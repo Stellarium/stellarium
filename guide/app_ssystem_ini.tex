@@ -18,7 +18,7 @@ System objects.
 The minor bodies can be modified by placing a privately modified 
 copy of \file{ssystem\_minor.ini} into your own
 \file{data/} directory (see Chapter~\ref{sec:FilesAndDirectories}). 
-You can edit the file either manually, or with the Solar System Editor plugin (see
+You can edit the file either manually or with the Solar System Editor plugin (see
 Section~\ref{sec:plugins:SolarSystemEditor}). The private user file is automatically created by the Solar System Editor plugin.
 
 
@@ -35,9 +35,10 @@ coordinate functions, minor moons with generic orbital elements, minor
 planets and comets with elliptical and parabolic orbit elements.
 
 All elements are stored in alphabetic order in the files, however it
-makes more sense to present the elements in another structure which
-better reflects the meaning. The actual order of the objects in the files, 
-and order of entries inside an object section, is irrelevant.
+makes more sense to present the elements in another sequence which
+better reflects the meaning. The actual order of the objects in the
+files, and order of entries inside an object section, is irrelevant,
+but in case of duplicate entries the later entry is used.
 
 \subsection{File ssystem\_major.ini}
 \label{sec:ssystem.ini:major}
@@ -50,24 +51,33 @@ Example:
 \begin{configfile}
 [jupiter]
 name=Jupiter
-type=planet  
+type=planet
 coord_func=jupiter_special
-
-albedo=0.51
-atmosphere=1
-color=1., 0.983, 0.934
-tex_map=jupiter.png #texture courtesy of Bj\xf6rn J\xf3nsson
-halo=true
-oblateness=0.064874
 orbit_visualization_period=4331.87
-parent=Sun
+
+atmosphere=1
+albedo=0.51
+color=1., 0.983, 0.934
+absolute_magnitude=-9.40
+
 radius=71492
+oblateness=0.064874
+tex_map=jupiter.png #texture courtesy of Bj\xf6rn J\xf3nsson
+
+# deprecated rotational elements
 rot_equator_ascending_node=-22.203
 rot_obliquity=2.222461
 rot_periode=9.92491
-rot_pole_de=64.49
-rot_pole_ra=268.05
 rot_rotation_offset=-1 # use JupiterGRS patch
+
+# WGCCRE rotational elements
+rot_pole_ra=268.056595
+rot_pole_ra1=-0.006499
+rot_pole_de=64.495303
+rot_pole_de1=0.002413
+rot_pole_w0=284.95
+rot_pole_w1=870.5360000
+
 \end{configfile}
 
 
@@ -75,8 +85,8 @@ where
 \begin{description}
 \item[name] English name of the planet. May appear translated. 
 \item[type] Mandatory for planets: \value{planet}
-\item[parent]=Sun. The body which this object is running around. Default: Sun
-\item[coord\_func] The planet positions are all computed with a dedicated function (VSOP or DE43x). 
+\item[parent]=Sun. The body which this object is running around. Default: \texttt{Sun}
+\item[coord\_func] The planet positions are all computed with a dedicated function (VSOP87 or DE43x). 
 \item[orbit\_visualization\_period] number of (earth) days for how
   long the orbit should be made visible. Typically Stellarium shows
   one orbit line. The orbit slowly drifts, however.
@@ -84,49 +94,66 @@ where
 \item[atmosphere] (0 or 1) flag to indicate whether observer locations should enable atmosphere drawing.
 
 \item[radius] Equator radius, km.
-\item[oblateness] Flattening of the polar diameter. ($r_{pole}/r_{eq}$)
+\item[oblateness] Flattening of the polar diameter. ($1-r_{pole}/r_{eq}$)
 \item[albedo] total albedo (reflectivity) of the planet. Used for ``generic''
   magnitude computation, but the major planets usually have dedicated
   magnitude formulas, so the value is not evaluated unless you are
   observing from a location outside Earth.
 \item[color] Used to colorize halo. At least one of the components should be 1.
-\item[tex\_halo] File name of texture map for halo texture in
-  \file{textures} folder. (Used when zoomed out far enough so that the
-  actual sphere is not visible.)
 \item[tex\_map] File name of texture map in \file{textures} folder.
-\item[halo] Should be true to draw a halo (simple light disk) when object too small to draw a sphere.
+\item[halo] Should be true to draw a halo (simple light disk) when object too small to draw a sphere. Default: \texttt{true}
 \end{description}
 
 \paragraph{Elements for the Physical Ephemeris}
 
+Where known, Stellarium can properly model axis rotation with the
+\texttt{rot\_\ldots} entries in the element sets.  Versions prior to
+0.21 had rotational elements defined with respect to the equator of
+the parent object. While writing this documentation the origin and
+accuracy of this model is unfortunately untraceable.  However, the IAU
+Working Group on Cartographic Coordinates and Rotational Elements
+(WGCCRE) and modern sources like \citet{ESAA:2013} use rotational
+elements with respect to the ICRF (see section
+\ref{sec:Concepts:Equatorial}). Therefore, starting with version 0.21,\newFeature{v.0.21}
+Stellarium uses these more modern data and can now also show axes with
+precessional or other motions. Data for some planet moons are
+unfortunately still not available in this WGCCRE format, and therefore
+the old format can still be used, but should not be used for new
+entries.
+
 \begin{description}
 \item[rot\_equator\_ascending\_node] \emph{deprecated}
 \item[rot\_obliquity] \emph{deprecated}
+\item[rot\_rotation\_offset] \emph{deprecated} longitude of prime
+  meridian. For Planets, this used to be counted from the ascending
+  node of the equator over the ecliptical plane at J2000.0. For moons,
+  it is the longitude of the prime meridian counted from the ascending
+  node of the moon's equator over the planet equator.  A special value
+  here indicates special treatment for the Great Red Spot.
+\item[rot\_periode] \emph{deprecated} Duration of one sidereal rotation, in earth hours.
+
 \item[rot\_pole\_ra]  constant of axis right ascension in ICRF, degrees
 \item[rot\_pole\_ra1] change per century of axis right ascension in ICRF, degrees
 \item[rot\_pole\_de] constant of axis declination in ICRF, degrees
 \item[rot\_pole\_de1] change per century of axis declination in ICRF, degrees
-\item[rot\_rotation\_offset] longitude of central meridian at J2000.0. 
-                             The special value here indicates special treatment for the Great Red Spot.
-\item[rot\_periode] Duration of one sidereal rotation, in earth hours.
+\item[rot\_pole\_w0] longitude of the prime meridian counted from the
+  ascending node of the objects's equator through the ICRF equator, degrees
+\item[rot\_pole\_w1] change per day of axis rotation, degrees
 \end{description}
 
-rot\_equator\_ascending\_node and rot\_obliquity are the generic
-values to specify the axis orientation with respect to the parent
-object's equator, or the VSOP87 inertial plane in case of planets. However,
-for planets the IAU has been using right ascension and declination of
-the pole in the ICRF for decades now. The elements to use for planets
-should therefore be the rot\_pole\_* values.
-
-In many cases, the attitude/rotation formula is given like
+\noindent In many cases, the attitude/rotation formulae for the North (or
+``positive'') pole $(\alpha_0, \delta_0)$ are given like
 \begin{eqnarray}
   \label{eq:PlanetOrientation}
   \alpha_0 &=& \mathtt{rot\_pole\_ra} + T * \mathtt{rot\_pole\_ra1}\\
   \delta_0 &=& \mathtt{rot\_pole\_de} + T * \mathtt{rot\_pole\_de1}\\
-  W        &=& \mathtt{rot\_rotation\_offset} + d * \mathtt{rot\_periode}
+  W        &=& \mathtt{rot\_pole\_w0} + d * \mathtt{rot\_pole\_w1}
 \end{eqnarray}
 
-These cases are covered by the data in \file{ssystem\_major.ini}. Other cases are dealt with in a different way.
+\noindent These cases are fully covered by the data in
+\file{ssystem\_major.ini}. Corrections for solar system objects given
+by \citet{ESAA:2013, WGCCRE2009, WGCCRE2009:corr, WGCCRE2015,
+  WGCCRE2015:corr} have been implemented in the program.
 
 
 \subsubsection{Moon section}
@@ -135,13 +162,16 @@ These cases are covered by the data in \file{ssystem\_major.ini}. Other cases ar
 All planet moons are defined only in \file{ssystem\_major.ini}.
 
 Moons are special in that they orbit another planet. Therefore, the
-rotational elements used to be specified relative to the equatorial plane of the
-parent planet, and \texttt{orbit\_SemiMajorAxis} are specified in kilometers. 
-However, current IAU reference material gives axis orientation
-with right ascension and declination values for the pole in ICRF
-coordinates, with some of them in motion. So again, if one of the
+rotational elements used to be specified relative to the equatorial
+plane of the parent planet, and \texttt{orbit\_SemiMajorAxis} are
+specified in kilometers.  However, \newFeature{v0.21} as for the
+planets (see section \ref{sec:ssystem.ini:Planet} above), current
+\indexterm{IAU} reference material gives axis orientation with right
+ascension and declination values for the pole in ICRF coordinates,
+with some of them in motion. So again, if one of the
 \texttt{rot\_pole\_...} values exist, we assume the current
-standard. For more complicated motion, again some special functions
+standard, but keep the old elements available until we find new data.
+For more complicated motion, again some special functions
 are applied.
 
 %% TODO: CHANGE THIS WHEN AXES HAVE BEEN REMADE!
@@ -153,7 +183,6 @@ type=moon
 parent=Jupiter
 iau_moon_number=JV
 
-coord_func=ell_orbit
 orbit_AscendingNode=141.5521520794674
 orbit_Eccentricity=0.006175744402949701
 orbit_Epoch=2454619.50000
@@ -162,19 +191,26 @@ orbit_LongOfPericenter=245.4222355150120000
 orbit_MeanLongitude=224.7924893552550000
 orbit_Period=0.5016370462116355
 orbit_SemiMajorAxis=181994.8658358799
-orbit_visualization_period=0.5016370462116355
+# orbit_visualization_period=0.5016370462116355
 
-radius=73
-rot_equator_ascending_node=213.7
-rot_obliquity=15.5
-rot_periode=12.039289109079252
-rot_rotation_offset=235.50
-
-albedo=0.06
+absolute_magnitude=7.4
+albedo=0.09
 color=1., 0.627, 0.492
-halo=true
+radius=83.5
 tex_map=amalthea.png
 model=j5amalthea_MLfix.obj
+
+
+rot_equator_ascending_node=213.7
+rot_obliquity=15.5
+# rot_periode=12.039289109079252
+rot_rotation_offset=235.50
+rot_pole_ra=268.05
+rot_pole_ra1=-0.009
+rot_pole_de=64.49
+rot_pole_de1=0.003
+rot_pole_w0=231.67
+rot_pole_w1=722.6314560
 \end{configfile}
 
 where
@@ -185,7 +221,7 @@ where
   \item[parent] English name of planet or parent body.
   \item[iau\_moon\_number] a short label (string) consisting of the planet's initial and the moon's Roman number in order of discovery.\newFeature{v0.16.1}
 
-  \item[coord\_func] Must be \texttt{ell\_orbit} for moons with orbital elements given, or \texttt{<name>\_special} for 
+  \item[coord\_func] Must be \texttt{kepler\_orbit} (default, can be left away) for moons with orbital elements given, or \texttt{<name>\_special} for 
   \item[orbit\_AscendingNode] $\Omega$
   \item[orbit\_Eccentricity] $e$
   \item[orbit\_Epoch] 
@@ -198,23 +234,30 @@ where
        This is in fact only useful in case of special functions for positioning where \texttt{orbit\_Period} is not given.
 
   \item[radius] Equator radius, km.
-  \item[oblateness] Flattening of the polar diameter. ($r_{pole}/r_{eq}$)
-  \item[rot\_equator\_ascending\_node]=213.7 TRY TO AVOID!
-  \item[rot\_obliquity]=15.5                 TRY TO AVOID!
+  \item[oblateness] Flattening of the polar
+    diameter. ($1-r_{pole}/r_{eq}$) Bodies with non-ellipsoid shape,
+    e.g. tri-axial geometry, cannot be modelled with this simple
+    approach, but a 3D solid model can be shown, see below.
+    
+  \item[albedo] total reflectivity [0..1]
+  \item[color] for drawing halo (default: 1,1,1)
+  \item[halo] [=true|false] to draw a simple diffuse dot when zoomed out. Default: \texttt{true}
+  \item[tex\_map] name of spherical texture map. Many moons have been mapped by visiting spacecraft! For many other moons, Stellarium applies an inverted Lunar texture image.
+  \item[model] \newFeature{v0.16.0}(optional) name of a 3D model for a non-spherical body in the \file{model} subdirectory of the program directory. 
+
+  \item[rot\_equator\_ascending\_node] \emph{deprecated}
+  \item[rot\_obliquity] \emph{deprecated}
+  \item[rot\_rotation\_offset] \emph{deprecated} longitude of prime meridian at J2000.0. 
+  \item[rot\_periode]  \emph{deprecated}  Duration of one sidereal rotation, in earth hours. For moons in bound rotation 
+       (which always show one face towards their parent planet), it is best to omit this value: it defaults to \texttt{orbit\_Period * 24}. 
 
   \item[rot\_pole\_ra]  constant of axis right ascension in ICRF, degrees
   \item[rot\_pole\_ra1] change per century of axis right ascension in ICRF, degrees
   \item[rot\_pole\_de] constant of axis declination in ICRF, degrees
   \item[rot\_pole\_de1] change per century of axis declination in ICRF, degrees
-  \item[rot\_rotation\_offset] longitude of central meridian at J2000.0. 
-  \item[rot\_periode] Duration of one sidereal rotation, in earth hours. For moons in bound rotation 
-       (which always show one face towards their parent planet), it is best to omit this value: it defaults to \texttt{orbit\_Period * 24}. 
-
-  \item[albedo] total reflectivity [0..1]
-  \item[color] for drawing halo (default: 1,1,1)
-  \item[halo] [=true|false] to draw a simple diffuse dot when zoomed out. Default: true
-  \item[tex\_map] name of spherical texture map. Many moons have been mapped by visiting spacecraft!
-  \item[model] \newFeature{v0.16.0}(optional) name of a 3D model for a non-spherical body in the \file{model} subdirectory of the program directory. 
+  \item[rot\_pole\_w0] longitude of the prime meridian counted from the
+    ascending node of the objects's equator through the ICRF equator, degrees
+  \item[rot\_pole\_w1] change per day of axis rotation, degrees  
 \end{description}
 
 

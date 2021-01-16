@@ -32,6 +32,7 @@ class SkyPoint;
 //! @class GridLinesMgr
 //! The GridLinesMgr controls the drawing of the Azimuthal, Equatorial, Ecliptical and Galactic Grids,
 //! as well as the great circles: Meridian Line, Ecliptic Lines of J2000.0 and date, Equator Line (of J2000.0 and date),
+//! Solar Equator and Invariable Plane of the Solar System,
 //! Precession Circles, and a special line marking conjunction or opposition in ecliptical longitude (of date).
 class GridLinesMgr : public StelModule
 {
@@ -78,6 +79,14 @@ class GridLinesMgr : public StelModule
 	Q_PROPERTY(bool eclipticJ2000PartsDisplayed	READ getFlagEclipticJ2000Parts	 WRITE setFlagEclipticJ2000Parts	NOTIFY eclipticJ2000PartsDisplayedChanged)
 	Q_PROPERTY(bool eclipticJ2000PartsLabeled		READ getFlagEclipticJ2000Labeled WRITE setFlagEclipticJ2000Labeled	NOTIFY eclipticJ2000PartsLabeledChanged)
 	Q_PROPERTY(Vec3f eclipticJ2000LineColor		READ getColorEclipticJ2000Line	 WRITE setColorEclipticJ2000Line	NOTIFY eclipticJ2000LineColorChanged)
+
+	Q_PROPERTY(bool invariablePlaneLineDisplayed	READ getFlagInvariablePlaneLine	 WRITE setFlagInvariablePlaneLine	NOTIFY invariablePlaneLineDisplayedChanged)
+	Q_PROPERTY(Vec3f invariablePlaneLineColor	READ getColorInvariablePlaneLine WRITE setColorInvariablePlaneLine	NOTIFY invariablePlaneLineColorChanged)
+
+	Q_PROPERTY(bool solarEquatorLineDisplayed	READ getFlagSolarEquatorLine	 WRITE setFlagSolarEquatorLine		NOTIFY solarEquatorLineDisplayedChanged)
+	Q_PROPERTY(bool solarEquatorPartsDisplayed	READ getFlagSolarEquatorParts	 WRITE setFlagSolarEquatorParts		NOTIFY solarEquatorPartsDisplayedChanged)
+	Q_PROPERTY(bool solarEquatorPartsLabeled	READ getFlagSolarEquatorLabeled  WRITE setFlagSolarEquatorLabeled	NOTIFY solarEquatorPartsLabeledChanged)
+	Q_PROPERTY(Vec3f solarEquatorLineColor		READ getColorSolarEquatorLine	 WRITE setColorSolarEquatorLine		NOTIFY solarEquatorLineColorChanged)
 
 	Q_PROPERTY(bool precessionCirclesDisplayed	READ getFlagPrecessionCircles	WRITE setFlagPrecessionCircles		NOTIFY precessionCirclesDisplayedChanged)
 	Q_PROPERTY(bool precessionPartsDisplayed		READ getFlagPrecessionParts	WRITE setFlagPrecessionParts		NOTIFY precessionPartsDisplayedChanged)
@@ -399,6 +408,42 @@ public slots:
 	//! GridLinesMgr.setColorEclipticLine(Vec3f(1.0,0.0,0.0));
 	//! @endcode
 	void setColorEclipticLine(const Vec3f& newColor);
+
+	//! Setter for displaying a line for the Invariable Plane of the Solar System.
+	void setFlagInvariablePlaneLine(const bool displayed);
+	//! Accessor for displaying Invariable Plane Line.
+	bool getFlagInvariablePlaneLine() const;
+	//! Get the current color of the Line for the Invariable Plane.
+	Vec3f getColorInvariablePlaneLine() const;
+	//! Set the color of the Line for the Invariable Plane.
+	//! @param newColor The color of the Invariable Plane line
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorInvariablePlaneLine(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorInvariablePlaneLine(const Vec3f& newColor);
+
+	//! Setter for displaying Solar Equator Line.
+	void setFlagSolarEquatorLine(const bool displayed);
+	//! Accessor for displaying Solar Equator Line.
+	bool getFlagSolarEquatorLine() const;
+	//! Setter for displaying Solar Equator line partitions.
+	void setFlagSolarEquatorParts(const bool displayed);
+	//! Accessor for displaying Solar Equator line partitions.
+	bool getFlagSolarEquatorParts() const;
+	//! Setter for displaying Solar Equator line partition labels.
+	void setFlagSolarEquatorLabeled(const bool displayed);
+	//! Accessor for displaying Solar Equator line partition labels.
+	bool getFlagSolarEquatorLabeled() const;
+	//! Get the current color of the Solar Equator Line.
+	Vec3f getColorSolarEquatorLine() const;
+	//! Set the color of the Solar Equator Line.
+	//! @param newColor The color of Solar Equator line
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorSolarEquatorLine(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorSolarEquatorLine(const Vec3f& newColor);
 
 	//! Setter for displaying precession circles.
 	void setFlagPrecessionCircles(const bool displayed);
@@ -850,6 +895,14 @@ signals:
 	void eclipticPartsDisplayedChanged(const bool displayed) const;
 	void eclipticPartsLabeledChanged(const bool displayed) const;
 	void eclipticLineColorChanged(const Vec3f & newColor) const;
+	void invariablePlaneLineDisplayedChanged(const bool displayed) const;
+	//void invariablePlanePartsDisplayedChanged(const bool displayed) const;
+	//void invariablePlanePartsLabeledChanged(const bool displayed) const;
+	void invariablePlaneLineColorChanged(const Vec3f & newColor) const;
+	void solarEquatorLineDisplayedChanged(const bool displayed) const;
+	void solarEquatorPartsDisplayedChanged(const bool displayed) const;
+	void solarEquatorPartsLabeledChanged(const bool displayed) const;
+	void solarEquatorLineColorChanged(const Vec3f & newColor) const;
 	void eclipticJ2000LineDisplayedChanged(const bool displayed) const;
 	void eclipticJ2000PartsDisplayedChanged(const bool displayed) const;
 	void eclipticJ2000PartsLabeledChanged(const bool displayed) const;
@@ -946,6 +999,8 @@ private:
 	SkyLine * equatorJ2000Line;		// Celestial Equator line of J2000
 	SkyLine * eclipticLine;			// Ecliptic line
 	SkyLine * eclipticJ2000Line;		// Ecliptic line of J2000
+	SkyLine * invariablePlaneLine;		// Invariable Plane of the Solar System (WGCCRE2015 report)
+	SkyLine * solarEquatorLine;		// Projected Solar equator (WGCCRE2015 report)
 	SkyLine * precessionCircleN;		// Northern precession circle
 	SkyLine * precessionCircleS;		// Southern precession circle
 	SkyLine * meridianLine;			// Meridian line

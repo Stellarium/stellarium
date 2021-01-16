@@ -137,7 +137,9 @@ public:
 		COLURE_1,
 		COLURE_2,
 		CIRCUMPOLARCIRCLE_N,
-		CIRCUMPOLARCIRCLE_S
+		CIRCUMPOLARCIRCLE_S,
+		INVARIABLEPLANE,
+		SOLAR_EQUATOR
 	};
 	// Create and precompute positions of a SkyGrid
 	SkyLine(SKY_LINE_TYPE _line_type = EQUATOR_J2000);
@@ -725,8 +727,14 @@ void SkyLine::updateLabel()
 			frameType = StelCore::FrameEquinoxEqu;
 			label = q_("Circumpolar Circle");
 			break;
-		default:
-			Q_ASSERT(0);
+		case INVARIABLEPLANE:
+			frameType = StelCore::FrameJ2000;
+			label = q_("Invariable Plane");
+			break;
+		case SOLAR_EQUATOR:
+			frameType = StelCore::FrameJ2000;
+			label = q_("Projected Solar Equator");
+			break;
 	}
 }
 
@@ -759,7 +767,7 @@ void SkyLine::draw(StelCore *core) const
 	// Precession and Circumpolar circles are Small Circles, all others are Great Circles.
 	if (line_type==PRECESSIONCIRCLE_N || line_type==PRECESSIONCIRCLE_S || line_type==CIRCUMPOLARCIRCLE_N || line_type==CIRCUMPOLARCIRCLE_S)
 	{
-		// TODO: partitions, at least for precession. (mark millennia!)
+		// partitions for precession. (mark millennia!)
 		double lat;
 		if (line_type==PRECESSIONCIRCLE_N || line_type==PRECESSIONCIRCLE_S)
 		{
@@ -948,6 +956,7 @@ void SkyLine::draw(StelCore *core) const
 	// All the other "lines" are Great Circles
 	SphericalCap sphericalCap(Vec3d(0,0,1), 0);
 	Vec3d fpt(1,0,0); // First Point
+
 	if ((line_type==MERIDIAN) || (line_type==COLURE_1))
 	{
 		sphericalCap.n.set(0,1,0);
@@ -968,7 +977,7 @@ void SkyLine::draw(StelCore *core) const
 	else if (line_type==LONGITUDE)
 	{
 		Vec3d coord;		
-		double eclJDE = earth->getRotObliquity(core->getJDE());
+		const double eclJDE = earth->getRotObliquity(core->getJDE());
 		double ra_equ, dec_equ, lambdaJDE, betaJDE;
 
 		StelUtils::rectToSphe(&ra_equ,&dec_equ, sun->getEquinoxEquatorialPos(core));
@@ -979,8 +988,27 @@ void SkyLine::draw(StelCore *core) const
 		sphericalCap.n=coord;
 		fpt.set(0,0,1);
 	}
+	else if (line_type==INVARIABLEPLANE)
+	{
+		// RA, DEC of the Invariable Plane given in WGCCRE2015 report
+		static const Mat4d mat=Mat4d::zrotation(M_PI_180*(273.85+90.))*Mat4d::xrotation(M_PI_180*(90.-66.99));
+		static const Vec3d axis=mat*Vec3d(0, 0, 1);
+		static const Vec3d ivFpt=mat*Vec3d(1, 0, 0);
+		sphericalCap.n=axis;
+		fpt=ivFpt;
+	}
+	else if (line_type==SOLAR_EQUATOR)
+	{
+		// Split out the const part of rotaiton: rotate along ICRS equator to ascending node
+		static const Mat4d solarFrame = Mat4d::zrotation((286.13+90)*M_PI_180) * Mat4d::xrotation((90-63.87)*M_PI_180);
+		// Axis rotation. N.B. By this formulation, we ignore any light time correction.
+		Mat4d solarRot=solarFrame * Mat4d::zrotation((sun->getSiderealTime(core->getJD(), core->getJDE())*M_PI_180));
 
-	if (showPartitions)
+		sphericalCap.n=solarRot*sphericalCap.n;
+		fpt=solarRot*fpt;
+	}
+
+	if (showPartitions && (line_type!=INVARIABLEPLANE))
 	{
 		const float lineThickness=sPainter.getLineWidth();
 		sPainter.setLineWidth(partThickness);
@@ -999,7 +1027,7 @@ void SkyLine::draw(StelCore *core) const
 			part0.set(0,1,0);
 			partAxis.set(0,0,1);
 		}
-		else if ((line_type==LONGITUDE) || (line_type==CURRENT_VERTICAL))
+		else if ((line_type==LONGITUDE) || (line_type==CURRENT_VERTICAL) || (line_type==SOLAR_EQUATOR))
 		{
 			partAxis=sphericalCap.n ^ part0;
 		}
@@ -1187,8 +1215,8 @@ void SkyLine::draw(StelCore *core) const
 	{
 		if (!SphericalCap::intersectionPoints(viewPortSphericalCap, sphericalCap, p1, p2))
 		{
-			if ((viewPortSphericalCap.d<sphericalCap.d && viewPortSphericalCap.contains(sphericalCap.n))
-					|| (viewPortSphericalCap.d<-sphericalCap.d && viewPortSphericalCap.contains(-sphericalCap.n)))
+			if ((viewPortSphericalCap.d< sphericalCap.d && viewPortSphericalCap.contains( sphericalCap.n))
+			 || (viewPortSphericalCap.d<-sphericalCap.d && viewPortSphericalCap.contains(-sphericalCap.n)))
 			{
 				// The meridian is fully included in the viewport, draw it in 3 sub-arcs to avoid length > 180.
 				const Mat4d& rotLon120 = Mat4d::rotation(sphericalCap.n, 120.*M_PI_180);
@@ -1513,6 +1541,8 @@ GridLinesMgr::GridLinesMgr()
 	equatorJ2000Line = new SkyLine(SkyLine::EQUATOR_J2000);
 	eclipticJ2000Line = new SkyLine(SkyLine::ECLIPTIC_J2000);
 	eclipticLine = new SkyLine(SkyLine::ECLIPTIC_OF_DATE);
+	invariablePlaneLine = new SkyLine(SkyLine::INVARIABLEPLANE);
+	solarEquatorLine = new SkyLine(SkyLine::SOLAR_EQUATOR);
 	precessionCircleN = new SkyLine(SkyLine::PRECESSIONCIRCLE_N);
 	precessionCircleS = new SkyLine(SkyLine::PRECESSIONCIRCLE_S);
 	meridianLine = new SkyLine(SkyLine::MERIDIAN);
@@ -1558,6 +1588,8 @@ GridLinesMgr::~GridLinesMgr()
 	delete equatorJ2000Line;
 	delete eclipticLine;
 	delete eclipticJ2000Line;
+	delete invariablePlaneLine;
+	delete solarEquatorLine;
 	delete precessionCircleN;
 	delete precessionCircleS;
 	delete meridianLine;
@@ -1628,7 +1660,11 @@ void GridLinesMgr::init()
 	setFlagEclipticLabeled(conf->value("viewing/flag_ecliptic_labels").toBool());
 	setFlagEclipticJ2000Line(conf->value("viewing/flag_ecliptic_J2000_line").toBool());
 	setFlagEclipticJ2000Parts(conf->value("viewing/flag_ecliptic_J2000_parts").toBool());
-	setFlagEclipticJ2000Labeled(conf->value("viewing/flag_ecliptic_J2000_labels").toBool());
+	setFlagEclipticJ2000Labeled(conf->value("viewing/flag_ecliptic_J2000_labels").toBool());	
+	setFlagInvariablePlaneLine(conf->value("viewing/flag_invariable_plane_line").toBool());
+	setFlagSolarEquatorLine(conf->value("viewing/flag_solar_equator_line").toBool());
+	setFlagSolarEquatorParts(conf->value("viewing/flag_solar_equator_parts").toBool());
+	setFlagSolarEquatorLabeled(conf->value("viewing/flag_solar_equator_labels").toBool());
 	setFlagPrecessionCircles(conf->value("viewing/flag_precession_circles").toBool());
 	setFlagPrecessionParts(conf->value("viewing/flag_precession_parts").toBool());
 	setFlagPrecessionLabeled(conf->value("viewing/flag_precession_labels").toBool());
@@ -1689,6 +1725,8 @@ void GridLinesMgr::init()
 	setColorEquatorJ2000Line(        Vec3f(conf->value("color/equator_J2000_color", defaultColor).toString()));
 	setColorEclipticLine(            Vec3f(conf->value("color/ecliptic_color", defaultColor).toString()));
 	setColorEclipticJ2000Line(       Vec3f(conf->value("color/ecliptic_J2000_color", defaultColor).toString()));
+	setColorInvariablePlaneLine(     Vec3f(conf->value("color/invariable_plane_color", defaultColor).toString()));
+	setColorSolarEquatorLine(        Vec3f(conf->value("color/solar_equator_color", defaultColor).toString()));
 	setColorPrecessionCircles(       Vec3f(conf->value("color/precession_circles_color", defaultColor).toString()));
 	setColorMeridianLine(            Vec3f(conf->value("color/meridian_color", defaultColor).toString()));
 	setColorHorizonLine(             Vec3f(conf->value("color/horizon_color", defaultColor).toString()));
@@ -1705,7 +1743,7 @@ void GridLinesMgr::init()
 	setColorEclipticJ2000Poles(      Vec3f(conf->value("color/ecliptic_J2000_poles_color", defaultColor).toString()));
 	setColorEclipticPoles(           Vec3f(conf->value("color/ecliptic_poles_color", defaultColor).toString()));
 	setColorGalacticPoles(           Vec3f(conf->value("color/galactic_poles_color", defaultColor).toString()));
-	setColorGalacticCenter(           Vec3f(conf->value("color/galactic_center_color", defaultColor).toString()));
+	setColorGalacticCenter(          Vec3f(conf->value("color/galactic_center_color", defaultColor).toString()));
 	setColorSupergalacticPoles(      Vec3f(conf->value("color/supergalactic_poles_color", defaultColor).toString()));
 	setColorEquinoxJ2000Points(      Vec3f(conf->value("color/equinox_J2000_points_color", defaultColor).toString()));
 	setColorEquinoxPoints(           Vec3f(conf->value("color/equinox_points_color", defaultColor).toString()));
@@ -1724,6 +1762,8 @@ void GridLinesMgr::init()
 	addAction("actionShow_Azimuthal_Grid",             displayGroup, N_("Azimuthal grid"), "azimuthalGridDisplayed", "Z");
 	addAction("actionShow_Ecliptic_Line",              displayGroup, N_("Ecliptic line"), "eclipticLineDisplayed", ",");
 	addAction("actionShow_Ecliptic_J2000_Line",        displayGroup, N_("Ecliptic J2000 line"), "eclipticJ2000LineDisplayed");
+	addAction("actionShow_Invariable_Plane_Line",      displayGroup, N_("Invariable Plane line"), "invariablePlaneLineDisplayed");
+	addAction("actionShow_Solar_Equator_Line",         displayGroup, N_("Solar Equator Plane line"), "solarEquatorLineDisplayed");
 	addAction("actionShow_Equator_Line",               displayGroup, N_("Equator line"), "equatorLineDisplayed", ".");
 	addAction("actionShow_Equator_J2000_Line",         displayGroup, N_("Equator J2000 line"), "equatorJ2000LineDisplayed"); // or with Hotkey??
 	addAction("actionShow_Meridian_Line",              displayGroup, N_("Meridian line"), "meridianLineDisplayed", ";");
@@ -1747,7 +1787,7 @@ void GridLinesMgr::init()
 	addAction("actionShow_Ecliptic_J2000_Poles",       displayGroup, N_("Ecliptic J2000 poles"), "eclipticJ2000PolesDisplayed");
 	addAction("actionShow_Ecliptic_Poles",             displayGroup, N_("Ecliptic poles"), "eclipticPolesDisplayed");
 	addAction("actionShow_Galactic_Poles",             displayGroup, N_("Galactic poles"), "galacticPolesDisplayed");
-	addAction("actionShow_Galactic_Center",             displayGroup, N_("Galactic center and anticenter"), "galacticCenterDisplayed");
+	addAction("actionShow_Galactic_Center",            displayGroup, N_("Galactic center and anticenter"), "galacticCenterDisplayed");
 	addAction("actionShow_Supergalactic_Poles",        displayGroup, N_("Supergalactic poles"), "supergalacticPolesDisplayed");
 	addAction("actionShow_Equinox_J2000_Points",       displayGroup, N_("Equinox J2000 points"), "equinoxJ2000PointsDisplayed");
 	addAction("actionShow_Equinox_Points",             displayGroup, N_("Equinox points"), "equinoxPointsDisplayed");
@@ -1776,6 +1816,8 @@ void GridLinesMgr::update(double deltaTime)
 	equatorJ2000Line->update(deltaTime);
 	eclipticLine->update(deltaTime);
 	eclipticJ2000Line->update(deltaTime);
+	invariablePlaneLine->update(deltaTime);
+	solarEquatorLine->update(deltaTime);
 	precessionCircleN->update(deltaTime);
 	precessionCircleS->update(deltaTime);
 	meridianLine->update(deltaTime);
@@ -1842,6 +1884,8 @@ void GridLinesMgr::draw(StelCore* core)
 	eclipticJ2000Line->draw(core);	
 	equatorJ2000Line->draw(core);
 	equatorLine->draw(core);
+	invariablePlaneLine->draw(core);
+	solarEquatorLine->draw(core);
 	meridianLine->draw(core);
 	horizonLine->draw(core);
 	primeVerticalLine->draw(core);
@@ -1866,6 +1910,8 @@ void GridLinesMgr::updateLabels()
 	equatorLine->updateLabel();
 	eclipticLine->updateLabel();
 	eclipticJ2000Line->updateLabel();
+	invariablePlaneLine->updateLabel();
+	solarEquatorLine->updateLabel();
 	precessionCircleN->updateLabel();
 	precessionCircleS->updateLabel();
 	meridianLine->updateLabel();
@@ -1933,6 +1979,8 @@ void GridLinesMgr::setFlagAllLines(const bool displayed)
 	setFlagLongitudeLine(displayed);
 	setFlagEquatorJ2000Line(displayed);
 	setFlagEclipticJ2000Line(displayed);
+	setFlagInvariablePlaneLine(displayed);
+	setFlagSolarEquatorLine(displayed);
 	setFlagPrecessionCircles(displayed);
 	setFlagPrimeVerticalLine(displayed);
 	setFlagCurrentVerticalLine(displayed);
@@ -2362,6 +2410,88 @@ void GridLinesMgr::setColorEclipticJ2000Line(const Vec3f& newColor)
 	{
 		eclipticJ2000Line->setColor(newColor);
 		emit eclipticJ2000LineColorChanged(newColor);
+	}
+}
+
+//! Set flag for displaying Invariable Plane Line
+void GridLinesMgr::setFlagInvariablePlaneLine(const bool displayed)
+{
+	if(displayed != invariablePlaneLine->isDisplayed())
+	{
+		invariablePlaneLine->setDisplayed(displayed);
+		emit invariablePlaneLineDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Invariable Plane Line
+bool GridLinesMgr::getFlagInvariablePlaneLine() const
+{
+	return invariablePlaneLine->isDisplayed();
+}
+Vec3f GridLinesMgr::getColorInvariablePlaneLine() const
+{
+	return invariablePlaneLine->getColor();
+}
+void GridLinesMgr::setColorInvariablePlaneLine(const Vec3f& newColor)
+{
+	if(newColor != invariablePlaneLine->getColor())
+	{
+		invariablePlaneLine->setColor(newColor);
+		emit invariablePlaneLineColorChanged(newColor);
+	}
+}
+
+//! Set flag for displaying Solar Equator Line
+void GridLinesMgr::setFlagSolarEquatorLine(const bool displayed)
+{
+	if(displayed != solarEquatorLine->isDisplayed())
+	{
+		solarEquatorLine->setDisplayed(displayed);
+		emit solarEquatorLineDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Solar Equator Line
+bool GridLinesMgr::getFlagSolarEquatorLine() const
+{
+	return solarEquatorLine->isDisplayed();
+}
+//! Set flag for displaying Solar Equator Line partitions
+void GridLinesMgr::setFlagSolarEquatorParts(const bool displayed)
+{
+	if(displayed != solarEquatorLine->showsPartitions())
+	{
+		solarEquatorLine->setPartitions(displayed);
+		emit solarEquatorPartsDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Solar Equator Line partitions
+bool GridLinesMgr::getFlagSolarEquatorParts() const
+{
+	return solarEquatorLine->showsPartitions();
+}
+//! Set flag for displaying Solar Equator Line partitions
+void GridLinesMgr::setFlagSolarEquatorLabeled(const bool displayed)
+{
+	if(displayed != solarEquatorLine->isLabeled())
+	{
+		solarEquatorLine->setLabeled(displayed);
+		emit solarEquatorPartsLabeledChanged(displayed);
+	}
+}
+//! Get flag for displaying Solar Equator Line partitions
+bool GridLinesMgr::getFlagSolarEquatorLabeled() const
+{
+	return solarEquatorLine->isLabeled();
+}
+Vec3f GridLinesMgr::getColorSolarEquatorLine() const
+{
+	return solarEquatorLine->getColor();
+}
+void GridLinesMgr::setColorSolarEquatorLine(const Vec3f& newColor)
+{
+	if(newColor != solarEquatorLine->getColor())
+	{
+		solarEquatorLine->setColor(newColor);
+		emit solarEquatorLineColorChanged(newColor);
 	}
 }
 
@@ -3296,6 +3426,8 @@ void GridLinesMgr::setLineThickness(const int thickness)
 		equatorJ2000Line->setLineThickness(lineThickness);
 		eclipticLine->setLineThickness(lineThickness);
 		eclipticJ2000Line->setLineThickness(lineThickness);
+		invariablePlaneLine->setLineThickness(lineThickness);
+		solarEquatorLine->setLineThickness(lineThickness);
 		precessionCircleN->setLineThickness(lineThickness);
 		precessionCircleS->setLineThickness(lineThickness);
 		meridianLine->setLineThickness(lineThickness);
@@ -3330,6 +3462,8 @@ void GridLinesMgr::setLineThickness(const int thickness)
 		 equatorJ2000Line->setPartThickness(partThickness);
 		 eclipticLine->setPartThickness(partThickness);
 		 eclipticJ2000Line->setPartThickness(partThickness);
+		 //invariablePlaneLine->setPartThickness(partThickness);
+		 solarEquatorLine->setPartThickness(partThickness);
 		 precessionCircleN->setPartThickness(partThickness);
 		 precessionCircleS->setPartThickness(partThickness);
 		 meridianLine->setPartThickness(partThickness);
@@ -3370,6 +3504,8 @@ void GridLinesMgr::setFontSizeFromApp(int size)
 	equatorJ2000Line->setFontSize(lineFontSize);
 	eclipticLine->setFontSize(lineFontSize);
 	eclipticJ2000Line->setFontSize(lineFontSize);
+	invariablePlaneLine->setFontSize(lineFontSize);
+	solarEquatorLine->setFontSize(lineFontSize);
 	precessionCircleN->setFontSize(lineFontSize);
 	precessionCircleS->setFontSize(lineFontSize);
 	meridianLine->setFontSize(lineFontSize);

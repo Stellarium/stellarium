@@ -111,11 +111,11 @@ QString daysFloatToDHMS(float days)
 	float remain = days;
 
 	int d = static_cast<int> (remain); remain -= d;
-	remain *= 24.0;
+	remain *= 24.0f;
 	int h = static_cast<int> (remain); remain -= h;
-	remain *= 60.0;
+	remain *= 60.0f;
 	int m = static_cast<int> (remain); remain -= m; 
-	remain *= 60.0;
+	remain *= 60.0f;
 
 	auto r = QString("%1%2 %3%4 %5%6 %7%8")
 	.arg(d)		.arg(qc_("d", "duration"))
@@ -186,16 +186,11 @@ void radToDecDeg(double rad, bool &sign, double &deg)
 
 QString radToDecDegStr(const double angle, const int precision, const bool useD, const bool useC)
 {
-	QChar degsign('d');
-	QString str;	
-	if (!useD)
-	{
-		degsign = 0x00B0;		
-	}
+	const QChar degsign = (useD ? 'd' : 0x00B0);
 	bool sign;
 	double deg;
 	StelUtils::radToDecDeg(angle, sign, deg);
-	str = QString("%1%2%3").arg((sign?"+":"-"), QString::number(deg, 'f', precision), degsign);
+	QString str = QString("%1%2%3").arg((sign?"+":"-"), QString::number(deg, 'f', precision), degsign);
 	if (useC)
 	{
 		if (!sign)
@@ -290,11 +285,7 @@ QString radToHmsStr(const double angle, const bool decimal)
 *************************************************************************/
 QString radToDmsStrAdapt(const double angle, const bool useD)
 {
-	QChar degsign('d');
-	if (!useD)
-	{
-		degsign = 0x00B0;
-	}
+	const QChar degsign = (useD ? 'd' : 0x00B0);
 	bool sign;
 	unsigned int d,m;
 	double s;
@@ -334,11 +325,7 @@ QString radToDmsStr(const double angle, const bool decimal, const bool useD)
 *************************************************************************/
 QString radToDmsPStr(const double angle, const int precision, const bool useD)
 {
-	QChar degsign('d');
-	if (!useD)
-	{
-		degsign = 0x00B0;
-	}
+	const QChar degsign = (useD ? 'd' : 0x00B0);
 	bool sign;
 	unsigned int d,m;
 	double s;
@@ -585,9 +572,7 @@ void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 
 	static const long JD_GREG_CAL = 2299161;
 	static const int JB_MAX_WITHOUT_OVERFLOW = 107374182;
-	long julian;
-
-	julian = static_cast<long>(floor(jd + 0.5));
+	const long julian = static_cast<long>(floor(jd + 0.5));
 
 	long ta, jalpha, tb, tc, td, te;
 
@@ -666,7 +651,7 @@ QString julianDayToISO8601String(const double jd, bool addMS)
 
 	if(addMS)
 	{
-		res = res.append(".%1").arg(millis,3,10,QLatin1Char('0'));
+		res.append(".%1").arg(millis,3,10,QLatin1Char('0'));
 	}
 	if (year < 0)
 	{

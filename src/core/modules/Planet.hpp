@@ -27,6 +27,7 @@
 #include "StelFader.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelProjectorType.hpp"
+#include "RotationElements.hpp"
 
 #include <QCache>
 #include <QString>
@@ -60,20 +61,6 @@ class QOpenGLFramebufferObject;
 #endif
 
 typedef QSharedPointer<class HipsSurvey> HipsSurveyP;
-
-// Class used to store rotational elements, i.e. axis orientation for the planetary body.
-class RotationElements
-{
-public:
-	RotationElements(void) : period(1.), offset(0.), epoch(J2000), obliquity(0.), ascendingNode(0.), precessionRate(0.), siderealPeriod(0.) {}
-	float period;			// (sidereal) rotation period [earth days]
-	float offset;			// rotation at epoch  [degrees]
-	double epoch;			// JDE (JD TT) of epoch for these elements
-	float obliquity;			// tilt of rotation axis w.r.t. ecliptic [radians]
-	float ascendingNode;		// long. of ascending node of equator on the ecliptic [radians]
-	float precessionRate;		// rate of precession of rotation axis in [rads/JulianCentury(36525d)]
-	double siderealPeriod;		// sidereal period (Planet year or a moon's sidereal month) [earth days]
-};
 
 // Class to manage rings for planets like Saturn
 class Ring
@@ -140,7 +127,7 @@ public:
 		Generic                     // Visual magnitude based on phase angle and albedo. The formula source for this is totally unknown!
 	};
 
-
+public:
 	Planet(const QString& englishName,
 	       double equatorialRadius,
 	       double oblateness,
@@ -232,16 +219,19 @@ public:
 	//! Get the equator radius of the planet in AU.
 	//! @return the equator radius of the planet in astronomical units.
 	double getEquatorialRadius(void) const {return equatorialRadius;}
-	//! Get the value (1-f) for oblateness f.
+	//! Get the value (1-f) for oblateness f=polarRadius/equatorialRadius.
 	double getOneMinusOblateness(void) const {return oneMinusOblateness;}
 	//! Get the polar radius of the planet in AU.
 	//! @return the polar radius of the planet in astronomical units.
 	double getPolarRadius(void) const {return equatorialRadius*oneMinusOblateness;}
-	//! Get duration of sidereal day
-	double getSiderealDay(void) const {return static_cast<double>(re.period);}
+	//! Get duration of sidereal day (earth days, may come from rot_periode or orbit_period (for moons) from ssystem_*.ini)
+	double getSiderealDay(void) const { if (re.W1!=0.) return 360.0/re.W1; else return static_cast<double>(re.period);} // I assume the more modern values are better.
 	//! Get duration of sidereal year
 	// must be virtual for Comets.
-	virtual double getSiderealPeriod(void) const { return re.siderealPeriod; }
+	virtual double getSiderealPeriod(void) const { return siderealPeriod; }
+	//! set duration of sidereal year. Also sets deltaOrbitJDE and may set closeOrbit for Planet objects which have KeplerOrbits.
+	//! siderealPeriod [earth days] orbital duration.
+	void setSiderealPeriod(const double siderealPeriod);
 	//! Get duration of mean solar day, in earth days.
 	double getMeanSolarDay(void) const;
 	//! Get albedo
@@ -268,25 +258,54 @@ public:
 	static void setApparentMagnitudeAlgorithm(QString algorithm);
 	static void setApparentMagnitudeAlgorithm(ApparentMagnitudeAlgorithm algorithm){ vMagAlgorithm=algorithm; }
 
-	//! Compute the z rotation to use from equatorial to geographic coordinates. For general applicability we need both time flavours:
+	//! Compute the axial z rotation (daily rotation around the polar axis) [degrees] to use from equatorial to hour angle based coordinates.
+	//! On Earth, sidereal time on the other hand is the angle along the planet equator from RA0 to the meridian, i.e. hour angle of the first point of Aries.
+	//! For Earth (of course) it is sidereal time at Greenwich.
+	//! V0.21+ update:
+	//! For planets and Moons, in this context this is the rotation angle W of the Prime meridian from the ascending node of the planet equator on the ICRF equator.
+	//! The usual WGCCRE model is W=W0+d*W1. Some planets/moons have more complicated rotations though, these are also handled in here.
+	//! The planet objects with old-style data are computed like in earlier versions of Stellarium. Their computational model is however questionable.
+	//! For general applicability we need both time flavours:
 	//! @param JD is JD(UT) for Earth
 	//! @param JDE is used for other locations
 	double getSiderealTime(double JD, double JDE) const;
+
+	//! return a rotation matrix from the planet's equatorial coordinate frame to the VSOP87 (ecliptical J2000) frame.
+	//! For planets/moons with WGCCRE rotation elements, this is just a single matrix.
+	//! For objects with traditional elements, this builds up the matrix from the parents.
 	Mat4d getRotEquatorialToVsop87(void) const;
+	//! set a rotation matrix from the planet's equatorial coordinate frame to the VSOP87 (ecliptical J2000) frame.
+	//! For planets/moons with WGCCRE rotation elements, this just sets this matrix.
+	//! For objects with traditional elements, this builds up the matrix from the parents.
 	void setRotEquatorialToVsop87(const Mat4d &m);
 
 	const RotationElements &getRotationElements(void) const {return re;}
-	// Set the orbital elements
-	void setRotationElements(float _period, float _offset, double _epoch,
-				 float _obliquity, float _ascendingNode,
-				 float _precessionRate, double _siderealPeriod);
-	double getRotAscendingNode(void) const {return static_cast<double>(re.ascendingNode);}
-	// return angle between axis and normal of ecliptic plane (or, for a moon, equatorial/reference plane defined by parent).
-	// For Earth, this is the angle between axis and normal to current ecliptic of date, i.e. the ecliptic obliquity of date JDE.
-	// TODO: decide if this is always angle between axis and J2000 ecliptic, or should be axis//current ecliptic!
+
+	//! Set the rotational elements.
+	//! Given two data models, we must support both: the traditional elements relative to the parent object:
+	//! name: English name of the object. A corrective function may be attached which depends on the name.
+	//! _period: duration of sidereal rotation [Julian days]
+	//! _offset: [angle at _epoch. ]
+	//! _epoch: [JDE]
+	//! _obliquity [rad]
+	//! _ascendingNode of equator on ecliptic[rad]
+	//! The more modern way to specify these elements are relative to the ICRF:
+	//! ra_pole=_ra0 + T*_ra1. ra_pole and de_pole must be computed more than for initialisation for J2000
+	//! de_pole=_de0 + T*_de1. ra and de values to be stored in [rad]
+	//! _w0, _w1 to be given in degrees!
+	//! If _ra0 is not zero, we understand WGCCRE data ra0, ra1, de0, de1, w0, w1 are used.
+	void setRotationElements(const QString name, const double _period, const double _offset, const double _epoch,
+				 const double _obliquity, const double _ascendingNode,
+				 const double _ra0, const double _ra1,
+				 const double _de0, const double _de1,
+				 const double _w0,  const double _w1);
+
+	//! Note: The only place where this is used is to build up orbits for planet moons w.r.t. the parent planet orientation.
+	double getRotAscendingNode(void) const {return re.ascendingNode; }
+	//! return angle between axis and normal of ecliptic plane (or, for a moon, equatorial/reference plane defined by parent).
+	//! For Earth, this is the angle between axis and normal to current ecliptic of date, i.e. the ecliptic obliquity of date JDE.
+	//! Note: The only place where this is not used for Earth is to build up orbits for planet moons w.r.t. the parent planet orientation.
 	double getRotObliquity(double JDE) const;
-
-
 
 	//! Compute the position in the parent Planet coordinate system
 	virtual void computePosition(const double dateJDE);
@@ -309,6 +328,24 @@ public:
 	//! An angle of 90° indicates a bright limb on the eastern limb, like an old moon.
 	//! Source: Meeus, Astr.Algorithms (2nd ed.), 48.5.
 	static float getPAsun(const Vec3d &sunPos, const Vec3d &objPos);
+
+	//! Get planetographic coordinates of subsolar and sub-observer points.
+	//! Only meaningful for earth-bound observers.
+	//! Source: Explanatory Supplement 2013, 10.4.1
+	//! first[0]  = 10.26 phi_e     [rad] Planetocentric latitude of sub-earth point
+	//! first[1]  = 10.26 phi'_e	[rad] Planetographic latitude of sub-earth point
+	//! first[2]  = 10.26 lambda'_e	[rad] Planetographic longitude of sub-earth point (0..2pi)
+	//! first[3]  = 10.29 P_n	[rad] Position angle of axis north pole in equatorial coordinates of date
+	//! second[0] = 10.26 phi_s	[rad] Planetocentric latitude of sub-solar point
+	//! second[1] = 10.26 phi'_s	[rad] Planetographic latitude of sub-solar point
+	//! second[2] = 10.26 lambda'_s	[rad] Planetographic longitude of sub-solar point (0..2pi)
+	//! Note: For the Moon, it is more common to give Libration angles, where L=-lambda'_e, B=phi'_e.
+	//! Note: For Jupiter, this returns central meridian in L_II.
+	//! Note: For Saturn, this returns central meridian in L_III (rotation of magnetic field).
+	QPair<Vec4d, Vec3d> getSubSolarObserverPoints(const StelCore *core) const;
+
+	//! returns if planet has retrograde rotation
+	bool isRotatingRetrograde() const { return re.W1<0.; }
 
 	//! Get the Planet position in the parent Planet ecliptic coordinate in AU
 	Vec3d getEclipticPos(double dateJDE) const;
@@ -552,10 +589,10 @@ protected:
 	QString nativeName;              // Can be used in a skyculture
 	QString texMapName;              // Texture file path
 	QString normalMapName;           // Texture file path
-	//int flagLighting;              // Set whether light computation has to be proceed. NO LONGER USED (always on!)
-	RotationElements re;             // Rotation param
+	RotationElements re;             // Rotation and axis orientation parameters
+	double siderealPeriod;           // sidereal period (Planet year or a moon's sidereal month) [earth days]
 	double equatorialRadius;         // Planet's equatorial radius in AU
-	double oneMinusOblateness;       // (polar radius)/(equatorial radius)
+	double oneMinusOblateness;       // OneMinusOblateness=(polar radius)/(equatorial radius). Geometric flattening f=1-oneMinusOblateness (ExplanSup2013 10.1)
 	Vec3d eclipticPos;               // Position in AU in the rectangular ecliptic coordinate system (J2000) centered on the parent body.
 					 // To get heliocentric coordinates, use getHeliocentricEclipticPos()
 	Vec3d eclipticVelocity;          // Speed in AU/d in the rectangular ecliptic coordinate system (J2000) around the parent body.
@@ -573,28 +610,32 @@ protected:
 					 // Non-null only for Comets, but we use one shader for all Planets and derivatives, so we need a placeholder here.
 	float outgas_falloff;            // Exponent for falloff of outgas effect, should probably be < 1
 					 // Non-null only for Comets, but we use one shader for all Planets and derivatives, so we need a placeholder here.
-	Mat4d rotLocalToParent;          // GZ2015: undocumented.
-					 // Apparently this is the axis orientation with respect to the parent body.
-					 // For planets, this is axis orientation w.r.t. VSOP87A/J2000 ecliptical system.
+	Mat4d rotLocalToParent;          // retro-documented:
+					 // rotation matrix of axis orientation with respect to the rotation axes of the parent body.
+					 // For planets, this is the axis orientation w.r.t. VSOP87A/J2000 ecliptical system.
+					 // For planets' satellites, this used to be a rotation into the planet's equatorial system.
+					 // 0.21+: if rot_pole... data available in ssystem_*.ini (and therefore re.method==WGCCRE), this is not the rotation from planet axes over ICRF to the VSOP frame on which Stellarium is defined.
+					 //
 	float axisRotation;              // Rotation angle of the Planet on its axis, degrees.
 					 // For Earth, this should be Greenwich Mean Sidereal Time GMST.
+					 // For V0.21+, and for planets computed after the IAU2009/WGCCRE papers this is angle W (rotDeg),
+					 // i.e. angle between ascending node of body equator w.r.t. ICRF equator and its prime meridian.
 	StelTextureSP texMap;            // Planet map texture
 	StelTextureSP normalMap;         // Planet normal map texture
 
 	PlanetOBJModel* objModel;               // Planet model (when it has been loaded)
 	QFuture<PlanetOBJModel*>* objModelLoader;// For async loading of the OBJ file
-
 	QString objModelPath;
 
 	HipsSurveyP survey;
 
 	Ring* rings;                     // Planet rings
 	double distance;                 // Temporary variable used to store the distance to a given point
-	// it is used for sorting while drawing
+					 // it is used for sorting while drawing
 	double sphereScale;              // Artificial scaling for better viewing.
 	double lastJDE;                  // caches JDE of last positional computation
-	// The callback for the calculation of the equatorial rect heliocentric position at time JDE.
-	posFuncType coordFunc;
+
+	posFuncType coordFunc;		// callback for the calculation of the equatorial rectangular heliocentric position at time JDE.
 	Orbit* orbitPtr;		// Usually a KeplerOrbit for positional computations of Minor Planets, Comets and Moons.
 					// For an "observer", it is GimbalOrbit.
 					// For the major planets, it is Q_NULLPTR.
@@ -616,8 +657,6 @@ protected:
 
 	QOpenGLFunctions* gl;
 
-	static bool shaderError;		// True if loading shaders caused errors
-
 	static Vec3f labelColor;
 	static StelTextureSP hintCircleTex;
 	static const QMap<PlanetType, QString> pTypeMap; // Maps fast type to english name.
@@ -625,12 +664,6 @@ protected:
 	static bool drawMoonHalo;
 	//! If true, planet orbits will be drawn even if planet is off screen.
 	static bool permanentDrawingOrbits;
-
-	static bool flagCustomGrsSettings;	// Is enabled usage of custom settings for calculation of position of Great Red Spot?
-	static double customGrsJD;		// Initial JD for calculation of position of Great Red Spot
-	static int customGrsLongitude;		// Longitude of Great Red Spot (System II, degrees)
-	static double customGrsDrift;		// Annual drift of Great Red Spot position (degrees)
-
 	static int orbitsThickness;
 
 private:
@@ -711,6 +744,8 @@ private:
 	static PlanetShaderVars transformShaderVars;
 	static QOpenGLShaderProgram* transformShaderProgram;
 
+	static bool shaderError;		// True if loading shaders caused errors
+
 	static bool shadowInitialized;
 	static Vec2f shadowPolyOffset;
 #ifdef DEBUG_SHADOWMAP
@@ -738,4 +773,3 @@ private:
 };
 
 #endif // PLANET_HPP
-

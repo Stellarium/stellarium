@@ -832,6 +832,10 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/flag_ecliptic_J2000_line",		propMgr->getStelPropertyValue("GridLinesMgr.eclipticJ2000LineDisplayed").toBool());
 	conf->setValue("viewing/flag_ecliptic_J2000_parts",		propMgr->getStelPropertyValue("GridLinesMgr.eclipticJ2000PartsDisplayed").toBool());
 	conf->setValue("viewing/flag_ecliptic_J2000_labels",		propMgr->getStelPropertyValue("GridLinesMgr.eclipticJ2000PartsLabeled").toBool());
+	conf->setValue("viewing/flag_invariable_plane_line",		propMgr->getStelPropertyValue("GridLinesMgr.invariablePlaneLineDisplayed").toBool());
+	conf->setValue("viewing/flag_solar_equator_line",		propMgr->getStelPropertyValue("GridLinesMgr.solarEquatorLineDisplayed").toBool());
+	conf->setValue("viewing/flag_solar_equator_parts",		propMgr->getStelPropertyValue("GridLinesMgr.solarEquatorPartsDisplayed").toBool());
+	conf->setValue("viewing/flag_solar_equator_labels",		propMgr->getStelPropertyValue("GridLinesMgr.solarEquatorPartsLabeled").toBool());
 	conf->setValue("viewing/flag_ecliptic_grid",				propMgr->getStelPropertyValue("GridLinesMgr.eclipticGridDisplayed").toBool());
 	conf->setValue("viewing/flag_ecliptic_J2000_grid",		propMgr->getStelPropertyValue("GridLinesMgr.eclipticJ2000GridDisplayed").toBool());
 	conf->setValue("viewing/flag_meridian_line",			propMgr->getStelPropertyValue("GridLinesMgr.meridianLineDisplayed").toBool());

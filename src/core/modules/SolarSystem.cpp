@@ -509,7 +509,7 @@ void SolarSystem::loadPlanets()
 		return;
 	}
 
-	for (const auto& solarSystemFile : solarSystemFiles)
+	for (const auto& solarSystemFile : qAsConst(solarSystemFiles))
 	{
 		if (loadPlanets(solarSystemFile))
 		{
@@ -554,7 +554,7 @@ void SolarSystem::loadPlanets()
 
 	shadowPlanetCount = 0;
 
-	for (const auto& planet : systemPlanets)
+	for (const auto& planet : qAsConst(systemPlanets))
 		if(planet->parent != sun || !planet->satellites.isEmpty())
 			shadowPlanetCount++;
 }
@@ -674,7 +674,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		if (strParent!="none")
 		{
 			// Look in the other planets the one named with strParent
-			for (const auto& p : systemPlanets)
+			for (const auto& p : qAsConst(systemPlanets))
 			{
 				if (p->getEnglishName()==strParent)
 				{
@@ -803,7 +803,11 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				{ "Neptune",    19412.259776},
 				{ "Pluto",  135836683.768617}};
 
-			// when the parent is the sun use ecliptic rather than sun equator:
+			// Construct orbital elements relative to the parent body. This will construct orbits for J2000 only.
+			// Some planet axes move very slowly, this effect could be modelled by replicating these lines
+			// after recomputing obliquity and node (below) in Planet::computeTransMatrix().
+			// The effect is negligible for several millennia, though.
+			// When the parent is the sun use ecliptic rather than sun equator:
 			const double parentRotObliquity  = parent->getParent() ? parent->getRotObliquity(J2000) : 0.0;
 			const double parent_rot_asc_node = parent->getParent() ? parent->getRotAscendingNode()  : 0.0;
 			double parent_rot_j2000_longitude = 0.0;
@@ -837,7 +841,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 							   parentRotObliquity,     // [radians]
 							   parent_rot_asc_node,    // [radians]
 							   parent_rot_j2000_longitude, // [radians]
-							   1./massMap.value(parent->englishName, 1.));
+							   1./massMap.value(parent->englishName, 1.)); // central mass [solar masses]
 			orbits.push_back(orb);
 
 			orbitPtr = orb;
@@ -1012,7 +1016,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					       closeOrbit,
 					       pd.value(secname+"/hidden", false).toBool(),
 					       pd.value(secname+"/atmosphere", false).toBool(),
-					       pd.value(secname+"/halo", true).toBool(),          // GZ new default. Avoids clutter in ssystem.ini.
+					       pd.value(secname+"/halo", true).toBool(),
 					       type));
 			newP->absoluteMagnitude = pd.value(secname+"/absolute_magnitude", -99.f).toFloat();
 
@@ -1033,41 +1037,83 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		if (secname=="sun") sun = newP;
 		if (secname=="moon") moon = newP;
 
-		float rotObliquity = pd.value(secname+"/rot_obliquity",0.).toFloat()*(M_PI_180f);
-		float rotAscNode = pd.value(secname+"/rot_equator_ascending_node",0.).toFloat()*(M_PI_180f);
+		// At this point the orbit and object type (class Planet and subclasses) have been fixed.
+		// For many objects we have oriented spheroids with rotational parameters.
 
-		// Use more common planet North pole data if available
-		// NB: N pole as defined by IAU (NOT right hand rotation rule)
-		// NB: J2000 epoch
-		const double J2000NPoleRA = pd.value(secname+"/rot_pole_ra", 0.).toDouble()*M_PI/180.;
-		const double J2000NPoleDE = pd.value(secname+"/rot_pole_de", 0.).toDouble()*M_PI/180.;
+		// There are two ways of defining the axis orientation:
+		// obliquity and ascending node, which was used by Stellarium already before 2010 (based on Celestia?).
+		double rotObliquity = pd.value(secname+"/rot_obliquity",0.).toDouble()*(M_PI_180);
+		double rotAscNode = pd.value(secname+"/rot_equator_ascending_node",0.).toDouble()*(M_PI_180);
+		// rot_periode given in hours (from which rotPeriod in days),
+		// The default is useful for many moons in bound rotation
+		double rotPeriod=pd.value(secname+"/rot_periode", pd.value(secname+"/orbit_Period", 1.).toDouble()*24.).toDouble()/24.;
+		double rotOffset=pd.value(secname+"/rot_rotation_offset",0.).toDouble();
 
+		// 0.21+: Use WGCCRE planet North pole data if available
+		// NB: N pole for J2000 epoch as defined by IAU (NOT right hand rotation rule)
+		// Define only basic motion. Use special functions for more complicated axes.
+		const double J2000NPoleRA  = pd.value(secname+"/rot_pole_ra",  0.).toDouble()*M_PI_180;
+		const double J2000NPoleRA1 = pd.value(secname+"/rot_pole_ra1", 0.).toDouble()*M_PI_180;
+		const double J2000NPoleDE  = pd.value(secname+"/rot_pole_de",  0.).toDouble()*M_PI_180;
+		const double J2000NPoleDE1 = pd.value(secname+"/rot_pole_de1", 0.).toDouble()*M_PI_180;
+		const double J2000NPoleW0  = pd.value(secname+"/rot_pole_w0",  0.).toDouble(); // [degrees]   Basically the same idea as rot_rotation_offset, but W!=rotAngle
+		const double J2000NPoleW1  = pd.value(secname+"/rot_pole_w1",  0.).toDouble(); // [degrees/d] Basically the same idea as 360/rot_periode
+		if (fabs(J2000NPoleW1) > 0.0) // Patch possibly old period value with a more modern value.
+		{
+			// this is just another expression for rotational speed.
+			rotPeriod=360.0/J2000NPoleW1;
+		}
+
+		// IMPORTANT: For the planet moons with orbits relative to planets' equator plane,
+		// re-compute the important bits from the updated axis elements.
+		// Reactivated to re-establish Pluto/Charon lock #153
 		if((J2000NPoleRA!=0.) || (J2000NPoleDE!=0.))
 		{
+			// If available, recompute obliquity and AscNode from the new data.
+			// Solution since 0.16: Make this once for J2000.
+			// Optional (future?): Repeat this block in Planet::computeTransMatrix() for planets with moving axes and update all Moons' KeplerOrbit if required.
 			Vec3d J2000NPole;
 			StelUtils::spheToRect(J2000NPoleRA,J2000NPoleDE,J2000NPole);
 
 			Vec3d vsop87Pole(StelCore::matJ2000ToVsop87.multiplyWithoutTranslation(J2000NPole));
 
-			float ra, de;
-			StelUtils::rectToSphe(&ra, &de, vsop87Pole);
+			double lon, lat;
+			StelUtils::rectToSphe(&lon, &lat, vsop87Pole);
 
-			rotObliquity = (M_PI_2f - de);
-			rotAscNode = (ra + M_PI_2f);
+			rotObliquity = (M_PI_2 - lat);
+			rotAscNode = (lon + M_PI_2);
 
-			// qDebug() << "\tCalculated rotational obliquity: " << rotObliquity*180./M_PI << StelUtils::getEndLineChar();
-			// qDebug() << "\tCalculated rotational ascending node: " << rotAscNode*180./M_PI << StelUtils::getEndLineChar();
+			//qDebug() << englishName << ": Compare these values to the older data in ssystem_major";
+			//qDebug() << "\tCalculated rotational obliquity: " << rotObliquity*180./M_PI;
+			//qDebug() << "\tCalculated rotational ascending node: " << rotAscNode*180./M_PI;
+
+			if (J2000NPoleW0 >0)
+			{
+				// W0 is counted from the ascending node with ICRF, but rotOffset from orbital plane.
+				// Try this assumption by just counting Offset=W0+90+RA0.
+				rotOffset=J2000NPoleW0 + lon*M_180_PI;
+				//qDebug() << "\tCalculated rotational period (days // hours): " << rotPeriod << "//" << rotPeriod*24.;
+				//qDebug() << "\tRotational offset (degrees): " << rotOffset;
+			}
 		}
-
-		// rot_periode given in hours, or orbit_Period given in days, orbit_visualization_period in days. The latter should have a meaningful default.
 		newP->setRotationElements(
-			pd.value(secname+"/rot_periode", pd.value(secname+"/orbit_Period", 1.).toDouble()*24.).toFloat()/24.f,
-			pd.value(secname+"/rot_rotation_offset",0.).toFloat(),
+			englishName,
+			rotPeriod,
+			rotOffset,
 			pd.value(secname+"/rot_epoch", J2000).toDouble(),
 			rotObliquity,
 			rotAscNode,
-			pd.value(secname+"/rot_precession_rate",0.).toFloat()*M_PIf/(180*36525),
-			pd.value(secname+"/orbit_good", pd.value(secname+"/orbit_visualization_period", fabs(pd.value(secname+"/orbit_Period", 1.).toDouble())).toDouble()).toDouble()); // this is given in days...
+			J2000NPoleRA,
+			J2000NPoleRA1,
+			J2000NPoleDE,
+			J2000NPoleDE1,
+			J2000NPoleW0,
+			J2000NPoleW1);
+		// orbit_Period given in days, orbit_visualization_period in days. The latter should have a meaningful default.
+		newP->setSiderealPeriod(
+			pd.value(secname+"/orbit_visualization_period",
+				 fabs(pd.value(secname+"/orbit_Period",
+					       fabs(pd.value(secname+"/orbit_good", 100.).toDouble())).toDouble())).toDouble());
 
 		if (pd.contains(secname+"/tex_ring")) {
 			const float rMin = pd.value(secname+"/ring_inner_size").toFloat()/AUf;
@@ -1110,7 +1156,7 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 {
 	if (flagLightTravelTime)
 	{
-		for (const auto& p : systemPlanets)
+		for (const auto& p : qAsConst(systemPlanets))
 		{
 			p->computePosition(dateJDE);
 		}
@@ -1128,17 +1174,31 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 		// We must reset observerPlanet for the next step!
 		observerPlanet->computePosition(dateJDE);
 		// END HACK FOR SOLAR LIGHT TIME/ABERRATION
-		for (const auto& p : systemPlanets)
+		for (const auto& p : qAsConst(systemPlanets))
 		{
+			p->setExtraInfoString(StelObject::DebugAid, "");
 			const double light_speed_correction = (p->getHeliocentricEclipticPos()-obsPosJDE).length() * (AU / (SPEED_OF_LIGHT * 86400.));
 			p->computePosition(dateJDE-light_speed_correction);
+			if      (p->englishName=="Moon")    RotationElements::updatePlanetCorrections(dateJDE-light_speed_correction, RotationElements::EarthMoon);
+			else if (p->englishName=="Mars")    RotationElements::updatePlanetCorrections(dateJDE-light_speed_correction, RotationElements::Mars);
+			else if (p->englishName=="Jupiter") RotationElements::updatePlanetCorrections(dateJDE-light_speed_correction, RotationElements::Jupiter);
+			else if (p->englishName=="Saturn")  RotationElements::updatePlanetCorrections(dateJDE-light_speed_correction, RotationElements::Saturn);
+			else if (p->englishName=="Uranus")  RotationElements::updatePlanetCorrections(dateJDE-light_speed_correction, RotationElements::Uranus);
+			else if (p->englishName=="Neptune") RotationElements::updatePlanetCorrections(dateJDE-light_speed_correction, RotationElements::Neptune);
 		}
 	}
 	else
 	{
-		for (const auto& p : systemPlanets)
+		for (const auto& p : qAsConst(systemPlanets))
 		{
+			p->setExtraInfoString(StelObject::DebugAid, "");
 			p->computePosition(dateJDE);
+			if      (p->englishName=="Moon")    RotationElements::updatePlanetCorrections(dateJDE, RotationElements::EarthMoon);
+			else if (p->englishName=="Mars")    RotationElements::updatePlanetCorrections(dateJDE, RotationElements::Mars);
+			else if (p->englishName=="Jupiter") RotationElements::updatePlanetCorrections(dateJDE, RotationElements::Jupiter);
+			else if (p->englishName=="Saturn")  RotationElements::updatePlanetCorrections(dateJDE, RotationElements::Saturn);
+			else if (p->englishName=="Uranus")  RotationElements::updatePlanetCorrections(dateJDE, RotationElements::Uranus);
+			else if (p->englishName=="Neptune") RotationElements::updatePlanetCorrections(dateJDE, RotationElements::Neptune);
 		}
 		lightTimeSunPosition.set(0.,0.,0.);
 	}
@@ -1153,7 +1213,7 @@ void SolarSystem::computeTransMatrices(double dateJDE, const Vec3d& observerPos)
 
 	if (flagLightTravelTime)
 	{
-		for (const auto& p : systemPlanets)
+		for (const auto& p : qAsConst(systemPlanets))
 		{
 			const double light_speed_correction = (p->getHeliocentricEclipticPos()-observerPos).length() * (AU / (SPEED_OF_LIGHT * 86400));
 			p->computeTransMatrix(dateJD-light_speed_correction, dateJDE-light_speed_correction);
@@ -1161,7 +1221,7 @@ void SolarSystem::computeTransMatrices(double dateJDE, const Vec3d& observerPos)
 	}
 	else
 	{
-		for (const auto& p : systemPlanets)
+		for (const auto& p : qAsConst(systemPlanets))
 		{
 			p->computeTransMatrix(dateJD, dateJDE);
 		}
@@ -1187,7 +1247,7 @@ void SolarSystem::draw(StelCore* core)
 	// Compute each Planet distance to the observer
 	const Vec3d obsHelioPos = core->getObserverHeliocentricEclipticPos();
 
-	for (const auto& p : systemPlanets)
+	for (const auto& p : qAsConst(systemPlanets))
 	{
 		p->computeDistance(obsHelioPos);
 	}
@@ -1212,7 +1272,7 @@ void SolarSystem::draw(StelCore* core)
 			5.f+(sdLimitMag-5.f)*1.2f) +(static_cast<float>(labelsAmount)-3.f)*1.2f;
 
 	// Draw the elements
-	for (const auto& p : systemPlanets)
+	for (const auto& p : qAsConst(systemPlanets))
 	{
 		p->draw(core, maxMagLabel, planetNameFont);
 	}
@@ -1231,7 +1291,7 @@ void SolarSystem::draw(StelCore* core)
 Vec3f SolarSystem::getEphemerisMarkerColor(int index) const
 {
 	// Sync index with AstroCalcDialog::generateEphemeris(). If required, switch to using a QMap.
-	const QList<Vec3f> colors={
+	const QVector<Vec3f> colors={
 		ephemerisGenericMarkerColor,
 		ephemerisSecondaryMarkerColor,
 		ephemerisMercuryMarkerColor,
@@ -1635,7 +1695,7 @@ QList<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, c
 void SolarSystem::updateI18n()
 {
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
-	for (const auto& p : systemPlanets)
+	for (const auto& p : qAsConst(systemPlanets))
 		p->translateName(trans);
 }
 
@@ -1682,7 +1742,7 @@ void SolarSystem::setFlagHints(bool b)
 {
 	if (getFlagHints() != b)
 	{
-		for (const auto& p : systemPlanets)
+		for (const auto& p : qAsConst(systemPlanets))
 			p->setFlagHints(b);
 		emit flagHintsChanged(b);
 	}
@@ -1702,7 +1762,7 @@ void SolarSystem::setFlagLabels(bool b)
 {
 	if (getFlagLabels() != b)
 	{
-		for (const auto& p : systemPlanets)
+		for (const auto& p : qAsConst(systemPlanets))
 			p->setFlagLabels(b);
 		emit labelsDisplayedChanged(b);
 	}
@@ -1727,7 +1787,7 @@ void SolarSystem::setFlagOrbits(bool b)
 	{
 		if (flagPlanetsOnly)
 		{
-			for (const auto& p : systemPlanets)
+			for (const auto& p : qAsConst(systemPlanets))
 			{
 				if (p->getPlanetType()==Planet::isPlanet)
 					p->setFlagOrbits(b);
@@ -1737,7 +1797,7 @@ void SolarSystem::setFlagOrbits(bool b)
 		}
 		else
 		{
-			for (const auto& p : systemPlanets)
+			for (const auto& p : qAsConst(systemPlanets))
 				p->setFlagOrbits(b);
 		}
 	}
@@ -1745,7 +1805,7 @@ void SolarSystem::setFlagOrbits(bool b)
 	{
 		if (flagPlanetsOnly)
 		{
-			for (const auto& p : systemPlanets)
+			for (const auto& p : qAsConst(systemPlanets))
 			{
 				if (selected == p && p->getPlanetType()==Planet::isPlanet)
 					p->setFlagOrbits(b);
@@ -1755,7 +1815,7 @@ void SolarSystem::setFlagOrbits(bool b)
 		}
 		else
 		{
-			for (const auto& p : systemPlanets)
+			for (const auto& p : qAsConst(systemPlanets))
 			{
 				if (selected == p)
 					p->setFlagOrbits(b);
@@ -1767,7 +1827,7 @@ void SolarSystem::setFlagOrbits(bool b)
 	else
 	{
 		// A planet is selected and orbits are on - draw orbits for the planet and their moons
-		for (const auto& p : systemPlanets)
+		for (const auto& p : qAsConst(systemPlanets))
 		{
 			if (selected == p || selected == p->parent)
 				p->setFlagOrbits(b);
@@ -1822,7 +1882,7 @@ void SolarSystem::update(double deltaTime)
 		allTrails->update();
 	}
 
-	for (const auto& p : systemPlanets)
+	for (const auto& p : qAsConst(systemPlanets))
 	{
 		p->update(static_cast<int>(deltaTime*1000));
 	}
@@ -2212,7 +2272,7 @@ void SolarSystem::setFlagNativePlanetNames(bool b)
 	if (b!=flagNativePlanetNames)
 	{
 		flagNativePlanetNames=b;
-		for (const auto& p : systemPlanets)
+		for (const auto& p : qAsConst(systemPlanets))
 		{
 			if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
 				p->setFlagNativeName(flagNativePlanetNames);
@@ -2232,7 +2292,7 @@ void SolarSystem::setFlagTranslatedNames(bool b)
 	if (b!=flagTranslatedNames)
 	{
 		flagTranslatedNames=b;
-		for (const auto& p : systemPlanets)
+		for (const auto& p : qAsConst(systemPlanets))
 		{
 			if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
 				p->setFlagTranslatedName(flagTranslatedNames);
@@ -2639,7 +2699,7 @@ void SolarSystem::setFlagMinorBodyScale(bool b)
 
 		double newScale = b ? minorBodyScale : 1.0;
 		//update the bodies with the new scale
-		for (const auto& p : systemPlanets)
+		for (const auto& p : qAsConst(systemPlanets))
 		{
 			if(p == moon) continue;
 			if (p->getPlanetType()!=Planet::isPlanet && p->getPlanetType()!=Planet::isStar)
@@ -2657,7 +2717,7 @@ void SolarSystem::setMinorBodyScale(double f)
 		minorBodyScale = f;
 		if(flagMinorBodyScale) //update the bodies with the new scale
 		{
-			for (const auto& p : systemPlanets)
+			for (const auto& p : qAsConst(systemPlanets))
 			{
 				if(p == moon) continue;
 				if (p->getPlanetType()!=Planet::isPlanet && p->getPlanetType()!=Planet::isStar)
@@ -2734,7 +2794,7 @@ void SolarSystem::reloadPlanets()
 	selected.clear();//Release the selected one
 
 	// GZ TODO in case this methods gets converted to only reload minor bodies: Only delete Orbits which are not referenced by some Planet.
-	for (auto* orb : orbits)
+	for (auto* orb : qAsConst(orbits))
 	{
 		delete orb;
 	}
@@ -2748,7 +2808,7 @@ void SolarSystem::reloadPlanets()
 	delete allTrails;
 	allTrails = Q_NULLPTR;
 
-	for (const auto& p : systemPlanets)
+	for (const auto& p : qAsConst(systemPlanets))
 	{
 		p->satellites.clear();
 	}
@@ -2843,7 +2903,7 @@ int SolarSystem::getOrbitsThickness() const
 
 void SolarSystem::setFlagCustomGrsSettings(bool b)
 {
-	Planet::flagCustomGrsSettings=b;
+	RotationElements::flagCustomGrsSettings=b;
 	// automatic saving of the setting
 	conf->setValue("astro/flag_grs_custom", b);
 	emit flagCustomGrsSettingsChanged(b);
@@ -2851,12 +2911,12 @@ void SolarSystem::setFlagCustomGrsSettings(bool b)
 
 bool SolarSystem::getFlagCustomGrsSettings() const
 {
-	return Planet::flagCustomGrsSettings;
+	return RotationElements::flagCustomGrsSettings;
 }
 
 void SolarSystem::setCustomGrsLongitude(int longitude)
 {
-	Planet::customGrsLongitude = longitude;
+	RotationElements::customGrsLongitude = longitude;
 	// automatic saving of the setting
 	conf->setValue("astro/grs_longitude", longitude);
 	emit customGrsLongitudeChanged(longitude);
@@ -2864,12 +2924,12 @@ void SolarSystem::setCustomGrsLongitude(int longitude)
 
 int SolarSystem::getCustomGrsLongitude() const
 {
-	return Planet::customGrsLongitude;
+	return RotationElements::customGrsLongitude;
 }
 
 void SolarSystem::setCustomGrsDrift(double drift)
 {
-	Planet::customGrsDrift = drift;
+	RotationElements::customGrsDrift = drift;
 	// automatic saving of the setting
 	conf->setValue("astro/grs_drift", drift);
 	emit customGrsDriftChanged(drift);
@@ -2877,12 +2937,12 @@ void SolarSystem::setCustomGrsDrift(double drift)
 
 double SolarSystem::getCustomGrsDrift() const
 {
-	return Planet::customGrsDrift;
+	return RotationElements::customGrsDrift;
 }
 
 void SolarSystem::setCustomGrsJD(double JD)
 {
-	Planet::customGrsJD = JD;
+	RotationElements::customGrsJD = JD;
 	// automatic saving of the setting
 	conf->setValue("astro/grs_jd", JD);
 	emit customGrsJDChanged(JD);
@@ -2890,7 +2950,7 @@ void SolarSystem::setCustomGrsJD(double JD)
 
 double SolarSystem::getCustomGrsJD()
 {
-	return Planet::customGrsJD;
+	return RotationElements::customGrsJD;
 }
 
 void SolarSystem::setOrbitColorStyle(QString style)
