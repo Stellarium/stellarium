@@ -246,7 +246,7 @@ public slots:
 	//! @param b to hide or not to hide
 	void setAutoHideVerticalButtonBar(bool b);
 
-#ifndef DISABLE_SCRIPTING
+#ifdef ENABLE_SCRIPTING
 	//! change keys when a script is running / not running
 	void setScriptKeys(bool b);
 	void increaseScriptSpeed();
@@ -287,7 +287,7 @@ signals:
 
 private slots:
 	void reloadStyle();
-#ifndef DISABLE_SCRIPTING
+#ifdef ENABLE_SCRIPTING
 	void scriptStarted();
 	void scriptStopped();
 #endif
@@ -389,7 +389,7 @@ private:
 	// Currently used StelStyle
 	StelStyle currentStelStyle;
 
-#ifndef DISABLE_SCRIPTING
+#ifdef ENABLE_SCRIPTING
 	// We use a QStringList to save the user-configured buttons while script is running, and restore them later.
 	QStringList scriptSaveSpeedbuttons;
 #endif

@@ -26,7 +26,7 @@
 #include "CLIProcessor.hpp"
 #include "StelIniParser.hpp"
 #include "StelUtils.hpp"
-#ifndef DISABLE_SCRIPTING
+#ifdef ENABLE_SCRIPTING
 #include "StelScriptOutput.hpp"
 #endif
 
@@ -337,7 +337,7 @@ int main(int argc, char **argv)
 	Q_ASSERT(confSettings);
 	qDebug() << "Config file is: " << QDir::toNativeSeparators(configFileFullPath);
 
-	#ifndef DISABLE_SCRIPTING
+	#ifdef ENABLE_SCRIPTING
 	QString outputFile = StelFileMgr::getUserDir()+"/output.txt";
 	if (confSettings->value("main/use_separate_output_file", false).toBool())
 		outputFile = StelFileMgr::getUserDir()+"/output-"+QDateTime::currentDateTime().toString("yyyyMMdd-HHmmss")+".txt";

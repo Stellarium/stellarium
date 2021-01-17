@@ -365,13 +365,12 @@ ENDIF(ENABLE_SPOUT)
 
 SET(ENABLE_SCRIPTING 1 CACHE BOOL "Define whether scripting features should be activated.")
 IF(ENABLE_SCRIPTING)
+     ADD_DEFINITIONS(-DENABLE_SCRIPTING)
      # (De-)Activate the script edit console
      SET(ENABLE_SCRIPT_CONSOLE 1 CACHE BOOL "Define whether to build the script console feature.")
      IF(ENABLE_SCRIPT_CONSOLE)
           ADD_DEFINITIONS(-DENABLE_SCRIPT_CONSOLE)
      ENDIF()
-ELSE()
-     ADD_DEFINITIONS(-DDISABLE_SCRIPTING)
 ENDIF()
 
 SET(STELLARIUM_GUI_MODE Standard CACHE STRING "Choose the type of GUI to build, options are: Standard, None")
