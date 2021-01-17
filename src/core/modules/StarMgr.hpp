@@ -367,6 +367,8 @@ public:
 	const QList<QMap<StelObjectP, float>>& getHipparcosHighPMStars() const { return hipStarsHighPM; }
 	const QList<QMap<StelObjectP, float>>& getHipparcosDoubleStars() const { return doubleHipStars; }
 	const QList<QMap<StelObjectP, float>>& getHipparcosVariableStars() const { return variableHipStars; }
+	const QList<QMap<StelObjectP, float>>& getHipparcosAlgolTypeStars() const { return algolTypeStars; }
+	const QList<QMap<StelObjectP, float>>& getHipparcosClassicalCepheidsTypeStars() const { return classicalCepheidsTypeStars; }
 
 private slots:
 	//! Translate text.
@@ -436,7 +438,7 @@ private:
 
 	//! List of all Hipparcos stars.
 	QList<StelObjectP> hipparcosStars;
-	QList<QMap<StelObjectP, float>> doubleHipStars, variableHipStars, hipStarsHighPM;
+	QList<QMap<StelObjectP, float>> doubleHipStars, variableHipStars, algolTypeStars, classicalCepheidsTypeStars, hipStarsHighPM;
 
 	LinearFader labelsFader;
 	LinearFader starsFader;

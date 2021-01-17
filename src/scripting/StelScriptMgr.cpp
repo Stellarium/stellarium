@@ -653,7 +653,7 @@ void StelScriptMgr::stopScript()
 	// Hack abusing stopScript for two different stops: it
 	// will be called again after exit from the timer loop
 	// which we kill here if it is running.
-    if( waitEventLoop->isRunning() )
+	if( waitEventLoop->isRunning() )
 	{
 		waitEventLoop->exit( 1 );
 		return;

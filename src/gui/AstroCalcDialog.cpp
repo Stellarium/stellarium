@@ -815,7 +815,7 @@ void AstroCalcDialog::initListCelestialPositions()
 	ui->celestialPositionsTreeWidget->setColumnCount(CColumnCount);
 	setCelestialPositionsHeaderNames();
 	ui->celestialPositionsTreeWidget->header()->setSectionsMovable(false);
-	ui->celestialPositionsTreeWidget->header()->setDefaultAlignment(Qt::AlignHCenter);
+	ui->celestialPositionsTreeWidget->header()->setDefaultAlignment(Qt::AlignHCenter);	
 }
 
 void AstroCalcDialog::setCelestialPositionsHeaderNames()
@@ -1030,6 +1030,7 @@ void AstroCalcDialog::currentCelestialPositions()
 	QPair<QString, QString> coordStrings;
 
 	initListCelestialPositions();
+	ui->celestialPositionsTreeWidget->showColumn(CColumnAngularSize);
 
 	const float mag = static_cast<float>(ui->celestialMagnitudeDoubleSpinBox->value());
 	const bool horizon = ui->horizontalCoordinatesCheckBox->isChecked();
@@ -1224,7 +1225,7 @@ void AstroCalcDialog::currentCelestialPositions()
 
 				fillCelestialPositionTable(planet->getNameI18n(), coordStrings.first, coordStrings.second, planet->getVMagnitudeWithExtinction(core), angularSize, asToolTip, extra, sToolTip, sTransit, sMaxElevation, elongStr, q_(planet->getPlanetTypeString()));
 			}
-		}
+		}		
 	}
 	else
 	{
@@ -1303,6 +1304,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				fillCelestialPositionTable(commonName, coordStrings.first, coordStrings.second, obj->getVMagnitudeWithExtinction(core), dash, "", extra, sToolTip, sTransit, sMaxElevation, elongStr, sType);
 			}
 		}
+		ui->celestialPositionsTreeWidget->hideColumn(CColumnAngularSize);
 	}
 
 	adjustCelestialPositionsColumns();
@@ -4385,12 +4387,11 @@ double AstroCalcDialog::findInitialStep(double startJD, double stopJD, QStringLi
 	else if (objects.contains("Mars",Qt::CaseInsensitive))
 		limit = 5.;
 	else if (objects.indexOf(mp)>=0)
-		limit = 10.;
-	// TODO: Consider using 30 days as max stepwidth? Else planet loops cannot be followed.
+		limit = 10.;	
 	else if (objects.contains("Jupiter", Qt::CaseInsensitive) || objects.contains("Saturn", Qt::CaseInsensitive))
-		limit = 90.5625;
+		limit = 15.;
 	else if (objects.contains("Neptune", Qt::CaseInsensitive) || objects.contains("Uranus", Qt::CaseInsensitive) || objects.contains("Pluto",Qt::CaseInsensitive))
-		limit = 181.125;
+		limit = 20.;
 
 	if (step > limit)
 		step = limit;
@@ -5114,56 +5115,58 @@ void AstroCalcDialog::populateWutGroups()
 	category->blockSignals(true);
 
 	wutCategories.clear();
-	wutCategories.insert(q_("Planets"), 0);
-	wutCategories.insert(q_("Bright stars"), 1);
-	wutCategories.insert(q_("Bright nebulae"), 2);
-	wutCategories.insert(q_("Dark nebulae"), 3);
-	wutCategories.insert(q_("Galaxies"), 4);
-	wutCategories.insert(q_("Open star clusters"), 5);
-	wutCategories.insert(q_("Asteroids"), 6);
-	wutCategories.insert(q_("Comets"), 7);
-	wutCategories.insert(q_("Plutinos"), 8);
-	wutCategories.insert(q_("Dwarf planets"), 9);
-	wutCategories.insert(q_("Cubewanos"), 10);
-	wutCategories.insert(q_("Scattered disc objects"), 11);
-	wutCategories.insert(q_("Oort cloud objects"), 12);
-	wutCategories.insert(q_("Sednoids"), 13);
-	wutCategories.insert(q_("Planetary nebulae"), 14);
-	wutCategories.insert(q_("Bright double stars"), 15);
-	wutCategories.insert(q_("Bright variable stars"), 16);
-	wutCategories.insert(q_("Bright stars with high proper motion"), 17);
-	wutCategories.insert(q_("Symbiotic stars"), 18);
-	wutCategories.insert(q_("Emission-line stars"), 19);
-	wutCategories.insert(q_("Supernova candidates"), 20);
-	wutCategories.insert(q_("Supernova remnant candidates"), 21);
-	wutCategories.insert(q_("Supernova remnants"), 22);
-	wutCategories.insert(q_("Clusters of galaxies"), 23);
-	wutCategories.insert(q_("Interstellar objects"), 24);
-	wutCategories.insert(q_("Globular star clusters"), 25);
-	wutCategories.insert(q_("Regions of the sky"), 26);
-	wutCategories.insert(q_("Active galaxies"), 27);
+	wutCategories.insert(q_("Planets"),					EWPlanets);
+	wutCategories.insert(q_("Bright stars"),				EWBrightStars);
+	wutCategories.insert(q_("Bright nebulae"),			EWBrightNebulae);
+	wutCategories.insert(q_("Dark nebulae"),				EWDarkNebulae);
+	wutCategories.insert(q_("Galaxies"),					EWGalaxies);
+	wutCategories.insert(q_("Open star clusters"),			EWOpenStarClusters);
+	wutCategories.insert(q_("Asteroids"),				EWAsteroids);
+	wutCategories.insert(q_("Comets"),					EWComets);
+	wutCategories.insert(q_("Plutinos"),					EWPlutinos);
+	wutCategories.insert(q_("Dwarf planets"),				EWDwarfPlanets);
+	wutCategories.insert(q_("Cubewanos"),				EWCubewanos);
+	wutCategories.insert(q_("Scattered disc objects"),	 	EWScatteredDiscObjects);
+	wutCategories.insert(q_("Oort cloud objects"),			EWOortCloudObjects);
+	wutCategories.insert(q_("Sednoids"),				EWSednoids);
+	wutCategories.insert(q_("Planetary nebulae"),			EWPlanetaryNebulae);
+	wutCategories.insert(q_("Bright double stars"),			EWBrightDoubleStars);
+	wutCategories.insert(q_("Bright variable stars"),		EWBrightVariableStars);
+	wutCategories.insert(q_("Bright stars with high proper motion"),	EWBrightStarsWithHighProperMotion);
+	wutCategories.insert(q_("Symbiotic stars"),			EWSymbioticStars);
+	wutCategories.insert(q_("Emission-line stars"),			EWEmissionLineStars);
+	wutCategories.insert(q_("Supernova candidates"),		EWSupernovaeCandidates);
+	wutCategories.insert(q_("Supernova remnant candidates"), EWSupernovaeRemnantCandidates);
+	wutCategories.insert(q_("Supernova remnants"),		EWSupernovaeRemnants);
+	wutCategories.insert(q_("Clusters of galaxies"), 		EWClustersOfGalaxies);
+	wutCategories.insert(q_("Interstellar objects"),			EWInterstellarObjects);
+	wutCategories.insert(q_("Globular star clusters"),		EWGlobularStarClusters);
+	wutCategories.insert(q_("Regions of the sky"), 			EWRegionsOfTheSky);
+	wutCategories.insert(q_("Active galaxies"), 			EWActiveGalaxies);
 	if (moduleMgr.isPluginLoaded("Pulsars"))
 	{
 		// Add the category when pulsars is visible
 		if (propMgr->getProperty("Pulsars.pulsarsVisible")->getValue().toBool())
-			wutCategories.insert(q_("Pulsars"), 28);
+			wutCategories.insert(q_("Pulsars"), EWPulsars);
 	}
 	if (moduleMgr.isPluginLoaded("Exoplanets"))
 	{
 		// Add the category when exoplanets is visible
 		if (propMgr->getProperty("Exoplanets.showExoplanets")->getValue().toBool())
-			wutCategories.insert(q_("Exoplanetary systems"), 29);
+			wutCategories.insert(q_("Exoplanetary systems"), EWExoplanetarySystems);
 	}
 	if (moduleMgr.isPluginLoaded("Novae"))
-		wutCategories.insert(q_("Bright nova stars"), 30);
+		wutCategories.insert(q_("Bright nova stars"), EWBrightNovaStars);
 	if (moduleMgr.isPluginLoaded("Supernovae"))
-		wutCategories.insert(q_("Bright supernova stars"), 31);	
-	wutCategories.insert(q_("Interacting galaxies"), 32);
-	wutCategories.insert(q_("Deep-sky objects"), 33);
-	wutCategories.insert(q_("Messier objects"), 34);
-	wutCategories.insert(q_("NGC/IC objects"), 35);
-	wutCategories.insert(q_("Caldwell objects"), 36);
-	wutCategories.insert(q_("Herschel 400 objects"), 37);
+		wutCategories.insert(q_("Bright supernova stars"), 	EWBrightSupernovaStars);
+	wutCategories.insert(q_("Interacting galaxies"), 		EWInteractingGalaxies);
+	wutCategories.insert(q_("Deep-sky objects"), 			EWDeepSkyObjects);
+	wutCategories.insert(q_("Messier objects"), 			EWMessierObjects);
+	wutCategories.insert(q_("NGC/IC objects"), 			EWNGCICObjects);
+	wutCategories.insert(q_("Caldwell objects"), 			EWCaldwellObjects);
+	wutCategories.insert(q_("Herschel 400 objects"), 		EWHerschel400Objects);
+	wutCategories.insert(q_("Algol-type eclipsing systems"),	EWAlgolTypeVariableStars);
+	wutCategories.insert(q_("The classical cepheids"),		EWClassicalCepheidsTypeVariableStars);
 
 	category->clear();
 	category->addItems(wutCategories.keys());
@@ -5266,6 +5269,8 @@ void AstroCalcDialog::enableAngularLimits(bool enable)
 	ui->wutAngularSizeLimitCheckBox->setEnabled(enable);
 	ui->wutAngularSizeLimitMinSpinBox->setEnabled(enable);
 	ui->wutAngularSizeLimitMaxSpinBox->setEnabled(enable);
+	if (!enable)
+		ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
 }
 
 void AstroCalcDialog::fillWUTTable(QString objectName, QString designation, float magnitude, Vec3f RTSTime, double maxElevation, double angularSize, bool decimalDegrees)
@@ -5321,19 +5326,22 @@ void AstroCalcDialog::calculateWutObjects()
 	if (ui->wutCategoryListWidget->currentItem())
 	{
 		QString categoryName = ui->wutCategoryListWidget->currentItem()->text();
-		int categoryId = wutCategories.value(categoryName);
+		const WUTCategory categoryId = static_cast<WUTCategory> (wutCategories.value(categoryName));
 
 		QList<PlanetP> allObjects = solarSystem->getAllPlanets();
 		QVector<NebulaP> allDSO = dsoMgr->getAllDeepSkyObjects();
 		QList<StelObjectP> hipStars = starMgr->getHipparcosStars();
 		QList<StelACStarData> dblHipStars = starMgr->getHipparcosDoubleStars();
 		QList<StelACStarData> varHipStars = starMgr->getHipparcosVariableStars();
+		QList<StelACStarData> algolTypeStars = starMgr->getHipparcosAlgolTypeStars();
+		QList<StelACStarData> classicalCepheidsTypeStars = starMgr->getHipparcosClassicalCepheidsTypeStars();
 		QList<StelACStarData> hpmHipStars = starMgr->getHipparcosHighPMStars();
 
 		const Nebula::TypeGroup& tflags = dsoMgr->getTypeFilters();
 		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 		const bool angularSizeLimit = ui->wutAngularSizeLimitCheckBox->isChecked();
-		bool passByType, visible, state = true;
+		bool passByType, visible = true;
+		bool enableAngular = true;
 		const double angularSizeLimitMin = ui->wutAngularSizeLimitMinSpinBox->valueDegrees();
 		const double angularSizeLimitMax = ui->wutAngularSizeLimitMaxSpinBox->valueDegrees();
 		const float magLimit = static_cast<float>(ui->wutMagnitudeDoubleSpinBox->value());
@@ -5416,8 +5424,8 @@ void AstroCalcDialog::calculateWutObjects()
 
 			switch (categoryId)
 			{
-				case 1: // Bright stars
-					state = false;
+				case EWBrightStars:
+					enableAngular = false;
 					for (const auto& object : hipStars)
 					{
 						// Filter for angular size is not applicable
@@ -5441,29 +5449,28 @@ void AstroCalcDialog::calculateWutObjects()
 								objectsList.insert(designation);
 							}
 						}
-					}
-					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
+					}					
 					break;
-				case 2: // DSO
-				case 3:
-				case 4:
-				case 5:
-				case 14:
-				case 18:
-				case 19:
-				case 20:
-				case 21:
-				case 22:
-				case 23:
-				case 25:
-				case 26:
-				case 32:
-				case 33:
+				case EWBrightNebulae:
+				case EWDarkNebulae:
+				case EWGalaxies:
+				case EWOpenStarClusters:
+				case EWPlanetaryNebulae:
+				case EWSymbioticStars:
+				case EWEmissionLineStars:
+				case EWSupernovaeCandidates:
+				case EWSupernovaeRemnantCandidates:
+				case EWSupernovaeRemnants:
+				case EWClustersOfGalaxies:
+				case EWGlobularStarClusters:
+				case EWRegionsOfTheSky:
+				case EWInteractingGalaxies:
+				case EWDeepSkyObjects:
 				{
-					if (categoryId==3)
+					if (categoryId==EWDarkNebulae)
 						initListWUT(false, false); // special case!
-					if (categoryId==18 || categoryId==19 || categoryId==20)
-						state = false;
+					if (categoryId==EWSymbioticStars || categoryId==EWEmissionLineStars || categoryId==EWSupernovaeCandidates)
+						enableAngular = false;
 
 					for (const auto& object : allDSO)
 					{
@@ -5472,76 +5479,78 @@ void AstroCalcDialog::calculateWutObjects()
 						Nebula::NebulaType ntype = object->getDSOType();						
 						switch (categoryId)
 						{
-							case 2: // Bright nebulae
+							case EWBrightNebulae:
 								if (static_cast<bool>(tflags & Nebula::TypeBrightNebulae) && (ntype == Nebula::NebN || ntype == Nebula::NebBn || ntype == Nebula::NebEn || ntype == Nebula::NebRn || ntype == Nebula::NebHII || ntype == Nebula::NebISM || ntype == Nebula::NebCn || ntype == Nebula::NebSNR) && mag <= magLimit)
 									passByType = true;
 								break;
-							case 3: // Dark nebulae
+							case EWDarkNebulae:
 								if (static_cast<bool>(tflags & Nebula::TypeDarkNebulae) && (ntype == Nebula::NebDn || ntype == Nebula::NebMolCld	 || ntype == Nebula::NebYSO))
 									passByType = true;
 								break;
-							case 4: // Galaxies
+							case EWGalaxies:
 								if (static_cast<bool>(tflags & Nebula::TypeGalaxies) && (ntype == Nebula::NebGx) && mag <= magLimit)
 									passByType = true;
 								break;
-							case 5: // Open Star clusters
+							case EWOpenStarClusters:
 								if (static_cast<bool>(tflags & Nebula::TypeOpenStarClusters) && (ntype == Nebula::NebCl || ntype == Nebula::NebOc || ntype == Nebula::NebSA || ntype == Nebula::NebSC || ntype == Nebula::NebCn) && mag <= magLimit)
 									passByType = true;
 								break;
-							case 14: // Planetary nebulae
+							case EWPlanetaryNebulae:
 								if (static_cast<bool>(tflags & Nebula::TypePlanetaryNebulae) && (ntype == Nebula::NebPn || ntype == Nebula::NebPossPN || ntype == Nebula::NebPPN) && mag <= magLimit)
 									passByType = true;
 								break;
-							case 18: // Symbiotic stars
+							case EWSymbioticStars:
 								if (static_cast<bool>(tflags & Nebula::TypeOther) && (ntype == Nebula::NebSymbioticStar) && mag <= magLimit)
 									passByType = true;
 								break;
-							case 19: // Emission-line stars
+							case EWEmissionLineStars:
 								if (static_cast<bool>(tflags & Nebula::TypeOther) && (ntype == Nebula::NebEmissionLineStar) && mag <= magLimit)
 									passByType = true;
 								break;
-							case 20: // Supernova candidates
+							case EWSupernovaeCandidates:
 							{
 								visible = ((mag <= magLimit) || (mag > 90.f && magLimit >= 19.f));
 								if (static_cast<bool>(tflags & Nebula::TypeSupernovaRemnants) && (ntype == Nebula::NebSNC) && visible)
 									passByType = true;
 								break;
 							}
-							case 21: // Supernova remnant candidates
+							case EWSupernovaeRemnantCandidates:
 							{
 								visible = ((mag <= magLimit) || (mag > 90.f && magLimit >= 19.f));
 								if (static_cast<bool>(tflags & Nebula::TypeSupernovaRemnants) && (ntype == Nebula::NebSNRC) && visible)
 									passByType = true;
 								break;
 							}
-							case 22: // Supernova remnants
+							case EWSupernovaeRemnants:
 							{
 								visible = ((mag <= magLimit) || (mag > 90.f && magLimit >= 19.f));
 								if (static_cast<bool>(tflags & Nebula::TypeSupernovaRemnants) && (ntype == Nebula::NebSNR) && visible)
 									passByType = true;
 								break;
 							}
-							case 23: // Clusters of galaxies
+							case EWClustersOfGalaxies:
 								if (static_cast<bool>(tflags & Nebula::TypeGalaxyClusters) && (ntype == Nebula::NebGxCl) && mag <= magLimit)
 									passByType = true;
 								break;
-							case 25: // Globular Star clusters
+							case EWGlobularStarClusters:
 								if ((static_cast<bool>(tflags & Nebula::TypeGlobularStarClusters) && ntype == Nebula::NebGc) && mag <= magLimit)
 									passByType = true;
 								break;
-							case 26: // Regions
+							case EWRegionsOfTheSky:
 								if (static_cast<bool>(tflags & Nebula::TypeOther) && ntype == Nebula::NebRegion)
 									passByType = true;
 								break;
-							case 32: // Interacting Galaxies
+							case EWInteractingGalaxies:
 								if (static_cast<bool>(tflags & Nebula::TypeInteractingGalaxies) && (ntype == Nebula::NebIGx) && mag <= magLimit)
 									passByType = true;
 								break;
-							case 33: // Deep-sky objets
+							case EWDeepSkyObjects:
 								if (mag <= magLimit)
 									passByType = true;
 								if (ntype == Nebula::NebDn)
 									mag = 99.f;
+								break;
+							default:
 								break;
 						}
 
@@ -5576,10 +5585,7 @@ void AstroCalcDialog::calculateWutObjects()
 						}
 					}
 
-					if (categoryId==18 || categoryId==19 || categoryId==23)
-						ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
-
-					if (categoryId==26) // special case!
+					if (categoryId==EWRegionsOfTheSky) // special case!
 					{
 						ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize);
 						ui->wutMatchingObjectsTreeWidget->hideColumn(WUTMagnitude);
@@ -5587,28 +5593,28 @@ void AstroCalcDialog::calculateWutObjects()
 
 					break;
 				}
-				case 0:
-				case 6:
-				case 7:
-				case 8:
-				case 9:
-				case 10:
-				case 11:
-				case 12:
-				case 13:
-				case 24:
+				case EWPlanets:
+				case EWAsteroids:
+				case EWComets:
+				case EWPlutinos:
+				case EWDwarfPlanets:
+				case EWCubewanos:
+				case EWScatteredDiscObjects:
+				case EWOortCloudObjects:
+				case EWSednoids:
+				case EWInterstellarObjects:
 				{
 					static const QMap<int, Planet::PlanetType>map = {
-						{0, Planet::isPlanet},
-						{6, Planet::isAsteroid},
-						{7, Planet::isComet},
-						{8, Planet::isPlutino},
-						{9, Planet::isDwarfPlanet},
-						{10, Planet::isCubewano},
-						{11, Planet::isSDO},
-						{12, Planet::isOCO},
-						{13, Planet::isSednoid},
-						{24, Planet::isInterstellar}};
+						{EWPlanets,				Planet::isPlanet},
+						{EWAsteroids,				Planet::isAsteroid},
+						{EWComets,				Planet::isComet},
+						{EWPlutinos,				Planet::isPlutino},
+						{EWDwarfPlanets,			Planet::isDwarfPlanet},
+						{EWCubewanos,			Planet::isCubewano},
+						{EWScatteredDiscObjects,	Planet::isSDO},
+						{EWOortCloudObjects,		Planet::isOCO},
+						{EWSednoids,				Planet::isSednoid},
+						{EWInterstellarObjects,		Planet::isInterstellar}};
 					const Planet::PlanetType pType = map.value(categoryId, Planet::isInterstellar);
 
 					for (const auto& object : allObjects)
@@ -5636,7 +5642,7 @@ void AstroCalcDialog::calculateWutObjects()
 
 					break;
 				}
-				case 15: // Bright double stars
+				case EWBrightDoubleStars:
 					// Special case for double stars
 					ui->wutAngularSizeLimitCheckBox->setText(q_("Limit angular separation:"));
 					ui->wutAngularSizeLimitCheckBox->setToolTip(q_("Set limits for angular separation for visible double stars"));
@@ -5674,9 +5680,16 @@ void AstroCalcDialog::calculateWutObjects()
 						}
 					}
 					break;
-				case 16: // Bright variable stars
-					state = false;
-					for (const auto& varStar : varHipStars)
+				case EWAlgolTypeVariableStars:
+				case EWClassicalCepheidsTypeVariableStars:
+				case EWBrightVariableStars:
+				{
+					enableAngular = false;					
+					static QMap<int, QList<StelACStarData>>map = {
+						{EWAlgolTypeVariableStars,			algolTypeStars},
+						{EWClassicalCepheidsTypeVariableStars,	classicalCepheidsTypeStars},
+						{EWBrightVariableStars,				varHipStars}};
+					for (const auto& varStar : map.value(categoryId, varHipStars))
 					{
 						StelObjectP object = varStar.firstKey();
 						mag = object->getVMagnitude(core);
@@ -5699,11 +5712,11 @@ void AstroCalcDialog::calculateWutObjects()
 								objectsList.insert(designation);
 							}
 						}
-					}
-					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
+					}					
 					break;
-				case 17: // Bright stars with high proper motion
-					state = false;
+				}
+				case EWBrightStarsWithHighProperMotion:
+					enableAngular = false;
 					for (const auto& hpmStar : hpmHipStars)
 					{
 						StelObjectP object = hpmStar.firstKey();
@@ -5727,11 +5740,10 @@ void AstroCalcDialog::calculateWutObjects()
 								objectsList.insert(designation);
 							}
 						}
-					}
-					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
+					}					
 					break;
-				case 27: // Active galaxies
-					state = false;
+				case EWActiveGalaxies:
+					enableAngular = false;
 					for (const auto& object : allDSO)
 					{
 						passByType = false;
@@ -5790,11 +5802,10 @@ void AstroCalcDialog::calculateWutObjects()
 							}
 						}
 					}
-					#endif
-					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
+					#endif					
 					break;
-				case 28: // Pulsars
-					state = false;
+				case EWPulsars:
+					enableAngular = false;
 					#ifdef USE_STATIC_PLUGIN_PULSARS					
 					for (const auto& object : GETSTELMODULE(Pulsars)->getAllPulsars())
 					{
@@ -5817,12 +5828,11 @@ void AstroCalcDialog::calculateWutObjects()
 							}
 						}
 					}
-					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTMagnitude); // special case!
-					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
+					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTMagnitude); // special case!					
 					#endif
 					break;
-				case 29: // Exoplanetary systems
-					state = false;
+				case EWExoplanetarySystems:
+					enableAngular = false;
 					#ifdef USE_STATIC_PLUGIN_EXOPLANETS					
 					for (const auto& object : GETSTELMODULE(Exoplanets)->getAllExoplanetarySystems())
 					{
@@ -5838,12 +5848,11 @@ void AstroCalcDialog::calculateWutObjects()
 								objectsList.insert(designation);
 							}
 						}
-					}
-					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
+					}					
 					#endif
 					break;
-				case 30: // Bright novae
-					state = false;
+				case EWBrightNovaStars:
+					enableAngular = false;
 					#ifdef USE_STATIC_PLUGIN_NOVAE					
 					for (const auto& object : GETSTELMODULE(Novae)->getAllBrightNovae())
 					{
@@ -5859,12 +5868,11 @@ void AstroCalcDialog::calculateWutObjects()
 								objectsList.insert(designation);
 							}
 						}
-					}
-					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
+					}					
 					#endif
 					break;
-				case 31: // Bright supernovae
-					state = false;
+				case EWBrightSupernovaStars:
+					enableAngular = false;
 					#ifdef USE_STATIC_PLUGIN_SUPERNOVAE					
 					for (const auto& object : GETSTELMODULE(Supernovae)->getAllBrightSupernovae())
 					{
@@ -5880,30 +5888,32 @@ void AstroCalcDialog::calculateWutObjects()
 								objectsList.insert(designation);
 							}
 						}
-					}
-					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
+					}					
 					#endif
 					break;
-				case 34:
-				case 35:
-				case 36:
-				case 37:
+				case EWMessierObjects:
+				case EWNGCICObjects:
+				case EWCaldwellObjects:
+				case EWHerschel400Objects:
 				{
 					QList<NebulaP> catDSO;
 					switch (categoryId)
 					{
-						case 34: // Messier objects
+						case EWMessierObjects:
 							catDSO = dsoMgr->getDeepSkyObjectsByType("100");
 							break;
-						case 35: // NGC/IC objects
+						case EWNGCICObjects:
 							catDSO = dsoMgr->getDeepSkyObjectsByType("108");
 							catDSO.append(dsoMgr->getDeepSkyObjectsByType("109"));
 							break;
-						case 36: // Caldwell objects
+						case EWCaldwellObjects:
 							catDSO = dsoMgr->getDeepSkyObjectsByType("101");
 							break;
-						case 37: // Herschel 400 objects
+						case EWHerschel400Objects:
 							catDSO = dsoMgr->getDeepSkyObjectsByType("151");
+							break;
+						default:
+							qWarning() << "catDSO: should never come here";
 							break;
 					}
 
@@ -5942,10 +5952,13 @@ void AstroCalcDialog::calculateWutObjects()
 					}
 					break;
 				}
+				default:
+					qWarning() << "unknown WUTCategory " << categoryId;
+					break;
 			}
 		}
 
-		enableAngularLimits(state);
+		enableAngularLimits(enableAngular);
 		core->setJD(JD);
 		adjustWUTColumns();
 		objectsList.clear();		

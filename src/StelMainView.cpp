@@ -744,6 +744,8 @@ QSurfaceFormat StelMainView::getDesiredGLFormat() const
 	fmt.setDepthBufferSize(24);
 	//Stencil buffer seems necessary for GUI boxes
 	fmt.setStencilBufferSize(8);
+	if(const auto multisamplingLevel = configuration->value("video/multisampling", 0).toUInt())
+        fmt.setSamples(multisamplingLevel);
 
 #ifdef OPENGL_DEBUG_LOGGING
 	//try to enable GL debugging using GL_KHR_debug
@@ -946,7 +948,7 @@ void StelMainView::init()
 
 		if (!conflicts.isEmpty())
 		{
-			QMessageBox::warning(Q_NULLPTR, q_("Attention!"), QString("%1: %2").arg(q_("Shortcuts have conflicts! Please press F7 after program startup and check following multiple assignments"), conflicts.join("; ")), QMessageBox::Ok);
+			QMessageBox::warning(&getInstance(), q_("Attention!"), QString("%1: %2").arg(q_("Shortcuts have conflicts! Please press F7 after program startup and check following multiple assignments"), conflicts.join("; ")), QMessageBox::Ok);
 			qWarning() << "Attention! Conflicting keyboard shortcut assignments found. Please resolve:" << conflicts.join("; "); // Repeat in logfile for later retrieval.
 		}
 	}
@@ -1028,7 +1030,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 		QMessageBox::critical(Q_NULLPTR, "Stellarium", q_("Insufficient OpenGL version. Please update drivers, graphics hardware, or use --angle-mode (or --mesa-mode) option."), QMessageBox::Abort, QMessageBox::Abort);
 		#else
 		qWarning() << "Oops... Insufficient OpenGL version. Please update drivers, or graphics hardware.";
-		QMessageBox::critical(0, "Stellarium", q_("Insufficient OpenGL version. Please update drivers, or graphics hardware."), QMessageBox::Abort, QMessageBox::Abort);
+		QMessageBox::critical(Q_NULLPTR, "Stellarium", q_("Insufficient OpenGL version. Please update drivers, or graphics hardware."), QMessageBox::Abort, QMessageBox::Abort);
 		#endif
 		exit(1);
 	}
@@ -1553,6 +1555,8 @@ void StelMainView::doScreenshot(void)
 	QOpenGLFramebufferObjectFormat fbFormat;
 	fbFormat.setAttachment(QOpenGLFramebufferObject::CombinedDepthStencil);
 	fbFormat.setInternalTextureFormat(isGLES ? GL_RGBA : GL_RGB); // try to avoid transparent background!
+	if(const auto multisamplingLevel = configuration->value("video/multisampling", 0).toUInt())
+        fbFormat.setSamples(multisamplingLevel);
 	QOpenGLFramebufferObject * fbObj = new QOpenGLFramebufferObject(imgWidth * pixelRatio, imgHeight * pixelRatio, fbFormat);
 	fbObj->bind();
 	// Now the painter has to be convinced to paint to the potentially larger image frame.

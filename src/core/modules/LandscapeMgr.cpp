@@ -34,6 +34,7 @@
 #include "StelIniParser.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelPainter.hpp"
+#include "StelPropertyMgr.hpp"
 #include "qzipreader.h"
 
 #include <QDebug>
@@ -64,6 +65,7 @@ public:
 	void setFlagShow(bool b){fader = b;}
 	bool getFlagShow() const {return fader;}
 private:
+	class StelPropertyMgr* propMgr;
 	//float radius;
 	QFont fontC, fontSC;
 	Vec3f color;
@@ -86,6 +88,7 @@ Cardinals::Cardinals(float _radius)
 	fontC.setPixelSize(conf->value("viewing/cardinal_font_size", screenFontSize+11).toInt());
 	// Default font size is 18
 	fontSC.setPixelSize(conf->value("viewing/subcardinal_font_size", screenFontSize+5).toInt());
+	propMgr = StelApp::getInstance().getStelPropertyManager();
 }
 
 Cardinals::~Cardinals()
@@ -126,52 +129,53 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 
 	float sshift = sPainter.getFontMetrics().boundingRect(sNorth).width()*0.5f;
 	float bshift = sPainter.getFontMetrics().boundingRect(sNortheast).width()*0.5f;
+	float vshift = sshift;
 	if (core->getProjection(StelCore::FrameJ2000)->getMaskType() == StelProjector::MaskDisk)
-	{
-		sshift = bshift = 0;
-	}
+		sshift = bshift = vshift = 0;
+	if (propMgr->getProperty("SpecialMarkersMgr.compassMarksDisplayed")->getValue().toBool())
+		vshift = -sshift*3.f;
 
 	// N for North
 	pos.set(-1.f, 0.f, 0.f);
 	if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[0], 0., -sshift, -sshift, false);
+		sPainter.drawText(xy[0], xy[1], d[0], 0., -sshift, -vshift, false);
 
 	// S for South
 	pos.set(1.f, 0.f, 0.f);
 	if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[1], 0., -sshift, -sshift, false);
+		sPainter.drawText(xy[0], xy[1], d[1], 0., -sshift, -vshift, false);
 
 	// E for East
 	pos.set(0.f, 1.f, 0.f);
 	if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[2], 0., -sshift, -sshift, false);
+		sPainter.drawText(xy[0], xy[1], d[2], 0., -sshift, -vshift, false);
 
 	// W for West
 	pos.set(0.f, -1.f, 0.f);
 	if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[3], 0., -sshift, -sshift, false);
+		sPainter.drawText(xy[0], xy[1], d[3], 0., -sshift, -vshift, false);
 
 	sPainter.setFont(fontSC);
 
 	// NE for Northeast
 	pos.set(-1.f, 1.f, 0.f);
 	if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[4], 0., -bshift, -sshift, false);
+		sPainter.drawText(xy[0], xy[1], d[4], 0., -bshift, -vshift, false);
 
 	// SE for Southeast
 	pos.set(1.f, 1.f, 0.f);
 	if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[5], 0., -bshift, -sshift, false);
+		sPainter.drawText(xy[0], xy[1], d[5], 0., -bshift, -vshift, false);
 
 	// SW for Southwest
 	pos.set(1.f, -1.f, 0.f);
 	if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[6], 0., -bshift, -sshift, false);
+		sPainter.drawText(xy[0], xy[1], d[6], 0., -bshift, -vshift, false);
 
 	// NW for Northwest
 	pos.set(-1.f, -1.f, 0.f);
 	if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[7], 0., -bshift, -sshift, false);
+		sPainter.drawText(xy[0], xy[1], d[7], 0., -bshift, -vshift, false);
 }
 
 // Translate cardinal labels with gettext to current sky language and update font for the language

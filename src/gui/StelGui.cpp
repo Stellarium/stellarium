@@ -128,6 +128,10 @@ StelGui::StelGui()
 	, btShowAsterismLines(Q_NULLPTR)
 	, flagShowAsterismLabelsButton(false)
 	, btShowAsterismLabels(Q_NULLPTR)
+	, flagShowCardinalButton(false)
+	, btShowCardinal(Q_NULLPTR)
+	, flagShowCompassButton(false)
+	, btShowCompass(Q_NULLPTR)
 	, initDone(false)
 #ifndef DISABLE_SCRIPTING
 	  // We use a QStringList to save the user-configured buttons while script is running, and restore them later.
@@ -297,8 +301,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	addButtonOnBottomBar("btAzimuthalGrid", "actionShow_Azimuthal_Grid", groupName);
 	// Buttons for manage landscapes
 	groupName = "030-landscapeGroup";
-	addButtonOnBottomBar("btGround", "actionShow_Ground", groupName);
-	addButtonOnBottomBar("btCardinalPoints", "actionShow_Cardinal_Points", groupName);
+	addButtonOnBottomBar("btGround", "actionShow_Ground", groupName);	
 	addButtonOnBottomBar("btAtmosphere", "actionShow_Atmosphere", groupName);
 	// Buttons for manage sky objects
 	groupName = "040-nebulaeGroup";
@@ -366,6 +369,8 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	setFlagShowAsterismLinesButton(conf->value("gui/flag_show_asterism_lines_button", false).toBool());
 	setFlagShowAsterismLabelsButton(conf->value("gui/flag_show_asterism_labels_button", false).toBool());
 	setFlagShowQuitButton(conf->value("gui/flag_show_quit_button", true).toBool());
+	setFlagShowCardinalButton(conf->value("gui/flag_show_cardinal_button", true).toBool());
+	setFlagShowCompassButton(conf->value("gui/flag_show_compass_button", false).toBool());
 
 	setFlagEnableFocusOnDaySpinner(conf->value("gui/flag_focus_day_spinner", false).toBool());
 
@@ -572,6 +577,14 @@ void StelGui::update()
 	if (getAction("actionShow_Asterism_Labels")->isChecked() != flag)
 		getAction("actionShow_Asterism_Labels")->setChecked(flag);
 
+	flag = propMgr->getProperty("LandscapeMgr.cardinalsPointsDisplayed")->getValue().toBool();
+	if (getAction("actionShow_Cardinal_Points")->isChecked() != flag)
+		getAction("actionShow_Cardinal_Points")->setChecked(flag);
+
+	flag = propMgr->getProperty("SpecialMarkersMgr.compassMarksDisplayed")->getValue().toBool();
+	if (getAction("actionShow_Compass_Marks")->isChecked() != flag)
+		getAction("actionShow_Compass_Marks")->setChecked(flag);
+
 	flag = StelApp::getInstance().getVisionModeNight();
 	if (getAction("actionShow_Night_Mode")->isChecked() != flag)
 		getAction("actionShow_Night_Mode")->setChecked(flag);
@@ -678,15 +691,18 @@ void StelGui::setFlagShowFlipButtons(bool b)
 {
 	if (b!=flagShowFlipButtons)
 	{
-		if (b==true) {
-			if (flipVert==Q_NULLPTR) {
+		if (b==true)
+		{
+			if (flipVert==Q_NULLPTR)
+			{
 				// Create the vertical flip button
 				QPixmap pxmapGlow32x32(":/graphicGui/miscGlow32x32.png");
 				QPixmap pxmapOn(":/graphicGui/btFlipVertical-on.png");
 				QPixmap pxmapOff(":/graphicGui/btFlipVertical-off.png");
 				flipVert = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionVertical_Flip");
 			}
-			if (flipHoriz==Q_NULLPTR) {
+			if (flipHoriz==Q_NULLPTR)
+			{
 				QPixmap pxmapGlow32x32(":/graphicGui/miscGlow32x32.png");
 				QPixmap pxmapOn(":/graphicGui/btFlipHorizontal-on.png");
 				QPixmap pxmapOff(":/graphicGui/btFlipHorizontal-off.png");
@@ -715,8 +731,10 @@ void StelGui::setFlagShowNebulaBackgroundButton(bool b)
 {
 	if (b!=flagShowNebulaBackgroundButton)
 	{
-		if (b==true) {
-			if (btShowNebulaeBackground==Q_NULLPTR) {
+		if (b==true)
+		{
+			if (btShowNebulaeBackground==Q_NULLPTR)
+			{
 				// Create the nebulae background button
 				QPixmap pxmapGlow32x32(":/graphicGui/miscGlow32x32.png");
 				QPixmap pxmapOn(":/graphicGui/btNebulaeBackground-on.png");
@@ -744,8 +762,10 @@ void StelGui::setFlagShowBookmarksButton(bool b)
 {
 	if(b!=flagShowBookmarksButton)
 	{
-		if (b==true) {
-			if (btShowBookmarks==Q_NULLPTR) {
+		if (b==true)
+		{
+			if (btShowBookmarks==Q_NULLPTR)
+			{
 				// Create the nebulae background button
 				QPixmap pxmapGlow32x32(":/graphicGui/miscGlow32x32.png");
 				QPixmap pxmapOn(":/graphicGui/btBookmarks-on.png");
@@ -773,8 +793,10 @@ void StelGui::setFlagShowICRSGridButton(bool b)
 {
 	if (b!=flagShowICRSGridButton)
 	{
-		if (b==true) {
-			if (btShowICRSGrid==Q_NULLPTR) {
+		if (b==true)
+		{
+			if (btShowICRSGrid==Q_NULLPTR)
+			{
 				// Create the nebulae background button
 				QPixmap pxmapGlow32x32(":/graphicGui/miscGlow32x32.png");
 				QPixmap pxmapOn(":/graphicGui/btEquatorialJ2000Grid-on.png");
@@ -802,8 +824,10 @@ void StelGui::setFlagShowGalacticGridButton(bool b)
 {
 	if (b!=flagShowGalacticGridButton)
 	{
-		if (b==true) {
-			if (btShowGalacticGrid==Q_NULLPTR) {
+		if (b==true)
+		{
+			if (btShowGalacticGrid==Q_NULLPTR)
+			{
 				// Create the nebulae background button
 				QPixmap pxmapGlow32x32(":/graphicGui/miscGlow32x32.png");
 				QPixmap pxmapOn(":/graphicGui/btGalacticGrid-on.png");
@@ -831,8 +855,10 @@ void StelGui::setFlagShowEclipticGridButton(bool b)
 {
 	if (b!=flagShowEclipticGridButton)
 	{
-		if (b==true) {
-			if (btShowEclipticGrid==Q_NULLPTR) {
+		if (b==true)
+		{
+			if (btShowEclipticGrid==Q_NULLPTR)
+			{
 				// Create the nebulae background button
 				QPixmap pxmapGlow32x32(":/graphicGui/miscGlow32x32.png");
 				QPixmap pxmapOn(":/graphicGui/btEclipticGrid-on.png");
@@ -860,8 +886,10 @@ void StelGui::setFlagShowConstellationBoundariesButton(bool b)
 {
 	if (b!=flagShowConstellationBoundariesButton)
 	{
-		if (b==true) {
-			if (btShowConstellationBoundaries==Q_NULLPTR) {
+		if (b==true)
+		{
+			if (btShowConstellationBoundaries==Q_NULLPTR)
+			{
 				// Create the nebulae background button
 				QPixmap pxmapGlow32x32(":/graphicGui/miscGlow32x32.png");
 				QPixmap pxmapOn(":/graphicGui/btConstellationBoundaries-on.png");
@@ -889,8 +917,10 @@ void StelGui::setFlagShowAsterismLinesButton(bool b)
 {
 	if (b!=flagShowAsterismLinesButton)
 	{
-		if (b==true) {
-			if (btShowAsterismLines==Q_NULLPTR) {
+		if (b==true)
+		{
+			if (btShowAsterismLines==Q_NULLPTR)
+			{
 				// Create the asterism lines button
 				QPixmap pxmapGlow32x32(":/graphicGui/miscGlow32x32.png");
 				QPixmap pxmapOn(":/graphicGui/btAsterismLines-on.png");
@@ -918,8 +948,10 @@ void StelGui::setFlagShowAsterismLabelsButton(bool b)
 {
 	if (b!=flagShowAsterismLabelsButton)
 	{
-		if (b==true) {
-			if (btShowAsterismLabels==Q_NULLPTR) {
+		if (b==true)
+		{
+			if (btShowAsterismLabels==Q_NULLPTR)
+			{
 				// Create the asterism labels button
 				QPixmap pxmapGlow32x32(":/graphicGui/miscGlow32x32.png");
 				QPixmap pxmapOn(":/graphicGui/btAsterismLabels-on.png");
@@ -949,8 +981,10 @@ void StelGui::setFlagShowDSSButton(bool b)
 {
 	if (b!=flagShowDSSButton)
 	{
-		if (b==true) {
-			if (btShowDSS==Q_NULLPTR) {
+		if (b==true)
+		{
+			if (btShowDSS==Q_NULLPTR)
+			{
 				// Create the nebulae background button
 				QPixmap pxmapGlow32x32(":/graphicGui/miscGlow32x32.png");
 				QPixmap pxmapOn(":/graphicGui/btDSS-on.png");
@@ -975,8 +1009,10 @@ void StelGui::setFlagShowHiPSButton(bool b)
 {
 	if (b!=flagShowHiPSButton)
 	{
-		if (b==true) {
-			if (btShowHiPS==Q_NULLPTR) {
+		if (b==true)
+		{
+			if (btShowHiPS==Q_NULLPTR)
+			{
 				// Create the nebulae background button
 				QPixmap pxmapGlow32x32(":/graphicGui/miscGlow32x32.png");
 				QPixmap pxmapOn(":/graphicGui/btHIPS-on.png");
@@ -1001,8 +1037,10 @@ void StelGui::setFlagShowGotoSelectedObjectButton(bool b)
 {
 	if (b!=flagShowGotoSelectedObjectButton)
 	{
-		if (b==true) {
-			if (buttonGotoSelectedObject==Q_NULLPTR) {
+		if (b==true)
+		{
+			if (buttonGotoSelectedObject==Q_NULLPTR)
+			{
 				// Create the button
 				QPixmap pxmapGlow32x32(":/graphicGui/miscGlow32x32.png");
 				QPixmap pxmapOn(":/graphicGui/btGotoSelectedObject-on.png");
@@ -1026,8 +1064,10 @@ void StelGui::setFlagShowNightmodeButton(bool b)
 {
 	if (b!=flagShowNightmodeButton)
 	{
-		if (b==true) {
-			if (buttonNightmode==Q_NULLPTR) {
+		if (b==true)
+		{
+			if (buttonNightmode==Q_NULLPTR)
+			{
 				// Create the nightmode button
 				QPixmap pxmapGlow32x32(":/graphicGui/miscGlow32x32.png");
 				QPixmap pxmapOn(":/graphicGui/btNightView-on.png");
@@ -1051,8 +1091,10 @@ void StelGui::setFlagShowFullscreenButton(bool b)
 {
 	if (b!=flagShowFullscreenButton)
 	{
-		if (b==true) {
-			if (buttonFullscreen==Q_NULLPTR) {
+		if (b==true)
+		{
+			if (buttonFullscreen==Q_NULLPTR)
+			{
 				// Create the fullscreen button
 				QPixmap pxmapGlow32x32(":/graphicGui/miscGlow32x32.png");
 				QPixmap pxmapOn(":/graphicGui/btFullScreen-on.png");
@@ -1077,7 +1119,8 @@ void StelGui::setFlagShowQuitButton(bool b)
 	if (b!=flagShowQuitButton)
 	{
 		if (b==true) {
-			if (buttonFullscreen==Q_NULLPTR) {
+			if (buttonFullscreen==Q_NULLPTR)
+			{
 				// Create the fullscreen button
 				QPixmap pxmapGlow32x32(":/graphicGui/miscGlow32x32.png");
 				QPixmap pxmapOn(":/graphicGui/btQuit.png");
@@ -1093,6 +1136,57 @@ void StelGui::setFlagShowQuitButton(bool b)
 		conf->setValue("gui/flag_show_quit_button", b);
 		conf->sync();
 		emit flagShowQuitButtonChanged(b);
+	}
+}
+
+void StelGui::setFlagShowCardinalButton(bool b)
+{
+	if (b!=flagShowCardinalButton)
+	{
+		if (b==true) {
+			if (btShowCardinal==Q_NULLPTR)
+			{
+				QPixmap pxmapGlow32x32(":/graphicGui/miscGlow32x32.png");
+				QPixmap pxmapOn(":/graphicGui/btCardinalPoints-on.png");
+				QPixmap pxmapOff(":/graphicGui/btCardinalPoints-off");
+				btShowCardinal = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Cardinal_Points");
+			}
+			getButtonBar()->addButton(btShowCardinal, "030-landscapeGroup");
+		} else {
+			getButtonBar()->hideButton("actionShow_Cardinal_Points");
+		}
+		flagShowCardinalButton = b;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		Q_ASSERT(conf);
+		conf->setValue("gui/flag_show_cardinal_button", b);
+		conf->sync();
+		emit flagShowCardinalButtonChanged(b);
+	}
+}
+
+void StelGui::setFlagShowCompassButton(bool b)
+{
+	if (b!=flagShowCompassButton)
+	{
+		if (b==true)
+		{
+			if (btShowCompass==Q_NULLPTR)
+			{
+				QPixmap pxmapGlow32x32(":/graphicGui/miscGlow32x32.png");
+				QPixmap pxmapOn(":/graphicGui/btCompass-on.png");
+				QPixmap pxmapOff(":/graphicGui/btCompass-off");
+				btShowCompass = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Compass_Marks");
+			}
+			getButtonBar()->addButton(btShowCompass, "030-landscapeGroup");
+		} else {
+			getButtonBar()->hideButton("actionShow_Compass_Marks");
+		}
+		flagShowCompassButton = b;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		Q_ASSERT(conf);
+		conf->setValue("gui/flag_show_compass_button", b);
+		conf->sync();
+		emit flagShowCompassButtonChanged(b);
 	}
 }
 
@@ -1277,6 +1371,16 @@ bool StelGui::getFlagShowAsterismLinesButton() const
 bool StelGui::getFlagShowAsterismLabelsButton() const
 {
 	return flagShowAsterismLabelsButton;
+}
+
+bool StelGui::getFlagShowCardinalButton() const
+{
+	return flagShowCardinalButton;
+}
+
+bool StelGui::getFlagShowCompassButton() const
+{
+	return flagShowCompassButton;
 }
 
 bool StelGui::initComplete(void) const

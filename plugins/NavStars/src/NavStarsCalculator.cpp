@@ -26,6 +26,7 @@ using std::asin;
 using std::acos;
 
 bool NavStarsCalculator::useExtraDecimals = false;
+bool NavStarsCalculator::useDecimalDegrees = false;
 
 #ifdef _DEBUG
 static void examineCalc(NavStarsCalculator& calc);
@@ -95,15 +96,23 @@ void NavStarsCalculator::execute()
 QString NavStarsCalculator::radToDm(double rad, const QString pos, const QString neg)
 {
 	QString rval;
-	bool sign;
-	double s, md;
-	unsigned int d, m;
-	StelUtils::radToDms(rad, sign, d, m, s);
-	md = static_cast<double>(m);
-	md += (s / 60.);
-	rval += (sign ? pos : neg)
-		+ QString::number(d, 'f', 0) + QString("&deg;")
-		+ QString::number(md, 'f', useExtraDecimals ? 4 : 1) + "'";
+	bool sign;	
+	if (useDecimalDegrees)
+	{
+		double dd;
+		StelUtils::radToDecDeg(rad, sign, dd);
+		rval = QString("%1%2&deg;").arg(sign ? pos : neg).arg(QString::number(dd, 'f', useExtraDecimals ? 6 : 5));
+	}
+	else
+	{
+		double s, md;
+		unsigned int d, m;
+		StelUtils::radToDms(rad, sign, d, m, s);
+
+		md = static_cast<double>(m);
+		md += (s / 60.);
+		rval = QString("%1%2&deg;%3'").arg(sign ? pos : neg).arg(QString::number(d, 'f', 0)).arg(QString::number(md, 'f', useExtraDecimals ? 4 : 1));
+	}
 #ifdef _DEBUG
 	// An easier to use display when working with Google Earth, 
 	// Google Maps, custom software tools, etc. Keep everything

@@ -1037,7 +1037,10 @@ void Satellite::drawOrbit(StelCore *core, StelPainter& painter)
 		{
 			vertexArray.append(position);
 			drawColor = (visibilityPoints[i] == gSatWrapper::VISIBLE) ? orbitColor : invisibleSatelliteColor;
-			colorArray.append(Vec4f(drawColor, hintBrightness * calculateOrbitSegmentIntensity(i)));
+			if (hideInvisibleSatellitesFlag && visibilityPoints[i] != gSatWrapper::VISIBLE)
+				colorArray.append(Vec4f(0.f,0.f,0.f,0.f)); // hide invisible part of orbit
+			else
+				colorArray.append(Vec4f(drawColor, hintBrightness * calculateOrbitSegmentIntensity(i)));
 		}
 	}
 	painter.drawPath(vertexArray, colorArray); // (does client state switching as needed internally)

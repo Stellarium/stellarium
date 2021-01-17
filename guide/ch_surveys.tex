@@ -36,7 +36,8 @@ hips_status       = public mirror clonableOnce
 \end{configfileScr}
 
 As of v0.18.0, by default Stellarium tries to load HiPS from two sources:
-\url{http://alaskybis.unistra.fr/hipslist}\footnote{Since version 0.20.3 the first URL was changed to \url{http://alasky.u-strasbg.fr/MocServer/query?*/P/*&get=record} due changes in HiPS service} and
+\url{http://alaskybis.unistra.fr/hipslist}\footnote{Since version 0.20.3 the first URL 
+was changed to \url{http://alasky.u-strasbg.fr/MocServer/query?*/P/*&get=record} due to changes in HiPS services} and
 \url{https://data.stellarium.org/surveys/hipslist}.
 This can be changed with the hips/sources options in the configuration
 file (see also section~\ref{sec:config.ini:hips}).  For example, you can add your
@@ -44,7 +45,7 @@ own private HiPS surveys by running a local webserver and adding:
 
 \begin{configfile}
 [hips]
-sources/1/url = http://alaskybis.unistra.fr/hipslist
+sources/1/url = http://alasky.u-strasbg.fr/MocServer/query?*/P/*&get=record
 sources/2/url = https://data.stellarium.org/surveys/hipslist
 sources/3/url = http://localhost/Stellarium/hips/hipslist
 sources/size  = 3
@@ -70,7 +71,7 @@ Stellarium provides access to the Digitized Sky Survey 2, a
 combination of high-resolution scans of red- and blue-sensitive
 photographic plates taken in 1983--2006 at Palomar Observatory and the
 Anglo-Australian Observatory.\footnote{The original data are available
-  at \url{http://archive.stsci.edu/cgi-bin/dss_form}.}
+  at \url{https://archive.stsci.edu/cgi-bin/dss_form}.}
 
 To enable access to the DSS layer, see
 section~\ref{sec:gui:configuration:extras} and enable the DSS

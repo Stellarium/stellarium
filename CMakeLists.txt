@@ -19,7 +19,7 @@ PROJECT(Stellarium)
 # Use integer versions instead of strings for easier handling if required
 SET(STELLARIUM_MAJOR 0)
 SET(STELLARIUM_MINOR 20)
-SET(STELLARIUM_PATCH 3)
+SET(STELLARIUM_PATCH 4)
 ADD_DEFINITIONS(
      -DSTELLARIUM_MAJOR=${STELLARIUM_MAJOR}
      -DSTELLARIUM_MINOR=${STELLARIUM_MINOR}
@@ -420,7 +420,7 @@ ADD_PLUGIN(SimpleDrawLine 0)
 #### work plugins ####
 ADD_PLUGIN(AngleMeasure 1)
 ADD_PLUGIN(ArchaeoLines 1)
-ADD_PLUGIN(CompassMarks 1)
+ADD_PLUGIN(Calendars 1)
 ADD_PLUGIN(Exoplanets 1)
 ADD_PLUGIN(EquationOfTime 1)
 ADD_PLUGIN(MeteorShowers 1)

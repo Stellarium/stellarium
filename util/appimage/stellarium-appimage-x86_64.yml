@@ -1,0 +1,77 @@
+version: 1
+
+script:
+    - cmake ../.. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+    - make -j3
+    - make install DESTDIR=AppDir
+
+AppDir:
+  path: ./AppDir
+
+  app_info:
+    id: org.stellarium.Stellarium
+    name: Stellarium
+    icon: stellarium
+    version: !ENV ${APP_VERSION}
+    exec: usr/bin/stellarium
+
+  apt:
+    arch: amd64
+    sources:
+      - sourceline: 'deb [arch=amd64] http://archive.ubuntu.com/ubuntu/ bionic main restricted universe multiverse'
+        key_url: 'http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x3b4fe6acc0b21f32'
+      - sourceline: 'deb [arch=amd64] http://archive.ubuntu.com/ubuntu/ bionic-updates main restricted universe multiverse'
+      - sourceline: 'deb [arch=amd64] http://archive.ubuntu.com/ubuntu/ bionic-backports main restricted universe multiverse'
+
+    include:
+      - libqt5core5a
+      - libqt5gui5
+      - libqt5multimedia5
+      - libqt5multimediawidgets5
+      - libqt5network5
+      - libqt5positioning5
+      - libqt5printsupport5
+      - libqt5script5
+      - libqt5serialport5
+      - libqt5widgets5
+      - libgps23
+    exclude: []
+
+  files:
+    exclude:
+      - usr/lib/x86_64-linux-gnu/gconv
+      - usr/share/man
+      - usr/share/doc/*/README.*
+      - usr/share/doc/*/changelog.*
+      - usr/share/doc/*/NEWS.*
+  runtime:
+    env:
+      APPDIR_LIBRARY_PATH: $APPDIR/lib/x86_64-linux-gnu:$APPDIR/usr/lib/x86_64-linux-gnu:$APPDIR/usr/lib/x86_64-linux-gnu/pulseaudio
+
+  test:
+    debian:
+      image: appimagecrafters/tests-env:debian-stable
+      command: "./AppRun"
+      use_host_x: True
+    centos:
+      image: appimagecrafters/tests-env:centos-7
+      command: "./AppRun"
+      use_host_x: True
+    arch:
+      image: appimagecrafters/tests-env:archlinux-latest
+      command: "./AppRun"
+      use_host_x: True
+    fedora:
+      image: appimagecrafters/tests-env:fedora-30
+      command: "./AppRun"
+      use_host_x: True
+    ubuntu:
+      image: appimagecrafters/tests-env:ubuntu-xenial
+      command: "./AppRun"
+      use_host_x: True
+
+
+AppImage:
+  update-information: None
+  sign-key: None
+  arch: x86_64

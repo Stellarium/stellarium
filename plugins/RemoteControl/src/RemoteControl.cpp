@@ -41,6 +41,7 @@
 #include <QPixmap>
 #include <QtNetwork>
 #include <QSettings>
+#include <stdexcept>
 
 //! This method is the one called automatically by the StelModuleMgr just after loading the dynamic library
 StelModule* RemoteControlStelPluginInterface::getStelModule() const

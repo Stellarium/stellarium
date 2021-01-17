@@ -87,6 +87,7 @@ class Oculars : public StelModule
 	Q_PROPERTY(int selectedTelescopeIndex READ getSelectedTelescopeIndex WRITE selectTelescopeAtIndex NOTIFY selectedTelescopeChanged)
 	Q_PROPERTY(int selectedLensIndex      READ getSelectedLensIndex      WRITE selectLensAtIndex      NOTIFY selectedLensChanged)
 	Q_PROPERTY(double selectedCCDRotationAngle READ getSelectedCCDRotationAngle WRITE setSelectedCCDRotationAngle NOTIFY selectedCCDRotationAngleChanged)
+	Q_PROPERTY(double selectedCCDPrismPositionAngle READ getSelectedCCDPrismPositionAngle WRITE setSelectedCCDPrismPositionAngle NOTIFY selectedCCDPrismPositionAngleChanged)
 
 	Q_PROPERTY(bool flagGuiPanelEnabled          READ getFlagGuiPanelEnabled          WRITE enableGuiPanel NOTIFY flagGuiPanelEnabledChanged)
 	Q_PROPERTY(bool flagInitFOVUsage             READ getFlagInitFovUsage             WRITE setFlagInitFovUsage NOTIFY flagInitFOVUsageChanged) 
@@ -156,6 +157,7 @@ public slots:
 	//! is implemented.
 	void updateLists();
 	void ccdRotationReset();
+	void prismPositionAngleReset();
 	void decrementCCDIndex();
 	void decrementOcularIndex();
 	void decrementTelescopeIndex();
@@ -177,6 +179,10 @@ public slots:
 	void rotateCCD(int amount);     //!< amount must be a number. This adds to the current rotation.
 	double getSelectedCCDRotationAngle(void) const; //!< get rotation angle from currently selected CCD
 	void setSelectedCCDRotationAngle(double angle); //!< set rotation angle for currently selected CCD
+
+	void rotatePrism(int amount);     //!< amount must be a number. This adds to the current rotation.
+	double getSelectedCCDPrismPositionAngle(void) const; //!< get position angle from prism/OAG of currently selected CCD
+	void setSelectedCCDPrismPositionAngle(double angle); //!< set position angle for prism/OAG of currently selected CCD
 	
 	void selectCCDAtIndex(int index);           //!< index in the range of -1:ccds.count(), else call is ignored
 	int getSelectedCCDIndex() const {return selectedCCDIndex; }
@@ -316,6 +322,7 @@ signals:
 	void selectedTelescopeChanged(int value);
 	void selectedLensChanged(int value);
 	void selectedCCDRotationAngleChanged(double value);
+	void selectedCCDPrismPositionAngleChanged(double value);
 
 	void flagGuiPanelEnabledChanged(bool value);
 	void guiPanelFontSizeChanged(int value);
@@ -430,6 +437,7 @@ private:
 	int selectedTelescopeIndex;     //!< index of the current telescope, in the range of -1:telescopes.count(). -1 means none is selected.
 	int selectedLensIndex;          //!< index of the current lens, in the range of -1:lense.count(). -1 means no lens is selected
 	double selectedCCDRotationAngle;//!< allows rotating via property/remotecontrol API
+	double selectedCCDPrismPositionAngle;//!< allows rotating via property/remotecontrol API
 	int arrowButtonScale;           //!< allows scaling of the GUI "previous/next" Ocular/CCD/Telescope etc. buttons
 
 	QFont font;			//!< The font used for drawing labels.

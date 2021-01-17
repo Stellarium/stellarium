@@ -199,6 +199,9 @@
       </item>
       <item row="0" column="0">
        <widget class="QLabel" name="longitudeLabel">
+        <property name="toolTip">
+         <string>Jovigraphic longitude of Great Red Spot in System II</string>
+        </property>
         <property name="text">
          <string>Longitude of GRS (degrees):</string>
         </property>
@@ -233,10 +236,10 @@
       <item row="3" column="0" colspan="2">
        <widget class="QPushButton" name="recentGrsMeasurementPushButton">
         <property name="toolTip">
-         <string/>
+         <string>Open JUPOS website</string>
         </property>
         <property name="text">
-         <string>Get the recent GRS measurement</string>
+         <string>View recent GRS measurements</string>
         </property>
         <property name="flat">
          <bool>false</bool>
@@ -257,10 +260,10 @@
   </customwidget>
  </customwidgets>
  <tabstops>
-   <tabstop>longitudeSpinBox</tabstop>
-   <tabstop>driftDoubleSpinBox</tabstop>
-   <tabstop>jdDateTimeEdit</tabstop>
-   <tabstop>recentGrsMeasurementPushButton</tabstop>
+  <tabstop>longitudeSpinBox</tabstop>
+  <tabstop>driftDoubleSpinBox</tabstop>
+  <tabstop>jdDateTimeEdit</tabstop>
+  <tabstop>recentGrsMeasurementPushButton</tabstop>
  </tabstops>
  <resources/>
  <connections/>

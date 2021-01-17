@@ -72,7 +72,6 @@ ENDIF()
 
 IF(UNIX AND NOT APPLE)
 	INSTALL(FILES org.stellarium.Stellarium.desktop DESTINATION share/applications)
-	INSTALL(FILES stellarium.xpm DESTINATION share/pixmaps)
 	INSTALL(FILES org.stellarium.Stellarium.appdata.xml DESTINATION share/metainfo)
 	INSTALL(FILES stellarium.xml DESTINATION share/mime/packages)
 	INSTALL(FILES icons/16x16/stellarium.png DESTINATION share/icons/hicolor/16x16/apps)

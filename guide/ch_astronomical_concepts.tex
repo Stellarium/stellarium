@@ -187,7 +187,15 @@ catalogues such as the Hipparcos catalogue.
 However, the story is complicated a little by \indexterm{precession}
 (section~\ref{sec:Concepts:Precession}) and \indexterm{parallax}
 (section~\ref{sec:Concepts:Parallax}). Precession causes a slow drift of the coordinates almost parallel to the \indexterm{ecliptic}, and therefore star catalogues always have to specify their \indexterm{equinox} of
-validity. Current catalogs and atlases use coordinates for J2000.0.
+validity.
+
+Current catalogs and atlases use coordinates for the
+\indexterm{standard epoch} J2000.0. The currently best defined
+coordinate system, the International Celestial Reference Frame
+(\indexterm{ICRF}), is one particular version described in detail in
+the astronomical literature \citep{ESAA:2013}. Other catalogs with data
+referring to ``J2000.0'' may have to be slightly adjusted (usually in
+sub-arcsecond rotations) to match the ICRF coordinate system (short ICRS).
 
 
 Stellarium can draw grid lines for equatorial coordinates. Use the
@@ -298,6 +306,76 @@ activating the respective options in the Markings dialog (see
 section~\ref{sec:gui:view:markings}). You can assign a keyboard
 shortcut if you frequently use these coordinates
 (see~\ref{sec:gui:help:hotkeys}).
+
+
+\subsection{Planet Coordinates}
+\label{sec:Concepts:PlanetCoordinates}
+
+The larger objects in the Solar system are described as spheroids,
+sometimes flattened into slightly ellipsoid shape.
+
+Just like the Prime Meridian on Earth has been defined to run through
+Greenwich Observatory, each such object in the Solar system for which
+any kind of rotation has been detected has a prime meridian defined by
+the IAU Working Group on Cartographic Coordinates and Rotational
+Elements (WGCCRE). On a rocky planet this is usually defined by some
+surface feature like a crater. For the Moon, it has traditionally been
+the center of the Lunar disk. For the gas giant planets with
+ever-changing atmospheric features, there are even several systems of
+rotation. Most notably on Jupiter, System~I describes the rotation of
+its equatorial area, while System~II describes the mean atmospheric
+rotation north of the south component of the north equatorial belt,
+and south of the north component of the south equatorial
+belt. Official sources prefer to list the rotation of the magnetic
+fields (System~III) for these planets. The most interesting feature on
+Jupiter for most observers is the \indexterm{Great Red Spot} (GRS), a
+huge storm that has been observed since the 19th, if not even since
+the 17th century.
+
+Astronomical almanachs and observing guides often list \emph{transit
+  times} when the GRS crosses the center of Jupiter's visible
+disk. Stellarium aims to show it at the right place. The storm moves
+in longitude, and to adjust for this you can configure its System~II
+longitude in the settings, see~\ref{sec:gui:view:sso}.
+
+Like many planet moons, also Earth's Moon shows one side towards its
+planet. However, given its elliptical orbit and disturbations by
+Earth, Sun and other planets, the Moon seems to nod slightly in
+east-west and north-south directions. This motion is called
+\indexterm{Libration}. \newFeature{0.21.0} Stellarium gives geocentric
+libration in longitude $L$ and latitude $B$, which are the coordinates
+of the apparent center of the Lunar disk. Another way to express this
+shift is the total angle of libration and the direction into which the
+Moon's mean center has been shifted. This angle is given
+counterclockwise from the direction of the North pole on the Lunar
+disk. The larger this shift is, the better you can observe the
+opposite side, which is therefore marked in brackets. If libration is
+larger than 3/5/7 degrees, Stellarium shows 1, 2 or 3 exclamation
+marks to draw your attention further to this lunar rim. However, you
+also need light on this edge.
+
+Another interesting point for which Stellarium gives coordinates is
+the subsolar point $(L_s, B_s)$.
+
+The Selenographic colongitude of the Sun $c_0=450^\circ-L_s$ is given for the
+Moon. This helps estimating the terminator \citep{AstronomicalAlgorithms:1998}:
+\begin{itemize}
+\item The morning terminator is at $360^\circ-c_0$.
+\item The evening terminator is at $180^\circ-c_0$.
+\item When $c_0=0^\circ$, the Sun rises at selenographic longitude $L=0^\circ$, near First Quarter.
+\item When $c_0=90^\circ$, the Sun rises at selenographic longitude $L=270^\circ$, near Full Moon.
+\item When $c_0=180^\circ$, the Sun rises at selenographic longitude $L=180^\circ$, near Last Quarter.
+\item When $c_0=270^\circ$, the Sun rises at selenographic longitude $L=90^\circ$, near New Moon.
+\end{itemize}
+
+$c_0$ is used to compute the Sun's altitude $h$ over a surface point,
+e.g.\ a crater on the Moon at position $(\eta, \theta)$, which is
+displayed when you select a surface feature.
+
+\begin{equation}
+\sin h=\sin B_s \sin\theta + \cos B_s \cos\theta \sin(c_0+\eta)
+\end{equation}
+
 
 
 \section{Distance}

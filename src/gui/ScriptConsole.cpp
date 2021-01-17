@@ -175,7 +175,7 @@ void ScriptConsole::loadScript()
 	if (dirty)
 	{
 		// We are loaded and dirty: don't just overwrite!
-		if (QMessageBox::question(Q_NULLPTR, q_("Caution!"), q_("Are you sure you want to load script without saving changes?"), QMessageBox::Yes | QMessageBox::No) == QMessageBox::No)
+        if (QMessageBox::question(&StelMainView::getInstance(), q_("Caution!"), q_("Are you sure you want to load script without saving changes?"), QMessageBox::Yes | QMessageBox::No) == QMessageBox::No)
 			return;
 	}
 	
@@ -247,7 +247,7 @@ void ScriptConsole::clearButtonPressed()
 	{
 		bool doClear = false;
 		if (dirty)
-			doClear = QMessageBox::question(Q_NULLPTR, q_("Caution!"), q_("Are you sure you want to clear script?"), QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes;
+            doClear = QMessageBox::question(&StelMainView::getInstance(), q_("Caution!"), q_("Are you sure you want to clear script?"), QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes;
 
 		if (doClear)
 		{

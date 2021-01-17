@@ -87,6 +87,7 @@ public:
 	static double wrap360(double d);
 
 	static bool useExtraDecimals;
+	static bool useDecimalDegrees;
 
 private:
 	QString utc;

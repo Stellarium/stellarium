@@ -69,7 +69,7 @@ NavStars::NavStars()
 	, upperLimb(false)
 	, highlightWhenVisible(false)
 	, limitInfoToNavStars(false)	
-	, tabulatedDisplay(false)	
+	, tabulatedDisplay(false)
 	, toolbarButton(Q_NULLPTR)
 {
 	setObjectName("NavStars");
@@ -124,6 +124,8 @@ void NavStars::init()
 	addAction("actionShow_NavStars", N_("Navigational Stars"), N_("Mark the navigational stars"), "navStarsVisible", "");
 
 	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
+	connect(&StelApp::getInstance(), SIGNAL(flagShowDecimalDegreesChanged(bool)), this, SLOT(setUseDecimalDegrees()));
+	setUseDecimalDegrees();
 
 	// Toolbar button
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -241,6 +243,11 @@ void NavStars::setNavStarsMarks(const bool b)
 bool NavStars::getNavStarsMarks() const
 {
 	return markerFader;
+}
+
+void NavStars::setUseDecimalDegrees()
+{
+	NavStarsCalculator::useDecimalDegrees = (StelApp::getInstance().getFlagShowDecimalDegrees() ? true : false);
 }
 
 void NavStars::restoreDefaultConfiguration(void)
@@ -474,14 +481,12 @@ void NavStars::addExtraInfo(StelCore *core)
 				}
 			}
 		}
-		if (doExtraInfo) {
-			withTables = stelApp.getFlagUseFormattingOutput();
-			extraInfo(core, selectedObject, withTables);
-		}
+		if (doExtraInfo)
+			extraInfo(core, selectedObject);
 	}
 }
 
-void NavStars::extraInfo(StelCore* core, const StelObjectP& selectedObject, bool withTables)
+void NavStars::extraInfo(StelCore* core, const StelObjectP& selectedObject)
 {
 	double jd, jde, x = 0., y = 0.;
 	QString extraText = "", englishName = selectedObject->getEnglishName();
@@ -526,10 +531,9 @@ void NavStars::extraInfo(StelCore* core, const StelObjectP& selectedObject, bool
 		displayStandardInfo(selectedObject, calc, extraText);
 }
 
-
 void NavStars::displayStandardInfo(const StelObjectP& selectedObject, NavStarsCalculator& calc, const QString& extraText)
 {
-	Q_UNUSED(extraText)
+	Q_UNUSED(extraText)	
 	QString temp;
 	StelObject::InfoStringGroup infoGroup = StelObject::OtherCoord;
 	selectedObject->addToExtraInfoString(infoGroup, 
@@ -554,7 +558,7 @@ void NavStars::displayStandardInfo(const StelObjectP& selectedObject, NavStarsCa
 
 void NavStars::displayTabulatedInfo(const StelObjectP& selectedObject, NavStarsCalculator& calc, const QString& extraText)
 {
-	StelObject::InfoStringGroup infoGroup = StelObject::OtherCoord;	
+	StelObject::InfoStringGroup infoGroup = StelObject::OtherCoord;		
 	selectedObject->addToExtraInfoString(infoGroup, 
 		oneRowTwoCells(qc_("UTC", "Universal Time Coordinated"), calc.getUTC(), "", false));
 	selectedObject->addToExtraInfoString(infoGroup, "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>");
