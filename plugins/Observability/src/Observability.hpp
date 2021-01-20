@@ -94,6 +94,8 @@ public slots:
 	void setTwilightAltitudeDeg(int alt);
 	void setHorizonAltitudeDeg(int alt);
 
+	void setSelectedObject(StelModule::StelModuleSelectAction mode);
+
 private:
 	bool flagShowReport = false;
 	bool flagShowGoodNights = false;
@@ -106,6 +108,11 @@ private:
 
 	QSettings* config;
 	ObservabilityDialog* configDialog;
+
+	Vec3d calculateRiseSet(double siderialTime, double latitude, double longitude, double alpha1,
+	                       double delta1, double alpha2, double delta2, double alpha3, double delta3);
+
+	static double valueBetween0And1(double x);
 };
 
 #include "StelPluginInterface.hpp"
