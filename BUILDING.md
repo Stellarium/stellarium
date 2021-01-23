@@ -197,7 +197,18 @@ You should now have a directory `stellarium-0.20.2` with the source code in it.
 ### Clone project from GitHub
 
 To create the copy install git from your OS distribution repository or from 
-https://git-scm.com/ and then execute the following commands:
+https://git-scm.com/.
+
+The git repository has become quite large (about 2GB). You do not need the complete 
+history to build or continue development, but can try a *blobless clone* 
+(https://github.blog/2020-12-21-get-up-to-speed-with-partial-clone-and-shallow-clone/)
+
+```
+$ git clone clone --filter=blob:none https://github.com/Stellarium/stellarium.git
+$ cd stellarium
+```
+
+Else, to get the full repository, execute the following commands:
 
 ```
 $ git clone https://github.com/Stellarium/stellarium.git
