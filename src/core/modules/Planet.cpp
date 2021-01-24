@@ -138,6 +138,7 @@ const QMap<Planet::PlanetType, QString> Planet::pTypeMap = // Maps type to engli
 
 const QMap<Planet::ApparentMagnitudeAlgorithm, QString> Planet::vMagAlgorithmMap =
 {
+	{Planet::MallamaHilton_2018,	        "Mallama2018"},
 	{Planet::ExplanatorySupplement_2013,	"ExpSup2013"},
 	{Planet::ExplanatorySupplement_1992,	"ExpSup1992"},
 	{Planet::Mueller_1893,			"Mueller1893"},
@@ -2085,28 +2086,121 @@ float Planet::getVMagnitude(const StelCore* core) const
 	}
 
 	// Use empirical formulae for main planets when seen from earth
-	if (core->getCurrentLocation().planetName=="Earth")
+	if ((Planet::getApparentMagnitudeAlgorithm()==MallamaHilton_2018) || (core->getCurrentLocation().planetName=="Earth"))
 	{
 		const double phaseDeg=phaseAngle*M_180_PI;
 		const double d = 5. * log10(dr);
 
-		// GZ: I prefer the values given by Meeus, Astronomical Algorithms (1992).
-		// There are three solutions:
-		// (0) "Planesas": original solution in Stellarium, present around 2010.
-		// (1) G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961 p.312ff]
-		// (2) Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes.
-		// The structure is almost identical, just the numbers are different!
-		// I activate (1) for now, because we want to simulate the eye's impression. (Esp. Venus!)
-		// AW: (2) activated by default
-		// GZ Note that calling (2) "Harris" is an absolute misnomer. Meeus clearly describes this in AstrAlg1998 p.286.
-		// The values should likely be named:
-		// Planesas --> Expl_Suppl_1992  AND THIS SHOULD BECOME DEFAULT
-		// Mueller  --> Mueller_1893
-		// Harris   --> Astr_Eph_1984
-
+		// There are several solutions:
+		// (0) "ExplanatorySupplement_1992" original solution in Stellarium, present around 2010.
+		// (1) "Mueller_1893" G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961 p.312ff]
+		// (2) "AstronomicalAlmanac_1984" Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes.
+		//     The structure is almost identical, just the numbers are different!
+		//     Note that calling (2) "Harris" is an absolute misnomer. Meeus clearly describes this in AstrAlg1998 p.286.
+		// (3) "ExplanatorySupplement_2013" More modern.
+		// (4) "MallamaHilton_2018" seems the best available. Mercury-Neptune. Pluto and Jovian moons copied from (3).
 		switch (Planet::getApparentMagnitudeAlgorithm())
 		{
-			case UndefinedAlgorithm:	// The most recent solution should be activated by default			
+			case UndefinedAlgorithm:	// The most recent solution should be activated by default
+			case MallamaHilton_2018:
+			{
+				if (englishName=="Mercury")
+					return static_cast<float>(-0.613 + d + ((((((-3.0334e-12*phaseDeg + 1.6893e-9)*phaseDeg -3.4265e-7)*phaseDeg) + 3.3644e-5)*phaseDeg - 1.6336e-3)*phaseDeg + 6.3280e-2)*phaseDeg);
+				if (englishName=="Venus")
+				{
+					if (phaseDeg<=163.7)
+						return static_cast<float>(-4.384 + d + (((8.938e-9*phaseDeg - 2.814e-6)*phaseDeg + 3.687e-4)*phaseDeg - 1.044e-3)*phaseDeg);
+					else
+						return static_cast<float>(236.05828 + d + (8.39034e-3*phaseDeg - 2.81914)*phaseDeg);
+				}
+				if (englishName=="Earth")
+					return static_cast<float>(-3.99 + d + ((2.054e-4*phaseDeg - 1.060e-3)*phaseDeg));
+				if (englishName=="Mars")
+				{	double V=d; // + L(Le)+L(Ls) // TBD: get access to the "Mars Paper"
+					if(phaseDeg<=50)
+					{
+						V += (-0.0001302*phaseDeg + 0.02267)*phaseDeg -1.601;
+					}
+					else
+					{
+						V += (0.0003445*phaseDeg - 0.02573)*phaseDeg -0.367;
+					}
+					return static_cast<float>(V);
+				}
+				if (englishName=="Jupiter")
+				{
+					if (phaseDeg<=12)
+						return static_cast<float>(-9.395 + d + (6.16e-4*phaseDeg -3.7e-4)*phaseDeg);
+					else {
+						const double p= phaseDeg/180.;
+						const double bracket= 1.0 - (((((-1.876*p + 2.809)*p - 0.062)*p -0.363)*p -1.507)*p);
+						return static_cast<float>(-9.428 + d - 2.5*log10(bracket));
+					}
+				}
+				if (englishName=="Saturn")
+				{
+					// add rings computation
+					const QPair<Vec4d,Vec3d>axis=getSubSolarObserverPoints(core);
+					const double be=axis.first[0];
+					const double bs=axis.second[0];
+					double beta= be*bs; beta=(beta<=0 ? 0. : sqrt(beta));
+					// Note: this is really only for phaseAngle<6, i.e. from Earth.
+					return static_cast<float>(-8.914 + d + 0.026*phaseDeg - (1.825+0.378*exp(-2.25*phaseDeg))*sin(beta) );
+				}
+				if (englishName=="Uranus")
+				{
+					const QPair<Vec4d,Vec3d>axis=getSubSolarObserverPoints(core);
+					const double phiP=0.5*M_180_PI*(abs(axis.first[1])+abs(axis.second[1]));
+
+					return static_cast<float>(-7.110 + d - 8.4e-4*phiP + (1.045e-4*phaseDeg+6.587e-3)*phaseDeg );
+				}
+				if (englishName=="Neptune")
+				{
+					int yy, mm, dd;
+					StelUtils::getDateFromJulianDay(core->getJD(), &yy, &mm, &dd);
+					const double t=StelUtils::yearFraction(yy, mm, dd);
+					double V=d-6.89;
+					if ((1980.0<=t) && (t<=2000.0))
+						V-=0.0054*(t-1980.);
+					else if (t>2000.0)
+						V-=0.11;
+
+					return static_cast<float>(V +(9.617e-5*phaseDeg +7.944e-3)*phaseDeg);
+				}
+				if (englishName=="Pluto")
+					return static_cast<float>(-1.01 + d);
+
+				// AW 2017: I've added special case for Jupiter's moons when they are in the shadow of Jupiter.
+				// TODO: Need experimental data to fitting to real world or the scientific paper with description of model.
+				// GZ 2017-09: Phase coefficients for I and III corrected, based on original publication (Stebbins&Jacobsen 1928) now.
+				// AW 2020-02: Let's use linear model in the first approximation for smooth reduce the brightness of Jovian moons for get more realistic look
+				if (englishName=="Io")
+				{
+					const float mag = static_cast<float>(-1.68 + d + phaseDeg*(0.046  - 0.0010 *phaseDeg));
+					return shadowFactor<1.0 ? static_cast<float>(13.*(1.-shadowFactor)) + mag : mag;
+				}
+				if (englishName=="Europa")
+				{
+					const float mag = static_cast<float>(-1.41 + d + phaseDeg*(0.0312 - 0.00125*phaseDeg));
+					return shadowFactor<1.0 ? static_cast<float>(13.*(1.-shadowFactor)) + mag : mag;
+				}
+				if (englishName=="Ganymede")
+				{
+					const float mag = static_cast<float>(-2.09 + d + phaseDeg*(0.0323 - 0.00066*phaseDeg));
+					return shadowFactor<1.0 ? static_cast<float>(13.*(1.-shadowFactor)) + mag : mag;
+				}
+				if (englishName=="Callisto")
+				{
+					const float mag = static_cast<float>(-1.05 + d + phaseDeg*(0.078  - 0.00274*phaseDeg));
+					return shadowFactor<1.0 ? static_cast<float>(13.*(1.-shadowFactor)) + mag : mag;
+				}
+
+				if ((!fuzzyEquals(absoluteMagnitude,-99.f)) && (englishName!="Moon"))
+					return absoluteMagnitude+static_cast<float>(d);
+
+				break;
+			}
+
 			case ExplanatorySupplement_2013:
 			{
 				// GZ2017: This is taken straight from the Explanatory Supplement to the Astronomical Ephemeris 2013 (chap. 10.3)
@@ -4084,5 +4178,5 @@ void Planet::update(int deltaTime)
 void Planet::setApparentMagnitudeAlgorithm(QString algorithm)
 {
 	// sync default value with ViewDialog and SolarSystem!
-	vMagAlgorithm = vMagAlgorithmMap.key(algorithm, Planet::ExplanatorySupplement_2013);
+	vMagAlgorithm = vMagAlgorithmMap.key(algorithm, Planet::MallamaHilton_2018);
 }

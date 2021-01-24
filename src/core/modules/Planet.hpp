@@ -123,6 +123,7 @@ public:
 		AstronomicalAlmanac_1984,   // Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes (allegedly from D.L. Harris, but this is wrong!)
 		ExplanatorySupplement_1992, // Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional) (Was called "Planesas")
 		ExplanatorySupplement_2013, // Explanatory Supplement to the Astronomical Almanac, 3rd edition 2013
+		MallamaHilton_2018,         // A. Mallama, J. L. Hilton: Computing apparent planetary magnitudes for the Astronomical Almanac. Astron.&Computing 25 (2018) 10-24
 		UndefinedAlgorithm,
 		Generic                     // Visual magnitude based on phase angle and albedo. The formula source for this is totally unknown!
 	};
