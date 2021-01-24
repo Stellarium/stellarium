@@ -28,7 +28,11 @@
 #include <ostream>
 #include <string>
 #include <sstream>
-#include <sys/time.h>
+#ifdef Q_OS_WIN
+    #include <windows.h>
+#else
+    #include <sys/time.h>
+#endif
 
 /**
  * @brief Macro to configure the logger.
