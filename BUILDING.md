@@ -204,7 +204,7 @@ history to build or continue development, but can try a *blobless clone*
 (https://github.blog/2020-12-21-get-up-to-speed-with-partial-clone-and-shallow-clone/)
 
 ```
-$ git clone clone --filter=blob:none https://github.com/Stellarium/stellarium.git
+$ git clone --filter=blob:none https://github.com/Stellarium/stellarium.git
 $ cd stellarium
 ```
 
