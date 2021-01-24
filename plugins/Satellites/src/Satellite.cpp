@@ -803,14 +803,14 @@ void Satellite::update(double)
 		velocity                 = pSatWrapper->getTEMEVel();
 		latLongSubPointPosition  = pSatWrapper->getSubPoint();
 		height                   = latLongSubPointPosition[2]; // km
-		if (height < 80.0)
+		if (height < 70.0)
 		{
 			// The orbit is no longer valid.  Causes include very out of date
 			// TLE, system date and time out of a reasonable range, and orbital
 			// degradation and re-entry of a satellite.  In any of these cases
 			// we might end up with a problem - usually a crash of Stellarium
 			// because of a div/0 or something.  To prevent this, we turn off
-			// the satellite when the computed height is 80km.
+			// the satellite when the computed height is 70km.
 			// Low Earth Orbit (LEO):
 			// A geocentric orbit with an altitude much less than the Earth's radius.
 			// Satellites in this orbit are between 80 and 2000 kilometres above
