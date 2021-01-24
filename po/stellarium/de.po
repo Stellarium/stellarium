@@ -13,7 +13,7 @@
 # Alexander Stohr <alexander.stohr@gmx.de>, 2020
 # Frank Tönies <fraies@web.de>, 2020
 # Jan Willing <yesn.wanting@gmail.com>, 2020
-# Latein Lebt, 2020
+# Latein Lebt, 2021
 # Georg Zotti <Georg.Zotti@univie.ac.at>, 2021
 # 
 #, fuzzy
@@ -220,11 +220,11 @@ msgstr "Zirkumpolarkreis"
 
 #: src/core/modules/GridLinesMgr.cpp:732
 msgid "Invariable Plane"
-msgstr ""
+msgstr "Invariable Ebene"
 
 #: src/core/modules/GridLinesMgr.cpp:736 src/ui_viewDialog.h:3560
 msgid "Projected Solar Equator"
-msgstr ""
+msgstr "Projizierter Sonnenäquator"
 
 #. TRANSLATORS: North Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:1280
@@ -342,11 +342,11 @@ msgstr "Ekliptiklinie (J2000.0)"
 
 #: src/core/modules/GridLinesMgr.cpp:1765
 msgid "Invariable Plane line"
-msgstr ""
+msgstr "Linie für Invariable Ebene"
 
 #: src/core/modules/GridLinesMgr.cpp:1766
 msgid "Solar Equator Plane line"
-msgstr ""
+msgstr "Linie der Sonnenäquatorebene"
 
 #: src/core/modules/GridLinesMgr.cpp:1767
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:352
@@ -658,7 +658,7 @@ msgstr "Beschreibung der Landform"
 
 #: src/core/modules/NomenclatureItem.cpp:230
 msgid "Solar altitude"
-msgstr ""
+msgstr "Sonnenhöhe"
 
 #. TRANSLATORS: Geographic area distinguished by amount of reflected light
 #: src/core/modules/NomenclatureItem.cpp:396
@@ -2114,105 +2114,105 @@ msgstr "Positionswinkel des hellen Randes"
 #: src/core/modules/Planet.cpp:992
 msgctxt "compass direction"
 msgid "S"
-msgstr ""
+msgstr "S"
 
 #: src/core/modules/Planet.cpp:993
 msgctxt "compass direction"
 msgid "SSW"
-msgstr ""
+msgstr "SSW"
 
 #: src/core/modules/Planet.cpp:994
 msgctxt "compass direction"
 msgid "SW"
-msgstr ""
+msgstr "SW"
 
 #: src/core/modules/Planet.cpp:995
 msgctxt "compass direction"
 msgid "WSW"
-msgstr ""
+msgstr "WSW"
 
 #: src/core/modules/Planet.cpp:996
 msgctxt "compass direction"
 msgid "W"
-msgstr ""
+msgstr "W"
 
 #: src/core/modules/Planet.cpp:997
 msgctxt "compass direction"
 msgid "WNW"
-msgstr ""
+msgstr "WNW"
 
 #: src/core/modules/Planet.cpp:998
 msgctxt "compass direction"
 msgid "NW"
-msgstr ""
+msgstr "NW"
 
 #: src/core/modules/Planet.cpp:999
 msgctxt "compass direction"
 msgid "NNW"
-msgstr ""
+msgstr "NNW"
 
 #: src/core/modules/Planet.cpp:1000
 msgctxt "compass direction"
 msgid "N"
-msgstr ""
+msgstr "N"
 
 #: src/core/modules/Planet.cpp:1001
 msgctxt "compass direction"
 msgid "NNE"
-msgstr ""
+msgstr "NNO"
 
 #: src/core/modules/Planet.cpp:1002
 msgctxt "compass direction"
 msgid "NE"
-msgstr ""
+msgstr "NO"
 
 #: src/core/modules/Planet.cpp:1003
 msgctxt "compass direction"
 msgid "ENE"
-msgstr ""
+msgstr "ONO"
 
 #: src/core/modules/Planet.cpp:1004
 msgctxt "compass direction"
 msgid "E"
-msgstr ""
+msgstr "O"
 
 #: src/core/modules/Planet.cpp:1005
 msgctxt "compass direction"
 msgid "ESE"
-msgstr ""
+msgstr "OSO"
 
 #: src/core/modules/Planet.cpp:1006
 msgctxt "compass direction"
 msgid "SE"
-msgstr ""
+msgstr "SO"
 
 #: src/core/modules/Planet.cpp:1007
 msgctxt "compass direction"
 msgid "SSE"
-msgstr ""
+msgstr "SSO"
 
 #: src/core/modules/Planet.cpp:1052 src/core/modules/Planet.cpp:1061
 #: src/core/modules/Planet.cpp:1097 src/core/modules/Planet.cpp:1104
 msgid "Position Angle of axis"
-msgstr ""
+msgstr "Positionswinkel der Achse"
 
 #: src/core/modules/Planet.cpp:1053 src/core/modules/Planet.cpp:1054
 #: src/core/modules/Planet.cpp:1062 src/core/modules/Planet.cpp:1063
 msgid "Libration"
-msgstr ""
+msgstr "Libration"
 
 #: src/core/modules/Planet.cpp:1055 src/core/modules/Planet.cpp:1064
 #: src/core/modules/Planet.cpp:1099 src/core/modules/Planet.cpp:1106
 msgid "Subsolar point"
-msgstr ""
+msgstr "Subsolarpunkt"
 
 #: src/core/modules/Planet.cpp:1056 src/core/modules/Planet.cpp:1065
 msgid "Colongitude"
-msgstr ""
+msgstr "Colongitude"
 
 #: src/core/modules/Planet.cpp:1098 src/core/modules/Planet.cpp:1105
 msgid "Center point"
-msgstr ""
+msgstr "Scheibenmittelpunkt"
 
 #: src/core/modules/Planet.cpp:1117
 msgid "Eclipse obscuration"
@@ -5524,7 +5524,7 @@ msgstr "Phase"
 
 #: src/gui/AstroCalcDialog.cpp:1809
 msgid "Save calculated ephemeris as..."
-msgstr "Speicher berechnete Ephemeriden als ..."
+msgstr "Speichere berechnete Ephemeride als ..."
 
 #: src/gui/AstroCalcDialog.cpp:1827 src/ui_astroCalcDialog.h:1624
 msgid "Ephemeris"
@@ -6177,7 +6177,7 @@ msgstr "Pulsare"
 
 #: src/gui/AstroCalcDialog.cpp:5144
 msgid "Exoplanetary systems"
-msgstr "Planetensysteme außerhalb des Sonnensystems"
+msgstr "Exoplanetensysteme"
 
 #: src/gui/AstroCalcDialog.cpp:5147
 msgid "Bright nova stars"
@@ -8293,8 +8293,8 @@ msgid ""
 "This script will help you make practical works for celestial navigation - he"
 " sets a random location and hides it from the GUI."
 msgstr ""
-"Dieses Skript hilft dir Übungen für die astronomische Navigation zu "
-"erstellen. Es wählt einen zufälligen Standort aus und versteckt die Anzeige."
+"Dieses Skript hilft bei Übungen für die astronomische Navigation: es wählt "
+"einen zufälligen Standort aus und versteckt die Anzeige."
 
 #: src/translations.h:748
 msgid "&Undo"
@@ -10676,7 +10676,7 @@ msgstr "Zeige Unterteilungen"
 
 #: src/ui_viewDialog.h:3340
 msgid "Solar equator projected into space."
-msgstr ""
+msgstr "Projektion des Sonnenäquators in den Raum"
 
 #: src/ui_viewDialog.h:3348
 msgid ""
@@ -10874,7 +10874,7 @@ msgstr "Ekliptikales Gradnetz (zum Datum)"
 
 #: src/ui_viewDialog.h:3530
 msgid "Color of the projected Solar equator line"
-msgstr ""
+msgstr "Farbe für projizierten Sonnenäquator"
 
 #: src/ui_viewDialog.h:3538
 msgid "Color of supergalactic equator"
@@ -11094,15 +11094,15 @@ msgstr "Strichstärke der Teilungen, Pixels"
 #: src/ui_viewDialog.h:3704
 msgid ""
 "A plane perpendicular to the angular momentum vector of the Solar system."
-msgstr ""
+msgstr "Eine Ebene senkrecht zum Drehimpulsvektor des Sonnensystems."
 
 #: src/ui_viewDialog.h:3706
 msgid "Invariable plane of the Solar system"
-msgstr ""
+msgstr "Invariable Ebene des Sonnensystems"
 
 #: src/ui_viewDialog.h:3708
 msgid "Color of the invariable plane of the Solar system"
-msgstr ""
+msgstr "Farbe für die invariable Ebene des Sonnensystems"
 
 #: src/ui_viewDialog.h:3711
 msgid "Add/remove landscapes..."
@@ -11118,11 +11118,11 @@ msgstr "Zeige nur Polygon"
 
 #: src/ui_viewDialog.h:3721
 msgid "Set the planet and position as it specified in landscape.ini"
-msgstr "Verwende den Planeten und den Standort in landscape.ini."
+msgstr "Verwende Planeten und Standort aus landscape.ini."
 
 #: src/ui_viewDialog.h:3723
 msgid "Position from landscape"
-msgstr "Position von der Landschaft"
+msgstr "Position aus Landschaftsinformation"
 
 #: src/ui_viewDialog.h:3724
 msgid "Show landscape labels"
@@ -12162,7 +12162,7 @@ msgstr "Jährliche Bewegung (Grad):"
 
 #: src/ui_greatRedSpotDialog.h:177
 msgid "Jovigraphic longitude of Great Red Spot in System II"
-msgstr ""
+msgstr "Jovigraphische Länge des Großen Roten Flecks im System II"
 
 #: src/ui_greatRedSpotDialog.h:179
 msgid "Longitude of GRS (degrees):"
@@ -12174,11 +12174,11 @@ msgstr "Datum und Uhrzeit (UTC):"
 
 #: src/ui_greatRedSpotDialog.h:188
 msgid "Open JUPOS website"
-msgstr ""
+msgstr "Öffne JUPOS-Webseite"
 
 #: src/ui_greatRedSpotDialog.h:190
 msgid "View recent GRS measurements"
-msgstr ""
+msgstr "Zeige aktuelle GRF-Messungen"
 
 #: src/ui_scriptConsole.h:388
 msgid "Script console"

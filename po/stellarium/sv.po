@@ -2025,7 +2025,7 @@ msgstr "dygn"
 
 #: src/core/modules/Planet.cpp:756
 msgid "Sidereal period"
-msgstr "Siderisk period"
+msgstr "Siderisk omloppstid"
 
 #: src/core/modules/Planet.cpp:765
 msgid "Synodic period"
@@ -2721,7 +2721,7 @@ msgstr "Lägg till 1 kalendermånad"
 
 #: src/core/StelCore.cpp:294
 msgid "Subtract 1 sidereal day"
-msgstr "Dra ifrån 1 sideriskt dygn"
+msgstr "Dra ifrån 1 stjärndygn"
 
 #: src/core/StelCore.cpp:295
 msgid "Subtract 7 sidereal days"
@@ -4570,7 +4570,7 @@ msgstr "Öka uppspelningshastigheten på skriptet"
 
 #: src/gui/StelGui.cpp:235
 msgid "Slow down the script execution rate"
-msgstr "Reduser kjørehastigheten for skript"
+msgstr "Sakta ner skriptets uppspelningshastighet"
 
 #: src/gui/StelGui.cpp:236
 msgid "Set the normal script execution rate"
@@ -5051,7 +5051,7 @@ msgstr "Du kan ta bort den manuellt genom att ta bort följande mapp: %1"
 #: src/gui/ScriptConsole.cpp:83
 msgctxt "command"
 msgid "selected text as script"
-msgstr ""
+msgstr "selekterad text som skript"
 
 #: src/gui/ScriptConsole.cpp:84
 msgctxt "command"
@@ -5099,7 +5099,7 @@ msgstr "Varning!"
 
 #: src/gui/ScriptConsole.cpp:178
 msgid "Are you sure you want to load script without saving changes?"
-msgstr ""
+msgstr "Är du säker på att du vill ladda skriptet utan att spara ändringarna?"
 
 #: src/gui/ScriptConsole.cpp:192
 msgid "Stellarium Script Files"
@@ -5115,7 +5115,7 @@ msgstr "Spara skript"
 
 #: src/gui/ScriptConsole.cpp:250
 msgid "Are you sure you want to clear script?"
-msgstr ""
+msgstr "Är du säker på att du vill rensa skriptet?"
 
 #: src/gui/ScriptConsole.cpp:361
 msgid "Select Script Include Directory"
@@ -12114,7 +12114,7 @@ msgstr "Ladda skript från användarkatalogen som standard"
 
 #: src/ui_scriptConsole.h:425
 msgid "Clear output before script runs"
-msgstr ""
+msgstr "Rensa utdata före skriptet körs"
 
 #: src/ui_scriptConsole.h:426 plugins/Satellites/src/ui_satellitesDialog.h:994
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:247
@@ -18499,7 +18499,7 @@ msgstr ""
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:218
 msgid "See manual for detailed description."
-msgstr ""
+msgstr "Se manualen för en detaljerad beskrivning."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:219
 msgid "This plugin was developed during ESA SoCiS 2015&amp;2016."
