@@ -37,8 +37,8 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="../../../../data/gui/guiRes.qrc">
-         <normaloff>:/graphicGui/uieSpinleft.png</normaloff>:/graphicGui/uieSpinleft.png</iconset>
+        <iconset resource="../../resources/TelescopeControl.qrc">
+         <normaloff>:/telescopeControl/nv_spinleft.png</normaloff>:/telescopeControl/nv_spinleft.png</iconset>
        </property>
       </widget>
      </item>
@@ -57,8 +57,8 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="../../../../data/gui/guiRes.qrc">
-         <normaloff>:/graphicGui/uieSpindown.png</normaloff>:/graphicGui/uieSpindown.png</iconset>
+        <iconset resource="../../resources/TelescopeControl.qrc">
+         <normaloff>:/telescopeControl/nv_spindown.png</normaloff>:/telescopeControl/nv_spindown.png</iconset>
        </property>
       </widget>
      </item>
@@ -77,8 +77,8 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="../../../../data/gui/guiRes.qrc">
-         <normaloff>:/graphicGui/uieSpinright.png</normaloff>:/graphicGui/uieSpinright.png</iconset>
+        <iconset resource="../../resources/TelescopeControl.qrc">
+         <normaloff>:/telescopeControl/nv_spinright.png</normaloff>:/telescopeControl/nv_spinright.png</iconset>
        </property>
        <property name="flat">
         <bool>false</bool>
@@ -94,8 +94,8 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="../../../../data/gui/guiRes.qrc">
-         <normaloff>:/graphicGui/uieSpinup.png</normaloff>:/graphicGui/uieSpinup.png</iconset>
+        <iconset resource="../../resources/TelescopeControl.qrc">
+         <normaloff>:/telescopeControl/nv_spinup.png</normaloff>:/telescopeControl/nv_spinup.png</iconset>
        </property>
       </widget>
      </item>
@@ -170,7 +170,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../../../../data/gui/guiRes.qrc"/>
+  <include location="../../resources/TelescopeControl.qrc"/>
  </resources>
  <connections/>
 </ui>
