@@ -27,6 +27,7 @@
 
 #include <iostream>
 #include <string>
+#include <algorithm>
 
 #include <cstdlib>
 
@@ -39,10 +40,8 @@
 #pragma warning(disable : 4996)
 #endif
 
-INDI::BaseClientQt::BaseClientQt()
+INDI::BaseClientQt::BaseClientQt(QObject *parent) : QObject(parent), cServer("localhost"), cPort(7624)
 {
-    cServer    = "localhost";
-    cPort      = 7624;
     sConnected = false;
     verbose    = false;
     lillp      = nullptr;
@@ -63,10 +62,16 @@ INDI::BaseClientQt::~BaseClientQt()
 void INDI::BaseClientQt::clear()
 {
     while (!cDevices.empty())
-        delete cDevices.back(), cDevices.pop_back();
+    {
+        delete cDevices.back();
+        cDevices.pop_back();
+    }
     cDevices.clear();
     while (!blobModes.empty())
-        delete blobModes.back(), blobModes.pop_back();
+    {
+        delete blobModes.back();
+        blobModes.pop_back();
+    }
     blobModes.clear();
 }
 
@@ -78,7 +83,18 @@ void INDI::BaseClientQt::setServer(const char *hostname, unsigned int port)
 
 void INDI::BaseClientQt::watchDevice(const char *deviceName)
 {
+    // Watch for duplicates. Should have used std::set from the beginning but let's
+    // avoid changing API now.
+    if (std::find(cDeviceNames.begin(), cDeviceNames.end(), deviceName) != cDeviceNames.end())
+        return;
+
     cDeviceNames.push_back(deviceName);
+}
+
+void INDI::BaseClientQt::watchProperty(const char *deviceName, const char *propertyName)
+{
+    watchDevice(deviceName);
+    cWatchProperties[deviceName].insert(propertyName);
 }
 
 bool INDI::BaseClientQt::connectServer()
@@ -113,7 +129,7 @@ bool INDI::BaseClientQt::connectServer()
     }
     else
     {
-        for (auto& str : cDeviceNames)
+        for (auto &str : cDeviceNames)
         {
             getProp =
                 QString("<getProperties version='%1' device='%2'/>\n").arg(QString::number(INDIV)).arg(str.c_str());
@@ -144,6 +160,8 @@ bool INDI::BaseClientQt::disconnectServer()
     clear();
 
     cDeviceNames.clear();
+
+    serverDisconnected(0);
 
     return true;
 }
@@ -205,7 +223,7 @@ void INDI::BaseClientQt::setDriverConnection(bool status, const char *deviceName
 
 INDI::BaseDevice *INDI::BaseClientQt::getDevice(const char *deviceName)
 {
-    for (auto& dev : cDevices)
+    for (auto &dev : cDevices)
     {
         if (!strcmp(deviceName, dev->getDeviceName()))
             return dev;
@@ -226,7 +244,6 @@ void INDI::BaseClientQt::listenINDI()
     int err_code = 0;
 
     XMLEle **nodes;
-    XMLEle *root;
     int inode = 0;
 
     if (sConnected == false)
@@ -243,12 +260,12 @@ void INDI::BaseClientQt::listenINDI()
         {
             if (errorMsg[0])
             {
-                fprintf(stderr, "Bad XML from %s/%d: %s\n%s\n", cServer.c_str(), cPort, errorMsg, buffer);
+                fprintf(stderr, "Bad XML from %s/%ud: %s\n%s\n", cServer.c_str(), cPort, errorMsg, buffer);
                 return;
             }
             return;
         }
-        root = nodes[inode];
+        XMLEle *root = nodes[inode];
         while (root)
         {
             if (verbose)
@@ -291,15 +308,39 @@ int INDI::BaseClientQt::dispatchCommand(XMLEle *root, char *errmsg)
         return INDI_DEVICE_NOT_FOUND;
     }
 
-    // FIXME REMOVE THIS
-
-    // Ignore echoed newXXX and getProperties
-    if (strstr(tagXMLEle(root), "new") || strstr(tagXMLEle(root), "getProperties"))
+    // Ignore echoed newXXX
+    if (strstr(tagXMLEle(root), "new"))
         return 0;
 
+    // If device is set to BLOB_ONLY, we ignore everything else
+    // not related to blobs
+    if (getBLOBMode(dp->getDeviceName()) == B_ONLY)
+    {
+        if (!strcmp(tagXMLEle(root), "defBLOBVector"))
+            return dp->buildProp(root, errmsg);
+        else if (!strcmp(tagXMLEle(root), "setBLOBVector"))
+            return dp->setValue(root, errmsg);
+
+        // Ignore everything else
+        return 0;
+    }
+
+    // If we are asked to watch for specific properties only, we ignore everything else
+    if (cWatchProperties.size() > 0)
+    {
+        const char *device = findXMLAttValu(root, "device");
+        const char *name = findXMLAttValu(root, "name");
+        if (device && name)
+        {
+            if (cWatchProperties.find(device) == cWatchProperties.end() ||
+                    cWatchProperties[device].find(name) == cWatchProperties[device].end())
+                return 0;
+        }
+    }
+
     if ((!strcmp(tagXMLEle(root), "defTextVector")) || (!strcmp(tagXMLEle(root), "defNumberVector")) ||
-        (!strcmp(tagXMLEle(root), "defSwitchVector")) || (!strcmp(tagXMLEle(root), "defLightVector")) ||
-        (!strcmp(tagXMLEle(root), "defBLOBVector")))
+            (!strcmp(tagXMLEle(root), "defSwitchVector")) || (!strcmp(tagXMLEle(root), "defLightVector")) ||
+            (!strcmp(tagXMLEle(root), "defBLOBVector")))
         return dp->buildProp(root, errmsg);
     else if (!strcmp(tagXMLEle(root), "setTextVector") || !strcmp(tagXMLEle(root), "setNumberVector") ||
              !strcmp(tagXMLEle(root), "setSwitchVector") || !strcmp(tagXMLEle(root), "setLightVector") ||
@@ -629,7 +670,7 @@ void INDI::BaseClientQt::sendOneBlob(IBLOB *bp)
     unsigned char *encblob;
     int l;
 
-    encblob = (unsigned char *)malloc(4 * bp->size / 3 + 4);
+    encblob = static_cast<unsigned char *>(malloc(4 * bp->size / 3 + 4));
     l       = to64frombits(encblob, reinterpret_cast<const unsigned char *>(bp->blob), bp->size);
 
     prop += QString("  <oneBLOB\n");
@@ -667,7 +708,7 @@ void INDI::BaseClientQt::sendOneBlob(const char *blobName, unsigned int blobSize
     unsigned char *encblob;
     int l;
 
-    encblob = (unsigned char *)malloc(4 * blobSize / 3 + 4);
+    encblob = static_cast<unsigned char *>(malloc(4 * blobSize / 3 + 4));
     l       = to64frombits(encblob, reinterpret_cast<const unsigned char *>(blobBuffer), blobSize);
 
     QString prop;
@@ -765,9 +806,9 @@ BLOBHandling INDI::BaseClientQt::getBLOBMode(const char *dev, const char *prop)
     return bHandle;
 }
 
-INDI::BaseClientQt::BLOBMode *INDI::BaseClientQt::findBLOBMode(const std::string& device, const std::string& property)
+INDI::BaseClientQt::BLOBMode *INDI::BaseClientQt::findBLOBMode(const std::string &device, const std::string &property)
 {
-    for (auto& blob : blobModes)
+    for (auto &blob : blobModes)
     {
         if (blob->device == device && blob->property == property)
             return blob;
@@ -795,11 +836,16 @@ bool INDI::BaseClientQt::getDevices(std::vector<INDI::BaseDevice *> &deviceList,
 {
     for (INDI::BaseDevice *device : cDevices)
     {
-        if (device->getDriverInterface() | driverInterface)
+        if (device->getDriverInterface() & driverInterface)
             deviceList.push_back(device);
     }
 
     return (deviceList.size() > 0);
+}
+
+bool INDI::BaseClientQt::isServerConnected() const
+{
+    return sConnected;
 }
 
 #if defined(_MSC_VER)

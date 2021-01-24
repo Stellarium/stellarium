@@ -28,6 +28,6 @@ const char *CONNECTION = "CONNECTION";
 const char *DEVICE_PORT = "DEVICE_PORT";
 const char *DEVICE_AUTO_SEARCH = "DEVICE_AUTO_SEARCH";
 const char *DEVICE_BAUD_RATE = "DEVICE_BAUD_RATE";
-const char *DEVICE_TCP_ADDRESS = "DEVICE_TCP_ADDRESS";
+const char *DEVICE_ADDRESS = "DEVICE_ADDRESS";
 } // namespace SP
 } // namespace INDI

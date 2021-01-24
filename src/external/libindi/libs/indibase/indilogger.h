@@ -28,11 +28,7 @@
 #include <ostream>
 #include <string>
 #include <sstream>
-#ifdef Q_OS_WIN
-	#include <windows.h>
-#else
-	#include <sys/time.h>
-#endif
+#include <sys/time.h>
 
 /**
  * @brief Macro to configure the logger.
@@ -60,9 +56,35 @@
 #define DEBUG(priority, msg) INDI::Logger::getInstance().print(getDeviceName(), priority, __FILE__, __LINE__, msg)
 #define DEBUGF(priority, msg, ...) \
     INDI::Logger::getInstance().print(getDeviceName(), priority, __FILE__, __LINE__, msg, __VA_ARGS__)
+
 #define DEBUGDEVICE(device, priority, msg) INDI::Logger::getInstance().print(device, priority, __FILE__, __LINE__, msg)
 #define DEBUGFDEVICE(device, priority, msg, ...) \
     INDI::Logger::getInstance().print(device, priority, __FILE__, __LINE__, msg, __VA_ARGS__)
+
+/**
+ * @brief Shorter logging macros. In order to use these macros, the function
+ * (or method) "getDeviceName()" must be defined in the calling scope.
+ *
+ * Usage examples:
+ *	    LOG_DEBUG("hello " << "world");
+ *	    LOGF_WARN("hello %s", "world");
+ */
+#define LOG_ERROR(txt)  DEBUG(INDI::Logger::DBG_ERROR, (txt))
+#define LOG_WARN(txt)   DEBUG(INDI::Logger::DBG_WARNING, (txt))
+#define LOG_INFO(txt)   DEBUG(INDI::Logger::DBG_SESSION, (txt))
+#define LOG_DEBUG(txt)  DEBUG(INDI::Logger::DBG_DEBUG, (txt))
+#define LOG_EXTRA1(txt)  DEBUG(INDI::Logger::DBG_EXTRA_1, (txt))
+#define LOG_EXTRA2(txt)  DEBUG(INDI::Logger::DBG_EXTRA_2, (txt))
+#define LOG_EXTRA3(txt)  DEBUG(INDI::Logger::DBG_EXTRA_3, (txt))
+
+#define LOGF_ERROR(fmt, ...) DEBUGF(INDI::Logger::DBG_ERROR, (fmt), __VA_ARGS__)
+#define LOGF_WARN(fmt, ...)  DEBUGF(INDI::Logger::DBG_WARNING, (fmt), __VA_ARGS__)
+#define LOGF_INFO(fmt, ...)  DEBUGF(INDI::Logger::DBG_SESSION, (fmt), __VA_ARGS__)
+#define LOGF_DEBUG(fmt, ...) DEBUGF(INDI::Logger::DBG_DEBUG, (fmt), __VA_ARGS__)
+#define LOGF_EXTRA1(fmt, ...) DEBUGF(INDI::Logger::DBG_EXTRA_1, (fmt), __VA_ARGS__)
+#define LOGF_EXTRA2(fmt, ...) DEBUGF(INDI::Logger::DBG_EXTRA_2, (fmt), __VA_ARGS__)
+#define LOGF_EXTRA3(fmt, ...) DEBUGF(INDI::Logger::DBG_EXTRA_3, (fmt), __VA_ARGS__)
+
 
 namespace INDI
 {
@@ -166,6 +188,7 @@ class Logger
   public:
     enum VerbosityLevel
     {
+        DBG_IGNORE  = 0x0,
         DBG_ERROR   = 0x1,
         DBG_WARNING = 0x2,
         DBG_SESSION = 0x4,

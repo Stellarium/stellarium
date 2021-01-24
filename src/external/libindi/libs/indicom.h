@@ -2,8 +2,8 @@
     INDI LIB
     Common routines used by all drivers
     Copyright (C) 2003 by Jason Harris (jharris@30doradus.org)
-    			  Elwood C. Downey
-			  Jasem Mutlaq
+                  Elwood C. Downey
+              Jasem Mutlaq
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -41,6 +41,10 @@
 
 #pragma once
 
+#if defined(_MSC_VER)
+#define _USE_MATH_DEFINES
+#endif
+
 #define J2000       2451545.0
 #define ERRMSG_SIZE 1024
 
@@ -49,6 +53,22 @@
 #define SOLAR_DAY          86400
 #define TRACKRATE_SOLAR    ((360.0 * 3600.0) / SOLAR_DAY)
 #define TRACKRATE_LUNAR    14.511415
+#define EARTHRADIUSEQUATORIAL 6378137.0
+#define EARTHRADIUSPOLAR 6356752.0
+#define EARTHRADIUSMEAN 6372797.0
+#define h_20190520 6.62607015E-34
+#define EULER 2.71828182845904523536028747135266249775724709369995
+#define ROOT2 1.41421356237309504880168872420969807856967187537694
+#define AIRY 1.21966
+#define CIRCLE_DEG 360
+#define CIRCLE_AM (CIRCLE_DEG * 60)
+#define CIRCLE_AS (CIRCLE_AM * 60)
+#define RAD_AS (CIRCLE_AS/(M_PI*2))
+#define ASTRONOMICALUNIT 1.495978707E+11
+#define PARSEC (ASTRONOMICALUNIT*2.06264806247096E+5)
+#define LIGHTSPEED 299792458.0
+#define LY (LIGHTSPEED * SOLAR_DAY * 365)
+#define LUMEN(wavelength) ((1.464129E-3*wavelength)/(h_20190520*LIGHTSPEED))
 
 extern const char *Direction[];
 extern const char *SolarSystem[];
@@ -66,7 +86,8 @@ enum TTY_ERROR
     TTY_PORT_FAILURE = -5,
     TTY_PARAM_ERROR  = -6,
     TTY_ERRNO        = -7,
-    TTY_OVERFLOW     = -8
+    TTY_OVERFLOW     = -8,
+    TTY_PORT_BUSY    = -9,
 };
 
 #ifdef __cplusplus
@@ -161,6 +182,8 @@ void tty_error_msg(int err_code, char *err_msg, int err_msg_len);
  */
 void tty_set_debug(int debug);
 void tty_set_gemini_udp_format(int enabled);
+void tty_set_generic_udp_format(int enabled);
+void tty_clr_trailing_read_lf(int enabled);
 
 int tty_timeout(int fd, int timeout);
 /*@}*/
@@ -179,10 +202,10 @@ int tty_timeout(int fd, int timeout);
   \param w the number of spaces in the whole part.
   \param fracbase is the number of pieces a whole is to broken into; valid options:\n
           \li 360000:	\<w\>:mm:ss.ss
-	  \li 36000:	\<w\>:mm:ss.s
- 	  \li 3600:	\<w\>:mm:ss
- 	  \li 600:	\<w\>:mm.m
- 	  \li 60:	\<w\>:mm
+      \li 36000:	\<w\>:mm:ss.s
+      \li 3600:	\<w\>:mm:ss
+      \li 600:	\<w\>:mm.m
+      \li 60:	\<w\>:mm
 
   \return number of characters written to out, not counting final null terminator.
  */
@@ -267,6 +290,126 @@ double get_local_sidereal_time(double longitude);
  * @return Hour angle in hours (-12 to 12)
  */
 double get_local_hour_angle(double local_sideral_time, double ra);
+
+/**
+ * @brief get_alt_az_coordinates Returns alt-azimuth coordinates of an object
+ * @param hour_angle Hour angle in hours (-12 to 12)
+ * @param dec DEC of object
+ * @param latitude latitude in INDI format (-90 to +90)
+ * @param alt ALT of object will be returned here
+ * @param az AZ of object will be returned here
+ */
+void get_alt_az_coordinates(double hour_angle, double dec, double latitude, double* alt, double *az);
+
+/**
+ * @brief estimate_geocentric_elevation Returns an estimation of the actual geocentric elevation
+ * @param latitude latitude in INDI format (-90 to +90)
+ * @param sea_level_elevation sea level elevation
+ * @return Aproximated geocentric elevation
+ */
+double estimate_geocentric_elevation(double latitude, double sea_level_elevation);
+
+/**
+ * @brief estimate_field_rotation_rate Returns an estimation of the field rotation rate of the object
+ * @param Alt altitude coordinate of the object
+ * @param Az azimuth coordinate of the object
+ * @param latitude latitude in INDI format (-90 to +90)
+ * @return Aproximation of the field rotation rate
+ */
+double estimate_field_rotation_rate(double Alt, double Az, double latitude);
+
+/**
+ * @brief estimate_field_rotation Returns an estimation of the field rotation rate of the object
+ * @param hour_angle Hour angle in hours (-12 to 12)
+ * @param field_rotation_rate the field rotation rate
+ * @return Aproximation of the absolute field rotation
+ */
+double estimate_field_rotation(double hour_angle, double field_rotation_rate);
+
+/**
+ * @brief as2rad Convert arcseconds into radians
+ * @param as the arcseconds to convert
+ * @return radians corresponding as angle value
+ */
+double as2rad(double as);
+
+/**
+ * @brief rad2as Convert radians into arcseconds
+ * @param as the radians to convert
+ * @return arcseconds corresponding as angle value
+ */
+double rad2as(double rad);
+
+/**
+ * @brief estimate_distance Convert parallax arcseconds into meters
+ * @param parsec the parallax arcseconds to convert
+ * @return Estimation of the distance in measure units used in parallax_radius
+ */
+double estimate_distance(double parsecs, double parallax_radius);
+
+/**
+ * @brief m2au Convert meters into astronomical units
+ * @param m the distance in meters to convert
+ * @return Estimation of the distance in astronomical units
+ */
+double m2au(double m);
+
+/**
+ * @brief calc_delta_magnitude Returns the difference of magnitudes given two spectra
+ * @param mag_ratio Reference magnitude
+ * @param spectrum The spectrum of the star under exam
+ * @param ref_spectrum The spectrum of the reference star
+ * @param spectrum_size The size of the spectrum array in elements
+ * @return the magnitude difference
+ */
+double calc_delta_magnitude(double mag_ratio, double *spectrum, double *ref_spectrum, int spectrum_size);
+
+/**
+ * @brief calc_photon_flux Returns the photon flux of the object with the given magnitude observed at a determined wavelenght using a passband filter over an incident surface
+ * @param rel_magnitude Relative magnitude of the object observed
+ * @param filter_bandwidth Filter bandwidth in meters
+ * @param wavelength Wavelength in meters
+ * @param incident_surface The incident surface in square meters
+ * @return the photon flux in Lumen
+ */
+double calc_photon_flux(double rel_magnitude, double filter_bandwidth, double wavelength, double incident_surface);
+
+/**
+ * @brief calc_rel_magnitude Returns the relative magnitude of the object with the given photon flux measured at a determined wavelenght using a passband filter over an incident surface
+ * @param photon_flux The photon flux in Lumen
+ * @param filter_bandwidth Filter bandwidth in meters
+ * @param wavelength Wavelength in meters
+ * @param incident_surface The incident surface in square meters
+ * @return the relative magnitude of the object observed
+ */
+double calc_rel_magnitude(double photon_flux, double filter_bandwidth, double wavelength, double incident_surface);
+
+/**
+ * @brief estimate_absolute_magnitude Returns an estimation of the absolute magnitude of an object given its distance and the difference of its magnitude with a reference object
+ * @param dist The distance in parallax radiuses
+ * @param delta_mag The difference of magnitudes
+ * @return Aproximation of the absolute magnitude in Δmag
+ */
+double estimate_absolute_magnitude(double dist, double delta_mag);
+
+/**
+ * @brief interferometry_uv_coords_vector Returns the coordinates in the UV plane of the projection of a single baseline targeting the object in vector
+ * @param baseline_m the length of the baseline in meters. This is supposed to be placed into the X 3d plane.
+ * @param wavelength The observing electromagnetic wavelength, the lower the size increases.
+ * @param target_vector The target direction vector. This is relative to the baseline in XYZ order where X is parallel to the baseline.
+ * @return double[2] UV plane coordinates of the current projection given the baseline and target vector.
+ */
+double* interferometry_uv_coords_vector(double baseline_m, double wavelength, double *target_vector);
+
+/**
+ * @brief interferometry_uv_coords_hadec Returns the coordinates in the UV plane of the projection of a single baseline targeting the object by coordinates
+ * @param ha current hour angle of the target.
+ * @param dec declination of the target.
+ * @param baseline the baseline in meters. Three-dimensional xyz north is z axis y is UTC0 x is UTC0+90°.
+ * @param wavelength The observing electromagnetic wavelength, the lower the size increases.
+ * @return double[2] UV plane coordinates of the current projection given the baseline and target vector.
+ */
+double* interferometry_uv_coords_hadec(double ha, double dec, double *baseline, double wavelength);
 
 /*@}*/
 
