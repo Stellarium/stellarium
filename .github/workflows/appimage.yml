@@ -44,84 +44,85 @@ jobs:
         name: 'Stellarium-edge-x86_64'
         path: ${{ github.workspace }}/artifact/*.AppImage
 
-  # AppImage ARM
-  appimage-arm:
-    name: "${{ matrix.arch }}"
-    runs-on: ubuntu-18.04
-
-    strategy:
-      matrix:
-        include:
-          - arch: aarch64
-            qarch: aarch64
-            march: aarch64
-          - arch: armv7
-            qarch: arm
-            march: armhf
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Download static QEMU (${{ matrix.qarch }})
-      run: |
-        wget https://github.com/multiarch/qemu-user-static/releases/download/v5.1.0-7/qemu-${{ matrix.qarch }}-static -O ${{ runner.temp }}/qemu-static
-        chmod +x ${{ runner.temp }}/qemu-static
-
-    - name: Build AppImage
-      uses: uraimo/run-on-arch-action@v2.0.7
-      id: appimage
-      with:
-        arch: ${{ matrix.arch }}
-        distro: ubuntu18.04
-
-        # Not required, but speeds up builds by storing container images in
-        # a GitHub package registry.
-        githubToken: ${{ github.GITHUB_TOKEN }}
-
-        # Create an artifacts directory
-        setup: |
-          mkdir -p "${PWD}/artifact"
-
-        # Mount the artifacts directory as /artifact in the container
-        dockerRunArgs: |
-          --volume "${PWD}/artifact:/artifact"
-          --volume "${{ runner.temp }}/qemu-static:/usr/bin/qemu-static"
-
-        # The shell to run commands with in the container
-        shell: /bin/bash
-
-        # Install some dependencies in the container. This speeds up builds if
-        # you are also using githubToken. Any dependencies installed here will
-        # be part of the container image that gets cached, so subsequent
-        # builds don't have to re-install them. The image layer is cached
-        # publicly in your project's package repository, so it is vital that
-        # no secrets are present in the container state or logs.
-        install: |
-          # Update installed packages
-          apt-get update -y
-          apt-get upgrade -y
-          # Installing dependencies
-          apt-get install -y qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins zlib1g-dev libgl1-mesa-dev libdrm-dev cmake wget python3-pip python3-setuptools patchelf desktop-file-utils libgdk-pixbuf2.0-dev fakeroot
-          pip3 install appimage-builder
-
-        # Produce a binary artifact and place it in the mounted volume
-        run: |
-          wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-${{ matrix.march }}.AppImage -O /opt/appimagetool
-          chmod +x /opt/appimagetool
-          cd /opt
-          qemu-static /opt/appimagetool --appimage-extract
-          mv /opt/squashfs-root /opt/appimagetool.AppDir
-          ln -s /opt/appimagetool.AppDir/AppRun /usr/local/bin/appimagetool
-          mkdir -p ${{ github.workspace }}/builds/appimage
-          cd ${{ github.workspace }}/builds/appimage
-          export APP_VERSION="edge"
-          appimage-builder --recipe ${{ github.workspace }}/util/appimage/stellarium-appimage-${{ matrix.march }}.yml --skip-test
-          cp ${{ github.workspace }}/builds/appimage/*.AppImage /artifact
-
-    - name: Upload AppImage
-      uses: actions/upload-artifact@v2
-      if: success()
-      with:
-        name: 'Stellarium-edge-${{ matrix.arch }}'
-        path: ${{ github.workspace }}/artifact/*.AppImage
+#  # AppImage ARM
+#  appimage-arm:
+#    name: "${{ matrix.arch }}"
+#    runs-on: ubuntu-18.04
+#
+#    strategy:
+#      matrix:
+#        include:
+#          - arch: aarch64
+#            qarch: aarch64
+#            march: aarch64
+#          - arch: armv7
+#            qarch: arm
+#            march: armhf
+#
+#    steps:
+#    - name: Checkout repository
+#      uses: actions/checkout@v2
+#
+#    - name: Download static QEMU (${{ matrix.qarch }})
+#      run: |
+#        wget https://github.com/multiarch/qemu-user-static/releases/download/v5.1.0-7/qemu-${{ matrix.qarch }}-static -O ${{ runner.temp }}/qemu-static
+#        chmod +x ${{ runner.temp }}/qemu-static
+#
+#    - name: Build AppImage
+#      uses: uraimo/run-on-arch-action@v2.0.7
+#      id: appimage
+#      with:
+#        arch: ${{ matrix.arch }}
+#        distro: ubuntu18.04
+#
+#        # Not required, but speeds up builds by storing container images in
+#        # a GitHub package registry.
+#        githubToken: ${{ github.GITHUB_TOKEN }}
+#
+#        # Create an artifacts directory
+#        setup: |
+#          mkdir -p "${PWD}/artifact"
+#
+#        # Mount the artifacts directory as /artifact in the container
+#        dockerRunArgs: |
+#          --volume "${PWD}/artifact:/artifact"
+#          --volume "${{ runner.temp }}/qemu-static:/usr/bin/qemu-static"
+#
+#        # The shell to run commands with in the container
+#        shell: /bin/bash
+#
+#        # Install some dependencies in the container. This speeds up builds if
+#        # you are also using githubToken. Any dependencies installed here will
+#        # be part of the container image that gets cached, so subsequent
+#        # builds don't have to re-install them. The image layer is cached
+#        # publicly in your project's package repository, so it is vital that
+#        # no secrets are present in the container state or logs.
+#        install: |
+#          # Update installed packages
+#          apt-get update -y
+#          apt-get upgrade -y
+#          # Installing dependencies
+#          apt-get install -y qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins zlib1g-dev libgl1-mesa-dev libdrm-dev cmake wget python3-pip python3-setuptools patchelf desktop-file-utils libgdk-pixbuf2.0-dev fakeroot
+#          pip3 install appimage-builder
+#
+#        # Produce a binary artifact and place it in the mounted volume
+#        run: |
+#          wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-${{ matrix.march }}.AppImage -O /opt/appimagetool
+#          chmod +x /opt/appimagetool
+#          cd /opt
+#          qemu-static /opt/appimagetool --appimage-extract
+#          mv /opt/squashfs-root /opt/appimagetool.AppDir
+#          ln -s /opt/appimagetool.AppDir/AppRun /usr/local/bin/appimagetool
+#          mkdir -p ${{ github.workspace }}/builds/appimage
+#          cd ${{ github.workspace }}/builds/appimage
+#          export APP_VERSION="edge"
+#          appimage-builder --recipe ${{ github.workspace }}/util/appimage/stellarium-appimage-${{ matrix.march }}.yml --skip-test
+#          cp ${{ github.workspace }}/builds/appimage/*.AppImage /artifact
+#
+#    - name: Upload AppImage
+#      uses: actions/upload-artifact@v2
+#      if: success()
+#      with:
+#        name: 'Stellarium-edge-${{ matrix.arch }}'
+#        path: ${{ github.workspace }}/artifact/*.AppImage
+#
