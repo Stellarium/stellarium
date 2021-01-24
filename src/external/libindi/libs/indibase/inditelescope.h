@@ -20,7 +20,7 @@
 
 #include "defaultdevice.h"
 
-#include <libnova/julian_day.h>
+//#include <libnova/julian_day.h>
 
 #include <string>
 
@@ -541,7 +541,7 @@ protected:
          * \note If not implemented by the child class, this function by default returns false with a
          * warning message.
          */
-        virtual bool updateTime(ln_date *utc, double utc_offset);
+        //virtual bool updateTime(ln_date *utc, double utc_offset);
 
         /**
          * \brief Update telescope location settings
@@ -624,9 +624,9 @@ protected:
         TelescopePierSide expectedPierSide(double ra);
 
         // helper functions
-        double getAzimuth(double r, double d);
+	//double getAzimuth(double r, double d);
 
-        ln_lnlat_posn lnobserver { 0, 0 };
+        //ln_lnlat_posn lnobserver { 0, 0 };
 
         /**
          * @brief Load scope settings from XML files.
@@ -837,7 +837,7 @@ protected:
         const std::string ScopeConfigFileName;
 
 private:
-        bool processTimeInfo(const char *utc, const char *offset);
+        //bool processTimeInfo(const char *utc, const char *offset);
         bool processLocationInfo(double latitude, double longitude, double elevation);
         void triggerSnoop(const char *driverName, const char *propertyName);
         /**

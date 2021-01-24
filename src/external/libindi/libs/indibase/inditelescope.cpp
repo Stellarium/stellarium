@@ -23,8 +23,10 @@
 #include "connectionplugins/connectionserial.h"
 #include "connectionplugins/connectiontcp.h"
 
+/*
 #include <libnova/sidereal_time.h>
 #include <libnova/transform.h>
+*/
 
 #include <cmath>
 #include <cerrno>
@@ -1664,6 +1666,7 @@ bool Telescope::SetDefaultPark()
     return false;
 }
 
+/*
 bool Telescope::processTimeInfo(const char *utc, const char *offset)
 {
     struct ln_date utc_date;
@@ -1693,6 +1696,7 @@ bool Telescope::processTimeInfo(const char *utc, const char *offset)
         return false;
     }
 }
+*/
 
 bool Telescope::processLocationInfo(double latitude, double longitude, double elevation)
 {
@@ -1737,12 +1741,14 @@ bool Telescope::processLocationInfo(double latitude, double longitude, double el
     }
 }
 
+/*
 bool Telescope::updateTime(ln_date *utc, double utc_offset)
 {
     INDI_UNUSED(utc);
     INDI_UNUSED(utc_offset);
     return true;
 }
+*/
 
 bool Telescope::updateLocation(double latitude, double longitude, double elevation)
 {
@@ -3057,6 +3063,7 @@ void Telescope::setSimulatePierSide(bool simulate)
     m_simulatePierSide = simulate;
 }
 
+/*
 double Telescope::getAzimuth(double r, double d)
 {
     ln_equ_posn lnradec { 0, 0 };
@@ -3070,6 +3077,6 @@ double Telescope::getAzimuth(double r, double d)
     /* libnova measures azimuth from south towards west */
     return (range360(altaz.az + 180));
 }
-
+*/
 
 }
