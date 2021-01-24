@@ -3,6 +3,8 @@ version: '{branch}-{build}'
 configuration: Release
 # clone directory
 clone_folder: c:\stellarium
+# set clone depth
+clone_depth: 10
 # Do not build feature branch with open Pull Requests
 skip_branch_with_pr: true
 # environment variables
@@ -22,14 +24,14 @@ environment:
     msvcname: Visual Studio 15 2017
     packaging: true
     suffix: Win32
-#  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-#    platform: x64
-#    qtver: 5.15
-#    qtbin: msvc2019_64
-#    msvcname: Visual Studio 16 2019
-#    packaging: false
-#    suffix: Win64
-#    cmake_args: -A x64
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+    platform: x64
+    qtver: 5.15
+    qtbin: msvc2019_64
+    msvcname: Visual Studio 16 2019
+    packaging: false
+    suffix: Win64
+    cmake_args: -A x64
 #  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
 #    platform: Win32
 #    qtver: 5.15
