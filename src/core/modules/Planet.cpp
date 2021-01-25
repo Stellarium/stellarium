@@ -2085,7 +2085,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 		}
 	}
 
-	// Use empirical formulae for main planets when seen from earth
+	// Use empirical formulae for main planets when seen from earth. MallamaHilton_2018 also work from other locations.
 	if ((Planet::getApparentMagnitudeAlgorithm()==MallamaHilton_2018) || (core->getCurrentLocation().planetName=="Earth"))
 	{
 		const double phaseDeg=phaseAngle*M_180_PI;
@@ -2116,15 +2116,22 @@ float Planet::getVMagnitude(const StelCore* core) const
 				if (englishName=="Earth")
 					return static_cast<float>(-3.99 + d + ((2.054e-4*phaseDeg - 1.060e-3)*phaseDeg));
 				if (englishName=="Mars")
-				{	double V=d; // + L(Le)+L(Ls) // TBD: get access to the "Mars Paper"
+				{
+					double V=d;
+					const QPair<Vec4d,Vec3d>axis=getSubSolarObserverPoints(core);
+					V+=re.getMarsMagLs(0.5*(axis.first[2]+axis.second[2]), true); // albedo effect
+					Q_ASSERT(abs(re.getMarsMagLs(0.5*(axis.first[2]+axis.second[2]), true)) < 0.2);
+					// determine orbital longitude
+					const Vec3d pos=getHeliocentricEclipticPos();
+					double lng, lat;
+					StelUtils::rectToSphe(&lng, &lat, pos);
+					const double orbLong=StelUtils::fmodpos(lng-getRotAscendingNode(), 2.*M_PI);
+					V+=re.getMarsMagLs(orbLong, false); // Orbital Longitude effect
+					Q_ASSERT(abs(re.getMarsMagLs(orbLong, false)) < 0.1 );
 					if(phaseDeg<=50)
-					{
 						V += (-0.0001302*phaseDeg + 0.02267)*phaseDeg -1.601;
-					}
 					else
-					{
-						V += (0.0003445*phaseDeg - 0.02573)*phaseDeg -0.367;
-					}
+						V += ( 0.0003445*phaseDeg - 0.02573)*phaseDeg -0.367;
 					return static_cast<float>(V);
 				}
 				if (englishName=="Jupiter")
