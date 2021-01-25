@@ -410,6 +410,7 @@ QVariantMap Nebula::getInfoMap(const StelCore *core) const
 	map["type"]=getTypeString(); // replace "Nebula" type by detail. This is localized. Maybe add argument such as getTypeString(bool translated=true)?
 	map.insert("morpho", getMorphologicalTypeString());
 	map.insert("surface-brightness", getSurfaceBrightness(core));
+	map.insert("designations", withoutID ? QString() : designations.join(" - "));
 	map.insert("bmag", bMag);
 	if (vMag < 50 && bMag < 50)
 		map.insert("bV", bMag-vMag);
@@ -904,6 +905,7 @@ QString Nebula::getDSODesignationWIC() const
 	else
 		return QString();
 }
+
 
 void Nebula::readDSO(QDataStream &in)
 {
