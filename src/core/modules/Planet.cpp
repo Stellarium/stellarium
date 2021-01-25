@@ -510,6 +510,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	// Second test avoids crash when observer is on spaceship
 	if (flags&ProperMotion && !core->getCurrentObserver()->isObserverLifeOver())
 	{
+		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 		// Setting/resetting the time causes a significant slowdown. We must apply some trickery to keep time in sync.
 		Vec3d equPos=getEquinoxEquatorialPos(core);
 		double dec_equ, ra_equ;
@@ -525,8 +526,8 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		StelUtils::rectToSphe(&ra_equPrev,&dec_equPrev,equPosPrev);
 		double pa=atan2(ra_equ-ra_equPrev, dec_equ-dec_equPrev); // position angle: From North counterclockwise!
 		if (pa<0) pa += 2.*M_PI;
-		oss << QString("%1: %2 %3 %4%5<br/>").arg(q_("Hourly motion"), StelUtils::radToDmsStr(deltaEq), qc_("towards", "into the direction of"), QString::number(pa*M_180_PI, 'f', 1), QChar(0x00B0));
-		oss << QString("%1: d&alpha;=%2 d&delta;=%3<br/>").arg(q_("Hourly motion"), StelUtils::radToDmsStr(ra_equ-ra_equPrev), StelUtils::radToDmsStr(dec_equ-dec_equPrev));
+		oss << QString("%1: %2 %3 %4%5<br/>").arg(q_("Hourly motion"), withDecimalDegree ? StelUtils::radToDecDegStr(deltaEq) : StelUtils::radToDmsStr(deltaEq), qc_("towards", "into the direction of"), QString::number(pa*M_180_PI, 'f', 1), QChar(0x00B0));
+		oss << QString("%1: d&alpha;=%2 d&delta;=%3<br/>").arg(q_("Hourly motion"), withDecimalDegree ? StelUtils::radToDecDegStr(ra_equ-ra_equPrev) : StelUtils::radToDmsStr(ra_equ-ra_equPrev), withDecimalDegree ? StelUtils::radToDecDegStr(dec_equ-dec_equPrev) : StelUtils::radToDmsStr(dec_equ-dec_equPrev));
 		core1->setJD(currentJD); // this calls sync() which sets millis
 		core1->setMilliSecondsOfLastJDUpdate(millis); // restore millis.
 		core1->update(0);
