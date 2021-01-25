@@ -913,9 +913,10 @@ void TestComputations::testInterpolation()
 {
 	QVERIFY(fuzzyEquals(StelUtils::interpolate3(-0.2, 1., 2., 3.), 1.8));
 	QVERIFY(fuzzyEquals(StelUtils::interpolate3( 0.2, 1., 2., 3.), 2.2));
-	QVERIFY2(abs(StelUtils::interpolate3(4.35/24., .884226, .877366, .870531) - .8761253) < 0.000001,
-		 qPrintable(QString("Interpol3 returned %1").arg(QString::number(StelUtils::interpolate3(4.35/24., .884226, .877366, .870531), 'g', 7)))); // Meeus 1998, Ex.3a
-	double i5=StelUtils::interpolate5(0.2777778,                                   // Meeus 1998, Ex.3e
+	const double i3=StelUtils::interpolate3(4.35/24., .884226, .877366, .870531);  // Meeus 1998, Ex.3a
+	QVERIFY2(abs(i3-.8761253) < 0.000001,
+		 qPrintable(QString("Interpol3 returned %1").arg(QString::number(i3, 'g', 7))));
+	const double i5=StelUtils::interpolate5(0.2777778,                             // Meeus 1998, Ex.3e
 					  StelUtils::dmsToRad(0, 54, 36.125),
 					  StelUtils::dmsToRad(0, 54, 24.606),
 					  StelUtils::dmsToRad(0, 54, 15.486),
@@ -924,5 +925,4 @@ void TestComputations::testInterpolation()
 	double res5=StelUtils::dmsToRad(0, 54, 13.369);
 	QVERIFY2(abs(i5-res5)<0.000001,
 		 qPrintable(QString("Interpol5 returned %1, not %2").arg(QString::number(i5), 'g', 7).arg(QString::number(res5), 'g', 7)));
-
 }
