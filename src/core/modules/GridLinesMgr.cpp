@@ -1375,7 +1375,7 @@ void SkyPoint::updateLabel()
 		}
 		case ANTISOLAR:
 		{
-			frameType = StelCore::FrameObservercentricEclipticOfDate;
+			frameType = StelCore::FrameObservercentricEclipticJ2000;
 			// TRANSLATORS: Antisolar Point
 			northernLabel = q_("ASP");
 			break;
@@ -1489,14 +1489,15 @@ void SkyPoint::draw(StelCore *core) const
 		{
 			// Antisolar Point
 			Vec3d coord;
-			double eclJDE = earth->getRotObliquity(core->getJDE());
+			double eclJDE = earth->getRotObliquity(2451545.0);
 			double ra_equ, dec_equ, lambdaJDE, betaJDE;
 
-			StelUtils::rectToSphe(&ra_equ,&dec_equ, sun->getEquinoxEquatorialPos(core));
+			StelUtils::rectToSphe(&ra_equ,&dec_equ, sun->getJ2000EquatorialPos(core));
 			StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaJDE, &betaJDE);
 			if (lambdaJDE<0) lambdaJDE+=2.0*M_PI;
+			betaJDE *= -1.f;
 
-			StelUtils::spheToRect(lambdaJDE + M_PI, 0., coord);
+			StelUtils::spheToRect(lambdaJDE + M_PI, betaJDE, coord);
 
 			sPainter.drawSprite2dMode(coord, 5.f);
 			sPainter.drawText(coord, northernLabel, 0, shift, shift, false);
@@ -1874,8 +1875,6 @@ void GridLinesMgr::draw(StelCore* core)
 		equinoxPoints->draw(core);
 		solsticePoints->draw(core);
 		longitudeLine->draw(core);
-		// Antisolar point are calculated in Ecliptic (on date) frame (Earth only)
-		antisolarPoint->draw(core);
 	}
 
 	// Lines after grids, to be able to e.g. draw equators in different color!
@@ -1902,6 +1901,8 @@ void GridLinesMgr::draw(StelCore* core)
 	equinoxJ2000Points->draw(core);
 	solsticeJ2000Points->draw(core);	
 	apexPoints->draw(core);	
+	// Antisolar point are calculated in Ecliptic (J2000) frame
+	antisolarPoint->draw(core);
 }
 
 void GridLinesMgr::updateLabels()
