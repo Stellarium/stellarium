@@ -20,14 +20,7 @@
 #pragma once
 
 #include "StelModule.hpp"
-#include <QFont>
-#include <QString>
-#include <QPair>
 #include "VecMath.hpp"
-#include "SolarSystem.hpp"
-#include "Planet.hpp"
-#include "StelFader.hpp"
-
 
 class QPixmap;
 class StelButton;
@@ -109,10 +102,11 @@ private:
 	QSettings* config;
 	ObservabilityDialog* configDialog;
 
-	Vec3d calculateRiseSet(double siderialTime, double latitude, double longitude, double alpha1,
-	                       double delta1, double alpha2, double delta2, double alpha3, double delta3);
+	Vec3d calculateRiseSet(double siderialTime, double latitude, double longitude, /*double alpha1,
+	                       double delta1,*/ double alpha2, double delta2/*, double alpha3, double delta3*/);
 
 	static double valueBetween0And1(double x);
+	static Vec2i calcTimeFromDayFraction(const double& fraction);
 };
 
 #include "StelPluginInterface.hpp"

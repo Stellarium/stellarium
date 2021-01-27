@@ -17,40 +17,17 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <QDebug>
-#include <QKeyEvent>
-#include <QList>
-#include <QMouseEvent>
-#include <QPixmap>
-#include <QSettings>
-#include <QString>
-#include <QTimer>
-
 #include "Observability.hpp"
 #include "ObservabilityDialog.hpp"
 
-#include "Planet.hpp"
-#include "SolarSystem.hpp"
-#include "StarMgr.hpp"
-#include "StelActionMgr.hpp"
-#include "StelApp.hpp"
+//#include "Planet.hpp"
+//#include "SolarSystem.hpp"
 #include "StelCore.hpp"
-#include "StelFader.hpp"
-#include "StelFileMgr.hpp"
-#include "StelGui.hpp"
-#include "StelGuiItems.hpp"
-#include "StelIniParser.hpp"
-#include "StelLocaleMgr.hpp"
-#include "StelModuleMgr.hpp"
-#include "StelMovementMgr.hpp"
-#include "StelObject.hpp"
-#include "StelObjectMgr.hpp"
-#include "StelObserver.hpp"
-#include "StelPainter.hpp"
-#include "StelProjector.hpp"
-#include "StelSkyDrawer.hpp"
 #include "StelUtils.hpp"
-#include "ZoneArray.hpp"
+#include "StelObserver.hpp"
+#include "StelObjectMgr.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelLocaleMgr.hpp"
 
 StelModule* ObservabilityStelPluginInterface::getStelModule() const
 {
@@ -101,8 +78,8 @@ void Observability::init()
 	connect(&app, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this,
 	  SLOT(setSelectedObject(StelModule::StelModuleSelectAction)));
 
-	Vector3<double> x = calculateRiseSet(177.7420800, 42.333300, 71.083300, 40.6802100, 18.0476100,
-	  41.7312900, 18.4409200, 42.7820400, 18.8274200);
+	//Vec3d x = calculateRiseSet(177.7420800, 42.333300, 71.083300, /*40.6802100, 18.0476100,*/
+	//  41.7312900, 18.4409200/*, 42.7820400, 18.8274200*/);
 }
 
 void Observability::setSelectedObject(StelModule::StelModuleSelectAction mode)
@@ -123,7 +100,22 @@ void Observability::draw(StelCore* core)
 
 	if (obj.getSelectedObject().length() > 0)
 	{
+		double rightAscension, declination;
+		StelUtils::rectToSphe(
+		  &rightAscension, &declination, obj.getSelectedObject()[0]->getEquinoxEquatorialPos(core));
 		obj.getSelectedObject()[0]->addToExtraInfoString(StelObject::Extra, "Hey there<br/>");
+
+		rightAscension = rightAscension * M_180_PI;
+		declination = declination * M_180_PI;
+
+		double siderialTimeDeg = core->getLocalSiderealTime() * M_180_PI;
+		//siderialTimeDeg = 177.74208000;
+		const StelLocation& location = core->getCurrentObserver()->getCurrentLocation();
+		Vec3d x = calculateRiseSet(siderialTimeDeg, location.latitude, location.longitude, rightAscension, declination);
+
+		Vec2i rise = calcTimeFromDayFraction(x[0]);
+		Vec2i set = calcTimeFromDayFraction(x[1]);
+		Vec2i transit = calcTimeFromDayFraction(x[2]);
 	}
 }
 
@@ -154,15 +146,18 @@ bool Observability::configureGui(bool show)
 /// <param name="alpha3">right ascension of body tomorrow</param>
 /// <param name="delta3">declination of body tomorrow</param>
 Vector3<double> Observability::calculateRiseSet(double siderialTime, double latitude, double longitude,
-  double alpha1, double delta1, double alpha2, double delta2, double alpha3, double delta3)
+  /*double alpha1, double delta1,*/ double alpha2, double delta2/*, double alpha3, double delta3*/)
 {
 	// "standard" altitude, i.e. geometric altitude of the center of the body at rising or setting (for stars
 	// and planets)
 	const double h0 = -0.5667000;
+	// Make western longitude positive
+	longitude = -longitude;
 
 	double cosH0 = (std::sin(h0 / M_180_PI) - std::sin(latitude / M_180_PI) * std::sin(delta2 / M_180_PI))
 				   / std::cos(latitude / M_180_PI) * std::cos(delta2 / M_180_PI);
 
+	// if cosH0 is not between -1 and 1, the object stays either above or below the horizon
 	if (cosH0 < -1 || cosH0 > 1) return Vector3<double>(-1, -1, -1);
 
 	double h1 = std::acos(cosH0) / M_PI_180;
@@ -188,6 +183,14 @@ double Observability::valueBetween0And1(double x)
 		x += 1;
 	}
 	return x;
+}
+
+Vec2i Observability::calcTimeFromDayFraction(const double& fraction)
+{
+	double hoursDouble = fraction * 24;
+	int hoursInt = hoursDouble;
+	int minutes = (hoursDouble - hoursInt) * 60;
+	return Vec2i(hoursInt, minutes);
 }
 
 void Observability::showGoodNights(bool b)
