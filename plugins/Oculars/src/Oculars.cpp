@@ -260,25 +260,25 @@ void Oculars::deinit()
 	settings->remove("telescope");
 	settings->remove("lens");
 	int index = 0;
-	for (auto* ccd : ccds)
+	for (auto* ccd : qAsConst(ccds))
 	{
 		ccd->writeToSettings(settings, index);
 		index++;
 	}
 	index = 0;
-	for (auto* ocular : oculars)
+	for (auto* ocular : qAsConst(oculars))
 	{
 		ocular->writeToSettings(settings, index);
 		index++;
 	}
 	index = 0;
-	for (auto* telescope : telescopes)
+	for (auto* telescope : qAsConst(telescopes))
 	{
 		telescope->writeToSettings(settings, index);
 		index++;
 	}
 	index = 0;
-	for (auto* lens : lenses)
+	for (auto* lens : qAsConst(lenses))
 	{
 		lens->writeToSettings(settings, index);
 		index++;
