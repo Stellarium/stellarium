@@ -2085,6 +2085,45 @@ float Planet::getVMagnitude(const StelCore* core) const
 		}
 	}
 
+	// Lunar Magnitude from Earth: This is a combination of Russell 1916 (!) with its albedo dysbalance, Krisciunas-Schaefer (1991) for the opposition surge, and Agrawal (2016) for the contribution of earthshine.
+	if ((core->getCurrentLocation().planetName=="Earth") && (englishName=="Moon"))
+	{
+		double lEarth, bEarth, lMoon, bMoon;
+		StelUtils::rectToSphe(&lEarth, &bEarth, observerHelioPos);
+		StelUtils::rectToSphe(&lMoon, &bMoon, eclipticPos);
+		double dLong=StelUtils::fmodpos(lMoon-lEarth, 2.*M_PI); if (dLong>M_PI) dLong-=2.*M_PI; // now pa<0 for waxing phases.
+		const double p=dLong*M_180_PI;
+		// main magnitude term from Russell 1916. Polynomes from Excel fitting.
+		double magIll=(p<0 ?
+				((((-1.116337E-10*p - 3.507780E-08)*p - 5.106920E-06)*p - 2.589654E-04)*p - 2.641556E-02)*p - 9.094429E-03 :
+				(((1.581602E-08*p - 3.102053E-06)*p + 2.372987E-04)*p + 1.995185E-02)*p + 1.903380E-03);
+		magIll-=12.72;
+		const double r=2.56e-6; // see Agrawal (14)
+		double fluxIll=r*pow(10., -0.4*magIll);
+
+		// apply opposition surge where needed
+		const double psi=getPhaseAngle(observerHelioPos);
+		const double surge=qMax(1., 1.35-2.865*abs(psi));
+		fluxIll*=surge; // This is now shape of Russell's magnitude curve with peak brightness matched with Krisciunas-Schaefer
+		// apply distance factor
+		static const double lunarMeanDist=384399./AU;
+		static const double lunarMeanDistSq=lunarMeanDist*lunarMeanDist;
+		fluxIll *= (lunarMeanDistSq/observerPlanetRq);
+		// compute flux of ashen light: Agrawal 2016.
+		////const double sunRadius = parent->parent->equatorialRadius;
+		////const double alpha=sunRadius*sunRadius/observerRq;
+		const double beta=parent->equatorialRadius*parent->equatorialRadius/eclipticPos.lengthSquared();
+		const double gamma=equatorialRadius*equatorialRadius/eclipticPos.lengthSquared();
+
+		const double slfoe=122686.; // TBD: try the numerical solution
+		const double LumEarth=slfoe * core->getCurrentObserver()->getHomePlanet()->albedo;
+		const double elfom=LumEarth*beta;
+		const double elfoe=elfom*albedo*gamma; // brightness of full earthshine.
+		const double pfac=0.5*(1.+cos(dLong));
+		const double fluxTotal=fluxIll + elfoe*pfac;
+		return -2.5f*static_cast<float>(log10(fluxTotal*shadowFactor/r));
+	}
+
 	// Use empirical formulae for main planets when seen from earth. MallamaHilton_2018 also work from other locations.
 	if ((Planet::getApparentMagnitudeAlgorithm()==MallamaHilton_2018) || (core->getCurrentLocation().planetName=="Earth"))
 	{
