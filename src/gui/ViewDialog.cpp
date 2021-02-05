@@ -1164,7 +1164,7 @@ void ViewDialog::populatePlanetMagnitudeAlgorithmsList()
 	QVariant selectedAlgorithmId = algorithms->itemData(index);
 	algorithms->clear();
 	//For each algorithm, display the localized name and store the key as user data.
-	algorithms->addItem(qc_("G. Mueller (1893)",             "magnitude algorithm"), Planet::Mueller_1893);
+	algorithms->addItem(qc_("G. Müller (1893)",              "magnitude algorithm"), Planet::Mueller_1893);
 	algorithms->addItem(qc_("Astronomical Almanac (1984)",   "magnitude algorithm"), Planet::AstronomicalAlmanac_1984);
 	algorithms->addItem(qc_("Explanatory Supplement (1992)", "magnitude algorithm"), Planet::ExplanatorySupplement_1992);
 	algorithms->addItem(qc_("Explanatory Supplement (2013)", "magnitude algorithm"), Planet::ExplanatorySupplement_2013);
@@ -1198,10 +1198,10 @@ void ViewDialog::populatePlanetMagnitudeAlgorithmDescription()
 			info = q_("The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later) and gives V (instrumental) magnitudes (allegedly from D.L. Harris).");
 			break;
 		case Planet::Mueller_1893:
-			info = q_("The algorithm is based on visual observations 1877-1891 by G. Mueller and was published in <em>Explanatory Supplement to the Astronomical Ephemeris</em> (1961).");
+			info = q_("The algorithm is based on visual observations 1877-1891 by G. Müller and was still republished in the <em>Explanatory Supplement to the Astronomical Ephemeris</em> (1961).");
 			break;
 		case Planet::ExplanatorySupplement_1992:
-			info = q_("The algorithm was published in the <em>Explanatory Supplement to the Astronomical Almanac</em> (1992).");
+			info = q_("The algorithm was published in the 2nd edition of the <em>Explanatory Supplement to the Astronomical Almanac</em> (1992).");
 			break;
 		case Planet::ExplanatorySupplement_2013:
 			info = q_("The algorithm was published in the 3rd edition of the <em>Explanatory Supplement to the Astronomical Almanac</em> (2013).");
