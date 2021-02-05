@@ -474,8 +474,14 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&Magnitude)
 	{
+		static const QMap<ApparentMagnitudeAlgorithm, int>decMap={
+			{ Mueller_1893,               1 },
+			{ AstronomicalAlmanac_1984,   1 },
+			{ ExplanatorySupplement_1992, 1 },
+			{ ExplanatorySupplement_2013, 2 },
+			{ MallamaHilton_2018,         2 }};
 		if (!fuzzyEquals(getVMagnitude(core), std::numeric_limits<float>::infinity()))
-			oss << getMagnitudeInfoString(core, flags, alt_app, 2);
+			oss << getMagnitudeInfoString(core, flags, alt_app, decMap.value(vMagAlgorithm, 1));
 		oss << getExtraInfoStrings(Magnitude).join("");
 	}
 
@@ -2091,37 +2097,37 @@ float Planet::getVMagnitude(const StelCore* core) const
 		double lEarth, bEarth, lMoon, bMoon;
 		StelUtils::rectToSphe(&lEarth, &bEarth, observerHelioPos);
 		StelUtils::rectToSphe(&lMoon, &bMoon, eclipticPos);
-		double dLong=StelUtils::fmodpos(lMoon-lEarth, 2.*M_PI); if (dLong>M_PI) dLong-=2.*M_PI; // now pa<0 for waxing phases.
+		double dLong=StelUtils::fmodpos(lMoon-lEarth, 2.*M_PI); if (dLong>M_PI) dLong-=2.*M_PI; // now dLong<0 for waxing phases.
 		const double p=dLong*M_180_PI;
-		// main magnitude term from Russell 1916. Polynomes from Excel fitting.
+		// main magnitude term from Russell 1916. Polynomes from Excel fitting with mag(dLong=180)=0.
+		// Measurements support only dLong -150...150, and the New Moon area is mere guesswork.
 		double magIll=(p<0 ?
-				((((-1.116337E-10*p - 3.507780E-08)*p - 5.106920E-06)*p - 2.589654E-04)*p - 2.641556E-02)*p - 9.094429E-03 :
-				(((1.581602E-08*p - 3.102053E-06)*p + 2.372987E-04)*p + 1.995185E-02)*p + 1.903380E-03);
-		magIll-=12.72;
-		const double r=2.56e-6; // see Agrawal (14)
-		double fluxIll=r*pow(10., -0.4*magIll);
+				(((((4.208547E-12*p + 1.754857E-09)*p + 2.749700E-07)*p + 1.860811E-05)*p + 5.590310E-04)*p - 1.628691E-02)*p + 4.807056E-03 :
+				(((((4.609790E-12*p - 1.977692E-09)*p + 3.305454E-07)*p - 2.582825E-05)*p + 9.593360E-04)*p + 1.213761E-02)*p + 7.710015E-03);
+		magIll-=12.73;
+		static const double rf=2.56e-6; // Reference flux [lx] from Agrawal (14)
+		double fluxIll=rf*pow(10., -0.4*magIll);
 
 		// apply opposition surge where needed
 		const double psi=getPhaseAngle(observerHelioPos);
 		const double surge=qMax(1., 1.35-2.865*abs(psi));
-		fluxIll*=surge; // This is now shape of Russell's magnitude curve with peak brightness matched with Krisciunas-Schaefer
+		fluxIll *= surge; // This is now shape of Russell's magnitude curve with peak brightness matched with Krisciunas-Schaefer
 		// apply distance factor
 		static const double lunarMeanDist=384399./AU;
 		static const double lunarMeanDistSq=lunarMeanDist*lunarMeanDist;
 		fluxIll *= (lunarMeanDistSq/observerPlanetRq);
+
 		// compute flux of ashen light: Agrawal 2016.
-		////const double sunRadius = parent->parent->equatorialRadius;
-		////const double alpha=sunRadius*sunRadius/observerRq;
 		const double beta=parent->equatorialRadius*parent->equatorialRadius/eclipticPos.lengthSquared();
 		const double gamma=equatorialRadius*equatorialRadius/eclipticPos.lengthSquared();
 
-		const double slfoe=122686.; // TBD: try the numerical solution
-		const double LumEarth=slfoe * core->getCurrentObserver()->getHomePlanet()->albedo;
+		const double slfoe=133100.; // https://www.allthingslighting.org/index.php/2019/02/15/solar-illumination/
+		const double LumEarth=slfoe * static_cast<double>(core->getCurrentObserver()->getHomePlanet()->albedo);
 		const double elfom=LumEarth*beta;
-		const double elfoe=elfom*albedo*gamma; // brightness of full earthshine.
-		const double pfac=0.5*(1.+cos(dLong));
+		const double elfoe=elfom*static_cast<double>(albedo)*gamma; // brightness of full earthshine.
+		const double pfac=1.-(0.5*(1.+cos(dLong))); // diminishing earthshine with phase angle
 		const double fluxTotal=fluxIll + elfoe*pfac;
-		return -2.5f*static_cast<float>(log10(fluxTotal*shadowFactor/r));
+		return -2.5f*static_cast<float>(log10(fluxTotal*shadowFactor/rf));
 	}
 
 	// Use empirical formulae for main planets when seen from earth. MallamaHilton_2018 also work from other locations.
@@ -2132,7 +2138,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 
 		// There are several solutions:
 		// (0) "ExplanatorySupplement_1992" original solution in Stellarium, present around 2010.
-		// (1) "Mueller_1893" G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961 p.312ff]
+		// (1) "Mueller_1893" G. Müller, based on visual observations 1877-91. [Expl.Suppl.1961 p.312ff]
 		// (2) "AstronomicalAlmanac_1984" Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes.
 		//     The structure is almost identical, just the numbers are different!
 		//     Note that calling (2) "Harris" is an absolute misnomer. Meeus clearly describes this in AstrAlg1998 p.286.
@@ -2453,7 +2459,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 		}
 	}
 
-	// This formula source is unknown. But this is actually used even for the Moon!
+	// This formula source is unknown. But this was originally used even for the Moon!
 	const double p = (1.0 - phaseAngle/M_PI) * cos_chi + std::sqrt(1.0 - cos_chi*cos_chi) / M_PI;
 	const double F = 2.0 * static_cast<double>(albedo) * equatorialRadius * equatorialRadius * p / (3.0*observerPlanetRq*planetRq) * shadowFactor;
 	return -26.73f - 2.5f * static_cast<float>(log10(F));
