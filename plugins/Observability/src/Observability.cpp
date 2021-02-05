@@ -59,6 +59,7 @@ Observability::Observability()
 	setObjectName("Observability");
 	config = StelApp::getInstance().getSettings();
 	configDialog = new ObservabilityDialog();
+	core = StelApp::getInstance().getCore();
 }
 
 Observability::~Observability()
@@ -74,12 +75,26 @@ void Observability::init()
 	  addAction("actionShow_Observability", N_("Observability"), N_("Observability"), "flagShowReport");
 	addAction("actionShow_Observability_ConfigDialog", N_("Observability"),
 	  N_("Observability configuration window"), configDialog, "visible", "");
+	
 	StelObjectMgr& app = StelApp::getInstance().getStelObjectMgr();
+	
 	connect(&app, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this,
 	  SLOT(setSelectedObject(StelModule::StelModuleSelectAction)));
 
-	//Vec3d x = calculateRiseSet(177.7420800, 42.333300, 71.083300, /*40.6802100, 18.0476100,*/
-	//  41.7312900, 18.4409200/*, 42.7820400, 18.8274200*/);
+	connect(core, SIGNAL(locationChanged(const StelLocation&)), this,
+	  SLOT(prepareCalcRiseSetTransit()));
+
+	connect(core, SIGNAL(dateChanged(void)), this, SLOT(prepareCalcRiseSetTransit()));
+	connect(core, SIGNAL(currentTimeZoneChanged(const QString&)), this, SLOT(prepareCalcRiseSetTransit()));
+
+	Vec3d x = calculateRiseSetTransit(177.7420800, 42.333300, 71.083300, 41.7312900, 18.4409200);
+
+	double deltaTransit = calcDeltaM(177.7420800, x[0], 42.333300, 71.083300, 40.6802100, 18.0476100,
+	  41.7312900, 18.4409200, 42.7820400, 18.8274200, false, -0.5667000);
+
+	Vec2i rise = calcTimeFromDayFraction(x[0]);
+	Vec2i set = calcTimeFromDayFraction(x[1]);
+	Vec2i transit = calcTimeFromDayFraction(x[2]);
 }
 
 void Observability::setSelectedObject(StelModule::StelModuleSelectAction mode)
@@ -90,32 +105,17 @@ void Observability::setSelectedObject(StelModule::StelModuleSelectAction mode)
 
 	if (obj.getSelectedObject().length() > 0)
 	{
-		obj.getSelectedObject()[0]->addToExtraInfoString(StelObject::Extra, "Hey there<br/>");
+		prepareCalcRiseSetTransit();
 	}
 }
 
 void Observability::draw(StelCore* core)
 {
 	StelObjectMgr& obj = StelApp::getInstance().getStelObjectMgr();
-
 	if (obj.getSelectedObject().length() > 0)
 	{
-		double rightAscension, declination;
-		StelUtils::rectToSphe(
-		  &rightAscension, &declination, obj.getSelectedObject()[0]->getEquinoxEquatorialPos(core));
-		obj.getSelectedObject()[0]->addToExtraInfoString(StelObject::Extra, "Hey there<br/>");
-
-		rightAscension = rightAscension * M_180_PI;
-		declination = declination * M_180_PI;
-
-		double siderialTimeDeg = core->getLocalSiderealTime() * M_180_PI;
-		//siderialTimeDeg = 177.74208000;
-		const StelLocation& location = core->getCurrentObserver()->getCurrentLocation();
-		Vec3d x = calculateRiseSet(siderialTimeDeg, location.latitude, location.longitude, rightAscension, declination);
-
-		Vec2i rise = calcTimeFromDayFraction(x[0]);
-		Vec2i set = calcTimeFromDayFraction(x[1]);
-		Vec2i transit = calcTimeFromDayFraction(x[2]);
+		//prepareCalcRiseSetTransit();
+		obj.getSelectedObject()[0]->addToExtraInfoString(StelObject::Extra, test + "<br/>");
 	}
 }
 
@@ -134,6 +134,34 @@ bool Observability::configureGui(bool show)
 	return true;
 }
 
+void Observability::prepareCalcRiseSetTransit()
+{
+	StelObjectMgr& obj = StelApp::getInstance().getStelObjectMgr();
+
+	if (obj.getSelectedObject().length() > 0)
+	{
+		double rightAscension, declination;
+		StelUtils::rectToSphe(
+		  &rightAscension, &declination, obj.getSelectedObject()[0]->getEquinoxEquatorialPos(core));
+
+		rightAscension = rightAscension * M_180_PI;
+		declination = declination * M_180_PI;
+
+		double siderialTimeDeg = core->getLocalSiderealTime() * M_180_PI;
+		//siderialTimeDeg = 177.74208000;
+		const StelLocation& location = core->getCurrentObserver()->getCurrentLocation();
+		Vec3d x = calculateRiseSetTransit(siderialTimeDeg, location.latitude, location.longitude, rightAscension, declination);
+		x[0] += calcDeltaM(siderialTimeDeg, x[0], 42.333300, 71.083300, 40.6802100, 18.0476100,
+	  41.7312900, 18.4409200, 42.7820400, 18.8274200, false, -0.5667000);
+
+		Vec2i rise = calcTimeFromDayFraction(x[0]);
+		Vec2i set = calcTimeFromDayFraction(x[1]);
+		Vec2i transit = calcTimeFromDayFraction(x[2]);
+
+		test = rise.toString();
+	}
+}
+
 /// <summary>
 ///
 /// </summary>
@@ -145,14 +173,14 @@ bool Observability::configureGui(bool show)
 /// <param name="delta2">declination of body today</param>
 /// <param name="alpha3">right ascension of body tomorrow</param>
 /// <param name="delta3">declination of body tomorrow</param>
-Vector3<double> Observability::calculateRiseSet(double siderialTime, double latitude, double longitude,
+Vector3<double> Observability::calculateRiseSetTransit(double siderialTime, double latitude, double longitude,
   /*double alpha1, double delta1,*/ double alpha2, double delta2/*, double alpha3, double delta3*/)
 {
 	// "standard" altitude, i.e. geometric altitude of the center of the body at rising or setting (for stars
 	// and planets)
 	const double h0 = -0.5667000;
 	// Make western longitude positive
-	longitude = -longitude;
+	//longitude = -longitude;
 
 	double cosH0 = (std::sin(h0 / M_180_PI) - std::sin(latitude / M_180_PI) * std::sin(delta2 / M_180_PI))
 				   / std::cos(latitude / M_180_PI) * std::cos(delta2 / M_180_PI);
@@ -185,12 +213,47 @@ double Observability::valueBetween0And1(double x)
 	return x;
 }
 
-Vec2i Observability::calcTimeFromDayFraction(const double& fraction)
+Vec2i Observability::calcTimeFromDayFraction(double fraction)
 {
+	// time zone adjustments
+	fraction += core->getUTCOffset(core->getJD()) / 24;
+
 	double hoursDouble = fraction * 24;
 	int hoursInt = hoursDouble;
 	int minutes = (hoursDouble - hoursInt) * 60;
 	return Vec2i(hoursInt, minutes);
+}
+
+double Observability::interpolation(double m, double y1, double y2, double y3)
+{
+	// m + deltaT / 86400
+	double n = m + core->computeDeltaT(core->getJD()) / 86400;
+	// y2 - y1
+	double a = y2 - y1;
+	// y3 - y2
+	double b = y3 - y2;
+	// b - a
+	double c = b - a;
+	return y2 + n / 2 * (a + b + n * c);
+}
+
+double Observability::calcDeltaM(double siderialTime, double m, double latitude, double longitude,
+	double alpha1, double delta1, double alpha2, double delta2, double alpha3, double delta3,
+	bool isTransit, double h0)
+{
+	double greenwichSiderialTime = ((siderialTime + 360.985647) * m) / M_180_PI;
+	//greenwichSiderialTime = 4.79401;
+	double rightAscension = interpolation(m, alpha1, alpha2, alpha3);
+	double localeHourAngle = greenwichSiderialTime - longitude - rightAscension;
+	
+	if (isTransit) return -(localeHourAngle / 360);
+
+	double declination = interpolation(m, delta1, delta2, delta3);
+	double altitude = std::asin(std::sin(latitude / M_180_PI) * std::sin(declination)
+				+ std::cos(latitude / M_180_PI) * std::cos(declination) * std::cos(localeHourAngle));
+
+	return (altitude - h0)
+		   / (360 * std::cos(declination) * std::cos(latitude / M_180_PI) * std::sin(localeHourAngle));
 }
 
 void Observability::showGoodNights(bool b)

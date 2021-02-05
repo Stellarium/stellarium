@@ -21,6 +21,7 @@
 
 #include "StelModule.hpp"
 #include "VecMath.hpp"
+#include "StelLocation.hpp"
 
 class QPixmap;
 class StelButton;
@@ -87,7 +88,9 @@ public slots:
 	void setTwilightAltitudeDeg(int alt);
 	void setHorizonAltitudeDeg(int alt);
 
+private slots:
 	void setSelectedObject(StelModule::StelModuleSelectAction mode);
+	void prepareCalcRiseSetTransit();
 
 private:
 	bool flagShowReport = false;
@@ -102,11 +105,18 @@ private:
 	QSettings* config;
 	ObservabilityDialog* configDialog;
 
-	Vec3d calculateRiseSet(double siderialTime, double latitude, double longitude, /*double alpha1,
-	                       double delta1,*/ double alpha2, double delta2/*, double alpha3, double delta3*/);
+	StelCore* core;
+
+	Vec3d calculateRiseSetTransit(double siderialTime, double latitude, double longitude, /*double alpha1,
+	                              double delta1,*/ double alpha2, double delta2/*, double alpha3, double delta3*/);
 
 	static double valueBetween0And1(double x);
-	static Vec2i calcTimeFromDayFraction(const double& fraction);
+	Vec2i calcTimeFromDayFraction(double fraction);
+	double interpolation(double m, double y1, double y2, double y3);
+	double calcDeltaM(double siderialTime, double m, double latitude, double longitude, double alpha1,
+	  double delta1, double alpha2, double delta2, double alpha3, double delta3, bool isTransit, double h0);
+
+	QString test = "";
 };
 
 #include "StelPluginInterface.hpp"
