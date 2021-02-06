@@ -2191,13 +2191,21 @@ float Planet::getVMagnitude(const StelCore* core) const
 				}
 				if (englishName=="Saturn")
 				{
-					// add rings computation
-					const QPair<Vec4d,Vec3d>axis=getSubSolarObserverPoints(core);
-					const double be=axis.first[0];
-					const double bs=axis.second[0];
-					double beta= be*bs; beta=(beta<=0 ? 0. : sqrt(beta));
-					// Note: this is really only for phaseAngle<6, i.e. from Earth.
-					return static_cast<float>(-8.914 + d + 0.026*phaseDeg - (1.825+0.378*exp(-2.25*phaseDeg))*sin(beta) );
+					if (phaseDeg<6.5)
+					{
+						// Note: this is really only for phaseAngle<6, i.e. from Earth.
+						// add rings computation
+						const QPair<Vec4d,Vec3d>axis=getSubSolarObserverPoints(core);
+						const double be=axis.first[0];
+						const double bs=axis.second[0];
+						double beta= be*bs; beta=(beta<=0 ? 0. : sqrt(beta));
+						return static_cast<float>(-8.914 + d + 0.026*phaseDeg - (1.825+0.378*exp(-2.25*phaseDeg))*sin(beta) );
+					}
+					else
+					{
+						// Expression (12). This gives magV for the globe only, no ring.
+						return static_cast<float>(-8.94+d+(((4.767e-9*phaseDeg-1.505e-6)*phaseDeg + 2.672e-4)*phaseDeg + 2.446e-4)*phaseDeg);
+					}
 				}
 				if (englishName=="Uranus")
 				{
@@ -2226,25 +2234,28 @@ float Planet::getVMagnitude(const StelCore* core) const
 				// TODO: Need experimental data to fitting to real world or the scientific paper with description of model.
 				// GZ 2017-09: Phase coefficients for I and III corrected, based on original publication (Stebbins&Jacobsen 1928) now.
 				// AW 2020-02: Let's use linear model in the first approximation for smooth reduce the brightness of Jovian moons for get more realistic look
-				if (englishName=="Io")
+				if (core->getCurrentLocation().planetName=="Earth") // phase angle corrections only work for the small phase angles visible on earth.
 				{
-					const float mag = static_cast<float>(-1.68 + d + phaseDeg*(0.046  - 0.0010 *phaseDeg));
-					return shadowFactor<1.0 ? static_cast<float>(13.*(1.-shadowFactor)) + mag : mag;
-				}
-				if (englishName=="Europa")
-				{
-					const float mag = static_cast<float>(-1.41 + d + phaseDeg*(0.0312 - 0.00125*phaseDeg));
-					return shadowFactor<1.0 ? static_cast<float>(13.*(1.-shadowFactor)) + mag : mag;
-				}
-				if (englishName=="Ganymede")
-				{
-					const float mag = static_cast<float>(-2.09 + d + phaseDeg*(0.0323 - 0.00066*phaseDeg));
-					return shadowFactor<1.0 ? static_cast<float>(13.*(1.-shadowFactor)) + mag : mag;
-				}
-				if (englishName=="Callisto")
-				{
-					const float mag = static_cast<float>(-1.05 + d + phaseDeg*(0.078  - 0.00274*phaseDeg));
-					return shadowFactor<1.0 ? static_cast<float>(13.*(1.-shadowFactor)) + mag : mag;
+					if (englishName=="Io")
+					{
+						const float mag = static_cast<float>(-1.68 + d + phaseDeg*(0.046  - 0.0010 *phaseDeg));
+						return shadowFactor<1.0 ? static_cast<float>(13.*(1.-shadowFactor)) + mag : mag;
+					}
+					if (englishName=="Europa")
+					{
+						const float mag = static_cast<float>(-1.41 + d + phaseDeg*(0.0312 - 0.00125*phaseDeg));
+						return shadowFactor<1.0 ? static_cast<float>(13.*(1.-shadowFactor)) + mag : mag;
+					}
+					if (englishName=="Ganymede")
+					{
+						const float mag = static_cast<float>(-2.09 + d + phaseDeg*(0.0323 - 0.00066*phaseDeg));
+						return shadowFactor<1.0 ? static_cast<float>(13.*(1.-shadowFactor)) + mag : mag;
+					}
+					if (englishName=="Callisto")
+					{
+						const float mag = static_cast<float>(-1.05 + d + phaseDeg*(0.078  - 0.00274*phaseDeg));
+						return shadowFactor<1.0 ? static_cast<float>(13.*(1.-shadowFactor)) + mag : mag;
+					}
 				}
 
 				if ((!fuzzyEquals(absoluteMagnitude,-99.f)) && (englishName!="Moon"))
