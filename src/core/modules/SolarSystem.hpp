@@ -804,6 +804,10 @@ public:
 	//! In the unlikely event of multiple objects in front of the sun, only the largest will be reported.
 	QPair<double, PlanetP> getEclipseFactor(const StelCore *core) const;
 
+	//! Retrieve Radius of Umbra and Penumbra at the distance of the Moon.
+	//! Returns a pair (umbra, penumbra) in AU.
+	QPair<double,double> getEarthShadowRadiiAtLunarDistance() const;
+
 	//! Compute the position and transform matrix for every element of the solar system.
 	//! @param dateJDE the Julian Day in JDE (Ephemeris Time or equivalent)	
 	//! @param observerPlanet planet of the observer (Required for light travel time or aberration computation).

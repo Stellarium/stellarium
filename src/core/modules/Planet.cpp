@@ -2061,32 +2061,52 @@ float Planet::getVMagnitude(const StelCore* core) const
 		if (pos_times_parent_pos > parent_Rq)
 		{
 			// The satellite is farther away from the sun than the parent planet.
-			const double sun_radius = parent->parent->equatorialRadius;
-			const double sun_minus_parent_radius = sun_radius - parent->equatorialRadius;
-			const double quot = pos_times_parent_pos/parent_Rq;
-
-			// Compute d = distance from satellite center to border of inner shadow.
-			// d>0 means inside the shadow cone.
-			double d = sun_radius - sun_minus_parent_radius*quot - std::sqrt((1.-sun_minus_parent_radius/std::sqrt(parent_Rq)) * (planetRq-pos_times_parent_pos*quot));
-			if (d>=equatorialRadius)
+			if (englishName=="Moon")
 			{
-				// The satellite is totally inside the inner shadow.
-				if (englishName=="Moon")
+				static const double totalityFactor=2.710e-5; // defined previously by AW
+				const QPair<double,double>shadowRadii=GETSTELMODULE(SolarSystem)->getEarthShadowRadiiAtLunarDistance();
+				const double uu=shadowRadii.first;
+				const double pp=shadowRadii.second;
+				const double dist=getEclipticPos().length();                             // Lunar distance [AU]
+
+				const double u=atan(uu/dist) * M_180_PI; // geocentric angle of earth umbra radius at lunar distance [degrees]
+				const double p=atan(pp/dist) * M_180_PI; // geocentric angle of earth penumbra radius at lunar distance [degrees]
+				const double r=atan(getEquatorialRadius()/dist) * M_180_PI; // geocentric angle of Lunar radius at lunar distance [degrees]
+				const double od=180.-getElongation(GETSTELMODULE(SolarSystem)->getEarth()->getEclipticPos()) * (180.0/M_PI); // opposition distance [degrees]
+				if (od>p+r) shadowFactor=1.0;
+				else if (od>u+r) // penumbral transition zone: gradual decline (square curve)
+					shadowFactor=0.7+0.3*sqrt((od-u-r)/(p-u));
+				else if (od>u-r) // umbral transition zone
+					shadowFactor=totalityFactor+(0.7-totalityFactor)*(od-u+r)/(2.*r);
+				else // totality. Still, center is darker...
 				{
 					// Fit a more realistic magnitude for the Moon case.
 					// I used some empirical data for fitting. --AW
 					// TODO: This factor should be improved!
-					shadowFactor = 2.718e-5;
+					shadowFactor=totalityFactor*0.5*(1+od/(u-r));
 				}
-				else
-					shadowFactor = 1e-9;
 			}
-			else if (d>-equatorialRadius)
+			else
 			{
-				// The satellite is partly inside the inner shadow,
-				// compute a fantasy value for the magnitude:
-				d /= equatorialRadius;
-				shadowFactor = (0.5 - (std::asin(d)+d*std::sqrt(1.0-d*d))/M_PI);
+				const double sun_radius = parent->parent->equatorialRadius;
+				const double sun_minus_parent_radius = sun_radius - parent->equatorialRadius;
+				const double quot = pos_times_parent_pos/parent_Rq;
+
+				// Compute d = distance from satellite center to border of inner shadow.
+				// d>0 means inside the shadow cone.
+				double d = sun_radius - sun_minus_parent_radius*quot - std::sqrt((1.-sun_minus_parent_radius/std::sqrt(parent_Rq)) * (planetRq-pos_times_parent_pos*quot));
+				if (d>=equatorialRadius)
+				{
+					// The satellite is totally inside the inner shadow.
+					shadowFactor = 1e-9;
+				}
+				else if (d>-equatorialRadius)
+				{
+					// The satellite is partly inside the inner shadow,
+					// compute a fantasy value for the magnitude:
+					d /= equatorialRadius;
+					shadowFactor = (0.5 - (std::asin(d)+d*std::sqrt(1.0-d*d))/M_PI);
+				}
 			}
 		}
 	}
@@ -3543,23 +3563,20 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 			GL(moonShaderProgram->setUniformValue(moonShaderVars.earthShadow, 3));
 			// Ad-hoc visibility improvement during lunar eclipses:
 			// During partial umbra phase, make moon brighter so that the bright limb and umbra border has more visibility.
-			// When the moon is about half in umbra (geoc.elong 179.4), we start to raise its brightness.
+			// When the moon is half in umbra, we start to raise its brightness.
 			GLfloat push=1.0f;
-			const double od=180.-getElongation(ssm->getEarth()->getEclipticPos()) * (180.0/M_PI);
+			const double od=180.-getElongation(ssm->getEarth()->getEclipticPos()) * (180.0/M_PI); // opposition distance [degrees]
 
 			// Compute umbra radius at lunar distance.
-			const double Delta=ssm->getEarth()->getHeliocentricEclipticPos().length(); // Earth distance [AU]
 			const double Lambda=getEclipticPos().length();                             // Lunar distance [AU]
-			static const double sun2earth=ssm->getSun()->getEquatorialRadius() / ssm->getEarth()->getEquatorialRadius();
-			const double delta=Delta/(sun2earth-1.); // length of earth umbra [AU]
-			const double rho=ssm->getEarth()->getEquatorialRadius()*(delta-Lambda)/delta; // radius of earth shadow at lunar distance [AU]
-			const double sigma=atan(rho/Lambda) * M_180_PI; // geocentric angle of earth shadow at lunar distance [degrees]
-			const double tau=atan(getEquatorialRadius()/Lambda) * M_180_PI; // geocentric angle of Lunar diameter
+			const double rho=ssm->getEarthShadowRadiiAtLunarDistance().first;
+			const double sigma=atan(rho/Lambda) * M_180_PI; // geocentric angle of earth shadow radius at lunar distance [degrees]
+			const double tau=atan(getEquatorialRadius()/Lambda) * M_180_PI; // geocentric angle of Lunar radius [degrees]
 
 			if (od<sigma-tau)     // if the Moon is fully immersed in the shadow
-				push=5.0f;
+				push=4.0f;
 			else if (od<sigma)    // If the Moon is half immersed, start pushing with a strong power function that make it apparent only in the last few percents.
-				push+=4.f*(1.f-pow(static_cast<float>((od-sigma+tau)/tau), 1.f/6.f));
+				push+=3.f*(1.f-pow(static_cast<float>((od-sigma+tau)/tau), 1.f/6.f));
 
 			GL(moonShaderProgram->setUniformValue(moonShaderVars.eclipsePush, push)); // constant for now...
 		}
