@@ -3545,12 +3545,21 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 			// During partial umbra phase, make moon brighter so that the bright limb and umbra border has more visibility.
 			// When the moon is about half in umbra (geoc.elong 179.4), we start to raise its brightness.
 			GLfloat push=1.0f;
-			const double elong=getElongation(ssm->getEarth()->getEclipticPos()) * (180.0/M_PI);
-			const float x=static_cast<float>(elong) - 179.5f;
-			if (x>0.0f)
-				push+=20.0f * x;
-			if (x>0.1f)
-				push=3.0f;
+			const double od=180.-getElongation(ssm->getEarth()->getEclipticPos()) * (180.0/M_PI);
+
+			// Compute umbra radius at lunar distance.
+			const double Delta=ssm->getEarth()->getHeliocentricEclipticPos().length(); // Earth distance [AU]
+			const double Lambda=getEclipticPos().length();                             // Lunar distance [AU]
+			static const double sun2earth=ssm->getSun()->getEquatorialRadius() / ssm->getEarth()->getEquatorialRadius();
+			const double delta=Delta/(sun2earth-1.); // length of earth umbra [AU]
+			const double rho=ssm->getEarth()->getEquatorialRadius()*(delta-Lambda)/delta; // radius of earth shadow at lunar distance [AU]
+			const double sigma=atan(rho/Lambda) * M_180_PI; // geocentric angle of earth shadow at lunar distance [degrees]
+			const double tau=atan(getEquatorialRadius()/Lambda) * M_180_PI; // geocentric angle of Lunar diameter
+
+			if (od<sigma-tau)     // if the Moon is fully immersed in the shadow
+				push=5.0f;
+			else if (od<sigma)    // If the Moon is half immersed, start pushing with a strong power function that make it apparent only in the last few percents.
+				push+=4.f*(1.f-pow(static_cast<float>((od-sigma+tau)/tau), 1.f/6.f));
 
 			GL(moonShaderProgram->setUniformValue(moonShaderVars.eclipsePush, push)); // constant for now...
 		}
