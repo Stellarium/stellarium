@@ -2256,11 +2256,9 @@ float Planet::getVMagnitude(const StelCore* core) const
 						const float mag = static_cast<float>(-1.05 + d + phaseDeg*(0.078  - 0.00274*phaseDeg));
 						return shadowFactor<1.0 ? static_cast<float>(13.*(1.-shadowFactor)) + mag : mag;
 					}
+					if ((!fuzzyEquals(absoluteMagnitude,-99.f)) && (englishName!="Moon"))
+						return absoluteMagnitude+static_cast<float>(d);
 				}
-
-				if ((!fuzzyEquals(absoluteMagnitude,-99.f)) && (englishName!="Moon"))
-					return absoluteMagnitude+static_cast<float>(d);
-
 				break;
 			}
 
