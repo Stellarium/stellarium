@@ -23,10 +23,6 @@ IF(PYTHON_EXECUTABLE)
      SET_TARGET_PROPERTIES(RemoteControl-update-translationdata PROPERTIES FOLDER "plugins/RemoteControl/util")
 endif()
 
-SET(CMAKE_INSTALL_PREFIX $HDATALOC)
-INSTALL(FILES DESTINATION "modules/RemoteControl")
-
-
 ########### install files ###############
 # install webroot
 INSTALL(DIRECTORY ${REMOTECONTROL_WEBROOT_PATH} DESTINATION ${SDATALOC}/webroot FILES_MATCHING

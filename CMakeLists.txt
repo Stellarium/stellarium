@@ -171,13 +171,9 @@ IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
      SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
      # share data location:
      SET(SDATALOC "Resources")
-     # home data location:
-     SET(HDATALOC "$ENV{HOME}/Library/Application\ Support/${PROJECT_NAME}")
-ELSE()     
+ELSE()
      # share data location:
      SET(SDATALOC "share/${PACKAGE}")
-     # home data location:
-     SET(HDATALOC "$ENV{HOME}/.${PACKAGE}")
 ENDIF()
 
 IF(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_GNUCC)

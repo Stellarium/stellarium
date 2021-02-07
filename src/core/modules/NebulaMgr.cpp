@@ -1651,7 +1651,7 @@ void NebulaMgr::updateSkyCulture(const QString& skyCultureDir)
 {
 	QString namesFile = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/dso_names.fab");
 
-	for (const auto& n : dsoArray)
+	for (const auto& n : qAsConst(dsoArray))
 		n->removeAllNames();
 
 	if (namesFile.isEmpty())
