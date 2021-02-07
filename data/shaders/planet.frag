@@ -228,7 +228,7 @@ void main()
                 else if( d <= r - R ) // fully inside umbra
                 {
 #ifdef IS_MOON
-                    illumination = (d / (r - R)) * 0.6; // prepare texture coordinate. 0.6=umbra edge.
+                    illumination = (d / (r - R)) * 0.594; // prepare texture coordinate. 0.6=umbra edge. Smaller number->larger shadow.
 #else
                     illumination = 0.0;
 #endif
@@ -242,7 +242,7 @@ void main()
                 {
 #ifdef IS_MOON
                     //illumination = ((d - abs(R-r)) / (R + r - abs(R-r))) * 0.4 + 0.6;
-                    illumination = ((d - r + R) / (2.0 * R )) * 0.4 + 0.6;
+                    illumination = ((d - r + R) / (2.0 * R )) * 0.406 + 0.594;
 #else
                     mediump float x = (R * R + d * d - r * r) / (2.0 * d);
                     mediump float alpha = acos(x / R);
