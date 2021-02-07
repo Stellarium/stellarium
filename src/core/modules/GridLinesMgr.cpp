@@ -139,7 +139,9 @@ public:
 		CIRCUMPOLARCIRCLE_N,
 		CIRCUMPOLARCIRCLE_S,
 		INVARIABLEPLANE,
-		SOLAR_EQUATOR
+		SOLAR_EQUATOR,
+		EARTH_UMBRA,
+		EARTH_PENUMBRA
 	};
 	// Create and precompute positions of a SkyGrid
 	SkyLine(SKY_LINE_TYPE _line_type = EQUATOR_J2000);
@@ -163,8 +165,9 @@ public:
 	int getPartThickness() const {return partThickness;}
 	//! Re-translates the label and sets the frameType. Must be called in the constructor!
 	void updateLabel();
+	static void setSolarSystem(SolarSystem* ss);
 private:
-	QSharedPointer<Planet> earth, sun;
+	static QSharedPointer<Planet> earth, sun, moon;
 	SKY_LINE_TYPE line_type;
 	Vec3f color;
 	StelCore::FrameType frameType;
@@ -628,19 +631,17 @@ SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : line_type(_line_type), color(0.f, 0
 {
 	// Font size is 14
 	font.setPixelSize(StelApp::getInstance().getScreenFontSize()+1);
-
-	earth = GETSTELMODULE(SolarSystem)->getEarth();
-	sun = GETSTELMODULE(SolarSystem)->getSun();
-
 	updateLabel();
 }
 
 // Contains ecliptic rotations from -13000, -12900, ... , +13000
 QMap<int, double> SkyLine::precessionPartitions;
+QSharedPointer<Planet> SkyLine::earth, SkyLine::sun, SkyLine::moon;
 
 //! call once before creating the first line.
 void SkyLine::init()
 {
+	setSolarSystem(GETSTELMODULE(SolarSystem));
 	// The years for the precession circles start in -13000, this is 15000 before J2000.
 	for (int y=-13000; y<=17000; y+=100) // Range of DE431. Maybe extend to -50000..+50000?
 	{
@@ -649,6 +650,13 @@ void SkyLine::init()
 		getPrecessionAnglesVondrak(jdY0, &epsilonA, &chiA, &omegaA, &psiA);
 		precessionPartitions.insert(y, psiA); // Store only the value of shift along the ecliptic.
 	}
+}
+
+void SkyLine::setSolarSystem(SolarSystem* ss)
+{
+	earth = ss->getEarth();
+	sun   = ss->getSun();
+	moon  = ss->getMoon();
 }
 
 SkyLine::~SkyLine()
@@ -727,6 +735,14 @@ void SkyLine::updateLabel()
 			frameType = StelCore::FrameEquinoxEqu;
 			label = q_("Circumpolar Circle");
 			break;
+		case EARTH_UMBRA:
+			frameType = StelCore::FrameObservercentricEclipticJ2000;
+			label = q_("Umbra");
+			break;
+		case EARTH_PENUMBRA:
+			frameType = StelCore::FrameObservercentricEclipticJ2000;
+			label = q_("Penumbra");
+			break;
 		case INVARIABLEPLANE:
 			frameType = StelCore::FrameJ2000;
 			label = q_("Invariable Plane");
@@ -765,7 +781,7 @@ void SkyLine::draw(StelCore *core) const
 	// Draw the line
 
 	// Precession and Circumpolar circles are Small Circles, all others are Great Circles.
-	if (line_type==PRECESSIONCIRCLE_N || line_type==PRECESSIONCIRCLE_S || line_type==CIRCUMPOLARCIRCLE_N || line_type==CIRCUMPOLARCIRCLE_S)
+	if (QList<SKY_LINE_TYPE>({PRECESSIONCIRCLE_N, PRECESSIONCIRCLE_S, CIRCUMPOLARCIRCLE_N, CIRCUMPOLARCIRCLE_S, EARTH_UMBRA, EARTH_PENUMBRA}).contains(line_type))
 	{
 		// partitions for precession. (mark millennia!)
 		double lat;
@@ -773,7 +789,7 @@ void SkyLine::draw(StelCore *core) const
 		{
 			lat=(line_type==PRECESSIONCIRCLE_S ? -1.0 : 1.0) * (M_PI_2-getPrecessionAngleVondrakCurrentEpsilonA());
 		}
-		else // circumpolar:
+		else if (line_type==CIRCUMPOLARCIRCLE_N || line_type==CIRCUMPOLARCIRCLE_S)
 		{
 			const double obsLatRad=core->getCurrentLocation().latitude * (M_PI_180);
 			if (obsLatRad == 0.)
@@ -788,6 +804,26 @@ void SkyLine::draw(StelCore *core) const
 			else // southern circle
 				lat=(obsLatRad>0 ? +1.0 : -1.0) * obsLatRad - (M_PI_2);
 		}
+		else // umbra/penumbra
+		{
+			QPair<double, double> radii=GETSTELMODULE(SolarSystem)->getEarthShadowRadiiAtLunarDistance();
+			const double size=(line_type==EARTH_UMBRA ? radii.first : radii.second);
+			const double dist=moon->getEclipticPos().length();                             // Lunar distance [AU]
+			const double u=atan(size/dist); // geocentric angle of earth umbra/penumbra radius at lunar distance [degrees]
+			lat=M_PI_2-u;
+
+		}
+		if ((line_type==EARTH_UMBRA) || (line_type==EARTH_PENUMBRA))
+		{
+			// Simple solution, works for geocentric observer only.
+			Vec3d dir=earth->getEclipticPos();
+			dir.normalize(); // avoid drawing bugs
+			const SphericalCap declinationCap(dir, std::sin(lat));
+			sPainter.drawSphericalRegion(&declinationCap, StelPainter::SphericalPolygonDrawModeBoundary, Q_NULLPTR, false);
+			// TODO: Manually construct a vertex list and draw this.
+		}
+		else
+		{
 		SphericalCap declinationCap(Vec3d(0,0,1), std::sin(lat));
 		const Vec3d rotCenter(0,0,declinationCap.d);
 
@@ -945,7 +981,7 @@ void SkyLine::draw(StelCore *core) const
 
 			sPainter.setLineWidth(lineThickness);
 		}
-
+		}
 		sPainter.setLineWidth(oldLineWidth); // restore line thickness
 		sPainter.setLineSmooth(false);
 		sPainter.setBlending(false);
@@ -999,7 +1035,7 @@ void SkyLine::draw(StelCore *core) const
 	}
 	else if (line_type==SOLAR_EQUATOR)
 	{
-		// Split out the const part of rotaiton: rotate along ICRS equator to ascending node
+		// Split out the const part of rotation: rotate along ICRS equator to ascending node
 		static const Mat4d solarFrame = Mat4d::zrotation((286.13+90)*M_PI_180) * Mat4d::xrotation((90-63.87)*M_PI_180);
 		// Axis rotation. N.B. By this formulation, we ignore any light time correction.
 		Mat4d solarRot=solarFrame * Mat4d::zrotation((sun->getSiderealTime(core->getJD(), core->getJDE())*M_PI_180));
@@ -1008,7 +1044,7 @@ void SkyLine::draw(StelCore *core) const
 		fpt=solarRot*fpt;
 	}
 
-	if (showPartitions && (line_type!=INVARIABLEPLANE))
+	if (showPartitions && !(QList<SKY_LINE_TYPE>({INVARIABLEPLANE, EARTH_UMBRA, EARTH_PENUMBRA}).contains(line_type)))
 	{
 		const float lineThickness=sPainter.getLineWidth();
 		sPainter.setLineWidth(partThickness);
@@ -1375,7 +1411,7 @@ void SkyPoint::updateLabel()
 		}
 		case ANTISOLAR:
 		{
-			frameType = StelCore::FrameObservercentricEclipticOfDate;
+			frameType = StelCore::FrameObservercentricEclipticJ2000;
 			// TRANSLATORS: Antisolar Point
 			northernLabel = q_("ASP");
 			break;
@@ -1488,16 +1524,7 @@ void SkyPoint::draw(StelCore *core) const
 		case ANTISOLAR:
 		{
 			// Antisolar Point
-			Vec3d coord;
-			double eclJDE = earth->getRotObliquity(core->getJDE());
-			double ra_equ, dec_equ, lambdaJDE, betaJDE;
-
-			StelUtils::rectToSphe(&ra_equ,&dec_equ, sun->getEquinoxEquatorialPos(core));
-			StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaJDE, &betaJDE);
-			if (lambdaJDE<0) lambdaJDE+=2.0*M_PI;
-
-			StelUtils::spheToRect(lambdaJDE + M_PI, 0., coord);
-
+			Vec3d coord=core->getCurrentObserver()->getHomePlanet()->getHeliocentricEclipticPos();
 			sPainter.drawSprite2dMode(coord, 5.f);
 			sPainter.drawText(coord, northernLabel, 0, shift, shift, false);
 			break;
@@ -1556,6 +1583,8 @@ GridLinesMgr::GridLinesMgr()
 	colureLine_2 = new SkyLine(SkyLine::COLURE_2);
 	circumpolarCircleN = new SkyLine(SkyLine::CIRCUMPOLARCIRCLE_N);
 	circumpolarCircleS = new SkyLine(SkyLine::CIRCUMPOLARCIRCLE_S);
+	umbraCircle = new SkyLine(SkyLine::EARTH_UMBRA);
+	penumbraCircle = new SkyLine(SkyLine::EARTH_PENUMBRA);
 	celestialJ2000Poles = new SkyPoint(SkyPoint::CELESTIALPOLES_J2000);
 	celestialPoles = new SkyPoint(SkyPoint::CELESTIALPOLES_OF_DATE);
 	zenithNadir = new SkyPoint(SkyPoint::ZENITH_NADIR);
@@ -1572,7 +1601,7 @@ GridLinesMgr::GridLinesMgr()
 	apexPoints = new SkyPoint(SkyPoint::APEX);	
 
 	earth = GETSTELMODULE(SolarSystem)->getEarth();
-	connect(GETSTELMODULE(SolarSystem), SIGNAL(solarSystemDataReloaded()), this, SLOT(connectEarthFromSolarSystem()));
+	connect(GETSTELMODULE(SolarSystem), SIGNAL(solarSystemDataReloaded()), this, SLOT(connectSolarSystem()));
 }
 
 GridLinesMgr::~GridLinesMgr()
@@ -1603,6 +1632,8 @@ GridLinesMgr::~GridLinesMgr()
 	delete colureLine_2;
 	delete circumpolarCircleN;
 	delete circumpolarCircleS;
+	delete umbraCircle;
+	delete penumbraCircle;
 	delete celestialJ2000Poles;
 	delete celestialPoles;
 	delete zenithNadir;
@@ -1693,6 +1724,8 @@ void GridLinesMgr::init()
 	setFlagColureParts(conf->value("viewing/flag_colure_parts").toBool());
 	setFlagColureLabeled(conf->value("viewing/flag_colure_labels").toBool());
 	setFlagCircumpolarCircles(conf->value("viewing/flag_circumpolar_circles").toBool());
+	setFlagUmbraCircle(conf->value("viewing/flag_umbra_circle").toBool());
+	setFlagPenumbraCircle(conf->value("viewing/flag_penumbra_circle").toBool());
 	setFlagCelestialJ2000Poles(conf->value("viewing/flag_celestial_J2000_poles").toBool());
 	setFlagCelestialPoles(conf->value("viewing/flag_celestial_poles").toBool());
 	setFlagZenithNadir(conf->value("viewing/flag_zenith_nadir").toBool());
@@ -1737,6 +1770,8 @@ void GridLinesMgr::init()
 	setColorCurrentVerticalLine(     Vec3f(conf->value("color/current_vertical_color", defaultColor).toString()));
 	setColorColureLines(             Vec3f(conf->value("color/colures_color", defaultColor).toString()));
 	setColorCircumpolarCircles(      Vec3f(conf->value("color/circumpolar_circles_color", defaultColor).toString()));
+	setColorUmbraCircle(             Vec3f(conf->value("color/umbra_circle_color", defaultColor).toString()));
+	setColorPenumbraCircle(          Vec3f(conf->value("color/penumbra_circle_color", defaultColor).toString()));
 	setColorCelestialJ2000Poles(     Vec3f(conf->value("color/celestial_J2000_poles_color", defaultColor).toString()));
 	setColorCelestialPoles(          Vec3f(conf->value("color/celestial_poles_color", defaultColor).toString()));
 	setColorZenithNadir(             Vec3f(conf->value("color/zenith_nadir_color", defaultColor).toString()));
@@ -1781,6 +1816,8 @@ void GridLinesMgr::init()
 	addAction("actionShow_Current_Vertical_Line",      displayGroup, N_("Current Vertical"), "currentVerticalLineDisplayed");
 	addAction("actionShow_Colure_Lines",               displayGroup, N_("Colure Lines"), "colureLinesDisplayed");
 	addAction("actionShow_Circumpolar_Circles",        displayGroup, N_("Circumpolar Circles"), "circumpolarCirclesDisplayed");
+	addAction("actionShow_Umbra_Circle",	           displayGroup, N_("Umbra Circle"), "umbraCircleDisplayed");
+	addAction("actionShow_Penumbra_Circle",	           displayGroup, N_("Penumbra Circle"), "penumbraCircleDisplayed");
 	addAction("actionShow_Celestial_J2000_Poles",      displayGroup, N_("Celestial J2000 poles"), "celestialJ2000PolesDisplayed");
 	addAction("actionShow_Celestial_Poles",            displayGroup, N_("Celestial poles"), "celestialPolesDisplayed");
 	addAction("actionShow_Zenith_Nadir",               displayGroup, N_("Zenith and nadir"), "zenithNadirDisplayed");
@@ -1797,9 +1834,11 @@ void GridLinesMgr::init()
 	addAction("actionShow_Apex_Points",                displayGroup, N_("Apex points"), "apexPointsDisplayed");
 }
 
-void GridLinesMgr::connectEarthFromSolarSystem()
+void GridLinesMgr::connectSolarSystem()
 {
-	earth = GETSTELMODULE(SolarSystem)->getEarth();
+	SolarSystem *ss=GETSTELMODULE(SolarSystem);
+	earth = ss->getEarth();
+	SkyLine::setSolarSystem(ss);
 }
 
 void GridLinesMgr::update(double deltaTime)
@@ -1831,6 +1870,8 @@ void GridLinesMgr::update(double deltaTime)
 	colureLine_2->update(deltaTime);
 	circumpolarCircleN->update(deltaTime);
 	circumpolarCircleS->update(deltaTime);
+	umbraCircle->update(deltaTime);
+	penumbraCircle->update(deltaTime);
 	celestialJ2000Poles->update(deltaTime);
 	celestialPoles->update(deltaTime);
 	zenithNadir->update(deltaTime);
@@ -1864,6 +1905,8 @@ void GridLinesMgr::draw(StelCore* core)
 	// Of course, orbital plane of respective planet would be better, but is not implemented.
 	if (core->getCurrentPlanet()==earth)
 	{
+		penumbraCircle->draw(core);
+		umbraCircle->draw(core);
 		eclGrid->draw(core);
 		eclipticLine->draw(core);
 		precessionCircleN->draw(core);
@@ -1874,8 +1917,6 @@ void GridLinesMgr::draw(StelCore* core)
 		equinoxPoints->draw(core);
 		solsticePoints->draw(core);
 		longitudeLine->draw(core);
-		// Antisolar point are calculated in Ecliptic (on date) frame (Earth only)
-		antisolarPoint->draw(core);
 	}
 
 	// Lines after grids, to be able to e.g. draw equators in different color!
@@ -1902,6 +1943,7 @@ void GridLinesMgr::draw(StelCore* core)
 	equinoxJ2000Points->draw(core);
 	solsticeJ2000Points->draw(core);	
 	apexPoints->draw(core);	
+	antisolarPoint->draw(core);
 }
 
 void GridLinesMgr::updateLabels()
@@ -1925,6 +1967,8 @@ void GridLinesMgr::updateLabels()
 	colureLine_2->updateLabel();
 	circumpolarCircleN->updateLabel();
 	circumpolarCircleS->updateLabel();
+	umbraCircle->updateLabel();
+	penumbraCircle->updateLabel();
 	celestialJ2000Poles->updateLabel();
 	celestialPoles->updateLabel();
 	zenithNadir->updateLabel();
@@ -1985,6 +2029,8 @@ void GridLinesMgr::setFlagAllLines(const bool displayed)
 	setFlagPrimeVerticalLine(displayed);
 	setFlagCurrentVerticalLine(displayed);
 	setFlagCircumpolarCircles(displayed);
+	setFlagUmbraCircle(displayed);
+	setFlagPenumbraCircle(displayed);
 	setFlagGalacticEquatorLine(displayed);
 	setFlagSupergalacticEquatorLine(displayed);
 }
@@ -3029,6 +3075,60 @@ void GridLinesMgr::setColorCircumpolarCircles(const Vec3f& newColor)
 	}
 }
 
+//! Set flag for displaying Umbra Circle
+void GridLinesMgr::setFlagUmbraCircle(const bool displayed)
+{
+	if(displayed != umbraCircle->isDisplayed())
+	{
+		umbraCircle->setDisplayed(displayed);
+		emit umbraCircleDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Umbra Circle
+bool GridLinesMgr::getFlagUmbraCircle() const
+{
+	return umbraCircle->isDisplayed();
+}
+Vec3f GridLinesMgr::getColorUmbraCircle() const
+{
+	return umbraCircle->getColor();
+}
+void GridLinesMgr::setColorUmbraCircle(const Vec3f& newColor)
+{
+	if(newColor != umbraCircle->getColor())
+	{
+		umbraCircle->setColor(newColor);
+		emit umbraCircleColorChanged(newColor);
+	}
+}
+
+//! Set flag for displaying Penumbra Circle
+void GridLinesMgr::setFlagPenumbraCircle(const bool displayed)
+{
+	if(displayed != penumbraCircle->isDisplayed())
+	{
+		penumbraCircle->setDisplayed(displayed);
+		emit penumbraCircleDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Penumbra Circle
+bool GridLinesMgr::getFlagPenumbraCircle() const
+{
+	return penumbraCircle->isDisplayed();
+}
+Vec3f GridLinesMgr::getColorPenumbraCircle() const
+{
+	return penumbraCircle->getColor();
+}
+void GridLinesMgr::setColorPenumbraCircle(const Vec3f& newColor)
+{
+	if(newColor != penumbraCircle->getColor())
+	{
+		penumbraCircle->setColor(newColor);
+		emit penumbraCircleColorChanged(newColor);
+	}
+}
+
 //! Set flag for displaying celestial poles of J2000
 void GridLinesMgr::setFlagCelestialJ2000Poles(const bool displayed)
 {
@@ -3441,6 +3541,8 @@ void GridLinesMgr::setLineThickness(const int thickness)
 		colureLine_2->setLineThickness(lineThickness);
 		circumpolarCircleN->setLineThickness(lineThickness);
 		circumpolarCircleS->setLineThickness(lineThickness);
+		umbraCircle->setLineThickness(lineThickness);
+		penumbraCircle->setLineThickness(lineThickness);
 
 		emit lineThicknessChanged(lineThickness);
 	}
@@ -3519,6 +3621,8 @@ void GridLinesMgr::setFontSizeFromApp(int size)
 	colureLine_2->setFontSize(lineFontSize);
 	circumpolarCircleN->setFontSize(lineFontSize);
 	circumpolarCircleS->setFontSize(lineFontSize);
+	umbraCircle->setFontSize(lineFontSize);
+	penumbraCircle->setFontSize(lineFontSize);
 	celestialJ2000Poles->setFontSize(pointFontSize);
 	celestialPoles->setFontSize(pointFontSize);
 	zenithNadir->setFontSize(pointFontSize);

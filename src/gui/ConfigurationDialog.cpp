@@ -873,6 +873,8 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/flag_precession_parts",			propMgr->getStelPropertyValue("GridLinesMgr.precessionPartsDisplayed").toBool());
 	conf->setValue("viewing/flag_precession_labels",			propMgr->getStelPropertyValue("GridLinesMgr.precessionPartsLabeled").toBool());
 	conf->setValue("viewing/flag_circumpolar_circles",		propMgr->getStelPropertyValue("GridLinesMgr.circumpolarCirclesDisplayed").toBool());
+	conf->setValue("viewing/flag_umbra_circle",			propMgr->getStelPropertyValue("GridLinesMgr.umbraCircleDisplayed").toBool());
+	conf->setValue("viewing/flag_penumbra_circle",			propMgr->getStelPropertyValue("GridLinesMgr.penumbraCircleDisplayed").toBool());
 	conf->setValue("viewing/flag_supergalactic_grid",		propMgr->getStelPropertyValue("GridLinesMgr.supergalacticGridDisplayed").toBool());
 	conf->setValue("viewing/flag_supergalactic_equator_line",	propMgr->getStelPropertyValue("GridLinesMgr.supergalacticEquatorLineDisplayed").toBool());
 	conf->setValue("viewing/flag_supergalactic_equator_parts",	propMgr->getStelPropertyValue("GridLinesMgr.supergalacticEquatorPartsDisplayed").toBool());

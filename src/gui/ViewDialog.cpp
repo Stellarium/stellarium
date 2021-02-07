@@ -337,6 +337,8 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showCurrentVerticalLineCheckBox,		"actionShow_Current_Vertical_Line");
 	connectCheckBox(ui->showColuresLineCheckBox,			"actionShow_Colure_Lines");
 	connectCheckBox(ui->showCircumpolarCirclesCheckBox,		"actionShow_Circumpolar_Circles");
+	connectCheckBox(ui->showUmbraCheckBox,		                "actionShow_Umbra_Circle");
+	connectCheckBox(ui->showPenumbraCheckBox,		        "actionShow_Penumbra_Circle");
 	connectCheckBox(ui->showCelestialJ2000PolesCheckBox,		"actionShow_Celestial_J2000_Poles");
 	connectCheckBox(ui->showCelestialPolesCheckBox,			"actionShow_Celestial_Poles");
 	connectCheckBox(ui->showZenithNadirCheckBox,			"actionShow_Zenith_Nadir");
@@ -409,6 +411,8 @@ void ViewDialog::createDialogContent()
 	connectColorButton(ui->colorLongitudeLine,		"GridLinesMgr.longitudeLineColor",		"color/oc_longitude_color");
 	connectColorButton(ui->colorColuresLine,		"GridLinesMgr.colureLinesColor",		"color/colures_color");
 	connectColorButton(ui->colorCircumpolarCircles,		"GridLinesMgr.circumpolarCirclesColor",		"color/circumpolar_circles_color");
+	connectColorButton(ui->colorUmbraCircle,		"GridLinesMgr.umbraCircleColor",		"color/umbra_circle_color");
+	connectColorButton(ui->colorPenumbraCircle,		"GridLinesMgr.penumbraCircleColor",		"color/penumbra_circle_color");
 	connectColorButton(ui->colorPrecessionCircles,		"GridLinesMgr.precessionCirclesColor",		"color/precession_circles_color");
 	connectColorButton(ui->colorPrimeVerticalLine,		"GridLinesMgr.primeVerticalLineColor",		"color/prime_vertical_color");
 	connectColorButton(ui->colorCurrentVerticalLine,	"GridLinesMgr.currentVerticalLineColor",	"color/current_vertical_color");

@@ -319,7 +319,7 @@
       <item row="1" column="0">
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>3</number>
         </property>
         <widget class="QWidget" name="page_sky">
          <layout class="QGridLayout" name="gridLayout">
@@ -2774,13 +2774,6 @@
                  </property>
                 </widget>
                </item>
-               <item row="12" column="1">
-                <widget class="QCheckBox" name="showCompassMarksCheckBox">
-                 <property name="text">
-                  <string>Compass marks</string>
-                 </property>
-                </widget>
-               </item>
                <item row="9" column="0">
                 <widget class="QToolButton" name="colorSolsticeJ2000Points">
                  <property name="toolTip">
@@ -2948,16 +2941,6 @@
                  </property>
                 </widget>
                </item>
-               <item row="11" column="1">
-                <widget class="QCheckBox" name="showCardinalPointsCheckBox">
-                 <property name="toolTip">
-                  <string>Labels for the Cardinal and Ordinal directions.</string>
-                 </property>
-                 <property name="text">
-                  <string>Cardinal points</string>
-                 </property>
-                </widget>
-               </item>
                <item row="7" column="0">
                 <widget class="QToolButton" name="colorEquinoxJ2000Points">
                  <property name="toolTip">
@@ -2992,16 +2975,6 @@
                 <widget class="QToolButton" name="colorCelestialPoles">
                  <property name="toolTip">
                   <string>Color of celestial poles (of date)</string>
-                 </property>
-                 <property name="text">
-                  <string notr="true"/>
-                 </property>
-                </widget>
-               </item>
-               <item row="8" column="6">
-                <widget class="QToolButton" name="colorApexPoints">
-                 <property name="toolTip">
-                  <string>Color of Apex and Antapex points</string>
                  </property>
                  <property name="text">
                   <string notr="true"/>
@@ -3052,16 +3025,6 @@
                  </property>
                 </widget>
                </item>
-               <item row="9" column="6">
-                <widget class="QToolButton" name="colorCircumpolarCircles">
-                 <property name="toolTip">
-                  <string>Color of circumpolar circles</string>
-                 </property>
-                 <property name="text">
-                  <string notr="true"/>
-                 </property>
-                </widget>
-               </item>
                <item row="9" column="4">
                 <widget class="QCheckBox" name="meridianPartsCheckBox">
                  <property name="toolTip">
@@ -3109,16 +3072,6 @@
                  </property>
                  <property name="text">
                   <string>Supergalactic equator</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="9" column="8">
-                <widget class="QCheckBox" name="showCircumpolarCirclesCheckBox">
-                 <property name="toolTip">
-                  <string>These circles delimit stars which stay always above (respectively below) the mathematical horizon.</string>
-                 </property>
-                 <property name="text">
-                  <string>Circumpolar circles</string>
                  </property>
                 </widget>
                </item>
@@ -3232,13 +3185,6 @@
                  </property>
                 </widget>
                </item>
-               <item row="10" column="8">
-                <widget class="QCheckBox" name="showGalacticCenterCheckBox">
-                 <property name="text">
-                  <string>Galactic center and anticenter</string>
-                 </property>
-                </widget>
-               </item>
                <item row="11" column="3">
                 <widget class="QCheckBox" name="showColuresLineCheckBox">
                  <property name="toolTip">
@@ -3316,13 +3262,6 @@
                  </property>
                  <property name="text">
                   <string notr="true"/>
-                 </property>
-                </widget>
-               </item>
-               <item row="10" column="6">
-                <widget class="QToolButton" name="colorGalacticCenter">
-                 <property name="toolTip">
-                  <string>Color of galactic center and anticenter</string>
                  </property>
                 </widget>
                </item>
@@ -3496,13 +3435,6 @@
                  </property>
                 </widget>
                </item>
-               <item row="12" column="0">
-                <widget class="QToolButton" name="colorCompassMarks">
-                 <property name="toolTip">
-                  <string>Color of compass marks</string>
-                 </property>
-                </widget>
-               </item>
                <item row="9" column="5">
                 <widget class="QCheckBox" name="meridianLabelsCheckBox">
                  <property name="toolTip">
@@ -3530,16 +3462,6 @@
                  </property>
                  <property name="text">
                   <string/>
-                 </property>
-                </widget>
-               </item>
-               <item row="8" column="8">
-                <widget class="QCheckBox" name="showApexPointsCheckBox">
-                 <property name="toolTip">
-                  <string>Apex and Antapex indicate where the observer's planet is heading to or receding from, respectively.</string>
-                 </property>
-                 <property name="text">
-                  <string>Apex points</string>
                  </property>
                 </widget>
                </item>
@@ -3716,16 +3638,6 @@
                  </property>
                 </widget>
                </item>
-               <item row="11" column="0">
-                <widget class="QToolButton" name="colorCardinalPoints">
-                 <property name="toolTip">
-                  <string>Color of cardinal points</string>
-                 </property>
-                 <property name="text">
-                  <string notr="true"/>
-                 </property>
-                </widget>
-               </item>
                <item row="14" column="8">
                 <layout class="QHBoxLayout" name="horizontalLayout_24">
                  <item>
@@ -3897,7 +3809,27 @@
                  </property>
                 </widget>
                </item>
-               <item row="14" column="1">
+               <item row="11" column="8">
+                <widget class="QCheckBox" name="showInvariablePlaneCheckBox">
+                 <property name="toolTip">
+                  <string>A plane perpendicular to the angular momentum vector of the Solar system.</string>
+                 </property>
+                 <property name="text">
+                  <string>Invariable plane of the Solar system</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="11" column="6">
+                <widget class="QToolButton" name="colorInvariablePlane">
+                 <property name="toolTip">
+                  <string>Color of the invariable plane of the Solar system</string>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+               </item>
+               <item row="14" column="5">
                 <layout class="QHBoxLayout" name="horizontalLayout_23">
                  <item>
                   <widget class="QLabel" name="lineThicknessLabel">
@@ -3971,20 +3903,128 @@
                  </item>
                 </layout>
                </item>
-               <item row="11" column="8">
-                <widget class="QCheckBox" name="showInvariablePlaneCheckBox">
-                 <property name="toolTip">
-                  <string>A plane perpendicular to the angular momentum vector of the Solar system.</string>
-                 </property>
+               <item row="14" column="1">
+                <widget class="QCheckBox" name="showCompassMarksCheckBox">
                  <property name="text">
-                  <string>Invariable plane of the Solar system</string>
+                  <string>Compass marks</string>
                  </property>
                 </widget>
                </item>
-               <item row="11" column="6">
-                <widget class="QToolButton" name="colorInvariablePlane">
+               <item row="14" column="0">
+                <widget class="QToolButton" name="colorCompassMarks">
                  <property name="toolTip">
-                  <string>Color of the invariable plane of the Solar system</string>
+                  <string>Color of compass marks</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="13" column="1">
+                <widget class="QCheckBox" name="showCardinalPointsCheckBox">
+                 <property name="toolTip">
+                  <string>Labels for the Cardinal and Ordinal directions.</string>
+                 </property>
+                 <property name="text">
+                  <string>Cardinal points</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="13" column="0">
+                <widget class="QToolButton" name="colorCardinalPoints">
+                 <property name="toolTip">
+                  <string>Color of cardinal points</string>
+                 </property>
+                 <property name="text">
+                  <string notr="true"/>
+                 </property>
+                </widget>
+               </item>
+               <item row="11" column="1">
+                <widget class="QCheckBox" name="showApexPointsCheckBox">
+                 <property name="toolTip">
+                  <string>Apex and Antapex indicate where the observer's planet is heading to or receding from, respectively.</string>
+                 </property>
+                 <property name="text">
+                  <string>Apex points</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="11" column="0">
+                <widget class="QToolButton" name="colorApexPoints">
+                 <property name="toolTip">
+                  <string>Color of Apex and Antapex points</string>
+                 </property>
+                 <property name="text">
+                  <string notr="true"/>
+                 </property>
+                </widget>
+               </item>
+               <item row="12" column="1">
+                <widget class="QCheckBox" name="showGalacticCenterCheckBox">
+                 <property name="text">
+                  <string>Galactic center and anticenter</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="12" column="0">
+                <widget class="QToolButton" name="colorGalacticCenter">
+                 <property name="toolTip">
+                  <string>Color of galactic center and anticenter</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="10" column="6">
+                <widget class="QToolButton" name="colorCircumpolarCircles">
+                 <property name="toolTip">
+                  <string>Color of circumpolar circles</string>
+                 </property>
+                 <property name="text">
+                  <string notr="true"/>
+                 </property>
+                </widget>
+               </item>
+               <item row="10" column="8">
+                <widget class="QCheckBox" name="showCircumpolarCirclesCheckBox">
+                 <property name="toolTip">
+                  <string>These circles delimit stars which stay always above (respectively below) the mathematical horizon.</string>
+                 </property>
+                 <property name="text">
+                  <string>Circumpolar circles</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="8" column="8">
+                <widget class="QCheckBox" name="showUmbraCheckBox">
+                 <property name="toolTip">
+                  <string>This circle represents the size of Earth's central, deep shadow in the distance of the Moon.</string>
+                 </property>
+                 <property name="text">
+                  <string>Earth umbra</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="9" column="8">
+                <widget class="QCheckBox" name="showPenumbraCheckBox">
+                 <property name="toolTip">
+                  <string>This circle represents the outermost rim of Earth's shadow in the distance of the Moon.</string>
+                 </property>
+                 <property name="text">
+                  <string>Earth penumbra</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="8" column="6">
+                <widget class="QToolButton" name="colorUmbraCircle">
+                 <property name="toolTip">
+                  <string>Color of umbra circle</string>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+               </item>
+               <item row="9" column="6">
+                <widget class="QToolButton" name="colorPenumbraCircle">
+                 <property name="toolTip">
+                  <string>Color of penumbra circle</string>
                  </property>
                  <property name="text">
                   <string/>
