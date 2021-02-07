@@ -496,7 +496,10 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	// Debug help.
 	//oss << "Apparent Magnitude Algorithm: " << getApparentMagnitudeAlgorithmString() << " " << vMagAlgorithm << "<br>";
-
+	//Vec3d sunAberr=GETSTELMODULE(SolarSystem)->getLightTimeSunPosition()-GETSTELMODULE(SolarSystem)->getEarth()->eclipticPos;
+	//double lon, lat;
+	//StelUtils::rectToSphe(&lon, &lat, sunAberr);
+	//oss << "Sun (light time corrected) at &lambda;=" << StelUtils::radToDmsStr(StelUtils::fmodpos(lon, 2.*M_PI)) << " &beta;=" << StelUtils::radToDmsStr(lat) << "<br>";
 #ifndef NDEBUG
 	// This is mostly for debugging. Maybe also useful for letting people use our results to cross-check theirs, but we should not act as reference, currently...
 	// maybe separate this out into:
@@ -1196,68 +1199,55 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 			core1->setUseTopocentricCoordinates(false);
 			core1->update(0);
 
-			double ra_equ, dec_equ, raSun, deSun, raShadow, deShadow, raMoon, deMoon, raDiff;
-			StelUtils::rectToSphe(&ra_equ, &dec_equ, getEquinoxEquatorialPos(core1));
+			double raMoon, deMoon, raSun, deSun;
+			StelUtils::rectToSphe(&raMoon, &deMoon, getEquinoxEquatorialPos(core1));
 			StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core1));
 
-			// R.A. of Earth's shadow
-			raShadow = (raSun / M_PI_180)+180.;
-			if (raShadow < 0.) raShadow += 360.;
-			// Dec. of Earth's shadow
-			deShadow = -(deSun / M_PI_180);
-			// R.A. of the Moon
-			raMoon = (ra_equ / M_PI_180);
-			if (raMoon < 0.) raMoon += 360.;
-			// Dec. of the Moon
-			deMoon = (dec_equ / M_PI_180);
+			// R.A./Dec of Earth's shadow
+			const double raShadow = StelUtils::fmodpos(raSun + M_PI, 2.*M_PI);
+			const double deShadow = -(deSun);
+			const double raDiff = StelUtils::fmodpos(raMoon - raShadow, 2.*M_PI);
 
-			raDiff = raMoon - raShadow;
-			if (raDiff < 0.) raDiff += 360.;
-
-			if (raDiff < 3. || raDiff > 357.)
+			if (raDiff < 3.*M_PI_180 || raDiff > 357.*M_PI_180)
 			{
-				double sdistanceAu, mdistanceKm, mdistanceER, sHP, sSD, mHP, mSD;
-				sdistanceAu = ssystem->getSun()->getEquinoxEquatorialPos(core1).length();
-				mdistanceKm = getEquinoxEquatorialPos(core1).length() * AU;
-				// Moon's distance in Earth's radius
-				mdistanceER = mdistanceKm / 6378.1366;
+				const double sdistanceAu = ssystem->getSun()->getEquinoxEquatorialPos(core1).length();
+				// Moon's distance in Earth's radii
+				const double mdistanceER = getEquinoxEquatorialPos(core1).length() * AU / 6378.1366;
 
 				// Sun's horizontal parallax
-				sHP = 3600. * (asin(6378.1366 / (AU * sdistanceAu))) / M_PI_180;
+				const double sHP = 3600. * (asin(6378.1366 / (AU * sdistanceAu))) * M_180_PI;
 				// Sun's semi-diameter
-				sSD = 959.64 / sdistanceAu;
+				const double sSD = 959.64 / sdistanceAu;
 
 				// Moon's horizontal parallax
-				mHP = 3600. * asin(1. / mdistanceER) / M_PI_180;
+				const double mHP = 3600. * asin(1. / mdistanceER) * M_180_PI;
 				// Moon's semi-diameter
 				// 0.272488 is Moon/Earth's radius
-				mSD = 3600. * (asin(0.272488 / mdistanceER) / M_PI_180);
+				const double mSD = 3600. * (asin(0.272488 / mdistanceER) * M_180_PI);
 
 				// Besselian elements
-				// ref: Explanatory supplement to the astronomical ephemeris
-				// and the American ephemeris and nautical almanac (1961)
-				double p1, f1, f2, x, y, L1, L2, m, pMag, uMag;
+				// ref: Explanatory Supplement to the Astronomical Ephemeris
+				// and the American Ephemeris and Nautical Almanac (1961), Ch.9E
 
-				p1 = (1. + 1. / 85. - 1. / 594.) * mHP;
+				const double p1 = (1. + 1./85. - 1./594.) * mHP;
 				// Danjon's method - used in French almanac and NASA web site.
 				// It's the enlargment of Earth's shadows due to Earth's atmosphere
 				// and correction for Earth's oblateness at latitude 45 deg.
 				// ref: Five Millennium Catalog of Lunar Eclipses: -1999 to +3000 (Fred Espenak, NASA)
 				// Note: Astronomical Almanac using different value which create a bit larger shadows.
 
-				f1 = p1 + sSD + sHP; // radius of umbra at the distance of the Moon
-				f2 = p1 - sSD + sHP; // radius of penumbra at the distance of the Moon
+				const double f1 = p1 + sSD + sHP; // radius of penumbra at the distance of the Moon
+				const double f2 = p1 - sSD + sHP; // radius of umbra at the distance of the Moon
 
-				x = cos(deMoon * M_PI_180) * sin((raMoon - raShadow) * M_PI_180);
-				x = 3600. * (asin(x)) / M_PI_180;
-				y = cos(deShadow * M_PI_180) * sin(deMoon * M_PI_180);
-				y = y - sin(deShadow * M_PI_180) * cos(deMoon * M_PI_180) * cos((raMoon - raShadow) * M_PI_180);
-				y = 3600. * (asin(y)) / M_PI_180;
-				L1 = f1 + mSD; // distance between center of the Moon and shadow at beginning and end of penumbral eclipse
-				L2 = f2 + mSD; // distance between center of the Moon and shadow at beginning and end of partial eclipse
-				m = sqrt(x * x + y * y);
-				pMag = (L1 - m) / (2. * mSD); // penumbral magnitude
-				uMag = (L2 - m) / (2. * mSD); // umbral magnitude
+				double x = cos(deMoon) * sin(raDiff);
+				x *= 3600. * M_180_PI;
+				double y = cos(deShadow) * sin(deMoon) - sin(deShadow) * cos(deMoon) * cos(raDiff);
+				y *= 3600. * M_180_PI;
+				const double m = sqrt(x * x + y * y); // distance between lunar centre and shadow centre
+				const double L1 = f1 + mSD; // distance between center of the Moon and shadow at beginning and end of penumbral eclipse
+				const double L2 = f2 + mSD; // distance between center of the Moon and shadow at beginning and end of partial eclipse
+				const double pMag = (L1 - m) / (2. * mSD); // penumbral magnitude
+				const double uMag = (L2 - m) / (2. * mSD); // umbral magnitude
 
 				if (pMag > 1.e-6)
 				{

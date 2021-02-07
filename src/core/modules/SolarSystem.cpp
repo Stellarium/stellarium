@@ -3052,6 +3052,8 @@ QPair<double, PlanetP> SolarSystem::getEclipseFactor(const StelCore* core) const
 //! Retrieve Radius of Umbra and Penumbra at the distance of the Moon. May be useful for related tasks.
 QPair<double,double> SolarSystem::getEarthShadowRadiiAtLunarDistance() const
 {
+	static const double danjonScale=1+1./85.-1./594.; // shadow magnification factor (see Espenak 5000 years Canon)
+	// Note: The application of this shadow enlargement is not according to the books, but looks close enough for now.
 	static const double sun2earth=sun->getEquatorialRadius() / earth->getEquatorialRadius();
 	PlanetP sun=getSun();
 	PlanetP moon=getMoon();
@@ -3066,7 +3068,7 @@ QPair<double,double> SolarSystem::getEarthShadowRadiiAtLunarDistance() const
 	// Penumbra:
 	const double theta=Delta/(sun2earth + 1.); // distance between earth and point between sun and earth where penumbral border rays intersect
 	const double nu=earth->getEquatorialRadius()*(theta+Lambda)/theta; // radius of penumbra at Lunar distance [AU]
-	return QPair<double,double>(rho, nu);
+	return QPair<double,double>(rho*danjonScale, nu*danjonScale);
 }
 
 bool SolarSystem::removeMinorPlanet(QString name)
