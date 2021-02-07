@@ -736,11 +736,11 @@ void SkyLine::updateLabel()
 			label = q_("Circumpolar Circle");
 			break;
 		case EARTH_UMBRA:
-			frameType = StelCore::FrameObservercentricEclipticJ2000;
+			frameType = StelCore::FrameHeliocentricEclipticJ2000;
 			label = q_("Umbra");
 			break;
 		case EARTH_PENUMBRA:
-			frameType = StelCore::FrameObservercentricEclipticJ2000;
+			frameType = StelCore::FrameHeliocentricEclipticJ2000;
 			label = q_("Penumbra");
 			break;
 		case INVARIABLEPLANE:
@@ -784,7 +784,7 @@ void SkyLine::draw(StelCore *core) const
 	if (QList<SKY_LINE_TYPE>({PRECESSIONCIRCLE_N, PRECESSIONCIRCLE_S, CIRCUMPOLARCIRCLE_N, CIRCUMPOLARCIRCLE_S, EARTH_UMBRA, EARTH_PENUMBRA}).contains(line_type))
 	{
 		// partitions for precession. (mark millennia!)
-		double lat;
+		double lat=0.;
 		if (line_type==PRECESSIONCIRCLE_N || line_type==PRECESSIONCIRCLE_S)
 		{
 			lat=(line_type==PRECESSIONCIRCLE_S ? -1.0 : 1.0) * (M_PI_2-getPrecessionAngleVondrakCurrentEpsilonA());
@@ -804,183 +804,184 @@ void SkyLine::draw(StelCore *core) const
 			else // southern circle
 				lat=(obsLatRad>0 ? +1.0 : -1.0) * obsLatRad - (M_PI_2);
 		}
-		else // umbra/penumbra
-		{
-			QPair<double, double> radii=GETSTELMODULE(SolarSystem)->getEarthShadowRadiiAtLunarDistance();
-			const double size=(line_type==EARTH_UMBRA ? radii.first : radii.second);
-			const double dist=moon->getEclipticPos().length();                             // Lunar distance [AU]
-			const double u=atan(size/dist); // geocentric angle of earth umbra/penumbra radius at lunar distance [degrees]
-			lat=M_PI_2-u;
 
-		}
 		if ((line_type==EARTH_UMBRA) || (line_type==EARTH_PENUMBRA))
 		{
-			// Simple solution, works for geocentric observer only.
-			Vec3d dir=earth->getEclipticPos();
-			dir.normalize(); // avoid drawing bugs
-			const SphericalCap declinationCap(dir, std::sin(lat));
-			sPainter.drawSphericalRegion(&declinationCap, StelPainter::SphericalPolygonDrawModeBoundary, Q_NULLPTR, false);
-			// TODO: Manually construct a vertex list and draw this.
-		}
-		else
-		{
-		SphericalCap declinationCap(Vec3d(0,0,1), std::sin(lat));
-		const Vec3d rotCenter(0,0,declinationCap.d);
-
-		Vec3d p1, p2;
-		if (!SphericalCap::intersectionPoints(viewPortSphericalCap, declinationCap, p1, p2))
-		{
-			if ((viewPortSphericalCap.d<declinationCap.d && viewPortSphericalCap.contains(declinationCap.n))
-				|| (viewPortSphericalCap.d<-declinationCap.d && viewPortSphericalCap.contains(-declinationCap.n)))
+			const Vec3d pos=earth->getEclipticPos();
+			double lambda, beta;
+			StelUtils::rectToSphe(&lambda, &beta, pos);
+			const QPair<double, double> radii=GETSTELMODULE(SolarSystem)->getEarthShadowRadiiAtLunarDistance();
+			const double radius=(line_type==EARTH_UMBRA ? radii.first : radii.second);
+			const double dist=moon->getEclipticPos().length();  // geocentric Lunar distance [AU]
+			const Mat4d rot=Mat4d::zrotation(lambda)*Mat4d::yrotation(-beta);
+			StelVertexArray circle(StelVertexArray::LineLoop);
+			for (int i=0; i<360; ++i)
 			{
-				// The line is fully included in the viewport, draw it in 3 sub-arcs to avoid length > 180.
-				Vec3d pt1;
-				Vec3d pt2;
-				Vec3d pt3;
-				const double lon1=0.0;
-				const double lon2=120.0*M_PI_180;
-				const double lon3=240.0*M_PI_180;
-				StelUtils::spheToRect(lon1, lat, pt1); pt1.normalize();
-				StelUtils::spheToRect(lon2, lat, pt2); pt2.normalize();
-				StelUtils::spheToRect(lon3, lat, pt3); pt3.normalize();
-
-				sPainter.drawSmallCircleArc(pt1, pt2, rotCenter, viewportEdgeIntersectCallback, &userData);
-				sPainter.drawSmallCircleArc(pt2, pt3, rotCenter, viewportEdgeIntersectCallback, &userData);
-				sPainter.drawSmallCircleArc(pt3, pt1, rotCenter, viewportEdgeIntersectCallback, &userData);
+				Vec3d point(dist, cos(i*M_PI_180)*radius, sin(i*M_PI_180)*radius); // disk towards First Point of Aries
+				rot.transfo(point);                                                // rotate towards earth position
+				circle.vertex.append(pos+point);                                   // attach to earth centre
 			}
+			sPainter.drawStelVertexArray(circle, false); // setting true does not paint for cylindrical&friends :-(
 		}
 		else
 		{
-			// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
-			Vec3d middlePoint = p1-rotCenter+p2-rotCenter;
-			middlePoint.normalize();
-			middlePoint*=(p1-rotCenter).length();
-			middlePoint+=rotCenter;
-			if (!viewPortSphericalCap.contains(middlePoint))
+			SphericalCap declinationCap(Vec3d(0,0,1), std::sin(lat));
+			const Vec3d rotCenter(0,0,declinationCap.d);
+
+			Vec3d p1, p2;
+			if (!SphericalCap::intersectionPoints(viewPortSphericalCap, declinationCap, p1, p2))
 			{
-				middlePoint-=rotCenter;
-				middlePoint*=-1.;
+				if ((viewPortSphericalCap.d<declinationCap.d && viewPortSphericalCap.contains(declinationCap.n))
+						|| (viewPortSphericalCap.d<-declinationCap.d && viewPortSphericalCap.contains(-declinationCap.n)))
+				{
+					// The line is fully included in the viewport, draw it in 3 sub-arcs to avoid length > 180.
+					Vec3d pt1;
+					Vec3d pt2;
+					Vec3d pt3;
+					const double lon1=0.0;
+					const double lon2=120.0*M_PI_180;
+					const double lon3=240.0*M_PI_180;
+					StelUtils::spheToRect(lon1, lat, pt1); pt1.normalize();
+					StelUtils::spheToRect(lon2, lat, pt2); pt2.normalize();
+					StelUtils::spheToRect(lon3, lat, pt3); pt3.normalize();
+
+					sPainter.drawSmallCircleArc(pt1, pt2, rotCenter, viewportEdgeIntersectCallback, &userData);
+					sPainter.drawSmallCircleArc(pt2, pt3, rotCenter, viewportEdgeIntersectCallback, &userData);
+					sPainter.drawSmallCircleArc(pt3, pt1, rotCenter, viewportEdgeIntersectCallback, &userData);
+				}
+			}
+			else
+			{
+				// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
+				Vec3d middlePoint = p1-rotCenter+p2-rotCenter;
+				middlePoint.normalize();
+				middlePoint*=(p1-rotCenter).length();
 				middlePoint+=rotCenter;
+				if (!viewPortSphericalCap.contains(middlePoint))
+				{
+					middlePoint-=rotCenter;
+					middlePoint*=-1.;
+					middlePoint+=rotCenter;
+				}
+
+				sPainter.drawSmallCircleArc(p1, middlePoint, rotCenter,viewportEdgeIntersectCallback, &userData);
+				sPainter.drawSmallCircleArc(p2, middlePoint, rotCenter, viewportEdgeIntersectCallback, &userData);
 			}
 
-			sPainter.drawSmallCircleArc(p1, middlePoint, rotCenter,viewportEdgeIntersectCallback, &userData);
-			sPainter.drawSmallCircleArc(p2, middlePoint, rotCenter, viewportEdgeIntersectCallback, &userData);
-		}
-
-		if (showPartitions && (line_type==PRECESSIONCIRCLE_N))
-		{
-			const float lineThickness=sPainter.getLineWidth();
-			sPainter.setLineWidth(partThickness);
-
-			// Find current value of node rotation.
-			double epsilonA, chiA, omegaA, psiA;
-			getPrecessionAnglesVondrak(core->getJDE(), &epsilonA, &chiA, &omegaA, &psiA);
-			// psiA is the current angle, counted from J2000. Other century years have been precomputed in precessionPartitions.
-			// We cannot simply sum up the rotations, but must find the century locations one-by-one.
-
-			Vec3d part0; // current pole point on the northern precession circle.
-			StelUtils::spheToRect(0., M_PI/2.-core->getCurrentPlanet().data()->getRotObliquity(core->getJDE()), part0);
-			Vec3d partAxis(0,1,0);
-			Vec3d partZAxis = Vec3d(0,0,1); // rotation axis for the year partitions
-			Vec3d part100=part0;  part100.transfo4d(Mat4d::rotation(partAxis, 0.10*M_PI/180)); // part1 should point to 0.05deg south of "equator"
-			Vec3d part500=part0;  part500.transfo4d(Mat4d::rotation(partAxis, 0.25*M_PI/180));
-			Vec3d part1000=part0; part1000.transfo4d(Mat4d::rotation(partAxis, 0.45*M_PI/180));
-			Vec3d part1000l=part0; part1000l.transfo4d(Mat4d::rotation(partAxis, 0.475*M_PI/180)); // label
-
-			Vec3d pt0, ptTgt;
-			for (int y=-13000; y<13000; y+=100)
+			if (showPartitions && (line_type==PRECESSIONCIRCLE_N))
 			{
-				const double tickAngle=M_PI_2+psiA-precessionPartitions.value(y, 0.);
-				pt0=part0; pt0.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
-				if (y%1000 == 0)
-				{
-					ptTgt=part1000; ptTgt.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
-					if (viewPortSphericalCap.contains(pt0) || viewPortSphericalCap.contains(ptTgt))
-						sPainter.drawGreatCircleArc(pt0, ptTgt, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
-					if (showLabel)
-					{
-						Vec3d ptTgtL=part1000l; ptTgtL.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
-						QString label(QString::number(y));
-						Vec3d screenPosTgt, screenPosTgtL;
-						prj->project(ptTgt, screenPosTgt);
-						prj->project(ptTgtL, screenPosTgtL);
-						double dx=screenPosTgtL[0]-screenPosTgt[0];
-						double dy=screenPosTgtL[1]-screenPosTgt[1];
-						float textAngle=static_cast<float>(atan2(dy,dx));
+				const float lineThickness=sPainter.getLineWidth();
+				sPainter.setLineWidth(partThickness);
 
-						const float shiftx = 2.f;
-						const float shifty = - static_cast<float>(sPainter.getFontMetrics().height()) / 4.f;
-						sPainter.drawText(ptTgt, label, textAngle*M_180_PIf, shiftx, shifty, true);
+				// Find current value of node rotation.
+				double epsilonA, chiA, omegaA, psiA;
+				getPrecessionAnglesVondrak(core->getJDE(), &epsilonA, &chiA, &omegaA, &psiA);
+				// psiA is the current angle, counted from J2000. Other century years have been precomputed in precessionPartitions.
+				// We cannot simply sum up the rotations, but must find the century locations one-by-one.
+
+				Vec3d part0; // current pole point on the northern precession circle.
+				StelUtils::spheToRect(0., M_PI/2.-core->getCurrentPlanet().data()->getRotObliquity(core->getJDE()), part0);
+				Vec3d partAxis(0,1,0);
+				Vec3d partZAxis = Vec3d(0,0,1); // rotation axis for the year partitions
+				Vec3d part100=part0;  part100.transfo4d(Mat4d::rotation(partAxis, 0.10*M_PI/180)); // part1 should point to 0.05deg south of "equator"
+				Vec3d part500=part0;  part500.transfo4d(Mat4d::rotation(partAxis, 0.25*M_PI/180));
+				Vec3d part1000=part0; part1000.transfo4d(Mat4d::rotation(partAxis, 0.45*M_PI/180));
+				Vec3d part1000l=part0; part1000l.transfo4d(Mat4d::rotation(partAxis, 0.475*M_PI/180)); // label
+
+				Vec3d pt0, ptTgt;
+				for (int y=-13000; y<13000; y+=100)
+				{
+					const double tickAngle=M_PI_2+psiA-precessionPartitions.value(y, 0.);
+					pt0=part0; pt0.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
+					if (y%1000 == 0)
+					{
+						ptTgt=part1000; ptTgt.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
+						if (viewPortSphericalCap.contains(pt0) || viewPortSphericalCap.contains(ptTgt))
+							sPainter.drawGreatCircleArc(pt0, ptTgt, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+						if (showLabel)
+						{
+							Vec3d ptTgtL=part1000l; ptTgtL.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
+							QString label(QString::number(y));
+							Vec3d screenPosTgt, screenPosTgtL;
+							prj->project(ptTgt, screenPosTgt);
+							prj->project(ptTgtL, screenPosTgtL);
+							double dx=screenPosTgtL[0]-screenPosTgt[0];
+							double dy=screenPosTgtL[1]-screenPosTgt[1];
+							float textAngle=static_cast<float>(atan2(dy,dx));
+
+							const float shiftx = 2.f;
+							const float shifty = - static_cast<float>(sPainter.getFontMetrics().height()) / 4.f;
+							sPainter.drawText(ptTgt, label, textAngle*M_180_PIf, shiftx, shifty, true);
+						}
+					}
+					else
+					{
+						ptTgt=(y%500 == 0 ? part500 : part100);
+						ptTgt.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
+						if (viewPortSphericalCap.contains(pt0) || viewPortSphericalCap.contains(ptTgt))
+							sPainter.drawGreatCircleArc(pt0, ptTgt, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
 					}
 				}
-				else
-				{
-					ptTgt=(y%500 == 0 ? part500 : part100);
-					ptTgt.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
-					if (viewPortSphericalCap.contains(pt0) || viewPortSphericalCap.contains(ptTgt))
-						sPainter.drawGreatCircleArc(pt0, ptTgt, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
-				}
+
+				sPainter.setLineWidth(lineThickness);
 			}
-
-			sPainter.setLineWidth(lineThickness);
-		}
-		if (showPartitions && (line_type==PRECESSIONCIRCLE_S))
-		{
-			const float lineThickness=sPainter.getLineWidth();
-			sPainter.setLineWidth(partThickness);
-
-			// Find current value of node rotation.
-			double epsilonA, chiA, omegaA, psiA;
-			getPrecessionAnglesVondrak(core->getJDE(), &epsilonA, &chiA, &omegaA, &psiA);
-			// psiA is the current angle, counted from J2000. Other century years have been precomputed in precessionPartitions.
-			// We cannot simply sum up the rotations, but must find the century locations one-by-one.
-
-			Vec3d part0; // current pole point on the northern precession circle.
-			StelUtils::spheToRect(0., -M_PI/2.+core->getCurrentPlanet().data()->getRotObliquity(core->getJDE()), part0);
-			Vec3d partAxis(0,1,0);
-			Vec3d partZAxis = Vec3d(0,0,1); // rotation axis for the year partitions
-			Vec3d part100=part0;  part100.transfo4d(Mat4d::rotation(partAxis, -0.10*M_PI/180)); // part1 should point to 0.05deg south of "equator"
-			Vec3d part500=part0;  part500.transfo4d(Mat4d::rotation(partAxis, -0.25*M_PI/180));
-			Vec3d part1000=part0; part1000.transfo4d(Mat4d::rotation(partAxis, -0.45*M_PI/180));
-			Vec3d part1000l=part0; part1000.transfo4d(Mat4d::rotation(partAxis, -0.475*M_PI/180)); // label
-
-			Vec3d pt0, ptTgt;
-			for (int y=-13000; y<13000; y+=100)
+			if (showPartitions && (line_type==PRECESSIONCIRCLE_S))
 			{
-				const double tickAngle=-M_PI_2+psiA-precessionPartitions.value(y, 0.);
-				pt0=part0; pt0.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
-				if (y%1000 == 0)
-				{
-					ptTgt=part1000; ptTgt.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
-					if (viewPortSphericalCap.contains(pt0) || viewPortSphericalCap.contains(ptTgt))
-						sPainter.drawGreatCircleArc(pt0, ptTgt, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
-					if (showLabel)
-					{
-						Vec3d ptTgtL=part1000l; ptTgtL.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
-						QString label(QString::number(y));
-						Vec3d screenPosTgt, screenPosTgtL;
-						prj->project(ptTgt, screenPosTgt);
-						prj->project(ptTgtL, screenPosTgtL);
-						double dx=screenPosTgtL[0]-screenPosTgt[0];
-						double dy=screenPosTgtL[1]-screenPosTgt[1];
-						float textAngle=static_cast<float>(atan2(dy,dx));
+				const float lineThickness=sPainter.getLineWidth();
+				sPainter.setLineWidth(partThickness);
 
-						const float shiftx = -5.f - static_cast<float>(sPainter.getFontMetrics().boundingRect(label).width());
-						const float shifty = - static_cast<float>(sPainter.getFontMetrics().height()) / 4.f;
-						sPainter.drawText(ptTgt, label, textAngle*M_180_PIf, shiftx, shifty, true);
+				// Find current value of node rotation.
+				double epsilonA, chiA, omegaA, psiA;
+				getPrecessionAnglesVondrak(core->getJDE(), &epsilonA, &chiA, &omegaA, &psiA);
+				// psiA is the current angle, counted from J2000. Other century years have been precomputed in precessionPartitions.
+				// We cannot simply sum up the rotations, but must find the century locations one-by-one.
+
+				Vec3d part0; // current pole point on the northern precession circle.
+				StelUtils::spheToRect(0., -M_PI/2.+core->getCurrentPlanet().data()->getRotObliquity(core->getJDE()), part0);
+				Vec3d partAxis(0,1,0);
+				Vec3d partZAxis = Vec3d(0,0,1); // rotation axis for the year partitions
+				Vec3d part100=part0;  part100.transfo4d(Mat4d::rotation(partAxis, -0.10*M_PI/180)); // part1 should point to 0.05deg south of "equator"
+				Vec3d part500=part0;  part500.transfo4d(Mat4d::rotation(partAxis, -0.25*M_PI/180));
+				Vec3d part1000=part0; part1000.transfo4d(Mat4d::rotation(partAxis, -0.45*M_PI/180));
+				Vec3d part1000l=part0; part1000.transfo4d(Mat4d::rotation(partAxis, -0.475*M_PI/180)); // label
+
+				Vec3d pt0, ptTgt;
+				for (int y=-13000; y<13000; y+=100)
+				{
+					const double tickAngle=-M_PI_2+psiA-precessionPartitions.value(y, 0.);
+					pt0=part0; pt0.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
+					if (y%1000 == 0)
+					{
+						ptTgt=part1000; ptTgt.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
+						if (viewPortSphericalCap.contains(pt0) || viewPortSphericalCap.contains(ptTgt))
+							sPainter.drawGreatCircleArc(pt0, ptTgt, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+						if (showLabel)
+						{
+							Vec3d ptTgtL=part1000l; ptTgtL.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
+							QString label(QString::number(y));
+							Vec3d screenPosTgt, screenPosTgtL;
+							prj->project(ptTgt, screenPosTgt);
+							prj->project(ptTgtL, screenPosTgtL);
+							double dx=screenPosTgtL[0]-screenPosTgt[0];
+							double dy=screenPosTgtL[1]-screenPosTgt[1];
+							float textAngle=static_cast<float>(atan2(dy,dx));
+
+							const float shiftx = -5.f - static_cast<float>(sPainter.getFontMetrics().boundingRect(label).width());
+							const float shifty = - static_cast<float>(sPainter.getFontMetrics().height()) / 4.f;
+							sPainter.drawText(ptTgt, label, textAngle*M_180_PIf, shiftx, shifty, true);
+						}
+					}
+					else
+					{
+						ptTgt=(y%500 == 0 ? part500 : part100);
+						ptTgt.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
+						if (viewPortSphericalCap.contains(pt0) || viewPortSphericalCap.contains(ptTgt))
+							sPainter.drawGreatCircleArc(pt0, ptTgt, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
 					}
 				}
-				else
-				{
-					ptTgt=(y%500 == 0 ? part500 : part100);
-					ptTgt.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
-					if (viewPortSphericalCap.contains(pt0) || viewPortSphericalCap.contains(ptTgt))
-						sPainter.drawGreatCircleArc(pt0, ptTgt, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
-				}
-			}
 
-			sPainter.setLineWidth(lineThickness);
-		}
+				sPainter.setLineWidth(lineThickness);
+			}
 		}
 		sPainter.setLineWidth(oldLineWidth); // restore line thickness
 		sPainter.setLineSmooth(false);
