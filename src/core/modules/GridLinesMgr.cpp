@@ -807,11 +807,15 @@ void SkyLine::draw(StelCore *core) const
 
 		if ((line_type==EARTH_UMBRA) || (line_type==EARTH_PENUMBRA))
 		{
+			// resizing the shadow together with the Moon would require considerable trickery.
+			// It seems better to just switch it off.
+			if (GETSTELMODULE(SolarSystem)->getFlagMoonScale()) return;
+
 			const Vec3d pos=earth->getEclipticPos();
 			double lambda, beta;
 			StelUtils::rectToSphe(&lambda, &beta, pos);
-			const QPair<double, double> radii=GETSTELMODULE(SolarSystem)->getEarthShadowRadiiAtLunarDistance();
-			const double radius=(line_type==EARTH_UMBRA ? radii.first : radii.second);
+			const QPair<Vec3d, Vec3d> radii=GETSTELMODULE(SolarSystem)->getEarthShadowRadiiAtLunarDistance();
+			const double radius=(line_type==EARTH_UMBRA ? radii.first[1] : radii.second[1]);
 			const double dist=moon->getEclipticPos().length();  // geocentric Lunar distance [AU]
 			const Mat4d rot=Mat4d::zrotation(lambda)*Mat4d::yrotation(-beta);
 			StelVertexArray circle(StelVertexArray::LineLoop);
@@ -822,6 +826,7 @@ void SkyLine::draw(StelCore *core) const
 				circle.vertex.append(pos+point);                                   // attach to earth centre
 			}
 			sPainter.drawStelVertexArray(circle, false); // setting true does not paint for cylindrical&friends :-(
+			return;
 		}
 		else
 		{

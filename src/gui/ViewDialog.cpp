@@ -227,6 +227,7 @@ void ViewDialog::createDialogContent()
 	connectBoolProperty(ui->planetIsolatedTrailsCheckBox, "SolarSystem.flagIsolatedTrails");
 	connectIntProperty(ui->planetIsolatedTrailsSpinBox, "SolarSystem.numberIsolatedTrails");
 	connectBoolProperty(ui->drawMoonHaloCheckBox, "SolarSystem.flagDrawMoonHalo");
+	connectBoolProperty(ui->shadowEnlargementDanjonCheckBox, "SolarSystem.earthShadowEnlargementDanjon");
 	populateTrailsControls(ssmgr->getFlagTrails());
 	connect(ssmgr,SIGNAL(trailsDisplayedChanged(bool)), this, SLOT(populateTrailsControls(bool)));
 	connectBoolProperty(ui->hidePlanetNomenclatureCheckBox, "NomenclatureMgr.localNomenclatureHided");

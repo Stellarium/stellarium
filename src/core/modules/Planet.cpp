@@ -1210,34 +1210,11 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 
 			if (raDiff < 3.*M_PI_180 || raDiff > 357.*M_PI_180)
 			{
-				const double sdistanceAu = ssystem->getSun()->getEquinoxEquatorialPos(core1).length();
-				// Moon's distance in Earth's radii
-				const double mdistanceER = getEquinoxEquatorialPos(core1).length() * AU / 6378.1366;
-
-				// Sun's horizontal parallax
-				const double sHP = 3600. * (asin(6378.1366 / (AU * sdistanceAu))) * M_180_PI;
-				// Sun's semi-diameter
-				const double sSD = 959.64 / sdistanceAu;
-
-				// Moon's horizontal parallax
-				const double mHP = 3600. * asin(1. / mdistanceER) * M_180_PI;
 				// Moon's semi-diameter
-				// 0.272488 is Moon/Earth's radius
-				const double mSD = 3600. * (asin(0.272488 / mdistanceER) * M_180_PI);
-
-				// Besselian elements
-				// ref: Explanatory Supplement to the Astronomical Ephemeris
-				// and the American Ephemeris and Nautical Almanac (1961), Ch.9E
-
-				const double p1 = (1. + 1./85. - 1./594.) * mHP;
-				// Danjon's method - used in French almanac and NASA web site.
-				// It's the enlargment of Earth's shadows due to Earth's atmosphere
-				// and correction for Earth's oblateness at latitude 45 deg.
-				// ref: Five Millennium Catalog of Lunar Eclipses: -1999 to +3000 (Fred Espenak, NASA)
-				// Note: Astronomical Almanac using different value which create a bit larger shadows.
-
-				const double f1 = p1 + sSD + sHP; // radius of penumbra at the distance of the Moon
-				const double f2 = p1 - sSD + sHP; // radius of umbra at the distance of the Moon
+				const double mSD=atan(getEquatorialRadius()/eclipticPos.length()) * M_180_PI*3600.; // arcsec
+				const QPair<Vec3d,Vec3d>shadowRadii=ssystem->getEarthShadowRadiiAtLunarDistance();
+				const double f1 = shadowRadii.second[0]; // radius of penumbra at the distance of the Moon
+				const double f2 = shadowRadii.first[0];  // radius of umbra at the distance of the Moon
 
 				double x = cos(deMoon) * sin(raDiff);
 				x *= 3600. * M_180_PI;
@@ -1249,12 +1226,12 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 				const double pMag = (L1 - m) / (2. * mSD); // penumbral magnitude
 				const double uMag = (L2 - m) / (2. * mSD); // umbral magnitude
 
-				if (pMag > 1.e-6)
+				if (pMag > 1.e-3)
 				{
-					oss << QString("%1: %2").arg(q_("Penumbral eclipse magnitude")).arg(QString::number(pMag, 'f', 5)) << "<br />";
-					if (uMag > 1.e-6)
+					oss << QString("%1: %2%").arg(q_("Penumbral eclipse magnitude")).arg(QString::number(pMag*100., 'f', 1)) << "<br />";
+					if (uMag > 1.e-3)
 					{
-						oss << QString("%1: %2").arg(q_("Umbral eclipse magnitude")).arg(QString::number(uMag, 'f', 5)) << "<br />";
+						oss << QString("%1: %2%").arg(q_("Umbral eclipse magnitude")).arg(QString::number(uMag*100., 'f', 1)) << "<br />";
 					}
 				}
 			}
@@ -2055,20 +2032,17 @@ float Planet::getVMagnitude(const StelCore* core) const
 			if (englishName=="Moon")
 			{
 				static const double totalityFactor=2.710e-5; // defined previously by AW
-				const QPair<double,double>shadowRadii=GETSTELMODULE(SolarSystem)->getEarthShadowRadiiAtLunarDistance();
-				const double uu=shadowRadii.first;
-				const double pp=shadowRadii.second;
-				const double dist=getEclipticPos().length();                             // Lunar distance [AU]
-
-				const double u=atan(uu/dist) * M_180_PI; // geocentric angle of earth umbra radius at lunar distance [degrees]
-				const double p=atan(pp/dist) * M_180_PI; // geocentric angle of earth penumbra radius at lunar distance [degrees]
+				const QPair<Vec3d,Vec3d>shadowRadii=GETSTELMODULE(SolarSystem)->getEarthShadowRadiiAtLunarDistance();
+				const double dist=getEclipticPos().length();  // Lunar distance [AU]
+				const double u=shadowRadii.first[0]  / 3600.; // geocentric angle of earth umbra radius at lunar distance [degrees]
+				const double p=shadowRadii.second[0] / 3600.; // geocentric angle of earth penumbra radius at lunar distance [degrees]
 				const double r=atan(getEquatorialRadius()/dist) * M_180_PI; // geocentric angle of Lunar radius at lunar distance [degrees]
 				const double od=180.-getElongation(GETSTELMODULE(SolarSystem)->getEarth()->getEclipticPos()) * (180.0/M_PI); // opposition distance [degrees]
 				if (od>p+r) shadowFactor=1.0;
 				else if (od>u+r) // penumbral transition zone: gradual decline (square curve)
-					shadowFactor=0.7+0.3*sqrt((od-u-r)/(p-u));
+					shadowFactor=0.6+0.4*sqrt((od-u-r)/(p-u));
 				else if (od>u-r) // umbral transition zone
-					shadowFactor=totalityFactor+(0.7-totalityFactor)*(od-u+r)/(2.*r);
+					shadowFactor=totalityFactor+(0.6-totalityFactor)*(od-u+r)/(2.*r);
 				else // totality. Still, center is darker...
 				{
 					// Fit a more realistic magnitude for the Moon case.
@@ -3560,8 +3534,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 
 			// Compute umbra radius at lunar distance.
 			const double Lambda=getEclipticPos().length();                             // Lunar distance [AU]
-			const double rho=ssm->getEarthShadowRadiiAtLunarDistance().first;
-			const double sigma=atan(rho/Lambda) * M_180_PI; // geocentric angle of earth shadow radius at lunar distance [degrees]
+			const double sigma=ssm->getEarthShadowRadiiAtLunarDistance().first[0]/3600.;
 			const double tau=atan(getEquatorialRadius()/Lambda) * M_180_PI; // geocentric angle of Lunar radius [degrees]
 
 			if (od<sigma-tau)     // if the Moon is fully immersed in the shadow
