@@ -348,16 +348,17 @@ bool StelSkyDrawer::computeRCMag(float mag, RCMag* rcMag) const
 	}
 
 	// if size of star is too small (blink) we put its size to 1.2 --> no more blink
+	// Atque 2020-02-14: Attempting to make the faint stars being drawn more realistically...
 	// And we compensate the difference of brighteness with cmag
-	if (rcMag->radius<1.2f)
+	if (rcMag->radius<2.0f)
 	{
-		rcMag->luminance= rcMag->radius * rcMag->radius * rcMag->radius / 1.728f;
-		if (rcMag->luminance < 0.05f)
+		rcMag->luminance= rcMag->radius * rcMag->radius * rcMag->radius / 1.5f;
+		if (rcMag->luminance < 0.01f)
 		{
 			rcMag->radius = rcMag->luminance = 0.f;
 			return false;
 		}
-		rcMag->radius = 1.2f;
+		rcMag->radius = 2.0f;
 	}
 	else
 	{
