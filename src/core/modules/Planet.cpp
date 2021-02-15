@@ -761,7 +761,7 @@ QString Planet::getInfoStringPeriods(const StelCore *core, const InfoStringGroup
 		const double siderealPeriod = getSiderealPeriod(); // days required for revolution around parent.
 		const double siderealPeriodCurrentPlanet = currentPlanet->getSiderealPeriod();
 		QString celestialObject = getEnglishName();
-		if (siderealPeriod>0.0)
+		if ((siderealPeriod>0.0) && (celestialObject != "Sun"))
 		{
 			// Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
 			oss << QString(fmt).arg(q_("Sidereal period"), QString::number(siderealPeriod, 'f', 2), days, QString::number(siderealPeriod/365.25, 'f', 3));
