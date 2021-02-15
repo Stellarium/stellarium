@@ -201,7 +201,7 @@ void BookmarksDialog::addBookmarkButtonPressed()
 			if (loc.name.isEmpty())
 				Location = QString("%1, %2").arg(loc.latitude).arg(loc.longitude);
 			else
-				Location = QString("%1, %2").arg(loc.name).arg(loc.country);
+				Location = QString("%1, %2").arg(loc.name, loc.country);
 		}
 
 		int lastRow = bookmarksListModel->rowCount();
@@ -266,7 +266,7 @@ void BookmarksDialog::highlightBookrmarksButtonPressed()
 	QString color = hlMgr->getColor().toHtmlColor();
 	float distance = hlMgr->getMarkersSize();
 
-	for (auto bm : bookmarksCollection)
+	for (const auto &bm : qAsConst(bookmarksCollection))
 	{
 		QString name	= bm.name;
 		QString nameI18n = bm.nameI18n.isEmpty() ? name : bm.nameI18n; // seems this is designation
@@ -310,7 +310,7 @@ void BookmarksDialog::clearHighlightsButtonPressed()
 	objectMgr->unSelect();
 	GETSTELMODULE(HighlightMgr)->cleanHighlightList();
 	// Clear labels
-	for (auto l : highlightLabelIDs)
+	for (auto l : qAsConst(highlightLabelIDs))
 	{
 		labelMgr->deleteLabel(l);
 	}
@@ -379,7 +379,7 @@ void BookmarksDialog::goToBookmark(QString uuid)
 				double xpos = winpos[0];
 				double ypos = winpos[1];
 				double best_object_value = 1000.;
-				for (const auto& obj : candidates)
+				for (const auto& obj : qAsConst(candidates))
 				{
 					prj->project(obj->getJ2000EquatorialPos(core), winpos);
 					double distance = std::sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1]));
@@ -423,7 +423,7 @@ void BookmarksDialog::loadBookmarks()
 			bookmarksCollection.clear();
 			QVariantMap bookmarksMap = map.value("bookmarks").toMap();
 			int i = 0;
-			for (auto bookmarkKey : bookmarksMap.keys())
+			for (const auto &bookmarkKey : bookmarksMap.keys())
 			{
 				QVariantMap bookmarkData = bookmarksMap.value(bookmarkKey).toMap();
 				bookmark bm;
