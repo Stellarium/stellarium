@@ -87,6 +87,7 @@ jobs:
     steps:
     - name: Install dependencies
       run: |
+        sudo apt remove php7.* -y
         sudo apt update
         # using force-overwrite due to
         # https://github.com/actions/virtual-environments/issues/2703
