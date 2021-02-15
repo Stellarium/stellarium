@@ -65,6 +65,7 @@
 
 SolarSystem::SolarSystem() : StelObjectModule()
 	, shadowPlanetCount(0)
+	, earthShadowEnlargementDanjon(false)
 	, flagMoonScale(false)
 	, moonScale(1.0)
 	, flagMinorBodyScale(false)
@@ -193,7 +194,7 @@ void SolarSystem::init()
 	setFlagPointer(conf->value("astro/flag_planets_pointers", true).toBool());
 	// Set the algorithm from Astronomical Almanac for computation of apparent magnitudes for
 	// planets in case  observer on the Earth by default
-	setApparentMagnitudeAlgorithmOnEarth(conf->value("astro/apparent_magnitude_algorithm", "ExplSup2013").toString());
+	setApparentMagnitudeAlgorithmOnEarth(conf->value("astro/apparent_magnitude_algorithm", "Mallama2018").toString());
 	setFlagNativePlanetNames(conf->value("viewing/flag_planets_native_names", true).toBool());
 	// Is enabled the showing of isolated trails for selected objects only?
 	setFlagIsolatedTrails(conf->value("viewing/flag_isolated_trails", true).toBool());
@@ -209,6 +210,8 @@ void SolarSystem::init()
 	setCustomGrsLongitude(conf->value("astro/grs_longitude", 216).toInt());
 	setCustomGrsDrift(conf->value("astro/grs_drift", 15.).toDouble());
 	setCustomGrsJD(conf->value("astro/grs_jd", 2456901.5).toDouble());
+
+	setFlagEarthShadowEnlargementDanjon(conf->value("astro/shadow_enlargement_danjon", false).toBool());
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
@@ -2953,6 +2956,17 @@ double SolarSystem::getCustomGrsJD()
 	return RotationElements::customGrsJD;
 }
 
+void SolarSystem::setFlagEarthShadowEnlargementDanjon(bool b)
+{
+	earthShadowEnlargementDanjon=b;
+	emit earthShadowEnlargementDanjonChanged(b);
+}
+
+bool SolarSystem::getFlagEarthShadowEnlargementDanjon() const
+{
+	return earthShadowEnlargementDanjon;
+}
+
 void SolarSystem::setOrbitColorStyle(QString style)
 {
 	if (style.toLower()=="groups")
@@ -3047,6 +3061,51 @@ QPair<double, PlanetP> SolarSystem::getEclipseFactor(const StelCore* core) const
 	}
 
 	return QPair<double, PlanetP>(final_illumination, p);
+}
+
+// Retrieve Radius of Umbra and Penumbra at the distance of the Moon.
+// Returns a pair (umbra, penumbra) in (geocentric_arcseconds, AU, geometric_AU).
+// * sizes in arcseconds are the usual result found as Bessel element in eclipse literature.
+//   It includes scaling for effects of atmosphere either after Chauvenet (2%) or after Danjon. (see Espenak: 5000 Years Canon of Lunar Eclipses.)
+// * sizes in AU are the same, converted back to AU in Lunar distance.
+// * sizes in geometric_AU derived from pure geometrical evaluations without scalings applied.
+QPair<Vec3d,Vec3d> SolarSystem::getEarthShadowRadiiAtLunarDistance() const
+{
+	// Note: The application of this shadow enlargement is not according to the books, but looks close enough for now.
+	static const double sun2earth=sun->getEquatorialRadius() / earth->getEquatorialRadius();
+	PlanetP sun=getSun();
+	PlanetP moon=getMoon();
+	PlanetP earth=getEarth();
+	const double lunarDistance=moon->getEclipticPos().length(); // Lunar distance [AU]
+	const double earthDistance=earth->getHeliocentricEclipticPos().length(); // Earth distance [AU]
+	const double sunHP =asin(earth->getEquatorialRadius()/earthDistance) * M_180_PI*3600.; // arcsec.
+	const double moonHP=asin(earth->getEquatorialRadius()/lunarDistance) * M_180_PI*3600.; // arcsec.
+	const double sunSD  =atan(sun->getEquatorialRadius()/earthDistance)  * M_180_PI*3600.; // arcsec.
+
+	// Compute umbra radius at lunar distance.
+	const double lUmbra=earthDistance/(sun2earth-1.); // length of earth umbra [AU]
+	const double rUmbraAU=earth->getEquatorialRadius()*(lUmbra-lunarDistance)/lUmbra; // radius of earth shadow at lunar distance [AU]
+	// Penumbra:
+	const double lPenumbra=earthDistance/(sun2earth + 1.); // distance between earth and point between sun and earth where penumbral border rays intersect
+	const double rPenumbraAU=earth->getEquatorialRadius()*(lPenumbra+lunarDistance)/lPenumbra; // radius of penumbra at Lunar distance [AU]
+
+	//Classical Bessel elements instead
+	double f1, f2;
+	if (earthShadowEnlargementDanjon)
+	{
+		static const double danjonScale=1+1./85.-1./594.; // ~1.01, shadow magnification factor (see Espenak 5000 years Canon)
+		f1=danjonScale*moonHP + sunHP + sunSD; // penumbra radius, arcsec
+		f2=danjonScale*moonHP + sunHP - sunSD; // umbra radius, arcsec
+	}
+	else
+	{
+		const double mHP1=0.998340*moonHP;
+		f1=1.02*(mHP1 + sunHP + sunSD); // penumbra radius, arcsec
+		f2=1.02*(mHP1 + sunHP - sunSD); // umbra radius, arcsec
+	}
+	const double f1_AU=tan(f1/3600.*M_PI_180)*lunarDistance;
+	const double f2_AU=tan(f2/3600.*M_PI_180)*lunarDistance;
+	return QPair<Vec3d,Vec3d>(Vec3d(f2, f2_AU, rUmbraAU), Vec3d(f1, f1_AU, rPenumbraAU));
 }
 
 bool SolarSystem::removeMinorPlanet(QString name)

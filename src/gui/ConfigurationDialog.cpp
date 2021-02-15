@@ -813,6 +813,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("astro/grs_longitude",					propMgr->getStelPropertyValue("SolarSystem.customGrsLongitude").toInt());
 	conf->setValue("astro/grs_drift",						propMgr->getStelPropertyValue("SolarSystem.customGrsDrift").toDouble());
 	conf->setValue("astro/grs_jd",							propMgr->getStelPropertyValue("SolarSystem.customGrsJD").toDouble());
+	conf->setValue("astro/shadow_enlargement_danjon",			propMgr->getStelPropertyValue("SolarSystem.earthShadowEnlargementDanjon").toBool());
 	conf->setValue("astro/flag_planets_labels",				propMgr->getStelPropertyValue("SolarSystem.labelsDisplayed").toBool());
 	conf->setValue("astro/labels_amount",					propMgr->getStelPropertyValue("SolarSystem.labelsAmount").toDouble());
 	conf->setValue("viewing/flag_planets_native_names",		propMgr->getStelPropertyValue("SolarSystem.flagNativePlanetNames").toBool());
@@ -873,6 +874,8 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/flag_precession_parts",			propMgr->getStelPropertyValue("GridLinesMgr.precessionPartsDisplayed").toBool());
 	conf->setValue("viewing/flag_precession_labels",			propMgr->getStelPropertyValue("GridLinesMgr.precessionPartsLabeled").toBool());
 	conf->setValue("viewing/flag_circumpolar_circles",		propMgr->getStelPropertyValue("GridLinesMgr.circumpolarCirclesDisplayed").toBool());
+	conf->setValue("viewing/flag_umbra_circle",			propMgr->getStelPropertyValue("GridLinesMgr.umbraCircleDisplayed").toBool());
+	conf->setValue("viewing/flag_penumbra_circle",			propMgr->getStelPropertyValue("GridLinesMgr.penumbraCircleDisplayed").toBool());
 	conf->setValue("viewing/flag_supergalactic_grid",		propMgr->getStelPropertyValue("GridLinesMgr.supergalacticGridDisplayed").toBool());
 	conf->setValue("viewing/flag_supergalactic_equator_line",	propMgr->getStelPropertyValue("GridLinesMgr.supergalacticEquatorLineDisplayed").toBool());
 	conf->setValue("viewing/flag_supergalactic_equator_parts",	propMgr->getStelPropertyValue("GridLinesMgr.supergalacticEquatorPartsDisplayed").toBool());

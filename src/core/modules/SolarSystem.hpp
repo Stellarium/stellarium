@@ -98,6 +98,8 @@ class SolarSystem : public StelObjectModule
 	Q_PROPERTY(int customGrsLongitude		READ getCustomGrsLongitude		WRITE setCustomGrsLongitude		NOTIFY customGrsLongitudeChanged)
 	Q_PROPERTY(double customGrsDrift		READ getCustomGrsDrift			WRITE setCustomGrsDrift			NOTIFY customGrsDriftChanged)
 	Q_PROPERTY(double customGrsJD			READ getCustomGrsJD			WRITE setCustomGrsJD			NOTIFY customGrsJDChanged)
+	// Eclipse algorithm properties
+	Q_PROPERTY(bool earthShadowEnlargementDanjon    READ getFlagEarthShadowEnlargementDanjon    WRITE setFlagEarthShadowEnlargementDanjon   NOTIFY earthShadowEnlargementDanjonChanged)
 	// Colors
 	Q_PROPERTY(Vec3f labelsColor			READ getLabelsColor			WRITE setLabelsColor			NOTIFY labelsColorChanged)
 	Q_PROPERTY(Vec3f pointerColor			READ getPointerColor			WRITE setPointerColor			NOTIFY pointerColorChanged)
@@ -658,6 +660,11 @@ public slots:
 	//! Get initial JD for calculation of position of Great Red Spot
 	double getCustomGrsJD();
 
+	//! Set whether earth shadow should be enlarged following Danjon's method
+	void setFlagEarthShadowEnlargementDanjon(bool b);
+	//! Get whether earth shadow should be enlarged following Danjon's method
+	bool getFlagEarthShadowEnlargementDanjon() const;
+
 	//! Set style of colors of orbits for Solar system bodies
 	void setOrbitColorStyle(QString style);
 	//! Get style of colors of orbits for Solar system bodies
@@ -723,6 +730,7 @@ signals:
 	void customGrsLongitudeChanged(int l);
 	void customGrsDriftChanged(double drift);
 	void customGrsJDChanged(double JD);
+	void earthShadowEnlargementDanjonChanged(bool b);
 
 	void labelsColorChanged(const Vec3f & color) const;
 	void pointerColorChanged(const Vec3f & color) const;
@@ -803,6 +811,14 @@ public:
 	//! Determines relative amount of sun visible from the observer's position (first element) and the Planet object pointer for eclipsing celestial body (second element).
 	//! In the unlikely event of multiple objects in front of the sun, only the largest will be reported.
 	QPair<double, PlanetP> getEclipseFactor(const StelCore *core) const;
+
+	//! Retrieve Radius of Umbra and Penumbra at the distance of the Moon.
+	//! Returns a pair (umbra, penumbra) in (geocentric_arcseconds, AU, geometric_AU).
+	//! * sizes in arcseconds are the usual result found as Bessel element in eclipse literature.
+	//!   It includes scaling for effects of atmosphere either after Chauvenet (2%) or after Danjon. (see Espenak: 5000 Years Canon of Lunar Eclipses.)
+	//! * sizes in AU are the same, converted back to AU in Lunar distance.
+	//! * sizes in geometric_AU derived from pure geometrical evaluations without scalings applied.
+	QPair<Vec3d,Vec3d> getEarthShadowRadiiAtLunarDistance() const;
 
 	//! Compute the position and transform matrix for every element of the solar system.
 	//! @param dateJDE the Julian Day in JDE (Ephemeris Time or equivalent)	
@@ -959,6 +975,8 @@ private:
 
 	//! Used to count how many planets actually need shadow information
 	int shadowPlanetCount;
+	//! Used to track whether earth shadow enlargement shall be computed after Danjon (1951)
+	bool earthShadowEnlargementDanjon;
 	PlanetP sun;
 	PlanetP moon;
 	PlanetP earth;

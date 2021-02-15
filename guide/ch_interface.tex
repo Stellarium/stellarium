@@ -534,6 +534,15 @@ for changing the general appearance of the main sky view and projections. Some h
       Carr\'ee}. The maximum field of view in this mode is 233\degree.
 \end{description}
 
+\subsubsection{Atmosphere settings}
+\label{sec:gui:view:sky:atmosphere}
+
+An auxiliary dialog contains detail settings for the atmosphere. Here
+you can set atmospheric pressure and temperature which influence
+refraction (see section~\ref{sec:phenomena:Refraction}), and the
+opacity factor $k_v$ for extinction, \emph{magnitude loss per airmass} 
+(see section~\ref{sec:phenomena:Extinction}).
+
 \subsection{The Solar System Objects (SSO) Tab}
 \label{sec:gui:view:sso}
 
@@ -573,16 +582,15 @@ for changing the general appearance of the view of Solar system objects. Some hi
   labels displayed for Solar system objects. The further to the
   right the sliders are set, the more labels you will see. Note that
   more labels will also appear as you zoom in.
+\item[Planet magnitude algorithm] several ways to compute planet
+  magnitudes have been made available from the literature. Data by
+  Müller (1893) provide visual magnitudes. The other models provide
+  instrumental (Johnson V) magnitudes.
+\item[Earth shadow enlargement after Danjon] \newFeature{0.21.0}
+  Earth's shadow is enlarged by the atmosphere. You can select whether
+  the 2\% enlargement used by the Astronomical Almanac should be
+  applied (default), or the formulation of Danjon.
 \end{description}
-
-\subsubsection{Atmosphere settings}
-\label{sec:gui:view:sky:atmosphere}
-
-An auxiliary dialog contains detail settings for the atmosphere. Here
-you can set atmospheric pressure and temperature which influence
-refraction (see section~\ref{sec:phenomena:Refraction}), and the
-opacity factor $k_v$ for extinction, \emph{magnitude loss per airmass} 
-(see section~\ref{sec:phenomena:Extinction}).
 
 % Put these 3 on 1 page.
 \begin{figure}[p]

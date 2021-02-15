@@ -58,6 +58,7 @@
 //! rot_pole_W1  [degrees/day] re.W1  [degrees/day] d factor for W
 
 #include <QString>
+#include "VecMath.hpp"
 
 // epoch J2000: 12 UT on 1 Jan 2000
 #define J2000 2451545.0
@@ -287,6 +288,14 @@ public:
 	static double customGrsJD;		//!< Initial JD (epoch) for calculation of position of Great Red Spot
 	static double customGrsLongitude;	//!< Longitude of Great Red Spot at customGrsJD (System II, degrees)
 	static double customGrsDrift;		//!< Annual drift of Great Red Spot position (degrees)
+
+	//! Retrieve magnitude variation depending on angle Ls [radians].
+	//! Source: A. Mallama: The magnitude and albedo of Mars. Icarus 192(2007) 404-416.
+	//! @arg albedo true  to return longitudinal albedo correction, Ls=the average of sub-earth and sub-solar planetographic longitudes
+	//!             false for the Orbital Longitude correction. Ls here is the apparent solar longitude along Mars' "ecliptic". (0=Martian Vernal Equinox)
+	static double getMarsMagLs(const double Ls, const bool albedo);
+private:
+	static const QList<Vec3d> marsMagLs;
 };
 
 #endif // ROTATIONELEMENTS_HPP

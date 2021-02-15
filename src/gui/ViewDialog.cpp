@@ -227,6 +227,7 @@ void ViewDialog::createDialogContent()
 	connectBoolProperty(ui->planetIsolatedTrailsCheckBox, "SolarSystem.flagIsolatedTrails");
 	connectIntProperty(ui->planetIsolatedTrailsSpinBox, "SolarSystem.numberIsolatedTrails");
 	connectBoolProperty(ui->drawMoonHaloCheckBox, "SolarSystem.flagDrawMoonHalo");
+	connectBoolProperty(ui->shadowEnlargementDanjonCheckBox, "SolarSystem.earthShadowEnlargementDanjon");
 	populateTrailsControls(ssmgr->getFlagTrails());
 	connect(ssmgr,SIGNAL(trailsDisplayedChanged(bool)), this, SLOT(populateTrailsControls(bool)));
 	connectBoolProperty(ui->hidePlanetNomenclatureCheckBox, "NomenclatureMgr.localNomenclatureHided");
@@ -238,8 +239,8 @@ void ViewDialog::createDialogContent()
 	int idx = ui->planetMagnitudeAlgorithmComboBox->findData(Planet::getApparentMagnitudeAlgorithm(), Qt::UserRole, Qt::MatchCaseSensitive);
 	if (idx==-1)
 	{
-		// Use ExplanSupl2013 as default
-		idx = ui->planetMagnitudeAlgorithmComboBox->findData(Planet::ExplanatorySupplement_2013, Qt::UserRole, Qt::MatchCaseSensitive);
+		// Use Mallama&Hilton_2018 as default
+		idx = ui->planetMagnitudeAlgorithmComboBox->findData(Planet::MallamaHilton_2018, Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->planetMagnitudeAlgorithmComboBox->setCurrentIndex(idx);
 	connect(ui->planetMagnitudeAlgorithmComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setPlanetMagnitudeAlgorithm(int)));
@@ -337,6 +338,8 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showCurrentVerticalLineCheckBox,		"actionShow_Current_Vertical_Line");
 	connectCheckBox(ui->showColuresLineCheckBox,			"actionShow_Colure_Lines");
 	connectCheckBox(ui->showCircumpolarCirclesCheckBox,		"actionShow_Circumpolar_Circles");
+	connectCheckBox(ui->showUmbraCheckBox,		                "actionShow_Umbra_Circle");
+	connectCheckBox(ui->showPenumbraCheckBox,		        "actionShow_Penumbra_Circle");
 	connectCheckBox(ui->showCelestialJ2000PolesCheckBox,		"actionShow_Celestial_J2000_Poles");
 	connectCheckBox(ui->showCelestialPolesCheckBox,			"actionShow_Celestial_Poles");
 	connectCheckBox(ui->showZenithNadirCheckBox,			"actionShow_Zenith_Nadir");
@@ -409,6 +412,8 @@ void ViewDialog::createDialogContent()
 	connectColorButton(ui->colorLongitudeLine,		"GridLinesMgr.longitudeLineColor",		"color/oc_longitude_color");
 	connectColorButton(ui->colorColuresLine,		"GridLinesMgr.colureLinesColor",		"color/colures_color");
 	connectColorButton(ui->colorCircumpolarCircles,		"GridLinesMgr.circumpolarCirclesColor",		"color/circumpolar_circles_color");
+	connectColorButton(ui->colorUmbraCircle,		"GridLinesMgr.umbraCircleColor",		"color/umbra_circle_color");
+	connectColorButton(ui->colorPenumbraCircle,		"GridLinesMgr.penumbraCircleColor",		"color/penumbra_circle_color");
 	connectColorButton(ui->colorPrecessionCircles,		"GridLinesMgr.precessionCirclesColor",		"color/precession_circles_color");
 	connectColorButton(ui->colorPrimeVerticalLine,		"GridLinesMgr.primeVerticalLineColor",		"color/prime_vertical_color");
 	connectColorButton(ui->colorCurrentVerticalLine,	"GridLinesMgr.currentVerticalLineColor",	"color/current_vertical_color");
@@ -1164,11 +1169,12 @@ void ViewDialog::populatePlanetMagnitudeAlgorithmsList()
 	QVariant selectedAlgorithmId = algorithms->itemData(index);
 	algorithms->clear();
 	//For each algorithm, display the localized name and store the key as user data.
-	algorithms->addItem(qc_("G. Mueller (1893)", "magnitude algorithm"), Planet::Mueller_1893);
-	algorithms->addItem(qc_("Astronomical Almanac (1984)", "magnitude algorithm"), Planet::AstronomicalAlmanac_1984);
+	algorithms->addItem(qc_("G. Müller (1893)",              "magnitude algorithm"), Planet::Mueller_1893);
+	algorithms->addItem(qc_("Astronomical Almanac (1984)",   "magnitude algorithm"), Planet::AstronomicalAlmanac_1984);
 	algorithms->addItem(qc_("Explanatory Supplement (1992)", "magnitude algorithm"), Planet::ExplanatorySupplement_1992);
 	algorithms->addItem(qc_("Explanatory Supplement (2013)", "magnitude algorithm"), Planet::ExplanatorySupplement_2013);
-	algorithms->addItem(qc_("Generic", "magnitude algorithm"), Planet::Generic);
+	algorithms->addItem(qc_("Mallama & Hilton (2018)",       "magnitude algorithm"), Planet::MallamaHilton_2018);
+	algorithms->addItem(qc_("Generic",                       "magnitude algorithm"), Planet::Generic);
 	//Restore the selection
 	index = algorithms->findData(selectedAlgorithmId, Qt::UserRole, Qt::MatchCaseSensitive);
 	algorithms->setCurrentIndex(index);
@@ -1188,8 +1194,8 @@ void ViewDialog::populatePlanetMagnitudeAlgorithmDescription()
 	int currentAlgorithm = ui->planetMagnitudeAlgorithmComboBox->findData(Planet::getApparentMagnitudeAlgorithm(), Qt::UserRole, Qt::MatchCaseSensitive);
 	if (currentAlgorithm==-1)
 	{
-		// Use ExplanSupl2013 as default
-		currentAlgorithm = ui->planetMagnitudeAlgorithmComboBox->findData(Planet::ExplanatorySupplement_2013, Qt::UserRole, Qt::MatchCaseSensitive);
+		// Use Mallama&Hilton 2018 as default
+		currentAlgorithm = ui->planetMagnitudeAlgorithmComboBox->findData(Planet::MallamaHilton_2018, Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	QString info = "";
 	switch (currentAlgorithm) {
@@ -1197,13 +1203,16 @@ void ViewDialog::populatePlanetMagnitudeAlgorithmDescription()
 			info = q_("The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later) and gives V (instrumental) magnitudes (allegedly from D.L. Harris).");
 			break;
 		case Planet::Mueller_1893:
-			info = q_("The algorithm is based on visual observations 1877-1891 by G. Mueller and was published in <em>Explanatory Supplement to the Astronomical Ephemeris</em> (1961).");
+			info = q_("The algorithm is based on visual observations 1877-1891 by G. Müller and was still republished in the <em>Explanatory Supplement to the Astronomical Ephemeris</em> (1961).");
 			break;
 		case Planet::ExplanatorySupplement_1992:
-			info = q_("The algorithm was published in the <em>Explanatory Supplement to the Astronomical Almanac</em> (1992).");
+			info = q_("The algorithm was published in the 2nd edition of the <em>Explanatory Supplement to the Astronomical Almanac</em> (1992).");
 			break;
 		case Planet::ExplanatorySupplement_2013:
 			info = q_("The algorithm was published in the 3rd edition of the <em>Explanatory Supplement to the Astronomical Almanac</em> (2013).");
+			break;
+		case Planet::MallamaHilton_2018:
+			info = q_("The algorithm was published by A. Mallama & J. L. Hilton: <em>Computing apparent planetary magnitudes for the Astronomical Almanac.</em> Astronomy&Computing 25 (2018) 10-24.");
 			break;
 		default:
 			info = q_("Visual magnitude based on phase angle and albedo.");
