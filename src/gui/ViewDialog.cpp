@@ -215,6 +215,10 @@ void ViewDialog::createDialogContent()
 	connectDoubleProperty(ui->moonScaleFactor,"SolarSystem.moonScale");
 	connectBoolProperty(ui->planetScaleMinorBodyCheckBox, "SolarSystem.flagMinorBodyScale");
 	connectDoubleProperty(ui->minorBodyScaleFactor,"SolarSystem.minorBodyScale");
+	connectBoolProperty(ui->planetScalePlanetsCheckBox, "SolarSystem.flagPlanetScale");
+	connectDoubleProperty(ui->planetScaleFactor,"SolarSystem.planetScale");
+	connectBoolProperty(ui->planetScaleSunCheckBox, "SolarSystem.flagSunScale");
+	connectDoubleProperty(ui->sunScaleFactor,"SolarSystem.sunScale");
 	connectCheckBox(ui->planetLabelCheckBox, "actionShow_Planets_Labels");
 	connectCheckBox(ui->planetNomenclatureCheckBox, "actionShow_Planets_Nomenclature");
 	connectDoubleProperty(ui->planetsLabelsHorizontalSlider, "SolarSystem.labelsAmount",0.0,10.0);	
