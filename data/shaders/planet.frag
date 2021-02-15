@@ -152,10 +152,10 @@ mediump float orenNayar(in mediump vec3 normal, in highp vec3 lightDir, in highp
     // This clamp gives an ugly pseudo edge visible in rapid animation.
     //return clamp(ON, 0.0, 1.0);
     // Better use GLSL's smoothstep. However, this is N/A in GLSL1.20/GLES. Workaround from https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/smoothstep.xhtml
-    if (ON>0.9)
+    if (ON>0.8)
     {
-        mediump float t = clamp((ON - 0.9) / (1.0 - 0.9), 0.0, 1.0);
-        return 0.9 + 0.1*(t * t * (3.0 - 2.0 * t));
+        mediump float t = clamp((ON - 0.8) / (1.0 - 0.8), 0.0, 1.0);
+        return 0.8 + 0.2*(t * t * (3.0 - 2.0 * t));
     }
     else
     return clamp(ON, 0.0, 1.0);
@@ -278,7 +278,8 @@ void main()
         outgas = outgasParameters.x * outgasFactor(normal, eyeDirection, outgasParameters.y);
     }
 //Reduce lum if sky is bright, to avoid burnt-out look in daylight sky.
-    lum *= (1.0-0.4*skyBrightness);
+    //lum *= (1.0-0.4*skyBrightness);
+    lum *= clamp((0.9-0.05*log(skyBrightness)), 0.1, 0.9);
 #ifdef SHADOWMAP
     //use shadowmapping
     //z-bias is modified using the angle between the surface and the light
