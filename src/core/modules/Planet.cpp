@@ -590,7 +590,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 		oss << QString("%1: %2 %3 (%4 %5)<br/>").arg(q_("Distance"), distAU, au, distKM, km);
 		// TRANSLATORS: Distance measured in terms of the speed of light
-		oss << QString("%1: %2<br/>").arg(q_("Light time"), StelUtils::hoursToHmsStr(distanceKm/SPEED_OF_LIGHT/3600.) );
+		oss << QString("%1: %2 <br/>").arg(q_("Light time"), StelUtils::hoursToHmsStr(distanceKm/SPEED_OF_LIGHT/3600.) );
 		oss << getExtraInfoStrings(Distance).join("");
 	}
 
@@ -1330,7 +1330,7 @@ QString Planet::getSkyLabel(const StelCore*) const
 {
 	QString str;
 	QTextStream oss(&str);
-	oss.setRealNumberPrecision(3);
+	oss.setRealNumberPrecision(4);
 	oss << getNameI18n();
 
 	if (sphereScale != 1.)
@@ -1952,7 +1952,7 @@ float Planet::getMeanOppositionMagnitude() const
 	if (absoluteMagnitude<=-99.f)
 		return 100.f;
 
-	static const QMap<QString, float>nameMap = {
+	static const QMap<QString, float>momagMap = {
 		{ "Sun",    100.f},
 		{ "Moon",   -12.74f},
 		{ "Mars",    -2.01f},
@@ -1965,8 +1965,8 @@ float Planet::getMeanOppositionMagnitude() const
 		{ "Europa",   5.29f},
 		{ "Ganymede", 4.61f},
 		{ "Callisto", 5.65f}};
-	if (nameMap.contains(englishName))
-		return nameMap.value(englishName);
+	if (momagMap.contains(englishName))
+		return momagMap.value(englishName);
 
 	static const QMap<QString, double>smaMap = {
 		{ "Mars",     1.52371034 },
@@ -3064,7 +3064,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		//determine the minimum size of the clip space
 		double r = equatorialRadius*sphereScale;
 		if(rings)
-			r+=rings->getSize();
+			r+=rings->getSize()*sphereScale;
 
 		const double dist = getEquinoxEquatorialPos(core).length();
 		const double z_near = qMax(0.00001, (dist - r)); //near Z should be as close as possible to the actual geometry
@@ -3175,8 +3175,8 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 	// Draw the halo if enabled in the ssystem_*.ini files (+ special case for backward compatible for the Sun)
 	if ((hasHalo() || this==ssm->getSun()) && allowDrawHalo)
 	{
-		// Prepare openGL lighting parameters according to luminance
-		float surfArcMin2 = static_cast<float>(getSpheroidAngularSize(core))*60.f;
+		// Prepare openGL lighting parameters according to luminance. For scaled-up planets, reduce brightness of the halo.
+		float surfArcMin2 = static_cast<float>(getSpheroidAngularSize(core)*qMax(1.0, (englishName=="Moon" ? 1.0 : 0.025)*sphereScale))*60.f;
 		surfArcMin2 = surfArcMin2*surfArcMin2*M_PIf; // the total illuminated area in arcmin^2
 
 		StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
@@ -3426,6 +3426,7 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 
 void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 {
+	const float sphereScaleF=static_cast<float>(sphereScale);
 	if (texMap)
 	{
 		// For lazy loading, return if texture not yet loaded
@@ -3440,14 +3441,13 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 
 	// Draw the spheroid itself
 	// Adapt the number of facets according with the size of the sphere for optimization
-	const unsigned short int nb_facet = static_cast<unsigned short int>(qBound(10u, static_cast<uint>(screenSz * 40.f/50.f), 100u));	// 40 facets for 1024 pixels diameter on screen
+	const unsigned short int nb_facet = static_cast<unsigned short int>(qBound(10u, static_cast<uint>(screenSz * 40.f/50.f * sqrt(sphereScaleF)), 100u));	// 40 facets for 1024 pixels diameter on screen
 
 	// Generates the vertices
 	Planet3DModel model;
 	sSphere(&model, static_cast<float>(equatorialRadius), static_cast<float>(oneMinusOblateness), nb_facet, nb_facet);
 
 	QVector<float> projectedVertexArr(model.vertexArr.size());
-	const float sphereScaleF=static_cast<float>(sphereScale);
 	for (int i=0;i<model.vertexArr.size()/3;++i)
 	{
 		Vec3f p = *(reinterpret_cast<const Vec3f*>(model.vertexArr.constData()+i*3));
@@ -3573,7 +3573,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 
 		Ring3DModel ringModel;
 		sRing(&ringModel, rings->radiusMin, rings->radiusMax, 128, 32);
-		
+
 		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.isRing, true));
 		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.tex, 2));
 		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.ringS, 1));
@@ -3589,7 +3589,11 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 		
 		projectedVertexArr.resize(ringModel.vertexArr.size());
 		for (int i=0;i<ringModel.vertexArr.size()/3;++i)
-			painter->getProjector()->project(*(reinterpret_cast<const Vec3f*>(ringModel.vertexArr.constData()+i*3)), *(reinterpret_cast<Vec3f*>(projectedVertexArr.data()+i*3)));
+		{
+			Vec3f p = *(reinterpret_cast<const Vec3f*>(ringModel.vertexArr.constData()+i*3));
+			p *= sphereScaleF;
+			painter->getProjector()->project(p, *(reinterpret_cast<Vec3f*>(projectedVertexArr.data()+i*3)));
+		}
 		
 		GL(ringPlanetShaderProgram->setAttributeArray(ringPlanetShaderVars.vertex, reinterpret_cast<const GLfloat*>(projectedVertexArr.constData()), 3));
 		GL(ringPlanetShaderProgram->enableAttributeArray(ringPlanetShaderVars.vertex));

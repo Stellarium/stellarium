@@ -79,6 +79,10 @@ class SolarSystem : public StelObjectModule
 	Q_PROPERTY(double moonScale			READ getMoonScale			WRITE setMoonScale			NOTIFY moonScaleChanged)
 	Q_PROPERTY(bool flagMinorBodyScale		READ getFlagMinorBodyScale		WRITE setFlagMinorBodyScale		NOTIFY flagMinorBodyScaleChanged)
 	Q_PROPERTY(double minorBodyScale		READ getMinorBodyScale			WRITE setMinorBodyScale			NOTIFY minorBodyScaleChanged)
+	Q_PROPERTY(bool flagPlanetScale			READ getFlagPlanetScale			WRITE setFlagPlanetScale		NOTIFY flagPlanetScaleChanged)
+	Q_PROPERTY(double planetScale			READ getPlanetScale			WRITE setPlanetScale			NOTIFY planetScaleChanged)
+	Q_PROPERTY(bool flagSunScale			READ getFlagSunScale			WRITE setFlagSunScale			NOTIFY flagSunScaleChanged)
+	Q_PROPERTY(double sunScale			READ getSunScale			WRITE setSunScale			NOTIFY sunScaleChanged)
 	Q_PROPERTY(double labelsAmount			READ getLabelsAmount			WRITE setLabelsAmount			NOTIFY labelsAmountChanged)
 	// Ephemeris-related properties
 	Q_PROPERTY(bool ephemerisMarkersDisplayed	READ getFlagEphemerisMarkers		WRITE setFlagEphemerisMarkers		NOTIFY ephemerisMarkersChanged)
@@ -546,6 +550,26 @@ public slots:
 	//! Get the display scaling factor for minor bodies.
 	double getMinorBodyScale(void) const {return minorBodyScale;}
 
+	//! Set flag which determines if planets are displayed scaled or not.
+	void setFlagPlanetScale(bool b);
+	//! Get the current value of the flag which determines if planets are displayed scaled or not.
+	bool getFlagPlanetScale(void) const {return flagPlanetScale;}
+
+	//! Set the display scaling factor for planets.
+	void setPlanetScale(double f);
+	//! Get the display scaling factor for planets.
+	double getPlanetScale(void) const {return planetScale;}
+
+	//! Set flag which determines if Sun is scaled or not.
+	void setFlagSunScale(bool b);
+	//! Get the current value of the flag which determines if Sun is scaled or not.
+	bool getFlagSunScale(void) const {return flagSunScale;}
+
+	//! Set the display scaling factor for Sun.
+	void setSunScale(double f);
+	//! Get the display scaling factor for Sun.
+	double getSunScale(void) const {return sunScale;}
+
 	//! Translate names. (public so that SolarSystemEditor can call it).
 	void updateI18n();
 
@@ -713,6 +737,10 @@ signals:
 	void moonScaleChanged(double f);
 	void flagMinorBodyScaleChanged(bool b);
 	void minorBodyScaleChanged(double f);
+	void flagPlanetScaleChanged(bool b);
+	void planetScaleChanged(double f);
+	void flagSunScaleChanged(bool b);
+	void sunScaleChanged(double f);
 	void labelsAmountChanged(double f);
 	void ephemerisMarkersChanged(bool b);
 	void ephemerisHorizontalCoordinatesChanged(bool b);
@@ -992,12 +1020,16 @@ private:
 	PlanetP selected;
 	std::vector<PlanetP> selectedSSO; // More than one can be selected at a time
 
+	// Allow enlargements of the planets. May be useful to highlight the planets in in overview plots
 	// Separate Moon and minor body scale values. The latter make sense to zoom up and observe irregularly formed 3D objects like minor moons of the outer planets.
-	// TBD: It may be wise to remove the sphereScale value from the Planet class: that is only used by the Moon.
 	bool flagMoonScale;
 	double moonScale;
 	bool flagMinorBodyScale;
 	double minorBodyScale;
+	bool flagPlanetScale;
+	double planetScale;
+	bool flagSunScale;
+	double sunScale;
 
 	QFont planetNameFont;
 

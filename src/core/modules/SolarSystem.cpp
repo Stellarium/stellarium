@@ -70,6 +70,10 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	, moonScale(1.0)
 	, flagMinorBodyScale(false)
 	, minorBodyScale(1.0)
+	, flagPlanetScale(false)
+	, planetScale(1.0)
+	, flagSunScale(false)
+	, sunScale(1.0)
 	, labelsAmount(false)
 	, flagOrbits(false)
 	, flagLightTravelTime(true)
@@ -179,10 +183,14 @@ void SolarSystem::init()
 
 	setSelected("");	// Fix a bug on macosX! Thanks Fumio!
 	setFlagDrawMoonHalo(conf->value("viewing/flag_draw_moon_halo", true).toBool());
-	setFlagMoonScale(conf->value("viewing/flag_moon_scaled", conf->value("viewing/flag_init_moon_scaled", "false").toBool()).toBool());  // name change
+	setFlagMoonScale(conf->value("viewing/flag_moon_scaled", conf->value("viewing/flag_init_moon_scaled", false).toBool()).toBool());  // name change
+	setMoonScale(conf->value("viewing/moon_scale", 4.0).toDouble());
 	setMinorBodyScale(conf->value("viewing/minorbodies_scale", 10.0).toDouble());
 	setFlagMinorBodyScale(conf->value("viewing/flag_minorbodies_scaled", false).toBool());
-	setMoonScale(conf->value("viewing/moon_scale", 4.0).toDouble());
+	setFlagPlanetScale(conf->value("viewing/flag_planets_scaled", false).toBool());
+	setPlanetScale(conf->value("viewing/planets_scale", 150.0).toDouble());
+	setFlagSunScale(conf->value("viewing/flag_sun_scaled", false).toBool());
+	setSunScale(conf->value("viewing/sun_scale", 4.0).toDouble());
 	setFlagPlanets(conf->value("astro/flag_planets").toBool());
 	setFlagHints(conf->value("astro/flag_planets_hints").toBool());
 	setFlagLabels(conf->value("astro/flag_planets_labels", true).toBool());
@@ -294,6 +302,8 @@ void SolarSystem::init()
 	addAction("actionShow_Planets_Pointers", displayGroup, N_("Planet selection marker"), "flagPointer", "Ctrl+Shift+P");
 	addAction("actionShow_Planets_EnlargeMoon", displayGroup, N_("Enlarge Moon"), "flagMoonScale");
 	addAction("actionShow_Planets_EnlargeMinor", displayGroup, N_("Enlarge minor bodies"), "flagMinorBodyScale");
+	addAction("actionShow_Planets_EnlargePlanets", displayGroup, N_("Enlarge Planets"), "flagPlanetScale");
+	addAction("actionShow_Planets_EnlargeSun", displayGroup, N_("Enlarge Sun"), "flagSunScale");
 	addAction("actionShow_Skyculture_NativePlanetNames", displayGroup, N_("Native planet names (from starlore)"), "flagNativePlanetNames", "Ctrl+Shift+N");
 
 	connect(StelApp::getInstance().getModule("HipsMgr"), SIGNAL(gotNewSurvey(HipsSurveyP)),
@@ -2674,8 +2684,8 @@ void SolarSystem::setFlagMoonScale(bool b)
 {
 	if(b!=flagMoonScale)
 	{
-		if (!b) getMoon()->setSphereScale(1);
-		else getMoon()->setSphereScale(moonScale);
+		if (b) getMoon()->setSphereScale(moonScale);
+		else getMoon()->setSphereScale(1);
 		flagMoonScale = b;
 		emit flagMoonScaleChanged(b);
 	}
@@ -2693,7 +2703,7 @@ void SolarSystem::setMoonScale(double f)
 	}
 }
 
-// Set/Get if minor body display is scaled. This flag will be queried by all Planet objects except for the Moon.
+// Set if minor body display is scaled. This flag will be queried by all Planet objects except for the Moon.
 void SolarSystem::setFlagMinorBodyScale(bool b)
 {
 	if(b!=flagMinorBodyScale)
@@ -2712,7 +2722,7 @@ void SolarSystem::setFlagMinorBodyScale(bool b)
 	}
 }
 
-// Set/Get minor body display scaling factor. This will be queried by all Planet objects except for the Moon.
+// Set minor body display scaling factor. This will be queried by all Planet objects except for the Moon.
 void SolarSystem::setMinorBodyScale(double f)
 {
 	if(!fuzzyEquals(minorBodyScale, f))
@@ -2728,6 +2738,62 @@ void SolarSystem::setMinorBodyScale(double f)
 			}
 		}
 		emit minorBodyScaleChanged(f);
+	}
+}
+
+// Set if Planet display is scaled
+void SolarSystem::setFlagPlanetScale(bool b)
+{
+	if(b!=flagPlanetScale)
+	{
+		double scale=(b ? planetScale : 1.);
+		for (auto& p : systemPlanets)
+		{
+			if (p->pType==Planet::isPlanet)
+				p->setSphereScale(scale);
+		}
+		flagPlanetScale = b;
+		emit flagPlanetScaleChanged(b);
+	}
+}
+
+// Set Moon display scaling factor.
+void SolarSystem::setPlanetScale(double f)
+{
+	if(!fuzzyEquals(planetScale, f))
+	{
+		planetScale = f;
+		if (flagPlanetScale)
+			for (auto& p : systemPlanets)
+			{
+				if (p->pType==Planet::isPlanet)
+					p->setSphereScale(planetScale);
+			}
+		emit planetScaleChanged(f);
+	}
+}
+
+// Set if Sun display is scaled
+void SolarSystem::setFlagSunScale(bool b)
+{
+	if(b!=flagSunScale)
+	{
+		if (b) getSun()->setSphereScale(sunScale);
+		else getSun()->setSphereScale(1);
+		flagSunScale = b;
+		emit flagSunScaleChanged(b);
+	}
+}
+
+// Set Sun display scaling factor. This goes directly to the Sun object.
+void SolarSystem::setSunScale(double f)
+{
+	if(!fuzzyEquals(sunScale, f))
+	{
+		sunScale = f;
+		if (flagSunScale)
+			getSun()->setSphereScale(sunScale);
+		emit sunScaleChanged(f);
 	}
 }
 
