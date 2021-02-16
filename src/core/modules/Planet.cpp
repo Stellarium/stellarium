@@ -1952,7 +1952,7 @@ float Planet::getMeanOppositionMagnitude() const
 	if (absoluteMagnitude<=-99.f)
 		return 100.f;
 
-	static const QMap<QString, float>nameMap = {
+	static const QMap<QString, float>momagMap = {
 		{ "Sun",    100.f},
 		{ "Moon",   -12.74f},
 		{ "Mars",    -2.01f},
@@ -1965,8 +1965,8 @@ float Planet::getMeanOppositionMagnitude() const
 		{ "Europa",   5.29f},
 		{ "Ganymede", 4.61f},
 		{ "Callisto", 5.65f}};
-	if (nameMap.contains(englishName))
-		return nameMap.value(englishName);
+	if (momagMap.contains(englishName))
+		return momagMap.value(englishName);
 
 	static const QMap<QString, double>smaMap = {
 		{ "Mars",     1.52371034 },
@@ -3171,14 +3171,12 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 	if (this==ssm->getMoon() && !drawMoonHalo)
 		allowDrawHalo = false;
-	if (sphereScale>50) // inhibit the little white dot in the center of an enlarged sphere.
-		allowDrawHalo = false;
 
 	// Draw the halo if enabled in the ssystem_*.ini files (+ special case for backward compatible for the Sun)
 	if ((hasHalo() || this==ssm->getSun()) && allowDrawHalo)
 	{
-		// Prepare openGL lighting parameters according to luminance
-		float surfArcMin2 = static_cast<float>(getSpheroidAngularSize(core))*60.f;
+		// Prepare openGL lighting parameters according to luminance. For scaled-up planets, reduce brightness of the halo.
+		float surfArcMin2 = static_cast<float>(getSpheroidAngularSize(core)*qMax(1.0, (englishName=="Moon" ? 1.0 : 0.025)*sphereScale))*60.f;
 		surfArcMin2 = surfArcMin2*surfArcMin2*M_PIf; // the total illuminated area in arcmin^2
 
 		StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
