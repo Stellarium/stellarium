@@ -717,7 +717,7 @@ QString Planet::getInfoStringEloPhase(const StelCore *core, const InfoStringGrou
 			oss << QString("<tr><td>%1:</td><td align=\"right\">%2</td></tr>").arg(q_("Elongation"), elo);
 			oss << QString("<tr><td>%1:</td><td align=\"right\">%2</td></tr>").arg(q_("Phase angle"), pha);
 			if (withIllum)
-				oss << QString("<tr><td>%1:</td><td align=\"right\">%2%</td></tr>").arg(q_("Illuminated")).arg(QString::number(getPhase(observerHelioPos) * 100.f, 'f', 1));
+				oss << QString("<tr><td>%1:</td><td align=\"right\">%2%</td></tr>").arg(q_("Illuminated")).arg(QString::number(getPhase(observerHelioPos) * 100., 'f', 1));
 			oss << "</table>";
 		}
 		else
@@ -725,7 +725,7 @@ QString Planet::getInfoStringEloPhase(const StelCore *core, const InfoStringGrou
 			oss << QString("%1: %2<br/>").arg(q_("Elongation"), elo);
 			oss << QString("%1: %2<br/>").arg(q_("Phase angle"), pha);
 			if (withIllum)
-				oss << QString("%1: %2%<br/>").arg(q_("Illuminated"), QString::number(getPhase(observerHelioPos) * 100.f, 'f', 1));
+				oss << QString("%1: %2%<br/>").arg(q_("Illuminated"), QString::number(getPhase(observerHelioPos) * 100., 'f', 1));
 		}
 
 		if (getPlanetType()==isMoon && this->parent!=core->getCurrentPlanet())
@@ -1195,7 +1195,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 			// Show magnitude of lunar eclipse
 			// Use geocentric coordinates
 			StelCore* core1 = StelApp::getInstance().getCore();
-			const bool useTopocentric = core1->getUseTopocentricCoordinates();
+			const bool saveTopocentric = core1->getUseTopocentricCoordinates();
 			core1->setUseTopocentricCoordinates(false);
 			core1->update(0);
 
@@ -1235,7 +1235,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 					}
 				}
 			}
-			core1->setUseTopocentricCoordinates(useTopocentric);
+			core1->setUseTopocentricCoordinates(saveTopocentric);
 			core1->update(0); // enforce update cache to avoid odd selection of Moon details!
 		}		
 

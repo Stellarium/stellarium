@@ -209,6 +209,16 @@ template<> QColor Vec3d::toQColor() const
 	return QColor::fromRgbF(v[0], v[1], v[2]);
 }
 
+template<> QVector3D Vec3f::toQVector3D() const
+{
+	return QVector3D(v[0], v[1], v[2]);
+}
+
+template<> QVector3D Vec3d::toQVector3D() const
+{
+	return QVector3D(static_cast<float>(v[0]), static_cast<float>(v[1]), static_cast<float>(v[2]));
+}
+
 ///// Vector4 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Obtains a Vec4i/Vec4f/Vec4d from a stringlist with the form x,y,z,w  (use C++11 type delegating constructors)
