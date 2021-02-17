@@ -239,7 +239,6 @@ void Observability::draw(StelCore* core)
 {
 	if (!flagShowReport)
 		return; // Button is off.
-
 /////////////////////////////////////////////////////////////////
 // PRELIMINARS:
 	bool locChanged, yearChanged;
@@ -804,9 +803,10 @@ void Observability::draw(StelCore* core)
 
 // Print all results:
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
-	int lineSpacing = static_cast<int>(params.devicePixelsPerPixel * 1.3 * fontSize);  // between lines
-	int groupSpacing = static_cast<int>(6*fontSize*params.devicePixelsPerPixel);  // between daily and yearly results
-	int yLine = static_cast<int>(8*fontSize*params.devicePixelsPerPixel) + 110;
+	float ppx = static_cast<float>(params.devicePixelsPerPixel);
+	int lineSpacing = static_cast<int>(ppx * 1.3 * fontSize);  // between lines
+	int groupSpacing = static_cast<int>(6*fontSize*ppx);  // between daily and yearly results
+	int yLine = static_cast<int>(8*fontSize*ppx) + 110*ppx;
 	int xLine = 80;
 
 	if (show_Today) 
