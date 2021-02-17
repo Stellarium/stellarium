@@ -147,6 +147,7 @@ public:
 	SkyLine(SKY_LINE_TYPE _line_type = EQUATOR_J2000);
 	virtual ~SkyLine();
 	static void init(); //! call once before creating the first line.
+	static void deinit(); //! call once after deleting all lines.
 	void draw(StelCore* core) const;
 	void setColor(const Vec3f& c) {color = c;}
 	void setPartitions(bool visible) {showPartitions = visible;}
@@ -657,6 +658,13 @@ void SkyLine::setSolarSystem(SolarSystem* ss)
 	earth = ss->getEarth();
 	sun   = ss->getSun();
 	moon  = ss->getMoon();
+}
+
+void SkyLine::deinit()
+{
+	earth = Q_NULLPTR;
+	sun   = Q_NULLPTR;
+	moon  = Q_NULLPTR;
 }
 
 SkyLine::~SkyLine()
@@ -1654,6 +1662,7 @@ GridLinesMgr::~GridLinesMgr()
 	delete solsticePoints;
 	delete antisolarPoint;
 	delete apexPoints;	
+	SkyLine::deinit();
 }
 
 /*************************************************************************
