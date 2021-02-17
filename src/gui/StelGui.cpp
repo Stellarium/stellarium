@@ -46,7 +46,7 @@
 #ifdef ENABLE_SCRIPT_CONSOLE
 #include "ScriptConsole.hpp"
 #endif
-#ifndef DISABLE_SCRIPTING
+#ifdef ENABLE_SCRIPTING
 #include "StelScriptMgr.hpp"
 #endif
 
@@ -133,7 +133,7 @@ StelGui::StelGui()
 	, flagShowCompassButton(false)
 	, btShowCompass(Q_NULLPTR)
 	, initDone(false)
-#ifndef DISABLE_SCRIPTING
+#ifdef ENABLE_SCRIPTING
 	  // We use a QStringList to save the user-configured buttons while script is running, and restore them later.
 	, scriptSaveSpeedbuttons()
   #endif
@@ -230,7 +230,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	QString miscGroup = N_("Miscellaneous");
 	actionsMgr->addAction("actionQuit_Global", miscGroup, N_("Quit"), this, "quit()", "Ctrl+Q", "Ctrl+X");
 
-#ifndef DISABLE_SCRIPTING
+#ifdef ENABLE_SCRIPTING
 	actionsMgr->addAction("actionIncrease_Script_Speed", datetimeGroup, N_("Speed up the script execution rate"), this, "increaseScriptSpeed()");
 	actionsMgr->addAction("actionDecrease_Script_Speed", datetimeGroup, N_("Slow down the script execution rate"), this, "decreaseScriptSpeed()");
 	actionsMgr->addAction("actionSet_Real_Script_Speed", datetimeGroup, N_("Set the normal script execution rate"), this, "setRealScriptSpeed()");
@@ -263,7 +263,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	setGuiVisible(conf->value("gui/flag_show_gui", true).toBool());
 	actionsMgr->addAction("actionToggle_GuiHidden_Global", miscGroup, N_("Toggle visibility of GUI"), this, "visible", "Ctrl+T", "", true);
 
-#ifndef DISABLE_SCRIPTING
+#ifdef ENABLE_SCRIPTING
 	StelScriptMgr* scriptMgr = &StelApp::getInstance().getScriptMgr();
 	connect(scriptMgr, SIGNAL(scriptRunning()), this, SLOT(scriptStarted()));
 	connect(scriptMgr, SIGNAL(scriptStopped()), this, SLOT(scriptStopped()));
@@ -603,7 +603,7 @@ void StelGui::update()
 	}
 }
 
-#ifndef DISABLE_SCRIPTING
+#ifdef ENABLE_SCRIPTING
 void StelGui::setScriptKeys(bool b)
 {
 	// Allows use of buttons from conf! Bug LP:1530567 -- GZ
@@ -1393,7 +1393,7 @@ void StelGui::forceRefreshGui()
 	skyGui->updateBarsPos();
 }
 
-#ifndef DISABLE_SCRIPTING
+#ifdef ENABLE_SCRIPTING
 void StelGui::scriptStarted()
 {
 	setScriptKeys(true);

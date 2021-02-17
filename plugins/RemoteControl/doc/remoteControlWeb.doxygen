@@ -242,6 +242,7 @@ An example:
 \warning
 The \c stelssc approach has some disadvantages, so try to use it only when necessary:
 - causes a larger overhead for Stellarium internally than other methods provided by the web interface
+- Stellarium must have been built with ENABLE_SCRIPTING defined (default)
 - the scripts can't be executed if another script is currently running, an error message will be shown in this case
     - this also includes the user clicking too fast on any \c stelssc buttons!
 

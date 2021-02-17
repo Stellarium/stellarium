@@ -117,6 +117,9 @@ void EquationOfTime::draw(StelCore *core)
 		return;
 
 	StelPainter sPainter(core->getProjection2d());
+	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+	float ppx = static_cast<float>(params.devicePixelsPerPixel);
+
 	sPainter.setColor(textColor[0], textColor[1], textColor[2], 1.f);
 	font.setPixelSize(getFontSize());
 	sPainter.setFont(font);
@@ -141,7 +144,7 @@ void EquationOfTime::draw(StelCore *core)
 	QFontMetrics fm(font);
 	QSize fs = fm.size(Qt::TextSingleLine, timeText);	
 
-	sPainter.drawText(gui->getSkyGui()->getSkyGuiWidth()/2 - fs.width()/2, gui->getSkyGui()->getSkyGuiHeight() - fs.height()*1.5, timeText);
+	sPainter.drawText(gui->getSkyGui()->getSkyGuiWidth()*ppx/2 - fs.width()*ppx/2, gui->getSkyGui()->getSkyGuiHeight()*ppx - fs.height()*ppx*1.5, timeText);
 
 	//qDebug() << timeText;
 }

@@ -126,7 +126,7 @@ orbital changes of minor bodies passing major planets.
 
 Since v0.14.0, Stellarium computes the orientation of earth's axis
 according to the IAU2006 Precession in a long-time variant developed
-by \citet{2011AA:Vondrak}, and IAU2000B Nutation~\citep{Nutation:IAU2000B}.
+by \citet{2011AA:Vondrak, 2012AA:Vondrak}, and IAU2000B Nutation~\citep{Nutation:IAU2000B}.
 This also now allows proper depiction of the changes in ecliptic obliquity
 and display of ``instantaneous precession circles'' around the
 ecliptic poles. These circles are indeed varying according to
@@ -137,16 +137,20 @@ unclear for how long this model is applicable.
 \section{Planet Axes}
 \label{sec:Accuracy:PlanetAxes}
 
-Orientation for the other planets is still simplified. Future versions
-should implement modern IAU-approved models.\index{IAU} 
+Where available, Stellarium uses \newFeature{v0.21} axis orientation
+and rotation data from the \indexterm{IAU} Working Group on
+Cartographic Coordinates and Rotational Elements (\indexterm{WGCCRE}).
+Orientation for some small moons is still simplified and
+based on the model originally available. (See section~\ref{sec:ssystem.ini:Planet})
 
 \section{Eclipses}
 \label{sec:Accuracy:Eclipses}
 
-The moon's motion is very complicated, and eclipse computations can be tricky. 
-One aspect which every student of history, prehistory and archaeology should 
-know but as it seems not every does, is at least a basic understanding of the 
-irregular slow-down of earth's rotation known as $\Delta T$ (see section~\ref{sec:Concepts:DeltaT}). 
+The moon's motion is very complicated, and eclipse computations can be
+tricky.  One aspect which every student of history, prehistory and
+archaeology should know but as it seems not every does, is at least a
+basic understanding of the irregular slow-down of earth's rotation
+known as $\Delta T$ (see section~\ref{sec:Concepts:DeltaT}).
 
 Eclipse records on cuneiform tablets go back to the 8th century BC, some Chinese 
 records go back a bit further. Experts on Earth rotation have provided models 

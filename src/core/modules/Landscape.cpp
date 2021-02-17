@@ -226,7 +226,7 @@ void Landscape::createPolygonalHorizon(const QString& lineFileName, const float 
 		}
 
 		StelUtils::spheToRect(az, alt, point);
-		if (horiPoints.last() != point)
+		if (horiPoints.isEmpty() || horiPoints.last() != point)
 			horiPoints.append(point);
 	}
 	file.close();

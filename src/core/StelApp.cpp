@@ -60,7 +60,7 @@
 #include "StelViewportEffect.hpp"
 #include "StelGuiBase.hpp"
 #include "StelPainter.hpp"
-#ifndef DISABLE_SCRIPTING
+#ifdef ENABLE_SCRIPTING
  #include "StelScriptMgr.hpp"
  #include "StelMainScriptAPIProxy.hpp"
 #endif
@@ -227,7 +227,7 @@ StelApp::StelApp(StelMainView *parent)
 	, audioMgr(Q_NULLPTR)
 	, videoMgr(Q_NULLPTR)
 	, skyImageMgr(Q_NULLPTR)
-#ifndef DISABLE_SCRIPTING
+#ifdef ENABLE_SCRIPTING
 	, scriptAPIProxy(Q_NULLPTR)
 	, scriptMgr(Q_NULLPTR)
 #endif
@@ -379,7 +379,7 @@ void StelApp::setupNetworkProxy()
 	}
 }
 
-#ifndef DISABLE_SCRIPTING
+#ifdef ENABLE_SCRIPTING
 void StelApp::initScriptMgr()
 {
 	scriptMgr->addModules();
@@ -596,7 +596,7 @@ void StelApp::init(QSettings* conf)
 
 	//Create the script manager here, maybe some modules/plugins may want to connect to it
 	//It has to be initialized later after all modules have been loaded by calling initScriptMgr
-#ifndef DISABLE_SCRIPTING
+#ifdef ENABLE_SCRIPTING
 	SplashScreen::showMessage(q_("Initializing scripting..."));
 	scriptAPIProxy = new StelMainScriptAPIProxy(this);
 	scriptMgr = new StelScriptMgr(this);
@@ -696,7 +696,7 @@ void StelApp::deinit()
 	delete spoutSender;
 	spoutSender = Q_NULLPTR;
 #endif
-#ifndef DISABLE_SCRIPTING
+#ifdef ENABLE_SCRIPTING
 	if (scriptMgr->scriptIsRunning())
 		scriptMgr->stopScript();
 #endif

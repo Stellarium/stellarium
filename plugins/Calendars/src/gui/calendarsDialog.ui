@@ -333,19 +333,19 @@
            <property name="enabled">
             <bool>false</bool>
            </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
            <property name="acceptDrops">
             <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
          <item row="2" column="1">
           <widget class="QSpinBox" name="gregorianYearSpinBox">
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
            <property name="minimum">
             <number>-100000</number>
            </property>
@@ -369,6 +369,9 @@
            <property name="wrapping">
             <bool>true</bool>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
            <property name="minimum">
             <number>0</number>
            </property>
@@ -382,14 +385,11 @@
            <property name="enabled">
             <bool>false</bool>
            </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
            <property name="acceptDrops">
             <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
@@ -412,6 +412,9 @@
            <property name="wrapping">
             <bool>true</bool>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
            <property name="minimum">
             <number>0</number>
            </property>
@@ -424,6 +427,9 @@
           <widget class="QSpinBox" name="julianDaySpinBox">
            <property name="wrapping">
             <bool>true</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="minimum">
             <number>0</number>
@@ -445,6 +451,9 @@
            <property name="wrapping">
             <bool>true</bool>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
            <property name="minimum">
             <number>0</number>
            </property>
@@ -457,6 +466,9 @@
           <widget class="QSpinBox" name="gregorianMonthSpinBox">
            <property name="wrapping">
             <bool>true</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="minimum">
             <number>0</number>
@@ -485,6 +497,9 @@
            <property name="toolTip">
             <string>Negative years here mark years B.C.</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
            <property name="minimum">
             <number>-100000</number>
            </property>
@@ -505,6 +520,9 @@
          </item>
          <item row="3" column="3">
           <widget class="QSpinBox" name="isoDaySpinBox">
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
            <property name="minimum">
             <number>0</number>
            </property>
@@ -518,6 +536,9 @@
          </item>
          <item row="3" column="1">
           <widget class="QSpinBox" name="isoYearSpinBox">
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
            <property name="minimum">
             <number>-1000000</number>
            </property>
@@ -578,6 +599,9 @@
            <property name="wrapping">
             <bool>true</bool>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
            <property name="minimum">
             <number>-1</number>
            </property>
@@ -590,6 +614,9 @@
           <widget class="QSpinBox" name="katunSpinBox">
            <property name="wrapping">
             <bool>true</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="minimum">
             <number>-1</number>
@@ -611,6 +638,9 @@
            <property name="wrapping">
             <bool>true</bool>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
            <property name="minimum">
             <number>-1000</number>
            </property>
@@ -623,6 +653,9 @@
           <widget class="QSpinBox" name="haabDaySpinBox">
            <property name="wrapping">
             <bool>true</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="maximum">
             <number>19</number>
@@ -661,11 +694,8 @@
            <property name="enabled">
             <bool>false</bool>
            </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
@@ -673,6 +703,9 @@
           <widget class="QSpinBox" name="haabMonthSpinBox">
            <property name="wrapping">
             <bool>true</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="minimum">
             <number>1</number>
@@ -714,6 +747,9 @@
            <property name="wrapping">
             <bool>true</bool>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
            <property name="minimum">
             <number>1</number>
            </property>
@@ -738,6 +774,9 @@
            <property name="wrapping">
             <bool>true</bool>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
            <property name="minimum">
             <number>1</number>
            </property>
@@ -751,6 +790,9 @@
            <property name="wrapping">
             <bool>true</bool>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
            <property name="minimum">
             <number>-1</number>
            </property>
@@ -763,6 +805,9 @@
           <widget class="QSpinBox" name="kinSpinBox">
            <property name="wrapping">
             <bool>true</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="minimum">
             <number>-1</number>
@@ -799,11 +844,8 @@
            <property name="enabled">
             <bool>false</bool>
            </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
@@ -841,6 +883,9 @@
          </item>
          <item row="5" column="1">
           <widget class="QSpinBox" name="xihuitlMonthSpinBox">
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
            <property name="minimum">
             <number>1</number>
            </property>
@@ -851,6 +896,9 @@
          </item>
          <item row="6" column="1">
           <widget class="QSpinBox" name="tonalpohualliNumberSpinBox">
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
            <property name="minimum">
             <number>1</number>
            </property>
@@ -861,6 +909,9 @@
          </item>
          <item row="5" column="2">
           <widget class="QSpinBox" name="xihuitlDaySpinBox">
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
            <property name="minimum">
             <number>1</number>
            </property>
@@ -871,6 +922,9 @@
          </item>
          <item row="6" column="2">
           <widget class="QSpinBox" name="tonalpohualliNameSpinBox">
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
            <property name="minimum">
             <number>1</number>
            </property>
@@ -884,11 +938,8 @@
            <property name="enabled">
             <bool>false</bool>
            </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
@@ -897,11 +948,8 @@
            <property name="enabled">
             <bool>false</bool>
            </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>

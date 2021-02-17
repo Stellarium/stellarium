@@ -41,7 +41,7 @@ void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 	StelProjector::ModelViewTranformP transfo = core->getJ2000ModelViewTransform();
 	transfo->combine(j2000ToTrailNativeInverted);
 	sPainter->setProjector(core->getProjection(transfo));
-	for (const auto& trail : allTrails)
+	for (const auto& trail : qAsConst(allTrails))
 	{
 		Planet* hpl = dynamic_cast<Planet*>(trail.stelObject.data());
 		if (hpl!=Q_NULLPTR)
@@ -68,7 +68,7 @@ void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 void TrailGroup::update()
 {
 	float newJDE=static_cast<float>(core->getJDE());
-	if (fabsf(times.last()-newJDE) > 0.000001f)
+	if (times.isEmpty() || fabsf(times.last()-newJDE) > 0.000001f)
 	{
 		times.append(newJDE);
 		for (auto& trail : allTrails)

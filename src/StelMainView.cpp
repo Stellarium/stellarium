@@ -744,8 +744,9 @@ QSurfaceFormat StelMainView::getDesiredGLFormat() const
 	fmt.setDepthBufferSize(24);
 	//Stencil buffer seems necessary for GUI boxes
 	fmt.setStencilBufferSize(8);
-	if(const auto multisamplingLevel = configuration->value("video/multisampling", 0).toUInt())
-        fmt.setSamples(multisamplingLevel);
+	const int multisamplingLevel = configuration->value("video/multisampling", 0).toInt();
+	if(  multisamplingLevel  && (qApp->property("spout").toString() == "") )
+		fmt.setSamples(multisamplingLevel);
 
 #ifdef OPENGL_DEBUG_LOGGING
 	//try to enable GL debugging using GL_KHR_debug

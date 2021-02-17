@@ -36,8 +36,8 @@ This section includes settings for the commonly displayed objects.
 \begin{longtable}{l|l|l|p{55mm}}
 \toprule
 \emph{ID} & \emph{Type} & \emph{Default} & \emph{Description}\\\midrule
-apparent\_magnitude\_algorithm     & string & ExpSup2013 & Set algorithm for computation of apparent magnitude of the planets. 
-                                                   Possible values: \emph{ExpSup2013}, \emph{ExpSup1992}, \emph{AstrAlm1984}, \emph{Mueller1893} and \emph{Generic}.\\%\midrule
+apparent\_magnitude\_algorithm     & string & Mallama2018 & Set algorithm for computation of apparent magnitude of the planets. 
+                                                   Possible values: \emph{Mallama2018}, \emph{ExpSup2013}, \emph{ExpSup1992}, \emph{AstrAlm1984}, \emph{Mueller1893} and \emph{Generic}.\\%\midrule
 nebula\_magnitude\_limit           & float  & 8.5  & Value of limiting magnitude for the deep-sky objects.\\%\midrule
 star\_magnitude\_limit             & float  & 6.5  & Value of limiting magnitude for the stars. Sometimes you don't want to display more stars when zooming in. \\%\midrule
 planet\_magnitude\_limit  		   & float  & 6.5  & Value of limiting magnitude for the planets. Sometimes you don't want to display more planets when zooming in. \\%\midrule
@@ -83,6 +83,7 @@ size\_limit\_max                   & int    & 600   & Maximum angular size of vi
 flag\_use\_type\_filter            & bool   & false & Enables/disables usage of the type filters for deep-sky objects. \\\midrule
 flag\_nutation  				   & bool   & true  & Enables/disables usage nutation.\\\midrule
 flag\_topocentric\_coordinates	   & bool   & true  & Enables/disables usage topocentric coordinates.\\\midrule
+shadow\_enlargement\_danjon 	   & bool   & false & Earth shadow enlargement (see \ref{sec:Eclipses:lunar}).\\\midrule
 %
 flag\_dso\_designation\_usage      & bool   & false & If \emph{true}, use designations of deep-sky objects on the sky instead of their common names.\\%\midrule
 flag\_dso\_outlines\_usage         & bool   & false & If \emph{true}, use outlines for big deep-sky objects on the sky instead of their hints.\\%\midrule
@@ -410,21 +411,21 @@ flag\_show\_other                 & bool & true & display other deep-sky objects
 \end{tabularx}
 
 \subsection{\big[fov\big]}
-In this section you can fine-tune 10 predefined values of field of view in degrees (all FOV may be set through keyboard hotkeys).
+In this section you can fine-tune 10 predefined values of field of view in degrees (all FOV may be set through keyboard hotkeys, see section~\ref{sec:tour:moving}).
 
 \noindent%
 \begin{tabularx}{\textwidth}{l|l|l|X}\toprule
 \emph{ID} & \emph{Type} & \emph{Default} & \emph{Description}\\\midrule
-quick\_fov\_0 & float & 0.5  & predefined value for FOV \emph{0}.\\%\midrule
-quick\_fov\_1 & float & 180  & predefined value for FOV \emph{1}.\\%\midrule
-quick\_fov\_2 & float & 90   & predefined value for FOV \emph{2}.\\%\midrule
-quick\_fov\_3 & float & 60   & predefined value for FOV \emph{3}.\\%\midrule
-quick\_fov\_4 & float & 45   & predefined value for FOV \emph{4}.\\%\midrule
-quick\_fov\_5 & float & 20   & predefined value for FOV \emph{5}.\\%\midrule
-quick\_fov\_6 & float & 10   & predefined value for FOV \emph{6}.\\%\midrule
-quick\_fov\_7 & float & 5    & predefined value for FOV \emph{7}.\\%\midrule
-quick\_fov\_8 & float & 2    & predefined value for FOV \emph{8}.\\%\midrule
-quick\_fov\_9 & float & 1    & predefined value for FOV \emph{9}.  \\\bottomrule
+quick\_fov\_1 & float & 180  & predefined value for FOV \emph{1}.\\
+quick\_fov\_2 & float & 90   & predefined value for FOV \emph{2}.\\
+quick\_fov\_3 & float & 60   & predefined value for FOV \emph{3}.\\
+quick\_fov\_4 & float & 45   & predefined value for FOV \emph{4}.\\
+quick\_fov\_5 & float & 20   & predefined value for FOV \emph{5}.\\
+quick\_fov\_6 & float & 10   & predefined value for FOV \emph{6}.\\
+quick\_fov\_7 & float & 5    & predefined value for FOV \emph{7}.\\
+quick\_fov\_8 & float & 2    & predefined value for FOV \emph{8}.\\
+quick\_fov\_9 & float & 1    & predefined value for FOV \emph{9}.\\
+quick\_fov\_0 & float & 0.5  & predefined value for FOV \emph{0}.\\\bottomrule
 \end{tabularx}
 
 
@@ -526,7 +527,7 @@ last\_location    & string & Coordinates of last used location in stellarium.\\\
 \label{sec:configini:landscape}
 \fi
 
-\begin{longtable}{l|l|p{80mm}}\toprule
+\begin{longtable}{l|l|p{68mm}}\toprule
 \emph{ID}                            & \emph{Type} & \emph{Description}\\\midrule
 atmosphere\_fade\_duration                 & float & Sets the time (seconds) it takes for the atmosphere to fade when de-selected\\%\midrule
 flag\_landscape                            & bool  & Set to \emph{false} if you don't want to see the landscape at all\\%\midrule
@@ -808,7 +809,7 @@ tui\_admin\_shutdown\_command       & string  && e.g.\ for Linux: \command{shutd
 \end{tabularx}
 
 \subsection{\big[video\big]}
-%\label{sec:config.ini:video}
+\label{sec:config.ini:video}
 
 \begin{tabularx}{\textwidth}{l|l|X}\toprule
 \emph{ID}  & \emph{Type} & \emph{Description}\\\midrule

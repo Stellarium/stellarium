@@ -452,4 +452,3 @@ void get_oberon_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void*
 	Q_UNUSED(unused);
 	GetGust86Coor(jd, GUST86_OBERON, xyz, xyzdot);
 }
-

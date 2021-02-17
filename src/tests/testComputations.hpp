@@ -47,6 +47,7 @@ private slots:
 	void testExp();
 	void testACos();
 	void testSign();
+	void testInterpolation();
 };
 
 #endif // _TESTCOMPUTATIONS_HPP

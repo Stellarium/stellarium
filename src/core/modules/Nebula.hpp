@@ -163,6 +163,7 @@ public:
 	//! - bmag (photometric B magnitude. 99 if unknown)
 	//! - morpho (longish description; translated!)
 	//! - surface-brightness
+	//! - designations (all designations of DSO)
 	//! A few entries are optional
 	//! - bV (B-V index)
 	//! - redshift
@@ -221,7 +222,7 @@ public:
 	QString getDSODesignation() const;
 	//! Get designation for DSO with priority and ignorance of availability of catalogs
 	//! @return a designation
-	QString getDSODesignationWIC() const;
+	QString getDSODesignationWIC() const;	
 
 	bool objectInDisplayedCatalog() const;
 
@@ -241,7 +242,7 @@ private:
 		nameI18Aliases.clear();
 		for (auto alias : englishAliases)
 			nameI18Aliases.append(trans.qtranslate(alias));
-	}
+	}	
 
 	void readDSO(QDataStream& in);
 
