@@ -92,6 +92,4 @@ void get_umbriel_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*
 void get_titania_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
 void get_oberon_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
 
-#endif // EPHEMWRAPPER_HPP
-
-
+#endif // _EPHEMWRAPPER_HPP_

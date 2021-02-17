@@ -63,7 +63,6 @@ TelescopeConfigurationDialog::TelescopeConfigurationDialog()
 TelescopeConfigurationDialog::~TelescopeConfigurationDialog()
 {
 	delete ui;
-
 	delete telescopeNameValidator;
 	delete hostNameValidator;
 	delete circleListValidator;

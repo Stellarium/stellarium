@@ -29,6 +29,7 @@
 #include "Planet.hpp"
 #include "SpecialMarkersMgr.hpp"
 #include "CustomObjectMgr.hpp"
+#include "SolarSystem.hpp"
 
 #include "StelObjectMgr.hpp"
 #include "StelGui.hpp"
@@ -744,14 +745,14 @@ void SearchDialog::manualPositionChanged()
 		case eclipticJ2000:
 		{
 			double ra, dec;
-			StelUtils::eclToEqu(spinLong, spinLat, core->getCurrentPlanet()->getRotObliquity(2451545.0), &ra, &dec);
+			StelUtils::eclToEqu(spinLong, spinLat, GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0), &ra, &dec);
 			StelUtils::spheToRect(ra, dec, pos);
 			break;
 		}
 		case ecliptic:
 		{
 			double ra, dec;
-			StelUtils::eclToEqu(spinLong, spinLat, core->getCurrentPlanet()->getRotObliquity(core->getJDE()), &ra, &dec);
+			StelUtils::eclToEqu(spinLong, spinLat, GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(core->getJDE()), &ra, &dec);
 			StelUtils::spheToRect(ra, dec, pos);
 			pos = core->equinoxEquToJ2000(pos, StelCore::RefractionOff);
 			break;

@@ -54,7 +54,9 @@ MainService::MainService(QObject *parent)
 	objMgr = &StelApp::getInstance().getStelObjectMgr();
 	mvmgr = GETSTELMODULE(StelMovementMgr);
 	propMgr = StelApp::getInstance().getStelPropertyManager();
+#ifdef ENABLE_SCRIPTING
 	scriptMgr = &StelApp::getInstance().getScriptMgr();
+#endif
 	skyCulMgr = &StelApp::getInstance().getSkyCultureMgr();
 
 	connect(actionMgr,SIGNAL(actionToggled(QString,bool)),this,SLOT(actionToggled(QString,bool)));

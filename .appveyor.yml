@@ -3,6 +3,8 @@ version: '{branch}-{build}'
 configuration: Release
 # clone directory
 clone_folder: c:\stellarium
+# set clone depth
+clone_depth: 10
 # Do not build feature branch with open Pull Requests
 skip_branch_with_pr: true
 # environment variables

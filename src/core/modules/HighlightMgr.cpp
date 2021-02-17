@@ -151,7 +151,7 @@ void HighlightMgr::drawHighlights(StelCore* core, StelPainter& painter)
 	if (!highlightList.empty())
 	{
 		Vec3d screenpos;
-		for (const auto& hlObj : highlightList)
+		for (const auto& hlObj : qAsConst(highlightList))
 		{
 			// Compute 2D pos and return if outside screen
 			if (!painter.getProjector()->project(hlObj, screenpos))

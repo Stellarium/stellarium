@@ -495,6 +495,34 @@ Waning Crescent& Less than half the disc of the moon is illuminated, and this ge
 \label{tab:moonphases}
 \end{table}
 
+\subsection{The Lunar Magnitude}
+\label{sec:Moon:magnitude}
+
+The eastern half of the Moon has more dark \emph{maria}, therefore
+careful studies \citep{Russell:1916} have shown that in the waxing
+phases the Moon is slightly brighter than in the waning phase of the
+same degree of illumination.
+
+Around Full Moon, the Moon shows an \indexterm{opposition surge}, a
+strong increase in brightness which \citet{Krisciunas-Schaefer:1991}
+describe as a 35\% increase in luminous flux over the curve
+extrapolated from measurements when the phase angle $|\alpha|<7^\circ$. 
+
+Of course, just at Full Moon when the opposition is near-perfect, the
+Moon will also move through Earth's shadow during a Lunar eclipse.
+
+The Moon is a large reflective body which reflects not only sunlight
+which directly hits it, but also sunlight reflected from Earth to the
+Moon \citep{Agrawal:2016}. This \indexterm{Ashen Light} or
+\indexterm{Earthshine} is brightest when Earth is most strongly
+illuminated for the Moon, i.e., when the Moon as seen from Earth shows
+only a thin crescent. Therefore in these days around the New Moon, the
+thin crescent can often be seen complemented into a softly glowing
+full disk. \newFeature{v0.21.0} Stellarium's estimate for visual
+magnitude is based on the mentioned references and a new standard 
+value for the solar illumination constant of 133.1~klx \citep{Ashdown:2019}.
+
+
 \section{The Major Planets}
 \label{sec:Planets}
 
@@ -569,6 +597,29 @@ their mass being in gaseous form (although they may have rocky or
 metallic cores). Because of this, they have an average density which is
 much less than the terrestrial planets. Saturn's mean density is only
 about $0.7 \g/\cm^3$ -- it would float in water!
+
+\subsection{Magnitudes of the Planets}
+The visual magnitude of the planets can be found in astronomical
+almanachs. Over time, several scientific studies have refined these
+models. A few of them have been implemented in Stellarium:
+\begin{description}
+\item[Müller 1893] G. Müller formulated visual magnitudes for the
+  planets from visual observations of 1877--1891. They can be found in
+  \citet{AstronomicalAlgorithms:1998} and \citet{ESAE:1961}. They give 
+  notably lower brightness estimates than the later models, which however 
+  provide Johnson V (instrumental) magnitudes. Several important 
+  historical studies from the early 20th century are based on these estimates.
+\item[Astronomical Almanac 1984] This model was used in the
+  Astronomical Almanac starting in 1984. The expressions are allegedly
+  ``due to D. L.  Harris'', but J.
+  \citet[p.286]{AstronomicalAlgorithms:1998} denies this origin. 
+\item[Explanatory Supplement 1992] Expressions from \citet{ESAA:1992}.
+\item[Explanatory Supplement 2013] Expressions from \citet{ESAA:2013}.
+\item[Mallama \& Hilton 2018] The currently most modern expressions
+  include e.g. a model for Mars which takes the brightening and
+  dimming of albedo features into account \citep{Mallama:2018}.
+\item[Generic] A simple model based on albedo, size and distance.
+\end{description}
 
 \section{The Minor Bodies}%\label{the-minor-planets}
 
@@ -883,7 +934,12 @@ so that there is a marked reddening of the light as it passes through the atmosp
 makes the Moon appear in a deep red colour. The darkness and colors are notably influenced by 
 atmospheric clarity and clouds. After big volcanic eruptions eclipses are often reported darker.
 
-
+Earth's atmosphere also makes the shadow slightly larger than what can
+be derived by the geometrical sizes and distances of the involved
+objects. The Astronomical Almanac uses a traditional enlargement by 2\% after
+\name{Chauvenet} while recent eclipse experts prefer another
+formulation which leads to a slightly smaller enlargement after \name{Danjon} \citep{Espenak-Meeus:2009}. You
+can select which formulation you prefer (see section~\ref{sec:gui:view:sso}).
 
 \section{Observing Hints}
 \label{sec:observing_hints}

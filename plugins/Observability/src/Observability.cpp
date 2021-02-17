@@ -75,11 +75,12 @@ void Observability::init()
 	  addAction("actionShow_Observability", N_("Observability"), N_("Observability"), "flagShowReport");
 	addAction("actionShow_Observability_ConfigDialog", N_("Observability"),
 	  N_("Observability configuration window"), configDialog, "visible", "");
-	
+
 	StelObjectMgr& app = StelApp::getInstance().getStelObjectMgr();
 	
 	connect(&app, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this,
 	  SLOT(setSelectedObject(StelModule::StelModuleSelectAction)));
+
 
 	connect(core, SIGNAL(locationChanged(const StelLocation&)), this,
 	  SLOT(prepareCalcRiseSetTransit()));

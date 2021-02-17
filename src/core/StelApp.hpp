@@ -210,7 +210,7 @@ public:
 	//! The caller is responsible for destroying the GUI.
 	void setGui(StelGuiBase* b) {stelGui=b;}
 
-#ifndef DISABLE_SCRIPTING
+#ifdef ENABLE_SCRIPTING
 	//! Get the script API proxy (for signal handling)
 	StelMainScriptAPIProxy* getMainScriptAPIProxy() const {return scriptAPIProxy;}
 	//! Get the script manager
@@ -402,7 +402,7 @@ private:
 
 	StelSkyLayerMgr* skyImageMgr;
 
-#ifndef DISABLE_SCRIPTING
+#ifdef ENABLE_SCRIPTING
 	// The script API proxy object (for bridging threads)
 	StelMainScriptAPIProxy* scriptAPIProxy;
 
