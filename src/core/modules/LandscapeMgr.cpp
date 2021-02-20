@@ -133,7 +133,7 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 	if (core->getProjection(StelCore::FrameJ2000)->getMaskType() == StelProjector::MaskDisk)
 		sshift = bshift = vshift = 0;
 	if (propMgr->getProperty("SpecialMarkersMgr.compassMarksDisplayed")->getValue().toBool())
-		vshift = -sshift*3.f;
+		vshift = -sshift*3.f*core->getCurrentStelProjectorParams().devicePixelsPerPixel;
 
 	// N for North
 	pos.set(-1.f, 0.f, 0.f);
