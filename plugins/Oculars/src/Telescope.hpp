@@ -24,6 +24,7 @@
 #include <QSettings>
 
 //! @ingroup oculars
+// TBD: Describe the consequences of Flipped and Equatorial flags.
 class Telescope : public QObject
 {
 	Q_OBJECT
@@ -41,18 +42,18 @@ public:
 	void writeToSettings(QSettings * settings, const int index);
 	static Telescope* telescopeModel();
 
-	double diameter() const;
-	void setDiameter(double theValue);
-	double focalLength() const;
-	void setFocalLength(double theValue);
-	const QString name() const;
-	void setName(QString theValue);
-	bool isHFlipped() const;
-	void setHFlipped(bool flipped);
-	bool isVFlipped() const;
-	void setVFlipped(bool flipped);
-	bool isEquatorial() const;
-	void setEquatorial(bool eq);
+	double diameter() const;              //!< return diameter [mm]
+	void setDiameter(double theValue);    //!< set diameter [mm]
+	double focalLength() const;           //!< return focal length [mm]
+	void setFocalLength(double theValue); //!< set focal length [mm]
+	const QString name() const;           //!< return proper name
+	void setName(QString theValue);       //!< set proper name
+	bool isHFlipped() const;              //!< horizontally flipped?
+	void setHFlipped(bool flipped);       //!< horizontally flipped?
+	bool isVFlipped() const;              //!< vertically flipped?
+	void setVFlipped(bool flipped);       //!< vertically flipped?
+	bool isEquatorial() const;            //!< equatorially mounted?
+	void setEquatorial(bool eq);          //!< equatorially mounted?
 	QMap<int, QString> propertyMap();
 private:
 	QString m_name;		//!< proper name

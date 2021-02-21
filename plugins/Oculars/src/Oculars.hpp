@@ -78,10 +78,25 @@ class Oculars : public StelModule
 {
 	Q_OBJECT
 
-	Q_PROPERTY(bool enableOcular     READ getEnableOcular     WRITE enableOcular     NOTIFY enableOcularChanged)
-	Q_PROPERTY(bool enableCrosshairs READ getEnableCrosshairs WRITE toggleCrosshairs NOTIFY enableCrosshairsChanged)
-	Q_PROPERTY(bool enableCCD        READ getEnableCCD        WRITE toggleCCD        NOTIFY enableCCDChanged)
-	Q_PROPERTY(bool enableTelrad     READ getEnableTelrad     WRITE toggleTelrad     NOTIFY enableTelradChanged)
+	Q_ENUMS(PluginMode)
+public:
+	enum PluginMode
+	{
+		OcNone,     //!< disabled
+		OcTelrad,   //!< showing Telrad mode: naked eye view, just a Telrad overlay
+		OcOcular,   //!< central circle, magnified, different skyDrawer settings
+		OcSensor    //!< central box, magnified, different skyDrawer settings
+	};
+
+	// We use one master mode property for mutually exclusive operation
+	Q_PROPERTY(PluginMode pluginMode READ getPluginMode       WRITE setPluginMode    NOTIFY pluginModeChanged)
+	// While the switching StelActions could work with Lambda functions, the GUI panel in the screen corner still needs Boolean properties to highlight the buttons.
+	// TODO 2021: Try to make them or the slots private.
+	Q_PROPERTY(bool flagModeOcular        READ getFlagModeOcular         WRITE setFlagModeOcular      NOTIFY flagModeOcularChanged)
+	Q_PROPERTY(bool flagModeSensor        READ getFlagModeSensor         WRITE setFlagModeSensor      NOTIFY flagModeSensorChanged)
+	Q_PROPERTY(bool flagModeTelrad        READ getFlagModeTelrad         WRITE setFlagModeTelrad      NOTIFY flagModeTelradChanged)
+	// This is another property for an Action. Switching it has no side effects, though, therefore it is not in the PluginMode enum.
+	Q_PROPERTY(bool enableCrosshairs      READ getEnableCrosshairs       WRITE toggleCrosshairs NOTIFY enableCrosshairsChanged)
 
 	Q_PROPERTY(int selectedCCDIndex       READ getSelectedCCDIndex       WRITE selectCCDAtIndex       NOTIFY selectedCCDChanged)
 	Q_PROPERTY(int selectedOcularIndex    READ getSelectedOcularIndex    WRITE selectOcularAtIndex    NOTIFY selectedOcularChanged)
@@ -165,10 +180,15 @@ public slots:
 	void decrementTelescopeIndex();
 	void decrementLensIndex();
 	void displayPopupMenu();
-	//! This method is called with we detect that our hot key is pressed.  It handles
-	//! determining if we should do anything - based on a selected object.
-	void enableOcular(bool b);
-	bool getEnableOcular() const { return flagShowOculars; }
+//	//! This method is called with we detect that our hot key is pressed.  It handles
+//	//! determining if we should do anything - based on a selected object.
+//	void enableOcular(bool b);
+	//bool getEnableOcular() const { return flagShowOculars; }
+	//! Just return current mode of operation
+	PluginMode getPluginMode() const { return pluginMode; }
+	//! Master switch. Must handle mode transitions cleanly: Disable mode specific settings/restore main app settings, change mode, enable possible new mode specific settings
+	void setPluginMode(PluginMode mode);
+
 	void incrementCCDIndex();
 	void incrementOcularIndex();
 	void incrementTelescopeIndex();
@@ -198,17 +218,14 @@ public slots:
 	void selectLensAtIndex(int index);           //!< index in the range -1:lenses.count(), else call is ignored
 	int getSelectedLensIndex() const {return selectedLensIndex; }
 
-	//! Toggles the sensor frame overlay.
-	void toggleCCD(bool show);
-	//! Toggles the sensor frame overlay (overloaded for blind switching).
+
+	//! Toggles the sensor frame overlay //(overloaded for blind switching).
 	void toggleCCD();
-	bool getEnableCCD() const { return flagShowCCD; }
+	//bool getEnableCCD() const { return flagShowCCD; }
 	void toggleCrosshairs(bool show = true);
 	bool getEnableCrosshairs() const { return flagShowCrosshairs; }
-	//! Toggles the Telrad sight overlay.
-	void toggleTelrad(bool show);
-	bool getEnableTelrad() const { return flagShowTelrad; }
-	//! Toggles the Telrad sight overlay (overloaded for blind switching).
+
+	//! Toggles the Telrad sight overlay //(overloaded for blind switching).
 	void toggleTelrad();
 	
 	void enableGuiPanel(bool enable = true);
@@ -320,11 +337,32 @@ public slots:
 	void setFlagUseLargeFocuserOverlay(const bool b);
 	bool getFlagUseLargeFocuserOverlay(void) const;
 
+private slots:
+	// Switching or retrieving these 3 properties should not be done normally. We need those only for the Actions linked to the GUI buttons.
+	//! Indicates the ocular view overlay. Activating this also triggers setPluginMode()
+	void setFlagModeOcular(bool show);
+	//! Indicates the ocular view overlay.
+	bool getFlagModeOcular() { return flagModeOcular; }
+
+	//! Indicates the sensor frame overlay. Activating this also triggers setPluginMode()
+	void setFlagModeSensor(bool show);
+	//! Indicates the sensor frame overlay.
+	bool getFlagModeSensor() { return flagModeSensor; }
+
+	//! Indicates the Telrad sight overlay. Activating this also triggers setPluginMode()
+	void setFlagModeTelrad(bool show);
+	//! Indicates the Telrad sight overlay.
+	bool getFlagModeTelrad() const { return flagModeTelrad; }
+
+
 signals:
-	void enableOcularChanged(bool value);
+	void pluginModeChanged(PluginMode mode);
+	void flagModeOcularChanged(bool value);
+	void flagModeSensorChanged(bool value);
+	void flagModeTelradChanged(bool value);
 	void enableCrosshairsChanged(bool value);
-	void enableCCDChanged(bool value);
-	void enableTelradChanged(bool value);
+	//void enableCCDChanged(bool value);
+	//void enableTelradChanged(bool value);
 	void selectedCCDChanged(int value);
 	void selectedOcularChanged(int value);
 	void selectedTelescopeChanged(int value);
@@ -404,8 +442,8 @@ private:
 	//! Should only be called from a 'ready' state; currently from the draw() method.
 	void paintText(const StelCore * core);
 
-	//! This method is called by the zoom() method, when this plugin is toggled off; it resets to the default view.
-	void unzoomOcular();
+//	//! This method is called by the zoom() method, when this plugin is toggled off; it resets to the default view.
+//	void unzoomOcular();
 
 	//! This method is responsible for ensuring a valid ini file for the plugin exists.  It first checks to see
 	//! if one exists in the expected location.  If it does not, a default one is copied into place, and the process
@@ -421,7 +459,7 @@ private:
 	//! Record the state of the GridLinesMgr and other settings beforehand, so that they can be reset afterwards.
 	//! @param zoomedIn if true, this zoom operation is starting from an already zoomed state.
 	//!		False for the original state.
-	void zoom(bool zoomedIn);
+	//void zoom(bool zoomedIn);
 
 	//! This method is called by the zoom() method, when this plugin is toggled on; it resets the zoomed view.
 	void zoomOcular();
@@ -436,6 +474,12 @@ private:
 
 	//! Returns selected lens,or Q_NULLPTR if no lens is selected
 	Lens* selectedLens();
+
+	//! Store state of line displays from the Main application. The Oculars view may disable them.
+	void storeLineStateMain();
+	//! Restore state of line displays for the Main application. May be called when leaving oculars view or when toggling the respective switch.
+	void restoreLineStateMain();
+
 
 	//! A list of all the oculars defined in the ini file.  Must have at least one, or module will not run.
 	QList<CCD *> ccds;
@@ -452,10 +496,13 @@ private:
 	int arrowButtonScale;           //!< allows scaling of the GUI "previous/next" Ocular/CCD/Telescope etc. buttons
 
 	QFont font;			//!< The font used for drawing labels.
-	bool flagShowCCD;		//!< flag used to track if we are in CCD mode.
-	bool flagShowOculars;		//!< flag used to track if we are in ocular mode.
+	PluginMode pluginMode;          //!< Current operational mode
+	// The next 3 are mutually exclusive "slave mode" flags to keep the buttons in the GUI show active/inactive highlight state.
+	bool flagModeOcular;		//!< flag used to track if we are in ocular mode.
+	bool flagModeSensor;		//!< flag used to track if we are in CCD mode.
+	bool flagModeTelrad;		//!< flag used to track if we are in Telrad mode.
+
 	bool flagShowCrosshairs;	//!< flag used to track in crosshairs should be rendered in the ocular view.
-	bool flagShowTelrad;		//!< If true, display the Telrad overlay.
 	int usageMessageLabelID;	//!< the id of the label showing the usage message. -1 means it's not displayed.
 
 	bool flagCardinalPointsMain;	//!< Flag to track if CardinalPoints was displayed at activation.
@@ -482,12 +529,12 @@ private:
 	double absoluteStarScaleOculars;	//!< Value to store the absolute star scale when switching off ocular view
 	double relativeStarScaleCCD;    //!< Value to store the relative star scale when switching off CCD view
 	double absoluteStarScaleCCD;    //!< Value to store the absolute star scale when switching off CCD view
-	bool flagMoonScaleMain;	        //!< Flag to track of usage zooming of the Moon
-	bool flagMinorBodiesScaleMain;  //!< Flag to track of usage zooming of minor bodies
-	bool flagSunScaleMain;	        //!< Flag to track of usage zooming of the Sun
-	bool flagPlanetsScaleMain;	//!< Flag to track of usage zooming of major planets
+	bool flagMoonScaleMain;	        //!< Flag to track of usage of artificial scaling of the Moon
+	bool flagMinorBodiesScaleMain;  //!< Flag to track of usage of artificial scaling of minor bodies
+	bool flagPlanetScaleMain;       //!< Flag to track of usage of artificial scaling of planets
+	bool flagSunScaleMain;          //!< Flag to track of usage of artificial scaling of the Sun
 	bool flagDSOPropHintMain;	//!< Flag to track of usage proportional hints for DSO
-	double milkyWaySaturation;
+	double milkyWaySaturationMain;
 
 	double maxEyepieceAngle;        //!< The maximum aFOV of any eyepiece.
 	bool flagRequireSelection;      //!< Decide whether an object is required to be selected to zoom in.

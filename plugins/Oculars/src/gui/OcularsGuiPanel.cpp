@@ -410,7 +410,7 @@ OcularsGuiPanel::~OcularsGuiPanel()
 void OcularsGuiPanel::showOcularGui()
 {
 	setPreferredHeight(0);//WTF?
-	if (ocularsPlugin->flagShowOculars)
+	if (ocularsPlugin->getPluginMode()==Oculars::OcOcular)
 	{
 		updateOcularControls();
 	}
@@ -609,13 +609,8 @@ void OcularsGuiPanel::updateLensControls()
 
 	int oindex = ocularsPlugin->selectedOcularIndex;
 	Ocular* ocular = ocularsPlugin->oculars[oindex];
-	if (ocularsPlugin->getEnableCCD() || ocularsPlugin->getEnableOcular())
-	{
-		if (ocular->isBinoculars() && ocularsPlugin->getEnableOcular()) // Hide the lens info for binoculars in eyepiece mode only
-			setLensControlsVisible(false);
-		else
-			setLensControlsVisible(true);
-	}
+	if (ocular->isBinoculars() && (ocularsPlugin->getPluginMode()==Oculars::OcOcular)) // Hide the lens info for binoculars in eyepiece mode only
+		setLensControlsVisible(false);
 	else
 		setLensControlsVisible(false);
 }
@@ -842,7 +837,7 @@ void OcularsGuiPanel::updateTelescopeControls()
 
 	double mag = 0.0;
 
-	if (ocularsPlugin->flagShowCCD)
+	if (ocularsPlugin->getPluginMode()==Oculars::OcSensor)
 	{
 		int index = ocularsPlugin->selectedCCDIndex;
 		CCD* ccd = ocularsPlugin->ccds[index];
@@ -873,7 +868,7 @@ void OcularsGuiPanel::updateTelescopeControls()
 		fieldFov->setVisible(false);
 	}
 
-	if (ocularsPlugin->flagShowOculars)
+	if (ocularsPlugin->getPluginMode()==Oculars::OcOcular)
 	{
 		//We need the current ocular
 		int index = ocularsPlugin->selectedOcularIndex;
@@ -972,7 +967,6 @@ void OcularsGuiPanel::updateTelescopeControls()
 		posY += fieldSparrowCriterion->boundingRect().height();
 		widgetHeight += fieldSparrowCriterion->boundingRect().height();
 
-
 		fieldRayleighCriterion->setVisible(true);
 		fieldDawesCriterion->setVisible(true);
 		fieldAbbeyCriterion->setVisible(true);
@@ -987,12 +981,10 @@ void OcularsGuiPanel::updateTelescopeControls()
 	}
 
 	// Visual resolution
-	if (ocularsPlugin->flagShowOculars && ocularsPlugin->getFlagShowResolutionCriteria() && diameter>0.0)
+	if (ocularsPlugin->getPluginMode()==Oculars::OcOcular && ocularsPlugin->getFlagShowResolutionCriteria() && diameter>0.0)
 	{
-		double rayleigh = 138/diameter;
-		double vres = 60/mag;
-		if (vres<rayleigh)
-			vres = rayleigh;
+		const double rayleigh = 138/diameter;
+		const double vres = qMax(60/mag, rayleigh);
 		QString visualResolutionLabel = QString("%1: %2\"").arg(q_("Visual resolution"), QString::number(vres, 'f', 2));
 		fieldVisualResolution->setPlainText(visualResolutionLabel);
 		fieldVisualResolution->setToolTip(q_("Visual resolution is based on eye properties and magnification"));
