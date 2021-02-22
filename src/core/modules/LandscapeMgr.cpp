@@ -67,9 +67,9 @@ public:
 private:
 	class StelPropertyMgr* propMgr;
 	//float radius;
-	QFont fontC, fontSC;
+        QFont fontC, fontSC, fontSSC;
 	Vec3f color;
-	QString sNorth, sSouth, sEast, sWest, sNortheast, sSoutheast, sSouthwest, sNorthwest;
+	QString sNorth, sSouth, sEast, sWest, sNortheast, sSoutheast, sSouthwest, sNorthwest, sNorthnortheast, sEastnortheast, sEastsoutheast, sSouthsoutheast, sSouthsouthwest, sWestsouthwest, sWestnorthwest, sNorthnorthwest;
 	LinearFader fader;
 };
 
@@ -79,6 +79,7 @@ Cardinals::Cardinals(float _radius)
 	  color(0.6f,0.2f,0.2f)
 	, sNorth("N"), sSouth("S"), sEast("E"), sWest("W")
 	, sNortheast("NE"), sSoutheast("SE"), sSouthwest("SW"), sNorthwest("NW")
+	, sNorthnortheast("NNE"), sEastnortheast("ENE"), sEastsoutheast("ESE"), sSouthsoutheast("SSE"), sSouthsouthwest("SSW"), sWestsouthwest("WSW"), sWestnorthwest("WNW"), sNorthnorthwest("NNW")
 {
 	Q_UNUSED(_radius)
 	QSettings* conf = StelApp::getInstance().getSettings();
@@ -87,7 +88,9 @@ Cardinals::Cardinals(float _radius)
 	// Default font size is 24
 	fontC.setPixelSize(conf->value("viewing/cardinal_font_size", screenFontSize+11).toInt());
 	// Default font size is 18
-	fontSC.setPixelSize(conf->value("viewing/subcardinal_font_size", screenFontSize+5).toInt());
+	fontSC.setPixelSize(conf->value("viewing/subcardinal_font_size", screenFontSize+6).toInt());
+	//Draw the sub-subcardinal points even smaller.
+        fontSSC.setPixelSize(conf->value("viewing/subsubcardinal_font_size", screenFontSize+4).toInt());
 	propMgr = StelApp::getInstance().getStelPropertyManager();
 }
 
@@ -95,8 +98,8 @@ Cardinals::~Cardinals()
 {
 }
 
-// Draw the cardinals points : N S E W
-// handles special cases at poles
+// Draw the cardinals points : N S E W and the subcardinal and sub-subcardinal.
+// Handles special cases at poles
 void Cardinals::draw(const StelCore* core, double latitude) const
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
@@ -106,7 +109,7 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 	if (fader.getInterstate()==0.0f) return;
 
 	// direction text
-	QString d[8];
+        QString d[16];
 
 	d[0] = sNorth;
 	d[1] = sSouth;
@@ -116,10 +119,18 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 	d[5] = sSoutheast;
 	d[6] = sSouthwest;
 	d[7] = sNorthwest;
+        d[8] = sNorthnortheast;
+        d[9] = sEastnortheast;
+        d[10] = sEastsoutheast;
+        d[11] = sSouthsoutheast;
+        d[12] = sSouthsouthwest;
+        d[13] = sWestsouthwest;
+	d[14] = sWestnorthwest;
+        d[15] = sNorthnorthwest;
 
 	// fun polar special cases
-	if (fabs(latitude - 90.0) < 1e-10) d[0] = d[1] = d[2] = d[3] = d[4] = d[5] = d[6] = d[7] = sSouth;
-	if (fabs(latitude + 90.0) < 1e-10) d[0] = d[1] = d[2] = d[3] = d[4] = d[5] = d[6] = d[7] = sNorth;
+        if (fabs(latitude - 90.0) < 1e-10) d[0] = d[1] = d[2] = d[3] = d[4] = d[5] = d[6] = d[7] = d[8] = d[9] = d[10] = d[11] = d[12] = d[13] = d[14] = d[15] = sSouth;
+        if (fabs(latitude + 90.0) < 1e-10) d[0] = d[1] = d[2] = d[3] = d[4] = d[5] = d[6] = d[7] = d[8] = d[9] = d[10] = d[11] = d[12] = d[13] = d[14] = d[15] = sNorth;
 
 	sPainter.setColor(color,fader.getInterstate());
 	sPainter.setBlending(true);
@@ -176,6 +187,49 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 	pos.set(-1.f, -1.f, 0.f);
 	if (prj->project(pos,xy))
 		sPainter.drawText(xy[0], xy[1], d[7], 0., -bshift, -vshift, false);
+
+        sPainter.setFont(fontSSC);
+
+        // NNE for North-northeast
+	pos.set(-1.f, 1.f/(1+sqrt(2)), 0.f);
+        if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[8], 0., -bshift, -vshift, false);
+
+        // ENE for East-northeast
+	pos.set(-1.f/(1+sqrt(2)), 1.f, 0.f);
+        if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[9], 0., -bshift, -vshift, false);
+
+        // ESE for East-southeast
+	pos.set(1.f/(1+sqrt(2)), 1.f, 0.f);
+        if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[10], 0., -bshift, -vshift, false);
+
+        // SSE for South-southeast
+        pos.set(1.f, 1.f/(1+sqrt(2)), 0.f);
+        if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[11], 0., -bshift, -vshift, false);
+
+        // SSW for South-southwest
+	pos.set(1.f, -1.f/(1+sqrt(2)), 0.f);
+        if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[12], 0., -bshift, -vshift, false);
+
+        // WSW for West-southwest
+	pos.set(1.f/(1+sqrt(2)), -1.f, 0.f);
+        if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[13], 0., -bshift, -vshift, false);
+
+        // WNW for West-northwest
+	pos.set(-1.f/(1+sqrt(2)), -1.f, 0.f);
+        if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[14], 0., -bshift, -vshift, false);
+
+        // NNW for North-northwest
+	pos.set(-1.f, -1.f/(1+sqrt(2)), 0.f);
+        if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[15], 0., -bshift, -vshift, false);
+
 }
 
 // Translate cardinal labels with gettext to current sky language and update font for the language
@@ -190,6 +244,14 @@ void Cardinals::updateI18n()
 	sSoutheast = trans.qtranslate("SE");
 	sSouthwest = trans.qtranslate("SW");
 	sNorthwest = trans.qtranslate("NW");
+        sNorthnortheast = trans.qtranslate("NNE");
+        sEastnortheast = trans.qtranslate("ENE");
+        sEastsoutheast = trans.qtranslate("ESE");
+        sSouthsoutheast = trans.qtranslate("SSE");
+        sSouthsouthwest = trans.qtranslate("SSW");
+        sWestsouthwest = trans.qtranslate("WSW");
+        sWestnorthwest = trans.qtranslate("WNW");
+        sNorthnorthwest = trans.qtranslate("NNW");
 }
 
 LandscapeMgr::LandscapeMgr()
