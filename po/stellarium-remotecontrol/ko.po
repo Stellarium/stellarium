@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-11-21 16:45+0700\n"
+"POT-Creation-Date: 2021-02-20 23:34+0700\n"
 "PO-Revision-Date: 2017-11-29 01:19+0000\n"
 "Last-Translator: ilsubyeega <ilsubyeega@gmail.com>, 2020\n"
 "Language-Team: Korean (https://www.transifex.com/stellarium/teams/80998/ko/)\n"
@@ -110,8 +110,8 @@ msgid "Could not retrieve landscape list"
 msgstr "풍경 목록을 불러오는 데 실패하였습니다."
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:628
-#: index.html:685 tablet7in.html:733 tablet7in.html:793
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:638
+#: index.html:695 tablet7in.html:733 tablet7in.html:793
 msgid "-none-"
 msgstr "-없음-"
 
@@ -355,156 +355,156 @@ msgid ""
 " Displayed on Earth only."
 msgstr "지구의 축이 천구의 극점 주위로  돌며 그리는 원. 지구 위에만 표시함."
 
-#: index.html:377 tablet7in.html:472
+#: index.html:378 tablet7in.html:472
 msgid "Solstices"
 msgstr "지점"
 
-#: index.html:378 tablet7in.html:473
+#: index.html:379 tablet7in.html:473
 msgid "Crossquarters"
 msgstr "분점"
 
-#: index.html:379 tablet7in.html:474
+#: index.html:380 tablet7in.html:474
 msgid "Major Standstill"
 msgstr "최대 월구정변기"
 
-#: index.html:380 tablet7in.html:475
+#: index.html:381 tablet7in.html:475
 msgid "Minor Standstill"
 msgstr "최소 월구정변기"
 
-#: index.html:389 tablet7in.html:484
+#: index.html:390 tablet7in.html:484
 msgid "Current Planet:"
 msgstr "현재행성:"
 
-#: index.html:429 tablet7in.html:524
+#: index.html:426 tablet7in.html:524
 msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
 msgstr "반사성운 목록 (Van den Bergh, 1966)"
 
-#: index.html:447 tablet7in.html:542
+#: index.html:444 tablet7in.html:542
 msgid ""
 "Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975)"
 msgstr "성운 상태에 따라 정렬된 남방 항성 목록(반덴베르그+, 1975)"
 
-#: index.html:502
+#: index.html:512
 msgid "Objects without identifier"
 msgstr "식별자가 없는 천체"
 
-#: index.html:527 tablet7in.html:616
+#: index.html:537 tablet7in.html:616
 msgid "Bright Nebulae"
 msgstr "발광성운"
 
-#: index.html:528 tablet7in.html:617
+#: index.html:538 tablet7in.html:617
 msgid "Dark Nebulae"
 msgstr "암흑성운"
 
-#: index.html:529 tablet7in.html:618
+#: index.html:539 tablet7in.html:618
 msgid "Planetary Nebulae"
 msgstr "행성상 성운"
 
-#: index.html:538 tablet7in.html:627
+#: index.html:548 tablet7in.html:627
 msgid "Labels and markers"
 msgstr "라벨과 마커"
 
-#: index.html:563 tablet7in.html:652
+#: index.html:573 tablet7in.html:652
 msgid "Use associated planet and position"
 msgstr ""
 
-#: index.html:572 tablet7in.html:661
+#: index.html:582 tablet7in.html:661
 msgid "Show illumination"
 msgstr "조도 보기"
 
-#: index.html:577 tablet7in.html:667
+#: index.html:587 tablet7in.html:667
 msgid "Current landscape"
 msgstr "현재 풍경"
 
-#: index.html:589 tablet7in.html:680
+#: index.html:599 tablet7in.html:680
 msgid "Show lines with thickness"
 msgstr "두께를 가진 선 표시"
 
-#: index.html:594 tablet7in.html:685
+#: index.html:604 tablet7in.html:685
 msgid "Show asterisms with thickness"
 msgstr "성군(星群) 보기 (테두리 표시)"
 
-#: index.html:598 tablet7in.html:689
+#: index.html:608 tablet7in.html:689
 msgid "Show ray helpers with thickness"
 msgstr "두께로 광선 도우미 표시"
 
-#: index.html:606 tablet7in.html:699
+#: index.html:616 tablet7in.html:699
 msgid "Show boundaries with thickness"
 msgstr "두께로 테두리 표시"
 
-#: index.html:611 tablet7in.html:704
+#: index.html:621 tablet7in.html:704
 msgid "Constellation selection isolated"
 msgstr "단 하나의 별자리만을 선택"
 
-#: index.html:615 tablet7in.html:708
+#: index.html:625 tablet7in.html:708
 msgid "Current sky culture"
 msgstr "현재 하늘 문화"
 
-#: index.html:628 tablet7in.html:733
+#: index.html:638 tablet7in.html:733
 msgid "Active script:"
 msgstr "활성화된 스크립트:"
 
-#: index.html:629 tablet7in.html:734
+#: index.html:639 tablet7in.html:734
 msgid "Run selected script"
 msgstr "선택한 스크립트 실행"
 
-#: index.html:629 tablet7in.html:734
+#: index.html:639 tablet7in.html:734
 msgid "Stop current script"
 msgstr "현재 스크립트 중지"
 
-#: index.html:634 tablet7in.html:41 tablet7in.html:718
+#: index.html:644 tablet7in.html:41 tablet7in.html:718
 msgid "Actions"
 msgstr "동작"
 
-#: index.html:638 tablet7in.html:722
+#: index.html:648 tablet7in.html:722
 msgid "Run/toggle action"
 msgstr "동작 실행/ 켜고 끄기"
 
-#: index.html:649 tablet7in.html:757
+#: index.html:659 tablet7in.html:757
 msgid "Planet map"
 msgstr "행성 지도"
 
-#: index.html:650 tablet7in.html:758
+#: index.html:660 tablet7in.html:758
 msgid "Planet map pointer"
 msgstr "행성 지도 포인터"
 
-#: index.html:654 tablet7in.html:762
+#: index.html:664 tablet7in.html:762
 msgid "Type to search location"
 msgstr "위치 검색을 위해 입력"
 
-#: index.html:683 tablet7in.html:791
+#: index.html:693 tablet7in.html:791
 msgid "Interaction"
 msgstr "상호작용"
 
-#: index.html:684 tablet7in.html:792
+#: index.html:694 tablet7in.html:792
 msgid "Current scene:"
 msgstr "현재 장면:"
 
-#: index.html:687 tablet7in.html:795
+#: index.html:697 tablet7in.html:795
 msgid "View controls"
 msgstr "관점 조절"
 
-#: index.html:693 tablet7in.html:801
+#: index.html:703 tablet7in.html:801
 msgid "Movement controls"
 msgstr "움직임 조절"
 
-#: index.html:705 tablet7in.html:813
+#: index.html:715 tablet7in.html:813
 msgid "Torchlight"
 msgstr "불빛"
 
-#: index.html:712 tablet7in.html:820
+#: index.html:722 tablet7in.html:820
 msgid "Scene selection"
 msgstr "장면 선택"
 
-#: index.html:716 tablet7in.html:824
+#: index.html:726 tablet7in.html:824
 msgid "Load selected scene"
 msgstr "선택한 장면 불러오기"
 
-#: index.html:740 tablet7in.html:849
+#: index.html:750 tablet7in.html:849
 msgid "No response from server"
 msgstr "서버로부터 응답이 없습니다."
 
-#: index.html:741 tablet7in.html:850
+#: index.html:751 tablet7in.html:850
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr "서버로부터 %1 간 응답이 없습니다. 아직도 스텔라리움이 작동 중인가요?"
 
@@ -647,6 +647,10 @@ msgstr "물병자리"
 #: tablet7in.html:288
 msgid "Pisces"
 msgstr "물고기자리"
+
+#: tablet7in.html:507
+msgid "Compass Marks"
+msgstr ""
 
 #: tablet7in.html:742
 msgid "Favorites"
