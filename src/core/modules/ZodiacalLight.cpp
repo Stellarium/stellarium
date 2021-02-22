@@ -250,7 +250,7 @@ void ZodiacalLight::draw(StelCore* core)
 
 			float oneMag=0.0f;
 			extinction.forward(vertAltAz, &oneMag);
-			float extinctionFactor=std::pow(0.4f , oneMag)/bortleIntensity; // drop of one magnitude: factor 2.5 or 40%, and further reduced by light pollution
+			float extinctionFactor=std::pow(0.4f , oneMag) * (1.1f-bortleIntensity*0.1f);// Drop of one magnitude: factor 2.5 or 40%, and further reduced by light pollution.
 			Vec3f thisColor=Vec3f(c[0]*extinctionFactor, c[1]*extinctionFactor, c[2]*extinctionFactor);
 			vertexArray->colors.append(thisColor);
 		}
