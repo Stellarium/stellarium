@@ -47,6 +47,22 @@ class Translations
 		N_("SW");
 		// TRANSLATORS: Ordinals names: Northwest
 		N_("NW");
+                // TRANSLATORS: Ordinals names: North-northeast
+                N_("NNE");
+                // TRANSLATORS: Ordinals names: East-northeast
+                N_("ENE");
+                // TRANSLATORS: Ordinals names: East-southeast
+                N_("ESE");
+                // TRANSLATORS: Ordinals names: South-southeast
+                N_("SSE");
+                // TRANSLATORS: Ordinals names: South-southwest
+                N_("SSW");
+                // TRANSLATORS: Ordinals names: West-southwest
+                N_("WSW");
+                // TRANSLATORS: Ordinals names: West-northwest
+                N_("WNW");
+                // TRANSLATORS: Ordinals names: North-northwest
+                N_("NNW");
 
 		// =====================================================================
 		// List of types solar system bodies
