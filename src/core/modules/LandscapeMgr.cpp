@@ -229,7 +229,6 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 	pos.set(-1.f, -1.f/(1+sqrt(2)), 0.f);
         if (prj->project(pos,xy))
 		sPainter.drawText(xy[0], xy[1], d[15], 0., -bshift, -vshift, false);
-
 }
 
 // Translate cardinal labels with gettext to current sky language and update font for the language
