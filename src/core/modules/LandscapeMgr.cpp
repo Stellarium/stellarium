@@ -89,8 +89,8 @@ Cardinals::Cardinals(float _radius)
 	fontC.setPixelSize(conf->value("viewing/cardinal_font_size", screenFontSize+11).toInt());
 	// Default font size is 18
 	fontSC.setPixelSize(conf->value("viewing/subcardinal_font_size", screenFontSize+6).toInt());
-	//Draw the sub-subcardinal points even smaller.
-        fontSSC.setPixelSize(conf->value("viewing/subsubcardinal_font_size", screenFontSize+4).toInt());
+	// Draw the sub-subcardinal points even smaller.
+	fontSSC.setPixelSize(conf->value("viewing/subsubcardinal_font_size", screenFontSize+2).toInt());
 	propMgr = StelApp::getInstance().getStelPropertyManager();
 }
 
@@ -103,6 +103,7 @@ Cardinals::~Cardinals()
 void Cardinals::draw(const StelCore* core, double latitude) const
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
+	const float ppx = core->getCurrentStelProjectorParams().devicePixelsPerPixel;
 	StelPainter sPainter(prj);
 	sPainter.setFont(fontC);
 
@@ -138,14 +139,14 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 	Vec3f pos;
 	Vec3f xy;
 
-	float sshift = sPainter.getFontMetrics().boundingRect(sNorth).width()*0.5f;
-	float bshift = sPainter.getFontMetrics().boundingRect(sNortheast).width()*0.5f;
-	float cshift = sPainter.getFontMetrics().boundingRect(sNorthnortheast).width()*0.5f;
+	float sshift = ppx*sPainter.getFontMetrics().boundingRect(sNorth).width()*0.5f;
+	float bshift = ppx*sPainter.getFontMetrics().boundingRect(sNortheast).width()*0.5f;
+	float cshift = ppx*sPainter.getFontMetrics().boundingRect(sNorthnortheast).width()*0.5f;
 	float vshift = sshift;
 	if (core->getProjection(StelCore::FrameJ2000)->getMaskType() == StelProjector::MaskDisk)
 		sshift = bshift = cshift = vshift = 0;
 	if (propMgr->getProperty("SpecialMarkersMgr.compassMarksDisplayed")->getValue().toBool())
-		vshift = -sshift*3.f*core->getCurrentStelProjectorParams().devicePixelsPerPixel;
+		vshift = -sshift*3.f;
 
 	// N for North
 	pos.set(-1.f, 0.f, 0.f);
