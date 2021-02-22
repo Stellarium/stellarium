@@ -944,90 +944,6 @@ double Oculars::getSelectedCCDPrismPositionAngle() const
 	else return 0.0;
 }
 
-// DISSOLVED
-//void Oculars::enableOcular(bool enableOcularMode)
-/*
-//{
-//	if (enableOcularMode)
-//	{
-//		// Close the sensor view if it's displayed
-//		if (flagShowCCD)
-//		{
-//			toggleCCD(false);
-//			flagShowCCD = false;
-//			selectedCCDIndex = -1;
-//		}
-//
-//		// Close the Telrad sight if it's displayed
-//		if (flagShowTelrad)
-//		{
-//			toggleTelrad(false);
-//		}
-
-//		// Check to ensure that we have enough oculars & telescopes, as they may have been edited in the config dialog
-//		if (oculars.count() == 0)
-//		{
-//			selectedOcularIndex = -1;
-//			qWarning() << "No oculars found";
-//		}
-//		else if (oculars.count() > 0 && selectedOcularIndex == -1)
-//		{
-//			selectedOcularIndex = 0;
-//		}
-//		if (telescopes.count() == 0)
-//		{
-//			selectedTelescopeIndex = -1;
-//			qWarning() << "No telescopes found";
-//		}
-//		else if (telescopes.count() > 0 && selectedTelescopeIndex == -1)
-//		{
-//			selectedTelescopeIndex = 0;
-//		}
-//	}
-
-//	if (!ready  || selectedOcularIndex == -1 ||  (selectedTelescopeIndex == -1 && !isBinocularDefined()))
-//	{
-//		qWarning() << "The Oculars module has been disabled.";
-//		return;
-//	}
-
-//	StelCore *core = StelApp::getInstance().getCore();
-//	LabelMgr* labelManager = GETSTELMODULE(LabelMgr);
-
-//	// Toggle the ocular view on & off. To toggle on, we want to ensure there is a selected object.
-//	if (!flagShowOculars && !flagShowTelrad && flagRequireSelection && !StelApp::getInstance().getStelObjectMgr().getWasSelected() )
-//	{
-//		if (usageMessageLabelID == -1)
-//		{
-//			QFontMetrics metrics(font);
-//			QString labelText = q_("Please select an object before switching to ocular view.");
-//			StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
-//			int yPositionOffset = qRound(projectorParams.viewportXywh[3]*projectorParams.viewportCenterOffset[1]);
-//			int xPosition = qRound(projectorParams.viewportCenter[0] - 0.5 * metrics.boundingRect(labelText).width());
-//			int yPosition = qRound(projectorParams.viewportCenter[1] - yPositionOffset - 0.5 * metrics.height());
-//			const char *tcolor = "#99FF99";
-//			usageMessageLabelID = labelManager->labelScreen(labelText, xPosition, yPosition,
-//									true, font.pixelSize(), tcolor);
-//		}
-//	}
-//	else
-//	{
-//		if (selectedOcularIndex != -1)
-//		{
-//			// remove the usage label if it is being displayed.
-//			hideUsageMessageIfDisplayed();
-//			flagShowOculars = enableOcularMode;
-//			zoom(false);
-//			//BM: I hope this is the right place...
-//			if (guiPanel)
-//				guiPanel->showOcularGui();
-//		}
-//	}
-//
-//	emit enableOcularChanged(flagShowOculars);
-//}
-*/
-
 void Oculars::decrementCCDIndex()
 {
 	selectedCCDIndex--;
@@ -1376,99 +1292,8 @@ void Oculars::selectLensAtIndex(int index)
 	}
 }
 
-// DISSOLVED
-//void Oculars::toggleCCD(bool show)
-/*
-//{
-//	//If there are no sensors...
-//	if (ccds.isEmpty() || telescopes.isEmpty())
-//	{
-//		//TODO: BM: Make this an on-screen message and/or disable the button
-//		//if there are no sensors.
-//		if (show)
-//		{
-//			qWarning() << "Oculars plugin: Unable to display a sensor boundary: No sensors or telescopes are defined.";
-//			QMessageBox::warning(&StelMainView::getInstance(), q_("Warning!"), q_("Unable to display a sensor boundary: No sensors or telescopes are defined."), QMessageBox::Ok);
-//		}
-//		flagShowCCD = false;
-//		selectedCCDIndex = -1;
-//		show = false;
-//	}
-
-//	StelCore *core = StelApp::getInstance().getCore();
-//	StelMovementMgr *movementManager = core->getMovementMgr();
-//	StelSkyDrawer *skyDrawer = core->getSkyDrawer();
-//	if (show)
-//	{
-//		initialFOV = movementManager->getCurrentFov();
-//		//Mutually exclusive with the ocular mode
-//		hideUsageMessageIfDisplayed();
-//		if (flagShowOculars)
-//			enableOcular(false);
-//
-//		if (flagShowTelrad) {
-//			toggleTelrad(false);
-//		}
-//
-//		if (selectedTelescopeIndex < 0)
-//		{
-//			selectedTelescopeIndex = 0;
-//		}
-//		if (selectedCCDIndex < 0)
-//		{
-//			selectedCCDIndex = 0;
-//		}
-//		flagShowCCD = true;
-//		setScreenFOVForCCD();
-//
-//		// Change scales for stars. (Even restoring from ocular view has restored main program's values at this point.)
-//		relativeStarScaleMain=skyDrawer->getRelativeStarScale();
-//		absoluteStarScaleMain=skyDrawer->getAbsoluteStarScale();
-//		skyDrawer->setRelativeStarScale(relativeStarScaleCCD);
-//		skyDrawer->setAbsoluteStarScale(absoluteStarScaleCCD);
-//
-//		if (guiPanel)
-//		{
-//			guiPanel->showCcdGui();
-//		}
-//	}
-//	else
-//	{
-//		flagShowCCD = false;
-//
-//		// Restore star scales
-//		relativeStarScaleCCD=skyDrawer->getRelativeStarScale();
-//		absoluteStarScaleCCD=skyDrawer->getAbsoluteStarScale();
-//		skyDrawer->setRelativeStarScale(relativeStarScaleMain);
-//		skyDrawer->setAbsoluteStarScale(absoluteStarScaleMain);
-//		movementManager->setFlagTracking(false);
-//		//Zoom out
-//		if (getFlagInitFovUsage())
-//			movementManager->zoomTo(movementManager->getInitFov());
-//		else if (!flagShowTelrad)
-//			movementManager->zoomTo(initialFOV);
-//
-//		if (getFlagInitDirectionUsage())
-//			movementManager->setViewDirectionJ2000(core->altAzToJ2000(movementManager->getInitViewingDirection(), StelCore::RefractionOff));
-//
-//		if (getFlagAutosetMountForCCD())
-//		{
-//			StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
-//			propMgr->setStelPropertyValue("StelMovementMgr.equatorialMount", equatorialMountEnabledMain);
-//		}
-//
-//		if (guiPanel)
-//		{
-//			guiPanel->foldGui();
-//		}
-//	}
-//	emit enableCCDChanged(flagShowCCD);
-//}
-*/
-
 void Oculars::toggleCCD()
 {
-	//toggleCCD(pluginMode!=OcSensor);
 	setPluginMode(pluginMode==OcSensor ? OcNone : OcSensor);
 }
 
@@ -1480,38 +1305,6 @@ void Oculars::toggleCrosshairs(bool show)
 		emit enableCrosshairsChanged(show);
 	}
 }
-
-// DISSOLVED
-//void Oculars::toggleTelrad(bool show)
-/*
-//{
-//	if(show!=flagShowTelrad)
-//	{
-//		flagShowTelrad = show;
-//
-//		StelMovementMgr* movementMgr = StelApp::getInstance().getCore()->getMovementMgr();
-//		if (show)
-//		{
-//			hideUsageMessageIfDisplayed();
-//			enableOcular(false);
-//			toggleCCD(false);
-//			// NOTE: Added special zoom level for Telrad
-//			if (flagScalingFOVForTelrad)
-//			{
-//				float fov = qMax(qMax(telradFOV[0], telradFOV[1]), qMax(telradFOV[2], telradFOV[3]));
-//				movementMgr->zoomTo(static_cast<double>(fov)*2.);
-//			}
-//		}
-//		else if (getFlagInitFovUsage()) // Restoration of FOV is needed?
-//			movementMgr->zoomTo(movementMgr->getInitFov());
-//
-//		if (getFlagInitDirectionUsage())
-//			movementMgr->setViewDirectionJ2000(StelApp::getInstance().getCore()->altAzToJ2000(movementMgr->getInitViewingDirection(), StelCore::RefractionOff));
-//
-//		emit enableTelradChanged(flagShowTelrad);
-//	}
-//}
-*/
 
 void Oculars::toggleTelrad()
 {
@@ -2634,141 +2427,6 @@ void Oculars::setFlagModeTelrad(bool show)
 	setPluginMode(show ? OcTelrad : OcNone );
 }
 
-// DISSOLVED
-//void Oculars::unzoomOcular()
-/*
-//{
-	// This function was called on leave of ocular view mode and included various restore operations.
-	// MOVED to the state switcher.
-
-	// This is also called when enabling Telrad out of no-ocular state. In this case we must not change any skydrawer aettings! (#1509)
-
-//	Q_ASSERT(flagShowOculars == false);
-//	StelCore *core = StelApp::getInstance().getCore();
-//	StelMovementMgr *movementManager = core->getMovementMgr();
-//	StelSkyDrawer *skyDrawer = core->getSkyDrawer();
-
-//	if (flagHideGridsLines)
-//		toggleLines(true);
-//
-//	if (!flagShowTelrad)
-//	{
-//	StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue("MilkyWay.saturation", milkyWaySaturation);
-//	disconnect(skyDrawer, SIGNAL(customStarMagLimitChanged(double)), this, SLOT(setMagLimitStarsOcularsManual(double)));
-//	// restore values, but keep current to enable toggling.
-//	if (!getFlagAutoLimitMagnitude())
-//	{
-//		flagLimitStarsOculars=skyDrawer->getFlagStarMagnitudeLimit();
-//		magLimitStarsOculars=skyDrawer->getCustomStarMagnitudeLimit();
-//	}
-//	skyDrawer->setCustomStarMagnitudeLimit(magLimitStarsMain);
-//	skyDrawer->setFlagStarMagnitudeLimit(flagLimitStarsMain);
-//	relativeStarScaleOculars=skyDrawer->getRelativeStarScale();
-//	absoluteStarScaleOculars=skyDrawer->getAbsoluteStarScale();
-//	skyDrawer->setRelativeStarScale(relativeStarScaleMain);
-//	skyDrawer->setAbsoluteStarScale(absoluteStarScaleMain);
-//	skyDrawer->setFlagLuminanceAdaptation(flagAdaptationMain);
-//	skyDrawer->setFlagPlanetMagnitudeLimit(flagLimitPlanetsMain);
-//	skyDrawer->setFlagNebulaMagnitudeLimit(flagLimitDSOsMain);
-//	skyDrawer->setCustomPlanetMagnitudeLimit(magLimitPlanetsMain);
-//	skyDrawer->setCustomNebulaMagnitudeLimit(magLimitDSOsMain);
-//	movementManager->setFlagTracking(false);
-//	movementManager->setFlagEnableZoomKeys(true);
-//	movementManager->setFlagEnableMouseNavigation(true);
-//
-//	SolarSystem *ss=GETSTELMODULE(SolarSystem);
-//	ss->setFlagMoonScale(flagMoonScaleMain);
-//	ss->setFlagMinorBodyScale(flagMinorBodiesScaleMain);
-//	ss->setFlagPlanetScale(flagPlanetScaleMain);
-//	ss->setFlagSunScale(flagSunScaleMain);
-//
-//	// Set the screen display
-//	core->setFlipHorz(flipHorzMain);
-//	core->setFlipVert(flipVertMain);
-//}
-//	if (getFlagInitFovUsage())
-//		movementManager->zoomTo(movementManager->getInitFov());
-//	else if (!flagShowTelrad)
-//		movementManager->zoomTo(initialFOV);
-
-//	if (getFlagInitDirectionUsage())
-//		movementManager->setViewDirectionJ2000(core->altAzToJ2000(movementManager->getInitViewingDirection(), StelCore::RefractionOff));
-//}
-*/
-
-// DISSOLVED
-//void Oculars::zoom(bool zoomedIn)
-/*
-//{
-//	// Bug hunt: under which circumstances or in which state can this be triggered?
-//	// Presumably, zoomedIn should only be true in ocular mode.
-//	Q_ASSERT(zoomedIn != (pluginMode==OcOcular));
-//
-//	if ((pluginMode==OcOcular) && selectedOcularIndex == -1)
-//	{
-//		// The user cycled out the selected ocular
-//		// flagShowOculars = false;
-//		// TODO 2021: GZ: I don't understand "cycled out".
-//		// If ocular mode ends, we just disable and go to standard mode with all consequences (restore *Main settings), right? Then this should be correct.
-//		setPluginMode(OcNone); // This command must call any dynamic zoom etc.
-//	}
-//
-//	if (pluginMode==OcOcular)
-//	{
-//		// TODO 2021: Move this block to the 4-state setOcularMode() switcher.
-////		if (!zoomedIn)
-////		{
-////			StelCore *core = StelApp::getInstance().getCore();
-////			StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
-////
-////			if (flagHideGridsLines)
-////			{
-////				// Store current state for later resetting
-////				flagGridLinesDisplayedMain	= propMgr->getStelPropertyValue("GridLinesMgr.gridlinesDisplayed").toBool();
-////				flagCardinalPointsMain		= propMgr->getStelPropertyValue("LandscapeMgr.cardinalsPointsDisplayed").toBool();
-////				flagConstellationLinesMain	= propMgr->getStelPropertyValue("ConstellationMgr.linesDisplayed").toBool();
-////				flagConstellationBoundariesMain	= propMgr->getStelPropertyValue("ConstellationMgr.boundariesDisplayed").toBool();
-////				flagAsterismLinesMain		= propMgr->getStelPropertyValue("AsterismMgr.linesDisplayed").toBool();
-////				flagRayHelpersLinesMain		= propMgr->getStelPropertyValue("AsterismMgr.rayHelpersDisplayed").toBool();
-////			}
-////
-////			StelSkyDrawer *skyDrawer = core->getSkyDrawer();
-////			// Current state
-////			flagAdaptationMain	= skyDrawer->getFlagLuminanceAdaptation();
-////			flagLimitStarsMain	= skyDrawer->getFlagStarMagnitudeLimit();
-////			flagLimitPlanetsMain	= skyDrawer->getFlagPlanetMagnitudeLimit();
-////			flagLimitDSOsMain	= skyDrawer->getFlagNebulaMagnitudeLimit();
-////			magLimitStarsMain	= skyDrawer->getCustomStarMagnitudeLimit();
-////			magLimitPlanetsMain	= skyDrawer->getCustomPlanetMagnitudeLimit();
-////			magLimitDSOsMain	= skyDrawer->getCustomNebulaMagnitudeLimit();
-////			relativeStarScaleMain	= skyDrawer->getRelativeStarScale();
-////			absoluteStarScaleMain	= skyDrawer->getAbsoluteStarScale();
-////
-////			flagMoonScaleMain		= propMgr->getStelPropertyValue("SolarSystem.flagMoonScale").toBool();
-////			flagMinorBodiesScaleMain	= propMgr->getStelPropertyValue("SolarSystem.flagMinorBodyScale").toBool();
-////			flagPlanetScaleMain		= propMgr->getStelPropertyValue("SolarSystem.flagPlanetScale").toBool();
-////			flagSunScaleMain		= propMgr->getStelPropertyValue("SolarSystem.flagSunScale").toBool();
-////
-////			milkyWaySaturation	= propMgr->getStelPropertyValue("MilkyWay.saturation").toDouble();
-////
-////			flipHorzMain = core->getFlipHorz();
-////			flipVertMain = core->getFlipVert();
-////
-////			StelMovementMgr *movementManager = core->getMovementMgr();
-////			initialFOV = movementManager->getCurrentFov();
-////		}
-//
-//		// set new state
-//		zoomOcular();
-//	}
-//	else
-//	{
-//		//reset to original state
-////		unzoomOcular(); // DISSOLVED
-//	}
-//}
-*/
-
 // TODO 2021: Misnomer: This is not "toggle" (flip whatever state) but "switch"
 void Oculars::toggleLines(bool visible)
 {
@@ -2800,32 +2458,12 @@ void Oculars::toggleLines(bool visible)
 }
 
 // zoomOcular() is called only within state OcOcular mode, either after activation or when an instrument has been changed.
-// TODO 2021 Changes should be finished.
 void Oculars::zoomOcular()
 {
 	Q_ASSERT(pluginMode==OcOcular);
 	StelCore *core = StelApp::getInstance().getCore();
 	StelMovementMgr *movementManager = core->getMovementMgr();
 	StelSkyDrawer *skyDrawer = core->getSkyDrawer();
-
-	//// TODO 2021: This must go into the mode switcher
-	//if (flagHideGridsLines)
-	//	toggleLines(false);
-
-	//// TODO 2021: This must go into the mode switcher.
-	//skyDrawer->setFlagLuminanceAdaptation(false);  // Will this ever be restored to the state set by the user?
-	//StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue("MilkyWay.saturation", 0.f);
-
-	//// TODO 2021: This must go into the mode switcher.
-	//SolarSystem *ss=GETSTELMODULE(SolarSystem);
-	//ss->setFlagMoonScale(false);
-	//ss->setFlagMinorBodyScale(false);
-	//ss->setFlagPlanetScale(false);
-	//ss->setFlagSunScale(false);
-
-	//movementManager->setFlagTracking(true);
-	//movementManager->setFlagEnableZoomKeys(false);
-	//movementManager->setFlagEnableMouseNavigation(false);
 	
 	// We won't always have a selected object
 	if (StelApp::getInstance().getStelObjectMgr().getWasSelected())
@@ -2854,13 +2492,6 @@ void Oculars::zoomOcular()
 		core->setFlipHorz(telescope->isHFlipped());
 		core->setFlipVert(telescope->isVFlipped());
 	}
-
-	//// TODO 2021: This must go into the mode switcher.
-	//// Change relative and absolute scales for stars
-	//relativeStarScaleMain=skyDrawer->getRelativeStarScale();
-	//skyDrawer->setRelativeStarScale(relativeStarScaleOculars);
-	//absoluteStarScaleMain=skyDrawer->getAbsoluteStarScale();
-	//skyDrawer->setAbsoluteStarScale(absoluteStarScaleOculars);
 
 	// Limit stars and DSOs	magnitude. Either compute limiting magnitude for the telescope/ocular,
 	// or just use the custom oculars mode value.
