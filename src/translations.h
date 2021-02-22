@@ -30,41 +30,6 @@ class Translations
 		// Generate Gettext strings for traduction
 		Q_ASSERT(0);
 
-		// Cardinals names
-		// TRANSLATORS: Cardinals names: North
-		N_("N");
-		// TRANSLATORS: Cardinals names: South
-		N_("S");
-		// TRANSLATORS: Cardinals names: East
-		N_("E");
-		// TRANSLATORS: Cardinals names: West
-		N_("W");
-		// TRANSLATORS: Ordinals names: Northeast
-		N_("NE");
-		// TRANSLATORS: Ordinals names: Southeast
-		N_("SE");
-		// TRANSLATORS: Ordinals names: Southwest
-		N_("SW");
-		// TRANSLATORS: Ordinals names: Northwest
-		N_("NW");
-                // TRANSLATORS: Ordinals names: North-northeast
-                N_("NNE");
-                // TRANSLATORS: Ordinals names: East-northeast
-                N_("ENE");
-                // TRANSLATORS: Ordinals names: East-southeast
-                N_("ESE");
-                // TRANSLATORS: Ordinals names: South-southeast
-                N_("SSE");
-                // TRANSLATORS: Ordinals names: South-southwest
-                N_("SSW");
-                // TRANSLATORS: Ordinals names: West-southwest
-                N_("WSW");
-                // TRANSLATORS: Ordinals names: West-northwest
-                N_("WNW");
-                // TRANSLATORS: Ordinals names: North-northwest
-                N_("NNW");
-
-		// =====================================================================
 		// List of types solar system bodies
 		// TRANSLATORS: Type of object
 		N_("star");

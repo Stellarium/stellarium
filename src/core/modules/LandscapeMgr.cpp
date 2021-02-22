@@ -109,7 +109,7 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 	if (fader.getInterstate()==0.0f) return;
 
 	// direction text
-        QString d[16];
+	QString d[16];
 
 	d[0] = sNorth;
 	d[1] = sSouth;
@@ -119,18 +119,18 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 	d[5] = sSoutheast;
 	d[6] = sSouthwest;
 	d[7] = sNorthwest;
-        d[8] = sNorthnortheast;
-        d[9] = sEastnortheast;
-        d[10] = sEastsoutheast;
-        d[11] = sSouthsoutheast;
-        d[12] = sSouthsouthwest;
-        d[13] = sWestsouthwest;
+	d[8] = sNorthnortheast;
+	d[9] = sEastnortheast;
+	d[10] = sEastsoutheast;
+	d[11] = sSouthsoutheast;
+	d[12] = sSouthsouthwest;
+	d[13] = sWestsouthwest;
 	d[14] = sWestnorthwest;
-        d[15] = sNorthnorthwest;
+	d[15] = sNorthnorthwest;
 
 	// fun polar special cases
-        if (fabs(latitude - 90.0) < 1e-10) d[0] = d[1] = d[2] = d[3] = d[4] = d[5] = d[6] = d[7] = d[8] = d[9] = d[10] = d[11] = d[12] = d[13] = d[14] = d[15] = sSouth;
-        if (fabs(latitude + 90.0) < 1e-10) d[0] = d[1] = d[2] = d[3] = d[4] = d[5] = d[6] = d[7] = d[8] = d[9] = d[10] = d[11] = d[12] = d[13] = d[14] = d[15] = sNorth;
+	if (fabs(latitude - 90.0) < 1e-10) d[0] = d[1] = d[2] = d[3] = d[4] = d[5] = d[6] = d[7] = d[8] = d[9] = d[10] = d[11] = d[12] = d[13] = d[14] = d[15] = sSouth;
+	if (fabs(latitude + 90.0) < 1e-10) d[0] = d[1] = d[2] = d[3] = d[4] = d[5] = d[6] = d[7] = d[8] = d[9] = d[10] = d[11] = d[12] = d[13] = d[14] = d[15] = sNorth;
 
 	sPainter.setColor(color,fader.getInterstate());
 	sPainter.setBlending(true);
@@ -140,9 +140,10 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 
 	float sshift = sPainter.getFontMetrics().boundingRect(sNorth).width()*0.5f;
 	float bshift = sPainter.getFontMetrics().boundingRect(sNortheast).width()*0.5f;
+	float cshift = sPainter.getFontMetrics().boundingRect(sNorthnortheast).width()*0.5f;
 	float vshift = sshift;
 	if (core->getProjection(StelCore::FrameJ2000)->getMaskType() == StelProjector::MaskDisk)
-		sshift = bshift = vshift = 0;
+		sshift = bshift = cshift = vshift = 0;
 	if (propMgr->getProperty("SpecialMarkersMgr.compassMarksDisplayed")->getValue().toBool())
 		vshift = -sshift*3.f*core->getCurrentStelProjectorParams().devicePixelsPerPixel;
 
@@ -190,67 +191,82 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 
         sPainter.setFont(fontSSC);
 
-        // NNE for North-northeast
+	// NNE for North-northeast
 	pos.set(-1.f, 1.f/(1+sqrt(2)), 0.f);
-        if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[8], 0., -bshift, -vshift, false);
+	if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[8], 0., -cshift, -vshift, false);
 
-        // ENE for East-northeast
+	// ENE for East-northeast
 	pos.set(-1.f/(1+sqrt(2)), 1.f, 0.f);
-        if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[9], 0., -bshift, -vshift, false);
+	if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[9], 0., -cshift, -vshift, false);
 
-        // ESE for East-southeast
+	// ESE for East-southeast
 	pos.set(1.f/(1+sqrt(2)), 1.f, 0.f);
-        if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[10], 0., -bshift, -vshift, false);
+	if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[10], 0., -cshift, -vshift, false);
 
-        // SSE for South-southeast
-        pos.set(1.f, 1.f/(1+sqrt(2)), 0.f);
-        if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[11], 0., -bshift, -vshift, false);
+	// SSE for South-southeast
+	pos.set(1.f, 1.f/(1+sqrt(2)), 0.f);
+	if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[11], 0., -cshift, -vshift, false);
 
-        // SSW for South-southwest
+	// SSW for South-southwest
 	pos.set(1.f, -1.f/(1+sqrt(2)), 0.f);
-        if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[12], 0., -bshift, -vshift, false);
+	if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[12], 0., -cshift, -vshift, false);
 
-        // WSW for West-southwest
+	// WSW for West-southwest
 	pos.set(1.f/(1+sqrt(2)), -1.f, 0.f);
-        if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[13], 0., -bshift, -vshift, false);
+	if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[13], 0., -cshift, -vshift, false);
 
-        // WNW for West-northwest
+	// WNW for West-northwest
 	pos.set(-1.f/(1+sqrt(2)), -1.f, 0.f);
-        if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[14], 0., -bshift, -vshift, false);
+	if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[14], 0., -cshift, -vshift, false);
 
-        // NNW for North-northwest
+	// NNW for North-northwest
 	pos.set(-1.f, -1.f/(1+sqrt(2)), 0.f);
-        if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[15], 0., -bshift, -vshift, false);
+	if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[15], 0., -cshift, -vshift, false);
 }
 
 // Translate cardinal labels with gettext to current sky language and update font for the language
 void Cardinals::updateI18n()
 {
-	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getAppStelTranslator();
-	sNorth = trans.qtranslate("N");
-	sSouth = trans.qtranslate("S");
-	sEast = trans.qtranslate("E");
-	sWest = trans.qtranslate("W");
-	sNortheast = trans.qtranslate("NE");
-	sSoutheast = trans.qtranslate("SE");
-	sSouthwest = trans.qtranslate("SW");
-	sNorthwest = trans.qtranslate("NW");
-        sNorthnortheast = trans.qtranslate("NNE");
-        sEastnortheast = trans.qtranslate("ENE");
-        sEastsoutheast = trans.qtranslate("ESE");
-        sSouthsoutheast = trans.qtranslate("SSE");
-        sSouthsouthwest = trans.qtranslate("SSW");
-        sWestsouthwest = trans.qtranslate("WSW");
-        sWestnorthwest = trans.qtranslate("WNW");
-        sNorthnorthwest = trans.qtranslate("NNW");
+	// TRANSLATORS: North
+	sNorth		= qc_("N",   "compass direction");
+	// TRANSLATORS: South
+	sSouth		= qc_("S",   "compass direction");
+	// TRANSLATORS: East
+	sEast		= qc_("E",   "compass direction");
+	// TRANSLATORS: West
+	sWest		= qc_("W",   "compass direction");
+	// TRANSLATORS: Northeast
+	sNortheast	= qc_("NE",  "compass direction");
+	// TRANSLATORS: Southeast
+	sSoutheast	= qc_("SE",  "compass direction");
+	// TRANSLATORS: Southwest
+	sSouthwest	= qc_("SW",  "compass direction");
+	// TRANSLATORS: Northwest
+	sNorthwest	= qc_("NW",  "compass direction");
+	// TRANSLATORS: North-northeast
+	sNorthnortheast = qc_("NNE", "compass direction");
+	// TRANSLATORS: East-northeast
+	sEastnortheast	= qc_("ENE", "compass direction");
+	// TRANSLATORS: East-southeast
+	sEastsoutheast	= qc_("ESE", "compass direction");
+	// TRANSLATORS: South-southeast
+	sSouthsoutheast = qc_("SSE", "compass direction");
+	// TRANSLATORS: South-southwest
+	sSouthsouthwest = qc_("SSW", "compass direction");
+	// TRANSLATORS: West-southwest
+	sWestsouthwest	= qc_("WSW", "compass direction");
+	// TRANSLATORS: West-northwest
+	sWestnorthwest	= qc_("WNW", "compass direction");
+	// TRANSLATORS: North-northwest
+	sNorthnorthwest = qc_("NNW", "compass direction");
 }
 
 LandscapeMgr::LandscapeMgr()
