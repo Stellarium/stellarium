@@ -88,7 +88,7 @@ Cardinals::Cardinals(float _radius)
 	// Default font size is 24
 	fontC.setPixelSize(conf->value("viewing/cardinal_font_size", screenFontSize+11).toInt());
 	// Default font size is 18
-	fontSC.setPixelSize(conf->value("viewing/subcardinal_font_size", screenFontSize+6).toInt());
+        fontSC.setPixelSize(conf->value("viewing/subcardinal_font_size", screenFontSize+5).toInt());
 	// Draw the sub-subcardinal points even smaller.
 	fontSSC.setPixelSize(conf->value("viewing/subsubcardinal_font_size", screenFontSize+2).toInt());
 	propMgr = StelApp::getInstance().getStelPropertyManager();
