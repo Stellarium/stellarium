@@ -73,7 +73,7 @@ StelPluginInfo OcularsStelPluginInterface::getPluginInfo() const
 	StelPluginInfo info;
 	info.id = "Oculars";
 	info.displayedName = N_("Oculars");
-	info.authors = "Timothy Reaves";
+	info.authors = "Timothy Reaves, Bogdan Marinov, Alexander Wolf, Georg Zotti";
 	info.contact = STELLARIUM_DEV_URL;
 	info.description = N_("Shows the sky as if looking through a telescope eyepiece. (Only magnification and field of view are simulated.) It can also show a sensor frame and a Telrad sight.");
 	info.version = OCULARS_PLUGIN_VERSION;
@@ -86,6 +86,7 @@ Oculars::Oculars()
 	, selectedOcularIndex(-1)
 	, selectedTelescopeIndex(-1)
 	, selectedLensIndex(-1)
+	, selectedFinderIndex(-1)
 	, selectedCCDRotationAngle(0.0)
 	, selectedCCDPrismPositionAngle(0.0)
 	, arrowButtonScale(150)
@@ -93,10 +94,8 @@ Oculars::Oculars()
 	, flagModeOcular(false)
 	, flagModeSensor(false)
 	, flagModeTelrad(false)
-//	, flagShowCCD(false)
-//	, flagShowOculars(false)
+	, flagModeFinder(false)
 	, flagShowCrosshairs(false)
-//	, flagShowTelrad(false)
 	, usageMessageLabelID(-1)
 	, flagCardinalPointsMain(false)
 	, flagAdaptationMain(false)
@@ -148,6 +147,7 @@ Oculars::Oculars()
 	, actionShowCrosshairs(Q_NULLPTR)
 	, actionShowSensor(Q_NULLPTR)
 	, actionShowTelrad(Q_NULLPTR)
+	, actionShowFinder(Q_NULLPTR)
 	, actionConfiguration(Q_NULLPTR)
 	, actionMenu(Q_NULLPTR)
 	, actionTelescopeIncrement(Q_NULLPTR)
@@ -193,6 +193,7 @@ Oculars::Oculars()
 	oculars = QList<Ocular *>();
 	telescopes = QList<Telescope *>();
 	lenses = QList<Lens *> ();
+	finders = QList<Finder *> ();
 
 #ifdef Q_OS_MACOS
 	qt_set_sequence_auto_mnemonic(true);
@@ -220,6 +221,8 @@ Oculars::~Oculars()
 	oculars.clear();
 	qDeleteAll(lenses);
 	lenses.clear();
+	qDeleteAll(finders);
+	finders.clear();
 }
 
 QSettings* Oculars::getSettings()
@@ -244,6 +247,7 @@ void Oculars::deinit()
 	settings->remove("ocular");
 	settings->remove("telescope");
 	settings->remove("lens");
+	settings->remove("finder");
 	int index = 0;
 	for (auto* ccd : qAsConst(ccds))
 	{
@@ -268,6 +272,12 @@ void Oculars::deinit()
 		lens->writeToSettings(settings, index);
 		index++;
 	}
+	index = 0;
+	for (auto* finder : qAsConst(finders))
+	{
+		finder->writeToSettings(settings, index);
+		index++;
+	}
 
 	settings->setValue("ocular_count", oculars.count());
 	settings->setValue("telescope_count", telescopes.count());
@@ -277,37 +287,13 @@ void Oculars::deinit()
 	settings->setValue("telescope_index", selectedTelescopeIndex);
 	settings->setValue("ccd_index", selectedCCDIndex);
 	settings->setValue("lens_index", selectedLensIndex);
+	settings->setValue("finder_index", selectedFinderIndex);
 
 	StelCore *core = StelApp::getInstance().getCore();
 	StelSkyDrawer *skyDrawer = core->getSkyDrawer();
 	disconnect(skyDrawer, SIGNAL(customStarMagLimitChanged(double)), this, SLOT(setMagLimitStarsOcularsManual(double)));
 	disconnect(skyDrawer, SIGNAL(flagStarMagnitudeLimitChanged(bool)), this, SLOT(handleStarMagLimitToggle(bool)));
-	setPluginMode(OcNone); // TODO 2021: Restore Main App's settings
-//	if (flagShowCCD)
-//	{
-//		// Retrieve and restore star scales
-//		relativeStarScaleCCD=skyDrawer->getRelativeStarScale();
-//		absoluteStarScaleCCD=skyDrawer->getAbsoluteStarScale();
-//		skyDrawer->setRelativeStarScale(relativeStarScaleMain);
-//		skyDrawer->setAbsoluteStarScale(absoluteStarScaleMain);
-//	}
-//	else if (flagShowOculars)
-//	{
-//		qDebug() << "Oculars::deinit() .. restoring skyDrawer values while ocular view is active";
-//
-//		if (!getFlagAutoLimitMagnitude())
-//		{
-//			flagLimitStarsOculars=skyDrawer->getFlagStarMagnitudeLimit();
-//			magLimitStarsOculars=skyDrawer->getCustomStarMagnitudeLimit();
-//		}
-//		skyDrawer->setCustomStarMagnitudeLimit(magLimitStarsMain);
-//		skyDrawer->setFlagStarMagnitudeLimit(flagLimitStarsMain);
-//		// Retrieve and restore star scales
-//		relativeStarScaleOculars=skyDrawer->getRelativeStarScale();
-//		absoluteStarScaleOculars=skyDrawer->getAbsoluteStarScale();
-//		skyDrawer->setRelativeStarScale(relativeStarScaleMain);
-//		skyDrawer->setAbsoluteStarScale(absoluteStarScaleMain);
-//	}
+	setPluginMode(OcNone); // Restore Main App's settings
 
 	settings->setValue("stars_scale_relative", QString::number(relativeStarScaleOculars, 'f', 2));
 	settings->setValue("stars_scale_absolute", QString::number(absoluteStarScaleOculars, 'f', 2));
@@ -357,6 +343,26 @@ void Oculars::draw(StelCore* core)
 				qWarning() << "Oculars: the selected ocular index of "
 					   << selectedOcularIndex << " is greater than the ocular count of "
 					   << oculars.count() << ". Module disabled!";
+			}
+			break;
+		case OcFinder:
+			if (selectedFinderIndex >= 0)
+			{
+				paintOcularMask(core); // TODO: paintFinderMask?
+				if (flagShowCrosshairs)
+					paintCrosshairs();
+
+				if (!flagGuiPanelEnabled)
+				{
+					// Paint the information in the upper-right hand corner
+					paintText(core);
+				}
+			}
+			else
+			{	// TODO 2021: "Module disabled" is printed but not visible here. Change message or set ocularMode=OcNone?
+				qWarning() << "Oculars: the selected finder index of "
+					   << selectedFinderIndex << " is greater than the finder count of "
+					   << finders.count() << ". Module disabled!";
 			}
 			break;
 		case OcSensor:
@@ -438,12 +444,12 @@ void Oculars::handleMouseClicks(class QMouseEvent* event)
 		}
 	}
 
-	if (pluginMode==OcOcular)
+	if ((pluginMode==OcOcular) || (pluginMode==OcFinder))
 		movementManager->handleMouseClicks(event); // force it here for selection!
 
 	if (StelApp::getInstance().getStelObjectMgr().getWasSelected())
 	{
-		if (pluginMode==OcOcular)
+		if ((pluginMode==OcOcular) || (pluginMode==OcFinder))
 		{
 			// center the selected object in the ocular, and track.
 			movementManager->setFlagTracking(true);
@@ -454,7 +460,7 @@ void Oculars::handleMouseClicks(class QMouseEvent* event)
 			hideUsageMessageIfDisplayed();
 		}
 	}
-	else if(pluginMode==OcOcular)
+	else if((pluginMode==OcOcular) || (pluginMode==OcFinder))
 	{
 		// The ocular is displayed, but no object is selected.  So don't track the stars.  We may have locked
 		// the position of the screen if the movement keys were used.  so call this to be on the safe side.
@@ -482,7 +488,7 @@ void Oculars::init()
 
 		setFlagRequireSelection(settings->value("require_selection_to_zoom", true).toBool());
 		flagScaleImageCircle = settings->value("use_max_exit_circle", false).toBool();
-		int ocularCount = settings->value("ocular_count", 0).toInt();
+		const int ocularCount = settings->value("ocular_count", 0).toInt();
 		int actualOcularCount = ocularCount;
 		for (int index = 0; index < ocularCount; index++)
 		{
@@ -500,12 +506,13 @@ void Oculars::init()
 		{
 			if (actualOcularCount < ocularCount)
 			{
-				qWarning() << "The Oculars ini file appears to be corrupt; delete it.";
+				qWarning() << "The Oculars ini file appears to be corrupt (inconsistent number of oculars); edit or delete it.";
 			}
 			else
 			{
-				qWarning() << "There are no oculars defined for the Oculars plugin; plugin will be disabled.";
+				qWarning() << "There are no oculars defined for the Oculars plugin.";
 			}
+			qWarning() << "Oculars plugin will be disabled.";
 			ready = false;
 		}
 		else
@@ -513,7 +520,7 @@ void Oculars::init()
 			selectedOcularIndex = settings->value("ocular_index", 0).toInt();
 		}
 
-		int ccdCount = settings->value("ccd_count", 0).toInt();
+		const int ccdCount = settings->value("ccd_count", 0).toInt();
 		int actualCcdCount = ccdCount;
 		for (int index = 0; index < ccdCount; index++)
 		{
@@ -534,7 +541,7 @@ void Oculars::init()
 		}
 		selectedCCDIndex = settings->value("ccd_index", 0).toInt();
 
-		int telescopeCount = settings->value("telescope_count", 0).toInt();
+		const int telescopeCount = settings->value("telescope_count", 0).toInt();
 		int actualTelescopeCount = telescopeCount;
 		for (int index = 0; index < telescopeCount; index++)
 		{
@@ -552,12 +559,13 @@ void Oculars::init()
 		{
 			if (actualTelescopeCount < telescopeCount)
 			{
-				qWarning() << "The Oculars ini file appears to be corrupt; delete it.";
+				qWarning() << "The Oculars ini file appears to be corrupt (inconsistent number of telescopes); edit or delete it.";
 			}
 			else
 			{
-				qWarning() << "There are no telescopes defined for the Oculars plugin; plugin will be disabled.";
+				qWarning() << "There are no telescopes defined for the Oculars plugin.";
 			}
+			qWarning() << "Oculars plugin will be disabled.";
 			ready = false;
 		}
 		else
@@ -565,7 +573,7 @@ void Oculars::init()
 			selectedTelescopeIndex = settings->value("telescope_index", 0).toInt();
 		}
 
-		int lensCount = settings->value("lens_count", 0).toInt();
+		const int lensCount = settings->value("lens_count", 0).toInt();
 		int actualLensCount = lensCount;
 		for (int index = 0; index<lensCount; index++)
 		{
@@ -581,17 +589,42 @@ void Oculars::init()
 		}
 		if (lensCount > 0 && actualLensCount < lensCount)
 		{
-			qWarning() << "The Oculars ini file appears to be corrupt; delete it.";
+			qWarning() << "The Oculars ini file appears to be corrupt  (inconsistent number of lenses); edit or delete it.";
 		}
 		selectedLensIndex=settings->value("lens_index", -1).toInt(); // Lens is not selected by default!
+
+		const int finderCount = settings->value("finder_count", 0).toInt();
+		int actualFinderCount = finderCount;
+		for (int index = 0; index<finderCount; index++)
+		{
+			Finder *newFinder = Finder::finderFromSettings(settings, index);
+			if (newFinder != Q_NULLPTR)
+			{
+				finders.append(newFinder);
+			}
+			else
+			{
+				actualFinderCount--;
+			}
+		}
+		if (finderCount > 0 && actualFinderCount < finderCount)
+		{
+			qWarning() << "The Oculars ini file appears to be corrupt (inconsistent number of finders); edit or delete it.";
+		}
+		selectedFinderIndex=settings->value("finder_index", 0).toInt();
 
 		pxmapGlow = new QPixmap(":/graphicGui/miscGlow32x32.png");
 		pxmapOnIcon = new QPixmap(":/ocular/bt_ocular_on.png");
 		pxmapOffIcon = new QPixmap(":/ocular/bt_ocular_off.png");
 
-		ocularDialog = new OcularDialog(this, &ccds, &oculars, &telescopes, &lenses);
+		qDebug() << "Oculars::init(): OcularDialog";
+		ocularDialog = new OcularDialog(this, &ccds, &oculars, &telescopes, &lenses, &finders);
+		qDebug() << "Oculars::init(): initializeActivationActions";
 		initializeActivationActions();
+		qDebug() << "Oculars::init(): determineMaxEyepieceAngle";
 		determineMaxEyepieceAngle();
+		qDebug() << "Oculars::init(): enableGuiPanel";
+
 
 		guiPanelFontSize=settings->value("gui_panel_fontsize", 12).toInt();
 		enableGuiPanel(settings->value("enable_control_panel", true).toBool());
@@ -599,6 +632,8 @@ void Oculars::init()
 		lineColor=Vec3f(settings->value("line_color", "0.77,0.14,0.16").toString());
 		telradFOV=Vec4f(settings->value("telrad_fov", "0.5,2.0,4.0,0.0").toString());
 		focuserColor=Vec3f(settings->value("focuser_color", "0.0,0.67,1.0").toString());
+
+		qDebug() << "Oculars::init(): setting up properties";
 
 		// This must come ahead of setFlagAutosetMountForCCD (GH #505)
 		StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
@@ -652,6 +687,8 @@ void Oculars::init()
 	// enforce check existence of reticle for the current eyepiece
 	updateOcularReticle();
 
+	qDebug() << "Oculars::init(): connections...";
+
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslateGui()));
 	connect(this, SIGNAL(selectedOcularChanged(int)), this, SLOT(updateOcularReticle()));
 	StelCore *core = StelApp::getInstance().getCore();
@@ -659,6 +696,7 @@ void Oculars::init()
 	connect(skyDrawer, SIGNAL(flagStarMagnitudeLimitChanged(bool)), this, SLOT(handleStarMagLimitToggle(bool)));
 	StelObjectMgr* objectMgr = GETSTELMODULE(StelObjectMgr);
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(updateLatestSelectedSSO()));
+	qDebug() << "Oculars::init(): done";
 }
 
 void Oculars::determineMaxEyepieceAngle()
@@ -750,6 +788,8 @@ void Oculars::enableGuiPanel(bool enable)
 					guiPanel->showOcularGui();
 				else if (pluginMode==OcSensor)
 					guiPanel->showCcdGui();
+				else if (pluginMode==OcFinder)
+					guiPanel->showFinderGui();
 			}
 		}
 	}
@@ -882,7 +922,7 @@ void Oculars::ccdRotationReset()
 	if (ccd)
 	{
 		ccd->setChipRotAngle(0.0);
-		emit selectedCCDChanged(selectedCCDIndex);
+		emit selectedCCDChanged(selectedCCDIndex); // TODO: Why do we emit this? We did not change the index! Probably the function can be replaced by setSelectedCCDRotationAngle(0)
 		emit selectedCCDRotationAngleChanged(0.0);
 	}
 }
@@ -952,6 +992,16 @@ void Oculars::decrementCCDIndex()
 		selectedCCDIndex = ccds.count() - 1;
 	}
 	emit selectedCCDChanged(selectedCCDIndex);
+}
+
+void Oculars::decrementFinderIndex()
+{
+	selectedFinderIndex--;
+	if (selectedFinderIndex == -1)
+	{
+		selectedFinderIndex = finders.count() - 1;
+	}
+	emit(selectedFinderChanged(selectedFinderIndex));
 }
 
 void Oculars::decrementOcularIndex()
@@ -1169,6 +1219,16 @@ void Oculars::incrementCCDIndex()
 	emit selectedCCDChanged(selectedCCDIndex);
 }
 
+void Oculars::incrementFinderIndex()
+{
+	selectedFinderIndex++;
+	if (selectedFinderIndex == finders.count())
+	{
+		selectedFinderIndex = 0;
+	}
+	emit(selectedFinderChanged(selectedFinderIndex));
+}
+
 void Oculars::incrementOcularIndex()
 {
 	selectedOcularIndex++;
@@ -1292,6 +1352,15 @@ void Oculars::selectLensAtIndex(int index)
 	}
 }
 
+void Oculars::selectFinderAtIndex(int index)
+{
+	if (index > -1 && index < finders.count())
+	{
+		selectedFinderIndex = index;
+		emit(selectedFinderChanged(index));
+	}
+}
+
 void Oculars::toggleCCD()
 {
 	setPluginMode(pluginMode==OcSensor ? OcNone : OcSensor);
@@ -1308,8 +1377,12 @@ void Oculars::toggleCrosshairs(bool show)
 
 void Oculars::toggleTelrad()
 {
-	//toggleTelrad(pluginMode!=OcTelrad);
 	setPluginMode(pluginMode==OcTelrad ? OcNone : OcTelrad);
+}
+
+void Oculars::toggleFinder()
+{
+	setPluginMode(pluginMode==OcFinder ? OcNone : OcFinder);
 }
 
 void Oculars::initializeActivationActions()
@@ -1319,6 +1392,7 @@ void Oculars::initializeActivationActions()
 	actionShowOcular = addAction("actionShow_Ocular", ocularsGroup, N_("Ocular view"), "flagModeOcular", "Ctrl+O");
 	actionShowSensor = addAction("actionShow_Sensor", ocularsGroup, N_("Image sensor frame"), "flagModeSensor");
 	actionShowTelrad = addAction("actionShow_Telrad", ocularsGroup, N_("Telrad sight"), "flagModeTelrad", "Ctrl+B");
+	actionShowFinder = addAction("actionShow_Finder", ocularsGroup, N_("Finder view"), "flagModeFinder"); // TODO: Define default hotkey? Ctrl+Alt+B?
 	actionShowCrosshairs = addAction("actionShow_Ocular_Crosshairs", ocularsGroup, N_("Show crosshairs"), "enableCrosshairs", "Alt+C");
 	actionConfiguration = addAction("actionOpen_Oculars_Configuration", ocularsGroup, N_("Toggle Oculars configuration window"), ocularDialog, "visible", ""); // Allow assign shortkey
 	addAction("actionShow_Oculars_GUI", ocularsGroup, N_("Toggle Oculars button bar"), "flagGuiPanelEnabled"); // Allow assign shortkey
@@ -1831,6 +1905,11 @@ void Oculars::paintText(const StelCore* core)
 	{
 		telescope = telescopes[selectedTelescopeIndex];
 	}
+	Finder *finder = Q_NULLPTR;
+	if(selectedFinderIndex != -1)
+	{
+		finder = finders[selectedFinderIndex];
+	}
 	Lens *lens = selectedLens();
 
 	// set up the color and the GL state
@@ -1941,6 +2020,54 @@ void Oculars::paintText(const StelCore* core)
 				painter.drawText(xPosition, yPosition, QString(q_("FOV: %1")).arg(fovString));
 			}
 		}
+	}
+
+	// The Finder
+	else if (pluginMode==OcFinder && finder!=Q_NULLPTR)
+	{
+		QString finderNumberLabel;
+		QString name = finder->name();
+		QString finderI18n = q_("Finder");
+		if (name.isEmpty())
+		{
+			finderNumberLabel = QString("%1 #%2").arg(finderI18n).arg(selectedFinderIndex);
+		}
+		else
+		{
+			finderNumberLabel = QString("%1 #%2: %3").arg(finderI18n).arg(selectedFinderIndex).arg(name);
+		}
+		// The name of the finder could be really long.
+		if (name.length() > widthString.length())
+		{
+			xPosition -= qRound(insetFromRHS*0.5);
+		}
+		painter.drawText(xPosition, yPosition, finderNumberLabel);
+		yPosition-=lineHeight;
+
+		// General info
+		QString magString = QString::number(finder->magnification(), 'f', 1);
+		magString.append(QChar(0x02E3)); // Was 0x00D7
+		painter.drawText(xPosition, yPosition, QString(q_("Magnification: %1")).arg(magString));
+		yPosition-=lineHeight;
+
+		QString fApertureLabel = QString(q_("Finder aperture: %1")).arg(QString::number(finder->aperture(), 'f', 1));
+		painter.drawText(xPosition, yPosition, fApertureLabel);
+		yPosition-=lineHeight;
+
+		QString fovString = QString::number(finder->trueFOV(), 'f', 5);
+		fovString.append(QChar(0x00B0));//Degree sign
+		painter.drawText(xPosition, yPosition, QString(q_("True FOV: %1")).arg(fovString));
+		yPosition-=lineHeight;
+
+		QString finderFov = QString::number(finder->apparentFOV(), 'f', 2);
+		finderFov.append(QChar(0x00B0));//Degree sign
+		// TRANSLATORS: aFOV = apparent field of view
+		QString finderFOVLabel = QString(q_("Finder aFOV: %1")).arg(finderFov);
+		painter.drawText(xPosition, yPosition, finderFOVLabel);
+		yPosition-=lineHeight;
+
+		QString exitPupil = QString::number(finder->aperture()/finder->magnification(), 'f', 2);
+		painter.drawText(xPosition, yPosition, QString(q_("Exit pupil: %1 mm")).arg(exitPupil));
 	}
 
 	// A Sensor
@@ -2088,7 +2215,6 @@ void Oculars::setPluginMode(PluginMode newMode)
 	StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
 	StelSkyDrawer *skyDrawer = core->getSkyDrawer();
 	StelMovementMgr *movementManager = core->getMovementMgr();
-	SolarSystem *ss=GETSTELMODULE(SolarSystem);
 
 	// Try to avoid linked side effects like zooming. Only view quality settings should be affected.
 	// 1. We always switch first to ground state (OcNone), then (2) prepare the new state, or set transition to OcNone if there are obstacles, and finally (3) activate the new state.
@@ -2106,13 +2232,27 @@ void Oculars::setPluginMode(PluginMode newMode)
 			flagModeTelrad=false;
 			emit flagModeTelradChanged(false);
 			break;
+		case OcFinder:
+			if (getFlagInitFovUsage()) // Restoration of FOV is needed?
+				movementManager->zoomTo(movementManager->getInitFov());
+			else
+				movementManager->zoomTo(initialFOV);
+
+			// TODO 2021: Decide if this is really useful? We only de-activate the finder. Why revert to another view direction?
+			if (getFlagInitDirectionUsage())
+				movementManager->setViewDirectionJ2000(StelApp::getInstance().getCore()->altAzToJ2000(movementManager->getInitViewingDirection(), StelCore::RefractionOff));
+
+			handlePlanetScaling(true);
+			flagModeFinder=false;
+			emit flagModeFinderChanged(false);
+			break;
 		case OcOcular:
 			// TODO switch out Ocular-specific settings
 
 			if (flagHideGridsLines)
 				toggleLines(true);
 
-			StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue("MilkyWay.saturation", milkyWaySaturationMain);
+			propMgr->setStelPropertyValue("MilkyWay.saturation", milkyWaySaturationMain);
 			disconnect(skyDrawer, SIGNAL(customStarMagLimitChanged(double)), this, SLOT(setMagLimitStarsOcularsManual(double)));
 			// restore values, but keep current to enable toggling.
 			if (!getFlagAutoLimitMagnitude())
@@ -2131,16 +2271,12 @@ void Oculars::setPluginMode(PluginMode newMode)
 			skyDrawer->setFlagNebulaMagnitudeLimit(flagLimitDSOsMain);
 			skyDrawer->setCustomPlanetMagnitudeLimit(magLimitPlanetsMain);
 			skyDrawer->setCustomNebulaMagnitudeLimit(magLimitDSOsMain);
-			// TODO: The next 3 should likewise actually restore previously stored settings
+			// TODO: The next 3 could likewise actually restore previously stored (configurable) settings
 			movementManager->setFlagTracking(false);
 			movementManager->setFlagEnableZoomKeys(true);
 			movementManager->setFlagEnableMouseNavigation(true);
 
-			ss->setFlagMoonScale(flagMoonScaleMain);
-			ss->setFlagMinorBodyScale(flagMinorBodiesScaleMain);
-			ss->setFlagPlanetScale(flagPlanetScaleMain);
-			ss->setFlagSunScale(flagSunScaleMain);
-
+			handlePlanetScaling(true);
 			// Set the screen display
 			core->setFlipHorz(flipHorzMain);
 			core->setFlipVert(flipVertMain);
@@ -2151,14 +2287,13 @@ void Oculars::setPluginMode(PluginMode newMode)
 			//flagShowOculars = enableOcularMode;
 			// TODO: Make sure zoom() has no side effect about ocularMode / flagOcularShow.
 			//zoom(false);
-			//BM: I hope this is the right place...
 			if (guiPanel)
-				guiPanel->showOcularGui();
+				guiPanel->foldGui();
 
 			// from unzoomOcular()
 			if (getFlagInitFovUsage())
 				movementManager->zoomTo(movementManager->getInitFov());
-			else // if (!flagShowTelrad)
+			else
 				movementManager->zoomTo(initialFOV);
 
 			if (getFlagInitDirectionUsage())
@@ -2176,6 +2311,8 @@ void Oculars::setPluginMode(PluginMode newMode)
 
 			// Rest from toggleCCD(false):
 			//flagShowCCD = false;
+
+			handlePlanetScaling(true);
 
 			// Restore star scales
 			relativeStarScaleCCD=skyDrawer->getRelativeStarScale();
@@ -2204,47 +2341,63 @@ void Oculars::setPluginMode(PluginMode newMode)
 	}
 
 	// 2. We are in state OcNone without having set this value yet.
-	// Now try to prepare the new settings, or
+	// Now try to prepare the new settings, or force OcNone if something goes wrong.
 	switch (newMode) // only prepare switching INTO this mode...
 	{
-		case OcNone:
-			pluginMode=OcNone;
-			break;
+		case OcNone:    // fallthrough
 		case OcTelrad:
-			pluginMode=OcTelrad;
+			pluginMode=newMode;
+			break;
+		case OcFinder:
+			if (finders.isEmpty())
+			{
+				selectedFinderIndex = -1;
+				qWarning() << "No finders found";
+				pluginMode=OcNone;
+				break;
+			}
+			else if (finders.count() > 0 && selectedFinderIndex == -1)
+			{
+				selectedFinderIndex = 0;
+			}
+			pluginMode=OcFinder;
 			break;
 		case OcOcular:
 			pluginMode=OcOcular;
-			// TODO switch in Ocular-specific settings
+			// TODO switch in Ocular-specific settings?
+			// TODO: Decide if a warning panel like for sensors should be displayed?
 			// Check to ensure that we have enough oculars & telescopes, as they may have been edited in the config dialog
 			// was in enableOcularMode(true)
-			if (oculars.count() == 0)
+			if (oculars.isEmpty())
 			{
 				selectedOcularIndex = -1;
 				qWarning() << "No oculars found";
+				pluginMode=OcNone;
+				break;
 			}
 			else if (oculars.count() > 0 && selectedOcularIndex == -1)
 			{
 				selectedOcularIndex = 0;
 			}
-			if (telescopes.count() == 0)
+			if (telescopes.isEmpty())
 			{
 				selectedTelescopeIndex = -1;
 				qWarning() << "No telescopes found";
+				pluginMode=OcNone;
+				break;
 			}
 			else if (telescopes.count() > 0 && selectedTelescopeIndex == -1)
 			{
 				selectedTelescopeIndex = 0;
 			}
-			if (!ready  || selectedOcularIndex == -1 ||  (selectedTelescopeIndex == -1 && !isBinocularDefined()))
-			{
-				qWarning() << "The Oculars module has been disabled.";
-				newMode=OcNone; // we are in state OcNone and will not enable anything now.
-				//return;
-				// TODO: Test: leave the switch statement prematurely.
-				break;
-			}
-			// Switch the ocular view on. We may want to ensure there is a selected object.
+			//if (!ready  || selectedOcularIndex == -1 ||  (selectedTelescopeIndex == -1 && !isBinocularDefined()))
+			//{
+			//	qWarning() << "The Oculars module has been disabled.";
+			//	pluginMode=OcNone; // we are in state OcNone and will not enable anything now.
+			//}
+
+
+			// We may want to ensure there is a selected object. Disable switching if so configured.
 			if (flagRequireSelection && !StelApp::getInstance().getStelObjectMgr().getWasSelected() )
 			{
 				if (usageMessageLabelID == -1)
@@ -2255,75 +2408,14 @@ void Oculars::setPluginMode(PluginMode newMode)
 					int yPositionOffset = qRound(projectorParams.viewportXywh[3]*projectorParams.viewportCenterOffset[1]);
 					int xPosition = qRound(projectorParams.viewportCenter[0] - 0.5 * metrics.boundingRect(labelText).width());
 					int yPosition = qRound(projectorParams.viewportCenter[1] - yPositionOffset - 0.5 * metrics.height());
-					usageMessageLabelID = labelManager->labelScreen(labelText, xPosition, yPosition,
-											true, font.pixelSize(),  "#99FF99");
+					usageMessageLabelID = labelManager->labelScreen(labelText, xPosition, yPosition, true, font.pixelSize(), "#99FF99");
 				}
+				pluginMode=OcNone;
 			}
 			else
 			{
-				if (selectedOcularIndex != -1)
-				{
-					// remove the usage label if it is being displayed.
-					hideUsageMessageIfDisplayed();
-					//flagShowOculars = enableOcularMode;
-					pluginMode=OcOcular;
-					//zoom(false); // TODO 2021: What are the side effects of this?
-					//BM: I hope this is the right place...
-					if (guiPanel)
-						guiPanel->showOcularGui();
-				}
+				hideUsageMessageIfDisplayed();
 			}
-
-
-			// this block is from previous zoom(false). These are side effects unrelated to a "zooming" operation.
-
-			if (flagHideGridsLines)
-			{
-				// Store current state for later resetting, and hide them
-				storeLineStateMain();
-				toggleLines(false);
-				// TODO 2021: Make sure to handle toggling gridlines correctly in addition, while OcOcular is active.
-			}
-			skyDrawer->setFlagLuminanceAdaptation(false);  // Will this ever be restored to the state set by the user?
-			StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue("MilkyWay.saturation", 0.f);
-
-			// Current state
-			flagAdaptationMain	= skyDrawer->getFlagLuminanceAdaptation();
-			flagLimitStarsMain	= skyDrawer->getFlagStarMagnitudeLimit();
-			flagLimitPlanetsMain	= skyDrawer->getFlagPlanetMagnitudeLimit();
-			flagLimitDSOsMain	= skyDrawer->getFlagNebulaMagnitudeLimit();
-			magLimitStarsMain	= skyDrawer->getCustomStarMagnitudeLimit();
-			magLimitPlanetsMain	= skyDrawer->getCustomPlanetMagnitudeLimit();
-			magLimitDSOsMain	= skyDrawer->getCustomNebulaMagnitudeLimit();
-			relativeStarScaleMain	= skyDrawer->getRelativeStarScale();
-			absoluteStarScaleMain	= skyDrawer->getAbsoluteStarScale();
-
-			// Change relative and absolute scales for stars
-			relativeStarScaleMain=skyDrawer->getRelativeStarScale();
-			skyDrawer->setRelativeStarScale(relativeStarScaleOculars);
-			absoluteStarScaleMain=skyDrawer->getAbsoluteStarScale();
-			skyDrawer->setAbsoluteStarScale(absoluteStarScaleOculars);
-
-			flagMoonScaleMain		= propMgr->getStelPropertyValue("SolarSystem.flagMoonScale").toBool();
-			flagMinorBodiesScaleMain	= propMgr->getStelPropertyValue("SolarSystem.flagMinorBodyScale").toBool();
-			flagPlanetScaleMain		= propMgr->getStelPropertyValue("SolarSystem.flagPlanetScale").toBool();
-			flagSunScaleMain		= propMgr->getStelPropertyValue("SolarSystem.flagSunScale").toBool();
-			ss->setFlagMoonScale(false);
-			ss->setFlagMinorBodyScale(false);
-			ss->setFlagPlanetScale(false);
-			ss->setFlagSunScale(false);
-
-			milkyWaySaturationMain	= propMgr->getStelPropertyValue("MilkyWay.saturation").toDouble();
-
-			flipHorzMain = core->getFlipHorz();
-			flipVertMain = core->getFlipVert();
-
-			initialFOV = core->getMovementMgr()->getCurrentFov();
-			// TODO 2021: Store these settings first, and restore on leaving OcOcular mode above!
-			movementManager->setFlagTracking(true);
-			movementManager->setFlagEnableZoomKeys(false);
-			movementManager->setFlagEnableMouseNavigation(false);
-
 			break;
 		case OcSensor:
 			// TODO prepare Sensor-specific settings?
@@ -2331,8 +2423,7 @@ void Oculars::setPluginMode(PluginMode newMode)
 			//If there are no sensors...
 			if (ccds.isEmpty() || telescopes.isEmpty())
 			{
-				//TODO: BM: Make this an on-screen message and/or disable the button
-				//if there are no sensors.
+				//TODO: BM: Make this an on-screen message and/or disable the button if there are no sensors.
 				qWarning() << "Oculars plugin: Unable to display a sensor boundary: No sensors or telescopes are defined.";
 				QMessageBox::warning(&StelMainView::getInstance(), q_("Warning!"), q_("Unable to display a sensor boundary: No sensors or telescopes are defined."), QMessageBox::Ok);
 				//flagShowCCD = false;
@@ -2344,9 +2435,7 @@ void Oculars::setPluginMode(PluginMode newMode)
 	}
 
 
-
-
-	// 3. Now really switch what's possible
+	// 3. pluginMode has been set. Now really switch around what's needed
 	switch (pluginMode){
 		case OcNone:
 			if (guiPanel)
@@ -2372,22 +2461,81 @@ void Oculars::setPluginMode(PluginMode newMode)
 			emit flagModeTelradChanged(true);
 
 			break;
+		case OcFinder:
+			if (guiPanel)
+				guiPanel->showFinderGui();
+
+			handlePlanetScaling(false);
+
+			flipHorzMain = core->getFlipHorz();
+			flipVertMain = core->getFlipVert();
+
+			initialFOV = core->getMovementMgr()->getCurrentFov();
+			movementManager->zoomTo(1.2*finders[selectedFinderIndex]->trueFOV());
+
+			// TODO 2021: Decide if this is really useful? We only activate a red zero-magnification finder where we need it. Why revert to another view direction?
+			if (StelApp::getInstance().getStelObjectMgr().getWasSelected())
+				movementManager->setViewDirectionJ2000(StelApp::getInstance().getCore()->altAzToJ2000(movementManager->getInitViewingDirection(), StelCore::RefractionOff));
+			// TODO 2021: While we are at it, shall activating the Finder center on a selected object?
+
+			flagModeFinder=true;
+			emit flagModeFinderChanged(true);
+
+			break;
 		case OcOcular:
+			if (guiPanel)
+				guiPanel->showOcularGui();
+
+			// this block is from previous zoom(false). These are side effects unrelated to a "zooming" operation.
+			if (flagHideGridsLines)
+			{
+				// Store current state for later resetting, and hide them
+				storeLineStateMain();
+				toggleLines(false);
+				// TODO 2021: Make sure to handle toggling gridlines correctly in addition, while OcOcular is active.
+			}
+
+
+			milkyWaySaturationMain	= propMgr->getStelPropertyValue("MilkyWay.saturation").toDouble();
+			propMgr->setStelPropertyValue("MilkyWay.saturation", 0.f);
+
+			// Current state
+			flagAdaptationMain	= skyDrawer->getFlagLuminanceAdaptation();
+			flagLimitStarsMain	= skyDrawer->getFlagStarMagnitudeLimit();
+			flagLimitPlanetsMain	= skyDrawer->getFlagPlanetMagnitudeLimit();
+			flagLimitDSOsMain	= skyDrawer->getFlagNebulaMagnitudeLimit();
+			magLimitStarsMain	= skyDrawer->getCustomStarMagnitudeLimit();
+			magLimitPlanetsMain	= skyDrawer->getCustomPlanetMagnitudeLimit();
+			magLimitDSOsMain	= skyDrawer->getCustomNebulaMagnitudeLimit();
+			relativeStarScaleMain	= skyDrawer->getRelativeStarScale();
+			absoluteStarScaleMain	= skyDrawer->getAbsoluteStarScale();
+			skyDrawer->setFlagLuminanceAdaptation(false);  // Will this ever be restored to the state set by the user?
+
+			// Change relative and absolute scales for stars
+			relativeStarScaleMain=skyDrawer->getRelativeStarScale();
+			skyDrawer->setRelativeStarScale(relativeStarScaleOculars);
+			absoluteStarScaleMain=skyDrawer->getAbsoluteStarScale();
+			skyDrawer->setAbsoluteStarScale(absoluteStarScaleOculars);
+
+			handlePlanetScaling(false);
+
+			flipHorzMain = core->getFlipHorz();
+			flipVertMain = core->getFlipVert();
+
+			initialFOV = core->getMovementMgr()->getCurrentFov();
+			// TODO 2021: Store these settings first, and restore on leaving OcOcular mode above!
+			movementManager->setFlagTracking(true);
+			movementManager->setFlagEnableZoomKeys(false);
+			movementManager->setFlagEnableMouseNavigation(false);
+
 			zoomOcular();
 			flagModeOcular=true;
 			emit flagModeOcularChanged(true);
 			break;
 		case OcSensor:
-			//from previous: toggleCCD(true);
 			initialFOV = movementManager->getCurrentFov();
 			//Mutually exclusive with the ocular mode
 			hideUsageMessageIfDisplayed();
-			//if (flagShowOculars)
-			//	enableOcular(false);
-			//
-			//if (flagShowTelrad) {
-			//	toggleTelrad(false);
-			//}
 
 			selectedTelescopeIndex = qMax(0, selectedTelescopeIndex);
 			selectedCCDIndex = qMax(0, selectedCCDIndex);
@@ -2427,33 +2575,74 @@ void Oculars::setFlagModeTelrad(bool show)
 	setPluginMode(show ? OcTelrad : OcNone );
 }
 
+void Oculars::setFlagModeFinder(bool show)
+{
+	setPluginMode(show ? OcFinder : OcNone );
+}
+
 // TODO 2021: Misnomer: This is not "toggle" (flip whatever state) but "switch"
+// This should be called when a new state is entered
 void Oculars::toggleLines(bool visible)
 {
 	//if (flagShowTelrad)
 	//	return;
 	// TODO 2021: Probably this is a better ensurement: But get rid of that later!
-	if (visible)
-	{
-		Q_ASSERT((pluginMode==OcNone) || (pluginMode==OcTelrad));
-	}
-
+	//if (visible)
+	//{
+	//	Q_ASSERT((!flagHideGridsLines) || (pluginMode==OcNone) || (pluginMode==OcTelrad) || (pluginMode==OcFinder));
+	//}
+	//else {
+	//	Q_ASSERT((flagHideGridsLines) && ((pluginMode==OcOcular) || (pluginMode==OcSensor)) );
+	//}
 
 	StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
 
 	if (visible) // restore previous settings
 	{
-		restoreLineStateMain();
+		propMgr->setStelPropertyValue("GridLinesMgr.gridlinesDisplayed", flagGridLinesDisplayedMain);
+		propMgr->setStelPropertyValue("LandscapeMgr.cardinalsPointsDisplayed", flagCardinalPointsMain);
+		propMgr->setStelPropertyValue("ConstellationMgr.linesDisplayed", flagConstellationLinesMain);
+		propMgr->setStelPropertyValue("ConstellationMgr.boundariesDisplayed", flagConstellationBoundariesMain);
+		propMgr->setStelPropertyValue("AsterismMgr.linesDisplayed", flagAsterismLinesMain);
+		propMgr->setStelPropertyValue("AsterismMgr.rayHelpersDisplayed", flagRayHelpersLinesMain);
 	}
 	else
 	{
-		// TODO 2021: Where do we store the current state first?
+		flagGridLinesDisplayedMain	= propMgr->getStelPropertyValue("GridLinesMgr.gridlinesDisplayed").toBool();
+		flagCardinalPointsMain		= propMgr->getStelPropertyValue("LandscapeMgr.cardinalsPointsDisplayed").toBool();
+		flagConstellationLinesMain	= propMgr->getStelPropertyValue("ConstellationMgr.linesDisplayed").toBool();
+		flagConstellationBoundariesMain	= propMgr->getStelPropertyValue("ConstellationMgr.boundariesDisplayed").toBool();
+		flagAsterismLinesMain		= propMgr->getStelPropertyValue("AsterismMgr.linesDisplayed").toBool();
+		flagRayHelpersLinesMain		= propMgr->getStelPropertyValue("AsterismMgr.rayHelpersDisplayed").toBool();
 		propMgr->setStelPropertyValue("GridLinesMgr.gridlinesDisplayed", false);
 		propMgr->setStelPropertyValue("LandscapeMgr.cardinalPointsDisplayed", false);
 		propMgr->setStelPropertyValue("ConstellationMgr.linesDisplayed", false);
 		propMgr->setStelPropertyValue("ConstellationMgr.boundariesDisplayed", false);
 		propMgr->setStelPropertyValue("AsterismMgr.linesDisplayed", false);
 		propMgr->setStelPropertyValue("AsterismMgr.rayHelpersDisplayed", false);
+	}
+}
+
+void Oculars::handlePlanetScaling(bool scale)
+{
+	SolarSystem *ss=GETSTELMODULE(SolarSystem);
+	if (scale)
+	{
+		ss->setFlagMoonScale(flagMoonScaleMain);
+		ss->setFlagMinorBodyScale(flagMinorBodiesScaleMain);
+		ss->setFlagPlanetScale(flagPlanetScaleMain);
+		ss->setFlagSunScale(flagSunScaleMain);
+	}
+	else
+	{
+		flagMoonScaleMain        = ss->getFlagMoonScale();
+		flagMinorBodiesScaleMain = ss->getFlagMinorBodyScale();
+		flagPlanetScaleMain      = ss->getFlagPlanetScale();
+		flagSunScaleMain         = ss->getFlagSunScale();
+		ss->setFlagMoonScale(false);
+		ss->setFlagMinorBodyScale(false);
+		ss->setFlagPlanetScale(false);
+		ss->setFlagSunScale(false);
 	}
 }
 
@@ -2964,8 +3153,6 @@ void Oculars::setFlagHideGridsLines(const bool b)
 
 		if (b && (pluginMode==OcOcular))
 		{
-			// Store current state for later resetting
-			storeLineStateMain();
 			toggleLines(false);
 		}
 		else if (!b && (pluginMode==OcOcular))
@@ -3133,25 +3320,3 @@ void Oculars::handleStarMagLimitToggle(bool on)
 	}
 }
 
-// Store state of line displays from the Main application. The Oculars view may disable them.
-void Oculars::storeLineStateMain()
-{
-	StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
-	flagGridLinesDisplayedMain	= propMgr->getStelPropertyValue("GridLinesMgr.gridlinesDisplayed").toBool();
-	flagCardinalPointsMain		= propMgr->getStelPropertyValue("LandscapeMgr.cardinalsPointsDisplayed").toBool();
-	flagConstellationLinesMain	= propMgr->getStelPropertyValue("ConstellationMgr.linesDisplayed").toBool();
-	flagConstellationBoundariesMain	= propMgr->getStelPropertyValue("ConstellationMgr.boundariesDisplayed").toBool();
-	flagAsterismLinesMain		= propMgr->getStelPropertyValue("AsterismMgr.linesDisplayed").toBool();
-	flagRayHelpersLinesMain		= propMgr->getStelPropertyValue("AsterismMgr.rayHelpersDisplayed").toBool();
-}
-// Restore state of line displays for the Main application. May be called when leaving oculars view or when toggling the respective switch.
-void Oculars::restoreLineStateMain()
-{
-	StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
-	propMgr->setStelPropertyValue("GridLinesMgr.gridlinesDisplayed", flagGridLinesDisplayedMain);
-	propMgr->setStelPropertyValue("LandscapeMgr.cardinalsPointsDisplayed", flagCardinalPointsMain);
-	propMgr->setStelPropertyValue("ConstellationMgr.linesDisplayed", flagConstellationLinesMain);
-	propMgr->setStelPropertyValue("ConstellationMgr.boundariesDisplayed", flagConstellationBoundariesMain);
-	propMgr->setStelPropertyValue("AsterismMgr.linesDisplayed", flagAsterismLinesMain);
-	propMgr->setStelPropertyValue("AsterismMgr.rayHelpersDisplayed", flagRayHelpersLinesMain);
-}

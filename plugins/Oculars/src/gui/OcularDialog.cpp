@@ -42,23 +42,28 @@ OcularDialog::OcularDialog(Oculars* pluginPtr,
 			   QList<CCD *>* ccds,
 			   QList<Ocular *>* oculars,
 			   QList<Telescope *>* telescopes,
-			   QList<Lens *> *lenses)
+			   QList<Lens *>* lenses,
+			   QList<Finder *>* finders)
 	: StelDialog("Oculars")
 	, plugin(pluginPtr)
 	, ccdMapper(Q_NULLPTR)
 	, ocularMapper(Q_NULLPTR)
 	, telescopeMapper(Q_NULLPTR)
 	, lensMapper(Q_NULLPTR)
+	, finderMapper(Q_NULLPTR)
 {
 	ui = new Ui_ocularDialogForm;
+
 	this->ccds = ccds;
 	ccdTableModel = new PropertyBasedTableModel(this);
 	CCD* ccdModel = CCD::ccdModel();
 	ccdTableModel->init(reinterpret_cast<QList<QObject *>* >(ccds), ccdModel, ccdModel->propertyMap());
+
 	this->oculars = oculars;
 	ocularTableModel = new PropertyBasedTableModel(this);
 	Ocular* ocularModel = Ocular::ocularModel();
 	ocularTableModel->init(reinterpret_cast<QList<QObject *>* >(oculars), ocularModel, ocularModel->propertyMap());
+
 	this->telescopes = telescopes;
 	telescopeTableModel = new PropertyBasedTableModel(this);
 	Telescope* telescopeModel = Telescope::telescopeModel();
@@ -67,12 +72,17 @@ OcularDialog::OcularDialog(Oculars* pluginPtr,
 	this->lenses = lenses;
 	lensTableModel = new PropertyBasedTableModel(this);
 	Lens* lensModel = Lens::lensModel();
-	lensTableModel->init(reinterpret_cast<QList<QObject *>* >(lenses),
-			     lensModel,
-			     lensModel->propertyMap());
+	lensTableModel->init(reinterpret_cast<QList<QObject *>* >(lenses), lensModel, lensModel->propertyMap());
+
+	this->finders = finders;
+	finderTableModel = new PropertyBasedTableModel(this);
+	Finder* finderModel = Finder::finderModel();
+	finderTableModel->init(reinterpret_cast<QList<QObject *>* >(finders), finderModel, finderModel->propertyMap());
+	qDebug() << "all Models ::init()ed...";
 
 	QRegularExpression nameExp("^\\S.*");
 	validatorName = new QRegularExpressionValidator(nameExp, this);
+	qDebug() << "OcularDialog constructed";
 }
 
 OcularDialog::~OcularDialog()
@@ -176,6 +186,21 @@ void OcularDialog::deleteSelectedLens()
 	}
 }
 
+void OcularDialog::deleteSelectedFinder()
+{
+	if (askConfirmation())
+	{
+		if (finderTableModel->rowCount() > 0)
+		{
+			finderTableModel->removeRows(ui->finderListView->currentIndex().row(), 1);
+			if (finderTableModel->rowCount() > 0)
+				ui->finderListView->setCurrentIndex(finderTableModel->index(0, 1));
+
+			plugin->updateLists();
+		}
+	}
+}
+
 void OcularDialog::insertNewCCD()
 {
 	int count = ccdTableModel->rowCount();
@@ -202,6 +227,13 @@ void OcularDialog::insertNewLens()
 	int count = lensTableModel->rowCount();
 	lensTableModel->insertRows(count, 1);
 	ui->lensListView->setCurrentIndex(lensTableModel->index(count, 1));
+}
+
+void OcularDialog::insertNewFinder()
+{
+	int count = finderTableModel->rowCount();
+	finderTableModel->insertRows(count, 1);
+	ui->finderListView->setCurrentIndex(finderTableModel->index(count - 1, 1));
 }
 
 void OcularDialog::moveUpSelectedSensor()
@@ -240,6 +272,16 @@ void OcularDialog::moveUpSelectedLens()
 	if (index > 0)
 	{
 		lensTableModel->moveRowUp(index);
+		plugin->updateLists();
+	}
+}
+
+void OcularDialog::moveUpSelectedFinder()
+{
+	int index = ui->finderListView->currentIndex().row();
+	if (index > 0)
+	{
+		finderTableModel->moveRowUp(index);
 		plugin->updateLists();
 	}
 }
@@ -284,6 +326,16 @@ void OcularDialog::moveDownSelectedLens()
 	}
 }
 
+void OcularDialog::moveDownSelectedFinder()
+{
+	int index = ui->finderListView->currentIndex().row();
+	if (index >= 0 && index < finderTableModel->rowCount() - 1)
+	{
+		finderTableModel->moveRowDown(index);
+		plugin->updateLists();
+	}
+}
+
 void OcularDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
@@ -292,9 +344,10 @@ void OcularDialog::createDialogContent()
 	ui->ocularListView->setModel(ocularTableModel);
 	ui->telescopeListView->setModel(telescopeTableModel);
 	ui->lensListView->setModel(lensTableModel);
+	ui->finderListView->setModel(finderTableModel);
 
 	// Kinetic scrolling
-	kineticScrollingList << ui->textBrowser << ui->telescopeListView << ui->ccdListView << ui->ocularListView << ui->lensListView;
+	kineticScrollingList << ui->textBrowser << ui->telescopeListView << ui->ccdListView << ui->ocularListView << ui->lensListView << ui->finderListView;
 	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (gui)
 	{
@@ -357,12 +410,15 @@ void OcularDialog::createDialogContent()
 	connect(ui->deleteLens,      SIGNAL(clicked()), this, SLOT(deleteSelectedLens()));
 	connect(ui->addTelescope,    SIGNAL(clicked()), this, SLOT(insertNewTelescope()));
 	connect(ui->deleteTelescope, SIGNAL(clicked()), this, SLOT(deleteSelectedTelescope()));
+	connect(ui->addFinder,       SIGNAL(clicked()), this, SLOT(insertNewFInder()));
+	connect(ui->deleteFinder,    SIGNAL(clicked()), this, SLOT(deleteSelectedFinder()));
 
 	// Validators
 	ui->ccdName->setValidator(validatorName);
 	ui->ocularName->setValidator(validatorName);
 	ui->telescopeName->setValidator(validatorName);
 	ui->lensName->setValidator(validatorName);
+	ui->finderName->setValidator(validatorName);
 
 	initAboutText();
 	updateSuffixes();
@@ -375,6 +431,8 @@ void OcularDialog::createDialogContent()
 	connect(ui->pushButtonMoveTelescopeDown, SIGNAL(pressed()), this, SLOT(moveDownSelectedTelescope()));
 	connect(ui->pushButtonMoveLensUp,        SIGNAL(pressed()), this, SLOT(moveUpSelectedLens()));
 	connect(ui->pushButtonMoveLensDown,      SIGNAL(pressed()), this, SLOT(moveDownSelectedLens()));
+	connect(ui->pushButtonMoveFinderUp,      SIGNAL(pressed()), this, SLOT(moveUpSelectedFinder()));
+	connect(ui->pushButtonMoveFinderDown,    SIGNAL(pressed()), this, SLOT(moveDownSelectedFinder()));
 
 	// The CCD mapper
 	ccdMapper = new QDataWidgetMapper();
@@ -485,6 +543,35 @@ void OcularDialog::createDialogContent()
 	connect(ui->telescopeVFlip,    SIGNAL(stateChanged(int)), this, SLOT(updateTelescope()));
 	connect(ui->telescopeEQ,       SIGNAL(stateChanged(int)), this, SLOT(updateTelescope()));
 
+	// The finder mapper
+	finderMapper = new QDataWidgetMapper();
+	finderMapper->setModel(finderTableModel);
+	finderMapper->setSubmitPolicy(QDataWidgetMapper::AutoSubmit);
+	finderMapper->addMapping(ui->finderName,     0);
+	finderMapper->addMapping(ui->finderFOV,      1);
+	finderMapper->addMapping(ui->finderMag,      2);
+	finderMapper->addMapping(ui->finderDia,      3);
+	finderMapper->addMapping(ui->finderXHairCheckBox, 4, "checked");
+	finderMapper->addMapping(ui->finderHFlip,    4, "checked");
+	finderMapper->addMapping(ui->finderVFlip,    5, "checked");
+	finderMapper->addMapping(ui->finderEQ,       6, "checked");
+	//finderMapper->addMapping(ui->finderReticlePath, 7);
+	finderMapper->toFirst();
+	connect(ui->finderListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
+		finderMapper, SLOT(setCurrentModelIndex(QModelIndex)));
+	connect(ui->finderListView, SIGNAL(doubleClicked(QModelIndex)),
+		     this, SLOT(selectFinder(QModelIndex)));
+	ui->finderListView->setSelectionBehavior(QAbstractItemView::SelectRows);
+	ui->finderListView->setCurrentIndex(finderTableModel->index(0, 1));
+
+	connect(ui->telescopeDiameter, SIGNAL(editingFinished()), this, SLOT(updateTelescope()));
+	connect(ui->telescopeFL,       SIGNAL(editingFinished()), this, SLOT(updateTelescope()));
+	connect(ui->telescopeHFlip,    SIGNAL(stateChanged(int)), this, SLOT(updateTelescope()));
+	connect(ui->telescopeVFlip,    SIGNAL(stateChanged(int)), this, SLOT(updateTelescope()));
+	connect(ui->telescopeEQ,       SIGNAL(stateChanged(int)), this, SLOT(updateTelescope()));
+
+
+	// General UI
 	connect(ui->binocularsCheckBox, SIGNAL(toggled(bool)), this, SLOT(setLabelsDescriptionText(bool)));
 	connect(ui->checkBoxControlPanel, SIGNAL(toggled(bool)), this, SLOT(updateGuiOptions()));
 	connect(ui->semiTransparencyCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateGuiOptions()));
@@ -572,6 +659,19 @@ void OcularDialog::selectTelescope(const QModelIndex)
 	plugin->updateLists();
 }
 
+void OcularDialog::updateFinder()
+{
+	finderMapper->submit();
+	plugin->selectFinderAtIndex(plugin->getSelectedFinderIndex());
+}
+
+void OcularDialog::selectFinder(const QModelIndex)
+{
+	plugin->selectFinderAtIndex(finderMapper->currentIndex());
+	plugin->updateLists();
+}
+
+// TODO 2021: Split this for Oculars/Finders
 void OcularDialog::setLabelsDescriptionText(bool state)
 {
 	if (state)
@@ -644,9 +744,10 @@ void OcularDialog::initAboutText()
 	html +=         q_("The trade-off of this is that, with the image scaled, a large part of the screen can be wasted.") + " ";
 	html +=         q_("Therefore we recommend that you leave it off, unless you feel you have a need for it.") + "</p>";
 	html += "<p>" + q_("You can toggle a crosshair in the view.") + "</p>";
+	html += "<p>" + q_("A dedicated Finder view simulates views through a compact device like a finder scope or binoculars specified with a different set of parameters.") + "</p>";
 	html += "<p>" + QString(q_("You can toggle a Telrad finder. This feature draws three concentric circles of 0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with the naked eye through the Telrad (or similar) finder.")).arg(QChar(0x00B0));
 	html +=         q_("You can adjust the diameters or even add a fourth circle if you have a different finder, or revert to the Telrad standard sizes.") + "</p>";
-	html += "<p>" + q_("If you find any issues, please let me know. Enjoy!") + "</p>";
+	html += "<p>" + q_("If you find any issues, please let us know. Enjoy!") + "</p>";
 
 	// Keys
 	html += "<h3>" + q_("Hot Keys") + "</h3>";

@@ -24,6 +24,7 @@
 #include "CCD.hpp"
 #include "Lens.hpp"
 #include "Ocular.hpp"
+#include "Finder.hpp"
 #include "OcularDialog.hpp"
 #include "SolarSystem.hpp"
 #include "StelModule.hpp"
@@ -34,7 +35,7 @@
 #include <QFont>
 #include <QSettings>
 
-#define MIN_OCULARS_INI_VERSION 3.1f
+#define MIN_OCULARS_INI_VERSION 3.2f
 #define DEFAULT_CCD_CROP_OVERLAY_SIZE 250
 
 QT_BEGIN_NAMESPACE
@@ -84,6 +85,7 @@ public:
 	{
 		OcNone,     //!< disabled
 		OcTelrad,   //!< showing Telrad mode: naked eye view, just a Telrad overlay
+		OcFinder,   //!< showing Finderscope mode: slightly magnified by a compact instrument
 		OcOcular,   //!< central circle, magnified, different skyDrawer settings
 		OcSensor    //!< central box, magnified, different skyDrawer settings
 	};
@@ -95,6 +97,7 @@ public:
 	Q_PROPERTY(bool flagModeOcular        READ getFlagModeOcular         WRITE setFlagModeOcular      NOTIFY flagModeOcularChanged)
 	Q_PROPERTY(bool flagModeSensor        READ getFlagModeSensor         WRITE setFlagModeSensor      NOTIFY flagModeSensorChanged)
 	Q_PROPERTY(bool flagModeTelrad        READ getFlagModeTelrad         WRITE setFlagModeTelrad      NOTIFY flagModeTelradChanged)
+	Q_PROPERTY(bool flagModeFinder        READ getFlagModeFinder         WRITE setFlagModeFinder      NOTIFY flagModeFinderChanged)
 	// This is another property for an Action. Switching it has no side effects, though, therefore it is not in the PluginMode enum.
 	Q_PROPERTY(bool enableCrosshairs      READ getEnableCrosshairs       WRITE toggleCrosshairs NOTIFY enableCrosshairsChanged)
 
@@ -177,13 +180,10 @@ public slots:
 	void prismPositionAngleReset();
 	void decrementCCDIndex();
 	void decrementOcularIndex();
+	void decrementFinderIndex();
 	void decrementTelescopeIndex();
 	void decrementLensIndex();
 	void displayPopupMenu();
-//	//! This method is called with we detect that our hot key is pressed.  It handles
-//	//! determining if we should do anything - based on a selected object.
-//	void enableOcular(bool b);
-	//bool getEnableOcular() const { return flagShowOculars; }
 	//! Just return current mode of operation
 	PluginMode getPluginMode() const { return pluginMode; }
 	//! Master switch. Must handle mode transitions cleanly: Disable mode specific settings/restore main app settings, change mode, enable possible new mode specific settings
@@ -191,6 +191,7 @@ public slots:
 
 	void incrementCCDIndex();
 	void incrementOcularIndex();
+	void incrementFinderIndex();
 	void incrementTelescopeIndex();
 	void incrementLensIndex();
 	void disableLens();
@@ -218,16 +219,18 @@ public slots:
 	void selectLensAtIndex(int index);           //!< index in the range -1:lenses.count(), else call is ignored
 	int getSelectedLensIndex() const {return selectedLensIndex; }
 
+	void selectFinderAtIndex(int index);           //!< index in the range 0:finders.count(), else call is ignored
+	int getSelectedFinderIndex() const {return selectedFinderIndex; }
 
 	//! Toggles the sensor frame overlay //(overloaded for blind switching).
 	void toggleCCD();
-	//bool getEnableCCD() const { return flagShowCCD; }
 	void toggleCrosshairs(bool show = true);
 	bool getEnableCrosshairs() const { return flagShowCrosshairs; }
 
 	//! Toggles the Telrad sight overlay //(overloaded for blind switching).
 	void toggleTelrad();
-	
+	void toggleFinder();
+
 	void enableGuiPanel(bool enable = true);
 	bool getFlagGuiPanelEnabled(void) const {return flagGuiPanelEnabled;}
 	void setGuiPanelFontSize(int size);
@@ -354,12 +357,17 @@ private slots:
 	//! Indicates the Telrad sight overlay.
 	bool getFlagModeTelrad() const { return flagModeTelrad; }
 
+	//! Indicates the Finder overlay. Activating this also triggers setPluginMode()
+	void setFlagModeFinder(bool show);
+	//! Indicates the Finder overlay.
+	bool getFlagModeFinder() const { return flagModeFinder; }
 
 signals:
 	void pluginModeChanged(PluginMode mode);
 	void flagModeOcularChanged(bool value);
 	void flagModeSensorChanged(bool value);
 	void flagModeTelradChanged(bool value);
+	void flagModeFinderChanged(bool value);
 	void enableCrosshairsChanged(bool value);
 	//void enableCCDChanged(bool value);
 	//void enableTelradChanged(bool value);
@@ -367,6 +375,7 @@ signals:
 	void selectedOcularChanged(int value);
 	void selectedTelescopeChanged(int value);
 	void selectedLensChanged(int value);
+	void selectedFinderChanged(int value);
 	void selectedCCDRotationAngleChanged(double value);
 	void selectedCCDPrismPositionAngleChanged(double value);
 
@@ -442,9 +451,6 @@ private:
 	//! Should only be called from a 'ready' state; currently from the draw() method.
 	void paintText(const StelCore * core);
 
-//	//! This method is called by the zoom() method, when this plugin is toggled off; it resets to the default view.
-//	void unzoomOcular();
-
 	//! This method is responsible for ensuring a valid ini file for the plugin exists.  It first checks to see
 	//! if one exists in the expected location.  If it does not, a default one is copied into place, and the process
 	//! ends.  However, if one does exist, it opens it, and looks for the oculars_version key.  The value (or even
@@ -453,7 +459,11 @@ private:
 	//! Once there is a valid ini file, it is loaded into the settings attribute.
 	void validateAndLoadIniFile();
 
+	//! Switch state of line displays for the Main application. Should be called when entering or leaving oculars view or when toggling the respective switch.
 	void toggleLines(bool visible);
+	//! Inhibit scaling up planets in the Main application.  Should be called when entering or leaving oculars, finder and sensors mode or when toggling the respective switch.
+	//! Set scale to true to set the scale as given in the main program, false to store status and scale to 1.
+	void handlePlanetScaling(bool scale);
 
 	//! toggles the actual ocular view.
 	//! Record the state of the GridLinesMgr and other settings beforehand, so that they can be reset afterwards.
@@ -486,21 +496,24 @@ private:
 	QList<Ocular *> oculars;
 	QList<Telescope *> telescopes;
 	QList<Lens *> lenses;
+	QList<Finder *> finders;
 
 	int selectedCCDIndex;           //!< index of the current CCD, in the range of -1:ccds.count().  -1 means no CCD is selected.
 	int selectedOcularIndex;        //!< index of the current ocular, in the range of -1:oculars.count().  -1 means no ocular is selected.
 	int selectedTelescopeIndex;     //!< index of the current telescope, in the range of -1:telescopes.count(). -1 means none is selected.
-	int selectedLensIndex;          //!< index of the current lens, in the range of -1:lense.count(). -1 means no lens is selected
+	int selectedLensIndex;          //!< index of the current lens, in the range of -1:lenses.count(). -1 means no lens is selected.
+	int selectedFinderIndex;        //!< index of the current finder, in the range of -1:finders.count(). -1 means no finder is selected.
 	double selectedCCDRotationAngle;//!< allows rotating via property/remotecontrol API
 	double selectedCCDPrismPositionAngle;//!< allows rotating via property/remotecontrol API
 	int arrowButtonScale;           //!< allows scaling of the GUI "previous/next" Ocular/CCD/Telescope etc. buttons
 
 	QFont font;			//!< The font used for drawing labels.
 	PluginMode pluginMode;          //!< Current operational mode
-	// The next 3 are mutually exclusive "slave mode" flags to keep the buttons in the GUI show active/inactive highlight state.
+	// The next 4 are mutually exclusive "slave mode" flags to keep the buttons in the GUI show active/inactive highlight state.
 	bool flagModeOcular;		//!< flag used to track if we are in ocular mode.
 	bool flagModeSensor;		//!< flag used to track if we are in CCD mode.
 	bool flagModeTelrad;		//!< flag used to track if we are in Telrad mode.
+	bool flagModeFinder;		//!< flag used to track if we are in Finder mode.
 
 	bool flagShowCrosshairs;	//!< flag used to track in crosshairs should be rendered in the ocular view.
 	int usageMessageLabelID;	//!< the id of the label showing the usage message. -1 means it's not displayed.
@@ -568,6 +581,7 @@ private:
 	StelAction * actionShowCrosshairs;
 	StelAction * actionShowSensor;
 	StelAction * actionShowTelrad;
+	StelAction * actionShowFinder;
 	StelAction * actionConfiguration;
 	StelAction * actionMenu;
 	StelAction * actionTelescopeIncrement;

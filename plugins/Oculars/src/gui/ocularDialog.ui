@@ -1040,6 +1040,302 @@
           </item>
          </layout>
         </widget>
+		
+		
+		
+		
+        <widget class="QWidget" name="findersTab">
+         <attribute name="title">
+          <string>Finders</string>
+         </attribute>
+         <layout class="QGridLayout" name="gridLayoutFinders">
+          <item row="0" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayoutFinders">
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayoutFinders">
+              <item>
+               <widget class="QListView" name="finderListView">
+                <property name="editTriggers">
+                 <set>QAbstractItemView::NoEditTriggers</set>
+                </property>
+                <property name="isWrapping" stdset="0">
+                 <bool>false</bool>
+                </property>
+                <property name="resizeMode">
+                 <enum>QListView::Fixed</enum>
+                </property>
+                <property name="viewMode">
+                 <enum>QListView::ListMode</enum>
+                </property>
+                <property name="modelColumn">
+                 <number>0</number>
+                </property>
+               </widget>
+              </item>
+			  
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayoutFinders2">
+                <item>
+                 <widget class="QPushButton" name="addFinder">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                  <property name="focusPolicy">
+                   <enum>Qt::NoFocus</enum>
+                  </property>
+                  <property name="text">
+                   <string>Add</string>
+                  </property>
+                 </widget>
+                </item>
+				
+                <item>
+                 <widget class="QPushButton" name="pushButtonMoveFinderUp">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>24</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                  <property name="focusPolicy">
+                   <enum>Qt::NoFocus</enum>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                    <normaloff>:/graphicGui/uibtUp.png</normaloff>
+                    <disabledoff>:/graphicGui/uibtUp-disabled.png</disabledoff>:/graphicGui/uibtUp.png</iconset>
+                  </property>
+                 </widget>
+                </item>
+				
+                <item>
+                 <widget class="QPushButton" name="pushButtonMoveFinderDown">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>24</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                  <property name="focusPolicy">
+                   <enum>Qt::NoFocus</enum>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                    <normaloff>:/graphicGui/uibtDown.png</normaloff>
+                    <disabledoff>:/graphicGui/uibtDown-disabled.png</disabledoff>:/graphicGui/uibtDown.png</iconset>
+                  </property>
+                 </widget>
+                </item>
+				
+                <item>
+                 <widget class="QPushButton" name="deleteFinder">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                  <property name="focusPolicy">
+                   <enum>Qt::NoFocus</enum>
+                  </property>
+                  <property name="text">
+                   <string>Delete</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QGridLayout" name="gridLayoutFinders2">
+			 
+              <item row="0" column="0">
+               <widget class="QLabel" name="labelFName">
+                <property name="text">
+                 <string>Name:</string>
+                </property>
+               </widget>
+              </item>			 
+
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="finderName">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="baseSize">
+                 <size>
+                  <width>100</width>
+                  <height>22</height>
+                 </size>
+                </property>
+                <property name="maxLength">
+                 <number>50</number>
+                </property>
+               </widget>
+              </item>
+			  
+              <item row="1" column="0">
+               <widget class="QLabel" name="labelTFOV">
+                <property name="text">
+                 <string>True FOV:</string>
+                </property>
+               </widget>
+              </item>
+			  
+			  <item row="1" column="1">
+               <widget class="QDoubleSpinBox" name="finderFOV">
+                <property name="decimals">
+                 <number>1</number>
+                </property>
+                <property name="minimum">
+                 <double>1.0</double>
+                </property>
+                <property name="maximum">
+                 <double>25.0</double>
+                </property>
+                <property name="singleStep">
+                 <double>0.1</double>
+                </property>
+               </widget>
+              </item>
+			  
+              <item row="2" column="0">
+               <widget class="QLabel" name="labelFMag">
+                <property name="text">
+                 <string>Magnification:</string>
+                </property>
+               </widget>
+              </item>
+			  
+              <item row="2" column="1">
+               <widget class="QDoubleSpinBox" name="finderMag">
+                <property name="decimals">
+                 <number>1</number>
+                </property>
+                <property name="minimum">
+                 <double>1.0</double>
+                </property>
+                <property name="maximum">
+                 <double>300.0</double>
+                </property>
+                <property name="singleStep">
+                 <double>0.1</double>
+                </property>
+               </widget>
+              </item>
+			  
+			  <item row="3" column="0">
+               <widget class="QLabel" name="labelFDia">
+                <property name="text">
+                 <string>Aperture:</string>
+                </property>
+               </widget>
+              </item>
+
+              <item row="3" column="1">
+               <widget class="QDoubleSpinBox" name="finderDia">
+                <property name="decimals">
+                 <number>1</number>
+                </property>
+                <property name="minimum">
+                 <double>10.0</double>
+                </property>
+                <property name="maximum">
+                 <double>200.000000000000000</double>
+                </property>
+                <property name="singleStep">
+                 <double>0.100000000000000</double>
+                </property>
+                <property name="value">
+                 <double>30.0000000000000</double>
+                </property>
+               </widget>
+              </item>
+
+              <item row="4" column="0" colspan="2">
+               <widget class="QCheckBox" name="finderXHairCheckBox">
+                <property name="text">
+                 <string>Has permanent cross-hairs</string>
+                </property>
+               </widget>
+              </item>
+			  
+			  
+			   <item row="5" column="0" colspan="2">
+               <widget class="QCheckBox" name="finderHFlip">
+                <property name="text">
+                 <string>Horizontal flip</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="0" colspan="2">
+               <widget class="QCheckBox" name="finderVFlip">
+                <property name="text">
+                 <string>Vertical flip</string>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="0" colspan="2">
+               <widget class="QCheckBox" name="finderEQ">
+                <property name="text">
+                 <string>Equatorial Mount</string>
+                </property>
+               </widget>
+              </item>
+
+              <item row="8" column="0" colspan="2">
+               <widget class="QCheckBox" name="binocularsFinderCheckBox_useless">
+                <property name="text">
+                 <string>Binoculars (delete?)</string>
+                </property>
+               </widget>
+              </item>
+			  
+			  
+			  
+              <item row="9" column="0">
+               <spacer name="verticalSpacer">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+		
+		
+		
+		
+		
         <widget class="QWidget" name="ocularsTab">
          <attribute name="title">
           <string>Eyepieces</string>
@@ -1296,6 +1592,13 @@
           </item>
          </layout>
         </widget>
+		
+		
+		
+		
+		
+		
+		
         <widget class="QWidget" name="lensesTab">
          <attribute name="title">
           <string>Lenses</string>
