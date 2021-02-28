@@ -76,14 +76,14 @@ double Ocular::actualFOV(const Telescope * telescope, const Lens * lens) const
 
 double Ocular::magnification(const Telescope * telescope, const Lens * lens) const
 {
-	double magnifiction = 0.0;
+	double magnification = 0.0;
 	if (m_binoculars) {
-		magnifiction = effectiveFocalLength();
+		magnification = effectiveFocalLength();
 	} else {
 		const double lens_multipler = (lens != Q_NULLPTR ? lens->getMultipler() : 1.0);
-		magnifiction = telescope->focalLength() * lens_multipler / effectiveFocalLength();
+		magnification = telescope->focalLength() * lens_multipler / effectiveFocalLength();
 	}
-	return magnifiction;
+	return magnification;
 }
 
 QString Ocular::name(void) const
