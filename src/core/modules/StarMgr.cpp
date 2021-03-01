@@ -1520,140 +1520,95 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		return result;
 
 	QString objw = objPrefix.toUpper();
+	bool found;
 
 	// Search for common names
-	if (useStartOfWords)
+	QMapIterator<QString, int> i(commonNamesIndexI18n);
+	while (i.hasNext())
 	{
-		for (auto it = commonNamesIndexI18n.lowerBound(objw); it != commonNamesIndexI18n.end(); ++it)
+		i.next();
+		if (useStartOfWords && i.key().startsWith(objw))
+			found = true;
+		else if (!useStartOfWords && i.key().contains(objw))
+			found = true;
+		else
+			found = false;
+
+		if (found)
 		{
-			if (it.key().startsWith(objw))
-			{
-				if (maxNbItem<=0)
-					break;
-				result.append(getCommonName(it.value()));
-				--maxNbItem;
-			}
-			else
+			if (maxNbItem<=0)
 				break;
-		}
-		for (auto it = commonNamesIndex.lowerBound(objw); it != commonNamesIndex.end(); ++it)
-		{
-			if (it.key().startsWith(objw))
-			{
-				if (maxNbItem<=0)
-					break;
-				result.append(getCommonEnglishName(it.value()));
-				--maxNbItem;
-			}
-			else
-				break;
-		}
-		if (getFlagAdditionalNames())
-		{
-			for (auto ita = additionalNamesIndexI18n.lowerBound(objw); ita != additionalNamesIndexI18n.end(); ++ita)
-			{
-				if (ita.key().startsWith(objw))
-				{
-					if (maxNbItem<=0)
-						break;
-					QStringList names = getAdditionalNames(ita.value()).split(" - ");
-					for (auto name : names)
-					{
-						if (name.contains(objw, Qt::CaseInsensitive))
-						{
-							result.append(name);
-							--maxNbItem;
-						}
-					}
-				}
-				else
-					break;
-			}
-			for (auto ita = additionalNamesIndex.lowerBound(objw); ita != additionalNamesIndex.end(); ++ita)
-			{
-				if (ita.key().startsWith(objw))
-				{
-					if (maxNbItem<=0)
-						break;
-					QStringList names = getAdditionalEnglishNames(ita.value()).split(" - ");
-					for (auto name : names)
-					{
-						if (name.contains(objw, Qt::CaseInsensitive))
-						{
-							result.append(name);
-							--maxNbItem;
-						}
-					}
-				}
-				else
-					break;
-			}
+			result.append(getCommonName(i.value()));
+			--maxNbItem;
 		}
 	}
-	else
+
+	QMapIterator<QString, int> j(commonNamesIndex);
+	while (j.hasNext())
 	{
-		QMapIterator<QString, int> i(commonNamesIndexI18n);
-		while (i.hasNext())
+		j.next();
+		if (useStartOfWords && j.key().startsWith(objw))
+			found = true;
+		else if (!useStartOfWords && j.key().contains(objw))
+			found = true;
+		else
+			found = false;
+
+		if (found)
 		{
-			i.next();
-			if (i.key().contains(objw))
-			{
-				if (maxNbItem<=0)
-					break;
-				result.append(getCommonName(i.value()));
-				--maxNbItem;
-			}
+			if (maxNbItem<=0)
+				break;
+			result.append(getCommonEnglishName(j.value()));
+			--maxNbItem;
 		}
-		QMapIterator<QString, int> j(commonNamesIndex);
-		while (j.hasNext())
+	}
+
+	if (getFlagAdditionalNames())
+	{
+		QMapIterator<QString, int> k(additionalNamesIndexI18n);
+		while (k.hasNext())
 		{
-			j.next();
-			if (j.key().contains(objw))
+			k.next();
+			QStringList names = getAdditionalNames(k.value()).split(" - ");
+			for (const auto &name : qAsConst(names))
 			{
-				if (maxNbItem<=0)
-					break;
-				result.append(getCommonEnglishName(j.value()));
-				--maxNbItem;
-			}
-		}
-		if (getFlagAdditionalNames())
-		{
-			QMapIterator<QString, int> k(additionalNamesIndexI18n);
-			while (k.hasNext())
-			{
-				k.next();
-				if (k.key().contains(objw))
+				if (useStartOfWords && name.startsWith(objw, Qt::CaseInsensitive))
+					found = true;
+				else if (!useStartOfWords && name.contains(objw, Qt::CaseInsensitive))
+					found = true;
+				else
+					found = false;
+
+				if (found)
 				{
 					if (maxNbItem<=0)
 						break;
-					QStringList names = getAdditionalNames(j.value()).split(" - ");
-					for (auto name : names)
-					{
-						if (name.contains(objw, Qt::CaseInsensitive))
-						{
-							result.append(name);
-							--maxNbItem;
-						}
-					}
+					result.append(name);
+					--maxNbItem;
 				}
 			}
-			QMapIterator<QString, int> l(additionalNamesIndex);
-			while (l.hasNext())
+		}
+
+		QMapIterator<QString, int> l(additionalNamesIndex);
+		while (l.hasNext())
+		{
+			l.next();
+			QStringList names = getAdditionalNames(l.value()).split(" - ");
+			for (const auto &name : qAsConst(names))
 			{
-				l.next();
-				if (l.key().contains(objw))
+				if (useStartOfWords && name.startsWith(objw, Qt::CaseInsensitive))
+					found = true;
+				else if (!useStartOfWords && name.contains(objw, Qt::CaseInsensitive))
+					found = true;
+				else
+					found = false;
+
+				if (found)
 				{
 					if (maxNbItem<=0)
 						break;
-					QStringList names = getAdditionalEnglishNames(j.value()).split(" - ");
-					for (auto name : names)
-					{
-						if (name.contains(objw, Qt::CaseInsensitive))
-						{
-							result.append(name);
-							--maxNbItem;
-						}
-					}
+					result.append(name);
+					--maxNbItem;
 				}
 			}
 		}
