@@ -45,26 +45,27 @@ QStringList StelObjectModule::listMatchingObjects(const QString &objPrefix, int 
 {
 	QStringList result;
 	if (maxNbItem <= 0)
-	{
 		return result;
-	}
 
-	QStringList names = listAllObjects(inEnglish);
-	for (const auto& name : names)
+	QStringList names;
+	names << listAllObjects(false) << listAllObjects(true);
+	QString fullMatch = "";
+	for (const auto& name : qAsConst(names))
 	{
 		if (!matchObjectName(name, objPrefix, useStartOfWords))
-		{
 			continue;
-		}
 
-		result.append(name);
+		if (name==objPrefix)
+			fullMatch = name;
+		else
+			result.append(name);
 		if (result.size() >= maxNbItem)
-		{
 			break;
-		}
 	}
 
 	result.sort();
+	if (!fullMatch.isEmpty())
+		result.prepend(fullMatch);
 	return result;
 }
 

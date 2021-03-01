@@ -561,33 +561,6 @@ StelObjectP AsterismMgr::searchByName(const QString& name) const
 	return Q_NULLPTR;
 }
 
-QStringList AsterismMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
-{
-	QStringList result;
-	if (maxNbItem <= 0)
-	{
-		return result;
-	}
-
-	for (auto* asterism : asterisms)
-	{
-		QString name = inEnglish ? asterism->getEnglishName() : asterism->getNameI18n();
-		if (!matchObjectName(name, objPrefix, useStartOfWords))
-		{
-			continue;
-		}
-
-		result.append(name);
-		if (result.size() >= maxNbItem)
-		{
-			break;
-		}
-	}
-
-	result.sort();
-	return result;
-}
-
 QStringList AsterismMgr::listAllObjects(bool inEnglish) const
 {
 	QStringList result;
