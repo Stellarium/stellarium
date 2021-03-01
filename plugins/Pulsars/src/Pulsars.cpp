@@ -323,41 +323,33 @@ QStringList Pulsars::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	if (flagShowPulsars && maxNbItem>0)
 	{
 		QStringList names;
-
-		if (inEnglish)
+		for (const auto& pulsar : psr)
 		{
-			for (const auto& pulsar : psr)
-			{
-				if (!pulsar->getEnglishName().isEmpty())
-					names << pulsar->getEnglishName();
-				names << pulsar->getDesignation();
-			}
-		}
-		else
-		{
-			for (const auto& pulsar : psr)
-			{
-				if (!pulsar->getNameI18n().isEmpty())
-					names << pulsar->getNameI18n();
-				names << pulsar->getDesignation();
-			}
+			if (!pulsar->getNameI18n().isEmpty())
+				names << pulsar->getNameI18n();
+			if (!pulsar->getEnglishName().isEmpty())
+				names << pulsar->getEnglishName();
+			names << pulsar->getDesignation();
 		}
 
-		for (const auto& name : names)
+		QString fullMatch = "";
+		for (const auto& name : qAsConst(names))
 		{
 			if (!matchObjectName(name, objPrefix, useStartOfWords))
-			{
 				continue;
-			}
 
-			result.append(name);
+			if (name==objPrefix)
+				fullMatch = name;
+			else
+				result.append(name);
+
 			if (result.size() >= maxNbItem)
-			{
 				break;
-			}
 		}
 
 		result.sort();
+		if (!fullMatch.isEmpty())
+			result.prepend(fullMatch);
 	}
 	return result;
 }

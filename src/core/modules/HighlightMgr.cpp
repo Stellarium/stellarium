@@ -99,12 +99,11 @@ StelObjectP HighlightMgr::searchByID(const QString& id) const
 	return Q_NULLPTR;
 }
 
-QStringList HighlightMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
+QStringList HighlightMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	Q_UNUSED(objPrefix)
 	Q_UNUSED(maxNbItem)
-	Q_UNUSED(useStartOfWords)
-	Q_UNUSED(inEnglish)
+	Q_UNUSED(useStartOfWords)	
 	return QStringList();
 }
 

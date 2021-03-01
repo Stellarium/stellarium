@@ -278,42 +278,34 @@ QStringList Novae::listMatchingObjects(const QString& objPrefix, int maxNbItem, 
 {
 	QStringList result;
 	if (maxNbItem <= 0)
-	{
 		return result;
-	}
 
 	QStringList names;
-	if (inEnglish)
+	for (const auto& n : nova)
 	{
-		for (const auto& n : nova)
-		{
-			names.append(n->getEnglishName());
-			names.append(n->getDesignation());
-		}
-	}
-	else
-	{
-		for (const auto& n : nova)
-		{
-			names.append(n->getNameI18n());
-		}
+		names.append(n->getNameI18n());
+		names.append(n->getEnglishName());
+		names.append(n->getDesignation());
 	}
 
+	QString fullMatch = "";
 	for (const auto& name : names)
 	{
 		if (!matchObjectName(name, objPrefix, useStartOfWords))
-		{
 			continue;
-		}
 
-		result.append(name);
+		if (name==objPrefix)
+			fullMatch = name;
+		else
+			result.append(name);
+
 		if (result.size() >= maxNbItem)
-		{
 			break;
-		}
 	}
 
 	result.sort();
+	if (!fullMatch.isEmpty())
+		result.prepend(fullMatch);
 	return result;
 }
 

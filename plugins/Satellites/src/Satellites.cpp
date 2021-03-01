@@ -457,7 +457,7 @@ StelObjectP Satellites::searchByNoradNumber(const QString &noradNumber) const
 	return StelObjectP();
 }
 
-QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
+QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (!hintFader || maxNbItem <= 0)
@@ -484,30 +484,37 @@ QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbI
 			numberPrefix = numberString;
 	}
 
+	QStringList names;
 	for (const auto& sobj : satellites)
 	{
 		if (!sobj->initialized || !sobj->displayed)
-		{
 			continue;
-		}
 
-		QString name = inEnglish ? sobj->getEnglishName() : sobj->getNameI18n();
-		if (matchObjectName(name, objPrefix, useStartOfWords))
-		{
+		names.append(sobj->getNameI18n());
+		names.append(sobj->getEnglishName());
+		if (!numberPrefix.isEmpty() && sobj->getCatalogNumberString().startsWith(numberPrefix))
+			names.append(QString("NORAD %1").arg(sobj->getCatalogNumberString()));
+	}
+
+	QString fullMatch = "";
+	for (const auto& name : qAsConst(names))
+	{
+		if (!matchObjectName(name, objPrefix, useStartOfWords))
+			continue;
+
+		if (name==objPrefix)
+			fullMatch = name;
+		else
 			result.append(name);
-		}
-		else if (!numberPrefix.isEmpty() && sobj->getCatalogNumberString().startsWith(numberPrefix))
-		{
-			result.append(QString("NORAD %1").arg(sobj->getCatalogNumberString()));
-		}
 
 		if (result.size() >= maxNbItem)
-		{
 			break;
-		}
 	}
 
 	result.sort();
+	if (!fullMatch.isEmpty())
+		result.prepend(fullMatch);
+
 	return result;
 }
 

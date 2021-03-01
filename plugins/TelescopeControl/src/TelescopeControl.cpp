@@ -1717,7 +1717,7 @@ void TelescopeControl::logAtSlot(int slot)
 		log_file = telescopeServerLogStreams.value(slot);
 }
 
-QStringList TelescopeControl::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
+QStringList TelescopeControl::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (maxNbItem<=0)
@@ -1727,7 +1727,7 @@ QStringList TelescopeControl::listMatchingObjects(const QString& objPrefix, int 
 	bool find;
 	for (const auto& telescope : telescopeClients)
 	{
-		tn = inEnglish ? telescope->getEnglishName() : telescope->getNameI18n();
+		tn = telescope->getNameI18n();
 		find = false;
 		if (useStartOfWords)
 		{
@@ -1740,9 +1740,22 @@ QStringList TelescopeControl::listMatchingObjects(const QString& objPrefix, int 
 				find = true;
 		}
 		if (find)
-		{
 			result << tn;
+
+		tn = telescope->getEnglishName();
+		find = false;
+		if (useStartOfWords)
+		{
+			if (objPrefix.toUpper()==tn.mid(0, objPrefix.size()).toUpper())
+				find = true;
 		}
+		else
+		{
+			if (tn.contains(objPrefix, Qt::CaseInsensitive))
+				find = true;
+		}
+		if (find)
+			result << tn;
 	}
 	result.sort();
 	if (result.size()>maxNbItem)

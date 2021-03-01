@@ -610,21 +610,18 @@ QList<StelObjectP> StelObjectMgr::getSelectedObject(const QString& type) const
 /*****************************************************************************************
  Find and return the list of at most maxNbItem objects auto-completing passed object name
 *******************************************************************************************/
-QStringList StelObjectMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
+QStringList StelObjectMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (maxNbItem <= 0)
-	{
 		return result;
-	}
 
 	// For all StelObjectmodules..
 	for (const auto* m : objectsModules)
 	{
 		// Get matching object for this module
-		QStringList matchingObj = m->listMatchingObjects(objPrefix, maxNbItem, useStartOfWords, inEnglish);
+		QStringList matchingObj = m->listMatchingObjects(objPrefix, maxNbItem, useStartOfWords);
 		result += matchingObj;
-		maxNbItem-=matchingObj.size();
 	}
 
 	result.sort();

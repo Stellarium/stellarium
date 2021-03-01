@@ -32,16 +32,12 @@ StelObjectModule::~StelObjectModule()
 bool StelObjectModule::matchObjectName(const QString& objName, const QString& objPrefix, bool useStartOfWords) const
 {
 	if (useStartOfWords)
-	{
 		return objName.startsWith(objPrefix, Qt::CaseInsensitive);
-	}
 	else
-	{
 		return objName.contains(objPrefix, Qt::CaseInsensitive);
-	}
 }
 
-QStringList StelObjectModule::listMatchingObjects(const QString &objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
+QStringList StelObjectModule::listMatchingObjects(const QString &objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (maxNbItem <= 0)

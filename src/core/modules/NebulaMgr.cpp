@@ -1859,13 +1859,11 @@ NebulaP NebulaMgr::searchByDesignation(const QString &designation) const
 }
 
 //! Find and return the list of at most maxNbItem objects auto-completing the passed object name
-QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
+QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (maxNbItem <= 0)
-	{
 		return result;
-	}
 
 	QString objw = objPrefix.toUpper();
 
@@ -2458,35 +2456,42 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 		}
 	}
 
-	// Search by common names
+	// Search by common names and aliases
+	QStringList names;
 	for (const auto& n : dsoArray)
 	{
-		QString name = inEnglish ? n->englishName : n->nameI18;
-		if (matchObjectName(name, objPrefix, useStartOfWords))
+		names.append(n->nameI18);
+		names.append(n->englishName);
+		if (getFlagAdditionalNames())
 		{
-			result.append(name);
+			QStringList nameList = n->nameI18Aliases;
+			for (const auto &name : nameList)
+				names.append(name);
+
+			nameList = n->englishAliases;
+			for (const auto &name : nameList)
+				names.append(name);
 		}
 	}
 
-	if (getFlagAdditionalNames())
+	QString fullMatch = "";
+	for (const auto& name : qAsConst(names))
 	{
-		// Search by aliases of common names
-		for (const auto& n : dsoArray)
-		{
-			QStringList nameList = inEnglish ? n->englishAliases : n->nameI18Aliases;
-			for (auto name : nameList)
-			{
-				if (matchObjectName(name, objPrefix, useStartOfWords))
-					result.append(name);
-			}
-		}
+		if (!matchObjectName(name, objPrefix, useStartOfWords))
+			continue;
+
+		if (name==objPrefix)
+			fullMatch = name;
+		else
+			result.append(name);
 	}
 
 	result.sort();
+	if (!fullMatch.isEmpty())
+		result.prepend(fullMatch);
+
 	if (result.size() > maxNbItem)
-	{
 		result.erase(result.begin() + maxNbItem, result.end());
-	}
 
 	return result;
 }
