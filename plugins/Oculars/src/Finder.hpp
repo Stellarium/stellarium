@@ -31,21 +31,21 @@ class Finder : public QObject
 {
 	Q_OBJECT
 	//Q_PROPERTY(bool binoculars READ isBinoculars WRITE setBinoculars) // This could be added as purely informagtive flag without any consequence for display now.
-	Q_PROPERTY(bool permanentCrosshair READ hasPermanentCrosshair WRITE setPermanentCrosshair)
+	Q_PROPERTY(QString name            READ name                  WRITE setName)
 	Q_PROPERTY(double trueFOV          READ trueFOV               WRITE setTrueFOV)
 	Q_PROPERTY(double magnification    READ magnification         WRITE setMagnification)
 	Q_PROPERTY(double aperture         READ aperture              WRITE setAperture)
-	Q_PROPERTY(QString name            READ name                  WRITE setName)
-	Q_PROPERTY(QString reticlePath     READ reticlePath           WRITE setReticlePath) // Some military binoculars or targetting scopes have grids.
 	Q_PROPERTY(bool hFlipped           READ isHFlipped            WRITE setHFlipped)
 	Q_PROPERTY(bool vFlipped           READ isVFlipped            WRITE setVFlipped)
 	Q_PROPERTY(bool equatorial         READ isEquatorial          WRITE setEquatorial)
+	Q_PROPERTY(bool permanentCrosshair READ hasPermanentCrosshair WRITE setPermanentCrosshair)
+	Q_PROPERTY(QString reticlePath     READ reticlePath           WRITE setReticlePath) // Some military binoculars or targetting scopes have grids.
 
 public:
 	Finder();
 	Q_INVOKABLE Finder(const QObject& other);
 	virtual ~Finder();
-	static Finder * finderFromSettings(const QSettings * theSettings, const int finderIndex);
+	static Finder * finderFromSettings(const QSettings * settings, const int finderIndex);
 	void writeToSettings(QSettings * settings, const int index);
 	static Finder * finderModel(void);
 	double apparentFOV() const {return m_magnification*m_trueFOV;}
@@ -74,15 +74,15 @@ public slots:
 	void setReticlePath(const QString path);
 
 private:
-	//bool m_binoculars;
-	bool    m_permanentCrosshair;
-	double  m_trueFOV;
+	QString m_name;
 	double  m_magnification;
 	double  m_aperture;        //!< aperture, mm
+	double  m_trueFOV;
+	//bool m_binoculars;
 	bool    m_hFlipped;	   //!< horizontally flipped?
-	bool    m_vFlipped;	   //!< vertically flipped?
+	bool    m_vFlipped;	   //!< vertically flipped? (angled finder)
 	bool    m_equatorial;	   //!< equatorially mounted?
-	QString m_name;
+	bool    m_permanentCrosshair;
 	QString m_reticlePath;
 };
 

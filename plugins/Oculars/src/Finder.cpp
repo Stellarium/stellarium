@@ -19,27 +19,28 @@
 #include "Finder.hpp"
 
 Finder::Finder()
-	: //m_binoculars(false),
-	  m_permanentCrosshair(false),
-	  m_trueFOV(5.0),
+	: //m_binoculars(true),
 	  m_magnification(5.0),
-	  m_aperture(25.0),
+	  m_aperture(24.0),
+	  m_trueFOV(8.0),
 	  m_hFlipped(false),
 	  m_vFlipped(false),
-	  m_equatorial(false)
+	  m_equatorial(false),
+	m_permanentCrosshair(false)
 {
 }
 
 Finder::Finder(const QObject& other)
 	: //m_binoculars(other.property("binoculars").toBool()),
-	  m_permanentCrosshair(other.property("permanentCrosshair").toBool()),
-	  m_trueFOV(other.property("trueFOV").toDouble()),
+	  m_name(other.property("name").toString()),
 	  m_magnification(other.property("magnification").toDouble()),
 	  m_aperture(other.property("aperture").toDouble()),
+	  m_trueFOV(other.property("trueFOV").toDouble()),
 	  m_hFlipped(other.property("hFlipped").toBool()),
 	  m_vFlipped(other.property("vFlipped").toBool()),
 	  m_equatorial(other.property("equatorial").toBool()),
-	  m_name(other.property("name").toString())
+	  m_permanentCrosshair(other.property("permanentCrosshair").toBool()),
+	  m_reticlePath(other.property("reticlePath").toString())
 {
 }
 
@@ -47,21 +48,19 @@ Finder::~Finder()
 {
 }
 
-static QMap<int, QString> mapping;
+static const QMap<int, QString> mapping = {
+	{0, "name"		 },
+	{1, "trueFOV"		 },
+	{2, "magnification"	 },
+	{3, "aperture"		 },
+	{4, "hFlipped"		 },
+	{5, "vFlipped"		 },
+	{6, "equatorial"	 },
+	{7, "permanentCrosshair" },
+	{8, "reticlePath"	 }};
+
 QMap<int, QString> Finder::propertyMap(void)
 {
-	if(mapping.isEmpty()) {
-		mapping = QMap<int, QString>();
-		mapping[0] = "name";
-		mapping[1] = "trueFOV";
-		mapping[2] = "magnification";
-		mapping[3] = "aperture";
-		mapping[4] = "permanentCrosshair";
-		mapping[5] = "hFlipped";
-		mapping[6] = "vFlipped";
-		mapping[7] = "equatorial";
-		mapping[8] = "reticlePath";
-	}
 	return mapping;
 }
 
@@ -177,22 +176,22 @@ void Finder::setEquatorial(bool eq)
 #endif
 /* ********************************************************************* */
 
-Finder * Finder::finderFromSettings(const QSettings *theSettings, const int finderIndex)
+Finder * Finder::finderFromSettings(const QSettings *settings, const int finderIndex)
 {
 	qDebug() << "finderFromSettings()...";
 	Finder* finder = new Finder();
 	QString prefix = "finder/" + QVariant(finderIndex).toString() + "/";
 
-	finder->setName(theSettings->value(prefix + "name", "nameless").toString());
-	finder->setTrueFOV(theSettings->value(prefix + "tfov", 5.0).toDouble());
-	finder->setMagnification(theSettings->value(prefix + "mag", 5.0).toDouble());
-	finder->setAperture(theSettings->value(prefix + "aperture", 24.0).toDouble());
-	//finder->setBinoculars(theSettings->value(prefix + "binoculars", "false").toBool());
-	finder->setPermanentCrosshair(theSettings->value(prefix + "permanentCrosshair", "false").toBool());
-	finder->setReticlePath(theSettings->value(prefix + "reticlePath", "").toString());
-	finder->setHFlipped(theSettings->value(prefix + "hFlip").toBool());
-	finder->setVFlipped(theSettings->value(prefix + "vFlip").toBool());
-	finder->setEquatorial(theSettings->value(prefix + "equatorial").toBool());
+	finder->setName(settings->value(prefix + "name", "nameless").toString());
+	finder->setTrueFOV(settings->value(prefix + "tfov", 8.0).toDouble());
+	finder->setMagnification(settings->value(prefix + "mag", 5.0).toDouble());
+	finder->setAperture(settings->value(prefix + "aperture", 24.0).toDouble());
+	//finder->setBinoculars(theSettings->value(prefix + "binoculars", false).toBool());
+	finder->setHFlipped(settings->value(prefix + "hFlip", false).toBool());
+	finder->setVFlipped(settings->value(prefix + "vFlip", false).toBool());
+	finder->setEquatorial(settings->value(prefix + "equatorial", false).toBool());
+	finder->setPermanentCrosshair(settings->value(prefix + "permanentCrosshair", false).toBool());
+	finder->setReticlePath(settings->value(prefix + "reticlePath", "").toString());
 
 	if (!(finder->trueFOV() > 0.0 && finder->magnification() > 0.0)) {
 		qWarning() << "WARNING: Invalid data for finder " << finderIndex << ". Finder values must be positive. \n"
@@ -210,18 +209,17 @@ Finder * Finder::finderFromSettings(const QSettings *theSettings, const int find
 
 void Finder::writeToSettings(QSettings * settings, const int index)
 {
-	QString prefix = "ocular/" + QVariant(index).toString() + "/";
+	QString prefix = "finder/" + QVariant(index).toString() + "/";
 	settings->setValue(prefix + "name", this->name());
 	settings->setValue(prefix + "tfov", this->trueFOV());
 	settings->setValue(prefix + "mag", this->magnification());
 	settings->setValue(prefix + "aperture", this->aperture());
 	//settings->setValue(prefix + "binoculars", this->isBinoculars());
-	settings->setValue(prefix + "permanentCrosshair", this->hasPermanentCrosshair());
-	settings->setValue(prefix + "reticlePath", this->reticlePath());
 	settings->setValue(prefix + "hFlip", this->isHFlipped());
 	settings->setValue(prefix + "vFlip", this->isVFlipped());
 	settings->setValue(prefix + "equatorial", this->isEquatorial());
-
+	settings->setValue(prefix + "permanentCrosshair", this->hasPermanentCrosshair());
+	settings->setValue(prefix + "reticlePath", this->reticlePath());
 }
 
 Finder * Finder::finderModel(void)
@@ -233,11 +231,11 @@ Finder * Finder::finderModel(void)
 	model->setMagnification(5);
 	model->setAperture(24);
 	//model->setBinoculars(false);
-	model->setPermanentCrosshair(false);
-	model->setReticlePath("");
 	model->setHFlipped(false);
 	model->setVFlipped(false);
 	model->setEquatorial(false);
+	model->setPermanentCrosshair(false);
+	model->setReticlePath("");
 	qDebug() << "finderModel() exiting";
 
 	return model;
