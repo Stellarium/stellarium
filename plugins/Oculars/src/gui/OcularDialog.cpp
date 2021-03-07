@@ -551,11 +551,11 @@ void OcularDialog::createDialogContent()
 	finderMapper->addMapping(ui->finderFOV,      1);
 	finderMapper->addMapping(ui->finderMag,      2);
 	finderMapper->addMapping(ui->finderDia,      3);
-	finderMapper->addMapping(ui->finderXHairCheckBox, 4, "checked");
 	finderMapper->addMapping(ui->finderHFlip,    4, "checked");
 	finderMapper->addMapping(ui->finderVFlip,    5, "checked");
 	finderMapper->addMapping(ui->finderEQ,       6, "checked");
-	//finderMapper->addMapping(ui->finderReticlePath, 7);
+	finderMapper->addMapping(ui->finderXHairCheckBox, 7, "checked");
+	//finderMapper->addMapping(ui->finderReticlePath, 8); // Maybe add a textfield with file select dialog here?
 	finderMapper->toFirst();
 	connect(ui->finderListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 		finderMapper, SLOT(setCurrentModelIndex(QModelIndex)));
@@ -564,15 +564,16 @@ void OcularDialog::createDialogContent()
 	ui->finderListView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	ui->finderListView->setCurrentIndex(finderTableModel->index(0, 1));
 
-	connect(ui->telescopeDiameter, SIGNAL(editingFinished()), this, SLOT(updateTelescope()));
-	connect(ui->telescopeFL,       SIGNAL(editingFinished()), this, SLOT(updateTelescope()));
-	connect(ui->telescopeHFlip,    SIGNAL(stateChanged(int)), this, SLOT(updateTelescope()));
-	connect(ui->telescopeVFlip,    SIGNAL(stateChanged(int)), this, SLOT(updateTelescope()));
-	connect(ui->telescopeEQ,       SIGNAL(stateChanged(int)), this, SLOT(updateTelescope()));
+	connect(ui->finderFOV,      SIGNAL(editingFinished()), this, SLOT(updateFinder()));
+	connect(ui->finderMag,      SIGNAL(editingFinished()), this, SLOT(updateFinder()));
+	connect(ui->finderDia,      SIGNAL(editingFinished()), this, SLOT(updateFinder()));
+	connect(ui->finderHFlip,    SIGNAL(stateChanged(int)), this, SLOT(updateFinder()));
+	connect(ui->finderVFlip,    SIGNAL(stateChanged(int)), this, SLOT(updateFinder()));
+	connect(ui->finderEQ,       SIGNAL(stateChanged(int)), this, SLOT(updateFinder()));
 
 
 	// General UI
-	connect(ui->binocularsCheckBox, SIGNAL(toggled(bool)), this, SLOT(setLabelsDescriptionText(bool)));
+	connect(ui->binocularsCheckBox, SIGNAL(toggled(bool)), this, SLOT(setLabelsDescriptionText(bool))); // FIXME: these are now separate tabs...
 	connect(ui->checkBoxControlPanel, SIGNAL(toggled(bool)), this, SLOT(updateGuiOptions()));
 	connect(ui->semiTransparencyCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateGuiOptions()));
 	connect(ui->checkBoxShowFocuserOverlay, SIGNAL(toggled(bool)), this, SLOT(updateGuiOptions()));
