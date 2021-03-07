@@ -263,6 +263,12 @@ public slots:
 	void setMagLimitStarsOcularsManual(double mag);
 	double getMagLimitStarsOcularsManual() const;
 
+	void setMagLimitPlanetsOcularsManual(double mag);
+	double getMagLimitPlanetsOcularsManual() const;
+
+	void setMagLimitDSOsOcularsManual(double mag);
+	double getMagLimitDSOsOcularsManual() const;
+
 	void setFlagInitFovUsage(const bool b);
 	bool getFlagInitFovUsage(void) const;
 
@@ -429,8 +435,8 @@ private slots:
 	void updateLatestSelectedSSO();
 
 private:
-	//! Compute the limiting magnitude for a telescope
-	static double computeLimitMagnitude(Ocular *ocular, Telescope *telescope);
+	//! Compute the limiting magnitude for a telescope with aperture given in mm
+	static double computeLimitMagnitude(double aperture);
 
 	//! Set up the Qt actions needed to activate the plugin.
 	void initializeActivationActions();
@@ -460,10 +466,15 @@ private:
 	void validateAndLoadIniFile();
 
 	//! Switch state of line displays for the Main application. Should be called when entering or leaving oculars view or when toggling the respective switch.
-	void toggleLines(bool visible);
-	//! Inhibit scaling up planets in the Main application.  Should be called when entering or leaving oculars, finder and sensors mode or when toggling the respective switch.
-	//! Set scale to true to set the scale as given in the main program, false to store status and scale to 1.
-	void handlePlanetScaling(bool scale);
+	void handleLines(bool visibleMain);
+	//! Inhibit scaling up planets that may be active in the Main application.  Should be called when entering or leaving oculars, finder and sensors mode or when toggling the respective switch.
+	//! Set scaleMain to true to set the scale as given in the main program, false to store status and scale to 1.
+	void handlePlanetScaling(bool scaleMain);
+
+	//! adjust star, planet and nebula limiting magnitudes as required for Oculars and Finder views
+	//! set mode to the requested PluginMode.
+	//! @note: Currently it is recommended to first switch to OcNone, then OcOcular or OcFinder, and not switch between the two modes directly.
+	void handleMagnitudeLimits(PluginMode mode);
 
 	//! toggles the actual ocular view.
 	//! Record the state of the GridLinesMgr and other settings beforehand, so that they can be reset afterwards.
@@ -521,32 +532,74 @@ private:
 	bool flagCardinalPointsMain;	//!< Flag to track if CardinalPoints was displayed at activation.
 	bool flagAdaptationMain;	//!< Flag to track if adaptationCheckbox was enabled at activation.
 
+	// allow tracking of settings for manually configured magnitude limits for ocular and finder modes. See handleMagnitudeLimits().
 	bool flagLimitStarsMain;        //!< Flag to track limitation of stellar magnitude in the main program
 	double magLimitStarsMain;       //!< Value of limited stellar magnitude in the main program
+	bool flagLimitPlanetsMain;      //!< Flag to track limit magnitude for planets, asteroids, comets etc.
+	double magLimitPlanetsMain;     //!< Value of limited magnitude for planets, asteroids, comets etc.
+	bool flagLimitDSOsMain;		//!< Flag to track limit magnitude for DSOs
+	double magLimitDSOsMain;	//!< Value of limited magnitude for DSOs
+
 	bool flagLimitStarsOculars;	//!< Track whether a stellar magnitude limit should be activated when Oculars view is selected.
 					//!< This flag is not a StelProperty, but linked to SkyDrawer.flagStarMagnitudeLimit while oculars view is active.
 					//!< This is required to set the manual limitation flag in SkyDrawer.
 	double magLimitStarsOculars;    //!< Value of limited magnitude for stars in oculars mode, when not auto-defined with flagAutoLimitMagnitude.
 					//!< This value is not a StelProperty, but linked to SkyDrawer.customStarMagLimit while oculars view is active and automatic setting of magnitude is not active.
 					//!< If user modifies the magnitude while flagAutoLimitMagnitude is true, the value will not be stored permanently. [FIXME: Recheck this sentence.]
-	bool flagAutoLimitMagnitude;    //!< Decide whether stellar magnitudes should be auto-limited based on telescope/ocular combination.
-					//!< If false, the manual limitation value magLimitStarsOculars takes over, and limitation is decided by flagLimitStarsOculars.
-					//!< If true, flagLimitStarsOculars is set true when activating Oculars view, and will remain true.
-	bool flagLimitDSOsMain;		//!< Flag to track limit magnitude for DSOs
-	double magLimitDSOsMain;	//!< Value of limited magnitude for DSOs
-	bool flagLimitPlanetsMain;      //!< Flag to track limit magnitude for planets, asteroids, comets etc.
-	double magLimitPlanetsMain;     //!< Value of limited magnitude for planets, asteroids, comets etc.
+	bool flagLimitPlanetsOculars;	//!< Track whether a planet magnitude limit should be activated when Oculars view is selected.
+					//!< This flag is not a StelProperty, but linked to SkyDrawer.flagPlanetMagnitudeLimit while oculars view is active.
+					//!< This is required to set the manual limitation flag in SkyDrawer.
+	double magLimitPlanetsOculars;  //!< Value of limited magnitude for planets in oculars mode, when not auto-defined with flagAutoLimitMagnitude.
+					//!< This value is not a StelProperty, but linked to SkyDrawer.customPlanetMagLimit while oculars view is active and automatic setting of magnitude is not active.
+					//!< If user modifies the magnitude while flagAutoLimitMagnitude is true, the value will not be stored permanently. [FIXME: Recheck this sentence.]
+	bool flagLimitDSOsOculars;	//!< Track whether a nebula magnitude limit should be activated when Oculars view is selected.
+					//!< This flag is not a StelProperty, but linked to SkyDrawer.flagNebulaMagnitudeLimit while oculars view is active.
+					//!< This is required to set the manual limitation flag in SkyDrawer.
+	double magLimitDSOsOculars;     //!< Value of limited magnitude for nebula in oculars mode, when not auto-defined with flagAutoLimitMagnitude.
+					//!< This value is not a StelProperty, but linked to SkyDrawer.customNebulaMagLimit while oculars view is active and automatic setting of magnitude is not active.
+					//!< If user modifies the magnitude while flagAutoLimitMagnitude is true, the value will not be stored permanently. [FIXME: Recheck this sentence.]
+
+	bool flagLimitStarsFinder; 	//!< Track whether a stellar magnitude limit should be activated when Finder view is selected.
+					//!< This flag is not a StelProperty, but linked to SkyDrawer.flagStarMagnitudeLimit while finder view is active.
+					//!< This is required to set the manual limitation flag in SkyDrawer.
+	double magLimitStarsFinder;     //!< Value of limited magnitude for stars in finder mode, when not auto-defined with flagAutoLimitMagnitude.
+					//!< This value is not a StelProperty, but linked to SkyDrawer.customStarMagLimit while finder view is active and automatic setting of magnitude is not active.
+					//!< If user modifies the magnitude while flagAutoLimitMagnitude is true, the value will not be stored permanently. [FIXME: Recheck this sentence.]
+	bool flagLimitPlanetsFinder;	//!< Track whether a planet magnitude limit should be activated when Finder view is selected.
+					//!< This flag is not a StelProperty, but linked to SkyDrawer.flagPlanetMagnitudeLimit while finderview is active.
+					//!< This is required to set the manual limitation flag in SkyDrawer.
+	double magLimitPlanetsFinder;   //!< Value of limited magnitude for planets in finder mode, when not auto-defined with flagAutoLimitMagnitude.
+					//!< This value is not a StelProperty, but linked to SkyDrawer.customPlanetMagLimit while finder view is active and automatic setting of magnitude is not active.
+					//!< If user modifies the magnitude while flagAutoLimitMagnitude is true, the value will not be stored permanently. [FIXME: Recheck this sentence.]
+	bool flagLimitDSOsFinder;	//!< Track whether a nebula magnitude limit should be activated when finder view is selected.
+					//!< This flag is not a StelProperty, but linked to SkyDrawer.flagNebulaMagnitudeLimit while finder view is active.
+					//!< This is required to set the manual limitation flag in SkyDrawer.
+	double magLimitDSOsFinder;      //!< Value of limited magnitude for nebula in finder mode, when not auto-defined with flagAutoLimitMagnitude.
+					//!< This value is not a StelProperty, but linked to SkyDrawer.customNebulaMagLimit while finder view is active and automatic setting of magnitude is not active.
+					//!< If user modifies the magnitude while flagAutoLimitMagnitude is true, the value will not be stored permanently. [FIXME: Recheck this sentence.]
+
+	bool flagAutoLimitMagnitude;    //!< Decide whether stellar and other magnitudes should be auto-limited based on telescope/ocular combination.
+					//!< If false, the manual limitation value magLimit(Stars|Planets|Nebula)(Oculars|Finder) takes over, and limitation is decided by flagLimit(Stars|Planets|Nebula)(Oculars|Finder).
+					//!< If true, flagLimit(Stars|Planets|Nebula)(Oculars|Finder) is set true when activating Oculars view, and will remain true.
+					//!
+
+	// allow tracking and restoring star scales between various modes
 	double relativeStarScaleMain;   //!< Value to store the usual relative star scale when activating ocular or CCD view
 	double absoluteStarScaleMain;   //!< Value to store the usual absolute star scale when activating ocular or CCD view
 	double relativeStarScaleOculars;	//!< Value to store the relative star scale when switching off ocular view
 	double absoluteStarScaleOculars;	//!< Value to store the absolute star scale when switching off ocular view
 	double relativeStarScaleCCD;    //!< Value to store the relative star scale when switching off CCD view
 	double absoluteStarScaleCCD;    //!< Value to store the absolute star scale when switching off CCD view
+	double relativeStarScaleFinder; //!< Value to store the relative star scale when switching off finder view
+	double absoluteStarScaleFinder; //!< Value to store the absolute star scale when switching off finder view
+
+	// variables for handlePlanetScaling()
 	bool flagMoonScaleMain;	        //!< Flag to track of usage of artificial scaling of the Moon
 	bool flagMinorBodiesScaleMain;  //!< Flag to track of usage of artificial scaling of minor bodies
 	bool flagPlanetScaleMain;       //!< Flag to track of usage of artificial scaling of planets
 	bool flagSunScaleMain;          //!< Flag to track of usage of artificial scaling of the Sun
 	bool flagDSOPropHintMain;	//!< Flag to track of usage proportional hints for DSO
+
 	double milkyWaySaturationMain;
 
 	double maxEyepieceAngle;        //!< The maximum aFOV of any eyepiece.
@@ -558,12 +611,15 @@ private:
 	bool flagHorizontalCoordinates;  //!< Use horizontal coordinates instead equatorial coordinates for cross of center CCD
 	bool flagSemiTransparency;       //!< Draw the area outside the ocular circle not black but let some stars through.
 	int transparencyMask;		 //!< Value of transparency for semi-transparent mask
+
+	// variables for handleLines()
 	bool flagHideGridsLines;         //!< Switch off all grids and lines of GridMgr while in Ocular view
 	bool flagGridLinesDisplayedMain; //!< keep track of gridline display while possibly suppressing their display.
 	bool flagConstellationLinesMain; //!< keep track of constellation display while possibly suppressing their display.
 	bool flagConstellationBoundariesMain; //!< keep track of constellation display while possibly suppressing their display.
 	bool flagAsterismLinesMain;      //!< keep track of asterism display while possibly suppressing their display.
 	bool flagRayHelpersLinesMain;      //!< keep track of ray helpers display while possibly suppressing their display.
+
 	bool flipVertMain;               //!< keep track of screen flip in main program
 	bool flipHorzMain;               //!< keep track of screen flip in main program
 

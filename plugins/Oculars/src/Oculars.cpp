@@ -99,15 +99,27 @@ Oculars::Oculars()
 	, usageMessageLabelID(-1)
 	, flagCardinalPointsMain(false)
 	, flagAdaptationMain(false)
+
 	, flagLimitStarsMain(false)
 	, magLimitStarsMain(0.0)
-	, flagLimitStarsOculars(false)
-	, magLimitStarsOculars(0.0)
-	, flagAutoLimitMagnitude(false)
-	, flagLimitDSOsMain(false)
-	, magLimitDSOsMain(0.0)
 	, flagLimitPlanetsMain(false)
 	, magLimitPlanetsMain(0.0)
+	, flagLimitDSOsMain(false)
+	, magLimitDSOsMain(0.0)
+	, flagLimitStarsOculars(false)
+	, magLimitStarsOculars(0.0)
+	, flagLimitPlanetsOculars(false)
+	, magLimitPlanetsOculars(0.0)
+	, flagLimitDSOsOculars(false)
+	, magLimitDSOsOculars(0.0)
+	, flagLimitStarsFinder(false)
+	, magLimitStarsFinder(0.0)
+	, flagLimitPlanetsFinder(false)
+	, magLimitPlanetsFinder(0.0)
+	, flagLimitDSOsFinder(false)
+	, magLimitDSOsFinder(0.0)
+
+	, flagAutoLimitMagnitude(false)
 	, relativeStarScaleMain(1.0)
 	, absoluteStarScaleMain(1.0)
 	, relativeStarScaleOculars(1.0)
@@ -299,11 +311,28 @@ void Oculars::deinit()
 	settings->setValue("stars_scale_absolute", QString::number(absoluteStarScaleOculars, 'f', 2));
 	settings->setValue("stars_scale_relative_ccd", QString::number(relativeStarScaleCCD, 'f', 2));
 	settings->setValue("stars_scale_absolute_ccd", QString::number(absoluteStarScaleCCD, 'f', 2));
+	settings->setValue("stars_scale_relative_finder", QString::number(relativeStarScaleFinder, 'f', 2));
+	settings->setValue("stars_scale_absolute_finder", QString::number(absoluteStarScaleFinder, 'f', 2));
+
 	settings->setValue("limit_stellar_magnitude_oculars_val", QString::number(magLimitStarsOculars, 'f', 2));
 	settings->setValue("limit_stellar_magnitude_oculars", flagLimitStarsOculars);
+	settings->setValue("limit_stellar_magnitude_finder_val", QString::number(magLimitStarsFinder, 'f', 2));
+	settings->setValue("limit_stellar_magnitude_finder", flagLimitStarsFinder);
+
+	settings->setValue("limit_planet_magnitude_oculars_val", QString::number(magLimitPlanetsOculars, 'f', 2));
+	settings->setValue("limit_planet_magnitude_oculars", flagLimitPlanetsOculars);
+	settings->setValue("limit_planet_magnitude_finder_val", QString::number(magLimitPlanetsFinder, 'f', 2));
+	settings->setValue("limit_planet_magnitude_finder", flagLimitPlanetsFinder);
+
+	settings->setValue("limit_nabula_magnitude_oculars_val", QString::number(magLimitDSOsOculars, 'f', 2));
+	settings->setValue("limit_nabula_magnitude_oculars", flagLimitDSOsOculars);
+	settings->setValue("limit_nabula_magnitude_finder_val", QString::number(magLimitDSOsFinder, 'f', 2));
+	settings->setValue("limit_nabula_magnitude_finder", flagLimitDSOsFinder);
+
 	settings->setValue("text_color", textColor.toStr());
 	settings->setValue("line_color", lineColor.toStr());
 	settings->setValue("focuser_color", focuserColor.toStr());
+	settings->setValue("oculars_version", QString::number(static_cast<double>(MIN_OCULARS_INI_VERSION), 'f', 2));
 	settings->sync();
 
 	disconnect(this, SIGNAL(selectedOcularChanged(int)), this, SLOT(updateOcularReticle()));
@@ -418,7 +447,7 @@ void Oculars::handleMouseClicks(class QMouseEvent* event)
 
 	// In case we show oculars with black circle, ignore mouse presses outside image circle:
 	// https://sourceforge.net/p/stellarium/discussion/278769/thread/57893bb3/?limit=25#75c0
-	if (pluginMode==OcOcular ) //&& !getFlagUseSemiTransparency()) // Not sure: ignore or allow selection of semi-hidden stars?
+	if ((pluginMode==OcOcular) || (pluginMode==OcFinder)) //&& !getFlagUseSemiTransparency()) // Not sure: ignore or allow selection of semi-hidden stars?
 	{
 		float wh = prj->getViewportWidth()*0.5f; // get half of width of the screen
 		float hh = prj->getViewportHeight()*0.5f; // get half of height of the screen
@@ -431,8 +460,8 @@ void Oculars::handleMouseClicks(class QMouseEvent* event)
 #endif
 
 		double inner = 0.5 * params.viewportFovDiameter * ppx;
-		// See if we need to scale the mask
-		if (flagScaleImageCircle && oculars[selectedOcularIndex]->apparentFOV() > 0.0 && !oculars[selectedOcularIndex]->isBinoculars())
+		// See if we need to scale the mask (only for real ocular views...)
+		if ((pluginMode==OcOcular) && flagScaleImageCircle && oculars[selectedOcularIndex]->apparentFOV() > 0.0)
 		{
 			inner = oculars[selectedOcularIndex]->apparentFOV() * inner / maxEyepieceAngle;
 		}
@@ -488,14 +517,38 @@ void Oculars::init()
 
 		setFlagRequireSelection(settings->value("require_selection_to_zoom", true).toBool());
 		flagScaleImageCircle = settings->value("use_max_exit_circle", false).toBool();
+
+		// Read Oculars. Convert "isBinocular" type from version before 0.21.0 to Finder type.
 		const int ocularCount = settings->value("ocular_count", 0).toInt();
 		int actualOcularCount = ocularCount;
+		int ocularIsActuallyFinder=0;
 		for (int index = 0; index < ocularCount; index++)
 		{
 			Ocular *newOcular = Ocular::ocularFromSettings(settings, index);
 			if (newOcular != Q_NULLPTR)
 			{
-				oculars.append(newOcular);
+				// V0.21.0: process old config files to convert "binocular" oculars into finders.
+				// TBD: Remove this in about 0.23.0
+				if (newOcular->isBinoculars())
+				{
+					qDebug() << "Converting Ocular" << newOcular->name() << "(marked as 'binocular') to Finder";
+					Finder *f=new Finder();
+					f->setName(newOcular->name());
+					f->setTrueFOV(newOcular->apparentFOV());
+					f->setMagnification(newOcular->effectiveFocalLength());
+					f->setAperture(newOcular->fieldStop());
+					f->setPermanentCrosshair(newOcular->hasPermanentCrosshair());
+					f->setReticlePath(newOcular->reticlePath());
+					finders.append(f);
+					delete newOcular;
+					ocularIsActuallyFinder++;
+					actualOcularCount--;
+
+				}
+				else
+				{
+					oculars.append(newOcular);
+				}
 			}
 			else
 			{
@@ -504,7 +557,7 @@ void Oculars::init()
 		}
 		if (actualOcularCount < 1)
 		{
-			if (actualOcularCount < ocularCount)
+			if (actualOcularCount < ocularCount-ocularIsActuallyFinder)
 			{
 				qWarning() << "The Oculars ini file appears to be corrupt (inconsistent number of oculars); edit or delete it.";
 			}
@@ -643,9 +696,22 @@ void Oculars::init()
 		setFlagDMSDegrees( ! settings->value("use_decimal_degrees", false).toBool());
 		setFlagHorizontalCoordinates(settings->value("use_horizontal_coordinates", false).toBool());
 		setFlagAutoLimitMagnitude(settings->value("autolimit_stellar_magnitude", true).toBool());
+		connect(this, SIGNAL(flagAutoLimitMagnitudeChanged(bool)), this, SLOT(handleAutoLimitToggle(bool))); // only after first initialisation!
+
 		flagLimitStarsOculars=settings->value("limit_stellar_magnitude_oculars", false).toBool();
 		magLimitStarsOculars=settings->value("limit_stellar_magnitude_oculars_val", 12.).toDouble();
-		connect(this, SIGNAL(flagAutoLimitMagnitudeChanged(bool)), this, SLOT(handleAutoLimitToggle(bool))); // only after first initialisation!
+		flagLimitPlanetsOculars=settings->value("limit_planet_magnitude_oculars", false).toBool();
+		magLimitPlanetsOculars=settings->value("limit_planet_magnitude_oculars_val", 12.).toDouble();
+		flagLimitDSOsOculars=settings->value("limit_nebula_magnitude_oculars", false).toBool();
+		magLimitDSOsOculars=settings->value("limit_nebula_magnitude_oculars_val", 12.).toDouble();
+
+		flagLimitStarsFinder=settings->value("limit_stellar_magnitude_finder", false).toBool();
+		magLimitStarsFinder=settings->value("limit_stellar_magnitude_finder_val", 10.).toDouble();
+		flagLimitPlanetsFinder=settings->value("limit_planet_magnitude_finder", false).toBool();
+		magLimitPlanetsFinder=settings->value("limit_planet_magnitude_finder_val", 10.).toDouble();
+		flagLimitDSOsFinder=settings->value("limit_nebula_magnitude_finder", false).toBool();
+		magLimitDSOsFinder=settings->value("limit_nebula_magnitude_finder_val", 10.).toDouble();
+
 		setFlagInitFovUsage(settings->value("use_initial_fov", false).toBool());
 		setFlagInitDirectionUsage(settings->value("use_initial_direction", false).toBool());
 		setFlagUseSemiTransparency(settings->value("use_semi_transparency", false).toBool());
@@ -662,6 +728,8 @@ void Oculars::init()
 		absoluteStarScaleOculars=settings->value("stars_scale_absolute", 1.0).toDouble();
 		relativeStarScaleCCD=settings->value("stars_scale_relative_ccd", 1.0).toDouble();
 		absoluteStarScaleCCD=settings->value("stars_scale_absolute_ccd", 1.0).toDouble();
+		relativeStarScaleFinder=settings->value("stars_scale_relative_finder", 1.0).toDouble();
+		absoluteStarScaleFinder=settings->value("stars_scale_absolute_finder", 1.0).toDouble();
 		setFlagShowCcdCropOverlay(settings->value("show_ccd_crop_overlay", false).toBool());
 		setFlagShowCcdCropOverlayPixelGrid(settings-> value("ccd_crop_overlay_pixel_grid",false).toBool());
 		setCcdCropOverlayHSize(settings->value("ccd_crop_overlay_hsize", DEFAULT_CCD_CROP_OVERLAY_SIZE).toInt());
@@ -691,8 +759,7 @@ void Oculars::init()
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslateGui()));
 	connect(this, SIGNAL(selectedOcularChanged(int)), this, SLOT(updateOcularReticle()));
-	StelCore *core = StelApp::getInstance().getCore();
-	StelSkyDrawer *skyDrawer = core->getSkyDrawer();
+	StelSkyDrawer *skyDrawer = StelApp::getInstance().getCore()->getSkyDrawer();
 	connect(skyDrawer, SIGNAL(flagStarMagnitudeLimitChanged(bool)), this, SLOT(handleStarMagLimitToggle(bool)));
 	StelObjectMgr* objectMgr = GETSTELMODULE(StelObjectMgr);
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(updateLatestSelectedSSO()));
@@ -2233,16 +2300,43 @@ void Oculars::setPluginMode(PluginMode newMode)
 			emit flagModeTelradChanged(false);
 			break;
 		case OcFinder:
-			if (getFlagInitFovUsage()) // Restoration of FOV is needed?
+
+			// magnitude limits and star scales.
+			disconnect(skyDrawer, SIGNAL(customStarMagLimitChanged(double)), this, SLOT(setMagLimitStarsOcularsManual(double)));
+			// restore values, but keep current to enable toggling.
+			if (!getFlagAutoLimitMagnitude())
+			{
+				flagLimitStarsFinder=skyDrawer->getFlagStarMagnitudeLimit();
+				magLimitStarsFinder=skyDrawer->getCustomStarMagnitudeLimit();
+			}
+			skyDrawer->setCustomStarMagnitudeLimit(magLimitStarsMain);
+			skyDrawer->setFlagStarMagnitudeLimit(flagLimitStarsMain);
+			relativeStarScaleOculars=skyDrawer->getRelativeStarScale();
+			absoluteStarScaleOculars=skyDrawer->getAbsoluteStarScale();
+			skyDrawer->setRelativeStarScale(relativeStarScaleMain);
+			skyDrawer->setAbsoluteStarScale(absoluteStarScaleMain);
+			skyDrawer->setFlagLuminanceAdaptation(flagAdaptationMain);
+			skyDrawer->setFlagPlanetMagnitudeLimit(flagLimitPlanetsMain);
+			skyDrawer->setFlagNebulaMagnitudeLimit(flagLimitDSOsMain);
+			skyDrawer->setCustomPlanetMagnitudeLimit(magLimitPlanetsMain);
+			skyDrawer->setCustomNebulaMagnitudeLimit(magLimitDSOsMain);
+
+
+			handlePlanetScaling(true);
+			// Set the screen display
+			core->setFlipHorz(flipHorzMain);
+			core->setFlipVert(flipVertMain);
+
+			// from unzoomOcular()
+			if (getFlagInitFovUsage())
 				movementManager->zoomTo(movementManager->getInitFov());
 			else
 				movementManager->zoomTo(initialFOV);
 
 			// TODO 2021: Decide if this is really useful? We only de-activate the finder. Why revert to another view direction?
 			if (getFlagInitDirectionUsage())
-				movementManager->setViewDirectionJ2000(StelApp::getInstance().getCore()->altAzToJ2000(movementManager->getInitViewingDirection(), StelCore::RefractionOff));
+				movementManager->setViewDirectionJ2000(core->altAzToJ2000(movementManager->getInitViewingDirection(), StelCore::RefractionOff));
 
-			handlePlanetScaling(true);
 			flagModeFinder=false;
 			emit flagModeFinderChanged(false);
 			break;
@@ -2250,7 +2344,7 @@ void Oculars::setPluginMode(PluginMode newMode)
 			// TODO switch out Ocular-specific settings
 
 			if (flagHideGridsLines)
-				toggleLines(true);
+				handleLines(true);
 
 			propMgr->setStelPropertyValue("MilkyWay.saturation", milkyWaySaturationMain);
 			disconnect(skyDrawer, SIGNAL(customStarMagLimitChanged(double)), this, SLOT(setMagLimitStarsOcularsManual(double)));
@@ -2486,15 +2580,11 @@ void Oculars::setPluginMode(PluginMode newMode)
 			if (guiPanel)
 				guiPanel->showOcularGui();
 
-			// this block is from previous zoom(false). These are side effects unrelated to a "zooming" operation.
 			if (flagHideGridsLines)
-			{
-				// Store current state for later resetting, and hide them
-				storeLineStateMain();
-				toggleLines(false);
-				// TODO 2021: Make sure to handle toggling gridlines correctly in addition, while OcOcular is active.
-			}
+				handleLines(false);
 
+
+			// this block is from previous zoom(false). These are side effects unrelated to a "zooming" operation.
 
 			milkyWaySaturationMain	= propMgr->getStelPropertyValue("MilkyWay.saturation").toDouble();
 			propMgr->setStelPropertyValue("MilkyWay.saturation", 0.f);
@@ -2582,7 +2672,7 @@ void Oculars::setFlagModeFinder(bool show)
 
 // TODO 2021: Misnomer: This is not "toggle" (flip whatever state) but "switch"
 // This should be called when a new state is entered
-void Oculars::toggleLines(bool visible)
+void Oculars::handleLines(bool visibleMain)
 {
 	//if (flagShowTelrad)
 	//	return;
@@ -2597,7 +2687,7 @@ void Oculars::toggleLines(bool visible)
 
 	StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
 
-	if (visible) // restore previous settings
+	if (visibleMain) // restore previous settings
 	{
 		propMgr->setStelPropertyValue("GridLinesMgr.gridlinesDisplayed", flagGridLinesDisplayedMain);
 		propMgr->setStelPropertyValue("LandscapeMgr.cardinalsPointsDisplayed", flagCardinalPointsMain);
@@ -2623,10 +2713,10 @@ void Oculars::toggleLines(bool visible)
 	}
 }
 
-void Oculars::handlePlanetScaling(bool scale)
+void Oculars::handlePlanetScaling(bool scaleMain)
 {
 	SolarSystem *ss=GETSTELMODULE(SolarSystem);
-	if (scale)
+	if (scaleMain)
 	{
 		ss->setFlagMoonScale(flagMoonScaleMain);
 		ss->setFlagMinorBodyScale(flagMinorBodiesScaleMain);
@@ -2646,13 +2736,148 @@ void Oculars::handlePlanetScaling(bool scale)
 	}
 }
 
+
+// Call this when toggling between main (none), oculars and finder modes or when changing instruments within these modes. Other modes are seen as error.
+// Either current pluginMode or newMode MUST be OcNone
+// The call MUST be processed in the old pluginMode, announcing the new mode in the argument.
+void Oculars::handleMagnitudeLimits(PluginMode newMode)
+{
+	Q_ASSERT((pluginMode==OcNone && newMode!=OcNone) || (pluginMode!=OcNone && newMode==OcNone) || (pluginMode==newMode));
+
+	// This may be helpful while developing, to call only where useful.
+	if (pluginMode==OcNone)
+	{
+		Q_ASSERT((newMode==OcOcular) || (newMode==OcFinder));
+	}
+	else if ((pluginMode==OcOcular) || (pluginMode==OcFinder))
+	{
+		Q_ASSERT(newMode=OcNone);
+	}
+	StelCore *core = StelApp::getInstance().getCore();
+	StelSkyDrawer *skyDrawer = core->getSkyDrawer();
+
+	const bool switchOff= (pluginMode!=OcNone) && (newMode==OcNone);
+	const bool onlyRecalcLimits=(newMode==pluginMode); // This must then inhibit storing 'Main' values.
+
+	double limitMagComputed=0.;
+	double limitMagStars, limitMagPlanets, limitMagDSOs;
+	bool flagLimitMagStars, flagLimitMagPlanets, flagLimitMagDSOs;
+
+	// If we are going out of special modes, we *may* need to retain the manually set values.
+	if (switchOff && !getFlagAutoLimitMagnitude())
+	{
+		switch (pluginMode)
+		{
+			case OcOcular:
+				flagLimitStarsOculars=skyDrawer->getFlagStarMagnitudeLimit();
+				flagLimitPlanetsOculars=skyDrawer->getFlagPlanetMagnitudeLimit();
+				flagLimitDSOsOculars=skyDrawer->getFlagNebulaMagnitudeLimit();
+
+				magLimitStarsOculars=skyDrawer->getCustomStarMagnitudeLimit();
+				magLimitPlanetsOculars=skyDrawer->getCustomPlanetMagnitudeLimit();
+				magLimitDSOsOculars=skyDrawer->getCustomNebulaMagnitudeLimit();
+				break;
+			case OcFinder:
+				flagLimitStarsFinder=skyDrawer->getFlagStarMagnitudeLimit();
+				flagLimitPlanetsFinder=skyDrawer->getFlagPlanetMagnitudeLimit();
+				flagLimitDSOsFinder=skyDrawer->getFlagNebulaMagnitudeLimit();
+
+				magLimitStarsFinder=skyDrawer->getCustomStarMagnitudeLimit();
+				magLimitPlanetsFinder=skyDrawer->getCustomPlanetMagnitudeLimit();
+				magLimitDSOsFinder=skyDrawer->getCustomNebulaMagnitudeLimit();
+				break;
+			default:
+				break;
+		}
+	}
+
+
+
+//	if (newMode==pluginMode)
+//	{
+//		limitMagStars=skyDrawer->getCustomStarMagnitudeLimit();
+//		limitMagPlanets=skyDrawer->getCustomPlanetMagnitudeLimit();
+//		limitMagDSOs=skyDrawer->getCustomNebulaMagnitudeLimit();
+//	}
+//	else
+	switch (newMode)
+	{
+		case OcNone:
+		case OcTelrad:
+		case OcSensor:
+			flagLimitMagStars=flagLimitStarsMain;
+			flagLimitMagPlanets=flagLimitPlanetsMain;
+			flagLimitMagDSOs=flagLimitDSOsMain;
+
+			limitMagStars=magLimitStarsMain;
+			limitMagPlanets=magLimitPlanetsMain;
+			limitMagDSOs=magLimitDSOsMain;
+			break;
+		case OcOcular:
+			flagLimitMagStars=flagLimitStarsOculars;
+			flagLimitMagPlanets=flagLimitPlanetsOculars;
+			flagLimitMagDSOs=flagLimitDSOsOculars;
+
+			limitMagComputed=computeLimitMagnitude(telescopes[selectedTelescopeIndex]->diameter());
+			limitMagStars=magLimitStarsOculars;
+			limitMagPlanets=magLimitPlanetsOculars;
+			limitMagDSOs=magLimitDSOsOculars;
+			break;
+		case OcFinder:
+			flagLimitMagStars=flagLimitStarsFinder;
+			flagLimitMagPlanets=flagLimitPlanetsFinder;
+			flagLimitMagDSOs=flagLimitDSOsFinder;
+
+			limitMagComputed=computeLimitMagnitude(finders[selectedFinderIndex]->aperture());
+			limitMagStars=magLimitStarsFinder;
+			limitMagPlanets=magLimitPlanetsFinder;
+			limitMagDSOs=magLimitDSOsFinder;
+			break;
+	}
+
+
+	// from zoomOcular()
+
+	// Limit stars/planet/DSOs magnitude. Either compute limiting magnitude for the telescope/ocular//finder,
+	// or just use the custom oculars mode value.
+	// TODO: What about planets?
+	if (getFlagAutoLimitMagnitude() && ((newMode==OcOcular) || (newMode==OcFinder)))
+	{
+		disconnect(skyDrawer, SIGNAL(customStarMagLimitChanged(double)),    this, SLOT(setMagLimitStarsOcularsManual(double)));   // we want to keep the old manual value.
+		disconnect(skyDrawer, SIGNAL(customPlanetsMagLimitChanged(double)), this, SLOT(setMagLimitPlanetsOcularsManual(double))); // we want to keep the old manual value.
+		disconnect(skyDrawer, SIGNAL(customNebulaMagLimitChanged(double)),  this, SLOT(setMagLimitDSOsOcularsManual(double)));    // we want to keep the old manual value.
+
+		// TODO: Is it really OK to apply the star formula to planets and esp. DSO?
+		skyDrawer->setFlagStarMagnitudeLimit(true);
+		skyDrawer->setCustomStarMagnitudeLimit(limitMagComputed);
+		skyDrawer->setFlagPlanetMagnitudeLimit(true);
+		skyDrawer->setCustomPlanetMagnitudeLimit(limitMagComputed);
+		skyDrawer->setFlagNebulaMagnitudeLimit(true);
+		skyDrawer->setCustomNebulaMagnitudeLimit(limitMagComputed);
+	}
+	else
+	{	// It's possible that the user changes the custom magnitude while viewing, and then changes the ocular.
+		// Therefore we need a temporary connection.
+		connect(skyDrawer, SIGNAL(customStarMagLimitChanged(double)),   this, SLOT(setMagLimitStarsOcularsManual(double)));
+		connect(skyDrawer, SIGNAL(customPlanetMagLimitChanged(double)), this, SLOT(setMagLimitPlanetsOcularsManual(double)));
+		connect(skyDrawer, SIGNAL(customNebulaMagLimitChanged(double)), this, SLOT(setMagLimitDSOsOcularsManual(double)));
+
+		skyDrawer->setFlagStarMagnitudeLimit(flagLimitMagStars);
+		skyDrawer->setCustomStarMagnitudeLimit(limitMagStars);
+		skyDrawer->setFlagPlanetMagnitudeLimit(flagLimitMagPlanets);
+		skyDrawer->setCustomPlanetMagnitudeLimit(limitMagPlanets);
+		skyDrawer->setFlagNebulaMagnitudeLimit(flagLimitMagDSOs);
+		skyDrawer->setCustomNebulaMagnitudeLimit(limitMagDSOs);
+	}
+}
+
 // zoomOcular() is called only within state OcOcular mode, either after activation or when an instrument has been changed.
 void Oculars::zoomOcular()
 {
-	Q_ASSERT(pluginMode==OcOcular);
+	Q_ASSERT((pluginMode==OcOcular) || (pluginMode==OcFinder));
 	StelCore *core = StelApp::getInstance().getCore();
 	StelMovementMgr *movementManager = core->getMovementMgr();
-	StelSkyDrawer *skyDrawer = core->getSkyDrawer();
+	//StelSkyDrawer *skyDrawer = core->getSkyDrawer();
 	
 	// We won't always have a selected object
 	if (StelApp::getInstance().getStelObjectMgr().getWasSelected())
@@ -2662,14 +2887,16 @@ void Oculars::zoomOcular()
 	}
 
 	// Set the screen display. Main program's flip settings have been stored in the Mode Switcher
-	Ocular * ocular = oculars[selectedOcularIndex];
-	Telescope * telescope = Q_NULLPTR;
-	Lens * lens = Q_NULLPTR;
-	// Only consider flip is we're not binoculars
-	if (ocular->isBinoculars())
+	Finder *finder = finders[selectedFinderIndex];
+	Ocular *ocular = oculars[selectedOcularIndex];
+	Telescope *telescope = Q_NULLPTR;
+	Lens *lens = Q_NULLPTR;
+	// Only consider flip is we're not binoculars. VERY WRONG! There are angle finders etc.
+	//if (ocular->isBinoculars())
+	if (pluginMode==OcFinder)
 	{
-		core->setFlipHorz(false);
-		core->setFlipVert(false);
+		core->setFlipHorz(finder->isHFlipped());
+		core->setFlipVert(finder->isVFlipped());
 	}
 	else
 	{
@@ -2682,35 +2909,45 @@ void Oculars::zoomOcular()
 		core->setFlipVert(telescope->isVFlipped());
 	}
 
-	// Limit stars and DSOs	magnitude. Either compute limiting magnitude for the telescope/ocular,
-	// or just use the custom oculars mode value.
-	// TODO: What about planets?
 
-	double limitMag=magLimitStarsOculars;
-	if (getFlagAutoLimitMagnitude() || flagLimitStarsOculars )
+	//handleMagnitudeLimits(OcOcular); // REPLACES THE FOLLOWING LINES
+//	// Limit stars and DSOs	magnitude. Either compute limiting magnitude for the telescope/ocular,
+//	// or just use the custom oculars mode value.
+//	// TODO: What about planets?
+//	double limitMag=magLimitStarsOculars;
+//	if (getFlagAutoLimitMagnitude() || flagLimitStarsOculars )
+//	{
+//		if (getFlagAutoLimitMagnitude())
+//		{
+//			disconnect(skyDrawer, SIGNAL(customStarMagLimitChanged(double)), this, SLOT(setMagLimitStarsOcularsManual(double))); // we want to keep the old manual value.
+//			limitMag = computeLimitMagnitude(telescope->diameter());
+//			// TODO: Is it really good to apply the star formula to DSO and planets?
+//			skyDrawer->setFlagNebulaMagnitudeLimit(true);
+//			skyDrawer->setCustomNebulaMagnitudeLimit(limitMag);
+//			skyDrawer->setFlagPlanetMagnitudeLimit(true);
+//			skyDrawer->setCustomPlanetMagnitudeLimit(limitMag);
+//		}
+//		else
+//		{	// It's possible that the user changes the custom magnitude while viewing, and then changes the ocular.
+//			// Therefore we need a temporary connection.
+//			connect(skyDrawer, SIGNAL(customStarMagLimitChanged(double)), this, SLOT(setMagLimitStarsOcularsManual(double)));
+//		}
+//		skyDrawer->setFlagStarMagnitudeLimit(true);
+//	}
+//	skyDrawer->setCustomStarMagnitudeLimit(limitMag);
+
+	if (pluginMode==OcFinder)
 	{
-		if (getFlagAutoLimitMagnitude())
-		{
-			disconnect(skyDrawer, SIGNAL(customStarMagLimitChanged(double)), this, SLOT(setMagLimitStarsOcularsManual(double))); // we want to keep the old manual value.
-			limitMag = computeLimitMagnitude(ocular, telescope);
-			// TODO: Is it really good to apply the star formula to DSO?
-			skyDrawer->setFlagNebulaMagnitudeLimit(true);
-			skyDrawer->setCustomNebulaMagnitudeLimit(limitMag);
-		}
-		else
-		{	// It's possible that the user changes the custom magnitude while viewing, and then changes the ocular.
-			// Therefore we need a temporary connection.
-			connect(skyDrawer, SIGNAL(customStarMagLimitChanged(double)), this, SLOT(setMagLimitStarsOcularsManual(double)));
-		}
-		skyDrawer->setFlagStarMagnitudeLimit(true);
+		actualFOV = finder->trueFOV();
 	}
-	skyDrawer->setCustomStarMagnitudeLimit(limitMag);
-
-	actualFOV = ocular->actualFOV(telescope, lens);
-	// See if the mask was scaled; if so, correct the actualFOV.
-	if (flagScaleImageCircle && ocular->apparentFOV() > 0.0 && !ocular->isBinoculars())
+	else
 	{
-		actualFOV = maxEyepieceAngle * actualFOV / ocular->apparentFOV();
+		actualFOV = ocular->actualFOV(telescope, lens);
+		// See if the mask was scaled; if so, correct the actualFOV.
+		if (flagScaleImageCircle && ocular->apparentFOV() > 0.0 && !ocular->isBinoculars())
+		{
+			actualFOV = maxEyepieceAngle * actualFOV / ocular->apparentFOV();
+		}
 	}
 	movementManager->zoomTo(actualFOV, 0.f);
 }
@@ -2850,6 +3087,8 @@ bool Oculars::getFlagAutoLimitMagnitude() const
 
 void Oculars::setMagLimitStarsOcularsManual(double mag)
 {
+	Q_ASSERT(pluginMode==OcOcular);
+
 	magLimitStarsOculars = mag;
 	settings->setValue("limit_stellar_magnitude_oculars_val", mag);
 	settings->sync();
@@ -2859,6 +3098,36 @@ void Oculars::setMagLimitStarsOcularsManual(double mag)
 double Oculars::getMagLimitStarsOcularsManual() const
 {
 	return magLimitStarsOculars;
+}
+
+void Oculars::setMagLimitPlanetsOcularsManual(double mag)
+{
+	Q_ASSERT(pluginMode==OcOcular);
+
+	magLimitPlanetsOculars = mag;
+	settings->setValue("limit_planet_magnitude_oculars_val", mag);
+	settings->sync();
+	// This is no property, no need to emit a signal.
+}
+
+double Oculars::getMagLimitPlanetsOcularsManual() const
+{
+	return magLimitPlanetsOculars;
+}
+
+void Oculars::setMagLimitDSOsOcularsManual(double mag)
+{
+	Q_ASSERT(pluginMode==OcOcular);
+
+	magLimitDSOsOculars = mag;
+	settings->setValue("limit_nebula_magnitude_oculars_val", mag);
+	settings->sync();
+	// This is no property, no need to emit a signal.
+}
+
+double Oculars::getMagLimitDSOsOcularsManual() const
+{
+	return magLimitDSOsOculars;
 }
 
 void Oculars::setFlagInitFovUsage(const bool b)
@@ -3153,12 +3422,12 @@ void Oculars::setFlagHideGridsLines(const bool b)
 
 		if (b && (pluginMode==OcOcular))
 		{
-			toggleLines(false);
+			handleLines(false);
 		}
 		else if (!b && (pluginMode==OcOcular))
 		{
 			// Restore main program state
-			toggleLines(true);
+			handleLines(true);
 		}
 	}
 }
@@ -3263,24 +3532,20 @@ void Oculars::toggleFocuserOverlay()
 	setFlagShowFocuserOverlay(!getFlagShowFocuserOverlay());
 }
 
-double Oculars::computeLimitMagnitude(Ocular *ocular, Telescope *telescope)
+// Simplified calculation of the penetrating power of the telescope
+// A better formula for telescopic limiting magnitudes?
+// North, G.; Journal of the British Astronomical Association, vol.107, no.2, p.82
+// http://adsabs.harvard.edu/abs/1997JBAA..107...82N
+double Oculars::computeLimitMagnitude(double aperture)
 {
-	// Simplified calculation of the penetrating power of the telescope
-	double diameter = 0.;
-	if (ocular->isBinoculars())
-		diameter = ocular->fieldStop();
-	else
-		diameter = telescope!=Q_NULLPTR ? telescope->diameter() : 0.1; // Avoid a potential call of null pointer, and a log(0) error.
-
-	// A better formula for telescopic limiting magnitudes?
-	// North, G.; Journal of the British Astronomical Association, vol.107, no.2, p.82
-	// http://adsabs.harvard.edu/abs/1997JBAA..107...82N
-	return 4.5 + 4.4*std::log10(diameter);
+	return 4.5 + 4.4*std::log10(qMax(aperture, 0.1));  // Avoid a potential call of null pointer, and a log(0) error.
 }
 
 void Oculars::handleAutoLimitToggle(bool on)
 {
-	if (pluginMode != OcOcular)
+	Q_ASSERT((pluginMode != OcOcular) || (pluginMode != OcFinder)); // Trace principal calling errors...
+
+	if ((pluginMode != OcOcular) || (pluginMode != OcFinder))
 		return;
 
 	// When we are in Oculars mode, we must toggle between the auto limit and manual limit. Logic taken from zoomOcular()/unzoomOcular()
@@ -3288,21 +3553,41 @@ void Oculars::handleAutoLimitToggle(bool on)
 	StelSkyDrawer *skyDrawer = core->getSkyDrawer();
 	if (on)
 	{
-		Ocular * ocular = oculars[selectedOcularIndex];
-		Telescope * telescope = (ocular->isBinoculars() ? Q_NULLPTR : telescopes[selectedTelescopeIndex]);
+		//Ocular * ocular = oculars[selectedOcularIndex];
+		//Telescope * telescope = (ocular->isBinoculars() ? Q_NULLPTR : telescopes[selectedTelescopeIndex]);
+		double instrumentDiameter=(pluginMode==OcOcular ? telescopes[selectedTelescopeIndex]->diameter() : finders[selectedFinderIndex]->aperture());
 		disconnect(skyDrawer, SIGNAL(customStarMagLimitChanged(double)), this, SLOT(setMagLimitStarsOcularsManual(double))); // keep the old manual value in config.
-		double limitMag = computeLimitMagnitude(ocular, telescope);
+		double limitMag = computeLimitMagnitude(instrumentDiameter);
 		// TODO: Is it really good to apply the star formula to DSO?
 		skyDrawer->setFlagNebulaMagnitudeLimit(true);
 		skyDrawer->setCustomNebulaMagnitudeLimit(limitMag);
 		skyDrawer->setFlagStarMagnitudeLimit(true);
 		skyDrawer->setCustomStarMagnitudeLimit(limitMag);
+		skyDrawer->setFlagPlanetMagnitudeLimit(true);
+		skyDrawer->setCustomPlanetMagnitudeLimit(limitMag);
 	}
 	else
 	{
 		connect(skyDrawer, SIGNAL(customStarMagLimitChanged(double)), this, SLOT(setMagLimitStarsOcularsManual(double)));
-		skyDrawer->setCustomStarMagnitudeLimit(magLimitStarsOculars);
-		skyDrawer->setFlagStarMagnitudeLimit(flagLimitStarsOculars);
+		if (pluginMode==OcOcular)
+		{
+			skyDrawer->setCustomStarMagnitudeLimit(magLimitStarsOculars);
+			skyDrawer->setFlagStarMagnitudeLimit(flagLimitStarsOculars);
+			skyDrawer->setCustomPlanetMagnitudeLimit(magLimitPlanetsOculars);
+			skyDrawer->setFlagPlanetMagnitudeLimit(flagLimitPlanetsOculars);
+			skyDrawer->setCustomNebulaMagnitudeLimit(magLimitDSOsOculars);
+			skyDrawer->setFlagNebulaMagnitudeLimit(flagLimitDSOsOculars);
+		}
+		else
+		{
+			skyDrawer->setCustomStarMagnitudeLimit(magLimitStarsFinder);
+			skyDrawer->setFlagStarMagnitudeLimit(flagLimitStarsFinder);
+			skyDrawer->setCustomPlanetMagnitudeLimit(magLimitPlanetsFinder);
+			skyDrawer->setFlagPlanetMagnitudeLimit(flagLimitPlanetsFinder);
+			skyDrawer->setCustomNebulaMagnitudeLimit(magLimitDSOsFinder);
+			skyDrawer->setFlagNebulaMagnitudeLimit(flagLimitDSOsFinder);
+
+		}
 	}
 }
 
