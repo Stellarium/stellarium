@@ -1742,16 +1742,6 @@
                </item>
               </layout>
              </item>
-             <item row="5" column="1">
-              <widget class="QCheckBox" name="drawMoonHaloCheckBox">
-               <property name="toolTip">
-                <string>Toggle drawing halo around the Moon</string>
-               </property>
-               <property name="text">
-                <string>Show Moon's halo</string>
-               </property>
-              </widget>
-             </item>
              <item row="6" column="1">
               <widget class="QCheckBox" name="shadowEnlargementDanjonCheckBox">
                <property name="toolTip">
@@ -1895,6 +1885,27 @@
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="5" column="1">
+              <layout class="QHBoxLayout" name="horizontalLayout_sunMoonHalo">
+               <item>
+                <widget class="QCheckBox" name="drawMoonHaloCheckBox">
+                 <property name="toolTip">
+                  <string>Toggle drawing halo around the Moon</string>
+                 </property>
+                 <property name="text">
+                  <string>Show Moon's halo</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="drawSunGlareCheckBox">
+                 <property name="text">
+                  <string>Show Sun's glare</string>
                  </property>
                 </widget>
                </item>

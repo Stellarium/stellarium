@@ -142,6 +142,7 @@ class SolarSystem : public StelObjectModule
 	Q_PROPERTY(QString apparentMagnitudeAlgorithmOnEarth	READ getApparentMagnitudeAlgorithmOnEarth	WRITE setApparentMagnitudeAlgorithmOnEarth	NOTIFY apparentMagnitudeAlgorithmOnEarthChanged)
 	Q_PROPERTY(int orbitsThickness			READ getOrbitsThickness			WRITE setOrbitsThickness		NOTIFY orbitsThicknessChanged)
 	Q_PROPERTY(bool flagDrawMoonHalo		READ getFlagDrawMoonHalo		WRITE setFlagDrawMoonHalo		NOTIFY flagDrawMoonHaloChanged)
+	Q_PROPERTY(bool flagDrawSunHalo			READ getFlagDrawSunHalo			WRITE setFlagDrawSunHalo		NOTIFY flagDrawSunHaloChanged)
 
 public:
 	SolarSystem();
@@ -708,6 +709,9 @@ public slots:
 	void setFlagDrawMoonHalo(bool b);
 	bool getFlagDrawMoonHalo() const;
 
+	void setFlagDrawSunHalo(bool b);
+	bool getFlagDrawSunHalo() const;
+
 	//! Reset and recreate trails
 	void recreateTrails();
 
@@ -717,6 +721,7 @@ signals:
 	void flagOrbitsChanged(bool b);
 	void flagHintsChanged(bool b);
 	void flagDrawMoonHaloChanged(bool b);
+	void flagDrawSunHaloChanged(bool b);
 	void trailsDisplayedChanged(bool b);
 	void trailsThicknessChanged(int v);
 	void orbitsThicknessChanged(int v);

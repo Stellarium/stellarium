@@ -663,6 +663,7 @@ protected:
 	static const QMap<PlanetType, QString> pTypeMap; // Maps fast type to english name.
 	static const QMap<ApparentMagnitudeAlgorithm, QString> vMagAlgorithmMap;
 	static bool drawMoonHalo;
+	static bool drawSunHalo;
 	//! If true, planet orbits will be drawn even if planet is off screen.
 	static bool permanentDrawingOrbits;
 	static int orbitsThickness;

@@ -90,6 +90,7 @@ StelTextureSP Planet::hintCircleTex;
 StelTextureSP Planet::texEarthShadow;
 
 bool Planet::drawMoonHalo = true;
+bool Planet::drawSunHalo = true;
 bool Planet::permanentDrawingOrbits = false;
 Planet::PlanetOrbitColorStyle Planet::orbitColorStyle = Planet::ocsOneColor;
 
@@ -3047,9 +3048,9 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 
 	// Find extinction settings to change colors. The method is rather ad-hoc.
-	double extinctedMag=static_cast<double>(getVMagnitudeWithExtinction(core)-getVMagnitude(core)); // this is net value of extinction, in mag.
-	double magFactorGreen=pow(0.85, 0.6*extinctedMag);
-	double magFactorBlue=pow(0.6, 0.5*extinctedMag);
+	float extinctedMag=getVMagnitudeWithExtinction(core)-getVMagnitude(core); // this is net value of extinction, in mag.
+	float magFactorGreen=powf(0.85f, 0.6f*extinctedMag);
+	float magFactorBlue=powf(0.6f, 0.5f*extinctedMag);
 
 	if (screenSz>1.f)
 	{
@@ -3101,23 +3102,23 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			// When atm.brightness has fallen to 2000cd/m^2, we allow ashen light to appear visible. Its impact is full when atm.brightness is below 1000.
 			LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 			Q_ASSERT(lmgr);
-			const double atmLum=(lmgr->getFlagAtmosphere() ? static_cast<double>(lmgr->getAtmosphereAverageLuminance()) : 0.0);
-			if (atmLum<2000.0)
+			const float atmLum=(lmgr->getFlagAtmosphere() ? lmgr->getAtmosphereAverageLuminance() : 0.0f);
+			if (atmLum<2000.0f)
 			{
-				double atmScaling=1.0 - (qMax(1000.0, atmLum)-1000.0)*0.001; // full impact when atmLum<1000.
-				double ashenFactor=static_cast<double>(1.0f-getPhase(ssm->getEarth()->getHeliocentricEclipticPos())); // We really mean the Earth for this! (Try observing from Mars ;-)
-				ashenFactor*=ashenFactor*0.15*atmScaling;
-				light.ambient = Vec4f(static_cast<float>(ashenFactor), static_cast<float>(magFactorGreen*ashenFactor), static_cast<float>(magFactorBlue*ashenFactor));
+				float atmScaling=1.0f - (qMax(1000.0f, atmLum)-1000.0f)*0.001f; // full impact when atmLum<1000.
+				float ashenFactor=(1.0f-getPhase(ssm->getEarth()->getHeliocentricEclipticPos())); // We really mean the Earth for this! (Try observing from Mars ;-)
+				ashenFactor*=ashenFactor*0.15f*atmScaling;
+				light.ambient = Vec4f(ashenFactor, magFactorGreen*ashenFactor, magFactorBlue*ashenFactor);
 			}
 			const float fov=core->getProjection(transfo)->getFov();
-			double fovFactor=1.6;
+			float fovFactor=1.6f;
 			// scale brightness to reduce if fov smaller than 5 degrees. Min brightness (to avoid glare) if fov=2deg.
 			if (fov<5.0f)
 			{
-				fovFactor -= 0.1*static_cast<double>(5.0f-qMax(2.0f, fov));
+				fovFactor -= 0.1f*(5.0f-qMax(2.0f, fov));
 			}
 			// Special case for the Moon. Was 1.6, but this often is too bright.
-			light.diffuse.set(static_cast<float>(fovFactor),static_cast<float>(magFactorGreen*fovFactor),static_cast<float>(magFactorBlue*fovFactor));
+			light.diffuse.set(fovFactor,magFactorGreen*fovFactor,magFactorBlue*fovFactor);
 		}
 
 		// possibly tint sun's color from extinction. This should deliberately cause stronger reddening than for the other objects.
@@ -3126,7 +3127,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			// when we zoom in, reduce the overbrightness. (LP:#1421173)
 			const float fov=core->getProjection(transfo)->getFov();
 			const float overbright=qBound(0.85f, 0.5f*fov, 2.0f); // scale full brightness to 0.85...2. (<2 when fov gets under 4 degrees)
-			sPainter.setColor(overbright, static_cast<float>(pow(0.75, extinctedMag))*overbright, static_cast<float>(pow(0.42, 0.9*extinctedMag))*overbright);
+			sPainter.setColor(overbright, powf(0.75f, extinctedMag)*overbright, powf(0.42f, 0.9f*extinctedMag)*overbright);
 		}
 
 		//if (rings) /// GZ This was the previous condition. Not sure why rings were dropped?
@@ -3175,7 +3176,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 	// Draw the halo if enabled in the ssystem_*.ini files (+ special case for backward compatible for the Sun)
 	if ((hasHalo() || this==ssm->getSun()) && allowDrawHalo)
 	{
-		// Prepare openGL lighting parameters according to luminance. For scaled-up planets, reduce brightness of the halo.
+		// Prepare OpenGL lighting parameters according to luminance. For scaled-up planets, reduce brightness of the halo.
 		float surfArcMin2 = static_cast<float>(getSpheroidAngularSize(core)*qMax(1.0, (englishName=="Moon" ? 1.0 : 0.025)*sphereScale))*60.f;
 		surfArcMin2 = surfArcMin2*surfArcMin2*M_PIf; // the total illuminated area in arcmin^2
 
@@ -3186,23 +3187,24 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		// For the sun, we have again to use the stronger extinction to avoid color mismatch.
 		Vec3f haloColorToDraw;
 		if (this==ssm->getSun())
-			haloColorToDraw.set(haloColor[0], static_cast<float>(pow(0.75, extinctedMag)) * haloColor[1], static_cast<float>(pow(0.42, 0.9*extinctedMag)) * haloColor[2]);
+			haloColorToDraw.set(haloColor[0], powf(0.75f, extinctedMag) * haloColor[1], powf(0.42f, 0.9f*extinctedMag) * haloColor[2]);
 		else
-			haloColorToDraw.set(haloColor[0], static_cast<float>(magFactorGreen) * haloColor[1], static_cast<float>(magFactorBlue) * haloColor[2]);
+			haloColorToDraw.set(haloColor[0], magFactorGreen * haloColor[1], static_cast<float>(magFactorBlue) * haloColor[2]);
 		if (this==ssm->getMoon())
 			haloColorToDraw*=0.6f; //GZ: Attempt to make lunar halo less glaring...
 
-		core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp.toVec3f(), surfArcMin2, getVMagnitudeWithExtinction(core), haloColorToDraw);
+		if (this!=ssm->getSun() || drawSunHalo)
+			core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp.toVec3f(), surfArcMin2, getVMagnitudeWithExtinction(core), haloColorToDraw);
 
-		if ((englishName=="Sun") && (core->getCurrentLocation().planetName == "Earth"))
+		if ((this==ssm->getSun()) && (core->getCurrentLocation().planetName == "Earth"))
 		{
 			LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 			const float eclipseFactor = static_cast<float>(ssm->getEclipseFactor(core).first);
 			// This alpha ensures 0 for complete sun, 1 for eclipse better 1e-10, with a strong increase towards full eclipse. We still need to square it.
 			// But without atmosphere we should indeed draw a visible corona!
-			const float alpha= ( !lmgr->getFlagAtmosphere() ? 0.7f : -0.1f*qMax(-10.0f, static_cast<float>(std::log10(eclipseFactor))));
+			const float alpha= ( !lmgr->getFlagAtmosphere() ? 0.7f : -0.1f*qMax(-10.0f, log10f(eclipseFactor)));
 			StelMovementMgr* mmgr = GETSTELMODULE(StelMovementMgr);
-			float rotationAngle=(mmgr->getEquatorialMount() ? 0.0f : getParallacticAngle(core) * static_cast<float>(180.0/M_PI));
+			float rotationAngle=(mmgr->getEquatorialMount() ? 0.0f : getParallacticAngle(core) * M_180_PIf);
 
 			// Add ecliptic/equator angle. Meeus, Astr. Alg. 2nd, p100.
 			const double jde=core->getJDE();

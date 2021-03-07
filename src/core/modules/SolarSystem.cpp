@@ -183,6 +183,7 @@ void SolarSystem::init()
 
 	setSelected("");	// Fix a bug on macosX! Thanks Fumio!
 	setFlagDrawMoonHalo(conf->value("viewing/flag_draw_moon_halo", true).toBool());
+	setFlagDrawSunHalo(conf->value("viewing/flag_draw_sun_halo", true).toBool());
 	setFlagMoonScale(conf->value("viewing/flag_moon_scaled", conf->value("viewing/flag_init_moon_scaled", false).toBool()).toBool());  // name change
 	setMoonScale(conf->value("viewing/moon_scale", 4.0).toDouble());
 	setMinorBodyScale(conf->value("viewing/minorbodies_scale", 10.0).toDouble());
@@ -2945,6 +2946,17 @@ void SolarSystem::setFlagDrawMoonHalo(bool b)
 bool SolarSystem::getFlagDrawMoonHalo() const
 {
 	return Planet::drawMoonHalo;
+}
+
+void SolarSystem::setFlagDrawSunHalo(bool b)
+{
+	Planet::drawSunHalo=b;
+	emit flagDrawSunHaloChanged(b);
+}
+
+bool SolarSystem::getFlagDrawSunHalo() const
+{
+	return Planet::drawSunHalo;
 }
 
 void SolarSystem::setFlagPermanentOrbits(bool b)
