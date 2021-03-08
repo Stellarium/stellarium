@@ -409,6 +409,7 @@ OcularsGuiPanel::~OcularsGuiPanel()
 
 	delete buttonCrosshairs; buttonCrosshairs = Q_NULLPTR;
 	delete buttonCcd; buttonCcd = Q_NULLPTR;
+	delete buttonFinder;	buttonFinder= Q_NULLPTR;
 	delete buttonTelrad;	buttonTelrad = Q_NULLPTR;
 	delete buttonConfiguration; buttonConfiguration = Q_NULLPTR;
 	delete fieldOcularFl; fieldOcularFl = Q_NULLPTR;

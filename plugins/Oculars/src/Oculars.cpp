@@ -2751,7 +2751,7 @@ void Oculars::handleMagnitudeLimits(PluginMode newMode)
 	}
 	else if ((pluginMode==OcOcular) || (pluginMode==OcFinder))
 	{
-		Q_ASSERT(newMode=OcNone);
+		Q_ASSERT(newMode==OcNone);
 	}
 	StelCore *core = StelApp::getInstance().getCore();
 	StelSkyDrawer *skyDrawer = core->getSkyDrawer();

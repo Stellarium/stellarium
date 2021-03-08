@@ -520,7 +520,7 @@ private:
 
 	QFont font;			//!< The font used for drawing labels.
 	PluginMode pluginMode;          //!< Current operational mode
-	// The next 4 are mutually exclusive "slave mode" flags to keep the buttons in the GUI show active/inactive highlight state.
+	// The next 4 are mutually exclusive "slave mode" flags to keep the buttons in the GUI showing active/inactive highlight state.
 	bool flagModeOcular;		//!< flag used to track if we are in ocular mode.
 	bool flagModeSensor;		//!< flag used to track if we are in CCD mode.
 	bool flagModeTelrad;		//!< flag used to track if we are in Telrad mode.
