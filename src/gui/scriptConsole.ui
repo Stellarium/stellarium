@@ -331,8 +331,8 @@
           </property>
           <property name="icon">
            <iconset resource="../../data/gui/guiRes.qrc">
-           <normaloff>:/graphicGui/uibtStart.png</normaloff>
-           <disabledoff>:/graphicGui/uibtStart-disabled.png</disabledoff>:/graphicGui/uibtStart.png</iconset>
+            <normaloff>:/graphicGui/uibtStart.png</normaloff>
+            <disabledoff>:/graphicGui/uibtStart-disabled.png</disabledoff>:/graphicGui/uibtStart.png</iconset>
           </property>
           <property name="shortcut">
            <string notr="true">Ctrl+Return</string>
@@ -364,8 +364,8 @@
           </property>
           <property name="icon">
            <iconset resource="../../data/gui/guiRes.qrc">
-           <normaloff>:/graphicGui/uibtStop.png</normaloff>
-           <disabledoff>:/graphicGui/uibtStop-disabled.png</disabledoff>:/graphicGui/uibtStop.png</iconset>
+            <normaloff>:/graphicGui/uibtStop.png</normaloff>
+            <disabledoff>:/graphicGui/uibtStop-disabled.png</disabledoff>:/graphicGui/uibtStop.png</iconset>
           </property>
          </widget>
         </item>
@@ -398,12 +398,6 @@
           </property>
           <item>
            <widget class="QPlainTextEdit" name="scriptEdit">
-            <property name="font">
-             <font>
-              <family>DejaVu Sans Mono</family>
-              <pointsize>8</pointsize>
-             </font>
-            </property>
             <property name="verticalScrollBarPolicy">
              <enum>Qt::ScrollBarAlwaysOn</enum>
             </property>

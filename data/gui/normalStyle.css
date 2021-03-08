@@ -51,7 +51,7 @@ QLineEdit {
 	background: rgb(30, 30, 31);
 	selection-background-color: rgb(253, 216, 134);
 	color: rgb(170, 173, 164);
-	font-size: 92%;
+        font-size: 100%;
 }
 
 QTextEdit:disabled,
@@ -64,6 +64,7 @@ QTextBrowser {
 	border: 0 solid rgb(0, 0, 0);
 	background: rgb(90, 90, 90);
 	color: rgb(3, 3, 3);
+        font-size: 100%;
 }
 
 QGroupBox {
@@ -157,14 +158,14 @@ QProgressBar::chunk {
 QTreeView {
 	background-color: rgb(76, 77, 80);
 	color: rgb(238, 238, 238);
-	font-size: 92%;
+        font-size: 100%;
 }
 
 QHeaderView::section {
 	background-color: rgb(31, 31, 31);
 	font: bold;
 	color: rgb(255, 255, 255);
-	font-size: 92%;
+        font-size: 100%;
 	padding-left: 4px;
 	border: 1px solid rgb(108, 108, 108);
 }
@@ -319,7 +320,7 @@ QPushButton {
 	border-radius: 2px;
 	padding: 2px 8px;
 	color: rgb(31, 31, 31);
-	font-size: 92%;
+        font-size: 100%;
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(183, 184, 185), stop: 1 rgb(111, 113, 114));
 }
 
@@ -930,7 +931,7 @@ QLineEdit#citySearchLineEdit {
 }
 
 QListView#citiesListView {
-	font-size: 92%;
+        font-size: 100%;
 }
 
 QListView#citiesListView::item {

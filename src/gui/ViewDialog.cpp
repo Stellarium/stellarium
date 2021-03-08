@@ -952,7 +952,7 @@ void ViewDialog::populateLists()
 	l->clear();
 	StelModule* lmgr = app.getModule("LandscapeMgr");
 	QStringList landscapeList = lmgr->property("allLandscapeNames").toStringList();
-	for (const auto& landscapeName : landscapeList)
+	for (const auto& landscapeName : qAsConst(landscapeList))
 	{
 		QString label = q_(landscapeName);
 		QListWidgetItem* item = new QListWidgetItem(label);
