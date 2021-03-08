@@ -28,6 +28,8 @@ static QPixmap makePixmap()
 {
 	QPixmap pixmap(StelFileMgr::findFile("data/splash.png"));
 	QPainter p(&pixmap);
+	p.setRenderHint(QPainter::Antialiasing);
+	p.setRenderHint(QPainter::HighQualityAntialiasing);
 	p.setPen(Qt::white);
 	QFontMetrics metrics(p.font());
 	p.drawText(QPointF(metrics.averageCharWidth(), 1.3*metrics.height()), StelUtils::getApplicationVersion());

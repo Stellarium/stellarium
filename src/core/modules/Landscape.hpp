@@ -175,6 +175,7 @@ public:
 	virtual float getOpacity(Vec3d azalt) const { Q_ASSERT(0); return (azalt[2]<0 ? 1.0f : 0.0f); }
 	//! The list of azimuths (counted from True North towards East) and altitudes can come in various formats. We read the first two elements, which can be of formats:
 	enum horizonListMode {
+		invalid        =-1,
 		azDeg_altDeg   = 0, //! azimuth[degrees] altitude[degrees]
 		azDeg_zdDeg    = 1, //! azimuth[degrees] zenithDistance[degrees]
 		azRad_altRad   = 2, //! azimuth[radians] altitude[radians]
@@ -202,13 +203,12 @@ protected:
 	//! @param lineFileName A text file with lines that are either empty or comment lines starting with # or azimuth altitude [degrees]
 	//! @param polyAngleRotateZ possibility to set some final calibration offset like meridian convergence correction.
 	//! @param listMode keys which indicate angular units for the angles
-	//! @param polygonInverted Must be true to use horizons which are on average below mathematical horizon (Solution for bug LP:1554639)
-	void createPolygonalHorizon(const QString& lineFileName, const float polyAngleRotateZ=0.0f, const QString &listMode="azDeg_altDeg", const bool polygonInverted=false);
+	void createPolygonalHorizon(const QString& lineFileName, const float polyAngleRotateZ=0.0f, const QString &listMode="azDeg_altDeg");
 
 	//! search for a texture in landscape directory, else global textures directory
 	//! @param basename The name of a texture file, e.g. "fog.png"
 	//! @param landscapeId The landscape ID (directory name) to which the texture belongs
-	//! @exception misc possibility of throwing "file not found" exceptions
+	//! @note returns an empty string if file not found.
 	static const QString getTexturePath(const QString& basename, const QString& landscapeId);
 	double radius;
 	QString name;          //! Read from landscape.ini:[landscape]name

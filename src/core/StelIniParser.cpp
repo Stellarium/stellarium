@@ -34,7 +34,11 @@ bool readStelIniFile(QIODevice &device, QSettings::SettingsMap &map)
 
 	// Split by a RE which should match any platform's line breaking rules
 	QRegExp matchLbr("[\\n\\r]+");
+	#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+	const QStringList& lines = data.split(matchLbr, Qt::SkipEmptyParts);
+	#else
 	const QStringList& lines = data.split(matchLbr, QString::SkipEmptyParts);
+	#endif
 
 	QString currentSection = "";
 	QRegExp sectionRe("^\\[(.+)\\]$");

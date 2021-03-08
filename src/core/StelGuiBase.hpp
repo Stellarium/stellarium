@@ -35,7 +35,7 @@ public:
 
 	virtual void init(QGraphicsWidget *atopLevelGraphicsWidget);
 
-	//! Load color scheme matchin the section name.
+	//! Load color scheme matching the section name.
 	virtual void setStelStyle(const QString& section) =0;
 
 	//! Get a pointer on the info panel used to display selected object info

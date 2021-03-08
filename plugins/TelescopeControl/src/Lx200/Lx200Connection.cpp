@@ -26,6 +26,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include "Lx200Command.hpp"
 #include "TelescopeClientDirectLx200.hpp"
 #include "common/LogFile.hpp"
+#include "StelUtils.hpp"
 
 using namespace std;
 
@@ -54,7 +55,7 @@ void Lx200Connection::resetCommunication(void)
 	read_buff_end = read_buff;
 	write_buff_end = write_buff;
 	#ifdef DEBUG4
-	*log_file << Now() << "Lx200Connection::resetCommunication" << endl;
+	*log_file << Now() << "Lx200Connection::resetCommunication" << StelUtils::getEndLineChar();
 	#endif
 	// wait 10 seconds before sending the next command in order to read
 	// and ignore data coming from the telescope:
@@ -94,7 +95,7 @@ void Lx200Connection::sendGoto(unsigned int ra_int, int dec_int)
 	else
 	{
 		#ifdef DEBUG4
-		*log_file << Now() << "Lx200Connection::sendGoto: ignoring command" << endl;
+		*log_file << Now() << "Lx200Connection::sendGoto: ignoring command" << StelUtils::getEndLineChar();
 		#endif
 	}
 }
@@ -126,7 +127,7 @@ void Lx200Connection::sendSync(unsigned int ra_int, int dec_int)
 	else
 	{
 		#ifdef DEBUG4
-		*log_file << Now() << "Lx200Connection::sendGoto: ignoring command" << endl;
+		*log_file << Now() << "Lx200Connection::sendGoto: ignoring command" << StelUtils::getEndLineChar();
 		#endif
 	}
 }
@@ -146,7 +147,7 @@ bool Lx200Connection::writeFrontCommandToBuffer(void)
 		/*
 		*log_file << Now() << "Lx200Connection::writeFrontCommandToBuffer("
 		                   << (*command_list.front()) << "): delayed for "
-		                   << (next_send_time-now) << endl;
+				   << (next_send_time-now) << StelUtils::getEndLineChar();
 		*/
 #endif
 		return false;
@@ -179,7 +180,7 @@ bool Lx200Connection::writeFrontCommandToBuffer(void)
 		          << "Lx200Connection::writeFrontCommandToBuffer("
 		          << (*command_list.front())
 		          << "): queued"
-		          << endl;
+			  << StelUtils::getEndLineChar();
 		#endif
 	}
 	
@@ -190,7 +191,7 @@ void Lx200Connection::dataReceived(const char *&p, const char *read_buff_end)
 {
 	if (isClosed())
 	{
-		*log_file << Now() << "Lx200Connection::dataReceived: strange: fd is closed" << endl;
+		*log_file << Now() << "Lx200Connection::dataReceived: strange: fd is closed" << StelUtils::getEndLineChar();
 	}
 	else if (command_list.empty())
 	{
@@ -204,7 +205,7 @@ void Lx200Connection::dataReceived(const char *&p, const char *read_buff_end)
 			#ifdef DEBUG4
 			*log_file << Now()
 			          << "Lx200Connection::dataReceived: error: command_list is empty"
-			          << endl;
+				  << StelUtils::getEndLineChar();
 			#endif
 			resetCommunication();
 		}
@@ -215,7 +216,7 @@ void Lx200Connection::dataReceived(const char *&p, const char *read_buff_end)
 		                      "strange: command("
 		                   << *command_list.front()
 		                   << ") needs no answer"
-		                   << endl;
+				   << StelUtils::getEndLineChar();
 		p = read_buff_end;
 	}
 	else
@@ -227,7 +228,7 @@ void Lx200Connection::dataReceived(const char *&p, const char *read_buff_end)
 				*log_file << Now()
 				          << "Lx200Connection::dataReceived: "
 				             "strange: no answer expected"
-				          << endl;
+					  << StelUtils::getEndLineChar();
 				p = read_buff_end;
 				break;
 			}
@@ -238,7 +239,7 @@ void Lx200Connection::dataReceived(const char *&p, const char *read_buff_end)
 			          << *command_list.front()
 			          << "->readAnswerFromBuffer returned "
 			          << rc
-			          << endl;
+				  << StelUtils::getEndLineChar();
 			*/
 			if (rc <= 0)
 			{
@@ -278,7 +279,7 @@ void Lx200Connection::prepareSelectFds(fd_set &read_fds,
 			                      "dequeueing command("
 			                   << *command_list.front()
 			                   << ") because of timeout"
-			                   << endl;
+					   << StelUtils::getEndLineChar();
 			#endif
 			if (command_list.front()->isCommandGotoSelected())
 			{
@@ -308,7 +309,7 @@ void Lx200Connection::flushCommandList(void)
 				//          << "Lx200Connection::flushCommandList: "
 				//          << (*command_list.front())
 				//          << "::writeFrontCommandToBuffer ok"
-				//          << endl;
+				//          << StelUtils::getEndLineChar();
 				if (command_list.front()->needsNoAnswer())
 				{
 					delete command_list.front();
@@ -326,7 +327,7 @@ void Lx200Connection::flushCommandList(void)
 			{
 				//*log_file << Now() << "Lx200Connection::flushCommandList: "
 				//                   << (*command_list.front())
-				//                   << "::writeFrontCommandToBuffer failed/delayed" << endl;
+				//                   << "::writeFrontCommandToBuffer failed/delayed" << StelUtils::getEndLineChar();
 				break;
 			}
 		}
@@ -342,12 +343,12 @@ void Lx200Connection::sendCommand(Lx200Command *command)
 		          << "Lx200Connection::sendCommand("
 		          << *command
 		          << ")"
-		          << endl;
+			  << StelUtils::getEndLineChar();
 		#endif
 		command_list.push_back(command);
 		flushCommandList();
 		//*log_file << Now() << "Lx200Connection::sendCommand(" << *command << ") end"
-		//          << endl;
+		//          << StelUtils::getEndLineChar();
 	}
 }
 

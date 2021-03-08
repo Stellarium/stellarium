@@ -118,13 +118,9 @@ float StelObject::getParallacticAngle(const StelCore* core) const
 // Checking position an object above mathematical horizon for current location
 bool StelObject::isAboveHorizon(const StelCore *core) const
 {
-	bool r = true;
 	float az, alt;
 	StelUtils::rectToSphe(&az, &alt, getAltAzPosAuto(core));
-	if (alt < 0.f)
-		r = false;
-
-	return r;
+	return (alt >= 0.f);
 }
 
 // Checking position an object above real horizon for current location
@@ -220,10 +216,7 @@ Vec3f StelObject::computeRTSTime(StelCore *core) const
 
 float StelObject::getSelectPriority(const StelCore* core) const
 {
-	float extMag = getVMagnitudeWithExtinction(core);
-	if (extMag>15.f)
-		extMag=15.f;
-	return extMag;
+	return qMin(getVMagnitudeWithExtinction(core), 15.0f);
 }
 
 float StelObject::getVMagnitudeWithExtinction(const StelCore* core) const
@@ -734,12 +727,12 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 		if (StelApp::getInstance().getFlagOverwriteInfoColor())
 		{
 			// make info text more readable...
-			color = Vec3f(StelApp::getInstance().getSettings()->value("color/info_text_color", "1.0,1.0,1.0").toString());
+			color = StelApp::getInstance().getOverwriteInfoColor();
 		}
 		if (core->isBrightDaylight() && !StelApp::getInstance().getVisionModeNight())
 		{
 			// make info text more readable when atmosphere enabled at daylight.
-			color = Vec3f(StelApp::getInstance().getSettings()->value("color/daylight_text_color", "0.0,0.0,0.0").toString());
+			color = StelApp::getInstance().getDaylightInfoColor();
 		}
 		str.prepend(QString("<font color=%1>").arg(color.toHtmlColor()));
 		str.append(QString("</font>"));

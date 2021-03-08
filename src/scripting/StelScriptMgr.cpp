@@ -70,7 +70,7 @@ defined in https://www.w3.org/TR/SVG11/types.htm.
 
 QScriptValue vec3fToString(QScriptContext* context, QScriptEngine *engine)
 {
-	std::ignore = engine;
+	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	QScriptValue rVal = that.property( "r", QScriptValue::ResolveLocal );
 	QScriptValue gVal = that.property( "g", QScriptValue::ResolveLocal );
@@ -81,7 +81,7 @@ QScriptValue vec3fToString(QScriptContext* context, QScriptEngine *engine)
 
 QScriptValue vec3fToHex(QScriptContext* context, QScriptEngine *engine)
 {
-	std::ignore = engine;
+	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	QScriptValue rVal = that.property( "r", QScriptValue::ResolveLocal );
 	QScriptValue gVal = that.property( "g", QScriptValue::ResolveLocal );
@@ -187,7 +187,7 @@ by StelUtils::getDecAngle.
 
 QScriptValue vec3dToString(QScriptContext* context, QScriptEngine *engine)
 {
-	std::ignore = engine;
+	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	QScriptValue xVal = that.property( "r", QScriptValue::ResolveLocal );
 	QScriptValue yVal = that.property( "g", QScriptValue::ResolveLocal );
@@ -198,40 +198,40 @@ QScriptValue vec3dToString(QScriptContext* context, QScriptEngine *engine)
 
 QScriptValue getX(QScriptContext* context, QScriptEngine *engine)
 {
-	std::ignore = engine;
+	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	return that.property( "r", QScriptValue::ResolveLocal );
 }
 QScriptValue getY(QScriptContext* context, QScriptEngine *engine)
 {
-	std::ignore = engine;
+	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	return that.property( "g", QScriptValue::ResolveLocal );
 }
 QScriptValue getZ(QScriptContext* context, QScriptEngine *engine)
 {
-	std::ignore = engine;
+	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	return that.property( "b", QScriptValue::ResolveLocal );
 }
 
 QScriptValue setX(QScriptContext* context, QScriptEngine *engine)
 {
-	std::ignore = engine;
+	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	that.setProperty("r", context->argument(0).toNumber());
 	return QScriptValue();
 }
 QScriptValue setY(QScriptContext* context, QScriptEngine *engine)
 {
-	std::ignore = engine;
+	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	that.setProperty("g", context->argument(0).toNumber());
 	return QScriptValue();
 }
 QScriptValue setZ(QScriptContext* context, QScriptEngine *engine)
 {
-	std::ignore = engine;
+	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	that.setProperty("b", context->argument(0).toNumber());
 	return QScriptValue();
@@ -269,7 +269,7 @@ QScriptValue createVec3d(QScriptContext* context, QScriptEngine *engine)
 			c.set( 0, 0, 0 );
 			break;
 		case 2:
-			// longitude, latitude - maybe string d/hms, maybe numeric degrees
+			// longitude/azimuth, latitude/altitude - maybe string dms, maybe numeric degrees
 			double lng;
 			if( context->argument(0).isString() )
 				lng = StelUtils::getDecAngle( context->argument(0).toString() );
@@ -277,10 +277,10 @@ QScriptValue createVec3d(QScriptContext* context, QScriptEngine *engine)
 				lng = static_cast<double>(context->argument(0).toNumber())*M_PI_180;
 
 			double lat;
-			if ( context->argument(0).isString())
-				lat = StelUtils::getDecAngle( context->argument(0).toString() );
+			if ( context->argument(1).isString())
+				lat = StelUtils::getDecAngle( context->argument(1).toString() );
 			else
-				lat = static_cast<double>(context->argument(0).toNumber())*M_PI_180;
+				lat = static_cast<double>(context->argument(1).toNumber())*M_PI_180;
 
 			StelUtils::spheToRect( lng, lat, c );
 			break;
@@ -324,9 +324,9 @@ void StelScriptMgr::defVecClasses(QScriptEngine *engine)
 	engine->globalObject().setProperty("Vec3d", ctorVec3d);
 }
 
-
 StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 {
+	waitEventLoop = new QEventLoop();
 	engine = new QScriptEngine(this);
 	connect(&StelApp::getInstance(), SIGNAL(aboutToQuit()), this, SLOT(stopScript()), Qt::DirectConnection);
 	// Scripting images
@@ -362,18 +362,14 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 void StelScriptMgr::initActions()
 {
 	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
-	QSignalMapper* mapper = new QSignalMapper(this);
 	for (const auto& script : getScriptList())
 	{
 		QString shortcut = getShortcut(script);
 		QString actionId = "actionScript/" + script;
-		StelAction* action = actionMgr->addAction(
-					actionId, N_("Scripts"), q_(getName(script).trimmed()), mapper, "map()", shortcut);
-		mapper->setMapping(action, script);
+		actionMgr->addAction(actionId, N_("Scripts"), q_(getName(script).trimmed()),
+				     this, [this, script] { runScript(script); }, shortcut);
 	}
-	connect(mapper, SIGNAL(mapped(QString)), this, SLOT(runScript(QString)));
 }
-
 
 StelScriptMgr::~StelScriptMgr()
 {
@@ -654,6 +650,15 @@ bool StelScriptMgr::prepareScript( QString &script, const QString &fileName, con
 
 void StelScriptMgr::stopScript()
 {
+	// Hack abusing stopScript for two different stops: it
+	// will be called again after exit from the timer loop
+	// which we kill here if it is running.
+	if( waitEventLoop->isRunning() )
+	{
+		waitEventLoop->exit( 1 );
+		return;
+	}
+	
 	if (engine->isEvaluating())
 	{
 		GETSTELMODULE(LabelMgr)->deleteAllLabels();
@@ -667,7 +672,7 @@ void StelScriptMgr::stopScript()
 		//qDebug() << msg;
 		engine->abortEvaluation();
 	}
-	scriptEnded();
+	// "Script finished..." is emitted after return from engine->evaluate().
 }
 
 void StelScriptMgr::setScriptRate(double r)
@@ -907,9 +912,8 @@ QString StelScriptMgr::lookup( int outputPos )
 
 StelScriptEngineAgent::StelScriptEngineAgent(QScriptEngine *engine) 
 	: QScriptEngineAgent(engine)
-{
-	isPaused = false;
-}
+	, isPaused(false)
+	{}
 
 void StelScriptEngineAgent::positionChange(qint64 scriptId, int lineNumber, int columnNumber)
 {

@@ -102,23 +102,10 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	setFlagNebulaMagnitudeLimit((conf->value("astro/flag_nebula_magnitude_limit", false).toBool()));
 	setCustomNebulaMagnitudeLimit(conf->value("astro/nebula_magnitude_limit", 8.5).toDouble());
 
-	bool ok=true;
-
-	setBortleScaleIndex(conf->value("stars/init_bortle_scale",3).toInt(&ok));
-	if (!ok)
-		setBortleScaleIndex(3);
-
-	setRelativeStarScale(conf->value("stars/relative_scale",1.0).toDouble(&ok));
-	if (!ok)
-		setRelativeStarScale(1.0);
-
-	setAbsoluteStarScale(conf->value("stars/absolute_scale",1.0).toDouble(&ok));
-	if (!ok)
-		setAbsoluteStarScale(1.0);
-
-	setExtinctionCoefficient(conf->value("landscape/atmospheric_extinction_coefficient",0.13).toDouble(&ok));
-	if (!ok)
-		setExtinctionCoefficient(0.2);
+	setBortleScaleIndex(conf->value("stars/init_bortle_scale", 3).toInt());
+	setRelativeStarScale(conf->value("stars/relative_scale", 1.0).toDouble());
+	setAbsoluteStarScale(conf->value("stars/absolute_scale", 1.0).toDouble());
+	setExtinctionCoefficient(conf->value("landscape/atmospheric_extinction_coefficient", 0.13).toDouble());
 
 	const QString extinctionMode = conf->value("astro/extinction_mode_below_horizon", "zero").toString();
 	// zero by default
@@ -127,13 +114,8 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	else if (extinctionMode=="max")
 		extinction.setUndergroundExtinctionMode(Extinction::UndergroundExtinctionMax);
 
-	setAtmosphereTemperature(conf->value("landscape/temperature_C",15.0).toDouble(&ok));
-	if (!ok)
-		setAtmosphereTemperature(15.0);
-
-	setAtmospherePressure(conf->value("landscape/pressure_mbar",1013.0).toDouble(&ok));
-	if (!ok)
-		setAtmospherePressure(1013.0);
+	setAtmosphereTemperature(conf->value("landscape/temperature_C", 15.0).toDouble());
+	setAtmospherePressure(conf->value("landscape/pressure_mbar", 1013.0).toDouble());
 
 	// Initialize buffers for use by gl vertex array	
 	
@@ -332,7 +314,7 @@ float StelSkyDrawer::pointSourceMagToLnLuminance(float mag) const
 	return -0.92103f*(mag + 12.12331f) + lnfovFactor;
 }
 
-float StelSkyDrawer::pointSourceLuminanceToMag(float lum)
+float StelSkyDrawer::pointSourceLuminanceToMag(float lum) const
 {
 	return (std::log(lum) - lnfovFactor)/-0.92103f - 12.12331f;
 }
@@ -450,14 +432,12 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 	// If the rmag is big, draw a big halo
 	if (flagDrawBigStarHalo && radius>MAX_LINEAR_RADIUS+5.f)
 	{
-		float cmag = qMin(rcMag.luminance, (radius-(MAX_LINEAR_RADIUS+5.f))/30.f);
+		float cmag = qMin(1.0f, qMin(rcMag.luminance, (radius-(MAX_LINEAR_RADIUS+5.f))/30.f));
 		float rmag = 150.f;
-		if (cmag>1.f)
-			cmag = 1.f;
 
 		texBigHalo->bind();
 		sPainter->setBlending(true, GL_ONE, GL_ONE);
-		sPainter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
+		sPainter->setColor(color*cmag);
 		sPainter->drawSprite2dModeNoDeviceScale(win[0], win[1], rmag);
 	}
 
@@ -519,12 +499,10 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 		painter->setBlending(true, GL_ONE, GL_ONE);
 
 		float rmag = big3dModelHaloRadius*(mag+15.f)/-11.f;
-		float cmag = 1.f;
-		if (rmag<pixRadius*3.f+100.f)
-			cmag = qMax(0.f, 1.f-(pixRadius*3.f+100-rmag)/100);
+		float cmag = (rmag>=pixRadius*3.f+100.f) ? 1.f : qMax(0.f, 1.f-(pixRadius*3.f+100-rmag)/100);
 		Vec3f win;
 		painter->getProjector()->project(v, win);
-		painter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
+		painter->setColor(color*cmag);
 		painter->drawSprite2dModeNoDeviceScale(win[0], win[1], rmag);
 		noStarHalo = true;
 	}
@@ -543,11 +521,11 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 	// so that the radius of the halo is small enough to be not visible (so that we see the disk)
 
 	// TODO: Change drawing halo to more realistic view of stars and planets
-	float tStart = 3.f; // Was 2.f: planet's halo is too dim
+	float tStart = 3.f; // Was 2.f: planet's halo is too dim. Atque 2020-11-12: No need to change these anymore. It appears that this has to do with halo size vs FOV (?).
 	float tStop = 6.f;
 	bool truncated=false;
 
-	float maxHaloRadius = qMax(tStart*3.f, pixRadius*3.f);
+	float maxHaloRadius = qMax(tStart*6.f, pixRadius*3.f); //Atque 2020-11-12: Careful, if tStart*6.f is too big (tStart*10.f or something), the Moon gets a ridiculously big halo.
 	if (rcm.radius>maxHaloRadius)
 	{
 		truncated = true;
@@ -593,7 +571,7 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 	flagForcedTwinkle=saveForcedTwinkle;
 }
 
-float StelSkyDrawer::findWorldLumForMag(float mag, float targetRadius)
+float StelSkyDrawer::findWorldLumForMag(float mag, float targetRadius) const
 {
 	const float saveLum = eye->getWorldAdaptationLuminance();	// save
 
@@ -712,7 +690,7 @@ float StelSkyDrawer::getNELMFromBortleScale(int idx)
 	return nelms[idx-1];
 }
 
-// New colors
+// colors for B-V display
 Vec3f StelSkyDrawer::colorTable[128] = {
 	Vec3f(0.602745f,0.713725f,1.000000f),
 	Vec3f(0.604902f,0.715294f,1.000000f),

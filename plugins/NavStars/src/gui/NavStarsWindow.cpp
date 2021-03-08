@@ -77,6 +77,8 @@ void NavStarsWindow::createDialogContent()
 	connect(ui->highlightWhenVisible, SIGNAL(stateChanged(int)), this, SLOT(setHighlightWhenVisibleEnabled(int)));
 	ui->limitInfoToNavStars->setChecked(ns->getLimitInfoToNavStars());
 	connect(ui->limitInfoToNavStars, SIGNAL(stateChanged(int)), this, SLOT(setLimitInfoToNavStarsEnabled(int)));
+	ui->showExtraDecimals->setChecked(ns->getShowExtraDecimals());
+	connect(ui->showExtraDecimals, SIGNAL(stateChanged(int)), this, SLOT(setExtraDecimalsDisplayEnabled(int)));
 
 	ui->upperLimb->setChecked(ns->getUpperLimb());
 	connect(ui->upperLimb, SIGNAL(stateChanged(int)), this, SLOT(setUpperLimbEnabled(int)));
@@ -102,7 +104,13 @@ void NavStarsWindow::saveSettings()
 
 void NavStarsWindow::resetSettings()
 {
-	ns->restoreDefaultConfiguration();
+	if (askConfirmation())
+	{
+		qDebug() << "[NavStars] restore defaults...";
+		ns->restoreDefaultConfiguration();
+	}
+	else
+		qDebug() << "[NavStars] restore defaults is canceled...";
 }
 
 void NavStarsWindow::setDisplayAtStartupEnabled(int checkState)
@@ -133,6 +141,12 @@ void NavStarsWindow::setTabulatedDisplayEnabled(int checkState)
 {
 	bool b = checkState != Qt::Unchecked;
 	ns->setTabulatedDisplay(b);
+}
+
+void NavStarsWindow::setExtraDecimalsDisplayEnabled(int checkState)
+{
+	bool b = checkState != Qt::Unchecked;
+	ns->setShowExtraDecimals(b);
 }
 
 void NavStarsWindow::populateNavigationalStarsSets()

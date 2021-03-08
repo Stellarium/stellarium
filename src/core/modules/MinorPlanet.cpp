@@ -190,9 +190,9 @@ QString MinorPlanet::getInfoStringExtraMag(const StelCore *core, const InfoStrin
 
 QString MinorPlanet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& flags) const
 {
+	Q_UNUSED(core)
 	QString str;
 	QTextStream oss(&str);
-
 	if (flags&Extra)
 	{
 		if (!specT.isEmpty())

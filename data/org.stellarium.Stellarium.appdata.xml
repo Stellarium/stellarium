@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2019 Stellarium team -->
+<component type="desktop-application">
+  <id>org.stellarium.Stellarium</id>
+  <launchable type="desktop-id">org.stellarium.Stellarium.desktop</launchable>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0+</project_license>
+  <name>Stellarium</name>
+  <name xml:lang="af">Stellarium</name>
+  <name xml:lang="ar">ستيلاريوم</name>
+  <name xml:lang="ast">Stellarium</name>
+  <name xml:lang="az">Stellarium</name>
+  <name xml:lang="be">Stellarium</name>
+  <name xml:lang="bg">Stellarium</name>
+  <name xml:lang="bn">স্টেলারিয়াম</name>
+  <name xml:lang="br">Stellarium</name>
+  <name xml:lang="bs">Stellarium</name>
+  <name xml:lang="ca">Stellarium</name>
+  <name xml:lang="ca-valencia">Stellarium</name>
+  <name xml:lang="cs">Stellarium</name>
+  <name xml:lang="cv">Stellarium</name>
+  <name xml:lang="da">Stellarium</name>
+  <name xml:lang="de">Stellarium</name>
+  <name xml:lang="el">Stellarium</name>
+  <name xml:lang="en-CA">Stellarium</name>
+  <name xml:lang="en-GB">Stellarium</name>
+  <name xml:lang="eo">Stellarium</name>
+  <name xml:lang="es">Stellarium</name>
+  <name xml:lang="et">Stellarium</name>
+  <name xml:lang="eu">Stellarium</name>
+  <name xml:lang="fa">ستاره شناسی</name>
+  <name xml:lang="fi">Stellarium</name>
+  <name xml:lang="fr">Stellarium</name>
+  <name xml:lang="ga">Stellarium</name>
+  <name xml:lang="gd">Stellarium</name>
+  <name xml:lang="gl">Stellarium</name>
+  <name xml:lang="gu">Stellarium</name>
+  <name xml:lang="he">Stellarium</name>
+  <name xml:lang="hi">स्टेलेरियम</name>
+  <name xml:lang="hr">Stellarium</name>
+  <name xml:lang="hu">Stellarium</name>
+  <name xml:lang="hy">Stellarium</name>
+  <name xml:lang="id">Stellarium</name>
+  <name xml:lang="is">Stellarium</name>
+  <name xml:lang="it">Stellarium</name>
+  <name xml:lang="ja">ステラリウム</name>
+  <name xml:lang="jv">Stéllarium</name>
+  <name xml:lang="ka">Stellarium</name>
+  <name xml:lang="kk">Stellarium</name>
+  <name xml:lang="kn">ಸ್ಟೆಲ್ಲೇರಿಯಂ</name>
+  <name xml:lang="ko">스텔라리움</name>
+  <name xml:lang="ky">Stellarium</name>
+  <name xml:lang="la">Stellarium</name>
+  <name xml:lang="lb">Stellarium</name>
+  <name xml:lang="lt">Stellarium</name>
+  <name xml:lang="lv">Stellarium</name>
+  <name xml:lang="mk">Stellarium</name>
+  <name xml:lang="ml">Stellarium</name>
+  <name xml:lang="mr">स्टेलारीअम</name>
+  <name xml:lang="ms">Stellarium</name>
+  <name xml:lang="nb">Stellarium</name>
+  <name xml:lang="nds">Stellarium</name>
+  <name xml:lang="ne">Stellarium</name>
+  <name xml:lang="nl">Stellarium</name>
+  <name xml:lang="nn">Stellarium</name>
+  <name xml:lang="pa">Stellarium</name>
+  <name xml:lang="pl">Stellarium</name>
+  <name xml:lang="pt">Stellarium</name>
+  <name xml:lang="pt-BR">Stellarium</name>
+  <name xml:lang="ro">Stellarium</name>
+  <name xml:lang="ru">Stellarium</name>
+  <name xml:lang="sc">Stellarium</name>
+  <name xml:lang="si">Stellarium</name>
+  <name xml:lang="sk">Stellarium</name>
+  <name xml:lang="sl">Stellarium</name>
+  <name xml:lang="sq">Stellarium</name>
+  <name xml:lang="sr">Стеларијум</name>
+  <name xml:lang="sv">Stellarium</name>
+  <name xml:lang="ta">ஸ்டெல்லாரியம்</name>
+  <name xml:lang="te">స్టెల్లేరియమ్</name>
+  <name xml:lang="tg">Stellarium</name>
+  <name xml:lang="th">Stellarium</name>
+  <name xml:lang="tl">Stellarium</name>
+  <name xml:lang="tr">Stellarium</name>
+  <name xml:lang="ug">Stellarium</name>
+  <name xml:lang="uk">Stellarium</name>
+  <name xml:lang="vi">Stellarium</name>
+  <name xml:lang="zh">Stellarium</name>
+  <name xml:lang="zh-CN">Stellarium</name>
+  <name xml:lang="zh-HK">Stellarium</name>
+  <name xml:lang="zh-TW">Stellarium</name>
+  <summary>Desktop Planetarium</summary>
+  <summary xml:lang="af">Werkskerm Planetarium</summary>
+  <summary xml:lang="ar">قبة سماوية مكتبية</summary>
+  <summary xml:lang="ast">Planetariu pal escritoriu</summary>
+  <summary xml:lang="az">Masaüstü Planetari</summary>
+  <summary xml:lang="be">Настольны плянэтарый</summary>
+  <summary xml:lang="bg">Настолен планетариум</summary>
+  <summary xml:lang="bn">ডেস্কটপ প্ল্যানেটরিয়াম</summary>
+  <summary xml:lang="br">Planetariom a vurev</summary>
+  <summary xml:lang="bs">Stoni planetarij</summary>
+  <summary xml:lang="ca">Planetari per a l'escriptori</summary>
+  <summary xml:lang="ca-valencia">Planetari per a l'escriptori</summary>
+  <summary xml:lang="cs">Planetárium na vaší obrazovce</summary>
+  <summary xml:lang="cv">Сӗтелҫи Планетариум</summary>
+  <summary xml:lang="da">Planetarium på desktoppen</summary>
+  <summary xml:lang="de">Das Planetarium für den Schreibtisch</summary>
+  <summary xml:lang="el">Επιτραπέζιο πλανητάριο</summary>
+  <summary xml:lang="en-CA">Desktop Planetarium</summary>
+  <summary xml:lang="en-GB">Desktop Planetarium</summary>
+  <summary xml:lang="eo">Tabula planetario</summary>
+  <summary xml:lang="es">Planetario de escritorio</summary>
+  <summary xml:lang="et">Töölaua planetaarium</summary>
+  <summary xml:lang="eu">Mahaigaineko planetarioa</summary>
+  <summary xml:lang="fa">آسمان‌نمای رومیزی</summary>
+  <summary xml:lang="fi">Työpöytäplanetaario</summary>
+  <summary xml:lang="fr">Planétarium virtuel</summary>
+  <summary xml:lang="ga">Pláinéadlann Deisce</summary>
+  <summary xml:lang="gd">Amharc-lann nam planaidean airson an deasg</summary>
+  <summary xml:lang="gl">Planetario de escritorio</summary>
+  <summary xml:lang="gu">ડેસ્કટોપ પર પ્લેનેટેરીયમ</summary>
+  <summary xml:lang="he">פלנטריום שולחני</summary>
+  <summary xml:lang="hi">डेस्कटॉप प्लेनेटेरियम</summary>
+  <summary xml:lang="hr">Desktop Planetarij</summary>
+  <summary xml:lang="hu">Planetárium a munkaasztalon</summary>
+  <summary xml:lang="hy">Սեղանի երկնացուցարան</summary>
+  <summary xml:lang="id">Planetarium Desktop</summary>
+  <summary xml:lang="is">Skjáborðsstjörnuver</summary>
+  <summary xml:lang="it">Planetario per il desktop</summary>
+  <summary xml:lang="ja">デスクトップ・プラネタリウム</summary>
+  <summary xml:lang="jv">Planetarium Desktop</summary>
+  <summary xml:lang="ka">სამაგიდო პლანეტარიუმი</summary>
+  <summary xml:lang="kk">Экрандағы планетарий</summary>
+  <summary xml:lang="kn">ಗಣಕ ತಾರಾಲಯ</summary>
+  <summary xml:lang="ko">데스크톱 플라네타리움</summary>
+  <summary xml:lang="ky">Үстөлдүк планетарий</summary>
+  <summary xml:lang="la">Planetarium mensae illuminatae</summary>
+  <summary xml:lang="lb">Desktop Planéitarium</summary>
+  <summary xml:lang="lt">Virtualus Planetariumas</summary>
+  <summary xml:lang="lv">Darbvirsmas Planetārijs</summary>
+  <summary xml:lang="mk">Планетариум на работна површина</summary>
+  <summary xml:lang="ml">പണിയിട പ്ലാനറ്റേറിയം</summary>
+  <summary xml:lang="mr">डेस्कटॉप् नभांगण</summary>
+  <summary xml:lang="ms">Planetarium Atas Meja</summary>
+  <summary xml:lang="nb">Planetarium for skrivebordet</summary>
+  <summary xml:lang="nds">Planetarium för den Schriefdisch</summary>
+  <summary xml:lang="ne">डेस्कटप ग्रहमण्डल</summary>
+  <summary xml:lang="nl">Bureaublad-planetarium</summary>
+  <summary xml:lang="nn">Skrivebordsplanetarium</summary>
+  <summary xml:lang="pa">ਡੈਸਕਟਾਪ ਪਲੇਟੇਰੀਅਮ</summary>
+  <summary xml:lang="pl">Podręczne planetarium</summary>
+  <summary xml:lang="pt">Planetário de Ambiente de Trabalho</summary>
+  <summary xml:lang="pt-BR">Planetário para computador</summary>
+  <summary xml:lang="ro">Planetariu de birou</summary>
+  <summary xml:lang="ru">Настольный планетарий</summary>
+  <summary xml:lang="sc">Planetariu de iscrivania</summary>
+  <summary xml:lang="sk">Planetárium na obrazovke</summary>
+  <summary xml:lang="sl">Namizni planetarij</summary>
+  <summary xml:lang="sq">Planetarium Desktopi</summary>
+  <summary xml:lang="sr">Планетаријум на радној површини</summary>
+  <summary xml:lang="sv">Skrivbordsplanetarium</summary>
+  <summary xml:lang="ta">மேசைத்தள கோளரங்கம்</summary>
+  <summary xml:lang="te">డెస్క్‌టాప్ నక్షత్ర వేధశాల</summary>
+  <summary xml:lang="tg">Планетарии рӯимизӣ</summary>
+  <summary xml:lang="th">ท้องฟ้าจำลองบนคอมพิวเตอร์แบบตั้งโต๊ะ</summary>
+  <summary xml:lang="tl">Planetaryum para sa Desktop</summary>
+  <summary xml:lang="tr">Masaüstü Gökevi</summary>
+  <summary xml:lang="ug">ئۈستەلئۈستى رەسەتخانىسى</summary>
+  <summary xml:lang="uk">Настільний планетарій</summary>
+  <summary xml:lang="vi">Ngắm sao trên màn hình máy tính</summary>
+  <summary xml:lang="zh">桌面天文馆</summary>
+  <summary xml:lang="zh-CN">桌面天文馆</summary>
+  <summary xml:lang="zh-HK">桌面星象館</summary>
+  <summary xml:lang="zh-TW">桌上型電腦版星象儀</summary>
+  <description>
+    <p>Stellarium renders 3D photo-realistic skies in real time with OpenGL. It displays stars, constellations, planets and nebulae, and has many other features including multiple panoramic landscapes, fog, light pollution simulation and a built-in scripting engine.</p>
+    <p xml:lang="af">Stellarium lewer 3D realistiese hemelruime in werklike tyd met OpenGL. Dit wys sterre, sterrebeelde, planete en newels , en het baie ander funksies insluitend veelvuldige panoramiese landskappe, mis, ligbesoedeling nabootsing en 'n ingeboude stappestoor masjien.</p>
+    <p xml:lang="ar">ستيلاريوم يقدم صور واقعية ثلاثية الأبعاد للسماء في الوقت الفعلي مع واجهة مكتبة الرسوميات المفتوحة. ستيلاريوم يمكنك من مشاهدة النجوم, المجموعات, الكواكب والسدم, ويملك مميزات أخرى مثل مناظر بانورامية متعددة, الضباب, ومحاكاة التلوث الخفيف ومحرك البرمجة النصية المضمنة.</p>
+    <p xml:lang="be">Stellarium адлюстроўвае фотарэалістычнае неба ў рэальным часе, выкарыстоўваючы OpenGL. Ён паказвае зоркі, сузор'і, плянэты й туманнасьці, а таксама мае іншыя магчымасьці, такія як шматлікія панарамныя краявіды, туман, удаваньне засьвечваньня й убудаваны рухавік для стварэньня сцэнароў.</p>
+    <p xml:lang="bg">Stellarium изобразява 3D фотореалистично звездно небе в реално време с помощта на OpenGL. Може да се показват звезди, съзвездия, планети, мъглявини, както и много други обекти като се симулират различни панорамни хоризонти, мъгла и светлинно замърсяване. Също така, Stellarium може да се програмира със скриптове.</p>
+    <p xml:lang="bn">স্টেলারিয়ামে OpenGL এর সাহায্যে সময়ের সাথে তাল মিলিয়ে আকাশের একটি ত্রিমাত্রিক মূর্ত রূপ ফুটিয়ে তোলে । এটি বিভিন্ন নক্ষত্র, তাদের গ্রহ, নীহারিকা, নক্ষত্রমন্ডল ইত্যাদি দেখায় । এমনকি এটি বিভিন্ন ভূমিরূপ অনুযায়ী কুয়াশা, আলো জনিত দৃশ্য দূষন ইত্যাদি পরিবেশগত বৈশিষ্টগুলিও অনুকরন করতে পারে । এছাড়া এতে কার্যলিপি লেখার নিজস্ব একটি ব্যবস্থা আছে ।</p>
+    <p xml:lang="ca">Stellarium recrea cels de manera foto-realista en 3D en temps real amb OpenGL. Es mostren estels, constel·lacions, planetes i nebuloses, i té moltes altres característiques que inclouen múltiples paisatges panoràmics, boira, simulació de la contaminació lumínica i un motor de programació "scripting" integrat.</p>
+    <p xml:lang="ca-valencia">Stellarium recrea cels de manera foto-realista en 3D en temps real amb OpenGL. Es mostren estreles, constel·lacions, planetes i nebuloses, i té moltes altres característiques que inclouen múltiples paisatges panoràmics, boira, simulació de la contaminació lumínica i un motor de programació de scripts integrat.</p>
+    <p xml:lang="cs">Stellarium vykresluje fotorealistické 3D pohledy na oblohu v reálném čase pomocí OpenGL. Zobrazuje hvězdy, souhvězdí, planety, mlhoviny a má mnoho dalších funkcí včetně mnoha panoramatických snímků krajiny, simulace světelného znečištění a oparu a vestavěný skriptovací engine.</p>
+    <p xml:lang="da">Stellarium renderer en 3D-fotorealistisk himmel i realtid med OpenGL. Den viser stjerner, stjernebilleder, planeter og stjernetåger, og den har mange funktioner, inkl. adskillige panoramiske landskaber, tåge, simulering af lysforurening og en indbygget skriptingmotor.</p>
+    <p xml:lang="de">Stellarium bietet eine photorealistische Himmelsdarstellung mit OpenGL. Es zeigt Sterne, Sternbilder, Planeten und nebelartige Objekte und hat viele andere Funktionen, u.a. austauschbare Landschaftspanoramen incl. Bodennebel und Beleuchtungssimulation, und eine eingebaute Script-Funktion.</p>
+    <p xml:lang="el">Το Stellarium αποδίδει τρισδιάστατους φωτορεαλιστικούς ουρανούς σε πραγματικό χρόνο με το OpenGL. Δείχνει αστέρια, αστερισμούς, πλανήτες και νεφελώματα και έχει πολλές λειτουργίες που περιλαμβάνουν πολλαπλά πανοραμικά τοπία, ομίχλη, εξομοίωση φωτορύπανσης και ενσωματωμένη μηχανή σεναρίων.</p>
+    <p xml:lang="en-CA">Stellarium renders 3D photo-realistic skies in real time with OpenGL. It displays stars, constellations, planets and nebulae, and has many other features including multiple panoramic landscapes, fog, light pollution simulation and a built-in scripting engine.</p>
+    <p xml:lang="en-GB">Stellarium renders 3D photo-realistic skies in real time with OpenGL. It displays stars, constellations, planets and nebulae, and has many other features including multiple panoramic landscapes, fog, light pollution simulation and a built-in scripting engine.</p>
+    <p xml:lang="es">Stellarium traza cielos fotorrealistas 3D en tiempo real con OpenGL. Muestra estrellas, constelaciones, planetas y nebulosas, y tiene muchas otras características, incluyendo múltiples paisajes panorámicos, niebla, simulación de contaminación lumínica y un motor de órdenes interpretadas.</p>
+    <p xml:lang="fa">استلاریوم عکس واقعی سه‌بعدی آسمان را در زمان واقعی با OpenGL ارایه می‌دهد. ستاره‌ها، صورت‌های فلکی، سیاره‌ها، سحابی ها را نمایش می‌دهد، و امکانات بسیار دیگر از جمله منظره‌های پانورامای متعدد، مِهْ، شبیه‌سازی آلودگی نوری، یک موتور اسکریپت نویسی تعبیه‌شده دارد.</p>
+    <p xml:lang="fi">Stellarium mallintaa todentuntuisen 3D-taivaan reaaliajassa OpenGL-rajapinnalla. Ohjelma sisältää tähdet, tähdistöt, planeetat ja sumut, sekä monia muita ominaisuuksia kuten useita panoraamamaisemia, valosaastesimulaation ja sisäänrakennetun komentosarjamoottorin.</p>
+    <p xml:lang="fr">Stellarium présente le ciel en temps réel et en 3D de manière photoréaliste au moyen de OpenGL. Il permet d'afficher les étoiles, les constellations, les planètes et les nébuleuses. De nombreuses autres fonctionnalités sont disponibles, parmi lesquels l'utilisation de nombreux paysages panoramiques, la simulation du brouillard et de la pollution lumineuse. Un moteur de scripts est également proposé.</p>
+    <p xml:lang="gd">Reandaraidh Stellarium na speuran ann an 3D le coltas dealbh-camara air ’s ann am fìor-ama le OpenGL. Seallaidh e reultan, reul-bhadan, planaidean is dearganan-doininn agus tha iomadh gleus eile aige, a’ gabhail a-steach iomadh cuairt-shealladh tìre, ceò, truailleadh solais mas-fhìor agus einnsean-sgriobtaidh na bhroinn.</p>
+    <p xml:lang="gl">Stellarium ofrece ceos foto-realistas 3D en tempo real con OpenGL. Amosa estrelas, constelacións, planetas e nebulosas e ten moitos outros recursos, incluíndo múltiples paisaxes panorámicas, néboa, simulación de contaminación lumínica e un mecanismo de script incorporado.</p>
+    <p xml:lang="he">סטאלריום מעניק שמיים פוטו-ריאליסטיים תלת מימדיים בזמן אמת עם OpenGL. הוא מציג כוכבים, קבוצות כוכבים, כוכבי לכת וערפיליות, ויש לו תכונות רבות אחרות כולל נופים פנורמיים מרובים, ערפל,פליטת אור הדמיה ומנוע סקריפט מובנה.</p>
+    <p xml:lang="hr">Stellarium prikazuje 3D foto-realistično nebo u stvarnom vremenu putem OpenGL-a. Stvara prikaz zvijezda, zviježđa, planeta i maglica, a ima i mnoge druge značajke, uključujući razne panoramske pejzaže, maglu, simulaciju svjetlosnog onečišćenja i ugrađeni skriptni engine.</p>
+    <p xml:lang="hu">A Stellarium fotorealisztikus 3D-s égboltot állít elő valós időben, OpenGL technikával. Kirajzolja a csillagokat, csillagképeket, bolygókat és ködöket. Sok más tulajdonsága között van a panoráma-látkép, köd, fényszennyezés szimulálása és egy beépített szkript-motor.</p>
+    <p xml:lang="hy">Stellarium֊ը OpenGL֊ով իրական ժամանակում նկարում է եռաչափ ֆոտոիրատեսական երկինք։ Այն արտացոլում է աստղերը, համաստեղությունները, մոլորակները և միգամածությունները, և ունի բազում այլ հնարավորություններ, ներառյալ բազմաթիվ համայնապատկերային բնատեսարաններ, մառախուղ, լույսի աղտոտվածության նմանակում և սցենարների ներկառուցված շարժիչ։</p>
+    <p xml:lang="id">Stellarium membuat serealistis foto 3D dalam real time dengan OpenGL. Hal ini bisa menampilkan bintang-bintang, rasi-rasi, planet dan nebula dan banyak fitur lain termasuk panorama pemandangan, kabut, simulasi polusi cahaya dan mesin skript built-in.</p>
+    <p xml:lang="is">Stellarium myndgerir raunverulegan stjörnuhiminn í þrívídd og rauntíma með OpenGL. Það birtir stjörnur, vetrarbrautir, plánetur og stjörnuþokur, auk þess að hafa marga aðra eiginleika á borð við margskonar víðmyndarlandslög, þoku, ljósmengunarhermi og innbyggða skriftunarvél.</p>
+    <p xml:lang="it">Stellarium renderizza i cieli in realtà fotografica 3D in tempo reale usando OpenGL. Mostra stelle, costellazioni, pianeti e nebulose, e possiede molte altre caratteristiche compresi paesaggi panoramici multipli, nebbia, simulazione dell'inquinamento luminoso e un motore di scripting built-in.</p>
+    <p xml:lang="ja">ステラリウムはOpenGLを使用して3Dで写真のようにリアルな空をリアルタイムで描写します。星や星座、惑星、星雲を表示します。また、複数のパノラマの景色や、霧、光害のシミュレーションを含む多くの機能とビルトインスクリプトエンジンを搭載しています。</p>
+    <p xml:lang="jv">Nganggo OpenGL, Stéllarium nggawe penampakan awang-awang serealistis lan senyata mungkin kanthi arupa 3D. Stellarium mbèbèr lintang, rasi lintang, planet, lan nebula, lan nduwéni manika fitur kayata pira-pira lanskap panorama, pedhut, simulasi polusi cahaya, lan mesin skrip built-in.</p>
+    <p xml:lang="ko">스텔라리움은 현실적인 3D 하늘 사진들을 OpenGL을 사용하여 렌더링 합니다. 이는 별, 별자리, 행성과 성운, 그리고 다양한 파노라마 배경을 포함한 다른 기능과 안개, 광해 그리고  내장 스크립트 엔진을 보여줍니다.</p>
+    <p xml:lang="lb">Stellarium weist en 3D fotorealisteschen Himmel an echtzäit mat OpenGL. Et gi Stären, Stärebiller, Planéiten an Niwwelen ugewisen, an et gi vill aaner Funktiounen, wéi panoramesch Landschaften, Donst, d'Simulatioun vu Liichtverschmotzung an en integréierte scripting engine.</p>
+    <p xml:lang="lt">Stellarium rodo trimatį realistišką dangaus vaizdą realiu ar Jūsų parinktu laiku, naudodamas 3D spartinimą. Jis atvaizduoja žvaigždes, žvaigždynus, planetas ir ūkus, ir turi daugelį kitų funkcijų, tokių kaip panoraminiai kraštovaizdžiai, rūko bei šviesos taršos modeliavimas ir integruotas scenarijų programavimo variklis.</p>
+    <p xml:lang="ms">Stellarium menerap langit seakan-foto 3D dengan OpenGL. Aplikasi ini dapat memaparkan bintang, buruj, planet dan nebula, dengan banyak lagi fitur-fitur lain termasuklah pelbagai simulasi landskap panorama, kabus, pencemaran cahaya dan enjin penskripan terbina-dalam.</p>
+    <p xml:lang="nb">Stellarium tegner en fotorealistisk 3D-himmel i sanntid med OpenGL. Programmet viser stjerner, stjernebilder, planeter og stjernetåker og har mange andre funksjoner som panoramalandskap, tåke, simulering av lysforurensing og en innebygd skriptmotor.</p>
+    <p xml:lang="nl">Stellarium rendert een 3D-fotorealistische hemel in realtime met OpenGL. Het toont de sterren, sterrenbeelden, planeten en nevels, en heeft vele andere functies, waaronder meerdere panoramische landschappen, mist, lichtvervuilingssimulatie en een ingebouwde scripting engine.</p>
+    <p xml:lang="pl">Stellarium wyświetla trójwymiarowe fotorealistyczne niebo w czasie rzeczywistym, używając OpenGL. Pokazuje gwiazdy, gwiazdozbiory, planety i mgławice, a także inne obiekty i zjawiska, m.in. panoramiczne krajobrazy, mgłę, zaświetlenie nieba. Umożliwia też uruchamianie skryptów.</p>
+    <p xml:lang="pt">O Stellarium desenha um céu foto-realista tridimensional em tempo real com o OpenGL. Mostra estrelas, constelações, planetas e nebulosas e possui vários outros recursos, incluindo paisagens panorâmicas múltiplas, nevoeiro, simulação da poluição luminosa e um mecanismo de apresentações embutido.</p>
+    <p xml:lang="pt-BR">O Stellarium renderiza um céu fotorrealístico tridimensional em tempo real com o OpenGL. Ele mostra estrelas, constelações, planetas e nebulosoas e possui vários outros recursos, incluindo paisagens panorâmicas múltiplas, nevoeiro, simulação da poluição luminosa e um mecanismo de apresentações embutido.</p>
+    <p xml:lang="ro">Stellarium oferă ceruri realiste în 3D în timp real cu ajutorul OpenGL. Afişează stele, constelaţii, planete şi nebuloase şi oferă numeroase alte funcţionalităţi care includ numeroase peisaje panoramice, ceaţa, simularea poluării luminoase şi un motor de scriptare incorporat.</p>
+    <p xml:lang="ru">Stellarium рисует трехмерное фотореалистичное небо в режиме реального времени с OpenGL. Он отображает звезды, созвездия, планеты и туманности, и имеет много других функций, включая несколько панорамных пейзажей, туман, моделирование засветки и встроенный движок сценариев.</p>
+    <p xml:lang="sc">Stellarium faghet fotografias realisticas de su chelu in 3D erettu cun OpenGL. Faghet biere isteddos, costellatziones, pianetas e nebulosas, a ateras cosa s meda comente paesaggios panoramicos, neula, simulatzione de incuinamentu luminosu ed su motore internu de iscripting.</p>
+    <p xml:lang="sk">Stellarium vykresľuje fotorealistickú 3D oblohu v reálnom čase pomocou OpenGL. Zobrazuje hviezdy, súhvezdia, planéty, hmloviny a mnoho ďalších objektov, vrátane niekoľkých panoramatických záberov krajiny, hmly, svetelného znečistenia a ponúka vstavaný skriptovací mechanizmus.</p>
+    <p xml:lang="sl">Stellarium upodablja 3D realistično nebo v realnem času z uporabo OpenGL. Prikazuje zvezde, ozvezdja, planete in meglice ter ima veliko ostalih lastnosti, recimo več panoramskih ozadij, meglo, simulacija svetlobnega onesnaženja in vgrajen skriptni motor.</p>
+    <p xml:lang="sq">Stellarium vizaton qiej 3D me realizëm fotografik në kohë reale, me OpenGL. Shfaq yje, yjësi, planetë dhe mjegullnaja, dhe ka plot veçori të tjera, përfshi peizazhe të shumë panoramikë, mjegull, simulim ndotjeje drite dhe një mekanizëm të brendshëm skriptimi.</p>
+    <p xml:lang="sr">Стеларијум приказује 3д реалистичне фотографије неба у стварном времену користећи ОпенГЛ. Приказује звезде, сазвежђа, планете, маглине...  Садржи и много других могућности као што су промена пејзажа, додавање магле, приказ светлосног загађења, као и уграђени метод за прављење скрипти — програмчића који објашњавају неку природну појаву или приказују одређени део неба.</p>
+    <p xml:lang="sv">Stellarium renderar fotorealistiska 3D-himlar i realtid med OpenGL. Det visar stjärnor, stjärnbilder, planeter och nebulosor, och har många andra funktioner inklusive flera panoramalandskap, dimma, simulering av ljusförorening och en inbyggd skriptmotor.</p>
+    <p xml:lang="te">స్టెల్లేరియమ్ OpenGL ను వాడి వాస్తవికమైన 3డి ఫోటోలను వాస్తవ సమయంలో విశదీకరిస్తుంది. నక్షత్రాలు, రాశులు, గ్రహాలు, నెబ్యులాలను ఇది చూపిస్తుంది. సువిశాల ల్యాండ్‌స్కేపులు, పొగమంచు, కాంతి కాలుష్యాల సిమ్యులేషను వంటి విశేషాలు కూడా ఇందులో ఉన్నాయి. దీనిలో అంతర్గతంగా స్క్రిప్టింగు ఇంజను కూడా ఉంది.</p>
+    <p xml:lang="th">Stellarium แสดงท้องฟ้าเสมือนจริงแบบ 3 มิติ ตามเวลาจริงด้วย OpenGL สามารถแสดงดาวฤกษ์ กลุ่มดาว ดาวเคราะห์ และเนบิวลา มีคุณลักษณะอื่น ๆ อีกมากมาย รวมทั้งการจำลองภูมิทัศน์รอบตัวในแบบต่าง ๆ หมอก จำลองผลจากมลพิษทางแสง และมีระบบการประมวลผลสคริปต์ในตัว</p>
+    <p xml:lang="tr">Stellarium OpenGL ile gerçek zamanlı 3D foto-gerçekçi gökyüzü görüntülerini sunar.  Yıldızları, takımyıldızları, gezegenleri, bulutsu görüntüleri, çoklu panoramik manzaraları, sisi, ışık kirliliği simülasyonunu gösterir ve yerleşik bir betik motoru dahil olmak üzere birçok özellikleri vardır.</p>
+    <p xml:lang="uk">Stellarium відтворює просторову фотореалістичну картину зоряного неба у режимі реального часу за допомогою OpenGL. Програма здатна показувати зірки, сузір’я, планети і туманності. Має безліч інших можливостей, зокрема показ декількох панорамних ландшафтів, туману, імітацію світлового забруднення та вбудований рушій керування за допомогою сценаріїв.</p>
+    <p xml:lang="vi">Stellarium diễn tả bầu trời hình ảnh thực tế 3D trong thời gian thực với OpenGL. Nó hiển thị sao, chòm sao, hành tinh và các tinh vân, và có nhiều tính năng khác bao gồm nhiều cảnh quan toàn cảnh, sương mù, mô phỏng ô nhiễm ánh sáng và một động cơ kịch bản được xây dựng.</p>
+    <p xml:lang="zh">Stellarium使用OpenGL实时渲染逼真的3D天空。 它可以显示恒星、星座、行星和星云，并有许多其他功能，包括多种地景、雾、光污染模拟和一个内置的脚本引擎。</p>
+    <p xml:lang="zh-CN">Stellarium使用OpenGL实时渲染逼真的3D天空。 它可以显示恒星、星座、行星和星云，并有许多其他功能，包括多种地景、雾、光污染模拟和一个内置的脚本引擎。</p>
+    <p xml:lang="zh-HK">Stellarium使用OpenGL來顯示和立體照片一樣逼真的實時天空。能顯示恆星、星座、行星和星雲，並有許多其他功能：如多個全景景觀、霧、模擬光污染和內置腳本引擎。</p>
+    <p xml:lang="zh-TW">Stellarium使用OpenGL為你呈現出3D照片般逼真的天空. 它能夠顯示恆星, 星座, 行星和星雲, 並擁有許多其他功能包括多全景景觀, 霧, 光污染模擬和一個內置的腳本引擎.</p>
+    <p>Stellarium comes with a star catalogue of about 600 thousand stars and it is possible to download extra catalogues with up to 210 million stars.</p>
+    <p xml:lang="af">Stellarium het 'n ster katalogus van om en by 600 duisend sterre en dit is moontlik om ekstra katalogusse af te laai tot 210 miljoen sterre.</p>
+    <p xml:lang="ar">ستيلاريوم يأتي بفهرس نجوم فيه حوالي 600 ألف نجم ويمكنك تحميل فهارس إضافية حتى 210 مليون نجم.</p>
+    <p xml:lang="be">Stellarium пастаўляецца з каталёґам, у якім каля 600 тысяч зорак, а яшчэ магчыма загрузіць дадатковыя каталёґі, у якіх утрымліваецца да 210 мільёнаў зорак.</p>
+    <p xml:lang="bg">Stellarium идва с каталог от 600 000 звезди. Може да свалите допълнителен каталог с 210 милиона звезди.</p>
+    <p xml:lang="bn">স্টেলারিয়ামে প্রাথমিক ভাবে ৬০ লক্ষ তারার একটা তালিকা দেওয়া থাকে । এছাড়াও প্রয়োজন মত আরও ২১ কোটি তারার তালিকা ডাউনলোড করা যায় ।</p>
+    <p xml:lang="ca">Stellarium compta amb un catàleg estelar de prop de 600 milers d'estels, essent possible descarregar catàlegs addicionals de fins a 210 milions d'estels.</p>
+    <p xml:lang="ca-valencia">Stellarium compta amb un catàleg estel·lar de prop de 600 mil estreles i és possible descarregar-hi catàlegs addicionals de fins a 210 milions d'estreles.</p>
+    <p xml:lang="cs">Stellarium přichází s hvězdným katalogem obsahujícím zhruba 600 000 hvězd. Volitelně je možno stáhnout další katalogy obsahující až 210 milionů hvězd.</p>
+    <p xml:lang="cv">Stellarium пухмӑшӗнче 600 пине йахӑн ҫӑлтӑр пур, тата тепӗр 210 миллиона йахӑн ҫӑлтӑр пухмӑшне тийесе илме май пур.</p>
+    <p xml:lang="da">Stellarium indeholder et stjernekatalog på omkring 600 tusind stjerner, og det er muligt at hente ekstra kataloger med op til 210 millioner stjerner.</p>
+    <p xml:lang="de">Stellarium kommt mit einem Sternkatalog von etwa 600.000 Sternen, und es ist möglich, weitere Kataloge mit bis zu 210 Mio Sternen herunterzuladen.</p>
+    <p xml:lang="el">Το Stellarium περιέχει κατάλογο με πάνω από 600 χιλιάδες άστρα και με την δυνατότητα μεταφόρτωσης καταλόγων με μέχρι 210 εκατομμύρια άστρα</p>
+    <p xml:lang="en-CA">Stellarium comes with a star catalogue of about 600 thousand stars and it is possible to download extra catalogues with up to 210 million stars.</p>
+    <p xml:lang="en-GB">Stellarium comes with a star catalogue of about 600 thousand stars and it is possible to download extra catalogues with up to 210 million stars.</p>
+    <p xml:lang="es">Stellarium viene con un catálogo estelar de alrededor de 600 mil estrellas y es posible descargar catálogos adicionales con hasta 210 millones de estrellas.</p>
+    <p xml:lang="fa">فهرست ستاره‌ای استلاریوم شامل حدود 600 هزار ستاره است. هم‌چنین امکان دریافت فهرست‌هایی شامل اطّلاعات بیش از 210 میلیون ستاره وجود دارد.</p>
+    <p xml:lang="fi">Stellarium sisältää oletuksena 600 000 tähden tähtiluettelon, ja lisäluetteloita on mahdollista ladata aina 210 miljoonaan tähteen asti.</p>
+    <p xml:lang="fr">Stellarium est livré avec un catalogue d'environ 600 000 étoiles. Des catalogues supplémentaires comportant jusqu'à 210 millions d'étoiles peuvent être téléchargés gratuitement.</p>
+    <p xml:lang="gd">Thig catalog de chòrr is 600 reul an cois Stellarium agus ’s urrainn dhut barrachd chatalogan a luchdadh a-nuas le suas ri 210 millean reul.</p>
+    <p xml:lang="gl">Stellarium vén cun catálogo de estrelas de preto de 600 mil estrelas e é posible facer a descarga de catálogos extra con ata 210 millóns de estrelas.</p>
+    <p xml:lang="he">סטלריום מגיע עם א כוכב קטלוג של כ 600,000 כוכבים וזהו אפשרי להוריד קטלוגים נוספים עם עד 210 מיליון כוכבים.</p>
+    <p xml:lang="hr">Stellarium nudi katalog sa oko 600 tisuća zvijezda a moguće je preuzeti dodatne kataloge sa do 210 milijuna zvijezda.</p>
+    <p xml:lang="hu">A Stellariumban alapból 600 ezer csillagot tartalmazó katalógus van, és lehetőség van további csillagkatalógusok letöltésére, egészen 210 millió csillagig.</p>
+    <p xml:lang="hy">Stellarium֊ը տրամադրվում է մոտավորապես 600 հազար աստղ բովանդակող աստղացանկով։ Բացի այդ, կարելի է ներբեռնել լրացուցիչ աստղացանկեր և ընդլայնել աստղերի թիվը մինչև 210 միլիոնի։</p>
+    <p xml:lang="id">Stellarium memiliki katalog bintang sekitar 600 ribu bintang dan memungkinkan untuk mengunduh katalog tambahan sekitar 210 juta bintang-bintang.</p>
+    <p xml:lang="is">Stellarium kemur með stjörnuskrá sem inniheldur um það bil 600 þúsund stjörnur, og er hægt að hala inn aukaskrám með allt að 210 milljón stjörnum.</p>
+    <p xml:lang="it">Stellarium viene fornito con un catalogo di circa 600.000 stelle ed è possibile scaricare cataloghi extra fino a 210 milioni di stelle.</p>
+    <p xml:lang="ja">ステラリウムは初期状態で 60万個の恒星を含んでおり、追加カタログをダウンロードすることで、2億1千万個の恒星を見ることができるようになります。</p>
+    <p xml:lang="jv">Stellarium hadir kanthi katalog lintang sekitar 600 ewu lintang lan dimungkinkan kanggo ngunduh katalog tambahan nganti 210 yuta lintang.</p>
+    <p xml:lang="ko">스텔라리움은 약 60만개의 별이 들어있는 항성 목록과 함께 제공됩니다. 그리고 추가적으로 약 2.1억개까지의 항성 목록을 내려받을 수 있습니다.</p>
+    <p xml:lang="lb">Stellarium huet e Katalog mat 600'000 Stären an et ass méiglech fir zousätzlech Kataloge mat bis zu 210 Millioune Stären erofzelueden.</p>
+    <p xml:lang="lt">Stellarium platinamas su maždaug 600 tūkstančių žvaigždžių katalogu. Galima atsisiųsti papildomus katalogus ir padidinti atvaizduojamų žvaigždžių skaičių iki 210 milijonų.</p>
+    <p xml:lang="ms">Stellarium disertakan dengan katalog bintang sebanyak 600 ribu bintang dan juga boleh memuat turun katalog tambahan sehingga 210 juta bintang.</p>
+    <p xml:lang="nb">Stellarium kommer med en stjerne-katalog med ca 600 000 stjerner, det er også mulig å laste ned ekstra kataloger med opptil 210 millioner stjerner.</p>
+    <p xml:lang="nl">Stellarium wordt geleverd met een sterrencatalogus van ongeveer 600 duizend sterren en het is mogelijk om extra catalogi te downloaden met maximaal 210 miljoen sterren.</p>
+    <p xml:lang="pl">Stellarium zawiera katalog ok. 600 tysięcy gwiazd, ma również możliwość pobierania dodatkowych katalogów, obejmujących w sumie 210 milionów gwiazd.</p>
+    <p xml:lang="pt">O Stellarium vem com um catálogo estelar com cerca de 600.000 estrelas, e é possível baixar catálogos adicionais com até 210 milhões de estrelas.</p>
+    <p xml:lang="pt-BR">O Stellarium vem com um catálogo estelar com cerca de 600.000 estrelas, e é possível baixar catálogos adicionais com até 210 milhões de estrelas.</p>
+    <p xml:lang="ro">Stellarium se instalează împreună cu un catalog de aproximativ 600 de mii de stele şi există posibilitatea de a se descărca cataloage suplimentare cu pînă la 210 milioane de stele.</p>
+    <p xml:lang="ru">Stellarium поставляется со звездным каталога на примерно 600 тысяч звезд и можно скачать дополнительные каталоги и расширить число звёзд до 210 миллионов.</p>
+    <p xml:lang="sc">Stellarium arribat a tennere unu catalogu de 600 mila isteddos et est possibile inscarrigare catalogos in prus mentras a 210 miliones de isteddos.</p>
+    <p xml:lang="sk">Stellarium obsahuje hviezdny katalóg približne 600 000 hviezd a na želanie je možné doplniť ďalšie katalógy obsahujúce až 210 miliónov hviezd.</p>
+    <p xml:lang="sl">Stellarium vključuje zvezdni katalog z okoli 600 tisoč zvezdami, možno pa si je tudi prenesti posebne kataloge, ki vsebujejo kar 210 milijonov zvezd.</p>
+    <p xml:lang="sq">Stellarium vjen me një katalog ykesh me afërsisht 600 mijë yje dhe është e mundur të shkarkohen katalogë ekstra me deri 210 milionë yje.</p>
+    <p xml:lang="sr">Стеларијум долази са звезданим каталогом са око 600 хиљада звезда, а могуће је преузети додатни каталог са више од 210 милиона звезда.</p>
+    <p xml:lang="sv">Stellarium kommer med en stjärnkatalog med ungefär 600000 stjärnor och det är möjligt att hämta hem extra kataloger med upp till 210 miljoner stjärnor.</p>
+    <p xml:lang="ta">ஆறு இலட்சம் விண்மீன்களை கொண்ட விண்மீன் பட்டியலுடன் ஸ்டெல்லாரியம் வந்துள்ளது. மேலும், இருபத்தியொரு கோடி விண்மீன்களின் பட்டியலையும் நீங்கள் பதிவிறக்கம் செய்துக் கொள்ளலாம்.</p>
+    <p xml:lang="te">స్టెల్లేరియమ్‌లో 6 లక్షల నక్షత్రాలతో కూడిన క్యాటలాగులున్నాయి. ఇవి కాక, 21 కోట్ల నక్షత్రల క్యాటలాగులను డౌనులోడు చేసుకునే వీలు కూడా ఉంది</p>
+    <p xml:lang="th">Stellarium แสดงดาวฤกษ์จากบัญชีดาวที่มีดาวอยู่ประมาณ 600,000 ดวง และยังสามารถดาวน์โหลดเพิ่มเติมให้มีดาวฤกษ์ได้ถึง 210 ล้านดวง</p>
+    <p xml:lang="tr">Stellarium içinde yaklaşık 600 bin yıldız olan bir katalogla beraber gelir ve yaklaşık 210 milyon yıldız içeren ek kataloglar indirilebilir.</p>
+    <p xml:lang="uk">До пакунка Stellarium включено зоряний каталог, у якому близько 600 тисяч записів зірок. Ви також можете отримати з інтернету додаткові каталоги, у яких до 210 мільйонів записів.</p>
+    <p xml:lang="vi">Stellarium đi kèm với một danh mục sao của khoảng 600.000 ngôi sao và nó có thể tải về danh mục thêm với lên đến 210 triệu ngôi sao.</p>
+    <p xml:lang="zh">Stellarium内置一个含约60万颗星的星表，另外还可以下载含多达2.1亿颗星的额外星表。</p>
+    <p xml:lang="zh-CN">Stellarium内置一个含约60万颗星的星表，另外还可以下载含多达2.1亿颗星的额外星表。</p>
+    <p xml:lang="zh-HK">Stellarium內置一個有60萬顆星的數據庫，並可以另外下載多至21億顆星的數據庫。</p>
+    <p xml:lang="zh-TW">Stellarium內置一個60萬顆恆星的數據庫, 並且可以下載額外的最多到21億顆恆星的數據庫.</p>
+    <p>Stellarium has multiple sky cultures - see the constellations from the traditions of Polynesian, Inuit, Navajo, Korean, Lakota, Egyptian and Chinese astronomers, as well as the traditional Western constellations.</p>
+    <p xml:lang="af">Stellarium het veelvuldige lug kulture - sien die sterrebeelde van die tradisies van Polynesiese, Inuit, Navajo, Koreaanse, Lakota, Egiptiese en Chinese sterrekundiges asook die tradisionele Westerse sterrebeelde.</p>
+    <p xml:lang="ar">ستيلاريوم لديه ثقافتان للسماء, الأولى هي رؤية المجموعات النجمية من خلال التقاليد البولينيزية, الاسكيمو, الكورية, المصرية, والفلك الصيني, والثانية هي رؤية المجموعات النجمية من خلال الطريقة التقليدية الغربية</p>
+    <p xml:lang="be">Stellarium падтрымлівае розныя зорныя культуры, можна паглядзець на сузор'і ў традыцыях палінэзійскіх, інуіцкіх, навахскіх, карэйскіх, лакоцкіх, эґіпэцкіх і кітайскіх астраномаў, а таксама традыцыйныя заходнія сузор'і.</p>
+    <p xml:lang="bg">Stellarium съдържа множество варианти на съзвездията — както класическата, западна интерпретация, така и тези на хората от Полинезия, Корея, Египет, Китай, ескимосите, индианците от племената Навахо, Лакота.</p>
+    <p xml:lang="bn">স্টেলারিয়ামে পলিনেশীয়, ইনুইটিয়, নাভাজো, কোরীয়ান, লাকোটিয়ান, মিশরীয়, চৈনিক ইত্যাদি অনেকগুলি সংস্কৃতির মহাকাশ চর্চার সাথে আধুনিক বা পশ্চিমী মহাকাশ চর্চারও বিশদ তথ্য দেওয়া আছে ।</p>
+    <p xml:lang="ca">Stellarium permet representar diferents cultures astronòmiques, és a dir, veure les constel·lacions de les cultures de la Polinèsia, Inuit, Navajo, Coreana, Lakota, Egipcia i d'astrònoms xinesos així com les constel·lacions Occidentals tradicionals.</p>
+    <p xml:lang="ca-valencia">Stellarium permet representar diferents cultures astronòmiques, és a dir, veure les constel·lacions de les cultures de la Polinèsia, Inuit, Navajo, Coreana, Lakota, Egipcia i d'astrònoms xinesos així com les constel·lacions Occidentals tradicionals.</p>
+    <p xml:lang="cs">Stellarium obsahuje mytologii oblohy rozmanitých kultur – pozorujte souhvězdí z pohledu tradic polynéských, inuitských, navažských, korejských, lakotských, egyptských a čínských astronomů, stejně jako tradiční západní souhvězdí.</p>
+    <p xml:lang="cv">Stellarium ӑшлӑхӗнче тӗрлӗ халӑхӑн тӳпе культури те тӑратнӑ: Полинеҫи, Инуит, Навахӑ, Корей, Лакотӑ, Египӗт тата Китай ҫӑлтӑрҫин куҫӗпе ҫӑлтӑр сӑнаса ил-ха; ХӗвелАнӑҫ йӑла ҫӑлтӑр ушкӑнӗсем те пур паллах.</p>
+    <p xml:lang="da">Stellarium indeholder adskillige himmelkulturer – se stjernebillederne fra traditionelle polynesiske, inuitiske, Navajo, koreanske, Lakota, egyptiske og kinesiske astronomer, samt de traditionalle vestlige stjernebilleder.</p>
+    <p xml:lang="de">Stellarium hat vielfältige mythologische Figuren, etwa die Sternbilder der Polynesier, Inuit, Navajo, Lakota, Koreaner, Ägypter und Chinesischer Astronomen, neben den bekannten Westlichen.</p>
+    <p xml:lang="el">Το Stellarium έχει πολλαπλούς ουράνιους πολιτισμούς - δείτε τους αστερισμούς από τις παραδόσεις των Πολυνησίων, Ινουίτ, Ναβάχο, Κορεατών, Λακότα, Αιγυπτίων και Κινέζων αστρονόμων όπως επίσης και των παραδοσιακών δυτικών πολιτισμών.</p>
+    <p xml:lang="en-CA">Stellarium has multiple sky cultures - see the constellations from the traditions of Polynesian, Inuit, Navajo, Korean, Lakota, Egyptian and Chinese astronomers, as well as the traditional Western constellations.</p>
+    <p xml:lang="en-GB">Stellarium has multiple sky cultures - see the constellations from the traditions of Polynesian, Inuit, Navajo, Korean, Lakota, Egyptian and Chinese astronomers, as well as the traditional Western constellations.</p>
+    <p xml:lang="es">Stellarium tiene múltiples culturas estelares - vea las constelaciones de las tradiciones de los astrónomos polinesios, Inuit, Navajo, coreanos, Lakota, egipcios y chinos, así como las constelaciones occidentales tradicionales.</p>
+    <p xml:lang="fa">استلاریوم شامل فرهنگ‌های آسمانی مختلفی است. شما می‌توانید علاوه بر نمایش  صورت‌های فلکی غربی قدیم، آن‌ها را از دید تمدّن‌های پلینزی، اینویتی، ناواهی، کره‌ای، لاکوتا، مصری و چینی مشاهده کنید.</p>
+    <p xml:lang="fi">Stellarium sisältää useita taivaskulttuureja – voit nähdä polynesialaisten, inuiittien, navajojen, korealaisten, lakotojen, egyptiläisten ja kiinalaisten perinteiset tähtikuviot, sekä lisäksi tavalliset länsimaalaiset tähtikuviot.</p>
+    <p xml:lang="fr">Stellarium propose l'affichage de constellations de plusieurs cultures, issues des traditions d'astronomes de Polynésie, Inuit, Navajo, de Corée, Lakota, d'Égypte et de Chine, ainsi que les constellations traditionnelle de la culture occidentale.</p>
+    <p xml:lang="gd">Tha iomadh dualchas speura aig Stellarium – seall na reul-bhadan o dhualchas nan reul-eòlaichean Poilinèiseach, Inuit, Navajo, Coirèanach, Lakota, Èipheiteach agus Sìneach cho math ris na reul-bhadan Siarach tradaiseanta.</p>
+    <p xml:lang="gl">Stellarium ten ceos de múltiples culturas - amosa as constelacións das tradicións dos astrónomos polinesios, Inuit, Navajos, coreanos, Lakotas, exipcios e chineses, así como as constelacións occidentais tradicionais.</p>
+    <p xml:lang="he">לסטלריום יש ריבוי שמיים תרבויות - ראו את קבוצות הכוכבים ממסורותיהם של אסטרונומים פולינזיים, אינuitיים, נאוואחו, קוריאנים, לקוטות, מצרים וסינים, וכן את קבוצות הכוכבים המערביות המסורתיות.</p>
+    <p xml:lang="hr">Stellarium ima više kultura zvijezđa - pogledajte zviježđa iz tradicija polinezijskih, inuitskih, navajo, korejskih, lakotskih, egipatskih i kineskih astronoma, kao i tradicionalna zapadna zviježđa.</p>
+    <p xml:lang="hu">A Stellariumban többféle népcsoport hiedelemvilága tükröződik az égbolton, köztük polinéz, eszkimó (inuit), navahó, koreai, lakota, egyiptomi és kínai (az alap nyugateurópai mellett).</p>
+    <p xml:lang="hy">Stellarium֊ը բովանդակում է բազում աստղագիտական մշակույթներ. դիտեք եգիպտացի և չինացի աստղագետների, պոլինեզիացիների, ինուիտնետի, կորեացիների, նավախո և լակոտա ցեղերի ավանդական համաստեղությունները, ինչպես նաև ավանդական արևմտյան համաստեղությունները։</p>
+    <p xml:lang="id">Stellarium memiliki banyak seni langit - Bisa melihat rasi-rasi dari tradisi Polynesian, Inuit, Navajo, Korean, Lakota, Egyptian dan Astronomers China, sebaik rasi-rasi tradisional Western</p>
+    <p xml:lang="is">Stellarium er með mörg stjörnumerkjakerfi - skoðaðu stjörnumerkimeð hefðbundnum nöfnum frá Polýnesíu, Inúítum, Navajó, Kóreu, Lakota, gömul norræn, frá Egyptalandi forna, kínverskum stjörnuspekingum, auk hinna hefðbundnu vestrænu stjörnumerkja.</p>
+    <p xml:lang="it">Stellarium include molteplici culture del cielo: osserva le costellazioni dalle tradizioni degli astronomi polinesiani, Inuit, Navajo, coreani, Lakota, egizi e cinesi, oltre alle tradizionali costellazioni della cultura occidentale.</p>
+    <p xml:lang="ja">ステラリウムには複数の星の文化があります。伝統的な西洋の星座と同様にポリネシア、イヌイット、ナバホ、韓国、ラコタ、エジプト、中国の天文学者による伝統的な星座をご覧ください。</p>
+    <p xml:lang="jv">Stellarium nduweni pira-pira kabudayan perlintangan - kayata kabudayan Polinesia, Inuit, Navajo, Korea, Lakota, Mesir, lan Cina, sarta kabudayan Kulon.</p>
+    <p xml:lang="ko">스텔라리움은 여러 개의 하늘 문화를 가지고 있습니다. 한국, 폴리네시아, 나바호, 티톤,  이집트, 이누이트,  그리고 중국의 전통적인 별자리는 서양의 것과 마찬가지로 잘 되어 있습니다.</p>
+    <p xml:lang="lb">Stellarium weist den Himmel vu verschiddene Stäre-Kulturen - entdeckt déi traditionell polynesesch, Inuit, Navajo, koreansch, Lakota, ägyptesch a chinesesch Stärebiller un, awer och déi traditionell westlech Stärebiller. </p>
+    <p xml:lang="lt">Stellarium turi daugybę žvaigždynų piešinių - pamatykite tradicinius Polinezijos, Inuitų, Navaho, Korėjos, Lakotos, Egipto ir Kinijos žvaigždynus, o taip pat ir tradicinius vakarietiškus.</p>
+    <p xml:lang="ms">Stellarium dilengkapi dengan pelbagai jenis peribudaya langit - sila rujuk  buruj daripada astronomi tradisi Polynesia, Inuit, Navajo, Korea, Lakota, Mesir dan China, dan juga buruj tradisi Barat.</p>
+    <p xml:lang="nb">Stellarium byr på mange himmelkulturer – se de tradisjonelle stjernebildene fra polynesiske, inuittiske, navaho, koreanske, lakota, egyptiske og kinesiske astronomer, samt de tradisjonelle vestlige stjernebildene.</p>
+    <p xml:lang="nl">Stellarium heeft meerdere hemelculturen - bekijk de sterrenbeelden van de tradities van de Polynesische, Inuitische, Navajoaanse, Koreaanse, Lakotaanse, Egyptische en Chinese astronomen, evenals de traditionele westerse sterrenbeelden.</p>
+    <p xml:lang="pl">Stellarium pokazuje niebo oczami różnych kultur - zobacz gwiazdozbiory w tradycji polinezyjskiej, inuickiej, nawaho, koreańskiej, Dakotów, egipskiej i chińskiej, a także tradycyjne gwiazdozbiory kultury zachodniej.</p>
+    <p xml:lang="pt">O Stellarium tem diversas culturas estelares: veja as constelações a partir das tradições de astrónomos polinésios, inuítes, navajos, coreanos, lacotas, egípcios e chineses, bem como as constelações ocidentais tradicionais.</p>
+    <p xml:lang="pt-BR">O Stellarium tem diversas culturas estelares: veja as constelações a partir das tradições de astrônomos polinésios, inuítes, navajos, coreanos, lacotas, egípcios e chineses, bem como as constelações ocidentais tradicionais.</p>
+    <p xml:lang="ro">Stellarium include reprezentări ale cerului aparţinînd mai multor culturi - pot fi văzute constelaţiile din tradiţiile Polineziană, Inuită, Navajo, Coreană, Lakota, Egipteană şi Chineză, precum şi constelaţiile tradiţionale occidentale.</p>
+    <p xml:lang="ru">Stellarium имеет множество культур небо - посмотрите традиционные созвездия для полинезийцев, инуитов, навахо, корейцев, лакота, египетских и китайских астрономов, а также традиционные западные созвездия.</p>
+    <p xml:lang="sc">Stellarium tenet medas culturas de chelos - abbaida sas costellatziones de sos astronomos de sa traditzione Polinesiana, Inuit, Navajo, Coreana, Lakota, Egitziana e Tzinesa, puru finas sas costellatziones traditzionales de sa cultura otzidentale.</p>
+    <p xml:lang="sk">Stellarium ponúka rozmanité obrazce súhvezdí rôznych kultúr - súhvezdia podľa tradícií polynézskych, inuitských, navajských, kórejských, lakotských, egyptských a čínskych astronómov môžete porovnať s tradičnými obrazcami súhvezdí západnej kultúry.</p>
+    <p xml:lang="sl">Stellarium ima več ozvezdij iz različnih kultur - oglejte si tradicionalna ozvezdja od poljskih, inuitskih, navajskih, korejskih, lakotskih, egiptčanskih in kitajskih astronomov ter nenazadnje tudi ozvezdja zahodnih kultur.</p>
+    <p xml:lang="sq">Stellarium përmban qytetërime të shumta qiellore - shihini yjësitë sipas traditës së astronomëve polinezianë, inuitë, navajo, koreanë, lakota, egjiptianë dhe kinezë, si dhe yjësitë tradicionale perëndimore.</p>
+    <p xml:lang="sr">Стеларијум има опцију за преглед сазвежђа различитих култура. Погледајте традиционална сазвежђа Полинезије, Инуита, Египћана, Кинеза, као и традиционална сазвежђа западних култура.</p>
+    <p xml:lang="sv">Stellarium har flera stjärnmytologier - se stjärnbilderna enligt traditionerna hos polynesiska, inuitiska, navajoiska, koreanska, lakotaiska, egyptiska och kinesiska astronomer, så väl som de traditionella västerländska stjärnbilderna.</p>
+    <p xml:lang="ta">ஸ்டெல்லாரியம் மூலம் பல்வேறு நாகரீகங்களின் வான வரைப்படத்தை காண முடியும் - பாளிநீசியன், இனூயிட், நவஜோக்கள், கொரிய, லகோட்டா, எகிப்திய மற்றும் சீன வானவியலாலர்களின் விண்மீன் குழுக்களை பார்க்கலாம். மேலும், மேற்கத்திய விண்மீன் குழுவையும் காணலாம்.</p>
+    <p xml:lang="te">స్టెల్లేరియమ్ లో అనేక ఖగోళ సంస్కృతులున్నాయి - సాంప్రదాయిక పాశ్చాత్య నక్షత్ర మండలాలనే కాక, పాలినేసియన్, ఇన్యూట్, నవాజో, కొరియన్, లకోటా, ఈజిప్షియన్, చైనీసు సంస్కృతులకు చెందిన నక్షత్ర మండలాలను కూడా చూడండి.</p>
+    <p xml:lang="th">Stellarium แสดงกลุ่มดาวในหลายวัฒนธรรม เช่น โพลีนีเซีย อินูอิต นาวาโฮ เกาหลี ลาโคตา อียิปต์ จีน ฯลฯ รวมถึงกลุ่มดาวดั้งเดิมแบบตะวันตก</p>
+    <p xml:lang="tr">Stellariumda birçok gökyüzü kültürü vardır. Mısır, Çin ve diğer eski kültürlerin gökyüzü bilgileri bulunduğu gibi bunun yanında modern batı gökyüzü bilgileri de bulunur.</p>
+    <p xml:lang="uk">У Stellarium передбачено можливість спостерігати за декількома картинами зоряного неба: ви можете побачити його таким, яким його собі уявляли полінезійці, інуїти, навахо, корейці, лакота, єгиптяни та китайці, а також ознайомитися із традиційними західноєвропейськими сузір’ями.</p>
+    <p xml:lang="vi">Stellarium có nhiều nền văn hóa trên bầu trời - xem các chòm sao từ các truyền thống của các nhà thiên văn học người Polynesia, Inuit, Navajo, Hàn Quốc, Lakota,  Ai Cập và Trung Quốc, cũng như những chòm sao truyền thống phương Tây.</p>
+    <p xml:lang="zh">Stellarium内置多种星空文化——参见波利尼西亚、因纽特、纳瓦霍、朝鲜、拉科塔、埃及和中国天文学家的传统星座，以及西方的传统星座。</p>
+    <p xml:lang="zh-CN">Stellarium内置多种星空文化——参见波利尼西亚、因纽特、纳瓦霍、朝鲜、拉科塔、埃及和中国天文学家的传统星座，以及西方的传统星座。</p>
+    <p xml:lang="zh-HK">Stellarium能顯示不同的星座文化，包括波利尼西亞、因紐特人、納瓦霍、韓國、拉科塔、埃及和中國的天文傳統，以及西方的星座傳統。</p>
+    <p xml:lang="zh-TW">Stellarium具有多個民ˋ族的星空述語 - 從 波利尼西亞, 因紐特人, 納瓦霍, 韓國, 拉科塔, 埃及和中國的天文學家, 以及傳統的西方星座星座。</p>
+    <p>It is also possible to visit other planets in the solar system - see what the sky looked like to the Apollo astronauts, or what the rings of Saturn looks like from Titan.</p>
+    <p xml:lang="af">Dit is ook moontlik om ander planete in die sonnestelsel te besoek - sien hoe die lugruim gelyk het vir die Apollo ruimtevaarders of hoe die ringe van Saturnus lyk vanaf Titan.</p>
+    <p xml:lang="ar">من الممكن زيارة كواكب أخرى في النظام الشمسي - يمكنك رؤية كيف بدت السماء لرواد أبولو, أو يمكنك رؤية كيف تبدو حلقات زحل من قمر تيتان</p>
+    <p xml:lang="be">Таксама магчыма наведаць іншыя плянэты сонечнай сыстэмы: пабачыць неба, як яго бачылі касманаўты місіі «Апола», ці як выглядаюць кольцы Сатурна з Тытана.</p>
+    <p xml:lang="bg">Може да посетите и другите планети в слънчевата система — да видите звездите както са ги виждали космонавтите от мисията Аполо или да се насладите на пръстените на Сатурн от Титан.</p>
+    <p xml:lang="bn">অন্যান্য গ্রহ বা উপগ্রহ থেকে আকাশ কেমন দেখাতে পারে, যেমন - অ্যাপোলো অভিযানের সময় চাঁদ থেকে আকাশ কেমন দেখাবে কিংবা শনি থেকে তার বলয় কেমন দেখাবে ইত্যাদি স্টেলারিয়ামের সাহায্যে জানা যেতে পারে ।</p>
+    <p xml:lang="ca">També es possible visitar altres planetes en el sistema solar - veure el cel que veien els astronautes de l'Apolo, o com es veuen els anells de Saturn des de Tità.</p>
+    <p xml:lang="ca-valencia">També es possible visitar altres planetes del sistema solar - veure el cel que veien els astronautes de l'Apollo, o  veure els anells de Saturn des de Tità.</p>
+    <p xml:lang="cs">Je také možné navštívit jiné planety ve sluneční soustavě – podívejte se, jak vypadalo nebe pro kosmonauty programu Apollo nebo jak vypadají Saturnovy prstence z jeho měsíce Titanu.</p>
+    <p xml:lang="cv">Тата, Хӗвел системӗнчи ытти планет ҫине кайса пӑхма май пур - вӗсем Аполлон астрӑнавчӗшӗн йепле курӑннӑ-ши-ха? йе Сатурн унккисем Титан ҫинчен йепле курӑнаҫҫӗ-ши?</p>
+    <p xml:lang="da">Det er også muligt at besøge andre planeter i solsystemet – se hvordan himmelen så ud for Apollo-astronauterne eller hvordan Saturns ringe ser ud fra Titan.</p>
+    <p xml:lang="de">Man kann auch andere Planeten unseres Sonnensystems besuchen - erleben Sie den Himmelsanblick der Apollo-Astronauten, oder wie sich Saturn von seinem Mond Titan aus zeigt.</p>
+    <p xml:lang="el">Είναι επίσης δυνατόν να επισκεφτείτε άλλους πλανήτες στο ηλιακό σύστημα - δείτε πως έβλεπαν τον ουρανό οι αστροναύτες της αποστολής Απόλλο ή πως εμφανίζονται οι δακτύλιοι του Κρόνου από τον δορυφόρο του Τιτάνα.</p>
+    <p xml:lang="en-CA">It is also possible to visit other planets in the solar system - see what the sky looked like to the Apollo astronauts, or what the rings of Saturn looks like from Titan.</p>
+    <p xml:lang="en-GB">It is also possible to visit other planets in the solar system - see what the sky looked like to the Apollo astronauts, or what the rings of Saturn looks like from Titan.</p>
+    <p xml:lang="es">También es posible visitar otros planetas en el sistema solar - ver el cielo como se veía para los astronautas de Apolo, o cómo se miran los anillos de Saturno desde Titán.</p>
+    <p xml:lang="fa">هم‌چنین امکان بازدید از سایر سیّارات منظومه‌ی شمسی وجود دارد. آسمان را از دید فضانوردان آپولو ببینید یا حلقه‌های زحل را از دید تیتان نظاره کنید.</p>
+    <p xml:lang="fi">Myös muilla aurinkokunnan planeetoilla on mahdollista käydä – näe millainen taivas oli Apollo-astronauttien silmin, tai miltä Saturnuksen renkaat näyttävät Titanin pinnalta.</p>
+    <p xml:lang="fr">Il est également possible de visiter d'autres corps célestes du système solaire, par exemple pour voir le ciel comme les astronautes du programme Apollo ou observer les anneaux de Saturne depuis Titan.</p>
+    <p xml:lang="gd">’S urrainn dhut tadhal air planaidean eile sa rian-grèine cuideachd – seall an coltas a bha air na speuran dha na speuradairean Apollo no an coltas a cha air cearcallan Satairn o Thitan.</p>
+    <p xml:lang="gl">Tamén é posible visitar outros planetas no sistema solar - ver o ceo coma os astronautas do Apollo, ou os aneis de Saturno dende Titan.</p>
+    <p xml:lang="he">אפשר גם לבקר בכוכבי לכת אחרים במערכת השמש - ראו איך נראו השמיים לאסטרונאוטים של אפולו, או איך נראות הטבעות של סטורן מטיטאן.</p>
+    <p xml:lang="hr">Moguće je posjetiti i druge planete Sunčevog sustava - pogledajte kako je nebo izgledalo astronautima Apollo programa ili kako prstenovi Saturna izgledaju s Titana.</p>
+    <p xml:lang="hu">Lehetséges más bolygók meglátogatása a Naprendszerben: kipróbálható, milyen látvány tárult az Apollo űrhajósai elé, vagy hogyan néznek ki a Szaturnusz gyűrűi a Titán nevű holdról.</p>
+    <p xml:lang="hy">Բացի այդ, կարելի է այցելել Արեգակնային համակարգի այլ մոլորակները. դիտեք, թե ինչպիսի երկինք էր Ապոլոնի տիեզերագնացների վայրէջքի վայրում, կամ ինչպիսի տեսք ունեն Երևակի օղակները Տիտանից դիտելիս։</p>
+    <p xml:lang="id">Ini memungkinkan mengunjungi planet-planet lain dalam tata surya - melihat tampilan langit dari astronot Apollo, atau cincin saturnus dilihat dari Titan.</p>
+    <p xml:lang="is">Það er einnig hægt að heimsækja aðrar plánetur í sólkerfinu - skoða hvernig himininn leit út fyrir geimfarana í Apollo geimferðunum, eða hvernig hringir Satúrnusar líta út séð frá Títan.</p>
+    <p xml:lang="it">È anche possibile visitare altri pianeti nel Sistema Solare: guarda come appariva il cielo agli astronauti delle missioni Apollo, o come appaiono gli anelli di Saturno da Titano.</p>
+    <p xml:lang="ja">太陽系の他の惑星を訪れることもできます。アポロ宇宙飛行士が見た空がどんなものなのか、あるいはタイタンから見た土星の輪がどう見えるかを試してください。</p>
+    <p xml:lang="jv">Kanthi migunakne program iki, dhewe isoh ngangsuh kawruh babagan planit liya ing tata surya, - kayata ngrasakke pengalaman astronot Apollo nalika nonton awang-awang saka luar angkasa, utawa nonton cincin Zohal saka planit Titan.</p>
+    <p xml:lang="ko">태양계 내의 다른 행성을 방문하는 것도 가능합니다. 아폴로 우주비행사가 보는 하늘이 어떻게 보이는지, 타이탄에서 보는 토성의 고리가 어떤지도 볼 수 있습니다.</p>
+    <p xml:lang="la">Visitate tamen alteras planetas in systema solis - vidite coelum astronautium missionis "Apollo", vel anum Saturni ex locatione Titani.</p>
+    <p xml:lang="lb">Et ass och méiglech aaner Planéiten am Sonnesystem ze besichen - kuckt Iech un, wéi den Himmel fir d'Apollo-Astronauten ausgesinn huet, oder wéi d'Réng vum Saturn um Titan ausgesinn.</p>
+    <p xml:lang="lt">Taip pat galima apsilankyti kitose Saulės sistemos planetose - pamatykite, kaip dangus atrodė Apollo astronautams, arba kaip Saturno žiedai atrodo iš Titano.</p>
+    <p xml:lang="ms">Anda juga boleh melawati planet lain di dalam sistem suria - sila lihat apa yang dilihat oleh ahli astronaut Apollo, atau bagaimanakah rupa gelang Saturn dari pandangan bulan Titan.</p>
+    <p xml:lang="nb">Det er også mulig å besøke andre planeter i solsystemet – se hvordan himmelen så ut for Apollo-astronautene, eller hvordan Saturns ringer ser ut fra Titan.</p>
+    <p xml:lang="nl">Het is ook mogelijk om andere planeten in het zonnestelsel te bezoeken - zie hoe de hemel eruitzag voor de Apollo-astronauten, of hoe de ringen van Saturnus eruitzien vanuit Titan.</p>
+    <p xml:lang="pl">Możliwe jest również odwiedzanie innych obiektów w układzie słonecznym - zobacz niebo z perspektywy astronautów Apollo albo obejrzyj pierścienie Saturna z Tytana.</p>
+    <p xml:lang="pt">Também é possível visitar outros planetas no sistema solar: veja como o céu pareceu para os astronautas da Apollo ou como os anéis de Saturno parecem a partir de Titã.</p>
+    <p xml:lang="pt-BR">Também é possível visitar outros planetas no sistema solar: veja como o céu pareceu para os astronautas da Apollo ou como os anéis de Saturno parecem a partir de Titã.</p>
+    <p xml:lang="ro">Este de asemenea posibilă vizitarea altor planete din sistemul solar - se poate vedea cum vedeau cerul astronauţii în timpul misiunii Apollo sau cum arată inelele lui Saturn văzute de pe Titan.</p>
+    <p xml:lang="ru">Кроме того, можно посетить другие планеты в Солнечной системе - посмотрите на что было похоже небо на месте посадки астронавтов Аполлона, или как выглядят кольца Сатурна с Титана.</p>
+    <p xml:lang="sc">Est finas possibile visitare ateros pianetas de su sistema solare - abbaida ite han bisu sos astronautas de s'Apollo, o sos aneddos de Saturnu bisos de Titanu.</p>
+    <p xml:lang="sk">Navštíviť môžete iné planéty v Slnečnej sústave - pozrite sa, ako vyzeralo nebo pre kozmonautov programu Apollo alebo ako vyzerajú Saturnove prstence z jeho mesiaca Titanu.</p>
+    <p xml:lang="sl">Možno je tudi obiskati ostale planete v našem Osončju - oglejte si, kakšno je izgledalo nebo z vidika Apollovih astronavtov, ali kakšni izgledajo Saturnovi obroči s Titana.</p>
+    <p xml:lang="sq">Është e mundur të vizitohen planetë të tjerë në sistemin diellor - shihni se si u dukej qielli astronautëve të Apollos, ose se si duken unazat e Saturnit prej Titani.</p>
+    <p xml:lang="sr">Такође је могуће посетити остале планете Сунчевог система. Можете погледати како је небо изгледало астронаутима мисије Аполо, или како Сатурнови прстенови изгледају са Титана.</p>
+    <p xml:lang="sv">Det är också möjligt att besöka andra planeter i solsystemet - se hur himlen såg ut för astronauterna på Apollo, eller hur Saturnus ringar ser ut från Titan.</p>
+    <p xml:lang="ta">இந்த செயலி மூலம் நீங்கள் நமது சூரிய குடும்பத்தின் பிற கிரகங்களையும் பார்க்க இயலும் - அப்போலோ விண்கலத்தில் சென்ற விண்வெளி வீரர்களுக்கு, வானம் எவ்வாறு தோன்றியது என்பதை காணலாம், அல்லது சனியின் துணைக்கோளான டைடனில் இருந்து சனியின் வளையங்கள் எவ்வாறு தெரியும் என்பதையும் காணலாம்.</p>
+    <p xml:lang="te">సౌర కుటుంబం లోని ఇతర గ్రహాలకు వెళ్ళవచ్చు - అపోలో వ్యోమగాములకు భూమి ఎలా కనిపిస్తుందో చూడవచ్చు. టైటన్ నుండి చూస్తే శనిగ్రహపు వలయాలు ఎలా కనిపిస్తాయో చూడవచ్చు.</p>
+    <p xml:lang="th">เรายังสามารถย้ายไปอยู่บนดาวดวงอื่นในระบบสุริยะ ตัวอย่างเช่น ดูว่าท้องฟ้าเป็นอย่างไรในมุมมองของนักบินอวกาศในโครงการอะพอลโล หรือวงแหวนของดาวเสาร์มีลักษณะอย่างไรเมื่อมองจากดาวบริวารไททัน</p>
+    <p xml:lang="tr">Güneş sistemindeki diğer gezegenleri de ziyaret etmek mümkün - Apollo astronotlarının gökyüzünü nasıl gördüklerini görün ya da Satürn halkalarının Titan'dan nasıl göründüğüne bakın.</p>
+    <p xml:lang="uk">Також передбачено можливість «відвідання» інших планет Сонячної системи: ви зможете спостерігати небо таким, яким його бачили астронавти «Аполлонів», або побачити кільця Сатурна з Титана.</p>
+    <p xml:lang="vi">Nó thì cũng có thể dùng để viếng thăm các hành tinh khác trong hệ Mặt trời - Xem những gì trên bầu trời như các phi hành gia tàu Apollo từng thấy, hoặc những chiếc vòng của Thổ Tinh trông như thế nào khi nhìn từ Titan.</p>
+    <p xml:lang="zh">它也可以访问太阳系中的其他行星——比如从阿波罗号宇航员的视角看天空，或者从土卫六看土星光环。</p>
+    <p xml:lang="zh-CN">它也可以访问太阳系中的其他行星——比如从阿波罗号宇航员的视角看天空，或者从土卫六看土星光环。</p>
+    <p xml:lang="zh-HK">也可以探索太陽系其他行星。親歷阿波羅號太空人在月球上所看到的星空，或從土衛六觀看土星環。</p>
+    <p xml:lang="zh-TW">它也可以前往在太陽系其他星球 - 看看阿波羅計畫中的太空人在月球上所看到的星空, 還有在土衛六(Titan)上看土星環會是什麼光景。</p>
+  </description>
+  <url type="homepage">https://www.stellarium.org/</url>
+  <url type="bugtracker">https://github.com/Stellarium/stellarium/issues</url>
+  <url type="faq">https://github.com/Stellarium/stellarium/wiki/FAQ</url>
+  <url type="help">https://www.stellarium.org</url>
+  <url type="translate">https://www.transifex.com/stellarium/stellarium/</url>
+  <content_rating type="oars-1.1">
+    <content_attribute id="social-info">moderate</content_attribute>
+  </content_rating>
+  <categories>
+    <category>Education</category>
+    <category>Science</category>
+  </categories>
+  <releases>
+    <release date="2020-12-28" version="0.20.4"/>
+    <release date="2020-09-27" version="0.20.3"/>
+    <release date="2020-06-22" version="0.20.2"/>
+    <release date="2020-04-20" version="0.20.1"/>
+    <release date="2020-03-29" version="0.20.0"/>
+    <release date="2019-12-22" version="0.19.3"/>
+    <release date="2019-09-29" version="0.19.2"/>
+    <release date="2019-06-22" version="0.19.1"/>
+    <release date="2019-03-24" version="0.19.0"/>
+    <release date="2018-12-22" version="0.18.3"/>
+    <release date="2018-08-15" version="0.18.2"/>
+    <release date="2018-07-01" version="0.18.1"/>
+    <release date="2018-03-25" version="0.18.0"/>
+    <release date="2017-12-21" version="0.17.0"/>
+    <release date="2017-09-22" version="0.16.1"/>
+    <release date="2017-06-21" version="0.16.0"/>
+    <release date="2017-03-21" version="0.15.2"/>
+    <release date="2016-12-25" version="0.15.1"/>
+    <release date="2016-07-31" version="0.15.0"/>
+    <release date="2016-03-20" version="0.14.3"/>
+    <release date="2016-01-08" version="0.14.2"/>
+    <release date="2015-12-02" version="0.14.1"/>
+    <release date="2015-10-24" version="0.14.0"/>
+    <release date="2015-04-25" version="0.13.3"/>
+    <release date="2015-01-20" version="0.13.2"/>
+    <release date="2014-10-19" version="0.13.1"/>
+    <release date="2014-07-19" version="0.13.0"/>
+    <release date="2013-09-26" version="0.12.4"/>
+    <release date="2013-09-08" version="0.12.3"/>
+    <release date="2013-08-04" version="0.12.2"/>
+    <release date="2013-04-21" version="0.12.1"/>
+    <release date="2013-01-31" version="0.12.0"/>
+    <release date="2012-08-26" version="0.11.4"/>
+    <release date="2012-05-18" version="0.11.3"/>
+    <release date="2012-03-10" version="0.11.2"/>
+    <release date="2011-11-04" version="0.11.1"/>
+    <release date="2010-12-05" version="0.10.6"/>
+    <release date="2010-06-02" version="0.10.5"/>
+    <release date="2010-02-22" version="0.10.4"/>
+    <release date="2010-01-28" version="0.10.3"/>
+    <release date="2009-03-09" version="0.10.2"/>
+    <release date="2009-02-02" version="0.10.1"/>
+    <release date="2008-01-17" version="0.9.1"/>
+    <release date="2007-06-06" version="0.9.0"/>
+    <release date="2006-10-05" version="0.8.2"/>
+    <release date="2006-06-26" version="0.8.1"/>
+    <release date="2006-04-30" version="0.8.0"/>
+    <release date="2005-09-17" version="0.7.1"/>
+    <release date="2005-08-08" version="0.7.0"/>
+    <release date="2004-11-18" version="0.6.2"/>
+    <release date="2004-10-17" version="0.6.1"/>
+    <release date="2004-05-31" version="0.6.0"/>
+  </releases>
+  <screenshots>
+    <screenshot type="default">
+      <image>http://www.stellarium.org/img/screenshots/0.10-constellation-art-on.jpg</image>
+    </screenshot>
+    <screenshot>
+      <image>http://stellarium.org/img/screenshots/0.10-from-mars.jpg</image>
+    </screenshot>
+    <screenshot>
+      <image>http://stellarium.org/img/screenshots/0.10-planets.jpg</image>
+    </screenshot>
+    <screenshot>
+      <image>http://stellarium.org/img/screenshots/0.10-constellations.jpg</image>
+    </screenshot>
+    <screenshot>
+      <image>http://stellarium.org/img/screenshots/0.10-orion-nebula.jpg</image>
+    </screenshot>
+  </screenshots>
+  <provides>
+    <binary>stellarium</binary>
+  </provides>
+  <translation type="qt">stellarium</translation>
+  <translation type="qt">stellarium-planetary-features</translation>
+  <translation type="qt">stellarium-remotecontrol</translation>
+  <translation type="qt">stellarium-scripts</translation>
+  <translation type="qt">stellarium-skycultures</translation>
+  <update_contact>stellarium@googlegroups.com</update_contact>
+  <developer_name>Stellarium team</developer_name>
+  <developer_name xml:lang="af">Stellarium span</developer_name>
+  <developer_name xml:lang="ar">فريق ستيللاريوم</developer_name>
+  <developer_name xml:lang="be">Каманда Stellarium</developer_name>
+  <developer_name xml:lang="bg">Екипът на Stellarium</developer_name>
+  <developer_name xml:lang="bn">স্টেলারিয়াম দল</developer_name>
+  <developer_name xml:lang="ca">Equip de Stellarium</developer_name>
+  <developer_name xml:lang="ca-valencia">Equip de Stellarium</developer_name>
+  <developer_name xml:lang="cs">Tým Stellaria</developer_name>
+  <developer_name xml:lang="de">Stellarium-Team</developer_name>
+  <developer_name xml:lang="el">Η ομάδα του Stellarium</developer_name>
+  <developer_name xml:lang="en-GB">Stellarium team</developer_name>
+  <developer_name xml:lang="es">Equipo de Stellarium</developer_name>
+  <developer_name xml:lang="et">Stellariumi töörühm</developer_name>
+  <developer_name xml:lang="fa">تیم استلاریوم</developer_name>
+  <developer_name xml:lang="fi">Stellarium-tiimi</developer_name>
+  <developer_name xml:lang="fr">Équipe Stellarium</developer_name>
+  <developer_name xml:lang="gd">Sgioba Stellarium</developer_name>
+  <developer_name xml:lang="gl">Equipo de Stellarium</developer_name>
+  <developer_name xml:lang="he">צוות סטלריום</developer_name>
+  <developer_name xml:lang="hr">Stellarium tim</developer_name>
+  <developer_name xml:lang="hu">Stellarium csapat</developer_name>
+  <developer_name xml:lang="hy">Stellarium-ի թիմ</developer_name>
+  <developer_name xml:lang="id">Tim Stellarium</developer_name>
+  <developer_name xml:lang="is">Stellarium teymið</developer_name>
+  <developer_name xml:lang="it">team di Stellarium</developer_name>
+  <developer_name xml:lang="ja">ステラリウム・チーム</developer_name>
+  <developer_name xml:lang="jv">Pantha Stellarium</developer_name>
+  <developer_name xml:lang="kn">ಸ್ಟೆಲ್ಲೇರಿಯಂ ತಂಡ</developer_name>
+  <developer_name xml:lang="ko">스텔라리움 팀</developer_name>
+  <developer_name xml:lang="la">Manus Stellarii</developer_name>
+  <developer_name xml:lang="lb">Stellarium Team</developer_name>
+  <developer_name xml:lang="ms">Pasukan Stellarium</developer_name>
+  <developer_name xml:lang="nl">Stellarium team</developer_name>
+  <developer_name xml:lang="pl">Zespół Stellarium</developer_name>
+  <developer_name xml:lang="pt">Equipa do Stellarium</developer_name>
+  <developer_name xml:lang="pt-BR">Equipe Stellarium </developer_name>
+  <developer_name xml:lang="ro">Echipa Stellarium</developer_name>
+  <developer_name xml:lang="ru">Команда Stellarium</developer_name>
+  <developer_name xml:lang="sc">Iscuadra de Stellarium</developer_name>
+  <developer_name xml:lang="sk">Tím Stellaria</developer_name>
+  <developer_name xml:lang="sl">Ekipa Stellariuma</developer_name>
+  <developer_name xml:lang="sq">Ekipi i Stellarium-it</developer_name>
+  <developer_name xml:lang="sv">Stellariumteamet</developer_name>
+  <developer_name xml:lang="te">స్టెల్లేరియమ్ బృందం</developer_name>
+  <developer_name xml:lang="th">ทีมงาน Stellarium</developer_name>
+  <developer_name xml:lang="tr">Stellarium takımı</developer_name>
+  <developer_name xml:lang="uk">Команда Stellarium</developer_name>
+  <developer_name xml:lang="vi">Đội Stellarium</developer_name>
+  <developer_name xml:lang="zh">Stellarium团队</developer_name>
+  <developer_name xml:lang="zh-CN">Stellarium团队</developer_name>
+  <developer_name xml:lang="zh-HK">Stellarium團隊</developer_name>
+  <developer_name xml:lang="zh-TW">Stellarium 團隊</developer_name>
+</component>

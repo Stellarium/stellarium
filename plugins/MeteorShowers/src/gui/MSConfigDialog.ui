@@ -208,7 +208,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Restore default settings</string>
+            <string>Restore defaults</string>
            </property>
           </widget>
          </item>
@@ -485,14 +485,37 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_12">
           <item>
-           <layout class="QGridLayout" name="gridLayout">
-            <item row="1" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <widget class="QLabel" name="lUpdateFrequency">
+              <property name="text">
+               <string>Update frequency:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
              <widget class="QSpinBox" name="updateFrequency">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
               <property name="minimum">
                <number>1</number>
@@ -505,7 +528,31 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="1">
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="QLabel" name="lNextUpdate">
+              <property name="text">
+               <string>Next update:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
              <widget class="QDateTimeEdit" name="nextUpdate">
               <property name="enabled">
                <bool>false</bool>
@@ -513,22 +560,11 @@
               <property name="frame">
                <bool>false</bool>
               </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
               <property name="buttonSymbols">
                <enum>QAbstractSpinBox::NoButtons</enum>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="lUpdateFrequency">
-              <property name="text">
-               <string>Update frequency (hours):</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QLabel" name="lNextUpdate">
-              <property name="text">
-               <string>Next update:</string>
               </property>
              </widget>
             </item>

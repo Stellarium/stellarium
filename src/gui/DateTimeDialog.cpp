@@ -152,11 +152,6 @@ void DateTimeDialog::retranslate()
 	}
 }
 
-void DateTimeDialog::styleChanged()
-{
-	// Nothing for now
-}
-
 void DateTimeDialog::close()
 {
 	ui->dateTimeTab->setFocus();

@@ -39,8 +39,19 @@ ENDIF()
 
 FIND_PACKAGE(Qt5LinguistTools REQUIRED)
 GET_TARGET_PROPERTY(lupdate_executable Qt5::lupdate IMPORTED_LOCATION)
-GET_FILENAME_COMPONENT(qtbindirectory ${lupdate_executable} PATH)
-SET(lconvert_executable "${qtbindirectory}/lconvert")
+IF(EXISTS "${lupdate_executable}")
+     MESSAGE(STATUS "Found lupdate: ${lupdate_executable}")
+ELSE()
+     MESSAGE(STATUS "Could NOT find lupdate (missing: LUPDATE_EXECUTABLE)")
+ENDIF()
+GET_TARGET_PROPERTY(lconvert_executable Qt5::lconvert IMPORTED_LOCATION)
+IF(EXISTS "${lconvert_executable}")
+     MESSAGE(STATUS "Found lconvert: ${lconvert_executable}")
+ELSE()
+     MESSAGE(STATUS "Could NOT find lconvert (missing: LCONVERT_EXECUTABLE)")
+ENDIF()
+#GET_FILENAME_COMPONENT(qtbindirectory ${lupdate_executable} PATH)
+#SET(lconvert_executable "${qtbindirectory}/lconvert")
 
 # Creates translations directory if it doesn't exist
 file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/translations)
@@ -118,7 +129,7 @@ MACRO(GETTEXT_CREATE_TRANSLATIONS _domain _firstLang)
      # "translations" targets.
      ADD_CUSTOM_TARGET(translations-${_domain} ${_addToAll} DEPENDS ${_gmoFiles})
      ADD_DEPENDENCIES(translations translations-${_domain})
-    SET_TARGET_PROPERTIES(translations-${_domain} PROPERTIES FOLDER "po")
+     SET_TARGET_PROPERTIES(translations-${_domain} PROPERTIES FOLDER "po")
 
 ENDMACRO(GETTEXT_CREATE_TRANSLATIONS )
 

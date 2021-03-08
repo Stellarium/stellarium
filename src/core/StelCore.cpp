@@ -728,10 +728,10 @@ Vec3d StelCore::equinoxEquToAltAz(const Vec3d& v, RefractionMode refMode) const
 Vec3d StelCore::altAzToJ2000(const Vec3d& v, RefractionMode refMode) const
 {
 	if (refMode==RefractionOff || skyDrawer==Q_NULLPTR || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
-		return matEquinoxEquToJ2000*matAltAzToEquinoxEqu*v;
+		return matEquinoxEquDateToJ2000*matAltAzToEquinoxEqu*v;
 	Vec3d r(v);
 	skyDrawer->getRefraction().backward(r);
-	r.transfo4d(matEquinoxEquToJ2000*matAltAzToEquinoxEqu);
+	r.transfo4d(matEquinoxEquDateToJ2000*matAltAzToEquinoxEqu);
 	return r;
 }
 
@@ -758,7 +758,7 @@ Vec3d StelCore::supergalacticToJ2000(const Vec3d& v) const
 Vec3d StelCore::equinoxEquToJ2000(const Vec3d& v, RefractionMode refMode) const
 {
 	if (refMode==RefractionOff || skyDrawer==Q_NULLPTR || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
-		return matEquinoxEquToJ2000*v;
+		return matEquinoxEquDateToJ2000*v;
 	Vec3d r(v);
 	r.transfo4d(matEquinoxEquToAltAz);
 	skyDrawer->getRefraction().backward(r);
@@ -927,19 +927,17 @@ void StelCore::updateTransformMatrices()
 
 	// multiply static J2000 earth axis tilt (eclipticalJ2000<->equatorialJ2000)
 	// in effect, this matrix transforms from VSOP87 ecliptical J2000 to planet-based equatorial coordinates.
-	// For earth, matJ2000ToEquinoxEqu is the precession matrix.
-	// TODO: rename matEquinoxEquToJ2000 to matEquinoxEquDateToJ2000
-	matEquinoxEquToJ2000 = matVsop87ToJ2000 * position->getRotEquatorialToVsop87();
-	matJ2000ToEquinoxEqu = matEquinoxEquToJ2000.transpose();
+	// For earth, matJ2000ToEquinoxEqu is the precession matrix.	
+	matEquinoxEquDateToJ2000 = matVsop87ToJ2000 * position->getRotEquatorialToVsop87();
+	matJ2000ToEquinoxEqu = matEquinoxEquDateToJ2000.transpose();
 	matJ2000ToAltAz = matEquinoxEquToAltAz*matJ2000ToEquinoxEqu;
 	matAltAzToJ2000 = matJ2000ToAltAz.transpose();
 
 	matHeliocentricEclipticToEquinoxEqu = matJ2000ToEquinoxEqu * matVsop87ToJ2000 * Mat4d::translation(-position->getCenterVsop87Pos());
 
-	// These two next have to take into account the position of the observer on the earth/planet of observation.
-	// GZ tmp could be called matAltAzToVsop87
-	Mat4d tmp = matJ2000ToVsop87 * matEquinoxEquToJ2000 * matAltAzToEquinoxEqu;
-	//Mat4d tmp1 = matJ2000ToVsop87 * matEquinoxEquToJ2000;
+	// These two next have to take into account the position of the observer on the earth/planet of observation.	
+	Mat4d matAltAzToVsop87 = matJ2000ToVsop87 * matEquinoxEquDateToJ2000 * matAltAzToEquinoxEqu;
+	//Mat4d tmp1 = matJ2000ToVsop87 * matEquinoxEquDateToJ2000;
 
 	// Before 0.14 getDistanceFromCenter assumed spherical planets. Now uses rectangular coordinates for observer!
 	// In series 0.14 and 0.15, this was erroneous: offset by distance rho, but in the wrong direction.
@@ -951,11 +949,11 @@ void StelCore::updateTransformMatrices()
 		const double sigma=static_cast<double>(position->getCurrentLocation().latitude)*M_PI/180.0 - offset.v[2];
 		const double rho=offset.v[3];
 
-		matAltAzToHeliocentricEclipticJ2000 =  Mat4d::translation(position->getCenterVsop87Pos()) * tmp *
+		matAltAzToHeliocentricEclipticJ2000 =  Mat4d::translation(position->getCenterVsop87Pos()) * matAltAzToVsop87 *
 				Mat4d::translation(Vec3d(rho*sin(sigma), 0., rho*cos(sigma) ));
 
 		matHeliocentricEclipticJ2000ToAltAz =
-				Mat4d::translation(Vec3d(-rho*sin(sigma), 0., -rho*cos(sigma))) * tmp.transpose() *
+				Mat4d::translation(Vec3d(-rho*sin(sigma), 0., -rho*cos(sigma))) * matAltAzToVsop87.transpose() *
 				Mat4d::translation(-position->getCenterVsop87Pos());
 
 		// Here I tried to split tmp matrix. This does not work:
@@ -976,8 +974,8 @@ void StelCore::updateTransformMatrices()
 	}
 	else
 	{
-		matAltAzToHeliocentricEclipticJ2000 =  Mat4d::translation(position->getCenterVsop87Pos()) * tmp;
-		matHeliocentricEclipticJ2000ToAltAz =  tmp.transpose() * Mat4d::translation(-position->getCenterVsop87Pos());
+		matAltAzToHeliocentricEclipticJ2000 =  Mat4d::translation(position->getCenterVsop87Pos()) * matAltAzToVsop87;
+		matHeliocentricEclipticJ2000ToAltAz =  matAltAzToVsop87.transpose() * Mat4d::translation(-position->getCenterVsop87Pos());
 	}
 }
 

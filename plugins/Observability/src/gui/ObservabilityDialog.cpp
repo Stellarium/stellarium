@@ -112,7 +112,7 @@ void ObservabilityDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()),
-	        plugin, SLOT(resetConfiguration()));
+		this, SLOT(restoreDefaults()));
 	// TODO: The plug-in should emit a signal when settings are changed.
 	// This works, because slots are called in the order they were connected.
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()),
@@ -126,6 +126,17 @@ void ObservabilityDialog::createDialogContent()
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 
 	updateControls();
+}
+
+void ObservabilityDialog::restoreDefaults()
+{
+	if (askConfirmation())
+	{
+		qDebug() << "[Observability] restore defaults...";
+		GETSTELMODULE(Observability)->resetConfiguration();
+	}
+	else
+		qDebug() << "[Observability] restore defaults is canceled...";
 }
 
 void ObservabilityDialog::setAboutHtml(void)

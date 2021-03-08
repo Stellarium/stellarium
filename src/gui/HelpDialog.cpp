@@ -51,6 +51,8 @@
 #include "StelLogger.hpp"
 #include "StelStyle.hpp"
 #include "StelActionMgr.hpp"
+#include "StelMovementMgr.hpp"
+#include "StelModuleMgr.hpp"
 #include "StelJsonParser.hpp"
 
 HelpDialog::HelpDialog(QObject* parent)
@@ -108,9 +110,12 @@ void HelpDialog::createDialogContent()
 
 
 	// Help page
+	StelMovementMgr* mmgr = GETSTELMODULE(StelMovementMgr);
 	updateHelpText();
+	setKeyButtonState(mmgr->getFlagEnableMoveKeys());
 	connect(ui->editShortcutsButton, SIGNAL(clicked()), this, SLOT(showShortcutsWindow()));
 	connect(StelApp::getInstance().getStelActionManager(), SIGNAL(shortcutsChanged()), this, SLOT(updateHelpText()));
+	connect(mmgr, SIGNAL(flagEnableMoveKeysChanged(bool)), this, SLOT(setKeyButtonState(bool)));
 
 	// About page
 	updateAboutText();
@@ -129,6 +134,11 @@ void HelpDialog::createDialogContent()
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 }
 
+void HelpDialog::setKeyButtonState(bool state)
+{
+	ui->editShortcutsButton->setEnabled(state);
+}
+
 void HelpDialog::checkUpdates()
 {
 	if (networkManager->networkAccessible()==QNetworkAccessManager::Accessible)
@@ -144,9 +154,7 @@ void HelpDialog::checkUpdates()
 		QNetworkRequest request;
 		request.setUrl(API);
 		request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
-		#if QT_VERSION >= 0x050600
 		request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
-		#endif
 		downloadReply = networkManager->get(request);
 
 		updateState = HelpDialog::Updating;
@@ -399,12 +407,12 @@ void HelpDialog::updateAboutText(void) const
 		     << "Antoine Jacoutot" << "Sebastian Jennen" << "Matt Hughes" << "Sun Shuwei"
 		     << "Alexey Sokolov" << "Paul Krizak" << "ChrUnger" << "Minmin Gong" << "Andy Kirkham"
 		     << "Michael Dickens" << "Patrick (zero0cool0)" << "Martín Bernardi" << "Sebastian Garcia"
-		     << "Wolfgang Laun" << "Alexandros Kosiaris";
+		     << "Wolfgang Laun" << "Alexandros Kosiaris" << "Alexander Duytschaever";
 	contributors.sort();
 
 	// populate About tab
 	QString newHtml = "<h1>" + StelUtils::getApplicationName() + "</h1>";
-	// Note: this legal notice is not suitable for traslation
+	// Note: this legal notice is not suitable for translation
 	newHtml += QString("<h3>Copyright &copy; %1 Stellarium Developers</h3>").arg(COPYRIGHT_YEARS);
 	if (!message.isEmpty())
 		newHtml += "<p><strong>" + message + "</strong></p>";

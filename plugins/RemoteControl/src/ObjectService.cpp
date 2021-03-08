@@ -52,15 +52,13 @@ QStringList ObjectService::performSearch(const QString &text)
 	QString greekText = substituteGreek(text);
 
 	QStringList matches;
-	if(greekText != text) {
-		matches = objMgr->listMatchingObjects(text, 3, useStartOfWords, false);
-		matches += objMgr->listMatchingObjects(text, 3, useStartOfWords, true);
-		matches += objMgr->listMatchingObjects(greekText, (8 - matches.size()), useStartOfWords, false);
-	} else {
-		//no greek replaced, saves 1 call
-		matches = objMgr->listMatchingObjects(text, 5, useStartOfWords, false);
-		matches += objMgr->listMatchingObjects(text, 5, useStartOfWords, true);
+	if(greekText != text)
+	{
+		matches = objMgr->listMatchingObjects(text, 3, useStartOfWords);
+		matches += objMgr->listMatchingObjects(greekText, (8 - matches.size()), useStartOfWords);
 	}
+	else //no greek replaced, saves 1 call
+		matches = objMgr->listMatchingObjects(text, 5, useStartOfWords);
 
 	return matches;
 }

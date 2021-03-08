@@ -38,6 +38,7 @@
 #include <QKeyEvent>
 #include <QMouseEvent>
 #include <cmath>
+#include <stdexcept>
 
 //! This method is the one called automatically by the StelModuleMgr just
 //! after loading the dynamic library
@@ -151,7 +152,7 @@ void AngleMeasure::init()
 			toolbarButton = new StelButton(Q_NULLPTR,
 						       QPixmap(":/angleMeasure/bt_anglemeasure_on.png"),
 						       QPixmap(":/angleMeasure/bt_anglemeasure_off.png"),
-						       QPixmap(":/graphicGui/glow32x32.png"),
+						       QPixmap(":/graphicGui/miscGlow32x32.png"),
 						       "actionShow_Angle_Measure");
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		}

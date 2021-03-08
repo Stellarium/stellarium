@@ -41,6 +41,7 @@
 #include "StelTranslator.hpp"
 #include "StelProgressController.hpp"
 #include "StelUtils.hpp"
+#include "StelActionMgr.hpp"
 
 #include "external/qtcompress/qzipreader.h"
 
@@ -78,6 +79,11 @@ StelPluginInfo SatellitesStelPluginInterface::getPluginInfo() const
 	return info;
 }
 
+// WARNING! Update also the version number in resources/satellites.json,
+// otherwise the local copy of that file will be overwritten every time
+// Stellarium starts. (Less of a problem if it manages to get one update.)
+QString Satellites::SatellitesCatalogVersion = "0.12.0";
+
 Satellites::Satellites()
 	: satelliteListModel(Q_NULLPTR)
 	, toolbarButton(Q_NULLPTR)
@@ -92,7 +98,9 @@ Satellites::Satellites()
 	, autoAddEnabled(false)
 	, autoRemoveEnabled(false)
 	, updateFrequencyHours(0)
+	#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	, iridiumFlaresPredictionDepth(7)
+	#endif
 {
 	setObjectName("Satellites");
 	configDialog = new SatellitesDialog();
@@ -129,14 +137,14 @@ void Satellites::init()
 		// If no settings in the main config file, create with defaults
 		if (!conf->childGroups().contains("Satellites"))
 		{
-			//qDebug() << "Stellites: created section in config file.";
+			//qDebug() << "Satellites: created section in config file.";
 			restoreDefaultSettings();
 		}
 
 		// populate settings from main config file.
 		loadSettings();
 
-		// absolute file name for inner catalog of the satellites
+		// absolute file name for inner catalogue of the satellites
 		catalogPath = dataDir.absoluteFilePath("satellites.json");
 
 		// Load and find resources used in the plugin
@@ -147,7 +155,7 @@ void Satellites::init()
 		QString satGroup = N_("Satellites");
 		addAction("actionShow_Satellite_Hints", satGroup, N_("Satellite hints"), "flagHintsVisible", "Ctrl+Z");
 		addAction("actionShow_Satellite_Labels", satGroup, N_("Satellite labels"), "flagLabelsVisible", "Alt+Shift+Z");
-		addAction("actionShow_Satellite_ConfigDialog_Global", satGroup, N_("Satellites configuration window"), configDialog, "visible", "Alt+Z");
+		addAction("actionShow_Satellite_ConfigDialog_Global", satGroup, N_("Satellites configuration window"), configDialog, "visible", "Alt+Z");		
 
 		// Gui toolbar button
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -156,7 +164,7 @@ void Satellites::init()
 			toolbarButton = new StelButton(Q_NULLPTR,
 						       QPixmap(":/satellites/bt_satellites_on.png"),
 						       QPixmap(":/satellites/bt_satellites_off.png"),
-						       QPixmap(":/graphicGui/glow32x32.png"),
+						       QPixmap(":/graphicGui/miscGlow32x32.png"),
 						       "actionShow_Satellite_Hints");
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		}
@@ -167,10 +175,10 @@ void Satellites::init()
 		return;
 	}
 
-	// If the json file does not already exist, create it from the resource in the QT resource
+	// If the json file does not already exist, create it from the resource in the Qt resource
 	if(QFileInfo(catalogPath).exists())
 	{
-		if (!checkJsonFileFormat() || readCatalogVersion() != SATELLITES_PLUGIN_VERSION)
+		if (!checkJsonFileFormat() || readCatalogVersion() != SatellitesCatalogVersion)
 		{
 			displayMessage(q_("The old satellites.json file is no longer compatible - using default file"), "#bb0000");
 			restoreDefaultCatalog();
@@ -182,9 +190,9 @@ void Satellites::init()
 		restoreDefaultCatalog();
 	}
 
-	qDebug() << "[Satellites] loading catalog file:" << QDir::toNativeSeparators(catalogPath);
+	qDebug() << "[Satellites] loading catalogue file:" << QDir::toNativeSeparators(catalogPath);
 
-	// create satellites according to content os satellites.json file
+	// create satellites according to content of satellites.json file
 	loadCatalog();
 
 	// Set up download manager and the update schedule
@@ -205,16 +213,68 @@ void Satellites::init()
 	StelCore* core = StelApp::getInstance().getCore();
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateObserverLocation(StelLocation)));
 	connect(core, SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
-	
-	// let sat symbols stay on-screen even if highly unprecise over time 
-	//connect(core, SIGNAL(dateChangedForMonth()), this, SLOT(updateSatellitesVisibility()));
-	//connect(core, SIGNAL(dateChangedByYear()), this, SLOT(updateSatellitesVisibility()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(translateData()));
+
+	bindingGroups();
+}
+
+void Satellites::translateData()
+{
+	bindingGroups();
+	for (const auto& sat : satellites)
+	{
+		if (sat->initialized)
+			sat->recomputeEpochTLE();
+	}
 }
 
 void Satellites::updateSatellitesVisibility()
 {
 	if (getFlagHintsVisible())
 		setFlagHintsVisible(false);
+}
+
+void Satellites::bindingGroups()
+{
+	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
+	QStringList groups = getGroupIdList();
+	QString satGroup = N_("Satellites");
+	QString showSatGroup = q_("Show satellites from the group");
+	QString hideSatGroup = q_("Hide satellites from the group");
+	QStringList::const_iterator constIterator;
+	for (constIterator = groups.constBegin(); constIterator != groups.constEnd(); ++constIterator)
+	{
+		QString groupId = (*constIterator).toLocal8Bit().constData();
+		QString actionShowName = QString("actionShow_Satellite_Group_%1").arg(groupId);
+		QString actionShowDescription = QString("%1 \"%2\"").arg(showSatGroup, q_(groupId));
+		StelAction* actionShow = actionMgr->findAction(actionShowName);
+		if (actionShow!=Q_NULLPTR)
+			actionMgr->findAction(actionShowName)->setText(actionShowDescription);
+		else
+			addAction(actionShowName, satGroup, actionShowDescription, this, [=](){setSatGroupVisible(groupId, true);});
+
+		QString actionHideName = QString("actionHide_Satellite_Group_%1").arg(groupId);
+		QString actionHideDescription = QString("%1 \"%2\"").arg(hideSatGroup, q_(groupId));
+		StelAction* actionHide = actionMgr->findAction(actionHideName);
+		if (actionHide!=Q_NULLPTR)
+			actionMgr->findAction(actionHideName)->setText(actionHideDescription);
+		else
+			addAction(actionHideName, satGroup, actionHideDescription, this, [=](){setSatGroupVisible(groupId, false);});
+	}
+}
+
+void Satellites::setSatGroupVisible(const QString& groupId, bool visible)
+{
+	for (const auto& sat : satellites)
+	{
+		if (sat->initialized && sat->groups.toList().contains(groupId))
+		{
+			SatFlags flags = sat->getFlags();
+			visible ? flags |= SatDisplayed : flags &= ~SatDisplayed;
+			sat->setFlags(flags);
+		}
+	}
+	emit satGroupVisibleChanged();
 }
 
 bool Satellites::backupCatalog(bool deleteOriginal)
@@ -236,14 +296,14 @@ bool Satellites::backupCatalog(bool deleteOriginal)
 		{
 			if (!old.remove())
 			{
-				qWarning() << "[Satellites] WARNING: unable to remove old catalog file!";
+				qWarning() << "[Satellites] WARNING: unable to remove old catalogue file!";
 				return false;
 			}
 		}
 	}
 	else
 	{
-		qWarning() << "[Satellites] WARNING: failed to back up catalog file as"
+		qWarning() << "[Satellites] WARNING: failed to back up catalogue file as"
 			   << QDir::toNativeSeparators(backupPath);
 		return false;
 	}
@@ -378,7 +438,7 @@ StelObjectP Satellites::searchByNoradNumber(const QString &noradNumber) const
 	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
 		return Q_NULLPTR;
 	
-	// If the search string is a catalog number...
+	// If the search string is a catalogue number...
 	QRegExp regExp("^(NORAD)\\s*(\\d+)\\s*$");
 	if (regExp.exactMatch(noradNumber))
 	{
@@ -397,7 +457,7 @@ StelObjectP Satellites::searchByNoradNumber(const QString &noradNumber) const
 	return StelObjectP();
 }
 
-QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
+QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (!hintFader || maxNbItem <= 0)
@@ -424,30 +484,37 @@ QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbI
 			numberPrefix = numberString;
 	}
 
+	QStringList names;
 	for (const auto& sobj : satellites)
 	{
 		if (!sobj->initialized || !sobj->displayed)
-		{
 			continue;
-		}
 
-		QString name = inEnglish ? sobj->getEnglishName() : sobj->getNameI18n();
-		if (matchObjectName(name, objPrefix, useStartOfWords))
-		{
+		names.append(sobj->getNameI18n());
+		names.append(sobj->getEnglishName());
+		if (!numberPrefix.isEmpty() && sobj->getCatalogNumberString().startsWith(numberPrefix))
+			names.append(QString("NORAD %1").arg(sobj->getCatalogNumberString()));
+	}
+
+	QString fullMatch = "";
+	for (const auto& name : qAsConst(names))
+	{
+		if (!matchObjectName(name, objPrefix, useStartOfWords))
+			continue;
+
+		if (name==objPrefix)
+			fullMatch = name;
+		else
 			result.append(name);
-		}
-		else if (!numberPrefix.isEmpty() && sobj->getCatalogNumberString().startsWith(numberPrefix))
-		{
-			result.append(QString("NORAD %1").arg(sobj->getCatalogNumberString()));
-		}
 
 		if (result.size() >= maxNbItem)
-		{
 			break;
-		}
 	}
 
 	result.sort();
+	if (!fullMatch.isEmpty())
+		result.prepend(fullMatch);
+
 	return result;
 }
 
@@ -513,6 +580,7 @@ void Satellites::restoreDefaultSettings()
 	conf->setValue("auto_remove_enabled", true);
 	conf->setValue("hint_color", "0.0,0.4,0.6");
 	conf->setValue("invisible_satellite_color", "0.2,0.2,0.2");
+	conf->setValue("transit_satellite_color", "0.0,0.0,0.0");
 	conf->setValue("hint_font_size", 10);
 	conf->setValue("update_frequency_hours", 72);
 	conf->setValue("orbit_line_flag", false);
@@ -560,8 +628,8 @@ void Satellites::restoreDefaultSettings()
 	     << "http://www.celestrak.com/NORAD/elements/geodetic.txt"
 	     << "http://www.celestrak.com/NORAD/elements/radar.txt"
 	     << "http://www.celestrak.com/NORAD/elements/cubesat.txt"
-	     << "http://www.celestrak.com/NORAD/elements/other.txt"
-	     << "1,http://www.celestrak.com/NORAD/elements/starlink.txt"
+	     << "http://www.celestrak.com/NORAD/elements/other.txt"	     
+	     << "1,http://www.celestrak.com/NORAD/elements/supplemental/starlink.txt"
 	     << "https://www.amsat.org/amsat/ftp/keps/current/nasabare.txt"
 	     << "http://www.celestrak.com/NORAD/elements/oneweb.txt"
 	     << "http://www.celestrak.com/NORAD/elements/planet.txt"
@@ -585,12 +653,12 @@ void Satellites::restoreDefaultCatalog()
 	{
 		qDebug() << "[Satellites] copied default satellites.json to " << QDir::toNativeSeparators(catalogPath);
 		// The resource is read only, and the new file inherits this...  make sure the new file
-		// is writable by the Stellarium process so that updates can be done.
+		// is writeable by the Stellarium process so that updates can be done.
 		QFile dest(catalogPath);
 		dest.setPermissions(dest.permissions() | QFile::WriteOwner);
 
 		// Make sure that in the case where an online update has previously been done, but
-		// the json file has been manually removed, that an update is schreduled in a timely
+		// the json file has been manually removed, that an update is scheduled in a timely
 		// manner
 		StelApp::getInstance().getSettings()->remove("Satellites/last_update");
 		lastUpdate = QDateTime::fromString("2015-05-01T12:00:00", Qt::ISODate);
@@ -605,7 +673,7 @@ void Satellites::loadSettings()
 	// Load update sources list...
 	updateUrls.clear();
 	
-	// Backward compatibility: try to detect and read an old-stlye array.
+	// Backward compatibility: try to detect and read an old-style array.
 	// TODO: Assume that the user hasn't modified their conf in a stupid way?
 //	if (conf->contains("tle_url0")) // This can skip some operations...
 	QRegExp keyRE("^tle_url\\d+$");
@@ -618,7 +686,7 @@ void Satellites::loadSettings()
 			conf->remove(key); // Delete old-style keys
 			if (url.isEmpty())
 				continue;
-			// NOTE: This URL is also hardcoded in restoreDefaultSettings().
+			// NOTE: This URL is also hard-coded in restoreDefaultSettings().
 			if (url == "http://celestrak.com/NORAD/elements/visual.txt")
 				url.prepend("1,"); // Same as in the new default configuration
 			urls << url;
@@ -659,19 +727,20 @@ void Satellites::loadSettings()
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
 	autoAddEnabled = conf->value("auto_add_enabled", true).toBool();
 	autoRemoveEnabled = conf->value("auto_remove_enabled", true).toBool();
+#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	iridiumFlaresPredictionDepth = conf->value("flares_prediction_depth", 7).toInt();
+#endif
 
 	// Get a font for labels
 	labelFont.setPixelSize(conf->value("hint_font_size", 10).toInt());
 
 	// orbit drawing params
 	Satellite::orbitLinesFlag = conf->value("orbit_line_flag", false).toBool();
-	Satellite::orbitLineSegments = conf->value("orbit_line_segments", 90).toInt();
+	Satellite::orbitLineSegments = conf->value("orbit_line_segments", 180).toInt();
 	Satellite::orbitLineFadeSegments = conf->value("orbit_fade_segments", 5).toInt();
-	Satellite::orbitLineSegmentDuration = conf->value("orbit_segment_duration", 20).toInt();
-
-	Satellite::invisibleSatelliteColor = Vec3f(conf->value("invisible_satellite_color", "0.2,0.2,0.2").toString());
-
+	Satellite::orbitLineSegmentDuration = conf->value("orbit_segment_duration", 5).toInt();
+	setInvisibleSatelliteColor(Vec3f(conf->value("invisible_satellite_color", "0.2,0.2,0.2").toString()));
+	setTransitSatelliteColor(Vec3f(conf->value("transit_satellite_color", "0.0,0.0,0.0").toString()));
 	Satellite::timeRateLimit = conf->value("time_rate_limit", 1.0).toDouble();
 
 	// iconic mode
@@ -693,7 +762,9 @@ void Satellites::saveSettingsToConfig()
 	conf->setValue("updates_enabled", updatesEnabled );
 	conf->setValue("auto_add_enabled", autoAddEnabled);
 	conf->setValue("auto_remove_enabled", autoRemoveEnabled);
+#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	conf->setValue("flares_prediction_depth", iridiumFlaresPredictionDepth);
+#endif
 
 	// Get a font for labels
 	conf->setValue("hint_font_size", labelFont.pixelSize());
@@ -712,6 +783,28 @@ void Satellites::saveSettingsToConfig()
 	
 	// Update sources...
 	saveTleSources(updateUrls);
+}
+
+Vec3f Satellites::getInvisibleSatelliteColor() const
+{
+	return Satellite::invisibleSatelliteColor;
+}
+
+void Satellites::setInvisibleSatelliteColor(const Vec3f &c)
+{
+	Satellite::invisibleSatelliteColor = c;
+	emit invisibleSatelliteColorChanged(c);
+}
+
+Vec3f Satellites::getTransitSatelliteColor() const
+{
+	return Satellite::transitSatelliteColor;
+}
+
+void Satellites::setTransitSatelliteColor(const Vec3f &c)
+{
+	Satellite::transitSatelliteColor = c;
+	emit transitSatelliteColorChanged(c);
 }
 
 void Satellites::loadCatalog()
@@ -741,17 +834,22 @@ const QString Satellites::readCatalogVersion()
 		return jsonVersion;
 	}
 
-	if (map.contains("creator"))
+	if (map.contains("version"))
+	{
+		QString version = map.value("version").toString();
+		QRegExp vRx("(\\d+\\.\\d+\\.\\d+)");
+		if (vRx.exactMatch(version))
+			jsonVersion = vRx.cap(1);
+	}
+	else if (map.contains("creator"))
 	{
 		QString creator = map.value("creator").toString();
 		QRegExp vRx(".*(\\d+\\.\\d+\\.\\d+).*");
 		if (vRx.exactMatch(creator))
-		{
 			jsonVersion = vRx.cap(1);
-		}
 	}
 
-	//qDebug() << "[Satellites] catalog version from file:" << jsonVersion;
+	//qDebug() << "[Satellites] catalogue version from file:" << jsonVersion;
 	return jsonVersion;
 }
 
@@ -806,7 +904,6 @@ QVariantMap Satellites::loadDataMap(QString path)
 
 void Satellites::setDataMap(const QVariantMap& map)
 {
-	int numReadOk = 0;
 	QVariantList defaultHintColorMap;
 	defaultHintColorMap << defaultHintColor[0] << defaultHintColor[1] << defaultHintColor[2];
 
@@ -847,8 +944,7 @@ void Satellites::setDataMap(const QVariantMap& map)
 		if (sat->initialized)
 		{
 			satellites.append(sat);
-			groups.unite(sat->groups);
-			numReadOk++;
+			groups.unite(sat->groups);			
 		}
 	}
 	std::sort(satellites.begin(), satellites.end());
@@ -865,7 +961,11 @@ QVariantMap Satellites::createDataMap(void)
 		   << Satellite::roundToDp(defaultHintColor[1],3)
 		   << Satellite::roundToDp(defaultHintColor[2],3);
 
-	map["creator"] = QString("Satellites plugin version %1 (updated)").arg(SATELLITES_PLUGIN_VERSION);
+	// TODO: Since v0.21 uncomment this line:
+	// map["creator"] = QString("Satellites plugin version %1").arg(SATELLITES_PLUGIN_VERSION);
+	// and remove this line:
+	map["creator"] = QString("Satellites plugin version %1").arg(SatellitesCatalogVersion);
+	map["version"] = QString("%1").arg(SatellitesCatalogVersion);
 	map["hintColor"] = defHintCol;
 	map["shortName"] = "satellite orbital data";
 	QVariantMap sats;
@@ -1027,10 +1127,7 @@ bool Satellites::add(const TleData& tleData)
 			satGroups.append("communications");
 		}
 		if (tleData.name.startsWith("FLOCK") || tleData.name.startsWith("SKYSAT"))
-		{
-			satGroups.append("planet");
 			satGroups.append("earth resources");
-		}
 		if (tleData.name.startsWith("ONEWEB"))
 		{
 			satGroups.append("oneweb");
@@ -1065,15 +1162,17 @@ bool Satellites::add(const TleData& tleData)
 			satGroups.append("galileo");
 			satGroups.append("navigation");
 		}
-		if (tleData.name.startsWith("INTELSAT") || tleData.name.startsWith("GLOBALSTAR") || tleData.name.startsWith("ORBCOMM") || tleData.name.startsWith("GORIZONT") || tleData.name.startsWith("RADUGA") || tleData.name.startsWith("MOLNIYA"))
+		if (tleData.name.startsWith("INTELSAT") || tleData.name.startsWith("GLOBALSTAR") || tleData.name.startsWith("ORBCOMM") || tleData.name.startsWith("GORIZONT") || tleData.name.startsWith("RADUGA") || tleData.name.startsWith("MOLNIYA") || tleData.name.startsWith("DIRECTV") || tleData.name.startsWith("CHINASAT") || tleData.name.startsWith("YAMAL"))
 		{
 			QString satName = tleData.name.split(" ").at(0).toLower();
 			if (satName.contains("-"))
 				satName = satName.split("-").at(0);
 			satGroups.append(satName);
 			satGroups.append("communications");
-			if (satName.startsWith("INTELSAT") || satName.startsWith("RADUGA") || satName.startsWith("GORIZONT"))
+			if (satName.startsWith("INTELSAT") || satName.startsWith("RADUGA") || satName.startsWith("GORIZONT") || satName.startsWith("DIRECTV") || satName.startsWith("CHINASAT") || satName.startsWith("YAMAL"))
 				satGroups.append("geostationary");
+			if (satName.startsWith("INTELSAT") || satName.startsWith("DIRECTV") || satName.startsWith("YAMAL"))
+				satGroups.append("tv");
 		}
 		if (tleData.name.contains(" DEB"))
 			satGroups.append("debris");
@@ -1272,6 +1371,7 @@ void Satellites::setFlagHintsVisible(bool b)
 		hintFader = b;
 		emit settingsChanged(); // GZ IS THIS REQUIRED/USEFUL??
 		emit flagHintsVisibleChanged(b);
+		emit StelApp::getInstance().getCore()->updateSearchLists();
 	}
 }
 
@@ -1362,7 +1462,7 @@ void Satellites::updateFromOnlineSources()
 
 	// Setting lastUpdate should be done only when the update is finished. -BM
 
-	// TODO: Perhaps tie the emptyness of updateUrls to updatesEnabled... --BM
+	// TODO: Perhaps tie the emptiness of updateUrls to updatesEnabled... --BM
 	if (updateUrls.isEmpty())
 	{
 		qWarning() << "[Satellites] update failed."
@@ -1396,7 +1496,7 @@ void Satellites::updateFromOnlineSources()
 		source.addNew = false;
 		if (url.startsWith("1,"))
 		{
-			// Also prevents inconsistent behavior if the user toggles the flag
+			// Also prevents inconsistent behaviour if the user toggles the flag
 			// while an update is in progress.
 			source.addNew = autoAddEnabled;
 			url.remove(0, 2);
@@ -1767,7 +1867,7 @@ void Satellites::parseTleFile(QFile& openFile,
 				}
 			}
 
-			//TODO: We need to think of some kind of ecaping these
+			//TODO: We need to think of some kind of escaping these
 			//characters in the JSON parser. --BM
 			line.replace(QRegExp("\\s*\\[([^\\]])*\\]\\s*$"),"");  // remove "status code" from name
 			lastData.name = line;
@@ -1780,7 +1880,7 @@ void Satellites::parseTleFile(QFile& openFile,
 			else if (QRegExp("^2 .*").exactMatch(line))
 			{
 				lastData.second = line;
-				// The Satellite Catalog Number is the second number
+				// The Satellite Catalogue Number is the second number
 				// on the second line.
 				QString id = getSatIdFromLine2(line);
 				if (id.isEmpty()) {
@@ -1812,7 +1912,11 @@ void Satellites::parseTleFile(QFile& openFile,
 
 QString Satellites::getSatIdFromLine2(const QString& line)
 {
+	#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+	QString id = line.split(' ',  Qt::SkipEmptyParts).at(1).trimmed();
+	#else
 	QString id = line.split(' ',  QString::SkipEmptyParts).at(1).trimmed();
+	#endif
 	if (!id.isEmpty())
 	{
 		// Strip any leading zeros as they should be unique ints as strings.
@@ -1828,29 +1932,33 @@ void Satellites::loadExtraData()
 	// 2) http://www.prismnet.com/~mmccants/tles/intrmagdef.html
 	QFile qsmFile(":/satellites/qs.mag");	
 	qsMagList.clear();	
-	qsmFile.open(QFile::ReadOnly);
-	while (!qsmFile.atEnd())
+	if (qsmFile.open(QFile::ReadOnly))
 	{
-		QString line = QString(qsmFile.readLine());
-		int id   = line.mid(0,5).trimmed().toInt();
-		QString smag = line.mid(33,4).trimmed();		
-		if (!smag.isEmpty())
-			qsMagList.insert(id, smag.toDouble());		
+		while (!qsmFile.atEnd())
+		{
+			QString line = QString(qsmFile.readLine());
+			int id   = line.mid(0,5).trimmed().toInt();
+			QString smag = line.mid(33,4).trimmed();
+			if (!smag.isEmpty())
+				qsMagList.insert(id, smag.toDouble());
+		}
+		qsmFile.close();
 	}
-	qsmFile.close();
 
 	QFile rcsFile(":/satellites/rcs");
 	rcsList.clear();
-	rcsFile.open(QFile::ReadOnly);
-	while (!rcsFile.atEnd())
+	if (rcsFile.open(QFile::ReadOnly))
 	{
-		QString line = QString(rcsFile.readLine());
-		int id   = line.mid(0,5).trimmed().toInt();
-		QString srcs = line.mid(5,5).trimmed();
-		if (!srcs.isEmpty())
-			rcsList.insert(id, srcs.toDouble());
+		while (!rcsFile.atEnd())
+		{
+			QString line = QString(rcsFile.readLine());
+			int id   = line.mid(0,5).trimmed().toInt();
+			QString srcs = line.mid(5,5).trimmed();
+			if (!srcs.isEmpty())
+				rcsList.insert(id, srcs.toDouble());
+		}
+		rcsFile.close();
 	}
-	rcsFile.close();
 }
 
 void Satellites::update(double deltaTime)
@@ -1926,13 +2034,13 @@ void Satellites::drawPointer(StelCore* core, StelPainter& painter)
 		painter.setBlending(true);
 
 		// Size on screen
-		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
-		size += 12.f + 3.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
+		double size = obj->getAngularSize(core)*M_PI/180.*static_cast<double>(prj->getPixelPerRadAtCenter());
+		size += 12. + 3.*std::sin(2. * StelApp::getInstance().getTotalRunTime());
 		// size+=20.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
-		painter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]-size/2, 20, 90);
-		painter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]+size/2, 20, 0);
-		painter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]+size/2, 20, -90);
-		painter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]-size/2, 20, -180);
+		painter.drawSprite2dMode(static_cast<float>(screenpos[0]-size/2), static_cast<float>(screenpos[1]-size/2), 20, 90);
+		painter.drawSprite2dMode(static_cast<float>(screenpos[0]-size/2), static_cast<float>(screenpos[1]+size/2), 20, 0);
+		painter.drawSprite2dMode(static_cast<float>(screenpos[0]+size/2), static_cast<float>(screenpos[1]+size/2), 20, -90);
+		painter.drawSprite2dMode(static_cast<float>(screenpos[0]+size/2), static_cast<float>(screenpos[1]-size/2), 20, -180);
 	}
 }
 
@@ -1975,6 +2083,7 @@ bool Satellites::isValidRangeDates(const StelCore *core) const
 		return true;
 }
 
+#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 #ifdef _OLD_IRIDIUM_PREDICTIONS
 IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 {
@@ -2185,6 +2294,8 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 	return predictions;
 }
 #endif
+// close SATELLITES_PLUGIN_IRIDIUM
+#endif
 
 void Satellites::translations()
 {
@@ -2221,9 +2332,7 @@ void Satellites::translations()
 	// TRANSLATORS: Satellite group: Satellites belonging to the Iridium NEXT constellation (Iridium is a proper name)
 	N_("iridium next");
 	// TRANSLATORS: Satellite group: Satellites belonging to the Starlink constellation (Starlink is a proper name)
-	N_("starlink");
-	// TRANSLATORS: Satellite group: Satellites belonging to the Planet constellation (FLOCK and SKYSAT satellites)
-	N_("planet");
+	N_("starlink");	
 	// TRANSLATORS: Satellite group: Satellites belonging to the Spire constellation (LEMUR satellites)
 	N_("spire");
 	// TRANSLATORS: Satellite group: Satellites belonging to the OneWeb constellation (OneWeb is a proper name)
@@ -2254,6 +2363,12 @@ void Satellites::translations()
 	N_("crewed");
 	// TRANSLATORS: Satellite group: Satellites of ISS resupply missions
 	N_("resupply");
+	// TRANSLATORS: Satellite group: are known to broadcast TV signals
+	N_("tv");
+	// TRANSLATORS: Satellite group: military satellites
+	N_("military");
+	// TRANSLATORS: Satellite group: geodetic satellites
+	N_("geodetic");
 
 	// Satellite descriptions - bright and/or famous objects
 	// Just A FEW objects please! (I'm looking at you, Alex!)
@@ -2299,6 +2414,12 @@ void Satellites::translations()
 	N_("INTEGRAL");
 	// TRANSLATORS: China's first space station name
 	N_("TIANGONG 1");
+
+	// Satellites visibility
+	N_("The satellite and the observer are in sunlight");
+	N_("The satellite is visible");
+	N_("The satellite is eclipsed");
+	N_("The satellite is not visible");
 
 #endif
 }

@@ -85,7 +85,7 @@ void EquationOfTime::init()
 	StelApp &app = StelApp::getInstance();
 	if (!conf->childGroups().contains("EquationOfTime"))
 	{
-		qDebug() << "EquationOfTime: no EquationOfTime section exists in main config file - creating with defaults";
+		qDebug() << "[EquationOfTime] no EquationOfTime section exists in main config file - creating with defaults";
 		restoreDefaultConfigIni();
 	}
 
@@ -117,6 +117,9 @@ void EquationOfTime::draw(StelCore *core)
 		return;
 
 	StelPainter sPainter(core->getProjection2d());
+	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+	float ppx = static_cast<float>(params.devicePixelsPerPixel);
+
 	sPainter.setColor(textColor[0], textColor[1], textColor[2], 1.f);
 	font.setPixelSize(getFontSize());
 	sPainter.setFont(font);
@@ -141,7 +144,7 @@ void EquationOfTime::draw(StelCore *core)
 	QFontMetrics fm(font);
 	QSize fs = fm.size(Qt::TextSingleLine, timeText);	
 
-	sPainter.drawText(gui->getSkyGui()->getSkyGuiWidth()/2 - fs.width()/2, gui->getSkyGui()->getSkyGuiHeight() - fs.height()*1.5, timeText);
+	sPainter.drawText(gui->getSkyGui()->getSkyGuiWidth()*ppx/2 - fs.width()*ppx/2, gui->getSkyGui()->getSkyGuiHeight()*ppx - fs.height()*ppx*1.5, timeText);
 
 	//qDebug() << timeText;
 }
@@ -180,7 +183,7 @@ void EquationOfTime::restoreDefaultConfigIni(void)
 	conf->setValue("flag_use_ms_format", true);
 	conf->setValue("flag_use_inverted_value", false);
 	conf->setValue("flag_show_button", true);
-	conf->setValue("text_color", "0,0.5,1");
+	conf->setValue("text_color", "0.0,0.5,1.0");
 	conf->setValue("font_size", 20);
 
 	conf->endGroup();
@@ -192,8 +195,8 @@ void EquationOfTime::readSettingsFromConfig(void)
 
 	setFlagEnableAtStartup(conf->value("enable_at_startup", false).toBool());
 	setFlagMsFormat(conf->value("flag_use_ms_format", true).toBool());
-	setFlagInvertedValue(conf->value("flag_use_inverted_value", false).toBool());
-	textColor = Vec3f(conf->value("text_color", "0,0.5,1").toString());
+	setFlagInvertedValue(conf->value("flag_use_inverted_value", false).toBool());	
+	setTextColor(Vec3f(conf->value("text_color", "0.0,0.5,1.0").toString()));
 	setFontSize(conf->value("font_size", 20).toInt());
 	flagShowEOTButton = conf->value("flag_show_button", true).toBool();
 
@@ -208,7 +211,7 @@ void EquationOfTime::saveSettingsToConfig(void) const
 	conf->setValue("flag_use_ms_format", getFlagMsFormat());
 	conf->setValue("flag_use_inverted_value", getFlagInvertedValue());
 	conf->setValue("flag_show_button", getFlagShowEOTButton());
-	//conf->setValue("text_color", "0,0.5,1");
+	conf->setValue("text_color", getTextColor().toStr());
 	conf->setValue("font_size", getFontSize());
 
 	conf->endGroup();
@@ -231,7 +234,7 @@ void EquationOfTime::setFlagShowEOTButton(bool b)
 			toolbarButton = new StelButton(Q_NULLPTR,
 						       QPixmap(":/EquationOfTime/bt_EquationOfTime_On.png"),
 						       QPixmap(":/EquationOfTime/bt_EquationOfTime_Off.png"),
-						       QPixmap(":/graphicGui/glow32x32.png"),
+						       QPixmap(":/graphicGui/miscGlow32x32.png"),
 						       "actionShow_EquationOfTime");
 		}
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");

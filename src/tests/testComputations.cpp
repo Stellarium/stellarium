@@ -704,6 +704,61 @@ void TestComputations::testIntMod()
 	}
 }
 
+void TestComputations::testIntDiv()
+{
+	QVariantList data;
+
+	data << 1 << 1 << 1;
+	data << 1 << 2 << 0;
+	data << 1 << 3 << 0;
+	data << 4 << 2 << 2;
+	data << 9 << 5 << 1;
+	data << -2 << 5 << 0;
+	data << -9 << 5 << -1; // unfortunately...
+
+	while (data.count() >= 3)
+	{
+		int a = data.takeFirst().toInt();
+		int b = data.takeFirst().toInt();
+		int eR = data.takeFirst().toInt();
+		int r = a/b;
+
+		QVERIFY2(r==eR, qPrintable(QString("Integer division %1 / %2 = %3 (expected %4)")
+					   .arg(a)
+					   .arg(b)
+					   .arg(r)
+					   .arg(eR)));
+	}
+}
+
+void TestComputations::testIntFloorDiv()
+{
+	QVariantList data;
+
+	data << 1 << 1 << 1;
+	data << 1 << 2 << 0;
+	data << 1 << 3 << 0;
+	data << 4 << 2 << 2;
+	data << 9 << 5 << 1;
+	data << -2 << 5 << -1; // should be next lower integer
+	data << -9 << 5 << -2;
+	data << -9 << -5 << 1;
+
+	while (data.count() >= 3)
+	{
+		int a = data.takeFirst().toInt();
+		int b = data.takeFirst().toInt();
+		int eR = data.takeFirst().toInt();
+		int r = StelUtils::intFloorDiv(a, b);
+
+		QVERIFY2(r==eR, qPrintable(QString("Integer division %1 / %2 = %3 (expected %4)")
+					   .arg(a)
+					   .arg(b)
+					   .arg(r)
+					   .arg(eR)));
+	}
+}
+
 void TestComputations::testFloatMod()
 {
 	QVariantList data;
@@ -852,4 +907,22 @@ void TestComputations::testSign()
 					   .arg(r)
 					   .arg(e)));
 	}
+}
+
+void TestComputations::testInterpolation()
+{
+	QVERIFY(fuzzyEquals(StelUtils::interpolate3(-0.2, 1., 2., 3.), 1.8));
+	QVERIFY(fuzzyEquals(StelUtils::interpolate3( 0.2, 1., 2., 3.), 2.2));
+	const double i3=StelUtils::interpolate3(4.35/24., .884226, .877366, .870531);  // Meeus 1998, Ex.3a
+	QVERIFY2(abs(i3-.8761253) < 0.000001,
+		 qPrintable(QString("Interpol3 returned %1").arg(QString::number(i3, 'g', 7))));
+	const double i5=StelUtils::interpolate5(0.2777778,                             // Meeus 1998, Ex.3e
+					  StelUtils::dmsToRad(0, 54, 36.125),
+					  StelUtils::dmsToRad(0, 54, 24.606),
+					  StelUtils::dmsToRad(0, 54, 15.486),
+					  StelUtils::dmsToRad(0, 54, 08.694),
+					  StelUtils::dmsToRad(0, 54, 04.133));
+	double res5=StelUtils::dmsToRad(0, 54, 13.369);
+	QVERIFY2(abs(i5-res5)<0.000001,
+		 qPrintable(QString("Interpol5 returned %1, not %2").arg(QString::number(i5), 'g', 7).arg(QString::number(res5), 'g', 7)));
 }

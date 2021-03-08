@@ -27,6 +27,27 @@
 #include <QTimeLine>
 #include <QTimer>
 #include <QCursor>
+#include <QEasingCurve>
+
+//! @class Smoother
+//! Compute smooth animation for a given float value.
+//! Used to smooth out the fov animations.
+class Smoother
+{
+public:
+	double getValue() const;
+	double getAim() const { return aim; }
+	void setTarget(double start, double aim, double duration);
+	void update(double dt);
+	bool finished() const;
+
+private:
+	QEasingCurve easingCurve;
+	double start;
+	double aim;
+	double duration;
+	double progress;
+};
 
 //! @class StelMovementMgr
 //! Manages the head movements and zoom operations.
@@ -64,6 +85,14 @@ class StelMovementMgr : public StelModule
 		   READ getFlagEnableMouseNavigation
 		   WRITE setFlagEnableMouseNavigation
 		   NOTIFY flagEnableMouseNavigationChanged)
+	Q_PROPERTY(bool flagEnableMoveKeys
+		   READ getFlagEnableMoveKeys
+		   WRITE setFlagEnableMoveKeys
+		   NOTIFY flagEnableMoveKeysChanged)
+	Q_PROPERTY(bool flagEnableZoomKeys
+		   READ getFlagEnableZoomKeys
+		   WRITE setFlagEnableZoomKeys
+		   NOTIFY flagEnableZoomKeysChanged)
 public:
 	//! Possible mount modes defining the reference frame in which head movements occur.
 	//! MountGalactic and MountSupergalactic is currently only available via scripting API: core.clear("galactic") and core.clear("supergalactic")
@@ -135,6 +164,8 @@ public:
 	Vec3d j2000ToMountFrame(const Vec3d& v) const;
 	Vec3d mountFrameToJ2000(const Vec3d& v) const;
 
+	void moveToObject(const StelObjectP& target, float moveDuration = 1., ZoomingMode zooming = ZoomNone);
+
 public slots:
 	// UNUSED!
 	//! Toggle current mount mode between equatorial and altazimuthal
@@ -173,12 +204,12 @@ public slots:
 	//! Get whether keys can control zoom
 	bool getFlagEnableZoomKeys() const {return flagEnableZoomKeys;}
 	//! Set whether keys can control zoom
-	void setFlagEnableZoomKeys(bool b) {flagEnableZoomKeys=b;}
+	void setFlagEnableZoomKeys(bool b) {flagEnableZoomKeys=b; emit flagEnableZoomKeysChanged(b);}
 
 	//! Get whether keys can control movement
 	bool getFlagEnableMoveKeys() const {return flagEnableMoveKeys;}
 	//! Set whether keys can control movement
-	void setFlagEnableMoveKeys(bool b) {flagEnableMoveKeys=b;}
+	void setFlagEnableMoveKeys(bool b) {flagEnableMoveKeys=b; emit flagEnableMoveKeysChanged(b); }
 
 	//! Get whether being at the edge of the screen activates movement
 	bool getFlagEnableMoveAtScreenEdge() const {return flagEnableMoveAtScreenEdge;}
@@ -205,8 +236,12 @@ public slots:
 	//! StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	//! mvmgr->moveToJ2000(pos, mvmgr->mountFrameToJ2000(Vec3d(0., 0., 1.)), mvmgr->getAutoMoveDuration());
 	//! @endcode
+	//! @note core::moveToRaDecJ2000 provides a simpler signature for the same function.
+	//! @note Objects of class Vec3d are 3-dimensional vectors in a rectangular coordinate system. For
+	//!       J2000 positions, the x-axis points to 0h,0°, the y-axis to 6h,0° and the z-axis points to the
+	//!       celestial pole. You may use a constructor defining three components (x,y,z) or the
+	//!       format with just two angles, e.g., Vec3d("0h","0d").
 	void moveToJ2000(const Vec3d& aim, const Vec3d &aimUp, float moveDuration = 1., ZoomingMode zooming = ZoomNone);
-	void moveToObject(const StelObjectP& target, float moveDuration = 1., ZoomingMode zooming = ZoomNone);
 
 	//! Move the view to a specified AltAzimuthal position.
 	//! @param aim The position to move to expressed as a vector in AltAz frame.
@@ -218,14 +253,21 @@ public slots:
 	//! StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	//! mvmgr->moveToAltAzi(pos, Vec3d(0., 0., 1.), mvmgr->getAutoMoveDuration());
 	//! @endcode
+	//! @note core::moveToAltAzi provides a simpler signature for the same function.
+	//! @note Objects of class Vec3d are 3-dimensional vectors in a right-handed (!) rectangular coordinate system.
+	//!       For positions in the horizontal coordinate system, the axes point south, east and to the
+	//!       zenith, irrespective of the setting of the "Azimuth from south" option in the "Tools" tab of the
+	//!       "Configuration" window. You may use a constructor defining three components (x,y,z) or the
+	//!       format with just two angles, e.g., Vec3d("0d","0d") points south, Vec3d("90d","0d") points east,
+	//!       with azimuth angles running counter-clockwise, i.e., against the usual orientation.
 	//! @note Panic function made March 2016. It turned out that using moveToJ2000 for alt-az-based moves behaves odd for long moves during fast timelapse: end vector is linked to the sky!
 	//! As of March 2016: This call does nothing when mount frame is not AltAzi!
-	void moveToAltAzi(const Vec3d& aim, const Vec3d &aimUp, float moveDuration = 1., ZoomingMode zooming = ZoomNone);
+	void moveToAltAzi(const Vec3d& aim, const Vec3d &aimUp, float moveDuration = 1.f, ZoomingMode zooming = ZoomNone);
 
 	//! Change the zoom level.
 	//! @param aimFov The desired field of view in degrees.
 	//! @param zoomDuration The time that the operation should take to complete. [seconds]
-	void zoomTo(double aimFov, float zoomDuration = 1.);
+	void zoomTo(double aimFov, float zoomDuration = 1.f);
 	//! Get the current Field Of View in degrees
 	double getCurrentFov() const {return currentFov;}
 
@@ -234,13 +276,15 @@ public slots:
 	//! Set the initial Field Of View in degree.
 	void setInitFov(double fov);
 
-	//! Return the inital viewing direction in altazimuthal coordinates
+	//! Return the initial viewing direction in altazimuthal coordinates.
+	//! See StelMovementMgr::moveToAltAzi for an explanation of the return value.
 	const Vec3d getInitViewingDirection() const {return initViewPos;}
 	//! Sets the initial direction of view to the current altitude and azimuth.
 	//! Note: Updates the configuration file.
 	void setInitViewDirectionToCurrent();
 
 	//! Return the current viewing direction in the equatorial J2000 frame.
+	//! See StelMovementMgr::moveToJ2000 for an explanation of the return value.
 	Vec3d getViewDirectionJ2000() const {return viewDirectionJ2000;}
 	//! Set the current viewing direction in the equatorial J2000 frame.
 	void setViewDirectionJ2000(const Vec3d& v);
@@ -264,34 +308,70 @@ public slots:
 	//! If currently zooming, return the target FOV, otherwise return current FOV in degree.
 	double getAimFov(void) const;
 
-	//! Turn direction of view to right
+	//! With true, starts turning the direction of view to the right, with an unspecified speed, according to the
+	//! current mount mode (i.e., increasing azimuth, decreasing rectascension). Turning stops only
+	//! due to a call to turnRight with false (or to turnLeft with any value) ; it does not stop when the script
+	//! is terminated.
 	//! @param s - true move, false stop
 	//! @code
-	//! // You can use the following code to slightly turn direction of view to right:
+	//! // You can use the following code to turn the direction of the view
+	//! // "a little" to the right, by an un predictable amount.
 	//! StelMovementMgr.turnRight(true);
-	//! core.wait(0.75);
+	//! core.wait(0.42);
 	//! StelMovementMgr.turnRight(false);
 	//! @endcode
-	//! @note We recommend use StelMovementMgr.turnRight() command together with core.wait() command to avoid unwanted constant rotation to right
+	//! @note Use StelMovementMgr.panView for precise control of view movements.
 	void turnRight(bool s);
-	//! Turn direction of view to left
+
+	//! With true, starts turning the direction of view to the left, with an unspecified speed, and according to the
+	//! current mount mode (i.e., decreasing azimuth, increasing rectascension). Turning stops only
+	//! due to a call to turnLeft with false (or to turnRight with any value); it does not stop when the script
+	//! is terminated.
 	//! @param s - true move, false stop
 	//! @code
-	//! // You can use the following code to slightly turn direction of view to left:
+	//! // You can use the following code to turn the direction of the view
+	//! // "a little" to the left, by an unpredictable amount.
 	//! StelMovementMgr.turnLeft(true);
-	//! core.wait(0.75);
+	//! core.wait(0.42);
 	//! StelMovementMgr.turnLeft(false);
 	//! @endcode
-	//! @note We recommend use StelMovementMgr.turnLeft() command together with core.wait() command to avoid unwanted constant rotation to left
+	//! @note Use StelMovementMgr.panView for precise control of view movements.
 	void turnLeft(bool s);
-	//! Turn direction of view to up (up to zenith)
+
+	//! With true, starts moving the direction of the view up, with an unspecified speed, and according to the
+	//! current mount mode (i.e., towards the zenith or the celestial north pole). Movement halts when the
+	//! goal is reached, but the command remains active until turnUp is called with false, or turnDown with
+	//! any value. While this command is active, other movement commands or mouse or keyboard operations will be
+	//! countermanded by the still pending turnUp command.
 	//! @param s - true move, false stop
+	//! @note Use StelMovementMgr.panView for precise control of view movements.
 	void turnUp(bool s);
-	//! Turn direction of view to down (up to nadir)
+	
+	//! With true, starts moving the direction of the view down, with an unspecified speed, and according to the
+	//! current mount mode (i.e., towards the nadir or the celestial south pole). Movement halts when the
+	//! goal is reached, but the command remains active until turnDown is called with false, or turnUp with
+	//! any value. While this command is active, other movement commands or mouse or keyboard operations will be
+	//! countermanded by the still pending turnDown command.
 	//! @param s - true move, false stop
+	//! @note Use StelMovementMgr.panView for precise control of view movements.
 	void turnDown(bool s);
+	
 	void moveSlow(bool b) {flagMoveSlow=b;}
+
+	//! With true, starts zooming in, with an unspecified ratio of degrees per second, either until zooming
+	//! is stopped with a zoomIn call with false (or a zoomOut call). Zooming pauses when the field of view limit
+	//! (5 arc seconds) is reached, but the command remains active until zoomIn is called with false, or zoomOut
+	//! with any value. While this command is active, other movement commands or mouse or keyboard operations
+	//! will be countermanded by the still pending zoomIn command.
+	//! @param s - true zoom, false stop
 	void zoomIn(bool s);
+
+	//! With true, starts zooming out, with an unspecified ratio of degrees per second, either until zooming
+	//! is stopped with a zoomIn call with false (or a zoomOut call). Zooming pauses when the field of view limit
+	//! (235 degrees) is reached, but the command remains active until zoomOut is called with false, or zoomIn
+	//! with any value. While this command is active, other movement commands or mouse or keyboard operations
+	//! will be countermanded by the still pending zoomOut command.
+	//! @param s - true zoom, false stop
 	void zoomOut(bool s);
 
 	//! Look immediately towards East.
@@ -351,6 +431,8 @@ signals:
 	void viewportHorizontalOffsetTargetChanged(double f);
 	void viewportVerticalOffsetTargetChanged(double f);
 	void flagEnableMouseNavigationChanged(bool b);
+	void flagEnableMoveKeysChanged(bool b);
+	void flagEnableZoomKeysChanged(bool b);
 
 private slots:
 	//! Called when the selected object changes.
@@ -359,16 +441,8 @@ private slots:
 	//! Connected to the viewportOffsetTimeLine, does the actual viewport shift.
 	void handleViewportOffsetMovement(qreal value);
 
-	void setFOV180Deg();
-	void setFOV90Deg();
-	void setFOV60Deg();
-	void setFOV45Deg();
-	void setFOV20Deg();
-	void setFOV10Deg();
-	void setFOV5Deg();
-	void setFOV2Deg();
-	void setFOV1Deg();
-	void setFOV05Deg();
+	void setFOVDeg(float fov);
+	void bindingFOVActions();
 
 private:
 	double currentFov; // The current FOV in degrees
@@ -392,6 +466,7 @@ private:
 	void dragView(int x1, int y1, int x2, int y2);
 
 	StelCore* core;          // The core on which the movement are applied
+	QSettings* conf;
 	class StelObjectMgr* objectMgr;
 	bool flagLockEquPos;     // Define if the equatorial position is locked
 	bool flagTracking;       // Define if the selected object is followed
@@ -462,23 +537,9 @@ private:
 	// Time mouse control
 	bool dragTimeMode; // Internal flag, true during mouse time motion. This is set true when mouse is moving with ctrl pressed. Set false when releasing ctrl.
 
-	//! @internal
-	//! Store data for auto-zoom.
-	// Components:
-	// startFov: field of view at start
-	// aimFov: intended field of view at end of zoom move
-	// speed: rate of change. UNITS?
-	// coef: set to 0 at begin of zoom, will increase to 1 during autozoom motion.
-	struct AutoZoom
-	{
-		double startFov;
-		double aimFov;
-		float speed;
-		float coef;
-	};
+	// Internal state for smooth zoom animation.
+	Smoother zoomMove;
 
-	// Automove
-	AutoZoom zoomMove; // Current auto movement
 	bool flagAutoZoom; // Define if autozoom is on or off
 	bool flagAutoZoomOutResetsDirection;
 

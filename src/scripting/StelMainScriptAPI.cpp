@@ -43,6 +43,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelPropertyMgr.hpp"
+#include "StelScriptMgr.hpp"
 
 #include "StelObject.hpp"
 #include "StelObjectMgr.hpp"
@@ -144,30 +145,6 @@ void StelMainScriptAPI::setDate(const QString& dateStr, const QString& spec, con
 		core->setJDE(JD);
 	else
 		core->setJD(JD);
-
-//	bool relativeTime = false;
-//	if (dateStr.startsWith("+") || dateStr.startsWith("-") || (dateStr.startsWith("now") && (dateStr.startsWith("+") || dateStr.startsWith("-"))))
-//		relativeTime = true;
-//	double JD = jdFromDateString(dateStr, spec);
-//	StelCore* core = StelApp::getInstance().getCore();
-//	if (relativeTime)
-//	{
-//		core->setJDay(JD);
-//	}
-//	else
-//	{
-//		if (dateIsDT)
-//		{
-//			// add Delta-T correction for date
-//			core->setJDay(JD + core->getDeltaT(JD)/86400);
-//		}
-//		else
-//		{
-//			// set date without Delta-T correction
-//			// compatible with 0.11
-//			core->setJDay(JD);
-//		}
-//	}
 }
 
 QString StelMainScriptAPI::getDate(const QString& spec)
@@ -420,6 +397,26 @@ bool StelMainScriptAPI::getFlagGravityLabels()
 void StelMainScriptAPI::setFlagGravityLabels(bool b)
 {
 	StelApp::getInstance().getCore()->setFlagGravityLabels(b);
+}
+
+bool StelMainScriptAPI::getFlipHorz()
+{
+	return StelApp::getInstance().getCore()->getFlipHorz();
+}
+
+void StelMainScriptAPI::setFlipHorz(bool b)
+{
+	StelApp::getInstance().getCore()->setFlipHorz(b);
+}
+
+bool StelMainScriptAPI::getFlipVert()
+{
+	return StelApp::getInstance().getCore()->getFlipVert();
+}
+
+void StelMainScriptAPI::setFlipVert(bool b)
+{
+	StelApp::getInstance().getCore()->setFlipVert(b);
 }
 
 bool StelMainScriptAPI::getDiskViewport()
@@ -705,7 +702,6 @@ void StelMainScriptAPI::exit()
 
 void StelMainScriptAPI::quitStellarium()
 {
-	emit(requestExit()); // exit from script
 	StelApp::getInstance().quit(); // quit from planetarium
 }
 
@@ -845,9 +841,13 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 
 void StelMainScriptAPI::wait(double t)
 {
-	QEventLoop loop;
-	QTimer::singleShot(qRound(1000*t), &loop, SLOT(quit()));
-	loop.exec();
+	StelScriptMgr* scriptMgr = &StelApp::getInstance().getScriptMgr();
+	QEventLoop* loop = scriptMgr->getWaitEventLoop();
+	QTimer::singleShot(qRound(1000*t), loop, SLOT(quit()));
+	if( loop->exec() != 0 )
+	{
+		emit(requestExit()); // causes a call of stopScript
+	}
 }
 
 void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec)
@@ -865,9 +865,13 @@ void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec)
 		qDebug() << "waitFor() called, but negative interval (time exceeded before starting timer). Not waiting!";
 		return;
 	}
-	QEventLoop loop;
-	QTimer::singleShot(interval, &loop, SLOT(quit()));
-	loop.exec();
+	StelScriptMgr* scriptMgr = &StelApp::getInstance().getScriptMgr();
+	QEventLoop* loop = scriptMgr->getWaitEventLoop();
+	QTimer::singleShot(interval, loop, SLOT(quit()));
+	if( loop->exec() != 0 )
+	{
+		emit(requestExit()); // causes a call of stopScript
+	}
 }
 
 

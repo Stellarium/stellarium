@@ -78,7 +78,7 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 	if (name.isEmpty())
 	{
 		qWarning() << "No valid landscape definition (no name) found for landscape ID "
-			<< landscapeId << ". No landscape in use." << endl;
+			<< landscapeId << ". No landscape in use." << StelUtils::getEndLineChar();
 		validLandscape = false;
 		return;
 	}
@@ -136,15 +136,14 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 	sinMinAltitudeLimit = std::sin(M_PI_180 * landscapeIni.value("landscape/minimal_altitude", -2.0).toDouble());
 
 	// This is now optional for all classes, for mixing with a photo horizon:
-	// they may have different offsets, like a south-centered pano and a geographically-oriented polygon.
+	// they may have different offsets, like a south-centered pano and a grid-aligned polygon.
 	// In case they are aligned, we can use one value angle_rotatez, or define the polygon rotation individually.
 	if (landscapeIni.contains("landscape/polygonal_horizon_list"))
 	{
 		createPolygonalHorizon(
 					StelFileMgr::findFile("landscapes/" + landscapeId + "/" + landscapeIni.value("landscape/polygonal_horizon_list").toString()),
 					landscapeIni.value("landscape/polygonal_angle_rotatez", 0.f).toFloat(),
-					landscapeIni.value("landscape/polygonal_horizon_list_mode", "azDeg_altDeg").toString(),
-					landscapeIni.value("landscape/polygonal_horizon_inverted", "false").toBool()
+					landscapeIni.value("landscape/polygonal_horizon_list_mode", "azDeg_altDeg").toString()
 					);
 		// This line can then be drawn in all classes with the color specified here. If not specified, don't draw it! (flagged by negative red)
 		horizonPolygonLineColor=Vec3f(landscapeIni.value("landscape/horizon_line_color", "-1,0,0" ).toString());
@@ -156,7 +155,7 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 	loadLabels(landscapeId);
 }
 
-void Landscape::createPolygonalHorizon(const QString& lineFileName, const float polyAngleRotateZ, const QString &listMode , const bool polygonInverted)
+void Landscape::createPolygonalHorizon(const QString& lineFileName, const float polyAngleRotateZ, const QString &listMode)
 {
 	// qDebug() << _name << " " << _fullpath << " " << _lineFileName ;
 
@@ -221,20 +220,14 @@ void Landscape::createPolygonalHorizon(const QString& lineFileName, const float 
 				az=(200.0f  - list.at(0).toFloat())*M_PIf/200.f    - polyAngleRotateZ*M_PI_180f;
 				alt=(100.0f-list.at(1).toFloat())*M_PIf/200.f;
 				break;
-			default: qWarning() << "invalid coordMode while reading horizon line.";
+			case invalid:
+				qWarning() << "invalid polygonal_horizon_list_mode while reading horizon line.";
+				return;
 		}
 
 		StelUtils::spheToRect(az, alt, point);
-		if (polygonInverted)
-		{
-			if (horiPoints.at(0) != point)
-				horiPoints.prepend(point);
-		}
-		else
-		{
-			if (horiPoints.last() != point)
-				horiPoints.append(point);
-		}
+		if (horiPoints.isEmpty() || horiPoints.last() != point)
+			horiPoints.append(point);
 	}
 	file.close();
 	//horiPoints.append(horiPoints.at(0)); // close loop? Apparently not necessary.
@@ -243,14 +236,19 @@ void Landscape::createPolygonalHorizon(const QString& lineFileName, const float 
 	//for (int i=0; i<horiPoints.count(); ++i)
 	//	qDebug() << horiPoints.at(i)[0] << "/" << horiPoints.at(i)[1] << "/" << horiPoints.at(i)[2] ;
 	AllSkySphericalRegion allskyRegion;
-	SphericalPolygon aboveHorizonPolygon;
-	aboveHorizonPolygon.setContour(horiPoints);
+	SphericalPolygon aboveHorizonPolygon(horiPoints);
 	horizonPolygon = allskyRegion.getSubtraction(aboveHorizonPolygon);
-	if (polygonInverted)
+
+	// If this now contains the zenith, invert the solution:
+	if (horizonPolygon->contains(Vec3d(0.,0.,1.)))
 	{
+		//qDebug() << "Must invert polygon vector!";
+		std::reverse(horiPoints.begin(), horiPoints.end());
+		AllSkySphericalRegion allskyRegion;
+		SphericalPolygon aboveHorizonPolygon(horiPoints);
+		horizonPolygon = allskyRegion.getSubtraction(aboveHorizonPolygon);
 		AllSkySphericalRegion allskyRegion2;
 		horizonPolygon = allskyRegion2.getSubtraction(horizonPolygon);
-		//horizonPolygon=&aboveHorizonPolygon;
 	}
 }
 
@@ -261,6 +259,8 @@ const QString Landscape::getTexturePath(const QString& basename, const QString& 
 	QString path = StelFileMgr::findFile("landscapes/" + landscapeId + "/" + basename);
 	if (path.isEmpty())
 		path = StelFileMgr::findFile("textures/" + basename);
+	if (path.isEmpty())
+		qWarning() << "Warning: Landscape" << landscapeId << ": File" << basename << "does not exist.";
 	return path;
 }
 
@@ -565,9 +565,10 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	const float sa = std::sin(alpha);
 	float y0 = static_cast<float>(radius);
 	float x0 = 0.0f;
+	unsigned short int limit;
 
 	LOSSide precompSide;
-	precompSide.arr.primitiveType=StelVertexArray::Triangles;
+	precompSide.arr.primitiveType=StelVertexArray::Triangles;	
 	for (unsigned int n=0;n<nbDecorRepeat;n++)
 	{
 		for (unsigned int i=0;i<nbSide;i++)
@@ -588,7 +589,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 
 			float tx0 = sides[ti].texCoords[0];
 			const float d_tx = (sides[ti].texCoords[2]-sides[ti].texCoords[0]) / slices_per_side;
-			const float d_ty = (sides[ti].texCoords[3]-sides[ti].texCoords[1]) / stacks;
+			const float d_ty = (sides[ti].texCoords[3]-sides[ti].texCoords[1]) / stacks;			
 			for (unsigned short int j=0;j<slices_per_side;j++)
 			{
 				const float y1 = y0*ca - x0*sa;
@@ -596,7 +597,8 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 				const float tx1 = tx0 + d_tx;
 				float z = z0;
 				float ty0 = sides[ti].texCoords[1];
-				for (unsigned short int k=0u;k<=static_cast<unsigned short int>(stacks*2u);k+=2u)
+				limit = static_cast<unsigned short int>(stacks*2u);
+				for (unsigned short int k=0u;k<=limit;k+=2u)
 				{
 					precompSide.arr.texCoords << Vec2f(tx0, ty0) << Vec2f(tx1, ty0);
 					if (calibrated && !tanMode)
@@ -613,7 +615,8 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 					ty0 += d_ty;
 				}
 				unsigned short int offset = j*(stacks+1u)*2u;
-				for (unsigned short int k = 2;k<static_cast<unsigned short int>(stacks*2u+2u);k+=2u)
+				limit = static_cast<unsigned short int>(stacks*2u+2u);
+				for (unsigned short int k = 2;k<limit;k+=2u)
 				{
 					precompSide.arr.indices << offset+k-2 << offset+k-1 << offset+k;
 					precompSide.arr.indices << offset+k   << offset+k-1 << offset+k+1;
@@ -661,7 +664,7 @@ void LandscapeOldStyle::draw(StelCore* core, bool onlyPolygon)
 		}
 	}
 	// If a horizon line also has been defined, draw it.
-	if (horizonPolygon && (horizonPolygonLineColor != Vec3f(0.f)))
+	if (horizonPolygon && (horizonPolygonLineColor != Vec3f(-1.f,0.f,0.f)))
 	{
 		//qDebug() << "drawing line";
 		StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
@@ -798,6 +801,7 @@ float LandscapeOldStyle::getOpacity(Vec3d azalt) const
 	int currentSide = static_cast<int>(floor(fmodf(az_panel, nbSide)));
 	Q_ASSERT(currentSide>=0);
 	Q_ASSERT(currentSide<static_cast<int>(nbSideTexs));
+	if (sidesImages[currentSide]->isNull()) return 0.0f; // can happen if image is misconfigured and failed to load.
 	int x= static_cast<int>(sides[currentSide].texCoords[0] + x_in_panel*(sides[currentSide].texCoords[2]-sides[currentSide].texCoords[0]))
 			* sidesImages[currentSide]->width(); // pixel X from left.
 
@@ -896,7 +900,7 @@ void LandscapePolygonal::draw(StelCore* core, bool onlyPolygon)
 		sPainter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeFill);
 	}
 
-	if (horizonPolygonLineColor != Vec3f(0.f))
+	if (horizonPolygonLineColor != Vec3f(-1.f,0.f,0.f))
 	{
 		sPainter.setLineSmooth(true);
 		sPainter.setColor(horizonPolygonLineColor, landFader.getInterstate());
@@ -1034,7 +1038,7 @@ void LandscapeFisheye::draw(StelCore* core, bool onlyPolygon)
 	}
 
 	// If a horizon line also has been defined, draw it.
-	if (horizonPolygon && (horizonPolygonLineColor != Vec3f(0.f)))
+	if (horizonPolygon && (horizonPolygonLineColor != Vec3f(-1.f,0.f,0.f)))
 	{
 		//qDebug() << "drawing line";
 		StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
@@ -1054,7 +1058,7 @@ void LandscapeFisheye::draw(StelCore* core, bool onlyPolygon)
 
 float LandscapeFisheye::getOpacity(Vec3d azalt) const
 {
-	if(!validLandscape) return (azalt[2]>0.0 ? 0.0f : 1.0f);
+	if(!validLandscape || (!horizonPolygon && (!mapImage || mapImage->isNull()))) return (azalt[2]>0.0 ? 0.0f : 1.0f); // can happen if image is misconfigured and failed to load.
 
 	if (angleRotateZOffset!=0.0f)
 		azalt.transfo4d(Mat4d::zrotation(static_cast<double>(angleRotateZOffset)));
@@ -1248,10 +1252,9 @@ void LandscapeSpherical::draw(StelCore* core, bool onlyPolygon)
 			sPainter.sSphere(radius, 1.0, cols, static_cast<uint>(ceil(rows*(illumTexTop-illumTexBottom)/(mapTexTop-mapTexBottom))), true, true, illumTexTop, illumTexBottom);
 		}
 	}
-	//qDebug() << "before drawing line";
 
 	// If a horizon line also has been defined, draw it.
-	if (horizonPolygon && (horizonPolygonLineColor != Vec3f(0.f)))
+	if (horizonPolygon && (horizonPolygonLineColor != Vec3f(-1.f,0.f,0.f)))
 	{
 		//qDebug() << "drawing line";
 		transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
@@ -1275,7 +1278,7 @@ void LandscapeSpherical::draw(StelCore* core, bool onlyPolygon)
 //! @retval alpha (0..1), where 0=fully transparent.
 float LandscapeSpherical::getOpacity(Vec3d azalt) const
 {
-	if(!validLandscape) return (azalt[2]>0.0 ? 0.0f : 1.0f);
+	if(!validLandscape || (!horizonPolygon && (!mapImage || mapImage->isNull()))) return (azalt[2]>0.0 ? 0.0f : 1.0f); // can happen if image is misconfigured and failed to load.
 
 	if (angleRotateZOffset!=0.0f)
 		azalt.transfo4d(Mat4d::zrotation(static_cast<double>(angleRotateZOffset)));

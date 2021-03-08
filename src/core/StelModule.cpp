@@ -43,3 +43,11 @@ class StelAction* StelModule::addAction(const QString& id, const QString& groupI
 	StelActionMgr* mgr = StelApp::getInstance().getStelActionManager();
 	return mgr->addAction(id, groupId, text, target, slot, shortcut, altShortcut);
 }
+
+ StelAction* StelModule::addAction(const QString& id, const QString& groupId, const QString& text,
+					QObject* contextObject, std::function<void()> lambda,
+					const QString& shortcut, const QString& altShortcut)
+{
+	StelActionMgr* mgr = StelApp::getInstance().getStelActionManager();
+	return mgr->addAction(id, groupId, text, contextObject, lambda, shortcut, altShortcut);
+}

@@ -36,6 +36,7 @@
 #include <QModelIndex>
 #include <QSettings>
 #include <QStandardItemModel>
+#include <QMessageBox>
 #include <limits>
 
 OcularDialog::OcularDialog(Oculars* pluginPtr,
@@ -54,21 +55,15 @@ OcularDialog::OcularDialog(Oculars* pluginPtr,
 	this->ccds = ccds;
 	ccdTableModel = new PropertyBasedTableModel(this);
 	CCD* ccdModel = CCD::ccdModel();
-	ccdTableModel->init(reinterpret_cast<QList<QObject *>* >(ccds),
-			    ccdModel,
-			    ccdModel->propertyMap());
+	ccdTableModel->init(reinterpret_cast<QList<QObject *>* >(ccds), ccdModel, ccdModel->propertyMap());
 	this->oculars = oculars;
 	ocularTableModel = new PropertyBasedTableModel(this);
 	Ocular* ocularModel = Ocular::ocularModel();
-	ocularTableModel->init(reinterpret_cast<QList<QObject *>* >(oculars),
-			       ocularModel,
-			       ocularModel->propertyMap());
+	ocularTableModel->init(reinterpret_cast<QList<QObject *>* >(oculars), ocularModel, ocularModel->propertyMap());
 	this->telescopes = telescopes;
 	telescopeTableModel = new PropertyBasedTableModel(this);
 	Telescope* telescopeModel = Telescope::telescopeModel();
-	telescopeTableModel->init(reinterpret_cast<QList<QObject *>* >(telescopes),
-				  telescopeModel,
-				  telescopeModel->propertyMap());
+	telescopeTableModel->init(reinterpret_cast<QList<QObject *>* >(telescopes), telescopeModel, telescopeModel->propertyMap());
 	
 	this->lenses = lenses;
 	lensTableModel = new PropertyBasedTableModel(this);
@@ -120,16 +115,32 @@ void OcularDialog::closeWindow()
 
 void OcularDialog::deleteSelectedCCD()
 {
-	ccdTableModel->removeRows(ui->ccdListView->currentIndex().row(), 1);
-	ui->ccdListView->setCurrentIndex(ccdTableModel->index(0, 1));
-	plugin->updateLists();
+	if (ccdTableModel->rowCount() == 1)
+	{
+		qDebug() << "Cannot delete the last entry.";
+		QMessageBox::warning(&StelMainView::getInstance(), q_("Warning!"), q_("Cannot delete the last sensor."), QMessageBox::Ok);
+		return;
+	}
+
+	if (askConfirmation())
+	{
+		ccdTableModel->removeRows(ui->ccdListView->currentIndex().row(), 1);
+		ui->ccdListView->setCurrentIndex(ccdTableModel->index(0, 1));
+		plugin->updateLists();
+	}
 }
 
 void OcularDialog::deleteSelectedOcular()
 {
-	if (ocularTableModel->rowCount() == 1) {
+	if (ocularTableModel->rowCount() == 1)
+	{
 		qDebug() << "Cannot delete the last entry.";
-	} else {
+		QMessageBox::warning(&StelMainView::getInstance(), q_("Warning!"), q_("Cannot delete the last ocular."), QMessageBox::Ok);
+		return;
+	}
+
+	if (askConfirmation())
+	{
 		ocularTableModel->removeRows(ui->ocularListView->currentIndex().row(), 1);
 		ui->ocularListView->setCurrentIndex(ocularTableModel->index(0, 1));
 		plugin->updateLists();
@@ -138,9 +149,15 @@ void OcularDialog::deleteSelectedOcular()
 
 void OcularDialog::deleteSelectedTelescope()
 {
-	if (telescopeTableModel->rowCount() == 1) {
+	if (telescopeTableModel->rowCount() == 1)
+	{
 		qDebug() << "Cannot delete the last entry.";
-	} else {
+		QMessageBox::warning(&StelMainView::getInstance(), q_("Warning!"), q_("Cannot delete the last telescope."), QMessageBox::Ok);
+		return;
+	}
+
+	if (askConfirmation())
+	{
 		telescopeTableModel->removeRows(ui->telescopeListView->currentIndex().row(), 1);
 		ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(0, 1));
 		plugin->updateLists();
@@ -149,37 +166,45 @@ void OcularDialog::deleteSelectedTelescope()
 
 void OcularDialog::deleteSelectedLens()
 {
-    if (lensTableModel->rowCount() > 0) {
-	lensTableModel->removeRows(ui->lensListView->currentIndex().row(), 1);
-	if (lensTableModel->rowCount() > 0) {
-	    ui->lensListView->setCurrentIndex(lensTableModel->index(0, 1));
-        }
-        plugin->updateLists();
-    }
+	if (askConfirmation())
+	{
+		if (lensTableModel->rowCount() > 0)
+		{
+			lensTableModel->removeRows(ui->lensListView->currentIndex().row(), 1);
+			if (lensTableModel->rowCount() > 0)
+				ui->lensListView->setCurrentIndex(lensTableModel->index(0, 1));
+
+			plugin->updateLists();
+		}
+	}
 }
 
 void OcularDialog::insertNewCCD()
 {
-	ccdTableModel->insertRows(ccdTableModel->rowCount(), 1);
-	ui->ccdListView->setCurrentIndex(ccdTableModel->index(ccdTableModel->rowCount() - 1, 1));
+	int count = ccdTableModel->rowCount();
+	ccdTableModel->insertRows(count, 1);
+	ui->ccdListView->setCurrentIndex(ccdTableModel->index(count - 1, 1));
 }
 
 void OcularDialog::insertNewOcular()
 {
-	ocularTableModel->insertRows(ocularTableModel->rowCount(), 1);
-	ui->ocularListView->setCurrentIndex(ocularTableModel->index(ocularTableModel->rowCount() - 1, 1));
+	int count = ocularTableModel->rowCount();
+	ocularTableModel->insertRows(count, 1);
+	ui->ocularListView->setCurrentIndex(ocularTableModel->index(count - 1, 1));
 }
 
 void OcularDialog::insertNewTelescope()
 {
-	telescopeTableModel->insertRows(telescopeTableModel->rowCount(), 1);
-	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(telescopeTableModel->rowCount() - 1, 1));
+	int count = telescopeTableModel->rowCount();
+	telescopeTableModel->insertRows(count, 1);
+	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(count - 1, 1));
 }
 
 void OcularDialog::insertNewLens()
 {
-	lensTableModel->insertRows(lensTableModel->rowCount(), 1);
-	ui->lensListView->setCurrentIndex(lensTableModel->index(lensTableModel->rowCount() - 1, 1));
+	int count = lensTableModel->rowCount();
+	lensTableModel->insertRows(count, 1);
+	ui->lensListView->setCurrentIndex(lensTableModel->index(count - 1, 1));
 }
 
 void OcularDialog::moveUpSelectedSensor()
@@ -285,7 +310,6 @@ void OcularDialog::createDialogContent()
 		enableKineticScrolling(gui->getFlagUseKineticScrolling());
 		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
 	}
-
 	
 	//Now the rest of the actions.
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
@@ -297,18 +321,19 @@ void OcularDialog::createDialogContent()
 	connectBoolProperty(ui->checkBoxInitialDirection,	"Oculars.flagInitDirectionUsage");
 	connectBoolProperty(ui->checkBoxResolutionCriterion,	"Oculars.flagShowResolutionCriteria");
 	connectBoolProperty(ui->requireSelectionCheckBox,	"Oculars.flagRequireSelection");
-	connectBoolProperty(ui->limitStellarMagnitudeCheckBox,	"Oculars.flagLimitMagnitude");
+	connectBoolProperty(ui->limitStellarMagnitudeCheckBox,	"Oculars.flagAutoLimitMagnitude");
 	connectBoolProperty(ui->hideGridsLinesCheckBox,		"Oculars.flagHideGridsLines");
 	connectBoolProperty(ui->scaleImageCircleCheckBox,	"Oculars.flagScaleImageCircle");
 	connectBoolProperty(ui->semiTransparencyCheckBox,	"Oculars.flagSemiTransparency");
+	connectIntProperty(ui->transparencySpinBox,	        "Oculars.transparencyMask");
 	connectBoolProperty(ui->checkBoxDMSDegrees,		"Oculars.flagDMSDegrees");
 	connectBoolProperty(ui->checkBoxTypeOfMount,		"Oculars.flagAutosetMountForCCD");
 	connectBoolProperty(ui->checkBoxTelradFOVScaling,	"Oculars.flagScalingFOVForTelrad");
-	//connectBoolProperty(ui->checkBoxTelradFOVCustom,	"Oculars.flagCustomFOVForTelrad");
 	connectBoolProperty(ui->checkBoxCCDFOVScaling,		"Oculars.flagScalingFOVForCCD");
 	connectBoolProperty(ui->checkBoxToolbarButton,		"Oculars.flagShowOcularsButton");
-	connectDoubleProperty(ui->arrowButtonScaleDoubleSpinBox,	"Oculars.arrowButtonScale");
+	connectIntProperty(ui->arrowButtonScaleSpinBox,	        "Oculars.arrowButtonScale");
 	connectBoolProperty(ui->checkBoxShowCcdCropOverlay,	"Oculars.flagShowCcdCropOverlay");
+	connectBoolProperty(ui->checkBoxShowCcdCropOverlayPixelGrid,	"Oculars.flagShowCcdCropOverlayPixelGrid");
 	connectIntProperty(ui->guiCcdCropOverlayHSizeSpinBox,	"Oculars.ccdCropOverlayHSize");
 	connectIntProperty(ui->guiCcdCropOverlayVSizeSpinBox,	"Oculars.ccdCropOverlayVSize");
 	connectBoolProperty(ui->contourCheckBox,		"Oculars.flagShowContour");
@@ -316,6 +341,11 @@ void OcularDialog::createDialogContent()
 	connectBoolProperty(ui->alignCrosshairCheckBox,		"Oculars.flagAlignCrosshair");
 	connectColorButton(ui->textColorToolButton,             "Oculars.textColor", "text_color", "Oculars");
 	connectColorButton(ui->lineColorToolButton,             "Oculars.lineColor", "line_color", "Oculars");
+	connectColorButton(ui->focuserColorToolButton,		"Oculars.focuserColor", "focuser_color", "Oculars");
+	connectBoolProperty(ui->checkBoxShowFocuserOverlay,	"Oculars.flagShowFocuserOverlay");
+	connectBoolProperty(ui->checkBoxUseSmallFocuser,	"Oculars.flagUseSmallFocuserOverlay");
+	connectBoolProperty(ui->checkBoxUseMediumFocuser,	"Oculars.flagUseMediumFocuserOverlay");
+	connectBoolProperty(ui->checkBoxUseLargeFocuser,	"Oculars.flagUseLargeFocuserOverlay");
 
 	setupTelradFOVspins(plugin->getTelradFOV());
 	connect(plugin, SIGNAL(telradFOVChanged(Vec4f)), this, SLOT(setupTelradFOVspins(Vec4f)));
@@ -323,7 +353,7 @@ void OcularDialog::createDialogContent()
 	connect(ui->doubleSpinBoxTelradFOV2, SIGNAL(valueChanged(double)), this, SLOT(updateTelradCustomFOV()));
 	connect(ui->doubleSpinBoxTelradFOV3, SIGNAL(valueChanged(double)), this, SLOT(updateTelradCustomFOV()));
 	connect(ui->doubleSpinBoxTelradFOV4, SIGNAL(valueChanged(double)), this, SLOT(updateTelradCustomFOV()));
-	connect(ui->pushButtonRestoreTelradFOV, SIGNAL(clicked()), this, SLOT(setTelradDefaultFOV()));
+	connect(ui->pushButtonRestoreTelradFOV, &QPushButton::clicked, this, [=] () { plugin->setTelradFOV(Vec4f(0.5f, 2.0f, 4.0f, 0.0f));} );
 
 	// The add & delete buttons
 	connect(ui->addCCD,          SIGNAL(clicked()), this, SLOT(insertNewCCD()));
@@ -359,29 +389,28 @@ void OcularDialog::createDialogContent()
 	ccdMapper->addMapping(ui->ccdName,       0);
 	ccdMapper->addMapping(ui->ccdChipY,      1);
 	ccdMapper->addMapping(ui->ccdChipX,      2);
-	ccdMapper->addMapping(ui->ccdPixelY,     3);
-	ccdMapper->addMapping(ui->ccdPixelX,     4);
-	ccdMapper->addMapping(ui->ccdResX,       5);
-	ccdMapper->addMapping(ui->ccdResY,       6);
-	ccdMapper->addMapping(ui->ccdRotAngle,   7);
-	ccdMapper->addMapping(ui->ccdBinningX,   8);
-	ccdMapper->addMapping(ui->ccdBinningY,   9);
-	ccdMapper->addMapping(ui->OAG_checkBox, 10);
-	ccdMapper->addMapping(ui->OAGPrismH,    11);
-	ccdMapper->addMapping(ui->OAGPrismW,    12);
-	ccdMapper->addMapping(ui->OAGDist,      13);
-	ccdMapper->addMapping(ui->OAGPrismPA,   14);
+	ccdMapper->addMapping(ui->ccdResX,       3);
+	ccdMapper->addMapping(ui->ccdResY,       4);
+	ccdMapper->addMapping(ui->ccdRotAngle,   5);
+	ccdMapper->addMapping(ui->ccdBinningX,   6);
+	ccdMapper->addMapping(ui->ccdBinningY,   7);
+	ccdMapper->addMapping(ui->OAG_checkBox, 8);
+	ccdMapper->addMapping(ui->OAGPrismH,    9);
+	ccdMapper->addMapping(ui->OAGPrismW,    10);
+	ccdMapper->addMapping(ui->OAGDist,      11);
+	ccdMapper->addMapping(ui->OAGPrismPA,   12);
 	ccdMapper->toFirst();
 	connect(ui->ccdListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 		ccdMapper, SLOT(setCurrentModelIndex(QModelIndex)));
+	connect(ui->ccdListView, SIGNAL(doubleClicked(QModelIndex)),
+		     this, SLOT(selectCCD(QModelIndex)));
 	connectDoubleProperty(ui->ccdRotAngle, "Oculars.selectedCCDRotationAngle");
+	connectDoubleProperty(ui->OAGPrismPA, "Oculars.selectedCCDPrismPositionAngle");
 	ui->ccdListView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	ui->ccdListView->setCurrentIndex(ccdTableModel->index(0, 1));
 
 	connect(ui->ccdChipY,    SIGNAL(editingFinished()), this, SLOT(updateCCD()));
 	connect(ui->ccdChipX,    SIGNAL(editingFinished()), this, SLOT(updateCCD()));
-	connect(ui->ccdPixelY,   SIGNAL(editingFinished()), this, SLOT(updateCCD()));
-	connect(ui->ccdPixelX,   SIGNAL(editingFinished()), this, SLOT(updateCCD()));
 	connect(ui->ccdResX,     SIGNAL(editingFinished()), this, SLOT(updateCCD()));
 	connect(ui->ccdResY,     SIGNAL(editingFinished()), this, SLOT(updateCCD()));
 	connect(ui->ccdRotAngle, SIGNAL(editingFinished()), this, SLOT(updateCCD()));
@@ -406,6 +435,8 @@ void OcularDialog::createDialogContent()
 	ocularMapper->toFirst();
 	connect(ui->ocularListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 		ocularMapper, SLOT(setCurrentModelIndex(QModelIndex)));
+	connect(ui->ocularListView, SIGNAL(doubleClicked(QModelIndex)),
+		     this, SLOT(selectOcular(QModelIndex)));
 	ui->ocularListView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	ui->ocularListView->setCurrentIndex(ocularTableModel->index(0, 1));
 
@@ -425,6 +456,8 @@ void OcularDialog::createDialogContent()
 	lensMapper->toFirst();
 	connect(ui->lensListView->selectionModel(), SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 		lensMapper, SLOT(setCurrentModelIndex(QModelIndex)));
+	connect(ui->lensListView, SIGNAL(doubleClicked(QModelIndex)),
+		     this, SLOT(selectLens(QModelIndex)));
 	ui->lensListView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	ui->lensListView->setCurrentIndex(lensTableModel->index(0, 1));
 
@@ -443,6 +476,8 @@ void OcularDialog::createDialogContent()
 	telescopeMapper->toFirst();
 	connect(ui->telescopeListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 		telescopeMapper, SLOT(setCurrentModelIndex(QModelIndex)));
+	connect(ui->telescopeListView, SIGNAL(doubleClicked(QModelIndex)),
+		     this, SLOT(selectTelescope(QModelIndex)));
 	ui->telescopeListView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(0, 1));
 
@@ -453,6 +488,11 @@ void OcularDialog::createDialogContent()
 	connect(ui->telescopeEQ,       SIGNAL(stateChanged(int)), this, SLOT(updateTelescope()));
 
 	connect(ui->binocularsCheckBox, SIGNAL(toggled(bool)), this, SLOT(setLabelsDescriptionText(bool)));
+	connect(ui->checkBoxControlPanel, SIGNAL(toggled(bool)), this, SLOT(updateGuiOptions()));
+	connect(ui->semiTransparencyCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateGuiOptions()));
+	connect(ui->checkBoxShowFocuserOverlay, SIGNAL(toggled(bool)), this, SLOT(updateGuiOptions()));
+	connect(ui->checkBoxShowCcdCropOverlay, SIGNAL(toggled(bool)), this, SLOT(updateGuiOptions()));
+	updateGuiOptions();
 }
 
 void OcularDialog::setupTelradFOVspins(Vec4f fov)
@@ -465,17 +505,11 @@ void OcularDialog::setupTelradFOVspins(Vec4f fov)
 
 void OcularDialog::updateTelradCustomFOV()
 {
-	Vec4f fov;
-	fov[0] = static_cast<float>(ui->doubleSpinBoxTelradFOV1->value());
-	fov[1] = static_cast<float>(ui->doubleSpinBoxTelradFOV2->value());
-	fov[2] = static_cast<float>(ui->doubleSpinBoxTelradFOV3->value());
-	fov[3] = static_cast<float>(ui->doubleSpinBoxTelradFOV4->value());
+	Vec4f fov(static_cast<float>(ui->doubleSpinBoxTelradFOV1->value()),
+		  static_cast<float>(ui->doubleSpinBoxTelradFOV2->value()),
+		  static_cast<float>(ui->doubleSpinBoxTelradFOV3->value()),
+		  static_cast<float>(ui->doubleSpinBoxTelradFOV4->value()));
 	plugin->setTelradFOV(fov);
-}
-
-void OcularDialog::setTelradDefaultFOV()
-{
-	plugin->setTelradFOV(Vec4f(0.5f, 2.0f, 4.0f, 0.0f));
 }
 
 // We need particular refresh methods to see immediate feedback.
@@ -485,10 +519,22 @@ void OcularDialog::updateOcular()
 	plugin->selectOcularAtIndex(plugin->getSelectedOcularIndex());
 }
 
+void OcularDialog::selectOcular(const QModelIndex)
+{
+	plugin->selectOcularAtIndex(ocularMapper->currentIndex());
+	plugin->updateLists();
+}
+
 void OcularDialog::updateLens()
 {
 	lensMapper->submit();
 	plugin->selectLensAtIndex(plugin->getSelectedLensIndex());
+}
+
+void OcularDialog::selectLens(const QModelIndex)
+{
+	plugin->selectLensAtIndex(lensMapper->currentIndex());
+	plugin->updateLists();
 }
 
 void OcularDialog::updateCCD()
@@ -497,10 +543,22 @@ void OcularDialog::updateCCD()
 	plugin->selectCCDAtIndex(plugin->getSelectedCCDIndex());
 }
 
+void OcularDialog::selectCCD(const QModelIndex)
+{
+	plugin->selectCCDAtIndex(ccdMapper->currentIndex());
+	plugin->updateLists();
+}
+
 void OcularDialog::updateTelescope()
 {
 	telescopeMapper->submit();
 	plugin->selectTelescopeAtIndex(plugin->getSelectedTelescopeIndex());
+}
+
+void OcularDialog::selectTelescope(const QModelIndex)
+{
+	plugin->selectTelescopeAtIndex(telescopeMapper->currentIndex());
+	plugin->updateLists();
 }
 
 void OcularDialog::setLabelsDescriptionText(bool state)
@@ -533,30 +591,38 @@ void OcularDialog::initAboutText()
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + OCULARS_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + OCULARS_PLUGIN_LICENSE + "</td></tr>";
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Timothy Reaves &lt;treaves@silverfieldstech.com&gt;</td></tr>";
-	html += "<tr><td rowspan=\"6\"><strong>" + q_("Contributors") + ":</strong></td><td>Bogdan Marinov</td></tr>";
-	html += "<tr><td>Pawel Stolowski (" + q_("Barlow lens feature") + ")</td></tr>";
+	html += "<tr><td rowspan=\"7\"><strong>" + q_("Contributors") + ":</strong></td><td>Bogdan Marinov</td></tr>";
 	html += "<tr><td>Alexander Wolf</td></tr>";
-	html += "<tr><td>Rumen G. Bogdanovski &lt;rumen@skyarchive.org&gt;</td></tr>";
 	html += "<tr><td>Georg Zotti</td></tr>";
+	html += "<tr><td>Rumen G. Bogdanovski &lt;rumen@skyarchive.org&gt;</td></tr>";
+	html += "<tr><td>Pawel Stolowski (" + q_("Barlow lens feature") + ")</td></tr>";		
 	html += "<tr><td>Matt Hughes (" + q_("Sensor crop overlay feature") + ")</td></tr>";
+	html += "<tr><td>Dhia Moakhar (" + q_("Pixel grid feature") + ")</td></tr>";
 	html += "</table>";
 
-	//Overview
+	// Overview
 	html += "<h3>" + q_("Overview") + "</h3>";
 
-	html += "<p>" + q_("This plugin is intended to simulate what you would see through an eyepiece.  This configuration dialog can be used to add, modify, or delete eyepieces and telescopes, as well as CCD Sensors.  Your first time running the app will populate some samples to get your started.") + "</p>";
+	html += "<p>" + q_("This plugin is intended to simulate what you would see through an eyepiece.  This configuration dialog can be used to add, modify, or delete eyepieces and telescopes, as well as CCD Sensors.  Your first time running the app will populate some samples to get you started.") + "</p>";
 	html += "<p>" + q_("You can choose to scale the image you see on the screen.") + " ";
 	html +=         q_("This is intended to show you a better comparison of what one eyepiece/telescope combination will be like when compared to another.") + " ";
 	html +=         q_("The same eyepiece in two different telescopes of differing focal length will produce two different exit pupils, changing the view somewhat.") + " ";
 	html +=         q_("The trade-off of this is that, with the image scaled, a large part of the screen can be wasted.") + " ";
-	html +=         q_("Therefore I recommend that you leave it off, unless you feel you have a need of it.") + "</p>";
+	html +=         q_("Therefore we recommend that you leave it off, unless you feel you have a need for it.") + "</p>";
 	html += "<p>" + q_("You can toggle a crosshair in the view.") + "</p>";
-	html += "<p>" + QString(q_("You can toggle a Telrad finder; this can only be done when you have not turned on the Ocular view.  This feature draws three concentric circles of 0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with the naked eye through the Telrad (or similar) finder.")).arg(QChar(0x00B0)) + "</p>";
-	html += "<p>" + q_("If you find any issues, please let me know.  Enjoy!") + "</p>";
+	html += "<p>" + QString(q_("You can toggle a Telrad finder. This feature draws three concentric circles of 0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with the naked eye through the Telrad (or similar) finder.")).arg(QChar(0x00B0));
+	html +=         q_("You can adjust the diameters or even add a fourth circle if you have a different finder, or revert to the Telrad standard sizes.") + "</p>";
+	html += "<p>" + q_("If you find any issues, please let me know. Enjoy!") + "</p>";
 
-	//Keys
+	// Keys
 	html += "<h3>" + q_("Hot Keys") + "</h3>";
 	html += "<p>" + q_("The plug-in's key bindings can be edited in the Keyboard shortcuts editor (F7).") + "</p>";
+
+	// Notes
+	html += "<h3>" + q_("Notes") + "</h3>";
+	html += "<p>" +  q_("The sensor view has a feature to show a sensor crop overlay with information about the crop size. The size of this rectangle may be adjusted when binning is active (e.g. crop size of 100px will be adjusted to 99px by binning 3).") + " ";
+	html +=          q_("In this case, information about crop size overlay will be marked by %1.").arg("[*]") + " ";
+	html +=          q_("This mark is also displayed if the crop size is larger than the sensor size.") + "</p>";
 
 	html += "<h3>" + q_("Links") + "</h3>";
 	html += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg("Oculars plugin") + "</p>";
@@ -575,3 +641,25 @@ void OcularDialog::initAboutText()
 
 	ui->textBrowser->setHtml(html);
 }
+
+void OcularDialog::updateGuiOptions()
+{
+	bool flag = ui->checkBoxControlPanel->isChecked();
+	ui->guiFontSizeLabel->setEnabled(flag);
+	ui->guiFontSizeSpinBox->setEnabled(flag);
+
+	ui->transparencySpinBox->setEnabled(ui->semiTransparencyCheckBox->isChecked());
+
+	flag = ui->checkBoxShowFocuserOverlay->isChecked();
+	ui->labelFocuserOverlay->setEnabled(flag);
+	ui->checkBoxUseSmallFocuser->setEnabled(flag);
+	ui->checkBoxUseMediumFocuser->setEnabled(flag);
+	ui->checkBoxUseLargeFocuser->setEnabled(flag);
+
+	flag = ui->checkBoxShowCcdCropOverlay->isChecked();
+	ui->guiCcdCropOverlaySizeLabel->setEnabled(flag);
+	ui->guiCcdCropOverlayHSizeSpinBox->setEnabled(flag);
+	ui->guiCcdCropOverlayVSizeSpinBox->setEnabled(flag);
+	ui->checkBoxShowCcdCropOverlayPixelGrid->setEnabled(flag);
+}
+

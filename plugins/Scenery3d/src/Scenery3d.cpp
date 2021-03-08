@@ -350,17 +350,17 @@ void Scenery3d::createToolbarButtons() const
 			StelButton* toolbarEnableButton =	new StelButton(Q_NULLPTR,
 									       QPixmap(":/Scenery3d/bt_scenery3d_on.png"),
 									       QPixmap(":/Scenery3d/bt_scenery3d_off.png"),
-									       QPixmap(":/graphicGui/glow32x32.png"),
+									       QPixmap(":/graphicGui/miscGlow32x32.png"),
 									       "actionShow_Scenery3d");
 			StelButton* toolbarSettingsButton =	new StelButton(Q_NULLPTR,
 									       QPixmap(":/Scenery3d/bt_scenery3d_settings_on.png"),
 									       QPixmap(":/Scenery3d/bt_scenery3d_settings_off.png"),
-									       QPixmap(":/graphicGui/glow32x32.png"),
+									       QPixmap(":/graphicGui/miscGlow32x32.png"),
 									       "actionShow_Scenery3d_dialog");
 			StelButton* toolbarStoredViewButton =	new StelButton(Q_NULLPTR,
 									       QPixmap(":/Scenery3d/bt_scenery3d_eyepoint_on.png"),
 									       QPixmap(":/Scenery3d/bt_scenery3d_eyepoint_off.png"),
-									       QPixmap(":/graphicGui/glow32x32.png"),
+									       QPixmap(":/graphicGui/miscGlow32x32.png"),
 									       "actionShow_Scenery3d_storedViewDialog");
 
 			gui->getButtonBar()->addButton(toolbarEnableButton, "065-pluginsGroup");

@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-03-29 02:52+0700\n"
+"POT-Creation-Date: 2020-12-15 10:55+0700\n"
 "PO-Revision-Date: 2020-01-06 16:35+0000\n"
 "Last-Translator: Manuel Rosales <manuel.rosales.gr@gmail.com>, 2020\n"
 "Language-Team: Galician (https://www.transifex.com/stellarium/teams/80998/gl/)\n"
@@ -20,16 +20,13 @@ msgstr ""
 "Language: gl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. type: Content of: <p><font><em><font>
+#. type: Content of: <h1>
 #: ../../skycultures/almagest/description.en.utf8:1
-#: ../../skycultures/arabic/description.en.utf8:4
-#: ../../skycultures/arabic/description.en.utf8:7
-#: ../../skycultures/arabic/description.en.utf8:16
 msgid "Almagest"
 msgstr "Almagest"
 
 #. type: Content of: <p>
-#: ../../skycultures/almagest/description.en.utf8:4
+#: ../../skycultures/almagest/description.en.utf8:3
 msgid ""
 "This ancient Greek sky culture is based on the Almagest, a compilation of "
 "astronomical knowledge of former astronomers including results from "
@@ -42,9 +39,19 @@ msgid ""
 "translations. To create this sky culture we used the English translation by "
 "Toomer (1984)."
 msgstr ""
+"Esta antiga cultura do ceo grega baséase en Almagest, unha recompilación de "
+"coñecementos astronómicos de antigos astrónomos incluíndo resultados de "
+"observacións e astronomía matemática. Compilado por Claudio Ptolomeo, "
+"empregando observacións máis antigas, así como as súas propias, foi escrito "
+"en grego, publicado no século II e foi o principal traballo astronómico "
+"durante os seguintes 1500 anos. Foi orixinalmente escrito co título "
+"<i>Mathematike Syntaxis</i>, in Grego Antigo.  O nome <i>Almagest</i>, que "
+"significa &ldquo;O maior [Libro]&rdquo;, foi elaborado a partir de "
+"traducións árabes. Para crear esta cultura do ceo utilizouse a tradución en "
+"inglés de Toomer (1984)."
 
 #. type: Content of: <p>
-#: ../../skycultures/almagest/description.en.utf8:15
+#: ../../skycultures/almagest/description.en.utf8:14
 msgid ""
 "The Almagest consists of 13 sections, called books. In the seventh and "
 "eighth book, Ptolemy listed a total of 1022 stars in 48 constellations "
@@ -58,9 +65,21 @@ msgid ""
 "preserved). The scale starts with the brightest star with the magnitude of "
 "1, going down to magnitude of 6, for the faintest stars visible."
 msgstr ""
+"O Almagest consta de 13 seccións, chamadas libros. No sétimo e oitavo libros"
+" Ptolomeo enumerou un total de 1022 estrelas en 48 constelacións (entre as "
+"que se atopan preto de cinco obxectos estelares como cúmulos de estrelas "
+"globulares). É unha táboa de coordenadas das estrelas cunha descrición da "
+"súa posición na constelación (como \"estrela no cóbado de X, lonxitude, "
+"latitude, magnitude\"). En canto á precesión, Ptolomeo usou coordenadas "
+"eclípticas. Como un dos primeiros do seu tempo, Ptolomeo incluíu a "
+"magnitude, unha escala cuantitativa de brillo estelar, probablemente "
+"adoptada a partir de Hipparchus (o que non é seguro porque non se conserva o"
+" catálogo de Hipparchus). A escala comeza coa estrela máis brillante coa "
+"magnitude de 1, baixando ata a magnitude de 6, para as estrelas máis débiles"
+" que sexan visibles."
 
 #. type: Content of: <p>
-#: ../../skycultures/almagest/description.en.utf8:28
+#: ../../skycultures/almagest/description.en.utf8:27
 msgid ""
 "For the computation of planet positions Ptolemy used a geocentric model "
 "(which is allowed because the observer always stands on Earth) and, thus, "
@@ -75,17 +94,30 @@ msgid ""
 "updates to the epoch of the respective globemaker could be applied by a "
 "simple subtraction of the value for ecliptic longitude."
 msgstr ""
+"Para o cálculo das posicións dos planetas Ptolomeo usou un modelo "
+"xeocéntrico (o que se permite porque o observador sempre está na Terra) e, "
+"polo tanto, contribuíu á crenza científica de que o modelo heliocéntrico de "
+"Aristarco non era necesario. Non obstante, para o catálogo de estrelas de "
+"<i>Almagest</i> isto non importa en absoluto porque un catálogo de estrelas "
+"sempre representa unha especie de inventario dos puntos fixos no ceo e o "
+"obxectivo proclamado do catálogo de Ptolomeo é proporcionar unha listaxe "
+"para facer un globo celeste ( véxase Alm., VIII, 3). Sendo consciente da "
+"precesión quere facilitar o negocio dos futuros globos mediante as "
+"coordenadas eclípticas: A precesión, como é coñecida por Ptolemeo, cambia "
+"todas as estrelas paralelas á eclíptica, polo tanto, as actualizacións á "
+"época do respectivo globo poderían aplicarse mediante unha simple "
+"substracción do valor para lonxitude eclíptica."
 
 #. type: Content of: <h2>
-#: ../../skycultures/almagest/description.en.utf8:41
+#: ../../skycultures/almagest/description.en.utf8:40
 msgid "How this sky culture was made"
-msgstr ""
+msgstr "Como se fixo esta cultura do ceo"
 
 #. type: Content of: <p>
-#: ../../skycultures/almagest/description.en.utf8:43
+#: ../../skycultures/almagest/description.en.utf8:42
 msgid ""
 "The process can be described as sketched here with the example of Corvus:"
-msgstr ""
+msgstr "O proceso resúmese aquí co exemplo de Corvus:"
 
 #. type: Content of: <p>
 #: ../../skycultures/almagest/description.en.utf8:45
@@ -98,17 +130,26 @@ msgid ""
 "the rear wing. From the star in the breast another line goes to the "
 "&quot;foot of the raven&quot;, the star &beta; Crv."
 msgstr ""
+"Na costelación de Corvus, &alpha; Crv é a estrena na &quot;cabeza do "
+"corvo&quot;. Conéctase coa &quot;estrela no pescozo&quot;, &epsilon; Crv.  "
+"Esta está conectada coa &quot;estrela no peito&quot; &zeta; Crv.  A partir "
+"de aquí dúas liñas se dirixen ás puntas das ás. &gamma; Crv é a estrela na "
+"parte dianteira e &delta; Crv a estrela na á traseira. Dende a estrela no "
+"peito outra liña vai ata o&quot;pé do corvo&quot;, a estrela &beta; Crv."
 
 #. type: Content of: <p>
-#: ../../skycultures/almagest/description.en.utf8:54
+#: ../../skycultures/almagest/description.en.utf8:56
 msgid ""
 "After identifying the stars based on their coordinates and names, we "
 "reconnected the stars according to the descriptions in the table presented "
 "in the <i>Almagest</i>."
 msgstr ""
+"Despois de identificar as estrelas en función das súas coordenadas e nomes, "
+"reconectamos as estrelas segundo as descricións na táboa presentada no "
+"<i>Almagest</i>."
 
 #. type: Content of: <p>
-#: ../../skycultures/almagest/description.en.utf8:58
+#: ../../skycultures/almagest/description.en.utf8:60
 msgid ""
 "The names of stars and names of deep sky objects rely on the Almagest only. "
 "E.g. Ptolemy uses the name "
@@ -117,77 +158,91 @@ msgid ""
 "this is not implemented in this sky culture because it doesn't show up in "
 "the Almagest."
 msgstr ""
+"Os nomes das estrelas e os nomes dos obxectos do ceo profundo dependen só do"
+" Almagest. Por exemplo Ptolomeo usa o "
+"nome&quot;&lambda;&alpha;&mu;&pi;&alpha;&delta;&#943;&alpha;&sigmaf; (O "
+"Facho)&quot; para Aldebaran no seu outro traballo, o <i>Tetrabiblos</i>, "
+"pero isto non se implementa nesta cultura do ceo porque non aparece en "
+"Almagest."
 
 #. type: Content of: <p>
-#: ../../skycultures/almagest/description.en.utf8:64
+#: ../../skycultures/almagest/description.en.utf8:66
 msgid ""
 "The following table displays the original constellation name in Greek and "
 "its English translation (column 2 and 3) and denotes our uncertainties in "
 "the reconstruction (column 6)."
 msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:70
-msgid "<b>Abbreviation</b>"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:71
-msgid "<b>\tOriginal name</b>"
-msgstr ""
+"A seguinte táboa mostra o nome da constelación orixinal en grego e a súa "
+"tradución en galego (columnas 2 e 3) e indica as nosas incertezas na "
+"reconstrución (columna 6)."
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:72
-msgid "<b>\tTranslation</b>\t\t\t(direct)"
-msgstr ""
+msgid "<b>Abbreviation</b>"
+msgstr "<b>Abreviatura</b>"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:73
-msgid "<b>\tIAU (Latin) name</b>"
-msgstr ""
+msgid "<b>Original name</b>"
+msgstr "<b>Nome orixinal</b>"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:74
-msgid "<b>hints to constellation</b>"
-msgstr ""
+msgid "<b>Translation</b> (direct)"
+msgstr "<b>Tradución</b> (directa)"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:75
+msgid "<b>IAU (Latin) name</b>"
+msgstr "<b>Nome latino IAU</b>"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:76
+msgid "<b>hints to constellation</b>"
+msgstr "<b>consellos para a constelación</b>"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:77
 msgid "<b>freedom of art</b>"
-msgstr ""
+msgstr "<b>liberdade da arte</b>"
 
 #. type: Content of: <p><table><tbody><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:78
+#: ../../skycultures/almagest/description.en.utf8:80
 #: ../../skycultures/mulapin/description.en.utf8:175
 #: ../../skycultures/seleucid/description.en.utf8:131
 msgid "UMi"
 msgstr "UMi"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:79
+#: ../../skycultures/almagest/description.en.utf8:81
 msgid ""
 "&Mu;&iota;&kappa;&rho;&#942; "
 "&#702;&#714;&Alpha;&rho;&kappa;&tau;&omicron;&sigmaf;"
 msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:81
-msgid "Small \tBear"
-msgstr ""
+"&Mu;&iota;&kappa;&rho;&#942; "
+"&#702;&#714;&Alpha;&rho;&kappa;&tau;&omicron;&sigmaf;"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:82
-msgid "Ursa Minor"
-msgstr ""
+msgid "Small Bear"
+msgstr "Pequeno Oso"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:83
-#: ../../skycultures/almagest/description.en.utf8:94
+msgid "Ursa Minor"
+msgstr "Ursa Minor"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:84
+#: ../../skycultures/almagest/description.en.utf8:92
+#: ../../skycultures/almagest/description.en.utf8:404
+#: ../../skycultures/almagest/description.en.utf8:420
+#: ../../skycultures/almagest/description.en.utf8:444
 msgid "like IAU constellation"
-msgstr ""
+msgstr "como a constelacion IAU"
 
 #. type: Content of: <p><table><tbody><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:87
+#: ../../skycultures/almagest/description.en.utf8:88
 #: ../../skycultures/mulapin/description.en.utf8:157
 #: ../../skycultures/seleucid/description.en.utf8:113
 msgid "UMa"
@@ -199,605 +254,618 @@ msgid ""
 "&Mu;&epsilon;&gamma;&alpha;&lambda;&#942; "
 "&#702;&#714;&Alpha;&rho;&kappa;&tau;&omicron;&sigmaf;"
 msgstr ""
+"&Mu;&epsilon;&gamma;&alpha;&lambda;&#942; "
+"&#702;&#714;&Alpha;&rho;&kappa;&tau;&omicron;&sigmaf;"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:92
+#: ../../skycultures/almagest/description.en.utf8:90
 msgid "Great Bear"
-msgstr ""
+msgstr "Gran Osa"
 
 #. type: Content of: <h3>
-#: ../../skycultures/almagest/description.en.utf8:93
+#: ../../skycultures/almagest/description.en.utf8:91
 #: ../../skycultures/lokono/description.en.utf8:91
 #: ../../skycultures/siberian/description.en.utf8:18
 msgid "Ursa Major"
 msgstr "Ursa Major"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:98
+#: ../../skycultures/almagest/description.en.utf8:96
 msgid "Dra"
-msgstr ""
+msgstr "Dra"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:97
+msgid "&Delta;&rho;&#940;&kappa;&omega;&nu;"
+msgstr "&Delta;&rho;&#940;&kappa;&omega;&nu;"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:98
+msgid "Dragon"
+msgstr "Dragón"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:99
-msgid "&Delta;&rho;&#940;&kappa;&omega;&nu;"
-msgstr ""
+msgid "Draco"
+msgstr "Draco"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:100
-msgid "Dragon"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:101
-msgid "Draco"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:102
 msgid ""
 "all triangles or squares are vertebra or parts of the body; line at the head"
 " is the tongue"
 msgstr ""
+"todos os triángulos ou cadrados son vértebras ou partes do corpo; a liña da "
+"cabeza é a lingua"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:104
+msgid "Cep"
+msgstr "Cep"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:105
+msgid "&Kappa;&eta;&phi;&epsilon;&#973;&sigmaf;"
+msgstr "&Kappa;&eta;&phi;&epsilon;&#973;&sigmaf;"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:106
+msgid "Kepheus"
+msgstr "Cefeo"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:107
-msgid "Cep"
-msgstr ""
+msgid "Cepheus"
+msgstr "Cepheus"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:108
-msgid "&Kappa;&eta;&phi;&epsilon;&#973;&sigmaf;"
-msgstr ""
+msgid "king, upside down"
+msgstr "Rei, ó revés"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:109
-msgid "Kepheus"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:110
-msgid "Cepheus"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:111
-msgid "king, upside down"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:112
 msgid ""
 "three head stars are tiara; &beta; seen as part of the belt, although "
 "Almagest says beneath belt"
 msgstr ""
+"tres estrelas de cabeza son a tiara; vese como parte do cinto, aínda que "
+"Almagest di que está debaixo do cinto"
 
 #. type: Content of: <p><table><tbody><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:117
+#: ../../skycultures/almagest/description.en.utf8:112
 #: ../../skycultures/mulapin/description.en.utf8:139
 #: ../../skycultures/seleucid/description.en.utf8:95
 msgid "Boo"
 msgstr "Boo"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:118
+#: ../../skycultures/almagest/description.en.utf8:113
 msgid "&Beta;&omicron;&#974;&tau;&eta;&sigmaf;"
-msgstr ""
+msgstr "&Beta;&omicron;&#974;&tau;&eta;&sigmaf;"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:119
+#: ../../skycultures/almagest/description.en.utf8:114
 msgid "Ploughman"
-msgstr ""
+msgstr "Arado"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:120
+#: ../../skycultures/almagest/description.en.utf8:115
 msgid "Bo&ouml;tes"
-msgstr ""
+msgstr "Bo&ouml;tes"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:121
+#: ../../skycultures/almagest/description.en.utf8:116
 msgid "has a shepherd's staff in his hand (&omega;)"
-msgstr ""
+msgstr "ten na man roupa de pastor (&omega;)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:122
+#: ../../skycultures/almagest/description.en.utf8:117
 msgid "star HIP 72582 added as neck star"
-msgstr ""
+msgstr "a estrela HIP 72582engadiuse como estrela do pescozo"
 
 #. type: Content of: <p><table><tbody><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:125
+#: ../../skycultures/almagest/description.en.utf8:120
 #: ../../skycultures/mulapin/description.en.utf8:151
 #: ../../skycultures/seleucid/description.en.utf8:107
 msgid "CrB"
 msgstr "CrB"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:126
+#: ../../skycultures/almagest/description.en.utf8:121
 msgid "&Sigma;&tau;&#941;&phi;&alpha;&nu;&omicron;&sigmaf;"
-msgstr ""
+msgstr "&Sigma;&tau;&#941;&phi;&alpha;&nu;&omicron;&sigmaf;"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:127
+#: ../../skycultures/almagest/description.en.utf8:122
 msgid "Crown"
-msgstr ""
+msgstr "Coroa"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:123
+msgid "Corona Borealis"
+msgstr "Corona Borealis"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:124
+msgid "like IAU constellation; no details for lines in the text"
+msgstr "como a constelación da IAU; sen detalles para as liñas de texto"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:128
-msgid "Corona Borealis"
-msgstr ""
+msgid "Her"
+msgstr "Her"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:129
-msgid "like IAU constellation; no details for lines in \tthe text"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:133
-msgid "Her"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:134
 msgid "&#700;&Epsilon;&nu;&gamma;&#972;&nu;&alpha;&sigma;&iota;&nu;"
-msgstr ""
+msgstr "&#700;&Epsilon;&nu;&gamma;&#972;&nu;&alpha;&sigma;&iota;&nu;"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:135
+#: ../../skycultures/almagest/description.en.utf8:130
 msgid "Kneeler"
-msgstr ""
+msgstr "Axeonllado"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:136
+#: ../../skycultures/almagest/description.en.utf8:131
 #: ../../skycultures/lokono/description.en.utf8:106
 msgid "Hercules"
 msgstr "Hercules"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:137
+#: ../../skycultures/almagest/description.en.utf8:132
 msgid "one of the foot stars is top of staff of Bootes"
-msgstr ""
+msgstr "unha das estrelas do pé é a parte superior do persoal de Bootes"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:138
+#: ../../skycultures/almagest/description.en.utf8:133
 msgid "star HIP 82764 added as neck star"
-msgstr ""
+msgstr "a estrela HIP 82764 engadiuse como estrela do pescozo"
 
 #. type: Content of: <p><table><tbody><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:141
+#: ../../skycultures/almagest/description.en.utf8:136
 #: ../../skycultures/mulapin/description.en.utf8:204
 #: ../../skycultures/seleucid/description.en.utf8:149
 msgid "Lyr"
 msgstr "Lyr"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:142
+#: ../../skycultures/almagest/description.en.utf8:137
 msgid "&Lambda;&#973;&rho;&alpha;"
-msgstr ""
+msgstr "&Lambda;&#973;&rho;&alpha;"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:143
+#: ../../skycultures/almagest/description.en.utf8:138
 msgid "Lyre"
-msgstr ""
+msgstr "Lira"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:144
+#: ../../skycultures/almagest/description.en.utf8:139
 #: ../../skycultures/boorong/description.en.utf8:121
 msgid "Lyra"
 msgstr "Lyra"
 
 #. type: Content of: <p><table><tbody><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:149
+#: ../../skycultures/almagest/description.en.utf8:144
 #: ../../skycultures/mulapin/description.en.utf8:228
 #: ../../skycultures/seleucid/description.en.utf8:173
 msgid "Cyg"
 msgstr "Cyg"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:150
+#: ../../skycultures/almagest/description.en.utf8:145
 msgid "&#700;&#714;&Omicron;&rho;&nu;&iota;&sigmaf;"
-msgstr ""
+msgstr "&#700;&#714;&Omicron;&rho;&nu;&iota;&sigmaf;"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:151
+#: ../../skycultures/almagest/description.en.utf8:146
 msgid "Bird"
-msgstr ""
+msgstr "Paxaro"
 
-#. type: Content of: <p><font><em><font>
-#: ../../skycultures/almagest/description.en.utf8:152
-#: ../../skycultures/arabic/description.en.utf8:12
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:147
 msgid "Cygnus"
 msgstr "Cygnus"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:153
+#: ../../skycultures/almagest/description.en.utf8:148
 msgid "swan with legs"
-msgstr ""
+msgstr "cisne con patas"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:154
-msgid "Tips of wings connected with tail,"
-msgstr ""
+#: ../../skycultures/almagest/description.en.utf8:149
+msgid "Tips of wings connected with tail"
+msgstr "Puntas das ás conectadas coa cola"
 
 #. type: Content of: <p><table><tbody><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:157
+#: ../../skycultures/almagest/description.en.utf8:152
 #: ../../skycultures/mulapin/description.en.utf8:79
 #: ../../skycultures/seleucid/description.en.utf8:31
 msgid "Cas"
 msgstr "Cas"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:158
+#: ../../skycultures/almagest/description.en.utf8:153
 msgid "&Kappa;&alpha;&sigma;&sigma;&iota;&#941;&pi;&epsilon;&iota;&alpha;"
-msgstr ""
+msgstr "&Kappa;&alpha;&sigma;&sigma;&iota;&#941;&pi;&epsilon;&iota;&alpha;"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:159
+#: ../../skycultures/almagest/description.en.utf8:154
 msgid "Kassiepeia"
-msgstr ""
+msgstr "Casiopea"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:160
+#: ../../skycultures/almagest/description.en.utf8:155
 msgid "Cassiopeia"
-msgstr ""
+msgstr "Cassiopeia"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:161
+#: ../../skycultures/almagest/description.en.utf8:156
 msgid "Queen sitting on a throne"
-msgstr ""
+msgstr "Raíña sentada no trono"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:162
+#: ../../skycultures/almagest/description.en.utf8:157
 msgid "to avoid confusion we did not draw the throne"
-msgstr ""
+msgstr "para evitar confusións non debuxamos o trono"
 
 #. type: Content of: <p><table><tbody><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:165
+#: ../../skycultures/almagest/description.en.utf8:160
 #: ../../skycultures/mulapin/description.en.utf8:91
 #: ../../skycultures/seleucid/description.en.utf8:44
 msgid "Per"
 msgstr "Per"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:166
+#: ../../skycultures/almagest/description.en.utf8:161
 msgid "&Pi;&epsilon;&rho;&sigma;&epsilon;&#973;&sigmaf;"
-msgstr ""
+msgstr "&Pi;&epsilon;&rho;&sigma;&epsilon;&#973;&sigmaf;"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:167
-#: ../../skycultures/almagest/description.en.utf8:168
+#: ../../skycultures/almagest/description.en.utf8:162
+#: ../../skycultures/almagest/description.en.utf8:163
 msgid "Perseus"
+msgstr "Perseus"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:164
+msgid ""
+"Double star cluster NGC 869 and NGC 884 as Deep Sky Object - &gt;one of the "
+"stars in the cluster was used for drawing"
 msgstr ""
+"Cúmulo de estrelas dobres NGC 869 e NGC 884 como obxecto do ceo profundo: "
+"unha das estrelas do cúmulo empregouse para o debuxo"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:165
+msgid ""
+"one of the stars in Gorgon-head is added to make the head look more "
+"spherical"
+msgstr ""
+"engádese unha estrela da Cabeza da Gorgona para que a cabeza pareza máis "
+"esférica"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:168
+msgid "Aur"
+msgstr "Aur"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:169
-msgid ""
-"Double star cluster NGC 869 and NGC 884 as Deep Sky Object -&gt; one of the "
-"stars in the cluster was used for drawing"
-msgstr ""
+msgid "&#699;&Eta;&nu;&#943;&omicron;&chi;&omicron;&sigmaf;"
+msgstr "&#699;&Eta;&nu;&#943;&omicron;&chi;&omicron;&sigmaf;"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:170
+msgid "Charioteer"
+msgstr "Auriga"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:171
-msgid ""
-"one of the stars in Gorgon-head is added to make the head look more "
-"spherical;"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:175
-msgid "Aur"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:176
-msgid "&#699;&Eta;&nu;&#943;&omicron;&chi;&omicron;&sigmaf;"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:177
-msgid "Charioteer"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:178
 msgid "Auriga"
-msgstr ""
+msgstr "Auriga"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:179
+#: ../../skycultures/almagest/description.en.utf8:172
 msgid "wears long garment; garment limited through shoulders and hem"
-msgstr ""
+msgstr "leva roupa longa; prenda limitada por ombreiros e basta"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:180
+#: ../../skycultures/almagest/description.en.utf8:173
 msgid "o Aur added as neck star; 1 Aur added as hem star"
 msgstr ""
+"o Aur engadido como estrela do pescozo; 1 Aur engadido como estrela da basta"
 
 #. type: Content of: <p><table><tbody><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:183
+#: ../../skycultures/almagest/description.en.utf8:176
 #: ../../skycultures/seleucid/description.en.utf8:328
 msgid "Oph"
 msgstr "Oph"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:184
+#: ../../skycultures/almagest/description.en.utf8:177
 msgid "&#702;&Omicron;&phi;&iota;&omicron;&#973;&chi;&omicron;&sigmaf;"
-msgstr ""
+msgstr "&#702;&Omicron;&phi;&iota;&omicron;&#973;&chi;&omicron;&sigmaf;"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:178
+msgid "Serpent Bearer"
+msgstr "Portador da serpe"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:179
+msgid "Ophiuchus"
+msgstr "Ophiuchus"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:180
+msgid "has serpent in his hand"
+msgstr "ten unha serpe na man"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:181
+msgid "a star added as neck star"
+msgstr "engadeuse unha estrela para formar o pescozo"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:184
+msgid "Ser"
+msgstr "Ser"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:185
-msgid "Serpent Bearer"
-msgstr ""
+msgid "&#700;&#714;&Omicron;&phi;&iota;&sigmaf;"
+msgstr "&#700;&#714;&Omicron;&phi;&iota;&sigmaf;"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:186
-msgid "Ophiuchus"
-msgstr ""
+msgid "Snake"
+msgstr "Serpe"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:187
-msgid "has serpent in his hand"
-msgstr ""
+msgid "Serpens"
+msgstr "Serpens"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:188
-msgid "a star added as neck star;"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:191
-msgid "Ser"
-msgstr ""
+msgid "two separate parts of the snake (head and tail); square is head"
+msgstr "dúas partes separadas da serpe (cabeza e cola); o cadrado é a cabeza"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:192
-msgid "&#700;&#714;&Omicron;&phi;&iota;&sigmaf;"
-msgstr ""
+msgid "Sge"
+msgstr "Sge"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:193
-msgid "Snake"
-msgstr ""
+msgid "&#702;&Omicron;&iota;&sigma;&tau;&#972;&sigmaf;"
+msgstr "&#702;&Omicron;&iota;&sigma;&tau;&#972;&sigmaf;"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:194
-msgid "Serpens"
-msgstr ""
+msgid "Arrow"
+msgstr "Frecha"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:195
-msgid "two separate parts of the snake (head and tail); square is head"
-msgstr ""
+msgid "Sagitta"
+msgstr "Sagitta"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:199
-msgid "Sge"
-msgstr ""
+#: ../../skycultures/almagest/description.en.utf8:196
+msgid "Like IAU constellation, &eta; Sge is missing"
+msgstr "Como constelación IAU, &eta; falta Sge"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:200
-msgid "&#702;&Omicron;&iota;&sigma;&tau;&#972;&sigmaf;"
-msgstr ""
+msgid "Aql"
+msgstr "Aql"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:201
-msgid "Arrow"
-msgstr ""
+msgid "&#702;&Alpha;&epsilon;&tau;&#972;&sigmaf;"
+msgstr "&#702;&Alpha;&epsilon;&tau;&#972;&sigmaf;"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:202
-msgid "Sagitta"
-msgstr ""
+msgid "Eagle"
+msgstr "Aguia"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:203
-msgid "Like IAU constellation, &eta; Sge is missing"
-msgstr ""
+msgid "Aquila"
+msgstr "Aquila"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:207
-msgid "Aql"
+#: ../../skycultures/almagest/description.en.utf8:204
+msgid ""
+"&tau; Aql as head star, &beta; as neck, Altair is between shoulders, &gamma;"
+" and &mu; are shoulders"
 msgstr ""
+"&tau; Aql como estrela da cabeza, &beta; coma o pescozo neck, Altair está "
+"entre os ombreiros, &gamma; e &mu; son os ombreiros"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:208
-msgid "&#702;&Alpha;&epsilon;&tau;&#972;&sigmaf;"
-msgstr ""
+msgid "Del"
+msgstr "Del"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:209
-msgid "Eagle"
-msgstr ""
+msgid "&Delta;&epsilon;&lambda;&phi;&#943;&sigmaf;"
+msgstr "&Delta;&epsilon;&lambda;&phi;&#943;&sigmaf;"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:210
-msgid "Aquila"
-msgstr ""
+msgid "Dolphin"
+msgstr "Golfiño"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:211
-msgid ""
-"&tau; \tAql as head star, &beta; as neck, Altair is between shoulders, "
-"&gamma; and &mu; are shoulders"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:215
-msgid "Del"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:216
-msgid "&Delta;&epsilon;&lambda;&phi;&#943;&sigmaf;"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:217
-msgid "Dolphin"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:218
 #: ../../skycultures/anutan/description.en.utf8:23
 #: ../../skycultures/boorong/description.en.utf8:131
 msgid "Delphinus"
 msgstr "Delphinus"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:220
+#: ../../skycultures/almagest/description.en.utf8:213
 msgid "refined shape"
-msgstr ""
+msgstr "forma refinada"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:223
+#: ../../skycultures/almagest/description.en.utf8:216
 msgid "Equ"
-msgstr ""
+msgstr "Equ"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:224
+#: ../../skycultures/almagest/description.en.utf8:217
 msgid "&Pi;&rho;&omicron;&tau;&omicron;&mu;&#942;"
-msgstr ""
+msgstr "&Pi;&rho;&omicron;&tau;&omicron;&mu;&#942;"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:225
+#: ../../skycultures/almagest/description.en.utf8:218
 msgid "Bust [of a horse]"
-msgstr ""
+msgstr "Busto [dun cabalo]"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:226
+#: ../../skycultures/almagest/description.en.utf8:219
 msgid "Equuleus"
-msgstr ""
+msgstr "Equuleus"
 
 #. type: Content of: <p><table><tbody><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:231
+#: ../../skycultures/almagest/description.en.utf8:224
 #: ../../skycultures/mulapin/description.en.utf8:303
 #: ../../skycultures/seleucid/description.en.utf8:219
 msgid "Peg"
 msgstr "Peg"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:232
+#: ../../skycultures/almagest/description.en.utf8:225
 msgid "&#699;&#714;&Iota;&pi;&pi;&omicron;&sigmaf;"
-msgstr ""
+msgstr "&#699;&#714;&Iota;&pi;&pi;&omicron;&sigmaf;"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:233
+#: ../../skycultures/almagest/description.en.utf8:226
 msgid "Horse"
-msgstr ""
+msgstr "Cabalo"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:234
+#: ../../skycultures/almagest/description.en.utf8:227
 #: ../../skycultures/lokono/description.en.utf8:51
 msgid "Pegasus"
 msgstr "Pegasus"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:235
+#: ../../skycultures/almagest/description.en.utf8:228
 msgid "with mane and one wing"
-msgstr ""
+msgstr "con melena e unha á"
 
 #. type: Content of: <p><table><tbody><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:239
+#: ../../skycultures/almagest/description.en.utf8:232
 #: ../../skycultures/seleucid/description.en.utf8:238
 msgid "And"
 msgstr "E"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:240
+#: ../../skycultures/almagest/description.en.utf8:233
 msgid "&#702;&Alpha;&nu;&delta;&rho;&omicron;&mu;&#941;&delta;&alpha;"
-msgstr ""
+msgstr "&#702;&Alpha;&nu;&delta;&rho;&omicron;&mu;&#941;&delta;&alpha;"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:234
+#: ../../skycultures/almagest/description.en.utf8:235
+msgid "Andromeda"
+msgstr "Andromeda"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:236
+msgid "dress and belt"
+msgstr "vestido e cinturón"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:240
+msgid "Tri"
+msgstr "Tri"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:241
-#: ../../skycultures/almagest/description.en.utf8:242
-msgid "Andromeda"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:243
-msgid "dress and belt"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:247
-msgid "Tri"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:248
 msgid "&Tau;&rho;&#943;&gamma;&omega;&nu;&omicron;&sigmaf;"
-msgstr ""
+msgstr "&Tau;&rho;&#943;&gamma;&omega;&nu;&omicron;&sigmaf;"
 
 #. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:249
+#: ../../skycultures/almagest/description.en.utf8:242
 #: ../../skycultures/chinese/description.en.utf8:2778
 msgid "Triangle"
 msgstr "Triángulo"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:250
+#: ../../skycultures/almagest/description.en.utf8:243
 msgid "Triangulum"
-msgstr ""
+msgstr "Triangulum"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:251
+#: ../../skycultures/almagest/description.en.utf8:244
 msgid "four given stars &#61664; middle star of one side"
-msgstr ""
+msgstr "catro estrelas &#61664; a estrela central dun lado"
 
 #. type: Content of: <p><table><tbody><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:255
+#: ../../skycultures/almagest/description.en.utf8:248
 #: ../../skycultures/mulapin/description.en.utf8:321
 #: ../../skycultures/seleucid/description.en.utf8:244
 msgid "Ari"
 msgstr "Ari"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:256
+#: ../../skycultures/almagest/description.en.utf8:249
 msgid "&Kappa;&rho;&iota;&#972;&sigmaf;"
-msgstr ""
+msgstr "&Kappa;&rho;&iota;&#972;&sigmaf;"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:257
+#: ../../skycultures/almagest/description.en.utf8:250
 msgid "Ram"
-msgstr ""
+msgstr "Carneiro"
 
 #. type: Content of: <table><tr>
-#: ../../skycultures/almagest/description.en.utf8:258
+#: ../../skycultures/almagest/description.en.utf8:251
 #: ../../skycultures/anutan/description.en.utf8:20
 msgid "Aries"
 msgstr "Aries"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:259
+#: ../../skycultures/almagest/description.en.utf8:252
 msgid "turned head; only one horn"
-msgstr ""
+msgstr "cabeza ladeada; só un corno"
 
 #. type: Content of: <table><tbody><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:263
+#: ../../skycultures/almagest/description.en.utf8:256
 #: ../../skycultures/mulapin/description.en.utf8:333
 msgid "Tau"
 msgstr "Tau"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:264
+#: ../../skycultures/almagest/description.en.utf8:257
 msgid "&Tau;&alpha;&upsilon;&#771;&rho;&omicron;&sigmaf;"
-msgstr ""
+msgstr "&Tau;&alpha;&upsilon;&#771;&rho;&omicron;&sigmaf;"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:265
+#: ../../skycultures/almagest/description.en.utf8:258
 msgid "Bull"
-msgstr ""
+msgstr "Touro"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:266
+#: ../../skycultures/almagest/description.en.utf8:259
 msgid "Taurus"
-msgstr ""
+msgstr "Taurus"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:267
+#: ../../skycultures/almagest/description.en.utf8:260
 msgid "half body, only two legs visible; direction of view to observer"
 msgstr ""
+"medio corpo, só dúas patas visibles; dirección de visión cara ó observador"
 
 #. type: Content of: <p><table><tbody><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:271
+#: ../../skycultures/almagest/description.en.utf8:264
 #: ../../skycultures/mulapin/description.en.utf8:103
 #: ../../skycultures/mulapin/description.en.utf8:109
 #: ../../skycultures/seleucid/description.en.utf8:57
@@ -806,249 +874,252 @@ msgid "Gem"
 msgstr "Gem"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:272
+#: ../../skycultures/almagest/description.en.utf8:265
 msgid "&Delta;&#943;&delta;&upsilon;&mu;&omicron;&iota;"
-msgstr ""
+msgstr "&Delta;&#943;&delta;&upsilon;&mu;&omicron;&iota;"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:273
+#: ../../skycultures/almagest/description.en.utf8:266
 msgid "Twins"
-msgstr ""
+msgstr "Xemelgos"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:274
+#: ../../skycultures/almagest/description.en.utf8:267
 msgid "Gemini"
-msgstr ""
+msgstr "Gemini"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:275
+#: ../../skycultures/almagest/description.en.utf8:268
 msgid "one star in common; touching each other with hands"
-msgstr ""
+msgstr "unha estrela en común; tocándose entre si coas mans"
 
 #. type: Content of: <p><table><tbody><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:279
+#: ../../skycultures/almagest/description.en.utf8:272
 #: ../../skycultures/mulapin/description.en.utf8:115
 #: ../../skycultures/seleucid/description.en.utf8:71
 msgid "Cnc"
 msgstr "Cnc"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:280
+#: ../../skycultures/almagest/description.en.utf8:273
 msgid "&Kappa;&alpha;&rho;&kappa;&#943;&nu;&omicron;&sigmaf;"
-msgstr ""
+msgstr "&Kappa;&alpha;&rho;&kappa;&#943;&nu;&omicron;&sigmaf;"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:281
+#: ../../skycultures/almagest/description.en.utf8:274
 msgid "Crab"
-msgstr ""
+msgstr "Cangrexo"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:282
+#: ../../skycultures/almagest/description.en.utf8:275
 msgid "Cancer"
-msgstr ""
+msgstr "Cancer"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:283
+#: ../../skycultures/almagest/description.en.utf8:276
 msgid "square body"
-msgstr ""
+msgstr "corpo cadrado"
 
 #. type: Content of: <p><table><tbody><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:287
-#: ../../skycultures/almagest/description.en.utf8:290
+#: ../../skycultures/almagest/description.en.utf8:280
+#: ../../skycultures/almagest/description.en.utf8:283
 #: ../../skycultures/mulapin/description.en.utf8:121
 #: ../../skycultures/seleucid/description.en.utf8:77
 msgid "Leo"
 msgstr "Leo"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:288
+#: ../../skycultures/almagest/description.en.utf8:281
 msgid "&Lambda;&#941;&omega;&nu;"
-msgstr ""
+msgstr "&Lambda;&#941;&omega;&nu;"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:289
+#: ../../skycultures/almagest/description.en.utf8:282
 msgid "Lion"
-msgstr ""
+msgstr "León"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:291
+#: ../../skycultures/almagest/description.en.utf8:284
 msgid "opens jaw"
-msgstr ""
+msgstr "abre a mandíbula"
 
 #. type: Content of: <p><table><tbody><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:295
+#: ../../skycultures/almagest/description.en.utf8:288
 #: ../../skycultures/mulapin/description.en.utf8:381
 #: ../../skycultures/seleucid/description.en.utf8:314
 msgid "Vir"
 msgstr "Vir"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:296
+#: ../../skycultures/almagest/description.en.utf8:289
 msgid "&Pi;&alpha;&rho;&theta;&#941;&nu;&omicron;&sigmaf;"
-msgstr ""
+msgstr "&Pi;&alpha;&rho;&theta;&#941;&nu;&omicron;&sigmaf;"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:290
+msgid "Maiden"
+msgstr "Virxe"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:291
+msgid "Virgo"
+msgstr "Virgo"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:292
+msgid "no separate head"
+msgstr "sen cabeza separada"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:293
+msgid "fainter stars added to draw the wings"
+msgstr "engadíronse estrelas máis febles para debuxar as ás"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:296
+msgid "Lib"
+msgstr "Lib"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:297
-msgid "Maiden"
-msgstr ""
+msgid "&Chi;&eta;&lambda;&alpha;&#943;"
+msgstr "&Chi;&eta;&lambda;&alpha;&#943;"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:298
-msgid "Virgo"
-msgstr ""
+msgid "Claws [of the Scorpion]"
+msgstr "Poutas [de Escorpión]"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:299
-msgid "no separate head"
-msgstr ""
+msgid "Libra"
+msgstr "Libra"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:300
-msgid "fainter stars added to draw the wings"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:303
-msgid "Lib"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:304
-msgid "&Chi;&eta;&lambda;&alpha;&#943;"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:305
-msgid "Claws [of the Scorpion]"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:306
-msgid "Libra"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:307
 msgid ""
 "Ptolemy always uses the term &quot;claws&quot;, never &quot;the "
 "balance&quot;."
 msgstr ""
+"Ptolomeo usa sempre o termo &quot;pouta&quot;, nunca &quot;balanza&quot;"
 
 #. type: Content of: <p><table><tbody><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:311
+#: ../../skycultures/almagest/description.en.utf8:304
 #: ../../skycultures/mulapin/description.en.utf8:496
 #: ../../skycultures/seleucid/description.en.utf8:418
 msgid "Sco"
 msgstr "Sco"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:312
+#: ../../skycultures/almagest/description.en.utf8:305
 msgid "&Sigma;&kappa;&omicron;&rho;&pi;&#943;&omicron;&sigmaf;"
-msgstr ""
+msgstr "&Sigma;&kappa;&omicron;&rho;&pi;&#943;&omicron;&sigmaf;"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:313
+#: ../../skycultures/almagest/description.en.utf8:306
 msgid "Scorpion"
-msgstr ""
+msgstr "Escorpión"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:314
+#: ../../skycultures/almagest/description.en.utf8:307
 msgid "Scorpius"
-msgstr ""
+msgstr "Scorpius"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:316
+#: ../../skycultures/almagest/description.en.utf8:309
 msgid "arms added around the head: &nu; and &rho;"
-msgstr ""
+msgstr "engadíronse brazos arredor da cabeza: &nu; e &rho;"
 
 #. type: Content of: <p><table><tbody><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:319
+#: ../../skycultures/almagest/description.en.utf8:312
 #: ../../skycultures/mulapin/description.en.utf8:514
 #: ../../skycultures/seleucid/description.en.utf8:436
 msgid "Sgr"
 msgstr "Sgr"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:320
+#: ../../skycultures/almagest/description.en.utf8:313
 msgid "&Tau;&omicron;&xi;&#972;&tau;&eta;&sigmaf;"
-msgstr ""
+msgstr "&Tau;&omicron;&xi;&#972;&tau;&eta;&sigmaf;"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:321
+#: ../../skycultures/almagest/description.en.utf8:314
 msgid "Archer"
-msgstr ""
+msgstr "Arqueiro"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:322
+#: ../../skycultures/almagest/description.en.utf8:315
 msgid "Sagittarius"
-msgstr ""
+msgstr "Sagittarius"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:323
+#: ../../skycultures/almagest/description.en.utf8:316
 msgid "a centaur with bow ahead; &bdquo;cloak&ldquo; behind"
-msgstr ""
+msgstr "un centauro con arco e unha capa detrás"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:324
+#: ../../skycultures/almagest/description.en.utf8:317
 msgid ""
 "we included many faint stars in our stick figure in order to make the "
 "picture clear."
 msgstr ""
+"incluímos moitas estrelas débiles na nosa figura para que a imaxe fose "
+"clara."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:327
+#: ../../skycultures/almagest/description.en.utf8:320
 msgid "Cap"
-msgstr ""
+msgstr "Cap"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:328
+#: ../../skycultures/almagest/description.en.utf8:321
 msgid "&Alpha;&#943;&gamma;&#972;&kappa;&epsilon;&rho;&omicron;&sigmaf;"
-msgstr ""
+msgstr "&Alpha;&#943;&gamma;&#972;&kappa;&epsilon;&rho;&omicron;&sigmaf;"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:329
+#: ../../skycultures/almagest/description.en.utf8:322
 msgid "The One with the Goat's Horn"
-msgstr ""
+msgstr "O que ten un corno de cabra"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:330
+#: ../../skycultures/almagest/description.en.utf8:323
 msgid "Capricornus"
-msgstr ""
+msgstr "Capricornus"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:331
+#: ../../skycultures/almagest/description.en.utf8:324
 msgid "fish tail; two legs visible"
-msgstr ""
+msgstr "cola de peixe; dúas pernas visibles"
 
 #. type: Content of: <p><table><tbody><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:335
+#: ../../skycultures/almagest/description.en.utf8:328
 #: ../../skycultures/mulapin/description.en.utf8:448
 #: ../../skycultures/seleucid/description.en.utf8:365
 msgid "Aqr"
 msgstr "Aqr"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:336
+#: ../../skycultures/almagest/description.en.utf8:329
 msgid "&#703;&Upsilon;&delta;&rho;&omicron;&chi;&#972;&omicron;&sigmaf;"
-msgstr ""
+msgstr "&#703;&Upsilon;&delta;&rho;&omicron;&chi;&#972;&omicron;&sigmaf;"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:337
+#: ../../skycultures/almagest/description.en.utf8:330
 msgid "Water-Carrier"
-msgstr ""
+msgstr "Augador"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:338
+#: ../../skycultures/almagest/description.en.utf8:331
 msgid "Aquarius"
-msgstr ""
+msgstr "Aquarius"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:339
+#: ../../skycultures/almagest/description.en.utf8:332
 msgid "water out of jug"
-msgstr ""
+msgstr "auga verténdose da xarra"
 
 #. type: Content of: <p><table><tbody><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:343
+#: ../../skycultures/almagest/description.en.utf8:336
 #: ../../skycultures/mulapin/description.en.utf8:309
 #: ../../skycultures/mulapin/description.en.utf8:315
 #: ../../skycultures/seleucid/description.en.utf8:225
@@ -1057,270 +1128,282 @@ msgid "Psc"
 msgstr "Psc"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:344
+#: ../../skycultures/almagest/description.en.utf8:337
 msgid "&#702;&Iota;&chi;&theta;&#973;&epsilon;&sigmaf;"
+msgstr "&#702;&Iota;&chi;&theta;&#973;&epsilon;&sigmaf;"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:338
+msgid "[2] Fish"
+msgstr "[2] Peixe"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:339
+msgid "Pisces"
+msgstr "Pisces"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:341
+msgid ""
+"northern fish: 68(h), 67(k), and 65(i) described as head in Almagest but we "
+"took them as fin because mouth should be at g and &tau; Psc. Additional "
+"change on tail fin: extended to &rho;"
 msgstr ""
+"peixe do norte: 68(h), 67(k), e 65(i) descríbese como cabeza en Almagest "
+"pero tómanse como aleta porque a boca debería estar en g e &tau; Psc. Outro "
+"cambio adicional é a aleta de cola, estendida a &rho;"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:344
+msgid "Cet"
+msgstr "Cet"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:345
-msgid "[2] Fish"
-msgstr ""
+msgid "&Kappa;&eta;&#771;&tau;&omicron;&sigmaf;"
+msgstr "&Kappa;&eta;&#771;&tau;&omicron;&sigmaf;"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:346
-msgid "Pisces"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:348
-msgid ""
-"northern fish: 68(h), 67(k), and 65(i) described as head in Almagest but we "
-"took them as fin because mouth should be at g and &tau; Psc.  additional "
-"change on tail fin: extended to &rho;"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:353
-msgid "Cet"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:354
-msgid "&Kappa;&eta;&#771;&tau;&omicron;&sigmaf;"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:355
 msgid "Sea Monster"
-msgstr ""
+msgstr "Balea"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:356
+#: ../../skycultures/almagest/description.en.utf8:347
 msgid "Cetus"
-msgstr ""
+msgstr "Cetus"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:358
+#: ../../skycultures/almagest/description.en.utf8:349
 msgid "Body does not go through star &tau;, but through star &upsilon;"
-msgstr ""
+msgstr "O corpo non pasa pola estrela &tau;, senón pola estrela &upsilon;"
 
 #. type: Content of: <p><table><tbody><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:361
+#: ../../skycultures/almagest/description.en.utf8:352
 #: ../../skycultures/mulapin/description.en.utf8:339
 #: ../../skycultures/seleucid/description.en.utf8:265
 msgid "Ori"
 msgstr "Ori"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:362
+#: ../../skycultures/almagest/description.en.utf8:353
 msgid "&#702;&Omega;&rho;&#943;&omega;&nu;"
-msgstr ""
+msgstr "&#702;&Omega;&rho;&#943;&omega;&nu;"
 
 #. type: Content of: <h3>
-#: ../../skycultures/almagest/description.en.utf8:363
-#: ../../skycultures/almagest/description.en.utf8:364
+#: ../../skycultures/almagest/description.en.utf8:354
+#: ../../skycultures/almagest/description.en.utf8:355
 #: ../../skycultures/lokono/description.en.utf8:116
 #: ../../skycultures/siberian/description.en.utf8:22
 msgid "Orion"
 msgstr "Orion"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:366
+#: ../../skycultures/almagest/description.en.utf8:357
 msgid ""
 "The &quot;head&quot; is labeled as &quot;nebulous&quot; which means Ptolemy "
 "interpreted &phi;<sub>1</sub>, &phi;<sub>2</sub>, and &lambda;, together "
 "with fainter stars between them as a &quot;cluster&quot; (or association "
-"which is more extended than the modern &quot;lam Ori Assoc.&quot;). Head "
-"does not have direct connection to the shoulder stars anymore, but a "
+"which is more extended than the modern &quot;&lambda; Ori Assoc.&quot;). "
+"Head does not have direct connection to the shoulder stars anymore, but a "
 "connection to a star between the stars in the shoulders."
 msgstr ""
+"A \"cabeza\" está etiquetada como \"nebulosa\", o que significa que Ptolomeo"
+" interpretou &phi;<sub>1</sub>, &phi;<sub>2</sub>, e &lambda; xunto con "
+"estrelas máis débiles entre elas como \"cúmulo\" (ou asociación máis "
+"estendida que a moderna & quot; & lambda; Ori Assoc. & quot;). A cabeza xa "
+"non ten conexión directa coas estrelas do ombreiro, senón conexión cunha "
+"estrela entre as estrelas dos ombreiros."
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:360
+msgid "Eri"
+msgstr "Eri"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:361
+msgid "&Pi;&omicron;&tau;&alpha;&mu;&omicron;&#972;&sigmaf;"
+msgstr "&Pi;&omicron;&tau;&alpha;&mu;&omicron;&#972;&sigmaf;"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:362
+msgid "River [nameless]"
+msgstr "Río [sen nome]"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:363
+msgid "Eridanus"
+msgstr "Eridanus"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:364
+msgid "Like IAU constellation, but shorter"
+msgstr "Como a constelación da IAU, pero máis curta"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:368
+msgid "Lep"
+msgstr "Lep"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:369
+msgid "&Lambda;&alpha;&gamma;&omega;&#771;&sigmaf;"
+msgstr "&Lambda;&alpha;&gamma;&omega;&#771;&sigmaf;"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:370
+msgid "Hare"
+msgstr "Lebre"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:371
+msgid "Lepus"
+msgstr "Lepus"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:373
+msgid "took the \"4 stars over the ear\" as ear"
+msgstr "colleu as \"4 estrelas sobre a orella\" como orella"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/almagest/description.en.utf8:376
+msgid "CMa"
+msgstr "CMa"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/almagest/description.en.utf8:377
-msgid "Eri"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:378
-msgid "&Pi;&omicron;&tau;&alpha;&mu;&omicron;&#972;&sigmaf;"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:379
-msgid "River [nameless]"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:380
-msgid "Eridanus"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:381
-msgid "Like IAU constellation but shorter"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:385
-msgid "Lep"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:386
-msgid "&Lambda;&alpha;&gamma;&omega;&#771;&sigmaf;"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:387
-msgid "Hare"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:388
-msgid "Lepus"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:390
-msgid "took the \"4 stars over the ear\" as ear"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:393
-msgid "CMa"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:394
 msgid "&Kappa;&#973;&omega;&nu;"
-msgstr ""
+msgstr "&Kappa;&#973;&omega;&nu;"
 
 #. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:395
+#: ../../skycultures/almagest/description.en.utf8:378
 #: ../../skycultures/chinese/description.en.utf8:1469
 msgid "Dog"
 msgstr "Can"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:396
+#: ../../skycultures/almagest/description.en.utf8:379
 msgid "Canis Major"
-msgstr ""
+msgstr "Canis Major"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:401
+#: ../../skycultures/almagest/description.en.utf8:384
 msgid "CMi"
-msgstr ""
+msgstr "CMi"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:402
+#: ../../skycultures/almagest/description.en.utf8:385
 msgid "&Pi;&rho;&omicron;&kappa;&#973;&omega;&nu;"
-msgstr ""
+msgstr "&Pi;&rho;&omicron;&kappa;&#973;&omega;&nu;"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:403
+#: ../../skycultures/almagest/description.en.utf8:386
 msgid "The One before the Dog"
-msgstr ""
+msgstr "O que está antes do Can"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:404
+#: ../../skycultures/almagest/description.en.utf8:387
 msgid "Canis Minor"
-msgstr ""
+msgstr "Canis Minor"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:406
+#: ../../skycultures/almagest/description.en.utf8:389
 msgid ""
 "In Almagest, the name of the constellation is &quot;The One before the "
 "Dog&quot; or &quot;Harbinger of Sirius&quot; as Toomer puts it. However, "
 "&beta; CMi is called &quot;the neck&quot; (of whom is unknown). We drew a "
 "little dog with &gamma; and &epsilon; as head; &alpha;, &beta;, &eta; and "
-"HIP36889 as body; forelegs with HIP35509 and HIP35614; hindlegs with "
-"&delta;<sub>2</sub> and &delta;<sub>3</sub>; tail with HIP37634"
+"HIP36889 as body; forelegs with HIP 35509 and HIP 35614; hindlegs with "
+"&delta;<sub>2</sub> and &delta;<sub>3</sub>; tail with HIP 37634"
 msgstr ""
+"No Almagest, o nome da constelación é &quot;O que está antes do Can&quot; ou"
+" &quot;O anunciador de Sirius&quot; como di Toomer. Porén, a &beta; CMi "
+"chámaselle &quot;o pescozo&quot; (descoñécese de quen). Debuxamos un pequeno"
+" can con &gamma; e &epsilon; como cabeza; &alpha;, &beta;, &eta; e HIP36889 "
+"como corpo; as patas dianteiras con HIP 35509 e HIP 35614; as patas "
+"traseiras con &delta;<sub>2</sub> e &delta;<sub>3</sub>; o rabo con HIP "
+"37634"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:412
+#: ../../skycultures/almagest/description.en.utf8:392
 msgid "Arg"
-msgstr ""
+msgstr "Arg"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:413
+#: ../../skycultures/almagest/description.en.utf8:393
 msgid "&#702;&Alpha;&rho;&gamma;&omega;"
-msgstr ""
+msgstr "&#702;&Alpha;&rho;&gamma;&omega;"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:414
+#: ../../skycultures/almagest/description.en.utf8:394
 msgid "Ship &quot;Argo&quot;"
-msgstr ""
+msgstr "Barco &quot;Argo&quot;"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:415
+#: ../../skycultures/almagest/description.en.utf8:395
 msgid "Argo"
-msgstr ""
+msgstr "Argo"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:416
-msgid "smaller than the sum of the AIU-constellations Pup+Pyx+Car+Vel"
-msgstr ""
+#: ../../skycultures/almagest/description.en.utf8:396
+msgid "smaller than the sum of the IAU-constellations Pup+Pyx+Car+Vel"
+msgstr "menor cá suma de constelacións IAU Pup+Pyx+Car+Vel"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:417
+#: ../../skycultures/almagest/description.en.utf8:397
 msgid ""
 "Many stars not integrated in the constellation, to create a boat-like shape;"
 " in many depictions (including the ancient Farnese globe), only a half of a "
 "ship is painted."
 msgstr ""
+"Hai moitas estrelas non integradas na constelación, para crear unha forma "
+"parecida a un barco; en moitas representacións (incluído o antigo globo de "
+"Farnese), só se debuxa a metade dun barco."
 
 #. type: Content of: <p><table><tbody><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:423
+#: ../../skycultures/almagest/description.en.utf8:400
 #: ../../skycultures/mulapin/description.en.utf8:369
 #: ../../skycultures/seleucid/description.en.utf8:300
 msgid "Hya"
 msgstr "Hya"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:424
+#: ../../skycultures/almagest/description.en.utf8:401
 msgid "&#701;&#714;&Upsilon;&delta;&rho;&omicron;&sigmaf;"
-msgstr ""
+msgstr "&#701;&#714;&Upsilon;&delta;&rho;&omicron;&sigmaf;"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:425
+#: ../../skycultures/almagest/description.en.utf8:402
 msgid "Water Snake"
-msgstr ""
+msgstr "Serpe de Auga"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:426
+#: ../../skycultures/almagest/description.en.utf8:403
 msgid "Hydra"
-msgstr ""
+msgstr "Hydra"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:427
-#: ../../skycultures/almagest/description.en.utf8:444
-#: ../../skycultures/almagest/description.en.utf8:471
-msgid "Like IAU constellation"
-msgstr ""
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:431
+#: ../../skycultures/almagest/description.en.utf8:408
 msgid "Crt"
-msgstr ""
+msgstr "Crt"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:432
+#: ../../skycultures/almagest/description.en.utf8:409
 msgid "&Kappa;&rho;&alpha;&tau;&#768;&eta;&rho;"
-msgstr ""
+msgstr "&Kappa;&rho;&alpha;&tau;&#768;&eta;&rho;"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:433
+#: ../../skycultures/almagest/description.en.utf8:410
 msgid "Krater (vessel)"
-msgstr ""
+msgstr "Krater [vaixel]"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:434
+#: ../../skycultures/almagest/description.en.utf8:411
 msgid "Crater"
-msgstr ""
+msgstr "Crater"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:436
+#: ../../skycultures/almagest/description.en.utf8:413
 msgid ""
 "a Krater is special Greek wine mixing vessel which looks like an amphora or "
 "vase: <a "
@@ -1328,213 +1411,239 @@ msgid ""
 " Ptolemy describes only one star in the foot (&alpha; Crt) and two handles "
 "(&eta;, &theta; Crt)"
 msgstr ""
+"un Krater é un recipiente especial para a mestura de viño grego que semella "
+"unha ánfora ou un xarrón: <a "
+"href=\"https://en.wikipedia.org/wiki/Krater\">https://en.wikipedia.org/wiki/Krater</a>"
+" Ptolomeo describe só unha estrela no fondo (&alpha; Crt) e dúas manshandles"
+" (&eta;, &theta; Crt)"
 
 #. type: Content of: <p><table><tbody><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:440
+#: ../../skycultures/almagest/description.en.utf8:416
 #: ../../skycultures/mulapin/description.en.utf8:375
 #: ../../skycultures/seleucid/description.en.utf8:307
 msgid "Crv"
 msgstr "Crv"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:441
+#: ../../skycultures/almagest/description.en.utf8:417
 msgid "&Kappa;&oacute;&rho;&alpha;&xi;"
-msgstr ""
+msgstr "&Kappa;&oacute;&rho;&alpha;&xi;"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:442
+#: ../../skycultures/almagest/description.en.utf8:418
 msgid "Raven"
-msgstr ""
+msgstr "Corvo"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:443
+#: ../../skycultures/almagest/description.en.utf8:419
 msgid "Corvus"
-msgstr ""
+msgstr "Corvus"
 
 #. type: Content of: <p><table><tbody><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:448
+#: ../../skycultures/almagest/description.en.utf8:424
 #: ../../skycultures/mulapin/description.en.utf8:484
 #: ../../skycultures/seleucid/description.en.utf8:405
 msgid "Cen"
 msgstr "Cen"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:449
+#: ../../skycultures/almagest/description.en.utf8:425
 msgid "&Kappa;&#941;&nu;&tau;&alpha;&upsilon;&rho;&omicron;&sigmaf;"
-msgstr ""
+msgstr "&Kappa;&#941;&nu;&tau;&alpha;&upsilon;&rho;&omicron;&sigmaf;"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:450
+#: ../../skycultures/almagest/description.en.utf8:426
 msgid "Kentauros"
-msgstr ""
+msgstr "Centauro"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:451
+#: ../../skycultures/almagest/description.en.utf8:427
 msgid "Centaurus"
-msgstr ""
+msgstr "Centaurus"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:453
+#: ../../skycultures/almagest/description.en.utf8:429
 msgid ""
 "deviation from description: HIP 65373 instead of &omega; Cen (cluster) taken"
-" as star on the back.  &lsquo;Thyrsus&lsquo; not drawn (to avoid confusion),"
-" backward arm added."
+" as star on the back. &lsquo;Thyrsus&lsquo; not drawn (to avoid confusion), "
+"backward arm added."
 msgstr ""
+"desviación da descrición: HIP 65373 no canto de &omega; Cen (cúmulo) tomado "
+"como estrela das costas. &lsquo;Thyrsus&lsquo; non debuxado (para evitar "
+"confusións), engadiuse un brazo cara atrás."
 
 #. type: Content of: <p><table><tbody><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:457
+#: ../../skycultures/almagest/description.en.utf8:432
 #: ../../skycultures/mulapin/description.en.utf8:490
 #: ../../skycultures/seleucid/description.en.utf8:412
 msgid "Lup"
 msgstr "Lup"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:458
+#: ../../skycultures/almagest/description.en.utf8:433
 msgid "&Theta;&eta;&rho;&#943;&omicron;&nu;"
-msgstr ""
+msgstr "&Theta;&eta;&rho;&#943;&omicron;&nu;"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:459
+#: ../../skycultures/almagest/description.en.utf8:434
 msgid "Beast"
-msgstr ""
+msgstr "Lobo"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:460
+#: ../../skycultures/almagest/description.en.utf8:435
 msgid "Lupus"
-msgstr ""
+msgstr "Lupus"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:462
+#: ../../skycultures/almagest/description.en.utf8:437
 msgid ""
 "&beta; described as &lsquo;End of hind leg&lsquo; -> taken as star in the "
 "belly; &tau;<sub>1</sub> as hindleg &Chi; removed from head, because "
-"otherwise shapelessness arises; HIP73493 taken as foreleg"
+"otherwise shapelessness arises; HIP 73493 taken as foreleg"
 msgstr ""
+"&beta; descrita como &lsquo;Extremo da pata traseira&lsquo; -> tomouse como "
+"estrela na barriga; &tau;<sub>1</sub> pata traseira &Chi; retirada da "
+"cabeza, porque se non rompe a forma; HIP 73493 tomouse como pata dianteira"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:467
-#: ../../skycultures/almagest/description.en.utf8:470
+#: ../../skycultures/almagest/description.en.utf8:440
+#: ../../skycultures/almagest/description.en.utf8:443
 msgid "Ara"
-msgstr ""
+msgstr "Ara"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:468
+#: ../../skycultures/almagest/description.en.utf8:441
 msgid "&Theta;&upsilon;&mu;&iota;&alpha;&tau;&#942;&rho;&iota;&omicron;&nu;"
-msgstr ""
+msgstr "&Theta;&upsilon;&mu;&iota;&alpha;&tau;&#942;&rho;&iota;&omicron;&nu;"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:469
+#: ../../skycultures/almagest/description.en.utf8:442
 msgid "Altar"
-msgstr ""
+msgstr "Altar"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:475
+#: ../../skycultures/almagest/description.en.utf8:448
 msgid "CrA"
-msgstr ""
+msgstr "CrA"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:476
+#: ../../skycultures/almagest/description.en.utf8:449
 msgid ""
 "&Sigma;&tau;&#941;&phi;&alpha;&nu;&omicron;&sigmaf; "
 "&Nu;&#972;&tau;&iota;&omicron;&sigmaf;"
 msgstr ""
+"&Sigma;&tau;&#941;&phi;&alpha;&nu;&omicron;&sigmaf; "
+"&Nu;&#972;&tau;&iota;&omicron;&sigmaf;"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:478
+#: ../../skycultures/almagest/description.en.utf8:450
 msgid "Southern Crown"
-msgstr ""
+msgstr "Coroa do Sur"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:479
+#: ../../skycultures/almagest/description.en.utf8:451
 #: ../../skycultures/boorong/description.en.utf8:206
 #: ../../skycultures/lokono/description.en.utf8:121
 msgid "Corona Australis"
 msgstr "Corona Australis"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:480
+#: ../../skycultures/almagest/description.en.utf8:452
 msgid ""
-"Like IAU constellation; Only uncertainty with stars that only got a BSC "
+"like IAU constellation; only uncertainty with stars that only got a BSC "
 "number in the Almagest, because these are not clearly to identify in "
 "Stellarium"
 msgstr ""
+"como a constelación IAU; a única incerteza prodúcese con estrelas que só "
+"teñen número BSC en Almagest, porque estas non se identifican claramente en "
+"Stellarium"
 
 #. type: Content of: <p><table><tbody><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:486
+#: ../../skycultures/almagest/description.en.utf8:456
 #: ../../skycultures/mulapin/description.en.utf8:442
 #: ../../skycultures/seleucid/description.en.utf8:357
 msgid "PsA"
 msgstr "PsA"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:487
+#: ../../skycultures/almagest/description.en.utf8:457
 msgid ""
 "&Nu;&#972;&tau;&iota;&omicron;&sigmaf; "
 "&#700;&Iota;&chi;&theta;&#973;&sigmaf;"
 msgstr ""
+"&Nu;&#972;&tau;&iota;&omicron;&sigmaf; "
+"&#700;&Iota;&chi;&theta;&#973;&sigmaf;"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:489
+#: ../../skycultures/almagest/description.en.utf8:458
 msgid "Southern Fish"
-msgstr ""
+msgstr "Peixe do Sur"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:490
+#: ../../skycultures/almagest/description.en.utf8:459
 msgid "Piscis Austrinus"
-msgstr ""
+msgstr "Piscis Austrinus"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:491
-msgid "The fish is laying on his back."
-msgstr ""
+#: ../../skycultures/almagest/description.en.utf8:460
+msgid "the fish is laying on his back"
+msgstr "o peixe está deitado sobre o lombo"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/almagest/description.en.utf8:492
+#: ../../skycultures/almagest/description.en.utf8:461
 msgid ""
-"We added a few stars to mark the tail as such (&beta; should be the tip of "
+"we added a few stars to mark the tail as such (&beta; should be the tip of "
 "the tail but we used it as its root)"
 msgstr ""
+"engadimos algunhas estrelas para marcar a cola como tal (&beta; debería ser "
+"a punta da cola pero usámola como o seu nacemento)"
 
 #. type: Content of: <h2>
-#: ../../skycultures/almagest/description.en.utf8:496
-msgid "References/ Additional Literature"
-msgstr ""
+#: ../../skycultures/almagest/description.en.utf8:465
+msgid "References/Additional Literature"
+msgstr "Referencias/Literatura adicional"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/almagest/description.en.utf8:498
+#: ../../skycultures/almagest/description.en.utf8:467
 msgid ""
 "Grasshoff, G.: The History of Ptolemy's Star Catalog, Springer, New York, "
 "1990"
 msgstr ""
+"Grasshoff, G.: The History of Ptolemy's Star Catalog, Springer, New York, "
+"1990"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/almagest/description.en.utf8:499
+#: ../../skycultures/almagest/description.en.utf8:468
 msgid ""
 "Heiberg, J. L. (Ed.): Claudii Ptolemaei: Syntaxis Mathematica, Teubner, "
 "Leipzig, 1898"
 msgstr ""
+"Heiberg, J. L. (Ed.): Claudii Ptolemaei: Syntaxis Mathematica, Teubner, "
+"Leipzig, 1898"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/almagest/description.en.utf8:500
+#: ../../skycultures/almagest/description.en.utf8:469
 msgid ""
 "Hoffmann, S. M.: Hipparchs Himmelsglobus, Springer, Wiesbaden/ New York, "
 "2017"
 msgstr ""
+"Hoffmann, S. M.: Hipparchs Himmelsglobus, Springer, Wiesbaden/ New York, "
+"2017"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/almagest/description.en.utf8:501
+#: ../../skycultures/almagest/description.en.utf8:470
 msgid "Toomer, G. J.: Ptolemy's Almagest, Duckworth, London, 1984"
-msgstr ""
+msgstr "Toomer, G. J.: Ptolemy's Almagest, Duckworth, London, 1984"
 
 #. type: Content of: <h3>
-#: ../../skycultures/almagest/description.en.utf8:504
+#: ../../skycultures/almagest/description.en.utf8:473
 #: ../../skycultures/mulapin/description.en.utf8:549
 #: ../../skycultures/seleucid/description.en.utf8:464
 msgid "Fair Use"
 msgstr "Uso correcto"
 
 #. type: Content of: <p>
-#: ../../skycultures/almagest/description.en.utf8:505
+#: ../../skycultures/almagest/description.en.utf8:474
 msgid ""
 "This sky culture originates from a student's year of research. We provide "
 "this for free but authors of contributions certainly deserve to be cited "
@@ -1542,21 +1651,29 @@ msgid ""
 "4.0 International Public Licence (share-alike, do not change it without "
 "consulting the contributors, and cite the contributors). Thank you!"
 msgstr ""
+"Esta cultura do ceo ten a súa orixe na investigación dun estudante. "
+"Ofrecémolo de xeito gratuíto pero os autores de contribucións merecen ser "
+"citados segundo as regras comúns. Esta cultura do ceo inclúese baixo a "
+"licenza pública internacional CC BY-ND 4.0 (igual, non a cambies sen "
+"consultar e citar os colaboradores). Grazas!"
 
 #. type: Content of: <h2>
-#: ../../skycultures/almagest/description.en.utf8:510
+#: ../../skycultures/almagest/description.en.utf8:479
 msgid "Thanks"
-msgstr ""
+msgstr "Grazas"
 
 #. type: Content of: <p>
-#: ../../skycultures/almagest/description.en.utf8:511
+#: ../../skycultures/almagest/description.en.utf8:480
 msgid ""
 "The authors thank Patrick Gleason and Georg Zotti for English proofreading "
 "and interesting discussions."
 msgstr ""
+"Os autores agradecen a Patrick Gleason e Georg Zotti a discusión interesante"
+" e a lectura dende o inglés."
 
 #. type: Content of: <h3>
-#: ../../skycultures/almagest/description.en.utf8:514
+#: ../../skycultures/almagest/description.en.utf8:482
+#: ../../skycultures/arabic/description.en.utf8:36
 #: ../../skycultures/belarusian/description.en.utf8:42
 #: ../../skycultures/boorong/description.en.utf8:220
 #: ../../skycultures/chinese/description.en.utf8:2984
@@ -1573,23 +1690,20 @@ msgid "Authors"
 msgstr "Autores"
 
 #. type: Content of: <p>
-#: ../../skycultures/almagest/description.en.utf8:515
+#: ../../skycultures/almagest/description.en.utf8:483
 msgid ""
 "This sky culture was compiled and added to Stellarium by Alina Schmidt, Lea "
 "Jabschinski, Marie von Seggern and Susanne M. Hoffmann: service@uhura-"
 "uraniae.com"
 msgstr ""
+"Esta cultura do ceo foi compilada e engadida a Stellarium por Alina Schmidt,"
+" Lea Jabschinski, Marie von Seggern e Susanne M. Hoffmann: service@uhura-"
+"uraniae.com"
 
-#. type: Content of: <h5>
-#: ../../skycultures/almagest/description.en.utf8:518
-#: ../../skycultures/mulapin/description.en.utf8:571
-msgid "written in English:"
-msgstr "escrito en inglés:"
-
-#. type: Content of: <h5>
-#: ../../skycultures/almagest/description.en.utf8:518
-msgid "the authors"
-msgstr ""
+#. type: Content of: <p>
+#: ../../skycultures/almagest/description.en.utf8:484
+msgid "Written in English: the authors"
+msgstr "Escrito en Inglés: os autores"
 
 #. type: Content of: <h2>
 #: ../../skycultures/anutan/description.en.utf8:1
@@ -1650,7 +1764,6 @@ msgstr "O Corpo do Paxaro"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/anutan/description.en.utf8:12
-#: ../../skycultures/arabic/description.en.utf8:13
 #: ../../skycultures/boorong/description.en.utf8:191
 #: ../../skycultures/lokono/description.en.utf8:36
 #: ../../skycultures/tongan/description.en.utf8:61
@@ -1912,12 +2025,10 @@ msgstr "Te Tukaniva"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/anutan/description.en.utf8:30
-#: ../../skycultures/indian/description.en.utf8:31
-#: ../../skycultures/indian/description.en.utf8:31
-#: ../../skycultures/indian/description.en.utf8:47
-#: ../../skycultures/indian/description.en.utf8:48
-msgid "-"
-msgstr "-"
+#: ../../skycultures/boorong/description.en.utf8:41
+#: ../../skycultures/tongan/description.en.utf8:82
+msgid "&mdash;"
+msgstr "&mdash;"
 
 #. type: Content of: <table><tr>
 #: ../../skycultures/anutan/description.en.utf8:30
@@ -1946,8 +2057,8 @@ msgstr "Te Ao Toka"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/anutan/description.en.utf8:32
-msgid "The Restrained Cloud(?)"
-msgstr "A Nube Restrinxida(?)"
+msgid "The Restrained Cloud (?)"
+msgstr "A Nube Restrinxida (?)"
 
 #. type: Content of: <table><tr>
 #: ../../skycultures/anutan/description.en.utf8:32
@@ -1990,6 +2101,7 @@ msgstr "Venus(?)"
 
 #. type: Content of: <h3>
 #: ../../skycultures/anutan/description.en.utf8:37
+#: ../../skycultures/indian/description.en.utf8:35
 #: ../../skycultures/lokono/description.en.utf8:381
 #: ../../skycultures/tongan/description.en.utf8:30
 msgid "References"
@@ -2019,9 +2131,8 @@ msgstr ""
 
 #. type: Content of: <p><h3>
 #: ../../skycultures/anutan/description.en.utf8:45
-#: ../../skycultures/arabic/description.en.utf8:36
 #: ../../skycultures/arabic_moon_stations/description.en.utf8:239
-#: ../../skycultures/aztec/description.en.utf8:65
+#: ../../skycultures/aztec/description.en.utf8:61
 #: ../../skycultures/chinese_contemporary/description.en.utf8:23
 #: ../../skycultures/chinese_medieval/description.en.utf8:45
 #: ../../skycultures/egyptian/description.en.utf8:17
@@ -2047,67 +2158,21 @@ msgstr ""
 "A esta cultura do ceo de Stellarium contribuíu <i>Dan Smale</i>, "
 "d.smale(at)niwa.co.nz"
 
-#. type: Content of: outside any tag (error?)
-#: ../../skycultures/arabic/description.en.utf8:1
-#: ../../skycultures/arabic_moon_stations/description.en.utf8:1
-#: ../../skycultures/maya/description.en.utf8:1
-#: ../../skycultures/western_hlad/description.en.utf8:1
-msgid "﻿"
-msgstr " "
-
-#. type: Attribute 'lang' of: <h3>
-#: ../../skycultures/arabic/description.en.utf8:1
-#: ../../skycultures/arabic/description.en.utf8:2
-#: ../../skycultures/arabic/description.en.utf8:4
-#: ../../skycultures/arabic/description.en.utf8:5
-#: ../../skycultures/arabic/description.en.utf8:6
-#: ../../skycultures/arabic/description.en.utf8:7
-#: ../../skycultures/arabic/description.en.utf8:10
-#: ../../skycultures/arabic/description.en.utf8:11
-#: ../../skycultures/arabic/description.en.utf8:12
-#: ../../skycultures/arabic/description.en.utf8:13
-#: ../../skycultures/arabic/description.en.utf8:14
-#: ../../skycultures/arabic/description.en.utf8:15
-#: ../../skycultures/arabic/description.en.utf8:16
-#: ../../skycultures/arabic/description.en.utf8:17
-msgid "en"
-msgstr "en"
-
-#. type: Content of: <h1><font>
+#. type: Content of: <h1>
 #: ../../skycultures/arabic/description.en.utf8:1
 msgid "Arabic"
 msgstr "Árabe"
 
-#. type: Content of: <p><font><em>
-#: ../../skycultures/arabic/description.en.utf8:2
-msgid "This <em>"
-msgstr "Este <em>"
-
-#. type: Content of: <p><font><em><font>
-#: ../../skycultures/arabic/description.en.utf8:2
-msgid "Arabic sky culture"
-msgstr "Cultura do ceo árabe"
-
-#. type: Content of: <p><font><em>
+#. type: Content of: <p>
 #: ../../skycultures/arabic/description.en.utf8:2
 msgid ""
-"</em>, which is in use now for more than a thousand years, had been "
-"influenced greatly by Greek astronomy, particularly <em>"
+"This Arabic sky culture, which is in use now for more than a thousand years,"
+" had been influenced greatly by Greek astronomy, particularly Ptolemy's "
+"astronomy."
 msgstr ""
-"</em>, que leva en uso máis de mil anos, estivo moi influenciada pola "
-"astronomía grega, particularmente <em>"
-
-#. type: Content of: <p><font><em><font>
-#: ../../skycultures/arabic/description.en.utf8:2
-msgid "Ptolemy's astronomy"
-msgstr "Astronomía de Ptolomeo"
-
-#. type: Content of: <p><font>
-#: ../../skycultures/arabic/description.en.utf8:2
-#: ../../skycultures/arabic/description.en.utf8:4
-#: ../../skycultures/arabic/description.en.utf8:16
-msgid "</em>."
-msgstr "</em>."
+"Esta cultura do ceo árabe, que se usa dende hai máis de mil anos, estivo moi"
+" influenciada pola astronomía grega, particularmente pola astronomía de "
+"Ptolomeo."
 
 #. type: Content of: <p><a>
 #: ../../skycultures/arabic/description.en.utf8:3
@@ -2118,100 +2183,36 @@ msgstr ""
 "<a href=\"http://www.ianridpath.com/startales/startales1b.htm\" "
 "class='external text' rel=\"nofollow\">"
 
-#. type: Content of: <p><em>
-#: ../../skycultures/arabic/description.en.utf8:3
-#: ../../skycultures/arabic/description.en.utf8:4
-#: ../../skycultures/arabic/description.en.utf8:9
-#: ../../skycultures/arabic/description.en.utf8:38
-#: ../../skycultures/arabic/description.en.utf8:40
-msgid "<em>"
-msgstr "<em>"
-
-#. type: Content of: <p><a><em><font>
+#. type: Content of: <p>
 #: ../../skycultures/arabic/description.en.utf8:3
 msgid ""
-"The depiction of Orion, as seen from Earth (left) and a mirror-image, from a"
-" 13th-century copy of al-Sufi's Book of the Fixed Stars. In this version, "
-"Orion's shield has become a long sleeve, typical of Islamic dress."
+"</a> The depiction of Orion, as seen from Earth (left) and a mirror-image, "
+"from a 13th-century copy of al-Sufi's Book of the Fixed Stars. In this "
+"version, Orion's shield has become a long sleeve, typical of Islamic dress."
 msgstr ""
-"A representación de Orión, vista dende a Terra (esquerda) e unha imaxe "
+"</a> A representación de Orión, vista desde a Terra (esquerda) e unha imaxe "
 "espello, dunha copia do século XIII do Libro das estrelas fixas de al-Sufi. "
 "Nesta versión, o escudo de Orion converteuse nunha manga longa, típica do "
 "vestido islámico."
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic/description.en.utf8:3
-#: ../../skycultures/arabic/description.en.utf8:9
-msgid "</em></a>"
-msgstr "</em></a>"
-
-#. type: Content of: <p><font><em><font>
-#: ../../skycultures/arabic/description.en.utf8:4
-#: ../../skycultures/arabic/description.en.utf8:16
-msgid "Ptolemy"
-msgstr "Ptolomeo"
-
-#. type: Content of: <p><font><em>
-#: ../../skycultures/arabic/description.en.utf8:4
-msgid "</em>, the Greek astronomer who lived and worked around <em>"
-msgstr "</em>, o astrónomo grego que viviu e traballou sobre  <em>"
-
-#. type: Content of: <p><font><em><font>
-#: ../../skycultures/arabic/description.en.utf8:4
-msgid "100-178 CE"
-msgstr "100-178 CE"
-
-#. type: Content of: <p><font>
-#: ../../skycultures/arabic/description.en.utf8:4
-msgid "</em> in Alexandria, Egypt, collected ancient Greek descriptions of"
-msgstr "</em> en Alexandría, Exipto, recolleu descricións gregas antigas de"
-
-#. type: Content of: <p><font><font>
-#: ../../skycultures/arabic/description.en.utf8:4
-msgid "1,022"
-msgstr "1,022"
-
-#. type: Content of: <p><font><em>
-#: ../../skycultures/arabic/description.en.utf8:4
-msgid "stars in his famous book <em>"
-msgstr "estrelas neste famoso libro <em>"
-
-#. type: Content of: <p><font><em><font>
-#: ../../skycultures/arabic/description.en.utf8:4
-msgid "The Great System of Astronomy"
-msgstr "O Gran Sistema de Astronomía"
-
-#. type: Content of: <p><font><em>
-#: ../../skycultures/arabic/description.en.utf8:4
-msgid "</em>, popularised under its shortened Arabic title, the <em>"
-msgstr "</em>, popularizado baixo o seu título árabe acurtado, o <em>"
-
-#. type: Content of: <p><font><em>
-#: ../../skycultures/arabic/description.en.utf8:4
-msgid "</em>. Ptolemy's catalogue of stars arranged into <em>"
-msgstr "</em>. Catálogo de estrelas de Ptolomeo disposto en <em>"
-
-#. type: Content of: <p><font><em><font>
-#: ../../skycultures/arabic/description.en.utf8:4
-#: ../../skycultures/arabic/description.en.utf8:7
-msgid "48 constellations"
-msgstr "48 constelacións"
-
-#. type: Content of: <p><font><em>
 #: ../../skycultures/arabic/description.en.utf8:4
 msgid ""
-"</em>, with estimates of their brightness, based largely on the observations"
-" of the Greek earlier astronomers, such as <em>"
+"Ptolemy, the Greek astronomer who lived and worked around 100-178 CE in "
+"Alexandria, Egypt, collected ancient Greek descriptions of 1,022 stars in "
+"his famous book The Great System of Astronomy, popularised under its "
+"shortened Arabic title, the Almagest. Ptolemy's catalogue of stars arranged "
+"into 48 constellations, with estimates of their brightness, based largely on"
+" the observations of the Greek earlier astronomers, such as Hipparchus."
 msgstr ""
-"</em>, con estimacións do seu brillo, baseándose en gran medida nas "
-"observacións dos astrónomos anteriores gregos, como <em>"
+"Ptolomeo, o astrónomo grego que viviu e traballou arredor do 100-178 d.C. en"
+" Alexandría, Exipto, recolleu descricións antigas gregas de 1.022 estrelas "
+"no seu famoso libro O Gran Sistema da Astronomía, popularizado baixo o seu "
+"título árabe abreviado, o Almagest. O catálogo de estrelas de Ptolomeo "
+"ordénaas en 48 constelacións, con estimacións do seu brillo, baseado en gran"
+" parte nas observacións dos astrónomos gregos anteriores, como Hiparco."
 
-#. type: Content of: <p><font><em><font>
-#: ../../skycultures/arabic/description.en.utf8:4
-msgid "Hipparchus"
-msgstr "Hiparco"
-
-#. type: Content of: <p><font>
+#. type: Content of: <p>
 #: ../../skycultures/arabic/description.en.utf8:5
 msgid ""
 "Ptolemy's book was translated twice into Arabic in the 9th century and "
@@ -2234,137 +2235,62 @@ msgstr ""
 msgid "Constellations"
 msgstr "Constelacións"
 
-#. type: Content of: <p><font><em>
-#: ../../skycultures/arabic/description.en.utf8:7
-msgid "This Arabic sky culture uses the classical <em>"
-msgstr "Esta cultura do ceo árabe usa o clásico <em>"
-
-#. type: Content of: <p><font><em>
+#. type: Content of: <p>
 #: ../../skycultures/arabic/description.en.utf8:7
 msgid ""
-"</em> of the Greeks. These constellations were described by several Arab and"
-" Islamic authors, One of those who left an indelible influence on the Arabic"
-" observation and study of stars is the astronomer <em>"
+"This Arabic sky culture uses the classical 48 constellations of the Greeks. "
+"These constellations were described by several Arab and Islamic authors, One"
+" of those who left an indelible influence on the Arabic observation and "
+"study of stars is the astronomer Abū al-Husayn ‘Abd Al-Rahmān al-Sūfī "
+"(903-986), known also by his Latinized name of Azophi, who systematically "
+"revised Ptolemy's catalogue of stars. Al-Sūfī produced a revised and updated"
+" version of Ptolemy's Almagest in a major book called Kitab suwar al-kawakib"
+" (The Book of Fixed Stars), completed around 964 CE. Built on the basis of "
+"the Greek astronomical heritage, the work of Al-Sūfī contained a listing of "
+"the Arabs' own star names, magnitudes determined by al-Sūfī himself, and two"
+" drawings of each constellation, one as it is seen in the sky and one "
+"reversed right to left as it would appear on a celestial globe. The oldest "
+"surviving copy was produced by his son around 1010 CE and is preserved in "
+"the Bodleian Library, Oxford (MS Marsh 144)."
 msgstr ""
-"</em> dos gregos. Estas constelacións foron descritas por varios autores "
-"árabes e islámicos. Un dos que deixou unha influencia indeleble na "
-"observación e estudo árabes das estrelas é o astrónomo <em>"
-
-#. type: Content of: <p><font><em><font>
-#: ../../skycultures/arabic/description.en.utf8:7
-msgid "Abū al-Husayn ‘Abd Al-Rahmān al-Sūfī (903-986)"
-msgstr "Abū al-Husayn ‘Abd Al-Rahmān al-Sūfī (903-986)"
-
-#. type: Content of: <p><font><em>
-#: ../../skycultures/arabic/description.en.utf8:7
-msgid "</em>, known also by his Latinized name of <em>"
-msgstr "</em>, coñecido tamén polo nome latino de  <em>"
-
-#. type: Content of: <p><font><em><font>
-#: ../../skycultures/arabic/description.en.utf8:7
-msgid "Azophi"
-msgstr "Azophi"
-
-#. type: Content of: <p><font><em>
-#: ../../skycultures/arabic/description.en.utf8:7
-msgid "</em>, who systematically revised Ptolemy's catalogue of stars. <em>"
-msgstr ""
-"</em>, que revisou sistematicamente o catálogo de estrelas de Ptolomeo. <em>"
-
-#. type: Content of: <p><font><em><font>
-#: ../../skycultures/arabic/description.en.utf8:7
-#: ../../skycultures/arabic/description.en.utf8:7
-msgid "Al-Sūfī"
-msgstr "Al-Sūfī"
-
-#. type: Content of: <p><font><em>
-#: ../../skycultures/arabic/description.en.utf8:7
-msgid "</em> produced a revised and updated version of Ptolemy's <em>"
-msgstr "</em> produciu unha revisada e actualizada versión de Ptolomeo <em>"
-
-#. type: Content of: <p><font><em>
-#: ../../skycultures/arabic/description.en.utf8:7
-msgid "</em> in a major book called <em>"
-msgstr "</em> nun gran libro chamado <em>"
-
-#. type: Content of: <p><font><em><font>
-#: ../../skycultures/arabic/description.en.utf8:7
-msgid "Kitab suwar al-kawakib"
-msgstr "Kitab suwar al-kawakib"
-
-#. type: Content of: <p><font><em>
-#: ../../skycultures/arabic/description.en.utf8:7
-msgid "</em> <em>"
-msgstr "</em> <em>"
-
-#. type: Content of: <p><font><em><font>
-#: ../../skycultures/arabic/description.en.utf8:7
-msgid "(The Book of Fixed Stars)"
-msgstr "(O libro das Estrelas Fixas)"
-
-#. type: Content of: <p><font><em>
-#: ../../skycultures/arabic/description.en.utf8:7
-msgid ""
-"</em>, completed around 964 CE. Built on the basis of the Greek astronomical"
-" heritage, the work of <em>"
-msgstr ""
-"</em>, completado arredor do 964 aC. Foi construído sobre a base do "
-"patrimonio astronómico grego, o traballo de <em>"
-
-#. type: Content of: <p><font><em>
-#: ../../skycultures/arabic/description.en.utf8:7
-msgid ""
-"</em> contained a listing of the Arabs' own star names, magnitudes "
-"determined by <em>al-Sūfī</em> himself, and two drawings of each "
-"constellation, one as it is seen in the sky and one reversed right to left "
-"as it would appear on a celestial globe. The oldest surviving copy was "
-"produced by his son around <em>"
-msgstr ""
-"</em> contiña unha lista dos nomes estelares propios dos árabes, magnitudes "
-"determinadas polo propio <em>al-Sūfī</em>, e dous debuxos de cada "
-"constelación, un como se ve no ceo e outro invertido de dereita a esquerda "
-"como aparecería nun globo celeste. A copia máis antiga que sobreviviu foi "
-"producida polo seu fillo sobre <em>"
-
-#. type: Content of: <p><font><em><font>
-#: ../../skycultures/arabic/description.en.utf8:7
-msgid "1010 CE"
-msgstr "1010 aC"
-
-#. type: Content of: <p><font>
-#: ../../skycultures/arabic/description.en.utf8:7
-msgid "</em> and is preserved in the Bodleian Library, Oxford (MS Marsh 144)."
-msgstr "</em> e gárdase na Librería Bodleiana, Oxford (MS Marsh 144)."
+"Esta cultura do ceo árabe usa as clásicas 48 constelacións dos gregos. Estas"
+" constelacións foron descritas por varios autores árabes e islámicos. Un dos"
+" que deixou unha influencia indeleble na observación e estudo árabe das "
+"estrelas é o astrónomo Abū al-Husayn 'Abd Al-Rahmān al-Sūfī (903-986), tamén"
+" coñecido polo seu nome latinizado de Azophi, que revisou sistematicamente o"
+" catálogo de estrelas de Ptolomeo. Al-Sūfī produciu unha versión revisada e "
+"actualizada do Almagest de Ptolomeo nun libro importante chamado Kitab suwar"
+" al-kawakib (O libro das estrelas fixas), completado arredor do 964 CE. "
+"Construído sobre a base do patrimonio astronómico grego, o traballo de Al-"
+"Sūfī contiña unha lista dos nomes de estrelas dos árabes, magnitudes "
+"determinadas polo propio al-Sūfī e dous debuxos de cada constelación, un tal"
+" e como se ve no ceo e outro invertido de dereita a esquerda, como "
+"aparecería nun globo celeste. A copia máis antiga que sobreviviu foi feita "
+"polo seu fillo cara ó 1010 a.C. e está conservada na Biblioteca de Bodleian,"
+" Oxford (MS Marsh 144)."
 
 #. type: Content of: <p>
 #: ../../skycultures/arabic/description.en.utf8:8
 msgid ""
-"<a href=\"http://www.atlascoelestis.com/alsufi%20Suwar.htm\" "
-"target=\"_top\">In this link you can see the beautiful illustrations of "
-"constellations and sample star tables in an old manuscript of Al-Sufi "
-"book.</a>"
+"<a href=\"http://www.atlascoelestis.com/alsufi%20Suwar.htm\">In this link "
+"you can see the beautiful illustrations of constellations and sample star "
+"tables in an old manuscript of Al-Sufi book.</a>"
 msgstr ""
-"<a href=\"http://www.atlascoelestis.com/alsufi%20Suwar.htm\" "
-"target=\"_top\">Nesta ligazón podes ver as fermosas ilustracións de "
-"constelacións e mostras de táboas de estrelas nun antigo manuscrito do libro"
-" de Al-Sufi.</a>"
+"<a href=\"http://www.atlascoelestis.com/alsufi%20Suwar.htm\">Nesta ligazón "
+"podes ver as fermosas ilustracións de constelacións e mostras de táboas de "
+"estrelas nun antigo manuscrito do libro de Al-Sufi.</a>"
 
-#. type: Content of: <p><a>
-#: ../../skycultures/arabic/description.en.utf8:9
-msgid "<a href=\"http://www.atlascoelestis.com/alsufi%20Suwar.htm\">"
-msgstr "<a href=\"http://www.atlascoelestis.com/alsufi%20Suwar.htm\">"
-
-#. type: Content of: <p><a><em><font>
+#. type: Content of: <p>
 #: ../../skycultures/arabic/description.en.utf8:9
 msgid "Cetus as seen in the sky"
 msgstr "Cetus como se ve no ceo"
 
-#. type: Content of: <h3><font>
+#. type: Content of: <h3>
 #: ../../skycultures/arabic/description.en.utf8:10
 msgid "The origin of star names"
 msgstr "A orixe dos nomes de estrelas"
 
-#. type: Content of: <p><font>
+#. type: Content of: <p>
 #: ../../skycultures/arabic/description.en.utf8:11
 msgid ""
 "Regardless of origin, almost all star names belong to old traditions. They "
@@ -2374,159 +2300,60 @@ msgstr ""
 "antigas tradicións. Son unha parte do patrimonio cultural colectivo da "
 "humanidade."
 
-#. type: Content of: <p><font><em>
-#: ../../skycultures/arabic/description.en.utf8:12
-msgid "official star names are essentially limited to the <em>"
-msgstr "os nomes oficiais de estrelas están esencialmente limitados a  <em>"
-
-#. type: Content of: <p><font><em><font>
-#: ../../skycultures/arabic/description.en.utf8:12
-msgid "old names"
-msgstr "nomes antigos"
-
-#. type: Content of: <p><font><em>
+#. type: Content of: <p>
 #: ../../skycultures/arabic/description.en.utf8:12
 msgid ""
-"</em>, and typically only bright stars have names. The majority of stars "
-"names are related to their constellation, e.g., the star <em>"
+"Official star names are essentially limited to the old names, and typically "
+"only bright stars have names. The majority of stars names are related to "
+"their constellation, e.g., the star Deneb means \"tail\" and labels that "
+"part of Cygnus (the Swan)."
 msgstr ""
-"</em>, e comunmente só as estrelas brillantes teñen nome. A maioría de nomes"
-" de estrelas refírense á súa constelación, por ex, a estrela  <em>"
+"Os nomes oficiais de estrelas limítanse esencialmente ós nomes antigos e "
+"normalmente só as estrelas brillantes teñen nome. A maioría dos nomes de "
+"estrelas están relacionados coa súa constelación, por exemplo, a estrela "
+"Deneb significa \"cola\" e etiqueta esa parte de Cygnus (o Cisne)."
 
-#. type: Content of: <p><font><em><font>
-#: ../../skycultures/arabic/description.en.utf8:12
-msgid "Deneb"
-msgstr "Deneb"
-
-#. type: Content of: <p><font><em>
-#: ../../skycultures/arabic/description.en.utf8:12
-msgid "</em> means <em>"
-msgstr "</em> medios <em>"
-
-#. type: Content of: <p><font><em><font>
-#: ../../skycultures/arabic/description.en.utf8:12
-msgid "\"tail\""
-msgstr "\"rabo\""
-
-#. type: Content of: <p><font><em>
-#: ../../skycultures/arabic/description.en.utf8:12
-msgid "</em> and labels that part of <em>"
-msgstr "</em> e etiqueta esta parte de <em>"
-
-#. type: Content of: <p><font>
-#: ../../skycultures/arabic/description.en.utf8:12
-msgid "</em> the Swan."
-msgstr "</em> o Cisne."
-
-#. type: Content of: <p><font><em>
-#: ../../skycultures/arabic/description.en.utf8:13
-msgid "Others describe the star itself, such as <em>"
-msgstr "Outros describen a estrela mesma, como <em>"
-
-#. type: Content of: <p><font><em>
-#: ../../skycultures/arabic/description.en.utf8:13
-msgid "</em>, which translates literally as <em>"
-msgstr "</em>, que se traduce literalmente como <em>"
-
-#. type: Content of: <p><font><em><font>
-#: ../../skycultures/arabic/description.en.utf8:13
-msgid "\"scorching\""
-msgstr "\"abrasador\""
-
-#. type: Content of: <p><font><em>
+#. type: Content of: <p>
 #: ../../skycultures/arabic/description.en.utf8:13
 msgid ""
-"</em>, apt enough for the brightest star in the sky. Quite a lot of "
-"prominent stars bear Arabic names, in which <em>"
+"Others describe the star itself, such as Sirius, which translates literally "
+"as \"scorching\", apt enough for the brightest star in the sky. Quite a lot "
+"of prominent stars bear Arabic names, in which \"al\" corresponds to the "
+"article \"the\" and often appears in front, e.g., \"Algol\", \"The Ghoul\". "
+"Its inclusion has become somewhat arbitrary over time. Hence, several star "
+"names of Arabic origin are given elsewhere with or without the al- prefix. "
+"Most other names of stars inherited from the past have Greek, Latin or "
+"Chinese labels."
 msgstr ""
-"</em>, apto para a estrela máis brillante do ceo. Moitas estrelas destacadas"
-" levan nomes árabes, no cal <em>"
+"Outros describen a propia estrela como Sirius, que se traduce literalmente "
+"como \"abrasadora\", debido a que é a estrela máis brillante do ceo. Moitas "
+"estrelas destacadas levan nomes árabes, nos que \"al\" se corresponde co "
+"artigo \"o\" e aparece a miúdo diante, por exemplo, \"Algol\", \"O "
+"Vampiro\". A súa inclusión volveuse algo arbitraria co paso do tempo, de aí "
+"que varios nomes de estrelas de orixe árabe se dean noutros lugares con ou "
+"sen o prefixo \"al\". A maioría dos outros nomes de estrelas herdados do "
+"pasado teñen etiquetas gregas, latinas ou chinesas."
 
-#. type: Content of: <p><font><em><font>
-#: ../../skycultures/arabic/description.en.utf8:13
-msgid "“al”"
-msgstr "“al”"
-
-#. type: Content of: <p><font><em>
-#: ../../skycultures/arabic/description.en.utf8:13
-msgid "</em> corresponds to the article <em>"
-msgstr "</em> corresponde ó artigo <em>"
-
-#. type: Content of: <p><font><em><font>
-#: ../../skycultures/arabic/description.en.utf8:13
-msgid "\"the\""
-msgstr "\"o\""
-
-#. type: Content of: <p><font><em>
-#: ../../skycultures/arabic/description.en.utf8:13
-msgid "</em> and often appears in front, e.g., <em>"
-msgstr "</em> e a miúdo aparece diante, por exemplo, <em>"
-
-#. type: Content of: <p><font><em><font>
-#: ../../skycultures/arabic/description.en.utf8:13
-msgid "\"Algol\", \"The Ghoul\""
-msgstr "\"Algol\", \"O necrófagol\""
-
-#. type: Content of: <p><font><em>
-#: ../../skycultures/arabic/description.en.utf8:13
-msgid ""
-"</em>. Its inclusion has become somewhat arbitrary over time. Hence, several"
-" star names of Arabic origin are given elsewhere with or without the al- "
-"prefix. Most other names of stars inherited from the past have <em>"
-msgstr ""
-"</em>. A súa inclusión volveuse algo arbitraria co paso do tempo. De aí que "
-"varios nomes de estrelas de orixe árabe se dean noutros lugares con ou sen o"
-" prefixo al-. A maioría dos outros nomes de estrelas herdadas do pasado "
-"teñen <em>"
-
-#. type: Content of: <p><font><em><font>
-#: ../../skycultures/arabic/description.en.utf8:13
-msgid "Greek, Latin or Chinese"
-msgstr "Grego, Latino ou Chinés"
-
-#. type: Content of: <p><font>
-#: ../../skycultures/arabic/description.en.utf8:13
-msgid "</em> labels."
-msgstr "</em> etiquetas."
-
-#. type: Content of: <p><font><em>
+#. type: Content of: <p>
 #: ../../skycultures/arabic/description.en.utf8:14
 msgid ""
-"When the Arabic texts were translated into Latin beginning from the <em>"
-msgstr "Cando os textos árabes foron traducidos ao latín a partir do  <em>"
-
-#. type: Content of: <p><font><em><font>
-#: ../../skycultures/arabic/description.en.utf8:14
-msgid "12th century"
-msgstr "século 12"
-
-#. type: Content of: <p><font>
-#: ../../skycultures/arabic/description.en.utf8:14
-msgid ""
-"</em>, the Arabic tradition of star names was passed down to the Latin "
+"When the Arabic texts were translated into Latin beginning from the 12th "
+"century, the Arabic tradition of star names was passed down to the Latin "
 "world. However, this happened often in a highly corrupted form that either "
 "changed the meaning, or in extreme cases gave birth to words with no meaning"
 " at all. Other names were mistakenly transferred from one star to another, "
-"so that a name might even refer to a different constellation"
+"so that a name might even refer to a different constellation (Greek or "
+"Arabic) rather than to the one of the star's actual residence."
 msgstr ""
-"</em>, a tradición árabe dos nomes de estrelas foi transmitida ó mundo "
-"latino. Non obstante, isto sucedía a miúdo dun xeito moi corrompido que "
-"cambiou o significado ou, en casos extremos, deu a luz palabras sen "
-"significado. Outros nomes foron transferidos erroneamente dunha estrela a "
-"outra, de xeito que un nome podería referirse incluso a unha constelación "
-"diferente"
+"Cando os textos árabes foron traducidos ó latín a partir do século XII, a "
+"tradición árabe dos nomes de estrelas pasou ó mundo latino. Non obstante, "
+"isto sucedeu a miúdo de xeito moi corrupto, o que cambiou o significado ou, "
+"en casos extremos, orixinou palabras sen significado. Outros nomes foron "
+"transferidos erroneamente dunha estrela a outra, de xeito que un nome "
+"podería referirse incluso a unha constelación diferente (grega ou árabe) e "
+"non ó lugar onde realmente estaba a estrela."
 
-#. type: Content of: <p><font><font>
-#: ../../skycultures/arabic/description.en.utf8:14
-msgid "(Greek or Arabic)"
-msgstr "(Grego ou Árabe)"
-
-#. type: Content of: <p><font>
-#: ../../skycultures/arabic/description.en.utf8:14
-msgid "rather than to the one of the star's actual residence."
-msgstr "máis que para unha das residencias actuais da estrela."
-
-#. type: Content of: <p><font>
+#. type: Content of: <p>
 #: ../../skycultures/arabic/description.en.utf8:15
 msgid ""
 "Nevertheless, even with these shortcomings, the majority of star names "
@@ -2535,132 +2362,38 @@ msgstr ""
 "Con todo, mesmo con estas carencias, a maioría dos nomes de estrelas "
 "adoptados dende o Renacemento teñen orixe árabe."
 
-#. type: Content of: <p><font><em>
-#: ../../skycultures/arabic/description.en.utf8:16
-msgid "local tradition of the peoples of <em>"
-msgstr "tradición local dos pobos de <em>"
-
-#. type: Content of: <p><font><em><font>
-#: ../../skycultures/arabic/description.en.utf8:16
-msgid "Islamic lands"
-msgstr "terras islámicas"
-
-#. type: Content of: <p><font><em>
+#. type: Content of: <p>
 #: ../../skycultures/arabic/description.en.utf8:16
 msgid ""
-"</em> in the Arabian Peninsula and in the Middle East had their own names "
-"for various bright stars such as <em>"
+"Local tradition of the peoples of Islamic lands in the Arabian Peninsula and"
+" in the Middle East had their own names for various bright stars such as "
+"Aldebaran, and they commonly regarded single stars as representing animals "
+"or people. For example, the stars we know as &alpha; and &beta; Ophiuchi "
+"were regarded by them as a shepherd and his dog, while neighbouring stars "
+"made up the outlines of a field with sheep. Some of the Arabic names were "
+"already so many centuries old that their meanings were lost even to al-Sūfī "
+"and his contemporaries, and they remain unknown today. Other star names used"
+" by al-Sūfī and his compatriots were direct translations of Ptolemy's "
+"descriptions. For example, the star name Fomalhaut comes from the Arabic "
+"meaning \"mouth of the southern fish\", which is where Ptolemy had described"
+" it in the Almagest."
 msgstr ""
-"</em> na Península Arábiga e no Oriente Medio tiñan nomes propios para "
-"varias estrelas brillantes como <em>"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/arabic/description.en.utf8:16
-#: ../../skycultures/boorong/description.en.utf8:66
-msgid "Aldebaran"
-msgstr "Aldebarán"
-
-#. type: Content of: <p><font><em>
-#: ../../skycultures/arabic/description.en.utf8:16
-msgid "</em>, and they commonly regarded single stars as representing <em>"
-msgstr ""
-"</em>, e normalmente consideraban as estrelas simples como representativas "
-"<em>"
-
-#. type: Content of: <p><font><em><font>
-#: ../../skycultures/arabic/description.en.utf8:16
-msgid "animals or people"
-msgstr "animais ou xente"
-
-#. type: Content of: <p><font><em>
-#: ../../skycultures/arabic/description.en.utf8:16
-msgid "</em>. For example, the stars we know as <em>"
-msgstr "</em>. Por exemplo, as estrelas que coñecemos como <em>"
-
-#. type: Content of: <p><font><em><font>
-#: ../../skycultures/arabic/description.en.utf8:16
-msgid "Alpha"
-msgstr "alfa"
-
-#. type: Content of: <p><font><em>
-#: ../../skycultures/arabic/description.en.utf8:16
-#: ../../skycultures/arabic/description.en.utf8:16
-msgid "</em> and <em>"
-msgstr "</em> e <em>"
-
-#. type: Content of: <p><font><em><font>
-#: ../../skycultures/arabic/description.en.utf8:16
-msgid "Beta Ophiuchi"
-msgstr "Beta Ophiuchi"
-
-#. type: Content of: <p><font><em>
-#: ../../skycultures/arabic/description.en.utf8:16
-msgid "</em> were regarded by them as a <em>"
-msgstr "</em> foron considerados por eles como un <em>"
-
-#. type: Content of: <p><font><em><font>
-#: ../../skycultures/arabic/description.en.utf8:16
-msgid "shepherd"
-msgstr "pastor"
-
-#. type: Content of: <p><font><em><font>
-#: ../../skycultures/arabic/description.en.utf8:16
-msgid "his dog"
-msgstr "o seu can"
-
-#. type: Content of: <p><font><em>
-#: ../../skycultures/arabic/description.en.utf8:16
-msgid "</em>, while neighbouring stars made up the outlines of a <em>"
-msgstr "</em>, mentres que as estrelas veciñas compoñían os trazos dun <em>"
-
-#. type: Content of: <p><font><em><font>
-#: ../../skycultures/arabic/description.en.utf8:16
-msgid "field with sheep"
-msgstr "campo con ovellas"
-
-#. type: Content of: <p><font><em>
-#: ../../skycultures/arabic/description.en.utf8:16
-msgid ""
-"</em>. Some of the Arabic names were already so many centuries old that "
-"their meanings were lost even to <em>al-Sūfī</em> and his contemporaries, "
-"and they remain unknown today. Other star names used by <em>al-Sūfī</em> and"
-" his compatriots were direct translations of Ptolemy's descriptions. For "
-"example, the star name <em>"
-msgstr ""
-"</em>. Algúns dos nomes árabes xa tiñan tantos séculos que se perderon os "
-"seus significados como <em>al-Sūfī</em> e os seus contemporáneos, e seguen "
-"sendo hoxe descoñecidos. Outros nomes de estrelas usados por <em>al-"
-"Sūfī</em> e os seus compatriotas eran traducións directas das descricións de"
-" Ptolomeo. Por exemplo, o nome da estrela <em>"
-
-#. type: Content of: <p><font><em><font>
-#: ../../skycultures/arabic/description.en.utf8:16
-msgid "Fomalhaut"
-msgstr "Fomalhaut"
-
-#. type: Content of: <p><font><em>
-#: ../../skycultures/arabic/description.en.utf8:16
-msgid "</em> comes from the Arabic meaning <em>"
-msgstr "</em> procede do significado árabe <em>"
-
-#. type: Content of: <p><font><em><font>
-#: ../../skycultures/arabic/description.en.utf8:16
-msgid "\"mouth of the southern fish\""
-msgstr "\"boca do peixe do sur\""
-
-#. type: Content of: <p><font><em>
-#: ../../skycultures/arabic/description.en.utf8:16
-msgid "</em>, which is where <em>"
-msgstr "</em>, que é onde <em>"
-
-#. type: Content of: <p><font><em>
-#: ../../skycultures/arabic/description.en.utf8:16
-msgid "</em> had described it in the <em>"
-msgstr "</em> foi descrito no <em>"
+"A tradición local dos pobos das terras islámicas da Península Arábiga e do "
+"Oriente Medio tiña os seus propios nomes para varias estrelas brillantes "
+"como Aldebaran, e normalmente consideraban as estrelas simples como "
+"representantes de animais ou persoas. Por exemplo, as estrelas que coñecemos"
+" como &alpha; e &beta; Ophiuchi foron consideradas por eles como un pastor e"
+" o seu can, mentres que as estrelas veciñas compoñían bordos dun campo con "
+"ovellas. Algúns dos nomes árabes xa tiñan tantos séculos que se perderon os "
+"seus significados incluso para al-Sūfī e os seus contemporáneos, e aínda "
+"hoxe se descoñecen. Outros nomes de estrelas empregados por al-Sūfī e os "
+"seus compatriotas foron traducións directas das descricións de Ptolomeo. Por"
+" exemplo, o nome da estrela Fomalhaut provén do árabe que significa \"boca "
+"dos peixes do sur\", que é onde Ptolomeo a describira no Almagest."
 
 #. type: Content of: <h3>
 #: ../../skycultures/arabic/description.en.utf8:17
-#: ../../skycultures/aztec/description.en.utf8:35
+#: ../../skycultures/aztec/description.en.utf8:31
 #: ../../skycultures/belarusian/description.en.utf8:31
 #: ../../skycultures/chinese/description.en.utf8:2973
 #: ../../skycultures/chinese_contemporary/description.en.utf8:14
@@ -2668,7 +2401,6 @@ msgstr "</em> foi descrito no <em>"
 #: ../../skycultures/dakota/description.en.utf8:50
 #: ../../skycultures/egyptian/description.en.utf8:7
 #: ../../skycultures/hawaiian_starlines/description.en.utf8:86
-#: ../../skycultures/indian/description.en.utf8:58
 #: ../../skycultures/inuit/description.en.utf8:25
 #: ../../skycultures/japanese_moon_stations/description.en.utf8:273
 #: ../../skycultures/korean/description.en.utf8:7
@@ -2681,7 +2413,7 @@ msgstr "</em> foi descrito no <em>"
 #: ../../skycultures/tupi/description.en.utf8:17
 #: ../../skycultures/vanuatu_netwar/description.en.utf8:53
 #: ../../skycultures/western/description.en.utf8:14
-#: ../../skycultures/western_SnT/description.en.utf8:10
+#: ../../skycultures/western_SnT/description.en.utf8:12
 #: ../../skycultures/western_rey/description.en.utf8:73
 msgid "External links"
 msgstr "Ligazóns externas"
@@ -2701,13 +2433,13 @@ msgstr ""
 #: ../../skycultures/arabic/description.en.utf8:20
 msgid ""
 "<a href=\"http://www.atlascoelestis.com/alsufi%20Suwar.htm\" class='external"
-" text' rel=\"nofollow\">Constellations Illustrations by Al-Sufi</a> Images "
+" text' rel=\"nofollow\">Constellations Illustrations by Al-Sufi</a>: Images "
 "of a manuscript of Al-Sufi book with sample artistic illustrations and star "
 "table samples."
 msgstr ""
 "<a href=\"http://www.atlascoelestis.com/alsufi%20Suwar.htm\" class='external"
-" text' rel=\"nofollow\">Ilustracións das Constelacións por Al-Sufi</a> "
-"Imaxes dun manuscrito de Al-Sufi libro con mostras de ilustracións "
+" text' rel=\"nofollow\">Ilustracións das Constelacións de Al-Sufi</a>: "
+"Imaxes dun manuscrito do libro de Al-Sufi con mostras de ilustracións "
 "artísticas e exemplos de táboas de estrelas."
 
 #. type: Content of: <ul><li>
@@ -2716,25 +2448,25 @@ msgid ""
 "<a "
 "href=\"http://gallica.bnf.fr/ark:/12148/btv1b60006156.image.f7.pagination\" "
 "class='external text' rel=\"nofollow\">The Original \"Ulg Beack\" "
-"manuscripte of the \"Kitab suwar al-kawakib\"(The Book of Fixed Stars)</a> "
+"manuscripte of the \"Kitab suwar al-kawakib\" (The Book of Fixed Stars)</a> "
 "Paris Digital Library \"Gallica\"."
 msgstr ""
 "<a "
 "href=\"http://gallica.bnf.fr/ark:/12148/btv1b60006156.image.f7.pagination\" "
 "class='external text' rel=\"nofollow\">O manuscrito orixinal \"Ulg Beack\" "
-"do \"Kitab suwar al-kawakib\" (O libro das estrelas fixas)</a> Paris Digital"
+"de \"Kitab suwar al-kawakib\" (O libro das estrelas fixas)</a> Paris Digital"
 " Library \"Gallica\"."
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/arabic/description.en.utf8:22
 msgid ""
 "<a href=\"http://en.wikipedia.org/wiki/List_of_Arabic_star_names\" "
-"class='external text' rel=\"nofollow\">List of Arabic Star Names</a> article"
-" at Wikipedia."
+"class='external text' rel=\"nofollow\">List of Arabic Star Names</a>: "
+"article at Wikipedia."
 msgstr ""
 "<a href=\"http://en.wikipedia.org/wiki/List_of_Arabic_star_names\" "
-"class='external text' rel=\"nofollow\">Listaxes dos nomes árabes de "
-"estrelas</a> artigo en Wikipedia."
+"class='external text' rel=\"nofollow\">Listaxe de Nomes Árabes de "
+"Estrelas</a>: artigo na Wikipedia."
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/arabic/description.en.utf8:23
@@ -2742,33 +2474,30 @@ msgid ""
 "<a "
 "href=\"http://penelope.uchicago.edu/Thayer/E/Gazetteer/Topics/astronomy/_Texts/secondary/ALLSTA/home.html\""
 " class='external text' rel=\"nofollow\">Star Names — Their Lore and "
-"Meaning</a> Richard Hinckley Allen: Star Names — Their Lore and Meaning."
+"Meaning</a>: Richard Hinckley Allen: Star Names — Their Lore and Meaning."
 msgstr ""
 "<a "
 "href=\"http://penelope.uchicago.edu/Thayer/E/Gazetteer/Topics/astronomy/_Texts/secondary/ALLSTA/home.html\""
-" class='external text' rel=\"nofollow\">Star Names — Their Lore and "
-"Meaning</a> Richard Hinckley Allen: Star Names — Their Lore and Meaning."
+" class='external text' rel=\"nofollow\">Nomes de Estrelas — A súa tradición "
+"e significado</a>: Richard Hinckley Allen: Star Names — Their Lore and "
+"Meaning."
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/arabic/description.en.utf8:24
 msgid ""
 "<a href=\"http://www.muslimheritage.com/article/arabic-star-names-treasure-"
 "knowledge-shared-world\" class='external text' rel=\"nofollow\">Islamic "
-"science heritage</a> article :"
+"science heritage article</a>: Arabic Star Names: A Treasure of Knowledge "
+"Shared by the World."
 msgstr ""
 "<a href=\"http://www.muslimheritage.com/article/arabic-star-names-treasure-"
-"knowledge-shared-world\" class='external text' rel=\"nofollow\">A herdanza "
-"da ciencia islámica</a> artigo :"
-
-#. type: Content of: <ul><li>
-#: ../../skycultures/arabic/description.en.utf8:24
-msgid "Arabic Star Names: A Treasure of Knowledge Shared by the World."
-msgstr ""
-"Nomes de estrelas árabes: un tesouro de coñecemento compartido polo mundo."
+"knowledge-shared-world\" class='external text' rel=\"nofollow\">Artigo sobre"
+" o patrimonio da ciencia islámica</a>: Nomes Árabes de Estrelas: Un tesouro "
+"do coñecemento compartido polo mundo."
 
 #. type: Content of: <h3>
 #: ../../skycultures/arabic/description.en.utf8:26
-#: ../../skycultures/aztec/description.en.utf8:55
+#: ../../skycultures/aztec/description.en.utf8:51
 #: ../../skycultures/mulapin/description.en.utf8:556
 #: ../../skycultures/seleucid/description.en.utf8:468
 msgid "Thanks to"
@@ -2778,10 +2507,10 @@ msgstr "Grazas a"
 #: ../../skycultures/arabic/description.en.utf8:28
 msgid ""
 "<a href=\"http://www.jas.org.jo/forum/viewtopic.php\" class='external text' "
-"rel=\"nofollow\">The Arab Astronomy Forum .</a>"
+"rel=\"nofollow\">The Arab Astronomy Forum.</a>"
 msgstr ""
 "<a href=\"http://www.jas.org.jo/forum/viewtopic.php\" class='external text' "
-"rel=\"nofollow\">The Arab Astronomy Forum .</a>"
+"rel=\"nofollow\">O Foro de Astronomía Árabe.</a>"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/arabic/description.en.utf8:29
@@ -2801,77 +2530,46 @@ msgstr ""
 msgid "Arabic Stellarium Translation team"
 msgstr "equipo de tradución árabe de Stellarium"
 
-#. type: Content of: <h3><font>
+#. type: Content of: <h3>
 #: ../../skycultures/arabic/description.en.utf8:32
-msgid "source"
-msgstr "fonte"
-
-#. type: Attribute 'lang' of: <ul><li>
-#: ../../skycultures/arabic/description.en.utf8:34
-#: ../../skycultures/mulapin/description.en.utf8:543
-#: ../../skycultures/seleucid/description.en.utf8:454
-#: ../../skycultures/seleucid/description.en.utf8:455
-#: ../../skycultures/seleucid/description.en.utf8:456
-#: ../../skycultures/seleucid/description.en.utf8:457
-#: ../../skycultures/seleucid/description.en.utf8:461
-msgid "fr"
-msgstr "fr"
+msgid "Source"
+msgstr "Orixe"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/arabic/description.en.utf8:34
 msgid ""
 "<a "
 "href=\"http://gallica.bnf.fr/ark:/12148/btv1b60006156.image.f7.pagination\" "
-"class='external text' rel=\"nofollow\">Bibliothéque Nqtionqle de "
-"France;Départment des manuscrits, Arabe 5036 </a>"
+"class='external text' rel=\"nofollow\">Bibliothéque Nqtionqle de France; "
+"Départment des manuscrits, Arabe 5036</a>"
 msgstr ""
 "<a "
 "href=\"http://gallica.bnf.fr/ark:/12148/btv1b60006156.image.f7.pagination\" "
 "class='external text' rel=\"nofollow\">Bibliothéque Nationale de France; "
-"Départment des manuscrits, Arabe 5036 </a>"
+"Départment des manuscrits, Arabe 5036</a>"
 
-#. type: Content of: <ul><li><font>
-#: ../../skycultures/arabic/description.en.utf8:34
-msgid "/ gallica.bnf.fr"
-msgstr "/ gallica.bnf.fr"
-
-#. type: Content of: <p><font>
+#. type: Content of: <p>
 #: ../../skycultures/arabic/description.en.utf8:37
-msgid "The Arabic star names were compiled and added to Stellarium by :"
+msgid ""
+"The Arabic star names were compiled and added to Stellarium by Khalid "
+"Alajaji"
 msgstr ""
-"Os nomes de estrelas árabes foi compilado e engadido a Stellarium por: "
-
-#. type: Content of: <p><em><font>
-#: ../../skycultures/arabic/description.en.utf8:38
-msgid "Khalid Alajaji"
-msgstr "Khalid Alajaji"
+"Os nomes árabes de estrelas foron recompilados e engadidos a Stellarium por "
+"Khalid Alajaji"
 
 #. type: Content of: <p>
 #: ../../skycultures/arabic/description.en.utf8:38
-#: ../../skycultures/arabic/description.en.utf8:40
-msgid "</em>"
-msgstr "</em>"
+msgid ""
+"The Arabic constellation lines and images prepared by Kutaibaa Akraa "
+"(kutaibaa@gmail.com)"
+msgstr ""
+"As liñas e as imaxes das constelacións árabes foron feitas por Kutaibaa "
+"Akraa (kutaibaa@gmail.com)"
 
-#. type: Content of: <p><font>
+#. type: Content of: <p>
 #: ../../skycultures/arabic/description.en.utf8:39
-msgid "The Arabic constellation lines and images prepared by :"
-msgstr "As liñas das constelacións árabes e as imaxes preparounas:"
-
-#. type: Content of: <p><em><font>
-#: ../../skycultures/arabic/description.en.utf8:40
-msgid "Kutaibaa Akraa: kutaibaa@gmail.com"
-msgstr "Kutaibaa Akraa: kutaibaa@gmail.com"
-
-#. type: Content of: <h5>
-#: ../../skycultures/arabic/description.en.utf8:41
-#: ../../skycultures/aztec/description.en.utf8:70
-msgid "English translation by:"
-msgstr "Tradución ó inglés de:"
-
-#. type: Content of: <h5>
-#: ../../skycultures/arabic/description.en.utf8:41
-msgid "kutaibaa akraa"
-msgstr "kutaibaa akraa"
+msgid "English translation by Kutaibaa Akraa"
+msgstr "Tradución ó Inglés de Kutaibaa Akraa"
 
 #. type: Content of: <h2>
 #: ../../skycultures/arabic_moon_stations/description.en.utf8:1
@@ -3984,36 +3682,13 @@ msgstr ""
 "chamados <em>toxiuh molpilia</em> que significa a unión dos anos e coincidiu"
 " co comezo do novo ano chamado <em>xiuhtzitzquilo</em>."
 
-#. type: Content of: <p><p><p><p><p><p><p><p><p>
-#: ../../skycultures/aztec/description.en.utf8:12
-#: ../../skycultures/aztec/description.en.utf8:20
-#: ../../skycultures/aztec/description.en.utf8:31
-#: ../../skycultures/aztec/description.en.utf8:34
-#: ../../skycultures/maya/description.en.utf8:13
-#: ../../skycultures/maya/description.en.utf8:16
-#: ../../skycultures/maya/description.en.utf8:19
-#: ../../skycultures/maya/description.en.utf8:20
-#: ../../skycultures/maya/description.en.utf8:23
-#: ../../skycultures/maya/description.en.utf8:24
-#: ../../skycultures/maya/description.en.utf8:27
-#: ../../skycultures/maya/description.en.utf8:28
-#: ../../skycultures/maya/description.en.utf8:31
-#: ../../skycultures/maya/description.en.utf8:34
-#: ../../skycultures/maya/description.en.utf8:37
-#: ../../skycultures/maya/description.en.utf8:40
-#: ../../skycultures/maya/description.en.utf8:43
-#: ../../skycultures/maya/description.en.utf8:56
-#: ../../skycultures/maya/description.en.utf8:61
-msgid "&nbsp;"
-msgstr "&nbsp;"
-
 #. type: Content of: <h4>
-#: ../../skycultures/aztec/description.en.utf8:14
+#: ../../skycultures/aztec/description.en.utf8:13
 msgid "<em>Tianquiztli</em>"
 msgstr "<em>Tianquiztli</em>"
 
 #. type: Content of: <p>
-#: ../../skycultures/aztec/description.en.utf8:15
+#: ../../skycultures/aztec/description.en.utf8:14
 msgid ""
 "The group of stars that we know as Pleiades symbolized for the Mexicas "
 "<em>Tianquiztli</em>, which means market, perhaps because of the crowd that "
@@ -4026,7 +3701,7 @@ msgstr ""
 "persoas dentro dun círculo con mercadorías."
 
 #. type: Content of: <p>
-#: ../../skycultures/aztec/description.en.utf8:17
+#: ../../skycultures/aztec/description.en.utf8:16
 msgid ""
 "Currently, in Mexico the informal market or street markets are called "
 "<em>Tianguis</em>."
@@ -4035,12 +3710,12 @@ msgstr ""
 "<em>Tianguis</em>."
 
 #. type: Content of: <h4>
-#: ../../skycultures/aztec/description.en.utf8:18
+#: ../../skycultures/aztec/description.en.utf8:17
 msgid "<em>Citlaltlachtli</em>"
 msgstr "<em>Citlaltlachtli</em>"
 
 #. type: Content of: <p>
-#: ../../skycultures/aztec/description.en.utf8:19
+#: ../../skycultures/aztec/description.en.utf8:18
 msgid ""
 "The constellation of Gemini was called <em>Citlaltlachtli</em>, which means "
 "the ball game of the stars. This game was endowed with a ritual significance"
@@ -4053,12 +3728,12 @@ msgstr ""
 "dentro do terreo de xogo refírese ao movemento do sol e da lúa."
 
 #. type: Content of: <h4>
-#: ../../skycultures/aztec/description.en.utf8:21
+#: ../../skycultures/aztec/description.en.utf8:19
 msgid "<em>Xonecuilli</em>"
 msgstr "<em>Xonecuilli</em>"
 
 #. type: Content of: <p>
-#: ../../skycultures/aztec/description.en.utf8:22
+#: ../../skycultures/aztec/description.en.utf8:20
 msgid ""
 "The Ursa Minor constellation is identified as <em>Xonecuilli</em> which "
 "means twisted foot, and is related to Nanahuatzin, this character is "
@@ -4072,7 +3747,7 @@ msgstr ""
 "<em>Tonatiuh</em> o deus Sol."
 
 #. type: Content of: <p>
-#: ../../skycultures/aztec/description.en.utf8:24
+#: ../../skycultures/aztec/description.en.utf8:22
 msgid ""
 "Apparently, this constellation can also be associated with the Southern "
 "Cross and its surrounding stars as is referred by <em>Tezozomoc</em>. For "
@@ -4085,17 +3760,17 @@ msgstr ""
 "polos aztecas <em>xonecuilli</em>."
 
 #. type: Content of: <p>
-#: ../../skycultures/aztec/description.en.utf8:25
+#: ../../skycultures/aztec/description.en.utf8:23
 msgid "<em>xonecuilli</em>"
 msgstr "<em>xonecuilli</em>"
 
 #. type: Content of: <h4>
-#: ../../skycultures/aztec/description.en.utf8:26
+#: ../../skycultures/aztec/description.en.utf8:24
 msgid "<em>Citlalcolotl</em>"
 msgstr "<em>Citlalcolotl</em>"
 
 #. type: Content of: <p>
-#: ../../skycultures/aztec/description.en.utf8:27
+#: ../../skycultures/aztec/description.en.utf8:25
 msgid ""
 "According to the Florentino Codex Sahagun's informants identified a group of"
 " stars known as <em>Citlalcolotl</em>, the scorpion star. In turn, Tezozomoc"
@@ -4108,12 +3783,12 @@ msgstr ""
 "e chámaa <em>Colotlixayac</em>, que significa a cara do escorpión."
 
 #. type: Content of: <h5>
-#: ../../skycultures/aztec/description.en.utf8:29
+#: ../../skycultures/aztec/description.en.utf8:27
 msgid "<em>Paris Codex</em>"
 msgstr "<em>Paris Codex</em>"
 
 #. type: Content of: <p>
-#: ../../skycultures/aztec/description.en.utf8:30
+#: ../../skycultures/aztec/description.en.utf8:28
 msgid ""
 "In a section of the Paris Codex called zodiac pages appears the scorpion, in"
 " this codex the icons shows figures of animals hanging from the body of the "
@@ -4124,13 +3799,13 @@ msgstr ""
 "corpo do Dragón Celeste."
 
 #. type: Content of: <img><p><p><p><p><h3>
-#: ../../skycultures/aztec/description.en.utf8:32
+#: ../../skycultures/aztec/description.en.utf8:29
 #: ../../skycultures/mongolian/description.en.utf8:237
 msgid "Conclusion"
 msgstr "Conclusión"
 
 #. type: Content of: <p>
-#: ../../skycultures/aztec/description.en.utf8:33
+#: ../../skycultures/aztec/description.en.utf8:30
 msgid ""
 "It is noteworthy that the interpretation of some of these constellations are"
 " still in discussion, and of course there must be other constellations to "
@@ -4143,7 +3818,7 @@ msgstr ""
 "preservar o coñecemento e significado das estrelas da cultura azteca."
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/aztec/description.en.utf8:37
+#: ../../skycultures/aztec/description.en.utf8:33
 msgid ""
 "<a "
 "href=\"http://biblioteca.itam.mx/estudios/estudio/letras30/notas3/sec_1.html\">Fuego"
@@ -4152,179 +3827,175 @@ msgstr ""
 "<a "
 "href=\"http://biblioteca.itam.mx/estudios/estudio/letras30/notas3/sec_1.html\">Fuego"
 " Nuevo</a>"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/aztec/description.en.utf8:34
+msgid ""
+"<a href=\"http://www.montero.org.mx/constelaciones.htm\">Constelaciones "
+"Prehisp&#225;nicas</a>"
+msgstr ""
+"<a href=\"http://www.montero.org.mx/constelaciones.htm\">Constelaciones "
+"Prehisp&#225;nicas</a>"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/aztec/description.en.utf8:35
+msgid ""
+"<a href=\"http://www.jstor.org/stable/660290?origin=JSTOR-pdf\">The Question"
+" of the Zodiac in America</a>"
+msgstr ""
+"<a href=\"http://www.jstor.org/stable/660290?origin=JSTOR-pdf\">The Question"
+" of the Zodiac in America</a>"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/aztec/description.en.utf8:37
+msgid ""
+"<a "
+"href=\"http://www.windows2universe.org/mythology/aztec_culture.html\">Aztec "
+"Mythology</a>"
+msgstr ""
+"<a "
+"href=\"http://www.windows2universe.org/mythology/aztec_culture.html\">Aztec "
+"Mythology</a>"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/aztec/description.en.utf8:38
 msgid ""
-"<a href=\"http://www.montero.org.mx/constelaciones.htm\">Constelaciones "
-"Prehisp&#225;nicas</a>"
+"<a href=\"http://www.iconio.com/ABCD/F/INDEX.PDF\">Los c&#243;dices de "
+"M&#233;xico</a>"
 msgstr ""
-"<a href=\"http://www.montero.org.mx/constelaciones.htm\">Constelaciones "
-"Prehisp&#225;nicas</a>"
+"<a href=\"http://www.iconio.com/ABCD/F/INDEX.PDF\">Los c&#243;dices de "
+"M&#233;xico</a>"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/aztec/description.en.utf8:39
 msgid ""
-"<a href=\"http://www.jstor.org/stable/660290?origin=JSTOR-pdf\">The Question"
-" of the Zodiac in America</a>"
+"<a "
+"href=\"http://es.wikipedia.org/wiki/C%C3%B3dices_coloniales_de_M%C3%A9xico\">Los"
+" c&#243;dices coloniales de M&#233;xico</a>"
 msgstr ""
-"<a href=\"http://www.jstor.org/stable/660290?origin=JSTOR-pdf\">The Question"
-" of the Zodiac in America</a>"
+"<a "
+"href=\"http://es.wikipedia.org/wiki/C%C3%B3dices_coloniales_de_M%C3%A9xico\">Los"
+" c&#243;dices coloniales de M&#233;xico</a>"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/aztec/description.en.utf8:41
 msgid ""
 "<a "
-"href=\"http://www.windows2universe.org/mythology/aztec_culture.html\">Aztec "
-"Mythology</a>"
+"href=\"http://www.traduccionliteraria.org/1611/esc/america/sahagun.htm\">Real"
+" c&#233;dula prohibiendo la historia general de las cosas de Nueva "
+"Espa&#241;a de Fray Bernardino de Sahag&#250;n</a>"
 msgstr ""
 "<a "
-"href=\"http://www.windows2universe.org/mythology/aztec_culture.html\">Aztec "
-"Mythology</a>"
+"href=\"http://www.traduccionliteraria.org/1611/esc/america/sahagun.htm\">Real"
+" c&#233;dula prohibiendo la historia general de las cosas de Nueva "
+"Espa&#241;a de Fray Bernardino de Sahag&#250;n</a>"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/aztec/description.en.utf8:42
+#: ../../skycultures/aztec/description.en.utf8:44
 msgid ""
-"<a href=\"http://www.iconio.com/ABCD/F/INDEX.PDF\">Los c&#243;dices de "
-"M&#233;xico</a>"
+"<a href=\"http://commons.wikimedia.org/wiki/User:Akapochtli\">Akapochtli</a>"
 msgstr ""
-"<a href=\"http://www.iconio.com/ABCD/F/INDEX.PDF\">Los c&#243;dices de "
-"M&#233;xico</a>"
-
-#. type: Content of: <ul><li>
-#: ../../skycultures/aztec/description.en.utf8:43
-msgid ""
-"<a "
-"href=\"http://es.wikipedia.org/wiki/C%C3%B3dices_coloniales_de_M%C3%A9xico\">Los"
-" c&#243;dices coloniales de M&#233;xico</a>"
-msgstr ""
-"<a "
-"href=\"http://es.wikipedia.org/wiki/C%C3%B3dices_coloniales_de_M%C3%A9xico\">Los"
-" c&#243;dices coloniales de M&#233;xico</a>"
+"<a href=\"http://commons.wikimedia.org/wiki/User:Akapochtli\">Akapochtli</a>"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/aztec/description.en.utf8:45
 msgid ""
 "<a "
-"href=\"http://www.traduccionliteraria.org/1611/esc/america/sahagun.htm\">Real"
-" c&#233;dula prohibiendo la historia general de las cosas de Nueva "
-"Espa&#241;a de Fray Bernardino de Sahag&#250;n</a>"
+"href=\"http://books.google.com.mx/books?id=kxPjdY1PJjEC&amp;pg=PA118&amp;lpg=PA118&amp;dq=Colotlixayac&amp;source=bl&amp;ots=F6xlTU1rer&amp;sig=9q_8ApdMTw5l9kagolArj5cPSMk&amp;hl=es&amp;ei=xoMeS8ToJoS1tgfpwv2cCg&amp;sa=X&amp;oi=book_result&amp;ct=result&amp;resnum=5&amp;ved=0CBsQ6AEwBA#v=onepage&amp;q=Colotlixayac&amp;f=false\">Iconograf&#237;a"
+" mexicana, Volumen 3</a>"
 msgstr ""
 "<a "
-"href=\"http://www.traduccionliteraria.org/1611/esc/america/sahagun.htm\">Real"
-" c&#233;dula prohibiendo la historia general de las cosas de Nueva "
-"Espa&#241;a de Fray Bernardino de Sahag&#250;n</a>"
+"href=\"http://books.google.com.mx/books?id=kxPjdY1PJjEC&amp;pg=PA118&amp;lpg=PA118&amp;dq=Colotlixayac&amp;source=bl&amp;ots=F6xlTU1rer&amp;sig=9q_8ApdMTw5l9kagolArj5cPSMk&amp;hl=es&amp;ei=xoMeS8ToJoS1tgfpwv2cCg&amp;sa=X&amp;oi=book_result&amp;ct=result&amp;resnum=5&amp;ved=0CBsQ6AEwBA#v=onepage&amp;q=Colotlixayac&amp;f=false\">Iconograf&#237;a"
+" mexicana, Volumen 3</a>"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/aztec/description.en.utf8:46
+msgid ""
+"<a href=\"http://www.famsi.org/spanish/mayawriting/codices/paris.html\">El "
+"C&#243;dice Par&#237;s</a>"
+msgstr ""
+"<a href=\"http://www.famsi.org/spanish/mayawriting/codices/paris.html\">El "
+"C&#243;dice Par&#237;s</a>"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/aztec/description.en.utf8:47
+msgid ""
+"<a "
+"href=\"http://redescolar.ilce.edu.mx/redescolar/biblioteca/literatura/leyenda/mexicas/mexsolun.html\">El"
+" nacimiento del sol y la luna</a>"
+msgstr ""
+"<a "
+"href=\"http://redescolar.ilce.edu.mx/redescolar/biblioteca/literatura/leyenda/mexicas/mexsolun.html\">El"
+" nacimiento del sol y la luna</a>"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/aztec/description.en.utf8:48
 msgid ""
-"<a href=\"http://commons.wikimedia.org/wiki/User:Akapochtli\">Akapochtli</a>"
+"<a href=\"http://aulex.org/nah-es/\">Diccionario n&aacute;huatl - "
+"espa&#241;ol en l&#237;nea en AULEX</a>"
 msgstr ""
-"<a href=\"http://commons.wikimedia.org/wiki/User:Akapochtli\">Akapochtli</a>"
+"<a href=\"http://aulex.org/nah-es/\">Diccionario n&aacute;huatl - "
+"espa&#241;ol en l&#237;nea en AULEX</a>"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/aztec/description.en.utf8:49
 msgid ""
 "<a "
-"href=\"http://books.google.com.mx/books?id=kxPjdY1PJjEC&amp;pg=PA118&amp;lpg=PA118&amp;dq=Colotlixayac&amp;source=bl&amp;ots=F6xlTU1rer&amp;sig=9q_8ApdMTw5l9kagolArj5cPSMk&amp;hl=es&amp;ei=xoMeS8ToJoS1tgfpwv2cCg&amp;sa=X&amp;oi=book_result&amp;ct=result&amp;resnum=5&amp;ved=0CBsQ6AEwBA#v=onepage&amp;q=Colotlixayac&amp;f=false\">Iconograf&#237;a"
-" mexicana, Volumen 3</a>"
+"href=\"http://sepiensa.org.mx/contenidos/fd_depo/nahuatl/tlach_1.html\">Tlachtli</a>"
 msgstr ""
 "<a "
-"href=\"http://books.google.com.mx/books?id=kxPjdY1PJjEC&amp;pg=PA118&amp;lpg=PA118&amp;dq=Colotlixayac&amp;source=bl&amp;ots=F6xlTU1rer&amp;sig=9q_8ApdMTw5l9kagolArj5cPSMk&amp;hl=es&amp;ei=xoMeS8ToJoS1tgfpwv2cCg&amp;sa=X&amp;oi=book_result&amp;ct=result&amp;resnum=5&amp;ved=0CBsQ6AEwBA#v=onepage&amp;q=Colotlixayac&amp;f=false\">Iconograf&#237;a"
-" mexicana, Volumen 3</a>"
-
-#. type: Content of: <ul><li>
-#: ../../skycultures/aztec/description.en.utf8:50
-msgid ""
-"<a href=\"http://www.famsi.org/spanish/mayawriting/codices/paris.html\">El "
-"C&#243;dice Par&#237;s</a>"
-msgstr ""
-"<a href=\"http://www.famsi.org/spanish/mayawriting/codices/paris.html\">El "
-"C&#243;dice Par&#237;s</a>"
-
-#. type: Content of: <ul><li>
-#: ../../skycultures/aztec/description.en.utf8:51
-msgid ""
-"<a "
-"href=\"http://redescolar.ilce.edu.mx/redescolar/biblioteca/literatura/leyenda/mexicas/mexsolun.html\">El"
-" nacimiento del sol y la luna</a>"
-msgstr ""
-"<a "
-"href=\"http://redescolar.ilce.edu.mx/redescolar/biblioteca/literatura/leyenda/mexicas/mexsolun.html\">El"
-" nacimiento del sol y la luna</a>"
-
-#. type: Content of: <ul><li>
-#: ../../skycultures/aztec/description.en.utf8:52
-msgid ""
-"<a href=\"http://aulex.org/nah-es/\">Diccionario n&aacute;huatl - "
-"espa&#241;ol en l&#237;nea en AULEX</a>"
-msgstr ""
-"<a href=\"http://aulex.org/nah-es/\">Diccionario n&aacute;huatl - "
-"espa&#241;ol en l&#237;nea en AULEX</a>"
+"href=\"http://sepiensa.org.mx/contenidos/fd_depo/nahuatl/tlach_1.html\">Tlachtli</a>"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/aztec/description.en.utf8:53
-msgid ""
-"<a "
-"href=\"http://sepiensa.org.mx/contenidos/fd_depo/nahuatl/tlach_1.html\">Tlachtli</a>"
-msgstr ""
-"<a "
-"href=\"http://sepiensa.org.mx/contenidos/fd_depo/nahuatl/tlach_1.html\">Tlachtli</a>"
-
-#. type: Content of: <ul><li>
-#: ../../skycultures/aztec/description.en.utf8:57
 msgid "Javier G&#243;mez Sandoval"
 msgstr "Javier G&#243;mez Sandoval"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/aztec/description.en.utf8:58
+#: ../../skycultures/aztec/description.en.utf8:54
 msgid "Martha Patricia Rivera"
 msgstr "Martha Patricia Rivera"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/aztec/description.en.utf8:59
+#: ../../skycultures/aztec/description.en.utf8:55
 msgid "Emilio Ram&#243;n Bola&#241;os Guerra"
 msgstr "Emilio Ram&#243;n Bola&#241;os Guerra"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/aztec/description.en.utf8:60
+#: ../../skycultures/aztec/description.en.utf8:56
 msgid "Hector Vega"
 msgstr "Hector Vega"
 
 #. type: Content of: <h5>
-#: ../../skycultures/aztec/description.en.utf8:61
-#: ../../skycultures/aztec/description.en.utf8:70
+#: ../../skycultures/aztec/description.en.utf8:57
+#: ../../skycultures/aztec/description.en.utf8:64
 msgid "Rafael Rojas Segoviano"
 msgstr "Rafael Rojas Segoviano"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/aztec/description.en.utf8:62
+#: ../../skycultures/aztec/description.en.utf8:58
 msgid "Juan Caballero"
 msgstr "Juan Caballero"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/aztec/description.en.utf8:63
+#: ../../skycultures/aztec/description.en.utf8:59
 msgid "SAAGS"
 msgstr "SAAGS"
 
 #. type: Content of: <p>
-#: ../../skycultures/aztec/description.en.utf8:66
+#: ../../skycultures/aztec/description.en.utf8:62
 msgid "<strong>Enrique G&#243;mez Candelario</strong>"
 msgstr "<strong>Enrique G&#243;mez Candelario</strong>"
 
 #. type: Content of: <p>
-#: ../../skycultures/aztec/description.en.utf8:67
+#: ../../skycultures/aztec/description.en.utf8:62
 msgid "<a href=\"mailto:aldeaglobal@gmail.com\">aldeaglobal@gmail.com</a>"
 msgstr "<a href=\"mailto:aldeaglobal@gmail.com\">aldeaglobal@gmail.com</a>"
 
-#. type: Content of: <p>
-#: ../../skycultures/aztec/description.en.utf8:68
-msgid ""
-"<a "
-"href=\"http://www.wirikuta.org/comala\">http://www.wirikuta.org/comala</a>"
-msgstr ""
-"<a "
-"href=\"http://www.wirikuta.org/comala\">http://www.wirikuta.org/comala</a>"
+#. type: Content of: <h5>
+#: ../../skycultures/aztec/description.en.utf8:64
+msgid "English translation by:"
+msgstr "Tradución ó inglés de:"
 
 #. type: Content of: <h2>
 #: ../../skycultures/belarusian/description.en.utf8:1
@@ -4678,12 +4349,6 @@ msgid "Larvae of the woodant"
 msgstr "Larvas do bosque"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:41
-#: ../../skycultures/tongan/description.en.utf8:82
-msgid "&mdash;"
-msgstr "&mdash;"
-
-#. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:44
 msgid "Collenbitchick"
 msgstr "Collenbitchick"
@@ -4754,6 +4419,11 @@ msgstr "Gellarlec"
 #: ../../skycultures/boorong/description.en.utf8:65
 msgid "Pink cockatoo"
 msgstr "Cacatúa rosa"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/boorong/description.en.utf8:66
+msgid "Aldebaran"
+msgstr "Aldebarán"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:69
@@ -5221,23 +4891,24 @@ msgid ""
 "star names. A project conducted by community member G.S.K.Lee is now "
 "underway to construct a complete Chinese sky culture set for Stellarium "
 "based on the information inside <i>Complete Studies of Astronomical "
-"Instruments</i> (Chinese: 仪象考成; pinyin: Yíxiàngkǎochéng), an imperial record"
-" of astronomy finished in 1756.It was revised in 1844, published.<i>The "
-"Continuation of Complete Studies of Astronomical Instruments</i> (Chinese: "
-"仪象考成续编; pinyin: Yíxiàngkǎochéng xùbiān), which is the major reference to the"
-" traditional Chinese Xingguans and star names used today."
+"Instruments</i> (Chinese: 仪象考成; pinyin: Yíxiàng kǎochéng), an imperial "
+"record of astronomy finished in 1756.It was revised in 1844, "
+"published.<i>The Continuation of Complete Studies of Astronomical "
+"Instruments</i> (Chinese: 仪象考成续编; pinyin: Yíxiàngkǎochéng xùbiān), which is "
+"the major reference to the traditional Chinese Xingguans and star names used"
+" today."
 msgstr ""
-"Stellarium actualmente ofrece aproximadamente 300 xingguas chineses (chinés:"
-" 星 官; pinyin: xīngguān, que significa: funcionarios da estrela) conxuntos, e"
-" non ten nome de estrelas chinesas. Un proxecto realizado polo membro da "
-"comunidade G.S.K.Lee está en marcha agora para construír un completo "
-"catálogo do ceo chinés para Stellarium baseado na información que se atopa "
-"en <i>Complete Studies of Astronomical Instruments</i> (Chinés: 仪象考成; "
-"pinyin: Yíxiàngkǎochéng), un rexistro imperial de astronomía rematado en "
-"1756. Foi revisado en 1844, publicado.<i>The Continuation of Complete "
-"Studies of Astronomical Instruments</i> (Chiné: 仪象考成续编; pinyin: "
-"Yíxiàngkǎochéng xùbiān), que é a maior referencia ós Xingguans tradicionais "
-"chineses e nomes de estrelas aínda hoxe utilizados."
+"Actualmente Stellarium ofrece aproximadamente 300 conxuntos de Xingguans "
+"chineses (chinés: 星 官; pinyin: xīngguān, que significa: funcionarios da "
+"estrela), e non ten ningún nome de estrela chinesa. Agora está en marcha un "
+"proxecto levado a cabo polo membro da comunidade G.S.K. Lee para construír "
+"un conxunto de culturas de ceo chinés para Stellarium baseado na información"
+" de <i>Complete Studies of Astronomical Instruments</i> (chinés: 仪象考成; "
+"pinyin: Yíxiàng kǎochéng), un rexistro imperial de astronomía rematado en "
+"1756. Foi completado e revisado en 1844.<i>The Continuation of Complete "
+"Studies of Astronomical Instruments</i> (chinés: 仪象考成续编; pinyin: "
+"Yíxiàngkǎochéng xùbiān), que é a principal referencia para os Xingguans e "
+"nomes de estrelas tradicionais chineses usados na actualidade."
 
 #. type: Content of: <p>
 #: ../../skycultures/chinese/description.en.utf8:5
@@ -5370,16 +5041,20 @@ msgid ""
 "Astronomical Map shows a total of 283 Xingguans, comprising a total of 1,565"
 " individual stars. The Xingguan are divided into 31 regions, the Twenty-"
 "Eight Mansions along the ecliptic, and the Three Enclosures of the northern "
-"sky. Due to the precession, six Xingguans near the southern horizon became "
-"difficult to see and were lost."
+"sky. Due to the influence of precession, six Xingguans near the southern "
+"horizon are getting more and more south. They were no longer easy to be "
+"observed by astronomers in the Ming and Qing Dynasties, so they were no "
+"longer recorded in <i>Complete Studies of Astronomical Instruments</i>."
 msgstr ""
 "Os Xingguans son xeralmente máis pequenos cás constelacións da tradición "
-"helenística. Na dinastía Song (século XIII), o Mapa Astronómico de Talla de "
-"Pedra de Suzhou mostra un total de 283 xingguans, comprendendo un total de "
-"1.565 estrelas individuais. Os xingguans divídense en 31 rexións, as vinte e"
-" oito mansións ao longo da eclíptica e os tres recintos do ceo norte. Debido"
-" á precesión, seis Xingguans preto do horizonte sur fixéronse difíciles de "
-"ver e perdéronse."
+"helenística. A dinastía Song (século XIII), o Mapa astronómico tallado en "
+"pedra de Suzhou mostra un total de 283 Xingguans, que comprenden un total de"
+" 1.565 estrelas individuais. Os Xingguans divídense en 31 rexións, as vinte "
+"e oito mansións ó longo da eclíptica e os tres recintos do ceo norte. Debido"
+" á influencia da precesión, seis Xingguans preto do horizonte sur están cada"
+" vez máis ó sur. Xa non eran fáciles de observar polos astrónomos das "
+"dinastías Ming e Qing, polo que xa non se rexistraron en  <i>Complete "
+"Studies of Astronomical Instruments</i>."
 
 #. type: Content of: <p><p>
 #: ../../skycultures/chinese/description.en.utf8:22
@@ -5397,11 +5072,11 @@ msgstr ""
 #. type: Content of: <p><p>
 #: ../../skycultures/chinese/description.en.utf8:23
 msgid ""
-"<i>Complete Studies of Astronomical Instruments</i> has 300 Xingguans in "
-"total."
+"In this way, <i>Complete Studies of Astronomical Instruments</i> has 300 "
+"Xingguans in total."
 msgstr ""
-"<i>Complete Studies of Astronomical Instruments</i> ten 300 Xingguans en "
-"total."
+"Deste xeito, <i>Complete Studies of Astronomical Instruments</i> tiña 300 "
+"Xigguans en total."
 
 #. type: Content of: <p><p><p>
 #: ../../skycultures/chinese/description.en.utf8:24
@@ -5417,7 +5092,7 @@ msgstr ""
 #. type: Content of: <p><h3>
 #: ../../skycultures/chinese/description.en.utf8:26
 #: ../../skycultures/western/description.en.utf8:7
-#: ../../skycultures/western_SnT/description.en.utf8:7
+#: ../../skycultures/western_SnT/description.en.utf8:9
 msgid "Star names"
 msgstr "Nomes de estrelas"
 
@@ -5437,16 +5112,16 @@ msgstr ""
 #. type: Content of: <p><p><p>
 #: ../../skycultures/chinese/description.en.utf8:29
 msgid ""
-"In the Chinese catalogue, some of the stars are \"principle\" "
+"In the Chinese catalogue, some of the stars are \"Principal\" "
 "(Chinese:正星pinyin:zhèngxīng). These stars were first discovered and well-"
 "known. On the contrary, some of the stars are \"added\" "
 "(Chinese:增星,pinyin:zēngxīng). They were recorded and named in later "
 "catalogues."
 msgstr ""
-"No catálogo chinés, algunhas das estrelas son \"principio\" (chinés: 正 星 "
-"pinyin: zhèngxīng). Estas estrelas foron descubertas e coñecidas dende o "
-"principio. Pola contra, algunhas das estrelas son \"engadidas\" (chinés: 增 "
-"星, pinyin: zēngxīng). Graváronse e nomeáronse en catálogos posteriores."
+"No catálogo chinés, algunhas das estrelas son \"Principais\" (chinés: 正 星 "
+"pinyin: zhèngxīng). Estas estrelas son ben coñecidas. Pola contra, algunhas "
+"das estrelas son \"engadidas\" (chinés: 增 星, pinyin: zēngxīng). Estas "
+"graváronse e déuselles nome en catálogos posteriores."
 
 #. type: Content of: <p><p><p>
 #: ../../skycultures/chinese/description.en.utf8:30
@@ -12613,13 +12288,13 @@ msgstr ""
 #. type: Content of: <p><p><p><p>
 #: ../../skycultures/chinese/description.en.utf8:2986
 msgid ""
-"This sky culture was contributed by <i>Karrie Berglund</i> of Digitalis "
-"Education Solutions, Inc. based on Hong Kong Space Museum star maps (no "
-"longer available online)."
+"This sky culture was originally contributed by <i>Karrie Berglund</i> of "
+"Digitalis Education Solutions, Inc. based on Hong Kong Space Museum star "
+"maps (no longer available online)."
 msgstr ""
-"Esta cultura do ceo foi achegada por <i>Karrie Berglund</i> de Digitalis "
-"Education Solutions, Inc. baseada en Hong Kong Space Museum star maps (xa "
-"non accesible online)."
+"Esta cultura do ceo foi orixinalmente achegada por <i>Karrie Berglund</i> de"
+" Digitalis Education Solutions, Inc. baseada en mapas de estrelas do Museo "
+"do Espazo de Hong Kong (xa non está dispoñible en liña)."
 
 #. type: Content of: <p><p><p><p>
 #: ../../skycultures/chinese/description.en.utf8:2987
@@ -13995,15 +13670,26 @@ msgstr ""
 #. type: Content of: <p>
 #: ../../skycultures/indian/description.en.utf8:7
 msgid ""
-"In vedic astronomy there are two system of measuring time - Lunar Calender &"
-" Solar calender. In both cases one year is divided into 12 months or "
-"\"māsā\". Name of the solar months originated from these constellation' "
+"In stellarium, we show Rāśi constellations attached to the corresponding "
+"asterisms, and not as divisions of the ecliptic offset away from their "
+"original locations to account for precession."
+msgstr ""
+"En stellarium, amosamos as constelacións de Rāśi unidas ós asterismos "
+"correspondentes e non como divisións da eclíptica desprazadas das súas "
+"localizacións orixinais para explicar a precesión."
+
+#. type: Content of: <p>
+#: ../../skycultures/indian/description.en.utf8:8
+msgid ""
+"In traditional astronomy there are two systems of measuring time - Lunar "
+"Calender & Solar calender. In both cases one year is divided into 12 months "
+"or \"māsā\". Name of the solar months originated from these constellation' "
 "names."
 msgstr ""
-"Na astronomía védica hai dous sistemas de medida do tempo: o calendario "
-"lunar e o calendario solar. En ambos os casos divídese un ano en 12 meses ou"
-" \"māsā\". O nome dos meses solares orixinouse a partir destes nomes da "
-"constelación."
+"Na astronomía tradicional hai dous sistemas de medición do tempo: o "
+"calendario lunar e o calendario solar. Nos dous casos un ano divídese en 12 "
+"meses ou \"māsā\". O nome dos meses solares orixinouse a partir destes nomes"
+" das constelacións."
 
 #. type: Content of: <h3>
 #: ../../skycultures/indian/description.en.utf8:10
@@ -14063,25 +13749,23 @@ msgstr ""
 #. type: Content of: <p>
 #: ../../skycultures/indian/description.en.utf8:14
 msgid ""
-"In mythology the Nakshatras are considered to be the 27 daughters of Daksha "
-"Prajipati and wives of Chandra, the god of moon. Daksha found that Soma "
-"overly favored one daughter (rohinī) over the others, thus neglecting their "
-"needs and flouting his responsibilities. For this, Daksha cursed him to "
-"wither and die. Chandra Dev approached and worshipped Lord Shiva in order to"
-" be relieved of the curse. He gave Chandra the boon that in a lunar month, "
-"he would grow for fifteen days (or \"Pakshā\") in one half and in the other "
-"half he would keep losing one shade (or \"Kalā\") per lunar day (or "
-"\"tithi\") and decrease in size."
+"There are multiple rich mythologies and symbolisms associated with the same "
+"constellations and stars (Example: <a "
+"href=\"https://www.youtube.com/watch?v=Jq__DXtfeXw\">Raj Vedam on "
+"Rohini</a>) - it wouldn't do to rely on one to the exclusion of others "
+"during translation or truncated description. Hence we stick to etymological "
+"translations; and rather than including long mythological accounts here, "
+"just suggest that interested readers delve into them separately. (See "
+"references below.)"
 msgstr ""
-"Na mitoloxía as Nakshatras considéranse as 27 fillas de Daksha Prajipati e "
-"as esposas de Chandra, o deus da lúa. Daksha descubriu que Soma favorecía "
-"excesivamente a unha filla (rohinī) sobre as outras, descoidando así as súas"
-" necesidades e sacudindo as súas responsabilidades. Por isto, Daksha "
-"condenouno a decaer e morrer. Chandra Dev achegouse e adorou a Lord Shiva "
-"para ser aliviado da maldición. Deulle a Chandra a benzón de que nun mes "
-"lunar medraría durante quince días (ou \"Pakshā\") a metade e na outra "
-"metade seguiría perdendo unha sombra (ou \"Kalā\") por día lunar (ou "
-"\"tithi\") e diminuiría de tamaño."
+"Hai múltiples e richas mitoloxías e simbolismos asociados ás mesmas "
+"constelacións e estrelas (exemplo: <a "
+"href=\"https://www.youtube.com/watch?v=Jq__DXtfeXw\">Raj Vedam en "
+"Rohini</a>) - non sería bo fiarse dun e excluír a outros durante a tradución"
+" ou descrición truncada. De aí que nos ateñamos ás traducións etimolóxicas; "
+"e en lugar de incluír aquí longas relacións mitolóxicas, só se indica que os"
+" lectores interesados afonden neles por separado. (Ver referencias a "
+"continuación.)"
 
 #. type: Content of: <p>
 #: ../../skycultures/indian/description.en.utf8:15
@@ -14105,254 +13789,8 @@ msgstr ""
 "engádese outro mes cada 32,5 meses de media ou 4 meses cada 11 anos para "
 "corrixir o desaxuste entre o ano lunar e o ano solar."
 
-#. type: Content of: <table><tr><th>
-#: ../../skycultures/indian/description.en.utf8:18
-msgid "Solar Months"
-msgstr "Meses Solares"
-
-#. type: Content of: <table><tr><th>
-#: ../../skycultures/indian/description.en.utf8:18
-msgid "Lunar Months"
-msgstr "Meses Lunares"
-
-#. type: Content of: <table><tr><th>
-#: ../../skycultures/indian/description.en.utf8:18
-msgid "Modern"
-msgstr "Moderno"
-
-#. type: Content of: <table><tr><th>
-#: ../../skycultures/indian/description.en.utf8:18
-msgid "Season"
-msgstr "Estación"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:19
-msgid "Meṣa"
-msgstr "Meṣa"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:19
-msgid "Vaiśakhā"
-msgstr "Vaiśakhā"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:19
-msgid "Apr-May"
-msgstr "Abr-Mai"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:19
-#: ../../skycultures/indian/description.en.utf8:20
-msgid "Grīṣma (Summer)"
-msgstr "Grīṣma (Summer)"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:20
-msgid "Vṛṣabha"
-msgstr "Vṛṣabha"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:20
-msgid "Jyeṣṭha"
-msgstr "Jyeṣṭha"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:20
-msgid "May–June"
-msgstr "Mai-Xuñ"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:21
-msgid "Mithuna"
-msgstr "Mithuna"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:21
-msgid "āṣāṛā"
-msgstr "āṣāṛā"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:21
-msgid "June–July"
-msgstr "Xuñ-Xul"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:21
-#: ../../skycultures/indian/description.en.utf8:22
-msgid "Varṣā (Monsoon)"
-msgstr "Varṣā (Monzón)"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:22
-msgid "Karkaṭa"
-msgstr "Karkaṭa"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:22
-msgid "śrabaṇā"
-msgstr "śrabaṇā"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:22
-msgid "July-Aug"
-msgstr "Xul-Ago"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:23
-msgid "Siṃha"
-msgstr "Siṃha"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:23
-msgid "Bhādra"
-msgstr "Bhādra"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:23
-msgid "Aug-Sept"
-msgstr "Ago-Set"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:23
-#: ../../skycultures/indian/description.en.utf8:24
-msgid "Śarad (Autumn)"
-msgstr "Śarad (Autumn)"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:24
-msgid "Kanyā"
-msgstr "Kanyā"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:24
-msgid "Aśvin"
-msgstr "Aśvin"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:24
-msgid "Sept-Oct"
-msgstr "Set-Out"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:25
-msgid "Tulā"
-msgstr "Tulā"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:25
-msgid "Kārtik"
-msgstr "Kārtik"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:25
-msgid "Oct-Nov"
-msgstr "Out-Nov"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:25
-#: ../../skycultures/indian/description.en.utf8:26
-msgid "Hemanta (Pre-Winter)"
-msgstr "Hemanta (Pre-Inverno)"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:26
-msgid "Vṛścika"
-msgstr "Vṛścika"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:26
-msgid "Agāhāna"
-msgstr "Agāhāna"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:26
-msgid "Nov-Dec"
-msgstr "Nov-Dec"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:27
-msgid "Dhanu"
-msgstr "Dhanu"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:27
-msgid "Pauṣa"
-msgstr "Pauṣa"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:27
-msgid "Dec-Jan"
-msgstr "Dec-Xan"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:27
-#: ../../skycultures/indian/description.en.utf8:28
-msgid "Śiśira (Winter)"
-msgstr "Śiśira (Inverno)"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:28
-msgid "Makara"
-msgstr "Makara"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:28
-msgid "Magha"
-msgstr "Magha"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:28
-msgid "Jan-Feb"
-msgstr "Xan-Feb"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:29
-msgid "Kumbha"
-msgstr "Kumbha"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:29
-msgid "phālguna"
-msgstr "phālguna"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:29
-msgid "Feb-Mar"
-msgstr "Feb-Mar"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:29
-#: ../../skycultures/indian/description.en.utf8:30
-msgid "Vasanta (Spring)"
-msgstr "Vasanta (Primavera)"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:30
-msgid "Mīna"
-msgstr "Mīna"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:30
-msgid "Chaitrā"
-msgstr "Chaitrā"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:30
-msgid "Mar-Apr"
-msgstr "Mar-Abr"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:31
-msgid "Adhikā"
-msgstr "Adhikā"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:31
-msgid "Leap month"
-msgstr "Mes bisesto"
-
 #. type: Content of: <p>
-#: ../../skycultures/indian/description.en.utf8:33
+#: ../../skycultures/indian/description.en.utf8:16
 msgid ""
 "A few of the yogatārā-s or prominent asterisms in the nakṣatra-s (going by "
 "their mainstream identification) lie slightly outside their constellation "
@@ -14368,184 +13806,175 @@ msgstr ""
 "iogatārā-s)."
 
 #. type: Content of: <h3>
-#: ../../skycultures/indian/description.en.utf8:35
-msgid "Navagraha - Nine planets"
-msgstr "Navagraha - Nove planetas"
+#: ../../skycultures/indian/description.en.utf8:18
+msgid "Navagraha - Nine \"planets\""
+msgstr "Navagraha - Nove \"planetas\""
 
 #. type: Content of: <p>
-#: ../../skycultures/indian/description.en.utf8:36
+#: ../../skycultures/indian/description.en.utf8:19
 msgid ""
 "They observed that some celestial body moves independently relative to "
-"background stars and named them planets or \"graha\". As such The sun and "
-"moon are also treated as graha or planet. They also named the lunar nodes as"
-" planets as these points are very important to calculate the eclipses. Name "
+"background stars and named them \"planets\" or \"graha\". As such The sun "
+"and moon are also treated as graha. They also named the lunar nodes as "
+"graha-s as these points are very important to calculate the eclipses. Name "
 "of vedic days originated from these planet's names."
 msgstr ""
-"Observaron que algún corpo celeste se move de forma independente con "
-"respecto ás estrelas de fondo e nomeáronos planetas ou \"graha\". Así, o sol"
-" e a lúa tamén son tratados como graha ou planetas. Tamén nomearon os nodos "
-"lunares como planetas xa que estes puntos son moi importantes para calcular "
-"as eclipses. O nome dos días védicos orixinouse a partir destes nomes de "
-"planeta."
+"Observaron que algún corpo celeste se move independentemente con relación ás"
+" estrelas de fondo e chamáronlles \"planetas\" ou \"graha\". Como tal, o sol"
+" e a lúa tamén son tratados como graha. Tamén lle chamaron ós nodos lunares "
+"graha-s xa que estes puntos son moi importantes para calcular os eclipses. O"
+" nome dos días védicos orixinouse a partir dos nomes destes planetas."
 
 #. type: Content of: <table><tr><th>
-#: ../../skycultures/indian/description.en.utf8:39
+#: ../../skycultures/indian/description.en.utf8:22
 msgid "Graha"
 msgstr "Graha"
 
 #. type: Content of: <table><tr><th>
-#: ../../skycultures/indian/description.en.utf8:39
+#: ../../skycultures/indian/description.en.utf8:22
 #: ../../skycultures/tongan/description.en.utf8:45
 msgid "Designation"
 msgstr "Designación"
 
 #. type: Content of: <table><tr><th>
-#: ../../skycultures/indian/description.en.utf8:39
+#: ../../skycultures/indian/description.en.utf8:22
 msgid "Name of Solar days"
 msgstr "Nome dos días solares"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:40
+#: ../../skycultures/indian/description.en.utf8:23
 msgid "Sūrya (Sun)"
 msgstr "Sūrya (Sol)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:40
+#: ../../skycultures/indian/description.en.utf8:23
 msgid "Sun God"
 msgstr "Deus Sol"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:40
+#: ../../skycultures/indian/description.en.utf8:23
 msgid "Ravivāsara (Sunday)"
 msgstr "Ravivāsara (Domingo)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:41
+#: ../../skycultures/indian/description.en.utf8:24
 msgid "Chandra/Soma (Moon)"
 msgstr "Chandra/Soma (Lúa)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:41
+#: ../../skycultures/indian/description.en.utf8:24
 msgid "Moon god"
 msgstr "Deus da Lúa"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:41
+#: ../../skycultures/indian/description.en.utf8:24
 msgid "Somavāsara (Monday)"
 msgstr "Somavāsara (Luns)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:42
+#: ../../skycultures/indian/description.en.utf8:25
 msgid "Maṅgala (Mars)"
 msgstr "Maṅgala (Marte)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:42
+#: ../../skycultures/indian/description.en.utf8:25
 msgid "God of war"
 msgstr "Deus da guerra"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:42
+#: ../../skycultures/indian/description.en.utf8:25
 msgid "Maṅgalavāsara (Tuesday)"
 msgstr "Maṅgalavāsara (Martes)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:43
+#: ../../skycultures/indian/description.en.utf8:26
 msgid "Budha (Mercury)"
 msgstr "Budha (Mercurio)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:43
+#: ../../skycultures/indian/description.en.utf8:26
 msgid "Son of Moon"
 msgstr "Fillo da Lúa"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:43
+#: ../../skycultures/indian/description.en.utf8:26
 msgid "Budhavāsara (Wednesday)"
 msgstr "Budhavāsara (Mércores)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:44
+#: ../../skycultures/indian/description.en.utf8:27
 msgid "Bṛihaspati/Guru (Jupiter)"
 msgstr "Bṛihaspati/Guru (Xúpiter)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:44
+#: ../../skycultures/indian/description.en.utf8:27
 msgid "Teacher of Gods"
 msgstr "Mestre dos Deuses"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:44
+#: ../../skycultures/indian/description.en.utf8:27
 msgid "Guruvāsara (Thursday)"
 msgstr "Guruvāsara (Xoves)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:45
+#: ../../skycultures/indian/description.en.utf8:28
 msgid "Śukra (Venus)"
 msgstr "Śukra (Venus)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:45
+#: ../../skycultures/indian/description.en.utf8:28
 msgid "Mentor of Demons"
 msgstr "Mentor de Demos"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:45
+#: ../../skycultures/indian/description.en.utf8:28
 msgid "Śukravāsara (Friday)"
 msgstr "Śukravāsara (Venres)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:46
+#: ../../skycultures/indian/description.en.utf8:29
 msgid "Śani (Saturn)"
 msgstr "Śani (Saturno)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:46
+#: ../../skycultures/indian/description.en.utf8:29
 msgid "God of Misfortune"
 msgstr "Deus do Infortunio"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:46
+#: ../../skycultures/indian/description.en.utf8:29
 msgid "Śanivāsara (Saturday)"
 msgstr "Śanivāsara (Sábado)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:47
+#: ../../skycultures/indian/description.en.utf8:30
 msgid "Rahu"
 msgstr "Rahu"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:47
-#: ../../skycultures/indian/description.en.utf8:48
+#: ../../skycultures/indian/description.en.utf8:30
+#: ../../skycultures/indian/description.en.utf8:31
 msgid "lunar node"
 msgstr "nodo lunar"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:48
+#: ../../skycultures/indian/description.en.utf8:30
+#: ../../skycultures/indian/description.en.utf8:31
+msgid "-"
+msgstr "-"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/indian/description.en.utf8:31
 msgid "Ketú"
 msgstr "Ketú"
 
-#. type: Content of: <h3>
-#: ../../skycultures/indian/description.en.utf8:52
-msgid "Contributors"
-msgstr "Contribuidores"
+#. type: Content of: <h4>
+#: ../../skycultures/indian/description.en.utf8:36
+msgid "General"
+msgstr "Xeral"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/indian/description.en.utf8:54
-msgid "Tanmoy Saha"
-msgstr "Tanmoy Saha"
-
-#. type: Content of: <ul><li>
-#: ../../skycultures/indian/description.en.utf8:55
-msgid ""
-"Contributors from the <a href=\"https://github.com/sanskrit-coders"
-"\">sanskrit-coders community</a>."
-msgstr ""
-"Contribuidores da  <a href=\"https://github.com/sanskrit-coders\">comunidade"
-" de codificadores sánscritos</a>."
-
-#. type: Content of: <ul><li>
-#: ../../skycultures/indian/description.en.utf8:60
+#: ../../skycultures/indian/description.en.utf8:38
 msgid ""
 "<a href=\"https://sa.wikipedia.org/wiki/नक्षत्रम्\" class='external text' "
 "rel=\"nofollow\">Nakshatra</a> article at Sanskrit Wikipedia"
@@ -14554,7 +13983,7 @@ msgstr ""
 "rel=\"nofollow\">Nakshatra</a> artigo en sánscrito Wikipedia"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/indian/description.en.utf8:61
+#: ../../skycultures/indian/description.en.utf8:39
 msgid ""
 "<a href=\"http://en.wikipedia.org/wiki/Nakshatra\" class='external text' "
 "rel=\"nofollow\">Nakshatra</a> article at English Wikipedia"
@@ -14563,7 +13992,7 @@ msgstr ""
 "rel=\"nofollow\">Nakshatra</a> artigo en inglés Wikipedia"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/indian/description.en.utf8:62
+#: ../../skycultures/indian/description.en.utf8:40
 msgid ""
 "<a href=\"https://archive.org/stream/HistoryOfCalendarPanchangaCommittee"
 "/History-of-Calendar-Panchanga-Committee#page/n77/mode/2up\" class='external"
@@ -14575,7 +14004,7 @@ msgstr ""
 "Report</a>"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/indian/description.en.utf8:63
+#: ../../skycultures/indian/description.en.utf8:41
 msgid ""
 "<a "
 "href=\"http://www.tifr.res.in/~archaeo/papers/Others/Possible%20period%20of%20the%20design%20of%20Nakshatras.pdf\""
@@ -14586,6 +14015,95 @@ msgstr ""
 "href=\"http://www.tifr.res.in/~archaeo/papers/Others/Possible%20period%20of%20the%20design%20of%20Nakshatras.pdf\""
 " class='external text'> \"Posible período de debuxos Nakshatras e "
 "Abhijit\"</a>"
+
+#. type: Content of: <h4>
+#: ../../skycultures/indian/description.en.utf8:44
+msgid "Mythology"
+msgstr "Mitoloxía"
+
+#. type: Content of: outside any tag (error?)
+#: ../../skycultures/indian/description.en.utf8:45
+msgid "Much of the below is available online for free at archive.org."
+msgstr ""
+"Gran parte do seguinte está dispoñible en liña de balde en archive.org."
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/indian/description.en.utf8:48
+msgid ""
+"Secondary references such as: Purana Encyclopedia, Purana Index, Mahabharata"
+" Index, Vedic Indix"
+msgstr ""
+"Referencias secundarias como: Enciclopedia Purana, Índice Purana, Índice "
+"Mahabharata, Índice Védico"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/indian/description.en.utf8:49
+#: ../../skycultures/indian/description.en.utf8:54
+msgid "Vedas, Agamas"
+msgstr "Vedas, Agamas"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/indian/description.en.utf8:50
+msgid ""
+"<a href=\"https://archive.org/details/vedicchronologya033083mbp/page/n5\" "
+"class='external text'> Vedic Chronology And Vedanga Jyotisha by Bala "
+"Gangadhar Tilak</a>"
+msgstr ""
+"<a href=\"https://archive.org/details/vedicchronologya033083mbp/page/n5\" "
+"class='external text'> Vedic Chronology And Vedanga Jyotisha de Bala "
+"Gangadhar Tilak</a>"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/indian/description.en.utf8:51
+msgid ""
+"<a href=\"https://archive.org/details/in.gov.ignca.5110\" class='external "
+"text'> Orion The Antiquity Of The Vedas by Bala Gangadhar Tilak</a>"
+msgstr ""
+"<a href=\"https://archive.org/details/in.gov.ignca.5110\" class='external "
+"text'> Orion The Antiquity Of The Vedas de Bala Gangadhar Tilak</a>"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/indian/description.en.utf8:52
+msgid ""
+"<a href=\"https://archive.org/details/arctichm/page/n21/mode/2up\" "
+"class='external text'> The Arctic Home in the Vedas by Bal Gangadhar "
+"Tilak</a>"
+msgstr ""
+"<a href=\"https://archive.org/details/arctichm/page/n21/mode/2up\" "
+"class='external text'> The Arctic Home in the Vedas de Bal Gangadhar "
+"Tilak</a>"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/indian/description.en.utf8:53
+msgid ""
+"<a href=\"https://archive.org/details/HamletsMill\" class='external "
+"text'>Hamlet's Mill: An Essay on Myth & the Frame of Time by Giorgio de "
+"Santillana, Hertha von Dechend</a>"
+msgstr ""
+"<a href=\"https://archive.org/details/HamletsMill\" class='external "
+"text'>Hamlet's Mill: An Essay on Myth & the Frame of Time de Giorgio de "
+"Santillana, Hertha von Dechend</a>"
+
+#. type: Content of: <h3>
+#: ../../skycultures/indian/description.en.utf8:58
+msgid "Contributors"
+msgstr "Contribuidores"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/indian/description.en.utf8:60
+msgid "Tanmoy Saha"
+msgstr "Tanmoy Saha"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/indian/description.en.utf8:61
+msgid ""
+"Contributors from the <a href=\"https://github.com/sanskrit-coders"
+"\">sanskrit-coders community</a> (esp <a "
+"href=\"https://github.com/vvasuki/\">Vishvas Vasuki</a>."
+msgstr ""
+"Contribuidores da <a href=\"https://github.com/sanskrit-coders\">comunidade "
+"de codificadores de sánscrito</a> (esp <a "
+"href=\"https://github.com/vvasuki/\">Vishvas Vasuki</a>."
 
 #. type: Content of: <h2>
 #: ../../skycultures/inuit/description.en.utf8:1
@@ -18962,6 +18480,25 @@ msgstr ""
 "voitre, xa que non está decorado e relaciónase mellor con algunhas "
 "descricións etnográficas (Špoták, 2015)."
 
+#. type: Content of: <p><p><p><p><p><p><p><p><p>
+#: ../../skycultures/maya/description.en.utf8:13
+#: ../../skycultures/maya/description.en.utf8:16
+#: ../../skycultures/maya/description.en.utf8:19
+#: ../../skycultures/maya/description.en.utf8:20
+#: ../../skycultures/maya/description.en.utf8:23
+#: ../../skycultures/maya/description.en.utf8:24
+#: ../../skycultures/maya/description.en.utf8:27
+#: ../../skycultures/maya/description.en.utf8:28
+#: ../../skycultures/maya/description.en.utf8:31
+#: ../../skycultures/maya/description.en.utf8:34
+#: ../../skycultures/maya/description.en.utf8:37
+#: ../../skycultures/maya/description.en.utf8:40
+#: ../../skycultures/maya/description.en.utf8:43
+#: ../../skycultures/maya/description.en.utf8:56
+#: ../../skycultures/maya/description.en.utf8:61
+msgid "&nbsp;"
+msgstr "&nbsp;"
+
 #. type: Content of: <p><p><h4>
 #: ../../skycultures/maya/description.en.utf8:14
 msgid "<em>Shark <i>[Xoc]</i></em>"
@@ -21346,6 +20883,16 @@ msgstr ""
 "Assyriologique Internationale 2018). Vera o capítulo \"Lectura adicional\" a"
 " continuación."
 
+#. type: Attribute 'lang' of: <ul><li>
+#: ../../skycultures/mulapin/description.en.utf8:543
+#: ../../skycultures/seleucid/description.en.utf8:454
+#: ../../skycultures/seleucid/description.en.utf8:455
+#: ../../skycultures/seleucid/description.en.utf8:456
+#: ../../skycultures/seleucid/description.en.utf8:457
+#: ../../skycultures/seleucid/description.en.utf8:461
+msgid "fr"
+msgstr "fr"
+
 #. type: Content of: <ul><li>
 #: ../../skycultures/mulapin/description.en.utf8:543
 msgid ""
@@ -21468,6 +21015,11 @@ msgstr ""
 #: ../../skycultures/mulapin/description.en.utf8:570
 msgid "<em>Susanne M. Hoffmann: service@uhura-uraniae.com </em>"
 msgstr "<em>Susanne M. Hoffmann: service@uhura-uraniae.com </em>"
+
+#. type: Content of: <h5>
+#: ../../skycultures/mulapin/description.en.utf8:571
+msgid "written in English:"
+msgstr "escrito en inglés:"
 
 #. type: Content of: <h5>
 #: ../../skycultures/mulapin/description.en.utf8:571
@@ -24912,7 +24464,7 @@ msgstr ""
 
 #. type: Content of: <p><p><ul><li>
 #: ../../skycultures/western/description.en.utf8:15
-#: ../../skycultures/western_SnT/description.en.utf8:12
+#: ../../skycultures/western_SnT/description.en.utf8:14
 msgid ""
 "<a href=\"http://en.wikipedia.org/wiki/Constellation\" class='external text'"
 " title=\"http://en.wikipedia.org/wiki/Constellation\" "
@@ -24924,7 +24476,7 @@ msgstr ""
 
 #. type: Content of: <p><p><ul><li>
 #: ../../skycultures/western/description.en.utf8:16
-#: ../../skycultures/western_SnT/description.en.utf8:13
+#: ../../skycultures/western_SnT/description.en.utf8:15
 msgid ""
 "<a href=\"http://en.wikipedia.org/wiki/Star_catalogue\" class='external "
 "text' title=\"http://en.wikipedia.org/wiki/Star catalogue\" "
@@ -24978,7 +24530,16 @@ msgstr ""
 "revista Sky & Telescope."
 
 #. type: Content of: <p><p>
-#: ../../skycultures/western_SnT/description.en.utf8:8
+#: ../../skycultures/western_SnT/description.en.utf8:7
+msgid ""
+"Note: the Sky & Telescope sky culture does not provide constellation lines "
+"for Microscopium or Mensa."
+msgstr ""
+"Nota: a cultura do ceo de Sky & Telescope non prové liñas de constelacións "
+"para Microscopium ou Mensa."
+
+#. type: Content of: <p><p>
+#: ../../skycultures/western_SnT/description.en.utf8:10
 msgid ""
 "The method used by Sky & Telescope to determine star names is detailed in "
 "the included <i>SnT_star_names.docx</i> file."
@@ -24987,7 +24548,7 @@ msgstr ""
 "detállase no ficheiro <i>SnT_star_names.docx</i> ."
 
 #. type: Content of: <p><p><ul><li>
-#: ../../skycultures/western_SnT/description.en.utf8:11
+#: ../../skycultures/western_SnT/description.en.utf8:13
 msgid ""
 "<a href=\"https://www.skyandtelescope.com\" class='external text' "
 "title=\"Sky & Telescope\" rel=\"nofollow\">Sky & Telescope</a> homepage"
@@ -24996,7 +24557,7 @@ msgstr ""
 "title=\"Sky & Telescope\" rel=\"nofollow\">Sky & Telescope</a> homepage"
 
 #. type: Content of: <p><p><ul><li>
-#: ../../skycultures/western_SnT/description.en.utf8:14
+#: ../../skycultures/western_SnT/description.en.utf8:16
 msgid ""
 "<a href=\"http://www.iau.org/public/constellations/\" class='external text' "
 "title=\"http://www.iau.org/public/constellations\" rel=\"nofollow\">Official"

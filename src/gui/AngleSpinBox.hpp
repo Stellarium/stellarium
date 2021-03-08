@@ -40,32 +40,32 @@ public:
 	//! Used to decide how to display the angle.
 	enum DisplayFormat
 	{
-		DMSLetters,			//!< Degrees, minutes and seconds, e.g. 180d 4m 8s, with negative values, [-360..360d]
-		DMSSymbols,			//!< Degrees, minutes and seconds, e.g. 180° 4' 8", with negative values, [-360..360°]
+		DMSLetters,		//!< Degrees, minutes and seconds, e.g. 180d 4m 8s, with negative values, [-360..360d]
+		DMSSymbols,		//!< Degrees, minutes and seconds, e.g. 180° 4' 8", with negative values, [-360..360°]
 		DMSLettersUnsigned,	//!< Degrees, minutes and seconds, e.g. 180d 4m 8s, [0..360d]
 		DMSSymbolsUnsigned,     //!< Degrees, minutes and seconds, e.g. 180° 4' 8", [0..360°]
-		HMSLetters,			//!< Hours, minutes and seconds, e.g. 12h 4m 6s
-		HMSSymbols,			//!< Hours, minutes and seconds, e.g. 12h 4' 6s"
-		DecimalDeg			//!< Decimal degrees, e.g. 180.06888
+		HMSLetters,		//!< Hours, minutes and seconds, e.g. 12h 4m 6s
+		HMSSymbols,		//!< Hours, minutes and seconds, e.g. 12h 4' 6s"
+		DecimalDeg		//!< Decimal degrees, e.g. 180.06888
 	};
 
 	//! @enum PrefixType
 	//! Determines how positive and negative values are indicated.
 	enum PrefixType
 	{
-		Normal,		//!< negative values have '-' prefix
-		NormalPlus,	//!< positive values have '+' prefix, negative values have '-' prefix.
-		Longitude,	//!< positive values have 'E' prefix, negative values have 'W' prefix.
+		Normal,			//!< negative values have '-' prefix
+		NormalPlus,		//!< positive values have '+' prefix, negative values have '-' prefix.
+		Longitude,		//!< positive values have 'E' prefix, negative values have 'W' prefix.
 		Latitude,		//!< positive values have 'N' prefix, negative values have 'S' prefix.
  		Unknown
 	};
 	
 	AngleSpinBox(QWidget* parent=Q_NULLPTR, DisplayFormat format=DMSSymbols, PrefixType prefix=Normal);
-	~AngleSpinBox();
+	~AngleSpinBox() Q_DECL_OVERRIDE;
 
 	// QAbstractSpinBox virtual members
-	virtual void stepBy(int steps);
-	virtual QValidator::State validate(QString& input, int& pos) const;
+	virtual void stepBy(int steps) Q_DECL_OVERRIDE;
+	virtual QValidator::State validate(QString& input, int& pos) const Q_DECL_OVERRIDE;
 
 	//! Get the angle held in the AngleSpinBox
 	//! @return the angle in radians
@@ -115,11 +115,10 @@ public:
 	//! @return the current maximum value
 	//! @param isDegrees true if the maximum value is required in degrees, else max is returned as radians.
 	double getMaximum(const bool isDegrees) const { return maxRad * (isDegrees ? 180.0/M_PI : 1.0); }
-
 	
 public slots:
 	//! Set the value to default 0 angle.
-	virtual void clear();
+	virtual void clear() Q_DECL_OVERRIDE;
 	
 	//! Set the value of the spin box in radians.
 	//! @param radians the value to set, in radians.
@@ -134,7 +133,7 @@ signals:
 	void valueChanged();
 
 protected:
-	virtual StepEnabled stepEnabled() const;
+	virtual StepEnabled stepEnabled() const Q_DECL_OVERRIDE;
 
 private slots:
 	//! Updates radAngle (internal representation of the angle) and calls formatText

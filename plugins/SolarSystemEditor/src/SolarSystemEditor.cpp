@@ -75,8 +75,8 @@ SolarSystemEditor::SolarSystemEditor():
 	//I really hope that the file manager is instantiated before this
 	// GZ new: Not sure whether this should be major or minor here.
 	defaultSolarSystemFilePath	= QFileInfo(StelFileMgr::getInstallationDir() + "/data/ssystem_minor.ini").absoluteFilePath();
-	customSolarSystemFilePath	= QFileInfo(StelFileMgr::getUserDir() + "/data/ssystem_minor.ini").absoluteFilePath();
 	majorSolarSystemFilePath	= QFileInfo(StelFileMgr::getInstallationDir() + "/data/ssystem_major.ini").absoluteFilePath();
+	customSolarSystemFilePath	= QFileInfo(StelFileMgr::getUserDir() + "/data/ssystem_minor.ini").absoluteFilePath();
 }
 
 SolarSystemEditor::~SolarSystemEditor()
@@ -107,7 +107,7 @@ void SolarSystemEditor::init()
 	if (QFile::exists(majorSolarSystemFilePath))
 	{
 		//defaultSsoIdentifiers.unite(listAllLoadedObjectsInFile(majorSolarSystemFilePath));
-		defaultSsoIdentifiers=listAllLoadedObjectsInFile(majorSolarSystemFilePath);
+		defaultSsoIdentifiers = listAllLoadedObjectsInFile(majorSolarSystemFilePath);
 	}
 	else
 	{
@@ -238,7 +238,7 @@ bool SolarSystemEditor::resetSolarSystemConfigurationFile() const
 		if (!QFile::remove((customSolarSystemFilePath)))
 		{
 			qWarning() << "Unable to delete" << QDir::toNativeSeparators(customSolarSystemFilePath)
-			         << endl << "Please remove the file manually.";
+				 << StelUtils::getEndLineChar() << "Please remove the file manually.";
 			return false;
 		}
 	}
@@ -352,11 +352,11 @@ bool SolarSystemEditor::addFromSolarSystemConfigurationFile(QString filePath)
 		qDebug() << "ADD OBJECTS: Data for " << newData.childGroups().count() << "objects to minor file with " << minorBodies.childGroups().count() << "entries";
 		for (auto group : newData.childGroups())
 		{
-			QString fixedGroupName=fixGroupName(group);
+			QString fixedGroupName = fixGroupName(group);
 			newData.beginGroup(group);
 			qDebug() << "  Group: " << group << "for object " << newData.value("name");
 			qDebug() << "   ";
-			QStringList minorChildGroups=minorBodies.childGroups();
+			QStringList minorChildGroups = minorBodies.childGroups();
 			if (minorChildGroups.contains(fixedGroupName))
 			{
 				qDebug() << "This group " << fixedGroupName << "already exists. Updating values";
@@ -365,7 +365,7 @@ bool SolarSystemEditor::addFromSolarSystemConfigurationFile(QString filePath)
 				qDebug() << "This group " << fixedGroupName << "does not yet exist. Adding values";
 
 			minorBodies.beginGroup(fixedGroupName);
-			QStringList newKeys=newData.allKeys(); // limited to the group!
+			QStringList newKeys = newData.allKeys(); // limited to the group!
 			for (auto key : newKeys)
 			{
 				minorBodies.setValue(key, newData.value(key));
@@ -405,12 +405,12 @@ QHash<QString,QString> SolarSystemEditor::listAllLoadedObjectsInFile(QString fil
 		return QHash<QString,QString>();
 
 	QStringList groups = solarSystemIni.childGroups();
-	QStringList planetNames = solarSystem->getAllMinorPlanetCommonEnglishNames();
+	QStringList minorBodies = solarSystem->getAllMinorPlanetCommonEnglishNames();
 	QHash<QString,QString> loadedObjects;
 	for (auto group : groups)
 	{
 		QString name = solarSystemIni.value(group + "/name").toString();
-		if (planetNames.contains(name))
+		if (minorBodies.contains(name))
 		{
 			loadedObjects.insert(name, group);
 		}
@@ -598,8 +598,7 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 		const double a=perihelionDistance/(1.-eccentricity); // semimajor axis.
 		const double meanMotion=std::sqrt(mu/(a*a*a)); // radians/day
 		double period=M_PI*2.0 / meanMotion; // period, days
-		result.insert("orbit_good", qMin(1000, static_cast<int>(floor(0.5*period)))); // validity for elliptical osculating elements, days. Goes from aphel to next aphel or max 1000 days.
-		result.insert("orbit_visualization_period", period); // add period for visualization of orbit
+		result.insert("orbit_good", qMin(1000, static_cast<int>(floor(0.5*period)))); // validity for elliptical osculating elements, days. Goes from aphel to next aphel or max 1000 days.		
 	}
 	else
 		result.insert("orbit_good", 1000); // default validity for osculating elements, days
@@ -611,8 +610,7 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	double slopeParameter = mpcParser.cap(16).toDouble(&ok);
 	result.insert("slope_parameter", slopeParameter);
 
-	double radius = 5; //Fictitious default assumption
-	result.insert("radius", radius);
+	result.insert("radius", 5); //Fictitious default assumption
 	result.insert("albedo", 0.1); // GZ 2014-01-10: Comets are very dark, should even be 0.03!
 	result.insert("dust_lengthfactor", 0.4); // dust tail length w.r.t. gas tail length
 	result.insert("dust_brightnessfactor", 1.5); // dust tail brightness w.r.t. gas tail.
@@ -987,15 +985,17 @@ bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> 
 		return false;
 	}
 
+	// load all existing minor bodies
 	QHash<QString,QString> loadedObjects = listAllLoadedSsoIdentifiers();
 
-	//Remove duplicates (identified by name, not by section name)
 	QSettings * solarSystemSettings = new QSettings(customSolarSystemFilePath, StelIniFormat);
 	if (solarSystemSettings->status() != QSettings::NoError)
 	{
 		qDebug() << "Error opening ssystem_minor.ini:" << QDir::toNativeSeparators(customSolarSystemFilePath);
 		return false;
 	}
+
+	//Remove loaded objects (identified by name, not by section name) that are also in the proposed objectList
 	for (auto object : objectList)
 	{
 		QString name = object.value("name").toString();
@@ -1044,10 +1044,10 @@ bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> 
 			if (name.isEmpty())
 				continue;
 
-			output << endl << QString("[%1]").arg(sectionName) << endl;
+			output << StelUtils::getEndLineChar() << QString("[%1]").arg(sectionName) << StelUtils::getEndLineChar();
 			for (auto key : object.keys())
 			{
-				output << QString("%1 = %2").arg(key).arg(object.value(key).toString()) << endl;
+				output << QString("%1 = %2").arg(key).arg(object.value(key).toString()) << StelUtils::getEndLineChar();
 			}
 			output.flush();
 			qDebug() << "Appended successfully" << sectionName;
@@ -1101,6 +1101,7 @@ bool SolarSystemEditor::updateSolarSystemConfigurationFile(QList<SsoElements> ob
 		qDebug() << "Error opening ssystem.ini:" << QDir::toNativeSeparators(customSolarSystemFilePath);
 		return false;
 	}
+
 	QStringList existingSections = solarSystem.childGroups();
 	QHash<QString,QString> loadedObjects = listAllLoadedSsoIdentifiers();
 	//TODO: Move to constructor?
@@ -1216,7 +1217,7 @@ bool SolarSystemEditor::updateSolarSystemConfigurationFile(QList<SsoElements> ob
 				}
 				else
 				{
-					//TODO: Do what, log a message?
+					qWarning() << "cannot update magnitude for type " << type;
 				}
 			}
 		}

@@ -29,18 +29,30 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110 - 1301  USA
 \section Introduction
 
 <p>INDI is a simple XML-like communications protocol described for interactive and automated remote control of diverse instrumentation. INDI is small, easy to parse, and stateless.</p>
-<p>In the INDI paradigm each Device poses all command and status functions in terms of settings and getting Properties.
-Each Property is a vector of one or more names members. Each property has a current value vector; a target value vector; provides information about how it should be sequenced with
-respect to other Properties to accomplish one coordinated unit of observation; and provides hints as to how it might be displayed for interactive manipulation in a GUI.</p>
+<p>A full description of the INDI protocol is detailed in the INDI <a href="http://www.clearskyinstitute.com/INDI/INDI.pdf">white paper</a></p>
 
-<p>Clients learn the Properties of a particular Device at runtime using introspection. This decouples Client and Device implementation histories. Devices have a complete authority over whether to accept commands from Clients. INDI accommadates intermediate servers, broadcasting, and connection topologies ranging from one-to-one on a single system to many-to-many between systems of different genre.</p>
+<p>Under INDI, any number of clients can connect to any number of drivers running one or more devices. It is a true N-to-N server/client architecture topology
+allowing for reliable deployments of several INDI server, client, and driver instances distrubted across different systems in different physical and logical locations.</p>
 
-<p>The INDI protocol can be nested within other XML elements such as constraints for automatic scheduling and execution.
-For a complete review on the INDI protocol, please refer to the INDI <a href="http://www.clearskyinstitute.com/INDI/INDI.pdf">white paper</a>.</p>
+<p>The basic premise of INDI is this: Drivers are responsible for defining their functionality in terms of <b>Properties</b>. Clients are not aware of such properties until they establish connection with the driver
+and start receiving streams of defined properties. Each property encompases some functionality or information about the device. These include number, text, switch, light, and BLOB properties.</p>
+
+<p>For example, all devices define the <i>CONNECTION</i> vector switch property, which is compromised of two switches:</p>
+<ol>
+<li><strong>CONNECT</strong>: Connect to the device.</li>
+<li><strong>DISCONNECT</strong>: Disconnect to the device.</li>
+</ol>
+
+<p>Therefore, a client, whether it is a GUI client that represents such property as buttons, or a Python script that parses the properties, can change the state
+of the switch to cause the desired action.</p>
+<p>Not all properties are equal. A few properties are reserved to ensure interoperality among different clients that want to target a specific functionality.
+These <i>Standard Properties</i> ensure that different clients agree of a common set of properties with specific meaning since INDI does not impose any specific meaning on the properties themselves.</p>
+
+<p>INDI server acts as a convenient hub to route communications between clients and drivers. While it is not strictly required for controlling driver, it offers many queue and routing capabilities.</p>
 
 \section Audience Intended Audience
 
-INDI is intended for developers who seek a scalable API for device control and automation. Hardware drivers written under INDI can be used under any INDI-compatible client. INDI serves as a backend only, you need frontend clients to control devices. Current clients include <a href="http://edu.kde.org/kstars">KStars</a>, <a href="http://www.clearyskyinstitute.com/xephem">Xephem</a>, <a href="http://pygtkindiclient.sourceforge.net/">DCD</a>, and <a href="http://www.stargazing.net/astropc">Cartes du Ciel</a>.
+INDI is intended for developers seeking to add support for their devices in INDI. Any INDI driver can be operated from numerous cross-platform cross-architecture <a href="http://indilib.org/about/clients.html">clients</a>.
 
 \section Development Developing under INDI
 
@@ -57,16 +69,22 @@ INDI is intended for developers who seek a scalable API for device control and a
 <li><a href="classINDI_1_1GuiderInterface.html">Guider</a></li>
 <li><a href="classINDI_1_1FilterWheel.html">Filter Wheel</a></li>
 <li><a href="classINDI_1_1Focuser.html">Focuser</a></li>
+<li><a href="classINDI_1_1Rotator.html">Rotator</a></li>
+<li><a href="classINDI_1_1Detector.html">Detector</a></li>
 <li><a href="classINDI_1_1Dome.html">Dome</a></li>
+<li><a href="classLightBoxInterface.html">Light Panel</a></li>
 <li><a href="classINDI_1_1Weather.html">Weather</a></li>
 <li><a href="classINDI_1_1GPS.html">GPS</a></li>
 <li><a href="classINDI_1_1USBDevice.html">USB</a></li>
 </ul>
+<li>@ref Connection "INDI Connection Interface"</li>
 <li>@ref INDI::SP "INDI Standard Properties"</li>
 <li><a href="md_libs_indibase_alignment_alignment_white_paper.html">INDI Alignment Subsystem</a></li>
 <li><a href="structINDI_1_1Logger.html">INDI Debugging & Logging API</a></li>
+<li>@ref DSP "Digital Signal Processing API"</li>
 <li><a href="indicom_8h.html">INDI Common Routine Library</a></li>
 <li><a href="lilxml_8h.html">INDI LilXML Library</a></li>
+<li><a href="classStreamManager.html">INDI Stream Manager for video encoding, streaming, and recording.</a></li>
 <li><a href="group__configFunctions.html">Configuration</a></li>
 </ul>
 
@@ -78,14 +96,15 @@ INDI Library includes a number of tutorials to illustrate development of INDI dr
 
 Simulators provide a great framework to test drivers and equipment alike. INDI Library provides the following simulators:
 <ul>
-<li><b>Telescope Simulator</b>: Offers GOTO capability, motion control, guiding, and ability to set Periodic Error (PE) which is read by the CCD simulator when generating images.</li>
-<li><b>CCD Simulator</b>: Offers a very flexible CCD simulator with a primary CCD chip and a guide chip. The simulator generate images based on the RA & DEC coordinates it
+<li><b>@ref ScopeSim "Telescope Simulator"</b>: Offers GOTO capability, motion control, guiding, and ability to set Periodic Error (PE) which is read by the CCD simulator when generating images.</li>
+<li><b>@ref CCDSim "CCD Simulator"</b>: Offers a very flexible CCD simulator with a primary CCD chip and a guide chip. The simulator generate images based on the RA & DEC coordinates it
  snoops from the telescope driver using General Star Catalog (GSC). Please note that you must install GSC for the CCD simulator to work properly. Furthermore,
  The simulator snoops FWHM from the focuser simulator which affects the generated images focus. All images are generated in standard FITS format.</li>
-<li><b>Filter Wheel Simulator</b>: Offers a simple simulator to change filter wheels and their corresponding designations.</li>
-<li><b>Focuser Simulator</b>: Offers a simple simualtor for an absolute position focuser. It generates a simulated FWHM value that may be used by other simulator such as the CCD simulator.</li>
-<li><b>Dome Simulator</b>: Offers a simple simulator for an absolute position dome with shutter.
-<li><b>GPS Simulator</b>: Offers a simple simulator for GPS devices that send time and location data to the client and other drivers.
+<li><b>@ref GuideSim "Guide Simulator"</b>: Simple dedicated Guide Simulator.
+<li><b>@ref FilterSim "Filter Wheel Simulator"</b>: Offers a simple simulator to change filter wheels and their corresponding designations.</li>
+<li><b>@ref FocusSim "Focuser Simulator"</b>: Offers a simple simualtor for an absolute position focuser. It generates a simulated FWHM value that may be used by other simulator such as the CCD simulator.</li>
+<li><b>@ref DomeSim "Dome Simulator"</b>: Offers a simple simulator for an absolute position dome with shutter.
+<li><b>@ref GPSSimulator "GPS Simulator"</b>: Offers a simple simulator for GPS devices that send time and location data to the client and other drivers.
 </ul>
 
 \section Help
@@ -94,6 +113,9 @@ You can find information on INDI development in the <a href="http://www.indilib.
 
 \author Jasem Mutlaq
 \author Elwood Downey
+
+For a full list of contributors, please check <a href="https://github.com/indilib/indi/graphs/contributors">Contributors page</a> on Github.
+
 */
 
 /** \file indiapi.h
@@ -110,8 +132,8 @@ You can find information on INDI development in the <a href="http://www.indilib.
 
 /* INDI Library version */
 #define INDI_VERSION_MAJOR   1
-#define INDI_VERSION_MINOR   5
-#define INDI_VERSION_RELEASE 0
+#define INDI_VERSION_MINOR   8
+#define INDI_VERSION_RELEASE 5
 
 /*******************************************************************************
  * Manifest constants
@@ -121,40 +143,44 @@ You can find information on INDI development in the <a href="http://www.indilib.
  * @typedef ISState
  * @brief Switch state.
  */
-typedef enum {
-    ISS_OFF = 0, /*!< Switch is OFF */
-    ISS_ON       /*!< Switch is ON */
+typedef enum
+{
+ISS_OFF = 0, /*!< Switch is OFF */
+ISS_ON       /*!< Switch is ON */
 } ISState;
 
 /**
  * @typedef IPState
  * @brief Property state.
  */
-typedef enum {
-    IPS_IDLE = 0, /*!< State is idle */
-    IPS_OK,       /*!< State is ok */
-    IPS_BUSY,     /*!< State is busy */
-    IPS_ALERT     /*!< State is alert */
+typedef enum
+{
+IPS_IDLE = 0, /*!< State is idle */
+IPS_OK,       /*!< State is ok */
+IPS_BUSY,     /*!< State is busy */
+IPS_ALERT     /*!< State is alert */
 } IPState;
 
 /**
  * @typedef ISRule
  * @brief Switch vector rule hint.
  */
-typedef enum {
-    ISR_1OFMANY, /*!< Only 1 switch of many can be ON (e.g. radio buttons) */
-    ISR_ATMOST1, /*!< At most one switch can be ON, but all switches can be off. It is similar to ISR_1OFMANY with the exception that all switches can be off. */
-    ISR_NOFMANY  /*!< Any number of switches can be ON (e.g. check boxes) */
+typedef enum
+{
+ISR_1OFMANY, /*!< Only 1 switch of many can be ON (e.g. radio buttons) */
+ISR_ATMOST1, /*!< At most one switch can be ON, but all switches can be off. It is similar to ISR_1OFMANY with the exception that all switches can be off. */
+ISR_NOFMANY  /*!< Any number of switches can be ON (e.g. check boxes) */
 } ISRule;
 
 /**
  * @typedef IPerm
  * @brief Permission hint, with respect to client.
  */
-typedef enum {
-    IP_RO, /*!< Read Only */
-    IP_WO, /*!< Write Only */
-    IP_RW  /*!< Read & Write */
+typedef enum
+{
+IP_RO, /*!< Read Only */
+IP_WO, /*!< Write Only */
+IP_RW  /*!< Read & Write */
 } IPerm;
 
 // The XML strings for these attributes may be any length but implementations
@@ -195,8 +221,8 @@ typedef enum {
  */
 typedef struct
 {
-    /** Index name */
-    char name[MAXINDINAME];
+/** Index name */
+char name[MAXINDINAME];
     /** Short description */
     char label[MAXINDILABEL];
     /** Allocated text string */

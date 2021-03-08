@@ -54,6 +54,7 @@ private slots:
 	//! Updates the displayed values of controls from the plug-in.
 	//! Called when the configuration is changed.
 	void updateControls();
+	void restoreDefaults();
 
 private:
 	Ui_ObservabilityDialog* ui;

@@ -72,6 +72,8 @@ public:
 
 	int getSkyGuiWidth() const;
 	int getSkyGuiHeight() const;
+	qreal getBottomBarHeight() const; //!< return height of bottom Bar when fully shown
+	qreal getLeftBarWidth() const;    //!< return width of left Bar when fully shown
 	
 protected:
 	virtual void resizeEvent(QGraphicsSceneResizeEvent* event) Q_DECL_OVERRIDE;

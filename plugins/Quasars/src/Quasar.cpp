@@ -242,7 +242,7 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 		}
 		else
 		{
-			Vec3f color = sd->indexToColor(BvToColorIndex(bV))*0.75f;
+			Vec3f color = sd->indexToColor(BvToColorIndex(bV))*0.75f; // see ZoneArray.cpp:L490
 			RCMag rcMag;
 
 			sd->preDrawPointSource(&painter);

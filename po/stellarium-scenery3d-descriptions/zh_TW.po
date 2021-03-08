@@ -1,0 +1,285 @@
+# SOME DESCRIPTIVE TITLE
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# freemanli <freeman.tam@gmail.com>, 2020
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2020-12-26 18:32+0700\n"
+"PO-Revision-Date: 2020-11-24 18:28+0000\n"
+"Last-Translator: freemanli <freeman.tam@gmail.com>, 2020\n"
+"Language-Team: Chinese (Taiwan) (https://www.transifex.com/stellarium/teams/80998/zh_TW/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_TW\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. type: Content of: <h2>
+#: ../../scenery3d/Testscene/description.en.utf8:1
+msgid "Testscene"
+msgstr "測試場景"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Testscene/description.en.utf8:3
+msgid ""
+"This scene is mostly useful as testbed for your own developments. You should"
+" make a copy of the scene folder and modify at will, try material settings "
+"or some other details to find out how this plugin behaves. Then build and "
+"present your own work!"
+msgstr ""
+"這個場景最適合作為您自行設計時的試驗台。 您應該複製該場景資料夾 Testscene 然後隨意修改，嘗試使用材質設置或其他一些細節來了解此外掛的特性。 "
+"然後構建並展示您自己的作品！"
+
+#. type: Content of: <h4>
+#: ../../scenery3d/Testscene/description.en.utf8:8
+msgid "Coordinate and orientation tests"
+msgstr "座標和方向測試"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Testscene/description.en.utf8:10
+msgid ""
+"The pillars shown here, as seen from the structure's center, provide an "
+"approximate view (not hi-precision!) to solstice/equinox sunrise/sunset "
+"positions in central European latitudes. The central pillars provide an "
+"east-west-line. The survey coordinate grid visible on the floor does not "
+"align with geographic north.  A rotation of -4.2 deg (test for meridian "
+"convergence) must be compensated, i.e., while the central pillars must "
+"absolutely and always point west-east, the grid lines hit the northern "
+"horizon slightly (4.2 deg) left of north!"
+msgstr ""
+"從結構中心看，此處顯示的柱子為中歐緯度的冬至（春分）日出（日落）位置提供了近似視圖（非高精準度！）。 中央支柱提供東西線。 "
+"地板上可見的測量坐標網格並未對齊地理北方，必須補償-4.2度的旋轉（經度收斂測試），意思是雖然中心支柱必須絕對且始終指向西，但網格線還是會稍微偏向正北的左方（4.2度）！"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Testscene/description.en.utf8:19
+msgid ""
+"Walkaround ground coordinates (Ctrl-R, T) should display the coordinates "
+"visible along the south and west border of the ground."
+msgstr "漫遊地面坐標（Ctrl-R，T）時應會顯示沿地面南，西邊界的可見坐標。"
+
+#. type: Content of: <h4>
+#: ../../scenery3d/Testscene/description.en.utf8:23
+msgid "Material test"
+msgstr "材質測試"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Testscene/description.en.utf8:25
+msgid ""
+"This model is also used for testing the plugin's graphical capabilities. You"
+" can play with material parameters to create funny effects like "
+"semitransparent or glow-in-the-dark brick spheres."
+msgstr "這個模型還可用於測試外掛的圖繪功能。 您可以使用材質參數來創建有趣的效果，例如半透明或黑暗中發光的磚球。"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Testscene/description.en.utf8:29
+msgid ""
+"To test temporal features, the pillars and spheres are visible only from the"
+" years 2000 until 2020.  Edit the material file to change that!"
+msgstr "為了測試現世的特徵，支柱和球體僅在2000年到2020年可見。可編輯材質檔案進行更改！"
+
+#. type: Content of: <h4>
+#: ../../scenery3d/Testscene/description.en.utf8:32
+#: ../../scenery3d/Sterngarten/description.en.utf8:56
+msgid "Model"
+msgstr "模型"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Testscene/description.en.utf8:33
+msgid ""
+"Testscene for Stellarium/scenery3d development. Export from SU8-Kerkythea-"
+"KT2OBJ."
+msgstr "Stellarium/scenery3d 開發設計的測試場景，從 SU8-Kerkythea-KT2OBJ 中匯出。"
+
+#. type: Content of: <h2>
+#: ../../scenery3d/Sterngarten/description.en.utf8:1
+msgid "Vienna Sterngarten"
+msgstr "維也納 Sterngarten"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Sterngarten/description.en.utf8:3
+msgid ""
+"Sterngarten (\"Star Garden\") is an open-air planetarium in the south-west "
+"of Vienna, demonstrating the solar year."
+msgstr "Sterngarten（“星星花園”）是維也納西南部的一個露天星象台，展示回歸年。"
+
+#. type: Content of: <h4>
+#: ../../scenery3d/Sterngarten/description.en.utf8:7
+msgid "Idea"
+msgstr "理念"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Sterngarten/description.en.utf8:9
+msgid ""
+"Univ.Prof.Dr.Oswald Thomas (1882 Kronstadt - 1963 Vienna). Founder, "
+"Astronomical Bureau (1907) and Austrian Astronomical Society (1924). "
+"Director of first Vienna Planetarium (1927) and Urania observatory."
+msgstr ""
+"大學教授 Oswald Thomas（1882 喀琅施塔得 - 1963 維也納）。 （1907）天文局和（1924）奧地利天文學會的創始人。 "
+"（1927）維也納星象台和Urania天文觀測台的第一任台長。"
+
+#. type: Content of: <h4>
+#: ../../scenery3d/Sterngarten/description.en.utf8:14
+msgid "Construction"
+msgstr "建構"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Sterngarten/description.en.utf8:16
+msgid ""
+"The Sterngarten was developed by Thomas' student and successor in the "
+"Astronomical Bureau Prof. Hermann Mucke (1935-2019) with his collaborators."
+"  Mucke was also secretary of the Austrian Astronomical Society from "
+"1963-2018, director of Vienna planetarium 1963-2001 and Vienna Urania public"
+" observatory from 1971-2001. For more than 60 years, Mucke and the Society "
+"published the \"Österreichischer Himmelskalender\" (Austrian Celestial "
+"Calendar)  and the monthly journal \"Der Sternenbote\" (The Starry "
+"Messenger)."
+msgstr ""
+"Sterngarten由 Thomas 的學生和天文局的接班人 Hermann Mucke 教授（1935-2019）與他的合作者所共同開發。Mucke"
+" 在 1963-2018 擔任奧地利天文學會秘書長，從1963年至2001年擔任維也納星象台台長，在 1971-2001 "
+"擔任維也納烏拉尼亞公共天文台台長。 60多年來，Mucke和協會出版了“Österreichischer "
+"Himmelskalender”（奧地利天文日曆）和“ Der Sternenbote”（《星空使者》）月刊。"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Sterngarten/description.en.utf8:22
+msgid ""
+"It was built 1997-2001 by the Austrian Astronomical Society, supported by "
+"public and private sponsors."
+msgstr "它是由奧地利天文學會於1997-2001年建造的，並得到了公家和私人的贊助。"
+
+#. type: Content of: <h4>
+#: ../../scenery3d/Sterngarten/description.en.utf8:24
+msgid "Purpose"
+msgstr "木ㄉㄧ"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Sterngarten/description.en.utf8:26
+msgid ""
+"Improvement of basic astronomical knowledge in the general public. "
+"Witnessing celestial facts and changes with the unaided eye, optionally with"
+" a field glass, is offered by our installation, situated in the extreme "
+"southwest of Vienna; always open privately for everybody free of charge. "
+"Frequently guided tours."
+msgstr ""
+"增進大眾的基本天文知識。可以用肉眼觀察天上的事實和變化，還可以選擇用我們安裝於維也納西南端的野外望遠鏡來觀察。 始終對所有人免費開放。 經常舉辦導覽。"
+
+#. type: Content of: <h4>
+#: ../../scenery3d/Sterngarten/description.en.utf8:32
+msgid "Components"
+msgstr "組成"
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:35
+msgid ""
+"Pyramid with platform 7x7m. Seen from 1.5m above Center Plate all angles "
+"fit."
+msgstr "平台為7x7m的錐體。 從中心板上方1.5m處看到的所有角度都合適。"
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:36
+msgid "Horizon Railing, representing the mathematical horizon."
+msgstr "地平線欄杆，代表數學上的地平線。"
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:37
+msgid ""
+"Surrounding Steps; 200 seats. Entrance by staircase and wheelchair ramp."
+msgstr "周圍的台階有 200 個座位。 入口有樓梯和輪椅坡道。"
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:38
+msgid ""
+"Pillars for sunrise and sunset at beginning of the seasons.  Pillar "
+"positions are right on the azimuths of equinoxes and solstices.  Arms "
+"indicate horizon and shifting effect due to refraction.  (Observation of "
+"rising/setting on the mathematical horizon is not possible in the field due "
+"to vegetation and landscape)."
+msgstr ""
+"支柱表示在季節開始時的日出和日落。 支柱位置恰好在分點和至點的方位角上。 扶手表示水平和由於折射產生的視線移位效果。 "
+"（由於植被和景觀，在野外無法觀察到數學上的上升/落下）。"
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:42
+msgid ""
+"South Pillar, marked (10&deg;/10&deg; altitude); Transit marks for sun at "
+"seasons' beginning."
+msgstr "南方支柱, 標記 (10&deg;/10&deg; 高度); 中天標記表示太陽在季節開始的那天過中天的位置。"
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:43
+msgid ""
+"North Pillar, marked (10&deg;/10&deg; altitude); on top Shadow Disc with "
+"central hole: North celestial Pole."
+msgstr "北方支柱, 標記 (10&deg;/10&deg; 高度); 頂端有中間穿孔的暗影圓盤: 北天極。"
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:44
+msgid ""
+"Bent Analemma, divided. Spring and summer dates on the horizontal part, "
+"autumn and winter dates on the ascending one, marked (10&deg;/10&deg;) solar"
+" longitude, with zodiacal signs. Ascending part serves as polar gnomon for "
+"the"
+msgstr ""
+"分開的彎曲日行跡。春天和夏天的日期在水平部份，秋天和冬天的日期在上升部份，標記 (10&deg;/10&deg;) "
+"具有黃道符號的太陽經度。上升部份提供日晷上的晷影器裝置"
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:45
+msgid "Sundial, full hours Vh to VIIh marked."
+msgstr "具有全部的 Vh 到 VIIh 時數標記。"
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:46
+msgid "Information panels."
+msgstr "資訊面板。"
+
+#. type: Content of: <h4>
+#: ../../scenery3d/Sterngarten/description.en.utf8:49
+msgid "Further Information"
+msgstr "更多資訊"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Sterngarten/description.en.utf8:50
+msgid "Websites in German only."
+msgstr "僅有在德國的網站。"
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:52
+msgid ""
+"Österreichischer Astronomischer Verein: <a "
+"href=\"https://www.astroverein.at\">https://www.astroverein.at</a>"
+msgstr ""
+"Österreichischer Astronomischer Verein: <a "
+"href=\"https://www.astroverein.at\">https://www.astroverein.at</a>"
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:53
+msgid ""
+"German Wikipedia article on the <a "
+"href=\"https://de.wikipedia.org/wiki/Sterngarten\">Sterngarten</a>"
+msgstr ""
+"德國的維基文章在 <a "
+"href=\"https://de.wikipedia.org/wiki/Sterngarten\">Sterngarten</a>"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Sterngarten/description.en.utf8:57
+msgid ""
+"Created by Georg Zotti following plans by H. Mucke; Like countless amateur "
+"and professional astronomers in Austria, Zotti was introduced to astronomy "
+"by Mucke in his primary school days. Mucke's spirit will remain alive in the"
+" Sterngarten."
+msgstr ""
+"由 Georg Zotti 依循 H. Mucke 的計劃所創建； 就像奧地利無數的業餘和專業天文學家一樣，Zotti 在小學時代就將透過 Mucke "
+"認識天文學。 Mucke 的精神將永遠存在 Sterngarten 中。"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Sterngarten/description.en.utf8:60
+msgid ""
+"Model created in 2010 with Google Sketchup 8, exported from Google Sketchup "
+"8.0.14346."
+msgstr "模型於2010年使用 Google Sketchup 8 創建，並從 Google Sketchup 8.0.14346 匯出。"

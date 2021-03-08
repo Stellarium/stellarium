@@ -44,6 +44,8 @@
  * Clients that get more than maxqsiz bytes behind are shut down.
  */
 
+#define _GNU_SOURCE // needed for siginfo_t and sigaction
+
 #include "config.h"
 
 #include "fq.h"
@@ -75,6 +77,7 @@
 #define MAXSBUF       512
 #define MAXRBUF       49152 /* max read buffering here */
 #define MAXWSIZ       49152 /* max bytes/write */
+#define SHORTMSGSIZ   2048  /* buf size for most messages */
 #define DEFMAXQSIZ    128   /* default max q behind, MB */
 #define DEFMAXSSIZ    5     /* default max stream behind, MB */
 #define DEFMAXRESTART 10    /* default max restarts */
@@ -90,7 +93,7 @@ typedef struct
     int count;         /* number of consumers left */
     unsigned long cl;  /* content length */
     char *cp;          /* content: buf or malloced */
-    char buf[MAXWSIZ]; /* local buf for most messages */
+    char buf[SHORTMSGSIZ];    /* local buf for most messages */
 } Msg;
 
 /* device + property name */
@@ -360,7 +363,7 @@ static void usage(void)
 {
     fprintf(stderr, "Usage: %s [options] driver [driver ...]\n", me);
     fprintf(stderr, "Purpose: server for local and remote INDI drivers\n");
-    fprintf(stderr, "INDI Library: %s\nCode %s. Protocol %g.\n", CMAKE_INDI_VERSION_STRING, "$Rev$", INDIV);
+    fprintf(stderr, "INDI Library: %s\nCode %s. Protocol %g.\n", CMAKE_INDI_VERSION_STRING, GIT_TAG_STRING, INDIV);
     fprintf(stderr, "Options:\n");
     fprintf(stderr, " -l d     : log driver messages to <d>/YYYY-MM-DD.islog\n");
     fprintf(stderr, " -m m     : kill client if gets more than this many MB behind, default %d\n", DEFMAXQSIZ);
@@ -881,23 +884,26 @@ static void indiRun(void)
     for (i = 0; s > 0 && i < ndvrinfo; i++)
     {
         DvrInfo *dp = &dvrinfo[i];
-        if (dp->pid != REMOTEDVR && FD_ISSET(dp->efd, &rs))
+        if (dp->active)
         {
-            if (stderrFromDriver(dp) < 0)
-                return; /* fds effected */
-            s--;
-        }
-        if (s > 0 && FD_ISSET(dp->rfd, &rs))
-        {
-            if (readFromDriver(dp) < 0)
-                return; /* fds effected */
-            s--;
-        }
-        if (s > 0 && FD_ISSET(dp->wfd, &ws) && nFQ(dp->msgq) > 0)
-        {
-            if (sendDriverMsg(dp) < 0)
-                return; /* fds effected */
-            s--;
+            if (dp->pid != REMOTEDVR && FD_ISSET(dp->efd, &rs))
+            {
+                if (stderrFromDriver(dp) < 0)
+                    return; /* fds effected */
+                s--;
+            }
+            if (s > 0 && FD_ISSET(dp->rfd, &rs))
+            {
+                if (readFromDriver(dp) < 0)
+                    return; /* fds effected */
+                s--;
+            }
+            if (s > 0 && FD_ISSET(dp->wfd, &ws) && nFQ(dp->msgq) > 0)
+            {
+                if (sendDriverMsg(dp) < 0)
+                    return; /* fds effected */
+                s--;
+            }
         }
     }
 }
@@ -948,11 +954,11 @@ static void newFIFO(void)
         char cmd[MAXSBUF], arg[4][1], var[4][MAXSBUF], tDriver[MAXSBUF], tName[MAXSBUF], envConfig[MAXSBUF],
             envSkel[MAXSBUF], envPrefix[MAXSBUF];
 
-        memset(&tDriver[0], 0, sizeof(MAXSBUF));
-        memset(&tName[0], 0, sizeof(MAXSBUF));
-        memset(&envConfig[0], 0, sizeof(MAXSBUF));
-        memset(&envSkel[0], 0, sizeof(MAXSBUF));
-        memset(&envPrefix[0], 0, sizeof(MAXSBUF));
+        memset(&tDriver[0], 0, sizeof(char) * MAXSBUF);
+        memset(&tName[0], 0, sizeof(char) * MAXSBUF);
+        memset(&envConfig[0], 0, sizeof(char) * MAXSBUF);
+        memset(&envSkel[0], 0, sizeof(char) * MAXSBUF);
+        memset(&envPrefix[0], 0, sizeof(char) * MAXSBUF);
 
         int n = 0;
 
@@ -1063,22 +1069,22 @@ static void newFIFO(void)
                     if (verbose)
                         fprintf(stderr, "FIFO: Shutting down driver: %s\n", tDriver);
 
-                    for (i = 0; i < dp->ndev; i++)
-                    {
-                        /* Inform clients that this driver is dead */
-                        XMLEle *root = addXMLEle(NULL, "delProperty");
-                        addXMLAtt(root, "device", dp->dev[i]);
+//                    for (i = 0; i < dp->ndev; i++)
+//                    {
+//                        /* Inform clients that this driver is dead */
+//                        XMLEle *root = addXMLEle(NULL, "delProperty");
+//                        addXMLAtt(root, "device", dp->dev[i]);
 
-                        prXMLEle(stderr, root, 0);
-                        Msg *mp = newMsg();
+//                        prXMLEle(stderr, root, 0);
+//                        Msg *mp = newMsg();
 
-                        q2Clients(NULL, 0, dp->dev[i], NULL, mp, root);
-                        if (mp->count > 0)
-                            setMsgXMLEle(mp, root);
-                        else
-                            freeMsg(mp);
-                        delXMLEle(root);
-                    }
+//                        q2Clients(NULL, 0, dp->dev[i], NULL, mp, root);
+//                        if (mp->count > 0)
+//                            setMsgXMLEle(mp, root);
+//                        else
+//                            freeMsg(mp);
+//                        delXMLEle(root);
+//                    }
 
                     shutdownDvr(dp, 0);
                     break;
@@ -1464,6 +1470,25 @@ static void shutdownClient(ClInfo *cp)
 static void shutdownDvr(DvrInfo *dp, int restart)
 {
     Msg *mp;
+    int i=0;
+
+    // Tell client driver is dead.
+    for (i = 0; i < dp->ndev; i++)
+    {
+        /* Inform clients that this driver is dead */
+        XMLEle *root = addXMLEle(NULL, "delProperty");
+        addXMLAtt(root, "device", dp->dev[i]);
+
+        prXMLEle(stderr, root, 0);
+        Msg *mp = newMsg();
+
+        q2Clients(NULL, 0, dp->dev[i], NULL, mp, root);
+        if (mp->count > 0)
+            setMsgXMLEle(mp, root);
+        else
+            freeMsg(mp);
+        delXMLEle(root);
+    }
 
     /* make sure it's dead, reclaim resources */
     if (dp->pid == REMOTEDVR)
@@ -1583,6 +1608,9 @@ static void q2SDrivers(DvrInfo *me, int isblob, const char *dev, const char *nam
 
     for (dp = dvrinfo; dp < &dvrinfo[ndvrinfo]; dp++)
     {
+        if (dp->active == 0)
+            continue;
+
         Property *sp = findSDevice(dp, dev, name);
 
         /* nothing for dp if not snooping for dev/name or wrong BLOB mode */
@@ -1819,7 +1847,9 @@ static int msgQSize(FQ *q)
     for (i = 0; i < nFQ(q); i++)
     {
         Msg *mp = (Msg *)peekiFQ(q, i);
-        l += mp->cl;
+        l += sizeof(Msg);
+        if (mp->cp != mp->buf)
+            l += mp->cl;
     }
 
     return (l);
