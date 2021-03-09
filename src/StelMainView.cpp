@@ -1561,8 +1561,7 @@ void StelMainView::doScreenshot(void)
 	QOpenGLFramebufferObject * fbObj = new QOpenGLFramebufferObject(imgWidth * pixelRatio, imgHeight * pixelRatio, fbFormat);
 	fbObj->bind();
 	// Now the painter has to be convinced to paint to the potentially larger image frame.
-	QOpenGLPaintDevice fbObjPaintDev(imgWidth, imgHeight);
-	fbObjPaintDev.setDevicePixelRatio(pixelRatio);
+	QOpenGLPaintDevice fbObjPaintDev(imgWidth * pixelRatio, imgHeight * pixelRatio);
 
 	// It seems the projector has its own knowledge about image size. We must adjust fov and image size, but reset afterwards.
 	StelProjector::StelProjectorParams pParams=StelApp::getInstance().getCore()->getCurrentStelProjectorParams();
