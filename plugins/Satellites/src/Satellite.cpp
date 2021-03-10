@@ -166,7 +166,7 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	QVariantList groupList =  map.value("groups", QVariantList()).toList();
 	if (!groupList.isEmpty())
 	{
-		for (const auto& group : groupList)
+		for (const auto& group : qAsConst(groupList))
 			groups.insert(group.toString());
 	}
 
@@ -242,7 +242,7 @@ QVariantMap Satellite::getMap(void)
 	map["orbitColor"] = orbitCol;
 	map["infoColor"] = infoCol;
 	QVariantList commList;
-	for (const auto& c : comms)
+	for (const auto& c : qAsConst(comms))
 	{
 		QVariantMap commMap;
 		commMap["frequency"] = c.frequency;
@@ -252,7 +252,7 @@ QVariantMap Satellite::getMap(void)
 	}
 	map["comms"] = commList;
 	QVariantList groupList;
-	for (const auto& g : groups)
+	for (const auto& g : qAsConst(groups))
 	{
 		groupList << g;
 	}
@@ -297,9 +297,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 					 .arg(id);
 		else
 			catalogNumbers = QString("NORAD %1; %2: %3")
-			                 .arg(id)
-					 .arg(q_("International Designator"))
-			                 .arg(internationalDesignator);
+					 .arg(id, q_("International Designator"), internationalDesignator);
 		oss << catalogNumbers << "<br/><br/>";
 	}
 
@@ -362,8 +360,8 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		}
 		double inclination = pSatWrapper->getOrbitalInclination();
 		oss << QString("%1: %2 (%3%4)")
-		       .arg(q_("Inclination")).arg(StelUtils::decDegToDmsStr(inclination))
-		       .arg(QString::number(inclination, 'f', 4)).arg(degree)
+		       .arg(q_("Inclination"), StelUtils::decDegToDmsStr(inclination),
+			    QString::number(inclination, 'f', 4), degree)
 		<< "<br/>";
 		oss << QString("%1: %2%3/%4%5")
 		       .arg(q_("SubPoint (Lat./Long.)"))
@@ -387,7 +385,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		        .arg(velocity[1], 5, 'f', 2)
 		        .arg(velocity[2], 5, 'f', 2);
 		// TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered inertial coordinate system
-		oss << QString("%1: %2 %3").arg(q_("TEME velocity")).arg(temeVel).arg(qc_("km/s", "speed")) << "<br/>";
+		oss << QString("%1: %2 %3").arg(q_("TEME velocity"), temeVel, qc_("km/s", "speed")) << "<br/>";
 
 		QString pha = StelApp::getInstance().getFlagShowDecimalDegrees() ?
 				StelUtils::radToDecDegStr(phaseAngle,4,false,true) :
@@ -431,7 +429,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		}
 
 		if (status!=StatusUnknown)
-			oss << QString("%1: %2").arg(q_("Operational status")).arg(getOperationalStatus()) << "<br />";
+			oss << QString("%1: %2").arg(q_("Operational status"), getOperationalStatus()) << "<br />";
 		//Visibility: Full text		
 		oss << q_(visibilityDescription.value(visibility, "")) << "<br />";
 
@@ -773,10 +771,8 @@ void Satellite::setNewTleElements(const QString& tle1, const QString& tle2)
 		delete old;
 	}
 
-	tleElements.first.clear();
-	tleElements.first.append(tle1);
-	tleElements.second.clear();
-	tleElements.second.append(tle2);
+	tleElements.first = tle1.toUtf8();
+	tleElements.second = tle2.toUtf8();
 
 	pSatWrapper = new gSatWrapper(id, tle1, tle2);
 	orbitPoints.clear();

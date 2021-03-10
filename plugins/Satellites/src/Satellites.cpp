@@ -956,7 +956,7 @@ void Satellites::setDataMap(const QVariantMap& map)
 QVariantMap Satellites::createDataMap(void)
 {
 	QVariantMap map;
-	QVariantList defHintCol, defOrbitCol, defInfoCol;
+	QVariantList defHintCol;
 	defHintCol << Satellite::roundToDp(defaultHintColor[0],3)
 		   << Satellite::roundToDp(defaultHintColor[1],3)
 		   << Satellite::roundToDp(defaultHintColor[2],3);
@@ -969,7 +969,7 @@ QVariantMap Satellites::createDataMap(void)
 	map["hintColor"] = defHintCol;
 	map["shortName"] = "satellite orbital data";
 	QVariantMap sats;
-	for (const auto& sat : satellites)
+	for (const auto& sat : qAsConst(satellites))
 	{
 		QVariantMap satMap = sat->getMap();
 
@@ -1180,11 +1180,13 @@ bool Satellites::add(const TleData& tleData)
 			satGroups.append("crewed");
 		if (tleData.name.startsWith("PROGRESS-MS") || tleData.name.startsWith("CYGNUS NG"))
 			satGroups.append("resupply");
+		if (tleData.status==Satellite::StatusNonoperational)
+			satGroups.append("non-operational");
 	}
 	if (!satGroups.isEmpty())
 	{
 		satProperties.insert("groups", satGroups);
-		for (const auto& str : satGroups)
+		for (const auto& str : qAsConst(satGroups))
 		{
 			if (!getGroupIdList().contains(str))
 				addGroup(str);
@@ -1489,7 +1491,7 @@ void Satellites::updateFromOnlineSources()
 	progressBar->setRange(0, updateUrls.size());
 	progressBar->setFormat("TLE download %v/%m");
 
-	for (auto url : updateUrls)
+	for (auto url : qAsConst(updateUrls))
 	{
 		TleSource source;
 		source.file = Q_NULLPTR;
@@ -1547,7 +1549,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 					else
 					{
 						QList<Stel::QZipReader::FileInfo> infoList = reader.fileInfoList();
-						for (const auto& info : infoList)
+						for (const auto& info : qAsConst(infoList))
 						{
 							// qWarning() << "[Satellites] Processing:" << info.filePath;
 							if (info.isFile)
@@ -1642,7 +1644,7 @@ bool Satellites::getFlagOrbitLines() const
 
 void Satellites::recalculateOrbitLines(void)
 {
-	for (const auto& sat : satellites)
+	for (const auto& sat : qAsConst(satellites))
 	{
 		if (sat->initialized && sat->displayed && sat->orbitDisplayed)
 			sat->recalculateOrbitLines();
@@ -1704,7 +1706,7 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	int addedCount = 0;
 	int missingCount = 0; // Also the number of removed sats, if any.
 	QStringList toBeRemoved;
-	for (const auto& sat : satellites)
+	for (const auto& sat : qAsConst(satellites))
 	{
 		totalCount++;
 		
@@ -1746,6 +1748,11 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 			// special case: starlink satellites; details: http://satobs.org/seesat/Apr-2020/0174.html
 			if (!rcsList.contains(sid) && sat->name.startsWith("STARLINK"))
 				sat->RCS = 22.68; // Starlink's solar array is 8.1 x 2.8 metres.
+
+			if (sat->status==Satellite::StatusNonoperational && !sat->groups.contains("non-operational"))
+				sat->groups.insert("non-operational");
+			if (sat->status!=Satellite::StatusNonoperational && sat->groups.contains("non-operational"))
+				sat->groups.remove("non-operational");
 		}
 		else
 		{
@@ -1819,6 +1826,18 @@ void Satellites::parseTleFile(QFile& openFile,
 	int lineNumber = 0;
 	TleData lastData;
 	lastData.addThis = addFlagValue;
+
+	// Celestrak's "status code" list
+	const QMap<QString, Satellite::OptStatus> satOpStatusMap = {
+		{ "+", Satellite::StatusOperational },
+		{ "-", Satellite::StatusNonoperational },
+		{ "P", Satellite::StatusPartiallyOperational },
+		{ "B", Satellite::StatusStandby },
+		{ "S", Satellite::StatusSpare },
+		{ "X", Satellite::StatusExtendedMission },
+		{ "D", Satellite::StatusDecayed },
+		{ "?", Satellite::StatusUnknown }
+	};
 	
 	while (!openFile.atEnd())
 	{
@@ -1831,41 +1850,10 @@ void Satellites::parseTleFile(QFile& openFile,
 			
 			// The thing in square brackets after the name is actually
 			// Celestrak's "status code". Parse it!
-			QStringList codes;
-			codes << "+" << "-" << "P" << "B" << "S" << "X" << "D" << "?";
-
 			QRegExp statusRx("\\s*\\[(\\D{1})\\]\\s*$");
 			statusRx.setMinimal(true);
 			if (statusRx.indexIn(line)>-1)
-			{
-				lastData.status = Satellite::StatusUnknown;
-				switch (codes.indexOf(statusRx.cap(1).toUpper()))
-				{
-					case 0:
-						lastData.status = Satellite::StatusOperational;
-						break;
-					case 1:
-						lastData.status = Satellite::StatusNonoperational;
-						break;
-					case 2:
-						lastData.status = Satellite::StatusPartiallyOperational;
-						break;
-					case 3:
-						lastData.status = Satellite::StatusStandby;
-						break;
-					case 4:
-						lastData.status = Satellite::StatusSpare;
-						break;
-					case 5:
-						lastData.status = Satellite::StatusExtendedMission;
-						break;
-					case 6:
-						lastData.status = Satellite::StatusDecayed;
-						break;
-					default:
-						lastData.status = Satellite::StatusUnknown;
-				}
-			}
+				lastData.status = satOpStatusMap.value(statusRx.cap(1).toUpper(), Satellite::StatusUnknown);
 
 			//TODO: We need to think of some kind of escaping these
 			//characters in the JSON parser. --BM
