@@ -55,6 +55,9 @@ public:
 	//! find number in sequence from a xihuitl date of {month[1...19], day[1...20]}
 	inline static int aztecXihuitlOrdinal(QVector<int> xihuitl) {return (xihuitl.at(0)-1)*20+xihuitl.at(1)-1;}
 
+	//! get 2-part vector of xihuitl date from RD
+	static QVector<int> aztecXihuitlFromFixed(int rd);
+
 	//! find RD number of a Xihuitl date on or before rd.
 	static int aztecXihuitlOnOrBefore(QVector<int> xihuitl, int rd);
 
