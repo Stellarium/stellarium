@@ -221,7 +221,7 @@ void Satellites::init()
 void Satellites::translateData()
 {
 	bindingGroups();
-	for (const auto& sat : satellites)
+	for (const auto& sat : qAsConst(satellites))
 	{
 		if (sat->initialized)
 			sat->recomputeEpochTLE();
@@ -265,9 +265,9 @@ void Satellites::bindingGroups()
 
 void Satellites::setSatGroupVisible(const QString& groupId, bool visible)
 {
-	for (const auto& sat : satellites)
+	for (const auto& sat : qAsConst(satellites))
 	{
-		if (sat->initialized && sat->groups.toList().contains(groupId))
+		if (sat->initialized && sat->groups.contains(groupId))
 		{
 			SatFlags flags = sat->getFlags();
 			visible ? flags |= SatDisplayed : flags &= ~SatDisplayed;
@@ -533,19 +533,12 @@ QStringList Satellites::listAllObjects(bool inEnglish) const
 	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
 		return result;
 
-	if (inEnglish)
+	for (const auto& sat : satellites)
 	{
-		for (const auto& sat : satellites)
-		{
+		if (inEnglish)
 			result << sat->getEnglishName();
-		}
-	}
-	else
-	{
-		for (const auto& sat : satellites)
-		{
+		else
 			result << sat->getNameI18n();
-		}
 	}
 	return result;
 }
@@ -907,7 +900,6 @@ void Satellites::setDataMap(const QVariantMap& map)
 	QVariantList defaultHintColorMap;
 	defaultHintColorMap << defaultHintColor[0] << defaultHintColor[1] << defaultHintColor[2];
 
-
 	if (map.contains("hintColor"))
 	{
 		defaultHintColorMap = map.value("hintColor").toList();
@@ -1075,19 +1067,16 @@ QStringList Satellites::listAllIds() const
 
 bool Satellites::add(const TleData& tleData)
 {
-	//TODO: Duplicates check!!! --BM
-	
 	// More validation?
-	if (tleData.id.isEmpty() ||
-	        tleData.name.isEmpty() ||
-	        tleData.first.isEmpty() ||
-	        tleData.second.isEmpty())
+	if (tleData.id.isEmpty() || tleData.name.isEmpty() || tleData.first.isEmpty() || tleData.second.isEmpty())
 		return false;
-	
+
+	// Duplicates check
+	if (searchByID(getSatIdFromLine2(tleData.second.trimmed()))!=Q_NULLPTR)
+		return false;
+
 	QVariantList hintColor;
-	hintColor << defaultHintColor[0]
-	          << defaultHintColor[1]
-	          << defaultHintColor[2];
+	hintColor << defaultHintColor[0] << defaultHintColor[1] << defaultHintColor[2];
 	
 	QVariantMap satProperties;
 	satProperties.insert("name", tleData.name);
@@ -1871,7 +1860,8 @@ void Satellites::parseTleFile(QFile& openFile,
 				// The Satellite Catalogue Number is the second number
 				// on the second line.
 				QString id = getSatIdFromLine2(line);
-				if (id.isEmpty()) {
+				if (id.isEmpty())
+				{
 					qDebug() << "[Satellites] failed to extract SatId from \"" << line << "\"";
 					continue;
 				}
@@ -1965,7 +1955,7 @@ void Satellites::update(double deltaTime)
 
 	hintFader.update(static_cast<int>(deltaTime*1000));
 
-	for (const auto& sat : satellites)
+	for (const auto& sat : qAsConst(satellites))
 	{
 		if (sat->initialized && sat->displayed)
 			sat->update(deltaTime);
@@ -1992,7 +1982,7 @@ void Satellites::draw(StelCore* core)
 	painter.setBlending(true);
 	Satellite::hintTexture->bind();
 	Satellite::viewportHalfspace = painter.getProjector()->getBoundingCap();
-	for (const auto& sat : satellites)
+	for (const auto& sat : qAsConst(satellites))
 	{
 		if (sat && sat->initialized && sat->displayed)
 			sat->draw(core, painter);
