@@ -36,11 +36,11 @@ jobs:
     steps:
     - name: Install dependencies
       run: |
-        sudo apt update
+        sudo apt-get update
         # using force-overwrite due to
         # https://github.com/actions/virtual-environments/issues/2703
-        sudo apt upgrade -o Dpkg::Options::="--force-overwrite" --yes
-        sudo apt install -y qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins zlib1g-dev libgl1-mesa-dev libdrm-dev cmake
+        sudo ACCEPT_EULA=Y apt-get upgrade -o Dpkg::Options::="--force-overwrite" --yes
+        sudo apt-get install -y qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins zlib1g-dev libgl1-mesa-dev libdrm-dev cmake
 
     - name: Checkout repository
       uses: actions/checkout@v2
