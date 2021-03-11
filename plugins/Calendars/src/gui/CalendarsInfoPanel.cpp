@@ -42,7 +42,8 @@ CalendarsInfoPanel::CalendarsInfoPanel(Calendars* plugin,
 	QGraphicsTextItem("", parent),
 	plugin(plugin),
 	parentWidget(parent),
-	xPos(static_cast<qreal>(FLT_MAX))
+	xPos(static_cast<qreal>(FLT_MAX)),
+	yPos(static_cast<qreal>(FLT_MAX))
 {
 	StelApp& stelApp = StelApp::getInstance();
 	QFont newFont = font();
@@ -60,10 +61,14 @@ void CalendarsInfoPanel::updatePosition()
 	qreal bottomBoundingHeight = static_cast<SkyGui*>(parentWidget)->getBottomBarHeight();
 
 	if (sender())
+	{
 		xPos=parentWidget->size().width(); // reset when window has been resized.
+		yPos=static_cast<qreal>(FLT_MAX);
+	}
 	qreal xPosCand = parentWidget->size().width() -  boundingRect().width();
 	xPos=qMin(xPos, xPosCand);
-	qreal yPos = parentWidget->size().height() - boundingRect().height() - bottomBoundingHeight;
+	qreal yPosCand = parentWidget->size().height() - boundingRect().height() - bottomBoundingHeight;
+	yPos=qMin(yPos, yPosCand);
 	setPos(xPos, yPos);
 }
 
