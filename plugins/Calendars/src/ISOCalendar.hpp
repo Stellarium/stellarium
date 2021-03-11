@@ -46,7 +46,6 @@ public:
 	//! get a formatted complete string for a date
 	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
-private:
 	static QVector<int> isoFromFixed(int rd);
 	static int fixedFromISO(QVector<int> iso);
 };
