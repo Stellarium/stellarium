@@ -2650,8 +2650,7 @@ void Oculars::setPluginMode(PluginMode newMode)
 	emit pluginModeChanged(pluginMode); // May trigger additional effects. TODO Investigate which, and actually avoid them if possible (easier maintenance!)
 }
 
-// 3 flag setters which are needed for the GUI buttons only :-(
-// TODO 2021: Decide whether "show=false" should do nothing if the respective mode is not enabled.
+// 4 flag setters which are needed for the GUI buttons only :-(
 void Oculars::setFlagModeOcular(bool show)
 {
 	setPluginMode(show ? OcOcular : OcNone );
@@ -2664,7 +2663,6 @@ void Oculars::setFlagModeTelrad(bool show)
 {
 	setPluginMode(show ? OcTelrad : OcNone );
 }
-
 void Oculars::setFlagModeFinder(bool show)
 {
 	setPluginMode(show ? OcFinder : OcNone );
