@@ -275,18 +275,10 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	}
 	
 	if (flags&ObjectType)
-	{
 		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("planetary system")) << "<br />";
-	}
 
 	if (flags&Magnitude && isVMagnitudeDefined() && !distributionMode)
-	{
-		double az_app, alt_app;
-		StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
-		Q_UNUSED(az_app)
-
-		oss << getMagnitudeInfoString(core, flags, alt_app, 2);
-	}
+		oss << getMagnitudeInfoString(core, flags, 2);
 
 	// Ra/Dec etc.
 	oss << getCommonInfoString(core, flags);

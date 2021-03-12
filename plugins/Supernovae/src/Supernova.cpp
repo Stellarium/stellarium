@@ -113,7 +113,7 @@ QString Supernova::getMaxBrightnessDate(const double JD) const
 	return StelApp::getInstance().getLocaleMgr().getPrintableDateLocal(JD);
 }
 
-QString Supernova::getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const double alt_app, const int decimals) const
+QString Supernova::getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals) const
 {
 	const float maglimit = 21.f;
 	QString res;
@@ -121,7 +121,7 @@ QString Supernova::getMagnitudeInfoString(const StelCore *core, const InfoString
 	if (flags&Magnitude)
 	{
 		if (getVMagnitude(core) <= maglimit)
-			res = StelObject::getMagnitudeInfoString(core, flags, alt_app, decimals);
+			res = StelObject::getMagnitudeInfoString(core, flags, decimals);
 		else
 		{
 			res = QString("%1: <b>--</b><br />").arg(q_("Magnitude"));
@@ -137,20 +137,14 @@ QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	QTextStream oss(&str);
 
 	if (flags&Name)
-	{
 		oss << "<h2>" << getNameI18n() << "</h2>";
-	}
 
 	if (flags&ObjectType)
 		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("supernova")) << "<br />";
 
 	if (flags&Magnitude)
-	{
-		double az_app, alt_app;
-		StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
-		Q_UNUSED(az_app)
-		oss << getMagnitudeInfoString(core, flags, alt_app, 2);
-	}
+		oss << getMagnitudeInfoString(core, flags, 2);
+
 	// Ra/Dec etc.
 	oss << getCommonInfoString(core, flags);
 

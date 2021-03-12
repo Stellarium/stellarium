@@ -133,7 +133,7 @@ Nebula::~Nebula()
 {
 }
 
-QString Nebula::getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const double alt_app, const int decimals) const
+QString Nebula::getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals) const
 {
 	QString res;
 	const float mmag = qMin(vMag, bMag);
@@ -161,10 +161,9 @@ QString Nebula::getMagnitudeInfoString(const StelCore *core, const InfoStringGro
 			bmag = true;
 		}
 
-		if (nType != NebDn && hasAtmosphere && (alt_app>-2.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
+		const float airmass = getAirmass(core);
+		if (nType != NebDn && airmass>-1.f) // Don't show extincted magnitude much below horizon where model is meaningless.
 		{
-			const Extinction &extinction=core->getSkyDrawer()->getExtinction();
-			float airmass=extinction.airmass(static_cast<float>(std::cos(M_PI_2-alt_app)), true);
 			emag = QString("%1 <b>%2</b> %3 <b>%4</b> %5)").arg(q_("reduced to"), QString::number(mage, 'f', decimals), q_("by"), QString::number(airmass, 'f', 2), q_("Airmasses"));
 			if (!bmag)
 				emag = QString("(%1").arg(emag);
@@ -179,10 +178,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 {
 	QString str;
 	QTextStream oss(&str);
-	double az_app, alt_app;
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
-	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
-	Q_UNUSED(az_app)
 
 	if ((flags&Name) || (flags&CatalogNumber))
 		oss << "<h2>";
@@ -229,8 +225,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		oss << getExtraInfoStrings(ObjectType).join("");
 	}
 
-	oss << getMagnitudeInfoString(core, flags, alt_app, 2);
-
+	oss << getMagnitudeInfoString(core, flags, 2);
 
 	if (flags&Extra)
 	{
@@ -258,7 +253,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 		if (getSurfaceBrightness(core)<99.f)
 		{
-			if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-2.0*M_PI/180.0) && getSurfaceBrightnessWithExtinction(core)<99.f) // Don't show extincted surface brightness much below horizon where model is meaningless.
+			if (getAirmass(core)>-1.f && getSurfaceBrightnessWithExtinction(core)<99.f) // Don't show extincted surface brightness much below horizon where model is meaningless.
 			{
 				oss << QString("%1: <b>%2</b> %5 (%3: <b>%4</b> %5)").arg(sb, QString::number(getSurfaceBrightness(core, flagUseArcsecSurfaceBrightness), 'f', 2),
 											  ae, QString::number(getSurfaceBrightnessWithExtinction(core, flagUseArcsecSurfaceBrightness), 'f', 2), mu) << "<br />";

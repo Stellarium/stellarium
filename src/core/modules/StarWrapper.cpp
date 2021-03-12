@@ -45,16 +45,11 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 {
 	QString str;
 	QTextStream oss(&str);
-	double az_app, alt_app;
-	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
-	Q_UNUSED(az_app);
 
 	if (flags&ObjectType)
-	{
 		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("star")) << "<br />";
-	}
 
-	oss << getMagnitudeInfoString(core, flags, alt_app, 2);
+	oss << getMagnitudeInfoString(core, flags, 2);
 
 	if (flags&Extra)
 		oss << QString("%1: <b>%2</b>").arg(q_("Color Index (B-V)"), QString::number(getBV(), 'f', 2)) << "<br />";
@@ -228,7 +223,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		oss << getExtraInfoStrings(flags&ObjectType).join("");
 	}
 
-	oss << getMagnitudeInfoString(core, flags, alt_app, 2);
+	oss << getMagnitudeInfoString(core, flags, 2);
 
 	if ((flags&AbsoluteMagnitude) && s->getPlx ()&& !isNan(s->getPlx()) && !isInf(s->getPlx()))
 		oss << QString("%1: %2").arg(q_("Absolute Magnitude")).arg(getVMagnitude(core)+5.*(1.+std::log10(0.00001*s->getPlx())), 0, 'f', 2) << "<br />";

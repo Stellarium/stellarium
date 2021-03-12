@@ -439,10 +439,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 {
 	QString str;
 	QTextStream oss(&str);
-	double az_app, alt_app;
-	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));	
 	const double distanceAu = getJ2000EquatorialPos(core).length();
-	Q_UNUSED(az_app)
 
 	if (flags&Name)
 	{
@@ -482,7 +479,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			{ ExplanatorySupplement_2013, 2 },
 			{ MallamaHilton_2018,         2 }};
 		if (!fuzzyEquals(getVMagnitude(core), std::numeric_limits<float>::infinity()))
-			oss << getMagnitudeInfoString(core, flags, alt_app, decMap.value(vMagAlgorithm, 1));
+			oss << getMagnitudeInfoString(core, flags, decMap.value(vMagAlgorithm, 1));
 		oss << getExtraInfoStrings(Magnitude).join("");
 	}
 

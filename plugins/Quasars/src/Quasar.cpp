@@ -121,23 +121,16 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	QTextStream oss(&str);
 
 	if (flags&Name)
-	{
 		oss << "<h2>" << designation << "</h2>";
-	}
+
 	if (flags&ObjectType)
 		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("quasar")) << "<br />";
 
 	if (flags&Magnitude && VMagnitude>-99.f)
-	{
-		double az_app, alt_app;
-		StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
-		Q_UNUSED(az_app)
-
-		oss << getMagnitudeInfoString(core, flags, alt_app, 2);
-	}
+		oss << getMagnitudeInfoString(core, flags, 2);
 
 	if (flags&AbsoluteMagnitude && AMagnitude>-99.f)
-		oss << QString("%1: %2").arg(q_("Absolute Magnitude")).arg(QString::number(AMagnitude, 'f', 2)) << "<br />";
+		oss << QString("%1: %2").arg(q_("Absolute Magnitude"), QString::number(AMagnitude, 'f', 2)) << "<br />";
 
 	if (flags&Extra && bV>-99.f)
 		oss << QString("%1: <b>%2</b>").arg(q_("Color Index (B-V)"), QString::number(bV, 'f', 2)) << "<br />";
@@ -154,9 +147,9 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		if (redshift>0.f)
 			oss << QString("%1: %2").arg(q_("Redshift")).arg(redshift) << "<br />";
 		if (f6>-9999.f)
-			oss << QString("%1: %2 %3").arg(q_("Radio flux density around 5GHz (6cm)")).arg(QString::number(f6, 'f', 3)).arg(sfd) << "<br />";
+			oss << QString("%1: %2 %3").arg(q_("Radio flux density around 5GHz (6cm)"), QString::number(f6, 'f', 3), sfd) << "<br />";
 		if (f20>-9999.f)
-			oss << QString("%1: %2 %3").arg(q_("Radio flux density around 1.4GHz (21cm)")).arg(QString::number(f20, 'f', 3)).arg(sfd) << "<br />";
+			oss << QString("%1: %2 %3").arg(q_("Radio flux density around 1.4GHz (21cm)"), QString::number(f20, 'f', 3), sfd) << "<br />";
 	}
 
 	postProcessInfoString(str, flags);
