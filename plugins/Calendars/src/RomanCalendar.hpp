@@ -66,7 +66,7 @@ public:
 	//! Convert between AUC and Julian year numbers
 	static int aucYearFromJulian(int julianYear);
 
-	//! return a Roman number
+	//! return a Roman number (1...19)
 	static QString romanNumber(const int num);
 
 	constexpr static const int yearRomeFounded=-753;

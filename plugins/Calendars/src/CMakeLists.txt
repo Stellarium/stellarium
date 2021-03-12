@@ -53,6 +53,8 @@ SET(Calendars_SRCS
     AztecTonalpohualliCalendar.cpp
     BalinesePawukonCalendar.hpp
     BalinesePawukonCalendar.cpp
+    FrenchArithmeticCalendar.hpp
+    FrenchArithmeticCalendar.cpp
 )
 
 SET(Calendars_UIS

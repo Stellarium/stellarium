@@ -365,6 +365,20 @@ namespace StelUtils
 	    }
 	}
 
+	//! version of intFloorDiv() for large integers.
+	inline long intFloorDivLL(long long num, long long den)
+	{
+	  if (0 < (num^den)) // lgtm [cpp/bitwise-sign-check]
+	    return static_cast<long>(num/den);
+	  else
+	    {
+	      lldiv_t res = lldiv(num,den);
+	      long long ret=  (res.rem)? res.quot-1
+			      : res.quot;
+	      return static_cast<long>(ret);
+	    }
+	}
+
 	///////////////////////////////////////////////////
 	// New Qt based General Calendar Functions.
 	//! Make from julianDay a year, month, day for the Julian Date julianDay represents.

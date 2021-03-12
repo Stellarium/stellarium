@@ -59,6 +59,16 @@ public:
 	//! Return R.D. of date in the Gregorian calendar.
 	static int fixedFromGregorian(QVector<int> gregorian);
 
+	//! Orthodox Easter sunday (RD) from chapter 9.1
+	static int orthodoxEaster(int gYear);
+
+	//! Gregorian Easter sunday (RD) from chapter 9.2
+	static int easter(int gYear);
+
+	//! Return RD of Pentecost in Gregorian calendar.
+	static int pentecost(int gYear) { return easter(gYear)+49; }
+
+
 protected:
 	static int gregorianNewYear(int year) {return fixedFromGregorian({year, january, 1});}
 	static int gregorianYearFromFixed(int rd);

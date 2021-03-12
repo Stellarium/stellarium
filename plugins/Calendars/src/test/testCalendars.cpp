@@ -37,6 +37,7 @@
 #include "../CopticCalendar.hpp"
 #include "../EthiopicCalendar.hpp"
 #include "../RomanCalendar.hpp"
+#include "../FrenchArithmeticCalendar.hpp"
 #include "../IslamicCalendar.hpp"
 #include "../HebrewCalendar.hpp"
 #include "../OldHinduSolarCalendar.hpp"
@@ -81,6 +82,13 @@ void TestCalendars::testBasics()
 	// Critically important: modinterval(., 1, n)=amod(., n-1). n is NOT the maximum possible return value!
 	QVERIFY2(Calendar::modInterval(42, 1, 7)==StelUtils::amod(42, 6), qPrintable(QString("modInterval(42, 1, 6)=%1 vs amod(42, 6)=%2").arg(QString::number(Calendar::modInterval(5, 1, 2))).arg(QString::number(StelUtils::amod(42, 6)))));
 	QVERIFY2(Calendar::modInterval(43, 1, 7)==StelUtils::amod(43, 6), qPrintable(QString("modInterval(43, 1, 6)=%1 vs amod(43, 6)=%2").arg(QString::number(Calendar::modInterval(6, 1, 2))).arg(QString::number(StelUtils::amod(43, 6)))));
+	QVERIFY(StelUtils::intFloorDiv(8, 2)==4);
+	QVERIFY(StelUtils::intFloorDiv(8, 3)==2);
+	QVERIFY(StelUtils::intFloorDiv(-8, 3)==-3);
+	QVERIFY(StelUtils::intFloorDiv(-8, -2)==4);
+	QVERIFY(StelUtils::intFloorDiv(-8, 2)==-4);
+	QVERIFY(StelUtils::intFloorDiv(8, -2)==-4);
+
 }
 
 void TestCalendars::testEuropean()
@@ -592,6 +600,77 @@ void TestCalendars::testRoman()
 	QVERIFY(RomanCalendar::romanFromFixed( 728714)==QVector<int>({1996,  2, 3,  2, 0}));
 	QVERIFY(RomanCalendar::romanFromFixed( 744313)==QVector<int>({2038, 11, 1,  5, 0}));
 	QVERIFY(RomanCalendar::romanFromFixed( 764652)==QVector<int>({2094,  7, 2,  3, 0}));
+}
+
+void TestCalendars::testFrenchRevolution()
+{
+	QVERIFY(-214193==FrenchArithmeticCalendar::fixedFromFrenchArithmetic({-2378, 11,  4}));
+	QVERIFY( -61387==FrenchArithmeticCalendar::fixedFromFrenchArithmetic({-1959,  3, 13}));
+	QVERIFY(  25469==FrenchArithmeticCalendar::fixedFromFrenchArithmetic({-1721,  1,  2}));
+	QVERIFY(  49217==FrenchArithmeticCalendar::fixedFromFrenchArithmetic({-1656,  1, 10}));
+	QVERIFY( 171307==FrenchArithmeticCalendar::fixedFromFrenchArithmetic({-1322,  4, 18}));
+	QVERIFY( 210155==FrenchArithmeticCalendar::fixedFromFrenchArithmetic({-1216,  9,  1}));
+	QVERIFY( 253427==FrenchArithmeticCalendar::fixedFromFrenchArithmetic({-1097,  2, 19}));
+	QVERIFY( 369740==FrenchArithmeticCalendar::fixedFromFrenchArithmetic({ -779,  8,  4}));
+	QVERIFY( 400085==FrenchArithmeticCalendar::fixedFromFrenchArithmetic({ -696,  9,  5}));
+	QVERIFY( 434355==FrenchArithmeticCalendar::fixedFromFrenchArithmetic({ -602,  7,  1}));
+	QVERIFY( 452605==FrenchArithmeticCalendar::fixedFromFrenchArithmetic({ -552,  6, 20}));
+	QVERIFY( 470160==FrenchArithmeticCalendar::fixedFromFrenchArithmetic({ -504,  7, 13}));
+	QVERIFY( 473837==FrenchArithmeticCalendar::fixedFromFrenchArithmetic({ -494,  8,  8}));
+	QVERIFY( 507850==FrenchArithmeticCalendar::fixedFromFrenchArithmetic({ -401,  9, 23}));
+	QVERIFY( 524156==FrenchArithmeticCalendar::fixedFromFrenchArithmetic({ -356,  5, 13}));
+	QVERIFY( 544676==FrenchArithmeticCalendar::fixedFromFrenchArithmetic({ -300,  7, 19}));
+	QVERIFY( 567118==FrenchArithmeticCalendar::fixedFromFrenchArithmetic({ -239, 13,  1}));
+	QVERIFY( 569477==FrenchArithmeticCalendar::fixedFromFrenchArithmetic({ -232,  6, 14}));
+	QVERIFY( 601716==FrenchArithmeticCalendar::fixedFromFrenchArithmetic({ -144,  9, 22}));
+	QVERIFY( 613424==FrenchArithmeticCalendar::fixedFromFrenchArithmetic({ -112, 10, 12}));
+	QVERIFY( 626596==FrenchArithmeticCalendar::fixedFromFrenchArithmetic({  -76, 11,  6}));
+	QVERIFY( 645554==FrenchArithmeticCalendar::fixedFromFrenchArithmetic({  -24, 10,  1}));
+	QVERIFY( 664224==FrenchArithmeticCalendar::fixedFromFrenchArithmetic({   27, 11, 14}));
+	QVERIFY( 671401==FrenchArithmeticCalendar::fixedFromFrenchArithmetic({   47,  7,  6}));
+	QVERIFY( 694799==FrenchArithmeticCalendar::fixedFromFrenchArithmetic({  111,  7, 29}));
+	QVERIFY( 704424==FrenchArithmeticCalendar::fixedFromFrenchArithmetic({  137, 12,  7}));
+	QVERIFY( 708842==FrenchArithmeticCalendar::fixedFromFrenchArithmetic({  150,  1,  7}));
+	QVERIFY( 709409==FrenchArithmeticCalendar::fixedFromFrenchArithmetic({  151,  7, 29}));
+	QVERIFY( 709580==FrenchArithmeticCalendar::fixedFromFrenchArithmetic({  152,  1, 15}));
+	QVERIFY( 727274==FrenchArithmeticCalendar::fixedFromFrenchArithmetic({  200,  6, 27}));
+	QVERIFY( 728714==FrenchArithmeticCalendar::fixedFromFrenchArithmetic({  204,  6,  7}));
+	QVERIFY( 744313==FrenchArithmeticCalendar::fixedFromFrenchArithmetic({  247,  2, 20}));
+	QVERIFY( 764652==FrenchArithmeticCalendar::fixedFromFrenchArithmetic({  302, 11,  1}));
+
+	QVERIFY(FrenchArithmeticCalendar::frenchArithmeticFromFixed(-214193)==QVector<int>({-2378, 11,  4}));
+	QVERIFY(FrenchArithmeticCalendar::frenchArithmeticFromFixed( -61387)==QVector<int>({-1959,  3, 13}));
+	QVERIFY(FrenchArithmeticCalendar::frenchArithmeticFromFixed(  25469)==QVector<int>({-1721,  1,  2}));
+	QVERIFY(FrenchArithmeticCalendar::frenchArithmeticFromFixed(  49217)==QVector<int>({-1656,  1, 10}));
+	QVERIFY(FrenchArithmeticCalendar::frenchArithmeticFromFixed( 171307)==QVector<int>({-1322,  4, 18}));
+	QVERIFY(FrenchArithmeticCalendar::frenchArithmeticFromFixed( 210155)==QVector<int>({-1216,  9,  1}));
+	QVERIFY(FrenchArithmeticCalendar::frenchArithmeticFromFixed( 253427)==QVector<int>({-1097,  2, 19}));
+	QVERIFY(FrenchArithmeticCalendar::frenchArithmeticFromFixed( 369740)==QVector<int>({ -779,  8,  4}));
+	QVERIFY(FrenchArithmeticCalendar::frenchArithmeticFromFixed( 400085)==QVector<int>({ -696,  9,  5}));
+	QVERIFY(FrenchArithmeticCalendar::frenchArithmeticFromFixed( 434355)==QVector<int>({ -602,  7,  1}));
+	QVERIFY(FrenchArithmeticCalendar::frenchArithmeticFromFixed( 452605)==QVector<int>({ -552,  6, 20}));
+	QVERIFY(FrenchArithmeticCalendar::frenchArithmeticFromFixed( 470160)==QVector<int>({ -504,  7, 13}));
+	QVERIFY(FrenchArithmeticCalendar::frenchArithmeticFromFixed( 473837)==QVector<int>({ -494,  8,  8}));
+	QVERIFY(FrenchArithmeticCalendar::frenchArithmeticFromFixed( 507850)==QVector<int>({ -401,  9, 23}));
+	QVERIFY(FrenchArithmeticCalendar::frenchArithmeticFromFixed( 524156)==QVector<int>({ -356,  5, 13}));
+	QVERIFY(FrenchArithmeticCalendar::frenchArithmeticFromFixed( 544676)==QVector<int>({ -300,  7, 19}));
+	QVERIFY(FrenchArithmeticCalendar::frenchArithmeticFromFixed( 567118)==QVector<int>({ -239, 13,  1}));
+	QVERIFY(FrenchArithmeticCalendar::frenchArithmeticFromFixed( 569477)==QVector<int>({ -232,  6, 14}));
+	QVERIFY(FrenchArithmeticCalendar::frenchArithmeticFromFixed( 601716)==QVector<int>({ -144,  9, 22}));
+	QVERIFY(FrenchArithmeticCalendar::frenchArithmeticFromFixed( 613424)==QVector<int>({ -112, 10, 12}));
+	QVERIFY(FrenchArithmeticCalendar::frenchArithmeticFromFixed( 626596)==QVector<int>({  -76, 11,  6}));
+	QVERIFY(FrenchArithmeticCalendar::frenchArithmeticFromFixed( 645554)==QVector<int>({  -24, 10,  1}));
+	QVERIFY(FrenchArithmeticCalendar::frenchArithmeticFromFixed( 664224)==QVector<int>({   27, 11, 14}));
+	QVERIFY(FrenchArithmeticCalendar::frenchArithmeticFromFixed( 671401)==QVector<int>({   47,  7,  6}));
+	QVERIFY(FrenchArithmeticCalendar::frenchArithmeticFromFixed( 694799)==QVector<int>({  111,  7, 29}));
+	QVERIFY(FrenchArithmeticCalendar::frenchArithmeticFromFixed( 704424)==QVector<int>({  137, 12,  7}));
+	QVERIFY(FrenchArithmeticCalendar::frenchArithmeticFromFixed( 708842)==QVector<int>({  150,  1,  7}));
+	QVERIFY(FrenchArithmeticCalendar::frenchArithmeticFromFixed( 709409)==QVector<int>({  151,  7, 29}));
+	QVERIFY(FrenchArithmeticCalendar::frenchArithmeticFromFixed( 709580)==QVector<int>({  152,  1, 15}));
+	QVERIFY(FrenchArithmeticCalendar::frenchArithmeticFromFixed( 727274)==QVector<int>({  200,  6, 27}));
+	QVERIFY(FrenchArithmeticCalendar::frenchArithmeticFromFixed( 728714)==QVector<int>({  204,  6,  7}));
+	QVERIFY(FrenchArithmeticCalendar::frenchArithmeticFromFixed( 744313)==QVector<int>({  247,  2, 20}));
+	QVERIFY(FrenchArithmeticCalendar::frenchArithmeticFromFixed( 764652)==QVector<int>({  302, 11,  1}));
 }
 
 void TestCalendars::testMesoamerican()

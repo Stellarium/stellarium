@@ -32,6 +32,7 @@ private slots:
 	void testEuropean();
 	void testNearEastern();
 	void testRoman();
+	void testFrenchRevolution();
 	void testMesoamerican();
 	void testIslamic();
 	void testHebrew();
