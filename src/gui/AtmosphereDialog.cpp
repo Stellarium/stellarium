@@ -17,8 +17,6 @@
 */
 
 #include "StelApp.hpp"
-#include "StelCore.hpp"
-#include "StelSkyDrawer.hpp"
 #include "AtmosphereDialog.hpp"
 #include "ui_atmosphereDialog.h"
 
@@ -55,4 +53,15 @@ void AtmosphereDialog::createDialogContent()
 	connectDoubleProperty(ui->pressureDoubleSpinBox,"StelSkyDrawer.atmospherePressure");
 	connectDoubleProperty(ui->temperatureDoubleSpinBox,"StelSkyDrawer.atmosphereTemperature");
 	connectDoubleProperty(ui->extinctionDoubleSpinBox,"StelSkyDrawer.extinctionCoefficient");
+
+	connect(ui->standardAtmosphereButton, SIGNAL(clicked()), this, SLOT(setStandardAtmosphere()));
+}
+
+void AtmosphereDialog::setStandardAtmosphere()
+{
+	// See https://en.wikipedia.org/wiki/International_Standard_Atmosphere#ICAO_Standard_Atmosphere
+	ui->pressureDoubleSpinBox->setValue(1013.25);
+	ui->temperatureDoubleSpinBox->setValue(15.0);
+	// See http://www.icq.eps.harvard.edu/ICQExtinct.html
+	ui->extinctionDoubleSpinBox->setValue(0.2);
 }
