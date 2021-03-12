@@ -243,14 +243,15 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 		else
 		{
 			Vec3f color = sd->indexToColor(BvToColorIndex(bV))*0.75f; // see ZoneArray.cpp:L490
-			Vec3f altAz(XYZ.toVec3f());
+			Vec3f vf(XYZ.toVec3f());
+			Vec3f altAz(vf);
 			altAz.normalize();
 			core->j2000ToAltAzInPlaceNoRefraction(&altAz);
 			RCMag rcMag;
 			sd->preDrawPointSource(&painter);
 			sd->computeRCMag(mag, &rcMag);
 			// allow height-dependent twinkle and suppress twinkling in higher altitudes. Keep 0.1 twinkle amount in zenith.
-			sd->drawPointSource(&painter, XYZ.toVec3f(), rcMag, sd->indexToColor(BvToColorIndex(bV)), true, qMin(1.0f, 1.0f-0.9f*altAz[2]));
+			sd->drawPointSource(&painter, vf, rcMag, sd->indexToColor(BvToColorIndex(bV)), true, qMin(1.0f, 1.0f-0.9f*altAz[2]));
 			sd->postDrawPointSource(&painter);
 			painter.setColor(color[0], color[1], color[2], 1);
 			size = getAngularSize(Q_NULLPTR)*M_PI_180f*painter.getProjector()->getPixelPerRadAtCenter();

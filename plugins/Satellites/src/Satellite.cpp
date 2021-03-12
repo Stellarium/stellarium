@@ -970,13 +970,14 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 				// Draw the satellite
 				if (magSat <= sd->getLimitMagnitude())
 				{
-					Vec3f altAz(XYZ.toVec3f());
+					Vec3f vf(XYZ.toVec3f());
+					Vec3f altAz(vf);
 					altAz.normalize();
 					core->j2000ToAltAzInPlaceNoRefraction(&altAz);
 					sd->preDrawPointSource(&painter);
 					sd->computeRCMag(magSat, &rcMag);
 					// allow height-dependent twinkle and suppress twinkling in higher altitudes. Keep 0.1 twinkle amount in zenith.
-					sd->drawPointSource(&painter, XYZ.toVec3f(), rcMag, color*hintBrightness, true, qMin(1.0f, 1.0f-0.9f*altAz[2]));
+					sd->drawPointSource(&painter, vf, rcMag, color*hintBrightness, true, qMin(1.0f, 1.0f-0.9f*altAz[2]));
 					sd->postDrawPointSource(&painter);
 				}
 

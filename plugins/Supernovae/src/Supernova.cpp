@@ -265,14 +265,15 @@ void Supernova::draw(StelCore* core, StelPainter& painter)
 	if (mag <= mlimit)
 	{
 		const Vec3f color(1.f);
-		Vec3f altAz(XYZ.toVec3f());
+		Vec3f vf(XYZ.toVec3f());
+		Vec3f altAz(vf);
 		altAz.normalize();
 		core->j2000ToAltAzInPlaceNoRefraction(&altAz);
 		RCMag rcMag;
 		sd->computeRCMag(mag, &rcMag);
 		sd->preDrawPointSource(&painter);
 		// allow height-dependent twinkle and suppress twinkling in higher altitudes. Keep 0.1 twinkle amount in zenith.
-		sd->drawPointSource(&painter, XYZ.toVec3f(), rcMag, color, true, qMin(1.0f, 1.0f-0.9f*altAz[2]));
+		sd->drawPointSource(&painter, vf, rcMag, color, true, qMin(1.0f, 1.0f-0.9f*altAz[2]));
 		sd->postDrawPointSource(&painter);
 		painter.setColor(color, 1.f);
 		float size = static_cast<float>(getAngularSize(Q_NULLPTR))*M_PI_180f*painter.getProjector()->getPixelPerRadAtCenter();
