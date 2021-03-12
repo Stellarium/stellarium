@@ -970,9 +970,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 				// Draw the satellite
 				if (magSat <= sd->getLimitMagnitude())
 				{
-					Vec3f vf(XYZ.toVec3f());
-					vf.normalize();
-					Vec3f altAz(vf);
+					Vec3f altAz(XYZ.toVec3f());
 					altAz.normalize();
 					core->j2000ToAltAzInPlaceNoRefraction(&altAz);
 					sd->preDrawPointSource(&painter);

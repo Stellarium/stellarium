@@ -330,9 +330,7 @@ void Nova::draw(StelCore* core, StelPainter* painter)
 	if (mag <= mlimit)
 	{
 		const Vec3f color(1.f);
-		Vec3f vf(XYZ.toVec3f());
-		vf.normalize();
-		Vec3f altAz(vf);
+		Vec3f altAz(XYZ.toVec3f());
 		altAz.normalize();
 		core->j2000ToAltAzInPlaceNoRefraction(&altAz);
 		RCMag rcMag;
