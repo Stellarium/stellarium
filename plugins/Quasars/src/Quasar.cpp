@@ -243,21 +243,24 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 		else
 		{
 			Vec3f color = sd->indexToColor(BvToColorIndex(bV))*0.75f; // see ZoneArray.cpp:L490
+			Vec3f vf(XYZ.toVec3f());
+			vf.normalize();
+			Vec3f altAz(vf);
+			altAz.normalize();
+			core->j2000ToAltAzInPlaceNoRefraction(&altAz);
 			RCMag rcMag;
-
 			sd->preDrawPointSource(&painter);
 			sd->computeRCMag(mag, &rcMag);
-			sd->drawPointSource(&painter, XYZ.toVec3f(), rcMag, sd->indexToColor(BvToColorIndex(bV)), true);
-			painter.setColor(color[0], color[1], color[2], 1);
-			size = getAngularSize(Q_NULLPTR)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
-			shift = 6.f + size/1.8f;
+			// allow height-dependent twinkle and suppress twinkling in higher altitudes. Keep 0.1 twinkle amount in zenith.
+			sd->drawPointSource(&painter, XYZ.toVec3f(), rcMag, sd->indexToColor(BvToColorIndex(bV)), true, qMin(1.0f, 1.0f-0.9f*altAz[2]));
 			sd->postDrawPointSource(&painter);
+			painter.setColor(color[0], color[1], color[2], 1);
+			size = getAngularSize(Q_NULLPTR)*M_PI_180f*painter.getProjector()->getPixelPerRadAtCenter();
+			shift = 6.f + size/1.8f;
 		}
 
 		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+2.f)<mlimit)
-		{
 			painter.drawText(XYZ, designation, 0, shift, shift, false);
-		}
 	}
 }
 
