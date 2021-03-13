@@ -55,6 +55,8 @@ SET(Calendars_SRCS
     BalinesePawukonCalendar.cpp
     FrenchArithmeticCalendar.hpp
     FrenchArithmeticCalendar.cpp
+    PersianArithmeticCalendar.hpp
+    PersianArithmeticCalendar.cpp
 )
 
 SET(Calendars_UIS

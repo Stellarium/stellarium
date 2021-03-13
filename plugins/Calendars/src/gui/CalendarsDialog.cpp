@@ -114,6 +114,7 @@ void CalendarsDialog::createDialogContent()
 	connectBoolProperty(ui->aztecTonalpohualliCheckBox, "Calendars.flagShowAztecTonalpohualli");
 	connectBoolProperty(ui->balineseCheckBox,           "Calendars.flagShowBalinese");
 	connectBoolProperty(ui->frenchArithmeticCheckBox,   "Calendars.flagShowFrenchArithmetic");
+	connectBoolProperty(ui->persianArithmeticCheckBox,  "Calendars.flagShowPersianArithmetic");
 
 	// MAKE SURE to connect all part edit elements respective ...Changed() method here.
 	connect(ui->julianYearSpinBox,      SIGNAL(valueChanged(int)), this, SLOT(julianChanged()));

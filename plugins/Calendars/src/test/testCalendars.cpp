@@ -40,6 +40,7 @@
 #include "../FrenchArithmeticCalendar.hpp"
 #include "../IslamicCalendar.hpp"
 #include "../HebrewCalendar.hpp"
+#include "../PersianArithmeticCalendar.hpp"
 #include "../OldHinduSolarCalendar.hpp"
 #include "../OldHinduLuniSolarCalendar.hpp"
 #include "../MayaLongCountCalendar.hpp"
@@ -1054,6 +1055,77 @@ void TestCalendars::testHebrew()
 	QVERIFY(HebrewCalendar::hebrewFromFixed( 728714)==QVector<int>({5756, 12,  5}));
 	QVERIFY(HebrewCalendar::hebrewFromFixed( 744313)==QVector<int>({5799,  8, 12}));
 	QVERIFY(HebrewCalendar::hebrewFromFixed( 764652)==QVector<int>({5854,  5,  5}));
+}
+
+void TestCalendars::testPersian()
+{
+	QVERIFY(-214193==PersianArithmeticCalendar::fixedFromPersianArithmetic({-1208,  5,  1}));
+	QVERIFY( -61387==PersianArithmeticCalendar::fixedFromPersianArithmetic({ -790,  9, 14}));
+	QVERIFY(  25469==PersianArithmeticCalendar::fixedFromPersianArithmetic({ -552,  7,  2}));
+	QVERIFY(  49217==PersianArithmeticCalendar::fixedFromPersianArithmetic({ -487,  7,  9}));
+	QVERIFY( 171307==PersianArithmeticCalendar::fixedFromPersianArithmetic({ -153, 10, 18}));
+	QVERIFY( 210155==PersianArithmeticCalendar::fixedFromPersianArithmetic({  -46,  2, 30}));
+	QVERIFY( 253427==PersianArithmeticCalendar::fixedFromPersianArithmetic({   73,  8, 19}));
+	QVERIFY( 369740==PersianArithmeticCalendar::fixedFromPersianArithmetic({  392,  2,  5}));
+	QVERIFY( 400085==PersianArithmeticCalendar::fixedFromPersianArithmetic({  475,  3,  3}));
+	QVERIFY( 434355==PersianArithmeticCalendar::fixedFromPersianArithmetic({  569,  1,  3}));
+	QVERIFY( 452605==PersianArithmeticCalendar::fixedFromPersianArithmetic({  618, 12, 20}));
+	QVERIFY( 470160==PersianArithmeticCalendar::fixedFromPersianArithmetic({  667,  1, 14}));
+	QVERIFY( 473837==PersianArithmeticCalendar::fixedFromPersianArithmetic({  677,  2,  8}));
+	QVERIFY( 507850==PersianArithmeticCalendar::fixedFromPersianArithmetic({  770,  3, 22}));
+	QVERIFY( 524156==PersianArithmeticCalendar::fixedFromPersianArithmetic({  814, 11, 13}));
+	QVERIFY( 544676==PersianArithmeticCalendar::fixedFromPersianArithmetic({  871,  1, 21}));
+	QVERIFY( 567118==PersianArithmeticCalendar::fixedFromPersianArithmetic({  932,  6, 28}));
+	QVERIFY( 569477==PersianArithmeticCalendar::fixedFromPersianArithmetic({  938, 12, 14}));
+	QVERIFY( 601716==PersianArithmeticCalendar::fixedFromPersianArithmetic({ 1027,  3, 21}));
+	QVERIFY( 613424==PersianArithmeticCalendar::fixedFromPersianArithmetic({ 1059,  4, 10}));
+	QVERIFY( 626596==PersianArithmeticCalendar::fixedFromPersianArithmetic({ 1095,  5,  2}));
+	QVERIFY( 645554==PersianArithmeticCalendar::fixedFromPersianArithmetic({ 1147,  3, 30}));
+	QVERIFY( 664224==PersianArithmeticCalendar::fixedFromPersianArithmetic({ 1198,  5, 10}));
+	QVERIFY( 671401==PersianArithmeticCalendar::fixedFromPersianArithmetic({ 1218,  1,  7}));
+	QVERIFY( 694799==PersianArithmeticCalendar::fixedFromPersianArithmetic({ 1282,  1, 29}));
+	QVERIFY( 704424==PersianArithmeticCalendar::fixedFromPersianArithmetic({ 1308,  6,  3}));
+	QVERIFY( 708842==PersianArithmeticCalendar::fixedFromPersianArithmetic({ 1320,  7,  7}));
+	QVERIFY( 709409==PersianArithmeticCalendar::fixedFromPersianArithmetic({ 1322,  1, 29}));
+	QVERIFY( 709580==PersianArithmeticCalendar::fixedFromPersianArithmetic({ 1322,  7, 14}));
+	QVERIFY( 727274==PersianArithmeticCalendar::fixedFromPersianArithmetic({ 1370, 12, 27}));
+	QVERIFY( 728714==PersianArithmeticCalendar::fixedFromPersianArithmetic({ 1374, 12,  6}));
+	QVERIFY( 744313==PersianArithmeticCalendar::fixedFromPersianArithmetic({ 1417,  8, 19}));
+	QVERIFY( 764652==PersianArithmeticCalendar::fixedFromPersianArithmetic({ 1473,  4, 28}));
+
+	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed(-214193)==QVector<int>({-1208,  5,  1}));
+	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed( -61387)==QVector<int>({ -790,  9, 14}));
+	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed(  25469)==QVector<int>({ -552,  7,  2}));
+	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed(  49217)==QVector<int>({ -487,  7,  9}));
+	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed( 171307)==QVector<int>({ -153, 10, 18}));
+	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed( 210155)==QVector<int>({  -46,  2, 30}));
+	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed( 253427)==QVector<int>({   73,  8, 19}));
+	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed( 369740)==QVector<int>({  392,  2,  5}));
+	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed( 400085)==QVector<int>({  475,  3,  3}));
+	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed( 434355)==QVector<int>({  569,  1,  3}));
+	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed( 452605)==QVector<int>({  618, 12, 20}));
+	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed( 470160)==QVector<int>({  667,  1, 14}));
+	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed( 473837)==QVector<int>({  677,  2,  8}));
+	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed( 507850)==QVector<int>({  770,  3, 22}));
+	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed( 524156)==QVector<int>({  814, 11, 13}));
+	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed( 544676)==QVector<int>({  871,  1, 21}));
+	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed( 567118)==QVector<int>({  932,  6, 28}));
+	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed( 569477)==QVector<int>({  938, 12, 14}));
+	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed( 601716)==QVector<int>({ 1027,  3, 21}));
+	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed( 613424)==QVector<int>({ 1059,  4, 10}));
+	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed( 626596)==QVector<int>({ 1095,  5,  2}));
+	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed( 645554)==QVector<int>({ 1147,  3, 30}));
+	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed( 664224)==QVector<int>({ 1198,  5, 10}));
+	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed( 671401)==QVector<int>({ 1218,  1,  7}));
+	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed( 694799)==QVector<int>({ 1282,  1, 29}));
+	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed( 704424)==QVector<int>({ 1308,  6,  3}));
+	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed( 708842)==QVector<int>({ 1320,  7,  7}));
+	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed( 709409)==QVector<int>({ 1322,  1, 29}));
+	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed( 709580)==QVector<int>({ 1322,  7, 14}));
+	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed( 727274)==QVector<int>({ 1370, 12, 27}));
+	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed( 728714)==QVector<int>({ 1374, 12,  6}));
+	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed( 744313)==QVector<int>({ 1417,  8, 19}));
+	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed( 764652)==QVector<int>({ 1473,  4, 28}));
 }
 
 void TestCalendars::testBalinesePawukon()
