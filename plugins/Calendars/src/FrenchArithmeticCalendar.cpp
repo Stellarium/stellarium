@@ -112,28 +112,29 @@ QStringList FrenchArithmeticCalendar::getDateStrings() const
 QString FrenchArithmeticCalendar::getFormattedDateString() const
 {
 	QStringList str=getDateStrings();
-	QString year=QString("%1 %2 %3").arg(qc_("An", "French Revolution Calendar: year"),
+	QString year=QString("%1 %2 %3").arg(qc_("an", "French Revolution Calendar: year"),
 					     str.at(0),
 					     qc_("de la République Française", "French Revolution Calendar: year"));
 	if (parts.at(1)==13)
 		return QString("%1, %2").arg(str.at(5), year);
 	else {
+		QMap<int, QString>decadeMap={{1, qc_("première" , "French Revolution Calendar 'week'")},
+					     {2, qc_("seconde"  , "French Revolution Calendar 'week'")},
+					     {3, qc_("troisième", "French Revolution Calendar 'week'")}};
+
+		QString dela=qc_("de la", "French Revolution Calendar: of the");
+
+		return QString("%1 %2 %3 %4 (%5) %6 %7, %8")
+				.arg(str.at(5)) // weekday
+				.arg(dela) // day
+				.arg(decadeMap.value((parts.at(2)-1)/10 + 1)) // decadeNr
+				.arg(qc_("décade", "French Revolution Calendar 'week'"))
+				.arg(str.at(3))
+				.arg(qc_("du", "French Revolution Calendar: 'of'"))
+				.arg(monthNames.value(parts.at(1))) // monthname
+				.arg(year);// year
 
 	}
-
-	QMap<int, QString>decadeMap={{1, qc_("première" , "French Revolution Calendar 'week'")},
-				     {2, qc_("seconde"  , "French Revolution Calendar 'week'")},
-				     {3, qc_("troisième", "French Revolution Calendar 'week'")}};
-
-	QString dela=qc_("de la", "French Revolution Calendar: of the");
-
-	return QString("%1 %2 %3 %4 %5, %6")
-			.arg(str.at(5)) // weekday
-			.arg(dela) // day
-			.arg(decadeMap.value((parts.at(2)-1)/10 + 1)) // decadeNr
-			.arg(qc_("décade du", "French Revolution Calendar 'week'"))
-			.arg(monthNames.value(parts.at(1))) // monthname
-			.arg(year);// year
 }
 
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
