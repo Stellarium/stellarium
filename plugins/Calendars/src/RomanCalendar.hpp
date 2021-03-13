@@ -35,6 +35,7 @@ public:
 
 	virtual ~RomanCalendar() Q_DECL_OVERRIDE {}
 
+public slots:
 	virtual void retranslate() Q_DECL_OVERRIDE;
 
 	//! Set a calendar date from the Julian day number
@@ -51,6 +52,7 @@ public:
 	//! get a formatted complete string for a date. Years are AUC.
 	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
+public:
 	//! find RD number for date in the Roman calendar. Years are like in the Julian calendar.
 	static int fixedFromRoman(QVector<int> julian);
 	//! find date in the Roman calendar from RD number

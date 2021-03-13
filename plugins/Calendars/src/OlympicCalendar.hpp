@@ -32,6 +32,7 @@ public:
 
 	virtual ~OlympicCalendar() Q_DECL_OVERRIDE {}
 
+public slots:
 	virtual void retranslate() Q_DECL_OVERRIDE {}
 
 	//! Set a calendar date from the Julian day number
@@ -50,6 +51,7 @@ public:
 	//! get a formatted complete string for a date ("nth of the monthname, Year X in the YY olympiad")
 	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
+public:
 	static int julianYearFromOlympiad(QVector<int>odate);
 
 	static QVector<int> olympiadFromJulianYear(int jYear);

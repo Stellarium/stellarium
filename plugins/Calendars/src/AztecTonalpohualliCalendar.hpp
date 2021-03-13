@@ -33,6 +33,7 @@ public:
 
 	virtual ~AztecTonalpohualliCalendar() Q_DECL_OVERRIDE {}
 
+public slots:
 	virtual void retranslate() Q_DECL_OVERRIDE;
 
 	//! Set a calendar date from the Julian day number
@@ -47,6 +48,7 @@ public:
 	//! dayNumber[1..13]-name
 	virtual QStringList getDateStrings() const Q_DECL_OVERRIDE;
 
+public:
 	//! Return ordinal in Tonalpohualli cycle.
 	//! @arg tonalpohualli is a QVector<int> of {number, name} (typo in book...)
 	inline static int aztecTonalpohualliOrdinal(QVector<int> tonalpohualli) {return StelUtils::imod((tonalpohualli.at(0) - 1 + 39*(tonalpohualli.at(0)-tonalpohualli.at(1))), 260);}

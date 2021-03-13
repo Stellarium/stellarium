@@ -37,6 +37,7 @@ public:
 
 	virtual ~GregorianCalendar() Q_DECL_OVERRIDE {}
 
+public slots:
 	//! Set a calendar date from the Julian day number
 	virtual void setJD(double JD) Q_DECL_OVERRIDE;
 
@@ -51,6 +52,7 @@ public:
 	//! get a formatted complete string for a date
 	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
+public:
 	//! returns true for leap years
 	static bool isLeap(int year);
 
