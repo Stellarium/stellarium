@@ -292,7 +292,7 @@ void Calendars::draw(StelCore* core)
 	if (flagShowHebrew)        oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Hebrew",          "calendar")).arg(getCal("Hebrew")->getFormattedDateString());
 	if (flagShowPersianArithmetic) oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Persian (Arithm.)", "calendar")).arg(getCal("PersianArithmetic")->getFormattedDateString());
 	if (flagShowOldHinduSolar) oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Old Hindu Solar", "calendar")).arg(getCal("OldHinduSolar")->getFormattedDateString());
-	if (flagShowOldHinduLunar) oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Old Hindu Lunar", "calendar")).arg(getCal("OldHinduLunar")->getFormattedDateString());
+	if (flagShowOldHinduLunar) oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Old Hindu Lunisolar", "calendar")).arg(getCal("OldHinduLunar")->getFormattedDateString());
 	if (flagShowMayaLongCount) oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Maya Long Count", "calendar")).arg(getCal("MayaLongCount")->getFormattedDateString());
 	if (flagShowMayaHaab)      oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Maya Haab",       "calendar")).arg(getCal("MayaHaab")->getFormattedDateString());
 	if (flagShowMayaTzolkin)   oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Maya Tzolkin",    "calendar")).arg(getCal("MayaTzolkin")->getFormattedDateString());

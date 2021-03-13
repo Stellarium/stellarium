@@ -78,6 +78,8 @@ void CalendarsDialog::createDialogContent()
 	// DISABLE Chinese for now, TBD!
 	ui->chineseCheckBox->hide();
 	ui->tabs->removeTab(2);
+	ui->newHinduLunarCheckBox->hide();
+	ui->newHinduSolarCheckBox->hide();
 
 	// MAKE SURE to connect each calendar's partsChanged to a respective populate... method here.
 	connect(cal->getCal("Julian"),             SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateJulianParts(QVector<int>)));
