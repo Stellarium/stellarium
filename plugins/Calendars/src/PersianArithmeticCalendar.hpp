@@ -29,7 +29,6 @@ class PersianArithmeticCalendar : public Calendar
 	Q_OBJECT
 
 public:
-
 	PersianArithmeticCalendar(double jd);
 
 	virtual ~PersianArithmeticCalendar() Q_DECL_OVERRIDE {}

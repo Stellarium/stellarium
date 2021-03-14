@@ -117,7 +117,8 @@ QString FrenchArithmeticCalendar::getFormattedDateString() const
 					     qc_("de la République Française", "French Revolution Calendar: year"));
 	if (parts.at(1)==13)
 		return QString("%1, %2").arg(str.at(5), year);
-	else {
+	else
+	{
 		QMap<int, QString>decadeMap={{1, qc_("première" , "French Revolution Calendar 'week'")},
 					     {2, qc_("seconde"  , "French Revolution Calendar 'week'")},
 					     {3, qc_("troisième", "French Revolution Calendar 'week'")}};

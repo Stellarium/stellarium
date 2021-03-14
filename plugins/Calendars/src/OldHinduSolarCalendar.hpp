@@ -78,7 +78,6 @@ protected:
 private:
 	int weekdayStyle; // 0 or 1
 	int monthStyle; // 0=Vedic or 1=Sanskrit or 2=Zodiacal
-
 };
 
 #endif

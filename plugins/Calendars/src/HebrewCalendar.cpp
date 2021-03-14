@@ -92,8 +92,6 @@ QStringList HebrewCalendar::getDateStrings() const
 	list << weekDayNames.value(dow);                 // 4:weekday
 
 	return list;
-
-
 }
 
 // get a formatted complete string for a date

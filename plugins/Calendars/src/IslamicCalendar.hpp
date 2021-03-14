@@ -33,7 +33,6 @@ class IslamicCalendar : public Calendar
 	Q_OBJECT
 
 public:
-
 	IslamicCalendar(double jd);
 
 	virtual ~IslamicCalendar() Q_DECL_OVERRIDE {}

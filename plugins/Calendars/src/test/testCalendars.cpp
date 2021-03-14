@@ -89,7 +89,6 @@ void TestCalendars::testBasics()
 	QVERIFY(StelUtils::intFloorDiv(-8, -2)==4);
 	QVERIFY(StelUtils::intFloorDiv(-8, 2)==-4);
 	QVERIFY(StelUtils::intFloorDiv(8, -2)==-4);
-
 }
 
 void TestCalendars::testEuropean()

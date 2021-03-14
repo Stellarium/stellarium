@@ -32,7 +32,6 @@ class FrenchArithmeticCalendar : public Calendar
 	Q_OBJECT
 
 public:
-
 	FrenchArithmeticCalendar(double jd);
 
 	virtual ~FrenchArithmeticCalendar() Q_DECL_OVERRIDE {}
