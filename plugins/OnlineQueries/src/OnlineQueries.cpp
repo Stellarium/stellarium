@@ -149,7 +149,7 @@ void OnlineQueries::restoreDefaultConfiguration(void)
 void OnlineQueries::loadConfiguration(void)
 {
 	conf->beginGroup("OnlineQueries");
-	ancientSkiesUrl=conf->value("ancientskies_url", "https://www.ancient-skies.org/webservice?hip=%1").toString();
+	ancientSkiesUrl=conf->value("ancientskies_url", "https://www.ancient-skies.org/webservice?apikey=fZdn9QsNdCAY4KggkV2T&response=HTML&entity=star&catalog=HIPPARCOS&id=%1").toString();
 	aavsoHipUrl    =conf->value("aavso_hip_url",    "https://www.aavso.org/vsx/index.php?view=api.object&ident=HIP%1").toString();
 	aavsoOidUrl    =conf->value("aavso_oid_url",    "https://www.aavso.org/vsx/index.php?view=detail.top&oid=%1").toString();
 	gcvsUrl        =conf->value("gcvs_url",         "http://www.sai.msu.su/gcvs/cgi-bin/ident.cgi?cat=Hip+&num=%1").toString();
