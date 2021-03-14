@@ -33,6 +33,14 @@ SET(Calendars_SRCS
     EthiopicCalendar.cpp
     IcelandicCalendar.hpp
     IcelandicCalendar.cpp
+    IslamicCalendar.hpp
+    IslamicCalendar.cpp
+    HebrewCalendar.hpp
+    HebrewCalendar.cpp
+    OldHinduSolarCalendar.hpp
+    OldHinduSolarCalendar.cpp
+    OldHinduLuniSolarCalendar.hpp
+    OldHinduLuniSolarCalendar.cpp
     MayaLongCountCalendar.hpp
     MayaLongCountCalendar.cpp
     MayaHaabCalendar.hpp
@@ -45,6 +53,10 @@ SET(Calendars_SRCS
     AztecTonalpohualliCalendar.cpp
     BalinesePawukonCalendar.hpp
     BalinesePawukonCalendar.cpp
+    FrenchArithmeticCalendar.hpp
+    FrenchArithmeticCalendar.cpp
+    PersianArithmeticCalendar.hpp
+    PersianArithmeticCalendar.cpp
 )
 
 SET(Calendars_UIS

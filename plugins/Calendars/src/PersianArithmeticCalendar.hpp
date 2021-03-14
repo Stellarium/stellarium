@@ -16,24 +16,22 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef ZOROASTRIANCALENDAR_HPP
-#define ZOROASTRIANCALENDAR_HPP
+#ifndef PERSIANARITHMETICCALENDAR_HPP
+#define PERSIANARITHMETICCALENDAR_HPP
 
-#include "EgyptianCalendar.hpp"
+#include "Calendar.hpp"
 
-//! The Zoroastrian calendar has the same structure as the Egyptian and Armenian calendars
-//! Epoch is Jezdegerd, the last Persian ruler of A.D. 632
-//! Source: CC.UE 1.11.
-//! Month Names from Ginzel 1906, Vol1, §69.
+//! This class implements an algorithmical intercalation scheme for the Persian calendar of 1925.
+//! The leap year cycle is 2820 years long.
 
-class ZoroastrianCalendar: public EgyptianCalendar
+class PersianArithmeticCalendar : public Calendar
 {
 	Q_OBJECT
 
 public:
-	ZoroastrianCalendar(double jd);
+	PersianArithmeticCalendar(double jd);
 
-	virtual ~ZoroastrianCalendar() Q_DECL_OVERRIDE {}
+	virtual ~PersianArithmeticCalendar() Q_DECL_OVERRIDE {}
 
 public slots:
 	virtual void retranslate() Q_DECL_OVERRIDE;
@@ -42,7 +40,7 @@ public slots:
 	virtual void setJD(double JD) Q_DECL_OVERRIDE;
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
-	//! Year-Month[1...12]-Day[1...31]
+	//! Year-Month[1...13]-Day[1...30]
 	virtual void setDate(QVector<int> parts) Q_DECL_OVERRIDE;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
@@ -53,17 +51,18 @@ public slots:
 	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
 public:
-	//! find RD number for date in the Zoroastrian calendar (may be used in other calendars!)
-	static int fixedFromZoroastrian(QVector<int> julian);
-	//! find date in the Zoroastrian calendar from RD number (may be used in other calendars!)
-	static QVector<int> zoroastrianFromFixed(int rd);
+	//! returns true for leap years
+	static bool isLeap(int pYear);
 
-	static const int zoroastrianEpoch;
+	//! find RD number for date in the Persian arithmetic calendar
+	static int fixedFromPersianArithmetic(QVector<int> persian);
+	//! find date in the Persian calendar from RD number
+	static QVector<int> persianArithmeticFromFixed(int rd);
 
 protected:
+	static const int persianEpoch; //! RD of .
+	static QMap<int, QString> weekDayNames;
 	static QMap<int, QString> monthNames;
-	static QMap<int, QString> dayNames;
-	static QMap<int, QString> epagomenaeNames;
 };
 
 #endif

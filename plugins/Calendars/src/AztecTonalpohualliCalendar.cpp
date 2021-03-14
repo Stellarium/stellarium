@@ -103,3 +103,13 @@ int AztecTonalpohualliCalendar::aztecTonalpohualliOnOrBefore(QVector<int> tonalp
 {
 	return modInterval(aztecTonalpohualliCorrelation+aztecTonalpohualliOrdinal(tonalpohualli), rd, rd-260);
 }
+
+// get 2-part vector of Tonalpohualli date from RD
+QVector<int> AztecTonalpohualliCalendar::aztecTonalpohualliFromFixed(int rd)
+{
+	const int count=rd-aztecTonalpohualliCorrelation+1;
+	const int number = StelUtils::amod(count, 13);
+	const int name = StelUtils::amod(count, 20);
+
+	return { number, name };
+}

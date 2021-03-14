@@ -16,24 +16,25 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef ZOROASTRIANCALENDAR_HPP
-#define ZOROASTRIANCALENDAR_HPP
+#ifndef FRENCHARITHMETICCALENDAR_HPP
+#define FRENCHARITHMETICCALENDAR_HPP
 
-#include "EgyptianCalendar.hpp"
+#include "Calendar.hpp"
 
-//! The Zoroastrian calendar has the same structure as the Egyptian and Armenian calendars
-//! Epoch is Jezdegerd, the last Persian ruler of A.D. 632
-//! Source: CC.UE 1.11.
-//! Month Names from Ginzel 1906, Vol1, §69.
+//! The French Revolution also introduced a new calendar which was valid only for few years (1793-1805)
+//! and another few weeks in May 1871.
+//! In fact, even that calendar saw a reform proposal: The original, astronomically determined begin at autumn equinox
+//! should have been replaced by leap-year rules similar to the Gregorian.
+//! This class implements the modified, arithmetic calendar proposed in 1795, which however never came into use.
 
-class ZoroastrianCalendar: public EgyptianCalendar
+class FrenchArithmeticCalendar : public Calendar
 {
 	Q_OBJECT
 
 public:
-	ZoroastrianCalendar(double jd);
+	FrenchArithmeticCalendar(double jd);
 
-	virtual ~ZoroastrianCalendar() Q_DECL_OVERRIDE {}
+	virtual ~FrenchArithmeticCalendar() Q_DECL_OVERRIDE {}
 
 public slots:
 	virtual void retranslate() Q_DECL_OVERRIDE;
@@ -42,7 +43,7 @@ public slots:
 	virtual void setJD(double JD) Q_DECL_OVERRIDE;
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
-	//! Year-Month[1...12]-Day[1...31]
+	//! Year-Month[1...13]-Day[1...30]
 	virtual void setDate(QVector<int> parts) Q_DECL_OVERRIDE;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
@@ -53,17 +54,19 @@ public slots:
 	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
 public:
-	//! find RD number for date in the Zoroastrian calendar (may be used in other calendars!)
-	static int fixedFromZoroastrian(QVector<int> julian);
-	//! find date in the Zoroastrian calendar from RD number (may be used in other calendars!)
-	static QVector<int> zoroastrianFromFixed(int rd);
+	//! returns true for leap years
+	static bool isLeap(int year);
 
-	static const int zoroastrianEpoch;
+	//! find RD number for date in the French Revolution calendar
+	static int fixedFromFrenchArithmetic(QVector<int> french);
+	//! find date in the arithmetic French Revolution calendar from RD number
+	static QVector<int> frenchArithmeticFromFixed(int rd);
 
 protected:
-	static QMap<int, QString> monthNames;
+	static const int frenchEpoch; //! RD of 1792-sep-22.
 	static QMap<int, QString> dayNames;
-	static QMap<int, QString> epagomenaeNames;
+	static QMap<int, QString> sansculottides;
+	static QMap<int, QString> monthNames;
 };
 
 #endif

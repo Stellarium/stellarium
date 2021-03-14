@@ -16,24 +16,26 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef ZOROASTRIANCALENDAR_HPP
-#define ZOROASTRIANCALENDAR_HPP
+#ifndef ISLAMICCALENDAR_HPP
+#define ISLAMICCALENDAR_HPP
 
-#include "EgyptianCalendar.hpp"
+#include "Calendar.hpp"
 
-//! The Zoroastrian calendar has the same structure as the Egyptian and Armenian calendars
-//! Epoch is Jezdegerd, the last Persian ruler of A.D. 632
-//! Source: CC.UE 1.11.
-//! Month Names from Ginzel 1906, Vol1, §69.
+//! The Islamic calendar is a strictly Lunar calendar with no month intercalation. It thus does not observe the Solar year,
+//! and drifts through the seasons in about 32 solar years.
+//! This implementation of the arithmetic Islamic calendar is the easy to compute version, whereas most Muslims follow an
+//! observation-based calendar, which by definition cannot be computed.
+//! Note that Islamic days begin on the evening before the actual date we compute.
+//! Therefore, times lying after sunset will be wrong and should count up one day.
 
-class ZoroastrianCalendar: public EgyptianCalendar
+class IslamicCalendar : public Calendar
 {
 	Q_OBJECT
 
 public:
-	ZoroastrianCalendar(double jd);
+	IslamicCalendar(double jd);
 
-	virtual ~ZoroastrianCalendar() Q_DECL_OVERRIDE {}
+	virtual ~IslamicCalendar() Q_DECL_OVERRIDE {}
 
 public slots:
 	virtual void retranslate() Q_DECL_OVERRIDE;
@@ -53,17 +55,19 @@ public slots:
 	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
 public:
-	//! find RD number for date in the Zoroastrian calendar (may be used in other calendars!)
-	static int fixedFromZoroastrian(QVector<int> julian);
-	//! find date in the Zoroastrian calendar from RD number (may be used in other calendars!)
-	static QVector<int> zoroastrianFromFixed(int rd);
+	//! Return true if iYear is an Islamic leap year
+	static bool isLeap(int iYear);
 
-	static const int zoroastrianEpoch;
+	//! find RD number for date in the Islamic calendar
+	static int fixedFromIslamic(QVector<int> islamic);
+	//! find date in the Islamic calendar from RD number
+	static QVector<int> islamicFromFixed(int rd);
+
+	static const int islamicEpoch; //! RD of July 16, 622.
 
 protected:
+	static QMap<int, QString> weekDayNames;
 	static QMap<int, QString> monthNames;
-	static QMap<int, QString> dayNames;
-	static QMap<int, QString> epagomenaeNames;
 };
 
 #endif

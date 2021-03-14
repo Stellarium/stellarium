@@ -16,24 +16,24 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef ZOROASTRIANCALENDAR_HPP
-#define ZOROASTRIANCALENDAR_HPP
+#ifndef OLDHINDULUNISOLARCALENDAR_HPP
+#define OLDHINDULUNISOLARCALENDAR_HPP
 
-#include "EgyptianCalendar.hpp"
+#include "OldHinduSolarCalendar.hpp"
 
-//! The Zoroastrian calendar has the same structure as the Egyptian and Armenian calendars
-//! Epoch is Jezdegerd, the last Persian ruler of A.D. 632
-//! Source: CC.UE 1.11.
-//! Month Names from Ginzel 1906, Vol1, §69.
+//! The old Hindu Lunisolar calendar as given in CC.UE describes the South Indian version where months begin at New Moon (amanta scheme).
+//! The name of a lunar month depends on the solar month that begins during that lunar month.
+//! A month is leap and takes the following month’s name when no solar month begins within it.
+//! The calendar repeats after 180.000 years.
 
-class ZoroastrianCalendar: public EgyptianCalendar
+class OldHinduLuniSolarCalendar : public OldHinduSolarCalendar
 {
 	Q_OBJECT
 
 public:
-	ZoroastrianCalendar(double jd);
+	OldHinduLuniSolarCalendar(double jd);
 
-	virtual ~ZoroastrianCalendar() Q_DECL_OVERRIDE {}
+	virtual ~OldHinduLuniSolarCalendar() Q_DECL_OVERRIDE {}
 
 public slots:
 	virtual void retranslate() Q_DECL_OVERRIDE;
@@ -42,28 +42,32 @@ public slots:
 	virtual void setJD(double JD) Q_DECL_OVERRIDE;
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
-	//! Year-Month[1...12]-Day[1...31]
+	//! Year-Month[1...12]-leap[0|1]-Day[1...30]
 	virtual void setDate(QVector<int> parts) Q_DECL_OVERRIDE;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
-	//! Year, Month, MonthName, Day, DayName
+	//! {Year, Month, MonthName, leap[0|1], Day, DayName}
 	virtual QStringList getDateStrings() const Q_DECL_OVERRIDE;
 
 	//! get a formatted complete string for a date
 	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
+	// static public Methods from CC
 public:
-	//! find RD number for date in the Zoroastrian calendar (may be used in other calendars!)
-	static int fixedFromZoroastrian(QVector<int> julian);
-	//! find date in the Zoroastrian calendar from RD number (may be used in other calendars!)
-	static QVector<int> zoroastrianFromFixed(int rd);
+	//! compute RD date from an Old Hindu Lunisolar date
+	//! parts={ year, month, leap, day}
+	static int fixedFromOldHinduLunar(QVector<int> parts);
+	//! return { year, month, leap, day}
+	static QVector<int> oldHinduLunarFromFixed(int rd);
 
-	static const int zoroastrianEpoch;
+	//! called old-hindu-lunar-leap-year?() in the CC.UE book.
+	static bool isLeap(int lYear);
 
 protected:
+	constexpr static const double aryaLunarMonth   = 1577917500./53433336.0;
+	constexpr static const double aryaLunarDay     = aryaLunarMonth/30.0;
+
 	static QMap<int, QString> monthNames;
-	static QMap<int, QString> dayNames;
-	static QMap<int, QString> epagomenaeNames;
 };
 
 #endif
