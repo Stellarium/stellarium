@@ -1,3 +1,4 @@
+ADD_SUBDIRECTORY( al-sufi )
 ADD_SUBDIRECTORY( almagest )
 ADD_SUBDIRECTORY( anutan )
 ADD_SUBDIRECTORY( arabic )
