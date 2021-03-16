@@ -451,6 +451,8 @@ class Translations
 		// =====================================================================
 		// Constellation cultures
 		// TRANSLATORS: Name of the sky culture
+		N_("Al-Sufi");
+		// TRANSLATORS: Name of the sky culture
 		N_("Almagest");
 		// TRANSLATORS: Name of the sky culture
 		N_("Anutan");
