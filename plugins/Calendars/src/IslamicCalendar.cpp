@@ -39,7 +39,7 @@ void IslamicCalendar::retranslate()
 		{0, qc_("yaum al-aḥad (first day)"       , "Islamic day name")},
 		{1, qc_("yaum al-ithnaya (second day)"   , "Islamic day name")},
 		{2, qc_("yaum ath-thalāthāʾ (third day)" , "Islamic day name")},
-		{3, qc_("yaum al-arbaʿāʾ"                , "Islamic day name")},
+		{3, qc_("yaum al-arbaʿāʾ (fourth day)"   , "Islamic day name")},
 		{4, qc_("yaum al-ẖamis (fifth day)"      , "Islamic day name")},
 		{5, qc_("yaum al-jumʿa (day of assembly)", "Islamic day name")},
 		{6, qc_("yaum as-sabt (sabbath day)"     , "Islamic day name")}};
