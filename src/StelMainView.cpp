@@ -835,14 +835,13 @@ void StelMainView::init()
 	//install the effect on the whole view
 	rootItem->setGraphicsEffect(nightModeEffect);
 
-	QDesktopWidget *desktop = QApplication::desktop();
 	int screen = configuration->value("video/screen_number", 0).toInt();
-	if (screen < 0 || screen >= desktop->screenCount())
+	if (screen < 0 || screen >= qApp->screens().count())
 	{
 		qWarning() << "WARNING: screen" << screen << "not found";
 		screen = 0;
 	}
-	QRect screenGeom = desktop->screenGeometry(screen);
+	QRect screenGeom = qApp->screens().at(screen)->geometry();
 
 	QSize size = QSize(configuration->value("video/screen_w", screenGeom.width()).toInt(),
 		     configuration->value("video/screen_h", screenGeom.height()).toInt());
@@ -1353,14 +1352,13 @@ void StelMainView::setFullScreen(bool b)
 		if ( (x()<0)  && (y()<0))
 		{
 			QSettings *conf = stelApp->getSettings();
-			QDesktopWidget *desktop = QApplication::desktop();
 			int screen = conf->value("video/screen_number", 0).toInt();
-			if (screen < 0 || screen >= desktop->screenCount())
+			if (screen < 0 || screen >= qApp->screens().count())
 			{
 				qWarning() << "WARNING: screen" << screen << "not found";
 				screen = 0;
 			}
-			QRect screenGeom = desktop->screenGeometry(screen);
+			QRect screenGeom = qApp->screens().at(screen)->geometry();
 			int x = conf->value("video/screen_x", 0).toInt();
 			int y = conf->value("video/screen_y", 0).toInt();
 			move(x + screenGeom.x(), y + screenGeom.y());
@@ -1559,7 +1557,7 @@ void StelMainView::doScreenshot(void)
 	QOpenGLFramebufferObjectFormat fbFormat;
 	fbFormat.setAttachment(QOpenGLFramebufferObject::CombinedDepthStencil);
 	fbFormat.setInternalTextureFormat(isGLES ? GL_RGBA : GL_RGB); // try to avoid transparent background!
-	if(const auto multisamplingLevel = configuration->value("video/multisampling", 0).toUInt())
+	if(const auto multisamplingLevel = configuration->value("video/multisampling", 0).toInt())
         fbFormat.setSamples(multisamplingLevel);
 	QOpenGLFramebufferObject * fbObj = new QOpenGLFramebufferObject(imgWidth * pixelRatio, imgHeight * pixelRatio, fbFormat);
 	fbObj->bind();
@@ -1574,7 +1572,7 @@ void StelMainView::doScreenshot(void)
 	sParams.viewportXywh[3]=imgHeight;
 
 	// Configure a helper value to allow some modules to tweak their output sizes. Currently used by StarMgr, maybe solve font issues?
-	customScreenshotMagnification=(float)imgHeight/QApplication::desktop()->screenGeometry().height();
+	customScreenshotMagnification=static_cast<float>(imgHeight)/qApp->screens().at(qApp->desktop()->screenNumber())->geometry().height();
 
 	sParams.viewportCenter.set(0.0+(0.5+pParams.viewportCenterOffset.v[0])*imgWidth, 0.0+(0.5+pParams.viewportCenterOffset.v[1])*imgHeight);
 	sParams.viewportFovDiameter = qMin(imgWidth,imgHeight);
