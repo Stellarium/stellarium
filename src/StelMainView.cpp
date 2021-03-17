@@ -736,6 +736,9 @@ QSurfaceFormat StelMainView::getDesiredGLFormat() const
 		//fmt.setOption(QSurfaceFormat::DeprecatedFunctions);
 	}
 
+	// Note: this only works if --mesa-mode was given on the command line. Auto-switch to Mesa or the driver name apparently cannot be detected at this early stage.
+	bool isMesa= qApp->property("onetime_mesa_mode").isValid() && (qApp->property("onetime_mesa_mode")==true);
+
 	//request some sane buffer formats
 	fmt.setRedBufferSize(8);
 	fmt.setGreenBufferSize(8);
@@ -745,7 +748,7 @@ QSurfaceFormat StelMainView::getDesiredGLFormat() const
 	//Stencil buffer seems necessary for GUI boxes
 	fmt.setStencilBufferSize(8);
 	const int multisamplingLevel = configuration->value("video/multisampling", 0).toInt();
-	if(  multisamplingLevel  && (qApp->property("spout").toString() == "none") )
+	if(  multisamplingLevel  && (qApp->property("spout").toString() == "none") && (!isMesa) )
 		fmt.setSamples(multisamplingLevel);
 
 #ifdef OPENGL_DEBUG_LOGGING
