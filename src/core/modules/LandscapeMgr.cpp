@@ -106,6 +106,9 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 	const float ppx = core->getCurrentStelProjectorParams().devicePixelsPerPixel;
 	StelPainter sPainter(prj);
 	sPainter.setFont(fontC);
+	float sshift, bshift, cshift, vshift;
+	sshift = bshift = cshift = 0.f;
+	bool flagMask = (core->getProjection(StelCore::FrameJ2000)->getMaskType() != StelProjector::MaskDisk);
 
 	if (fader.getInterstate()==0.0f) return;
 
@@ -139,12 +142,10 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 	Vec3f pos;
 	Vec3f xy;
 
-	float sshift = ppx*sPainter.getFontMetrics().boundingRect(sNorth).width()*0.5f;
-	float bshift = ppx*sPainter.getFontMetrics().boundingRect(sNortheast).width()*0.5f;
-	float cshift = ppx*sPainter.getFontMetrics().boundingRect(sNorthnortheast).width()*0.5f;
-	float vshift = sshift;
-	if (core->getProjection(StelCore::FrameJ2000)->getMaskType() == StelProjector::MaskDisk)
-		sshift = bshift = cshift = vshift = 0;
+	if (flagMask)
+		sshift = ppx*sPainter.getFontMetrics().boundingRect(sNorth).width()*0.5f;
+
+	vshift = sshift;
 	if (propMgr->getProperty("SpecialMarkersMgr.compassMarksDisplayed")->getValue().toBool())
 		vshift = -sshift*3.f;
 
@@ -169,6 +170,8 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 		sPainter.drawText(xy[0], xy[1], d[3], 0., -sshift, -vshift, false);
 
 	sPainter.setFont(fontSC);
+	if (flagMask)
+		bshift = ppx*sPainter.getFontMetrics().boundingRect(sNortheast).width()*0.5f;
 
 	// NE for Northeast
 	pos.set(-1.f, 1.f, 0.f);
@@ -191,6 +194,8 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 		sPainter.drawText(xy[0], xy[1], d[7], 0., -bshift, -vshift, false);
 
         sPainter.setFont(fontSSC);
+	if (flagMask)
+		cshift = ppx*sPainter.getFontMetrics().boundingRect(sNorthnortheast).width()*0.5f;
 
 	// NNE for North-northeast
 	pos.set(-1.f, 1.f/(1+sqrt(2)), 0.f);
