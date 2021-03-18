@@ -2050,7 +2050,7 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 			// Morrison & Stephenson (1982) algorithm for DeltaT (used by RedShift)
 			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByMorrisonStephenson1982;
-			// FIXME: This is correct valid range?
+			// FIXME: Is it valid range?
 			deltaTstart	= -4000;
 			deltaTfinish	= 2800;
 			break;

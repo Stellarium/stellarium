@@ -198,8 +198,7 @@ void StelObjectMgr::registerStelObjectMgr(StelObjectModule* m)
 
 	objModulesMap.insert(m->objectName(), m->getName());
 
-	//TODO: there should probably be a better way to specify the sub-types
-	// instead of hardcoding them here
+	//TODO: there should probably be a better way to specify the sub-types instead of hardcoding them here
 
 	// Celestial objects from Solar system by type
 	if (m->objectName()=="SolarSystem")
