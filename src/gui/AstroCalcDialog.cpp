@@ -3634,6 +3634,11 @@ void AstroCalcDialog::calculatePhenomena()
 
 	initListPhenomena();
 
+	double startJD = StelUtils::qDateTimeToJd(QDateTime(ui->phenomenFromDateEdit->date()));
+	double stopJD = StelUtils::qDateTimeToJd(QDateTime(ui->phenomenToDateEdit->date().addDays(1)));
+	if (stopJD<=startJD) // Stop warming atmosphere!..
+		return;
+
 	QList<PlanetP> objects;
 	objects.clear();
 	QList<PlanetP> allObjects = solarSystem->getAllPlanets();
@@ -3804,8 +3809,6 @@ void AstroCalcDialog::calculatePhenomena()
 	if (planet)
 	{
 		const double currentJD = core->getJD();   // save current JD
-		double startJD = StelUtils::qDateTimeToJd(QDateTime(ui->phenomenFromDateEdit->date()));
-		double stopJD = StelUtils::qDateTimeToJd(QDateTime(ui->phenomenToDateEdit->date().addDays(1)));
 		startJD = startJD - core->getUTCOffset(startJD) / 24.;
 		stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
 
@@ -4845,7 +4848,7 @@ QMap<double, double> AstroCalcDialog::findOrbitalPointApproach(PlanetP &object1,
 
 bool AstroCalcDialog::findPreciseOrbitalPoint(QPair<double, double>* out, PlanetP object1, double JD, double stopJD, double step, bool minimal)
 {
-	double dist, prevDist;
+	double dist, prevDist, timeDist = qAbs(stopJD-JD);
 
 	if (out == Q_NULLPTR)
 		return false;
@@ -4853,6 +4856,7 @@ bool AstroCalcDialog::findPreciseOrbitalPoint(QPair<double, double>* out, Planet
 	prevDist = findHeliocentricDistance(JD, object1);
 	step /= -2.;
 
+	bool result;
 	while (true)
 	{
 		JD += step;
@@ -4864,21 +4868,14 @@ bool AstroCalcDialog::findPreciseOrbitalPoint(QPair<double, double>* out, Planet
 			out->second = findHeliocentricDistance(JD - step / 2.0, object1);
 			if (minimal)
 			{
-				if (out->second > findHeliocentricDistance(JD - step / 5.0, object1))
-				{
+				result = (out->second > findHeliocentricDistance(JD - step / 5.0, object1));
+				if (result)
 					out->second *= -1;
-					return true;
-				}
-				else
-					return false;
 			}
 			else
-			{
-				if (out->second < findHeliocentricDistance(JD - step / 5.0, object1))
-					return true;
-				else
-					return false;
-			}
+				result = (out->second < findHeliocentricDistance(JD - step / 5.0, object1));
+
+			return result;
 		}
 		if (minimal)
 		{
@@ -4892,7 +4889,7 @@ bool AstroCalcDialog::findPreciseOrbitalPoint(QPair<double, double>* out, Planet
 		}
 		prevDist = dist;
 
-		if (JD > stopJD)
+		if (JD > stopJD || JD < (stopJD - 2*timeDist))
 			return false;
 	}
 }
