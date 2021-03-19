@@ -204,10 +204,7 @@ void DateTimeDialog::secondChanged(int newsecond)
 
 void DateTimeDialog::jdChanged(double njd)
 {
-	if ( jd != njd)
-	{
-		validJd(njd);
-	}
+	validJd(njd);
 }
 
 void DateTimeDialog::mjdChanged(double nmjd)
@@ -255,7 +252,8 @@ Prepare date elements from newJd and send to spinner_*
  ************************************************************************/
 void DateTimeDialog::setDateTime(double newJd)
 {
-	if (this->visible()) {
+	if (this->visible())
+	{
 		// JD and MJD should be at the UTC scale on the window!
 		double newJdC = newJd + core->getUTCOffset(newJd)/24.0; // UTC -> local tz
 		StelUtils::getDateFromJulianDay(newJdC, &year, &month, &day);
