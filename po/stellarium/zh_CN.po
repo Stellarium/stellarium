@@ -509,97 +509,97 @@ msgstr "罗盘标记"
 #: src/core/modules/LandscapeMgr.cpp:240 src/core/modules/Planet.cpp:1009
 msgctxt "compass direction"
 msgid "N"
-msgstr "N"
+msgstr "北"
 
 #. TRANSLATORS: South
 #: src/core/modules/LandscapeMgr.cpp:242 src/core/modules/Planet.cpp:1001
 msgctxt "compass direction"
 msgid "S"
-msgstr "S"
+msgstr "南"
 
 #. TRANSLATORS: East
 #: src/core/modules/LandscapeMgr.cpp:244 src/core/modules/Planet.cpp:1013
 msgctxt "compass direction"
 msgid "E"
-msgstr "E"
+msgstr "东"
 
 #. TRANSLATORS: West
 #: src/core/modules/LandscapeMgr.cpp:246 src/core/modules/Planet.cpp:1005
 msgctxt "compass direction"
 msgid "W"
-msgstr "W"
+msgstr "西"
 
 #. TRANSLATORS: Northeast
 #: src/core/modules/LandscapeMgr.cpp:248 src/core/modules/Planet.cpp:1011
 msgctxt "compass direction"
 msgid "NE"
-msgstr "NE"
+msgstr "东北"
 
 #. TRANSLATORS: Southeast
 #: src/core/modules/LandscapeMgr.cpp:250 src/core/modules/Planet.cpp:1015
 msgctxt "compass direction"
 msgid "SE"
-msgstr "SE"
+msgstr "东南"
 
 #. TRANSLATORS: Southwest
 #: src/core/modules/LandscapeMgr.cpp:252 src/core/modules/Planet.cpp:1003
 msgctxt "compass direction"
 msgid "SW"
-msgstr "SW"
+msgstr "西南"
 
 #. TRANSLATORS: Northwest
 #: src/core/modules/LandscapeMgr.cpp:254 src/core/modules/Planet.cpp:1007
 msgctxt "compass direction"
 msgid "NW"
-msgstr "NW"
+msgstr "西北"
 
 #. TRANSLATORS: North-northeast
 #: src/core/modules/LandscapeMgr.cpp:256 src/core/modules/Planet.cpp:1010
 msgctxt "compass direction"
 msgid "NNE"
-msgstr "NNE"
+msgstr "北北东"
 
 #. TRANSLATORS: East-northeast
 #: src/core/modules/LandscapeMgr.cpp:258 src/core/modules/Planet.cpp:1012
 msgctxt "compass direction"
 msgid "ENE"
-msgstr "ENE"
+msgstr "东北东"
 
 #. TRANSLATORS: East-southeast
 #: src/core/modules/LandscapeMgr.cpp:260 src/core/modules/Planet.cpp:1014
 msgctxt "compass direction"
 msgid "ESE"
-msgstr "ESE"
+msgstr "东北东"
 
 #. TRANSLATORS: South-southeast
 #: src/core/modules/LandscapeMgr.cpp:262 src/core/modules/Planet.cpp:1016
 msgctxt "compass direction"
 msgid "SSE"
-msgstr "SSE"
+msgstr "南南东"
 
 #. TRANSLATORS: South-southwest
 #: src/core/modules/LandscapeMgr.cpp:264 src/core/modules/Planet.cpp:1002
 msgctxt "compass direction"
 msgid "SSW"
-msgstr "SSW"
+msgstr "南南西"
 
 #. TRANSLATORS: West-southwest
 #: src/core/modules/LandscapeMgr.cpp:266 src/core/modules/Planet.cpp:1004
 msgctxt "compass direction"
 msgid "WSW"
-msgstr "WSW"
+msgstr "西南西"
 
 #. TRANSLATORS: West-northwest
 #: src/core/modules/LandscapeMgr.cpp:268 src/core/modules/Planet.cpp:1006
 msgctxt "compass direction"
 msgid "WNW"
-msgstr "WNW"
+msgstr "西南西"
 
 #. TRANSLATORS: North-northwest
 #: src/core/modules/LandscapeMgr.cpp:270 src/core/modules/Planet.cpp:1008
 msgctxt "compass direction"
 msgid "NNW"
-msgstr "NNW"
+msgstr "北北西"
 
 #: src/core/modules/LandscapeMgr.cpp:590
 msgid "Atmosphere"
@@ -7949,7 +7949,7 @@ msgstr "金星凌日，2012年6月6日，澳大利亚悉尼"
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Historical "
 "Supernovae plugin has to be enabled."
-msgstr ""
+msgstr "演示第谷·布拉赫于1572年观测到的超新星爆发。需启用超新星插件。"
 
 #: src/translations.h:705
 msgid ""
@@ -11911,11 +11911,11 @@ msgstr "建议在条件很好的山顶使用0.12，农村地区使用0.2，条�
 
 #: src/ui_atmosphereDialog.h:196
 msgid "Set the International Standard Atmosphere at the height 0 km MSL"
-msgstr ""
+msgstr "将国际标准大气的高度设置为平均海平面高度 0 km"
 
 #: src/ui_atmosphereDialog.h:198
 msgid "Standard Atmosphere"
-msgstr ""
+msgstr "标准大气"
 
 #: src/ui_greatRedSpotDialog.h:168
 msgid "Great Red Spot Details"
@@ -17652,7 +17652,7 @@ msgstr "对太阳和月球使用上边"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:293
 msgid "Use UTC time when navigational stars are displayed"
-msgstr ""
+msgstr "显示导航星时使用UTC时间"
 
 #: plugins/Novae/src/Novae.cpp:72 plugins/Novae/src/Novae.cpp:145
 msgid "Bright Novae"

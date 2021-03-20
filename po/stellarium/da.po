@@ -6,6 +6,7 @@
 # Translators:
 # cardinot <mcardinot@gmail.com>, 2017
 # Jon Saalbach <jon.saalbach@gmail.com>, 2019
+# Holger Nielsen <ogierdanois@gmail.com>, 2021
 # 
 #, fuzzy
 msgid ""
@@ -14,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2021-03-17 10:50+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
-"Last-Translator: Jon Saalbach <jon.saalbach@gmail.com>, 2019\n"
+"Last-Translator: Holger Nielsen <ogierdanois@gmail.com>, 2021\n"
 "Language-Team: Danish (https://www.transifex.com/stellarium/teams/80998/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,11 +25,11 @@ msgstr ""
 
 #: src/core/modules/CustomObject.cpp:84
 msgid "custom object"
-msgstr ""
+msgstr "Brugervalgt objekt"
 
 #: src/core/modules/CustomObject.cpp:86
 msgid "custom marker"
-msgstr ""
+msgstr "Brugervalgt markør"
 
 #. TRANSLATORS: type of object
 #: src/core/modules/CustomObject.cpp:88 src/core/modules/Asterism.cpp:205
@@ -49,7 +50,7 @@ msgstr "Type"
 
 #: src/core/modules/CustomObjectMgr.cpp:65
 msgid "Marker"
-msgstr ""
+msgstr "Markør"
 
 #: src/core/modules/Asterism.cpp:205
 msgid "asterism"
@@ -103,7 +104,7 @@ msgstr "Stjernebilledetiketter"
 #: src/core/modules/ConstellationMgr.cpp:137 src/ui_configurationDialog.h:1774
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
 msgid "Constellation boundaries"
-msgstr "Stjernebilledomrids"
+msgstr "Stjernebilledgrænser"
 
 #: src/core/modules/ConstellationMgr.cpp:138 src/ui_configurationDialog.h:1933
 msgid "Select single constellation"
@@ -133,11 +134,11 @@ msgstr "Stjerneetiketter"
 
 #: src/core/modules/StarMgr.cpp:471
 msgid "Increase the magnitude limit for stars"
-msgstr ""
+msgstr "Øg grænsen for stjerners størrelsesklasse"
 
 #: src/core/modules/StarMgr.cpp:472
 msgid "Reduce the magnitude limit for stars"
-msgstr ""
+msgstr "Formindsk grænsen for stjerners størrelsesklasse"
 
 #: src/core/modules/GridLinesMgr.cpp:685 src/ui_viewDialog.h:3641
 msgid "Meridian"
@@ -153,7 +154,7 @@ msgstr "Ekliptika for dato"
 
 #: src/core/modules/GridLinesMgr.cpp:697
 msgid "Equator of J2000.0"
-msgstr ""
+msgstr "Ækvator for J2000.0"
 
 #: src/core/modules/GridLinesMgr.cpp:701
 msgid "Equator"
@@ -173,7 +174,7 @@ msgstr "Galaktisk ækvator"
 
 #: src/core/modules/GridLinesMgr.cpp:718
 msgid "Supergalactic Equator"
-msgstr ""
+msgstr "Supergalaktisk ækvator"
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:723 src/ui_viewDialog.h:3390
@@ -229,13 +230,13 @@ msgstr ""
 #: src/core/modules/GridLinesMgr.cpp:1330
 #: src/core/modules/GridLinesMgr.cpp:1339
 msgid "NCP"
-msgstr ""
+msgstr "Nordlige himmelpol"
 
 #. TRANSLATORS: South Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:1332
 #: src/core/modules/GridLinesMgr.cpp:1341
 msgid "SCP"
-msgstr ""
+msgstr "Sydlige himmelpol"
 
 #. TRANSLATORS: Zenith
 #: src/core/modules/GridLinesMgr.cpp:1348
@@ -253,33 +254,33 @@ msgstr ""
 #: src/core/modules/GridLinesMgr.cpp:1357
 #: src/core/modules/GridLinesMgr.cpp:1366
 msgid "NEP"
-msgstr ""
+msgstr "Nordlige ekliptikapol"
 
 #. TRANSLATORS: South Ecliptic Pole
 #: src/core/modules/GridLinesMgr.cpp:1359
 #: src/core/modules/GridLinesMgr.cpp:1368
 msgid "SEP"
-msgstr ""
+msgstr "Sydlige ekliptikapol"
 
 #. TRANSLATORS: North Galactic Pole
 #: src/core/modules/GridLinesMgr.cpp:1375
 msgid "NGP"
-msgstr ""
+msgstr "Nordlige galaktiske pol"
 
 #. TRANSLATORS: South Galactic Pole
 #: src/core/modules/GridLinesMgr.cpp:1377
 msgid "SGP"
-msgstr ""
+msgstr "Sydlige galaktiske pol"
 
 #. TRANSLATORS: Galactic Center point
 #: src/core/modules/GridLinesMgr.cpp:1384
 msgid "GC"
-msgstr ""
+msgstr "Mælkevejens centrum"
 
 #. TRANSLATORS: Galactic Anticenter point
 #: src/core/modules/GridLinesMgr.cpp:1386
 msgid "GA"
-msgstr ""
+msgstr "Mælkevejens anticentrum"
 
 #. TRANSLATORS: North Supergalactic Pole
 #: src/core/modules/GridLinesMgr.cpp:1393
@@ -299,12 +300,12 @@ msgstr ""
 #. TRANSLATORS: Apex Point, where the observer planet is heading to
 #: src/core/modules/GridLinesMgr.cpp:1437
 msgid "Apex"
-msgstr ""
+msgstr "Solens apex"
 
 #. TRANSLATORS: Antapex Point, where the observer planet is receding from
 #: src/core/modules/GridLinesMgr.cpp:1439
 msgid "Antapex"
-msgstr ""
+msgstr "Solens antapex"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/GridLinesMgr.cpp:1449 src/core/modules/Planet.cpp:598
@@ -314,11 +315,11 @@ msgstr ""
 #: plugins/MeteorShowers/src/MeteorShower.cpp:546
 msgctxt "speed"
 msgid "km/s"
-msgstr ""
+msgstr "km/s"
 
 #: src/core/modules/GridLinesMgr.cpp:1810
 msgid "Grids and lines"
-msgstr ""
+msgstr "Gitternet"
 
 #: src/core/modules/GridLinesMgr.cpp:1811
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
@@ -341,11 +342,11 @@ msgstr "Ekliptika J2000-linje"
 
 #: src/core/modules/GridLinesMgr.cpp:1815
 msgid "Invariable Plane line"
-msgstr ""
+msgstr "Det invaliable plan"
 
 #: src/core/modules/GridLinesMgr.cpp:1816
 msgid "Solar Equator Plane line"
-msgstr ""
+msgstr "Solens ækvatorplan"
 
 #: src/core/modules/GridLinesMgr.cpp:1817
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:352
@@ -391,11 +392,11 @@ msgstr "Galaktisk ækvator"
 
 #: src/core/modules/GridLinesMgr.cpp:1826 src/ui_viewDialog.h:3699
 msgid "Supergalactic grid"
-msgstr ""
+msgstr "Supergalaktisk gitternet"
 
 #: src/core/modules/GridLinesMgr.cpp:1827 src/ui_viewDialog.h:3510
 msgid "Supergalactic equator"
-msgstr ""
+msgstr "Supergalaktisk ækvator"
 
 #: src/core/modules/GridLinesMgr.cpp:1828
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:404
@@ -420,43 +421,43 @@ msgstr "Cirkumpolare cirkler"
 
 #: src/core/modules/GridLinesMgr.cpp:1834
 msgid "Umbra Circle"
-msgstr ""
+msgstr "Umbragrænse"
 
 #: src/core/modules/GridLinesMgr.cpp:1835
 msgid "Penumbra Circle"
-msgstr ""
+msgstr "Penumbragrænse"
 
 #: src/core/modules/GridLinesMgr.cpp:1836
 msgid "Celestial J2000 poles"
-msgstr ""
+msgstr "Himmelpoler for ækvinoktiet J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1837
 msgid "Celestial poles"
-msgstr ""
+msgstr "Himmelpolerne"
 
 #: src/core/modules/GridLinesMgr.cpp:1838
 msgid "Zenith and nadir"
-msgstr ""
+msgstr "Zenit og nadir"
 
 #: src/core/modules/GridLinesMgr.cpp:1839
 msgid "Ecliptic J2000 poles"
-msgstr ""
+msgstr "Ekliptikapoler for ækvinoktiet J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1840
 msgid "Ecliptic poles"
-msgstr ""
+msgstr "Ekliptikapoler"
 
 #: src/core/modules/GridLinesMgr.cpp:1841 src/ui_viewDialog.h:3491
 msgid "Galactic poles"
-msgstr ""
+msgstr "Galaktiske poler"
 
 #: src/core/modules/GridLinesMgr.cpp:1842 src/ui_viewDialog.h:3784
 msgid "Galactic center and anticenter"
-msgstr ""
+msgstr "Mælkevejens centrum og anticentrum"
 
 #: src/core/modules/GridLinesMgr.cpp:1843 src/ui_viewDialog.h:3612
 msgid "Supergalactic poles"
-msgstr ""
+msgstr "Supergalaktiske poler"
 
 #: src/core/modules/GridLinesMgr.cpp:1844
 msgid "Equinox J2000 points"
@@ -674,23 +675,23 @@ msgstr "Placering"
 #: src/core/modules/LandscapeMgr.cpp:1036
 msgctxt "pressure"
 msgid "hPa"
-msgstr ""
+msgstr "hPa"
 
 #: src/core/modules/LandscapeMgr.cpp:1046
 msgid "extinction coefficient"
-msgstr ""
+msgstr "ekstinktionskoefficient"
 
 #: src/core/modules/LandscapeMgr.cpp:1049
 msgid "Atmospheric conditions"
-msgstr ""
+msgstr "Atmosfæriske forhold"
 
 #: src/core/modules/LandscapeMgr.cpp:1053
 msgid "Light pollution"
-msgstr ""
+msgstr "Lysforurening"
 
 #: src/core/modules/LandscapeMgr.cpp:1053
 msgid "by Bortle scale"
-msgstr ""
+msgstr "efter Bortle-skalaen"
 
 #: src/core/modules/NomenclatureItem.cpp:65
 msgctxt "landform"
@@ -4318,7 +4319,7 @@ msgstr "Højreklik"
 
 #: src/gui/HelpDialog.cpp:288
 msgid "Add custom marker"
-msgstr ""
+msgstr "Tilføj brugervalgt markør"
 
 #: src/gui/HelpDialog.cpp:289
 msgid "Shift & left click"
@@ -12955,7 +12956,7 @@ msgstr ""
 #. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:568
 msgid "PA="
-msgstr ""
+msgstr "Positionsvinkel = "
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:97
 msgid "Angle Measure Plug-in"

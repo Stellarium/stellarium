@@ -6,8 +6,8 @@
 # Translators:
 # cardinot <mcardinot@gmail.com>, 2017
 # Abdullah AlShahrany <aboodsa77@gmail.com>, 2018
-# Khalid AlAjaji, 2020
 # Latein Lebt, 2020
+# Khalid AlAjaji, 2021
 # 
 #, fuzzy
 msgid ""
@@ -16,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2021-03-17 10:50+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
-"Last-Translator: Latein Lebt, 2020\n"
+"Last-Translator: Khalid AlAjaji, 2021\n"
 "Language-Team: Arabic (https://www.transifex.com/stellarium/teams/80998/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -505,97 +505,97 @@ msgstr "درجات البوصلة"
 #: src/core/modules/LandscapeMgr.cpp:240 src/core/modules/Planet.cpp:1009
 msgctxt "compass direction"
 msgid "N"
-msgstr ""
+msgstr "الشمال"
 
 #. TRANSLATORS: South
 #: src/core/modules/LandscapeMgr.cpp:242 src/core/modules/Planet.cpp:1001
 msgctxt "compass direction"
 msgid "S"
-msgstr ""
+msgstr "الجنوب"
 
 #. TRANSLATORS: East
 #: src/core/modules/LandscapeMgr.cpp:244 src/core/modules/Planet.cpp:1013
 msgctxt "compass direction"
 msgid "E"
-msgstr ""
+msgstr "الشرق"
 
 #. TRANSLATORS: West
 #: src/core/modules/LandscapeMgr.cpp:246 src/core/modules/Planet.cpp:1005
 msgctxt "compass direction"
 msgid "W"
-msgstr ""
+msgstr "الغرب"
 
 #. TRANSLATORS: Northeast
 #: src/core/modules/LandscapeMgr.cpp:248 src/core/modules/Planet.cpp:1011
 msgctxt "compass direction"
 msgid "NE"
-msgstr ""
+msgstr "الشمال الشرقي"
 
 #. TRANSLATORS: Southeast
 #: src/core/modules/LandscapeMgr.cpp:250 src/core/modules/Planet.cpp:1015
 msgctxt "compass direction"
 msgid "SE"
-msgstr ""
+msgstr "الجنوب الشرقي"
 
 #. TRANSLATORS: Southwest
 #: src/core/modules/LandscapeMgr.cpp:252 src/core/modules/Planet.cpp:1003
 msgctxt "compass direction"
 msgid "SW"
-msgstr ""
+msgstr "الجنوب الغربي"
 
 #. TRANSLATORS: Northwest
 #: src/core/modules/LandscapeMgr.cpp:254 src/core/modules/Planet.cpp:1007
 msgctxt "compass direction"
 msgid "NW"
-msgstr ""
+msgstr "الشمال الغربي"
 
 #. TRANSLATORS: North-northeast
 #: src/core/modules/LandscapeMgr.cpp:256 src/core/modules/Planet.cpp:1010
 msgctxt "compass direction"
 msgid "NNE"
-msgstr ""
+msgstr "شمال الشمال الشرقي"
 
 #. TRANSLATORS: East-northeast
 #: src/core/modules/LandscapeMgr.cpp:258 src/core/modules/Planet.cpp:1012
 msgctxt "compass direction"
 msgid "ENE"
-msgstr ""
+msgstr "شرق الشمال الشرقي"
 
 #. TRANSLATORS: East-southeast
 #: src/core/modules/LandscapeMgr.cpp:260 src/core/modules/Planet.cpp:1014
 msgctxt "compass direction"
 msgid "ESE"
-msgstr ""
+msgstr "شرق الجنوب الشرقي"
 
 #. TRANSLATORS: South-southeast
 #: src/core/modules/LandscapeMgr.cpp:262 src/core/modules/Planet.cpp:1016
 msgctxt "compass direction"
 msgid "SSE"
-msgstr ""
+msgstr "جنوب الجنوب الشرقي"
 
 #. TRANSLATORS: South-southwest
 #: src/core/modules/LandscapeMgr.cpp:264 src/core/modules/Planet.cpp:1002
 msgctxt "compass direction"
 msgid "SSW"
-msgstr ""
+msgstr "جنوب الجنوب الغربي"
 
 #. TRANSLATORS: West-southwest
 #: src/core/modules/LandscapeMgr.cpp:266 src/core/modules/Planet.cpp:1004
 msgctxt "compass direction"
 msgid "WSW"
-msgstr ""
+msgstr "غرب الجنوب الغربي"
 
 #. TRANSLATORS: West-northwest
 #: src/core/modules/LandscapeMgr.cpp:268 src/core/modules/Planet.cpp:1006
 msgctxt "compass direction"
 msgid "WNW"
-msgstr ""
+msgstr "غرب الشمال الغربي"
 
 #. TRANSLATORS: North-northwest
 #: src/core/modules/LandscapeMgr.cpp:270 src/core/modules/Planet.cpp:1008
 msgctxt "compass direction"
 msgid "NNW"
-msgstr ""
+msgstr "شمال الشمال الغربي"
 
 #: src/core/modules/LandscapeMgr.cpp:590
 msgid "Atmosphere"
@@ -4757,7 +4757,7 @@ msgstr "إطار في الثانية"
 
 #: src/gui/StelDialog.cpp:306
 msgid "Are you sure? This will delete your customized data."
-msgstr "أأنت متئكد؟ هذا سوف يحذف بياناتك المخصصة."
+msgstr "هل أنت متأكد؟ هذا سوف يحذف بياناتك المخصصة."
 
 #: src/gui/ViewDialog.cpp:543
 msgid "Loading ..."
@@ -7373,7 +7373,7 @@ msgstr "نجوم متغيرة مهمة"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:454
 msgid "Al-Sufi"
-msgstr ""
+msgstr "الصوفي"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:456
