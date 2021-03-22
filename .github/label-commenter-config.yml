@@ -36,6 +36,10 @@ labels:
     labeled:
       issue:
         body: Thank you @{{ issue.user.login }} for suggesting this.
+  - name: confirmed
+    labeled:
+      issue:
+        body: OK, developers can reproduce the issue. Thank you @{{ issue.user.login }} for the report!
   - name: won't fix
     labeled:
       issue:
