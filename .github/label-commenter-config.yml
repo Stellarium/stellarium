@@ -2,7 +2,7 @@ labels:
   - name: invalid
     labeled:
       issue:
-        body: Please follow the issue templates.
+        body: This is not a bug or at least we just don't understand your problem. Please follow the issue templates.
         action: close
       pr:
         body: Thank you @{{ pull_request.user.login }} for suggesting this. Please follow the pull request templates.
