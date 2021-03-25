@@ -66,10 +66,8 @@ void CalendarsInfoPanel::updatePosition()
 		yPos=static_cast<qreal>(FLT_MAX);
 	}
 	qreal xPosCand = parentWidget->size().width() -  boundingRect().width();
-	xPos=qMin(xPos, xPosCand);
 	qreal yPosCand = parentWidget->size().height() - boundingRect().height() - bottomBoundingHeight;
-	yPos=qMin(yPos, yPosCand);
-	setPos(xPos, yPos);
+	setPos(qMin(xPos, xPosCand), qMin(yPos, yPosCand));
 }
 
 
