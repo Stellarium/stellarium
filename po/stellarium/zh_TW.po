@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-03-17 10:50+0700\n"
+"POT-Creation-Date: 2021-03-25 19:44+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: freemanli <freeman.tam@gmail.com>, 2021\n"
 "Language-Team: Chinese (Taiwan) (https://www.transifex.com/stellarium/teams/80998/zh_TW/)\n"
@@ -60,14 +60,14 @@ msgstr "星群"
 #: src/core/modules/ConstellationMgr.cpp:133 src/core/modules/StarMgr.cpp:467
 #: src/core/modules/GridLinesMgr.cpp:1809
 #: src/core/modules/SpecialMarkersMgr.cpp:263
-#: src/core/modules/LandscapeMgr.cpp:589
+#: src/core/modules/LandscapeMgr.cpp:594
 #: src/core/modules/NomenclatureMgr.cpp:77 src/core/modules/NebulaMgr.cpp:474
 #: src/core/modules/NebulaMgr.cpp:475 src/core/modules/SolarSystem.cpp:295
 #: src/core/modules/MilkyWay.cpp:79 src/core/modules/ZodiacalLight.cpp:87
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:151
 #: src/core/StelApp.cpp:617 src/core/StelCore.cpp:257
 #: src/core/StelObjectMgr.cpp:54 src/core/StelSkyLayerMgr.cpp:85
-#: src/core/StelSkyLayerMgr.cpp:86 src/StelMainView.cpp:822
+#: src/core/StelSkyLayerMgr.cpp:86 src/StelMainView.cpp:825
 msgid "Display Options"
 msgstr "顯示選項"
 
@@ -194,7 +194,7 @@ msgstr "卯酉圈"
 #: src/gui/AstroCalcDialog.cpp:3276 src/gui/AstroCalcDialog.cpp:3555
 #: src/gui/AstroCalcDialog.cpp:3557 src/ui_viewDialog.h:3394
 #: plugins/Satellites/src/Satellite.cpp:328
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1357
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1355
 msgid "Altitude"
 msgstr "高度角"
 
@@ -309,7 +309,7 @@ msgstr "背點"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/GridLinesMgr.cpp:1449 src/core/modules/Planet.cpp:598
-#: src/core/modules/Planet.cpp:892 src/gui/AstroCalcDialog.cpp:6169
+#: src/core/modules/Planet.cpp:892 src/gui/AstroCalcDialog.cpp:6166
 #: plugins/Satellites/src/Satellite.cpp:326
 #: plugins/Satellites/src/Satellite.cpp:388
 #: plugins/MeteorShowers/src/MeteorShower.cpp:546
@@ -501,144 +501,144 @@ msgid "Compass marks"
 msgstr "羅盤刻度"
 
 #. TRANSLATORS: North
-#: src/core/modules/LandscapeMgr.cpp:240 src/core/modules/Planet.cpp:1009
+#: src/core/modules/LandscapeMgr.cpp:245 src/core/modules/Planet.cpp:1009
 msgctxt "compass direction"
 msgid "N"
 msgstr "北"
 
 #. TRANSLATORS: South
-#: src/core/modules/LandscapeMgr.cpp:242 src/core/modules/Planet.cpp:1001
+#: src/core/modules/LandscapeMgr.cpp:247 src/core/modules/Planet.cpp:1001
 msgctxt "compass direction"
 msgid "S"
 msgstr "南"
 
 #. TRANSLATORS: East
-#: src/core/modules/LandscapeMgr.cpp:244 src/core/modules/Planet.cpp:1013
+#: src/core/modules/LandscapeMgr.cpp:249 src/core/modules/Planet.cpp:1013
 msgctxt "compass direction"
 msgid "E"
 msgstr "東"
 
 #. TRANSLATORS: West
-#: src/core/modules/LandscapeMgr.cpp:246 src/core/modules/Planet.cpp:1005
+#: src/core/modules/LandscapeMgr.cpp:251 src/core/modules/Planet.cpp:1005
 msgctxt "compass direction"
 msgid "W"
 msgstr "西"
 
 #. TRANSLATORS: Northeast
-#: src/core/modules/LandscapeMgr.cpp:248 src/core/modules/Planet.cpp:1011
+#: src/core/modules/LandscapeMgr.cpp:253 src/core/modules/Planet.cpp:1011
 msgctxt "compass direction"
 msgid "NE"
 msgstr "東北"
 
 #. TRANSLATORS: Southeast
-#: src/core/modules/LandscapeMgr.cpp:250 src/core/modules/Planet.cpp:1015
+#: src/core/modules/LandscapeMgr.cpp:255 src/core/modules/Planet.cpp:1015
 msgctxt "compass direction"
 msgid "SE"
 msgstr "東南"
 
 #. TRANSLATORS: Southwest
-#: src/core/modules/LandscapeMgr.cpp:252 src/core/modules/Planet.cpp:1003
+#: src/core/modules/LandscapeMgr.cpp:257 src/core/modules/Planet.cpp:1003
 msgctxt "compass direction"
 msgid "SW"
 msgstr "西南"
 
 #. TRANSLATORS: Northwest
-#: src/core/modules/LandscapeMgr.cpp:254 src/core/modules/Planet.cpp:1007
+#: src/core/modules/LandscapeMgr.cpp:259 src/core/modules/Planet.cpp:1007
 msgctxt "compass direction"
 msgid "NW"
 msgstr "西北"
 
 #. TRANSLATORS: North-northeast
-#: src/core/modules/LandscapeMgr.cpp:256 src/core/modules/Planet.cpp:1010
+#: src/core/modules/LandscapeMgr.cpp:261 src/core/modules/Planet.cpp:1010
 msgctxt "compass direction"
 msgid "NNE"
 msgstr "北北東"
 
 #. TRANSLATORS: East-northeast
-#: src/core/modules/LandscapeMgr.cpp:258 src/core/modules/Planet.cpp:1012
+#: src/core/modules/LandscapeMgr.cpp:263 src/core/modules/Planet.cpp:1012
 msgctxt "compass direction"
 msgid "ENE"
 msgstr "東北東"
 
 #. TRANSLATORS: East-southeast
-#: src/core/modules/LandscapeMgr.cpp:260 src/core/modules/Planet.cpp:1014
+#: src/core/modules/LandscapeMgr.cpp:265 src/core/modules/Planet.cpp:1014
 msgctxt "compass direction"
 msgid "ESE"
 msgstr "東南東"
 
 #. TRANSLATORS: South-southeast
-#: src/core/modules/LandscapeMgr.cpp:262 src/core/modules/Planet.cpp:1016
+#: src/core/modules/LandscapeMgr.cpp:267 src/core/modules/Planet.cpp:1016
 msgctxt "compass direction"
 msgid "SSE"
 msgstr "南南東"
 
 #. TRANSLATORS: South-southwest
-#: src/core/modules/LandscapeMgr.cpp:264 src/core/modules/Planet.cpp:1002
+#: src/core/modules/LandscapeMgr.cpp:269 src/core/modules/Planet.cpp:1002
 msgctxt "compass direction"
 msgid "SSW"
 msgstr "南南西"
 
 #. TRANSLATORS: West-southwest
-#: src/core/modules/LandscapeMgr.cpp:266 src/core/modules/Planet.cpp:1004
+#: src/core/modules/LandscapeMgr.cpp:271 src/core/modules/Planet.cpp:1004
 msgctxt "compass direction"
 msgid "WSW"
 msgstr "西南西"
 
 #. TRANSLATORS: West-northwest
-#: src/core/modules/LandscapeMgr.cpp:268 src/core/modules/Planet.cpp:1006
+#: src/core/modules/LandscapeMgr.cpp:273 src/core/modules/Planet.cpp:1006
 msgctxt "compass direction"
 msgid "WNW"
 msgstr "西北西"
 
 #. TRANSLATORS: North-northwest
-#: src/core/modules/LandscapeMgr.cpp:270 src/core/modules/Planet.cpp:1008
+#: src/core/modules/LandscapeMgr.cpp:275 src/core/modules/Planet.cpp:1008
 msgctxt "compass direction"
 msgid "NNW"
 msgstr "北北西"
 
-#: src/core/modules/LandscapeMgr.cpp:590
+#: src/core/modules/LandscapeMgr.cpp:595
 msgid "Atmosphere"
 msgstr "大氣層"
 
-#: src/core/modules/LandscapeMgr.cpp:591
+#: src/core/modules/LandscapeMgr.cpp:596
 msgid "Fog"
 msgstr "霧氣"
 
-#: src/core/modules/LandscapeMgr.cpp:592 src/ui_viewDialog.h:3773
+#: src/core/modules/LandscapeMgr.cpp:597 src/ui_viewDialog.h:3773
 #: src/ui_configurationDialog.h:1791
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:314
 msgid "Cardinal points"
 msgstr "方位點"
 
-#: src/core/modules/LandscapeMgr.cpp:593
+#: src/core/modules/LandscapeMgr.cpp:598
 msgid "Ground"
 msgstr "地面"
 
-#: src/core/modules/LandscapeMgr.cpp:594
+#: src/core/modules/LandscapeMgr.cpp:599
 msgid "Landscape illumination"
 msgstr "地景亮度"
 
-#: src/core/modules/LandscapeMgr.cpp:595
+#: src/core/modules/LandscapeMgr.cpp:600
 msgid "Landscape labels"
 msgstr "地景標籤"
 
-#: src/core/modules/LandscapeMgr.cpp:596
+#: src/core/modules/LandscapeMgr.cpp:601
 msgid "Light pollution data from locations database"
 msgstr "取自位置資料庫的光污染數據"
 
-#: src/core/modules/LandscapeMgr.cpp:598
+#: src/core/modules/LandscapeMgr.cpp:603
 msgid "Increase light pollution"
 msgstr "加強光污染"
 
-#: src/core/modules/LandscapeMgr.cpp:599
+#: src/core/modules/LandscapeMgr.cpp:604
 msgid "Reduce light pollution"
 msgstr "降低光污染"
 
-#: src/core/modules/LandscapeMgr.cpp:600
+#: src/core/modules/LandscapeMgr.cpp:605
 msgid "Cyclic change in light pollution"
 msgstr "循環改變光污染數值"
 
-#: src/core/modules/LandscapeMgr.cpp:1006 src/scripting/StelScriptMgr.cpp:457
+#: src/core/modules/LandscapeMgr.cpp:1011 src/scripting/StelScriptMgr.cpp:457
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
 #: plugins/Oculars/src/gui/OcularDialog.cpp:593
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
@@ -658,38 +658,38 @@ msgid "Author"
 msgstr "作者"
 
 #. TRANSLATORS: Unit of measure for distance - meter
-#: src/core/modules/LandscapeMgr.cpp:1012 src/gui/StelGuiItems.cpp:775
+#: src/core/modules/LandscapeMgr.cpp:1017 src/gui/StelGuiItems.cpp:775
 #: plugins/Satellites/src/Satellite.cpp:418
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1030
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1028
 msgctxt "distance"
 msgid "m"
 msgstr "公尺"
 
-#: src/core/modules/LandscapeMgr.cpp:1015 src/ui_locationDialogGui.h:481
+#: src/core/modules/LandscapeMgr.cpp:1020 src/ui_locationDialogGui.h:481
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:489
 msgid "Location"
 msgstr "位置"
 
 #. TRANSLATORS: Unit of measure for pressure - hectopascals
-#: src/core/modules/LandscapeMgr.cpp:1036
+#: src/core/modules/LandscapeMgr.cpp:1041
 msgctxt "pressure"
 msgid "hPa"
 msgstr "百帕"
 
-#: src/core/modules/LandscapeMgr.cpp:1046
+#: src/core/modules/LandscapeMgr.cpp:1051
 msgid "extinction coefficient"
 msgstr "消光係數"
 
-#: src/core/modules/LandscapeMgr.cpp:1049
+#: src/core/modules/LandscapeMgr.cpp:1054
 msgid "Atmospheric conditions"
 msgstr "大氣條件"
 
-#: src/core/modules/LandscapeMgr.cpp:1053
+#: src/core/modules/LandscapeMgr.cpp:1058
 msgid "Light pollution"
 msgstr "光污染"
 
-#: src/core/modules/LandscapeMgr.cpp:1053
+#: src/core/modules/LandscapeMgr.cpp:1058
 msgid "by Bortle scale"
 msgstr "依據 Bortle 暗空分類法"
 
@@ -739,7 +739,7 @@ msgstr "直徑"
 #: src/core/modules/NomenclatureItem.cpp:220 src/core/modules/Planet.cpp:554
 #: src/core/modules/Planet.cpp:579 src/core/modules/Planet.cpp:677
 #: src/core/modules/Comet.cpp:164 src/core/modules/Comet.cpp:174
-#: src/gui/StelGuiItems.cpp:805 src/gui/AstroCalcDialog.cpp:6098
+#: src/gui/StelGuiItems.cpp:805 src/gui/AstroCalcDialog.cpp:6095
 #: plugins/Satellites/src/Satellite.cpp:322
 #: plugins/Satellites/src/Satellite.cpp:381
 msgctxt "distance"
@@ -1979,7 +1979,7 @@ msgid "object of unknown nature"
 msgstr "未知天體"
 
 #: src/core/modules/NebulaMgr.cpp:474 src/gui/AstroCalcDialog.cpp:952
-#: src/gui/AstroCalcDialog.cpp:5151
+#: src/gui/AstroCalcDialog.cpp:5148
 msgid "Deep-sky objects"
 msgstr "深空天體"
 
@@ -1988,7 +1988,7 @@ msgid "Toggle DSO type filter"
 msgstr "切換深空天體類型篩選器"
 
 #: src/core/modules/NebulaMgr.cpp:1377 src/gui/StelDialog.cpp:306
-#: src/StelMainView.cpp:952
+#: src/StelMainView.cpp:954
 msgid "Attention!"
 msgstr "注意！"
 
@@ -2048,8 +2048,8 @@ msgstr "朝向"
 #: src/core/modules/Planet.cpp:552 src/gui/AstroCalcDialog.cpp:870
 #: src/gui/AstroCalcDialog.cpp:1140 src/gui/AstroCalcDialog.cpp:1513
 #: src/gui/AstroCalcDialog.cpp:1561 src/gui/AstroCalcDialog.cpp:3081
-#: src/gui/AstroCalcDialog.cpp:6142 src/gui/AstroCalcDialog.cpp:6207
-#: src/gui/AstroCalcDialog.cpp:6349 plugins/Exoplanets/src/Exoplanet.cpp:322
+#: src/gui/AstroCalcDialog.cpp:6139 src/gui/AstroCalcDialog.cpp:6204
+#: src/gui/AstroCalcDialog.cpp:6346 plugins/Exoplanets/src/Exoplanet.cpp:322
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
 msgctxt "distance, astronomical unit"
 msgid "AU"
@@ -2059,7 +2059,7 @@ msgstr "天文單位 (AU)"
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #. TRANSLATORS: Unit of measure for distance - millions kilometers
 #: src/core/modules/Planet.cpp:568 src/core/modules/Planet.cpp:586
-#: src/core/modules/Comet.cpp:166 src/gui/AstroCalcDialog.cpp:6100
+#: src/core/modules/Comet.cpp:166 src/gui/AstroCalcDialog.cpp:6097
 msgctxt "distance"
 msgid "M km"
 msgstr "百萬公里"
@@ -2113,14 +2113,14 @@ msgstr "相位角"
 msgid "Illuminated"
 msgstr "被照明的"
 
-#: src/core/modules/Planet.cpp:738 src/gui/AstroCalcDialog.cpp:6208
-#: src/gui/AstroCalcDialog.cpp:6352 src/gui/AstroCalcDialog.cpp:6369
+#: src/core/modules/Planet.cpp:738 src/gui/AstroCalcDialog.cpp:6205
+#: src/gui/AstroCalcDialog.cpp:6349 src/gui/AstroCalcDialog.cpp:6366
 msgid "Angular distance"
 msgstr "角距離"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:756 src/core/modules/Planet.cpp:900
-#: src/core/modules/StarWrapper.cpp:306 src/gui/AstroCalcDialog.cpp:6180
+#: src/core/modules/StarWrapper.cpp:306 src/gui/AstroCalcDialog.cpp:6177
 msgctxt "duration"
 msgid "days"
 msgstr "天"
@@ -2303,7 +2303,7 @@ msgstr "正射"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/modules/SolarSystem.cpp:296 src/gui/AstroCalcDialog.cpp:2455
-#: src/gui/AstroCalcDialog.cpp:5106 src/translations.h:63
+#: src/gui/AstroCalcDialog.cpp:5103 src/translations.h:63
 msgid "Planets"
 msgstr "行星"
 
@@ -3362,17 +3362,17 @@ msgstr "視恆星時"
 
 #. TRANSLATORS: time of transit
 #: src/core/StelObject.cpp:612 src/gui/AstroCalcDialog.cpp:883
-#: src/gui/AstroCalcDialog.cpp:5218
+#: src/gui/AstroCalcDialog.cpp:5215
 msgctxt "celestial event; passage across a meridian"
 msgid "Transit"
 msgstr "中天"
 
-#: src/core/StelObject.cpp:613 src/gui/AstroCalcDialog.cpp:5217
+#: src/core/StelObject.cpp:613 src/gui/AstroCalcDialog.cpp:5214
 msgctxt "celestial event"
 msgid "Rise"
 msgstr "出"
 
-#: src/core/StelObject.cpp:614 src/gui/AstroCalcDialog.cpp:5221
+#: src/core/StelObject.cpp:614 src/gui/AstroCalcDialog.cpp:5218
 msgctxt "celestial event"
 msgid "Set"
 msgstr "沒"
@@ -3545,7 +3545,7 @@ msgid "References"
 msgstr "參考資料"
 
 #: src/core/StelMovementMgr.cpp:224 src/gui/StelGui.cpp:230
-#: src/StelMainView.cpp:820 src/StelMainView.cpp:821
+#: src/StelMainView.cpp:823 src/StelMainView.cpp:824
 msgid "Miscellaneous"
 msgstr "其他"
 
@@ -5159,7 +5159,7 @@ msgstr "赤緯"
 #: src/gui/SearchDialog.cpp:307 src/gui/AstroCalcDialog.cpp:609
 #: src/gui/AstroCalcDialog.cpp:795 src/gui/AstroCalcDialog.cpp:797
 #: src/gui/AstroCalcDialog.cpp:834 src/gui/AstroCalcDialog.cpp:1497
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1358
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1356
 msgid "Azimuth"
 msgstr "方位角"
 
@@ -5269,7 +5269,7 @@ msgid "Local Time"
 msgstr "地方時"
 
 #: src/gui/AstroCalcDialog.cpp:752 src/gui/AstroCalcDialog.cpp:2676
-#: src/gui/AstroCalcDialog.cpp:3426 src/gui/AstroCalcDialog.cpp:6480
+#: src/gui/AstroCalcDialog.cpp:3426 src/gui/AstroCalcDialog.cpp:6477
 #: src/gui/BookmarksDialog.cpp:180
 msgid "Unnamed star"
 msgstr "未具名恆星"
@@ -5281,7 +5281,7 @@ msgstr "此刻約為 %1"
 
 #. TRANSLATORS: name of object
 #: src/gui/AstroCalcDialog.cpp:830 src/gui/AstroCalcDialog.cpp:1492
-#: src/gui/AstroCalcDialog.cpp:1881 src/gui/AstroCalcDialog.cpp:5206
+#: src/gui/AstroCalcDialog.cpp:1881 src/gui/AstroCalcDialog.cpp:5203
 #: src/ui_configurationDialog.h:1739
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:532
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
@@ -5301,13 +5301,13 @@ msgid "Dec (J2000)"
 msgstr "赤緯 (J2000)"
 
 #. TRANSLATORS: opacity
-#: src/gui/AstroCalcDialog.cpp:848 src/gui/AstroCalcDialog.cpp:5215
+#: src/gui/AstroCalcDialog.cpp:848 src/gui/AstroCalcDialog.cpp:5212
 msgid "Opac."
 msgstr "不透明度"
 
 #. TRANSLATORS: magnitude
 #: src/gui/AstroCalcDialog.cpp:853 src/gui/AstroCalcDialog.cpp:1509
-#: src/gui/AstroCalcDialog.cpp:1886 src/gui/AstroCalcDialog.cpp:5210
+#: src/gui/AstroCalcDialog.cpp:1886 src/gui/AstroCalcDialog.cpp:5207
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
 msgid "Mag."
 msgstr "星等"
@@ -5319,7 +5319,7 @@ msgstr "角度大小"
 
 #. TRANSLATORS: separation, arc-seconds
 #. TRANSLATORS: separation
-#: src/gui/AstroCalcDialog.cpp:860 src/gui/AstroCalcDialog.cpp:5225
+#: src/gui/AstroCalcDialog.cpp:860 src/gui/AstroCalcDialog.cpp:5222
 msgid "Sep."
 msgstr "間距"
 
@@ -5354,7 +5354,7 @@ msgid "S.B."
 msgstr "表面亮度"
 
 #. TRANSLATORS: elevation
-#: src/gui/AstroCalcDialog.cpp:885 src/gui/AstroCalcDialog.cpp:5220
+#: src/gui/AstroCalcDialog.cpp:885 src/gui/AstroCalcDialog.cpp:5217
 msgid "Elev."
 msgstr "高度"
 
@@ -5413,16 +5413,16 @@ msgid "star with high proper motion"
 msgstr "具有高自行的恆星"
 
 #: src/gui/AstroCalcDialog.cpp:1355 src/gui/AstroCalcDialog.cpp:1803
-#: src/gui/AstroCalcDialog.cpp:2069 src/gui/AstroCalcDialog.cpp:3889
-#: src/gui/AstroCalcDialog.cpp:5982
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1433
+#: src/gui/AstroCalcDialog.cpp:2069 src/gui/AstroCalcDialog.cpp:3892
+#: src/gui/AstroCalcDialog.cpp:5979
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1431
 msgid "Microsoft Excel Open XML Spreadsheet"
 msgstr "微軟 Excel 電子試算表 Open XML 格式"
 
 #: src/gui/AstroCalcDialog.cpp:1357 src/gui/AstroCalcDialog.cpp:1805
-#: src/gui/AstroCalcDialog.cpp:2071 src/gui/AstroCalcDialog.cpp:3891
-#: src/gui/AstroCalcDialog.cpp:5984
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1435
+#: src/gui/AstroCalcDialog.cpp:2071 src/gui/AstroCalcDialog.cpp:3894
+#: src/gui/AstroCalcDialog.cpp:5981
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1433
 msgid "CSV (Comma delimited)"
 msgstr "CSV(逗號分隔)"
 
@@ -5629,51 +5629,51 @@ msgid "Solar system"
 msgstr "太陽系"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2455 src/gui/AstroCalcDialog.cpp:5112
+#: src/gui/AstroCalcDialog.cpp:2455 src/gui/AstroCalcDialog.cpp:5109
 #: src/translations.h:67
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
 msgid "Asteroids"
 msgstr "小行星"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2455 src/gui/AstroCalcDialog.cpp:5114
+#: src/gui/AstroCalcDialog.cpp:2455 src/gui/AstroCalcDialog.cpp:5111
 #: src/translations.h:71
 msgid "Plutinos"
 msgstr "類冥小天體"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2455 src/gui/AstroCalcDialog.cpp:5113
+#: src/gui/AstroCalcDialog.cpp:2455 src/gui/AstroCalcDialog.cpp:5110
 #: src/translations.h:65
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Comets"
 msgstr "彗星"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2456 src/gui/AstroCalcDialog.cpp:5115
+#: src/gui/AstroCalcDialog.cpp:2456 src/gui/AstroCalcDialog.cpp:5112
 #: src/translations.h:73
 msgid "Dwarf planets"
 msgstr "矮行星"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2456 src/gui/AstroCalcDialog.cpp:5116
+#: src/gui/AstroCalcDialog.cpp:2456 src/gui/AstroCalcDialog.cpp:5113
 #: src/translations.h:75
 msgid "Cubewanos"
 msgstr "傳統古柏(Kuiper)帶天體"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2456 src/gui/AstroCalcDialog.cpp:5117
+#: src/gui/AstroCalcDialog.cpp:2456 src/gui/AstroCalcDialog.cpp:5114
 #: src/translations.h:77
 msgid "Scattered disc objects"
 msgstr "黃道離散天體"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2456 src/gui/AstroCalcDialog.cpp:5118
+#: src/gui/AstroCalcDialog.cpp:2456 src/gui/AstroCalcDialog.cpp:5115
 #: src/translations.h:79
 msgid "Oort cloud objects"
 msgstr "歐特(Oort)雲天體"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2456 src/gui/AstroCalcDialog.cpp:5119
+#: src/gui/AstroCalcDialog.cpp:2456 src/gui/AstroCalcDialog.cpp:5116
 #: src/translations.h:81
 msgid "Sednoids"
 msgstr "類塞德娜(Sedna)天體"
@@ -5709,7 +5709,7 @@ msgid "Bright nebulae (<%1 mag)"
 msgstr "明亮星雲 (<%1 星等)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2459 src/gui/AstroCalcDialog.cpp:5109
+#: src/gui/AstroCalcDialog.cpp:2459 src/gui/AstroCalcDialog.cpp:5106
 #: src/translations.h:318 src/ui_viewDialog.h:3345
 #: src/ui_dsoColorsDialog.h:659
 msgid "Dark nebulae"
@@ -5721,19 +5721,19 @@ msgid "Bright galaxies (<%1 mag)"
 msgstr "亮星系(<%1 星等)"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2460 src/gui/AstroCalcDialog.cpp:5124
+#: src/gui/AstroCalcDialog.cpp:2460 src/gui/AstroCalcDialog.cpp:5121
 #: src/translations.h:368 src/ui_dsoColorsDialog.h:695
 msgid "Symbiotic stars"
 msgstr "共生星"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2460 src/gui/AstroCalcDialog.cpp:5125
+#: src/gui/AstroCalcDialog.cpp:2460 src/gui/AstroCalcDialog.cpp:5122
 #: src/translations.h:370 src/ui_dsoColorsDialog.h:674
 msgid "Emission-line stars"
 msgstr "發射(譜)線星"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2460 src/gui/AstroCalcDialog.cpp:5130
+#: src/gui/AstroCalcDialog.cpp:2460 src/gui/AstroCalcDialog.cpp:5127
 #: src/translations.h:83
 msgid "Interstellar objects"
 msgstr "星際物質"
@@ -5887,321 +5887,321 @@ msgstr "2 星等"
 msgid "Elevation"
 msgstr "高度"
 
-#: src/gui/AstroCalcDialog.cpp:3612 src/gui/AstroCalcDialog.cpp:4011
-#: src/gui/AstroCalcDialog.cpp:4262
+#: src/gui/AstroCalcDialog.cpp:3612 src/gui/AstroCalcDialog.cpp:4014
+#: src/gui/AstroCalcDialog.cpp:4265
 msgid "Opposition"
 msgstr "衝"
 
-#: src/gui/AstroCalcDialog.cpp:3895
+#: src/gui/AstroCalcDialog.cpp:3898
 msgid "Save calculated phenomena as..."
 msgstr "將計算的天象另存為..."
 
-#: src/gui/AstroCalcDialog.cpp:3913 src/gui/AstroCalcDialog.cpp:3915
+#: src/gui/AstroCalcDialog.cpp:3916 src/gui/AstroCalcDialog.cpp:3918
 #: src/ui_astroCalcDialog.h:1627
 msgid "Phenomena"
 msgstr "現象"
 
-#: src/gui/AstroCalcDialog.cpp:3970
+#: src/gui/AstroCalcDialog.cpp:3973
 msgid "Magnitude of first object"
 msgstr "第一個天體的星等"
 
-#: src/gui/AstroCalcDialog.cpp:3973
+#: src/gui/AstroCalcDialog.cpp:3976
 msgid "Magnitude of second object"
 msgstr "第二個天體的星等"
 
-#: src/gui/AstroCalcDialog.cpp:3979
+#: src/gui/AstroCalcDialog.cpp:3982
 msgid "Elevation of first object at moment of phenomena"
 msgstr "第一個天體在現象發生時刻的高度"
 
-#: src/gui/AstroCalcDialog.cpp:3981 src/gui/AstroCalcDialog.cpp:4120
+#: src/gui/AstroCalcDialog.cpp:3984 src/gui/AstroCalcDialog.cpp:4123
 msgid "Angular distance from the Sun"
 msgstr "與太陽的角距離"
 
-#: src/gui/AstroCalcDialog.cpp:3984 src/gui/AstroCalcDialog.cpp:4121
+#: src/gui/AstroCalcDialog.cpp:3987 src/gui/AstroCalcDialog.cpp:4124
 msgid "Angular distance from the Moon"
 msgstr "與月球的角距離"
 
-#: src/gui/AstroCalcDialog.cpp:4002 src/gui/AstroCalcDialog.cpp:4173
-#: src/gui/AstroCalcDialog.cpp:4253
+#: src/gui/AstroCalcDialog.cpp:4005 src/gui/AstroCalcDialog.cpp:4176
+#: src/gui/AstroCalcDialog.cpp:4256
 msgid "Conjunction"
 msgstr "合"
 
-#: src/gui/AstroCalcDialog.cpp:4014 src/gui/AstroCalcDialog.cpp:4060
-#: src/gui/AstroCalcDialog.cpp:4066 src/gui/AstroCalcDialog.cpp:4265
-#: src/gui/AstroCalcDialog.cpp:4281 src/gui/AstroCalcDialog.cpp:4287
+#: src/gui/AstroCalcDialog.cpp:4017 src/gui/AstroCalcDialog.cpp:4063
+#: src/gui/AstroCalcDialog.cpp:4069 src/gui/AstroCalcDialog.cpp:4268
+#: src/gui/AstroCalcDialog.cpp:4284 src/gui/AstroCalcDialog.cpp:4290
 msgid "Eclipse"
 msgstr "食"
 
-#: src/gui/AstroCalcDialog.cpp:4023
+#: src/gui/AstroCalcDialog.cpp:4026
 msgid "Greatest eastern elongation"
 msgstr "東大距"
 
-#: src/gui/AstroCalcDialog.cpp:4026
+#: src/gui/AstroCalcDialog.cpp:4029
 msgid "Greatest western elongation"
 msgstr "西大距"
 
 #. TRANSLATORS: The planet are stand still in the equatorial coordinates
-#: src/gui/AstroCalcDialog.cpp:4033
+#: src/gui/AstroCalcDialog.cpp:4036
 msgid "Stationary (begin retrograde motion)"
 msgstr "留(開始逆行)"
 
 #. TRANSLATORS: The planet are stand still in the equatorial coordinates
-#: src/gui/AstroCalcDialog.cpp:4038
+#: src/gui/AstroCalcDialog.cpp:4041
 msgid "Stationary (begin prograde motion)"
 msgstr "留(開始順行)"
 
-#: src/gui/AstroCalcDialog.cpp:4044
+#: src/gui/AstroCalcDialog.cpp:4047
 msgid "Perihelion"
 msgstr "近日點"
 
-#: src/gui/AstroCalcDialog.cpp:4046
+#: src/gui/AstroCalcDialog.cpp:4049
 msgid "Aphelion"
 msgstr "遠日點"
 
-#: src/gui/AstroCalcDialog.cpp:4053 src/gui/AstroCalcDialog.cpp:4274
+#: src/gui/AstroCalcDialog.cpp:4056 src/gui/AstroCalcDialog.cpp:4277
 msgctxt "passage of the celestial body"
 msgid "Transit"
 msgstr "凌"
 
-#: src/gui/AstroCalcDialog.cpp:4056 src/gui/AstroCalcDialog.cpp:4178
-#: src/gui/AstroCalcDialog.cpp:4277
+#: src/gui/AstroCalcDialog.cpp:4059 src/gui/AstroCalcDialog.cpp:4181
+#: src/gui/AstroCalcDialog.cpp:4280
 msgid "Occultation"
 msgstr "掩星"
 
-#: src/gui/AstroCalcDialog.cpp:4079 src/gui/AstroCalcDialog.cpp:4081
-#: src/gui/AstroCalcDialog.cpp:4300 src/gui/AstroCalcDialog.cpp:4302
+#: src/gui/AstroCalcDialog.cpp:4082 src/gui/AstroCalcDialog.cpp:4084
+#: src/gui/AstroCalcDialog.cpp:4303 src/gui/AstroCalcDialog.cpp:4305
 msgid "Superior conjunction"
 msgstr "上合"
 
-#: src/gui/AstroCalcDialog.cpp:4079 src/gui/AstroCalcDialog.cpp:4081
-#: src/gui/AstroCalcDialog.cpp:4300 src/gui/AstroCalcDialog.cpp:4302
+#: src/gui/AstroCalcDialog.cpp:4082 src/gui/AstroCalcDialog.cpp:4084
+#: src/gui/AstroCalcDialog.cpp:4303 src/gui/AstroCalcDialog.cpp:4305
 msgid "Inferior conjunction"
 msgstr "下合"
 
-#: src/gui/AstroCalcDialog.cpp:4124
+#: src/gui/AstroCalcDialog.cpp:4127
 msgid "Angular distance from the Sun for second object"
 msgstr "第二天體與太陽的角距離"
 
-#: src/gui/AstroCalcDialog.cpp:4125
+#: src/gui/AstroCalcDialog.cpp:4128
 msgid "Angular distance from the Moon for second object"
 msgstr "第二天體與月球的角距離"
 
-#: src/gui/AstroCalcDialog.cpp:5084
+#: src/gui/AstroCalcDialog.cpp:5081
 msgctxt "Celestial object is observed..."
 msgid "In the Evening"
 msgstr "在傍晚"
 
-#: src/gui/AstroCalcDialog.cpp:5085
+#: src/gui/AstroCalcDialog.cpp:5082
 msgctxt "Celestial object is observed..."
 msgid "In the Morning"
 msgstr "在早上"
 
-#: src/gui/AstroCalcDialog.cpp:5086
+#: src/gui/AstroCalcDialog.cpp:5083
 msgctxt "Celestial object is observed..."
 msgid "Around Midnight"
 msgstr "午夜左右"
 
-#: src/gui/AstroCalcDialog.cpp:5087
+#: src/gui/AstroCalcDialog.cpp:5084
 msgctxt "Celestial object is observed..."
 msgid "In Any Time of the Night"
 msgstr "夜晚的任何時刻"
 
-#: src/gui/AstroCalcDialog.cpp:5107
+#: src/gui/AstroCalcDialog.cpp:5104
 msgid "Bright stars"
 msgstr "亮星"
 
-#: src/gui/AstroCalcDialog.cpp:5108 src/ui_viewDialog.h:3344
+#: src/gui/AstroCalcDialog.cpp:5105 src/ui_viewDialog.h:3344
 msgid "Bright nebulae"
 msgstr "明亮星雲"
 
-#: src/gui/AstroCalcDialog.cpp:5110 src/ui_viewDialog.h:3348
+#: src/gui/AstroCalcDialog.cpp:5107 src/ui_viewDialog.h:3348
 #: src/ui_dsoColorsDialog.h:595
 msgid "Galaxies"
 msgstr "星系"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5111 src/translations.h:310
+#: src/gui/AstroCalcDialog.cpp:5108 src/translations.h:310
 #: src/ui_viewDialog.h:3351 src/ui_dsoColorsDialog.h:599
 msgid "Open star clusters"
 msgstr "疏散星團"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5120 src/translations.h:316
+#: src/gui/AstroCalcDialog.cpp:5117 src/translations.h:316
 #: src/ui_viewDialog.h:3343 src/ui_dsoColorsDialog.h:588
 msgid "Planetary nebulae"
 msgstr "行星狀星雲"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5121 src/translations.h:445
+#: src/gui/AstroCalcDialog.cpp:5118 src/translations.h:445
 msgid "Bright double stars"
 msgstr "明亮雙星"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5122 src/translations.h:447
+#: src/gui/AstroCalcDialog.cpp:5119 src/translations.h:447
 msgid "Bright variable stars"
 msgstr "明亮變星"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5123 src/translations.h:449
+#: src/gui/AstroCalcDialog.cpp:5120 src/translations.h:449
 msgid "Bright stars with high proper motion"
 msgstr "具有高自行的亮星"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5126 src/translations.h:346
+#: src/gui/AstroCalcDialog.cpp:5123 src/translations.h:346
 #: src/ui_dsoColorsDialog.h:640
 msgid "Supernova candidates"
 msgstr "超新星候選者"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5127 src/translations.h:348
+#: src/gui/AstroCalcDialog.cpp:5124 src/translations.h:348
 #: src/ui_dsoColorsDialog.h:681
 msgid "Supernova remnant candidates"
 msgstr "超新星殘骸候選者"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5128 src/translations.h:344
+#: src/gui/AstroCalcDialog.cpp:5125 src/translations.h:344
 #: src/ui_viewDialog.h:3350 src/ui_dsoColorsDialog.h:581
 msgid "Supernova remnants"
 msgstr "超新星殘骸"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5129 src/translations.h:372
+#: src/gui/AstroCalcDialog.cpp:5126 src/translations.h:372
 #: src/ui_viewDialog.h:3347 src/ui_dsoColorsDialog.h:694
 msgid "Clusters of galaxies"
 msgstr "星系團"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5131 src/translations.h:312
+#: src/gui/AstroCalcDialog.cpp:5128 src/translations.h:312
 #: src/ui_viewDialog.h:3353 src/ui_dsoColorsDialog.h:574
 msgid "Globular star clusters"
 msgstr "球狀星團"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5132 src/translations.h:374
+#: src/gui/AstroCalcDialog.cpp:5129 src/translations.h:374
 #: src/ui_dsoColorsDialog.h:710
 msgid "Regions of the sky"
 msgstr "天空的區域"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5133 src/translations.h:326
+#: src/gui/AstroCalcDialog.cpp:5130 src/translations.h:326
 #: src/ui_viewDialog.h:3342 src/ui_dsoColorsDialog.h:565
 msgid "Active galaxies"
 msgstr "活躍星系"
 
-#: src/gui/AstroCalcDialog.cpp:5138 plugins/Pulsars/src/Pulsars.cpp:72
+#: src/gui/AstroCalcDialog.cpp:5135 plugins/Pulsars/src/Pulsars.cpp:72
 #: plugins/Pulsars/src/Pulsars.cpp:170 plugins/Pulsars/src/Pulsars.cpp:171
 msgid "Pulsars"
 msgstr "脈衝星"
 
-#: src/gui/AstroCalcDialog.cpp:5144
+#: src/gui/AstroCalcDialog.cpp:5141
 msgid "Exoplanetary systems"
 msgstr "系外行星系統"
 
-#: src/gui/AstroCalcDialog.cpp:5147
+#: src/gui/AstroCalcDialog.cpp:5144
 msgid "Bright nova stars"
 msgstr "明亮新星"
 
-#: src/gui/AstroCalcDialog.cpp:5149
+#: src/gui/AstroCalcDialog.cpp:5146
 msgid "Bright supernova stars"
 msgstr "明亮超新星"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5150 src/translations.h:330
+#: src/gui/AstroCalcDialog.cpp:5147 src/translations.h:330
 #: src/ui_viewDialog.h:3349 src/ui_dsoColorsDialog.h:650
 msgid "Interacting galaxies"
 msgstr "交互作用星系"
 
-#: src/gui/AstroCalcDialog.cpp:5152
+#: src/gui/AstroCalcDialog.cpp:5149
 msgid "Messier objects"
 msgstr "梅西爾(Messier)天體"
 
-#: src/gui/AstroCalcDialog.cpp:5153
+#: src/gui/AstroCalcDialog.cpp:5150
 msgid "NGC/IC objects"
 msgstr "NGC/IC 天體"
 
-#: src/gui/AstroCalcDialog.cpp:5154
+#: src/gui/AstroCalcDialog.cpp:5151
 msgid "Caldwell objects"
 msgstr "Caldwell 天體"
 
-#: src/gui/AstroCalcDialog.cpp:5155
+#: src/gui/AstroCalcDialog.cpp:5152
 msgid "Herschel 400 objects"
 msgstr "Herschel 400 天體"
 
-#: src/gui/AstroCalcDialog.cpp:5156
+#: src/gui/AstroCalcDialog.cpp:5153
 msgid "Algol-type eclipsing systems"
 msgstr "大陵五型食變星系統"
 
-#: src/gui/AstroCalcDialog.cpp:5157
+#: src/gui/AstroCalcDialog.cpp:5154
 msgid "The classical cepheids"
 msgstr "典型造父變星"
 
 #. TRANSLATORS: angular size
-#: src/gui/AstroCalcDialog.cpp:5230
+#: src/gui/AstroCalcDialog.cpp:5227
 msgid "Ang. Size"
 msgstr "角度大小"
 
-#: src/gui/AstroCalcDialog.cpp:5344 src/ui_astroCalcDialog.h:1816
+#: src/gui/AstroCalcDialog.cpp:5341 src/ui_astroCalcDialog.h:1816
 msgid "Limit angular size:"
 msgstr "角度大小限制 : "
 
-#: src/gui/AstroCalcDialog.cpp:5345 src/ui_astroCalcDialog.h:1814
+#: src/gui/AstroCalcDialog.cpp:5342 src/ui_astroCalcDialog.h:1814
 msgid "Set limits for angular size for visible celestial objects"
 msgstr "設定可見天體的角度大小限制"
 
-#: src/gui/AstroCalcDialog.cpp:5346 src/ui_astroCalcDialog.h:1818
+#: src/gui/AstroCalcDialog.cpp:5343 src/ui_astroCalcDialog.h:1818
 msgid "Minimal angular size for visible celestial objects"
 msgstr "可見天體的最小角度"
 
-#: src/gui/AstroCalcDialog.cpp:5347 src/ui_astroCalcDialog.h:1821
+#: src/gui/AstroCalcDialog.cpp:5344 src/ui_astroCalcDialog.h:1821
 msgid "Maximum angular size for visible celestial objects"
 msgstr "可見天體的最大角度"
 
-#: src/gui/AstroCalcDialog.cpp:5635
+#: src/gui/AstroCalcDialog.cpp:5632
 msgid "Limit angular separation:"
 msgstr "角距限制:"
 
-#: src/gui/AstroCalcDialog.cpp:5636
+#: src/gui/AstroCalcDialog.cpp:5633
 msgid "Set limits for angular separation for visible double stars"
 msgstr "設定可見雙星的角距限制"
 
-#: src/gui/AstroCalcDialog.cpp:5637
+#: src/gui/AstroCalcDialog.cpp:5634
 msgid "Minimal angular separation for visible double stars"
 msgstr "可見雙星的最小角距"
 
-#: src/gui/AstroCalcDialog.cpp:5638
+#: src/gui/AstroCalcDialog.cpp:5635
 msgid "Maximum angular separation for visible double stars"
 msgstr "可見雙星的最大角距"
 
-#: src/gui/AstroCalcDialog.cpp:5986
+#: src/gui/AstroCalcDialog.cpp:5983
 msgid "JSON (Stellarium bookmarks)"
 msgstr "JSON (Stellarium 書籤)"
 
-#: src/gui/AstroCalcDialog.cpp:5990
+#: src/gui/AstroCalcDialog.cpp:5987
 msgid "Save list of objects as..."
 msgstr "儲存天體的列表為..."
 
-#: src/gui/AstroCalcDialog.cpp:6010 src/ui_astroCalcDialog.h:1633
+#: src/gui/AstroCalcDialog.cpp:6007 src/ui_astroCalcDialog.h:1633
 msgid "What's Up Tonight"
 msgstr "今晚有什麼"
 
-#: src/gui/AstroCalcDialog.cpp:6156
+#: src/gui/AstroCalcDialog.cpp:6153
 msgid "spin-orbit resonance"
 msgstr "自旋軌道共振"
 
-#: src/gui/AstroCalcDialog.cpp:6206 src/gui/AstroCalcDialog.cpp:6368
+#: src/gui/AstroCalcDialog.cpp:6203 src/gui/AstroCalcDialog.cpp:6365
 msgid "Days from today"
 msgstr "從今日開始的天數"
 
-#: src/gui/AstroCalcDialog.cpp:6207 src/gui/AstroCalcDialog.cpp:6349
+#: src/gui/AstroCalcDialog.cpp:6204 src/gui/AstroCalcDialog.cpp:6346
 msgid "Linear distance"
 msgstr "直線距離"
 
-#: src/gui/AstroCalcDialog.cpp:6349 src/gui/AstroCalcDialog.cpp:6352
+#: src/gui/AstroCalcDialog.cpp:6346 src/gui/AstroCalcDialog.cpp:6349
 #: plugins/Calendars/src/ui_calendarsDialog.h:832
 msgid "Day"
 msgstr "天"
 
-#: src/gui/AstroCalcDialog.cpp:6410
+#: src/gui/AstroCalcDialog.cpp:6407
 msgid "Change of angular distance between the Moon and selected object"
 msgstr "月球與選取天體的角距變化"
 
@@ -6295,11 +6295,11 @@ msgstr "匯入書籤"
 msgid "Export bookmarks as..."
 msgstr "匯出書籤為..."
 
-#: src/gui/DateTimeDialog.cpp:242 src/gui/DateTimeDialog.cpp:243
+#: src/gui/DateTimeDialog.cpp:239 src/gui/DateTimeDialog.cpp:240
 msgid "Date and Time in Julian calendar"
 msgstr "儒略曆的日期和時間"
 
-#: src/gui/DateTimeDialog.cpp:247 src/gui/DateTimeDialog.cpp:248
+#: src/gui/DateTimeDialog.cpp:244 src/gui/DateTimeDialog.cpp:245
 msgid "Date and Time in Gregorian calendar"
 msgstr "公曆(格里曆)的日期和時間"
 
@@ -6312,36 +6312,36 @@ msgstr "腳本(Scripts)"
 msgid "Shortcut"
 msgstr "快捷鍵"
 
-#: src/StelMainView.cpp:820
+#: src/StelMainView.cpp:823
 msgid "Save screenshot"
 msgstr "儲存螢幕擷取圖片"
 
-#: src/StelMainView.cpp:821
+#: src/StelMainView.cpp:824
 msgid "Reload shaders (for development)"
 msgstr "重新載入陰影(開發用)"
 
-#: src/StelMainView.cpp:822
+#: src/StelMainView.cpp:825
 msgid "Full-screen mode"
 msgstr "全螢幕模式"
 
-#: src/StelMainView.cpp:952
+#: src/StelMainView.cpp:954
 msgid ""
 "Shortcuts have conflicts! Please press F7 after program startup and check "
 "following multiple assignments"
 msgstr "鍵盤快速鍵有衝突！請在啟動程式後按下 F7 鍵來修正下列重複的快速鍵設定。"
 
-#: src/StelMainView.cpp:1031
+#: src/StelMainView.cpp:1033
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
 msgstr "OpenGL版本過低，請升級驅動程式或顯卡或使用 --angle-mode (或 --mesa-mode)模式的選項。"
 
-#: src/StelMainView.cpp:1034
+#: src/StelMainView.cpp:1036
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr "OpenGL版本過低，請升級驅動程式或顯卡。"
 
-#: src/StelMainView.cpp:1076
+#: src/StelMainView.cpp:1078
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -6349,7 +6349,7 @@ msgstr ""
 "您的 DirectX/OpenGL ES 子系統驅動有問題，詳見記錄檔\n"
 "是否以後總是忽略並廢止此通知並且繼續嘗試降級模式"
 
-#: src/StelMainView.cpp:1127
+#: src/StelMainView.cpp:1129
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -6357,7 +6357,7 @@ msgstr ""
 "您的 OpenGL/Mesa 子系統驅動有問題，詳見記錄檔\n"
 "是否以後總是忽略並廢止此通知並且繼續嘗試降級模式"
 
-#: src/StelMainView.cpp:1187
+#: src/StelMainView.cpp:1189
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -6365,7 +6365,7 @@ msgstr ""
 "您的 OpenGL 子系統驅動有問題，詳見記錄檔\n"
 "是否以後總是忽略並廢止此通知並且繼續嘗試降級模式"
 
-#: src/StelMainView.cpp:1228
+#: src/StelMainView.cpp:1230
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -6373,7 +6373,7 @@ msgstr ""
 "您的 OpenGL ES 子系統驅動有問題，詳見記錄檔\n"
 "是否以後總是忽略並廢止此通知並且繼續嘗試降級模式"
 
-#: src/StelMainView.cpp:1337
+#: src/StelMainView.cpp:1339
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -7294,7 +7294,7 @@ msgstr "有趣的變星"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:454
 msgid "Al-Sufi"
-msgstr ""
+msgstr "Al-Sufi"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:456
@@ -7942,7 +7942,7 @@ msgstr "2012年6月6日在澳洲雪梨(Sydney Australia)所見的金星凌日。
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Historical "
 "Supernovae plugin has to be enabled."
-msgstr ""
+msgstr "第谷 Tycho Brahe 在公元1572年所觀測到的超新星閃光，需先啟用歷史上的超新星外掛程式。"
 
 #: src/translations.h:705
 msgid ""
@@ -10231,7 +10231,7 @@ msgstr "顯示月球的光環"
 
 #: src/ui_viewDialog.h:3251
 msgid "Show Sun's glare"
-msgstr ""
+msgstr "顯示太陽光芒"
 
 #: src/ui_viewDialog.h:3252
 msgid "Display objects from catalogs"
@@ -10928,8 +10928,8 @@ msgid "Draw only polygon"
 msgstr "僅繪製多邊形線"
 
 #: src/ui_viewDialog.h:3821
-msgid "Set the planet and position as it specified in landscape.ini"
-msgstr "設定行星與位置，取自 landscape.ini 檔案的資料。"
+msgid "Set the planet and position as specified for the selected landscape"
+msgstr ""
 
 #: src/ui_viewDialog.h:3823
 msgid "Position from landscape"
@@ -11086,7 +11086,7 @@ msgid "Additional settings for Graphical User Interface"
 msgstr "圖形使用介面的額外設定"
 
 #: src/ui_configurationDialog.h:1617
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1355
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1353
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:488
 msgid "Time"
 msgstr "時間"
@@ -11847,8 +11847,9 @@ msgid "Keyboard Shortcuts"
 msgstr "鍵盤快速鍵"
 
 #: src/ui_shortcutsDialog.h:212
-msgid "Search action..."
-msgstr "搜尋中..."
+msgctxt "placeholder for input line"
+msgid "Search the action..."
+msgstr ""
 
 #: src/ui_shortcutsDialog.h:213
 msgid "Primary shortcut"
@@ -11907,11 +11908,11 @@ msgstr "極好的山頂環境使用約0.12的數值，良好的田園環境使�
 
 #: src/ui_atmosphereDialog.h:196
 msgid "Set the International Standard Atmosphere at the height 0 km MSL"
-msgstr ""
+msgstr "設定為平均海拔高度0公里的國際標準大氣"
 
 #: src/ui_atmosphereDialog.h:198
 msgid "Standard Atmosphere"
-msgstr ""
+msgstr "標準大氣"
 
 #: src/ui_greatRedSpotDialog.h:168
 msgid "Great Red Spot Details"
@@ -13221,8 +13222,8 @@ msgstr "旋轉歸位(&R)"
 #: plugins/Oculars/src/gui/OcularDialog.cpp:121
 #: plugins/Oculars/src/gui/OcularDialog.cpp:138
 #: plugins/Oculars/src/gui/OcularDialog.cpp:155
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:825
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:832
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:823
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:830
 msgid "Warning!"
 msgstr "警告！"
 
@@ -14956,19 +14957,19 @@ msgstr "更新了人造衛星 %1/%2 ；增加了 %3 ； 移除了 %4"
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
 msgstr "更新了人造衛星 %1/%2 ；增加了 %3 ；%4 的資料遺失"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:825
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:823
 msgid "Empty string - not saving"
 msgstr "空字串 - 未儲存"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:832
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:830
 msgid "Invalid URL - not saving"
 msgstr "不正確的 URL - 未儲存"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:899
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:897
 msgid "[new source]"
 msgstr "[新的資料源]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:967
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:965
 #: plugins/Satellites/src/ui_satellitesDialog.h:952
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:209
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
@@ -14984,7 +14985,7 @@ msgstr "[新的資料源]"
 msgid "Update now"
 msgstr "立即更新"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:969
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:967
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:211
 #: plugins/Novae/src/gui/NovaeDialog.cpp:207
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:205
@@ -14993,93 +14994,93 @@ msgstr "立即更新"
 msgid "Update from files"
 msgstr "從檔案更新"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:997
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:995
 msgid "[orbit calculation error]"
 msgstr "[軌道計算錯誤]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:998
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:996
 msgid "[all newly added]"
 msgstr "[所有最新增加的]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:999
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:997
 msgid "[all not displayed]"
 msgstr "[所有未顯示的]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1000
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:998
 msgid "[all displayed]"
 msgstr "[所有顯示的]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1001
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:999
 msgid "[small satellites]"
 msgstr "[小型人造衛星]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1002
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1000
 msgid "[medium satellites]"
 msgstr "[中型人造衛星]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1003
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1001
 msgid "[large satellites]"
 msgstr "[大型人造衛星]"
 
 #. TRANSLATORS: LEO = Low Earth orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1005
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1003
 msgid "[LEO satellites]"
 msgstr "[LEO 人造衛星]"
 
 #. TRANSLATORS: GEO = Geosynchronous equatorial orbit (Geostationary orbit)
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1007
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1005
 msgid "[GEO/GSO satellites]"
 msgstr "[GEO/GSO 人造衛星]"
 
 #. TRANSLATORS: MEO = Medium Earth orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1009
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1007
 msgid "[MEO satellites]"
 msgstr "[MEO 人造衛星]"
 
 #. TRANSLATORS: HEO = Highly elliptical orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1011
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1009
 msgid "[HEO satellites]"
 msgstr "[HEO 人造衛星]"
 
 #. TRANSLATORS: HGEO = High geosynchronous orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1013
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1011
 msgid "[HGSO satellites]"
 msgstr "[HGSO 人造衛星]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1014
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1012
 msgid "[all]"
 msgstr "[全部]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1030
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1028
 msgid "RCS"
 msgstr "RCS"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1031
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1029
 msgid ""
 "Radar cross-section (RCS) is a measure of how detectable an object is with a"
 " radar. A larger RCS indicates that an object is more easily detected."
 msgstr "雷達散射截面(Radar cross-section, RCS)是測量物體在雷達下的可觀測性，較大的 RCS 值表示該物體較易觀測。"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1032
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1030
 msgid ""
 "The standard magnitude of a satellite is defined as its apparent magnitude "
 "when at half-phase and at a distance 1000 km from the observer."
 msgstr "衛星的標準亮度是以它在距離觀測者1000公里遠時，所見半相的視星等來定義。"
 
 #. TRANSLATORS: duration
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1034
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1032
 msgctxt "time unit"
 msgid " s"
 msgstr "秒"
 
 #. TRANSLATORS: duration
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1036
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1034
 #: plugins/Satellites/src/ui_satellitesDialog.h:982
 msgid "Segment length:"
 msgstr "線段長度:"
 
 #. TRANSLATORS: duration
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1038
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1036
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:301
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:341
 msgctxt "time unit"
@@ -15087,28 +15088,28 @@ msgid " h"
 msgstr "時"
 
 #. TRANSLATORS: Displayed in the satellite group selection box.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1069
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1067
 msgid "New group..."
 msgstr "新增群組..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1334
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1332
 msgid "Select TLE Update File"
 msgstr "選擇 TLE 更新檔案"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1356
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1354
 msgid "Brightness"
 msgstr "亮度"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1359
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1357
 msgid "Satellite"
 msgstr "人造衛星"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1439
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1437
 msgid "Save predicted Iridium flares as..."
 msgstr "將預測的銥閃光儲存為 ..."
 
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1482
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1484
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1486
 msgid "Predicted Iridium flares"
 msgstr "預測銥閃光 (Iridium flare)"
 
@@ -17667,7 +17668,7 @@ msgstr "對太陽和月球使用上部的邊緣"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:293
 msgid "Use UTC time when navigational stars are displayed"
-msgstr ""
+msgstr "當導航星顯示時使用 UTC 時間"
 
 #: plugins/Novae/src/Novae.cpp:72 plugins/Novae/src/Novae.cpp:145
 msgid "Bright Novae"
@@ -23208,7 +23209,7 @@ msgstr "衣索比亞曆"
 #: plugins/Calendars/src/Calendars.cpp:290
 msgctxt "calendar"
 msgid "French Rev. (Arithm.)"
-msgstr ""
+msgstr "French Rev. (Arithm.)"
 
 #: plugins/Calendars/src/Calendars.cpp:291
 #: plugins/Calendars/src/ui_calendarsDialog.h:820
@@ -23225,17 +23226,17 @@ msgstr "希伯來文"
 #: plugins/Calendars/src/Calendars.cpp:293
 msgctxt "calendar"
 msgid "Persian (Arithm.)"
-msgstr ""
+msgstr "Persian (Arithm.)"
 
 #: plugins/Calendars/src/Calendars.cpp:294
 msgctxt "calendar"
 msgid "Old Hindu Solar"
-msgstr ""
+msgstr "Old Hindu Solar"
 
 #: plugins/Calendars/src/Calendars.cpp:295
 msgctxt "calendar"
 msgid "Old Hindu Lunisolar"
-msgstr ""
+msgstr "Old Hindu Lunisolar"
 
 #: plugins/Calendars/src/Calendars.cpp:296
 #: plugins/Calendars/src/ui_calendarsDialog.h:823
@@ -24623,47 +24624,47 @@ msgstr "Decembris"
 #: plugins/Calendars/src/RomanCalendar.cpp:65
 msgctxt "Roman calendar term"
 msgid "Kalendae"
-msgstr ""
+msgstr "Kalendae"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:66
 msgctxt "Roman calendar term"
 msgid "Nones"
-msgstr ""
+msgstr "Nones"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:67
 msgctxt "Roman calendar term"
 msgid "Ides"
-msgstr ""
+msgstr "Ides"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:68
 msgctxt "Roman calendar term"
 msgid "Kal."
-msgstr ""
+msgstr "Kal."
 
 #: plugins/Calendars/src/RomanCalendar.cpp:69
 msgctxt "Roman calendar term"
 msgid "Non."
-msgstr ""
+msgstr "Non."
 
 #: plugins/Calendars/src/RomanCalendar.cpp:70
 msgctxt "Roman calendar term"
 msgid "Id."
-msgstr ""
+msgstr "Id."
 
 #: plugins/Calendars/src/RomanCalendar.cpp:86
 msgctxt "Roman calendar term"
 msgid "pridie"
-msgstr ""
+msgstr "pridie"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:88
 msgctxt "Roman calendar term"
 msgid "bis"
-msgstr ""
+msgstr "bis"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:89
 msgctxt "Roman calendar term"
 msgid "ante diem"
-msgstr ""
+msgstr "ante diem"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:106
 msgctxt "ab urbe condita"
@@ -24913,1082 +24914,1103 @@ msgstr "Jezdegerd Era"
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:41
 msgctxt "French Revolution Calendar day name"
 msgid "Primidi"
-msgstr ""
+msgstr "Primidi"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:42
 msgctxt "French Revolution Calendar day name"
 msgid "Duodi"
-msgstr ""
+msgstr "Duodi"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:43
 msgctxt "French Revolution Calendar day name"
 msgid "Tridi"
-msgstr ""
+msgstr "Tridi"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:44
 msgctxt "French Revolution Calendar day name"
 msgid "Quartidi"
-msgstr ""
+msgstr "Quartidi"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:45
 msgctxt "French Revolution Calendar day name"
 msgid "Quintidi"
-msgstr ""
+msgstr "Quintidi"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:46
 msgctxt "French Revolution Calendar day name"
 msgid "Sextidi"
-msgstr ""
+msgstr "Sextidi"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:47
 msgctxt "French Revolution Calendar day name"
 msgid "Septidi"
-msgstr ""
+msgstr "Septidi"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:48
 msgctxt "French Revolution Calendar day name"
 msgid "Octidi"
-msgstr ""
+msgstr "Octidi"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:49
 msgctxt "French Revolution Calendar day name"
 msgid "Nonidi"
-msgstr ""
+msgstr "Nonidi"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:50
 msgctxt "French Revolution Calendar day name"
 msgid "Décadi"
-msgstr ""
+msgstr "Décadi"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:52
 msgctxt "French Revolution Calendar day name"
 msgid "Fête de la Vertu (Virtue Day)"
-msgstr ""
+msgstr "Fête de la Vertu (美德日)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:53
 msgctxt "French Revolution Calendar day name"
 msgid "Fête du Génie (Genius Day)"
-msgstr ""
+msgstr "Fête du Génie (天才日)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:54
 msgctxt "French Revolution Calendar day name"
 msgid "Fête du Travail (Labour Day)"
-msgstr ""
+msgstr "Fête du Travail (勞動節)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:55
 msgctxt "French Revolution Calendar day name"
 msgid "Fête de l'Opinion (Opinion Day)"
-msgstr ""
+msgstr "Fête de l'Opinion (觀點日)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:56
 msgctxt "French Revolution Calendar day name"
 msgid "Fête de la Récompense (Reward Day)"
-msgstr ""
+msgstr "Fête de la Récompense (賞賜日)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:57
 msgctxt "French Revolution Calendar day name"
 msgid "Jour de la Révolution (Revolution Day)"
-msgstr ""
+msgstr "Jour de la Révolution (革命紀念日)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:59
 msgctxt "French Revolution Calendar month name"
 msgid "Vendémiaire (vintage)"
-msgstr ""
+msgstr "Vendémiaire (釀酒)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:60
 msgctxt "French Revolution Calendar month name"
 msgid "Brumaire (fog)"
-msgstr ""
+msgstr "Brumaire (霧)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:61
 msgctxt "French Revolution Calendar month name"
 msgid "Frimaire (sleet)"
-msgstr ""
+msgstr "Frimaire (霰)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:62
 msgctxt "French Revolution Calendar month name"
 msgid "Nivôse (snow)"
-msgstr ""
+msgstr "Nivôse (雪)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:63
 msgctxt "French Revolution Calendar month name"
 msgid "Pluviôse (rain)"
-msgstr ""
+msgstr "Pluviôse (雨)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:64
 msgctxt "French Revolution Calendar month name"
 msgid "Ventôse (wind)"
-msgstr ""
+msgstr "Ventôse (風)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:65
 msgctxt "French Revolution Calendar month name"
 msgid "Germinal (seed)"
-msgstr ""
+msgstr "Germinal (播種)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:66
 msgctxt "French Revolution Calendar month name"
 msgid "Floréal (blossom)"
-msgstr ""
+msgstr "Floréal (開花)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:67
 msgctxt "French Revolution Calendar month name"
 msgid "Prairial (pasture)"
-msgstr ""
+msgstr "Prairial (放牧)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:68
 msgctxt "French Revolution Calendar month name"
 msgid "Messidor (harvest)"
-msgstr ""
+msgstr "Messidor (收成)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:69
 msgctxt "French Revolution Calendar month name"
 msgid "Thermidor (heat)"
-msgstr ""
+msgstr "Thermidor (熱)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:70
 msgctxt "French Revolution Calendar month name"
 msgid "Fructidor (fruit)"
-msgstr ""
+msgstr "Fructidor (果實)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:71
 msgctxt "French Revolution Calendar month name"
 msgid "Sansculottides"
-msgstr ""
+msgstr "Sansculottides"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:104
 msgctxt "French Revolution Calendar 'week'"
 msgid "Décade"
-msgstr ""
+msgstr "Décade"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:115
 msgctxt "French Revolution Calendar: year"
 msgid "an"
-msgstr ""
+msgstr "an"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:117
 msgctxt "French Revolution Calendar: year"
 msgid "de la République Française"
-msgstr ""
+msgstr "de la République Française"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:122
 msgctxt "French Revolution Calendar 'week'"
 msgid "première"
-msgstr ""
+msgstr "première"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:123
 msgctxt "French Revolution Calendar 'week'"
 msgid "seconde"
-msgstr ""
+msgstr "seconde"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:124
 msgctxt "French Revolution Calendar 'week'"
 msgid "troisième"
-msgstr ""
+msgstr "troisième"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:126
 msgctxt "French Revolution Calendar: of the"
 msgid "de la"
-msgstr ""
+msgstr "de la"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:132
 msgctxt "French Revolution Calendar 'week'"
 msgid "décade"
-msgstr ""
+msgstr "décade"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:134
 msgctxt "French Revolution Calendar: 'of'"
 msgid "du"
-msgstr ""
+msgstr "du"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:40
 msgctxt "Hebrew week day name"
 msgid "yom rishon (first day)"
-msgstr ""
+msgstr "yom rishon (第一天)"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:41
 msgctxt "Hebrew week day name"
 msgid "yom sheni (second day)"
-msgstr ""
+msgstr "yom sheni (第二天)"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:42
 msgctxt "Hebrew week day name"
 msgid "yom shelishi (third day)"
-msgstr ""
+msgstr "yom shelishi (第三天)"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:43
 msgctxt "Hebrew week day name"
 msgid "yom revi'i (fourth day)"
-msgstr ""
+msgstr "yom revi'i (第四天)"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:44
 msgctxt "Hebrew week day name"
 msgid "yom ḥamishi (fifth day)"
-msgstr ""
+msgstr "yom ḥamishi (第五天)"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:45
 msgctxt "Hebrew week day name"
 msgid "yom shishi (sixth day)"
-msgstr ""
+msgstr "yom shishi (第六天)"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:46
 msgctxt "Hebrew week day name"
 msgid "yom shabbat (sabbath day)"
-msgstr ""
+msgstr "yom shabbat (安息日)"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:48
 msgctxt "Hebrew month name"
 msgid "Nisan"
-msgstr ""
+msgstr "Nisan"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:49
 msgctxt "Hebrew month name"
 msgid "Iyyar"
-msgstr ""
+msgstr "Iyyar"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:50
 msgctxt "Hebrew month name"
 msgid "Sivan"
-msgstr ""
+msgstr "Sivan"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:51
 msgctxt "Hebrew month name"
 msgid "Tammuz"
-msgstr ""
+msgstr "Tammuz"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:52
 msgctxt "Hebrew month name"
 msgid "Av"
-msgstr ""
+msgstr "Av"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:53
 msgctxt "Hebrew month name"
 msgid "Elul"
-msgstr ""
+msgstr "Elul"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:54
 msgctxt "Hebrew month name"
 msgid "Tishri"
-msgstr ""
+msgstr "Tishri"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:55
 msgctxt "Hebrew month name"
 msgid "Marḥeshvan"
-msgstr ""
+msgstr "Marḥeshvan"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:56
 msgctxt "Hebrew month name"
 msgid "Kislev"
-msgstr ""
+msgstr "Kislev"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:57
 msgctxt "Hebrew month name"
 msgid "Tevet"
-msgstr ""
+msgstr "Tevet"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:58
 msgctxt "Hebrew month name"
 msgid "Shevat"
-msgstr ""
+msgstr "Shevat"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:59
 msgctxt "Hebrew month name"
 msgid "Adar"
-msgstr ""
+msgstr "Adar"
 
 #: plugins/Calendars/src/IslamicCalendar.cpp:39
 msgctxt "Islamic day name"
 msgid "yaum al-aḥad (first day)"
-msgstr ""
+msgstr "yaum al-aḥad (第一天)"
 
 #: plugins/Calendars/src/IslamicCalendar.cpp:40
 msgctxt "Islamic day name"
 msgid "yaum al-ithnaya (second day)"
-msgstr ""
+msgstr "yaum al-ithnaya (第二天)"
 
 #: plugins/Calendars/src/IslamicCalendar.cpp:41
 msgctxt "Islamic day name"
 msgid "yaum ath-thalāthāʾ (third day)"
-msgstr ""
+msgstr "yaum ath-thalāthāʾ (第三天)"
 
 #: plugins/Calendars/src/IslamicCalendar.cpp:42
 msgctxt "Islamic day name"
 msgid "yaum al-arbaʿāʾ (fourth day)"
-msgstr ""
+msgstr "yaum al-arbaʿāʾ (第四天)"
 
 #: plugins/Calendars/src/IslamicCalendar.cpp:43
 msgctxt "Islamic day name"
 msgid "yaum al-ẖamis (fifth day)"
-msgstr ""
+msgstr "yaum al-ẖamis (第五天)"
 
 #: plugins/Calendars/src/IslamicCalendar.cpp:44
 msgctxt "Islamic day name"
 msgid "yaum al-jumʿa (day of assembly)"
-msgstr ""
+msgstr "yaum al-jumʿa (集會日)"
 
 #: plugins/Calendars/src/IslamicCalendar.cpp:45
 msgctxt "Islamic day name"
 msgid "yaum as-sabt (sabbath day)"
-msgstr ""
+msgstr "yaum as-sabt (安息日)"
 
 #: plugins/Calendars/src/IslamicCalendar.cpp:47
 msgctxt "Islamic month name"
 msgid "Muḥarram"
-msgstr ""
+msgstr "Muḥarram"
 
 #: plugins/Calendars/src/IslamicCalendar.cpp:48
 msgctxt "Islamic month name"
 msgid "Ṣafar"
-msgstr ""
+msgstr "Ṣafar"
 
 #: plugins/Calendars/src/IslamicCalendar.cpp:49
 msgctxt "Islamic month name"
 msgid "Rabīʿ I (al-Awwal)"
-msgstr ""
+msgstr "Rabīʿ I (al-Awwal)"
 
 #: plugins/Calendars/src/IslamicCalendar.cpp:50
 msgctxt "Islamic month name"
 msgid "Rabīʿ II (al-Āḥir)"
-msgstr ""
+msgstr "Rabīʿ II (al-Āḥir)"
 
 #: plugins/Calendars/src/IslamicCalendar.cpp:51
 msgctxt "Islamic month name"
 msgid "Jumādā I (al-Ūlā)"
-msgstr ""
+msgstr "Jumādā I (al-Ūlā)"
 
 #: plugins/Calendars/src/IslamicCalendar.cpp:52
 msgctxt "Islamic month name"
 msgid "Jumādā II (al-Āḥira)"
-msgstr ""
+msgstr "Jumādā II (al-Āḥira)"
 
 #: plugins/Calendars/src/IslamicCalendar.cpp:53
 msgctxt "Islamic month name"
 msgid "Rajab"
-msgstr ""
+msgstr "Rajab"
 
 #: plugins/Calendars/src/IslamicCalendar.cpp:54
 msgctxt "Islamic month name"
 msgid "Shaʿbān"
-msgstr ""
+msgstr "Shaʿbān"
 
 #: plugins/Calendars/src/IslamicCalendar.cpp:55
 msgctxt "Islamic month name"
 msgid "Ramaḍān"
-msgstr ""
+msgstr "Ramaḍān"
 
 #: plugins/Calendars/src/IslamicCalendar.cpp:56
 msgctxt "Islamic month name"
 msgid "Shawwāl"
-msgstr ""
+msgstr "Shawwāl"
 
 #: plugins/Calendars/src/IslamicCalendar.cpp:57
 msgctxt "Islamic month name"
 msgid "Dhu al-Qaʿda"
-msgstr ""
+msgstr "Dhu al-Qaʿda"
 
 #: plugins/Calendars/src/IslamicCalendar.cpp:58
 msgctxt "Islamic month name"
 msgid "Dhu al-Ḥijja"
+msgstr "Dhu al-Ḥijja"
+
+#. TRANSLATORS: A.H. stands for "after hegira" meaning the year prophet
+#. Mohammad (Peace be upon him and all prophets) migrated from Mecca to
+#. Madinah.
+#: plugins/Calendars/src/IslamicCalendar.cpp:94
+msgctxt "epoch"
+msgid "A.H."
 msgstr ""
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:38
 msgctxt "old Hindu month name"
 msgid "Caitra"
-msgstr ""
+msgstr "Caitra"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:39
 msgctxt "old Hindu month name"
 msgid "Vaiśākha"
-msgstr ""
+msgstr "Vaiśākha"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:40
 msgctxt "old Hindu month name"
 msgid "Jyeṣṭha"
-msgstr ""
+msgstr "Jyeṣṭha"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:41
 msgctxt "old Hindu month name"
 msgid "Āṣāḑha"
-msgstr ""
+msgstr "Āṣāḑha"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:42
 msgctxt "old Hindu month name"
 msgid "Śrāvaṇa"
-msgstr ""
+msgstr "Śrāvaṇa"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:43
 msgctxt "old Hindu month name"
 msgid "Bhādrapada"
-msgstr ""
+msgstr "Bhādrapada"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:44
 msgctxt "old Hindu month name"
 msgid "Āśvina"
-msgstr ""
+msgstr "Āśvina"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:45
 msgctxt "old Hindu month name"
 msgid "Kārtika"
-msgstr ""
+msgstr "Kārtika"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:46
 msgctxt "old Hindu month name"
 msgid "Mārgaśīrṣa"
-msgstr ""
+msgstr "Mārgaśīrṣa"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:47
 msgctxt "old Hindu month name"
 msgid "Pauṣa"
-msgstr ""
+msgstr "Pauṣa"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:48
 msgctxt "old Hindu month name"
 msgid "Māgha"
-msgstr ""
+msgstr "Māgha"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:49
 msgctxt "old Hindu month name"
 msgid "Phālguna"
+msgstr "Phālguna"
+
+#. TRANSLATORS: K.Y. stands for Kali Yuga
+#: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:86
+msgctxt "epoch"
+msgid "K.Y."
 msgstr ""
 
-#: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:91
+#: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:87
 msgctxt "short indicator for leap month"
 msgid "[leap]"
-msgstr ""
+msgstr "[閏]"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:43
 msgctxt "old Hindu day name"
 msgid "Ravivāra"
-msgstr ""
+msgstr "Ravivāra"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:44
 msgctxt "old Hindu day name"
 msgid "Somavāra"
-msgstr ""
+msgstr "Somavāra"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:45
 msgctxt "old Hindu day name"
 msgid "Mangalavāra"
-msgstr ""
+msgstr "Mangalavāra"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:46
 msgctxt "old Hindu day name"
 msgid "Budhavāra"
-msgstr ""
+msgstr "Budhavāra"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:47
 msgctxt "old Hindu day name"
 msgid "Brihaspatvāra"
-msgstr ""
+msgstr "Brihaspatvāra"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:48
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:55
 msgctxt "old Hindu day name"
 msgid "Śukravāra"
-msgstr ""
+msgstr "Śukravāra"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:49
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:56
 msgctxt "old Hindu day name"
 msgid "Śanivāra"
-msgstr ""
+msgstr "Śanivāra"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:50
 msgctxt "old Hindu day name"
 msgid "Ādityavāra"
-msgstr ""
+msgstr "Ādityavāra"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:51
 msgctxt "old Hindu day name"
 msgid "Candravāra"
-msgstr ""
+msgstr "Candravāra"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:52
 msgctxt "old Hindu day name"
 msgid "Bhaumavāra"
-msgstr ""
+msgstr "Bhaumavāra"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:53
 msgctxt "old Hindu day name"
 msgid "Saumyavāra"
-msgstr ""
+msgstr "Saumyavāra"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:54
 msgctxt "old Hindu day name"
 msgid "Guruvāra"
-msgstr ""
+msgstr "Guruvāra"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:60
 msgctxt "old Hindu month name"
 msgid "Madhu"
-msgstr ""
+msgstr "Madhu"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:61
 msgctxt "old Hindu month name"
 msgid "Mādhava"
-msgstr ""
+msgstr "Mādhava"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:62
 msgctxt "old Hindu month name"
 msgid "Śukra"
-msgstr ""
+msgstr "Śukra"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:63
 msgctxt "old Hindu month name"
 msgid "Śuchi"
-msgstr ""
+msgstr "Śuchi"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:64
 msgctxt "old Hindu month name"
 msgid "Nabhas"
-msgstr ""
+msgstr "Nabhas"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:65
 msgctxt "old Hindu month name"
 msgid "Nabhasya"
-msgstr ""
+msgstr "Nabhasya"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:66
 msgctxt "old Hindu month name"
 msgid "Issa"
-msgstr ""
+msgstr "Issa"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:67
 msgctxt "old Hindu month name"
 msgid "Ūrja"
-msgstr ""
+msgstr "Ūrja"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:68
 msgctxt "old Hindu month name"
 msgid "Sahas"
-msgstr ""
+msgstr "Sahas"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:69
 msgctxt "old Hindu month name"
 msgid "Sahasya"
-msgstr ""
+msgstr "Sahasya"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:70
 msgctxt "old Hindu month name"
 msgid "Tapas"
-msgstr ""
+msgstr "Tapas"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:71
 msgctxt "old Hindu month name"
 msgid "Tapasya"
-msgstr ""
+msgstr "Tapasya"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:72
 msgctxt "old Hindu month name"
 msgid "Meṣa"
-msgstr ""
+msgstr "Meṣa"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:73
 msgctxt "old Hindu month name"
 msgid "Vṛṣabha"
-msgstr ""
+msgstr "Vṛṣabha"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:74
 msgctxt "old Hindu month name"
 msgid "Mithuna"
-msgstr ""
+msgstr "Mithuna"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:75
 msgctxt "old Hindu month name"
 msgid "Karka"
-msgstr ""
+msgstr "Karka"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:76
 msgctxt "old Hindu month name"
 msgid "Siṃha"
-msgstr ""
+msgstr "Siṃha"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:77
 msgctxt "old Hindu month name"
 msgid "Kanyā"
-msgstr ""
+msgstr "Kanyā"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:78
 msgctxt "old Hindu month name"
 msgid "Tulā"
-msgstr ""
+msgstr "Tulā"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:79
 msgctxt "old Hindu month name"
 msgid "Vṛścika"
-msgstr ""
+msgstr "Vṛścika"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:80
 msgctxt "old Hindu month name"
 msgid "Dhanus"
-msgstr ""
+msgstr "Dhanus"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:81
 msgctxt "old Hindu month name"
 msgid "Makara"
-msgstr ""
+msgstr "Makara"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:82
 msgctxt "old Hindu month name"
 msgid "Kumbha"
-msgstr ""
+msgstr "Kumbha"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:83
 msgctxt "old Hindu month name"
 msgid "Mīna"
-msgstr ""
+msgstr "Mīna"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:84
 msgctxt "Zodiacal sign"
 msgid "Aries"
-msgstr ""
+msgstr "白羊"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:85
 msgctxt "Zodiacal sign"
 msgid "Taurus"
-msgstr ""
+msgstr "金牛"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:86
 msgctxt "Zodiacal sign"
 msgid "Gemini"
-msgstr ""
+msgstr "雙子"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:87
 msgctxt "Zodiacal sign"
 msgid "Cancer"
-msgstr ""
+msgstr "巨蟹"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:88
 msgctxt "Zodiacal sign"
 msgid "Leo"
-msgstr ""
+msgstr "獅子"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:89
 msgctxt "Zodiacal sign"
 msgid "Virgo"
-msgstr ""
+msgstr "室女"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:90
 msgctxt "Zodiacal sign"
 msgid "Libra"
-msgstr ""
+msgstr "天秤"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:91
 msgctxt "Zodiacal sign"
 msgid "Scorpio"
-msgstr ""
+msgstr "天蝎"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:92
 msgctxt "Zodiacal sign"
 msgid "Sagittarius"
-msgstr ""
+msgstr "人馬"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:93
 msgctxt "Zodiacal sign"
 msgid "Capricorn"
-msgstr ""
+msgstr "魔羯"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:94
 msgctxt "Zodiacal sign"
 msgid "Aquarius"
-msgstr ""
+msgstr "寶瓶"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:95
 msgctxt "Zodiacal sign"
 msgid "Pisces"
-msgstr ""
+msgstr "雙魚"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:98
 msgctxt "Old Hindu Jovian year name"
 msgid "Prabhava"
-msgstr ""
+msgstr "Prabhava"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:99
 msgctxt "Old Hindu Jovian year name"
 msgid "Vibhava"
-msgstr ""
+msgstr "Vibhava"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:100
 msgctxt "Old Hindu Jovian year name"
 msgid "Śukla"
-msgstr ""
+msgstr "Śukla"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:101
 msgctxt "Old Hindu Jovian year name"
 msgid "Pramoda"
-msgstr ""
+msgstr "Pramoda"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:102
 msgctxt "Old Hindu Jovian year name"
 msgid "Prajāpati"
-msgstr ""
+msgstr "Prajāpati"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:103
 msgctxt "Old Hindu Jovian year name"
 msgid "Aṅgiras"
-msgstr ""
+msgstr "Aṅgiras"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:104
 msgctxt "Old Hindu Jovian year name"
 msgid "Śrīmukha"
-msgstr ""
+msgstr "Śrīmukha"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:105
 msgctxt "Old Hindu Jovian year name"
 msgid "Bhāva"
-msgstr ""
+msgstr "Bhāva"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:106
 msgctxt "Old Hindu Jovian year name"
 msgid "Yuvan"
-msgstr ""
+msgstr "Yuvan"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:107
 msgctxt "Old Hindu Jovian year name"
 msgid "Dhātṛ"
-msgstr ""
+msgstr "Dhātṛ"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:108
 msgctxt "Old Hindu Jovian year name"
 msgid "Iśvara"
-msgstr ""
+msgstr "Iśvara"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:109
 msgctxt "Old Hindu Jovian year name"
 msgid "Bahudhānya"
-msgstr ""
+msgstr "Bahudhānya"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:110
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:144
 msgctxt "Old Hindu Jovian year name"
 msgid "Pramāthin"
-msgstr ""
+msgstr "Pramāthin"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:111
 msgctxt "Old Hindu Jovian year name"
 msgid "Vikrama"
-msgstr ""
+msgstr "Vikrama"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:112
 msgctxt "Old Hindu Jovian year name"
 msgid "Vṛṣa"
-msgstr ""
+msgstr "Vṛṣa"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:113
 msgctxt "Old Hindu Jovian year name"
 msgid "Citrabhānu"
-msgstr ""
+msgstr "Citrabhānu"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:114
 msgctxt "Old Hindu Jovian year name"
 msgid "Subhānu"
-msgstr ""
+msgstr "Subhānu"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:115
 msgctxt "Old Hindu Jovian year name"
 msgid "Tāraṇa"
-msgstr ""
+msgstr "Tāraṇa"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:116
 msgctxt "Old Hindu Jovian year name"
 msgid "Pārthiva"
-msgstr ""
+msgstr "Pārthiva"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:117
 msgctxt "Old Hindu Jovian year name"
 msgid "Vyaya"
-msgstr ""
+msgstr "Vyaya"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:118
 msgctxt "Old Hindu Jovian year name"
 msgid "Sarvajit"
-msgstr ""
+msgstr "Sarvajit"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:119
 msgctxt "Old Hindu Jovian year name"
 msgid "Sarvadhārin"
-msgstr ""
+msgstr "Sarvadhārin"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:120
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:146
 msgctxt "Old Hindu Jovian year name"
 msgid "Rākṣasa"
-msgstr ""
+msgstr "Rākṣasa"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:121
 msgctxt "Old Hindu Jovian year name"
 msgid "Vikṛta"
-msgstr ""
+msgstr "Vikṛta"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:122
 msgctxt "Old Hindu Jovian year name"
 msgid "Khara"
-msgstr ""
+msgstr "Khara"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:123
 msgctxt "Old Hindu Jovian year name"
 msgid "Nandana"
-msgstr ""
+msgstr "Nandana"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:124
 msgctxt "Old Hindu Jovian year name"
 msgid "Vijaya"
-msgstr ""
+msgstr "Vijaya"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:125
 msgctxt "Old Hindu Jovian year name"
 msgid "Jaya"
-msgstr ""
+msgstr "Jaya"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:126
 msgctxt "Old Hindu Jovian year name"
 msgid "Manmatha"
-msgstr ""
+msgstr "Manmatha"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:127
 msgctxt "Old Hindu Jovian year name"
 msgid "Durmukha"
-msgstr ""
+msgstr "Durmukha"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:128
 msgctxt "Old Hindu Jovian year name"
 msgid "Hemalamba"
-msgstr ""
+msgstr "Hemalamba"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:129
 msgctxt "Old Hindu Jovian year name"
 msgid "Vilamba"
-msgstr ""
+msgstr "Vilamba"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:130
 msgctxt "Old Hindu Jovian year name"
 msgid "Vikārin"
-msgstr ""
+msgstr "Vikārin"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:131
 msgctxt "Old Hindu Jovian year name"
 msgid "Śarvari"
-msgstr ""
+msgstr "Śarvari"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:132
 msgctxt "Old Hindu Jovian year name"
 msgid "Plava"
-msgstr ""
+msgstr "Plava"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:133
 msgctxt "Old Hindu Jovian year name"
 msgid "Śubhakṛt"
-msgstr ""
+msgstr "Śubhakṛt"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:134
 msgctxt "Old Hindu Jovian year name"
 msgid "Śobhana"
-msgstr ""
+msgstr "Śobhana"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:135
 msgctxt "Old Hindu Jovian year name"
 msgid "Krodhin"
-msgstr ""
+msgstr "Krodhin"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:136
 msgctxt "Old Hindu Jovian year name"
 msgid "Viśvāvasu"
-msgstr ""
+msgstr "Viśvāvasu"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:137
 msgctxt "Old Hindu Jovian year name"
 msgid "Parābhava"
-msgstr ""
+msgstr "Parābhava"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:138
 msgctxt "Old Hindu Jovian year name"
 msgid "Plavaṅga"
-msgstr ""
+msgstr "Plavaṅga"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:139
 msgctxt "Old Hindu Jovian year name"
 msgid "Kīlaka"
-msgstr ""
+msgstr "Kīlaka"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:140
 msgctxt "Old Hindu Jovian year name"
 msgid "Saumya"
-msgstr ""
+msgstr "Saumya"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:141
 msgctxt "Old Hindu Jovian year name"
 msgid "Sādhāraṇa"
-msgstr ""
+msgstr "Sādhāraṇa"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:142
 msgctxt "Old Hindu Jovian year name"
 msgid "Virodhakṛt"
-msgstr ""
+msgstr "Virodhakṛt"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:143
 msgctxt "Old Hindu Jovian year name"
 msgid "Paridhāvin"
-msgstr ""
+msgstr "Paridhāvin"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:145
 msgctxt "Old Hindu Jovian year name"
 msgid "Ānanda"
-msgstr ""
+msgstr "Ānanda"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:147
 msgctxt "Old Hindu Jovian year name"
 msgid "Anala"
-msgstr ""
+msgstr "Anala"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:148
 msgctxt "Old Hindu Jovian year name"
 msgid "Piṅgala"
-msgstr ""
+msgstr "Piṅgala"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:149
 msgctxt "Old Hindu Jovian year name"
 msgid "Kālayukta"
-msgstr ""
+msgstr "Kālayukta"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:150
 msgctxt "Old Hindu Jovian year name"
 msgid "Siddhārthin"
-msgstr ""
+msgstr "Siddhārthin"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:151
 msgctxt "Old Hindu Jovian year name"
 msgid "Rāudra"
-msgstr ""
+msgstr "Rāudra"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:152
 msgctxt "Old Hindu Jovian year name"
 msgid "Durmati"
-msgstr ""
+msgstr "Durmati"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:153
 msgctxt "Old Hindu Jovian year name"
 msgid "Dundubhi"
-msgstr ""
+msgstr "Dundubhi"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:154
 msgctxt "Old Hindu Jovian year name"
 msgid "Rudhirodgārin"
-msgstr ""
+msgstr "Rudhirodgārin"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:155
 msgctxt "Old Hindu Jovian year name"
 msgid "Raktākṣa"
-msgstr ""
+msgstr "Raktākṣa"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:156
 msgctxt "Old Hindu Jovian year name"
 msgid "Krodhana"
-msgstr ""
+msgstr "Krodhana"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:157
 msgctxt "Old Hindu Jovian year name"
 msgid "Kṣaya"
-msgstr ""
+msgstr "Kṣaya"
 
 #. TRANSLATORS: Old Hindu calendar phrase like "[Weekday], [number] -
-#. [MonthNumber] ([MonthName]) - [year] (Jovian [nr]:[name])"
+#. [MonthNumber] ([MonthName]) - [year] K.Y. (Jovian [nr]:[name])"; K.Y.
+#. stands for Kali Yuga
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:196
 #, qt-format
 msgid "%1, %2 - %3 (%4) - %5 K.Y. (Jovian %6:%7)"
-msgstr ""
+msgstr "%1, %2 - %3 (%4) - %5 K.Y. (Jovian %6:%7)"
 
 #: plugins/Calendars/src/PersianArithmeticCalendar.cpp:40
 msgctxt "Persian weekday name"
 msgid "Yek-shanbēh"
-msgstr ""
+msgstr "Yek-shanbēh"
 
 #: plugins/Calendars/src/PersianArithmeticCalendar.cpp:41
 msgctxt "Persian weekday name"
 msgid "Do-shanbēh"
-msgstr ""
+msgstr "Do-shanbēh"
 
 #: plugins/Calendars/src/PersianArithmeticCalendar.cpp:42
 msgctxt "Persian weekday name"
 msgid "Se-shanbēh"
-msgstr ""
+msgstr "Se-shanbēh"
 
 #: plugins/Calendars/src/PersianArithmeticCalendar.cpp:43
 msgctxt "Persian weekday name"
 msgid "Chār-shanbēh"
-msgstr ""
+msgstr "Chār-shanbēh"
 
 #: plugins/Calendars/src/PersianArithmeticCalendar.cpp:44
 msgctxt "Persian weekday name"
 msgid "Panj-shanbēh"
-msgstr ""
+msgstr "Panj-shanbēh"
 
 #: plugins/Calendars/src/PersianArithmeticCalendar.cpp:45
 msgctxt "Persian weekday name"
 msgid "Jom`ēh"
-msgstr ""
+msgstr "Jom`ēh"
 
 #: plugins/Calendars/src/PersianArithmeticCalendar.cpp:46
 msgctxt "Persian weekday name"
 msgid "Shanbēh"
-msgstr ""
+msgstr "Shanbēh"
 
 #: plugins/Calendars/src/PersianArithmeticCalendar.cpp:48
 msgctxt "Persian month name"
 msgid "Farvardīn"
-msgstr ""
+msgstr "Farvardīn"
 
 #: plugins/Calendars/src/PersianArithmeticCalendar.cpp:49
 msgctxt "Persian month name"
 msgid "Ordībehesht"
-msgstr ""
+msgstr "Ordībehesht"
 
 #: plugins/Calendars/src/PersianArithmeticCalendar.cpp:50
 msgctxt "Persian month name"
 msgid "Xordād"
-msgstr ""
+msgstr "Xordād"
 
 #: plugins/Calendars/src/PersianArithmeticCalendar.cpp:51
 msgctxt "Persian month name"
 msgid "Tīr"
-msgstr ""
+msgstr "Tīr"
 
 #: plugins/Calendars/src/PersianArithmeticCalendar.cpp:52
 msgctxt "Persian month name"
 msgid "Mordād"
-msgstr ""
+msgstr "Mordād"
 
 #: plugins/Calendars/src/PersianArithmeticCalendar.cpp:53
 msgctxt "Persian month name"
 msgid "Shahrīvar"
-msgstr ""
+msgstr "Shahrīvar"
 
 #: plugins/Calendars/src/PersianArithmeticCalendar.cpp:54
 msgctxt "Persian month name"
 msgid "Mehr"
-msgstr ""
+msgstr "Mehr"
 
 #: plugins/Calendars/src/PersianArithmeticCalendar.cpp:55
 msgctxt "Persian month name"
 msgid "Ābān"
-msgstr ""
+msgstr "Ābān"
 
 #: plugins/Calendars/src/PersianArithmeticCalendar.cpp:56
 msgctxt "Persian month name"
 msgid "Āzar"
-msgstr ""
+msgstr "Āzar"
 
 #: plugins/Calendars/src/PersianArithmeticCalendar.cpp:57
 msgctxt "Persian month name"
 msgid "Dey"
-msgstr ""
+msgstr "Dey"
 
 #: plugins/Calendars/src/PersianArithmeticCalendar.cpp:58
 msgctxt "Persian month name"
 msgid "Bahman"
-msgstr ""
+msgstr "Bahman"
 
 #: plugins/Calendars/src/PersianArithmeticCalendar.cpp:59
 msgctxt "Persian month name"
 msgid "Esfand"
+msgstr "Esfand"
+
+#. TRANSLATORS: A.P. means Anno Persico/Anno Persarum = Persian year
+#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:95
+msgctxt "epoch"
+msgid "A.P."
 msgstr ""
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:159
@@ -26047,23 +26069,23 @@ msgstr "衣索比亞曆"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:179
 msgid "Islamic Calendar (algorithmic)"
-msgstr ""
+msgstr "伊斯蘭曆 (演算版)"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:180
 msgid "Hebrew Calendar"
-msgstr ""
+msgstr "希伯來曆"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:181
 msgid "French Revolution calendar (arithmetic version of 1795)"
-msgstr ""
+msgstr "法國共和曆 (1795 年的演算版)"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:182
 msgid "Persian calendar (arithmetic version)"
-msgstr ""
+msgstr "波斯曆 (演算版)"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:186
 msgid "Old Hindu Solar and Lunar calendars"
-msgstr ""
+msgstr "古印度陰陽曆"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:188
 msgid "Maya calendars"
@@ -26116,15 +26138,15 @@ msgstr "ISO週日曆"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:807
 msgid "New Hindu Lunar"
-msgstr ""
+msgstr "新印度陰曆"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:813
 msgid "New Hindu Solar"
-msgstr ""
+msgstr "新印度陽曆"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:815
 msgid "Old Hindu Solar"
-msgstr ""
+msgstr "古印度陽曆"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:819
 msgctxt "calendar"
@@ -26133,15 +26155,15 @@ msgstr "中文"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:821
 msgid "Old Hindu Lunar"
-msgstr ""
+msgstr "古印度陰曆"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:826
 msgid "French Revolution (arithmetic)"
-msgstr ""
+msgstr "法國大革命 (演算版)"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:827
 msgid "Persian (arithmetic)"
-msgstr ""
+msgstr "波斯 (演算版)"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:829
 msgid "Display"

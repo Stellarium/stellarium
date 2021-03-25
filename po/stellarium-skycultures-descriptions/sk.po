@@ -5,7 +5,7 @@
 # 
 # Translators:
 # Alexander Wolf <alex.v.wolf@gmail.com>, 2020
-# Lubomir Hambalek <lubomir.hambalek@gmail.com>, 2020
+# Lubomir Hambalek <lubomir.hambalek@gmail.com>, 2021
 # 
 #, fuzzy
 msgid ""
@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2021-03-16 22:04+0700\n"
 "PO-Revision-Date: 2020-01-06 16:35+0000\n"
-"Last-Translator: Lubomir Hambalek <lubomir.hambalek@gmail.com>, 2020\n"
+"Last-Translator: Lubomir Hambalek <lubomir.hambalek@gmail.com>, 2021\n"
 "Language-Team: Slovak (https://www.transifex.com/stellarium/teams/80998/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,7 +24,7 @@ msgstr ""
 #. type: Content of: <h1>
 #: ../../skycultures/al-sufi/description.en.utf8:1
 msgid "Al-Sufi (\"Book of Fixed Stars\")"
-msgstr ""
+msgstr "Al-Súfi (\"Kniha stálic\")"
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:3
@@ -51,6 +51,25 @@ msgid ""
 "neglected by Ptolemy, but he did not catalogue them and was faithful to "
 "Ptolemy star catalog."
 msgstr ""
+"Kniha stálic bola napísaná krátko pred r. 964 n.l. Dr. Paul Kunitzsch ju "
+"popísal ako \"najskvelejšia z diel popredného astronóma Abú al-Husejna 'Abd "
+"al-Rahmána ibn 'Umara al-Súfího (nar. 903 v Rajj, zomrel 986), nazývaného "
+"ako al-Súfí. V nej al-Súfí rozoberá 48 klasických súhvezdí, ktoré boli "
+"uzákonené a odovzdané v Ptolemajovom Almageste. Popis každého súhvezdia "
+"zahŕňa nasledovné časti: po prvé, všeobecnú rozpravu o súhvezdí a jeho "
+"jednotlivých hviezdach; táto časť obsahuje aj al-Súfího kritiku "
+"Ptolemajovskej tradície a poznámky zo svojich vlastných pozorovaní. Po "
+"druhé, záznam domorodých arabských mien hviezd, ktoré spadajú pod dané "
+"súhvezdie a presné určenie jednotlivých hviezd so zodpovedajúcimi "
+"Ptolemajovskými hviezdami. Po tretie, dve kresby súhvezdia - jedna, ako je "
+"vidieť na nebeskej sfére, a druhá, ako je vidieť na oblohe. Po štvrté, "
+"tabuľku hviezd tvoriacich súhvezdie, so slovným popisom polohy každej "
+"hviezdy a jej dĺžku, šírku, magnitúdu. Táto tabuľka blízko kopíruje "
+"usporiadanie Ptolemajovho hviezdneho katalógu v Almageste.\" <sup><a "
+"href=\"#footnote-1\">[1]</a></sup>. K štyrom častiam ku každému súhvezdiu "
+"spomínaných dr. Kunitzschom navyše al-Súfí určil hviezdy do 6 magnitúdy, "
+"ktoré boli Ptolemajom zanedbané, ale do katalógu ich nepripojil a ostal "
+"verný Ptolemajovmu hviezdnemu katalógu."
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:6
@@ -70,11 +89,24 @@ msgid ""
 "relationship to the cubit value from Schjellerup<sup><a "
 "href=\"#footnote-3\">[3]</a></sup> and from my research."
 msgstr ""
+"Dôležitý aspekt časti všeobecnej diskusie je Al-Súfího metóda vykonania "
+"identifikácie hviezd. Každú jednotlivú hviezdu popisuje viacerými spôsobmi: "
+"podľa polohy hviezdy vzhľadom na obrazec súhvezdia, podľa magnitúdy, podľa "
+"asterizmov, ktoré tvorí s ostatnými hviezdami ako trojuholníky, alebo časti "
+"oblúka, niekedy podľa polohy voči Mliečnej ceste a podľa uhlovej "
+"vzdialenosti od blízkej hviezdy. V knihe som napočítal viac ako 700 uhlových"
+" vzdialeností meraných Al-Súfím. Jednotky, ktoré používa pre uhlové "
+"vzdialenosti, sú lakte, dĺžka kopije, výška človeka, šírka a prst. Al-Súfí "
+"sám explicitne tvrdí, že lakeť sa rovná dvom stupňom a 20 minútam <sup><a "
+"href=\"#footnote-2\">[2]</a></sup>. Pre ostatné jednotky odvodil Schjellerup"
+" niektoré hodnoty, ale po prezretí 700 meraní som prišiel na iné hodnoty. "
+"Nasledujúca tabuľka zhŕňa jednotky a ich vzťah k hodnote lakťa podľa "
+"Schjellerupa <sup><a href=\"#footnote-3\">[3]</a></sup> a z môjho výskumu."
 
 #. type: Content of: <p><h2>
 #: ../../skycultures/al-sufi/description.en.utf8:7
 msgid "Angular distance units used by Al-Sufi"
-msgstr ""
+msgstr "Jednotky uhlových vzdialeností používané Al-Súfim"
 
 #. type: Content of: <p><p><p><p><p><p><p><p><p>
 #: ../../skycultures/al-sufi/description.en.utf8:11
@@ -99,128 +131,128 @@ msgstr "&nbsp;"
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:12
 msgid "<b>Schjellerup</b>"
-msgstr ""
+msgstr "<b>Schjellerup</b>"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:13
 msgid "<b>Khalid</b>"
-msgstr ""
+msgstr "<b>Chálid</b>"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:16
 msgid "<b>unit</b>"
-msgstr ""
+msgstr "<b>jednotka</b>"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:17
 #: ../../skycultures/al-sufi/description.en.utf8:19
 msgid "<b>cubits</b>"
-msgstr ""
+msgstr "<b>lakte</b>"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:18
 #: ../../skycultures/al-sufi/description.en.utf8:20
 msgid "<b>Angular Value</b>"
-msgstr ""
+msgstr "<b>Uhlová hodnota</b>"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:23
 msgid "spear"
-msgstr ""
+msgstr "kopija"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:24
 #: ../../skycultures/al-sufi/description.en.utf8:26
 msgid "6 cubits"
-msgstr ""
+msgstr "6 lakťov"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:25
 #: ../../skycultures/al-sufi/description.en.utf8:27
 msgid "14°"
-msgstr ""
+msgstr "14°"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:30
 msgid "Man-Height"
-msgstr ""
+msgstr "výška muža"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:33
 msgid "3 cubits"
-msgstr ""
+msgstr "3 lakte"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:34
 msgid "7°"
-msgstr ""
+msgstr "7°"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:37
 msgid "cubit"
-msgstr ""
+msgstr "lakeť"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:38
 #: ../../skycultures/al-sufi/description.en.utf8:40
 msgid "1 cubit"
-msgstr ""
+msgstr "1 lakeť"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:39
 #: ../../skycultures/al-sufi/description.en.utf8:41
 msgid "2°20'"
-msgstr ""
+msgstr "2°20'"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:44
 msgid "span"
-msgstr ""
+msgstr "šírka"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:45
 msgid "1/3 of a cubit"
-msgstr ""
+msgstr "1/3 lakťa"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:46
 msgid "47'"
-msgstr ""
+msgstr "47'"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:47
 msgid "1/2 of a cubit"
-msgstr ""
+msgstr "1/2 lakťa"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:48
 msgid "1°10'"
-msgstr ""
+msgstr "1°10'"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:51
 msgid "finger"
-msgstr ""
+msgstr "prst"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:52
 msgid "1/32 of a cubit"
-msgstr ""
+msgstr "1/32 lakťa"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:53
 msgid "4.4'"
-msgstr ""
+msgstr "4.4'"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:54
 msgid "1/16 of a cubit"
-msgstr ""
+msgstr "1/16 lakťa"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:55
 msgid "8.75'"
-msgstr ""
+msgstr "Severné korene mihalníc"
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:60
@@ -231,11 +263,15 @@ msgid ""
 "stars. This means that we are looking at two layers of stars knowledge at "
 "the same time: the Ptolemaic one and the indigenous Arab one."
 msgstr ""
+"Ďalší dôležitý prvok Al-Súfího knihy je jeho záznam domorodých arabských "
+"mien hviezd spadajúcich pod každé súhvezdie a ich presná identifikácia "
+"vzhľadom k zodpovedajúcim Ptolemajovým hviezdam. To znamená, že sa pozeráme "
+"naraz na dve vrstvy poznania hviezd: Ptolemajovské a domorodé arabské."
 
 #. type: Content of: <h2>
 #: ../../skycultures/al-sufi/description.en.utf8:62
 msgid "The Sky Culture"
-msgstr ""
+msgstr "Kultúra oblohy"
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:64
@@ -247,6 +283,12 @@ msgid ""
 "class='external text' rel=\"nofollow\">Oxford, Bodleian Library Ms. Marsh "
 "144 dated 1009 AD</a>."
 msgstr ""
+"Táto kultúra oblohy je výsledkom výskumu na viacerých rukopisoch knihy, z "
+"ktorých najstarší je <a href=\"https://iiif.bodleian.ox.ac.uk/iiif/viewer"
+"/c1caa84c-f6d2-483f-"
+"9eb4-2439cccdc801#?c=0&m=0&s=0&cv=25&r=0&xywh=-4815%2C-378%2C14782%2C7535\" "
+"class='external text' rel=\"nofollow\">Oxford, Bodleian Library Ms. Marsh "
+"144 datovaný 1009 n.l.</a>."
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:67
@@ -261,6 +303,14 @@ msgid ""
 " plus explanations and commentary by Khalid Al-Ajaji<sup><a "
 "href=\"#footnote-4\">[4]</a></sup>."
 msgstr ""
+"Po prvé, rukopisy Knihy stálic boli riadne upravované a bol k nim spravený "
+"text. Po druhé, každá členská hviezda zo 48 súhvezdí bola identifikovaná "
+"podľa Al-Súfího popisu a skonštruovali sa nové tabuľky vrátane moderných "
+"označení hviezd z katalógov Hipparcos, Jasných hviezd a Beyerovho. Po "
+"tretie, domorodé arabské mená hviezd sa zozbierali a identifikovali podľa "
+"Al-Súfího priradenia k Ptolemajovým. Všetky predošlé kroky boli opísané v "
+"digitálne vydanej knihe Kniha stálic plus vysvetlenia a komentáre od Chálid "
+"Al-Adžadžiho <sup><a href=\"#footnote-4\">[4]</a></sup>."
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:70
@@ -280,6 +330,18 @@ msgid ""
 "star file as secondary names, while names of group of stars were defined "
 "through asterism names and asterism lines files."
 msgstr ""
+"Paličkové obrázky ku kultúre oblohy sú prevzaté z Ulug Begovho rukopisu "
+"Knihy stálic, vybraté a uprevené pre Stellarium pánom Kutaibaa Akraa <sup><a"
+" href=\"#footnote-5\">[5]</a></sup>. Súbor s menami hviezd obsahuje číslo "
+"hviezdy v súhvezdí, ako jej hlavné meno a popis hviezdy v tabuľkách ako "
+"vedľajšie meno. Napríklad, Polárka má hlavné meno zobrazené ako UMi1, UMi je"
+" skratka Ursa Minor a 1 je prvá hviezda súhvezdia. Ak je hviezda vybratá, na"
+" vrchu obrazovky sa zobrazia vedľajšie mená ako \"Hviezda na konci "
+"chvosta\". Čiary súhvezdí sú zostavené podľa tvarov súhvezdí s pokusom "
+"spojiť čo najviac členských hviezd. Do súboru s hviezdami boli pridané "
+"ďalšie jednotlivé vedľajšie mená pre domorodé arabské názvy hviezd, kým "
+"názvy skupín hviezd boli definované cez asterizmy a súbory pre čiary "
+"asterizmov."
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:73
@@ -290,6 +352,11 @@ msgid ""
 "href=\"#footnote-7\">[7]</a></sup>. The translation was modified in a few "
 "places to agree with Al-Sufi wording."
 msgstr ""
+"Preklad popisov hviezd z arabčiny do angličtiny bol prevzatý zo stránky "
+"Ernieho Wrigtha <sup><a href=\"#footnote-6\">[6]</a></sup>, ktorý bol "
+"prepísaný z Toomervho prekladu Almagestu <sup><a "
+"href=\"#footnote-7\">[7]</a></sup>. Preklad bol miestami upravený, aby "
+"súhlasil s Al-Súfího vyjadrením."
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:77
@@ -297,6 +364,8 @@ msgid ""
 "The single source of the sky culture is the Book of Fixed Stars and the "
 "objective is to give a faithful representation of the book content."
 msgstr ""
+"Jediným zdrojom tejto kultúry oblohy je Kniha stálic a zámerom je podať "
+"vernú reprezentáciu obsahu knihy."
 
 #. type: Content of: <h3>
 #: ../../skycultures/al-sufi/description.en.utf8:79
@@ -314,6 +383,10 @@ msgid ""
 "contributors, and cite the contributors). The author wishes that this work "
 "be cited according to the common rules."
 msgstr ""
+"Táto kultúra oblohy je poskytnutá zadarmo pod medzinárodnou licenciou CC BY-"
+"ND 4.0 (možné zdieľanie, nemeniť bez oslovenia prispievateľov a citovať "
+"prispievateľov). Autor si želá, aby bolo to dielo citované podľa všeobecných"
+" pravidiel."
 
 #. type: Content of: <p><h3>
 #: ../../skycultures/al-sufi/description.en.utf8:82
@@ -342,6 +415,8 @@ msgid ""
 "Book of Fixed Stars sky culture was compiled and added to Stellarium by "
 "Khalid Al-Ajaji: turath.alfalak@gmail.com"
 msgstr ""
+"Kultúru oblohy podľa Knihy stálic skompiloval a do Stellaria pridal Chálid "
+"Al-Adžadži: turath.alfalak@gmail.com"
 
 #. type: Content of: <h3>
 #: ../../skycultures/al-sufi/description.en.utf8:85
@@ -357,11 +432,14 @@ msgid ""
 "Sufi And His Book On The Constellations, XI, pg 57. Northampton [England]: "
 "Variorum Reprints, 1989."
 msgstr ""
+"[1] The Arabs and the Stars, Paul Kunitzsch,The Astronomer Abu'L-Husayn Al-"
+"Sufi And His Book On The Constellations, XI, pg 57. Northampton [England]: "
+"Variorum Reprints, 1989."
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:88
 msgid "[2] See Al-Sufi description in his book of the 14th star in Auriga."
-msgstr ""
+msgstr "[2] viď Al-Súfího popis v jeho knihe k 14. hviezde v Povozníkovi."
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:90
@@ -369,6 +447,8 @@ msgid ""
 "[3] DESCRIPTIONS DES ETOILES FIXES, traduction littérale avec des notes par "
 "H C F C Schjellerup, St Petersbourg, 1874, pg 26-27."
 msgstr ""
+"[3] DESCRIPTIONS DES ETOILES FIXES, traduction littérale avec des notes par "
+"H C F C Schjellerup, St Petersbourg, 1874, pg 26-27."
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:92
@@ -378,6 +458,10 @@ msgid ""
 " class='external text' rel=\"nofollow\">Book of Fixed Stars: Critical "
 "edition with commentary by Khalid AlAjaji</a>."
 msgstr ""
+"[4] <a "
+"href=\"https://drive.google.com/drive/folders/1s6JXzftwjMQ5rgZoGE3718EtBLBZtjzr?usp=sharing\""
+" class='external text' rel=\"nofollow\">Book of Fixed Stars: Critical "
+"edition with commentary by Khalid AlAjaji</a>."
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:94
@@ -387,6 +471,10 @@ msgid ""
 "ibn ʿUmar al-Ṣūfī. Kitāb ṣuwar al-kawākib al-ṯābita, Paris, Bibliothèque "
 "nationale de France Ms. Arabe 5036</a>."
 msgstr ""
+"[5] <a href=\"https://gallica.bnf.fr/ark:/12148/btv1b60006156.r=.langEN\" "
+"class='external text' rel=\"nofollow\">Oulough Beg copy of ʿAbd al-Raḥmān "
+"ibn ʿUmar al-Ṣūfī. Kitāb ṣuwar al-kawākib al-ṯābita, Paris, Bibliothèque "
+"nationale de France Ms. Arabe 5036</a>."
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:96
@@ -395,6 +483,9 @@ msgid ""
 "class='external text' rel=\"nofollow\">Seeing Ancient Stars, Visualization "
 "of the Almagest Catalog</a>."
 msgstr ""
+"[6] <a href=\"http://www.etwright.org/astro/almagest.html#cat\" "
+"class='external text' rel=\"nofollow\">Seeing Ancient Stars, Visualization "
+"of the Almagest Catalog</a>."
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:98
@@ -402,6 +493,8 @@ msgid ""
 "[7] Ptolemy’s ALMAGEST, G. J. Toomer, Princeton University Press, 2nd ed., "
 "1998."
 msgstr ""
+"[7] Ptolemy’s ALMAGEST, G. J. Toomer, Princeton University Press, 2nd ed., "
+"1998."
 
 #. type: Content of: <h1>
 #: ../../skycultures/almagest/description.en.utf8:1
@@ -5340,6 +5433,14 @@ msgid ""
 "observed by astronomers in the Ming and Qing Dynasties, so they were no "
 "longer recorded in <i>Complete Studies of Astronomical Instruments</i>."
 msgstr ""
+"Singkuany sú všeobecne menšie ako súhvezdia z helénskej tradície. Do kameňa "
+"vyrytá Nebeská mapa z Sučou z obdobia dynastie Sung (13. storočie) ukazuje "
+"celkovo 283 Singkuanov zložených dovedna z 1565 jednotlivých hviezd. "
+"Singkuany sú rozdelené do 31 oblastí, 28 Dómov pozdĺž ekliptiky a Tri ohrady"
+" na severnej oblohe. Kvôli vplyvu precesie sa šesť Singkuanov pri južnom "
+"horizonte presúva viac a viac na juh. Pre astronómov z dynastií Ming a "
+"Čching sa stali ťažko pozorovateľnými, takže ich viac nezaznamenali v "
+"<i>Kompletnom výskume astronomických prístrojov</i>."
 
 #. type: Content of: <p><p>
 #: ../../skycultures/chinese/description.en.utf8:22
@@ -12559,6 +12660,9 @@ msgid ""
 "Digitalis Education Solutions, Inc. based on Hong Kong Space Museum star "
 "maps (no longer available online)."
 msgstr ""
+"Túto kultúru oblohy pôvodne pridala <i>Karrie Berglundová</i> z Digitalis "
+"Education Solutions, Inc. založenú na mapách hviezd Hongkongského múzea "
+"vesmíru (už viac nedostupné online)."
 
 #. type: Content of: <p><p><p><p>
 #: ../../skycultures/chinese/description.en.utf8:2987
