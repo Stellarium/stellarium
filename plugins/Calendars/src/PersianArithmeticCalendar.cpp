@@ -91,13 +91,10 @@ QStringList PersianArithmeticCalendar::getDateStrings() const
 QString PersianArithmeticCalendar::getFormattedDateString() const
 {
 	QStringList str=getDateStrings();
-
-	return QString("%1, %2 - %3 (%4) - %5 A.P.")
-			.arg(str.at(4)) // weekday
-			.arg(str.at(3)) // day
-			.arg(str.at(1)) // month, numerical
-			.arg(str.at(2)) // month, name
-			.arg(str.at(0));// year
+	// TRANSLATORS: A.P. means Anno Persico/Anno Persarum = Persian year
+	QString epoch = qc_("A.P.", "epoch");
+	// Format: [weekday], [day] - [month, numeral] ([month, name]) - [year] [epoch]
+	return QString("%1, %2 - %3 (%4) - %5 %6").arg(str.at(4), str.at(3), str.at(1), str.at(2), str.at(0), epoch);
 }
 
 // set date from a vector of calendar date elements sorted from the largest to the smallest.

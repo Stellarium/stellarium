@@ -203,7 +203,7 @@ void CalendarsDialog::setAboutHtml(void)
 	html += "<p>"  + q_("This plugin is based on:");
 	html += "<ul>";
 	html += "<li>" + QString("{Edward M. Reingold, Nachum Dershowitz: Calendrical Calculations.} The Ultimate Edition. Cambridge University Press 2018.")
-			.toHtmlEscaped().replace(a_rx, "<a href=\"https://doi.org/10.1017/9781107057623\">\\1</a>") + "</li>";
+			.toHtmlEscaped().replace(a_rx, "<a href=\"https://doi.org/10.1017/9781107415058\">\\1</a>") + "</li>";
 	html += "</ul></p>";
 
 	html += "<h3>" + q_("Links") + "</h3>";

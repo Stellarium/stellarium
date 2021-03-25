@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>927</width>
-    <height>584</height>
+    <width>956</width>
+    <height>659</height>
    </rect>
   </property>
   <property name="font">
@@ -4286,7 +4286,7 @@
              <item row="4" column="1">
               <widget class="QCheckBox" name="landscapePositionCheckBox">
                <property name="toolTip">
-                <string>Set the planet and position as it specified in landscape.ini</string>
+                <string>Set the planet and position as specified for the selected landscape</string>
                </property>
                <property name="text">
                 <string>Position from landscape</string>
@@ -5002,12 +5002,12 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>

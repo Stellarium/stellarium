@@ -90,12 +90,10 @@ QStringList IslamicCalendar::getDateStrings() const
 QString IslamicCalendar::getFormattedDateString() const
 {
 	QStringList str=getDateStrings();
-	return QString("%1, %2 - %3 (%4) - %5 A.H.")
-			.arg(str.at(4)) // weekday
-			.arg(str.at(3)) // day
-			.arg(str.at(1)) // month, numerical
-			.arg(str.at(2)) // month, name
-			.arg(str.at(0));// year
+	// TRANSLATORS: A.H. stands for "after hegira" meaning the year prophet Mohammad (Peace be upon him and all prophets) migrated from Mecca to Madinah.
+	QString epoch = qc_("A.H.", "epoch");
+	// Format: [weekday], [day] - [month, numeral] ([month, name]) - [year] [epoch]
+	return QString("%1, %2 - %3 (%4) - %5 %6").arg(str.at(4), str.at(3), str.at(1), str.at(2), str.at(0), epoch);
 }
 
 // set date from a vector of calendar date elements sorted from the largest to the smallest.

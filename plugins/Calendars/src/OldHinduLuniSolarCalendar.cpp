@@ -82,14 +82,11 @@ QStringList OldHinduLuniSolarCalendar::getDateStrings() const
 QString OldHinduLuniSolarCalendar::getFormattedDateString() const
 {
 	QStringList str=getDateStrings();
-	// TRANSLATORS: Old Hindu Lunar calendar phrase like "[Weekday], [number] - [MonthNumber] ([MonthName]) [leap] - [year]"
-	return QString("%1, %2 - %3 (%4) %5- %6 K.Y.")
-			.arg(str.at(5)) // weekday
-			.arg(str.at(4)) // day
-			.arg(str.at(1)) // month, numerical
-			.arg(str.at(2)) // month, name
-			.arg(str.at(3)=="1" ? qc_("[leap]", "short indicator for leap month") : "") // leap note
-			.arg(str.at(0));// year
+	// TRANSLATORS: K.Y. stands for Kali Yuga
+	QString epoch = qc_("K.Y.", "epoch");
+	QString leap = (str.at(3)=="1" ? qc_("[leap]", "short indicator for leap month") : "");
+	// Format: [weekday], [day] - [month, numeral] ([month, name]) [leap] - [year] [epoch]
+	return QString("%1, %2 - %3 (%4) %5 - %6 %7").arg(str.at(5), str.at(4), str.at(1), str.at(2), leap, str.at(0), epoch);
 }
 
 // set date from a vector of calendar date elements sorted from the largest to the smallest.

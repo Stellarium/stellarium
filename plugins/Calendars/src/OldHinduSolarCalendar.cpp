@@ -192,7 +192,7 @@ QStringList OldHinduSolarCalendar::getDateStrings() const
 QString OldHinduSolarCalendar::getFormattedDateString() const
 {
 	QStringList str=getDateStrings();
-	// TRANSLATORS: Old Hindu calendar phrase like "[Weekday], [number] - [MonthNumber] ([MonthName]) - [year] (Jovian [nr]:[name])"
+	// TRANSLATORS: Old Hindu calendar phrase like "[Weekday], [number] - [MonthNumber] ([MonthName]) - [year] K.Y. (Jovian [nr]:[name])"; K.Y. stands for Kali Yuga
 	return QString(q_("%1, %2 - %3 (%4) - %5 K.Y. (Jovian %6:%7)"))
 			.arg(str.at(6)) // weekday
 			.arg(str.at(5)) // day
