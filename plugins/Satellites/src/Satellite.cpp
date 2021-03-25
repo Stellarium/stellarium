@@ -440,7 +440,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 			{
 				double dop = getDoppler(c.frequency);
 				double ddop = dop;
-				char sign;
+				QString sign;
 				if (dop<0.)
 				{
 					sign='-';
@@ -452,12 +452,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 				if (!c.modulation.isEmpty() && c.modulation != "") oss << "  " << c.modulation;
 				if (!c.description.isEmpty() && c.description != "") oss << "  " << c.description;
 				if ((!c.modulation.isEmpty() && c.modulation != "") || (!c.description.isEmpty() && c.description != "")) oss << ": ";
-				oss << QString("%1 %2 (%3%4 %5)")
-				       .arg(c.frequency, 8, 'f', 5)
-				       .arg(qc_("MHz", "frequency"))
-				       .arg(sign)
-				       .arg(ddop, 6, 'f', 3)
-				       .arg(qc_("kHz", "frequency"));
+				oss << QString("%1 %2 (%3%4 %5)").arg(QString::number(c.frequency, 'f', 3), qc_("MHz", "frequency"), sign, QString::number(ddop, 'f', 3), qc_("kHz", "frequency"));
 				oss << "<br/>";
 			}
 		}
