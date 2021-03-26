@@ -5,7 +5,7 @@ labels:
         body: This is not a bug or at least we just don't understand your problem. Please follow the issue templates.
         action: close
       pr:
-        body: Thank you @{{ pull_request.user.login }} for suggesting this. Please follow the pull request templates.
+        body: Thanks to @{{ pull_request.user.login }} for suggesting this. Please follow the pull request templates.
         action: close
     unlabeled:
       issue:
@@ -27,19 +27,19 @@ labels:
   - name: enhancement
     labeled:
       issue:
-        body: Thank you @{{ issue.user.login }} for suggesting this enhancement.
+        body: Thanks to @{{ issue.user.login }} for suggesting this enhancement.
   - name: feature request
     labeled:
       issue:
-        body: Thank you @{{ issue.user.login }} for suggesting this feature.
+        body: Thanks to @{{ issue.user.login }} for suggesting this feature.
   - name: wishlist
     labeled:
       issue:
-        body: Thank you @{{ issue.user.login }} for suggesting this.
+        body: Thanks to @{{ issue.user.login }} for suggesting this.
   - name: confirmed
     labeled:
       issue:
-        body: OK, developers can reproduce the issue. Thank you @{{ issue.user.login }} for the report!
+        body: OK, developers can reproduce the issue. Thanks to @{{ issue.user.login }} for the report!
   - name: won't fix
     labeled:
       issue:
@@ -65,6 +65,12 @@ labels:
           This site actually does not discuss the Mobile version. Please use its own feedback system:
           https://www.stellarium-labs.com/support/
         action: close
+  - name: translations
+    labeled:
+      issue:
+        body: |
+          Thanks @{{ issue.user.login }}! In future please use Transifex to fix and improve translations: 
+          https://www.transifex.com/stellarium/stellarium/dashboard/
   - name: fix committed
     labeled:
       issue:
