@@ -410,6 +410,9 @@ void HelpDialog::updateAboutText(void) const
 		     << "Wolfgang Laun" << "Alexandros Kosiaris" << "Alexander Duytschaever";
 	contributors.sort();
 
+	// Regexp to replace {text} with an HTML link.
+	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
+
 	// populate About tab
 	QString newHtml = "<h1>" + StelUtils::getApplicationName() + "</h1>";
 	// Note: this legal notice is not suitable for translation
@@ -458,6 +461,12 @@ void HelpDialog::updateAboutText(void) const
 	newHtml += "<li>" + q_("Tester: %1").arg(QString("Khalid AlAjaji")).toHtmlEscaped() + "</li></ul>";
 	newHtml += "<h3>" + q_("Contributors").toHtmlEscaped() + "</h3>";
 	newHtml += "<p>"  + q_("Several people have made contributions to the project and their work has made Stellarium better (sorted alphabetically): %1.").arg(contributors.join(", ")).toHtmlEscaped() + "</p>";
+	newHtml += "<h3>" + q_("Acknowledgment").toHtmlEscaped() + "</h3>";
+	newHtml += "<p>"  + q_("If the Stellarium planetarium was helpful for your research work, the following acknowledgment would be appreciated:").toHtmlEscaped() + "</p>";
+	newHtml += "<p><em>"  + q_("This research has made use of the Stellarium planetarium") + "</em></p>";
+	newHtml += "<p>Zotti, G., Hoffmann, S. M., Wolf, A., Chéreau, F., & Chéreau, G. (2021). The Simulated Sky: Stellarium for Cultural Astronomy Research. Journal of Skyscape Archaeology, 6(2), 221–258. <a href='https://doi.org/10.1558/jsa.17822'>https://doi.org/10.1558/jsa.17822</a></p>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	newHtml += "<p>" + q_("Or you may {download the BibTeX file of the paper} to create another citation format.").toHtmlEscaped().replace(a_rx, "<a href=\"https://stellarium.org/files/stellarium.bib\">\\1</a>") + "</p>";
 	newHtml += "<p>";
 
 	ui->aboutBrowser->clear();
