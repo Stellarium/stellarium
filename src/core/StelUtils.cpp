@@ -965,7 +965,7 @@ bool isLeapYear(const int year)
 			return (year % 4 == 0);
 	}
 	else
-		return (imod(year, 4) == (year > 0 ? 0 : 3) );
+		return (year % 4 == 0); // astronomical year counting: strictly every 4th year.
 }
 
 // Find day number for date in year.
