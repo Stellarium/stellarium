@@ -1677,9 +1677,7 @@ void ConfigurationDialog::updateTabBarListWidgetWidth()
 
 	QAbstractItemModel* model = ui->stackListWidget->model();
 	if (!model)
-	{
 		return;
-	}
 
 	// stackListWidget->font() does not work properly!
 	// It has a incorrect fontSize in the first loading, which produces the bug#995107.
@@ -1700,6 +1698,7 @@ void ConfigurationDialog::updateTabBarListWidgetWidth()
 
 	// Hack to force the window to be resized...
 	ui->stackListWidget->setMinimumWidth(width);
+	ui->stackListWidget->updateGeometry();
 }
 
 void ConfigurationDialog::populateDeltaTAlgorithmsList()

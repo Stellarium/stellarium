@@ -649,9 +649,8 @@ void ViewDialog::updateTabBarListWidgetWidth()
 	ui->stackListWidget->adjustSize();
 	QAbstractItemModel* model = ui->stackListWidget->model();
 	if (!model)
-	{
 		return;
-	}
+
 	// stackListWidget->font() does not work properly!
 	// It has a incorrect fontSize in the first loading, which produces the bug#995107.
 	QFont font;
@@ -668,6 +667,7 @@ void ViewDialog::updateTabBarListWidgetWidth()
 	}
 	// Hack to force the window to be resized...
 	ui->stackListWidget->setMinimumWidth(width);
+	ui->stackListWidget->updateGeometry();
 }
 
 void ViewDialog::setSelectedCatalogsFromCheckBoxes()
