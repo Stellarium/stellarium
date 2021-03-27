@@ -637,7 +637,7 @@ msgstr "Vähennä valosaastetta"
 
 #: src/core/modules/LandscapeMgr.cpp:605
 msgid "Cyclic change in light pollution"
-msgstr "Valosaasteen syklinen muutos"
+msgstr "Valosaasteen jaksollinen muutos"
 
 #: src/core/modules/LandscapeMgr.cpp:1011 src/scripting/StelScriptMgr.cpp:457
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
@@ -706,7 +706,7 @@ msgstr "Dokumentoimaton pinnanmuototyyppi."
 #. TRANSLATORS: Description for landform 'mare' on Mars
 #: src/core/modules/NomenclatureItem.cpp:133
 msgid "'Sea'; dark albedo areas of no known geological significance."
-msgstr "'Meri'; tumma albedoalue ilman tunnettua geologiasta selitystä."
+msgstr "'Meri'; tumma albedoalue ilman tunnettua geologista selitystä."
 
 #. TRANSLATORS: Description for landform 'lacus' on Titan
 #: src/core/modules/NomenclatureItem.cpp:138
@@ -2227,7 +2227,7 @@ msgstr "Kirkkaan reunan suuntakulma"
 #: src/core/modules/Planet.cpp:1061 src/core/modules/Planet.cpp:1070
 #: src/core/modules/Planet.cpp:1106 src/core/modules/Planet.cpp:1113
 msgid "Position Angle of axis"
-msgstr ""
+msgstr "Akselin suuntakulma"
 
 #: src/core/modules/Planet.cpp:1062 src/core/modules/Planet.cpp:1063
 #: src/core/modules/Planet.cpp:1071 src/core/modules/Planet.cpp:1072
@@ -2580,7 +2580,7 @@ msgstr "Alustetaan käyttäjän nimistö..."
 
 #: src/core/StelApp.cpp:576
 msgid "Initializing sky cultures..."
-msgstr "Alustetaan taivaskulttuurit..."
+msgstr "Alustetaan tähtitarusto..."
 
 #: src/core/StelApp.cpp:580
 msgid "Initializing user markers..."
@@ -2596,7 +2596,7 @@ msgstr "Alustetaan kohokohdat..."
 
 #: src/core/StelApp.cpp:600
 msgid "Initializing scripting..."
-msgstr "Alustetetaan komentojonot..."
+msgstr "Alustetetaan komentosarjat..."
 
 #: src/core/StelApp.cpp:605
 msgid "Initializing color scheme..."
@@ -4293,15 +4293,15 @@ msgstr "mm-dd-yy"
 
 #: src/gui/ConfigurationDialog.cpp:1812
 msgid "ww, yyyy-mm-dd"
-msgstr ""
+msgstr "vko, vvvv-kk-pp"
 
 #: src/gui/ConfigurationDialog.cpp:1813
 msgid "ww, dd-mm-yyyy"
-msgstr ""
+msgstr "vko, pp-kk-vvvv"
 
 #: src/gui/ConfigurationDialog.cpp:1814
 msgid "ww, mm-dd-yyyy"
-msgstr ""
+msgstr "vko, kk-pp-vvvv"
 
 #: src/gui/ConfigurationDialog.cpp:1846
 msgid "12-hour format"
@@ -4334,23 +4334,23 @@ msgstr "10/10/10 bittiä"
 
 #: src/gui/HelpDialog.cpp:181 src/gui/HelpDialog.cpp:193
 msgid "Cannot check updates..."
-msgstr ""
+msgstr "Päivityksiä ei voida tarkastaa..."
 
 #: src/gui/HelpDialog.cpp:206
 msgid "Looks like you are using the development version of Stellarium."
-msgstr ""
+msgstr "Näyttää, että käytät Stellariumin kehitysversiota."
 
 #: src/gui/HelpDialog.cpp:208
 msgid "This is latest stable version of Stellarium."
-msgstr ""
+msgstr "Tämä viimeisin Stellariumin vakaa versio."
 
 #: src/gui/HelpDialog.cpp:210
 msgid "This version of Stellarium is outdated!"
-msgstr ""
+msgstr "Tämä Stellariumin versio on vanhentunut!"
 
 #: src/gui/HelpDialog.cpp:210
 msgid "Download new version."
-msgstr ""
+msgstr "Lataa uusi versio."
 
 #: src/gui/HelpDialog.cpp:241
 msgid "Stellarium Help"
@@ -4499,17 +4499,19 @@ msgstr "{Usein kysyttyjä kysymyksiä} Stellariumista. Ja vastauksia."
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:347
 msgid "{The Stellarium Wiki} - general information."
-msgstr ""
+msgstr "{The Stellarium Wiki} - yleistä informaatiota."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:352
 msgid "{The landscapes} - user-contributed landscapes for Stellarium."
-msgstr ""
+msgstr "{Maisemat} - käyttäjien lähettämiä maisemia Stellariumiin."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:357
 msgid "{The scripts} - user-contributed and official scripts for Stellarium."
 msgstr ""
+"{Komentosarjat} - käyttäjien lähettämiä ja virallisia komentosarjoja "
+"Stellariumiin."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:362
@@ -4925,12 +4927,12 @@ msgstr "Suurin tunnettu aktiivisuus (leonidit 1833)"
 #: src/gui/ViewDialog.cpp:1177
 msgctxt "magnitude algorithm"
 msgid "G. Müller (1893)"
-msgstr ""
+msgstr "G. Müller (1893)"
 
 #: src/gui/ViewDialog.cpp:1178
 msgctxt "magnitude algorithm"
 msgid "Astronomical Almanac (1984)"
-msgstr ""
+msgstr "Astronomical Almanac (1984)"
 
 #: src/gui/ViewDialog.cpp:1179
 msgctxt "magnitude algorithm"
@@ -4945,7 +4947,7 @@ msgstr "Explanatory Supplement (2013)"
 #: src/gui/ViewDialog.cpp:1181
 msgctxt "magnitude algorithm"
 msgid "Mallama & Hilton (2018)"
-msgstr ""
+msgstr "Mallama & Hilton (2018)"
 
 #: src/gui/ViewDialog.cpp:1182
 msgctxt "magnitude algorithm"
@@ -5162,15 +5164,15 @@ msgstr ""
 
 #: src/gui/ScriptConsole.cpp:178 src/gui/ScriptConsole.cpp:248
 msgid "Caution!"
-msgstr ""
+msgstr "Varoitus!"
 
 #: src/gui/ScriptConsole.cpp:178
 msgid "Are you sure you want to load script without saving changes?"
-msgstr ""
+msgstr "Haluatko todella ladata komentosarjan tallentamatta muutoksia?"
 
 #: src/gui/ScriptConsole.cpp:192
 msgid "Stellarium Script Files"
-msgstr ""
+msgstr "Stellariumin komentosarjatiedostot"
 
 #: src/gui/ScriptConsole.cpp:195
 msgid "Load Script"
@@ -7252,7 +7254,7 @@ msgstr "Sharpless-luettelo"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:384
 msgid "van den Bergh Catalogue"
-msgstr ""
+msgstr "van den Bergh Catalogue"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:386
@@ -7332,7 +7334,7 @@ msgstr "Hickson Compact Group"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:416
 msgid "ESO/Uppsala Survey of the ESO(B) Atlas"
-msgstr ""
+msgstr "ESO/Uppsala Survey of the ESO(B) Atlas"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:418
@@ -7397,7 +7399,7 @@ msgstr "Kiinnostavat muuttuvat tähdet"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:454
 msgid "Al-Sufi"
-msgstr ""
+msgstr "Al-Sufi"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:456
@@ -7934,7 +7936,7 @@ msgstr "Messier-maratoni"
 #. TRANSLATORS: Name of script
 #: src/translations.h:677
 msgid "Random location"
-msgstr ""
+msgstr "Satunnainen sijainti"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:683
@@ -15600,11 +15602,11 @@ msgstr "Lisää uusi lähde"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1054
 msgid "Edit selected source"
-msgstr ""
+msgstr "Muokkaa valittua lähdettä"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1057
 msgid "Save source"
-msgstr ""
+msgstr "Tallenna lähde"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1060
 msgid "Remove selected source"
@@ -15848,7 +15850,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:49
 msgid "Use Stellarium settings"
-msgstr ""
+msgstr "Käytä Stellariumin asetuksia"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:185
 msgid ""
@@ -17840,12 +17842,12 @@ msgstr ""
 #: plugins/NavStars/src/NavStars.cpp:596
 msgctxt "the highest part of the Sun or Moon"
 msgid "upper limb"
-msgstr ""
+msgstr "yläreuna"
 
 #: plugins/NavStars/src/NavStars.cpp:597
 msgctxt "the lowest part of the Sun or Moon"
 msgid "lower limb"
-msgstr ""
+msgstr "alareuna"
 
 #: plugins/NavStars/src/NavStars.cpp:612 plugins/NavStars/src/NavStars.cpp:640
 #: plugins/NavStars/src/NavStars.cpp:646
@@ -18109,7 +18111,7 @@ msgstr ""
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:292
 msgid "Use upper limb for Sun and Moon"
-msgstr ""
+msgstr "Käytä Auringon tai Kuun yläreunaa"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:293
 msgid "Use UTC time when navigational stars are displayed"
@@ -18580,7 +18582,7 @@ msgstr "Tämä laajennus käyttää Stefan Fringsin {QtWebApp HTTP-palvelinta}."
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:174
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:195
 msgid "Publications"
-msgstr ""
+msgstr "Julkaisut"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:159
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:175
@@ -18985,7 +18987,7 @@ msgstr "TTV"
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:1038
 msgid "Timing"
-msgstr ""
+msgstr "Ajoitus"
 
 #. TRANSLATORS: Exoplanet detection method. TTV=Transit Timing Variation
 #: plugins/Exoplanets/src/Exoplanets.cpp:1040
@@ -18995,7 +18997,7 @@ msgstr ""
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:1042
 msgid "Default"
-msgstr ""
+msgstr "Oletus"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:278
 msgid "planetary system"
@@ -19075,12 +19077,12 @@ msgstr "Tasapainolämpötila maapallolla"
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 msgctxt "time period"
 msgid "day"
-msgstr ""
+msgstr "päivää"
 
 #. TRANSLATORS: angular distance
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
 msgid "Ang. dist."
-msgstr ""
+msgstr "Kulmaet."
 
 #. TRANSLATORS: detection method
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:181
@@ -19089,39 +19091,39 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:218
 msgid "Mass of exoplanet in Jovian masses"
-msgstr ""
+msgstr "Eksoplaneetan massa Jupiterin massoina"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
 msgid "Radius of exoplanet in Jovian radii"
-msgstr ""
+msgstr "Eksoplaneetan säde Jupiterin säteinä"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:224
 msgid "Orbital period of exoplanet in days"
-msgstr ""
+msgstr "Eksoplaneetan kiertoaika päivissä"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
 msgid "Semi-major axis of orbit in astronomical units"
-msgstr ""
+msgstr "Radan pääakselin puolikas tähtitieteellisinä yksikköinä"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
 msgid "Eccentricity of orbit"
-msgstr ""
+msgstr "Kiertoradan eksentrisyys"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
 msgid "Inclination of orbit in degrees"
-msgstr ""
+msgstr "Kiertoradan kaltevuus asteina"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
 msgid "Angular distance from host star in arcseconds"
-msgstr ""
+msgstr "Kulmaetäisyys emotähdestä kaarisekunneissa"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:241
 msgid "Radius of star in solar radii"
-msgstr ""
+msgstr "Tähden säde Auringon säteinä"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:244
 msgid "Detection method of exoplanet"
-msgstr ""
+msgstr "Eksoplaneetan tunnistusmenetelmä"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:273
 msgid "Exoplanets Plug-in"
@@ -20657,6 +20659,8 @@ msgid ""
 "Solaris is the title of a 1961 science fiction novel about an ocean-covered "
 "exoplanet by Polish writer Stanislaw Lem."
 msgstr ""
+"Solaris on puolalaisen kirjailijan Stanislaw Lemin meren peittämästä "
+"eksoplaneetasta kertovan tieteiskirjan nimi vuodelta 1961."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:547
 msgid ""
@@ -21189,7 +21193,7 @@ msgstr "Kiertoaika, päivää"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:897
 msgid "Angular Distance, arc-sec"
-msgstr ""
+msgstr "Kulmaetäisyys, kaarisekuntia"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:898
 msgid "Effective temperature of host star, K"
@@ -21357,7 +21361,7 @@ msgstr "Kuvaaja"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:620
 msgid "Table"
-msgstr ""
+msgstr "Taulukko"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:621
 msgctxt "tab in plugin windows"
@@ -21858,7 +21862,7 @@ msgstr "Vaihda ajantasauksen etumerkki"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:253
 msgid "Color of text"
-msgstr ""
+msgstr "Tekstin väri"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:89
 msgid "The current catalog of Meteor Showers is invalid!"
@@ -21973,7 +21977,7 @@ msgstr "Aktiivisena"
 #: plugins/MeteorShowers/src/MeteorShower.cpp:575
 msgctxt "meteor shower activity"
 msgid "Maximum"
-msgstr ""
+msgstr "Maksimi"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:577
 msgid "Solar longitude"
@@ -22296,7 +22300,7 @@ msgstr "Sextantidit"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:157
 msgid "Daytime Sextantids"
-msgstr ""
+msgstr "Päivätaivaan sextantidit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:159
@@ -23320,7 +23324,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:491
 msgid "Draw horizon polyline in foreground"
-msgstr ""
+msgstr "Piirrä horisontin murtoviiva etualalle"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:492
 msgid "Visual options"
@@ -23738,7 +23742,7 @@ msgstr "Valittu kohteen tuntikulma"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:616
 msgid "Line thickness"
-msgstr ""
+msgstr "Viivan paksuus"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:619
 msgid "Geographic Location 1"
@@ -23756,7 +23760,7 @@ msgstr "Maantieteellinen sijainti 2"
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:632
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:639
 msgid "Always counted from North"
-msgstr ""
+msgstr "Lasketaan aina pohjoisesta"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:634
 msgid "Custom Azimuth 1"
@@ -23799,30 +23803,30 @@ msgstr ""
 #: plugins/Calendars/src/Calendars.cpp:162
 #: plugins/Calendars/src/Calendars.cpp:163
 msgid "Calendars"
-msgstr ""
+msgstr "Kalenterit"
 
 #: plugins/Calendars/src/Calendars.cpp:78
 msgid "Calendars of the world"
-msgstr ""
+msgstr "Maailman kalenterit"
 
 #: plugins/Calendars/src/Calendars.cpp:279
 #: plugins/Calendars/src/ui_calendarsDialog.h:818
 #: plugins/Calendars/src/ui_calendarsDialog.h:831
 msgctxt "calendar"
 msgid "Julian"
-msgstr ""
+msgstr "Juliaaninen"
 
 #: plugins/Calendars/src/Calendars.cpp:280
 #: plugins/Calendars/src/ui_calendarsDialog.h:825
 #: plugins/Calendars/src/ui_calendarsDialog.h:835
 msgctxt "calendar"
 msgid "Gregorian"
-msgstr ""
+msgstr "Gregoriaaninen"
 
 #: plugins/Calendars/src/Calendars.cpp:281
 msgctxt "calendar"
 msgid "ISO week"
-msgstr ""
+msgstr "ISO-viikko"
 
 #: plugins/Calendars/src/Calendars.cpp:282
 #: plugins/Calendars/src/ui_calendarsDialog.h:822
@@ -24900,17 +24904,17 @@ msgstr ""
 
 #: plugins/Calendars/src/ISOCalendar.cpp:79
 msgid "Week"
-msgstr ""
+msgstr "Viikko"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:76
 msgctxt "Icelandic calendar"
 msgid "summer"
-msgstr ""
+msgstr "kesä"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:77
 msgctxt "Icelandic calendar"
 msgid "winter"
-msgstr ""
+msgstr "talvi"
 
 #. TRANSLATORS: Icelandic calendar phrase like "[Weekday] of week [number] of
 #. [summer|winter] (Month [number]: [name]) - [year]"

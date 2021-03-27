@@ -5,7 +5,7 @@
 # 
 # Translators:
 # cardinot <mcardinot@gmail.com>, 2017
-# Besnik Bleta <besnik@programeshqip.org>, 2020
+# Besnik Bleta <besnik@programeshqip.org>, 2021
 # 
 #, fuzzy
 msgid ""
@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2021-03-25 19:44+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
-"Last-Translator: Besnik Bleta <besnik@programeshqip.org>, 2020\n"
+"Last-Translator: Besnik Bleta <besnik@programeshqip.org>, 2021\n"
 "Language-Team: Albanian (https://www.transifex.com/stellarium/teams/80998/sq/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -119,7 +119,7 @@ msgstr "Përzgjidhni krejt yjësiye"
 
 #: src/core/modules/ConstellationMgr.cpp:142
 msgid "Reload the sky culture"
-msgstr ""
+msgstr "Ringarko kulturën qiellore"
 
 #: src/core/modules/StarMgr.cpp:468 src/ui_viewDialog.h:3151
 #: src/ui_dsoColorsDialog.h:703
@@ -299,7 +299,7 @@ msgstr ""
 #. TRANSLATORS: Apex Point, where the observer planet is heading to
 #: src/core/modules/GridLinesMgr.cpp:1437
 msgid "Apex"
-msgstr ""
+msgstr "Apeks"
 
 #. TRANSLATORS: Antapex Point, where the observer planet is receding from
 #: src/core/modules/GridLinesMgr.cpp:1439
@@ -364,7 +364,7 @@ msgstr "Vijë meridiani"
 #: src/core/modules/GridLinesMgr.cpp:1820
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:389
 msgid "Horizon line"
-msgstr ""
+msgstr "Vijë e horizontit"
 
 #: src/core/modules/GridLinesMgr.cpp:1821
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:347
@@ -377,7 +377,7 @@ msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:1823 src/ui_configurationDialog.h:1769
 msgid "Ecliptic grid"
-msgstr ""
+msgstr "Rrjetë ekliptike"
 
 #: src/core/modules/GridLinesMgr.cpp:1824 src/ui_viewDialog.h:3695
 #: src/ui_configurationDialog.h:1761
@@ -452,7 +452,7 @@ msgstr "Pole galaktike"
 
 #: src/core/modules/GridLinesMgr.cpp:1842 src/ui_viewDialog.h:3784
 msgid "Galactic center and anticenter"
-msgstr ""
+msgstr "Qendër dhe kundërqendër galaktike"
 
 #: src/core/modules/GridLinesMgr.cpp:1843 src/ui_viewDialog.h:3612
 msgid "Supergalactic poles"
@@ -503,97 +503,97 @@ msgstr "Tregues kompasi"
 #: src/core/modules/LandscapeMgr.cpp:245 src/core/modules/Planet.cpp:1009
 msgctxt "compass direction"
 msgid "N"
-msgstr ""
+msgstr "V"
 
 #. TRANSLATORS: South
 #: src/core/modules/LandscapeMgr.cpp:247 src/core/modules/Planet.cpp:1001
 msgctxt "compass direction"
 msgid "S"
-msgstr ""
+msgstr "J"
 
 #. TRANSLATORS: East
 #: src/core/modules/LandscapeMgr.cpp:249 src/core/modules/Planet.cpp:1013
 msgctxt "compass direction"
 msgid "E"
-msgstr ""
+msgstr "L"
 
 #. TRANSLATORS: West
 #: src/core/modules/LandscapeMgr.cpp:251 src/core/modules/Planet.cpp:1005
 msgctxt "compass direction"
 msgid "W"
-msgstr ""
+msgstr "P"
 
 #. TRANSLATORS: Northeast
 #: src/core/modules/LandscapeMgr.cpp:253 src/core/modules/Planet.cpp:1011
 msgctxt "compass direction"
 msgid "NE"
-msgstr ""
+msgstr "VL"
 
 #. TRANSLATORS: Southeast
 #: src/core/modules/LandscapeMgr.cpp:255 src/core/modules/Planet.cpp:1015
 msgctxt "compass direction"
 msgid "SE"
-msgstr ""
+msgstr "JL"
 
 #. TRANSLATORS: Southwest
 #: src/core/modules/LandscapeMgr.cpp:257 src/core/modules/Planet.cpp:1003
 msgctxt "compass direction"
 msgid "SW"
-msgstr ""
+msgstr "JP"
 
 #. TRANSLATORS: Northwest
 #: src/core/modules/LandscapeMgr.cpp:259 src/core/modules/Planet.cpp:1007
 msgctxt "compass direction"
 msgid "NW"
-msgstr ""
+msgstr "VP"
 
 #. TRANSLATORS: North-northeast
 #: src/core/modules/LandscapeMgr.cpp:261 src/core/modules/Planet.cpp:1010
 msgctxt "compass direction"
 msgid "NNE"
-msgstr ""
+msgstr "VVL"
 
 #. TRANSLATORS: East-northeast
 #: src/core/modules/LandscapeMgr.cpp:263 src/core/modules/Planet.cpp:1012
 msgctxt "compass direction"
 msgid "ENE"
-msgstr ""
+msgstr "LVL"
 
 #. TRANSLATORS: East-southeast
 #: src/core/modules/LandscapeMgr.cpp:265 src/core/modules/Planet.cpp:1014
 msgctxt "compass direction"
 msgid "ESE"
-msgstr ""
+msgstr "LJL"
 
 #. TRANSLATORS: South-southeast
 #: src/core/modules/LandscapeMgr.cpp:267 src/core/modules/Planet.cpp:1016
 msgctxt "compass direction"
 msgid "SSE"
-msgstr ""
+msgstr "JJL"
 
 #. TRANSLATORS: South-southwest
 #: src/core/modules/LandscapeMgr.cpp:269 src/core/modules/Planet.cpp:1002
 msgctxt "compass direction"
 msgid "SSW"
-msgstr ""
+msgstr "JJP"
 
 #. TRANSLATORS: West-southwest
 #: src/core/modules/LandscapeMgr.cpp:271 src/core/modules/Planet.cpp:1004
 msgctxt "compass direction"
 msgid "WSW"
-msgstr ""
+msgstr "PJP"
 
 #. TRANSLATORS: West-northwest
 #: src/core/modules/LandscapeMgr.cpp:273 src/core/modules/Planet.cpp:1006
 msgctxt "compass direction"
 msgid "WNW"
-msgstr ""
+msgstr "PVP"
 
 #. TRANSLATORS: North-northwest
 #: src/core/modules/LandscapeMgr.cpp:275 src/core/modules/Planet.cpp:1008
 msgctxt "compass direction"
 msgid "NNW"
-msgstr ""
+msgstr "VVP"
 
 #: src/core/modules/LandscapeMgr.cpp:595
 msgid "Atmosphere"
@@ -662,7 +662,7 @@ msgstr "Autor"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1028
 msgctxt "distance"
 msgid "m"
-msgstr ""
+msgstr "m"
 
 #: src/core/modules/LandscapeMgr.cpp:1020 src/ui_locationDialogGui.h:481
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
@@ -743,7 +743,7 @@ msgstr "Diametër"
 #: plugins/Satellites/src/Satellite.cpp:381
 msgctxt "distance"
 msgid "km"
-msgstr ""
+msgstr "km"
 
 #: src/core/modules/NomenclatureItem.cpp:225
 msgid "Planetographic long./lat."
@@ -1133,7 +1133,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'catena'
 #: src/core/modules/NomenclatureItem.cpp:518
 msgid "Chain of craters."
-msgstr "Zinxhir krateresh"
+msgstr "Zinxhir krateresh."
 
 #. TRANSLATORS: Description for landform 'cavus'
 #: src/core/modules/NomenclatureItem.cpp:520
@@ -1179,7 +1179,7 @@ msgstr "Qendër vullkanike aktive."
 #. TRANSLATORS: Description for landform 'facula'
 #: src/core/modules/NomenclatureItem.cpp:536
 msgid "Bright spot."
-msgstr "Njollë e ndritshme"
+msgstr "Njollë e ndritshme."
 
 #. TRANSLATORS: Description for landform 'farrum'
 #: src/core/modules/NomenclatureItem.cpp:538
@@ -1248,7 +1248,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'lenticula'
 #: src/core/modules/NomenclatureItem.cpp:562
 msgid "Small dark spot."
-msgstr ""
+msgstr "Njollë e vogël e errët."
 
 #. TRANSLATORS: Description for landform 'linea'
 #: src/core/modules/NomenclatureItem.cpp:564
@@ -1412,7 +1412,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:3102 src/gui/AstroCalcDialog.cpp:3160
 #: plugins/Supernovae/src/Supernova.cpp:127
 msgid "Magnitude"
-msgstr ""
+msgstr "Magnitudë"
 
 #: src/core/modules/Nebula.cpp:150
 msgid "Opacity"
@@ -1440,7 +1440,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:209 src/core/modules/Planet.cpp:450
 #: src/core/modules/StarWrapper.cpp:173
 msgid "Additional names: "
-msgstr "Emra shtesë:"
+msgstr "Emra shtesë: "
 
 #: src/core/modules/Nebula.cpp:215 src/core/modules/Planet.cpp:457
 #: src/core/modules/StarWrapper.cpp:179
@@ -1459,7 +1459,7 @@ msgstr "Ndriçim sipërfaqeje"
 
 #: src/core/modules/Nebula.cpp:239
 msgid "after extinction"
-msgstr ""
+msgstr "pas zhdukjes"
 
 #: src/core/modules/Nebula.cpp:249 src/core/modules/Nebula.cpp:251
 #: src/gui/AstroCalcDialog.cpp:1062 src/gui/AstroCalcDialog.cpp:1064
@@ -1598,7 +1598,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:1148
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "undocumented concentration class"
-msgstr ""
+msgstr "klasë përqendrimi e padokumentuar"
 
 #: src/core/modules/Nebula.cpp:1168
 msgctxt "Trumpler's Concentration Class"
@@ -1683,7 +1683,7 @@ msgstr "e ndritshme"
 #: src/core/modules/Nebula.cpp:1241
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
-msgstr ""
+msgstr "ndriçim mesatar"
 
 #: src/core/modules/Nebula.cpp:1244
 msgctxt "Reflection Nebulae Brightness"
@@ -1693,7 +1693,7 @@ msgstr "e zbehtë"
 #: src/core/modules/Nebula.cpp:1247
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
-msgstr ""
+msgstr "shumë i zbehtë"
 
 #: src/core/modules/Nebula.cpp:1250
 msgctxt "Reflection Nebulae Brightness"
@@ -1896,7 +1896,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1373
 msgid "HII region"
-msgstr ""
+msgstr "Rajon HII"
 
 #: src/core/modules/Nebula.cpp:1374
 msgid "supernova remnant"
@@ -1967,11 +1967,11 @@ msgstr "grumbull galaktikash"
 
 #: src/core/modules/Nebula.cpp:1390
 msgid "part of a galaxy"
-msgstr ""
+msgstr "pjesë e një galaktike"
 
 #: src/core/modules/Nebula.cpp:1391
 msgid "region of the sky"
-msgstr ""
+msgstr "zonë e qiellit"
 
 #: src/core/modules/Nebula.cpp:1392
 msgid "object of unknown nature"
@@ -1989,7 +1989,7 @@ msgstr "Hap/Mbyll filtër lloji OQTh"
 #: src/core/modules/NebulaMgr.cpp:1377 src/gui/StelDialog.cpp:306
 #: src/StelMainView.cpp:954
 msgid "Attention!"
-msgstr ""
+msgstr "Kujdes!"
 
 #: src/core/modules/NebulaMgr.cpp:1377
 msgid "DSO catalog version mismatch"
@@ -2006,7 +2006,7 @@ msgstr ""
 
 #: src/core/modules/NebulaMgr.cpp:1377
 msgid "See Logfile for instructions."
-msgstr ""
+msgstr "Për udhëzime, shihni Logfile"
 
 #: src/core/modules/Planet.cpp:428 src/core/modules/Comet.cpp:155
 #: src/core/modules/StarWrapper.cpp:229 plugins/Quasars/src/Quasar.cpp:133
@@ -2082,7 +2082,7 @@ msgstr "Shpejtësi heliocentrike"
 
 #: src/core/modules/Planet.cpp:644
 msgid "with rings"
-msgstr ""
+msgstr "me unaza"
 
 #: src/core/modules/Planet.cpp:661
 msgid "scaled up to"
@@ -2225,11 +2225,11 @@ msgstr ""
 
 #: src/core/modules/Planet.cpp:1126
 msgid "Eclipse obscuration"
-msgstr ""
+msgstr "Errësim eklipsi"
 
 #: src/core/modules/Planet.cpp:1135
 msgid "Eclipse magnitude"
-msgstr ""
+msgstr "Magnitudë eklipsi"
 
 #: src/core/modules/Planet.cpp:1160
 msgid "Center of solar eclipse (Lat./Long.)"
@@ -2255,7 +2255,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:1182
 msgctxt "type of solar eclipse"
 msgid "(total)"
-msgstr ""
+msgstr "(gjithsej)"
 
 #: src/core/modules/Planet.cpp:1229
 msgid "Penumbral eclipse magnitude"
@@ -2343,11 +2343,11 @@ msgstr "Zmadho trupa të vegjël"
 
 #: src/core/modules/SolarSystem.cpp:306
 msgid "Enlarge Planets"
-msgstr ""
+msgstr "Zmadho Planetët"
 
 #: src/core/modules/SolarSystem.cpp:307
 msgid "Enlarge Sun"
-msgstr ""
+msgstr "Zmadho Diellin"
 
 #: src/core/modules/SolarSystem.cpp:308
 msgid "Native planet names (from starlore)"
@@ -2444,7 +2444,7 @@ msgstr "Kashta e Kumtrit"
 
 #: src/core/modules/ZodiacalLight.cpp:88
 msgid "Zodiacal Light"
-msgstr ""
+msgstr "Dritë Zodiake"
 
 #: src/core/modules/ToastMgr.cpp:62
 msgid "Digitized Sky Survey (TOAST)"
@@ -2464,7 +2464,7 @@ msgstr "Po gatitet hyrje në rrjet…"
 
 #: src/core/StelApp.cpp:431
 msgid "Initializing network disk cache..."
-msgstr ""
+msgstr "Po gatitet fshehtinë disku rrjeti…"
 
 #: src/core/StelApp.cpp:445
 msgid "Initializing network proxy..."
@@ -2500,7 +2500,7 @@ msgstr "Po gatitet baza…"
 
 #: src/core/StelApp.cpp:497
 msgid "Initializing deep-sky objects..."
-msgstr ""
+msgstr "Po gatiten objekte qielli të thellë…"
 
 #: src/core/StelApp.cpp:503
 msgid "Initializing Milky Way..."
@@ -2508,7 +2508,7 @@ msgstr "Po gatitet Kashta e Kumtrit…"
 
 #: src/core/StelApp.cpp:509
 msgid "Initializing zodiacal light..."
-msgstr ""
+msgstr "Po gatitet dritë zodiake…"
 
 #: src/core/StelApp.cpp:515
 msgid "Initializing sky image layer..."
@@ -3036,7 +3036,7 @@ msgstr ""
 
 #: src/core/StelCore.cpp:2350
 msgid "Used by default."
-msgstr "E përdorur si parazgjedhje"
+msgstr "E përdorur si parazgjedhje."
 
 #: src/core/StelCore.cpp:2353
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
@@ -3176,10 +3176,10 @@ msgid ""
 "centre of the field of view (like the distortions seen with very wide angle "
 "camera lenses)."
 msgstr ""
-"Në projeksionin sy-peshku, ose <i>projeksionin e barazlarguar azimutal</i>, "
-"linjat e drejta shndrrohen në kurba kur shfaqen në distancë të largët "
-"këndore nga qendra e pikëvështrimit (si shtrembërimi i parë me thjerra shumë"
-" kendgjëra)."
+"Në projeksionin sy-peshku, ose <i>projeksioni azimutal i baraslarguar</i>, "
+"vijat e drejta shndërrohen në lakore, kur shfaqen në distancë të largët "
+"këndore nga qendra e fushëpamjes (si shtrembërimet që shihen me një lente "
+"kamerash me kënd shumë të gjerë)."
 
 #: src/core/StelProjectorClasses.cpp:261
 msgid "Hammer-Aitoff"
@@ -3314,12 +3314,12 @@ msgstr ""
 #: src/core/StelObject.cpp:613 src/gui/AstroCalcDialog.cpp:5214
 msgctxt "celestial event"
 msgid "Rise"
-msgstr ""
+msgstr "Lindje"
 
 #: src/core/StelObject.cpp:614 src/gui/AstroCalcDialog.cpp:5218
 msgctxt "celestial event"
 msgid "Set"
-msgstr ""
+msgstr "Perëndim"
 
 #: src/core/StelObject.cpp:652
 msgid "Daytime"
@@ -4176,7 +4176,7 @@ msgstr "Format 24-orësh"
 #: src/gui/ConfigurationDialog.cpp:1873
 msgctxt "disabled"
 msgid "None"
-msgstr ""
+msgstr "Asnjë"
 
 #: src/gui/ConfigurationDialog.cpp:1874
 msgid "5/6/5 bits"
@@ -4778,12 +4778,12 @@ msgstr ""
 #: src/gui/ViewDialog.cpp:1177
 msgctxt "magnitude algorithm"
 msgid "G. Müller (1893)"
-msgstr ""
+msgstr "G. Müller (1893)"
 
 #: src/gui/ViewDialog.cpp:1178
 msgctxt "magnitude algorithm"
 msgid "Astronomical Almanac (1984)"
-msgstr ""
+msgstr "Almanaku Astronomik (1984)"
 
 #: src/gui/ViewDialog.cpp:1179
 msgctxt "magnitude algorithm"
@@ -5060,17 +5060,17 @@ msgstr ""
 #: src/gui/SearchDialog.cpp:263
 msgctxt "coordinate system"
 msgid "Equatorial"
-msgstr ""
+msgstr "Ekuatorial"
 
 #: src/gui/SearchDialog.cpp:264
 msgctxt "coordinate system"
 msgid "Horizontal"
-msgstr ""
+msgstr "Horizontal"
 
 #: src/gui/SearchDialog.cpp:265
 msgctxt "coordinate system"
 msgid "Galactic"
-msgstr ""
+msgstr "Galaktik"
 
 #: src/gui/SearchDialog.cpp:266
 msgctxt "coordinate system"
@@ -5080,7 +5080,7 @@ msgstr "Supergalaktik"
 #: src/gui/SearchDialog.cpp:267
 msgctxt "coordinate system"
 msgid "Ecliptic"
-msgstr ""
+msgstr "Ekliptik"
 
 #: src/gui/SearchDialog.cpp:268
 msgctxt "coordinate system"
@@ -5124,12 +5124,12 @@ msgstr ""
 #: src/gui/SearchDialog.cpp:496
 msgctxt "search tool"
 msgid "Range"
-msgstr ""
+msgstr "Interval"
 
 #: src/gui/SearchDialog.cpp:499
 msgctxt "search tool"
 msgid "searches"
-msgstr ""
+msgstr "kërkime"
 
 #: src/gui/SearchDialog.cpp:620
 msgid "Clear search history: delete all search objects data"
@@ -5166,12 +5166,12 @@ msgstr "Veprim"
 #: src/gui/ShortcutsDialog.cpp:523
 msgctxt "column name"
 msgid "Primary shortcut"
-msgstr ""
+msgstr "Shkurtore parësore"
 
 #: src/gui/ShortcutsDialog.cpp:523
 msgctxt "column name"
 msgid "Alternative shortcut"
-msgstr ""
+msgstr "Shkurtore alternative"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:126
 #, qt-format
@@ -5783,7 +5783,7 @@ msgstr "h"
 
 #: src/gui/AstroCalcDialog.cpp:3275
 msgid "Date"
-msgstr ""
+msgstr "Datë"
 
 #: src/gui/AstroCalcDialog.cpp:3537
 #, qt-format
@@ -5871,7 +5871,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:4069 src/gui/AstroCalcDialog.cpp:4268
 #: src/gui/AstroCalcDialog.cpp:4284 src/gui/AstroCalcDialog.cpp:4290
 msgid "Eclipse"
-msgstr ""
+msgstr "Eklips"
 
 #: src/gui/AstroCalcDialog.cpp:4026
 msgid "Greatest eastern elongation"
@@ -5930,22 +5930,22 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:5081
 msgctxt "Celestial object is observed..."
 msgid "In the Evening"
-msgstr ""
+msgstr "Në Mbrëmje"
 
 #: src/gui/AstroCalcDialog.cpp:5082
 msgctxt "Celestial object is observed..."
 msgid "In the Morning"
-msgstr ""
+msgstr "Në Mëngjes"
 
 #: src/gui/AstroCalcDialog.cpp:5083
 msgctxt "Celestial object is observed..."
 msgid "Around Midnight"
-msgstr ""
+msgstr "Aty Nga Mesnata"
 
 #: src/gui/AstroCalcDialog.cpp:5084
 msgctxt "Celestial object is observed..."
 msgid "In Any Time of the Night"
-msgstr ""
+msgstr "Kurdo Natën"
 
 #: src/gui/AstroCalcDialog.cpp:5104
 msgid "Bright stars"
@@ -6027,7 +6027,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:5130 src/translations.h:326
 #: src/ui_viewDialog.h:3342 src/ui_dsoColorsDialog.h:565
 msgid "Active galaxies"
-msgstr ""
+msgstr "Galaksi aktive"
 
 #: src/gui/AstroCalcDialog.cpp:5135 plugins/Pulsars/src/Pulsars.cpp:72
 #: plugins/Pulsars/src/Pulsars.cpp:170 plugins/Pulsars/src/Pulsars.cpp:171
@@ -6054,7 +6054,7 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:5149
 msgid "Messier objects"
-msgstr ""
+msgstr "Objekte Mesie"
 
 #: src/gui/AstroCalcDialog.cpp:5150
 msgid "NGC/IC objects"
@@ -6062,11 +6062,11 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:5151
 msgid "Caldwell objects"
-msgstr ""
+msgstr "Objekte Kalduell"
 
 #: src/gui/AstroCalcDialog.cpp:5152
 msgid "Herschel 400 objects"
-msgstr ""
+msgstr "Objekte Hershel 400"
 
 #: src/gui/AstroCalcDialog.cpp:5153
 msgid "Algol-type eclipsing systems"
@@ -6149,27 +6149,27 @@ msgstr ""
 #: src/gui/AstroCalcCustomStepsDialog.cpp:76
 msgctxt "unit of measurement"
 msgid "minute"
-msgstr ""
+msgstr "minutë"
 
 #: src/gui/AstroCalcCustomStepsDialog.cpp:77
 msgctxt "unit of measurement"
 msgid "hour"
-msgstr ""
+msgstr "orë"
 
 #: src/gui/AstroCalcCustomStepsDialog.cpp:78
 msgctxt "unit of measurement"
 msgid "solar day"
-msgstr ""
+msgstr "ditë diellore"
 
 #: src/gui/AstroCalcCustomStepsDialog.cpp:79
 msgctxt "unit of measurement"
 msgid "sidereal day"
-msgstr ""
+msgstr "ditë yjore"
 
 #: src/gui/AstroCalcCustomStepsDialog.cpp:80
 msgctxt "unit of measurement"
 msgid "Julian day"
-msgstr ""
+msgstr "ditë juliane"
 
 #: src/gui/AstroCalcCustomStepsDialog.cpp:81
 msgctxt "unit of measurement"
@@ -6194,17 +6194,17 @@ msgstr ""
 #: src/gui/AstroCalcCustomStepsDialog.cpp:85
 msgctxt "unit of measurement"
 msgid "sidereal year"
-msgstr ""
+msgstr "Vit yjor"
 
 #: src/gui/AstroCalcCustomStepsDialog.cpp:86
 msgctxt "unit of measurement"
 msgid "Julian year"
-msgstr ""
+msgstr "Vit julian"
 
 #: src/gui/AstroCalcCustomStepsDialog.cpp:87
 msgctxt "unit of measurement"
 msgid "Gaussian year"
-msgstr ""
+msgstr "Vit gausian"
 
 #: src/gui/AstroCalcCustomStepsDialog.cpp:88
 msgctxt "unit of measurement"
@@ -6251,7 +6251,7 @@ msgstr "Programthe"
 
 #: src/scripting/StelScriptMgr.cpp:472
 msgid "Shortcut"
-msgstr ""
+msgstr "Shkurtore"
 
 #: src/StelMainView.cpp:823
 msgid "Save screenshot"
@@ -7502,7 +7502,7 @@ msgstr "Neptuni"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:567
 msgid "Geneva"
-msgstr ""
+msgstr "Gjenevë"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:569
@@ -7763,7 +7763,7 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:677
 msgid "Random location"
-msgstr ""
+msgstr "Vendndodhje kuturu"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:683
@@ -7850,7 +7850,7 @@ msgstr ""
 
 #: src/translations.h:699
 msgid "A tour of the western constellations."
-msgstr ""
+msgstr "Një tur i yjësive perëndimore."
 
 #: src/translations.h:700
 msgid "A tour of the constellations of the selected sky culture."
@@ -7897,7 +7897,7 @@ msgstr ""
 
 #: src/translations.h:708
 msgid "A tour of Messier Objects"
-msgstr ""
+msgstr "Një tur i Objekteve Mesier"
 
 #: src/translations.h:709
 msgid ""
@@ -7971,7 +7971,7 @@ msgstr ""
 
 #: src/translations.h:720
 msgid "A tour of the Solar System planets"
-msgstr ""
+msgstr "Një tur i planetëve të Sistemit Diellor"
 
 #: src/translations.h:721
 msgid ""
@@ -8021,7 +8021,7 @@ msgstr ""
 
 #: src/translations.h:731
 msgid "&Undo"
-msgstr ""
+msgstr "&Zhbëje"
 
 #: src/translations.h:732
 msgid "&Redo"
@@ -8101,23 +8101,23 @@ msgstr ""
 
 #: src/translations.h:750
 msgid "File &name:"
-msgstr ""
+msgstr "&Emër kartele:"
 
 #: src/translations.h:751
 msgid "Copy &Link Location"
-msgstr ""
+msgstr "Kopjo Vendndodhje &Lidhjeje"
 
 #: src/translations.h:752
 msgid "Abort"
-msgstr ""
+msgstr "Ndërprite"
 
 #: src/translations.h:753
 msgid "Ignore"
-msgstr ""
+msgstr "Shpërfille"
 
 #: src/translations.h:754
 msgid "&Basic colors"
-msgstr ""
+msgstr "Ngjyra &bazë"
 
 #: src/translations.h:755
 msgid "&Pick Screen Color"
@@ -8125,7 +8125,7 @@ msgstr ""
 
 #: src/translations.h:756
 msgid "&Custom colors"
-msgstr ""
+msgstr "Ngjyra &vetjake"
 
 #: src/translations.h:757
 msgid "&Add to Custom Colors"
@@ -8145,11 +8145,11 @@ msgstr ""
 
 #: src/translations.h:761
 msgid "&Red:"
-msgstr ""
+msgstr "E &kuqe:"
 
 #: src/translations.h:762
 msgid "&Green:"
-msgstr ""
+msgstr "E &gjelbër:"
 
 #: src/translations.h:763
 msgid "Bl&ue:"
@@ -8157,7 +8157,7 @@ msgstr ""
 
 #: src/translations.h:764
 msgid "Select Color"
-msgstr ""
+msgstr "Përzgjidhni Ngjyrë"
 
 #: src/translations.h:765
 #, qt-format
@@ -8166,31 +8166,31 @@ msgstr ""
 
 #: src/translations.h:766
 msgid "Back"
-msgstr ""
+msgstr "Mbrasht"
 
 #: src/translations.h:767
 msgid "Forward"
-msgstr ""
+msgstr "Përpara"
 
 #: src/translations.h:768
 msgid "Parent Directory"
-msgstr ""
+msgstr "Drejtoria Mëmë"
 
 #: src/translations.h:769
 msgid "Create New Folder"
-msgstr ""
+msgstr "Krijo Dosje të Re"
 
 #: src/translations.h:770
 msgid "List View"
-msgstr ""
+msgstr "Parje Si Listë"
 
 #: src/translations.h:771
 msgid "Detail View"
-msgstr ""
+msgstr "Pamje Hollësish"
 
 #: src/translations.h:772
 msgid "Recent Places"
-msgstr ""
+msgstr "Vende Së Fundi"
 
 #: src/translations.h:773
 #, qt-format
@@ -8238,197 +8238,197 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Andorra
 #: src/translations_countries.h:32
 msgid "Andorra"
-msgstr ""
+msgstr "Andorrë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/United_Arab_Emirates
 #: src/translations_countries.h:34
 msgid "United Arab Emirates"
-msgstr ""
+msgstr "Emiratet e Bashkuara Arabe"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Afghanistan
 #: src/translations_countries.h:36
 msgid "Afghanistan"
-msgstr ""
+msgstr "Afganistan"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Antigua_&_Barbuda
 #: src/translations_countries.h:38
 msgid "Antigua and Barbuda"
-msgstr ""
+msgstr "Antigua dhe Barbuda"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Anguilla
 #: src/translations_countries.h:40
 msgid "Anguilla"
-msgstr ""
+msgstr "Anguila"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Albania
 #: src/translations_countries.h:42
 msgid "Albania"
-msgstr ""
+msgstr "Shqipëri"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Armenia
 #: src/translations_countries.h:44
 msgid "Armenia"
-msgstr ""
+msgstr "Armeni"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Angola
 #: src/translations_countries.h:46
 msgid "Angola"
-msgstr ""
+msgstr "Angolë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Antarctica
 #: src/translations_countries.h:48
 msgid "Antarctica"
-msgstr ""
+msgstr "Antarktidë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Argentina
 #: src/translations_countries.h:50
 msgid "Argentina"
-msgstr ""
+msgstr "Argjentinë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/American_Samoa
 #: src/translations_countries.h:52
 msgid "Samoa (American)"
-msgstr ""
+msgstr "Samoa (Amerikane)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Austria
 #: src/translations_countries.h:54
 msgid "Austria"
-msgstr ""
+msgstr "Austri"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Australia
 #: src/translations_countries.h:56
 msgid "Australia"
-msgstr ""
+msgstr "Australi"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Aruba
 #: src/translations_countries.h:58
 msgid "Aruba"
-msgstr ""
+msgstr "Aruba"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Åland_Islands
 #: src/translations_countries.h:60
 msgid "Åland Islands"
-msgstr ""
+msgstr "Ishujt Aland"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Azerbaijan
 #: src/translations_countries.h:62
 msgid "Azerbaijan"
-msgstr ""
+msgstr "Azerbajxhan"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Bosnia_&_Herzegovina
 #: src/translations_countries.h:64
 msgid "Bosnia and Herzegovina"
-msgstr ""
+msgstr "Bosnjë dhe Hercegovinë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Barbados
 #: src/translations_countries.h:66
 msgid "Barbados"
-msgstr ""
+msgstr "Barbados"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Bangladesh
 #: src/translations_countries.h:68
 msgid "Bangladesh"
-msgstr ""
+msgstr "Bangladesh"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Belgium
 #: src/translations_countries.h:70
 msgid "Belgium"
-msgstr ""
+msgstr "Belgjikë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Burkina_Faso
 #: src/translations_countries.h:72
 msgid "Burkina Faso"
-msgstr ""
+msgstr "Burkina Faso"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Bulgaria
 #: src/translations_countries.h:74
 msgid "Bulgaria"
-msgstr ""
+msgstr "Bullgari"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Bahrain
 #: src/translations_countries.h:76
 msgid "Bahrain"
-msgstr ""
+msgstr "Bahrejn"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Burundi
 #: src/translations_countries.h:78
 msgid "Burundi"
-msgstr ""
+msgstr "Burundi"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Benin
 #: src/translations_countries.h:80
 msgid "Benin"
-msgstr ""
+msgstr "Benin"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/St._Barthélemy
 #: src/translations_countries.h:82
 msgid "St Barthelemy"
-msgstr ""
+msgstr "Shën Bartolome"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Bermuda
 #: src/translations_countries.h:84
 msgid "Bermuda"
-msgstr ""
+msgstr "Bermuda"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Brunei
 #: src/translations_countries.h:86
 msgid "Brunei"
-msgstr ""
+msgstr "Brunei"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Bolivia
 #: src/translations_countries.h:88
 msgid "Bolivia"
-msgstr ""
+msgstr "Bolivi"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Caribbean_Netherlands
 #: src/translations_countries.h:90
 msgid "Bonaire, Sint Eustatius and Saba"
-msgstr ""
+msgstr "Boner, Shën Efstathi dhe Sava"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Brazil
 #: src/translations_countries.h:92
 msgid "Brazil"
-msgstr ""
+msgstr "Brazil"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Bahamas
 #: src/translations_countries.h:94
 msgid "Bahamas"
-msgstr ""
+msgstr "Bahamas"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Bhutan
 #: src/translations_countries.h:96
 msgid "Bhutan"
-msgstr ""
+msgstr "Butan"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Bouvet_Island
 #: src/translations_countries.h:98
 msgid "Bouvet Island"
-msgstr ""
+msgstr "Ishulli Bouvet"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Botswana
 #: src/translations_countries.h:100
 msgid "Botswana"
-msgstr ""
+msgstr "Botsvanë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Belarus
 #: src/translations_countries.h:102
 msgid "Belarus"
-msgstr ""
+msgstr "Bjellorusi"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Belize
 #: src/translations_countries.h:104
 msgid "Belize"
-msgstr ""
+msgstr "Belize"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Canada
 #: src/translations_countries.h:106
 msgid "Canada"
-msgstr ""
+msgstr "Kanada"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Cocos_(Keeling)_Islands
 #: src/translations_countries.h:108
 msgid "Cocos (Keeling) Islands"
-msgstr ""
+msgstr "Ishujt Kokos (Keeling)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Congo_(DRC)
 #: src/translations_countries.h:110
@@ -8438,1048 +8438,1048 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Central_African_Republic
 #: src/translations_countries.h:112
 msgid "Central African Rep."
-msgstr ""
+msgstr "Republika Qendrore Afrikane"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Congo_(Republic)
 #: src/translations_countries.h:114
 msgid "Congo"
-msgstr ""
+msgstr "Kongo"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Switzerland
 #: src/translations_countries.h:116
 msgid "Switzerland"
-msgstr ""
+msgstr "Zvicër"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Ivory_Coast
 #: src/translations_countries.h:118
 msgid "Côte d'Ivoire"
-msgstr ""
+msgstr "Bregu i Fildishtë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Cook_Islands
 #: src/translations_countries.h:120
 msgid "Cook Islands"
-msgstr ""
+msgstr "Ishujt Kuk"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Chile
 #: src/translations_countries.h:122
 msgid "Chile"
-msgstr ""
+msgstr "Kili"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Cameroon
 #: src/translations_countries.h:124
 msgid "Cameroon"
-msgstr ""
+msgstr "Kamerun"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/China
 #: src/translations_countries.h:126
 msgid "China"
-msgstr ""
+msgstr "Kinë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Colombia
 #: src/translations_countries.h:128
 msgid "Colombia"
-msgstr ""
+msgstr "Kolumbi"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Costa_Rica
 #: src/translations_countries.h:130
 msgid "Costa Rica"
-msgstr ""
+msgstr "Kosta Rika"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Cuba
 #: src/translations_countries.h:132
 msgid "Cuba"
-msgstr ""
+msgstr "Kubë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Cape_Verde
 #: src/translations_countries.h:134
 msgid "Cabo Verde"
-msgstr ""
+msgstr "Kepi i Gjelbër"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Curaçao
 #: src/translations_countries.h:136
 msgid "Curaçao"
-msgstr ""
+msgstr "Kurasëu"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Christmas_Island
 #: src/translations_countries.h:138
 msgid "Christmas Island"
-msgstr ""
+msgstr "Ishulli i Krishtlindjeve"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Cyprus
 #: src/translations_countries.h:140
 msgid "Cyprus"
-msgstr ""
+msgstr "Qipro"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Czech_Republic
 #: src/translations_countries.h:142
 msgid "Czechia"
-msgstr ""
+msgstr "Çeki"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Germany
 #: src/translations_countries.h:144
 msgid "Germany"
-msgstr ""
+msgstr "Gjermani"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Djibouti
 #: src/translations_countries.h:146
 msgid "Djibouti"
-msgstr ""
+msgstr "Xhibut"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Denmark
 #: src/translations_countries.h:148
 msgid "Denmark"
-msgstr ""
+msgstr "Danimarkë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Dominica
 #: src/translations_countries.h:150
 msgid "Dominica"
-msgstr ""
+msgstr "Dominikë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Dominican_Republic
 #: src/translations_countries.h:152
 msgid "Dominican Republic"
-msgstr ""
+msgstr "Republika Dominikanë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Algeria
 #: src/translations_countries.h:154
 msgid "Algeria"
-msgstr ""
+msgstr "Algjeri"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Ecuador
 #: src/translations_countries.h:156
 msgid "Ecuador"
-msgstr ""
+msgstr "Ekuador"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Estonia
 #: src/translations_countries.h:158
 msgid "Estonia"
-msgstr ""
+msgstr "Estoni"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Egypt
 #: src/translations_countries.h:160
 msgid "Egypt"
-msgstr ""
+msgstr "Egjipt"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Western_Sahara
 #: src/translations_countries.h:162
 msgid "Western Sahara"
-msgstr ""
+msgstr "Saharaja Perëndimore"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Eritrea
 #: src/translations_countries.h:164
 msgid "Eritrea"
-msgstr ""
+msgstr "Eritre"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Spain
 #: src/translations_countries.h:166
 msgid "Spain"
-msgstr ""
+msgstr "Spanjë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Ethiopia
 #: src/translations_countries.h:168
 msgid "Ethiopia"
-msgstr ""
+msgstr "Etiopi"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Finland
 #: src/translations_countries.h:170
 msgid "Finland"
-msgstr ""
+msgstr "Finlandë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Fiji
 #: src/translations_countries.h:172
 msgid "Fiji"
-msgstr ""
+msgstr "Fixhi"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Falkland_Islands
 #: src/translations_countries.h:174
 msgid "Falkland Islands (Malvinas)"
-msgstr ""
+msgstr "Ishujt Folkland (Malvinas)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Micronesia
 #: src/translations_countries.h:176
 msgid "Micronesia"
-msgstr ""
+msgstr "Mikronezi"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Faroe_Islands
 #: src/translations_countries.h:178
 msgid "Faroe Islands"
-msgstr ""
+msgstr "Ishujt Faroe"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/France
 #: src/translations_countries.h:180
 msgid "France"
-msgstr ""
+msgstr "Francë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Gabon
 #: src/translations_countries.h:182
 msgid "Gabon"
-msgstr ""
+msgstr "Gabon"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/United_Kingdom
 #: src/translations_countries.h:184
 msgid "Britain (UK)"
-msgstr ""
+msgstr "Britani (UK)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Grenada
 #: src/translations_countries.h:186
 msgid "Grenada"
-msgstr ""
+msgstr "Grenadë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Georgia
 #: src/translations_countries.h:188
 msgid "Georgia"
-msgstr ""
+msgstr "Gjeorgji"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/French_Guiana
 #: src/translations_countries.h:190
 msgid "French Guiana"
-msgstr ""
+msgstr "Guajana Frënge"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Guernsey
 #: src/translations_countries.h:192
 msgid "Guernsey"
-msgstr ""
+msgstr "Gërnzi"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Ghana
 #: src/translations_countries.h:194
 msgid "Ghana"
-msgstr ""
+msgstr "Ganë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Gibraltar
 #: src/translations_countries.h:196
 msgid "Gibraltar"
-msgstr ""
+msgstr "Gjibraltar"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Greenland
 #: src/translations_countries.h:198
 msgid "Greenland"
-msgstr ""
+msgstr "Groenlandë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Gambia
 #: src/translations_countries.h:200
 msgid "Gambia"
-msgstr ""
+msgstr "Gambia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Guinea
 #: src/translations_countries.h:202
 msgid "Guinea"
-msgstr ""
+msgstr "Guine"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Guadeloupe
 #: src/translations_countries.h:204
 msgid "Guadeloupe"
-msgstr ""
+msgstr "Guadalupë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Equatorial_Guinea
 #: src/translations_countries.h:206
 msgid "Equatorial Guinea"
-msgstr ""
+msgstr "Guinea Ekuatoriale"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Greece
 #: src/translations_countries.h:208
 msgid "Greece"
-msgstr ""
+msgstr "Greqi"
 
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/South_Georgia_&_South_Sandwich_Islands
 #: src/translations_countries.h:210
 msgid "South Georgia and the South Sandwich Islands"
-msgstr ""
+msgstr "Xhorxhia Jugore dhe Ishujt Sanduiçi i Jugut"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Guatemala
 #: src/translations_countries.h:212
 msgid "Guatemala"
-msgstr ""
+msgstr "Guatemalë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Guam
 #: src/translations_countries.h:214
 msgid "Guam"
-msgstr ""
+msgstr "Guam"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Guinea-Bissau
 #: src/translations_countries.h:216
 msgid "Guinea-Bissau"
-msgstr ""
+msgstr "Guine-Bisau"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Guyana
 #: src/translations_countries.h:218
 msgid "Guyana"
-msgstr ""
+msgstr "Guajanë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Hong_Kong
 #: src/translations_countries.h:220
 msgid "Hong Kong"
-msgstr ""
+msgstr "Hong Kong"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Heard_&_McDonald_Islands
 #: src/translations_countries.h:222
 msgid "Heard Island and McDonald Islands"
-msgstr ""
+msgstr "Ishulli Hërd dhe Ishujt MkDonalds"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Honduras
 #: src/translations_countries.h:224
 msgid "Honduras"
-msgstr ""
+msgstr "Honduras"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Croatia
 #: src/translations_countries.h:226
 msgid "Croatia"
-msgstr ""
+msgstr "Kroaci"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Haiti
 #: src/translations_countries.h:228
 msgid "Haiti"
-msgstr ""
+msgstr "Haiti"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Hungary
 #: src/translations_countries.h:230
 msgid "Hungary"
-msgstr ""
+msgstr "Hungari"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Indonesia
 #: src/translations_countries.h:232
 msgid "Indonesia"
-msgstr ""
+msgstr "Indonezi"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Ireland
 #: src/translations_countries.h:234
 msgid "Ireland"
-msgstr ""
+msgstr "Irlandë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Israel
 #: src/translations_countries.h:236
 msgid "Israel"
-msgstr ""
+msgstr "Izrael"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Isle_of_Man
 #: src/translations_countries.h:238
 msgid "Isle of Man"
-msgstr ""
+msgstr "Ishulli Man"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/India
 #: src/translations_countries.h:240
 msgid "India"
-msgstr ""
+msgstr "Indi"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/British_Indian_Ocean_Territory
 #: src/translations_countries.h:242
 msgid "British Indian Ocean Territory"
-msgstr ""
+msgstr "Territoret Britanike të Oqeanit Indian"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Iraq
 #: src/translations_countries.h:244
 msgid "Iraq"
-msgstr ""
+msgstr "Irak"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Iran
 #: src/translations_countries.h:246
 msgid "Iran"
-msgstr ""
+msgstr "Iran"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Iceland
 #: src/translations_countries.h:248
 msgid "Iceland"
-msgstr ""
+msgstr "Islandë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Italy
 #: src/translations_countries.h:250
 msgid "Italy"
-msgstr ""
+msgstr "Itali"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Jersey
 #: src/translations_countries.h:252
 msgid "Jersey"
-msgstr ""
+msgstr "Xhersi"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Jamaica
 #: src/translations_countries.h:254
 msgid "Jamaica"
-msgstr ""
+msgstr "Xhamajkë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Jordan
 #: src/translations_countries.h:256
 msgid "Jordan"
-msgstr ""
+msgstr "Jordani"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Japan
 #: src/translations_countries.h:258
 msgid "Japan"
-msgstr ""
+msgstr "Japoni"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Kenya
 #: src/translations_countries.h:260
 msgid "Kenya"
-msgstr ""
+msgstr "Kenia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Kyrgyzstan
 #: src/translations_countries.h:262
 msgid "Kyrgyzstan"
-msgstr ""
+msgstr "Kirgizstan"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Cambodia
 #: src/translations_countries.h:264
 msgid "Cambodia"
-msgstr ""
+msgstr "Kamboxhia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Kiribati
 #: src/translations_countries.h:266
 msgid "Kiribati"
-msgstr ""
+msgstr "Kiribati"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Comoros
 #: src/translations_countries.h:268
 msgid "Comoros"
-msgstr ""
+msgstr "Komoro"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/St._Kitts_&_Nevis
 #: src/translations_countries.h:270
 msgid "St Kitts and Nevis"
-msgstr ""
+msgstr "Shën Kits dhe Nevis"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/North_Korea
 #: src/translations_countries.h:272
 msgid "Korea (North)"
-msgstr ""
+msgstr "Kore (e Veriut)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/South_Korea
 #: src/translations_countries.h:274
 msgid "Korea (South)"
-msgstr ""
+msgstr "Kore (e Jugut)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Kuwait
 #: src/translations_countries.h:276
 msgid "Kuwait"
-msgstr ""
+msgstr "Kuvajt"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Cayman_Islands
 #: src/translations_countries.h:278
 msgid "Cayman Islands"
-msgstr ""
+msgstr "Ishujt Kajman"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Kazakhstan
 #: src/translations_countries.h:280
 msgid "Kazakhstan"
-msgstr ""
+msgstr "Kazakistan"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Laos
 #: src/translations_countries.h:282
 msgid "Laos"
-msgstr ""
+msgstr "Laos"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Lebanon
 #: src/translations_countries.h:284
 msgid "Lebanon"
-msgstr ""
+msgstr "Liban"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/St._Lucia
 #: src/translations_countries.h:286
 msgid "St Lucia"
-msgstr ""
+msgstr "Shën Luçia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Liechtenstein
 #: src/translations_countries.h:288
 msgid "Liechtenstein"
-msgstr ""
+msgstr "Lihtenshtejn"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Sri_Lanka
 #: src/translations_countries.h:290
 msgid "Sri Lanka"
-msgstr ""
+msgstr "Sri Lankë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Liberia
 #: src/translations_countries.h:292
 msgid "Liberia"
-msgstr ""
+msgstr "Liberi"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Lesotho
 #: src/translations_countries.h:294
 msgid "Lesotho"
-msgstr ""
+msgstr "Lesoto"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Lithuania
 #: src/translations_countries.h:296
 msgid "Lithuania"
-msgstr ""
+msgstr "Lituani"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Luxembourg
 #: src/translations_countries.h:298
 msgid "Luxembourg"
-msgstr ""
+msgstr "Luksemburg"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Latvia
 #: src/translations_countries.h:300
 msgid "Latvia"
-msgstr ""
+msgstr "Letoni"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Libya
 #: src/translations_countries.h:302
 msgid "Libya"
-msgstr ""
+msgstr "Libi"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Morocco
 #: src/translations_countries.h:304
 msgid "Morocco"
-msgstr ""
+msgstr "Marok"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Monaco
 #: src/translations_countries.h:306
 msgid "Monaco"
-msgstr ""
+msgstr "Monako"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Moldova
 #: src/translations_countries.h:308
 msgid "Moldova"
-msgstr ""
+msgstr "Moldavi"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Montenegro
 #: src/translations_countries.h:310
 msgid "Montenegro"
-msgstr ""
+msgstr "Mal i Zi"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/St._Martin
 #: src/translations_countries.h:312
 msgid "St Martin (French)"
-msgstr ""
+msgstr "Shën-Martin (Frëng)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Madagascar
 #: src/translations_countries.h:314
 msgid "Madagascar"
-msgstr ""
+msgstr "Madagaskar"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Marshall_Islands
 #: src/translations_countries.h:316
 msgid "Marshall Islands"
-msgstr ""
+msgstr "Ishujt Marshall"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Macedonia
 #: src/translations_countries.h:318
 msgid "North Macedonia"
-msgstr ""
+msgstr "Maqedonia e Veriut"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mali
 #: src/translations_countries.h:320
 msgid "Mali"
-msgstr ""
+msgstr "Mali"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Myanmar_(Burma)
 #: src/translations_countries.h:322
 msgid "Myanmar (Burma)"
-msgstr ""
+msgstr "Mianmar (Burma)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mongolia
 #: src/translations_countries.h:324
 msgid "Mongolia"
-msgstr ""
+msgstr "Mongoli"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Macau
 #: src/translations_countries.h:326
 msgid "Macao"
-msgstr ""
+msgstr "Makao"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Northern_Mariana_Islands
 #: src/translations_countries.h:328
 msgid "Northern Mariana Islands"
-msgstr ""
+msgstr "Ishujt Veriorë Mariana"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Martinique
 #: src/translations_countries.h:330
 msgid "Martinique"
-msgstr ""
+msgstr "Martinikë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mauritania
 #: src/translations_countries.h:332
 msgid "Mauritania"
-msgstr ""
+msgstr "Mauritani"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Montserrat
 #: src/translations_countries.h:334
 msgid "Montserrat"
-msgstr ""
+msgstr "Montserrat"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Malta
 #: src/translations_countries.h:336
 msgid "Malta"
-msgstr ""
+msgstr "Maltë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mauritius
 #: src/translations_countries.h:338
 msgid "Mauritius"
-msgstr ""
+msgstr "Mauricius"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Maldives
 #: src/translations_countries.h:340
 msgid "Maldives"
-msgstr ""
+msgstr "Maldive"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Malawi
 #: src/translations_countries.h:342
 msgid "Malawi"
-msgstr ""
+msgstr "Malaui"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mexico
 #: src/translations_countries.h:344
 msgid "Mexico"
-msgstr ""
+msgstr "Meksikë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Malaysia
 #: src/translations_countries.h:346
 msgid "Malaysia"
-msgstr ""
+msgstr "Malajzi"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mozambique
 #: src/translations_countries.h:348
 msgid "Mozambique"
-msgstr ""
+msgstr "Mozambik"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Namibia
 #: src/translations_countries.h:350
 msgid "Namibia"
-msgstr ""
+msgstr "Namibi"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/New_Caledonia
 #: src/translations_countries.h:352
 msgid "New Caledonia"
-msgstr ""
+msgstr "Kaledoni e Re"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Niger
 #: src/translations_countries.h:354
 msgid "Niger"
-msgstr ""
+msgstr "Niger"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Norfolk_Island
 #: src/translations_countries.h:356
 msgid "Norfolk Island"
-msgstr ""
+msgstr "Ishujt Norfolk"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Nigeria
 #: src/translations_countries.h:358
 msgid "Nigeria"
-msgstr ""
+msgstr "Nigeri"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Nicaragua
 #: src/translations_countries.h:360
 msgid "Nicaragua"
-msgstr ""
+msgstr "Nikaragua"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Netherlands
 #: src/translations_countries.h:362
 msgid "Netherlands"
-msgstr ""
+msgstr "Holandë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Norway
 #: src/translations_countries.h:364
 msgid "Norway"
-msgstr ""
+msgstr "Norvegji"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Nepal
 #: src/translations_countries.h:366
 msgid "Nepal"
-msgstr ""
+msgstr "Nepal"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Nauru
 #: src/translations_countries.h:368
 msgid "Nauru"
-msgstr ""
+msgstr "Nauru"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Niue
 #: src/translations_countries.h:370
 msgid "Niue"
-msgstr ""
+msgstr "Niue"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/New_Zealand
 #: src/translations_countries.h:372
 msgid "New Zealand"
-msgstr ""
+msgstr "Zelandë e Re"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Oman
 #: src/translations_countries.h:374
 msgid "Oman"
-msgstr ""
+msgstr "Oman"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Panama
 #: src/translations_countries.h:376
 msgid "Panama"
-msgstr ""
+msgstr "Panama"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Peru
 #: src/translations_countries.h:378
 msgid "Peru"
-msgstr ""
+msgstr "Peru"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/French_Polynesia
 #: src/translations_countries.h:380
 msgid "French Polynesia"
-msgstr ""
+msgstr "Polinezia Frënge"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Papua_New_Guinea
 #: src/translations_countries.h:382
 msgid "Papua New Guinea"
-msgstr ""
+msgstr "Papua Guineja e Re"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Philippines
 #: src/translations_countries.h:384
 msgid "Philippines"
-msgstr ""
+msgstr "Filipine"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Pakistan
 #: src/translations_countries.h:386
 msgid "Pakistan"
-msgstr ""
+msgstr "Pakistan"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Poland
 #: src/translations_countries.h:388
 msgid "Poland"
-msgstr ""
+msgstr "Poloni"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/St._Pierre_&_Miquelon
 #: src/translations_countries.h:390
 msgid "St Pierre and Miquelon"
-msgstr ""
+msgstr "Shën. Pier dhe Mikëlon"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Pitcairn_Islands
 #: src/translations_countries.h:392
 msgid "Pitcairn"
-msgstr ""
+msgstr "Pitkern"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Puerto_Rico
 #: src/translations_countries.h:394
 msgid "Puerto Rico"
-msgstr ""
+msgstr "Porto Riko"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Palestine
 #: src/translations_countries.h:396
 msgid "Palestine"
-msgstr ""
+msgstr "Palestinë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Portugal
 #: src/translations_countries.h:398
 msgid "Portugal"
-msgstr ""
+msgstr "Portugali"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Palau
 #: src/translations_countries.h:400
 msgid "Palau"
-msgstr ""
+msgstr "Palau"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Paraguay
 #: src/translations_countries.h:402
 msgid "Paraguay"
-msgstr ""
+msgstr "Paraguai"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Qatar
 #: src/translations_countries.h:404
 msgid "Qatar"
-msgstr ""
+msgstr "Katar"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Réunion
 #: src/translations_countries.h:406
 msgid "Réunion"
-msgstr ""
+msgstr "Reunion"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Romania
 #: src/translations_countries.h:408
 msgid "Romania"
-msgstr ""
+msgstr "Rumani"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Serbia
 #: src/translations_countries.h:410
 msgid "Serbia"
-msgstr ""
+msgstr "Serbi"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Russia
 #: src/translations_countries.h:412
 msgid "Russian Federation"
-msgstr ""
+msgstr "Rusi"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Rwanda
 #: src/translations_countries.h:414
 msgid "Rwanda"
-msgstr ""
+msgstr "Ruandë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Saudi_Arabia
 #: src/translations_countries.h:416
 msgid "Saudi Arabia"
-msgstr ""
+msgstr "Arabi Saudite"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Solomon_Islands
 #: src/translations_countries.h:418
 msgid "Solomon Islands"
-msgstr ""
+msgstr "Ishujt Solomon"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Seychelles
 #: src/translations_countries.h:420
 msgid "Seychelles"
-msgstr ""
+msgstr "Sejshelle"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Sudan
 #: src/translations_countries.h:422
 msgid "Sudan"
-msgstr ""
+msgstr "Sudan"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Sweden
 #: src/translations_countries.h:424
 msgid "Sweden"
-msgstr ""
+msgstr "Suedi"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Singapore
 #: src/translations_countries.h:426
 msgid "Singapore"
-msgstr ""
+msgstr "Singapor"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/St._Helena
 #: src/translations_countries.h:428
 msgid "St Helena, Ascension and Tristan da Cunha"
-msgstr ""
+msgstr "Shën Helena, Asension dhe Tristan da Kunja"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Slovenia
 #: src/translations_countries.h:430
 msgid "Slovenia"
-msgstr ""
+msgstr "Slloveni"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Svalbard_&_Jan_Mayen
 #: src/translations_countries.h:432
 msgid "Svalbard and Jan Mayen"
-msgstr ""
+msgstr "Svalbard dhe Jan Majen"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Slovakia
 #: src/translations_countries.h:434
 msgid "Slovakia"
-msgstr ""
+msgstr "Sllovaki"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Sierra_Leone
 #: src/translations_countries.h:436
 msgid "Sierra Leone"
-msgstr ""
+msgstr "Sierra Leone"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/San_Marino
 #: src/translations_countries.h:438
 msgid "San Marino"
-msgstr ""
+msgstr "San Marino"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Senegal
 #: src/translations_countries.h:440
 msgid "Senegal"
-msgstr ""
+msgstr "Senegal"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Somalia
 #: src/translations_countries.h:442
 msgid "Somalia"
-msgstr ""
+msgstr "Somali"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Suriname
 #: src/translations_countries.h:444
 msgid "Suriname"
-msgstr ""
+msgstr "Surinam"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/South_Sudan
 #: src/translations_countries.h:446
 msgid "South Sudan"
-msgstr ""
+msgstr "Sudan i Jugut"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/São_Tomé_&_Príncipe
 #: src/translations_countries.h:448
 msgid "Sao Tome and Principe"
-msgstr ""
+msgstr "Sao Tome dhe Principe"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/El_Salvador
 #: src/translations_countries.h:450
 msgid "El Salvador"
-msgstr ""
+msgstr "Salvador"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Sint_Maarten
 #: src/translations_countries.h:452
 msgid "St Maarten (Dutch)"
-msgstr ""
+msgstr "Sint Marten (Holandez)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Syria
 #: src/translations_countries.h:454
 msgid "Syrian Arab Republic"
-msgstr ""
+msgstr "Republika Arabe e Sirisë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Swaziland
 #: src/translations_countries.h:456
 msgid "Eswatini"
-msgstr ""
+msgstr "Esuatini"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Turks_&_Caicos_Islands
 #: src/translations_countries.h:458
 msgid "Turks and Caicos Islands"
-msgstr ""
+msgstr "Ishujt Turks dhe Kaikos"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Chad
 #: src/translations_countries.h:460
 msgid "Chad"
-msgstr ""
+msgstr "Ҫad"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/French_Southern_Territories
 #: src/translations_countries.h:462
 msgid "French Southern Territories"
-msgstr ""
+msgstr "Territoret Frënge Jugore"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Togo
 #: src/translations_countries.h:464
 msgid "Togo"
-msgstr ""
+msgstr "Togo"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Thailand
 #: src/translations_countries.h:466
 msgid "Thailand"
-msgstr ""
+msgstr "Tailandë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Tajikistan
 #: src/translations_countries.h:468
 msgid "Tajikistan"
-msgstr ""
+msgstr "Taxhikistan"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Tokelau
 #: src/translations_countries.h:470
 msgid "Tokelau"
-msgstr ""
+msgstr "Tokelau"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/East_Timor
 #: src/translations_countries.h:472
 msgid "Timor-Leste"
-msgstr ""
+msgstr "Timori Lindor"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Turkmenistan
 #: src/translations_countries.h:474
 msgid "Turkmenistan"
-msgstr ""
+msgstr "Turkmenistan"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Tunisia
 #: src/translations_countries.h:476
 msgid "Tunisia"
-msgstr ""
+msgstr "Tunizi"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Tonga
 #: src/translations_countries.h:478
 msgid "Tonga"
-msgstr ""
+msgstr "Tonga"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Turkey
 #: src/translations_countries.h:480
 msgid "Turkey"
-msgstr ""
+msgstr "Turqi"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Trinidad_&_Tobago
 #: src/translations_countries.h:482
 msgid "Trinidad and Tobago"
-msgstr ""
+msgstr "Trinidad dhe Tobago"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Tuvalu
 #: src/translations_countries.h:484
 msgid "Tuvalu"
-msgstr ""
+msgstr "Tuvalu"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Taiwan
 #: src/translations_countries.h:486
 msgid "Taiwan (Province of China)"
-msgstr ""
+msgstr "Tajvan (Provincë e Kinës)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Tanzania
 #: src/translations_countries.h:488
 msgid "United Republic of Tanzania"
-msgstr ""
+msgstr "Republika e Bashkuar e Tanzanisë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Ukraine
 #: src/translations_countries.h:490
 msgid "Ukraine"
-msgstr ""
+msgstr "Ukrainë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Uganda
 #: src/translations_countries.h:492
 msgid "Uganda"
-msgstr ""
+msgstr "Ugandë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/U.S._Outlying_Islands
 #: src/translations_countries.h:494
 msgid "US Minor Outlying Islands"
-msgstr ""
+msgstr "Ishujt e Vegjël të Përtejmë të ShBA-s"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/United_States
 #: src/translations_countries.h:496
 msgid "United States of America"
-msgstr ""
+msgstr "Shtetet e Bashkuar të Amerikës"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Uruguay
 #: src/translations_countries.h:498
 msgid "Uruguay"
-msgstr ""
+msgstr "Uruguai"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Uzbekistan
 #: src/translations_countries.h:500
 msgid "Uzbekistan"
-msgstr ""
+msgstr "Uzbekistan"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Vatican_City
 #: src/translations_countries.h:502
 msgid "Holy See"
-msgstr ""
+msgstr "Selia e Shenjtë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/St._Vincent_&_Grenadines
 #: src/translations_countries.h:504
 msgid "St Vincent and the Grenadines"
-msgstr ""
+msgstr "Shën. Vincent dhe Grenadinet"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Venezuela
 #: src/translations_countries.h:506
 msgid "Venezuela"
-msgstr ""
+msgstr "Venezuelë"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/British_Virgin_Islands
 #: src/translations_countries.h:508
 msgid "Virgin Islands (British)"
-msgstr ""
+msgstr "Ishujt e Virgjër (Britanikë)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/U.S._Virgin_Islands
 #: src/translations_countries.h:510
 msgid "Virgin Islands (U.S.)"
-msgstr ""
+msgstr "Ishujt e Virgjër (ShBA)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Vietnam
 #: src/translations_countries.h:512
 msgid "Viet Nam"
-msgstr ""
+msgstr "Vietnam"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Vanuatu
 #: src/translations_countries.h:514
 msgid "Vanuatu"
-msgstr ""
+msgstr "Vanuatu"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Wallis_&_Futuna
 #: src/translations_countries.h:516
 msgid "Wallis and Futuna"
-msgstr ""
+msgstr "Uallis dhe Futuna"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Samoa
 #: src/translations_countries.h:518
 msgid "Samoa"
-msgstr ""
+msgstr "Samoa"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Yemen
 #: src/translations_countries.h:520
 msgid "Yemen"
-msgstr ""
+msgstr "Jemen"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mayotte
 #: src/translations_countries.h:522
 msgid "Mayotte"
-msgstr ""
+msgstr "Majot"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/South_Africa
 #: src/translations_countries.h:524
 msgid "South Africa"
-msgstr ""
+msgstr "Afrikë e Jugut"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Zambia
 #: src/translations_countries.h:526
 msgid "Zambia"
-msgstr ""
+msgstr "Zambia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Zimbabwe
 #: src/translations_countries.h:528
 msgid "Zimbabwe"
-msgstr ""
+msgstr "Zimbabve"
 
 #: src/ui_dateTimeDialogGui.h:378 src/ui_dateTimeDialogGui.h:383
 msgid "Julian Day"
@@ -9504,11 +9504,11 @@ msgstr "Regjistër"
 
 #: src/ui_helpDialogGui.h:251 src/ui_configurationDialog.h:1959
 msgid "Edit keyboard shortcuts..."
-msgstr ""
+msgstr "Përpunoni shkurtore tastiere…"
 
 #: src/ui_helpDialogGui.h:252
 msgid "Check updates"
-msgstr ""
+msgstr "Kontrollo për përditësime"
 
 #: src/ui_helpDialogGui.h:253
 msgid "Refresh"
@@ -9537,7 +9537,7 @@ msgstr ""
 
 #: src/ui_locationDialogGui.h:495
 msgid "Return to default location"
-msgstr ""
+msgstr "Kthehu te vendndodhje parazgjedhje"
 
 #: src/ui_locationDialogGui.h:496
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:146
@@ -9546,7 +9546,7 @@ msgstr "Gjerësi:"
 
 #: src/ui_locationDialogGui.h:498
 msgid "Enter the elevation in meter"
-msgstr ""
+msgstr "Jepni lartësinë nga niveli i detit në metra"
 
 #: src/ui_locationDialogGui.h:500
 msgid " m"
@@ -9554,15 +9554,15 @@ msgstr " m"
 
 #: src/ui_locationDialogGui.h:501
 msgid "Get location from Network"
-msgstr ""
+msgstr "Merre vendndodhjen nga Rrjeti"
 
 #: src/ui_locationDialogGui.h:502
 msgid "Use current location as default"
-msgstr ""
+msgstr "Përdor vendin e tanishëm si parazgjedhje"
 
 #: src/ui_locationDialogGui.h:503
 msgid "Elevation:"
-msgstr ""
+msgstr "Lartësi nga niveli i detit:"
 
 #: src/ui_locationDialogGui.h:505 src/ui_locationDialogGui.h:509
 msgid ""
@@ -9587,11 +9587,11 @@ msgstr "Planet:"
 
 #: src/ui_locationDialogGui.h:514
 msgid "Use custom time zone"
-msgstr ""
+msgstr "Përdor zonë kohore vetjake"
 
 #: src/ui_locationDialogGui.h:515
 msgid "Time zone:"
-msgstr ""
+msgstr "Zonë kohore:"
 
 #: src/ui_locationDialogGui.h:516
 msgid "Name/City:"
@@ -9615,23 +9615,23 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:838
 msgid "iota"
-msgstr ""
+msgstr "jota"
 
 #: src/ui_searchDialogGui.h:841
 msgid "alpha"
-msgstr ""
+msgstr "alfa"
 
 #: src/ui_searchDialogGui.h:844
 msgid "beta"
-msgstr ""
+msgstr "beta"
 
 #: src/ui_searchDialogGui.h:847
 msgid "gamma"
-msgstr ""
+msgstr "gama"
 
 #: src/ui_searchDialogGui.h:850
 msgid "delta"
-msgstr ""
+msgstr "delta"
 
 #: src/ui_searchDialogGui.h:853
 msgid "epsilon"
@@ -9643,7 +9643,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:859
 msgid "eta"
-msgstr ""
+msgstr "eta"
 
 #: src/ui_searchDialogGui.h:862
 msgid "theta"
@@ -9659,11 +9659,11 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:871
 msgid "mu"
-msgstr ""
+msgstr "my"
 
 #: src/ui_searchDialogGui.h:874
 msgid "nu"
-msgstr ""
+msgstr "ni"
 
 #: src/ui_searchDialogGui.h:877
 msgid "xi"
@@ -9675,7 +9675,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:883
 msgid "pi"
-msgstr ""
+msgstr "pi"
 
 #: src/ui_searchDialogGui.h:886
 msgid "rho"
@@ -9699,11 +9699,11 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:901
 msgid "chi"
-msgstr ""
+msgstr "hqi"
 
 #: src/ui_searchDialogGui.h:904
 msgid "psi"
-msgstr ""
+msgstr "psi"
 
 #: src/ui_searchDialogGui.h:907
 msgid "omega"
@@ -9719,15 +9719,15 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:912
 msgid "All IDs"
-msgstr ""
+msgstr "Krejt ID-të"
 
 #: src/ui_searchDialogGui.h:913
 msgid "Types"
-msgstr ""
+msgstr "Lloje"
 
 #: src/ui_searchDialogGui.h:914
 msgid "Spectral Class"
-msgstr ""
+msgstr "Klasë Spektrale"
 
 #: src/ui_searchDialogGui.h:918
 msgid "Morph. Descr."
@@ -9735,7 +9735,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:919
 msgid "Dimensions"
-msgstr ""
+msgstr "Përmasa"
 
 #: src/ui_searchDialogGui.h:920
 msgid "Max. search radius"
@@ -9757,11 +9757,11 @@ msgstr ""
 #: src/ui_searchDialogGui.h:926
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:600
 msgid "Coordinate system:"
-msgstr ""
+msgstr "Sistem koordinatash:"
 
 #: src/ui_searchDialogGui.h:928
 msgid "Position"
-msgstr ""
+msgstr "Pozicion"
 
 #: src/ui_searchDialogGui.h:930
 msgid "Some objects may be found after activation respective plug-ins"
@@ -9769,17 +9769,17 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:932
 msgid "names in English"
-msgstr ""
+msgstr "emra në anglisht"
 
 #: src/ui_searchDialogGui.h:933 src/ui_astroCalcDialog.h:1811
 #: plugins/Satellites/src/ui_satellitesDialog.h:994
 msgid "Search in list..."
-msgstr ""
+msgstr "Kërkoni te lista…"
 
 #: src/ui_searchDialogGui.h:934
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Lists"
-msgstr ""
+msgstr "Lista"
 
 #: src/ui_searchDialogGui.h:935
 msgid "Search options"
@@ -9807,7 +9807,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:943
 msgid "Server:"
-msgstr ""
+msgstr "Shërbyes:"
 
 #: src/ui_searchDialogGui.h:944
 msgid "Recent Searches"
@@ -9878,11 +9878,11 @@ msgstr "Përshtatje dinamike syu"
 
 #: src/ui_viewDialog.h:3125
 msgid "Atmosphere visualization"
-msgstr ""
+msgstr "Vizualizim atmosfere"
 
 #: src/ui_viewDialog.h:3127
 msgid "pressure, temperature, extinction coefficient"
-msgstr ""
+msgstr "trysni, temperaturë, koeficient zhdukjeje"
 
 #: src/ui_viewDialog.h:3129
 msgid "Refraction/Extinction settings..."
@@ -9913,7 +9913,7 @@ msgstr ""
 #: src/ui_viewDialog.h:3145
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:446
 msgid "Light pollution:"
-msgstr ""
+msgstr "Ndotje drite:"
 
 #: src/ui_viewDialog.h:3146 src/ui_astroCalcDialog.h:1729
 msgid "or"
@@ -9987,7 +9987,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:3171
 msgid "Solar System objects"
-msgstr ""
+msgstr "Objekte të Sistemit Diellor"
 
 #: src/ui_viewDialog.h:3173
 msgid "Color of nomenclature labels"
@@ -10031,7 +10031,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:3193
 msgid "Colors..."
-msgstr ""
+msgstr "Ngjyra…"
 
 #: src/ui_viewDialog.h:3195
 msgid "Orbits thickness in pixels"
@@ -10081,7 +10081,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:3221
 msgid "Color of planet labels"
-msgstr ""
+msgstr "Ngjyrë etiketash planeti"
 
 #: src/ui_viewDialog.h:3224
 msgid ""
@@ -10257,7 +10257,7 @@ msgstr ""
 #: src/ui_viewDialog.h:3334
 msgctxt "other catalogs"
 msgid "Other"
-msgstr ""
+msgstr "Tjetër"
 
 #: src/ui_viewDialog.h:3339
 msgid ""
@@ -10267,7 +10267,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:3341
 msgid "Filter by type"
-msgstr ""
+msgstr "Filtroji sipas llojit"
 
 #: src/ui_viewDialog.h:3346 src/ui_dsoColorsDialog.h:636
 msgid "Hydrogen regions"
@@ -10308,11 +10308,11 @@ msgstr ""
 
 #: src/ui_viewDialog.h:3371 plugins/Satellites/src/ui_satellitesDialog.h:956
 msgid "Labels"
-msgstr ""
+msgstr "Etiketa"
 
 #: src/ui_viewDialog.h:3372
 msgid "Hints"
-msgstr ""
+msgstr "Ndihmëza"
 
 #: src/ui_viewDialog.h:3373
 msgid "Configure colors of markers"
@@ -10388,7 +10388,7 @@ msgstr ""
 #: src/ui_viewDialog.h:3583 src/ui_viewDialog.h:3609 src/ui_viewDialog.h:3647
 #: src/ui_viewDialog.h:3669 src/ui_viewDialog.h:3677
 msgid "Show partitions"
-msgstr ""
+msgstr "Shfaq pjesë"
 
 #: src/ui_viewDialog.h:3423
 msgid "Solar equator projected into space."
@@ -10417,7 +10417,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:3460
 msgid "Color of meridian"
-msgstr ""
+msgstr "Ngjyrë meridiani"
 
 #: src/ui_viewDialog.h:3462
 msgid "Equinoxes (of date)"
@@ -10585,7 +10585,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:3629
 msgid "Celestial poles (J2000)"
-msgstr ""
+msgstr "Pole qiellore (J2000)"
 
 #: src/ui_viewDialog.h:3631
 msgid ""
@@ -10861,7 +10861,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:3828
 msgid "Show illumination "
-msgstr ""
+msgstr "Shfaq ndriçim "
 
 #: src/ui_viewDialog.h:3830
 msgid "Use minimal brightness as may be specified in landscape.ini"
@@ -10906,7 +10906,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:3849
 msgid "Color of constellation names"
-msgstr ""
+msgstr "Ngjyrë emrash yjësish"
 
 #: src/ui_viewDialog.h:3851
 msgid "Show labels"
@@ -10986,7 +10986,7 @@ msgstr "Kreu"
 
 #: src/ui_configurationDialog.h:1607
 msgid "Information"
-msgstr ""
+msgstr "Informacion"
 
 #: src/ui_configurationDialog.h:1609 src/ui_configurationDialog.h:1664
 msgid "Selected object information"
@@ -11005,7 +11005,7 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1353
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:488
 msgid "Time"
-msgstr ""
+msgstr "Kohë"
 
 #: src/ui_configurationDialog.h:1619
 msgid "Tools"
@@ -11017,19 +11017,19 @@ msgstr "Shtojca"
 
 #: src/ui_configurationDialog.h:1626
 msgid "Language settings"
-msgstr ""
+msgstr "Rregullime gjuhe"
 
 #: src/ui_configurationDialog.h:1627
 msgid "Program Language"
-msgstr ""
+msgstr "Gjuhë Programi"
 
 #: src/ui_configurationDialog.h:1628
 msgid "Sky Culture Language"
-msgstr ""
+msgstr "Gjuhë Kulturash Qiellore"
 
 #: src/ui_configurationDialog.h:1630
 msgid "This feature has not been thoroughly tested yet!"
-msgstr ""
+msgstr "Kjo veçori s’është testuar ende plotësisht!"
 
 #: src/ui_configurationDialog.h:1632
 msgid "Ephemeris settings"
@@ -11175,7 +11175,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1681
 msgid "Displayed fields"
-msgstr ""
+msgstr "Fusha të shfaqura"
 
 #: src/ui_configurationDialog.h:1683 src/ui_configurationDialog.h:1703
 msgid "Equatorial coordinates, equinox of date"
@@ -11192,7 +11192,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1689
 msgid "Ecliptic coordinates (of date)"
-msgstr ""
+msgstr "Koordinata ekliptike (të datës)"
 
 #: src/ui_configurationDialog.h:1691
 msgid "Equatorial coordinates, equinox of J2000.0"
@@ -11204,11 +11204,11 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1694
 msgid "Absolute magnitude"
-msgstr ""
+msgstr "Magnitudë absolute"
 
 #: src/ui_configurationDialog.h:1695
 msgid "Supergalactic coordinates"
-msgstr ""
+msgstr "Koordinata supergalaktike"
 
 #: src/ui_configurationDialog.h:1697
 msgid "Ecliptic coordinates, equinox J2000.0"
@@ -11216,11 +11216,11 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1699
 msgid "Ecliptic coordinates (J2000)"
-msgstr ""
+msgstr "Koordinata ekliptike (J2000)"
 
 #: src/ui_configurationDialog.h:1701
 msgid "Velocity"
-msgstr ""
+msgstr "Shpejtësi"
 
 #: src/ui_configurationDialog.h:1705
 msgid "Right ascension/Declination (of date)"
@@ -11240,7 +11240,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1711
 msgid "Galactic coordinates"
-msgstr ""
+msgstr "Koordinata galaktike"
 
 #: src/ui_configurationDialog.h:1713
 msgid "The type of the object (star, planet, etc.)"
@@ -11265,7 +11265,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1724
 msgid "Constellation"
-msgstr ""
+msgstr "Yjësi"
 
 #: src/ui_configurationDialog.h:1726
 msgid "Angular or physical size"
@@ -11293,7 +11293,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1738
 msgid "Catalog number(s)"
-msgstr ""
+msgstr "Numër(a) katalogu"
 
 #: src/ui_configurationDialog.h:1741
 msgid "Elongation and phase angle"
@@ -11319,7 +11319,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1753
 msgid "ICRS grid"
-msgstr ""
+msgstr "Rrjetë ICRS"
 
 #: src/ui_configurationDialog.h:1755
 msgid "Toggle vertical and horizontal image flip buttons."
@@ -11460,7 +11460,7 @@ msgstr "Tjetër:"
 
 #: src/ui_configurationDialog.h:1840
 msgid "Use current local date and time"
-msgstr ""
+msgstr "Përdor datën dhe kohën e tanishme vendore"
 
 #: src/ui_configurationDialog.h:1842
 msgid "use current"
@@ -11479,15 +11479,15 @@ msgstr ""
 #: src/ui_configurationDialog.h:1847
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:472
 msgid "Date:"
-msgstr ""
+msgstr "Datë:"
 
 #: src/ui_configurationDialog.h:1848
 msgid "and time:"
-msgstr ""
+msgstr "dhe kohë:"
 
 #: src/ui_configurationDialog.h:1849
 msgid "Time correction"
-msgstr ""
+msgstr "Saktësim kohe"
 
 #: src/ui_configurationDialog.h:1852
 msgid "Edit equation"
@@ -11507,7 +11507,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1859
 msgid "Use decimal degrees"
-msgstr ""
+msgstr "Përdor gradë dhjetore"
 
 #: src/ui_configurationDialog.h:1860
 msgid "Font size: Screen"
@@ -11519,7 +11519,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1865
 msgid "Graphical user interface"
-msgstr ""
+msgstr "Ndërfaqe grafike përdoruesi"
 
 #: src/ui_configurationDialog.h:1867
 msgctxt "abbreviation"
@@ -11536,7 +11536,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1875
 msgid "Application font"
-msgstr ""
+msgstr "Shkronja aplikacioni"
 
 #: src/ui_configurationDialog.h:1878
 msgid "Info text color for overwrite"
@@ -11596,7 +11596,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1905
 msgid "seconds"
-msgstr ""
+msgstr "sekonda"
 
 #: src/ui_configurationDialog.h:1908
 msgid ""
@@ -11707,7 +11707,7 @@ msgstr "Drejtori Fotosh Ekrani"
 
 #: src/ui_configurationDialog.h:1964
 msgid "File format"
-msgstr ""
+msgstr "Format kartelash"
 
 #: src/ui_configurationDialog.h:1965
 msgid "Invert colors"
@@ -11715,7 +11715,7 @@ msgstr "Kthe ngjyrat"
 
 #: src/ui_configurationDialog.h:1966
 msgid "Custom size"
-msgstr ""
+msgstr "Madhësi vetjake"
 
 #: src/ui_configurationDialog.h:1969 src/ui_scriptConsole.h:421
 msgid "Close window when script runs"
@@ -11768,7 +11768,7 @@ msgstr ""
 
 #: src/ui_shortcutsDialog.h:210
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Shkurtore Tastiere"
 
 #: src/ui_shortcutsDialog.h:212
 msgctxt "placeholder for input line"
@@ -11785,19 +11785,19 @@ msgstr "Shkurtore alternative"
 
 #: src/ui_shortcutsDialog.h:215
 msgid "Restore Defaults"
-msgstr ""
+msgstr "Rikthe Parazgjedhjet"
 
 #: src/ui_shortcutsDialog.h:216
 msgid "Apply"
-msgstr ""
+msgstr "Zbatoji"
 
 #: src/ui_shortcutsDialog.h:217
 msgid "Restore All Defaults"
-msgstr ""
+msgstr "Rikthe Krejt Parazgjedhjet"
 
 #: src/ui_atmosphereDialog.h:180
 msgid "Atmosphere Details"
-msgstr ""
+msgstr "Hollësi Atmosfere"
 
 #: src/ui_atmosphereDialog.h:182
 msgid "Refraction Settings"
@@ -11809,7 +11809,7 @@ msgstr ""
 
 #: src/ui_atmosphereDialog.h:184
 msgid "Temperature (C):"
-msgstr ""
+msgstr "Temperaturë (C):"
 
 #: src/ui_atmosphereDialog.h:189 src/ui_greatRedSpotDialog.h:181
 msgid ""
@@ -11834,7 +11834,7 @@ msgstr ""
 
 #: src/ui_atmosphereDialog.h:198
 msgid "Standard Atmosphere"
-msgstr ""
+msgstr "Atmosferë Standarde"
 
 #: src/ui_greatRedSpotDialog.h:168
 msgid "Great Red Spot Details"
@@ -11929,11 +11929,11 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:601
 #: plugins/Observability/src/ui_ObservabilityDialog.h:346
 msgid "Settings"
-msgstr ""
+msgstr "Rregullime"
 
 #: src/ui_scriptConsole.h:425
 msgid "Cursor position"
-msgstr ""
+msgstr "Pozicion kursori"
 
 #: src/ui_scriptConsole.h:427
 msgid "R:0 C:0"
@@ -11950,11 +11950,11 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:1612
 msgid "Astronomical calculations"
-msgstr ""
+msgstr "Njehsime astronomike"
 
 #: src/ui_astroCalcDialog.h:1618
 msgid "Positions"
-msgstr ""
+msgstr "Pozicione"
 
 #: src/ui_astroCalcDialog.h:1620
 msgid "Celestial bodies above horizon"
@@ -11963,7 +11963,7 @@ msgstr ""
 #: src/ui_astroCalcDialog.h:1629 src/ui_astroCalcDialog.h:1800
 #: src/ui_astroCalcDialog.h:1837
 msgid "Graphs"
-msgstr ""
+msgstr "Grafikë"
 
 #: src/ui_astroCalcDialog.h:1631
 msgctxt "What's Up Tonight"
@@ -11977,15 +11977,15 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:1638
 msgid "Planetary Calculator"
-msgstr ""
+msgstr "Makinë llogaritëse Planetare"
 
 #: src/ui_astroCalcDialog.h:1646
 msgid "Save positions"
-msgstr ""
+msgstr "Ruaji pozicionet"
 
 #: src/ui_astroCalcDialog.h:1647
 msgid "Update positions"
-msgstr ""
+msgstr "Përditësoji pozicionet"
 
 #: src/ui_astroCalcDialog.h:1649 src/ui_astroCalcDialog.h:1807
 msgid "Show objects brighter than magnitude"
@@ -11997,7 +11997,7 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:1653 src/ui_astroCalcDialog.h:1680
 msgid "Use horizontal coordinates"
-msgstr ""
+msgstr "Përdor koordinata horizontale"
 
 #: src/ui_astroCalcDialog.h:1655 src/ui_astroCalcDialog.h:1682
 msgctxt "horizonal coordinates"
@@ -12010,7 +12010,7 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:1659
 msgid "Show:"
-msgstr ""
+msgstr "Shfaq:"
 
 #: src/ui_astroCalcDialog.h:1661
 msgid "Show connecting line between the ephemeris markers"
@@ -12035,7 +12035,7 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:1671
 msgid "dates"
-msgstr ""
+msgstr "data"
 
 #: src/ui_astroCalcDialog.h:1673
 msgid "Show magnitudes of current celestial body"
@@ -12102,7 +12102,7 @@ msgstr ""
 #: src/ui_astroCalcDialog.h:1749
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
 msgid "From:"
-msgstr ""
+msgstr "Nga:"
 
 #: src/ui_astroCalcDialog.h:1715 src/ui_astroCalcDialog.h:1740
 #: src/ui_astroCalcDialog.h:1750
@@ -12120,7 +12120,7 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:1720
 msgid "Celestial body:"
-msgstr ""
+msgstr "Objekt qiellor:"
 
 #: src/ui_astroCalcDialog.h:1722
 msgid "First celestial body"
@@ -12259,19 +12259,19 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:1789
 msgid "Second graph:"
-msgstr ""
+msgstr "Grafiku i dytë:"
 
 #: src/ui_astroCalcDialog.h:1790
 msgid "First graph:"
-msgstr ""
+msgstr "Grafiku i parë:"
 
 #: src/ui_astroCalcDialog.h:1792 src/ui_astroCalcDialog.h:1796
 msgid "How many years to display"
-msgstr ""
+msgstr "Sa vite të shfaqen"
 
 #: src/ui_astroCalcDialog.h:1794
 msgid "Duration:"
-msgstr ""
+msgstr "Kohëzgjatje:"
 
 #: src/ui_astroCalcDialog.h:1798
 msgctxt "duration"
@@ -12292,11 +12292,11 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:1803
 msgid "Lunar Distance"
-msgstr ""
+msgstr "Largësi Hënore"
 
 #: src/ui_astroCalcDialog.h:1804
 msgid "Select a category:"
-msgstr ""
+msgstr "Përzgjidhni një kategori:"
 
 #: src/ui_astroCalcDialog.h:1805
 msgid "Show objects which are up:"
@@ -12308,7 +12308,7 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:1812
 msgid "Save list of objects"
-msgstr ""
+msgstr "Ruaj listë objektesh"
 
 #: src/ui_astroCalcDialog.h:1823
 msgid "First celestial body:"
@@ -12362,7 +12362,7 @@ msgstr ""
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:189
 msgid "Extra options"
-msgstr ""
+msgstr "Mundësi ekstra"
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:192
 msgid "Label each N steps, where N is"
@@ -12388,11 +12388,11 @@ msgstr ""
 #: plugins/Satellites/src/ui_satellitesDialog.h:957
 msgctxt "pixels"
 msgid "px"
-msgstr ""
+msgstr "px"
 
 #: src/ui_astroCalcCustomStepsDialog.h:150
 msgid "Custom interval"
-msgstr ""
+msgstr "Interval vetjak"
 
 #: src/ui_astroCalcCustomStepsDialog.h:154
 msgid "Unit of measurement:"
@@ -12404,15 +12404,15 @@ msgstr ""
 
 #: src/ui_bookmarksDialog.h:200
 msgid "Add location"
-msgstr ""
+msgstr "Shtoni vendndodhje"
 
 #: src/ui_bookmarksDialog.h:201
 msgid "&Go to bookmark"
-msgstr ""
+msgstr "&Kalo te faqerojtësi"
 
 #: src/ui_bookmarksDialog.h:202
 msgid "&Remove bookmark"
-msgstr ""
+msgstr "&Hiq faqerojtës"
 
 #: src/ui_bookmarksDialog.h:204
 msgid "Add selected object to bookmarks"
@@ -12420,15 +12420,15 @@ msgstr ""
 
 #: src/ui_bookmarksDialog.h:206
 msgid "&Add bookmark"
-msgstr ""
+msgstr "&Shtoni faqerojtës"
 
 #: src/ui_bookmarksDialog.h:207
 msgid "Clear bookmarks"
-msgstr ""
+msgstr "Spastroji faqerojtësit"
 
 #: src/ui_bookmarksDialog.h:209
 msgid "Export bookmarks"
-msgstr ""
+msgstr "Eksporto faqerojtësit"
 
 #: src/ui_bookmarksDialog.h:210
 msgid "Clear the highlights"
@@ -12440,7 +12440,7 @@ msgstr ""
 
 #: src/ui_dsoColorsDialog.h:545 src/ui_orbitColorsDialog.h:387
 msgid "Color settings"
-msgstr ""
+msgstr "Rregullime ngjyrash"
 
 #: src/ui_dsoColorsDialog.h:547
 msgid "Colors of labels and markers of deep-sky objects"
@@ -12452,7 +12452,7 @@ msgstr ""
 
 #: src/ui_dsoColorsDialog.h:551
 msgid "Possible quasars"
-msgstr ""
+msgstr "Kuazarë të mundshëm"
 
 #: src/ui_dsoColorsDialog.h:553
 msgid "Color of markers of stars"
@@ -12649,7 +12649,7 @@ msgstr ""
 
 #: src/ui_orbitColorsDialog.h:390
 msgid "One color for all orbits"
-msgstr ""
+msgstr "Një ngjyrë për krejt orbitat"
 
 #: src/ui_orbitColorsDialog.h:391
 msgid "Separate colors for orbits by object type"
@@ -12665,7 +12665,7 @@ msgstr ""
 
 #: src/ui_orbitColorsDialog.h:394
 msgid "Orbits of major planets"
-msgstr ""
+msgstr "Orbita planetësh të rëndësishëm"
 
 #: src/ui_orbitColorsDialog.h:395
 msgid "Orbits of Oort cloud objects"
@@ -12673,23 +12673,23 @@ msgstr ""
 
 #: src/ui_orbitColorsDialog.h:399
 msgid "Orbits of minor planets"
-msgstr ""
+msgstr "Orbita planetësh të dorës së dytë"
 
 #: src/ui_orbitColorsDialog.h:400
 msgid "Orbits of moons of planets"
-msgstr ""
+msgstr "Orbita hënash planetësh"
 
 #: src/ui_orbitColorsDialog.h:404
 msgid "Orbit of Neptune"
-msgstr ""
+msgstr "Orbitë e Neptunit"
 
 #: src/ui_orbitColorsDialog.h:405
 msgid "Orbit of Jupiter"
-msgstr ""
+msgstr "Orbitë e Jupiterit"
 
 #: src/ui_orbitColorsDialog.h:406
 msgid "Orbit of Earth"
-msgstr ""
+msgstr "Orbitë e Tokës"
 
 #: src/ui_orbitColorsDialog.h:407
 msgid "Orbits of dwarf planets"
@@ -12697,11 +12697,11 @@ msgstr ""
 
 #: src/ui_orbitColorsDialog.h:411
 msgid "Orbit of Saturn"
-msgstr ""
+msgstr "Orbitë e Saturnit"
 
 #: src/ui_orbitColorsDialog.h:412
 msgid "Orbits of comets"
-msgstr ""
+msgstr "Orbita kometash"
 
 #: src/ui_orbitColorsDialog.h:413
 msgid "Orbits of plutinos"
@@ -12721,7 +12721,7 @@ msgstr ""
 
 #: src/ui_orbitColorsDialog.h:420
 msgid "Orbit of Venus"
-msgstr ""
+msgstr "Orbitë e Afërditës"
 
 #: src/ui_orbitColorsDialog.h:421
 msgid "Orbits of sednoids"
@@ -12733,15 +12733,15 @@ msgstr ""
 
 #: src/ui_orbitColorsDialog.h:423
 msgid "Orbit of Uranus"
-msgstr ""
+msgstr "Orbitë e Uranit"
 
 #: src/ui_orbitColorsDialog.h:424
 msgid "Orbit of Mars"
-msgstr ""
+msgstr "Orbitë e Marsit"
 
 #: src/ui_orbitColorsDialog.h:425
 msgid "Orbit of Mercury"
-msgstr ""
+msgstr "Orbitë e Mërkurit"
 
 #: src/ui_orbitColorsDialog.h:427
 msgid "Color of generic orbit"
@@ -12793,35 +12793,35 @@ msgstr ""
 
 #: src/ui_orbitColorsDialog.h:464
 msgid "Color of Mercury orbit"
-msgstr ""
+msgstr "Ngjyrë e orbitës së Mërkurit"
 
 #: src/ui_orbitColorsDialog.h:467
 msgid "Color of Earth orbit"
-msgstr ""
+msgstr "Ngjyrë e orbitës së Tokës"
 
 #: src/ui_orbitColorsDialog.h:470
 msgid "Color of Jupiter orbit"
-msgstr ""
+msgstr "Ngjyrë e orbitës së Jupiterit"
 
 #: src/ui_orbitColorsDialog.h:473
 msgid "Color of Venus orbit"
-msgstr ""
+msgstr "Ngjyrë e orbitës së Afërditës"
 
 #: src/ui_orbitColorsDialog.h:476
 msgid "Color of Mars orbit"
-msgstr ""
+msgstr "Ngjyrë e orbitës së Marsit"
 
 #: src/ui_orbitColorsDialog.h:479
 msgid "Color of Saturn orbit"
-msgstr ""
+msgstr "Ngjyrë e orbitës së Saturnit"
 
 #: src/ui_orbitColorsDialog.h:482
 msgid "Color of Uranus orbit"
-msgstr ""
+msgstr "Ngjyrë e orbitës së Uranit"
 
 #: src/ui_orbitColorsDialog.h:485
 msgid "Color of Neptune orbit"
-msgstr ""
+msgstr "Ngjyrë e orbitës së Neptunit"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:139
@@ -12903,7 +12903,7 @@ msgstr ""
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:181
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:209
 msgid "Links"
-msgstr ""
+msgstr "Lidhje"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:111
 #: plugins/Oculars/src/gui/OcularDialog.cpp:628
@@ -12998,7 +12998,7 @@ msgstr ""
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:296
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:327
 msgid "Pulsars Configuration"
-msgstr ""
+msgstr "Formësim Pulsarësh"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:297
 msgid "Angle Measure Plug-in Configuration"
@@ -13006,7 +13006,7 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:299
 msgid "Show in Equatorial Coordinates"
-msgstr ""
+msgstr "Shfaqe në Koordinata Ekuatoriale"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:300
 msgid "Display with position angle"
@@ -13015,7 +13015,7 @@ msgstr ""
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:302
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:313
 msgid "Text"
-msgstr ""
+msgstr "Tekst"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:304
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:315
@@ -13024,7 +13024,7 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:305
 msgid "Show in Horizontal Coordinates"
-msgstr ""
+msgstr "Shfaqe në Koordinata Horizontale"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:306
 msgid "Attach start point to rotating sky"
@@ -13183,11 +13183,11 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1513
 msgid "Select next telescope"
-msgstr ""
+msgstr "Përzgjidhni teleskopin pasues"
 
 #: plugins/Oculars/src/Oculars.cpp:1515
 msgid "Select previous telescope"
-msgstr ""
+msgstr "Përzgjidhni teleskopin e mëparshëm"
 
 #: plugins/Oculars/src/Oculars.cpp:1517
 msgid "Select next eyepiece"
@@ -13262,29 +13262,29 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:567
 #, qt-format
 msgid "Lens #%1"
-msgstr ""
+msgstr "Thjerra #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:2054
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:571
 #, qt-format
 msgid "Lens #%1: %2"
-msgstr ""
+msgstr "Thjerra #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:2059
 msgid "Lens: none"
-msgstr ""
+msgstr "Thjerra: asnjë"
 
 #: plugins/Oculars/src/Oculars.cpp:2074 plugins/Oculars/src/Oculars.cpp:2135
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:808
 #, qt-format
 msgid "Telescope #%1"
-msgstr ""
+msgstr "Teleskop #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:2083
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:910
 #, qt-format
 msgid "Magnification: %1"
-msgstr ""
+msgstr "Zmadhim: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:2090
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:921
@@ -13303,7 +13303,7 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:852
 #, qt-format
 msgid "Dimensions: %1"
-msgstr ""
+msgstr "Përmasa: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:2119
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:682
@@ -13315,43 +13315,43 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:636
 #, qt-format
 msgid "Sensor #%1"
-msgstr ""
+msgstr "Ndijues #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:2127
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:640
 #, qt-format
 msgid "Sensor #%1: %2"
-msgstr ""
+msgstr "Ndijues #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:2140
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:812
 #, qt-format
 msgid "Telescope #%1: %2"
-msgstr ""
+msgstr "Teleskop #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:2471
 msgid "&Lens"
-msgstr ""
+msgstr "&Thjerra"
 
 #: plugins/Oculars/src/Oculars.cpp:2472
 msgid "&Previous lens"
-msgstr ""
+msgstr "Thjerrat e &mëparshme"
 
 #: plugins/Oculars/src/Oculars.cpp:2473
 msgid "&Next lens"
-msgstr ""
+msgstr "Thjerrat &pasuese"
 
 #: plugins/Oculars/src/Oculars.cpp:2502
 msgid "&Telescope"
-msgstr ""
+msgstr "&Teleskop"
 
 #: plugins/Oculars/src/Oculars.cpp:2503
 msgid "&Previous telescope"
-msgstr ""
+msgstr "Teleskopi i &mëparshëm"
 
 #: plugins/Oculars/src/Oculars.cpp:2504
 msgid "&Next telescope"
-msgstr ""
+msgstr "Teleskopi &pasues"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:190
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:216
@@ -13366,12 +13366,12 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:192
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:220
 msgid "Previous lens"
-msgstr ""
+msgstr "Thjerrat e mëparshme"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:193
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:222
 msgid "Next lens"
-msgstr ""
+msgstr "Thjerrat pasuese"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:194
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:224
@@ -13386,12 +13386,12 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:196
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:228
 msgid "Previous telescope"
-msgstr ""
+msgstr "Teleskopi i mëparshëm"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:197
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:230
 msgid "Next telescope"
-msgstr ""
+msgstr "Teleskopi pasues"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:199
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:280
@@ -13451,12 +13451,12 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:211
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:312
 msgid "Rotate the prism 15 degrees clockwise"
-msgstr ""
+msgstr "Rrotulloje prizmin 15 gradë në kahun orar"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:212
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:302
 msgid "Rotate the prism 5 degrees clockwise"
-msgstr ""
+msgstr "Rrotulloje prizmin 5 gradë në kahun orar"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:213
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:292
@@ -13478,7 +13478,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:578
 msgid "Lens: None"
-msgstr ""
+msgstr "Thjerra: Asnjë"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:579
 msgid "Multiplicity: N/A"
@@ -13496,27 +13496,27 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:689
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:861
 msgid "X scale"
-msgstr ""
+msgstr "Shkallë X"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:690
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:862
 msgid "Horizontal scale"
-msgstr ""
+msgstr "Shkallë horizontale"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:694
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:863
 msgid "Y scale"
-msgstr ""
+msgstr "Shkallë Y"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:695
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:864
 msgid "Vertical scale"
-msgstr ""
+msgstr "Shkallë vertikale"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:701
 #, qt-format
 msgid "Rotation: %1"
-msgstr ""
+msgstr "Rrotullim: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:739
 #, qt-format
@@ -13586,7 +13586,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:995
 msgid "Visual resolution"
-msgstr ""
+msgstr "Qartësi pamore"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:997
 msgid "Visual resolution is based on eye properties and magnification"
@@ -13594,7 +13594,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:121
 msgid "Cannot delete the last sensor."
-msgstr ""
+msgstr "S’mund të fshihet ndijuesi i fundit."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:138
 msgid "Cannot delete the last ocular."
@@ -13602,7 +13602,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:155
 msgid "Cannot delete the last telescope."
-msgstr ""
+msgstr "S’mund të fshihet teleskopi i fundit."
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
 #: plugins/Oculars/src/gui/OcularDialog.cpp:569
@@ -13612,12 +13612,12 @@ msgstr ""
 #. TRANSLATORS: Magnification factor for binoculars
 #: plugins/Oculars/src/gui/OcularDialog.cpp:571
 msgid "Magnification factor:"
-msgstr ""
+msgstr "Faktor zmadhimi:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:572
 #: plugins/Oculars/src/ui_ocularDialog.h:1581
 msgid "Diameter:"
-msgstr ""
+msgstr "Diametër:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:576
 #: plugins/Oculars/src/ui_ocularDialog.h:1546
@@ -13628,7 +13628,7 @@ msgstr ""
 #: plugins/Oculars/src/ui_ocularDialog.h:1547
 #: plugins/Oculars/src/ui_ocularDialog.h:1582
 msgid "Focal length:"
-msgstr ""
+msgstr "Rreze vatrore:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:578
 #: plugins/Oculars/src/ui_ocularDialog.h:1543
@@ -13653,7 +13653,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:604
 msgid "Overview"
-msgstr ""
+msgstr "Përmbledhje"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:606
 msgid ""
@@ -13728,7 +13728,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:604
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:318
 msgid "Notes"
-msgstr ""
+msgstr "Shënime"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:623
 msgid ""
@@ -13751,7 +13751,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1431
 msgid "Interface"
-msgstr ""
+msgstr "Ndërfaqe"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1435
 msgid "Arrow button scale (requires restart)"
@@ -13782,7 +13782,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1445
 msgid "...font size"
-msgstr ""
+msgstr "…madhësi shkronjash"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1450
 msgid ""
@@ -13792,7 +13792,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1452
 msgid "Restore direction to initial values"
-msgstr ""
+msgstr "Rikthe drejtimin te vlerat fillestare"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1454
 msgid "Color for ocular circles and sensor frames"
@@ -13800,7 +13800,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1457
 msgid "Line Color"
-msgstr ""
+msgstr "Ngjyrë Vijash"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1459
 msgid "Color for text which is shown only when GUI is switched off."
@@ -13808,7 +13808,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1462
 msgid "Text Color"
-msgstr ""
+msgstr "Ngjyrë Tekstesh"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1463
 msgid "Show oculars button on toolbar"
@@ -13869,7 +13869,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1490
 msgid "Use semi-transparent mask"
-msgstr ""
+msgstr "Përdor maskë gjysmë të tejdukshme"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1492
 msgid "Opacity of semi-transparent mask"
@@ -13925,11 +13925,11 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1512
 msgid "Horizontal size (width)"
-msgstr ""
+msgstr "Madhësi horizontale (gjerësi)"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1515
 msgid "Vertical size (height)"
-msgstr ""
+msgstr "Madhësi vertikale (lartësi)"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1518
 msgid "Enable pixel grid of sensor binned pixels within sensor crop overlay."
@@ -13937,7 +13937,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1520
 msgid "Show pixel grid"
-msgstr ""
+msgstr "Shfaq rrjetë pikselash"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1521
 msgid "Telrad view"
@@ -13976,7 +13976,7 @@ msgstr ""
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:226
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:447
 msgid "General"
-msgstr ""
+msgstr "Të përgjithshme"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1541
 #: plugins/Oculars/src/ui_ocularDialog.h:1550
@@ -13984,7 +13984,7 @@ msgstr ""
 #: plugins/Oculars/src/ui_ocularDialog.h:1575
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:216
 msgid "Add"
-msgstr ""
+msgstr "Shto"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1544
 msgid "Has permanent cross-hairs"
@@ -13992,7 +13992,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1545
 msgid "Binoculars"
-msgstr ""
+msgstr "Dylbi"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1548
 #: plugins/Oculars/src/ui_ocularDialog.h:1552
@@ -14002,7 +14002,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:595
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:244
 msgid "Name:"
-msgstr ""
+msgstr "Emër:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1549
 msgid "Eyepieces"
@@ -14028,7 +14028,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1559
 msgid "Resolution y (pixels):"
-msgstr ""
+msgstr "Qartësi y (piksel):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1560
 msgid "Binning x:"
@@ -14036,7 +14036,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1561
 msgid "Resolution x (pixels):"
-msgstr ""
+msgstr "Qartësi x (piksel):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1563
 msgid "Prism/CCD height (mm):"
@@ -14054,7 +14054,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1568
 msgid "Rotation Angle (degrees):"
-msgstr ""
+msgstr "Kënd Rrotullimi (gradë):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1569
 msgid "Binning y:"
@@ -14074,11 +14074,11 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1573
 msgid "Position angle (degrees):"
-msgstr ""
+msgstr "Kënd pozicioni (gradë):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1574
 msgid "Sensors"
-msgstr ""
+msgstr "Ndijues"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1578
 msgid "Horizontal flip"
@@ -14096,7 +14096,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:415
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:427
 msgid "Telescopes"
-msgstr ""
+msgstr "Teleskopë"
 
 #: plugins/Oculus/src/Oculus.cpp:174
 msgid "Oculus"
@@ -14142,41 +14142,41 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:242
 msgid "Show satellites from the group"
-msgstr ""
+msgstr "Shfaq satelitë prej grupit"
 
 #: plugins/Satellites/src/Satellites.cpp:243
 msgid "Hide satellites from the group"
-msgstr ""
+msgstr "Fshih satelitë prej grupit"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
 #: plugins/Satellites/src/Satellites.cpp:2283
 msgid "visual"
-msgstr ""
+msgstr "pamor"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
 #: plugins/Satellites/src/Satellites.cpp:2285
 msgid "scientific"
-msgstr ""
+msgstr "shkencor"
 
 #. TRANSLATORS: Satellite group: Communication satellites
 #: plugins/Satellites/src/Satellites.cpp:2287
 msgid "communications"
-msgstr ""
+msgstr "komunikime"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
 #: plugins/Satellites/src/Satellites.cpp:2289
 msgid "navigation"
-msgstr ""
+msgstr "lëvizje"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
 #: plugins/Satellites/src/Satellites.cpp:2291
 msgid "amateur"
-msgstr ""
+msgstr "amator"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
 #: plugins/Satellites/src/Satellites.cpp:2293
 msgid "weather"
-msgstr ""
+msgstr "moti"
 
 #. TRANSLATORS: Satellite group: Earth Resources satellites
 #: plugins/Satellites/src/Satellites.cpp:2295
@@ -14197,7 +14197,7 @@ msgstr ""
 #. (the Global Positioning System)
 #: plugins/Satellites/src/Satellites.cpp:2301
 msgid "gps"
-msgstr ""
+msgstr "gps"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS
 #. constellation (GLObal NAvigation Satellite System)
@@ -14250,18 +14250,18 @@ msgstr ""
 #. TRANSLATORS: Satellite group: Space stations
 #: plugins/Satellites/src/Satellites.cpp:2319
 msgid "stations"
-msgstr ""
+msgstr "stacione"
 
 #. TRANSLATORS: Satellite group: Education satellites
 #: plugins/Satellites/src/Satellites.cpp:2321
 msgid "education"
-msgstr ""
+msgstr "edukim"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space
 #. observatories
 #: plugins/Satellites/src/Satellites.cpp:2323
 msgid "observatory"
-msgstr ""
+msgstr "observator"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the INTELSAT
 #. satellites
@@ -14301,7 +14301,7 @@ msgstr ""
 #. TRANSLATORS: Satellite group: Satellites belonging to the COSMOS satellites
 #: plugins/Satellites/src/Satellites.cpp:2337
 msgid "cosmos"
-msgstr ""
+msgstr "gjithësi"
 
 #. TRANSLATORS: Satellite group: Debris of satellites
 #: plugins/Satellites/src/Satellites.cpp:2339
@@ -14321,12 +14321,12 @@ msgstr ""
 #. TRANSLATORS: Satellite group: are known to broadcast TV signals
 #: plugins/Satellites/src/Satellites.cpp:2345
 msgid "tv"
-msgstr ""
+msgstr "tv"
 
 #. TRANSLATORS: Satellite group: military satellites
 #: plugins/Satellites/src/Satellites.cpp:2347
 msgid "military"
-msgstr ""
+msgstr "ushtarake"
 
 #. TRANSLATORS: Satellite group: geodetic satellites
 #: plugins/Satellites/src/Satellites.cpp:2349
@@ -14336,12 +14336,12 @@ msgstr ""
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
 #: plugins/Satellites/src/Satellites.cpp:2354
 msgid "The Hubble Space Telescope"
-msgstr ""
+msgstr "Teleskopi Hapësinor Habëll"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:2356
 msgid "The International Space Station"
-msgstr ""
+msgstr "The International Space Station"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:2358
@@ -14361,7 +14361,7 @@ msgstr ""
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:2364
 msgid "The Gamma-Ray Observatory"
-msgstr ""
+msgstr "Observatori i Rrezeve Gama"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:2366
@@ -14433,19 +14433,19 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:2397
 msgid "The satellite and the observer are in sunlight"
-msgstr ""
+msgstr "Sateliti dhe vëzhguesi gjenden nën dritën diellore"
 
 #: plugins/Satellites/src/Satellites.cpp:2398
 msgid "The satellite is visible"
-msgstr ""
+msgstr "Sateliti është i dukshëm"
 
 #: plugins/Satellites/src/Satellites.cpp:2399
 msgid "The satellite is eclipsed"
-msgstr ""
+msgstr "Sateliti s’është i dukshëm"
 
 #: plugins/Satellites/src/Satellites.cpp:2400
 msgid "The satellite is not visible"
-msgstr ""
+msgstr "Sateliti s’është i dukshëm"
 
 #: plugins/Satellites/src/Satellite.cpp:300
 msgid "International Designator"
@@ -14453,7 +14453,7 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellite.cpp:305
 msgid "artificial satellite"
-msgstr ""
+msgstr "satelit artificial"
 
 #: plugins/Satellites/src/Satellite.cpp:311
 msgid "Approx. magnitude"
@@ -14544,19 +14544,19 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellite.cpp:427
 msgid "Group"
-msgstr ""
+msgstr "Grup"
 
 #: plugins/Satellites/src/Satellite.cpp:427
 msgid "Groups"
-msgstr ""
+msgstr "Grupe"
 
 #: plugins/Satellites/src/Satellite.cpp:432
 msgid "Operational status"
-msgstr ""
+msgstr "Gjendje funksionuese"
 
 #: plugins/Satellites/src/Satellite.cpp:438
 msgid "Radio communication"
-msgstr ""
+msgstr "Komunikim me radio"
 
 #. TRANSLATORS: Unit of measurement of frequency
 #: plugins/Satellites/src/Satellite.cpp:457 plugins/Pulsars/src/Pulsar.cpp:274
@@ -14611,7 +14611,7 @@ msgstr "e panjohur"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:675
 msgid "Stellarium Satellites Plugin"
-msgstr ""
+msgstr "Shtojcë Stellarium Satelitësh"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:682
 #: plugins/Satellites/src/ui_satellitesDialog.h:1069
@@ -14626,7 +14626,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:691
 msgid "Notes for users"
-msgstr ""
+msgstr "Shënime për përdoruesit"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:692
 msgid ""
@@ -14736,7 +14736,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:722
 msgid "Adding new satellites"
-msgstr ""
+msgstr "Shtim satelitësh të rinj"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:723
 msgid ""
@@ -14752,7 +14752,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:726
 msgid "Technical notes"
-msgstr ""
+msgstr "Shënime teknike"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:727
 msgid ""
@@ -14796,7 +14796,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:187
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:666
 msgid "Next update"
-msgstr ""
+msgstr "Përditësimi pasues"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:764
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:172
@@ -14805,7 +14805,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:193
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:672
 msgid "Internet updates disabled"
-msgstr ""
+msgstr "Përditësimet nga Interneti janë çaktivizuar"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:766
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:790
@@ -14820,7 +14820,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:674
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:749
 msgid "Updating now..."
-msgstr ""
+msgstr "Po përditësohet tani…"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:771
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:176
@@ -14829,7 +14829,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:197
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:676
 msgid "< 1 minute"
-msgstr ""
+msgstr "< 1 minutë"
 
 #. TRANSLATORS: minutes.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:776
@@ -14850,7 +14850,7 @@ msgstr "m"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:279
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:752
 msgid "Update error"
-msgstr ""
+msgstr "Gabim përditësimi"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:806
 #, qt-format
@@ -14864,15 +14864,15 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:823
 msgid "Empty string - not saving"
-msgstr ""
+msgstr "Varg i zbrazët - s’po ruhet"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:830
 msgid "Invalid URL - not saving"
-msgstr ""
+msgstr "URL e pavlefshme - s’po ruhet"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:897
 msgid "[new source]"
-msgstr ""
+msgstr "[burim i ri]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:965
 #: plugins/Satellites/src/ui_satellitesDialog.h:952
@@ -14888,7 +14888,7 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:573
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:475
 msgid "Update now"
-msgstr ""
+msgstr "Përditësoje tani"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:967
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:211
@@ -14897,7 +14897,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:232
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:741
 msgid "Update from files"
-msgstr ""
+msgstr "Përditësoje prej kartelash"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:995
 msgid "[orbit calculation error]"
@@ -14905,27 +14905,27 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:996
 msgid "[all newly added]"
-msgstr ""
+msgstr "[krejt të shtuarit rishtazi]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:997
 msgid "[all not displayed]"
-msgstr ""
+msgstr "[krejt të pashfaqurit]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:998
 msgid "[all displayed]"
-msgstr ""
+msgstr "[krejt të shfaqurit]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:999
 msgid "[small satellites]"
-msgstr ""
+msgstr "[satelitë të vegjël]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1000
 msgid "[medium satellites]"
-msgstr ""
+msgstr "[satelitë mesatarë]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1001
 msgid "[large satellites]"
-msgstr ""
+msgstr "[satelitë të mëdhenj]"
 
 #. TRANSLATORS: LEO = Low Earth orbit
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1003
@@ -14954,7 +14954,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1012
 msgid "[all]"
-msgstr ""
+msgstr "[krejt]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1028
 msgid "RCS"
@@ -14976,13 +14976,13 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1032
 msgctxt "time unit"
 msgid " s"
-msgstr ""
+msgstr " s"
 
 #. TRANSLATORS: duration
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1034
 #: plugins/Satellites/src/ui_satellitesDialog.h:982
 msgid "Segment length:"
-msgstr ""
+msgstr "Gjatësi segmenti:"
 
 #. TRANSLATORS: duration
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1036
@@ -14990,12 +14990,12 @@ msgstr ""
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:341
 msgctxt "time unit"
 msgid " h"
-msgstr ""
+msgstr " h"
 
 #. TRANSLATORS: Displayed in the satellite group selection box.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1067
 msgid "New group..."
-msgstr ""
+msgstr "Grup i ri…"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1332
 msgid "Select TLE Update File"
@@ -15003,11 +15003,11 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1354
 msgid "Brightness"
-msgstr ""
+msgstr "Ndriçim"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1357
 msgid "Satellite"
-msgstr ""
+msgstr "Satelit"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1437
 msgid "Save predicted Iridium flares as..."
@@ -15020,7 +15020,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:156
 msgid "Downloading data..."
-msgstr ""
+msgstr "Po shkarkohen të dhëna…"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:157
 msgid ""
@@ -15037,39 +15037,39 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:249
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:250
 msgid "Processing data..."
-msgstr ""
+msgstr "Po përpunohen të dhëna…"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:244
 msgid "No data could be downloaded. Try again later."
-msgstr ""
+msgstr "S’u shkarkuan dot të dhëna. Riprovoni më vonë."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:266
 msgid "Download aborted."
-msgstr ""
+msgstr "Shkarkimi u ndërpre."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:311
 msgid "Get data"
-msgstr ""
+msgstr "Merrni të dhëna"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:377
 #, qt-format
 msgid "Catalog Number: %1"
-msgstr ""
+msgstr "Numër Katalogu: %1"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:946
 #: plugins/Satellites/src/ui_satellitesDialog.h:947
 msgid "Satellites Configuration"
-msgstr ""
+msgstr "Formësim Satelitësh"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:949
 msgid "Updates"
-msgstr ""
+msgstr "Përditësime"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:950
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:571
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:469
 msgid "Update frequency:"
-msgstr ""
+msgstr "Shpeshti përditësimesh:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:951
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:238
@@ -15078,7 +15078,7 @@ msgstr ""
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:332
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:570
 msgid "Last update:"
-msgstr ""
+msgstr "Përditësimi i fundit më:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:953
 msgid "On update, add all new satellites from the selected source(s)"
@@ -15103,7 +15103,7 @@ msgstr "Madhësi shkronjash:"
 #: plugins/Satellites/src/ui_satellitesDialog.h:959
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:286
 msgid "Colors"
-msgstr ""
+msgstr "Ngjyra"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:961
 msgid "Color of markers, labels and orbits for invisible satellites"
@@ -15115,7 +15115,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:967
 msgid "Show satellites as markers"
-msgstr ""
+msgstr "Shfaqi satelitët si piketa"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:968
 msgid "Hide invisible artificial satellites"
@@ -15123,7 +15123,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:969
 msgid "Orbit lines"
-msgstr ""
+msgstr "Vija orbitash"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:971
 #: plugins/Satellites/src/ui_satellitesDialog.h:988
@@ -15132,7 +15132,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:974
 msgid "Duration of a single segment in seconds"
-msgstr ""
+msgstr "Kohëzgjatje e një segmenti të vetëm, në sekonda"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:977
 #: plugins/Satellites/src/ui_satellitesDialog.h:984
@@ -15141,11 +15141,11 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:980
 msgid "Duration of a single segment"
-msgstr ""
+msgstr "Kohëzgjatje e një segmenti të vetëm"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:986
 msgid "Number of  segments:"
-msgstr ""
+msgstr "Numër segmentesh:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:990
 msgid "Fade length:"
@@ -15153,11 +15153,11 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:996
 msgid "Double-click a satellite to start tracking it."
-msgstr ""
+msgstr "Dyklikoni mbi një satelit që të fillohet të ndiqet."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:999
 msgid "Add more satellites"
-msgstr ""
+msgstr "Shtoni më tepër satelitë"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1002
 msgid "Remove the selected satellites"
@@ -15184,7 +15184,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1017
 msgid "Catalog number:"
-msgstr ""
+msgstr "Numër katalogu:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1022
 #: plugins/Satellites/src/ui_satellitesDialog.h:1026
@@ -15193,11 +15193,11 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1024
 msgid "I.D.:"
-msgstr ""
+msgstr "I.D.:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1028
 msgid "Standard magnitude:"
-msgstr ""
+msgstr "Magnitudë standarde:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1030
 msgid "Display orbit line(s) for the selected satellite(s)"
@@ -15205,11 +15205,11 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1032
 msgid "Orbit"
-msgstr ""
+msgstr "Orbitë"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1034
 msgid "Display the selected satellite(s)"
-msgstr ""
+msgstr "Shfaq satelitin(ët) e përzgjedhur"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1036
 msgid "Displayed"
@@ -15221,16 +15221,16 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1040
 msgid "Do not update"
-msgstr ""
+msgstr "Mos e përditëso"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1041
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:216
 msgid "Description:"
-msgstr ""
+msgstr "Pershkrim:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1042
 msgid "Groups:"
-msgstr ""
+msgstr "Grupe:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1043
 msgid "TLE set:"
@@ -15248,23 +15248,23 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1051
 msgid "Add new source"
-msgstr ""
+msgstr "Shtoni burim të ri"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1054
 msgid "Edit selected source"
-msgstr ""
+msgstr "Përpunoni burimin e përzgjedhur"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1057
 msgid "Save source"
-msgstr ""
+msgstr "Ruaje burimin"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1060
 msgid "Remove selected source"
-msgstr ""
+msgstr "Hiqe burimin e përzgjedhur"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1062
 msgid "Sources"
-msgstr ""
+msgstr "Burime"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1063
 msgid "Flare prediction (days):"
@@ -15280,7 +15280,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:208
 msgid "More Satellites"
-msgstr ""
+msgstr "Më Tepër Satelitë"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:210
 msgid "Get data from update sources"
@@ -15289,11 +15289,11 @@ msgstr ""
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:211
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
 msgid "Abort download"
-msgstr ""
+msgstr "Ndërprite shkarkimin"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:212
 msgid "New satellites"
-msgstr ""
+msgstr "Satelitë të rinj"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:213
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
@@ -15408,7 +15408,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/Rts2/TelescopeClientJsonRts2.cpp:289
 msgid "Telescope position: "
-msgstr ""
+msgstr "Pozicion teleskopi: "
 
 #: plugins/TelescopeControl/src/Rts2/TelescopeClientJsonRts2.cpp:291
 msgid "Distance to target position: "
@@ -15416,12 +15416,12 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:126
 msgid "INDI Settings"
-msgstr ""
+msgstr "Rregullime INDI"
 
 #: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:127
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:615
 msgid "TCP port:"
-msgstr ""
+msgstr "Portë TCP:"
 
 #: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:129
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:613
@@ -15432,23 +15432,23 @@ msgstr ""
 #: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:131
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:611
 msgid "Host:"
-msgstr ""
+msgstr "Strehë:"
 
 #: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:132
 msgid "Refresh devices"
-msgstr ""
+msgstr "Rifresko pajisjet"
 
 #: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:133
 msgid "Devices:"
-msgstr ""
+msgstr "Pajisje:"
 
 #: plugins/TelescopeControl/src/INDI/ui_INDIControlWidget.h:160
 msgid "Max"
-msgstr ""
+msgstr "Maks."
 
 #: plugins/TelescopeControl/src/INDI/ui_INDIControlWidget.h:161
 msgid "Min"
-msgstr ""
+msgstr "Min."
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOM.cpp:161
 msgid ""
@@ -15458,23 +15458,23 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:41
 msgid "ASCOM Settings"
-msgstr ""
+msgstr "Rregullime ASCOM"
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:42
 msgid "Choose ASCOM Telescope"
-msgstr ""
+msgstr "Zgjidhni Teleskop ASCOM"
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:43
 msgid "Selected Device:"
-msgstr ""
+msgstr "Pajisje e Përzgjedhur:"
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:44
 msgid "No device selected"
-msgstr ""
+msgstr "S’u përzgjodh pajisje"
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:45
 msgid "Source for coordinate system:"
-msgstr ""
+msgstr "Burim për sistem koordinatash:"
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:46
 msgid ""
@@ -15484,7 +15484,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:47
 msgid "Let ASCOM device decide"
-msgstr ""
+msgstr "Lini pajisjen ASCOM të vendosë"
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:48
 msgid ""
@@ -15494,7 +15494,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:49
 msgid "Use Stellarium settings"
-msgstr ""
+msgstr "Përdor rregullimet e Stellarium-it"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:185
 msgid ""
@@ -15510,39 +15510,39 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:257
 msgid "Add New Telescope"
-msgstr ""
+msgstr "Shtoni Teleskop të Ri"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:267
 msgid "Configure Telescope"
-msgstr ""
+msgstr "Formësoni Teleskop"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:63
 msgid "N/A"
-msgstr ""
+msgstr "N/A"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:64
 msgid "Starting"
-msgstr ""
+msgstr "Po niset"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:65
 msgid "Connecting"
-msgstr ""
+msgstr "Po bëhet lidhja"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:66
 msgid "Connected"
-msgstr ""
+msgstr "U lidh"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:67
 msgid "Disconnected"
-msgstr ""
+msgstr "U shkëput"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:68
 msgid "Stopped"
-msgstr ""
+msgstr "U ndal"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:263
 msgid "Telescope Control plug-in"
-msgstr ""
+msgstr "Shtojcë Kontrolli Teleskopi"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:267
 msgid "Plug-in and GUI programming"
@@ -15550,15 +15550,15 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
 msgid "ASCOM Telescope Client"
-msgstr ""
+msgstr "Klient Teleskopësh ASCOM"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "RTS2 support"
-msgstr ""
+msgstr "Mbulim për RTS2"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:270
 msgid "INDI Telescope Client"
-msgstr ""
+msgstr "Klient Teleskopësh INDI"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:276
 msgid ""
@@ -15609,12 +15609,12 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:298
 msgid "Contents"
-msgstr ""
+msgstr "Lëndë"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:299
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:314
 msgid "Abilities and limitations"
-msgstr ""
+msgstr "Aftësi dhe kufizime"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:300
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:322
@@ -15624,45 +15624,45 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:301
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:326
 msgid "Using this plug-in"
-msgstr ""
+msgstr "Përdorimi i kësaj shtojce"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:302
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:350
 msgid "Main window ('Telescopes')"
-msgstr ""
+msgstr "Dritare kryesore ('Teleskopë')"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:303
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:374
 msgid "Telescope configuration window"
-msgstr ""
+msgstr "Dritare formësimi teleskopi"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:304
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:376
 msgid "Connection type"
-msgstr ""
+msgstr "Lloj lidhjeje"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:305
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:390
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:594
 msgid "Telescope properties"
-msgstr ""
+msgstr "Veti teleskopi"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:306
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:398
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:607
 msgid "Device settings"
-msgstr ""
+msgstr "Rregullime pajisjeje"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:307
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:417
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:610
 msgid "Connection settings"
-msgstr ""
+msgstr "Rregullime lidhjeje"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:308
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:434
 msgid "Field of view indicators"
-msgstr ""
+msgstr "Tregues fushëpamjeje"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:309
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:445
@@ -15671,17 +15671,17 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
 msgid "Telescope commands"
-msgstr ""
+msgstr "Urdhra teleskopi"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:311
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:478
 msgid "Supported devices"
-msgstr ""
+msgstr "Pajisje të mbuluara"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:312
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:500
 msgid "Virtual telescope"
-msgstr ""
+msgstr "Teleskop virtual"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:315
 msgid ""
@@ -15733,7 +15733,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:498
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:510
 msgid "Back to top"
-msgstr ""
+msgstr "Mbrapsht te kreu"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:323
 msgid ""
@@ -15750,7 +15750,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:328
 msgid "DIRECT CONNECTION"
-msgstr ""
+msgstr "LIDHJE E DREJTPËRDREJTË"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:331
@@ -15761,7 +15761,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:333
 msgid "INDIRECT CONNECTION"
-msgstr ""
+msgstr "LIDHJE E TËRTHORTË"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:336
@@ -15900,7 +15900,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:381
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:580
 msgid "Telescope controlled by:"
-msgstr ""
+msgstr "Teleskop i kontrolluar nga:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:382
 msgid "<b>Stellarium, directly through a serial port</b> is the DIRECT case"
@@ -16127,7 +16127,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:462
 msgid "Sending commands"
-msgstr ""
+msgstr "Dërgim urdhrash"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:463
 msgid ""
@@ -16151,11 +16151,11 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:466
 msgid "For example, Ctrl+1 for telescope #1."
-msgstr ""
+msgstr "Për shembull, Ctrl+1 për teleskopin #%1."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:467
 msgid "This will move the telescope to the selected object."
-msgstr ""
+msgstr "Kjo do ta drejtojë teleskopin e objekti i përzgjedhur."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:468
 msgid ""
@@ -16165,7 +16165,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:469
 msgid "For example, Alt+1 for telescope #1."
-msgstr ""
+msgstr "Për shembull, Alt+1 për teleskopin #%1."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:470
 msgid ""
@@ -16195,7 +16195,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:483
 msgid "The device list contains the following:"
-msgstr ""
+msgstr "Lista e pajisjeve përmban sa vijon:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:484
 msgid "Any device using the NexStar interface."
@@ -16287,7 +16287,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:530
 msgid "Status"
-msgstr ""
+msgstr "Gjendje"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:547
 #, qt-format
@@ -16317,73 +16317,73 @@ msgstr ""
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:573
 msgid "local, Stellarium"
-msgstr ""
+msgstr "vendore, Stellarium"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:577
 msgid "local, external"
-msgstr ""
+msgstr "vendore, e jashtme"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:581
 msgid "remote, unknown"
-msgstr ""
+msgstr "e largët, e panjohur"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:585
 msgid "virtual"
-msgstr ""
+msgstr "virtuale"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:589
 msgid "remote, RTS2"
-msgstr ""
+msgstr "e largët, RTS2"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:593
 msgid "remote, INDI/INDIGO"
-msgstr ""
+msgstr "e largët, INDI/INDIGO"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:597
 msgid "local, ASCOM"
-msgstr ""
+msgstr "vendore, ASCOM"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1019
 msgid "Start"
-msgstr ""
+msgstr "Nise"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1021
 msgid "Start the selected local telescope"
-msgstr ""
+msgstr "Vini në punë teleskopin vendor të përzgjedhur"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1026
 msgid "Stop"
-msgstr ""
+msgstr "Ndale"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1028
 msgid "Stop the selected local telescope"
-msgstr ""
+msgstr "Ndalni punën e teleskopit vendor të përzgjedhur"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1033
 msgid "Connect"
-msgstr ""
+msgstr "Lidhu"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1035
 msgid "Connect to the selected telescope"
-msgstr ""
+msgstr "Lidhu me teleskopin e përzgjedhur"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1040
 msgid "Disconnect"
-msgstr ""
+msgstr "Shkëputu"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1042
 msgid "Disconnect from the selected telescope"
-msgstr ""
+msgstr "Shkëputu nga teleskopi i përzgjedhur"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1062
 msgid "Select a directory"
-msgstr ""
+msgstr "Përzgjidhni drejtori"
 
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:96
 msgid "Right Ascension (J2000)"
@@ -16397,7 +16397,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:320
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:469
 msgid "Select one"
-msgstr ""
+msgstr "Përzgjidhni një"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:336
 msgid "Slew telescope to"
@@ -16405,7 +16405,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:338
 msgid "There are no active devices."
-msgstr ""
+msgstr "S’ka pajisje aktive."
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:339
 msgid "Slew telescope to coordinates"
@@ -16424,16 +16424,16 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:342
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:242
 msgid "&Current object"
-msgstr ""
+msgstr "Objekt i &çastit"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:343
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:243
 msgid "Center of the screen"
-msgstr ""
+msgstr "Qendër e ekranit"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:346
 msgid "Hours-minutes-seconds format"
-msgstr ""
+msgstr "Format orë-minuta-sekonda"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:348
 msgid "&HMS"
@@ -16441,7 +16441,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:350
 msgid "Degrees-minutes-seconds format"
-msgstr ""
+msgstr "Format gradë-minuta-sekonda"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:352
 msgid "&DMS"
@@ -16449,7 +16449,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:354
 msgid "Decimal degrees"
-msgstr ""
+msgstr "Gradë dhjetore"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:356
 msgid "D&ecimal"
@@ -16461,15 +16461,15 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:358
 msgid "Sync"
-msgstr ""
+msgstr "Njëkohësim"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:359
 msgid "Configure &telescopes..."
-msgstr ""
+msgstr "Formësoni &teleskopësh…"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:578
 msgid "Telescope Configuration"
-msgstr ""
+msgstr "Formësim Teleskopi"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:582
 msgid ""
@@ -16489,7 +16489,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:588
 msgid "External software or a remote computer"
-msgstr ""
+msgstr "Software i jashtëm ose kompjuter i largët"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:590
 msgid "Telescope which is accessible through RTS2(.org) JSON API"
@@ -16497,7 +16497,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:592
 msgid "RTS2 telescope"
-msgstr ""
+msgstr "Teleskop RTS2"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:593
 msgid "Nothing, just simulate one (a moving reticle)"
@@ -16505,7 +16505,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:596
 msgid "Connection delay:"
-msgstr ""
+msgstr "Vonesë lidhjeje:"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:601
 msgid "J2000 (default)"
@@ -16527,35 +16527,35 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:608
 msgid "Serial port:"
-msgstr ""
+msgstr "Portë seriale:"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:609
 msgid "Device model:"
-msgstr ""
+msgstr "Model pajisjeje:"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:616
 msgid "RTS2 telescope settings"
-msgstr ""
+msgstr "Rregullime teleskopi RTS2"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:617
 msgid "URL:"
-msgstr ""
+msgstr "URL:"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:618
 msgid "Username:"
-msgstr ""
+msgstr "Emër përdoruesi:"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:619
 msgid "Password:"
-msgstr ""
+msgstr "Fjalëkalim:"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:621
 msgid "RTS2 username"
-msgstr ""
+msgstr "Emër përdoruesi RTS2"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:624
 msgid "RTS2 password"
-msgstr ""
+msgstr "Fjalëkalim RTS2"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:627
 msgid "URL of the machine that hosts the RTS2 JSON (httpd) server"
@@ -16563,11 +16563,11 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:629
 msgid "Refresh every:"
-msgstr ""
+msgstr "Rifreskim çdo:"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:633
 msgid "User interface settings"
-msgstr ""
+msgstr "Rregullime ndërfaqeje përdoruesi"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:635
 msgid "Show circles with fixed angular size around the telescope reticle"
@@ -16575,11 +16575,11 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:637
 msgid "Use field of view indicators"
-msgstr ""
+msgstr "Përdor tregues fushëpamjeje"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:638
 msgid "Circle size(s):"
-msgstr ""
+msgstr "Madhësi rrethi:"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:640
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
@@ -16587,7 +16587,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:643
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:417
 msgid "Telescopes Controlled"
@@ -16595,23 +16595,23 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:419
 msgid "Configure the selected telescope"
-msgstr ""
+msgstr "Formësoni teleskopin e përzgjedhur"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:422
 msgid "Add a new telescope"
-msgstr ""
+msgstr "Shtoni teleskop të ri"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:425
 msgid "Remove the selected telescope"
-msgstr ""
+msgstr "Hiqe teleskopin e përzgjedhur"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:428
 msgid "GUI"
-msgstr ""
+msgstr "GUI"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:429
 msgid "Show telescope labels"
-msgstr ""
+msgstr "Shfaq etiketa teleskopësh"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:430
 msgid "Show telescope reticles"
@@ -16619,11 +16619,11 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:431
 msgid "Show field of view indicators"
-msgstr ""
+msgstr "Shfaq tregues fushëpamjeje"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:432
 msgid "Files"
-msgstr ""
+msgstr "Kartela"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:433
 msgid "Log telescope driver messages to files"
@@ -16635,23 +16635,23 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:435
 msgid "Executables directory:"
-msgstr ""
+msgstr "Drejtori të ekzekutueshmish:"
 
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:240
 msgid "Points"
-msgstr ""
+msgstr "Pikë"
 
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:247
 msgid "Add point"
-msgstr ""
+msgstr "Shtoni pikë"
 
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:248
 msgid "Remove selected"
-msgstr ""
+msgstr "Hiq të përzgjedhurin"
 
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:249
 msgid "Clear list"
-msgstr ""
+msgstr "Spastroje listën"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:87
 msgid "Text User Interface"
@@ -16662,8 +16662,8 @@ msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
 msgstr ""
-"Zbatim shtojce i serisë 0.9.x për Ndërfaqen Tekstuale të Përdoruesit (TUI), "
-"përdorur në sisteme planetarësh"
+"Sendërtim shtojce i serisë 0.9.x për Ndërfaqen Tekstuale të Përdoruesit "
+"(TUI), përdorur në sisteme planetariumesh"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:152
 msgid "Altitude:"
@@ -16671,15 +16671,15 @@ msgstr "Lartësi:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:160
 msgid "Solar System body"
-msgstr ""
+msgstr "Objekt Sistemi Diellor"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:175
 msgid "Current date/time"
-msgstr ""
+msgstr "Data/koha e tanishme"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:180
 msgid "Set time zone"
-msgstr ""
+msgstr "Caktoni zonën kohore"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:181
 msgid "Day keys"
@@ -16692,7 +16692,7 @@ msgstr ""
 #. TRANSLATORS: The current system time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:189
 msgid "system"
-msgstr ""
+msgstr "sistem"
 
 #. TRANSLATORS: A pre-set time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:191
@@ -16713,33 +16713,33 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:200
 msgid "Date display format"
-msgstr ""
+msgstr "Format shfaqjeje datash"
 
 #. TRANSLATORS: 12-hour time format
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:208
 msgid "12h"
-msgstr ""
+msgstr "12h"
 
 #. TRANSLATORS: 24-hour time format
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:210
 msgid "24h"
-msgstr ""
+msgstr "24h"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:211
 msgid "Time display format"
-msgstr ""
+msgstr "Format shfaqjeje kohësh"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:236
 msgid "Sky Language"
-msgstr ""
+msgstr "Gjuhë Kulturash Qiellore"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:242
 msgid "App Language"
-msgstr ""
+msgstr "Gjuhë Aplikacioni"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:258
 msgid "Show stars"
-msgstr ""
+msgstr "Shfaq Yje"
 
 #. TRANSLATORS: Refers to constellation art
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:302
@@ -16752,15 +16752,15 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:369
 msgid "Nebula names"
-msgstr ""
+msgstr "Emra mjegullnajash"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:373
 msgid "Nebula hints"
-msgstr ""
+msgstr "Ndihmëza për mjegullnaja"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:377
 msgid "Galaxy hints"
-msgstr ""
+msgstr "Ndihmëza për galaksi"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:381
 msgid "Dark nebulae hints"
@@ -16776,11 +16776,11 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:410
 msgid "Sky Background (default: black)"
-msgstr ""
+msgstr "Sfond Qielli (parazgjedhje: i zi)"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:443
 msgid "Effects"
-msgstr ""
+msgstr "Efekte"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:457
 msgid "Setting landscape sets location"
@@ -16804,28 +16804,28 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:501
 msgid "Run local script"
-msgstr ""
+msgstr "Xhiro programth vendor"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:507
 msgid "Stop running script"
-msgstr ""
+msgstr "Ndal xhirimin e programthit"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:518
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:522
 msgid "Administration"
-msgstr ""
+msgstr "Administrim"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:528
 msgid "Load default configuration"
-msgstr ""
+msgstr "Ngarko formësimin parazgjedhje"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:529
 msgid "Save current configuration"
-msgstr ""
+msgstr "Ruaj formësimin e tanishëm"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:532
 msgid "Shut down"
-msgstr ""
+msgstr "Fike"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:608
 msgid "[no TUI node]"
@@ -16838,12 +16838,12 @@ msgstr ""
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:73
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
 msgid "Off"
-msgstr ""
+msgstr "Off"
 
 #: plugins/TextUserInterface/src/TuiNodeColor.cpp:109
 #, qt-format
 msgid "error, unknown color part \"%1\""
-msgstr ""
+msgstr "gabim, pjesë e panjohur ngjyre \"%1\""
 
 #: plugins/TextUserInterface/src/TuiNodeActivate.cpp:48
 msgid " [RETURN to activate]"
@@ -16896,24 +16896,24 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:212
 msgid "Select bookmark..."
-msgstr ""
+msgstr "Përzgjidhni faqerojtës…"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:349
 msgid "Plain Text File"
-msgstr ""
+msgstr "Kartelë Teksti të Thjeshtë"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:351
 msgid "All Files"
-msgstr ""
+msgstr "Tërë Kartelat"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:353
 msgid "Select a file"
-msgstr ""
+msgstr "Përzgjidhni një kartelë"
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:104
 msgid "website"
-msgstr ""
+msgstr "sajt"
 
 #. TRANSLATORS: IAU = International Astronomical Union
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:108
@@ -16932,7 +16932,7 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:217
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:225
 msgid "Configuration files"
-msgstr ""
+msgstr "Kartela formësimi"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:219
 msgid "Select a file to replace the Solar System minor bodies"
@@ -16944,15 +16944,15 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:511
 msgid "Import data"
-msgstr ""
+msgstr "Importo të dhëna"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:513
 msgid "Select the type"
-msgstr ""
+msgstr "Përzgjidhni llojin"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:516
 msgid "Select the source"
-msgstr ""
+msgstr "Përzgjidhni burimin"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:517
 msgid "Download a list of objects from the Internet"
@@ -16960,36 +16960,36 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:518
 msgid "Select a source from the list:"
-msgstr ""
+msgstr "Përzgjidhni një burim nga lista:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:519
 msgid "Or enter a URL:"
-msgstr ""
+msgstr "Ose jepni një URL:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:520
 msgid "Add this URL to the bookmarks list"
-msgstr ""
+msgstr "Shtoje këtë URL te listë faqerojtësish"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:521
 msgid "Bookmark title:"
-msgstr ""
+msgstr "Titull faqerojtësi:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:522
 msgid "A file containing a list of objects"
-msgstr ""
+msgstr "Kartelë që përmban një listë objektesh"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
 msgid "Get orbital elements"
-msgstr ""
+msgstr "Merr elementë orbitalë"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
 msgid "Online search"
-msgstr ""
+msgstr "Kërkim në internet"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
 msgid "Objects found"
-msgstr ""
+msgstr "U gjetën objekte"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
 msgid ""
@@ -17000,19 +17000,19 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
 msgid "This will update existing objects only."
-msgstr ""
+msgstr "Kjo do të përditësojë vetëm objektet ekzistuese."
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
 msgid "Overwrite existing objects only"
-msgstr ""
+msgstr "Mbishkruaj vetëm objekte ekzistuese"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
 msgid "This will add new objects AND update existing ones."
-msgstr ""
+msgstr "Kjo do të shtojë objekte të rinj DHE do të përditësojë ekzistuesit."
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
 msgid "Add new and update existing objects"
-msgstr ""
+msgstr "Shto të rinj dhe përditëso objektet ekzistues"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:539
 msgid ""
@@ -17022,21 +17022,21 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
 msgid "Update only the orbital elements"
-msgstr ""
+msgstr "Përditëso vetëm elementët orbitalë"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
 msgid "Add objects"
-msgstr ""
+msgstr "Shtoni objekt"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:258
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:270
 msgid "Minor Solar System objects"
-msgstr ""
+msgstr "Objekte Sistemi Diellor të vegjël"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:260
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:150
 msgid "Note"
-msgstr ""
+msgstr "Shënim"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:261
 msgid ""
@@ -17074,16 +17074,16 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:269
 msgid "Configuration file"
-msgstr ""
+msgstr "Kartelë formësimi"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:272
 msgid "Add new Minor Solar System objects"
-msgstr ""
+msgstr "Shtoni objekt të ri të vogël Sistemi Diellor"
 
 #: plugins/Supernovae/src/Supernovae.cpp:72
 #: plugins/Supernovae/src/Supernovae.cpp:151
 msgid "Historical Supernovae"
-msgstr ""
+msgstr "Supernova Historike"
 
 #: plugins/Supernovae/src/Supernovae.cpp:75
 msgid "This plugin allows you to see some bright historical supernovae."
@@ -17095,15 +17095,15 @@ msgstr ""
 
 #: plugins/Supernovae/src/Supernova.cpp:143
 msgid "supernova"
-msgstr ""
+msgstr "supernova"
 
 #: plugins/Supernovae/src/Supernova.cpp:153
 msgid "Type of supernova"
-msgstr ""
+msgstr "Lloj supernova"
 
 #: plugins/Supernovae/src/Supernova.cpp:154 plugins/Novae/src/Nova.cpp:157
 msgid "Maximum brightness"
-msgstr ""
+msgstr "Ndriçim maksimum"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:122
 msgid "Historical Supernovae Plug-in"
@@ -17117,7 +17117,7 @@ msgstr ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:131
 #, qt-format
 msgid "This list altogether contains %1 stars."
-msgstr ""
+msgstr "Kjo listë gjithsej përmban %1 yje."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:131
 #, qt-format
@@ -17155,7 +17155,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:142
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:158
 msgid "in Russia"
-msgstr ""
+msgstr "në Rusi"
 
 #. TRANSLATORS: days.
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:193
@@ -17183,7 +17183,7 @@ msgstr ""
 #: plugins/Quasars/src/ui_quasarsDialog.h:294
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:330
 msgid "Update catalog from Internet"
-msgstr ""
+msgstr "Përditësoje katalogun prej Interneti"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
 #: plugins/Novae/src/ui_novaeDialog.h:240
@@ -17191,14 +17191,14 @@ msgstr ""
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:331
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:569
 msgid "Update from Internet sources"
-msgstr ""
+msgstr "Përditësoje prej burimesh Interneti"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
 #: plugins/Novae/src/ui_novaeDialog.h:242
 #: plugins/Quasars/src/ui_quasarsDialog.h:297
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:333
 msgid "Update frequency (days):"
-msgstr ""
+msgstr "Shpeshti përditësimesh (ditë):"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
 #: plugins/Novae/src/ui_novaeDialog.h:243
@@ -17206,7 +17206,7 @@ msgstr ""
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:334
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:572
 msgid "[next update info]"
-msgstr ""
+msgstr "[informacion përditësimi pasues]"
 
 #: plugins/NavStars/src/NavStars.cpp:56 plugins/NavStars/src/NavStars.cpp:126
 msgid "Navigational Stars"
@@ -17259,12 +17259,12 @@ msgstr ""
 #: plugins/NavStars/src/NavStars.cpp:596
 msgctxt "the highest part of the Sun or Moon"
 msgid "upper limb"
-msgstr ""
+msgstr "gjymtyrë e sipërme"
 
 #: plugins/NavStars/src/NavStars.cpp:597
 msgctxt "the lowest part of the Sun or Moon"
 msgid "lower limb"
-msgstr ""
+msgstr "gjymtyrë e poshtme"
 
 #: plugins/NavStars/src/NavStars.cpp:612 plugins/NavStars/src/NavStars.cpp:640
 #: plugins/NavStars/src/NavStars.cpp:646
@@ -17346,22 +17346,22 @@ msgstr ""
 #. TRANSLATORS: Part of full phrase: Anglo-American set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:122
 msgid "Anglo-American"
-msgstr ""
+msgstr "Anglo-amerikane"
 
 #. TRANSLATORS: Part of full phrase: French set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:124
 msgid "French"
-msgstr ""
+msgstr "Frënge"
 
 #. TRANSLATORS: Part of full phrase: Russian set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:126
 msgid "Russian"
-msgstr ""
+msgstr "Ruse"
 
 #. TRANSLATORS: Part of full phrase: German set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:128
 msgid "German"
-msgstr ""
+msgstr "Gjermane"
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:154
 msgid "Navigational Stars Plug-in"
@@ -17375,7 +17375,7 @@ msgstr ""
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:169
 msgid "These fields are:"
-msgstr ""
+msgstr "Këto fusha janë:"
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:171
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:192
@@ -17491,7 +17491,7 @@ msgstr ""
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:280
 msgid "Note:"
-msgstr ""
+msgstr "Shënim:"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:282
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:307
@@ -17609,11 +17609,11 @@ msgstr ""
 
 #: plugins/Quasars/src/Quasars.cpp:172
 msgid "Show quasars"
-msgstr ""
+msgstr "Shfaq kuazarë"
 
 #: plugins/Quasars/src/Quasars.cpp:173
 msgid "Quasars configuration window"
-msgstr ""
+msgstr "Dritare formësimi kuazarësh"
 
 #. TRANSLATORS: Jy is Jansky(10-26W/m2/Hz)
 #: plugins/Quasars/src/Quasar.cpp:146
@@ -17631,7 +17631,7 @@ msgstr ""
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:125
 msgid "Quasars Plug-in"
-msgstr ""
+msgstr "Shtojcë Kuazarësh"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:132
 msgid ""
@@ -17651,19 +17651,19 @@ msgstr ""
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:248
 msgid "Quasars is updated"
-msgstr ""
+msgstr "Kuazarët u përditësuan"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:291
 msgid "Quasars Configuration"
-msgstr ""
+msgstr "Formësim Kuazarësh"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:292
 msgid "Quasars Plug-in Configuration"
-msgstr ""
+msgstr "Formësim Shtojce Kuazarësh"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:300
 msgid "Settings for quasars"
-msgstr ""
+msgstr "Rregullime për kuazarë"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:302
 msgid "Plot all quasars without labels"
@@ -17671,19 +17671,19 @@ msgstr ""
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:304
 msgid "Enable display of distribution for quasars"
-msgstr ""
+msgstr "Aktivizo shfaqje shpërndarjeje për kuazarë"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:306
 msgid "Show quasars button on toolbar"
-msgstr ""
+msgstr "Shfaq buton kuazarësh te paneli"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:307
 msgid "Use markers for quasars"
-msgstr ""
+msgstr "Përdor piketa për kuazarë"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:308
 msgid "Quasars marker color"
-msgstr ""
+msgstr "Ngjyrë piketash kuazarësh"
 
 #: plugins/Pulsars/src/Pulsars.cpp:75
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:144
@@ -17694,11 +17694,11 @@ msgstr ""
 
 #: plugins/Pulsars/src/Pulsars.cpp:170
 msgid "Show pulsars"
-msgstr ""
+msgstr "Shfaq pulsarë"
 
 #: plugins/Pulsars/src/Pulsars.cpp:171
 msgid "Pulsars configuration window"
-msgstr ""
+msgstr "Dritare formësimi pulsarësh"
 
 #: plugins/Pulsars/src/Pulsar.cpp:184
 msgid "pulsar"
@@ -17768,7 +17768,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/Pulsar.cpp:242
 msgid "Annual parallax"
-msgstr ""
+msgstr "Paralaks vjetor"
 
 #: plugins/Pulsars/src/Pulsar.cpp:251
 msgid "Distance based on electron density model"
@@ -17830,7 +17830,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
 msgid "Pulsars Plug-in"
-msgstr ""
+msgstr "Shtojcë Pulsarësh"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:145
 #, qt-format
@@ -17855,7 +17855,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:155
 msgid "Vladimir Samodourov"
-msgstr ""
+msgstr "Vladimir Samodourov"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:157
 msgid "Pushchino Radio Astronomy Observatory"
@@ -17867,23 +17867,23 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:162
 msgid "Nancay Radioastronomical Observatory"
-msgstr ""
+msgstr "Observatori Radioastronomik i Nansejit"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:163
 msgid "in France"
-msgstr ""
+msgstr "në Francë"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:286
 msgid "Pulsars is updated"
-msgstr ""
+msgstr "Pulsarët u përditësuan"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:328
 msgid "Pulsars Plug-in Configuration"
-msgstr ""
+msgstr "Formësim Shtojce Pulsarësh"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:336
 msgid "Settings for pulsars"
-msgstr ""
+msgstr "Rregullime për pulsarë"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:338
 msgid "Plot all pulsars without labels"
@@ -17891,11 +17891,11 @@ msgstr ""
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:340
 msgid "Enable display of distribution for pulsars"
-msgstr ""
+msgstr "Aktivizo shfaqje shpërndarjeje për pulsarët"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:342
 msgid "Show pulsars button on toolbar"
-msgstr ""
+msgstr "Shfaq buton pulsarësh te paneli"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:343
 msgid "Pulsars marker color"
@@ -17921,7 +17921,7 @@ msgstr ""
 #: plugins/RemoteControl/src/RemoteControl.cpp:153
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:282
 msgid "Remote Control"
-msgstr ""
+msgstr "Kontroll Së Largëti"
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:62
 msgid ""
@@ -17937,11 +17937,11 @@ msgstr ""
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:153
 msgid "Remote control"
-msgstr ""
+msgstr "Kontroll së largëti"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:133
 msgid "Remote Control Plug-in"
-msgstr ""
+msgstr "Shtojcë Kontrolli Së Largëti"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:141
 msgid ""
@@ -17970,7 +17970,7 @@ msgstr ""
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:174
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:195
 msgid "Publications"
-msgstr ""
+msgstr "Botime"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:159
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:175
@@ -18003,15 +18003,15 @@ msgstr ""
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:269
 msgid "Port Number:"
-msgstr ""
+msgstr "Numër Porte:"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:272
 msgid "Access requires authentication"
-msgstr ""
+msgstr "Hyrja lyp mirëfilltësim"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:273
 msgid "Password"
-msgstr ""
+msgstr "Fjalëkalim"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:274
 msgid ""
@@ -18022,7 +18022,7 @@ msgstr ""
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:275
 msgid "Enable CORS for the following origin"
-msgstr ""
+msgstr "Aktivizo CORS për origjinën vijuese"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:276
 msgid ""
@@ -18033,11 +18033,11 @@ msgstr ""
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:277
 msgid "Your changes require a restart of the server."
-msgstr ""
+msgstr "Ndryshimet tuaja lypin rinisje të shërbyesit."
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:278
 msgid "Restart server"
-msgstr ""
+msgstr "Rinis shërbyesin"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:279
 msgid "Server enabled"
@@ -18045,7 +18045,7 @@ msgstr ""
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:280
 msgid "Enable automatically on startup"
-msgstr ""
+msgstr "Aktivizoje vetvetiu gjatë nisjesh"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:281
 msgid "Server disabled - or Server listening on IP: aaa.bbb.ccc.ddd"
@@ -18054,7 +18054,7 @@ msgstr ""
 #: plugins/RemoteSync/src/RemoteSync.cpp:53
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:484
 msgid "Remote Sync"
-msgstr ""
+msgstr "Njëkohësim i Largët"
 
 #: plugins/RemoteSync/src/RemoteSync.cpp:56
 msgid ""
@@ -18071,63 +18071,63 @@ msgstr ""
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:129
 #, qt-format
 msgid "ERROR: %1"
-msgstr ""
+msgstr "GABIM: %1"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:146
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:471
 msgid "Start server"
-msgstr ""
+msgstr "Nise shërbyesin"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:151
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:474
 msgid "Connect to server"
-msgstr ""
+msgstr "Lidhu te shërbyesi"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:154
 msgid "Not running"
-msgstr ""
+msgstr "S’xhiron"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:159
 msgid "Stop server"
-msgstr ""
+msgstr "Ndale shërbyesin"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:164
 #, qt-format
 msgid "Running as server on port %1"
-msgstr ""
+msgstr "Po xhirohet si shërbyes te porta %1"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:178
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:183
 msgid "Cancel connecting"
-msgstr ""
+msgstr "Anuloje lidhjen"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:179
 #, qt-format
 msgid "Connecting to %1: %2..."
-msgstr ""
+msgstr "Po lidhet te %1: %2…"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:184
 #, qt-format
 msgid "Retrying connection to %1: %2..."
-msgstr ""
+msgstr "Po riprovohet lidhja me %1: %2…"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:190
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:191
 msgid "Disconnecting..."
-msgstr ""
+msgstr "Po shkëputet…"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:195
 msgid "Disconnect from server"
-msgstr ""
+msgstr "Shkëputu prej shërbyesit"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:196
 #, qt-format
 msgid "Connected to %1: %2"
-msgstr ""
+msgstr "I lidhur te %1: %2"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:207
 msgid "Remote Sync Plug-in"
-msgstr ""
+msgstr "Shtojcë Njëkohësimi të Largët"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:215
 msgid ""
@@ -18149,7 +18149,7 @@ msgstr ""
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:218
 msgid "See manual for detailed description."
-msgstr ""
+msgstr "Për përshkrim të hollësishëm, shihni doracakun."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:219
 msgid "This plugin was developed during ESA SoCiS 2015&amp;2016."
@@ -18157,11 +18157,11 @@ msgstr ""
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:257
 msgid "Server Name"
-msgstr ""
+msgstr "Emër Shërbyesi"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:265
 msgid "Server not active."
-msgstr ""
+msgstr "Shërbyes jo aktiv."
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:466
 msgid "Remote Sync Plug-in Configuration"
@@ -18170,44 +18170,44 @@ msgstr ""
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:468
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:473
 msgid "Status:"
-msgstr ""
+msgstr "Gjendje:"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:470
 msgid "Server mode"
-msgstr ""
+msgstr "Mënyrë shërbyesi"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:472
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:477
 msgid "Server port"
-msgstr ""
+msgstr "Portë shërbyesi"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:473
 msgid "Client mode"
-msgstr ""
+msgstr "Mënyrë klienti"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:475
 msgid "Server host address/name"
-msgstr ""
+msgstr "Adresë/emër strehe shërbyeso"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:476
 msgid "127.0.0.1"
-msgstr ""
+msgstr "127.0.0.1"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:478
 msgid "When connection is lost"
-msgstr ""
+msgstr "Kur humb lidhja"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:479
 msgid "Do nothing"
-msgstr ""
+msgstr "Mos bëj gjë"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:480
 msgid "Try reconnecting"
-msgstr ""
+msgstr "Provo të rilidhesh"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:483
 msgid "When server quits"
-msgstr ""
+msgstr "Kur shërbyesi mbyllet"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:485
 msgid "Changes on this page require a re-connection to the server"
@@ -18215,11 +18215,11 @@ msgstr ""
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:486
 msgid "Settings applied on this client"
-msgstr ""
+msgstr "regullime të aplikuara mbi këtë klient"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:487
 msgid "Selection"
-msgstr ""
+msgstr "Përzgjedhje"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:490
 msgid "View direction"
@@ -18227,15 +18227,15 @@ msgstr ""
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:492
 msgid "Property filters"
-msgstr ""
+msgstr "Filtra vetish"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:493
 msgid "Exclude GUI-related properties"
-msgstr ""
+msgstr "Përjashto veti të lidhura me GUI-n"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:495
 msgid "These are all available properties."
-msgstr ""
+msgstr "Këto janë krejt vetitë e gatshme."
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:498
 msgid "These are the properties currently excluded from synchronisation."
@@ -18243,19 +18243,19 @@ msgstr ""
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:500
 msgid "Excluded Properties"
-msgstr ""
+msgstr "Veti të Përjashtuara"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:501
 msgid "Synchronized Properties"
-msgstr ""
+msgstr "Veti të Njëkohësuara"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:502
 msgid "Additional excluded properties:"
-msgstr ""
+msgstr "Veti shtesë të përjashtuara:"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:503
 msgid "Client settings"
-msgstr ""
+msgstr "Rregullime klienti"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:76
 #: plugins/Exoplanets/src/Exoplanets.cpp:173
@@ -18280,17 +18280,17 @@ msgstr ""
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:1002
 msgid "Hot"
-msgstr ""
+msgstr "Vapë"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:1004
 msgid "Warm"
-msgstr ""
+msgstr "Ngrohtë"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:1006
 msgid "Cold"
-msgstr ""
+msgstr "Ftohtë"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:1009
@@ -18335,7 +18335,7 @@ msgstr ""
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:1026
 msgid "Radial Velocity"
-msgstr ""
+msgstr "Shpejtësi Rrezore"
 
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:1028
@@ -18370,11 +18370,11 @@ msgstr ""
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:1042
 msgid "Default"
-msgstr ""
+msgstr "Parazgjedhje"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:278
 msgid "planetary system"
-msgstr ""
+msgstr "sistem planetar"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:300
 msgid "Metallicity"
@@ -18384,18 +18384,18 @@ msgstr ""
 #: plugins/Exoplanets/src/Exoplanet.cpp:320
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:169
 msgid "Mass"
-msgstr ""
+msgstr "Masë"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:308
 #: plugins/Exoplanets/src/Exoplanet.cpp:321
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:179
 msgid "Radius"
-msgstr ""
+msgstr "Rreze"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:312
 msgid "Effective temperature"
-msgstr ""
+msgstr "Temperaturë efektive"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:312
 msgctxt "temperature"
@@ -18413,7 +18413,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:325
 msgid "Angle Distance"
-msgstr ""
+msgstr "Largësi Këndore"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:326
 msgid "Discovered year"
@@ -18421,16 +18421,16 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:327
 msgid "Detection method"
-msgstr ""
+msgstr "Metodë pikasjeje"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:328
 msgid "Planetary class"
-msgstr ""
+msgstr "Klasë planetare"
 
 #. TRANSLATORS: Full phrase is "Equilibrium Temperature"
 #: plugins/Exoplanets/src/Exoplanet.cpp:330
 msgid "Equilibrium temp."
-msgstr ""
+msgstr "Temp. ekuilibri"
 
 #. TRANSLATORS: Average stellar flux of the planet
 #: plugins/Exoplanets/src/Exoplanet.cpp:332
@@ -18450,7 +18450,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 msgctxt "time period"
 msgid "day"
-msgstr ""
+msgstr "ditë"
 
 #. TRANSLATORS: angular distance
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
@@ -18480,11 +18480,11 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
 msgid "Eccentricity of orbit"
-msgstr ""
+msgstr "Jashtëqendërsi e orbitës"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
 msgid "Inclination of orbit in degrees"
-msgstr ""
+msgstr "Përkulje e orbitës, në gradë"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
 msgid "Angular distance from host star in arcseconds"
@@ -18543,7 +18543,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:314
 msgid "Planetary Class"
-msgstr ""
+msgstr "Klasë planetare"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:315
 msgid ""
@@ -18554,7 +18554,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:317
 msgid "Equilibrium Temperature"
-msgstr ""
+msgstr "Temperaturë Ekuilibri"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:318
 msgid ""
@@ -20282,7 +20282,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:612
 msgid "Additional info"
-msgstr ""
+msgstr "Të dhëna shtesë"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:613
 msgid "Circumstellar habitable zone"
@@ -20290,15 +20290,15 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:614
 msgid "Planetary equilibrium temperature"
-msgstr ""
+msgstr "Temperaturë ekulibri planetar"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:615
 msgid "Planetary habitability"
-msgstr ""
+msgstr "Banueshmëri planetare"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:616
 msgid "Earth Similarity Index"
-msgstr ""
+msgstr "Tregues Ngjashmërie Me Tokën"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:617
 msgid "Final Results of NameExoWorlds Public Vote Released"
@@ -20306,7 +20306,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:618
 msgid "NameExoWorlds website"
-msgstr ""
+msgstr "Sajt NameExoWorlds"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:633
 msgid "General professional Web sites relevant to extrasolar planets"
@@ -20334,7 +20334,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:638
 msgid "update: 16 April 2012"
-msgstr ""
+msgstr "përditësim: 16 prill 2012"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:639
 msgid "The Exoplanet Data Explorer"
@@ -20358,7 +20358,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:644
 msgid "Pulsar planets"
-msgstr ""
+msgstr "Planetë pulsarë"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:645
 msgid "The NASA Exoplanet Archive"
@@ -20394,7 +20394,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:892
 msgid "Orbital Eccentricity"
-msgstr ""
+msgstr "Jashtëqendërsi Orbitale"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:893
 msgid "Orbit Semi-Major Axis, AU"
@@ -20410,7 +20410,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:896
 msgid "Orbital Period, days"
-msgstr ""
+msgstr "Periudhë Orbitale, ditë"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:897
 msgid "Angular Distance, arc-sec"
@@ -20422,7 +20422,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:899
 msgid "Year of Discovery"
-msgstr ""
+msgstr "Vit i Zbulimit"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:900
 msgid "Metallicity of host star"
@@ -20442,7 +20442,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:904
 msgid "Distance to star, pc"
-msgstr ""
+msgstr "Largësi për te ylli, pc"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:905
 msgid "Mass of host star, Msol"
@@ -20532,7 +20532,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:598
 msgid "Temperature scale:"
-msgstr ""
+msgstr "Shkallë temperature:"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:602
 msgid "Diagrams: scatter plot"
@@ -20540,31 +20540,31 @@ msgstr ""
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:603
 msgid "X axis"
-msgstr ""
+msgstr "Boshti X"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:605
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:613
 msgid "Logarithmic scale"
-msgstr ""
+msgstr "Shkallë logaritmike"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:607
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:615
 msgid "log scale"
-msgstr ""
+msgstr "shkallë logaritmike"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:609
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:616
 msgid "min"
-msgstr ""
+msgstr "min."
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:610
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:617
 msgid "max"
-msgstr ""
+msgstr "maks."
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:611
 msgid "Y axis"
-msgstr ""
+msgstr "Boshti Y"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:618
 msgid "Plot"
@@ -20577,7 +20577,7 @@ msgstr "Diagram"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:620
 msgid "Table"
-msgstr ""
+msgstr "Tabelë"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:621
 msgctxt "tab in plugin windows"
@@ -20607,17 +20607,17 @@ msgstr ""
 #. TRANSLATORS: Short for "hours".
 #: plugins/Observability/src/Observability.cpp:162
 msgid "h"
-msgstr ""
+msgstr "h"
 
 #. TRANSLATORS: Short for "minutes".
 #: plugins/Observability/src/Observability.cpp:164
 msgid "m"
-msgstr ""
+msgstr "m"
 
 #. TRANSLATORS: Short for "seconds".
 #: plugins/Observability/src/Observability.cpp:166
 msgid "s"
-msgstr ""
+msgstr "s"
 
 #: plugins/Observability/src/Observability.cpp:167
 #, qt-format
@@ -20632,12 +20632,12 @@ msgstr ""
 #: plugins/Observability/src/Observability.cpp:169
 #, qt-format
 msgid "Set at %1 (%2 ago)"
-msgstr ""
+msgstr "Perëndon më %1 (%2 më parë)"
 
 #: plugins/Observability/src/Observability.cpp:170
 #, qt-format
 msgid "Rises at %1 (in %2)"
-msgstr ""
+msgstr "Lind më %1 (në %2)"
 
 #: plugins/Observability/src/Observability.cpp:171
 msgid "Circumpolar."
@@ -20645,12 +20645,12 @@ msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:172
 msgid "No rise."
-msgstr ""
+msgstr "Nuk lind."
 
 #: plugins/Observability/src/Observability.cpp:173
 #, qt-format
 msgid "Culminates at %1 (in %2) at %3 deg."
-msgstr ""
+msgstr "Kulmon më %1 (në %2) me %3 gradë."
 
 #: plugins/Observability/src/Observability.cpp:174
 #, qt-format
@@ -20659,7 +20659,7 @@ msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:175
 msgid "Source is not observable."
-msgstr ""
+msgstr "Burimi është i pavëzhgueshëm."
 
 #: plugins/Observability/src/Observability.cpp:176
 msgid "No Acronychal nor Cosmical rise/set."
@@ -20717,7 +20717,7 @@ msgstr ""
 #: plugins/Observability/src/Observability.cpp:190
 #, qt-format
 msgid "Nights above horizon: %1"
-msgstr ""
+msgstr "Netë sipër horizontit: %1"
 
 #: plugins/Observability/src/Observability.cpp:191
 msgid "TODAY:"
@@ -20767,11 +20767,11 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:153
 msgid "Explanation of some parameters"
-msgstr ""
+msgstr "Shpjegim i disa parametrave"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:154
 msgid "Sun altitude at twilight:"
-msgstr ""
+msgstr "Ngritje e Diellit në muzg:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:154
 msgid ""
@@ -20783,7 +20783,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:156
 msgid "Horizon altitude:"
-msgstr ""
+msgstr "Ngritje horizontale:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:156
 msgid ""
@@ -20870,7 +20870,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:162
 msgid "Full Moon:"
-msgstr ""
+msgstr "Hënë e Plotë:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:162
 msgid ""
@@ -20898,19 +20898,19 @@ msgstr ""
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:332
 msgid "Font color and size"
-msgstr ""
+msgstr "Ngjyrë dhe madhësi shkronjash"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:333
 msgid "Red"
-msgstr ""
+msgstr "E kuqe"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:334
 msgid "Green"
-msgstr ""
+msgstr "E gjelbër"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:335
 msgid "Blue"
-msgstr ""
+msgstr "Blu"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:336
 msgid "Font Size"
@@ -20918,7 +20918,7 @@ msgstr "Madhësi Shkronjash"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:337
 msgid "Observing conditions"
-msgstr ""
+msgstr "Kushte vëzhgimi"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:338
 msgid "Showing options"
@@ -20991,15 +20991,15 @@ msgstr ""
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:250
 msgid "Use minutes and seconds"
-msgstr ""
+msgstr "Përdor minuta dhe sekonda"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:251
 msgid "Change sign of equation"
-msgstr ""
+msgstr "Ndrysho shenjën e ekuacionit"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:253
 msgid "Color of text"
-msgstr ""
+msgstr "Ngjyrë e tekstit"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:89
 msgid "The current catalog of Meteor Showers is invalid!"
@@ -21056,20 +21056,20 @@ msgstr ""
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:127
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:466
 msgid "Confirmed"
-msgstr ""
+msgstr "Të ripohuara"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:131
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:458
 msgid "Generic"
-msgstr ""
+msgstr "Elementare"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:509
 msgid "generic data"
-msgstr ""
+msgstr "të dhëna elementare"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:510
 msgid "confirmed data"
-msgstr ""
+msgstr "të dhëna të ripohuara"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:511
 msgid "inactive"
@@ -21549,15 +21549,15 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:144
 msgid "Updating..."
-msgstr ""
+msgstr "Po përditësohet…"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:149
 msgid "Successfully updated!"
-msgstr ""
+msgstr "U përditësua me sukses!"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:153
 msgid "Failed!"
-msgstr ""
+msgstr "Dështoi!"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:157
 msgid "Outdated!"
@@ -21565,7 +21565,7 @@ msgstr "E vjetruar!"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:219
 msgid "Meteor Showers Plug-in"
-msgstr "Shtojcë Shiu Meteorësh!"
+msgstr "Shtojcë Shiu Meteorësh"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:240
 msgid ""
@@ -21702,7 +21702,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:109
 msgid "Start date greater than end date!"
-msgstr ""
+msgstr "Datë fillimi më e madhe se datë përfundimi!"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:113
 msgid "Time interval must be less than one year!"
@@ -21893,7 +21893,7 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:191
 msgid "Near mouse cursor"
-msgstr ""
+msgstr "Pranë kursorit të miut"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:192
 msgid "Custom position"
@@ -21921,7 +21921,7 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:219
 msgid "Galactic Longitude/Latitude"
-msgstr ""
+msgstr "Gjerësi gjeografike/Gjatësi gjeografike Galaktike"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:220
 msgid "Supergalactic Longitude/Latitude"
@@ -21933,7 +21933,7 @@ msgstr "Koordinata pozicioni vetja:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:294
 msgid "Enable display of coordinates at startup"
-msgstr ""
+msgstr "Aktivizo shfaqje koordinatash gjatë nisjes"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:295
 msgid "Show plug-in button on toolbar"
@@ -21995,11 +21995,11 @@ msgstr "Shfaq/Fshih hije"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:336
 msgid "Toggle debug information"
-msgstr ""
+msgstr "Shfaq/Fshih të dhëna diagnostikimi"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:337
 msgid "Toggle location text"
-msgstr ""
+msgstr "Shfaq/Fshih tekst vendndodhjeje"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:338
 msgid "Toggle torchlight"
@@ -22011,12 +22011,12 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:440
 msgid "Loading scene. Please be patient!"
-msgstr ""
+msgstr "Po ngarkohet skenë. Ju lutemi, bëni durim!"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:442
 #, qt-format
 msgid "Loading scene '%1'"
-msgstr ""
+msgstr "Po ngarkohet skenë '%1'"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:460
 msgid "Loading model..."
@@ -22081,7 +22081,7 @@ msgstr ""
 #: plugins/Scenery3d/src/Scenery3d.cpp:750
 msgctxt "disable"
 msgid "off"
-msgstr ""
+msgstr "off"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:714
 #, qt-format
@@ -22331,7 +22331,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:482
 msgid "Set as default scene"
-msgstr ""
+msgstr "Caktoje si skenë parazgjedhje"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
 msgid "Load/save viewpoints"
@@ -22376,11 +22376,11 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:494
 msgid "Shadows"
-msgstr ""
+msgstr "Hije"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:495
 msgid "Simple shadows"
-msgstr ""
+msgstr "Hije të thjeshta"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
 msgid "Bump mapping"
@@ -22559,7 +22559,7 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1278
 msgid "Equinox"
-msgstr ""
+msgstr "Ekuinoks"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1281
 msgid "Solstice"
@@ -22588,7 +22588,7 @@ msgstr ""
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1301
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:612
 msgid "Selected Object"
-msgstr ""
+msgstr "Përzgjidhni Objekt"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1310
 msgid "error if you can read this"
@@ -22767,7 +22767,7 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:616
 msgid "Line thickness"
-msgstr ""
+msgstr "Trashësi vije"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:619
 msgid "Geographic Location 1"
@@ -22776,7 +22776,7 @@ msgstr "Vendndodhje Gjeografike 1"
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:621
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:627
 msgid "Enter a label (location name) for this line"
-msgstr ""
+msgstr "Jepni një etiketë (emër vendndodhjeje) për këtë vijë"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:625
 msgid "Geographic Location 2"
@@ -22785,20 +22785,20 @@ msgstr "Vendndodhje Gjeografike 2"
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:632
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:639
 msgid "Always counted from North"
-msgstr ""
+msgstr "Llogaritur përherë nga Veriu"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:634
 msgid "Custom Azimuth 1"
-msgstr ""
+msgstr "Azimut Vetjak 1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:636
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:643
 msgid "Enter a label for this line"
-msgstr ""
+msgstr "Jepni një etiketë për këtë vijë"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:641
 msgid "Custom Azimuth 2"
-msgstr ""
+msgstr "Azimut Vetjak 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:645
 msgid "Custom Declination 1"
@@ -22810,11 +22810,11 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:647
 msgid "Restore default settings"
-msgstr ""
+msgstr "Rikthe rregullimet parazgjedhje"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:648
 msgid "Custom Lines"
-msgstr ""
+msgstr "Vija Vetjake"
 
 #: plugins/Vts/src/Vts.cpp:152
 msgid "Vts"
@@ -22828,60 +22828,60 @@ msgstr ""
 #: plugins/Calendars/src/Calendars.cpp:162
 #: plugins/Calendars/src/Calendars.cpp:163
 msgid "Calendars"
-msgstr ""
+msgstr "Kalendarë"
 
 #: plugins/Calendars/src/Calendars.cpp:78
 msgid "Calendars of the world"
-msgstr ""
+msgstr "Kalendarë të botës"
 
 #: plugins/Calendars/src/Calendars.cpp:279
 #: plugins/Calendars/src/ui_calendarsDialog.h:818
 #: plugins/Calendars/src/ui_calendarsDialog.h:831
 msgctxt "calendar"
 msgid "Julian"
-msgstr ""
+msgstr "Julian"
 
 #: plugins/Calendars/src/Calendars.cpp:280
 #: plugins/Calendars/src/ui_calendarsDialog.h:825
 #: plugins/Calendars/src/ui_calendarsDialog.h:835
 msgctxt "calendar"
 msgid "Gregorian"
-msgstr ""
+msgstr "Gregorian"
 
 #: plugins/Calendars/src/Calendars.cpp:281
 msgctxt "calendar"
 msgid "ISO week"
-msgstr ""
+msgstr "Javë ISO"
 
 #: plugins/Calendars/src/Calendars.cpp:282
 #: plugins/Calendars/src/ui_calendarsDialog.h:822
 msgctxt "calendar"
 msgid "Icelandic"
-msgstr ""
+msgstr "Islandik"
 
 #: plugins/Calendars/src/Calendars.cpp:283
 #: plugins/Calendars/src/ui_calendarsDialog.h:803
 msgctxt "calendar"
 msgid "Roman"
-msgstr ""
+msgstr "Romak"
 
 #: plugins/Calendars/src/Calendars.cpp:284
 #: plugins/Calendars/src/ui_calendarsDialog.h:817
 msgctxt "calendar"
 msgid "Olympic"
-msgstr ""
+msgstr "Olimpik"
 
 #: plugins/Calendars/src/Calendars.cpp:285
 #: plugins/Calendars/src/ui_calendarsDialog.h:824
 msgctxt "calendar"
 msgid "Egyptian"
-msgstr ""
+msgstr "Egjiptian"
 
 #: plugins/Calendars/src/Calendars.cpp:286
 #: plugins/Calendars/src/ui_calendarsDialog.h:811
 msgctxt "calendar"
 msgid "Armenian"
-msgstr ""
+msgstr "Armen"
 
 #: plugins/Calendars/src/Calendars.cpp:287
 #: plugins/Calendars/src/ui_calendarsDialog.h:812
@@ -22893,35 +22893,35 @@ msgstr ""
 #: plugins/Calendars/src/ui_calendarsDialog.h:808
 msgctxt "calendar"
 msgid "Coptic"
-msgstr ""
+msgstr "Kopt"
 
 #: plugins/Calendars/src/Calendars.cpp:289
 #: plugins/Calendars/src/ui_calendarsDialog.h:802
 msgctxt "calendar"
 msgid "Ethiopic"
-msgstr ""
+msgstr "Etiopas"
 
 #: plugins/Calendars/src/Calendars.cpp:290
 msgctxt "calendar"
 msgid "French Rev. (Arithm.)"
-msgstr ""
+msgstr "Rev Frëng (Aritm.)"
 
 #: plugins/Calendars/src/Calendars.cpp:291
 #: plugins/Calendars/src/ui_calendarsDialog.h:820
 msgctxt "calendar"
 msgid "Islamic"
-msgstr ""
+msgstr "Islamik"
 
 #: plugins/Calendars/src/Calendars.cpp:292
 #: plugins/Calendars/src/ui_calendarsDialog.h:809
 msgctxt "calendar"
 msgid "Hebrew"
-msgstr ""
+msgstr "Hebr"
 
 #: plugins/Calendars/src/Calendars.cpp:293
 msgctxt "calendar"
 msgid "Persian (Arithm.)"
-msgstr ""
+msgstr "Persian (Aritm.)"
 
 #: plugins/Calendars/src/Calendars.cpp:294
 msgctxt "calendar"
@@ -22943,25 +22943,25 @@ msgstr ""
 #: plugins/Calendars/src/ui_calendarsDialog.h:816
 msgctxt "calendar"
 msgid "Maya Haab"
-msgstr ""
+msgstr "Maja Haab"
 
 #: plugins/Calendars/src/Calendars.cpp:298
 #: plugins/Calendars/src/ui_calendarsDialog.h:805
 msgctxt "calendar"
 msgid "Maya Tzolkin"
-msgstr ""
+msgstr "Maja Xholkin"
 
 #: plugins/Calendars/src/Calendars.cpp:299
 #: plugins/Calendars/src/ui_calendarsDialog.h:814
 msgctxt "calendar"
 msgid "Aztec Xihuitl"
-msgstr ""
+msgstr "Aztek Xihuitl"
 
 #: plugins/Calendars/src/Calendars.cpp:300
 #: plugins/Calendars/src/ui_calendarsDialog.h:810
 msgctxt "calendar"
 msgid "Aztec Tonalpohualli"
-msgstr ""
+msgstr "Aztek Tonalpohuali"
 
 #: plugins/Calendars/src/Calendars.cpp:302
 #: plugins/Calendars/src/ui_calendarsDialog.h:804
@@ -23036,7 +23036,7 @@ msgstr ""
 
 #: plugins/Calendars/src/ArmenianCalendar.cpp:88
 msgid "Armenian Era"
-msgstr ""
+msgstr "Era Armene"
 
 #: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:39
 msgctxt "Aztec Tonalpohualli name"
@@ -23752,7 +23752,7 @@ msgstr ""
 
 #: plugins/Calendars/src/CopticCalendar.cpp:100
 msgid "Era Martyrum"
-msgstr ""
+msgstr "Era e Martirëve"
 
 #: plugins/Calendars/src/EgyptianCalendar.cpp:41
 msgctxt "Egyptian month name"
@@ -23821,7 +23821,7 @@ msgstr ""
 
 #: plugins/Calendars/src/EgyptianCalendar.cpp:89
 msgid "Nabonassar Era"
-msgstr ""
+msgstr "Era Nabonasar"
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:42
 msgctxt "Ethiopic month name"
@@ -23925,21 +23925,21 @@ msgstr ""
 
 #: plugins/Calendars/src/EthiopicCalendar.cpp:100
 msgid "Ethiopic Era of Mercy"
-msgstr ""
+msgstr "Era Etiopase e Mëshirës"
 
 #: plugins/Calendars/src/ISOCalendar.cpp:79
 msgid "Week"
-msgstr ""
+msgstr "Javë"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:76
 msgctxt "Icelandic calendar"
 msgid "summer"
-msgstr ""
+msgstr "verë"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:77
 msgctxt "Icelandic calendar"
 msgid "winter"
-msgstr ""
+msgstr "dimër"
 
 #. TRANSLATORS: Icelandic calendar phrase like "[Weekday] of week [number] of
 #. [summer|winter] (Month [number]: [name]) - [year]"
@@ -23986,7 +23986,7 @@ msgstr ""
 #: plugins/Calendars/src/IcelandicCalendar.cpp:180
 msgctxt "Icelandic month name"
 msgid "unnamed"
-msgstr ""
+msgstr "i paemërt"
 
 #: plugins/Calendars/src/IcelandicCalendar.cpp:181
 msgctxt "Icelandic month name"
@@ -24050,16 +24050,16 @@ msgstr ""
 
 #: plugins/Calendars/src/JulianCalendar.cpp:76
 msgid "A.D."
-msgstr ""
+msgstr "e.r"
 
 #: plugins/Calendars/src/JulianCalendar.cpp:76
 msgid "B.C."
-msgstr ""
+msgstr "p.e.r"
 
 #: plugins/Calendars/src/MayaHaabCalendar.cpp:40
 msgctxt "Maya Haab month name"
 msgid "Pop"
-msgstr ""
+msgstr "Pop"
 
 #: plugins/Calendars/src/MayaHaabCalendar.cpp:41
 msgctxt "Maya Haab month name"
@@ -24069,7 +24069,7 @@ msgstr ""
 #: plugins/Calendars/src/MayaHaabCalendar.cpp:42
 msgctxt "Maya Haab month name"
 msgid "Zip"
-msgstr ""
+msgstr "Zip"
 
 #: plugins/Calendars/src/MayaHaabCalendar.cpp:43
 msgctxt "Maya Haab month name"
@@ -24084,7 +24084,7 @@ msgstr ""
 #: plugins/Calendars/src/MayaHaabCalendar.cpp:45
 msgctxt "Maya Haab month name"
 msgid "Xul"
-msgstr ""
+msgstr "Ksul"
 
 #: plugins/Calendars/src/MayaHaabCalendar.cpp:46
 msgctxt "Maya Haab month name"
@@ -24094,7 +24094,7 @@ msgstr ""
 #: plugins/Calendars/src/MayaHaabCalendar.cpp:47
 msgctxt "Maya Haab month name"
 msgid "Mol"
-msgstr ""
+msgstr "Mol"
 
 #: plugins/Calendars/src/MayaHaabCalendar.cpp:48
 msgctxt "Maya Haab month name"
@@ -24104,22 +24104,22 @@ msgstr ""
 #: plugins/Calendars/src/MayaHaabCalendar.cpp:49
 msgctxt "Maya Haab month name"
 msgid "Yax"
-msgstr ""
+msgstr "Yaks"
 
 #: plugins/Calendars/src/MayaHaabCalendar.cpp:50
 msgctxt "Maya Haab month name"
 msgid "Zac"
-msgstr ""
+msgstr "Zak"
 
 #: plugins/Calendars/src/MayaHaabCalendar.cpp:51
 msgctxt "Maya Haab month name"
 msgid "Ceh"
-msgstr ""
+msgstr "Ceh"
 
 #: plugins/Calendars/src/MayaHaabCalendar.cpp:52
 msgctxt "Maya Haab month name"
 msgid "Mac"
-msgstr ""
+msgstr "Mak"
 
 #: plugins/Calendars/src/MayaHaabCalendar.cpp:53
 msgctxt "Maya Haab month name"
@@ -24134,7 +24134,7 @@ msgstr ""
 #: plugins/Calendars/src/MayaHaabCalendar.cpp:55
 msgctxt "Maya Haab month name"
 msgid "Pax"
-msgstr ""
+msgstr "Paks"
 
 #: plugins/Calendars/src/MayaHaabCalendar.cpp:56
 msgctxt "Maya Haab month name"
@@ -24169,7 +24169,7 @@ msgstr ""
 #: plugins/Calendars/src/MayaTzolkinCalendar.cpp:42
 msgctxt "Maya Tzolkin name"
 msgid "Kan"
-msgstr ""
+msgstr "Kan"
 
 #: plugins/Calendars/src/MayaTzolkinCalendar.cpp:43
 msgctxt "Maya Tzolkin name"
@@ -24179,7 +24179,7 @@ msgstr ""
 #: plugins/Calendars/src/MayaTzolkinCalendar.cpp:44
 msgctxt "Maya Tzolkin name"
 msgid "Cimi"
-msgstr ""
+msgstr "Cimi"
 
 #: plugins/Calendars/src/MayaTzolkinCalendar.cpp:45
 msgctxt "Maya Tzolkin name"
@@ -24189,7 +24189,7 @@ msgstr ""
 #: plugins/Calendars/src/MayaTzolkinCalendar.cpp:46
 msgctxt "Maya Tzolkin name"
 msgid "Lamat"
-msgstr ""
+msgstr "Lamat"
 
 #: plugins/Calendars/src/MayaTzolkinCalendar.cpp:47
 msgctxt "Maya Tzolkin name"
@@ -24199,7 +24199,7 @@ msgstr ""
 #: plugins/Calendars/src/MayaTzolkinCalendar.cpp:48
 msgctxt "Maya Tzolkin name"
 msgid "Oc"
-msgstr ""
+msgstr "Oc"
 
 #: plugins/Calendars/src/MayaTzolkinCalendar.cpp:49
 msgctxt "Maya Tzolkin name"
@@ -24209,22 +24209,22 @@ msgstr ""
 #: plugins/Calendars/src/MayaTzolkinCalendar.cpp:50
 msgctxt "Maya Tzolkin name"
 msgid "Eb"
-msgstr ""
+msgstr "Eb"
 
 #: plugins/Calendars/src/MayaTzolkinCalendar.cpp:51
 msgctxt "Maya Tzolkin name"
 msgid "Ben"
-msgstr ""
+msgstr "Ben"
 
 #: plugins/Calendars/src/MayaTzolkinCalendar.cpp:52
 msgctxt "Maya Tzolkin name"
 msgid "Ix"
-msgstr ""
+msgstr "Ix"
 
 #: plugins/Calendars/src/MayaTzolkinCalendar.cpp:53
 msgctxt "Maya Tzolkin name"
 msgid "Men"
-msgstr ""
+msgstr "Men"
 
 #: plugins/Calendars/src/MayaTzolkinCalendar.cpp:54
 msgctxt "Maya Tzolkin name"
@@ -24259,22 +24259,22 @@ msgstr ""
 #: plugins/Calendars/src/RomanCalendar.cpp:36
 msgctxt "Roman month name (genitive)"
 msgid "Ianuarii"
-msgstr ""
+msgstr "Ianuari"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:37
 msgctxt "Roman month name (genitive)"
 msgid "Februarii"
-msgstr ""
+msgstr "Februari"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:38
 msgctxt "Roman month name (genitive)"
 msgid "Martii"
-msgstr ""
+msgstr "Marti"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:39
 msgctxt "Roman month name (genitive)"
 msgid "Aprilis"
-msgstr ""
+msgstr "Aprilis"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:40
 msgctxt "Roman month name (genitive)"
@@ -24294,27 +24294,27 @@ msgstr ""
 #: plugins/Calendars/src/RomanCalendar.cpp:43
 msgctxt "Roman month name (genitive)"
 msgid "Augusti"
-msgstr ""
+msgstr "Augusti"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:44
 msgctxt "Roman month name (genitive)"
 msgid "Septembris"
-msgstr ""
+msgstr "Septembris"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:45
 msgctxt "Roman month name (genitive)"
 msgid "Octobris"
-msgstr ""
+msgstr "Oktobris"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:46
 msgctxt "Roman month name (genitive)"
 msgid "Novembris"
-msgstr ""
+msgstr "Novembris"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:47
 msgctxt "Roman month name (genitive)"
 msgid "Decembris"
-msgstr ""
+msgstr "Decembris"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:65
 msgctxt "Roman calendar term"
@@ -24604,7 +24604,7 @@ msgstr ""
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:132
 msgid "Jezdegerd Era"
-msgstr ""
+msgstr "Era e Jezdegerdid"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:41
 msgctxt "French Revolution Calendar day name"
@@ -25160,7 +25160,7 @@ msgstr ""
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:66
 msgctxt "old Hindu month name"
 msgid "Issa"
-msgstr ""
+msgstr "Isa"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:67
 msgctxt "old Hindu month name"
@@ -25200,7 +25200,7 @@ msgstr ""
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:74
 msgctxt "old Hindu month name"
 msgid "Mithuna"
-msgstr ""
+msgstr "Mithuna"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:75
 msgctxt "old Hindu month name"
@@ -25230,7 +25230,7 @@ msgstr ""
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:80
 msgctxt "old Hindu month name"
 msgid "Dhanus"
-msgstr ""
+msgstr "Dhanus"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:81
 msgctxt "old Hindu month name"
@@ -25250,37 +25250,37 @@ msgstr ""
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:84
 msgctxt "Zodiacal sign"
 msgid "Aries"
-msgstr ""
+msgstr "Dashi"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:85
 msgctxt "Zodiacal sign"
 msgid "Taurus"
-msgstr ""
+msgstr "Demi"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:86
 msgctxt "Zodiacal sign"
 msgid "Gemini"
-msgstr ""
+msgstr "Binjakët"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:87
 msgctxt "Zodiacal sign"
 msgid "Cancer"
-msgstr ""
+msgstr "Gaforrja"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:88
 msgctxt "Zodiacal sign"
 msgid "Leo"
-msgstr ""
+msgstr "Luani"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:89
 msgctxt "Zodiacal sign"
 msgid "Virgo"
-msgstr ""
+msgstr "Virgjëresha"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:90
 msgctxt "Zodiacal sign"
 msgid "Libra"
-msgstr ""
+msgstr "Peshorja"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:91
 msgctxt "Zodiacal sign"
@@ -25290,7 +25290,7 @@ msgstr ""
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:92
 msgctxt "Zodiacal sign"
 msgid "Sagittarius"
-msgstr ""
+msgstr "Shigjetari"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:93
 msgctxt "Zodiacal sign"
@@ -25300,12 +25300,12 @@ msgstr ""
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:94
 msgctxt "Zodiacal sign"
 msgid "Aquarius"
-msgstr ""
+msgstr "Ujori"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:95
 msgctxt "Zodiacal sign"
 msgid "Pisces"
-msgstr ""
+msgstr "Peshqit"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:98
 msgctxt "Old Hindu Jovian year name"
@@ -25437,7 +25437,7 @@ msgstr ""
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:123
 msgctxt "Old Hindu Jovian year name"
 msgid "Nandana"
-msgstr ""
+msgstr "Nandana"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:124
 msgctxt "Old Hindu Jovian year name"
@@ -25492,7 +25492,7 @@ msgstr ""
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:134
 msgctxt "Old Hindu Jovian year name"
 msgid "Śobhana"
-msgstr ""
+msgstr "Sobhana"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:135
 msgctxt "Old Hindu Jovian year name"
@@ -25542,7 +25542,7 @@ msgstr ""
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:145
 msgctxt "Old Hindu Jovian year name"
 msgid "Ānanda"
-msgstr ""
+msgstr "Ananda"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:147
 msgctxt "Old Hindu Jovian year name"
@@ -25572,7 +25572,7 @@ msgstr ""
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:152
 msgctxt "Old Hindu Jovian year name"
 msgid "Durmati"
-msgstr ""
+msgstr "Durmati"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:153
 msgctxt "Old Hindu Jovian year name"
@@ -25592,7 +25592,7 @@ msgstr ""
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:156
 msgctxt "Old Hindu Jovian year name"
 msgid "Krodhana"
-msgstr ""
+msgstr "Krodhana"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:157
 msgctxt "Old Hindu Jovian year name"
@@ -25710,7 +25710,7 @@ msgstr ""
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:159
 msgid "Calendars Plug-in"
-msgstr ""
+msgstr "Shtojcë Kalendarësh"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:166
 msgid ""
@@ -25720,55 +25720,55 @@ msgstr ""
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:167
 msgid "Julian Calendar"
-msgstr ""
+msgstr "Kalendari Julian"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:168
 msgid "Gregorian Calendar"
-msgstr ""
+msgstr "Kalendari Gregorian"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:169
 msgid "ISO Weeks"
-msgstr ""
+msgstr "Javë ISO"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:170
 msgid "Icelandic calendar"
-msgstr ""
+msgstr "Kalendari Islandik"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:171
 msgid "Roman (Julian) calendar"
-msgstr ""
+msgstr "Kalendari Romak (Julian)"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:172
 msgid "Olympiad calendar"
-msgstr ""
+msgstr "Kalendari Olimpik"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:173
 msgid "Egyptian calendar"
-msgstr ""
+msgstr "Kalendari Egjiptian"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:174
 msgid "Armenian calendar"
-msgstr ""
+msgstr "Kalendari Armen"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:175
 msgid "Zoroastrian calendar"
-msgstr ""
+msgstr "Kalendari Zoroastrian"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:176
 msgid "Coptic calendar"
-msgstr ""
+msgstr "Kalendari Kopt"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:177
 msgid "Ethiopic calendar"
-msgstr ""
+msgstr "Kalendari Etiopas"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:179
 msgid "Islamic Calendar (algorithmic)"
-msgstr ""
+msgstr "Kalendari Islamik (algoritmik)"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:180
 msgid "Hebrew Calendar"
-msgstr ""
+msgstr "Kalendari Hebre"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:181
 msgid "French Revolution calendar (arithmetic version of 1795)"
@@ -25784,15 +25784,15 @@ msgstr ""
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:188
 msgid "Maya calendars"
-msgstr ""
+msgstr "Kalendarë Maja"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:189
 msgid "Aztec calendars"
-msgstr ""
+msgstr "Kalendarë Actekë"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:190
 msgid "Balinese Pawukon calendar"
-msgstr ""
+msgstr "Kalendari Paukon i Balit"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:192
 msgid ""
@@ -25808,7 +25808,7 @@ msgstr ""
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:203
 msgid "This plugin is based on:"
-msgstr ""
+msgstr "Kjo shtojcë bazohet në:"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:217
@@ -25819,17 +25819,17 @@ msgstr ""
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:799
 msgid "Calendars Configuration"
-msgstr ""
+msgstr "Formësim Kalendarësh"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:800
 msgid "Calendars Plug-in Configuration"
-msgstr ""
+msgstr "Formësim Shtojce Kalendarësh"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:806
 #: plugins/Calendars/src/ui_calendarsDialog.h:834
 msgctxt "calendar"
 msgid "ISO Week"
-msgstr ""
+msgstr "Javë ISO"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:807
 msgid "New Hindu Lunar"
@@ -25846,7 +25846,7 @@ msgstr ""
 #: plugins/Calendars/src/ui_calendarsDialog.h:819
 msgctxt "calendar"
 msgid "Chinese"
-msgstr ""
+msgstr "Kinez"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:821
 msgid "Old Hindu Lunar"
@@ -25854,11 +25854,11 @@ msgstr ""
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:826
 msgid "French Revolution (arithmetic)"
-msgstr ""
+msgstr "Revolucioni Frëng (aritmetik)"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:827
 msgid "Persian (arithmetic)"
-msgstr ""
+msgstr "Persian (aritmetik)"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:829
 msgid "Display"
@@ -25866,11 +25866,11 @@ msgstr ""
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:830
 msgid "Month"
-msgstr ""
+msgstr "Muaj"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:833
 msgid "Weekday"
-msgstr ""
+msgstr "Ditë e javës"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:837
 msgid "Negative years here mark years B.C."
@@ -25878,7 +25878,7 @@ msgstr ""
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:839
 msgid "Year"
-msgstr ""
+msgstr "Vit"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:840
 msgid "Lunisolar"
@@ -25895,7 +25895,7 @@ msgstr ""
 #: plugins/Calendars/src/ui_calendarsDialog.h:844
 msgctxt "calendar"
 msgid "Maya"
-msgstr ""
+msgstr "Maja"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:845
 msgid "Haab"
@@ -25926,19 +25926,19 @@ msgstr ""
 #: plugins/Calendars/src/ui_calendarsDialog.h:870
 #: plugins/Calendars/src/ui_calendarsDialog.h:876
 msgid "Step forward"
-msgstr ""
+msgstr "Hap përpara"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:858
 #: plugins/Calendars/src/ui_calendarsDialog.h:861
 #: plugins/Calendars/src/ui_calendarsDialog.h:867
 #: plugins/Calendars/src/ui_calendarsDialog.h:873
 msgid "Step backward"
-msgstr ""
+msgstr "Hap prapa"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:863
 msgctxt "calendar"
 msgid "Aztec"
-msgstr ""
+msgstr "Aztek"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:864
 msgid "Tzolkin"
