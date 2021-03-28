@@ -457,8 +457,6 @@ class Translations
 		// TRANSLATORS: Name of the sky culture
 		N_("Anutan");
 		// TRANSLATORS: Name of the sky culture
-		N_("Arabic");
-		// TRANSLATORS: Name of the sky culture
 		N_("Arabic Moon Stations");
 		// TRANSLATORS: Name of the sky culture
 		N_("Armintxe");
