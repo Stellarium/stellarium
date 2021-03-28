@@ -73,6 +73,7 @@ ArchaeoLines::ArchaeoLines()
 	, flagShowCrossquarters(false)
 	, flagShowMajorStandstills(false)
 	, flagShowMinorStandstills(false)
+	, flagShowPolarCircles(false)
 	, flagShowZenithPassage(false)
 	, flagShowNadirPassage(false)
 	, flagShowSelectedObject(false)
@@ -121,6 +122,8 @@ ArchaeoLines::ArchaeoLines()
 	southernMajorStandstillLine6 = new ArchaeoLine(ArchaeoLine::MajorStandstill, -23.5-5.1);
 	southernMajorStandstillLine7 = new ArchaeoLine(ArchaeoLine::MajorStandstill, -23.5-5.1);
 	southernMajorStandstillLine6->setLabelVisible(false);
+	northernPolarCircleLine = new ArchaeoLine(ArchaeoLine::PolarCircles, 66.5);
+	southernPolarCircleLine = new ArchaeoLine(ArchaeoLine::PolarCircles, -66.5);
 	zenithPassageLine  = new ArchaeoLine(ArchaeoLine::ZenithPassage, 48.0);
 	nadirPassageLine   = new ArchaeoLine(ArchaeoLine::NadirPassage, 42.0);
 	selectedObjectLine = new ArchaeoLine(ArchaeoLine::SelectedObject, 0.0);
@@ -157,6 +160,8 @@ ArchaeoLines::~ArchaeoLines()
 	delete southernMinorStandstillLine5; southernMinorStandstillLine5=Q_NULLPTR;
 	delete southernMajorStandstillLine6; southernMajorStandstillLine6=Q_NULLPTR;
 	delete southernMajorStandstillLine7; southernMajorStandstillLine7=Q_NULLPTR;
+	delete northernPolarCircleLine; northernPolarCircleLine=Q_NULLPTR;
+	delete southernPolarCircleLine; southernPolarCircleLine=Q_NULLPTR;
 	delete zenithPassageLine;  zenithPassageLine=Q_NULLPTR;
 	delete nadirPassageLine;   nadirPassageLine=Q_NULLPTR;
 	delete selectedObjectLine; selectedObjectLine=Q_NULLPTR;
@@ -205,6 +210,8 @@ void ArchaeoLines::init()
 	Q_ASSERT(southernMinorStandstillLine5);
 	Q_ASSERT(southernMajorStandstillLine6);
 	Q_ASSERT(southernMajorStandstillLine7);
+	Q_ASSERT(northernPolarCircleLine);
+	Q_ASSERT(southernPolarCircleLine);
 	Q_ASSERT(zenithPassageLine);
 	Q_ASSERT(nadirPassageLine);
 	Q_ASSERT(selectedObjectLine);
@@ -233,6 +240,8 @@ void ArchaeoLines::init()
 	connect(this, SIGNAL(minorStandstillColorChanged(Vec3f)),        northernMinorStandstillLine3, SLOT(setColor(Vec3f)));
 	connect(this, SIGNAL(minorStandstillColorChanged(Vec3f)),        southernMinorStandstillLine4, SLOT(setColor(Vec3f)));
 	connect(this, SIGNAL(minorStandstillColorChanged(Vec3f)),        southernMinorStandstillLine5, SLOT(setColor(Vec3f)));
+	connect(this, SIGNAL(polarCirclesColorChanged(Vec3f)),           northernPolarCircleLine     , SLOT(setColor(Vec3f)));
+	connect(this, SIGNAL(polarCirclesColorChanged(Vec3f)),           southernPolarCircleLine     , SLOT(setColor(Vec3f)));
 	connect(this, SIGNAL(zenithPassageColorChanged(Vec3f)),          zenithPassageLine           , SLOT(setColor(Vec3f)));
 	connect(this, SIGNAL(nadirPassageColorChanged(Vec3f)),           nadirPassageLine            , SLOT(setColor(Vec3f)));
 	connect(this, SIGNAL(selectedObjectColorChanged(Vec3f)),         selectedObjectLine          , SLOT(setColor(Vec3f)));
@@ -279,6 +288,7 @@ void ArchaeoLines::init()
 	addAction("actionAL_showCrossquarterLines",    section, N_("Show Line for Crossquarter"),       "flagShowCrossquarters"   ); // No Shortcuts configured.
 	addAction("actionAL_showMajorStandstillLines", section, N_("Show Line for Major Standstill"),   "flagShowMajorStandstills"); // No Shortcuts configured.
 	addAction("actionAL_showMinorStandstillLines", section, N_("Show Line for Minor Standstill"),   "flagShowMinorStandstills"); // No Shortcuts configured.
+	addAction("actionAL_showPolarCircleLines",     section, N_("Show Polar Circles"),               "flagShowPolarCircles"    ); // No Shortcuts configured.
 	addAction("actionAL_showZenithPassageLine",    section, N_("Show Line for Zenith Passage"),     "flagShowZenithPassage"   ); // No Shortcuts configured.
 	addAction("actionAL_showNadirPassageLine",     section, N_("Show Line for Nadir Passage"),      "flagShowNadirPassage"    ); // No Shortcuts configured.
 	addAction("actionAL_showSelectedObjectLine",   section, N_("Show Line for Selected Object"),    "flagShowSelectedObject"  ); // No Shortcuts configured.
@@ -340,6 +350,8 @@ void ArchaeoLines::update(double deltaTime)
 		eps= epsRad*180.0/M_PI;
 		northernSolsticeLine->setDefiningAngle(eps);
 		southernSolsticeLine->setDefiningAngle(-eps);
+		northernPolarCircleLine->setDefiningAngle(90.-eps);
+		southernPolarCircleLine->setDefiningAngle(-90.+eps);
 		northernCrossquarterLine->setDefiningAngle( xqDec);
 		southernCrossquarterLine->setDefiningAngle(-xqDec);
 		lastJDE=newJDE;
@@ -427,6 +439,8 @@ void ArchaeoLines::update(double deltaTime)
 	southernMinorStandstillLine5->update(deltaTime);
 	southernMajorStandstillLine6->update(deltaTime);
 	southernMajorStandstillLine7->update(deltaTime);
+	northernPolarCircleLine->update(deltaTime);
+	southernPolarCircleLine->update(deltaTime);
 	zenithPassageLine->update(deltaTime);
 	nadirPassageLine->update(deltaTime);
 	selectedObjectLine->update(deltaTime);
@@ -465,6 +479,8 @@ void ArchaeoLines::draw(StelCore* core)
 	southernMinorStandstillLine5->draw(core, lineFader.getInterstate());
 	southernMajorStandstillLine6->draw(core, lineFader.getInterstate());
 	southernMajorStandstillLine7->draw(core, lineFader.getInterstate());
+	northernPolarCircleLine->draw(core, lineFader.getInterstate());
+	southernPolarCircleLine->draw(core, lineFader.getInterstate());
 	zenithPassageLine->draw(core, lineFader.getInterstate());
 	nadirPassageLine->draw(core, lineFader.getInterstate());
 	if (objMgr->getWasSelected())
@@ -515,6 +531,7 @@ void ArchaeoLines::loadSettings()
 	setCrossquartersColor(          Vec3f(conf->value("ArchaeoLines/color_crossquarters",              "1.00,0.75,0.25").toString()));
 	setMajorStandstillColor(        Vec3f(conf->value("ArchaeoLines/color_major_standstill",           "0.25,1.00,0.25").toString()));
 	setMinorStandstillColor(        Vec3f(conf->value("ArchaeoLines/color_minor_standstill",           "0.20,0.75,0.20").toString()));
+	setPolarCirclesColor(           Vec3f(conf->value("ArchaeoLines/color_polar_circles",              "0.25,0.25,0.75").toString()));
 	setZenithPassageColor(          Vec3f(conf->value("ArchaeoLines/color_zenith_passage",             "0.75,0.75,0.75").toString()));
 	setNadirPassageColor(           Vec3f(conf->value("ArchaeoLines/color_nadir_passage",              "0.25,0.25,0.25").toString()));
 	setSelectedObjectColor(         Vec3f(conf->value("ArchaeoLines/color_selected_object",            "1.00,1.00,1.00").toString()));
@@ -561,6 +578,8 @@ void ArchaeoLines::loadSettings()
 	// 4 lunar limits
 	showMajorStandstills(conf->value("ArchaeoLines/show_major_standstills", true).toBool());
 	showMinorStandstills(conf->value("ArchaeoLines/show_minor_standstills", true).toBool());
+	// Polar circles (design mostly for sky globes)
+	showPolarCircles(conf->value("ArchaeoLines/show_polar_circles", true).toBool());
 	// esp. Mesoamerica
 	showZenithPassage(conf->value("ArchaeoLines/show_zenith_passage", true).toBool());
 	showNadirPassage(conf->value("ArchaeoLines/show_nadir_passage",  false).toBool());
@@ -649,6 +668,17 @@ void ArchaeoLines::showMinorStandstills(bool b)
 		southernMinorStandstillLine4->setDisplayed(b);
 		southernMinorStandstillLine5->setDisplayed(b);
 		emit showMinorStandstillsChanged(b);
+	}
+}
+void ArchaeoLines::showPolarCircles(bool b)
+{
+	if (b!=flagShowPolarCircles)
+	{
+		flagShowPolarCircles=b;
+		conf->setValue("ArchaeoLines/show_polar_circles",      isPolarCirclesDisplayed());
+		northernPolarCircleLine->setDisplayed(b);
+		southernPolarCircleLine->setDisplayed(b);
+		emit showPolarCirclesChanged(b);
 	}
 }
 void ArchaeoLines::showZenithPassage(bool b)
@@ -991,6 +1021,14 @@ void ArchaeoLines::setMinorStandstillColor(Vec3f color)
 		emit minorStandstillColorChanged(color);
 	}
 }
+void ArchaeoLines::setPolarCirclesColor(Vec3f color)
+{
+	if (color!=getPolarCirclesColor())
+	{
+		polarCirclesColor=color;
+		emit polarCirclesColorChanged(color);
+	}
+}
 void ArchaeoLines::setZenithPassageColor(Vec3f color)
 {
 	if (color!=getZenithPassageColor())
@@ -1119,6 +1157,8 @@ double ArchaeoLines::getLineAngle(ArchaeoLine::Line whichLine) const
 			return northernMajorStandstillLine0->getDefiningAngle();
 		case ArchaeoLine::MinorStandstill:
 			return northernMinorStandstillLine2->getDefiningAngle();
+		case ArchaeoLine::PolarCircles:
+			return northernPolarCircleLine->getDefiningAngle();
 		case ArchaeoLine::ZenithPassage:
 			return zenithPassageLine->getDefiningAngle();
 		case ArchaeoLine::NadirPassage:
@@ -1172,6 +1212,8 @@ QString ArchaeoLines::getLineLabel(ArchaeoLine::Line whichLine) const
 			return northernMajorStandstillLine0->getLabel();
 		case ArchaeoLine::MinorStandstill:
 			return northernMinorStandstillLine2->getLabel();
+		case ArchaeoLine::PolarCircles:
+			return northernPolarCircleLine->getLabel();
 		case ArchaeoLine::ZenithPassage:
 			return zenithPassageLine->getLabel();
 		case ArchaeoLine::NadirPassage:
@@ -1288,6 +1330,9 @@ void ArchaeoLine::updateLabel()
 			break;
 		case ArchaeoLine::MinorStandstill:
 			label = q_("Minor Lunar Standstill");
+			break;
+		case ArchaeoLine::PolarCircles:
+			label = q_("Polar Circle");
 			break;
 		case ArchaeoLine::ZenithPassage:
 			label = q_("Zenith Passage");

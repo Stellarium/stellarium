@@ -71,6 +71,7 @@ void ArchaeoLinesDialog::createDialogContent()
 	connectBoolProperty(ui->crossquarterCheckBox,    "ArchaeoLines.flagShowCrossquarters");
 	connectBoolProperty(ui->majorStandstillCheckBox, "ArchaeoLines.flagShowMajorStandstills");
 	connectBoolProperty(ui->minorStandstillCheckBox, "ArchaeoLines.flagShowMinorStandstills");
+	connectBoolProperty(ui->polarCirclesCheckBox,    "ArchaeoLines.flagShowPolarCircles");
 	connectBoolProperty(ui->zenithPassageCheckBox,   "ArchaeoLines.flagShowZenithPassage");
 	connectBoolProperty(ui->nadirPassageCheckBox,    "ArchaeoLines.flagShowNadirPassage");
 	connectBoolProperty(ui->selectedObjectCheckBox,  "ArchaeoLines.flagShowSelectedObject");
@@ -115,6 +116,7 @@ void ArchaeoLinesDialog::createDialogContent()
 	connectColorButton(ui->crossquarterColorToolButton,            "ArchaeoLines.crossquartersColor",           "ArchaeoLines/color_crossquarters");
 	connectColorButton(ui->majorStandstillColorToolButton,         "ArchaeoLines.majorStandstillColor",         "ArchaeoLines/color_major_standstill");
 	connectColorButton(ui->minorStandstillColorToolButton,         "ArchaeoLines.minorStandstillColor",         "ArchaeoLines/color_minor_standstill");
+	connectColorButton(ui->polarCirclesColorToolButton,            "ArchaeoLines.polarCirclesColor",            "ArchaeoLines/color_polar_circles");
 	connectColorButton(ui->zenithPassageColorToolButton,           "ArchaeoLines.zenithPassageColor",           "ArchaeoLines/color_zenith_passage");
 	connectColorButton(ui->nadirPassageColorToolButton,            "ArchaeoLines.nadirPassageColor",            "ArchaeoLines/color_nadir_passage");
 	connectColorButton(ui->selectedObjectColorToolButton,          "ArchaeoLines.selectedObjectColor",          "ArchaeoLines/color_selected_object");
@@ -154,6 +156,7 @@ void ArchaeoLinesDialog::setAboutHtml(void)
 	html += "<li>" + q_("Declinations of the crossquarter days (days right between solstices and equinoxes)") + "</li>";
 	html += "<li>" + q_("Declinations of the Major Lunar Standstills") + "</li>";
 	html += "<li>" + q_("Declinations of the Minor Lunar Standstills") + "</li>";
+	html += "<li>" + q_("Declination of the Polar circles") + "</li>";
 	html += "<li>" + q_("Declination of the Zenith passage") + "</li>";
 	html += "<li>" + q_("Declination of the Nadir passage") + "</li>";
 	html += "<li>" + q_("Declination of the currently selected object") + "</li>";
