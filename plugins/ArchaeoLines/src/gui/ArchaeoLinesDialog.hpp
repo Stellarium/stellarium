@@ -55,6 +55,8 @@ private:
 
 private slots:
 	void resetArchaeoLinesSettings();
+	//! Switch between decimal and DMS inputs
+	void setDisplayFormatForSpins(bool flagDecimalDegrees);
 };
 
 #endif /* ARCHAEOLINESDIALOG_HPP */

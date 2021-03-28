@@ -36,6 +36,7 @@ class QDoubleSpinBox;
 class QSlider;
 class StelAction;
 class QToolButton;
+class AngleSpinBox;
 
 //! Base class for all the GUI windows in Stellarium.
 //! 
@@ -150,6 +151,10 @@ protected:
 	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
 	//! to the required datatype, the application will crash
 	static void connectDoubleProperty(QDoubleSpinBox* spinBox, const QString& propName);
+	//! Helper function to connect an AngleSpinBox to a double or float StelProperty representing decimal degrees
+	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
+	//! to the required datatype, the application will crash
+	static void connectDoubleProperty(AngleSpinBox* spinBox, const QString& propName);
 	//! Helper function to connect a QSlider to an double or float StelProperty
 	//! @param slider The slider which should be connected
 	//! @param propName The id of the StelProperty which should be connected

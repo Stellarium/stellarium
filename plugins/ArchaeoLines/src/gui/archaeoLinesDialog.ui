@@ -484,15 +484,9 @@
           </widget>
          </item>
          <item row="1" column="2">
-          <widget class="QDoubleSpinBox" name="geographicLocation1LongitudeDoubleSpinBox">
-           <property name="minimum">
-            <double>-180.000000000000000</double>
-           </property>
-           <property name="maximum">
-            <double>359.990000000000009</double>
-           </property>
-           <property name="singleStep">
-            <double>0.100000000000000</double>
+          <widget class="AngleSpinBox" name="geographicLocation1LongitudeDoubleSpinBox">
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
@@ -507,15 +501,9 @@
           </widget>
          </item>
          <item row="1" column="4">
-          <widget class="QDoubleSpinBox" name="geographicLocation1LatitudeDoubleSpinBox">
-           <property name="minimum">
-            <double>-90.000000000000000</double>
-           </property>
-           <property name="maximum">
-            <double>90.000000000000000</double>
-           </property>
-           <property name="singleStep">
-            <double>0.100000000000000</double>
+          <widget class="AngleSpinBox" name="geographicLocation1LatitudeDoubleSpinBox">
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
@@ -551,15 +539,9 @@
           </widget>
          </item>
          <item row="3" column="2">
-          <widget class="QDoubleSpinBox" name="geographicLocation2LongitudeDoubleSpinBox">
-           <property name="minimum">
-            <double>-180.000000000000000</double>
-           </property>
-           <property name="maximum">
-            <double>359.990000000000009</double>
-           </property>
-           <property name="singleStep">
-            <double>0.100000000000000</double>
+          <widget class="AngleSpinBox" name="geographicLocation2LongitudeDoubleSpinBox">
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
@@ -574,15 +556,9 @@
           </widget>
          </item>
          <item row="3" column="4">
-          <widget class="QDoubleSpinBox" name="geographicLocation2LatitudeDoubleSpinBox">
-           <property name="minimum">
-            <double>-90.000000000000000</double>
-           </property>
-           <property name="maximum">
-            <double>90.000000000000000</double>
-           </property>
-           <property name="singleStep">
-            <double>0.100000000000000</double>
+          <widget class="AngleSpinBox" name="geographicLocation2LatitudeDoubleSpinBox">
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
@@ -604,9 +580,9 @@
           </widget>
          </item>
          <item row="4" column="2">
-          <widget class="QDoubleSpinBox" name="customAzimuth1DoubleSpinBox">
-           <property name="maximum">
-            <double>359.990000000000009</double>
+          <widget class="AngleSpinBox" name="customAzimuth1DoubleSpinBox">
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
@@ -635,9 +611,9 @@
           </widget>
          </item>
          <item row="5" column="2">
-          <widget class="QDoubleSpinBox" name="customAzimuth2DoubleSpinBox">
-           <property name="maximum">
-            <double>359.990000000000009</double>
+          <widget class="AngleSpinBox" name="customAzimuth2DoubleSpinBox">
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
@@ -663,15 +639,9 @@
           </widget>
          </item>
          <item row="6" column="2">
-          <widget class="QDoubleSpinBox" name="customDeclination1DoubleSpinBox">
-           <property name="minimum">
-            <double>-89.989999999999995</double>
-           </property>
-           <property name="maximum">
-            <double>89.989999999999995</double>
-           </property>
-           <property name="singleStep">
-            <double>0.100000000000000</double>
+          <widget class="AngleSpinBox" name="customDeclination1DoubleSpinBox">
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
@@ -693,15 +663,9 @@
           </widget>
          </item>
          <item row="7" column="2">
-          <widget class="QDoubleSpinBox" name="customDeclination2DoubleSpinBox">
-           <property name="minimum">
-            <double>-89.989999999999995</double>
-           </property>
-           <property name="maximum">
-            <double>89.989999999999995</double>
-           </property>
-           <property name="singleStep">
-            <double>0.100000000000000</double>
+          <widget class="AngleSpinBox" name="customDeclination2DoubleSpinBox">
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
@@ -762,6 +726,11 @@
    <extends>QFrame</extends>
    <header>Dialog.hpp</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>AngleSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>AngleSpinBox.hpp</header>
   </customwidget>
  </customwidgets>
  <resources/>

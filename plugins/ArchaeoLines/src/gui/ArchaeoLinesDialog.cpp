@@ -27,6 +27,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelMainView.hpp"
 #include "StelOpenGL.hpp"
+#include "AngleSpinBox.hpp"
 
 ArchaeoLinesDialog::ArchaeoLinesDialog()
 	: StelDialog("ArchaeoLines")
@@ -81,6 +82,43 @@ void ArchaeoLinesDialog::createDialogContent()
 	connectBoolProperty(ui->currentMoonCheckBox,     "ArchaeoLines.flagShowCurrentMoon");
 
 	connectIntProperty(ui->currentPlanetComboBox, "ArchaeoLines.enumShowCurrentPlanet");
+
+	ui->geographicLocation1LatitudeDoubleSpinBox->setPrefixType(AngleSpinBox::Latitude);
+	ui->geographicLocation1LatitudeDoubleSpinBox->setMinimum(-90., true);
+	ui->geographicLocation1LatitudeDoubleSpinBox->setMaximum(90., true);
+	ui->geographicLocation1LatitudeDoubleSpinBox->setWrapping(false);
+	ui->geographicLocation2LatitudeDoubleSpinBox->setPrefixType(AngleSpinBox::Latitude);
+	ui->geographicLocation2LatitudeDoubleSpinBox->setMinimum(-90., true);
+	ui->geographicLocation2LatitudeDoubleSpinBox->setMaximum(90., true);
+	ui->geographicLocation2LatitudeDoubleSpinBox->setWrapping(false);
+	ui->geographicLocation1LongitudeDoubleSpinBox->setPrefixType(AngleSpinBox::Longitude);
+	ui->geographicLocation1LongitudeDoubleSpinBox->setMinimum(-180., true);
+	ui->geographicLocation1LongitudeDoubleSpinBox->setMaximum(180., true);
+	ui->geographicLocation1LongitudeDoubleSpinBox->setWrapping(true);
+	ui->geographicLocation2LongitudeDoubleSpinBox->setPrefixType(AngleSpinBox::Longitude);
+	ui->geographicLocation2LongitudeDoubleSpinBox->setMinimum(-180., true);
+	ui->geographicLocation2LongitudeDoubleSpinBox->setMaximum(180., true);
+	ui->geographicLocation2LongitudeDoubleSpinBox->setWrapping(true);
+	ui->customAzimuth1DoubleSpinBox->setPrefixType(AngleSpinBox::Normal);
+	ui->customAzimuth1DoubleSpinBox->setMinimum(0., true);
+	ui->customAzimuth1DoubleSpinBox->setMaximum(360., true);
+	ui->customAzimuth1DoubleSpinBox->setWrapping(true);
+	ui->customAzimuth2DoubleSpinBox->setPrefixType(AngleSpinBox::Normal);
+	ui->customAzimuth2DoubleSpinBox->setMinimum(0., true);
+	ui->customAzimuth2DoubleSpinBox->setMaximum(360., true);
+	ui->customAzimuth2DoubleSpinBox->setWrapping(true);
+	ui->customDeclination1DoubleSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
+	ui->customDeclination1DoubleSpinBox->setMinimum(-90., true);
+	ui->customDeclination1DoubleSpinBox->setMaximum(90., true);
+	ui->customDeclination1DoubleSpinBox->setWrapping(false);
+	ui->customDeclination2DoubleSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
+	ui->customDeclination2DoubleSpinBox->setMinimum(-90., true);
+	ui->customDeclination2DoubleSpinBox->setMaximum(90., true);
+	ui->customDeclination2DoubleSpinBox->setWrapping(false);
+
+	// TBD: Store a decimal/DMS selection property separately?
+	setDisplayFormatForSpins(StelApp::getInstance().getFlagShowDecimalDegrees());
+	connect(&StelApp::getInstance(), SIGNAL(flagShowDecimalDegreesChanged(bool)), this, SLOT(setDisplayFormatForSpins(bool)));
 
 	connectBoolProperty(ui->geographicLocation1CheckBox,                 "ArchaeoLines.flagShowGeographicLocation1");
 	connectBoolProperty(ui->geographicLocation2CheckBox,                 "ArchaeoLines.flagShowGeographicLocation2");
@@ -218,6 +256,27 @@ void ArchaeoLinesDialog::resetArchaeoLinesSettings()
 	}
 	else
 		qDebug() << "[ArchaeoLines] restore defaults is canceled...";
+}
+
+void ArchaeoLinesDialog::setDisplayFormatForSpins(bool flagDecimalDegrees)
+{
+	int places = 2;
+	AngleSpinBox::DisplayFormat format = AngleSpinBox::DMSSymbols;
+	if (flagDecimalDegrees)
+	{
+		places = 6;
+		format = AngleSpinBox::DecimalDeg;
+	}
+	const QList<AngleSpinBox *> list={ui->geographicLocation1LatitudeDoubleSpinBox,  ui->geographicLocation2LatitudeDoubleSpinBox,
+					  ui->geographicLocation1LongitudeDoubleSpinBox, ui->geographicLocation2LongitudeDoubleSpinBox,
+					  ui->customAzimuth1DoubleSpinBox,               ui->customAzimuth2DoubleSpinBox,
+					  ui->customDeclination1DoubleSpinBox,           ui->customDeclination2DoubleSpinBox};
+	QList<AngleSpinBox *>::const_iterator i;
+	for (i=list.constBegin(); i!=list.constEnd(); ++i)
+	{
+		(*i)->setDecimals(places);
+		(*i)->setDisplayFormat(format);
+	}
 }
 
 // Notes/Observations by GZ in 2015-04 with Qt5.4.0/MinGW on Windows7SP1.
