@@ -30,6 +30,7 @@
 
 class Ui_archaeoLinesDialog;
 class ArchaeoLines;
+class ArchaeoLinesDialogLocations;
 
 //! Main window of the ArchaeoLines plug-in.
 //! @ingroup archaeoLines
@@ -50,6 +51,7 @@ protected:
 private:
 	Ui_archaeoLinesDialog* ui;
 	ArchaeoLines* al;
+	ArchaeoLinesDialogLocations* locationsDialog;
 
 	void setAboutHtml();
 

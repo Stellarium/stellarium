@@ -21,6 +21,8 @@
 #include "ArchaeoLinesDialog.hpp"
 #include "ui_archaeoLinesDialog.h"
 
+#include "ArchaeoLinesDialogLocations.hpp"
+
 #include "StelApp.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModule.hpp"
@@ -34,11 +36,13 @@ ArchaeoLinesDialog::ArchaeoLinesDialog()
 	, al(Q_NULLPTR)
 {
 	ui = new Ui_archaeoLinesDialog();
+	locationsDialog = new ArchaeoLinesDialogLocations();
 }
 
 ArchaeoLinesDialog::~ArchaeoLinesDialog()
 {
-	delete ui;          ui=Q_NULLPTR;
+	delete locationsDialog; locationsDialog=Q_NULLPTR;
+	delete ui;              ui=Q_NULLPTR;
 }
 
 void ArchaeoLinesDialog::retranslate()
@@ -120,6 +124,9 @@ void ArchaeoLinesDialog::createDialogContent()
 	setDisplayFormatForSpins(StelApp::getInstance().getFlagShowDecimalDegrees());
 	connect(&StelApp::getInstance(), SIGNAL(flagShowDecimalDegreesChanged(bool)), this, SLOT(setDisplayFormatForSpins(bool)));
 
+	connect(ui->geographicLocation1PickPushButton, &QPushButton::clicked, [=](){locationsDialog->setVisible(true); locationsDialog->setModalContext(1);});
+	connect(ui->geographicLocation2PickPushButton, &QPushButton::clicked, [=](){locationsDialog->setVisible(true); locationsDialog->setModalContext(2);});
+
 	connectBoolProperty(ui->geographicLocation1CheckBox,                 "ArchaeoLines.flagShowGeographicLocation1");
 	connectBoolProperty(ui->geographicLocation2CheckBox,                 "ArchaeoLines.flagShowGeographicLocation2");
 	connectDoubleProperty(ui->geographicLocation1LongitudeDoubleSpinBox, "ArchaeoLines.geographicLocation1Longitude");
@@ -130,6 +137,8 @@ void ArchaeoLinesDialog::createDialogContent()
 	ui->geographicLocation2LineEdit->setText(al->getLineLabel(ArchaeoLine::GeographicLocation2));
 	connect(ui->geographicLocation1LineEdit, SIGNAL(textChanged(QString)), al, SLOT(setGeographicLocation1Label(QString)));
 	connect(ui->geographicLocation2LineEdit, SIGNAL(textChanged(QString)), al, SLOT(setGeographicLocation2Label(QString)));
+	connect(al, SIGNAL(geographicLocation1LabelChanged(QString)), ui->geographicLocation1LineEdit, SLOT(setText(QString)));
+	connect(al, SIGNAL(geographicLocation2LabelChanged(QString)), ui->geographicLocation2LineEdit, SLOT(setText(QString)));
 
 	connectBoolProperty(ui->customAzimuth1CheckBox,        "ArchaeoLines.flagShowCustomAzimuth1");
 	connectBoolProperty(ui->customAzimuth2CheckBox,        "ArchaeoLines.flagShowCustomAzimuth2");
@@ -219,7 +228,8 @@ void ArchaeoLinesDialog::setAboutHtml(void)
 			   "Note that declination of the moon at the major standstill can exceed the "
 			   "indicated limits if it is high in the sky due to parallax effects.") + "</p>";	
 	html += "<p>" + q_("Some religions, most notably Islam, adhere to a practice of observing a prayer direction towards a particular location. "
-			   "Azimuth lines for two locations can be shown. Default locations are Mecca (Kaaba) and Jerusalem. "
+			   "Azimuth lines for two locations can be shown. Default locations are Mecca (Kaaba) and Jerusalem, "
+			   "but you can select locations from Stellarium's locations list or enter arbitrary locations. "
 			   "The directions are computed based on spherical trigonometry on a spherical Earth.") + "</p>";
 	html += "<p>" + q_("In addition, up to two vertical lines with arbitrary azimuth and declination lines with custom label can be shown.") + "</p>";
 
