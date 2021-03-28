@@ -149,6 +149,11 @@ void ArchaeoLinesDialog::createDialogContent()
 	connect(ui->customDeclination1LineEdit, SIGNAL(textChanged(QString)), al, SLOT(setCustomDeclination1Label(QString)));
 	connect(ui->customDeclination2LineEdit, SIGNAL(textChanged(QString)), al, SLOT(setCustomDeclination2Label(QString)));
 
+	connect(al, SIGNAL(customAzimuth1LabelChanged(QString)), ui->customAzimuth1LineEdit, SLOT(setText(QString)));
+	connect(al, SIGNAL(customAzimuth2LabelChanged(QString)), ui->customAzimuth2LineEdit, SLOT(setText(QString)));
+	connect(al, SIGNAL(customDeclination1LabelChanged(QString)), ui->customDeclination1LineEdit, SLOT(setText(QString)));
+	connect(al, SIGNAL(customDeclination2LabelChanged(QString)), ui->customDeclination2LineEdit, SLOT(setText(QString)));
+
 	connectColorButton(ui->equinoxColorToolButton,                 "ArchaeoLines.equinoxColor",                 "ArchaeoLines/color_equinox");
 	connectColorButton(ui->solsticesColorToolButton,               "ArchaeoLines.solsticesColor",               "ArchaeoLines/color_solstices");
 	connectColorButton(ui->crossquarterColorToolButton,            "ArchaeoLines.crossquartersColor",           "ArchaeoLines/color_crossquarters");
@@ -169,6 +174,12 @@ void ArchaeoLinesDialog::createDialogContent()
 	connectColorButton(ui->customAzimuth2ColorToolButton,          "ArchaeoLines.customAzimuth2Color",          "ArchaeoLines/color_custom_azimuth_2");
 	connectColorButton(ui->customDeclination1ColorToolButton,      "ArchaeoLines.customDeclination1Color",      "ArchaeoLines/color_custom_declination_1");
 	connectColorButton(ui->customDeclination2ColorToolButton,      "ArchaeoLines.customDeclination2Color",      "ArchaeoLines/color_custom_declination_2");
+
+
+	connect(ui->customAzimuth1PushButton, SIGNAL(clicked()), this, SLOT(assignCustomAzimuth1FromSelection()));
+	connect(ui->customAzimuth2PushButton, SIGNAL(clicked()), this, SLOT(assignCustomAzimuth2FromSelection()));
+	connect(ui->customDeclination1PushButton, SIGNAL(clicked()), this, SLOT(assignCustomDeclination1FromSelection()));
+	connect(ui->customDeclination2PushButton, SIGNAL(clicked()), this, SLOT(assignCustomDeclination2FromSelection()));
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(resetArchaeoLinesSettings()));
 	connect(ui->restoreDefaultsButtonCL, SIGNAL(clicked()), this, SLOT(resetArchaeoLinesSettings()));
@@ -278,6 +289,66 @@ void ArchaeoLinesDialog::setDisplayFormatForSpins(bool flagDecimalDegrees)
 		(*i)->setDisplayFormat(format);
 	}
 }
+
+void ArchaeoLinesDialog::assignCustomAzimuth1FromSelection()
+{
+	StelObjectMgr *mgr=GETSTELMODULE(StelObjectMgr);
+	if (!mgr->getWasSelected())
+		return;
+
+	StelCore *core=StelApp::getInstance().getCore();
+	StelObjectP sel=mgr->getSelectedObject().at(0);
+	Vec3d altAz=sel->getAltAzPosAuto(core);
+	double az, alt;
+	StelUtils::rectToSphe(&az, &alt, altAz);
+	az=M_PI-az;
+	al->setCustomAzimuth1(az*M_180_PI);
+	al->setCustomAzimuth1Label(sel->getNameI18n());
+}
+void ArchaeoLinesDialog::assignCustomAzimuth2FromSelection()
+{
+	StelObjectMgr *mgr=GETSTELMODULE(StelObjectMgr);
+	if (!mgr->getWasSelected())
+		return;
+
+	StelCore *core=StelApp::getInstance().getCore();
+	StelObjectP sel=mgr->getSelectedObject().at(0);
+	Vec3d altAz=sel->getAltAzPosAuto(core);
+	double az, alt;
+	StelUtils::rectToSphe(&az, &alt, altAz);
+	az=M_PI-az;
+	al->setCustomAzimuth2(az*M_180_PI);
+	al->setCustomAzimuth2Label(sel->getNameI18n());
+}
+void ArchaeoLinesDialog::assignCustomDeclination1FromSelection()
+{
+	StelObjectMgr *mgr=GETSTELMODULE(StelObjectMgr);
+	if (!mgr->getWasSelected())
+		return;
+
+	StelCore *core=StelApp::getInstance().getCore();
+	StelObjectP sel=mgr->getSelectedObject().at(0);
+	Vec3d eq=sel->getEquinoxEquatorialPos(core);
+	double ra, dec;
+	StelUtils::rectToSphe(&ra, &dec, eq);
+	al->setCustomDeclination1(dec*M_180_PI);
+	al->setCustomDeclination1Label(sel->getNameI18n());
+}
+void ArchaeoLinesDialog::assignCustomDeclination2FromSelection()
+{
+	StelObjectMgr *mgr=GETSTELMODULE(StelObjectMgr);
+	if (!mgr->getWasSelected())
+		return;
+
+	StelCore *core=StelApp::getInstance().getCore();
+	StelObjectP sel=mgr->getSelectedObject().at(0);
+	Vec3d eq=sel->getEquinoxEquatorialPos(core);
+	double ra, dec;
+	StelUtils::rectToSphe(&ra, &dec, eq);
+	al->setCustomDeclination2(dec*M_180_PI);
+	al->setCustomDeclination2Label(sel->getNameI18n());
+}
+
 
 // Notes/Observations by GZ in 2015-04 with Qt5.4.0/MinGW on Windows7SP1.
 // (1) There are issues in calling the QColorPanel that seem to be related to QTBUG-35302,

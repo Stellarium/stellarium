@@ -57,6 +57,13 @@ private slots:
 	void resetArchaeoLinesSettings();
 	//! Switch between decimal and DMS inputs
 	void setDisplayFormatForSpins(bool flagDecimalDegrees);
+	//! assign fields from current selection
+	void assignCustomAzimuth1FromSelection();
+	void assignCustomAzimuth2FromSelection();
+	void assignCustomDeclination1FromSelection();
+	void assignCustomDeclination2FromSelection();
+	//! Connected to a QPushButton with a property "geo" of value 1 or 2
+	//void assignGeographicLocationFromList();
 };
 
 #endif /* ARCHAEOLINESDIALOG_HPP */
