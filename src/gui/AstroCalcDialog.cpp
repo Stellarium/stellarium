@@ -2458,8 +2458,8 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 		{q_("Bright variable stars (<%1 mag)").arg(QString::number(brightLimit - 5.0f, 'f', 1)), "12"},{q_("Bright star clusters (<%1 mag)").arg(brLimit), "13"},
 		{q_("Planetary nebulae (<%1 mag)").arg(brLimit), "14"},{q_("Bright nebulae (<%1 mag)").arg(brLimit), "15"},{q_("Dark nebulae"), "16"},
 		{q_("Bright galaxies (<%1 mag)").arg(brLimit), "17"},{q_("Symbiotic stars"), "18"},{q_("Emission-line stars"), "19"},{q_("Interstellar objects"), "20"},
-		{q_("Planets and Sun"), "21"},{q_("Sun, planets and moons"), "22"},{q_("Bright Solar system objects (<%1 mag)").arg(QString::number(brightLimit + 2.0f, 'f', 1)), "23"},
-		{q_("Solar system objects: minor bodies"), "24"}
+		{q_("Planets and Sun"), "21"},{q_("Sun, planets and moons of observer location"), "22"},{q_("Bright Solar system objects (<%1 mag)").arg(QString::number(brightLimit + 2.0f, 'f', 1)), "23"},
+		{q_("Solar system objects: minor bodies"), "24"},{q_("Moons of first body"), "25"}
 	};
 	QMapIterator<QString, QString> i(itemsMap);
 	groups->clear();
@@ -3778,7 +3778,7 @@ void AstroCalcDialog::calculatePhenomena()
 					objects.append(object);
 			}
 			break;
-		case 22: // Sun, planets and moons
+		case 22: // Sun, planets and moons of observer location
 		{
 			PlanetP cp = core->getCurrentPlanet();
 			for (const auto& object : allObjects)
@@ -3799,6 +3799,14 @@ void AstroCalcDialog::calculatePhenomena()
 			for (const auto& object : allObjects)
 			{
 				if (object->getPlanetType() != Planet::isUNDEFINED && object->getPlanetType() != Planet::isPlanet && object->getPlanetType() != Planet::isStar && object->getPlanetType() != Planet::isMoon && object->getPlanetType() != Planet::isComet && object->getPlanetType() != Planet::isArtificial && object->getPlanetType() != Planet::isObserver && !object->getEnglishName().contains("Pluto", Qt::CaseInsensitive))
+					objects.append(object);
+			}
+			break;
+		case 25: // Moons of first body
+			PlanetP firstPplanet = solarSystem->searchByEnglishName(currentPlanet);
+			for (const auto& object : allObjects)
+			{
+				if (object->getParent()==firstPplanet && object->getPlanetType() == Planet::isMoon)
 					objects.append(object);
 			}
 			break;
@@ -3828,7 +3836,7 @@ void AstroCalcDialog::calculatePhenomena()
 				}
 			}
 		}
-		else if ((obj2Type >= 0 && obj2Type < 10) || (obj2Type >= 20 && obj2Type <= 24))
+		else if ((obj2Type >= 0 && obj2Type < 10) || (obj2Type >= 20 && obj2Type <= 25))
 		{
 			// Solar system objects
 			for (auto& obj : objects)
