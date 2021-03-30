@@ -111,6 +111,14 @@ void ArchaeoLinesDialog::createDialogContent()
 	ui->customAzimuth2DoubleSpinBox->setMinimum(0., true);
 	ui->customAzimuth2DoubleSpinBox->setMaximum(360., true);
 	ui->customAzimuth2DoubleSpinBox->setWrapping(true);
+	ui->customAltitude1DoubleSpinBox->setPrefixType(AngleSpinBox::Normal);
+	ui->customAltitude1DoubleSpinBox->setMinimum(-90., true);
+	ui->customAltitude1DoubleSpinBox->setMaximum( 90., true);
+	ui->customAltitude1DoubleSpinBox->setWrapping(false);
+	ui->customAltitude2DoubleSpinBox->setPrefixType(AngleSpinBox::Normal);
+	ui->customAltitude2DoubleSpinBox->setMinimum(-90., true);
+	ui->customAltitude2DoubleSpinBox->setMaximum( 90., true);
+	ui->customAltitude2DoubleSpinBox->setWrapping(false);
 	ui->customDeclination1DoubleSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
 	ui->customDeclination1DoubleSpinBox->setMinimum(-90., true);
 	ui->customDeclination1DoubleSpinBox->setMaximum(90., true);
@@ -149,6 +157,15 @@ void ArchaeoLinesDialog::createDialogContent()
 	connect(ui->customAzimuth1LineEdit, SIGNAL(textChanged(QString)), al, SLOT(setCustomAzimuth1Label(QString)));
 	connect(ui->customAzimuth2LineEdit, SIGNAL(textChanged(QString)), al, SLOT(setCustomAzimuth2Label(QString)));
 
+	connectBoolProperty(ui->customAltitude1CheckBox,        "ArchaeoLines.flagShowCustomAltitude1");
+	connectBoolProperty(ui->customAltitude2CheckBox,        "ArchaeoLines.flagShowCustomAltitude2");
+	connectDoubleProperty(ui->customAltitude1DoubleSpinBox, "ArchaeoLines.customAltitude1");
+	connectDoubleProperty(ui->customAltitude2DoubleSpinBox, "ArchaeoLines.customAltitude2");
+	ui->customAltitude1LineEdit->setText(al->getLineLabel(ArchaeoLine::CustomAltitude1));
+	ui->customAltitude2LineEdit->setText(al->getLineLabel(ArchaeoLine::CustomAltitude2));
+	connect(ui->customAltitude1LineEdit, SIGNAL(textChanged(QString)), al, SLOT(setCustomAltitude1Label(QString)));
+	connect(ui->customAltitude2LineEdit, SIGNAL(textChanged(QString)), al, SLOT(setCustomAltitude2Label(QString)));
+
 	connectBoolProperty(ui->customDeclination1CheckBox,        "ArchaeoLines.flagShowCustomDeclination1");
 	connectBoolProperty(ui->customDeclination2CheckBox,        "ArchaeoLines.flagShowCustomDeclination2");
 	connectDoubleProperty(ui->customDeclination1DoubleSpinBox, "ArchaeoLines.customDeclination1");
@@ -160,6 +177,8 @@ void ArchaeoLinesDialog::createDialogContent()
 
 	connect(al, SIGNAL(customAzimuth1LabelChanged(QString)), ui->customAzimuth1LineEdit, SLOT(setText(QString)));
 	connect(al, SIGNAL(customAzimuth2LabelChanged(QString)), ui->customAzimuth2LineEdit, SLOT(setText(QString)));
+	connect(al, SIGNAL(customAltitude1LabelChanged(QString)), ui->customAltitude1LineEdit, SLOT(setText(QString)));
+	connect(al, SIGNAL(customAltitude2LabelChanged(QString)), ui->customAltitude2LineEdit, SLOT(setText(QString)));
 	connect(al, SIGNAL(customDeclination1LabelChanged(QString)), ui->customDeclination1LineEdit, SLOT(setText(QString)));
 	connect(al, SIGNAL(customDeclination2LabelChanged(QString)), ui->customDeclination2LineEdit, SLOT(setText(QString)));
 
@@ -181,12 +200,15 @@ void ArchaeoLinesDialog::createDialogContent()
 	connectColorButton(ui->geographicLocation2ColorToolButton,     "ArchaeoLines.geographicLocation2Color",     "ArchaeoLines/color_geographic_location_2");
 	connectColorButton(ui->customAzimuth1ColorToolButton,          "ArchaeoLines.customAzimuth1Color",          "ArchaeoLines/color_custom_azimuth_1");
 	connectColorButton(ui->customAzimuth2ColorToolButton,          "ArchaeoLines.customAzimuth2Color",          "ArchaeoLines/color_custom_azimuth_2");
+	connectColorButton(ui->customAltitude1ColorToolButton,         "ArchaeoLines.customAltitude1Color",         "ArchaeoLines/color_custom_altitude_1");
+	connectColorButton(ui->customAltitude2ColorToolButton,         "ArchaeoLines.customAltitude2Color",         "ArchaeoLines/color_custom_altitude_2");
 	connectColorButton(ui->customDeclination1ColorToolButton,      "ArchaeoLines.customDeclination1Color",      "ArchaeoLines/color_custom_declination_1");
 	connectColorButton(ui->customDeclination2ColorToolButton,      "ArchaeoLines.customDeclination2Color",      "ArchaeoLines/color_custom_declination_2");
 
-
 	connect(ui->customAzimuth1PushButton, SIGNAL(clicked()), this, SLOT(assignCustomAzimuth1FromSelection()));
 	connect(ui->customAzimuth2PushButton, SIGNAL(clicked()), this, SLOT(assignCustomAzimuth2FromSelection()));
+	connect(ui->customAltitude1PushButton, SIGNAL(clicked()), this, SLOT(assignCustomAltitude1FromSelection()));
+	connect(ui->customAltitude2PushButton, SIGNAL(clicked()), this, SLOT(assignCustomAltitude2FromSelection()));
 	connect(ui->customDeclination1PushButton, SIGNAL(clicked()), this, SLOT(assignCustomDeclination1FromSelection()));
 	connect(ui->customDeclination2PushButton, SIGNAL(clicked()), this, SLOT(assignCustomDeclination2FromSelection()));
 
@@ -231,7 +253,7 @@ void ArchaeoLinesDialog::setAboutHtml(void)
 			   "Azimuth lines for two locations can be shown. Default locations are Mecca (Kaaba) and Jerusalem, "
 			   "but you can select locations from Stellarium's locations list or enter arbitrary locations. "
 			   "The directions are computed based on spherical trigonometry on a spherical Earth.") + "</p>";
-	html += "<p>" + q_("In addition, up to two vertical lines with arbitrary azimuth and declination lines with custom label can be shown.") + "</p>";
+	html += "<p>" + q_("In addition, up to two lines each with arbitrary azimuth, altitude and declination lines with custom label can be shown.") + "</p>";
 
 	html += "<h3>" + q_("Publications") + "</h3>";
 	html += "<p>"  + q_("If you use this plugin in your publications, please cite:") + "</p>";
@@ -272,6 +294,8 @@ void ArchaeoLinesDialog::resetArchaeoLinesSettings()
 		ui->geographicLocation2LineEdit->setText(al->getLineLabel(ArchaeoLine::GeographicLocation2));
 		ui->customAzimuth1LineEdit->setText(al->getLineLabel(ArchaeoLine::CustomAzimuth1));
 		ui->customAzimuth2LineEdit->setText(al->getLineLabel(ArchaeoLine::CustomAzimuth2));
+		ui->customAltitude1LineEdit->setText(al->getLineLabel(ArchaeoLine::CustomAltitude1));
+		ui->customAltitude2LineEdit->setText(al->getLineLabel(ArchaeoLine::CustomAltitude2));
 		ui->customDeclination1LineEdit->setText(al->getLineLabel(ArchaeoLine::CustomDeclination1));
 		ui->customDeclination2LineEdit->setText(al->getLineLabel(ArchaeoLine::CustomDeclination2));
 	}
@@ -291,6 +315,7 @@ void ArchaeoLinesDialog::setDisplayFormatForSpins(bool flagDecimalDegrees)
 	const QList<AngleSpinBox *> list={ui->geographicLocation1LatitudeDoubleSpinBox,  ui->geographicLocation2LatitudeDoubleSpinBox,
 					  ui->geographicLocation1LongitudeDoubleSpinBox, ui->geographicLocation2LongitudeDoubleSpinBox,
 					  ui->customAzimuth1DoubleSpinBox,               ui->customAzimuth2DoubleSpinBox,
+					  ui->customAltitude1DoubleSpinBox,              ui->customAltitude2DoubleSpinBox,
 					  ui->customDeclination1DoubleSpinBox,           ui->customDeclination2DoubleSpinBox};
 	QList<AngleSpinBox *>::const_iterator i;
 	for (i=list.constBegin(); i!=list.constEnd(); ++i)
@@ -314,6 +339,7 @@ void ArchaeoLinesDialog::assignCustomAzimuth1FromSelection()
 	az=M_PI-az;
 	al->setCustomAzimuth1(az*M_180_PI);
 	al->setCustomAzimuth1Label(sel->getNameI18n());
+	al->showCustomAzimuth1(true);
 }
 void ArchaeoLinesDialog::assignCustomAzimuth2FromSelection()
 {
@@ -329,6 +355,37 @@ void ArchaeoLinesDialog::assignCustomAzimuth2FromSelection()
 	az=M_PI-az;
 	al->setCustomAzimuth2(az*M_180_PI);
 	al->setCustomAzimuth2Label(sel->getNameI18n());
+	al->showCustomAzimuth2(true);
+}
+void ArchaeoLinesDialog::assignCustomAltitude1FromSelection()
+{
+	StelObjectMgr *mgr=GETSTELMODULE(StelObjectMgr);
+	if (!mgr->getWasSelected())
+		return;
+
+	StelCore *core=StelApp::getInstance().getCore();
+	StelObjectP sel=mgr->getSelectedObject().at(0);
+	Vec3d altAz=sel->getAltAzPosAuto(core);
+	double az, alt;
+	StelUtils::rectToSphe(&az, &alt, altAz);
+	al->setCustomAltitude1(alt*M_180_PI);
+	al->setCustomAltitude1Label(sel->getNameI18n());
+	al->showCustomAltitude1(true);
+}
+void ArchaeoLinesDialog::assignCustomAltitude2FromSelection()
+{
+	StelObjectMgr *mgr=GETSTELMODULE(StelObjectMgr);
+	if (!mgr->getWasSelected())
+		return;
+
+	StelCore *core=StelApp::getInstance().getCore();
+	StelObjectP sel=mgr->getSelectedObject().at(0);
+	Vec3d altAz=sel->getAltAzPosAuto(core);
+	double az, alt;
+	StelUtils::rectToSphe(&az, &alt, altAz);
+	al->setCustomAltitude2(alt*M_180_PI);
+	al->setCustomAltitude2Label(sel->getNameI18n());
+	al->showCustomAltitude2(true);
 }
 void ArchaeoLinesDialog::assignCustomDeclination1FromSelection()
 {
@@ -343,6 +400,7 @@ void ArchaeoLinesDialog::assignCustomDeclination1FromSelection()
 	StelUtils::rectToSphe(&ra, &dec, eq);
 	al->setCustomDeclination1(dec*M_180_PI);
 	al->setCustomDeclination1Label(sel->getNameI18n());
+	al->showCustomDeclination1(true);
 }
 void ArchaeoLinesDialog::assignCustomDeclination2FromSelection()
 {
@@ -357,6 +415,7 @@ void ArchaeoLinesDialog::assignCustomDeclination2FromSelection()
 	StelUtils::rectToSphe(&ra, &dec, eq);
 	al->setCustomDeclination2(dec*M_180_PI);
 	al->setCustomDeclination2Label(sel->getNameI18n());
+	al->showCustomDeclination2(true);
 }
 
 

@@ -62,6 +62,8 @@ private slots:
 	//! assign fields from current selection
 	void assignCustomAzimuth1FromSelection();
 	void assignCustomAzimuth2FromSelection();
+	void assignCustomAltitude1FromSelection();
+	void assignCustomAltitude2FromSelection();
 	void assignCustomDeclination1FromSelection();
 	void assignCustomDeclination2FromSelection();
 	//! Connected to a QPushButton with a property "geo" of value 1 or 2

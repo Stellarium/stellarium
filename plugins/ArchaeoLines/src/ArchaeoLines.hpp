@@ -115,7 +115,9 @@ public:
 		GeographicLocation1,
 		GeographicLocation2,
 		CustomAzimuth1,
-		CustomAzimuth2
+		CustomAzimuth2,
+		CustomAltitude1,
+		CustomAltitude2
 	};
 
 	ArchaeoLine(ArchaeoLine::Line lineType, double definingAngle);
@@ -149,7 +151,7 @@ public slots:
 
 private:
 	ArchaeoLine::Line lineType;
-	double definingAngle; // degrees. This is declination for non-azimuth lines, azimuth for geographic locations and custom azimuths.
+	double definingAngle; // degrees. This is declination/altitude for non-azimuth lines, azimuth for geographic locations and custom azimuths.
 	Vec3f color;
 	StelCore::FrameType frameType;
 	bool flagLabel; //! show the label. (some should be permanently silent)
@@ -191,17 +193,27 @@ class ArchaeoLines : public StelModule
 	// Note: following 2 are only "forwarding properties", no proper variables!
 	Q_PROPERTY(double customAzimuth1 READ getCustomAzimuth1 WRITE setCustomAzimuth1 NOTIFY customAzimuth1Changed)
 	Q_PROPERTY(double customAzimuth2 READ getCustomAzimuth2 WRITE setCustomAzimuth2 NOTIFY customAzimuth2Changed)
+
+	Q_PROPERTY(bool flagShowCustomAltitude1            READ isCustomAltitude1Displayed         WRITE showCustomAltitude1             NOTIFY showCustomAltitude1Changed)
+	Q_PROPERTY(bool flagShowCustomAltitude2            READ isCustomAltitude2Displayed         WRITE showCustomAltitude2             NOTIFY showCustomAltitude2Changed)
+	// Note: following 2 are only "forwarding properties", no proper variables!
+	Q_PROPERTY(double customAltitude1 READ getCustomAltitude1 WRITE setCustomAltitude1 NOTIFY customAltitude1Changed)
+	Q_PROPERTY(double customAltitude2 READ getCustomAltitude2 WRITE setCustomAltitude2 NOTIFY customAltitude2Changed)
+
 	Q_PROPERTY(bool flagShowCustomDeclination1 READ   isCustomDeclination1Displayed WRITE  showCustomDeclination1 NOTIFY showCustomDeclination1Changed)
 	Q_PROPERTY(bool flagShowCustomDeclination2 READ   isCustomDeclination2Displayed WRITE  showCustomDeclination2 NOTIFY showCustomDeclination2Changed)
-	// Note: following 2 are only "forwarding properties", no proper variables!
+	// Note: following 4 are only "forwarding properties", no proper variables!
 	Q_PROPERTY(double customDeclination1 READ getCustomDeclination1 WRITE setCustomDeclination1 NOTIFY customDeclination1Changed)
 	Q_PROPERTY(double customDeclination2 READ getCustomDeclination2 WRITE setCustomDeclination2 NOTIFY customDeclination2Changed)
+
 
 	// More "forwarding properties" for geo locations and custom azimuths/declination labels.
 	Q_PROPERTY(QString geographicLocation1Label READ getGeographicLocation1Label WRITE setGeographicLocation1Label NOTIFY geographicLocation1LabelChanged)
 	Q_PROPERTY(QString geographicLocation2Label READ getGeographicLocation2Label WRITE setGeographicLocation2Label NOTIFY geographicLocation2LabelChanged)
 	Q_PROPERTY(QString customAzimuth1Label      READ getCustomAzimuth1Label      WRITE setCustomAzimuth1Label      NOTIFY customAzimuth1LabelChanged)
 	Q_PROPERTY(QString customAzimuth2Label      READ getCustomAzimuth2Label      WRITE setCustomAzimuth2Label      NOTIFY customAzimuth2LabelChanged)
+	Q_PROPERTY(QString customAltitude1Label     READ getCustomAltitude1Label     WRITE setCustomAltitude1Label     NOTIFY customAltitude1LabelChanged)
+	Q_PROPERTY(QString customAltitude2Label     READ getCustomAltitude2Label     WRITE setCustomAltitude2Label     NOTIFY customAltitude2LabelChanged)
 	Q_PROPERTY(QString customDeclination1Label  READ getCustomDeclination1Label  WRITE setCustomDeclination1Label  NOTIFY customDeclination1LabelChanged)
 	Q_PROPERTY(QString customDeclination2Label  READ getCustomDeclination2Label  WRITE setCustomDeclination2Label  NOTIFY customDeclination2LabelChanged)
 
@@ -224,6 +236,8 @@ class ArchaeoLines : public StelModule
 	Q_PROPERTY(Vec3f geographicLocation2Color     READ getGeographicLocation2Color     WRITE setGeographicLocation2Color     NOTIFY geographicLocation2ColorChanged     )
 	Q_PROPERTY(Vec3f customAzimuth1Color          READ getCustomAzimuth1Color          WRITE setCustomAzimuth1Color          NOTIFY customAzimuth1ColorChanged          )
 	Q_PROPERTY(Vec3f customAzimuth2Color          READ getCustomAzimuth2Color          WRITE setCustomAzimuth2Color          NOTIFY customAzimuth2ColorChanged          )
+	Q_PROPERTY(Vec3f customAltitude1Color         READ getCustomAltitude1Color         WRITE setCustomAltitude1Color         NOTIFY customAltitude1ColorChanged         )
+	Q_PROPERTY(Vec3f customAltitude2Color         READ getCustomAltitude2Color         WRITE setCustomAltitude2Color         NOTIFY customAltitude2ColorChanged         )
 	Q_PROPERTY(Vec3f customDeclination1Color      READ getCustomDeclination1Color      WRITE setCustomDeclination1Color      NOTIFY customDeclination1ColorChanged      )
 	Q_PROPERTY(Vec3f customDeclination2Color      READ getCustomDeclination2Color      WRITE setCustomDeclination2Color      NOTIFY customDeclination2ColorChanged      )
 
@@ -279,6 +293,10 @@ signals:
 	void showCustomAzimuth2Changed(bool on);
 	void customAzimuth1Changed(double az);
 	void customAzimuth2Changed(double az);
+	void showCustomAltitude1Changed(double az);
+	void showCustomAltitude2Changed(double az);
+	void customAltitude1Changed(double az);
+	void customAltitude2Changed(double az);
 	void showCustomDeclination1Changed(bool on);
 	void showCustomDeclination2Changed(bool on);
 	void customDeclination1Changed(double dec);
@@ -288,6 +306,8 @@ signals:
 	void geographicLocation2LabelChanged(QString label);
 	void customAzimuth1LabelChanged(QString label);
 	void customAzimuth2LabelChanged(QString label);
+	void customAltitude1LabelChanged(QString label);
+	void customAltitude2LabelChanged(QString label);
 	void customDeclination1LabelChanged(QString label);
 	void customDeclination2LabelChanged(QString label);
 	void equinoxColorChanged(Vec3f color);
@@ -308,6 +328,8 @@ signals:
 	void geographicLocation2ColorChanged(Vec3f color);
 	void customAzimuth1ColorChanged(Vec3f color);
 	void customAzimuth2ColorChanged(Vec3f color);
+	void customAltitude1ColorChanged(Vec3f color);
+	void customAltitude2ColorChanged(Vec3f color);
 	void customDeclination1ColorChanged(Vec3f color);
 	void customDeclination2ColorChanged(Vec3f color);
 	void lineWidthChanged(int width);
@@ -334,6 +356,8 @@ public slots:
 	bool isGeographicLocation2Displayed() const {return flagShowGeographicLocation2;}
 	bool isCustomAzimuth1Displayed() const {return flagShowCustomAzimuth1;}
 	bool isCustomAzimuth2Displayed() const {return flagShowCustomAzimuth2;}
+	bool isCustomAltitude1Displayed() const {return flagShowCustomAltitude1;}
+	bool isCustomAltitude2Displayed() const {return flagShowCustomAltitude2;}
 	bool isCustomDeclination1Displayed() const {return flagShowCustomDeclination1;}
 	bool isCustomDeclination2Displayed() const {return flagShowCustomDeclination2;}
 
@@ -376,6 +400,16 @@ public slots:
 	void setCustomAzimuth2Label(QString label);
 	QString getCustomAzimuth1Label() const {return customAzimuth1Line->getLabel();}
 	QString getCustomAzimuth2Label() const {return customAzimuth2Line->getLabel();}
+	void showCustomAltitude1(bool b);
+	void showCustomAltitude2(bool b);
+	void setCustomAltitude1(double alt);
+	double getCustomAltitude1() const { return customAltitude1Line->getDefiningAngle(); }
+	void setCustomAltitude2(double alt);
+	double getCustomAltitude2() const { return customAltitude2Line->getDefiningAngle(); }
+	void setCustomAltitude1Label(QString label);
+	void setCustomAltitude2Label(QString label);
+	QString getCustomAltitude1Label() const {return customAltitude1Line->getLabel();}
+	QString getCustomAltitude2Label() const {return customAltitude2Line->getLabel();}
 	void showCustomDeclination1(bool b);
 	void showCustomDeclination2(bool b);
 	void setCustomDeclination1(double dec);
@@ -414,6 +448,8 @@ public slots:
 	Vec3f getGeographicLocation2Color()     const {return geographicLocation2Color;}
 	Vec3f getCustomAzimuth1Color()          const {return customAzimuth1Color;}
 	Vec3f getCustomAzimuth2Color()          const {return customAzimuth2Color;}
+	Vec3f getCustomAltitude1Color()         const {return customAltitude1Color;}
+	Vec3f getCustomAltitude2Color()         const {return customAltitude2Color;}
 	Vec3f getCustomDeclination1Color()      const {return customDeclination1Color;}
 	Vec3f getCustomDeclination2Color()      const {return customDeclination2Color;}
 	void setEquinoxColor(Vec3f color);
@@ -434,6 +470,8 @@ public slots:
 	void setGeographicLocation2Color(Vec3f color);
 	void setCustomAzimuth1Color(Vec3f color);
 	void setCustomAzimuth2Color(Vec3f color);
+	void setCustomAltitude1Color(Vec3f color);
+	void setCustomAltitude2Color(Vec3f color);
 	void setCustomDeclination1Color(Vec3f color);
 	void setCustomDeclination2Color(Vec3f color);
 
@@ -468,6 +506,8 @@ private:
 	Vec3f geographicLocation2Color;
 	Vec3f customAzimuth1Color;
 	Vec3f customAzimuth2Color;
+	Vec3f customAltitude1Color;
+	Vec3f customAltitude2Color;
 	Vec3f customDeclination1Color;
 	Vec3f customDeclination2Color;
 
@@ -493,6 +533,8 @@ private:
 	double geographicLocation2Latitude;
 	bool flagShowCustomAzimuth1;
 	bool flagShowCustomAzimuth2;
+	bool flagShowCustomAltitude1;
+	bool flagShowCustomAltitude2;
 	bool flagShowCustomDeclination1;
 	bool flagShowCustomDeclination2;
 	double lastJDE; // cache last-time-computed to every 10 days or so?
@@ -524,6 +566,8 @@ private:
 	ArchaeoLine * geographicLocation2Line;
 	ArchaeoLine * customAzimuth1Line;
 	ArchaeoLine * customAzimuth2Line;
+	ArchaeoLine * customAltitude1Line;
+	ArchaeoLine * customAltitude2Line;
 	ArchaeoLine * customDeclination1Line;
 	ArchaeoLine * customDeclination2Line;
 
