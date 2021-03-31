@@ -294,6 +294,15 @@ void StelDialog::connectStringProperty(QComboBox *comboBox, const QString &propN
 	new QComboBoxStelStringPropertyConnectionHelper(prop,comboBox);
 }
 
+void StelDialog::connectStringProperty(QLineEdit *lineEdit, const QString &propName)
+{
+	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propName);
+	Q_ASSERT_X(prop,"StelDialog", "StelProperty does not exist");
+
+	//use a proxy for the connection
+	new QLineEditStelPropertyConnectionHelper(prop,lineEdit);
+}
+
 void StelDialog::connectBoolProperty(QAbstractButton *checkBox, const QString &propName)
 {
 	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propName);

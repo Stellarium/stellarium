@@ -141,46 +141,29 @@ void ArchaeoLinesDialog::createDialogContent()
 	connectDoubleProperty(ui->geographicLocation1LatitudeDoubleSpinBox,  "ArchaeoLines.geographicLocation1Latitude");
 	connectDoubleProperty(ui->geographicLocation2LongitudeDoubleSpinBox, "ArchaeoLines.geographicLocation2Longitude");
 	connectDoubleProperty(ui->geographicLocation2LatitudeDoubleSpinBox,  "ArchaeoLines.geographicLocation2Latitude");
-	ui->geographicLocation1LineEdit->setText(al->getLineLabel(ArchaeoLine::GeographicLocation1));
-	ui->geographicLocation2LineEdit->setText(al->getLineLabel(ArchaeoLine::GeographicLocation2));
-	connect(ui->geographicLocation1LineEdit, SIGNAL(textChanged(QString)), al, SLOT(setGeographicLocation1Label(QString)));
-	connect(ui->geographicLocation2LineEdit, SIGNAL(textChanged(QString)), al, SLOT(setGeographicLocation2Label(QString)));
-	connect(al, SIGNAL(geographicLocation1LabelChanged(QString)), ui->geographicLocation1LineEdit, SLOT(setText(QString)));
-	connect(al, SIGNAL(geographicLocation2LabelChanged(QString)), ui->geographicLocation2LineEdit, SLOT(setText(QString)));
+	connectStringProperty(ui->geographicLocation1LineEdit,               "ArchaeoLines.geographicLocation1Label");
+	connectStringProperty(ui->geographicLocation2LineEdit,               "ArchaeoLines.geographicLocation2Label");
 
 	connectBoolProperty(ui->customAzimuth1CheckBox,        "ArchaeoLines.flagShowCustomAzimuth1");
 	connectBoolProperty(ui->customAzimuth2CheckBox,        "ArchaeoLines.flagShowCustomAzimuth2");
 	connectDoubleProperty(ui->customAzimuth1DoubleSpinBox, "ArchaeoLines.customAzimuth1");
 	connectDoubleProperty(ui->customAzimuth2DoubleSpinBox, "ArchaeoLines.customAzimuth2");
-	ui->customAzimuth1LineEdit->setText(al->getLineLabel(ArchaeoLine::CustomAzimuth1));
-	ui->customAzimuth2LineEdit->setText(al->getLineLabel(ArchaeoLine::CustomAzimuth2));
-	connect(ui->customAzimuth1LineEdit, SIGNAL(textChanged(QString)), al, SLOT(setCustomAzimuth1Label(QString)));
-	connect(ui->customAzimuth2LineEdit, SIGNAL(textChanged(QString)), al, SLOT(setCustomAzimuth2Label(QString)));
+	connectStringProperty(ui->customAzimuth1LineEdit,      "ArchaeoLines.customAzimuth1Label");
+	connectStringProperty(ui->customAzimuth2LineEdit,      "ArchaeoLines.customAzimuth2Label");
 
 	connectBoolProperty(ui->customAltitude1CheckBox,        "ArchaeoLines.flagShowCustomAltitude1");
 	connectBoolProperty(ui->customAltitude2CheckBox,        "ArchaeoLines.flagShowCustomAltitude2");
 	connectDoubleProperty(ui->customAltitude1DoubleSpinBox, "ArchaeoLines.customAltitude1");
 	connectDoubleProperty(ui->customAltitude2DoubleSpinBox, "ArchaeoLines.customAltitude2");
-	ui->customAltitude1LineEdit->setText(al->getLineLabel(ArchaeoLine::CustomAltitude1));
-	ui->customAltitude2LineEdit->setText(al->getLineLabel(ArchaeoLine::CustomAltitude2));
-	connect(ui->customAltitude1LineEdit, SIGNAL(textChanged(QString)), al, SLOT(setCustomAltitude1Label(QString)));
-	connect(ui->customAltitude2LineEdit, SIGNAL(textChanged(QString)), al, SLOT(setCustomAltitude2Label(QString)));
+	connectStringProperty(ui->customAltitude1LineEdit,      "ArchaeoLines.customAltitude1Label");
+	connectStringProperty(ui->customAltitude2LineEdit,      "ArchaeoLines.customAltitude2Label");
 
 	connectBoolProperty(ui->customDeclination1CheckBox,        "ArchaeoLines.flagShowCustomDeclination1");
 	connectBoolProperty(ui->customDeclination2CheckBox,        "ArchaeoLines.flagShowCustomDeclination2");
 	connectDoubleProperty(ui->customDeclination1DoubleSpinBox, "ArchaeoLines.customDeclination1");
 	connectDoubleProperty(ui->customDeclination2DoubleSpinBox, "ArchaeoLines.customDeclination2");
-	ui->customDeclination1LineEdit->setText(al->getLineLabel(ArchaeoLine::CustomDeclination1));
-	ui->customDeclination2LineEdit->setText(al->getLineLabel(ArchaeoLine::CustomDeclination2));
-	connect(ui->customDeclination1LineEdit, SIGNAL(textChanged(QString)), al, SLOT(setCustomDeclination1Label(QString)));
-	connect(ui->customDeclination2LineEdit, SIGNAL(textChanged(QString)), al, SLOT(setCustomDeclination2Label(QString)));
-
-	connect(al, SIGNAL(customAzimuth1LabelChanged(QString)), ui->customAzimuth1LineEdit, SLOT(setText(QString)));
-	connect(al, SIGNAL(customAzimuth2LabelChanged(QString)), ui->customAzimuth2LineEdit, SLOT(setText(QString)));
-	connect(al, SIGNAL(customAltitude1LabelChanged(QString)), ui->customAltitude1LineEdit, SLOT(setText(QString)));
-	connect(al, SIGNAL(customAltitude2LabelChanged(QString)), ui->customAltitude2LineEdit, SLOT(setText(QString)));
-	connect(al, SIGNAL(customDeclination1LabelChanged(QString)), ui->customDeclination1LineEdit, SLOT(setText(QString)));
-	connect(al, SIGNAL(customDeclination2LabelChanged(QString)), ui->customDeclination2LineEdit, SLOT(setText(QString)));
+	connectStringProperty(ui->customDeclination1LineEdit,      "ArchaeoLines.customDeclination1Label");
+	connectStringProperty(ui->customDeclination2LineEdit,      "ArchaeoLines.customDeclination2Label");
 
 	connectColorButton(ui->equinoxColorToolButton,                 "ArchaeoLines.equinoxColor",                 "ArchaeoLines/color_equinox");
 	connectColorButton(ui->solsticesColorToolButton,               "ArchaeoLines.solsticesColor",               "ArchaeoLines/color_solstices");
@@ -205,14 +188,14 @@ void ArchaeoLinesDialog::createDialogContent()
 	connectColorButton(ui->customDeclination1ColorToolButton,      "ArchaeoLines.customDeclination1Color",      "ArchaeoLines/color_custom_declination_1");
 	connectColorButton(ui->customDeclination2ColorToolButton,      "ArchaeoLines.customDeclination2Color",      "ArchaeoLines/color_custom_declination_2");
 
-	connect(ui->customAzimuth1PushButton, SIGNAL(clicked()), this, SLOT(assignCustomAzimuth1FromSelection()));
-	connect(ui->customAzimuth2PushButton, SIGNAL(clicked()), this, SLOT(assignCustomAzimuth2FromSelection()));
-	connect(ui->customAltitude1PushButton, SIGNAL(clicked()), this, SLOT(assignCustomAltitude1FromSelection()));
-	connect(ui->customAltitude2PushButton, SIGNAL(clicked()), this, SLOT(assignCustomAltitude2FromSelection()));
+	connect(ui->customAzimuth1PushButton,     SIGNAL(clicked()), this, SLOT(assignCustomAzimuth1FromSelection()));
+	connect(ui->customAzimuth2PushButton,     SIGNAL(clicked()), this, SLOT(assignCustomAzimuth2FromSelection()));
+	connect(ui->customAltitude1PushButton,    SIGNAL(clicked()), this, SLOT(assignCustomAltitude1FromSelection()));
+	connect(ui->customAltitude2PushButton,    SIGNAL(clicked()), this, SLOT(assignCustomAltitude2FromSelection()));
 	connect(ui->customDeclination1PushButton, SIGNAL(clicked()), this, SLOT(assignCustomDeclination1FromSelection()));
 	connect(ui->customDeclination2PushButton, SIGNAL(clicked()), this, SLOT(assignCustomDeclination2FromSelection()));
 
-	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(resetArchaeoLinesSettings()));
+	connect(ui->restoreDefaultsButton,   SIGNAL(clicked()), this, SLOT(resetArchaeoLinesSettings()));
 	connect(ui->restoreDefaultsButtonCL, SIGNAL(clicked()), this, SLOT(resetArchaeoLinesSettings()));
 
 	setAboutHtml();

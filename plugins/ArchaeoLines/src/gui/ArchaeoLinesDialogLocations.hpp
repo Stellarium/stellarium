@@ -33,7 +33,7 @@
 class Ui_archaeoLinesDialogLocations;
 class ArchaeoLines;
 
-//! Auxiliary window of the ArchaeoLines plug-in.
+//! Auxiliary window of the ArchaeoLines plug-in. Most of this has been borrowed from the LocationDialog.
 //! @ingroup archaeoLines
 class ArchaeoLinesDialogLocations : public StelDialog
 {
