@@ -79,13 +79,6 @@ void ArchaeoLinesDialogLocations::createDialogContent()
 
 	connect(ui->citySearchLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
 	connect(ui->citiesListView, SIGNAL(clicked(const QModelIndex&)), this, SLOT(setLocationFromList(const QModelIndex&)));
-
-	// TODO: These can probably be deleted.
-	//connect(ui->setCustomLocationPushButton, SIGNAL(clicked()), this, SLOT(setLocationFromList()));
-	//connect(ui->cancelPushButton, SIGNAL(clicked()), this, SLOT(close()));
-	ui->setCustomLocationPushButton->hide();
-	ui->cancelPushButton->hide();
-
 }
 
 void ArchaeoLinesDialogLocations::setLocationFromList(const QModelIndex& index)

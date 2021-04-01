@@ -144,7 +144,7 @@ Earth~\citep{Abdali:1997} as
   q=\arctan \frac{\sin (\lambda_{T} - \lambda_O) } { \cos\varphi_O \tan\varphi_T - \sin\varphi_O \cos(\lambda_{T} - \lambda_O) }
 \end{equation}
 
-You can set \newFeature{v0.21.1} geographical coordinates and a name
+\noindent You can set \newFeature{v0.21.1} geographical coordinates and a name
 label directly, or select locations from Stellarium's location list by
 pressing the \button{Pick...} button.  You can search for locations in the
 list. When you click on a location, its data are taken as target.
@@ -155,11 +155,13 @@ list. When you click on a location, its data are taken as target.
 In addition, lines can be shown which indicate arbitrary azimuths (great circles through the zenith),
 altitudes, and declinations. \newFeature{v0.15.1, v0.21.1}  Note that these azimuths are always counted
 from north, regardless of the azimuth setting described in section
-\ref{sec:gui:configuration:tools}.
+\ref{sec:gui:configuration:tools}. These lines can be marked with a custom label.
 
-These lines can be marked with a custom label. When some celestial
-object is selected, you can take over its respective data and name by
-pressing the \guibutton[0.25]{2}{telescope_blk.png} button.
+When some celestial object is selected, you can take over its current
+respective data and name by pressing the
+\guibutton[0.225]{1.8}{telescope_blk.png} button, however the lines
+are \emph{not} linked to the selected objects, and changing angle
+values or time will make labels invalid.
 
 \subsection{Configuration Options}
 \label{sec:plugin:ArchaeoLines:configuration}

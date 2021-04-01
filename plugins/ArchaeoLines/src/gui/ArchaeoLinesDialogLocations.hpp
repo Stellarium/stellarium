@@ -54,7 +54,7 @@ protected:
 private:
 	Ui_archaeoLinesDialogLocations* ui;
 	ArchaeoLines* al;
-	int modalContext; //<! when set to 1 or 2, these represent the target custom locations to address in the plugin. Other values will not do anything but close the dialog.
+	int modalContext; //<! when set to 1 or 2, these represent the target custom locations to address in the plugin. Other values will not do anything.
 	QStringListModel* allModel;
 	QStringListModel* pickedModel;
 	QSortFilterProxyModel *proxyModel;

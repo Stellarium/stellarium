@@ -287,22 +287,7 @@
        </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <widget class="QPushButton" name="setCustomLocationPushButton">
-          <property name="text">
-           <string>Set</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="cancelPushButton">
-          <property name="text">
-           <string>Cancel</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <layout class="QHBoxLayout" name="horizontalLayout"/>
       </item>
      </layout>
     </widget>
@@ -319,8 +304,6 @@
  </customwidgets>
  <tabstops>
   <tabstop>citySearchLineEdit</tabstop>
-  <tabstop>setCustomLocationPushButton</tabstop>
-  <tabstop>cancelPushButton</tabstop>
  </tabstops>
  <resources/>
  <connections/>
