@@ -417,9 +417,7 @@ void AngleSpinBox::formatText(void)
 			}
 
 			// fix when we have tiny tiny tiny values.
-			if (s < ::pow(10.0, -1 * (decimalPlaces+1)))
-				s= 0.0;
-			else if (s < 0.0 && 0.0 - ::pow(10.0, -1 * (decimalPlaces+1))) // FIXME?
+			if (abs(s) < ::pow(10.0, -1 * (decimalPlaces+1)))
 				s= 0.0;
 
 			QString signInd = positivePrefix(currentPrefixType);
@@ -463,9 +461,7 @@ void AngleSpinBox::formatText(void)
 			}
 
 			// fix when we have tiny tiny tiny values.
-			if (s < ::pow(10.0, -1 * (decimalPlaces+1)))
-				s= 0.0;
-			else if ((s < 0.0) && (0.0 - ::pow(10.0, -1 * (decimalPlaces+1)))) // FIXME?
+			if (abs(s) < ::pow(10.0, -1 * (decimalPlaces+1)))
 				s= 0.0;
 
 			if (angleSpinBoxFormat == HMSLetters)
