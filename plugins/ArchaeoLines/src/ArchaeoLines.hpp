@@ -162,8 +162,8 @@ private:
 
 //! Main class of the ArchaeoLines plug-in.
 //! Provides an on-screen visualisation of several small circles relevant mainly to archaeoastronomy.
-//! In addition, a few azimuth lines can be shown.
-//! GZ 2014-12, updated 2016-06, 2018-10.
+//! In addition, a few azimuth, altitude and declination lines can be shown.
+//! GZ 2014-12, updated 2016-06, 2018-10, 2021-04.
 class ArchaeoLines : public StelModule
 {
 	Q_OBJECT
@@ -188,34 +188,35 @@ class ArchaeoLines : public StelModule
 	Q_PROPERTY(double geographicLocation1Latitude      READ getGeographicLocation1Latitude     WRITE setGeographicLocation1Latitude  NOTIFY geographicLocation1Changed)
 	Q_PROPERTY(double geographicLocation2Longitude     READ getGeographicLocation2Longitude    WRITE setGeographicLocation2Longitude NOTIFY geographicLocation2Changed)
 	Q_PROPERTY(double geographicLocation2Latitude      READ getGeographicLocation2Latitude     WRITE setGeographicLocation2Latitude  NOTIFY geographicLocation2Changed)
+
 	Q_PROPERTY(bool flagShowCustomAzimuth1             READ isCustomAzimuth1Displayed          WRITE showCustomAzimuth1              NOTIFY showCustomAzimuth1Changed)
 	Q_PROPERTY(bool flagShowCustomAzimuth2             READ isCustomAzimuth2Displayed          WRITE showCustomAzimuth2              NOTIFY showCustomAzimuth2Changed)
 	// Note: following 2 are only "forwarding properties", no proper variables!
-	Q_PROPERTY(double customAzimuth1 READ getCustomAzimuth1 WRITE setCustomAzimuth1 NOTIFY customAzimuth1Changed)
-	Q_PROPERTY(double customAzimuth2 READ getCustomAzimuth2 WRITE setCustomAzimuth2 NOTIFY customAzimuth2Changed)
+	Q_PROPERTY(double customAzimuth1                   READ getCustomAzimuth1                  WRITE setCustomAzimuth1               NOTIFY customAzimuth1Changed)
+	Q_PROPERTY(double customAzimuth2                   READ getCustomAzimuth2                  WRITE setCustomAzimuth2               NOTIFY customAzimuth2Changed)
 
 	Q_PROPERTY(bool flagShowCustomAltitude1            READ isCustomAltitude1Displayed         WRITE showCustomAltitude1             NOTIFY showCustomAltitude1Changed)
 	Q_PROPERTY(bool flagShowCustomAltitude2            READ isCustomAltitude2Displayed         WRITE showCustomAltitude2             NOTIFY showCustomAltitude2Changed)
 	// Note: following 2 are only "forwarding properties", no proper variables!
-	Q_PROPERTY(double customAltitude1 READ getCustomAltitude1 WRITE setCustomAltitude1 NOTIFY customAltitude1Changed)
-	Q_PROPERTY(double customAltitude2 READ getCustomAltitude2 WRITE setCustomAltitude2 NOTIFY customAltitude2Changed)
+	Q_PROPERTY(double customAltitude1                  READ getCustomAltitude1                 WRITE setCustomAltitude1              NOTIFY customAltitude1Changed)
+	Q_PROPERTY(double customAltitude2                  READ getCustomAltitude2                 WRITE setCustomAltitude2              NOTIFY customAltitude2Changed)
 
-	Q_PROPERTY(bool flagShowCustomDeclination1 READ   isCustomDeclination1Displayed WRITE  showCustomDeclination1 NOTIFY showCustomDeclination1Changed)
-	Q_PROPERTY(bool flagShowCustomDeclination2 READ   isCustomDeclination2Displayed WRITE  showCustomDeclination2 NOTIFY showCustomDeclination2Changed)
-	// Note: following 4 are only "forwarding properties", no proper variables!
-	Q_PROPERTY(double customDeclination1 READ getCustomDeclination1 WRITE setCustomDeclination1 NOTIFY customDeclination1Changed)
-	Q_PROPERTY(double customDeclination2 READ getCustomDeclination2 WRITE setCustomDeclination2 NOTIFY customDeclination2Changed)
+	Q_PROPERTY(bool flagShowCustomDeclination1         READ   isCustomDeclination1Displayed    WRITE  showCustomDeclination1         NOTIFY showCustomDeclination1Changed)
+	Q_PROPERTY(bool flagShowCustomDeclination2         READ   isCustomDeclination2Displayed    WRITE  showCustomDeclination2         NOTIFY showCustomDeclination2Changed)
+	// Note: following 2 are only "forwarding properties", no proper variables!
+	Q_PROPERTY(double customDeclination1               READ getCustomDeclination1              WRITE setCustomDeclination1           NOTIFY customDeclination1Changed)
+	Q_PROPERTY(double customDeclination2               READ getCustomDeclination2              WRITE setCustomDeclination2           NOTIFY customDeclination2Changed)
 
 
 	// More "forwarding properties" for geo locations and custom azimuths/declination labels.
-	Q_PROPERTY(QString geographicLocation1Label READ getGeographicLocation1Label WRITE setGeographicLocation1Label NOTIFY geographicLocation1LabelChanged)
-	Q_PROPERTY(QString geographicLocation2Label READ getGeographicLocation2Label WRITE setGeographicLocation2Label NOTIFY geographicLocation2LabelChanged)
-	Q_PROPERTY(QString customAzimuth1Label      READ getCustomAzimuth1Label      WRITE setCustomAzimuth1Label      NOTIFY customAzimuth1LabelChanged)
-	Q_PROPERTY(QString customAzimuth2Label      READ getCustomAzimuth2Label      WRITE setCustomAzimuth2Label      NOTIFY customAzimuth2LabelChanged)
-	Q_PROPERTY(QString customAltitude1Label     READ getCustomAltitude1Label     WRITE setCustomAltitude1Label     NOTIFY customAltitude1LabelChanged)
-	Q_PROPERTY(QString customAltitude2Label     READ getCustomAltitude2Label     WRITE setCustomAltitude2Label     NOTIFY customAltitude2LabelChanged)
-	Q_PROPERTY(QString customDeclination1Label  READ getCustomDeclination1Label  WRITE setCustomDeclination1Label  NOTIFY customDeclination1LabelChanged)
-	Q_PROPERTY(QString customDeclination2Label  READ getCustomDeclination2Label  WRITE setCustomDeclination2Label  NOTIFY customDeclination2LabelChanged)
+	Q_PROPERTY(QString geographicLocation1Label   READ getGeographicLocation1Label     WRITE setGeographicLocation1Label     NOTIFY geographicLocation1LabelChanged)
+	Q_PROPERTY(QString geographicLocation2Label   READ getGeographicLocation2Label     WRITE setGeographicLocation2Label     NOTIFY geographicLocation2LabelChanged)
+	Q_PROPERTY(QString customAzimuth1Label        READ getCustomAzimuth1Label          WRITE setCustomAzimuth1Label          NOTIFY customAzimuth1LabelChanged)
+	Q_PROPERTY(QString customAzimuth2Label        READ getCustomAzimuth2Label          WRITE setCustomAzimuth2Label          NOTIFY customAzimuth2LabelChanged)
+	Q_PROPERTY(QString customAltitude1Label       READ getCustomAltitude1Label         WRITE setCustomAltitude1Label         NOTIFY customAltitude1LabelChanged)
+	Q_PROPERTY(QString customAltitude2Label       READ getCustomAltitude2Label         WRITE setCustomAltitude2Label         NOTIFY customAltitude2LabelChanged)
+	Q_PROPERTY(QString customDeclination1Label    READ getCustomDeclination1Label      WRITE setCustomDeclination1Label      NOTIFY customDeclination1LabelChanged)
+	Q_PROPERTY(QString customDeclination2Label    READ getCustomDeclination2Label      WRITE setCustomDeclination2Label      NOTIFY customDeclination2LabelChanged)
 
 	// Properties to simplify color setting.
 	Q_PROPERTY(Vec3f equinoxColor 		      READ getEquinoxColor                 WRITE setEquinoxColor                 NOTIFY equinoxColorChanged                 )
