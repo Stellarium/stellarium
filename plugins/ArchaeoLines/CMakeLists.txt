@@ -9,7 +9,8 @@
 #0.1.9 Refactor color settings, use properties more sensible.
 #0.1.10 Refactor GUI
 #0.1.11 Fix crossquarter declination
-SET(ARCHAEOLINES_VERSION "0.1.11")
+# Further: Use program version number. (Static plugin, why bother?)
+SET(ARCHAEOLINES_VERSION "${VERSION}")
 ADD_DEFINITIONS(-DARCHAEOLINES_PLUGIN_VERSION="${ARCHAEOLINES_VERSION}")
 ADD_DEFINITIONS(-DARCHAEOLINES_PLUGIN_LICENSE="GNU GPLv2 or later")
 
