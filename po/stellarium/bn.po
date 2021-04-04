@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-03-28 10:19+0700\n"
+"POT-Creation-Date: 2021-04-02 19:21+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Tanmoy Saha <t4saha@gmail.com>, 2021\n"
 "Language-Team: Bengali (https://www.transifex.com/stellarium/teams/80998/bn/)\n"
@@ -309,7 +309,7 @@ msgstr "আগমন"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/GridLinesMgr.cpp:1449 src/core/modules/Planet.cpp:598
-#: src/core/modules/Planet.cpp:892 src/gui/AstroCalcDialog.cpp:6165
+#: src/core/modules/Planet.cpp:892 src/gui/AstroCalcDialog.cpp:6173
 #: plugins/Satellites/src/Satellite.cpp:326
 #: plugins/Satellites/src/Satellite.cpp:388
 #: plugins/MeteorShowers/src/MeteorShower.cpp:546
@@ -652,7 +652,7 @@ msgstr "আলোক দূষনের মান পরিবর্তন ক�
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:230
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:130
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:455
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:148
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:213
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:162
 msgid "Author"
 msgstr "প্রস্তুতকারক"
@@ -739,7 +739,7 @@ msgstr "ব্যাস"
 #: src/core/modules/NomenclatureItem.cpp:220 src/core/modules/Planet.cpp:554
 #: src/core/modules/Planet.cpp:579 src/core/modules/Planet.cpp:677
 #: src/core/modules/Comet.cpp:164 src/core/modules/Comet.cpp:174
-#: src/gui/StelGuiItems.cpp:805 src/gui/AstroCalcDialog.cpp:6094
+#: src/gui/StelGuiItems.cpp:805 src/gui/AstroCalcDialog.cpp:6102
 #: plugins/Satellites/src/Satellite.cpp:322
 #: plugins/Satellites/src/Satellite.cpp:381
 msgctxt "distance"
@@ -1980,7 +1980,7 @@ msgid "object of unknown nature"
 msgstr "নির্ধারণ করা যায় নি"
 
 #: src/core/modules/NebulaMgr.cpp:474 src/gui/AstroCalcDialog.cpp:952
-#: src/gui/AstroCalcDialog.cpp:5147
+#: src/gui/AstroCalcDialog.cpp:5155
 msgid "Deep-sky objects"
 msgstr "মহাজাগতিক জ্যোতিষ্ক"
 
@@ -1988,7 +1988,7 @@ msgstr "মহাজাগতিক জ্যোতিষ্ক"
 msgid "Toggle DSO type filter"
 msgstr "পছন্দসই মহাজাগতিক জ্যোতিষ্ক"
 
-#: src/core/modules/NebulaMgr.cpp:1377 src/gui/StelDialog.cpp:306
+#: src/core/modules/NebulaMgr.cpp:1377 src/gui/StelDialog.cpp:324
 #: src/StelMainView.cpp:954
 msgid "Attention!"
 msgstr "সতর্কতা !"
@@ -2049,8 +2049,8 @@ msgstr "হয়ে"
 #: src/core/modules/Planet.cpp:552 src/gui/AstroCalcDialog.cpp:870
 #: src/gui/AstroCalcDialog.cpp:1140 src/gui/AstroCalcDialog.cpp:1513
 #: src/gui/AstroCalcDialog.cpp:1561 src/gui/AstroCalcDialog.cpp:3081
-#: src/gui/AstroCalcDialog.cpp:6138 src/gui/AstroCalcDialog.cpp:6203
-#: src/gui/AstroCalcDialog.cpp:6345 plugins/Exoplanets/src/Exoplanet.cpp:322
+#: src/gui/AstroCalcDialog.cpp:6146 src/gui/AstroCalcDialog.cpp:6211
+#: src/gui/AstroCalcDialog.cpp:6353 plugins/Exoplanets/src/Exoplanet.cpp:322
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
 msgctxt "distance, astronomical unit"
 msgid "AU"
@@ -2060,7 +2060,7 @@ msgstr "জ্যোঃ এঃ"
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #. TRANSLATORS: Unit of measure for distance - millions kilometers
 #: src/core/modules/Planet.cpp:568 src/core/modules/Planet.cpp:586
-#: src/core/modules/Comet.cpp:166 src/gui/AstroCalcDialog.cpp:6096
+#: src/core/modules/Comet.cpp:166 src/gui/AstroCalcDialog.cpp:6104
 msgctxt "distance"
 msgid "M km"
 msgstr "মিলিয়ন কিমি"
@@ -2114,14 +2114,14 @@ msgstr "কলার কৌণিক অবস্থান"
 msgid "Illuminated"
 msgstr "দৃশ্যমান অংশ"
 
-#: src/core/modules/Planet.cpp:738 src/gui/AstroCalcDialog.cpp:6204
-#: src/gui/AstroCalcDialog.cpp:6348 src/gui/AstroCalcDialog.cpp:6365
+#: src/core/modules/Planet.cpp:738 src/gui/AstroCalcDialog.cpp:6212
+#: src/gui/AstroCalcDialog.cpp:6356 src/gui/AstroCalcDialog.cpp:6373
 msgid "Angular distance"
 msgstr "কৌণিক দূরত্ব"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:756 src/core/modules/Planet.cpp:900
-#: src/core/modules/StarWrapper.cpp:306 src/gui/AstroCalcDialog.cpp:6176
+#: src/core/modules/StarWrapper.cpp:306 src/gui/AstroCalcDialog.cpp:6184
 msgctxt "duration"
 msgid "days"
 msgstr "দিন"
@@ -2304,7 +2304,7 @@ msgstr "লম্বন (Orthographic)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/modules/SolarSystem.cpp:296 src/gui/AstroCalcDialog.cpp:2455
-#: src/gui/AstroCalcDialog.cpp:5102 src/translations.h:63
+#: src/gui/AstroCalcDialog.cpp:5110 src/translations.h:63
 msgid "Planets"
 msgstr "গ্রহ"
 
@@ -3424,17 +3424,17 @@ msgstr "আপাত নাক্ষত্রিক সময়"
 
 #. TRANSLATORS: time of transit
 #: src/core/StelObject.cpp:612 src/gui/AstroCalcDialog.cpp:883
-#: src/gui/AstroCalcDialog.cpp:5214
+#: src/gui/AstroCalcDialog.cpp:5222
 msgctxt "celestial event; passage across a meridian"
 msgid "Transit"
 msgstr "মাঝ আকাশে"
 
-#: src/core/StelObject.cpp:613 src/gui/AstroCalcDialog.cpp:5213
+#: src/core/StelObject.cpp:613 src/gui/AstroCalcDialog.cpp:5221
 msgctxt "celestial event"
 msgid "Rise"
 msgstr "উদয়"
 
-#: src/core/StelObject.cpp:614 src/gui/AstroCalcDialog.cpp:5217
+#: src/core/StelObject.cpp:614 src/gui/AstroCalcDialog.cpp:5225
 msgctxt "celestial event"
 msgid "Set"
 msgstr "অস্ত"
@@ -4015,7 +4015,7 @@ msgstr "যোগাযোগ"
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:90
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:222
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:128
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:146
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:211
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:160
 msgid "Version"
 msgstr "সংস্করণ"
@@ -4038,7 +4038,7 @@ msgstr "সংস্করণ"
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:91
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:226
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:129
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:147
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:212
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:161
 msgid "License"
 msgstr "অনুমতিপত্র"
@@ -4607,10 +4607,12 @@ msgid ""
 "If the Stellarium planetarium was helpful for your research work, the "
 "following acknowledgment would be appreciated:"
 msgstr ""
+"স্টেলারিয়াম যদি আপনার গবেষণা সংক্রান্ত কাজের জন্য ব্যবহৃত ও সহায়ক হয়ে "
+"থাকে তবে নিম্নলিখিত অংশটি কৃতজ্ঞতাস্বীকার অংশে অবশ্যই যোগ করুন :"
 
 #: src/gui/HelpDialog.cpp:466
 msgid "This research has made use of the Stellarium planetarium"
-msgstr ""
+msgstr "এই গবেষণাটির জন্য স্টেলারিয়াম প্ল্যানেটারিয়ামটি ব্যবহার করা হয়েছে ।"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:469
@@ -4618,6 +4620,8 @@ msgid ""
 "Or you may {download the BibTeX file of the paper} to create another "
 "citation format."
 msgstr ""
+"কিংবা আপনি উপযুক্ত উদ্ধৃতি ফর্ম্যাট তৈরির জন্য {BibTeX ফাইলটি ডাউনলোড করতে "
+"পারেন} ।"
 
 #: src/gui/StelGui.cpp:229
 msgid "Windows"
@@ -4785,7 +4789,7 @@ msgstr "FPS"
 msgid "Frames per second"
 msgstr "ফ্রেম প্রতি সেকেন্ড"
 
-#: src/gui/StelDialog.cpp:306
+#: src/gui/StelDialog.cpp:324
 msgid "Are you sure? This will delete your customized data."
 msgstr ""
 "আপনি আপনার পছন্দসই বৈশিষ্ট্য ও তথ্যগুলি মুছে দিতে চলেছেন, আপনি কি এ ব্যাপারে"
@@ -5274,14 +5278,14 @@ msgid "Azimuth"
 msgstr "দিগংশ"
 
 #: src/gui/SearchDialog.cpp:321
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:623
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:629
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:749
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:795
 msgid "Longitude"
 msgstr "দ্রাঘিমাংশ"
 
 #: src/gui/SearchDialog.cpp:324
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:624
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:630
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:769
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:794
 msgid "Latitude"
 msgstr "অক্ষাংশ"
 
@@ -5379,7 +5383,7 @@ msgid "Local Time"
 msgstr "স্থানীয় সময়"
 
 #: src/gui/AstroCalcDialog.cpp:752 src/gui/AstroCalcDialog.cpp:2676
-#: src/gui/AstroCalcDialog.cpp:3426 src/gui/AstroCalcDialog.cpp:6476
+#: src/gui/AstroCalcDialog.cpp:3426 src/gui/AstroCalcDialog.cpp:6484
 #: src/gui/BookmarksDialog.cpp:180
 msgid "Unnamed star"
 msgstr "নামহীন নক্ষত্র"
@@ -5391,7 +5395,7 @@ msgstr "এখন প্রায় %1"
 
 #. TRANSLATORS: name of object
 #: src/gui/AstroCalcDialog.cpp:830 src/gui/AstroCalcDialog.cpp:1492
-#: src/gui/AstroCalcDialog.cpp:1881 src/gui/AstroCalcDialog.cpp:5202
+#: src/gui/AstroCalcDialog.cpp:1881 src/gui/AstroCalcDialog.cpp:5210
 #: src/ui_configurationDialog.h:1739
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:532
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
@@ -5411,13 +5415,13 @@ msgid "Dec (J2000)"
 msgstr "বিষুবলম্ব (J2000 অনুযায়ী):"
 
 #. TRANSLATORS: opacity
-#: src/gui/AstroCalcDialog.cpp:848 src/gui/AstroCalcDialog.cpp:5211
+#: src/gui/AstroCalcDialog.cpp:848 src/gui/AstroCalcDialog.cpp:5219
 msgid "Opac."
 msgstr "স্পষ্টতা"
 
 #. TRANSLATORS: magnitude
 #: src/gui/AstroCalcDialog.cpp:853 src/gui/AstroCalcDialog.cpp:1509
-#: src/gui/AstroCalcDialog.cpp:1886 src/gui/AstroCalcDialog.cpp:5206
+#: src/gui/AstroCalcDialog.cpp:1886 src/gui/AstroCalcDialog.cpp:5214
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
 msgid "Mag."
 msgstr "ঔজ্জ্বল্য"
@@ -5429,7 +5433,7 @@ msgstr "কৌ আকার"
 
 #. TRANSLATORS: separation, arc-seconds
 #. TRANSLATORS: separation
-#: src/gui/AstroCalcDialog.cpp:860 src/gui/AstroCalcDialog.cpp:5221
+#: src/gui/AstroCalcDialog.cpp:860 src/gui/AstroCalcDialog.cpp:5229
 msgid "Sep."
 msgstr "চ্যুতি"
 
@@ -5464,7 +5468,7 @@ msgid "S.B."
 msgstr "পৃষ্ঠঃ উজ্জ্বঃ"
 
 #. TRANSLATORS: elevation
-#: src/gui/AstroCalcDialog.cpp:885 src/gui/AstroCalcDialog.cpp:5216
+#: src/gui/AstroCalcDialog.cpp:885 src/gui/AstroCalcDialog.cpp:5224
 msgid "Elev."
 msgstr "উচ্চতা"
 
@@ -5523,15 +5527,15 @@ msgid "star with high proper motion"
 msgstr "বেশি সরণ যুক্ত নক্ষত্র"
 
 #: src/gui/AstroCalcDialog.cpp:1355 src/gui/AstroCalcDialog.cpp:1803
-#: src/gui/AstroCalcDialog.cpp:2069 src/gui/AstroCalcDialog.cpp:3892
-#: src/gui/AstroCalcDialog.cpp:5978
+#: src/gui/AstroCalcDialog.cpp:2069 src/gui/AstroCalcDialog.cpp:3900
+#: src/gui/AstroCalcDialog.cpp:5986
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1431
 msgid "Microsoft Excel Open XML Spreadsheet"
 msgstr "Microsoft Excel Open XML Spreadsheet"
 
 #: src/gui/AstroCalcDialog.cpp:1357 src/gui/AstroCalcDialog.cpp:1805
-#: src/gui/AstroCalcDialog.cpp:2071 src/gui/AstroCalcDialog.cpp:3894
-#: src/gui/AstroCalcDialog.cpp:5980
+#: src/gui/AstroCalcDialog.cpp:2071 src/gui/AstroCalcDialog.cpp:3902
+#: src/gui/AstroCalcDialog.cpp:5988
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1433
 msgid "CSV (Comma delimited)"
 msgstr "CSV (কমা দ্বারা বিভাজিত)"
@@ -5739,51 +5743,51 @@ msgid "Solar system"
 msgstr "সৌরজগত"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2455 src/gui/AstroCalcDialog.cpp:5108
+#: src/gui/AstroCalcDialog.cpp:2455 src/gui/AstroCalcDialog.cpp:5116
 #: src/translations.h:67
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
 msgid "Asteroids"
 msgstr "গ্রহাণু"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2455 src/gui/AstroCalcDialog.cpp:5110
+#: src/gui/AstroCalcDialog.cpp:2455 src/gui/AstroCalcDialog.cpp:5118
 #: src/translations.h:71
 msgid "Plutinos"
 msgstr "প্লুটো সদৃশ"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2455 src/gui/AstroCalcDialog.cpp:5109
+#: src/gui/AstroCalcDialog.cpp:2455 src/gui/AstroCalcDialog.cpp:5117
 #: src/translations.h:65
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Comets"
 msgstr "ধূমকেতু"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2456 src/gui/AstroCalcDialog.cpp:5111
+#: src/gui/AstroCalcDialog.cpp:2456 src/gui/AstroCalcDialog.cpp:5119
 #: src/translations.h:73
 msgid "Dwarf planets"
 msgstr "বামন গ্রহ"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2456 src/gui/AstroCalcDialog.cpp:5112
+#: src/gui/AstroCalcDialog.cpp:2456 src/gui/AstroCalcDialog.cpp:5120
 #: src/translations.h:75
 msgid "Cubewanos"
 msgstr "কিউবিয়ানো বা কাইপার বেল্টের মূল বস্তু"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2456 src/gui/AstroCalcDialog.cpp:5113
+#: src/gui/AstroCalcDialog.cpp:2456 src/gui/AstroCalcDialog.cpp:5121
 #: src/translations.h:77
 msgid "Scattered disc objects"
 msgstr "কাইপার বেল্ট পরবর্তী বিক্ষিপ্ত বলয়ে থাকা বস্তু"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2456 src/gui/AstroCalcDialog.cpp:5114
+#: src/gui/AstroCalcDialog.cpp:2456 src/gui/AstroCalcDialog.cpp:5122
 #: src/translations.h:79
 msgid "Oort cloud objects"
 msgstr "উর্ট ক্লাউডে থাকা বস্তু"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2456 src/gui/AstroCalcDialog.cpp:5115
+#: src/gui/AstroCalcDialog.cpp:2456 src/gui/AstroCalcDialog.cpp:5123
 #: src/translations.h:81
 msgid "Sednoids"
 msgstr "সেডনা সদৃশ"
@@ -5819,7 +5823,7 @@ msgid "Bright nebulae (<%1 mag)"
 msgstr "উজ্জ্বল নীহারিকা (<%1 mag)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2459 src/gui/AstroCalcDialog.cpp:5105
+#: src/gui/AstroCalcDialog.cpp:2459 src/gui/AstroCalcDialog.cpp:5113
 #: src/translations.h:318 src/ui_viewDialog.h:3345
 #: src/ui_dsoColorsDialog.h:659
 msgid "Dark nebulae"
@@ -5831,19 +5835,19 @@ msgid "Bright galaxies (<%1 mag)"
 msgstr "উজ্জ্বল নক্ষত্রলোক (<%1 mag)"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2460 src/gui/AstroCalcDialog.cpp:5120
+#: src/gui/AstroCalcDialog.cpp:2460 src/gui/AstroCalcDialog.cpp:5128
 #: src/translations.h:368 src/ui_dsoColorsDialog.h:695
 msgid "Symbiotic stars"
 msgstr "মিথোজীবি নক্ষত্র"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2460 src/gui/AstroCalcDialog.cpp:5121
+#: src/gui/AstroCalcDialog.cpp:2460 src/gui/AstroCalcDialog.cpp:5129
 #: src/translations.h:370 src/ui_dsoColorsDialog.h:674
 msgid "Emission-line stars"
 msgstr "নির্দিষ্ট-তরঙ্গ নক্ষত্র"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2460 src/gui/AstroCalcDialog.cpp:5126
+#: src/gui/AstroCalcDialog.cpp:2460 src/gui/AstroCalcDialog.cpp:5134
 #: src/translations.h:83
 msgid "Interstellar objects"
 msgstr "আন্তঃনাক্ষত্রিক জ্যোতিষ্ক"
@@ -5853,13 +5857,17 @@ msgid "Planets and Sun"
 msgstr "সূর্য ও অন্যান্য গ্রহ"
 
 #: src/gui/AstroCalcDialog.cpp:2461
-msgid "Sun, planets and moons"
-msgstr "সূর্য, গ্রহ ও উপগ্রহ"
+msgid "Sun, planets and moons of observer location"
+msgstr "অবস্থান জ্যোতিষ্কের উপগ্রহ সমেত সেটির মূল নক্ষত্র এবং গ্রহ সমূহ"
 
 #: src/gui/AstroCalcDialog.cpp:2461
 #, qt-format
 msgid "Bright Solar system objects (<%1 mag)"
 msgstr "উজ্জ্বল সৌরজাগতিক জ্যোতিষ্ক (<%1 উজ্জ্বল)"
+
+#: src/gui/AstroCalcDialog.cpp:2462
+msgid "Moons of first body"
+msgstr " সেটির উপগ্রহগুলি"
 
 #: src/gui/AstroCalcDialog.cpp:3030
 msgid "Magnitude vs. Time"
@@ -5997,321 +6005,321 @@ msgstr "২য় টির উজ্জ্ব্লতা"
 msgid "Elevation"
 msgstr "দিগন্ত থেকে উচ্চতা"
 
-#: src/gui/AstroCalcDialog.cpp:3612 src/gui/AstroCalcDialog.cpp:4014
-#: src/gui/AstroCalcDialog.cpp:4265
+#: src/gui/AstroCalcDialog.cpp:3612 src/gui/AstroCalcDialog.cpp:4022
+#: src/gui/AstroCalcDialog.cpp:4273
 msgid "Opposition"
 msgstr "প্রতিযোগ"
 
-#: src/gui/AstroCalcDialog.cpp:3898
+#: src/gui/AstroCalcDialog.cpp:3906
 msgid "Save calculated phenomena as..."
 msgstr "নিম্নলিখিত নামে সঞ্চয় করুন ...."
 
-#: src/gui/AstroCalcDialog.cpp:3916 src/gui/AstroCalcDialog.cpp:3918
+#: src/gui/AstroCalcDialog.cpp:3924 src/gui/AstroCalcDialog.cpp:3926
 #: src/ui_astroCalcDialog.h:1627
 msgid "Phenomena"
 msgstr "ঘটনা"
 
-#: src/gui/AstroCalcDialog.cpp:3973
+#: src/gui/AstroCalcDialog.cpp:3981
 msgid "Magnitude of first object"
 msgstr "প্রথম জ্যোতিষ্কটির উজ্জ্ব্লতা"
 
-#: src/gui/AstroCalcDialog.cpp:3976
+#: src/gui/AstroCalcDialog.cpp:3984
 msgid "Magnitude of second object"
 msgstr "দ্বিতীয় জ্যোতিষ্কটির উজ্জ্ব্লতা"
 
-#: src/gui/AstroCalcDialog.cpp:3982
+#: src/gui/AstroCalcDialog.cpp:3990
 msgid "Elevation of first object at moment of phenomena"
 msgstr "ঘটনার সময়ে ১ম জ্যোতিষ্কটির উচ্চতা"
 
-#: src/gui/AstroCalcDialog.cpp:3984 src/gui/AstroCalcDialog.cpp:4123
+#: src/gui/AstroCalcDialog.cpp:3992 src/gui/AstroCalcDialog.cpp:4131
 msgid "Angular distance from the Sun"
 msgstr "সূর্য থেকে কৌণিক দূরত্ব"
 
-#: src/gui/AstroCalcDialog.cpp:3987 src/gui/AstroCalcDialog.cpp:4124
+#: src/gui/AstroCalcDialog.cpp:3995 src/gui/AstroCalcDialog.cpp:4132
 msgid "Angular distance from the Moon"
 msgstr "চাঁদ থেকে কৌণিক দূরত্ব"
 
-#: src/gui/AstroCalcDialog.cpp:4005 src/gui/AstroCalcDialog.cpp:4176
-#: src/gui/AstroCalcDialog.cpp:4256
+#: src/gui/AstroCalcDialog.cpp:4013 src/gui/AstroCalcDialog.cpp:4184
+#: src/gui/AstroCalcDialog.cpp:4264
 msgid "Conjunction"
 msgstr "সংযোগ"
 
-#: src/gui/AstroCalcDialog.cpp:4017 src/gui/AstroCalcDialog.cpp:4063
-#: src/gui/AstroCalcDialog.cpp:4069 src/gui/AstroCalcDialog.cpp:4268
-#: src/gui/AstroCalcDialog.cpp:4284 src/gui/AstroCalcDialog.cpp:4290
+#: src/gui/AstroCalcDialog.cpp:4025 src/gui/AstroCalcDialog.cpp:4071
+#: src/gui/AstroCalcDialog.cpp:4077 src/gui/AstroCalcDialog.cpp:4276
+#: src/gui/AstroCalcDialog.cpp:4292 src/gui/AstroCalcDialog.cpp:4298
 msgid "Eclipse"
 msgstr "গ্রহন"
 
-#: src/gui/AstroCalcDialog.cpp:4026
+#: src/gui/AstroCalcDialog.cpp:4034
 msgid "Greatest eastern elongation"
 msgstr "সর্বোচ্চ সম্মুখ চ্যুতি"
 
-#: src/gui/AstroCalcDialog.cpp:4029
+#: src/gui/AstroCalcDialog.cpp:4037
 msgid "Greatest western elongation"
 msgstr "সর্বোচ্চ পশ্চাৎ চ্যুতি"
 
 #. TRANSLATORS: The planet are stand still in the equatorial coordinates
-#: src/gui/AstroCalcDialog.cpp:4036
+#: src/gui/AstroCalcDialog.cpp:4044
 msgid "Stationary (begin retrograde motion)"
 msgstr "বিপরীত চলন শুরু"
 
 #. TRANSLATORS: The planet are stand still in the equatorial coordinates
-#: src/gui/AstroCalcDialog.cpp:4041
+#: src/gui/AstroCalcDialog.cpp:4049
 msgid "Stationary (begin prograde motion)"
 msgstr "সম্মুখ চলন শুরু"
 
-#: src/gui/AstroCalcDialog.cpp:4047
+#: src/gui/AstroCalcDialog.cpp:4055
 msgid "Perihelion"
 msgstr "অনুসূর"
 
-#: src/gui/AstroCalcDialog.cpp:4049
+#: src/gui/AstroCalcDialog.cpp:4057
 msgid "Aphelion"
 msgstr "অপসূর"
 
-#: src/gui/AstroCalcDialog.cpp:4056 src/gui/AstroCalcDialog.cpp:4277
+#: src/gui/AstroCalcDialog.cpp:4064 src/gui/AstroCalcDialog.cpp:4285
 msgctxt "passage of the celestial body"
 msgid "Transit"
 msgstr "সরণ"
 
-#: src/gui/AstroCalcDialog.cpp:4059 src/gui/AstroCalcDialog.cpp:4181
-#: src/gui/AstroCalcDialog.cpp:4280
+#: src/gui/AstroCalcDialog.cpp:4067 src/gui/AstroCalcDialog.cpp:4189
+#: src/gui/AstroCalcDialog.cpp:4288
 msgid "Occultation"
 msgstr "সমাপতন"
 
-#: src/gui/AstroCalcDialog.cpp:4082 src/gui/AstroCalcDialog.cpp:4084
-#: src/gui/AstroCalcDialog.cpp:4303 src/gui/AstroCalcDialog.cpp:4305
+#: src/gui/AstroCalcDialog.cpp:4090 src/gui/AstroCalcDialog.cpp:4092
+#: src/gui/AstroCalcDialog.cpp:4311 src/gui/AstroCalcDialog.cpp:4313
 msgid "Superior conjunction"
 msgstr "বিপরীত সংযোগ"
 
-#: src/gui/AstroCalcDialog.cpp:4082 src/gui/AstroCalcDialog.cpp:4084
-#: src/gui/AstroCalcDialog.cpp:4303 src/gui/AstroCalcDialog.cpp:4305
+#: src/gui/AstroCalcDialog.cpp:4090 src/gui/AstroCalcDialog.cpp:4092
+#: src/gui/AstroCalcDialog.cpp:4311 src/gui/AstroCalcDialog.cpp:4313
 msgid "Inferior conjunction"
 msgstr "সম্মুখ সংযোগ"
 
-#: src/gui/AstroCalcDialog.cpp:4127
+#: src/gui/AstroCalcDialog.cpp:4135
 msgid "Angular distance from the Sun for second object"
 msgstr "২য় বস্তুর সূর্য থেকে কৌণিক দূরত্ব"
 
-#: src/gui/AstroCalcDialog.cpp:4128
+#: src/gui/AstroCalcDialog.cpp:4136
 msgid "Angular distance from the Moon for second object"
 msgstr "কৌণিক২য় বস্তুর চাঁদ থেকে কৌণিক দূরত্ব"
 
-#: src/gui/AstroCalcDialog.cpp:5080
+#: src/gui/AstroCalcDialog.cpp:5088
 msgctxt "Celestial object is observed..."
 msgid "In the Evening"
 msgstr "সন্ধ্যার সময়"
 
-#: src/gui/AstroCalcDialog.cpp:5081
+#: src/gui/AstroCalcDialog.cpp:5089
 msgctxt "Celestial object is observed..."
 msgid "In the Morning"
 msgstr "ভোরের সময়"
 
-#: src/gui/AstroCalcDialog.cpp:5082
+#: src/gui/AstroCalcDialog.cpp:5090
 msgctxt "Celestial object is observed..."
 msgid "Around Midnight"
 msgstr "মাঝ রাতে"
 
-#: src/gui/AstroCalcDialog.cpp:5083
+#: src/gui/AstroCalcDialog.cpp:5091
 msgctxt "Celestial object is observed..."
 msgid "In Any Time of the Night"
 msgstr "রাতের যে কোনো সময়"
 
-#: src/gui/AstroCalcDialog.cpp:5103
+#: src/gui/AstroCalcDialog.cpp:5111
 msgid "Bright stars"
 msgstr "উজ্জ্বল তারা"
 
-#: src/gui/AstroCalcDialog.cpp:5104 src/ui_viewDialog.h:3344
+#: src/gui/AstroCalcDialog.cpp:5112 src/ui_viewDialog.h:3344
 msgid "Bright nebulae"
 msgstr "উজ্জ্বল নীহারিকা"
 
-#: src/gui/AstroCalcDialog.cpp:5106 src/ui_viewDialog.h:3348
+#: src/gui/AstroCalcDialog.cpp:5114 src/ui_viewDialog.h:3348
 #: src/ui_dsoColorsDialog.h:595
 msgid "Galaxies"
 msgstr "নক্ষত্রলোক"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5107 src/translations.h:310
+#: src/gui/AstroCalcDialog.cpp:5115 src/translations.h:310
 #: src/ui_viewDialog.h:3351 src/ui_dsoColorsDialog.h:599
 msgid "Open star clusters"
 msgstr "মুক্ত তারকাগুচ্ছ"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5116 src/translations.h:316
+#: src/gui/AstroCalcDialog.cpp:5124 src/translations.h:316
 #: src/ui_viewDialog.h:3343 src/ui_dsoColorsDialog.h:588
 msgid "Planetary nebulae"
 msgstr "গ্রহরূপী নীহারিকা"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5117 src/translations.h:445
+#: src/gui/AstroCalcDialog.cpp:5125 src/translations.h:445
 msgid "Bright double stars"
 msgstr "উজ্জ্বল দ্বৈত নক্ষত্র"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5118 src/translations.h:447
+#: src/gui/AstroCalcDialog.cpp:5126 src/translations.h:447
 msgid "Bright variable stars"
 msgstr "উজ্জ্বল অসম ঔজ্জ্বল্যের তারা"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5119 src/translations.h:449
+#: src/gui/AstroCalcDialog.cpp:5127 src/translations.h:449
 msgid "Bright stars with high proper motion"
 msgstr "বেশি সরণ যুক্ত উজ্জ্বল নক্ষত্র"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5122 src/translations.h:346
+#: src/gui/AstroCalcDialog.cpp:5130 src/translations.h:346
 #: src/ui_dsoColorsDialog.h:640
 msgid "Supernova candidates"
 msgstr "সম্ভবত অতিনোভা"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5123 src/translations.h:348
+#: src/gui/AstroCalcDialog.cpp:5131 src/translations.h:348
 #: src/ui_dsoColorsDialog.h:681
 msgid "Supernova remnant candidates"
 msgstr "সম্ভবত অতিনোভা ধ্বংশাবশেষ"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5124 src/translations.h:344
+#: src/gui/AstroCalcDialog.cpp:5132 src/translations.h:344
 #: src/ui_viewDialog.h:3350 src/ui_dsoColorsDialog.h:581
 msgid "Supernova remnants"
 msgstr "অতিনোভার ধ্বংসাবশেষ"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5125 src/translations.h:372
+#: src/gui/AstroCalcDialog.cpp:5133 src/translations.h:372
 #: src/ui_viewDialog.h:3347 src/ui_dsoColorsDialog.h:694
 msgid "Clusters of galaxies"
 msgstr "নক্ষত্রলোকপুঞ্জ"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5127 src/translations.h:312
+#: src/gui/AstroCalcDialog.cpp:5135 src/translations.h:312
 #: src/ui_viewDialog.h:3353 src/ui_dsoColorsDialog.h:574
 msgid "Globular star clusters"
 msgstr "গোলাকার তারকা গুচ্ছ"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5128 src/translations.h:374
+#: src/gui/AstroCalcDialog.cpp:5136 src/translations.h:374
 #: src/ui_dsoColorsDialog.h:710
 msgid "Regions of the sky"
 msgstr "বিশেষ এলাকা"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5129 src/translations.h:326
+#: src/gui/AstroCalcDialog.cpp:5137 src/translations.h:326
 #: src/ui_viewDialog.h:3342 src/ui_dsoColorsDialog.h:565
 msgid "Active galaxies"
 msgstr "সক্রিয় নক্ষত্রলোক"
 
-#: src/gui/AstroCalcDialog.cpp:5134 plugins/Pulsars/src/Pulsars.cpp:72
+#: src/gui/AstroCalcDialog.cpp:5142 plugins/Pulsars/src/Pulsars.cpp:72
 #: plugins/Pulsars/src/Pulsars.cpp:170 plugins/Pulsars/src/Pulsars.cpp:171
 msgid "Pulsars"
 msgstr "স্পন্দন তারা বা পালসার"
 
-#: src/gui/AstroCalcDialog.cpp:5140
+#: src/gui/AstroCalcDialog.cpp:5148
 msgid "Exoplanetary systems"
 msgstr "গ্রহজগৎ"
 
-#: src/gui/AstroCalcDialog.cpp:5143
+#: src/gui/AstroCalcDialog.cpp:5151
 msgid "Bright nova stars"
 msgstr "উজ্জ্বল নোভা"
 
-#: src/gui/AstroCalcDialog.cpp:5145
+#: src/gui/AstroCalcDialog.cpp:5153
 msgid "Bright supernova stars"
 msgstr "উজ্জ্বল অতিনোভা"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5146 src/translations.h:330
+#: src/gui/AstroCalcDialog.cpp:5154 src/translations.h:330
 #: src/ui_viewDialog.h:3349 src/ui_dsoColorsDialog.h:650
 msgid "Interacting galaxies"
 msgstr "পারস্পরিক ক্রিয়াশীল নক্ষত্রলোক"
 
-#: src/gui/AstroCalcDialog.cpp:5148
+#: src/gui/AstroCalcDialog.cpp:5156
 msgid "Messier objects"
 msgstr "মেসিয়ার তালিকা"
 
-#: src/gui/AstroCalcDialog.cpp:5149
+#: src/gui/AstroCalcDialog.cpp:5157
 msgid "NGC/IC objects"
 msgstr "NGC/IC তালিকা"
 
-#: src/gui/AstroCalcDialog.cpp:5150
+#: src/gui/AstroCalcDialog.cpp:5158
 msgid "Caldwell objects"
 msgstr "ক্যাডোয়েল তালিকা"
 
-#: src/gui/AstroCalcDialog.cpp:5151
+#: src/gui/AstroCalcDialog.cpp:5159
 msgid "Herschel 400 objects"
 msgstr "হার্শেল 400 তালিকা"
 
-#: src/gui/AstroCalcDialog.cpp:5152
+#: src/gui/AstroCalcDialog.cpp:5160
 msgid "Algol-type eclipsing systems"
 msgstr "অ্যালগল এর মত পরস্পর গ্রহণ ঘটানো তারা"
 
-#: src/gui/AstroCalcDialog.cpp:5153
+#: src/gui/AstroCalcDialog.cpp:5161
 msgid "The classical cepheids"
 msgstr "মুল শেফালী বিষম উজ্জ্ব্যলতার তারা"
 
 #. TRANSLATORS: angular size
-#: src/gui/AstroCalcDialog.cpp:5226
+#: src/gui/AstroCalcDialog.cpp:5234
 msgid "Ang. Size"
 msgstr "কৌণিক আকার"
 
-#: src/gui/AstroCalcDialog.cpp:5340 src/ui_astroCalcDialog.h:1816
+#: src/gui/AstroCalcDialog.cpp:5348 src/ui_astroCalcDialog.h:1816
 msgid "Limit angular size:"
 msgstr "কৌণিক আকারের সীমা :"
 
-#: src/gui/AstroCalcDialog.cpp:5341 src/ui_astroCalcDialog.h:1814
+#: src/gui/AstroCalcDialog.cpp:5349 src/ui_astroCalcDialog.h:1814
 msgid "Set limits for angular size for visible celestial objects"
 msgstr "উল্লেখ্য সীমার মধ্যে থাকা জ্যোতিষ্কগুলি দেখানো হবে ।"
 
-#: src/gui/AstroCalcDialog.cpp:5342 src/ui_astroCalcDialog.h:1818
+#: src/gui/AstroCalcDialog.cpp:5350 src/ui_astroCalcDialog.h:1818
 msgid "Minimal angular size for visible celestial objects"
 msgstr "নিম্ন সীমা"
 
-#: src/gui/AstroCalcDialog.cpp:5343 src/ui_astroCalcDialog.h:1821
+#: src/gui/AstroCalcDialog.cpp:5351 src/ui_astroCalcDialog.h:1821
 msgid "Maximum angular size for visible celestial objects"
 msgstr "উর্ধ সীমা"
 
-#: src/gui/AstroCalcDialog.cpp:5631
+#: src/gui/AstroCalcDialog.cpp:5639
 msgid "Limit angular separation:"
 msgstr "কৌণিক দূরত্বের সীমা :"
 
-#: src/gui/AstroCalcDialog.cpp:5632
+#: src/gui/AstroCalcDialog.cpp:5640
 msgid "Set limits for angular separation for visible double stars"
 msgstr "উল্লেখ্য সীমার মধ্যে থাকা দ্বৈততারাগুলি দেখানো হবে ।"
 
-#: src/gui/AstroCalcDialog.cpp:5633
+#: src/gui/AstroCalcDialog.cpp:5641
 msgid "Minimal angular separation for visible double stars"
 msgstr "নিম্ন সীমা"
 
-#: src/gui/AstroCalcDialog.cpp:5634
+#: src/gui/AstroCalcDialog.cpp:5642
 msgid "Maximum angular separation for visible double stars"
 msgstr "উর্ধ সীমা"
 
-#: src/gui/AstroCalcDialog.cpp:5982
+#: src/gui/AstroCalcDialog.cpp:5990
 msgid "JSON (Stellarium bookmarks)"
 msgstr "JSON (স্টীলারিয়াম বুকমার্ক)"
 
-#: src/gui/AstroCalcDialog.cpp:5986
+#: src/gui/AstroCalcDialog.cpp:5994
 msgid "Save list of objects as..."
 msgstr "তালিকাটি পছন্দসই নামে সঞ্চয় করুন ..."
 
-#: src/gui/AstroCalcDialog.cpp:6006 src/ui_astroCalcDialog.h:1633
+#: src/gui/AstroCalcDialog.cpp:6014 src/ui_astroCalcDialog.h:1633
 msgid "What's Up Tonight"
 msgstr "আজ রাতে কি কি দেখা যাবে"
 
-#: src/gui/AstroCalcDialog.cpp:6152
+#: src/gui/AstroCalcDialog.cpp:6160
 msgid "spin-orbit resonance"
 msgstr "ঘুর্ণন-পরিক্রমণ সমলয়"
 
-#: src/gui/AstroCalcDialog.cpp:6202 src/gui/AstroCalcDialog.cpp:6364
+#: src/gui/AstroCalcDialog.cpp:6210 src/gui/AstroCalcDialog.cpp:6372
 msgid "Days from today"
 msgstr "বর্তমান দিন থেকে"
 
-#: src/gui/AstroCalcDialog.cpp:6203 src/gui/AstroCalcDialog.cpp:6345
+#: src/gui/AstroCalcDialog.cpp:6211 src/gui/AstroCalcDialog.cpp:6353
 msgid "Linear distance"
 msgstr "দূরত্ব"
 
-#: src/gui/AstroCalcDialog.cpp:6345 src/gui/AstroCalcDialog.cpp:6348
+#: src/gui/AstroCalcDialog.cpp:6353 src/gui/AstroCalcDialog.cpp:6356
 #: plugins/Calendars/src/ui_calendarsDialog.h:832
 msgid "Day"
 msgstr "দিন"
 
-#: src/gui/AstroCalcDialog.cpp:6406
+#: src/gui/AstroCalcDialog.cpp:6414
 msgid "Change of angular distance between the Moon and selected object"
 msgstr "চাঁদ ও নির্বাচিত জ্যোতিষ্কের কৌণিক দূরত্ব"
 
@@ -7633,7 +7641,7 @@ msgid "Trees"
 msgstr "উদ্যান"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:547 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1307
+#: src/translations.h:547 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1446
 msgid "Moon"
 msgstr "চাঁদ"
 
@@ -7653,17 +7661,17 @@ msgid "Garching"
 msgstr "গারচিং"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:555 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1319
+#: src/translations.h:555 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1458
 msgid "Mars"
 msgstr "মঙ্গল"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:557 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1322
+#: src/translations.h:557 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1461
 msgid "Jupiter"
 msgstr "বৃহস্পতি"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:559 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1325
+#: src/translations.h:559 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1464
 msgid "Saturn"
 msgstr "শনি"
 
@@ -7693,7 +7701,7 @@ msgid "Zero Horizon"
 msgstr "সোজাসাপটা"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:571 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1304
+#: src/translations.h:571 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1443
 msgid "Sun"
 msgstr "সূর্য"
 
@@ -9756,6 +9764,8 @@ msgid "Refresh"
 msgstr "টাটকা তথ্য"
 
 #: src/ui_locationDialogGui.h:485 src/ui_locationDialogGui.h:488
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:156
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:159
 msgid ""
 "Standard list of locations contains only English names (without diacritics!)"
 msgstr ""
@@ -11403,7 +11413,7 @@ msgstr "স্টেলারিয়াম প্রদত্ত স্বাভ�
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:256
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:446
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:318
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:617
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:747
 #: plugins/Calendars/src/ui_calendarsDialog.h:828
 msgid "Restore defaults"
 msgstr "স্বাভাবিক বৈশিষ্ট্যাবলী ফিরিয়ে আনুন"
@@ -13216,7 +13226,7 @@ msgstr ""
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:97
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:328
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:137
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:181
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:248
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:209
 msgid "Links"
 msgstr "বিবিধ"
@@ -13236,7 +13246,7 @@ msgstr "বিবিধ"
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:283
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:98
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:138
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:182
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:249
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:210
 #, qt-format
 msgid ""
@@ -13263,7 +13273,7 @@ msgstr ""
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:101
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:332
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:141
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:185
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:252
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:213
 msgid "If you have a question, you can {get an answer here}."
 msgstr "যে কোনো রকমের জিজ্ঞাসার জন্য {এখানে দেখুন} ।"
@@ -13285,7 +13295,7 @@ msgstr "যে কোনো রকমের জিজ্ঞাসার জন�
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:103
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:334
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:143
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:187
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:254
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:215
 msgid "Bug reports and feature requests can be made {here}."
 msgstr "সমস্যা কিংবা নতুন বৈশিষ্ট্য সংক্রান্ত বিষয় {এখানে} জানান ।"
@@ -13307,7 +13317,7 @@ msgstr "সমস্যা কিংবা নতুন বৈশিষ্ট্
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:105
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:336
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:145
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:189
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:256
 msgid ""
 "If you want to read full information about this plugin and its history, you "
 "can {get info here}."
@@ -13385,7 +13395,7 @@ msgstr "কোণ পরিমাপে দশমিক যুক্ত ডি�
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:259
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:477
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:321
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:649
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:819
 #: plugins/Calendars/src/ui_calendarsDialog.h:879
 msgctxt "tab in plugin windows"
 msgid "About"
@@ -18644,13 +18654,13 @@ msgid "This plugin uses the {QtWebApp HTTP server} by Stefan Frings."
 msgstr "এই সরঞ্জামটি স্টিফান নির্মিত {QtWebApp HTTP সার্ভার} প্রয়োজন ।"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:158
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:174
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:241
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:195
 msgid "Publications"
 msgstr "প্রকাশনা"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:159
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:175
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:242
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:196
 msgid "If you use this plugin in your publications, please cite:"
 msgstr ""
@@ -23286,7 +23296,7 @@ msgid "Toggle 3D landscape"
 msgstr "ত্রিমাতৃক ভূমিরূপ চালু বা বন্ধ করুন"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:333
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:256
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:275
 #: plugins/Calendars/src/Calendars.cpp:164
 msgid "Show settings dialog"
 msgstr "তথ্য বিন্যাস বিভাগ"
@@ -23828,9 +23838,9 @@ msgid "Title:"
 msgstr "নাম :"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:59
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:254
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:255
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:618
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:273
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:274
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:748
 msgid "ArchaeoLines"
 msgstr "ঘটনা রেখা"
 
@@ -23839,128 +23849,144 @@ msgid "A tool for archaeo-/ethnoastronomical alignment studies"
 msgstr ""
 "প্রাচীন কালে নানা জ্যোতির্বৈজ্ঞানিক গণনার জন্য এগুলি ব্যবহৃত কিছু অক্ষরেখা"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:277
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:296
 msgid "Show Line for Equinox"
 msgstr "বিষুব রেখা দেখুন"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:278
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:297
 msgid "Show Line for Solstices"
 msgstr "সূর্যায়ন রেখা দেখুন"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:279
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:298
 msgid "Show Line for Crossquarter"
 msgstr "মরশুমি সূচনা রেখা দেখুন"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:280
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:299
 msgid "Show Line for Major Standstill"
 msgstr "সর্বোচ্চ চন্দ্রায়ন রেখা দেখুন"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:281
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:300
 msgid "Show Line for Minor Standstill"
 msgstr "সর্বনিম্ন চন্দ্রায়ন রেখা দেখুন"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:282
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:301
+msgid "Show Polar Circles"
+msgstr "মেরু বৃত্ত দেখুন"
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:302
 msgid "Show Line for Zenith Passage"
 msgstr "সুবিন্দুর অক্ষাংশ দেখুন"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:283
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:303
 msgid "Show Line for Nadir Passage"
 msgstr "কুবিন্দুর অক্ষাংশ দেখুন"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:284
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:304
 msgid "Show Line for Selected Object"
 msgstr "পছন্দসই জ্যোতিষ্কের অক্ষাংশ দেখুন"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:285
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:305
 msgid "Show Line for Selected Object's Azimuth"
 msgstr "পছন্দসই জ্যোতিষ্কের দিগংশ রেখা"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:286
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:306
 msgid "Show Line for Selected Object's Hour Angle"
 msgstr "পছন্দসই জ্যোতিষ্কের উন্নতি রেখা"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:287
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:307
 msgid "Show Line for Current Sun"
 msgstr "সূর্যের অক্ষাংশ দেখুন"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:288
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:308
 msgid "Show Line for Current Moon"
 msgstr "চাঁদের অক্ষাংশ দেখুন"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:289
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:309
 msgid "Show Vertical for Geographic Location 1"
 msgstr "পছন্দসই অবস্থান ১ এর অভিলম্ব"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:290
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:310
 msgid "Show Vertical for Geographic Location 2"
 msgstr "পছন্দসই অবস্থান ২ এর অভিলম্ব"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:291
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:311
 msgid "Show Vertical for Custom Azimuth 1"
-msgstr "পছন্দসই দিগংশ ১ এর অভিলম্ব"
+msgstr "পছন্দসই দিগংশ ১ এর অভিলম্ব দেখুন"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:292
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:312
 msgid "Show Vertical for Custom Azimuth 2"
-msgstr "পছন্দসই দিগংশ ২ এর অভিলম্ব"
+msgstr "পছন্দসই দিগংশ ২ এর অভিলম্ব দেখুন"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:293
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:313
+msgid "Show Line for Custom Altitude 1"
+msgstr "পছন্দসই উন্নতি রেখা ১ দেখুন"
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:314
+msgid "Show Line for Custom Altitude 2"
+msgstr "পছন্দসই উন্নতি রেখা ২ দেখুন"
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:315
 msgid "Show Line for Custom Declination 1"
 msgstr "পছন্দসই অক্ষাংশ ১ নির্দেশক রেখা দেখুন"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:294
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:316
 msgid "Show Line for Custom Declination 2"
 msgstr "পছন্দসই অক্ষাংশ ২ নির্দেশক রেখা দেখুন"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1278
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1414
 msgid "Equinox"
 msgstr "বিষুবরেখা"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1281
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1417
 msgid "Solstice"
 msgstr "সূর্যায়ণ"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1284
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1420
 msgid "Crossquarter"
 msgstr "মরশুমি সূচনা রেখা"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1287
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1423
 msgid "Major Lunar Standstill"
 msgstr "সর্বোচ্চ চন্দ্রায়ণ"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1290
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1426
 msgid "Minor Lunar Standstill"
 msgstr "সর্বনিম্ন চন্দ্রায়ণ"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1293
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1429
+msgid "Polar Circle"
+msgstr "মেরু বৃত্ত"
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1432
 msgid "Zenith Passage"
 msgstr "সুবিন্দু"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1296
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1435
 msgid "Nadir Passage"
 msgstr "কুবিন্দু"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1301
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:612
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1440
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:737
 msgid "Selected Object"
 msgstr "পছন্দসই বস্তু"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1310
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1449
 msgid "error if you can read this"
 msgstr "ত্রুটি দেখা দিযেছে"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1313
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1452
 msgid "Mercury"
 msgstr "বুধ"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1316
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1455
 msgid "Venus"
 msgstr "শুক্র"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:145
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:210
 msgid "ArchaeoLines Plug-in"
 msgstr "ঘটনা রেখা সরঞ্জাম"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:152
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:217
 msgid ""
 "The ArchaeoLines plugin displays any combination of declination arcs most "
 "relevant to archaeo- or ethnoastronomical studies."
@@ -23969,57 +23995,61 @@ msgstr ""
 " গুলি কিছু বিশিষ্ট্য মহাজাগতিক ঘটনার সঙ্গে যুক্ত এবং প্রাচীন কালে নানা "
 "জ্যোতির্বৈজ্ঞানিক গণনার জন্য এগুলি ব্যবহার করা হত ।"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:153
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:218
 msgid "Declinations of equinoxes (i.e. equator) and the solstices"
 msgstr "বিষুবরেখা ও তার থেকে সূর্যের সর্বোচ্চ চ্যুতি বা সূর্যায়ণ"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:154
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:219
 msgid ""
 "Declinations of the crossquarter days (days right between solstices and "
 "equinoxes)"
 msgstr "মরশুমি সূচনা রেখা বা ত্রৈমাসিক বিভাজন রেখা"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:155
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:220
 msgid "Declinations of the Major Lunar Standstills"
 msgstr "বিষুবরেখা থেকে চাঁদের সর্বোচ্চ চ্যুতি বা সর্বোচ্চ চন্দ্রায়ণ"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:156
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:221
 msgid "Declinations of the Minor Lunar Standstills"
 msgstr "বিষুবরেখা থেকে চাঁদের সর্বোচ্চ চ্যুতি বা সর্বনিম্ন চন্দ্রায়ণ"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:157
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:222
+msgid "Declination of the Polar circles"
+msgstr "মেরু বৃত্তদ্বয়"
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:223
 msgid "Declination of the Zenith passage"
 msgstr "সুবিন্দু রেখা"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:158
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:224
 msgid "Declination of the Nadir passage"
 msgstr "কুবিন্দু রেখা"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:159
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:225
 msgid "Declination of the currently selected object"
 msgstr "বিষুবরেখা থেকে পছন্দসই বস্তুর সর্বোচ্চ চ্যুতি"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:160
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:226
 msgid "Azimuth of the currently selected object"
 msgstr "পছন্দসই জ্যোতিষ্কের দিগংশ রেখা"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:161
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:227
 msgid "Hour Angle of the currently selected object"
 msgstr "পছন্দসই জ্যোতিষ্কের উন্নতি রেখা"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:162
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:228
 msgid "Current declination of the sun"
 msgstr "সূর্যের বর্তমান বিষুবলম্ব"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:163
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:229
 msgid "Current declination of the moon"
 msgstr "চাঁদের বর্তমান বিষুবলম্ব"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:164
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:230
 msgid "Current declination of a naked-eye planet"
 msgstr "খালি চোখে দেখতে পাওয়া গ্রহগুলির বিষুবরেখা থেকে সর্বোচ্চ চ্যুতি"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:165
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:231
 msgid ""
 "The lunar lines include horizon parallax effects. There are two lines each "
 "drawn, for maximum and minimum distance of the moon. Note that declination "
@@ -24030,157 +24060,197 @@ msgstr ""
 "বিভিন্ন স্থান থেকে দেখলে এর অবস্থানের সামান্য হেরফের লক্ষ্য করা যায় । তাই "
 "প্রতিটি চন্দ্রায়ন রেখা আসলে খুব কাছাকাছি থাকা দুটি রেখার সমষ্টি ।"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:169
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:235
 msgid ""
 "Some religions, most notably Islam, adhere to a practice of observing a "
 "prayer direction towards a particular location. Azimuth lines for two "
-"locations can be shown. Default locations are Mecca (Kaaba) and Jerusalem. "
-"The directions are computed based on spherical trigonometry on a spherical "
-"Earth."
+"locations can be shown. Default locations are Mecca (Kaaba) and Jerusalem, "
+"but you can select locations from Stellarium's locations list or enter "
+"arbitrary locations. The directions are computed based on spherical "
+"trigonometry on a spherical Earth."
 msgstr ""
-"বিশেষ কিছু ধর্মের লোকেরা কোনো একটি নির্দিষ্ট স্থানের দিকে ভগবানের প্রার্থনা "
-"করে থাকেন । এই উদ্দেশ্যে এখানে দুটি বিশেষ স্থানের দিগংশ রেখা দেখানো যায় । "
-"প্রাথমিক ভাবে মক্কা(কাবা) এবং জেরুজালেম স্থান দুটি দেওয়া আছে । দিক নির্ণয়ের "
-"ক্ষেত্রে পৃথিবীকে গোলক ধরে গোলীয় জ্যামিতি ব্যবহার করা হয়েছে ।"
+"কিছু ধর্ম, বিশেষত ইসলামে, একটি নির্দিষ্ট অবস্থানের দিকে প্রার্থনার নির্দেশ "
+"রয়েছে । তাই এখানে আপনার পছন্দসই দুটি অবস্থানের দিগংশ রেখা দেখানো ব্যবস্থা "
+"রয়েছে । প্রাথমিক ভাবে এদুটিকে মক্কা (কাবা) এবং জেরুসালেম ধরা হয়েছে, তবে আপনি"
+" স্টেলারিয়ামের অবস্থানের তালিকা থেকে পছন্দসই অবস্থান নির্বাচন করতে পারেন । "
+"গোলীয় পৃথিবীতে পরিগণিত বর্তুলাকার ত্রিকোণমিতির উপর ভিত্তি করে দিকনির্দেশগুলি"
+" এগুলি গণনা করা হয়ে থাকে ।"
 
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:172
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:239
 msgid ""
-"In addition, up to two vertical lines with arbitrary azimuth and declination"
-" lines with custom label can be shown."
+"In addition, up to two lines each with arbitrary azimuth, altitude and "
+"declination lines with custom label can be shown."
 msgstr ""
-"এছাড়া অতিরিক্ত হিসাবে পছন্দসই দিগংশ ও অক্ষাংশ অনুসারে দুটো লম্বালম্বি ও দুটো"
-" আড়াআড়ি রেখা দেখানো যায় ।"
+"তাছাড়াও, সম্পূর্ণ ভাবে মনের মত নাম সহ দুটি দিগংশ, উন্নতি ও বিষুবলম্ব রেখা "
+"পর্যবেক্ষণ করতে পারেন ।"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:590
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:718
 msgid "ArchaeoLines Configuration"
 msgstr "ঘটনা রেখার বৈশিষ্ট্য বিন্যাস"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:591
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:719
 msgid "ArchaeoLines Plug-in Configuration"
 msgstr "ঘটনা রেখা দেখানোর সরঞ্জামের রূপরেখা"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:593
-msgid "Declination of Nadir passage"
-msgstr "কুবিন্দু"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:594
-msgid "Minor Lunar Standstill lines"
-msgstr "সর্বনিম্ন চন্দ্রায়ণ"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:596
-msgid "Change color"
-msgstr "রং বদলান"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:598
-msgid "Solstice Lines"
-msgstr "সূর্যায়ন"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:599
-msgid "Equinox line (Equator)"
-msgstr "বিষুবরেখা বা নিরক্ষরেখা"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:600
-msgid "Current Sun"
-msgstr "সূর্য"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:601
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:721
 msgid "Crossquarter Lines"
 msgstr "মরশুমি সূচনা রেখা"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:602
-msgid "Major Lunar Standstill lines"
-msgstr "সর্বোচ্চ চন্দ্রায়ণ"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:603
-msgid "Declination of Zenith passage"
-msgstr "সুবিন্দু"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:604
-msgid "Current Moon"
-msgstr "চাঁদ"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:605
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:722
 msgid "Current Planet: None"
 msgstr "পছন্দ করুন"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:606
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:723
 msgid "Current Planet: Mercury"
 msgstr "বুধ"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:607
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:724
 msgid "Current Planet: Venus"
 msgstr "শুক্র"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:608
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:725
 msgid "Current Planet: Mars"
 msgstr "মঙ্গল"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:609
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:726
 msgid "Current Planet: Jupiter"
 msgstr "বৃহস্পতি"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:610
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:727
 msgid "Current Planet: Saturn"
 msgstr "শনি"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:613
-msgid "Selected Object Azimuth"
-msgstr "পছন্দসই জ্যোতিষ্কের দিগংশ রেখা"
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:730
+msgid "Current Sun"
+msgstr "সূর্য"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:614
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:731
+msgid "Current Moon"
+msgstr "চাঁদ"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:732
+msgid "Major Lunar Standstill lines"
+msgstr "সর্বোচ্চ চন্দ্রায়ণ"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:733
+msgid "Minor Lunar Standstill lines"
+msgstr "সর্বনিম্ন চন্দ্রায়ণ"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:734
+msgid "Equinox line (Equator)"
+msgstr "বিষুবরেখা বা নিরক্ষরেখা"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:735
+msgid "Polar Circles"
+msgstr "মেরু বৃত্ত"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:736
 msgid "Selected Object Hour Angle"
 msgstr "পছন্দসই জ্যোতিষ্কের উন্নতি রেখা"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:616
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:739
+msgid "Change color"
+msgstr "রং বদলান"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:741
 msgid "Line thickness"
 msgstr "রেখার বেধ"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:619
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:742
+msgid "Declination of Zenith passage"
+msgstr "সুবিন্দু"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:743
+msgid "Solstice Lines"
+msgstr "সূর্যায়ন"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:744
+msgid "Selected Object Azimuth"
+msgstr "পছন্দসই জ্যোতিষ্কের দিগংশ রেখা"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:745
+msgid "Declination of Nadir passage"
+msgstr "কুবিন্দু"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:751
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:762
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:766
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:779
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:810
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:814
+msgid "From selected object (if any)"
+msgstr "বর্তমান নির্বাচিত জ্যোতিষ্কটির (যদি কিছু) থেকে"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:754
 msgid "Geographic Location 1"
 msgstr "বিশেষ স্থান ১"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:621
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:627
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:756
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:775
 msgid "Enter a label (location name) for this line"
 msgstr "এই স্থানটির নাম লিখুন"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:625
-msgid "Geographic Location 2"
-msgstr "বিশেষ স্থান ২"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:632
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:639
-msgid "Always counted from North"
-msgstr "উত্তর দিক থেকে পরিমিত"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:634
-msgid "Custom Azimuth 1"
-msgstr "পছন্দসই দিগংশ ১"
-
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:636
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:643
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:759
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:772
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:804
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:807
 msgid "Enter a label for this line"
 msgstr "এই লাইনের একটি নাম দিন"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:641
-msgid "Custom Azimuth 2"
-msgstr "পছন্দসই দিগংশ ২"
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:770
+msgid "Geographic Location 2"
+msgstr "বিশেষ স্থান ২"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:645
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:777
 msgid "Custom Declination 1"
 msgstr "পছন্দসই অক্ষাংশ ১"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:646
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:783
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:798
+msgid "Always counted from North"
+msgstr "উত্তর দিক থেকে পরিমিত"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:785
+msgid "Custom Azimuth 1"
+msgstr "পছন্দসই দিগংশ ১"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:787
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:791
+msgid "Select from location list"
+msgstr "অবস্থান তালিকা থেকে পছন্দ করুন"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:789
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:793
+msgid "Pick..."
+msgstr "বেছে নিন ..."
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:796
 msgid "Custom Declination 2"
 msgstr "পছন্দসই অক্ষাংশ ২"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:647
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:800
+msgid "Custom Azimuth 2"
+msgstr "পছন্দসই দিগংশ ২"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:801
+msgid "Custom Altitude 1"
+msgstr "পছন্দসই উন্নতি ১"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:802
+msgid "Custom Altitude 2"
+msgstr "পছন্দসই উন্নতি ২"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:817
 msgid "Restore default settings"
 msgstr "স্বাভাবিক বৈশিষ্টগুলি ফিরিয়ে আনুন"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:648
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:818
 msgid "Custom Lines"
 msgstr "পছন্দসই লাইন"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:153
+msgid "Locations"
+msgstr "জায়গার স্থানাঙ্ক"
 
 #: plugins/Vts/src/Vts.cpp:152
 msgid "Vts"
@@ -26042,7 +26112,7 @@ msgstr "ফেট ডু ট্রাভাই (শ্রম দিবস)"
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:55
 msgctxt "French Revolution Calendar day name"
 msgid "Fête de l'Opinion (Opinion Day)"
-msgstr "ফেট দে লোপিনিয়ন (মতামত দিবস)"
+msgstr "ফেট দেল ওপিনিয়ন (মতামত দিবস)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:56
 msgctxt "French Revolution Calendar day name"
