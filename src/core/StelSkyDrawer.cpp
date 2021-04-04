@@ -253,15 +253,14 @@ float StelSkyDrawer::computeLimitMagnitude() const
 	while (std::fabs(lim-a)>0.05f)
 	{
 		computeRCMag(lim, &rcmag);
+		float tmp = lim;
 		if (rcmag.radius<=0.f)
 		{
-			float tmp = lim;
 			lim=(a+lim)*0.5f;
 			b=tmp;
 		}
 		else
 		{
-			float tmp = lim;
 			lim=(b+lim)*0.5f;
 			a=tmp;
 		}
@@ -489,7 +488,6 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 	// Assume a disk shape
 	float pixRadius = std::sqrt(illuminatedArea/(60.f*60.f)*M_PI_180f*M_PI_180f*(pixPerRad*pixPerRad))/M_PIf;
 	float pxRd = pixRadius*3.f+100.f;
-
 	bool noStarHalo = false;
 
 	if (mag<-15.f)
