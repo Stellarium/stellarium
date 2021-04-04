@@ -33,6 +33,7 @@ public:
 
 	virtual ~MayaTzolkinCalendar() Q_DECL_OVERRIDE {}
 
+public slots:
 	virtual void retranslate() Q_DECL_OVERRIDE;
 
 	//! Set a calendar date from the Julian day number
@@ -47,6 +48,7 @@ public:
 	//! dayNumber[1..13]-name
 	virtual QStringList getDateStrings() const Q_DECL_OVERRIDE;
 
+public:
 	//! usually internal, but used by MayaHaabCalendar.
 	static QVector<int> mayanTzolkinFromFixed(int rd);
 

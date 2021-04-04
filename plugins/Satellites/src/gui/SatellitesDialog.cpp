@@ -810,8 +810,6 @@ void SatellitesDialog::showUpdateCompleted(int updated,
 	// display the status for another full interval before refreshing status
 	updateTimer->start();
 	ui->lastUpdateDateTimeEdit->setDateTime(plugin->getLastUpdate());
-	//QTimer *timer = new QTimer(this); // FIXME: What's the point of this? --BM. GZ Indeed, never triggered. Remove?
-	//connect(timer, SIGNAL(timeout()), this, SLOT(updateCountdown()));	
 	populateFilterMenu();
 }
 

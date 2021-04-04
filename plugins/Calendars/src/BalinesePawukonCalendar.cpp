@@ -29,7 +29,6 @@ BalinesePawukonCalendar::BalinesePawukonCalendar(double jd): Calendar(jd)
 	BalinesePawukonCalendar::retranslate();
 }
 
-
 // Set a calendar date from the Julian day number
 void BalinesePawukonCalendar::setJD(double JD)
 {
@@ -58,7 +57,6 @@ void BalinesePawukonCalendar::setDate(QVector<int> parts)
 	emit jdChanged(JD);
 }
 
-
 //! get a stringlist of calendar date elements sorted from the largest to the smallest.
 //! The order depends on the actual calendar
 QStringList BalinesePawukonCalendar::getDateStrings() const
@@ -76,7 +74,6 @@ QStringList BalinesePawukonCalendar::getDateStrings() const
 	list << dasawaraNames.value(parts.at(9));
 	return list;
 }
-
 
 QString BalinesePawukonCalendar::getFormattedDateString() const
 {
@@ -102,6 +99,7 @@ QString BalinesePawukonCalendar::getFormattedDateString1to5() const
 	}
 	return str;
 }
+
 // get a formatted string for the 5 second components of a date.
 QString BalinesePawukonCalendar::getFormattedDateString6to10() const
 {
@@ -113,9 +111,6 @@ QString BalinesePawukonCalendar::getFormattedDateString6to10() const
 	}
 	return str;
 }
-
-
-
 
 const int BalinesePawukonCalendar::baliEpoch=fixedFromJD(146, false);
 

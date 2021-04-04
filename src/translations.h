@@ -30,25 +30,6 @@ class Translations
 		// Generate Gettext strings for traduction
 		Q_ASSERT(0);
 
-		// Cardinals names
-		// TRANSLATORS: Cardinals names: North
-		N_("N");
-		// TRANSLATORS: Cardinals names: South
-		N_("S");
-		// TRANSLATORS: Cardinals names: East
-		N_("E");
-		// TRANSLATORS: Cardinals names: West
-		N_("W");
-		// TRANSLATORS: Ordinals names: Northeast
-		N_("NE");
-		// TRANSLATORS: Ordinals names: Southeast
-		N_("SE");
-		// TRANSLATORS: Ordinals names: Southwest
-		N_("SW");
-		// TRANSLATORS: Ordinals names: Northwest
-		N_("NW");
-
-		// =====================================================================
 		// List of types solar system bodies
 		// TRANSLATORS: Type of object
 		N_("star");
@@ -470,11 +451,11 @@ class Translations
 		// =====================================================================
 		// Constellation cultures
 		// TRANSLATORS: Name of the sky culture
+		N_("Al-Sufi");
+		// TRANSLATORS: Name of the sky culture
 		N_("Almagest");
 		// TRANSLATORS: Name of the sky culture
 		N_("Anutan");
-		// TRANSLATORS: Name of the sky culture
-		N_("Arabic");
 		// TRANSLATORS: Name of the sky culture
 		N_("Arabic Moon Stations");
 		// TRANSLATORS: Name of the sky culture
@@ -718,7 +699,7 @@ class Translations
 		N_("Look at the Sun from big planets of Solar System and Pluto.");
 		N_("Best views of Earth from other Solar System bodies in the 21st Century.");
 		N_("Transit of Venus as seen from Sydney Australia, 6th June 2012.");
-		N_("Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae plugin has to be enabled.");
+		N_("Flash of the supernova observed by Tycho Brahe in 1572. The Historical Supernovae plugin has to be enabled.");
 		N_("Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-3000");
 		N_("Earth Greatest Elongations and Transits from Callisto 2000-3000. Why Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of Jupiter's radiation belt. Therefore, if humans ever colonize Jupiter's moons, Callisto will be the one.");
 		N_("Earth the other visible Planet's Greatest Elongations and Oppositions from Ceres 2000-2200");

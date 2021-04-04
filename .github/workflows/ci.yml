@@ -20,7 +20,9 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt update
-        sudo apt upgrade -y
+        # using force-overwrite due to
+        # https://github.com/actions/virtual-environments/issues/2703
+        sudo ACCEPT_EULA=Y apt upgrade -o Dpkg::Options::="--force-overwrite" --yes
         sudo apt install -y qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins zlib1g-dev libgl1-mesa-dev libdrm-dev cmake
 
     - name: Checkout repository
@@ -53,7 +55,7 @@ jobs:
     # @BODY At the moment after installing gpsd (brew install gpsd) library can be found by cmake, but not headers! Apparently we should add some magic for environment variables or something else on macOS Catalina to make headers available for cmake/make
     steps:
     - name: Install dependencies
-      run: brew install qt
+      run: brew install qt@5
 
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -61,7 +63,7 @@ jobs:
     - name: Configure CMake
       shell: bash
       run: |
-        export PATH="/usr/local/opt/qt/bin:$PATH"
+        export PATH="/usr/local/opt/qt@5/bin:$PATH"
         mkdir -p build
         cd build
         cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On ${{ github.workspace }}
@@ -85,8 +87,12 @@ jobs:
     steps:
     - name: Install dependencies
       run: |
+        sudo apt remove php7.* -y
+        sudo apt remove php8.* -y
         sudo apt update
-        sudo apt upgrade -y
+        # using force-overwrite due to
+        # https://github.com/actions/virtual-environments/issues/2703
+        sudo ACCEPT_EULA=Y apt upgrade -o Dpkg::Options::="--force-overwrite" --yes
         sudo apt install -y qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins zlib1g-dev libgl1-mesa-dev libdrm-dev cmake lcov
 
     - name: Checkout repository

@@ -65,10 +65,9 @@ public:
 	//! Find and return the list of at most maxNbItem objects auto-completing passed object name
 	//! @param objPrefix the first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
-	//! @param useStartOfWords decide if start of word is searched
-	//! @param inEnglish list translated names (false) or in English (true)
+	//! @param useStartOfWords decide if start of word is searched	
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing matches
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=false) const;
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 
 	//! List all StelObjects.
 	//! @param inEnglish list names in English (true) or translated (false)

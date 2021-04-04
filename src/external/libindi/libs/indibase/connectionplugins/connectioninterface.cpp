@@ -24,7 +24,7 @@ namespace Connection
 {
 const char *CONNECTION_TAB = "Connection";
 
-Interface::Interface(INDI::DefaultDevice *dev) : device(dev)
+Interface::Interface(INDI::DefaultDevice *dev, Type type) : m_Device(dev), m_Type(type)
 {
     // Default handshake
     registerHandshake([]() { return true; });
@@ -36,7 +36,7 @@ Interface::~Interface()
 
 const char *Interface::getDeviceName()
 {
-    return device->getDeviceName();
+    return m_Device->getDeviceName();
 }
 
 bool Interface::ISNewSwitch(const char *dev, const char *name, ISState *states, char *names[], int n)
@@ -64,6 +64,20 @@ bool Interface::ISNewText(const char *dev, const char *name, char *texts[], char
     INDI_UNUSED(dev);
     INDI_UNUSED(name);
     INDI_UNUSED(texts);
+    INDI_UNUSED(names);
+    INDI_UNUSED(n);
+    return false;
+}
+
+bool Interface::ISNewBLOB(const char *dev, const char *name, int sizes[], int blobsizes[], char *blobs[],
+                          char *formats[], char *names[], int n)
+{
+    INDI_UNUSED(dev);
+    INDI_UNUSED(name);
+    INDI_UNUSED(sizes);
+    INDI_UNUSED(blobsizes);
+    INDI_UNUSED(blobs);
+    INDI_UNUSED(formats);
     INDI_UNUSED(names);
     INDI_UNUSED(n);
     return false;

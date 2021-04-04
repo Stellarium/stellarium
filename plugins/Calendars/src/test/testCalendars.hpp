@@ -31,8 +31,14 @@ private slots:
 	void testBasics();
 	void testEuropean();
 	void testNearEastern();
+	void testRoman();
+	void testFrenchRevolution();
 	void testMesoamerican();
+	void testIslamic();
+	void testHebrew();
+	void testPersian();
 	void testBalinesePawukon();
+	void testOldHindu();
 };
 
 #endif // _TESTCALENDARS_HPP

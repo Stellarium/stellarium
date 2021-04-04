@@ -1,0 +1,34 @@
+<h2>Testovacia scéna</h2>
+
+<p>Táto scéna je použiteľná hlavne ako základ pre vaše vlastné projekty. Mali
+by ste si spraviť kópiu priečinka tejto scény a potom ho ľubovoľne
+upravovať. Vyskúšajte nastavenia materiálov, alebo niektoré iné detaily, aby
+ste zistili, ako sa tento modul správa. Potom môžete postaviť a prezentovať
+svoju vlastnú prácu!</p>
+
+<h4>Testy súradníc a orientácie</h4>
+
+<p>Stĺpy, ktoré sú tu znázornené a vidieť ich zo stredu štruktúry, poskytujú
+približný pohľad (nie vysokopresný!) na polohy slnovratov/rovnodenností,
+východov/západov Slnka pre stredoeurópske zemepisné šírky. Stredné stĺpy
+naznačujú smer východ-západ. Na zami je viditeľná mriežka súradníc, ktorá
+nie je presne stotožnená so severom. Musí byť kompenzovaná rotácia o -4,2
+deg (test na konvergenciu meridánu), t.j. kým stredové stĺpy musia vždy a
+prense smerovať na západ-východ, čiary mriežky na severnom horizonte sú
+mierne (4,2 deg) vľavo od severu!</p>
+
+<p>Obchádzkové pozemné súradnice (Ctrl-R, T) by mali zobraziť súradnice
+viditeľné pozdĺž južnej a západnej hranice terénu.</p>
+
+<h4>Test materiálov</h4>
+
+<p>Tento model sa dá tiež použiť na test grafických možností zásuvného
+modulu. Môžete sa pohrať s nastaveniami materiálov, aby ste vytvorili vtipné
+efekty ako polopriehľadné, alebo potme svietiace tmavé tehlové gule.</p>
+
+<p>Kvôli testovaniu časových efektov sú stĺpy a gule viditeľné len medzi rokmi
+2000 a 2020. Na zmenu je potrebné upraviť súbor s materiálmi!</p>
+
+<h4>Model</h4>
+<p>Testovacia scéna pre Stellarium/scenery3d development. Export z
+SU8-Kerkythea-KT2OBJ.</p>

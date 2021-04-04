@@ -230,18 +230,29 @@ float StelObject::getVMagnitudeWithExtinction(const StelCore* core) const
 	return vMag;
 }
 
+float StelObject::getAirmass(const StelCore *core) const
+{
+	double az_app, alt_app;
+	StelUtils::rectToSphe(&az_app, &alt_app, getAltAzPosApparent(core));
+	Q_UNUSED(az_app)
+	if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-2.0*M_PI_180)) // Don't compute extinction much below horizon where model is meaningless.
+	{
+		const Extinction &extinction=core->getSkyDrawer()->getExtinction();
+		return extinction.airmass(static_cast<float>(std::cos(M_PI_2-alt_app)), true);
+	}
+	else
+		return -1.f;
+}
+
 // Format the magnitude info string for the object
-QString StelObject::getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const double alt_app, const int decimals) const
+QString StelObject::getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals) const
 {
 	if (flags&Magnitude)
 	{
 		QString str = QString("%1: <b>%2</b>").arg(q_("Magnitude"), QString::number(getVMagnitude(core), 'f', decimals));
-		if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-2.0*M_PI_180)) // Don't show extincted magnitude much below horizon where model is meaningless.
-		{
-			const Extinction &extinction=core->getSkyDrawer()->getExtinction();
-			const float airmass=extinction.airmass(static_cast<float>(std::cos(M_PI_2-alt_app)), true);
+		const float airmass = getAirmass(core);
+		if (airmass>-1.f) // Don't show extincted magnitude much below horizon where model is meaningless.
 			str += QString(" (%1 <b>%2</b> %3 <b>%4</b> %5)").arg(q_("reduced to"), QString::number(getVMagnitudeWithExtinction(core), 'f', decimals), q_("by"), QString::number(airmass, 'f', 2), q_("Airmasses"));
-		}
 		str +="<br />";
 		str += getExtraInfoStrings(Magnitude).join("");
 		return str;
@@ -797,9 +808,7 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 
 	map.insert("altitude", alt*M_180_PI);
 	map.insert("azimuth", az*M_180_PI);
-
-	const Extinction &extinction=core->getSkyDrawer()->getExtinction();
-	map.insert("airmass", extinction.airmass(static_cast<float>(cos(M_PI_2-alt)), true));
+	map.insert("airmass", getAirmass(core));
 
 	// geometric altitude/azimuth
 	pos = getAltAzPosGeometric(core);

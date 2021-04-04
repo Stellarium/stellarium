@@ -166,7 +166,7 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	QVariantList groupList =  map.value("groups", QVariantList()).toList();
 	if (!groupList.isEmpty())
 	{
-		for (const auto& group : groupList)
+		for (const auto& group : qAsConst(groupList))
 			groups.insert(group.toString());
 	}
 
@@ -242,7 +242,7 @@ QVariantMap Satellite::getMap(void)
 	map["orbitColor"] = orbitCol;
 	map["infoColor"] = infoCol;
 	QVariantList commList;
-	for (const auto& c : comms)
+	for (const auto& c : qAsConst(comms))
 	{
 		QVariantMap commMap;
 		commMap["frequency"] = c.frequency;
@@ -252,7 +252,7 @@ QVariantMap Satellite::getMap(void)
 	}
 	map["comms"] = commList;
 	QVariantList groupList;
-	for (const auto& g : groups)
+	for (const auto& g : qAsConst(groups))
 	{
 		groupList << g;
 	}
@@ -297,22 +297,20 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 					 .arg(id);
 		else
 			catalogNumbers = QString("NORAD %1; %2: %3")
-			                 .arg(id)
-					 .arg(q_("International Designator"))
-			                 .arg(internationalDesignator);
+					 .arg(id, q_("International Designator"), internationalDesignator);
 		oss << catalogNumbers << "<br/><br/>";
 	}
 
 	if (flags & ObjectType)
-	{
 		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("artificial satellite"))  << "<br/>";
-	}
 	
 	if ((flags & Magnitude) && (stdMag<99. || RCS>0.) && (visibility==gSatWrapper::VISIBLE))
 	{
-		oss << QString("%1: <b>%2</b>").arg(q_("Approx. magnitude"), QString::number(getVMagnitude(core), 'f', 2));
-		if (core->getSkyDrawer()->getFlagHasAtmosphere())
-			oss << QString(" (%1: <b>%2</b>)").arg(q_("extincted to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2));
+		const int decimals = 2;
+		const float airmass = getAirmass(core);
+		oss << QString("%1: <b>%2</b>").arg(q_("Approx. magnitude"), QString::number(getVMagnitude(core), 'f', decimals));
+		if (airmass>-1.f) // Don't show extincted magnitude much below horizon where model is meaningless.
+			oss << QString(" (%1 <b>%2</b> %3 <b>%4</b> %5)").arg(q_("reduced to"), QString::number(getVMagnitudeWithExtinction(core), 'f', decimals), q_("by"), QString::number(airmass, 'f', decimals), q_("Airmasses"));
 		oss << "<br />";
 	}
 
@@ -362,8 +360,8 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		}
 		double inclination = pSatWrapper->getOrbitalInclination();
 		oss << QString("%1: %2 (%3%4)")
-		       .arg(q_("Inclination")).arg(StelUtils::decDegToDmsStr(inclination))
-		       .arg(QString::number(inclination, 'f', 4)).arg(degree)
+		       .arg(q_("Inclination"), StelUtils::decDegToDmsStr(inclination),
+			    QString::number(inclination, 'f', 4), degree)
 		<< "<br/>";
 		oss << QString("%1: %2%3/%4%5")
 		       .arg(q_("SubPoint (Lat./Long.)"))
@@ -387,7 +385,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		        .arg(velocity[1], 5, 'f', 2)
 		        .arg(velocity[2], 5, 'f', 2);
 		// TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered inertial coordinate system
-		oss << QString("%1: %2 %3").arg(q_("TEME velocity")).arg(temeVel).arg(qc_("km/s", "speed")) << "<br/>";
+		oss << QString("%1: %2 %3").arg(q_("TEME velocity"), temeVel, qc_("km/s", "speed")) << "<br/>";
 
 		QString pha = StelApp::getInstance().getFlagShowDecimalDegrees() ?
 				StelUtils::radToDecDegStr(phaseAngle,4,false,true) :
@@ -431,7 +429,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		}
 
 		if (status!=StatusUnknown)
-			oss << QString("%1: %2").arg(q_("Operational status")).arg(getOperationalStatus()) << "<br />";
+			oss << QString("%1: %2").arg(q_("Operational status"), getOperationalStatus()) << "<br />";
 		//Visibility: Full text		
 		oss << q_(visibilityDescription.value(visibility, "")) << "<br />";
 
@@ -442,7 +440,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 			{
 				double dop = getDoppler(c.frequency);
 				double ddop = dop;
-				char sign;
+				QString sign;
 				if (dop<0.)
 				{
 					sign='-';
@@ -454,12 +452,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 				if (!c.modulation.isEmpty() && c.modulation != "") oss << "  " << c.modulation;
 				if (!c.description.isEmpty() && c.description != "") oss << "  " << c.description;
 				if ((!c.modulation.isEmpty() && c.modulation != "") || (!c.description.isEmpty() && c.description != "")) oss << ": ";
-				oss << QString("%1 %2 (%3%4 %5)")
-				       .arg(c.frequency, 8, 'f', 5)
-				       .arg(qc_("MHz", "frequency"))
-				       .arg(sign)
-				       .arg(ddop, 6, 'f', 3)
-				       .arg(qc_("kHz", "frequency"));
+				oss << QString("%1 %2 (%3%4 %5)").arg(QString::number(c.frequency, 'f', 3), qc_("MHz", "frequency"), sign, QString::number(ddop, 'f', 3), qc_("kHz", "frequency"));
 				oss << "<br/>";
 			}
 		}
@@ -773,10 +766,8 @@ void Satellite::setNewTleElements(const QString& tle1, const QString& tle2)
 		delete old;
 	}
 
-	tleElements.first.clear();
-	tleElements.first.append(tle1);
-	tleElements.second.clear();
-	tleElements.second.append(tle2);
+	tleElements.first = tle1.toUtf8();
+	tleElements.second = tle2.toUtf8();
 
 	pSatWrapper = new gSatWrapper(id, tle1, tle2);
 	orbitPoints.clear();
@@ -803,14 +794,14 @@ void Satellite::update(double)
 		velocity                 = pSatWrapper->getTEMEVel();
 		latLongSubPointPosition  = pSatWrapper->getSubPoint();
 		height                   = latLongSubPointPosition[2]; // km
-		if (height < 80.0)
+		if (height < 70.0)
 		{
 			// The orbit is no longer valid.  Causes include very out of date
 			// TLE, system date and time out of a reasonable range, and orbital
 			// degradation and re-entry of a satellite.  In any of these cases
 			// we might end up with a problem - usually a crash of Stellarium
 			// because of a div/0 or something.  To prevent this, we turn off
-			// the satellite when the computed height is 80km.
+			// the satellite when the computed height is 70km.
 			// Low Earth Orbit (LEO):
 			// A geocentric orbit with an altitude much less than the Earth's radius.
 			// Satellites in this orbit are between 80 and 2000 kilometres above
@@ -972,13 +963,18 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 				RCMag rcMag;
 
 				// Draw the satellite
-				sd->preDrawPointSource(&painter);
 				if (magSat <= sd->getLimitMagnitude())
 				{
+					Vec3f vf(XYZ.toVec3f());
+					Vec3f altAz(vf);
+					altAz.normalize();
+					core->j2000ToAltAzInPlaceNoRefraction(&altAz);
+					sd->preDrawPointSource(&painter);
 					sd->computeRCMag(magSat, &rcMag);
-					sd->drawPointSource(&painter, XYZ.toVec3f(), rcMag, color*hintBrightness, true);
+					// allow height-dependent twinkle and suppress twinkling in higher altitudes. Keep 0.1 twinkle amount in zenith.
+					sd->drawPointSource(&painter, vf, rcMag, color*hintBrightness, true, qMin(1.0f, 1.0f-0.9f*altAz[2]));
+					sd->postDrawPointSource(&painter);
 				}
-				sd->postDrawPointSource(&painter);
 
 				float txtMag = magSat;
 				if (visibility != gSatWrapper::VISIBLE)

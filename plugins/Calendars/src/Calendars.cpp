@@ -43,12 +43,18 @@
 #include "ZoroastrianCalendar.hpp"
 #include "CopticCalendar.hpp"
 #include "EthiopicCalendar.hpp"
+#include "IslamicCalendar.hpp"
+#include "HebrewCalendar.hpp"
+#include "OldHinduSolarCalendar.hpp"
+#include "OldHinduLuniSolarCalendar.hpp"
 #include "MayaLongCountCalendar.hpp"
 #include "MayaHaabCalendar.hpp"
 #include "MayaTzolkinCalendar.hpp"
 #include "AztecXihuitlCalendar.hpp"
 #include "AztecTonalpohualliCalendar.hpp"
 #include "BalinesePawukonCalendar.hpp"
+#include "FrenchArithmeticCalendar.hpp"
+#include "PersianArithmeticCalendar.hpp"
 
 /*************************************************************************
  This method is the one called automatically by the StelModuleMgr just 
@@ -93,12 +99,18 @@ Calendars::Calendars():
 	flagShowCoptic(true),
 	flagShowEthiopic(true),
 	flagShowChinese(true),
+	flagShowIslamic(true),
+	flagShowHebrew(true),
+	flagShowOldHinduSolar(true),
+	flagShowOldHinduLunar(true),
 	flagShowMayaLongCount(true),
 	flagShowMayaHaab(true),
 	flagShowMayaTzolkin(true),
 	flagShowAztecXihuitl(true),
 	flagShowAztecTonalpohualli(true),
-	flagShowBalinese(true)
+	flagShowBalinese(true),
+	flagShowFrenchArithmetic(true),
+	flagShowPersianArithmetic(true)
 {
 	setObjectName("Calendars");
 	font.setPixelSize(15);
@@ -188,17 +200,24 @@ void Calendars::init()
 	calendars.insert("Zoroastrian", new ZoroastrianCalendar(jd));
 	calendars.insert("Coptic", new CopticCalendar(jd));
 	calendars.insert("Ethiopic", new EthiopicCalendar(jd));
+	calendars.insert("Islamic", new IslamicCalendar(jd));
+	calendars.insert("Hebrew", new HebrewCalendar(jd));
+	calendars.insert("OldHinduSolar", new OldHinduSolarCalendar(jd));
+	calendars.insert("OldHinduLunar", new OldHinduLuniSolarCalendar(jd));
 	calendars.insert("MayaLongCount", new MayaLongCountCalendar(jd));
 	calendars.insert("MayaHaab", new MayaHaabCalendar(jd));
 	calendars.insert("MayaTzolkin", new MayaTzolkinCalendar(jd));
 	calendars.insert("AztecXihuitl", new AztecXihuitlCalendar(jd));
 	calendars.insert("AztecTonalpohualli", new AztecTonalpohualliCalendar(jd));
 	calendars.insert("Balinese", new BalinesePawukonCalendar(jd));
+	calendars.insert("FrenchArithmetic", new FrenchArithmeticCalendar(jd));
+	calendars.insert("PersianArithmetic", new PersianArithmeticCalendar(jd));
 	// TODO: Add your Calendar subclasses here.
 
 	foreach (Calendar* cal, calendars)
 	{
 		connect(cal, SIGNAL(jdChanged(double)), StelApp::getInstance().getCore(), SLOT(setJD(double)));
+		connect(&StelApp::getInstance(), SIGNAL(languageChanged()), cal, SLOT(retranslate()));
 	}
 }
 
@@ -218,12 +237,18 @@ void Calendars::loadSettings()
 	showCoptic(	       conf->value("Calendars/show_coptic", true).toBool());
 	showEthiopic(	       conf->value("Calendars/show_ethiopic", true).toBool());
 	showChinese(           conf->value("Calendars/show_chinese", false).toBool());
+	showIslamic(           conf->value("Calendars/show_islamic", true).toBool());
+	showHebrew(            conf->value("Calendars/show_hebrew", true).toBool());
+	showOldHinduSolar(     conf->value("Calendars/show_old_hindu_solar", true).toBool());
+	showOldHinduLunar(     conf->value("Calendars/show_old_hindu_lunar", true).toBool());
 	showMayaLongCount(     conf->value("Calendars/show_maya_long_count", true).toBool());
 	showMayaHaab(          conf->value("Calendars/show_maya_haab", true).toBool());
 	showMayaTzolkin(       conf->value("Calendars/show_maya_tzolkin", true).toBool());
 	showAztecXihuitl(      conf->value("Calendars/show_aztec_xihuitl", true).toBool());
 	showAztecTonalpohualli(conf->value("Calendars/show_aztec_tonalpohualli", true).toBool());
 	showBalinese(          conf->value("Calendars/show_balinese_pawukon", true).toBool());
+	showFrenchArithmetic(  conf->value("Calendars/show_french_arithmetic", true).toBool());
+	showPersianArithmetic( conf->value("Calendars/show_persian_arithmetic", true).toBool());
 }
 
 void Calendars::restoreDefaultSettings()
@@ -262,6 +287,12 @@ void Calendars::draw(StelCore* core)
 	if (flagShowZoroastrian)   oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Zoroastrian",     "calendar")).arg(getCal("Zoroastrian")->getFormattedDateString());
 	if (flagShowCoptic)        oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Coptic",          "calendar")).arg(getCal("Coptic")->getFormattedDateString());
 	if (flagShowEthiopic)      oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Ethiopic",        "calendar")).arg(getCal("Ethiopic")->getFormattedDateString());
+	if (flagShowFrenchArithmetic) oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("French Rev. (Arithm.)",   "calendar")).arg(getCal("FrenchArithmetic")->getFormattedDateString());
+	if (flagShowIslamic)       oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Islamic",         "calendar")).arg(getCal("Islamic")->getFormattedDateString());
+	if (flagShowHebrew)        oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Hebrew",          "calendar")).arg(getCal("Hebrew")->getFormattedDateString());
+	if (flagShowPersianArithmetic) oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Persian (Arithm.)", "calendar")).arg(getCal("PersianArithmetic")->getFormattedDateString());
+	if (flagShowOldHinduSolar) oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Old Hindu Solar", "calendar")).arg(getCal("OldHinduSolar")->getFormattedDateString());
+	if (flagShowOldHinduLunar) oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Old Hindu Lunisolar", "calendar")).arg(getCal("OldHinduLunar")->getFormattedDateString());
 	if (flagShowMayaLongCount) oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Maya Long Count", "calendar")).arg(getCal("MayaLongCount")->getFormattedDateString());
 	if (flagShowMayaHaab)      oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Maya Haab",       "calendar")).arg(getCal("MayaHaab")->getFormattedDateString());
 	if (flagShowMayaTzolkin)   oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Maya Tzolkin",    "calendar")).arg(getCal("MayaTzolkin")->getFormattedDateString());
@@ -449,6 +480,50 @@ void Calendars::showChinese(bool b)
 	}
 }
 
+bool Calendars::isIslamicDisplayed() const { return flagShowIslamic;}
+void Calendars::showIslamic(bool b)
+{
+	if (b!=flagShowIslamic)
+	{
+		flagShowIslamic=b;
+		conf->setValue("Calendars/show_islamic", b);
+		emit showIslamicChanged(b);
+	}
+}
+
+bool Calendars::isHebrewDisplayed() const { return flagShowHebrew;}
+void Calendars::showHebrew(bool b)
+{
+	if (b!=flagShowHebrew)
+	{
+		flagShowHebrew=b;
+		conf->setValue("Calendars/show_hebrew", b);
+		emit showHebrewChanged(b);
+	}
+}
+
+bool Calendars::isOldHinduSolarDisplayed() const { return flagShowOldHinduSolar;}
+void Calendars::showOldHinduSolar(bool b)
+{
+	if (b!=flagShowOldHinduSolar)
+	{
+		flagShowOldHinduSolar=b;
+		conf->setValue("Calendars/show_old_hindu_solar", b);
+		emit showOldHinduSolarChanged(b);
+	}
+}
+
+bool Calendars::isOldHinduLunarDisplayed() const { return flagShowOldHinduLunar;}
+void Calendars::showOldHinduLunar(bool b)
+{
+	if (b!=flagShowOldHinduLunar)
+	{
+		flagShowOldHinduLunar=b;
+		conf->setValue("Calendars/show_old_hindu_lunar", b);
+		emit showOldHinduLunarChanged(b);
+	}
+}
+
 bool Calendars::isMayaLongCountDisplayed() const { return flagShowMayaLongCount;}
 void Calendars::showMayaLongCount(bool b)
 {
@@ -512,5 +587,27 @@ void Calendars::showBalinese(bool b)
 		flagShowBalinese=b;
 		conf->setValue("Calendars/show_balinese_pawukon", b);
 		emit showBalineseChanged(b);
+	}
+}
+
+bool Calendars::isFrenchArithmeticDisplayed() const { return flagShowFrenchArithmetic;}
+void Calendars::showFrenchArithmetic(bool b)
+{
+	if (b!=flagShowFrenchArithmetic)
+	{
+		flagShowFrenchArithmetic=b;
+		conf->setValue("Calendars/show_french_arithmetic", b);
+		emit showFrenchArithmeticChanged(b);
+	}
+}
+
+bool Calendars::isPersianArithmeticDisplayed() const { return flagShowPersianArithmetic;}
+void Calendars::showPersianArithmetic(bool b)
+{
+	if (b!=flagShowPersianArithmetic)
+	{
+		flagShowPersianArithmetic=b;
+		conf->setValue("Calendars/show_persian_arithmetic", b);
+		emit showPersianArithmeticChanged(b);
 	}
 }

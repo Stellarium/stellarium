@@ -152,10 +152,10 @@ mediump float orenNayar(in mediump vec3 normal, in highp vec3 lightDir, in highp
     // This clamp gives an ugly pseudo edge visible in rapid animation.
     //return clamp(ON, 0.0, 1.0);
     // Better use GLSL's smoothstep. However, this is N/A in GLSL1.20/GLES. Workaround from https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/smoothstep.xhtml
-    if (ON>0.9)
+    if (ON>0.8)
     {
-        mediump float t = clamp((ON - 0.9) / (1.0 - 0.9), 0.0, 1.0);
-        return 0.9 + 0.1*(t * t * (3.0 - 2.0 * t));
+        mediump float t = clamp((ON - 0.8) / (1.0 - 0.8), 0.0, 1.0);
+        return 0.8 + 0.2*(t * t * (3.0 - 2.0 * t));
     }
     else
     return clamp(ON, 0.0, 1.0);
@@ -228,7 +228,7 @@ void main()
                 else if( d <= r - R ) // fully inside umbra
                 {
 #ifdef IS_MOON
-                    illumination = (d / (r - R)) * 0.6; // prepare texture coordinate. 0.6=umbra edge.
+                    illumination = (d / (r - R)) * 0.594; // prepare texture coordinate. 0.6=umbra edge. Smaller number->larger shadow.
 #else
                     illumination = 0.0;
 #endif
@@ -242,7 +242,7 @@ void main()
                 {
 #ifdef IS_MOON
                     //illumination = ((d - abs(R-r)) / (R + r - abs(R-r))) * 0.4 + 0.6;
-                    illumination = ((d - r + R) / (2.0 * R )) * 0.4 + 0.6;
+                    illumination = ((d - r + R) / (2.0 * R )) * 0.406 + 0.594;
 #else
                     mediump float x = (R * R + d * d - r * r) / (2.0 * d);
                     mediump float alpha = acos(x / R);
@@ -278,7 +278,8 @@ void main()
         outgas = outgasParameters.x * outgasFactor(normal, eyeDirection, outgasParameters.y);
     }
 //Reduce lum if sky is bright, to avoid burnt-out look in daylight sky.
-    lum *= (1.0-0.4*skyBrightness);
+    //lum *= (1.0-0.4*skyBrightness);
+    lum *= clamp((0.9-0.05*log(skyBrightness)), 0.1, 0.9);
 #ifdef SHADOWMAP
     //use shadowmapping
     //z-bias is modified using the angle between the surface and the light

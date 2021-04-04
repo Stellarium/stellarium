@@ -64,10 +64,15 @@
 
 SolarSystem::SolarSystem() : StelObjectModule()
 	, shadowPlanetCount(0)
+	, earthShadowEnlargementDanjon(false)
 	, flagMoonScale(false)
 	, moonScale(1.0)
 	, flagMinorBodyScale(false)
 	, minorBodyScale(1.0)
+	, flagPlanetScale(false)
+	, planetScale(1.0)
+	, flagSunScale(false)
+	, sunScale(1.0)
 	, labelsAmount(false)
 	, flagOrbits(false)
 	, flagLightTravelTime(true)
@@ -155,10 +160,15 @@ void SolarSystem::init()
 
 	setSelected("");	// Fix a bug on macosX! Thanks Fumio!
 	setFlagDrawMoonHalo(conf->value("viewing/flag_draw_moon_halo", true).toBool());
-	setFlagMoonScale(conf->value("viewing/flag_moon_scaled", conf->value("viewing/flag_init_moon_scaled", "false").toBool()).toBool());  // name change
+	setFlagDrawSunHalo(conf->value("viewing/flag_draw_sun_halo", true).toBool());
+	setFlagMoonScale(conf->value("viewing/flag_moon_scaled", conf->value("viewing/flag_init_moon_scaled", false).toBool()).toBool());  // name change
+	setMoonScale(conf->value("viewing/moon_scale", 4.0).toDouble());
 	setMinorBodyScale(conf->value("viewing/minorbodies_scale", 10.0).toDouble());
 	setFlagMinorBodyScale(conf->value("viewing/flag_minorbodies_scaled", false).toBool());
-	setMoonScale(conf->value("viewing/moon_scale", 4.0).toDouble());
+	setFlagPlanetScale(conf->value("viewing/flag_planets_scaled", false).toBool());
+	setPlanetScale(conf->value("viewing/planets_scale", 150.0).toDouble());
+	setFlagSunScale(conf->value("viewing/flag_sun_scaled", false).toBool());
+	setSunScale(conf->value("viewing/sun_scale", 4.0).toDouble());
 	setFlagPlanets(conf->value("astro/flag_planets").toBool());
 	setFlagHints(conf->value("astro/flag_planets_hints").toBool());
 	setFlagLabels(conf->value("astro/flag_planets_labels", true).toBool());
@@ -170,7 +180,7 @@ void SolarSystem::init()
 	setFlagPointer(conf->value("astro/flag_planets_pointers", true).toBool());
 	// Set the algorithm from Astronomical Almanac for computation of apparent magnitudes for
 	// planets in case  observer on the Earth by default
-	setApparentMagnitudeAlgorithmOnEarth(conf->value("astro/apparent_magnitude_algorithm", "ExplSup2013").toString());
+	setApparentMagnitudeAlgorithmOnEarth(conf->value("astro/apparent_magnitude_algorithm", "Mallama2018").toString());
 	setFlagNativePlanetNames(conf->value("viewing/flag_planets_native_names", true).toBool());
 	// Is enabled the showing of isolated trails for selected objects only?
 	setFlagIsolatedTrails(conf->value("viewing/flag_isolated_trails", true).toBool());
@@ -186,6 +196,8 @@ void SolarSystem::init()
 	setCustomGrsLongitude(conf->value("astro/grs_longitude", 216).toInt());
 	setCustomGrsDrift(conf->value("astro/grs_drift", 15.).toDouble());
 	setCustomGrsJD(conf->value("astro/grs_jd", 2456901.5).toDouble());
+
+	setFlagEarthShadowEnlargementDanjon(conf->value("astro/shadow_enlargement_danjon", false).toBool());
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
@@ -245,6 +257,8 @@ void SolarSystem::init()
 	addAction("actionShow_Planets_Pointers", displayGroup, N_("Planet selection marker"), "flagPointer", "Ctrl+Shift+P");
 	addAction("actionShow_Planets_EnlargeMoon", displayGroup, N_("Enlarge Moon"), "flagMoonScale");
 	addAction("actionShow_Planets_EnlargeMinor", displayGroup, N_("Enlarge minor bodies"), "flagMinorBodyScale");
+	addAction("actionShow_Planets_EnlargePlanets", displayGroup, N_("Enlarge Planets"), "flagPlanetScale");
+	addAction("actionShow_Planets_EnlargeSun", displayGroup, N_("Enlarge Sun"), "flagSunScale");
 	addAction("actionShow_Skyculture_NativePlanetNames", displayGroup, N_("Native planet names (from starlore)"), "flagNativePlanetNames", "Ctrl+Shift+N");
 
 	connect(StelApp::getInstance().getModule("HipsMgr"), SIGNAL(gotNewSurvey(HipsSurveyP)),
@@ -2103,8 +2117,8 @@ void SolarSystem::setFlagMoonScale(bool b)
 {
 	if(b!=flagMoonScale)
 	{
-		if (!b) getMoon()->setSphereScale(1);
-		else getMoon()->setSphereScale(moonScale);
+		if (b) getMoon()->setSphereScale(moonScale);
+		else getMoon()->setSphereScale(1);
 		flagMoonScale = b;
 		emit flagMoonScaleChanged(b);
 	}
@@ -2122,7 +2136,7 @@ void SolarSystem::setMoonScale(double f)
 	}
 }
 
-// Set/Get if minor body display is scaled. This flag will be queried by all Planet objects except for the Moon.
+// Set if minor body display is scaled. This flag will be queried by all Planet objects except for the Moon.
 void SolarSystem::setFlagMinorBodyScale(bool b)
 {
 	if(b!=flagMinorBodyScale)
@@ -2141,7 +2155,7 @@ void SolarSystem::setFlagMinorBodyScale(bool b)
 	}
 }
 
-// Set/Get minor body display scaling factor. This will be queried by all Planet objects except for the Moon.
+// Set minor body display scaling factor. This will be queried by all Planet objects except for the Moon.
 void SolarSystem::setMinorBodyScale(double f)
 {
 	if(!fuzzyEquals(minorBodyScale, f))
@@ -2157,6 +2171,62 @@ void SolarSystem::setMinorBodyScale(double f)
 			}
 		}
 		emit minorBodyScaleChanged(f);
+	}
+}
+
+// Set if Planet display is scaled
+void SolarSystem::setFlagPlanetScale(bool b)
+{
+	if(b!=flagPlanetScale)
+	{
+		double scale=(b ? planetScale : 1.);
+		for (auto& p : systemPlanets)
+		{
+			if (p->pType==Planet::isPlanet)
+				p->setSphereScale(scale);
+		}
+		flagPlanetScale = b;
+		emit flagPlanetScaleChanged(b);
+	}
+}
+
+// Set Moon display scaling factor.
+void SolarSystem::setPlanetScale(double f)
+{
+	if(!fuzzyEquals(planetScale, f))
+	{
+		planetScale = f;
+		if (flagPlanetScale)
+			for (auto& p : systemPlanets)
+			{
+				if (p->pType==Planet::isPlanet)
+					p->setSphereScale(planetScale);
+			}
+		emit planetScaleChanged(f);
+	}
+}
+
+// Set if Sun display is scaled
+void SolarSystem::setFlagSunScale(bool b)
+{
+	if(b!=flagSunScale)
+	{
+		if (b) getSun()->setSphereScale(sunScale);
+		else getSun()->setSphereScale(1);
+		flagSunScale = b;
+		emit flagSunScaleChanged(b);
+	}
+}
+
+// Set Sun display scaling factor. This goes directly to the Sun object.
+void SolarSystem::setSunScale(double f)
+{
+	if(!fuzzyEquals(sunScale, f))
+	{
+		sunScale = f;
+		if (flagSunScale)
+			getSun()->setSphereScale(sunScale);
+		emit sunScaleChanged(f);
 	}
 }
 
@@ -2310,6 +2380,17 @@ bool SolarSystem::getFlagDrawMoonHalo() const
 	return Planet::drawMoonHalo;
 }
 
+void SolarSystem::setFlagDrawSunHalo(bool b)
+{
+	Planet::drawSunHalo=b;
+	emit flagDrawSunHaloChanged(b);
+}
+
+bool SolarSystem::getFlagDrawSunHalo() const
+{
+	return Planet::drawSunHalo;
+}
+
 void SolarSystem::setFlagPermanentOrbits(bool b)
 {
 	Planet::permanentDrawingOrbits=b;
@@ -2383,6 +2464,17 @@ void SolarSystem::setCustomGrsJD(double JD)
 double SolarSystem::getCustomGrsJD()
 {
 	return RotationElements::customGrsJD;
+}
+
+void SolarSystem::setFlagEarthShadowEnlargementDanjon(bool b)
+{
+	earthShadowEnlargementDanjon=b;
+	emit earthShadowEnlargementDanjonChanged(b);
+}
+
+bool SolarSystem::getFlagEarthShadowEnlargementDanjon() const
+{
+	return earthShadowEnlargementDanjon;
 }
 
 void SolarSystem::setOrbitColorStyle(QString style)
@@ -2479,6 +2571,51 @@ QPair<double, PlanetP> SolarSystem::getEclipseFactor(const StelCore* core) const
 	}
 
 	return QPair<double, PlanetP>(final_illumination, p);
+}
+
+// Retrieve Radius of Umbra and Penumbra at the distance of the Moon.
+// Returns a pair (umbra, penumbra) in (geocentric_arcseconds, AU, geometric_AU).
+// * sizes in arcseconds are the usual result found as Bessel element in eclipse literature.
+//   It includes scaling for effects of atmosphere either after Chauvenet (2%) or after Danjon. (see Espenak: 5000 Years Canon of Lunar Eclipses.)
+// * sizes in AU are the same, converted back to AU in Lunar distance.
+// * sizes in geometric_AU derived from pure geometrical evaluations without scalings applied.
+QPair<Vec3d,Vec3d> SolarSystem::getEarthShadowRadiiAtLunarDistance() const
+{
+	// Note: The application of this shadow enlargement is not according to the books, but looks close enough for now.
+	static const double sun2earth=sun->getEquatorialRadius() / earth->getEquatorialRadius();
+	PlanetP sun=getSun();
+	PlanetP moon=getMoon();
+	PlanetP earth=getEarth();
+	const double lunarDistance=moon->getEclipticPos().length(); // Lunar distance [AU]
+	const double earthDistance=earth->getHeliocentricEclipticPos().length(); // Earth distance [AU]
+	const double sunHP =asin(earth->getEquatorialRadius()/earthDistance) * M_180_PI*3600.; // arcsec.
+	const double moonHP=asin(earth->getEquatorialRadius()/lunarDistance) * M_180_PI*3600.; // arcsec.
+	const double sunSD  =atan(sun->getEquatorialRadius()/earthDistance)  * M_180_PI*3600.; // arcsec.
+
+	// Compute umbra radius at lunar distance.
+	const double lUmbra=earthDistance/(sun2earth-1.); // length of earth umbra [AU]
+	const double rUmbraAU=earth->getEquatorialRadius()*(lUmbra-lunarDistance)/lUmbra; // radius of earth shadow at lunar distance [AU]
+	// Penumbra:
+	const double lPenumbra=earthDistance/(sun2earth + 1.); // distance between earth and point between sun and earth where penumbral border rays intersect
+	const double rPenumbraAU=earth->getEquatorialRadius()*(lPenumbra+lunarDistance)/lPenumbra; // radius of penumbra at Lunar distance [AU]
+
+	//Classical Bessel elements instead
+	double f1, f2;
+	if (earthShadowEnlargementDanjon)
+	{
+		static const double danjonScale=1+1./85.-1./594.; // ~1.01, shadow magnification factor (see Espenak 5000 years Canon)
+		f1=danjonScale*moonHP + sunHP + sunSD; // penumbra radius, arcsec
+		f2=danjonScale*moonHP + sunHP - sunSD; // umbra radius, arcsec
+	}
+	else
+	{
+		const double mHP1=0.998340*moonHP;
+		f1=1.02*(mHP1 + sunHP + sunSD); // penumbra radius, arcsec
+		f2=1.02*(mHP1 + sunHP - sunSD); // umbra radius, arcsec
+	}
+	const double f1_AU=tan(f1/3600.*M_PI_180)*lunarDistance;
+	const double f2_AU=tan(f2/3600.*M_PI_180)*lunarDistance;
+	return QPair<Vec3d,Vec3d>(Vec3d(f2, f2_AU, rUmbraAU), Vec3d(f1, f1_AU, rPenumbraAU));
 }
 
 bool SolarSystem::removeMinorPlanet(QString name)

@@ -139,7 +139,7 @@ private slots:
 	void populateDitherList();
 	void setDitherFormat();
 
-	#ifndef DISABLE_SCRIPTING
+	#ifdef ENABLE_SCRIPTING
 	//! The selection of script in the script list has changed
 	//! Updates the script information panel
 	void scriptSelectionChanged(const QString& s);

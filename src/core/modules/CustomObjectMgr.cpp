@@ -308,11 +308,6 @@ StelObjectP CustomObjectMgr::searchByNameI18n(const QString& nameI18n) const
 	return Q_NULLPTR;
 }
 
-QStringList CustomObjectMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
-{
-	return StelObjectModule::listMatchingObjects(objPrefix, maxNbItem, useStartOfWords, inEnglish);
-}
-
 QStringList CustomObjectMgr::listAllObjects(bool inEnglish) const
 {
 	QStringList result;

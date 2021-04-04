@@ -844,3 +844,69 @@ void RotationElements::corrOriProteus(const double d, const double T, double* J2
 	*J2000NPoleDE+=(M_PI_180*-0.51)*cos(planetCorrections.Na) - (M_PI_180* 0.04)*cos(planetCorrections.N6);
 }
 
+const QList<Vec3d> RotationElements::marsMagLs =
+{
+	{ -20.0,  0.024, -0.030},
+	{ -10.0,  0.034, -0.017},
+	{   0.0,  0.036, -0.029},
+	{  10.0,  0.045, -0.017},
+	{  20.0,  0.038, -0.014},
+	{  30.0,  0.023, -0.006},
+	{  40.0,  0.015, -0.018},
+	{  50.0,  0.011, -0.020},
+	{  60.0,  0.000, -0.014},
+	{  70.0, -0.012, -0.030},
+	{  80.0, -0.018, -0.008},
+	{  90.0, -0.036, -0.040},
+	{ 100.0, -0.044, -0.024},
+	{ 110.0, -0.059, -0.037},
+	{ 120.0, -0.060, -0.036},
+	{ 130.0, -0.055, -0.032},
+	{ 140.0, -0.043,  0.010},
+	{ 150.0, -0.041,  0.010},
+	{ 160.0, -0.041, -0.001},
+	{ 170.0, -0.036,  0.044},
+	{ 180.0, -0.036,  0.025},
+	{ 190.0, -0.018, -0.004},
+	{ 200.0, -0.038, -0.016},
+	{ 210.0, -0.011, -0.008},
+	{ 220.0,  0.002,  0.029},
+	{ 230.0,  0.004, -0.054},
+	{ 240.0,  0.018,  0.0  },
+	{ 250.0,  0.019,  0.055},
+	{ 260.0,  0.035,  0.017},
+	{ 270.0,  0.050,  0.052},
+	{ 280.0,  0.035,  0.006},
+	{ 290.0,  0.027,  0.087},
+	{ 300.0,  0.037,  0.006},
+	{ 310.0,  0.048,  0.064},
+	{ 320.0,  0.025,  0.030},
+	{ 330.0,  0.022,  0.019},
+	{ 340.0,  0.024, -0.030},
+	{ 350.0,  0.034, -0.017},
+	{ 360.0,  0.036, -0.029},
+	{ 370.0,  0.045, -0.017},
+	{ 380.0,  0.038, -0.014}};
+
+// Retrieve magnitude variation depending on angle Ls [radians].
+// Source: A. Mallama: The magnitude and albedo of Mars. Icarus 192(2007) 404-416.
+// @arg albedo true  to return longitudinal albedo correction, the average of sub-earth and sub-solar planetographic longitudes
+//             false for the Orbital Longitude correction
+
+// Orbital Longitude: In the context given by Mallama 2007, this defines the position of the Sun along the planet's "ecliptic", counted from the vernal equinox of Mars.
+// Stellarium does not provide this number directly, however we have in the old rotation elements ascending node and obliquity.
+// The ascending node is that of the Mars equator over the ecliptic of J2000.0 given as node=82.91 degrees. When the sun is there, it moves from the northern to the southern hemisphere of Mars.
+// That means, if Mars is at heliocentric l=82.91°, the sun is crossing northwards, i.e. this is where Ls=0. Therefore Ls= (l-node) mod 2pi.
+double RotationElements::getMarsMagLs(const double Ls, const bool albedo)
+{
+	const double l=StelUtils::fmodpos(Ls, 2.0*M_PI) * M_180_PI; // longitude in degrees [0...360]
+	int pos=std::lround(std::floor(l/10.))+2; // index of central value for 5-point Spline interpolation
+	Q_ASSERT(pos>=2);
+	Q_ASSERT(pos<38);
+	double n=(l-marsMagLs.at(pos)[0]) / 10.0;
+	Q_ASSERT(abs(n)<1.);
+	if (albedo)
+		return StelUtils::interpolate5(n, marsMagLs.at(pos-2)[1], marsMagLs.at(pos-1)[1], marsMagLs.at(pos)[1], marsMagLs.at(pos+1)[1], marsMagLs.at(pos+2)[1]);
+	else
+		return StelUtils::interpolate5(n, marsMagLs.at(pos-2)[2], marsMagLs.at(pos-1)[2], marsMagLs.at(pos)[2], marsMagLs.at(pos+1)[2], marsMagLs.at(pos+2)[2]);
+}

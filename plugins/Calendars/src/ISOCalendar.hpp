@@ -32,6 +32,7 @@ public:
 
 	virtual ~ISOCalendar() Q_DECL_OVERRIDE {}
 
+public slots:
 	//! Set a calendar date from the Julian day number
 	virtual void setJD(double JD) Q_DECL_OVERRIDE;
 
@@ -46,7 +47,7 @@ public:
 	//! get a formatted complete string for a date
 	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
-private:
+public:
 	static QVector<int> isoFromFixed(int rd);
 	static int fixedFromISO(QVector<int> iso);
 };

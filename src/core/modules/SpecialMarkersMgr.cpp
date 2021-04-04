@@ -172,6 +172,7 @@ void SpecialSkyMarker::draw(StelCore *core) const
 		{
 			Vec3d pos, screenPos;
 			const int f = (StelApp::getInstance().getFlagSouthAzimuthUsage() ? 180 : 0);
+			const float ppx = core->getCurrentStelProjectorParams().devicePixelsPerPixel;
 			sPainter.setBlending(true);
 			sPainter.setLineSmooth(true);
 
@@ -186,8 +187,8 @@ void SpecialSkyMarker::draw(StelCore *core) const
 
 					QString s = QString("%1").arg((i+90+f)%360);
 
-					float shiftx = sPainter.getFontMetrics().width(s) / 2.;
-					float shifty = sPainter.getFontMetrics().height() / 2.;
+					float shiftx = ppx*sPainter.getFontMetrics().width(s) / 2.;
+					float shifty = ppx*sPainter.getFontMetrics().height() / 2.;
 					sPainter.drawText(pos, s, 0, -shiftx, shifty);
 				}
 				else if (i % 5 == 0)

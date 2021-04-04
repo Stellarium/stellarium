@@ -225,40 +225,11 @@ StelObjectP MeteorShowers::searchByNameI18n(const QString& nameI18n) const
 	return Q_NULLPTR;
 }
 
-QStringList MeteorShowers::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
-{
-	QStringList result;
-	if (!m_mgr->getEnablePlugin() || maxNbItem <= 0)
-	{
-		return result;
-	}
-
-	for (const auto& ms : m_meteorShowers)
-	{
-		QString name = inEnglish ? ms->getEnglishName() : ms->getNameI18n();
-		if (!matchObjectName(name, objPrefix, useStartOfWords))
-		{
-			continue;
-		}
-
-		result.append(name);
-		if (result.size() >= maxNbItem)
-		{
-			break;
-		}
-	}
-
-	result.sort();
-	return result;
-}
-
 QStringList MeteorShowers::listAllObjects(bool inEnglish) const
 {
 	QStringList result;
 	if (!m_mgr->getEnablePlugin())
-	{
 		return result;
-	}
 
 	if (inEnglish)
 	{

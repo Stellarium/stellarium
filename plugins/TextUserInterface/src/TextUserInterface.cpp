@@ -48,7 +48,7 @@
 #include "StelMainView.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
-#ifndef DISABLE_SCRIPTING
+#ifdef ENABLE_SCRIPTING
 #include "StelScriptMgr.hpp"
 #endif
 #include "StelGui.hpp"
@@ -493,7 +493,7 @@ void TextUserInterface::init()
 	m6_1->loopToTheLast();
 	m6->setChildNode(m6_1);
 
-	#ifndef DISABLE_SCRIPTING
+	#ifdef ENABLE_SCRIPTING
 	TuiNode* m7 = new TuiNode(N_("Scripts"), Q_NULLPTR, m6);
 	m7->setParent(this);
 	m6->setNextNode(m7);	

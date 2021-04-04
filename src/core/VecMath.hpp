@@ -260,6 +260,8 @@ public:
 	QString toHtmlColor() const;
 	//! Convert to a QColor.
 	QColor toQColor() const;
+	//! Convert to a QVector3D.
+	QVector3D toQVector3D() const;
 
 	T v[3];		// The 3 values
 };

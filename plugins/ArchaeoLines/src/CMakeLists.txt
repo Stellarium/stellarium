@@ -6,10 +6,13 @@ SET(ArchaeoLines_SRCS
      ArchaeoLines.cpp
      gui/ArchaeoLinesDialog.hpp
      gui/ArchaeoLinesDialog.cpp
+     gui/ArchaeoLinesDialogLocations.hpp
+     gui/ArchaeoLinesDialogLocations.cpp
 )
 
 SET(ArchaeoLines_UIS
      gui/archaeoLinesDialog.ui
+     gui/archaeoLinesDialogLocations.ui
 )
 
 QT5_WRAP_UI(ArchaeoLines_UIS_H ${ArchaeoLines_UIS})

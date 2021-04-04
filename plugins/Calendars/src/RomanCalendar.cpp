@@ -62,13 +62,17 @@ void RomanCalendar::setJD(double JD)
 // AUCYear, Month, MonthName(genitive), event, DayName
 QStringList RomanCalendar::getDateStrings() const
 {
-	QStringList events={"Kalendae", "Nones", "Ides"};
-	QStringList eventsShort={"Kal.", "Non.", "Id."};
+	QStringList events={qc_("Kalendae", "Roman calendar term"),
+			    qc_("Nones",    "Roman calendar term"),
+			    qc_("Ides",     "Roman calendar term")};
+	QStringList eventsShort={qc_("Kal.", "Roman calendar term"),
+				 qc_("Non.", "Roman calendar term"),
+				 qc_("Id." , "Roman calendar term")};
 
 	QStringList list;
 	list << QString::number(aucYearFromJulian(parts.at(0))); // 0:AUC year
 	list << QString::number(parts.at(1)); // 1:Month (numeric)
-	list << monthGen.value(parts.at(1)); // 2:Month (genitive form)
+	list << monthGen.value(parts.at(1));  // 2:Month (genitive form)
 	// 3:event:
 	if (parts.at(3)==1)
 		list << events.at(parts.at(2)-1);
@@ -79,9 +83,10 @@ QStringList RomanCalendar::getDateStrings() const
 	if (parts.at(3)==1)
 		list << "";
 	else if (parts.at(3)==2)
-		list << "pridie";
+		list << qc_("pridie", "Roman calendar term");
 	else {
-		list << QString("ante diem %1%2").arg((parts.at(4)? "bis " : "")).arg(romanNumber(parts.at(3)));
+		const QString bisTerm=QString(" %1").arg(parts.at(4)? qc_("bis", "Roman calendar term") : "");
+		list << QString("%1%2 %3").arg(qc_("ante diem", "Roman calendar term"), bisTerm, romanNumber(parts.at(3)));
 	}
 
 	return list;
@@ -207,6 +212,6 @@ QString RomanCalendar::romanNumber(const int num)
 	QStringList roman={"",   "I",  "II",  "III",  "IV",  "V",  "VI",  "VII",  "VIII",  "IX",
 			   "X", "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX"};
 	if (num>19) return QString::number(num); // "bogus";
-	if (num<1) return QString::number(num); // "bogus";
+	if (num<1) return QString::number(num);  // "bogus";
 	return roman.at(num);
 }

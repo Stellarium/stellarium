@@ -48,6 +48,9 @@ protected:
 private:
         Refraction *refraction;
         Extinction *extinction;
+
+private slots:
+	void setStandardAtmosphere();
 };
 
 #endif // ATMOSPHEREDIALOG_HPP

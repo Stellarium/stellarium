@@ -221,7 +221,7 @@ void Satellites::init()
 void Satellites::translateData()
 {
 	bindingGroups();
-	for (const auto& sat : satellites)
+	for (const auto& sat : qAsConst(satellites))
 	{
 		if (sat->initialized)
 			sat->recomputeEpochTLE();
@@ -265,9 +265,9 @@ void Satellites::bindingGroups()
 
 void Satellites::setSatGroupVisible(const QString& groupId, bool visible)
 {
-	for (const auto& sat : satellites)
+	for (const auto& sat : qAsConst(satellites))
 	{
-		if (sat->initialized && sat->groups.toList().contains(groupId))
+		if (sat->initialized && sat->groups.contains(groupId))
 		{
 			SatFlags flags = sat->getFlags();
 			visible ? flags |= SatDisplayed : flags &= ~SatDisplayed;
@@ -457,7 +457,7 @@ StelObjectP Satellites::searchByNoradNumber(const QString &noradNumber) const
 	return StelObjectP();
 }
 
-QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
+QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (!hintFader || maxNbItem <= 0)
@@ -484,30 +484,37 @@ QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbI
 			numberPrefix = numberString;
 	}
 
+	QStringList names;
 	for (const auto& sobj : satellites)
 	{
 		if (!sobj->initialized || !sobj->displayed)
-		{
 			continue;
-		}
 
-		QString name = inEnglish ? sobj->getEnglishName() : sobj->getNameI18n();
-		if (matchObjectName(name, objPrefix, useStartOfWords))
-		{
+		names.append(sobj->getNameI18n());
+		names.append(sobj->getEnglishName());
+		if (!numberPrefix.isEmpty() && sobj->getCatalogNumberString().startsWith(numberPrefix))
+			names.append(QString("NORAD %1").arg(sobj->getCatalogNumberString()));
+	}
+
+	QString fullMatch = "";
+	for (const auto& name : qAsConst(names))
+	{
+		if (!matchObjectName(name, objPrefix, useStartOfWords))
+			continue;
+
+		if (name==objPrefix)
+			fullMatch = name;
+		else
 			result.append(name);
-		}
-		else if (!numberPrefix.isEmpty() && sobj->getCatalogNumberString().startsWith(numberPrefix))
-		{
-			result.append(QString("NORAD %1").arg(sobj->getCatalogNumberString()));
-		}
 
 		if (result.size() >= maxNbItem)
-		{
 			break;
-		}
 	}
 
 	result.sort();
+	if (!fullMatch.isEmpty())
+		result.prepend(fullMatch);
+
 	return result;
 }
 
@@ -526,19 +533,12 @@ QStringList Satellites::listAllObjects(bool inEnglish) const
 	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
 		return result;
 
-	if (inEnglish)
+	for (const auto& sat : satellites)
 	{
-		for (const auto& sat : satellites)
-		{
+		if (inEnglish)
 			result << sat->getEnglishName();
-		}
-	}
-	else
-	{
-		for (const auto& sat : satellites)
-		{
+		else
 			result << sat->getNameI18n();
-		}
 	}
 	return result;
 }
@@ -900,7 +900,6 @@ void Satellites::setDataMap(const QVariantMap& map)
 	QVariantList defaultHintColorMap;
 	defaultHintColorMap << defaultHintColor[0] << defaultHintColor[1] << defaultHintColor[2];
 
-
 	if (map.contains("hintColor"))
 	{
 		defaultHintColorMap = map.value("hintColor").toList();
@@ -949,7 +948,7 @@ void Satellites::setDataMap(const QVariantMap& map)
 QVariantMap Satellites::createDataMap(void)
 {
 	QVariantMap map;
-	QVariantList defHintCol, defOrbitCol, defInfoCol;
+	QVariantList defHintCol;
 	defHintCol << Satellite::roundToDp(defaultHintColor[0],3)
 		   << Satellite::roundToDp(defaultHintColor[1],3)
 		   << Satellite::roundToDp(defaultHintColor[2],3);
@@ -962,7 +961,7 @@ QVariantMap Satellites::createDataMap(void)
 	map["hintColor"] = defHintCol;
 	map["shortName"] = "satellite orbital data";
 	QVariantMap sats;
-	for (const auto& sat : satellites)
+	for (const auto& sat : qAsConst(satellites))
 	{
 		QVariantMap satMap = sat->getMap();
 
@@ -1068,19 +1067,16 @@ QStringList Satellites::listAllIds() const
 
 bool Satellites::add(const TleData& tleData)
 {
-	//TODO: Duplicates check!!! --BM
-	
 	// More validation?
-	if (tleData.id.isEmpty() ||
-	        tleData.name.isEmpty() ||
-	        tleData.first.isEmpty() ||
-	        tleData.second.isEmpty())
+	if (tleData.id.isEmpty() || tleData.name.isEmpty() || tleData.first.isEmpty() || tleData.second.isEmpty())
 		return false;
-	
+
+	// Duplicates check
+	if (searchByID(getSatIdFromLine2(tleData.second.trimmed()))!=Q_NULLPTR)
+		return false;
+
 	QVariantList hintColor;
-	hintColor << defaultHintColor[0]
-	          << defaultHintColor[1]
-	          << defaultHintColor[2];
+	hintColor << defaultHintColor[0] << defaultHintColor[1] << defaultHintColor[2];
 	
 	QVariantMap satProperties;
 	satProperties.insert("name", tleData.name);
@@ -1173,11 +1169,13 @@ bool Satellites::add(const TleData& tleData)
 			satGroups.append("crewed");
 		if (tleData.name.startsWith("PROGRESS-MS") || tleData.name.startsWith("CYGNUS NG"))
 			satGroups.append("resupply");
+		if (tleData.status==Satellite::StatusNonoperational)
+			satGroups.append("non-operational");
 	}
 	if (!satGroups.isEmpty())
 	{
 		satProperties.insert("groups", satGroups);
-		for (const auto& str : satGroups)
+		for (const auto& str : qAsConst(satGroups))
 		{
 			if (!getGroupIdList().contains(str))
 				addGroup(str);
@@ -1482,7 +1480,7 @@ void Satellites::updateFromOnlineSources()
 	progressBar->setRange(0, updateUrls.size());
 	progressBar->setFormat("TLE download %v/%m");
 
-	for (auto url : updateUrls)
+	for (auto url : qAsConst(updateUrls))
 	{
 		TleSource source;
 		source.file = Q_NULLPTR;
@@ -1540,7 +1538,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 					else
 					{
 						QList<Stel::QZipReader::FileInfo> infoList = reader.fileInfoList();
-						for (const auto& info : infoList)
+						for (const auto& info : qAsConst(infoList))
 						{
 							// qWarning() << "[Satellites] Processing:" << info.filePath;
 							if (info.isFile)
@@ -1635,7 +1633,7 @@ bool Satellites::getFlagOrbitLines() const
 
 void Satellites::recalculateOrbitLines(void)
 {
-	for (const auto& sat : satellites)
+	for (const auto& sat : qAsConst(satellites))
 	{
 		if (sat->initialized && sat->displayed && sat->orbitDisplayed)
 			sat->recalculateOrbitLines();
@@ -1697,7 +1695,7 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	int addedCount = 0;
 	int missingCount = 0; // Also the number of removed sats, if any.
 	QStringList toBeRemoved;
-	for (const auto& sat : satellites)
+	for (const auto& sat : qAsConst(satellites))
 	{
 		totalCount++;
 		
@@ -1739,6 +1737,11 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 			// special case: starlink satellites; details: http://satobs.org/seesat/Apr-2020/0174.html
 			if (!rcsList.contains(sid) && sat->name.startsWith("STARLINK"))
 				sat->RCS = 22.68; // Starlink's solar array is 8.1 x 2.8 metres.
+
+			if (sat->status==Satellite::StatusNonoperational && !sat->groups.contains("non-operational"))
+				sat->groups.insert("non-operational");
+			if (sat->status!=Satellite::StatusNonoperational && sat->groups.contains("non-operational"))
+				sat->groups.remove("non-operational");
 		}
 		else
 		{
@@ -1812,6 +1815,18 @@ void Satellites::parseTleFile(QFile& openFile,
 	int lineNumber = 0;
 	TleData lastData;
 	lastData.addThis = addFlagValue;
+
+	// Celestrak's "status code" list
+	const QMap<QString, Satellite::OptStatus> satOpStatusMap = {
+		{ "+", Satellite::StatusOperational },
+		{ "-", Satellite::StatusNonoperational },
+		{ "P", Satellite::StatusPartiallyOperational },
+		{ "B", Satellite::StatusStandby },
+		{ "S", Satellite::StatusSpare },
+		{ "X", Satellite::StatusExtendedMission },
+		{ "D", Satellite::StatusDecayed },
+		{ "?", Satellite::StatusUnknown }
+	};
 	
 	while (!openFile.atEnd())
 	{
@@ -1824,41 +1839,10 @@ void Satellites::parseTleFile(QFile& openFile,
 			
 			// The thing in square brackets after the name is actually
 			// Celestrak's "status code". Parse it!
-			QStringList codes;
-			codes << "+" << "-" << "P" << "B" << "S" << "X" << "D" << "?";
-
 			QRegExp statusRx("\\s*\\[(\\D{1})\\]\\s*$");
 			statusRx.setMinimal(true);
 			if (statusRx.indexIn(line)>-1)
-			{
-				lastData.status = Satellite::StatusUnknown;
-				switch (codes.indexOf(statusRx.cap(1).toUpper()))
-				{
-					case 0:
-						lastData.status = Satellite::StatusOperational;
-						break;
-					case 1:
-						lastData.status = Satellite::StatusNonoperational;
-						break;
-					case 2:
-						lastData.status = Satellite::StatusPartiallyOperational;
-						break;
-					case 3:
-						lastData.status = Satellite::StatusStandby;
-						break;
-					case 4:
-						lastData.status = Satellite::StatusSpare;
-						break;
-					case 5:
-						lastData.status = Satellite::StatusExtendedMission;
-						break;
-					case 6:
-						lastData.status = Satellite::StatusDecayed;
-						break;
-					default:
-						lastData.status = Satellite::StatusUnknown;
-				}
-			}
+				lastData.status = satOpStatusMap.value(statusRx.cap(1).toUpper(), Satellite::StatusUnknown);
 
 			//TODO: We need to think of some kind of escaping these
 			//characters in the JSON parser. --BM
@@ -1876,7 +1860,8 @@ void Satellites::parseTleFile(QFile& openFile,
 				// The Satellite Catalogue Number is the second number
 				// on the second line.
 				QString id = getSatIdFromLine2(line);
-				if (id.isEmpty()) {
+				if (id.isEmpty())
+				{
 					qDebug() << "[Satellites] failed to extract SatId from \"" << line << "\"";
 					continue;
 				}
@@ -1970,7 +1955,7 @@ void Satellites::update(double deltaTime)
 
 	hintFader.update(static_cast<int>(deltaTime*1000));
 
-	for (const auto& sat : satellites)
+	for (const auto& sat : qAsConst(satellites))
 	{
 		if (sat->initialized && sat->displayed)
 			sat->update(deltaTime);
@@ -1997,7 +1982,7 @@ void Satellites::draw(StelCore* core)
 	painter.setBlending(true);
 	Satellite::hintTexture->bind();
 	Satellite::viewportHalfspace = painter.getProjector()->getBoundingCap();
-	for (const auto& sat : satellites)
+	for (const auto& sat : qAsConst(satellites))
 	{
 		if (sat && sat->initialized && sat->displayed)
 			sat->draw(core, painter);

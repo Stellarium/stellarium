@@ -1513,86 +1513,102 @@ StelObjectP StarMgr::searchByID(const QString &id) const
 }
 
 //! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
-QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
+QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (maxNbItem <= 0)
-	{
 		return result;
-	}
 
 	QString objw = objPrefix.toUpper();
-
-	QMap<QString, int> cNamesIdx = inEnglish ? commonNamesIndex : commonNamesIndexI18n;
-	QMap<QString, int> aNamesIdx;
-	if (getFlagAdditionalNames())
-		aNamesIdx = inEnglish ? additionalNamesIndex : additionalNamesIndexI18n;
+	bool found;
 
 	// Search for common names
-	if (useStartOfWords)
+	QMapIterator<QString, int> i(commonNamesIndexI18n);
+	while (i.hasNext())
 	{
-		for (auto it = cNamesIdx.lowerBound(objw); it != cNamesIdx.end(); ++it)
+		i.next();
+		if (useStartOfWords && i.key().startsWith(objw))
+			found = true;
+		else if (!useStartOfWords && i.key().contains(objw))
+			found = true;
+		else
+			found = false;
+
+		if (found)
 		{
-			if (it.key().startsWith(objw))
-			{
-				if (maxNbItem<=0)
-					break;
-				result.append(inEnglish ? getCommonEnglishName(it.value()) : getCommonName(it.value()));
-				--maxNbItem;
-			}
-			else
+			if (maxNbItem<=0)
 				break;
-		}
-		for (auto ita = aNamesIdx.lowerBound(objw); ita != aNamesIdx.end(); ++ita)
-		{
-			if (ita.key().startsWith(objw))
-			{
-				if (maxNbItem<=0)
-					break;
-				QStringList names = (inEnglish ? getAdditionalEnglishNames(ita.value()) : getAdditionalNames(ita.value())).split(" - ");
-				for (auto name : names)
-				{
-					if (name.contains(objw, Qt::CaseInsensitive))
-					{
-						result.append(name);
-						--maxNbItem;
-					}
-				}
-			}
-			else
-				break;
+			result.append(getCommonName(i.value()));
+			--maxNbItem;
 		}
 	}
-	else
+
+	QMapIterator<QString, int> j(commonNamesIndex);
+	while (j.hasNext())
 	{
-		QMapIterator<QString, int> i(cNamesIdx);
-		while (i.hasNext())
+		j.next();
+		if (useStartOfWords && j.key().startsWith(objw))
+			found = true;
+		else if (!useStartOfWords && j.key().contains(objw))
+			found = true;
+		else
+			found = false;
+
+		if (found)
 		{
-			i.next();
-			if (i.key().contains(objw))
+			if (maxNbItem<=0)
+				break;
+			result.append(getCommonEnglishName(j.value()));
+			--maxNbItem;
+		}
+	}
+
+	if (getFlagAdditionalNames())
+	{
+		QMapIterator<QString, int> k(additionalNamesIndexI18n);
+		while (k.hasNext())
+		{
+			k.next();
+			QStringList names = getAdditionalNames(k.value()).split(" - ");
+			for (const auto &name : qAsConst(names))
 			{
-				if (maxNbItem<=0)
-					break;
-				result.append(inEnglish ? getCommonEnglishName(i.value()) : getCommonName(i.value()));
-				--maxNbItem;
+				if (useStartOfWords && name.startsWith(objw, Qt::CaseInsensitive))
+					found = true;
+				else if (!useStartOfWords && name.contains(objw, Qt::CaseInsensitive))
+					found = true;
+				else
+					found = false;
+
+				if (found)
+				{
+					if (maxNbItem<=0)
+						break;
+					result.append(name);
+					--maxNbItem;
+				}
 			}
 		}
-		QMapIterator<QString, int> j(aNamesIdx);
-		while (j.hasNext())
+
+		QMapIterator<QString, int> l(additionalNamesIndex);
+		while (l.hasNext())
 		{
-			j.next();
-			if (j.key().contains(objw))
+			l.next();
+			QStringList names = getAdditionalNames(l.value()).split(" - ");
+			for (const auto &name : qAsConst(names))
 			{
-				if (maxNbItem<=0)
-					break;
-				QStringList names = (inEnglish ? getAdditionalEnglishNames(j.value()) : getAdditionalNames(j.value())).split(" - ");
-				for (auto name : names)
+				if (useStartOfWords && name.startsWith(objw, Qt::CaseInsensitive))
+					found = true;
+				else if (!useStartOfWords && name.contains(objw, Qt::CaseInsensitive))
+					found = true;
+				else
+					found = false;
+
+				if (found)
 				{
-					if (name.contains(objw, Qt::CaseInsensitive))
-					{
-						result.append(name);
-						--maxNbItem;
-					}
+					if (maxNbItem<=0)
+						break;
+					result.append(name);
+					--maxNbItem;
 				}
 			}
 		}

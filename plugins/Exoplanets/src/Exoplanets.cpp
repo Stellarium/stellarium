@@ -351,7 +351,7 @@ StelObjectP Exoplanets::searchByNameI18n(const QString& nameI18n) const
 	return Q_NULLPTR;
 }
 
-QStringList Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
+QStringList Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (!flagShowExoplanets || maxNbItem <= 0)
@@ -359,37 +359,33 @@ QStringList Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbI
 		return result;
 	}
 
+	QStringList names;
 	for (const auto& eps : ep)
 	{
-		QStringList names;
-		if (inEnglish)
-		{
-			names.append(eps->getEnglishName());
-			names.append(eps->getExoplanetsEnglishNames());
-		}
+		names.append(eps->getNameI18n());
+		names.append(eps->getExoplanetsNamesI18n());
+		names.append(eps->getEnglishName());
+		names.append(eps->getExoplanetsEnglishNames());
+	}
+
+	QString fullMatch = "";
+	for (const auto& name : names)
+	{
+		if (!matchObjectName(name, objPrefix, useStartOfWords))
+			continue;
+
+		if (name==objPrefix)
+			fullMatch = name;
 		else
-		{
-			names.append(eps->getNameI18n());
-			names.append(eps->getExoplanetsNamesI18n());
-		}
-
-		for (const auto& name : names)
-		{
-			if (!matchObjectName(name, objPrefix, useStartOfWords))
-			{
-				continue;
-			}
-
 			result.append(name);
-			if (result.size() >= maxNbItem)
-			{
-				result.sort();
-				return result;
-			}
-		}
+
+		if (result.size() >= maxNbItem)
+			break;
 	}
 
 	result.sort();
+	if (!fullMatch.isEmpty())
+		result.prepend(fullMatch);
 	return result;
 }
 

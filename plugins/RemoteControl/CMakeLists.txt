@@ -1,5 +1,5 @@
 # This is the cmake config file for the RemoteControl plugin
-SET(REMOTECONTROL_VERSION "0.0.3")
+SET(REMOTECONTROL_VERSION "0.0.4")
 ADD_DEFINITIONS(-DREMOTECONTROL_PLUGIN_VERSION="${REMOTECONTROL_VERSION}")
 ADD_DEFINITIONS(-DREMOTECONTROL_PLUGIN_LICENSE="GNU GPLv2 or later")
 SET(REMOTECONTROL_WEBROOT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/webroot/")
@@ -22,10 +22,6 @@ IF(PYTHON_EXECUTABLE)
 
      SET_TARGET_PROPERTIES(RemoteControl-update-translationdata PROPERTIES FOLDER "plugins/RemoteControl/util")
 endif()
-
-SET(CMAKE_INSTALL_PREFIX $HDATALOC)
-INSTALL(FILES DESTINATION "modules/RemoteControl")
-
 
 ########### install files ###############
 # install webroot

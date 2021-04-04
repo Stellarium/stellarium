@@ -79,12 +79,18 @@ class SolarSystem : public StelObjectModule
 	Q_PROPERTY(double moonScale			READ getMoonScale			WRITE setMoonScale			NOTIFY moonScaleChanged)
 	Q_PROPERTY(bool flagMinorBodyScale		READ getFlagMinorBodyScale		WRITE setFlagMinorBodyScale		NOTIFY flagMinorBodyScaleChanged)
 	Q_PROPERTY(double minorBodyScale		READ getMinorBodyScale			WRITE setMinorBodyScale			NOTIFY minorBodyScaleChanged)
+	Q_PROPERTY(bool flagPlanetScale			READ getFlagPlanetScale			WRITE setFlagPlanetScale		NOTIFY flagPlanetScaleChanged)
+	Q_PROPERTY(double planetScale			READ getPlanetScale			WRITE setPlanetScale			NOTIFY planetScaleChanged)
+	Q_PROPERTY(bool flagSunScale			READ getFlagSunScale			WRITE setFlagSunScale			NOTIFY flagSunScaleChanged)
+	Q_PROPERTY(double sunScale			READ getSunScale			WRITE setSunScale			NOTIFY sunScaleChanged)
 	Q_PROPERTY(double labelsAmount			READ getLabelsAmount			WRITE setLabelsAmount			NOTIFY labelsAmountChanged)
 	// Great Red Spot (GRS) properties
 	Q_PROPERTY(bool flagCustomGrsSettings		READ getFlagCustomGrsSettings		WRITE setFlagCustomGrsSettings		NOTIFY flagCustomGrsSettingsChanged)
 	Q_PROPERTY(int customGrsLongitude		READ getCustomGrsLongitude		WRITE setCustomGrsLongitude		NOTIFY customGrsLongitudeChanged)
 	Q_PROPERTY(double customGrsDrift		READ getCustomGrsDrift			WRITE setCustomGrsDrift			NOTIFY customGrsDriftChanged)
 	Q_PROPERTY(double customGrsJD			READ getCustomGrsJD			WRITE setCustomGrsJD			NOTIFY customGrsJDChanged)
+	// Eclipse algorithm properties
+	Q_PROPERTY(bool earthShadowEnlargementDanjon    READ getFlagEarthShadowEnlargementDanjon    WRITE setFlagEarthShadowEnlargementDanjon   NOTIFY earthShadowEnlargementDanjonChanged)
 	// Colors
 	Q_PROPERTY(Vec3f labelsColor			READ getLabelsColor			WRITE setLabelsColor			NOTIFY labelsColorChanged)
 	Q_PROPERTY(Vec3f pointerColor			READ getPointerColor			WRITE setPointerColor			NOTIFY pointerColorChanged)
@@ -114,6 +120,7 @@ class SolarSystem : public StelObjectModule
 	Q_PROPERTY(QString apparentMagnitudeAlgorithmOnEarth	READ getApparentMagnitudeAlgorithmOnEarth	WRITE setApparentMagnitudeAlgorithmOnEarth	NOTIFY apparentMagnitudeAlgorithmOnEarthChanged)
 	Q_PROPERTY(int orbitsThickness			READ getOrbitsThickness			WRITE setOrbitsThickness		NOTIFY orbitsThicknessChanged)
 	Q_PROPERTY(bool flagDrawMoonHalo		READ getFlagDrawMoonHalo		WRITE setFlagDrawMoonHalo		NOTIFY flagDrawMoonHaloChanged)
+	Q_PROPERTY(bool flagDrawSunHalo			READ getFlagDrawSunHalo			WRITE setFlagDrawSunHalo		NOTIFY flagDrawSunHaloChanged)
 
 public:
 	SolarSystem();
@@ -522,6 +529,26 @@ public slots:
 	//! Get the display scaling factor for minor bodies.
 	double getMinorBodyScale(void) const {return minorBodyScale;}
 
+	//! Set flag which determines if planets are displayed scaled or not.
+	void setFlagPlanetScale(bool b);
+	//! Get the current value of the flag which determines if planets are displayed scaled or not.
+	bool getFlagPlanetScale(void) const {return flagPlanetScale;}
+
+	//! Set the display scaling factor for planets.
+	void setPlanetScale(double f);
+	//! Get the display scaling factor for planets.
+	double getPlanetScale(void) const {return planetScale;}
+
+	//! Set flag which determines if Sun is scaled or not.
+	void setFlagSunScale(bool b);
+	//! Get the current value of the flag which determines if Sun is scaled or not.
+	bool getFlagSunScale(void) const {return flagSunScale;}
+
+	//! Set the display scaling factor for Sun.
+	void setSunScale(double f);
+	//! Get the display scaling factor for Sun.
+	double getSunScale(void) const {return sunScale;}
+
 	//! Translate names. (public so that SolarSystemEditor can call it).
 	void updateI18n();
 
@@ -636,6 +663,11 @@ public slots:
 	//! Get initial JD for calculation of position of Great Red Spot
 	double getCustomGrsJD();
 
+	//! Set whether earth shadow should be enlarged following Danjon's method
+	void setFlagEarthShadowEnlargementDanjon(bool b);
+	//! Get whether earth shadow should be enlarged following Danjon's method
+	bool getFlagEarthShadowEnlargementDanjon() const;
+
 	//! Set style of colors of orbits for Solar system bodies
 	void setOrbitColorStyle(QString style);
 	//! Get style of colors of orbits for Solar system bodies
@@ -655,6 +687,9 @@ public slots:
 	void setFlagDrawMoonHalo(bool b);
 	bool getFlagDrawMoonHalo() const;
 
+	void setFlagDrawSunHalo(bool b);
+	bool getFlagDrawSunHalo() const;
+
 	//! Reset and recreate trails
 	void recreateTrails();
 
@@ -664,6 +699,7 @@ signals:
 	void flagOrbitsChanged(bool b);
 	void flagHintsChanged(bool b);
 	void flagDrawMoonHaloChanged(bool b);
+	void flagDrawSunHaloChanged(bool b);
 	void trailsDisplayedChanged(bool b);
 	void trailsThicknessChanged(int v);
 	void orbitsThicknessChanged(int v);
@@ -684,11 +720,16 @@ signals:
 	void moonScaleChanged(double f);
 	void flagMinorBodyScaleChanged(bool b);
 	void minorBodyScaleChanged(double f);
-	void labelsAmountChanged(double f);	
+	void flagPlanetScaleChanged(bool b);
+	void planetScaleChanged(double f);
+	void flagSunScaleChanged(bool b);
+	void sunScaleChanged(double f);
+	void labelsAmountChanged(double f);
 	void flagCustomGrsSettingsChanged(bool b);
 	void customGrsLongitudeChanged(int l);
 	void customGrsDriftChanged(double drift);
 	void customGrsJDChanged(double JD);
+	void earthShadowEnlargementDanjonChanged(bool b);
 
 	void labelsColorChanged(const Vec3f & color) const;
 	void pointerColorChanged(const Vec3f & color) const;
@@ -761,6 +802,14 @@ public:
 	//! In the unlikely event of multiple objects in front of the sun, only the largest will be reported.
 	QPair<double, PlanetP> getEclipseFactor(const StelCore *core) const;
 
+	//! Retrieve Radius of Umbra and Penumbra at the distance of the Moon.
+	//! Returns a pair (umbra, penumbra) in (geocentric_arcseconds, AU, geometric_AU).
+	//! * sizes in arcseconds are the usual result found as Bessel element in eclipse literature.
+	//!   It includes scaling for effects of atmosphere either after Chauvenet (2%) or after Danjon. (see Espenak: 5000 Years Canon of Lunar Eclipses.)
+	//! * sizes in AU are the same, converted back to AU in Lunar distance.
+	//! * sizes in geometric_AU derived from pure geometrical evaluations without scalings applied.
+	QPair<Vec3d,Vec3d> getEarthShadowRadiiAtLunarDistance() const;
+
 	//! Compute the position and transform matrix for every element of the solar system.
 	//! @param dateJDE the Julian Day in JDE (Ephemeris Time or equivalent)	
 	//! @param observerPlanet planet of the observer (Required for light travel time or aberration computation).
@@ -821,6 +870,8 @@ private:
 
 	//! Used to count how many planets actually need shadow information
 	int shadowPlanetCount;
+	//! Used to track whether earth shadow enlargement shall be computed after Danjon (1951)
+	bool earthShadowEnlargementDanjon;
 	PlanetP sun;
 	PlanetP moon;
 	PlanetP earth;
@@ -836,12 +887,16 @@ private:
 	PlanetP selected;
 	std::vector<PlanetP> selectedSSO; // More than one can be selected at a time
 
+	// Allow enlargements of the planets. May be useful to highlight the planets in in overview plots
 	// Separate Moon and minor body scale values. The latter make sense to zoom up and observe irregularly formed 3D objects like minor moons of the outer planets.
-	// TBD: It may be wise to remove the sphereScale value from the Planet class: that is only used by the Moon.
 	bool flagMoonScale;
 	double moonScale;
 	bool flagMinorBodyScale;
 	double minorBodyScale;
+	bool flagPlanetScale;
+	double planetScale;
+	bool flagSunScale;
+	double sunScale;
 
 	QFont planetNameFont;
 

@@ -33,6 +33,7 @@ public:
 
 	virtual ~EthiopicCalendar() Q_DECL_OVERRIDE {}
 
+public slots:
 	virtual void retranslate() Q_DECL_OVERRIDE;
 
 	//! Set a calendar date from the Julian day number
@@ -49,6 +50,7 @@ public:
 	//! get a formatted complete string for a date
 	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
+public:
 	//! find RD number for date in the Ethiopic calendar (may be used in other calendars!)
 	static int fixedFromEthiopic(QVector<int> ethiopic);
 	//! find date in the Ethiopic calendar from RD number (may be used in other calendars!)
