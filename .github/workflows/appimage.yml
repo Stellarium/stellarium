@@ -52,7 +52,6 @@ jobs:
   appimage-arm:
     name: "${{ matrix.arch }}"
     runs-on: ubuntu-18.04
-    if: "contains(github.event.head_commit.message, '[publish]') || contains(github.ref, 'heads/release')"
 
     strategy:
       matrix:
@@ -60,9 +59,11 @@ jobs:
           - arch: aarch64
             qarch: aarch64
             march: aarch64
+            if: "contains(github.event.head_commit.message, '[publish]') || contains(github.ref, 'heads/release')"
           - arch: armv7
             qarch: arm
             march: armhf
+            if: "contains(github.event.head_commit.message, '[publish]') || contains(github.ref, 'heads/release')"
 
     steps:
     - name: Checkout repository
