@@ -4,14 +4,14 @@
 name: "AppImage"
 
 on:
-  push:
-    branches: [release]
+  push
 
 jobs:
   # AppImage x86_64
   appimage-amd64:
     name: "x86_64"
     runs-on: ubuntu-18.04
+    if: "contains(github.event.head_commit.message, '[publish]') || contains(github.ref, 'heads/release')"
 
     steps:
     - name: Checkout repository
@@ -52,6 +52,7 @@ jobs:
   appimage-arm:
     name: "${{ matrix.arch }}"
     runs-on: ubuntu-18.04
+    if: "contains(github.event.head_commit.message, '[publish]') || contains(github.ref, 'heads/release')"
 
     strategy:
       matrix:
