@@ -3,8 +3,7 @@
 #
 name: "AppImage"
 
-on:
-  push
+on: [push]
 
 jobs:
   # AppImage x86_64
@@ -50,20 +49,18 @@ jobs:
 
   # AppImage ARM
   appimage-arm:
-    name: "${{ matrix.arch }}"
-    runs-on: ubuntu-18.04
-
     strategy:
       matrix:
         include:
           - arch: aarch64
             qarch: aarch64
             march: aarch64
-            if: "contains(github.event.head_commit.message, '[publish]') || contains(github.ref, 'heads/release')"
           - arch: armv7
             qarch: arm
             march: armhf
-            if: "contains(github.event.head_commit.message, '[publish]') || contains(github.ref, 'heads/release')"
+    name: "${{ matrix.arch }}"
+    runs-on: ubuntu-18.04
+    if: "contains(github.event.head_commit.message, '[publish]') || contains(github.ref, 'heads/release')"
 
     steps:
     - name: Checkout repository
