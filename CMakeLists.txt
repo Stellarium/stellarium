@@ -520,20 +520,6 @@ IF(WIN32)
     ENDIF()
 ENDIF()
 
-# when using Qt 5.3, default to using the old QGLWidget, but warn
-IF(${Qt5Core_VERSION} VERSION_LESS "5.4")
-     SET(USE_OLD_QGLWIDGET 1)
-     MESSAGE(WARNING "You are using Qt ${Qt5Core_VERSION} to build, falling back to legacy QGLWidget rendering. Consider using at least Qt 5.4 if possible.")
-ELSE()
-     # offer the old widget as an alternative, default off
-     SET(USE_OLD_QGLWIDGET 0 CACHE BOOL "Use the legacy QGLWidget instead of the new QOpenGLWidget for the main viewport, and link to the QtOpenGL module")
-ENDIF()
-
-IF(USE_OLD_QGLWIDGET)
-     SET(USE_QTOPENGL 1)
-     ADD_DEFINITIONS(-DUSE_OLD_QGLWIDGET)
-ENDIF()
-
 # Since Qt 5.4, linking to OpenGL is basically not required anymore,
 # because the QtGui module re-implements the GL functions, and perhaps even
 # dispatches the calls to a dynamically selected GL library.

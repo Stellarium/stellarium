@@ -28,9 +28,7 @@
 #include "StelCore.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
-#ifndef USE_OLD_QGLWIDGET
 #include "StelMainView.hpp"
-#endif
 
 #include "StelModuleMgr.hpp"
 #include "LandscapeMgr.hpp"
@@ -335,9 +333,7 @@ bool StelSkyDrawer::computeRCMag(float mag, RCMag* rcMag) const
 {
 	rcMag->radius = eye->adaptLuminanceScaledLn(pointSourceMagToLnLuminance(mag), static_cast<float>(starRelativeScale)*1.40f*0.5f);
 	rcMag->radius *=starLinearScale;
-#ifndef USE_OLD_QGLWIDGET
 	rcMag->radius *=StelMainView::getInstance().getCustomScreenshotMagnification();
-#endif
 	// Use now statically min_rmag = 0.5, because higher and too small values look bad
 	if (rcMag->radius < 0.3f)
 	{
