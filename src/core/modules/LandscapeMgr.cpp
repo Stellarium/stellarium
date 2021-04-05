@@ -102,6 +102,13 @@ Cardinals::~Cardinals()
 // Handles special cases at poles
 void Cardinals::draw(const StelCore* core, double latitude) const
 {
+	if (fader.getInterstate()==0.0f)
+		return;
+
+	// fun polar special cases: no cardinals!
+	if ((fabs(latitude - 90.0) < 1e-10) || (fabs(latitude + 90.0) < 1e-10))
+		return;
+
 	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 	const float ppx = core->getCurrentStelProjectorParams().devicePixelsPerPixel;
 	StelPainter sPainter(prj);
@@ -109,8 +116,6 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 	float sshift, bshift, cshift, vshift;
 	sshift = bshift = cshift = 0.f;
 	bool flagMask = (core->getProjection(StelCore::FrameJ2000)->getMaskType() != StelProjector::MaskDisk);
-
-	if (fader.getInterstate()==0.0f) return;
 
 	// direction text
 	QString d[16];
@@ -131,10 +136,6 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 	d[13] = sWestsouthwest;
 	d[14] = sWestnorthwest;
 	d[15] = sNorthnorthwest;
-
-	// fun polar special cases
-	if (fabs(latitude - 90.0) < 1e-10) d[0] = d[1] = d[2] = d[3] = d[4] = d[5] = d[6] = d[7] = d[8] = d[9] = d[10] = d[11] = d[12] = d[13] = d[14] = d[15] = sSouth;
-	if (fabs(latitude + 90.0) < 1e-10) d[0] = d[1] = d[2] = d[3] = d[4] = d[5] = d[6] = d[7] = d[8] = d[9] = d[10] = d[11] = d[12] = d[13] = d[14] = d[15] = sNorth;
 
 	sPainter.setColor(color,fader.getInterstate());
 	sPainter.setBlending(true);
