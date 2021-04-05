@@ -4514,7 +4514,7 @@ double AstroCalcDialog::findDistance(double JD, PlanetP object1, StelObjectP obj
 	double angle = object1->getJ2000EquatorialPos(core).angle(object2->getJ2000EquatorialPos(core));
 	if (mode==PhenomenaTypeIndex::Opposition)
 		angle = M_PI - angle;
-	if (mode==PhenomenaTypeIndex::Shadows)
+	else if (mode==PhenomenaTypeIndex::Shadows)
 		angle = object1->getHeliocentricEclipticPos().angle(qSharedPointerCast<Planet>(object2)->getHeliocentricEclipticPos());
 	return angle;
 }
