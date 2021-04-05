@@ -3847,6 +3847,9 @@ void AstroCalcDialog::calculatePhenomena()
 				// opposition
 				if (opposition)
 					fillPhenomenaTable(findClosestApproach(planet, mObj, startJD, stopJD, separation, PhenomenaTypeIndex::Opposition), planet, obj, PhenomenaTypeIndex::Opposition);
+				// shadows from moons
+				if (obj2Type==25 || obj2Type==0)
+					fillPhenomenaTable(findClosestApproach(planet, mObj, startJD, stopJD, separation, PhenomenaTypeIndex::Shadows), planet, obj, PhenomenaTypeIndex::Shadows);
 			}
 		}
 		else if (obj2Type == 10 || obj2Type == 11 || obj2Type == 12)
@@ -4017,7 +4020,14 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		const double s2 = object2->getSpheroidAngularSize(core);
 		const double d1 = object1->getJ2000EquatorialPos(core).length();
 		const double d2 = object2->getJ2000EquatorialPos(core).length();
-		if (mode==PhenomenaTypeIndex::Opposition) // opposition
+		if (mode==PhenomenaTypeIndex::Shadows) // shadows
+		{
+			phenomenType = q_("Shadow transit");
+			separation = object1->getJ2000EquatorialPos(core).angle(object2->getJ2000EquatorialPos(core));
+			if (d1<d2) // the moon is behind planet, so the moon in shadow
+				phenomenType = q_("Eclipse");
+		}
+		else if (mode==PhenomenaTypeIndex::Opposition) // opposition
 		{
 			phenomenType = q_("Opposition");
 			// Added a special case - lunar eclipse
@@ -4503,7 +4513,9 @@ double AstroCalcDialog::findDistance(double JD, PlanetP object1, StelObjectP obj
 	core->update(0);
 	double angle = object1->getJ2000EquatorialPos(core).angle(object2->getJ2000EquatorialPos(core));
 	if (mode==PhenomenaTypeIndex::Opposition)
-		angle = M_PI - angle;	
+		angle = M_PI - angle;
+	if (mode==PhenomenaTypeIndex::Shadows)
+		angle = object1->getHeliocentricEclipticPos().angle(qSharedPointerCast<Planet>(object2)->getHeliocentricEclipticPos());
 	return angle;
 }
 

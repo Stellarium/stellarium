@@ -125,7 +125,8 @@ public:
 		Opposition		= 1,
 		GreatestElongation	= 2,
 		StationaryPoint		= 3,
-		OrbitalPoint		= 4
+		OrbitalPoint		= 4,
+		Shadows			= 5
 	};
 
 	//! Defines the number and the order of the columns in the WUT tool
