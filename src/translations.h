@@ -447,6 +447,12 @@ class Translations
 		N_("Bright variable stars");
 		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
 		N_("Bright stars with high proper motion");
+		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
+		N_("Variable stars: Algol-type eclipsing systems");
+		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
+		N_("Variable stars: the classical cepheids");
+		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
+		N_("Bright carbon stars");
 		
 		// =====================================================================
 		// Constellation cultures

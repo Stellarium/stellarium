@@ -667,6 +667,7 @@ void StarMgr::populateHipparcosLists()
 	variableHipStars.clear();
 	algolTypeStars.clear();
 	classicalCepheidsTypeStars.clear();
+	carbonStars.clear();
 	const int pmLimit = 1; // arc-second per year!
 	for (int hip=0; hip<=NR_OF_HIP; hip++)
 	{
@@ -677,6 +678,10 @@ void StarMgr::populateHipparcosLists()
 			const SpecialZoneData<Star1> *const z = hipIndex[hip].z;
 			StelObjectP so = s->createStelObject(a,z);
 			hipparcosStars.push_back(so);
+			// Carbon stars have spectral type, which start with C letter
+			if (convertToSpectralType(s->getSpInt()).startsWith("C", Qt::CaseInsensitive))
+				carbonStars.push_back(so);
+
 			if (!getGcvsVariabilityType(s->getHip()).isEmpty())
 			{
 				QMap<StelObjectP, float> sa;
@@ -714,7 +719,7 @@ void StarMgr::populateHipparcosLists()
 				hipStarsHighPM.push_back(spm);
 			}
 		}
-	}
+	}	
 }
 
 // Load common names from file
@@ -1933,7 +1938,7 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 			}
 			else
 			{
-				for (auto star : doubleStars)
+				for (const auto &star : doubleStars)
 				{
 					result << trans.qtranslate(star);
 				}
@@ -1959,7 +1964,7 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 			}
 			else
 			{
-				for (auto star : variableStars)
+				for (const auto &star : variableStars)
 				{
 					result << trans.qtranslate(star);
 				}
@@ -1996,6 +2001,39 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 					result << star.firstKey()->getEnglishName();
 				else
 					result << star.firstKey()->getNameI18n();
+			}
+			break;
+		}
+		case 5: // Variable stars: Algol-type eclipsing systems
+		{
+			for (const auto& star : algolTypeStars)
+			{
+				if (inEnglish)
+					result << star.firstKey()->getEnglishName();
+				else
+					result << star.firstKey()->getNameI18n();
+			}
+			break;
+		}
+		case 6: // Variable stars: the classical cepheids
+		{
+			for (const auto& star : classicalCepheidsTypeStars)
+			{
+				if (inEnglish)
+					result << star.firstKey()->getEnglishName();
+				else
+					result << star.firstKey()->getNameI18n();
+			}
+			break;
+		}
+		case 7: // Bright carbon stars
+		{
+			for (const auto& star : carbonStars)
+			{
+				if (inEnglish)
+					result << star->getEnglishName();
+				else
+					result << star->getNameI18n();
 			}
 			break;
 		}
