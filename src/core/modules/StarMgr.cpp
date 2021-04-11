@@ -719,7 +719,7 @@ void StarMgr::populateHipparcosLists()
 				hipStarsHighPM.push_back(spm);
 			}
 		}
-	}	
+	}
 }
 
 // Load common names from file
