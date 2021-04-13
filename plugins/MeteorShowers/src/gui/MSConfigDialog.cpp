@@ -23,7 +23,7 @@
 #include "StelApp.hpp"
 #include "StelGui.hpp"
 #include "ui_MSConfigDialog.h"
-
+#include "StelMainView.hpp"
 MSConfigDialog::MSConfigDialog(MeteorShowersMgr* mgr)
 	: StelDialog("MeteorShowers")
 	, m_mgr(mgr)
@@ -62,7 +62,7 @@ void MSConfigDialog::createDialogContent()
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(m_ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(m_ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
-	connect(m_ui->bRestoreDefaults, SIGNAL(clicked()), m_mgr, SLOT(restoreDefaultSettings()));
+	connect(m_ui->bRestoreDefaults, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 
 	// General tab
 	connect(m_ui->enableAtStartUp, SIGNAL(clicked(bool)), m_mgr, SLOT(setEnableAtStartup(bool)));
@@ -97,6 +97,17 @@ void MSConfigDialog::createDialogContent()
 	}
 
 	init();
+}
+
+void MSConfigDialog::restoreDefaults()
+{
+	if (askConfirmation())
+	{
+		qDebug() << "[MeteorShower] restore defaults...";
+		m_mgr->restoreDefaultSettings();
+	}
+	else
+		qDebug() << "[MeteorShower] restore defaults is canceled...";
 }
 
 void MSConfigDialog::init()
@@ -167,7 +178,7 @@ void MSConfigDialog::setColorARG()
 {
 	Vec3f c = m_mgr->getColorARG();
 	QColor color(QColor::fromRgbF(c[0], c[1], c[2]));
-	color = QColorDialog::getColor(color);
+    color = QColorDialog::getColor(color,&StelMainView::getInstance());
 	if (color.isValid())
 	{
 		m_ui->setColorARG->setStyleSheet("background-color:" + color.name() + ";");
@@ -179,7 +190,7 @@ void MSConfigDialog::setColorARC()
 {
 	Vec3f c = m_mgr->getColorARC();
 	QColor color(QColor::fromRgbF(c[0], c[1], c[2]));
-	color = QColorDialog::getColor(color);
+    color = QColorDialog::getColor(color,&StelMainView::getInstance());
 	if (color.isValid())
 	{
 		m_ui->setColorARC->setStyleSheet("background-color:" + color.name() + ";");
@@ -191,7 +202,7 @@ void MSConfigDialog::setColorIR()
 {
 	Vec3f c = m_mgr->getColorIR();
 	QColor color(QColor::fromRgbF(c[0], c[1], c[2]));
-	color = QColorDialog::getColor(color);
+    color = QColorDialog::getColor(color,&StelMainView::getInstance());
 	if (color.isValid())
 	{
 		m_ui->setColorIR->setStyleSheet("background-color:" + color.name() + ";");
@@ -326,4 +337,6 @@ void MSConfigDialog::setAboutHtml()
 	html += "</ul></p></body></html>";
 
 	m_ui->about->setHtml(html);
+	// TRANSLATORS: duration
+	m_ui->updateFrequency->setSuffix(qc_(" h","time unit"));
 }

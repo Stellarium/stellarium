@@ -168,6 +168,9 @@ public:
 	//! Get count of supernovae from catalog
 	int getCountSupernovae(void) const {return SNCount;}
 
+	//! Get the list of all bright historical supernovae.
+	const QList<SupernovaP>& getAllBrightSupernovae() const {return snstar;}
+
 signals:
 	//! @param state the new update state.
 	void updateStateChanged(Supernovae::UpdateState state);

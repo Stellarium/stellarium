@@ -35,19 +35,19 @@ class AddRemoveLandscapesDialog : public StelDialog
 	Q_OBJECT
 public:
 	AddRemoveLandscapesDialog();
-	virtual ~AddRemoveLandscapesDialog();
+	virtual ~AddRemoveLandscapesDialog() Q_DECL_OVERRIDE;
 
 public slots:
-	void retranslate();
-	//! This function overrides the non-virtual StelDialog::setVisible()
+	virtual void retranslate() Q_DECL_OVERRIDE;
+	//! This function overrides StelDialog::setVisible()
 	//! to allow the current landscape to be selected in the list of user
 	//! landscapes (if it is in the list) every time the dialog is displayed.
-	void setVisible(bool);
+	virtual void setVisible(bool) Q_DECL_OVERRIDE;
 	void populateLists();
 	
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots.
-	virtual void createDialogContent();
+	virtual void createDialogContent() Q_DECL_OVERRIDE;
 	Ui_addRemoveLandscapesDialogForm* ui;
 
 private slots:

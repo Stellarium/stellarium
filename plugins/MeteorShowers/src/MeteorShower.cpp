@@ -94,8 +94,8 @@ MeteorShower::MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map)
 
 			if (!ok)
 			{
-				qWarning() << "MeteorShower: INVALID data for " << m_showerID;
-				qWarning() << "MeteorShower: Please, check your 'showers.json' catalog!";
+				qWarning() << "[MeteorShower] INVALID data for " << m_showerID;
+				qWarning() << "[MeteorShower] Please, check your 'showers.json' catalog!";
 				return;
 			}
 		}
@@ -158,9 +158,9 @@ MeteorShower::MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map)
 		}
 		else
 		{
-			qWarning() << "MeteorShower: INVALID data for "
+			qWarning() << "[MeteorShower] INVALID data for "
 				   << m_showerID << "Unable to read some dates!";
-			qWarning() << "MeteorShower: Please, check your 'showers.json' catalog!";
+			qWarning() << "[MeteorShower] Please, check your 'showers.json' catalog!";
 			return;
 		}
 
@@ -181,9 +181,9 @@ MeteorShower::MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map)
 
 		// the total intensity must be 100
 		if (totalIntensity != 100) {
-			qWarning() << "MeteorShower: INVALID data for "
+			qWarning() << "[MeteorShower] INVALID data for "
 				   << m_showerID << "The total intensity must be equal to 100";
-			qWarning() << "MeteorShower: Please, check your 'showers.json' catalog!";
+			qWarning() << "[MeteorShower] Please, check your 'showers.json' catalog!";
 			m_colors.clear();
 		}
 	}
@@ -519,10 +519,9 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 		oss << "</h2>";
 	}
 
-	if (flags&Extra)
-	{
+	if (flags&ObjectType)
 		oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), q_("meteor shower"), mstdata) << "<br />";
-	}
+	
 
 	// Ra/Dec etc.
 	oss << getCommonInfoString(core, flags);

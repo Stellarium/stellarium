@@ -28,6 +28,7 @@
 #include "StelStyle.hpp"
 #include "Telescope.hpp"
 #include "Lens.hpp"
+#include "VecMath.hpp"
 
 class Ui_ocularDialogForm;
 
@@ -73,9 +74,13 @@ public slots:
 
 	// Mini-methods required to immediately update display
 	void updateOcular();
+	void selectOcular(const QModelIndex);
 	void updateLens();
+	void selectLens(const QModelIndex);
 	void updateCCD();
+	void selectCCD(const QModelIndex);
 	void updateTelescope();
+	void selectTelescope(const QModelIndex);
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
@@ -85,6 +90,9 @@ protected:
 private slots:
 	void initAboutText();
 	void setLabelsDescriptionText(bool state);
+	void updateTelradCustomFOV();	
+	void setupTelradFOVspins(Vec4f fov);
+	void updateGuiOptions();
 
 private:
 	Oculars* plugin;

@@ -92,7 +92,7 @@ void PointerCoordinates::init()
 {
 	if (!conf->childGroups().contains("PointerCoordinates"))
 	{
-		qDebug() << "PointerCoordinates: no coordinates section exists in main config file - creating with defaults";
+		qDebug() << "[PointerCoordinates] no coordinates section exists in main config file - creating with defaults";
 		restoreDefaultConfiguration();
 	}
 
@@ -226,7 +226,7 @@ void PointerCoordinates::draw(StelCore *core)
 		{
 			double lambda, beta;
 			StelUtils::rectToSphe(&cx,&cy,core->j2000ToEquinoxEqu(mousePosition, StelCore::RefractionOff));
-			StelUtils::equToEcl(cx, cy, core->getCurrentPlanet()->getRotObliquity(core->getJDE()), &lambda, &beta); // Calculate ecliptic position and show it...
+			StelUtils::equToEcl(cx, cy, GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(core->getJDE()), &lambda, &beta); // Calculate ecliptic position and show it...
 			if (lambda<0) lambda+=2.0*M_PI;
 			coordsSystem = qc_("Ecl. Long/Lat", "abbreviated in the plugin");
 			if (withDecimalDegree)
@@ -245,7 +245,7 @@ void PointerCoordinates::draw(StelCore *core)
 		{
 			double lambda, beta;
 			StelUtils::rectToSphe(&cx,&cy, mousePosition);
-			StelUtils::equToEcl(cx, cy, core->getCurrentPlanet()->getRotObliquity(2451545.0), &lambda, &beta); // Calculate ecliptic position and show it...
+			StelUtils::equToEcl(cx, cy, GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0), &lambda, &beta); // Calculate ecliptic position and show it...
 			if (lambda<0) lambda+=2.0*M_PI;
 			coordsSystem = qc_("Ecl. Long/Lat (J2000.0)", "abbreviated in the plugin");
 			if (withDecimalDegree)
@@ -351,7 +351,7 @@ void PointerCoordinates::loadConfiguration(void)
 	conf->beginGroup("PointerCoordinates");
 
 	setFlagEnableAtStartup(conf->value("enable_at_startup", false).toBool());
-	textColor = StelUtils::strToVec3f(conf->value("text_color", "1,0.5,0").toString());
+	textColor = Vec3f(conf->value("text_color", "1,0.5,0").toString());
 	setFontSize(conf->value("font_size", 14).toInt());
 	flagShowCoordinatesButton = conf->value("flag_show_button", true).toBool();	
 	setCurrentCoordinatesPlaceKey(conf->value("current_displaying_place", "TopRight").toString());
@@ -392,7 +392,7 @@ void PointerCoordinates::setFlagShowCoordinatesButton(bool b)
 				toolbarButton = new StelButton(Q_NULLPTR,
 							       QPixmap(":/PointerCoordinates/bt_PointerCoordinates_On.png"),
 							       QPixmap(":/PointerCoordinates/bt_PointerCoordinates_Off.png"),
-							       QPixmap(":/graphicGui/glow32x32.png"),
+							       QPixmap(":/graphicGui/miscGlow32x32.png"),
 							       "actionShow_MousePointer_Coordinates");
 			}
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
@@ -410,7 +410,7 @@ void PointerCoordinates::setCurrentCoordinatesPlaceKey(QString key)
 	CoordinatesPlace coordPlace = static_cast<CoordinatesPlace>(en.keyToValue(key.toLatin1().data()));
 	if (coordPlace<0)
 	{
-		qWarning() << "Unknown coordinates place: " << key << "setting \"TopRight\" instead";
+		qWarning() << "[PointerCoordinates] Unknown coordinates place: " << key << "setting \"TopRight\" instead";
 		coordPlace = TopRight;
 	}
 	setCurrentCoordinatesPlace(coordPlace);
@@ -428,7 +428,7 @@ void PointerCoordinates::setCurrentCoordinateSystemKey(QString key)
 	CoordinateSystem coordSystem = static_cast<CoordinateSystem>(en.keyToValue(key.toLatin1().data()));
 	if (coordSystem<0)
 	{
-		qWarning() << "Unknown coordinate system: " << key << "setting \"RaDecJ2000\" instead";
+		qWarning() << "[PointerCoordinates] Unknown coordinate system: " << key << "setting \"RaDecJ2000\" instead";
 		coordSystem = RaDecJ2000;
 	}
 	setCurrentCoordinateSystem(coordSystem);
@@ -442,7 +442,7 @@ QString PointerCoordinates::getCurrentCoordinateSystemKey() const
 QPair<int, int> PointerCoordinates::getCoordinatesPlace(QString text)
 {
 	int x = 0, y = 0;
-	float coeff = 1.5;
+	static const float coeff = 1.5;
 	QFontMetrics fm(font);
 	QSize fs = fm.size(Qt::TextSingleLine, text);
 	switch(getCurrentCoordinatesPlace())
@@ -461,7 +461,7 @@ QPair<int, int> PointerCoordinates::getCoordinatesPlace(QString text)
 		}
 		case RightBottomCorner:
 		{
-			x = gui->getSkyGui()->getSkyGuiWidth() - static_cast<int>(fs.width() - 10*coeff);
+			x = gui->getSkyGui()->getSkyGuiWidth() - static_cast<int>(fs.width() + 10*coeff);
 			y = fs.height();
 			break;
 		}

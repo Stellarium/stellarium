@@ -17,6 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include <stdexcept>
 #include <QDir>
 #include <QJsonDocument>
 #include <QSettings>
@@ -145,8 +146,8 @@ void MeteorShowersMgr::createActions()
 	QString msGroup = N_("Meteor Showers");
 	addAction("actionShow_MeteorShowers",               msGroup, N_("Toggle meteor showers"), this,           "enablePlugin", "Ctrl+Shift+M");
 	addAction("actionShow_MeteorShowers_labels",        msGroup, N_("Toggle radiant labels"), this,           "enableLabels", "Shift+M");
-	addAction("actionShow_MeteorShowers_config_dialog", msGroup, N_("Show settings dialog"),  m_configDialog, "visible",      "Ctrl+Alt+Shift+M");
-	addAction("actionShow_MeteorShowers_search_dialog", msGroup, N_("Show search dialog"),    m_searchDialog, "visible",      "Ctrl+Alt+M");
+	addAction("actionShow_MeteorShowers_config_dialog", msGroup, N_("Show meteor showers settings dialog"),  m_configDialog, "visible",      "Ctrl+Alt+Shift+M");
+    addAction("actionShow_MeteorShowers_search_dialog", msGroup, N_("Show meteor showers search dialog"),    m_searchDialog, "visible",      "Ctrl+Alt+M");
 }
 
 void MeteorShowersMgr::loadConfig()
@@ -154,13 +155,13 @@ void MeteorShowersMgr::loadConfig()
 	setActiveRadiantOnly(m_conf->value(MS_CONFIG_PREFIX + "/flag_active_radiant_only", true).toBool());
 	setShowEnableButton(m_conf->value(MS_CONFIG_PREFIX + "/show_enable_button", true).toBool());
 	setShowSearchButton(m_conf->value(MS_CONFIG_PREFIX + "/show_search_button", true).toBool());
-	Vec3f color = StelUtils::strToVec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorARG", "0.0,1.0,0.94").toString());
+	Vec3f color = Vec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorARG", "0.0,1.0,0.94").toString());
 	if (color[0]>1.f || color[1]>1.f || color[2]>1.f) { color /= 255.f; }
 	setColorARG(color);
-	color = StelUtils::strToVec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorARC", "1.0,0.94,0.0").toString());
+	color = Vec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorARC", "1.0,0.94,0.0").toString());
 	if (color[0]>1.f || color[1]>1.f || color[2]>1.f) { color /= 255.f; }
 	setColorARC(color);
-	color = StelUtils::strToVec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorIR", "1.0,1.0,1.0").toString());
+	color = Vec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorIR", "1.0,1.0,1.0").toString());
 	if (color[0]>1.f || color[1]>1.f || color[2]>1.f) { color /= 255.f; }
 	setColorIR(color);
 	setEnableAtStartup(m_conf->value(MS_CONFIG_PREFIX + "/enable_at_startup", true).toBool());	
@@ -301,6 +302,15 @@ void MeteorShowersMgr::checkForUpdates()
 	}
 }
 
+void MeteorShowersMgr::actionEnablePlugin(const bool &b)
+{
+	if (m_enablePlugin != b)
+	{
+		m_enablePlugin = b;
+		emit enablePluginChanged(b);
+		emit StelApp::getInstance().getCore()->updateSearchLists();
+	}
+}
 
 void MeteorShowersMgr::deleteDownloadProgressBar()
 {
@@ -331,9 +341,7 @@ void MeteorShowersMgr::startDownload(QString urlString)
 	QNetworkRequest request;
 	request.setUrl(QUrl(m_url));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
-	#if QT_VERSION >= 0x050600
 	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
-	#endif
 	m_downloadReply = m_networkManager->get(request);
 	connect(m_downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
 
@@ -370,23 +378,6 @@ void MeteorShowersMgr::downloadComplete(QNetworkReply *reply)
 		return;
 
 	disconnect(m_networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
-
-	#if QT_VERSION < 0x050600
-	int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
-	if (statusCode == 301 || statusCode == 302 || statusCode == 307)
-	{
-		QUrl rawUrl = reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
-		QUrl redirectUrl(rawUrl.toString(QUrl::RemoveQuery));
-		qDebug() << "[MeteorShowersMgr] The query has been redirected to" << redirectUrl.toString();
-		m_url = redirectUrl.toString();
-		m_conf->setValue(MS_CONFIG_PREFIX + "/url", m_url);
-		reply->deleteLater();
-		m_downloadReply = Q_NULLPTR;
-		startDownload(redirectUrl.toString());
-		return;
-	}
-	#endif
-
 	deleteDownloadProgressBar();
 
 	if (reply->error() || reply->bytesAvailable()==0)
@@ -485,7 +476,7 @@ void MeteorShowersMgr::setShowEnableButton(const bool& show)
 			StelButton* enablePlugin = new StelButton(Q_NULLPTR,
 								  QPixmap(":/MeteorShowers/btMS-on.png"),
 								  QPixmap(":/MeteorShowers/btMS-off.png"),
-								  QPixmap(":/graphicGui/glow32x32.png"),
+								  QPixmap(":/graphicGui/miscGlow32x32.png"),
 								  "actionShow_MeteorShowers");
 			gui->getButtonBar()->addButton(enablePlugin, "065-pluginsGroup");
 		}
@@ -518,7 +509,7 @@ void MeteorShowersMgr::setShowSearchButton(const bool& show)
 			StelButton* searchMS = new StelButton(Q_NULLPTR,
 							      QPixmap(":/MeteorShowers/btMS-search-on.png"),
 							      QPixmap(":/MeteorShowers/btMS-search-off.png"),
-							      QPixmap(":/graphicGui/glow32x32.png"),
+							      QPixmap(":/graphicGui/miscGlow32x32.png"),
 							      "actionShow_MeteorShowers_search_dialog");
 			gui->getButtonBar()->addButton(searchMS, "065-pluginsGroup");
 		}
@@ -539,19 +530,19 @@ void MeteorShowersMgr::setShowSearchButton(const bool& show)
 void MeteorShowersMgr::setColorARG(const Vec3f& rgb)
 {
 	m_colorARG = rgb;	
-	m_conf->setValue(MS_CONFIG_PREFIX + "/colorARG", StelUtils::vec3fToStr(rgb));
+	m_conf->setValue(MS_CONFIG_PREFIX + "/colorARG", rgb.toStr());
 }
 
 void MeteorShowersMgr::setColorARC(const Vec3f& rgb)
 {
 	m_colorARC = rgb;	
-	m_conf->setValue(MS_CONFIG_PREFIX + "/colorARC", StelUtils::vec3fToStr(rgb));
+	m_conf->setValue(MS_CONFIG_PREFIX + "/colorARC", rgb.toStr());
 }
 
 void MeteorShowersMgr::setColorIR(const Vec3f& rgb)
 {
 	m_colorIR = rgb;	
-	m_conf->setValue(MS_CONFIG_PREFIX + "/colorIR", StelUtils::vec3fToStr(rgb));
+	m_conf->setValue(MS_CONFIG_PREFIX + "/colorIR", rgb.toStr());
 }
 
 void MeteorShowersMgr::setEnableAtStartup(const bool& b)

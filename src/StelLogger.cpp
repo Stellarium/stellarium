@@ -112,7 +112,11 @@ void StelLogger::init(const QString& logFilePath)
 	lspci.start("lspci -v", QIODevice::ReadOnly);
 	lspci.waitForFinished(300);
 	const QString pciData(lspci.readAll());
+	#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+	QStringList pciLines = pciData.split('\n', Qt::SkipEmptyParts);
+	#else
 	QStringList pciLines = pciData.split('\n', QString::SkipEmptyParts);
+	#endif
 	for (int i = 0; i<pciLines.size(); i++)
 	{
 		if(pciLines.at(i).contains("VGA compatible controller"))
@@ -199,7 +203,11 @@ void StelLogger::init(const QString& logFilePath)
 	systemProfiler.waitForStarted();
 	systemProfiler.waitForFinished();
 	const QString systemData(systemProfiler.readAllStandardOutput());
+	#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+	QStringList systemLines = systemData.split('\n', Qt::SkipEmptyParts);
+	#else
 	QStringList systemLines = systemData.split('\n', QString::SkipEmptyParts);
+	#endif
 	for (int i = 0; i<systemLines.size(); i++)
 	{
 		if(systemLines.at(i).contains("Model"))
@@ -229,7 +237,11 @@ void StelLogger::init(const QString& logFilePath)
 	dmesg.waitForStarted();
 	dmesg.waitForFinished();
 	const QString dmesgData(dmesg.readAll());
+	#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
 	QStringList dmesgLines = dmesgData.split('\n', QString::SkipEmptyParts);
+	#else
+	QStringList dmesgLines = dmesgData.split('\n', Qt::SkipEmptyParts);
+	#endif
 	for (int i = 0; i<dmesgLines.size(); i++)
 	{
 		if (dmesgLines.at(i).contains("memory"))

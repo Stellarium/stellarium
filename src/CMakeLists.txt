@@ -93,6 +93,7 @@ SET(stellarium_lib_SRCS
      core/StelTranslator.cpp
      core/StelTranslator.hpp
      core/VecMath.hpp
+     core/VecMath.cpp
      core/StelJsonParser.hpp
      core/StelJsonParser.cpp
      core/SimbadSearcher.hpp
@@ -154,7 +155,6 @@ SET(stellarium_lib_SRCS
      core/planetsephems/jpleph.cpp
      core/planetsephems/EphemWrapper.cpp
      core/planetsephems/EphemWrapper.hpp
-
      core/planetsephems/tass17.c
      core/planetsephems/tass17.h
      core/planetsephems/vsop87.c
@@ -163,7 +163,6 @@ SET(stellarium_lib_SRCS
      core/planetsephems/de430.hpp
      core/planetsephems/de431.cpp
      core/planetsephems/de431.hpp
-
      core/modules/Atmosphere.cpp
      core/modules/Atmosphere.hpp
      core/modules/Asterism.cpp
@@ -209,6 +208,8 @@ SET(stellarium_lib_SRCS
      core/modules/Orbit.hpp
      core/modules/Planet.cpp
      core/modules/Planet.hpp
+     core/modules/RotationElements.cpp
+     core/modules/RotationElements.hpp
      core/modules/MinorPlanet.cpp
      core/modules/MinorPlanet.hpp
      core/modules/Comet.cpp
@@ -237,6 +238,8 @@ SET(stellarium_lib_SRCS
      core/modules/ZodiacalLight.cpp
      core/modules/ZoneArray.hpp
      core/modules/ZoneData.hpp
+     core/modules/SpecialMarkersMgr.cpp
+     core/modules/SpecialMarkersMgr.hpp
      StelMainView.hpp
      StelMainView.cpp
      StelSplashScreen.hpp
@@ -335,6 +338,8 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/AstroCalcDialog.cpp
           gui/AstroCalcExtraEphemerisDialog.hpp
           gui/AstroCalcExtraEphemerisDialog.cpp
+          gui/AstroCalcCustomStepsDialog.hpp
+          gui/AstroCalcCustomStepsDialog.cpp
           gui/BookmarksDialog.hpp
           gui/BookmarksDialog.cpp
           gui/StelDialog.hpp
@@ -361,6 +366,7 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/customDeltaTEquationDialog.ui
           gui/astroCalcDialog.ui
           gui/astroCalcExtraEphemerisDialog.ui
+          gui/astroCalcCustomStepsDialog.ui
           gui/addRemoveLandscapesDialog.ui
           gui/dsoColorsDialog.ui
           gui/orbitColorsDialog.ui
@@ -451,10 +457,6 @@ IF(ENABLE_MEDIA)
 ENDIF()
 IF(ENABLE_SCRIPTING)
      SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::Script)
-ENDIF()
-IF(USE_OLD_QGLWIDGET)
-     # The Qt5OpenGL library is only required when using the legacy viewport
-     SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::OpenGL)
 ENDIF()
 IF(ENABLE_GPS)
      SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::Positioning Qt5::SerialPort)
@@ -737,6 +739,16 @@ IF(ENABLE_TESTING)
     ADD_TEST(testVecMath testVecMath)
     SET_TARGET_PROPERTIES(testVecMath PROPERTIES FOLDER "src/tests")
 
+    SET(tests_testJavaScripting_SRCS
+        tests/testJavaScripting.hpp
+        tests/testJavaScripting.cpp
+    )
+    ADD_EXECUTABLE(testJavaScripting ${tests_testJavaScripting_SRCS})
+    TARGET_LINK_LIBRARIES(testJavaScripting ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testJavaScripting)
+    ADD_TEST(testJavaScripting testJavaScripting)
+    SET_TARGET_PROPERTIES(testJavaScripting PROPERTIES FOLDER "src/tests")
+	
     SET(tests_testStelProjector_SRCS
         tests/testStelProjector.hpp
         tests/testStelProjector.cpp

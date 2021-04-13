@@ -56,20 +56,6 @@ public:
 
 	~MinorPlanet() Q_DECL_OVERRIDE;
 
-	//Inherited from StelObject via Planet
-	//! Get a string with data about the MinorPlanet.
-	//! Asteroids support the following InfoStringGroup flags:
-	//! - Name
-	//! - Magnitude
-	//! - RaDec
-	//! - AltAzi
-	//! - Distance
-	//! - Size
-	//! - PlainText
-	//! \param core the StelCore object
-	//! \param flags a set of InfoStringGroup items to include in the return value.
-	//! \return a QString containing an HMTL encoded description of the MinorPlanet.
-	virtual QString getInfoString(const StelCore *core, const InfoStringGroup &flags) const Q_DECL_OVERRIDE;
 	//The Comet class inherits the "Planet" type because the SolarSystem class
 	//was not designed to handle different types of objects.
 	// \todo Decide if this is going to be "MinorPlanet" or "Asteroid"
@@ -116,6 +102,13 @@ public:
 
 	//! get sidereal period for minor planet
 	virtual double getSiderealPeriod() const Q_DECL_OVERRIDE;
+
+protected:
+	// components for Planet::getInfoString() that are overridden here:
+	virtual QString getInfoStringName(const StelCore *core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
+	virtual QString getInfoStringExtraMag(const StelCore *core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
+	//! Any flag=Extra information to be displayed at the end
+	virtual QString getInfoStringExtra(const StelCore *core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
 
 private:
 	int minorPlanetNumber;

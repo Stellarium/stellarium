@@ -812,12 +812,32 @@ start_az_alt_fov=50,10,83
 \label{fig:scenery3d:UffingtonIni}
 \end{figure}
 
+\section{Limitations}
+\label{sec:scenery3d:Limitations}
+
+Models with up to 14 million triangles have been used successfully on
+a mid-range notebook PC from 2016. However, take some restrictions
+into account:
+
+\begin{itemize}
+\item The model is rendered in Cartesian coordinates. Earth's surface
+  is curved. If your model extends by tens of kilometres, the visible
+  horizon formed by faraway mountains may appear too high. You can
+  \newFeature{v0.20.2} display a landscape polygon defined in the
+  currently displayed Landscape on top of your 3D scene by activating
+  \menu{Draw horizon polyline in foreground} in the plugin's
+  settings dialog.
+\item
+  The OBJ format is static. Simulation of interaction with 3D objects
+  is not possible with this plugin.
+\end{itemize}
+
 \section*{Authors and Acknowledgements}
 \label{sec:scenery3d:Acknowledgments}
 
 
 Scenery3d was conceived by Georg Zotti for the
-ASTROSIM\footnote{\url{http://astrosim.univie.ac.at}} project. A first
+ASTROSIM\footnote{\url{https://astrosim.univie.ac.at}} project. A first
 prototype was implemented in 2010/2011 by Simon Parzer and
 Peter Neubauer as student work supervised by Michael Wimmer (TU Wien).
 Models for accuracy tests (Sterngarten, Testscene), and later
@@ -840,7 +860,7 @@ the Austrian Science Fund (FWF) under grant number P~21208-G19. Further developm
 partially supported by the Ludwig Boltzmann Institute for Archaeological Prospection and Virtual Archaeology in Vienna, Austria\footnote{%
   \url{http://archpro.lbg.ac.at}}.
 
-If you are using this plugin in scientific work, please cite: \citep{Zotti:CHNT2015,Zotti:SEAC2015,Zotti:SEAC2017,Zotti-etal:SIA2016,Zotti:TAG2016}.
+If you are using this plugin in scientific work, please cite: \citep{Zotti:CHNT2015,Zotti:SEAC2015,Zotti:SEAC2017,Zotti-etal:SIA2016,Zotti:TAG2016,Zotti-etal:JSA2020.6.2}.
 
 
 %%% Local Variables: 

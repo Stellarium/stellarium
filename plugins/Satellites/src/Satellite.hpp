@@ -50,7 +50,11 @@ typedef struct
 //! @ingroup satellites
 enum SatelliteDataRole {
 	SatIdRole = Qt::UserRole,
+	SatCosparIDRole,
 	SatDescriptionRole,
+	SatStdMagnitudeRole,
+	SatRCSRole,
+	SatTLEEpochRole,
 	SatFlagsRole,
 	SatGroupsRole,
 	FirstLineRole,
@@ -65,13 +69,21 @@ typedef QSet<QString> GroupSet;
 //! @ingroup satellites
 enum SatFlag
 {
-	SatNoFlags = 0x0,
-	SatDisplayed = 0x1,
-	SatNotDisplayed = 0x2,
-	SatUser = 0x4,
-	SatOrbit = 0x8,
-	SatNew = 0x10,
-	SatError = 0x20
+	SatNoFlags		= 0x0000,
+	SatDisplayed		= 0x0001,
+	SatNotDisplayed	= 0x0002,
+	SatUser			= 0x0004,
+	SatOrbit			= 0x0008,
+	SatNew			= 0x0010,
+	SatError			= 0x0020,
+	SatSmallSize		= 0x0040,
+	SatMediumSize		= 0x0080,
+	SatLargeSize		= 0x0100,
+	SatLEO			= 0x0200,
+	SatMEO			= 0x0400,
+	SatGSO			= 0x0800,
+	SatHEO			= 0x1000,
+	SatHGSO			= 0x2000
 };
 typedef QFlags<SatFlag> SatFlags;
 Q_DECLARE_OPERATORS_FOR_FLAGS(SatFlags)
@@ -85,7 +97,7 @@ Q_DECLARE_METATYPE(SatFlags)
 //! Details about the satellite are passed with a JSON-representation structure
 //! that contains a <b>Satellite Catalog</b> entry.
 //! 
-//! Thanks to operator<() overloading, container classes (QList, QMap, etc)
+//! Thanks to operator<() overloading, container classes (QList, QMap, etc.)
 //! with Satellite or SatelliteP objects can be sorted by satellite name/ID.
 //! @ingroup satellites
 class Satellite : public StelObject
@@ -169,7 +181,8 @@ public:
 	virtual Vec3f getInfoColor(void) const;
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const;
 	virtual float getVMagnitude(const StelCore* core) const;
-	virtual double getAngularSize(const StelCore* core) const;
+	//! Get angular size, degrees
+	virtual double getAngularSize(const StelCore*) const;
 	virtual QString getNameI18n(void) const;
 	virtual QString getEnglishName(void) const
 	{
@@ -200,10 +213,6 @@ public:
 	//! Sets the internal flags in one operation (only display flags)!
 	void setFlags(const SatFlags& flags);
 	
-	//! Parse TLE line to extract International Designator and launch year.
-	//! Sets #internationalDesignator and #jdLaunchYearJan1.
-	void parseInternationalDesignator(const QString& tle1);
-	
 	//! Needed for sorting lists (if this ever happens...).
 	//! Compares #name fields. If equal, #id fields, which can't be.
 	bool operator<(const Satellite& another) const;
@@ -214,6 +223,8 @@ public:
 	//! Get operational status of satellite
 	QString getOperationalStatus() const;
 
+	void recomputeEpochTLE();
+
 private:
 	//draw orbits methods
 	void computeOrbitPoints();
@@ -222,6 +233,11 @@ private:
 	//! each end of an orbit, with 1 in the middle.
 	float calculateOrbitSegmentIntensity(int segNum);
 	Vec2d calculatePerigeeApogeeFromLine2(QString tle) const;
+	Vec2d getEccentricityInclinationFromLine2(QString tle) const;
+	//! Parse TLE line to extract International Designator and launch year.
+	//! Sets #internationalDesignator and #jdLaunchYearJan1.
+	void parseInternationalDesignator(const QString& tle1);
+	void calculateEpochFromLine1(QString tle);
 
 	bool initialized;
 	//! Flag indicating whether the satellite should be displayed.
@@ -249,6 +265,8 @@ private:
 	QString description;
 	//! International Designator / COSPAR designation / NSSDC ID.
 	QString internationalDesignator;
+	//! Epoch of the TLE
+	QString tleEpoch;
 	//! Julian date of Jan 1st of the launch year.
 	//! Used to hide satellites before their launch date.
 	//! Extracted from TLE set with parseInternationalDesignator().
@@ -256,6 +274,7 @@ private:
 	double jdLaunchYearJan1;
 	//! Standard visual magnitude of the satellite.
 	double stdMag;
+	double RCS;
 	//! Operational status code
 	int status;
 	//! Contains the J2000 position.
@@ -283,9 +302,10 @@ private:
 	static bool  orbitLinesFlag;
 	static bool  iconicModeFlag;
 	static bool  hideInvisibleSatellitesFlag;
-	//! Mask controlling which info display flags should be honored.
+	//! Mask controlling which info display flags should be honoured.
 	static StelObject::InfoStringGroupFlags flagsMask;
 	static Vec3f invisibleSatelliteColor;
+	static Vec3f transitSatelliteColor;
 
 	static double timeRateLimit;
 
@@ -298,15 +318,12 @@ private:
 	Vec3d	latLongSubPointPosition;
 	Vec3d	elAzPosition;
 
-#ifdef IRIDIUM_SAT_TEXT_DEBUG
-	static QString myText;
-#endif
-
 	gSatWrapper::Visibility	visibility;
 	double	phaseAngle; // phase angle for the satellite
+#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	static double sunReflAngle; // for Iridium satellites
 	//static double timeShift; // for Iridium satellites UNUSED
-
+#endif
 	Vec3f    infoColor;
 	//Satellite Orbit Draw
 	Vec3f    orbitColor;
@@ -314,6 +331,7 @@ private:
 	double    epochTime;  //measured in Julian Days
 	QList<Vec3d> orbitPoints; //orbit points represented by ElAzPos vectors
 	QList<gSatWrapper::Visibility> visibilityPoints; //orbit visibility points
+	QMap<gSatWrapper::Visibility, QString> visibilityDescription;
 };
 
 typedef QSharedPointer<Satellite> SatelliteP;

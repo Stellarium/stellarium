@@ -118,9 +118,9 @@ void ConstellationMgr::init()
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
-	setLinesColor(StelUtils::strToVec3f(conf->value("color/const_lines_color", defaultColor).toString()));
-	setBoundariesColor(StelUtils::strToVec3f(conf->value("color/const_boundary_color", "0.8,0.3,0.3").toString()));
-	setLabelsColor(StelUtils::strToVec3f(conf->value("color/const_names_color", defaultColor).toString()));
+	setLinesColor(Vec3f(conf->value("color/const_lines_color", defaultColor).toString()));
+	setBoundariesColor(Vec3f(conf->value("color/const_boundary_color", "0.8,0.3,0.3").toString()));
+	setLabelsColor(Vec3f(conf->value("color/const_names_color", defaultColor).toString()));
 
 	StelObjectMgr *objectManager = GETSTELMODULE(StelObjectMgr);
 	objectManager->registerStelObjectMgr(this);
@@ -297,7 +297,7 @@ void ConstellationMgr::deselectConstellations(void)
 		}
 
 		// If any constellation is selected at the moment, then let's do not touch to it!
-		if (omgr->getWasSelected())
+		if (omgr->getWasSelected() && selected.size()>0)
 			selected.pop_back();
 
 		// Let's hide all previously selected constellations
@@ -307,17 +307,15 @@ void ConstellationMgr::deselectConstellations(void)
 			constellation->setFlagLabels(false);
 			constellation->setFlagArt(false);
 			constellation->setFlagBoundaries(false);
-		}
-		selected.clear();
+		}		
 	}
 	else
 	{
 		const QList<StelObjectP> newSelectedConst = omgr->getSelectedObject("Constellation");
 		if (!newSelectedConst.empty())
 			omgr->unSelect();
-
-		selected.clear();
 	}
+	selected.clear();
 }
 
 void ConstellationMgr::selectAllConstellations()
@@ -778,17 +776,17 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 		}
 		else
 		{
-			shortName = recRx.capturedTexts().at(1);
+			shortName = recRx.cap(1);
 			aster = findFromAbbreviation(shortName);
 			// If the constellation exists, set the English name
 			if (aster != Q_NULLPTR)
 			{
-				aster->nativeName = recRx.capturedTexts().at(2);
-				ctxt = recRx.capturedTexts().at(3);
+				aster->nativeName = recRx.cap(2);
+				ctxt = recRx.cap(3);
 				if (ctxRx.exactMatch(ctxt))
 				{
-					aster->englishName = ctxRx.capturedTexts().at(1);
-					aster->context = ctxRx.capturedTexts().at(2);
+					aster->englishName = ctxRx.cap(1);
+					aster->context = ctxRx.cap(2);
 				}
 				else
 				{
@@ -879,13 +877,13 @@ void ConstellationMgr::loadSeasonalRules(const QString& rulesFile)
 		}
 		else
 		{
-			shortName = recRx.capturedTexts().at(1);
+			shortName = recRx.cap(1);
 			aster = findFromAbbreviation(shortName);
 			// If the constellation exists, set the English name
 			if (aster != Q_NULLPTR)
 			{
-				aster->beginSeason = recRx.capturedTexts().at(2).toInt();
-				aster->endSeason = recRx.capturedTexts().at(3).toInt();
+				aster->beginSeason = recRx.cap(2).toInt();
+				aster->endSeason = recRx.cap(3).toInt();
 				readOk++;
 			}
 			else
@@ -1422,33 +1420,6 @@ StelObjectP ConstellationMgr::searchByID(const QString &id) const
 		if (constellation->getID() == id) return constellation;
 	}
 	return Q_NULLPTR;
-}
-
-QStringList ConstellationMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
-{
-	QStringList result;
-	if (maxNbItem <= 0)
-	{
-		return result;
-	}
-
-	for (auto* constellation : constellations)
-	{
-		QString name = inEnglish ? constellation->getEnglishName() : constellation->getNameI18n();
-		if (!matchObjectName(name, objPrefix, useStartOfWords))
-		{
-			continue;
-		}
-
-		result.append(name);
-		if (result.size() >= maxNbItem)
-		{
-			break;
-		}
-	}
-
-	result.sort();
-	return result;
 }
 
 QStringList ConstellationMgr::listAllObjects(bool inEnglish) const

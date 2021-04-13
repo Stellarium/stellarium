@@ -62,20 +62,6 @@ public:
 
 	virtual ~Comet() Q_DECL_OVERRIDE;
 
-	//Inherited from StelObject via Planet
-	//! Get a string with data about the Comet.
-	//! Comets support the following InfoStringGroup flags:
-	//! - Name
-	//! - Magnitude
-	//! - RaDec
-	//! - AltAzi
-	//! - Distance
-	//! - PlainText
-	//  - Size <- Size of what?
-	//! \param core the StelCore object
-	//! \param flags a set of InfoStringGroup items to include in the return value.
-	//! \return a QString containing an HMTL encoded description of the Comet.
-	virtual QString getInfoString(const StelCore *core, const InfoStringGroup &flags) const Q_DECL_OVERRIDE;
 	//! In addition to Planet::getInfoMap(), Comets provides estimates for
 	//! - tail-length-km
 	//! - coma-diameter-km
@@ -107,6 +93,14 @@ public:
 
 	// re-implementation of Planet's update() to prepare tails (extinction etc). @param deltaTime: ms (since last call)
 	virtual void update(int deltaTime) Q_DECL_OVERRIDE;
+
+protected:
+	// components for Planet::getInfoString() that are overridden here:
+	virtual QString getInfoStringAbsoluteMagnitude(const StelCore *core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
+	//! Any flag=Size information to be displayed
+	virtual QString getInfoStringSize(const StelCore *core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
+	//! Any flag=Extra information to be displayed at the end
+	virtual QString getInfoStringExtra(const StelCore *core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
 
 private:
 	//! @returns estimates for (Coma diameter [AU], gas tail length [AU]).

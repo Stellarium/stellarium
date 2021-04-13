@@ -36,6 +36,8 @@
 #define PARSEC 30.857e12
 // speed of light (km/sec)
 #define SPEED_OF_LIGHT 299792.458
+// Ecliptic obliquity of J2000.0, degrees
+#define EPS_0 23.4392803055555555555556
 
 // Add a few frequently used extra math-type literals
 #ifndef M_PI_180
@@ -189,41 +191,6 @@ namespace StelUtils
 	//! @param s The input string
 	double dmsStrToRad(const QString& s);
 
-	//TODO these Vector-String converters should be removed, and missing functionality added to
-	//the VecMath classes and QVariant-based conversion
-
-	//! Reads a Vec2f from a string list
-	Vec2f strToVec2f(const QStringList& s);
-	//! Reads a Vec2f from a string, separated by commas. Example: 1.0,2.0
-	Vec2f strToVec2f(const QString& s);
-	//! Obtains a Vec3f from a string.
-	//! @param s the string describing the Vector with the form "x,y,z"
-	//! @return The corresponding vector
-	//! @deprecated Use the >> operator from Vec3f class (Will be removed in version 0.20)
-	Vec3f strToVec3f(const QStringList& s);
-	//! Reads a Vec3f from a string, separated by commas. Example: 1.0,2.0,3.0
-	Vec3f strToVec3f(const QString& s);
-	//! Like StelUtils::strToVec3f, but with 4 components and with double precision
-	Vec4d strToVec4d(const QStringList& s);
-	//! Like StelUtils::strToVec3f, but with 4 components and with double precision
-	Vec4d strToVec4d(const QString& s);
-
-	//! Converts a Vec2f to a string in the same format that can be read by strToVec2f
-	QString vec2fToStr(const Vec2f& v);
-	//! Converts a Vec3f to a string in the same format that can be read by strToVec3f
-	QString vec3fToStr(const Vec3f& v);
-	//! Converts a Vec4d to a string in the same format that can be read by strToVec4d
-	QString vec4dToStr(const Vec4d& v);
-
-	//! Converts a Vec3f to HTML color notation.
-	//! @param v The vector
-	//! @return The string in HTML color notation "#rrggbb".
-	QString vec3fToHtmlColor(const Vec3f& v);
-
-	//! Converts a color in HTML notation to a Vec3f.
-	//! @param c The HTML spec color string
-	Vec3f htmlColorToVec3f(const QString& c);
-
 	//! Convert from spherical coordinates to Rectangular direction.
 	//! @param lng longitude in radian
 	//! @param lat latitude in radian
@@ -260,7 +227,7 @@ namespace StelUtils
 		v.set(cos(dlng) * cosLat, sin(dlng) * cosLat, sin(dlat));
 	}
 
-	//! Convert from spherical coordinates to Rectangular direction.
+	//! Convert from Rectangular direction to spherical coordinate components.
 	//! @param lng double* to store longitude in radian
 	//! @param lat double* to store latitude in radian
 	//! @param v the input 3D vector
@@ -270,7 +237,7 @@ namespace StelUtils
 		*lng = atan2(v[1],v[0]);
 	}
 
-	//! Convert from spherical coordinates to Rectangular direction.
+	//! Convert from Rectangular direction to spherical coordinate components.
 	//! @param lng float* to store longitude in radian
 	//! @param lat float* to store latitude in radian
 	//! @param v the input 3D vector
@@ -281,7 +248,7 @@ namespace StelUtils
 	}
 
 
-	//! Convert from spherical coordinates to Rectangular direction.
+	//! Convert from Rectangular direction to spherical coordinate components.
 	//! @param lng float* to store longitude in radian
 	//! @param lat float* to store latitude in radian
 	//! @param v the input 3D vector
@@ -291,7 +258,7 @@ namespace StelUtils
 		*lng = atan2f(v[1],v[0]);
 	}
 
-	//! Convert from spherical coordinates to Rectangular direction.
+	//! Convert from Rectangular direction to spherical coordinate components.
 	//! @param lng double* to store longitude in radian
 	//! @param lat double* to store latitude in radian
 	//! @param v the input 3D vector
@@ -313,26 +280,33 @@ namespace StelUtils
 		*decRad = std::asin(std::sin(betaRad)*std::cos(eclRad)+std::cos(betaRad)*std::sin(eclRad)*std::sin(lambdaRad));
 	}
 
-	//! Convert a string longitude, latitude, RA or Declination angle
+	//! Convert a string longitude, latitude, RA or declination angle
 	//! to radians.
-	//! @param str the angle in format something like these:
-	//! - +53d  51'21.6"
-	//! - +53d51'21.6"
-	//! - -1d  10'31.8"
-	//! - +46d6'31"
-	//! - 50D46'0"N
-	//! - 123D47'59"W
-	//! - 123.567 N
-	//! - 123.567W
-	//! - -123.567
-	//! - 12h 14m 6s
-	//! The degree separator may be a degree symbol (\\xBA) in addition
-	//! to a 'd' or 'D'.
-	//! @return the angle in radians.
-	//! Latitude: North are positive, South are negative.
+	//! @param str the angle in a format according to:
+	//!   angle ::= [sign¹] ( real [degs | mins | secs]
+	//!                     | [integer degs] ( [integer mins] real secs
+	//!                                       | real mins )
+	//!                     ) [cardinal¹]            
+	//!   sign ::= + | -
+	//!   digit := 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+	//!   integer ::= digit [digits]
+	//!   real ::= integer [. integer]
+	//!   degs ::= d | h² | U+00B0 | U+00BA³
+	//!   mins ::= m | '
+	//!   secs ::= s | "
+	//!   cardinal ::= N² | S² | E | W
+	//!   ¹) A cardinal point overrides any sign. N and E result in a positive,
+	//!      W and S in a negative angle.
+	//!   ²) The use of the cardinal points N and S together with the hour sign
+	//!      'H' or 'h' is forbidden.
+	//!   ³) The MASCULINE ORDINAL INDICATOR U+00BA is accepted, considering
+	//!      Spanish QWERTY keyboards.
+	//! The string is parsed without regarding to case, except that, after a
+	//! single real, a solitary 's' indicates seconds whereas an 'S' indicates South.
+	//! It is highly recommended to use lower case for hdms and upper case for NSEW.
+	//! Latitude: North is positive, South is negative.
 	//! Longitude: East is positive, West is negative.
-	//! Note: if there is a N, S, E or W suffix, any leading + or -
-	//! characters are ignored.
+	//! @return the angle in radians.
 	double getDecAngle(const QString& str);
 
 	//! Check if a number is a power of 2.
@@ -349,26 +323,62 @@ namespace StelUtils
 			     -std::log(-z + std::sqrt(z*z+1)));
 	}
 
-	//! Integer modulo where the result is always positive.
+	//! Integer modulo where the result is always nonnegative. [0..b-1]
 	inline int imod(const int a, const int b){
 		int ret = a % b;
 		if(ret < 0)
 			ret+=b;
 		return ret;
 	}
-	//! Double modulo where the result is always positive.
+	//! Integer modulo where the result is always positive. [1..b]
+	inline int amod(const int a, const int b){
+		int ret = a % b;
+		if(ret <= 0)
+			ret+=b;
+		return ret;
+	}
+	//! Double modulo where the result is always nonnegative. [0..(b
 	inline double fmodpos(const double a, const double b){
 		double ret = fmod(a, b);
 		if(ret < 0)
 			ret+=b;
 		return ret;
 	}
-	//! Float modulo where the result is always positive.
+	//! Float modulo where the result is always nonnegative. [0..(b
 	inline float fmodpos(const float a, const float b){
 		float ret = fmodf(a, b);
 		if(ret < 0)
 			ret+=b;
 		return ret;
+	}
+
+	//! Floor integer division provides truncating to the next lower integer, also for negative numerators.
+	//! https://stackoverflow.com/questions/2622441/c-integer-floor-function
+	//! @returns floor(num/den)
+	inline long intFloorDiv (long num, long den)
+	{
+	  if (0 < (num^den)) // lgtm [cpp/bitwise-sign-check]
+	    return num/den;
+	  else
+	    {
+	      ldiv_t res = ldiv(num,den);
+	      return (res.rem)? res.quot-1
+			      : res.quot;
+	    }
+	}
+
+	//! version of intFloorDiv() for large integers.
+	inline long intFloorDivLL(long long num, long long den)
+	{
+	  if (0 < (num^den)) // lgtm [cpp/bitwise-sign-check]
+	    return static_cast<long>(num/den);
+	  else
+	    {
+	      lldiv_t res = lldiv(num,den);
+	      long long ret=  (res.rem)? res.quot-1
+			      : res.quot;
+	      return static_cast<long>(ret);
+	    }
 	}
 
 	///////////////////////////////////////////////////
@@ -406,7 +416,7 @@ namespace StelUtils
 	//! @return number of day: 0 - sunday, 1 - monday,..
 	int getDayOfWeek(int year, int month, int day);
 	inline int getDayOfWeek(double JD){ double d= fmod(JD+1.5, 7); if (d<0) d+=7.0;
-		return static_cast<int>(floor(d));
+		return std::lround(floor(d));
 	}
 
 	//! Get the current Julian Date from system time.
@@ -491,6 +501,9 @@ namespace StelUtils
 
 	//! Convert a hms formatted string to decimal hours
 	double hmsStrToHours(const QString& s);
+
+	//! Convert days (float) to a time string
+	QString daysFloatToDHMS(float days);
 
 	//! Get Delta-T estimation for a given date.
 	//! This is just an "empty" correction function, returning 0.
@@ -846,6 +859,12 @@ namespace StelUtils
 	//! @param b second number
 	//! @return Greatest Common Divisor
 	int gcd(int a, int b);
+
+	//! Least Common Multiple
+	//! @param a first number
+	//! @param b second number
+	//! @return Least Common Multiple
+	int lcm(int a, int b);
 
 	//! Given regularly spaced steps x1, x2, x3 and curve values y1, y2, y3,
 	//! calculate an intermediate value of the 3 arguments for the given interpolation point n.

@@ -54,93 +54,93 @@ The standard properties are divided into the following categories:
 */
 namespace SP
 {
-    /**
-     * \defgroup GeneralProperties Standard Properties - General: Common properties shared across devices of multiple genres.
-     * The following tables describe standard properties pertaining to generic devices. The name of a standard property and its members must be
-     * strictly reserved in all drivers. However, it is permissible to change the label element of properties. You can find numerous uses of the
-     * standard properties in the INDI library driver repository.
-     *
-     * As a <b>general</b> rule of the thumb, the status of properties reflects the command execution result:
-     * IPS_OKAY: Command excuted successfully.
-     * IPS_BUSY: Command execution under progress.
-     * IPS_ALERT: Command execution failed.
-     */
+/**
+ * \defgroup GeneralProperties Standard Properties - General: Common properties shared across devices of multiple genres.
+ * The following tables describe standard properties pertaining to generic devices. The name of a standard property and its members must be
+ * strictly reserved in all drivers. However, it is permissible to change the label element of properties. You can find numerous uses of the
+ * standard properties in the INDI library driver repository.
+ *
+ * As a <b>general</b> rule of the thumb, the status of properties reflects the command execution result:
+ * IPS_OKAY: Command excuted successfully.
+ * IPS_BUSY: Command execution under progress.
+ * IPS_ALERT: Command execution failed.
+ */
 
-    /*@{*/
+/*@{*/
 
-    /**
-     * @brief Connect to and disconnect from device.
-     * Name | Type | Member | Default | Description
-     * ---- | ---- | ------ | ------- | -----------
-     * CONNECTION | SWITCH | CONNECT | OFF | Establish connection to device
-     * CONNECTION | SWITCH | DISCONNECT | ON | Disconnect device
-     */
-    extern const char *CONNECTION;
+/**
+ * @brief Connect to and disconnect from device.
+ * Name | Type | Member | Default | Description
+ * ---- | ---- | ------ | ------- | -----------
+ * CONNECTION | SWITCH | CONNECT | OFF | Establish connection to device
+ * CONNECTION | SWITCH | DISCONNECT | ON | Disconnect device
+ */
+extern const char *CONNECTION;
 
-    /*@}*/
+/*@}*/
 
-    /**
-     * \defgroup SerialProperties Standard Properties - Serial: Properties used to communicate with and manage serial devices.
-     * Serial communication over RS232/485 and Bluetooth. Unless otherwise noted, all the properties are saved in the configuration file so that they are remembered across sessions.
-     */
+/**
+ * \defgroup SerialProperties Standard Properties - Serial: Properties used to communicate with and manage serial devices.
+ * Serial communication over RS232/485 and Bluetooth. Unless otherwise noted, all the properties are saved in the configuration file so that they are remembered across sessions.
+ */
 
-    /*@{*/
+/*@{*/
 
-    /**
-     * @brief Device serial (or bluetooth) connection port. The default value on Linux is <i>/dev/ttyUSB0</i> while on MacOS it is <i>/dev/cu.usbserial</i>
-     * It is part of Connection::SerialInterface to manage connections to serial devices.
-     * Name | Type | Member | Default | Description
-     * ---- | ---- | ------ | ------- | -----------
-     * DEVICE_PORT | TEXT | PORT | /dev/ttyUSB0 | Device serial connection port
-     */
-    extern const char *DEVICE_PORT;
+/**
+ * @brief Device serial (or bluetooth) connection port. The default value on Linux is <i>/dev/ttyUSB0</i> while on MacOS it is <i>/dev/cu.usbserial</i>
+ * It is part of Connection::SerialInterface to manage connections to serial devices.
+ * Name | Type | Member | Default | Description
+ * ---- | ---- | ------ | ------- | -----------
+ * DEVICE_PORT | TEXT | PORT | /dev/ttyUSB0 | Device serial connection port
+ */
+extern const char *DEVICE_PORT;
 
-    /**
-     * @brief Toggle device auto search.
-     * If enabled and on connection failure with the default port, the SerialInterface class shall scan the system for available
-     * serial ports and attempts connection and handshake with each until successful. Please note if this option is enabled it can take
-     * a while before connection is established depending on how many ports are available on the system and the handshake timeout of the
-     * the underlying device.
-     * Name | Type | Member | Default | Description
-     * ---- | ---- | ------ | ------- | -----------
-     * DEVICE_AUTO_SEARCH | SWITCH | ENABLED | ON | Auto Search ON
-     * DEVICE_AUTO_SEARCH | SWITCH | DISABLED | OFF | Auto Search OFF
-     */
-    extern const char *DEVICE_AUTO_SEARCH;
+/**
+ * @brief Toggle device auto search.
+ * If enabled and on connection failure with the default port, the SerialInterface class shall scan the system for available
+ * serial ports and attempts connection and handshake with each until successful. Please note if this option is enabled it can take
+ * a while before connection is established depending on how many ports are available on the system and the handshake timeout of the
+ * the underlying device.
+ * Name | Type | Member | Default | Description
+ * ---- | ---- | ------ | ------- | -----------
+ * DEVICE_AUTO_SEARCH | SWITCH | ENABLED | ON | Auto Search ON
+ * DEVICE_AUTO_SEARCH | SWITCH | DISABLED | OFF | Auto Search OFF
+ */
+extern const char *DEVICE_AUTO_SEARCH;
 
-    /**
-     * @brief Set device baud rate
-     * Name | Type | Member | Default | Description
-     * ---- | ---- | ------ | ------- | -----------
-     * DEVICE_BAUD_RATE | SWITCH | 9600 | ON | 9600
-     * DEVICE_BAUD_RATE | SWITCH | 19200 | OFF | 19200
-     * DEVICE_BAUD_RATE | SWITCH | 38400 | OFF | 38400
-     * DEVICE_BAUD_RATE | SWITCH | 57600 | OFF | 57600
-     * DEVICE_BAUD_RATE | SWITCH | 115200 | OFF | 115200
-     * DEVICE_BAUD_RATE | SWITCH | 230400 | OFF | 230400
-     */
-    extern const char *DEVICE_BAUD_RATE;
+/**
+ * @brief Set device baud rate
+ * Name | Type | Member | Default | Description
+ * ---- | ---- | ------ | ------- | -----------
+ * DEVICE_BAUD_RATE | SWITCH | 9600 | ON | 9600
+ * DEVICE_BAUD_RATE | SWITCH | 19200 | OFF | 19200
+ * DEVICE_BAUD_RATE | SWITCH | 38400 | OFF | 38400
+ * DEVICE_BAUD_RATE | SWITCH | 57600 | OFF | 57600
+ * DEVICE_BAUD_RATE | SWITCH | 115200 | OFF | 115200
+ * DEVICE_BAUD_RATE | SWITCH | 230400 | OFF | 230400
+ */
+extern const char *DEVICE_BAUD_RATE;
 
-    /*@}*/
+/*@}*/
 
-    /**
-     * \defgroup TCPProperties Standard Properties - TCP: Properties used to communicate with and manage devices over the network.
-     * Communication with devices over TCP/IP. Unless otherwise noted, all the properties are saved in the configuration file so that they are remembered across sessions.
-     */
+/**
+ * \defgroup TCPProperties Standard Properties - TCP: Properties used to communicate with and manage devices over the network.
+ * Communication with devices over TCP/IP. Unless otherwise noted, all the properties are saved in the configuration file so that they are remembered across sessions.
+ */
 
-    /*@{*/
+/*@{*/
 
-    /**
-     * @brief Device hostname and port.
-     * It is part of Connection::TCPInterface to manage connections to devices over the network.
-     * Name | Type | Member | Default | Description
-     * ---- | ---- | ------ | ------- | -----------
-     * DEVICE_TCP_ADDRESS | TEXT | ADDRESS |  | Device hostname or IP Address
-     * DEVICE_TCP_ADDRESS | TEXT | PORT |  | Device port
-     */
-    extern const char *DEVICE_TCP_ADDRESS;
+/**
+ * @brief Device hostname and port.
+ * It is part of Connection::TCPInterface to manage connections to devices over the network.
+ * Name | Type | Member | Default | Description
+ * ---- | ---- | ------ | ------- | -----------
+ * DEVICE_ADDRESS | TEXT | ADDRESS |  | Device hostname or IP Address
+ * DEVICE_ADDRESS | TEXT | PORT |  | Device port
+ */
+extern const char *DEVICE_ADDRESS;
 
-    /*@}*/
+/*@}*/
 
 }
 } // namespace INDI

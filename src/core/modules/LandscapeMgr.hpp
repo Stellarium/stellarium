@@ -80,6 +80,14 @@ class LandscapeMgr : public StelModule
 		   READ getFlagLabels
 		   WRITE setFlagLabels
 		   NOTIFY labelsDisplayedChanged)
+	Q_PROPERTY(bool flagPolyLineDisplayedOnly
+		   READ getFlagPolyLineDisplayed
+		   WRITE setFlagPolyLineDisplayed
+		   NOTIFY flagPolyLineDisplayedChanged)
+	Q_PROPERTY(int polyLineThickness
+		   READ getPolyLineThickness
+		   WRITE setPolyLineThickness
+		   NOTIFY polyLineThicknessChanged)
 	Q_PROPERTY(bool flagUseLightPollutionFromDatabase
 		   READ getFlagUseLightPollutionFromDatabase
 		   WRITE setFlagUseLightPollutionFromDatabase
@@ -138,8 +146,11 @@ public:
 	//! - Set up landscape-related display flags from ini parser object
 	virtual void init();
 
-	//! Draw the landscape graphics, cardinal points and atmosphere.
+	//! Draw the atmosphere, landscape graphics, and cardinal points.
 	virtual void draw(StelCore* core);
+	//! Draw landscape graphics and cardinal points. This only will redraw a polygonal line (if defined), the gazetteer and the Cardinal points.
+	//! This can be called outside the usual call order, if any foreground has to be overdrawn, e.g. 3D sceneries.
+	void drawPolylineOnly(StelCore* core);
 
 	//! Update time-dependent state.
 	//! Includes:
@@ -295,6 +306,15 @@ public slots:
 	bool getFlagLabels() const;
 	//! Set flag for displaying landscape labels
 	void setFlagLabels(const bool on);
+
+	//! Retrieve flag for rendering polygonal line (if one is defined)
+	bool getFlagPolyLineDisplayed() const {return flagPolyLineDisplayedOnly;}
+	//! Set flag for rendering polygonal line (if one is defined)
+	void setFlagPolyLineDisplayed(bool b) {if(b!=flagPolyLineDisplayedOnly){ flagPolyLineDisplayedOnly=b; emit flagPolyLineDisplayedChanged(b);}}
+	//! Retrieve thickness for rendering polygonal line (if one is defined)
+	int getPolyLineThickness() const {return polyLineThickness;}
+	//! Set thickness for rendering polygonal line (if one is defined)
+	void setPolyLineThickness(int thickness) {polyLineThickness=thickness; emit polyLineThicknessChanged(thickness);}
 
 	//! Return the value of the flag determining if a change of landscape will update the observer location.
 	bool getFlagLandscapeSetsLocation() const {return flagLandscapeSetsLocation;}
@@ -461,6 +481,8 @@ signals:
 	void landscapeDisplayedChanged(const bool displayed);
 	void illuminationDisplayedChanged(const bool displayed);
 	void labelsDisplayedChanged(const bool displayed);
+	void flagPolyLineDisplayedChanged(const bool enabled);
+	void polyLineThicknessChanged(const int thickness);
 	void flagUseLightPollutionFromDatabaseChanged(const bool usage);
 	void flagLandscapeAutoSelectionChanged(const bool value);
 	void flagLandscapeSetsLocationChanged(const bool value);
@@ -548,6 +570,11 @@ private:
 	bool flagLandscapeAutoSelection;
 
 	bool flagLightPollutionFromDatabase;
+
+	//! control drawing of a Polygonal line, if one is defined.
+	bool flagPolyLineDisplayedOnly;
+	//! thickness of polygonal horizon line
+	int polyLineThickness;
 
 	//! Indicate use of the default minimal brightness value specified in config.ini.
 	bool flagLandscapeUseMinimalBrightness;

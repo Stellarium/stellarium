@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>639</width>
-    <height>490</height>
+    <height>503</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -190,6 +190,9 @@
               <property name="frame">
                <bool>false</bool>
               </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
               <property name="buttonSymbols">
                <enum>QAbstractSpinBox::NoButtons</enum>
               </property>
@@ -204,6 +207,9 @@
             </item>
             <item row="1" column="2">
              <widget class="QSpinBox" name="updateFrequencySpinBox">
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
               <property name="minimum">
                <number>1</number>
               </property>
@@ -386,9 +392,25 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Restore default settings</string>
+            <string>Restore defaults</string>
            </property>
           </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
          </item>
          <item>
           <widget class="QPushButton" name="saveSettingsButton">
@@ -399,7 +421,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Save settings as default</string>
+            <string>Save settings</string>
            </property>
           </widget>
          </item>

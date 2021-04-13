@@ -79,7 +79,7 @@ public:
 		SINGLE		//! Implementation of a single book or atlas usually providing a "snapshot" of a traditional skyculture.
 				//! e.g. Bayer, Schiller, Hevelius, Bode, Rey, ...
 				//! Content (star names, artwork, spelling, ...) should not deviate from what the atlas contains.
-				//! The description should provide information about the presented work, and if possible a link to a digital online version.
+				//! The description should provide information about the presented work, and if possible a link to a digital online version.		
 	};
 
 	//! English name

@@ -104,13 +104,24 @@ void RemoteSyncDialog::createDialogContent()
 	connect(ui->buttonGroupSyncOptions, SIGNAL(buttonToggled(int,bool)), this, SLOT(checkboxToggled(int,bool)));
 
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), rs, SLOT(saveSettings()));	
-	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), rs, SLOT(restoreDefaultSettings()));
+	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 
 	populateExclusionLists();
 	connect(ui->pushButtonSelectProperties, SIGNAL(clicked()), this, SLOT(addPropertiesForExclusion()));
 	connect(ui->pushButtonDeselectProperties, SIGNAL(clicked()), this, SLOT(removePropertiesForExclusion()));
 
 	setAboutHtml();
+}
+
+void RemoteSyncDialog::restoreDefaults()
+{
+	if (askConfirmation())
+	{
+		qCDebug(remoteSync) << "restore defaults...";
+		rs->restoreDefaultSettings();
+	}
+	else
+		qCDebug(remoteSync) << "restore defaults is canceled...";
 }
 
 void RemoteSyncDialog::printErrorMessage(const QString error)

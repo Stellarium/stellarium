@@ -1,0 +1,135 @@
+#
+# Implementation of Continuous Integration process for linux and macOS by Github actions (with extra additionals...)
+#
+name: "CI"
+
+on:
+  push:
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [master]
+
+jobs:
+  # CI on Linux
+  ci-linux:
+    name: "Linux"
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]')"
+
+    steps:
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        # using force-overwrite due to
+        # https://github.com/actions/virtual-environments/issues/2703
+        sudo ACCEPT_EULA=Y apt upgrade -o Dpkg::Options::="--force-overwrite" --yes
+        sudo apt install -y qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins zlib1g-dev libgl1-mesa-dev libdrm-dev cmake
+
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Configure CMake
+      shell: bash
+      run: |
+        mkdir -p build
+        cd build
+        cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On ${{ github.workspace }}
+
+    - name: Compile
+      working-directory: build
+      run: make -j3
+
+    - name: Run unit tests
+      uses: GabrielBB/xvfb-action@v1
+      with:
+        working-directory: build
+        run: ctest --output-on-failure
+
+  # CI on macOS
+  ci-macos:
+    name: "macOS"
+    runs-on: macos-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]')"
+
+    # @TODO Enable gpsd on macOS instance for CI testing
+    # @BODY At the moment after installing gpsd (brew install gpsd) library can be found by cmake, but not headers! Apparently we should add some magic for environment variables or something else on macOS Catalina to make headers available for cmake/make
+    steps:
+    - name: Install dependencies
+      run: brew install qt@5
+
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Configure CMake
+      shell: bash
+      run: |
+        export PATH="/usr/local/opt/qt@5/bin:$PATH"
+        mkdir -p build
+        cd build
+        cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On ${{ github.workspace }}
+
+    - name: Compile
+      working-directory: build
+      run: make -j3
+
+    - name: Run unit tests
+      uses: GabrielBB/xvfb-action@v1
+      with:
+        working-directory: build
+        run: ctest --output-on-failure
+
+  # Coveralls CI
+  ci-coveralls:
+    name: "Coveralls"
+    runs-on: ubuntu-18.04
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]')"
+
+    steps:
+    - name: Install dependencies
+      run: |
+        sudo apt remove php7.* -y
+        sudo apt remove php8.* -y
+        sudo apt update
+        # using force-overwrite due to
+        # https://github.com/actions/virtual-environments/issues/2703
+        sudo ACCEPT_EULA=Y apt upgrade -o Dpkg::Options::="--force-overwrite" --yes
+        sudo apt install -y qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins zlib1g-dev libgl1-mesa-dev libdrm-dev cmake lcov
+
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Configure CMake
+      shell: bash
+      run: |
+        mkdir -p ../../../.stellarium/ephem
+        mkdir -p build
+        cd build
+        cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On ${{ github.workspace }}
+
+    - name: Compile
+      working-directory: build
+      run: make -j3
+
+    - name: Download JPL DE430 ephemeris
+      uses: carlosperate/download-file-action@v1.0.3
+      with:
+        file-url: 'https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/linux_p1550p2650.430'
+        file-name: 'linux_p1550p2650.430'
+        location: '../../../.stellarium/ephem'
+
+    - name: Make coverage
+      uses: GabrielBB/xvfb-action@v1
+      with:
+        working-directory: build
+        run: make coverage
+
+    # Remove unnecessary data from final report
+    - name: Coverage data cleanup
+      working-directory: build
+      run: lcov --gcov-tool "/usr/bin/gcov" --remove coverage.info '*_autogen/*' '*/ui_*.h' '*/qrc_*.cpp' '*/qt5/*' '/usr/*' '*gmock*' --output-file coverage.info
+
+    - name: Coveralls
+      uses: coverallsapp/github-action@master
+      with:
+        path-to-lcov: ${{ github.workspace }}/build/coverage.info
+        github-token: ${{ secrets.GITHUB_TOKEN }}

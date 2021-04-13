@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>750</width>
-    <height>491</height>
+    <width>663</width>
+    <height>523</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -178,70 +178,114 @@
           <property name="bottomMargin">
            <number>0</number>
           </property>
-          <item row="5" column="0" colspan="5">
-           <widget class="QLabel" name="nextUpdateLabel">
-            <property name="text">
-             <string notr="true">[next update info]</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="2">
-           <widget class="QSpinBox" name="updateFrequencySpinBox">
-            <property name="minimum">
-             <number>1</number>
-            </property>
-            <property name="maximum">
-             <number>9999</number>
-            </property>
-            <property name="value">
-             <number>1</number>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0" colspan="4">
-           <widget class="QCheckBox" name="internetUpdatesCheckbox">
-            <property name="text">
-             <string>Update satellite data from Internet sources</string>
-            </property>
-           </widget>
-          </item>
           <item row="3" column="0">
-           <widget class="QLabel" name="label_7">
-            <property name="text">
-             <string>Last update:</string>
-            </property>
-           </widget>
+           <layout class="QGridLayout" name="gridLayout_7">
+            <item row="0" column="1">
+             <layout class="QHBoxLayout" name="horizontalLayout_11">
+              <item>
+               <widget class="QLabel" name="updateFrequencyLabel">
+                <property name="text">
+                 <string>Update frequency:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_6">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="updateFrequencySpinBox">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1</number>
+                </property>
+                <property name="maximum">
+                 <number>9999</number>
+                </property>
+                <property name="value">
+                 <number>1</number>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="0" column="0">
+             <layout class="QHBoxLayout" name="horizontalLayout_10">
+              <item>
+               <widget class="QLabel" name="label_7">
+                <property name="text">
+                 <string>Last update:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QDateTimeEdit" name="lastUpdateDateTimeEdit">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="frame">
+                 <bool>false</bool>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="buttonSymbols">
+                 <enum>QAbstractSpinBox::NoButtons</enum>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="nextUpdateLabel">
+              <property name="text">
+               <string notr="true">[next update info]</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QPushButton" name="updateButton">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Update now</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
-          <item row="3" column="1" rowspan="2">
-           <spacer name="horizontalSpacer">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>17</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="3" column="2">
-           <widget class="QDateTimeEdit" name="lastUpdateDateTimeEdit">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="frame">
-             <bool>false</bool>
-            </property>
-            <property name="buttonSymbols">
-             <enum>QAbstractSpinBox::NoButtons</enum>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0" colspan="4">
+          <item row="1" column="0">
            <layout class="QHBoxLayout" name="horizontalLayoutAutoAdd">
             <item>
              <widget class="QCheckBox" name="checkBoxAutoAdd">
@@ -268,30 +312,17 @@
             </item>
            </layout>
           </item>
-          <item row="3" column="3" rowspan="2">
-           <widget class="QPushButton" name="updateButton">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="internetUpdatesCheckbox">
             <property name="text">
-             <string>Update now</string>
+             <string>Update satellite data from Internet sources</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="0" colspan="4">
+          <item row="2" column="0">
            <widget class="QCheckBox" name="checkBoxAutoRemove">
             <property name="text">
              <string>On update, remove the satellites that are no longer listed in the update sources</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="updateFrequencyLabel">
-            <property name="text">
-             <string>Update frequency (hours):</string>
             </property>
            </widget>
           </item>
@@ -299,57 +330,158 @@
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="labelsGroup">
-         <property name="title">
-          <string>Labels</string>
+        <layout class="QHBoxLayout" name="horizontalLayout_9">
+         <property name="spacing">
+          <number>0</number>
          </property>
-         <property name="flat">
-          <bool>true</bool>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_2">
-          <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_10">
-            <property name="text">
-             <string>Label font size (pixels):</string>
+         <item>
+          <widget class="QGroupBox" name="labelsGroup">
+           <property name="title">
+            <string>Labels</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_2">
+            <property name="leftMargin">
+             <number>0</number>
             </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QSpinBox" name="fontSizeSpinBox">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+            <property name="topMargin">
+             <number>0</number>
             </property>
-            <property name="minimum">
-             <number>-100</number>
+            <property name="rightMargin">
+             <number>0</number>
             </property>
-            <property name="maximum">
-             <number>200</number>
+            <property name="bottomMargin">
+             <number>0</number>
             </property>
-            <property name="value">
-             <number>10</number>
+            <item row="1" column="2">
+             <widget class="QSpinBox" name="fontSizeSpinBox">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="suffix">
+               <string comment="pixels">px</string>
+              </property>
+              <property name="minimum">
+               <number>-100</number>
+              </property>
+              <property name="maximum">
+               <number>200</number>
+              </property>
+              <property name="value">
+               <number>10</number>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_10">
+              <property name="text">
+               <string>Font size:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <spacer name="horizontalSpacer_3">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="colorsGroup">
+           <property name="title">
+            <string>Colors</string>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_6">
+            <property name="leftMargin">
+             <number>0</number>
             </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item row="0" column="0">
+             <widget class="QToolButton" name="invisibleColorButton">
+              <property name="toolTip">
+               <string>Color of markers, labels and orbits for invisible satellites</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QToolButton" name="transitColorButton">
+              <property name="toolTip">
+               <string>Color of markers for satellites in transit through the Sun or the Moon</string>
+              </property>
+              <property name="text">
+               <string notr="true"/>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="iconicGroup">
+           <property name="title">
+            <string>Show satellites as markers</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_4">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item row="0" column="0">
+             <widget class="QCheckBox" name="hideInvisibleSatellites">
+              <property name="text">
+               <string>Hide invisible artificial satellites</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
        </item>
        <item>
         <widget class="QGroupBox" name="orbitLinesGroup">
@@ -375,37 +507,95 @@
           <property name="bottomMargin">
            <number>0</number>
           </property>
-          <item row="0" column="1">
-           <widget class="QSpinBox" name="orbitSegmentsSpin">
+          <item row="0" column="7">
+           <widget class="QSpinBox" name="orbitFadeSpin">
             <property name="toolTip">
-             <string>Number of segments used to draw the line</string>
+             <string>Number of segments used to draw each end of the line</string>
             </property>
-            <property name="minimum">
-             <number>3</number>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
             <property name="maximum">
-             <number>200</number>
+             <number>50</number>
             </property>
             <property name="value">
-             <number>60</number>
+             <number>5</number>
             </property>
            </widget>
           </item>
-          <item row="0" column="3">
+          <item row="0" column="2">
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="0" column="4">
            <widget class="QSpinBox" name="orbitDurationSpin">
             <property name="toolTip">
              <string>Duration of a single segment in seconds</string>
             </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
             <property name="minimum">
-             <number>5</number>
+             <number>1</number>
             </property>
             <property name="maximum">
              <number>120</number>
             </property>
             <property name="value">
-             <number>15</number>
+             <number>5</number>
             </property>
            </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QSpinBox" name="orbitSegmentsSpin">
+            <property name="toolTip">
+             <string>Number of segments used to draw the line</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+            <property name="minimum">
+             <number>3</number>
+            </property>
+            <property name="maximum">
+             <number>9000</number>
+            </property>
+            <property name="value">
+             <number>180</number>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QLabel" name="labelSegmentLength">
+            <property name="toolTip">
+             <string>Duration of a single segment</string>
+            </property>
+            <property name="text">
+             <string>Segment length:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="5">
+           <spacer name="horizontalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
           </item>
           <item row="0" column="0">
            <widget class="QLabel" name="label_5">
@@ -417,70 +607,13 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="4">
+          <item row="0" column="6">
            <widget class="QLabel" name="label_6">
             <property name="toolTip">
              <string>Number of segments used to draw each end of the line</string>
             </property>
             <property name="text">
              <string>Fade length:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="2">
-           <widget class="QLabel" name="label_8">
-            <property name="toolTip">
-             <string>Duration of a single segment in seconds</string>
-            </property>
-            <property name="text">
-             <string extracomment="TRANSLATORS: = &quot;duration&quot;. 's' means seconds">Segment length (s):</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="5">
-           <widget class="QSpinBox" name="orbitFadeSpin">
-            <property name="toolTip">
-             <string>Number of segments used to draw each end of the line</string>
-            </property>
-            <property name="maximum">
-             <number>50</number>
-            </property>
-            <property name="value">
-             <number>5</number>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="iconicGroup">
-         <property name="title">
-          <string>Show artificial satellites as markers</string>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-         <property name="checked">
-          <bool>false</bool>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_4">
-          <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
-          <item row="0" column="0">
-           <widget class="QCheckBox" name="hideInvisibleSatellites">
-            <property name="text">
-             <string>Hide invisible artificial satellites</string>
             </property>
            </widget>
           </item>
@@ -524,9 +657,25 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>Restore default settings</string>
+             <string>Restore defaults</string>
             </property>
            </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_7">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
           </item>
           <item>
            <widget class="QPushButton" name="saveSettingsButton">
@@ -537,7 +686,7 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>Save settings as default</string>
+             <string>Save settings</string>
             </property>
            </widget>
           </item>
@@ -593,8 +742,10 @@
              <property name="toolTip">
               <string>Add more satellites</string>
              </property>
-             <property name="text">
-              <string notr="true">Add</string>
+             <property name="icon">
+              <iconset resource="../../../../data/gui/guiRes.qrc">
+               <normaloff>:/graphicGui/uibtAdd.png</normaloff>
+               <disabledoff>:/graphicGui/uibtAdd-disabled.png</disabledoff>:/graphicGui/uibtAdd.png</iconset>
              </property>
             </widget>
            </item>
@@ -609,10 +760,25 @@
              <property name="toolTip">
               <string>Remove the selected satellites</string>
              </property>
-             <property name="text">
-              <string notr="true">Remove</string>
+             <property name="icon">
+              <iconset resource="../../../../data/gui/guiRes.qrc">
+               <normaloff>:/graphicGui/uibtRemove.png</normaloff>
+               <disabledoff>:/graphicGui/uibtRemove-disabled.png</disabledoff>:/graphicGui/uibtRemove.png</iconset>
              </property>
             </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
            </item>
            <item>
             <widget class="QPushButton" name="satMarkerColorPickerButton">
@@ -662,38 +828,6 @@
              </property>
             </widget>
            </item>
-           <item>
-            <spacer name="horizontalSpacer_2">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <widget class="QPushButton" name="saveSatellitesButton">
-             <property name="enabled">
-              <bool>true</bool>
-             </property>
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="toolTip">
-              <string>Save changes</string>
-             </property>
-             <property name="text">
-              <string notr="true">Save</string>
-             </property>
-            </widget>
-           </item>
           </layout>
          </item>
         </layout>
@@ -728,6 +862,9 @@
           <layout class="QHBoxLayout" name="horizontalLayoutCatalogNumber">
            <item>
             <widget class="QLabel" name="labelCatalogNumber">
+             <property name="toolTip">
+              <string>The Satellite Catalog Number (also known as NORAD (North American Aerospace Defense) Catalog Number, NORAD ID)</string>
+             </property>
              <property name="text">
               <string>Catalog number:</string>
              </property>
@@ -738,6 +875,70 @@
            </item>
            <item>
             <widget class="QLineEdit" name="noradNumberEdit">
+             <property name="toolTip">
+              <string>The Satellite Catalog Number (also known as NORAD (North American Aerospace Defense) Catalog Number, NORAD ID)</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="labelCosparNumber">
+             <property name="toolTip">
+              <string>The International Designator, also known as COSPAR ID</string>
+             </property>
+             <property name="text">
+              <string>I.D.:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="cosparNumberEdit">
+             <property name="toolTip">
+              <string>The International Designator, also known as COSPAR ID</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_8">
+           <item>
+            <widget class="QLabel" name="labelStdMagnitude">
+             <property name="text">
+              <string>Standard magnitude:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="stdMagnitudeLineEdit">
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="labelRCS">
+             <property name="text">
+              <string notr="true" extracomment="Radar cross-section">RCS:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="rcsLineEdit">
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
@@ -753,19 +954,6 @@
            <property name="horizontalSpacing">
             <number>0</number>
            </property>
-           <item row="0" column="0">
-            <widget class="QCheckBox" name="displayedCheckbox">
-             <property name="toolTip">
-              <string>Display the selected satellite(s)</string>
-             </property>
-             <property name="text">
-              <string>Displayed</string>
-             </property>
-             <property name="tristate">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
            <item row="0" column="1">
             <widget class="QCheckBox" name="orbitCheckbox">
              <property name="toolTip">
@@ -779,7 +967,20 @@
              </property>
             </widget>
            </item>
-           <item row="1" column="0" colspan="2">
+           <item row="0" column="0">
+            <widget class="QCheckBox" name="displayedCheckbox">
+             <property name="toolTip">
+              <string>Display the selected satellite(s)</string>
+             </property>
+             <property name="text">
+              <string>Displayed</string>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2">
             <widget class="QCheckBox" name="userCheckBox">
              <property name="toolTip">
               <string>Do not update (or remove on update) the selected satellite(s)</string>
@@ -805,6 +1006,12 @@
            </item>
            <item>
             <widget class="QTextEdit" name="descriptionTextEdit">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="readOnly">
               <bool>false</bool>
              </property>
@@ -876,6 +1083,30 @@
            </item>
           </layout>
          </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_12">
+           <item>
+            <widget class="QLabel" name="labelTleEpoch">
+             <property name="text">
+              <string>Epoch of the TLE:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="labelTleEpochData">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string notr="true"/>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
         </layout>
        </item>
       </layout>
@@ -910,7 +1141,10 @@
          <item>
           <widget class="QLineEdit" name="sourceEdit">
            <property name="toolTip">
-            <string>Enter or edit the URL of the selected source. Changes are saved by pressing Enter.</string>
+            <string/>
+           </property>
+           <property name="inputMethodHints">
+            <set>Qt::ImhUrlCharactersOnly</set>
            </property>
           </widget>
          </item>
@@ -919,8 +1153,34 @@
            <property name="toolTip">
             <string>Add new source</string>
            </property>
-           <property name="text">
-            <string notr="true">Add</string>
+           <property name="icon">
+            <iconset resource="../../../../data/gui/guiRes.qrc">
+             <normaloff>:/graphicGui/uibtCreate.png</normaloff>
+             <disabledoff>:/graphicGui/uibtCreate-disabled.png</disabledoff>:/graphicGui/uibtCreate.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="editSourceButton">
+           <property name="toolTip">
+            <string>Edit selected source</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../../data/gui/guiRes.qrc">
+             <normaloff>:/graphicGui/uibtEdit.png</normaloff>
+             <disabledoff>:/graphicGui/uibtEdit-disabled.png</disabledoff>:/graphicGui/uibtEdit.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="saveSourceButton">
+           <property name="toolTip">
+            <string>Save source</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../../data/gui/guiRes.qrc">
+             <normaloff>:/graphicGui/uibtSave.png</normaloff>
+             <disabledoff>:/graphicGui/uibtSave-disabled.png</disabledoff>:/graphicGui/uibtSave.png</iconset>
            </property>
           </widget>
          </item>
@@ -929,8 +1189,10 @@
            <property name="toolTip">
             <string>Remove selected source</string>
            </property>
-           <property name="text">
-            <string notr="true">Remove</string>
+           <property name="icon">
+            <iconset resource="../../../../data/gui/guiRes.qrc">
+             <normaloff>:/graphicGui/uibtDelete.png</normaloff>
+             <disabledoff>:/graphicGui/uibtDelete-disabled.png</disabledoff>:/graphicGui/uibtDelete.png</iconset>
            </property>
           </widget>
          </item>
@@ -1056,12 +1318,7 @@
   <tabstop>checkBoxAutoAdd</tabstop>
   <tabstop>jumpToSourcesButton</tabstop>
   <tabstop>checkBoxAutoRemove</tabstop>
-  <tabstop>updateButton</tabstop>
-  <tabstop>lastUpdateDateTimeEdit</tabstop>
-  <tabstop>updateFrequencySpinBox</tabstop>
-  <tabstop>labelsGroup</tabstop>
   <tabstop>fontSizeSpinBox</tabstop>
-  <tabstop>orbitLinesGroup</tabstop>
   <tabstop>orbitSegmentsSpin</tabstop>
   <tabstop>orbitDurationSpin</tabstop>
   <tabstop>restoreDefaultsButton</tabstop>
@@ -1073,7 +1330,6 @@
   <tabstop>noradNumberEdit</tabstop>
   <tabstop>displayedCheckbox</tabstop>
   <tabstop>orbitCheckbox</tabstop>
-  <tabstop>userCheckBox</tabstop>
   <tabstop>descriptionTextEdit</tabstop>
   <tabstop>groupsListWidget</tabstop>
   <tabstop>tleFirstLineEdit</tabstop>
@@ -1081,14 +1337,15 @@
   <tabstop>addSatellitesButton</tabstop>
   <tabstop>removeSatellitesButton</tabstop>
   <tabstop>satMarkerColorPickerButton</tabstop>
-  <tabstop>saveSatellitesButton</tabstop>
   <tabstop>sourceList</tabstop>
   <tabstop>sourceEdit</tabstop>
   <tabstop>addSourceButton</tabstop>
   <tabstop>deleteSourceButton</tabstop>
   <tabstop>aboutTextBrowser</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../../../../data/gui/guiRes.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>checkBoxAutoAdd</sender>

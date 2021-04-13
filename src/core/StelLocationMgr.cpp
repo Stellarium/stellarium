@@ -454,6 +454,8 @@ StelLocationMgr::StelLocationMgr()
 		locationDBToIANAtranslations.insert("Asia/Rangoon",      "Asia/Yangon");  // UTC+6:30 Yangon missing on Ubuntu/Qt5.5.1.
 		locationDBToIANAtranslations.insert("Asia/Yangon",       "Asia/Rangoon"); // This can translate from the binary location file back to the zone name as known on Windows.
 		locationDBToIANAtranslations.insert( "", "UTC");
+		// Missing on Qt5.9.5/Ubuntu 18.04.4
+		locationDBToIANAtranslations.insert("America/Godthab",   "UTC-03:00");
 		// N.B. Further missing TZ names will be printed out in the log.txt. Resolve these by adding into this list.
 		// TODO later: create a text file in user data directory, and auto-update it weekly.
 	}
@@ -652,11 +654,11 @@ static float parseAngle(const QString& s, bool* ok)
 	QRegExp reg("([+-]?[\\d.]+)°(?:([\\d.]+)')?(?:([\\d.]+)\")?");
 	if (reg.exactMatch(s))
 	{
-		float deg = reg.capturedTexts()[1].toFloat(ok);
+		float deg = reg.cap(1).toFloat(ok);
 		if (!*ok) return 0;
-		float min = reg.capturedTexts()[2].isEmpty()? 0 : reg.capturedTexts()[2].toFloat(ok);
+		float min = reg.cap(2).isEmpty()? 0 : reg.cap(2).toFloat(ok);
 		if (!*ok) return 0;
-		float sec = reg.capturedTexts()[3].isEmpty()? 0 : reg.capturedTexts()[3].toFloat(ok);
+		float sec = reg.cap(3).isEmpty()? 0 : reg.cap(3).toFloat(ok);
 		if (!*ok) return 0;
 		return deg + min / 60 + sec / 3600;
 	}
@@ -677,11 +679,11 @@ const StelLocation StelLocationMgr::locationForString(const QString& s) const
 	{
 		bool ok;
 		// We have a set of coordinates
-		ret.latitude = parseAngle(csreg.capturedTexts()[1].trimmed(), &ok);
+		ret.latitude = parseAngle(csreg.cap(1).trimmed(), &ok);
 		if (!ok) ret.role = '!';
-		ret.longitude = parseAngle(csreg.capturedTexts()[2].trimmed(), &ok);
+		ret.longitude = parseAngle(csreg.cap(2).trimmed(), &ok);
 		if (!ok) ret.role = '!';
-		ret.altitude = csreg.capturedTexts()[3].trimmed().toInt(&ok);
+		ret.altitude = csreg.cap(3).trimmed().toInt(&ok);
 		if (!ok) ret.role = '!';
 		ret.name = QString("%1, %2").arg(QString::number(ret.latitude, 'f', 2), QString::number(ret.longitude, 'f', 2));
 		ret.planetName = "Earth";
@@ -693,11 +695,11 @@ const StelLocation StelLocationMgr::locationForString(const QString& s) const
 	{
 		bool ok;
 		// We have a set of coordinates
-		ret.latitude = parseAngle(reg.capturedTexts()[2].trimmed(), &ok);
+		ret.latitude = parseAngle(reg.cap(2).trimmed(), &ok);
 		if (!ok) ret.role = '!';
-		ret.longitude = parseAngle(reg.capturedTexts()[3].trimmed(), &ok);
+		ret.longitude = parseAngle(reg.cap(3).trimmed(), &ok);
 		if (!ok) ret.role = '!';
-		ret.name = reg.capturedTexts()[1].trimmed();
+		ret.name = reg.cap(1).trimmed();
 		ret.planetName = "Earth";
 		return ret;
 	}
@@ -720,6 +722,7 @@ const StelLocation StelLocationMgr::locationFromCLI() const
 	ret.landscapeKey = conf->value("landscape_name", "guereins").toString();
 	conf->endGroup();
 	conf->remove("location_run_once");
+	ret.state="CLI"; // flag this location with a marker for handling in LandscapeMgr::init(). state is not displayed anywhere, so I expect no issues from that.
 	return ret;
 }
 

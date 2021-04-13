@@ -33,19 +33,18 @@ class GreatRedSpotDialog : public StelDialog
 
 public:
 	GreatRedSpotDialog();
-	virtual ~GreatRedSpotDialog();
+	virtual ~GreatRedSpotDialog() Q_DECL_OVERRIDE;
 
 public slots:
-        void retranslate();
-	void setVisible(bool);
+	virtual void retranslate() Q_DECL_OVERRIDE;
 
 private slots:
 	void setGrsJD(QDateTime dt);
-	void openRecentGrsMeasurement();
+	void openRecentGrsMeasurement(); //! Opens a website in the system web browser where GRS data can be found.
 
 protected:
         //! Initialize the dialog widgets and connect the signals/slots.
-        virtual void createDialogContent();
+	virtual void createDialogContent() Q_DECL_OVERRIDE;
 	Ui_GreatRedSpotDialogForm *ui;
 };
 

@@ -43,6 +43,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelPropertyMgr.hpp"
+#include "StelScriptMgr.hpp"
 
 #include "StelObject.hpp"
 #include "StelObjectMgr.hpp"
@@ -144,30 +145,6 @@ void StelMainScriptAPI::setDate(const QString& dateStr, const QString& spec, con
 		core->setJDE(JD);
 	else
 		core->setJD(JD);
-
-//	bool relativeTime = false;
-//	if (dateStr.startsWith("+") || dateStr.startsWith("-") || (dateStr.startsWith("now") && (dateStr.startsWith("+") || dateStr.startsWith("-"))))
-//		relativeTime = true;
-//	double JD = jdFromDateString(dateStr, spec);
-//	StelCore* core = StelApp::getInstance().getCore();
-//	if (relativeTime)
-//	{
-//		core->setJDay(JD);
-//	}
-//	else
-//	{
-//		if (dateIsDT)
-//		{
-//			// add Delta-T correction for date
-//			core->setJDay(JD + core->getDeltaT(JD)/86400);
-//		}
-//		else
-//		{
-//			// set date without Delta-T correction
-//			// compatible with 0.11
-//			core->setJDay(JD);
-//		}
-//	}
 }
 
 QString StelMainScriptAPI::getDate(const QString& spec)
@@ -232,7 +209,7 @@ void StelMainScriptAPI::setPlanetocentricCalculations(bool f)
 void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, double altitude, double duration, const QString& name, const QString& planet)
 {
 	StelCore* core = StelApp::getInstance().getCore();
-	StelObjectP ssObj = GETSTELMODULE(SolarSystem)->searchByName(planet);
+	StelObjectP ssObj = GETSTELMODULE(SolarSystem)->searchByName(planet);	
 	StelLocation loc = core->getCurrentLocation();
 	loc.longitude = static_cast<float>(longitude);
 	loc.latitude = static_cast<float>(latitude);
@@ -240,7 +217,18 @@ void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, d
 		loc.altitude = qRound(altitude);
 	if (!ssObj.isNull())
 		loc.planetName = ssObj->getEnglishName();
-	loc.name = name;
+	else
+		return; // Avoid crash when planet is not defined or not exist
+
+	QRegExp cico( "^\\s*([^,]+),\\s*(\\S.*)$" );
+	if( cico.exactMatch( name ) )
+	{
+		loc.name = cico.cap(1);
+		loc.country = cico.cap(2);
+	}
+	else
+		loc.name = name;
+
 	core->moveObserverTo(loc, duration, duration);
 }
 
@@ -409,6 +397,26 @@ bool StelMainScriptAPI::getFlagGravityLabels()
 void StelMainScriptAPI::setFlagGravityLabels(bool b)
 {
 	StelApp::getInstance().getCore()->setFlagGravityLabels(b);
+}
+
+bool StelMainScriptAPI::getFlipHorz()
+{
+	return StelApp::getInstance().getCore()->getFlipHorz();
+}
+
+void StelMainScriptAPI::setFlipHorz(bool b)
+{
+	StelApp::getInstance().getCore()->setFlipHorz(b);
+}
+
+bool StelMainScriptAPI::getFlipVert()
+{
+	return StelApp::getInstance().getCore()->getFlipVert();
+}
+
+void StelMainScriptAPI::setFlipVert(bool b)
+{
+	StelApp::getInstance().getCore()->setFlipVert(b);
 }
 
 bool StelMainScriptAPI::getDiskViewport()
@@ -694,7 +702,6 @@ void StelMainScriptAPI::exit()
 
 void StelMainScriptAPI::quitStellarium()
 {
-	emit(requestExit()); // exit from script
 	StelApp::getInstance().quit(); // quit from planetarium
 }
 
@@ -756,25 +763,27 @@ void StelMainScriptAPI::saveOutputAs(const QString &filename)
 
 double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spec)
 {
+	QString tdt = dt.trimmed();
 	StelCore *core = StelApp::getInstance().getCore();
-	if (dt == "now")
+	if (tdt == "now")
 		return StelUtils::getJDFromSystem();
 	
 	bool ok;
 	double jd;
 	if (spec=="local")
-	{
-		jd = StelApp::getInstance().getLocaleMgr().getJdFromISO8601TimeLocal(dt, &ok);
-	}
+		jd = StelApp::getInstance().getLocaleMgr().getJdFromISO8601TimeLocal(tdt, &ok);
 	else
-	{
-		jd = StelUtils::getJulianDayFromISO8601String(dt, &ok);
-	}
+		jd = StelUtils::getJulianDayFromISO8601String(tdt, &ok);
+
 	if (ok)
 		return jd;
-	
-	QRegExp nowRe("^(now)?(\\s*([+\\-])\\s*(\\d+(\\.\\d+)?)\\s*(second|seconds|minute|minutes|hour|hours|day|days|sol|sols|week|weeks|month|months|year|years))(\\s+(sidereal)?)?");
-	if (nowRe.exactMatch(dt))
+
+	QRegExp nowRe("(now)?"
+		      "\\s*([-+])"
+		      "\\s*(\\d+(?:\\.\\d+)?(?:[eE][-+]?\\d+)?)"
+		      "\\s*(second|minute|hour|day|sol|week|month|year)s?"
+		      "(?:\\s+(sidereal))?");
+	if (nowRe.exactMatch(tdt))
 	{
 		double delta;
 		double unit;
@@ -782,46 +791,46 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 		double yearLength = 365.242190419; // duration of Earth's mean tropical year
 		double monthLength = 27.321582241; // duration of Earth's mean tropical month
 
-		if (nowRe.capturedTexts().at(1)=="now")
+		if (nowRe.cap(1)=="now")
 			jd = StelUtils::getJDFromSystem();
 		else
 			jd = core->getJD();
 
-		if (nowRe.capturedTexts().at(8) == "sidereal")
+		if (nowRe.cap(5) == "sidereal")
 		{
 			dayLength = core->getLocalSiderealDayLength();
 			yearLength = core->getLocalSiderealYearLength();
 			monthLength = 27.321661; // duration of Earth's sidereal month
 		}
 
-		QString unitString = nowRe.capturedTexts().at(6);
-		if (unitString == "seconds" || unitString == "second")
+		QString unitString = nowRe.cap(4);
+		if ( unitString == "second")
 			unit = dayLength / (24*3600.);
-		else if (unitString == "minutes" || unitString == "minute")
+		else if (unitString == "minute")
 			unit = dayLength / (24*60.);
-		else if (unitString == "hours" || unitString == "hour")
+		else if (unitString == "hour")
 			unit = dayLength / (24.);
-		else if (unitString == "days" || unitString == "day")
+		else if (unitString == "day")
 			unit = dayLength;
-		else if (unitString == "sols" || unitString == "sol")
+		else if (unitString == "sol")
 			unit = core->getCurrentPlanet()->getMeanSolarDay();
-		else if (unitString == "weeks" || unitString == "week")
+		else if (unitString == "week")
 			unit = dayLength * 7.;
-		else if (unitString == "months" || unitString == "month")
+		else if (unitString == "month")
 			unit = monthLength;
-		else if (unitString == "years" || unitString == "year")
+		else if (unitString == "year")
 			unit = yearLength;
 		else
 		{
-			qWarning() << "StelMainScriptAPI::setDate - unknown time unit:" << nowRe.capturedTexts().at(4);
+			qWarning() << "StelMainScriptAPI::setDate - unknown time unit:" << nowRe.cap(4);
 			unit = 0;
 		}
 
-		delta = nowRe.capturedTexts().at(4).toDouble();
+		delta = nowRe.cap(3).toDouble();
 
-		if (nowRe.capturedTexts().at(3) == "+")
+		if (nowRe.cap(2) == "+")
 			jd += (unit * delta);
-		else if (nowRe.capturedTexts().at(3) == "-")
+		else if (nowRe.cap(2) == "-")
 			jd -= (unit * delta);
 		return jd;
 	}
@@ -830,10 +839,15 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 	return StelUtils::getJDFromSystem();
 }
 
-void StelMainScriptAPI::wait(double t) {
-	QEventLoop loop;
-	QTimer::singleShot(qRound(1000*t), &loop, SLOT(quit()));
-	loop.exec();
+void StelMainScriptAPI::wait(double t)
+{
+	StelScriptMgr* scriptMgr = &StelApp::getInstance().getScriptMgr();
+	QEventLoop* loop = scriptMgr->getWaitEventLoop();
+	QTimer::singleShot(qRound(1000*t), loop, SLOT(quit()));
+	if( loop->exec() != 0 )
+	{
+		emit(requestExit()); // causes a call of stopScript
+	}
 }
 
 void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec)
@@ -851,9 +865,13 @@ void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec)
 		qDebug() << "waitFor() called, but negative interval (time exceeded before starting timer). Not waiting!";
 		return;
 	}
-	QEventLoop loop;
-	QTimer::singleShot(interval, &loop, SLOT(quit()));
-	loop.exec();
+	StelScriptMgr* scriptMgr = &StelApp::getInstance().getScriptMgr();
+	QEventLoop* loop = scriptMgr->getWaitEventLoop();
+	QTimer::singleShot(interval, loop, SLOT(quit()));
+	if( loop->exec() != 0 )
+	{
+		emit(requestExit()); // causes a call of stopScript
+	}
 }
 
 

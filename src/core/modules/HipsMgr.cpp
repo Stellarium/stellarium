@@ -98,10 +98,12 @@ void HipsMgr::loadSources()
 	}
 	conf->endArray();
 
-	// Use alasky & data.stellarium.org if there are not values:
+	// Use alasky (all pixelate surveys from MocServer) & data.stellarium.org if there are not values:
 	if (sources.isEmpty())
-		sources << "http://alaskybis.unistra.fr/hipslist"
-		        << "https://data.stellarium.org/surveys/hipslist";
+	{
+		sources << "http://alasky.u-strasbg.fr/MocServer/query?*/P/*&get=record"
+			<< "https://data.stellarium.org/surveys/hipslist";
+	}
 
 	for (QUrl source: sources)
 	{
@@ -146,7 +148,7 @@ void HipsMgr::init()
 		hasVisibleSurvey = false;
 	}
 
-	addAction("actionShow_Hips_Surveys", N_("Display Options"), N_("Toggle Hierarchical Progressive Surveys (experimental)"), "flagShow", "Ctrl+Alt+D");
+	addAction("actionShow_Hips_Surveys", N_("Display Options"), N_("Toggle Hierarchical Progressive Surveys"), "flagShow", "Ctrl+Alt+D");
 
 	// Start loading the sources only after stellarium has time to set up the proxy.
 	// We only do it if we actually have a visible survey.  Otherwise it's

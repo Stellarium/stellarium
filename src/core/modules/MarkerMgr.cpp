@@ -219,7 +219,7 @@ bool SkyMarker::draw(StelCore* core, StelPainter& sPainter)
 	markerTexture->bind();
 
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
-	sPainter.setColor(markerColor[0], markerColor[1], markerColor[2], markerFader.getInterstate());
+	sPainter.setColor(markerColor, markerFader.getInterstate());
 	sPainter.drawSprite2dMode(static_cast<float>(xyPos[0]), static_cast<float>(xyPos[1]), markerSize);
 
 	return true;
@@ -289,7 +289,7 @@ bool HorizonMarker::draw(StelCore *core, StelPainter& sPainter)
 	sPainter.getProjector()->project(altaz, xyPos);
 	markerTexture->bind();
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
-	sPainter.setColor(markerColor[0], markerColor[1], markerColor[2], markerFader.getInterstate());
+	sPainter.setColor(markerColor, markerFader.getInterstate());
 	sPainter.drawSprite2dMode(static_cast<float>(xyPos[0]), static_cast<float>(xyPos[1]), markerSize);
 	sPainter.setProjector(keepProj);
 	return true;
@@ -383,7 +383,7 @@ int MarkerMgr::markerObject(const QString& objectName,
 		return -1;
 	}
 	
-	StelMarker* m = new SkyMarker(obj->getJ2000EquatorialPos(StelApp::getInstance().getCore()), size, StelUtils::htmlColorToVec3f(color), SkyMarker::stringToMarkerType(mtype));
+	StelMarker* m = new SkyMarker(obj->getJ2000EquatorialPos(StelApp::getInstance().getCore()), size, Vec3f().setFromHtmlColor(color), SkyMarker::stringToMarkerType(mtype));
 	if (m==Q_NULLPTR)
 		return -1;
 
@@ -412,7 +412,7 @@ int MarkerMgr::markerEquatorial(const QString& RA,
 	if (!j2000epoch)
 		pos = StelApp::getInstance().getCore()->equinoxEquToJ2000(pos);
 
-	StelMarker* m = new SkyMarker(pos, size, StelUtils::htmlColorToVec3f(color), SkyMarker::stringToMarkerType(mtype));
+	StelMarker* m = new SkyMarker(pos, size, Vec3f().setFromHtmlColor(color), SkyMarker::stringToMarkerType(mtype));
 	if (m==Q_NULLPTR)
 		return -1;
 
@@ -436,7 +436,7 @@ int MarkerMgr::markerHorizon(const QString& az,
 	float dAzi	= static_cast<float>(StelUtils::getDecAngle(az)*M_180_PI);
 	float dAlt	= static_cast<float>(StelUtils::getDecAngle(alt)*M_180_PI);
 
-	StelMarker* m = new HorizonMarker(dAzi, dAlt, size, StelUtils::htmlColorToVec3f(color), SkyMarker::stringToMarkerType(mtype));
+	StelMarker* m = new HorizonMarker(dAzi, dAlt, size, Vec3f().setFromHtmlColor(color), SkyMarker::stringToMarkerType(mtype));
 	if (m==Q_NULLPTR)
 		return -1;
 

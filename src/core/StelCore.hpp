@@ -89,15 +89,15 @@ public:
 	//! Available projection types. A value of 1000 indicates the default projection
 	enum ProjectionType
 	{
-		ProjectionPerspective,	//!< Perspective projection
+		ProjectionPerspective,		//!< Perspective projection
 		ProjectionStereographic,	//!< Stereographic projection
 		ProjectionFisheye,		//!< Fisheye projection
-		ProjectionOrthographic,	//!< Orthographic projection
+		ProjectionOrthographic,		//!< Orthographic projection
 		ProjectionEqualArea,		//!< Equal Area projection
 		ProjectionHammer,		//!< Hammer-Aitoff projection
 		ProjectionSinusoidal,		//!< Sinusoidal projection
 		ProjectionMercator,		//!< Mercator projection
-		ProjectionMiller,			//!< Miller cylindrical projection
+		ProjectionMiller,		//!< Miller cylindrical projection
 		ProjectionCylinder,		//!< Cylinder projection
 	};
 
@@ -178,7 +178,7 @@ public:
 
 	//! Get a new instance of projector using the given modelview transformation.
 	//! If not specified the projection used is the one currently used as default.
-	StelProjectorP getProjection(StelProjector::ModelViewTranformP modelViewTransform, ProjectionType projType=(ProjectionType)1000) const;
+	StelProjectorP getProjection(StelProjector::ModelViewTranformP modelViewTransform, ProjectionType projType=static_cast<ProjectionType>(1000)) const;
 
 	//! Get the current tone reproducer used in the core.
 	StelToneReproducer* getToneReproducer(){return toneReproducer;}
@@ -214,13 +214,14 @@ public:
 	//! Get the projection TypeKey from its translated name for the current locale.
 	QString projectionNameI18nToTypeKey(const QString& nameI18n) const;
 
-	//! Get the current set of parameters to use when creating a new StelProjector.
+	//! Get the current set of parameters.
 	StelProjector::StelProjectorParams getCurrentStelProjectorParams() const;
 	//! Set the set of parameters to use when creating a new StelProjector.
 	void setCurrentStelProjectorParams(const StelProjector::StelProjectorParams& newParams);
 
 	//! Set vision direction
 	void lookAtJ2000(const Vec3d& pos, const Vec3d& up);
+	void setMatAltAzModelView(const Mat4d& mat);
 
 	Vec3d altAzToEquinoxEqu(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
 	Vec3d equinoxEquToAltAz(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
@@ -730,7 +731,6 @@ public slots:
 	//! @param positionEqJnow position vector in rectangular equatorial coordinates of current epoch&equinox.
 	QString getIAUConstellation(const Vec3d positionEqJnow) const;
 
-
 signals:
 	//! This signal is emitted when the observer location has changed.
 	void locationChanged(const StelLocation&);
@@ -750,6 +750,9 @@ signals:
 	void timeSyncOccurred(double jDay);
 	//! This signal is emitted when the date has changed.
 	void dateChanged();
+	//! This signal can be emitted when e.g. the date has changed in a way that planet trails or similar things should better be reset.
+	//! TODO: Currently the signal is not used. Think of the proper way to apply it.
+	void dateChangedForTrails();
 	//! This signal is emitted when the date has changed for a month.
 	void dateChangedForMonth();
 	//! This signal is emitted when the date has changed by one year.
@@ -772,6 +775,7 @@ signals:
 	void flagGravityLabelsChanged(bool gravity);
 	//! Emitted when button "Save settings" is pushed
 	void configurationDataSaved();
+	void updateSearchLists();
 
 private:
 	StelToneReproducer* toneReproducer;		// Tones conversion between stellarium world and display device
@@ -805,7 +809,7 @@ private:
 	Mat4d matAltAzToEquinoxEqu;                // Transform from topocentric altazimuthal coordinate to Earth Equatorial
 	Mat4d matEquinoxEquToAltAz;                // Transform from Earth Equatorial to topocentric (StelObserver) altazimuthal coordinate
 	Mat4d matHeliocentricEclipticToEquinoxEqu; // Transform from heliocentric ecliptic Cartesian (VSOP87A) to earth equatorial coordinate
-	Mat4d matEquinoxEquToJ2000;                // For Earth, this is almost the inverse precession matrix, =Rz(VSOPbias)Rx(eps0)Rz(-psiA)Rx(-omA)Rz(chiA)
+	Mat4d matEquinoxEquDateToJ2000;            // For Earth, this is almost the inverse precession matrix, =Rz(VSOPbias)Rx(eps0)Rz(-psiA)Rx(-omA)Rz(chiA)
 	Mat4d matJ2000ToEquinoxEqu;                // precession matrix
 	static Mat4d matJ2000ToJ1875;              // Precession matrix for IAU constellation lookup.
 

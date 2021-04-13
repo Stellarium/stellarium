@@ -71,8 +71,7 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 		
 	designation  = map.value("designation").toString();
-	starProperName = map.value("starProperName").toString();
-	// TODO: get rid of RA, DE and show data reverse-computed from XYZ later?
+	starProperName = map.value("starProperName").toString();	
 	RA = StelUtils::getDecAngle(map.value("RA").toString());
 	DE = StelUtils::getDecAngle(map.value("DE").toString());
 	StelUtils::spheToRect(RA, DE, XYZ);	
@@ -276,18 +275,10 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	}
 	
 	if (flags&ObjectType)
-	{
 		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("planetary system")) << "<br />";
-	}
 
-	if (flags&Magnitude && Vmag<99 && !distributionMode)
-	{
-		double az_app, alt_app;
-		StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
-		Q_UNUSED(az_app);
-
-		oss << getMagnitudeInfoString(core, flags, alt_app, 2);
-	}
+	if (flags&Magnitude && isVMagnitudeDefined() && !distributionMode)
+		oss << getMagnitudeInfoString(core, flags, 2);
 
 	// Ra/Dec etc.
 	oss << getCommonInfoString(core, flags);
@@ -310,11 +301,11 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 		}
 		if (smass>0)
 		{
-			oss << QString("%1: %2 M<sub>%3</sub>").arg(q_("Mass"), QString::number(smass, 'f', 3), q_("Sun")) << "<br />";
+			oss << QString("%1: %2 M<sub>%3</sub>").arg(q_("Mass"), QString::number(smass, 'f', 3), QChar(0x2609)) << "<br />";
 		}
 		if (sradius>0)
 		{
-			oss << QString("%1: %2 R<sub>%3</sub>").arg(q_("Radius"), QString::number(sradius, 'f', 5), q_("Sun")) << "<br />";
+			oss << QString("%1: %2 R<sub>%3</sub>").arg(q_("Radius"), QString::number(sradius, 'f', 5), QChar(0x2609)) << "<br />";
 		}
 		if (effectiveTemp>0)
 		{
@@ -326,8 +317,8 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 			QString planetNameLabel = QString("<td style=\"%2\">%1</td>").arg(q_("Exoplanet")).arg(qss);
 			QString planetProperNameLabel = QString("<td style=\"%2\">%1</td>").arg(q_("Name")).arg(qss);
 			QString periodLabel = QString("<td style=\"%3\">%1 (%2)</td>").arg(q_("Period")).arg(qc_("days", "period")).arg(qss);
-			QString massLabel = QString("<td style=\"%3\">%1 (M<sub>%2</sub>)</td>").arg(q_("Mass")).arg(q_("Jup")).arg(qss);
-			QString radiusLabel = QString("<td style=\"%3\">%1 (R<sub>%2</sub>)</td>").arg(q_("Radius")).arg(q_("Jup")).arg(qss);
+			QString massLabel = QString("<td style=\"%3\">%1 (M<sub>%2</sub>)</td>").arg(q_("Mass")).arg(QChar(0x2643)).arg(qss);
+			QString radiusLabel = QString("<td style=\"%3\">%1 (R<sub>%2</sub>)</td>").arg(q_("Radius")).arg(QChar(0x2643)).arg(qss);
 			QString semiAxisLabel = QString("<td style=\"%3\">%1 (%2)</td>").arg(q_("Semi-Major Axis")).arg(qc_("AU", "distance, astronomical unit")).arg(qss);
 			QString eccentricityLabel = QString("<td style=\"%2\">%1</td>").arg(q_("Eccentricity")).arg(qss);
 			QString inclinationLabel = QString("<td style=\"%3\">%1 (%2)</td>").arg(q_("Inclination")).arg(QChar(0x00B0)).arg(qss);
@@ -534,9 +525,9 @@ QString Exoplanet::getPlanetaryClassI18n(QString ptype) const
 	QRegExp dataRx("^(\\w)-(\\w+)\\s(\\w+)$");
 	if (dataRx.exactMatch(ptype))
 	{
-		QString spectral = dataRx.capturedTexts().at(1).trimmed();
-		QString zone = dataRx.capturedTexts().at(2).trimmed();
-		QString size = dataRx.capturedTexts().at(3).trimmed();
+		QString spectral = dataRx.cap(1).trimmed();
+		QString zone = dataRx.cap(2).trimmed();
+		QString size = dataRx.cap(3).trimmed();
 
 		result = QString("%1-%2 %3")
 				.arg(spectral)
@@ -553,8 +544,13 @@ Vec3f Exoplanet::getInfoColor(void) const
 
 float Exoplanet::getVMagnitude(const StelCore* core) const
 {
-	Q_UNUSED(core);
-	return (distributionMode ? 4.f : (Vmag<99. ? static_cast<float>(Vmag) : 6.f));
+	Q_UNUSED(core)
+	return (distributionMode ? 4.f : (isVMagnitudeDefined() ? static_cast<float>(Vmag) : 6.f));
+}
+
+bool Exoplanet::isVMagnitudeDefined() const
+{
+	return Vmag<98.;
 }
 
 double Exoplanet::getAngularSize(const StelCore*) const

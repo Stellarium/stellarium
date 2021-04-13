@@ -332,7 +332,7 @@ private:
 
 	//! Enable/disable the Meteor Showers plugin.
 	//! It'll be triggered by a StelAction! So, it should NOT be called directly!
-	void actionEnablePlugin(const bool& b) { if (m_enablePlugin != b) { m_enablePlugin = b; emit enablePluginChanged(b);} }
+	void actionEnablePlugin(const bool& b);
 };
 
 #include <QObject>

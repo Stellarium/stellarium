@@ -198,7 +198,7 @@ void Observability::updateMessageText()
 double Observability::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
-		return StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr")->getCallOrder(actionName)+10.;
+		return StelApp::getInstance().getModuleMgr().getModule("LabelMgr")->getCallOrder(actionName)+110.;
 	return 0;
 }
 
@@ -222,7 +222,7 @@ void Observability::init()
 		button = new StelButton(Q_NULLPTR,
 					QPixmap(":/observability/bt_observab_on.png"),
 					QPixmap(":/observability/bt_observab_off.png"),
-					QPixmap(":/graphicGui/glow32x32.png"),
+					QPixmap(":/graphicGui/miscGlow32x32.png"),
 					actionShow);
 		gui->getButtonBar()->addButton(button, "065-pluginsGroup");
 	}
@@ -239,7 +239,6 @@ void Observability::draw(StelCore* core)
 {
 	if (!flagShowReport)
 		return; // Button is off.
-
 /////////////////////////////////////////////////////////////////
 // PRELIMINARS:
 	bool locChanged, yearChanged;
@@ -804,9 +803,10 @@ void Observability::draw(StelCore* core)
 
 // Print all results:
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
-	int lineSpacing = static_cast<int>(params.devicePixelsPerPixel * 1.3 * fontSize);  // between lines
-	int groupSpacing = static_cast<int>(6*fontSize*params.devicePixelsPerPixel);  // between daily and yearly results
-	int yLine = static_cast<int>(8*fontSize*params.devicePixelsPerPixel) + 110;
+	float ppx = static_cast<float>(params.devicePixelsPerPixel);
+	int lineSpacing = static_cast<int>(ppx * 1.3 * fontSize);  // between lines
+	int groupSpacing = static_cast<int>(6*fontSize*ppx);  // between daily and yearly results
+	int yLine = static_cast<int>(8*fontSize*ppx) + 110*ppx;
 	int xLine = 80;
 
 	if (show_Today) 
@@ -1689,7 +1689,7 @@ void Observability::loadConfiguration()
 	// Load settings from main config file
 	fontSize = conf->value("font_size",15).toInt();
 	font.setPixelSize(fontSize);
-	fontColor = StelUtils::strToVec3f(conf->value("font_color", "0,0.5,1").toString());
+	fontColor = Vec3f(conf->value("font_color", "0,0.5,1").toString());
 	show_AcroCos = conf->value("show_AcroCos", true).toBool();
 	show_Good_Nights = conf->value("show_Good_Nights", true).toBool();
 	show_Best_Night = conf->value("show_Best_Night", true).toBool();

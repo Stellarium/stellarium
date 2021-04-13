@@ -1,0 +1,20 @@
+#
+# See https://github.com/marketplace/actions/contextual-qa-checklists
+#
+name: Contextual QA Checklists
+
+on:
+  pull_request_target:
+    types: [opened, reopened, ready_for_review]
+
+jobs:
+  checklist_job:
+    runs-on: ubuntu-latest
+    name: Checklist job
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Checklist
+        uses: wyozi/contextual-qa-checklist-action@master
+        with:
+          gh-token: ${{ secrets.GITHUB_TOKEN }}

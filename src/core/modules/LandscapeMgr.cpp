@@ -34,6 +34,7 @@
 #include "StelIniParser.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelPainter.hpp"
+#include "StelPropertyMgr.hpp"
 #include "qzipreader.h"
 
 #include <QDebug>
@@ -64,10 +65,11 @@ public:
 	void setFlagShow(bool b){fader = b;}
 	bool getFlagShow() const {return fader;}
 private:
+	class StelPropertyMgr* propMgr;
 	//float radius;
-	QFont fontC, fontSC;
+        QFont fontC, fontSC, fontSSC;
 	Vec3f color;
-	QString sNorth, sSouth, sEast, sWest, sNortheast, sSoutheast, sSouthwest, sNorthwest;
+	QString sNorth, sSouth, sEast, sWest, sNortheast, sSoutheast, sSouthwest, sNorthwest, sNorthnortheast, sEastnortheast, sEastsoutheast, sSouthsoutheast, sSouthsouthwest, sWestsouthwest, sWestnorthwest, sNorthnorthwest;
 	LinearFader fader;
 };
 
@@ -77,6 +79,7 @@ Cardinals::Cardinals(float _radius)
 	  color(0.6f,0.2f,0.2f)
 	, sNorth("N"), sSouth("S"), sEast("E"), sWest("W")
 	, sNortheast("NE"), sSoutheast("SE"), sSouthwest("SW"), sNorthwest("NW")
+	, sNorthnortheast("NNE"), sEastnortheast("ENE"), sEastsoutheast("ESE"), sSouthsoutheast("SSE"), sSouthsouthwest("SSW"), sWestsouthwest("WSW"), sWestnorthwest("WNW"), sNorthnorthwest("NNW")
 {
 	Q_UNUSED(_radius)
 	QSettings* conf = StelApp::getInstance().getSettings();
@@ -85,25 +88,37 @@ Cardinals::Cardinals(float _radius)
 	// Default font size is 24
 	fontC.setPixelSize(conf->value("viewing/cardinal_font_size", screenFontSize+11).toInt());
 	// Default font size is 18
-	fontSC.setPixelSize(conf->value("viewing/subcardinal_font_size", screenFontSize+5).toInt());
+        fontSC.setPixelSize(conf->value("viewing/subcardinal_font_size", screenFontSize+5).toInt());
+	// Draw the sub-subcardinal points even smaller.
+	fontSSC.setPixelSize(conf->value("viewing/subsubcardinal_font_size", screenFontSize+2).toInt());
+	propMgr = StelApp::getInstance().getStelPropertyManager();
 }
 
 Cardinals::~Cardinals()
 {
 }
 
-// Draw the cardinals points : N S E W
-// handles special cases at poles
+// Draw the cardinals points : N S E W and the subcardinal and sub-subcardinal.
+// Handles special cases at poles
 void Cardinals::draw(const StelCore* core, double latitude) const
 {
+	if (fader.getInterstate()==0.0f)
+		return;
+
+	// fun polar special cases: no cardinals!
+	if ((fabs(latitude - 90.0) < 1e-10) || (fabs(latitude + 90.0) < 1e-10))
+		return;
+
 	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
+	const float ppx = core->getCurrentStelProjectorParams().devicePixelsPerPixel;
 	StelPainter sPainter(prj);
 	sPainter.setFont(fontC);
-
-	if (fader.getInterstate()==0.0f) return;
+	float sshift, bshift, cshift, vshift;
+	sshift = bshift = cshift = 0.f;
+	bool flagMask = (core->getProjection(StelCore::FrameJ2000)->getMaskType() != StelProjector::MaskDisk);
 
 	// direction text
-	QString d[8];
+	QString d[16];
 
 	d[0] = sNorth;
 	d[1] = sSouth;
@@ -113,79 +128,152 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 	d[5] = sSoutheast;
 	d[6] = sSouthwest;
 	d[7] = sNorthwest;
+	d[8] = sNorthnortheast;
+	d[9] = sEastnortheast;
+	d[10] = sEastsoutheast;
+	d[11] = sSouthsoutheast;
+	d[12] = sSouthsouthwest;
+	d[13] = sWestsouthwest;
+	d[14] = sWestnorthwest;
+	d[15] = sNorthnorthwest;
 
-	// fun polar special cases
-	if (fabs(latitude - 90.0) < 1e-10) d[0] = d[1] = d[2] = d[3] = d[4] = d[5] = d[6] = d[7] = sSouth;
-	if (fabs(latitude + 90.0) < 1e-10) d[0] = d[1] = d[2] = d[3] = d[4] = d[5] = d[6] = d[7] = sNorth;
-
-	sPainter.setColor(color[0],color[1],color[2],fader.getInterstate());
+	sPainter.setColor(color,fader.getInterstate());
 	sPainter.setBlending(true);
 
 	Vec3f pos;
 	Vec3f xy;
 
-	float sshift = sPainter.getFontMetrics().boundingRect(sNorth).width()*0.5f;
-	float bshift = sPainter.getFontMetrics().boundingRect(sNortheast).width()*0.5f;
-	if (core->getProjection(StelCore::FrameJ2000)->getMaskType() == StelProjector::MaskDisk)
-	{
-		sshift = bshift = 0;
-	}
+	if (flagMask)
+		sshift = ppx*sPainter.getFontMetrics().boundingRect(sNorth).width()*0.5f;
+
+	vshift = sshift;
+	if (propMgr->getProperty("SpecialMarkersMgr.compassMarksDisplayed")->getValue().toBool())
+		vshift = -sshift*3.f;
 
 	// N for North
 	pos.set(-1.f, 0.f, 0.f);
 	if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[0], 0., -sshift, -sshift, false);
+		sPainter.drawText(xy[0], xy[1], d[0], 0., -sshift, -vshift, false);
 
 	// S for South
 	pos.set(1.f, 0.f, 0.f);
 	if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[1], 0., -sshift, -sshift, false);
+		sPainter.drawText(xy[0], xy[1], d[1], 0., -sshift, -vshift, false);
 
 	// E for East
 	pos.set(0.f, 1.f, 0.f);
 	if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[2], 0., -sshift, -sshift, false);
+		sPainter.drawText(xy[0], xy[1], d[2], 0., -sshift, -vshift, false);
 
 	// W for West
 	pos.set(0.f, -1.f, 0.f);
 	if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[3], 0., -sshift, -sshift, false);
+		sPainter.drawText(xy[0], xy[1], d[3], 0., -sshift, -vshift, false);
 
 	sPainter.setFont(fontSC);
+	if (flagMask)
+		bshift = ppx*sPainter.getFontMetrics().boundingRect(sNortheast).width()*0.5f;
 
 	// NE for Northeast
 	pos.set(-1.f, 1.f, 0.f);
 	if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[4], 0., -bshift, -sshift, false);
+		sPainter.drawText(xy[0], xy[1], d[4], 0., -bshift, -vshift, false);
 
 	// SE for Southeast
 	pos.set(1.f, 1.f, 0.f);
 	if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[5], 0., -bshift, -sshift, false);
+		sPainter.drawText(xy[0], xy[1], d[5], 0., -bshift, -vshift, false);
 
 	// SW for Southwest
 	pos.set(1.f, -1.f, 0.f);
 	if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[6], 0., -bshift, -sshift, false);
+		sPainter.drawText(xy[0], xy[1], d[6], 0., -bshift, -vshift, false);
 
 	// NW for Northwest
 	pos.set(-1.f, -1.f, 0.f);
 	if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[7], 0., -bshift, -sshift, false);
+		sPainter.drawText(xy[0], xy[1], d[7], 0., -bshift, -vshift, false);
+
+        sPainter.setFont(fontSSC);
+	if (flagMask)
+		cshift = ppx*sPainter.getFontMetrics().boundingRect(sNorthnortheast).width()*0.5f;
+
+	// NNE for North-northeast
+	pos.set(-1.f, 1.f/(1+sqrt(2)), 0.f);
+	if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[8], 0., -cshift, -vshift, false);
+
+	// ENE for East-northeast
+	pos.set(-1.f/(1+sqrt(2)), 1.f, 0.f);
+	if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[9], 0., -cshift, -vshift, false);
+
+	// ESE for East-southeast
+	pos.set(1.f/(1+sqrt(2)), 1.f, 0.f);
+	if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[10], 0., -cshift, -vshift, false);
+
+	// SSE for South-southeast
+	pos.set(1.f, 1.f/(1+sqrt(2)), 0.f);
+	if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[11], 0., -cshift, -vshift, false);
+
+	// SSW for South-southwest
+	pos.set(1.f, -1.f/(1+sqrt(2)), 0.f);
+	if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[12], 0., -cshift, -vshift, false);
+
+	// WSW for West-southwest
+	pos.set(1.f/(1+sqrt(2)), -1.f, 0.f);
+	if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[13], 0., -cshift, -vshift, false);
+
+	// WNW for West-northwest
+	pos.set(-1.f/(1+sqrt(2)), -1.f, 0.f);
+	if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[14], 0., -cshift, -vshift, false);
+
+	// NNW for North-northwest
+	pos.set(-1.f, -1.f/(1+sqrt(2)), 0.f);
+	if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[15], 0., -cshift, -vshift, false);
 }
 
 // Translate cardinal labels with gettext to current sky language and update font for the language
 void Cardinals::updateI18n()
 {
-	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getAppStelTranslator();
-	sNorth = trans.qtranslate("N");
-	sSouth = trans.qtranslate("S");
-	sEast = trans.qtranslate("E");
-	sWest = trans.qtranslate("W");
-	sNortheast = trans.qtranslate("NE");
-	sSoutheast = trans.qtranslate("SE");
-	sSouthwest = trans.qtranslate("SW");
-	sNorthwest = trans.qtranslate("NW");
+	// TRANSLATORS: North
+	sNorth		= qc_("N",   "compass direction");
+	// TRANSLATORS: South
+	sSouth		= qc_("S",   "compass direction");
+	// TRANSLATORS: East
+	sEast		= qc_("E",   "compass direction");
+	// TRANSLATORS: West
+	sWest		= qc_("W",   "compass direction");
+	// TRANSLATORS: Northeast
+	sNortheast	= qc_("NE",  "compass direction");
+	// TRANSLATORS: Southeast
+	sSoutheast	= qc_("SE",  "compass direction");
+	// TRANSLATORS: Southwest
+	sSouthwest	= qc_("SW",  "compass direction");
+	// TRANSLATORS: Northwest
+	sNorthwest	= qc_("NW",  "compass direction");
+	// TRANSLATORS: North-northeast
+	sNorthnortheast = qc_("NNE", "compass direction");
+	// TRANSLATORS: East-northeast
+	sEastnortheast	= qc_("ENE", "compass direction");
+	// TRANSLATORS: East-southeast
+	sEastsoutheast	= qc_("ESE", "compass direction");
+	// TRANSLATORS: South-southeast
+	sSouthsoutheast = qc_("SSE", "compass direction");
+	// TRANSLATORS: South-southwest
+	sSouthsouthwest = qc_("SSW", "compass direction");
+	// TRANSLATORS: West-southwest
+	sWestsouthwest	= qc_("WSW", "compass direction");
+	// TRANSLATORS: West-northwest
+	sWestnorthwest	= qc_("WNW", "compass direction");
+	// TRANSLATORS: North-northwest
+	sNorthnorthwest = qc_("NNW", "compass direction");
 }
 
 LandscapeMgr::LandscapeMgr()
@@ -197,6 +285,8 @@ LandscapeMgr::LandscapeMgr()
 	, flagLandscapeSetsLocation(false)
 	, flagLandscapeAutoSelection(false)
 	, flagLightPollutionFromDatabase(false)
+	, flagPolyLineDisplayedOnly(false)
+	, polyLineThickness(1)
 	, flagLandscapeUseMinimalBrightness(false)
 	, defaultMinimalBrightness(0.01)
 	, flagLandscapeSetsMinimalBrightness(false)
@@ -243,7 +333,7 @@ double LandscapeMgr::getCallOrder(StelModuleActionName actionName) const
 	// GZ The next 2 lines are only required to test landscape transparency. They should be commented away for releases.
 	if (actionName==StelModule::ActionHandleMouseClicks)
 		return StelApp::getInstance().getModuleMgr().getModule("StelMovementMgr")->getCallOrder(actionName)-1;
-	return 0;
+	return 0.;
 }
 
 void LandscapeMgr::update(double deltaTime)
@@ -417,8 +507,8 @@ void LandscapeMgr::draw(StelCore* core)
 
 	// Draw the landscape
 	if (oldLandscape)
-		oldLandscape->draw(core);
-	landscape->draw(core);
+		oldLandscape->draw(core, flagPolyLineDisplayedOnly);
+	landscape->draw(core, flagPolyLineDisplayedOnly);
 
 	// Draw the cardinal points
 	cardinalsPoints->draw(core, static_cast<double>(StelApp::getInstance().getCore()->getCurrentLocation().latitude));
@@ -433,43 +523,69 @@ void LandscapeMgr::draw(StelCore* core)
 	QPainter painter(&device);
 }
 
+// Some element in drawing order behind LandscapeMgr can call this at the end of its own draw() to overdraw with the polygon line and gazetteer.
+void LandscapeMgr::drawPolylineOnly(StelCore* core)
+{
+	// Draw the landscape
+	if (oldLandscape && oldLandscape->hasLandscapePolygon())
+		oldLandscape->draw(core, true);
+	if (landscape->hasLandscapePolygon())
+		landscape->draw(core, true);
+
+	// Draw the cardinal points
+	cardinalsPoints->draw(core, static_cast<double>(StelApp::getInstance().getCore()->getCurrentLocation().latitude));
+}
+
+
 void LandscapeMgr::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
+	StelApp *app = &StelApp::getInstance();
+	Q_ASSERT(app);
 
 	landscapeCache.setMaxCost(conf->value("landscape/cache_size_mb", 100).toInt());
 	qDebug() << "LandscapeMgr: initialized Cache for" << landscapeCache.maxCost() << "MB.";
 
-	atmosphere = new Atmosphere();
-	defaultLandscapeID = conf->value("init_location/landscape_name").toString();
-	setCurrentLandscapeID(defaultLandscapeID);
-	setFlagLandscape(conf->value("landscape/flag_landscape", conf->value("landscape/flag_ground", true).toBool()).toBool());
-	setFlagFog(conf->value("landscape/flag_fog",true).toBool());
-	setFlagAtmosphere(conf->value("landscape/flag_atmosphere", true).toBool());
-	setAtmosphereFadeDuration(conf->value("landscape/atmosphere_fade_duration",0.5).toFloat());
-	setAtmosphereLightPollutionLuminance(conf->value("viewing/light_pollution_luminance",0.0).toFloat());
-	setFlagUseLightPollutionFromDatabase(conf->value("viewing/flag_light_pollution_database", false).toBool());
-	cardinalsPoints = new Cardinals();
-	cardinalsPoints->setFlagShow(conf->value("viewing/flag_cardinal_points",true).toBool());
+	// SET SIMPLE PROPERTIES FIRST, before loading the landscape (Loading may already make use of them! GH#1237)
 	setFlagLandscapeSetsLocation(conf->value("landscape/flag_landscape_sets_location",false).toBool());
 	setFlagLandscapeAutoSelection(conf->value("viewing/flag_landscape_autoselection", false).toBool());
+	setFlagEnvironmentAutoEnable(conf->value("viewing/flag_environment_auto_enable",true).toBool());
 	// Set minimal brightness for landscape. This feature has been added for folks which say "landscape is super dark, please add light". --AW
 	setDefaultMinimalBrightness(conf->value("landscape/minimal_brightness", 0.01).toDouble());
 	setFlagLandscapeUseMinimalBrightness(conf->value("landscape/flag_minimal_brightness", false).toBool());
 	setFlagLandscapeSetsMinimalBrightness(conf->value("landscape/flag_landscape_sets_minimal_brightness",false).toBool());
-	setFlagEnvironmentAutoEnable(conf->value("viewing/flag_environment_auto_enable",true).toBool());
+
+	atmosphere = new Atmosphere();
+	setFlagAtmosphere(conf->value("landscape/flag_atmosphere", true).toBool());
+	setAtmosphereFadeDuration(conf->value("landscape/atmosphere_fade_duration",0.5).toFloat());
+	setAtmosphereLightPollutionLuminance(conf->value("viewing/light_pollution_luminance",0.0).toFloat());
+
+	defaultLandscapeID = conf->value("init_location/landscape_name").toString();
+
+	// We must make sure to allow auto location or command-line location even if landscape usually should set location.
+	StelCore *core = StelApp::getInstance().getCore();
+	const bool setLocationFromIPorCLI=((conf->value("init_location/location", "auto").toString() == "auto") || (core->getCurrentLocation().state=="CLI"));
+	const bool shouldThenSetLocation=getFlagLandscapeSetsLocation();
+	if (setLocationFromIPorCLI) setFlagLandscapeSetsLocation(false);
+	setCurrentLandscapeID(defaultLandscapeID);
+	setFlagLandscapeSetsLocation(shouldThenSetLocation);
+	setFlagUseLightPollutionFromDatabase(conf->value("viewing/flag_light_pollution_database", false).toBool());
+	setFlagLandscape(conf->value("landscape/flag_landscape", conf->value("landscape/flag_ground", true).toBool()).toBool());
+	setFlagFog(conf->value("landscape/flag_fog",true).toBool());
 	setFlagIllumination(conf->value("landscape/flag_enable_illumination_layer", true).toBool());
 	setFlagLabels(conf->value("landscape/flag_enable_labels", true).toBool());
 
+	cardinalsPoints = new Cardinals();
+	cardinalsPoints->setFlagShow(conf->value("viewing/flag_cardinal_points",true).toBool());
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
-	setColorCardinalPoints(StelUtils::strToVec3f(conf->value("color/cardinal_color", defaultColor).toString()));
+	setColorCardinalPoints(Vec3f(conf->value("color/cardinal_color", defaultColor).toString()));
 
-	StelApp *app = &StelApp::getInstance();
 	currentPlanetName = app->getCore()->getCurrentLocation().planetName;
 	//Bortle scale is managed by SkyDrawer
 	StelSkyDrawer* drawer = app->getCore()->getSkyDrawer();
+	Q_ASSERT(drawer);
 	setAtmosphereBortleLightPollution(drawer->getBortleScaleIndex());
 	connect(app->getCore(), SIGNAL(locationChanged(StelLocation)), this, SLOT(onLocationChanged(StelLocation)));
 	connect(app->getCore(), SIGNAL(targetLocationChanged(StelLocation)), this, SLOT(onTargetLocationChanged(StelLocation)));
@@ -615,7 +731,7 @@ bool LandscapeMgr::setCurrentLandscapeName(const QString& name, const double cha
 	}
 	else
 	{
-		qWarning() << "Can't find a landscape with name=" << name << endl;
+		qWarning() << "Can't find a landscape with name=" << name << StelUtils::getEndLineChar();
 		return false;
 	}
 }
@@ -1298,7 +1414,7 @@ bool LandscapeMgr::removeLandscape(const QString landscapeID)
 		qWarning() << "LandscapeMgr: Error! Landscape" << landscapeID
 				   << "could not be removed. "
 				   << "Some files were deleted, but not all."
-				   << endl
+				   << StelUtils::getEndLineChar()
 				   << "LandscapeMgr: You can delete manually" << QDir::cleanPath(landscapeDir.filePath(landscapeID));
 		emit errorRemoveManually(QDir::cleanPath(landscapeDir.filePath(landscapeID)));
 		return false;

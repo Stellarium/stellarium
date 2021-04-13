@@ -19,8 +19,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
  
-#ifndef _SATELLITESDIALOG_HPP
-#define _SATELLITESDIALOG_HPP
+#ifndef SATELLITESDIALOG_HPP
+#define SATELLITESDIALOG_HPP
 
 #include <QObject>
 #include <QModelIndex>
@@ -47,6 +47,7 @@ class SatellitesDialog : public StelDialog
 	Q_OBJECT
 
 public:
+#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	//! Defines the number and the order of the columns in the Iridium Flares table
 	//! @enum IridiumFlaresColumns
 	enum IridiumFlaresColumns {
@@ -57,6 +58,7 @@ public:
 		IridiumFlaresSatellite,	//! satellite name
 		IridiumFlaresCount	//! total number of columns
 	};
+#endif
 
 	SatellitesDialog();
 	~SatellitesDialog();
@@ -81,6 +83,7 @@ private slots:
 	//! "@em the current" and "@em a selected" item - a selection can contain
 	//! multiple items.)
 	void updateSatelliteData();
+	void updateSatelliteAndSaveData();
 	void saveSatellites(void);
 	void showUpdateState(Satellites::UpdateState state);
 	void showUpdateCompleted(int updated, int total, int added, int missing);
@@ -88,9 +91,11 @@ private slots:
 	//! @name Sources Tab 
 	//@{
 	void saveEditedSource();
+	void updateButtonsProperties();
 	void saveSourceList(void);
 	void deleteSourceRow(void);
 	void addSourceRow(void);
+	void editSourceRow(void);
 	//! Toggle between modes in the Sources list.
 	//! If automatic adding is enabled, items in the list become checkable.
 	void toggleCheckableSources();
@@ -108,9 +113,11 @@ private slots:
 	void trackSatellite(const QModelIndex & index);
 	void updateTLEs(void);
 
+#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	void predictIridiumFlares();
 	void selectCurrentIridiumFlare(const QModelIndex &modelIndex);
 	void savePredictedIridiumFlares();
+#endif
 
 	void searchSatellitesClear();
 
@@ -121,6 +128,9 @@ private slots:
 
 	// change description text
 	void descriptionTextChanged();
+
+	void setRightSideToROMode();
+	void setRightSideToRWMode();
 
 private:
 	//! @todo find out if this is really necessary... --BM
@@ -133,7 +143,8 @@ private:
 	//! Preserves the current item, if it's still in the new list.
 	void populateFilterMenu();
 	//! Populates the list of sources on the Sources tab.
-	void populateSourcesList();
+	void populateSourcesList();	
+	void populateInfo();	
 	//! Add the special "New group..." editable item to the group selector.
 	//! Unlike the other items, which can only be checked/unchecked, this one
 	//! can be edited. Saving the edit will add a new group with the specified
@@ -143,12 +154,14 @@ private:
 	//! Applies the changes in the group selector to the selected satellites.
 	void setGroups();
 
+#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	//! Update header names for Iridium flares table
 	void setIridiumFlaresHeaderNames();
 
 	//! Init header and list of Iridium flares
 	void initListIridiumFlares();
-	
+#endif
+
 	Ui_satellitesDialog* ui;
 	bool satelliteModified;
 	
@@ -162,12 +175,17 @@ private:
 	Qt::ItemDataRole checkStateRole;
 
 	QString delimiter;
+#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	QStringList iridiumFlaresHeader;
+#endif
 
 	// colorpickerbutton's color
 	QColor buttonMarkerColor, buttonOrbitColor, buttonInfoColor;
+
+	static const QString dash;
 };
 
+#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 // Reimplements the QTreeWidgetItem class to fix the sorting bug
 class SatPIFTreeWidgetItem : public QTreeWidgetItem
 {
@@ -192,5 +210,6 @@ private:
 		}
 	}
 };
+#endif
 
-#endif // _SATELLITESDIALOG_HPP
+#endif // SATELLITESDIALOG_HPP

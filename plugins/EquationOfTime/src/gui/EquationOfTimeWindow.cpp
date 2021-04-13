@@ -75,6 +75,8 @@ void EquationOfTimeWindow::createDialogContent()
 	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(saveEquationOfTimeSettings()));	
 	connect(ui->pushButtonReset, SIGNAL(clicked()), this, SLOT(resetEquationOfTimeSettings()));
 
+	connectColorButton(ui->textColorButton, "EquationOfTime.textColor", "EquationOfTime/text_color");
+
 	setAboutHtml();
 }
 
@@ -120,5 +122,11 @@ void EquationOfTimeWindow::saveEquationOfTimeSettings()
 
 void EquationOfTimeWindow::resetEquationOfTimeSettings()
 {
-	eq->restoreDefaults();
+	if (askConfirmation())
+	{
+		qDebug() << "[EquationOfTime] restore defaults...";
+		eq->restoreDefaults();
+	}
+	else
+		qDebug() << "[EquationOfTime] restore defaults is canceled...";
 }

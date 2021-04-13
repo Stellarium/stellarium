@@ -57,9 +57,9 @@
 #include <QString>
 #include <QStringList>
 #include <QDir>
-#include <QSignalMapper>
 
 #include <QDebug>
+#include <stdexcept>
 
 #define DEFAULT_RTS2_REFRESH    500000
 
@@ -160,11 +160,6 @@ void TelescopeControl::init()
 		reticleTexture = StelApp::getInstance().getTextureManager().createTexture(":/telescopeControl/telescope_reticle.png");
 		selectionTexture = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
 
-		QSignalMapper* slewObj = new QSignalMapper(this);
-		QSignalMapper* syncObj = new QSignalMapper(this);
-		QSignalMapper* slewDir = new QSignalMapper(this);
-		QSignalMapper* abortSlew = new QSignalMapper(this);
-
 		//Create telescope key bindings
 		/* StelAction-s with these key bindings existed in Stellarium prior to
 			revision 6311. Any future backports should account for that. */
@@ -176,36 +171,27 @@ void TelescopeControl::init()
 			QString shortcut = QString("Ctrl+%1").arg(i);
 			QString text;
 			text = q_("Move telescope #%1 to selected object").arg(i);
-			StelAction* actionSlewObj = addAction(name, section, text, slewObj, "map()", shortcut);
-			slewObj->setMapping(actionSlewObj, i);
+			addAction(name, section, text, this, [=](){slewTelescopeToSelectedObject(i);}, shortcut);
 
 			// "Slew to the center of the screen" commands
 			name = moveToCenterActionId.arg(i);
 			shortcut = QString("Alt+%1").arg(i);
 			text = q_("Move telescope #%1 to the point currently in the center of the screen").arg(i);
-			StelAction* actionSlewDir = addAction(name, section, text, slewDir, "map()", shortcut);
-			slewDir->setMapping(actionSlewDir, i);
+			addAction(name, section, text, this, [=](){slewTelescopeToViewDirection(i);}, shortcut);
 
 			// "Sync to object" commands
 			name = syncActionId.arg(i);
 			shortcut = QString("Ctrl+Shift+%1").arg(i);
 			text = q_("Sync telescope #%1 position to selected object").arg(i);
-			StelAction* actionSyncObj = addAction(name, section, text, syncObj, "map()", shortcut);
-			syncObj->setMapping(actionSyncObj, i);
+			addAction(name, section, text, this, [=](){syncTelescopeWithSelectedObject(i);}, shortcut);
 
 			// "Abort Slew" commands
 			name = abortSlewActionId.arg(i);
 			shortcut = QString("Ctrl+Shift+Alt+%1").arg(i);
 			text = q_("Abort last slew command of telescope #%1").arg(i);
-			StelAction* actionAbortSlew = addAction(name, section, text, abortSlew, "map()", shortcut);
-			abortSlew->setMapping(actionAbortSlew, i);
+			addAction(name, section, text, this, [=](){abortTelescopeSlew(i);}, shortcut);
 		}
-		connect(slewObj, SIGNAL(mapped(int)), this, SLOT(slewTelescopeToSelectedObject(int)));
-		connect(syncObj, SIGNAL(mapped(int)), this, SLOT(syncTelescopeWithSelectedObject(int)));
-		connect(slewDir, SIGNAL(mapped(int)), this, SLOT(slewTelescopeToViewDirection(int)));
-		connect(abortSlew, SIGNAL(mapped(int)), this, SLOT(abortTelescopeSlew(int)));
-		connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
-				this, SLOT(translateActionDescriptions()));
+		connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(translateActionDescriptions()));
 
 		//Create and initialize dialog windows
 		telescopeDialog = new TelescopeDialog();
@@ -220,7 +206,7 @@ void TelescopeControl::init()
 			toolbarButton =	new StelButton(Q_NULLPTR,
 						       QPixmap(":/telescopeControl/button_Slew_Dialog_on.png"),
 						       QPixmap(":/telescopeControl/button_Slew_Dialog_off.png"),
-						       QPixmap(":/graphicGui/glow32x32.png"),
+						       QPixmap(":/graphicGui/miscGlow32x32.png"),
 						       "actionShow_Slew_Window");
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		}
@@ -605,9 +591,9 @@ void TelescopeControl::loadConfiguration()
 #endif
 
 	//Load colours
-	setReticleColor(StelUtils::strToVec3f(settings->value("color_telescope_reticles", "0.6,0.4,0").toString()));
-	setLabelColor(StelUtils::strToVec3f(settings->value("color_telescope_labels", "0.6,0.4,0").toString()));
-	setCircleColor(StelUtils::strToVec3f(settings->value("color_telescope_circles", "0.6,0.4,0").toString()));
+	setReticleColor(Vec3f(settings->value("color_telescope_reticles", "0.6,0.4,0").toString()));
+	setLabelColor(Vec3f(settings->value("color_telescope_labels", "0.6,0.4,0").toString()));
+	setCircleColor(Vec3f(settings->value("color_telescope_circles", "0.6,0.4,0").toString()));
 
 	//Load server executables flag and directory
 	useServerExecutables = settings->value("flag_use_server_executables", false).toBool();
@@ -649,9 +635,9 @@ void TelescopeControl::saveConfiguration()
 	settings->setValue("flag_telescope_circles", getFlagTelescopeCircles());
 
 	//Save colours
-	settings->setValue("color_telescope_reticles", StelUtils::vec3fToHtmlColor(getReticleColor()));
-	settings->setValue("color_telescope_labels", StelUtils::vec3fToHtmlColor(getLabelColor()));
-	settings->setValue("color_telescope_circles", StelUtils::vec3fToHtmlColor(getCircleColor()));
+	settings->setValue("color_telescope_reticles", getReticleColor().toHtmlColor());
+	settings->setValue("color_telescope_labels", getLabelColor().toHtmlColor());
+	settings->setValue("color_telescope_circles", getCircleColor().toHtmlColor());
 
 	//Save telescope server executables flag and directory
 	settings->setValue("flag_use_server_executables", useServerExecutables);
@@ -1086,7 +1072,6 @@ bool TelescopeControl::addTelescopeAtSlot(int slot, ConnectionType connectionTyp
 			return false;
 		telescope.insert("delay", delay);
 	}
-
 	telescope.insert("connect_at_startup", connectAtStartup);
 
 	if(!circles.isEmpty())
@@ -1732,7 +1717,7 @@ void TelescopeControl::logAtSlot(int slot)
 		log_file = telescopeServerLogStreams.value(slot);
 }
 
-QStringList TelescopeControl::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
+QStringList TelescopeControl::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (maxNbItem<=0)
@@ -1742,7 +1727,7 @@ QStringList TelescopeControl::listMatchingObjects(const QString& objPrefix, int 
 	bool find;
 	for (const auto& telescope : telescopeClients)
 	{
-		tn = inEnglish ? telescope->getEnglishName() : telescope->getNameI18n();
+		tn = telescope->getNameI18n();
 		find = false;
 		if (useStartOfWords)
 		{
@@ -1755,9 +1740,22 @@ QStringList TelescopeControl::listMatchingObjects(const QString& objPrefix, int 
 				find = true;
 		}
 		if (find)
-		{
 			result << tn;
+
+		tn = telescope->getEnglishName();
+		find = false;
+		if (useStartOfWords)
+		{
+			if (objPrefix.toUpper()==tn.mid(0, objPrefix.size()).toUpper())
+				find = true;
 		}
+		else
+		{
+			if (tn.contains(objPrefix, Qt::CaseInsensitive))
+				find = true;
+		}
+		if (find)
+			result << tn;
 	}
 	result.sort();
 	if (result.size()>maxNbItem)

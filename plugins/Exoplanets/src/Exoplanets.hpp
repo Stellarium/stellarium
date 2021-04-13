@@ -90,11 +90,11 @@ public:
 	//! @enum UpdateState
 	//! Used for keeping for track of the download/update status
 	enum UpdateState {
-		Updating,		//!< Update in progress
+		Updating,				//!< Update in progress
 		CompleteNoUpdates,	//!< Update completed, there we no updates
-		CompleteUpdates,	//!< Update completed, there were updates
-		DownloadError,		//!< Error during download phase
-		OtherError		//!< Other error
+		CompleteUpdates,		//!< Update completed, there were updates
+		DownloadError,			//!< Error during download phase
+		OtherError				//!< Other error
 	};
 	//! @enum TemperatureScale
 	//! Available temperature scales
@@ -102,7 +102,7 @@ public:
 	{
 		Kelvin		= 0,
 		Celsius		= 1,
-		Fahrenheit		= 2
+		Fahrenheit	= 2
 	};
 	
 	Exoplanets();
@@ -143,7 +143,7 @@ public:
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=false) const;
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 
 	virtual QStringList listAllObjects(bool inEnglish) const;
 
@@ -228,6 +228,9 @@ public:
 				return EPEccentricityAll;
 		}
 	}
+
+	//! Get the list of all exoplanetary systems.
+	const QList<ExoplanetP>& getAllExoplanetarySystems() const {return ep;}
 
 signals:
 	//! @param state the new update state.

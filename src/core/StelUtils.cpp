@@ -50,8 +50,8 @@ QString getApplicationVersion()
 {
 #if defined(STELLARIUM_VERSION)
 	return QString(STELLARIUM_VERSION);
-#elif defined(GIT_COMMITS)
-	return QString("%1.%2 [%3]").arg(PACKAGE_VERSION).arg(GIT_COMMITS).arg(GIT_BRANCH);
+#elif defined(GIT_REVISION)
+	return QString("%1-%2 [%3]").arg(PACKAGE_VERSION).arg(GIT_REVISION).arg(GIT_BRANCH);
 #else
 	return QString(PACKAGE_VERSION);
 #endif
@@ -96,13 +96,36 @@ double hmsStrToHours(const QString& s)
 	QRegExp reg("(\\d+)h(\\d+)m(\\d+)s");
 	if (!reg.exactMatch(s))
 		return 0.;
-	QStringList list = reg.capturedTexts();
-	uint hrs = list[1].toUInt();
-	uint min = list[2].toUInt();
-	int sec = list[3].toInt();
+	uint hrs = reg.cap(1).toUInt();
+	uint min = reg.cap(2).toUInt();
+	int sec = reg.cap(3).toInt();
 
 	return hmsToHours(hrs, min, sec);
 }
+
+/*************************************************************************
+ Convert a real duration in days to DHMS formatted string
+*************************************************************************/
+QString daysFloatToDHMS(float days)
+{
+	float remain = days;
+
+	int d = static_cast<int> (remain); remain -= d;
+	remain *= 24.0f;
+	int h = static_cast<int> (remain); remain -= h;
+	remain *= 60.0f;
+	int m = static_cast<int> (remain); remain -= m; 
+	remain *= 60.0f;
+
+	auto r = QString("%1%2 %3%4 %5%6 %7%8")
+	.arg(d)		.arg(qc_("d", "duration"))
+	.arg(h)		.arg(qc_("h", "duration"))
+	.arg(m)		.arg(qc_("m", "duration"))
+	.arg(remain)	.arg(qc_("s", "duration"));
+
+	return r;
+}
+
 
 /*************************************************************************
  Convert an angle in radian to hms
@@ -163,16 +186,11 @@ void radToDecDeg(double rad, bool &sign, double &deg)
 
 QString radToDecDegStr(const double angle, const int precision, const bool useD, const bool useC)
 {
-	QChar degsign('d');
-	QString str;	
-	if (!useD)
-	{
-		degsign = 0x00B0;		
-	}
+	const QChar degsign = (useD ? 'd' : 0x00B0);
 	bool sign;
 	double deg;
 	StelUtils::radToDecDeg(angle, sign, deg);
-	str = QString("%1%2%3").arg((sign?"+":"-"), QString::number(deg, 'f', precision), degsign);
+	QString str = QString("%1%2%3").arg((sign?"+":"-"), QString::number(deg, 'f', precision), degsign);
 	if (useC)
 	{
 		if (!sign)
@@ -267,11 +285,7 @@ QString radToHmsStr(const double angle, const bool decimal)
 *************************************************************************/
 QString radToDmsStrAdapt(const double angle, const bool useD)
 {
-	QChar degsign('d');
-	if (!useD)
-	{
-		degsign = 0x00B0;
-	}
+	const QChar degsign = (useD ? 'd' : 0x00B0);
 	bool sign;
 	unsigned int d,m;
 	double s;
@@ -311,11 +325,7 @@ QString radToDmsStr(const double angle, const bool decimal, const bool useD)
 *************************************************************************/
 QString radToDmsPStr(const double angle, const int precision, const bool useD)
 {
-	QChar degsign('d');
-	if (!useD)
-	{
-		degsign = 0x00B0;
-	}
+	const QChar degsign = (useD ? 'd' : 0x00B0);
 	bool sign;
 	unsigned int d,m;
 	double s;
@@ -375,11 +385,10 @@ double dmsStrToRad(const QString& s)
 	QRegExp reg("([\\+\\-])(\\d+)d(\\d+)'(\\d+)\"");
 	if (!reg.exactMatch(s))
 		return 0;
-	QStringList list = reg.capturedTexts();
-	bool sign = (list[1] == "-");
-	int deg = list[2].toInt();
-	uint min = list[3].toUInt();
-	int sec = list[4].toInt();
+	bool sign = (reg.cap(1) == "-");
+	int deg = reg.cap(2).toInt();
+	uint min = reg.cap(3).toUInt();
+	int sec = reg.cap(4).toInt();
 
 	double rad = dmsToRad(qAbs(deg), min, sec);
 	if (sign)
@@ -388,147 +397,143 @@ double dmsStrToRad(const QString& s)
 	return rad;
 }
 
-Vec2f strToVec2f(const QStringList &s)
-{
-	if (s.size()<2)
-		 return Vec2f(0.f,0.f);
-
-	return Vec2f(s[0].toFloat(),s[1].toFloat());
-}
-
-Vec2f strToVec2f(const QString &s)
-{
-	return strToVec2f(s.split(","));
-}
-
-// Obtains a Vec3f from a string with the form x,y,z
-Vec3f strToVec3f(const QStringList& s)
-{
-	if (s.size()<3)
-		 return Vec3f(0.f,0.f,0.f);
-
-	return Vec3f(s[0].toFloat(),s[1].toFloat(),s[2].toFloat());
-}
-
-Vec3f strToVec3f(const QString& s)
-{
-	return strToVec3f(s.split(","));
-}
-
-Vec4d strToVec4d(const QStringList &s)
-{
-	if(s.size()<4)
-		return Vec4d(0.0,0.0,0.0,0.0);
-
-	return Vec4d(s[0].toDouble(), s[1].toDouble(), s[2].toDouble(), s[3].toDouble());
-}
-
-Vec4d strToVec4d(const QString& str)
-{
-	return strToVec4d(str.split(","));
-}
-
-QString vec2fToStr(const Vec2f &v)
-{
-	return QString("%1,%2")
-		.arg(static_cast<double>(v[0]),0,'f',6)
-		.arg(static_cast<double>(v[1]),0,'f',6);
-}
-
-QString vec3fToStr(const Vec3f &v)
-{
-	return QString("%1,%2,%3")
-		.arg(static_cast<double>(v[0]),0,'f',6)
-		.arg(static_cast<double>(v[1]),0,'f',6)
-		.arg(static_cast<double>(v[2]),0,'f',6);
-}
-
-QString vec4dToStr(const Vec4d &v)
-{
-	return QString("%1,%2,%3,%4")
-		.arg(v[0],0,'f',10)
-		.arg(v[1],0,'f',10)
-		.arg(v[2],0,'f',10)
-		.arg(v[3],0,'f',10);
-}
-
-// Converts a Vec3f to HTML color notation.
-QString vec3fToHtmlColor(const Vec3f& v)
-{
-	return QString("#%1%2%3")
-		.arg(qMin(255, int(v[0] * 255)), 2, 16, QChar('0'))
-		.arg(qMin(255, int(v[1] * 255)), 2, 16, QChar('0'))
-		.arg(qMin(255, int(v[2] * 255)), 2, 16, QChar('0'));
-}
-
-Vec3f htmlColorToVec3f(const QString& c)
-{
-	Vec3f v;
-	QRegExp re("^#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$");
-	if (re.exactMatch(c))
-	{
-		bool ok;
-		int i = re.capturedTexts().at(1).toInt(&ok, 16);
-		v[0] = static_cast<float>(i) / 255.f;
-		i = re.capturedTexts().at(2).toInt(&ok, 16);
-		v[1] = static_cast<float>(i) / 255.f;
-		i = re.capturedTexts().at(3).toInt(&ok, 16);
-		v[2] = static_cast<float>(i) / 255.f;
-	}
-	else
-	{
-		v[0] = 0.;
-		v[1] = 0.;
-		v[2] = 0.;
-	}
-	return v;
-}
-
 double getDecAngle(const QString& str)
 {
-	QRegExp re1("^\\s*([\\+\\-])?\\s*(\\d+)\\s*([hHDd\xBA])\\s*(\\d+)\\s*['Mm]\\s*(\\d+(\\.\\d+)?)\\s*[\"Ss]\\s*([NSEWnsew])?\\s*$"); // DMS/HMS
-	QRegExp re2("^\\s*([\\+\\-])?\\s*(\\d+(\\.\\d+)?).?([NSEWnsew])?\\s*$"); // Decimal
-	QRegExp re3("([+-]?[\\d.]+)°(?:([\\d.]+)')?(?:([\\d.]+)\")?"); // DMS like +121°33'38.28"
-
-	if (re1.exactMatch(str))
+	QRegExp rex("([-+]?)\\s*"                         // [sign] (1)
+		    "(?:"                                 // either
+		    "(\\d+(?:\\.\\d+)?)\\s*"               // fract (2)
+		    "([dhms°º]?)"                          // [dhms] (3) \u00B0\u00BA
+		    "|"                                   // or
+		    "(?:(\\d+)\\s*([hHdD°º])\\s*)?"         // [int degs] (4) (5)
+		    "(?:"                                   // either
+		    "(?:(\\d+)\\s*['mM]\\s*)?"              //  [int mins]  (6)
+		    "(\\d+(?:\\.\\d+)?)\\s*[\"sS]"          //  fract secs  (7)
+		    "|"                                     // or
+		    "(\\d+(?:\\.\\d+)?)\\s*['mM]"           //  fract mins (8)
+		    ")"                                     // end
+		    ")"                                   // end
+		    "\\s*([NSEW]?)",                      // [point] (9)
+		    Qt::CaseInsensitive);
+	if( rex.exactMatch(str) )
 	{
-		bool neg = (re1.capturedTexts().at(1) == "-");
-		double d = re1.capturedTexts().at(2).toDouble();
-		double m = re1.capturedTexts().at(4).toDouble();
-		double s = re1.capturedTexts().at(5).toDouble();
-		if (re1.capturedTexts().at(3).toUpper() == "H")
-		{
-			d *= 15;
-			m *= 15;
-			s *= 15;
+		QStringList caps = rex.capturedTexts();
+#if 0
+		std::cout << "reg exp: ";
+		for( int i = 1; i <= rex.captureCount() ; ++i ){
+			std::cout << i << "=\"" << caps.at(i).toStdString() << "\" ";
 		}
-		QString cardinal = re1.capturedTexts().at(7);
-		double deg = d + (m/60) + (s/3600);
-		if (cardinal.toLower() == "s" || cardinal.toLower() == "w" || neg)
-			deg *= -1.;
-		return (deg * 2 * M_PI / 360.);
-	}
-	else if (re2.exactMatch(str))
-	{
-		bool neg = (re2.capturedTexts().at(1) == "-");
-		double deg = re2.capturedTexts().at(2).toDouble();
-		QString cardinal = re2.capturedTexts().at(4);
-		if (cardinal.toLower() == "s" || cardinal.toLower() == "w" || neg)
-			deg *= -1.;
-		return (deg * 2 * M_PI / 360.);
-	}
-	else if (re3.exactMatch(str))
-	{
-		double deg = re3.capturedTexts()[1].toDouble();
-		double min = re3.capturedTexts()[2].isEmpty()? 0 : re3.capturedTexts()[2].toDouble();
-		double sec = re3.capturedTexts()[3].isEmpty()? 0 : re3.capturedTexts()[3].toDouble();
-		double r = qAbs(deg) + min / 60 + sec / 3600;
-		if (deg<0.)
-			r *= -1.;
-		return (r * 2 * M_PI / 360.);
+		std::cout << std::endl;
+#endif
+		double d = 0;
+		double m = 0;
+		double s = 0;
+		ushort hd = caps.at(5).isEmpty() ? 'd' : caps.at(5).toLower().at(0).unicode();
+		QString pointStr = caps.at(9).toUpper() + " ";
+		if( caps.at(7) != "" )
+		{
+			// [dh, degs], [m] and s entries at 4, 5, 6, 7
+			d = caps.at(4).toDouble();
+			m = caps.at(6).toDouble();
+			s = caps.at(7).toDouble();
+		}
+		else if( caps.at(8) != "" )
+		{
+			// [dh, degs] and m entries at 4, 5, 8
+			d = caps.at(4).toDouble();
+			m = caps.at(8).toDouble();
+		}
+		else if( caps.at(2) != "" )
+		{
+			// some value at 2, dh|m|s at 3
+			double x = caps.at(2).toDouble();
+			QString sS = caps.at(3) + caps.at(9);
+			switch( sS.length() )
+			{
+				case 0:
+					// degrees, no point
+					hd = 'd';
+					break;
+				case 1:
+					// NnSEeWw is point for degrees, "dhms°..." distinguish dhms
+					if( QString("NnSEeWw").contains(sS.at(0)) )
+					{
+						pointStr = sS.toUpper();
+						hd = 'd';
+					}
+					else
+						hd = sS.toLower().at(0).unicode();
+					break;
+				case 2:
+					// hdms selected by 1st char, NSEW by 2nd
+					hd = sS.at(0).toLower().unicode();
+					pointStr = sS.right(1).toUpper();
+					break;
+			}
+			switch( hd )
+			{
+				case 'h':
+				case 'd':
+				case 0x00B0:
+				case 0x00BA:
+					d = x;
+					break;
+				case 'm':
+				case '\'':
+					m = x;
+					break;
+				case 's':
+				case '"':
+					s = x;
+					break;
+				default:
+					qDebug() << "internal error, hd = " << hd;
+			}
+		}
+		else
+		{
+			qDebug() << "getDecAngle failed to parse angle string: " << str;
+			return -0.0;
+		}
+
+		// General sign handling: group 1 or overruled by point
+		int sgn = caps.at(1) == "-" ? -1 : 1;
+		bool isNS = false;
+		switch( pointStr.at(0).unicode() )
+		{
+			case 'N':
+				sgn = 1;
+				isNS = 1;
+				break;
+			case 'S':
+				sgn = -1;
+				isNS = 1;
+				break;
+			case 'E':
+				sgn = 1;
+				break;
+			case 'W':
+				sgn = -1;
+				break;
+			default:  // OK, there is no NSEW.
+				break;
+		}
+
+		int h2d = 1;
+		if( hd == 'h' )
+		{
+			// Sanity check - h and N/S not accepted together
+			if( isNS  )
+			{
+				qDebug() << "getDecAngle does not accept ...H...N/S: " << str;
+				return -0.0;
+			}
+			h2d = 15;
+		}
+		double deg = (d + (m/60) + (s/3600))*h2d*sgn;
+		return deg * 2 * M_PI / 360.;
 	}
 
-	qDebug() << "getDecAngle failed to parse angle string:" << str;
+	qDebug() << "getDecAngle failed to parse angle string: " << str;
 	return -0.0;
 }
 
@@ -567,9 +572,7 @@ void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 
 	static const long JD_GREG_CAL = 2299161;
 	static const int JB_MAX_WITHOUT_OVERFLOW = 107374182;
-	long julian;
-
-	julian = static_cast<long>(floor(jd + 0.5));
+	const long julian = static_cast<long>(floor(jd + 0.5));
 
 	long ta, jalpha, tb, tc, td, te;
 
@@ -594,9 +597,7 @@ void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 	}
 	else
 	{
-		// FIXME: Modifying this cast to modern style breaks a test.
-		//tc = static_cast<long>((static_cast<unsigned long long>(tb*20) - 2442) / 7305); //- WTF???
-		tc = (long)(((unsigned long long)tb*20 - 2442) / 7305);
+		tc = static_cast<long>((static_cast<unsigned long long>(tb)*20 - 2442) / 7305);
 	}
 	td = 365 * tc + tc/4;
 	te = ((tb - td) * 10000)/306001;
@@ -650,7 +651,7 @@ QString julianDayToISO8601String(const double jd, bool addMS)
 
 	if(addMS)
 	{
-		res = res.append(".%1").arg(millis,3,10,QLatin1Char('0'));
+		res.append(".%1").arg(millis,3,10,QLatin1Char('0'));
 	}
 	if (year < 0)
 	{
@@ -831,7 +832,7 @@ bool getJDFromDate(double* newjd, const int y, const int m, const int d, const i
 	double deltaTime = (h / 24.0) + (min / (24.0*60.0)) + (static_cast<double>(s) / (24.0 * 60.0 * 60.0)) - 0.5;
 	QDate test((y <= 0 ? y-1 : y), m, d);
 	// if QDate will oblige, do so.
-	// added hook for Julian calendar, because he has been removed from Qt5 --AW
+	// added hook for Julian calendar, because it has been removed from Qt5 --AW
 	if ( test.isValid() && y>1582)
 	{
 		double qdjd = static_cast<double>(test.toJulianDay());
@@ -956,15 +957,15 @@ int numberOfDaysInMonthInYear(const int month, const int year)
 // return true if year is a leap year. Observes 1582 switch from Julian to Gregorian Calendar.
 bool isLeapYear(const int year)
 {
-	if (year>1582){
-		if (year % 400 == 0)
-			return true;
-		else if (year % 100 == 0)
-			return false;
-		else return (year % 4 == 0);
+	if (year>1582)
+	{
+		if (year % 100 == 0)
+			return (year % 400 == 0);
+		else
+			return (year % 4 == 0);
 	}
 	else
-		return (year % 4 == 0);
+		return (year % 4 == 0); // astronomical year counting: strictly every 4th year.
 }
 
 // Find day number for date in year.
@@ -1122,17 +1123,17 @@ bool getDateTimeFromISO8601String(const QString& iso8601Date, int* y, int* m, in
 	{
 		bool error = false;
 		bool ok;
-		*y = finalRe.capturedTexts().at(1).toInt(&ok);
+		*y = finalRe.cap(1).toInt(&ok);
 		error = error || !ok;
-		*m = finalRe.capturedTexts().at(2).toInt(&ok);
+		*m = finalRe.cap(2).toInt(&ok);
 		error = error || !ok;
-		*d = finalRe.capturedTexts().at(3).toInt(&ok);
+		*d = finalRe.cap(3).toInt(&ok);
 		error = error || !ok;
-		*h = finalRe.capturedTexts().at(4).toInt(&ok);
+		*h = finalRe.cap(4).toInt(&ok);
 		error = error || !ok;
-		*min = finalRe.capturedTexts().at(5).toInt(&ok);
+		*min = finalRe.cap(5).toInt(&ok);
 		error = error || !ok;
-		*s = finalRe.capturedTexts().at(6).toFloat(&ok);
+		*s = finalRe.cap(6).toFloat(&ok);
 		error = error || !ok;
 		if (!error)
 			return true;
@@ -1687,8 +1688,7 @@ double getDeltaTByReingoldDershowitz(const double jDay)
 	}
 	else if ((year >= 1800) && (year <= 1986))
 	{
-		// FIXME: This part should be check and maybe partially rewrited (gregorian-date-difference?)
-		//        because this part gives the strange values of DeltaT
+		// FIXME: This part should be check because this part gives the strange values of DeltaT (see unit tests)
 		double c = (getFixedFromGregorian(1900, 1, 1)-getFixedFromGregorian(year, 7, 1))/36525.;
 
 		if (year >= 1900) // [1900..1986]
@@ -2272,10 +2272,9 @@ float *ComputeCosSinRhoZone(const float dRho, const unsigned int segments, const
 int getFixedFromGregorian(const int year, const int month, const int day)
 {
 	int y = year - 1;
-	int r = 365*y + static_cast<int>(std::floor(y/4.) - std::floor(y/100.) + std::floor(y/400.) + std::floor((367 * month - 362)/12.));
+	int r = 365*y + intFloorDiv(y, 4) - intFloorDiv(y, 100) + intFloorDiv(y, 400) + (367*month-362)/12 + day;
 	if (month>2)
-		r -= isLeapYear(year) ? 1 : 2;
-	r += day;
+		r += (isLeapYear(year) ? -1 : -2);
 
 	return r;
 }
@@ -2308,6 +2307,11 @@ int compareVersions(const QString v1, const QString v2)
 int gcd(int a, int b)
 {
 	return b ? gcd(b, a % b) : a;
+}
+
+int lcm(int a, int b)
+{
+	return (a*b/gcd(a, b));
 }
 
 //! Uncompress gzip or zlib compressed data.

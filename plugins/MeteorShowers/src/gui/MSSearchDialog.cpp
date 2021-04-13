@@ -27,6 +27,7 @@
 #include "StelObjectMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelUtils.hpp"
+#include "StelMainView.hpp"
 #include "ui_MSSearchDialog.h"
 
 MSSearchDialog::MSSearchDialog(MeteorShowersMgr* mgr)
@@ -105,11 +106,11 @@ void MSSearchDialog::checkDates()
 
 	if (jdFrom > jdTo)
 	{
-		QMessageBox::warning(Q_NULLPTR, "Stellarium", q_("Start date greater than end date!"));
+		QMessageBox::warning(&StelMainView::getInstance(), "Stellarium", q_("Start date greater than end date!"));
 	}
 	else if (jdTo-jdFrom > 365)
 	{
-		QMessageBox::warning(Q_NULLPTR, "Stellarium", q_("Time interval must be less than one year!"));
+		QMessageBox::warning(&StelMainView::getInstance(), "Stellarium", q_("Time interval must be less than one year!"));
 	}
 	else
 	{

@@ -22,6 +22,8 @@
 #include <QString>
 #include <QMetaType>
 
+class Planet;
+
 //! @class StelLocation
 //! Store the informations for a location on a planet
 class StelLocation
@@ -36,6 +38,18 @@ public:
 
 	//! Output the location as a string ready to be stored in the user_location file
 	QString serializeToLine() const;
+
+	//! Compute great-circle distance from other location.
+	//! arguments given in decimal degrees
+	float distanceDegrees(const float otherLong, const float otherLat) const {return distanceDegrees(longitude, latitude, otherLong, otherLat);}
+
+	//! Compute great-circle distance from other location.
+	//! arguments given in decimal degrees
+	double distanceKm(const double otherLong, const double otherLat) const;
+
+	//! Compute azimuth towards Target. All angles (args and result) are in degrees.
+	//! @return azimuth counted from north or south as set in the StelApp preferences, in [0...360].
+	double getAzimuthForLocation(double longTarget, double latTarget) const;
 
 	//! Location/city name
 	QString name;
@@ -82,8 +96,16 @@ public:
 	//! Parse a location from a line serialization
 	static StelLocation createFromLine(const QString& line);
 
-	//! Compute great-circle distance between two locations
+	//! Compute great-circle distance between two locations on a spherical body
+	//! arguments given in decimal degrees
 	static float distanceDegrees(const float long1, const float lat1, const float long2, const float lat2);
+	//! Compute great-circle distance between two locations on the current planet (takes flattening into account)
+	//! arguments given in decimal degrees
+	//! Source: Jean Meeus, Astronomical Algorithms, 2nd edition, ch.11.
+	static double distanceKm(Planet *planet, const double long1, const double lat1, const double long2, const double lat2);
+	//! Compute azimuth from Obs towards Target. All angles (args and result) are in degrees.
+	//! @return azimuth counted from north or south as set in the StelApp preferences, in [0...360].
+	static double getAzimuthForLocation(double longObs, double latObs, double longTarget, double latTarget);
 
 	//! Used privately by the StelLocationMgr
 	bool isUserLocation;

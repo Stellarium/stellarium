@@ -142,11 +142,13 @@ following sub-directories.
 \item[\file{skycultures/}] contains constellations, common star names and
   constellation artwork for Stellarium's many sky cultures. Each culture
   has its own sub-directory in the skycultures directory.
+\item[\file{scripts/}] contains your own scripts. These can be used to create
+  complex demonstrations (see ch.~\ref{ch:scripting}). 
 \item[\file{nebulae/}] contains data and image files for nebula textures.
   In the future Stellarium may be able to support multiple sets of nebula
   images and switch between them at runtime. This feature is not
   implemented for version~\StelVersion, although the directory structure is in
-  place - each set of nebula textures has its own sub-directory in the
+  place -- each set of nebula textures has its own sub-directory in the
   nebulae directory.
   %% TODO: Update this if no longer valid.
 \item[\file{stars/}] contains Stellarium's star catalogues. In the
@@ -243,12 +245,12 @@ in the \emph{Tools} tab of the \emph{Configuration} dialog (\guibutton[0.25]{2}{
 objects\footnote{Over 83 thousand deep-sky objects in version 0.16.0.} in the normal
 program download (the standard edition of Stellarium DSO catalog, see section \ref{sec:dso:catalog}), 
 but an extended DSO catalog with over one million objects (up to $20.0^m$ for galaxies) may be downloaded
-from Stellarium's Github website\footnote{\url{https://github.com/Stellarium/stellarium-data/releases/tag/dso-3.8}}:
+from Stellarium's Github website\footnote{\url{https://github.com/Stellarium/stellarium-data/releases/tag/dso-3.12}}:
 
 \noindent\begin{tabular}{lllr}
 \toprule
 \emph{Version}&\emph{Filename}& \emph{MD5 hash}& \emph{Size}\\\midrule
-3.8; extended edition & \file{catalog.dat} &\texttt{25e904d855330ae59f63e09c6d078e70}& 27\,MB\\\bottomrule
+3.12; extended edition & \file{catalog.dat} &\texttt{e235475877315eb714d6b8c74802a1aa}& 27MB\\\bottomrule
 \end{tabular}
 
 The file can be placed in a folder named \file{nebulae/default} inside either
@@ -274,8 +276,7 @@ DE431 covers years $-13000\ldots+17000$, which allows e.g.\
 archaeoastronomical research on Mesolithic landscapes. Outside these
 year ranges, positional computation falls back to VSOP87.
 
-The integration of this feature is still somewhat experimental, and some other current 
-approximations will lead to numerical data which differ slightly from best possible ephemerides.  
+Some current approximations may still lead to numerical data which differ slightly from best possible ephemerides.  
 Please at least compare with JPL Horizons\footnote{\url{https://ssd.jpl.nasa.gov/horizons.cgi}} for dependable results.
 
 To enable use of these data, download the files from
@@ -475,6 +476,7 @@ For example, using the option \texttt{-c\ my\_config.ini} would resolve to the f
 -\/-sky-time         & time       & The initial time in \texttt{hh:mm:ss} format. \\\midrule
 -\/-startup-script   & script name & The name of a script to run after the program has started. [\file{startup.ssc}] \\\midrule
 -\/-fov              & angle      & The initial vertical field of view in degrees. \\\midrule
+-\/-scale-gui        & scale factor & Scaling the GUI according to scale factor\\\midrule
 -\/-projection-type  & ptype      & The initial projection type (e.g. \texttt{perspective}). \\\midrule
 -\/-spout  or -S     & all or sky & Act as Spout sender (See section \ref{sec:CommandLineOptions:Special:Spout}).%
                                     \footnote{On Windows only}\footnote{This function requires running in OpenGL mode.}\\
@@ -539,6 +541,8 @@ This mode does not work in ANGLE mode and requires modern graphics hardware with
 driver extension running in OpenGL mode. Some NVidia GPUs work without this extension listed explicitly. 
 On a notebook with NVidia Optimus technology, make sure to launch Stellarium on the NVidia hardware. 
 For permanent setting, use the NVidia configuration dialog to configure Stellarium explicitly to run always on the NVidia card.
+
+Note that Spout use disables any multisampling setting (see Appendix~\ref{sec:config.ini:video}). 
 
 %%% Local Variables: 
 %%% mode: latex

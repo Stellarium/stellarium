@@ -251,14 +251,20 @@ void QuasarsDialog::updateCompleteReceiver(void)
 	ui->lastUpdateDateTimeEdit->setDateTime(qsr->getLastUpdate());
 	QTimer *timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
+	setAboutHtml();
 }
 
 void QuasarsDialog::restoreDefaults(void)
 {
-	qDebug() << "[Quasars] Restore defaults...";
-	qsr->restoreDefaults();
-	qsr->readSettingsFromConfig();
-	updateGuiFromSettings();
+	if (askConfirmation())
+	{
+		qDebug() << "[Quasars] restore defaults...";
+		qsr->restoreDefaults();
+		qsr->readSettingsFromConfig();
+		updateGuiFromSettings();
+	}
+	else
+		qDebug() << "[Quasars] restore defaults is canceled...";
 }
 
 void QuasarsDialog::updateGuiFromSettings(void)

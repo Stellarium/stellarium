@@ -35,6 +35,7 @@
 #include "LabelMgr.hpp"
 #include "Planet.hpp"
 #include "Orbit.hpp"
+#include "StelActionMgr.hpp"
 
 #include <cmath>
 #include <QString>
@@ -44,6 +45,38 @@
 #include <QDebug>
 #include <QFont>
 #include <QFontMetrics>
+
+double Smoother::getValue() const
+{
+	double k = easingCurve.valueForProgress(progress / duration);
+	return start * (1 - k) + aim * k;
+}
+
+void Smoother::setTarget(double start, double aim, double duration)
+{
+	this->start = start;
+	this->aim = aim;
+	if (duration>0.001) // duration cannot be zero!
+		this->duration = duration;
+	else
+		this->duration = 0.001;
+	this->progress = 0.;
+	// Compute best easing curve depending on the speed of animation.
+	if (duration >= 1.0)
+		easingCurve = QEasingCurve(QEasingCurve::InOutQuart);
+	else
+		easingCurve = QEasingCurve(QEasingCurve::OutQuad);
+}
+
+void Smoother::update(double dt)
+{
+	progress = qMin(progress + dt, duration);
+}
+
+bool Smoother::finished() const
+{
+	return progress >= duration;
+}
 
 StelMovementMgr::StelMovementMgr(StelCore* acore)
 	: currentFov(60.)
@@ -110,12 +143,13 @@ StelMovementMgr::~StelMovementMgr()
 
 void StelMovementMgr::init()
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
+	conf = StelApp::getInstance().getSettings();
 	objectMgr = GETSTELMODULE(StelObjectMgr);
 	Q_ASSERT(conf);
 	Q_ASSERT(objectMgr);
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)),
 		this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(bindingFOVActions()));
 
 	flagEnableMoveAtScreenEdge = conf->value("navigation/flag_enable_move_at_screen_edge",false).toBool();
 	mouseZoomSpeed = conf->value("navigation/mouse_zoom",30).toInt();
@@ -132,7 +166,6 @@ void StelMovementMgr::init()
 	minFov = conf->value("navigation/min_fov",0.001389).toDouble(); // default: minimal FOV = 5"
 	initFov = conf->value("navigation/init_fov",60.0).toDouble();
 	currentFov = initFov;
-
 
 	// we must set mount mode before potentially loading zenith views etc.
 	QString tmpstr = conf->value("navigation/viewing_mode", "horizon").toString();
@@ -154,7 +187,7 @@ void StelMovementMgr::init()
 	//           -1/0   ->180   SOUTH is bottom
 	//            0/-1  -> 90   EAST is bottom
 	//            0/1   ->270   WEST is bottom
-	Vec3f tmp = StelUtils::strToVec3f(conf->value("navigation/init_view_pos", "1,0,0").toString());
+	Vec3f tmp(conf->value("navigation/init_view_pos", "1,0,0").toString());
 	//qDebug() << "initViewPos" << tmp[0] << "/" << tmp[1] << "/" << tmp[2];
 	if (tmp[2]>=1)
 	{
@@ -205,28 +238,33 @@ void StelMovementMgr::init()
 	addAction("actionLook_Towards_NCP", movementGroup, N_("Look towards North Celestial pole"), "lookTowardsNCP()", "Alt+Shift+N");
 	addAction("actionLook_Towards_SCP", movementGroup, N_("Look towards South Celestial pole"), "lookTowardsSCP()", "Alt+Shift+S");
 	// Field of view
-	// The feature was moved from FOV plugin
-	// TODO: Switch to use C++/Qt lambda's
-	QString fovGroup = N_("Field of View");	
-	addAction("actionSet_FOV_180deg",	 fovGroup, N_("Set FOV to 180°"), "setFOV180Deg()", "Ctrl+Alt+1");
-	addAction("actionSet_FOV_90deg",   fovGroup,	 N_("Set FOV to 90°"),   "setFOV90Deg()",   "Ctrl+Alt+2");
-	addAction("actionSet_FOV_60deg",   fovGroup, N_("Set FOV to 60°"),   "setFOV60Deg()",   "Ctrl+Alt+3");
-	addAction("actionSet_FOV_45deg",   fovGroup, N_("Set FOV to 45°"),   "setFOV45Deg()",   "Ctrl+Alt+4");
-	addAction("actionSet_FOV_20deg",   fovGroup, N_("Set FOV to 20°"),   "setFOV20Deg()",   "Ctrl+Alt+5");
-	addAction("actionSet_FOV_10deg",   fovGroup, N_("Set FOV to 10°"),   "setFOV10Deg()",   "Ctrl+Alt+6");
-	addAction("actionSet_FOV_5deg",     fovGroup, N_("Set FOV to 5°"),     "setFOV5Deg()",     "Ctrl+Alt+7");
-	addAction("actionSet_FOV_2deg",     fovGroup, N_("Set FOV to 2°"),     "setFOV2Deg()",     "Ctrl+Alt+8");
-	addAction("actionSet_FOV_1deg",     fovGroup, N_("Set FOV to 1°"),     "setFOV1Deg()",     "Ctrl+Alt+9");
-	addAction("actionSet_FOV_0_5deg", fovGroup, N_("Set FOV to 0.5°"),  "setFOV05Deg()",   "Ctrl+Alt+0");
-	// Remove all FOV settings
-	conf->beginGroup("FOV");
-	conf->remove("");
-	conf->endGroup();
+	// The feature was moved from FOV plugin	
+	bindingFOVActions();
 
 	viewportOffsetTimeline=new QTimeLine(1000, this);
 	viewportOffsetTimeline->setFrameRange(0, 100);
 	connect(viewportOffsetTimeline, SIGNAL(valueChanged(qreal)), this, SLOT(handleViewportOffsetMovement(qreal)));
 	targetViewportOffset.set(core->getViewportHorizontalOffset(), core->getViewportVerticalOffset());
+}
+
+void StelMovementMgr::bindingFOVActions()
+{
+	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
+	QString confval, tfov, fovGroup = N_("Field of View"), fovText = q_("Set predefined FOV");
+	QList<float> defaultFOV = { 0.5f, 180.f, 90.f, 60.f, 45.f, 20.f, 10.f, 5.f, 2.f, 1.f };
+	for (int i = 0; i < defaultFOV.size(); ++i)
+	{
+		confval = QString("fov/quick_fov_%1").arg(i);
+		float cfov = conf->value(confval, defaultFOV.at(i)).toFloat();
+		tfov = QString::number(cfov, 'f', 2);
+		QString actionName = QString("actionSet_FOV_%1").arg(i);
+		QString actionDescription = QString("%1 #%2 (%3%4)").arg(fovText, QString::number(i), tfov, QChar(0x00B0));
+		StelAction* action = actionMgr->findAction(actionName);
+		if (action!=Q_NULLPTR)
+			actionMgr->findAction(actionName)->setText(actionDescription);
+		else
+			addAction(actionName, fovGroup, actionDescription, this, [=](){setFOVDeg(cfov);}, QString("Ctrl+Alt+%1").arg(i));
+	}
 }
 
 void StelMovementMgr::setEquatorialMount(bool b)
@@ -921,54 +959,9 @@ void StelMovementMgr::lookTowardsSCP(void)
 	setViewDirectionJ2000(core->equinoxEquToJ2000(Vec3d(0,0,-1), StelCore::RefractionOff));
 }
 
-void StelMovementMgr::setFOV180Deg()
+void StelMovementMgr::setFOVDeg(float fov)
 {
-	zoomTo(180., 1.f);
-}
-
-void StelMovementMgr::setFOV90Deg()
-{
-	zoomTo(90., 1.f);
-}
-
-void StelMovementMgr::setFOV60Deg()
-{
-	zoomTo(60., 1.f);
-}
-
-void StelMovementMgr::setFOV45Deg()
-{
-	zoomTo(45., 1.f);
-}
-
-void StelMovementMgr::setFOV20Deg()
-{
-	zoomTo(20., 1.f);
-}
-
-void StelMovementMgr::setFOV10Deg()
-{
-	zoomTo(10., 1.f);
-}
-
-void StelMovementMgr::setFOV5Deg()
-{
-	zoomTo(5., 1.f);
-}
-
-void StelMovementMgr::setFOV2Deg()
-{
-	zoomTo(2., 1.f);
-}
-
-void StelMovementMgr::setFOV1Deg()
-{
-	zoomTo(1., 1.f);
-}
-
-void StelMovementMgr::setFOV05Deg()
-{
-	zoomTo(0.5, 1.f);
+	zoomTo(fov, 1.f);
 }
 
 // Increment/decrement smoothly the vision field and position
@@ -1548,29 +1541,10 @@ void StelMovementMgr::updateAutoZoom(double deltaTime)
 {
 	if (flagAutoZoom)
 	{
-		// Use a smooth function
-		double c;
-
-		if( zoomMove.startFov > zoomMove.aimFov )
-		{
-			// slow down as we approach final view
-			c = 1.0 - static_cast<double>((1.0f-zoomMove.coef)*(1.0f-zoomMove.coef)*(1.0f-zoomMove.coef));
-		}
-		else
-		{
-			// speed up as we leave zoom target
-			c = static_cast<double>(zoomMove.coef * zoomMove.coef * zoomMove.coef);
-		}
-
-		double newFov=zoomMove.startFov + (zoomMove.aimFov - zoomMove.startFov) * c;
-
-		zoomMove.coef+=zoomMove.speed*static_cast<float>(deltaTime)*1000;
-		if (zoomMove.coef>=1.f)
-		{
+		zoomMove.update(deltaTime);
+		double newFov = zoomMove.getValue();
+		if (zoomMove.finished())
 			flagAutoZoom = 0;
-			newFov=zoomMove.aimFov;
-		}
-
 		setFov(newFov); // updates currentFov->don't use newFov later!
 
 		// In case we have offset center, we want object still visible in center.
@@ -1631,11 +1605,7 @@ void StelMovementMgr::updateAutoZoom(double deltaTime)
 void StelMovementMgr::zoomTo(double aim_fov, float zoomDuration)
 {
 	zoomDuration /= movementsSpeedFactor;
-
-	zoomMove.aimFov=aim_fov;
-	zoomMove.startFov=currentFov;
-	zoomMove.speed=1.f/(zoomDuration*1000);
-	zoomMove.coef=0.;
+	zoomMove.setTarget(currentFov, aim_fov, zoomDuration);
 	flagAutoZoom = true;
 }
 
@@ -1648,7 +1618,7 @@ void StelMovementMgr::changeFov(double deltaFov)
 
 double StelMovementMgr::getAimFov(void) const
 {
-	return (flagAutoZoom ? zoomMove.aimFov : currentFov);
+	return (flagAutoZoom ? zoomMove.getAim() : currentFov);
 }
 
 void StelMovementMgr::setMaxFov(double max)

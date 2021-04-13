@@ -123,6 +123,45 @@ public slots:
 			bool autoDelete = false,
 			int autoDeleteTimeoutMs = 0);
 
+	//! Create a label in equatorial coordinate system
+	//! @param text the text to display
+	//! @param RA right ascension (e.g. 5h10m31s)
+	//! @param Dec declination (e.g. 25d30m30s)
+	//! @param visible if true, the label starts displayed, else it starts hidden
+	//! @param fontSize size of the font to use
+	//! @param fontColor either HTML-like color spec, e.g. "#ffff00", or 3-part float vector like Vec3f(1.0f,1.0f,0.0f) for yellow
+	//! @param side where the label appears in relation to coordinates:
+	//! - "N" = above object on screen
+	//! - "S" = below object on screen
+	//! - "E" = to the right of the object on screen
+	//! - "W" = to the left of the object on screen
+	//! - "NE", "NW", "SE", "SW" work too.
+	//! @param autoDelete the label will be automatically deleted after it is displayed once
+	//! @param autoDeleteTimeoutMs if not zero, the label will be automatically deleted after autoDeleteTimeoutMs ms
+	//! @param j2000epoch if true, the label starts displayed in equatorial coordinates for epoch J2000.0
+	int labelEquatorial(const QString& text,
+			const QString& ra,
+			const QString& dec,
+			bool visible=true,
+			float fontSize=14,
+			const QString& fontColor="#999999",
+			const QString& side="",
+			double labelDistance=-1.0,
+			bool autoDelete = false,
+			int autoDeleteTimeoutMs = 0,
+			bool j2000epoch = true);
+	int labelEquatorial(const QString& text,
+			const QString& ra,
+			const QString& dec,
+			bool visible,
+			float fontSize,
+			const Vec3f& fontColor,
+			const QString& side="",
+			double labelDistance=-1.0,
+			bool autoDelete = false,
+			int autoDeleteTimeoutMs = 0,
+			bool j2000epoch = true);
+
 	//! Create a label at fixed screen coordinates
 	//! @param text the text to display
 	//! @param x the horizontal position on the screen, in pixels, from the left of the screen

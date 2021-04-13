@@ -1,30 +1,10 @@
-# TRANSLATORS: Ram
-R01	_("Meṣa Rāśi")
-# TRANSLATORS: Bull
-R02	_("Vṛṣa Rāśi")
-# TRANSLATORS: Twin
-R03	_("Mithuna Rāśi")
-# TRANSLATORS: Crab
-R04	_("Karkaṭa Rāśi")
-# TRANSLATORS: Lion
-R05	_("Simha Rāśi")
-# TRANSLATORS: Virgin
-R06	_("Kanyā Rāśi")
-# TRANSLATORS: Balance
-R07	_("Tulā Rāśi")
-# TRANSLATORS: Scorpion
-R08	_("Vṛścikā Rāśi")
-# TRANSLATORS: Archer
-R09	_("Dhanur Rāśi")
-# TRANSLATORS: Crocodile
-R10	_("Makara Rāśi")
-# TRANSLATORS: Potter
-R11	_("Kumbha Rāśi")
-# TRANSLATORS: Fishes
-R12	_("Mīna Rāśi")
-# TRANSLATORS: Hunter
-C01	_("Kālapuruṣa")
-# TRANSLATORS: Hunter's Dog
-C02	_("Bṛihān śvāna")
-# TRANSLATORS: The Seven Sage
-C03	_("Saptarṣi")
+# Comment from Gzotti: ""Asterisms" were added in the last years to show what "modern" people understand as "inofficial" star group, like the Big Dipper, Summer Triangle or Winter Hexagon. Those figures currently don't show constellation art, although clearly a Big Dipper or Sickle could be shown with an artistic rendering, so this may also change, if somebody is willing to add them. Given the uncontrolled growth of asterisms, we should also find some way of selecting favourites, e.g. there are "Winter Hexagon" and "Big G" formed by practically the same stars, seeing any of the two is a personal preference. ... I don't know whether the Indian traditional sky has non-constellational asterisms in a similar add-on concept as described above."
+
+# From the manual: This file consists of 2 simple columns: Abbreviation (or just a serial number) and English name of asterism. The writing _("name") allows automatic translation of the English strings to other languages. These strings will be used as asterisms labels. In addition, after a hash mark (#) marking a comment sign, some reference information can be added in comment lines, like “List found at . . . ”.... Also, you can again add a reference comment after each 2-column entry. Just add a whitespace, and then a comma-separated list of numerical references to the books listed in reference.fab. Collecting sources and giving such references is always a good idea. Some later versions of Stellarium may use and display this information.
+# Example line: JbC	_("Job's Coffin","asterism") 30,32
+
+# For the column 1: We use an intuitive ITRANS/ OPTITRANS transliteration scheme for codes.
+# For the column 2: We use IAST transliteration for unambious transliteration of devanAgarI using latin alphabets, while using phonetically more intuitive equivalents in suggested translations.
+
+
+

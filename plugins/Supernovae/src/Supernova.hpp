@@ -93,7 +93,7 @@ public:
 	void update(double deltaTime);
 
 protected:
-	virtual QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const double alt_app, const int decimals=1) const;
+	virtual QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals=1) const;
 
 private:
 	bool initialized;

@@ -23,13 +23,15 @@
 #include <QObject>
 #include <QStringList>
 #include <QFile>
-#include <QTime>
 #include <QTimer>
+#include <QEventLoop>
 #include <QMap>
 #include <QPair>
 #include <QSet>
 
-class StelMainScriptAPI;
+// class StelMainScriptAPI;
+#include "StelMainScriptAPI.hpp"
+
 class StelScriptEngineAgent;
 class QScriptEngine;
 
@@ -67,11 +69,21 @@ public:
 	//! if the command line option --verbose has been given,
 	//! this dumps the preprocessed script with line numbers attached to log.
 	//! This helps to understand the line number given by the usual error message.
-	bool preprocessScript(const QString fileName, const QString& input, QString& output, const QString& scriptDir);
+	bool preprocessScript(const QString fileName, const QString& input, QString& output, const QString& scriptDir, int &errLoc);
 	bool preprocessFile(const QString fileName, QFile &input, QString& output, const QString& scriptDir);
 	
 	//! Add all the StelModules into the script engine
 	void addModules();
+
+    //! Define JS classes Vec3f, Vec3d
+	static void defVecClasses(QScriptEngine *engine);
+
+    //! Permit access to StelScriptMainAPI's methods
+	const QMetaObject * getMetaOfStelMainScriptAPI(){ return mainAPI->metaObject(); }
+
+    //! Accessor to QEventLoop
+    QEventLoop* getWaitEventLoop(){ return waitEventLoop; }
+
 public slots:
 	//! Returns a HTML description of the specified script.
 	//! Includes name, author, description...
@@ -144,10 +156,11 @@ public slots:
 	//! @note This is a blocking call! The event queue is held up by calls of QCoreApplication::processEvents().
 	//! @param scriptId path name, if available, or something helpful
 	//! @param scriptCode The script to execute
+	//! @param errLoc offset of erroneous include line, or -1
 	//! @param includePath If a null string (the default), no pre-processing is done. If an empty string, the default
 	//! script directories are used (script/ in both user and install directory). Otherwise, the given directory is used.
 	//! @return false if the named script code could not be prepared or run, true otherwise
-	bool runScriptDirect(const QString scriptId, const QString& scriptCode, const QString &includePath = QString());
+	bool runScriptDirect(const QString scriptId, const QString& scriptCode, int &errLoc, const QString &includePath = QString());
 
 	//! Runs preprocessed script code which has been generated using runPreprocessedScript().
 	//! In general, you do not want to use this method, use runScript() or runScriptDirect() instead.
@@ -230,7 +243,7 @@ private:
 	QMap<QString, QString> mappify(const QStringList& args, bool lowerKey=false);
 	bool strToBool(const QString& str);
 	// The recursive preprocessing workhorse.
-        bool expand(const QString fileName, const QString &input, QString &output, const QString &scriptDir);
+	void expand(const QString fileName, const QString &input, QString &output, const QString &scriptDir, int &errLoc);
 
 	//! Generate one StelAction per script.
 	//! The name of the action is of the form: "actionScript/<script-path>"
@@ -248,6 +261,9 @@ private:
 	//! The thread in which scripts are run
 	StelMainScriptAPI *mainAPI;
 
+	//! The QEventLoop for wait and waitFor
+    QEventLoop* waitEventLoop;
+	
 	QString scriptFileName;
 	
 	//Script engine agent

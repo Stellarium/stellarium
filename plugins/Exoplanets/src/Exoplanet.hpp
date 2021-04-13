@@ -114,6 +114,8 @@ public:
 	//! Get the english name
 	virtual QString getEnglishName(void) const;
 
+	bool isVMagnitudeDefined() const;
+
 	QString getDesignation(void) const;
 	QStringList getExoplanetsEnglishNames(void) const;
 	QStringList getExoplanetsNamesI18n(void) const;

@@ -90,7 +90,11 @@ void StelLocaleMgr::generateCountryList()
 
 			if (!line.isEmpty())
 			{
+				#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+				QStringList list=line.split("\t", Qt::KeepEmptyParts);
+				#else
 				QStringList list=line.split("\t", QString::KeepEmptyParts);
+				#endif
 				QString code = list.at(0).trimmed().toLower();
 				QString country = list.at(1).trimmed().replace("&", "and");
 
@@ -146,10 +150,7 @@ void StelLocaleMgr::setAppLanguage(const QString& newAppLanguageName, bool refre
 
 	createNameLists();
 	if (refreshAll)
-	{
-
 		StelApp::getInstance().updateI18n();
-	}
 }
 
 bool StelLocaleMgr::isAppRTL() const

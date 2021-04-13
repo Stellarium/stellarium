@@ -69,10 +69,10 @@ TelescopeClient *TelescopeClient::create(const QString &url)
 	if (urlSchema.exactMatch(url))
 	{
 		// trimmed removes whitespace on either end of a QString
-		name = urlSchema.capturedTexts().at(1).trimmed();
-		type = urlSchema.capturedTexts().at(2).trimmed();
-		equinox = urlSchema.capturedTexts().at(3).trimmed();
-		params = urlSchema.capturedTexts().at(4).trimmed();
+		name = urlSchema.cap(1).trimmed();
+		type = urlSchema.cap(2).trimmed();
+		equinox = urlSchema.cap(3).trimmed();
+		params = urlSchema.cap(4).trimmed();
 	}
 	else
 	{
@@ -208,9 +208,9 @@ TelescopeTCP::TelescopeTCP(const QString &name, const QString &params, Equinox e
 	{
 		// I will not use the ok param to toInt as the
 		// QRegExp only matches valid integers.
-		host		= paramRx.capturedTexts().at(1).trimmed();
-		port		= static_cast<quint16>(paramRx.capturedTexts().at(2).toUInt());
-		time_delay	= paramRx.capturedTexts().at(3).toInt();
+		host		= paramRx.cap(1).trimmed();
+		port		= static_cast<quint16>(paramRx.cap(2).toUInt());
+		time_delay	= paramRx.cap(3).toInt();
 	}
 	else
 	{

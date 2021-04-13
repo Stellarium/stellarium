@@ -30,25 +30,6 @@ class Translations
 		// Generate Gettext strings for traduction
 		Q_ASSERT(0);
 
-		// Cardinals names
-		// TRANSLATORS: Cardinals names: North
-		N_("N");
-		// TRANSLATORS: Cardinals names: South
-		N_("S");
-		// TRANSLATORS: Cardinals names: East
-		N_("E");
-		// TRANSLATORS: Cardinals names: West
-		N_("W");
-		// TRANSLATORS: Ordinals names: Northeast
-		N_("NE");
-		// TRANSLATORS: Ordinals names: Southeast
-		N_("SE");
-		// TRANSLATORS: Ordinals names: Southwest
-		N_("SW");
-		// TRANSLATORS: Ordinals names: Northwest
-		N_("NW");
-
-		// =====================================================================
 		// List of types solar system bodies
 		// TRANSLATORS: Type of object
 		N_("star");
@@ -389,6 +370,8 @@ class Translations
 		N_("Emission-line stars");
 		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
 		N_("Clusters of galaxies");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Regions of the sky");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("Messier Catalogue");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
@@ -398,7 +381,7 @@ class Translations
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("Sharpless Catalogue");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-		N_("Van den Bergh Catalogue");
+		N_("van den Bergh Catalogue");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("The Catalogue of Rodgers, Campbell, and Whiteoak");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
@@ -428,9 +411,7 @@ class Translations
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("A Catalog of Rich Clusters of Galaxies");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-		N_("Hickson Compact Group");
-		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-		N_("Abell Catalog of Planetary Nebulae");
+		N_("Hickson Compact Group");		
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("ESO/Uppsala Survey of the ESO(B) Atlas")
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
@@ -445,6 +426,14 @@ class Translations
 		N_("Jack Bennett's deep sky catalogue");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("James Dunlop's southern deep sky catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Trumpler Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Stock Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Ruprecht Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("van den Bergh-Hagen Catalogue");
 		
 		// =====================================================================
 		// List of stars types
@@ -458,15 +447,21 @@ class Translations
 		N_("Bright variable stars");
 		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
 		N_("Bright stars with high proper motion");
+		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
+		N_("Variable stars: Algol-type eclipsing systems");
+		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
+		N_("Variable stars: the classical cepheids");
+		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
+		N_("Bright carbon stars");
 		
 		// =====================================================================
 		// Constellation cultures
 		// TRANSLATORS: Name of the sky culture
+		N_("Al-Sufi");
+		// TRANSLATORS: Name of the sky culture
 		N_("Almagest");
 		// TRANSLATORS: Name of the sky culture
 		N_("Anutan");
-		// TRANSLATORS: Name of the sky culture
-		N_("Arabic");
 		// TRANSLATORS: Name of the sky culture
 		N_("Arabic Moon Stations");
 		// TRANSLATORS: Name of the sky culture
@@ -682,6 +677,8 @@ class Translations
 		N_("Uranian analemma");
 		// TRANSLATORS: Name of script
 		N_("Messier Marathon");
+		// TRANSLATORS: Name of script
+		N_("Random location");
 		
 		// =====================================================================
 		// Script descriptions
@@ -708,7 +705,7 @@ class Translations
 		N_("Look at the Sun from big planets of Solar System and Pluto.");
 		N_("Best views of Earth from other Solar System bodies in the 21st Century.");
 		N_("Transit of Venus as seen from Sydney Australia, 6th June 2012.");
-		N_("Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae plugin has to be enabled.");
+		N_("Flash of the supernova observed by Tycho Brahe in 1572. The Historical Supernovae plugin has to be enabled.");
 		N_("Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-3000");
 		N_("Earth Greatest Elongations and Transits from Callisto 2000-3000. Why Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of Jupiter's radiation belt. Therefore, if humans ever colonize Jupiter's moons, Callisto will be the one.");
 		N_("Earth the other visible Planet's Greatest Elongations and Oppositions from Ceres 2000-2200");
@@ -730,7 +727,9 @@ class Translations
 		N_("A demonstration of the analemma - the path of the Sun across the sky during the year on Saturn.");
 		N_("A demonstration of the analemma - the path of the Sun across the sky during the year on Uranus.");
 		N_("Messier Marathon on March 20, 2020. The data for the script are taken from GaoXing's observation log: http://www.xjltp.com/2_huodong/2_030301.htm");
-		
+		N_("Creates 6 tiles (North/East/South/West/Up/Down) for a skybox. These can be further used e.g. in Unity3D or other 3D environments. Output directory and filenames can be set with environment variables STEL_SKYBOX_DIR and STEL_SKYBOX_BASENAME. A data file is also written, you can set its name with environment variable OUTPUT_DATA. Please read the script to understand how to apply it to your projects.");
+		N_("This script will help you make practical works for celestial navigation - he sets a random location and hides it from the GUI.");
+
 		// =====================================================================
 		// List of GUI elements (Qt's dialogs)
 		N_("&Undo");
@@ -781,5 +780,9 @@ class Translations
 		N_("&Select All");
 		N_("&Step up");
 		N_("Step &down");
+		N_("&Rename");
+		N_("&Delete");
+		N_("&New Folder");
+		N_("Show &hidden files");
 	}
 };

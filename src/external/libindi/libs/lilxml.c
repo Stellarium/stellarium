@@ -87,7 +87,7 @@ typedef enum {
 } State;            /* parsing states */
 
 /* maintain state while parsing */
-struct _LilXML
+struct LilXML_
 {
     State cs;      /* current state */
     int ln;        /* line number for diags */
@@ -101,7 +101,7 @@ struct _LilXML
 };
 
 /* internal representation of a (possibly nested) XML element */
-struct _xml_ele
+struct xml_ele_
 {
     String tag;        /* element tag */
     XMLEle *pe;        /* parent element, or NULL if root */
@@ -116,7 +116,7 @@ struct _xml_ele
 };
 
 /* internal representation of an attribute */
-struct _xml_att
+struct xml_att_
 {
     String name; /* name */
     String valu; /* value */
@@ -505,7 +505,7 @@ XMLAtt *findXMLAtt(XMLEle *ep, const char *name)
  */
 XMLEle *findXMLEle(XMLEle *ep, const char *tag)
 {
-    int tl = (int)strlen(tag);
+    int tl = strlen(tag);
     int i;
 
     for (i = 0; i < ep->nel; i++)
@@ -781,7 +781,7 @@ int sprlXMLEle(XMLEle *ep, int level)
 
     l += indent + 1 + ep->tag.sl;
     for (i = 0; i < ep->nat; i++)
-	l += ep->at[i]->name.sl + 4 + (int)strlen(entityXML(ep->at[i]->valu.s));
+        l += ep->at[i]->name.sl + 4 + strlen(entityXML(ep->at[i]->valu.s));
 
     if (ep->nel > 0)
     {
@@ -794,7 +794,7 @@ int sprlXMLEle(XMLEle *ep, int level)
         if (ep->nel == 0)
             l += 2;
         if (ep->pcdata_hasent)
-	    l += (int)strlen(entityXML(ep->pcdata.s));
+            l += strlen(entityXML(ep->pcdata.s));
         else
             l += ep->pcdata.sl;
         if (ep->pcdata.s[ep->pcdata.sl - 1] != '\n')
@@ -863,7 +863,7 @@ char *entityXML(char *s)
     else
     {
         /* put remaining part of s into malbuf */
-	int nleft = (int)strlen(s) + 1; /* include \0 */
+        int nleft = strlen(s) + 1; /* include \0 */
         sret = malbuf = moremem(malbuf, nmalbuf + nleft);
         memcpy(malbuf + nmalbuf, s, nleft);
     }
@@ -1064,8 +1064,12 @@ static int oneXMLchar(LilXML *lp, int c, char ynot[])
                 else
                 {
                     appendString(&lp->ce->pcdata, lp->entity.s);
-                    lp->ce->pcdata_hasent = 1;
+                    //lp->ce->pcdata_hasent = 1;
                 }
+                // JM 2018-09-26: Even if decoded, we always set
+                // pcdata_hasent to 1 since we need to encode it again
+                // before sending it over to clients and drivers.
+                lp->ce->pcdata_hasent = 1;
                 freeString(&lp->entity);
                 lp->cs = INCON;
             }
@@ -1248,7 +1252,7 @@ static void appendString(String *sp, const char *str)
     if (!sp || !str)
         return;
 
-    int strl = (int)strlen(str);
+    int strl = strlen(str);
     int l    = sp->sl + strl + 1; /* need room for '\0' */
 
     if (l > sp->sm)

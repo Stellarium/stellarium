@@ -94,7 +94,9 @@ RequestHandler::RequestHandler(const StaticFileControllerSettings& settings, QOb
 	//executed in the HTTP handler threads
 	apiController->registerService(new MainService(apiController));
 	apiController->registerService(new ObjectService(apiController));
+#ifdef ENABLE_SCRIPTING
 	apiController->registerService(new ScriptService(apiController));
+#endif
 	apiController->registerService(new SimbadService(apiController));
 	apiController->registerService(new StelActionService(apiController));
 	apiController->registerService(new StelPropertyService(apiController));

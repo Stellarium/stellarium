@@ -41,7 +41,7 @@ void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 	StelProjector::ModelViewTranformP transfo = core->getJ2000ModelViewTransform();
 	transfo->combine(j2000ToTrailNativeInverted);
 	sPainter->setProjector(core->getProjection(transfo));
-	for (const auto& trail : allTrails)
+	for (const auto& trail : qAsConst(allTrails))
 	{
 		Planet* hpl = dynamic_cast<Planet*>(trail.stelObject.data());
 		if (hpl!=Q_NULLPTR)
@@ -56,7 +56,7 @@ void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 		colorArray.resize(posHistory.size());
 		for (int i=0;i<posHistory.size();++i)
 		{
-			float colorRatio = 1.f-(currentTime-times.at(i))/timeExtent;
+			float colorRatio = 1.f-fabsf(currentTime-times.at(i))/timeExtent;
 			colorArray[i].set(trail.color[0], trail.color[1], trail.color[2], colorRatio*opacity);
 			vertexArray[i]=posHistory.at(i);
 		}
@@ -64,29 +64,26 @@ void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 	}
 }
 
-// Add 1 point to all the curves at current time and suppress too old points
+// Add 1 point to all the curves at current time and remove too old points
 void TrailGroup::update()
 {
-	times.append(static_cast<float>(core->getJDE()));
-	for (auto& trail : allTrails)
+	float newJDE=static_cast<float>(core->getJDE());
+	if (times.isEmpty() || fabsf(times.last()-newJDE) > 0.000001f)
 	{
-		trail.posHistory.append(j2000ToTrailNative * trail.stelObject->getJ2000EquatorialPos(core));
-	}
-	if (static_cast<float>(core->getJDE())-times.at(0)>timeExtent || times.length()>maxPoints)
-	{
-		times.pop_front();
+		times.append(newJDE);
 		for (auto& trail : allTrails)
 		{
-			trail.posHistory.pop_front();
+			trail.posHistory.append(j2000ToTrailNative * trail.stelObject->getJ2000EquatorialPos(core));
+		}
+		if (fabs(static_cast<float>(core->getJDE())-times.at(0))>timeExtent || times.length()>maxPoints)
+		{
+			times.pop_front();
+			for (auto& trail : allTrails)
+			{
+				trail.posHistory.pop_front();
+			}
 		}
 	}
-}
-
-// Set the matrix to use to post process J2000 positions before storing in the trail
-void TrailGroup::setJ2000ToTrailNative(const Mat4d& m)
-{
-	j2000ToTrailNative=m;
-	j2000ToTrailNativeInverted=m.inverse();
 }
 
 void TrailGroup::addObject(const StelObjectP& obj, const Vec3f* col)

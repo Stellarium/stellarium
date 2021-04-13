@@ -55,12 +55,12 @@ public:
 	void setEquatorial(bool eq);
 	QMap<int, QString> propertyMap();
 private:
-	QString m_name;
-	double m_diameter;
-	double m_focalLength;
-	bool m_hFlipped;
-	bool m_vFlipped;
-	bool m_equatorial;
+	QString m_name;		//!< proper name
+	double m_diameter;	//!< millimetres
+	double m_focalLength;	//!< millimetres
+	bool m_hFlipped;	//!< horizontally flipped?
+	bool m_vFlipped;	//!< vertically flipped?
+	bool m_equatorial;	//!< equatorially mounted?
 };
 
 #endif /*TELESCOPE_HPP*/

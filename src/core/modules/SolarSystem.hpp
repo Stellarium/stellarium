@@ -52,333 +52,97 @@ typedef QSharedPointer<Planet> PlanetP;
 class SolarSystem : public StelObjectModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool labelsDisplayed // This is a "forwarding property" which sets labeling into all planets.
-		   READ getFlagLabels
-		   WRITE setFlagLabels
-		   NOTIFY labelsDisplayedChanged)
-	Q_PROPERTY(bool flagOrbits // was bool orbitsDisplayed
-		   READ getFlagOrbits
-		   WRITE setFlagOrbits
-		   NOTIFY flagOrbitsChanged)
-	Q_PROPERTY(bool trailsDisplayed
-		   READ getFlagTrails
-		   WRITE setFlagTrails
-		   NOTIFY trailsDisplayedChanged)
-	Q_PROPERTY(int maxTrailPoints
-		   READ getMaxTrailPoints
-		   WRITE setMaxTrailPoints
-		   NOTIFY maxTrailPointsChanged)
-	Q_PROPERTY(bool flagHints // was bool hintsDisplayed. This is a "forwarding property" only, without own variable.
-		   READ getFlagHints
-		   WRITE setFlagHints
-		   NOTIFY flagHintsChanged)
-	Q_PROPERTY(bool flagPointer // was bool pointersDisplayed
-		   READ getFlagPointer
-		   WRITE setFlagPointer
-		   NOTIFY flagPointerChanged)
-	Q_PROPERTY(bool flagNativePlanetNames // was bool nativeNamesDisplayed
-		   READ getFlagNativePlanetNames
-		   WRITE setFlagNativePlanetNames
-		   NOTIFY flagNativePlanetNamesChanged)
-	Q_PROPERTY(bool flagTranslatedNames
-		   READ getFlagTranslatedNames
-		   WRITE setFlagTranslatedNames
-		   NOTIFY flagTranslatedNamesChanged)
-	Q_PROPERTY(bool planetsDisplayed
-		   READ getFlagPlanets
-		   WRITE setFlagPlanets
-		   NOTIFY flagPlanetsDisplayedChanged
-		   )
-	Q_PROPERTY(bool flagPlanetsOrbitsOnly
-		   READ getFlagPlanetsOrbitsOnly
-		   WRITE setFlagPlanetsOrbitsOnly
-		   NOTIFY flagPlanetsOrbitsOnlyChanged
-		   )
-	Q_PROPERTY(bool flagPermanentOrbits
-		   READ getFlagPermanentOrbits
-		   WRITE setFlagPermanentOrbits
-		   NOTIFY flagPermanentOrbitsChanged
-		   )
-	Q_PROPERTY(bool flagIsolatedOrbits
-		   READ getFlagIsolatedOrbits
-		   WRITE setFlagIsolatedOrbits
-		   NOTIFY flagIsolatedOrbitsChanged
-		   )
-	Q_PROPERTY(bool flagIsolatedTrails
-		   READ getFlagIsolatedTrails
-		   WRITE setFlagIsolatedTrails
-		   NOTIFY flagIsolatedTrailsChanged
-		   )
-	Q_PROPERTY(int numberIsolatedTrails
-		   READ getNumberIsolatedTrails
-		   WRITE setNumberIsolatedTrails
-		   NOTIFY numberIsolatedTrailsChanged
-		   )
-	Q_PROPERTY(bool flagLightTravelTime
-		   READ getFlagLightTravelTime
-		   WRITE setFlagLightTravelTime
-		   NOTIFY flagLightTravelTimeChanged
-		   )
-	Q_PROPERTY(bool flagUseObjModels
-		   READ getFlagUseObjModels
-		   WRITE setFlagUseObjModels
-		   NOTIFY flagUseObjModelsChanged
-		   )
-	Q_PROPERTY(bool flagShowObjSelfShadows
-		   READ getFlagShowObjSelfShadows
-		   WRITE setFlagShowObjSelfShadows
-		   NOTIFY flagShowObjSelfShadowsChanged
-		   )
-	Q_PROPERTY(bool flagMoonScale
-		   READ getFlagMoonScale
-		   WRITE setFlagMoonScale
-		   NOTIFY flagMoonScaleChanged
-		   )
-	Q_PROPERTY(double moonScale
-		   READ getMoonScale
-		   WRITE setMoonScale
-		   NOTIFY moonScaleChanged
-		   )
-	Q_PROPERTY(bool flagMinorBodyScale
-		   READ getFlagMinorBodyScale
-		   WRITE setFlagMinorBodyScale
-		   NOTIFY flagMinorBodyScaleChanged
-		   )
-	Q_PROPERTY(double minorBodyScale
-		   READ getMinorBodyScale
-		   WRITE setMinorBodyScale
-		   NOTIFY minorBodyScaleChanged
-		   )
-	Q_PROPERTY(double labelsAmount
-		   READ getLabelsAmount
-		   WRITE setLabelsAmount
-		   NOTIFY labelsAmountChanged
-		   )
-	Q_PROPERTY(bool ephemerisMarkersDisplayed
-		   READ getFlagEphemerisMarkers
-		   WRITE setFlagEphemerisMarkers
-		   NOTIFY ephemerisMarkersChanged
-		   )
-	Q_PROPERTY(bool ephemerisHorizontalCoordinates
-		   READ getFlagEphemerisHorizontalCoordinates
-		   WRITE setFlagEphemerisHorizontalCoordinates
-		   NOTIFY ephemerisHorizontalCoordinatesChanged
-		   )
-	Q_PROPERTY(bool ephemerisDatesDisplayed
-		   READ getFlagEphemerisDates
-		   WRITE setFlagEphemerisDates
-		   NOTIFY ephemerisDatesChanged
-		   )
-	Q_PROPERTY(bool ephemerisMagnitudesDisplayed
-		   READ getFlagEphemerisMagnitudes
-		   WRITE setFlagEphemerisMagnitudes
-		   NOTIFY ephemerisMagnitudesChanged
-		   )
-	Q_PROPERTY(bool ephemerisLineDisplayed
-		   READ getFlagEphemerisLine
-		   WRITE setFlagEphemerisLine
-		   NOTIFY ephemerisLineChanged
-		   )
-	Q_PROPERTY(bool ephemerisSkippedData
-		   READ getFlagEphemerisSkipData
-		   WRITE setFlagEphemerisSkipData
-		   NOTIFY ephemerisSkipDataChanged
-		   )
-	Q_PROPERTY(int ephemerisDataStep
-		   READ getEphemerisDataStep
-		   WRITE setEphemerisDataStep
-		   NOTIFY ephemerisDataStepChanged
-		   )
-	Q_PROPERTY(bool ephemerisSmartDates
-		   READ getFlagEphemerisSmartDates
-		   WRITE setFlagEphemerisSmartDates
-		   NOTIFY ephemerisSmartDatesChanged
-		   )
-	Q_PROPERTY(bool ephemerisScaleMarkersDisplayed
-		   READ getFlagEphemerisScaleMarkers
-		   WRITE setFlagEphemerisScaleMarkers
-		   NOTIFY ephemerisScaleMarkersChanged
-		   )
-
-	Q_PROPERTY(bool flagCustomGrsSettings
-		   READ getFlagCustomGrsSettings
-		   WRITE setFlagCustomGrsSettings
-		   NOTIFY flagCustomGrsSettingsChanged
-		   )
-	Q_PROPERTY(int customGrsLongitude
-		   READ getCustomGrsLongitude
-		   WRITE setCustomGrsLongitude
-		   NOTIFY customGrsLongitudeChanged
-		   )
-	Q_PROPERTY(double customGrsDrift
-		   READ getCustomGrsDrift
-		   WRITE setCustomGrsDrift
-		   NOTIFY customGrsDriftChanged
-		   )
-	Q_PROPERTY(double customGrsJD
-		   READ getCustomGrsJD
-		   WRITE setCustomGrsJD
-		   NOTIFY customGrsJDChanged
-		   )
-
+	// This is a "forwarding property" which sets labeling into all planets.
+	Q_PROPERTY(bool labelsDisplayed			READ getFlagLabels			WRITE setFlagLabels			NOTIFY labelsDisplayedChanged)
+	// was bool orbitsDisplayed
+	Q_PROPERTY(bool flagOrbits			READ getFlagOrbits			WRITE setFlagOrbits			NOTIFY flagOrbitsChanged)
+	Q_PROPERTY(bool trailsDisplayed			READ getFlagTrails			WRITE setFlagTrails			NOTIFY trailsDisplayedChanged)
+	Q_PROPERTY(int maxTrailPoints			READ getMaxTrailPoints			WRITE setMaxTrailPoints			NOTIFY maxTrailPointsChanged)
+	Q_PROPERTY(int trailsThickness			READ getTrailsThickness			WRITE setTrailsThickness		NOTIFY trailsThicknessChanged)
+	// was bool hintsDisplayed. This is a "forwarding property" only, without own variable.
+	Q_PROPERTY(bool flagHints			READ getFlagHints			WRITE setFlagHints			NOTIFY flagHintsChanged)
+	// was bool pointersDisplayed
+	Q_PROPERTY(bool flagPointer			READ getFlagPointer			WRITE setFlagPointer			NOTIFY flagPointerChanged)
+	// was bool nativeNamesDisplayed
+	Q_PROPERTY(bool flagNativePlanetNames		READ getFlagNativePlanetNames		WRITE setFlagNativePlanetNames		NOTIFY flagNativePlanetNamesChanged)
+	Q_PROPERTY(bool flagTranslatedNames		READ getFlagTranslatedNames		WRITE setFlagTranslatedNames		NOTIFY flagTranslatedNamesChanged)
+	Q_PROPERTY(bool planetsDisplayed		READ getFlagPlanets			WRITE setFlagPlanets			NOTIFY flagPlanetsDisplayedChanged)
+	Q_PROPERTY(bool flagPlanetsOrbitsOnly		READ getFlagPlanetsOrbitsOnly		WRITE setFlagPlanetsOrbitsOnly		NOTIFY flagPlanetsOrbitsOnlyChanged)
+	Q_PROPERTY(bool flagPermanentOrbits		READ getFlagPermanentOrbits		WRITE setFlagPermanentOrbits		NOTIFY flagPermanentOrbitsChanged)
+	Q_PROPERTY(bool flagIsolatedOrbits		READ getFlagIsolatedOrbits		WRITE setFlagIsolatedOrbits		NOTIFY flagIsolatedOrbitsChanged)
+	Q_PROPERTY(bool flagIsolatedTrails		READ getFlagIsolatedTrails		WRITE setFlagIsolatedTrails		NOTIFY flagIsolatedTrailsChanged)
+	Q_PROPERTY(int numberIsolatedTrails		READ getNumberIsolatedTrails		WRITE setNumberIsolatedTrails		NOTIFY numberIsolatedTrailsChanged)
+	Q_PROPERTY(bool flagLightTravelTime		READ getFlagLightTravelTime		WRITE setFlagLightTravelTime		NOTIFY flagLightTravelTimeChanged)
+	Q_PROPERTY(bool flagUseObjModels		READ getFlagUseObjModels		WRITE setFlagUseObjModels		NOTIFY flagUseObjModelsChanged)
+	Q_PROPERTY(bool flagShowObjSelfShadows		READ getFlagShowObjSelfShadows		WRITE setFlagShowObjSelfShadows		NOTIFY flagShowObjSelfShadowsChanged)
+	Q_PROPERTY(bool flagMoonScale			READ getFlagMoonScale			WRITE setFlagMoonScale			NOTIFY flagMoonScaleChanged)
+	Q_PROPERTY(double moonScale			READ getMoonScale			WRITE setMoonScale			NOTIFY moonScaleChanged)
+	Q_PROPERTY(bool flagMinorBodyScale		READ getFlagMinorBodyScale		WRITE setFlagMinorBodyScale		NOTIFY flagMinorBodyScaleChanged)
+	Q_PROPERTY(double minorBodyScale		READ getMinorBodyScale			WRITE setMinorBodyScale			NOTIFY minorBodyScaleChanged)
+	Q_PROPERTY(bool flagPlanetScale			READ getFlagPlanetScale			WRITE setFlagPlanetScale		NOTIFY flagPlanetScaleChanged)
+	Q_PROPERTY(double planetScale			READ getPlanetScale			WRITE setPlanetScale			NOTIFY planetScaleChanged)
+	Q_PROPERTY(bool flagSunScale			READ getFlagSunScale			WRITE setFlagSunScale			NOTIFY flagSunScaleChanged)
+	Q_PROPERTY(double sunScale			READ getSunScale			WRITE setSunScale			NOTIFY sunScaleChanged)
+	Q_PROPERTY(double labelsAmount			READ getLabelsAmount			WRITE setLabelsAmount			NOTIFY labelsAmountChanged)
+	// Ephemeris-related properties
+	Q_PROPERTY(bool ephemerisMarkersDisplayed	READ getFlagEphemerisMarkers		WRITE setFlagEphemerisMarkers		NOTIFY ephemerisMarkersChanged)
+	Q_PROPERTY(bool ephemerisHorizontalCoordinates	READ getFlagEphemerisHorizontalCoordinates	WRITE setFlagEphemerisHorizontalCoordinates	NOTIFY ephemerisHorizontalCoordinatesChanged)
+	Q_PROPERTY(bool ephemerisDatesDisplayed		READ getFlagEphemerisDates		WRITE setFlagEphemerisDates		NOTIFY ephemerisDatesChanged)
+	Q_PROPERTY(bool ephemerisMagnitudesDisplayed	READ getFlagEphemerisMagnitudes		WRITE setFlagEphemerisMagnitudes	NOTIFY ephemerisMagnitudesChanged)
+	Q_PROPERTY(bool ephemerisLineDisplayed		READ getFlagEphemerisLine		WRITE setFlagEphemerisLine		NOTIFY ephemerisLineChanged)
+	Q_PROPERTY(int ephemerisLineThickness		READ getEphemerisLineThickness		WRITE setEphemerisLineThickness		NOTIFY ephemerisLineThicknessChanged)
+	Q_PROPERTY(bool ephemerisSkippedData		READ getFlagEphemerisSkipData		WRITE setFlagEphemerisSkipData		NOTIFY ephemerisSkipDataChanged)
+	Q_PROPERTY(bool ephemerisSkippedMarkers		READ getFlagEphemerisSkipMarkers	WRITE setFlagEphemerisSkipMarkers	NOTIFY ephemerisSkipMarkersChanged)
+	Q_PROPERTY(int ephemerisDataStep		READ getEphemerisDataStep		WRITE setEphemerisDataStep		NOTIFY ephemerisDataStepChanged)
+	Q_PROPERTY(int ephemerisDataLimit		READ getEphemerisDataLimit		WRITE setEphemerisDataLimit		NOTIFY ephemerisDataLimitChanged)
+	Q_PROPERTY(bool ephemerisSmartDates		READ getFlagEphemerisSmartDates		WRITE setFlagEphemerisSmartDates	NOTIFY ephemerisSmartDatesChanged)
+	Q_PROPERTY(bool ephemerisScaleMarkersDisplayed	READ getFlagEphemerisScaleMarkers	WRITE setFlagEphemerisScaleMarkers	NOTIFY ephemerisScaleMarkersChanged)
+	// Great Red Spot (GRS) properties
+	Q_PROPERTY(bool flagCustomGrsSettings		READ getFlagCustomGrsSettings		WRITE setFlagCustomGrsSettings		NOTIFY flagCustomGrsSettingsChanged)
+	Q_PROPERTY(int customGrsLongitude		READ getCustomGrsLongitude		WRITE setCustomGrsLongitude		NOTIFY customGrsLongitudeChanged)
+	Q_PROPERTY(double customGrsDrift		READ getCustomGrsDrift			WRITE setCustomGrsDrift			NOTIFY customGrsDriftChanged)
+	Q_PROPERTY(double customGrsJD			READ getCustomGrsJD			WRITE setCustomGrsJD			NOTIFY customGrsJDChanged)
+	// Eclipse algorithm properties
+	Q_PROPERTY(bool earthShadowEnlargementDanjon    READ getFlagEarthShadowEnlargementDanjon    WRITE setFlagEarthShadowEnlargementDanjon   NOTIFY earthShadowEnlargementDanjonChanged)
 	// Colors
-	Q_PROPERTY(Vec3f labelsColor
-		   READ getLabelsColor
-		   WRITE setLabelsColor
-		   NOTIFY labelsColorChanged
-		   )
-	Q_PROPERTY(Vec3f trailsColor
-		   READ getTrailsColor
-		   WRITE setTrailsColor
-		   NOTIFY trailsColorChanged
-		   )
-	Q_PROPERTY(Vec3f orbitsColor
-		   READ getOrbitsColor
-		   WRITE setOrbitsColor
-		   NOTIFY orbitsColorChanged
-		   )
-	Q_PROPERTY(Vec3f majorPlanetsOrbitsColor
-		   READ getMajorPlanetsOrbitsColor
-		   WRITE setMajorPlanetsOrbitsColor
-		   NOTIFY majorPlanetsOrbitsColorChanged
-		   )
-	Q_PROPERTY(Vec3f minorPlanetsOrbitsColor
-		   READ getMinorPlanetsOrbitsColor
-		   WRITE setMinorPlanetsOrbitsColor
-		   NOTIFY minorPlanetsOrbitsColorChanged
-		   )
-	Q_PROPERTY(Vec3f dwarfPlanetsOrbitsColor
-		   READ getDwarfPlanetsOrbitsColor
-		   WRITE setDwarfPlanetsOrbitsColor
-		   NOTIFY dwarfPlanetsOrbitsColorChanged
-		   )
-	Q_PROPERTY(Vec3f moonsOrbitsColor
-		   READ getMoonsOrbitsColor
-		   WRITE setMoonsOrbitsColor
-		   NOTIFY moonsOrbitsColorChanged
-		   )
-	Q_PROPERTY(Vec3f cubewanosOrbitsColor
-		   READ getCubewanosOrbitsColor
-		   WRITE setCubewanosOrbitsColor
-		   NOTIFY cubewanosOrbitsColorChanged
-		   )
-	Q_PROPERTY(Vec3f plutinosOrbitsColor
-		   READ getPlutinosOrbitsColor
-		   WRITE setPlutinosOrbitsColor
-		   NOTIFY plutinosOrbitsColorChanged
-		   )
-	Q_PROPERTY(Vec3f scatteredDiskObjectsOrbitsColor
-		   READ getScatteredDiskObjectsOrbitsColor
-		   WRITE setScatteredDiskObjectsOrbitsColor
-		   NOTIFY scatteredDiskObjectsOrbitsColorChanged
-		   )
-	Q_PROPERTY(Vec3f oortCloudObjectsOrbitsColor
-		   READ getOortCloudObjectsOrbitsColor
-		   WRITE setOortCloudObjectsOrbitsColor
-		   NOTIFY oortCloudObjectsOrbitsColorChanged
-		   )
-	Q_PROPERTY(Vec3f cometsOrbitsColor
-		   READ getCometsOrbitsColor
-		   WRITE setCometsOrbitsColor
-		   NOTIFY cometsOrbitsColorChanged
-		   )
-	Q_PROPERTY(Vec3f sednoidsOrbitsColor
-		   READ getSednoidsOrbitsColor
-		   WRITE setSednoidsOrbitsColor
-		   NOTIFY sednoidsOrbitsColorChanged
-		   )
-	Q_PROPERTY(Vec3f interstellarOrbitsColor
-		   READ getInterstellarOrbitsColor
-		   WRITE setInterstellarOrbitsColor
-		   NOTIFY interstellarOrbitsColorChanged
-		   )
-	Q_PROPERTY(Vec3f mercuryOrbitColor
-		   READ getMercuryOrbitColor
-		   WRITE setMercuryOrbitColor
-		   NOTIFY mercuryOrbitColorChanged
-		   )
-	Q_PROPERTY(Vec3f venusOrbitColor
-		   READ getVenusOrbitColor
-		   WRITE setVenusOrbitColor
-		   NOTIFY venusOrbitColorChanged
-		   )
-	Q_PROPERTY(Vec3f earthOrbitColor
-		   READ getEarthOrbitColor
-		   WRITE setEarthOrbitColor
-		   NOTIFY earthOrbitColorChanged
-		   )
-	Q_PROPERTY(Vec3f marsOrbitColor
-		   READ getMarsOrbitColor
-		   WRITE setMarsOrbitColor
-		   NOTIFY marsOrbitColorChanged
-		   )
-	Q_PROPERTY(Vec3f jupiterOrbitColor
-		   READ getJupiterOrbitColor
-		   WRITE setJupiterOrbitColor
-		   NOTIFY jupiterOrbitColorChanged
-		   )
-	Q_PROPERTY(Vec3f saturnOrbitColor
-		   READ getSaturnOrbitColor
-		   WRITE setSaturnOrbitColor
-		   NOTIFY saturnOrbitColorChanged
-		   )
-	Q_PROPERTY(Vec3f uranusOrbitColor
-		   READ getUranusOrbitColor
-		   WRITE setUranusOrbitColor
-		   NOTIFY uranusOrbitColorChanged
-		   )
-	Q_PROPERTY(Vec3f neptuneOrbitColor
-		   READ getNeptuneOrbitColor
-		   WRITE setNeptuneOrbitColor
-		   NOTIFY neptuneOrbitColorChanged
-		   )	
-	Q_PROPERTY(Vec3f ephemerisGenericMarkerColor
-		   READ getEphemerisGenericMarkerColor
-		   WRITE setEphemerisGenericMarkerColor
-		   NOTIFY ephemerisGenericMarkerColorChanged
-		   )
-	Q_PROPERTY(Vec3f ephemerisSelectedMarkerColor
-		   READ getEphemerisSelectedMarkerColor
-		   WRITE setEphemerisSelectedMarkerColor
-		   NOTIFY ephemerisSelectedMarkerColorChanged
-		   )
-	Q_PROPERTY(Vec3f ephemerisMercuryMarkerColor
-		   READ getEphemerisMercuryMarkerColor
-		   WRITE setEphemerisMercuryMarkerColor
-		   NOTIFY ephemerisMercuryMarkerColorChanged
-		   )
-	Q_PROPERTY(Vec3f ephemerisVenusMarkerColor
-		   READ getEphemerisVenusMarkerColor
-		   WRITE setEphemerisVenusMarkerColor
-		   NOTIFY ephemerisVenusMarkerColorChanged
-		   )
-	Q_PROPERTY(Vec3f ephemerisMarsMarkerColor
-		   READ getEphemerisMarsMarkerColor
-		   WRITE setEphemerisMarsMarkerColor
-		   NOTIFY ephemerisMarsMarkerColorChanged
-		   )
-	Q_PROPERTY(Vec3f ephemerisJupiterMarkerColor
-		   READ getEphemerisJupiterMarkerColor
-		   WRITE setEphemerisJupiterMarkerColor
-		   NOTIFY ephemerisJupiterMarkerColorChanged
-		   )
-	Q_PROPERTY(Vec3f ephemerisSaturnMarkerColor
-		   READ getEphemerisSaturnMarkerColor
-		   WRITE setEphemerisSaturnMarkerColor
-		   NOTIFY ephemerisSaturnMarkerColorChanged
-		   )
-
+	Q_PROPERTY(Vec3f labelsColor			READ getLabelsColor			WRITE setLabelsColor			NOTIFY labelsColorChanged)
+	Q_PROPERTY(Vec3f pointerColor			READ getPointerColor			WRITE setPointerColor			NOTIFY pointerColorChanged)
+	Q_PROPERTY(Vec3f trailsColor			READ getTrailsColor			WRITE setTrailsColor			NOTIFY trailsColorChanged)
+	Q_PROPERTY(Vec3f orbitsColor			READ getOrbitsColor			WRITE setOrbitsColor			NOTIFY orbitsColorChanged)
+	Q_PROPERTY(Vec3f majorPlanetsOrbitsColor	READ getMajorPlanetsOrbitsColor		WRITE setMajorPlanetsOrbitsColor	NOTIFY majorPlanetsOrbitsColorChanged)
+	Q_PROPERTY(Vec3f minorPlanetsOrbitsColor	READ getMinorPlanetsOrbitsColor		WRITE setMinorPlanetsOrbitsColor	NOTIFY minorPlanetsOrbitsColorChanged)
+	Q_PROPERTY(Vec3f dwarfPlanetsOrbitsColor	READ getDwarfPlanetsOrbitsColor		WRITE setDwarfPlanetsOrbitsColor	NOTIFY dwarfPlanetsOrbitsColorChanged)
+	Q_PROPERTY(Vec3f moonsOrbitsColor		READ getMoonsOrbitsColor		WRITE setMoonsOrbitsColor		NOTIFY moonsOrbitsColorChanged)
+	Q_PROPERTY(Vec3f cubewanosOrbitsColor		READ getCubewanosOrbitsColor		WRITE setCubewanosOrbitsColor		NOTIFY cubewanosOrbitsColorChanged)
+	Q_PROPERTY(Vec3f plutinosOrbitsColor		READ getPlutinosOrbitsColor		WRITE setPlutinosOrbitsColor		NOTIFY plutinosOrbitsColorChanged)
+	Q_PROPERTY(Vec3f scatteredDiskObjectsOrbitsColor	READ getScatteredDiskObjectsOrbitsColor		WRITE setScatteredDiskObjectsOrbitsColor	NOTIFY scatteredDiskObjectsOrbitsColorChanged)
+	Q_PROPERTY(Vec3f oortCloudObjectsOrbitsColor	READ getOortCloudObjectsOrbitsColor	WRITE setOortCloudObjectsOrbitsColor		NOTIFY oortCloudObjectsOrbitsColorChanged)
+	Q_PROPERTY(Vec3f cometsOrbitsColor		READ getCometsOrbitsColor		WRITE setCometsOrbitsColor		NOTIFY cometsOrbitsColorChanged)
+	Q_PROPERTY(Vec3f sednoidsOrbitsColor		READ getSednoidsOrbitsColor		WRITE setSednoidsOrbitsColor		NOTIFY sednoidsOrbitsColorChanged)
+	Q_PROPERTY(Vec3f interstellarOrbitsColor	READ getInterstellarOrbitsColor		WRITE setInterstellarOrbitsColor	NOTIFY interstellarOrbitsColorChanged)
+	Q_PROPERTY(Vec3f mercuryOrbitColor		READ getMercuryOrbitColor		WRITE setMercuryOrbitColor		NOTIFY mercuryOrbitColorChanged)
+	Q_PROPERTY(Vec3f venusOrbitColor		READ getVenusOrbitColor			WRITE setVenusOrbitColor		NOTIFY venusOrbitColorChanged)
+	Q_PROPERTY(Vec3f earthOrbitColor		READ getEarthOrbitColor			WRITE setEarthOrbitColor		NOTIFY earthOrbitColorChanged)
+	Q_PROPERTY(Vec3f marsOrbitColor			READ getMarsOrbitColor			WRITE setMarsOrbitColor			NOTIFY marsOrbitColorChanged)
+	Q_PROPERTY(Vec3f jupiterOrbitColor		READ getJupiterOrbitColor		WRITE setJupiterOrbitColor		NOTIFY jupiterOrbitColorChanged)
+	Q_PROPERTY(Vec3f saturnOrbitColor		READ getSaturnOrbitColor		WRITE setSaturnOrbitColor		NOTIFY saturnOrbitColorChanged)
+	Q_PROPERTY(Vec3f uranusOrbitColor		READ getUranusOrbitColor		WRITE setUranusOrbitColor		NOTIFY uranusOrbitColorChanged)
+	Q_PROPERTY(Vec3f neptuneOrbitColor		READ getNeptuneOrbitColor		WRITE setNeptuneOrbitColor		NOTIFY neptuneOrbitColorChanged)
+	// Ephemeris-related properties
+	Q_PROPERTY(Vec3f ephemerisGenericMarkerColor	READ getEphemerisGenericMarkerColor	WRITE setEphemerisGenericMarkerColor	NOTIFY ephemerisGenericMarkerColorChanged)
+	Q_PROPERTY(Vec3f ephemerisSecondaryMarkerColor	READ getEphemerisSecondaryMarkerColor	WRITE setEphemerisSecondaryMarkerColor	NOTIFY ephemerisSecondaryMarkerColorChanged)
+	Q_PROPERTY(Vec3f ephemerisSelectedMarkerColor	READ getEphemerisSelectedMarkerColor	WRITE setEphemerisSelectedMarkerColor	NOTIFY ephemerisSelectedMarkerColorChanged)
+	Q_PROPERTY(Vec3f ephemerisMercuryMarkerColor	READ getEphemerisMercuryMarkerColor	WRITE setEphemerisMercuryMarkerColor	NOTIFY ephemerisMercuryMarkerColorChanged)
+	Q_PROPERTY(Vec3f ephemerisVenusMarkerColor	READ getEphemerisVenusMarkerColor	WRITE setEphemerisVenusMarkerColor	NOTIFY ephemerisVenusMarkerColorChanged)
+	Q_PROPERTY(Vec3f ephemerisMarsMarkerColor	READ getEphemerisMarsMarkerColor	WRITE setEphemerisMarsMarkerColor	NOTIFY ephemerisMarsMarkerColorChanged)
+	Q_PROPERTY(Vec3f ephemerisJupiterMarkerColor	READ getEphemerisJupiterMarkerColor	WRITE setEphemerisJupiterMarkerColor	NOTIFY ephemerisJupiterMarkerColorChanged)
+	Q_PROPERTY(Vec3f ephemerisSaturnMarkerColor	READ getEphemerisSaturnMarkerColor	WRITE setEphemerisSaturnMarkerColor	NOTIFY ephemerisSaturnMarkerColorChanged)
 	// Color style
-	Q_PROPERTY(QString orbitColorStyle
-		   READ getOrbitColorStyle
-		   WRITE setOrbitColorStyle
-		   NOTIFY orbitColorStyleChanged
-		   )
-
-	Q_PROPERTY(QString apparentMagnitudeAlgorithmOnEarth
-		   READ getApparentMagnitudeAlgorithmOnEarth
-		   WRITE setApparentMagnitudeAlgorithmOnEarth
-		   NOTIFY apparentMagnitudeAlgorithmOnEarthChanged)
+	Q_PROPERTY(QString orbitColorStyle		READ getOrbitColorStyle			WRITE setOrbitColorStyle		NOTIFY orbitColorStyleChanged)
+	Q_PROPERTY(QString apparentMagnitudeAlgorithmOnEarth	READ getApparentMagnitudeAlgorithmOnEarth	WRITE setApparentMagnitudeAlgorithmOnEarth	NOTIFY apparentMagnitudeAlgorithmOnEarthChanged)
+	Q_PROPERTY(int orbitsThickness			READ getOrbitsThickness			WRITE setOrbitsThickness		NOTIFY orbitsThicknessChanged)
+	Q_PROPERTY(bool flagDrawMoonHalo		READ getFlagDrawMoonHalo		WRITE setFlagDrawMoonHalo		NOTIFY flagDrawMoonHaloChanged)
+	Q_PROPERTY(bool flagDrawSunHalo			READ getFlagDrawSunHalo			WRITE setFlagDrawSunHalo		NOTIFY flagDrawSunHaloChanged)
 
 public:
 	SolarSystem();
@@ -452,6 +216,11 @@ public slots:
 	void setFlagTrails(bool b);
 	//! Get the current value of the flag which determines if planet trails are drawn or hidden.
 	bool getFlagTrails() const;
+
+	//! Set thickness of trails.
+	void setTrailsThickness(int v);
+	//! Get thickness of trail.
+	int getTrailsThickness() const {return trailsThickness;}
 
 	//! Set maximum number of trail points. Too many points may slow down the application. 5000 seems to be a good balance.
 	//! The trails are drawn for a maximum of 365 days and then fade out.
@@ -746,10 +515,10 @@ public slots:
 	//! // example of usage in scripts
 	//! SolarSystem.setTrailsColor(Vec3f(1.0,0.0,0.0));
 	//! @endcode
-	void setTrailsColor(const Vec3f& c) {trailColor=c;}
+	void setTrailsColor(const Vec3f& c) {if (c!=trailsColor) { trailsColor=c; emit trailsColorChanged(c);}}
 	//! Get the current color used to draw planet trails lines.
 	//! @return current color
-	Vec3f getTrailsColor() const {return trailColor;}
+	Vec3f getTrailsColor() const {return trailsColor;}
 
 	//! Set the color used to draw planet pointers.
 	//! @param c The color of the planet pointers
@@ -757,7 +526,7 @@ public slots:
 	//! // example of usage in scripts
 	//! SolarSystem.setPointerColor(Vec3f(1.0,0.0,0.0));
 	//! @endcode
-	void setPointerColor(const Vec3f& c) {pointerColor=c;}
+	void setPointerColor(const Vec3f& c) {if (c!=pointerColor) {pointerColor=c; emit pointerColorChanged(c);}}
 	//! Get the current color used to draw planet pointers.
 	//! @return current color
 	Vec3f getPointerColor() const {return pointerColor;}
@@ -781,6 +550,26 @@ public slots:
 	void setMinorBodyScale(double f);
 	//! Get the display scaling factor for minor bodies.
 	double getMinorBodyScale(void) const {return minorBodyScale;}
+
+	//! Set flag which determines if planets are displayed scaled or not.
+	void setFlagPlanetScale(bool b);
+	//! Get the current value of the flag which determines if planets are displayed scaled or not.
+	bool getFlagPlanetScale(void) const {return flagPlanetScale;}
+
+	//! Set the display scaling factor for planets.
+	void setPlanetScale(double f);
+	//! Get the display scaling factor for planets.
+	double getPlanetScale(void) const {return planetScale;}
+
+	//! Set flag which determines if Sun is scaled or not.
+	void setFlagSunScale(bool b);
+	//! Get the current value of the flag which determines if Sun is scaled or not.
+	bool getFlagSunScale(void) const {return flagSunScale;}
+
+	//! Set the display scaling factor for Sun.
+	void setSunScale(double f);
+	//! Get the display scaling factor for Sun.
+	double getSunScale(void) const {return sunScale;}
 
 	//! Translate names. (public so that SolarSystemEditor can call it).
 	void updateI18n();
@@ -896,6 +685,11 @@ public slots:
 	//! Get initial JD for calculation of position of Great Red Spot
 	double getCustomGrsJD();
 
+	//! Set whether earth shadow should be enlarged following Danjon's method
+	void setFlagEarthShadowEnlargementDanjon(bool b);
+	//! Get whether earth shadow should be enlarged following Danjon's method
+	bool getFlagEarthShadowEnlargementDanjon() const;
+
 	//! Set style of colors of orbits for Solar system bodies
 	void setOrbitColorStyle(QString style);
 	//! Get style of colors of orbits for Solar system bodies
@@ -909,12 +703,28 @@ public slots:
 	void setFlagPermanentOrbits(bool b);
 	bool getFlagPermanentOrbits() const;
 
+	void setOrbitsThickness(int v);
+	int getOrbitsThickness() const;
+
+	void setFlagDrawMoonHalo(bool b);
+	bool getFlagDrawMoonHalo() const;
+
+	void setFlagDrawSunHalo(bool b);
+	bool getFlagDrawSunHalo() const;
+
+	//! Reset and recreate trails
+	void recreateTrails();
+
 signals:
 	void labelsDisplayedChanged(bool b);
 	void nomenclatureDisplayedChanged(bool b);
 	void flagOrbitsChanged(bool b);
 	void flagHintsChanged(bool b);
+	void flagDrawMoonHaloChanged(bool b);
+	void flagDrawSunHaloChanged(bool b);
 	void trailsDisplayedChanged(bool b);
+	void trailsThicknessChanged(int v);
+	void orbitsThicknessChanged(int v);
 	void maxTrailPointsChanged(int max);
 	void flagPointerChanged(bool b);
 	void flagNativePlanetNamesChanged(bool b);
@@ -932,22 +742,31 @@ signals:
 	void moonScaleChanged(double f);
 	void flagMinorBodyScaleChanged(bool b);
 	void minorBodyScaleChanged(double f);
+	void flagPlanetScaleChanged(bool b);
+	void planetScaleChanged(double f);
+	void flagSunScaleChanged(bool b);
+	void sunScaleChanged(double f);
 	void labelsAmountChanged(double f);
 	void ephemerisMarkersChanged(bool b);
 	void ephemerisHorizontalCoordinatesChanged(bool b);
 	void ephemerisDatesChanged(bool b);
 	void ephemerisMagnitudesChanged(bool b);
 	void ephemerisLineChanged(bool b);
+	void ephemerisLineThicknessChanged(int v);
 	void ephemerisSkipDataChanged(bool b);
+	void ephemerisSkipMarkersChanged(bool b);
 	void ephemerisDataStepChanged(int s);
+	void ephemerisDataLimitChanged(int s);
 	void ephemerisSmartDatesChanged(bool b);
 	void ephemerisScaleMarkersChanged(bool b);
 	void flagCustomGrsSettingsChanged(bool b);
 	void customGrsLongitudeChanged(int l);
 	void customGrsDriftChanged(double drift);
 	void customGrsJDChanged(double JD);
+	void earthShadowEnlargementDanjonChanged(bool b);
 
 	void labelsColorChanged(const Vec3f & color) const;
+	void pointerColorChanged(const Vec3f & color) const;
 	void trailsColorChanged(const Vec3f & color) const;
 	void orbitsColorChanged(const Vec3f & color) const;
 	void nomenclatureColorChanged(const Vec3f & color) const;
@@ -971,6 +790,7 @@ signals:
 	void uranusOrbitColorChanged(const Vec3f & color) const;
 	void neptuneOrbitColorChanged(const Vec3f & color) const;
 	void ephemerisGenericMarkerColorChanged(const Vec3f & color) const;
+	void ephemerisSecondaryMarkerColorChanged(const Vec3f & color) const;
 	void ephemerisSelectedMarkerColorChanged(const Vec3f & color) const;
 	void ephemerisMercuryMarkerColorChanged(const Vec3f & color) const;
 	void ephemerisVenusMarkerColorChanged(const Vec3f & color) const;
@@ -1025,6 +845,14 @@ public:
 	//! In the unlikely event of multiple objects in front of the sun, only the largest will be reported.
 	QPair<double, PlanetP> getEclipseFactor(const StelCore *core) const;
 
+	//! Retrieve Radius of Umbra and Penumbra at the distance of the Moon.
+	//! Returns a pair (umbra, penumbra) in (geocentric_arcseconds, AU, geometric_AU).
+	//! * sizes in arcseconds are the usual result found as Bessel element in eclipse literature.
+	//!   It includes scaling for effects of atmosphere either after Chauvenet (2%) or after Danjon. (see Espenak: 5000 Years Canon of Lunar Eclipses.)
+	//! * sizes in AU are the same, converted back to AU in Lunar distance.
+	//! * sizes in geometric_AU derived from pure geometrical evaluations without scalings applied.
+	QPair<Vec3d,Vec3d> getEarthShadowRadiiAtLunarDistance() const;
+
 	//! Compute the position and transform matrix for every element of the solar system.
 	//! @param dateJDE the Julian Day in JDE (Ephemeris Time or equivalent)	
 	//! @param observerPlanet planet of the observer (Required for light travel time or aberration computation).
@@ -1052,35 +880,71 @@ private slots:
 	//! Called following StelMainView::reloadShadersRequested
 	void reloadShaders();
 
+	//! Set flag which enabled the showing of ephemeris markers or not
 	void setFlagEphemerisMarkers(bool b);
+	//! Get the current value of the flag which enabled the showing of ephemeris markers or not
 	bool getFlagEphemerisMarkers() const;
 
+	//! Set flag which enabled the showing of ephemeris line between markers or not
 	void setFlagEphemerisLine(bool b);
+	//! Get the current value of the flag which enabled the showing of ephemeris line between markers or not
 	bool getFlagEphemerisLine() const;
 
+	//! Set the thickness of ephemeris line
+	void setEphemerisLineThickness(int v);
+	//! Get the thickness of ephemeris line
+	int getEphemerisLineThickness() const;
+
+	//! Set flag which enabled the showing of ephemeris markers in horizontal coordinates or not
 	void setFlagEphemerisHorizontalCoordinates(bool b);
+	//! Get the current value of the flag which enabled the showing of ephemeris markers in horizontal coordinates or not
 	bool getFlagEphemerisHorizontalCoordinates() const;
 
+	//! Set flag which enable the showing the date near ephemeris markers or not
 	void setFlagEphemerisDates(bool b);
+	//! Get the current value of the flag which enable the showing the date near ephemeris markers or not
 	bool getFlagEphemerisDates() const;
 
+	//! Set flag which enable the showing the magnitude near ephemeris markers or not
 	void setFlagEphemerisMagnitudes(bool b);
+	//! Get the current value of the flag which enable the showing the magnitude near ephemeris markers or not
 	bool getFlagEphemerisMagnitudes() const;
 
+	//! Set flag which allow skipping dates near ephemeris markers
 	void setFlagEphemerisSkipData(bool b);
+	//! Get the current value of the flag which allow skipping dates near ephemeris markers
 	bool getFlagEphemerisSkipData() const;
 
+	//! Set flag which allow skipping the ephemeris markers without dates
+	void setFlagEphemerisSkipMarkers(bool b);
+	//! Get the current value of the flag which allow skipping the ephemeris markers without dates
+	bool getFlagEphemerisSkipMarkers() const;
+
+	//! Set flag which allow using smart format for dates near ephemeris markers
 	void setFlagEphemerisSmartDates(bool b);
+	//! Get the current value of the flag which allow using smart format for dates near ephemeris markers
 	bool getFlagEphemerisSmartDates() const;
 
+	//! Set flag which allow scaling the ephemeris markers
 	void setFlagEphemerisScaleMarkers(bool b);
+	//! Get the current value of the flag which allow scaling the ephemeris markers
 	bool getFlagEphemerisScaleMarkers() const;
 
+	//! Set the step of skip for date of ephemeris markers (and markers if it enabled)
 	void setEphemerisDataStep(int step);
+	//! Get the step of skip for date of ephemeris markers
 	int getEphemerisDataStep() const;
+
+	//! Set the limit for data: we computed ephemeris for 1, 2 or 5 celestial bodies
+	void setEphemerisDataLimit(int limit);
+	//! Get the limit of the data (how many celestial bodies was in computing of ephemeris)
+	int getEphemerisDataLimit() const;
 
 	void setEphemerisGenericMarkerColor(const Vec3f& c);
 	Vec3f getEphemerisGenericMarkerColor(void) const;
+
+	void setEphemerisSecondaryMarkerColor(const Vec3f& c);
+	Vec3f getEphemerisSecondaryMarkerColor(void) const;
 
 	void setEphemerisSelectedMarkerColor(const Vec3f& c);
 	Vec3f getEphemerisSelectedMarkerColor(void) const;
@@ -1103,9 +967,8 @@ private slots:
 	//! Called when a new Hips survey has been loaded by the hips mgr.
 	void onNewSurvey(HipsSurveyP survey);
 
+	//! Taking the JD dates for each ephemeride and preparation the human readable dates according to the settings for dates
 	void fillEphemerisDates();
-	//! Reset and recreate trails
-	void recreateTrails();
 
 private:
 	//! Search for SolarSystem objects which are close to the position given
@@ -1145,6 +1008,8 @@ private:
 
 	//! Used to count how many planets actually need shadow information
 	int shadowPlanetCount;
+	//! Used to track whether earth shadow enlargement shall be computed after Danjon (1951)
+	bool earthShadowEnlargementDanjon;
 	PlanetP sun;
 	PlanetP moon;
 	PlanetP earth;
@@ -1160,12 +1025,16 @@ private:
 	PlanetP selected;
 	std::vector<PlanetP> selectedSSO; // More than one can be selected at a time
 
+	// Allow enlargements of the planets. May be useful to highlight the planets in in overview plots
 	// Separate Moon and minor body scale values. The latter make sense to zoom up and observe irregularly formed 3D objects like minor moons of the outer planets.
-	// TBD: It may be wise to remove the sphereScale value from the Planet class: that is only used by the Moon.
 	bool flagMoonScale;
 	double moonScale;
 	bool flagMinorBodyScale;
 	double minorBodyScale;
+	bool flagPlanetScale;
+	double planetScale;
+	bool flagSunScale;
+	double sunScale;
 
 	QFont planetNameFont;
 
@@ -1186,6 +1055,7 @@ private:
 	//! The selection pointer texture.
 	StelTextureSP texPointer;
 	StelTextureSP texEphemerisMarker;
+	StelTextureSP texEphemerisCometMarker;
 
 	bool flagShow;
 	bool flagPointer;                           // show red cross selection pointer?
@@ -1194,6 +1064,7 @@ private:
 	bool flagIsolatedTrails;
 	int numberIsolatedTrails;
 	int maxTrailPoints;                         // limit trails to a manageable size.
+	int trailsThickness;
 	bool flagIsolatedOrbits;
 	bool flagPlanetsOrbitsOnly;
 	bool ephemerisMarkersDisplayed;
@@ -1201,11 +1072,15 @@ private:
 	bool ephemerisMagnitudesDisplayed;
 	bool ephemerisHorizontalCoordinates;
 	bool ephemerisLineDisplayed;
+	int ephemerisLineThickness;
 	bool ephemerisSkipDataDisplayed;
-	int ephemerisDataStep;
+	bool ephemerisSkipMarkersDisplayed;
+	int ephemerisDataStep;				// How many days skip for dates near ephemeris markers (and the markers if it enabled)
+	int ephemerisDataLimit;				// Number of celestial bodies in ephemeris data (how many celestial bodies was in computing of ephemeris)
 	bool ephemerisSmartDatesDisplayed;
 	bool ephemerisScaleMarkersDisplayed;
 	Vec3f ephemerisGenericMarkerColor;
+	Vec3f ephemerisSecondaryMarkerColor;
 	Vec3f ephemerisSelectedMarkerColor;
 	Vec3f ephemerisMercuryMarkerColor;
 	Vec3f ephemerisVenusMarkerColor;
@@ -1216,7 +1091,7 @@ private:
 	class TrailGroup* allTrails;
 	QSettings* conf;
 	LinearFader trailFader;
-	Vec3f trailColor;
+	Vec3f trailsColor;
 	Vec3f pointerColor;
 
 	QHash<QString, QString> planetNativeNamesMap;

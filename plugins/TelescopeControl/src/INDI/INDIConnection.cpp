@@ -102,12 +102,13 @@ void INDIConnection::syncPosition(INDIConnection::Coordinates coords)
 		return;
 	}
 
+	ISwitch *track = IUFindSwitch(switchVector, "TRACK");
+	ISwitch *slew = IUFindSwitch(switchVector, "SLEW");
 	ISwitch *sync = IUFindSwitch(switchVector, "SYNC");
-	if (sync->s == ISS_OFF)
-	{
-		sync->s = ISS_ON;
-		sendNewSwitch(switchVector);
-	}
+	track->s = ISS_OFF;
+	slew->s = ISS_OFF;
+	sync->s = ISS_ON;
+	sendNewSwitch(switchVector);
 
 	INumberVectorProperty *property = Q_NULLPTR;
 	property = mTelescope->getNumber("EQUATORIAL_EOD_COORD");
@@ -122,11 +123,10 @@ void INDIConnection::syncPosition(INDIConnection::Coordinates coords)
 	sendNewNumber(property);
 
 	// And now unset SYNC switch member to revert to default state/behavior
-	if (sync->s == ISS_ON)
-	{
-		sync->s = ISS_OFF;
-		sendNewSwitch(switchVector);
-	}
+	track->s = ISS_ON;
+	slew->s = ISS_OFF;
+	sync->s = ISS_OFF;
+	sendNewSwitch(switchVector);
 }
 
 bool INDIConnection::isDeviceConnected() const

@@ -394,6 +394,10 @@ void Logger::print(const char *devicename, const unsigned int verbosityLevel, co
                    //const std::string& message,
                    const char *message, ...)
 {
+    // 0 is ignored
+    if (verbosityLevel == 0)
+        return;
+
     INDI_UNUSED(file);
     INDI_UNUSED(line);
     bool filelog   = (verbosityLevel & fileVerbosityLevel_) != 0;

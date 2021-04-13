@@ -233,14 +233,20 @@ void SupernovaeDialog::updateCompleteReceiver(void)
 	ui->lastUpdateDateTimeEdit->setDateTime(sn->getLastUpdate());
 	QTimer *timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
+	setAboutHtml();
 }
 
 void SupernovaeDialog::restoreDefaults(void)
 {
-	qDebug() << "[Supernovae] restore defaults";
-	sn->restoreDefaults();
-	sn->readSettingsFromConfig();
-	updateGuiFromSettings();
+	if (askConfirmation())
+	{
+		qDebug() << "[Supernovae] restore defaults...";
+		sn->restoreDefaults();
+		sn->readSettingsFromConfig();
+		updateGuiFromSettings();
+	}
+	else
+		qDebug() << "[Supernovae] restore defaults is canceled...";
 }
 
 void SupernovaeDialog::updateGuiFromSettings(void)

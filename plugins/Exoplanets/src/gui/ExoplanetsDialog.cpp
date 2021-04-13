@@ -49,6 +49,9 @@ ExoplanetsDialog::ExoplanetsDialog()
 	, updateTimer(Q_NULLPTR)
 {
         ui = new Ui_exoplanetsDialog;
+	exoplanetsHeader.clear();
+	objectMgr = GETSTELMODULE(StelObjectMgr);
+	mvMgr = GETSTELMODULE(StelMovementMgr);
 }
 
 ExoplanetsDialog::~ExoplanetsDialog()
@@ -73,6 +76,7 @@ void ExoplanetsDialog::retranslate()
 		setWebsitesHtml();
 		populateDiagramsList();
 		populateTemperatureScales();
+		fillExoplanetsTable();
 	}
 }
 
@@ -139,6 +143,9 @@ void ExoplanetsDialog::createDialogContent()
 	ui->temperatureScaleComboBox->setCurrentIndex(idx);
 	connect(ui->temperatureScaleComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setTemperatureScale(int)));
 
+	// Table tab
+	connect(ui->exoplanetsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentExoplanet(QModelIndex)));
+
 	// About & Info tabs
 	setAboutHtml();
 	setInfoHtml();
@@ -151,7 +158,110 @@ void ExoplanetsDialog::createDialogContent()
 	}
 
 	populateDiagramsList();	
+	fillExoplanetsTable();
 	updateGuiFromSettings();
+}
+
+void ExoplanetsDialog::setColumnNames()
+{
+	exoplanetsHeader.clear();
+	exoplanetsHeader << q_("Exoplanet");
+	exoplanetsHeader << QString("%1, M%2").arg(q_("Mass")).arg(QChar(0x2643));
+	exoplanetsHeader << QString("%1, R%2").arg(q_("Radius")).arg(QChar(0x2643));
+	exoplanetsHeader << QString("%1, %2").arg(q_("Period"),qc_("day","time period"));
+	exoplanetsHeader << QString("a, %1").arg(qc_("AU", "distance, astronomical unit"));
+	exoplanetsHeader << QString("e");
+	exoplanetsHeader << QString("i, %1").arg(QChar(0x00B0));
+	// TRANSLATORS: angular distance
+	exoplanetsHeader << QString("%1, \"").arg(q_("Ang. dist."));
+	// TRANSLATORS: magnitude
+	exoplanetsHeader << q_("Mag.");
+	exoplanetsHeader << QString("%1, R%2").arg(q_("Radius")).arg(QChar(0x2609));
+	// TRANSLATORS: detection method
+	exoplanetsHeader << q_("D. M.");
+	ui->exoplanetsTreeWidget->setHeaderLabels(exoplanetsHeader);
+
+	// adjust the column width
+	for (int i = 0; i < EPSCount; ++i)
+	{
+		ui->exoplanetsTreeWidget->resizeColumnToContents(i);
+	}
+}
+
+void ExoplanetsDialog::fillExoplanetsTable()
+{
+	ui->exoplanetsTreeWidget->clear();
+	ui->exoplanetsTreeWidget->setColumnCount(EPSCount);
+	setColumnNames();
+	ui->exoplanetsTreeWidget->header()->setSectionsMovable(false);
+	ui->exoplanetsTreeWidget->header()->setDefaultAlignment(Qt::AlignHCenter);
+
+	const QString dash = QChar(0x2014);
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+	for (auto epsystem : ep->getAllExoplanetarySystems())
+	{
+		QVariantMap map = epsystem->getMap();
+		float vmag = map["Vmag"].toFloat();
+		float sr = map["sradius"].toFloat();
+		QString sradius = sr>0.f ? QString::number(sr, 'f', 5) : dash;
+		for (auto eps : map["exoplanets"].toList())
+		{
+			auto epdata = eps.toMap();
+			QString dm = epdata.contains("detectionMethod") ? epdata["detectionMethod"].toString().trimmed() : dash;
+			EPSTreeWidgetItem* treeItem = new EPSTreeWidgetItem(ui->exoplanetsTreeWidget);
+			treeItem->setText(EPSExoplanetName, QString("%1 %2").arg(trans.qtranslate(map["designation"].toString().trimmed())).arg(epdata["planetName"].toString()).trimmed());
+			treeItem->setData(EPSExoplanetName, Qt::UserRole, map["designation"].toString());
+			if (epdata.contains("planetProperName")) {
+				treeItem->setToolTip(EPSExoplanetName, trans.qtranslate(epdata["planetProperName"].toString().trimmed()));
+			}
+			treeItem->setText(EPSExoplanetMass, epdata.contains("mass") ? QString::number(epdata["mass"].toFloat(), 'f', 2) : dash);
+			treeItem->setToolTip(EPSExoplanetMass,  q_("Mass of exoplanet in Jovian masses"));
+			treeItem->setTextAlignment(EPSExoplanetMass,  Qt::AlignRight);
+			treeItem->setText(EPSExoplanetRadius, epdata.contains("radius") ? QString::number(epdata["radius"].toFloat(), 'f', 2) : dash);
+			treeItem->setToolTip(EPSExoplanetRadius,  q_("Radius of exoplanet in Jovian radii"));
+			treeItem->setTextAlignment(EPSExoplanetRadius,  Qt::AlignRight);
+			treeItem->setText(EPSExoplanetPeriod, epdata.contains("period") ? QString::number(epdata["period"].toFloat(), 'f', 2) : dash);
+			treeItem->setToolTip(EPSExoplanetPeriod,  q_("Orbital period of exoplanet in days"));
+			treeItem->setTextAlignment(EPSExoplanetPeriod,  Qt::AlignRight);
+			treeItem->setText(EPSExoplanetSemiAxes, epdata.contains("semiAxis") ? QString::number(epdata["semiAxis"].toFloat(), 'f', 4) : dash);
+			treeItem->setToolTip(EPSExoplanetSemiAxes,  q_("Semi-major axis of orbit in astronomical units"));
+			treeItem->setTextAlignment(EPSExoplanetSemiAxes,  Qt::AlignRight);
+			treeItem->setText(EPSExoplanetEccentricity, epdata.contains("eccentricity") ? QString::number(epdata["eccentricity"].toFloat(), 'f', 3) : dash);
+			treeItem->setToolTip(EPSExoplanetEccentricity,  q_("Eccentricity of orbit"));
+			treeItem->setTextAlignment(EPSExoplanetEccentricity,  Qt::AlignRight);
+			treeItem->setText(EPSExoplanetInclination, epdata.contains("inclination") ? QString::number(epdata["inclination"].toFloat(), 'f', 1) : dash);
+			treeItem->setToolTip(EPSExoplanetInclination,  q_("Inclination of orbit in degrees"));
+			treeItem->setTextAlignment(EPSExoplanetInclination,  Qt::AlignRight);
+			treeItem->setText(EPSExoplanetAngleDistance, epdata.contains("angleDistance") ? QString::number(epdata["angleDistance"].toFloat(), 'f', 6) : dash);
+			treeItem->setToolTip(EPSExoplanetAngleDistance,  q_("Angular distance from host star in arcseconds"));
+			treeItem->setTextAlignment(EPSExoplanetAngleDistance,  Qt::AlignRight);
+			treeItem->setText(EPSStarMagnitude, vmag < 98.f ? QString::number(vmag, 'f', 2) : dash);
+			treeItem->setTextAlignment(EPSStarMagnitude,  Qt::AlignRight);
+			treeItem->setText(EPSStarRadius, sradius);
+			treeItem->setToolTip(EPSStarRadius,  q_("Radius of star in solar radii"));
+			treeItem->setTextAlignment(EPSStarRadius,  Qt::AlignRight);
+			treeItem->setText(EPSExoplanetDetectionMethod, q_(dm));
+			treeItem->setToolTip(EPSExoplanetDetectionMethod,  q_("Detection method of exoplanet"));
+		}
+	}
+}
+
+void ExoplanetsDialog::selectCurrentExoplanet(const QModelIndex& modelIndex)
+{
+	// Enable display exoplanets if it is not
+	if (!ep->getFlagShowExoplanets())
+		ep->setFlagShowExoplanets(true);
+	// Find the object
+	QString name = modelIndex.sibling(modelIndex.row(), EPSExoplanetName).data(Qt::UserRole).toString();
+	if (objectMgr->findAndSelectI18n(name) || objectMgr->findAndSelect(name))
+	{
+		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
+		if (!newSelected.empty())
+		{
+			mvMgr->moveToObject(newSelected[0], mvMgr->getAutoMoveDuration());
+			mvMgr->setFlagTracking(true);
+		}
+	}
 }
 
 void ExoplanetsDialog::setAboutHtml(void)
@@ -187,6 +297,8 @@ void ExoplanetsDialog::setAboutHtml(void)
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
 	}
 	ui->aboutTextBrowser->setHtml(html);
+	// TRANSLATORS: duration
+	ui->updateFrequencySpinBox->setSuffix(qc_(" h","time unit"));
 }
 
 void ExoplanetsDialog::setInfoHtml(void)
@@ -211,6 +323,12 @@ void ExoplanetsDialog::setInfoHtml(void)
 	html += QString("<p><b><a href='http://phl.upr.edu/projects/earth-similarity-index-esi'>%1</a></b> &mdash; %2</p>")
 			.arg(q_("Earth Similarity Index (ESI)"))
 			.arg(q_("Similarity to Earth on a scale from 0 to 1, with 1 being the most Earth-like. ESI depends on the planet's radius, density, escape velocity, and surface temperature."));
+	html += QString("<p><b>%1</b> &mdash; %2</p>")
+			.arg(q_("Conservative Sample"))
+			.arg(q_("Planets in the habitable zone with a radius less 1.5 Earth radii or a minimum mass less 5 Earth masses. These are the best candidates for planets that might be rocky and support surface liquid water. They are also known as warm terrans."));
+	html += QString("<p><b>%1</b> &mdash; %2</p>")
+			.arg(q_("Optimistic Sample"))
+			.arg(q_("Planets in the habitable zone with a radius between 1.5 to 2.5 Earth radii or between 5 to 10 Earth masses. These are planets that are less likely to be rocky or support surface liquid water. Some might be mini-Neptunes instead. They are also known as warm superterrans."));
 	html += "<h2>" + q_("Proper names") + "</h2>";
 	html += "<p>" + q_("In December 2015 and in December 2019, the International Astronomical Union (IAU) has officially approved names for several exoplanets after a public vote.") + "</p><ul>";
 	html += QString("<li><strong>%1</strong><sup>*</sup> (%2) &mdash; %3<sup>1</sup></li>").arg(trans.qtranslate("Veritate"), "14 And", q_("From the latin <em>Veritas</em>, truth. The ablative form means <em>where there is truth</em>."));
@@ -284,7 +402,7 @@ void ExoplanetsDialog::setInfoHtml(void)
 	html += QString("<li><strong>%1</strong> (%2) &mdash; %3</li>").arg(trans.qtranslate("Tapecue"), "HD 63765", q_("Tapecue means eternal path in Guarani and represents the Milky Way through which the first inhabitants of the Earth arrived and could return."));
 	html += QString("<li><strong>%1</strong> (%2) &mdash; %3</li>").arg(trans.qtranslate("Yvaga"), "HD 63765 b", q_("Yvaga means paradise for the Guarani and the Milky Way was known as the road to Yvaga or paradise."));
 	html += QString("<li><strong>%1</strong> (%2) &mdash; %3</li>").arg(trans.qtranslate("Bosona"), "HD 206610", q_("Bosona is the name given to the territory of Bosnia in the 10th century. Later, the name was transformed to Bosnia originating from the name of the Bosna river."));
-	html += QString("<li><strong>%1</strong> (%2) &mdash; %3</li>").arg(trans.qtranslate("Naron"), "HD 206610 b", q_("Naron is one of the names given to the Neretva river in Herzegovina (and partly in Croatia) in antiquity orginating with the Celts who called it Nera Etwa which means the Flowing Divinity."));
+	html += QString("<li><strong>%1</strong> (%2) &mdash; %3</li>").arg(trans.qtranslate("Naron"), "HD 206610 b", q_("Naron is one of the names given to the Neretva river in Herzegovina (and partly in Croatia) in antiquity originating with the Celts who called it Nera Etwa which means the Flowing Divinity."));
 	html += QString("<li><strong>%1</strong> (%2) &mdash; %3</li>").arg(trans.qtranslate("Tupi"), "HD 23079", q_("Tupi is the name of the most populous Indigenous People living on the eastern coast of South America, before the Portuguese arrived in the 16th century."));
 	html += QString("<li><strong>%1</strong> (%2) &mdash; %3</li>").arg(trans.qtranslate("Guarani"), "HD 23079 b", q_("Guarani is the name of the most populous Indigenous people living in South Brazil and parts of Argentina, Paraguay and Uruguay."));
 	html += QString("<li><strong>%1</strong> (%2) &mdash; %3</li>").arg(trans.qtranslate("Gumala"), "HD 179949", q_("Gumala is a Malay word, which means a magic bezoar stone found in snakes, dragons, etc."));
@@ -449,7 +567,7 @@ void ExoplanetsDialog::setInfoHtml(void)
 	html += QString("<li><strong>%1</strong> (%2) &mdash; %3</li>").arg(trans.qtranslate("Krotoa"), "WASP-62 b", q_("Krotoa is considered the Mother of Africa and member of the indigenous Khoi people, who was a community builder and educator during colonial times."));
 	html += QString("<li><strong>%1</strong> (%2) &mdash; %3</li>").arg(trans.qtranslate("Baekdu"), "8 Umi", q_("Baekdu is the highest mountain on the Korean peninsula, situated in North Korea, and symbolises the national spirit of Korea."));
 	html += QString("<li><strong>%1</strong> (%2) &mdash; %3</li>").arg(trans.qtranslate("Halla"), "8 Umi b", q_("Halla is the highest mountain in South Korea and is regarded as a sacred place in the region."));
-	html += QString("<li><strong>%1</strong> (%2) &mdash; %3</li>").arg(trans.qtranslate("Rosalíadecastro"), "HD 149143", q_("Rosalía de Castro was a significant figure of Galician culture and prominent Spanish writer, whose pioneeting work often referenced the night and celestial objects."));
+	html += QString("<li><strong>%1</strong> (%2) &mdash; %3</li>").arg(trans.qtranslate("Rosalíadecastro"), "HD 149143", q_("Rosalía de Castro was a significant figure of Galician culture and prominent Spanish writer, whose pioneering work often referenced the night and celestial objects."));
 	html += QString("<li><strong>%1</strong> (%2) &mdash; %3</li>").arg(trans.qtranslate("Riosar"), "HD 149143 b", q_("Rio Sar is the name of a river that was present in much of the literary work of the pioneering Spanish author Rosalía de Castro."));
 	html += QString("<li><strong>%1</strong> (%2) &mdash; %3</li>").arg(trans.qtranslate("Sāmaya"), "HD 205739", q_("Sāmaya means peace in the Sinhalese language."));
 	html += QString("<li><strong>%1</strong> (%2) &mdash; %3</li>").arg(trans.qtranslate("Samagiya"), "HD 205739 b", q_("Samagiya means togetherness and unity in the Sinhalese language."));
@@ -644,14 +762,21 @@ void ExoplanetsDialog::updateCompleteReceiver(void)
 	ui->lastUpdateDateTimeEdit->setDateTime(ep->getLastUpdate());
 	QTimer *timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
+	setAboutHtml();	
+	fillExoplanetsTable();
 }
 
 void ExoplanetsDialog::restoreDefaults(void)
 {
-	qDebug() << "[Exoplanets] Restore defaults...";
-	ep->restoreDefaults();
-	ep->loadConfiguration();
-	updateGuiFromSettings();
+	if (askConfirmation())
+	{
+		qDebug() << "[Exoplanets] restore defaults...";
+		ep->restoreDefaults();
+		ep->loadConfiguration();
+		updateGuiFromSettings();
+	}
+	else
+		qDebug() << "[Exoplanets] restore defaults is canceled...";
 }
 
 void ExoplanetsDialog::updateGuiFromSettings(void)
@@ -769,7 +894,7 @@ void ExoplanetsDialog::populateDiagramsList()
 	{ q_("Planetary Mass, Mjup"),          2},
 	{ q_("Planetary Radius, Rjup"),        3},
 	{ q_("Orbital Period, days"),          4},
-	{ q_("Angular Distance, arcsec"),      5},
+	{ q_("Angular Distance, arc-sec"),      5},
 	{ q_("Effective temperature of host star, K"), 6},
 	{ q_("Year of Discovery"),             7},
 	{ q_("Metallicity of host star"),      8},

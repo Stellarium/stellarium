@@ -50,17 +50,14 @@ class BookmarksDialog : public StelDialog
 
 public:
 	BookmarksDialog(QObject* parent);
-	virtual ~BookmarksDialog();
-
-	//! Notify that the application style changed
-	void styleChanged();
+	virtual ~BookmarksDialog() Q_DECL_OVERRIDE;
 
 public slots:
-        void retranslate();
+	void retranslate() Q_DECL_OVERRIDE;
 
 protected:
         //! Initialize the dialog widgets and connect the signals/slots.
-        virtual void createDialogContent();
+	virtual void createDialogContent() Q_DECL_OVERRIDE;
 	Ui_bookmarksDialogForm *ui;
 
 private slots:
