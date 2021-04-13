@@ -1005,18 +1005,20 @@ void ConfigurationDialog::saveAllSettings()
 	// DO NOT SAVE CURRENT LANDSCAPE ID! There is a dedicated button in the landscape tab of the View dialog.
 	//conf->setValue("init_location/landscape_name",                     propMgr->getStelPropertyValue("LandscapeMgr.currentLandscapeID").toString());
 	conf->setValue("landscape/flag_landscape_sets_location",	propMgr->getStelPropertyValue("LandscapeMgr.flagLandscapeSetsLocation").toBool());
-	conf->setValue("landscape/flag_landscape",				propMgr->getStelPropertyValue("LandscapeMgr.landscapeDisplayed").toBool());
-	conf->setValue("landscape/flag_atmosphere",				propMgr->getStelPropertyValue("LandscapeMgr.atmosphereDisplayed").toBool());
-	conf->setValue("landscape/flag_fog",					propMgr->getStelPropertyValue("LandscapeMgr.fogDisplayed").toBool());
+	conf->setValue("landscape/flag_landscape",			propMgr->getStelPropertyValue("LandscapeMgr.landscapeDisplayed").toBool());
+	conf->setValue("landscape/flag_atmosphere",			propMgr->getStelPropertyValue("LandscapeMgr.atmosphereDisplayed").toBool());
+	conf->setValue("landscape/flag_fog",				propMgr->getStelPropertyValue("LandscapeMgr.fogDisplayed").toBool());
 	conf->setValue("landscape/flag_enable_illumination_layer",	propMgr->getStelPropertyValue("LandscapeMgr.illuminationDisplayed").toBool());
 	conf->setValue("landscape/flag_enable_labels",			propMgr->getStelPropertyValue("LandscapeMgr.labelsDisplayed").toBool());
 	conf->setValue("landscape/flag_minimal_brightness",		propMgr->getStelPropertyValue("LandscapeMgr.flagLandscapeUseMinimalBrightness").toBool());
 	conf->setValue("landscape/flag_landscape_sets_minimal_brightness", propMgr->getStelPropertyValue("LandscapeMgr.flagLandscapeSetsMinimalBrightness").toBool());
 	conf->setValue("landscape/minimal_brightness",			propMgr->getStelPropertyValue("LandscapeMgr.defaultMinimalBrightness").toFloat());
-	conf->setValue("stars/init_bortle_scale",					propMgr->getStelPropertyValue("StelSkyDrawer.bortleScaleIndex").toInt());
+	conf->setValue("landscape/flag_polyline_only",			propMgr->getStelPropertyValue("LandscapeMgr.flagPolyLineDisplayedOnly").toBool());
+	conf->setValue("landscape/polyline_thickness",			propMgr->getStelPropertyValue("LandscapeMgr.polyLineThickness").toInt());
+	conf->setValue("stars/init_bortle_scale",			propMgr->getStelPropertyValue("StelSkyDrawer.bortleScaleIndex").toInt());
 	conf->setValue("landscape/atmospheric_extinction_coefficient",	propMgr->getStelPropertyValue("StelSkyDrawer.extinctionCoefficient").toFloat());
-	conf->setValue("landscape/pressure_mbar",				propMgr->getStelPropertyValue("StelSkyDrawer.atmospherePressure").toFloat());
-	conf->setValue("landscape/temperature_C",				propMgr->getStelPropertyValue("StelSkyDrawer.atmosphereTemperature").toFloat());
+	conf->setValue("landscape/pressure_mbar",			propMgr->getStelPropertyValue("StelSkyDrawer.atmospherePressure").toFloat());
+	conf->setValue("landscape/temperature_C",			propMgr->getStelPropertyValue("StelSkyDrawer.atmosphereTemperature").toFloat());
 
 	// view dialog / starlore tab
 	QObject* scmgr = reinterpret_cast<QObject*>(&StelApp::getInstance().getSkyCultureMgr());
