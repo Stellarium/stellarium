@@ -58,7 +58,6 @@
 #include "ViewDialog.hpp"
 #include "ShortcutsDialog.hpp"
 #include "AstroCalcDialog.hpp"
-///#include "BookmarksDialog.hpp"
 #include "ObsListDialog.hpp"
 
 #include <QDebug>
