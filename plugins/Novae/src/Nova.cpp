@@ -147,7 +147,12 @@ QString Nova::getInfoString(const StelCore* core, const InfoStringGroup& flags) 
 		oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), q_("nova"), novaType) << "<br />";
 
 	if (flags&Magnitude)
-		oss << getMagnitudeInfoString(core, flags, 2);
+	{
+		double az_app, alt_app;
+		StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
+		Q_UNUSED(az_app)
+		oss << getMagnitudeInfoString(core, flags, alt_app, 2);
+	}
 
 	// Ra/Dec etc.
 	oss << getCommonInfoString(core, flags);
@@ -324,19 +329,13 @@ void Nova::draw(StelCore* core, StelPainter* painter)
 
 	if (mag <= mlimit)
 	{
-		const Vec3f color(1.f);
-		Vec3f vf(XYZ.toVec3f());
-		Vec3f altAz(vf);
-		altAz.normalize();
-		core->j2000ToAltAzInPlaceNoRefraction(&altAz);
+		Vec3f color(1.f);
 		RCMag rcMag;
 		sd->computeRCMag(mag, &rcMag);
 		sd->preDrawPointSource(painter);
-		// allow height-dependent twinkle and suppress twinkling in higher altitudes. Keep 0.1 twinkle amount in zenith.
-		sd->drawPointSource(painter, vf, rcMag, color, true, qMin(1.0f, 1.0f-0.9f*altAz[2]));
-		sd->postDrawPointSource(painter);
+		sd->drawPointSource(painter, XYZ.toVec3f(), rcMag, color, false);
 		painter->setColor(color, 1.f);
-		float size = getAngularSize(Q_NULLPTR)*M_PI_180f*painter->getProjector()->getPixelPerRadAtCenter();
+		float size = getAngularSize(Q_NULLPTR)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
 		float shift = 6.f + size/1.8f;
 		StarMgr* smgr = GETSTELMODULE(StarMgr); // It's need for checking displaying of labels for stars
 		if (labelsFader.getInterstate()<=0.f && (mag+5.f)<mlimit && smgr->getFlagLabels())
@@ -345,4 +344,6 @@ void Nova::draw(StelCore* core, StelPainter* painter)
 			painter->drawText(XYZ, name, 0, shift, shift, false);
 		}
 	}
+
+	sd->postDrawPointSource(painter);
 }

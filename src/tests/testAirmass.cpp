@@ -55,11 +55,10 @@ void TestAirmass::testRozenbergEquation()
 	refCls.setPressure(pressure);
 	refCls.setTemperature(temperature);
 
-	QVariantList d = data;
-	while(d.count() >= 2)
+	while(data.count() >= 2)
 	{
-		double z = d.takeFirst().toDouble();
-		double M = d.takeFirst().toDouble();
+		double z = data.takeFirst().toDouble();
+		double M = data.takeFirst().toDouble();
 		double Mc = extCls.airmass(std::cos(z * M_PI/180.), true);
 		double actualError = qAbs(Mc - M);
 		QVERIFY2(actualError <= acceptableError, QString("z=%1deg M=%2\" M(expected)=%3\" error=%4 acceptable=%5")
@@ -80,15 +79,12 @@ void TestAirmass::testYoungEquation()
 	refCls.setPressure(pressure);
 	refCls.setTemperature(temperature);
 
-	QVariantList d = data;
-	while(d.count() >= 2)
+	while(data.count() >= 2)
 	{
-		double z = d.takeFirst().toDouble();
-		double M = d.takeFirst().toDouble();
+		double z = data.takeFirst().toDouble();
+		double M = data.takeFirst().toDouble();
 		double Mc = extCls.airmass(std::cos(z * M_PI/180.), false);
 		double actualError = qAbs(Mc - M);
-		// Error for z=80deg is 0.059; Is it normal?
-		if (z>70.) acceptableError = 0.06;
 		QVERIFY2(actualError <= acceptableError, QString("z=%1deg M=%2\" M(expected)=%3\" error=%4 acceptable=%5")
 							.arg(QString::number(z, 'f', 2))
 							.arg(QString::number(Mc, 'f', 2))

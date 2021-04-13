@@ -238,15 +238,10 @@ void SupernovaeDialog::updateCompleteReceiver(void)
 
 void SupernovaeDialog::restoreDefaults(void)
 {
-	if (askConfirmation())
-	{
-		qDebug() << "[Supernovae] restore defaults...";
-		sn->restoreDefaults();
-		sn->readSettingsFromConfig();
-		updateGuiFromSettings();
-	}
-	else
-		qDebug() << "[Supernovae] restore defaults is canceled...";
+	qDebug() << "[Supernovae] restore defaults";
+	sn->restoreDefaults();
+	sn->readSettingsFromConfig();
+	updateGuiFromSettings();
 }
 
 void SupernovaeDialog::updateGuiFromSettings(void)

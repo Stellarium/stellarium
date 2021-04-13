@@ -33,13 +33,13 @@ class Scenery3dDialog : public StelDialog
 	Q_OBJECT
 public:
 	Scenery3dDialog(QObject* parent = Q_NULLPTR);
-	virtual ~Scenery3dDialog() Q_DECL_OVERRIDE;
+	~Scenery3dDialog();
 
 public slots:
-	virtual void retranslate() Q_DECL_OVERRIDE;
+	void retranslate();
 
 protected:
-	virtual void createDialogContent() Q_DECL_OVERRIDE;
+	void createDialogContent();
 
 private slots:
 	void on_comboBoxShadowFiltering_currentIndexChanged(int index);

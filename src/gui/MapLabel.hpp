@@ -31,7 +31,7 @@ class MapLabel : public QLabel
 
 public:
 	MapLabel(QWidget *parent = Q_NULLPTR);
-	~MapLabel() Q_DECL_OVERRIDE;
+	~MapLabel();
 	//! Set the current cursor position
 	//! @param longitude longitude in degree in range [-180;180[
 	//! @param latitude latitude in degree in range [-90;90]
@@ -45,8 +45,8 @@ signals:
 	void positionChanged(double longitude, double latitude);
 
 protected:
-	void mousePressEvent(QMouseEvent * event) Q_DECL_OVERRIDE;
-	void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
+	void mousePressEvent(QMouseEvent * event) override;
+	void resizeEvent(QResizeEvent *event) override;
 
 private:
 	//QLabel* cursor;

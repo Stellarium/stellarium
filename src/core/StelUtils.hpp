@@ -36,8 +36,6 @@
 #define PARSEC 30.857e12
 // speed of light (km/sec)
 #define SPEED_OF_LIGHT 299792.458
-// Ecliptic obliquity of J2000.0, degrees
-#define EPS_0 23.4392803055555555555556
 
 // Add a few frequently used extra math-type literals
 #ifndef M_PI_180
@@ -323,62 +321,26 @@ namespace StelUtils
 			     -std::log(-z + std::sqrt(z*z+1)));
 	}
 
-	//! Integer modulo where the result is always nonnegative. [0..b-1]
+	//! Integer modulo where the result is always positive.
 	inline int imod(const int a, const int b){
 		int ret = a % b;
 		if(ret < 0)
 			ret+=b;
 		return ret;
 	}
-	//! Integer modulo where the result is always positive. [1..b]
-	inline int amod(const int a, const int b){
-		int ret = a % b;
-		if(ret <= 0)
-			ret+=b;
-		return ret;
-	}
-	//! Double modulo where the result is always nonnegative. [0..(b
+	//! Double modulo where the result is always positive.
 	inline double fmodpos(const double a, const double b){
 		double ret = fmod(a, b);
 		if(ret < 0)
 			ret+=b;
 		return ret;
 	}
-	//! Float modulo where the result is always nonnegative. [0..(b
+	//! Float modulo where the result is always positive.
 	inline float fmodpos(const float a, const float b){
 		float ret = fmodf(a, b);
 		if(ret < 0)
 			ret+=b;
 		return ret;
-	}
-
-	//! Floor integer division provides truncating to the next lower integer, also for negative numerators.
-	//! https://stackoverflow.com/questions/2622441/c-integer-floor-function
-	//! @returns floor(num/den)
-	inline long intFloorDiv (long num, long den)
-	{
-	  if (0 < (num^den)) // lgtm [cpp/bitwise-sign-check]
-	    return num/den;
-	  else
-	    {
-	      ldiv_t res = ldiv(num,den);
-	      return (res.rem)? res.quot-1
-			      : res.quot;
-	    }
-	}
-
-	//! version of intFloorDiv() for large integers.
-	inline long intFloorDivLL(long long num, long long den)
-	{
-	  if (0 < (num^den)) // lgtm [cpp/bitwise-sign-check]
-	    return static_cast<long>(num/den);
-	  else
-	    {
-	      lldiv_t res = lldiv(num,den);
-	      long long ret=  (res.rem)? res.quot-1
-			      : res.quot;
-	      return static_cast<long>(ret);
-	    }
 	}
 
 	///////////////////////////////////////////////////
@@ -416,7 +378,7 @@ namespace StelUtils
 	//! @return number of day: 0 - sunday, 1 - monday,..
 	int getDayOfWeek(int year, int month, int day);
 	inline int getDayOfWeek(double JD){ double d= fmod(JD+1.5, 7); if (d<0) d+=7.0;
-		return std::lround(floor(d));
+		return static_cast<int>(floor(d));
 	}
 
 	//! Get the current Julian Date from system time.
@@ -501,9 +463,6 @@ namespace StelUtils
 
 	//! Convert a hms formatted string to decimal hours
 	double hmsStrToHours(const QString& s);
-
-	//! Convert days (float) to a time string
-	QString daysFloatToDHMS(float days);
 
 	//! Get Delta-T estimation for a given date.
 	//! This is just an "empty" correction function, returning 0.
@@ -859,12 +818,6 @@ namespace StelUtils
 	//! @param b second number
 	//! @return Greatest Common Divisor
 	int gcd(int a, int b);
-
-	//! Least Common Multiple
-	//! @param a first number
-	//! @param b second number
-	//! @return Least Common Multiple
-	int lcm(int a, int b);
 
 	//! Given regularly spaced steps x1, x2, x3 and curve values y1, y2, y3,
 	//! calculate an intermediate value of the 3 arguments for the given interpolation point n.

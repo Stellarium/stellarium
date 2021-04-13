@@ -234,15 +234,10 @@ void NovaeDialog::updateCompleteReceiver(void)
 
 void NovaeDialog::restoreDefaults(void)
 {
-	if (askConfirmation())
-	{
-		qDebug() << "[Novae] restore defaults...";
-		nova->restoreDefaults();
-		nova->readSettingsFromConfig();
-		updateGuiFromSettings();
-	}
-	else
-		qDebug() << "[Novae] restore defaults is canceled...";
+	qDebug() << "[Novae] restore defaults";
+	nova->restoreDefaults();
+	nova->readSettingsFromConfig();
+	updateGuiFromSettings();
 }
 
 void NovaeDialog::updateGuiFromSettings(void)

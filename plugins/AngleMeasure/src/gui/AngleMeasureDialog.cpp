@@ -48,6 +48,8 @@ void AngleMeasureDialog::retranslate()
 
 void AngleMeasureDialog::createDialogContent()
 {
+	AngleMeasure* am = GETSTELMODULE(AngleMeasure);
+
 	ui->setupUi(dialog);
 
 	// Kinetic scrolling
@@ -72,20 +74,9 @@ void AngleMeasureDialog::createDialogContent()
 	connectColorButton(ui->horizontalLineColorToolButton, "AngleMeasure.horizontalLineColor", "AngleMeasure/line_color_horizontal");
 	connectColorButton(ui->horizontalTextColorToolButton, "AngleMeasure.horizontalTextColor", "AngleMeasure/text_color_horizontal");
 
-	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
+	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), am, SLOT(restoreDefaultSettings()));
 
 	setAboutHtml();
-}
-
-void AngleMeasureDialog::restoreDefaults()
-{
-	if (askConfirmation())
-	{
-		qDebug() << "[AngleMeasure] restore defaults...";
-		GETSTELMODULE(AngleMeasure)->restoreDefaultSettings();
-	}
-	else
-		qDebug() << "[AngleMeasure] restore defaults is canceled...";
 }
 
 void AngleMeasureDialog::setAboutHtml(void)

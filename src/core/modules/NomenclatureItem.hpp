@@ -150,13 +150,8 @@ public:
 	bool getFlagHideLocalNomenclature() const { return hideLocalNomenclature; }
 	//QString getEnglishPlanetName(void) const {return planet->getEnglishName();}
 	PlanetP getPlanet(void) const { return planet;}
-	//! get latitude [degrees]
 	float getLatitude(void) const {return latitude;}
-	//! get longitude [degrees]
 	float getLongitude(void) const {return longitude;}
-	//! return solar altitude in degrees (Meeus, Astr.Alg.1998 53.3)
-	double getSolarAltitude(const StelCore *core) const;
-
 protected:
 	//! returns a type enum for a given 2-letter code
 	static NomenclatureItemType getNomenclatureItemType(const QString abbrev);
@@ -180,7 +175,7 @@ private:
 	int identificator;
 	QString englishName, context, nameI18n;
 	NomenclatureItemType nType;       // Type of nomenclature item
-	float latitude, longitude, size;  // degrees, degrees, km
+	float latitude, longitude, size;
 
 	LinearFader labelsFader;
 };

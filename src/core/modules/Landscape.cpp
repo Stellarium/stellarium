@@ -143,7 +143,8 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 		createPolygonalHorizon(
 					StelFileMgr::findFile("landscapes/" + landscapeId + "/" + landscapeIni.value("landscape/polygonal_horizon_list").toString()),
 					landscapeIni.value("landscape/polygonal_angle_rotatez", 0.f).toFloat(),
-					landscapeIni.value("landscape/polygonal_horizon_list_mode", "azDeg_altDeg").toString()
+					landscapeIni.value("landscape/polygonal_horizon_list_mode", "azDeg_altDeg").toString(),
+					landscapeIni.value("landscape/polygonal_horizon_inverted", "false").toBool()
 					);
 		// This line can then be drawn in all classes with the color specified here. If not specified, don't draw it! (flagged by negative red)
 		horizonPolygonLineColor=Vec3f(landscapeIni.value("landscape/horizon_line_color", "-1,0,0" ).toString());
@@ -155,7 +156,7 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 	loadLabels(landscapeId);
 }
 
-void Landscape::createPolygonalHorizon(const QString& lineFileName, const float polyAngleRotateZ, const QString &listMode)
+void Landscape::createPolygonalHorizon(const QString& lineFileName, const float polyAngleRotateZ, const QString &listMode , const bool polygonInverted)
 {
 	// qDebug() << _name << " " << _fullpath << " " << _lineFileName ;
 
@@ -226,8 +227,16 @@ void Landscape::createPolygonalHorizon(const QString& lineFileName, const float 
 		}
 
 		StelUtils::spheToRect(az, alt, point);
-		if (horiPoints.isEmpty() || horiPoints.last() != point)
-			horiPoints.append(point);
+		if (polygonInverted)
+		{
+			if (horiPoints.at(0) != point)
+				horiPoints.prepend(point);
+		}
+		else
+		{
+			if (horiPoints.last() != point)
+				horiPoints.append(point);
+		}
 	}
 	file.close();
 	//horiPoints.append(horiPoints.at(0)); // close loop? Apparently not necessary.
@@ -236,19 +245,14 @@ void Landscape::createPolygonalHorizon(const QString& lineFileName, const float 
 	//for (int i=0; i<horiPoints.count(); ++i)
 	//	qDebug() << horiPoints.at(i)[0] << "/" << horiPoints.at(i)[1] << "/" << horiPoints.at(i)[2] ;
 	AllSkySphericalRegion allskyRegion;
-	SphericalPolygon aboveHorizonPolygon(horiPoints);
+	SphericalPolygon aboveHorizonPolygon;
+	aboveHorizonPolygon.setContour(horiPoints);
 	horizonPolygon = allskyRegion.getSubtraction(aboveHorizonPolygon);
-
-	// If this now contains the zenith, invert the solution:
-	if (horizonPolygon->contains(Vec3d(0.,0.,1.)))
+	if (polygonInverted)
 	{
-		//qDebug() << "Must invert polygon vector!";
-		std::reverse(horiPoints.begin(), horiPoints.end());
-		AllSkySphericalRegion allskyRegion;
-		SphericalPolygon aboveHorizonPolygon(horiPoints);
-		horizonPolygon = allskyRegion.getSubtraction(aboveHorizonPolygon);
 		AllSkySphericalRegion allskyRegion2;
 		horizonPolygon = allskyRegion2.getSubtraction(horizonPolygon);
+		//horizonPolygon=&aboveHorizonPolygon;
 	}
 }
 
@@ -565,10 +569,9 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	const float sa = std::sin(alpha);
 	float y0 = static_cast<float>(radius);
 	float x0 = 0.0f;
-	unsigned short int limit;
 
 	LOSSide precompSide;
-	precompSide.arr.primitiveType=StelVertexArray::Triangles;	
+	precompSide.arr.primitiveType=StelVertexArray::Triangles;
 	for (unsigned int n=0;n<nbDecorRepeat;n++)
 	{
 		for (unsigned int i=0;i<nbSide;i++)
@@ -589,7 +592,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 
 			float tx0 = sides[ti].texCoords[0];
 			const float d_tx = (sides[ti].texCoords[2]-sides[ti].texCoords[0]) / slices_per_side;
-			const float d_ty = (sides[ti].texCoords[3]-sides[ti].texCoords[1]) / stacks;			
+			const float d_ty = (sides[ti].texCoords[3]-sides[ti].texCoords[1]) / stacks;
 			for (unsigned short int j=0;j<slices_per_side;j++)
 			{
 				const float y1 = y0*ca - x0*sa;
@@ -597,8 +600,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 				const float tx1 = tx0 + d_tx;
 				float z = z0;
 				float ty0 = sides[ti].texCoords[1];
-				limit = static_cast<unsigned short int>(stacks*2u);
-				for (unsigned short int k=0u;k<=limit;k+=2u)
+				for (unsigned short int k=0u;k<=static_cast<unsigned short int>(stacks*2u);k+=2u)
 				{
 					precompSide.arr.texCoords << Vec2f(tx0, ty0) << Vec2f(tx1, ty0);
 					if (calibrated && !tanMode)
@@ -615,8 +617,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 					ty0 += d_ty;
 				}
 				unsigned short int offset = j*(stacks+1u)*2u;
-				limit = static_cast<unsigned short int>(stacks*2u+2u);
-				for (unsigned short int k = 2;k<limit;k+=2u)
+				for (unsigned short int k = 2;k<static_cast<unsigned short int>(stacks*2u+2u);k+=2u)
 				{
 					precompSide.arr.indices << offset+k-2 << offset+k-1 << offset+k;
 					precompSide.arr.indices << offset+k   << offset+k-1 << offset+k+1;

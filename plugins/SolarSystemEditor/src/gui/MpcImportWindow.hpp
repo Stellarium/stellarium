@@ -85,8 +85,6 @@ private slots:
 	void markAll();
 	//! Unmarks (unchecks) all items in the results lists
 	void unmarkAll();
-
-	//! process the marked items
 	void addObjects();
 	void discardObjects();
 
@@ -109,8 +107,7 @@ private:
 	QList<SsoElements> readElementsFromFile(ImportType type, QString filePath);
 
 	void populateBookmarksList();
-
-	//! Load list dialog with acquired objects and separate existing from new objects
+	//void populateCandidateObjects();
 	void populateCandidateObjects(QList<SsoElements>);
 	void enableInterface(bool enable);
 

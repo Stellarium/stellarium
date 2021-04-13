@@ -252,13 +252,13 @@ void KeplerOrbit::positionAtTimevInVSOP87Coordinates(double JDE, double *v)
 double KeplerOrbit::calculateSiderealPeriod(const double semiMajorAxis, const double centralMass)
 {
 	// Solution for non-Solar central mass (Moons:) we need to take central mass (in Solar units) into account. Tested with comparison of preconfigured Moon data.
-	return (semiMajorAxis <=0 ? 0. : (2.*M_PI/GAUSS_GRAV_k)*sqrt(semiMajorAxis*semiMajorAxis*semiMajorAxis/centralMass));
+	return (semiMajorAxis >0 ? (2.*M_PI/GAUSS_GRAV_k)*sqrt(semiMajorAxis*semiMajorAxis*semiMajorAxis/centralMass) : std::numeric_limits<double>::max() );
 }
 
 double KeplerOrbit::calculateSiderealPeriod() const
 {
 	if (e>=1.)
-		return 0.;
+		return std::numeric_limits<double>::max();
 	const double a = q/(1.0-e); // semimajor axis
 	return calculateSiderealPeriod(a, centralMass);
 }

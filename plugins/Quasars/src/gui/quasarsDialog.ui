@@ -193,9 +193,6 @@
               <property name="frame">
                <bool>false</bool>
               </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
               <property name="buttonSymbols">
                <enum>QAbstractSpinBox::NoButtons</enum>
               </property>
@@ -210,9 +207,6 @@
             </item>
             <item row="1" column="2">
              <widget class="QSpinBox" name="updateFrequencySpinBox">
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
               <property name="minimum">
                <number>1</number>
               </property>
@@ -356,22 +350,6 @@
             <string>Restore defaults</string>
            </property>
           </widget>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer_2">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
          </item>
          <item>
           <widget class="QPushButton" name="saveSettingsButton">

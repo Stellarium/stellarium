@@ -64,14 +64,10 @@ class NavStars : public StelModule
 {
 	Q_OBJECT
 	Q_ENUMS(NavigationalStarsSet)
-	Q_PROPERTY(bool navStarsVisible		READ getNavStarsMarks		WRITE setNavStarsMarks		NOTIFY navStarsMarksChanged)
-	Q_PROPERTY(bool displayAtStartup	READ getEnableAtStartup		WRITE setEnableAtStartup	NOTIFY enableAtStartupChanged)
-	Q_PROPERTY(bool highlightWhenVisible	READ getHighlightWhenVisible	WRITE setHighlightWhenVisible   NOTIFY highlightWhenVisibleChanged)
-	Q_PROPERTY(bool limitInfoToNavStars	READ getLimitInfoToNavStars	WRITE setLimitInfoToNavStars	NOTIFY limitInfoToNavStarsChanged)
-	Q_PROPERTY(bool upperLimb		READ getUpperLimb		WRITE setUpperLimb		NOTIFY upperLimbChanged)
-	Q_PROPERTY(bool tabulatedDisplay	READ getTabulatedDisplay	WRITE setTabulatedDisplay	NOTIFY tabulatedDisplayChanged)
-	Q_PROPERTY(bool showExtraDecimals	READ getShowExtraDecimals	WRITE setShowExtraDecimals	NOTIFY showExtraDecimalsChanged)
-	Q_PROPERTY(bool useUTCTime		READ getFlagUseUTCTime		WRITE setFlagUseUTCTime		NOTIFY flagUseUTCTimeChanged)
+	Q_PROPERTY(bool navStarsVisible
+		   READ getNavStarsMarks
+		   WRITE setNavStarsMarks
+		   NOTIFY navStarsMarksChanged)
 public:	
 	//! @enum NavigationalStarsSet
 	//! Available sets of navigational stars
@@ -117,26 +113,20 @@ public slots:
 	//! Get flag of displaying markers of the navigational stars
 	bool getNavStarsMarks(void) const;
 
-	void setEnableAtStartup(bool b);
+	void setEnableAtStartup(bool b) { enableAtStartup=b; }
 	bool getEnableAtStartup(void) const { return enableAtStartup; }
 
-	void setHighlightWhenVisible(bool b);
+	void setHighlightWhenVisible(bool b) { highlightWhenVisible=b; }
 	bool getHighlightWhenVisible(void) const { return highlightWhenVisible; }
 
-	void setLimitInfoToNavStars(bool b);
+	void setLimitInfoToNavStars(bool b) { limitInfoToNavStars=b; }
 	bool getLimitInfoToNavStars(void) const { return limitInfoToNavStars; }
 
-	void setUpperLimb(bool b);
+	void setUpperLimb(bool b) { upperLimb=b; }
 	bool getUpperLimb(void) const { return upperLimb; }
 
-	void setTabulatedDisplay(bool b);
+	void setTabulatedDisplay(bool b) { tabulatedDisplay=b; }
 	bool getTabulatedDisplay(void) const { return tabulatedDisplay; }
-
-	void setShowExtraDecimals(bool b);
-	bool getShowExtraDecimals(void) const { return NavStarsCalculator::useExtraDecimals; }
-
-	void setFlagUseUTCTime(bool b);
-	bool getFlagUseUTCTime(void) const { return useUTCTime; }
 
 	//! Set the set of navigational stars
 	void setCurrentNavigationalStarsSet(NavigationalStarsSet nsset)
@@ -163,7 +153,7 @@ public slots:
 
 	//! For the currently select object add the extraString info
 	//! in a format that matches the Nautical Almanac.
-	void extraInfo(StelCore* core, const StelObjectP& selectedObject);
+	void extraInfo(StelCore* core, const StelObjectP& selectedObject, bool withTables);
 
 	//! Used to display the extraInfoStrings in standard "paired" lines (for example gha/dev)
 	void displayStandardInfo(const StelObjectP& selectedObject, NavStarsCalculator& calc, const QString& extraText);
@@ -183,19 +173,11 @@ public slots:
 
 private slots:
 	//! Call when button "Save settings" in main GUI are pressed
-	void saveSettings() { saveConfiguration(); }
-	void setUseDecimalDegrees(bool flag);
+	void 	saveSettings() { saveConfiguration(); }
 
 signals:
 	//! Emitted when display of markers have been changed.
 	void navStarsMarksChanged(bool b);
-	void enableAtStartupChanged(bool b);
-	void highlightWhenVisibleChanged(bool b);
-	void limitInfoToNavStarsChanged(bool b);
-	void upperLimbChanged(bool b);
-	void tabulatedDisplayChanged(bool b);
-	void showExtraDecimalsChanged(bool b);
-	void flagUseUTCTimeChanged(bool b);
 
 private:
 	NavStarsWindow* mainWindow;
@@ -205,15 +187,14 @@ private:
 	// The current set of navigational stars
 	NavigationalStarsSet currentNSSet;
 
+	bool withTables;
 	bool enableAtStartup;
 	bool starLabelsState;
 	bool upperLimb;
 	bool highlightWhenVisible;
 	bool limitInfoToNavStars;
 	bool tabulatedDisplay;
-	bool useUTCTime;
 
-	QString timeZone;
 	QVector<QString> permittedObjects;
 
 	//! List of the navigational stars' HIP numbers.

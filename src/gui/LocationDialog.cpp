@@ -31,7 +31,6 @@
 #include "StelLocaleMgr.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
-#include "StelSkyCultureMgr.hpp"
 
 #include <QSettings>
 #include <QDebug>
@@ -89,20 +88,18 @@ void LocationDialog::createDialogContent()
 	ui->mapLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
 	ui->mapLabel->setScaledContents(false);
 
-	StelApp *app = &StelApp::getInstance();
-	connect(app, SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(app, SIGNAL(flagShowDecimalDegreesChanged(bool)), this, SLOT(setDisplayFormatForSpins(bool)));
-	connect(&app->getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(populatePlanetList(QString)));
-	// Init the SpinBox entries	
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	// Init the SpinBox entries
+	ui->longitudeSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 	ui->longitudeSpinBox->setPrefixType(AngleSpinBox::Longitude);
 	ui->longitudeSpinBox->setMinimum(-180.0, true);
 	ui->longitudeSpinBox->setMaximum( 180.0, true);
-	ui->longitudeSpinBox->setWrapping(true);	
+	ui->longitudeSpinBox->setWrapping(true);
+	ui->latitudeSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 	ui->latitudeSpinBox->setPrefixType(AngleSpinBox::Latitude);
 	ui->latitudeSpinBox->setMinimum(-90.0, true);
 	ui->latitudeSpinBox->setMaximum( 90.0, true);
 	ui->latitudeSpinBox->setWrapping(false);
-	setDisplayFormatForSpins(app->getFlagShowDecimalDegrees());
 
 	//initialize list model
 	allModel = new QStringListModel(this);
@@ -192,21 +189,6 @@ void LocationDialog::createDialogContent()
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateFromProgram(StelLocation)));
 
 	ui->citySearchLineEdit->setFocus();
-}
-
-void LocationDialog::setDisplayFormatForSpins(bool flagDecimalDegrees)
-{
-	int places = 2;
-	AngleSpinBox::DisplayFormat format = AngleSpinBox::DMSSymbols;
-	if (flagDecimalDegrees)
-	{
-		places = 6;
-		format = AngleSpinBox::DecimalDeg;
-	}
-	ui->longitudeSpinBox->setDecimals(places);
-	ui->longitudeSpinBox->setDisplayFormat(format);
-	ui->latitudeSpinBox->setDecimals(places);
-	ui->latitudeSpinBox->setDisplayFormat(format);
 }
 
 void LocationDialog::handleDialogSizeChanged(QSizeF size)
@@ -709,8 +691,9 @@ void LocationDialog::addCurrentLocationToList()
 	{
 		if (model->index(i,0).data()==id)
 		{
+			//FIXME: scroll caused artifcats in the GUI for long lists. WTF????
+			//ui->citiesListView->scrollTo(model->index(i,0));
 			ui->citiesListView->selectionModel()->select(model->index(i,0), QItemSelectionModel::ClearAndSelect|QItemSelectionModel::Rows);
-			ui->citiesListView->scrollTo(model->index(i,0));
 			setLocationFromList(model->index(i,0));
 			disconnectEditSignals();
 			ui->citySearchLineEdit->setFocus();

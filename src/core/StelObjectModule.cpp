@@ -32,36 +32,39 @@ StelObjectModule::~StelObjectModule()
 bool StelObjectModule::matchObjectName(const QString& objName, const QString& objPrefix, bool useStartOfWords) const
 {
 	if (useStartOfWords)
+	{
 		return objName.startsWith(objPrefix, Qt::CaseInsensitive);
+	}
 	else
+	{
 		return objName.contains(objPrefix, Qt::CaseInsensitive);
+	}
 }
 
-QStringList StelObjectModule::listMatchingObjects(const QString &objPrefix, int maxNbItem, bool useStartOfWords) const
+QStringList StelObjectModule::listMatchingObjects(const QString &objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
 {
 	QStringList result;
 	if (maxNbItem <= 0)
+	{
 		return result;
+	}
 
-	QStringList names;
-	names << listAllObjects(false) << listAllObjects(true);
-	QString fullMatch = "";
-	for (const auto& name : qAsConst(names))
+	QStringList names = listAllObjects(inEnglish);
+	for (const auto& name : names)
 	{
 		if (!matchObjectName(name, objPrefix, useStartOfWords))
+		{
 			continue;
+		}
 
-		if (name==objPrefix)
-			fullMatch = name;
-		else
-			result.append(name);
+		result.append(name);
 		if (result.size() >= maxNbItem)
+		{
 			break;
+		}
 	}
 
 	result.sort();
-	if (!fullMatch.isEmpty())
-		result.prepend(fullMatch);
 	return result;
 }
 

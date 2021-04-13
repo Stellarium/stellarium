@@ -71,7 +71,7 @@ HipsSurvey::HipsSurvey(const QString& url_, double releaseDate_):
 	url(url_),
 	releaseDate(releaseDate_),
 	planetarySurvey(false),
-	tiles(1000 * 512 * 512), // Cache max cost in pixels (enough for 1000 512x512 tiles).
+	tiles(1000),
 	nbVisibleTiles(0),
 	nbLoadedTiles(0)
 {
@@ -98,7 +98,7 @@ HipsSurvey::HipsSurvey(const QString& url_, double releaseDate_):
 			releaseDate = StelUtils::qDateTimeToJd(date);
 		}
 		if (properties.contains("hips_frame"))
-			hipsFrame = properties["hips_frame"].toString().toLower();
+			hipsFrame = properties["hips_frame"].toString();
 
 		QStringList DSSSurveys;
 		DSSSurveys << "equatorial" << "galactic" << "ecliptic"; // HiPS frames for DSS surveys
@@ -282,8 +282,7 @@ HipsTile* HipsSurvey::getTile(int order, int pix)
 			QImage image = allsky.copy(x, y, s, s);
 			tile->allsky = texMgr.createTexture(image, StelTexture::StelTextureParams(true));
 		}
-		int tileWidth = getPropertyInt("hips_tile_width", 512);
-		tiles.insert(uid, tile, tileWidth * tileWidth);
+		tiles.insert(uid, tile);
 	}
 	return tile;
 }
@@ -429,7 +428,7 @@ skip_render:
 		}
 	}
 	// Restore the painter color.
-	sPainter->setColor(color);
+	sPainter->setColor(color[0], color[1], color[2], color[3]);
 }
 
 int HipsSurvey::fillArrays(int order, int pix, int drawOrder, int splitOrder,
@@ -486,8 +485,6 @@ QList<HipsSurveyP> HipsSurvey::parseHipslist(const QString& data)
 		QString key = line.section("=", 0, 0).trimmed();
 		QString value = line.section("=", 1, -1).trimmed();
 		if (key == "hips_service_url") url = value;
-		// special case: https://github.com/Stellarium/stellarium/issues/1276
-		if (url.contains("data.stellarium.org/surveys/dss")) continue;
 		if (key == "hips_release_date")
 		{
 			// XXX: StelUtils::getJulianDayFromISO8601String does not work

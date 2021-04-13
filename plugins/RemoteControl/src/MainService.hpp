@@ -96,9 +96,7 @@ private:
 	StelMovementMgr* mvmgr;
 	StelObjectMgr* objMgr;
 	StelPropertyMgr* propMgr;
-#ifdef ENABLE_SCRIPTING
 	StelScriptMgr* scriptMgr;
-#endif
 	StelSkyCultureMgr* skyCulMgr;
 
 	double moveX,moveY;

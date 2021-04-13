@@ -26,7 +26,7 @@
 #include "CLIProcessor.hpp"
 #include "StelIniParser.hpp"
 #include "StelUtils.hpp"
-#ifdef ENABLE_SCRIPTING
+#ifndef DISABLE_SCRIPTING
 #include "StelScriptOutput.hpp"
 #endif
 
@@ -131,17 +131,8 @@ void clearCache()
 // Main stellarium procedure
 int main(int argc, char **argv)
 {
-	Q_INIT_RESOURCE(mainRes);
-	Q_INIT_RESOURCE(guiRes);
-
-	// Log command line arguments.
-	QString argStr;
-	QStringList argList;
-	for (int i=0; i<argc; ++i)
-	{
-		argList << argv[i];
-		argStr += QString("%1 ").arg(argv[i]);
-	}
+    Q_INIT_RESOURCE(mainRes);
+    Q_INIT_RESOURCE(guiRes);
 
 #ifdef Q_OS_WIN
 	// Fix for the speeding system clock bug on systems that use ACPI
@@ -166,9 +157,9 @@ int main(int argc, char **argv)
 
 	// Support high DPI pixmaps and fonts
 	QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
+	#if (QT_VERSION>=QT_VERSION_CHECK(5, 6, 0))
 	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
-	if (argList.contains("--scale-gui")) // Variable QT_SCALE_FACTOR should be defined before app will be created!
-		qputenv("QT_SCALE_FACTOR", CLIProcessor::argsGetOptionWithArg(argList, "", "--scale-gui", "").toString().toLatin1());
+	#endif
 
 	#if defined(Q_OS_MAC)
 	QFileInfo appInfo(QString::fromUtf8(argv[0]));
@@ -204,6 +195,14 @@ int main(int argc, char **argv)
 
 	SplashScreen::present();
 
+	// Log command line arguments.
+	QString argStr;
+	QStringList argList;
+	for (int i=0; i<argc; ++i)
+	{
+		argList << argv[i];
+		argStr += QString("%1 ").arg(argv[i]);
+	}
 	// add contents of STEL_OPTS environment variable.
 	QString envStelOpts(qgetenv("STEL_OPTS").constData());
 	if (envStelOpts.length()>0)
@@ -337,7 +336,7 @@ int main(int argc, char **argv)
 	Q_ASSERT(confSettings);
 	qDebug() << "Config file is: " << QDir::toNativeSeparators(configFileFullPath);
 
-	#ifdef ENABLE_SCRIPTING
+	#ifndef DISABLE_SCRIPTING
 	QString outputFile = StelFileMgr::getUserDir()+"/output.txt";
 	if (confSettings->value("main/use_separate_output_file", false).toBool())
 		outputFile = StelFileMgr::getUserDir()+"/output-"+QDateTime::currentDateTime().toString("yyyyMMdd-HHmmss")+".txt";

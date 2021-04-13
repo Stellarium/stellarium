@@ -165,17 +165,17 @@ float NomenclatureItem::getSelectPriority(const StelCore* core) const
 QString NomenclatureItem::getNameI18n() const
 {
 	if (nType==niCrater)
-		return QString("%1 (%2, %3)").arg(nameI18n, getNomenclatureTypeString(nType), getPlanet()->getNameI18n());
+		return QString("%1 (%2)").arg(nameI18n, getNomenclatureTypeString(nType));
 	else
-		return QString("%1 (%2)").arg(nameI18n, getPlanet()->getNameI18n());
+		return nameI18n;
 }
 
 QString NomenclatureItem::getEnglishName() const
 {
-	if (nType==niCrater)
-		return QString("%1 (%2, %3)").arg(englishName, getNomenclatureTypeLatinString(nType), getPlanet()->getEnglishName());
+	if (getNomenclatureType()==niCrater)
+		return QString("%1 (%2)").arg(englishName, getNomenclatureTypeLatinString(nType));
 	else
-		return QString("%1 (%2)").arg(englishName, getPlanet()->getEnglishName());
+		return englishName;
 }
 
 void NomenclatureItem::translateName(const StelTranslator& trans)
@@ -203,9 +203,9 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 		QString latin = getNomenclatureTypeLatinString(nType); // not always latin!
 		QString ts    = q_("Type");
 		if (tstr!=latin && !latin.isEmpty())
-			oss << QString("%1: <b>%2</b> (%3: %4)<br/>").arg(ts).arg(tstr).arg(q_("geologic term")).arg(latin);
+			oss << QString("%1: <b>%2</b> (%3: %4)").arg(ts).arg(tstr).arg(q_("geologic term")).arg(latin) << "<br />";
 		else
-			oss << QString("%1: <b>%2</b><br/>").arg(ts).arg(tstr);
+			oss << QString("%1: <b>%2</b>").arg(ts).arg(tstr) << "<br />";
 	}
 
 	// Ra/Dec etc.
@@ -217,17 +217,16 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 		// Satellite Features are almost(?) exclusively lettered craters, and all are on the Moon. Assume craters.
 		if ((getNomenclatureType()==NomenclatureItem::niCrater) || (getNomenclatureType()==NomenclatureItem::niSatelliteFeature))
 			sz = q_("Diameter");
-		oss << QString("%1: %2 %3<br/>").arg(sz).arg(QString::number(size, 'f', 2)).arg(qc_("km", "distance"));
+		oss << QString("%1: %2 %3").arg(sz).arg(QString::number(size, 'f', 2)).arg(qc_("km", "distance")) << "<br />";
 	}
 
 	if (flags&Extra)
 	{
-		oss << QString("%1: %2/%3<br/>").arg(q_("Planetographic long./lat.")).arg(StelUtils::decDegToDmsStr(longitude)).arg(StelUtils::decDegToDmsStr(latitude));
-		oss << QString("%1: %2<br/>").arg(q_("Celestial body")).arg(planet->getNameI18n());
+		oss << QString("%1: %2/%3").arg(q_("Planetographic long./lat.")).arg(StelUtils::decDegToDmsStr(longitude)).arg(StelUtils::decDegToDmsStr(latitude)) << "<br />";
+		oss << QString("%1: %2").arg(q_("Celestial body")).arg(planet->getNameI18n()) << "<br />";
 		QString description = getNomenclatureTypeDescription(nType, planet->getEnglishName());
 		if (getNomenclatureType()!=NomenclatureItem::niUNDEFINED && !description.isEmpty())
-			oss << QString("%1: %2<br/>").arg(q_("Landform description"), description);
-		oss << QString("%1: %2°<br/>").arg(q_("Solar altitude")).arg(QString::number(getSolarAltitude(core), 'f', 1));
+			oss << QString("%1: %2").arg(q_("Landform description"), description) << "<br />";
 	}
 
 	postProcessInfoString(str, flags);
@@ -307,22 +306,13 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 	Vec3d srcPos;
 	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (equPos.length() >= XYZ.length()) && (screenSize>50. && screenSize<750.))
 	{
-		float brightness=(getSolarAltitude(core)<0. ? 0.25f : 1.0f);
-		painter->setColor(color*brightness, 1.0f);
+		painter->setColor(color, 1.0);
 		painter->drawCircle(static_cast<float>(srcPos[0]), static_cast<float>(srcPos[1]), 2.f);
 		painter->drawText(static_cast<float>(srcPos[0]), static_cast<float>(srcPos[1]), nameI18n, 0, 5.f, 5.f, false);
 	}
 }
 
-double NomenclatureItem::getSolarAltitude(const StelCore *core) const
-{
-	QPair<Vec4d, Vec3d> ssop=planet->getSubSolarObserverPoints(core);
-	double sign=planet->isRotatingRetrograde() ? -1. : 1.;
-	double colongitude=450.*M_PI_180-sign*ssop.second[2];
-	double h=asin(sin(ssop.second[0])*sin(static_cast<double>(latitude)*M_PI_180) +
-		      cos(ssop.second[0])*cos(static_cast<double>(latitude)*M_PI_180)*sin(colongitude-static_cast<double>(longitude)*M_PI_180));
-	return h*M_180_PI;
-}
+
 
 NomenclatureItem::NomenclatureItemType NomenclatureItem::getNomenclatureItemType(const QString abbrev)
 {

@@ -39,7 +39,7 @@ class OcularsGuiPanel : public QGraphicsWidget
 public:
 	OcularsGuiPanel(Oculars* ocularsPlugin,
 			QGraphicsWidget * parent = Q_NULLPTR,
-			Qt::WindowFlags wFlags = Q_NULLPTR);
+	                Qt::WindowFlags wFlags = 0);
 	~OcularsGuiPanel();
 
 public slots:
@@ -107,11 +107,9 @@ private:
 	QGraphicsTextItem* fieldOcularAfov;
 	QGraphicsTextItem* fieldCcdName;
 	QGraphicsTextItem* fieldCcdDimensions;
-	QGraphicsTextItem* fieldCcdBinning;
 	QGraphicsTextItem* fieldCcdHScale;
 	QGraphicsTextItem* fieldCcdVScale;
 	QGraphicsTextItem* fieldCcdRotation;
-	QGraphicsTextItem* fieldPrismRotation;
 	QGraphicsTextItem* fieldTelescopeName;
 	QGraphicsTextItem* fieldMagnification;
 	QGraphicsTextItem* fieldExitPupil;
@@ -130,13 +128,6 @@ private:
 	StelButton* rotateCcdPlus1Button;
 	StelButton* rotateCcdPlus5Button;
 	StelButton* rotateCcdPlus15Button;
-	StelButton* rotatePrismMinus15Button;
-	StelButton* rotatePrismMinus5Button;
-	StelButton* rotatePrismMinus1Button;
-	StelButton* resetPrismRotationButton;
-	StelButton* rotatePrismPlus1Button;
-	StelButton* rotatePrismPlus5Button;
-	StelButton* rotatePrismPlus15Button;
 
 	//! Sets the visibility of the ocular name label and the associated buttons.
 	void setOcularControlsVisible(bool show);

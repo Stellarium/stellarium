@@ -23,7 +23,7 @@
 #include <QLineEdit>
 #include <QKeySequence>
 
-//! Specialized GUI control for entering keyboard shortcut combinations.
+//! Specialised GUI control for entering keyboard shortcut combinations.
 //! Allows Emacs-style key sequences (for example "Ctrl+E, Ctrl+2")
 //! no longer than four combinations. See the documentation of 
 //! QKeySequence for details.
@@ -58,9 +58,9 @@ signals:
 	void contentsChanged();
 
 protected:
-	virtual void keyPressEvent(QKeyEvent *e) Q_DECL_OVERRIDE;
-	virtual void focusInEvent(QFocusEvent *e) Q_DECL_OVERRIDE;
-	virtual void focusOutEvent(QFocusEvent *e) Q_DECL_OVERRIDE;
+	void keyPressEvent(QKeyEvent *e);
+	void focusInEvent(QFocusEvent *e);
+	void focusOutEvent(QFocusEvent *e);
 
 private:
 	//! transform modifiers to int.

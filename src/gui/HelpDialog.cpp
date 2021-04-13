@@ -51,8 +51,6 @@
 #include "StelLogger.hpp"
 #include "StelStyle.hpp"
 #include "StelActionMgr.hpp"
-#include "StelMovementMgr.hpp"
-#include "StelModuleMgr.hpp"
 #include "StelJsonParser.hpp"
 
 HelpDialog::HelpDialog(QObject* parent)
@@ -110,12 +108,9 @@ void HelpDialog::createDialogContent()
 
 
 	// Help page
-	StelMovementMgr* mmgr = GETSTELMODULE(StelMovementMgr);
 	updateHelpText();
-	setKeyButtonState(mmgr->getFlagEnableMoveKeys());
 	connect(ui->editShortcutsButton, SIGNAL(clicked()), this, SLOT(showShortcutsWindow()));
 	connect(StelApp::getInstance().getStelActionManager(), SIGNAL(shortcutsChanged()), this, SLOT(updateHelpText()));
-	connect(mmgr, SIGNAL(flagEnableMoveKeysChanged(bool)), this, SLOT(setKeyButtonState(bool)));
 
 	// About page
 	updateAboutText();
@@ -134,11 +129,6 @@ void HelpDialog::createDialogContent()
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 }
 
-void HelpDialog::setKeyButtonState(bool state)
-{
-	ui->editShortcutsButton->setEnabled(state);
-}
-
 void HelpDialog::checkUpdates()
 {
 	if (networkManager->networkAccessible()==QNetworkAccessManager::Accessible)
@@ -154,7 +144,9 @@ void HelpDialog::checkUpdates()
 		QNetworkRequest request;
 		request.setUrl(API);
 		request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
+		#if QT_VERSION >= 0x050600
 		request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+		#endif
 		downloadReply = networkManager->get(request);
 
 		updateState = HelpDialog::Updating;
@@ -407,15 +399,12 @@ void HelpDialog::updateAboutText(void) const
 		     << "Antoine Jacoutot" << "Sebastian Jennen" << "Matt Hughes" << "Sun Shuwei"
 		     << "Alexey Sokolov" << "Paul Krizak" << "ChrUnger" << "Minmin Gong" << "Andy Kirkham"
 		     << "Michael Dickens" << "Patrick (zero0cool0)" << "Martín Bernardi" << "Sebastian Garcia"
-		     << "Wolfgang Laun" << "Alexandros Kosiaris" << "Alexander Duytschaever";
+		     << "Wolfgang Laun" << "Alexandros Kosiaris";
 	contributors.sort();
-
-	// Regexp to replace {text} with an HTML link.
-	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
 
 	// populate About tab
 	QString newHtml = "<h1>" + StelUtils::getApplicationName() + "</h1>";
-	// Note: this legal notice is not suitable for translation
+	// Note: this legal notice is not suitable for traslation
 	newHtml += QString("<h3>Copyright &copy; %1 Stellarium Developers</h3>").arg(COPYRIGHT_YEARS);
 	if (!message.isEmpty())
 		newHtml += "<p><strong>" + message + "</strong></p>";
@@ -461,12 +450,6 @@ void HelpDialog::updateAboutText(void) const
 	newHtml += "<li>" + q_("Tester: %1").arg(QString("Khalid AlAjaji")).toHtmlEscaped() + "</li></ul>";
 	newHtml += "<h3>" + q_("Contributors").toHtmlEscaped() + "</h3>";
 	newHtml += "<p>"  + q_("Several people have made contributions to the project and their work has made Stellarium better (sorted alphabetically): %1.").arg(contributors.join(", ")).toHtmlEscaped() + "</p>";
-	newHtml += "<h3>" + q_("Acknowledgment").toHtmlEscaped() + "</h3>";
-	newHtml += "<p>"  + q_("If the Stellarium planetarium was helpful for your research work, the following acknowledgment would be appreciated:").toHtmlEscaped() + "</p>";
-	newHtml += "<p><em>"  + q_("This research has made use of the Stellarium planetarium") + "</em></p>";
-	newHtml += "<p>Zotti, G., Hoffmann, S. M., Wolf, A., Chéreau, F., & Chéreau, G. (2021). The Simulated Sky: Stellarium for Cultural Astronomy Research. Journal of Skyscape Archaeology, 6(2), 221–258. <a href='https://doi.org/10.1558/jsa.17822'>https://doi.org/10.1558/jsa.17822</a></p>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	newHtml += "<p>" + q_("Or you may {download the BibTeX file of the paper} to create another citation format.").toHtmlEscaped().replace(a_rx, "<a href=\"https://stellarium.org/files/stellarium.bib\">\\1</a>") + "</p>";
 	newHtml += "<p>";
 
 	ui->aboutBrowser->clear();

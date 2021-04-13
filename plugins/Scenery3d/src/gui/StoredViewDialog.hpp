@@ -32,11 +32,11 @@ class StoredViewDialog : public StelDialog
 	Q_OBJECT
 public:
 	StoredViewDialog(QObject* parent = Q_NULLPTR);
-	virtual ~StoredViewDialog() Q_DECL_OVERRIDE;
+	~StoredViewDialog();
 public slots:
-	virtual void retranslate() Q_DECL_OVERRIDE;
+	void retranslate();
 protected:
-	virtual void createDialogContent() Q_DECL_OVERRIDE;
+	void createDialogContent();
 private slots:
 	void updateViewSelection(const QModelIndex &idx);
 	void resetViewSelection();

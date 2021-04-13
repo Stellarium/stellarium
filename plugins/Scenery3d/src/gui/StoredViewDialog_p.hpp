@@ -26,7 +26,6 @@
 #include <QDebug>
 #include <QTextEdit>
 #include <QAbstractListModel>
-#include <QIcon>
 
 //! A custom QTextEdit subclass that has an editingFinished() signal like QLineEdit.
 class CustomTextEdit : public QTextEdit
@@ -38,14 +37,14 @@ public:
 		connect(this,&QTextEdit::textChanged,this,&CustomTextEdit::handleTextChange);
 	}
 protected:
-	virtual void focusInEvent(QFocusEvent* e) Q_DECL_OVERRIDE
+	void focusInEvent(QFocusEvent* e)
 	{
 		trackChange = true;
 		textChanged = false;
 		QTextEdit::focusInEvent(e);
 	}
 
-	virtual void focusOutEvent(QFocusEvent *e) Q_DECL_OVERRIDE
+	void focusOutEvent(QFocusEvent *e)
 	{
 		QTextEdit::focusOutEvent(e);
 		trackChange = false;
@@ -77,14 +76,14 @@ public:
 	StoredViewModel(QObject* parent = Q_NULLPTR) : QAbstractListModel(parent)
 	{ }
 
-	virtual int rowCount(const QModelIndex &parent) const Q_DECL_OVERRIDE
+	int rowCount(const QModelIndex &parent) const
 	{
 		if(parent.isValid())
 			return 0;
 		return global.size() + user.size();
 	}
 
-	virtual QVariant data(const QModelIndex &index, int role) const Q_DECL_OVERRIDE
+	QVariant data(const QModelIndex &index, int role) const
 	{
 		if(role == Qt::DisplayRole || role == Qt::EditRole)
 		{

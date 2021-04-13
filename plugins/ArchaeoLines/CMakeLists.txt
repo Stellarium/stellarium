@@ -9,9 +9,11 @@
 #0.1.9 Refactor color settings, use properties more sensible.
 #0.1.10 Refactor GUI
 #0.1.11 Fix crossquarter declination
-# Further: Use program version number. (Static plugin, why bother?)
-SET(ARCHAEOLINES_VERSION "${VERSION}")
+SET(ARCHAEOLINES_VERSION "0.1.11")
 ADD_DEFINITIONS(-DARCHAEOLINES_PLUGIN_VERSION="${ARCHAEOLINES_VERSION}")
 ADD_DEFINITIONS(-DARCHAEOLINES_PLUGIN_LICENSE="GNU GPLv2 or later")
 
 ADD_SUBDIRECTORY( src )
+
+SET(CMAKE_INSTALL_PREFIX $HDATALOC)
+INSTALL(FILES DESTINATION "modules/ArchaeoLines")

@@ -34,18 +34,18 @@ class LocationDialog : public StelDialog
 	Q_OBJECT
 public:
 	LocationDialog(QObject* parent);
-	virtual ~LocationDialog() Q_DECL_OVERRIDE;
+	virtual ~LocationDialog();
 	//! Notify that the application style changed
-	virtual void styleChanged() Q_DECL_OVERRIDE;
+	void styleChanged();
 
 public slots:
-	virtual void retranslate() Q_DECL_OVERRIDE;
+	void retranslate();
 	//! In addition to StelDialog's inherited solution, puts the arrow on the right spot in the map.
-	virtual void handleDialogSizeChanged(QSizeF size) Q_DECL_OVERRIDE;
+	virtual void handleDialogSizeChanged(QSizeF size);
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent() Q_DECL_OVERRIDE;
+	virtual void createDialogContent();
 	Ui_locationDialogForm* ui;
 
 	//void resizePixmap();
@@ -137,11 +137,6 @@ private slots:
 	//! @arg state true to immediately query location and activate auto-query on next launch.
 	//! @arg state false to store current location as startup location.
 	void ipQueryLocation(bool state);
-
-	// Esp. for signals from StelSkyCultureMgr
-	void populatePlanetList(QString) { populatePlanetList(); }
-
-	void setDisplayFormatForSpins(bool flagDecimalDegrees);
 
 #ifdef ENABLE_GPS
 	//! called when the user wants to get GPS location from GPSD or directly attached (USB over virtual serial device) GPS device.

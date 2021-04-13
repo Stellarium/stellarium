@@ -31,12 +31,12 @@ class ScriptConsole : public StelDialog
 	Q_OBJECT
 public:
 	ScriptConsole(QObject* parent);
-	virtual ~ScriptConsole() Q_DECL_OVERRIDE;
+	virtual ~ScriptConsole();
 	//! Notify that the application style changed
-	virtual void styleChanged() Q_DECL_OVERRIDE;
+	void styleChanged();
 
 public slots:
-	virtual void retranslate() Q_DECL_OVERRIDE;
+	void retranslate();
 
 private slots:
 	void runScript();
@@ -62,7 +62,7 @@ protected:
 	Ui_scriptConsoleForm* ui;
 	
 	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent() Q_DECL_OVERRIDE;
+	virtual void createDialogContent();
 
 private:
 	static const QString getFileMask();

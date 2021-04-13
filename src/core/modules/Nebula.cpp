@@ -126,14 +126,13 @@ Nebula::Nebula()
 	, nType()
 {
 	outlineSegments.clear();
-	designations.clear();
 }
 
 Nebula::~Nebula()
 {
 }
 
-QString Nebula::getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals) const
+QString Nebula::getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const double alt_app, const int decimals) const
 {
 	QString res;
 	const float mmag = qMin(vMag, bMag);
@@ -161,9 +160,10 @@ QString Nebula::getMagnitudeInfoString(const StelCore *core, const InfoStringGro
 			bmag = true;
 		}
 
-		const float airmass = getAirmass(core);
-		if (nType != NebDn && airmass>-1.f) // Don't show extincted magnitude much below horizon where model is meaningless.
+		if (nType != NebDn && hasAtmosphere && (alt_app>-2.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
 		{
+			const Extinction &extinction=core->getSkyDrawer()->getExtinction();
+			float airmass=extinction.airmass(static_cast<float>(std::cos(M_PI_2-alt_app)), true);
 			emag = QString("%1 <b>%2</b> %3 <b>%4</b> %5)").arg(q_("reduced to"), QString::number(mage, 'f', decimals), q_("by"), QString::number(airmass, 'f', 2), q_("Airmasses"));
 			if (!bmag)
 				emag = QString("(%1").arg(emag);
@@ -178,7 +178,10 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 {
 	QString str;
 	QTextStream oss(&str);
+	double az_app, alt_app;
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
+	Q_UNUSED(az_app)
 
 	if ((flags&Name) || (flags&CatalogNumber))
 		oss << "<h2>";
@@ -192,11 +195,71 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	}
 
 	if (flags&CatalogNumber)
-	{	
-		if (!nameI18.isEmpty() && !withoutID && flags&Name)
+	{
+		QStringList catIds;
+		if (M_nb > 0)
+			catIds << QString("M %1").arg(M_nb);
+		if (C_nb > 0)
+			catIds << QString("C %1").arg(C_nb);
+		if (NGC_nb > 0)
+			catIds << QString("NGC %1").arg(NGC_nb);
+		if (IC_nb > 0)
+			catIds << QString("IC %1").arg(IC_nb);		
+		if (B_nb > 0)
+			catIds << QString("B %1").arg(B_nb);
+		if (Sh2_nb > 0)
+			catIds << QString("SH 2-%1").arg(Sh2_nb);
+		if (VdB_nb > 0)
+			catIds << QString("vdB %1").arg(VdB_nb);
+		if (RCW_nb > 0)
+			catIds << QString("RCW %1").arg(RCW_nb);
+		if (LDN_nb > 0)
+			catIds << QString("LDN %1").arg(LDN_nb);
+		if (LBN_nb > 0)
+			catIds << QString("LBN %1").arg(LBN_nb);
+		if (Cr_nb > 0)
+			catIds << QString("Cr %1").arg(Cr_nb);
+		if (Mel_nb > 0)
+			catIds << QString("Mel %1").arg(Mel_nb);
+		if (PGC_nb > 0)
+			catIds << QString("PGC %1").arg(PGC_nb);
+		if (UGC_nb > 0)
+			catIds << QString("UGC %1").arg(UGC_nb);
+		if (!Ced_nb.isEmpty())
+			catIds << QString("Ced %1").arg(Ced_nb);
+		if (Arp_nb > 0)
+			catIds << QString("Arp %1").arg(Arp_nb);
+		if (VV_nb > 0)
+			catIds << QString("VV %1").arg(VV_nb);
+		if (!PK_nb.isEmpty())
+			catIds << QString("PK %1").arg(PK_nb);
+		if (!PNG_nb.isEmpty())
+			catIds << QString("PN G%1").arg(PNG_nb);
+		if (!SNRG_nb.isEmpty())
+			catIds << QString("SNR G%1").arg(SNRG_nb);
+		if (!ACO_nb.isEmpty())
+			catIds << QString("Abell %1").arg(ACO_nb);
+		if (!HCG_nb.isEmpty())
+			catIds << QString("HCG %1").arg(HCG_nb);		
+		if (!ESO_nb.isEmpty())
+			catIds << QString("ESO %1").arg(ESO_nb);
+		if (!VdBH_nb.isEmpty())
+			catIds << QString("vdBH %1").arg(VdBH_nb);
+		if (DWB_nb > 0)
+			catIds << QString("DWB %1").arg(DWB_nb);
+		if (Tr_nb > 0)
+			catIds << QString("Tr %1").arg(Tr_nb);
+		if (St_nb > 0)
+			catIds << QString("St %1").arg(St_nb);
+		if (Ru_nb > 0)
+			catIds << QString("Ru %1").arg(Ru_nb);
+		if (VdBHa_nb > 0)
+			catIds << QString("vdB-Ha %1").arg(VdBHa_nb);
+
+		if (!nameI18.isEmpty() && !catIds.isEmpty() && flags&Name)
 			oss << "<br>";
 
-		oss << designations.join(" - ");
+		oss << catIds.join(" - ");
 	}
 
 	if ((flags&Name) || (flags&CatalogNumber))
@@ -225,7 +288,8 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		oss << getExtraInfoStrings(ObjectType).join("");
 	}
 
-	oss << getMagnitudeInfoString(core, flags, 2);
+	oss << getMagnitudeInfoString(core, flags, alt_app, 2);
+
 
 	if (flags&Extra)
 	{
@@ -246,14 +310,14 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		}
 		else
 		{
-			mu = QString("%1/%2<sup>2</sup>").arg(qc_("mag", "magnitude"), q_("arc-min"));
+			mu = QString("%1/%2<sup>2</sup>").arg(qc_("mag", "magnitude"), q_("arcmin"));
 			if (flagUseArcsecSurfaceBrightness)
-				mu = QString("%1/%2<sup>2</sup>").arg(qc_("mag", "magnitude"), q_("arc-sec"));
+				mu = QString("%1/%2<sup>2</sup>").arg(qc_("mag", "magnitude"), q_("arcsec"));
 		}
 
 		if (getSurfaceBrightness(core)<99.f)
 		{
-			if (getAirmass(core)>-1.f && getSurfaceBrightnessWithExtinction(core)<99.f) // Don't show extincted surface brightness much below horizon where model is meaningless.
+			if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-2.0*M_PI/180.0) && getSurfaceBrightnessWithExtinction(core)<99.f) // Don't show extincted surface brightness much below horizon where model is meaningless.
 			{
 				oss << QString("%1: <b>%2</b> %5 (%3: <b>%4</b> %5)").arg(sb, QString::number(getSurfaceBrightness(core, flagUseArcsecSurfaceBrightness), 'f', 2),
 											  ae, QString::number(getSurfaceBrightnessWithExtinction(core, flagUseArcsecSurfaceBrightness), 'f', 2), mu) << "<br />";
@@ -405,7 +469,6 @@ QVariantMap Nebula::getInfoMap(const StelCore *core) const
 	map["type"]=getTypeString(); // replace "Nebula" type by detail. This is localized. Maybe add argument such as getTypeString(bool translated=true)?
 	map.insert("morpho", getMorphologicalTypeString());
 	map.insert("surface-brightness", getSurfaceBrightness(core));
-	map.insert("designations", withoutID ? QString() : designations.join(" - "));
 	map.insert("bmag", bMag);
 	if (vMag < 50 && bMag < 50)
 		map.insert("bV", bMag-vMag);
@@ -893,15 +956,6 @@ QString Nebula::getDSODesignation() const
 	return str;
 }
 
-QString Nebula::getDSODesignationWIC() const
-{
-	if (!withoutID)
-		return designations.first();
-	else
-		return QString();
-}
-
-
 void Nebula::readDSO(QDataStream &in)
 {
 	float	ra, dec;
@@ -916,36 +970,6 @@ void Nebula::readDSO(QDataStream &in)
 	const unsigned int f = NGC_nb + IC_nb + M_nb + C_nb + B_nb + Sh2_nb + VdB_nb + RCW_nb + LDN_nb + LBN_nb + Cr_nb + Mel_nb + PGC_nb + UGC_nb + Arp_nb + VV_nb + DWB_nb + Tr_nb + St_nb + Ru_nb + VdBHa_nb;
 	if (f==0 && Ced_nb.isEmpty() && PK_nb.isEmpty() && PNG_nb.isEmpty() && SNRG_nb.isEmpty() && ACO_nb.isEmpty() && HCG_nb.isEmpty() && ESO_nb.isEmpty() && VdBH_nb.isEmpty())
 		withoutID = true;
-
-	if (M_nb > 0) designations << QString("M %1").arg(M_nb);
-	if (C_nb > 0)  designations << QString("C %1").arg(C_nb);
-	if (NGC_nb > 0) designations << QString("NGC %1").arg(NGC_nb);
-	if (IC_nb > 0) designations << QString("IC %1").arg(IC_nb);
-	if (B_nb > 0) designations << QString("B %1").arg(B_nb);
-	if (Sh2_nb > 0) designations << QString("SH 2-%1").arg(Sh2_nb);
-	if (VdB_nb > 0) designations << QString("vdB %1").arg(VdB_nb);
-	if (RCW_nb > 0) designations << QString("RCW %1").arg(RCW_nb);
-	if (LDN_nb > 0) designations << QString("LDN %1").arg(LDN_nb);
-	if (LBN_nb > 0) designations << QString("LBN %1").arg(LBN_nb);
-	if (Cr_nb > 0) designations << QString("Cr %1").arg(Cr_nb);
-	if (Mel_nb > 0) designations << QString("Mel %1").arg(Mel_nb);
-	if (PGC_nb > 0) designations << QString("PGC %1").arg(PGC_nb);
-	if (UGC_nb > 0) designations << QString("UGC %1").arg(UGC_nb);
-	if (!Ced_nb.isEmpty()) designations << QString("Ced %1").arg(Ced_nb);
-	if (Arp_nb > 0) designations << QString("Arp %1").arg(Arp_nb);
-	if (VV_nb > 0) designations << QString("VV %1").arg(VV_nb);
-	if (!PK_nb.isEmpty()) designations << QString("PK %1").arg(PK_nb);
-	if (!PNG_nb.isEmpty()) designations << QString("PN G%1").arg(PNG_nb);
-	if (!SNRG_nb.isEmpty()) designations << QString("SNR G%1").arg(SNRG_nb);
-	if (!ACO_nb.isEmpty()) designations << QString("Abell %1").arg(ACO_nb);
-	if (!HCG_nb.isEmpty()) designations << QString("HCG %1").arg(HCG_nb);
-	if (!ESO_nb.isEmpty()) designations << QString("ESO %1").arg(ESO_nb);
-	if (!VdBH_nb.isEmpty()) designations << QString("vdBH %1").arg(VdBH_nb);
-	if (DWB_nb > 0) designations << QString("DWB %1").arg(DWB_nb);
-	if (Tr_nb > 0) designations << QString("Tr %1").arg(Tr_nb);
-	if (St_nb > 0) designations << QString("St %1").arg(St_nb);
-	if (Ru_nb > 0) designations << QString("Ru %1").arg(Ru_nb);
-	if (VdBHa_nb > 0) designations << QString("vdB-Ha %1").arg(VdBHa_nb);
 
 	StelUtils::spheToRect(ra,dec,XYZ);
 	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<1e-9);

@@ -122,11 +122,5 @@ void EquationOfTimeWindow::saveEquationOfTimeSettings()
 
 void EquationOfTimeWindow::resetEquationOfTimeSettings()
 {
-	if (askConfirmation())
-	{
-		qDebug() << "[EquationOfTime] restore defaults...";
-		eq->restoreDefaults();
-	}
-	else
-		qDebug() << "[EquationOfTime] restore defaults is canceled...";
+	eq->restoreDefaults();
 }

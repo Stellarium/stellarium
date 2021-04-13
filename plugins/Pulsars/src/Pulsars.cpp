@@ -50,7 +50,6 @@
 #include <QStringList>
 #include <QDir>
 #include <QSettings>
-#include <stdexcept>
 
 #define CATALOG_FORMAT_VERSION 2 /* Version of format of catalog */
 
@@ -317,39 +316,47 @@ StelObjectP Pulsars::searchByNameI18n(const QString& nameI18n) const
 	return Q_NULLPTR;
 }
 
-QStringList Pulsars::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
+QStringList Pulsars::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
 {
 	QStringList result;
 	if (flagShowPulsars && maxNbItem>0)
 	{
 		QStringList names;
-		for (const auto& pulsar : psr)
+
+		if (inEnglish)
 		{
-			if (!pulsar->getNameI18n().isEmpty())
-				names << pulsar->getNameI18n();
-			if (!pulsar->getEnglishName().isEmpty())
-				names << pulsar->getEnglishName();
-			names << pulsar->getDesignation();
+			for (const auto& pulsar : psr)
+			{
+				if (!pulsar->getEnglishName().isEmpty())
+					names << pulsar->getEnglishName();
+				names << pulsar->getDesignation();
+			}
+		}
+		else
+		{
+			for (const auto& pulsar : psr)
+			{
+				if (!pulsar->getNameI18n().isEmpty())
+					names << pulsar->getNameI18n();
+				names << pulsar->getDesignation();
+			}
 		}
 
-		QString fullMatch = "";
-		for (const auto& name : qAsConst(names))
+		for (const auto& name : names)
 		{
 			if (!matchObjectName(name, objPrefix, useStartOfWords))
+			{
 				continue;
+			}
 
-			if (name==objPrefix)
-				fullMatch = name;
-			else
-				result.append(name);
-
+			result.append(name);
 			if (result.size() >= maxNbItem)
+			{
 				break;
+			}
 		}
 
 		result.sort();
-		if (!fullMatch.isEmpty())
-			result.prepend(fullMatch);
 	}
 	return result;
 }
@@ -694,7 +701,9 @@ void Pulsars::startDownload(QString urlString)
 	QNetworkRequest request;
 	request.setUrl(QUrl(updateUrl));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
+	#if QT_VERSION >= 0x050600
 	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+	#endif
 	downloadReply = networkManager->get(request);
 	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
 
@@ -732,6 +741,23 @@ void Pulsars::downloadComplete(QNetworkReply *reply)
 		return;
 
 	disconnect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
+
+	#if QT_VERSION < 0x050600
+	int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+	if (statusCode == 301 || statusCode == 302 || statusCode == 307)
+	{
+		QUrl rawUrl = reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
+		QUrl redirectUrl(rawUrl.toString(QUrl::RemoveQuery));
+		qDebug() << "[Pulsars] The query has been redirected to" << redirectUrl.toString();
+		updateUrl = redirectUrl.toString();
+		conf->setValue("Pulsars/url", updateUrl);
+		reply->deleteLater();
+		downloadReply = Q_NULLPTR;
+		startDownload(redirectUrl.toString());
+		return;
+	}
+	#endif
+
 	deleteDownloadProgressBar();
 
 	if (reply->error() || reply->bytesAvailable()==0)
@@ -907,6 +933,5 @@ void Pulsars::setFlagShowPulsars(bool b)
 	{
 		flagShowPulsars=b;
 		emit flagPulsarsVisibilityChanged(b);
-		emit StelApp::getInstance().getCore()->updateSearchLists();
 	}
 }

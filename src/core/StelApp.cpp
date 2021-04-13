@@ -60,7 +60,7 @@
 #include "StelViewportEffect.hpp"
 #include "StelGuiBase.hpp"
 #include "StelPainter.hpp"
-#ifdef ENABLE_SCRIPTING
+#ifndef DISABLE_SCRIPTING
  #include "StelScriptMgr.hpp"
  #include "StelMainScriptAPIProxy.hpp"
 #endif
@@ -109,8 +109,8 @@ Q_IMPORT_PLUGIN(AngleMeasureStelPluginInterface)
 Q_IMPORT_PLUGIN(ArchaeoLinesStelPluginInterface)
 #endif
 
-#ifdef USE_STATIC_PLUGIN_CALENDARS
-Q_IMPORT_PLUGIN(CalendarsStelPluginInterface)
+#ifdef USE_STATIC_PLUGIN_COMPASSMARKS
+Q_IMPORT_PLUGIN(CompassMarksStelPluginInterface)
 #endif
 
 #ifdef USE_STATIC_PLUGIN_SATELLITES
@@ -269,6 +269,13 @@ StelApp::StelApp(StelMainView *parent)
 	singleton = this;
 
 	moduleMgr = new StelModuleMgr();
+
+	wheelEventTimer = new QTimer(this);
+	wheelEventTimer->setInterval(25);
+	wheelEventTimer->setSingleShot(true);
+
+	// Reset delta accumulators
+	wheelEventDelta[0] = wheelEventDelta[1] = 0;
 }
 
 /*************************************************************************
@@ -379,7 +386,7 @@ void StelApp::setupNetworkProxy()
 	}
 }
 
-#ifdef ENABLE_SCRIPTING
+#ifndef DISABLE_SCRIPTING
 void StelApp::initScriptMgr()
 {
 	scriptMgr->addModules();
@@ -651,7 +658,7 @@ void StelApp::init(QSettings* conf)
 
 			if (!spoutSender->isValid())
 			{
-				QMessageBox::warning(&StelMainView::getInstance(), "Stellarium SPOUT", q_("Cannot create Spout sender. See log for details."), QMessageBox::Ok);
+				QMessageBox::warning(Q_NULLPTR, "Stellarium SPOUT", q_("Cannot create Spout sender. See log for details."), QMessageBox::Ok);
 				delete spoutSender;
 				spoutSender = Q_NULLPTR;
 				qApp->setProperty("spout", "");
@@ -696,7 +703,7 @@ void StelApp::deinit()
 	delete spoutSender;
 	spoutSender = Q_NULLPTR;
 #endif
-#ifdef ENABLE_SCRIPTING
+#ifndef DISABLE_SCRIPTING
 	if (scriptMgr->scriptIsRunning())
 		scriptMgr->stopScript();
 #endif
@@ -852,13 +859,31 @@ void StelApp::handleClick(QMouseEvent* inputEvent)
 }
 
 // Handle mouse wheel.
+// This deltaEvent is a work-around for QTBUG-22269
 void StelApp::handleWheel(QWheelEvent* event)
 {
 	event->setAccepted(false);
+
+	const int deltaIndex = event->orientation() == Qt::Horizontal ? 0 : 1;
+	wheelEventDelta[deltaIndex] += event->delta();
+	if (wheelEventTimer->isActive())
+	{
+		// Collect the values. If delta is small enough we wait for more values or the end
+		// of the timer period to process them.
+		if (qAbs(wheelEventDelta[deltaIndex]) < 120)
+			return;
+	}
+
+	wheelEventTimer->start();
+
+	// Create a new event with the accumulated delta
 	QWheelEvent deltaEvent(QPoint(qRound(event->pos().x()*devicePixelsPerPixel), qRound(event->pos().y()*devicePixelsPerPixel)),
 			       QPoint(qRound(event->globalPos().x()*devicePixelsPerPixel), qRound(event->globalPos().y()*devicePixelsPerPixel)),
-	                       event->delta(), event->buttons(), event->modifiers(), event->orientation());
+	                       wheelEventDelta[deltaIndex], event->buttons(), event->modifiers(), event->orientation());
 	deltaEvent.setAccepted(false);
+	// Reset the collected values
+	wheelEventDelta[deltaIndex] = 0;
+
 	// Send the event to every StelModule
 	for (auto* i : moduleMgr->getCallOrders(StelModule::ActionHandleMouseClicks)) {
 		i->handleMouseWheel(&deltaEvent);
@@ -1033,8 +1058,7 @@ void StelApp::reportFileDownloadFinished(QNetworkReply* reply)
 void StelApp::quit()
 {
 	emit aboutToQuit();
-	// Let's allow exit from Stellarium via startup script!
-	QMetaObject::invokeMethod(qApp, "quit", Qt::QueuedConnection);
+	QCoreApplication::exit(0);
 }
 
 void StelApp::setDevicePixelsPerPixel(qreal dppp)

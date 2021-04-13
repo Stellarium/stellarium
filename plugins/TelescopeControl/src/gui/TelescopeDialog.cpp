@@ -1016,29 +1016,25 @@ void TelescopeDialog::updateStatusButtonForSlot(int selectedSlot)
 
 void TelescopeDialog::setStatusButtonToStart()
 {
-	ui->pushButtonChangeStatus->setText(q_("Start"));
-	ui->pushButtonChangeStatus->setIcon(QIcon(":/graphicGui/uibtStart.png"));
+        ui->pushButtonChangeStatus->setText(q_("Start"));
         ui->pushButtonChangeStatus->setToolTip(q_("Start the selected local telescope"));
 }
 
 void TelescopeDialog::setStatusButtonToStop()
 {
-	ui->pushButtonChangeStatus->setText(q_("Stop"));
-	ui->pushButtonChangeStatus->setIcon(QIcon(":/graphicGui/uibtStop.png"));
+        ui->pushButtonChangeStatus->setText(q_("Stop"));
         ui->pushButtonChangeStatus->setToolTip(q_("Stop the selected local telescope"));
 }
 
 void TelescopeDialog::setStatusButtonToConnect()
 {
         ui->pushButtonChangeStatus->setText(q_("Connect"));
-	ui->pushButtonChangeStatus->setIcon(QIcon(":/graphicGui/uibtStart.png"));
         ui->pushButtonChangeStatus->setToolTip(q_("Connect to the selected telescope"));
 }
 
 void TelescopeDialog::setStatusButtonToDisconnect()
 {
         ui->pushButtonChangeStatus->setText(q_("Disconnect"));
-	ui->pushButtonChangeStatus->setIcon(QIcon(":/graphicGui/uibtStop.png"));
         ui->pushButtonChangeStatus->setToolTip(q_("Disconnect from the selected telescope"));
 }
 

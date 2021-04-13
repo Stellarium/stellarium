@@ -17,8 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifdef ENABLE_SCRIPTING
-
 #include "ScriptService.hpp"
 
 #include "StelApp.hpp"
@@ -172,5 +170,3 @@ void ScriptService::post(const QByteArray& operation, const APIParameters &param
 		response.writeRequestError("unsupported operation. GET: list,info,status POST: run,direct,stop");
 	}
 }
-
-#endif

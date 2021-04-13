@@ -256,15 +256,10 @@ void QuasarsDialog::updateCompleteReceiver(void)
 
 void QuasarsDialog::restoreDefaults(void)
 {
-	if (askConfirmation())
-	{
-		qDebug() << "[Quasars] restore defaults...";
-		qsr->restoreDefaults();
-		qsr->readSettingsFromConfig();
-		updateGuiFromSettings();
-	}
-	else
-		qDebug() << "[Quasars] restore defaults is canceled...";
+	qDebug() << "[Quasars] Restore defaults...";
+	qsr->restoreDefaults();
+	qsr->readSettingsFromConfig();
+	updateGuiFromSettings();
 }
 
 void QuasarsDialog::updateGuiFromSettings(void)

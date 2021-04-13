@@ -71,14 +71,18 @@ void NavStarsWindow::createDialogContent()
 	}
 	ui->nsSetComboBox->setCurrentIndex(idx);
 	connect(ui->nsSetComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setNavigationalStarsSet(int)));
+	ui->displayAtStartupCheckBox->setChecked(ns->getEnableAtStartup());
+	connect(ui->displayAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayAtStartupEnabled(int)));
+	ui->highlightWhenVisible->setChecked(ns->getHighlightWhenVisible());
+	connect(ui->highlightWhenVisible, SIGNAL(stateChanged(int)), this, SLOT(setHighlightWhenVisibleEnabled(int)));
+	ui->limitInfoToNavStars->setChecked(ns->getLimitInfoToNavStars());
+	connect(ui->limitInfoToNavStars, SIGNAL(stateChanged(int)), this, SLOT(setLimitInfoToNavStarsEnabled(int)));
 
-	connectBoolProperty(ui->displayAtStartupCheckBox,	"NavStars.displayAtStartup");
-	connectBoolProperty(ui->highlightWhenVisible,		"NavStars.highlightWhenVisible");
-	connectBoolProperty(ui->limitInfoToNavStars,		"NavStars.limitInfoToNavStars");
-	connectBoolProperty(ui->upperLimb,			"NavStars.upperLimb");
-	connectBoolProperty(ui->tabulatedDisplay,		"NavStars.tabulatedDisplay");
-	connectBoolProperty(ui->showExtraDecimals,		"NavStars.showExtraDecimals");
-	connectBoolProperty(ui->useUTCCheckBox,			"NavStars.useUTCTime");
+	ui->upperLimb->setChecked(ns->getUpperLimb());
+	connect(ui->upperLimb, SIGNAL(stateChanged(int)), this, SLOT(setUpperLimbEnabled(int)));
+
+	ui->tabulatedDisplay->setChecked(ns->getTabulatedDisplay());
+	connect(ui->tabulatedDisplay, SIGNAL(stateChanged(int)), this, SLOT(setTabulatedDisplayEnabled(int)));
 
 	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(saveSettings()));	
 	connect(ui->pushButtonReset, SIGNAL(clicked()), this, SLOT(resetSettings()));
@@ -90,6 +94,7 @@ void NavStarsWindow::createDialogContent()
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 }
 
+
 void NavStarsWindow::saveSettings()
 {
 	ns->saveConfiguration();
@@ -97,13 +102,37 @@ void NavStarsWindow::saveSettings()
 
 void NavStarsWindow::resetSettings()
 {
-	if (askConfirmation())
-	{
-		qDebug() << "[NavStars] restore defaults...";
-		ns->restoreDefaultConfiguration();
-	}
-	else
-		qDebug() << "[NavStars] restore defaults is canceled...";
+	ns->restoreDefaultConfiguration();
+}
+
+void NavStarsWindow::setDisplayAtStartupEnabled(int checkState)
+{
+	bool b = checkState != Qt::Unchecked;
+	ns->setEnableAtStartup(b);
+}
+
+void NavStarsWindow::setHighlightWhenVisibleEnabled(int checkState)
+{
+	bool b = checkState != Qt::Unchecked;
+	ns->setHighlightWhenVisible(b);
+}
+
+void NavStarsWindow::setLimitInfoToNavStarsEnabled(int checkState)
+{
+	bool b = checkState != Qt::Unchecked;
+	ns->setLimitInfoToNavStars(b);
+}
+
+void NavStarsWindow::setUpperLimbEnabled(int checkState)
+{
+	bool b = checkState != Qt::Unchecked;
+	ns->setUpperLimb(b);
+}
+
+void NavStarsWindow::setTabulatedDisplayEnabled(int checkState)
+{
+	bool b = checkState != Qt::Unchecked;
+	ns->setTabulatedDisplay(b);
 }
 
 void NavStarsWindow::populateNavigationalStarsSets()

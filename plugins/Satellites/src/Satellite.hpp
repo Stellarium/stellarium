@@ -50,11 +50,9 @@ typedef struct
 //! @ingroup satellites
 enum SatelliteDataRole {
 	SatIdRole = Qt::UserRole,
-	SatCosparIDRole,
 	SatDescriptionRole,
 	SatStdMagnitudeRole,
 	SatRCSRole,
-	SatTLEEpochRole,
 	SatFlagsRole,
 	SatGroupsRole,
 	FirstLineRole,
@@ -97,7 +95,7 @@ Q_DECLARE_METATYPE(SatFlags)
 //! Details about the satellite are passed with a JSON-representation structure
 //! that contains a <b>Satellite Catalog</b> entry.
 //! 
-//! Thanks to operator<() overloading, container classes (QList, QMap, etc.)
+//! Thanks to operator<() overloading, container classes (QList, QMap, etc)
 //! with Satellite or SatelliteP objects can be sorted by satellite name/ID.
 //! @ingroup satellites
 class Satellite : public StelObject
@@ -213,6 +211,10 @@ public:
 	//! Sets the internal flags in one operation (only display flags)!
 	void setFlags(const SatFlags& flags);
 	
+	//! Parse TLE line to extract International Designator and launch year.
+	//! Sets #internationalDesignator and #jdLaunchYearJan1.
+	void parseInternationalDesignator(const QString& tle1);
+	
 	//! Needed for sorting lists (if this ever happens...).
 	//! Compares #name fields. If equal, #id fields, which can't be.
 	bool operator<(const Satellite& another) const;
@@ -223,8 +225,6 @@ public:
 	//! Get operational status of satellite
 	QString getOperationalStatus() const;
 
-	void recomputeEpochTLE();
-
 private:
 	//draw orbits methods
 	void computeOrbitPoints();
@@ -234,10 +234,7 @@ private:
 	float calculateOrbitSegmentIntensity(int segNum);
 	Vec2d calculatePerigeeApogeeFromLine2(QString tle) const;
 	Vec2d getEccentricityInclinationFromLine2(QString tle) const;
-	//! Parse TLE line to extract International Designator and launch year.
-	//! Sets #internationalDesignator and #jdLaunchYearJan1.
-	void parseInternationalDesignator(const QString& tle1);
-	void calculateEpochFromLine1(QString tle);
+	QString calculateEpochFromLine1(QString tle) const;
 
 	bool initialized;
 	//! Flag indicating whether the satellite should be displayed.
@@ -265,8 +262,6 @@ private:
 	QString description;
 	//! International Designator / COSPAR designation / NSSDC ID.
 	QString internationalDesignator;
-	//! Epoch of the TLE
-	QString tleEpoch;
 	//! Julian date of Jan 1st of the launch year.
 	//! Used to hide satellites before their launch date.
 	//! Extracted from TLE set with parseInternationalDesignator().
@@ -302,10 +297,9 @@ private:
 	static bool  orbitLinesFlag;
 	static bool  iconicModeFlag;
 	static bool  hideInvisibleSatellitesFlag;
-	//! Mask controlling which info display flags should be honoured.
+	//! Mask controlling which info display flags should be honored.
 	static StelObject::InfoStringGroupFlags flagsMask;
 	static Vec3f invisibleSatelliteColor;
-	static Vec3f transitSatelliteColor;
 
 	static double timeRateLimit;
 
@@ -331,7 +325,6 @@ private:
 	double    epochTime;  //measured in Julian Days
 	QList<Vec3d> orbitPoints; //orbit points represented by ElAzPos vectors
 	QList<gSatWrapper::Visibility> visibilityPoints; //orbit visibility points
-	QMap<gSatWrapper::Visibility, QString> visibilityDescription;
 };
 
 typedef QSharedPointer<Satellite> SatelliteP;

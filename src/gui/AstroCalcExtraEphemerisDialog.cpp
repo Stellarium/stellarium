@@ -42,6 +42,7 @@ void AstroCalcExtraEphemerisDialog::retranslate()
 	}
 }
 
+
 void AstroCalcExtraEphemerisDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
@@ -51,19 +52,16 @@ void AstroCalcExtraEphemerisDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
-	connect(ui->skipDataCheckBox, SIGNAL(clicked()), this, SLOT(setOptionStatus()));
-
-	connectBoolProperty(ui->skipDataCheckBox,	"SolarSystem.ephemerisSkippedData");
-	connectBoolProperty(ui->skipMarkersCheckBox,	"SolarSystem.ephemerisSkippedMarkers");
-	connectIntProperty(ui->dataStepSpinBox,		"SolarSystem.ephemerisDataStep");
-	connectBoolProperty(ui->smartDatesCheckBox,	"SolarSystem.ephemerisSmartDates");
-	connectBoolProperty(ui->scaleMarkersCheckBox,	"SolarSystem.ephemerisScaleMarkersDisplayed");
-	connectIntProperty(ui->lineThicknessSpinBox,	"SolarSystem.ephemerisLineThickness");
-
-	setOptionStatus();
+	connectBoolProperty(ui->skipDataCheckBox, "SolarSystem.ephemerisSkippedData");
+	connectIntProperty(ui->dataStepSpinBox, "SolarSystem.ephemerisDataStep");
+	connectBoolProperty(ui->smartDatesCheckBox, "SolarSystem.ephemerisSmartDates");
+	connectBoolProperty(ui->scaleMarkersCheckBox, "SolarSystem.ephemerisScaleMarkersDisplayed");
+	connectIntProperty(ui->lineThicknessSpinBox, "SolarSystem.ephemerisLineThickness");
 }
 
-void AstroCalcExtraEphemerisDialog::setOptionStatus()
+void AstroCalcExtraEphemerisDialog::setVisible(bool v)
 {
-	ui->skipMarkersCheckBox->setEnabled(ui->skipDataCheckBox->isChecked());
+	StelDialog::setVisible(v);
 }
+
+

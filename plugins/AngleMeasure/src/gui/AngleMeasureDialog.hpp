@@ -43,9 +43,6 @@ public slots:
 protected:
 	void createDialogContent();
 
-private slots:
-	void restoreDefaults();
-
 private:
 	Ui_angleMeasureDialog* ui;
 

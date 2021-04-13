@@ -32,13 +32,14 @@ class AstroCalcCustomStepsDialog : public StelDialog
 
 public:
 	AstroCalcCustomStepsDialog();
-	virtual ~AstroCalcCustomStepsDialog() Q_DECL_OVERRIDE;
+	virtual ~AstroCalcCustomStepsDialog();
 
 public slots:
-	virtual void retranslate() Q_DECL_OVERRIDE;
+	void retranslate();
+	void setVisible(bool);
 
 	void populateUnitMeasurementsList();
-	void saveTimeStep(double value);
+	void saveTimeStep(int value);
 	void saveUnitMeasurement(int index);
 
 private:
@@ -46,7 +47,7 @@ private:
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots.
-	virtual void createDialogContent() Q_DECL_OVERRIDE;
+	virtual void createDialogContent();
 	Ui_astroCalcCustomStepsDialogForm *ui;
 };
 

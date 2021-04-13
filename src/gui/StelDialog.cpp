@@ -41,7 +41,6 @@
 #include <QScroller>
 #include <QToolButton>
 #include <QColorDialog>
-#include <QMessageBox>
 
 StelDialog::StelDialog(QString dialogName, QObject* parent)
 	: QObject(parent)
@@ -65,11 +64,6 @@ void StelDialog::close()
 	setVisible(false);
 }
 
-void StelDialog::styleChanged()
-{
-	// Nothing for now
-}
-
 bool StelDialog::visible() const
 {
 	return dialog!=Q_NULLPTR && dialog->isVisible();
@@ -81,8 +75,7 @@ void StelDialog::setVisible(bool v)
 	{
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());		
 		QSize screenSize = StelMainView::getInstance().size();
-		// If dialog size is very large and we move to a computer with much smaller screen, this should create the dialog with reasonable better size.
-		QSize maxSize = 0.95*screenSize;
+		QSize maxSize = 0.8*screenSize;
 		if (dialog)
 		{
 			// reload stylesheet, in case size changed!
@@ -100,6 +93,13 @@ void StelDialog::setVisible(bool v)
 				newPos.setY(screenSize.height() - dialog->size().height());
 			if (newPos != dialog->pos())
 				proxy->setPos(newPos);
+			QSizeF newSize = proxy->size();
+			if (newSize.width() >= maxSize.width())
+				newSize.setWidth(maxSize.width());
+			if (newSize.height() >= maxSize.height())
+				newSize.setHeight(maxSize.height());
+			if(newSize != dialog->size())
+				proxy->resize(newSize);
 		}
 		else
 		{
@@ -174,14 +174,20 @@ void StelDialog::setVisible(bool v)
 			// resize only if number was valid and larger than default loaded size.
 			if ( (newX>=proxy->size().width()) || (newY>=proxy->size().height()) )
 			{
-				//qDebug() << confNameSize << ": resize from" << proxy->size().width() << "x" << proxy->size().height() << "to " << storedSizeString;
+				//qDebug() << confNameSize << ": resize to " << storedSizeString;
 				proxy->resize(qMax(static_cast<qreal>(newX), proxy->size().width()), qMax(static_cast<qreal>(newY), proxy->size().height()));
 			}
 			if(proxy->size().width() > maxSize.width() || proxy->size().height() > maxSize.height())
 			{
-				proxy->resize(qMin(static_cast<qreal>(maxSize.width()), proxy->size().width()), qMin(static_cast<qreal>(maxSize.height()), proxy->size().height()));
+				proxy->resize(maxSize);
 			}
 			handleDialogSizeChanged(proxy->size()); // This may trigger internal updates in subclasses. E.g. LocationPanel location arrow.
+
+			// The caching is buggy on all platforms with Qt 4.5.2
+			// Disabled on mac for the moment (https://github.com/Stellarium/stellarium/issues/393)
+			#ifndef Q_OS_MAC
+			proxy->setCacheMode(QGraphicsItem::ItemCoordinateCache);
+			#endif
 
 			proxy->setZValue(100);
 			StelMainView::getInstance().scene()->setActiveWindow(proxy);
@@ -267,15 +273,6 @@ void StelDialog::connectDoubleProperty(QDoubleSpinBox *spinBox, const QString &p
 	new QDoubleSpinBoxStelPropertyConnectionHelper(prop,spinBox);
 }
 
-void StelDialog::connectDoubleProperty(AngleSpinBox *spinBox, const QString &propName)
-{
-	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propName);
-	Q_ASSERT_X(prop,"StelDialog", "StelProperty does not exist");
-
-	//use a proxy for the connection
-	new AngleSpinBoxStelPropertyConnectionHelper(prop,spinBox);
-}
-
 void StelDialog::connectDoubleProperty(QSlider *slider, const QString &propName,double minValue, double maxValue)
 {
 	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propName);
@@ -294,15 +291,6 @@ void StelDialog::connectStringProperty(QComboBox *comboBox, const QString &propN
 	new QComboBoxStelStringPropertyConnectionHelper(prop,comboBox);
 }
 
-void StelDialog::connectStringProperty(QLineEdit *lineEdit, const QString &propName)
-{
-	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propName);
-	Q_ASSERT_X(prop,"StelDialog", "StelProperty does not exist");
-
-	//use a proxy for the connection
-	new QLineEditStelPropertyConnectionHelper(prop,lineEdit);
-}
-
 void StelDialog::connectBoolProperty(QAbstractButton *checkBox, const QString &propName)
 {
 	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propName);
@@ -317,11 +305,6 @@ void StelDialog::connectBoolProperty(QGroupBox *checkBox, const QString &propNam
 	Q_ASSERT_X(prop,"StelDialog", "StelProperty does not exist");
 
 	new QGroupBoxStelPropertyConnectionHelper(prop,checkBox);
-}
-
-bool StelDialog::askConfirmation()
-{
-    return (QMessageBox::warning(&StelMainView::getInstance(), q_("Attention!"), q_("Are you sure? This will delete your customized data."), QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes);
 }
 
 void StelDialog::connectColorButton(QToolButton *toolButton, QString propertyName, QString iniName, QString moduleName)
@@ -363,8 +346,8 @@ void StelDialog::askColor()
 		return;
 	}
 	Vec3d vColor = StelApp::getInstance().getStelPropertyManager()->getProperty(propName)->getValue().value<Vec3f>().toVec3d();
-    QColor color = vColor.toQColor();
-    QColor c = QColorDialog::getColor(color, &StelMainView::getInstance() , q_(static_cast<QToolButton*>(QObject::sender())->toolTip()));
+	QColor color = vColor.toQColor();
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(static_cast<QToolButton*>(QObject::sender())->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3d(c.redF(), c.greenF(), c.blueF());
@@ -570,28 +553,6 @@ void QDoubleSpinBoxStelPropertyConnectionHelper::onPropertyChanged(const QVarian
 	spin->setValue(value.toDouble());
 	spin->blockSignals(b);
 }
-
-AngleSpinBoxStelPropertyConnectionHelper::AngleSpinBoxStelPropertyConnectionHelper(StelProperty *prop, AngleSpinBox *spin)
-	:StelPropertyProxy(prop,spin), spin(spin)
-{
-	QVariant val = prop->getValue();
-	bool ok = val.canConvert<double>();
-	Q_ASSERT_X(ok,"AngleSpinBoxStelPropertyConnectionHelper","Can not convert to double datatype");
-	Q_UNUSED(ok);
-	onPropertyChanged(val);
-
-	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
-	connect(spin, static_cast<void (AngleSpinBox::*)(double)>(&AngleSpinBox::valueChangedDeg),prop,&StelProperty::setValue);
-}
-
-void AngleSpinBoxStelPropertyConnectionHelper::onPropertyChanged(const QVariant &value)
-{
-	//block signals to prevent sending the valueChanged signal, changing the property again
-	bool b = spin->blockSignals(true);
-	spin->setDegrees(value.toDouble());
-	spin->blockSignals(b);
-}
-
 
 QSliderStelPropertyConnectionHelper::QSliderStelPropertyConnectionHelper(StelProperty *prop, double minValue, double maxValue, QSlider *slider)
 	: StelPropertyProxy(prop,slider),slider(slider),minValue(minValue),maxValue(maxValue)

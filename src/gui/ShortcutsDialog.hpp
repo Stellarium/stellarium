@@ -45,8 +45,8 @@ public:
 	ShortcutsFilterModel(QObject* parent = Q_NULLPTR);
 	
 protected:
-	virtual bool filterAcceptsRow(int source_row,
-			      const QModelIndex &source_parent) const Q_DECL_OVERRIDE;
+	bool filterAcceptsRow(int source_row,
+	                      const QModelIndex &source_parent) const;
 };
 
 
@@ -56,17 +56,17 @@ class ShortcutsDialog : public StelDialog
 
 public:
 	ShortcutsDialog(QObject* parent);
-	~ShortcutsDialog() Q_DECL_OVERRIDE;
+	~ShortcutsDialog();
 
-	//! highlight items that have collisions with current lineEdits' state according to CSS.
+	//! higlight items that have collisions with current lineEdits' state according to css.
 	//! Note: previous collisions aren't redrawn.
 	void drawCollisions();
 
 public slots:
 	//! restore colors of all items it TreeWidget to defaults.
 	void resetCollisions();
-	virtual void retranslate() Q_DECL_OVERRIDE;
-	//! initialize editors state when current item changed.
+	void retranslate();
+	//! ititialize editors state when current item changed.
 	void initEditors();
 	//! checks whether one QKeySequence is prefix of another.
 	bool prefixMatchKeySequence(const QKeySequence &ks1, const QKeySequence &ks2);
@@ -77,7 +77,7 @@ public slots:
 	void handleChanges();
 	//! called when apply button clicked.
 	void applyChanges();
-	//! called by double-click; if click is on editable item, switch to editors
+	//! called by doubleclick; if click is on editable item, switch to editors
 	void switchToEditors(const QModelIndex& index);
 	//! update shortcut representation in tree correspondingly to its actual contents.
 	//! if no item is specified, search for it in tree, if no items found, create new item
@@ -88,7 +88,7 @@ public slots:
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots.
-	virtual void createDialogContent() Q_DECL_OVERRIDE;
+	virtual void createDialogContent();
 
 private:
 	//! checks whether given item can be changed by editors.
@@ -100,10 +100,10 @@ private:
 
 	QStandardItem* updateGroup(const QString& group);
 
-	//! search for first appearance of item with requested data.
+	//! search for first appearence of item with requested data.
 	QStandardItem* findItemByData(QVariant value, int role, int column = 0) const;
 
-	//! pointer to mgr, for not getting it from StelApp every time.
+	//! pointer to mgr, for not getting it from stelapp every time.
 	class StelActionMgr* actionMgr;
 
 	//! list for storing collisions items, so we can easy restore their colors.

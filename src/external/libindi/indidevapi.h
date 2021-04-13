@@ -36,13 +36,7 @@ This file is divided into two main sections:\n
 <ol><li> Functions the INDI device driver framework defines which the Driver may
 call:</li>
 
-<ul><li>IDxxx functions to send messages to an INDI client. Please note that it is recommended to use the
- INDI Library wrapper functions instead of calling IDxxx directly.
- <ul>
-  <li>IDMessage: Use @ref INDI::Logger "INDI Logging Framework" functions (e.g. LOG_DEBUG..etc) instead.</li>
-  <li>IDDefXXX: use @ref INDI::DefaultDevice "INDI Default Device" defXXX functions intead.</li>
- </ul>
- </li>
+<ul><li>IDxxx functions to send messages to an INDI client.</li>
 <li>IExxx functions to implement the event driven model.</li>
 <li>IUxxx functions to perform handy utility functions.</li></ul>
 
@@ -140,9 +134,9 @@ computer on which this driver is running.</p>
 */
 extern void IDDefText(const ITextVectorProperty *t, const char *msg, ...)
 #ifdef __GNUC__
-__attribute__((format(printf, 2, 3)))
+    __attribute__((format(printf, 2, 3)))
 #endif
-;
+    ;
 
 /** \brief Tell client to create a number number property.
     \param n pointer to the vector number property to be defined.
@@ -150,9 +144,9 @@ __attribute__((format(printf, 2, 3)))
 */
 extern void IDDefNumber(const INumberVectorProperty *n, const char *msg, ...)
 #ifdef __GNUC__
-__attribute__((format(printf, 2, 3)))
+    __attribute__((format(printf, 2, 3)))
 #endif
-;
+    ;
 
 /** \brief Tell client to create a switch vector property.
     \param s pointer to the vector switch property to be defined.
@@ -160,9 +154,9 @@ __attribute__((format(printf, 2, 3)))
 */
 extern void IDDefSwitch(const ISwitchVectorProperty *s, const char *msg, ...)
 #ifdef __GNUC__
-__attribute__((format(printf, 2, 3)))
+    __attribute__((format(printf, 2, 3)))
 #endif
-;
+    ;
 
 /** \brief Tell client to create a light vector property.
     \param l pointer to the vector light property to be defined.
@@ -170,9 +164,9 @@ __attribute__((format(printf, 2, 3)))
 */
 extern void IDDefLight(const ILightVectorProperty *l, const char *msg, ...)
 #ifdef __GNUC__
-__attribute__((format(printf, 2, 3)))
+    __attribute__((format(printf, 2, 3)))
 #endif
-;
+    ;
 
 /** \brief Tell client to create a BLOB vector property.
     \param b pointer to the vector BLOB property to be defined.
@@ -180,9 +174,9 @@ __attribute__((format(printf, 2, 3)))
  */
 extern void IDDefBLOB(const IBLOBVectorProperty *b, const char *msg, ...)
 #ifdef __GNUC__
-__attribute__((format(printf, 2, 3)))
+    __attribute__((format(printf, 2, 3)))
 #endif
-;
+    ;
 
 /*@}*/
 
@@ -197,9 +191,9 @@ __attribute__((format(printf, 2, 3)))
 */
 extern void IDSetText(const ITextVectorProperty *t, const char *msg, ...)
 #ifdef __GNUC__
-__attribute__((format(printf, 2, 3)))
+    __attribute__((format(printf, 2, 3)))
 #endif
-;
+    ;
 
 /** \brief Tell client to update an existing number vector property.
     \param n pointer to the vector number property.
@@ -207,9 +201,9 @@ __attribute__((format(printf, 2, 3)))
 */
 extern void IDSetNumber(const INumberVectorProperty *n, const char *msg, ...)
 #ifdef __GNUC__
-__attribute__((format(printf, 2, 3)))
+    __attribute__((format(printf, 2, 3)))
 #endif
-;
+    ;
 
 /** \brief Tell client to update an existing switch vector property.
     \param s pointer to the vector switch property.
@@ -217,9 +211,9 @@ __attribute__((format(printf, 2, 3)))
 */
 extern void IDSetSwitch(const ISwitchVectorProperty *s, const char *msg, ...)
 #ifdef __GNUC__
-__attribute__((format(printf, 2, 3)))
+    __attribute__((format(printf, 2, 3)))
 #endif
-;
+    ;
 
 /** \brief Tell client to update an existing light vector property.
     \param l pointer to the vector light property.
@@ -227,9 +221,9 @@ __attribute__((format(printf, 2, 3)))
 */
 extern void IDSetLight(const ILightVectorProperty *l, const char *msg, ...)
 #ifdef __GNUC__
-__attribute__((format(printf, 2, 3)))
+    __attribute__((format(printf, 2, 3)))
 #endif
-;
+    ;
 
 /** \brief Tell client to update an existing BLOB vector property.
     \param b pointer to the vector BLOB property.
@@ -237,9 +231,9 @@ __attribute__((format(printf, 2, 3)))
  */
 extern void IDSetBLOB(const IBLOBVectorProperty *b, const char *msg, ...)
 #ifdef __GNUC__
-__attribute__((format(printf, 2, 3)))
+    __attribute__((format(printf, 2, 3)))
 #endif
-;
+    ;
 
 /*@}*/
 
@@ -257,9 +251,9 @@ __attribute__((format(printf, 2, 3)))
 */
 extern void IDMessage(const char *dev, const char *msg, ...)
 #ifdef __GNUC__
-__attribute__((format(printf, 2, 3)))
+    __attribute__((format(printf, 2, 3)))
 #endif
-;
+    ;
 
 /** \brief Function Drivers call to inform Clients a Property is no longer available, or the entire device is gone if name is NULL.
 
@@ -269,9 +263,9 @@ __attribute__((format(printf, 2, 3)))
 */
 extern void IDDelete(const char *dev, const char *name, const char *msg, ...)
 #ifdef __GNUC__
-__attribute__((format(printf, 3, 4)))
+    __attribute__((format(printf, 3, 4)))
 #endif
-;
+    ;
 
 /** \brief Function Drivers call to log a message locally.
 
@@ -281,9 +275,9 @@ __attribute__((format(printf, 3, 4)))
 */
 extern void IDLog(const char *msg, ...)
 #ifdef __GNUC__
-__attribute__((format(printf, 1, 2)))
+    __attribute__((format(printf, 1, 2)))
 #endif
-;
+    ;
 
 /*@}*/
 
@@ -295,8 +289,7 @@ __attribute__((format(printf, 1, 2)))
 
 /** \typedef BLOBHandling
     \brief How drivers handle BLOBs incoming from snooping drivers */
-typedef enum
-{
+typedef enum {
     B_NEVER = 0, /*!< Never receive BLOBs */
     B_ALSO,      /*!< Receive BLOBs along with normal messages */
     B_ONLY       /*!< ONLY receive BLOBs from drivers, ignore all other traffic */
@@ -547,10 +540,6 @@ extern int IUSaveBLOB(IBLOB *bp, int size, int blobsize, char *blob, char *forma
 
 /** \brief Function to update the min and max elements of a number in the client
     \param nvp pointer to an INumberVectorProperty.
-    \warning This call is not INDI protocol compliant. It sends setNumberVector along with updated Min/Max/Step values so that the client
-    updates the range accordingly for this property. In the INDI-compliant paradigm, it is NOT possible to update min/max/step step of an existing number
-    property and the only way is to do so is to delete and redefine the number property again. However, due to the many problems with approach in device drivers,
-    INDI Library defines this function to simplify the update process without requiring a complete delete/define cycle.
  */
 extern void IUUpdateMinMax(const INumberVectorProperty *nvp);
 

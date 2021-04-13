@@ -215,7 +215,7 @@ void ObsListDialog::obsListHighLightAllButtonPressed()
     obsListClearHighLightButtonPressed(); // Enable fool protection
     int fontSize = StelApp::getInstance().getScreenFontSize();
     HighlightMgr* hlMgr = GETSTELMODULE ( HighlightMgr );
-    QString color = StelUtils::vec3fToHtmlColor ( hlMgr->getColor() );
+    QString color = hlMgr->getColor().toHtmlColor();
     float distance = hlMgr->getMarkersSize();
 
     for ( auto item : observingListItemCollection ) {

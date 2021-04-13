@@ -63,6 +63,7 @@ TelescopeConfigurationDialog::TelescopeConfigurationDialog()
 TelescopeConfigurationDialog::~TelescopeConfigurationDialog()
 {
 	delete ui;
+
 	delete telescopeNameValidator;
 	delete hostNameValidator;
 	delete circleListValidator;
@@ -376,6 +377,17 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 
 	// Connect at startup
 	ui->checkBoxConnectAtStartup->setChecked(connectAtStartup);
+
+	#ifdef Q_OS_WIN
+	// NOTE: Dirty fix a crash Stellarium when autoconnect is enabled for ASCOM device, but device is not attached
+	if (connectionType == ConnectionASCOM)
+	{
+		ui->checkBoxConnectAtStartup->setChecked(false);
+		ui->checkBoxConnectAtStartup->setEnabled(false);
+	}
+	else
+		ui->checkBoxConnectAtStartup->setEnabled(true);
+	#endif
 }
 
 void TelescopeConfigurationDialog::toggleTypeLocal(bool isChecked)

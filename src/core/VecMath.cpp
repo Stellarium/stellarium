@@ -182,16 +182,16 @@ template<> QString Vec3i::toHtmlColor() const
 template<> QString Vec3f::toHtmlColor() const
 {
 	return QString("#%1%2%3")
-		.arg(qMin(255, qRound(v[0] * 255)), 2, 16, QChar('0'))
-		.arg(qMin(255, qRound(v[1] * 255)), 2, 16, QChar('0'))
-		.arg(qMin(255, qRound(v[2] * 255)), 2, 16, QChar('0'));
+		.arg(qMin(255, int(v[0] * 255)), 2, 16, QChar('0'))
+		.arg(qMin(255, int(v[1] * 255)), 2, 16, QChar('0'))
+		.arg(qMin(255, int(v[2] * 255)), 2, 16, QChar('0'));
 }
 template<> QString Vec3d::toHtmlColor() const
 {
 	return QString("#%1%2%3")
-		.arg(qMin(255, qRound(v[0] * 255)), 2, 16, QChar('0'))
-		.arg(qMin(255, qRound(v[1] * 255)), 2, 16, QChar('0'))
-		.arg(qMin(255, qRound(v[2] * 255)), 2, 16, QChar('0'));
+		.arg(qMin(255, int(v[0] * 255)), 2, 16, QChar('0'))
+		.arg(qMin(255, int(v[1] * 255)), 2, 16, QChar('0'))
+		.arg(qMin(255, int(v[2] * 255)), 2, 16, QChar('0'));
 }
 
 template<> QColor Vec3i::toQColor() const
@@ -207,16 +207,6 @@ template<> QColor Vec3f::toQColor() const
 template<> QColor Vec3d::toQColor() const
 {
 	return QColor::fromRgbF(v[0], v[1], v[2]);
-}
-
-template<> QVector3D Vec3f::toQVector3D() const
-{
-	return QVector3D(v[0], v[1], v[2]);
-}
-
-template<> QVector3D Vec3d::toQVector3D() const
-{
-	return QVector3D(static_cast<float>(v[0]), static_cast<float>(v[1]), static_cast<float>(v[2]));
 }
 
 ///// Vector4 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

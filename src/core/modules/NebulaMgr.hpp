@@ -357,6 +357,10 @@ public:
 	//! @param name The case in-sensitive standard program name
 	virtual StelObjectP searchByName(const QString& name) const;
 
+	//! Return the matching nebula if exists or Q_NULLPTR.
+	//! @param name The case in-sensitive designation of deep-sky object
+	virtual StelObjectP searchByDesignation(const QString& designation) const;
+
 	virtual StelObjectP searchByID(const QString &id) const { return searchByName(id); }
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
@@ -364,7 +368,7 @@ public:
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=false) const;
 	//! @note Loading deep-sky objects with the proper names only.
 	virtual QStringList listAllObjects(bool inEnglish) const;
 	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const;
@@ -378,10 +382,6 @@ public:
 	//! @note using for bookmarks feature as example
 	//! @return a designation
 	QString getLatestSelectedDSODesignation() const;
-	//! Get designation for latest selected DSO with priority and ignorance of availability of catalogs
-	//! @note using for bookmarks feature as example
-	//! @return a designation
-	QString getLatestSelectedDSODesignationWIC() const;
 
 	//! Get the list of all deep-sky objects.
 	const QVector<NebulaP>& getAllDeepSkyObjects() const { return dsoArray; }
@@ -980,9 +980,6 @@ private:
 	NebulaP searchSt(unsigned int St) const;
 	NebulaP searchRu(unsigned int Ru) const;
 	NebulaP searchVdBHa(unsigned int VdBHa) const;
-	//! Return the matching nebula if exists or Q_NULLPTR.
-	//! @param name The case in-sensitive designation of deep-sky object
-	NebulaP searchByDesignation(const QString& designation) const;
 
 	// Load catalog of DSO
 	bool loadDSOCatalog(const QString& filename);

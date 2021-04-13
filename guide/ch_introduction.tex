@@ -37,7 +37,7 @@ the Stellarium website\footnote{\url{https://stellarium.org}}.
 
 If you have questions and/or comments about this guide, or about
 Stellarium itself, visit the Stellarium site at
-GitHub\footnote{\url{https://github.com/Stellarium/stellarium}} or our
+Github\footnote{\url{https://github.com/Stellarium/stellarium}} or our
 Google Groups
 forum\footnote{\url{https://groups.google.com/forum/#!forum/stellarium}}.
 
@@ -68,7 +68,7 @@ arrival on the project:
 \item[Diego Marcos] SVMT plugin
 \item[Guillaume Ch\'ereau] display, optimization, Qt upgrades, HiPS surveys
 \item[Alexander Wolf] maintainer, DSO catalogs, user guide, general development
-\item[Georg Zotti] astronomical computations, Scenery 3D, ArchaeoLines and Calendars plugins, general development, user guide, user support
+\item[Georg Zotti] astronomical computations, Scenery 3D and ArchaeoLines plugins, general development, user guide, user support
 \item[Marcos Cardinot] MeteorShowers plugin
 \item[Florian Schaukowitsch] Scenery 3D plugin, Remote Control plugin, RemoteSync plugin, OBJ rendering, Qt/OpenGL internals
 \item[Teresa Huertas Roldán] Planetary nomenclature 
@@ -80,13 +80,14 @@ to the project (some are still available for limited work
 which requires specific knowledge about the project).
 
 As of 2017, the project's maintainer is Alexander Wolf, doing most
-maintenance and regular releases. He has also introduced the AstroCalc module.
-Other new features are contributed
-mostly by Georg Zotti and his team focusing on extensions of
+maintenance and regular releases. Major new features are contributed
+mostly by Georg Zotti and his team focussing on extensions of
 Stellarium's applicability in the fields of historical and cultural
 astronomy research (which means Stellarium is getting more accurate)
 and outreach (making it usable for museum installations), but also on
-graphic items like comet tails or the Zodiacal Light. 
+graphic items like comet tails or the Zodiacal Light. Some of Georg's work is
+in part supported by the Ludwig Boltzmann Institute for Archaeological
+Prospection and Virtual Archaeology, Vienna, Austria.
 
 \vspace{1\baselineskip}
 \noindent A detailed track of development can be found in the
@@ -119,28 +120,16 @@ milestones for the project:
 \item[2017-12] v0.17.0: Nomenclature labels for planets and moons, INDI telescope support
 \item[2018-03] v0.18.0: Multiple image surveys
 \item[2019-12] v0.19.3: ASCOM telescope support 
-\item[2020-09] v0.20.3: Accurate seasons' beginnings
-\item[2021-03] v0.21.0: Accurate planet rotation (Libration, central meridians, subsolar points, \ldots) 
 \end{description}
 
-\section{Acknowledgements}
 Stellarium has been kindly supported by ESA in their Summer of Code in
 Space initiatives, which so far has resulted in better planetary rendering
 (2012), the Meteor Showers plugin (2013), the web-based remote
 control and an alternative solution for planetary positions based on
 the DE430/DE431 ephemeris (2015), the RemoteSync plugin and OBJ models (2016), 
-and the planet nomenclature labels (2017). Some of Georg's work is
-in part supported by the Ludwig Boltzmann Institute for Archaeological
-Prospection and Virtual Archaeology, Vienna, Austria.
+and the planet nomenclature labels (2017).
 
-\section{Scientific use}
 
-Stellarium has gained wide popularity in the research areas of
-cultural astronomy. Please note limitations of Stellarium mentioned in
-Appendix~\ref{ch:Accuracy}. If you used Stellarium in scientific work,
-please cite our recent paper \citep{Zotti-etal:JSA2020.6.2}.
-
-\section{About this User Guide}
 This guide is based on the user guide written by Matthew Gates for
 version 0.10 around 2008. The guide was then ported to the Stellarium
 wiki and continuously updated by Barry Gerdes and Alexander Wolf up to version 0.12. 
@@ -159,7 +148,6 @@ New features are marked with a version number like 0.15.2 in the margin.
 Some references to previous versions may still be made for completeness, 
 but if you are using earlier versions of Stellarium 
 for particular reasons, please use the older guides.
-
 
 %%% Local Variables: 
 %%% mode: latex

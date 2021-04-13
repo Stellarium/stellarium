@@ -294,15 +294,10 @@ void PulsarsDialog::updateCompleteReceiver(void)
 
 void PulsarsDialog::restoreDefaults(void)
 {
-	if (askConfirmation())
-	{
-		qDebug() << "[Pulsars] restore defaults...";
-		psr->restoreDefaults();
-		psr->readSettingsFromConfig();
-		updateGuiFromSettings();
-	}
-	else
-		qDebug() << "[Pulsars] restore defaults is canceled...";
+	qDebug() << "[Pulsars] Restore defaults...";
+	psr->restoreDefaults();
+	psr->readSettingsFromConfig();
+	updateGuiFromSettings();
 }
 
 void PulsarsDialog::updateGuiFromSettings(void)

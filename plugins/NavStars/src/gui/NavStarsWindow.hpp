@@ -51,6 +51,12 @@ private:
 private slots:
 	void saveSettings();
 	void resetSettings();
+	void setDisplayAtStartupEnabled(int checkState);
+	void setHighlightWhenVisibleEnabled(int checkState);
+	void setLimitInfoToNavStarsEnabled(int checkState);
+	void setUpperLimbEnabled(int checkState);
+	void setTabulatedDisplayEnabled(int checkState);
+    
 	void populateNavigationalStarsSets();
 	void setNavigationalStarsSet(int nsSetID);
 };

@@ -163,7 +163,6 @@ public:
 	//! - bmag (photometric B magnitude. 99 if unknown)
 	//! - morpho (longish description; translated!)
 	//! - surface-brightness
-	//! - designations (all designations of DSO)
 	//! A few entries are optional
 	//! - bV (B-V index)
 	//! - redshift
@@ -220,9 +219,6 @@ public:
 	//! Get designation for DSO (with priority: M, C, NGC, IC, B, Sh2, vdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Ced, Arp, VV, PK, PN G, SNR G, ACO, HCG, ESO, vdBH, DWB, Tr, St, Ru, vdB-Ha)
 	//! @return a designation
 	QString getDSODesignation() const;
-	//! Get designation for DSO with priority and ignorance of availability of catalogs
-	//! @return a designation
-	QString getDSODesignationWIC() const;	
 
 	bool objectInDisplayedCatalog() const;
 
@@ -230,7 +226,7 @@ public:
 
 protected:
 	//! Format the magnitude info string for the object
-	virtual QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals=1) const;
+	virtual QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const double alt_app, const int decimals=1) const;
 
 private:
 	friend struct DrawNebulaFuncObject;
@@ -242,7 +238,7 @@ private:
 		nameI18Aliases.clear();
 		for (auto alias : englishAliases)
 			nameI18Aliases.append(trans.qtranslate(alias));
-	}	
+	}
 
 	void readDSO(QDataStream& in);
 
@@ -311,7 +307,6 @@ private:
 	NebulaType nType;
 
 	SphericalRegionP pointRegion;
-	QStringList designations;
 
 	static StelTextureSP texCircle;				// The symbolic circle texture
 	static StelTextureSP texCircleLarge;			// The symbolic circle texture for large objects

@@ -54,7 +54,6 @@
 #include <QPixmap>
 #include <QDir>
 #include <QSettings>
-#include <stdexcept>
 
 #define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
 
@@ -351,7 +350,7 @@ StelObjectP Exoplanets::searchByNameI18n(const QString& nameI18n) const
 	return Q_NULLPTR;
 }
 
-QStringList Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
+QStringList Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
 {
 	QStringList result;
 	if (!flagShowExoplanets || maxNbItem <= 0)
@@ -359,33 +358,37 @@ QStringList Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbI
 		return result;
 	}
 
-	QStringList names;
 	for (const auto& eps : ep)
 	{
-		names.append(eps->getNameI18n());
-		names.append(eps->getExoplanetsNamesI18n());
-		names.append(eps->getEnglishName());
-		names.append(eps->getExoplanetsEnglishNames());
-	}
-
-	QString fullMatch = "";
-	for (const auto& name : names)
-	{
-		if (!matchObjectName(name, objPrefix, useStartOfWords))
-			continue;
-
-		if (name==objPrefix)
-			fullMatch = name;
+		QStringList names;
+		if (inEnglish)
+		{
+			names.append(eps->getEnglishName());
+			names.append(eps->getExoplanetsEnglishNames());
+		}
 		else
-			result.append(name);
+		{
+			names.append(eps->getNameI18n());
+			names.append(eps->getExoplanetsNamesI18n());
+		}
 
-		if (result.size() >= maxNbItem)
-			break;
+		for (const auto& name : names)
+		{
+			if (!matchObjectName(name, objPrefix, useStartOfWords))
+			{
+				continue;
+			}
+
+			result.append(name);
+			if (result.size() >= maxNbItem)
+			{
+				result.sort();
+				return result;
+			}
+		}
 	}
 
 	result.sort();
-	if (!fullMatch.isEmpty())
-		result.prepend(fullMatch);
 	return result;
 }
 
@@ -859,7 +862,6 @@ void Exoplanets::setFlagShowExoplanets(bool b)
 	{
 		flagShowExoplanets=b;
 		emit flagExoplanetsVisibilityChanged(b);
-		emit StelApp::getInstance().getCore()->updateSearchLists();
 	}
 }
 
@@ -909,7 +911,9 @@ void Exoplanets::startDownload(QString urlString)
 	QNetworkRequest request;
 	request.setUrl(QUrl(updateUrl));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
+	#if QT_VERSION >= 0x050600
 	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+	#endif
 	downloadReply = networkManager->get(request);
 	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
 
@@ -947,6 +951,23 @@ void Exoplanets::downloadComplete(QNetworkReply *reply)
 		return;
 
 	disconnect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
+
+	#if QT_VERSION < 0x050600
+	int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+	if (statusCode == 301 || statusCode == 302 || statusCode == 307)
+	{
+		QUrl rawUrl = reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
+		QUrl redirectUrl(rawUrl.toString(QUrl::RemoveQuery));
+		qDebug() << "[Exoplanets] The query has been redirected to" << redirectUrl.toString();
+		updateUrl = redirectUrl.toString();
+		conf->setValue("Exoplanets/url", updateUrl);
+		reply->deleteLater();
+		downloadReply = Q_NULLPTR;
+		startDownload(redirectUrl.toString());
+		return;
+	}
+	#endif
+
 	deleteDownloadProgressBar();
 
 	if (reply->error() || reply->bytesAvailable()==0)
@@ -1032,14 +1053,8 @@ void Exoplanets::translations()
 	N_("Other");
 	// TRANSLATORS: Exoplanet detection method
 	N_("Astrometry");
-	// TRANSLATORS: Exoplanet detection method. TTV=Transit Timing Variation
+	// TRANSLATORS: Detection method. TTV=Transit Timing Variation
 	N_("TTV");
-	// TRANSLATORS: Exoplanet detection method
-	N_("Timing");
-	// TRANSLATORS: Exoplanet detection method. TTV=Transit Timing Variation
-	N_("Primary Transit, TTV");
-	// TRANSLATORS: Exoplanet detection method
-	N_("Default");
 
 	/* For copy/paste:
 	// TRANSLATORS:

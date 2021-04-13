@@ -32,17 +32,15 @@ class AstroCalcExtraEphemerisDialog : public StelDialog
 
 public:
 	AstroCalcExtraEphemerisDialog();
-	virtual ~AstroCalcExtraEphemerisDialog() Q_DECL_OVERRIDE;
+	virtual ~AstroCalcExtraEphemerisDialog();
 
 public slots:
-	virtual void retranslate() Q_DECL_OVERRIDE;
-
-private slots:
-	void setOptionStatus();
+	void retranslate();
+	void setVisible(bool);
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots.
-	virtual void createDialogContent() Q_DECL_OVERRIDE;
+	virtual void createDialogContent();
 	Ui_astroCalcExtraEphemerisDialogForm *ui;
 };
 

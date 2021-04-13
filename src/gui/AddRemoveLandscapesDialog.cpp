@@ -25,7 +25,6 @@
 #include "StelApp.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelLocaleMgr.hpp"
-#include "StelMainView.hpp"
 
 #include <QDebug>
 #include <QFileDialog>
@@ -153,8 +152,7 @@ void AddRemoveLandscapesDialog::removeClicked()
 	int reply = QMessageBox(QMessageBox::Question,
 				q_("Remove an installed landscape"),
 				q_("Do you really want to remove this landscape?"),
-                QMessageBox::Yes|QMessageBox::No,
-                &StelMainView::getInstance()).exec();
+				QMessageBox::Yes|QMessageBox::No).exec();
 
 	if (reply == QMessageBox::Yes)
 	{

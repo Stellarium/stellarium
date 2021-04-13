@@ -70,9 +70,9 @@ extern "C" {
 #endif
 
 /* opaque handle types */
-typedef struct xml_att_ XMLAtt;
-typedef struct xml_ele_ XMLEle;
-typedef struct LilXML_ LilXML;
+typedef struct _xml_att XMLAtt;
+typedef struct _xml_ele XMLEle;
+typedef struct _LilXML LilXML;
 
 /**
  * \defgroup lilxmlFunctions XML Functions: Functions to parse, process, and search XML.
@@ -91,10 +91,9 @@ extern LilXML *newLilXML();
 */
 extern void delLilXML(LilXML *lp);
 
-/**
- * @brief delXMLEle Delete XML element.
- * @param e Pointer to XML element to delete. If nullptr, no action is taken.
- */
+/** \brief Delete an XML element.
+    \return a pointer to the XML Element to be deleted.
+*/
 extern void delXMLEle(XMLEle *e);
 
 /** \brief Process an XML chunk.

@@ -49,7 +49,6 @@
 #include "StelTranslator.hpp"
 #include "StelActionMgr.hpp"
 #include "StelUtils.hpp"
-#include "StelMainView.hpp"
 
 #include "external/qxlsx/xlsxdocument.h"
 #include "external/qxlsx/xlsxchartsheet.h"
@@ -147,7 +146,7 @@ void SatellitesDialog::createDialogContent()
 	ui->addSourceButton->setFixedSize(bs);
 	ui->deleteSourceButton->setFixedSize(bs);
 	ui->editSourceButton->setFixedSize(bs);
-	ui->saveSourceButton->setFixedSize(bs);	
+	ui->saveSourceButton->setFixedSize(bs);
 
 	// Settings tab / updates group
 	// These controls are refreshed by updateSettingsPage(), which in
@@ -176,10 +175,6 @@ void SatellitesDialog::createDialogContent()
 	// Settings tab / realistic mode group
 	connectBoolProperty(ui->iconicGroup,             "Satellites.flagIconicMode");
 	connectBoolProperty(ui->hideInvisibleSatellites, "Satellites.flagHideInvisible");
-
-	// Settings tab / colors group
-	connectColorButton(ui->invisibleColorButton, "Satellites.invisibleSatelliteColor", "Satellites/invisible_satellite_color");
-	connectColorButton(ui->transitColorButton,   "Satellites.transitSatelliteColor",   "Satellites/transit_satellite_color");
 
 	// Settings tab - populate all values
 	updateSettingsPage();
@@ -245,7 +240,6 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->addSourceButton, SIGNAL(clicked()),	this, SLOT(addSourceRow()));
 	connect(ui->editSourceButton, SIGNAL(clicked()),	this, SLOT(editSourceRow()));
 	connect(ui->saveSourceButton, SIGNAL(clicked()),	this, SLOT(saveEditedSource()));
-	connect(plugin, SIGNAL(satGroupVisibleChanged()), this, SLOT(updateSatelliteAndSaveData()));
 	connect(plugin, SIGNAL(settingsChanged()), this, SLOT(toggleCheckableSources()));
 	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
 	connect(ui->sourceList, SIGNAL(currentRowChanged(int)), ui->sourceList, SLOT(repaint()));
@@ -282,19 +276,19 @@ void SatellitesDialog::askSatMarkerColor()
 	Satellites* SatellitesMgr = GETSTELMODULE(Satellites);
 	Q_ASSERT(SatellitesMgr);
 
-    QColor c = QColorDialog::getColor(buttonMarkerColor, &StelMainView::getInstance(), "");
+	QColor c = QColorDialog::getColor(buttonMarkerColor, Q_NULLPTR, "");
 	if (c.isValid())
 	{
 		Vec3f vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
 		SatelliteP sat;
-		// colourize all selected satellites
+		// colorize all selected satellites
 		for (int i = 0; i < selection.size(); i++)
 		{
 			const QModelIndex& index = selection.at(i);
 			sat = SatellitesMgr->getById(index.data(Qt::UserRole).toString());
 			sat->hintColor = vColor;
 		}
-		// colourize the button
+		// colorize the button
 		buttonMarkerColor = c;
 		ui->satMarkerColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonMarkerColor.name() + "; }");
 		saveSatellites();
@@ -310,19 +304,19 @@ void SatellitesDialog::askSatOrbitColor()
 	Satellites* SatellitesMgr = GETSTELMODULE(Satellites);
 	Q_ASSERT(SatellitesMgr);
 
-    QColor c = QColorDialog::getColor(buttonOrbitColor, &StelMainView::getInstance(), "");
+	QColor c = QColorDialog::getColor(buttonOrbitColor, Q_NULLPTR, "");
 	if (c.isValid())
 	{
 		Vec3f vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
 		SatelliteP sat;
-		// colourize all selected satellites
+		// colorize all selected satellites
 		for (int i = 0; i < selection.size(); i++)
 		{
 			const QModelIndex& index = selection.at(i);
 			sat = SatellitesMgr->getById(index.data(Qt::UserRole).toString());
 			sat->orbitColor = vColor;
 		}
-		// colourize the button
+		// colorize the button
 		buttonOrbitColor = c;
 		ui->satOrbitColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonOrbitColor.name() + "; }");
 		saveSatellites();
@@ -338,19 +332,19 @@ void SatellitesDialog::askSatInfoColor()
 	Satellites* SatellitesMgr = GETSTELMODULE(Satellites);
 	Q_ASSERT(SatellitesMgr);
 
-    QColor c = QColorDialog::getColor(buttonInfoColor, &StelMainView::getInstance(), "");
+	QColor c = QColorDialog::getColor(buttonInfoColor, Q_NULLPTR, "");
 	if (c.isValid())
 	{
 		Vec3f vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
 		SatelliteP sat;
-		// colourize all selected satellites
+		// colorize all selected satellites
 		for (int i = 0; i < selection.size(); i++)
 		{
 			const QModelIndex& index = selection.at(i);
 			sat = SatellitesMgr->getById(index.data(Qt::UserRole).toString());
 			sat->infoColor = vColor;
 		}
-		// colourize the button
+		// colorize the button
 		buttonInfoColor = c;
 		ui->satInfoColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonInfoColor.name() + "; }");
 		saveSatellites();
@@ -436,12 +430,6 @@ void SatellitesDialog::filterListByGroup(int index)
 	ui->satellitesList->scrollTo(first);
 }
 
-void SatellitesDialog::updateSatelliteAndSaveData()
-{
-	updateSatelliteData(); // update properties of selected satellite in the GUI
-	saveSatellites(); // enforcement saving properties of satellites
-}
-
 void SatellitesDialog::updateSatelliteData()
 {
 	setRightSideToRWMode();
@@ -469,12 +457,10 @@ void SatellitesDialog::updateSatelliteData()
 	{
 		ui->nameEdit->setText(QString());
 		ui->noradNumberEdit->setText(QString());
-		ui->cosparNumberEdit->setText(QString());
 		ui->tleFirstLineEdit->setText(QString());
 		ui->tleSecondLineEdit->setText(QString());
 		ui->stdMagnitudeLineEdit->setText(QString());
 		ui->rcsLineEdit->setText(QString());
-		ui->labelTleEpochData->setText(QString());
 
 		// get color of first selected item and test against all other selections
 		{
@@ -540,7 +526,6 @@ void SatellitesDialog::updateSatelliteData()
 			rcsString = QString::number(rcs, 'f', 3);
 		ui->nameEdit->setText(index.data(Qt::DisplayRole).toString());
 		ui->noradNumberEdit->setText(index.data(Qt::UserRole).toString());
-		ui->cosparNumberEdit->setText(index.data(SatCosparIDRole).toString());
 		// NOTE: Description is deliberately displayed untranslated!
 		ui->descriptionTextEdit->setText(index.data(SatDescriptionRole).toString());
 		ui->stdMagnitudeLineEdit->setText(stdMagString);
@@ -548,9 +533,8 @@ void SatellitesDialog::updateSatelliteData()
 		ui->tleFirstLineEdit->setText(index.data(FirstLineRole).toString());
 		ui->tleFirstLineEdit->setCursorPosition(0);
 		ui->tleSecondLineEdit->setText(index.data(SecondLineRole).toString());
-		ui->tleSecondLineEdit->setCursorPosition(0);
-		ui->labelTleEpochData->setText(index.data(SatTLEEpochRole).toString());
-
+		ui->tleSecondLineEdit->setCursorPosition(0);		
+		
 		// get color of the one selected sat
 		QString id = index.data(Qt::UserRole).toString();
 		SatelliteP sat = SatellitesMgr->getById(id);
@@ -559,7 +543,7 @@ void SatellitesDialog::updateSatelliteData()
 		iColor = sat->infoColor;
 	}
 
-	// colourize the colorpicker button
+	// colorize the colorpicker button
 	buttonMarkerColor=mColor.toQColor(); // .setRgbF(mColor.v[0], mColor.v[1], mColor.v[2]);
 	ui->satMarkerColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonMarkerColor.name() + "; }");
 	buttonOrbitColor=oColor.toQColor(); // .setRgbF(oColor.v[0], oColor.v[1], oColor.v[2]);
@@ -643,7 +627,6 @@ void SatellitesDialog::updateSatelliteData()
 	{
 		QListWidgetItem* item = new QListWidgetItem(q_(group),
 							    ui->groupsListWidget);
-		item->setToolTip(q_(group));
 		item->setData(Qt::UserRole, group);
 		Qt::CheckState state = Qt::Unchecked;
 		if (groupsUsedByAll.contains(group))
@@ -724,12 +707,10 @@ void SatellitesDialog::populateAboutPage()
 	html += "<li>" + q_("Go to the Satellites tab, and click the '+' button.  Select the satellite(s) you wish to add and select the 'add' button.") + "</li></ol>";
 
 	html += "<h3>" + q_("Technical notes") + "</h3>";
-	html += "<p>" + q_("Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data as the input.") + " ";
-	html +=               q_("The orbital calculation code is written by Jose Luis Canales according to the revised Spacetrack Report #3 (including Spacetrack Report #6)") + " <a href=\"http://www.celestrak.com/publications/AIAA/2006-6753\">[*]</a>. ";
-	html +=               q_("To calculate an approximate visual magnitude of satellites we use data from Mike McCants' database (with permissions) of the radar cross-section (RCS) and standard magnitudes.") + " ";
-	html +=               q_("Formula to calculate an approximate visual magnitude of satellites from the standard magnitude may be found at Mike McCants website") + " <a href=\"https://www.prismnet.com/~mmccants/tles/mccdesc.html\">[**]</a>. ";
-	html +=               q_("We use a spherical shape of satellite to calculate an approximate visual magnitude from RCS values.") + " ";
-	html +=               q_("For modelling Starlink magnitudes we use Anthony Mallama's formula") + " <a href=\"http://www.satobs.org/seesat/Aug-2020/0079.html\">[***]</a>.</p>";
+	html += "<p>" + q_("Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data as the input. ");
+	html += q_("The orbital calculation code is written by Jose Luis Canales according to the revised Spacetrack Report #3 (including Spacetrack Report #6). ");
+	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+	html += QString(q_("See %1this document%2 for details.")).arg("<a href=\"http://www.celestrak.com/publications/AIAA/2006-6753\">").arg("</a>") + "</p>";
 
 	html += "<h3>" + q_("Links") + "</h3>";
 	html += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg("Satellites plugin") + "</p>";
@@ -810,6 +791,8 @@ void SatellitesDialog::showUpdateCompleted(int updated,
 	// display the status for another full interval before refreshing status
 	updateTimer->start();
 	ui->lastUpdateDateTimeEdit->setDateTime(plugin->getLastUpdate());
+	//QTimer *timer = new QTimer(this); // FIXME: What's the point of this? --BM. GZ Indeed, never triggered. Remove?
+	//connect(timer, SIGNAL(timeout()), this, SLOT(updateCountdown()));	
 	populateFilterMenu();
 }
 
@@ -820,14 +803,14 @@ void SatellitesDialog::saveEditedSource()
 	if (u.isEmpty() || u=="")
 	{
 		qDebug() << "SatellitesDialog::saveEditedSource empty string - not saving";
-		QMessageBox::warning(&StelMainView::getInstance(), q_("Warning!"), q_("Empty string - not saving"), QMessageBox::Ok);
+		QMessageBox::warning(Q_NULLPTR, q_("Warning!"), q_("Empty string - not saving"), QMessageBox::Ok);
 		return;
 	}
 
 	if (!QUrl(u).isValid() || !u.contains("://"))
 	{
 		qDebug() << "SatellitesDialog::saveEditedSource invalid URL - not saving : " << u;
-		QMessageBox::warning(&StelMainView::getInstance(), q_("Warning!"), q_("Invalid URL - not saving"), QMessageBox::Ok);
+		QMessageBox::warning(Q_NULLPTR, q_("Warning!"), q_("Invalid URL - not saving"), QMessageBox::Ok);
 		return;
 	}
 
@@ -861,15 +844,12 @@ void SatellitesDialog::saveSourceList(void)
 
 void SatellitesDialog::deleteSourceRow(void)
 {
-	if (askConfirmation())
-	{
-		ui->sourceEdit->setText("");
-		if (ui->sourceList->currentItem())
-			delete ui->sourceList->currentItem();
+	ui->sourceEdit->setText("");
+	if (ui->sourceList->currentItem())
+		delete ui->sourceList->currentItem();
 
-		updateButtonsProperties();
-		saveSourceList();
-	}
+	updateButtonsProperties();
+	saveSourceList();
 }
 
 void SatellitesDialog::editSourceRow(void)
@@ -942,17 +922,12 @@ void SatellitesDialog::toggleCheckableSources()
 
 void SatellitesDialog::restoreDefaults(void)
 {
-	if (askConfirmation())
-	{
-		qDebug() << "[Satellites] restore defaults...";
-		GETSTELMODULE(Satellites)->restoreDefaults();
-		GETSTELMODULE(Satellites)->loadSettings();
-		updateSettingsPage();
-		populateFilterMenu();
-		populateSourcesList();
-	}
-	else
-		qDebug() << "[Satellites] restore defaults is canceled...";
+	qDebug() << "Satellites::restoreDefaults";
+	GETSTELMODULE(Satellites)->restoreDefaults();
+	GETSTELMODULE(Satellites)->loadSettings();
+	updateSettingsPage();
+	populateFilterMenu();
+	populateSourcesList();
 }
 
 void SatellitesDialog::updateSettingsPage()
@@ -1028,12 +1003,6 @@ void SatellitesDialog::populateInfo()
 	ui->labelRCS->setText(QString("%1, %2<sup>2</sup>:").arg(q_("RCS"), qc_("m","distance")));
 	ui->labelRCS->setToolTip(QString("<p>%1</p>").arg(q_("Radar cross-section (RCS) is a measure of how detectable an object is with a radar. A larger RCS indicates that an object is more easily detected.")));
 	ui->labelStdMagnitude->setToolTip(QString("<p>%1</p>").arg(q_("The standard magnitude of a satellite is defined as its apparent magnitude when at half-phase and at a distance 1000 km from the observer.")));
-	// TRANSLATORS: duration
-	ui->orbitDurationSpin->setSuffix(qc_(" s","time unit"));
-	// TRANSLATORS: duration
-	ui->labelSegmentLength->setText(q_("Segment length:"));
-	// TRANSLATORS: duration
-	ui->updateFrequencySpinBox->setSuffix(qc_(" h","time unit"));
 }
 
 void SatellitesDialog::populateSourcesList()
@@ -1150,21 +1119,18 @@ void SatellitesDialog::addSatellites(const TleDataList& newSatellites)
 
 void SatellitesDialog::removeSatellites()
 {
-	if (askConfirmation())
+	QStringList idList;
+	QItemSelectionModel* selectionModel = ui->satellitesList->selectionModel();
+	QModelIndexList selectedIndexes = selectionModel->selectedRows();
+	for (const auto& index : selectedIndexes)
 	{
-		QStringList idList;
-		QItemSelectionModel* selectionModel = ui->satellitesList->selectionModel();
-		QModelIndexList selectedIndexes = selectionModel->selectedRows();
-		for (const auto& index : selectedIndexes)
-		{
-			QString id = index.data(Qt::UserRole).toString();
-			idList.append(id);
-		}
-		if (!idList.isEmpty())
-		{
-			GETSTELMODULE(Satellites)->remove(idList);
-			saveSatellites();
-		}
+		QString id = index.data(Qt::UserRole).toString();
+		idList.append(id);
+	}
+	if (!idList.isEmpty())
+	{
+		GETSTELMODULE(Satellites)->remove(idList);
+		saveSatellites();
 	}
 }
 
@@ -1214,8 +1180,6 @@ void SatellitesDialog::setRightSideToROMode()
 	ui->nameEdit->setText(QString());
 	ui->noradNumberEdit->setEnabled(false);
 	ui->noradNumberEdit->setText(QString());
-	ui->cosparNumberEdit->setEnabled(false);
-	ui->cosparNumberEdit->setText(QString());
 	ui->descriptionTextEdit->setEnabled(false);
 	ui->descriptionTextEdit->setText(QString());
 	ui->groupsListWidget->setEnabled(false);
@@ -1224,7 +1188,6 @@ void SatellitesDialog::setRightSideToROMode()
 	ui->tleFirstLineEdit->setText(QString());
 	ui->tleSecondLineEdit->setEnabled(false);
 	ui->tleSecondLineEdit->setText(QString());
-	ui->labelTleEpochData->setText(QString());
 	ui->stdMagnitudeLineEdit->setEnabled(false);
 	ui->stdMagnitudeLineEdit->setText(QString());
 	ui->rcsLineEdit->setEnabled(false);
@@ -1247,7 +1210,6 @@ void SatellitesDialog::setRightSideToRWMode()
 	ui->userCheckBox->setEnabled(true);
 	ui->nameEdit->setEnabled(true);
 	ui->noradNumberEdit->setEnabled(true);
-	ui->cosparNumberEdit->setEnabled(true);
 	ui->descriptionTextEdit->setEnabled(true);
 	ui->groupsListWidget->setEnabled(true);
 	ui->tleFirstLineEdit->setEnabled(true);
@@ -1269,7 +1231,6 @@ void SatellitesDialog::handleGroupChanges(QListWidgetItem* item)
 		item->setCheckState(Qt::Checked);
 		QString groupId = item->text().trimmed();
 		item->setData(Qt::UserRole, groupId);
-		item->setToolTip(q_(groupId));
 		QFont font = item->font();
 		font.setItalic(false);
 		item->setFont(font);
