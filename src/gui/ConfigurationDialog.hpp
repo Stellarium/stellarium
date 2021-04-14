@@ -38,16 +38,14 @@ class ConfigurationDialog : public StelDialog
 	Q_OBJECT
 public:
 	ConfigurationDialog(StelGui* agui, QObject* parent);
-	virtual ~ConfigurationDialog();
-	//! Notify that the application style changed
-	void styleChanged();
+	virtual ~ConfigurationDialog() Q_DECL_OVERRIDE;
 
 public slots:
-	void retranslate();
+	virtual void retranslate() Q_DECL_OVERRIDE;
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent();
+	virtual void createDialogContent() Q_DECL_OVERRIDE;
 	Ui_configurationDialogForm* ui;
 
 private:
@@ -141,7 +139,7 @@ private slots:
 	void populateDitherList();
 	void setDitherFormat();
 
-	#ifndef DISABLE_SCRIPTING
+	#ifdef ENABLE_SCRIPTING
 	//! The selection of script in the script list has changed
 	//! Updates the script information panel
 	void scriptSelectionChanged(const QString& s);
@@ -166,6 +164,7 @@ private slots:
 	void handleFontBoxWritingSystem(int index);
 	void populateScreenshotFileformatsCombo();
 
+	void setKeyNavigationState(bool state);
 
 private:
 	StelGui* gui;

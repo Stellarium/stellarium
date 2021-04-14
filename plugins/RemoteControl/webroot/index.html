@@ -366,7 +366,8 @@
                 <label><input type="checkbox" class="stelaction" name="actionShow_Antisolar_Point" /><?= tr("Antisolar point")?></label>
                 <label><input type="checkbox" class="stelaction" name="actionShow_Circumpolar_Circles" /><?= tr("Circumpolar circles")?></label>
                 <label title='<?= tr("Instantaneous circles of earth´s axis on its motion around ecliptical poles. Displayed on Earth only.")?>'>
-				       <input type="checkbox" class="stelaction" name="actionShow_Precession_Circles" /><?= tr("Precession circles")?></label>
+                       <input type="checkbox" class="stelaction" name="actionShow_Precession_Circles" /><?= tr("Precession circles")?></label>
+                <label><input type="checkbox" class="stelaction" name="actionShow_Compass_Marks"/><?= tr("Compass marks")?></label>
             </div>
           </div>
 
@@ -408,10 +409,6 @@
                 <label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowCustomDeclination2"/><?= tr("Custom Declination 2")?> (<span class="stelproperty" data-prop="ArchaeoLines.customDeclination2" data-numberformat="n1"></span>&deg;=<span class="stelproperty" data-prop="ArchaeoLines.customDeclination2Label"></span>)</label>
               </div>
           </div>
-          <div class="smallblock stelplugin" data-plugin="CompassMarks">
-              <label><input type="checkbox" class="stelaction" name="actionShow_Compass_Marks"/><?= tr("Compass Marks")?></label>
-          </div>
-
         </div>
       </div>
       <div id="tab_dso">
@@ -447,6 +444,9 @@
               <label title='<?= tr("Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975)")?>'>
                 <input type="checkbox" value="0x800000" />VdBH
               </label>
+              <label title='<?= tr("Trumpler Catalogue")?>'>
+                <input type="checkbox" value="0x2000000" />Tr
+              </label>
             </div>
             <div class="inline-block blocklabel">
               <label title='<?= tr("Caldwell Catalogue")?>'>
@@ -476,6 +476,9 @@
               <label title='<?= tr("Catalogue and distances of optically visible H II regions (Dickel+, 1969)")?>'>
                 <input type="checkbox" value="0x1000000" />DWB
               </label>
+              <label title='<?= tr("Stock Catalogue")?>'>
+                <input type="checkbox" value="0x4000000" />St
+              </label>
             </div>
             <div class="inline-block blocklabel">
               <label title='<?= tr("New General Catalogue of Nebulae and Clusters of Stars")?>'>
@@ -499,6 +502,13 @@
               <label title='<?= tr("ESO/Uppsala Survey of the ESO(B) Atlas (Lauberts, 1982)")?>'>
                 <input type="checkbox" value="0x400000" />ESO
               </label>
+              <label title='<?= tr("Ruprecht Catalogue")?>'>
+                <input type="checkbox" value="0x8000000" />Ru
+              </label>
+              <label title='<?= tr("van den Bergh-Hagen Catalogue (Uniform survey of clusters in the Southern Milky Way; van den Bergh and Hagen, 1975)")?>'>
+                <input type="checkbox" value="0x10000000" />vdB-Ha
+              </label>
+
               <label title='<?= tr("Objects without identifier")?>'>
                 <input type="checkbox" value="0x2000000" /><?= tr("Other")?>
               </label>

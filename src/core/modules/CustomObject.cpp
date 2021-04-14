@@ -127,7 +127,7 @@ void CustomObject::draw(StelCore* core, StelPainter *painter)
 		return;
 
 	painter->setBlending(true, GL_ONE, GL_ONE);
-	painter->setColor(markerColor[0], markerColor[1], markerColor[2], 1.f);
+	painter->setColor(markerColor, 1.f);
 
 	if (isMarker)
 	{

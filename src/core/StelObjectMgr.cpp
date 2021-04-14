@@ -35,6 +35,7 @@
 #include <QString>
 #include <QDebug>
 #include <QStringList>
+#include <QSettings>
 
 StelObjectMgr::StelObjectMgr() : objectPointerVisibility(true), searchRadiusPixel(25.), distanceWeight(1.f)
 {
@@ -61,6 +62,10 @@ void StelObjectMgr::init()
 	actionsMgr->addAction("actionPrevious_Transit", timeGroup, N_("Previous transit of the selected object"), this, "previousTransit()");
 	actionsMgr->addAction("actionPrevious_Rising", timeGroup, N_("Previous rising of the selected object"), this, "previousRising()");
 	actionsMgr->addAction("actionPrevious_Setting", timeGroup, N_("Previous setting of the selected object"), this, "previousSetting()");
+
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	setFlagSelectedObjectPointer(conf->value("viewing/flag_show_selection_marker", true).toBool());
 }
 
 void StelObjectMgr::nextTransit()
@@ -193,8 +198,7 @@ void StelObjectMgr::registerStelObjectMgr(StelObjectModule* m)
 
 	objModulesMap.insert(m->objectName(), m->getName());
 
-	//TODO: there should probably be a better way to specify the sub-types
-	// instead of hardcoding them here
+	//TODO: there should probably be a better way to specify the sub-types instead of hardcoding them here
 
 	// Celestial objects from Solar system by type
 	if (m->objectName()=="SolarSystem")
@@ -291,6 +295,9 @@ void StelObjectMgr::registerStelObjectMgr(StelObjectModule* m)
 		objModulesMap["StarMgr:2"] = "Bright double stars";
 		objModulesMap["StarMgr:3"] = "Bright variable stars";
 		objModulesMap["StarMgr:4"] = "Bright stars with high proper motion";
+		objModulesMap["StarMgr:5"] = "Variable stars: Algol-type eclipsing systems";
+		objModulesMap["StarMgr:6"] = "Variable stars: the classical cepheids";
+		objModulesMap["StarMgr:7"] = "Bright carbon stars";
 	}
 	// Nomenclature...
 	if (m->objectName()=="NomenclatureMgr")
@@ -488,8 +495,10 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 	for (const auto* m : objectsModules)
 		candidates += m->searchAround(v, fov_around, core);
 
-	// GZ 2014-08-17: This should be exactly the sky's limit magnitude (or even more, but not less!), else visible stars cannot be clicked.
-	float limitMag = core->getSkyDrawer()->getLimitMagnitude(); // -2.f;
+	// This should be exactly the sky's limit magnitude, else visible stars cannot be clicked, or suppressed stars can be found.
+	const float limitMag = core->getSkyDrawer()->getFlagStarMagnitudeLimit() ?
+				static_cast<float>(core->getSkyDrawer()->getCustomStarMagnitudeLimit()) :
+				core->getSkyDrawer()->getLimitMagnitude();
 	QList<StelObjectP> tmp;
 	for (const auto& obj : candidates)
 	{
@@ -603,21 +612,18 @@ QList<StelObjectP> StelObjectMgr::getSelectedObject(const QString& type) const
 /*****************************************************************************************
  Find and return the list of at most maxNbItem objects auto-completing passed object name
 *******************************************************************************************/
-QStringList StelObjectMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
+QStringList StelObjectMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (maxNbItem <= 0)
-	{
 		return result;
-	}
 
 	// For all StelObjectmodules..
 	for (const auto* m : objectsModules)
 	{
 		// Get matching object for this module
-		QStringList matchingObj = m->listMatchingObjects(objPrefix, maxNbItem, useStartOfWords, inEnglish);
+		QStringList matchingObj = m->listMatchingObjects(objPrefix, maxNbItem, useStartOfWords);
 		result += matchingObj;
-		maxNbItem-=matchingObj.size();
 	}
 
 	result.sort();

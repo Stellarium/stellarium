@@ -107,20 +107,20 @@ class Scenery3d : public StelModule
 
 public:
     Scenery3d();
-    virtual ~Scenery3d();
+    virtual ~Scenery3d() Q_DECL_OVERRIDE;
 
     //StelModule members
-    virtual void init();
-    virtual void deinit();
-    virtual void draw(StelCore* core);
-    virtual void update(double deltaTime);
-    virtual double getCallOrder(StelModuleActionName actionName) const;
-    virtual bool configureGui(bool show);
+    virtual void init() Q_DECL_OVERRIDE;
+    virtual void deinit() Q_DECL_OVERRIDE;
+    virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
+    virtual void update(double deltaTime) Q_DECL_OVERRIDE;
+    virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
+    virtual bool configureGui(bool show) Q_DECL_OVERRIDE;
     //! Walk/Fly Navigation with Ctrl+Cursor and Ctrl+PgUp/Dn keys.
     //! Pressing Ctrl-Alt: 5x, Ctrl-Shift: 10x speedup; Ctrl-Shift-Alt: 50x!
     //! To allow fine control, zoom in.
     //! If you release Ctrl key while pressing cursor key, movement will continue.
-    virtual void handleKeys(QKeyEvent* e);
+    virtual void handleKeys(QKeyEvent* e) Q_DECL_OVERRIDE;
 
     //! Sends the progressReport() signal, which eventually updates the progress bar. Can be called from another thread.
     void updateProgress(const QString& str, int val, int min, int max) const;

@@ -363,6 +363,7 @@ void StelPainter::computeFanDisk(float radius, uint innerFanSlices, uint level, 
 	float rad[64];
 	uint i,j;
 	rad[level] = radius;
+#pragma warning(suppress: 4146)
 	for (i=level-1u;i!=-1u;--i)
 	{
 		rad[i] = rad[i+1]*(1.f-M_PIf/(innerFanSlices<<(i+1)))*2.f/3.f;
@@ -1727,7 +1728,7 @@ void StelPainter::drawSprite2dMode(const Vec3d& v, float radius)
 {
 	Vec3d win;
 	if (prj->project(v, win))
-		drawSprite2dMode(static_cast<int>(win[0]), static_cast<int>(win[1]), radius);
+		drawSprite2dMode(static_cast<float>(win[0]), static_cast<float>(win[1]), radius);
 }
 
 void StelPainter::drawSprite2dMode(float x, float y, float radius, float rotation)

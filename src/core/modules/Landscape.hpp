@@ -203,8 +203,7 @@ protected:
 	//! @param lineFileName A text file with lines that are either empty or comment lines starting with # or azimuth altitude [degrees]
 	//! @param polyAngleRotateZ possibility to set some final calibration offset like meridian convergence correction.
 	//! @param listMode keys which indicate angular units for the angles
-	//! @param polygonInverted Must be true to use horizons which are on average below mathematical horizon (Solution for bug LP:1554639)
-	void createPolygonalHorizon(const QString& lineFileName, const float polyAngleRotateZ=0.0f, const QString &listMode="azDeg_altDeg", const bool polygonInverted=false);
+	void createPolygonalHorizon(const QString& lineFileName, const float polyAngleRotateZ=0.0f, const QString &listMode="azDeg_altDeg");
 
 	//! search for a texture in landscape directory, else global textures directory
 	//! @param basename The name of a texture file, e.g. "fog.png"

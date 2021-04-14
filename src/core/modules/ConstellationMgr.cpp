@@ -1422,33 +1422,6 @@ StelObjectP ConstellationMgr::searchByID(const QString &id) const
 	return Q_NULLPTR;
 }
 
-QStringList ConstellationMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
-{
-	QStringList result;
-	if (maxNbItem <= 0)
-	{
-		return result;
-	}
-
-	for (auto* constellation : constellations)
-	{
-		QString name = inEnglish ? constellation->getEnglishName() : constellation->getNameI18n();
-		if (!matchObjectName(name, objPrefix, useStartOfWords))
-		{
-			continue;
-		}
-
-		result.append(name);
-		if (result.size() >= maxNbItem)
-		{
-			break;
-		}
-	}
-
-	result.sort();
-	return result;
-}
-
 QStringList ConstellationMgr::listAllObjects(bool inEnglish) const
 {
 	QStringList result;

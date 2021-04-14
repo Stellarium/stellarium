@@ -36,8 +36,8 @@ This section includes settings for the commonly displayed objects.
 \begin{longtable}{l|l|l|p{55mm}}
 \toprule
 \emph{ID} & \emph{Type} & \emph{Default} & \emph{Description}\\\midrule
-apparent\_magnitude\_algorithm     & string & ExpSup2013 & Set algorithm for computation of apparent magnitude of the planets. 
-                                                   Possible values: \emph{ExpSup2013}, \emph{ExpSup1992}, \emph{AstrAlm1984}, \emph{Mueller1893} and \emph{Generic}.\\%\midrule
+apparent\_magnitude\_algorithm     & string & Mallama2018 & Set algorithm for computation of apparent magnitude of the planets. 
+                                                   Possible values: \emph{Mallama2018}, \emph{ExpSup2013}, \emph{ExpSup1992}, \emph{AstrAlm1984}, \emph{Mueller1893} and \emph{Generic}.\\%\midrule
 nebula\_magnitude\_limit           & float  & 8.5  & Value of limiting magnitude for the deep-sky objects.\\%\midrule
 star\_magnitude\_limit             & float  & 6.5  & Value of limiting magnitude for the stars. Sometimes you don't want to display more stars when zooming in. \\%\midrule
 planet\_magnitude\_limit  		   & float  & 6.5  & Value of limiting magnitude for the planets. Sometimes you don't want to display more planets when zooming in. \\%\midrule
@@ -83,6 +83,7 @@ size\_limit\_max                   & int    & 600   & Maximum angular size of vi
 flag\_use\_type\_filter            & bool   & false & Enables/disables usage of the type filters for deep-sky objects. \\\midrule
 flag\_nutation  				   & bool   & true  & Enables/disables usage nutation.\\\midrule
 flag\_topocentric\_coordinates	   & bool   & true  & Enables/disables usage topocentric coordinates.\\\midrule
+shadow\_enlargement\_danjon 	   & bool   & false & Earth shadow enlargement (see \ref{sec:Eclipses:lunar}).\\\midrule
 %
 flag\_dso\_designation\_usage      & bool   & false & If \emph{true}, use designations of deep-sky objects on the sky instead of their common names.\\%\midrule
 flag\_dso\_outlines\_usage         & bool   & false & If \emph{true}, use outlines for big deep-sky objects on the sky instead of their hints.\\%\midrule
@@ -284,7 +285,12 @@ script\_console\_keyword\_color         & \ccbox{1.0,0.0,1.0} & syntax highlight
 script\_console\_module\_color          & \ccbox{0.0,1.0,1.0} & syntax highlight for modules in the script console. \\%\midrule
 script\_console\_comment\_color         & \ccbox{1.0,1.0,0.0} & syntax highlight for comments in the script console. \\%\midrule
 script\_console\_function\_color        & \ccbox{0.0,1.0,0.0} & syntax highlight for functions in the script console. \\%\midrule
-script\_console\_constant\_color        & \ccbox{1.0,0.5,0.5} & syntax highlight for constants in the script console. \\
+script\_console\_constant\_color        & \ccbox{1.0,0.5,0.5} & syntax highlight for constants in the script console. \\\midrule
+% special markers colors
+fov\_center\_marker\_color              & \ccbox{0.5,0.5,0.7} & FOV Center marker. \\%\midrule
+fov\_circular\_marker\_color            & \ccbox{0.5,0.5,0.7} & circular marker of FOV. \\%\midrule
+fov\_rectangular\_marker\_color         & \ccbox{0.5,0.5,0.7} & rectangular marker of FOV. \\%\midrule
+compass\_marks\_color                   & \ccbox{0.5,0.5,0.7} & compass marks. \\
 \bottomrule
 \end{longtable}
 
@@ -404,6 +410,25 @@ flag\_show\_galaxy\_clusters      & bool & true & display clusters of galaxies. 
 flag\_show\_other                 & bool & true & display other deep-sky objects.  \\\bottomrule
 \end{tabularx}
 
+\subsection{\big[fov\big]}
+In this section you can fine-tune 10 predefined values of field of view in degrees (all FOV may be set through keyboard hotkeys, see section~\ref{sec:tour:moving}).
+
+\noindent%
+\begin{tabularx}{\textwidth}{l|l|l|X}\toprule
+\emph{ID} & \emph{Type} & \emph{Default} & \emph{Description}\\\midrule
+quick\_fov\_1 & float & 180  & predefined value for FOV \emph{1}.\\
+quick\_fov\_2 & float & 90   & predefined value for FOV \emph{2}.\\
+quick\_fov\_3 & float & 60   & predefined value for FOV \emph{3}.\\
+quick\_fov\_4 & float & 45   & predefined value for FOV \emph{4}.\\
+quick\_fov\_5 & float & 20   & predefined value for FOV \emph{5}.\\
+quick\_fov\_6 & float & 10   & predefined value for FOV \emph{6}.\\
+quick\_fov\_7 & float & 5    & predefined value for FOV \emph{7}.\\
+quick\_fov\_8 & float & 2    & predefined value for FOV \emph{8}.\\
+quick\_fov\_9 & float & 1    & predefined value for FOV \emph{9}.\\
+quick\_fov\_0 & float & 0.5  & predefined value for FOV \emph{0}.\\\bottomrule
+\end{tabularx}
+
+
 \subsection{\big[gui\big]}
 %\label{sec:config.ini:gui}
 
@@ -442,6 +467,8 @@ flag\_show\_hips\_button               & bool  & false & Show a button to toggle
 flag\_show\_bookmark\_button           & bool  & false & Show a button to show and edit bookmarks\\
 flag\_show\_fullscreen\_button         & bool  & true  & Show a button to toggle fullscreen view\\
 flag\_show\_quit\_button               & bool  & true  & Show a button to quit via button press\\
+flag\_show\_cardinal\_button           & bool  & true  & Show a button to toggle cardinals via button press\\
+flag\_show\_compass\_button            & bool  & false & Show a button to toggle compass marks via button press\\
 flag\_show\_buttons\_background        & bool  & true  & If \emph{true}, use background under buttons on bottom bar.\\\midrule
 flag\_overwrite\_info\_color           & bool  & false & Set \emph{true} to use one color for test in info panel for all objects.\\\midrule
 %
@@ -500,7 +527,7 @@ last\_location    & string & Coordinates of last used location in stellarium.\\\
 \label{sec:configini:landscape}
 \fi
 
-\begin{longtable}{l|l|p{80mm}}\toprule
+\begin{longtable}{l|l|p{68mm}}\toprule
 \emph{ID}                            & \emph{Type} & \emph{Description}\\\midrule
 atmosphere\_fade\_duration                 & float & Sets the time (seconds) it takes for the atmosphere to fade when de-selected\\%\midrule
 flag\_landscape                            & bool  & Set to \emph{false} if you don't want to see the landscape at all\\%\midrule
@@ -607,25 +634,25 @@ which plugins to load, you must restart Stellarium.
 \begin{longtable}{l|l|p{80mm}}
 \toprule
 \emph{ID} & \emph{Type} & \emph{Description}\\\midrule
-AngleMeasure          & bool & \ref{sec:plugins:AngleMeasure} Angle Measure plugin\\%\midrule
-ArchaeoLines          & bool & \ref{sec:plugin:ArchaeoLines} ArchaeoLines plugin\\%\midrule
-CompassMarks          & bool & \ref{sec:plugins:CompassMarks} Compass Marks plugin\\%\midrule
-MeteorShowers         & bool & \ref{sec:plugins:MeteorShowers} Meteor Showers plugin \\%\midrule
-Exoplanets            & bool & \ref{sec:plugins:Exoplanets} Exoplanets plugin \\%\midrule
-Observability         & bool & \ref{sec:plugins:Observability} Observability Analysis\\%\midrule
-Oculars               & bool & \ref{sec:plugins:Oculars} Oculars plugin \\%\midrule
-Pulsars               & bool & \ref{sec:plugins:Pulsars} Pulsars plugin \\%\midrule
-Quasars               & bool & \ref{sec:plugins:Quasars} Quasars plugin \\%\midrule
-RemoteControl         & bool & \ref{sec:plugin:RemoteControl} Remote Control plugin \\%\midrule
-RemoteSync            & bool & \ref{sec:plugin:RemoteSync} Remote Sync plugin \\%\midrule
-Satellites            & bool & \ref{sec:plugins:Satellites} Satellites plugin \\%\midrule
-SolarSystemEditor     & bool & \ref{sec:plugins:SolarSystemEditor} Solar System Editor plugin\\%\midrule
-Supernovae            & bool & \ref{sec:plugins:HistoricalSupernovae} Historical Supernovae plugin \\%\midrule
-TelescopeControl      & bool & \ref{sec:plugins:TelescopeControl} Telescope Control plugin \\%\midrule
-TextUserInterface     & bool & \ref{sec:plugins:TextUserInterface} Text User Interface plugin \\%\midrule
-%TimeZoneConfiguration & bool & \ref{sec:plugins:TimeZoneControl} Time Zone plugin \\\midrule
-Novae                 & bool & \ref{sec:plugins:BrightNovae} Bright Novae plugin \\%\midrule
-Scenery3dMgr          & bool & \ref{ch:scenery3d} Scenery 3D plugin \\\bottomrule
+AngleMeasure          & bool & \ref{sec:plugins:AngleMeasure} Angle Measure plugin\\
+ArchaeoLines          & bool & \ref{sec:plugin:ArchaeoLines} ArchaeoLines plugin\\
+Calendars             & bool & \ref{sec:plugin:Calendars} Calendars plugin\\
+EquationOfTime        & bool & \ref{sec:plugins:EquationOfTime} Equation of Time plugin\\
+Exoplanets            & bool & \ref{sec:plugins:Exoplanets} Exoplanets plugin \\
+MeteorShowers         & bool & \ref{sec:plugins:MeteorShowers} Meteor Showers plugin \\
+Novae                 & bool & \ref{sec:plugins:BrightNovae} Bright Novae plugin \\
+Observability         & bool & \ref{sec:plugins:Observability} Observability Analysis\\
+Oculars               & bool & \ref{sec:plugins:Oculars} Oculars plugin \\
+Pulsars               & bool & \ref{sec:plugins:Pulsars} Pulsars plugin \\
+Quasars               & bool & \ref{sec:plugins:Quasars} Quasars plugin \\
+RemoteControl         & bool & \ref{sec:plugin:RemoteControl} Remote Control plugin \\
+RemoteSync            & bool & \ref{sec:plugin:RemoteSync} Remote Sync plugin \\
+Satellites            & bool & \ref{sec:plugins:Satellites} Satellites plugin \\
+Scenery3d             & bool & \ref{ch:scenery3d} Scenery 3D plugin \\
+SolarSystemEditor     & bool & \ref{sec:plugins:SolarSystemEditor} Solar System Editor plugin\\
+Supernovae            & bool & \ref{sec:plugins:HistoricalSupernovae} Historical Supernovae plugin \\
+TelescopeControl      & bool & \ref{sec:plugins:TelescopeControl} Telescope Control plugin \\
+TextUserInterface     & bool & \ref{sec:plugins:TextUserInterface} Text User Interface plugin \\\bottomrule
 \end{longtable}
 
 \subsection{\big[projection\big]}
@@ -782,7 +809,7 @@ tui\_admin\_shutdown\_command       & string  && e.g.\ for Linux: \command{shutd
 \end{tabularx}
 
 \subsection{\big[video\big]}
-%\label{sec:config.ini:video}
+\label{sec:config.ini:video}
 
 \begin{tabularx}{\textwidth}{l|l|X}\toprule
 \emph{ID}  & \emph{Type} & \emph{Description}\\\midrule
@@ -793,7 +820,8 @@ screen\_x        & int    & Horizontal position of the top-left corner in window
 screen\_y        & int    & Vertical   position of the top-left corner in windowed mode. Value in pixels, e.g. \emph{0}\\%\midrule
 viewport\_effect & string & This is used when the spheric mirror display mode is activated. Values include \emph{none} and \emph{sphericMirrorDistorter}.\\%\midrule
 minimum\_fps     & int    & Sets the minimum number of frames per second to display at (hardware performance permitting)\\%\midrule
-maximum\_fps     & int    & Sets the maximum number of frames per second to display at. This is useful to reduce power consumption in laptops.\\\bottomrule
+maximum\_fps     & int    & Sets the maximum number of frames per second to display at. This is useful to reduce power consumption in laptops.\\%\midrule
+multisampling    & int    & Sets the number of samples to use for multisampling antialiasing. \emph{0} disables antialiasing, \emph{1} is no-op (single sample per pixel), higher values increase smoothness and degrade performance. Too high a value may result in excessive blurriness of the GUI. A good starting value to try is \emph{4}.\\\bottomrule
 \end{tabularx}
 
 \subsection{\big[viewing\big]}
@@ -847,6 +875,15 @@ moon\_scale                   & float & Sets the moon scale factor, sometimes us
 
 flag\_minorbodies\_scaled     & bool & Set to \emph{true} if you want to see minor bodies enlarged \\
 minorbodies\_scale            & float & Set scale factor for minor bodies, to see them in unnatural detail. Typical value: \emph{10}\\
+\midrule
+flag\_fov\_center\_marker        & bool  & Set to \emph{true} to enable drawing a field of view center marker \\
+flag\_fov\_circular\_marker      & bool  & Set to \emph{true} to enable drawing a circular FOV marker \\
+size\_fov\_circular\_marker      & float & size of the circular FOV marker, degrees \\
+flag\_fov\_rectangular\_marker   & bool  & Set to \emph{true} to enable drawing a rectangular FOV marker \\
+width\_fov\_rectangular\_marker  & float & width of the rectangular FOV marker, degrees \\
+height\_fov\_rectangular\_marker & float & height of the rectangular FOV marker, degrees \\
+rot\_fov\_rectangular\_marker    & float & rotation angle of the rectangular FOV marker, degrees \\
+flag\_compass\_marks             & bool  & Set to \emph{true} to enable drawing compass marks \\
 \midrule
 constellation\_art\_intensity      & float & brightness [0\ldots1] of the constellation art images. Typical value: \emph{0.5}\\%\midrule
 constellation\_art\_fade\_duration & float & time the constellation art takes to fade in or out, in seconds. Typical value: \emph{1.5}\\%\midrule

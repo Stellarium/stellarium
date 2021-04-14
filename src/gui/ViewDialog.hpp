@@ -39,17 +39,17 @@ class ViewDialog : public StelDialog
 Q_OBJECT
 public:
 	ViewDialog(QObject* parent);
-	virtual ~ViewDialog();
+	virtual ~ViewDialog() Q_DECL_OVERRIDE;
 	//! Notify that the application style changed
-	void styleChanged();
+	virtual void styleChanged() Q_DECL_OVERRIDE;
 
 public slots:
-	void retranslate();
+	virtual void retranslate() Q_DECL_OVERRIDE;
 
 protected:
 	Ui_viewDialogForm* ui;
 	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent();
+	virtual void createDialogContent() Q_DECL_OVERRIDE;
 private slots:
 	void populateLists();
 	void populateToolTips();
@@ -71,10 +71,7 @@ private slots:
 	void showConfigureDSOColorsDialog();
 	void showConfigureOrbitColorsDialog();
 
-	//void setLightPollutionSpinBoxStatus();
-	// Two new from the unwanted trunk-rework Not sure if we need them at all?
 	void populateLightPollution();
-
 	void populatePlanetMagnitudeAlgorithmsList();
 	void populatePlanetMagnitudeAlgorithmDescription();
 	void setPlanetMagnitudeAlgorithm(int algorithmID);

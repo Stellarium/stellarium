@@ -129,7 +129,7 @@ MACRO(GETTEXT_CREATE_TRANSLATIONS _domain _firstLang)
      # "translations" targets.
      ADD_CUSTOM_TARGET(translations-${_domain} ${_addToAll} DEPENDS ${_gmoFiles})
      ADD_DEPENDENCIES(translations translations-${_domain})
-    SET_TARGET_PROPERTIES(translations-${_domain} PROPERTIES FOLDER "po")
+     SET_TARGET_PROPERTIES(translations-${_domain} PROPERTIES FOLDER "po")
 
 ENDMACRO(GETTEXT_CREATE_TRANSLATIONS )
 

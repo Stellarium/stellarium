@@ -98,7 +98,7 @@ signals:
 private:
 	LinearFader fader;
 	QString url;
-	QString hipsFrame;
+	QString hipsFrame = "equatorial";
 	QString planet;
 	double releaseDate; // As UTC Julian day.
 	bool planetarySurvey;

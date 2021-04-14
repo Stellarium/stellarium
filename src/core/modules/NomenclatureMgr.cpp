@@ -273,8 +273,7 @@ void NomenclatureMgr::drawPointer(StelCore* core, StelPainter& painter)
 		if (!painter.getProjector()->project(pos, screenpos))
 			return;
 
-		const Vec3f& c(obj->getInfoColor());
-		painter.setColor(c[0],c[1],c[2]);
+		painter.setColor(obj->getInfoColor());
 		texPointer->bind();
 		painter.setBlending(true);
 		painter.drawSprite2dMode(static_cast<float>(screenpos[0]), static_cast<float>(screenpos[1]), 13.f, static_cast<float>(StelApp::getInstance().getTotalRunTime()*40.));
@@ -330,11 +329,6 @@ StelObjectP NomenclatureMgr::searchByNameI18n(const QString& nameI18n) const
 		}
 	}
 	return Q_NULLPTR;
-}
-
-QStringList NomenclatureMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
-{
-	return StelObjectModule::listMatchingObjects(objPrefix, maxNbItem, useStartOfWords, inEnglish);
 }
 
 QStringList NomenclatureMgr::listAllObjects(bool inEnglish) const

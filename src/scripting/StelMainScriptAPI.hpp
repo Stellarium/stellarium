@@ -495,6 +495,20 @@ public slots:
 	//! @return true if gravity labels are enabled, else false
 	static bool getFlagGravityLabels();
 
+	//! Get the current status of the horizontal flip
+	//! @return true if horizontal flip are enabled, else false
+	static bool getFlipHorz();
+	//! Set the horizontal flip status.
+	//! @param flip The new value (true = flipped, false = unflipped).
+	static void setFlipHorz(bool b);
+
+	//! Get the current status of the vertical flip
+	//! @return true if vertical flip are enabled, else false
+	static bool getFlipVert();
+	//! Set the vertical flip status.
+	//! @param flip The new value (true = flipped, false = unflipped).
+	static void setFlipVert(bool b);
+
 	//! Turn on/off gravity labels
 	//! @param b if true, turn on gravity labels, else turn them off
 	static void setFlagGravityLabels(bool b);

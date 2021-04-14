@@ -175,7 +175,7 @@ void ScriptConsole::loadScript()
 	if (dirty)
 	{
 		// We are loaded and dirty: don't just overwrite!
-		if (QMessageBox::question(Q_NULLPTR, q_("Caution!"), q_("Are you sure you want to load script without saving changes?"), QMessageBox::Yes | QMessageBox::No) == QMessageBox::No)
+        if (QMessageBox::question(&StelMainView::getInstance(), q_("Caution!"), q_("Are you sure you want to load script without saving changes?"), QMessageBox::Yes | QMessageBox::No) == QMessageBox::No)
 			return;
 	}
 	
@@ -245,11 +245,7 @@ void ScriptConsole::clearButtonPressed()
 {
 	if (ui->tabs->currentIndex() == 0)
 	{
-		bool doClear = false;
-		if (dirty)
-			doClear = QMessageBox::question(Q_NULLPTR, q_("Caution!"), q_("Are you sure you want to clear script?"), QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes;
-
-		if (doClear)
+		if (QMessageBox::question(&StelMainView::getInstance(), q_("Caution!"), q_("Are you sure you want to clear script?"), QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes)
 		{
 			ui->scriptEdit->clear();
 			scriptFileName = ""; // OK, it's a new file!
@@ -366,8 +362,7 @@ void ScriptConsole::includeBrowse()
 void ScriptConsole::quickRun(int idx)
 {
 	if (idx==0)
-		return;
-	// TODO: Switch to unique keys?
+		return;	
 	static const QMap<int, QString>map = {
 		{2, "LabelMgr.deleteAllLabels();\n"},
 		{3, "ScreenImageMgr.deleteAllImages();\n"},

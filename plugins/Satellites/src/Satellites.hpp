@@ -45,7 +45,7 @@ class SatellitesListModel;
 
 /*! @defgroup satellites Satellites Plug-in
 @{
-The %Satellites plugin displays the positions of artifical satellites in Earth
+The %Satellites plugin displays the positions of artificial satellites in Earth
 orbit based on a catalog of orbital data.
 
 The Satellites class is the main class of the plug-in. It manages a collection
@@ -159,7 +159,8 @@ class Satellites : public StelObjectModule
 	Q_PROPERTY(int  orbitLineSegments        READ getOrbitLineSegments        WRITE setOrbitLineSegments        NOTIFY orbitLineSegmentsChanged)
 	Q_PROPERTY(int  orbitLineFadeSegments    READ getOrbitLineFadeSegments    WRITE setOrbitLineFadeSegments    NOTIFY orbitLineFadeSegmentsChanged)
 	Q_PROPERTY(int  orbitLineSegmentDuration READ getOrbitLineSegmentDuration WRITE setOrbitLineSegmentDuration NOTIFY orbitLineSegmentDurationChanged)
-
+	Q_PROPERTY(Vec3f invisibleSatelliteColor READ getInvisibleSatelliteColor  WRITE setInvisibleSatelliteColor  NOTIFY invisibleSatelliteColorChanged)
+	Q_PROPERTY(Vec3f transitSatelliteColor   READ getTransitSatelliteColor    WRITE setTransitSatelliteColor    NOTIFY transitSatelliteColorChanged)
 	
 public:
 	//! @enum UpdateState
@@ -228,14 +229,14 @@ public:
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=false) const;
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 
 	virtual QStringList listAllObjects(bool inEnglish) const;
 
 	virtual QString getName() const { return "Satellites"; }
 	virtual QString getStelObjectType() const { return Satellite::SATELLITE_TYPE; }
 
-	//! Implment this to tell the main Stellarium GUi that there is a GUI element to configure this
+	//! Implement this to tell the main Stellarium GUI that there is a GUI element to configure this
 	//! plugin. 
 	virtual bool configureGui(bool show=true);
 
@@ -315,7 +316,7 @@ public:
 	void saveTleSources(const QStringList& urls);
 	
 	//! Reads update file(s) in celestrak's .txt format, and updates
-	//! the TLE elements for exisiting satellites from them.
+	//! the TLE elements for existing satellites from them.
 	//! Indirectly emits signals updateStateChanged() and tleUpdateComplete(),
 	//! as it calls updateSatellites().
 	//! See updateFromOnlineSources() for the other kind of update operation.
@@ -326,11 +327,11 @@ public:
 	
 	//! Updates the loaded satellite collection from the provided data.
 	//! Worker function called by updateFromFiles() and saveDownloadedUpdate().
-	//! (Respecitvely, user-initiated update from file(s) and user- or auto-
+	//! (Respectively, user-initiated update from file(s) and user- or auto-
 	//! initiated update from online source(s).)
 	//! Emits updateStateChanged() and tleUpdateComplete().
 	//! @note Instead of splitting this method off updateFromFiles() and passing
-	//! the auto-add flag through data structures, another possiblity was to
+	//! the auto-add flag through data structures, another possibility was to
 	//! modify updateFromFiles to use the same prefix trick (adding "1,"
 	//! to file paths). I decided against it because I thought it would be more
 	//! complex. :) --BM
@@ -380,6 +381,8 @@ signals:
 	void orbitLineSegmentsChanged(int i);
 	void orbitLineFadeSegmentsChanged(int i);
 	void orbitLineSegmentDurationChanged(int i);
+	void invisibleSatelliteColorChanged(Vec3f);
+	void transitSatelliteColorChanged(Vec3f);
 
 	//! Emitted when some of the plugin settings have been changed.
 	//! Used to communicate with the configuration window.
@@ -399,6 +402,8 @@ signals:
 	//! @param missing the number of satellites that were not found in the
 	//! update source(s) (and were removed, if autoRemoveEnabled is set).
 	void tleUpdateComplete(int updated, int total, int added, int missing);
+
+	void satGroupVisibleChanged();
 
 public slots:
 	//! get whether or not the plugin will try to update TLE data from the internet
@@ -435,6 +440,18 @@ public slots:
 
 	bool getFlagHideInvisible() const;
 	void setFlagHideInvisible(bool b);
+
+	//! Get color for invisible satellites
+	//! @return color
+	Vec3f getInvisibleSatelliteColor() const;
+	//! Set color for invisible satellites
+	void setInvisibleSatelliteColor(const Vec3f& c);
+
+	//! Get color for satellites in transit through the Sun or the Moon (color of markers)
+	//! @return color
+	Vec3f getTransitSatelliteColor() const;
+	//! Set color for satellites in transit through the Sun or the Moon (color of markers)
+	void setTransitSatelliteColor(const Vec3f& c);
 	
 	//! get the label font size.
 	//! @return the pixel size of the font
@@ -450,11 +467,11 @@ public slots:
 	
 	//! Start an Internet update.
 	//! This method starts the process of an Internet update: it tries to
-	//! download TLE lists from online recources and then use them to 
+	//! download TLE lists from online resources and then use them to
 	//! update the orbital data (and names, etc.) of the included satellites.
 	//! This only initialized the download. The rest of the work is done by
 	//! saveDownloadedUpdate() and updateSatellites().
-	//! Update sources are described in updateUrls (see for accessor details).
+	//! Update sources are described in updateUrls (see for accessors details).
 	//! If autoAddEnabled is true when this function is called, new satellites
 	//! in the chosen update sources will be added during the update. 
 	//! If autoRemoveEnabled is true when this function is called, any existing
@@ -505,7 +522,8 @@ private slots:
 	//! Update satellites visibility on wide range of dates changes - by month or year
 	void updateSatellitesVisibility();
 	//! Call when button "Save settings" in main GUI are pressed
-	void saveSettings() { saveSettingsToConfig(); }
+	void saveSettings() { saveSettingsToConfig(); }	
+	void translateData();
 
 private:
 	//! Add to the current collection the satellite described by the data.
@@ -553,7 +571,10 @@ private:
 	//! Check format of the catalog of satellites
 	//! @return valid boolean, e.g. "true"
 	bool checkJsonFileFormat();
+
+	void setSatGroupVisible(const QString& groupId, bool visible);
 	
+	void bindingGroups();
 	//! A fake method for strings marked for translation.
 	//! Use it instead of translations.h for N_() strings, except perhaps for
 	//! keyboard action descriptions. (It's better for them to be in a single

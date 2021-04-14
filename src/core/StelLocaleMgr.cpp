@@ -150,10 +150,7 @@ void StelLocaleMgr::setAppLanguage(const QString& newAppLanguageName, bool refre
 
 	createNameLists();
 	if (refreshAll)
-	{
-
 		StelApp::getInstance().updateI18n();
-	}
 }
 
 bool StelLocaleMgr::isAppRTL() const

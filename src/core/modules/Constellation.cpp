@@ -110,7 +110,7 @@ void Constellation::drawOptim(StelPainter& sPainter, const StelCore* core, const
 
 	if (checkVisibility())
 	{
-		sPainter.setColor(lineColor[0], lineColor[1], lineColor[2], lineFader.getInterstate());
+		sPainter.setColor(lineColor, lineFader.getInterstate());
 
 		Vec3d star1;
 		Vec3d star2;
@@ -149,7 +149,7 @@ void Constellation::drawName(StelPainter& sPainter, ConstellationMgr::Constellat
 				break;
 		}
 
-		sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], nameFader.getInterstate());
+		sPainter.setColor(labelColor, nameFader.getInterstate());
 		sPainter.drawText(static_cast<float>(XYname[0]), static_cast<float>(XYname[1]), name, 0., -sPainter.getFontMetrics().boundingRect(name).width()/2, 0, false);
 	}
 }
@@ -210,7 +210,7 @@ void Constellation::drawBoundaryOptim(StelPainter& sPainter) const
 		return;
 
 	sPainter.setBlending(true);
-	sPainter.setColor(boundaryColor[0], boundaryColor[1], boundaryColor[2], boundaryFader.getInterstate());
+	sPainter.setColor(boundaryColor, boundaryFader.getInterstate());
 
 	unsigned int i, j;
 	size_t size;

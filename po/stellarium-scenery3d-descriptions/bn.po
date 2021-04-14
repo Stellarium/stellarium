@@ -1,0 +1,330 @@
+# SOME DESCRIPTIVE TITLE
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Tanmoy Saha <t4saha@gmail.com>, 2021
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2020-12-26 18:32+0700\n"
+"PO-Revision-Date: 2020-11-24 18:28+0000\n"
+"Last-Translator: Tanmoy Saha <t4saha@gmail.com>, 2021\n"
+"Language-Team: Bengali (https://www.transifex.com/stellarium/teams/80998/bn/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: bn\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. type: Content of: <h2>
+#: ../../scenery3d/Testscene/description.en.utf8:1
+msgid "Testscene"
+msgstr "পরীক্ষামূলক"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Testscene/description.en.utf8:3
+msgid ""
+"This scene is mostly useful as testbed for your own developments. You should"
+" make a copy of the scene folder and modify at will, try material settings "
+"or some other details to find out how this plugin behaves. Then build and "
+"present your own work!"
+msgstr ""
+"এই ভূমিরূপটি আপনার নিজস্ব ভূমিরূপ বিকাশের জন্য পরীক্ষামূলক হিসাবে ব্যবহার "
+"করতে পারেন । প্রথমে আপনার দৃশ্যের ফোল্ডারের এটির একটি অনুলিপি তৈরি করুন এবং "
+"তারপর ইচ্ছামতো তা পরিবর্তন করুন । এই সরঞ্জামটি কিভাবে কাজ করে করে তা জানতে "
+"উপাদান সহ অন্যান্য বিকল্পগুলিও একবার পরিবর্তনের চেষ্টা করে দেখতে পারেন । "
+"তারপরে আপনার নিজের তৈরী কাজটি এখানে উপস্থাপন করুন !"
+
+#. type: Content of: <h4>
+#: ../../scenery3d/Testscene/description.en.utf8:8
+msgid "Coordinate and orientation tests"
+msgstr "অবস্থান ও অভিমুখ পরীক্ষা"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Testscene/description.en.utf8:10
+msgid ""
+"The pillars shown here, as seen from the structure's center, provide an "
+"approximate view (not hi-precision!) to solstice/equinox sunrise/sunset "
+"positions in central European latitudes. The central pillars provide an "
+"east-west-line. The survey coordinate grid visible on the floor does not "
+"align with geographic north.  A rotation of -4.2 deg (test for meridian "
+"convergence) must be compensated, i.e., while the central pillars must "
+"absolutely and always point west-east, the grid lines hit the northern "
+"horizon slightly (4.2 deg) left of north!"
+msgstr ""
+"কাঠামোর কেন্দ্র থেকে, এখানে দেখানো স্তম্ভগুলি মধ্য দিয়ে ইউরোপীয় অক্ষাংশে "
+"ক্রান্তি/বিষুব সূর্যোদয়/সূর্যাস্তের একটি আনুমানিক দৃশ্য (নিখুঁত নয় !) দেখা"
+" সম্ভব । কেন্দ্রীয় স্তম্ভগুলি পূর্ব-পশ্চিম-রেখাটি নির্দেশ করে । তবে মেঝেতে "
+"দৃশ্যমান সমীক্ষা সমন্বিত স্থানাঙ্ক ছক ভৌগলিক উত্তরের সাথে সামঞ্জস্যপূর্ণ নয় "
+"। তাই -৪.২ ডিগ্রির একটি ঘূর্ণন (মুলমধ্যরেখা সমন্বয় পরীক্ষার জন্য) অবশ্যই "
+"ব্যাবহার করা উচিত, অর্থাৎ কেন্দ্রীয় স্তম্ভগুলি সবসময় এবং নিখুঁত ভাবে "
+"পূর্ব-পশ্চিম দিকে নির্দেশ করলেও, স্থানাঙ্ক ছকটি উত্তর দিগন্তকে সামান্য (৪.২ "
+"ডিগ্রি) বাম দিকে আঘাত করে !"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Testscene/description.en.utf8:19
+msgid ""
+"Walkaround ground coordinates (Ctrl-R, T) should display the coordinates "
+"visible along the south and west border of the ground."
+msgstr ""
+"আশেপাশে চলাফেরার সময় অবস্থান স্থানাঙ্ক জানতে হলে (Ctrl-R, T) স্থলভাগের "
+"দক্ষিণ পশ্চিম সীমান্তে দেখুন ।"
+
+#. type: Content of: <h4>
+#: ../../scenery3d/Testscene/description.en.utf8:23
+msgid "Material test"
+msgstr "উপাদান পরীক্ষা"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Testscene/description.en.utf8:25
+msgid ""
+"This model is also used for testing the plugin's graphical capabilities. You"
+" can play with material parameters to create funny effects like "
+"semitransparent or glow-in-the-dark brick spheres."
+msgstr ""
+"এই মডেলটি সরঞ্জামটির গ্রাফিকাল ক্ষমতা পরীক্ষার জন্যও ব্যবহৃত হয় । "
+"আধো-স্বচ্ছ কিংবা অন্ধকারে হালকা উজ্জ্বল দেওয়ালের মতো মজাদার প্রভাব তৈরি করতে"
+" আপনি উপাদান পরামিতিগুলি নেড়েচেড়ে দেখতে পারেন ।"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Testscene/description.en.utf8:29
+msgid ""
+"To test temporal features, the pillars and spheres are visible only from the"
+" years 2000 until 2020.  Edit the material file to change that!"
+msgstr ""
+"স্তম্ভ ও গোলকটি দেখার জন্য সমায় ২০০০ সাল থেকে ২০২০ সালের মধ্যে বেছে নিন "
+"কিংবা এই ভূমিরূপটির উপাদান ফাইলে সীমা পরিবর্তন করুন ।"
+
+#. type: Content of: <h4>
+#: ../../scenery3d/Testscene/description.en.utf8:32
+#: ../../scenery3d/Sterngarten/description.en.utf8:56
+msgid "Model"
+msgstr "মডেল"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Testscene/description.en.utf8:33
+msgid ""
+"Testscene for Stellarium/scenery3d development. Export from SU8-Kerkythea-"
+"KT2OBJ."
+msgstr ""
+"স্টেলারিয়াম/ত্রিমাতৃক ভূমিরূপ তৈরীর পরীক্ষামূলক মডেল । SU8-Kerkythea-KT2OBJ "
+"থেকে প্রস্তুত করা হয়েছে । "
+
+#. type: Content of: <h2>
+#: ../../scenery3d/Sterngarten/description.en.utf8:1
+msgid "Vienna Sterngarten"
+msgstr "ভিয়েনা স্টার্নগার্টেন"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Sterngarten/description.en.utf8:3
+msgid ""
+"Sterngarten (\"Star Garden\") is an open-air planetarium in the south-west "
+"of Vienna, demonstrating the solar year."
+msgstr ""
+"স্টার্নগার্টেন (\"Star Garden\" বা তারার বাগান) হল ভিয়েনার দক্ষিণ-পশ্চীমে "
+"অবস্থিত একটি খোলা তারামন্ডল মানমন্দির, যা সৌরবছরকে প্রদর্শিত করে ।"
+
+#. type: Content of: <h4>
+#: ../../scenery3d/Sterngarten/description.en.utf8:7
+msgid "Idea"
+msgstr "উদ্ভাবনা"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Sterngarten/description.en.utf8:9
+msgid ""
+"Univ.Prof.Dr.Oswald Thomas (1882 Kronstadt - 1963 Vienna). Founder, "
+"Astronomical Bureau (1907) and Austrian Astronomical Society (1924). "
+"Director of first Vienna Planetarium (1927) and Urania observatory."
+msgstr ""
+"বিশ্ববিদ্যালয়. অধ্যাপক. ড. অসওয়াল্ড থমাস (১৮৮২ ক্রোনস্ট্যাড - ১৯৬৩ ভিয়েনা), "
+"প্রতিষ্ঠাতা, জ্যোতির্বৈজ্ঞানিক বিভাগ (১৯০৭) এবং অস্ট্রিয়ান "
+"জ্যোতির্বৈজ্ঞানিক সংস্থা (১৯২৪) । ভিয়েনা তারামন্ডল (১৯২৭) এবং ইউরানিয়া "
+"মানমন্দিরের প্রথম পরিচালক । "
+
+#. type: Content of: <h4>
+#: ../../scenery3d/Sterngarten/description.en.utf8:14
+msgid "Construction"
+msgstr "নির্মাণ"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Sterngarten/description.en.utf8:16
+msgid ""
+"The Sterngarten was developed by Thomas' student and successor in the "
+"Astronomical Bureau Prof. Hermann Mucke (1935-2019) with his collaborators."
+"  Mucke was also secretary of the Austrian Astronomical Society from "
+"1963-2018, director of Vienna planetarium 1963-2001 and Vienna Urania public"
+" observatory from 1971-2001. For more than 60 years, Mucke and the Society "
+"published the \"Österreichischer Himmelskalender\" (Austrian Celestial "
+"Calendar)  and the monthly journal \"Der Sternenbote\" (The Starry "
+"Messenger)."
+msgstr ""
+"অধ্যাপক থমাসের শিক্ষার্থী এবং জ্যোতির্বৈজ্ঞানিক বিভাগের উত্তরসূরী অধ্যাপক "
+"হারমান মুকেকে (১৯৩৫-২০১৯) তাঁর সহযোগীদের সাথে মিলিত ভাবে এটি তৈরী করেছেন । "
+"তিনি ১৯৬৩ থেকে ২০১৮ সাল পর্যন্ত অস্ট্রিয়ান জ্যোতির্বৈজ্ঞানিক সংস্থার "
+"সম্পাদক, ভিয়েনা তারামন্ডলের পরিচালক ১৯৬৩-২০০১ এবং ভিয়েনা ইউরানিয়া সাধারণ "
+"মানমন্দিরের পরিচারক ১১৯৭১-২০০১ ছিলেন । ৬০ বছরেরও বেশি সময় ধরে, তিনি এবং "
+"তাঁর সংস্থা যথাক্রমে \"Öterreichischer Himmelskalender\" (অস্ট্রিয়ান মহাকাশ"
+" পঞ্জিকা) ও একটি মাসিক জার্নাল \"Der Sternenbote\" (তারার নির্দেশ) প্রকাশ "
+"করেছেন ।"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Sterngarten/description.en.utf8:22
+msgid ""
+"It was built 1997-2001 by the Austrian Astronomical Society, supported by "
+"public and private sponsors."
+msgstr ""
+"এটি নির্মান করেছে (১৯৯৭-২০০১) অস্ট্রিয়ান জ্যোতিরবৈজ্ঞানিক সংস্থা, সাধারন ও "
+"ব্যাক্তিগত সহায়কদের সহযোগীতায় ।"
+
+#. type: Content of: <h4>
+#: ../../scenery3d/Sterngarten/description.en.utf8:24
+msgid "Purpose"
+msgstr "উদ্দেশ্য"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Sterngarten/description.en.utf8:26
+msgid ""
+"Improvement of basic astronomical knowledge in the general public. "
+"Witnessing celestial facts and changes with the unaided eye, optionally with"
+" a field glass, is offered by our installation, situated in the extreme "
+"southwest of Vienna; always open privately for everybody free of charge. "
+"Frequently guided tours."
+msgstr ""
+"সাধারণ জনগণের মধ্যে মৌলিক জ্যোতির্বিদ্যার প্রসার ঘটানোই এটির মূল লক্ষ্য । "
+"ভিয়েনার একদম দক্ষিণ-পশ্চিমে অবস্থিত, এই স্থাপনা দ্বারা নানা মহাজাগতিক ঘটনা ও"
+" চিরন্তন পরিবর্তনগুলি খালি চোখে কিংবা কখনো দূরবীনের সাহায্যে পর্যবেক্ষনের "
+"সুবিধা রয়েছে; যা সবসময় নিখরচায় সর্বসাধারণের জন্য খোলা থাকে এবং মাঝে মাঝে "
+"গাইড ট্যুরেেরও ব্যবস্থা করা হয় ।"
+
+#. type: Content of: <h4>
+#: ../../scenery3d/Sterngarten/description.en.utf8:32
+msgid "Components"
+msgstr "উপাদান"
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:35
+msgid ""
+"Pyramid with platform 7x7m. Seen from 1.5m above Center Plate all angles "
+"fit."
+msgstr "পিরামিডাক্যাল মঞ্চটির আকার ৭x৭ মি । মধ্যস্থলটি ১.৫ মি উঁচু ।"
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:36
+msgid "Horizon Railing, representing the mathematical horizon."
+msgstr "বেড়াগুলি, দিগন্তকে নির্দেশ করে ।"
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:37
+msgid ""
+"Surrounding Steps; 200 seats. Entrance by staircase and wheelchair ramp."
+msgstr ""
+"সিঁড়িগুলিতে প্রায় ২০০ জন মত বসতে পারে । এমনকি হুইলচেয়ার র‍্যাম্পের ব্যবস্থাও"
+" রয়েছে ।"
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:38
+msgid ""
+"Pillars for sunrise and sunset at beginning of the seasons.  Pillar "
+"positions are right on the azimuths of equinoxes and solstices.  Arms "
+"indicate horizon and shifting effect due to refraction.  (Observation of "
+"rising/setting on the mathematical horizon is not possible in the field due "
+"to vegetation and landscape)."
+msgstr ""
+"প্রত্যেক ঋতুর শুরুর সময়কালীন সূর্যোদয় ও সূর্যাস্তের জন্য একটি করে স্তম্ভ "
+"রয়েছে । স্তম্ভগুলি ক্রান্তি ও বিষুব দিগংশের ডানদিকে রয়েছে । হাতলগুলি দিগন্ত "
+"সমেত প্রতিসরণ ত্রুটিকে নির্দেশ করে । (উদ্ভিদ এবং প্রাকৃতিক দৃশ্যের কারণে "
+"গাণিতিক দিগন্তটিকে পর্যবেক্ষণ করা সম্ভব নয় ।)"
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:42
+msgid ""
+"South Pillar, marked (10&deg;/10&deg; altitude); Transit marks for sun at "
+"seasons' beginning."
+msgstr ""
+"দক্ষিণ স্তম্ভ, নির্দিষ্ট দূরত্বে দাগ দেয়া রয়েছে (১০&deg;/১০&deg; উন্নতি); "
+"এটিকে সূর্যের অতিক্রম ঋতুর সূচনাকে নির্দেশ করে ।"
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:43
+msgid ""
+"North Pillar, marked (10&deg;/10&deg; altitude); on top Shadow Disc with "
+"central hole: North celestial Pole."
+msgstr ""
+"উত্তর স্তম্ভ, নির্দিষ্ট দূরত্বে দাগ দেয়া রয়েছে (১০&deg;/১০&deg; উন্নতি); "
+"উপরের চাকতিটিতে একটি ফুঁটো রয়েছে : এটি উত্তর মেরু ।"
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:44
+msgid ""
+"Bent Analemma, divided. Spring and summer dates on the horizontal part, "
+"autumn and winter dates on the ascending one, marked (10&deg;/10&deg;) solar"
+" longitude, with zodiacal signs. Ascending part serves as polar gnomon for "
+"the"
+msgstr ""
+"সৌরপথ, ভাগ করা রয়েছে । বসন্ত এবং গ্রীষ্মকালের তারিখগুলি আনুভূমিক অংশে রয়েছে,"
+" শরৎ এবং শীতের তারিখগুলি সামনের দিকে রয়েছে, নির্দিষ্ট দূরত্বে দাগ দেয়া রয়েছে"
+" (১০&deg;/১০&deg;) সৌর দ্রাঘিমা অনুযায়ী, রাশিচিহ্ন সমেত । সামনের অংশটি মূলত "
+"একটি সৌরঘড়ি হিসাবে কাজ করে ।"
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:45
+msgid "Sundial, full hours Vh to VIIh marked."
+msgstr "সূর্যঘড়ি, Vh থেকে VIIh পর্যন্ত দাগ দেওয়া রয়েছে ।"
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:46
+msgid "Information panels."
+msgstr "তথ্য ফলক "
+
+#. type: Content of: <h4>
+#: ../../scenery3d/Sterngarten/description.en.utf8:49
+msgid "Further Information"
+msgstr "আরো জানতে"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Sterngarten/description.en.utf8:50
+msgid "Websites in German only."
+msgstr "ওয়েবসাইটি শুধু জার্মান ভাষায় রয়েছে"
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:52
+msgid ""
+"Österreichischer Astronomischer Verein: <a "
+"href=\"https://www.astroverein.at\">https://www.astroverein.at</a>"
+msgstr ""
+"Österreichischer Astronomischer Verein: <a "
+"href=\"https://www.astroverein.at\">https://www.astroverein.at</a>"
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:53
+msgid ""
+"German Wikipedia article on the <a "
+"href=\"https://de.wikipedia.org/wiki/Sterngarten\">Sterngarten</a>"
+msgstr ""
+"<a href=\"https://de.wikipedia.org/wiki/Sterngarten\">স্টার্নগার্টেন</a> - "
+"জার্মান উইকিপিডিয়া প্রবন্ধ"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Sterngarten/description.en.utf8:57
+msgid ""
+"Created by Georg Zotti following plans by H. Mucke; Like countless amateur "
+"and professional astronomers in Austria, Zotti was introduced to astronomy "
+"by Mucke in his primary school days. Mucke's spirit will remain alive in the"
+" Sterngarten."
+msgstr ""
+"H. Mucke এর পরিকল্পনা অনুয়ায়ী এটি তৈরী করেছেন Georg Zotti; অস্ট্রিয়াতে "
+"অগণিত অপেশাদার এবং পেশাদার জ্যোতির্বিদদের মতোই, Zotti কে প্রাথমিক "
+"বিদ্যালয়েরই অধ্যাপক Mucke জ্যোতির্বিদ্যার সাথে পরিচয় করিয়ে দিয়েছিলেন । "
+"ওনার আত্মা স্টার্নগার্টেনে চিরজীবিত থাকবে ।"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Sterngarten/description.en.utf8:60
+msgid ""
+"Model created in 2010 with Google Sketchup 8, exported from Google Sketchup "
+"8.0.14346."
+msgstr ""
+"২০১০ এ তৈরী মডেলটি প্রস্তুত করা হয়েছে Google Sketchup 8.0.14346 এর সাহায্য ।"

@@ -58,11 +58,7 @@ StelAction::StelAction(const QString& actionId,
 	QString cfgOpt = "shortcuts/" + actionId;
 	if (conf->contains(cfgOpt)) // Check existence of shortcut to allow removing shortcuts
 	{
-		#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
-		QStringList shortcuts = conf->value(cfgOpt).toString().split(" ", Qt::SkipEmptyParts);
-		#else
-		QStringList shortcuts = conf->value(cfgOpt).toString().split(" ", QString::SkipEmptyParts);
-		#endif
+		QStringList shortcuts = conf->value(cfgOpt).toString().split(QRegExp("\\s+")); // empty shortcuts allows stay primary and alternative shortcuts as they was defined
 		if (shortcuts.size() > 2)
 			qWarning() << actionId << ": does not support more than two shortcuts per action";		
 		setShortcut(shortcuts[0]);
@@ -107,7 +103,7 @@ QString StelAction::getText() const
 void StelAction::setChecked(bool value)
 {
 	Q_ASSERT(boolProperty);
-	if (value == isChecked()) //dont do anything if value would not change
+	if (value == isChecked()) //don't do anything if value would not change
 		return;
 
 	boolProperty->setValue(value);
@@ -132,7 +128,7 @@ void StelAction::trigger()
 		//This should still call the target slot first before all other registered slots
 		//(because it is registered first, see https://doc.qt.io/qt-4.8/signalsandslots.html#signals).
 		//This enables the slot to find out the StelAction that was triggered using sender(),
-		//and enables use of QSignalMapper or similar constructs
+		//and enables use of QSignalMapper (obsolete), Lambda functions or similar constructs
 		emit triggered();
 	}
 }
@@ -169,7 +165,7 @@ void StelAction::connectToObject(QObject* obj, const char* slot)
 	if (slotIndex<0) qWarning()<<"[StelAction]"<<getId()<<"cannot connect to slot"<<slot<<"of object"<<obj << "- EXIT!";
 #endif
 	Q_ASSERT(slotIndex>=0);
-	// connect to a parameterless slot.
+	// connect to a parameter-less slot.
 	this->slot = obj->metaObject()->method(slotIndex);
 	Q_ASSERT(this->slot.parameterCount() == 0);
 	//let Qt handle invoking the slot when the StelAction is triggered
@@ -209,6 +205,17 @@ StelAction* StelActionMgr::addAction(const QString& id, const QString& groupId, 
 	StelAction* action = new StelAction(id, groupId, text, shortcut, altShortcut, global);
 	connect(action,SIGNAL(toggled(bool)),this,SLOT(onStelActionToggled(bool)));
 	action->connectToObject(target, slot);
+	return action;
+}
+
+
+StelAction* StelActionMgr::addAction(const QString& id, const QString& groupId, const QString& text,
+				      QObject* context, std::function<void()> lambda,
+				      const QString& shortcut, const QString& altShortcut,
+				      bool global)
+{
+	StelAction* action = new StelAction(id, groupId, text, shortcut, altShortcut, global);
+	connect(action, &StelAction::triggered, context, lambda);
 	return action;
 }
 
@@ -309,13 +316,13 @@ void StelActionMgr::saveShortcuts()
 		    action->altKeySequence == action->defaultAltKeySequence)
 			continue;
 		QString seq = action->keySequence.toString().replace(" ", "");
+		if (seq.isEmpty()) // Let's allow remove shortcuts
+			seq = "\"\"";
 		if (action->altKeySequence != action->defaultAltKeySequence)
 			seq += " " + action->altKeySequence.toString().replace(" ", "");
 		if (action->altKeySequence.toString()=="")
-			seq += " \"\"";
-		if (seq.isEmpty()) // Let's allow remove shortcuts
-			seq = "\"\"";
-		conf->setValue(action->objectName(), seq);
+			seq += " \"\"";		
+		conf->setValue(action->objectName(), seq.replace(QRegExp("\\s+")," "));
 	}
 	conf->endGroup();
 	// Apparently shortcuts was changed

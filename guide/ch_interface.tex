@@ -126,7 +126,7 @@ When you select ``Use custom time zone'', you can select other time zones.
 Those that start with UTC have no daylight time rules.
 
 Time zones were introduced in the 19th century, originally for
-purposes of railway traffic synchronisation. The first such action was
+purposes of railway traffic synchronization. The first such action was
 taken in 1847, and therefore Stellarium by default will present Local
 Mean Solar Time (LMST) for dates before 1847, and ignore all
 configured time zones unless you deliberately activate ``Use custom
@@ -192,7 +192,7 @@ The Information tab (Fig.~\ref{fig:gui:configuration:info}) allows you to set th
 displayed about a selected object.
 \begin{itemize}
 \item Ticking or unticking the relevant boxes will control this.
-\item The information displays in various colours depending on the type and
+\item The information displays in various colors depending on the type and
 level of the stored data
 \end{itemize}
 
@@ -214,34 +214,36 @@ The information display can be tweaked a bit with the options found in the GUI s
 
 \subsubsection{Customization of button visibility on bottom toolbar}
 If your screen is too narrow to show all buttons
-or you simply don't need them because you prefer the keyboard
-shortcuts, you can choose your optimal setup. The selection of buttons is stored immediately. 
+or you simply don't need them because you prefer the keyboard shortcuts,
+you can choose your optimal setup. The selection of buttons is stored immediately. 
 \begin{description}
-\item[Show constellation boundaries button] You can toggle display of constellation boundaries with this button.
-\item[Show asterism lines button] You can toggle display of asterism lines with this button.
-\item[Show asterism labels button] You can toggle display of asterism labels with this button.
-\item[Show ecliptic grid button] You can toggle display of ecliptic coordinate grid with this button.
-\item[Show ICRS grid button] You can toggle display of the International Coordinate Reference System (equatorial J2000 coordinate grid) with this button.
-\item[Show galactic grid button] You can toggle display of galactic coordinate grid with this button.
-\item[Show centering button] You can toggle display of the ``center on selected object'' button.
-\item[Show nightmode button] You can toggle display of the nightmode button.
-\item[Show nebula background button] You can toggle display of DSO photographs with this button.
-\item[Show flip buttons] When enabled, two buttons will be added to
+\item[Constellation boundaries] You can toggle display of constellation boundaries with this button.
+\item[Asterism lines] You can toggle display of asterism lines with this button.
+\item[Asterism labels] You can toggle display of asterism labels with this button.
+\item[Ecliptic grid] You can toggle display of ecliptic coordinate grid with this button.
+\item[ICRS grid] You can toggle display of the International Coordinate Reference System (equatorial J2000 coordinate grid) with this button.
+\item[galactic grid] You can toggle display of galactic coordinate grid with this button.
+\item[Cardinal points] You can toggle display of the ``Cardinal points'' button.
+\item[Compass marks] You can toggle display of the ``Compass marks'' button.
+\item[Night mode] You can toggle display of the nightmode button.
+\item[Centering button] You can toggle display of the ``Center on selected object'' button.
+\item[Fullscreen button] You can toggle display of the fullscreen button.
+\item[Quit button] You can toggle display of the button to quit Stellarium.
+\item[Nebula background] You can toggle display of DSO photographs with this button.
+\item[Flip buttons] When enabled, two buttons will be added to
   the main tool bar which allow the main view to be mirrored in the
   vertical and horizontal directions. This is useful when observing
   through telecopes which may cause the image to be mirrored.
-\item[Show DSS button] You can toggle display of Digitized Sky Survey with this button (see section~\ref{sec:TOAST}).
-\item[Show HiPS button] You can toggle display of Hierarchical Progressive Surveys with this button (see section \ref{sec:gui:view:surveys}).
-\item[Show bookmarks button] You can enable display of Bookmarks dialog with this button.
-\item[Show fullscreen button] You can toggle display of the fullscreen button.
-\item[Show Quit button] You can toggle display of the button to quit Stellarium.
+\item[DSS survey] You can toggle display of Digitized Sky Survey with this button (see section~\ref{sec:TOAST}).
+\item[HiPS Surveys] You can toggle display of Hierarchical Progressive Surveys with this button (see section \ref{sec:gui:view:surveys}).
+\item[Bookmarks] You can enable display of Bookmarks dialog with this button.
 \item[Use buttons background] Applies a gray background under the buttons on the bottom bar.
 \end{description}
 
 \subsubsection{Download more star catalogs}
 Stellarium comes with enough stars for casual stargazing with the
 unaided eye or binoculars. If you have a telescope and want to see
-more stars, here you can download more catalogs.
+more stars, here you can download more catalogs. (See Appendix~\ref{ch:Catalogues})
 
 \subsection{The Time Tab}
 \label{sec:gui:configuration:time}
@@ -287,7 +289,9 @@ know what you are doing.
 \label{fig:gui:configuration:tools}
 \end{figure}
 
-The Tools tab (Fig.~\ref{fig:gui:configuration:tools}) contains planetarium options (like enabling/disabling of keyboard shortcuts for panning and zooming the main view) and options for screenshots.
+The Tools tab (Fig.~\ref{fig:gui:configuration:tools}) contains planetarium options 
+(like enabling/disabling of keyboard shortcuts for panning and zooming the main view) 
+and options for screenshots.
 
 \begin{description}
 \item[Spheric mirror distortion] This option pre-warps the main view
@@ -305,16 +309,24 @@ The Tools tab (Fig.~\ref{fig:gui:configuration:tools}) contains planetarium opti
 \item[Select single constellation] When active, clicking on a star
   that is member in the constellation lines will make the
   constellation stand out. See section~\ref{sec:starlore:singleConstellations} for details.
-\item[Auto-enabling for the atmosphere] When changing planet during
+\item[Auto-enabling for the environment] When changing planet during
   location change, atmosphere will be switched as required.
 \item[Dithering] options to allow select better simulation of sky on different hardware.
 \item[Auto zoom out returns to initial direction of view] When enabled,
-  this option changes the behaviour of the zoom out key
+  this option changes the behavior of the zoom out key
   \key{\textbackslash{}} so that it resets the initial direction of view in
   addition to the field of view.
 \item[Enable keyboard navigation]
 \item[Enable mouse navigation]
-
+\item[Overwrite text color] --- enabling this option\newFeature{v0.20.2} will ignore the 
+  color settings for each celestial object and enable one color for text on the info panel 
+  for all celestial objects. By default Stellarium uses white color for this option, 
+  but you may re-define it through a color chooser\newFeature{v0.20.3}.
+\item[Set keyboard focus to day input] --- you may use this option to force setting the 
+  keyboard focus on the day input field in the Date and Time dialog. 
+  
+  Important note: the focus in the sky will be lost when you open the 
+  Date and Time dialog after enabling this option.
 \item[Azimuth from South] Some users may be used to counting azimuth
   from south.
 \item[Use decimal degrees] You can toggle usage of decimal degree format for coordinates.
@@ -328,10 +340,13 @@ The Tools tab (Fig.~\ref{fig:gui:configuration:tools}) contains planetarium opti
 \item[Edit keyboard shortcuts\ldots] See section~\ref{sec:gui:help:hotkeys}.
 \item[Mouse cursor timeout] You can decide whether, and when, the
   mouse cursor should disappear from view when not moved.
+\item[Info text color at daylight] --- this is a color chooser\newFeature{v0.20.3} for defining the 
+  text color for the info panel at daylight to increase the contrast of the text. 
+  By default Stellarium use black color.
 \item[Use kinetic scrolling]  Text fields in \newFeature{v0.18.3} 
-  dialogs can either be moved on sidebar handles (with this switch
-  disabled) or by dragging the text itself (enabled), as it is known
-  from touch-enabled devices like smartphones. 
+dialogs can either be moved on sidebar handles (with this switch
+disabled) or by dragging the text itself (enabled), as it is known
+from touch-enabled devices like smartphones. 
 \end{description}
 
 \paragraph{Font size and font selection} \newFeature{v0.18.3} You can change the font sizes for on-screen
@@ -425,21 +440,26 @@ which are not available via the main toolbar.
 \end{figure}
 
 The Sky tab of the View window (Fig.~\ref{fig:gui:view:sky}) contains settings
-for changing the general appearance of the main sky view and projections. Some hightlights of sky field:
+for changing the general appearance of the main sky view and projections. Some highlights of sky field:
 \begin{description}
 \item[Dynamic eye adaptation] When enabled this feature reduces the
   brightness of faint objects when a bright object is in the field of
   view. This simulates how the eye can be dazzled by a bright object
   such as the moon, making it harder to see faint stars and galaxies.
 \item[Light pollution] In urban and suburban areas, the sky is
-  brightned by terrestrial light pollution reflected in the atmophere.
+  brightened by terrestrial light pollution reflected in the atmosphere.
   Stellarium simulates light pollution and is calibrated to the
   \emph{Bortle Dark Sky Scale} where 1 means a good dark sky, and 9 is
   a very badly light-polluted sky. See Appendix~\ref{ch:BortleScale}
   for more information.
+\item[Shooting stars] Stellarium has a simple meteor simulation
+  option. This setting controls how many shooting stars will be shown.
+  Note that shooting stars are only visible when the time rate is 1, and
+  might not be visible at some times of the day. Meteor showers can be
+  simulated using a dedicated plugin (see section~\ref{sec:plugins:MeteorShowers}).
 \end{description}
 
-\noindent Some hightlights of the stars field:
+\noindent Some highlights of the stars field:
 \begin{description}
 \item[Absolute scale] is the size of stars as rendered by
   Stellarium. If you increase this value, all stars will appear larger
@@ -461,6 +481,8 @@ for changing the general appearance of the main sky view and projections. Some h
   labels displayed for stars. The further to the
   right the sliders are set, the more labels you will see. Note that
   more labels will also appear as you zoom in.
+\item[Use designations for screen labels] --- when this option is enabled you will see 
+  in the sky only scientific designations of the stars instead of their common names.
 \end{description}
 
 \noindent Projection field: Selecting items in this list changes the
@@ -481,7 +503,7 @@ for changing the general appearance of the main sky view and projections. Some h
   \item[Fish-Eye] Stellarium draws the sky using \emph{azimuthal
     equidistant projection}. In fish-eye projection, straight lines
     become curves when they appear a large angular distance from the
-    centre of the field of view (like the distortions seen with very
+    center of the field of view (like the distortions seen with very
     wide angle camera lenses). This is more pronounced as the user zooms
     out. The maximum field of view in this mode is 180\degree.
   \item[Orthographic] Orthographic projection is related to
@@ -512,11 +534,20 @@ for changing the general appearance of the main sky view and projections. Some h
       Carr\'ee}. The maximum field of view in this mode is 233\degree.
 \end{description}
 
+\subsubsection{Atmosphere settings}
+\label{sec:gui:view:sky:atmosphere}
+
+An auxiliary dialog contains detail settings for the atmosphere. Here
+you can set atmospheric pressure and temperature which influence
+refraction (see section~\ref{sec:phenomena:Refraction}), and the
+opacity factor $k_v$ for extinction, \emph{magnitude loss per airmass} 
+(see section~\ref{sec:phenomena:Extinction}).
+
 \subsection{The Solar System Objects (SSO) Tab}
 \label{sec:gui:view:sso}
 
 The Solar System Objects tab of the View window (Fig.~\ref{fig:gui:view:sso}) contains settings
-for changing the general appearance of the view of Solar system objects. Some hightlights:
+for changing the general appearance of the view of Solar system objects. Some highlights:
 
 \begin{figure}[htbp]
 \centering\includegraphics[width=0.75\textwidth]{view_dialog_sso_tab.png}
@@ -526,31 +557,40 @@ for changing the general appearance of the view of Solar system objects. Some hi
 
 
 \begin{description}
-\item[Solar System objects] this group of options lets you turn on
-  and off various features related to the planets. Simulation of light
-  speed will give more precise positions for planetary bodies which move
-  rapidly against backround stars (e.g. the moons of Jupiter). The
-  \emph{Scale Moon} option will increase the apparent size of the moon
+\item[Simulate light speed] will give more precise positions for planetary bodies which move
+  rapidly against backround stars (e.g. the moons of Jupiter). 
+\item[Scale Moon]  will increase the apparent size of the moon
   in the sky, which can be nice for wide field of view shots.
+\item[Scale minor bodies] will increase the apparent size of minor
+  bodies: planet satellites, all kinds of asteroids, and comets.  For
+  some of these 3D models are available, which will be better
+  discernible if enlarged.
+\item[Show orbits] adds a rendition of the orbit or trajectory of an SSO. 
+\item[Show trails] plots the apparent path of SSO among the stars as
+  seen from the current planet.
+\item[Show planetary nomenclature] displays positions and names of
+  surface features officially named by the IAU (See
+  Appendix~\ref{ch:Nomenclature}). When the sun is below the horizon
+  at the location of the feature, the label is attenuated.
+\item[Use custom settings for GRS]: The Great Red Spot (GRS) is slowly
+  drifting along Jupiter's System~II coordinate system. When the
+  default solution seems to misplace the GRS, you can activate and
+  configure a custom location. The central meridian data given
+  \newFeature{v0.21.0} in the object information on screen still shows
+  System~II longitude.
 \item[Labels and markers] you can independently change the amount of
   labels displayed for Solar system objects. The further to the
   right the sliders are set, the more labels you will see. Note that
   more labels will also appear as you zoom in.
-\item[Shooting stars] Stellarium has a simple meteor simulation
-  option. This setting controls how many shooting stars will be shown.
-  Note that shooting stars are only visible when the time rate is 1, and
-  might not be visiable at some times of day. Meteor showers are not
-  currently simulated.
+\item[Planet magnitude algorithm] several ways to compute planet
+  magnitudes have been made available from the literature. Data by
+  Müller (1893) provide visual magnitudes. The other models provide
+  instrumental (Johnson V) magnitudes.
+\item[Earth shadow enlargement after Danjon] \newFeature{v0.21.0}
+  Earth's shadow is enlarged by the atmosphere. You can select whether
+  the 2\% enlargement used by the Astronomical Almanac should be
+  applied (default), or the formulation of Danjon.
 \end{description}
-
-\subsubsection{Atmosphere settings}
-\label{sec:gui:view:sky:atmosphere}
-
-An auxiliary dialog contains detail settings for the atmosphere. Here
-you can set atmospheric pressure and temperature which influence
-refraction (see section~\ref{sec:phenomena:Refraction}), and the
-opacity factor $k_v$ for extinction, \emph{magnitude loss per airmass} 
-(see section~\ref{sec:phenomena:Extinction}).
 
 % Put these 3 on 1 page.
 \begin{figure}[p]
@@ -578,8 +618,8 @@ opacity factor $k_v$ for extinction, \emph{magnitude loss per airmass}
 external to the solar system, and are not point sources like stars.
 DSO include galaxies, planetary nebulae and star clusters. These
 objects may or may not have images associated with them. Stellarium
-comes with a catalogue of over 90,000 extended objects containing
-the combined data from many catalogues, with 200 images.  
+comes with a catalog of over 90,000 extended objects containing
+the combined data from many catalogs, with 500+ images.  
 
 The DSO tab (Fig.~\ref{fig:gui:view:dso}) allows you to specify which 
 catalogs or which object types you are interested in. This selection 
@@ -766,13 +806,19 @@ Deep sky surveys will be rendered aligned with the sky view, while solar system
 surveys automatically map on the proper body.
 
 
-\section{The Object Search Window}
+\section{The Search Window}
 \label{sec:gui:search}
 
 \begin{figure}[p]
 \centering\includegraphics[width=0.68\textwidth]{search_dialog.png}
-\caption{The Search Window: Objects}
+\caption{The Search Window: Object}
 \label{fig:gui:search}
+\end{figure}
+
+\begin{figure}[p]
+\centering\includegraphics[width=0.68\textwidth]{search_dialog_recent_result.png}
+\caption{The Search Window: Object (Recent Searches)}
+\label{fig:gui:search:recentSearches}
 \end{figure}
 
 \begin{figure}[p]
@@ -783,7 +829,7 @@ surveys automatically map on the proper body.
 
 \begin{figure}[p]
 \centering\includegraphics[width=0.68\textwidth,trim=0 40 0 0,clip]{search_dialog_position.png}
-\caption{The Search Window: Positions}
+\caption{The Search Window: Position}
 \label{fig:gui:search:position}
 \end{figure}
 
@@ -795,70 +841,163 @@ surveys automatically map on the proper body.
 
 
 \begin{figure}[tbp]
-\centering\includegraphics[width=0.68\textwidth,trim=0 50 0 0,clip]{search_dialog_option.png}
+\centering\includegraphics[width=0.68\textwidth]{search_dialog_option.png}
 \caption{The Search Window: Options}
 \label{fig:gui:search:options}
 \end{figure}
 
-The Object Search window provides a convenient way to locate objects
+\subsection{The Object tab}
+\label{sec:gui:SearchWindow:Object}
+The Object tab of the Search window provides a convenient way to locate objects
 in the sky. Simply type in the name of an object to find, and press
 \key{\return}. Stellarium will point you at that object in the sky.
 
 As you type, Stellarium will make a list of objects which contains 
 what you have typed so far. The first of the list of matching objects
-will be highlighted. If you press the \key{\tab} key, the selection will change
-to the next item in the list. Hitting the \key{\return} key will center on the
-currently highlighted object and close the search dialog.
+will be highlighted. If you press the \key{\tab} or \key{\arrowkeydown} key,
+the selection will change to the next item in the list.
+Pressing the \key{\arrowkeyup} key will bring you to the previous item.
+Hitting the \key{\return} key will center on the
+currently highlighted object and close the Search window.
 
-For example, suppose we want to locate Saturn's moon Mimas. 
+For example, suppose we want to locate Saturn's moon Mimas (SI).
+Open the Search window (\guibutton[0.5]{2.5}{btd_find.png}, \key{F3}, or \key{Ctrl+F}).
 Type the first letter of the name, \emph{m}, to see a list
-of objects whose name contains \emph{m}: Hau\emph{m}ea, \emph{M}iranda, U\emph{m}briel, \ldots 
+of objects whose name contains \emph{m}:
+\begin{center}
+\begin{tabular}{l}
+        \emph{M}iranda (UV)\\
+        Psa\emph{m}athe (NX)\\
+        U\emph{m}briel (UII)\\
+        \ldots\\
+\end{tabular}
+\end{center}
 
-You may want at this point to have Stellarium rather propose object
-names with start with the string you enter. Do that in the Options tab
-of this panel. Now repeat searching (delete, and re-enter \emph{m} to start
-over). Now the list is shorter and contains only objects which start
-with \emph{m}: \emph{M}aia, \emph{M}ars, \ldots The first item in this list, Maia, is
-highlighted. Pressing \key{\return} now would go to Maia, but we want
-Mimas. We can either press \key{\tab} a few times to highlight Mimas
+\noindent You may want at this point to have Stellarium rather propose object
+names which start with the string you enter. Do that in the Options tab
+of this panel (see section~\ref{sec:gui:SearchWindow:Options}).
+The search result should update automatically\newFeature{v0.20.3}
+when you nagivate back to the Object tab.
+Now the list is shorter and contains only objects which start
+with \emph{m}:
+\begin{center}
+\begin{tabular}{l}
+        \emph{M}ago\\
+        \emph{M}aia\\
+        \emph{M}ars\\
+        \ldots\\
+\end{tabular}
+\end{center}
+
+\noindent The first item in this list, Mago, is
+highlighted. Pressing \key{\return} now would go to Mago, but we want
+Mimas (SI). We can either press \key{\tab} or \key{\arrowkeydown} a few times to highlight Mimas (SI)
 and then hit \key{\return}, or we can continue to type the name until
 it is the first/only object in the list.
 
+After you searched for an object, the next time the Search window opens,\newFeature{v0.20.3}
+your most recently searched object(s)
+will automatically appear in the search result of the Object tab.
+For instance, continuing with our example, re-open the Search window's Object tab.
+Mimas (SI) should already be populated and highlighted:
+\begin{center}
+\begin{tabular}{l}
+        \textbf{\emph{M}imas (SI)}\\
+\end{tabular}
+\end{center}
+
+\noindent The Object tab's search result will now prioritize your most recent searches
+(which will be shown in \textbf{bold}).\newFeature{v0.20.3}
+To modify the search results, see section~\ref{sec:gui:SearchWindow:Options}.
+From our earlier example, re-enter \emph{m} into the Object tab.
+Doing so will generate a slightly different list than before.
+In this case, Mimas (SI) will appear first, as shown in Figure~\ref{fig:gui:search:recentSearches}:
+\begin{center}
+\begin{tabular}{l}
+        \textbf{\emph{M}imas (SI)}\\
+        \emph{M}ago\\
+        \emph{M}aia\\
+        \emph{M}ars\\
+        \ldots\\
+\end{tabular}
+\end{center}
+
+\subsection{The SIMBAD tab}
+\label{sec:gui:SearchWindow:SIMBAD}
 The SIMBAD tab (Fig.~\ref{fig:gui:search:simbad}) provides a
 convenient way to fetch and show a set of information for selected
-object from the astronomical database
+object from the astronomical online database
 SIMBAD~\citep{2000A&AS..143....9W}.  If some object is only visible in
 a survey or DSS background (see section~\ref{ch:surveys}) and not in
 Stellarium's catalogs, you can also set a custom marker (see
-sectin~\ref{sec:tour:markers}), select it and query SIMBAD ``tell me
-what's known about this''.
+section~\ref{sec:tour:markers}), select it and query SIMBAD ``tell me
+what's known about objects at this location''.
 
+\subsection{The Position tab}
+\label{sec:gui:SearchWindow:Position}
 The Position tab (Fig.~\ref{fig:gui:search:position}) provides a convenient way to enter a set
 of coordinates.
 
-The List Search tab (Fig.~\ref{fig:gui:search:options}) allows selection of an object from predefined
+\subsection{The Lists tab}
+\label{sec:gui:SearchWindow:Lists}
+The Lists tab (Fig.~\ref{fig:gui:search:lists}) allows selection of an object from predefined
 sets.  The number of choices is governed by the loaded DSO catalogs and plug-ins. 
 Scroll down the first window to select the type. Click on the name
 and Stellarium will center on that object.
 
+\subsection{The Options tab}
+\label{sec:gui:SearchWindow:Options}
 The Options tab (Fig.~\ref{fig:gui:search:options}) provides a few settings to fine-tune your search experience.
-When the name of an object to find is typed in the object
-window and you are connected to the internet and ``Extend search'' is
-ticked, Stellarium will search the SIMBAD on-line  data bases for its
-coordinates. You can then click the \guibutton{0.6}{bt_search.png} button or press return.
+
+\begin{description}
+\item[Use SIMBAD]
+When the name of an object to find is typed in the Object
+tab and you are connected to the internet and ``Use SIMBAD'' is
+ticked, Stellarium will search the SIMBAD on-line databases for its
+coordinates. You can then click the \guibutton{0.6}{bt_search.png} button or press \key{\return}.
 Stellarium will point you at that object in the sky even if there is no
 object displayed on the screen. The SIMBAD server being used can be
 selected from the scroll window.
+\begin{description}
+\item[Server:] for server selection
+\end{description}
+\end{description}
 
+\begin{description}
+\item[Search Options] group allows for changes in the search result behaviour.
+\begin{description}
+\item[Use autofill only from the beginning of words] when checked, will 
+search for object names that begins with the same letters as your input. 
+Example provided in section~\ref{sec:gui:SearchWindow:Object}. 
+\item[Lock position when coordinates are used]
+\item[Show FOV center marker when position is search]
+\end{description}        
+\end{description}
+
+\begin{description}
+\item[Recent Searches]group allows modification to your recent search data\newFeature{v0.20.3}. 
+Any changes here will automatically update the search results displayed in the Object tab. 
+Example provided in section~\ref{sec:gui:SearchWindow:Object}.
+\begin{description}
+\item[Max items to display] amount of \emph{recent searches} that can appear in the search result
+\item[\guibutton{1.0}{uibtDelete.png}] button deletes your recent search history
+\end{description}
+\end{description}
 
 \section{The Astronomical Calculations Window}
 \label{sec:gui:AstroCalc}
 
-This window \newFeature{v0.15.0} provides advanced functionality, some of which is still in an experimental phase. 
+This window \newFeature{v0.15.0} provides advanced functionality, some of which is still in an experimental phase.
 You can call it by pressing \key{F10} or the button \guibutton{0.6}{btd_astrocalc.png} on the left menu bar. 
 The Astronomical Calculations window shows six tabs with different functionality.
 
 In version 0.18.3 \newFeature{v0.18.3} we added exporting the data to XLSX files in addition to CSV files.
+
+\begin{figure}[htbp]
+	\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_positions_tab.png}
+	\caption{Astronomical Calculations (AstroCalc): Celestial positions}
+	\label{fig:gui:AstroCalc:Positions}
+\end{figure}
 
 \subsection{The Positions Tab}
 \label{sec:gui:AstroCalc:Positions}
@@ -869,78 +1008,90 @@ lists of celestial objects above the horizon at the simulated time, filtered by 
 Double-clicking on an entry brings the object into focus (Fig.~\ref{fig:gui:AstroCalc:Positions}). 
 You may also export the list of positions into an XLSX or CSV file.
 
-
-\begin{figure}[htbp]
-\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_positions_tab.png}
-\caption{Astronomical Calculations (AstroCalc): Celestial positions}
-\label{fig:gui:AstroCalc:Positions}
-\end{figure}
-
 \subsection{The Ephemeris Tab}
 \label{sec:gui:AstroCalc:Ephemeris}
 
 Select an object, start and end time, and compute an ephemeris (list of positions and magnitudes evolving over time) for that object. 
 The positions are marked in the sky with yellow disks (Fig.~\ref{fig:gui:AstroCalc:Ephemeris}). 
 
+\begin{figure}[tbp]
+	\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_ephemeris_tab.png}
+	\caption{Astronomical Calculations (AstroCalc): Plot trace of planet}
+	\label{fig:gui:AstroCalc:Ephemeris}
+\end{figure}
+
+\begin{figure}[tbp]
+	\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_ephemeris_extra.png}
+	\caption{Astronomical Calculations (AstroCalc): Extra options for ephemeris}
+	\label{fig:gui:AstroCalc:Ephemeris:Extra}
+\end{figure}
+
 When you click on a date, an orange disk indicates this date and/or magnitude. 
 Double-clicking sets the respective date and brings the object to focus. 
-Dates and/or magnitudes will show near position markers when \emph{Show dates} and/or \emph{Show magnitudes} checkboxes are active. \newFeature{v0.19.2} To show a line between markers please tick checkbox \emph{Show line}. You may customize the format of displayed data near markers and their frequency in \emph{Extra options} window (Fig.~\ref{fig:gui:AstroCalc:Ephemeris:Extra}).
+Dates and/or magnitudes will show up near position markers when \emph{Show dates} 
+and/or \emph{Show magnitudes} checkboxes are active. \newFeature{v0.19.2} 
+To show a line between markers please tick checkbox \emph{Show line}. 
+You may customize the format of displayed data near markers and their frequency in the \emph{Extra options} window (Fig.~\ref{fig:gui:AstroCalc:Ephemeris:Extra}).
 
 You can export the calculated ephemeris into an XLSX or CSV file. 
 
 \begin{figure}[tbp]
-\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_ephemeris_tab.png}
-\caption{Astronomical Calculations (AstroCalc): Plot trace of planet}
-\label{fig:gui:AstroCalc:Ephemeris}
+	\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_ephemeris_analemma.png}
+	\caption{Astronomical Calculations (AstroCalc): Analemma on the Earth}
+	\label{fig:gui:AstroCalc:Ephemeris:Analemma}
 \end{figure}
 
-\begin{figure}[tbp]
-\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_ephemeris_extra.png}
-\caption{Astronomical Calculations (AstroCalc): Extra options for ephemeris}
-\label{fig:gui:AstroCalc:Ephemeris:Extra}
+\begin{figure}[p]
+	\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_ephemeris_analemma_mars.png}
+	\caption{Astronomical Calculations (AstroCalc): Analemma on Mars}
+	\label{fig:gui:AstroCalc:Ephemeris:AnalemmaMars}
+\end{figure}
+
+\begin{figure}[p]
+	\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_ephemeris_asteroids.png}
+	\caption{Astronomical Calculations (AstroCalc): Two asteroids nearby to one place}
+	\label{fig:gui:AstroCalc:Ephemeris:Asteroids}
 \end{figure}
 
 Another interesting option in this tool: using horizontal coordinates for plotting traces of the Solar system objects. 
 In this mode, the circle marks are not linked to the sky, but to the horizontal coordinate system.
-For example, you can get an analemma of the Sun for any location (Fig.~\ref{fig:gui:AstroCalc:Ephemeris:Analemma} and \ref{fig:gui:AstroCalc:Ephemeris:AnalemmaMars}), 
+For example, you can get an analemma of the Sun for any location (Fig.~\ref{fig:gui:AstroCalc:Ephemeris:Analemma}
+and \ref{fig:gui:AstroCalc:Ephemeris:AnalemmaMars}), 
 or observe the visibility of Mercury, Venus or a comet in the twilight sky.
 
-Since version 0.19.2\newFeature{v0.19.2} you may define the color of markers and enable display markers for all naked-eye visible planets.
+Since version 0.19.2\newFeature{v0.19.2} you may define the color of markers and 
+enable display markers for all naked-eye visible planets.
 
-\begin{figure}[tbp]
-\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_ephemeris_analemma.png}
-\caption{Astronomical Calculations (AstroCalc): Analemma on the Earth}
-\label{fig:gui:AstroCalc:Ephemeris:Analemma}
-\end{figure}
-
-\begin{figure}[tbp]
-\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_ephemeris_analemma_mars.png}
-\caption{Astronomical Calculations (AstroCalc): Analemma on Mars}
-\label{fig:gui:AstroCalc:Ephemeris:AnalemmaMars}
-\end{figure}
+Since version 0.20.3\newFeature{v0.20.3} we added ability to draw an ephemeris of 
+two objects at the same time and define custom time step for the ephemeris 
+(Fig.~\ref{fig:gui:AstroCalc:Ephemeris:Asteroids}).
 
 \subsection{The Transits Tab}
 \label{sec:gui:AstroCalc:Transits}
 
-This \newFeature{v0.19.3} tab allows you to compute transits of selected celestial object (except unnamed stars and artificial satellites) for specific date range. The tool is proposed for planning observations and he suggest the best time and conditions for visual observations or astrophotography (Fig.~\ref{fig:gui:AstroCalc:Transits}).
+\begin{figure}[htbp]
+	\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_transits_tab.png}
+	\caption{Astronomical Calculations (AstroCalc): Transits of selected celestial object}
+	\label{fig:gui:AstroCalc:Transits}
+\end{figure}
+
+\noindent This \newFeature{v0.19.3} tab allows you to compute meridian transits of selected celestial object 
+(except unnamed stars and artificial satellites) for a specific date range. 
+The tool is proposed for planning observations, and it suggests the best time and conditions 
+for visual observations or astrophotography (Fig.~\ref{fig:gui:AstroCalc:Transits}).
 
 You may also export the list of transits into an XLSX or CSV file.
 
-\begin{figure}[tbp]
-\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_transits_tab.png}
-\caption{Astronomical Calculations (AstroCalc): Transits of selected celestial object}
-\label{fig:gui:AstroCalc:Transits}
-\end{figure}
-
-%\newpage
 \subsection{The Phenomena Tab}
 \label{sec:gui:AstroCalc:Phenomena}
 
 This tab allows you to compute phenomena like conjunctions, oppositions, 
 occultations and eclipses (in special cases) between planetary objects 
 (Fig.~\ref{fig:gui:AstroCalc:Phenomena}). 
-In version 0.19.3\newFeature{v0.19.3} we added computation greatest elongations for inner planets and stationary points for all planets in
-additional to exist phenomena. For all Solar system bodies, except the moons, we also propose compute perihelion and aphelion in addition to other phenomena.
+In version 0.19.3\newFeature{v0.19.3} we added computation of greatest 
+elongations for the inner planets and stationary points for all planets in
+addition to the exist phenomena. For all Solar system bodies, except the moons, 
+we also compute perihelia and aphelia in addition to the other phenomena.
 
 You can export the calculated phenomena into an XLSX or CSV file.
 
@@ -1078,7 +1229,7 @@ You may center an object from the right list in the sky map just by selecting it
 Note that only DSO from catalogs which you have selected in the DSO panel (section~\ref{sec:gui:view:dso}) will be found.
 
 In version 0.18.3 \newFeature{v0.18.3} this tool has been refactored: the tool for searching items from list of \emph{Matching Objects} was removed,
-the filter for magnitudes was moved to the right and we added a new filter here to limit the range of acceptable angular sizes of matched objects.
+the filter for magnitudes was moved to the right, and we added a new filter here to limit the range of acceptable angular sizes of matched objects.
 In addition to the names we added 5 new sortable columns: magnitude, rising time, transit time, setting time and angular size of object.
 
 
@@ -1107,15 +1258,14 @@ current date) as graphs.
 \label{fig:gui:AstroCalc:PC:Graphs}
 \end{figure}
 
-\newpage
 
 \section{The Help Window}
 \label{sec:gui:help}
 
 \subsection{The Help Tab}
 \label{sec:gui:help:help}
-\begin{figure}[h]
-\centering\includegraphics[width=0.6\textwidth]{help_dialog.png}
+\begin{figure}[htp]
+\centering\includegraphics[width=0.65\textwidth]{help_dialog.png}
 \caption{Help Window}
 \label{fig:gui:help}
 \end{figure}
@@ -1126,8 +1276,8 @@ a browse of the information in this window.
 
 \subsection{The About Tab}
 \label{sec:gui:help:about}
-\begin{figure}[htbp]
-\centering\includegraphics[width=0.6\textwidth]{help_dialog_about.png}
+\begin{figure}[tbp]
+\centering\includegraphics[width=0.65\textwidth]{help_dialog_about.png}
 \caption{Help Window: About}
 \label{fig:gui:help:about}
 \end{figure}
@@ -1137,22 +1287,23 @@ Since version 0.18.3 \newFeature{0.18.3} this tab has tool to check for updates 
 
 \subsection{The Log Tab}
 \label{sec:gui:help:log}
-\begin{figure}[htbp]
-\centering\includegraphics[width=0.6\textwidth]{help_dialog_log.png}
+\begin{figure}[tbp]
+\centering\includegraphics[width=0.65\textwidth]{help_dialog_log.png}
 \caption{Help Window: Logfile}
 \label{fig:gui:help:log}
 \end{figure}
 
 The Log Tab (Fig.~\ref{fig:gui:help:log}) shows messages like the loading confirmations carried out when
-stellarium runs. It is useful to locate the files that stellarium writes
+Stellarium runs. It is useful to locate the files that Stellarium writes
 to your computer. The same information is written to  the file \file{log.txt} that you will
-find in your user directory (see~\ref{sec:Directories}).
+find in your user data directory (see~\ref{sec:Directories}).
+
 
 \section{Editing Keyboard Shortcuts}
 \label{sec:gui:help:hotkeys}
 
 \begin{figure}[htbp]
-\centering\includegraphics[width=0.75\textwidth]{hotkeys_dialog.png}
+\centering\includegraphics[width=0.8\textwidth]{hotkeys_dialog.png}
 \caption{Keyboard Shortcuts}
 \label{fig:gui:hotkeys}
 \end{figure}

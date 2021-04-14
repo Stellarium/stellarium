@@ -84,7 +84,7 @@ public:
 	//! @param maxNbItem the maximum number of returned object names.
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object names by order of relevance, or an empty list if nothing match
-	QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=true) const;
+	QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 
 	QStringList listAllModuleObjects(const QString& moduleId, bool inEnglish) const;
 	QMap<QString, QString> objectModulesMap() const;

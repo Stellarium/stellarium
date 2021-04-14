@@ -9,7 +9,7 @@ I extract.sh:
 
 Usage:
 
-1. Update po4a.config with the new cultures if needed.
+1. Update po4a.config with the new landscape if needed.
 2. Run from this folder
 
    sh extract.sh

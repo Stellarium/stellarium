@@ -55,7 +55,7 @@ gzip -nc catalog.pack > catalog.dat
 \end{commands}
 
 Stellarium DSO Catalog contains data and supports the designations for
-follow catalogues\footnote{Abell Catalog of Planetary Nebulae has been added in v0.18.2 and removed in v0.20.1}:
+follow catalogs\footnote{Abell Catalog of Planetary Nebulae was added in v0.18.2 and removed in v0.20.1}:
 
 \begin{description}[align=right,labelwidth=2cm]
 \item[\textbf{NGC}]  New General Catalogue 
@@ -70,23 +70,24 @@ follow catalogues\footnote{Abell Catalog of Planetary Nebulae has been added in 
 \item[\textbf{LBN}]  Lynds' Catalogue of Bright Nebulae~\citep{1965ApJS...12..163L} 
 \item[\textbf{Cr}] Collinder Catalogue~\citep{1931AnLun...2....1C} 
 \item[\textbf{Mel}]  Melotte Catalogue of Deep Sky Objects~\citep{1915MmRAS..60..175M} 
-\item[\textbf{PGC}]  HYPERLEDA. I. Catalog of galaxies\footnote{The PGC and UGC catalogues are partially supported}
+\item[\textbf{PGC}]  HYPERLEDA. I. Catalog of galaxies\footnote{The PGC and UGC catalogs are partially supported}
 \item[\textbf{UGC}]  The Uppsala General Catalogue of Galaxies
 \item[\textbf{Ced}]  Cederblad Catalog of bright diffuse Galactic nebulae~\citep{1946MeLuS.119....1C}
-\item[\textbf{Arp}]  Atlas of peculiar galaxies~\citep{1966ApJS...14....1A}\newFeature{V0.16.0}
-\item[\textbf{VV}]  The catalogue of interacting galaxies by Vorontsov-Velyaminov~\citep{2001A&AT...20..717V}\newFeature{V0.16.0}
-\item[\textbf{PK}]  Version 2000 of the Catalogue of Galactic Planetary Nebulae~\citep{2001A&A...378..843K}\newFeature{V0.16.0}
-\item[\textbf{PN G}]  The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae~\citep{1992secg.book.....A}\newFeature{V0.16.1}
-\item[\textbf{SNR G}]  A catalogue of Galactic supernova remnants~\citep{2014yCat.7272....0G}\newFeature{V0.16.1}
-\item[\textbf{Abell}]  A Catalog of Rich Clusters of Galaxies~\citep{1989ApJS...70....1A}\newFeature{V0.16.1}
-\item[\textbf{HCG}]  Atlas of compact groups of galaxies~\citep{1993ApL....29....1H}\newFeature{V0.18.0}
-\item[\textbf{ESO}]  ESO/Uppsala Survey of the ESO(B) Atlas~\citep{1982ESO...C......0L}\newFeature{V0.18.2}
-\item[\textbf{vdBH}]  Catalogue of southern stars embedded in nebulosity~\citep{1975AJ.....80..208V}\newFeature{V0.19.2}
-\item[\textbf{DWB}]  Catalogue and distances of optically visible H II regions~\citep{1969A&A.....1..270D}\newFeature{V0.19.2}
-\item[\textbf{Tr}]  Trumpler Catalogue\newFeature{V0.20.2}
-\item[\textbf{St}]  Stock Catalogue\newFeature{V0.20.2}
-\item[\textbf{Ru}]  Ruprecht Catalogue\newFeature{V0.20.2}
-\item[\textbf{vdB-Ha}]  van den Bergh-Hagen Catalogue~\citep{1975AJ.....80...11V}\newFeature{V0.20.2}
+\item[\textbf{Arp}]  Atlas of peculiar galaxies\footnote{Arp, VV and PK was added in version 0.16.0}~\citep{1966ApJS...14....1A}\newFeature{v0.16.0}
+\item[\textbf{VV}]  The catalogue of interacting galaxies by Vorontsov-Velyaminov~\citep{2001A&AT...20..717V}
+\item[\textbf{PK}]  Version 2000 of the Catalogue of Galactic Planetary Nebulae~\citep{2001A&A...378..843K}
+\item[\textbf{PN G}]  The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae\footnote{PN G, SNR G and Abell was added in version 0.16.1}~\citep{1992secg.book.....A}\newFeature{v0.16.1}
+\item[\textbf{SNR G}]  A catalogue of Galactic supernova remnants~\citep{2014yCat.7272....0G}
+\item[\textbf{Abell}]  A Catalog of Rich Clusters of Galaxies~\citep{1989ApJS...70....1A}
+\item[\textbf{HCG}]  Atlas of compact groups of galaxies~\citep{1993ApL....29....1H}\newFeature{v0.18.0}
+\item[\textbf{ESO}]  ESO/Uppsala Survey of the ESO(B) Atlas~\citep{1982ESO...C......0L}\newFeature{v0.18.2}
+\item[\textbf{vdBH}]  Catalogue of southern stars embedded in nebulosity\footnote{vdBH and DWB was added in version 0.19.2}~\citep{1975AJ.....80..208V}\newFeature{v0.19.2}
+\item[\textbf{DWB}]  Catalogue and distances of optically visible H II regions~\citep{1969A&A.....1..270D}
+\item[\textbf{Tr}]  Trumpler Catalog\footnote{Tr, St, Ru and vdB-Ha was added in version 0.20.2}\newFeature{v0.20.2}
+\item[\textbf{St}]  Stock Catalog
+\item[\textbf{Ru}]  Ruprecht Catalog
+\item[\textbf{vdB-Ha}]  van den Bergh-Hagen Catalog~\citep{1975AJ.....80...11V}
+\item[\textbf{Other}] deep-sky objects without designations and sky regions\newFeature{v0.20.3} --- by formal rules objects from this list are not included in any catalog known to Stellarium
 \end{description}
 
 \noindent Cross-index data for Stellarium's DSO Catalog is partially obtained from 
@@ -96,7 +97,7 @@ and NED\footnote{NASA/IPAC Extragalactic Database (NED) --- \url{https://ned.ipa
 
 \noindent Distances for some deep-sky objects obtained from \citetp{2008ApJ...689..194S}, \citetp{2007ApJ...670..363H}, \citetp{1995A&AS..113..325H} and \citetp{1996AJ....112.1487H}.
 
-\noindent Morphological class for many open clusters obtaunded from \citetp{1966BAICz..17...33R}.
+\noindent Morphological class for many open clusters obtained from \citetp{1966BAICz..17...33R}.
 
 \subsection{Modifying catalog.dat}
 \label{sec:dso:modifyingCatalog.dat}
@@ -215,7 +216,7 @@ CLG & Cluster of galaxies\\
 \label{sec:dso:modifyingNamesDat}
 
 Each line in the file \file{names.dat}  contains one record. A record
-relates an extended object catalogue number (from \file{catalog.dat})
+relates an extended object catalog number (from \file{catalog.dat})
 with a name. A single catalogue number may have more than one record in
 this file.
 
@@ -226,7 +227,7 @@ The record structure is as follows:
 \toprule
 \emph{Offset} & \emph{Length} & \emph{Type} & \emph{Description}\\
 \midrule
-0  &  5 & \%5s & Designator for catalogue (prefix)\\
+0  &  5 & \%5s & Designator for catalog (prefix)\\
 5  & 15 & \%d  & Identificator for object in the catalog\\
 20 & 60 & \%s  & Proper name of the object (translatable)\\
 \bottomrule
@@ -251,7 +252,7 @@ Stellarium has the following structure:
 
   \begin{description}
   \item[short] a short identifier of a server where the json file is found, e.g. ``ESO''
-  \item[full]  a longer description of a server, e.g. ``ESO Online Digitised Sky Survey Server''
+  \item[full]  a longer description of a server, e.g. ``ESO Online Digitized Sky Survey Server''
   \item[infoURL] a URL pointing at a page with information about the server
   \end{description}
 \item[imageCredits] a structure containing the same parts as a
@@ -261,7 +262,7 @@ Stellarium has the following structure:
   unless otherwise specified at the image level
 \item[maxBrightness] the maximum brightness of an image, applies to all
   images in the set, unless otherwise specified at the image level
-\item[subTiles] a list of structures describing indiviual image tiles, or
+\item[subTiles] a list of structures describing individual image tiles, or
   referring to another json file. Each subTile may contain:
 
   \begin{description}
@@ -316,7 +317,7 @@ where
 \end{description}
 
 
-Calculating of the coords of the corners of the images (plate solving) is
+Calculating of the coordinates of the corners of the images (plate solving) is
 a time consuming project and needs to be fine tuned from the screen
 display. As most images will be two dimensional, display on a spherical
 display will limit the size to about 1 degree before distortion becomes
@@ -326,7 +327,7 @@ textures for a more accurate display.
 \subsection{Modifying outlines.dat}
 \label{sec:dso:modifyingOutlines}
 
-\noindent\newFeature{V0.16.1}Each line in the file \file{outlines.dat} contains three ``columns'' of data for outline elements. The structure for each line is as follows:
+\noindent\newFeature{v0.16.1}Each line in the file \file{outlines.dat} contains three ``columns'' of data for outline elements. The structure for each line is as follows:
 
 \noindent%
 \begin{tabularx}{\textwidth}{r|r|l|X}
@@ -367,7 +368,7 @@ Example for outline of M42:
 05.56948 -05.57675 end
 \end{configfile}
 
-The format of the file \file{outlines.dat} is compatible with the similar file of the \program{SkyChart/Cartes du Ciel} planetarium.
+The format of the file \file{outlines.dat} is compatible with the similar file of the \program{SkyChart (Cartes du Ciel)} planetarium.
 
 \section{Adding Extra Nebula Images}%\label{adding-extra-nebulae-images}
 \label{sec:dso:adding_images}
@@ -385,7 +386,7 @@ Space Object (DSO) images for inclusion in Stellarium involved \indexterm{plate
 solving} the image to find its center on the sky, and then calculating
 the corners of the image in the World Coordinate System (WCS\footnote{%
 \url{https://fits.gsfc.nasa.gov/fits_wcs.html}}) using the scale of the
-image, arcseconds/pixel.
+image, arc-seconds/pixel.
 
 
 The problem with that approach is that it did not account for any
@@ -414,7 +415,7 @@ adjustments.
 There are \program{Python} libraries, namely \program{astropy} and a
 related ``channel'' \program{astroquery}, that can automate some or
 all of the needed steps, and there are both manual and fully automated
-scripts for that purpose available on Stellarium's Github site. These
+scripts for that purpose available on Stellarium's GitHub site. These
 scripts can be run on Windows, Mac, or Linux platforms, using the
 \program{Anaconda Python} distribution.
 
@@ -426,7 +427,7 @@ coordinate system so that north is directly up and not inverted side
 to side or up and down as can happen with photos taken with a diagonal
 mirror in the path (In the WCS system, ``Parity'' must be 1.)
 
-Next you will need to crop and/or rescale the picture, setting the
+Next you will need to crop and/or re-scale the picture, setting the
 main feature at the center and making the cropped size a power of 2,
 e.g.\ 64, 128, 256, 512, 1024 or 2048 pixels square (or elongated like
 $512\times1024$). If this requirement is not met, your textures may
@@ -441,8 +442,8 @@ as ugly gray square. Do not use ``transparent'' pixels available in
 the PNG format as they will show as white, not black, in Stellarium.
 
 Images covering more than 10 degrees of sky should be divided into
-separate images, and images with pixel scales less than 1 arcsec per
-pixel should be rescaled so as to have a pixel scale of 1 arcsec per
+separate images, and images with pixel scales less than 1 arc-sec per
+pixel should be re-scaled so as to have a pixel scale of 1 arc-sec per
 pixel or larger.
 
 \subsection{Processing requirements}

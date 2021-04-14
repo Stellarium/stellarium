@@ -35,19 +35,22 @@ class AtmosphereDialog : public StelDialog
 
 public:
 	AtmosphereDialog();
-	virtual ~AtmosphereDialog();
+	virtual ~AtmosphereDialog() Q_DECL_OVERRIDE;
 
 public slots:
-        void retranslate();
+	virtual void retranslate() Q_DECL_OVERRIDE;
 
 protected:
         //! Initialize the dialog widgets and connect the signals/slots.
-        virtual void createDialogContent();
+	virtual void createDialogContent() Q_DECL_OVERRIDE;
         Ui_atmosphereDialogForm *ui;
 
 private:
         Refraction *refraction;
         Extinction *extinction;
+
+private slots:
+	void setStandardAtmosphere();
 };
 
 #endif // ATMOSPHEREDIALOG_HPP

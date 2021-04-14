@@ -36,6 +36,7 @@ class QDoubleSpinBox;
 class QSlider;
 class StelAction;
 class QToolButton;
+class AngleSpinBox;
 
 //! Base class for all the GUI windows in Stellarium.
 //! 
@@ -78,7 +79,10 @@ class StelDialog : public QObject
 	Q_PROPERTY(bool visible READ visible WRITE setVisible NOTIFY visibleChanged)
 public:
 	StelDialog(QString dialogName="Default", QObject* parent=Q_NULLPTR);
-	virtual ~StelDialog();
+	virtual ~StelDialog() Q_DECL_OVERRIDE;
+
+	//! Notify that the application style changed
+	virtual void styleChanged();
 
 	//! Returns true if the dialog contents have been constructed and are currently shown
 	bool visible() const;
@@ -98,7 +102,7 @@ public slots:
 	//! On the first call with "true" populates the window contents.
 	virtual void setVisible(bool);
 	//! Closes the window (the window widget is not deleted, just not visible).
-	void close();
+	virtual void close();
 	//! Adds dialog location to config.ini; should be connected in createDialogContent()
 	void handleMovedTo(QPoint newPos);
 	//! Stores dialog sizes into config.ini; should be connected from the proxy.
@@ -147,6 +151,10 @@ protected:
 	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
 	//! to the required datatype, the application will crash
 	static void connectDoubleProperty(QDoubleSpinBox* spinBox, const QString& propName);
+	//! Helper function to connect an AngleSpinBox to a double or float StelProperty representing decimal degrees
+	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
+	//! to the required datatype, the application will crash
+	static void connectDoubleProperty(AngleSpinBox* spinBox, const QString& propName);
 	//! Helper function to connect a QSlider to an double or float StelProperty
 	//! @param slider The slider which should be connected
 	//! @param propName The id of the StelProperty which should be connected
@@ -156,12 +164,16 @@ protected:
 	//! to the required datatype, the application will crash
 	static void connectDoubleProperty(QSlider* slider, const QString& propName, double minValue, double maxValue);
 
-	//! Helper function to connect a QComboBox to an QString StelProperty.
+	//! Helper function to connect a QComboBox to a QString StelProperty.
 	//! The property is mapped to the selected string of the combobox.
 	//! Make sure the string is available in the Combobox, else the first element may be chosen.
 	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
 	//! to the required datatype, the application will crash
 	static void connectStringProperty(QComboBox *comboBox, const QString &propName);
+	//! Helper function to connect a QLineEdit to a QString StelProperty.
+	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
+	//! to the required datatype, the application will crash
+	static void connectStringProperty(QLineEdit *lineEdit, const QString &propName);
 
 	//! Helper function to connect a checkbox to a bool StelProperty
 	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
@@ -181,11 +193,17 @@ protected:
 	//! to the required datatype, the application will crash
 	void connectColorButton(QToolButton* button, QString propertyName, QString iniName, QString moduleName="");
 
+	bool askConfirmation();
+
 	//! The main dialog
 	QWidget* dialog;
 	class CustomProxy* proxy;
 	//! The name should be set in derived classes' constructors and can be used to store and retrieve the panel locations.
 	QString dialogName;
+
+	//! A list of widgets where kinetic scrolling can be activated or deactivated
+	//! The list must be filled once, in the constructor or init() of fillDialog() etc. functions.
+	QList<QWidget *> kineticScrollingList;
 
 protected slots:
 	//! To be called by a connected QToolButton with a color background.
@@ -196,12 +214,6 @@ protected slots:
 	//! connect from StelApp to handle font and font size changes.
 	void handleFontChanged();
 
-
-protected:
-	//! A list of widgets where kinetic scrolling can be activated or deactivated
-	//! The list must be filled once, in the constructor or init() of fillDialog() etc. functions.
-	QList<QWidget *> kineticScrollingList;
-
 private slots:
 	void updateNightModeProperty();
 };
@@ -210,7 +222,7 @@ class CustomProxy : public QGraphicsProxyWidget
 {	private:
 	Q_OBJECT
 	public:
-		CustomProxy(QGraphicsItem *parent = Q_NULLPTR, Qt::WindowFlags wFlags = Q_NULLPTR) : QGraphicsProxyWidget(parent, wFlags)
+		CustomProxy(QGraphicsItem *parent = Q_NULLPTR, Qt::WindowFlags wFlags = Qt::Widget) : QGraphicsProxyWidget(parent, wFlags)
 		{
 			setFocusPolicy(Qt::StrongFocus);
 		}

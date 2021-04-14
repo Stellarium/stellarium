@@ -18,8 +18,8 @@ SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON)
 PROJECT(Stellarium)
 # Use integer versions instead of strings for easier handling if required
 SET(STELLARIUM_MAJOR 0)
-SET(STELLARIUM_MINOR 20)
-SET(STELLARIUM_PATCH 2)
+SET(STELLARIUM_MINOR 21)
+SET(STELLARIUM_PATCH 0)
 ADD_DEFINITIONS(
      -DSTELLARIUM_MAJOR=${STELLARIUM_MAJOR}
      -DSTELLARIUM_MINOR=${STELLARIUM_MINOR}
@@ -64,7 +64,6 @@ SET(ENABLE_TESTING 0 CACHE BOOL "Define whether the unit tests should be activat
 IF(NOT CMAKE_BUILD_TYPE)
      SET(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind ASan UBSan Release RelWithDebInfo MinSizeRel." FORCE)
 ENDIF()
-MESSAGE(STATUS "Build mode: ${CMAKE_BUILD_TYPE}")
 
 IF(${CMAKE_BUILD_TYPE} MATCHES "Debug")
      IF(CMAKE_COMPILER_IS_GNUCXX)
@@ -88,6 +87,42 @@ IF(STELLARIUM_RELEASE_BUILD)
 ELSE()
      SET(SERIES "head")
 ENDIF()
+
+########### Get revision number for non-release builds ###########
+IF(NOT STELLARIUM_RELEASE_BUILD)
+     # Hack until CMake detection for Git is finished
+     IF(WIN32)
+          FIND_FILE(GITCMD git.exe)
+     ELSE()
+          FIND_FILE(GITCMD git)
+     ENDIF()
+     STRING(TIMESTAMP CDNUMBER "%j")
+     SET(WINDOWS_PACKAGE_VERSION "${VERSION}.${CDNUMBER}")
+     IF(EXISTS ${GITCMD})
+          EXECUTE_PROCESS(COMMAND git rev-parse --abbrev-ref HEAD WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_BRANCH OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
+          EXECUTE_PROCESS(COMMAND git log -1 --pretty=format:%h WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_REVISION OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
+          EXECUTE_PROCESS(COMMAND git rev-list --count ${GIT_BRANCH} WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_COMMITS OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
+          IF(GIT_REVISION)
+               # Let's use short hash in all cases
+               STRING(SUBSTRING ${GIT_REVISION} 0 7 REVISION)
+               SET(PACKAGE_VERSION "${VERSION}-${REVISION}")
+               ADD_DEFINITIONS(-DGIT_REVISION="${REVISION}")
+               ADD_DEFINITIONS(-DGIT_BRANCH="${GIT_BRANCH}")
+               # better way to numbering
+               SET(WINDOWS_PACKAGE_VERSION "${VERSION}.${GIT_COMMITS}")
+          ENDIF()
+     ELSE()
+          STRING(TIMESTAMP TODAY "%j%H%M")
+          SET(PACKAGE_VERSION "${VERSION}-${TODAY}")
+          ADD_DEFINITIONS(-DGIT_REVISION="${TODAY}")
+          ADD_DEFINITIONS(-DGIT_BRANCH="tarball")
+     ENDIF()
+     IF(STELLARIUM_VERSION)
+          SET(PACKAGE_VERSION "${STELLARIUM_VERSION}")
+          ADD_DEFINITIONS(-DSTELLARIUM_VERSION="${STELLARIUM_VERSION}")
+     ENDIF()
+ENDIF()
+MESSAGE(STATUS "Building Stellarium ${PACKAGE_VERSION} (Mode: ${CMAKE_BUILD_TYPE})")
 
 # Write version and series of Stellarium to Stellarium User Guide
 CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/version.tex.cmake ${PROJECT_SOURCE_DIR}/guide/version.tex @ONLY NEWLINE_STYLE LF)
@@ -138,13 +173,9 @@ IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
      SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
      # share data location:
      SET(SDATALOC "Resources")
-     # home data location:
-     SET(HDATALOC "$ENV{HOME}/Library/Application\ Support/${PROJECT_NAME}")
-ELSE()     
+ELSE()
      # share data location:
      SET(SDATALOC "share/${PACKAGE}")
-     # home data location:
-     SET(HDATALOC "$ENV{HOME}/.${PACKAGE}")
 ENDIF()
 
 IF(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_GNUCC)
@@ -332,13 +363,12 @@ ENDIF(ENABLE_SPOUT)
 
 SET(ENABLE_SCRIPTING 1 CACHE BOOL "Define whether scripting features should be activated.")
 IF(ENABLE_SCRIPTING)
+     ADD_DEFINITIONS(-DENABLE_SCRIPTING)
      # (De-)Activate the script edit console
      SET(ENABLE_SCRIPT_CONSOLE 1 CACHE BOOL "Define whether to build the script console feature.")
      IF(ENABLE_SCRIPT_CONSOLE)
           ADD_DEFINITIONS(-DENABLE_SCRIPT_CONSOLE)
      ENDIF()
-ELSE()
-     ADD_DEFINITIONS(-DDISABLE_SCRIPTING)
 ENDIF()
 
 SET(STELLARIUM_GUI_MODE Standard CACHE STRING "Choose the type of GUI to build, options are: Standard, None")
@@ -387,7 +417,7 @@ ADD_PLUGIN(SimpleDrawLine 0)
 #### work plugins ####
 ADD_PLUGIN(AngleMeasure 1)
 ADD_PLUGIN(ArchaeoLines 1)
-ADD_PLUGIN(CompassMarks 1)
+ADD_PLUGIN(Calendars 1)
 ADD_PLUGIN(Exoplanets 1)
 ADD_PLUGIN(EquationOfTime 1)
 ADD_PLUGIN(MeteorShowers 1)
@@ -490,20 +520,6 @@ IF(WIN32)
     ENDIF()
 ENDIF()
 
-# when using Qt 5.3, default to using the old QGLWidget, but warn
-IF(${Qt5Core_VERSION} VERSION_LESS "5.4")
-     SET(USE_OLD_QGLWIDGET 1)
-     MESSAGE(WARNING "You are using Qt ${Qt5Core_VERSION} to build, falling back to legacy QGLWidget rendering. Consider using at least Qt 5.4 if possible.")
-ELSE()
-     # offer the old widget as an alternative, default off
-     SET(USE_OLD_QGLWIDGET 0 CACHE BOOL "Use the legacy QGLWidget instead of the new QOpenGLWidget for the main viewport, and link to the QtOpenGL module")
-ENDIF()
-
-IF(USE_OLD_QGLWIDGET)
-     SET(USE_QTOPENGL 1)
-     ADD_DEFINITIONS(-DUSE_OLD_QGLWIDGET)
-ENDIF()
-
 # Since Qt 5.4, linking to OpenGL is basically not required anymore,
 # because the QtGui module re-implements the GL functions, and perhaps even
 # dispatches the calls to a dynamically selected GL library.
@@ -520,7 +536,10 @@ ENDIF()
 IF(${Qt5Gui_OPENGL_IMPLEMENTATION} MATCHES "GLES")
      MESSAGE(STATUS "Building an OpenGL ES build (${Qt5Gui_OPENGL_IMPLEMENTATION})")
      SET(STEL_GLES_LIBS Qt5::Gui_EGL Qt5::Gui_GLESv2)
+ELSE()
+     MESSAGE(STATUS "Building an OpenGL build")
 ENDIF()
+
 
 # Tell CMake to run moc when necessary:
 SET(CMAKE_AUTOMOC ON)
@@ -614,35 +633,6 @@ IF(CMAKE_BUILD_TYPE STREQUAL "Debug")
      ADD_DEFINITIONS(-DINSTALL_LOCALEDIR_FOR_DEBUG="${CMAKE_SOURCE_DIR}")
 ENDIF()
 
-########### Get revision number for non-release builds ###########
-IF(NOT STELLARIUM_RELEASE_BUILD)
-     # Hack until CMake detection for Git is finished
-     IF(WIN32)
-          FIND_FILE(GITCMD git.exe)
-     ELSE()
-          FIND_FILE(GITCMD git)
-     ENDIF()
-     IF(EXISTS ${GITCMD})
-          EXECUTE_PROCESS(COMMAND git rev-parse --abbrev-ref HEAD WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_BRANCH OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
-          EXECUTE_PROCESS(COMMAND git rev-list --count ${GIT_BRANCH} WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_COMMITS OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
-          IF(GIT_COMMITS)
-               SET(PACKAGE_VERSION "${VERSION}.${GIT_COMMITS}")
-               ADD_DEFINITIONS(-DGIT_COMMITS="${GIT_COMMITS}")
-               ADD_DEFINITIONS(-DGIT_BRANCH="${GIT_BRANCH}")
-          ENDIF()
-     ELSE()
-          STRING(TIMESTAMP TODAY "%j%H%M")
-          SET(PACKAGE_VERSION "${VERSION}.${TODAY}")
-          ADD_DEFINITIONS(-DGIT_COMMITS="${TODAY}")
-          ADD_DEFINITIONS(-DGIT_BRANCH="unknown")
-     ENDIF()
-     # MESSAGE(STATUS "Branch: ${GIT_BRANCH}; Commits: ${GIT_COMMITS}; Error: ${GIT_ERROR}")
-     IF(STELLARIUM_VERSION)
-          SET(PACKAGE_VERSION "${STELLARIUM_VERSION}")
-          ADD_DEFINITIONS(-DSTELLARIUM_VERSION="${STELLARIUM_VERSION}")
-     ENDIF()
-ENDIF()
-
 IF(WIN32)
      #######################################################
      ### Generate icon file name
@@ -661,7 +651,7 @@ IF(WIN32)
      IF(STELLARIUM_RELEASE_BUILD)
           SET(PACKAGE_VERSION_RC "${PACKAGE_VERSION},0")
      ELSE()
-          SET(PACKAGE_VERSION_RC "${PACKAGE_VERSION}")
+          SET(PACKAGE_VERSION_RC "${WINDOWS_PACKAGE_VERSION}")
      ENDIF()
      STRING(REGEX REPLACE "([.]+)" "," PACKAGE_VERSION_RC ${PACKAGE_VERSION_RC})
      CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/cmake/stellarium.rc.cmake ${CMAKE_CURRENT_BINARY_DIR}/stellarium.rc @ONLY)

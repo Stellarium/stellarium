@@ -92,7 +92,7 @@ void PointerCoordinates::init()
 {
 	if (!conf->childGroups().contains("PointerCoordinates"))
 	{
-		qDebug() << "PointerCoordinates: no coordinates section exists in main config file - creating with defaults";
+		qDebug() << "[PointerCoordinates] no coordinates section exists in main config file - creating with defaults";
 		restoreDefaultConfiguration();
 	}
 
@@ -226,7 +226,7 @@ void PointerCoordinates::draw(StelCore *core)
 		{
 			double lambda, beta;
 			StelUtils::rectToSphe(&cx,&cy,core->j2000ToEquinoxEqu(mousePosition, StelCore::RefractionOff));
-			StelUtils::equToEcl(cx, cy, core->getCurrentPlanet()->getRotObliquity(core->getJDE()), &lambda, &beta); // Calculate ecliptic position and show it...
+			StelUtils::equToEcl(cx, cy, GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(core->getJDE()), &lambda, &beta); // Calculate ecliptic position and show it...
 			if (lambda<0) lambda+=2.0*M_PI;
 			coordsSystem = qc_("Ecl. Long/Lat", "abbreviated in the plugin");
 			if (withDecimalDegree)
@@ -245,7 +245,7 @@ void PointerCoordinates::draw(StelCore *core)
 		{
 			double lambda, beta;
 			StelUtils::rectToSphe(&cx,&cy, mousePosition);
-			StelUtils::equToEcl(cx, cy, core->getCurrentPlanet()->getRotObliquity(2451545.0), &lambda, &beta); // Calculate ecliptic position and show it...
+			StelUtils::equToEcl(cx, cy, GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0), &lambda, &beta); // Calculate ecliptic position and show it...
 			if (lambda<0) lambda+=2.0*M_PI;
 			coordsSystem = qc_("Ecl. Long/Lat (J2000.0)", "abbreviated in the plugin");
 			if (withDecimalDegree)
@@ -410,7 +410,7 @@ void PointerCoordinates::setCurrentCoordinatesPlaceKey(QString key)
 	CoordinatesPlace coordPlace = static_cast<CoordinatesPlace>(en.keyToValue(key.toLatin1().data()));
 	if (coordPlace<0)
 	{
-		qWarning() << "Unknown coordinates place: " << key << "setting \"TopRight\" instead";
+		qWarning() << "[PointerCoordinates] Unknown coordinates place: " << key << "setting \"TopRight\" instead";
 		coordPlace = TopRight;
 	}
 	setCurrentCoordinatesPlace(coordPlace);
@@ -428,7 +428,7 @@ void PointerCoordinates::setCurrentCoordinateSystemKey(QString key)
 	CoordinateSystem coordSystem = static_cast<CoordinateSystem>(en.keyToValue(key.toLatin1().data()));
 	if (coordSystem<0)
 	{
-		qWarning() << "Unknown coordinate system: " << key << "setting \"RaDecJ2000\" instead";
+		qWarning() << "[PointerCoordinates] Unknown coordinate system: " << key << "setting \"RaDecJ2000\" instead";
 		coordSystem = RaDecJ2000;
 	}
 	setCurrentCoordinateSystem(coordSystem);

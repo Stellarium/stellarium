@@ -28,9 +28,7 @@
 #include "StelCore.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
-#ifndef USE_OLD_QGLWIDGET
 #include "StelMainView.hpp"
-#endif
 
 #include "StelModuleMgr.hpp"
 #include "LandscapeMgr.hpp"
@@ -253,15 +251,14 @@ float StelSkyDrawer::computeLimitMagnitude() const
 	while (std::fabs(lim-a)>0.05f)
 	{
 		computeRCMag(lim, &rcmag);
+		float tmp = lim;
 		if (rcmag.radius<=0.f)
 		{
-			float tmp = lim;
 			lim=(a+lim)*0.5f;
 			b=tmp;
 		}
 		else
 		{
-			float tmp = lim;
 			lim=(b+lim)*0.5f;
 			a=tmp;
 		}
@@ -336,9 +333,7 @@ bool StelSkyDrawer::computeRCMag(float mag, RCMag* rcMag) const
 {
 	rcMag->radius = eye->adaptLuminanceScaledLn(pointSourceMagToLnLuminance(mag), static_cast<float>(starRelativeScale)*1.40f*0.5f);
 	rcMag->radius *=starLinearScale;
-#ifndef USE_OLD_QGLWIDGET
 	rcMag->radius *=StelMainView::getInstance().getCustomScreenshotMagnification();
-#endif
 	// Use now statically min_rmag = 0.5, because higher and too small values look bad
 	if (rcMag->radius < 0.3f)
 	{
@@ -432,14 +427,12 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 	// If the rmag is big, draw a big halo
 	if (flagDrawBigStarHalo && radius>MAX_LINEAR_RADIUS+5.f)
 	{
-		float cmag = qMin(rcMag.luminance, (radius-(MAX_LINEAR_RADIUS+5.f))/30.f);
+		float cmag = qMin(1.0f, qMin(rcMag.luminance, (radius-(MAX_LINEAR_RADIUS+5.f))/30.f));
 		float rmag = 150.f;
-		if (cmag>1.f)
-			cmag = 1.f;
 
 		texBigHalo->bind();
 		sPainter->setBlending(true, GL_ONE, GL_ONE);
-		sPainter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
+		sPainter->setColor(color*cmag);
 		sPainter->drawSprite2dModeNoDeviceScale(win[0], win[1], rmag);
 	}
 
@@ -490,7 +483,7 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 	const float pixPerRad = painter->getProjector()->getPixelPerRadAtCenter();
 	// Assume a disk shape
 	float pixRadius = std::sqrt(illuminatedArea/(60.f*60.f)*M_PI_180f*M_PI_180f*(pixPerRad*pixPerRad))/M_PIf;
-
+	float pxRd = pixRadius*3.f+100.f;
 	bool noStarHalo = false;
 
 	if (mag<-15.f)
@@ -501,12 +494,10 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 		painter->setBlending(true, GL_ONE, GL_ONE);
 
 		float rmag = big3dModelHaloRadius*(mag+15.f)/-11.f;
-		float cmag = 1.f;
-		if (rmag<pixRadius*3.f+100.f)
-			cmag = qMax(0.f, 1.f-(pixRadius*3.f+100-rmag)/100);
+		float cmag = (rmag>=pxRd) ? 1.f : qMax(0.f, 1.f-(pxRd-rmag)/100);
 		Vec3f win;
 		painter->getProjector()->project(v, win);
-		painter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
+		painter->setColor(color*cmag);
 		painter->drawSprite2dModeNoDeviceScale(win[0], win[1], rmag);
 		noStarHalo = true;
 	}
@@ -525,11 +516,11 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 	// so that the radius of the halo is small enough to be not visible (so that we see the disk)
 
 	// TODO: Change drawing halo to more realistic view of stars and planets
-	float tStart = 3.f; // Was 2.f: planet's halo is too dim
+	float tStart = 3.f; // Was 2.f: planet's halo is too dim. Atque 2020-11-12: No need to change these anymore. It appears that this has to do with halo size vs FOV (?).
 	float tStop = 6.f;
 	bool truncated=false;
 
-	float maxHaloRadius = qMax(tStart*3.f, pixRadius*3.f);
+	float maxHaloRadius = qMax(tStart*6.f, pixRadius*3.f); //Atque 2020-11-12: Careful, if tStart*6.f is too big (tStart*10.f or something), the Moon gets a ridiculously big halo.
 	if (rcm.radius>maxHaloRadius)
 	{
 		truncated = true;

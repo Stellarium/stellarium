@@ -1,0 +1,284 @@
+%% Part of Stellarium User Guide 0.20.4+
+%% History:
+%% 2020-12-17 New chapter.
+%% !!!!!!!!!! Please ask GZ before editing this file. !!!!!!!!!!!!!!!
+
+
+\newpage
+\section{Calendars Plugin}
+\label{sec:plugin:Calendars}
+\sectionauthor*{Georg Zotti}
+
+
+
+\subsection{Introduction}
+\label{sec:plugin:Calendars:Introduction}
+
+The calendar dates in the main program behave like most other astronomical software titles:
+
+\begin{itemize}
+\item Dates are given in the Gregorian calendar for all dates
+  beginning with October 15, 1582.
+\item All earlier dates are given in the Julian Calendar in its
+  finalized form by \name{Augustus}. Historically, only dates
+  beginning with March 1st, 4 A.D. coincide with historically recorded
+  dates: the Roman priesthood messed up the 4-year count introduced by
+  \name[Julius]{Caesar} and counted leap years every third
+  year. \name{Augustus} decreed to omit leap days from 12~B.C. to
+  4~A.D. to move the seasons to where \name[Julius]{Caesar} had placed
+  them.
+\item Given the errors in the Julian calendar, simulation in early
+  prehistory will provide non-intuitive calendar dates for the
+  seasons' beginnings.
+\item Astronomical counting of years includes a year zero and negative
+  years. Historical calendars don't have a year zero. 1~A.D. is
+  preceded by 1~B.C. Therefore a negative year in Stellarium may look
+  uncommon to historians who may think Stellarium is one year off.
+\end{itemize}
+
+\noindent Since earliest times people all over the world have observed the sky
+and used its phenomena to record and measure time. Over millennia,
+various systematic calendars evolved. A classic and often-cited
+presentation of calendars from the pre-computer era is still the
+monumental work by Ginzel (\citeyear{Ginzel:ChronologieI, Ginzel:ChronologieII,
+  Ginzel:ChronologieIII}).  The next challenge was then to describe the
+systematic of these algorithmically and make them available for
+computer programs.  \citet{Reingold-Dershowitz:2018} have presented a
+modern masterpiece of this kind and are our preferred source of
+algorithms. This plugin \newFeature{v0.20.4} will evolve over the next
+time to bring a good sample of calendars into Stellarium.
+
+In the configuration panel you can select which calendars you want to
+display in the lower right corner of the screen, and you can also directly
+interact with some of them.
+
+The calendars displayed in this plugin come with their own
+logic. Historically, when a calendar was introduced, dates which
+precede its starting point (era) were of little interest to its users,
+therefore if a date bears negative years (or negative units of its
+largest component) those dates may not be useful.
+
+Note that in some calendars the day did not begin at midnight, but for
+example at sunrise, sunset, or dawn. This cannot be reflected in this
+plugin. Dates should be correct at noon, and may be one day off
+dependent on these aspects.
+
+\subsection{The Calendars}
+\subsubsection{Lunisolar European calendars}
+\begin{description}
+\item[Julian] This implementation utilizes historical year counting,
+  i.e., has no year zero. Years are marked A.D. or B.C., respectively.
+\item[Gregorian] This implementation acts like Stellarium with respect
+  to year counting and counts negative and positive years, with a year
+  zero between them. It shows dates in a \emph{Proleptic Gregorian}
+  calendar for dates before October 15, 1582. Given its improved rules
+  for leap years, it keeps the season's beginnings closer to the
+  commonly known dates, at least for many more centuries in the past
+  than the Julian calendar commonly used by historians.
+\item[ISO Week] The International Standards Organization describes
+  weeks in the Gregorian calendar from Monday (Day 1) to Sunday (Day
+  7). Week 1 of each year contains the first Thursday of the
+  year. Years may have a week 53, where the last days already belong
+  to the next Gregorian year.
+\item[Icelandic calendar] Since 1700, this counts weeks in summer and
+  winter seasons, 12 months of 30 days with a few extra days and the
+  occasional leap week after the third month of summer. Year numbers
+  concur with the Gregorian, but start with summer in late April.
+\item[Roman calendar] This presents the Roman way of writing calendar
+  dates in the Julian calendar and provides dates \emph{ab urbe condita} (A.U.C.).
+\item[Olympic calendar] Another way to write the years in the Julian
+  calendar uses the Greek Olympiads, a 4-year cycle starting in 776
+  B.C.E. The Olympic games of antiquity were held in year 1 of each cycle.
+\end{description}
+
+\subsubsection{Near Eastern Solar calendars}
+Several calendars with 12 months of 30 days plus 5 (6 for leap years
+in some calendars) \emph{epagomenae} days, with different \emph{calendar eras}.
+\begin{description}
+\item[Egyptian] A 365 day year without leap days. Following the
+  tradition of \name{Ptolemy}, we use the \emph{era of Nabonassar}.
+\item[Armenian] also has no leap days.
+\item[Zoroastrian] also has no leap days. This uses different names
+  for each day of the month and for each \emph{epagomenae} day. Month
+  names are from \citet[\S69]{Ginzel:ChronologieI} with
+  transliteration adapted to \citet{Reingold-Dershowitz:2018}.
+\item[Coptic] uses Month names derived from the Egyptian calendar, but observes
+  leap years every 4th year. Its \emph{era martyrum} is also called
+  \emph{Diocletian era}.
+\item[Ethiopic] is Parallel to the Coptic calendar, just with different
+  year numbers, counted from the \emph{ethiopic era of mercy}.
+\item[Persian] a Solar calendar adopted in 1925, \newFeature{v0.21.0}
+  but based on the earlier Jal\=al\=\i\ calendar of the 11th century
+  A.D. Years begin at the Vernal equinox (\emph{nowruz}) and follow a
+  complicated leap year cycle of 2820 years. Days begin at midnight
+  (zone time). An identical calendar with different month names was
+  adopted in Afghanistan in 1957. The current implementation gives the
+  algorithmic version which occasionally deviates from the
+  astronomical version by 1 day.
+\end{description}
+
+\subsubsection{Near Eastern calendars}
+Several more calendars \newFeature{0.21.0} have been worked out in algorithmic forms:
+\begin{description}
+\item[Islamic] is a strict lunar calendar without observance of
+  seasons. Days begin at sunset, but we cannot currently show
+  this. The date should be correct at Noon. The week begins on
+  Sunday. Note that this algorithmic solution may deviate from the
+  dates given by religious authorities on basis of observation.
+\item[Hebrew] is a Lunisolar calendar with strict Lunar months, but
+  adherence to the seasons. It has 12 or 13 months, and 353-355 or
+  383-385 days per year. The algorithmic form was instroduced in the
+  mid-4th century A.D.
+\end{description}
+
+
+\subsubsection{Asian calendars}
+\begin{description}
+\item[Old Hindu Solar] used before about 1100 A.D. The implementation follows the 
+  (First) \emph{\=Arya Siddh\=anta} of \=Aryabha\d{t}a (499 C.E.), 
+  as amended by Lalla (circa 720--790 C.E.).
+  The year is split into 12 months (\emph{saura}) of equal length. 
+  Days begin with sunrise, simplified as 6~am.
+\item[Old Hindu Lunisolar] used before about 1100 A.D. 
+  This implementation shows the south-Indian method 
+  with months starting at New Moon (\emph{am\=anta} scheme). 
+  (In the north, the \emph{p\=ur\d{n}im\=anta} scheme describes months 
+  starting with Full Moon. There are also some local differences.)
+\item[Balinese Pawukon] is a 10-part sequence of day names with cycle
+  lengths of 2 to 10, which can also be written as numbers or
+  symbols. Some numbers repeat in simple cycles, while others follow
+  more complicated rules. A full cycle takes 210 days.  Due to space
+  reasons this needs two lines on the display. Formatting may improve
+  in later versions.
+\end{description}
+
+\subsubsection{Mesoamerican calendars}
+\begin{description}
+\item[Maya Long Count] is a 5-part sequence of numbers, conventionally 
+  written with dot separators. Just like most
+  modern people write numbers in the decimal system (base 10), and the
+  Mesopotamians developed a scheme with base 60 still used today for
+  angular and temporal minutes and seconds, the Maya used base 20 as their
+  unit. However, this count uses a mixed-base system. The lowest
+  (rightmost) number (\emph{kin}) runs from 0 to 19, the second-lowest
+  (\emph{uinal}) from 0 to 17, the others from 0 to 19 again. It is
+  assumed these lowest places of $18\times20=360$ days have been used
+  to approximate the solar year, so that the third number from the
+  right (\emph{tun}) increases about once per year. The higher places
+  are called \emph{katun} and \emph{baktun}. Most scientists agree
+  that the zero point of the long count corresponds to Monday,
+  September 6, 3114 B.C. (Julian), but in many sources dates in the
+  proleptic Gregorian calendar are listed, where this date is given as
+  August 11, -3113. This plugin finally allows the use of both
+  systems, and of Long Count dates directly.
+
+  In December of 2012 some people were afraid that the switchover from
+  \emph{baktun} 12 to 13 (something which occurs about every 400
+  years) would cause Armageddon, just as other people prefer to be
+  afraid of turns of centuries or millennia of the Christian year
+  count.
+\item[Maya Haab] is a calendar of 18 ``months'' of 20 days each
+  (counted 1 to 20), plus 5 days (\emph{Uayeb}) at the end, providing
+  ``years'' of 365 days. Years are not counted, but you can use
+  buttons in the calendar interface to move forth and back to the
+  previous or next, respectively, day with the same Haab name.
+\item[Maya Tzolkin] is described as ritual calendar consisting of two
+  cycles with 13 day numbers (1 to 13) and 20 names. Each day both
+  counters are advanced. Date names repeat after 260 days. Usually
+  Haab and Tzolkin calendars were both used to define a unique date
+  which repeats only after a \emph{calendar round} of 52 Haab years,
+  corresponding to 73 Tzolkin cycles.
+\item[Aztec Xihuitl] is similar to the Maya Haab, consisting of 18
+  ``months'' of 20 days, plus 5 \emph{nemontemi} (worthless
+  days). Days are counted from 1 to 20. The Aztecs may have used
+  intercalation, but details have been lost. The correlation in use
+  here is based on the recorded Aztec date of the fall of their empire
+  to \name[Hern\'an]{Cort\'es} in 1521 and should provide correct dates in the
+  early 16th century.
+\item[Aztec Tonalpohualli] is similar in structure to the Mayan
+  Tzolkin. Also an Aztec date is usually given by both systems.
+\end{description}
+
+\subsubsection{French Revolution calendar}
+The French Revolution of 1789 brought also a calendar reform. After a
+few years with different year count only, a new calendar was
+introduced effective on November 24, 1793 (4. Frimaire, II). This was
+based on an astronomical determination of the autumnal equinox at
+Paris, which marked the start of the years.
+
+The calendar has 12 months of $3\times 10$ days (\emph{d\'ecades}), plus
+5 (in leap years: 6) extra days at the end of the year. These 10-day
+``weeks'' made it pretty unpopular. The months were given names that
+alluded to the climate or vegetation.
+
+In 1795, \newFeature{v0.21.0} an arithmetic version was proposed which
+got rid of the difficult astronomical computation with a leap year
+scheme similar to the Gregorian. However, this version of the calendar
+never came into use.  Stellarium currently shows this calendar, which
+may be off by 1 day.
+
+With the end of Gregorian year 1805, the calendar was abolished, but
+re-introduced for a few days in May 1871.
+
+\subsection{Further development}
+The plugin is in an early phase of development. More calendars will be
+added in later versions, and formatting and setting options may be
+improved.
+
+
+\subsection{Configuration Options}
+\label{sec:plugin:Calendars:configuration}
+
+The configuration dialog allows the selection of the calendars which are
+of interest to you, and also provides direct interaction with the calendars.
+The Mayan and Aztec calendars allow moving to the previous or next date of that respective name. 
+
+\subsection*{Section \big[Calendars\big] in config.ini file}
+
+Apart from changing settings using the plugin configuration dialog,
+you can also edit the \file{config.ini} file to change
+settings for the Calendars plugin -- just make it carefully!
+
+\begin{longtable}{l|l|l}\toprule
+\emph{ID}                      &\emph{Type} & \emph{Default}  \\\midrule
+show                         &bool & true\\\midrule
+show\_julian                 &bool & true\\
+show\_gregorian              &bool & true\\
+show\_iso                    &bool & true\\
+show\_icelandic              &bool & true\\\midrule
+show\_roman                  &bool & true\\
+show\_olympic                &bool & true\\
+show\_egyptian               &bool & true\\
+show\_armenian               &bool & true\\
+show\_zoroastrian            &bool & true\\
+show\_coptic                 &bool & true\\
+show\_ethiopic               &bool & true\\
+%show\_persian               &bool & true\\
+show\_persian\_arithmetic    &bool & true\\\midrule
+show\_islamic                &bool & true\\
+show\_hebrew                 &bool & true\\\midrule
+show\_old\_hindu\_solar      &bool & true\\
+show\_old\_hindu\_lunlar     &bool & true\\
+%show\_new\_hindu\_solar     &bool & true\\
+%show\_new\_hindu\_lunlar    &bool & true\\
+show\_balinese\_pawukon      &bool & true\\\midrule
+show\_maya\_long\_count      &bool & true\\
+show\_maya\_haab             &bool & true\\
+show\_maya\_tzolkin          &bool & true\\
+show\_aztec\_tonalpohualli   &bool & true\\
+show\_aztec\_xihuitl         &bool & true\\\midrule
+%show\_french\_revolution     &bool & true\\
+show\_french\_arithmetic     &bool & true\\\bottomrule
+%show\_chinese                &bool & false\\
+\end{longtable}
+
+\subsection{Acknowledgments}
+
+If you are using this plugin in scientific publications, please cite \citet{Zotti-etal:JSA2020.6.2}.
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "guide"
+%%% End: 
+

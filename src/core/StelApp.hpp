@@ -210,7 +210,7 @@ public:
 	//! The caller is responsible for destroying the GUI.
 	void setGui(StelGuiBase* b) {stelGui=b;}
 
-#ifndef DISABLE_SCRIPTING
+#ifdef ENABLE_SCRIPTING
 	//! Get the script API proxy (for signal handling)
 	StelMainScriptAPIProxy* getMainScriptAPIProxy() const {return scriptAPIProxy;}
 	//! Get the script manager
@@ -402,7 +402,7 @@ private:
 
 	StelSkyLayerMgr* skyImageMgr;
 
-#ifndef DISABLE_SCRIPTING
+#ifdef ENABLE_SCRIPTING
 	// The script API proxy object (for bridging threads)
 	StelMainScriptAPIProxy* scriptAPIProxy;
 
@@ -419,12 +419,6 @@ private:
 	// The scaling ratio to apply on all display elements, like GUI, text etc..
 	float globalScalingRatio;
 	
-	// Used to collect wheel events
-	QTimer * wheelEventTimer;
-
-	// Accumulated horizontal and vertical wheel event deltas
-	int wheelEventDelta[2];
-
 	float fps;
 	int frame;
 	double frameTimeAccum;		// Used for fps counter

@@ -69,7 +69,7 @@ private:
 
 	void selectTextureFile(QLineEdit * filePathLineEdit);
 	//! Check if a file is a valid graphics file with OpenGL texture dimensions.
-	//! OpenGL accepts only dimentions that are powers of 2 (512, 1024, etc.)
+	//! OpenGL accepts only dimensions that are powers of 2 (512, 1024, etc.)
 	bool verifyTextureFile(QString filePath);
 	bool verifyPowerOfTwo(int value);
 

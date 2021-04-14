@@ -162,8 +162,14 @@ void PointerCoordinatesWindow::saveCoordinatesSettings()
 
 void PointerCoordinatesWindow::resetCoordinatesSettings()
 {
-	coord->restoreDefaultConfiguration();
-	populateValues();
+	if (askConfirmation())
+	{
+		qDebug() << "[PointerCoordinates] restore defaults...";
+		coord->restoreDefaultConfiguration();
+		populateValues();
+	}
+	else
+		qDebug() << "[PointerCoordinates] restore defaults is canceled...";
 }
 
 void PointerCoordinatesWindow::populateCoordinatesPlacesList()

@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _S3DENUM_HPP
-#define _S3DENUM_HPP
+#ifndef S3DENUM_HPP
+#define S3DENUM_HPP
 
 #include <QObject>
 

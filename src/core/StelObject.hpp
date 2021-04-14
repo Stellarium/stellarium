@@ -256,6 +256,11 @@ public:
 	//! @return radius in degree. This value is the apparent angular size of the object, and is independent of the current FOV.
 	virtual double getAngularSize(const StelCore* core) const = 0;
 
+	//! Return airmass value for the object (for atmosphere-dependent calculations)
+	//! @param core
+	//! @return airmass value or -1.f if calculations are not applicable or meaningless
+	virtual float getAirmass(const StelCore *core) const;
+
 public slots:
 	//! Allow additions to the Info String. Can be used by plugins to show extra info for the selected object, or for debugging.
 	//! Hard-set this string group to a single str, or delete all messages when str==""
@@ -289,9 +294,8 @@ protected:
 	//! Format the magnitude info string for the object
 	//! @param core
 	//! @param flags
-	//! @param alt_app apparent altitude (for atmosphere-dependent calculations)
 	//! @param decimals significant digits after the comma.
-	virtual QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const double alt_app, const int decimals=1) const;
+	virtual QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals=1) const;
 
 	//! Apply post processing on the info string.
 	//! This also removes all extraInfoStrings possibly injected by modules (plugins) etc., except for Script and DebugAid types.

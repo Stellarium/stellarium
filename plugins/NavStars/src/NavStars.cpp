@@ -69,7 +69,8 @@ NavStars::NavStars()
 	, upperLimb(false)
 	, highlightWhenVisible(false)
 	, limitInfoToNavStars(false)	
-	, tabulatedDisplay(false)	
+	, tabulatedDisplay(false)
+	, useUTCTime(false)
 	, toolbarButton(Q_NULLPTR)
 {
 	setObjectName("NavStars");
@@ -105,8 +106,9 @@ void NavStars::init()
 		qDebug() << "[NavStars] no coordinates section exists in main config file - creating with defaults";
 		restoreDefaultConfiguration();
 	}
-	// save default state for star labels
+	// save default state for star labels and time zone
 	starLabelsState = propMgr->getStelPropertyValue("StarMgr.flagLabelsDisplayed").toBool();
+	timeZone = propMgr->getStelPropertyValue("StelCore.currentTimeZone").toString();
 
 	// populate settings from main config file.
 	loadConfiguration();
@@ -124,6 +126,8 @@ void NavStars::init()
 	addAction("actionShow_NavStars", N_("Navigational Stars"), N_("Mark the navigational stars"), "navStarsVisible", "");
 
 	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
+	connect(&StelApp::getInstance(), SIGNAL(flagShowDecimalDegreesChanged(bool)), this, SLOT(setUseDecimalDegrees(bool)));
+	setUseDecimalDegrees(StelApp::getInstance().getFlagShowDecimalDegrees());
 
 	// Toolbar button
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -144,6 +148,8 @@ void NavStars::init()
 
 void NavStars::deinit()
 {
+	if (getFlagUseUTCTime())
+		propMgr->setStelPropertyValue("StelCore.currentTimeZone", timeZone);
 	markerTexture.clear();
 	stars.clear();
 	starNumbers.clear();
@@ -229,10 +235,10 @@ void NavStars::setNavStarsMarks(const bool b)
 	if (b==getNavStarsMarks())
 		return;
 
-	if (b)
-		propMgr->setStelPropertyValue("StarMgr.flagLabelsDisplayed", !b);
-	else
-		propMgr->setStelPropertyValue("StarMgr.flagLabelsDisplayed", starLabelsState);
+	propMgr->setStelPropertyValue("StarMgr.flagLabelsDisplayed", b ? !b : starLabelsState);
+
+	if (getFlagUseUTCTime())
+		propMgr->setStelPropertyValue("StelCore.currentTimeZone", b ? "UTC" : timeZone);
 
 	markerFader = b;
 	emit navStarsMarksChanged(b);
@@ -241,6 +247,77 @@ void NavStars::setNavStarsMarks(const bool b)
 bool NavStars::getNavStarsMarks() const
 {
 	return markerFader;
+}
+
+void NavStars::setEnableAtStartup(bool b)
+{
+	if (b!=getEnableAtStartup())
+	{
+		enableAtStartup=b;
+		emit enableAtStartupChanged(b);
+	}
+}
+
+void NavStars::setHighlightWhenVisible(bool b)
+{
+	if (b!=getHighlightWhenVisible())
+	{
+		highlightWhenVisible=b;
+		emit highlightWhenVisibleChanged(b);
+	}
+}
+
+void NavStars::setLimitInfoToNavStars(bool b)
+{
+	if (b!=getLimitInfoToNavStars())
+	{
+		limitInfoToNavStars=b;
+		emit limitInfoToNavStarsChanged(b);
+	}
+}
+
+void NavStars::setUpperLimb(bool b)
+{
+	if (b!=getUpperLimb())
+	{
+		upperLimb=b;
+		emit upperLimbChanged(b);
+	}
+}
+
+void NavStars::setTabulatedDisplay(bool b)
+{
+	if (b!=getTabulatedDisplay())
+	{
+		tabulatedDisplay=b;
+		emit tabulatedDisplayChanged(b);
+	}
+}
+
+void NavStars::setFlagUseUTCTime(bool b)
+{
+	if (b!=getFlagUseUTCTime())
+	{
+		useUTCTime=b;
+		emit flagUseUTCTimeChanged(b);
+
+		if (getNavStarsMarks())
+			propMgr->setStelPropertyValue("StelCore.currentTimeZone", b ? "UTC" : timeZone);
+	}
+}
+
+void NavStars::setShowExtraDecimals(bool b)
+{
+	if (b!=getShowExtraDecimals())
+	{
+		NavStarsCalculator::useExtraDecimals=b;
+		emit showExtraDecimalsChanged(b);
+	}
+}
+
+void NavStars::setUseDecimalDegrees(bool flag)
+{
+	NavStarsCalculator::useDecimalDegrees = flag;
 }
 
 void NavStars::restoreDefaultConfiguration(void)
@@ -264,6 +341,8 @@ void NavStars::loadConfiguration(void)
 	limitInfoToNavStars  = conf->value("limit_info_to_nav_stars", false).toBool();
 	tabulatedDisplay = conf->value("tabulated_display", false).toBool();
 	upperLimb = conf->value("upper_limb", false).toBool();
+	setShowExtraDecimals(conf->value("extra_decimals", false).toBool());
+	useUTCTime = conf->value("use_utc_time", false).toBool();
 
 	conf->endGroup();
 }
@@ -274,11 +353,13 @@ void NavStars::saveConfiguration(void)
 
 	conf->setValue("current_ns_set", getCurrentNavigationalStarsSetKey());
 	conf->setValue("marker_color", markerColor.toStr());
-	conf->setValue("enable_at_startup", enableAtStartup);
-	conf->setValue("highlight_when_visible", highlightWhenVisible);
-	conf->setValue("limit_info_to_nav_stars", limitInfoToNavStars);
-	conf->setValue("tabulated_display", tabulatedDisplay);
-	conf->setValue("upper_limb", upperLimb);
+	conf->setValue("enable_at_startup", getEnableAtStartup());
+	conf->setValue("highlight_when_visible", getHighlightWhenVisible());
+	conf->setValue("limit_info_to_nav_stars", getLimitInfoToNavStars());
+	conf->setValue("tabulated_display", getTabulatedDisplay());
+	conf->setValue("upper_limb", getUpperLimb());
+	conf->setValue("extra_decimals", getShowExtraDecimals());
+	conf->setValue("use_utc_time", getFlagUseUTCTime());
 
 	conf->endGroup();
 }
@@ -472,14 +553,12 @@ void NavStars::addExtraInfo(StelCore *core)
 				}
 			}
 		}
-		if (doExtraInfo) {
-			withTables = stelApp.getFlagUseFormattingOutput();
-			extraInfo(core, selectedObject, withTables);
-		}
+		if (doExtraInfo)
+			extraInfo(core, selectedObject);
 	}
 }
 
-void NavStars::extraInfo(StelCore* core, const StelObjectP& selectedObject, bool withTables)
+void NavStars::extraInfo(StelCore* core, const StelObjectP& selectedObject)
 {
 	double jd, jde, x = 0., y = 0.;
 	QString extraText = "", englishName = selectedObject->getEnglishName();
@@ -496,16 +575,13 @@ void NavStars::extraInfo(StelCore* core, const StelObjectP& selectedObject, bool
 		.setGmst(get_mean_sidereal_time(jd, jde));
 
 	StelUtils::rectToSphe(&x, &y, selectedObject->getEquinoxEquatorialPos(core));	
-	calc.setRaRad(x)
-		.setDecRad(y);
+	calc.setRaRad(x).setDecRad(y);
 
 	StelUtils::rectToSphe(&x,&y,selectedObject->getAltAzPosGeometric(core)); 
-	calc.setAzRad(x)
-		.setAltRad(y);
+	calc.setAzRad(x).setAltRad(y);
 
 	StelUtils::rectToSphe(&x,&y,selectedObject->getAltAzPosApparent(core)); 
-	calc.setAzAppRad(x)
-		.setAltAppRad(y);
+	calc.setAzAppRad(x).setAltAppRad(y);
 
 	calc.execute();
 
@@ -527,10 +603,9 @@ void NavStars::extraInfo(StelCore* core, const StelObjectP& selectedObject, bool
 		displayStandardInfo(selectedObject, calc, extraText);
 }
 
-
 void NavStars::displayStandardInfo(const StelObjectP& selectedObject, NavStarsCalculator& calc, const QString& extraText)
 {
-	Q_UNUSED(extraText)
+	Q_UNUSED(extraText)	
 	QString temp;
 	StelObject::InfoStringGroup infoGroup = StelObject::OtherCoord;
 	selectedObject->addToExtraInfoString(infoGroup, 
@@ -555,7 +630,7 @@ void NavStars::displayStandardInfo(const StelObjectP& selectedObject, NavStarsCa
 
 void NavStars::displayTabulatedInfo(const StelObjectP& selectedObject, NavStarsCalculator& calc, const QString& extraText)
 {
-	StelObject::InfoStringGroup infoGroup = StelObject::OtherCoord;	
+	StelObject::InfoStringGroup infoGroup = StelObject::OtherCoord;		
 	selectedObject->addToExtraInfoString(infoGroup, 
 		oneRowTwoCells(qc_("UTC", "Universal Time Coordinated"), calc.getUTC(), "", false));
 	selectedObject->addToExtraInfoString(infoGroup, "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>");

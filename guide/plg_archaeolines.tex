@@ -86,8 +86,8 @@ figure~\ref{fig:plugin:ArchaeoLines:MorningLatitudes}. For example, in
 a latitude of 30\degree, an object which goes through the zenith rises
 at azimuth 55\degree. Lunar major standstill risings occur at azimuths
 56.7\degree\ and 123.5\degree, lunar minor standstill risings at
-azimuths 69\degree\ and 111\degree. The summer sun rises at
-62.6\degree, the winter sun at 117.3\degree. An object which goes
+azimuths 69\degree\ and 111\degree. The summer solstice sun rises at
+62.6\degree, the winter solstice sun at 117.3\degree. An object which goes
 through the nadir rises at 125\degree.  
 
 \begin{figure}[t]
@@ -127,8 +127,8 @@ The sun likewise swings between the solstices. Over centuries, the
 solstice declinations very slightly move as well due to the slightly
 changing obliquity of the ecliptic.
 
-\subsection{Azimuth Lines}
-\label{sec:plugin:ArchaeoLines:Azimuths}
+\subsection{Geographical Targets}
+\label{sec:plugin:ArchaeoLines:GeographicalTargets}
 
 Some religions, e.g., Islam or Bahai, adhere to a practice of
 observing a prayer direction towards a particular location.  Azimuth
@@ -144,16 +144,24 @@ Earth~\citep{Abdali:1997} as
   q=\arctan \frac{\sin (\lambda_{T} - \lambda_O) } { \cos\varphi_O \tan\varphi_T - \sin\varphi_O \cos(\lambda_{T} - \lambda_O) }
 \end{equation}
 
-\noindent In addition, up to two vertical lines with arbitrary azimuth and
-custom label can be shown. Note that these azimuths are always counted
+\noindent You can set \newFeature{v0.21.1} geographical coordinates and a name
+label directly, or select locations from Stellarium's location list by
+pressing the \button{Pick...} button.  You can search for locations in the
+list. When you click on a location, its data are taken as target.
+
+\subsection{Custom Lines}
+\label{sec:plugin:ArchaeoLines:Custom}
+
+In addition, lines can be shown which indicate arbitrary azimuths (great circles through the zenith),
+altitudes, and declinations. \newFeature{v0.15.1, v0.21.1}  Note that these azimuths are always counted
 from north, regardless of the azimuth setting described in section
-\ref{sec:gui:configuration:tools}.
+\ref{sec:gui:configuration:tools}. These lines can be marked with a custom label.
 
-
-\subsection{Arbitrary Declination Lines}
-\label{sec:plugin:ArchaeoLines:Declinations:arbitrary}
-
-Up to two arbitrary declination lines can be shown with a custom label. \newFeature{v0.15.1}
+When some celestial object is selected, you can take over its current
+respective data and name by pressing the
+\guibutton[0.225]{1.8}{telescope_blk.png} button, however the lines
+are \emph{not} linked to the selected objects, and changing angle
+values or time will make labels invalid.
 
 \subsection{Configuration Options}
 \label{sec:plugin:ArchaeoLines:configuration}
@@ -166,15 +174,16 @@ of interest to you.
 %been important. Also Venus or other planets may appear useful.
 %
 In addition, you can select the color of the lines by clicking on the
-color swatches.\footnote{Unfortunately, on some systems with Windows in OpenGL mode, the color dialog hides
-behind the Stellarium window when in fullscreen mode. So, before
-editing line colors, please leave fullscreen mode!}
+color swatches.
+%\footnote{Unfortunately, on some systems with Windows in OpenGL mode, the color dialog hides
+%behind the Stellarium window when in fullscreen mode. So, before
+%editing line colors, please leave fullscreen mode!}
 
 \subsection*{Section \big[ArchaeoLines\big] in config.ini file}
 
-Apart from changing settings using the plugin configuration dialog,
-you can also edit the \file{config.ini} file to change
-settings for the ArchaeoLines plugin -- just make it carefully!
+%Apart from changing settings using the plugin configuration dialog,
+%you can also edit the \file{config.ini} file to change
+%settings for the ArchaeoLines plugin -- just make it carefully!
 
 \begin{longtable}{l|l|l}\toprule
 \emph{ID}                      &\emph{Type} & \emph{Default}  \\\midrule
@@ -195,6 +204,8 @@ color\_geographic\_location\_1 &float R,G,B & \ccbox{0.25,1.00,0.25}  \\
 color\_geographic\_location\_2 &float R,G,B & \ccbox{0.25,0.25,1.00}  \\
 color\_custom\_azimuth\_1      &float R,G,B & \ccbox{0.25,1.00,0.25}  \\
 color\_custom\_azimuth\_2      &float R,G,B & \ccbox{0.25,0.50,0.75}  \\
+color\_custom\_altitude\_1     &float R,G,B & \ccbox{0.25,1.00,0.25}  \\
+color\_custom\_altitude\_2     &float R,G,B & \ccbox{0.25,0.50,0.75}  \\
 color\_custom\_declination\_1  &float R,G,B & \ccbox{0.45,1.00,0.15}  \\
 color\_custom\_declination\_2  &float R,G,B & \ccbox{0.45,0.50,0.65}  \\\midrule
 show\_equinox                  &bool        & true  \\
@@ -222,6 +233,8 @@ custom\_azimuth\_1\_angle      &double      & 0.0      \\
 custom\_azimuth\_2\_angle      &double      & 0.0      \\
 custom\_azimuth\_1\_label      &string      & custAzi1 \\
 custom\_azimuth\_2\_label      &string      & custAzi2 \\
+show\_custom\_altitude\_1      &bool        & false    \\
+show\_custom\_altitude\_2      &bool        & false    \\
 custom\_altitude\_1\_angle     &double      & 0.0      \\
 custom\_altitude\_2\_angle     &double      & 0.0      \\
 custom\_altitude\_1\_label     &string      & custAlt1 \\
