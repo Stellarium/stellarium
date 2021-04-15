@@ -320,7 +320,6 @@ void ScriptConsole::scriptStarted()
 void ScriptConsole::scriptEnded()
 {
 	qDebug() << "ScriptConsole::scriptEnded";
-	QString html = ui->logBrowser->toHtml();
 	appendLogLine(QString("Script finished at %1").arg(QDateTime::currentDateTime().toString()));
 	ui->quickrunCombo->setEnabled(true);
 	ui->runButton->setEnabled(true);
