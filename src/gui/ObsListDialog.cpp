@@ -277,10 +277,6 @@ void ObsListDialog::obsListNewListButtonPressed()
 */
 void ObsListDialog::obsListEditButtonPressed()
 {
-
-    //TODO: delete after tests
-    qDebug() << "[obsListEditButtonPressed] Selected uuid: " << QString::fromStdString ( selectedObservingListUuid );
-
     if ( !selectedObservingListUuid.empty() ) {
         invokeObsListCreateEditDialog ( selectedObservingListUuid );
     } else {
@@ -397,7 +393,6 @@ void ObsListDialog::loadObservingList ( QString listUuid )
                 return;
             }
 
-
             // Clear model
             obsListListModel->removeRows ( 0,obsListListModel->rowCount() );
 
@@ -501,15 +496,12 @@ void ObsListDialog::loadObservingList ( QString listUuid )
                         qCritical() << "[ObservingList] conversion error";
                         return;
                     }
-
                 }
 
             } else {
                 ui->obsListHighlightAllButton->setEnabled ( false );
                 ui->obsListClearHighlightButton->setEnabled ( false );
             }
-
-
 
             objectMgr->unSelect();
 
@@ -609,8 +601,6 @@ void ObsListDialog::selectAndGoToObject ( QModelIndex index )
 */
 void ObsListDialog::loadSelectedObservingList ( int selectedIndex )
 {
-    // TODO: delete after tests
-    qDebug() << "Selected index: " << selectedIndex;
 
     if ( selectedIndex > 0 ) {
         ui->obsListEditListButton->setEnabled ( true );
@@ -650,14 +640,11 @@ void ObsListDialog::obsListCreateEditDialogClosed()
 {
     // We must reload the list of list name
     loadListsName();
-    //TODO: delete after tests
-    qDebug() << "obsListCreateEditDialogClosed() -> selectedObservingListUuid = " << QString::fromStdString ( selectedObservingListUuid );
     int index = ui->obsListComboBox->findData ( QString::fromStdString ( selectedObservingListUuid ) ) ;
     if ( index != -1 ) {
         ui->obsListComboBox->setCurrentIndex ( index );
         loadSelectedObservingList ( index );
     }
-
 
     ObsListCreateEditDialog::kill();
     createEditDialog_instance = Q_NULLPTR;

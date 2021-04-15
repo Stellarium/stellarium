@@ -218,92 +218,106 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed()
     const QList<StelObjectP>& selectedObject = objectMgr->getSelectedObject();
     if ( !selectedObject.isEmpty() ) {
 
-        int lastRow = obsListListModel->rowCount();
-        QString objectUuid = QUuid::createUuid().toString();
-
-        QString objectName = selectedObject[0]->getEnglishName();
-        QString objectNameI18n = selectedObject[0]->getNameI18n();
-        if ( selectedObject[0]->getType() =="Nebula" ) {
-            objectName = GETSTELMODULE ( NebulaMgr )->getLatestSelectedDSODesignation();
+        // No duplicate item in the same list
+        bool is_already_in_list = false;
+        QHash<QString,observingListItem>::const_iterator i;
+        for ( i = observingListItemCollection.begin(); i != observingListItemCollection.end(); i++ ) {
+            if ( i.value().name.compare ( selectedObject[0]->getEnglishName() ) == 0 ) {
+                is_already_in_list = true;
+                break;
+            }
         }
 
-        QString objectRaStr = "", objectDecStr = "";
-        bool visibleFlag = false;
-        double fov = -1.0;
+        if ( !is_already_in_list ) {
+            int lastRow = obsListListModel->rowCount();
+            QString objectUuid = QUuid::createUuid().toString();
+
+            QString objectName = selectedObject[0]->getEnglishName();
+            QString objectNameI18n = selectedObject[0]->getNameI18n();
+            if ( selectedObject[0]->getType() =="Nebula" ) {
+                objectName = GETSTELMODULE ( NebulaMgr )->getLatestSelectedDSODesignation();
+            }
+
+            QString objectRaStr = "", objectDecStr = "";
+            bool visibleFlag = false;
+            double fov = -1.0;
+
+            QString objectType = selectedObject[0]->getType();
+
+            float ra, dec;
+            StelUtils::rectToSphe ( &ra, &dec, selectedObject[0]->getJ2000EquatorialPos ( core ) );
+            objectRaStr = StelUtils::radToHmsStr ( ra, false ).trimmed();
+            objectDecStr = StelUtils::radToDmsStr ( dec, false ).trimmed();
+            if ( objectName.contains ( "marker", Qt::CaseInsensitive ) ) {
+                visibleFlag = true;
+            }
+
+            if ( objectName.isEmpty() ) {
+                objectName = QString ( "%1, %2" ).arg ( objectRaStr, objectDecStr );
+                objectNameI18n = q_ ( "Unnamed object" );
+                fov = GETSTELMODULE ( StelMovementMgr )->getCurrentFov();
+            }
+
+            float objectMagnitude = selectedObject[0]->getVMagnitude ( core );
+            QString objectMagnitudeStr = QString::number ( objectMagnitude );
+
+            QVariantMap objectMap = selectedObject[0]->getInfoMap ( core );
+            QVariant objectConstellationVariant = objectMap["iauConstellation"];
+            QString objectConstellation ( "unknown" );
+            if ( objectConstellationVariant.canConvert<QString>() ) {
+                objectConstellation = objectConstellationVariant.value<QString>();
+            }
+
+            QString JDs = "";
+            double JD = core->getJD();
+            JDs = StelUtils::julianDayToISO8601String ( JD + core->getUTCOffset ( JD ) /24. ).replace ( "T", " " );
+
+            QString Location = "";
+            StelLocation loc = core->getCurrentLocation();
+            if ( loc.name.isEmpty() ) {
+                Location = QString ( "%1, %2" ).arg ( loc.latitude ).arg ( loc.longitude );
+            } else {
+                Location = QString ( "%1, %2" ).arg ( loc.name ).arg ( loc.country );
+            }
+
+            addModelRow ( lastRow,objectUuid,objectName, objectNameI18n, objectType, objectRaStr, objectDecStr, objectMagnitudeStr, objectConstellation );
+
+            observingListItem item;
+            item.name = objectName;
+            item.nameI18n = objectNameI18n;
+            if ( !objectType.isEmpty() ) {
+                item.type = objectType;
+            }
+            if ( !objectRaStr.isEmpty() ) {
+                item.ra = objectRaStr;
+            }
+            if ( !objectDecStr.isEmpty() ) {
+                item.dec = objectDecStr;
+            }
+            if ( !objectMagnitudeStr.isEmpty() ) {
+                item.magnitude = objectMagnitudeStr;
+            }
+            if ( !objectConstellation.isEmpty() ) {
+                item.constellation = objectConstellation;
+            }
+            if ( !JDs.isEmpty() ) {
+                item.jd = JDs;
+            }
+            if ( !Location.isEmpty() ) {
+                QHash<QString, int>::iterator i;
+                item.location = Location;
+            }
+            if ( !visibleFlag ) {
+                item.isVisibleMarker = visibleFlag;
+            }
+            if ( fov > 0.0 ) {
+                item.fov = fov;
+            }
 
 
-        QString objectType = selectedObject[0]->getType();
+            observingListItemCollection.insert ( objectUuid,item );
 
-        float ra, dec;
-        StelUtils::rectToSphe ( &ra, &dec, selectedObject[0]->getJ2000EquatorialPos ( core ) );
-        objectRaStr = StelUtils::radToHmsStr ( ra, false ).trimmed();
-        objectDecStr = StelUtils::radToDmsStr ( dec, false ).trimmed();
-        if ( objectName.contains ( "marker", Qt::CaseInsensitive ) ) {
-            visibleFlag = true;
         }
-
-        if ( objectName.isEmpty() ) {
-            objectName = QString ( "%1, %2" ).arg ( objectRaStr, objectDecStr );
-            objectNameI18n = q_ ( "Unnamed object" );
-            fov = GETSTELMODULE ( StelMovementMgr )->getCurrentFov();
-        }
-
-        float objectMagnitude = selectedObject[0]->getVMagnitude ( core );
-        QString objectMagnitudeStr = QString::number ( objectMagnitude );
-
-        QVariantMap objectMap = selectedObject[0]->getInfoMap ( core );
-        QVariant objectConstellationVariant = objectMap["iauConstellation"];
-        QString objectConstellation ( "unknown" );
-        if ( objectConstellationVariant.canConvert<QString>() ) {
-            objectConstellation = objectConstellationVariant.value<QString>();
-        }
-
-        QString JDs = "";
-        double JD = core->getJD();
-        JDs = StelUtils::julianDayToISO8601String ( JD + core->getUTCOffset ( JD ) /24. ).replace ( "T", " " );
-
-        QString Location = "";
-        StelLocation loc = core->getCurrentLocation();
-        if ( loc.name.isEmpty() ) {
-            Location = QString ( "%1, %2" ).arg ( loc.latitude ).arg ( loc.longitude );
-        } else {
-            Location = QString ( "%1, %2" ).arg ( loc.name ).arg ( loc.country );
-        }
-
-        addModelRow ( lastRow,objectUuid,objectName, objectNameI18n, objectType, objectRaStr, objectDecStr, objectMagnitudeStr, objectConstellation );
-
-        observingListItem item;
-        item.name = objectName;
-        item.nameI18n = objectNameI18n;
-        if ( !objectType.isEmpty() ) {
-            item.type = objectType;
-        }
-        if ( !objectRaStr.isEmpty() ) {
-            item.ra = objectRaStr;
-        }
-        if ( !objectDecStr.isEmpty() ) {
-            item.dec = objectDecStr;
-        }
-        if ( !objectMagnitudeStr.isEmpty() ) {
-            item.magnitude = objectMagnitudeStr;
-        }
-        if ( !objectConstellation.isEmpty() ) {
-            item.constellation = objectConstellation;
-        }
-        if ( !JDs.isEmpty() ) {
-            item.jd = JDs;
-        }
-        if ( !Location.isEmpty() ) {
-            item.location = Location;
-        }
-        if ( !visibleFlag ) {
-            item.isVisibleMarker = visibleFlag;
-        }
-        if ( fov > 0.0 ) {
-            item.fov = fov;
-        }
-
-        observingListItemCollection.insert ( objectUuid,item );
 
     } else {
         qWarning() << "selected object is empty !";
@@ -326,7 +340,6 @@ void ObsListCreateEditDialog::obsListRemoveObjectButtonPressed()
 */
 void ObsListCreateEditDialog::saveObservedObject()
 {
-
     QString listName = ui->nameOfListLineEdit->text();
     if ( observingListJsonPath.isEmpty() || listName.isEmpty() ) {
         qWarning() << "[ObservingList Creation/Edition] Error saving observing list";
@@ -402,7 +415,10 @@ void ObsListCreateEditDialog::saveObservedObject()
         if ( ui->obsListDefaultListCheckBox->isChecked() ) {
             mapFromJsonFile.insert ( KEY_DEFAULT_LIST_UUID, oblListUuid );
         } else {
-            mapFromJsonFile.insert ( KEY_DEFAULT_LIST_UUID, "" );
+            QString defaultListUuid = mapFromJsonFile.value ( KEY_DEFAULT_LIST_UUID ).toString();
+            if ( defaultListUuid == oblListUuid ) {
+                mapFromJsonFile.insert ( KEY_DEFAULT_LIST_UUID, "" );
+            }
         }
 
         mapFromJsonFile.insert ( KEY_VERSION, "1.0" );
@@ -506,8 +522,6 @@ void ObsListCreateEditDialog::obsListExitButtonPressed()
 */
 void ObsListCreateEditDialog::headerClicked ( int index )
 {
-    //TODO: delete after tests
-    qDebug() << "Index de la colonne: " << index ;
 
     switch ( index ) {
     case ColumnName:
@@ -533,8 +547,6 @@ void ObsListCreateEditDialog::headerClicked ( int index )
         break;
     }
     qDebug() << "Sorting = " << sorting;
-
-
 }
 
 
@@ -553,11 +565,11 @@ void ObsListCreateEditDialog::loadObservingList()
         try {
             map = StelJsonParser::parse ( jsonFile.readAll() ).toMap();
             jsonFile.close();
-            
+
             // Get the default list uuid
             QString defaultListUuid = map.value ( KEY_DEFAULT_LIST_UUID ).toString();
-            if(defaultListUuid.toStdString() == listUuid_){
-                ui->obsListDefaultListCheckBox->setChecked(true);
+            if ( defaultListUuid.toStdString() == listUuid_ ) {
+                ui->obsListDefaultListCheckBox->setChecked ( true );
             }
 
             observingListItemCollection.clear();
