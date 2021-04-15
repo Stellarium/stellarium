@@ -78,6 +78,7 @@ OcularDialog::OcularDialog(Oculars* pluginPtr,
 
 OcularDialog::~OcularDialog()
 {
+	//FIXME: Those disconnect() methods cause crash when user pressed quit button at the moment when Oculars GUI is open on any tabs, where models are used.
 	ocularTableModel->disconnect();
 	telescopeTableModel->disconnect();
 	ccdTableModel->disconnect();
@@ -400,10 +401,8 @@ void OcularDialog::createDialogContent()
 	ccdMapper->addMapping(ui->OAGDist,      11);
 	ccdMapper->addMapping(ui->OAGPrismPA,   12);
 	ccdMapper->toFirst();
-	connect(ui->ccdListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
-		ccdMapper, SLOT(setCurrentModelIndex(QModelIndex)));
-	connect(ui->ccdListView, SIGNAL(doubleClicked(QModelIndex)),
-		     this, SLOT(selectCCD(QModelIndex)));
+	connect(ui->ccdListView->selectionModel(), SIGNAL(currentRowChanged(QModelIndex, QModelIndex)), ccdMapper, SLOT(setCurrentModelIndex(QModelIndex)));
+	connect(ui->ccdListView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCCD(QModelIndex)));
 	connectDoubleProperty(ui->ccdRotAngle, "Oculars.selectedCCDRotationAngle");
 	connectDoubleProperty(ui->OAGPrismPA, "Oculars.selectedCCDPrismPositionAngle");
 	ui->ccdListView->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -433,10 +432,8 @@ void OcularDialog::createDialogContent()
 	ocularMapper->addMapping(ui->binocularsCheckBox,         4, "checked");
 	ocularMapper->addMapping(ui->permanentCrosshairCheckBox, 5, "checked");	
 	ocularMapper->toFirst();
-	connect(ui->ocularListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
-		ocularMapper, SLOT(setCurrentModelIndex(QModelIndex)));
-	connect(ui->ocularListView, SIGNAL(doubleClicked(QModelIndex)),
-		     this, SLOT(selectOcular(QModelIndex)));
+	connect(ui->ocularListView->selectionModel(), SIGNAL(currentRowChanged(QModelIndex, QModelIndex)), ocularMapper, SLOT(setCurrentModelIndex(QModelIndex)));
+	connect(ui->ocularListView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectOcular(QModelIndex)));
 	ui->ocularListView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	ui->ocularListView->setCurrentIndex(ocularTableModel->index(0, 1));
 
@@ -454,10 +451,8 @@ void OcularDialog::createDialogContent()
 	lensMapper->addMapping(ui->lensName,       0);
 	lensMapper->addMapping(ui->lensMultiplier, 1);
 	lensMapper->toFirst();
-	connect(ui->lensListView->selectionModel(), SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
-		lensMapper, SLOT(setCurrentModelIndex(QModelIndex)));
-	connect(ui->lensListView, SIGNAL(doubleClicked(QModelIndex)),
-		     this, SLOT(selectLens(QModelIndex)));
+	connect(ui->lensListView->selectionModel(), SIGNAL(currentRowChanged(QModelIndex, QModelIndex)), lensMapper, SLOT(setCurrentModelIndex(QModelIndex)));
+	connect(ui->lensListView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectLens(QModelIndex)));
 	ui->lensListView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	ui->lensListView->setCurrentIndex(lensTableModel->index(0, 1));
 
@@ -474,10 +469,8 @@ void OcularDialog::createDialogContent()
 	telescopeMapper->addMapping(ui->telescopeVFlip,    4, "checked");
 	telescopeMapper->addMapping(ui->telescopeEQ,       5, "checked");
 	telescopeMapper->toFirst();
-	connect(ui->telescopeListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
-		telescopeMapper, SLOT(setCurrentModelIndex(QModelIndex)));
-	connect(ui->telescopeListView, SIGNAL(doubleClicked(QModelIndex)),
-		     this, SLOT(selectTelescope(QModelIndex)));
+	connect(ui->telescopeListView->selectionModel(), SIGNAL(currentRowChanged(QModelIndex, QModelIndex)), telescopeMapper, SLOT(setCurrentModelIndex(QModelIndex)));
+	connect(ui->telescopeListView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectTelescope(QModelIndex)));
 	ui->telescopeListView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(0, 1));
 
