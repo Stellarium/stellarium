@@ -20,15 +20,15 @@
 #ifndef OCULARDIALOG_HPP
 #define OCULARDIALOG_HPP
 
-#include <QObject>
 #include "CCD.hpp"
+#include "Lens.hpp"
 #include "Ocular.hpp"
 #include "PropertyBasedTableModel.hpp"
 #include "StelDialog.hpp"
 #include "StelStyle.hpp"
 #include "Telescope.hpp"
-#include "Lens.hpp"
 #include "VecMath.hpp"
+#include <QObject>
 
 class Ui_ocularDialogForm;
 
@@ -46,70 +46,74 @@ class Oculars;
 //! @ingroup oculars
 class OcularDialog : public StelDialog
 {
-	Q_OBJECT
+   Q_OBJECT
 
 public:
-	OcularDialog(Oculars* plugin, QList<CCD *>* ccds, QList<Ocular *>* oculars, QList<Telescope *>* telescopes, QList<Lens *>* lenses);
-	virtual ~OcularDialog();
+   OcularDialog(Oculars *            plugin,
+                QList<CCD *> *       ccds,
+                QList<Ocular *> *    oculars,
+                QList<Telescope *> * telescopes,
+                QList<Lens *> *      lenses);
+   virtual ~OcularDialog();
 
 public slots:
-	void closeWindow();
-	void deleteSelectedCCD();
-	void deleteSelectedOcular();
-	void deleteSelectedTelescope();
-	void deleteSelectedLens();
-	void insertNewCCD();
-	void insertNewOcular();
-	void insertNewTelescope();
-	void insertNewLens();
-	void moveUpSelectedSensor();
-	void moveUpSelectedOcular();
-	void moveUpSelectedTelescope();
-	void moveUpSelectedLens();
-	void moveDownSelectedSensor();
-	void moveDownSelectedOcular();
-	void moveDownSelectedTelescope();
-	void moveDownSelectedLens();
-	void retranslate();
+   void closeWindow();
+   void deleteSelectedCCD();
+   void deleteSelectedOcular();
+   void deleteSelectedTelescope();
+   void deleteSelectedLens();
+   void insertNewCCD();
+   void insertNewOcular();
+   void insertNewTelescope();
+   void insertNewLens();
+   void moveUpSelectedSensor();
+   void moveUpSelectedOcular();
+   void moveUpSelectedTelescope();
+   void moveUpSelectedLens();
+   void moveDownSelectedSensor();
+   void moveDownSelectedOcular();
+   void moveDownSelectedTelescope();
+   void moveDownSelectedLens();
+   void retranslate();
 
-	// Mini-methods required to immediately update display
-	void updateOcular();
-	void selectOcular(const QModelIndex);
-	void updateLens();
-	void selectLens(const QModelIndex);
-	void updateCCD();
-	void selectCCD(const QModelIndex);
-	void updateTelescope();
-	void selectTelescope(const QModelIndex);
+   // Mini-methods required to immediately update display
+   void updateOcular();
+   void selectOcular(const QModelIndex);
+   void updateLens();
+   void selectLens(const QModelIndex);
+   void updateCCD();
+   void selectCCD(const QModelIndex);
+   void updateTelescope();
+   void selectTelescope(const QModelIndex);
 
 protected:
-	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent();
-	Ui_ocularDialogForm* ui;
+   //! Initialize the dialog widgets and connect the signals/slots
+   virtual void          createDialogContent();
+   Ui_ocularDialogForm * ui;
 
 private slots:
-	void initAboutText();
-	void setLabelsDescriptionText(bool state);
-	void updateTelradCustomFOV();	
-	void setupTelradFOVspins(Vec4f fov);
-	void updateGuiOptions();
+   void initAboutText();
+   void setLabelsDescriptionText(bool state);
+   void updateTelradCustomFOV();
+   void setupTelradFOVspins(Vec4f fov);
+   void updateGuiOptions();
 
 private:
-	Oculars* plugin;
+   Oculars *                  plugin;
 
-	QDataWidgetMapper*		ccdMapper;
-	QList<CCD *>*			ccds;
-	PropertyBasedTableModel*	ccdTableModel;
-	QDataWidgetMapper*		ocularMapper;
-	QList<Ocular *>*		oculars;
-	PropertyBasedTableModel*	ocularTableModel;
-	QDataWidgetMapper*		telescopeMapper;
-	QList<Telescope *>*		telescopes;
-	PropertyBasedTableModel*	telescopeTableModel;
-	QDataWidgetMapper*		lensMapper;
-	QList<Lens *>*			lenses;
-	PropertyBasedTableModel*	lensTableModel;
-	QRegExpValidator*		validatorName;
+   QDataWidgetMapper *        ccdMapper;
+   const QList<CCD *> *       ccds;
+   PropertyBasedTableModel *  ccdTableModel;
+   QDataWidgetMapper *        ocularMapper;
+   const QList<Ocular *> *    oculars;
+   PropertyBasedTableModel *  ocularTableModel;
+   QDataWidgetMapper *        telescopeMapper;
+   const QList<Telescope *> * telescopes;
+   PropertyBasedTableModel *  telescopeTableModel;
+   QDataWidgetMapper *        lensMapper;
+   const QList<Lens *> *      lenses;
+   PropertyBasedTableModel *  lensTableModel;
+   QRegExpValidator *         validatorName;
 };
 
 #endif // OCULARDIALOG_HPP

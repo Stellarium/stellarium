@@ -19,83 +19,85 @@
  */
 
 #include "Lens.hpp"
+#include <QMetaObject>
+#include <QMetaProperty>
 #include <QSettings>
 
-Lens::Lens()
-	: m_multipler(1.)
+Lens::Lens(QObject * parent)
+   : QObject(parent)
 {
 }
 
-Lens::Lens(const QObject& other)
-	: m_name(other.property("name").toString())
-	, m_multipler(other.property("multipler").toDouble())
+/* ****************************************************************************************************************** */
+// MARK: - Instance Methods
+/* ****************************************************************************************************************** */
+auto Lens::name() const -> QString
 {
+   return m_name;
 }
 
-Lens::~Lens()
+void Lens::setName(const QString & theValue)
 {
+   m_name = theValue;
 }
 
-static QMap<int, QString> mapping;
-QMap<int, QString> Lens::propertyMap()
+auto Lens::multiplier() const -> double
 {
-	if(mapping.isEmpty()) {
-		mapping = QMap<int, QString>();
-		mapping[0] = "name";
-		mapping[1] = "multipler";
-	}
-	return mapping;
+   return m_multiplier;
 }
 
-const QString Lens::getName() const
+void Lens::setMultiplier(double theValue)
 {
-	return m_name;
+   m_multiplier = theValue;
 }
 
-void Lens::setName(const QString& theValue)
+void Lens::writeToSettings(QSettings * settings, const int index) const
 {
-	m_name = theValue;
+   QString prefix = "lens/" + QVariant(index).toString() + "/";
+   settings->setValue(prefix + propertyMap().value(0), this->name());
+   settings->setValue(prefix + propertyMap().value(1), this->multiplier());
 }
 
-double Lens::getMultipler() const
+/* ****************************************************************************************************************** */
+// MARK: - Static Methods
+/* ****************************************************************************************************************** */
+auto Lens::lensFromSettings(QSettings * theSettings, int lensIndex) -> Lens *
 {
-	return m_multipler;
+   Lens *  lens   = new Lens();
+   QString prefix = "lens/" + QVariant(lensIndex).toString() + "/";
+
+   lens->setName(theSettings->value(prefix + propertyMap().value(0), "").toString());
+   lens->setMultiplier(theSettings->value(prefix + propertyMap().value(1), "1").toDouble());
+
+   return lens;
 }
 
-void Lens::setMultipler(double theValue)
+auto Lens::propertyMap() -> QMap<int, QString>
 {
-	m_multipler = theValue;
+   static const auto mapping = QMap<int, QString>{ { 0, QLatin1String("name") }, { 1, QLatin1String("multipler") } };
+   return mapping;
 }
 
-void Lens::writeToSettings(QSettings * settings, const int index)
+/* ****************************************************************************************************************** */
+// MARK: - Operators
+/* ****************************************************************************************************************** */
+auto operator<<(QDebug debug, const Lens & lens) -> QDebug
 {
-	QString prefix = "lens/" + QVariant(index).toString() + "/";
-	settings->setValue(prefix + "name", this->getName());
-	settings->setValue(prefix + "multipler", this->getMultipler());
+   return debug.maybeSpace() << &lens;
 }
 
-/* ********************************************************************* */
-#if 0
-#pragma mark -
-#pragma mark Static Methods
-#endif
-/* ********************************************************************* */
-
-Lens* Lens:: lensFromSettings(QSettings* theSettings, int lensIndex)
+auto operator<<(QDebug debug, const Lens * lens) -> QDebug
 {
-	Lens* lens = new Lens();
-	QString prefix = "lens/" + QVariant(lensIndex).toString() + "/";
+   QDebugStateSaver    saver(debug);
 
-	lens->setName(theSettings->value(prefix + "name", "").toString());
-	lens->setMultipler(theSettings->value(prefix + "multipler", "1").toDouble());
-
-	return lens;
-}
-
-Lens* Lens::lensModel()
-{
-	Lens* model = new Lens();
-	model->setName("My Lens");
-	model->setMultipler(2.0);
-	return model;
+   const QMetaObject * metaObject = lens->metaObject();
+   debug.nospace() << "Lens(";
+   int count = metaObject->propertyCount();
+   for (int i = 0; i < count; ++i) {
+      QMetaProperty metaProperty = metaObject->property(i);
+      const char *  name         = metaProperty.name();
+      debug.nospace() << name << ":" << lens->property(name);
+   }
+   debug.nospace() << ")";
+   return debug.maybeSpace();
 }

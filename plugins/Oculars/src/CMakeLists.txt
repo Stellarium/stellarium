@@ -15,6 +15,7 @@ SET(Oculars_SRCS
      Ocular.cpp
      Oculars.hpp
      Oculars.cpp
+   OcularsConfig.hpp
      Telescope.hpp
      Telescope.cpp
      gui/OcularDialog.hpp
@@ -34,7 +35,7 @@ SET(Oculars_UIS
 )
 QT5_WRAP_UI(Oculars_UIS_H ${Oculars_UIS})
 
-ADD_LIBRARY(Oculars-static STATIC ${Oculars_SRCS} ${Oculars_RES_CXX} ${Oculars_UIS_H})
+ADD_LIBRARY(Oculars-static STATIC ${Oculars_SRCS} ${Oculars_RES_CXX} ${Oculars_UIS_H} )
 SET_TARGET_PROPERTIES(Oculars-static PROPERTIES OUTPUT_NAME "Oculars")
 TARGET_LINK_LIBRARIES(Oculars-static Qt5::Core Qt5::Widgets)
 SET_TARGET_PROPERTIES(Oculars-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
