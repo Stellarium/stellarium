@@ -270,7 +270,7 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed()
 
             QString JDs = "";
             double JD = core->getJD();
-            JDs = StelUtils::julianDayToISO8601String ( JD + core->getUTCOffset ( JD ) /24. ).replace ( "T", " " );
+            JDs = StelUtils::julianDayToISO8601String(JD + core->getUTCOffset(JD)/24.).replace("T", " ");
 
             QString Location = "";
             StelLocation loc = core->getCurrentLocation();
@@ -301,7 +301,7 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed()
                 item.constellation = objectConstellation;
             }
             if ( !JDs.isEmpty() ) {
-                item.jd = JDs;
+                item.jd	= QString::number(JD, 'f', 6);
             }
             if ( !Location.isEmpty() ) {
                 QHash<QString, int>::iterator i;
@@ -372,7 +372,7 @@ void ObsListCreateEditDialog::saveObservedObject()
         // Julian day
         QString JDString = "";
         double JD = core->getJD();
-        JDString = StelUtils::julianDayToISO8601String ( JD + core->getUTCOffset ( JD ) /24. ).replace ( "T", " " );
+        JDString = QString::number(JD, 'f', 6);
         observingListDataList.insert ( QString ( KEY_JD ), JDString );
 
         // Location
