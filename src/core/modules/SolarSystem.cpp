@@ -1565,7 +1565,7 @@ StelObjectP SolarSystem::searchByName(const QString& name) const
 {
 	for (const auto& p : systemPlanets)
 	{
-		if (p->getEnglishName().toUpper() == name.toUpper() || p->getCommonEnglishName().toUpper() == name.toUpper())
+		if (p->getEnglishName().toUpper() == name.toUpper()) // || p->getCommonEnglishName().toUpper() == name.toUpper())
 			return qSharedPointerCast<StelObject>(p);
 	}
 	return StelObjectP();
