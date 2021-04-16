@@ -879,7 +879,18 @@ void StelMainScriptAPI::selectObjectByName(const QString& name, bool pointer)
 {
 	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
 	omgr->setFlagSelectedObjectPointer(pointer);
-	if (name.isEmpty() || !omgr->findAndSelect(name))
+	bool state = omgr->findAndSelect(name);
+	// backward compatible layer: probably we have Solar system body...
+	if (!state)
+	{
+		StelObjectP obj = qSharedPointerCast<StelObject>(GETSTELMODULE(SolarSystem)->searchByEnglishName(name));
+		if (!obj.isNull())
+			state = omgr->setSelectedObject(obj);
+		else
+			state = false;
+	}
+
+	if (name.isEmpty() || !state)
 	{
 		omgr->unSelect();
 	}
