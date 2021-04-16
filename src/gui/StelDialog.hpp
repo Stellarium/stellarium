@@ -193,8 +193,6 @@ protected:
 	//! to the required datatype, the application will crash
 	void connectColorButton(QToolButton* button, QString propertyName, QString iniName, QString moduleName="");
 
-	bool askConfirmation();
-
 	//! The main dialog
 	QWidget* dialog;
 	class CustomProxy* proxy;
@@ -206,6 +204,7 @@ protected:
 	QList<QWidget *> kineticScrollingList;
 
 protected slots:
+	bool askConfirmation();
 	//! To be called by a connected QToolButton with a color background.
 	//! This QToolButton needs properties "propName" and "iniName" which should be prepared using connectColorButton().
 	void askColor();

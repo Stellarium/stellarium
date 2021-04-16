@@ -462,11 +462,13 @@ bool EquatorialLabel::draw(StelCore *core, StelPainter& sPainter)
 // ScreenLabel class //
 ///////////////////////
 ScreenLabel::ScreenLabel(const QString& text, int x, int y, const QFont& font, const Vec3f& color)
-	: StelLabel(text, font, color),
-	  screenX(x)
+	: StelLabel(text, font, color)
 {
 	QFontMetrics metrics(font);
-	screenY = StelApp::getInstance().getCore()->getProjection2d()->getViewportHeight() - y - metrics.height();
+	StelCore* core = StelApp::getInstance().getCore();
+	const double ppx = core->getCurrentStelProjectorParams().devicePixelsPerPixel;
+	screenX = x*ppx;
+	screenY = core->getProjection2d()->getViewportHeight() - (y*ppx + metrics.height());
 }
 
 ScreenLabel::~ScreenLabel()
@@ -503,7 +505,7 @@ void LabelMgr::init()
 void LabelMgr::draw(StelCore* core)
 {
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-	for (auto* l : allLabels)
+	for (auto* l : qAsConst(allLabels))
 	{
 		l->draw(core, sPainter);
 	}
@@ -512,7 +514,7 @@ void LabelMgr::draw(StelCore* core)
 void LabelMgr::messageTimeout2()
 {
 	QObject* obj = QObject::sender();
-	for (auto* l : allLabels)
+	for (auto* l : qAsConst(allLabels))
 	{
 		if (l->timer == obj)
 		{
@@ -525,7 +527,7 @@ void LabelMgr::messageTimeout2()
 void LabelMgr::messageTimeout1()
 {
 	QObject* obj = QObject::sender();
-	for (auto* l : allLabels)
+	for (auto* l : qAsConst(allLabels))
 	{
 		if (l->timer == obj)
 		{
@@ -746,7 +748,7 @@ void LabelMgr::deleteLabel(int id)
 	
 void LabelMgr::update(double deltaTime)
 {
-	for (auto* l : allLabels) 
+	for (auto* l : qAsConst(allLabels))
 		l->update(deltaTime);
 }
 	
@@ -760,7 +762,7 @@ double LabelMgr::getCallOrder(StelModuleActionName actionName) const
 int LabelMgr::deleteAllLabels(void)
 {
 	int count=0;
-	for (auto* l : allLabels)
+	for (auto* l : qAsConst(allLabels))
 	{
 		delete l;
 		count++;

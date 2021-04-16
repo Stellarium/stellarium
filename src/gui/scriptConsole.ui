@@ -429,14 +429,7 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QTextBrowser" name="logBrowser">
-            <property name="font">
-             <font>
-              <family>DejaVu Sans Mono</family>
-              <pointsize>8</pointsize>
-             </font>
-            </property>
-           </widget>
+           <widget class="QTextBrowser" name="logBrowser"/>
           </item>
          </layout>
         </widget>
@@ -458,14 +451,7 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QTextBrowser" name="outputBrowser">
-            <property name="font">
-             <font>
-              <family>DejaVu Sans Mono</family>
-              <pointsize>8</pointsize>
-             </font>
-            </property>
-           </widget>
+           <widget class="QTextBrowser" name="outputBrowser"/>
           </item>
          </layout>
         </widget>
