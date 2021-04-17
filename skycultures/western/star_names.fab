@@ -221,9 +221,10 @@
   3179|_("Shedar") 1,2,5,6,10,11,12,23
   3179|_("Shedir") 23
    746|_("Caph") 1,2,6,11,12,23
-  6686|_("Ruchbah") 1,2,6,11,12
+  6686|_("Ruchbah") 1,2,6,11,12,37
   6686|_("Ksora") 23
   6686|_("Rucbar") 23
+  6686|_("Rucha") 37
   3821|_("Achird") 1,12
   8886|_("Segin") 1,11,12
   5542|_("Marfak") 2,5,11
@@ -232,7 +233,8 @@
   5336|_("Marfak-West")
   5336|_("Al Marfak")
   4427|_("Navi") 11
-  4427|_("Cih") 23
+  4427|_("Cih") 23,37
+  4427|_("Tsih") 37
   2920|_("Fulu") 12
   4422|_("Castula") 12
   1415|_("Pearce's Star") 22
@@ -279,12 +281,12 @@
   3419|_("Diphda") 1,2,5,6,11,12
   3419|_("Deneb Kaitos") 23
   8645|_("Baten Kaitos") 1,2,11,12,23
- 10826|_("Mira") 1,2,6,11,12
+ 10826|_("Mira") 1,2,6,11,12,37
  10826|_("Mira Ceti") 23
  12706|_("Kaffaljidhma") 2,5,11,12,23
  12706|_("Al Kaff al Jidhmah")
  12706|_("Kafalgidma")
-  5364|_("Dheneb") 2,5,11
+  5364|_("Dheneb") 2,5,11,37
   5364|_("Deneb Algenubi")
   1562|_("Deneb Kaitos Shemali") 2,10,11
   1562|_("Schemali")
@@ -366,7 +368,8 @@
 102098|_("Arided") 18
 102098|_("Aridif")
 102098|_("Arrioph")
- 95947|_("Albireo") 1,2,6,11,12,23
+ 95947|_("Albireo") 1,2,3,6,11,12,23,37
+ 95947|_("Albereo") 3,37
 100453|_("Sadr") 1,2,6,11,12
 100453|_("Sadir") 23
 102488|_("Aljanah") 12
@@ -744,9 +747,11 @@
  15863|_("Algenib") 18,23
  15863|_("Marfak") 18
  15863|_("Alchemb") 18
- 14576|_("Algol") 1,2,6,11,12,13,18,23
- 14576|_("Gorgonea Prima")
- 14576|_("Gorgona")
+ 14576|_("Algol") 1,2,6,11,12,13,18,23,37
+ 14576|_("Gorgonea Prima") 37
+ 14576|_("Gorgona") 37
+ 14576|_("Alghoul") 37
+ 14576|_("Demon star") 37
  18614|_("Menkib") 1,2,11,12 
  17448|_("Atik") 1,2,11,12
  17448|_("Ati")
@@ -955,9 +960,11 @@
  26451|_("Tianguan") 12
  21109|_("Hoggar") 36
 # Triangulum (Tri)
-  8796|_("Mothallah") 1,6,11,12
-  8796|_("Caput Trianguli") 18
-  8796|_("Methallah") 23
+  8796|_("Mothallah") 1,6,11,12,37
+  8796|_("Caput Trianguli") 18,37
+  8796|_("Methallah") 23,37
+  8796|_("Atria") 37
+  8796|_("Rasalmudallah") 37
  10064|_("Mizan") 11
 # Triangulum Australe (TrA)
  82273|_("Atria") 1,6,11,12,18
