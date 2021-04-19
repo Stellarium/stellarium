@@ -40,6 +40,9 @@ public:
 
     //! Notify that the application style changed
     void styleChanged();
+    
+    //! called when click on button close in top right corner
+    void close();
 
 protected:
     static ObsListCreateEditDialog * m_instance;

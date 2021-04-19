@@ -373,7 +373,23 @@ void ObsListCreateEditDialog::saveObservedObject()
         QString JDString = "";
         double JD = core->getJD();
         JDString = QString::number(JD, 'f', 6);
-        observingListDataList.insert ( QString ( KEY_JD ), JDString );
+        
+        
+        // No JD modifications in modification mode
+        if(!isCreationMode){
+            QString  uuidQs = QString::fromStdString(this->listUuid_);
+            QVariantMap currentList = allListsMap.value(uuidQs).toMap();
+            QVariant existingJD = currentList.value(QString(KEY_JD));
+            QString existingJDs = existingJD.toString();
+            if(existingJDs.isEmpty()){
+                observingListDataList.insert ( QString ( KEY_JD ), JDString );
+            }else{
+                observingListDataList.insert ( QString ( KEY_JD ), existingJDs );
+            }            
+        } else {
+            observingListDataList.insert ( QString ( KEY_JD ), JDString );
+        }
+        
 
         // Location
         QString Location = "";
@@ -505,6 +521,8 @@ void ObsListCreateEditDialog::obsListImportListButtonPresssed()
 void ObsListCreateEditDialog::obsListSaveButtonPressed()
 {
     saveObservedObject();
+    this->close();
+    emit exitButtonClicked();
 }
 
 /*
@@ -514,6 +532,15 @@ void ObsListCreateEditDialog::obsListExitButtonPressed()
 {
     this->close();
     emit exitButtonClicked();
+}
+
+
+/*
+ * Overload StelDialog::close()
+*/
+void ObsListCreateEditDialog::close(){
+    this->setVisible(false);;
+    emit this->exitButtonClicked();
 }
 
 

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>677</width>
-    <height>396</height>
+    <height>442</height>
    </rect>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
@@ -260,6 +260,16 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayoutExit">
            <item>
+            <widget class="QPushButton" name="obsListDeleteButton">
+             <property name="toolTip">
+              <string>Delete the selected list</string>
+             </property>
+             <property name="text">
+              <string>Delete selected list</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <spacer name="horizontalSpacer">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -274,6 +284,9 @@
            </item>
            <item>
             <widget class="QPushButton" name="obsListExitButton">
+             <property name="toolTip">
+              <string>Exit</string>
+             </property>
              <property name="text">
               <string>Exit</string>
              </property>
@@ -283,6 +296,37 @@
          </item>
         </layout>
        </widget>
+      </item>
+      <item row="6" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayoutDate">
+        <item>
+         <widget class="QLabel" name="creationDateLabel">
+          <property name="text">
+           <string>Creation date:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="obsListCreationDateLineEdit">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
       </item>
      </layout>
     </widget>

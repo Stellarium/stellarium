@@ -76,6 +76,7 @@ void ObsListDialog::createDialogContent()
     connect ( ui->obsListClearHighlightButton, SIGNAL ( clicked() ), this, SLOT ( obsListClearHighLightButtonPressed() ) );
     connect ( ui->obsListHighlightAllButton, SIGNAL ( clicked() ), this, SLOT ( obsListHighLightAllButtonPressed() ) );
     connect ( ui->obsListExitButton, SIGNAL ( clicked() ), this, SLOT ( obsListExitButtonPressed() ) );
+    connect ( ui->obsListDeleteButton, SIGNAL ( clicked() ), this, SLOT ( obsListDeleteButtonPressed() ) );
     connect ( ui->obsListTreeView, SIGNAL ( doubleClicked ( QModelIndex ) ), this, SLOT ( selectAndGoToObject ( QModelIndex ) ) );
 
     //BookmarksListCombo
@@ -107,6 +108,7 @@ void ObsListDialog::createDialogContent()
     ui->obsListEditListButton->setEnabled ( false );
     ui->obsListHighlightAllButton->setEnabled ( false );
     ui->obsListClearHighlightButton->setEnabled ( false );
+    ui->obsListDeleteButton->setEnabled(false);
 
     QFile jsonFile ( observingListJsonPath );
     if ( jsonFile.exists() ) {
@@ -385,6 +387,12 @@ void ObsListDialog::loadObservingList ( QString listUuid )
             QString listDescription = observingListMap.value ( QString ( KEY_DESCRIPTION ) ).value<QString>();
             ui->obsListDescriptionTextEdit->setPlainText ( listDescription );
 
+            // Displaying the creation date
+            QString JDs = observingListMap.value ( QString ( KEY_JD ) ).value<QString>();
+            double JD = JDs.toDouble();
+            QString listCreationDate = JDs = StelUtils::julianDayToISO8601String ( JD + core->getUTCOffset ( JD ) /24. ).replace ( "T", " " );
+            ui->obsListCreationDateLineEdit->setText ( listCreationDate );
+
             if ( observingListMap.value ( QString ( KEY_OBJECTS ) ).canConvert<QVariantList>() ) {
                 QVariant data = observingListMap.value ( QString ( KEY_OBJECTS ) );
                 listOfObjects = data.value<QVariantList>();
@@ -399,6 +407,7 @@ void ObsListDialog::loadObservingList ( QString listUuid )
             if ( listOfObjects.size() > 0 ) {
                 ui->obsListHighlightAllButton->setEnabled ( true );
                 ui->obsListClearHighlightButton->setEnabled ( true );
+                ui->obsListDeleteButton->setEnabled(true);
 
                 for ( QVariant object: listOfObjects ) {
                     QVariantMap objectMap;
@@ -471,7 +480,7 @@ void ObsListDialog::loadObservingList ( QString listUuid )
                                     item.constellation = objectConstellation;
                                 }
                                 if ( !JDs.isEmpty() ) {
-                                    item.jd = JDs;
+                                    item.jd	= QString::number ( JD, 'f', 6 );
                                 }
                                 if ( !Location.isEmpty() ) {
                                     item.location = Location;
@@ -501,6 +510,7 @@ void ObsListDialog::loadObservingList ( QString listUuid )
             } else {
                 ui->obsListHighlightAllButton->setEnabled ( false );
                 ui->obsListClearHighlightButton->setEnabled ( false );
+                ui->obsListDeleteButton->setEnabled(false);
             }
 
             objectMgr->unSelect();
@@ -604,6 +614,7 @@ void ObsListDialog::loadSelectedObservingList ( int selectedIndex )
 
     if ( selectedIndex > 0 ) {
         ui->obsListEditListButton->setEnabled ( true );
+        ui->obsListDeleteButton->setEnabled(true);
         QString listUuid = ui->obsListComboBox->itemData ( selectedIndex ).toString();
         selectedObservingListUuid = listUuid.toStdString();
         loadObservingList ( listUuid );
@@ -614,6 +625,7 @@ void ObsListDialog::loadSelectedObservingList ( int selectedIndex )
         ui->obsListEditListButton->setEnabled ( false );
         ui->obsListHighlightAllButton->setEnabled ( false );
         ui->obsListClearHighlightButton->setEnabled ( false );
+        ui->obsListDeleteButton->setEnabled(false);
         // Clear list description
         ui->obsListDescriptionTextEdit->setPlainText ( "" );
         // Clear model
@@ -623,6 +635,61 @@ void ObsListDialog::loadSelectedObservingList ( int selectedIndex )
 
 
 }
+
+
+/*
+ * Delete the selected list 
+*/
+void ObsListDialog::obsListDeleteButtonPressed()
+{
+    qDebug() << QString::fromStdString(selectedObservingListUuid);
+    QVariantMap map;
+    QFile jsonFile ( observingListJsonPath );
+    if ( !jsonFile.open ( QIODevice::ReadWrite ) ) {
+        qWarning() << "[ObservingList] cannot open" << QDir::toNativeSeparators ( JSON_FILE_NAME );
+
+    }else{
+        
+        try {
+            QVariantMap newMap;
+            QVariantMap newObsListMap;
+            map = StelJsonParser::parse ( jsonFile.readAll() ).toMap();
+            
+            newMap.insert(QString(KEY_DEFAULT_LIST_UUID), map.value(QString(KEY_DEFAULT_LIST_UUID)));
+            QVariantMap obsListMap = map.value(QString(KEY_OBSERVING_LISTS)).toMap();
+            
+            QMap<QString, QVariant>::iterator i;
+            for(i = map.begin(); i != map.end(); ++i){
+                if(i.key().compare(QString::fromStdString(selectedObservingListUuid))!=0){
+                    newObsListMap.insert(i.key(),i.value());
+                }
+            }
+            
+            newMap.insert(QString(KEY_OBSERVING_LISTS),newObsListMap);
+            
+            objectMgr->unSelect();
+            observingListItemCollection.clear();
+            // Clear model
+            obsListListModel->removeRows ( 0,obsListListModel->rowCount() );
+            ui->obsListCreationDateLineEdit->setText("");
+            int index = ui->obsListComboBox->findData("");
+            ui->obsListComboBox->setCurrentIndex(index);
+            ui->obsListDescriptionTextEdit->setPlainText("");
+        
+            jsonFile.resize ( 0 );
+            StelJsonParser::write ( newMap, &jsonFile );
+            jsonFile.flush();
+            jsonFile.close();
+
+        } catch ( std::runtime_error &e ) {
+            qWarning() << "[ObservingList] File format is wrong! Error: " << e.what();
+            return;
+        }
+        
+    }
+    
+}
+
 
 /*
  * Slot for button obsListExitButton

@@ -96,6 +96,7 @@ private slots:
     void obsListEditButtonPressed();
     void obsListCreateEditDialogClosed();
     void obsListExitButtonPressed();
+    void obsListDeleteButtonPressed();
 
     //! Method called when a list name is selected in the combobox
     //! @param selectedIndex the index of the list name in the combo box
