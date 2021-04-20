@@ -317,7 +317,6 @@ void ConfigurationDialog::createDialogContent()
 	connectBoolProperty(ui->showFlipButtonsCheckbox,				"StelGui.flagShowFlipButtons");
 	connectBoolProperty(ui->showNebulaBgButtonCheckbox,			"StelGui.flagShowNebulaBackgroundButton");
 	
-    //connectBoolProperty(ui->showBookmarksButtonCheckBox,		"StelGui.flagShowBookmarksButton");
     connectBoolProperty(ui->showObsListButtonCheckBox,	"StelGui.flagShowObsListButton");
 	
     connectBoolProperty(ui->showICRSGridButtonCheckBox,			"StelGui.flagShowICRSGridButton");
@@ -1060,8 +1059,6 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("gui/flag_show_goto_selected_button",	propMgr->getStelPropertyValue("StelGui.flagShowGotoSelectedObjectButton").toBool());
 	conf->setValue("gui/flag_show_nightmode_button",		propMgr->getStelPropertyValue("StelGui.flagShowNightmodeButton").toBool());
 	conf->setValue("gui/flag_show_fullscreen_button",		propMgr->getStelPropertyValue("StelGui.flagShowFullscreenButton").toBool());
-	
-    //conf->setValue("gui/flag_show_bookmarks_button",		propMgr->getStelPropertyValue("StelGui.flagShowBookmarksButton").toBool());
 	
     conf->setValue("gui/flag_show_obslist_button",		propMgr->getStelPropertyValue("StelGui.flagShowObsListButton").toBool());
     

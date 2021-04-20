@@ -659,19 +659,23 @@ void ObsListDialog::obsListDeleteButtonPressed()
             QVariantMap obsListMap = map.value(QString(KEY_OBSERVING_LISTS)).toMap();
             
             QMap<QString, QVariant>::iterator i;
-            for(i = map.begin(); i != map.end(); ++i){
+            for(i = obsListMap.begin(); i != obsListMap.end(); ++i){
                 if(i.key().compare(QString::fromStdString(selectedObservingListUuid))!=0){
                     newObsListMap.insert(i.key(),i.value());
                 }
             }
             
             newMap.insert(QString(KEY_OBSERVING_LISTS),newObsListMap);
-            
+            newMap.insert(QString(KEY_SHORT_NAME), map.value(QString(KEY_SHORT_NAME)));
+            newMap.insert(QString(KEY_VERSION), map.value(QString(KEY_VERSION)));
             objectMgr->unSelect();
             observingListItemCollection.clear();
             // Clear model
             obsListListModel->removeRows ( 0,obsListListModel->rowCount() );
             ui->obsListCreationDateLineEdit->setText("");
+            int currentIndex = ui->obsListComboBox->currentIndex();
+            ui->obsListComboBox->removeItem(currentIndex);
+            
             int index = ui->obsListComboBox->findData("");
             ui->obsListComboBox->setCurrentIndex(index);
             ui->obsListDescriptionTextEdit->setPlainText("");

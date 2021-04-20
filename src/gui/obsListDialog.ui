@@ -255,20 +255,20 @@
              </property>
             </widget>
            </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayoutExit">
            <item>
             <widget class="QPushButton" name="obsListDeleteButton">
              <property name="toolTip">
               <string>Delete the selected list</string>
              </property>
              <property name="text">
-              <string>Delete selected list</string>
+              <string>Delete list</string>
              </property>
             </widget>
            </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayoutExit">
            <item>
             <spacer name="horizontalSpacer">
              <property name="orientation">
