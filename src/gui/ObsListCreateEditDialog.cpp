@@ -390,7 +390,6 @@ void ObsListCreateEditDialog::saveObservedObject()
             observingListDataList.insert ( QString ( KEY_JD ), JDString );
         }
         
-
         // Location
         QString Location = "";
         StelLocation loc = core->getCurrentLocation();
@@ -467,9 +466,7 @@ void ObsListCreateEditDialog::obsListExportListButtonPressed()
                             q_ ( "Export observing list as..." ),
                             QDir::homePath() + "/" + JSON_FILE_NAME,
                             filter );
-
     saveObservedObject();
-
     observingListJsonPath = originalobservingListJsonPath;
 }
 
@@ -508,13 +505,12 @@ void ObsListCreateEditDialog::obsListImportListButtonPresssed()
             return;
         }
 
-
         loadObservingList();
-
         observingListJsonPath = originalobservingListJsonPath;
         saveObservedObject();
     }
 }
+
 /*
  * Slot for button obsListSaveButton
 */
@@ -534,7 +530,6 @@ void ObsListCreateEditDialog::obsListExitButtonPressed()
     emit exitButtonClicked();
 }
 
-
 /*
  * Overload StelDialog::close()
 */
@@ -542,7 +537,6 @@ void ObsListCreateEditDialog::close(){
     this->setVisible(false);;
     emit this->exitButtonClicked();
 }
-
 
 /*
  * Slot for obsListCreationEditionTreeView header
@@ -575,8 +569,6 @@ void ObsListCreateEditDialog::headerClicked ( int index )
     }
     qDebug() << "Sorting = " << sorting;
 }
-
-
 
 /*
  * Load the observing list in case of edit mode
@@ -724,7 +716,6 @@ void ObsListCreateEditDialog::loadObservingList()
         }
     }
 }
-
 
 /*
  * Destructor of singleton

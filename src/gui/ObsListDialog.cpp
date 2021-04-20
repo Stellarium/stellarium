@@ -50,9 +50,7 @@ ObsListDialog::ObsListDialog ( QObject* parent ) : StelDialog ( "Observing list"
     observingListJsonPath = StelFileMgr::findFile ( "data", ( StelFileMgr::Flags ) ( StelFileMgr::Directory|StelFileMgr::Writable ) ) + "/" + QString ( JSON_FILE_NAME );
     createEditDialog_instance = Q_NULLPTR;
     defaultListUuid_ = "";
-
 }
-
 
 ObsListDialog::~ObsListDialog()
 {
@@ -115,7 +113,6 @@ void ObsListDialog::createDialogContent()
         loadListsName();
         loadDefaultList();
     }
-
 }
 
 /*
@@ -129,7 +126,6 @@ void ObsListDialog::retranslate()
     }
 }
 
-
 /*
  * Style changed
 */
@@ -137,7 +133,6 @@ void ObsListDialog::styleChanged()
 {
     // Nothing for now
 }
-
 
 /*
  * Set the header for the observing list table
@@ -160,7 +155,6 @@ void ObsListDialog::setObservingListHeaderNames()
 
     obsListListModel->setHorizontalHeaderLabels ( headerStrings );;
 }
-
 
 /*
  * Add row in the obsListListModel
@@ -205,7 +199,6 @@ void ObsListDialog::addModelRow ( int number, QString uuid, QString name, QStrin
         ui->obsListTreeView->resizeColumnToContents ( i );
     }
 }
-
 
 /*
  * Slot for button obsListHighLightAllButton
@@ -271,7 +264,6 @@ void ObsListDialog::obsListNewListButtonPressed()
 {
     string listUuid = string();
     invokeObsListCreateEditDialog ( listUuid );
-
 }
 
 /*
@@ -286,7 +278,6 @@ void ObsListDialog::obsListEditButtonPressed()
     }
 }
 
-
 /**
  * Open the observing list create/edit dialog
 */
@@ -297,13 +288,11 @@ void ObsListDialog::invokeObsListCreateEditDialog ( string listUuid )
     createEditDialog_instance->setVisible ( true );
 }
 
-
 /*
  * Load the lists names for populate the combo box and get the default list uuid
 */
 void ObsListDialog::loadListsName()
 {
-
     QVariantMap map;
     QFile jsonFile ( observingListJsonPath );
     if ( !jsonFile.open ( QIODevice::ReadOnly ) ) {
@@ -343,10 +332,8 @@ void ObsListDialog::loadListsName()
             qWarning() << "[ObservingList] File format is wrong! Error: " << e.what();
             return;
         }
-
     }
 }
-
 
 /*
  * Load the default list
@@ -363,7 +350,6 @@ void ObsListDialog::loadDefaultList()
         }
     }
 }
-
 
 /*
  * Load selected observing list
@@ -522,7 +508,6 @@ void ObsListDialog::loadObservingList ( QString listUuid )
     }
 }
 
-
 /*
  * Select and go to object
 */
@@ -534,7 +519,6 @@ void ObsListDialog::selectAndGoToObject ( QModelIndex index )
     QStandardItem * uuidItem = obsListListModel->item ( rawNumber, ColumnUUID );
     QString itemUuid = uuidItem->text();
     observingListItem item = observingListItemCollection.value ( itemUuid );
-
 
     if ( !item.jd.isEmpty() ) {
         core->setJD ( item.jd.toDouble() );
@@ -601,10 +585,7 @@ void ObsListDialog::selectAndGoToObject ( QModelIndex index )
             mvmgr->setFlagTracking ( true );
         }
     }
-
 }
-
-
 
 /*
  * Method called when a list name is selected in the combobox
@@ -632,10 +613,7 @@ void ObsListDialog::loadSelectedObservingList ( int selectedIndex )
         obsListListModel->removeRows ( 0,obsListListModel->rowCount() );
         qWarning() << "[ObservingList] No list selected !";
     }
-
-
 }
-
 
 /*
  * Delete the selected list 
@@ -689,11 +667,8 @@ void ObsListDialog::obsListDeleteButtonPressed()
             qWarning() << "[ObservingList] File format is wrong! Error: " << e.what();
             return;
         }
-        
     }
-    
 }
-
 
 /*
  * Slot for button obsListExitButton
@@ -702,7 +677,6 @@ void ObsListDialog::obsListExitButtonPressed()
 {
     this->close();
 }
-
 
 /*
  * Slot to manage the close of obsListCreateEditDialog
