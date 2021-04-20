@@ -240,6 +240,8 @@ SET(stellarium_lib_SRCS
      core/modules/ZoneData.hpp
      core/modules/SpecialMarkersMgr.cpp
      core/modules/SpecialMarkersMgr.hpp
+     core/modules/EphemerisMgr.hpp
+     core/modules/EphemerisMgr.cpp
      StelMainView.hpp
      StelMainView.cpp
      StelSplashScreen.hpp
