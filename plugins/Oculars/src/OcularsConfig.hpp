@@ -20,13 +20,16 @@ const QLatin1String TelescopeEquatorial("equatorial");
 
 /* ***************************************************************************************************************** */
 //                                Numeric Constants (prevents Magic Number warnings)
-const double        CCDDefaultChipHeigth        = 15.7;
-const double        CCDDefaultChipWidth         = 23.4;
-const int           CCDDefaultResolutionX       = 6224;
-const int           CCDDefaultResolutionY       = 4168;
-const double        OcularDefaultFOV            = 68.0;
-const double        OcularDefaultFocalLength    = 32.0;
-const double        TelescopeDefaultDiameter    = 80.0;
-const double        TelescopeDefaultFocalLength = 500.0;
+const double        CCDDefaultChipHeigth          = 15.7;
+const double        CCDDefaultChipWidth           = 23.4;
+const int           CCDDefaultResolutionX         = 6224;
+const int           CCDDefaultResolutionY         = 4168;
+const double        OcularDefaultFOV              = 68.0;
+const double        OcularDefaultFocalLength      = 32.0;
+const double        TelescopeDefaultDiameter      = 80.0;
+const double        TelescopeDefaultFocalLength   = 500.0;
 
-const double        DegreesPerRadian            = 57.2958;
+const double        DegreesPerRadian              = 57.2958;
+
+const double        MIN_OCULARS_INI_VERSION       = 3.1f;
+const int           DEFAULT_CCD_CROP_OVERLAY_SIZE = 250;

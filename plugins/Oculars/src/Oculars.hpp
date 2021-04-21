@@ -32,17 +32,6 @@
 #include <QFont>
 #include <QSettings>
 
-#define MIN_OCULARS_INI_VERSION 3.1f
-#define DEFAULT_CCD_CROP_OVERLAY_SIZE 250
-
-QT_BEGIN_NAMESPACE
-class QKeyEvent;
-class QMenu;
-class QMouseEvent;
-class QPixmap;
-class QSettings;
-QT_END_NAMESPACE
-
 class StelButton;
 class StelAction;
 
@@ -75,6 +64,7 @@ a good way to supplement your visual astronomy interests.
 class Oculars : public StelModule
 {
    Q_OBJECT
+   Q_DISABLE_COPY_MOVE(Oculars)
 
    Q_PROPERTY(bool enableOcular READ getEnableOcular WRITE enableOcular NOTIFY enableOcularChanged)
    Q_PROPERTY(bool enableCrosshairs READ getEnableCrosshairs WRITE toggleCrosshairs NOTIFY enableCrosshairsChanged)
@@ -106,7 +96,7 @@ class Oculars : public StelModule
    Q_PROPERTY(
      bool flagHideGridsLines READ getFlagHideGridsLines WRITE setFlagHideGridsLines NOTIFY flagHideGridsLinesChanged)
    Q_PROPERTY(bool flagScaleImageCircle READ getFlagScaleImageCircle WRITE setFlagScaleImageCircle NOTIFY
-                flagScaleImageCircleChanged) // flag scale image circle scaleImageCirclCheckBox
+                flagScaleImageCircleChanged)
    Q_PROPERTY(bool flagSemiTransparency READ getFlagUseSemiTransparency WRITE setFlagUseSemiTransparency NOTIFY
                 flagUseSemiTransparencyChanged)
    Q_PROPERTY(int transparencyMask READ getTransparencyMask WRITE setTransparencyMask NOTIFY transparencyMaskChanged)
@@ -114,8 +104,8 @@ class Oculars : public StelModule
    Q_PROPERTY(bool flagAutosetMountForCCD READ getFlagAutosetMountForCCD WRITE setFlagAutosetMountForCCD NOTIFY
                 flagAutosetMountForCCDChanged)
    Q_PROPERTY(bool flagScalingFOVForTelrad READ getFlagScalingFOVForTelrad WRITE setFlagScalingFOVForTelrad NOTIFY
-                flagScalingFOVForTelradChanged) // TODO: Rename to flagTelradAutozoom etc. to be clearer.
-   Q_PROPERTY(Vec4f telradFOV READ getTelradFOV WRITE setTelradFOV NOTIFY telradFOVChanged)
+                flagScalingFOVForTelradChanged)
+   Q_PROPERTY(Vec4d telradFOV READ getTelradFOV WRITE setTelradFOV NOTIFY telradFOVChanged)
    Q_PROPERTY(bool flagScalingFOVForCCD READ getFlagScalingFOVForCCD WRITE setFlagScalingFOVForCCD NOTIFY
                 flagScalingFOVForCCDChanged)
    Q_PROPERTY(bool flagShowOcularsButton READ getFlagShowOcularsButton WRITE setFlagShowOcularsButton NOTIFY
@@ -135,8 +125,6 @@ class Oculars : public StelModule
                 flagShowCcdCropOverlayChanged)
    Q_PROPERTY(bool flagShowCcdCropOverlayPixelGrid READ getFlagShowCcdCropOverlayPixelGrid WRITE
                 setFlagShowCcdCropOverlayPixelGrid NOTIFY flagShowCcdCropOverlayPixelGridChanged)
-   // Q_PROPERTY(int ccdCropOverlaySize      READ getCcdCropOverlaySize      WRITE setCcdCropOverlaySize      NOTIFY
-   // ccdCropOverlaySizeChanged)
    Q_PROPERTY(
      int ccdCropOverlayHSize READ getCcdCropOverlayHSize WRITE setCcdCropOverlayHSize NOTIFY ccdCropOverlayHSizeChanged)
    Q_PROPERTY(
@@ -162,193 +150,160 @@ public:
 
    ///////////////////////////////////////////////////////////////////////////
    // Methods defined in the StelModule class
-   void   init() override;
-   void   deinit() override;
-   bool   configureGui(bool show = true) override;
-   void   draw(StelCore * core) override;
-   double getCallOrder(StelModuleActionName actionName) const override;
+   void init() override;
+   void deinit() override;
+   auto configureGui(bool show = true) -> bool override;
+   void draw(StelCore * core) override;
+   auto getCallOrder(StelModuleActionName actionName) const -> double override;
    //! Returns the module-specific style sheet.
-   void   handleMouseClicks(class QMouseEvent * event) override;
-   void   update(double) override {}
+   void handleMouseClicks(class QMouseEvent * event) override;
+   void update(double deltaTime) override;
 
-   auto        getDimensionsString(double fovX, double fovY) const -> QString;
-   QString        getFOVString(double fov) const;
+   auto getDimensionsString(double fovX, double fovY) const -> QString;
 
-public slots:
    //! return the plugin's own settings (these do not include the settings from the main application)
    //! This implementation return a singleton (class static) QSettings object.
-   QSettings * getSettings() override;
+   auto getSettings() -> QSettings * override;
+   auto getEnableOcular() const -> bool { return flagShowOculars; }
+   auto getSelectedCCDRotationAngle() const -> double;
+   auto getSelectedCCDPrismPositionAngle() const -> double;
+   auto getSelectedCCDIndex() const -> int { return selectedCCDIndex; }
+   auto getSelectedOcularIndex() const -> int { return selectedOcularIndex; }
+   auto getSelectedTelescopeIndex() const -> int { return selectedTelescopeIndex; }
+   auto getSelectedLensIndex() const -> int { return selectedLensIndex; }
+   auto getEnableCCD() const -> bool { return flagShowCCD; }
+   auto getEnableCrosshairs() const -> bool { return flagShowCrosshairs; }
+   auto getEnableTelrad() const -> bool { return flagShowTelrad; }
+   auto getFlagGuiPanelEnabled() const -> bool { return flagGuiPanelEnabled; }
+   auto getGuiPanelFontSize() const -> int { return guiPanelFontSize; }
+   auto getTextColor() const -> Vec3f { return textColor; }
+   auto getLineColor() const -> Vec3f { return lineColor; }
+   auto getFocuserColor() const -> Vec3f { return focuserColor; }
+   auto getTelradFOV() const -> Vec4d;
+   auto getFlagDMSDegrees() const -> bool;
+   auto getFlagRequireSelection() const -> bool;
+   auto getFlagAutoLimitMagnitude() const -> bool;
+   auto getMagLimitStarsOcularsManual() const -> double;
+   auto getFlagInitFovUsage() const -> bool;
+   auto getFlagInitDirectionUsage() const -> bool;
+   auto getFlagAutosetMountForCCD() const -> bool;
+   auto getFlagScalingFOVForTelrad() const -> bool;
+   auto getFlagScalingFOVForCCD() const -> bool;
+   auto getFlagUseSemiTransparency() const -> bool;
+   auto getTransparencyMask() const -> int;
+   auto getFlagShowResolutionCriteria() const -> bool;
+   auto getCcdCropOverlayHSize() const -> int { return ccdCropOverlayHSize; }
+   auto getCcdCropOverlayVSize() const -> int { return ccdCropOverlayVSize; }
+   auto getArrowButtonScale() const -> int;
+   auto getFlagHideGridsLines() const -> bool;
+   auto getFlagScaleImageCircle() const -> bool { return flagScaleImageCircle; }
+   auto getFlagShowOcularsButton() const -> bool { return flagShowOcularsButton; }
+   auto getFlagShowCcdCropOverlay() const -> bool;
+   auto getFlagShowCcdCropOverlayPixelGrid() const -> bool;
+   auto getFlagShowContour() const -> bool;
+   auto getFlagShowCardinals() const -> bool;
+   auto getFlagAlignCrosshair() const -> bool;
+   auto getFlagShowFocuserOverlay() const -> bool;
+   auto getFlagUseSmallFocuserOverlay() const -> bool;
+   auto getFlagUseMediumFocuserOverlay() const -> bool;
+   auto getFlagUseLargeFocuserOverlay() const -> bool;
+
+public slots:
    //! Update the ocular, telescope and sensor lists after the removal of a member.
    //! Necessary because of the way model/view management in the OcularDialog
    //! is implemented.
-   void                updateLists();
-   void                ccdRotationReset();
-   void                prismPositionAngleReset();
-   void                decrementCCDIndex();
-   void                decrementOcularIndex();
-   void                decrementTelescopeIndex();
-   void                decrementLensIndex();
-   void                displayPopupMenu();
+   void updateLists();
+   void ccdRotationReset();
+   void prismPositionAngleReset();
+   void decrementCCDIndex();
+   void decrementOcularIndex();
+   void decrementTelescopeIndex();
+   void decrementLensIndex();
+   void displayPopupMenu();
    //! This method is called with we detect that our hot key is pressed.  It handles
    //! determining if we should do anything - based on a selected object.
-   void                enableOcular(bool b);
-   bool                getEnableOcular() const { return flagShowOculars; }
-   void                incrementCCDIndex();
-   void                incrementOcularIndex();
-   void                incrementTelescopeIndex();
-   void                incrementLensIndex();
-   void                disableLens();
+   void enableOcular(bool b);
+   void incrementCCDIndex();
+   void incrementOcularIndex();
+   void incrementTelescopeIndex();
+   void incrementLensIndex();
+   void disableLens();
    // Rotate reticle
-   void                rotateReticleClockwise();
-   void                rotateReticleCounterclockwise();
+   void rotateReticleClockwise();
+   void rotateReticleCounterclockwise();
 
-   void                rotateCCD(int amount); //!< amount must be a number. This adds to the current rotation.
-   double              getSelectedCCDRotationAngle(void) const;   //!< get rotation angle from currently selected CCD
-   void                setSelectedCCDRotationAngle(double angle); //!< set rotation angle for currently selected CCD
-
-   void                rotatePrism(int amount);         //!< amount must be a number. This adds to the current rotation.
-   double getSelectedCCDPrismPositionAngle(void) const; //!< get position angle from prism/OAG of currently selected CCD
-   void setSelectedCCDPrismPositionAngle(double angle); //!< set position angle for prism/OAG of currently selected CCD
-
+   void rotateCCD(int amount);                     //!< amount must be a number. This adds to the current rotation.
+   void setSelectedCCDRotationAngle(double angle); //!< set rotation angle for currently selected CCD
+   void rotatePrism(int amount);                        //!< amount must be a number. This adds to the current rotation.
+   void setSelectedCCDPrismPositionAngle(double angle); //!< set position angle for prism/OAG of currently selected CC
    void selectCCDAtIndex(int index); //!< index in the range of -1:ccds.count(), else call is ignored
-   int  getSelectedCCDIndex() const { return selectedCCDIndex; }
-
    void selectOcularAtIndex(int index); //!< index in the range of -1:oculars.count(), else call is ignored
-   int  getSelectedOcularIndex() const { return selectedOcularIndex; }
-
    void selectTelescopeAtIndex(int index); //!< index in the range of -1:telescopes.count(), else call is ignored
-   int  getSelectedTelescopeIndex() const { return selectedTelescopeIndex; }
-
    void selectLensAtIndex(int index); //!< index in the range -1:lenses.count(), else call is ignored
-   int  getSelectedLensIndex() const { return selectedLensIndex; }
 
    //! Toggles the sensor frame overlay.
    void toggleCCD(bool show);
    //! Toggles the sensor frame overlay (overloaded for blind switching).
    void toggleCCD();
-   bool getEnableCCD() const { return flagShowCCD; }
    void toggleCrosshairs(bool show = true);
-   bool getEnableCrosshairs() const { return flagShowCrosshairs; }
    //! Toggles the Telrad sight overlay.
    void toggleTelrad(bool show);
-   bool getEnableTelrad() const { return flagShowTelrad; }
    //! Toggles the Telrad sight overlay (overloaded for blind switching).
    void toggleTelrad();
 
    void enableGuiPanel(bool enable = true);
-   bool getFlagGuiPanelEnabled(void) const { return flagGuiPanelEnabled; }
    void setGuiPanelFontSize(int size);
-   int  getGuiPanelFontSize() const { return guiPanelFontSize; }
 
    void setTextColor(Vec3f color)
    {
       textColor = color;
       emit textColorChanged(color);
    }
-   Vec3f getTextColor() const { return textColor; }
 
-   void  setLineColor(Vec3f color)
+   void setLineColor(Vec3f color)
    {
       lineColor = color;
       emit lineColorChanged(color);
    }
-   Vec3f getLineColor() const { return lineColor; }
 
-   void  setFocuserColor(Vec3f color)
+   void setFocuserColor(Vec3f color)
    {
       focuserColor = color;
       emit focuserColorChanged(color);
    }
-   Vec3f  getFocuserColor() const { return focuserColor; }
 
-   void   setTelradFOV(Vec4f fov);
-   Vec4f  getTelradFOV() const;
-
-   void   setFlagDMSDegrees(const bool b);
-   bool   getFlagDMSDegrees(void) const;
-
-   void   setFlagRequireSelection(const bool b);
-   bool   getFlagRequireSelection(void) const;
-
-   void   setFlagAutoLimitMagnitude(const bool b);
-   bool   getFlagAutoLimitMagnitude(void) const;
-
-   void   setMagLimitStarsOcularsManual(double mag);
-   double getMagLimitStarsOcularsManual() const;
-
-   void   setFlagInitFovUsage(const bool b);
-   bool   getFlagInitFovUsage(void) const;
-
-   void   setFlagInitDirectionUsage(const bool b);
-   bool   getFlagInitDirectionUsage(void) const;
-
-   void   setFlagAutosetMountForCCD(const bool b);
-   bool   getFlagAutosetMountForCCD(void) const;
-
-   void   setFlagScalingFOVForTelrad(const bool b);
-   bool   getFlagScalingFOVForTelrad(void) const;
-
-   void   setFlagScalingFOVForCCD(const bool b);
-   bool   getFlagScalingFOVForCCD(void) const;
-
-   void   setFlagUseSemiTransparency(const bool b);
-   bool   getFlagUseSemiTransparency(void) const;
-
-   void   setTransparencyMask(const int v);
-   int    getTransparencyMask(void) const;
-
-   void   setFlagShowResolutionCriteria(const bool b);
-   bool   getFlagShowResolutionCriteria(void) const;
-
-   void   setCcdCropOverlayHSize(int size);
-   int    getCcdCropOverlayHSize() const { return ccdCropOverlayHSize; }
-
-   void   setCcdCropOverlayVSize(int size);
-   int    getCcdCropOverlayVSize() const { return ccdCropOverlayVSize; }
-
-   void   setArrowButtonScale(const int val);
-   int    getArrowButtonScale() const;
-
-   void   setFlagHideGridsLines(const bool b);
-   bool   getFlagHideGridsLines(void) const;
-
-   void   setFlagScaleImageCircle(bool state);
-   bool   getFlagScaleImageCircle(void) const { return flagScaleImageCircle; }
-
+   void setTelradFOV(Vec4d fov);
+   void setFlagDMSDegrees(bool b);
+   void setFlagRequireSelection(bool b);
+   void setFlagAutoLimitMagnitude(bool b);
+   void setMagLimitStarsOcularsManual(double mag);
+   void setFlagInitFovUsage(bool b);
+   void setFlagInitDirectionUsage(bool b);
+   void setFlagScalingFOVForTelrad(bool b);
+   void setFlagScalingFOVForCCD(bool b);
+   void setFlagUseSemiTransparency(bool b);
+   void setTransparencyMask(int v);
+   void setFlagShowResolutionCriteria(bool b);
+   void setCcdCropOverlayHSize(int size);
+   void setCcdCropOverlayVSize(int size);
+   void setArrowButtonScale(int val);
+   void setFlagHideGridsLines(bool b);
+   void setFlagScaleImageCircle(bool state);
    //! Define whether the button toggling eyepieces should be visible
-   void   setFlagShowOcularsButton(bool b);
-   bool   getFlagShowOcularsButton(void) { return flagShowOcularsButton; }
-
-   void   setFontSize(int s) { font.setPixelSize(s); }
+   void setFlagShowOcularsButton(bool b);
+   void setFontSize(int s) { font.setPixelSize(s); }
    //! Connect this to StelApp font size.
-   void   setFontSizeFromApp(int s) { font.setPixelSize(s + 1); }
-
-   void   setFlagShowCcdCropOverlay(const bool b);
-   bool   getFlagShowCcdCropOverlay(void) const;
-
-   void   setFlagShowCcdCropOverlayPixelGrid(const bool b);
-   bool   getFlagShowCcdCropOverlayPixelGrid(void) const;
-
-   void   setFlagShowContour(const bool b);
-   bool   getFlagShowContour(void) const;
-
-   void   setFlagShowCardinals(const bool b);
-   bool   getFlagShowCardinals(void) const;
-
-   void   setFlagAlignCrosshair(const bool b);
-   bool   getFlagAlignCrosshair(void) const;
-
-   void   setFlagShowFocuserOverlay(const bool b);
-   bool   getFlagShowFocuserOverlay(void) const;
-
-   void   setFlagUseSmallFocuserOverlay(const bool b);
-   bool   getFlagUseSmallFocuserOverlay(void) const;
-
-   void   setFlagUseMediumFocuserOverlay(const bool b);
-   bool   getFlagUseMediumFocuserOverlay(void) const;
-
-   void   setFlagUseLargeFocuserOverlay(const bool b);
-   bool   getFlagUseLargeFocuserOverlay(void) const;
+   void setFontSizeFromApp(int s) { font.setPixelSize(s + 1); }
+   void setFlagShowCcdCropOverlay(bool b);
+   void setFlagShowCcdCropOverlayPixelGrid(bool b);
+   void setFlagShowContour(bool b);
+   void setFlagShowCardinals(bool b);
+   void setFlagAlignCrosshair(bool b);
+   void setFlagShowFocuserOverlay(bool b);
+   void setFlagUseSmallFocuserOverlay(bool b);
+   void setFlagUseMediumFocuserOverlay(bool b);
+   void setFlagUseLargeFocuserOverlay(bool b);
+   void setFlagAutosetMountForCCD(bool b);
 
 signals:
    void enableOcularChanged(bool value);
@@ -370,7 +325,7 @@ signals:
    void flagHideGridsLinesChanged(bool value);
    void flagAutosetMountForCCDChanged(bool value);
    void flagScalingFOVForTelradChanged(bool value);
-   void telradFOVChanged(Vec4f fov);
+   void telradFOVChanged(Vec4d fov);
    void flagScalingFOVForCCDChanged(bool value);
    void flagUseSemiTransparencyChanged(bool value);
    void transparencyMaskChanged(int value);
@@ -401,7 +356,7 @@ private slots:
    void determineMaxEyepieceAngle();
    void setScreenFOVForCCD();
    void retranslateGui();
-   void updateOcularReticle(void);
+   void updateOcularReticle();
    void togglePixelGrid();
    void toggleCropOverlay();
    void toggleFocuserOverlay();
@@ -410,13 +365,13 @@ private slots:
 
 private:
    //! Compute the limiting magnitude for a telescope
-   static double      computeLimitMagnitude(Ocular * ocular, Telescope * telescope);
+   static auto        computeLimitMagnitude(Ocular * ocular, Telescope * telescope) -> double;
 
    //! Set up the Qt actions needed to activate the plugin.
    void               initializeActivationActions();
 
    //! Returns TRUE if at least one bincular is defined.
-   bool               isBinocularDefined();
+   auto               isBinocularDefined() -> bool;
 
    //! Renders the CCD bounding box on-screen.  A telescope must be selected, or this call does nothing.
    void               paintCCDBounds();
@@ -442,7 +397,7 @@ private:
    //! Once there is a valid ini file, it is loaded into the settings attribute.
    void               validateAndLoadIniFile();
 
-   void               toggleLines(bool visible);
+   void               toggleLines(bool visible) const;
 
    //! toggles the actual ocular view.
    //! Record the state of the GridLinesMgr and other settings beforehand, so that they can be reset afterwards.
@@ -456,13 +411,13 @@ private:
    void               hideUsageMessageIfDisplayed();
 
    //! Creates the sub-menu listing lense in the pop-up menu
-   QMenu *            addLensSubmenu(QMenu * parent);
+   auto               addLensSubmenu(QMenu * parent) -> QMenu *;
 
    //! Creates the sub-menu listing telescopes in the pop-up menu.
-   QMenu *            addTelescopeSubmenu(QMenu * parent);
+   auto               addTelescopeSubmenu(QMenu * parent) -> QMenu *;
 
    //! Returns selected lens,or Q_NULLPTR if no lens is selected
-   Lens *             selectedLens();
+   auto               selectedLens() -> Lens *;
 
    //! A list of all the oculars defined in the ini file.  Must have at least one, or module will not run.
    QList<CCD *>       ccds;
@@ -493,23 +448,22 @@ private:
    bool   flagLimitStarsMain;    //!< Flag to track limitation of stellar magnitude in the main program
    double magLimitStarsMain;     //!< Value of limited stellar magnitude in the main program
    bool   flagLimitStarsOculars; //!< Track whether a stellar magnitude limit should be activated when Oculars view is
-                               //!< selected. This flag is not a StelProperty, but linked to
-                               //!< SkyDrawer.flagStarMagnitudeLimit while oculars view is active. This is required to
-                               //!< set the manual limitation flag in SkyDrawer.
-   double
-        magLimitStarsOculars; //!< Value of limited magnitude for stars in oculars mode, when not auto-defined with
-                           //!< flagAutoLimitMagnitude. This value is not a StelProperty, but linked to
-                           //!< SkyDrawer.customStarMagLimit while oculars view is active and automatic setting of
-                           //!< magnitude is not active. If user modifies the magnitude while flagAutoLimitMagnitude is
-                           //!< true, the value will not be stored permanently. [FIXME: Recheck this sentence.]
+                                 //!< selected. This flag is not a StelProperty, but linked to
+                                 //!< SkyDrawer.flagStarMagnitudeLimit while oculars view is active. This is required to
+                                 //!< set the manual limitation flag in SkyDrawer.
+   double magLimitStarsOculars;  //!< Value of limited magnitude for stars in oculars mode, when not auto-defined with
+                                 //!< flagAutoLimitMagnitude. This value is not a StelProperty, but linked to
+                                 //!< SkyDrawer.customStarMagLimit while oculars view is active and automatic setting of
+   //!< magnitude is not active. If user modifies the magnitude while flagAutoLimitMagnitude is
+   //!< true, the value will not be stored permanently. [FIXME: Recheck this sentence.]
    bool flagAutoLimitMagnitude; //!< Decide whether stellar magnitudes should be auto-limited based on telescope/ocular
                                 //!< combination. If false, the manual limitation value magLimitStarsOculars takes over,
                                 //!< and limitation is decided by flagLimitStarsOculars. If true, flagLimitStarsOculars
                                 //!< is set true when activating Oculars view, and will remain true.
-   bool flagLimitDSOsMain;          //!< Flag to track limit magnitude for DSOs
-   double magLimitDSOsMain;         //!< Value of limited magnitude for DSOs
-   bool   flagLimitPlanetsMain;     //!< Flag to track limit magnitude for planets, asteroids, comets etc.
-   double magLimitPlanetsMain;      //!< Value of limited magnitude for planets, asteroids, comets etc.
+   bool flagLimitDSOsMain;      //!< Flag to track limit magnitude for DSOs
+   double magLimitDSOsMain;     //!< Value of limited magnitude for DSOs
+   bool   flagLimitPlanetsMain; //!< Flag to track limit magnitude for planets, asteroids, comets etc.
+   double magLimitPlanetsMain;  //!< Value of limited magnitude for planets, asteroids, comets etc.
    double relativeStarScaleMain;    //!< Value to store the usual relative star scale when activating ocular or CCD view
    double absoluteStarScaleMain;    //!< Value to store the usual absolute star scale when activating ocular or CCD view
    double relativeStarScaleOculars; //!< Value to store the relative star scale when switching off ocular view
@@ -587,7 +541,7 @@ private:
    bool   flagShowContour;
    bool   flagShowCardinals;
    bool   flagAlignCrosshair;
-   Vec4f  telradFOV;                   //!< 4-vector of circles. The fourth element is non-standard.
+   Vec4d  telradFOV;                   //!< 4-vector of circles. The fourth element is non-standard.
    bool   flagShowFocuserOverlay;      //!< Flag used to track if the focuser crop overlay should be shown.
    bool   flagUseSmallFocuserOverlay;  //!< Flag used to track if a small-sized focuser (1.25") overlay should be shown.
    bool   flagUseMediumFocuserOverlay; //!< Flag used to track if a medium-sized focuser (2.0") overlay should be shown.
@@ -606,8 +560,7 @@ class OcularsStelPluginInterface
    Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
    Q_INTERFACES(StelPluginInterface)
 public:
-   virtual StelModule *   getStelModule() const;
-   virtual StelPluginInfo getPluginInfo() const;
-   virtual QObjectList    getExtensionList() const { return QObjectList(); }
+   auto getStelModule() const -> StelModule * override;
+   auto getPluginInfo() const -> StelPluginInfo override;
+   auto getExtensionList() const -> QObjectList override { return QObjectList(); }
 };
-

@@ -29,13 +29,9 @@
 #include "StelModuleMgr.hpp"
 #include "StelTranslator.hpp"
 
-#include <limits>
 #include <QAbstractItemModel>
 #include <QDataWidgetMapper>
-#include <QDebug>
-#include <QFrame>
 #include <QMessageBox>
-#include <QModelIndex>
 #include <QSettings>
 #include <QStandardItemModel>
 
@@ -45,30 +41,32 @@ OcularDialog::OcularDialog(Oculars *            pluginPtr,
                            QList<Telescope *> * telescopes,
                            QList<Lens *> *      lenses)
    : StelDialog("Oculars")
+   , ui(new Ui_ocularDialogForm)
    , plugin(pluginPtr)
    , ccdMapper(Q_NULLPTR)
+   , ccds(ccds)
+   , ccdTableModel(new PropertyBasedTableModel(this))
    , ocularMapper(Q_NULLPTR)
+   , oculars(oculars)
+   , ocularTableModel(new PropertyBasedTableModel(this))
    , telescopeMapper(Q_NULLPTR)
+   , telescopes(telescopes)
+   , telescopeTableModel(new PropertyBasedTableModel(this))
    , lensMapper(Q_NULLPTR)
+   , lenses(lenses)
+   , lensTableModel(new PropertyBasedTableModel(this))
+   , validatorName(new QRegExpValidator(this))
 {
-   ui            = new Ui_ocularDialogForm;
-   this->ccds    = ccds;
-   ccdTableModel = new PropertyBasedTableModel(this);
+
    ccdTableModel->init(reinterpret_cast<QList<QObject *> *>(ccds), new CCD(ccdTableModel), CCD::propertyMap());
-   this->oculars        = oculars;
-   ocularTableModel     = new PropertyBasedTableModel(this);
-   ocularTableModel->init(reinterpret_cast<QList<QObject *> *>(oculars), new Ocular(ccdTableModel), Ocular::propertyMap());
-   this->telescopes           = telescopes;
-   telescopeTableModel        = new PropertyBasedTableModel(this);
+   ocularTableModel->init(
+     reinterpret_cast<QList<QObject *> *>(oculars), new Ocular(ccdTableModel), Ocular::propertyMap());
    telescopeTableModel->init(
      reinterpret_cast<QList<QObject *> *>(telescopes), new Telescope(ccdTableModel), Telescope::propertyMap());
-
-   this->lenses     = lenses;
-   lensTableModel   = new PropertyBasedTableModel(this);
    lensTableModel->init(reinterpret_cast<QList<QObject *> *>(lenses), new Lens(ccdTableModel), Lens::propertyMap());
 
    QRegExp nameExp("^\\S.*");
-   validatorName = new QRegExpValidator(nameExp, this);
+   validatorName->setRegExp(nameExp);
 }
 
 OcularDialog::~OcularDialog()
@@ -79,39 +77,32 @@ OcularDialog::~OcularDialog()
    lensTableModel->disconnect();
 
    delete ui;
-   ui = Q_NULLPTR;
+   ui = nullptr;
 }
 
-/* ********************************************************************* */
-#if 0
-#pragma mark -
-#pragma mark StelModule Methods
-#endif
-/* ********************************************************************* */
+/* ****************************************************************************************************************** */
+// MARK: - StelModule Methods
+/* ****************************************************************************************************************** */
 void OcularDialog::retranslate()
 {
-   if (dialog) {
+   if (dialog != nullptr) {
       ui->retranslateUi(dialog);
       initAboutText();
    }
 }
 
-/* ********************************************************************* */
-#if 0
-#pragma mark -
-#pragma mark Slot Methods
-#endif
-/* ********************************************************************* */
+/* ****************************************************************************************************************** */
+// MARK: - Slots
+/* ****************************************************************************************************************** */
 void OcularDialog::closeWindow()
 {
    setVisible(false);
-   StelMainView::getInstance().scene()->setActiveWindow(Q_NULLPTR);
+   StelMainView::getInstance().scene()->setActiveWindow(nullptr);
 }
 
 void OcularDialog::deleteSelectedCCD()
 {
    if (ccdTableModel->rowCount() == 1) {
-      qDebug() << "Cannot delete the last entry.";
       QMessageBox::warning(
         &StelMainView::getInstance(), q_("Warning!"), q_("Cannot delete the last sensor."), QMessageBox::Ok);
       return;
@@ -127,7 +118,6 @@ void OcularDialog::deleteSelectedCCD()
 void OcularDialog::deleteSelectedOcular()
 {
    if (ocularTableModel->rowCount() == 1) {
-      qDebug() << "Cannot delete the last entry.";
       QMessageBox::warning(
         &StelMainView::getInstance(), q_("Warning!"), q_("Cannot delete the last ocular."), QMessageBox::Ok);
       return;
@@ -143,7 +133,6 @@ void OcularDialog::deleteSelectedOcular()
 void OcularDialog::deleteSelectedTelescope()
 {
    if (telescopeTableModel->rowCount() == 1) {
-      qDebug() << "Cannot delete the last entry.";
       QMessageBox::warning(
         &StelMainView::getInstance(), q_("Warning!"), q_("Cannot delete the last telescope."), QMessageBox::Ok);
       return;
@@ -161,8 +150,9 @@ void OcularDialog::deleteSelectedLens()
    if (askConfirmation()) {
       if (lensTableModel->rowCount() > 0) {
          lensTableModel->removeRows(ui->lensListView->currentIndex().row(), 1);
-         if (lensTableModel->rowCount() > 0)
+         if (lensTableModel->rowCount() > 0) {
             ui->lensListView->setCurrentIndex(lensTableModel->index(0, 1));
+         }
 
          plugin->updateLists();
       }
@@ -269,16 +259,13 @@ void OcularDialog::moveDownSelectedLens()
    }
 }
 
-/* ********************************************************************* */
-#if 0
-#pragma mark -
-#pragma mark Protected Methods
-#endif
-/* ********************************************************************* */
+/* ****************************************************************************************************************** */
+// MARK: - Protected Methods
+/* ****************************************************************************************************************** */
 void OcularDialog::createDialogContent()
 {
    ui->setupUi(dialog);
-   connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+   connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &OcularDialog::retranslate);
    ui->ccdListView->setModel(ccdTableModel);
    ui->ocularListView->setModel(ocularTableModel);
    ui->telescopeListView->setModel(telescopeTableModel);
@@ -288,14 +275,14 @@ void OcularDialog::createDialogContent()
    kineticScrollingList << ui->textBrowser << ui->telescopeListView << ui->ccdListView << ui->ocularListView
                         << ui->lensListView;
    StelGui * gui = dynamic_cast<StelGui *>(StelApp::getInstance().getGui());
-   if (gui) {
+   if (gui != nullptr) {
       enableKineticScrolling(gui->getFlagUseKineticScrolling());
-      connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+      connect(gui, &StelGui::flagUseKineticScrollingChanged, this, &OcularDialog::enableKineticScrolling);
    }
 
    // Now the rest of the actions.
-   connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-   connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+   connect(ui->closeStelWindow, &QPushButton::clicked, this, &OcularDialog::close);
+   connect(ui->TitleBar, &BarFrame::movedTo, this, &OcularDialog::handleMovedTo);
 
    connectBoolProperty(ui->checkBoxControlPanel, "Oculars.flagGuiPanelEnabled");
    connectIntProperty(ui->guiFontSizeSpinBox, "Oculars.guiPanelFontSize");
@@ -330,24 +317,36 @@ void OcularDialog::createDialogContent()
    connectBoolProperty(ui->checkBoxUseLargeFocuser, "Oculars.flagUseLargeFocuserOverlay");
 
    setupTelradFOVspins(plugin->getTelradFOV());
-   connect(plugin, SIGNAL(telradFOVChanged(Vec4f)), this, SLOT(setupTelradFOVspins(Vec4f)));
-   connect(ui->doubleSpinBoxTelradFOV1, SIGNAL(valueChanged(double)), this, SLOT(updateTelradCustomFOV()));
-   connect(ui->doubleSpinBoxTelradFOV2, SIGNAL(valueChanged(double)), this, SLOT(updateTelradCustomFOV()));
-   connect(ui->doubleSpinBoxTelradFOV3, SIGNAL(valueChanged(double)), this, SLOT(updateTelradCustomFOV()));
-   connect(ui->doubleSpinBoxTelradFOV4, SIGNAL(valueChanged(double)), this, SLOT(updateTelradCustomFOV()));
+   connect(plugin, &Oculars::telradFOVChanged, this, &OcularDialog::setupTelradFOVspins);
+   connect(ui->doubleSpinBoxTelradFOV1,
+           QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+           this,
+           &OcularDialog::updateTelradCustomFOV);
+   connect(ui->doubleSpinBoxTelradFOV2,
+           QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+           this,
+           &OcularDialog::updateTelradCustomFOV);
+   connect(ui->doubleSpinBoxTelradFOV3,
+           QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+           this,
+           &OcularDialog::updateTelradCustomFOV);
+   connect(ui->doubleSpinBoxTelradFOV4,
+           QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+           this,
+           &OcularDialog::updateTelradCustomFOV);
    connect(ui->pushButtonRestoreTelradFOV, &QPushButton::clicked, this, [=]() {
-      plugin->setTelradFOV(Vec4f(0.5f, 2.0f, 4.0f, 0.0f));
+      plugin->setTelradFOV(Vec4d(0.5, 2.0, 4.0, 0.0));
    });
 
    // The add & delete buttons
-   connect(ui->addCCD, SIGNAL(clicked()), this, SLOT(insertNewCCD()));
-   connect(ui->deleteCCD, SIGNAL(clicked()), this, SLOT(deleteSelectedCCD()));
-   connect(ui->addOcular, SIGNAL(clicked()), this, SLOT(insertNewOcular()));
-   connect(ui->deleteOcular, SIGNAL(clicked()), this, SLOT(deleteSelectedOcular()));
-   connect(ui->addLens, SIGNAL(clicked()), this, SLOT(insertNewLens()));
-   connect(ui->deleteLens, SIGNAL(clicked()), this, SLOT(deleteSelectedLens()));
-   connect(ui->addTelescope, SIGNAL(clicked()), this, SLOT(insertNewTelescope()));
-   connect(ui->deleteTelescope, SIGNAL(clicked()), this, SLOT(deleteSelectedTelescope()));
+   connect(ui->addCCD, &QPushButton::clicked, this, &OcularDialog::insertNewCCD);
+   connect(ui->deleteCCD, &QPushButton::clicked, this, &OcularDialog::deleteSelectedCCD);
+   connect(ui->addOcular, &QPushButton::clicked, this, &OcularDialog::insertNewOcular);
+   connect(ui->deleteOcular, &QPushButton::clicked, this, &OcularDialog::deleteSelectedOcular);
+   connect(ui->addLens, &QPushButton::clicked, this, &OcularDialog::insertNewLens);
+   connect(ui->deleteLens, &QPushButton::clicked, this, &OcularDialog::deleteSelectedLens);
+   connect(ui->addTelescope, &QPushButton::clicked, this, &OcularDialog::insertNewTelescope);
+   connect(ui->deleteTelescope, &QPushButton::clicked, this, &OcularDialog::deleteSelectedTelescope);
 
    // Validators
    ui->ccdName->setValidator(validatorName);
@@ -357,195 +356,191 @@ void OcularDialog::createDialogContent()
 
    initAboutText();
 
-   connect(ui->pushButtonMoveOcularUp, SIGNAL(pressed()), this, SLOT(moveUpSelectedOcular()));
-   connect(ui->pushButtonMoveOcularDown, SIGNAL(pressed()), this, SLOT(moveDownSelectedOcular()));
-   connect(ui->pushButtonMoveSensorUp, SIGNAL(pressed()), this, SLOT(moveUpSelectedSensor()));
-   connect(ui->pushButtonMoveSensorDown, SIGNAL(pressed()), this, SLOT(moveDownSelectedSensor()));
-   connect(ui->pushButtonMoveTelescopeUp, SIGNAL(pressed()), this, SLOT(moveUpSelectedTelescope()));
-   connect(ui->pushButtonMoveTelescopeDown, SIGNAL(pressed()), this, SLOT(moveDownSelectedTelescope()));
-   connect(ui->pushButtonMoveLensUp, SIGNAL(pressed()), this, SLOT(moveUpSelectedLens()));
-   connect(ui->pushButtonMoveLensDown, SIGNAL(pressed()), this, SLOT(moveDownSelectedLens()));
+   connect(ui->pushButtonMoveOcularUp, &QPushButton::pressed, this, &OcularDialog::moveUpSelectedOcular);
+   connect(ui->pushButtonMoveOcularDown, &QPushButton::pressed, this, &OcularDialog::moveDownSelectedOcular);
+   connect(ui->pushButtonMoveSensorUp, &QPushButton::pressed, this, &OcularDialog::moveUpSelectedSensor);
+   connect(ui->pushButtonMoveSensorDown, &QPushButton::pressed, this, &OcularDialog::moveDownSelectedSensor);
+   connect(ui->pushButtonMoveTelescopeUp, &QPushButton::pressed, this, &OcularDialog::moveUpSelectedTelescope);
+   connect(ui->pushButtonMoveTelescopeDown, &QPushButton::pressed, this, &OcularDialog::moveDownSelectedTelescope);
+   connect(ui->pushButtonMoveLensUp, &QPushButton::pressed, this, &OcularDialog::moveUpSelectedLens);
+   connect(ui->pushButtonMoveLensDown, &QPushButton::pressed, this, &OcularDialog::moveDownSelectedLens);
 
    // The CCD mapper
-   ccdMapper = new QDataWidgetMapper();
-   ccdMapper->setModel(ccdTableModel);
-   ccdMapper->setSubmitPolicy(QDataWidgetMapper::AutoSubmit);
-   ccdMapper->addMapping(ui->ccdName, 0);
-   ccdMapper->addMapping(ui->ccdChipY, 1);
-   ccdMapper->addMapping(ui->ccdChipX, 2);
-   ccdMapper->addMapping(ui->ccdResX, 3);
-   ccdMapper->addMapping(ui->ccdResY, 4);
-   ccdMapper->addMapping(ui->ccdRotAngle, 5);
-   ccdMapper->addMapping(ui->ccdBinningX, 6);
-   ccdMapper->addMapping(ui->ccdBinningY, 7);
-   ccdMapper->addMapping(ui->OAG_checkBox, 8);
-   ccdMapper->addMapping(ui->OAGPrismH, 9);
-   ccdMapper->addMapping(ui->OAGPrismW, 10);
-   ccdMapper->addMapping(ui->OAGDist, 11);
-   ccdMapper->addMapping(ui->OAGPrismPA, 12);
-   ccdMapper->toFirst();
+   ccdMapper.setModel(ccdTableModel);
+   ccdMapper.setSubmitPolicy(QDataWidgetMapper::AutoSubmit);
+   ccdMapper.addMapping(ui->ccdName, 0);
+   ccdMapper.addMapping(ui->ccdChipY, 1);
+   ccdMapper.addMapping(ui->ccdChipX, 2);
+   ccdMapper.addMapping(ui->ccdResX, 3);
+   ccdMapper.addMapping(ui->ccdResY, 4);
+   ccdMapper.addMapping(ui->ccdRotAngle, 5);
+   ccdMapper.addMapping(ui->ccdBinningX, 6);
+   ccdMapper.addMapping(ui->ccdBinningY, 7);
+   ccdMapper.addMapping(ui->OAG_checkBox, 8);
+   ccdMapper.addMapping(ui->OAGPrismH, 9);
+   ccdMapper.addMapping(ui->OAGPrismW, 10);
+   ccdMapper.addMapping(ui->OAGDist, 11);
+   ccdMapper.addMapping(ui->OAGPrismPA, 12);
+   ccdMapper.toFirst();
    connect(ui->ccdListView->selectionModel(),
-           SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
-           ccdMapper,
-           SLOT(setCurrentModelIndex(QModelIndex)));
-   connect(ui->ccdListView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCCD(QModelIndex)));
+           &QItemSelectionModel::currentRowChanged,
+           &ccdMapper,
+           &QDataWidgetMapper::setCurrentModelIndex);
+   connect(ui->ccdListView, &QListView::doubleClicked, this, &OcularDialog::selectCCD);
    connectDoubleProperty(ui->ccdRotAngle, "Oculars.selectedCCDRotationAngle");
    connectDoubleProperty(ui->OAGPrismPA, "Oculars.selectedCCDPrismPositionAngle");
    ui->ccdListView->setSelectionBehavior(QAbstractItemView::SelectRows);
    ui->ccdListView->setCurrentIndex(ccdTableModel->index(0, 1));
 
-   connect(ui->ccdChipY, SIGNAL(editingFinished()), this, SLOT(updateCCD()));
-   connect(ui->ccdChipX, SIGNAL(editingFinished()), this, SLOT(updateCCD()));
-   connect(ui->ccdResX, SIGNAL(editingFinished()), this, SLOT(updateCCD()));
-   connect(ui->ccdResY, SIGNAL(editingFinished()), this, SLOT(updateCCD()));
-   connect(ui->ccdRotAngle, SIGNAL(editingFinished()), this, SLOT(updateCCD()));
-   connect(ui->ccdBinningX, SIGNAL(editingFinished()), this, SLOT(updateCCD()));
-   connect(ui->ccdBinningY, SIGNAL(editingFinished()), this, SLOT(updateCCD()));
-   connect(ui->OAG_checkBox, SIGNAL(stateChanged(int)), this, SLOT(updateCCD()));
-   connect(ui->OAGPrismH, SIGNAL(editingFinished()), this, SLOT(updateCCD()));
-   connect(ui->OAGPrismW, SIGNAL(editingFinished()), this, SLOT(updateCCD()));
-   connect(ui->OAGDist, SIGNAL(editingFinished()), this, SLOT(updateCCD()));
-   connect(ui->OAGPrismPA, SIGNAL(editingFinished()), this, SLOT(updateCCD()));
+   connect(ui->ccdChipY, &QDoubleSpinBox::editingFinished, this, &OcularDialog::updateCCD);
+   connect(ui->ccdChipX, &QDoubleSpinBox::editingFinished, this, &OcularDialog::updateCCD);
+   connect(ui->ccdResX, &QSpinBox::editingFinished, this, &OcularDialog::updateCCD);
+   connect(ui->ccdResY, &QSpinBox::editingFinished, this, &OcularDialog::updateCCD);
+   connect(ui->ccdRotAngle, &QDoubleSpinBox::editingFinished, this, &OcularDialog::updateCCD);
+   connect(ui->ccdBinningX, &QSpinBox::editingFinished, this, &OcularDialog::updateCCD);
+   connect(ui->ccdBinningY, &QSpinBox::editingFinished, this, &OcularDialog::updateCCD);
+   connect(ui->OAG_checkBox, &QCheckBox::stateChanged, this, &OcularDialog::updateCCD);
+   connect(ui->OAGPrismH, &QDoubleSpinBox::editingFinished, this, &OcularDialog::updateCCD);
+   connect(ui->OAGPrismW, &QDoubleSpinBox::editingFinished, this, &OcularDialog::updateCCD);
+   connect(ui->OAGDist, &QDoubleSpinBox::editingFinished, this, &OcularDialog::updateCCD);
+   connect(ui->OAGPrismPA, &QDoubleSpinBox::editingFinished, this, &OcularDialog::updateCCD);
 
    // The ocular mapper
-   ocularMapper = new QDataWidgetMapper();
-   ocularMapper->setModel(ocularTableModel);
-   ocularMapper->setSubmitPolicy(QDataWidgetMapper::AutoSubmit);
-   ocularMapper->addMapping(ui->ocularName, 0);
-   ocularMapper->addMapping(ui->ocularAFov, 1);
-   ocularMapper->addMapping(ui->ocularFL, 2);
-   ocularMapper->addMapping(ui->ocularFieldStop, 3);
-   ocularMapper->addMapping(ui->binocularsCheckBox, 4, "checked");
-   ocularMapper->addMapping(ui->permanentCrosshairCheckBox, 5, "checked");
-   ocularMapper->toFirst();
+   ocularMapper.setModel(ocularTableModel);
+   ocularMapper.setSubmitPolicy(QDataWidgetMapper::AutoSubmit);
+   ocularMapper.addMapping(ui->ocularName, 0);
+   ocularMapper.addMapping(ui->ocularAFov, 1);
+   ocularMapper.addMapping(ui->ocularFL, 2);
+   ocularMapper.addMapping(ui->ocularFieldStop, 3);
+   ocularMapper.addMapping(ui->binocularsCheckBox, 4, "checked");
+   ocularMapper.addMapping(ui->permanentCrosshairCheckBox, 5, "checked");
+   ocularMapper.toFirst();
    connect(ui->ocularListView->selectionModel(),
-           SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
-           ocularMapper,
-           SLOT(setCurrentModelIndex(QModelIndex)));
-   connect(ui->ocularListView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectOcular(QModelIndex)));
+           &QItemSelectionModel::currentRowChanged,
+           &ocularMapper,
+           &QDataWidgetMapper::setCurrentModelIndex);
+   connect(ui->ocularListView, &QListView::doubleClicked, this, &OcularDialog::selectOcular);
    ui->ocularListView->setSelectionBehavior(QAbstractItemView::SelectRows);
    ui->ocularListView->setCurrentIndex(ocularTableModel->index(0, 1));
 
    // We need particular refresh methods to see immediate feedback.
-   connect(ui->ocularAFov, SIGNAL(editingFinished()), this, SLOT(updateOcular()));
-   connect(ui->ocularFL, SIGNAL(editingFinished()), this, SLOT(updateOcular()));
-   connect(ui->ocularFieldStop, SIGNAL(editingFinished()), this, SLOT(updateOcular()));
-   connect(ui->binocularsCheckBox, SIGNAL(stateChanged(int)), this, SLOT(updateOcular()));
-   connect(ui->permanentCrosshairCheckBox, SIGNAL(stateChanged(int)), this, SLOT(updateOcular()));
+   connect(ui->ocularAFov, &QDoubleSpinBox::editingFinished, this, &OcularDialog::updateOcular);
+   connect(ui->ocularFL, &QDoubleSpinBox::editingFinished, this, &OcularDialog::updateOcular);
+   connect(ui->ocularFieldStop, &QDoubleSpinBox::editingFinished, this, &OcularDialog::updateOcular);
+   connect(ui->binocularsCheckBox, &QCheckBox::stateChanged, this, &OcularDialog::updateOcular);
+   connect(ui->permanentCrosshairCheckBox, &QCheckBox::stateChanged, this, &OcularDialog::updateOcular);
 
    // The lens mapper
-   lensMapper = new QDataWidgetMapper();
-   lensMapper->setModel(lensTableModel);
-   lensMapper->setSubmitPolicy(QDataWidgetMapper::AutoSubmit);
-   lensMapper->addMapping(ui->lensName, 0);
-   lensMapper->addMapping(ui->lensMultiplier, 1);
-   lensMapper->toFirst();
+   lensMapper.setModel(lensTableModel);
+   lensMapper.setSubmitPolicy(QDataWidgetMapper::AutoSubmit);
+   lensMapper.addMapping(ui->lensName, 0);
+   lensMapper.addMapping(ui->lensMultiplier, 1);
+   lensMapper.toFirst();
    connect(ui->lensListView->selectionModel(),
-           SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
-           lensMapper,
-           SLOT(setCurrentModelIndex(QModelIndex)));
-   connect(ui->lensListView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectLens(QModelIndex)));
+           &QItemSelectionModel::currentRowChanged,
+           &lensMapper,
+           &QDataWidgetMapper::setCurrentModelIndex);
+   connect(ui->lensListView, &QListView::doubleClicked, this, &OcularDialog::selectLens);
    ui->lensListView->setSelectionBehavior(QAbstractItemView::SelectRows);
    ui->lensListView->setCurrentIndex(lensTableModel->index(0, 1));
 
-   connect(ui->lensMultiplier, SIGNAL(editingFinished()), this, SLOT(updateLens()));
+   connect(ui->lensMultiplier, &QDoubleSpinBox::editingFinished, this, &OcularDialog::updateLens);
 
    // The telescope mapper
-   telescopeMapper = new QDataWidgetMapper();
-   telescopeMapper->setModel(telescopeTableModel);
-   telescopeMapper->setSubmitPolicy(QDataWidgetMapper::AutoSubmit);
-   telescopeMapper->addMapping(ui->telescopeName, 0);
-   telescopeMapper->addMapping(ui->telescopeDiameter, 1);
-   telescopeMapper->addMapping(ui->telescopeFL, 2);
-   telescopeMapper->addMapping(ui->telescopeHFlip, 3, "checked");
-   telescopeMapper->addMapping(ui->telescopeVFlip, 4, "checked");
-   telescopeMapper->addMapping(ui->telescopeEQ, 5, "checked");
-   telescopeMapper->toFirst();
+   telescopeMapper.setModel(telescopeTableModel);
+   telescopeMapper.setSubmitPolicy(QDataWidgetMapper::AutoSubmit);
+   telescopeMapper.addMapping(ui->telescopeName, 0);
+   telescopeMapper.addMapping(ui->telescopeDiameter, 1);
+   telescopeMapper.addMapping(ui->telescopeFL, 2);
+   telescopeMapper.addMapping(ui->telescopeHFlip, 3, "checked");
+   telescopeMapper.addMapping(ui->telescopeVFlip, 4, "checked");
+   telescopeMapper.addMapping(ui->telescopeEQ, 5, "checked");
+   telescopeMapper.toFirst();
    connect(ui->telescopeListView->selectionModel(),
-           SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
-           telescopeMapper,
-           SLOT(setCurrentModelIndex(QModelIndex)));
-   connect(ui->telescopeListView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectTelescope(QModelIndex)));
+           &QItemSelectionModel::currentRowChanged,
+           &telescopeMapper,
+           &QDataWidgetMapper::setCurrentModelIndex);
+   connect(ui->telescopeListView, &QListView::doubleClicked, this, &OcularDialog::selectTelescope);
    ui->telescopeListView->setSelectionBehavior(QAbstractItemView::SelectRows);
    ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(0, 1));
 
-   connect(ui->telescopeDiameter, SIGNAL(editingFinished()), this, SLOT(updateTelescope()));
-   connect(ui->telescopeFL, SIGNAL(editingFinished()), this, SLOT(updateTelescope()));
-   connect(ui->telescopeHFlip, SIGNAL(stateChanged(int)), this, SLOT(updateTelescope()));
-   connect(ui->telescopeVFlip, SIGNAL(stateChanged(int)), this, SLOT(updateTelescope()));
-   connect(ui->telescopeEQ, SIGNAL(stateChanged(int)), this, SLOT(updateTelescope()));
+   connect(ui->telescopeFL, &QDoubleSpinBox::editingFinished, this, &OcularDialog::updateTelescope);
+   connect(ui->telescopeHFlip, &QCheckBox::stateChanged, this, &OcularDialog::updateTelescope);
+   connect(ui->telescopeVFlip, &QCheckBox::stateChanged, this, &OcularDialog::updateTelescope);
+   connect(ui->telescopeEQ, &QCheckBox::stateChanged, this, &OcularDialog::updateTelescope);
 
-   connect(ui->binocularsCheckBox, SIGNAL(toggled(bool)), this, SLOT(setLabelsDescriptionText(bool)));
-   connect(ui->checkBoxControlPanel, SIGNAL(toggled(bool)), this, SLOT(updateGuiOptions()));
-   connect(ui->semiTransparencyCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateGuiOptions()));
-   connect(ui->checkBoxShowFocuserOverlay, SIGNAL(toggled(bool)), this, SLOT(updateGuiOptions()));
-   connect(ui->checkBoxShowCcdCropOverlay, SIGNAL(toggled(bool)), this, SLOT(updateGuiOptions()));
+   connect(ui->binocularsCheckBox, &QCheckBox::toggled, this, &OcularDialog::setLabelsDescriptionText);
+   connect(ui->checkBoxControlPanel, &QCheckBox::toggled, this, &OcularDialog::updateGuiOptions);
+   connect(ui->semiTransparencyCheckBox, &QCheckBox::toggled, this, &OcularDialog::updateGuiOptions);
+   connect(ui->checkBoxShowFocuserOverlay, &QCheckBox::toggled, this, &OcularDialog::updateGuiOptions);
+   connect(ui->checkBoxShowCcdCropOverlay, &QCheckBox::toggled, this, &OcularDialog::updateGuiOptions);
    updateGuiOptions();
 }
 
-void OcularDialog::setupTelradFOVspins(Vec4f fov)
+void OcularDialog::setupTelradFOVspins(Vec4d fov)
 {
-   ui->doubleSpinBoxTelradFOV1->setValue(static_cast<double>(fov[0]));
-   ui->doubleSpinBoxTelradFOV2->setValue(static_cast<double>(fov[1]));
-   ui->doubleSpinBoxTelradFOV3->setValue(static_cast<double>(fov[2]));
-   ui->doubleSpinBoxTelradFOV4->setValue(static_cast<double>(fov[3]));
+   ui->doubleSpinBoxTelradFOV1->setValue(fov[0]);
+   ui->doubleSpinBoxTelradFOV2->setValue(fov[1]);
+   ui->doubleSpinBoxTelradFOV3->setValue(fov[2]);
+   ui->doubleSpinBoxTelradFOV4->setValue(fov[3]);
 }
 
-void OcularDialog::updateTelradCustomFOV()
+void OcularDialog::updateTelradCustomFOV(double newValue)
 {
-   Vec4f fov(static_cast<float>(ui->doubleSpinBoxTelradFOV1->value()),
-             static_cast<float>(ui->doubleSpinBoxTelradFOV2->value()),
-             static_cast<float>(ui->doubleSpinBoxTelradFOV3->value()),
-             static_cast<float>(ui->doubleSpinBoxTelradFOV4->value()));
+   Q_UNUSED(newValue)
+   Vec4d fov(ui->doubleSpinBoxTelradFOV1->value(),
+             ui->doubleSpinBoxTelradFOV2->value(),
+             ui->doubleSpinBoxTelradFOV3->value(),
+             ui->doubleSpinBoxTelradFOV4->value());
    plugin->setTelradFOV(fov);
 }
 
 // We need particular refresh methods to see immediate feedback.
 void OcularDialog::updateOcular()
 {
-   ocularMapper->submit();
+   ocularMapper.submit();
    plugin->selectOcularAtIndex(plugin->getSelectedOcularIndex());
 }
 
-void OcularDialog::selectOcular(const QModelIndex)
+void OcularDialog::selectOcular(const QModelIndex newIndex) const
 {
-   plugin->selectOcularAtIndex(ocularMapper->currentIndex());
+   plugin->selectOcularAtIndex(newIndex.row());
    plugin->updateLists();
 }
 
 void OcularDialog::updateLens()
 {
-   lensMapper->submit();
+   lensMapper.submit();
    plugin->selectLensAtIndex(plugin->getSelectedLensIndex());
 }
 
-void OcularDialog::selectLens(const QModelIndex)
+void OcularDialog::selectLens(const QModelIndex newIndex) const
 {
-   plugin->selectLensAtIndex(lensMapper->currentIndex());
+   plugin->selectLensAtIndex(newIndex.row());
    plugin->updateLists();
 }
 
 void OcularDialog::updateCCD()
 {
-   ccdMapper->submit();
+   ccdMapper.submit();
    plugin->selectCCDAtIndex(plugin->getSelectedCCDIndex());
 }
 
-void OcularDialog::selectCCD(const QModelIndex)
+void OcularDialog::selectCCD(const QModelIndex newIndex) const
 {
-   plugin->selectCCDAtIndex(ccdMapper->currentIndex());
+   plugin->selectCCDAtIndex(newIndex.row());
    plugin->updateLists();
 }
 
 void OcularDialog::updateTelescope()
 {
-   telescopeMapper->submit();
+   telescopeMapper.submit();
    plugin->selectTelescopeAtIndex(plugin->getSelectedTelescopeIndex());
 }
 
-void OcularDialog::selectTelescope(const QModelIndex)
+void OcularDialog::selectTelescope(const QModelIndex newIndex) const
 {
-   plugin->selectTelescopeAtIndex(telescopeMapper->currentIndex());
+   plugin->selectTelescopeAtIndex(newIndex.row());
    plugin->updateLists();
 }
 
@@ -641,25 +636,26 @@ void OcularDialog::initAboutText()
    html += "<li>" +
            q_("If you have a question, you can {get an answer here}.")
              .toHtmlEscaped()
-             .replace(a_rx, "<a href=\"https://groups.google.com/forum/#!forum/stellarium\">\\1</a>") +
+             .replace(a_rx, R"(<a href="https://groups.google.com/forum/#!forum/stellarium">\1</a>)") +
            "</li>";
    // TRANSLATORS: The text between braces is the text of an HTML link.
    html += "<li>" +
            q_("Bug reports and feature requests can be made {here}.")
              .toHtmlEscaped()
-             .replace(a_rx, "<a href=\"https://github.com/Stellarium/stellarium/issues\">\\1</a>") +
+             .replace(a_rx, R"(<a href="https://github.com/Stellarium/stellarium/issues">\1</a>)") +
            "</li>";
    // TRANSLATORS: The text between braces is the text of an HTML link.
    html += "<li>" +
            q_("If you want to read full information about this plugin and its history, you can {get info here}.")
              .toHtmlEscaped()
-             .replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Oculars_plugin\">\\1</a>") +
+             .replace(a_rx, R"(<a href="http://stellarium.sourceforge.net/wiki/index.php/Oculars_plugin">\1</a>)") +
            "</li>";
    html += "</ul></p></body></html>";
 
    StelGui * gui = dynamic_cast<StelGui *>(StelApp::getInstance().getGui());
-   if (gui)
+   if (gui != nullptr) {
       ui->textBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+   }
 
    ui->textBrowser->setHtml(html);
 }

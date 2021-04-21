@@ -17,8 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef OCULARDIALOG_HPP
-#define OCULARDIALOG_HPP
+#pragma once
 
 #include "CCD.hpp"
 #include "Lens.hpp"
@@ -28,25 +27,19 @@
 #include "StelStyle.hpp"
 #include "Telescope.hpp"
 #include "VecMath.hpp"
+#include <QDataWidgetMapper>
 #include <QObject>
 
 class Ui_ocularDialogForm;
 
-QT_BEGIN_NAMESPACE
-class QDataWidgetMapper;
-class QDoubleValidator;
-class QIntValidator;
 class QRegExpValidator;
-class QModelIndex;
-class QStandardItemModel;
-QT_END_NAMESPACE
-
 class Oculars;
 
 //! @ingroup oculars
 class OcularDialog : public StelDialog
 {
    Q_OBJECT
+   Q_DISABLE_COPY_MOVE(OcularDialog)
 
 public:
    OcularDialog(Oculars *            plugin,
@@ -54,7 +47,7 @@ public:
                 QList<Ocular *> *    oculars,
                 QList<Telescope *> * telescopes,
                 QList<Lens *> *      lenses);
-   virtual ~OcularDialog();
+   ~OcularDialog() override;
 
 public slots:
    void closeWindow();
@@ -74,46 +67,44 @@ public slots:
    void moveDownSelectedOcular();
    void moveDownSelectedTelescope();
    void moveDownSelectedLens();
-   void retranslate();
+   void retranslate() override;
 
    // Mini-methods required to immediately update display
    void updateOcular();
-   void selectOcular(const QModelIndex);
+   void selectOcular(QModelIndex newIndex) const;
    void updateLens();
-   void selectLens(const QModelIndex);
+   void selectLens(QModelIndex newIndex) const;
    void updateCCD();
-   void selectCCD(const QModelIndex);
+   void selectCCD(QModelIndex newIndex) const;
    void updateTelescope();
-   void selectTelescope(const QModelIndex);
+   void selectTelescope(QModelIndex newIndex) const;
 
 protected:
    //! Initialize the dialog widgets and connect the signals/slots
-   virtual void          createDialogContent();
-   Ui_ocularDialogForm * ui;
+   void createDialogContent() override;
 
 private slots:
    void initAboutText();
    void setLabelsDescriptionText(bool state);
-   void updateTelradCustomFOV();
-   void setupTelradFOVspins(Vec4f fov);
+   void updateTelradCustomFOV(double newValue);
+   void setupTelradFOVspins(Vec4d fov);
    void updateGuiOptions();
 
 private:
+   Ui_ocularDialogForm *      ui;
    Oculars *                  plugin;
 
-   QDataWidgetMapper *        ccdMapper;
+   QDataWidgetMapper          ccdMapper{};
    const QList<CCD *> *       ccds;
    PropertyBasedTableModel *  ccdTableModel;
-   QDataWidgetMapper *        ocularMapper;
+   QDataWidgetMapper          ocularMapper{};
    const QList<Ocular *> *    oculars;
    PropertyBasedTableModel *  ocularTableModel;
-   QDataWidgetMapper *        telescopeMapper;
+   QDataWidgetMapper          telescopeMapper{};
    const QList<Telescope *> * telescopes;
    PropertyBasedTableModel *  telescopeTableModel;
-   QDataWidgetMapper *        lensMapper;
+   QDataWidgetMapper          lensMapper{};
    const QList<Lens *> *      lenses;
    PropertyBasedTableModel *  lensTableModel;
    QRegExpValidator *         validatorName;
 };
-
-#endif // OCULARDIALOG_HPP

@@ -18,12 +18,14 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
 #include "OcularsGuiPanel.hpp"
+
 #include "Oculars.hpp"
 #include "StelActionMgr.hpp"
 #include "StelApp.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 #include "StelTranslator.hpp"
+#include <math.h>
 
 #include <QGraphicsLinearLayout>
 #include <QGraphicsPathItem>
@@ -35,24 +37,21 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include <QPushButton>
 #include <QWidget>
 
-OcularsGuiPanel::OcularsGuiPanel(Oculars * plugin, QGraphicsWidget * parent, Qt::WindowFlags wFlags)
-   : QGraphicsWidget(parent, wFlags)
+OcularsGuiPanel::OcularsGuiPanel(Oculars * plugin, QGraphicsWidget * parent)
+   : QGraphicsWidget(parent)
    , ocularsPlugin(plugin)
    , parentWidget(parent)
+   , mainLayout(new QGraphicsLinearLayout(Qt::Vertical))
    , borderPath(Q_NULLPTR)
 {
    setContentsMargins(0, 0, 0, 0);
 
-   // First create the layout and populate it, then set it?
-   mainLayout = new QGraphicsLinearLayout(Qt::Vertical);
-
    // Button bar
-   buttonBar  = new QGraphicsWidget();
+   buttonBar = new QGraphicsWidget(this);
    mainLayout->addItem(buttonBar);
 
    StelApp & stelApp = StelApp::getInstance();
-   Q_ASSERT(ocularsPlugin->actionShowOcular);
-   buttonOcular = new StelButton(buttonBar,
+   buttonOcular      = new StelButton(buttonBar,
                                  QPixmap(":/ocular/bt_ocular_on.png"),
                                  QPixmap(":/ocular/bt_ocular_off.png"),
                                  QPixmap(),
@@ -60,7 +59,6 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars * plugin, QGraphicsWidget * parent, Qt:
                                  true); // No background
    buttonOcular->setToolTip(ocularsPlugin->actionShowOcular->getText());
 
-   Q_ASSERT(ocularsPlugin->actionShowCrosshairs);
    buttonCrosshairs = new StelButton(buttonBar,
                                      QPixmap(":/ocular/bt_crosshairs_on.png"),
                                      QPixmap(":/ocular/bt_crosshairs_off.png"),
@@ -70,7 +68,6 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars * plugin, QGraphicsWidget * parent, Qt:
    buttonCrosshairs->setToolTip(ocularsPlugin->actionShowCrosshairs->getText());
    buttonCrosshairs->setVisible(false);
 
-   Q_ASSERT(ocularsPlugin->actionShowSensor);
    buttonCcd = new StelButton(buttonBar,
                               QPixmap(":/ocular/bt_sensor_on.png"),
                               QPixmap(":/ocular/bt_sensor_off.png"),
@@ -79,7 +76,6 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars * plugin, QGraphicsWidget * parent, Qt:
                               true);
    buttonCcd->setToolTip(ocularsPlugin->actionShowSensor->getText());
 
-   Q_ASSERT(ocularsPlugin->actionShowTelrad);
    buttonTelrad = new StelButton(buttonBar,
                                  QPixmap(":/ocular/bt_telrad_on.png"),
                                  QPixmap(":/ocular/bt_telrad_off.png"),
@@ -88,7 +84,6 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars * plugin, QGraphicsWidget * parent, Qt:
                                  true);
    buttonTelrad->setToolTip(ocularsPlugin->actionShowTelrad->getText());
 
-   Q_ASSERT(ocularsPlugin->actionConfiguration);
    buttonConfiguration = new StelButton(buttonBar,
                                         QPixmap(":/ocular/bt_settings_on.png"),
                                         QPixmap(":/ocular/bt_settings_off.png"),
@@ -132,7 +127,6 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars * plugin, QGraphicsWidget * parent, Qt:
    fieldAbbeyCriterion    = new QGraphicsTextItem(telescopeControls);
    fieldSparrowCriterion  = new QGraphicsTextItem(telescopeControls);
    fieldVisualResolution  = new QGraphicsTextItem(telescopeControls);
-
    fieldLensName          = new QGraphicsTextItem(lensControls);
    fieldLensMultipler     = new QGraphicsTextItem(lensControls);
 
@@ -170,8 +164,9 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars * plugin, QGraphicsWidget * parent, Qt:
    // Retrieve value from setting directly, because at this stage the plugin has not parsed it yet.
    // TODO: Remove this conversion tool in version 0.21 or 0.22
    float scv = plugin->getSettings()->value("arrow_scale", 150.f).toFloat();
-   if (scv < 100.f) // convert old value and type
+   if (scv < 100.f) { // convert old value and type
       scv *= 100.f;
+   }
    int             scale = static_cast<int>(lineHeight * scv * 0.01f);
    // TODO: change this load-once to interactively editable value of scaling coefficient
    QPixmap         pa(":/graphicGui/btTimeRewind-on.png");
@@ -339,14 +334,14 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars * plugin, QGraphicsWidget * parent, Qt:
      new StelButton(telescopeControls, nextArrow, nextArrowOff, QPixmap(), "actionToggle_Oculars_Next_Telescope");
    nextTelescopeButton->setToolTip(q_("Next telescope"));
 
-   connect(prevOcularButton, SIGNAL(triggered()), ocularsPlugin, SLOT(decrementOcularIndex()));
-   connect(nextOcularButton, SIGNAL(triggered()), ocularsPlugin, SLOT(incrementOcularIndex()));
-   connect(prevTelescopeButton, SIGNAL(triggered()), ocularsPlugin, SLOT(decrementTelescopeIndex()));
-   connect(nextTelescopeButton, SIGNAL(triggered()), ocularsPlugin, SLOT(incrementTelescopeIndex()));
-   connect(prevCcdButton, SIGNAL(triggered()), ocularsPlugin, SLOT(decrementCCDIndex()));
-   connect(nextCcdButton, SIGNAL(triggered()), ocularsPlugin, SLOT(incrementCCDIndex()));
-   connect(nextLensButton, SIGNAL(triggered()), ocularsPlugin, SLOT(incrementLensIndex()));
-   connect(prevLensButton, SIGNAL(triggered()), ocularsPlugin, SLOT(decrementLensIndex()));
+   connect(prevOcularButton, &StelButton::triggered, ocularsPlugin, &Oculars::decrementOcularIndex);
+   connect(nextOcularButton, &StelButton::triggered, ocularsPlugin, &Oculars::incrementOcularIndex);
+   connect(prevTelescopeButton, &StelButton::triggered, ocularsPlugin, &Oculars::decrementTelescopeIndex);
+   connect(nextTelescopeButton, &StelButton::triggered, ocularsPlugin, &Oculars::incrementTelescopeIndex);
+   connect(prevCcdButton, &StelButton::triggered, ocularsPlugin, &Oculars::decrementCCDIndex);
+   connect(nextCcdButton, &StelButton::triggered, ocularsPlugin, &Oculars::incrementCCDIndex);
+   connect(nextLensButton, &StelButton::triggered, ocularsPlugin, &Oculars::incrementLensIndex);
+   connect(prevLensButton, &StelButton::triggered, ocularsPlugin, &Oculars::decrementLensIndex);
 
    QColor  cOn(255, 255, 255);
    QColor  cOff(102, 102, 102);
@@ -441,15 +436,15 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars * plugin, QGraphicsWidget * parent, Qt:
    connect(rotateCcdPlus1Button, &StelButton::triggered, [=]() { ocularsPlugin->rotateCCD(1); });
    connect(rotateCcdPlus5Button, &StelButton::triggered, [=]() { ocularsPlugin->rotateCCD(5); });
    connect(rotateCcdPlus15Button, &StelButton::triggered, [=]() { ocularsPlugin->rotateCCD(15); });
-   connect(resetCcdRotationButton, SIGNAL(triggered()), ocularsPlugin, SLOT(ccdRotationReset()));
+   connect(resetCcdRotationButton, &StelButton::triggered, [=]() { ocularsPlugin->ccdRotationReset(); });
 
-   connect(rotateCcdMinus15Button, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-   connect(rotateCcdMinus5Button, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-   connect(rotateCcdMinus1Button, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-   connect(rotateCcdPlus1Button, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-   connect(rotateCcdPlus5Button, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-   connect(rotateCcdPlus15Button, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-   connect(resetCcdRotationButton, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
+   connect(rotateCcdMinus15Button, &StelButton::triggered, [=]() { updateCcdControls(); });
+   connect(rotateCcdMinus5Button, &StelButton::triggered, [=]() { updateCcdControls(); });
+   connect(rotateCcdMinus1Button, &StelButton::triggered, [=]() { updateCcdControls(); });
+   connect(rotateCcdPlus1Button, &StelButton::triggered, [=]() { updateCcdControls(); });
+   connect(rotateCcdPlus5Button, &StelButton::triggered, [=]() { updateCcdControls(); });
+   connect(rotateCcdPlus15Button, &StelButton::triggered, [=]() { updateCcdControls(); });
+   connect(resetCcdRotationButton, &StelButton::triggered, [=]() { updateCcdControls(); });
 
    connect(rotatePrismMinus15Button, &StelButton::triggered, [=]() { ocularsPlugin->rotatePrism(-15); });
    connect(rotatePrismMinus5Button, &StelButton::triggered, [=]() { ocularsPlugin->rotatePrism(-5); });
@@ -457,19 +452,22 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars * plugin, QGraphicsWidget * parent, Qt:
    connect(rotatePrismPlus1Button, &StelButton::triggered, [=]() { ocularsPlugin->rotatePrism(1); });
    connect(rotatePrismPlus5Button, &StelButton::triggered, [=]() { ocularsPlugin->rotatePrism(5); });
    connect(rotatePrismPlus15Button, &StelButton::triggered, [=]() { ocularsPlugin->rotatePrism(15); });
-   connect(resetPrismRotationButton, SIGNAL(triggered()), ocularsPlugin, SLOT(prismPositionAngleReset()));
+   connect(resetPrismRotationButton, &StelButton::triggered, [=]() { ocularsPlugin->prismPositionAngleReset(); });
 
-   connect(rotatePrismMinus15Button, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-   connect(rotatePrismMinus5Button, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-   connect(rotatePrismMinus1Button, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-   connect(rotatePrismPlus1Button, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-   connect(rotatePrismPlus5Button, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-   connect(rotatePrismPlus15Button, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-   connect(resetPrismRotationButton, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
+   connect(rotatePrismMinus15Button, &StelButton::triggered, [=]() { updateCcdControls(); });
+   connect(rotatePrismMinus5Button, &StelButton::triggered, [=]() { updateCcdControls(); });
+   connect(rotatePrismMinus1Button, &StelButton::triggered, [=]() { updateCcdControls(); });
+   connect(rotatePrismPlus1Button, &StelButton::triggered, [=]() { updateCcdControls(); });
+   connect(rotatePrismPlus5Button, &StelButton::triggered, [=]() { updateCcdControls(); });
+   connect(rotatePrismPlus15Button, &StelButton::triggered, [=]() { updateCcdControls(); });
+   connect(resetPrismRotationButton, &StelButton::triggered, [=]() { updateCcdControls(); });
 
    // Set the layout and update the size
-   qreal width = 2 * prevOcularButton->boundingRect().width() + maxWidth;
-   qreal left, right, top, bottom;
+   qreal width  = 2 * prevOcularButton->boundingRect().width() + maxWidth;
+   qreal left   = NAN;
+   qreal right  = NAN;
+   qreal top    = NAN;
+   qreal bottom = NAN;
    mainLayout->getContentsMargins(&left, &top, &right, &bottom);
    ocularControls->setMaximumWidth(width);
    ccdControls->setMaximumWidth(width);
@@ -480,87 +478,30 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars * plugin, QGraphicsWidget * parent, Qt:
    updateMainButtonsPositions();
 
    // Border/background for the widget
-   borderPath = new QGraphicsPathItem();
+   borderPath = new QGraphicsPathItem(parentWidget);
    borderPath->setZValue(100);
    QBrush borderBrush(QColor::fromRgbF(0.22, 0.22, 0.23, 0.2));
    borderPath->setBrush(borderBrush);
    QPen borderPen = QPen(QColor::fromRgbF(0.7, 0.7, 0.7, 0.5));
    borderPen.setWidthF(1.);
    borderPath->setPen(borderPen);
-   borderPath->setParentItem(parentWidget);
 
    updatePosition();
    connect(parentWidget, SIGNAL(geometryChanged()), this, SLOT(updatePosition()));
 
    // Connecting other slots
-   connect(ocularsPlugin, SIGNAL(selectedOcularChanged(int)), this, SLOT(updateOcularControls()));
-   connect(ocularsPlugin, SIGNAL(selectedCCDChanged(int)), this, SLOT(updateCcdControls()));
-   connect(ocularsPlugin, SIGNAL(selectedTelescopeChanged(int)), this, SLOT(updateTelescopeControls()));
-   connect(ocularsPlugin, SIGNAL(selectedLensChanged(int)), this, SLOT(updateTelescopeControls()));
+   connect(ocularsPlugin, &Oculars::selectedOcularChanged, [=]() { updateOcularControls(); });
+   connect(ocularsPlugin, &Oculars::selectedCCDChanged, [=]() { updateCcdControls(); });
+   connect(ocularsPlugin, &Oculars::selectedTelescopeChanged, [=]() { updateTelescopeControls(); });
+   connect(ocularsPlugin, &Oculars::selectedLensChanged, [=]() { updateTelescopeControls(); });
 
    // Night mode
    connect(&stelApp, SIGNAL(colorSchemeChanged(const QString &)), this, SLOT(setColorScheme(const QString &)));
    setColorScheme(stelApp.getCurrentStelStyle());
 }
 
-OcularsGuiPanel::~OcularsGuiPanel()
-{
-   if (borderPath)
-      delete borderPath;
-
-   delete buttonCrosshairs;
-   buttonCrosshairs = Q_NULLPTR;
-   delete buttonCcd;
-   buttonCcd = Q_NULLPTR;
-   delete buttonTelrad;
-   buttonTelrad = Q_NULLPTR;
-   delete buttonConfiguration;
-   buttonConfiguration = Q_NULLPTR;
-   delete fieldOcularFl;
-   fieldOcularFl = Q_NULLPTR;
-   delete fieldOcularAfov;
-   fieldOcularAfov = Q_NULLPTR;
-   delete fieldCcdName;
-   fieldCcdName = Q_NULLPTR;
-   delete fieldCcdDimensions;
-   fieldCcdDimensions = Q_NULLPTR;
-   delete fieldCcdBinning;
-   fieldCcdBinning = Q_NULLPTR;
-   delete fieldCcdHScale;
-   fieldCcdHScale = Q_NULLPTR;
-   delete fieldCcdVScale;
-   fieldCcdVScale = Q_NULLPTR;
-   delete fieldCcdRotation;
-   fieldCcdRotation = Q_NULLPTR;
-   delete fieldPrismRotation;
-   fieldPrismRotation = Q_NULLPTR;
-   delete fieldTelescopeName;
-   fieldTelescopeName = Q_NULLPTR;
-   delete fieldMagnification;
-   fieldMagnification = Q_NULLPTR;
-   delete fieldExitPupil;
-   fieldExitPupil = Q_NULLPTR;
-   delete fieldFov;
-   fieldFov = Q_NULLPTR;
-   delete fieldRayleighCriterion;
-   fieldRayleighCriterion = Q_NULLPTR;
-   delete fieldDawesCriterion;
-   fieldDawesCriterion = Q_NULLPTR;
-   delete fieldAbbeyCriterion;
-   fieldAbbeyCriterion = Q_NULLPTR;
-   delete fieldSparrowCriterion;
-   fieldSparrowCriterion = Q_NULLPTR;
-   delete fieldVisualResolution;
-   fieldVisualResolution = Q_NULLPTR;
-   delete fieldLensName;
-   fieldLensName = Q_NULLPTR;
-   delete fieldLensMultipler;
-   fieldLensMultipler = Q_NULLPTR;
-}
-
 void OcularsGuiPanel::showOcularGui()
 {
-   setPreferredHeight(0); // WTF?
    if (ocularsPlugin->flagShowOculars) {
       updateOcularControls();
    } else {
@@ -745,10 +686,11 @@ void OcularsGuiPanel::updateLensControls()
    int      oindex = ocularsPlugin->selectedOcularIndex;
    Ocular * ocular = ocularsPlugin->oculars[oindex];
    if (ocular->isBinoculars() &&
-       ocularsPlugin->flagShowOculars) // Hide the lens info for binoculars in eyepiece mode only
+       ocularsPlugin->flagShowOculars) { // Hide the lens info for binoculars in eyepiece mode only
       setLensControlsVisible(false);
-   else
+   } else {
       setLensControlsVisible(true);
+   }
 }
 
 void OcularsGuiPanel::updateCcdControls()
@@ -756,8 +698,8 @@ void OcularsGuiPanel::updateCcdControls()
    setOcularControlsVisible(false);
 
    // Get the name
-   int   index = ocularsPlugin->selectedCCDIndex;
-   CCD * ccd   = ocularsPlugin->ccds[index];
+   auto index = ocularsPlugin->selectedCCDIndex;
+   auto ccd   = ocularsPlugin->ccds[index];
    Q_ASSERT(ccd);
    ocularsPlugin->setSelectedCCDRotationAngle(ccd->rotationAngle());
    ocularsPlugin->setSelectedCCDPrismPositionAngle(ccd->prismPosAngle());
@@ -770,15 +712,15 @@ void OcularsGuiPanel::updateCcdControls()
    }
    fieldCcdName->setPlainText(fullName);
 
-   Lens * lens             = ocularsPlugin->selectedLens();
+   auto  lens             = ocularsPlugin->selectedLens();
 
-   qreal  posX             = 0.;
-   qreal  posY             = 0.;
-   qreal  widgetWidth      = 0.;
-   qreal  widgetHeight     = 0.;
+   qreal posX             = 0.0;
+   qreal posY             = 0.0;
+   qreal widgetWidth      = 0.0;
+   qreal widgetHeight     = 0.0;
 
    // Prev button
-   qreal  heightAdjustment = (fieldCcdName->boundingRect().height() - prevCcdButton->boundingRect().height()) / 2.;
+   qreal heightAdjustment = (fieldCcdName->boundingRect().height() - prevCcdButton->boundingRect().height()) / 2.0;
    prevCcdButton->setPos(posX, posY + heightAdjustment);
    posX += prevCcdButton->boundingRect().width();
    widgetWidth += prevCcdButton->boundingRect().width();
@@ -797,12 +739,12 @@ void OcularsGuiPanel::updateCcdControls()
    widgetHeight += fieldCcdName->boundingRect().height();
 
    // We need the current telescope
-   index                 = ocularsPlugin->selectedTelescopeIndex;
-   Telescope * telescope = ocularsPlugin->telescopes[index];
+   index          = ocularsPlugin->selectedTelescopeIndex;
+   auto telescope = ocularsPlugin->telescopes[index];
    Q_ASSERT(telescope);
    const double fovX            = ccd->getActualFOVx(telescope, lens);
    const double fovY            = ccd->getActualFOVy(telescope, lens);
-   QString      dimensionsLabel = QString(q_("Dimensions: %1")).arg(ocularsPlugin->getDimensionsString(fovX, fovY));
+   auto         dimensionsLabel = QString(q_("Dimensions: %1")).arg(ocularsPlugin->getDimensionsString(fovX, fovY));
    fieldCcdDimensions->setPlainText(dimensionsLabel);
    fieldCcdDimensions->setToolTip(q_("Dimensions field of view"));
    fieldCcdDimensions->setPos(posX, posY);
@@ -929,10 +871,9 @@ void OcularsGuiPanel::updateCcdControls()
 void OcularsGuiPanel::updateTelescopeControls()
 {
    // Get the name
-   int         index     = ocularsPlugin->selectedTelescopeIndex;
-   Telescope * telescope = ocularsPlugin->telescopes[index];
-   Q_ASSERT(telescope);
-   QString name = telescope->name();
+   int     index     = ocularsPlugin->selectedTelescopeIndex;
+   auto    telescope = ocularsPlugin->telescopes[index];
+   QString name      = telescope->name();
    QString fullName;
    if (name.isEmpty()) {
       fullName = QString(q_("Telescope #%1")).arg(index);
@@ -941,14 +882,14 @@ void OcularsGuiPanel::updateTelescopeControls()
    }
    fieldTelescopeName->setPlainText(fullName);
 
-   qreal posX         = 0.;
-   qreal posY         = 0.;
-   qreal widgetWidth  = 0.;
-   qreal widgetHeight = 0.;
+   qreal posX         = 0.0;
+   qreal posY         = 0.0;
+   qreal widgetWidth  = 0.0;
+   qreal widgetHeight = 0.0;
 
    // Prev button
    qreal heightAdjustment =
-     (fieldTelescopeName->boundingRect().height() - prevTelescopeButton->boundingRect().height()) / 2.;
+     (fieldTelescopeName->boundingRect().height() - prevTelescopeButton->boundingRect().height()) / 2.0;
    prevTelescopeButton->setPos(posX, posY + heightAdjustment);
    posX += prevTelescopeButton->boundingRect().width();
    widgetWidth += prevTelescopeButton->boundingRect().width();
@@ -971,22 +912,22 @@ void OcularsGuiPanel::updateTelescopeControls()
    double mag  = 0.0;
 
    if (ocularsPlugin->flagShowCCD) {
-      int   index = ocularsPlugin->selectedCCDIndex;
-      CCD * ccd   = ocularsPlugin->ccds[index];
+      auto ccdIndex = ocularsPlugin->selectedCCDIndex;
+      auto ccd      = ocularsPlugin->ccds[ccdIndex];
       Q_ASSERT(ccd);
 
-      const double fovX            = ccd->getActualFOVx(telescope, lens);
-      const double fovY            = ccd->getActualFOVy(telescope, lens);
-      QString      dimensionsLabel = QString(q_("Dimensions: %1")).arg(ocularsPlugin->getDimensionsString(fovX, fovY));
+      auto fovX            = ccd->getActualFOVx(telescope, lens);
+      auto fovY            = ccd->getActualFOVy(telescope, lens);
+      auto dimensionsLabel = QString(q_("Dimensions: %1")).arg(ocularsPlugin->getDimensionsString(fovX, fovY));
       fieldCcdDimensions->setPlainText(dimensionsLabel);
       fieldCcdDimensions->setToolTip(q_("Dimensions field of view"));
 
-      QString binningLabel =
+      auto binningLabel =
         QString("%1: %2 %4 %3").arg(q_("Binning")).arg(ccd->binningX()).arg(ccd->binningY()).arg(QChar(0x00D7));
       fieldCcdBinning->setPlainText(binningLabel);
 
       // TRANSLATORS: Unit of measure for scale - arc-seconds per pixel
-      QString unit = q_("\"/px");
+      auto unit = q_("\"/px");
       fieldCcdHScale->setPlainText(
         QString("%1: %2%3")
           .arg(q_("X scale"), QString::number(fovX * 3600 * ccd->binningX() / ccd->resolutionX(), 'f', 4), unit));
@@ -1007,9 +948,8 @@ void OcularsGuiPanel::updateTelescopeControls()
 
    if (ocularsPlugin->flagShowOculars) {
       // We need the current ocular
-      int      index  = ocularsPlugin->selectedOcularIndex;
-      Ocular * ocular = ocularsPlugin->oculars[index];
-      Q_ASSERT(ocular);
+      int  ocularIndex = ocularsPlugin->selectedOcularIndex;
+      auto ocular      = ocularsPlugin->oculars[ocularIndex];
 
       if (ocular->isBinoculars()) {
          prevTelescopeButton->setVisible(false);
@@ -1032,8 +972,8 @@ void OcularsGuiPanel::updateTelescopeControls()
          fieldExitPupil->setToolTip(q_("Exit pupil provided by this ocular/lens/telescope combination"));
       }
 
-      mag                         = ocular->magnification(telescope, lens);
-      QString magnificationString = QString::number(mag, 'f', 1);
+      mag                      = ocular->magnification(telescope, lens);
+      auto magnificationString = QString::number(mag, 'f', 1);
       magnificationString.append(QChar(0x02E3)); // Was 0x00D7
       magnificationString.append(QString(" (%1D)").arg(QString::number(mag / telescope->diameter(), 'f', 2)));
       QString magnificationLabel = QString(q_("Magnification: %1")).arg(magnificationString);
@@ -1044,17 +984,18 @@ void OcularsGuiPanel::updateTelescopeControls()
 
       if (mag > 0) {
          double exitPupil = telescope->diameter() / mag;
-         if (ocular->isBinoculars())
+         if (ocular->isBinoculars()) {
             exitPupil = ocular->fieldStop() / mag;
-         QString exitPupilLabel = QString(q_("Exit pupil: %1 mm")).arg(QString::number(exitPupil, 'f', 2));
+         }
+         auto exitPupilLabel = QString(q_("Exit pupil: %1 mm")).arg(QString::number(exitPupil, 'f', 2));
          fieldExitPupil->setPlainText(exitPupilLabel);
          fieldExitPupil->setPos(posX, posY);
          posY += fieldExitPupil->boundingRect().height();
          widgetHeight += fieldExitPupil->boundingRect().height();
       }
 
-      QString fovString = QString::number(ocular->actualFOV(telescope, lens), 'f', 4) + QChar(0x00B0);
-      QString fovLabel  = QString(q_("FOV: %1")).arg(fovString);
+      auto fovString = QString::number(ocular->actualFOV(telescope, lens), 'f', 4) + QChar(0x00B0);
+      auto fovLabel  = QString(q_("FOV: %1")).arg(fovString);
       fieldFov->setPlainText(fovLabel);
       fieldFov->setPos(posX, posY);
       posY += fieldFov->boundingRect().height();
@@ -1062,15 +1003,12 @@ void OcularsGuiPanel::updateTelescopeControls()
 
       fieldMagnification->setVisible(true);
       fieldFov->setVisible(true);
-      if (mag > 0)
-         fieldExitPupil->setVisible(true);
-      else
-         fieldExitPupil->setVisible(false);
+      fieldExitPupil->setVisible(mag > 0);
    }
 
-   double diameter = telescope->diameter();
+   auto diameter = telescope->diameter();
    if (diameter > 0.0 && ocularsPlugin->getFlagShowResolutionCriteria()) {
-      QString rayleighLabel =
+      auto rayleighLabel =
         QString("%1: %2\"").arg(q_("Rayleigh criterion")).arg(QString::number(138 / diameter, 'f', 2));
       fieldRayleighCriterion->setPlainText(rayleighLabel);
       fieldRayleighCriterion->setToolTip(q_("The Rayleigh resolution criterion"));
@@ -1078,22 +1016,21 @@ void OcularsGuiPanel::updateTelescopeControls()
       posY += fieldRayleighCriterion->boundingRect().height();
       widgetHeight += fieldRayleighCriterion->boundingRect().height();
 
-      QString dawesLabel = QString("%1: %2\"").arg(q_("Dawes' limit")).arg(QString::number(116 / diameter, 'f', 2));
+      auto dawesLabel = QString("%1: %2\"").arg(q_("Dawes' limit")).arg(QString::number(116 / diameter, 'f', 2));
       fieldDawesCriterion->setPlainText(dawesLabel);
       fieldDawesCriterion->setToolTip(q_("Dawes' resolution criterion"));
       fieldDawesCriterion->setPos(posX, posY);
       posY += fieldDawesCriterion->boundingRect().height();
       widgetHeight += fieldDawesCriterion->boundingRect().height();
 
-      QString abbeyLabel = QString("%1: %2\"").arg(q_("Abbe's limit")).arg(QString::number(113 / diameter, 'f', 2));
+      auto abbeyLabel = QString("%1: %2\"").arg(q_("Abbe's limit")).arg(QString::number(113 / diameter, 'f', 2));
       fieldAbbeyCriterion->setPlainText(abbeyLabel);
       fieldAbbeyCriterion->setToolTip(q_("Abbe’s diffraction resolution limit"));
       fieldAbbeyCriterion->setPos(posX, posY);
       posY += fieldAbbeyCriterion->boundingRect().height();
       widgetHeight += fieldAbbeyCriterion->boundingRect().height();
 
-      QString sparrowLabel =
-        QString("%1: %2\"").arg(q_("Sparrow's limit")).arg(QString::number(108 / diameter, 'f', 2));
+      auto sparrowLabel = QString("%1: %2\"").arg(q_("Sparrow's limit")).arg(QString::number(108 / diameter, 'f', 2));
       fieldSparrowCriterion->setPlainText(sparrowLabel);
       fieldSparrowCriterion->setToolTip(q_("Sparrow's resolution limit"));
       fieldSparrowCriterion->setPos(posX, posY);
@@ -1113,12 +1050,12 @@ void OcularsGuiPanel::updateTelescopeControls()
 
    // Visual resolution
    if (ocularsPlugin->flagShowOculars && ocularsPlugin->getFlagShowResolutionCriteria() && diameter > 0.0) {
-      float rayleigh = 138 / diameter;
-      float vres     = 60 / mag;
-      if (vres < rayleigh)
+      auto rayleigh = 138 / diameter;
+      auto vres     = 60 / mag;
+      if (vres < rayleigh) {
          vres = rayleigh;
-      QString visualResolutionLabel =
-        QString("%1: %2\"").arg(q_("Visual resolution")).arg(QString::number(vres, 'f', 2));
+      }
+      auto visualResolutionLabel = QString("%1: %2\"").arg(q_("Visual resolution")).arg(QString::number(vres, 'f', 2));
       fieldVisualResolution->setPlainText(visualResolutionLabel);
       fieldVisualResolution->setToolTip(q_("Visual resolution is based on eye properties and magnification"));
       fieldVisualResolution->setPos(posX, posY);
@@ -1126,8 +1063,9 @@ void OcularsGuiPanel::updateTelescopeControls()
       widgetHeight += fieldVisualResolution->boundingRect().height();
 
       fieldVisualResolution->setVisible(true);
-   } else
+   } else {
       fieldVisualResolution->setVisible(false);
+   }
 
    telescopeControls->setMinimumSize(widgetWidth, widgetHeight);
    telescopeControls->resize(widgetWidth, widgetHeight);
@@ -1207,27 +1145,21 @@ void OcularsGuiPanel::setTelescopeControlsVisible(bool show)
 
 void OcularsGuiPanel::updateMainButtonsPositions()
 {
-   Q_ASSERT(buttonOcular);
-   Q_ASSERT(buttonCrosshairs);
-   Q_ASSERT(buttonCcd);
-   Q_ASSERT(buttonTelrad);
-   Q_ASSERT(buttonConfiguration);
-
-   int   n       = buttonCrosshairs->isVisible() ? 5 : 4;
-   qreal width   = n * buttonOcular->getButtonPixmapWidth();
+   auto  n       = buttonCrosshairs->isVisible() ? 5 : 4;
+   auto  width   = n * buttonOcular->getButtonPixmapWidth();
 
    // Relative position inside the parent widget
-   qreal posX    = 0.;
-   qreal posY    = 0.;
-   qreal spacing = 0.;
-   if (prevTelescopeButton) {
+   qreal posX    = 0.0;
+   qreal posY    = 0.0;
+   qreal spacing = 0.0;
+   if (prevTelescopeButton != nullptr) {
       width += 2 * prevTelescopeButton->getButtonPixmapWidth();
       posX = prevTelescopeButton->getButtonPixmapWidth();
    }
-   if ((buttonOcular->parentItem()) && (buttonOcular->parentItem()->parentItem())) {
-      qreal parentWidth = buttonOcular->parentItem()->parentItem()->boundingRect().width();
-      int   nGaps       = n - 1; // n buttons have n-1 gaps
-      spacing           = qRound((parentWidth - width) / nGaps);
+   if (((buttonOcular->parentItem()) != nullptr) && ((buttonOcular->parentItem()->parentItem()) != nullptr)) {
+      auto parentWidth = buttonOcular->parentItem()->parentItem()->boundingRect().width();
+      auto nGaps       = n - 1; // n buttons have n-1 gaps
+      spacing          = qRound((parentWidth - width) / nGaps);
    }
    buttonOcular->setPos(posX, posY);
    posX += buttonOcular->getButtonPixmapWidth() + spacing;
@@ -1244,28 +1176,6 @@ void OcularsGuiPanel::updateMainButtonsPositions()
 
 void OcularsGuiPanel::setControlsColor(const QColor & color)
 {
-   Q_ASSERT(fieldOcularName);
-   Q_ASSERT(fieldOcularFl);
-   Q_ASSERT(fieldOcularAfov);
-   Q_ASSERT(fieldCcdName);
-   Q_ASSERT(fieldCcdDimensions);
-   Q_ASSERT(fieldCcdBinning);
-   Q_ASSERT(fieldCcdHScale);
-   Q_ASSERT(fieldCcdVScale);
-   Q_ASSERT(fieldCcdRotation);
-   Q_ASSERT(fieldPrismRotation);
-   Q_ASSERT(fieldTelescopeName);
-   Q_ASSERT(fieldMagnification);
-   Q_ASSERT(fieldExitPupil);
-   Q_ASSERT(fieldFov);
-   Q_ASSERT(fieldRayleighCriterion);
-   Q_ASSERT(fieldDawesCriterion);
-   Q_ASSERT(fieldAbbeyCriterion);
-   Q_ASSERT(fieldSparrowCriterion);
-   Q_ASSERT(fieldVisualResolution);
-   Q_ASSERT(fieldLensName);
-   Q_ASSERT(fieldLensMultipler);
-
    fieldOcularName->setDefaultTextColor(color);
    fieldOcularFl->setDefaultTextColor(color);
    fieldOcularAfov->setDefaultTextColor(color);
@@ -1291,28 +1201,6 @@ void OcularsGuiPanel::setControlsColor(const QColor & color)
 
 void OcularsGuiPanel::setControlsFont(const QFont & font)
 {
-   Q_ASSERT(fieldOcularName);
-   Q_ASSERT(fieldOcularFl);
-   Q_ASSERT(fieldOcularAfov);
-   Q_ASSERT(fieldCcdName);
-   Q_ASSERT(fieldCcdDimensions);
-   Q_ASSERT(fieldCcdBinning);
-   Q_ASSERT(fieldCcdHScale);
-   Q_ASSERT(fieldCcdVScale);
-   Q_ASSERT(fieldCcdRotation);
-   Q_ASSERT(fieldPrismRotation);
-   Q_ASSERT(fieldTelescopeName);
-   Q_ASSERT(fieldMagnification);
-   Q_ASSERT(fieldExitPupil);
-   Q_ASSERT(fieldFov);
-   Q_ASSERT(fieldRayleighCriterion);
-   Q_ASSERT(fieldDawesCriterion);
-   Q_ASSERT(fieldAbbeyCriterion);
-   Q_ASSERT(fieldSparrowCriterion);
-   Q_ASSERT(fieldVisualResolution);
-   Q_ASSERT(fieldLensName);
-   Q_ASSERT(fieldLensMultipler);
-
    fieldOcularName->setFont(font);
    fieldOcularFl->setFont(font);
    fieldOcularAfov->setFont(font);
@@ -1344,12 +1232,12 @@ void OcularsGuiPanel::setColorScheme(const QString & schemeName)
    setControlsColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
 }
 
-QPixmap OcularsGuiPanel::createPixmapFromText(const QString & text,
-                                              int             width,
-                                              int             height,
-                                              const QFont &   font,
-                                              const QColor &  textColor,
-                                              const QColor &  backgroundColor)
+auto OcularsGuiPanel::createPixmapFromText(const QString & text,
+                                           int             width,
+                                           int             height,
+                                           const QFont &   font,
+                                           const QColor &  textColor,
+                                           const QColor &  backgroundColor) -> QPixmap
 {
    if (width <= 0 || height <= 0) {
       return QPixmap();
