@@ -40,9 +40,9 @@ public:
    /// Creates a new instance of Lens.
    //! The newly created instance will have values initialized to represent a usable lens model.
    explicit Lens(QObject * parent = nullptr);
-   ~Lens() override    = default;
+   ~Lens() override = default;
 
-   static auto lensFromSettings(QSettings * theSettings, int lensIndex) -> Lens *;
+   void        initFromSettings(QSettings * theSettings, int lensIndex);
    void        writeToSettings(QSettings * settings, int index) const;
 
    auto        multiplier() const -> double;
@@ -53,7 +53,7 @@ public:
 
 private:
    double  m_multiplier{ 0.0 };
-   QString m_name { "New Lens"};
+   QString m_name{ "New Lens" };
 };
 
 auto operator<<(QDebug debug, const Lens & lens) -> QDebug;

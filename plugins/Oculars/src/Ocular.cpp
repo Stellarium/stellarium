@@ -57,6 +57,26 @@ auto Ocular::actualFOV(const Telescope * telescope, const Lens * lens) const -> 
    return actualFOV;
 }
 
+void Ocular::initFromSettings(const QSettings * theSettings, const int ocularIndex)
+{
+   QString  prefix = "ocular/" + QVariant(ocularIndex).toString() + "/";
+
+   this->setName(theSettings->value(prefix + "name", "").toString());
+   this->setApparentFOV(theSettings->value(prefix + "afov", 0.0).toDouble());
+   this->setEffectiveFocalLength(theSettings->value(prefix + "efl", 0.0).toDouble());
+   this->setFieldStop(theSettings->value(prefix + "fieldStop", 0.0).toDouble());
+   this->setBinoculars(theSettings->value(prefix + "binoculars", "false").toBool());
+   this->setPermanentCrosshair(theSettings->value(prefix + "permanentCrosshair", "false").toBool());
+   this->setReticlePath(theSettings->value(prefix + "reticlePath", "").toString());
+
+   if (!(this->apparentFOV() > 0.0 && this->effectiveFocalLength() > 0.0)) {
+      qWarning() << "WARNING: Invalid data for ocular. Ocular values must be positive. \n"
+                 << "\tafov: " << this->apparentFOV() << "\n"
+                 << "\tefl: " << this->effectiveFocalLength() << "\n"
+                 << "This ocular should be removed.";
+   }
+}
+
 auto Ocular::magnification(const Telescope * telescope, const Lens * lens) const -> double
 {
    double       magnification  =  NAN;
@@ -144,31 +164,6 @@ void Ocular::setReticlePath(QString path)
 /* ****************************************************************************************************************** */
 // MARK: - Static Methods
 /* ****************************************************************************************************************** */
-auto Ocular::ocularFromSettings(const QSettings * theSettings, const int ocularIndex) -> Ocular *
-{
-   Ocular * ocular = new Ocular();
-   QString  prefix = "ocular/" + QVariant(ocularIndex).toString() + "/";
-
-   ocular->setName(theSettings->value(prefix + "name", "").toString());
-   ocular->setApparentFOV(theSettings->value(prefix + "afov", 0.0).toDouble());
-   ocular->setEffectiveFocalLength(theSettings->value(prefix + "efl", 0.0).toDouble());
-   ocular->setFieldStop(theSettings->value(prefix + "fieldStop", 0.0).toDouble());
-   ocular->setBinoculars(theSettings->value(prefix + "binoculars", "false").toBool());
-   ocular->setPermanentCrosshair(theSettings->value(prefix + "permanentCrosshair", "false").toBool());
-   ocular->setReticlePath(theSettings->value(prefix + "reticlePath", "").toString());
-
-   if (!(ocular->apparentFOV() > 0.0 && ocular->effectiveFocalLength() > 0.0)) {
-      qWarning() << "WARNING: Invalid data for ocular. Ocular values must be positive. \n"
-                 << "\tafov: " << ocular->apparentFOV() << "\n"
-                 << "\tefl: " << ocular->effectiveFocalLength() << "\n"
-                 << "This ocular will be removed.,";
-      delete ocular;
-      ocular = nullptr;
-   }
-
-   return ocular;
-}
-
 void Ocular::writeToSettings(QSettings * settings, const int index) const
 {
    QString prefix = "ocular/" + QVariant(index).toString() + "/";

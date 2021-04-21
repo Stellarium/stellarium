@@ -31,6 +31,14 @@ Lens::Lens(QObject * parent)
 /* ****************************************************************************************************************** */
 // MARK: - Instance Methods
 /* ****************************************************************************************************************** */
+void Lens::initFromSettings(QSettings * theSettings, int lensIndex)
+{
+   QString prefix = "lens/" + QVariant(lensIndex).toString() + "/";
+
+   this->setName(theSettings->value(prefix + propertyMap().value(0), "").toString());
+   this->setMultiplier(theSettings->value(prefix + propertyMap().value(1), "1").toDouble());
+}
+
 auto Lens::name() const -> QString
 {
    return m_name;
@@ -61,17 +69,6 @@ void Lens::writeToSettings(QSettings * settings, const int index) const
 /* ****************************************************************************************************************** */
 // MARK: - Static Methods
 /* ****************************************************************************************************************** */
-auto Lens::lensFromSettings(QSettings * theSettings, int lensIndex) -> Lens *
-{
-   Lens *  lens   = new Lens();
-   QString prefix = "lens/" + QVariant(lensIndex).toString() + "/";
-
-   lens->setName(theSettings->value(prefix + propertyMap().value(0), "").toString());
-   lens->setMultiplier(theSettings->value(prefix + propertyMap().value(1), "1").toDouble());
-
-   return lens;
-}
-
 auto Lens::propertyMap() -> QMap<int, QString>
 {
    static const auto mapping = QMap<int, QString>{ { 0, QLatin1String("name") }, { 1, QLatin1String("multipler") } };

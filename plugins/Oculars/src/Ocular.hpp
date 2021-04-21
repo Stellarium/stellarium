@@ -47,7 +47,7 @@ public:
    explicit Ocular(QObject * parent = nullptr);
    ~Ocular() override = default;
 
-   static auto ocularFromSettings(const QSettings * theSettings, int ocularIndex) -> Ocular *;
+   void        initFromSettings(const QSettings * theSettings, int ocularIndex);
    void        writeToSettings(QSettings * settings, int index) const;
 
    auto        isBinoculars() const -> bool;
@@ -73,8 +73,8 @@ private:
    double  m_apparentFOV{ OcularDefaultFOV }; // millimeters
    bool    m_binoculars{ false };
    double  m_effectiveFocalLength{ OcularDefaultFocalLength }; // millimeters
-   double  m_fieldStop{ 0.0 };            // millimeters
-   QString m_name { "New Ocular"};
+   double  m_fieldStop{ 0.0 };                                 // millimeters
+   QString m_name{ "New Ocular" };
    bool    m_permanentCrosshair{ false };
    QString m_reticlePath;
 };

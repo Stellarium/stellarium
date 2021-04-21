@@ -43,7 +43,7 @@ public:
    explicit Telescope(QObject * parent = nullptr);
    ~Telescope() override = default;
 
-   static auto telescopeFromSettings(QSettings * theSettings, int telescopeIndex) -> Telescope *;
+   void        initFromSettings(QSettings * theSettings, int telescopeIndex);
    void        writeToSettings(QSettings * settings, int index) const;
 
    auto        diameter() const -> double;

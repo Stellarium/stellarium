@@ -35,6 +35,24 @@ CCD::CCD(QObject * parent)
 /* ****************************************************************************************************************** */
 // MARK: - Instance Methods
 /* ****************************************************************************************************************** */
+void CCD::initFromSettings(QSettings * settings, int ccdIndex)
+{
+   QString prefix = "ccd/" + QVariant(ccdIndex).toString() + "/";
+   this->setName(settings->value(prefix + "name", "").toString());
+   this->setResolutionX(settings->value(prefix + "resolutionX", 0).toInt());
+   this->setResolutionY(settings->value(prefix + "resolutionY", 0).toInt());
+   this->setChipWidth(settings->value(prefix + "chip_width", 0.0).toDouble());
+   this->setChipHeight(settings->value(prefix + "chip_height", 0.0).toDouble());
+   this->setRotationAngle(settings->value(prefix + "chip_rot_angle", 0.0).toDouble());
+   this->setBinningX(settings->value(prefix + "binningX", 1).toInt());
+   this->setBinningY(settings->value(prefix + "binningY", 1).toInt());
+   this->setHasOAG(settings->value(prefix + "has_oag", "false").toBool());
+   this->setPrismHeight(settings->value(prefix + "prism_height", 0.0).toDouble());
+   this->setPrismWidth(settings->value(prefix + "prism_width", 0.0).toDouble());
+   this->setPrismDistance(settings->value(prefix + "prism_distance", 0.0).toDouble());
+   this->setPrismPosAngle(settings->value(prefix + "prism_pos_angle", 0.0).toDouble());
+}
+
 auto CCD::name() const -> QString
 {
    return m_name;
@@ -232,26 +250,6 @@ void CCD::writeToSettings(QSettings * settings, const int index) const
 /* ****************************************************************************************************************** */
 // MARK: - Static Methods
 /* ****************************************************************************************************************** */
-auto CCD::ccdFromSettings(QSettings * settings, int ccdIndex) -> CCD *
-{
-   CCD *   ccd    = new CCD();
-   QString prefix = "ccd/" + QVariant(ccdIndex).toString() + "/";
-   ccd->setName(settings->value(prefix + "name", "").toString());
-   ccd->setResolutionX(settings->value(prefix + "resolutionX", 0).toInt());
-   ccd->setResolutionY(settings->value(prefix + "resolutionY", 0).toInt());
-   ccd->setChipWidth(settings->value(prefix + "chip_width", 0.0).toDouble());
-   ccd->setChipHeight(settings->value(prefix + "chip_height", 0.0).toDouble());
-   ccd->setRotationAngle(settings->value(prefix + "chip_rot_angle", 0.0).toDouble());
-   ccd->setBinningX(settings->value(prefix + "binningX", 1).toInt());
-   ccd->setBinningY(settings->value(prefix + "binningY", 1).toInt());
-   ccd->setHasOAG(settings->value(prefix + "has_oag", "false").toBool());
-   ccd->setPrismHeight(settings->value(prefix + "prism_height", 0.0).toDouble());
-   ccd->setPrismWidth(settings->value(prefix + "prism_width", 0.0).toDouble());
-   ccd->setPrismDistance(settings->value(prefix + "prism_distance", 0.0).toDouble());
-   ccd->setPrismPosAngle(settings->value(prefix + "prism_pos_angle", 0.0).toDouble());
-   return ccd;
-}
-
 auto CCD::propertyMap() -> QMap<int, QString>
 {
    static const auto mapping =

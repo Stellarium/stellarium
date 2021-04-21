@@ -146,7 +146,7 @@ class Oculars : public StelModule
 
 public:
    Oculars();
-   ~Oculars() override;
+   ~Oculars() override = default;
 
    ///////////////////////////////////////////////////////////////////////////
    // Methods defined in the StelModule class
@@ -164,21 +164,21 @@ public:
    //! return the plugin's own settings (these do not include the settings from the main application)
    //! This implementation return a singleton (class static) QSettings object.
    auto getSettings() -> QSettings * override;
-   auto getEnableOcular() const -> bool { return flagShowOculars; }
+   auto getEnableOcular() const -> bool;
    auto getSelectedCCDRotationAngle() const -> double;
    auto getSelectedCCDPrismPositionAngle() const -> double;
-   auto getSelectedCCDIndex() const -> int { return selectedCCDIndex; }
-   auto getSelectedOcularIndex() const -> int { return selectedOcularIndex; }
-   auto getSelectedTelescopeIndex() const -> int { return selectedTelescopeIndex; }
-   auto getSelectedLensIndex() const -> int { return selectedLensIndex; }
-   auto getEnableCCD() const -> bool { return flagShowCCD; }
-   auto getEnableCrosshairs() const -> bool { return flagShowCrosshairs; }
-   auto getEnableTelrad() const -> bool { return flagShowTelrad; }
-   auto getFlagGuiPanelEnabled() const -> bool { return flagGuiPanelEnabled; }
-   auto getGuiPanelFontSize() const -> int { return guiPanelFontSize; }
-   auto getTextColor() const -> Vec3f { return textColor; }
-   auto getLineColor() const -> Vec3f { return lineColor; }
-   auto getFocuserColor() const -> Vec3f { return focuserColor; }
+   auto getSelectedCCDIndex() const -> int;
+   auto getSelectedOcularIndex() const -> int;
+   auto getSelectedTelescopeIndex() const -> int;
+   auto getSelectedLensIndex() const -> int;
+   auto getEnableCCD() const -> bool;
+   auto getEnableCrosshairs() const -> bool;
+   auto getEnableTelrad() const -> bool;
+   auto getFlagGuiPanelEnabled() const -> bool;
+   auto getGuiPanelFontSize() const -> int;
+   auto getTextColor() const -> Vec3f;
+   auto getLineColor() const -> Vec3f;
+   auto getFocuserColor() const -> Vec3f;
    auto getTelradFOV() const -> Vec4d;
    auto getFlagDMSDegrees() const -> bool;
    auto getFlagRequireSelection() const -> bool;
@@ -192,12 +192,12 @@ public:
    auto getFlagUseSemiTransparency() const -> bool;
    auto getTransparencyMask() const -> int;
    auto getFlagShowResolutionCriteria() const -> bool;
-   auto getCcdCropOverlayHSize() const -> int { return ccdCropOverlayHSize; }
-   auto getCcdCropOverlayVSize() const -> int { return ccdCropOverlayVSize; }
+   auto getCcdCropOverlayHSize() const -> int;
+   auto getCcdCropOverlayVSize() const -> int;
    auto getArrowButtonScale() const -> int;
    auto getFlagHideGridsLines() const -> bool;
-   auto getFlagScaleImageCircle() const -> bool { return flagScaleImageCircle; }
-   auto getFlagShowOcularsButton() const -> bool { return flagShowOcularsButton; }
+   auto getFlagScaleImageCircle() const -> bool;
+   auto getFlagShowOcularsButton() const -> bool;
    auto getFlagShowCcdCropOverlay() const -> bool;
    auto getFlagShowCcdCropOverlayPixelGrid() const -> bool;
    auto getFlagShowContour() const -> bool;
@@ -232,14 +232,14 @@ public slots:
    void rotateReticleClockwise();
    void rotateReticleCounterclockwise();
 
-   void rotateCCD(int amount);                     //!< amount must be a number. This adds to the current rotation.
-   void setSelectedCCDRotationAngle(double angle); //!< set rotation angle for currently selected CCD
+   void rotateCCD(int amount);                          //!< amount must be a number. This adds to the current rotation.
+   void setSelectedCCDRotationAngle(double angle);      //!< set rotation angle for currently selected CCD
    void rotatePrism(int amount);                        //!< amount must be a number. This adds to the current rotation.
    void setSelectedCCDPrismPositionAngle(double angle); //!< set position angle for prism/OAG of currently selected CC
-   void selectCCDAtIndex(int index); //!< index in the range of -1:ccds.count(), else call is ignored
-   void selectOcularAtIndex(int index); //!< index in the range of -1:oculars.count(), else call is ignored
+   void selectCCDAtIndex(int index);                    //!< index in the range of -1:ccds.count(), else call is ignored
+   void selectOcularAtIndex(int index);    //!< index in the range of -1:oculars.count(), else call is ignored
    void selectTelescopeAtIndex(int index); //!< index in the range of -1:telescopes.count(), else call is ignored
-   void selectLensAtIndex(int index); //!< index in the range -1:lenses.count(), else call is ignored
+   void selectLensAtIndex(int index);      //!< index in the range -1:lenses.count(), else call is ignored
 
    //! Toggles the sensor frame overlay.
    void toggleCCD(bool show);
@@ -253,25 +253,9 @@ public slots:
 
    void enableGuiPanel(bool enable = true);
    void setGuiPanelFontSize(int size);
-
-   void setTextColor(Vec3f color)
-   {
-      textColor = color;
-      emit textColorChanged(color);
-   }
-
-   void setLineColor(Vec3f color)
-   {
-      lineColor = color;
-      emit lineColorChanged(color);
-   }
-
-   void setFocuserColor(Vec3f color)
-   {
-      focuserColor = color;
-      emit focuserColorChanged(color);
-   }
-
+   void setTextColor(Vec3f color);
+   void setLineColor(Vec3f color);
+   void setFocuserColor(Vec3f color);
    void setTelradFOV(Vec4d fov);
    void setFlagDMSDegrees(bool b);
    void setFlagRequireSelection(bool b);
@@ -291,9 +275,9 @@ public slots:
    void setFlagScaleImageCircle(bool state);
    //! Define whether the button toggling eyepieces should be visible
    void setFlagShowOcularsButton(bool b);
-   void setFontSize(int s) { font.setPixelSize(s); }
+   void setFontSize(int s);
    //! Connect this to StelApp font size.
-   void setFontSizeFromApp(int s) { font.setPixelSize(s + 1); }
+   void setFontSizeFromApp(int s);
    void setFlagShowCcdCropOverlay(bool b);
    void setFlagShowCcdCropOverlayPixelGrid(bool b);
    void setFlagShowContour(bool b);

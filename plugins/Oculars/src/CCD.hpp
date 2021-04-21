@@ -52,7 +52,7 @@ public:
    explicit CCD(QObject * parent = nullptr);
    ~CCD() override = default;
 
-   static auto ccdFromSettings(QSettings * settings, int ccdIndex) -> CCD *;
+   void        initFromSettings(QSettings * settings, int ccdIndex);
    void        writeToSettings(QSettings * settings, int index) const;
 
    auto        name() const -> QString;

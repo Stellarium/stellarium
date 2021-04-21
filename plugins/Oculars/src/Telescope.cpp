@@ -27,15 +27,17 @@ Telescope::Telescope(QObject * parent)
 {
 }
 
-auto Telescope::propertyMap() -> QMap<int, QString>
+void Telescope::initFromSettings(QSettings * theSettings, int telescopeIndex)
 {
-   static const auto mapping =
-     QMap<int, QString>{ { 0, QLatin1String("name") },        { 1, QLatin1String("diameter") },
-                         { 2, QLatin1String("focalLength") }, { 3, QLatin1String("hFlipped") },
-                         { 4, QLatin1String("vFlipped") },    { 5, QLatin1String("equatorial") } };
-   return mapping;
-}
+   QString     prefix    = "telescope/" + QVariant(telescopeIndex).toString() + "/";
 
+   this->setName(theSettings->value(prefix + "name", "").toString());
+   this->setFocalLength(theSettings->value(prefix + "focalLength", "0").toDouble());
+   this->setDiameter(theSettings->value(prefix + "diameter", "0").toDouble());
+   this->setHFlipped(theSettings->value(prefix + "hFlip").toBool());
+   this->setVFlipped(theSettings->value(prefix + "vFlip").toBool());
+   this->setEquatorial(theSettings->value(prefix + "equatorial").toBool());
+}
 /* ****************************************************************************************************************** */
 // MARK: - Accessors & Mutators
 /* ****************************************************************************************************************** */
@@ -113,19 +115,15 @@ void Telescope::writeToSettings(QSettings * settings, const int index) const
 /* ****************************************************************************************************************** */
 // MARK: - Static Methods
 /* ****************************************************************************************************************** */
-auto Telescope::telescopeFromSettings(QSettings * theSettings, int telescopeIndex) -> Telescope *
+auto Telescope::propertyMap() -> QMap<int, QString>
 {
-   Telescope * telescope = new Telescope();
-   QString     prefix    = "telescope/" + QVariant(telescopeIndex).toString() + "/";
-
-   telescope->setName(theSettings->value(prefix + "name", "").toString());
-   telescope->setFocalLength(theSettings->value(prefix + "focalLength", "0").toDouble());
-   telescope->setDiameter(theSettings->value(prefix + "diameter", "0").toDouble());
-   telescope->setHFlipped(theSettings->value(prefix + "hFlip").toBool());
-   telescope->setVFlipped(theSettings->value(prefix + "vFlip").toBool());
-   telescope->setEquatorial(theSettings->value(prefix + "equatorial").toBool());
-   return telescope;
+   static const auto mapping =
+     QMap<int, QString>{ { 0, QLatin1String("name") },        { 1, QLatin1String("diameter") },
+                         { 2, QLatin1String("focalLength") }, { 3, QLatin1String("hFlipped") },
+                         { 4, QLatin1String("vFlipped") },    { 5, QLatin1String("equatorial") } };
+   return mapping;
 }
+
 /* ****************************************************************************************************************** */
 // MARK: - Operators
 /* ****************************************************************************************************************** */
