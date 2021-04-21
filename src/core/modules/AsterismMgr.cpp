@@ -302,9 +302,10 @@ void AsterismMgr::drawLines(StelPainter& sPainter, const StelCore* core) const
 	if (!hasAsterism)
 		return;
 
+	const float ppx = static_cast<float>(sPainter.getProjector()->getDevicePixelsPerPixel());
 	sPainter.setBlending(true);
-	if (asterismLineThickness>1)
-		sPainter.setLineWidth(asterismLineThickness); // set line thickness
+	if (asterismLineThickness>1 || ppx>1.f)
+		sPainter.setLineWidth(asterismLineThickness*ppx); // set line thickness
 	sPainter.setLineSmooth(true);
 
 	const SphericalCap& viewportHalfspace = sPainter.getProjector()->getBoundingCap();
@@ -313,7 +314,7 @@ void AsterismMgr::drawLines(StelPainter& sPainter, const StelCore* core) const
 		if (asterism->isAsterism())
 			asterism->drawOptim(sPainter, core, viewportHalfspace);
 	}
-	if (asterismLineThickness>1)
+	if (asterismLineThickness>1 || ppx>1.f)
 		sPainter.setLineWidth(1); // restore line thickness
 	sPainter.setLineSmooth(false);
 }
@@ -324,9 +325,10 @@ void AsterismMgr::drawRayHelpers(StelPainter& sPainter, const StelCore* core) co
 	if (!hasAsterism)
 		return;
 
+	const float ppx = static_cast<float>(sPainter.getProjector()->getDevicePixelsPerPixel());
 	sPainter.setBlending(true);
-	if (rayHelperThickness>1)
-		sPainter.setLineWidth(rayHelperThickness); // set line thickness
+	if (rayHelperThickness>1 || ppx>1.f)
+		sPainter.setLineWidth(rayHelperThickness*ppx); // set line thickness
 	sPainter.setLineSmooth(true);
 
 	const SphericalCap& viewportHalfspace = sPainter.getProjector()->getBoundingCap();
@@ -335,7 +337,7 @@ void AsterismMgr::drawRayHelpers(StelPainter& sPainter, const StelCore* core) co
 		if (!asterism->isAsterism())
 			asterism->drawOptim(sPainter, core, viewportHalfspace);
 	}
-	if (rayHelperThickness>1)
+	if (rayHelperThickness>1 || ppx>1.f)
 		sPainter.setLineWidth(1); // restore line thickness
 	sPainter.setLineSmooth(false);
 }

@@ -1490,10 +1490,11 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 
 	// Initialize a painter and set OpenGL state
 	StelPainter sPainter(prj);
+	const float ppx = static_cast<float>(sPainter.getProjector()->getDevicePixelsPerPixel());
 	sPainter.setBlending(true);
 	sPainter.setLineSmooth(true);
 	const float oldLineWidth=sPainter.getLineWidth();
-	sPainter.setLineWidth(GETSTELMODULE(ArchaeoLines)->getLineWidth());
+	sPainter.setLineWidth(GETSTELMODULE(ArchaeoLines)->getLineWidth()*ppx);
 	sPainter.setColor(color[0], color[1], color[2], intensity*fader.getInterstate());
 	//Vec4f textColor(color[0], color[1], color[2], intensity*fader.getInterstate());
 

@@ -1272,11 +1272,12 @@ void SolarSystem::draw(StelCore* core)
 	if (trailFader.getInterstate()>0.0000001f)
 	{
 		StelPainter sPainter(core->getProjection2d());
+		const float ppx = static_cast<float>(sPainter.getProjector()->getDevicePixelsPerPixel());
 		allTrails->setOpacity(trailFader.getInterstate());
-		if (trailsThickness>1)
-			sPainter.setLineWidth(trailsThickness);
+		if (trailsThickness>1 || ppx>1.f)
+			sPainter.setLineWidth(trailsThickness*ppx);
 		allTrails->draw(core, &sPainter);
-		if (trailsThickness>1)
+		if (trailsThickness>1 || ppx>1.f)
 			sPainter.setLineWidth(1);
 	}
 
@@ -1424,9 +1425,10 @@ void SolarSystem::drawEphemerisLine(const StelCore *core)
 	else
 		prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
+	const float ppx = static_cast<float>(sPainter.getProjector()->getDevicePixelsPerPixel());
 
 	const float oldLineThickness=sPainter.getLineWidth();
-	const float lineThickness = getEphemerisLineThickness();
+	const float lineThickness = getEphemerisLineThickness()*ppx;
 	if (!fuzzyEquals(lineThickness, oldLineThickness))
 		sPainter.setLineWidth(lineThickness);
 
