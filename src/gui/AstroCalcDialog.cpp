@@ -6162,31 +6162,12 @@ void AstroCalcDialog::computePlanetaryData()
 
 	double spcb1 = firstCBId->getSiderealPeriod();
 	double spcb2 = secondCBId->getSiderealPeriod();
-	int cb1 = qRound(spcb1);
-	int cb2 = qRound(spcb2);
-	QString orbitalResonance = dash;
-	QString orbitalPeriodsRatio = dash;
-	bool spin = false;
 	QString parentFCBName = "";
 	if (firstCelestialBody != "Sun")
 		parentFCBName = firstCBId->getParent()->getEnglishName();
 	QString parentSCBName = "";
 	if (secondCelestialBody != "Sun")
 		parentSCBName = secondCBId->getParent()->getEnglishName();
-
-	if (firstCelestialBody == parentSCBName)
-	{
-		cb1 = qRound(secondCBId->getSiderealPeriod());
-		cb2 = qRound(secondCBId->getSiderealDay());
-		spin = true;
-	}
-	else if (secondCelestialBody == parentFCBName)
-	{
-		cb1 = qRound(firstCBId->getSiderealPeriod());
-		cb2 = qRound(firstCBId->getSiderealDay());
-		spin = true;
-	}
-	int gcd = StelUtils::gcd(cb1, cb2);
 
 	QString distanceUM = qc_("AU", "distance, astronomical unit");
 	ui->labelLinearDistanceValue->setText(QString("%1 %2 (%3 %4)").arg(distAU, distanceUM, distKM, useKM ? km : Mkm));
@@ -6195,24 +6176,6 @@ void AstroCalcDialog::computePlanetaryData()
 	if (firstCelestialBody != currentPlanet && secondCelestialBody != currentPlanet)
 		angularDistance = QString("%1%2 %3' %4\" (%5%2)").arg(d).arg(QChar(0x00B0)).arg(m).arg(s, 0, 'f', 2).arg(dd, 0, 'f', 5);
 	ui->labelAngularDistanceValue->setText(angularDistance);
-
-	if (cb1 > 0 && cb2 > 0)
-	{
-		double r1 = qAbs(cb1 / gcd);
-		double r2 = qAbs(cb2 / gcd);
-		orbitalResonance = QString("%1:%2").arg(qRound(r1)).arg(qRound(r2));
-		if (spin)
-			orbitalResonance.append(QString(" (%1)").arg(q_("spin-orbit resonance")));
-	}
-	ui->labelOrbitalResonanceValue->setText(orbitalResonance);
-
-	if (spcb1 > 0. && spcb2 > 0.)
-	{
-		double minp = spcb2;
-		if (qAbs(spcb1)<=qAbs(spcb2)) { minp = spcb1; }
-		orbitalPeriodsRatio = QString("%1:%2").arg(QString::number(qAbs(spcb2/minp), 'f', 2), QString::number(qAbs(spcb1/minp), 'f', 2));
-	}
-	ui->labelOrbitalPeriodsRatioValue->setText(orbitalPeriodsRatio);
 
 	// TRANSLATORS: Unit of measure for speed - kilometers per second
 	QString kms = qc_("km/s", "speed");
