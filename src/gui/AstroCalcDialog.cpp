@@ -6189,7 +6189,7 @@ void AstroCalcDialog::computePlanetaryData()
 	int gcd = StelUtils::gcd(cb1, cb2);
 
 	QString distanceUM = qc_("AU", "distance, astronomical unit");
-	ui->labelLinearDistanceValue->setText(QString("%1 %2 (%3 %4)").arg(distAU).arg(distanceUM).arg(distKM).arg(useKM ? km : Mkm));
+	ui->labelLinearDistanceValue->setText(QString("%1 %2 (%3 %4)").arg(distAU, distanceUM, distKM, useKM ? km : Mkm));
 
 	QString angularDistance = dash;
 	if (firstCelestialBody != currentPlanet && secondCelestialBody != currentPlanet)
@@ -6210,7 +6210,7 @@ void AstroCalcDialog::computePlanetaryData()
 	{
 		double minp = spcb2;
 		if (qAbs(spcb1)<=qAbs(spcb2)) { minp = spcb1; }
-		orbitalPeriodsRatio = QString("%1:%2").arg(QString::number(qAbs(spcb1/minp), 'f', 2)).arg(QString::number(qAbs(spcb2/minp), 'f', 2));
+		orbitalPeriodsRatio = QString("%1:%2").arg(QString::number(qAbs(spcb2/minp), 'f', 2), QString::number(qAbs(spcb1/minp), 'f', 2));
 	}
 	ui->labelOrbitalPeriodsRatioValue->setText(orbitalPeriodsRatio);
 
@@ -6218,11 +6218,11 @@ void AstroCalcDialog::computePlanetaryData()
 	QString kms = qc_("km/s", "speed");
 
 	double orbVelFCB = firstCBId->getEclipticVelocity().length();
-	QString orbitalVelocityFCB = orbVelFCB<=0. ? dash : QString("%1 %2").arg(QString::number(orbVelFCB * AU/86400., 'f', 3)).arg(kms);
+	QString orbitalVelocityFCB = orbVelFCB<=0. ? dash : QString("%1 %2").arg(QString::number(orbVelFCB * AU/86400., 'f', 3), kms);
 	ui->labelOrbitalVelocityFCBValue->setText(orbitalVelocityFCB);
 
 	double orbVelSCB = secondCBId->getEclipticVelocity().length();
-	QString orbitalVelocitySCB = orbVelSCB<=0. ? dash : QString("%1 %2").arg(QString::number(orbVelSCB * AU/86400., 'f', 3)).arg(kms);
+	QString orbitalVelocitySCB = orbVelSCB<=0. ? dash : QString("%1 %2").arg(QString::number(orbVelSCB * AU/86400., 'f', 3), kms);
 	ui->labelOrbitalVelocitySCBValue->setText(orbitalVelocitySCB);
 
 	// TRANSLATORS: Unit of measure for period - days
@@ -6236,7 +6236,7 @@ void AstroCalcDialog::computePlanetaryData()
 	if (spcb1 > 0.0 && spcb2 > 0.0 && showSP)
 	{
 		double sp = qAbs(1/(1/spcb1 - 1/spcb2));
-		synodicPeriod = QString("%1 %2 (%3 a)").arg(QString::number(sp, 'f', 3)).arg(days).arg(QString::number(sp/365.25, 'f', 5));
+		synodicPeriod = QString("%1 %2 (%3 a)").arg(QString::number(sp, 'f', 3), days, QString::number(sp/365.25, 'f', 5));
 	}
 
 	ui->labelSynodicPeriodValue->setText(synodicPeriod);
@@ -6246,7 +6246,7 @@ void AstroCalcDialog::computePlanetaryData()
 	double sratio = fcbs/scbs;
 	int ss = (sratio < 1.0 ? 6 : 2);
 
-	QString sizeRatio = QString("%1 (%2 %4 / %3 %4)").arg(QString::number(sratio, 'f', ss), QString::number(fcbs, 'f', 1), QString::number(scbs, 'f', 1) , km);
+	QString sizeRatio = QString("%1 (%2 %4 / %3 %4)").arg(QString::number(sratio, 'f', ss), QString::number(fcbs, 'f', 1), QString::number(scbs, 'f', 1), km);
 	ui->labelEquatorialRadiiRatioValue->setText(sizeRatio);
 }
 
