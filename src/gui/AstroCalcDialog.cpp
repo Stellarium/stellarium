@@ -6143,6 +6143,7 @@ void AstroCalcDialog::computePlanetaryData()
 
 	const double distanceAu = (posFCB - posSCB).length();
 	const double distanceKm = AU * distanceAu;
+	QString degree = QChar(0x00B0);
 	// TRANSLATORS: Unit of measure for distance - kilometers
 	QString km = qc_("km", "distance");
 	// TRANSLATORS: Unit of measure for distance - millions kilometers
@@ -6174,8 +6175,39 @@ void AstroCalcDialog::computePlanetaryData()
 
 	QString angularDistance = dash;
 	if (firstCelestialBody != currentPlanet && secondCelestialBody != currentPlanet)
-		angularDistance = QString("%1%2 %3' %4\" (%5%2)").arg(d).arg(QChar(0x00B0)).arg(m).arg(s, 0, 'f', 2).arg(dd, 0, 'f', 5);
+		angularDistance = QString("%1%2 %3' %4\" (%5%2)").arg(d).arg(degree).arg(m).arg(s, 0, 'f', 2).arg(dd, 0, 'f', 5);
 	ui->labelAngularDistanceValue->setText(angularDistance);
+
+	// TRANSLATORS: Part of unit of measure for mean motion - degrees per day
+	QString day = qc_("day", "mean motion");
+	// TRANSLATORS: Unit of measure for period - days
+	QString days = qc_("days", "duration");
+	QString synodicPeriod = dash;
+	QString orbitalPeriodsRatio = dash;
+	if (spcb1 > 0.0 && spcb2 > 0.0 && parentFCBName==parentSCBName && firstCelestialBody!="Sun")
+	{
+		double sp = qAbs(1/(1/spcb1 - 1/spcb2));
+		synodicPeriod = QString("%1 %2 (%3 a)").arg(QString::number(sp, 'f', 3), days, QString::number(sp/365.25, 'f', 5));
+
+		double minp = spcb2;
+		if (qAbs(spcb1)<=qAbs(spcb2)) { minp = spcb1; }
+		int a = qRound(qAbs(spcb1/minp)*10);
+		int b = qRound(qAbs(spcb2/minp)*10);
+		int lcm = qAbs(a*b)/StelUtils::gcd(a, b);
+		orbitalPeriodsRatio = QString("%1:%2").arg(lcm/a).arg(lcm/b);
+	}
+	ui->labelSynodicPeriodValue->setText(synodicPeriod);
+	ui->labelOrbitalPeriodsRatioValue->setText(orbitalPeriodsRatio);
+
+	if (spcb1>0. && firstCelestialBody!="Sun")
+		ui->labelMeanMotionFCBValue->setText(QString("%1 %2/%3").arg(QString::number(360./spcb1, 'f', 5), degree, day));
+	else
+		ui->labelMeanMotionFCBValue->setText(dash);
+
+	if (spcb2>0. && secondCelestialBody!="Sun")
+		ui->labelMeanMotionSCBValue->setText(QString("%1 %2/%3").arg(QString::number(360./spcb2, 'f', 5), degree, day));
+	else
+		ui->labelMeanMotionSCBValue->setText(dash);
 
 	// TRANSLATORS: Unit of measure for speed - kilometers per second
 	QString kms = qc_("km/s", "speed");
@@ -6187,22 +6219,6 @@ void AstroCalcDialog::computePlanetaryData()
 	double orbVelSCB = secondCBId->getEclipticVelocity().length();
 	QString orbitalVelocitySCB = orbVelSCB<=0. ? dash : QString("%1 %2").arg(QString::number(orbVelSCB * AU/86400., 'f', 3), kms);
 	ui->labelOrbitalVelocitySCBValue->setText(orbitalVelocitySCB);
-
-	// TRANSLATORS: Unit of measure for period - days
-	QString days = qc_("days", "duration");
-	QString synodicPeriod = dash;
-	bool showSP = true;
-	if (firstCelestialBody == secondCelestialBody || firstCelestialBody == "Sun" || secondCelestialBody == "Sun")
-		showSP = false;
-	if ((firstCBId->getPlanetTypeString()=="moon" && parentFCBName!=secondCelestialBody) || (secondCBId->getPlanetTypeString()=="moon" && parentSCBName!=firstCelestialBody))
-		showSP = false;
-	if (spcb1 > 0.0 && spcb2 > 0.0 && showSP)
-	{
-		double sp = qAbs(1/(1/spcb1 - 1/spcb2));
-		synodicPeriod = QString("%1 %2 (%3 a)").arg(QString::number(sp, 'f', 3), days, QString::number(sp/365.25, 'f', 5));
-	}
-
-	ui->labelSynodicPeriodValue->setText(synodicPeriod);
 
 	double fcbs = 2.0 * AU * firstCBId->getEquatorialRadius();
 	double scbs = 2.0 * AU * secondCBId->getEquatorialRadius();
