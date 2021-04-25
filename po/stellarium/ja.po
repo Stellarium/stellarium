@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-04-10 23:34+0700\n"
+"POT-Creation-Date: 2021-04-24 13:36+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Yasushi Takaoka <lss_ytak@hotmail.com>, 2021\n"
 "Language-Team: Japanese (https://www.transifex.com/stellarium/teams/80998/ja/)\n"
@@ -63,7 +63,7 @@ msgstr "アステリズム(星群)"
 #: src/core/modules/ConstellationMgr.cpp:133 src/core/modules/StarMgr.cpp:467
 #: src/core/modules/GridLinesMgr.cpp:1809
 #: src/core/modules/SpecialMarkersMgr.cpp:263
-#: src/core/modules/LandscapeMgr.cpp:595
+#: src/core/modules/LandscapeMgr.cpp:597
 #: src/core/modules/NomenclatureMgr.cpp:77 src/core/modules/NebulaMgr.cpp:474
 #: src/core/modules/NebulaMgr.cpp:475 src/core/modules/SolarSystem.cpp:295
 #: src/core/modules/MilkyWay.cpp:79 src/core/modules/ZodiacalLight.cpp:87
@@ -312,7 +312,7 @@ msgstr "反向点"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/GridLinesMgr.cpp:1449 src/core/modules/Planet.cpp:598
-#: src/core/modules/Planet.cpp:892 src/gui/AstroCalcDialog.cpp:6218
+#: src/core/modules/Planet.cpp:892 src/gui/AstroCalcDialog.cpp:6213
 #: plugins/Satellites/src/Satellite.cpp:326
 #: plugins/Satellites/src/Satellite.cpp:388
 #: plugins/MeteorShowers/src/MeteorShower.cpp:546
@@ -599,51 +599,51 @@ msgctxt "compass direction"
 msgid "NNW"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:596
+#: src/core/modules/LandscapeMgr.cpp:598
 msgid "Atmosphere"
 msgstr "大気"
 
-#: src/core/modules/LandscapeMgr.cpp:597
+#: src/core/modules/LandscapeMgr.cpp:599
 msgid "Fog"
 msgstr "もや"
 
-#: src/core/modules/LandscapeMgr.cpp:598 src/ui_viewDialog.h:3773
+#: src/core/modules/LandscapeMgr.cpp:600 src/ui_viewDialog.h:3773
 #: src/ui_configurationDialog.h:1791
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:314
 msgid "Cardinal points"
 msgstr "方位"
 
-#: src/core/modules/LandscapeMgr.cpp:599
+#: src/core/modules/LandscapeMgr.cpp:601
 msgid "Ground"
 msgstr "地表"
 
-#: src/core/modules/LandscapeMgr.cpp:600
+#: src/core/modules/LandscapeMgr.cpp:602
 msgid "Landscape illumination"
 msgstr "光害"
 
-#: src/core/modules/LandscapeMgr.cpp:601
+#: src/core/modules/LandscapeMgr.cpp:603
 msgid "Landscape labels"
 msgstr "地名"
 
-#: src/core/modules/LandscapeMgr.cpp:602
+#: src/core/modules/LandscapeMgr.cpp:604
 msgid "Light pollution data from locations database"
 msgstr "位置情報から光害データを取得"
 
-#: src/core/modules/LandscapeMgr.cpp:604
+#: src/core/modules/LandscapeMgr.cpp:606
 msgid "Increase light pollution"
 msgstr "光害を増やす"
 
-#: src/core/modules/LandscapeMgr.cpp:605
+#: src/core/modules/LandscapeMgr.cpp:607
 msgid "Reduce light pollution"
 msgstr "光害を減らす"
 
-#: src/core/modules/LandscapeMgr.cpp:606
+#: src/core/modules/LandscapeMgr.cpp:608
 msgid "Cyclic change in light pollution"
 msgstr "光害のサイクル変化"
 
-#: src/core/modules/LandscapeMgr.cpp:1012 src/scripting/StelScriptMgr.cpp:457
+#: src/core/modules/LandscapeMgr.cpp:1014 src/scripting/StelScriptMgr.cpp:457
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
-#: plugins/Oculars/src/gui/OcularDialog.cpp:593
+#: plugins/Oculars/src/gui/OcularDialog.cpp:586
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:125
 #: plugins/Novae/src/gui/NovaeDialog.cpp:123
@@ -661,38 +661,38 @@ msgid "Author"
 msgstr "作者"
 
 #. TRANSLATORS: Unit of measure for distance - meter
-#: src/core/modules/LandscapeMgr.cpp:1018 src/gui/StelGuiItems.cpp:775
+#: src/core/modules/LandscapeMgr.cpp:1020 src/gui/StelGuiItems.cpp:775
 #: plugins/Satellites/src/Satellite.cpp:418
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1028
 msgctxt "distance"
 msgid "m"
 msgstr "m"
 
-#: src/core/modules/LandscapeMgr.cpp:1021 src/ui_locationDialogGui.h:481
+#: src/core/modules/LandscapeMgr.cpp:1023 src/ui_locationDialogGui.h:481
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:489
 msgid "Location"
 msgstr "観測場所"
 
 #. TRANSLATORS: Unit of measure for pressure - hectopascals
-#: src/core/modules/LandscapeMgr.cpp:1042
+#: src/core/modules/LandscapeMgr.cpp:1044
 msgctxt "pressure"
 msgid "hPa"
 msgstr "hPa"
 
-#: src/core/modules/LandscapeMgr.cpp:1052
+#: src/core/modules/LandscapeMgr.cpp:1054
 msgid "extinction coefficient"
 msgstr "大気減光効果"
 
-#: src/core/modules/LandscapeMgr.cpp:1055
+#: src/core/modules/LandscapeMgr.cpp:1057
 msgid "Atmospheric conditions"
 msgstr "大気の状態"
 
-#: src/core/modules/LandscapeMgr.cpp:1059
+#: src/core/modules/LandscapeMgr.cpp:1061
 msgid "Light pollution"
 msgstr "光害"
 
-#: src/core/modules/LandscapeMgr.cpp:1059
+#: src/core/modules/LandscapeMgr.cpp:1061
 msgid "by Bortle scale"
 msgstr "ボートル・スケールによる"
 
@@ -742,7 +742,7 @@ msgstr "直径"
 #: src/core/modules/NomenclatureItem.cpp:220 src/core/modules/Planet.cpp:554
 #: src/core/modules/Planet.cpp:579 src/core/modules/Planet.cpp:677
 #: src/core/modules/Comet.cpp:164 src/core/modules/Comet.cpp:174
-#: src/gui/StelGuiItems.cpp:805 src/gui/AstroCalcDialog.cpp:6147
+#: src/gui/StelGuiItems.cpp:805 src/gui/AstroCalcDialog.cpp:6148
 #: plugins/Satellites/src/Satellite.cpp:322
 #: plugins/Satellites/src/Satellite.cpp:381
 msgctxt "distance"
@@ -1990,25 +1990,25 @@ msgstr "星雲・星団(DSO)"
 msgid "Toggle DSO type filter"
 msgstr "表示する星雲・星団をチェック"
 
-#: src/core/modules/NebulaMgr.cpp:1377 src/gui/StelDialog.cpp:324
+#: src/core/modules/NebulaMgr.cpp:1379 src/gui/StelDialog.cpp:324
 #: src/StelMainView.cpp:926
 msgid "Attention!"
 msgstr "注意してください！"
 
-#: src/core/modules/NebulaMgr.cpp:1377
+#: src/core/modules/NebulaMgr.cpp:1379
 msgid "DSO catalog version mismatch"
 msgstr "星雲星団カタログのバージョンが合っていません"
 
-#: src/core/modules/NebulaMgr.cpp:1377 src/core/SimbadSearcher.cpp:175
+#: src/core/modules/NebulaMgr.cpp:1379 src/core/SimbadSearcher.cpp:175
 #: src/core/SimbadSearcher.cpp:177
 msgid "Found"
 msgstr "見つかりました"
 
-#: src/core/modules/NebulaMgr.cpp:1377
+#: src/core/modules/NebulaMgr.cpp:1379
 msgid "Expected"
 msgstr ""
 
-#: src/core/modules/NebulaMgr.cpp:1377
+#: src/core/modules/NebulaMgr.cpp:1379
 msgid "See Logfile for instructions."
 msgstr "手順はログファイルを参照してください。"
 
@@ -2051,8 +2051,8 @@ msgstr "移動方向"
 #: src/core/modules/Planet.cpp:552 src/gui/AstroCalcDialog.cpp:870
 #: src/gui/AstroCalcDialog.cpp:1140 src/gui/AstroCalcDialog.cpp:1524
 #: src/gui/AstroCalcDialog.cpp:1572 src/gui/AstroCalcDialog.cpp:3095
-#: src/gui/AstroCalcDialog.cpp:6191 src/gui/AstroCalcDialog.cpp:6256
-#: src/gui/AstroCalcDialog.cpp:6398 plugins/Exoplanets/src/Exoplanet.cpp:322
+#: src/gui/AstroCalcDialog.cpp:6173 src/gui/AstroCalcDialog.cpp:6235
+#: src/gui/AstroCalcDialog.cpp:6377 plugins/Exoplanets/src/Exoplanet.cpp:322
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
 msgctxt "distance, astronomical unit"
 msgid "AU"
@@ -2062,7 +2062,7 @@ msgstr "天文単位(AU)"
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #. TRANSLATORS: Unit of measure for distance - millions kilometers
 #: src/core/modules/Planet.cpp:568 src/core/modules/Planet.cpp:586
-#: src/core/modules/Comet.cpp:166 src/gui/AstroCalcDialog.cpp:6149
+#: src/core/modules/Comet.cpp:166 src/gui/AstroCalcDialog.cpp:6150
 msgctxt "distance"
 msgid "M km"
 msgstr "x 100万km"
@@ -2116,14 +2116,14 @@ msgstr "位相角"
 msgid "Illuminated"
 msgstr "照度"
 
-#: src/core/modules/Planet.cpp:738 src/gui/AstroCalcDialog.cpp:6257
-#: src/gui/AstroCalcDialog.cpp:6401 src/gui/AstroCalcDialog.cpp:6418
+#: src/core/modules/Planet.cpp:738 src/gui/AstroCalcDialog.cpp:6236
+#: src/gui/AstroCalcDialog.cpp:6380 src/gui/AstroCalcDialog.cpp:6397
 msgid "Angular distance"
 msgstr "角距離"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:756 src/core/modules/Planet.cpp:900
-#: src/core/modules/StarWrapper.cpp:306 src/gui/AstroCalcDialog.cpp:6229
+#: src/core/modules/StarWrapper.cpp:306 src/gui/AstroCalcDialog.cpp:6184
 msgctxt "duration"
 msgid "days"
 msgstr "日"
@@ -3880,22 +3880,22 @@ msgstr "11月の"
 msgid "Select screenshot directory"
 msgstr "スクリーンショットを保存するディレクトリを選択"
 
-#: src/gui/ConfigurationDialog.cpp:1140
+#: src/gui/ConfigurationDialog.cpp:1142
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "起動時の視野角: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:1148
+#: src/gui/ConfigurationDialog.cpp:1150
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "起動時の方位角/高度: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:1217
+#: src/gui/ConfigurationDialog.cpp:1219
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:136
 msgid "Acknowledgments"
 msgstr "謝辞"
 
-#: src/gui/ConfigurationDialog.cpp:1219
+#: src/gui/ConfigurationDialog.cpp:1221
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:678
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:266
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:157
@@ -3904,13 +3904,13 @@ msgstr "謝辞"
 msgid "Authors"
 msgstr "作者"
 
-#: src/gui/ConfigurationDialog.cpp:1220
+#: src/gui/ConfigurationDialog.cpp:1222
 msgid "Contact"
 msgstr "連絡先"
 
-#: src/gui/ConfigurationDialog.cpp:1222 src/scripting/StelScriptMgr.cpp:467
+#: src/gui/ConfigurationDialog.cpp:1224 src/scripting/StelScriptMgr.cpp:467
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:98
-#: plugins/Oculars/src/gui/OcularDialog.cpp:591
+#: plugins/Oculars/src/gui/OcularDialog.cpp:584
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:676
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:264
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:238
@@ -3931,9 +3931,9 @@ msgstr "連絡先"
 msgid "Version"
 msgstr "バージョン"
 
-#: src/gui/ConfigurationDialog.cpp:1223 src/scripting/StelScriptMgr.cpp:462
+#: src/gui/ConfigurationDialog.cpp:1225 src/scripting/StelScriptMgr.cpp:462
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
-#: plugins/Oculars/src/gui/OcularDialog.cpp:592
+#: plugins/Oculars/src/gui/OcularDialog.cpp:585
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:677
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:239
@@ -3954,20 +3954,20 @@ msgstr "バージョン"
 msgid "License"
 msgstr "ライセンス"
 
-#: src/gui/ConfigurationDialog.cpp:1227
+#: src/gui/ConfigurationDialog.cpp:1229
 msgctxt "license"
 msgid "unknown"
 msgstr "不明"
 
-#: src/gui/ConfigurationDialog.cpp:1335
+#: src/gui/ConfigurationDialog.cpp:1337
 msgid "Running script: "
 msgstr "実行中のスクリプト: "
 
-#: src/gui/ConfigurationDialog.cpp:1342
+#: src/gui/ConfigurationDialog.cpp:1344
 msgid "Running script: [none]"
 msgstr "実行中のスクリプト: [なし]"
 
-#: src/gui/ConfigurationDialog.cpp:1407
+#: src/gui/ConfigurationDialog.cpp:1409
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -3975,16 +3975,16 @@ msgstr ""
 "新しい星表のダウンロードが終了しました！\n"
 "表示するには Stellarium を再起動してください。"
 
-#: src/gui/ConfigurationDialog.cpp:1411
+#: src/gui/ConfigurationDialog.cpp:1413
 msgid "All available star catalogs have been installed."
 msgstr "利用可能なすべての星表がインストールされました。"
 
-#: src/gui/ConfigurationDialog.cpp:1416
+#: src/gui/ConfigurationDialog.cpp:1418
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "カタログの取得 %1 / %2"
 
-#: src/gui/ConfigurationDialog.cpp:1423
+#: src/gui/ConfigurationDialog.cpp:1425
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -3993,7 +3993,7 @@ msgstr ""
 "ダウンロード中 %1...\n"
 "(このウィンドウを閉じても構いません)"
 
-#: src/gui/ConfigurationDialog.cpp:1430
+#: src/gui/ConfigurationDialog.cpp:1432
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -4004,7 +4004,7 @@ msgstr ""
 "星の数: %2 Million\n"
 "等級: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1476 src/gui/ConfigurationDialog.cpp:1513
+#: src/gui/ConfigurationDialog.cpp:1478 src/gui/ConfigurationDialog.cpp:1515
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -4013,11 +4013,11 @@ msgstr ""
 "ダウンロード中にエラーが発生しました %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1566
+#: src/gui/ConfigurationDialog.cpp:1568
 msgid "Verifying file integrity..."
 msgstr "ファイルの整合性を確認しています..."
 
-#: src/gui/ConfigurationDialog.cpp:1570
+#: src/gui/ConfigurationDialog.cpp:1572
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -4026,207 +4026,207 @@ msgstr ""
 "ダウンロード中にエラーが発生しました %1:\n"
 "ファイルが破損しています。"
 
-#: src/gui/ConfigurationDialog.cpp:1619 src/gui/ConfigurationDialog.cpp:1628
+#: src/gui/ConfigurationDialog.cpp:1621 src/gui/ConfigurationDialog.cpp:1630
 msgid "Available"
 msgstr "利用可能"
 
-#: src/gui/ConfigurationDialog.cpp:1621 src/gui/ConfigurationDialog.cpp:1630
+#: src/gui/ConfigurationDialog.cpp:1623 src/gui/ConfigurationDialog.cpp:1632
 msgid "Not Available"
 msgstr "利用不可"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1701
+#: src/gui/ConfigurationDialog.cpp:1703
 msgid "Algorithm of"
 msgstr "アルゴリズム選択"
 
-#: src/gui/ConfigurationDialog.cpp:1714
+#: src/gui/ConfigurationDialog.cpp:1716
 msgid "Without correction"
 msgstr "補正なし"
 
-#: src/gui/ConfigurationDialog.cpp:1715
+#: src/gui/ConfigurationDialog.cpp:1717
 msgid "Schoch (1931)"
 msgstr "ショック（1931）"
 
-#: src/gui/ConfigurationDialog.cpp:1716
+#: src/gui/ConfigurationDialog.cpp:1718
 msgid "Clemence (1948)"
 msgstr "クレメンス（1948）"
 
-#: src/gui/ConfigurationDialog.cpp:1717
+#: src/gui/ConfigurationDialog.cpp:1719
 msgid "IAU (1952)"
 msgstr "国際天文学連合（1952）"
 
-#: src/gui/ConfigurationDialog.cpp:1718
+#: src/gui/ConfigurationDialog.cpp:1720
 msgid "Astronomical Ephemeris (1960)"
 msgstr "天体暦（1960）"
 
-#: src/gui/ConfigurationDialog.cpp:1719
+#: src/gui/ConfigurationDialog.cpp:1721
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "タッカーマン（1962, 1964）、ゴールドスタイン（1973）"
 
-#: src/gui/ConfigurationDialog.cpp:1720
+#: src/gui/ConfigurationDialog.cpp:1722
 msgid "Muller & Stephenson (1975)"
 msgstr "ムラー＆スティーブンソン（1975）"
 
-#: src/gui/ConfigurationDialog.cpp:1721
+#: src/gui/ConfigurationDialog.cpp:1723
 msgid "Stephenson (1978)"
 msgstr "スティーブンソン（1978）"
 
-#: src/gui/ConfigurationDialog.cpp:1722
+#: src/gui/ConfigurationDialog.cpp:1724
 msgid "Schmadel & Zech (1979)"
 msgstr "シュマーデル、ツェッヒ（1979）"
 
-#: src/gui/ConfigurationDialog.cpp:1723
+#: src/gui/ConfigurationDialog.cpp:1725
 msgid "Schmadel & Zech (1988)"
 msgstr "シュマーデル、ツェッヒ（1988）"
 
-#: src/gui/ConfigurationDialog.cpp:1724
+#: src/gui/ConfigurationDialog.cpp:1726
 msgid "Morrison & Stephenson (1982)"
 msgstr "モリソン、スティーブンソン（1982）"
 
-#: src/gui/ConfigurationDialog.cpp:1725
+#: src/gui/ConfigurationDialog.cpp:1727
 msgid "Stephenson & Morrison (1984)"
 msgstr "スティーブンソン、モリソン（1984）"
 
-#: src/gui/ConfigurationDialog.cpp:1726
+#: src/gui/ConfigurationDialog.cpp:1728
 msgid "Stephenson & Houlden (1986)"
 msgstr "スティーブンソン、ホールデン（1986）"
 
-#: src/gui/ConfigurationDialog.cpp:1727
+#: src/gui/ConfigurationDialog.cpp:1729
 msgid "Espenak (1987, 1989)"
 msgstr "エスペナック（1987、1989）"
 
-#: src/gui/ConfigurationDialog.cpp:1728
+#: src/gui/ConfigurationDialog.cpp:1730
 msgid "Borkowski (1988)"
 msgstr "ボルコウスキー（1988）"
 
-#: src/gui/ConfigurationDialog.cpp:1729
+#: src/gui/ConfigurationDialog.cpp:1731
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "シャプロントトゥーズ、シャプロント（1991）"
 
-#: src/gui/ConfigurationDialog.cpp:1730
+#: src/gui/ConfigurationDialog.cpp:1732
 msgid "Stephenson & Morrison (1995)"
 msgstr "スティーブンソン、モリソン（1995）"
 
-#: src/gui/ConfigurationDialog.cpp:1731
+#: src/gui/ConfigurationDialog.cpp:1733
 msgid "Stephenson (1997)"
 msgstr "スティーブンソン（1997）"
 
-#: src/gui/ConfigurationDialog.cpp:1733
+#: src/gui/ConfigurationDialog.cpp:1735
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "メーウス（1998）（シャプロント、シャプロントトゥーズ、フランコウ （1997））"
 
-#: src/gui/ConfigurationDialog.cpp:1734
+#: src/gui/ConfigurationDialog.cpp:1736
 msgid "JPL Horizons"
 msgstr "JPL ホライズンズ"
 
-#: src/gui/ConfigurationDialog.cpp:1735
+#: src/gui/ConfigurationDialog.cpp:1737
 msgid "Meeus & Simons (2000)"
 msgstr "メーウス、サイモンズ（2000）"
 
-#: src/gui/ConfigurationDialog.cpp:1736
+#: src/gui/ConfigurationDialog.cpp:1738
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "モリソン、スティーブンソン（2004, 2005）"
 
-#: src/gui/ConfigurationDialog.cpp:1737
+#: src/gui/ConfigurationDialog.cpp:1739
 msgid "Stephenson, Morrison & Hohenkerk (2016)"
 msgstr "スティーブンソン、モリソン、ホーエンケルク (2016)"
 
-#: src/gui/ConfigurationDialog.cpp:1739
+#: src/gui/ConfigurationDialog.cpp:1741
 msgid "Espenak & Meeus (2006)"
 msgstr "エスペナック、メウス (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1742
+#: src/gui/ConfigurationDialog.cpp:1744
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr "エスペナック、メウス (2006) 特別な月の加速無し"
 
-#: src/gui/ConfigurationDialog.cpp:1744
+#: src/gui/ConfigurationDialog.cpp:1746
 msgid "Reijs (2006)"
 msgstr "レイス (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1745
+#: src/gui/ConfigurationDialog.cpp:1747
 msgid "Banjevic (2006)"
 msgstr "バンジェビッチ (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1746
+#: src/gui/ConfigurationDialog.cpp:1748
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "モンテンブルック、プフレガー (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1747
+#: src/gui/ConfigurationDialog.cpp:1749
 msgid "Reingold & Dershowitz (2002, 2007, 2018)"
 msgstr "レインゴールド、デルショヴィッツ (2002, 2007, 2018)"
 
-#: src/gui/ConfigurationDialog.cpp:1748
+#: src/gui/ConfigurationDialog.cpp:1750
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "イスラム、サディク、クレシ (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1749
+#: src/gui/ConfigurationDialog.cpp:1751
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "ハリド、スルタナ、ザイディ (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1750
+#: src/gui/ConfigurationDialog.cpp:1752
 msgid "Henriksson (2017)"
 msgstr "ヘンリクソン (2017)"
 
-#: src/gui/ConfigurationDialog.cpp:1751
+#: src/gui/ConfigurationDialog.cpp:1753
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "ユーザー定義の%1T計算式"
 
-#: src/gui/ConfigurationDialog.cpp:1799 src/gui/ConfigurationDialog.cpp:1836
+#: src/gui/ConfigurationDialog.cpp:1801 src/gui/ConfigurationDialog.cpp:1838
 #: src/gui/StelGuiItems.cpp:691 src/gui/LocationDialog.cpp:492
 msgid "System default"
 msgstr "システムのデフォルト"
 
-#: src/gui/ConfigurationDialog.cpp:1800
+#: src/gui/ConfigurationDialog.cpp:1802
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "年-月-日 (ISO 8601)"
 
-#: src/gui/ConfigurationDialog.cpp:1801
+#: src/gui/ConfigurationDialog.cpp:1803
 msgid "dd-mm-yyyy"
 msgstr "日-月-年"
 
-#: src/gui/ConfigurationDialog.cpp:1802
+#: src/gui/ConfigurationDialog.cpp:1804
 msgid "mm-dd-yyyy"
 msgstr "月-日-年"
 
-#: src/gui/ConfigurationDialog.cpp:1803
+#: src/gui/ConfigurationDialog.cpp:1805
 msgid "ww, yyyy-mm-dd"
 msgstr "曜日, 年-月-日"
 
-#: src/gui/ConfigurationDialog.cpp:1804
+#: src/gui/ConfigurationDialog.cpp:1806
 msgid "ww, dd-mm-yyyy"
 msgstr "曜日, 日-月-年"
 
-#: src/gui/ConfigurationDialog.cpp:1805
+#: src/gui/ConfigurationDialog.cpp:1807
 msgid "ww, mm-dd-yyyy"
 msgstr "曜日, 月-日-年"
 
-#: src/gui/ConfigurationDialog.cpp:1837
+#: src/gui/ConfigurationDialog.cpp:1839
 msgid "12-hour format"
 msgstr "12時間表記"
 
-#: src/gui/ConfigurationDialog.cpp:1838
+#: src/gui/ConfigurationDialog.cpp:1840
 msgid "24-hour format"
 msgstr "24時間表記"
 
-#: src/gui/ConfigurationDialog.cpp:1864
+#: src/gui/ConfigurationDialog.cpp:1866
 msgctxt "disabled"
 msgid "None"
 msgstr "なし"
 
-#: src/gui/ConfigurationDialog.cpp:1865
+#: src/gui/ConfigurationDialog.cpp:1867
 msgid "5/6/5 bits"
 msgstr "5/6/5ビット"
 
-#: src/gui/ConfigurationDialog.cpp:1866
+#: src/gui/ConfigurationDialog.cpp:1868
 msgid "6/6/6 bits"
 msgstr "6/6/6ビット"
 
-#: src/gui/ConfigurationDialog.cpp:1867
+#: src/gui/ConfigurationDialog.cpp:1869
 msgid "8/8/8 bits"
 msgstr "8/8/8ビット"
 
-#: src/gui/ConfigurationDialog.cpp:1868
+#: src/gui/ConfigurationDialog.cpp:1870
 msgid "10/10/10 bits"
 msgstr "10/10/10ビット"
 
@@ -4484,7 +4484,7 @@ msgstr "テスター: %1"
 
 #: src/gui/HelpDialog.cpp:462
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
-#: plugins/Oculars/src/gui/OcularDialog.cpp:594
+#: plugins/Oculars/src/gui/OcularDialog.cpp:587
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:680
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:271
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:241
@@ -5084,27 +5084,27 @@ msgstr "スクリプトをセーブ"
 msgid "Are you sure you want to clear script?"
 msgstr "スクリプトを消してもよろしいですか？"
 
-#: src/gui/ScriptConsole.cpp:357
+#: src/gui/ScriptConsole.cpp:356
 msgid "Select Script Include Directory"
 msgstr "ディレクトリの選択"
 
 #. TRANSLATORS: The first letter of word "Row"
-#: src/gui/ScriptConsole.cpp:389
+#: src/gui/ScriptConsole.cpp:388
 msgctxt "text cursor"
 msgid "R"
 msgstr "行(R)"
 
 #. TRANSLATORS: The first letter of word "Column"
-#: src/gui/ScriptConsole.cpp:391
+#: src/gui/ScriptConsole.cpp:390
 msgctxt "text cursor"
 msgid "C"
 msgstr "列(C)"
 
-#: src/gui/ScriptConsole.cpp:407
+#: src/gui/ScriptConsole.cpp:406
 msgid "Stellarium Script"
 msgstr "ステラリウムのスクリプト"
 
-#: src/gui/ScriptConsole.cpp:409
+#: src/gui/ScriptConsole.cpp:408
 msgid "Include File"
 msgstr "ファイルを含む"
 
@@ -5266,7 +5266,7 @@ msgid "Local Time"
 msgstr "地方時"
 
 #: src/gui/AstroCalcDialog.cpp:752 src/gui/AstroCalcDialog.cpp:2690
-#: src/gui/AstroCalcDialog.cpp:3440 src/gui/AstroCalcDialog.cpp:6529
+#: src/gui/AstroCalcDialog.cpp:3440 src/gui/AstroCalcDialog.cpp:6508
 #: src/gui/BookmarksDialog.cpp:180
 msgid "Unnamed star"
 msgstr "名前の付いていない星"
@@ -5441,7 +5441,7 @@ msgstr "位相"
 msgid "Save calculated ephemeris as..."
 msgstr "計算した天体暦の保存..."
 
-#: src/gui/AstroCalcDialog.cpp:1838 src/ui_astroCalcDialog.h:1623
+#: src/gui/AstroCalcDialog.cpp:1838 src/ui_astroCalcDialog.h:1636
 msgid "Ephemeris"
 msgstr "天体暦"
 
@@ -5457,7 +5457,7 @@ msgstr "月の離角"
 msgid "Save calculated transits as..."
 msgstr "計算した正中の保存..."
 
-#: src/gui/AstroCalcDialog.cpp:2104 src/ui_astroCalcDialog.h:1625
+#: src/gui/AstroCalcDialog.cpp:2104 src/ui_astroCalcDialog.h:1638
 msgid "Transits"
 msgstr "正中"
 
@@ -5904,7 +5904,7 @@ msgid "Save calculated phenomena as..."
 msgstr "計算結果を保存..."
 
 #: src/gui/AstroCalcDialog.cpp:3950 src/gui/AstroCalcDialog.cpp:3952
-#: src/ui_astroCalcDialog.h:1627
+#: src/ui_astroCalcDialog.h:1640
 msgid "Phenomena"
 msgstr "天文現象"
 
@@ -6152,19 +6152,19 @@ msgstr ""
 msgid "Ang. Size"
 msgstr "角直径"
 
-#: src/gui/AstroCalcDialog.cpp:5385 src/ui_astroCalcDialog.h:1816
+#: src/gui/AstroCalcDialog.cpp:5385 src/ui_astroCalcDialog.h:1829
 msgid "Limit angular size:"
 msgstr "角直径の限定"
 
-#: src/gui/AstroCalcDialog.cpp:5386 src/ui_astroCalcDialog.h:1814
+#: src/gui/AstroCalcDialog.cpp:5386 src/ui_astroCalcDialog.h:1827
 msgid "Set limits for angular size for visible celestial objects"
 msgstr "目視可能な天体の角直径を限定"
 
-#: src/gui/AstroCalcDialog.cpp:5387 src/ui_astroCalcDialog.h:1818
+#: src/gui/AstroCalcDialog.cpp:5387 src/ui_astroCalcDialog.h:1831
 msgid "Minimal angular size for visible celestial objects"
 msgstr "目視可能な天体の最低角直径"
 
-#: src/gui/AstroCalcDialog.cpp:5388 src/ui_astroCalcDialog.h:1821
+#: src/gui/AstroCalcDialog.cpp:5388 src/ui_astroCalcDialog.h:1834
 msgid "Maximum angular size for visible celestial objects"
 msgstr "目視可能な天体の最大角直径"
 
@@ -6192,28 +6192,30 @@ msgstr ""
 msgid "Save list of objects as..."
 msgstr "天体リストの保存..."
 
-#: src/gui/AstroCalcDialog.cpp:6059 src/ui_astroCalcDialog.h:1633
+#: src/gui/AstroCalcDialog.cpp:6059 src/ui_astroCalcDialog.h:1646
 msgid "What's Up Tonight"
 msgstr "今夜の天文現象"
 
-#: src/gui/AstroCalcDialog.cpp:6205
-msgid "spin-orbit resonance"
-msgstr "自転と公転の共鳴"
+#. TRANSLATORS: Part of unit of measure for mean motion - degrees per day
+#: src/gui/AstroCalcDialog.cpp:6182
+msgctxt "mean motion"
+msgid "day"
+msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:6255 src/gui/AstroCalcDialog.cpp:6417
+#: src/gui/AstroCalcDialog.cpp:6234 src/gui/AstroCalcDialog.cpp:6396
 msgid "Days from today"
 msgstr "日後"
 
-#: src/gui/AstroCalcDialog.cpp:6256 src/gui/AstroCalcDialog.cpp:6398
+#: src/gui/AstroCalcDialog.cpp:6235 src/gui/AstroCalcDialog.cpp:6377
 msgid "Linear distance"
 msgstr "直線距離"
 
-#: src/gui/AstroCalcDialog.cpp:6398 src/gui/AstroCalcDialog.cpp:6401
+#: src/gui/AstroCalcDialog.cpp:6377 src/gui/AstroCalcDialog.cpp:6380
 #: plugins/Calendars/src/ui_calendarsDialog.h:832
 msgid "Day"
 msgstr "日"
 
-#: src/gui/AstroCalcDialog.cpp:6459
+#: src/gui/AstroCalcDialog.cpp:6438
 msgid "Change of angular distance between the Moon and selected object"
 msgstr "選択天体と月の角距離変化"
 
@@ -9602,7 +9604,7 @@ msgstr "ヘルプ"
 msgid "About"
 msgstr "このソフトウェアについて"
 
-#: src/ui_helpDialogGui.h:248 src/ui_scriptConsole.h:418
+#: src/ui_helpDialogGui.h:248 src/ui_scriptConsole.h:413
 msgid "Log"
 msgstr "ログ"
 
@@ -9875,7 +9877,7 @@ msgstr "必要なプラグインを先に起動して下さい"
 msgid "names in English"
 msgstr "英語で検索"
 
-#: src/ui_searchDialogGui.h:933 src/ui_astroCalcDialog.h:1811
+#: src/ui_searchDialogGui.h:933 src/ui_astroCalcDialog.h:1824
 #: plugins/Satellites/src/ui_satellitesDialog.h:994
 msgid "Search in list..."
 msgstr "ここに入力して一覧から検索..."
@@ -10019,7 +10021,7 @@ msgstr "彩度は0.00から1.00(デフォルト)までの値。"
 msgid "Light pollution:"
 msgstr "光害:"
 
-#: src/ui_viewDialog.h:3146 src/ui_astroCalcDialog.h:1729
+#: src/ui_viewDialog.h:3146 src/ui_astroCalcDialog.h:1742
 msgid "or"
 msgstr "又"
 
@@ -11816,7 +11818,7 @@ msgstr "色の反転"
 msgid "Custom size"
 msgstr "サイズ変更"
 
-#: src/ui_configurationDialog.h:1969 src/ui_scriptConsole.h:421
+#: src/ui_configurationDialog.h:1969 src/ui_scriptConsole.h:416
 msgid "Close window when script runs"
 msgstr "スクリプトの実行時にウィンドウを閉じる"
 
@@ -11969,55 +11971,55 @@ msgstr ""
 msgid "View recent GRS measurements"
 msgstr ""
 
-#: src/ui_scriptConsole.h:385
+#: src/ui_scriptConsole.h:380
 msgid "Script console"
 msgstr "スクリプトコンソール"
 
-#: src/ui_scriptConsole.h:388
+#: src/ui_scriptConsole.h:383
 msgid "load script from file"
 msgstr "ファイルからスクリプトを読み込む"
 
-#: src/ui_scriptConsole.h:392
+#: src/ui_scriptConsole.h:387
 msgid "save script to file"
 msgstr "ファイルにスクリプトを保存する"
 
-#: src/ui_scriptConsole.h:396
+#: src/ui_scriptConsole.h:391
 msgid "clear"
 msgstr "クリア"
 
-#: src/ui_scriptConsole.h:400
+#: src/ui_scriptConsole.h:395
 msgid "pre-process script using SSC preprocessor"
 msgstr "SSCプリプロセッサを使用した前処理のスクリプト"
 
-#: src/ui_scriptConsole.h:405
+#: src/ui_scriptConsole.h:400
 msgid "Execute:"
 msgstr "実行:"
 
-#: src/ui_scriptConsole.h:410
+#: src/ui_scriptConsole.h:405
 msgid "run script"
 msgstr "スクリプトを実行する"
 
-#: src/ui_scriptConsole.h:414
+#: src/ui_scriptConsole.h:409
 msgid "stop script"
 msgstr "スクリプトを停止する"
 
-#: src/ui_scriptConsole.h:417
+#: src/ui_scriptConsole.h:412
 msgid "Script"
 msgstr "スクリプト"
 
-#: src/ui_scriptConsole.h:419
+#: src/ui_scriptConsole.h:414
 msgid "Output"
 msgstr "出力"
 
-#: src/ui_scriptConsole.h:420
+#: src/ui_scriptConsole.h:415
 msgid "Load scripts from the User Directory by default"
 msgstr "デフォルトでユーザー・ディレクトリからスクリプトを読み込む"
 
-#: src/ui_scriptConsole.h:422
+#: src/ui_scriptConsole.h:417
 msgid "Clear output before script runs"
 msgstr "スクリプトの出力をクリア"
 
-#: src/ui_scriptConsole.h:423 plugins/Satellites/src/ui_satellitesDialog.h:993
+#: src/ui_scriptConsole.h:418 plugins/Satellites/src/ui_satellitesDialog.h:993
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:244
 #: plugins/NavStars/src/ui_navStarsWindow.h:286
 #: plugins/Novae/src/ui_novaeDialog.h:247
@@ -12028,430 +12030,434 @@ msgstr "スクリプトの出力をクリア"
 msgid "Settings"
 msgstr "設定"
 
-#: src/ui_scriptConsole.h:425
+#: src/ui_scriptConsole.h:420
 msgid "Cursor position"
 msgstr "カーソル位置"
 
-#: src/ui_scriptConsole.h:427
+#: src/ui_scriptConsole.h:422
 msgid "R:0 C:0"
 msgstr ""
 
-#: src/ui_scriptConsole.h:428
+#: src/ui_scriptConsole.h:423
 msgid "Include dir:"
 msgstr "ディレクトリ:"
 
-#: src/ui_scriptConsole.h:429
+#: src/ui_scriptConsole.h:424
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:344
 msgid "..."
 msgstr "..."
 
-#: src/ui_astroCalcDialog.h:1612
+#: src/ui_astroCalcDialog.h:1625
 msgid "Astronomical calculations"
 msgstr "天文計算"
 
-#: src/ui_astroCalcDialog.h:1618
+#: src/ui_astroCalcDialog.h:1631
 msgid "Positions"
 msgstr "位置"
 
-#: src/ui_astroCalcDialog.h:1620
+#: src/ui_astroCalcDialog.h:1633
 msgid "Celestial bodies above horizon"
 msgstr "地平線上にある天体"
 
-#: src/ui_astroCalcDialog.h:1629 src/ui_astroCalcDialog.h:1800
-#: src/ui_astroCalcDialog.h:1837
+#: src/ui_astroCalcDialog.h:1642 src/ui_astroCalcDialog.h:1813
+#: src/ui_astroCalcDialog.h:1850
 msgid "Graphs"
 msgstr "グラフ"
 
-#: src/ui_astroCalcDialog.h:1631
+#: src/ui_astroCalcDialog.h:1644
 msgctxt "What's Up Tonight"
 msgid "WUT"
 msgstr "今夜の現象"
 
-#: src/ui_astroCalcDialog.h:1636
+#: src/ui_astroCalcDialog.h:1649
 msgctxt "Planetary Calculator"
 msgid "PC"
 msgstr "惑星計算"
 
-#: src/ui_astroCalcDialog.h:1638
+#: src/ui_astroCalcDialog.h:1651
 msgid "Planetary Calculator"
 msgstr "惑星計算"
 
-#: src/ui_astroCalcDialog.h:1646
+#: src/ui_astroCalcDialog.h:1659
 msgid "Save positions"
 msgstr "位置の保存"
 
-#: src/ui_astroCalcDialog.h:1647
+#: src/ui_astroCalcDialog.h:1660
 msgid "Update positions"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1649 src/ui_astroCalcDialog.h:1807
+#: src/ui_astroCalcDialog.h:1662 src/ui_astroCalcDialog.h:1820
 msgid "Show objects brighter than magnitude"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1651 src/ui_astroCalcDialog.h:1809
+#: src/ui_astroCalcDialog.h:1664 src/ui_astroCalcDialog.h:1822
 msgid "Up to mag.:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1653 src/ui_astroCalcDialog.h:1680
+#: src/ui_astroCalcDialog.h:1666 src/ui_astroCalcDialog.h:1693
 msgid "Use horizontal coordinates"
 msgstr "地平座標を使用する"
 
-#: src/ui_astroCalcDialog.h:1655 src/ui_astroCalcDialog.h:1682
+#: src/ui_astroCalcDialog.h:1668 src/ui_astroCalcDialog.h:1695
 msgctxt "horizonal coordinates"
 msgid "H.C."
 msgstr "地平座標"
 
-#: src/ui_astroCalcDialog.h:1657
+#: src/ui_astroCalcDialog.h:1670
 msgid "List of objects above horizon"
 msgstr "地平線上にある天体の一覧"
 
-#: src/ui_astroCalcDialog.h:1659
+#: src/ui_astroCalcDialog.h:1672
 msgid "Show:"
 msgstr "表示:"
 
-#: src/ui_astroCalcDialog.h:1661
+#: src/ui_astroCalcDialog.h:1674
 msgid "Show connecting line between the ephemeris markers"
 msgstr "暦のマーカー同士を線で結ぶ"
 
-#: src/ui_astroCalcDialog.h:1663
+#: src/ui_astroCalcDialog.h:1676
 msgctxt "show line"
 msgid "line"
 msgstr "線"
 
-#: src/ui_astroCalcDialog.h:1665
+#: src/ui_astroCalcDialog.h:1678
 msgid "Show markers of positions of the current celestial body on the sky"
 msgstr "選択天体の天球上の位置をマーカーで表示する"
 
-#: src/ui_astroCalcDialog.h:1667
+#: src/ui_astroCalcDialog.h:1680
 msgid "markers"
 msgstr "マーカー"
 
-#: src/ui_astroCalcDialog.h:1669
+#: src/ui_astroCalcDialog.h:1682
 msgid "Show dates of positions of current celestial body near markers"
 msgstr "選択天体の天球上の位置マーカー近くに日付を表示する"
 
-#: src/ui_astroCalcDialog.h:1671
+#: src/ui_astroCalcDialog.h:1684
 msgid "dates"
 msgstr "日付"
 
-#: src/ui_astroCalcDialog.h:1673
+#: src/ui_astroCalcDialog.h:1686
 msgid "Show magnitudes of current celestial body"
 msgstr "選択天体の等級を表示する"
 
-#: src/ui_astroCalcDialog.h:1675
+#: src/ui_astroCalcDialog.h:1688
 msgid "magnitudes"
 msgstr "等級"
 
-#: src/ui_astroCalcDialog.h:1677 src/ui_astroCalcExtraEphemerisDialog.h:191
+#: src/ui_astroCalcDialog.h:1690 src/ui_astroCalcExtraEphemerisDialog.h:191
 msgid "Extra options for ephemeris visualization"
 msgstr "暦表示の追加オプション"
 
-#: src/ui_astroCalcDialog.h:1684
+#: src/ui_astroCalcDialog.h:1697
 msgid "Color of ephemeris marker for first celestial body"
 msgstr "一番目の天体暦マーカーの色"
 
-#: src/ui_astroCalcDialog.h:1687
+#: src/ui_astroCalcDialog.h:1700
 msgid "Color of ephemeris marker for second celestial body"
 msgstr "二番目の天体暦マーカーの色"
 
-#: src/ui_astroCalcDialog.h:1690
+#: src/ui_astroCalcDialog.h:1703
 msgid "Color of selected ephemeris marker"
 msgstr "選択中の天体暦マーカーの色"
 
-#: src/ui_astroCalcDialog.h:1693
+#: src/ui_astroCalcDialog.h:1706
 msgid "Color of Mercury's ephemeris marker"
 msgstr "水星の天体暦マーカーの色"
 
-#: src/ui_astroCalcDialog.h:1696
+#: src/ui_astroCalcDialog.h:1709
 msgid "Color of Venus' ephemeris marker"
 msgstr "金星の天体暦マーカーの色"
 
-#: src/ui_astroCalcDialog.h:1700
+#: src/ui_astroCalcDialog.h:1713
 msgid "Color of Mars' ephemeris marker"
 msgstr "火星の天体暦マーカーの色"
 
-#: src/ui_astroCalcDialog.h:1703
+#: src/ui_astroCalcDialog.h:1716
 msgid "Color of Jupiter's ephemeris marker"
 msgstr "木星の天体暦マーカーの色"
 
-#: src/ui_astroCalcDialog.h:1706
+#: src/ui_astroCalcDialog.h:1719
 msgid "Color of Saturn's ephemeris marker"
 msgstr "土星の天体暦マーカーの色"
 
-#: src/ui_astroCalcDialog.h:1708
+#: src/ui_astroCalcDialog.h:1721
 msgid "Cleanup ephemerides"
 msgstr "天体暦クリア"
 
-#: src/ui_astroCalcDialog.h:1709
+#: src/ui_astroCalcDialog.h:1722
 msgid "Save ephemeris"
 msgstr "天体暦セーブ"
 
-#: src/ui_astroCalcDialog.h:1711 src/ui_astroCalcDialog.h:1754
+#: src/ui_astroCalcDialog.h:1724 src/ui_astroCalcDialog.h:1767
 #: plugins/Satellites/src/ui_satellitesDialog.h:1065
 msgid "Calculations require time, please be patient"
 msgstr "計算には時間がかかりますので、しばらくお待ちください"
 
-#: src/ui_astroCalcDialog.h:1713
+#: src/ui_astroCalcDialog.h:1726
 msgid "Calculate ephemeris"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1714 src/ui_astroCalcDialog.h:1739
-#: src/ui_astroCalcDialog.h:1749
+#: src/ui_astroCalcDialog.h:1727 src/ui_astroCalcDialog.h:1752
+#: src/ui_astroCalcDialog.h:1762
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
 msgid "From:"
 msgstr "開始日時:"
 
-#: src/ui_astroCalcDialog.h:1715 src/ui_astroCalcDialog.h:1740
-#: src/ui_astroCalcDialog.h:1750
+#: src/ui_astroCalcDialog.h:1728 src/ui_astroCalcDialog.h:1753
+#: src/ui_astroCalcDialog.h:1763
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "To:"
 msgstr "終了日時:"
 
-#: src/ui_astroCalcDialog.h:1716 src/ui_astroCalcCustomStepsDialog.h:153
+#: src/ui_astroCalcDialog.h:1729 src/ui_astroCalcCustomStepsDialog.h:153
 msgid "Time step:"
 msgstr "計算間隔:"
 
-#: src/ui_astroCalcDialog.h:1718 src/ui_astroCalcCustomStepsDialog.h:152
+#: src/ui_astroCalcDialog.h:1731 src/ui_astroCalcCustomStepsDialog.h:152
 msgid "Custom time step for ephemeris visualization"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1720
+#: src/ui_astroCalcDialog.h:1733
 msgid "Celestial body:"
 msgstr "天体:"
 
-#: src/ui_astroCalcDialog.h:1722
+#: src/ui_astroCalcDialog.h:1735
 msgid "First celestial body"
 msgstr "一番目の天体"
 
-#: src/ui_astroCalcDialog.h:1725 src/ui_astroCalcDialog.h:1744
+#: src/ui_astroCalcDialog.h:1738 src/ui_astroCalcDialog.h:1757
 msgid "and"
 msgstr "と"
 
-#: src/ui_astroCalcDialog.h:1727
+#: src/ui_astroCalcDialog.h:1740
 msgid "Second celestial body"
 msgstr "二番目の天体"
 
-#: src/ui_astroCalcDialog.h:1731
+#: src/ui_astroCalcDialog.h:1744
 msgid ""
 "Compute ephemeris for all planets visible to the unaided eye (works on Earth"
 " only)"
 msgstr "全ての肉眼惑星の暦を計算する(地球上のみ使用可)"
 
-#: src/ui_astroCalcDialog.h:1733
+#: src/ui_astroCalcDialog.h:1746
 msgid "all naked-eye planets"
 msgstr "全ての肉眼惑星"
 
-#: src/ui_astroCalcDialog.h:1734
+#: src/ui_astroCalcDialog.h:1747
 msgid "Cleanup transits"
 msgstr "正中のクリア"
 
-#: src/ui_astroCalcDialog.h:1735
+#: src/ui_astroCalcDialog.h:1748
 msgid "Save transits"
 msgstr "正中のセーブ"
 
-#: src/ui_astroCalcDialog.h:1736
+#: src/ui_astroCalcDialog.h:1749
 msgid "Calculate transits"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1737
+#: src/ui_astroCalcDialog.h:1750
 msgid "Celestial object:"
 msgstr "天体:"
 
-#: src/ui_astroCalcDialog.h:1741
+#: src/ui_astroCalcDialog.h:1754
 msgid "Table of approximate transits for selected celestial object"
 msgstr "選択天体の近似正中時刻表"
 
-#: src/ui_astroCalcDialog.h:1742
+#: src/ui_astroCalcDialog.h:1755
 msgid ""
 "Note: artificial satellites and unnamed stars are excluded from calculation"
 msgstr "注:人工衛星と命名されていない恒星は計算出来ません"
 
-#: src/ui_astroCalcDialog.h:1743
+#: src/ui_astroCalcDialog.h:1756
 msgid "Between objects:"
 msgstr "次の天体間:"
 
-#: src/ui_astroCalcDialog.h:1748
+#: src/ui_astroCalcDialog.h:1761
 msgid "Maximum allowed separation:"
 msgstr "許可する最大離角:"
 
-#: src/ui_astroCalcDialog.h:1751
+#: src/ui_astroCalcDialog.h:1764
 msgid "Cleanup of phenomena"
 msgstr "天文現象クリア"
 
-#: src/ui_astroCalcDialog.h:1752
+#: src/ui_astroCalcDialog.h:1765
 msgid "Save phenomena"
 msgstr "天文現象のセーブ"
 
-#: src/ui_astroCalcDialog.h:1756
+#: src/ui_astroCalcDialog.h:1769
 msgid "Calculate phenomena"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1757
+#: src/ui_astroCalcDialog.h:1770
 msgid "Calculate also:"
 msgstr "次の値も計算:"
 
-#: src/ui_astroCalcDialog.h:1758
+#: src/ui_astroCalcDialog.h:1771
 msgid "oppositions"
 msgstr "衝"
 
-#: src/ui_astroCalcDialog.h:1759
+#: src/ui_astroCalcDialog.h:1772
 msgid "perihelion and aphelion"
 msgstr "近日点と遠日点"
 
-#: src/ui_astroCalcDialog.h:1760
+#: src/ui_astroCalcDialog.h:1773
 msgid "Please select object to plot its graph 'Altitude vs. Time'."
 msgstr "高度グラフを描く天体を選択して下さい。"
 
-#: src/ui_astroCalcDialog.h:1761
+#: src/ui_astroCalcDialog.h:1774
 msgid "Also the graph for the Sun"
 msgstr "太陽高度も表示"
 
-#: src/ui_astroCalcDialog.h:1762
+#: src/ui_astroCalcDialog.h:1775
 msgid "Also the graph for the Moon"
 msgstr "月の高度も表示"
 
-#: src/ui_astroCalcDialog.h:1764 src/ui_astroCalcDialog.h:1774
+#: src/ui_astroCalcDialog.h:1777 src/ui_astroCalcDialog.h:1787
 msgid ""
 "Draw only the part of the graph where altitude is greater than the value "
 "given in the right box."
 msgstr "選択した高度以上のグラフだけを表示する。"
 
-#: src/ui_astroCalcDialog.h:1766 src/ui_astroCalcDialog.h:1776
+#: src/ui_astroCalcDialog.h:1779 src/ui_astroCalcDialog.h:1789
 msgid "Above altitude:"
 msgstr "下限高度:"
 
-#: src/ui_astroCalcDialog.h:1768 src/ui_astroCalcDialog.h:1778
+#: src/ui_astroCalcDialog.h:1781 src/ui_astroCalcDialog.h:1791
 msgid "Altitude limit in degrees"
 msgstr "上限高度"
 
-#: src/ui_astroCalcDialog.h:1770
+#: src/ui_astroCalcDialog.h:1783
 msgid "Altitude vs. Time"
 msgstr "今日の高度"
 
-#: src/ui_astroCalcDialog.h:1771
+#: src/ui_astroCalcDialog.h:1784
 msgid "Please select object to plot its graph 'Azimuth vs. Time'."
 msgstr "方位角のグラフを表示する天体を選択してください。"
 
-#: src/ui_astroCalcDialog.h:1772
+#: src/ui_astroCalcDialog.h:1785
 msgid "Azimuth vs. Time"
 msgstr "今日の方位角"
 
-#: src/ui_astroCalcDialog.h:1781
+#: src/ui_astroCalcDialog.h:1794
 msgid "Local Time in hours"
 msgstr "地方時(時)"
 
-#: src/ui_astroCalcDialog.h:1784
+#: src/ui_astroCalcDialog.h:1797
 msgid ""
 "Please select object to plot its 'Monthly Elevation' graph for the current "
 "year at selected time."
 msgstr "その時刻での毎月の高度を表示する天体を選択してください。"
 
-#: src/ui_astroCalcDialog.h:1785
+#: src/ui_astroCalcDialog.h:1798
 msgid "Monthly Elevation"
 msgstr "毎月の高度"
 
-#: src/ui_astroCalcDialog.h:1787
+#: src/ui_astroCalcDialog.h:1800
 msgid "Graphs since January 1st of the current year"
 msgstr "その年の1月1日からのグラフ"
 
-#: src/ui_astroCalcDialog.h:1789
+#: src/ui_astroCalcDialog.h:1802
 msgid "Second graph:"
 msgstr "第二グラフ:"
 
-#: src/ui_astroCalcDialog.h:1790
+#: src/ui_astroCalcDialog.h:1803
 msgid "First graph:"
 msgstr "第一グラフ:"
 
-#: src/ui_astroCalcDialog.h:1792 src/ui_astroCalcDialog.h:1796
+#: src/ui_astroCalcDialog.h:1805 src/ui_astroCalcDialog.h:1809
 msgid "How many years to display"
 msgstr "表示期間(年)"
 
-#: src/ui_astroCalcDialog.h:1794
+#: src/ui_astroCalcDialog.h:1807
 msgid "Duration:"
 msgstr "期間:"
 
-#: src/ui_astroCalcDialog.h:1798
+#: src/ui_astroCalcDialog.h:1811
 msgctxt "duration"
 msgid "years"
 msgstr "年"
 
-#: src/ui_astroCalcDialog.h:1799
+#: src/ui_astroCalcDialog.h:1812
 msgid "Draw graphs"
 msgstr "表示"
 
-#: src/ui_astroCalcDialog.h:1801
+#: src/ui_astroCalcDialog.h:1814
 msgid "Angular distance limit, degrees:"
 msgstr "角距離の制限(度):"
 
-#: src/ui_astroCalcDialog.h:1802
+#: src/ui_astroCalcDialog.h:1815
 msgid "Important note: this tool works on Earth only!"
 msgstr "重要:地球上でのみ使用可!"
 
-#: src/ui_astroCalcDialog.h:1803
+#: src/ui_astroCalcDialog.h:1816
 msgid "Lunar Distance"
 msgstr "月までの距離"
 
-#: src/ui_astroCalcDialog.h:1804
+#: src/ui_astroCalcDialog.h:1817
 msgid "Select a category:"
 msgstr "種類を選択:"
 
-#: src/ui_astroCalcDialog.h:1805
+#: src/ui_astroCalcDialog.h:1818
 msgid "Show objects which are up:"
 msgstr "右の時刻の天体を表示:"
 
-#: src/ui_astroCalcDialog.h:1810
+#: src/ui_astroCalcDialog.h:1823
 msgid "Matching objects:"
 msgstr "一致天体:"
 
-#: src/ui_astroCalcDialog.h:1812
+#: src/ui_astroCalcDialog.h:1825
 msgid "Save list of objects"
 msgstr "天体リストのセーブ"
 
-#: src/ui_astroCalcDialog.h:1823
+#: src/ui_astroCalcDialog.h:1836
 msgid "First celestial body:"
 msgstr "天体1:"
 
-#: src/ui_astroCalcDialog.h:1824
+#: src/ui_astroCalcDialog.h:1837
 msgid "Second celestial body:"
 msgstr "天体2:"
 
-#: src/ui_astroCalcDialog.h:1825
-msgid "Orbital velocity of first celestial body:"
-msgstr "天体1の軌道速度:"
-
-#: src/ui_astroCalcDialog.h:1826
-msgid "Angular distance:"
-msgstr "角距離:"
-
-#: src/ui_astroCalcDialog.h:1827
-msgid "Orbital resonance:"
-msgstr "軌道共鳴:"
-
-#: src/ui_astroCalcDialog.h:1829
-msgid "Linear distance:"
-msgstr "距離:"
-
-#: src/ui_astroCalcDialog.h:1830
+#: src/ui_astroCalcDialog.h:1838
 msgid "Synodic period:"
 msgstr "共鳴周期:"
 
-#: src/ui_astroCalcDialog.h:1831
-msgid "Equatorial diameters ratio:"
-msgstr "赤道直径の比:"
+#: src/ui_astroCalcDialog.h:1840
+msgid "Orbital velocity of first celestial body:"
+msgstr "天体1の軌道速度:"
 
-#: src/ui_astroCalcDialog.h:1832
+#: src/ui_astroCalcDialog.h:1841
+msgid "Angular distance:"
+msgstr "角距離:"
+
+#: src/ui_astroCalcDialog.h:1842
+msgid "Mean motion of second celestial body:"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:1843
+msgid "Mean motion of first celestial body:"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:1844
 msgid "Orbital velocity of second celestial body:"
 msgstr "天体2の軌道速度:"
 
-#: src/ui_astroCalcDialog.h:1833
+#: src/ui_astroCalcDialog.h:1845
 msgid "Orbital periods ratio:"
-msgstr "軌道周期の比:"
+msgstr ""
 
-#: src/ui_astroCalcDialog.h:1835
+#: src/ui_astroCalcDialog.h:1846
+msgid "Equatorial diameters ratio:"
+msgstr "赤道直径の比:"
+
+#: src/ui_astroCalcDialog.h:1847
+msgid "Linear distance:"
+msgstr "距離:"
+
+#: src/ui_astroCalcDialog.h:1848
 msgid "Data"
 msgstr "データ"
 
-#: src/ui_astroCalcDialog.h:1836
+#: src/ui_astroCalcDialog.h:1849
 msgid ""
 "The change in the linear and angular distances between selected celestial "
 "bodies"
@@ -12986,7 +12992,7 @@ msgstr ""
 " 私たちはハワイにいたいと願いました。"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:110
-#: plugins/Oculars/src/gui/OcularDialog.cpp:627
+#: plugins/Oculars/src/gui/OcularDialog.cpp:620
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:734
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:247
@@ -13007,7 +13013,7 @@ msgid "Links"
 msgstr "リンク"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:111
-#: plugins/Oculars/src/gui/OcularDialog.cpp:628
+#: plugins/Oculars/src/gui/OcularDialog.cpp:621
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:735
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:248
@@ -13031,7 +13037,7 @@ msgstr "サポートはGithubで行っています。投稿時には題名に\"%
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:114
-#: plugins/Oculars/src/gui/OcularDialog.cpp:631
+#: plugins/Oculars/src/gui/OcularDialog.cpp:624
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:738
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:288
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:251
@@ -13053,7 +13059,7 @@ msgstr "質問は{こちら}。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:116
-#: plugins/Oculars/src/gui/OcularDialog.cpp:633
+#: plugins/Oculars/src/gui/OcularDialog.cpp:626
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:740
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:290
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:253
@@ -13075,7 +13081,7 @@ msgstr "バグの報告やリクエストは{こちら}。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:118
-#: plugins/Oculars/src/gui/OcularDialog.cpp:635
+#: plugins/Oculars/src/gui/OcularDialog.cpp:628
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:742
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:255
@@ -13240,9 +13246,9 @@ msgid "&Reset rotation"
 msgstr "回転リセット(&R)"
 
 #: plugins/Oculars/src/Oculars.cpp:1370
-#: plugins/Oculars/src/gui/OcularDialog.cpp:121
-#: plugins/Oculars/src/gui/OcularDialog.cpp:138
-#: plugins/Oculars/src/gui/OcularDialog.cpp:155
+#: plugins/Oculars/src/gui/OcularDialog.cpp:122
+#: plugins/Oculars/src/gui/OcularDialog.cpp:139
+#: plugins/Oculars/src/gui/OcularDialog.cpp:156
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:823
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:830
 msgid "Warning!"
@@ -13693,70 +13699,70 @@ msgstr "裸眼の分解能"
 msgid "Visual resolution is based on eye properties and magnification"
 msgstr "裸眼の分解能は目の特性と倍率に基づいています"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:121
+#: plugins/Oculars/src/gui/OcularDialog.cpp:122
 msgid "Cannot delete the last sensor."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:138
+#: plugins/Oculars/src/gui/OcularDialog.cpp:139
 msgid "Cannot delete the last ocular."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:155
+#: plugins/Oculars/src/gui/OcularDialog.cpp:156
 msgid "Cannot delete the last telescope."
 msgstr ""
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
-#: plugins/Oculars/src/gui/OcularDialog.cpp:569
+#: plugins/Oculars/src/gui/OcularDialog.cpp:562
 msgid "tFOV:"
 msgstr "実視野角:"
 
 #. TRANSLATORS: Magnification factor for binoculars
-#: plugins/Oculars/src/gui/OcularDialog.cpp:571
+#: plugins/Oculars/src/gui/OcularDialog.cpp:564
 msgid "Magnification factor:"
 msgstr "双眼鏡倍率:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:572
+#: plugins/Oculars/src/gui/OcularDialog.cpp:565
 #: plugins/Oculars/src/ui_ocularDialog.h:1581
 msgid "Diameter:"
 msgstr "口径:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:576
+#: plugins/Oculars/src/gui/OcularDialog.cpp:569
 #: plugins/Oculars/src/ui_ocularDialog.h:1546
 msgid "aFOV:"
 msgstr "みかけの視野角:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:577
+#: plugins/Oculars/src/gui/OcularDialog.cpp:570
 #: plugins/Oculars/src/ui_ocularDialog.h:1547
 #: plugins/Oculars/src/ui_ocularDialog.h:1582
 msgid "Focal length:"
 msgstr "焦点距離:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:578
+#: plugins/Oculars/src/gui/OcularDialog.cpp:571
 #: plugins/Oculars/src/ui_ocularDialog.h:1543
 msgid "Field stop:"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:590
+#: plugins/Oculars/src/gui/OcularDialog.cpp:583
 msgid "Oculars Plug-in"
 msgstr "望遠鏡視野プラグイン"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:598
+#: plugins/Oculars/src/gui/OcularDialog.cpp:591
 msgid "Barlow lens feature"
 msgstr "バローレンズの特徴"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:599
+#: plugins/Oculars/src/gui/OcularDialog.cpp:592
 msgid "Sensor crop overlay feature"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:600
+#: plugins/Oculars/src/gui/OcularDialog.cpp:593
 msgid "Pixel grid feature"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:604
+#: plugins/Oculars/src/gui/OcularDialog.cpp:597
 msgid "Overview"
 msgstr "概要"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:606
+#: plugins/Oculars/src/gui/OcularDialog.cpp:599
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece."
 "  This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -13765,39 +13771,39 @@ msgid ""
 msgstr ""
 "このプラグインは接眼レンズを通して見えるものをシミュレートすることを目的としています。この設定ダイアログを使って接眼レンズや望遠鏡、CCDセンサーを追加、変更、または削除できます。アプリを初めて実行すると、開始するためにいくつかのサンプルが入力されます。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:607
+#: plugins/Oculars/src/gui/OcularDialog.cpp:600
 msgid "You can choose to scale the image you see on the screen."
 msgstr "画面に表示される画像を拡大/縮小することができます。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:608
+#: plugins/Oculars/src/gui/OcularDialog.cpp:601
 msgid ""
 "This is intended to show you a better comparison of what one "
 "eyepiece/telescope combination will be like when compared to another."
 msgstr "これは、ある接眼レンズと望遠鏡の組み合わせが他の組み合わせとどのようになるかをより良く比較するためのものです。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:609
+#: plugins/Oculars/src/gui/OcularDialog.cpp:602
 msgid ""
 "The same eyepiece in two different telescopes of differing focal length will"
 " produce two different exit pupils, changing the view somewhat."
 msgstr "同じ接眼レンズを使用しても、焦点距離の違う2つの望遠鏡では射出瞳径が異なり、眺めが多少変化します。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:610
+#: plugins/Oculars/src/gui/OcularDialog.cpp:603
 msgid ""
 "The trade-off of this is that, with the image scaled, a large part of the "
 "screen can be wasted."
 msgstr "画像の拡大/縮小とのトレードオフで画面の大部分が無駄になる可能性があります。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:611
+#: plugins/Oculars/src/gui/OcularDialog.cpp:604
 msgid ""
 "Therefore we recommend that you leave it off, unless you feel you have a "
 "need for it."
 msgstr "したがって必要と思われる場合を除いて、オフのままにしておくことをお勧めします。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:612
+#: plugins/Oculars/src/gui/OcularDialog.cpp:605
 msgid "You can toggle a crosshair in the view."
 msgstr "十字線の表示が可能です。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:613
+#: plugins/Oculars/src/gui/OcularDialog.cpp:606
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder. This feature draws three concentric circles "
@@ -13806,34 +13812,34 @@ msgid ""
 msgstr ""
 "テルラド表示に切り替えることができます。この機能は、0.5%1、2.0%1、および4.0%1の3つの同心円を描き、テルラド・ファインダー(または同等のファインダー)を通して肉眼で見ると予想されるものを確認するのに役立ちます。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:614
+#: plugins/Oculars/src/gui/OcularDialog.cpp:607
 msgid ""
 "You can adjust the diameters or even add a fourth circle if you have a "
 "different finder, or revert to the Telrad standard sizes."
 msgstr "別のファインダーを使用している場合は円の大きさを調整したり、4番目の円を追加したり出来ます。標準のテルラドの視野に戻しすことも出来ます。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:615
+#: plugins/Oculars/src/gui/OcularDialog.cpp:608
 msgid "If you find any issues, please let me know. Enjoy!"
 msgstr "何か問題があれば教えてください。エンジョイ！"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:618
+#: plugins/Oculars/src/gui/OcularDialog.cpp:611
 msgid "Hot Keys"
 msgstr "ショートカット"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:619
+#: plugins/Oculars/src/gui/OcularDialog.cpp:612
 msgid ""
 "The plug-in's key bindings can be edited in the Keyboard shortcuts editor "
 "(F7)."
 msgstr "このプラグインのショートカットは、キーボードショートカットの編集(F7)で編集出来ます。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:622
+#: plugins/Oculars/src/gui/OcularDialog.cpp:615
 #: plugins/Pulsars/src/Pulsar.cpp:288
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:604
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:318
 msgid "Notes"
 msgstr "備考"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:623
+#: plugins/Oculars/src/gui/OcularDialog.cpp:616
 msgid ""
 "The sensor view has a feature to show a sensor crop overlay with information"
 " about the crop size. The size of this rectangle may be adjusted when "
@@ -13841,13 +13847,13 @@ msgid ""
 "binning 3)."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:624
+#: plugins/Oculars/src/gui/OcularDialog.cpp:617
 #, qt-format
 msgid ""
 "In this case, information about crop size overlay will be marked by %1."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:625
+#: plugins/Oculars/src/gui/OcularDialog.cpp:618
 msgid ""
 "This mark is also displayed if the crop size is larger than the sensor size."
 msgstr ""
