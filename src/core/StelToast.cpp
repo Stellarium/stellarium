@@ -27,6 +27,7 @@
 #include "StelTextureMgr.hpp"
 #include "StelToast.hpp"
 #include "LandscapeMgr.hpp"
+#include "Planet.hpp"
 
 #include <QTimeLine>
 
@@ -109,6 +110,7 @@ void ToastTile::prepareDraw(Vec3f color)
 {
 	Q_ASSERT(!empty);
 
+	StelCore *core=StelApp::getInstance().getCore();
 	StelSkyDrawer *drawer=StelApp::getInstance().getCore()->getSkyDrawer();
 	const bool withExtinction=(drawer->getFlagHasAtmosphere() && drawer->getExtinction().getExtinctionCoefficient()>=0.01f);
 
@@ -128,20 +130,41 @@ void ToastTile::prepareDraw(Vec3f color)
 	if (!texture->canBind())
 		return;
 	// Get the opengl arrays
-	if (vertexArray.empty())
+	if (originalVertexArray.empty())
 	{
 		int ml = qMin(qMax(3, level+1), getGrid()->getMaxLevel());
-		vertexArray = getGrid()->getVertexArray(level, x, y, ml);
+		originalVertexArray = getGrid()->getVertexArray(level, x, y, ml);
 		textureArray = getGrid()->getTextureArray(level, x, y, ml);
 		indexArray = getGrid()->getTrianglesIndex(level, x, y, ml);
 		colorArray.clear();
-		for (int i=0; i<vertexArray.size(); ++i)
+		for (int i=0; i<originalVertexArray.size(); ++i)
 			colorArray.append(color);
 	}
+
+	if (core->getUseAberration())
+	{
+		Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+		vel=StelCore::matVsop87ToJ2000*vel;
+		vel*=core->getAberrationFactor() * (AU/(86400.0*SPEED_OF_LIGHT));
+		vertexArray=QVector<Vec3d>(originalVertexArray);
+		for (int i=0; i<originalVertexArray.size(); i++)
+		{
+			Vec3d vert=originalVertexArray.at(i);
+			Q_ASSERT(vert.lengthSquared()==1.0);
+			vert+=vel;
+			vert.normalize();
+
+			vertexArray[i]=vert;
+		}
+	}
+	else
+	{
+		vertexArray=originalVertexArray;
+	}
+
 	// Recreate the color array in any case. Assume we must compute extinction on every frame.
 	if (withExtinction)
 	{
-		StelCore *core=StelApp::getInstance().getCore();
 		// We must process the vertices to find geometric altitudes in order to compute vertex colors.
 		const Extinction& extinction=drawer->getExtinction();
 		colorArray.clear();
@@ -164,7 +187,6 @@ void ToastTile::prepareDraw(Vec3f color)
 	{
 		colorArray.fill(Vec3f(1.0f));
 	}
-
 
 	if (subTiles.isEmpty() && level < getSurvey()->getMaxLevel())
 	{
