@@ -35,6 +35,7 @@
 #include "StelModuleMgr.hpp"
 #include "LandscapeMgr.hpp"
 #include "StelMovementMgr.hpp"
+#include "Planet.hpp"
 
 #include <QDebug>
 #include <QSettings>
@@ -47,6 +48,7 @@ MilkyWay::MilkyWay()
 	, intensityMinFov(0.25) // when zooming in further, MilkyWay is no longer visible.
 	, intensityMaxFov(2.5) // when zooming out further, MilkyWay is fully visible (when enabled).
 	, vertexArray()
+	, vertexArrayNoAberration()
 {
 	setObjectName("MilkyWay");
 	fader = new LinearFader();
@@ -59,6 +61,8 @@ MilkyWay::~MilkyWay()
 	
 	delete vertexArray;
 	vertexArray = Q_NULLPTR;
+	delete vertexArrayNoAberration;
+	vertexArrayNoAberration = Q_NULLPTR;
 }
 
 void MilkyWay::init()
@@ -72,9 +76,11 @@ void MilkyWay::init()
 	setSaturation(conf->value("astro/milky_way_saturation", 1.).toDouble());
 
 	// A new texture was provided by Fabien. Better resolution, but in equatorial coordinates. I had to enhance it a bit, and shift it by 90 degrees.
-	vertexArray = new StelVertexArray(StelPainter::computeSphereNoLight(1.,1.,45,15,1, true)); // GZ orig: slices=stacks=20.
+	// We must create a constant array to take and derive possibly aberrated positions into the vertexArray
+	vertexArrayNoAberration = new StelVertexArray(StelPainter::computeSphereNoLight(1.,1.,45,15,1, true)); // GZ orig: slices=stacks=20.
+	vertexArray =             new StelVertexArray(StelPainter::computeSphereNoLight(1.,1.,45,15,1, true)); // GZ orig: slices=stacks=20.
 	vertexArray->colors.resize(vertexArray->vertex.length());
-	vertexArray->colors.fill(Vec3f(1.0f, 0.3f, 0.9f));
+	vertexArray->colors.fill(color);
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_MilkyWay", displayGroup, N_("Milky Way"), "flagMilkyWayDisplayed", "M");
@@ -114,6 +120,21 @@ void MilkyWay::draw(StelCore* core)
 {
 	if (!fader->getInterstate())
 		return;
+
+	// Apply annual aberration. We take original vertices, and put the aberrated positions into the vertexArray which we draw.
+	// prepare for aberration: Explan. Suppl. 2013, (7.38)
+	Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+	vel=StelCore::matVsop87ToJ2000*vel;
+	vel*=(AU/(86400.0*SPEED_OF_LIGHT));
+	for (int i=0; i<vertexArrayNoAberration->vertex.size(); ++i)
+	{
+		Vec3d vert=vertexArrayNoAberration->vertex.at(i);
+		Q_ASSERT(vert.lengthSquared()==1.0);
+		vert+=vel;
+		vert.normalize();
+
+		vertexArray->vertex[i]=vert;
+	}
 
 	StelProjector::ModelViewTranformP transfo = core->getJ2000ModelViewTransform();
 
@@ -162,13 +183,11 @@ void MilkyWay::draw(StelCore* core)
 	float atmFactor=qMax(0.35f, 50.0f*(0.02f-atmLum)); // keep visible in twilight, but this is enough for some effect with the moon.
 	c*=atmFactor*atmFactor;
 
-
 	if (c[0]<0) c[0]=0;
 	if (c[1]<0) c[1]=0;
 	if (c[2]<0) c[2]=0;
 
 	const bool withExtinction=(drawer->getFlagHasAtmosphere() && drawer->getExtinction().getExtinctionCoefficient()>=0.01f);
-
 	if (withExtinction)
 	{
 		// We must process the vertices to find geometric altitudes in order to compute vertex colors.
@@ -181,15 +200,14 @@ void MilkyWay::draw(StelCore* core)
 			Vec3d vertAltAz=core->j2000ToAltAz(vertexArray->vertex.at(i), StelCore::RefractionOn);
 			Q_ASSERT(fabs(vertAltAz.lengthSquared()-1.0) < 0.001);
 
-			float oneMag=0.0f;
-			extinction.forward(vertAltAz, &oneMag);
-			float extinctionFactor=std::pow(0.3f , oneMag) * (1.1f-bortleIntensity*0.1f); // drop of one magnitude: should be factor 2.5 or 40%. We take 30%, it looks more realistic.
-			Vec3f thisColor=Vec3f(c[0]*extinctionFactor, c[1]*extinctionFactor, c[2]*extinctionFactor);
-			vertexArray->colors.append(thisColor);
+			float mag=0.0f;
+			extinction.forward(vertAltAz, &mag);
+			float extinctionFactor=std::pow(0.3f, mag) * (1.1f-bortleIntensity*0.1f); // drop of one magnitude: should be factor 2.5 or 40%. We take 30%, it looks more realistic.
+			vertexArray->colors.append(c*extinctionFactor);
 		}
 	}
 	else
-		vertexArray->colors.fill(Vec3f(c[0], c[1], c[2]));
+		vertexArray->colors.fill(c);
 
 	StelPainter sPainter(prj);
 	sPainter.setCullFace(true);
