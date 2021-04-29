@@ -194,10 +194,10 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->de431checkBox, SIGNAL(clicked()), this, SLOT(de431ButtonClicked()));
 	resetEphemControls();
 
-	ui->nutationCheckBox->setChecked(core->getUseNutation());
-	connect(ui->nutationCheckBox, SIGNAL(toggled(bool)), core, SLOT(setUseNutation(bool)));
-	ui->topocentricCheckBox->setChecked(core->getUseTopocentricCoordinates());
-	connect(ui->topocentricCheckBox, SIGNAL(toggled(bool)), core, SLOT(setUseTopocentricCoordinates(bool)));
+	connectBoolProperty(ui->nutationCheckBox, "StelCore.flagUseNutation");
+	connectBoolProperty(ui->aberrationCheckBox, "StelCore.flagUseAberration");
+	connectDoubleProperty(ui->aberrationSpinBox, "StelCore.aberrationFactor");
+	connectBoolProperty(ui->topocentricCheckBox, "StelCore.flagUseTopocentricCoordinates");
 
 	// Selected object info
 	if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(Q_NULLPTR))
@@ -947,11 +947,13 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("astro/flag_nebula_display_no_texture",	!propMgr->getStelPropertyValue("StelSkyLayerMgr.flagShow").toBool() );
 
 	conf->setValue("astro/flag_size_limits_usage",			propMgr->getStelPropertyValue("NebulaMgr.flagUseSizeLimits").toBool());
-	conf->setValue("astro/size_limit_min",					QString::number(propMgr->getStelPropertyValue("NebulaMgr.minSizeLimit").toDouble(), 'f', 0));
-	conf->setValue("astro/size_limit_max",					QString::number(propMgr->getStelPropertyValue("NebulaMgr.maxSizeLimit").toDouble(), 'f', 0));
+	conf->setValue("astro/size_limit_min",				QString::number(propMgr->getStelPropertyValue("NebulaMgr.minSizeLimit").toDouble(), 'f', 0));
+	conf->setValue("astro/size_limit_max",				QString::number(propMgr->getStelPropertyValue("NebulaMgr.maxSizeLimit").toDouble(), 'f', 0));
 
-	conf->setValue("projection/type",						core->getCurrentProjectionTypeKey());
-	conf->setValue("astro/flag_nutation",					core->getUseNutation());
+	conf->setValue("projection/type",				core->getCurrentProjectionTypeKey());
+	conf->setValue("astro/flag_nutation",				core->getUseNutation());
+	conf->setValue("astro/flag_aberration",				core->getUseAberration());
+	conf->setValue("astro/aberration_factor",			core->getAberrationFactor());
 	conf->setValue("astro/flag_topocentric_coordinates",		core->getUseTopocentricCoordinates());
 
 	// view dialog / DSO tag settings
