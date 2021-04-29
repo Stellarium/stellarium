@@ -123,17 +123,26 @@ void MilkyWay::draw(StelCore* core)
 
 	// Apply annual aberration. We take original vertices, and put the aberrated positions into the vertexArray which we draw.
 	// prepare for aberration: Explan. Suppl. 2013, (7.38)
-	Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
-	vel=StelCore::matVsop87ToJ2000*vel;
-	vel*=(AU/(86400.0*SPEED_OF_LIGHT));
-	for (int i=0; i<vertexArrayNoAberration->vertex.size(); ++i)
+	if (core->getUseAberration())
 	{
-		Vec3d vert=vertexArrayNoAberration->vertex.at(i);
-		Q_ASSERT(vert.lengthSquared()==1.0);
-		vert+=vel;
-		vert.normalize();
+		Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+		vel=StelCore::matVsop87ToJ2000*vel;
+		vel*=core->getAberrationFactor() * (AU/(86400.0*SPEED_OF_LIGHT));
+		for (int i=0; i<vertexArrayNoAberration->vertex.size(); ++i)
+		{
+			Vec3d vert=vertexArrayNoAberration->vertex.at(i);
+			Q_ASSERT(vert.lengthSquared()==1.0);
+			vert+=vel;
+			vert.normalize();
 
-		vertexArray->vertex[i]=vert;
+			vertexArray->vertex[i]=vert;
+		}
+	}
+	else
+	{
+	//	for (int i=0; i<vertexArrayNoAberration->vertex.size(); ++i)
+	//		vertexArray->vertex[i]=vertexArrayNoAberration->vertex.at(i);
+		vertexArray->vertex=vertexArrayNoAberration->vertex;
 	}
 
 	StelProjector::ModelViewTranformP transfo = core->getJ2000ModelViewTransform();
