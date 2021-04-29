@@ -509,7 +509,7 @@ struct DrawNebulaFuncObject
 
 		if (n->majorAxisSize>angularSizeLimit || n->majorAxisSize==0.f || mag <= maxMagHints)
 		{
-			sPainter->getProjector()->project(n->XYZ,n->XY);
+			sPainter->getProjector()->project(n->getJ2000EquatorialPos(core),n->XY);
 			n->drawLabel(*sPainter, maxMagLabels);
 			n->drawHints(*sPainter, maxMagHints);
 			n->drawOutlines(*sPainter, maxMagHints);
