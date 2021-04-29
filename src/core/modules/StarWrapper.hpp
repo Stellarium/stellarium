@@ -26,6 +26,8 @@
 #include "StarMgr.hpp"
 #include "Star.hpp"
 #include "StelSkyDrawer.hpp"
+#include "Planet.hpp"
+#include "StelUtils.hpp"
 
 #include <QString>
 
@@ -78,7 +80,14 @@ protected:
 		static const double d2000 = 2451545.0;
 		Vec3f v;
 		s->getJ2000Pos(z, (M_PI/180.)*(0.0001/3600.) * ((core->getJDE()-d2000)/365.25) / a->star_position_scale, v);
-		return v.toVec3d();
+
+		// Aberration: Explanatory Supplement 2013, (7.38). We must get the observer planet speed vector in Equatorial J2000 coordinates.
+		Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+		vel=StelCore::matVsop87ToJ2000*vel*(AU/(86400.0*SPEED_OF_LIGHT));
+		v.normalize(); // TODO: Required?
+		Vec3d pos=v.toVec3d()+vel;
+		pos.normalize();
+		return pos;
 	}
 	virtual Vec3f getInfoColor(void) const Q_DECL_OVERRIDE
 	{
