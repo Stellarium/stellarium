@@ -439,6 +439,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 	Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
 	vel=StelCore::matVsop87ToJ2000*vel;
 	vel*=(AU/(86400.0*SPEED_OF_LIGHT));
+	const Vec3f velf=vel.toVec3f();
 
 	// Go through all stars, which are sorted by magnitude (bright stars first)
 	const SpecialZoneData<Star>* zoneToDraw = getZones() + index;
@@ -459,7 +460,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 
 		// Aberration: vf contains Equatorial J2000 position.
 		vf.normalize(); // TODO: not sure if required
-		vf+=vel.toVec3f();
+		vf+=velf;
 		vf.normalize();
 
 		
