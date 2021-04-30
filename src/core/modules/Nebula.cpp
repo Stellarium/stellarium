@@ -667,6 +667,11 @@ void Nebula::drawOutlines(StelPainter &sPainter, float maxMagHints) const
 		col.set(0.f,0.f,0.f);
 	sPainter.setColor(col, 1);
 
+	StelCore *core=StelApp::getInstance().getCore();
+	Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+	vel=StelCore::matVsop87ToJ2000*vel;
+	vel*=core->getAberrationFactor() * (AU/(86400.0*SPEED_OF_LIGHT));
+
 	// Show outlines
 	if (segments>0 && flagUseOutlines && oLim<=maxMagHints)
 	{
@@ -683,7 +688,16 @@ void Nebula::drawOutlines(StelPainter &sPainter, float maxMagHints) const
 
 			for (j=0;j<points->size()-1;j++)
 			{
-				sPainter.drawGreatCircleArc(points->at(j), points->at(j+1), &viewportHalfspace);
+				Vec3d point1=points->at(j);
+				Vec3d point2=points->at(j+1);
+				if (core->getUseAberration())
+				{
+					point1+=vel;
+					point1.normalize();
+					point2+=vel;
+					point2.normalize();
+				}
+				sPainter.drawGreatCircleArc(point1, point2, &viewportHalfspace);
 			}
 		}
 		sPainter.setLineSmooth(false);
