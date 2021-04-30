@@ -575,6 +575,8 @@ void LandscapeMgr::init()
 	setFlagFog(conf->value("landscape/flag_fog",true).toBool());
 	setFlagIllumination(conf->value("landscape/flag_enable_illumination_layer", true).toBool());
 	setFlagLabels(conf->value("landscape/flag_enable_labels", true).toBool());
+	setFlagPolyLineDisplayed(conf->value("landscape/flag_polyline_only", false).toBool());
+	setPolyLineThickness(conf->value("landscape/polyline_thickness", 1).toInt());
 
 	cardinalsPoints = new Cardinals();
 	cardinalsPoints->setFlagShow(conf->value("viewing/flag_cardinal_points",true).toBool());

@@ -902,7 +902,13 @@ void StarMgr::loadSciNames(const QString& sciNameFile)
 			{
 				if (sciAdditionalNamesMapI18n.find(hip)!=sciAdditionalNamesMapI18n.end())
 				{
-					sciAdditionalDblNamesMapI18n[hip] = sci_name_i18n;
+					if (sciAdditionalDblNamesMapI18n.find(hip)!=sciAdditionalDblNamesMapI18n.end())
+					{
+						QString sname = sciAdditionalDblNamesMapI18n[hip].append(" - " + sci_name_i18n);
+						sciAdditionalDblNamesMapI18n[hip] = sname;
+					}
+					else
+						sciAdditionalDblNamesMapI18n[hip] = sci_name_i18n;
 					sciAdditionalDblNamesIndexI18n[sci_name_i18n] = hip;
 				}
 				else
@@ -1689,9 +1695,25 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		if (it.key().indexOf(bayerRegEx)==0 || it.key().indexOf(objPrefix)==0)
 		{
 			if (maxNbItem<=0)
-				break;
-			result << getSciAdditionalDblName(it.value());
-			--maxNbItem;
+				break;			
+			QStringList names = getSciAdditionalDblName(it.value()).split(" - ");
+			for (const auto &name : qAsConst(names))
+			{
+				if (useStartOfWords && name.startsWith(objPrefix, Qt::CaseInsensitive))
+					found = true;
+				else if (!useStartOfWords && name.contains(objPrefix, Qt::CaseInsensitive))
+					found = true;
+				else
+					found = false;
+
+				if (found)
+				{
+					if (maxNbItem<=0)
+						break;
+					result.append(name);
+					--maxNbItem;
+				}
+			}
 		}
 		else if (it.key().at(0) != objPrefix.at(0))
 			break;
@@ -1703,8 +1725,24 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		{
 			if (maxNbItem<=0)
 				break;
-			result << getSciAdditionalDblName(it.value());
-			--maxNbItem;
+			QStringList names = getSciAdditionalDblName(it.value()).split(" - ");
+			for (const auto &name : qAsConst(names))
+			{
+				if (useStartOfWords && name.startsWith(objPrefix, Qt::CaseInsensitive))
+					found = true;
+				else if (!useStartOfWords && name.contains(objPrefix, Qt::CaseInsensitive))
+					found = true;
+				else
+					found = false;
+
+				if (found)
+				{
+					if (maxNbItem<=0)
+						break;
+					result.append(name);
+					--maxNbItem;
+				}
+			}
 		}
 		else if (it.key().at(0) != objw.at(0))
 			break;

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>743</width>
+    <width>766</width>
     <height>431</height>
    </rect>
   </property>
@@ -2108,7 +2108,30 @@
               </property>
               <item row="0" column="0">
                <layout class="QGridLayout" name="gridLayout_9">
-                <item row="5" column="0">
+                <item row="7" column="1">
+                 <widget class="QLabel" name="labelMeanMotionSCBValue"/>
+                </item>
+                <item row="2" column="0">
+                 <widget class="QLabel" name="labelSynodicPeriod">
+                  <property name="text">
+                   <string>Synodic period:</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QLabel" name="labelAngularDistanceValue"/>
+                </item>
+                <item row="8" column="1">
+                 <widget class="QLabel" name="labelEquatorialRadiiRatioValue">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="0">
                  <widget class="QLabel" name="labelOrbitalVelocityFCB">
                   <property name="text">
                    <string>Orbital velocity of first celestial body:</string>
@@ -2128,23 +2151,68 @@
                   </property>
                  </widget>
                 </item>
-                <item row="1" column="1">
-                 <widget class="QLabel" name="labelAngularDistanceValue"/>
+                <item row="5" column="1">
+                 <widget class="QLabel" name="labelMeanMotionFCBValue"/>
                 </item>
-                <item row="2" column="0">
-                 <widget class="QLabel" name="labelOrbitalResonance">
+                <item row="7" column="0">
+                 <widget class="QLabel" name="labelMeanMotionSCB">
                   <property name="text">
-                   <string>Orbital resonance:</string>
+                   <string>Mean motion of second celestial body:</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                   </property>
                  </widget>
                 </item>
-                <item row="7" column="1">
-                 <widget class="QLabel" name="labelEquatorialRadiiRatioValue">
+                <item row="5" column="0">
+                 <widget class="QLabel" name="labelMeanMotionFCB">
                   <property name="text">
-                   <string/>
+                   <string>Mean motion of first celestial body:</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QLabel" name="labelLinearDistanceValue"/>
+                </item>
+                <item row="4" column="1">
+                 <widget class="QLabel" name="labelOrbitalVelocityFCBValue"/>
+                </item>
+                <item row="6" column="0">
+                 <widget class="QLabel" name="labelOrbitalVelocitySCB">
+                  <property name="text">
+                   <string>Orbital velocity of second celestial body:</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="1">
+                 <widget class="QLabel" name="labelSynodicPeriodValue"/>
+                </item>
+                <item row="3" column="1">
+                 <widget class="QLabel" name="labelOrbitalPeriodsRatioValue"/>
+                </item>
+                <item row="3" column="0">
+                 <widget class="QLabel" name="labelOrbitalPeriodsRatio">
+                  <property name="text">
+                   <string>Orbital periods ratio:</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="8" column="0">
+                 <widget class="QLabel" name="labelEquatorialRadiiRatioRatio">
+                  <property name="text">
+                   <string>Equatorial diameters ratio:</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                   </property>
                  </widget>
                 </item>
@@ -2158,67 +2226,8 @@
                   </property>
                  </widget>
                 </item>
-                <item row="4" column="1">
-                 <widget class="QLabel" name="labelSynodicPeriodValue"/>
-                </item>
-                <item row="4" column="0">
-                 <widget class="QLabel" name="labelSynodicPeriod">
-                  <property name="text">
-                   <string>Synodic period:</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="1">
-                 <widget class="QLabel" name="labelOrbitalResonanceValue"/>
-                </item>
-                <item row="5" column="1">
-                 <widget class="QLabel" name="labelOrbitalVelocityFCBValue"/>
-                </item>
-                <item row="7" column="0">
-                 <widget class="QLabel" name="labelEquatorialRadiiRatioRatio">
-                  <property name="text">
-                   <string>Equatorial diameters ratio:</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="6" column="0">
-                 <widget class="QLabel" name="labelOrbitalVelocitySCB">
-                  <property name="text">
-                   <string>Orbital velocity of second celestial body:</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                  </property>
-                 </widget>
-                </item>
                 <item row="6" column="1">
                  <widget class="QLabel" name="labelOrbitalVelocitySCBValue"/>
-                </item>
-                <item row="0" column="1">
-                 <widget class="QLabel" name="labelLinearDistanceValue"/>
-                </item>
-                <item row="3" column="0">
-                 <widget class="QLabel" name="labelOrbitalPeriodsRatio">
-                  <property name="text">
-                   <string>Orbital periods ratio:</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="1">
-                 <widget class="QLabel" name="labelOrbitalPeriodsRatioValue">
-                  <property name="text">
-                   <string/>
-                  </property>
-                 </widget>
                 </item>
                </layout>
               </item>

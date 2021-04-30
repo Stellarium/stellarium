@@ -3871,7 +3871,7 @@ void AstroCalcDialog::calculatePhenomena()
 				if (opposition)
 					fillPhenomenaTable(findClosestApproach(planet, mObj, startJD, stopJD, separation, PhenomenaTypeIndex::Opposition), planet, obj, PhenomenaTypeIndex::Opposition);
 				// shadows from moons
-				if (obj2Type==PHCMoonsFirstBody || obj2Type==PHCSolarSystem)
+				if (obj2Type==PHCMoonsFirstBody || obj2Type==PHCSolarSystem || obj2Type==PHCBrightSolarSystemObjects)
 					fillPhenomenaTable(findClosestApproach(planet, mObj, startJD, stopJD, separation, PhenomenaTypeIndex::Shadows), planet, obj, PhenomenaTypeIndex::Shadows);
 			}
 		}
@@ -6143,6 +6143,7 @@ void AstroCalcDialog::computePlanetaryData()
 
 	const double distanceAu = (posFCB - posSCB).length();
 	const double distanceKm = AU * distanceAu;
+	QString degree = QChar(0x00B0);
 	// TRANSLATORS: Unit of measure for distance - kilometers
 	QString km = qc_("km", "distance");
 	// TRANSLATORS: Unit of measure for distance - millions kilometers
@@ -6162,11 +6163,6 @@ void AstroCalcDialog::computePlanetaryData()
 
 	double spcb1 = firstCBId->getSiderealPeriod();
 	double spcb2 = secondCBId->getSiderealPeriod();
-	int cb1 = qRound(spcb1);
-	int cb2 = qRound(spcb2);
-	QString orbitalResonance = dash;
-	QString orbitalPeriodsRatio = dash;
-	bool spin = false;
 	QString parentFCBName = "";
 	if (firstCelestialBody != "Sun")
 		parentFCBName = firstCBId->getParent()->getEnglishName();
@@ -6174,79 +6170,62 @@ void AstroCalcDialog::computePlanetaryData()
 	if (secondCelestialBody != "Sun")
 		parentSCBName = secondCBId->getParent()->getEnglishName();
 
-	if (firstCelestialBody == parentSCBName)
-	{
-		cb1 = qRound(secondCBId->getSiderealPeriod());
-		cb2 = qRound(secondCBId->getSiderealDay());
-		spin = true;
-	}
-	else if (secondCelestialBody == parentFCBName)
-	{
-		cb1 = qRound(firstCBId->getSiderealPeriod());
-		cb2 = qRound(firstCBId->getSiderealDay());
-		spin = true;
-	}
-	int gcd = StelUtils::gcd(cb1, cb2);
-
 	QString distanceUM = qc_("AU", "distance, astronomical unit");
-	ui->labelLinearDistanceValue->setText(QString("%1 %2 (%3 %4)").arg(distAU).arg(distanceUM).arg(distKM).arg(useKM ? km : Mkm));
+	ui->labelLinearDistanceValue->setText(QString("%1 %2 (%3 %4)").arg(distAU, distanceUM, distKM, useKM ? km : Mkm));
 
 	QString angularDistance = dash;
 	if (firstCelestialBody != currentPlanet && secondCelestialBody != currentPlanet)
-		angularDistance = QString("%1%2 %3' %4\" (%5%2)").arg(d).arg(QChar(0x00B0)).arg(m).arg(s, 0, 'f', 2).arg(dd, 0, 'f', 5);
+		angularDistance = QString("%1%2 %3' %4\" (%5%2)").arg(d).arg(degree).arg(m).arg(s, 0, 'f', 2).arg(dd, 0, 'f', 5);
 	ui->labelAngularDistanceValue->setText(angularDistance);
 
-	if (cb1 > 0 && cb2 > 0)
+	// TRANSLATORS: Part of unit of measure for mean motion - degrees per day
+	QString day = qc_("day", "mean motion");
+	// TRANSLATORS: Unit of measure for period - days
+	QString days = qc_("days", "duration");
+	QString synodicPeriod = dash;
+	QString orbitalPeriodsRatio = dash;
+	if (spcb1 > 0.0 && spcb2 > 0.0 && parentFCBName==parentSCBName && firstCelestialBody!="Sun")
 	{
-		double r1 = qAbs(cb1 / gcd);
-		double r2 = qAbs(cb2 / gcd);
-		orbitalResonance = QString("%1:%2").arg(qRound(r1)).arg(qRound(r2));
-		if (spin)
-			orbitalResonance.append(QString(" (%1)").arg(q_("spin-orbit resonance")));
-	}
-	ui->labelOrbitalResonanceValue->setText(orbitalResonance);
+		double sp = qAbs(1/(1/spcb1 - 1/spcb2));
+		synodicPeriod = QString("%1 %2 (%3 a)").arg(QString::number(sp, 'f', 3), days, QString::number(sp/365.25, 'f', 5));
 
-	if (spcb1 > 0. && spcb2 > 0.)
-	{
 		double minp = spcb2;
 		if (qAbs(spcb1)<=qAbs(spcb2)) { minp = spcb1; }
-		orbitalPeriodsRatio = QString("%1:%2").arg(QString::number(qAbs(spcb1/minp), 'f', 2)).arg(QString::number(qAbs(spcb2/minp), 'f', 2));
+		int a = qRound(qAbs(spcb1/minp)*10);
+		int b = qRound(qAbs(spcb2/minp)*10);
+		int lcm = qAbs(a*b)/StelUtils::gcd(a, b);
+		orbitalPeriodsRatio = QString("%1:%2").arg(lcm/a).arg(lcm/b);
 	}
+	ui->labelSynodicPeriodValue->setText(synodicPeriod);
 	ui->labelOrbitalPeriodsRatioValue->setText(orbitalPeriodsRatio);
+
+	if (spcb1>0. && firstCelestialBody!="Sun")
+		ui->labelMeanMotionFCBValue->setText(QString("%1 %2/%3").arg(QString::number(360./spcb1, 'f', 5), degree, day));
+	else
+		ui->labelMeanMotionFCBValue->setText(dash);
+
+	if (spcb2>0. && secondCelestialBody!="Sun")
+		ui->labelMeanMotionSCBValue->setText(QString("%1 %2/%3").arg(QString::number(360./spcb2, 'f', 5), degree, day));
+	else
+		ui->labelMeanMotionSCBValue->setText(dash);
 
 	// TRANSLATORS: Unit of measure for speed - kilometers per second
 	QString kms = qc_("km/s", "speed");
 
 	double orbVelFCB = firstCBId->getEclipticVelocity().length();
-	QString orbitalVelocityFCB = orbVelFCB<=0. ? dash : QString("%1 %2").arg(QString::number(orbVelFCB * AU/86400., 'f', 3)).arg(kms);
+	QString orbitalVelocityFCB = orbVelFCB<=0. ? dash : QString("%1 %2").arg(QString::number(orbVelFCB * AU/86400., 'f', 3), kms);
 	ui->labelOrbitalVelocityFCBValue->setText(orbitalVelocityFCB);
 
 	double orbVelSCB = secondCBId->getEclipticVelocity().length();
-	QString orbitalVelocitySCB = orbVelSCB<=0. ? dash : QString("%1 %2").arg(QString::number(orbVelSCB * AU/86400., 'f', 3)).arg(kms);
+	QString orbitalVelocitySCB = orbVelSCB<=0. ? dash : QString("%1 %2").arg(QString::number(orbVelSCB * AU/86400., 'f', 3), kms);
 	ui->labelOrbitalVelocitySCBValue->setText(orbitalVelocitySCB);
-
-	// TRANSLATORS: Unit of measure for period - days
-	QString days = qc_("days", "duration");
-	QString synodicPeriod = dash;
-	bool showSP = true;
-	if (firstCelestialBody == secondCelestialBody || firstCelestialBody == "Sun" || secondCelestialBody == "Sun")
-		showSP = false;
-	if ((firstCBId->getPlanetTypeString()=="moon" && parentFCBName!=secondCelestialBody) || (secondCBId->getPlanetTypeString()=="moon" && parentSCBName!=firstCelestialBody))
-		showSP = false;
-	if (spcb1 > 0.0 && spcb2 > 0.0 && showSP)
-	{
-		double sp = qAbs(1/(1/spcb1 - 1/spcb2));
-		synodicPeriod = QString("%1 %2 (%3 a)").arg(QString::number(sp, 'f', 3)).arg(days).arg(QString::number(sp/365.25, 'f', 5));
-	}
-
-	ui->labelSynodicPeriodValue->setText(synodicPeriod);
 
 	double fcbs = 2.0 * AU * firstCBId->getEquatorialRadius();
 	double scbs = 2.0 * AU * secondCBId->getEquatorialRadius();
 	double sratio = fcbs/scbs;
 	int ss = (sratio < 1.0 ? 6 : 2);
 
-	QString sizeRatio = QString("%1 (%2 %4 / %3 %4)").arg(QString::number(sratio, 'f', ss), QString::number(fcbs, 'f', 1), QString::number(scbs, 'f', 1) , km);
+	QString sizeRatio = QString("%1 (%2 %4 / %3 %4)").arg(QString::number(sratio, 'f', ss), QString::number(fcbs, 'f', 1), QString::number(scbs, 'f', 1), km);
 	ui->labelEquatorialRadiiRatioValue->setText(sizeRatio);
 }
 

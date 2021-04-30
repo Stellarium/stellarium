@@ -655,9 +655,10 @@ void ConstellationMgr::drawArt(StelPainter& sPainter) const
 // Draw constellations lines
 void ConstellationMgr::drawLines(StelPainter& sPainter, const StelCore* core) const
 {
+	const float ppx = static_cast<float>(sPainter.getProjector()->getDevicePixelsPerPixel());
 	sPainter.setBlending(true);
-	if (constellationLineThickness>1)
-		sPainter.setLineWidth(constellationLineThickness); // set line thickness
+	if (constellationLineThickness>1 || ppx>1.f)
+		sPainter.setLineWidth(constellationLineThickness*ppx); // set line thickness
 	sPainter.setLineSmooth(true);
 
 	const SphericalCap& viewportHalfspace = sPainter.getProjector()->getBoundingCap();
@@ -665,7 +666,7 @@ void ConstellationMgr::drawLines(StelPainter& sPainter, const StelCore* core) co
 	{
 		constellation->drawOptim(sPainter, core, viewportHalfspace);
 	}
-	if (constellationLineThickness>1)
+	if (constellationLineThickness>1 || ppx>1.f)
 		sPainter.setLineWidth(1); // restore line thickness
 	sPainter.setLineSmooth(false);
 }
@@ -1374,15 +1375,16 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 
 void ConstellationMgr::drawBoundaries(StelPainter& sPainter) const
 {
+	const float ppx = static_cast<float>(sPainter.getProjector()->getDevicePixelsPerPixel());
 	sPainter.setBlending(false);
-	if (constellationBoundariesThickness>1)
-		sPainter.setLineWidth(constellationBoundariesThickness); // set line thickness
+	if (constellationBoundariesThickness>1 || ppx>1.f)
+		sPainter.setLineWidth(constellationBoundariesThickness*ppx); // set line thickness
 	sPainter.setLineSmooth(true);
 	for (auto* constellation : constellations)
 	{
 		constellation->drawBoundaryOptim(sPainter);
 	}
-	if (constellationBoundariesThickness>1)
+	if (constellationBoundariesThickness>1 || ppx>1.f)
 		sPainter.setLineWidth(1); // restore line thickness
 	sPainter.setLineSmooth(false);
 }
