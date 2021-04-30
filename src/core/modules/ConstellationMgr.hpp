@@ -387,7 +387,8 @@ private:
 	//! Draw the constellation name labels.
 	void drawNames(StelPainter& sPainter) const;
 	//! Draw the constellation boundaries.
-	void drawBoundaries(StelPainter& sPainter) const;
+	//! @param obsVelocity is the speed vector of the observer planet to distort boundaries by aberration.
+	void drawBoundaries(StelPainter& sPainter, const Vec3d &obsVelocity) const;
 	//! Handle single and multi-constellation selections.
 	void setSelectedConst(Constellation* c);
 	//! Handle unselecting a single constellation.

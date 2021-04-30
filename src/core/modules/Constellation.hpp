@@ -88,7 +88,7 @@ private:
 	//! Draw the constellation art
 	void drawArt(StelPainter& sPainter) const;
 	//! Draw the constellation boundary
-	void drawBoundaryOptim(StelPainter& sPainter) const;
+	void drawBoundaryOptim(StelPainter& sPainter, const Vec3d &obsVelocity) const;
 
 	//! Test if a star is part of a Constellation.
 	//! This member tests to see if a star is one of those which make up
