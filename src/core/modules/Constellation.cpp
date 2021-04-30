@@ -204,7 +204,7 @@ void Constellation::update(int deltaTime)
 	boundaryFader.update(deltaTime);
 }
 
-void Constellation::drawBoundaryOptim(StelPainter& sPainter) const
+void Constellation::drawBoundaryOptim(StelPainter& sPainter, const Vec3d& obsVelocity) const
 {
 	if (boundaryFader.getInterstate()==0.0f)
 		return;
@@ -228,7 +228,12 @@ void Constellation::drawBoundaryOptim(StelPainter& sPainter) const
 
 		for (j=0;j<points->size()-1;j++)
 		{
-			sPainter.drawGreatCircleArc(points->at(j), points->at(j+1), &viewportHalfspace);
+			Vec3d point0=points->at(j)+obsVelocity;
+			point0.normalize();
+			Vec3d point1=points->at(j+1)+obsVelocity;
+			point1.normalize();
+
+			sPainter.drawGreatCircleArc(point0, point1, &viewportHalfspace);
 		}
 	}
 }
