@@ -126,7 +126,7 @@ void StelSkyPolygon::getTilesToDraw(QMultiMap<double, StelSkyPolygon*>& result, 
 	result.insert(minResolution, this);
 
 	// Check if we reach the resolution limit
-	const double degPerPixel = 1./core->getProjection(StelCore::FrameJ2000)->getPixelPerRadAtCenter()*M_180_PI;
+	const float degPerPixel = 1.f/core->getProjection(StelCore::FrameJ2000)->getPixelPerRadAtCenter()*M_180_PIf;
 	if (degPerPixel < minResolution)
 	{
 		if (subTiles.isEmpty() && !subTilesUrls.isEmpty())
@@ -208,7 +208,7 @@ void StelSkyPolygon::loadFromQVariantMap(const QVariantMap& map)
 		{
 			const QVariantList vl = vRaDec.toList();
 			Vec3d v;
-			StelUtils::spheToRect(vl.at(0).toFloat(&ok)*M_PI/180.f, vl.at(1).toFloat(&ok)*M_PI/180.f, v);
+			StelUtils::spheToRect(vl.at(0).toFloat(&ok)*M_PI_180f, vl.at(1).toFloat(&ok)*M_PI_180f, v);
 			if (!ok)
 				throw std::runtime_error("wrong Ra and Dec, expect a double value");
 			vertices.append(v);
