@@ -1556,7 +1556,6 @@ public:
 	}
 
 private:
-	//const StelVertexArray& vertexArray; // UNUSED?
 	StelPainter* painter;
 	const SphericalCap* clippingCap;
 	QVarLengthArray<Vec3f, 4096>* outVertices;
@@ -1565,16 +1564,30 @@ private:
 	double maxSqDistortion;
 };
 
-void StelPainter::drawStelVertexArray(const StelVertexArray& arr, bool checkDiscontinuity)
+void StelPainter::drawStelVertexArray(const StelVertexArray& arr, bool checkDiscontinuity, Vec3d aberration)
 {
 	if (checkDiscontinuity && prj->hasDiscontinuity())
 	{
 		// The projection has discontinuities, so we need to make sure that no triangle is crossing them.
-		drawStelVertexArray(arr.removeDiscontinuousTriangles(this->getProjector().data()), false);
+		drawStelVertexArray(arr.removeDiscontinuousTriangles(this->getProjector().data()), false, aberration);
 		return;
 	}
 
-	setVertexPointer(3, GL_DOUBLE, arr.vertex.constData());
+	if (aberration==Vec3d(0.))
+	{
+		setVertexPointer(3, GL_DOUBLE, arr.vertex.constData());
+	}
+	else
+	{
+		QVector<Vec3d> aberredVertex(arr.vertex.size());
+		for (int i=0; i<arr.vertex.size(); i++)
+		{
+			Vec3d vec=arr.vertex.at(i)+aberration;
+			vec.normalize();
+			aberredVertex[i]=vec;
+			setVertexPointer(3, GL_DOUBLE, aberredVertex.constData());
+		}
+	}
 	if (arr.isTextured())
 	{
 		setTexCoordPointer(2, GL_FLOAT, arr.texCoords.constData());

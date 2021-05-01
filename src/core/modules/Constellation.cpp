@@ -154,7 +154,7 @@ void Constellation::drawName(StelPainter& sPainter, ConstellationMgr::Constellat
 	}
 }
 
-void Constellation::drawArtOptim(StelPainter& sPainter, const SphericalRegion& region) const
+void Constellation::drawArtOptim(StelPainter& sPainter, const SphericalRegion& region, const Vec3d& obsVelocity) const
 {
 	if (checkVisibility())
 	{
@@ -167,7 +167,7 @@ void Constellation::drawArtOptim(StelPainter& sPainter, const SphericalRegion& r
 			if (artTexture->bind()==false)
 				return;
 
-			sPainter.drawStelVertexArray(artPolygon);
+			sPainter.drawStelVertexArray(artPolygon, false, obsVelocity);
 		}
 	}
 }
@@ -175,10 +175,12 @@ void Constellation::drawArtOptim(StelPainter& sPainter, const SphericalRegion& r
 // Draw the art texture
 void Constellation::drawArt(StelPainter& sPainter) const
 {
+	// Is this ever used?
+	Q_ASSERT(0);
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
 	sPainter.setCullFace(true);
 	SphericalRegionP region = sPainter.getProjector()->getViewportConvexPolygon();
-	drawArtOptim(sPainter, *region);
+	drawArtOptim(sPainter, *region, Vec3d(0.));
 	sPainter.setCullFace(false);
 }
 

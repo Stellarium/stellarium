@@ -684,8 +684,6 @@ void ConstellationMgr::draw(StelCore* core)
 	StelPainter sPainter(prj);
 	sPainter.setFont(asterFont);
 	drawLines(sPainter, core);
-	drawNames(sPainter);
-	drawArt(sPainter);
 	Vec3d vel(0.);
 	if (core->getUseAberration())
 	{
@@ -693,11 +691,13 @@ void ConstellationMgr::draw(StelCore* core)
 		vel=StelCore::matVsop87ToJ2000*vel;
 		vel*=core->getAberrationFactor() * (AU/(86400.0*SPEED_OF_LIGHT));
 	}
+	drawNames(sPainter, vel);
+	drawArt(sPainter, vel);
 	drawBoundaries(sPainter, vel);
 }
 
 // Draw constellations art textures
-void ConstellationMgr::drawArt(StelPainter& sPainter) const
+void ConstellationMgr::drawArt(StelPainter& sPainter, const Vec3d &obsVelocity) const
 {
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
 	sPainter.setCullFace(true);
@@ -705,7 +705,7 @@ void ConstellationMgr::drawArt(StelPainter& sPainter) const
 	SphericalRegionP region = sPainter.getProjector()->getViewportConvexPolygon();
 	for (auto* constellation : constellations)
 	{
-		constellation->drawArtOptim(sPainter, *region);
+		constellation->drawArtOptim(sPainter, *region, obsVelocity);
 	}
 
 	sPainter.setCullFace(false);
@@ -731,23 +731,15 @@ void ConstellationMgr::drawLines(StelPainter& sPainter, const StelCore* core) co
 }
 
 // Draw the names of all the constellations
-void ConstellationMgr::drawNames(StelPainter& sPainter) const
+void ConstellationMgr::drawNames(StelPainter& sPainter, const Vec3d &obsVelocity) const
 {
-	StelCore *core=StelApp::getInstance().getCore();
-	Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
-	vel=StelCore::matVsop87ToJ2000*vel;
-	vel*=core->getAberrationFactor() * (AU/(86400.0*SPEED_OF_LIGHT));
-
 	sPainter.setBlending(true);
 	for (auto* constellation : constellations)
 	{
 		Vec3d XYZname=constellation->XYZname;
-		if (core->getUseAberration())
-		{
-			XYZname.normalize();
-			XYZname+=vel;
-			XYZname.normalize();
-		}
+		XYZname.normalize();
+		XYZname+=obsVelocity;
+		XYZname.normalize();
 
 		// Check if in the field of view
 		if (sPainter.getProjector()->projectCheck(XYZname, constellation->XYname))
