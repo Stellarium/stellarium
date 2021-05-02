@@ -177,7 +177,7 @@ public:
 	//! @param margin the minimum enlargement margin in radian.
 	virtual SphericalRegionP getEnlarged(double margin) const;
 
-	//! Return an openGL compatible array to be displayed using vertex arrays.
+	//! Return an OpenGL compatible array to be displayed using vertex arrays.
 	virtual StelVertexArray getFillVertexArray() const {return getOctahedronPolygon().getFillVertexArray();}
 
 	//! Get the outline of the contours defining the SphericalPolygon.
@@ -185,7 +185,7 @@ public:
 	virtual StelVertexArray getOutlineVertexArray() const {return getOctahedronPolygon().getOutlineVertexArray();}
 
 	//! Get the contours defining the SphericalPolygon when combined using a positive winding rule.
-	//! The default implementation return a list of tesselated triangles derived from the OctahedronPolygon.
+	//! The default implementation returns a list of tessellated triangles derived from the OctahedronPolygon.
 	virtual QVector<QVector<Vec3d > > getSimplifiedContours() const;
 	
 	//! Serialize the region into a QVariant list matching the JSON format.
