@@ -21,6 +21,7 @@
 #include <QObject>
 #include <QSettings>
 #include <QString>
+#include <QtGlobal>
 
 #include "OcularsConfig.hpp"
 
@@ -30,7 +31,9 @@ class TelescopeData;
 class Telescope : public QObject
 {
    Q_OBJECT
+#if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)
    Q_DISABLE_COPY_MOVE(Telescope)
+#endif
    Q_PROPERTY(QString name READ name WRITE setName)
    Q_PROPERTY(double diameter READ diameter WRITE setDiameter)
    Q_PROPERTY(double focalLength READ focalLength WRITE setFocalLength)

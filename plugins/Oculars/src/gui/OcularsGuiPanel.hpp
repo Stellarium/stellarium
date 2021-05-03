@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #pragma once
 
 #include <QGraphicsWidget>
+#include <QtGlobal>
 
 class Oculars;
 class StelButton;
@@ -34,7 +35,9 @@ class QWidget;
 class OcularsGuiPanel : public QGraphicsWidget
 {
    Q_OBJECT
+#if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)
    Q_DISABLE_COPY_MOVE(OcularsGuiPanel)
+#endif
 
 public:
    OcularsGuiPanel(Oculars * ocularsPlugin, QGraphicsWidget * parent = Q_NULLPTR);
@@ -147,7 +150,7 @@ private:
    void                    setControlsColor(const QColor & color);
    void                    setControlsFont(const QFont & font);
 
-   static auto          createPixmapFromText(const QString & text,
+   static auto             createPixmapFromText(const QString & text,
                                                 int             width,
                                                 int             height,
                                                 const QFont &   font,

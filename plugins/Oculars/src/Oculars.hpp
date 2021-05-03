@@ -31,6 +31,7 @@
 
 #include <QFont>
 #include <QSettings>
+#include <QtGlobal>
 
 class StelButton;
 class StelAction;
@@ -64,7 +65,9 @@ a good way to supplement your visual astronomy interests.
 class Oculars : public StelModule
 {
    Q_OBJECT
+#if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)
    Q_DISABLE_COPY_MOVE(Oculars)
+#endif
 
    Q_PROPERTY(bool enableOcular READ getEnableOcular WRITE enableOcular NOTIFY enableOcularChanged)
    Q_PROPERTY(bool enableCrosshairs READ getEnableCrosshairs WRITE toggleCrosshairs NOTIFY enableCrosshairsChanged)

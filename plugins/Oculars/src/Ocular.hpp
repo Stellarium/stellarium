@@ -23,6 +23,7 @@
 #include <QObject>
 #include <QSettings>
 #include <QString>
+#include <QtGlobal>
 
 #include "OcularsConfig.hpp"
 
@@ -33,7 +34,9 @@ class Lens;
 class Ocular : public QObject
 {
    Q_OBJECT
+#if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)
    Q_DISABLE_COPY_MOVE(Ocular)
+#endif
    Q_PROPERTY(bool binoculars READ isBinoculars WRITE setBinoculars)
    Q_PROPERTY(bool permanentCrosshair READ hasPermanentCrosshair WRITE setPermanentCrosshair)
    Q_PROPERTY(double apparentFOV READ apparentFOV WRITE setApparentFOV)

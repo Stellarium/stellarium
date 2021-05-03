@@ -27,8 +27,10 @@
 #include "StelStyle.hpp"
 #include "Telescope.hpp"
 #include "VecMath.hpp"
+
 #include <QDataWidgetMapper>
 #include <QObject>
+#include <QtGlobal>
 
 class Ui_ocularDialogForm;
 
@@ -39,7 +41,9 @@ class Oculars;
 class OcularDialog : public StelDialog
 {
    Q_OBJECT
+#if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)
    Q_DISABLE_COPY_MOVE(OcularDialog)
+#endif
 
 public:
    OcularDialog(Oculars *            plugin,

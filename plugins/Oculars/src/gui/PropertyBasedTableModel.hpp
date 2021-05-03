@@ -19,6 +19,7 @@
 #pragma once
 
 #include <QAbstractTableModel>
+#include <QtGlobal>
 
 //! This class provides a table model for just about any QObject.  It it nice, as a table model implementation per
 //! class is not required.  It does this by using the Qt meta object system.
@@ -35,6 +36,9 @@
 class PropertyBasedTableModel : public QAbstractTableModel
 {
    Q_OBJECT
+#if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)
+   Q_DISABLE_COPY_MOVE(PropertyBasedTableModel)
+#endif
 public:
    explicit PropertyBasedTableModel(QObject * parent = Q_NULLPTR);
    ~PropertyBasedTableModel() override;

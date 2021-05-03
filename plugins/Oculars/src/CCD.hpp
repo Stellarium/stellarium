@@ -19,10 +19,12 @@
 #pragma once
 
 #include "OcularsConfig.hpp"
+
 #include <QExplicitlySharedDataPointer>
 #include <QObject>
 #include <QSettings>
 #include <QString>
+#include <QtGlobal>
 
 class Lens;
 class Telescope;
@@ -31,7 +33,9 @@ class Telescope;
 class CCD : public QObject
 {
    Q_OBJECT
+#if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)
    Q_DISABLE_COPY_MOVE(CCD)
+#endif
    Q_PROPERTY(QString name READ name WRITE setName)
    Q_PROPERTY(int resolutionX READ resolutionX WRITE setResolutionX)
    Q_PROPERTY(int resolutionY READ resolutionY WRITE setResolutionY)

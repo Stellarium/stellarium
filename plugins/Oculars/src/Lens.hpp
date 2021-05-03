@@ -25,6 +25,7 @@
 #include <QMap>
 #include <QObject>
 #include <QString>
+#include <QtGlobal>
 
 class QSettings;
 
@@ -32,7 +33,9 @@ class QSettings;
 class Lens : public QObject
 {
    Q_OBJECT
+#if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)
    Q_DISABLE_COPY_MOVE(Lens)
+#endif
    Q_PROPERTY(QString name READ name WRITE setName)
    Q_PROPERTY(double multiplier READ multiplier WRITE setMultiplier)
 
