@@ -644,6 +644,7 @@ void LandscapeOldStyle::draw(StelCore* core, bool onlyPolygon)
 		return;
 
 	StelPainter painter(core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff));
+	const float ppx = static_cast<float>(painter.getProjector()->getDevicePixelsPerPixel());
 	painter.setBlending(true);
 	painter.setCullFace(true);
 
@@ -674,7 +675,7 @@ void LandscapeOldStyle::draw(StelCore* core, bool onlyPolygon)
 		painter.setBlending(true, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		painter.setColor(horizonPolygonLineColor, landFader.getInterstate());
 		const float lineWidth=painter.getLineWidth();
-		painter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness());
+		painter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness()*ppx);
 		painter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
 		painter.setLineWidth(lineWidth);
 	}
@@ -889,6 +890,7 @@ void LandscapePolygonal::draw(StelCore* core, bool onlyPolygon)
 	transfo->combine(Mat4d::zrotation(-static_cast<double>(angleRotateZOffset)));
 	const StelProjectorP prj = core->getProjection(transfo);
 	StelPainter sPainter(prj);
+	const float ppx = static_cast<float>(sPainter.getProjector()->getDevicePixelsPerPixel());
 
 	// Normal transparency mode for the transition blending
 	sPainter.setBlending(true);
@@ -905,7 +907,7 @@ void LandscapePolygonal::draw(StelCore* core, bool onlyPolygon)
 		sPainter.setLineSmooth(true);
 		sPainter.setColor(horizonPolygonLineColor, landFader.getInterstate());
 		const float lineWidth=sPainter.getLineWidth();
-		sPainter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness());
+		sPainter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness()*ppx);
 		sPainter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
 		sPainter.setLineWidth(lineWidth);
 		sPainter.setLineSmooth(false);
@@ -1009,6 +1011,7 @@ void LandscapeFisheye::draw(StelCore* core, bool onlyPolygon)
 	transfo->combine(Mat4d::zrotation(-static_cast<double>(angleRotateZ+angleRotateZOffset)));
 	const StelProjectorP prj = core->getProjection(transfo);
 	StelPainter painter(prj);
+	const float ppx = static_cast<float>(painter.getProjector()->getDevicePixelsPerPixel());
 
 	if (!onlyPolygon || !horizonPolygon) // Make sure to draw the regular pano when there is no polygon
 	{
@@ -1048,7 +1051,7 @@ void LandscapeFisheye::draw(StelCore* core, bool onlyPolygon)
 		painter.setBlending(true, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		painter.setColor(horizonPolygonLineColor, landFader.getInterstate());
 		const float lineWidth=painter.getLineWidth();
-		painter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness());
+		painter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness()*ppx);
 		painter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
 		painter.setLineWidth(lineWidth);
 	}
@@ -1215,6 +1218,7 @@ void LandscapeSpherical::draw(StelCore* core, bool onlyPolygon)
 	transfo->combine(Mat4d::zrotation(-(static_cast<double>(angleRotateZ+angleRotateZOffset))));
 	const StelProjectorP prj = core->getProjection(transfo);
 	StelPainter sPainter(prj);
+	const float ppx = static_cast<float>(sPainter.getProjector()->getDevicePixelsPerPixel());
 
 	// Normal transparency mode
 	sPainter.setBlending(true);
@@ -1264,7 +1268,7 @@ void LandscapeSpherical::draw(StelCore* core, bool onlyPolygon)
 		sPainter.setBlending(true);
 		sPainter.setColor(horizonPolygonLineColor, landFader.getInterstate());
 		const float lineWidth=sPainter.getLineWidth();
-		sPainter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness());
+		sPainter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness()*ppx);
 		sPainter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
 		sPainter.setLineWidth(lineWidth);
 	}
