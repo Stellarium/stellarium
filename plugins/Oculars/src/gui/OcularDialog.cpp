@@ -57,7 +57,6 @@ OcularDialog::OcularDialog(Oculars *            pluginPtr,
    , lensTableModel(new PropertyBasedTableModel(this))
    , validatorName(new QRegExpValidator(this))
 {
-
    ccdTableModel->init(reinterpret_cast<QList<QObject *> *>(ccds), new CCD(ccdTableModel), CCD::propertyMap());
    ocularTableModel->init(
      reinterpret_cast<QList<QObject *> *>(oculars), new Ocular(ccdTableModel), Ocular::propertyMap());
