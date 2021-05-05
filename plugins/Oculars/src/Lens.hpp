@@ -18,39 +18,48 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef LENS_HPP
-#define LENS_HPP
+#pragma once
 
+#include <QDebug>
+#include <QExplicitlySharedDataPointer>
+#include <QMap>
 #include <QObject>
 #include <QString>
-#include <QMap>
+#include <QtGlobal>
 
 class QSettings;
 
 //! @ingroup oculars
 class Lens : public QObject
 {
-	Q_OBJECT
-	Q_PROPERTY(QString name READ getName WRITE setName)
-	Q_PROPERTY(double multipler READ getMultipler WRITE setMultipler)
+   Q_OBJECT
+#if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)
+   Q_DISABLE_COPY_MOVE(Lens)
+#endif
+   Q_PROPERTY(QString name READ name WRITE setName)
+   Q_PROPERTY(double multiplier READ multiplier WRITE setMultiplier)
 
 public:
-	Lens();
-	Q_INVOKABLE Lens(const QObject& other);
-	virtual ~Lens();
-	static Lens* lensFromSettings(QSettings* theSettings, int lensIndex);
-	void writeToSettings(QSettings * settings, const int index);
-	static Lens* lensModel();
+   /// Creates a new instance of Lens.
+   //! The newly created instance will have values initialized to represent a usable lens model.
+   explicit Lens(QObject * parent = nullptr);
+   ~Lens() override = default;
 
-	double getMultipler() const;
-	void setMultipler(double theValue);
-	const QString getName() const;
-	void setName(const QString& theValue);
-	QMap<int, QString> propertyMap();
+   void        initFromSettings(QSettings * theSettings, int lensIndex);
+   void        writeToSettings(QSettings * settings, int index) const;
+
+   auto        multiplier() const -> double;
+   void        setMultiplier(double theValue);
+   auto        name() const -> QString;
+   void        setName(const QString & theValue);
+   static auto propertyMap() -> QMap<int, QString>;
 
 private:
-	QString m_name;
-	double m_multipler;
+   double  m_multiplier{ 0.0 };
+   QString m_name{ "New Lens" };
 };
 
-#endif
+auto operator<<(QDebug debug, const Lens & lens) -> QDebug;
+auto operator<<(QDebug debug, const Lens * lens) -> QDebug;
+
+Q_DECLARE_METATYPE(Lens *);

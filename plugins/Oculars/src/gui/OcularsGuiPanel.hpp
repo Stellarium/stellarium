@@ -17,10 +17,10 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#ifndef OCULARSGUIPANEL_HPP
-#define OCULARSGUIPANEL_HPP
+#pragma once
 
 #include <QGraphicsWidget>
+#include <QtGlobal>
 
 class Oculars;
 class StelButton;
@@ -34,127 +34,126 @@ class QWidget;
 //! @ingroup oculars
 class OcularsGuiPanel : public QGraphicsWidget
 {
-	Q_OBJECT
+   Q_OBJECT
+#if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)
+   Q_DISABLE_COPY_MOVE(OcularsGuiPanel)
+#endif
 
 public:
-	OcularsGuiPanel(Oculars* ocularsPlugin,
-			QGraphicsWidget * parent = Q_NULLPTR,
-			Qt::WindowFlags wFlags = Q_NULLPTR);
-	~OcularsGuiPanel();
+   OcularsGuiPanel(Oculars * ocularsPlugin, QGraphicsWidget * parent = Q_NULLPTR);
+   ~OcularsGuiPanel() override = default;
 
 public slots:
-	//! Show only the controls used with an ocular overlay.
-	void showOcularGui();
-	//! Show only the controls used with a CCD overlay.
-	void showCcdGui();
-	//! Hide the controls, leaving only the button bar.
-	void foldGui();
+   //! Show only the controls used with an ocular overlay.
+   void showOcularGui();
+   //! Show only the controls used with a CCD overlay.
+   void showCcdGui();
+   //! Hide the controls, leaving only the button bar.
+   void foldGui();
 
 private slots:
-	//! Update the position of the widget within the parent.
-	//! Tied to the parent's geometryChanged() signal.
-	void updatePosition();
+   //! Update the position of the widget within the parent.
+   //! Tied to the parent's geometryChanged() signal.
+   void updatePosition();
 
-	//! Updates the information shown when an ocular overlay is displayed
-	void updateOcularControls();
-	//! Updates the information shown when a sensor overlay is displayed
-	void updateCcdControls();
-	//! Updates the information that depends on the current telescope.
-	//! Called in both updateOcularControls() and updateCcdControls().
-	void updateTelescopeControls();
-	//! Updates the information that depends on the current lens
-	void updateLensControls();
-	//! Sets the color scheme (day/night mode)
-	void setColorScheme(const QString& schemeName);
+   //! Updates the information shown when an ocular overlay is displayed
+   void updateOcularControls();
+   //! Updates the information shown when a sensor overlay is displayed
+   void updateCcdControls();
+   //! Updates the information that depends on the current telescope.
+   //! Called in both updateOcularControls() and updateCcdControls().
+   void updateTelescopeControls();
+   //! Updates the information that depends on the current lens
+   void updateLensControls();
+   //! Sets the color scheme (day/night mode)
+   void setColorScheme(const QString & schemeName);
 
 private:
-	Oculars* ocularsPlugin;
+   Oculars *               ocularsPlugin;
 
-	//! This is actually SkyGui. Perhaps it should be more specific?
-	QGraphicsWidget* parentWidget;
+   //! This is actually SkyGui. Perhaps it should be more specific?
+   QGraphicsWidget *       parentWidget;
 
-	QGraphicsLinearLayout* mainLayout;
+   QGraphicsLinearLayout * mainLayout;
 
-	QGraphicsPathItem* borderPath;
+   QGraphicsPathItem *     borderPath;
 
-	//! Mini-toolbar holding StelButtons
-	QGraphicsWidget* buttonBar;
-	QGraphicsWidget* ocularControls;
-	QGraphicsWidget* lensControls;
-	QGraphicsWidget* ccdControls;
-	QGraphicsWidget* telescopeControls;
+   //! Mini-toolbar holding StelButtons
+   QGraphicsWidget *       buttonBar;
+   QGraphicsWidget *       ocularControls;
+   QGraphicsWidget *       lensControls;
+   QGraphicsWidget *       ccdControls;
+   QGraphicsWidget *       telescopeControls;
 
-	//Mini-toolbar
-	StelButton* buttonOcular;
-	StelButton* buttonCrosshairs;
-	StelButton* buttonCcd;
-	StelButton* buttonTelrad;
-	StelButton* buttonConfiguration;
+   // Mini-toolbar
+   StelButton *            buttonOcular;
+   StelButton *            buttonCrosshairs;
+   StelButton *            buttonCcd;
+   StelButton *            buttonTelrad;
+   StelButton *            buttonConfiguration;
 
-	//Information display
-	StelButton* prevOcularButton;
-	StelButton* nextOcularButton;
-	StelButton* prevTelescopeButton;
-	StelButton* nextTelescopeButton;
-	StelButton* prevCcdButton;
-	StelButton* nextCcdButton;
-	StelButton* prevLensButton;
-	StelButton* nextLensButton;
-	QGraphicsTextItem* fieldLensName;
-	QGraphicsTextItem* fieldLensMultipler;
-	QGraphicsTextItem* fieldOcularName;
-	QGraphicsTextItem* fieldOcularFl;
-	QGraphicsTextItem* fieldOcularAfov;
-	QGraphicsTextItem* fieldCcdName;
-	QGraphicsTextItem* fieldCcdDimensions;
-	QGraphicsTextItem* fieldCcdBinning;
-	QGraphicsTextItem* fieldCcdHScale;
-	QGraphicsTextItem* fieldCcdVScale;
-	QGraphicsTextItem* fieldCcdRotation;
-	QGraphicsTextItem* fieldPrismRotation;
-	QGraphicsTextItem* fieldTelescopeName;
-	QGraphicsTextItem* fieldMagnification;
-	QGraphicsTextItem* fieldExitPupil;
-	QGraphicsTextItem* fieldFov;
-	QGraphicsTextItem* fieldRayleighCriterion;
-	QGraphicsTextItem* fieldDawesCriterion;
-	QGraphicsTextItem* fieldAbbeyCriterion;
-	QGraphicsTextItem* fieldSparrowCriterion;
-	QGraphicsTextItem* fieldVisualResolution;
+   // Information display
+   StelButton *            prevOcularButton;
+   StelButton *            nextOcularButton;
+   StelButton *            prevTelescopeButton;
+   StelButton *            nextTelescopeButton;
+   StelButton *            prevCcdButton;
+   StelButton *            nextCcdButton;
+   StelButton *            prevLensButton;
+   StelButton *            nextLensButton;
+   QGraphicsTextItem *     fieldLensName;
+   QGraphicsTextItem *     fieldLensMultipler;
+   QGraphicsTextItem *     fieldOcularName;
+   QGraphicsTextItem *     fieldOcularFl;
+   QGraphicsTextItem *     fieldOcularAfov;
+   QGraphicsTextItem *     fieldCcdName;
+   QGraphicsTextItem *     fieldCcdDimensions;
+   QGraphicsTextItem *     fieldCcdBinning;
+   QGraphicsTextItem *     fieldCcdHScale;
+   QGraphicsTextItem *     fieldCcdVScale;
+   QGraphicsTextItem *     fieldCcdRotation;
+   QGraphicsTextItem *     fieldPrismRotation;
+   QGraphicsTextItem *     fieldTelescopeName;
+   QGraphicsTextItem *     fieldMagnification;
+   QGraphicsTextItem *     fieldExitPupil;
+   QGraphicsTextItem *     fieldFov;
+   QGraphicsTextItem *     fieldRayleighCriterion;
+   QGraphicsTextItem *     fieldDawesCriterion;
+   QGraphicsTextItem *     fieldAbbeyCriterion;
+   QGraphicsTextItem *     fieldSparrowCriterion;
+   QGraphicsTextItem *     fieldVisualResolution;
 
-	//Sensor frame rotation controls
-	StelButton* rotateCcdMinus15Button;
-	StelButton* rotateCcdMinus5Button;
-	StelButton* rotateCcdMinus1Button;
-	StelButton* resetCcdRotationButton;
-	StelButton* rotateCcdPlus1Button;
-	StelButton* rotateCcdPlus5Button;
-	StelButton* rotateCcdPlus15Button;
-	StelButton* rotatePrismMinus15Button;
-	StelButton* rotatePrismMinus5Button;
-	StelButton* rotatePrismMinus1Button;
-	StelButton* resetPrismRotationButton;
-	StelButton* rotatePrismPlus1Button;
-	StelButton* rotatePrismPlus5Button;
-	StelButton* rotatePrismPlus15Button;
+   // Sensor frame rotation controls
+   StelButton *            rotateCcdMinus15Button;
+   StelButton *            rotateCcdMinus5Button;
+   StelButton *            rotateCcdMinus1Button;
+   StelButton *            resetCcdRotationButton;
+   StelButton *            rotateCcdPlus1Button;
+   StelButton *            rotateCcdPlus5Button;
+   StelButton *            rotateCcdPlus15Button;
+   StelButton *            rotatePrismMinus15Button;
+   StelButton *            rotatePrismMinus5Button;
+   StelButton *            rotatePrismMinus1Button;
+   StelButton *            resetPrismRotationButton;
+   StelButton *            rotatePrismPlus1Button;
+   StelButton *            rotatePrismPlus5Button;
+   StelButton *            rotatePrismPlus15Button;
 
-	//! Sets the visibility of the ocular name label and the associated buttons.
-	void setOcularControlsVisible(bool show);
-	void setCcdControlsVisible(bool show);
-	void setTelescopeControlsVisible(bool show);
-	void setLensControlsVisible(bool show);
-	//! Updates the positions of the buttons inside the button bar.
-	void updateMainButtonsPositions();
+   //! Sets the visibility of the ocular name label and the associated buttons.
+   void                    setOcularControlsVisible(bool show);
+   void                    setCcdControlsVisible(bool show);
+   void                    setTelescopeControlsVisible(bool show);
+   void                    setLensControlsVisible(bool show);
+   //! Updates the positions of the buttons inside the button bar.
+   void                    updateMainButtonsPositions();
 
-	void setControlsColor(const QColor& color);
-	void setControlsFont(const QFont& font);
+   void                    setControlsColor(const QColor & color);
+   void                    setControlsFont(const QFont & font);
 
-	static QPixmap createPixmapFromText(const QString& text,
-	                                    int width,
-	                                    int height,
-	                                    const QFont& font,
-	                                    const QColor& textColor,
-	                                    const QColor& backgroundColor = QColor(0,0,0,0));
+   static auto             createPixmapFromText(const QString & text,
+                                                int             width,
+                                                int             height,
+                                                const QFont &   font,
+                                                const QColor &  textColor,
+                                                const QColor &  backgroundColor = QColor(0, 0, 0, 0)) -> QPixmap;
 };
-
-#endif // OCULARSGUIPANEL_HPP

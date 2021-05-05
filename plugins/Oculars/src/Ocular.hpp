@@ -16,13 +16,16 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef OCULAR_HPP
-#define OCULAR_HPP
+#pragma once
 
 #include <QDebug>
+#include <QExplicitlySharedDataPointer>
 #include <QObject>
-#include <QString>
 #include <QSettings>
+#include <QString>
+#include <QtGlobal>
+
+#include "OcularsConfig.hpp"
 
 class Telescope;
 class Lens;
@@ -30,50 +33,56 @@ class Lens;
 //! @ingroup oculars
 class Ocular : public QObject
 {
-	Q_OBJECT
-	Q_PROPERTY(bool binoculars READ isBinoculars WRITE setBinoculars)
-	Q_PROPERTY(bool permanentCrosshair READ hasPermanentCrosshair WRITE setPermanentCrosshair)
-	Q_PROPERTY(double apparentFOV READ apparentFOV WRITE setApparentFOV)
-	Q_PROPERTY(double effectiveFocalLength READ effectiveFocalLength WRITE setEffectiveFocalLength)
-	Q_PROPERTY(double fieldStop READ fieldStop WRITE setFieldStop)
-	Q_PROPERTY(QString name READ name WRITE setName)
-	Q_PROPERTY(QString reticlePath READ reticlePath WRITE setReticlePath)
+   Q_OBJECT
+#if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)
+   Q_DISABLE_COPY_MOVE(Ocular)
+#endif
+   Q_PROPERTY(bool binoculars READ isBinoculars WRITE setBinoculars)
+   Q_PROPERTY(bool permanentCrosshair READ hasPermanentCrosshair WRITE setPermanentCrosshair)
+   Q_PROPERTY(double apparentFOV READ apparentFOV WRITE setApparentFOV)
+   Q_PROPERTY(double effectiveFocalLength READ effectiveFocalLength WRITE setEffectiveFocalLength)
+   Q_PROPERTY(double fieldStop READ fieldStop WRITE setFieldStop)
+   Q_PROPERTY(QString name READ name WRITE setName)
+   Q_PROPERTY(QString reticlePath READ reticlePath WRITE setReticlePath)
 public:
-	Ocular();
-	Q_INVOKABLE Ocular(const QObject& other);
-	virtual ~Ocular();
-	static Ocular * ocularFromSettings(const QSettings * theSettings, const int ocularIndex);
-	void writeToSettings(QSettings * settings, const int index);
-	static Ocular * ocularModel(void);
+   /// Creates a new instance of Ocular.
+   //! The newly created instance will have values initialized to represent a usable ocular model.
+   explicit Ocular(QObject * parent = nullptr);
+   ~Ocular() override = default;
 
-	bool isBinoculars(void) const;
-	void setBinoculars(const bool flag);
-	bool hasPermanentCrosshair(void) const;
-	void setPermanentCrosshair(const bool flag);
-	double apparentFOV(void) const;
-	void setApparentFOV(const double fov);
-	double effectiveFocalLength(void) const;
-	void setEffectiveFocalLength(const double fl);
-	double fieldStop(void) const;
-	void setFieldStop(const double fs);
-	QString name(void) const;
-	void setName(const QString aName);
-	QString reticlePath(void) const;
-	void setReticlePath(const QString path);
+   void        initFromSettings(const QSettings * theSettings, int ocularIndex);
+   void        writeToSettings(QSettings * settings, int index) const;
 
-	double actualFOV(const Telescope * telescope, const Lens *lens) const;
-	double magnification(const Telescope * telescope, const Lens *lens) const;
-	QMap<int, QString> propertyMap(void);
+   auto        isBinoculars() const -> bool;
+   void        setBinoculars(bool flag);
+   auto        hasPermanentCrosshair() const -> bool;
+   void        setPermanentCrosshair(bool flag);
+   auto        apparentFOV() const -> double;
+   void        setApparentFOV(double fov);
+   auto        effectiveFocalLength() const -> double;
+   void        setEffectiveFocalLength(double fl);
+   auto        fieldStop() const -> double;
+   void        setFieldStop(double fs);
+   auto        name() const -> QString;
+   void        setName(QString aName);
+   auto        reticlePath() const -> QString;
+   void        setReticlePath(QString path);
+
+   auto        actualFOV(const Telescope * telescope, const Lens * lens) const -> double;
+   auto        magnification(const Telescope * telescope, const Lens * lens) const -> double;
+   static auto propertyMap() -> QMap<int, QString>;
 
 private:
-	bool m_binoculars;
-	bool m_permanentCrosshair;
-	double m_apparentFOV;
-	double m_effectiveFocalLength;
-	double m_fieldStop;
-	QString m_name;
-	QString m_reticlePath;
+   double  m_apparentFOV{ OcularDefaultFOV }; // millimeters
+   bool    m_binoculars{ false };
+   double  m_effectiveFocalLength{ OcularDefaultFocalLength }; // millimeters
+   double  m_fieldStop{ 0.0 };                                 // millimeters
+   QString m_name{ "New Ocular" };
+   bool    m_permanentCrosshair{ false };
+   QString m_reticlePath;
 };
 
+auto operator<<(QDebug debug, const Ocular & ocular) -> QDebug;
+auto operator<<(QDebug debug, const Ocular * ocular) -> QDebug;
 
-#endif /* OCULAR_HPP */
+Q_DECLARE_METATYPE(Ocular *);
