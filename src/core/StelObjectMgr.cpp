@@ -49,9 +49,7 @@ StelObjectMgr::~StelObjectMgr()
 void StelObjectMgr::init()
 {
 	// Register all the core actions.
-	QString timeGroup = N_("Date and Time");
-	QString movementGroup = N_("Movement and Selection");
-	QString displayGroup = N_("Display Options");
+	QString timeGroup = N_("Date and Time");	
 	StelActionMgr* actionsMgr = StelApp::getInstance().getStelActionManager();
 	actionsMgr->addAction("actionNext_Transit", timeGroup, N_("Next transit of the selected object"), this, "nextTransit()");
 	actionsMgr->addAction("actionNext_Rising", timeGroup, N_("Next rising of the selected object"), this, "nextRising()");

@@ -326,6 +326,66 @@ void ConstellationMgr::selectAllConstellations()
 	}
 }
 
+void ConstellationMgr::selectConstellation(const QString &englishName)
+{
+	if (!getFlagIsolateSelected())
+		setFlagIsolateSelected(true); // Enable isolated selection
+
+	bool found = false;
+	for (auto* constellation : constellations)
+	{
+		if (constellation->getEnglishName().toLower()==englishName.toLower())
+		{
+			setSelectedConst(constellation);
+			found = true;
+		}
+	}
+	if (!found)
+		qWarning() << "The constellation" << englishName << "is not found";
+}
+
+void ConstellationMgr::selectConstellationByObjectName(const QString &englishName)
+{
+	if (!getFlagIsolateSelected())
+		setFlagIsolateSelected(true); // Enable isolated selection
+
+	if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesIdx()==0) // generic IAU boundaries
+		setSelectedConst(isObjectIn(GETSTELMODULE(StelObjectMgr)->searchByName(englishName).data()));
+	else
+		setSelectedConst(isStarIn(GETSTELMODULE(StelObjectMgr)->searchByName(englishName).data()));
+}
+
+void ConstellationMgr::deselectConstellation(const QString &englishName)
+{
+	if (!getFlagIsolateSelected())
+		setFlagIsolateSelected(true); // Enable isolated selection
+
+	bool found = false;
+	for (auto* constellation : constellations)
+	{
+		if (constellation->getEnglishName().toLower()==englishName.toLower())
+		{
+			unsetSelectedConst(constellation);
+			found = true;
+		}
+	}
+
+	if (selected.size()==0 && found)
+	{
+		// Let unselect all constellations if the list of selected constellations is empty
+		for (auto* constellation : constellations)
+		{
+			constellation->setFlagLines(false);
+			constellation->setFlagLabels(false);
+			constellation->setFlagArt(false);
+			constellation->setFlagBoundaries(false);
+		}
+	}
+
+	if (!found)
+		qWarning() << "The constellation" << englishName << "is not found";
+}
+
 void ConstellationMgr::setLinesColor(const Vec3f& color)
 {
 	if (color != Constellation::lineColor)
@@ -1093,7 +1153,7 @@ void ConstellationMgr::setFlagIsolateSelected(const bool isolate)
 	{
 		isolateSelected = isolate;
 
-		// when turning off isolated selection mode, clear exisiting isolated selections.
+		// when turning off isolated selection mode, clear existing isolated selections.
 		if (!isolateSelected)
 		{
 			for (auto* constellation : constellations)

@@ -249,10 +249,10 @@ public slots:
 	//! Get the font size used for constellation names display
 	float getFontSize() const;
 
-	//! Set the way how constellation names are displayed: abbbreviated/as-given/translated
+	//! Set the way how constellation names are displayed: abbreviated/as-given/translated
 	//! @param style the new display style
 	void setConstellationDisplayStyle(ConstellationMgr::ConstellationDisplayStyle style);
-	//! get the way how constellation names are displayed: abbbreviated/as-given/translated
+	//! get the way how constellation names are displayed: abbreviated/as-given/translated
 	ConstellationMgr::ConstellationDisplayStyle getConstellationDisplayStyle();
 	//! Returns the currently set constellation display style as string, instead of enum
 	//! @see getConstellationDisplayStyle()
@@ -275,6 +275,36 @@ public slots:
 
 	//! Select all constellations
 	void selectAllConstellations(void);
+
+	//! Select the constellation by his English name. Calling this method will enable
+	//! isolated selection for the constellations if it is not enabled yet.
+	//! @param englishName the English name of the constellation
+	//! @code
+	//! // example of usage in scripts: select the Orion constellation
+	//! ConstellationMgr.selectConstellation("Orion");
+	//! @endcode
+	void selectConstellation(const QString& englishName);
+	//! Select the constellation where celestial body with English name is located.
+	//! Calling this method will enable isolated selection for the constellations if it is
+	//! not enabled yet.
+	//! @param englishName the English name of the celestial body
+	//! @code
+	//! // example of usage in scripts: select constellation where Venus is located
+	//! ConstellationMgr.selectConstellationByObjectName("Venus");
+	//! @endcode
+	//! @note the method will be correct work for sky cultures with boundaries
+	//! otherwise you may use star names from constellation lines as celestial body
+	void selectConstellationByObjectName(const QString& englishName);
+	//! Remove the constellation from list of selected constellations by his English
+	//! name. Calling this method will enable isolated selection for the constellations
+	//! if it is not enabled yet.
+	//! @param englishName the English name of the constellation
+	//! @code
+	//! // example of usage in scripts: remove selection from the Orion constellation
+	//! ConstellationMgr.deselectConstellation("Orion");
+	//! @endcode
+	//! @note all constellations will be hided when list of selected constellations will be empty
+	void deselectConstellation(const QString& englishName);
 
 	//! Get the list of English names of all constellations for loaded sky culture
 	QStringList getConstellationsEnglishNames();
@@ -372,7 +402,7 @@ private:
 	void deselect() { setSelected(Q_NULLPTR); }
 	//! Get the first selected constellation.
 	//! NOTE: this function should return a list of all, or may be deleted. Please
-	//! do not use until it exhibits the proper behaviour.
+	//! do not use until it exhibits the proper behavior.
 	StelObject* getSelected(void) const;
 
 	std::vector<Constellation*> selected; // More than one can be selected at a time
