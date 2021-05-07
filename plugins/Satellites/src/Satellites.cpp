@@ -2357,6 +2357,8 @@ void Satellites::translations()
 	// TRANSLATORS: Satellite description.
 	N_("China's first space station");
 	// TRANSLATORS: Satellite description.
+	N_("Tiangong space station (Chinese large modular space station)");
+	// TRANSLATORS: Satellite description.
 	N_("The russian space radio telescope RadioAstron");
 	// TRANSLATORS: Satellite description.
 	N_("International Gamma-Ray Astrophysics Laboratory");
@@ -2390,8 +2392,12 @@ void Satellites::translations()
 	N_("SPEKTR-R");
 	// TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics Laboratory (INTEGRAL)
 	N_("INTEGRAL");
-	// TRANSLATORS: China's first space station name
+	// TRANSLATORS: Satellite name: China's first space station name
 	N_("TIANGONG 1");
+	// TRANSLATORS: Satellite name: name of China's space station module
+	N_("TIANHE");
+	// TRANSLATORS: Satellite name: China's space station name (with name of base module)
+	N_("TIANGONG (TIANHE)");
 
 	// Satellites visibility
 	N_("The satellite and the observer are in sunlight");
