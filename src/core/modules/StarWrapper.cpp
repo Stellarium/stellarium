@@ -149,6 +149,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		QString designationsList = designations.join(" - ");
 		designations.clear();
 		designations = designationsList.split(" - ");
+		designations.removeDuplicates();
 		int asize = designations.size();
 		if (asize>6) // Special case for many designations (max - 7 items per line)
 		{
@@ -175,6 +176,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			{
 				QString aliases = "";
 				QStringList additionalNames = additionalNameI18.split(" - ");
+				additionalNames.removeDuplicates();
 				asize = additionalNames.size();
 				if (asize>5) // Special case for many AKA (max - 6 items per line)
 				{
