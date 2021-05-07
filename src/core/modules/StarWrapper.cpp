@@ -146,7 +146,25 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		if (!wdsSciName.isEmpty() && wdsSciName!=addSciName && wdsSciName!=sciName)
 			designations.append(wdsSciName);
 
-		const QString designationsList = designations.join(" - ");
+		QString designationsList = designations.join(" - ");
+		designations.clear();
+		designations = designationsList.split(" - ");
+		int asize = designations.size();
+		if (asize>6) // Special case for many designations (max - 7 items per line)
+		{
+			designationsList = "";
+			for(int i=0; i<asize; i++)
+			{
+				designationsList.append(designations.at(i));
+				if (i<asize-1)
+					designationsList.append(" - ");
+
+				if (i>0 && (i % 6)==0 && i<(asize-1))
+					designationsList.append("<br />");
+			}
+		}
+		else
+			designationsList = designations.join(" - ");
 
 		if (flags&Name)
 		{
@@ -157,8 +175,8 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			{
 				QString aliases = "";
 				QStringList additionalNames = additionalNameI18.split(" - ");
-				int asize = additionalNames.size();
-				if (asize>5) // Special case for many AKA
+				asize = additionalNames.size();
+				if (asize>5) // Special case for many AKA (max - 6 items per line)
 				{
 					bool firstLine = true;
 					for(int i=0; i<asize; i++)
