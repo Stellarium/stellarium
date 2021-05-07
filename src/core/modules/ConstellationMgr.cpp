@@ -341,7 +341,7 @@ void ConstellationMgr::selectConstellation(const QString &englishName)
 		}
 	}
 	if (!found)
-		qWarning() << "The constellation" << englishName << "is not found";
+		qDebug() << "The constellation" << englishName << "is not found";
 }
 
 void ConstellationMgr::selectConstellationByObjectName(const QString &englishName)
@@ -372,7 +372,7 @@ void ConstellationMgr::deselectConstellation(const QString &englishName)
 
 	if (selected.size()==0 && found)
 	{
-		// Let unselect all constellations if the list of selected constellations is empty
+		// Let's remove the selection for all constellations if the list of selected constellations is empty
 		for (auto* constellation : constellations)
 		{
 			constellation->setFlagLines(false);
@@ -383,7 +383,7 @@ void ConstellationMgr::deselectConstellation(const QString &englishName)
 	}
 
 	if (!found)
-		qWarning() << "The constellation" << englishName << "is not found";
+		qDebug() << "The constellation" << englishName << "is not found";
 }
 
 void ConstellationMgr::setLinesColor(const Vec3f& color)
