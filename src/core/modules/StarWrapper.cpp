@@ -154,7 +154,35 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 				oss << commonNameI18;
 
 			if (!additionalNameI18.isEmpty() && StarMgr::getFlagAdditionalNames())
-				oss << " (" << additionalNameI18 << ")";
+			{
+				QString aliases = "";
+				QStringList additionalNames = additionalNameI18.split(" - ");
+				int asize = additionalNames.size();
+				if (asize>5) // Special case for many AKA
+				{
+					bool firstLine = true;
+					for(int i=0; i<asize; i++)
+					{
+						aliases.append(additionalNames.at(i));
+						if (i<asize-1)
+							aliases.append(" - ");
+
+						if (i>0)
+						{
+							if ((i % 4)==0 && firstLine)
+							{
+								aliases.append("<br />");
+								firstLine = false;
+							}
+							if (((i-4) % 6)==0 && !firstLine && i>5 && i<(asize-1))
+								aliases.append("<br />");
+						}
+					}
+				}
+				else
+					aliases = additionalNames.join(" - ");
+				oss << " (" << aliases << ")";
+			}
 
 			if (!commonNameI18.isEmpty() && !designationsList.isEmpty() && flags&CatalogNumber)
 				oss << "<br />";
