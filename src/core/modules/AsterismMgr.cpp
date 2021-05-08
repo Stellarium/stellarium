@@ -52,8 +52,9 @@ AsterismMgr::AsterismMgr(StarMgr *_hip_stars)
 	, rayHelpersDisplayed(false)
 	, namesDisplayed(false)
 	, hasAsterism(false)
+	, isolateAsterismSelected(false)
 	, asterismLineThickness(1)
-	, rayHelperThickness(1)
+	, rayHelperThickness(1)	
 {
 	setObjectName("AsterismMgr");
 	Q_ASSERT(hipStarMgr);
@@ -95,6 +96,7 @@ void AsterismMgr::init()
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Asterism_Lines", displayGroup, N_("Asterism lines"), "linesDisplayed", "Alt+A");	
 	addAction("actionShow_Asterism_Labels", displayGroup, N_("Asterism labels"), "namesDisplayed", "Alt+V");
+	//addAction("actionShow_Asterism_Isolated", displayGroup, N_("Select single asterism"), "isolateAsterismSelected");
 	addAction("actionShow_Ray_Helpers", displayGroup, N_("Ray helpers"), "rayHelpersDisplayed", "Alt+R");
 }
 
@@ -358,18 +360,6 @@ void AsterismMgr::drawNames(StelPainter& sPainter) const
 	}
 }
 
-Asterism *AsterismMgr::isStarIn(const StelObject* s) const
-{
-	for (auto* asterism : asterisms)
-	{
-		if (asterism->isStarIn(s))
-		{
-			return asterism;
-		}
-	}
-	return Q_NULLPTR;
-}
-
 Asterism* AsterismMgr::findFromAbbreviation(const QString& abbreviation) const
 {
 	for (auto* asterism : asterisms)
@@ -489,9 +479,15 @@ void AsterismMgr::setFlagLines(const bool displayed)
 	if(linesDisplayed != displayed)
 	{
 		linesDisplayed = displayed;
-		for (auto* asterism : asterisms)
+		if (!selected.empty() && getFlagIsolateAsterismSelected())
 		{
-			asterism->setFlagLines(linesDisplayed);
+			for (auto* asterism : selected)
+				asterism->setFlagLines(linesDisplayed);
+		}
+		else
+		{
+			for (auto* asterism : asterisms)
+				asterism->setFlagLines(linesDisplayed);
 		}
 		emit linesDisplayedChanged(displayed);
 	}
@@ -525,9 +521,16 @@ void AsterismMgr::setFlagLabels(const bool displayed)
 	if (namesDisplayed != displayed)
 	{
 		namesDisplayed = displayed;
-		for (auto* asterism : asterisms)
-			asterism->setFlagLabels(namesDisplayed);
-
+		if (!selected.empty() && getFlagIsolateAsterismSelected())
+		{
+			for (auto* asterism : selected)
+				asterism->setFlagLabels(namesDisplayed);
+		}
+		else
+		{
+			for (auto* asterism : asterisms)
+				asterism->setFlagLabels(namesDisplayed);
+		}
 		emit namesDisplayedChanged(displayed);
 	}
 }
@@ -597,4 +600,214 @@ StelObjectP AsterismMgr::searchByID(const QString &id) const
 QString AsterismMgr::getStelObjectType() const
 {
 	return Asterism::ASTERISM_TYPE;
+}
+
+void AsterismMgr::setFlagIsolateAsterismSelected(const bool isolate)
+{
+	if (isolateAsterismSelected != isolate)
+	{
+		isolateAsterismSelected = isolate;
+
+		// when turning off isolated selection mode, clear existing isolated selections.
+		if (!isolateAsterismSelected)
+		{
+			for (auto* asterism : asterisms)
+			{
+				asterism->setFlagLines(getFlagLines());
+				asterism->setFlagLabels(getFlagLabels());
+			}
+		}
+		emit isolateAsterismSelectedChanged(isolate);
+	}
+}
+
+bool AsterismMgr::getFlagIsolateAsterismSelected(void) const
+{
+	return isolateAsterismSelected;
+}
+
+void AsterismMgr::setSelectedAsterism(Asterism *a)
+{
+	// update states for other asterisms to fade them out
+	if (a != Q_NULLPTR)
+	{
+		selected.push_back(a);
+
+		if (getFlagIsolateAsterismSelected())
+		{
+			// Propagate current settings to newly selected asterism
+			a->setFlagLines(getFlagLines());
+			a->setFlagLabels(getFlagLabels());
+
+			for (auto* asterism : asterisms)
+			{
+				bool match = false;
+				for (auto* selected_asterisms : selected)
+				{
+					if (asterism == selected_asterisms)
+					{
+						match=true; // this is a selected asterism
+						break;
+					}
+				}
+
+				if(!match)
+				{
+					// Not selected asterism
+					asterism->setFlagLines(false);
+					asterism->setFlagLabels(false);
+				}
+			}
+		}
+		else
+		{
+			for (auto* asterism : asterisms)
+			{
+				asterism->setFlagLines(false);
+				asterism->setFlagLabels(false);
+			}
+
+			// Propagate current settings to newly selected asterism
+			a->setFlagLines(getFlagLines());
+			a->setFlagLabels(getFlagLabels());
+		}
+	}
+	else
+	{
+		if (selected.empty()) return;
+
+		// Otherwise apply standard flags to all asterisms
+		for (auto* asterism : asterisms)
+		{
+			asterism->setFlagLines(getFlagLines());
+			asterism->setFlagLabels(getFlagLabels());
+		}
+
+		// And remove all selections
+		selected.clear();
+	}
+}
+
+//! Remove a asterism from the selected asterism list
+void AsterismMgr::unsetSelectedAsterism(Asterism *a)
+{
+	if (a != Q_NULLPTR)
+	{
+		for (auto iter = selected.begin(); iter != selected.end();)
+		{
+			if( (*iter)->getEnglishName().toLower() == a->getEnglishName().toLower() )
+				iter = selected.erase(iter);
+			else
+				++iter;
+		}
+
+		// If no longer any selection, restore all flags on all asterisms
+		if (selected.empty())
+		{
+			// Otherwise apply standard flags to all asterisms
+			for (auto* asterism : asterisms)
+			{
+				asterism->setFlagLines(getFlagLines());
+				asterism->setFlagLabels(getFlagLabels());
+			}
+		}
+		else if(isolateAsterismSelected)
+		{
+			// No longer selected asterism
+			a->setFlagLines(false);
+			a->setFlagLabels(false);
+		}
+	}
+}
+
+void AsterismMgr::selectAsterism(const QString &englishName)
+{
+	if (!getFlagIsolateAsterismSelected())
+		setFlagIsolateAsterismSelected(true); // Enable isolated selection
+
+	bool found = false;
+	for (auto* asterism : asterisms)
+	{
+		if (asterism->getEnglishName().toLower()==englishName.toLower())
+		{
+			setSelectedAsterism(asterism);
+			found = true;
+			break;
+		}
+	}
+	if (!found)
+		qDebug() << "The asterism" << englishName << "is not found";
+}
+
+void AsterismMgr::deselectAsterism(const QString &englishName)
+{
+	if (!getFlagIsolateAsterismSelected())
+		setFlagIsolateAsterismSelected(true); // Enable isolated selection
+
+	bool found = false;
+	for (auto* asterism : asterisms)
+	{
+		if (asterism->getEnglishName().toLower()==englishName.toLower())
+		{
+			unsetSelectedAsterism(asterism);
+			found = true;
+			break;
+		}
+	}
+
+	if (selected.size()==0 && found)
+	{
+		// Let's remove the selection for all asterisms if the list of selected asterisms is empty
+		for (auto* asterism : asterisms)
+		{
+			asterism->setFlagLines(false);
+			asterism->setFlagLabels(false);
+		}
+	}
+
+	if (!found)
+		qDebug() << "The asterism" << englishName << "is not found";
+}
+
+void AsterismMgr::deselectAsterisms(void)
+{
+	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
+	Q_ASSERT(omgr);
+	if (getFlagIsolateAsterismSelected())
+	{
+		// The list of selected asterisms is empty, but...
+		if (selected.size()==0)
+		{
+			// ...let's unselect all asterisms for guarantee
+			for (auto* asterism : asterisms)
+			{
+				asterism->setFlagLines(false);
+				asterism->setFlagLabels(false);
+			}
+		}
+
+		// If any asterism is selected at the moment, then let's do not touch to it!
+		if (omgr->getWasSelected() && selected.size()>0)
+			selected.pop_back();
+
+		// Let's hide all previously selected asterisms
+		for (auto* asterism : selected)
+		{
+			asterism->setFlagLines(false);
+			asterism->setFlagLabels(false);
+		}
+	}
+	else
+	{
+		const QList<StelObjectP> newSelectedConst = omgr->getSelectedObject("Asterism");
+		if (!newSelectedConst.empty())
+			omgr->unSelect();
+	}
+	selected.clear();
+}
+
+void AsterismMgr::selectAllAsterisms()
+{
+	for (auto* asterism : asterisms)
+		setSelectedAsterism(asterism);
 }

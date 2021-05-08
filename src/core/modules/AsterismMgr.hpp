@@ -78,6 +78,10 @@ class AsterismMgr : public StelObjectModule
 		   READ getRayHelperThickness
 		   WRITE setRayHelperThickness
 		   NOTIFY rayHelperThicknessChanged)
+	Q_PROPERTY(bool isolateAsterismSelected
+		   READ getFlagIsolateAsterismSelected
+		   WRITE setFlagIsolateAsterismSelected
+		   NOTIFY isolateAsterismSelectedChanged)
 
 public:
 	//! Constructor
@@ -189,6 +193,37 @@ public slots:
 	//! @return true if asterism lines is defined
 	bool isLinesDefined() { return hasAsterism; }
 
+	//! Set whether selected asterism must be displayed alone
+	void setFlagIsolateAsterismSelected(const bool isolate);
+	//! Get whether selected asterism is displayed alone
+	bool getFlagIsolateAsterismSelected(void) const;
+
+	//! Select the asterism by his English name. Calling this method will enable
+	//! isolated selection for the asterisms if it is not enabled yet.
+	//! @param englishName the English name of the asterism
+	//! @code
+	//! // example of usage in scripts: select the "Summer Triangle" asterism
+	//! AsterismMgr.selectAsterism("Summer Triangle");
+	//! @endcode
+	void selectAsterism(const QString& englishName);
+
+	//! Remove the asterism from list of selected asterisms by his English
+	//! name. Calling this method will enable isolated selection for the asterisms
+	//! if it is not enabled yet.
+	//! @param englishName the English name of the asterism
+	//! @code
+	//! // example of usage in scripts: remove selection from the "Summer Triangle" asterism
+	//! AsterismMgr.deselectAsterism("Summer Triangle");
+	//! @endcode
+	//! @note all asterisms will be hided when list of selected asterisms will be empty
+	void deselectAsterism(const QString& englishName);
+
+	//! Remove asterisms from selected objects
+	void deselectAsterisms(void);
+
+	//! Select all asterisms
+	void selectAllAsterisms(void);
+
 signals:
 	void fontSizeChanged(const float newSize) const;
 	void linesColorChanged(const Vec3f & color) const;
@@ -199,6 +234,7 @@ signals:
 	void rayHelpersColorChanged(const Vec3f & color) const;
 	void rayHelpersDisplayedChanged(const bool displayed) const;
 	void rayHelperThicknessChanged(int thickness) const;
+	void isolateAsterismSelectedChanged(const bool isolate) const;
 
 private slots:
 	//! Loads new asterism data and art if the SkyCulture has changed.
@@ -229,13 +265,15 @@ private:
 	void drawRayHelpers(StelPainter& sPainter, const StelCore* core) const;
 	//! Draw the asterism name labels.
 	void drawNames(StelPainter& sPainter) const;
+	//! Handle single and multi-asterism selections.
+	void setSelectedAsterism(Asterism* a);
+	//! Handle unselecting a single asterism.
+	void unsetSelectedAsterism(Asterism* a);
 
-	Asterism* isStarIn(const StelObject *s) const;
 	Asterism* findFromAbbreviation(const QString& abbreviation) const;
 
-	//Constellation* isStarIn(const StelObject *s) const;
-	//Constellation* findFromAbbreviation(const QString& abbreviation) const;
 	std::vector<Asterism*> asterisms;
+	std::vector<Asterism*> selected; // More than one can be selected at a time
 	QFont asterFont;
 	StarMgr* hipStarMgr;
 
@@ -246,6 +284,7 @@ private:
 	bool rayHelpersDisplayed;
 	bool namesDisplayed;
 	bool hasAsterism;
+	bool isolateAsterismSelected; // true to pick individual asterisms.
 
 	// Store the thickness of lines of the asterisms
 	int asterismLineThickness;
