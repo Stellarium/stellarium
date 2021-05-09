@@ -7,14 +7,13 @@ HR = 4
 def parse_cross_id(path):
     hr_to_hip = {}
     with open(path) as f:
-        next(f)   # skip header line
+        next(f, None)   # skip header line
         for line in f:
             parts = line.split('\t')
             hip = int(parts[HIP])
             hr = parts[HR].strip()
             if hr:
                 hr_to_hip[int(hr)] = hip
-            #breakpoint()
     return hr_to_hip
 
 CAT_FILE = 'almstars/cat1.dat'
@@ -24,7 +23,7 @@ CAT_DESC = slice(48, None)
 def parse_cat(path):
     hr_desc = []
     with open(path) as f:
-        next(f)   # skip header line
+        next(f, None)   # skip header line
         for line in f:
             hr = int(line[CAT_HR].strip())
             modern_id = line[CAT_ID].strip()
