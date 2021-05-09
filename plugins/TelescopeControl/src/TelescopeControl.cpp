@@ -683,7 +683,7 @@ void TelescopeControl::saveTelescopes()
 	}
 
 	//Add the version:
-	telescopeDescriptions.insert("version", QString(TELESCOPE_CONTROL_PLUGIN_VERSION));
+	//telescopeDescriptions.insert("version", QString(TELESCOPE_CONTROL_PLUGIN_VERSION));
 
 	//Convert the tree to JSON
 	StelJsonParser::write(telescopeDescriptions, &telescopesJsonFile);
@@ -731,6 +731,8 @@ void TelescopeControl::loadTelescopes()
 		return;
 	}
 
+	/*
+	// Let do not check version of telescopes.json file! (see https://github.com/Stellarium/stellarium/issues/1651)
 	QString version = map.value("version", "0.0.0").toString();
 	if(StelUtils::compareVersions(version, QString(TELESCOPE_CONTROL_PLUGIN_VERSION))!=0)
 	{
@@ -749,7 +751,8 @@ void TelescopeControl::loadTelescopes()
 			return;
 		}
 	}
-	map.remove("version"); // Otherwise it will try to read it as a telescope
+	*/
+	map.remove("version");
 
 	//Make sure that there are no telescope clients yet
 	deleteAllTelescopes();
