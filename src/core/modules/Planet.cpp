@@ -2559,14 +2559,10 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 		// by putting here, only draw orbit if Planet is visible for clarity
 		drawOrbit(core);  // TODO - fade in here also...
 
-		if (flagLabels && ang_dist>0.25f && maxMagLabels>getVMagnitude(core))
-		{
+		if (flagLabels && ang_dist>0.25f && maxMagLabels>getVMagnitudeWithExtinction(core))
 			labelsFader=true;
-		}
 		else
-		{
 			labelsFader=false;
-		}
 		drawHints(core, planetNameFont);
 
 		draw3dModel(core,transfo,static_cast<float>(screenSz));
