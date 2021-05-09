@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-05-07 18:38+0700\n"
+"POT-Creation-Date: 2021-05-09 22:21+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,12 +26,12 @@ msgid "custom marker"
 msgstr ""
 
 #. TRANSLATORS: type of object
-#: src/core/modules/CustomObject.cpp:88 src/core/modules/Asterism.cpp:205
+#: src/core/modules/CustomObject.cpp:88 src/core/modules/Asterism.cpp:195
 #: src/core/modules/Constellation.cpp:277
 #: src/core/modules/NomenclatureItem.cpp:204 src/core/modules/Nebula.cpp:222
 #: src/core/modules/Nebula.cpp:224 src/core/modules/Planet.cpp:467
 #: src/core/modules/Planet.cpp:470 src/core/modules/StarWrapper.cpp:50
-#: src/core/modules/StarWrapper.cpp:219 src/core/modules/StarWrapper.cpp:222
+#: src/core/modules/StarWrapper.cpp:267 src/core/modules/StarWrapper.cpp:270
 #: src/gui/AstroCalcDialog.cpp:889 src/ui_configurationDialog.h:1715
 #: plugins/Satellites/src/Satellite.cpp:305
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:531
@@ -46,11 +46,11 @@ msgstr ""
 msgid "Marker"
 msgstr ""
 
-#: src/core/modules/Asterism.cpp:205
+#: src/core/modules/Asterism.cpp:195
 msgid "asterism"
 msgstr ""
 
-#: src/core/modules/AsterismMgr.cpp:95
+#: src/core/modules/AsterismMgr.cpp:96
 #: src/core/modules/ConstellationMgr.cpp:133 src/core/modules/StarMgr.cpp:467
 #: src/core/modules/GridLinesMgr.cpp:1809
 #: src/core/modules/SpecialMarkersMgr.cpp:263
@@ -65,15 +65,15 @@ msgstr ""
 msgid "Display Options"
 msgstr ""
 
-#: src/core/modules/AsterismMgr.cpp:96 src/ui_configurationDialog.h:1749
+#: src/core/modules/AsterismMgr.cpp:97 src/ui_configurationDialog.h:1749
 msgid "Asterism lines"
 msgstr ""
 
-#: src/core/modules/AsterismMgr.cpp:97 src/ui_configurationDialog.h:1779
+#: src/core/modules/AsterismMgr.cpp:98 src/ui_configurationDialog.h:1779
 msgid "Asterism labels"
 msgstr ""
 
-#: src/core/modules/AsterismMgr.cpp:98
+#: src/core/modules/AsterismMgr.cpp:100
 msgid "Ray helpers"
 msgstr ""
 
@@ -1420,17 +1420,17 @@ msgid "Airmasses"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:209 src/core/modules/Planet.cpp:450
-#: src/core/modules/StarWrapper.cpp:173
+#: src/core/modules/StarWrapper.cpp:221
 msgid "Additional names: "
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:215 src/core/modules/Planet.cpp:457
-#: src/core/modules/StarWrapper.cpp:179
+#: src/core/modules/StarWrapper.cpp:227
 msgid "Additional catalog numbers: "
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:233 src/core/modules/MinorPlanet.cpp:186
-#: src/core/modules/StarWrapper.cpp:55 src/core/modules/StarWrapper.cpp:235
+#: src/core/modules/StarWrapper.cpp:55 src/core/modules/StarWrapper.cpp:283
 #: plugins/Quasars/src/Quasar.cpp:136
 msgid "Color Index (B-V)"
 msgstr ""
@@ -1474,7 +1474,7 @@ msgstr ""
 #. TRANSLATORS: Unit of measure for distance - light years
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:318 src/core/modules/Nebula.cpp:331
-#: src/core/modules/StarWrapper.cpp:265
+#: src/core/modules/StarWrapper.cpp:313
 #: plugins/Supernovae/src/Supernova.cpp:158 plugins/Novae/src/Nova.cpp:161
 #: plugins/Pulsars/src/Pulsar.cpp:257 plugins/Exoplanets/src/Exoplanet.cpp:292
 msgctxt "distance"
@@ -1482,8 +1482,8 @@ msgid "ly"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:319 src/core/modules/Nebula.cpp:365
-#: src/core/modules/Planet.cpp:589 src/core/modules/StarWrapper.cpp:270
-#: src/core/modules/StarWrapper.cpp:272 src/gui/AstroCalcDialog.cpp:3127
+#: src/core/modules/Planet.cpp:589 src/core/modules/StarWrapper.cpp:318
+#: src/core/modules/StarWrapper.cpp:320 src/gui/AstroCalcDialog.cpp:3127
 #: src/gui/AstroCalcDialog.cpp:3185 src/ui_configurationDialog.h:1700
 #: plugins/Supernovae/src/Supernova.cpp:159 plugins/Novae/src/Nova.cpp:162
 #: plugins/Exoplanets/src/Exoplanet.cpp:293
@@ -1512,12 +1512,12 @@ msgstr ""
 msgid "Redshift"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:390 src/core/modules/StarWrapper.cpp:294
+#: src/core/modules/Nebula.cpp:390 src/core/modules/StarWrapper.cpp:342
 msgid "Parallax"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
-#: src/core/modules/Nebula.cpp:390 src/core/modules/StarWrapper.cpp:299
+#: src/core/modules/Nebula.cpp:390 src/core/modules/StarWrapper.cpp:347
 #: plugins/Pulsars/src/Pulsar.cpp:245
 msgctxt "parallax"
 msgid "mas"
@@ -1922,7 +1922,7 @@ msgstr ""
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/Nebula.cpp:1384 src/core/modules/StarWrapper.cpp:50
-#: src/core/modules/StarWrapper.cpp:212 src/gui/AstroCalcDialog.cpp:1232
+#: src/core/modules/StarWrapper.cpp:260 src/gui/AstroCalcDialog.cpp:1232
 #: src/translations.h:35
 msgid "star"
 msgstr ""
@@ -1970,6 +1970,7 @@ msgstr ""
 
 #: src/core/modules/NebulaMgr.cpp:1379 src/gui/StelDialog.cpp:324
 #: src/StelMainView.cpp:926
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:747
 msgid "Attention!"
 msgstr ""
 
@@ -1991,7 +1992,7 @@ msgid "See Logfile for instructions."
 msgstr ""
 
 #: src/core/modules/Planet.cpp:428 src/core/modules/Comet.cpp:155
-#: src/core/modules/StarWrapper.cpp:229 plugins/Quasars/src/Quasar.cpp:133
+#: src/core/modules/StarWrapper.cpp:277 plugins/Quasars/src/Quasar.cpp:133
 msgid "Absolute Magnitude"
 msgstr ""
 
@@ -2020,7 +2021,7 @@ msgid "Hourly motion"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:537 src/core/modules/Planet.cpp:1062
-#: src/core/modules/Planet.cpp:1071 src/core/modules/StarWrapper.cpp:286
+#: src/core/modules/Planet.cpp:1071 src/core/modules/StarWrapper.cpp:334
 msgctxt "into the direction of"
 msgid "towards"
 msgstr ""
@@ -2101,7 +2102,7 @@ msgstr ""
 
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:756 src/core/modules/Planet.cpp:900
-#: src/core/modules/StarWrapper.cpp:306 src/gui/AstroCalcDialog.cpp:6184
+#: src/core/modules/StarWrapper.cpp:354 src/gui/AstroCalcDialog.cpp:6184
 msgctxt "duration"
 msgid "days"
 msgstr ""
@@ -2335,87 +2336,87 @@ msgstr ""
 msgid "Native planet names (from starlore)"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:191
+#: src/core/modules/StarWrapper.cpp:239
 msgid "eruptive variable star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:193
+#: src/core/modules/StarWrapper.cpp:241
 msgid "pulsating variable star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:195
+#: src/core/modules/StarWrapper.cpp:243
 msgid "rotating variable star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:197
+#: src/core/modules/StarWrapper.cpp:245
 msgid "cataclysmic variable star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:200
+#: src/core/modules/StarWrapper.cpp:248
 msgid "eclipsing binary system"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:206 src/gui/AstroCalcDialog.cpp:1257
+#: src/core/modules/StarWrapper.cpp:254 src/gui/AstroCalcDialog.cpp:1257
 msgid "variable star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:210 src/gui/AstroCalcDialog.cpp:1240
+#: src/core/modules/StarWrapper.cpp:258 src/gui/AstroCalcDialog.cpp:1240
 msgid "double star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:253
+#: src/core/modules/StarWrapper.cpp:301
 msgid "Magnitude range"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:253
+#: src/core/modules/StarWrapper.cpp:301
 msgid "Photometric system"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:284
+#: src/core/modules/StarWrapper.cpp:332
 msgid "Proper motion"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:285 src/core/modules/StarWrapper.cpp:287
+#: src/core/modules/StarWrapper.cpp:333 src/core/modules/StarWrapper.cpp:335
 msgctxt "milliarc second per year"
 msgid "mas/yr"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:287
+#: src/core/modules/StarWrapper.cpp:335
 msgid "Proper motions by axes"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:303 plugins/Quasars/src/Quasar.cpp:144
+#: src/core/modules/StarWrapper.cpp:351 plugins/Quasars/src/Quasar.cpp:144
 #: plugins/Exoplanets/src/Exoplanet.cpp:287
 msgid "Spectral Type"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:306
+#: src/core/modules/StarWrapper.cpp:354
 #: plugins/Exoplanets/src/Exoplanet.cpp:319
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 msgid "Period"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:314
+#: src/core/modules/StarWrapper.cpp:362
 msgid "Next maximum light"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:316
+#: src/core/modules/StarWrapper.cpp:364
 msgid "Next minimum light"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:323
+#: src/core/modules/StarWrapper.cpp:371
 msgid "Rising time"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:325
+#: src/core/modules/StarWrapper.cpp:373
 msgid "Duration of eclipse"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:334
+#: src/core/modules/StarWrapper.cpp:382
 msgid "Position angle"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:338 src/core/modules/StarWrapper.cpp:340
+#: src/core/modules/StarWrapper.cpp:386 src/core/modules/StarWrapper.cpp:388
 #: src/gui/AstroCalcDialog.cpp:3596
 msgid "Separation"
 msgstr ""
@@ -15265,48 +15266,54 @@ msgstr ""
 msgid "Move a telescope to a given set of coordinates"
 msgstr ""
 
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:747
+msgid ""
+"The existing version of the configuration data for telescopes in the "
+"Telescope Control plugin is obsolete."
+msgstr ""
+
 #. TRANSLATORS: Description for Meade AutoStar compatible mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1771
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1768
 msgid ""
 "Any telescope or telescope mount compatible with Meade's AutoStar controller."
 msgstr ""
 
 #. TRANSLATORS: Description for Meade LX200 (compatible) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1773
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1770
 msgid "Any telescope or telescope mount compatible with Meade LX200."
 msgstr ""
 
 #. TRANSLATORS: Description for Meade ETX70 (#494 Autostar, #506 CCS) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1775
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1772
 msgid ""
 "Meade's ETX70 with the #494 Autostar controller and the #506 Connector Cable "
 "Set."
 msgstr ""
 
 #. TRANSLATORS: Description for Losmandy G-11 mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1777
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1774
 msgid "Losmandy's G-11 telescope mount."
 msgstr ""
 
 #. TRANSLATORS: Description for Wildcard Innovations Argo Navis (Meade mode) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1779
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1776
 msgid "Wildcard Innovations' Argo Navis DTC in Meade LX200 emulation mode."
 msgstr ""
 
 #. TRANSLATORS: Description for Celestron NexStar (compatible) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1781
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1778
 msgid "Any telescope or telescope mount compatible with Celestron NexStar."
 msgstr ""
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan (version 3 or later) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1783
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1780
 msgid ""
 "Any Sky-Watcher mount that uses version 3 or later of the SynScan hand "
 "controller."
 msgstr ""
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan AZ GOTO mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1785
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1782
 msgid ""
 "The Sky-Watcher SynScan AZ GOTO mount used in a number of telescope models."
 msgstr ""
@@ -16301,7 +16308,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:291
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:320
-#: plugins/TelescopeControl/src/gui/SlewDialog.cpp:469
+#: plugins/TelescopeControl/src/gui/SlewDialog.cpp:468
 msgid "Select one"
 msgstr ""
 

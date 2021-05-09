@@ -1,6 +1,3 @@
-
-# WARNING: Update also the version number in resources/device_models.json,
-# otherwise the local copy will be overwritten each time Stellarium is started.
 SET(TELESCOPE_CONTROL_MAJOR "0")
 SET(TELESCOPE_CONTROL_MINOR "4")
 SET(TELESCOPE_CONTROL_PATCH "2")
@@ -11,6 +8,10 @@ SET(TELESCOPE_CONTROL_VERSION "${TELESCOPE_CONTROL_MAJOR}.${TELESCOPE_CONTROL_MI
 
 ADD_DEFINITIONS(-DTELESCOPE_CONTROL_PLUGIN_VERSION="${TELESCOPE_CONTROL_VERSION}")
 ADD_DEFINITIONS(-DTELESCOPE_CONTROL_PLUGIN_LICENSE="GNU GPLv2 or later")
+
+# WARNING: Update also the version number in resources/device_models.json,
+# otherwise the local copy will be overwritten each time Stellarium is started.
+ADD_DEFINITIONS(-DTELESCOPE_CONTROL_CONFIG_VERSION="0.4.1")
 
 #Temporary debugging definitions for the telescope servers code
 ADD_DEFINITIONS(-DDEBUG3 -DDEBUG4 -DDEBUG5)

@@ -57,7 +57,7 @@
 #include <QString>
 #include <QStringList>
 #include <QDir>
-
+#include <QMessageBox>
 #include <QDebug>
 #include <stdexcept>
 
@@ -683,7 +683,7 @@ void TelescopeControl::saveTelescopes()
 	}
 
 	//Add the version:
-	//telescopeDescriptions.insert("version", QString(TELESCOPE_CONTROL_PLUGIN_VERSION));
+	telescopeDescriptions.insert("version", QString(TELESCOPE_CONTROL_CONFIG_VERSION));
 
 	//Convert the tree to JSON
 	StelJsonParser::write(telescopeDescriptions, &telescopesJsonFile);
@@ -731,28 +731,22 @@ void TelescopeControl::loadTelescopes()
 		return;
 	}
 
-	/*
-	// Let do not check version of telescopes.json file! (see https://github.com/Stellarium/stellarium/issues/1651)
 	QString version = map.value("version", "0.0.0").toString();
-	if(StelUtils::compareVersions(version, QString(TELESCOPE_CONTROL_PLUGIN_VERSION))!=0)
+	if(StelUtils::compareVersions(version, QString(TELESCOPE_CONTROL_CONFIG_VERSION))!=0)
 	{
 		QString newName = telescopesJsonPath + ".backup." + QDateTime::currentDateTime().toString("yyyy-MM-dd-hh-mm-ss");
 		if(telescopesJsonFile.rename(newName))
 		{
 			qWarning() << "[TelescopeControl] The existing version of telescopes.json is obsolete. Backing it up as" << QDir::toNativeSeparators(newName);
 			qWarning() << "[TelescopeControl] A blank telescopes.json file will have to be created.";
-			telescopeDescriptions = result;
-			return;
 		}
 		else
-		{
 			qWarning() << "[TelescopeControl] The existing version of telescopes.json is obsolete. Unable to rename.";
-			telescopeDescriptions = result;
-			return;
-		}
+
+		telescopeDescriptions = result;
+		QMessageBox::warning(Q_NULLPTR, q_("Attention!"), q_("The existing version of the configuration data for telescopes in the Telescope Control plugin is obsolete."), QMessageBox::Ok);
+		return;
 	}
-	*/
-	map.remove("version");
 
 	//Make sure that there are no telescope clients yet
 	deleteAllTelescopes();
@@ -1473,7 +1467,7 @@ void TelescopeControl::loadDeviceModels()
 			QVariantMap deviceModelsJsonMap;
 			deviceModelsJsonMap = StelJsonParser::parse(&deviceModelsJsonFile).toMap();
 			QString version = deviceModelsJsonMap.value("version", "0.0.0").toString();
-			if(StelUtils::compareVersions(version, QString(TELESCOPE_CONTROL_PLUGIN_VERSION))!=0)
+			if(StelUtils::compareVersions(version, QString(TELESCOPE_CONTROL_CONFIG_VERSION))!=0)
 			{
 				deviceModelsJsonFile.close();
 				QString newName = deviceModelsJsonPath + ".backup." + QDateTime::currentDateTime().toString("yyyy-MM-dd-hh-mm-ss");
