@@ -247,6 +247,15 @@ private slots:
 	//! in translations.h
 	void updateI18n();
 
+	//! Limit the number of asterisms to draw based on selected asterisms.
+	//! The selected objects changed, check if some asterism are selected and display the
+	//! matching asterisms if isolateAsterismSelected mode is activated.
+	//! @param action define whether to add to, replace, or remove from the existing selection
+	void selectedObjectChange(StelModule::StelModuleSelectAction action);
+
+	//! Toggle single asterism selection mode
+	void switchSelectionMode();
+
 private:
 	//! Read asterism names from the given file.
 	//! @param namesFile Name of the file containing the asterism names

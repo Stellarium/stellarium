@@ -89,6 +89,8 @@ void AsterismMgr::init()
 
 	StelObjectMgr *objectManager = GETSTELMODULE(StelObjectMgr);
 	objectManager->registerStelObjectMgr(this);
+	connect(objectManager, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)),
+			this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(&app->getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(updateSkyCulture(const QString&)));
@@ -96,7 +98,7 @@ void AsterismMgr::init()
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Asterism_Lines", displayGroup, N_("Asterism lines"), "linesDisplayed", "Alt+A");	
 	addAction("actionShow_Asterism_Labels", displayGroup, N_("Asterism labels"), "namesDisplayed", "Alt+V");
-	//addAction("actionShow_Asterism_Isolated", displayGroup, N_("Select single asterism"), "isolateAsterismSelected");
+	addAction("actionShow_Asterism_Isolated", displayGroup, N_("Toggle single asterism selection mode"), "switchSelectionMode()");
 	addAction("actionShow_Ray_Helpers", displayGroup, N_("Ray helpers"), "rayHelpersDisplayed", "Alt+R");
 }
 
@@ -810,4 +812,31 @@ void AsterismMgr::selectAllAsterisms()
 {
 	for (auto* asterism : asterisms)
 		setSelectedAsterism(asterism);
+}
+
+void AsterismMgr::selectedObjectChange(StelModule::StelModuleSelectAction action)
+{
+	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
+	Q_ASSERT(omgr);
+	const QList<StelObjectP> newSelected = omgr->getSelectedObject();
+	if (newSelected.empty())
+		return;
+
+	const QList<StelObjectP> newSelectedAsterisms = omgr->getSelectedObject("Asterism");
+	if (!newSelectedAsterisms.empty())
+	{
+		// If removing this selection
+		if(action == StelModule::RemoveFromSelection)
+			unsetSelectedAsterism(static_cast<Asterism *>(newSelectedAsterisms[0].data()));
+		else // Add asterism to selected list (do not select a star, just the constellation)
+			setSelectedAsterism(static_cast<Asterism *>(newSelectedAsterisms[0].data()));
+	}
+}
+
+void AsterismMgr::switchSelectionMode()
+{
+	bool state = getFlagIsolateAsterismSelected();
+	setFlagIsolateAsterismSelected(!state);
+	if (!state)
+		deselectAsterisms();
 }
