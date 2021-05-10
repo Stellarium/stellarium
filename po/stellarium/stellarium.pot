@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-05-09 22:21+0700\n"
+"POT-Creation-Date: 2021-05-10 17:09+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,7 +50,7 @@ msgstr ""
 msgid "asterism"
 msgstr ""
 
-#: src/core/modules/AsterismMgr.cpp:96
+#: src/core/modules/AsterismMgr.cpp:98
 #: src/core/modules/ConstellationMgr.cpp:133 src/core/modules/StarMgr.cpp:467
 #: src/core/modules/GridLinesMgr.cpp:1809
 #: src/core/modules/SpecialMarkersMgr.cpp:263
@@ -65,15 +65,19 @@ msgstr ""
 msgid "Display Options"
 msgstr ""
 
-#: src/core/modules/AsterismMgr.cpp:97 src/ui_configurationDialog.h:1749
+#: src/core/modules/AsterismMgr.cpp:99 src/ui_configurationDialog.h:1749
 msgid "Asterism lines"
 msgstr ""
 
-#: src/core/modules/AsterismMgr.cpp:98 src/ui_configurationDialog.h:1779
+#: src/core/modules/AsterismMgr.cpp:100 src/ui_configurationDialog.h:1779
 msgid "Asterism labels"
 msgstr ""
 
-#: src/core/modules/AsterismMgr.cpp:100
+#: src/core/modules/AsterismMgr.cpp:101
+msgid "Toggle single asterism selection mode"
+msgstr ""
+
+#: src/core/modules/AsterismMgr.cpp:102
 msgid "Ray helpers"
 msgstr ""
 
