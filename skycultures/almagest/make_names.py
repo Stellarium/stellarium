@@ -24,28 +24,37 @@ def parse_cross_id(path):
     return hr_to_hip
 
 CAT_FILE = 'almstars/cat1.dat'
-CAT_HR = slice(30, 34)
-CAT_ID = slice(35, 48)
+CAT_CON = slice(5, 8)     # constellation abbreviation
+CAT_IDX = slice(9, 11)    # index within constellation
+CAT_HR = slice(30, 34)    # HR number
+CAT_ID = slice(35, 48)    # modern Bayer/Flamsteed ID
 CAT_DESC = slice(48, None)
 def parse_cat(path):
     with open(path) as f:
         next(f, None)   # skip header line
         for line in f:
+            con = line[CAT_CON]
+            idx = int(line[CAT_IDX])
             hr = int(line[CAT_HR].strip())
             modern_id = line[CAT_ID].strip()
             desc = line[CAT_DESC].strip()
-            yield hr, modern_id, desc
+            yield con, idx, hr, modern_id, desc
 
 hr_to_hip = parse_cross_id(CROSS_ID)
 with open(STARS_FILE, 'w') as stars, open(DSO_FILE, 'w') as dso:
-    for hr, modern_id, desc in parse_cat(CAT_FILE):
+    for con, idx, hr, modern_id, desc in parse_cat(CAT_FILE):
         tag = hr_to_hip.get(hr)
         if tag is not None:
-            print(f'{tag}|_("{desc}")', file=stars)
-            continue
-        tags = DSO.get(modern_id)
-        if tags is not None:
+            file = stars
+            tags = [tag]
+        elif tags is not None:
+            file = dso
+            tags = DSO.get(modern_id)
+        else:
+            file, tags = None, []
+        if file is not None:
             for tag in tags:
-                print(f'{tag}|_("{desc}")', file=dso)
+                print(f'{tag}|_("{con} {idx}")', file=file)
+                print(f'{tag}|_("{desc}")', file=file)
         else:
             print(f'No HIP number found for HR {hr} ({modern_id})', file=sys.stderr)
