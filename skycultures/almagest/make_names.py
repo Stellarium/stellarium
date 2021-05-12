@@ -31,7 +31,7 @@ CAT_ID = slice(35, 48)    # modern Bayer/Flamsteed ID
 CAT_DESC = slice(48, None)
 def parse_cat(path):
     with open(path) as f:
-        next(f, None)   # skip header line
+        print(next(f, None).strip())   # skip header line
         for line in f:
             con = line[CAT_CON]
             idx = int(line[CAT_IDX])
@@ -41,8 +41,14 @@ def parse_cat(path):
             yield con, idx, hr, modern_id, desc
 
 hr_to_hip = parse_cross_id(CROSS_ID)
+hr_to_mid = {}
 with open(STARS_FILE, 'w') as stars, open(DSO_FILE, 'w') as dso:
     for con, idx, hr, modern_id, desc in parse_cat(CAT_FILE):
+        if hr and hr in hr_to_mid and modern_id != hr_to_mid[hr]:
+            print(f'discrepancy in modern id for HR {hr}: '
+                  f'{modern_id} != {hr_to_mid[hr]}')
+        else:
+            hr_to_mid[hr] = modern_id
         tag = hr_to_hip.get(hr)
         if tag is not None:
             file = stars
@@ -58,3 +64,4 @@ with open(STARS_FILE, 'w') as stars, open(DSO_FILE, 'w') as dso:
                 print(f'{tag}|_("{desc}")', file=file)
         else:
             print(f'No HIP number found for HR {hr} ({modern_id})', file=sys.stderr)
+print(f'  found {len(hr_to_mid)} unique stars')
