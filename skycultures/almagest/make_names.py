@@ -42,13 +42,16 @@ def parse_cat(path):
 
 hr_to_hip = parse_cross_id(CROSS_ID)
 hr_to_mid = {}
+hr_to_con = {}
 with open(STARS_FILE, 'w') as stars, open(DSO_FILE, 'w') as dso:
     for con, idx, hr, modern_id, desc in parse_cat(CAT_FILE):
-        if hr and hr in hr_to_mid and modern_id != hr_to_mid[hr]:
-            print(f'discrepancy in modern id for HR {hr}: '
-                  f'{modern_id} != {hr_to_mid[hr]}')
-        else:
-            hr_to_mid[hr] = modern_id
+        if hr:
+            if hr in hr_to_mid and modern_id != hr_to_mid[hr]:
+                print(f'discrepancy in modern id for HR {hr}: '
+                      f'{modern_id} != {hr_to_mid[hr]}')
+            else:
+                hr_to_mid[hr] = modern_id
+            hr_to_con.setdefault(hr, []).append(con)
         tag = hr_to_hip.get(hr)
         if tag is not None:
             file = stars
@@ -65,3 +68,7 @@ with open(STARS_FILE, 'w') as stars, open(DSO_FILE, 'w') as dso:
         else:
             print(f'No HIP number found for HR {hr} ({modern_id})', file=sys.stderr)
 print(f'  found {len(hr_to_mid)} unique stars')
+for hr, cons in hr_to_con.items():
+    if len(cons) > 1:
+        mid = hr_to_mid[hr]
+        print(f'{mid} (HR {hr}) is in {", ".join(cons)}.')
