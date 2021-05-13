@@ -128,6 +128,7 @@ void MSSearchDialog::searchEvents()
 	for (const auto& r : searchResult)
 	{
 		MSTreeWidgetItem* treeItem = new MSTreeWidgetItem(m_ui->listEvents);
+		treeItem->setText(ColumnCode, r.code);
 		treeItem->setText(ColumnName, r.name);
 		treeItem->setText(ColumnDataType, r.type);
 		treeItem->setText(ColumnPeak, QString("%1 %2").arg(r.peak.day()).arg(StelLocaleMgr::longGenitiveMonthName(r.peak.month())));
@@ -138,6 +139,7 @@ void MSSearchDialog::searchEvents()
 
 		// let's store the stuff in the UserRole to allow easier sorting
 		// check MSTreeWidgetItem::operator <()
+		treeItem->setData(ColumnCode, Qt::UserRole, r.code);
 		treeItem->setData(ColumnName, Qt::UserRole, r.name);
 		treeItem->setData(ColumnDataType, Qt::UserRole, r.type);
 		treeItem->setData(ColumnPeak, Qt::UserRole, r.peak);
@@ -194,6 +196,7 @@ void MSSearchDialog::refreshRangeDates()
 void MSSearchDialog::setHeaderNames()
 {
 	QStringList headerStrings;
+	headerStrings << q_("Code");
 	headerStrings << q_("Name");
 	headerStrings << q_("ZHR");
 	headerStrings << q_("Data Type");

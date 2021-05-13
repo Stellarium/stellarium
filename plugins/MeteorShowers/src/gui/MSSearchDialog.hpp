@@ -38,6 +38,7 @@ public:
 	//! Defines the number and the order of the columns in the table that lists active meteor showers
 	//! @enum ModelColumns
 	enum ModelColumns {
+		ColumnCode,		//! code column
 		ColumnName,		//! name column
 		ColumnZHR,		//! zhr column
 		ColumnDataType,		//! data type column
