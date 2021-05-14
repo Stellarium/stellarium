@@ -69,10 +69,10 @@ class Oculars : public StelModule
    Q_DISABLE_COPY_MOVE(Oculars)
 #endif
 
-   Q_PROPERTY(bool enableOcular READ getEnableOcular WRITE enableOcular NOTIFY enableOcularChanged)
-   Q_PROPERTY(bool enableCrosshairs READ getEnableCrosshairs WRITE toggleCrosshairs NOTIFY enableCrosshairsChanged)
-   Q_PROPERTY(bool enableCCD READ getEnableCCD WRITE toggleCCD NOTIFY enableCCDChanged)
-   Q_PROPERTY(bool enableTelrad READ getEnableTelrad WRITE toggleTelrad NOTIFY enableTelradChanged)
+   Q_PROPERTY(bool ccdDisplayed READ isCCDDisplayed WRITE setCCDDisplayed NOTIFY ccdDisplayedChanged)
+   Q_PROPERTY(bool crosshairsDisplayed READ isCrosshairsDisplayed WRITE setCrosshairsDisplayed NOTIFY crosshairsDisplayedChanged)
+   Q_PROPERTY(bool ocularsModeEnabled READ isOcularsModeEnabled WRITE setOcularsModeEnabled NOTIFY ocularsModeEnabledChanged)
+   Q_PROPERTY(bool telradDisplayed READ isTelradDisplayed WRITE setTelradDisplayed NOTIFY telradDisplayedChanged)
 
    Q_PROPERTY(int selectedCCDIndex READ getSelectedCCDIndex WRITE selectCCDAtIndex NOTIFY selectedCCDChanged)
    Q_PROPERTY(
@@ -167,16 +167,16 @@ public:
    //! return the plugin's own settings (these do not include the settings from the main application)
    //! This implementation return a singleton (class static) QSettings object.
    auto getSettings() -> QSettings * override;
-   auto getEnableOcular() const -> bool;
+   auto isOcularsModeEnabled() const -> bool;
    auto getSelectedCCDRotationAngle() const -> double;
    auto getSelectedCCDPrismPositionAngle() const -> double;
    auto getSelectedCCDIndex() const -> int;
    auto getSelectedOcularIndex() const -> int;
    auto getSelectedTelescopeIndex() const -> int;
    auto getSelectedLensIndex() const -> int;
-   auto getEnableCCD() const -> bool;
-   auto getEnableCrosshairs() const -> bool;
-   auto getEnableTelrad() const -> bool;
+   auto isCCDDisplayed() const -> bool;
+   auto isCrosshairsDisplayed() const -> bool;
+   auto isTelradDisplayed() const -> bool;
    auto getFlagGuiPanelEnabled() const -> bool;
    auto getGuiPanelFontSize() const -> int;
    auto getTextColor() const -> Vec3f;
@@ -225,7 +225,7 @@ public slots:
    void displayPopupMenu();
    //! This method is called with we detect that our hot key is pressed.  It handles
    //! determining if we should do anything - based on a selected object.
-   void enableOcular(bool b);
+   void setOcularsModeEnabled(bool b);
    void incrementCCDIndex();
    void incrementOcularIndex();
    void incrementTelescopeIndex();
@@ -245,12 +245,12 @@ public slots:
    void selectLensAtIndex(int index);      //!< index in the range -1:lenses.count(), else call is ignored
 
    //! Toggles the sensor frame overlay.
-   void toggleCCD(bool show);
+   void setCCDDisplayed(bool show);
    //! Toggles the sensor frame overlay (overloaded for blind switching).
    void toggleCCD();
-   void toggleCrosshairs(bool show = true);
+   void setCrosshairsDisplayed(bool show = true);
    //! Toggles the Telrad sight overlay.
-   void toggleTelrad(bool show);
+   void setTelradDisplayed(bool show);
    //! Toggles the Telrad sight overlay (overloaded for blind switching).
    void toggleTelrad();
 
@@ -293,10 +293,10 @@ public slots:
    void setFlagAutosetMountForCCD(bool b);
 
 signals:
-   void enableOcularChanged(bool value);
-   void enableCrosshairsChanged(bool value);
-   void enableCCDChanged(bool value);
-   void enableTelradChanged(bool value);
+   void ocularsModeEnabledChanged(bool value);
+   void crosshairsDisplayedChanged(bool value);
+   void ccdDisplayedChanged(bool value);
+   void telradDisplayedChanged(bool value);
    void selectedCCDChanged(int value);
    void selectedOcularChanged(int value);
    void selectedTelescopeChanged(int value);
@@ -412,7 +412,12 @@ private:
    QList<Telescope *> telescopes;
    QList<Lens *>      lenses;
 
-   int selectedCCDIndex; //!< index of the current CCD, in the range of -1:ccds.count().  -1 means no CCD is selected.
+   bool m_ccdDisplayed;               //!< flag used to track if we are in CCD mode.
+   bool m_crosshairsDisplayed;        //!< flag used to track in crosshairs should be rendered in the ocular view.
+   bool m_ocularsModeEnabled;         //!< flag used to track if we are in ocular mode.
+   bool m_telradDisplayed;            //!< If true, display the Telrad overlay.
+
+   int  selectedCCDIndex; //!< index of the current CCD, in the range of -1:ccds.count().  -1 means no CCD is selected.
    int selectedOcularIndex; //!< index of the current ocular, in the range of -1:oculars.count().  -1 means no ocular is
                             //!< selected.
    int selectedTelescopeIndex; //!< index of the current telescope, in the range of -1:telescopes.count(). -1 means none
@@ -423,10 +428,6 @@ private:
    int    arrowButtonScale; //!< allows scaling of the GUI "previous/next" Ocular/CCD/Telescope etc. buttons
 
    QFont  font;                //!< The font used for drawing labels.
-   bool   flagShowCCD;         //!< flag used to track if we are in CCD mode.
-   bool   flagShowOculars;     //!< flag used to track if we are in ocular mode.
-   bool   flagShowCrosshairs;  //!< flag used to track in crosshairs should be rendered in the ocular view.
-   bool   flagShowTelrad;      //!< If true, display the Telrad overlay.
    int    usageMessageLabelID; //!< the id of the label showing the usage message. -1 means it's not displayed.
 
    bool   flagCardinalPointsMain; //!< Flag to track if CardinalPoints was displayed at activation.

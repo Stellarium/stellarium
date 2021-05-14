@@ -502,7 +502,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars * plugin, QGraphicsWidget * parent)
 
 void OcularsGuiPanel::showOcularGui()
 {
-   if (ocularsPlugin->flagShowOculars) {
+   if (ocularsPlugin->isOcularsModeEnabled()) {
       updateOcularControls();
    } else {
       setOcularControlsVisible(false);
@@ -686,7 +686,7 @@ void OcularsGuiPanel::updateLensControls()
    int      oindex = ocularsPlugin->selectedOcularIndex;
    Ocular * ocular = ocularsPlugin->oculars[oindex];
    if (ocular->isBinoculars() &&
-       ocularsPlugin->flagShowOculars) { // Hide the lens info for binoculars in eyepiece mode only
+       ocularsPlugin->isOcularsModeEnabled()) { // Hide the lens info for binoculars in eyepiece mode only
       setLensControlsVisible(false);
    } else {
       setLensControlsVisible(true);
@@ -911,7 +911,7 @@ void OcularsGuiPanel::updateTelescopeControls()
 
    double mag  = 0.0;
 
-   if (ocularsPlugin->flagShowCCD) {
+   if (ocularsPlugin->isCCDDisplayed()) {
       auto ccdIndex = ocularsPlugin->selectedCCDIndex;
       auto ccd      = ocularsPlugin->ccds[ccdIndex];
       Q_ASSERT(ccd);
@@ -946,7 +946,7 @@ void OcularsGuiPanel::updateTelescopeControls()
       fieldFov->setVisible(false);
    }
 
-   if (ocularsPlugin->flagShowOculars) {
+   if (ocularsPlugin->isOcularsModeEnabled()) {
       // We need the current ocular
       int  ocularIndex = ocularsPlugin->selectedOcularIndex;
       auto ocular      = ocularsPlugin->oculars[ocularIndex];
@@ -1049,7 +1049,7 @@ void OcularsGuiPanel::updateTelescopeControls()
    }
 
    // Visual resolution
-   if (ocularsPlugin->flagShowOculars && ocularsPlugin->getFlagShowResolutionCriteria() && diameter > 0.0) {
+   if (ocularsPlugin->isOcularsModeEnabled() && ocularsPlugin->getFlagShowResolutionCriteria() && diameter > 0.0) {
       auto rayleigh = 138 / diameter;
       auto vres     = 60 / mag;
       if (vres < rayleigh) {
