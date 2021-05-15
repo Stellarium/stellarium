@@ -1,4 +1,20 @@
 import sys
+PROPER_NAMES = {              #  HIP
+    110: 'Arcturus',          # 69673
+    149: 'Lyra',              # 91262
+    222: 'Capella',           # 24608
+    288: 'Aquila',            # 97649
+    449: 'Praesepe',          # -----   (NGC 2632, M 44)
+    452: 'Aselli 1',          # 42806   (Translated as 'asses' in a footnote.)
+    453: 'Aselli 2',          # 42911
+    469: 'Regulus',           # 49669
+    509: 'Vindemiatrix',      # 63608   (In fn.: προτρυγητήρ 'Harbinger of Vintage'.)
+    510: 'Spica',             # 65474   (In fn.: στάχυς, an ear of wheat or other cereal.)
+    553: 'Antares',           # 80763
+    818: 'the Dog',           # 32349
+    848: 'Procyon',           # 37279   (before the dog)
+    892: 'Canopus',           # 30438
+}
 STARS_FILE = 'star_names.fab'
 DSO_FILE = 'dso_names.fab'
 # HIP           SAO     HD      HR
@@ -44,7 +60,7 @@ hr_to_hip = parse_cross_id(CROSS_ID)
 hr_to_mid = {}
 hr_to_con = {}
 with open(STARS_FILE, 'w') as stars, open(DSO_FILE, 'w') as dso:
-    for con, idx, hr, modern_id, desc in parse_cat(CAT_FILE):
+    for i, (con, idx, hr, modern_id, desc) in enumerate(parse_cat(CAT_FILE), 1):
         if hr:
             if hr in hr_to_mid and modern_id != hr_to_mid[hr]:
                 print(f'discrepancy in modern id for HR {hr}: '
@@ -63,11 +79,14 @@ with open(STARS_FILE, 'w') as stars, open(DSO_FILE, 'w') as dso:
             file, tags = None, []
         if file is not None:
             for tag in tags:
+                name = PROPER_NAMES.get(i)
+                if name is not None:
+                    print(f'{tag}|_("{name}")', file=file)
                 print(f'{tag}|_("{con} {idx}")', file=file)
                 print(f'{tag}|_("{desc}")', file=file)
         else:
             print(f'No HIP number found for HR {hr} ({modern_id})', file=sys.stderr)
-print(f'  found {len(hr_to_mid)} unique stars')
+print(f'  found {len(hr_to_mid)} unique stars and {len(PROPER_NAMES)} proper names')
 for hr, cons in hr_to_con.items():
     if len(cons) > 1:
         mid = hr_to_mid[hr]
