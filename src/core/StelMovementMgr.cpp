@@ -673,22 +673,18 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 					// CTRL + left click = right click for 1 button mouse
 					if (event->modifiers().testFlag(Qt::ControlModifier))
 					{
-						StelApp::getInstance().getStelObjectMgr().unSelect();
+						objectMgr->unSelect();
 						event->accept();
 						return;
 					}
 
 					// Try to select object at that position
-					StelApp::getInstance().getStelObjectMgr().findAndSelect(StelApp::getInstance().getCore(), event->x(), event->y(),
-						event->modifiers().testFlag(Qt::MetaModifier) ? StelModule::AddToSelection : StelModule::ReplaceSelection);
+					objectMgr->findAndSelect(core, event->x(), event->y(), event->modifiers().testFlag(Qt::MetaModifier) ? StelModule::AddToSelection : StelModule::ReplaceSelection);
 			#else
-					StelApp::getInstance().getStelObjectMgr().findAndSelect(StelApp::getInstance().getCore(), event->x(), event->y(),
-						event->modifiers().testFlag(Qt::ControlModifier) ? StelModule::AddToSelection : StelModule::ReplaceSelection);
+					objectMgr->findAndSelect(core, event->x(), event->y(), event->modifiers().testFlag(Qt::ControlModifier) ? StelModule::AddToSelection : StelModule::ReplaceSelection);
 			#endif
-					if (StelApp::getInstance().getStelObjectMgr().getWasSelected())
-					{
+					if (objectMgr->getWasSelected())
 						setFlagTracking(false);
-					}
 					//GZ: You must comment out this line for testing Landscape transparency debug prints.
 					//event->accept();
 					return;
