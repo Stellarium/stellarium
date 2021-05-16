@@ -52,4 +52,4 @@ The second part of the data lists the corresponding Yale catalog information for
 
 ### The make_names.py script
 
-The `make_names.py` takes the `cat1.dat` file and generates `star_names.fab` and `dso_names.fab` files that can be used by Stellarium.  Since `star_names.fab` requires HIP rather than HR numbers, the required cross-catalogue data is extracted from the `cross-id.dat` file.  The DSOs are identified by their modern designations and the necesary translations are hard-coded in the script. (There are only three such objects in the Almagest.)
+The `make_names.py` takes the `cat1.dat` file and generates `star_names.fab` and `dso_names.fab` files that can be used by Stellarium.  Since `star_names.fab` requires HIP rather than HR numbers, the required cross-catalogue data is extracted from the `cross-id.dat` file.  The DSOs are identified by their modern designations and the necessary translations are hard-coded in the script. (There are only three such objects in the Almagest.)
