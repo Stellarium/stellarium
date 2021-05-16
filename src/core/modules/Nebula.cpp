@@ -446,7 +446,7 @@ QString Nebula::getI18nAliases() const
 	int asize = nameI18Aliases.size();
 	if (asize!=0)
 	{
-		if (asize>3) // Special case for many AKA
+		if (asize>3) // Special case for many AKA; NOTE: Should we add size to the config data for skyculture?
 		{
 			for(int i=0; i<asize; i++)
 			{
@@ -454,7 +454,7 @@ QString Nebula::getI18nAliases() const
 				if (i<asize-1)
 					aliases.append(" - ");
 
-				if (i==1) // 2 AKA-items on first line!
+				if (i>0 && (i % 3)==0 && i<(asize-1))
 					aliases.append("<br />");
 			}
 		}

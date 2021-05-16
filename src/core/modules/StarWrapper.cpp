@@ -151,7 +151,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		designations = designationsList.split(" - ");
 		designations.removeDuplicates();
 		int asize = designations.size();
-		if (asize>6) // Special case for many designations (max - 7 items per line)
+		if (asize>6) // Special case for many designations (max - 7 items per line); NOTE: Should we add size to the config data for skyculture?
 		{
 			designationsList = "";
 			for(int i=0; i<asize; i++)

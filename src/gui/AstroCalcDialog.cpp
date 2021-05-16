@@ -510,15 +510,19 @@ void AstroCalcDialog::createDialogContent()
 	QString style = "QLabel { color: rgb(238, 238, 238); }";
 	ui->celestialPositionsTimeLabel->setStyleSheet(style);
 	ui->altVsTimeLabel->setStyleSheet(style);
+	//ui->altVsTimeTitle->setStyleSheet(style);
 	ui->aziVsTimeLabel->setStyleSheet(style);
+	//ui->aziVsTimeTitle->setStyleSheet(style);
 	ui->monthlyElevationLabel->setStyleSheet(style);
+	//ui->monthlyElevationTitle->setStyleSheet(style);
 	ui->graphsFirstLabel->setStyleSheet(style);	
 	ui->graphsSecondLabel->setStyleSheet(style);	
 	ui->graphsDurationLabel->setStyleSheet(style);
 	ui->graphsYearsLabel->setStyleSheet(style);
 	ui->angularDistanceNote->setStyleSheet(style);
 	ui->angularDistanceLimitLabel->setStyleSheet(style);	
-	ui->transitNotificationLabel->setStyleSheet(style);
+	//ui->angularDistanceTitle->setStyleSheet(style);
+	ui->transitNotificationLabel->setStyleSheet(style);	
 	style = "QCheckBox { color: rgb(238, 238, 238); }";
 	ui->sunAltitudeCheckBox->setStyleSheet(style);
 	ui->moonAltitudeCheckBox->setStyleSheet(style);
@@ -680,6 +684,7 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 		QList<double> aX, aY;
 
 		StelObjectP selectedObject = selectedObjects[0];
+		ui->aziVsTimeTitle->setText(selectedObject->getNameI18n());
 		double currentJD = core->getJD();
 		double shift = core->getUTCOffset(currentJD) / 24.0;
 		double noon = static_cast<int>(currentJD + shift);
@@ -2546,6 +2551,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		QVector<double> xs, ys, ysn, ysa, ysc, xm, ym;
 
 		StelObjectP selectedObject = selectedObjects[0];
+		ui->altVsTimeTitle->setText(selectedObject->getNameI18n());
 		const bool onEarth = core->getCurrentPlanet()==solarSystem->getEarth();
 
 		const double currentJD = core->getJD();
@@ -3387,6 +3393,7 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 		// X axis - time; Y axis - altitude
 		QList<double> aX, aY;
 		StelObjectP selectedObject = selectedObjects[0];
+		ui->monthlyElevationTitle->setText(selectedObject->getNameI18n());
 		if (selectedObject->getType() == "Satellite")
 		{
 			ui->monthlyElevationGraph->graph(0)->data()->clear();
@@ -6508,6 +6515,7 @@ void AstroCalcDialog::drawAngularDistanceGraph()
 				selectedObject->getID().isEmpty() ? name = q_("Unnamed star") : name = selectedObject->getID();
 		}
 		ui->angularDistancePlot->setToolTip(QString("%1 (%2)").arg(label, name));
+		ui->angularDistanceTitle->setText(QString("%1 (%2)").arg(label, name));
 
 		prepareAngularDistanceAxesAndGraph();
 

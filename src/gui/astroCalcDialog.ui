@@ -1271,6 +1271,12 @@
          <layout class="QGridLayout" name="gridLayout_5">
           <item row="2" column="0">
            <widget class="QTabWidget" name="tabWidgetGraphs">
+            <property name="font">
+             <font>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
             <property name="tabPosition">
              <enum>QTabWidget::South</enum>
             </property>
@@ -1294,20 +1300,7 @@
               <property name="bottomMargin">
                <number>4</number>
               </property>
-              <item row="0" column="0">
-               <widget class="QCustomPlot" name="altVsTimePlot" native="true">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
+              <item row="2" column="0">
                <widget class="QLabel" name="altVsTimeLabel">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
@@ -1332,7 +1325,7 @@
                 </property>
                </widget>
               </item>
-              <item row="2" column="0">
+              <item row="3" column="0">
                <layout class="QHBoxLayout" name="horizontalLayout_14">
                 <item>
                  <widget class="QCheckBox" name="sunAltitudeCheckBox">
@@ -1386,6 +1379,35 @@
                 </item>
                </layout>
               </item>
+              <item row="1" column="0">
+               <widget class="QCustomPlot" name="altVsTimePlot" native="true">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="altVsTimeTitle">
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Celestial body</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
              </layout>
             </widget>
             <widget class="QWidget" name="tabAziVsTime">
@@ -1405,17 +1427,7 @@
               <property name="bottomMargin">
                <number>4</number>
               </property>
-              <item row="0" column="0">
-               <widget class="QCustomPlot" name="aziVsTimePlot" native="true">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
+              <item row="2" column="0">
                <widget class="QLabel" name="aziVsTimeLabel">
                 <property name="maximumSize">
                  <size>
@@ -1425,6 +1437,32 @@
                 </property>
                 <property name="text">
                  <string>Please select object to plot its graph 'Azimuth vs. Time'.</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QCustomPlot" name="aziVsTimePlot" native="true">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="aziVsTimeTitle">
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Celestial body</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignCenter</set>
@@ -1450,17 +1488,7 @@
               <property name="bottomMargin">
                <number>4</number>
               </property>
-              <item row="0" column="0">
-               <widget class="QCustomPlot" name="monthlyElevationGraph" native="true">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="0">
+              <item row="3" column="0">
                <layout class="QHBoxLayout" name="horizontalLayout_10">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_21">
@@ -1536,6 +1564,16 @@
                </layout>
               </item>
               <item row="1" column="0">
+               <widget class="QCustomPlot" name="monthlyElevationGraph" native="true">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
                <widget class="QLabel" name="monthlyElevationLabel">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
@@ -1557,6 +1595,22 @@
                 </property>
                 <property name="wordWrap">
                  <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="monthlyElevationTitle">
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Celestial body</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
                 </property>
                </widget>
               </item>
@@ -1782,17 +1836,7 @@
               <property name="bottomMargin">
                <number>4</number>
               </property>
-              <item row="0" column="0">
-               <widget class="QCustomPlot" name="angularDistancePlot" native="true">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="0">
+              <item row="3" column="0">
                <layout class="QHBoxLayout" name="horizontalLayout_18">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_19">
@@ -1838,6 +1882,32 @@
                  </widget>
                 </item>
                </layout>
+              </item>
+              <item row="1" column="0">
+               <widget class="QCustomPlot" name="angularDistancePlot" native="true">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="angularDistanceTitle">
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Change of angular distance between the Moon and selected object</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
               </item>
              </layout>
             </widget>
@@ -2321,6 +2391,7 @@
   </customwidget>
  </customwidgets>
  <resources>
+  <include location="../../data/gui/guiRes.qrc"/>
   <include location="../../data/gui/guiRes.qrc"/>
  </resources>
  <connections/>
