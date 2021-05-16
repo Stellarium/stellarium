@@ -1683,7 +1683,7 @@ void NebulaMgr::updateSkyCulture(const QString& skyCultureDir)
 
 		// lines which look like records - we use the RE to extract the fields
 		// which will be available in recRx.capturedTexts()
-		QRegExp recRx("^\\s*([\\w\\s]+)\\s*\\|_[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
+		QRegExp recRx("^\\s*([\\w\\s]+)\\s*\\|[_]*[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
 
 		QString record, dsoId, nativeName;
 		int totalRecords=0;

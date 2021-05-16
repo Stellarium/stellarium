@@ -754,7 +754,7 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 	// "   677|_("Alpheratz")"
 	// "113368|_("Fomalhaut")"
 	// Note: Stellarium doesn't support sky cultures made prior version 0.10.6 now!
-	QRegExp recordRx("^\\s*(\\d+)\\s*\\|_[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
+	QRegExp recordRx("^\\s*(\\d+)\\s*\\|[_]*[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
 
 	while(!cnFile.atEnd())
 	{
