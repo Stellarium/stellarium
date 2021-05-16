@@ -82,7 +82,7 @@ with open(STARS_FILE, 'w') as stars, open(DSO_FILE, 'w') as dso:
                 name = PROPER_NAMES.get(i)
                 if name is not None:
                     print(f'{tag}|_("{name}")', file=file)
-                print(f'{tag}|_("{con} {idx}")', file=file)
+                print(f'{tag}|("{con} {idx}")', file=file)
                 print(f'{tag}|_("{desc}")', file=file)
         else:
             print(f'No HIP number found for HR {hr} ({modern_id})', file=sys.stderr)
