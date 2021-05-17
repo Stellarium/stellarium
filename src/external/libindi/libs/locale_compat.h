@@ -38,12 +38,12 @@ extern "C" {
 
 #if defined(_MSC_VER)
 
+#include <stdio.h>
 #include <string.h>
 #include <malloc.h>
-#include <stdio.h>
 
 typedef wchar_t locale_char_t;
-#define INDI_LOCALE(s) L#s
+#define INDI_LOCALE(s) L##s
 
 __inline static locale_char_t *indi_setlocale(int category, const locale_char_t *locale)
 {
