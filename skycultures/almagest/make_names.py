@@ -90,7 +90,7 @@ with open(STARS_FILE, 'w') as stars, open(DSO_FILE, 'w') as dso:
             tags = [tag]
         elif tags is not None:
             file = dso
-            tags = DSO.get(modern_id)
+            tags = DSO.get(modern_id, [])
         else:
             file, tags = None, []
         if file is not None:
