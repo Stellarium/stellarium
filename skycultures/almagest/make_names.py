@@ -1,19 +1,24 @@
 import sys
-PROPER_NAMES = {              #  HIP
-    110: 'Arcturus',          # 69673
-    149: 'Lyra',              # 91262
-    222: 'Capella',           # 24608
-    288: 'Aquila',            # 97649
-    449: 'Praesepe',          # -----   (NGC 2632, M 44)
-    452: 'Aselli 1',          # 42806   (Translated as 'asses' in a footnote.)
-    453: 'Aselli 2',          # 42911
-    469: 'Regulus',           # 49669
-    509: 'Vindemiatrix',      # 63608   (In fn.: προτρυγητήρ 'Harbinger of Vintage'.)
-    510: 'Spica',             # 65474   (In fn.: στάχυς, an ear of wheat or other cereal.)
-    553: 'Antares',           # 80763
-    818: 'the Dog',           # 32349
-    848: 'Procyon',           # 37279   (before the dog)
-    892: 'Canopus',           # 30438
+CAT_FILE = 'almstars/cat1.dat'
+PROPER_NAMES = {
+    #      Toomer          Greek          @sushoff                     HIP
+    110: ('Arcturus',     'Ἀρκτοῦρος',   '(Arkturos, Guard)'),       # 69673
+    149: ('Lyra',         'λύρα',        '(Lyra)'),                  # 91262
+    222: ('Capella',      'αἴξ',         '(Goat)'),                  # 24608
+    227: ('Haedi 1',      'Ἔριφοι',      '(Kids [of the Goat]) I'),  # 23767
+    228: ('Haedi 2',      'Ἔριφοι',      '(Kids [of the Goat]) II'), # 23767
+    288: ('Aquila',       'ἀετός',       '(Eagle)'),                 # 97649
+    449: ('Praesepe',     'φάτνη',       '(Manger)'),                # -----   (NGC 2632, M 44)
+    452: ('Aselli 1',     'ὄνος',        '(Ass) I'),                 # 42806   (Translated as 'asses' in a footnote.)
+    453: ('Aselli 2',     'ὄνος',        '(Ass) II'),                # 42911
+    469: ('Regulus',      'βασιλίσκος',  '(Princelet)'),             # 49669
+    509: ('Vindemiatrix', 'Προτρυγητήρ', '(Harbinger of Vintage)'),  # 63608   (In fn.: προτρυγητήρ 'Harbinger of Vintage'.)
+    510: ('Spica',        'στάχυς',      '(Ear of Grain)'),          # 65474   (In fn.: στάχυς, an ear of wheat or other cereal.)
+    553: ('Antares',      'ἀντάρης',     '(Antares)'),               # 80763
+    818: ('the Dog',      'κύων',        '(Dog)'),                   # 32349
+                                                                     # 37279   (before the dog)
+    848: ('Procyon',      'Προκύων',     '(Prokyon, The One [rising] before the Dog)'),     
+    892: ('Canopus',      'Κάνωβος',     '(Kanobos)'),               # 30438
 }
 STARS_FILE = 'star_names.fab'
 DSO_FILE = 'dso_names.fab'
@@ -39,7 +44,6 @@ def parse_cross_id(path):
                 hr_to_hip[int(hr)] = hip
     return hr_to_hip
 
-CAT_FILE = 'almstars/cat1.dat'
 CAT_CON = slice(5, 8)     # constellation abbreviation
 CAT_IDX = slice(9, 11)    # index within constellation
 CAT_HR = slice(30, 34)    # HR number
@@ -79,9 +83,9 @@ with open(STARS_FILE, 'w') as stars, open(DSO_FILE, 'w') as dso:
             file, tags = None, []
         if file is not None:
             for tag in tags:
-                name = PROPER_NAMES.get(i)
+                name, greek, s = PROPER_NAMES.get(i, (None, ) * 3)
                 if name is not None:
-                    print(f'{tag}|_("{name}")', file=file)
+                    print(f'{tag}|_("{greek} {s}")', file=file)
                 print(f'{tag}|("{con} {idx}")', file=file)
                 print(f'{tag}|_("{desc}")', file=file)
         else:
