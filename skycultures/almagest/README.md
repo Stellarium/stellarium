@@ -52,4 +52,19 @@ The second part of the data lists the corresponding Yale catalog information for
 
 ### The make_names.py script
 
-The `make_names.py` takes the `cat1.dat` file and generates `star_names.fab` and `dso_names.fab` files that can be used by Stellarium.  Since `star_names.fab` requires HIP rather than HR numbers, the required cross-catalogue data is extracted from the `cross-id.dat` file.  The DSOs are identified by their modern designations and the necessary translations are hard-coded in the script. (There are only three such objects in the Almagest.)
+The `make_names.py` script parses an "almstars" catalogue file and generates `star_names.fab` and `dso_names.fab` files that can be used by Stellarium.  There are four catalogue files included in the `almstars/` directory and the script uses `cat1.dat`.  If you would like to experiment with a different catalogue - change the value of the
+`CAT_FILE` variable at the top of the script and run the script as follows:
+
+```sh
+$ python3.9 make_names.py
+Almagest Catalog:  Toomer/Grasshoff
+  found 1022 unique stars and 16 proper names
+52 nu1 Boo (HR 5763) is in Boo, Her.
+112 bet Tau (HR 1791) is in Aur, Tau.
+24 alp PsA (HR 8728) is in Aqr, PsA.
+```
+
+Since `star_names.fab` requires HIP rather than HR numbers, the required cross-catalogue data is extracted from the `cross-id.dat` file.  The DSOs are identified by their modern designations and the necessary translations are hard-coded in the script. (There are only three such objects in the Almagest.)
+
+In addition, information required to generate proper names and location of the stars relative to constellation figures that is present in the primary source but not reflected in the computer readable catalogues, is manually
+coded in the script.  See the `PROPER_NAMES` and `OUTSIDE` dictionaries.
