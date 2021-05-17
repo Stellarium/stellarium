@@ -40,6 +40,7 @@ extern "C" {
 
 #include <string.h>
 #include <malloc.h>
+#include <stdio.h>
 
 typedef wchar_t locale_char_t;
 #define INDI_LOCALE(s) L#s
