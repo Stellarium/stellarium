@@ -20,6 +20,18 @@ PROPER_NAMES = {
     848: ('Procyon',      'Προκύων',     '(Prokyon, The One [rising] before the Dog)'),     
     892: ('Canopus',      'Κάνωβος',     '(Kanobos)'),               # 30438
 }
+OUTSIDE = { # 'n' = nearby, 'u' = under, 'a' = around, 'r' = round (?)
+#    I                 II                IV                V                 VII
+    'UMi': (8, 'n'),  'UMa': (28, 'u'), 'Cep': (12, 'a'), 'Boo': (23, 'u'), 'Her': (29, ''),
+#    IX                XI                XIII              XXII              XXIII
+    'Cyg': (18, 'a'), 'Per': (27, ''),  'Oph': (25, 'a'), 'Ari': (14, 'a'), 'Tau': (34, 'a'),
+#    XXV               XXIV              XXVI              XXVII             XXVIII
+    'Cnc': (10, 'a'), 'Gem': (19, 'a'), 'Leo': (28, 'a'), 'Vir': (27, 'a'), 'Lib': (9, 'a'),
+#    XXIX              XXXII             XXXIII            XXXVIII           XLI 
+    'Sco': (22, 'a'), 'Aqr': (43, 'r'), 'Psc': (35, 'r'), 'CMa': (19, 'r'), 'Hya': (26, 'r'), 
+#    XLVIII
+    'PsA': (13, 'r'),
+}
 STARS_FILE = 'star_names.fab'
 DSO_FILE = 'dso_names.fab'
 # HIP           SAO     HD      HR
@@ -86,6 +98,8 @@ with open(STARS_FILE, 'w') as stars, open(DSO_FILE, 'w') as dso:
                 name, greek, s = PROPER_NAMES.get(i, (None, ) * 3)
                 if name is not None:
                     print(f'{tag}|_("{greek} {s}")', file=file)
+                if con in OUTSIDE and idx >= OUTSIDE[con][0]:
+                    con = con.lower()
                 print(f'{tag}|("{con} {idx}")', file=file)
                 print(f'{tag}|_("{desc}")', file=file)
         else:
