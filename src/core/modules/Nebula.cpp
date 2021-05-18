@@ -422,15 +422,21 @@ QString Nebula::getEnglishAliases() const
 	int asize = englishAliases.size();
 	if (asize!=0)
 	{
-		if (asize>3) // Special case for many AKA
+		if (asize>2) // Special case for many AKA
 		{
-			for(int i=0; i<asize; i++)
+			bool firstLine = true;
+			for(int i=1; i<=asize; i++)
 			{
-				aliases.append(englishAliases.at(i));
-				if (i<asize-1)
+				aliases.append(englishAliases.at(i-1));
+				if (i<asize)
 					aliases.append(" - ");
 
-				if (i==1) // 2 AKA-items on first line!
+				if ((i % 2)==0 && firstLine) // 2 AKA-items on first line!
+				{
+					aliases.append("<br />");
+					firstLine = false;
+				}
+				if (i>3 && ((i-2) % 4)==0 && !firstLine &&  i<asize)
 					aliases.append("<br />");
 			}
 		}
@@ -446,16 +452,22 @@ QString Nebula::getI18nAliases() const
 	int asize = nameI18Aliases.size();
 	if (asize!=0)
 	{
-		if (asize>3) // Special case for many AKA; NOTE: Should we add size to the config data for skyculture?
+		if (asize>2) // Special case for many AKA; NOTE: Should we add size to the config data for skyculture?
 		{
-			for(int i=0; i<asize; i++)
+			bool firstLine = true;
+			for(int i=1; i<=asize; i++)
 			{
-				aliases.append(nameI18Aliases.at(i));
-				if (i<asize-1)
+				aliases.append(nameI18Aliases.at(i-1));
+				if (i<asize)
 					aliases.append(" - ");
 
-				if (i>0 && (i % 3)==0 && i<(asize-1))
+				if ((i % 2)==0 && firstLine) // 2 AKA-items on first line!
+				{
 					aliases.append("<br />");
+					firstLine = false;
+				}
+				if (i>3 && ((i-2) % 4)==0 && !firstLine &&  i<asize)
+						aliases.append("<br />");
 			}
 		}
 		else
