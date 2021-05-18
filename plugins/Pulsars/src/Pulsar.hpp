@@ -26,6 +26,8 @@
 #include <QList>
 #include <QDateTime>
 
+#include "StelCore.hpp"
+#include "StelUtils.hpp"
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelFader.hpp"
@@ -49,25 +51,26 @@ public:
 	~Pulsar();
 
 	//! Get a QVariantMap which describes the pulsar. Could be used to create a duplicate.
-	// TODO: Add proper documentation of these fields!
-	//! - designation
-	//! - parallax
-	//! - bperiod
-	//! - frequency
-	//! - pfrequency
-	//! - pderivative
-	//! - dmeasure
+	//! - designation: pulsar name based on J2000 coordinates
+	//! - parallax: annual parallax (mas)
+	//! - bperiod: binary period of pulsar (days)
+	//! - frequency: barycentric rotation frequency (Hz)
+	//! - pfrequency: time derivative of barycentric rotation frequency (s^-2)
+	//! - pderivative: time derivative of barcycentric period (dimensionless)
+	//! - dmeasure: dispersion measure (pc/cm^3)
 	//! - eccentricity
-	//! - RA
-	//! - DE
-	//! - period
-	//! - w50
-	//! - s400
-	//! - s600
-	//! - s1400
-	//! - distance
-	//! - glitch
-	//! - notes
+	//! - RA: right ascension (J2000) (hh:mm:ss.s)
+	//! - DE: declination (J2000) (+dd:mm:ss)
+	//! - pmRA: proper motion in the right ascension direction (mas/yr)
+	//! - pmDE: proper motion in declination (mas/yr)
+	//! - period: barycentric period of the pulsar (s)
+	//! - w50: width of pulse at 50% of peak (ms). Note, pulse widths are a function of both observing frequency and observational time resolution, so quoted widths are indicative only.
+	//! - s400: mean flux density at 400 MHz (mJy)
+	//! - s600: mean flux density at 1400 MHz (mJy)
+	//! - s1400: mean flux density at 2000 MHz (mJy)
+	//! - distance: best estimate of the pulsar distance using the YMW16 DM-based distance as default (kpc)
+	//! - glitch: number of glitches
+	//! - notes: pulsar types
 	QVariantMap getMap(void) const;
 
 	//! Get the type of object
@@ -90,9 +93,15 @@ public:
 	//! Return a map like StelObject::getInfoMap(), but with a few extra tags also available in getMap(), except for designation, RA and DE fields.
 	virtual QVariantMap getInfoMap(const StelCore *core) const;
 	virtual Vec3f getInfoColor(void) const;
-	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const
+	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const
 	{
-		return XYZ;
+		static const double d2000 = 2451545.0;
+		const double movementFactor = (M_PI/180.)*(0.0001/3600.) * (core->getJDE()-d2000)/365.25;
+		Vec3d v;
+		const double cRA = RA + movementFactor*pmRA;
+		const double cDE = DE + movementFactor*pmDE;
+		StelUtils::spheToRect(cRA, cDE, v);
+		return v;
 	}
 	//! Get the visual magnitude of pulsar
 	virtual float getVMagnitude(const StelCore* core) const;
@@ -129,6 +138,8 @@ private:
 	QString pulsarName;	//! The proper name of the pulsar
 	double RA;		//! J2000 right ascension
 	double DE;		//! J2000 declination
+	double pmRA;		//! proper motion by right ascension (mas/yr)
+	double pmDE;		//! proper motion by declination (mas/yr)
 	float parallax;		//! Annual parallax (mas)
 	double period;		//! Barycentric period of the pulsar (s)
 	double frequency;	//! Barycentric rotation frequency (Hz)

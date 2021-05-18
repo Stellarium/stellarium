@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-05-18 11:05+0700\n"
+"POT-Creation-Date: 2021-05-18 22:57+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,8 +36,8 @@ msgstr ""
 #: plugins/Satellites/src/Satellite.cpp:305
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:531
 #: plugins/Supernovae/src/Supernova.cpp:143 plugins/Novae/src/Nova.cpp:147
-#: plugins/Quasars/src/Quasar.cpp:127 plugins/Pulsars/src/Pulsar.cpp:184
-#: plugins/Pulsars/src/Pulsar.cpp:186 plugins/Exoplanets/src/Exoplanet.cpp:278
+#: plugins/Quasars/src/Quasar.cpp:127 plugins/Pulsars/src/Pulsar.cpp:188
+#: plugins/Pulsars/src/Pulsar.cpp:190 plugins/Exoplanets/src/Exoplanet.cpp:278
 #: plugins/MeteorShowers/src/MeteorShower.cpp:523
 msgid "Type"
 msgstr ""
@@ -1481,7 +1481,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:318 src/core/modules/Nebula.cpp:331
 #: src/core/modules/StarWrapper.cpp:313
 #: plugins/Supernovae/src/Supernova.cpp:158 plugins/Novae/src/Nova.cpp:161
-#: plugins/Pulsars/src/Pulsar.cpp:257 plugins/Exoplanets/src/Exoplanet.cpp:292
+#: plugins/Pulsars/src/Pulsar.cpp:272 plugins/Exoplanets/src/Exoplanet.cpp:292
 msgctxt "distance"
 msgid "ly"
 msgstr ""
@@ -1496,7 +1496,7 @@ msgid "Distance"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
-#: src/core/modules/Nebula.cpp:329 plugins/Pulsars/src/Pulsar.cpp:254
+#: src/core/modules/Nebula.cpp:329 plugins/Pulsars/src/Pulsar.cpp:269
 msgctxt "distance"
 msgid "kpc"
 msgstr ""
@@ -1523,7 +1523,7 @@ msgstr ""
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
 #: src/core/modules/Nebula.cpp:390 src/core/modules/StarWrapper.cpp:347
-#: plugins/Pulsars/src/Pulsar.cpp:245
+#: plugins/Pulsars/src/Pulsar.cpp:260
 msgctxt "parallax"
 msgid "mas"
 msgstr ""
@@ -2027,6 +2027,7 @@ msgstr ""
 
 #: src/core/modules/Planet.cpp:537 src/core/modules/Planet.cpp:1062
 #: src/core/modules/Planet.cpp:1071 src/core/modules/StarWrapper.cpp:334
+#: plugins/Pulsars/src/Pulsar.cpp:203
 msgctxt "into the direction of"
 msgid "towards"
 msgstr ""
@@ -2377,16 +2378,17 @@ msgstr ""
 msgid "Photometric system"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:332
+#: src/core/modules/StarWrapper.cpp:332 plugins/Pulsars/src/Pulsar.cpp:201
 msgid "Proper motion"
 msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:333 src/core/modules/StarWrapper.cpp:335
+#: plugins/Pulsars/src/Pulsar.cpp:202 plugins/Pulsars/src/Pulsar.cpp:204
 msgctxt "milliarc second per year"
 msgid "mas/yr"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:335
+#: src/core/modules/StarWrapper.cpp:335 plugins/Pulsars/src/Pulsar.cpp:204
 msgid "Proper motions by axes"
 msgstr ""
 
@@ -13659,7 +13661,7 @@ msgid ""
 msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:618
-#: plugins/Pulsars/src/Pulsar.cpp:288
+#: plugins/Pulsars/src/Pulsar.cpp:303
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:604
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:318
 msgid "Notes"
@@ -14483,7 +14485,7 @@ msgid "Radio communication"
 msgstr ""
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Satellites/src/Satellite.cpp:455 plugins/Pulsars/src/Pulsar.cpp:274
+#: plugins/Satellites/src/Satellite.cpp:455 plugins/Pulsars/src/Pulsar.cpp:289
 msgctxt "frequency"
 msgid "MHz"
 msgstr ""
@@ -17605,129 +17607,129 @@ msgstr ""
 msgid "Pulsars configuration window"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:184
+#: plugins/Pulsars/src/Pulsar.cpp:188
 msgid "pulsar"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:186
+#: plugins/Pulsars/src/Pulsar.cpp:190
 msgid "pulsar with glitches"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:186
+#: plugins/Pulsars/src/Pulsar.cpp:190
 msgid "registered glitches"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:197
+#: plugins/Pulsars/src/Pulsar.cpp:212
 msgid "Barycentric period"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for period - seconds
-#: plugins/Pulsars/src/Pulsar.cpp:200
+#: plugins/Pulsars/src/Pulsar.cpp:215
 msgctxt "period"
 msgid "s"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:204
+#: plugins/Pulsars/src/Pulsar.cpp:219
 msgid "Time derivative of barycentric period"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:209
+#: plugins/Pulsars/src/Pulsar.cpp:224
 msgid "Dispersion measure"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
-#: plugins/Pulsars/src/Pulsar.cpp:212
+#: plugins/Pulsars/src/Pulsar.cpp:227
 msgctxt "distance"
 msgid "pc"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - centimeters
-#: plugins/Pulsars/src/Pulsar.cpp:214
+#: plugins/Pulsars/src/Pulsar.cpp:229
 msgctxt "distance"
 msgid "cm"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:221
+#: plugins/Pulsars/src/Pulsar.cpp:236
 msgid "Spin down energy loss rate"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for power - erg per second
-#: plugins/Pulsars/src/Pulsar.cpp:224
+#: plugins/Pulsars/src/Pulsar.cpp:239
 msgctxt "power"
 msgid "ergs/s"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:230
+#: plugins/Pulsars/src/Pulsar.cpp:245
 msgid "Binary period of pulsar"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for period - days
-#: plugins/Pulsars/src/Pulsar.cpp:233 plugins/Exoplanets/src/Exoplanet.cpp:319
+#: plugins/Pulsars/src/Pulsar.cpp:248 plugins/Exoplanets/src/Exoplanet.cpp:319
 msgctxt "period"
 msgid "days"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:237 plugins/Exoplanets/src/Exoplanet.cpp:323
+#: plugins/Pulsars/src/Pulsar.cpp:252 plugins/Exoplanets/src/Exoplanet.cpp:323
 msgid "Eccentricity"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:242
+#: plugins/Pulsars/src/Pulsar.cpp:257
 msgid "Annual parallax"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:251
+#: plugins/Pulsars/src/Pulsar.cpp:266
 msgid "Distance based on electron density model"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:264
+#: plugins/Pulsars/src/Pulsar.cpp:279
 #, no-c-format
 msgid "Profile width at 50% of peak"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for time - milliseconds
-#: plugins/Pulsars/src/Pulsar.cpp:267
+#: plugins/Pulsars/src/Pulsar.cpp:282
 msgctxt "time"
 msgid "ms"
 msgstr ""
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
-#: plugins/Pulsars/src/Pulsar.cpp:272
+#: plugins/Pulsars/src/Pulsar.cpp:287
 msgid "Time averaged flux density at"
 msgstr ""
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
-#: plugins/Pulsars/src/Pulsar.cpp:276
+#: plugins/Pulsars/src/Pulsar.cpp:291
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:352
 msgctxt "spectral flux density"
 msgid "mJy"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:376
+#: plugins/Pulsars/src/Pulsar.cpp:391
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:381
+#: plugins/Pulsars/src/Pulsar.cpp:396
 msgid "has one or more binary companions"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:386
+#: plugins/Pulsars/src/Pulsar.cpp:401
 msgid "with pulsed emission from radio to infrared or higher frequencies"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:391
+#: plugins/Pulsars/src/Pulsar.cpp:406
 msgid "with pulsed emission only at infrared or higher frequencies"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:396
+#: plugins/Pulsars/src/Pulsar.cpp:411
 msgid "with pulsed emission in the radio band"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:401
+#: plugins/Pulsars/src/Pulsar.cpp:416
 msgid "with intermittently pulsed radio emission"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:406
+#: plugins/Pulsars/src/Pulsar.cpp:421
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
