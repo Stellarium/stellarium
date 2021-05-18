@@ -43,7 +43,7 @@ class Telescope : public QObject
 public:
    /// Creates a new instance of Telescope.
    //! The newly created instance will have values initialized to represent a usable telescope model.
-   explicit Telescope(QObject * parent = nullptr);
+   Q_INVOKABLE explicit Telescope(QObject * parent = nullptr);
    ~Telescope() override = default;
 
    void        initFromSettings(QSettings * theSettings, int telescopeIndex);

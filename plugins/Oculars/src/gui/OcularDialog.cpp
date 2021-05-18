@@ -34,6 +34,7 @@
 #include <QMessageBox>
 #include <QSettings>
 #include <QStandardItemModel>
+#include <QtGlobal>
 
 OcularDialog::OcularDialog(Oculars *            pluginPtr,
                            QList<CCD *> *       ccds,
@@ -283,37 +284,48 @@ void OcularDialog::createDialogContent()
    connect(ui->closeStelWindow, &QPushButton::clicked, this, &OcularDialog::close);
    connect(ui->TitleBar, &BarFrame::movedTo, this, &OcularDialog::handleMovedTo);
 
-   connectBoolProperty(ui->checkBoxControlPanel, "Oculars.flagGuiPanelEnabled");
-   connectIntProperty(ui->guiFontSizeSpinBox, "Oculars.guiPanelFontSize");
-   connectBoolProperty(ui->checkBoxInitialFOV, "Oculars.flagInitFOVUsage");
-   connectBoolProperty(ui->checkBoxInitialDirection, "Oculars.flagInitDirectionUsage");
-   connectBoolProperty(ui->checkBoxResolutionCriterion, "Oculars.flagShowResolutionCriteria");
-   connectBoolProperty(ui->requireSelectionCheckBox, "Oculars.flagRequireSelection");
-   connectBoolProperty(ui->limitStellarMagnitudeCheckBox, "Oculars.flagAutoLimitMagnitude");
-   connectBoolProperty(ui->hideGridsLinesCheckBox, "Oculars.flagHideGridsLines");
-   connectBoolProperty(ui->scaleImageCircleCheckBox, "Oculars.flagScaleImageCircle");
-   connectBoolProperty(ui->semiTransparencyCheckBox, "Oculars.flagSemiTransparency");
-   connectIntProperty(ui->transparencySpinBox, "Oculars.transparencyMask");
-   connectBoolProperty(ui->checkBoxDMSDegrees, "Oculars.flagDMSDegrees");
-   connectBoolProperty(ui->checkBoxTypeOfMount, "Oculars.flagAutosetMountForCCD");
-   connectBoolProperty(ui->checkBoxTelradFOVScaling, "Oculars.flagScalingFOVForTelrad");
-   connectBoolProperty(ui->checkBoxCCDFOVScaling, "Oculars.flagScalingFOVForCCD");
-   connectBoolProperty(ui->checkBoxToolbarButton, "Oculars.flagShowOcularsButton");
-   connectIntProperty(ui->arrowButtonScaleSpinBox, "Oculars.arrowButtonScale");
-   connectBoolProperty(ui->checkBoxShowCcdCropOverlay, "Oculars.flagShowCcdCropOverlay");
-   connectBoolProperty(ui->checkBoxShowCcdCropOverlayPixelGrid, "Oculars.flagShowCcdCropOverlayPixelGrid");
-   connectIntProperty(ui->guiCcdCropOverlayHSizeSpinBox, "Oculars.ccdCropOverlayHSize");
-   connectIntProperty(ui->guiCcdCropOverlayVSizeSpinBox, "Oculars.ccdCropOverlayVSize");
-   connectBoolProperty(ui->contourCheckBox, "Oculars.flagShowContour");
-   connectBoolProperty(ui->cardinalsCheckBox, "Oculars.flagShowCardinals");
-   connectBoolProperty(ui->alignCrosshairCheckBox, "Oculars.flagAlignCrosshair");
+   connect(ui->checkBoxControlPanel, &QCheckBox::toggled, plugin, &Oculars::enableGuiPanel);
+   connect(ui->checkBoxInitialFOV, &QCheckBox::toggled, plugin, &Oculars::setUseInitialFOV);
+   connect(ui->checkBoxInitialDirection, &QCheckBox::toggled, plugin, &Oculars::setUseInitialDiretion);
+   connect(ui->checkBoxResolutionCriterion, &QCheckBox::toggled, plugin, &Oculars::setShowResolutionCriteria);
+   connect(ui->requireSelectionCheckBox, &QCheckBox::toggled, plugin, &Oculars::setRequireSelectionToZoom);
+   connect(ui->limitStellarMagnitudeCheckBox, &QCheckBox::toggled, plugin, &Oculars::setAutoLimitMagnitude);
+   connect(ui->hideGridsLinesCheckBox, &QCheckBox::toggled, plugin, &Oculars::setHideGridsAndLines);
+   connect(ui->scaleImageCircleCheckBox, &QCheckBox::toggled, plugin, &Oculars::setScaleImageCircle);
+   connect(ui->semiTransparencyCheckBox, &QCheckBox::toggled, plugin, &Oculars::setUseSemiTransparency);
+   connect(ui->checkBoxDMSDegrees, &QCheckBox::toggled, plugin, &Oculars::setUseDecimalDegrees);
+   connect(ui->checkBoxTypeOfMount, &QCheckBox::toggled, plugin, &Oculars::setFlagAutosetMountForCCD);
+   connect(ui->checkBoxTelradFOVScaling, &QCheckBox::toggled, plugin, &Oculars::setScaleFOVForTelrad);
+   connect(ui->checkBoxCCDFOVScaling, &QCheckBox::toggled, plugin, &Oculars::setScaleFOVForCCD);
+   connect(ui->checkBoxToolbarButton, &QCheckBox::toggled, plugin, &Oculars::setShowOcularsButton);
+   connect(ui->checkBoxShowCcdCropOverlay, &QCheckBox::toggled, plugin, &Oculars::setShowCCDCropOverlay);
+   connect(
+     ui->checkBoxShowCcdCropOverlayPixelGrid, &QCheckBox::toggled, plugin, &Oculars::setShowCCDCropOverlayPixelGrid);
+   connect(ui->contourCheckBox, &QCheckBox::toggled, plugin, &Oculars::setShowOcularContour);
+   connect(ui->cardinalsCheckBox, &QCheckBox::toggled, plugin, &Oculars::setShowCardinalPoints);
+   connect(ui->alignCrosshairCheckBox, &QCheckBox::toggled, plugin, &Oculars::setAlignCrosshair);
+   connect(ui->checkBoxShowFocuserOverlay, &QCheckBox::toggled, plugin, &Oculars::setShowFocuserOverlay);
+   connect(ui->checkBoxUseSmallFocuser, &QCheckBox::toggled, plugin, &Oculars::setDisplayFocuserOverlaySmall);
+   connect(ui->checkBoxUseMediumFocuser, &QCheckBox::toggled, plugin, &Oculars::setDisplayFocuserOverlayMedium);
+   connect(ui->checkBoxUseLargeFocuser, &QCheckBox::toggled, plugin, &Oculars::setDisplayFocuserOverlayLarge);
+
+   connect(ui->guiFontSizeSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), plugin, &Oculars::setGuiPanelFontSize);
+   connect(
+     ui->transparencySpinBox, QOverload<int>::of(&QSpinBox::valueChanged), plugin, &Oculars::setTransparencyLevel);
+   connect(
+     ui->arrowButtonScaleSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), plugin, &Oculars::setArrowButtonScale);
+   connect(ui->guiCcdCropOverlayHSizeSpinBox,
+           QOverload<int>::of(&QSpinBox::valueChanged),
+           plugin,
+           &Oculars::setCCDCropOverlayHSize);
+   connect(ui->guiCcdCropOverlayVSizeSpinBox,
+           QOverload<int>::of(&QSpinBox::valueChanged),
+           plugin,
+           &Oculars::setCCDCropOverlayVSize);
+
    connectColorButton(ui->textColorToolButton, "Oculars.textColor", "text_color", "Oculars");
    connectColorButton(ui->lineColorToolButton, "Oculars.lineColor", "line_color", "Oculars");
    connectColorButton(ui->focuserColorToolButton, "Oculars.focuserColor", "focuser_color", "Oculars");
-   connectBoolProperty(ui->checkBoxShowFocuserOverlay, "Oculars.flagShowFocuserOverlay");
-   connectBoolProperty(ui->checkBoxUseSmallFocuser, "Oculars.flagUseSmallFocuserOverlay");
-   connectBoolProperty(ui->checkBoxUseMediumFocuser, "Oculars.flagUseMediumFocuserOverlay");
-   connectBoolProperty(ui->checkBoxUseLargeFocuser, "Oculars.flagUseLargeFocuserOverlay");
 
    setupTelradFOVspins(plugin->getTelradFOV());
    connect(plugin, &Oculars::telradFOVChanged, this, &OcularDialog::setupTelradFOVspins);
@@ -498,48 +510,48 @@ void OcularDialog::updateTelradCustomFOV(double newValue)
 void OcularDialog::updateOcular()
 {
    ocularMapper.submit();
-   plugin->selectOcularAtIndex(plugin->getSelectedOcularIndex());
+   plugin->setIndexSelectedOcular(plugin->indexSelectedOcular());
 }
 
 void OcularDialog::selectOcular(const QModelIndex newIndex) const
 {
-   plugin->selectOcularAtIndex(newIndex.row());
+   plugin->setIndexSelectedOcular(newIndex.row());
    plugin->updateLists();
 }
 
 void OcularDialog::updateLens()
 {
    lensMapper.submit();
-   plugin->selectLensAtIndex(plugin->getSelectedLensIndex());
+   plugin->setIndexSelectedLens(plugin->indexSelectedLens());
 }
 
 void OcularDialog::selectLens(const QModelIndex newIndex) const
 {
-   plugin->selectLensAtIndex(newIndex.row());
+   plugin->setIndexSelectedLens(newIndex.row());
    plugin->updateLists();
 }
 
 void OcularDialog::updateCCD()
 {
    ccdMapper.submit();
-   plugin->selectCCDAtIndex(plugin->getSelectedCCDIndex());
+   plugin->setIndexSelectedCCD(plugin->indexSelectedCCD());
 }
 
 void OcularDialog::selectCCD(const QModelIndex newIndex) const
 {
-   plugin->selectCCDAtIndex(newIndex.row());
+   plugin->setIndexSelectedCCD(newIndex.row());
    plugin->updateLists();
 }
 
 void OcularDialog::updateTelescope()
 {
    telescopeMapper.submit();
-   plugin->selectTelescopeAtIndex(plugin->getSelectedTelescopeIndex());
+   plugin->setIndexSelectedTelescope(plugin->indexSelectedTelescope());
 }
 
 void OcularDialog::selectTelescope(const QModelIndex newIndex) const
 {
-   plugin->selectTelescopeAtIndex(newIndex.row());
+   plugin->setIndexSelectedTelescope(newIndex.row());
    plugin->updateLists();
 }
 

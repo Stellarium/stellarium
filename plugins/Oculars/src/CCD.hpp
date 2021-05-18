@@ -53,7 +53,7 @@ class CCD : public QObject
 public:
    /// Creates a new instance of CCD.
    //! The newly created instance will have values initialized to represent a usable CCD model.
-   explicit CCD(QObject * parent = nullptr);
+   Q_INVOKABLE explicit CCD(QObject * parent = nullptr);
    ~CCD() override = default;
 
    void        initFromSettings(QSettings * settings, int ccdIndex);
