@@ -192,7 +192,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	// Ra/Dec etc.
 	oss << getCommonInfoString(core, flags);
 
-	if (flags&ProperMotion)
+	if (flags&ProperMotion && (pmRA!=0.0 && pmDE!=0.0))
 	{
 		float pa = std::atan2(pmRA, pmDE)*M_180_PIf;
 		if (pa<0)
