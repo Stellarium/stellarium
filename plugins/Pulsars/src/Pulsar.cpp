@@ -90,8 +90,7 @@ Pulsar::Pulsar(const QVariantMap& map)
 	dmeasure = map.value("dmeasure").toDouble();
 	eccentricity = map.value("eccentricity").toDouble();
 	RA = StelUtils::getDecAngle(map.value("RA").toString());
-	DE = StelUtils::getDecAngle(map.value("DE").toString());
-	StelUtils::spheToRect(RA, DE, XYZ);
+	DE = StelUtils::getDecAngle(map.value("DE").toString());	
 	pmRA = map.value("pmRA").toDouble();
 	pmDE = map.value("pmDE").toDouble();
 	w50 = map.value("w50").toFloat();

@@ -120,8 +120,6 @@ public:
 private:
 	bool initialized;
 
-	Vec3d XYZ;                         // holds J2000 position	
-
 	static StelTextureSP hintTexture;
 	static StelTextureSP markerTexture;
 	static bool distributionMode;
