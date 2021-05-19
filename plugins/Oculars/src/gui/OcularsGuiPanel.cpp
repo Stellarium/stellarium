@@ -490,10 +490,10 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars * plugin, QGraphicsWidget * parent)
    connect(parentWidget, SIGNAL(geometryChanged()), this, SLOT(updatePosition()));
 
    // Connecting other slots
-   connect(ocularsPlugin, &Oculars::selectedOcularChanged, [=]() { updateOcularControls(); });
-   connect(ocularsPlugin, &Oculars::selectedCCDChanged, [=]() { updateCcdControls(); });
-   connect(ocularsPlugin, &Oculars::selectedTelescopeChanged, [=]() { updateTelescopeControls(); });
-   connect(ocularsPlugin, &Oculars::selectedLensChanged, [=]() { updateTelescopeControls(); });
+   connect(ocularsPlugin, &Oculars::indexSelectedOcularChanged, [=]() { updateOcularControls(); });
+   connect(ocularsPlugin, &Oculars::indexSelectedCCDChanged, [=]() { updateCcdControls(); });
+   connect(ocularsPlugin, &Oculars::indexSelectedTelescopeChanged, [=]() { updateTelescopeControls(); });
+   connect(ocularsPlugin, &Oculars::indexSelectedLensChanged, [=]() { updateTelescopeControls(); });
 
    // Night mode
    connect(&stelApp, SIGNAL(colorSchemeChanged(const QString &)), this, SLOT(setColorScheme(const QString &)));
@@ -502,7 +502,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars * plugin, QGraphicsWidget * parent)
 
 void OcularsGuiPanel::showOcularGui()
 {
-   if (ocularsPlugin->flagShowOculars) {
+   if (ocularsPlugin->isOcularDisplayed()) {
       updateOcularControls();
    } else {
       setOcularControlsVisible(false);
@@ -559,7 +559,7 @@ void OcularsGuiPanel::updateOcularControls()
    setCcdControlsVisible(false);
 
    // Get the name
-   int      index  = ocularsPlugin->selectedOcularIndex;
+   int      index  = ocularsPlugin->m_indexSelectedOcular;
    Ocular * ocular = ocularsPlugin->oculars[index];
    Q_ASSERT(ocular);
    QString name = ocular->name();
@@ -633,7 +633,7 @@ void OcularsGuiPanel::updateOcularControls()
 void OcularsGuiPanel::updateLensControls()
 {
    Lens *  lens  = ocularsPlugin->selectedLens();
-   int     index = ocularsPlugin->selectedLensIndex;
+   int     index = ocularsPlugin->m_indexSelectedLens;
 
    QString fullName;
    QString multiplerString;
@@ -683,10 +683,10 @@ void OcularsGuiPanel::updateLensControls()
    lensControls->setMinimumSize(widgetWidth, widgetHeight);
    lensControls->resize(widgetWidth, widgetHeight);
 
-   int      oindex = ocularsPlugin->selectedOcularIndex;
+   int      oindex = ocularsPlugin->m_indexSelectedOcular;
    Ocular * ocular = ocularsPlugin->oculars[oindex];
    if (ocular->isBinoculars() &&
-       ocularsPlugin->flagShowOculars) { // Hide the lens info for binoculars in eyepiece mode only
+       ocularsPlugin->isOcularDisplayed()) { // Hide the lens info for binoculars in eyepiece mode only
       setLensControlsVisible(false);
    } else {
       setLensControlsVisible(true);
@@ -698,7 +698,7 @@ void OcularsGuiPanel::updateCcdControls()
    setOcularControlsVisible(false);
 
    // Get the name
-   auto index = ocularsPlugin->selectedCCDIndex;
+   auto index = ocularsPlugin->m_indexSelectedCCD;
    auto ccd   = ocularsPlugin->ccds[index];
    Q_ASSERT(ccd);
    ocularsPlugin->setSelectedCCDRotationAngle(ccd->rotationAngle());
@@ -739,7 +739,7 @@ void OcularsGuiPanel::updateCcdControls()
    widgetHeight += fieldCcdName->boundingRect().height();
 
    // We need the current telescope
-   index          = ocularsPlugin->selectedTelescopeIndex;
+   index          = ocularsPlugin->m_indexSelectedTelescope;
    auto telescope = ocularsPlugin->telescopes[index];
    Q_ASSERT(telescope);
    const double fovX            = ccd->getActualFOVx(telescope, lens);
@@ -871,7 +871,7 @@ void OcularsGuiPanel::updateCcdControls()
 void OcularsGuiPanel::updateTelescopeControls()
 {
    // Get the name
-   int     index     = ocularsPlugin->selectedTelescopeIndex;
+   int     index     = ocularsPlugin->m_indexSelectedTelescope;
    auto    telescope = ocularsPlugin->telescopes[index];
    QString name      = telescope->name();
    QString fullName;
@@ -911,8 +911,8 @@ void OcularsGuiPanel::updateTelescopeControls()
 
    double mag  = 0.0;
 
-   if (ocularsPlugin->flagShowCCD) {
-      auto ccdIndex = ocularsPlugin->selectedCCDIndex;
+   if (ocularsPlugin->isCCDDisplayed()) {
+      auto ccdIndex = ocularsPlugin->m_indexSelectedCCD;
       auto ccd      = ocularsPlugin->ccds[ccdIndex];
       Q_ASSERT(ccd);
 
@@ -946,9 +946,9 @@ void OcularsGuiPanel::updateTelescopeControls()
       fieldFov->setVisible(false);
    }
 
-   if (ocularsPlugin->flagShowOculars) {
+   if (ocularsPlugin->isOcularDisplayed()) {
       // We need the current ocular
-      int  ocularIndex = ocularsPlugin->selectedOcularIndex;
+      int  ocularIndex = ocularsPlugin->m_indexSelectedOcular;
       auto ocular      = ocularsPlugin->oculars[ocularIndex];
 
       if (ocular->isBinoculars()) {
@@ -1007,7 +1007,7 @@ void OcularsGuiPanel::updateTelescopeControls()
    }
 
    auto diameter = telescope->diameter();
-   if (diameter > 0.0 && ocularsPlugin->getFlagShowResolutionCriteria()) {
+   if (diameter > 0.0 && ocularsPlugin->isShowResolutionCriteria()) {
       auto rayleighLabel =
         QString("%1: %2\"").arg(q_("Rayleigh criterion")).arg(QString::number(138 / diameter, 'f', 2));
       fieldRayleighCriterion->setPlainText(rayleighLabel);
@@ -1049,7 +1049,7 @@ void OcularsGuiPanel::updateTelescopeControls()
    }
 
    // Visual resolution
-   if (ocularsPlugin->flagShowOculars && ocularsPlugin->getFlagShowResolutionCriteria() && diameter > 0.0) {
+   if (ocularsPlugin->isOcularDisplayed() && ocularsPlugin->isShowResolutionCriteria() && diameter > 0.0) {
       auto rayleigh = 138 / diameter;
       auto vres     = 60 / mag;
       if (vres < rayleigh) {

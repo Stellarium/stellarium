@@ -42,7 +42,7 @@ class Lens : public QObject
 public:
    /// Creates a new instance of Lens.
    //! The newly created instance will have values initialized to represent a usable lens model.
-   explicit Lens(QObject * parent = nullptr);
+   Q_INVOKABLE explicit Lens(QObject * parent = nullptr);
    ~Lens() override = default;
 
    void        initFromSettings(QSettings * theSettings, int lensIndex);

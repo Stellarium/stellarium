@@ -47,7 +47,7 @@ class Ocular : public QObject
 public:
    /// Creates a new instance of Ocular.
    //! The newly created instance will have values initialized to represent a usable ocular model.
-   explicit Ocular(QObject * parent = nullptr);
+   Q_INVOKABLE explicit Ocular(QObject * parent = nullptr);
    ~Ocular() override = default;
 
    void        initFromSettings(const QSettings * theSettings, int ocularIndex);

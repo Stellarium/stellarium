@@ -2462,7 +2462,7 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRangeDescription(const double JD
 // TODO2: This could be moved to the SkyDrawer or even some GUI class, as it is used to decide a GUI thing.
 bool StelCore::isBrightDaylight() const
 {
-	if (propMgr->getStelPropertyValue("Oculars.enableOcular", true).toBool())
+	if (propMgr->getStelPropertyValue("Oculars.ocularDisplayed", true).toBool())
 		return false;
 	SolarSystem* ssys = GETSTELMODULE(SolarSystem);
 	if (!ssys->getFlagPlanets())
