@@ -150,7 +150,7 @@ void ToastTile::prepareDraw(Vec3f color)
 		for (int i=0; i<originalVertexArray.size(); i++)
 		{
 			Vec3d vert=originalVertexArray.at(i);
-			Q_ASSERT(vert.lengthSquared()==1.0);
+			Q_ASSERT_X(fabs(vert.lengthSquared()-1.0)<0.0001, "StelToast aberration", "vertex length not unity");
 			vert+=vel;
 			vert.normalize();
 
