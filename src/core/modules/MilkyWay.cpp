@@ -131,7 +131,7 @@ void MilkyWay::draw(StelCore* core)
 		for (int i=0; i<vertexArrayNoAberration->vertex.size(); ++i)
 		{
 			Vec3d vert=vertexArrayNoAberration->vertex.at(i);
-			Q_ASSERT(vert.lengthSquared()==1.0);
+			Q_ASSERT_X(fabs(vert.lengthSquared()-1.0)<0.0001, "Milky Way aberration", "vertex length not unity");
 			vert+=vel;
 			vert.normalize();
 
