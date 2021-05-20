@@ -389,6 +389,8 @@ void Oculars::deinit()
 
    textureProtractor.clear();
    textureProtractorFlipH.clear();
+   textureProtractorFlipHV.clear();
+   textureProtractorFlipV.clear();
 }
 
 //! Draw any parts on the screen which are for our module
