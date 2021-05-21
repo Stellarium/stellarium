@@ -32,7 +32,7 @@ This is followed by 1028 variable-length lines. Each line is a star record conta
     6- 8  A3               constellation abbreviation
    10-11  I2               [1-45] index within constellation
    13-15  I3      deg      longitude degrees
-   17-18  I3      arcmin   longitude minutes
+   17-18  I2      arcmin   longitude minutes
    20     A1               latitude minus
    21-22  I2      deg      latitude degrees
    24-25  I2      arcmin   latitude minutes
