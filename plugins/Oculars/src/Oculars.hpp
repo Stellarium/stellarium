@@ -32,6 +32,7 @@
 #include <QFont>
 #include <QSettings>
 #include <QtGlobal>
+#include <StelPainter.hpp>
 
 class StelButton;
 class StelAction;
@@ -355,17 +356,17 @@ private:
    auto               isBinocularDefined() -> bool;
 
    //! Renders the CCD bounding box on-screen.  A telescope must be selected, or this call does nothing.
-   void               paintCCDBounds();
+   void               paintCCDBounds() const;
    //! Renders crosshairs into the viewport.
-   void               paintCrosshairs();
+   void               paintCrosshairs() const;
    //! Paint the mask into the viewport.
-   void               paintOcularMask(const StelCore * core);
+   void               paintOcularMask(StelCore * core) const;
    //! Renders the three Telrad circles, but only if not in ocular mode.
-   void               paintTelrad();
+   void               paintTelrad() const;
 
    //! Paints the text about the current object selections to the upper right hand of the screen.
    //! Should only be called from a 'ready' state; currently from the draw() method.
-   void               paintText(const StelCore * core);
+   void               paintText(const StelCore * core) const;
 
    //! This method is called by the zoom() method, when this plugin is toggled off; it resets to the default view.
    void               unzoomOcular();
@@ -398,7 +399,7 @@ private:
    auto               addTelescopeSubmenu(QMenu * parent) -> QMenu *;
 
    //! Returns selected lens,or Q_NULLPTR if no lens is selected
-   auto               selectedLens() -> Lens *;
+   auto               selectedLens() const -> Lens *;
 
    //! A list of all the oculars defined in the ini file.  Must have at least one, or module will not run.
    QList<CCD *>       ccds;
@@ -518,9 +519,11 @@ private:
    Vec3f                   focuserColor;
 
    // Reticle
-   StelTextureSP           reticleTexture;
-   StelTextureSP           cardinalsNormalTexture;
-   StelTextureSP           cardinalsMirroredTexture;
+   StelTextureSP           textureReticle;
+   StelTextureSP           textureProtractor;
+   StelTextureSP           textureProtractorFlipH;
+   StelTextureSP           textureProtractorFlipHV;
+   StelTextureSP           textureProtractorFlipV;
    double actualFOV;  //!< Holds the FOV of the ocular/tescope/lens combination; what the screen is zoomed to.
    double initialFOV; //!< Holds the initial FOV, degrees
    bool   flagAutosetMountForCCD;     //!< Flag used to track if we use automatic switch to type of mount for CCD frame

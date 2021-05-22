@@ -51,6 +51,7 @@
 #include <QMouseEvent>
 #include <QPixmap>
 
+#include <array>
 #include <cmath>
 #include <qglobal.h>
 #include <stdexcept>
@@ -386,8 +387,10 @@ void Oculars::deinit()
    disconnect(this, &Oculars::indexSelectedOcularChanged, this, &Oculars::updateOcularReticle);
    disconnect(&StelApp::getInstance(), &StelApp::languageChanged, this, &Oculars::retranslateGui);
 
-   cardinalsNormalTexture.clear();
-   cardinalsMirroredTexture.clear();
+   textureProtractor.clear();
+   textureProtractorFlipH.clear();
+   textureProtractorFlipHV.clear();
+   textureProtractorFlipV.clear();
 }
 
 //! Draw any parts on the screen which are for our module
@@ -623,9 +626,10 @@ void Oculars::init()
       ready = false;
    }
 
-   cardinalsNormalTexture = StelApp::getInstance().getTextureManager().createTexture(":/ocular/cardinals.png");
-   cardinalsMirroredTexture =
-     StelApp::getInstance().getTextureManager().createTexture(":/ocular/cardinals-mirrored.png");
+   textureProtractor       = StelApp::getInstance().getTextureManager().createTexture(":/ocular/Protractor.png");
+   textureProtractorFlipH  = StelApp::getInstance().getTextureManager().createTexture(":/ocular/ProtractorFlipH.png");
+   textureProtractorFlipHV = StelApp::getInstance().getTextureManager().createTexture(":/ocular/ProtractorFlipHV.png");
+   textureProtractorFlipV  = StelApp::getInstance().getTextureManager().createTexture(":/ocular/ProtractorFlipV.png");
    // enforce check existence of reticle for the current eyepiece
    updateOcularReticle();
 
@@ -763,13 +767,13 @@ void Oculars::updateOcularReticle()
    reticleRotation            = 0.0;
    QString reticleTexturePath = oculars.at(m_indexSelectedOcular)->reticlePath();
    if (reticleTexturePath.length() == 0) {
-      reticleTexture = StelTextureSP();
+      textureReticle = StelTextureSP();
    } else {
       StelTextureMgr &               manager = StelApp::getInstance().getTextureManager();
       // Load OpenGL textures
       StelTexture::StelTextureParams params;
       params.generateMipmaps = true;
-      reticleTexture         = manager.createTexture(reticleTexturePath, params);
+      textureReticle         = manager.createTexture(reticleTexturePath, params);
    }
 }
 
@@ -1465,7 +1469,7 @@ auto Oculars::isBinocularDefined() -> bool
    return binocularFound;
 }
 
-void Oculars::paintCCDBounds()
+void Oculars::paintCCDBounds() const
 {
    int        fontSize  = StelApp::getInstance().getScreenFontSize();
    auto *     core      = StelApp::getInstance().getCore();
@@ -1526,11 +1530,11 @@ void Oculars::paintCCDBounds()
             CPrel[2] *= 0.2;
             Vec3d crel;
             projector->project(CPrel, crel);
-            polarAngle = atan2(cpos[1] - crel[1], cpos[0] - crel[0]) * (-180.0) / M_PI; // convert to degrees
+            polarAngle = atan2(cpos[1] - crel[1], cpos[0] - crel[0]) * (-Degrees180) / M_PI; // convert to degrees
             if (CPos[2] > 0) {
-               polarAngle += 90.0;
+               polarAngle += Degrees90;
             } else {
-               polarAngle -= 90.0;
+               polarAngle -= Degrees90;
             }
          }
 
@@ -1758,7 +1762,7 @@ void Oculars::paintCCDBounds()
    }
 }
 
-void Oculars::paintCrosshairs()
+void Oculars::paintCrosshairs() const
 {
    StelCore *                         core      = StelApp::getInstance().getCore();
    const StelProjectorP               projector = core->getProjection(StelCore::FrameEquinoxEqu);
@@ -1782,11 +1786,11 @@ void Oculars::paintCrosshairs()
       CPrel[2] *= 0.2;
       Vec3d crel;
       projector->project(CPrel, crel);
-      polarAngle = atan2(cpos[1] - crel[1], cpos[0] - crel[0]) * (-180.0) / M_PI; // convert to degrees
+      polarAngle = atan2(cpos[1] - crel[1], cpos[0] - crel[0]) * (-Degrees180) / M_PI; // convert to degrees
       if (CPos[2] > 0) {
-         polarAngle += 90.0;
+         polarAngle += Degrees90;
       } else {
-         polarAngle -= 90.0;
+         polarAngle -= Degrees90;
       }
    }
    // Draw the lines
@@ -1804,7 +1808,7 @@ void Oculars::paintCrosshairs()
    painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 }
 
-void Oculars::paintTelrad()
+void Oculars::paintTelrad() const
 {
    if (!m_ocularDisplayed) {
       StelCore *           core      = StelApp::getInstance().getCore();
@@ -1834,7 +1838,7 @@ void Oculars::paintTelrad()
    }
 }
 
-void Oculars::paintOcularMask(const StelCore * core)
+void Oculars::paintOcularMask(StelCore * core) const
 {
    if (oculars.at(m_indexSelectedOcular)->hasPermanentCrosshair()) {
       paintCrosshairs();
@@ -1855,32 +1859,29 @@ void Oculars::paintOcularMask(const StelCore * core)
 
    painter.setBlending(true);
    // Paint the reticale, if needed
-   if (!reticleTexture.isNull()) {
+   if (!textureReticle.isNull()) {
       painter.setColor(lineColor);
-      reticleTexture->bind();
-      /* Why it need?
-      int textureHeight;
-      int textureWidth;
-      reticleTexture->getDimensions(textureWidth, textureHeight);
-      */
+      textureReticle->bind();
       painter.drawSprite2dMode(centerScreen[0],
                                centerScreen[1],
                                static_cast<float>(inner / params.devicePixelsPerPixel),
                                static_cast<float>(reticleRotation));
    }
 
-   const float alpha = useSemiTransparency() ? transparencyLevel() * 0.01f : 1.f;
-   painter.setColor(0.f, 0.f, 0.f, alpha);
+   const float alpha = useSemiTransparency() ? transparencyLevel() * 0.01F : 1.0F;
+   painter.setColor(0.0F, 0.0F, 0.0F, alpha);
 
    auto    outerRadius = static_cast<GLfloat>(params.viewportXywh[2] * params.devicePixelsPerPixel +
                                            params.viewportXywh[3] * params.devicePixelsPerPixel);
    GLint   slices      = 239;
 
-   GLfloat sinCache[240];
-   GLfloat cosCache[240];
+//   GLfloat sinCache2[240];
+   std::array<GLfloat, 240> sinCache{};
+//   GLfloat cosCache[240];
+   std::array<GLfloat, 240> cosCache{};
    GLfloat vertices[(240 + 1) * 2][3];
-   GLfloat deltaRadius;
-   GLfloat radiusHigh;
+   GLfloat deltaRadius = 0.0;
+   GLfloat radiusHigh = 0.0;
 
    /* Compute length (needed for normal calculations) */
    deltaRadius = outerRadius - static_cast<GLfloat>(inner);
@@ -1926,19 +1927,33 @@ void Oculars::paintOcularMask(const StelCore * core)
       CPrel[2] *= 0.2;
       Vec3d crel;
       projector->project(CPrel, crel);
-      double polarAngle = atan2(cpos[1] - crel[1], cpos[0] - crel[0]) * (-180.0) / M_PI; // convert to degrees
+      double polarAngle = atan2(cpos[1] - crel[1], cpos[0] - crel[0]) * (-Degrees180) / M_PI; // convert to degrees
       if (CPos[2] > 0) {
-         polarAngle += 90.0;
+         polarAngle += Degrees90;
       } else {
-         polarAngle -= 90.0;
+         polarAngle -= Degrees90;
       }
 
       painter.setColor(lineColor);
-      if (core->getFlipHorz() && !core->getFlipVert()) {
-         cardinalsMirroredTexture->bind();
-      } else {
-         cardinalsNormalTexture->bind();
+      bool flipHorizontal = core->getFlipHorz();
+      bool flipVertical   = core->getFlipVert();
+      if (m_indexSelectedTelescope > 0) {
+         // If a telescope is in use, that over-rides the system
+         flipHorizontal = telescopes.at(m_indexSelectedTelescope)->isHFlipped();
+         flipVertical   = telescopes.at(m_indexSelectedTelescope)->isVFlipped();
       }
+      if (flipHorizontal && !flipVertical) {
+         textureProtractorFlipH->bind();
+      } else if (!flipHorizontal && flipVertical) {
+         textureProtractorFlipV->bind();
+      } else if (flipHorizontal && flipVertical) {
+         textureProtractorFlipHV->bind();
+      } else {
+         textureProtractor->bind();
+      }
+
+      core->setFlipHorz(flipHorizontal);
+      core->setFlipVert(flipVertical);
       painter.drawSprite2dMode(centerScreen[0],
                                centerScreen[1],
                                static_cast<float>(inner / params.devicePixelsPerPixel),
@@ -1946,7 +1961,7 @@ void Oculars::paintOcularMask(const StelCore * core)
    }
 }
 
-void Oculars::paintText(const StelCore * core)
+void Oculars::paintText(const StelCore * core) const
 {
    const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
    StelPainter          painter(prj);
@@ -2400,7 +2415,7 @@ void Oculars::hideUsageMessageIfDisplayed()
    }
 }
 
-auto Oculars::selectedLens() -> Lens *
+auto Oculars::selectedLens() const -> Lens *
 {
    if (m_indexSelectedLens >= 0 && m_indexSelectedLens < lenses.count()) {
       return lenses.at(m_indexSelectedLens);

@@ -30,6 +30,8 @@ const double        TelescopeDefaultDiameter      = 80.0;
 const double        TelescopeDefaultFocalLength   = 500.0;
 
 const double        DegreesPerRadian              = 57.2958;
+const double        Degrees90                     = 90.0;
+const double        Degrees180                    = 180.0;
 
-const double        MIN_OCULARS_INI_VERSION       = 3.1f;
+const double        MIN_OCULARS_INI_VERSION       = 3.1F;
 const int           DEFAULT_CCD_CROP_OVERLAY_SIZE = 250;
