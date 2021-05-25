@@ -1,10 +1,10 @@
 // Author: Qam1
-// Version: 10.0
+// Version: 12.0
 // License: Public Domain
 // Name: Earth best views from other bodies
 // Description: Best views of Earth from other Solar System bodies in the 21st Century.
 
-// Made on Stellarium 0.16.1
+// Made on Stellarium 0.20.2
 
 //basics
 var spd = 5; // speed for screen saver mode in seconds
@@ -12,19 +12,25 @@ StelSkyDrawer.setFlagLuminanceAdaptation(false);
 var o = 1;
 var i = 1;
 var sl = StarMgr.getLabelsAmount();
-var ss = 0;
+var pk = 0
+
+
+
+
+LabelMgr.deleteAllLabels();
+var ss = -1;
 
 // Labels
-var txt1 = LabelMgr.labelScreen("Press = for next outer body", 770, 60, false, 15, "#FF0000");
+var txt1 = LabelMgr.labelScreen("Press N for next outer body", 470, 60, false, 35, "#FF0000");
 LabelMgr.setLabelShow(txt1, true);
 
-txt1 = LabelMgr.labelScreen("Press -+-+-  for previous inner body", 770, 80, false, 15, "#FF0000");
+txt1 = LabelMgr.labelScreen("Press B to go back to the last inner body", 470, 120, false, 35, "#FF0000");
 LabelMgr.setLabelShow(txt1, true);
 
-txt1 = LabelMgr.labelScreen("Press [  to toggle flags and labels", 770, 100, false, 15, "#FF0000");
+txt1 = LabelMgr.labelScreen("Press F  to toggle flags and labels", 470, 180, false, 35, "#FF0000");
 LabelMgr.setLabelShow(txt1, true);
 
-txt1 = LabelMgr.labelScreen("Press ]  toggle scrren saver mode", 770, 120, false, 15, "#FF0000");
+txt1 = LabelMgr.labelScreen("Press S  toggle screen saver mode", 470, 240, false, 35, "#FF0000");
 LabelMgr.setLabelShow(txt1, true);
 
 txt1 = LabelMgr.labelScreen("By Qam1", 770, 140, false, 15, "#FF0000");
@@ -91,7 +97,7 @@ while (q == 0)
 		LandscapeMgr.setCurrentLandscapeID("moon");
 
 		core.setDate("2093-12-17T12:04:47", "utc");
-		core.setObserverLocation(-84.7, 40.3, 50000, 1, "", "Venus");
+		core.setObserverLocation(6.7, 40.3, 50000, 1, "", "Venus");
 		StelMovementMgr.zoomTo(90, 1);
 
 		SolarSystem.setFlagOrbits(false);
@@ -155,7 +161,7 @@ SolarSystem.setFlagOrbits(true);
 		LandscapeMgr.setCurrentLandscapeID("ocean");
 
 		core.setDate("2082-10-19T21:08:21", "utc");
-		core.setObserverLocation(-131.71, 44.24, 17, 1, "", "(1) Ceres");
+		core.setObserverLocation(-179.71, 44.24, 17, 1, "", "(1) Ceres");
 		StelMovementMgr.zoomTo(42, 1);
 
 		sd = 1;
@@ -166,10 +172,10 @@ SolarSystem.setFlagOrbits(true);
 	{
 		LandscapeMgr.setFlagAtmosphere(true);
 		LandscapeMgr.setFlagFog(true);
-		LandscapeMgr.setCurrentLandscapeID("saturn");
+		LandscapeMgr.setCurrentLandscapeID("jupiter");
 
 		core.setDate("2058-07-15T11:52:00", "utc");
-		core.setObserverLocation(99.71, 27.24, 71492000, 1, "", "Jupiter");
+		core.setObserverLocation(121.71, 27.24, 71492000, 1, "", "Jupiter");
 		StelMovementMgr.zoomTo(34, 1);
 
 		txt1 = LabelMgr.labelScreen("Elongation: 11.849 degrees", 350, 10, false, 25, "#AAFFAA");
@@ -195,10 +201,10 @@ SolarSystem.setFlagOrbits(true);
 	{
 		LandscapeMgr.setFlagAtmosphere(true);
 		LandscapeMgr.setFlagFog(true);
-		LandscapeMgr.setCurrentLandscapeID("saturn");
+		LandscapeMgr.setCurrentLandscapeID("uranus");
 
 		core.setDate("2052-06-16T11:00:00", "utc");
-		core.setObserverLocation(-76.73, 76.92, 30268000, 1, "", "Uranus");
+		core.setObserverLocation(57.73, 60.0, 30268000, 1, "", "Uranus");
 		StelMovementMgr.zoomTo(15.6, 1);
 
 		txt1 = LabelMgr.labelScreen("Elongation: 3.186 degrees", 350, 10, false, 25, "#AAFFAA");
@@ -213,10 +219,10 @@ SolarSystem.setFlagOrbits(true);
 	{
 		LandscapeMgr.setFlagAtmosphere(true);
 		LandscapeMgr.setFlagFog(true);
-		LandscapeMgr.setCurrentLandscapeID("saturn");
+		LandscapeMgr.setCurrentLandscapeID("neptune");
 
 		core.setDate("2035-07-17T15:00:00", "utc");
-		core.setObserverLocation(76.71, 1.24, 24764000, 1, "", "Neptune");
+		core.setObserverLocation(94.71, 11.24, 24764000, 1, "", "Neptune");
 		StelMovementMgr.zoomTo(10.6, 1);
 
 		txt1 = LabelMgr.labelScreen("Elongation: 1.952 degrees", 350, 10, false, 25, "#AAFFAA");
@@ -233,7 +239,7 @@ SolarSystem.setFlagOrbits(true);
 		LandscapeMgr.setCurrentLandscapeID("moon");
 
 		core.setDate("2000-09-01T12:35:49", "utc");
-		core.setObserverLocation(17.49, 31.04, 76, 1, "", "Pluto");
+		core.setObserverLocation(38.49, 62.04, 76, 1, "", "Pluto");
 		StelMovementMgr.zoomTo(25, 1);
 
 		txt1 = LabelMgr.labelScreen("Elongation: 1.908 degrees", 500, 10, false, 25, "#AAFFAA");
@@ -243,242 +249,170 @@ SolarSystem.setFlagOrbits(true);
 	
 	}
 
-	var d = Math.floor(core.getJDay());
 
-var r = d;
-	var pak = 0;
 
-	if (ss ==1)
+	if (i == 11) 
 	{
-		while (pak < spd)
-		{
-			core.wait(0.25);
-			pak = pak + 1;
-			r = Math.floor(core.getJDay());
+		LandscapeMgr.setFlagAtmosphere(false);
+		LandscapeMgr.setFlagFog(false);
+		LandscapeMgr.setCurrentLandscapeID("moon");
 
-			if (Math.abs(r-d) > 0)
-			{
-				pak = spd + 1;
-				core.setDate("+2000 days");
-			} 
-		}
-		r = Math.floor(core.getJDay()) + 1;
+		core.setDate("2073-09-28T06:44:16", "utc");
+		core.setObserverLocation(1.49, 1.04, 76, 1, "", "Sedna");
+		StelMovementMgr.zoomTo(3.14, 1);
+
+		txt1 = LabelMgr.labelScreen("Elongation: 0.756 degrees", 500, 10, false, 25, "#AAFFAA");
+		LabelMgr.setLabelShow(txt1, true);
+
+
 	
+	}
 
 
-if (i == 11) // Why??
+	if (i == 12) 
+	{
+		LandscapeMgr.setFlagAtmosphere(false);
+		LandscapeMgr.setFlagFog(false);
+		LandscapeMgr.setCurrentLandscapeID("moon");
+
+		core.setDate("2099-08-06T07:47:31", "utc");
+		core.setObserverLocation(38.49, 31.04, 76, 1, "", "Eris");
+		StelMovementMgr.zoomTo(25, 1);
+
+		txt1 = LabelMgr.labelScreen("Elongation: 0.692 degrees", 500, 10, false, 25, "#AAFFAA");
+		LabelMgr.setLabelShow(txt1, true);
+
+
+	
+	}
+
+
+
+
+var d = 1
+
+ob = ConstellationMgr.getFlagBoundaries(); 
+od = NebulaMgr.getFlagHints();
+
+of = LandscapeMgr.getFlagFog();
+os = StarMgr.getFlagStars(); 
+
+oq = LandscapeMgr.getFlagCardinalsPoints();
+
+
+while (d == 1)
 {
-i = i + 1;
+
+
+core.wait(0.25);
+pk = pk + 1
+
+if (ss == -1)
+{
+pk = 0
 }
 
 
+cb = ConstellationMgr.getFlagBoundaries(); 
+
+
+if (cb != ob)
+{
+i = i-1
+d =2
+
+ConstellationMgr.setFlagBoundaries(ob); 
+
+}
+
+cd = NebulaMgr.getFlagHints();
+
+
+if (cd != od)
+{
+i = i+1
+d =2
+NebulaMgr.setFlagHints(od);
+
 }
 
 
+cf = LandscapeMgr.getFlagFog();
 
-if (i == 90)
+
+if (cf != of)
 {
-
-var d = Math.floor(core.getJDay()*10);
-var r = d;
-
-
-
-while (d  == r) 
-{
-r = Math.floor(core.getJDay()*10);
-}
-
-if (r > d)
-{
-d = d / 10;
-r = d + 1;
-}
-else
-{
-d = d / 10;
-r = d - 1;
+o = o * -1
+d =2
+LandscapeMgr.setFlagFog(ob);
 }
 
 
-txt1 = LabelMgr.labelScreen(r, 400, 20, false, 25, "#F6A101");
+cs = StarMgr.getFlagStars(); 
+
+
+if (cs != os)
+{
+ss = ss * -1
+d =2
+
+StarMgr.setFlagStars(os); 
+
+LabelMgr.deleteAllLabels();
+
+//toggle screen saver
+
+if (ss == -1)
+{
+txt1 = LabelMgr.labelScreen("Screensaver Mode off", 400, 20, false, 25, "#F6A101");
 LabelMgr.setLabelShow(txt1, true);
-
-txt1 = LabelMgr.labelScreen(d, 400, 60, false, 25, "#F6A101");
-LabelMgr.setLabelShow(txt1, true)
-
-core.wait(3);
-
-
+core.wait(1);
 }
-
 else
 {
+txt1 = LabelMgr.labelScreen("Screensaver Mode on", 400, 20, false, 25, "#F6A101");
+LabelMgr.setLabelShow(txt1, true);
+}
+core.wait(1);
 
-while (d == r) 
+
+} //ss
+
+
+if (pk > spd)
 {
-r = Math.floor(core.getJDay());
+i = i + 1
+d = 2
+pk = 0
 }
-}
 
 
 
+} //d
 
 
-			
+ConstellationMgr.setFlagBoundaries(ob); 
+NebulaMgr.getFlagHints(od);
+
+LandscapeMgr.getFlagFog(of);
+StarMgr.getFlagStars(os); 
 
 
-if (i < 4) // Merc & venus & moon
 
+if (i > 12)
 {
-
-sw = 1000
-
-
-	if ( r - d > 10)  
-	{
-	if (r - d < 1000)
-	{
-	i = i + 1;
-	}
-	}
-
-	if (r - d < - 10)  
-	{
-	if (r - d > -1000)
-	{
-	i = i - 1;
-	}
-	}
-
-
-
-	if (r - d < -1000)
-	{
-		o = o * -1;
-	}
-
-
+i = 1
 }
 
-else
 
-{ // Mars - Neptune
-
-
-sw = 2;
-
-
-if (i > 2)
+if (i < 1)
 {
-
-if (i < 10)
-{
-
-
-
-	if ( r - d == 1)  
-	{
-	i = i + 1;
-	}
-
-	if ( r - d == -1)  
-	{
-
-	if (i == 4)
-	{
-	i = 2
-	}
-	else
-	{
-	i = i - 1;
-	}
-
-
-	}
-
-	
-if (r - d < -2)
-	{
-		o = o * -1;
-	}
-
-
-
-}
-
-
-else // pluto
-
-{
-
-// swap
-
-
-sw = 20
-
-	if ( r - d > 1)  
-	{
-	if (r - d < 20)
-	{
-	i = i + 1;
-	}
-	}
-
-	if (r - d < - 1)  
-	{
-	if (r - d > -20)
-	{
-	i = i - 1;
-	}
-	}
-
-if (r - d < -20)
-	{
-	o = o * -1;
-	}
-
-
-}
-
-}
-
+i = 12
 }
 
 
 
 
-
-	if (i < 1) 
-	{
-		i = 10;
-	}
-
-	if (i > 10) 
-	{
-		i = 1;
-	}
-
-	
-	//toggle screen saver
-	if (r - d > sw) 
-	{
-		ss = ss + 1;
-
-		if (ss == 2)
-		{
-			ss = 0;
-			txt1 = LabelMgr.labelScreen("Screensaver Mode off", 400, 20, false, 25, "#F6A101");
-			LabelMgr.setLabelShow(txt1, true);
-			core.wait(1);
-		}
-		else
-		{
-			txt1 = LabelMgr.labelScreen("Screensaver Mode on", 400, 20, false, 25, "#F6A101");
-			LabelMgr.setLabelShow(txt1, true);
-		}
-		core.wait(1);
-	}
 
 	LabelMgr.deleteAllLabels();
 }
