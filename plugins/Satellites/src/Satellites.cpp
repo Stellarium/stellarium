@@ -1141,6 +1141,12 @@ bool Satellites::add(const TleData& tleData)
 		{
 			satGroups.append("qzss");
 		}
+		if (tleData.name.startsWith("TDRS"))
+		{
+			satGroups.append("tdrss");
+			satGroups.append("communications");
+			satGroups.append("geostationary");
+		}
 		if (tleData.name.startsWith("BEIDOU"))
 		{
 			satGroups.append("beidou");
@@ -2312,6 +2318,8 @@ void Satellites::translations()
 	N_("irnss");
 	// TRANSLATORS: Satellite group: The Quasi-Zenith Satellite System (QZSS), is a proposed three-satellite regional time transfer system and Satellite Based Augmentation System for the Global Positioning System, that would be receivable within Japan.
 	N_("qzss");
+	// TRANSLATORS: Satellite group: The Tracking and Data Relay Satellite System (TDRSS) is a network of communications satellites and ground stations used by NASA for space communications.
+	N_("tdrss");
 	// TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
 	N_("glonass");
 	// TRANSLATORS: Satellite group: Satellites belonging to the BeiDou constellation (BeiDou Navigation Satellite System)
