@@ -1132,6 +1132,15 @@ bool Satellites::add(const TleData& tleData)
 			satGroups.append("gps");
 			satGroups.append("navigation");
 		}
+		if (tleData.name.startsWith("IRNSS"))
+		{
+			satGroups.append("irnss");
+			satGroups.append("navigation");
+		}
+		if (tleData.name.startsWith("QZS"))
+		{
+			satGroups.append("qzss");
+		}
 		if (tleData.name.startsWith("BEIDOU"))
 		{
 			satGroups.append("beidou");
@@ -2299,6 +2308,10 @@ void Satellites::translations()
 	N_("non-operational");
 	// TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
 	N_("gps");
+	// TRANSLATORS: Satellite group: The Indian Regional Navigation Satellite System (IRNSS) is an autonomous regional satellite navigation system being developed by the Indian Space Research Organisation (ISRO) which would be under complete control of the Indian government.
+	N_("irnss");
+	// TRANSLATORS: Satellite group: The Quasi-Zenith Satellite System (QZSS), is a proposed three-satellite regional time transfer system and Satellite Based Augmentation System for the Global Positioning System, that would be receivable within Japan.
+	N_("qzss");
 	// TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
 	N_("glonass");
 	// TRANSLATORS: Satellite group: Satellites belonging to the BeiDou constellation (BeiDou Navigation Satellite System)
