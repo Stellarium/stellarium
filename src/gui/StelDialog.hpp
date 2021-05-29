@@ -191,7 +191,7 @@ protected:
 	//! @param moduleName if the iniName is for a module (plugin)-specific ini file, add the module name here. The module needs an implementation of getSettings()
 	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
 	//! to the required datatype, the application will crash
-   Q_DECL_DEPRECATED_X("Use functor-based connections. https://doc.qt.io/qt-5/signalsandslots-syntaxes.html") void connectColorButton(QToolButton* button, QString propertyName, QString iniName, QString moduleName="");
+	void connectColorButton(QToolButton* button, QString propertyName, QString iniName, QString moduleName="");
 
 	//! The main dialog
 	QWidget* dialog;
