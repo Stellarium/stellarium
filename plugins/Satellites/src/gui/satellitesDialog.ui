@@ -187,6 +187,9 @@
                 <property name="text">
                  <string>Update frequency:</string>
                 </property>
+                <property name="buddy">
+                 <cstring>updateFrequencySpinBox</cstring>
+                </property>
                </widget>
               </item>
               <item>
@@ -247,6 +250,9 @@
                 <property name="enabled">
                  <bool>false</bool>
                 </property>
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
                 <property name="frame">
                  <bool>false</bool>
                 </property>
@@ -267,6 +273,9 @@
               </property>
               <property name="alignment">
                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+              </property>
+              <property name="buddy">
+               <cstring>updateButton</cstring>
               </property>
              </widget>
             </item>
@@ -387,6 +396,9 @@
              <widget class="QLabel" name="label_10">
               <property name="text">
                <string>Font size:</string>
+              </property>
+              <property name="buddy">
+               <cstring>fontSizeSpinBox</cstring>
               </property>
              </widget>
             </item>
@@ -582,6 +594,9 @@
             <property name="text">
              <string>Segment length:</string>
             </property>
+            <property name="buddy">
+             <cstring>orbitDurationSpin</cstring>
+            </property>
            </widget>
           </item>
           <item row="0" column="5">
@@ -605,6 +620,9 @@
             <property name="text">
              <string>Number of  segments:</string>
             </property>
+            <property name="buddy">
+             <cstring>orbitSegmentsSpin</cstring>
+            </property>
            </widget>
           </item>
           <item row="0" column="6">
@@ -614,6 +632,9 @@
             </property>
             <property name="text">
              <string>Fade length:</string>
+            </property>
+            <property name="buddy">
+             <cstring>orbitFadeSpin</cstring>
             </property>
            </widget>
           </item>
@@ -696,12 +717,38 @@
       </layout>
      </widget>
      <widget class="QWidget" name="satellitesTab">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <attribute name="title">
        <string>Satellites</string>
       </attribute>
-      <layout class="QHBoxLayout" name="horizontalLayout_5">
+      <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout">
+        <widget class="QSplitter" name="splitter">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="handleWidth">
+          <number>7</number>
+         </property>
+         <property name="childrenCollapsible">
+          <bool>false</bool>
+         </property>
+         <widget class="QWidget" name="layoutWidget">
+          <layout class="QVBoxLayout" name="satlist_layout" stretch="0,0,0,0">
          <item>
           <widget class="QComboBox" name="groupFilterCombo">
            <property name="editable">
@@ -831,9 +878,9 @@
           </layout>
          </item>
         </layout>
-       </item>
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout_7">
+         </widget>
+         <widget class="QWidget" name="layoutWidget">
+          <layout class="QVBoxLayout" name="sat_details" stretch="0,0,0,0,0,0,0,0">
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_4">
            <item>
@@ -894,6 +941,9 @@
              <property name="text">
               <string>I.D.:</string>
              </property>
+               <property name="buddy">
+                <cstring>cosparNumberEdit</cstring>
+               </property>
             </widget>
            </item>
            <item>
@@ -918,6 +968,9 @@
              <property name="text">
               <string>Standard magnitude:</string>
              </property>
+               <property name="buddy">
+                <cstring>stdMagnitudeLineEdit</cstring>
+               </property>
             </widget>
            </item>
            <item>
@@ -935,6 +988,9 @@
              <property name="text">
               <string notr="true" extracomment="Radar cross-section">RCS:</string>
              </property>
+               <property name="buddy">
+                <cstring>rcsLineEdit</cstring>
+               </property>
             </widget>
            </item>
            <item>
@@ -1002,6 +1058,9 @@
              <property name="text">
               <string>Description:</string>
              </property>
+               <property name="buddy">
+                <cstring>descriptionTextEdit</cstring>
+               </property>
             </widget>
            </item>
            <item>
@@ -1019,7 +1078,7 @@
               <bool>false</bool>
              </property>
              <property name="placeholderText">
-              <string notr="true"/>
+                <string>(add personal notes here)</string>
              </property>
             </widget>
            </item>
@@ -1035,6 +1094,9 @@
              <property name="text">
               <string>Groups:</string>
              </property>
+               <property name="buddy">
+                <cstring>groupsListWidget</cstring>
+               </property>
             </widget>
            </item>
            <item>
@@ -1059,6 +1121,9 @@
              <property name="text">
               <string>TLE set:</string>
              </property>
+               <property name="buddy">
+                <cstring>tleFirstLineEdit</cstring>
+               </property>
             </widget>
            </item>
            <item>
@@ -1108,6 +1173,8 @@
           </layout>
          </item>
         </layout>
+         </widget>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -1230,6 +1297,9 @@
              <property name="text">
               <string>Flare prediction (days):</string>
              </property>
+             <property name="buddy">
+              <cstring>flaresPredictionDepthSpinBox</cstring>
+             </property>
             </widget>
            </item>
            <item>
@@ -1313,35 +1383,56 @@
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>tabs</tabstop>
+  <tabstop>deleteSourceButton</tabstop>
   <tabstop>internetUpdatesCheckbox</tabstop>
   <tabstop>checkBoxAutoAdd</tabstop>
   <tabstop>jumpToSourcesButton</tabstop>
   <tabstop>checkBoxAutoRemove</tabstop>
+  <tabstop>updateFrequencySpinBox</tabstop>
+  <tabstop>updateButton</tabstop>
+  <tabstop>labelsGroup</tabstop>
   <tabstop>fontSizeSpinBox</tabstop>
+  <tabstop>invisibleColorButton</tabstop>
+  <tabstop>transitColorButton</tabstop>
+  <tabstop>iconicGroup</tabstop>
+  <tabstop>hideInvisibleSatellites</tabstop>
+  <tabstop>orbitLinesGroup</tabstop>
   <tabstop>orbitSegmentsSpin</tabstop>
   <tabstop>orbitDurationSpin</tabstop>
+  <tabstop>orbitFadeSpin</tabstop>
   <tabstop>restoreDefaultsButton</tabstop>
   <tabstop>saveSettingsButton</tabstop>
+  <tabstop>tabs</tabstop>
   <tabstop>groupFilterCombo</tabstop>
   <tabstop>lineEditSearch</tabstop>
   <tabstop>satellitesList</tabstop>
+  <tabstop>satMarkerColorPickerButton</tabstop>
+  <tabstop>satOrbitColorPickerButton</tabstop>
+  <tabstop>satInfoColorPickerButton</tabstop>
   <tabstop>nameEdit</tabstop>
   <tabstop>noradNumberEdit</tabstop>
+  <tabstop>cosparNumberEdit</tabstop>
+  <tabstop>stdMagnitudeLineEdit</tabstop>
+  <tabstop>rcsLineEdit</tabstop>
   <tabstop>displayedCheckbox</tabstop>
   <tabstop>orbitCheckbox</tabstop>
+  <tabstop>userCheckBox</tabstop>
   <tabstop>descriptionTextEdit</tabstop>
   <tabstop>groupsListWidget</tabstop>
   <tabstop>tleFirstLineEdit</tabstop>
   <tabstop>tleSecondLineEdit</tabstop>
-  <tabstop>addSatellitesButton</tabstop>
   <tabstop>removeSatellitesButton</tabstop>
-  <tabstop>satMarkerColorPickerButton</tabstop>
+  <tabstop>addSatellitesButton</tabstop>
+  <tabstop>saveSourceButton</tabstop>
+  <tabstop>iridiumFlaresTreeWidget</tabstop>
+  <tabstop>flaresPredictionDepthSpinBox</tabstop>
+  <tabstop>predictIridiumFlaresPushButton</tabstop>
+  <tabstop>predictedIridiumFlaresSaveButton</tabstop>
+  <tabstop>editSourceButton</tabstop>
   <tabstop>sourceList</tabstop>
   <tabstop>sourceEdit</tabstop>
-  <tabstop>addSourceButton</tabstop>
-  <tabstop>deleteSourceButton</tabstop>
   <tabstop>aboutTextBrowser</tabstop>
+  <tabstop>addSourceButton</tabstop>
  </tabstops>
  <resources>
   <include location="../../../../data/gui/guiRes.qrc"/>
