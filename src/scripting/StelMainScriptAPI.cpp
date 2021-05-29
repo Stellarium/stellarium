@@ -951,6 +951,15 @@ void StelMainScriptAPI::addToSelectedObjectInfoString(const QString &str, bool r
 	}
 }
 
+void StelMainScriptAPI::setStelProperty(const QString& propertyName, QVariant propertyValue)
+{
+	StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue(propertyName, propertyValue);
+}
+
+QVariant StelMainScriptAPI::getStelProperty(const QString& propertyName)
+{
+	return StelApp::getInstance().getStelPropertyManager()->getStelPropertyValue(propertyName, true);
+}
 
 
 void StelMainScriptAPI::clear(const QString& state)
@@ -982,8 +991,8 @@ void StelMainScriptAPI::clear(const QString& state)
 		StelPropertyMgr* propMgr = StelApp::getInstance().getStelPropertyManager();
 
 		// Hide artificial satellites through StelProperties to avoid crash if plugin was not loaded
-		propMgr->setStelPropertyValue("Satellites.hintsVisible",   false);
-		propMgr->setStelPropertyValue("Satellites.labelsVisible",  false);
+		propMgr->setStelPropertyValue("Satellites.flagHintsVisible",   false);
+		propMgr->setStelPropertyValue("Satellites.flagLabelsVisible",  false);
 		propMgr->setStelPropertyValue("Satellites.flagOrbitLines", false);
 
 		// identical for all states

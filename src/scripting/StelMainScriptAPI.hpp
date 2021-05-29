@@ -242,6 +242,19 @@ public slots:
 	//! stars will start with no extra information when they become selected again.
 	static void addToSelectedObjectInfoString(const QString &str, bool replace=false);
 
+	//! Set value for some StelProperty.
+	//! @note This method may be very helpful for change the values in the plugins to avoid crashes when some plugin is not loaded.
+	//! @note See also @ref isModuleLoaded() method
+	//! @param propertyName the name of StelProperty, e.g. "Satellites.flagOrbitLines"
+	//! @param propertyValue the value of StelProperty
+	static void setStelProperty(const QString& propertyName, QVariant propertyValue);
+
+	//! Get value for some StelProperty.
+	//! @note This method may be very helpful for change the values in the plugins to avoid crashes when some plugin is not loaded.
+	//! @note See also @ref isModuleLoaded() method
+	//! @param propertyName the name of StelProperty, e.g. "Satellites.flagOrbitLines"
+	static QVariant getStelProperty(const QString& propertyName);
+
 	//! Clear the display options, setting a "standard" view.
 	//! Preset states:
 	//! - natural : azimuthal mount, atmosphere, landscape,
@@ -842,6 +855,7 @@ public slots:
 	static QString getEnv(const QString& var);
 
 	//! return whether a particular module has been loaded. Mostly useful to check whether a module available as plugin is active.
+	//! @note See also @ref setStelProperty() and @ref getStelProperty() methods
 	//! @param moduleID the QObject name of the module instance, by convention it is equal to the class name.
 	static bool isModuleLoaded(const QString& moduleID);
 
