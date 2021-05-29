@@ -209,7 +209,8 @@ void StelMainScriptAPI::setPlanetocentricCalculations(bool f)
 void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, double altitude, double duration, const QString& name, const QString& planet)
 {
 	StelCore* core = StelApp::getInstance().getCore();
-	StelObjectP ssObj = GETSTELMODULE(SolarSystem)->searchByName(planet);	
+	// backward compatible layer: probably we have Solar system body...
+	PlanetP ssObj = GETSTELMODULE(SolarSystem)->searchByEnglishName(planet);
 	StelLocation loc = core->getCurrentLocation();
 	loc.longitude = static_cast<float>(longitude);
 	loc.latitude = static_cast<float>(latitude);
@@ -885,15 +886,13 @@ void StelMainScriptAPI::selectObjectByName(const QString& name, bool pointer)
 	{
 		StelObjectP obj = qSharedPointerCast<StelObject>(GETSTELMODULE(SolarSystem)->searchByEnglishName(name));
 		if (!obj.isNull())
-			state = omgr->setSelectedObject(obj);
+			state = omgr->setSelectedObject(obj, StelModule::ReplaceSelection);
 		else
 			state = false;
 	}
 
 	if (name.isEmpty() || !state)
-	{
 		omgr->unSelect();
-	}
 }
 
 void StelMainScriptAPI::selectConstellationByName(const QString& name)
@@ -910,6 +909,9 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 {
 	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
 	StelObjectP obj = omgr->searchByName(name);
+	// backward compatible layer: probably we have Solar system body...
+	if (obj.isNull())
+		obj = qSharedPointerCast<StelObject>(GETSTELMODULE(SolarSystem)->searchByEnglishName(name));
 
 	return StelObjectMgr::getObjectInfo(obj);
 }
