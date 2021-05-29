@@ -32,31 +32,31 @@ class QSettings;
 //! @ingroup oculars
 class Lens : public QObject
 {
-   Q_OBJECT
+	Q_OBJECT
 #if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)
-   Q_DISABLE_COPY_MOVE(Lens)
+	Q_DISABLE_COPY_MOVE(Lens)
 #endif
-   Q_PROPERTY(QString name READ name WRITE setName)
-   Q_PROPERTY(double multiplier READ multiplier WRITE setMultiplier)
+	Q_PROPERTY(QString name READ name WRITE setName)
+	Q_PROPERTY(double multiplier READ multiplier WRITE setMultiplier)
 
 public:
-   /// Creates a new instance of Lens.
-   //! The newly created instance will have values initialized to represent a usable lens model.
-   Q_INVOKABLE explicit Lens(QObject * parent = nullptr);
-   ~Lens() override = default;
+	/// Creates a new instance of Lens.
+	//! The newly created instance will have values initialized to represent a usable lens model.
+	Q_INVOKABLE explicit Lens(QObject * parent = nullptr);
+	~Lens() override = default;
 
-   void        initFromSettings(QSettings * theSettings, int lensIndex);
-   void        writeToSettings(QSettings * settings, int index) const;
+	void        initFromSettings(QSettings * theSettings, int lensIndex);
+	void        writeToSettings(QSettings * settings, int index) const;
 
-   auto        multiplier() const -> double;
-   void        setMultiplier(double theValue);
-   auto        name() const -> QString;
-   void        setName(const QString & theValue);
-   static auto propertyMap() -> QMap<int, QString>;
+	auto        multiplier() const -> double;
+	void        setMultiplier(double theValue);
+	auto        name() const -> QString;
+	void        setName(const QString & theValue);
+	static auto propertyMap() -> QMap<int, QString>;
 
 private:
-   double  m_multiplier{ 0.0 };
-   QString m_name{ "New Lens" };
+	double  m_multiplier{ 0.0 };
+	QString m_name{ "New Lens" };
 };
 
 auto operator<<(QDebug debug, const Lens & lens) -> QDebug;

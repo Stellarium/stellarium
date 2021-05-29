@@ -30,46 +30,46 @@ class TelescopeData;
 //! @ingroup oculars
 class Telescope : public QObject
 {
-   Q_OBJECT
+	Q_OBJECT
 #if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)
-   Q_DISABLE_COPY_MOVE(Telescope)
+	Q_DISABLE_COPY_MOVE(Telescope)
 #endif
-   Q_PROPERTY(QString name READ name WRITE setName)
-   Q_PROPERTY(double diameter READ diameter WRITE setDiameter)
-   Q_PROPERTY(double focalLength READ focalLength WRITE setFocalLength)
-   Q_PROPERTY(bool hFlipped READ isHFlipped WRITE setHFlipped)
-   Q_PROPERTY(bool vFlipped READ isVFlipped WRITE setVFlipped)
-   Q_PROPERTY(bool equatorial READ isEquatorial WRITE setEquatorial)
+	Q_PROPERTY(QString name READ name WRITE setName)
+	Q_PROPERTY(double diameter READ diameter WRITE setDiameter)
+	Q_PROPERTY(double focalLength READ focalLength WRITE setFocalLength)
+	Q_PROPERTY(bool hFlipped READ isHFlipped WRITE setHFlipped)
+	Q_PROPERTY(bool vFlipped READ isVFlipped WRITE setVFlipped)
+	Q_PROPERTY(bool equatorial READ isEquatorial WRITE setEquatorial)
 public:
-   /// Creates a new instance of Telescope.
-   //! The newly created instance will have values initialized to represent a usable telescope model.
-   Q_INVOKABLE explicit Telescope(QObject * parent = nullptr);
-   ~Telescope() override = default;
+	/// Creates a new instance of Telescope.
+	//! The newly created instance will have values initialized to represent a usable telescope model.
+	Q_INVOKABLE explicit Telescope(QObject * parent = nullptr);
+	~Telescope() override = default;
 
-   void        initFromSettings(QSettings * theSettings, int telescopeIndex);
-   void        writeToSettings(QSettings * settings, int index) const;
+	void        initFromSettings(QSettings * theSettings, int telescopeIndex);
+	void        writeToSettings(QSettings * settings, int index) const;
 
-   auto        diameter() const -> double;
-   void        setDiameter(double theValue);
-   auto        focalLength() const -> double;
-   void        setFocalLength(double theValue);
-   auto        name() const -> QString;
-   void        setName(QString theValue);
-   auto        isHFlipped() const -> bool;
-   void        setHFlipped(bool flipped);
-   auto        isVFlipped() const -> bool;
-   void        setVFlipped(bool flipped);
-   auto        isEquatorial() const -> bool;
-   void        setEquatorial(bool eq);
-   static auto propertyMap() -> QMap<int, QString>;
+	auto        diameter() const -> double;
+	void        setDiameter(double theValue);
+	auto        focalLength() const -> double;
+	void        setFocalLength(double theValue);
+	auto        name() const -> QString;
+	void        setName(QString theValue);
+	auto        isHFlipped() const -> bool;
+	void        setHFlipped(bool flipped);
+	auto        isVFlipped() const -> bool;
+	void        setVFlipped(bool flipped);
+	auto        isEquatorial() const -> bool;
+	void        setEquatorial(bool eq);
+	static auto propertyMap() -> QMap<int, QString>;
 
 private:
-   double  m_diameter{ TelescopeDefaultDiameter }; // millimeters
-   bool    m_equatorial{ true };
-   bool    m_flippedHorizontally{ true };
-   bool    m_flippedVertically{ true };
-   double  m_focalLength{ TelescopeDefaultFocalLength }; // millimeters
-   QString m_name{ "New Telescope" };
+	double  m_diameter{ TelescopeDefaultDiameter }; // millimeters
+	bool    m_equatorial{ true };
+	bool    m_flippedHorizontally{ true };
+	bool    m_flippedVertically{ true };
+	double  m_focalLength{ TelescopeDefaultFocalLength }; // millimeters
+	QString m_name{ "New Telescope" };
 };
 
 auto operator<<(QDebug debug, const Telescope & telescope) -> QDebug;

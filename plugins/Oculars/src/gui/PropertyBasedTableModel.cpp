@@ -23,9 +23,9 @@
 // MARK: - instance Methods
 /* ****************************************************************************************************************** */
 PropertyBasedTableModel::PropertyBasedTableModel(QObject * parent)
-   : QAbstractTableModel(parent)
-   , content(nullptr)
-   , modelObject(nullptr)
+	: QAbstractTableModel(parent)
+	, content(nullptr)
+	, modelObject(nullptr)
 {
 }
 
@@ -35,11 +35,11 @@ PropertyBasedTableModel::~PropertyBasedTableModel()
 
 void PropertyBasedTableModel::init(QList<QObject *> * modelData, QObject * model, const QMap<int, QString> & properties)
 {
-   beginResetModel();
-   this->content     = modelData;
-   this->modelObject = model;
-   this->mappings    = properties;
-   endResetModel();
+	beginResetModel();
+	this->content     = modelData;
+	this->modelObject = model;
+	this->mappings    = properties;
+	endResetModel();
 }
 
 /* ****************************************************************************************************************** */
@@ -47,98 +47,98 @@ void PropertyBasedTableModel::init(QList<QObject *> * modelData, QObject * model
 /* ****************************************************************************************************************** */
 auto PropertyBasedTableModel::rowCount(const QModelIndex & parent) const -> int
 {
-   Q_UNUSED(parent)
-   return content->size();
+	Q_UNUSED(parent)
+	return content->size();
 }
 
 auto PropertyBasedTableModel::columnCount(const QModelIndex & parent) const -> int
 {
-   Q_UNUSED(parent)
-   return mappings.size();
+	Q_UNUSED(parent)
+	return mappings.size();
 }
 
 auto PropertyBasedTableModel::data(const QModelIndex & index, int role) const -> QVariant
 {
-   QVariant data;
-   if ((role == Qt::DisplayRole || role == Qt::EditRole) && index.isValid() && index.row() < content->size() &&
-       index.row() >= 0 && index.column() < mappings.size() && index.column() >= 0) {
-      QObject * object = content->at(index.row());
-      data             = object->property(mappings[index.column()].toStdString().c_str());
-   }
-   return data;
+	QVariant data;
+	if ((role == Qt::DisplayRole || role == Qt::EditRole) && index.isValid() && index.row() < content->size() &&
+			index.row() >= 0 && index.column() < mappings.size() && index.column() >= 0) {
+		QObject * object = content->at(index.row());
+		data             = object->property(mappings[index.column()].toStdString().c_str());
+	}
+	return data;
 }
 
 auto PropertyBasedTableModel::insertRows(int position, int rows, const QModelIndex & index) -> bool
 {
-   Q_UNUSED(index)
-   beginInsertRows(QModelIndex(), position, position + rows - 1);
+	Q_UNUSED(index)
+	beginInsertRows(QModelIndex(), position, position + rows - 1);
 
-   for (int row = 0; row < rows; row++) {
-      QObject * newInstance = modelObject->metaObject()->newInstance();
-      Q_ASSERT(newInstance != nullptr);
-      content->insert(position, newInstance);
-   }
+	for (int row = 0; row < rows; row++) {
+		QObject * newInstance = modelObject->metaObject()->newInstance();
+		Q_ASSERT(newInstance != nullptr);
+		content->insert(position, newInstance);
+	}
 
-   endInsertRows();
-   return true;
+	endInsertRows();
+	return true;
 }
 
 auto PropertyBasedTableModel::removeRows(int position, int rows, const QModelIndex & index) -> bool
 {
-   Q_UNUSED(index)
-   beginRemoveRows(QModelIndex(), position, position + rows - 1);
+	Q_UNUSED(index)
+	beginRemoveRows(QModelIndex(), position, position + rows - 1);
 
-   for (int row = 0; row < rows; ++row) {
-      content->removeAt(position);
-   }
+	for (int row = 0; row < rows; ++row) {
+		content->removeAt(position);
+	}
 
-   endRemoveRows();
-   return true;
+	endRemoveRows();
+	return true;
 }
 
 auto PropertyBasedTableModel::setData(const QModelIndex & index, const QVariant & value, int role) -> bool
 {
-   bool changeMade = false;
-   if (index.isValid() && role == Qt::EditRole && index.column() < mappings.size()) {
-      QObject * object = content->at(index.row());
-      object->setProperty(mappings[index.column()].toStdString().c_str(), value);
-      emit(QAbstractItemModel::dataChanged(index, index));
+	bool changeMade = false;
+	if (index.isValid() && role == Qt::EditRole && index.column() < mappings.size()) {
+		QObject * object = content->at(index.row());
+		object->setProperty(mappings[index.column()].toStdString().c_str(), value);
+		emit(QAbstractItemModel::dataChanged(index, index));
 
-      changeMade = true;
-   }
+		changeMade = true;
+	}
 
-   return changeMade;
+	return changeMade;
 }
 
 auto PropertyBasedTableModel::flags(const QModelIndex & index) const -> Qt::ItemFlags
 {
-   if (!index.isValid()) {
-      return Qt::ItemIsEnabled;
-   }
+	if (!index.isValid()) {
+		return Qt::ItemIsEnabled;
+	}
 
-   return QAbstractTableModel::flags(index) | Qt::ItemIsEditable;
+	return QAbstractTableModel::flags(index) | Qt::ItemIsEditable;
 }
 
 void PropertyBasedTableModel::moveRowUp(int position)
 {
-   int count = content->count();
-   if (count < 2 || position < 1 || position >= count) {
-      return;
-   }
+	int count = content->count();
+	if (count < 2 || position < 1 || position >= count) {
+		return;
+	}
 
-   beginMoveRows(QModelIndex(), position, position, QModelIndex(), position - 1);
-   content->move(position, position - 1);
-   endMoveRows();
+	beginMoveRows(QModelIndex(), position, position, QModelIndex(), position - 1);
+	content->move(position, position - 1);
+	endMoveRows();
 }
 
 void PropertyBasedTableModel::moveRowDown(int position)
 {
-   int count = content->count();
-   if (count < 2 || position < 0 || position > (count - 2)) {
-      return;
-   }
+	int count = content->count();
+	if (count < 2 || position < 0 || position > (count - 2)) {
+		return;
+	}
 
-   beginMoveRows(QModelIndex(), position, position, QModelIndex(), position + 2);
-   content->move(position, position + 1);
-   endMoveRows();
+	beginMoveRows(QModelIndex(), position, position, QModelIndex(), position + 2);
+	content->move(position, position + 1);
+	endMoveRows();
 }
