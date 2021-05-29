@@ -699,7 +699,7 @@ class Translations
 		N_("Phobos eclipsing the Sun as seen from Olympus Mons on Jan 2, 2021.");
 		N_("Phobos occultations of Earth are common, as are occultations of Jupiter. But occultations of both on the same day are very rare. Here's one that takes place 1/23/2048. In real speed.");
 		N_("Phobos races ahead of Mars and transits the sun, passes through it and then retrogrades back towards the sun and just partially transits it again (only seen in the southern hemisphere of Deimos), then Mars totally eclipses the sun while Phobos transits in darkness between Mars and Deimos. When Phobos emerges from Mars it is still eclipsed and dimmed in Mars' shadow, only to light up later.");
-		N_("Screensaver of various happenings in the Solar System. 314 events in all!");
+		N_("Screensaver of various happenings in the Solar System. 313 events in all!");
 		N_("A tour of the western constellations.");
 		N_("A tour of the constellations of the selected sky culture.");
 		N_("Look at the Sun from big planets of Solar System and Pluto.");

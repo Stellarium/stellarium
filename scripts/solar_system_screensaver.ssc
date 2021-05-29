@@ -1,11 +1,11 @@
 // Author: Qam1
 // Name: Solar System Screensaver
 // License: Public Domain
-// Version: 314-1
+// Version: 313-1
 // Shortcut: Ctrl+D,0
-// Description: Screensaver of various happenings in the Solar System. 314 events in all!
+// Description: Screensaver of various happenings in the Solar System. 313 events in all!
 
-// Made on Stellarium Version 0.20.4
+// Made on Stellarium Version 0.21.0
 
 
 
@@ -21,7 +21,7 @@ core.setDeltaTAlgorithm("WithoutCorrection");
 LabelMgr.deleteAllLabels();
 
 // Number of Events
-l = 314;
+l = 313;
 
 
 degstring = "\u00B0";
@@ -31,7 +31,7 @@ SolarSystem.setLabelsAmount(20);
 SolarSystem.setFlagMoonScale(4);  
 LandscapeMgr.setFlagAtmosphere(true);
 
-
+LandscapeMgr.setCurrentLandscapeID("ocean");
 
 y = core.getScreenHeight()/768;
 x = core.getScreenWidth()/1024;
@@ -87,7 +87,7 @@ dir = 0;
 sfn = 0;
 
 txt1 = LabelMgr.labelScreen(id[r], 10 * x, 600 * y, false, 40 * x, "#78FF17");
-//LabelMgr.setLabelShow(txt1, true);
+LabelMgr.setLabelShow(txt1, true);
 
 
 d1 = ""; d2 = "";
@@ -9065,36 +9065,12 @@ c1 = "#AAAAF8"
 }
 
 
+
+
+
+
+
 if (id[r] == 312)
-{
-
-// Jupiter and Venus trans Sun from Neptune
-StelMovementMgr.zoomTo(0.0282);
-
-core.setObserverLocation(4.4, -89.25, 27000, 1, "", "Neptune");
-core.setDate("15124-04-08T06:14:16", "utc");
-LandscapeMgr.setFlagAtmosphere(false);
-
-core.selectObjectByName("Jupiter", pointer = true);
-
-var pick = Math.floor(Math.random()*2);
-if (pick == 1)
-{
-core.selectObjectByName("Venus", pointer = true);
-}
-StelMovementMgr.setFlagTracking(true);
-
-
-d1 = "Venus and Jupiter Transit the sun from Neptune 4/08/15124";  
-c1 = "#B4B3FF"
-
-
-}
-
-
-
-
-if (id[r] == 313)
 {
 // Uranus Transit
 
@@ -9117,7 +9093,7 @@ c1 = "#74A8AC"
 }
 
 
-if (id[r] == 314)
+if (id[r] == 313)
 {
 // Arcturus and Spica 
 core.setObserverLocation(132.71, -44.24, 1126, 1, "", "Earth");
