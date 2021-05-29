@@ -1383,35 +1383,56 @@
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>tabs</tabstop>
+  <tabstop>deleteSourceButton</tabstop>
   <tabstop>internetUpdatesCheckbox</tabstop>
   <tabstop>checkBoxAutoAdd</tabstop>
   <tabstop>jumpToSourcesButton</tabstop>
   <tabstop>checkBoxAutoRemove</tabstop>
+  <tabstop>updateFrequencySpinBox</tabstop>
+  <tabstop>updateButton</tabstop>
+  <tabstop>labelsGroup</tabstop>
   <tabstop>fontSizeSpinBox</tabstop>
+  <tabstop>invisibleColorButton</tabstop>
+  <tabstop>transitColorButton</tabstop>
+  <tabstop>iconicGroup</tabstop>
+  <tabstop>hideInvisibleSatellites</tabstop>
+  <tabstop>orbitLinesGroup</tabstop>
   <tabstop>orbitSegmentsSpin</tabstop>
   <tabstop>orbitDurationSpin</tabstop>
+  <tabstop>orbitFadeSpin</tabstop>
   <tabstop>restoreDefaultsButton</tabstop>
   <tabstop>saveSettingsButton</tabstop>
+  <tabstop>tabs</tabstop>
   <tabstop>groupFilterCombo</tabstop>
   <tabstop>lineEditSearch</tabstop>
   <tabstop>satellitesList</tabstop>
+  <tabstop>satMarkerColorPickerButton</tabstop>
+  <tabstop>satOrbitColorPickerButton</tabstop>
+  <tabstop>satInfoColorPickerButton</tabstop>
   <tabstop>nameEdit</tabstop>
   <tabstop>noradNumberEdit</tabstop>
+  <tabstop>cosparNumberEdit</tabstop>
+  <tabstop>stdMagnitudeLineEdit</tabstop>
+  <tabstop>rcsLineEdit</tabstop>
   <tabstop>displayedCheckbox</tabstop>
   <tabstop>orbitCheckbox</tabstop>
+  <tabstop>userCheckBox</tabstop>
   <tabstop>descriptionTextEdit</tabstop>
   <tabstop>groupsListWidget</tabstop>
   <tabstop>tleFirstLineEdit</tabstop>
   <tabstop>tleSecondLineEdit</tabstop>
-  <tabstop>addSatellitesButton</tabstop>
   <tabstop>removeSatellitesButton</tabstop>
-  <tabstop>satMarkerColorPickerButton</tabstop>
+  <tabstop>addSatellitesButton</tabstop>
+  <tabstop>saveSourceButton</tabstop>
+  <tabstop>iridiumFlaresTreeWidget</tabstop>
+  <tabstop>flaresPredictionDepthSpinBox</tabstop>
+  <tabstop>predictIridiumFlaresPushButton</tabstop>
+  <tabstop>predictedIridiumFlaresSaveButton</tabstop>
+  <tabstop>editSourceButton</tabstop>
   <tabstop>sourceList</tabstop>
   <tabstop>sourceEdit</tabstop>
-  <tabstop>addSourceButton</tabstop>
-  <tabstop>deleteSourceButton</tabstop>
   <tabstop>aboutTextBrowser</tabstop>
+  <tabstop>addSourceButton</tabstop>
  </tabstops>
  <resources>
   <include location="../../../../data/gui/guiRes.qrc"/>
