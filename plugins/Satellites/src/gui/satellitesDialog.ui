@@ -696,12 +696,38 @@
       </layout>
      </widget>
      <widget class="QWidget" name="satellitesTab">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <attribute name="title">
        <string>Satellites</string>
       </attribute>
-      <layout class="QHBoxLayout" name="horizontalLayout_5">
+      <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout">
+        <widget class="QSplitter" name="splitter">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="handleWidth">
+          <number>7</number>
+         </property>
+         <property name="childrenCollapsible">
+          <bool>false</bool>
+         </property>
+         <widget class="QWidget" name="layoutWidget">
+          <layout class="QVBoxLayout" name="satlist_layout" stretch="0,0,0,0">
          <item>
           <widget class="QComboBox" name="groupFilterCombo">
            <property name="editable">
@@ -831,9 +857,9 @@
           </layout>
          </item>
         </layout>
-       </item>
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout_7">
+         </widget>
+         <widget class="QWidget" name="layoutWidget">
+          <layout class="QVBoxLayout" name="sat_details" stretch="0,0,0,0,0,0,0,0">
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_4">
            <item>
@@ -1108,6 +1134,8 @@
           </layout>
          </item>
         </layout>
+         </widget>
+        </widget>
        </item>
       </layout>
      </widget>
