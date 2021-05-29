@@ -863,7 +863,7 @@ bool Satellites::saveDataMap(const QVariantMap& map, QString path)
 	}
 	else
 	{
-		qDebug() << "[Satellites] writing to:" << QDir::toNativeSeparators(path);
+		//qDebug() << "[Satellites] writing to:" << QDir::toNativeSeparators(path);
 		StelJsonParser::write(map, &jsonFile);
 		jsonFile.close();
 		return true;
