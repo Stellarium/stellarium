@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-03-28 10:19+0700\n"
+"POT-Creation-Date: 2021-05-29 17:46+0700\n"
 "PO-Revision-Date: 2019-01-19 14:25+0000\n"
 "Last-Translator: Georgi Georgiev (Жоро) <g.georgiev.shumen@gmail.com>, 2020\n"
 "Language-Team: Bulgarian (https://www.transifex.com/stellarium/teams/80998/bg/)\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Language: bg\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: scripts/analemma.ssc:16
+#: scripts/analemma.ssc:17
 msgid "Analemma"
 msgstr "Аналема"
 
@@ -827,7 +827,7 @@ msgstr "6,3′ (ЗСЗ)"
 msgid "Separation:"
 msgstr "Ъглово отстояние:"
 
-#: scripts/martian_analemma.ssc:16
+#: scripts/martian_analemma.ssc:17
 msgid "Martian analemma"
 msgstr "Аналема от Марс"
 
@@ -894,63 +894,67 @@ msgstr "Окултации на ярки звезди от планети"
 msgid "Mutual occultations of planets"
 msgstr "Взаимни окултации на планети"
 
-#: scripts/supernova.ssc:22
+#: scripts/supernova.ssc:23
 msgid "Europe, Uraniborg."
 msgstr "Европа, Ураниборг"
 
-#: scripts/supernova.ssc:30
+#: scripts/supernova.ssc:31
 msgid "Evening of 20 October 1572"
 msgstr "Вечерта на 20 Октомври 1572"
 
-#: scripts/supernova.ssc:39
+#: scripts/supernova.ssc:40
 msgid "Constellation Cassiopeia"
 msgstr "Съзвездие Касиопея"
 
-#: scripts/supernova.ssc:60
+#: scripts/supernova.ssc:61
 msgid "5 days later..."
 msgstr "5 дни по-късно…"
 
-#: scripts/supernova.ssc:66
+#: scripts/supernova.ssc:67
 msgid "Next 3 days..."
 msgstr "Следващите 3 дни…"
 
-#: scripts/supernova.ssc:72
+#: scripts/supernova.ssc:73
 msgid "New star! But people have not seen it yet..."
 msgstr "Нова звезда! Но хората още не са я видели…"
 
-#: scripts/supernova.ssc:77
+#: scripts/supernova.ssc:78
 msgid "Evening of 31 October 1572"
 msgstr "Вечерта на 31 Октомври 1572"
 
-#: scripts/supernova.ssc:85
+#: scripts/supernova.ssc:86
 msgid "Evening of "
 msgstr "Вечерта на "
 
-#: scripts/supernova.ssc:85
+#: scripts/supernova.ssc:86
 msgid " November 1572"
 msgstr " Ноември 1572"
 
-#: scripts/supernova.ssc:92
+#: scripts/supernova.ssc:93
 msgid "Hooray! First observations in Korea and Europe."
 msgstr "Ура! Първи наблюдения в Корея и Европа."
 
-#: scripts/supernova.ssc:100
+#: scripts/supernova.ssc:101
 msgid "First observations in China."
 msgstr "Първи наблюдения в Китай."
 
-#: scripts/supernova.ssc:108
+#: scripts/supernova.ssc:109
 msgid ""
 "The clouds are gone and Tycho Brahe the first time watching a new star!"
 msgstr ""
 "Облаците се разпръснаха и Тихо Брахе вижда новата звезда за първи път!"
 
-#: scripts/supernova.ssc:117
+#: scripts/supernova.ssc:118
 msgid "Next 60 days..."
 msgstr "Следващите 60 дни…"
 
-#: scripts/supernova.ssc:128
+#: scripts/supernova.ssc:129
 msgid "Next other 40 days..."
 msgstr "Следващи още 40 дни…"
+
+#: scripts/supernova.ssc:150
+msgid "The Historical supernovae plugin is not loaded!"
+msgstr ""
 
 #: scripts/h400_tour.ssc:16
 msgid "The Herschel 400 Catalogue"
@@ -1311,7 +1315,7 @@ msgstr "Изгрев №3"
 msgid "Sunset #3"
 msgstr "Залез №3"
 
-#: scripts/saturnian_analemma.ssc:16
+#: scripts/saturnian_analemma.ssc:17
 msgid "Saturnian analemma"
 msgstr "Аналема от Сатурн"
 
@@ -1319,401 +1323,401 @@ msgstr "Аналема от Сатурн"
 msgid "Solar day"
 msgstr "Слънчев ден"
 
-#: scripts/uranian_analemma.ssc:16
+#: scripts/uranian_analemma.ssc:17
 msgid "Uranian analemma"
 msgstr "Аналема от Уран"
 
-#: scripts/messier_marathon.ssc:17
+#: scripts/messier_marathon.ssc:18
 msgid "Messier Marathon"
 msgstr "Маратон на Месие"
 
-#: scripts/messier_marathon.ssc:84
+#: scripts/messier_marathon.ssc:85
 msgid "Difficulty is 0"
 msgstr "Трудността е 0"
 
-#: scripts/messier_marathon.ssc:85
+#: scripts/messier_marathon.ssc:86
 msgid "Very diffuse, very dark, very difficult"
 msgstr "Много дифузен, много тъмен и много труден"
 
-#: scripts/messier_marathon.ssc:86
+#: scripts/messier_marathon.ssc:87
 msgid "Easier than M74, small"
 msgstr "По-лесен от М74, малък е"
 
-#: scripts/messier_marathon.ssc:87
+#: scripts/messier_marathon.ssc:88
 msgid "Visible to the naked eye, no difficulty"
 msgstr "Видим с невъоръжено око, не е труден"
 
-#: scripts/messier_marathon.ssc:88
+#: scripts/messier_marathon.ssc:89
 msgid "More difficult than M110 to verify, small"
 msgstr "По-труден за разпознаване от М110, малък е"
 
-#: scripts/messier_marathon.ssc:89
+#: scripts/messier_marathon.ssc:90
 msgid "In the west of M31, it is easy to detect"
 msgstr "Западно от М31, лесно забележим е"
 
-#: scripts/messier_marathon.ssc:90
+#: scripts/messier_marathon.ssc:91
 msgid "Diffuse, great, brighter"
 msgstr "Дифузен, страхотен и ярък"
 
-#: scripts/messier_marathon.ssc:91
+#: scripts/messier_marathon.ssc:92
 msgid "Small, easy to locate, not as horror as imagined"
 msgstr ""
 "Малък е, лесен за намиране, не е толкова страшно, колкото си го представяте"
 
-#: scripts/messier_marathon.ssc:92
+#: scripts/messier_marathon.ssc:93
 msgid "Difficult to locate, easy to detect and verify"
 msgstr "Труден за намиране, лесно забележим и разпознаваем"
 
-#: scripts/messier_marathon.ssc:93
+#: scripts/messier_marathon.ssc:94
 msgid "Small, easy to locate, don't confuse with NGC663"
 msgstr "Малък е, лесен за намиране, не го бъркайте с NGC663"
 
-#: scripts/messier_marathon.ssc:94
+#: scripts/messier_marathon.ssc:95
 msgid "Large, scattered, easy"
 msgstr "Голям, разпръснат и лесен"
 
-#: scripts/messier_marathon.ssc:95
+#: scripts/messier_marathon.ssc:96
 msgid "Fuzzy, easy to find, accompanied by a small star"
 msgstr "Блед е, лесен за намиране, придружаван е от малка звезда"
 
-#: scripts/messier_marathon.ssc:96
+#: scripts/messier_marathon.ssc:97
 msgid "Visible to the naked eye, better than M31"
 msgstr "Видим с невъоръжено око, по-добър е от М31"
 
-#: scripts/messier_marathon.ssc:97
+#: scripts/messier_marathon.ssc:98
 msgid "Very close to M42, not easy to see the fuzzy"
 msgstr "Много е близо до М42, не е лесно да се види"
 
-#: scripts/messier_marathon.ssc:98
+#: scripts/messier_marathon.ssc:99
 msgid "Small, dark, few stars around"
 msgstr "Малък и тъмен, без много звезди около него"
 
-#: scripts/messier_marathon.ssc:99
+#: scripts/messier_marathon.ssc:100
 msgid "Easy to locate, easy to detect in a good transparency."
 msgstr "Лесен за намиране и лесно забележим при добри атмосферни условия."
 
-#: scripts/messier_marathon.ssc:100
+#: scripts/messier_marathon.ssc:101
 msgid "Visible to the naked eye, easier"
 msgstr "Видим с невъоръжено око, по-лесен е"
 
-#: scripts/messier_marathon.ssc:101 scripts/messier_marathon.ssc:153
-#: scripts/messier_marathon.ssc:174
+#: scripts/messier_marathon.ssc:102 scripts/messier_marathon.ssc:154
+#: scripts/messier_marathon.ssc:175
 msgid "Easy to locate and verify"
 msgstr "Лесен за намиране и разпознаване"
 
-#: scripts/messier_marathon.ssc:102 scripts/messier_marathon.ssc:103
+#: scripts/messier_marathon.ssc:103 scripts/messier_marathon.ssc:104
 msgid "Large, scattered"
 msgstr "Голям и разпръснат"
 
-#: scripts/messier_marathon.ssc:104
+#: scripts/messier_marathon.ssc:105
 msgid "Bright, easy to verify, difficult to locate"
 msgstr "Ярък е, лесно разпознаваем, но труден за намиране"
 
-#: scripts/messier_marathon.ssc:105
+#: scripts/messier_marathon.ssc:106
 msgid "Large, difficult to locate, easy to confuse with NGC2506"
 msgstr "Голям е, но труден за намиране, лесно може да се обърка с NGC2506"
 
-#: scripts/messier_marathon.ssc:106
+#: scripts/messier_marathon.ssc:107
 msgid "Easy, more scattered"
 msgstr "Лесен е, но е доста разпръснат"
 
-#: scripts/messier_marathon.ssc:107
+#: scripts/messier_marathon.ssc:108
 msgid "Easy, fuzzy"
 msgstr "Лесен и блед"
 
-#: scripts/messier_marathon.ssc:108
+#: scripts/messier_marathon.ssc:109
 msgid "Easy, scattered"
 msgstr "Лесен и разпръснат"
 
-#: scripts/messier_marathon.ssc:109
+#: scripts/messier_marathon.ssc:110
 msgid "Easy, large, scattered"
 msgstr "Лесен, голям и разпръснат"
 
-#: scripts/messier_marathon.ssc:110
+#: scripts/messier_marathon.ssc:111
 msgid "Very close to M96 and M105"
 msgstr "Много е близо до М96 и М105"
 
-#: scripts/messier_marathon.ssc:111
+#: scripts/messier_marathon.ssc:112
 msgid "Easy to locate and verify, assist to verify M95 and M105"
 msgstr ""
 "Лесен за намиране и разпознаване, използвайте го за намирането на М95 и М105"
 
-#: scripts/messier_marathon.ssc:112
+#: scripts/messier_marathon.ssc:113
 msgid "Dark"
 msgstr "Тъмен е"
 
-#: scripts/messier_marathon.ssc:113
+#: scripts/messier_marathon.ssc:114
 msgid "Very close, it’s like M81 and M82"
 msgstr "Много е близо, точно като М81 и М82"
 
-#: scripts/messier_marathon.ssc:114
+#: scripts/messier_marathon.ssc:115
 msgid "There is NGC3628 nearby, don't think you have found a new comet"
 msgstr ""
 "NGC3628 е наблизо, само да не си помислите, че сте намерили нова комета"
 
-#: scripts/messier_marathon.ssc:115
+#: scripts/messier_marathon.ssc:116
 msgid "Like the darkened M33, require a high sky conditions"
 msgstr "Като затъмненият М33, той изисква отлични атмосферни условия"
 
-#: scripts/messier_marathon.ssc:116
+#: scripts/messier_marathon.ssc:117
 msgid "Difficult to locate, 4 stars of the inverted 7 shape beside"
 msgstr "Труден е за намиране, 4 звезди оформят обърнато числото 7"
 
-#: scripts/messier_marathon.ssc:117
+#: scripts/messier_marathon.ssc:118
 msgid "Easy, you can see the companion galaxy"
 msgstr "Лесно е, може да видите придружаващата го галактика"
 
-#: scripts/messier_marathon.ssc:118
+#: scripts/messier_marathon.ssc:119
 msgid "Easy to verify"
 msgstr "Лесен за разпознаване"
 
-#: scripts/messier_marathon.ssc:119
+#: scripts/messier_marathon.ssc:120
 msgid "Not easy to locate, small, slightly dark"
 msgstr "Не е лесен за намиране, малък е и леко тъмен"
 
-#: scripts/messier_marathon.ssc:120
+#: scripts/messier_marathon.ssc:121
 msgid "Not easy to locate, bright"
 msgstr "Не е лесен за намиране, ярък е"
 
-#: scripts/messier_marathon.ssc:121
+#: scripts/messier_marathon.ssc:122
 msgid "Not easy to locate, no bright stars nearby"
 msgstr "Не е лесен за намиране, няма ярки звезди около него"
 
-#: scripts/messier_marathon.ssc:122
+#: scripts/messier_marathon.ssc:123
 msgid "Easy to locate"
 msgstr "Лесен за намиране"
 
-#: scripts/messier_marathon.ssc:123
+#: scripts/messier_marathon.ssc:124
 msgid "Beside M60, it is easy to verify"
 msgstr "До М60, лесен е за разпознаване"
 
-#: scripts/messier_marathon.ssc:124
+#: scripts/messier_marathon.ssc:125
 msgid "It’s an easier one"
 msgstr "Лесен е"
 
-#: scripts/messier_marathon.ssc:125
+#: scripts/messier_marathon.ssc:126
 msgid "As bright as M85, easy to verify"
 msgstr "Ярък, колкото М85, лесен е за разпознаване"
 
-#: scripts/messier_marathon.ssc:126
+#: scripts/messier_marathon.ssc:127
 msgid "Dark, hard to look"
 msgstr "Тъмен и труден за наблюдение"
 
-#: scripts/messier_marathon.ssc:127
+#: scripts/messier_marathon.ssc:128
 msgid "Easy to detect than M89, easy to locate"
 msgstr "По-лесен за откриване от М89, лесен е за намиране"
 
-#: scripts/messier_marathon.ssc:128
+#: scripts/messier_marathon.ssc:129
 msgid "Easy to locate, detect once"
 msgstr "Веднъж открит е лесен за намиране"
 
-#: scripts/messier_marathon.ssc:129
+#: scripts/messier_marathon.ssc:130
 msgid "There is an NGC4438 near M84 and M86, don't make a mistake"
 msgstr "NGC4438 е близо до М84 и М86, не правете грешка"
 
-#: scripts/messier_marathon.ssc:130
+#: scripts/messier_marathon.ssc:131
 msgid "M84 are together, closer to NGC4438"
 msgstr "Близо до М84 е разположен и NGC4438"
 
-#: scripts/messier_marathon.ssc:131
+#: scripts/messier_marathon.ssc:132
 msgid "Just above M90, almost like M90"
 msgstr "Намира се точно над М90, почти като М90"
 
-#: scripts/messier_marathon.ssc:132
+#: scripts/messier_marathon.ssc:133
 msgid "Look hard"
 msgstr "Втренчете се"
 
-#: scripts/messier_marathon.ssc:133
+#: scripts/messier_marathon.ssc:134
 msgid "This bunch of things in the Virgo Cluster is not easy"
 msgstr "Този куп от неща в съзвездието Дева не е лесен"
 
-#: scripts/messier_marathon.ssc:134
+#: scripts/messier_marathon.ssc:135
 msgid "M99 is easier to verify than M98"
 msgstr "М99 е по-лесен за разпознаване от М98"
 
-#: scripts/messier_marathon.ssc:135
+#: scripts/messier_marathon.ssc:136
 msgid "First find M100 and then find M98 and M99"
 msgstr "Първо, намерете М100, след това намерете М98 и М99"
 
-#: scripts/messier_marathon.ssc:136
+#: scripts/messier_marathon.ssc:137
 msgid "Far away, but very bright, easy to find"
 msgstr "Далечен е, но много ярък и лесен за намиране"
 
-#: scripts/messier_marathon.ssc:137
+#: scripts/messier_marathon.ssc:138
 msgid "Small, not easy to locate, a little difficult"
 msgstr "Малък е, не е лесен за намиране и е малко труден"
 
-#: scripts/messier_marathon.ssc:138
+#: scripts/messier_marathon.ssc:139
 msgid "Not easy to locate, easy to verify"
 msgstr "Не е лесен за намиране, но е лесен за разпознаване"
 
-#: scripts/messier_marathon.ssc:139
+#: scripts/messier_marathon.ssc:140
 msgid "Easy to locate and verify, small"
 msgstr "Лесен за намиране и разпознаване, малък е"
 
-#: scripts/messier_marathon.ssc:140
+#: scripts/messier_marathon.ssc:141
 msgid "Easy to verify, a star 5 magnitude nearby"
 msgstr "Лесен е за разпознаване, в близост е до звезда от 5-та величина"
 
-#: scripts/messier_marathon.ssc:141
+#: scripts/messier_marathon.ssc:142
 msgid "Visible to the naked eye, big, bright"
 msgstr "Видим с невъоръжено око, голям е и ярък"
 
-#: scripts/messier_marathon.ssc:142
+#: scripts/messier_marathon.ssc:143
 msgid "Bright and big in the galaxies, not hard to find"
 msgstr "Ярък и голям на фона на галактиките, не е труден за намиране"
 
-#: scripts/messier_marathon.ssc:143
+#: scripts/messier_marathon.ssc:144
 msgid "Bright, easy to verify"
 msgstr "Ярък и лесен за разпознаване"
 
-#: scripts/messier_marathon.ssc:144
+#: scripts/messier_marathon.ssc:145
 msgid "Easy to verify in a right location"
 msgstr "Лесен е за разпознаване, ако сте на правилното място"
 
-#: scripts/messier_marathon.ssc:145
+#: scripts/messier_marathon.ssc:146
 msgid "Famous, like the shoulder pole star"
 msgstr "Известен е колкото Северната звезда"
 
-#: scripts/messier_marathon.ssc:146
+#: scripts/messier_marathon.ssc:147
 msgid "It may be easier to locate from the Dragon"
 msgstr "Ще е по-лесен за намиране, ако го търсите от съзвездието Дракон"
 
-#: scripts/messier_marathon.ssc:147
+#: scripts/messier_marathon.ssc:148
 msgid "Small, 20 times or more is still easy to detect"
 msgstr "Малък е, 20 пъти или повече е все още лесно откриваем"
 
-#: scripts/messier_marathon.ssc:148
+#: scripts/messier_marathon.ssc:149
 msgid "More difficult than M57, not easy to locate, very small"
 msgstr ""
 "По-труден за разпознаване от М57, не е лесен за намиране и е много малък"
 
-#: scripts/messier_marathon.ssc:149
+#: scripts/messier_marathon.ssc:150
 msgid "Easy, small, looks like a cluster of stars 7-8 magnitude"
 msgstr "Лесен и малък, изглежда като звезден куп от 7-8 величина"
 
-#: scripts/messier_marathon.ssc:150
+#: scripts/messier_marathon.ssc:151
 msgid "Larger than imagined, very scattered, not easy to locate"
 msgstr ""
 "По-голям е отколкото си го представяте, много е разпръснат и не е лесен за "
 "намиране"
 
-#: scripts/messier_marathon.ssc:151
+#: scripts/messier_marathon.ssc:152
 msgid "Find M71 first, then find M27, and will be easier to locate"
 msgstr ""
 "Първо, намерете М71, после намерете М27 и тогава ще е по-лесно да го "
 "намерите"
 
-#: scripts/messier_marathon.ssc:152
+#: scripts/messier_marathon.ssc:153
 msgid "Easy to locate, easy to verify in 50 binos"
 msgstr "Лесен за намиране и разпознаване в 50 мм бинокли"
 
-#: scripts/messier_marathon.ssc:154
+#: scripts/messier_marathon.ssc:155
 msgid "Bright, like M13, easy to find"
 msgstr "Ярък е като М13 и е лесен за намиране"
 
-#: scripts/messier_marathon.ssc:155
+#: scripts/messier_marathon.ssc:156
 msgid "Detect it with M12, brighter than M12"
 msgstr "Намерете го чрез М12, по-ярък е от М12"
 
-#: scripts/messier_marathon.ssc:156
+#: scripts/messier_marathon.ssc:157
 msgid "Difficult to locate, easy to verify"
 msgstr "Труден е за намиране, но е лесен за разпознаване"
 
-#: scripts/messier_marathon.ssc:157
+#: scripts/messier_marathon.ssc:158
 msgid "Small, not easy to verify"
 msgstr "Малък е, не е лесен за разпознаване"
 
-#: scripts/messier_marathon.ssc:158
+#: scripts/messier_marathon.ssc:159
 msgid "Bright, big, don't forget to detect NGC6144 nearby"
 msgstr "Той е ярък и голям, наблизо е и NGC6144"
 
-#: scripts/messier_marathon.ssc:159
+#: scripts/messier_marathon.ssc:160
 msgid "Not easy to verify at low power, easy at high power"
 msgstr ""
 "Не е лесен за разпознаване с ниско увеличение, опитайте с по-голямо "
 "увеличение"
 
-#: scripts/messier_marathon.ssc:160
+#: scripts/messier_marathon.ssc:161
 msgid "Follow the line of M4 and Antares, easy to verify"
 msgstr "Следвайте линията на М4 и Антарес, лесен е за разпознаване"
 
-#: scripts/messier_marathon.ssc:161
+#: scripts/messier_marathon.ssc:162
 msgid "Looking down from M19, darker than M19, but easy to verify"
 msgstr "Погледнете под М19, по-тъмен е от М19, но е лесен за разпознаване"
 
-#: scripts/messier_marathon.ssc:162
+#: scripts/messier_marathon.ssc:163
 msgid "Easy to locate, bright, and almost like M13"
 msgstr "Лесен за намиране и е ярък, почти като М13"
 
-#: scripts/messier_marathon.ssc:163
+#: scripts/messier_marathon.ssc:164
 msgid "Easy to locate M26 by M11"
 msgstr "М26 е лесен, благодарение на М11"
 
-#: scripts/messier_marathon.ssc:164
+#: scripts/messier_marathon.ssc:165
 msgid "Easy"
 msgstr "Лесен"
 
-#: scripts/messier_marathon.ssc:165 scripts/messier_marathon.ssc:178
+#: scripts/messier_marathon.ssc:166 scripts/messier_marathon.ssc:179
 msgid "Difficult to locate, bright, easy to verify"
 msgstr "Труден за намиране и е ярък, но е лесен за разпознаване"
 
-#: scripts/messier_marathon.ssc:166
+#: scripts/messier_marathon.ssc:167
 msgid "Beside M81, vertical to each other"
 msgstr "До М81, вертикални са един към друг"
 
-#: scripts/messier_marathon.ssc:167
+#: scripts/messier_marathon.ssc:168
 msgid "Large, a little fuzzy"
 msgstr "Голям и малко блед"
 
-#: scripts/messier_marathon.ssc:167
+#: scripts/messier_marathon.ssc:168
 msgid "Beside M20"
 msgstr "До М20"
 
-#: scripts/messier_marathon.ssc:168
+#: scripts/messier_marathon.ssc:169
 msgid "It’s not hard to see the diffuse nebula"
 msgstr "Не е трудно да се види дифузната мъглявина"
 
-#: scripts/messier_marathon.ssc:169
+#: scripts/messier_marathon.ssc:170
 msgid "Visible to the naked eye, extremely easy"
 msgstr "Видим с невъоръжено око, много е лесен"
 
-#: scripts/messier_marathon.ssc:170
+#: scripts/messier_marathon.ssc:171
 msgid "Big, easy"
 msgstr "Голям и лесен"
 
-#: scripts/messier_marathon.ssc:170
+#: scripts/messier_marathon.ssc:171
 msgid "Easy to locate and verify, bright"
 msgstr "Лесен за намиране и разпознаване, ярък е"
 
-#: scripts/messier_marathon.ssc:171
+#: scripts/messier_marathon.ssc:172
 msgid "M13 second"
 msgstr "Втори М13"
 
-#: scripts/messier_marathon.ssc:172
+#: scripts/messier_marathon.ssc:173
 msgid "Too big, scattered, not easy to verify"
 msgstr "Много е голям и разпръснат, не е лесен за разпознаване"
 
-#: scripts/messier_marathon.ssc:173
+#: scripts/messier_marathon.ssc:174
 msgid "Bigger than M6"
 msgstr "По-голям е от М6"
 
-#: scripts/messier_marathon.ssc:175
+#: scripts/messier_marathon.ssc:176
 msgid "Brighter than imagined, can be detected with 60 binos"
 msgstr "По-ярък е отколкото си мислите, може да се намери с 60 мм бинокъл"
 
-#: scripts/messier_marathon.ssc:176
+#: scripts/messier_marathon.ssc:177
 msgid "Darker than M97, long strips, look hard"
 msgstr "По-тъмен е от М97, има дълги ленти, втренчете се"
 
-#: scripts/messier_marathon.ssc:177
+#: scripts/messier_marathon.ssc:178
 msgid "Easy to verify with more than 20 times binos"
 msgstr "Лесен за разпознаване с бинокъл при увеличение 20 пъти"
 
-#: scripts/messier_marathon.ssc:179
+#: scripts/messier_marathon.ssc:180
 msgid "In the morning light, it looks too hard, dark"
 msgstr "В сутрешната светлина е много труден и тъмен"
 
-#: scripts/messier_marathon.ssc:288
+#: scripts/messier_marathon.ssc:289
 msgid "cannot be seen now"
 msgstr "не може да се види в момента"

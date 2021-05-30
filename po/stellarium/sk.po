@@ -7,17 +7,17 @@
 # cardinot <mcardinot@gmail.com>, 2017
 # Miroslav Sido <miro_redhawk@hotmail.com>, 2019
 # Alexander Wolf <alex.v.wolf@gmail.com>, 2021
-# Lubomir Hambalek <lubomir.hambalek@gmail.com>, 2021
 # Juraj Kubica <juraj.kubica@seznam.cz>, 2021
+# Lubomir Hambalek <lubomir.hambalek@gmail.com>, 2021
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-05-16 13:23+0700\n"
+"POT-Creation-Date: 2021-05-29 17:46+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
-"Last-Translator: Juraj Kubica <juraj.kubica@seznam.cz>, 2021\n"
+"Last-Translator: Lubomir Hambalek <lubomir.hambalek@gmail.com>, 2021\n"
 "Language-Team: Slovak (https://www.transifex.com/stellarium/teams/80998/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -44,8 +44,8 @@ msgstr "vlastná značka"
 #: plugins/Satellites/src/Satellite.cpp:305
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:531
 #: plugins/Supernovae/src/Supernova.cpp:143 plugins/Novae/src/Nova.cpp:147
-#: plugins/Quasars/src/Quasar.cpp:127 plugins/Pulsars/src/Pulsar.cpp:184
-#: plugins/Pulsars/src/Pulsar.cpp:186 plugins/Exoplanets/src/Exoplanet.cpp:278
+#: plugins/Quasars/src/Quasar.cpp:127 plugins/Pulsars/src/Pulsar.cpp:187
+#: plugins/Pulsars/src/Pulsar.cpp:189 plugins/Exoplanets/src/Exoplanet.cpp:278
 #: plugins/MeteorShowers/src/MeteorShower.cpp:523
 msgid "Type"
 msgstr "Typ"
@@ -83,7 +83,7 @@ msgstr "Názvy asterizmov"
 
 #: src/core/modules/AsterismMgr.cpp:101
 msgid "Toggle single asterism selection mode"
-msgstr ""
+msgstr "Prepnúť režim výberu jedného asterizmu"
 
 #: src/core/modules/AsterismMgr.cpp:102
 msgid "Ray helpers"
@@ -646,7 +646,7 @@ msgstr "Pravidelná zmena svetelného znečistenia"
 
 #: src/core/modules/LandscapeMgr.cpp:1014 src/scripting/StelScriptMgr.cpp:457
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
-#: plugins/Oculars/src/gui/OcularDialog.cpp:573
+#: plugins/Oculars/src/gui/OcularDialog.cpp:585
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:125
 #: plugins/Novae/src/gui/NovaeDialog.cpp:123
@@ -1508,7 +1508,7 @@ msgstr "Uhol orientácie"
 #: src/core/modules/Nebula.cpp:318 src/core/modules/Nebula.cpp:331
 #: src/core/modules/StarWrapper.cpp:313
 #: plugins/Supernovae/src/Supernova.cpp:158 plugins/Novae/src/Nova.cpp:161
-#: plugins/Pulsars/src/Pulsar.cpp:257 plugins/Exoplanets/src/Exoplanet.cpp:292
+#: plugins/Pulsars/src/Pulsar.cpp:271 plugins/Exoplanets/src/Exoplanet.cpp:292
 msgctxt "distance"
 msgid "ly"
 msgstr "ly"
@@ -1523,7 +1523,7 @@ msgid "Distance"
 msgstr "Vzdialenosť"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
-#: src/core/modules/Nebula.cpp:329 plugins/Pulsars/src/Pulsar.cpp:254
+#: src/core/modules/Nebula.cpp:329 plugins/Pulsars/src/Pulsar.cpp:268
 msgctxt "distance"
 msgid "kpc"
 msgstr "kpc"
@@ -1550,7 +1550,7 @@ msgstr "Paralaxa"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
 #: src/core/modules/Nebula.cpp:390 src/core/modules/StarWrapper.cpp:347
-#: plugins/Pulsars/src/Pulsar.cpp:245
+#: plugins/Pulsars/src/Pulsar.cpp:259
 msgctxt "parallax"
 msgid "mas"
 msgstr "mas"
@@ -1559,270 +1559,270 @@ msgstr "mas"
 msgid "Morphological description"
 msgstr "Morfologický popis"
 
-#: src/core/modules/Nebula.cpp:1116
+#: src/core/modules/Nebula.cpp:1128
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
 msgstr "vysoké zhustenie hviezd smerom k stredu"
 
-#: src/core/modules/Nebula.cpp:1119
+#: src/core/modules/Nebula.cpp:1131
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "dense central concentration of stars"
 msgstr "hustý stred"
 
-#: src/core/modules/Nebula.cpp:1122
+#: src/core/modules/Nebula.cpp:1134
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "strong inner core of stars"
 msgstr "výrazné hviezdne jadro"
 
-#: src/core/modules/Nebula.cpp:1125
+#: src/core/modules/Nebula.cpp:1137
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
 msgstr "stredné až bohaté zhustenie hviezd"
 
-#: src/core/modules/Nebula.cpp:1130
+#: src/core/modules/Nebula.cpp:1142
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
 msgstr "stredné zhustenie hviezd"
 
-#: src/core/modules/Nebula.cpp:1133
+#: src/core/modules/Nebula.cpp:1145
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "rather loose concentration of stars towards the center"
 msgstr "vcelku voľné zhustenie hviezd smerom k stredu"
 
-#: src/core/modules/Nebula.cpp:1136
+#: src/core/modules/Nebula.cpp:1148
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
 msgstr "voľné zhustenie hviezd smerom k stredu"
 
-#: src/core/modules/Nebula.cpp:1139
+#: src/core/modules/Nebula.cpp:1151
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "loose concentration of stars"
 msgstr "voľné zhustenie hviezd"
 
-#: src/core/modules/Nebula.cpp:1142
+#: src/core/modules/Nebula.cpp:1154
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
 msgstr "veľmi voľné zhustenie hviezd smerom k stredu"
 
-#: src/core/modules/Nebula.cpp:1145
+#: src/core/modules/Nebula.cpp:1157
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
 msgstr "takmer bez zhustenia smerom k stredu"
 
-#: src/core/modules/Nebula.cpp:1148
+#: src/core/modules/Nebula.cpp:1160
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "undocumented concentration class"
 msgstr "neuvedená trieda koncentrácie"
 
-#: src/core/modules/Nebula.cpp:1168
+#: src/core/modules/Nebula.cpp:1180
 msgctxt "Trumpler's Concentration Class"
 msgid "strong central concentration of stars"
 msgstr "intenzívne stredové zhustenie hviezd"
 
-#: src/core/modules/Nebula.cpp:1171
+#: src/core/modules/Nebula.cpp:1183
 msgctxt "Trumpler's Concentration Class"
 msgid "little central concentration of stars"
 msgstr "slabé stredové zhustenie hviezd"
 
-#: src/core/modules/Nebula.cpp:1174
+#: src/core/modules/Nebula.cpp:1186
 msgctxt "Trumpler's Concentration Class"
 msgid "no noticeable concentration of stars"
 msgstr "nepostrehnuteľné zhustenie hviezd"
 
-#: src/core/modules/Nebula.cpp:1177
+#: src/core/modules/Nebula.cpp:1189
 msgctxt "Trumpler's Concentration Class"
 msgid "a star field condensation"
 msgstr "kondenzácia hviezdneho poľa"
 
-#: src/core/modules/Nebula.cpp:1180
+#: src/core/modules/Nebula.cpp:1192
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented concentration class"
 msgstr "neuvedená trieda koncentrácie"
 
-#: src/core/modules/Nebula.cpp:1186
+#: src/core/modules/Nebula.cpp:1198
 msgctxt "Trumpler's Brightness Class"
 msgid "small brightness range of cluster members"
 msgstr "malý rozsah jasností členov hviezdokopy"
 
-#: src/core/modules/Nebula.cpp:1189
+#: src/core/modules/Nebula.cpp:1201
 msgctxt "Trumpler's Brightness Class"
 msgid "medium brightness range of cluster members"
 msgstr "stredný rozsah jasností členov hviezdokopy"
 
-#: src/core/modules/Nebula.cpp:1192
+#: src/core/modules/Nebula.cpp:1204
 msgctxt "Trumpler's Brightness Class"
 msgid "large brightness range of cluster members"
 msgstr "veľký rozsah jasností členov hviezdokopy"
 
-#: src/core/modules/Nebula.cpp:1195
+#: src/core/modules/Nebula.cpp:1207
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
 msgstr "neuvedený rozsah jasností členov hviezdokopy"
 
-#: src/core/modules/Nebula.cpp:1201
+#: src/core/modules/Nebula.cpp:1213
 msgctxt "Trumpler's Number of Members Class"
 msgid "poor cluster with less than 50 stars"
 msgstr "chudobná hviezdokopa s menej než 50 hviezdami"
 
-#: src/core/modules/Nebula.cpp:1204
+#: src/core/modules/Nebula.cpp:1216
 msgctxt "Trumpler's Number of Members Class"
 msgid "moderately rich cluster with 50-100 stars"
 msgstr "mierne bohatá hviezdokopa s 50 až 100 hviezdami"
 
-#: src/core/modules/Nebula.cpp:1207
+#: src/core/modules/Nebula.cpp:1219
 msgctxt "Trumpler's Number of Members Class"
 msgid "rich cluster with more than 100 stars"
 msgstr "bohatá hviezdokopa s viac než 100 hviezdami"
 
-#: src/core/modules/Nebula.cpp:1210
+#: src/core/modules/Nebula.cpp:1222
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
 msgstr "trieda s neuvedeným počtom členov"
 
-#: src/core/modules/Nebula.cpp:1214
+#: src/core/modules/Nebula.cpp:1226
 msgctxt "nebulosity factor of open clusters"
 msgid "the cluster lies within nebulosity"
 msgstr "hviezdokopa sa nachádza v hmlovine"
 
-#: src/core/modules/Nebula.cpp:1235
+#: src/core/modules/Nebula.cpp:1247
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
 msgstr "veľmi jasná"
 
-#: src/core/modules/Nebula.cpp:1238
+#: src/core/modules/Nebula.cpp:1250
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
 msgstr "jasná"
 
-#: src/core/modules/Nebula.cpp:1241
+#: src/core/modules/Nebula.cpp:1253
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
 msgstr "stredne jasná"
 
-#: src/core/modules/Nebula.cpp:1244
+#: src/core/modules/Nebula.cpp:1256
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
 msgstr "slabá"
 
-#: src/core/modules/Nebula.cpp:1247
+#: src/core/modules/Nebula.cpp:1259
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
 msgstr "veľmi slabá"
 
-#: src/core/modules/Nebula.cpp:1250
+#: src/core/modules/Nebula.cpp:1262
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
 msgstr "neurčitá jasnosť"
 
-#: src/core/modules/Nebula.cpp:1253
+#: src/core/modules/Nebula.cpp:1265
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
 msgstr "neuvedená jasnosť reflexnej hmloviny"
 
-#: src/core/modules/Nebula.cpp:1259
+#: src/core/modules/Nebula.cpp:1271
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
 msgstr "osvetľujúca hviezda je zahalená v hmlovine"
 
-#: src/core/modules/Nebula.cpp:1262
+#: src/core/modules/Nebula.cpp:1274
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
 msgstr "hviezda sa nachádza mimo osvetlovanej hmloviny"
 
-#: src/core/modules/Nebula.cpp:1265
+#: src/core/modules/Nebula.cpp:1277
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
 msgstr "hviezda sa nachádza na kraji osvetlenej hmloviny"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1270
+#: src/core/modules/Nebula.cpp:1282
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
 msgstr "hviezda sa nachádza mimo zvláštnej hmloviny"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1276
+#: src/core/modules/Nebula.cpp:1288
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
 msgstr "osvetlená zvláštna hmlovina"
 
-#: src/core/modules/Nebula.cpp:1280
+#: src/core/modules/Nebula.cpp:1292
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
 msgstr "neuvedený druh reflexných hmlovín"
 
-#: src/core/modules/Nebula.cpp:1300
+#: src/core/modules/Nebula.cpp:1312
 msgid "circular form"
 msgstr "okrúhly tvar"
 
-#: src/core/modules/Nebula.cpp:1301
+#: src/core/modules/Nebula.cpp:1313
 msgid "elliptical form"
 msgstr "oválny tvar"
 
-#: src/core/modules/Nebula.cpp:1302
+#: src/core/modules/Nebula.cpp:1314
 msgid "irregular form"
 msgstr "nepravidelný tvar"
 
-#: src/core/modules/Nebula.cpp:1304
+#: src/core/modules/Nebula.cpp:1316
 msgid "amorphous structure"
 msgstr "amorfná štruktúra"
 
-#: src/core/modules/Nebula.cpp:1305
+#: src/core/modules/Nebula.cpp:1317
 msgid "conventional structure"
 msgstr "obvyklá štruktúra"
 
-#: src/core/modules/Nebula.cpp:1306
+#: src/core/modules/Nebula.cpp:1318
 msgid "filamentary structure"
 msgstr "vláknitá štruktúra"
 
-#: src/core/modules/Nebula.cpp:1308
+#: src/core/modules/Nebula.cpp:1320
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr "najslabšia"
 
-#: src/core/modules/Nebula.cpp:1309
+#: src/core/modules/Nebula.cpp:1321
 msgctxt "HII region brightness"
 msgid "moderate brightness"
 msgstr "stredne jasná"
 
-#: src/core/modules/Nebula.cpp:1310
+#: src/core/modules/Nebula.cpp:1322
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr "najjasnejšia"
 
-#: src/core/modules/Nebula.cpp:1313
+#: src/core/modules/Nebula.cpp:1325
 msgid "undocumented form"
 msgstr "neuvedený tvar"
 
-#: src/core/modules/Nebula.cpp:1314
+#: src/core/modules/Nebula.cpp:1326
 msgid "undocumented structure"
 msgstr "neuvedená štruktúra"
 
-#: src/core/modules/Nebula.cpp:1315
+#: src/core/modules/Nebula.cpp:1327
 msgid "undocumented brightness"
 msgstr "neuvedená jasnosť"
 
-#: src/core/modules/Nebula.cpp:1327
+#: src/core/modules/Nebula.cpp:1339
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure"
 msgstr "zvyšok vykazuje obálkovú rádiovú štruktúru"
 
-#: src/core/modules/Nebula.cpp:1330
+#: src/core/modules/Nebula.cpp:1342
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a filled center ('plerion') radio structure"
 msgstr "zvyšok vykazuje rádiovú štruktúru s vyplneným stredom (plerión)"
 
-#: src/core/modules/Nebula.cpp:1333
+#: src/core/modules/Nebula.cpp:1345
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a composite (or combination) radio structure"
 msgstr "zvyšok vykazuje kompozitnú (alebo kombinovanú) rádiovú štruktúru"
 
-#: src/core/modules/Nebula.cpp:1336
+#: src/core/modules/Nebula.cpp:1348
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure with some uncertainty"
 msgstr "zvyšok vykazuje neistú obálkovú rádiovú štruktúru"
 
-#: src/core/modules/Nebula.cpp:1339
+#: src/core/modules/Nebula.cpp:1351
 msgctxt "supernova remnant structure classification"
 msgid ""
 "remnant shows a filled center ('plerion') radio structure with some "
@@ -1830,7 +1830,7 @@ msgid ""
 msgstr ""
 "zvyšok vykazuje neistú rádiovú štruktúru s vyplneným stredom (plerión)"
 
-#: src/core/modules/Nebula.cpp:1342
+#: src/core/modules/Nebula.cpp:1354
 msgctxt "supernova remnant structure classification"
 msgid ""
 "remnant shows a composite (or combination) radio structure with some "
@@ -1838,158 +1838,158 @@ msgid ""
 msgstr ""
 "zvyšok vykazuje neistú kompozitnú (alebo kombinovanú) rádiovú štruktúru"
 
-#: src/core/modules/Nebula.cpp:1350
+#: src/core/modules/Nebula.cpp:1362
 msgid "undocumented type"
 msgstr "neuvedený druh"
 
-#: src/core/modules/Nebula.cpp:1356
+#: src/core/modules/Nebula.cpp:1368
 msgid "galaxy"
 msgstr "galaxia"
 
-#: src/core/modules/Nebula.cpp:1357
+#: src/core/modules/Nebula.cpp:1369
 msgid "active galaxy"
 msgstr "aktívna galaxia"
 
-#: src/core/modules/Nebula.cpp:1358
+#: src/core/modules/Nebula.cpp:1370
 msgid "radio galaxy"
 msgstr "rádiová galaxia"
 
-#: src/core/modules/Nebula.cpp:1359
+#: src/core/modules/Nebula.cpp:1371
 msgid "interacting galaxy"
 msgstr "interagujúca galaxia"
 
-#: src/core/modules/Nebula.cpp:1360 plugins/Quasars/src/Quasar.cpp:127
+#: src/core/modules/Nebula.cpp:1372 plugins/Quasars/src/Quasar.cpp:127
 msgid "quasar"
 msgstr "kvazar"
 
-#: src/core/modules/Nebula.cpp:1361
+#: src/core/modules/Nebula.cpp:1373
 msgid "star cluster"
 msgstr "hviezdokopa"
 
-#: src/core/modules/Nebula.cpp:1362
+#: src/core/modules/Nebula.cpp:1374
 msgid "open star cluster"
 msgstr "otvorená hviezdokopa"
 
-#: src/core/modules/Nebula.cpp:1363
+#: src/core/modules/Nebula.cpp:1375
 msgid "globular star cluster"
 msgstr "guľová hviezdokopa"
 
-#: src/core/modules/Nebula.cpp:1364
+#: src/core/modules/Nebula.cpp:1376
 msgid "stellar association"
 msgstr "hviezdna asociácia"
 
-#: src/core/modules/Nebula.cpp:1365
+#: src/core/modules/Nebula.cpp:1377
 msgid "star cloud"
 msgstr "oblak hviezd"
 
-#: src/core/modules/Nebula.cpp:1366
+#: src/core/modules/Nebula.cpp:1378
 msgid "nebula"
 msgstr "hmlovina"
 
-#: src/core/modules/Nebula.cpp:1367
+#: src/core/modules/Nebula.cpp:1379
 msgid "planetary nebula"
 msgstr "planetárna hmlovina"
 
-#: src/core/modules/Nebula.cpp:1368
+#: src/core/modules/Nebula.cpp:1380
 msgid "dark nebula"
 msgstr "tmavá hmlovina"
 
-#: src/core/modules/Nebula.cpp:1369
+#: src/core/modules/Nebula.cpp:1381
 msgid "reflection nebula"
 msgstr "reflexná hmlovina"
 
-#: src/core/modules/Nebula.cpp:1370
+#: src/core/modules/Nebula.cpp:1382
 msgid "bipolar nebula"
 msgstr "bipolárna hmlovina"
 
-#: src/core/modules/Nebula.cpp:1371
+#: src/core/modules/Nebula.cpp:1383
 msgid "emission nebula"
 msgstr "emisná hmlovina"
 
-#: src/core/modules/Nebula.cpp:1372
+#: src/core/modules/Nebula.cpp:1384
 msgid "cluster associated with nebulosity"
 msgstr "hviezdokopa spojená s hmlovinou"
 
-#: src/core/modules/Nebula.cpp:1373
+#: src/core/modules/Nebula.cpp:1385
 msgid "HII region"
 msgstr "oblasť H II"
 
-#: src/core/modules/Nebula.cpp:1374
+#: src/core/modules/Nebula.cpp:1386
 msgid "supernova remnant"
 msgstr "zvyšok supernovy"
 
-#: src/core/modules/Nebula.cpp:1375
+#: src/core/modules/Nebula.cpp:1387
 msgid "interstellar matter"
 msgstr "medzihviezdna hmota"
 
-#: src/core/modules/Nebula.cpp:1376
+#: src/core/modules/Nebula.cpp:1388
 msgid "emission object"
 msgstr "emisný objekt"
 
-#: src/core/modules/Nebula.cpp:1377
+#: src/core/modules/Nebula.cpp:1389
 msgid "BL Lac object"
 msgstr "objekt typu BL Lac"
 
-#: src/core/modules/Nebula.cpp:1378
+#: src/core/modules/Nebula.cpp:1390
 msgid "blazar"
 msgstr "blazar"
 
-#: src/core/modules/Nebula.cpp:1379
+#: src/core/modules/Nebula.cpp:1391
 msgid "molecular cloud"
 msgstr "molekulárny oblak"
 
-#: src/core/modules/Nebula.cpp:1380
+#: src/core/modules/Nebula.cpp:1392
 msgid "young stellar object"
 msgstr "mladý hviezdny objekt"
 
-#: src/core/modules/Nebula.cpp:1381
+#: src/core/modules/Nebula.cpp:1393
 msgid "possible quasar"
 msgstr "možný kvazar"
 
-#: src/core/modules/Nebula.cpp:1382
+#: src/core/modules/Nebula.cpp:1394
 msgid "possible planetary nebula"
 msgstr "možná planetárna hmlovina"
 
-#: src/core/modules/Nebula.cpp:1383
+#: src/core/modules/Nebula.cpp:1395
 msgid "protoplanetary nebula"
 msgstr "protoplanetárna hmlovina"
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/Nebula.cpp:1384 src/core/modules/StarWrapper.cpp:50
+#: src/core/modules/Nebula.cpp:1396 src/core/modules/StarWrapper.cpp:50
 #: src/core/modules/StarWrapper.cpp:260 src/gui/AstroCalcDialog.cpp:1237
 #: src/translations.h:35
 msgid "star"
 msgstr "hviezda"
 
-#: src/core/modules/Nebula.cpp:1385
+#: src/core/modules/Nebula.cpp:1397
 msgid "symbiotic star"
 msgstr "symbiotická hviezda"
 
-#: src/core/modules/Nebula.cpp:1386
+#: src/core/modules/Nebula.cpp:1398
 msgid "emission-line star"
 msgstr "hviezda s emisnými čiarami"
 
-#: src/core/modules/Nebula.cpp:1387
+#: src/core/modules/Nebula.cpp:1399
 msgid "supernova candidate"
 msgstr "kandidát na supernovu"
 
-#: src/core/modules/Nebula.cpp:1388
+#: src/core/modules/Nebula.cpp:1400
 msgid "supernova remnant candidate"
 msgstr "kandidát na zvyšok supernovy"
 
-#: src/core/modules/Nebula.cpp:1389
+#: src/core/modules/Nebula.cpp:1401
 msgid "cluster of galaxies"
 msgstr "kopa galaxií"
 
-#: src/core/modules/Nebula.cpp:1390
+#: src/core/modules/Nebula.cpp:1402
 msgid "part of a galaxy"
 msgstr "časť galaxie"
 
-#: src/core/modules/Nebula.cpp:1391
+#: src/core/modules/Nebula.cpp:1403
 msgid "region of the sky"
 msgstr "oblasť oblohy"
 
-#: src/core/modules/Nebula.cpp:1392
+#: src/core/modules/Nebula.cpp:1404
 msgid "object of unknown nature"
 msgstr "objekt neznámej povahy"
 
@@ -2056,6 +2056,7 @@ msgstr "Hodinový pohyb"
 
 #: src/core/modules/Planet.cpp:537 src/core/modules/Planet.cpp:1062
 #: src/core/modules/Planet.cpp:1071 src/core/modules/StarWrapper.cpp:334
+#: plugins/Pulsars/src/Pulsar.cpp:202
 msgctxt "into the direction of"
 msgid "towards"
 msgstr "vpred"
@@ -2406,16 +2407,17 @@ msgstr "Rozsah jasností"
 msgid "Photometric system"
 msgstr "Fotometrický systém"
 
-#: src/core/modules/StarWrapper.cpp:332
+#: src/core/modules/StarWrapper.cpp:332 plugins/Pulsars/src/Pulsar.cpp:200
 msgid "Proper motion"
 msgstr "Vlastný pohyb"
 
 #: src/core/modules/StarWrapper.cpp:333 src/core/modules/StarWrapper.cpp:335
+#: plugins/Pulsars/src/Pulsar.cpp:201 plugins/Pulsars/src/Pulsar.cpp:203
 msgctxt "milliarc second per year"
 msgid "mas/yr"
 msgstr "mas/r"
 
-#: src/core/modules/StarWrapper.cpp:335
+#: src/core/modules/StarWrapper.cpp:335 plugins/Pulsars/src/Pulsar.cpp:203
 msgid "Proper motions by axes"
 msgstr "Vlastné pohyby v osiach"
 
@@ -4009,7 +4011,7 @@ msgstr "Kontakt"
 
 #: src/gui/ConfigurationDialog.cpp:1224 src/scripting/StelScriptMgr.cpp:467
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:98
-#: plugins/Oculars/src/gui/OcularDialog.cpp:571
+#: plugins/Oculars/src/gui/OcularDialog.cpp:583
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:676
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:264
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:238
@@ -4032,7 +4034,7 @@ msgstr "Verzia"
 
 #: src/gui/ConfigurationDialog.cpp:1225 src/scripting/StelScriptMgr.cpp:462
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
-#: plugins/Oculars/src/gui/OcularDialog.cpp:572
+#: plugins/Oculars/src/gui/OcularDialog.cpp:584
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:677
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:239
@@ -4591,7 +4593,7 @@ msgstr "Tester: %1"
 
 #: src/gui/HelpDialog.cpp:462
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
-#: plugins/Oculars/src/gui/OcularDialog.cpp:575
+#: plugins/Oculars/src/gui/OcularDialog.cpp:587
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:680
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:271
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:241
@@ -6327,7 +6329,7 @@ msgstr "Čo dnes vidno"
 #: src/gui/AstroCalcDialog.cpp:6189
 msgctxt "mean motion"
 msgid "day"
-msgstr ""
+msgstr "deň"
 
 #: src/gui/AstroCalcDialog.cpp:6241 src/gui/AstroCalcDialog.cpp:6403
 msgid "Days from today"
@@ -8085,9 +8087,8 @@ msgstr ""
 
 #: src/translations.h:702
 msgid ""
-"Screensaver of various happenings in the Solar System. 300 events in all!"
+"Screensaver of various happenings in the Solar System. 313 events in all!"
 msgstr ""
-"Šetrič obrazovky s rôznymi úkazmi v slnečnej sústave. Celkovo 300 úkazov!"
 
 #: src/translations.h:703
 msgid "A tour of the western constellations."
@@ -11499,7 +11500,7 @@ msgstr "Všetky dostupné"
 msgid "Display no information"
 msgstr "Nezobraziť žiadne informácie"
 
-#: src/ui_configurationDialog.h:1676 plugins/Oculars/src/Oculars.cpp:2428
+#: src/ui_configurationDialog.h:1676 plugins/Oculars/src/Oculars.cpp:2434
 #: plugins/Observability/src/Observability.cpp:179
 msgid "None"
 msgstr "Žiadne"
@@ -12698,11 +12699,11 @@ msgstr "Uhlová vzdialenosť:"
 
 #: src/ui_astroCalcDialog.h:1882
 msgid "Mean motion of second celestial body:"
-msgstr ""
+msgstr "Stredný pohyb druhého nebeského telesa:"
 
 #: src/ui_astroCalcDialog.h:1883
 msgid "Mean motion of first celestial body:"
-msgstr ""
+msgstr "Stredný pohyb prvého nebeského telesa:"
 
 #: src/ui_astroCalcDialog.h:1884
 msgid "Orbital velocity of second celestial body:"
@@ -12710,7 +12711,7 @@ msgstr "Obežná rýchlosť druhého nebeského telesa:"
 
 #: src/ui_astroCalcDialog.h:1885
 msgid "Orbital periods ratio:"
-msgstr ""
+msgstr "Pomer obežných dôb:"
 
 #: src/ui_astroCalcDialog.h:1886
 msgid "Equatorial diameters ratio:"
@@ -13269,7 +13270,7 @@ msgstr ""
 "Počítali sme. A želali sme si byť na Havajských ostrovoch."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:110
-#: plugins/Oculars/src/gui/OcularDialog.cpp:627
+#: plugins/Oculars/src/gui/OcularDialog.cpp:639
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:734
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:247
@@ -13290,7 +13291,7 @@ msgid "Links"
 msgstr "Linky"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:111
-#: plugins/Oculars/src/gui/OcularDialog.cpp:630
+#: plugins/Oculars/src/gui/OcularDialog.cpp:642
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:735
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:248
@@ -13316,7 +13317,7 @@ msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:114
-#: plugins/Oculars/src/gui/OcularDialog.cpp:636
+#: plugins/Oculars/src/gui/OcularDialog.cpp:648
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:738
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:288
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:251
@@ -13338,7 +13339,7 @@ msgstr "Odpovede na prípadné otázky môžete získať {tu}."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:116
-#: plugins/Oculars/src/gui/OcularDialog.cpp:642
+#: plugins/Oculars/src/gui/OcularDialog.cpp:654
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:740
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:290
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:253
@@ -13360,7 +13361,7 @@ msgstr "Nahlásenia chýb a požiadavky na nové funkcie {tu}."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:118
-#: plugins/Oculars/src/gui/OcularDialog.cpp:648
+#: plugins/Oculars/src/gui/OcularDialog.cpp:660
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:742
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:255
@@ -13461,13 +13462,13 @@ msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "O module"
 
-#: plugins/Oculars/src/Oculars.cpp:79 plugins/Oculars/src/Oculars.cpp:1418
+#: plugins/Oculars/src/Oculars.cpp:80 plugins/Oculars/src/Oculars.cpp:1412
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:182
 #: plugins/Oculars/src/ui_ocularDialog.h:1429
 msgid "Oculars"
 msgstr "Okuláre"
 
-#: plugins/Oculars/src/Oculars.cpp:82
+#: plugins/Oculars/src/Oculars.cpp:83
 msgid ""
 "Shows the sky as if looking through a telescope eyepiece. (Only "
 "magnification and field of view are simulated.) It can also show a sensor "
@@ -13477,270 +13478,270 @@ msgstr ""
 "(Simuluje sa len zväčšenie a zorné pole.) Dokáže zobraziť aj obrazový snímač"
 " a hľadáčik Telrad."
 
-#: plugins/Oculars/src/Oculars.cpp:948
+#: plugins/Oculars/src/Oculars.cpp:942
 msgid "Please select an object before switching to ocular view."
 msgstr "Pred zapnutím okulárového zobrazenia vyberte objekt."
 
-#: plugins/Oculars/src/Oculars.cpp:1044
+#: plugins/Oculars/src/Oculars.cpp:1038
 msgid "&Previous ocular"
 msgstr "&Predchádzajúci okulár"
 
-#: plugins/Oculars/src/Oculars.cpp:1045
+#: plugins/Oculars/src/Oculars.cpp:1039
 msgid "&Next ocular"
 msgstr "&Nasledujúci okulár"
 
-#: plugins/Oculars/src/Oculars.cpp:1046
+#: plugins/Oculars/src/Oculars.cpp:1040
 msgid "Select &ocular"
 msgstr "Vybrať &okulár"
 
-#: plugins/Oculars/src/Oculars.cpp:1081
+#: plugins/Oculars/src/Oculars.cpp:1076
 msgid "Toggle &crosshair"
 msgstr "Zapnúť zameriavací &kríž"
 
-#: plugins/Oculars/src/Oculars.cpp:1089
+#: plugins/Oculars/src/Oculars.cpp:1084
 msgid "Configure &Oculars"
 msgstr "Nastaviť &okuláre"
 
-#: plugins/Oculars/src/Oculars.cpp:1097
+#: plugins/Oculars/src/Oculars.cpp:1092
 msgid "Toggle &CCD"
 msgstr "Prepnúť &CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1104
+#: plugins/Oculars/src/Oculars.cpp:1099
 msgid "Toggle &Telrad"
 msgstr "Prepnúť hľadáčik &Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1112
+#: plugins/Oculars/src/Oculars.cpp:1107
 msgid "&Previous CCD"
 msgstr "&Predchádzajúce CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1113
+#: plugins/Oculars/src/Oculars.cpp:1108
 msgid "&Next CCD"
 msgstr "&Nasledujúce CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1114
+#: plugins/Oculars/src/Oculars.cpp:1109
 msgid "&Select CCD"
 msgstr "&Vybrať CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1130
+#: plugins/Oculars/src/Oculars.cpp:1125
 msgid "&Rotate CCD"
 msgstr "&Otočiť CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1142
+#: plugins/Oculars/src/Oculars.cpp:1137
 msgid "&Reset rotation"
 msgstr "&Resetovať otočenie"
 
-#: plugins/Oculars/src/Oculars.cpp:1292
-#: plugins/Oculars/src/gui/OcularDialog.cpp:106
-#: plugins/Oculars/src/gui/OcularDialog.cpp:121
-#: plugins/Oculars/src/gui/OcularDialog.cpp:136
+#: plugins/Oculars/src/Oculars.cpp:1290
+#: plugins/Oculars/src/gui/OcularDialog.cpp:107
+#: plugins/Oculars/src/gui/OcularDialog.cpp:122
+#: plugins/Oculars/src/gui/OcularDialog.cpp:137
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:823
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:830
 msgid "Warning!"
 msgstr "Pozor!"
 
-#: plugins/Oculars/src/Oculars.cpp:1293
+#: plugins/Oculars/src/Oculars.cpp:1291
 msgid ""
 "Unable to display a sensor boundary: No sensors or telescopes are defined."
 msgstr ""
 "Nemôžem zobraziť hranicu senzora: Nie je zadaný senzor alebo ďalekohľad."
 
-#: plugins/Oculars/src/Oculars.cpp:1419
+#: plugins/Oculars/src/Oculars.cpp:1413
 #: plugins/Oculars/src/ui_ocularDialog.h:1464
 msgid "Ocular view"
 msgstr "Okulárové zobrazenie"
 
-#: plugins/Oculars/src/Oculars.cpp:1421
+#: plugins/Oculars/src/Oculars.cpp:1415
 msgid "Oculars popup menu"
 msgstr "Ponuka okulárov"
 
-#: plugins/Oculars/src/Oculars.cpp:1423
+#: plugins/Oculars/src/Oculars.cpp:1417
 msgid "Show crosshairs"
 msgstr "Zobraziť zameriavací kríž"
 
-#: plugins/Oculars/src/Oculars.cpp:1424
+#: plugins/Oculars/src/Oculars.cpp:1418
 msgid "Image sensor frame"
 msgstr "Rám obrazového snímača"
 
-#: plugins/Oculars/src/Oculars.cpp:1425
+#: plugins/Oculars/src/Oculars.cpp:1419
 msgid "Telrad sight"
 msgstr "Hľadáčik Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1428
+#: plugins/Oculars/src/Oculars.cpp:1422
 msgid "Toggle Oculars configuration window"
 msgstr "Zobraziť okno nastavení okulárov"
 
-#: plugins/Oculars/src/Oculars.cpp:1434
+#: plugins/Oculars/src/Oculars.cpp:1428
 msgid "Toggle Oculars button bar"
 msgstr "Zobraziť panel tlačidiel okulárov"
 
-#: plugins/Oculars/src/Oculars.cpp:1437
+#: plugins/Oculars/src/Oculars.cpp:1431
 msgid "Select next telescope"
 msgstr "Vybrať nasledujúci ďalekohľad"
 
-#: plugins/Oculars/src/Oculars.cpp:1440
+#: plugins/Oculars/src/Oculars.cpp:1434
 msgid "Select previous telescope"
 msgstr "Vybrať predchádzajúci ďalekohľad"
 
-#: plugins/Oculars/src/Oculars.cpp:1442
+#: plugins/Oculars/src/Oculars.cpp:1436
 msgid "Select next eyepiece"
 msgstr "Vybrať nasledujúci okulár"
 
-#: plugins/Oculars/src/Oculars.cpp:1444
+#: plugins/Oculars/src/Oculars.cpp:1438
 msgid "Select previous eyepiece"
 msgstr "Vybrať predchádzajúci okulár"
 
-#: plugins/Oculars/src/Oculars.cpp:1447
+#: plugins/Oculars/src/Oculars.cpp:1441
 msgid "Rotate reticle pattern of the eyepiece clockwise"
 msgstr "Otočiť mriežku okuláru v smere hodinových ručičiek."
 
-#: plugins/Oculars/src/Oculars.cpp:1452
+#: plugins/Oculars/src/Oculars.cpp:1446
 msgid "Rotate reticle pattern of the eyepiece counterclockwise"
 msgstr "Otočiť mriežku okuláru v protismere hodinových ručičiek."
 
-#: plugins/Oculars/src/Oculars.cpp:1455
+#: plugins/Oculars/src/Oculars.cpp:1449
 msgid "Toggle sensor crop overlay"
 msgstr "Prepnúť orezanie prekrytia senzora"
 
-#: plugins/Oculars/src/Oculars.cpp:1456
+#: plugins/Oculars/src/Oculars.cpp:1450
 msgid "Toggle sensor pixel grid"
 msgstr "Prepnúť mriežku bodov senzora"
 
-#: plugins/Oculars/src/Oculars.cpp:1457
+#: plugins/Oculars/src/Oculars.cpp:1451
 msgid "Toggle focuser overlay"
 msgstr "Prepnúť vrstvu zaostrovania"
 
-#: plugins/Oculars/src/Oculars.cpp:1692
+#: plugins/Oculars/src/Oculars.cpp:1687
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr "RA/Dec (J2000,0) kríža"
 
 #. TRANSLATORS: Unit of measure for scale - arc-seconds per pixel
-#: plugins/Oculars/src/Oculars.cpp:1706
+#: plugins/Oculars/src/Oculars.cpp:1701
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:760
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:930
 msgid "\"/px"
 msgstr "\"/px"
 
-#: plugins/Oculars/src/Oculars.cpp:1728
+#: plugins/Oculars/src/Oculars.cpp:1723
 msgctxt "pixel"
 msgid "px"
 msgstr "px"
 
-#: plugins/Oculars/src/Oculars.cpp:1997
+#: plugins/Oculars/src/Oculars.cpp:2003
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:567
 msgid "Ocular"
 msgstr "Okulár"
 
-#: plugins/Oculars/src/Oculars.cpp:1999
+#: plugins/Oculars/src/Oculars.cpp:2005
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:569
 msgid "Binocular"
 msgstr "Binokulár"
 
-#: plugins/Oculars/src/Oculars.cpp:2016
+#: plugins/Oculars/src/Oculars.cpp:2022
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:607
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "OV okulára: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:2023
+#: plugins/Oculars/src/Oculars.cpp:2029
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:616
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "zZP okulára: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2033
+#: plugins/Oculars/src/Oculars.cpp:2039
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:643
 #, qt-format
 msgid "Lens #%1"
 msgstr "Šošovka č.%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2035
+#: plugins/Oculars/src/Oculars.cpp:2041
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:645
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Šošovka č.%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2038
+#: plugins/Oculars/src/Oculars.cpp:2044
 msgid "Lens: none"
 msgstr "Šošovka: žiadna"
 
-#: plugins/Oculars/src/Oculars.cpp:2052 plugins/Oculars/src/Oculars.cpp:2107
+#: plugins/Oculars/src/Oculars.cpp:2058 plugins/Oculars/src/Oculars.cpp:2113
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:879
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Ďalekohľad #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2061
+#: plugins/Oculars/src/Oculars.cpp:2067
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:979
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Zväčšenie: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2067
+#: plugins/Oculars/src/Oculars.cpp:2073
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:990
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "Výstupná pupila: %1 mm"
 
-#: plugins/Oculars/src/Oculars.cpp:2074
+#: plugins/Oculars/src/Oculars.cpp:2080
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:998
 #, qt-format
 msgid "FOV: %1"
 msgstr "Zorné pole: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2095
+#: plugins/Oculars/src/Oculars.cpp:2101
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:747
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:921
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Rozmery: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2097
+#: plugins/Oculars/src/Oculars.cpp:2103
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:754
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:926
 msgid "Binning"
 msgstr "Binovanie"
 
-#: plugins/Oculars/src/Oculars.cpp:2100
+#: plugins/Oculars/src/Oculars.cpp:2106
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:709
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Snímač č.%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2102
+#: plugins/Oculars/src/Oculars.cpp:2108
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:711
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Snímač č.%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2109
+#: plugins/Oculars/src/Oculars.cpp:2115
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:881
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Ďalekohľad č.%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2424
+#: plugins/Oculars/src/Oculars.cpp:2430
 msgid "&Lens"
 msgstr "Š&ošovka"
 
-#: plugins/Oculars/src/Oculars.cpp:2425
+#: plugins/Oculars/src/Oculars.cpp:2431
 msgid "&Previous lens"
 msgstr "&Predchádzajúca šošovka"
 
-#: plugins/Oculars/src/Oculars.cpp:2426
+#: plugins/Oculars/src/Oculars.cpp:2432
 msgid "&Next lens"
 msgstr "&Nasledujúca šošovka"
 
-#: plugins/Oculars/src/Oculars.cpp:2450
+#: plugins/Oculars/src/Oculars.cpp:2456
 msgid "&Telescope"
 msgstr "Ďalekohľa&d"
 
-#: plugins/Oculars/src/Oculars.cpp:2451
+#: plugins/Oculars/src/Oculars.cpp:2457
 msgid "&Previous telescope"
 msgstr "&Predchádzajúci ďalekohľad"
 
-#: plugins/Oculars/src/Oculars.cpp:2452
+#: plugins/Oculars/src/Oculars.cpp:2458
 msgid "&Next telescope"
 msgstr "&Nasledujúci ďalekohľad"
 
@@ -13985,70 +13986,70 @@ msgstr "Vizuálne rozlíšenie"
 msgid "Visual resolution is based on eye properties and magnification"
 msgstr "Vizuálne rozlíšenie závisí od vlastností oka a zväčšenia"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:106
+#: plugins/Oculars/src/gui/OcularDialog.cpp:107
 msgid "Cannot delete the last sensor."
 msgstr "Nemožno zmazať posledný senzor."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:121
+#: plugins/Oculars/src/gui/OcularDialog.cpp:122
 msgid "Cannot delete the last ocular."
 msgstr "Nemožno zmazať posledný okulár."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:136
+#: plugins/Oculars/src/gui/OcularDialog.cpp:137
 msgid "Cannot delete the last telescope."
 msgstr "Nemožno zmazať posledný ďalekohľad."
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
-#: plugins/Oculars/src/gui/OcularDialog.cpp:550
+#: plugins/Oculars/src/gui/OcularDialog.cpp:562
 msgid "tFOV:"
 msgstr "sZP:"
 
 #. TRANSLATORS: Magnification factor for binoculars
-#: plugins/Oculars/src/gui/OcularDialog.cpp:552
+#: plugins/Oculars/src/gui/OcularDialog.cpp:564
 msgid "Magnification factor:"
 msgstr "Zväčšenie:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:553
+#: plugins/Oculars/src/gui/OcularDialog.cpp:565
 #: plugins/Oculars/src/ui_ocularDialog.h:1581
 msgid "Diameter:"
 msgstr "Priemer:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:555
+#: plugins/Oculars/src/gui/OcularDialog.cpp:567
 #: plugins/Oculars/src/ui_ocularDialog.h:1546
 msgid "aFOV:"
 msgstr "zZP:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:556
+#: plugins/Oculars/src/gui/OcularDialog.cpp:568
 #: plugins/Oculars/src/ui_ocularDialog.h:1547
 #: plugins/Oculars/src/ui_ocularDialog.h:1582
 msgid "Focal length:"
 msgstr "Ohnisková vzdialenosť:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:557
+#: plugins/Oculars/src/gui/OcularDialog.cpp:569
 #: plugins/Oculars/src/ui_ocularDialog.h:1543
 msgid "Field stop:"
 msgstr "Clona:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:569
+#: plugins/Oculars/src/gui/OcularDialog.cpp:581
 msgid "Oculars Plug-in"
 msgstr "Modul okuláre"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:579
+#: plugins/Oculars/src/gui/OcularDialog.cpp:591
 msgid "Barlow lens feature"
 msgstr "Funkcia Barlowovej šošovky"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:580
+#: plugins/Oculars/src/gui/OcularDialog.cpp:592
 msgid "Sensor crop overlay feature"
 msgstr "Orezanie prekrytia senzora"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:581
+#: plugins/Oculars/src/gui/OcularDialog.cpp:593
 msgid "Pixel grid feature"
 msgstr "Funkcia mriežky bodov"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:585
+#: plugins/Oculars/src/gui/OcularDialog.cpp:597
 msgid "Overview"
 msgstr "Prehľad"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:588
+#: plugins/Oculars/src/gui/OcularDialog.cpp:600
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece."
 "  This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -14060,11 +14061,11 @@ msgstr ""
 "ďalekohľady, ako aj snímače CCD. Pri prvom spustení aplikácie bude k "
 "dispozícii niekoľko ukážok, ktoré vám pomôžu začať."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:592
+#: plugins/Oculars/src/gui/OcularDialog.cpp:604
 msgid "You can choose to scale the image you see on the screen."
 msgstr "Môžete si vybrať, či sa majú obrázky na obrazovke škálovať."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:593
+#: plugins/Oculars/src/gui/OcularDialog.cpp:605
 msgid ""
 "This is intended to show you a better comparison of what one "
 "eyepiece/telescope combination will be like when compared to another."
@@ -14072,7 +14073,7 @@ msgstr ""
 "Zámerom je názorne porovnať, ako bude vyzerať kombinácia rôznych druhov "
 "okulárov a ďalekohľadov."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:596
+#: plugins/Oculars/src/gui/OcularDialog.cpp:608
 msgid ""
 "The same eyepiece in two different telescopes of differing focal length will"
 " produce two different exit pupils, changing the view somewhat."
@@ -14080,7 +14081,7 @@ msgstr ""
 "Rovnaké okuláre v dvoch rôznych ďalekohľadoch s rôznou ohniskovou "
 "vzdialenosťou zobrazia rôzne výstupné pupily, čo mierne zmení obraz."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:599
+#: plugins/Oculars/src/gui/OcularDialog.cpp:611
 msgid ""
 "The trade-off of this is that, with the image scaled, a large part of the "
 "screen can be wasted."
@@ -14088,17 +14089,17 @@ msgstr ""
 "Nevýhodou môže byť situácia, keď zväčšený obrázok zbytočne zaberie väčšinu "
 "obrazovky."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:600
+#: plugins/Oculars/src/gui/OcularDialog.cpp:612
 msgid ""
 "Therefore we recommend that you leave it off, unless you feel you have a "
 "need for it."
 msgstr "Preto Vám odporúčame túto funkciu nezapínať, pokiaľ ju nepotrebujete."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:601
+#: plugins/Oculars/src/gui/OcularDialog.cpp:613
 msgid "You can toggle a crosshair in the view."
 msgstr "V tomto pohľade môžete zapnúť kríž."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:605
+#: plugins/Oculars/src/gui/OcularDialog.cpp:617
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder. This feature draws three concentric circles "
@@ -14109,7 +14110,7 @@ msgstr ""
 "kružnice veľkosti 0.5%1, 2.0%1 a 4.0%1, takže ľahšie porovnáte, čo by ste "
 "mohli vidieť voľným okom cez zameriavač Telrad (alebo podobný)."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:608
+#: plugins/Oculars/src/gui/OcularDialog.cpp:620
 msgid ""
 "You can adjust the diameters or even add a fourth circle if you have a "
 "different finder, or revert to the Telrad standard sizes."
@@ -14117,15 +14118,15 @@ msgstr ""
 "Môžete nastaviť priemery alebo dokonca pridať štvrtý kruh, ak máte iný "
 "hľadáčik, prípadne vrátiť štandardné veľkosti hľadáčiku Telrad."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:611
+#: plugins/Oculars/src/gui/OcularDialog.cpp:623
 msgid "If you find any issues, please let me know. Enjoy!"
 msgstr "Ak nájdete nejaké chyby, prosím dajte mi vedieť. Užívajte si!"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:614
+#: plugins/Oculars/src/gui/OcularDialog.cpp:626
 msgid "Hot Keys"
 msgstr "Klávesové skratky"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:615
+#: plugins/Oculars/src/gui/OcularDialog.cpp:627
 msgid ""
 "The plug-in's key bindings can be edited in the Keyboard shortcuts editor "
 "(F7)."
@@ -14133,14 +14134,14 @@ msgstr ""
 "Klávesové skratky modulu je možné zmeniť prostredníctvom Editoru skratiek "
 "(F7)."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:618
-#: plugins/Pulsars/src/Pulsar.cpp:288
+#: plugins/Oculars/src/gui/OcularDialog.cpp:630
+#: plugins/Pulsars/src/Pulsar.cpp:302
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:604
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:318
 msgid "Notes"
 msgstr "Poznámky"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:620
+#: plugins/Oculars/src/gui/OcularDialog.cpp:632
 msgid ""
 "The sensor view has a feature to show a sensor crop overlay with information"
 " about the crop size. The size of this rectangle may be adjusted when "
@@ -14152,7 +14153,7 @@ msgstr ""
 " aktívnom binovaní (napr. veľkosť orezu 100px sa prispôsobí na 99px pri "
 "binovaní 3)."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:624
+#: plugins/Oculars/src/gui/OcularDialog.cpp:636
 #, qt-format
 msgid ""
 "In this case, information about crop size overlay will be marked by %1."
@@ -14160,7 +14161,7 @@ msgstr ""
 "V tom prípade bude informácia o rozmeroch vrstvy prekrytia označená pomocou "
 "%1."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:625
+#: plugins/Oculars/src/gui/OcularDialog.cpp:637
 msgid ""
 "This mark is also displayed if the crop size is larger than the sensor size."
 msgstr ""
@@ -14574,237 +14575,260 @@ msgid "Hide satellites from the group"
 msgstr "Skryť družice zo skupiny"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:2283
+#: plugins/Satellites/src/Satellites.cpp:2298
 msgid "visual"
 msgstr "viditeľné"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:2285
+#: plugins/Satellites/src/Satellites.cpp:2300
 msgid "scientific"
 msgstr "vedecké"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:2287
+#: plugins/Satellites/src/Satellites.cpp:2302
 msgid "communications"
 msgstr "komunikačné"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:2289
+#: plugins/Satellites/src/Satellites.cpp:2304
 msgid "navigation"
 msgstr "navigačné"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:2291
+#: plugins/Satellites/src/Satellites.cpp:2306
 msgid "amateur"
 msgstr "amatérske"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:2293
+#: plugins/Satellites/src/Satellites.cpp:2308
 msgid "weather"
 msgstr "meterologické"
 
 #. TRANSLATORS: Satellite group: Earth Resources satellites
-#: plugins/Satellites/src/Satellites.cpp:2295
+#: plugins/Satellites/src/Satellites.cpp:2310
 msgid "earth resources"
 msgstr "pozemské suroviny"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:2297
+#: plugins/Satellites/src/Satellites.cpp:2312
 msgid "geostationary"
 msgstr "geostacionárne"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:2299
+#: plugins/Satellites/src/Satellites.cpp:2314
 msgid "non-operational"
 msgstr "nefunkčné"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation
 #. (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:2301
+#: plugins/Satellites/src/Satellites.cpp:2316
 msgid "gps"
 msgstr "GPS"
 
+#. TRANSLATORS: Satellite group: The Indian Regional Navigation Satellite
+#. System (IRNSS) is an autonomous regional satellite navigation system being
+#. developed by the Indian Space Research Organisation (ISRO) which would be
+#. under complete control of the Indian government.
+#: plugins/Satellites/src/Satellites.cpp:2318
+msgid "irnss"
+msgstr ""
+
+#. TRANSLATORS: Satellite group: The Quasi-Zenith Satellite System (QZSS), is
+#. a proposed three-satellite regional time transfer system and Satellite
+#. Based Augmentation System for the Global Positioning System, that would be
+#. receivable within Japan.
+#: plugins/Satellites/src/Satellites.cpp:2320
+msgid "qzss"
+msgstr ""
+
+#. TRANSLATORS: Satellite group: The Tracking and Data Relay Satellite System
+#. (TDRSS) is a network of communications satellites and ground stations used
+#. by NASA for space communications.
+#: plugins/Satellites/src/Satellites.cpp:2322
+msgid "tdrss"
+msgstr ""
+
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS
 #. constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:2303
+#: plugins/Satellites/src/Satellites.cpp:2324
 msgid "glonass"
 msgstr "GloNaSS"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the BeiDou
 #. constellation (BeiDou Navigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:2305
+#: plugins/Satellites/src/Satellites.cpp:2326
 msgid "beidou"
 msgstr "beidou"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo
 #. constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:2307
+#: plugins/Satellites/src/Satellites.cpp:2328
 msgid "galileo"
 msgstr "Galileo"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium
 #. constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2309
+#: plugins/Satellites/src/Satellites.cpp:2330
 msgid "iridium"
 msgstr "Iridium"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium NEXT
 #. constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2311
+#: plugins/Satellites/src/Satellites.cpp:2332
 msgid "iridium next"
 msgstr "iridium next"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Starlink
 #. constellation (Starlink is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2313
+#: plugins/Satellites/src/Satellites.cpp:2334
 msgid "starlink"
 msgstr "starlink"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Spire
 #. constellation (LEMUR satellites)
-#: plugins/Satellites/src/Satellites.cpp:2315
+#: plugins/Satellites/src/Satellites.cpp:2336
 msgid "spire"
 msgstr "spire"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the OneWeb
 #. constellation (OneWeb is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2317
+#: plugins/Satellites/src/Satellites.cpp:2338
 msgid "oneweb"
 msgstr "oneweb"
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:2319
+#: plugins/Satellites/src/Satellites.cpp:2340
 msgid "stations"
 msgstr "vesmírne stanice"
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:2321
+#: plugins/Satellites/src/Satellites.cpp:2342
 msgid "education"
 msgstr "vzdelávacie"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space
 #. observatories
-#: plugins/Satellites/src/Satellites.cpp:2323
+#: plugins/Satellites/src/Satellites.cpp:2344
 msgid "observatory"
 msgstr "vesmírne observatóriá"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the INTELSAT
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2325
+#: plugins/Satellites/src/Satellites.cpp:2346
 msgid "intelsat"
 msgstr "intelsat"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLOBALSTAR
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2327
+#: plugins/Satellites/src/Satellites.cpp:2348
 msgid "globalstar"
 msgstr "globalstar"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the ORBCOMM
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2329
+#: plugins/Satellites/src/Satellites.cpp:2350
 msgid "orbcomm"
 msgstr "orbcomm"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GORIZONT
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2331
+#: plugins/Satellites/src/Satellites.cpp:2352
 msgid "gorizont"
 msgstr "gorizont"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the RADUGA satellites
-#: plugins/Satellites/src/Satellites.cpp:2333
+#: plugins/Satellites/src/Satellites.cpp:2354
 msgid "raduga"
 msgstr "raduga"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the MOLNIYA
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2335
+#: plugins/Satellites/src/Satellites.cpp:2356
 msgid "molniya"
 msgstr "molniya"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the COSMOS satellites
-#: plugins/Satellites/src/Satellites.cpp:2337
+#: plugins/Satellites/src/Satellites.cpp:2358
 msgid "cosmos"
 msgstr "cosmos"
 
 #. TRANSLATORS: Satellite group: Debris of satellites
-#: plugins/Satellites/src/Satellites.cpp:2339
+#: plugins/Satellites/src/Satellites.cpp:2360
 msgid "debris"
 msgstr "trosky"
 
 #. TRANSLATORS: Satellite group: Crewed satellites
-#: plugins/Satellites/src/Satellites.cpp:2341
+#: plugins/Satellites/src/Satellites.cpp:2362
 msgid "crewed"
 msgstr "s posádkou"
 
 #. TRANSLATORS: Satellite group: Satellites of ISS resupply missions
-#: plugins/Satellites/src/Satellites.cpp:2343
+#: plugins/Satellites/src/Satellites.cpp:2364
 msgid "resupply"
 msgstr "zásobovanie"
 
 #. TRANSLATORS: Satellite group: are known to broadcast TV signals
-#: plugins/Satellites/src/Satellites.cpp:2345
+#: plugins/Satellites/src/Satellites.cpp:2366
 msgid "tv"
 msgstr "tv"
 
 #. TRANSLATORS: Satellite group: military satellites
-#: plugins/Satellites/src/Satellites.cpp:2347
+#: plugins/Satellites/src/Satellites.cpp:2368
 msgid "military"
 msgstr "vojenské"
 
 #. TRANSLATORS: Satellite group: geodetic satellites
-#: plugins/Satellites/src/Satellites.cpp:2349
+#: plugins/Satellites/src/Satellites.cpp:2370
 msgid "geodetic"
 msgstr "geodetické"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:2354
+#: plugins/Satellites/src/Satellites.cpp:2375
 msgid "The Hubble Space Telescope"
 msgstr "Hubblov vesmírny ďalekohľad"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2356
+#: plugins/Satellites/src/Satellites.cpp:2377
 msgid "The International Space Station"
 msgstr "Medzinárodná vesmírna stanica"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2358
+#: plugins/Satellites/src/Satellites.cpp:2379
 msgid "China's first space station"
 msgstr "prvá čínska vesmírna stanica"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2360
+#: plugins/Satellites/src/Satellites.cpp:2381
 msgid "Tiangong space station (Chinese large modular space station)"
-msgstr ""
+msgstr "Vesmírna stanica Tiangong (Veľká čínska modulárna vesmírna stanica)"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2362
+#: plugins/Satellites/src/Satellites.cpp:2383
 msgid "The russian space radio telescope RadioAstron"
 msgstr "ruský vesmírny rádioteleskop RadioAstron"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2364
+#: plugins/Satellites/src/Satellites.cpp:2385
 msgid "International Gamma-Ray Astrophysics Laboratory"
 msgstr "medzinárodné astrofyzikálne labortórium pre gama žiarenie"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2366
+#: plugins/Satellites/src/Satellites.cpp:2387
 msgid "The Gamma-Ray Observatory"
 msgstr "Compton Gamma Ray Observatory"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2368
+#: plugins/Satellites/src/Satellites.cpp:2389
 msgid "The Microvariability and Oscillations of Stars telescope"
 msgstr "The Microvariability and Oscillations of Stars telescope"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2370
+#: plugins/Satellites/src/Satellites.cpp:2391
 msgid "The Interface Region Imaging Spectrograph"
 msgstr "The Interface Region Imaging Spectrograph"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2372
+#: plugins/Satellites/src/Satellites.cpp:2393
 msgid ""
 "The Spectroscopic Planet Observatory for Recognition of Interaction of "
 "Atmosphere"
@@ -14813,80 +14837,80 @@ msgstr ""
 "Atmosphere"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2376
+#: plugins/Satellites/src/Satellites.cpp:2397
 msgid "The Dark Matter Particle Explorer"
 msgstr "The Dark Matter Particle Explorer"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2378
+#: plugins/Satellites/src/Satellites.cpp:2399
 msgid "Arcsecond Space Telescope Enabling Research in Astrophysics"
 msgstr "Arcsecond Space Telescope Enabling Research in Astrophysics"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2380
+#: plugins/Satellites/src/Satellites.cpp:2401
 msgid "Reuven Ramaty High Energy Solar Spectroscopic Imager"
 msgstr "Reuven Ramaty High Energy Solar Spectroscopic Imager"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2382
+#: plugins/Satellites/src/Satellites.cpp:2403
 msgid "The Chandra X-ray Observatory"
 msgstr "The Chandra X-ray Observatory"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2386
+#: plugins/Satellites/src/Satellites.cpp:2407
 msgid "ISS (ZARYA)"
 msgstr "ISS (Zarya)"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2388
+#: plugins/Satellites/src/Satellites.cpp:2409
 msgid "ISS"
 msgstr "ISS"
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:2390
+#: plugins/Satellites/src/Satellites.cpp:2411
 msgid "HST"
 msgstr "HST"
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:2392
+#: plugins/Satellites/src/Satellites.cpp:2413
 msgid "SPEKTR-R"
 msgstr "SPEKTR-R"
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics
 #. Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:2394
+#: plugins/Satellites/src/Satellites.cpp:2415
 msgid "INTEGRAL"
 msgstr "INTEGRAL"
 
 #. TRANSLATORS: Satellite name: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:2396
+#: plugins/Satellites/src/Satellites.cpp:2417
 msgid "TIANGONG 1"
 msgstr "TIANGONG 1"
 
 #. TRANSLATORS: Satellite name: name of China's space station module
-#: plugins/Satellites/src/Satellites.cpp:2398
+#: plugins/Satellites/src/Satellites.cpp:2419
 msgid "TIANHE"
-msgstr ""
+msgstr "TIANHE"
 
 #. TRANSLATORS: Satellite name: China's space station name (with name of base
 #. module)
-#: plugins/Satellites/src/Satellites.cpp:2400
+#: plugins/Satellites/src/Satellites.cpp:2421
 msgid "TIANGONG (TIANHE)"
-msgstr ""
+msgstr "TIANGONG (TIANHE)"
 
-#: plugins/Satellites/src/Satellites.cpp:2403
+#: plugins/Satellites/src/Satellites.cpp:2424
 msgid "The satellite and the observer are in sunlight"
 msgstr "Družica a pozorovateľ sú v slnečnom svetle"
 
-#: plugins/Satellites/src/Satellites.cpp:2404
+#: plugins/Satellites/src/Satellites.cpp:2425
 msgid "The satellite is visible"
 msgstr "Družica je viditeľná"
 
-#: plugins/Satellites/src/Satellites.cpp:2405
+#: plugins/Satellites/src/Satellites.cpp:2426
 msgid "The satellite is eclipsed"
 msgstr "Družica je skrytá"
 
-#: plugins/Satellites/src/Satellites.cpp:2406
+#: plugins/Satellites/src/Satellites.cpp:2427
 msgid "The satellite is not visible"
 msgstr "Družica nie je viditeľná"
 
@@ -15002,7 +15026,7 @@ msgid "Radio communication"
 msgstr "Rádiokomunikácia"
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Satellites/src/Satellite.cpp:455 plugins/Pulsars/src/Pulsar.cpp:274
+#: plugins/Satellites/src/Satellite.cpp:455 plugins/Pulsars/src/Pulsar.cpp:288
 msgctxt "frequency"
 msgid "MHz"
 msgstr "MHz"
@@ -15862,6 +15886,8 @@ msgid ""
 "The existing version of the configuration data for telescopes in the "
 "Telescope Control plugin is obsolete."
 msgstr ""
+"Existujúca verzia konfiguračných dát ďalekohľadov v module Ovládanie "
+"ďalekohľadov je zastaraná."
 
 #. TRANSLATORS: Description for Meade AutoStar compatible mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1768
@@ -18487,131 +18513,131 @@ msgstr "Zobraziť pulzary"
 msgid "Pulsars configuration window"
 msgstr "Okno nastavení pulzarov"
 
-#: plugins/Pulsars/src/Pulsar.cpp:184
+#: plugins/Pulsars/src/Pulsar.cpp:187
 msgid "pulsar"
 msgstr "pulzar"
 
-#: plugins/Pulsars/src/Pulsar.cpp:186
+#: plugins/Pulsars/src/Pulsar.cpp:189
 msgid "pulsar with glitches"
 msgstr "pulzar s poruchami"
 
-#: plugins/Pulsars/src/Pulsar.cpp:186
+#: plugins/Pulsars/src/Pulsar.cpp:189
 msgid "registered glitches"
 msgstr "zaznamenané poruchy"
 
-#: plugins/Pulsars/src/Pulsar.cpp:197
+#: plugins/Pulsars/src/Pulsar.cpp:211
 msgid "Barycentric period"
 msgstr "Barycentrická perióda"
 
 #. TRANSLATORS: Unit of measure for period - seconds
-#: plugins/Pulsars/src/Pulsar.cpp:200
+#: plugins/Pulsars/src/Pulsar.cpp:214
 msgctxt "period"
 msgid "s"
 msgstr "s"
 
-#: plugins/Pulsars/src/Pulsar.cpp:204
+#: plugins/Pulsars/src/Pulsar.cpp:218
 msgid "Time derivative of barycentric period"
 msgstr "Časová derivácia barycentrickej periódy"
 
-#: plugins/Pulsars/src/Pulsar.cpp:209
+#: plugins/Pulsars/src/Pulsar.cpp:223
 msgid "Dispersion measure"
 msgstr "Disperzná miera"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
-#: plugins/Pulsars/src/Pulsar.cpp:212
+#: plugins/Pulsars/src/Pulsar.cpp:226
 msgctxt "distance"
 msgid "pc"
 msgstr "pc"
 
 #. TRANSLATORS: Unit of measure for distance - centimeters
-#: plugins/Pulsars/src/Pulsar.cpp:214
+#: plugins/Pulsars/src/Pulsar.cpp:228
 msgctxt "distance"
 msgid "cm"
 msgstr "cm"
 
-#: plugins/Pulsars/src/Pulsar.cpp:221
+#: plugins/Pulsars/src/Pulsar.cpp:235
 msgid "Spin down energy loss rate"
 msgstr "Strata energie spomaľovaním"
 
 #. TRANSLATORS: Unit of measure for power - erg per second
-#: plugins/Pulsars/src/Pulsar.cpp:224
+#: plugins/Pulsars/src/Pulsar.cpp:238
 msgctxt "power"
 msgid "ergs/s"
 msgstr "erg/s"
 
-#: plugins/Pulsars/src/Pulsar.cpp:230
+#: plugins/Pulsars/src/Pulsar.cpp:244
 msgid "Binary period of pulsar"
 msgstr "Binárna perióda pulzaru"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: plugins/Pulsars/src/Pulsar.cpp:233 plugins/Exoplanets/src/Exoplanet.cpp:319
+#: plugins/Pulsars/src/Pulsar.cpp:247 plugins/Exoplanets/src/Exoplanet.cpp:319
 msgctxt "period"
 msgid "days"
 msgstr "dni"
 
-#: plugins/Pulsars/src/Pulsar.cpp:237 plugins/Exoplanets/src/Exoplanet.cpp:323
+#: plugins/Pulsars/src/Pulsar.cpp:251 plugins/Exoplanets/src/Exoplanet.cpp:323
 msgid "Eccentricity"
 msgstr "Excentricita"
 
-#: plugins/Pulsars/src/Pulsar.cpp:242
+#: plugins/Pulsars/src/Pulsar.cpp:256
 msgid "Annual parallax"
 msgstr "Ročná paralaxa"
 
-#: plugins/Pulsars/src/Pulsar.cpp:251
+#: plugins/Pulsars/src/Pulsar.cpp:265
 msgid "Distance based on electron density model"
 msgstr "Vzdialenosť podľa modelu elektrónovej hustoty"
 
-#: plugins/Pulsars/src/Pulsar.cpp:264
+#: plugins/Pulsars/src/Pulsar.cpp:278
 #, no-c-format
 msgid "Profile width at 50% of peak"
 msgstr "Šírka profilu na 50% vrcholu"
 
 #. TRANSLATORS: Unit of measure for time - milliseconds
-#: plugins/Pulsars/src/Pulsar.cpp:267
+#: plugins/Pulsars/src/Pulsar.cpp:281
 msgctxt "time"
 msgid "ms"
 msgstr "ms"
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
-#: plugins/Pulsars/src/Pulsar.cpp:272
+#: plugins/Pulsars/src/Pulsar.cpp:286
 msgid "Time averaged flux density at"
 msgstr "Časovo spriemerovaná hustota toku na"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
-#: plugins/Pulsars/src/Pulsar.cpp:276
+#: plugins/Pulsars/src/Pulsar.cpp:290
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:352
 msgctxt "spectral flux density"
 msgid "mJy"
 msgstr "mJy"
 
-#: plugins/Pulsars/src/Pulsar.cpp:376
+#: plugins/Pulsars/src/Pulsar.cpp:390
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr ""
 "anomálny röntgenový alebo mäkký gama zdroj so zaznamenanými pulzáciami"
 
-#: plugins/Pulsars/src/Pulsar.cpp:381
+#: plugins/Pulsars/src/Pulsar.cpp:395
 msgid "has one or more binary companions"
 msgstr "má jedného alebo viac binárnych spoločníkov"
 
-#: plugins/Pulsars/src/Pulsar.cpp:386
+#: plugins/Pulsars/src/Pulsar.cpp:400
 msgid "with pulsed emission from radio to infrared or higher frequencies"
 msgstr "s pulznými emisiami od rádiovej po infračervenú alebo vyššiu oblasť"
 
-#: plugins/Pulsars/src/Pulsar.cpp:391
+#: plugins/Pulsars/src/Pulsar.cpp:405
 msgid "with pulsed emission only at infrared or higher frequencies"
 msgstr ""
 "s pulznými emisiami len v infračervenej alebo vyššej frekvenčnej oblasti"
 
-#: plugins/Pulsars/src/Pulsar.cpp:396
+#: plugins/Pulsars/src/Pulsar.cpp:410
 msgid "with pulsed emission in the radio band"
 msgstr "s pulznými emisiami v rádiovom pásme"
 
-#: plugins/Pulsars/src/Pulsar.cpp:401
+#: plugins/Pulsars/src/Pulsar.cpp:415
 msgid "with intermittently pulsed radio emission"
 msgstr "s prerušovanými pulznými rádiovými emisiami"
 
-#: plugins/Pulsars/src/Pulsar.cpp:406
+#: plugins/Pulsars/src/Pulsar.cpp:420
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
@@ -23157,7 +23183,7 @@ msgstr "Časový interval musí byť menší, ako 1 rok!"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:199
 msgid "Code"
-msgstr ""
+msgstr "Kód"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:201
 msgid "ZHR"

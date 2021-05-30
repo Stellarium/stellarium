@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-05-16 13:23+0700\n"
+"POT-Creation-Date: 2021-05-29 17:46+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Empar Montoro <emontra2018@gmail.com>, 2020\n"
 "Language-Team: Catalan (Valencian) (https://www.transifex.com/stellarium/teams/80998/ca@valencia/)\n"
@@ -42,8 +42,8 @@ msgstr "marcador personalitzat"
 #: plugins/Satellites/src/Satellite.cpp:305
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:531
 #: plugins/Supernovae/src/Supernova.cpp:143 plugins/Novae/src/Nova.cpp:147
-#: plugins/Quasars/src/Quasar.cpp:127 plugins/Pulsars/src/Pulsar.cpp:184
-#: plugins/Pulsars/src/Pulsar.cpp:186 plugins/Exoplanets/src/Exoplanet.cpp:278
+#: plugins/Quasars/src/Quasar.cpp:127 plugins/Pulsars/src/Pulsar.cpp:187
+#: plugins/Pulsars/src/Pulsar.cpp:189 plugins/Exoplanets/src/Exoplanet.cpp:278
 #: plugins/MeteorShowers/src/MeteorShower.cpp:523
 msgid "Type"
 msgstr "Tipus"
@@ -644,7 +644,7 @@ msgstr "Canvi cíclic de la contaminació lumínica"
 
 #: src/core/modules/LandscapeMgr.cpp:1014 src/scripting/StelScriptMgr.cpp:457
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
-#: plugins/Oculars/src/gui/OcularDialog.cpp:573
+#: plugins/Oculars/src/gui/OcularDialog.cpp:585
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:125
 #: plugins/Novae/src/gui/NovaeDialog.cpp:123
@@ -1519,7 +1519,7 @@ msgstr "Angle d'orientació"
 #: src/core/modules/Nebula.cpp:318 src/core/modules/Nebula.cpp:331
 #: src/core/modules/StarWrapper.cpp:313
 #: plugins/Supernovae/src/Supernova.cpp:158 plugins/Novae/src/Nova.cpp:161
-#: plugins/Pulsars/src/Pulsar.cpp:257 plugins/Exoplanets/src/Exoplanet.cpp:292
+#: plugins/Pulsars/src/Pulsar.cpp:271 plugins/Exoplanets/src/Exoplanet.cpp:292
 msgctxt "distance"
 msgid "ly"
 msgstr "a.l."
@@ -1534,7 +1534,7 @@ msgid "Distance"
 msgstr "Distància"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
-#: src/core/modules/Nebula.cpp:329 plugins/Pulsars/src/Pulsar.cpp:254
+#: src/core/modules/Nebula.cpp:329 plugins/Pulsars/src/Pulsar.cpp:268
 msgctxt "distance"
 msgid "kpc"
 msgstr "kpc"
@@ -1561,7 +1561,7 @@ msgstr "Paral·laxi"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
 #: src/core/modules/Nebula.cpp:390 src/core/modules/StarWrapper.cpp:347
-#: plugins/Pulsars/src/Pulsar.cpp:245
+#: plugins/Pulsars/src/Pulsar.cpp:259
 msgctxt "parallax"
 msgid "mas"
 msgstr "mas"
@@ -1570,271 +1570,271 @@ msgstr "mas"
 msgid "Morphological description"
 msgstr "Descripció morfològica"
 
-#: src/core/modules/Nebula.cpp:1116
+#: src/core/modules/Nebula.cpp:1128
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
 msgstr "alta concentració d'estreles cap al centre"
 
-#: src/core/modules/Nebula.cpp:1119
+#: src/core/modules/Nebula.cpp:1131
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "dense central concentration of stars"
 msgstr "concentració densa d'estreles al centre"
 
-#: src/core/modules/Nebula.cpp:1122
+#: src/core/modules/Nebula.cpp:1134
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "strong inner core of stars"
 msgstr "nucli intern dens de les estreles"
 
-#: src/core/modules/Nebula.cpp:1125
+#: src/core/modules/Nebula.cpp:1137
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
 msgstr "concentració rica intermèdia d'estreles"
 
-#: src/core/modules/Nebula.cpp:1130
+#: src/core/modules/Nebula.cpp:1142
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
 msgstr "concentració intermèdia d'estreles"
 
-#: src/core/modules/Nebula.cpp:1133
+#: src/core/modules/Nebula.cpp:1145
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "rather loose concentration of stars towards the center"
 msgstr "concentració bastant baixa d'estreles cap al centre"
 
-#: src/core/modules/Nebula.cpp:1136
+#: src/core/modules/Nebula.cpp:1148
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
 msgstr "concentració baixa d'estreles cap al centre"
 
-#: src/core/modules/Nebula.cpp:1139
+#: src/core/modules/Nebula.cpp:1151
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "loose concentration of stars"
 msgstr "concentració baixa d'estreles"
 
-#: src/core/modules/Nebula.cpp:1142
+#: src/core/modules/Nebula.cpp:1154
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
 msgstr "concentració molt baixa d'estreles cap al centre"
 
-#: src/core/modules/Nebula.cpp:1145
+#: src/core/modules/Nebula.cpp:1157
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
 msgstr "quasi sense concentració cap al centre"
 
-#: src/core/modules/Nebula.cpp:1148
+#: src/core/modules/Nebula.cpp:1160
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "undocumented concentration class"
 msgstr "classe de concentració no documentada"
 
-#: src/core/modules/Nebula.cpp:1168
+#: src/core/modules/Nebula.cpp:1180
 msgctxt "Trumpler's Concentration Class"
 msgid "strong central concentration of stars"
 msgstr "forta concentració central d'estreles"
 
-#: src/core/modules/Nebula.cpp:1171
+#: src/core/modules/Nebula.cpp:1183
 msgctxt "Trumpler's Concentration Class"
 msgid "little central concentration of stars"
 msgstr "xicoteta concentració central d'estreles"
 
-#: src/core/modules/Nebula.cpp:1174
+#: src/core/modules/Nebula.cpp:1186
 msgctxt "Trumpler's Concentration Class"
 msgid "no noticeable concentration of stars"
 msgstr "sense concentració evident d'estreles"
 
-#: src/core/modules/Nebula.cpp:1177
+#: src/core/modules/Nebula.cpp:1189
 msgctxt "Trumpler's Concentration Class"
 msgid "a star field condensation"
 msgstr "un camp de concentració d'estreles"
 
-#: src/core/modules/Nebula.cpp:1180
+#: src/core/modules/Nebula.cpp:1192
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented concentration class"
 msgstr "classe de concentració no documentada"
 
-#: src/core/modules/Nebula.cpp:1186
+#: src/core/modules/Nebula.cpp:1198
 msgctxt "Trumpler's Brightness Class"
 msgid "small brightness range of cluster members"
 msgstr "rang baix de brillantor dels membres del cúmul"
 
-#: src/core/modules/Nebula.cpp:1189
+#: src/core/modules/Nebula.cpp:1201
 msgctxt "Trumpler's Brightness Class"
 msgid "medium brightness range of cluster members"
 msgstr "rang mitjà de brillantor dels membres del cúmul"
 
-#: src/core/modules/Nebula.cpp:1192
+#: src/core/modules/Nebula.cpp:1204
 msgctxt "Trumpler's Brightness Class"
 msgid "large brightness range of cluster members"
 msgstr "rang alt de brillantor dels membres del cúmul"
 
-#: src/core/modules/Nebula.cpp:1195
+#: src/core/modules/Nebula.cpp:1207
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
 msgstr "rang de brillantor dels membres del cúmul no registrat"
 
-#: src/core/modules/Nebula.cpp:1201
+#: src/core/modules/Nebula.cpp:1213
 msgctxt "Trumpler's Number of Members Class"
 msgid "poor cluster with less than 50 stars"
 msgstr "cúmul pobre amb menys de 50 estreles"
 
-#: src/core/modules/Nebula.cpp:1204
+#: src/core/modules/Nebula.cpp:1216
 msgctxt "Trumpler's Number of Members Class"
 msgid "moderately rich cluster with 50-100 stars"
 msgstr "cúmul moderadament ric, entre 50-100 estreles"
 
-#: src/core/modules/Nebula.cpp:1207
+#: src/core/modules/Nebula.cpp:1219
 msgctxt "Trumpler's Number of Members Class"
 msgid "rich cluster with more than 100 stars"
 msgstr "cúmul ric amb més de 100 estreles"
 
-#: src/core/modules/Nebula.cpp:1210
+#: src/core/modules/Nebula.cpp:1222
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
 msgstr "nombre dels membres de la classe no documentat"
 
-#: src/core/modules/Nebula.cpp:1214
+#: src/core/modules/Nebula.cpp:1226
 msgctxt "nebulosity factor of open clusters"
 msgid "the cluster lies within nebulosity"
 msgstr "el cúmul es troba dins de la nebulositat"
 
-#: src/core/modules/Nebula.cpp:1235
+#: src/core/modules/Nebula.cpp:1247
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
 msgstr "molt brillant"
 
-#: src/core/modules/Nebula.cpp:1238
+#: src/core/modules/Nebula.cpp:1250
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
 msgstr "brillant"
 
-#: src/core/modules/Nebula.cpp:1241
+#: src/core/modules/Nebula.cpp:1253
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
 msgstr "brillantor moderada"
 
-#: src/core/modules/Nebula.cpp:1244
+#: src/core/modules/Nebula.cpp:1256
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
 msgstr "feble"
 
-#: src/core/modules/Nebula.cpp:1247
+#: src/core/modules/Nebula.cpp:1259
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
 msgstr "molt feble"
 
-#: src/core/modules/Nebula.cpp:1250
+#: src/core/modules/Nebula.cpp:1262
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
 msgstr "brillantor imprecisa"
 
-#: src/core/modules/Nebula.cpp:1253
+#: src/core/modules/Nebula.cpp:1265
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
 msgstr "brillantor de les nebuloses de reflexió no registrada"
 
-#: src/core/modules/Nebula.cpp:1259
+#: src/core/modules/Nebula.cpp:1271
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
 msgstr "l'estrela il·luminadora està incrustada en la nebulositat"
 
-#: src/core/modules/Nebula.cpp:1262
+#: src/core/modules/Nebula.cpp:1274
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
 msgstr "estrela ubicada fora de la nebulositat il·luminada"
 
-#: src/core/modules/Nebula.cpp:1265
+#: src/core/modules/Nebula.cpp:1277
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
 msgstr "estrela ubicada en el cantó de la nebulositat  il·luminada"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1270
+#: src/core/modules/Nebula.cpp:1282
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
 msgstr "estrela ubicada fora de la peculiar nebulosa il·luminada"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1276
+#: src/core/modules/Nebula.cpp:1288
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
 msgstr "la nebulositat  peculiar il·luminada"
 
-#: src/core/modules/Nebula.cpp:1280
+#: src/core/modules/Nebula.cpp:1292
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
 msgstr "nebuloses de reflexió no registrades"
 
-#: src/core/modules/Nebula.cpp:1300
+#: src/core/modules/Nebula.cpp:1312
 msgid "circular form"
 msgstr "formar circular"
 
-#: src/core/modules/Nebula.cpp:1301
+#: src/core/modules/Nebula.cpp:1313
 msgid "elliptical form"
 msgstr "forma el·líptica"
 
-#: src/core/modules/Nebula.cpp:1302
+#: src/core/modules/Nebula.cpp:1314
 msgid "irregular form"
 msgstr "forma irregular"
 
-#: src/core/modules/Nebula.cpp:1304
+#: src/core/modules/Nebula.cpp:1316
 msgid "amorphous structure"
 msgstr "estructura amorfa"
 
-#: src/core/modules/Nebula.cpp:1305
+#: src/core/modules/Nebula.cpp:1317
 msgid "conventional structure"
 msgstr "estructura convencional"
 
-#: src/core/modules/Nebula.cpp:1306
+#: src/core/modules/Nebula.cpp:1318
 msgid "filamentary structure"
 msgstr "estructura filamentosa"
 
-#: src/core/modules/Nebula.cpp:1308
+#: src/core/modules/Nebula.cpp:1320
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr "molt feble"
 
-#: src/core/modules/Nebula.cpp:1309
+#: src/core/modules/Nebula.cpp:1321
 msgctxt "HII region brightness"
 msgid "moderate brightness"
 msgstr "brillantor moderada"
 
-#: src/core/modules/Nebula.cpp:1310
+#: src/core/modules/Nebula.cpp:1322
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr "molt brillant"
 
-#: src/core/modules/Nebula.cpp:1313
+#: src/core/modules/Nebula.cpp:1325
 msgid "undocumented form"
 msgstr "forma no no documentada"
 
-#: src/core/modules/Nebula.cpp:1314
+#: src/core/modules/Nebula.cpp:1326
 msgid "undocumented structure"
 msgstr "estructura no documentada"
 
-#: src/core/modules/Nebula.cpp:1315
+#: src/core/modules/Nebula.cpp:1327
 msgid "undocumented brightness"
 msgstr "brillantor no documentada"
 
-#: src/core/modules/Nebula.cpp:1327
+#: src/core/modules/Nebula.cpp:1339
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure"
 msgstr "El romanent mostra una estructura de ràdio de closca"
 
-#: src/core/modules/Nebula.cpp:1330
+#: src/core/modules/Nebula.cpp:1342
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a filled center ('plerion') radio structure"
 msgstr "El romanent mostra una estructura de ràdio plena («plerió»)"
 
-#: src/core/modules/Nebula.cpp:1333
+#: src/core/modules/Nebula.cpp:1345
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a composite (or combination) radio structure"
 msgstr "El romanent mostra una estructura de ràdio composta (o combinada)"
 
-#: src/core/modules/Nebula.cpp:1336
+#: src/core/modules/Nebula.cpp:1348
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure with some uncertainty"
 msgstr ""
 "El romanent mostra una estructura de ràdio de closca amb alguna incertesa"
 
-#: src/core/modules/Nebula.cpp:1339
+#: src/core/modules/Nebula.cpp:1351
 msgctxt "supernova remnant structure classification"
 msgid ""
 "remnant shows a filled center ('plerion') radio structure with some "
@@ -1843,7 +1843,7 @@ msgstr ""
 " El romanent mostra una estructura de ràdio plena («plerió») amb alguna "
 "incertesa"
 
-#: src/core/modules/Nebula.cpp:1342
+#: src/core/modules/Nebula.cpp:1354
 msgctxt "supernova remnant structure classification"
 msgid ""
 "remnant shows a composite (or combination) radio structure with some "
@@ -1852,158 +1852,158 @@ msgstr ""
 "El romanent mostra una estructura de ràdio composta (o combinada) amb alguna"
 " incertesa"
 
-#: src/core/modules/Nebula.cpp:1350
+#: src/core/modules/Nebula.cpp:1362
 msgid "undocumented type"
 msgstr "tipus no documentat"
 
-#: src/core/modules/Nebula.cpp:1356
+#: src/core/modules/Nebula.cpp:1368
 msgid "galaxy"
 msgstr "galàxia"
 
-#: src/core/modules/Nebula.cpp:1357
+#: src/core/modules/Nebula.cpp:1369
 msgid "active galaxy"
 msgstr "galàxia activa"
 
-#: src/core/modules/Nebula.cpp:1358
+#: src/core/modules/Nebula.cpp:1370
 msgid "radio galaxy"
 msgstr "radiogalàxia"
 
-#: src/core/modules/Nebula.cpp:1359
+#: src/core/modules/Nebula.cpp:1371
 msgid "interacting galaxy"
 msgstr "galàxia interactiva"
 
-#: src/core/modules/Nebula.cpp:1360 plugins/Quasars/src/Quasar.cpp:127
+#: src/core/modules/Nebula.cpp:1372 plugins/Quasars/src/Quasar.cpp:127
 msgid "quasar"
 msgstr "quàsar"
 
-#: src/core/modules/Nebula.cpp:1361
+#: src/core/modules/Nebula.cpp:1373
 msgid "star cluster"
 msgstr "cúmul d'estreles"
 
-#: src/core/modules/Nebula.cpp:1362
+#: src/core/modules/Nebula.cpp:1374
 msgid "open star cluster"
 msgstr "cúmul obert d'estreles"
 
-#: src/core/modules/Nebula.cpp:1363
+#: src/core/modules/Nebula.cpp:1375
 msgid "globular star cluster"
 msgstr "cúmul globular d'estreles"
 
-#: src/core/modules/Nebula.cpp:1364
+#: src/core/modules/Nebula.cpp:1376
 msgid "stellar association"
 msgstr "associació estel·lar"
 
-#: src/core/modules/Nebula.cpp:1365
+#: src/core/modules/Nebula.cpp:1377
 msgid "star cloud"
 msgstr "núvol estel·lar"
 
-#: src/core/modules/Nebula.cpp:1366
+#: src/core/modules/Nebula.cpp:1378
 msgid "nebula"
 msgstr "nebulosa"
 
-#: src/core/modules/Nebula.cpp:1367
+#: src/core/modules/Nebula.cpp:1379
 msgid "planetary nebula"
 msgstr "nebulosa planetària"
 
-#: src/core/modules/Nebula.cpp:1368
+#: src/core/modules/Nebula.cpp:1380
 msgid "dark nebula"
 msgstr "nebulosa fosca"
 
-#: src/core/modules/Nebula.cpp:1369
+#: src/core/modules/Nebula.cpp:1381
 msgid "reflection nebula"
 msgstr "nebulosa de reflexió"
 
-#: src/core/modules/Nebula.cpp:1370
+#: src/core/modules/Nebula.cpp:1382
 msgid "bipolar nebula"
 msgstr "nebulosa bipolar"
 
-#: src/core/modules/Nebula.cpp:1371
+#: src/core/modules/Nebula.cpp:1383
 msgid "emission nebula"
 msgstr "nebulosa d'emissió"
 
-#: src/core/modules/Nebula.cpp:1372
+#: src/core/modules/Nebula.cpp:1384
 msgid "cluster associated with nebulosity"
 msgstr "cúmul associat amb una nebulositat"
 
-#: src/core/modules/Nebula.cpp:1373
+#: src/core/modules/Nebula.cpp:1385
 msgid "HII region"
 msgstr "Regió HII"
 
-#: src/core/modules/Nebula.cpp:1374
+#: src/core/modules/Nebula.cpp:1386
 msgid "supernova remnant"
 msgstr "restes d'una supernova"
 
-#: src/core/modules/Nebula.cpp:1375
+#: src/core/modules/Nebula.cpp:1387
 msgid "interstellar matter"
 msgstr "matèria interestel·lar"
 
-#: src/core/modules/Nebula.cpp:1376
+#: src/core/modules/Nebula.cpp:1388
 msgid "emission object"
 msgstr "objecte emissor"
 
-#: src/core/modules/Nebula.cpp:1377
+#: src/core/modules/Nebula.cpp:1389
 msgid "BL Lac object"
 msgstr "objecte BL Lac"
 
-#: src/core/modules/Nebula.cpp:1378
+#: src/core/modules/Nebula.cpp:1390
 msgid "blazar"
 msgstr "blàzar"
 
-#: src/core/modules/Nebula.cpp:1379
+#: src/core/modules/Nebula.cpp:1391
 msgid "molecular cloud"
 msgstr "núvol molecular"
 
-#: src/core/modules/Nebula.cpp:1380
+#: src/core/modules/Nebula.cpp:1392
 msgid "young stellar object"
 msgstr "objecte estel·lar jove"
 
-#: src/core/modules/Nebula.cpp:1381
+#: src/core/modules/Nebula.cpp:1393
 msgid "possible quasar"
 msgstr "possible quàsar"
 
-#: src/core/modules/Nebula.cpp:1382
+#: src/core/modules/Nebula.cpp:1394
 msgid "possible planetary nebula"
 msgstr "possible nebulosa planetària"
 
-#: src/core/modules/Nebula.cpp:1383
+#: src/core/modules/Nebula.cpp:1395
 msgid "protoplanetary nebula"
 msgstr "nebulosa protoplanetària"
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/Nebula.cpp:1384 src/core/modules/StarWrapper.cpp:50
+#: src/core/modules/Nebula.cpp:1396 src/core/modules/StarWrapper.cpp:50
 #: src/core/modules/StarWrapper.cpp:260 src/gui/AstroCalcDialog.cpp:1237
 #: src/translations.h:35
 msgid "star"
 msgstr "estrela"
 
-#: src/core/modules/Nebula.cpp:1385
+#: src/core/modules/Nebula.cpp:1397
 msgid "symbiotic star"
 msgstr "estrela simbiòtica"
 
-#: src/core/modules/Nebula.cpp:1386
+#: src/core/modules/Nebula.cpp:1398
 msgid "emission-line star"
 msgstr "estrela de línia d'emissió"
 
-#: src/core/modules/Nebula.cpp:1387
+#: src/core/modules/Nebula.cpp:1399
 msgid "supernova candidate"
 msgstr "candidat a supernova"
 
-#: src/core/modules/Nebula.cpp:1388
+#: src/core/modules/Nebula.cpp:1400
 msgid "supernova remnant candidate"
 msgstr "candidat a romanent de supernova"
 
-#: src/core/modules/Nebula.cpp:1389
+#: src/core/modules/Nebula.cpp:1401
 msgid "cluster of galaxies"
 msgstr "cúmul de galàxies"
 
-#: src/core/modules/Nebula.cpp:1390
+#: src/core/modules/Nebula.cpp:1402
 msgid "part of a galaxy"
 msgstr "part d'una galàxia"
 
-#: src/core/modules/Nebula.cpp:1391
+#: src/core/modules/Nebula.cpp:1403
 msgid "region of the sky"
 msgstr "regió del cel"
 
-#: src/core/modules/Nebula.cpp:1392
+#: src/core/modules/Nebula.cpp:1404
 msgid "object of unknown nature"
 msgstr "objecte de naturalesa desconeguda"
 
@@ -2070,6 +2070,7 @@ msgstr "Moviment per hora"
 
 #: src/core/modules/Planet.cpp:537 src/core/modules/Planet.cpp:1062
 #: src/core/modules/Planet.cpp:1071 src/core/modules/StarWrapper.cpp:334
+#: plugins/Pulsars/src/Pulsar.cpp:202
 msgctxt "into the direction of"
 msgid "towards"
 msgstr "cap a"
@@ -2420,16 +2421,17 @@ msgstr "Rang de magnitud"
 msgid "Photometric system"
 msgstr "Sistema fotomètric"
 
-#: src/core/modules/StarWrapper.cpp:332
+#: src/core/modules/StarWrapper.cpp:332 plugins/Pulsars/src/Pulsar.cpp:200
 msgid "Proper motion"
 msgstr "Moviment propi"
 
 #: src/core/modules/StarWrapper.cpp:333 src/core/modules/StarWrapper.cpp:335
+#: plugins/Pulsars/src/Pulsar.cpp:201 plugins/Pulsars/src/Pulsar.cpp:203
 msgctxt "milliarc second per year"
 msgid "mas/yr"
 msgstr "ms arc/any"
 
-#: src/core/modules/StarWrapper.cpp:335
+#: src/core/modules/StarWrapper.cpp:335 plugins/Pulsars/src/Pulsar.cpp:203
 msgid "Proper motions by axes"
 msgstr "Moviment propi per eixos"
 
@@ -4045,7 +4047,7 @@ msgstr "Contactes"
 
 #: src/gui/ConfigurationDialog.cpp:1224 src/scripting/StelScriptMgr.cpp:467
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:98
-#: plugins/Oculars/src/gui/OcularDialog.cpp:571
+#: plugins/Oculars/src/gui/OcularDialog.cpp:583
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:676
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:264
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:238
@@ -4068,7 +4070,7 @@ msgstr "Versió"
 
 #: src/gui/ConfigurationDialog.cpp:1225 src/scripting/StelScriptMgr.cpp:462
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
-#: plugins/Oculars/src/gui/OcularDialog.cpp:572
+#: plugins/Oculars/src/gui/OcularDialog.cpp:584
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:677
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:239
@@ -4628,7 +4630,7 @@ msgstr "Verificador: %1"
 
 #: src/gui/HelpDialog.cpp:462
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
-#: plugins/Oculars/src/gui/OcularDialog.cpp:575
+#: plugins/Oculars/src/gui/OcularDialog.cpp:587
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:680
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:271
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:241
@@ -8115,10 +8117,8 @@ msgstr ""
 
 #: src/translations.h:702
 msgid ""
-"Screensaver of various happenings in the Solar System. 300 events in all!"
+"Screensaver of various happenings in the Solar System. 313 events in all!"
 msgstr ""
-"Estalvi de pantalla de diversos esdeveniments del sistema solar. 300 "
-"esdeveniments en total!"
 
 #: src/translations.h:703
 msgid "A tour of the western constellations."
@@ -11553,7 +11553,7 @@ msgstr "Tota la informació disponible"
 msgid "Display no information"
 msgstr "No mostres cap informació"
 
-#: src/ui_configurationDialog.h:1676 plugins/Oculars/src/Oculars.cpp:2428
+#: src/ui_configurationDialog.h:1676 plugins/Oculars/src/Oculars.cpp:2434
 #: plugins/Observability/src/Observability.cpp:179
 msgid "None"
 msgstr "Cap"
@@ -13346,7 +13346,7 @@ msgstr ""
 " calcular.  Haguérem desitjat estar a Hawaii."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:110
-#: plugins/Oculars/src/gui/OcularDialog.cpp:627
+#: plugins/Oculars/src/gui/OcularDialog.cpp:639
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:734
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:247
@@ -13367,7 +13367,7 @@ msgid "Links"
 msgstr "Enllaços"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:111
-#: plugins/Oculars/src/gui/OcularDialog.cpp:630
+#: plugins/Oculars/src/gui/OcularDialog.cpp:642
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:735
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:248
@@ -13393,7 +13393,7 @@ msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:114
-#: plugins/Oculars/src/gui/OcularDialog.cpp:636
+#: plugins/Oculars/src/gui/OcularDialog.cpp:648
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:738
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:288
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:251
@@ -13415,7 +13415,7 @@ msgstr "Si teniu una pregunta, podeu {obtenir una resposta ací}."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:116
-#: plugins/Oculars/src/gui/OcularDialog.cpp:642
+#: plugins/Oculars/src/gui/OcularDialog.cpp:654
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:740
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:290
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:253
@@ -13437,7 +13437,7 @@ msgstr "Es poden fer informes d'error i sol·licituds de funcions {aquí}."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:118
-#: plugins/Oculars/src/gui/OcularDialog.cpp:648
+#: plugins/Oculars/src/gui/OcularDialog.cpp:660
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:742
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:255
@@ -13538,13 +13538,13 @@ msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "Quant a"
 
-#: plugins/Oculars/src/Oculars.cpp:79 plugins/Oculars/src/Oculars.cpp:1418
+#: plugins/Oculars/src/Oculars.cpp:80 plugins/Oculars/src/Oculars.cpp:1412
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:182
 #: plugins/Oculars/src/ui_ocularDialog.h:1429
 msgid "Oculars"
 msgstr "Oculars"
 
-#: plugins/Oculars/src/Oculars.cpp:82
+#: plugins/Oculars/src/Oculars.cpp:83
 msgid ""
 "Shows the sky as if looking through a telescope eyepiece. (Only "
 "magnification and field of view are simulated.) It can also show a sensor "
@@ -13554,269 +13554,269 @@ msgstr ""
 " simulen l'ampliació i el camp visual ). També pot mostrar un quadre sensor "
 "i un visor Telrad."
 
-#: plugins/Oculars/src/Oculars.cpp:948
+#: plugins/Oculars/src/Oculars.cpp:942
 msgid "Please select an object before switching to ocular view."
 msgstr "Seleccioneu un objecte abans de canviar a la vista ocular."
 
-#: plugins/Oculars/src/Oculars.cpp:1044
+#: plugins/Oculars/src/Oculars.cpp:1038
 msgid "&Previous ocular"
 msgstr "Ocular &anterior"
 
-#: plugins/Oculars/src/Oculars.cpp:1045
+#: plugins/Oculars/src/Oculars.cpp:1039
 msgid "&Next ocular"
 msgstr "Ocular següe&nt"
 
-#: plugins/Oculars/src/Oculars.cpp:1046
+#: plugins/Oculars/src/Oculars.cpp:1040
 msgid "Select &ocular"
 msgstr "Selecciona l'&ocular"
 
-#: plugins/Oculars/src/Oculars.cpp:1081
+#: plugins/Oculars/src/Oculars.cpp:1076
 msgid "Toggle &crosshair"
 msgstr "Activa/desactiva el &punt de mira"
 
-#: plugins/Oculars/src/Oculars.cpp:1089
+#: plugins/Oculars/src/Oculars.cpp:1084
 msgid "Configure &Oculars"
 msgstr "Configura els &oculars"
 
-#: plugins/Oculars/src/Oculars.cpp:1097
+#: plugins/Oculars/src/Oculars.cpp:1092
 msgid "Toggle &CCD"
 msgstr "Activa/desactiva el &CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1104
+#: plugins/Oculars/src/Oculars.cpp:1099
 msgid "Toggle &Telrad"
 msgstr "Activa/desactiva el &Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1112
+#: plugins/Oculars/src/Oculars.cpp:1107
 msgid "&Previous CCD"
 msgstr "CCD &anterior"
 
-#: plugins/Oculars/src/Oculars.cpp:1113
+#: plugins/Oculars/src/Oculars.cpp:1108
 msgid "&Next CCD"
 msgstr "CCD següe&nt"
 
-#: plugins/Oculars/src/Oculars.cpp:1114
+#: plugins/Oculars/src/Oculars.cpp:1109
 msgid "&Select CCD"
 msgstr "&Selecciona el CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1130
+#: plugins/Oculars/src/Oculars.cpp:1125
 msgid "&Rotate CCD"
 msgstr "Gi&ra el CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1142
+#: plugins/Oculars/src/Oculars.cpp:1137
 msgid "&Reset rotation"
 msgstr "&Reinicialitza la rotació"
 
-#: plugins/Oculars/src/Oculars.cpp:1292
-#: plugins/Oculars/src/gui/OcularDialog.cpp:106
-#: plugins/Oculars/src/gui/OcularDialog.cpp:121
-#: plugins/Oculars/src/gui/OcularDialog.cpp:136
+#: plugins/Oculars/src/Oculars.cpp:1290
+#: plugins/Oculars/src/gui/OcularDialog.cpp:107
+#: plugins/Oculars/src/gui/OcularDialog.cpp:122
+#: plugins/Oculars/src/gui/OcularDialog.cpp:137
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:823
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:830
 msgid "Warning!"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1293
+#: plugins/Oculars/src/Oculars.cpp:1291
 msgid ""
 "Unable to display a sensor boundary: No sensors or telescopes are defined."
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1419
+#: plugins/Oculars/src/Oculars.cpp:1413
 #: plugins/Oculars/src/ui_ocularDialog.h:1464
 msgid "Ocular view"
 msgstr "Vista d'ocular"
 
-#: plugins/Oculars/src/Oculars.cpp:1421
+#: plugins/Oculars/src/Oculars.cpp:1415
 msgid "Oculars popup menu"
 msgstr "Menú emergent dels oculars"
 
-#: plugins/Oculars/src/Oculars.cpp:1423
+#: plugins/Oculars/src/Oculars.cpp:1417
 msgid "Show crosshairs"
 msgstr "Mostra el punt de mira"
 
-#: plugins/Oculars/src/Oculars.cpp:1424
+#: plugins/Oculars/src/Oculars.cpp:1418
 msgid "Image sensor frame"
 msgstr "Marc del sensor d'imatge"
 
-#: plugins/Oculars/src/Oculars.cpp:1425
+#: plugins/Oculars/src/Oculars.cpp:1419
 msgid "Telrad sight"
 msgstr "Visor Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1428
+#: plugins/Oculars/src/Oculars.cpp:1422
 msgid "Toggle Oculars configuration window"
 msgstr "Activa/desactiva la finestra de configuració dels oculars"
 
-#: plugins/Oculars/src/Oculars.cpp:1434
+#: plugins/Oculars/src/Oculars.cpp:1428
 msgid "Toggle Oculars button bar"
 msgstr "Activa/desactiva la barra de botons dels oculars"
 
-#: plugins/Oculars/src/Oculars.cpp:1437
+#: plugins/Oculars/src/Oculars.cpp:1431
 msgid "Select next telescope"
 msgstr "Selecciona el telescopi següent"
 
-#: plugins/Oculars/src/Oculars.cpp:1440
+#: plugins/Oculars/src/Oculars.cpp:1434
 msgid "Select previous telescope"
 msgstr "Selecciona el telescopi anterior"
 
-#: plugins/Oculars/src/Oculars.cpp:1442
+#: plugins/Oculars/src/Oculars.cpp:1436
 msgid "Select next eyepiece"
 msgstr "Selecciona l'ocular següent"
 
-#: plugins/Oculars/src/Oculars.cpp:1444
+#: plugins/Oculars/src/Oculars.cpp:1438
 msgid "Select previous eyepiece"
 msgstr "Selecciona l'ocular anterior"
 
-#: plugins/Oculars/src/Oculars.cpp:1447
+#: plugins/Oculars/src/Oculars.cpp:1441
 msgid "Rotate reticle pattern of the eyepiece clockwise"
 msgstr "Gira el model de la retícula de l'ocular en sentit horari"
 
-#: plugins/Oculars/src/Oculars.cpp:1452
+#: plugins/Oculars/src/Oculars.cpp:1446
 msgid "Rotate reticle pattern of the eyepiece counterclockwise"
 msgstr "Gira el model de la retícula de l'ocular en sentit antihorari"
 
-#: plugins/Oculars/src/Oculars.cpp:1455
+#: plugins/Oculars/src/Oculars.cpp:1449
 msgid "Toggle sensor crop overlay"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1456
+#: plugins/Oculars/src/Oculars.cpp:1450
 msgid "Toggle sensor pixel grid"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1457
+#: plugins/Oculars/src/Oculars.cpp:1451
 msgid "Toggle focuser overlay"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1692
+#: plugins/Oculars/src/Oculars.cpp:1687
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr "AR/Dec (J2000.0) de creu"
 
 #. TRANSLATORS: Unit of measure for scale - arc-seconds per pixel
-#: plugins/Oculars/src/Oculars.cpp:1706
+#: plugins/Oculars/src/Oculars.cpp:1701
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:760
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:930
 msgid "\"/px"
 msgstr "\"/px"
 
-#: plugins/Oculars/src/Oculars.cpp:1728
+#: plugins/Oculars/src/Oculars.cpp:1723
 msgctxt "pixel"
 msgid "px"
 msgstr "px"
 
-#: plugins/Oculars/src/Oculars.cpp:1997
+#: plugins/Oculars/src/Oculars.cpp:2003
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:567
 msgid "Ocular"
 msgstr "Ocular"
 
-#: plugins/Oculars/src/Oculars.cpp:1999
+#: plugins/Oculars/src/Oculars.cpp:2005
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:569
 msgid "Binocular"
 msgstr "Prismàtic"
 
-#: plugins/Oculars/src/Oculars.cpp:2016
+#: plugins/Oculars/src/Oculars.cpp:2022
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:607
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "f de l'ocular: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:2023
+#: plugins/Oculars/src/Oculars.cpp:2029
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:616
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "aFOV de l'ocular: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2033
+#: plugins/Oculars/src/Oculars.cpp:2039
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:643
 #, qt-format
 msgid "Lens #%1"
 msgstr "Lent #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2035
+#: plugins/Oculars/src/Oculars.cpp:2041
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:645
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Lent #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2038
+#: plugins/Oculars/src/Oculars.cpp:2044
 msgid "Lens: none"
 msgstr "Lent: cap"
 
-#: plugins/Oculars/src/Oculars.cpp:2052 plugins/Oculars/src/Oculars.cpp:2107
+#: plugins/Oculars/src/Oculars.cpp:2058 plugins/Oculars/src/Oculars.cpp:2113
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:879
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Telescopi #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2061
+#: plugins/Oculars/src/Oculars.cpp:2067
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:979
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Ampliació: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2067
+#: plugins/Oculars/src/Oculars.cpp:2073
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:990
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "Pupil·la d'eixida: %1 mm"
 
-#: plugins/Oculars/src/Oculars.cpp:2074
+#: plugins/Oculars/src/Oculars.cpp:2080
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:998
 #, qt-format
 msgid "FOV: %1"
 msgstr "FOV: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2095
+#: plugins/Oculars/src/Oculars.cpp:2101
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:747
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:921
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Dimensions: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2097
+#: plugins/Oculars/src/Oculars.cpp:2103
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:754
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:926
 msgid "Binning"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2100
+#: plugins/Oculars/src/Oculars.cpp:2106
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:709
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Sensor #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2102
+#: plugins/Oculars/src/Oculars.cpp:2108
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:711
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Sensor #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2109
+#: plugins/Oculars/src/Oculars.cpp:2115
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:881
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Telescopi #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2424
+#: plugins/Oculars/src/Oculars.cpp:2430
 msgid "&Lens"
 msgstr "&Lent"
 
-#: plugins/Oculars/src/Oculars.cpp:2425
+#: plugins/Oculars/src/Oculars.cpp:2431
 msgid "&Previous lens"
 msgstr "Lent &anterior"
 
-#: plugins/Oculars/src/Oculars.cpp:2426
+#: plugins/Oculars/src/Oculars.cpp:2432
 msgid "&Next lens"
 msgstr "Lent següe&nt"
 
-#: plugins/Oculars/src/Oculars.cpp:2450
+#: plugins/Oculars/src/Oculars.cpp:2456
 msgid "&Telescope"
 msgstr "&Telescopi"
 
-#: plugins/Oculars/src/Oculars.cpp:2451
+#: plugins/Oculars/src/Oculars.cpp:2457
 msgid "&Previous telescope"
 msgstr "Telescopi &anterior"
 
-#: plugins/Oculars/src/Oculars.cpp:2452
+#: plugins/Oculars/src/Oculars.cpp:2458
 msgid "&Next telescope"
 msgstr "Telescopi següe&nt"
 
@@ -14064,70 +14064,70 @@ msgstr "Resolució visual"
 msgid "Visual resolution is based on eye properties and magnification"
 msgstr "La resolució visual es basa en les propietats oculars i l'augment"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:106
+#: plugins/Oculars/src/gui/OcularDialog.cpp:107
 msgid "Cannot delete the last sensor."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:121
+#: plugins/Oculars/src/gui/OcularDialog.cpp:122
 msgid "Cannot delete the last ocular."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:136
+#: plugins/Oculars/src/gui/OcularDialog.cpp:137
 msgid "Cannot delete the last telescope."
 msgstr ""
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
-#: plugins/Oculars/src/gui/OcularDialog.cpp:550
+#: plugins/Oculars/src/gui/OcularDialog.cpp:562
 msgid "tFOV:"
 msgstr "vFOV:"
 
 #. TRANSLATORS: Magnification factor for binoculars
-#: plugins/Oculars/src/gui/OcularDialog.cpp:552
+#: plugins/Oculars/src/gui/OcularDialog.cpp:564
 msgid "Magnification factor:"
 msgstr "Factor d'ampliació:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:553
+#: plugins/Oculars/src/gui/OcularDialog.cpp:565
 #: plugins/Oculars/src/ui_ocularDialog.h:1581
 msgid "Diameter:"
 msgstr "Diàmetre:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:555
+#: plugins/Oculars/src/gui/OcularDialog.cpp:567
 #: plugins/Oculars/src/ui_ocularDialog.h:1546
 msgid "aFOV:"
 msgstr "aFOV:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:556
+#: plugins/Oculars/src/gui/OcularDialog.cpp:568
 #: plugins/Oculars/src/ui_ocularDialog.h:1547
 #: plugins/Oculars/src/ui_ocularDialog.h:1582
 msgid "Focal length:"
 msgstr "Distància focal:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:557
+#: plugins/Oculars/src/gui/OcularDialog.cpp:569
 #: plugins/Oculars/src/ui_ocularDialog.h:1543
 msgid "Field stop:"
 msgstr "Límit del camp:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:569
+#: plugins/Oculars/src/gui/OcularDialog.cpp:581
 msgid "Oculars Plug-in"
 msgstr "Connector d'oculars"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:579
+#: plugins/Oculars/src/gui/OcularDialog.cpp:591
 msgid "Barlow lens feature"
 msgstr "Característiques de la lent Barlow"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:580
+#: plugins/Oculars/src/gui/OcularDialog.cpp:592
 msgid "Sensor crop overlay feature"
 msgstr "Funció de superposició de l'escapçament del sensor"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:581
+#: plugins/Oculars/src/gui/OcularDialog.cpp:593
 msgid "Pixel grid feature"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:585
+#: plugins/Oculars/src/gui/OcularDialog.cpp:597
 msgid "Overview"
 msgstr "Visió general"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:588
+#: plugins/Oculars/src/gui/OcularDialog.cpp:600
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece."
 "  This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -14135,11 +14135,11 @@ msgid ""
 "will populate some samples to get you started."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:592
+#: plugins/Oculars/src/gui/OcularDialog.cpp:604
 msgid "You can choose to scale the image you see on the screen."
 msgstr "Podeu triar escalar la imatge que es veu a la pantalla."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:593
+#: plugins/Oculars/src/gui/OcularDialog.cpp:605
 msgid ""
 "This is intended to show you a better comparison of what one "
 "eyepiece/telescope combination will be like when compared to another."
@@ -14147,7 +14147,7 @@ msgstr ""
 "Amb açò es pretén mostrar una millor comparació de com seria que una "
 "combinació d'ocular/telescopi respecte a una altra."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:596
+#: plugins/Oculars/src/gui/OcularDialog.cpp:608
 msgid ""
 "The same eyepiece in two different telescopes of differing focal length will"
 " produce two different exit pupils, changing the view somewhat."
@@ -14156,7 +14156,7 @@ msgstr ""
 "produirà dues pupil·les de sortida diferents, canviant en alguna cosa la "
 "visualització."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:599
+#: plugins/Oculars/src/gui/OcularDialog.cpp:611
 msgid ""
 "The trade-off of this is that, with the image scaled, a large part of the "
 "screen can be wasted."
@@ -14164,17 +14164,17 @@ msgstr ""
 "El desavantatge d'això és que, amb la imatge escalada, una gran part de la "
 "pantalla es pot desaprofitar."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:600
+#: plugins/Oculars/src/gui/OcularDialog.cpp:612
 msgid ""
 "Therefore we recommend that you leave it off, unless you feel you have a "
 "need for it."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:601
+#: plugins/Oculars/src/gui/OcularDialog.cpp:613
 msgid "You can toggle a crosshair in the view."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:605
+#: plugins/Oculars/src/gui/OcularDialog.cpp:617
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder. This feature draws three concentric circles "
@@ -14182,21 +14182,21 @@ msgid ""
 "with the naked eye through the Telrad (or similar) finder."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:608
+#: plugins/Oculars/src/gui/OcularDialog.cpp:620
 msgid ""
 "You can adjust the diameters or even add a fourth circle if you have a "
 "different finder, or revert to the Telrad standard sizes."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:611
+#: plugins/Oculars/src/gui/OcularDialog.cpp:623
 msgid "If you find any issues, please let me know. Enjoy!"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:614
+#: plugins/Oculars/src/gui/OcularDialog.cpp:626
 msgid "Hot Keys"
 msgstr "Tecles de drecera"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:615
+#: plugins/Oculars/src/gui/OcularDialog.cpp:627
 msgid ""
 "The plug-in's key bindings can be edited in the Keyboard shortcuts editor "
 "(F7)."
@@ -14204,14 +14204,14 @@ msgstr ""
 "Les tecles associades als connectors es poden editar en l'editor de dreceres"
 " de teclat (F7)."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:618
-#: plugins/Pulsars/src/Pulsar.cpp:288
+#: plugins/Oculars/src/gui/OcularDialog.cpp:630
+#: plugins/Pulsars/src/Pulsar.cpp:302
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:604
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:318
 msgid "Notes"
 msgstr "Notes"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:620
+#: plugins/Oculars/src/gui/OcularDialog.cpp:632
 msgid ""
 "The sensor view has a feature to show a sensor crop overlay with information"
 " about the crop size. The size of this rectangle may be adjusted when "
@@ -14219,13 +14219,13 @@ msgid ""
 "binning 3)."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:624
+#: plugins/Oculars/src/gui/OcularDialog.cpp:636
 #, qt-format
 msgid ""
 "In this case, information about crop size overlay will be marked by %1."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:625
+#: plugins/Oculars/src/gui/OcularDialog.cpp:637
 msgid ""
 "This mark is also displayed if the crop size is larger than the sensor size."
 msgstr ""
@@ -14643,237 +14643,260 @@ msgid "Hide satellites from the group"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:2283
+#: plugins/Satellites/src/Satellites.cpp:2298
 msgid "visual"
 msgstr "visibles"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:2285
+#: plugins/Satellites/src/Satellites.cpp:2300
 msgid "scientific"
 msgstr "científics"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:2287
+#: plugins/Satellites/src/Satellites.cpp:2302
 msgid "communications"
 msgstr "comunicacions"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:2289
+#: plugins/Satellites/src/Satellites.cpp:2304
 msgid "navigation"
 msgstr "navegació"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:2291
+#: plugins/Satellites/src/Satellites.cpp:2306
 msgid "amateur"
 msgstr "amateur"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:2293
+#: plugins/Satellites/src/Satellites.cpp:2308
 msgid "weather"
 msgstr "oratge"
 
 #. TRANSLATORS: Satellite group: Earth Resources satellites
-#: plugins/Satellites/src/Satellites.cpp:2295
+#: plugins/Satellites/src/Satellites.cpp:2310
 msgid "earth resources"
 msgstr "recursos naturals"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:2297
+#: plugins/Satellites/src/Satellites.cpp:2312
 msgid "geostationary"
 msgstr "geostacionaris"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:2299
+#: plugins/Satellites/src/Satellites.cpp:2314
 msgid "non-operational"
 msgstr "no operatius"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation
 #. (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:2301
+#: plugins/Satellites/src/Satellites.cpp:2316
 msgid "gps"
 msgstr "gps"
 
+#. TRANSLATORS: Satellite group: The Indian Regional Navigation Satellite
+#. System (IRNSS) is an autonomous regional satellite navigation system being
+#. developed by the Indian Space Research Organisation (ISRO) which would be
+#. under complete control of the Indian government.
+#: plugins/Satellites/src/Satellites.cpp:2318
+msgid "irnss"
+msgstr ""
+
+#. TRANSLATORS: Satellite group: The Quasi-Zenith Satellite System (QZSS), is
+#. a proposed three-satellite regional time transfer system and Satellite
+#. Based Augmentation System for the Global Positioning System, that would be
+#. receivable within Japan.
+#: plugins/Satellites/src/Satellites.cpp:2320
+msgid "qzss"
+msgstr ""
+
+#. TRANSLATORS: Satellite group: The Tracking and Data Relay Satellite System
+#. (TDRSS) is a network of communications satellites and ground stations used
+#. by NASA for space communications.
+#: plugins/Satellites/src/Satellites.cpp:2322
+msgid "tdrss"
+msgstr ""
+
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS
 #. constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:2303
+#: plugins/Satellites/src/Satellites.cpp:2324
 msgid "glonass"
 msgstr "glonass"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the BeiDou
 #. constellation (BeiDou Navigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:2305
+#: plugins/Satellites/src/Satellites.cpp:2326
 msgid "beidou"
 msgstr "beidou"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo
 #. constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:2307
+#: plugins/Satellites/src/Satellites.cpp:2328
 msgid "galileo"
 msgstr "galileu"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium
 #. constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2309
+#: plugins/Satellites/src/Satellites.cpp:2330
 msgid "iridium"
 msgstr "Iridium"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium NEXT
 #. constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2311
+#: plugins/Satellites/src/Satellites.cpp:2332
 msgid "iridium next"
 msgstr "iridium next"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Starlink
 #. constellation (Starlink is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2313
+#: plugins/Satellites/src/Satellites.cpp:2334
 msgid "starlink"
 msgstr "starlink"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Spire
 #. constellation (LEMUR satellites)
-#: plugins/Satellites/src/Satellites.cpp:2315
+#: plugins/Satellites/src/Satellites.cpp:2336
 msgid "spire"
 msgstr "spire"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the OneWeb
 #. constellation (OneWeb is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2317
+#: plugins/Satellites/src/Satellites.cpp:2338
 msgid "oneweb"
 msgstr "oneweb"
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:2319
+#: plugins/Satellites/src/Satellites.cpp:2340
 msgid "stations"
 msgstr "estacions"
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:2321
+#: plugins/Satellites/src/Satellites.cpp:2342
 msgid "education"
 msgstr "educació"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space
 #. observatories
-#: plugins/Satellites/src/Satellites.cpp:2323
+#: plugins/Satellites/src/Satellites.cpp:2344
 msgid "observatory"
 msgstr "observatoris"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the INTELSAT
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2325
+#: plugins/Satellites/src/Satellites.cpp:2346
 msgid "intelsat"
 msgstr "intelsat"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLOBALSTAR
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2327
+#: plugins/Satellites/src/Satellites.cpp:2348
 msgid "globalstar"
 msgstr "globalstar"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the ORBCOMM
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2329
+#: plugins/Satellites/src/Satellites.cpp:2350
 msgid "orbcomm"
 msgstr "orbcomm"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GORIZONT
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2331
+#: plugins/Satellites/src/Satellites.cpp:2352
 msgid "gorizont"
 msgstr "gorizont"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the RADUGA satellites
-#: plugins/Satellites/src/Satellites.cpp:2333
+#: plugins/Satellites/src/Satellites.cpp:2354
 msgid "raduga"
 msgstr "raduga"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the MOLNIYA
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2335
+#: plugins/Satellites/src/Satellites.cpp:2356
 msgid "molniya"
 msgstr "molniya"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the COSMOS satellites
-#: plugins/Satellites/src/Satellites.cpp:2337
+#: plugins/Satellites/src/Satellites.cpp:2358
 msgid "cosmos"
 msgstr "cosmos"
 
 #. TRANSLATORS: Satellite group: Debris of satellites
-#: plugins/Satellites/src/Satellites.cpp:2339
+#: plugins/Satellites/src/Satellites.cpp:2360
 msgid "debris"
 msgstr "debris"
 
 #. TRANSLATORS: Satellite group: Crewed satellites
-#: plugins/Satellites/src/Satellites.cpp:2341
+#: plugins/Satellites/src/Satellites.cpp:2362
 msgid "crewed"
 msgstr "crewed"
 
 #. TRANSLATORS: Satellite group: Satellites of ISS resupply missions
-#: plugins/Satellites/src/Satellites.cpp:2343
+#: plugins/Satellites/src/Satellites.cpp:2364
 msgid "resupply"
 msgstr "resupply"
 
 #. TRANSLATORS: Satellite group: are known to broadcast TV signals
-#: plugins/Satellites/src/Satellites.cpp:2345
+#: plugins/Satellites/src/Satellites.cpp:2366
 msgid "tv"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: military satellites
-#: plugins/Satellites/src/Satellites.cpp:2347
+#: plugins/Satellites/src/Satellites.cpp:2368
 msgid "military"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: geodetic satellites
-#: plugins/Satellites/src/Satellites.cpp:2349
+#: plugins/Satellites/src/Satellites.cpp:2370
 msgid "geodetic"
 msgstr ""
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:2354
+#: plugins/Satellites/src/Satellites.cpp:2375
 msgid "The Hubble Space Telescope"
 msgstr "Telescopi espacial Hubble"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2356
+#: plugins/Satellites/src/Satellites.cpp:2377
 msgid "The International Space Station"
 msgstr "Estació Espacial Internacional"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2358
+#: plugins/Satellites/src/Satellites.cpp:2379
 msgid "China's first space station"
 msgstr "Primera estació espacial de la Xina"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2360
+#: plugins/Satellites/src/Satellites.cpp:2381
 msgid "Tiangong space station (Chinese large modular space station)"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2362
+#: plugins/Satellites/src/Satellites.cpp:2383
 msgid "The russian space radio telescope RadioAstron"
 msgstr "El radiotelescopi espacial rus RadioAstron"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2364
+#: plugins/Satellites/src/Satellites.cpp:2385
 msgid "International Gamma-Ray Astrophysics Laboratory"
 msgstr "International Gamma-Ray Astrophysics Laboratory"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2366
+#: plugins/Satellites/src/Satellites.cpp:2387
 msgid "The Gamma-Ray Observatory"
 msgstr "L'observatori de Raigs Gamma"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2368
+#: plugins/Satellites/src/Satellites.cpp:2389
 msgid "The Microvariability and Oscillations of Stars telescope"
 msgstr "El telescopi de Microvariabilitat  i Osci·llacions d'Estreles"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2370
+#: plugins/Satellites/src/Satellites.cpp:2391
 msgid "The Interface Region Imaging Spectrograph"
 msgstr "L'espectrògraf d'imatges de la regió de la interfície"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2372
+#: plugins/Satellites/src/Satellites.cpp:2393
 msgid ""
 "The Spectroscopic Planet Observatory for Recognition of Interaction of "
 "Atmosphere"
@@ -14882,81 +14905,81 @@ msgstr ""
 " de l'atmosfera"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2376
+#: plugins/Satellites/src/Satellites.cpp:2397
 msgid "The Dark Matter Particle Explorer"
 msgstr "L'explorador de partícules de la matèria fosca"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2378
+#: plugins/Satellites/src/Satellites.cpp:2399
 msgid "Arcsecond Space Telescope Enabling Research in Astrophysics"
 msgstr ""
 "Telescopi espacial de segons d'arc que permet la investigació en astrofísica"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2380
+#: plugins/Satellites/src/Satellites.cpp:2401
 msgid "Reuven Ramaty High Energy Solar Spectroscopic Imager"
 msgstr "Càmera espectroscòpica solar d'alta energia Reuven Ramaty"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2382
+#: plugins/Satellites/src/Satellites.cpp:2403
 msgid "The Chandra X-ray Observatory"
 msgstr "L'Observatori de Raigs X Chandra"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2386
+#: plugins/Satellites/src/Satellites.cpp:2407
 msgid "ISS (ZARYA)"
 msgstr "ISS (ZARIÀ)"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2388
+#: plugins/Satellites/src/Satellites.cpp:2409
 msgid "ISS"
 msgstr "EEI"
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:2390
+#: plugins/Satellites/src/Satellites.cpp:2411
 msgid "HST"
 msgstr "TEH"
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:2392
+#: plugins/Satellites/src/Satellites.cpp:2413
 msgid "SPEKTR-R"
 msgstr "SPEKTR-R"
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics
 #. Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:2394
+#: plugins/Satellites/src/Satellites.cpp:2415
 msgid "INTEGRAL"
 msgstr "INTEGRAL"
 
 #. TRANSLATORS: Satellite name: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:2396
+#: plugins/Satellites/src/Satellites.cpp:2417
 msgid "TIANGONG 1"
 msgstr "TIANGONG 1"
 
 #. TRANSLATORS: Satellite name: name of China's space station module
-#: plugins/Satellites/src/Satellites.cpp:2398
+#: plugins/Satellites/src/Satellites.cpp:2419
 msgid "TIANHE"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: China's space station name (with name of base
 #. module)
-#: plugins/Satellites/src/Satellites.cpp:2400
+#: plugins/Satellites/src/Satellites.cpp:2421
 msgid "TIANGONG (TIANHE)"
 msgstr ""
 
-#: plugins/Satellites/src/Satellites.cpp:2403
+#: plugins/Satellites/src/Satellites.cpp:2424
 msgid "The satellite and the observer are in sunlight"
 msgstr ""
 
-#: plugins/Satellites/src/Satellites.cpp:2404
+#: plugins/Satellites/src/Satellites.cpp:2425
 msgid "The satellite is visible"
 msgstr ""
 
-#: plugins/Satellites/src/Satellites.cpp:2405
+#: plugins/Satellites/src/Satellites.cpp:2426
 msgid "The satellite is eclipsed"
 msgstr ""
 
-#: plugins/Satellites/src/Satellites.cpp:2406
+#: plugins/Satellites/src/Satellites.cpp:2427
 msgid "The satellite is not visible"
 msgstr "El satèl·lit no és visible."
 
@@ -15072,7 +15095,7 @@ msgid "Radio communication"
 msgstr "Comunicació per ràdio"
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Satellites/src/Satellite.cpp:455 plugins/Pulsars/src/Pulsar.cpp:274
+#: plugins/Satellites/src/Satellite.cpp:455 plugins/Pulsars/src/Pulsar.cpp:288
 msgctxt "frequency"
 msgid "MHz"
 msgstr "MHz"
@@ -18586,132 +18609,132 @@ msgstr "Mostra els púlsars"
 msgid "Pulsars configuration window"
 msgstr "Finestra de configuració dels púlsars"
 
-#: plugins/Pulsars/src/Pulsar.cpp:184
+#: plugins/Pulsars/src/Pulsar.cpp:187
 msgid "pulsar"
 msgstr "púlsar"
 
-#: plugins/Pulsars/src/Pulsar.cpp:186
+#: plugins/Pulsars/src/Pulsar.cpp:189
 msgid "pulsar with glitches"
 msgstr "púlsar amb fallades"
 
-#: plugins/Pulsars/src/Pulsar.cpp:186
+#: plugins/Pulsars/src/Pulsar.cpp:189
 msgid "registered glitches"
 msgstr "fallades registrades"
 
-#: plugins/Pulsars/src/Pulsar.cpp:197
+#: plugins/Pulsars/src/Pulsar.cpp:211
 msgid "Barycentric period"
 msgstr "Període baricèntric"
 
 #. TRANSLATORS: Unit of measure for period - seconds
-#: plugins/Pulsars/src/Pulsar.cpp:200
+#: plugins/Pulsars/src/Pulsar.cpp:214
 msgctxt "period"
 msgid "s"
 msgstr "s"
 
-#: plugins/Pulsars/src/Pulsar.cpp:204
+#: plugins/Pulsars/src/Pulsar.cpp:218
 msgid "Time derivative of barycentric period"
 msgstr "Temps derivat del període baricèntric"
 
-#: plugins/Pulsars/src/Pulsar.cpp:209
+#: plugins/Pulsars/src/Pulsar.cpp:223
 msgid "Dispersion measure"
 msgstr "Mesura de dispersió"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
-#: plugins/Pulsars/src/Pulsar.cpp:212
+#: plugins/Pulsars/src/Pulsar.cpp:226
 msgctxt "distance"
 msgid "pc"
 msgstr "pc"
 
 #. TRANSLATORS: Unit of measure for distance - centimeters
-#: plugins/Pulsars/src/Pulsar.cpp:214
+#: plugins/Pulsars/src/Pulsar.cpp:228
 msgctxt "distance"
 msgid "cm"
 msgstr "cm"
 
-#: plugins/Pulsars/src/Pulsar.cpp:221
+#: plugins/Pulsars/src/Pulsar.cpp:235
 msgid "Spin down energy loss rate"
 msgstr "Taxa de pèrdua d'energia de rotació"
 
 #. TRANSLATORS: Unit of measure for power - erg per second
-#: plugins/Pulsars/src/Pulsar.cpp:224
+#: plugins/Pulsars/src/Pulsar.cpp:238
 msgctxt "power"
 msgid "ergs/s"
 msgstr "ergs/s"
 
-#: plugins/Pulsars/src/Pulsar.cpp:230
+#: plugins/Pulsars/src/Pulsar.cpp:244
 msgid "Binary period of pulsar"
 msgstr "Període binari de púlsar"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: plugins/Pulsars/src/Pulsar.cpp:233 plugins/Exoplanets/src/Exoplanet.cpp:319
+#: plugins/Pulsars/src/Pulsar.cpp:247 plugins/Exoplanets/src/Exoplanet.cpp:319
 msgctxt "period"
 msgid "days"
 msgstr "dies"
 
-#: plugins/Pulsars/src/Pulsar.cpp:237 plugins/Exoplanets/src/Exoplanet.cpp:323
+#: plugins/Pulsars/src/Pulsar.cpp:251 plugins/Exoplanets/src/Exoplanet.cpp:323
 msgid "Eccentricity"
 msgstr "Excentricitat"
 
-#: plugins/Pulsars/src/Pulsar.cpp:242
+#: plugins/Pulsars/src/Pulsar.cpp:256
 msgid "Annual parallax"
 msgstr "Paral·laxi anual"
 
-#: plugins/Pulsars/src/Pulsar.cpp:251
+#: plugins/Pulsars/src/Pulsar.cpp:265
 msgid "Distance based on electron density model"
 msgstr "Distància basada en el model de densitat d'electrons"
 
-#: plugins/Pulsars/src/Pulsar.cpp:264
+#: plugins/Pulsars/src/Pulsar.cpp:278
 #, no-c-format
 msgid "Profile width at 50% of peak"
 msgstr "Amplària del perfil al 50% del pic"
 
 #. TRANSLATORS: Unit of measure for time - milliseconds
-#: plugins/Pulsars/src/Pulsar.cpp:267
+#: plugins/Pulsars/src/Pulsar.cpp:281
 msgctxt "time"
 msgid "ms"
 msgstr "ms"
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
-#: plugins/Pulsars/src/Pulsar.cpp:272
+#: plugins/Pulsars/src/Pulsar.cpp:286
 msgid "Time averaged flux density at"
 msgstr "Freqüència de la densitat de flux a"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
-#: plugins/Pulsars/src/Pulsar.cpp:276
+#: plugins/Pulsars/src/Pulsar.cpp:290
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:352
 msgctxt "spectral flux density"
 msgid "mJy"
 msgstr "mJy"
 
-#: plugins/Pulsars/src/Pulsar.cpp:376
+#: plugins/Pulsars/src/Pulsar.cpp:390
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr ""
 "púlsar de raigs X anòmal o repetidor de raigs gamma tous amb pulsacions "
 "detectades"
 
-#: plugins/Pulsars/src/Pulsar.cpp:381
+#: plugins/Pulsars/src/Pulsar.cpp:395
 msgid "has one or more binary companions"
 msgstr "té un o més companys binaris"
 
-#: plugins/Pulsars/src/Pulsar.cpp:386
+#: plugins/Pulsars/src/Pulsar.cpp:400
 msgid "with pulsed emission from radio to infrared or higher frequencies"
 msgstr ""
 "amb emissió per pulsacions de ràdio a freqüències infraroges o superiors"
 
-#: plugins/Pulsars/src/Pulsar.cpp:391
+#: plugins/Pulsars/src/Pulsar.cpp:405
 msgid "with pulsed emission only at infrared or higher frequencies"
 msgstr "amb emissió per pulsacions només a freqüències infraroges o superiors"
 
-#: plugins/Pulsars/src/Pulsar.cpp:396
+#: plugins/Pulsars/src/Pulsar.cpp:410
 msgid "with pulsed emission in the radio band"
 msgstr "amb emissió per pulsacions en la banda de ràdio"
 
-#: plugins/Pulsars/src/Pulsar.cpp:401
+#: plugins/Pulsars/src/Pulsar.cpp:415
 msgid "with intermittently pulsed radio emission"
 msgstr "amb emissió de ràdio per pulsacions intermitents"
 
-#: plugins/Pulsars/src/Pulsar.cpp:406
+#: plugins/Pulsars/src/Pulsar.cpp:420
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"

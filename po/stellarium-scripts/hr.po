@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-03-28 10:19+0700\n"
+"POT-Creation-Date: 2021-05-29 17:46+0700\n"
 "PO-Revision-Date: 2019-01-19 14:25+0000\n"
 "Last-Translator: Orr Nuts <orrnuts@gmail.com>, 2020\n"
 "Language-Team: Croatian (https://www.transifex.com/stellarium/teams/80998/hr/)\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Language: hr\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
-#: scripts/analemma.ssc:16
+#: scripts/analemma.ssc:17
 msgid "Analemma"
 msgstr "Analema"
 
@@ -825,7 +825,7 @@ msgstr "6.3 kutnih minuta (WNW)"
 msgid "Separation:"
 msgstr "Udaljenost:"
 
-#: scripts/martian_analemma.ssc:16
+#: scripts/martian_analemma.ssc:17
 msgid "Martian analemma"
 msgstr "Marsova analema"
 
@@ -892,62 +892,66 @@ msgstr "Okultacije sjajnih zvijezda od strane planeta"
 msgid "Mutual occultations of planets"
 msgstr "Međusobne okultacije planeta"
 
-#: scripts/supernova.ssc:22
+#: scripts/supernova.ssc:23
 msgid "Europe, Uraniborg."
 msgstr "Europa, Uraniborg."
 
-#: scripts/supernova.ssc:30
+#: scripts/supernova.ssc:31
 msgid "Evening of 20 October 1572"
 msgstr "Večer na 20. Listopad 1572."
 
-#: scripts/supernova.ssc:39
+#: scripts/supernova.ssc:40
 msgid "Constellation Cassiopeia"
 msgstr "Zviježđe Kasiopeja"
 
-#: scripts/supernova.ssc:60
+#: scripts/supernova.ssc:61
 msgid "5 days later..."
 msgstr "5 dana kasnije..."
 
-#: scripts/supernova.ssc:66
+#: scripts/supernova.ssc:67
 msgid "Next 3 days..."
 msgstr "Slijedeća 3 dana..."
 
-#: scripts/supernova.ssc:72
+#: scripts/supernova.ssc:73
 msgid "New star! But people have not seen it yet..."
 msgstr "Nova zvijezda! Ali ljudi je još nisu primjetili..."
 
-#: scripts/supernova.ssc:77
+#: scripts/supernova.ssc:78
 msgid "Evening of 31 October 1572"
 msgstr "Večer na 31. Listopad 1572."
 
-#: scripts/supernova.ssc:85
+#: scripts/supernova.ssc:86
 msgid "Evening of "
 msgstr "Večer"
 
-#: scripts/supernova.ssc:85
+#: scripts/supernova.ssc:86
 msgid " November 1572"
 msgstr " Studeni 1572."
 
-#: scripts/supernova.ssc:92
+#: scripts/supernova.ssc:93
 msgid "Hooray! First observations in Korea and Europe."
 msgstr "Hura! Prva zapažanja u Koreji i Europi."
 
-#: scripts/supernova.ssc:100
+#: scripts/supernova.ssc:101
 msgid "First observations in China."
 msgstr "Prva promatranja u Kini."
 
-#: scripts/supernova.ssc:108
+#: scripts/supernova.ssc:109
 msgid ""
 "The clouds are gone and Tycho Brahe the first time watching a new star!"
 msgstr "Oblaci su isčezli i Tycho Brahe po prvi puta promatra novu zvijezdu!"
 
-#: scripts/supernova.ssc:117
+#: scripts/supernova.ssc:118
 msgid "Next 60 days..."
 msgstr "Slijedećih 60 dana..."
 
-#: scripts/supernova.ssc:128
+#: scripts/supernova.ssc:129
 msgid "Next other 40 days..."
 msgstr "Slijedećih ostalih 40 dana..."
+
+#: scripts/supernova.ssc:150
+msgid "The Historical supernovae plugin is not loaded!"
+msgstr ""
 
 #: scripts/h400_tour.ssc:16
 msgid "The Herschel 400 Catalogue"
@@ -1306,7 +1310,7 @@ msgstr "Izlazak #3"
 msgid "Sunset #3"
 msgstr "Zalazak #3"
 
-#: scripts/saturnian_analemma.ssc:16
+#: scripts/saturnian_analemma.ssc:17
 msgid "Saturnian analemma"
 msgstr "Saturnova analema"
 
@@ -1314,394 +1318,394 @@ msgstr "Saturnova analema"
 msgid "Solar day"
 msgstr "Solarni dan"
 
-#: scripts/uranian_analemma.ssc:16
+#: scripts/uranian_analemma.ssc:17
 msgid "Uranian analemma"
 msgstr "Uranova analema"
 
-#: scripts/messier_marathon.ssc:17
+#: scripts/messier_marathon.ssc:18
 msgid "Messier Marathon"
 msgstr "Messier-ov maraton"
 
-#: scripts/messier_marathon.ssc:84
+#: scripts/messier_marathon.ssc:85
 msgid "Difficulty is 0"
 msgstr "Težina je 0"
 
-#: scripts/messier_marathon.ssc:85
+#: scripts/messier_marathon.ssc:86
 msgid "Very diffuse, very dark, very difficult"
 msgstr "Vrlo difuzan, vrlo taman, vrlo težak"
 
-#: scripts/messier_marathon.ssc:86
+#: scripts/messier_marathon.ssc:87
 msgid "Easier than M74, small"
 msgstr "Laganiji od M74, mali"
 
-#: scripts/messier_marathon.ssc:87
+#: scripts/messier_marathon.ssc:88
 msgid "Visible to the naked eye, no difficulty"
 msgstr "Vidljiv golim okom, bez teškoća"
 
-#: scripts/messier_marathon.ssc:88
+#: scripts/messier_marathon.ssc:89
 msgid "More difficult than M110 to verify, small"
 msgstr "Teži za potvrditi nego M110, mali"
 
-#: scripts/messier_marathon.ssc:89
+#: scripts/messier_marathon.ssc:90
 msgid "In the west of M31, it is easy to detect"
 msgstr "Zapadnije od M31, lagan za pronaći"
 
-#: scripts/messier_marathon.ssc:90
+#: scripts/messier_marathon.ssc:91
 msgid "Diffuse, great, brighter"
 msgstr "Difuzan, velik, sjajan"
 
-#: scripts/messier_marathon.ssc:91
+#: scripts/messier_marathon.ssc:92
 msgid "Small, easy to locate, not as horror as imagined"
 msgstr "Mali, lagan za pronaći, nije strašno kao što se misli"
 
-#: scripts/messier_marathon.ssc:92
+#: scripts/messier_marathon.ssc:93
 msgid "Difficult to locate, easy to detect and verify"
 msgstr "Teži za pronaći, lagan za opaziti i potvrditi"
 
-#: scripts/messier_marathon.ssc:93
+#: scripts/messier_marathon.ssc:94
 msgid "Small, easy to locate, don't confuse with NGC663"
 msgstr "Mali, lagan za pronaći, ne zamijeniti za NGC663"
 
-#: scripts/messier_marathon.ssc:94
+#: scripts/messier_marathon.ssc:95
 msgid "Large, scattered, easy"
 msgstr "Veliki, raspršen, lagan"
 
-#: scripts/messier_marathon.ssc:95
+#: scripts/messier_marathon.ssc:96
 msgid "Fuzzy, easy to find, accompanied by a small star"
 msgstr "Nejasan, lagan za pronaći, u pratnji s manjom zvijezdom"
 
-#: scripts/messier_marathon.ssc:96
+#: scripts/messier_marathon.ssc:97
 msgid "Visible to the naked eye, better than M31"
 msgstr "Vidljiv golim okom, bolje od M31"
 
-#: scripts/messier_marathon.ssc:97
+#: scripts/messier_marathon.ssc:98
 msgid "Very close to M42, not easy to see the fuzzy"
 msgstr "Vrlo blizu M42, nije lagano za vidjeti zamagljenje"
 
-#: scripts/messier_marathon.ssc:98
+#: scripts/messier_marathon.ssc:99
 msgid "Small, dark, few stars around"
 msgstr "Mali, taman, nekoliko zvijezda uokolo"
 
-#: scripts/messier_marathon.ssc:99
+#: scripts/messier_marathon.ssc:100
 msgid "Easy to locate, easy to detect in a good transparency."
 msgstr "Lagan za pronaći, lagan za opaziti prilikom dobre prozirnosti neba."
 
-#: scripts/messier_marathon.ssc:100
+#: scripts/messier_marathon.ssc:101
 msgid "Visible to the naked eye, easier"
 msgstr "Vidljiv golim okom, lakši"
 
-#: scripts/messier_marathon.ssc:101 scripts/messier_marathon.ssc:153
-#: scripts/messier_marathon.ssc:174
+#: scripts/messier_marathon.ssc:102 scripts/messier_marathon.ssc:154
+#: scripts/messier_marathon.ssc:175
 msgid "Easy to locate and verify"
 msgstr "Lagan za pronaći i potvrditi"
 
-#: scripts/messier_marathon.ssc:102 scripts/messier_marathon.ssc:103
+#: scripts/messier_marathon.ssc:103 scripts/messier_marathon.ssc:104
 msgid "Large, scattered"
 msgstr "Velik, raspršen"
 
-#: scripts/messier_marathon.ssc:104
+#: scripts/messier_marathon.ssc:105
 msgid "Bright, easy to verify, difficult to locate"
 msgstr "Sjajan, lagan za potvrditi, teži za pronaći"
 
-#: scripts/messier_marathon.ssc:105
+#: scripts/messier_marathon.ssc:106
 msgid "Large, difficult to locate, easy to confuse with NGC2506"
 msgstr "Velik, teži za pronaći, lako zamjenjiv s NGC2506"
 
-#: scripts/messier_marathon.ssc:106
+#: scripts/messier_marathon.ssc:107
 msgid "Easy, more scattered"
 msgstr "Lagan, više raspršen"
 
-#: scripts/messier_marathon.ssc:107
+#: scripts/messier_marathon.ssc:108
 msgid "Easy, fuzzy"
 msgstr "Lagan, nejasan"
 
-#: scripts/messier_marathon.ssc:108
+#: scripts/messier_marathon.ssc:109
 msgid "Easy, scattered"
 msgstr "Lagan, raspršen"
 
-#: scripts/messier_marathon.ssc:109
+#: scripts/messier_marathon.ssc:110
 msgid "Easy, large, scattered"
 msgstr "Lagan, velik, raspršen"
 
-#: scripts/messier_marathon.ssc:110
+#: scripts/messier_marathon.ssc:111
 msgid "Very close to M96 and M105"
 msgstr "Vrlo blizu M96 i M105"
 
-#: scripts/messier_marathon.ssc:111
+#: scripts/messier_marathon.ssc:112
 msgid "Easy to locate and verify, assist to verify M95 and M105"
 msgstr "Lagan za pronaći i potvrditi, koristiti prilikom potvrde M95 i M105"
 
-#: scripts/messier_marathon.ssc:112
+#: scripts/messier_marathon.ssc:113
 msgid "Dark"
 msgstr "Taman"
 
-#: scripts/messier_marathon.ssc:113
+#: scripts/messier_marathon.ssc:114
 msgid "Very close, it’s like M81 and M82"
 msgstr "Vrlo blizu, kao M81 i M82"
 
-#: scripts/messier_marathon.ssc:114
+#: scripts/messier_marathon.ssc:115
 msgid "There is NGC3628 nearby, don't think you have found a new comet"
 msgstr "NGC3628 je u blizini, nemojte pomisliti da ste pronašli novi komet"
 
-#: scripts/messier_marathon.ssc:115
+#: scripts/messier_marathon.ssc:116
 msgid "Like the darkened M33, require a high sky conditions"
 msgstr "Kao zatamnjeni M33, potrebno promatrati na visokom djelu neba"
 
-#: scripts/messier_marathon.ssc:116
+#: scripts/messier_marathon.ssc:117
 msgid "Difficult to locate, 4 stars of the inverted 7 shape beside"
 msgstr "Teži za pronaći, 4 zvijezde u obliku obrnute 7-ce su pored"
 
-#: scripts/messier_marathon.ssc:117
+#: scripts/messier_marathon.ssc:118
 msgid "Easy, you can see the companion galaxy"
 msgstr "Lagan, možete vidjeti i prateću galaksiju"
 
-#: scripts/messier_marathon.ssc:118
+#: scripts/messier_marathon.ssc:119
 msgid "Easy to verify"
 msgstr "Lagan za potvrditi"
 
-#: scripts/messier_marathon.ssc:119
+#: scripts/messier_marathon.ssc:120
 msgid "Not easy to locate, small, slightly dark"
 msgstr "Nije lagan za pronaći, mali, pomalo taman"
 
-#: scripts/messier_marathon.ssc:120
+#: scripts/messier_marathon.ssc:121
 msgid "Not easy to locate, bright"
 msgstr "Nije lagan za pronaći, sjajan"
 
-#: scripts/messier_marathon.ssc:121
+#: scripts/messier_marathon.ssc:122
 msgid "Not easy to locate, no bright stars nearby"
 msgstr "Nije lagan za pronaći, bez zvijezda u blizini"
 
-#: scripts/messier_marathon.ssc:122
+#: scripts/messier_marathon.ssc:123
 msgid "Easy to locate"
 msgstr "Lagan za pronaći"
 
-#: scripts/messier_marathon.ssc:123
+#: scripts/messier_marathon.ssc:124
 msgid "Beside M60, it is easy to verify"
 msgstr "Pored M60, lagan za potvrditi"
 
-#: scripts/messier_marathon.ssc:124
+#: scripts/messier_marathon.ssc:125
 msgid "It’s an easier one"
 msgstr "Jedan od lakših"
 
-#: scripts/messier_marathon.ssc:125
+#: scripts/messier_marathon.ssc:126
 msgid "As bright as M85, easy to verify"
 msgstr "Sjajan poput M85, lagan za potvrditi"
 
-#: scripts/messier_marathon.ssc:126
+#: scripts/messier_marathon.ssc:127
 msgid "Dark, hard to look"
 msgstr "Taman, težak za promatranje"
 
-#: scripts/messier_marathon.ssc:127
+#: scripts/messier_marathon.ssc:128
 msgid "Easy to detect than M89, easy to locate"
 msgstr "Lakši za opaziti nego M89, lagan za pronaći"
 
-#: scripts/messier_marathon.ssc:128
+#: scripts/messier_marathon.ssc:129
 msgid "Easy to locate, detect once"
 msgstr "Lagan za pronaći nakon prvog puta"
 
-#: scripts/messier_marathon.ssc:129
+#: scripts/messier_marathon.ssc:130
 msgid "There is an NGC4438 near M84 and M86, don't make a mistake"
 msgstr "NGC4438 je u blizini M84 i M86, nemojte pogriješiti"
 
-#: scripts/messier_marathon.ssc:130
+#: scripts/messier_marathon.ssc:131
 msgid "M84 are together, closer to NGC4438"
 msgstr "M84 su zajedno, bliže NGC4438"
 
-#: scripts/messier_marathon.ssc:131
+#: scripts/messier_marathon.ssc:132
 msgid "Just above M90, almost like M90"
 msgstr "Odmah iznad M90, gotovo kao M90"
 
-#: scripts/messier_marathon.ssc:132
+#: scripts/messier_marathon.ssc:133
 msgid "Look hard"
 msgstr "Dobro pogledajte"
 
-#: scripts/messier_marathon.ssc:133
+#: scripts/messier_marathon.ssc:134
 msgid "This bunch of things in the Virgo Cluster is not easy"
 msgstr "Ova hrpa u Virgo skupu nije lagana"
 
-#: scripts/messier_marathon.ssc:134
+#: scripts/messier_marathon.ssc:135
 msgid "M99 is easier to verify than M98"
 msgstr "M99 je lakša za potvrditi nego M98"
 
-#: scripts/messier_marathon.ssc:135
+#: scripts/messier_marathon.ssc:136
 msgid "First find M100 and then find M98 and M99"
 msgstr "Prvo pronađite M100 a nakon toga M98 i M99"
 
-#: scripts/messier_marathon.ssc:136
+#: scripts/messier_marathon.ssc:137
 msgid "Far away, but very bright, easy to find"
 msgstr "Jako udaljen ali vrlo sjajan, lagan za pronaći"
 
-#: scripts/messier_marathon.ssc:137
+#: scripts/messier_marathon.ssc:138
 msgid "Small, not easy to locate, a little difficult"
 msgstr "Mali, nije lagan za pronaći, malo zahtjevniji"
 
-#: scripts/messier_marathon.ssc:138
+#: scripts/messier_marathon.ssc:139
 msgid "Not easy to locate, easy to verify"
 msgstr "Nije lagan za pronaći, lagan za potvrditi"
 
-#: scripts/messier_marathon.ssc:139
+#: scripts/messier_marathon.ssc:140
 msgid "Easy to locate and verify, small"
 msgstr "Lagan za pronaći i potvrditi, mali"
 
-#: scripts/messier_marathon.ssc:140
+#: scripts/messier_marathon.ssc:141
 msgid "Easy to verify, a star 5 magnitude nearby"
 msgstr "Lagan za potvrditi, zvijezda 5. magnitude u blizini"
 
-#: scripts/messier_marathon.ssc:141
+#: scripts/messier_marathon.ssc:142
 msgid "Visible to the naked eye, big, bright"
 msgstr "Vidljiv golim okom, veći, sjajni"
 
-#: scripts/messier_marathon.ssc:142
+#: scripts/messier_marathon.ssc:143
 msgid "Bright and big in the galaxies, not hard to find"
 msgstr "Sjajan i velik među galaksijama, nije težak za pronaći"
 
-#: scripts/messier_marathon.ssc:143
+#: scripts/messier_marathon.ssc:144
 msgid "Bright, easy to verify"
 msgstr "Sjajan, lagan za potvrditi"
 
-#: scripts/messier_marathon.ssc:144
+#: scripts/messier_marathon.ssc:145
 msgid "Easy to verify in a right location"
 msgstr "Lagan za potvrditi na pravoj poziciji"
 
-#: scripts/messier_marathon.ssc:145
+#: scripts/messier_marathon.ssc:146
 msgid "Famous, like the shoulder pole star"
 msgstr "Poznat kao zvijezda ramena"
 
-#: scripts/messier_marathon.ssc:146
+#: scripts/messier_marathon.ssc:147
 msgid "It may be easier to locate from the Dragon"
 msgstr "Možda je lakše pronaći gledajući iz smjera Zmaja"
 
-#: scripts/messier_marathon.ssc:147
+#: scripts/messier_marathon.ssc:148
 msgid "Small, 20 times or more is still easy to detect"
 msgstr "Malen međutim lagan za opaziti i s povećanjem od 20 puta"
 
-#: scripts/messier_marathon.ssc:148
+#: scripts/messier_marathon.ssc:149
 msgid "More difficult than M57, not easy to locate, very small"
 msgstr "Teži za potvrditi nego M57, nije lagan za pronaći, jako mali"
 
-#: scripts/messier_marathon.ssc:149
+#: scripts/messier_marathon.ssc:150
 msgid "Easy, small, looks like a cluster of stars 7-8 magnitude"
 msgstr "Lagan, mali, izgleda kao skup zvijezda 7-8 magnitude"
 
-#: scripts/messier_marathon.ssc:150
+#: scripts/messier_marathon.ssc:151
 msgid "Larger than imagined, very scattered, not easy to locate"
 msgstr "Veći od zamišljenog, vrlo raspršen, nije lagan za pronaći"
 
-#: scripts/messier_marathon.ssc:151
+#: scripts/messier_marathon.ssc:152
 msgid "Find M71 first, then find M27, and will be easier to locate"
 msgstr "Pronađite prvo M71, nakon togaM27, pa će biti lakši za pronaći"
 
-#: scripts/messier_marathon.ssc:152
+#: scripts/messier_marathon.ssc:153
 msgid "Easy to locate, easy to verify in 50 binos"
 msgstr ""
 "Lagan za pronaći, lagan za potvrditi s dvogledom promjera objektiva 50mm"
 
-#: scripts/messier_marathon.ssc:154
+#: scripts/messier_marathon.ssc:155
 msgid "Bright, like M13, easy to find"
 msgstr "Sjajan, poput M13, lagan za pronaći"
 
-#: scripts/messier_marathon.ssc:155
+#: scripts/messier_marathon.ssc:156
 msgid "Detect it with M12, brighter than M12"
 msgstr "Opažajte ga s M12, sjajniji od M12"
 
-#: scripts/messier_marathon.ssc:156
+#: scripts/messier_marathon.ssc:157
 msgid "Difficult to locate, easy to verify"
 msgstr "Teži za pronaći, lagan za potvrditi"
 
-#: scripts/messier_marathon.ssc:157
+#: scripts/messier_marathon.ssc:158
 msgid "Small, not easy to verify"
 msgstr "Mali, nije lagan za potvrditi"
 
-#: scripts/messier_marathon.ssc:158
+#: scripts/messier_marathon.ssc:159
 msgid "Bright, big, don't forget to detect NGC6144 nearby"
 msgstr "Sjajan, velik, ne zaboravite opaziti NGC6144 u blizini"
 
-#: scripts/messier_marathon.ssc:159
+#: scripts/messier_marathon.ssc:160
 msgid "Not easy to verify at low power, easy at high power"
 msgstr "Nije lagan za potvrditi na manjim, ali je na većim povećanjima"
 
-#: scripts/messier_marathon.ssc:160
+#: scripts/messier_marathon.ssc:161
 msgid "Follow the line of M4 and Antares, easy to verify"
 msgstr "Pratite liniju između M4 i Antaresa, lagan za potvrditi"
 
-#: scripts/messier_marathon.ssc:161
+#: scripts/messier_marathon.ssc:162
 msgid "Looking down from M19, darker than M19, but easy to verify"
 msgstr "Ispod M19, tamniji od M19 ali lagan za provjeru"
 
-#: scripts/messier_marathon.ssc:162
+#: scripts/messier_marathon.ssc:163
 msgid "Easy to locate, bright, and almost like M13"
 msgstr "Lagan za pronaći, sjajan, gotovo kao M13"
 
-#: scripts/messier_marathon.ssc:163
+#: scripts/messier_marathon.ssc:164
 msgid "Easy to locate M26 by M11"
 msgstr "M26 Lagan za pronaći uz pomoć M11"
 
-#: scripts/messier_marathon.ssc:164
+#: scripts/messier_marathon.ssc:165
 msgid "Easy"
 msgstr "Lagan"
 
-#: scripts/messier_marathon.ssc:165 scripts/messier_marathon.ssc:178
+#: scripts/messier_marathon.ssc:166 scripts/messier_marathon.ssc:179
 msgid "Difficult to locate, bright, easy to verify"
 msgstr "Teži za pronaći, sjajan, lagan za potvrdu"
 
-#: scripts/messier_marathon.ssc:166
+#: scripts/messier_marathon.ssc:167
 msgid "Beside M81, vertical to each other"
 msgstr "Uz M81, u vertikalnoj dužini"
 
-#: scripts/messier_marathon.ssc:167
+#: scripts/messier_marathon.ssc:168
 msgid "Large, a little fuzzy"
 msgstr "Velik, malo nejasan"
 
-#: scripts/messier_marathon.ssc:167
+#: scripts/messier_marathon.ssc:168
 msgid "Beside M20"
 msgstr "Uz M20"
 
-#: scripts/messier_marathon.ssc:168
+#: scripts/messier_marathon.ssc:169
 msgid "It’s not hard to see the diffuse nebula"
 msgstr "Nije teško vidjeti difuznu maglicu"
 
-#: scripts/messier_marathon.ssc:169
+#: scripts/messier_marathon.ssc:170
 msgid "Visible to the naked eye, extremely easy"
 msgstr "Vidljiv golim okom, izuzetno lagan"
 
-#: scripts/messier_marathon.ssc:170
+#: scripts/messier_marathon.ssc:171
 msgid "Big, easy"
 msgstr "Velik, lagan"
 
-#: scripts/messier_marathon.ssc:170
+#: scripts/messier_marathon.ssc:171
 msgid "Easy to locate and verify, bright"
 msgstr "Lagan za pronaći i potvrditi, sjajan"
 
-#: scripts/messier_marathon.ssc:171
+#: scripts/messier_marathon.ssc:172
 msgid "M13 second"
 msgstr "Drugi M13"
 
-#: scripts/messier_marathon.ssc:172
+#: scripts/messier_marathon.ssc:173
 msgid "Too big, scattered, not easy to verify"
 msgstr "Prevelik, raspršen, nije lagan za potvrditi"
 
-#: scripts/messier_marathon.ssc:173
+#: scripts/messier_marathon.ssc:174
 msgid "Bigger than M6"
 msgstr "Veći od M6"
 
-#: scripts/messier_marathon.ssc:175
+#: scripts/messier_marathon.ssc:176
 msgid "Brighter than imagined, can be detected with 60 binos"
 msgstr ""
 "Sjajniji od očekivanja, može se opaziti s dvogledom promjera objektiva 60mm "
 "ili većim"
 
-#: scripts/messier_marathon.ssc:176
+#: scripts/messier_marathon.ssc:177
 msgid "Darker than M97, long strips, look hard"
 msgstr "Tamniji od M97, duge pruge, neuočljiv"
 
-#: scripts/messier_marathon.ssc:177
+#: scripts/messier_marathon.ssc:178
 msgid "Easy to verify with more than 20 times binos"
 msgstr "Lagan za potvrditi s dvogledom čije je povećanje veće od 20 puta"
 
-#: scripts/messier_marathon.ssc:179
+#: scripts/messier_marathon.ssc:180
 msgid "In the morning light, it looks too hard, dark"
 msgstr "U jutarnjem svijetlu, izgleda pretežak, taman"
 
-#: scripts/messier_marathon.ssc:288
+#: scripts/messier_marathon.ssc:289
 msgid "cannot be seen now"
 msgstr "trenutno nije vidljiv"

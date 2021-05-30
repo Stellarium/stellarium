@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-05-16 13:23+0700\n"
+"POT-Creation-Date: 2021-05-29 17:46+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: 殳玮 孙 <itun@qq.com>, 2021\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/stellarium/teams/80998/zh_CN/)\n"
@@ -47,8 +47,8 @@ msgstr "自定义标识"
 #: plugins/Satellites/src/Satellite.cpp:305
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:531
 #: plugins/Supernovae/src/Supernova.cpp:143 plugins/Novae/src/Nova.cpp:147
-#: plugins/Quasars/src/Quasar.cpp:127 plugins/Pulsars/src/Pulsar.cpp:184
-#: plugins/Pulsars/src/Pulsar.cpp:186 plugins/Exoplanets/src/Exoplanet.cpp:278
+#: plugins/Quasars/src/Quasar.cpp:127 plugins/Pulsars/src/Pulsar.cpp:187
+#: plugins/Pulsars/src/Pulsar.cpp:189 plugins/Exoplanets/src/Exoplanet.cpp:278
 #: plugins/MeteorShowers/src/MeteorShower.cpp:523
 msgid "Type"
 msgstr "类型"
@@ -86,7 +86,7 @@ msgstr "星群标签"
 
 #: src/core/modules/AsterismMgr.cpp:101
 msgid "Toggle single asterism selection mode"
-msgstr ""
+msgstr "切换单个星群选择模式"
 
 #: src/core/modules/AsterismMgr.cpp:102
 msgid "Ray helpers"
@@ -649,7 +649,7 @@ msgstr "光污染周期性变化"
 
 #: src/core/modules/LandscapeMgr.cpp:1014 src/scripting/StelScriptMgr.cpp:457
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
-#: plugins/Oculars/src/gui/OcularDialog.cpp:573
+#: plugins/Oculars/src/gui/OcularDialog.cpp:585
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:125
 #: plugins/Novae/src/gui/NovaeDialog.cpp:123
@@ -1505,7 +1505,7 @@ msgstr "定向角"
 #: src/core/modules/Nebula.cpp:318 src/core/modules/Nebula.cpp:331
 #: src/core/modules/StarWrapper.cpp:313
 #: plugins/Supernovae/src/Supernova.cpp:158 plugins/Novae/src/Nova.cpp:161
-#: plugins/Pulsars/src/Pulsar.cpp:257 plugins/Exoplanets/src/Exoplanet.cpp:292
+#: plugins/Pulsars/src/Pulsar.cpp:271 plugins/Exoplanets/src/Exoplanet.cpp:292
 msgctxt "distance"
 msgid "ly"
 msgstr "光年"
@@ -1520,7 +1520,7 @@ msgid "Distance"
 msgstr "距离"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
-#: src/core/modules/Nebula.cpp:329 plugins/Pulsars/src/Pulsar.cpp:254
+#: src/core/modules/Nebula.cpp:329 plugins/Pulsars/src/Pulsar.cpp:268
 msgctxt "distance"
 msgid "kpc"
 msgstr "千秒差距"
@@ -1547,7 +1547,7 @@ msgstr "视差"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
 #: src/core/modules/Nebula.cpp:390 src/core/modules/StarWrapper.cpp:347
-#: plugins/Pulsars/src/Pulsar.cpp:245
+#: plugins/Pulsars/src/Pulsar.cpp:259
 msgctxt "parallax"
 msgid "mas"
 msgstr "毫角秒"
@@ -1556,435 +1556,435 @@ msgstr "毫角秒"
 msgid "Morphological description"
 msgstr "形态描述"
 
-#: src/core/modules/Nebula.cpp:1116
+#: src/core/modules/Nebula.cpp:1128
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
 msgstr "恒星高度趋向中心凝聚"
 
-#: src/core/modules/Nebula.cpp:1119
+#: src/core/modules/Nebula.cpp:1131
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "dense central concentration of stars"
 msgstr "恒星密集趋向中心凝聚"
 
-#: src/core/modules/Nebula.cpp:1122
+#: src/core/modules/Nebula.cpp:1134
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "strong inner core of stars"
 msgstr "恒星构建强的核心"
 
-#: src/core/modules/Nebula.cpp:1125
+#: src/core/modules/Nebula.cpp:1137
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
 msgstr "恒星中等偏丰的凝聚"
 
-#: src/core/modules/Nebula.cpp:1130
+#: src/core/modules/Nebula.cpp:1142
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
 msgstr "恒星中等凝聚"
 
-#: src/core/modules/Nebula.cpp:1133
+#: src/core/modules/Nebula.cpp:1145
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "rather loose concentration of stars towards the center"
 msgstr "恒星较为松散的趋向中心凝聚"
 
-#: src/core/modules/Nebula.cpp:1136
+#: src/core/modules/Nebula.cpp:1148
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
 msgstr "恒星松散的趋向中心凝聚"
 
-#: src/core/modules/Nebula.cpp:1139
+#: src/core/modules/Nebula.cpp:1151
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "loose concentration of stars"
 msgstr "恒星松散的凝聚"
 
-#: src/core/modules/Nebula.cpp:1142
+#: src/core/modules/Nebula.cpp:1154
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
 msgstr "恒星非常松散的趋向中心凝聚"
 
-#: src/core/modules/Nebula.cpp:1145
+#: src/core/modules/Nebula.cpp:1157
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
 msgstr "几乎没有趋向中心凝聚"
 
-#: src/core/modules/Nebula.cpp:1148
+#: src/core/modules/Nebula.cpp:1160
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "undocumented concentration class"
 msgstr "凝聚度未记录"
 
-#: src/core/modules/Nebula.cpp:1168
+#: src/core/modules/Nebula.cpp:1180
 msgctxt "Trumpler's Concentration Class"
 msgid "strong central concentration of stars"
 msgstr "恒星中心凝聚度强"
 
-#: src/core/modules/Nebula.cpp:1171
+#: src/core/modules/Nebula.cpp:1183
 msgctxt "Trumpler's Concentration Class"
 msgid "little central concentration of stars"
 msgstr "恒星中心凝聚度小"
 
-#: src/core/modules/Nebula.cpp:1174
+#: src/core/modules/Nebula.cpp:1186
 msgctxt "Trumpler's Concentration Class"
 msgid "no noticeable concentration of stars"
 msgstr "没有明显的凝聚"
 
-#: src/core/modules/Nebula.cpp:1177
+#: src/core/modules/Nebula.cpp:1189
 msgctxt "Trumpler's Concentration Class"
 msgid "a star field condensation"
 msgstr "星场凝聚度"
 
-#: src/core/modules/Nebula.cpp:1180
+#: src/core/modules/Nebula.cpp:1192
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented concentration class"
 msgstr "凝聚度未记录"
 
-#: src/core/modules/Nebula.cpp:1186
+#: src/core/modules/Nebula.cpp:1198
 msgctxt "Trumpler's Brightness Class"
 msgid "small brightness range of cluster members"
 msgstr "成员亮度差异小"
 
-#: src/core/modules/Nebula.cpp:1189
+#: src/core/modules/Nebula.cpp:1201
 msgctxt "Trumpler's Brightness Class"
 msgid "medium brightness range of cluster members"
 msgstr "成员亮度差异中等"
 
-#: src/core/modules/Nebula.cpp:1192
+#: src/core/modules/Nebula.cpp:1204
 msgctxt "Trumpler's Brightness Class"
 msgid "large brightness range of cluster members"
 msgstr "成员亮度差异大"
 
-#: src/core/modules/Nebula.cpp:1195
+#: src/core/modules/Nebula.cpp:1207
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
 msgstr "亮度差异未记录"
 
-#: src/core/modules/Nebula.cpp:1201
+#: src/core/modules/Nebula.cpp:1213
 msgctxt "Trumpler's Number of Members Class"
 msgid "poor cluster with less than 50 stars"
 msgstr "不到50颗恒星的贫星团"
 
-#: src/core/modules/Nebula.cpp:1204
+#: src/core/modules/Nebula.cpp:1216
 msgctxt "Trumpler's Number of Members Class"
 msgid "moderately rich cluster with 50-100 stars"
 msgstr "包含50-100颗恒星的中等星团"
 
-#: src/core/modules/Nebula.cpp:1207
+#: src/core/modules/Nebula.cpp:1219
 msgctxt "Trumpler's Number of Members Class"
 msgid "rich cluster with more than 100 stars"
 msgstr "超过100颗恒星的富星团"
 
-#: src/core/modules/Nebula.cpp:1210
+#: src/core/modules/Nebula.cpp:1222
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
 msgstr "成员数量未记录"
 
-#: src/core/modules/Nebula.cpp:1214
+#: src/core/modules/Nebula.cpp:1226
 msgctxt "nebulosity factor of open clusters"
 msgid "the cluster lies within nebulosity"
 msgstr "位于星云内的星团"
 
-#: src/core/modules/Nebula.cpp:1235
+#: src/core/modules/Nebula.cpp:1247
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
 msgstr "极亮"
 
-#: src/core/modules/Nebula.cpp:1238
+#: src/core/modules/Nebula.cpp:1250
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
 msgstr "明亮"
 
-#: src/core/modules/Nebula.cpp:1241
+#: src/core/modules/Nebula.cpp:1253
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
 msgstr "中等亮度"
 
-#: src/core/modules/Nebula.cpp:1244
+#: src/core/modules/Nebula.cpp:1256
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
 msgstr "暗淡"
 
-#: src/core/modules/Nebula.cpp:1247
+#: src/core/modules/Nebula.cpp:1259
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
 msgstr "极暗"
 
-#: src/core/modules/Nebula.cpp:1250
+#: src/core/modules/Nebula.cpp:1262
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
 msgstr "亮度不稳定"
 
-#: src/core/modules/Nebula.cpp:1253
+#: src/core/modules/Nebula.cpp:1265
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
 msgstr "反射星云亮度未记录"
 
-#: src/core/modules/Nebula.cpp:1259
+#: src/core/modules/Nebula.cpp:1271
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
 msgstr "照亮星云的恒星在星云内部"
 
-#: src/core/modules/Nebula.cpp:1262
+#: src/core/modules/Nebula.cpp:1274
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
 msgstr "恒星位于被照亮星云之外"
 
-#: src/core/modules/Nebula.cpp:1265
+#: src/core/modules/Nebula.cpp:1277
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
 msgstr "恒星位于被照亮星云一角"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1270
+#: src/core/modules/Nebula.cpp:1282
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
 msgstr "恒星位于被照亮的特殊星云之外"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1276
+#: src/core/modules/Nebula.cpp:1288
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
 msgstr "被照亮的特殊星云"
 
-#: src/core/modules/Nebula.cpp:1280
+#: src/core/modules/Nebula.cpp:1292
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
 msgstr "反射星云未归类"
 
-#: src/core/modules/Nebula.cpp:1300
+#: src/core/modules/Nebula.cpp:1312
 msgid "circular form"
 msgstr "圆形"
 
-#: src/core/modules/Nebula.cpp:1301
+#: src/core/modules/Nebula.cpp:1313
 msgid "elliptical form"
 msgstr "椭圆形"
 
-#: src/core/modules/Nebula.cpp:1302
+#: src/core/modules/Nebula.cpp:1314
 msgid "irregular form"
 msgstr "不规则形状"
 
-#: src/core/modules/Nebula.cpp:1304
+#: src/core/modules/Nebula.cpp:1316
 msgid "amorphous structure"
 msgstr "无定形结构"
 
-#: src/core/modules/Nebula.cpp:1305
+#: src/core/modules/Nebula.cpp:1317
 msgid "conventional structure"
 msgstr "常规结构"
 
-#: src/core/modules/Nebula.cpp:1306
+#: src/core/modules/Nebula.cpp:1318
 msgid "filamentary structure"
 msgstr "纤维结构"
 
-#: src/core/modules/Nebula.cpp:1308
+#: src/core/modules/Nebula.cpp:1320
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr "暗淡"
 
-#: src/core/modules/Nebula.cpp:1309
+#: src/core/modules/Nebula.cpp:1321
 msgctxt "HII region brightness"
 msgid "moderate brightness"
 msgstr "中等亮度"
 
-#: src/core/modules/Nebula.cpp:1310
+#: src/core/modules/Nebula.cpp:1322
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr "明亮"
 
-#: src/core/modules/Nebula.cpp:1313
+#: src/core/modules/Nebula.cpp:1325
 msgid "undocumented form"
 msgstr "形状未记录"
 
-#: src/core/modules/Nebula.cpp:1314
+#: src/core/modules/Nebula.cpp:1326
 msgid "undocumented structure"
 msgstr "结构未记录"
 
-#: src/core/modules/Nebula.cpp:1315
+#: src/core/modules/Nebula.cpp:1327
 msgid "undocumented brightness"
 msgstr "亮度未记录"
 
-#: src/core/modules/Nebula.cpp:1327
+#: src/core/modules/Nebula.cpp:1339
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure"
 msgstr "遗迹显示壳状射电结构"
 
-#: src/core/modules/Nebula.cpp:1330
+#: src/core/modules/Nebula.cpp:1342
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a filled center ('plerion') radio structure"
 msgstr "遗迹显示一个云心（“实心”）射电结构"
 
-#: src/core/modules/Nebula.cpp:1333
+#: src/core/modules/Nebula.cpp:1345
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a composite (or combination) radio structure"
 msgstr "遗迹显示混合（或复合）射电结构"
 
-#: src/core/modules/Nebula.cpp:1336
+#: src/core/modules/Nebula.cpp:1348
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure with some uncertainty"
 msgstr "遗迹显示出一些不确定的壳状射电结构"
 
-#: src/core/modules/Nebula.cpp:1339
+#: src/core/modules/Nebula.cpp:1351
 msgctxt "supernova remnant structure classification"
 msgid ""
 "remnant shows a filled center ('plerion') radio structure with some "
 "uncertainty"
 msgstr "遗迹显示一个云心（“实心”）射电结构，但有不确定性"
 
-#: src/core/modules/Nebula.cpp:1342
+#: src/core/modules/Nebula.cpp:1354
 msgctxt "supernova remnant structure classification"
 msgid ""
 "remnant shows a composite (or combination) radio structure with some "
 "uncertainty"
 msgstr "遗迹显示混合（或复合）射电结构，但有不确定性"
 
-#: src/core/modules/Nebula.cpp:1350
+#: src/core/modules/Nebula.cpp:1362
 msgid "undocumented type"
 msgstr "类型未记录"
 
-#: src/core/modules/Nebula.cpp:1356
+#: src/core/modules/Nebula.cpp:1368
 msgid "galaxy"
 msgstr "星系"
 
-#: src/core/modules/Nebula.cpp:1357
+#: src/core/modules/Nebula.cpp:1369
 msgid "active galaxy"
 msgstr "活动星系"
 
-#: src/core/modules/Nebula.cpp:1358
+#: src/core/modules/Nebula.cpp:1370
 msgid "radio galaxy"
 msgstr "射电星系"
 
-#: src/core/modules/Nebula.cpp:1359
+#: src/core/modules/Nebula.cpp:1371
 msgid "interacting galaxy"
 msgstr "相互作用星系"
 
-#: src/core/modules/Nebula.cpp:1360 plugins/Quasars/src/Quasar.cpp:127
+#: src/core/modules/Nebula.cpp:1372 plugins/Quasars/src/Quasar.cpp:127
 msgid "quasar"
 msgstr "类星体"
 
-#: src/core/modules/Nebula.cpp:1361
+#: src/core/modules/Nebula.cpp:1373
 msgid "star cluster"
 msgstr "星团"
 
-#: src/core/modules/Nebula.cpp:1362
+#: src/core/modules/Nebula.cpp:1374
 msgid "open star cluster"
 msgstr "疏散星团"
 
-#: src/core/modules/Nebula.cpp:1363
+#: src/core/modules/Nebula.cpp:1375
 msgid "globular star cluster"
 msgstr "球状星团"
 
-#: src/core/modules/Nebula.cpp:1364
+#: src/core/modules/Nebula.cpp:1376
 msgid "stellar association"
 msgstr "星协"
 
-#: src/core/modules/Nebula.cpp:1365
+#: src/core/modules/Nebula.cpp:1377
 msgid "star cloud"
 msgstr "恒星云"
 
-#: src/core/modules/Nebula.cpp:1366
+#: src/core/modules/Nebula.cpp:1378
 msgid "nebula"
 msgstr "星云"
 
-#: src/core/modules/Nebula.cpp:1367
+#: src/core/modules/Nebula.cpp:1379
 msgid "planetary nebula"
 msgstr "行星状星云"
 
-#: src/core/modules/Nebula.cpp:1368
+#: src/core/modules/Nebula.cpp:1380
 msgid "dark nebula"
 msgstr "暗星云"
 
-#: src/core/modules/Nebula.cpp:1369
+#: src/core/modules/Nebula.cpp:1381
 msgid "reflection nebula"
 msgstr "反射星云"
 
-#: src/core/modules/Nebula.cpp:1370
+#: src/core/modules/Nebula.cpp:1382
 msgid "bipolar nebula"
 msgstr "双极星云"
 
-#: src/core/modules/Nebula.cpp:1371
+#: src/core/modules/Nebula.cpp:1383
 msgid "emission nebula"
 msgstr "发射星云"
 
-#: src/core/modules/Nebula.cpp:1372
+#: src/core/modules/Nebula.cpp:1384
 msgid "cluster associated with nebulosity"
 msgstr "与星云相关的星团"
 
-#: src/core/modules/Nebula.cpp:1373
+#: src/core/modules/Nebula.cpp:1385
 msgid "HII region"
 msgstr "电离氢区"
 
-#: src/core/modules/Nebula.cpp:1374
+#: src/core/modules/Nebula.cpp:1386
 msgid "supernova remnant"
 msgstr "超新星遗迹"
 
-#: src/core/modules/Nebula.cpp:1375
+#: src/core/modules/Nebula.cpp:1387
 msgid "interstellar matter"
 msgstr "星际物质"
 
-#: src/core/modules/Nebula.cpp:1376
+#: src/core/modules/Nebula.cpp:1388
 msgid "emission object"
 msgstr "发射天体"
 
-#: src/core/modules/Nebula.cpp:1377
+#: src/core/modules/Nebula.cpp:1389
 msgid "BL Lac object"
 msgstr "蝎虎座BL型天体"
 
-#: src/core/modules/Nebula.cpp:1378
+#: src/core/modules/Nebula.cpp:1390
 msgid "blazar"
 msgstr "耀变体"
 
-#: src/core/modules/Nebula.cpp:1379
+#: src/core/modules/Nebula.cpp:1391
 msgid "molecular cloud"
 msgstr "分子云"
 
-#: src/core/modules/Nebula.cpp:1380
+#: src/core/modules/Nebula.cpp:1392
 msgid "young stellar object"
 msgstr "初期恒星体"
 
-#: src/core/modules/Nebula.cpp:1381
+#: src/core/modules/Nebula.cpp:1393
 msgid "possible quasar"
 msgstr "可能的类星体"
 
-#: src/core/modules/Nebula.cpp:1382
+#: src/core/modules/Nebula.cpp:1394
 msgid "possible planetary nebula"
 msgstr "可能的行星状星云"
 
-#: src/core/modules/Nebula.cpp:1383
+#: src/core/modules/Nebula.cpp:1395
 msgid "protoplanetary nebula"
 msgstr "原行星云"
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/Nebula.cpp:1384 src/core/modules/StarWrapper.cpp:50
+#: src/core/modules/Nebula.cpp:1396 src/core/modules/StarWrapper.cpp:50
 #: src/core/modules/StarWrapper.cpp:260 src/gui/AstroCalcDialog.cpp:1237
 #: src/translations.h:35
 msgid "star"
 msgstr "恒星"
 
-#: src/core/modules/Nebula.cpp:1385
+#: src/core/modules/Nebula.cpp:1397
 msgid "symbiotic star"
 msgstr "共生星"
 
-#: src/core/modules/Nebula.cpp:1386
+#: src/core/modules/Nebula.cpp:1398
 msgid "emission-line star"
 msgstr "发射线星"
 
-#: src/core/modules/Nebula.cpp:1387
+#: src/core/modules/Nebula.cpp:1399
 msgid "supernova candidate"
 msgstr "超新星候选体"
 
-#: src/core/modules/Nebula.cpp:1388
+#: src/core/modules/Nebula.cpp:1400
 msgid "supernova remnant candidate"
 msgstr "超新星遗迹候选体"
 
-#: src/core/modules/Nebula.cpp:1389
+#: src/core/modules/Nebula.cpp:1401
 msgid "cluster of galaxies"
 msgstr "星系团"
 
-#: src/core/modules/Nebula.cpp:1390
+#: src/core/modules/Nebula.cpp:1402
 msgid "part of a galaxy"
 msgstr "星系的一部分"
 
-#: src/core/modules/Nebula.cpp:1391
+#: src/core/modules/Nebula.cpp:1403
 msgid "region of the sky"
 msgstr "区"
 
-#: src/core/modules/Nebula.cpp:1392
+#: src/core/modules/Nebula.cpp:1404
 msgid "object of unknown nature"
 msgstr "性质不明天体"
 
@@ -2051,6 +2051,7 @@ msgstr "每时运动"
 
 #: src/core/modules/Planet.cpp:537 src/core/modules/Planet.cpp:1062
 #: src/core/modules/Planet.cpp:1071 src/core/modules/StarWrapper.cpp:334
+#: plugins/Pulsars/src/Pulsar.cpp:202
 msgctxt "into the direction of"
 msgid "towards"
 msgstr "方向"
@@ -2401,16 +2402,17 @@ msgstr "星等范围"
 msgid "Photometric system"
 msgstr "测光系统"
 
-#: src/core/modules/StarWrapper.cpp:332
+#: src/core/modules/StarWrapper.cpp:332 plugins/Pulsars/src/Pulsar.cpp:200
 msgid "Proper motion"
 msgstr "自行"
 
 #: src/core/modules/StarWrapper.cpp:333 src/core/modules/StarWrapper.cpp:335
+#: plugins/Pulsars/src/Pulsar.cpp:201 plugins/Pulsars/src/Pulsar.cpp:203
 msgctxt "milliarc second per year"
 msgid "mas/yr"
 msgstr "毫角秒/年"
 
-#: src/core/modules/StarWrapper.cpp:335
+#: src/core/modules/StarWrapper.cpp:335 plugins/Pulsars/src/Pulsar.cpp:203
 msgid "Proper motions by axes"
 msgstr "赤经/赤纬自行"
 
@@ -3943,7 +3945,7 @@ msgstr "联系信息"
 
 #: src/gui/ConfigurationDialog.cpp:1224 src/scripting/StelScriptMgr.cpp:467
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:98
-#: plugins/Oculars/src/gui/OcularDialog.cpp:571
+#: plugins/Oculars/src/gui/OcularDialog.cpp:583
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:676
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:264
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:238
@@ -3966,7 +3968,7 @@ msgstr "版本"
 
 #: src/gui/ConfigurationDialog.cpp:1225 src/scripting/StelScriptMgr.cpp:462
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
-#: plugins/Oculars/src/gui/OcularDialog.cpp:572
+#: plugins/Oculars/src/gui/OcularDialog.cpp:584
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:677
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:239
@@ -4515,7 +4517,7 @@ msgstr "测试：%1"
 
 #: src/gui/HelpDialog.cpp:462
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
-#: plugins/Oculars/src/gui/OcularDialog.cpp:575
+#: plugins/Oculars/src/gui/OcularDialog.cpp:587
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:680
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:271
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:241
@@ -4552,7 +4554,7 @@ msgstr "这项研究利用了Stellarium天文馆"
 msgid ""
 "Or you may {download the BibTeX file of the paper} to create another "
 "citation format."
-msgstr ""
+msgstr "或者您可以<a href='/files/stellarium.bib'>下载论文的BibTeX文件</a>来创建另一种引用格式。"
 
 #: src/gui/StelGui.cpp:229
 msgid "Windows"
@@ -5777,7 +5779,7 @@ msgstr "行星与太阳"
 
 #: src/gui/AstroCalcDialog.cpp:2478
 msgid "Sun, planets and moons of observer location"
-msgstr ""
+msgstr "太阳，行星和卫星的观测者的位置"
 
 #: src/gui/AstroCalcDialog.cpp:2479
 #, qt-format
@@ -5786,13 +5788,13 @@ msgstr "亮太阳系天体(<%1 星等)"
 
 #: src/gui/AstroCalcDialog.cpp:2480
 msgid "Moons of first body"
-msgstr ""
+msgstr "第一天体的卫星"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:2481 src/gui/AstroCalcDialog.cpp:5204
 #: src/translations.h:455
 msgid "Bright carbon stars"
-msgstr ""
+msgstr "亮碳星"
 
 #: src/gui/AstroCalcDialog.cpp:3050
 msgid "Magnitude vs. Time"
@@ -5971,7 +5973,7 @@ msgstr "合"
 
 #: src/gui/AstroCalcDialog.cpp:4055
 msgid "Shadow transit"
-msgstr ""
+msgstr "显示中天"
 
 #: src/gui/AstroCalcDialog.cpp:4058 src/gui/AstroCalcDialog.cpp:4065
 #: src/gui/AstroCalcDialog.cpp:4111 src/gui/AstroCalcDialog.cpp:4117
@@ -6236,7 +6238,7 @@ msgstr "今夜天象"
 #: src/gui/AstroCalcDialog.cpp:6189
 msgctxt "mean motion"
 msgid "day"
-msgstr ""
+msgstr "日"
 
 #: src/gui/AstroCalcDialog.cpp:6241 src/gui/AstroCalcDialog.cpp:6403
 msgid "Days from today"
@@ -7344,12 +7346,12 @@ msgstr "有趣的变星"
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:451
 msgid "Variable stars: Algol-type eclipsing systems"
-msgstr ""
+msgstr "变星：大陵食变星"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:453
 msgid "Variable stars: the classical cepheids"
-msgstr ""
+msgstr "变星：经典造父变星"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:460
@@ -7969,8 +7971,8 @@ msgstr ""
 
 #: src/translations.h:702
 msgid ""
-"Screensaver of various happenings in the Solar System. 300 events in all!"
-msgstr "太阳系中各种天文现象（总共300种！）的屏幕保护程序，"
+"Screensaver of various happenings in the Solar System. 313 events in all!"
+msgstr ""
 
 #: src/translations.h:703
 msgid "A tour of the western constellations."
@@ -10983,7 +10985,7 @@ msgstr "仅绘制多边形线"
 
 #: src/ui_viewDialog.h:3821
 msgid "Set the planet and position as specified for the selected landscape"
-msgstr ""
+msgstr "为选定的地景设置行星和位置"
 
 #: src/ui_viewDialog.h:3823
 msgid "Position from landscape"
@@ -11296,7 +11298,7 @@ msgstr "完整显示"
 msgid "Display no information"
 msgstr "不显示信息"
 
-#: src/ui_configurationDialog.h:1676 plugins/Oculars/src/Oculars.cpp:2428
+#: src/ui_configurationDialog.h:1676 plugins/Oculars/src/Oculars.cpp:2434
 #: plugins/Observability/src/Observability.cpp:179
 msgid "None"
 msgstr "不显示"
@@ -11903,7 +11905,7 @@ msgstr "键盘快捷键"
 #: src/ui_shortcutsDialog.h:212
 msgctxt "placeholder for input line"
 msgid "Search the action..."
-msgstr ""
+msgstr "搜索..."
 
 #: src/ui_shortcutsDialog.h:213
 msgid "Primary shortcut"
@@ -12464,11 +12466,11 @@ msgstr "角距离："
 
 #: src/ui_astroCalcDialog.h:1882
 msgid "Mean motion of second celestial body:"
-msgstr ""
+msgstr "天体2的平运动"
 
 #: src/ui_astroCalcDialog.h:1883
 msgid "Mean motion of first celestial body:"
-msgstr ""
+msgstr "天体1的平运动"
 
 #: src/ui_astroCalcDialog.h:1884
 msgid "Orbital velocity of second celestial body:"
@@ -12476,7 +12478,7 @@ msgstr "天体2的轨道速度："
 
 #: src/ui_astroCalcDialog.h:1885
 msgid "Orbital periods ratio:"
-msgstr ""
+msgstr "轨道周期比："
 
 #: src/ui_astroCalcDialog.h:1886
 msgid "Equatorial diameters ratio:"
@@ -13024,7 +13026,7 @@ msgstr ""
 " ， 我们测量， 我们计算， 我们希望我们在夏威夷。"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:110
-#: plugins/Oculars/src/gui/OcularDialog.cpp:627
+#: plugins/Oculars/src/gui/OcularDialog.cpp:639
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:734
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:247
@@ -13045,7 +13047,7 @@ msgid "Links"
 msgstr "链接"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:111
-#: plugins/Oculars/src/gui/OcularDialog.cpp:630
+#: plugins/Oculars/src/gui/OcularDialog.cpp:642
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:735
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:248
@@ -13069,7 +13071,7 @@ msgstr "通过Github网站提供支持。 发帖时务必在标题中加入\"%1\
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:114
-#: plugins/Oculars/src/gui/OcularDialog.cpp:636
+#: plugins/Oculars/src/gui/OcularDialog.cpp:648
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:738
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:288
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:251
@@ -13091,7 +13093,7 @@ msgstr "如果您有问题，您可以 {在这里提出}。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:116
-#: plugins/Oculars/src/gui/OcularDialog.cpp:642
+#: plugins/Oculars/src/gui/OcularDialog.cpp:654
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:740
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:290
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:253
@@ -13113,7 +13115,7 @@ msgstr "在{这里}提出功能请求和bug报告。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:118
-#: plugins/Oculars/src/gui/OcularDialog.cpp:648
+#: plugins/Oculars/src/gui/OcularDialog.cpp:660
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:742
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:255
@@ -13212,282 +13214,282 @@ msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "关于"
 
-#: plugins/Oculars/src/Oculars.cpp:79 plugins/Oculars/src/Oculars.cpp:1418
+#: plugins/Oculars/src/Oculars.cpp:80 plugins/Oculars/src/Oculars.cpp:1412
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:182
 #: plugins/Oculars/src/ui_ocularDialog.h:1429
 msgid "Oculars"
 msgstr "目镜效果"
 
-#: plugins/Oculars/src/Oculars.cpp:82
+#: plugins/Oculars/src/Oculars.cpp:83
 msgid ""
 "Shows the sky as if looking through a telescope eyepiece. (Only "
 "magnification and field of view are simulated.) It can also show a sensor "
 "frame and a Telrad sight."
 msgstr "将天空显示得像通过望远镜目镜观测时的样子（模拟仅限放大率与视场）。它还可以显示图像传感器的边框以及 Telrad寻星镜视场。"
 
-#: plugins/Oculars/src/Oculars.cpp:948
+#: plugins/Oculars/src/Oculars.cpp:942
 msgid "Please select an object before switching to ocular view."
 msgstr "在启用目镜视场前，请选择一个天体。"
 
-#: plugins/Oculars/src/Oculars.cpp:1044
+#: plugins/Oculars/src/Oculars.cpp:1038
 msgid "&Previous ocular"
 msgstr "前一个目镜(&P)"
 
-#: plugins/Oculars/src/Oculars.cpp:1045
+#: plugins/Oculars/src/Oculars.cpp:1039
 msgid "&Next ocular"
 msgstr "后一个目镜(&N)"
 
-#: plugins/Oculars/src/Oculars.cpp:1046
+#: plugins/Oculars/src/Oculars.cpp:1040
 msgid "Select &ocular"
 msgstr "选择目镜(&O)"
 
-#: plugins/Oculars/src/Oculars.cpp:1081
+#: plugins/Oculars/src/Oculars.cpp:1076
 msgid "Toggle &crosshair"
 msgstr "显示/隐藏十字丝(&C)"
 
-#: plugins/Oculars/src/Oculars.cpp:1089
+#: plugins/Oculars/src/Oculars.cpp:1084
 msgid "Configure &Oculars"
 msgstr "设置目镜(&O)"
 
-#: plugins/Oculars/src/Oculars.cpp:1097
+#: plugins/Oculars/src/Oculars.cpp:1092
 msgid "Toggle &CCD"
 msgstr "显示/隐藏 CCD(&C)"
 
-#: plugins/Oculars/src/Oculars.cpp:1104
+#: plugins/Oculars/src/Oculars.cpp:1099
 msgid "Toggle &Telrad"
 msgstr "显示/隐藏Telrad同心圆(&T)"
 
-#: plugins/Oculars/src/Oculars.cpp:1112
+#: plugins/Oculars/src/Oculars.cpp:1107
 msgid "&Previous CCD"
 msgstr "前一个 CCD(&P)"
 
-#: plugins/Oculars/src/Oculars.cpp:1113
+#: plugins/Oculars/src/Oculars.cpp:1108
 msgid "&Next CCD"
 msgstr "后一个 CCD(&P)"
 
-#: plugins/Oculars/src/Oculars.cpp:1114
+#: plugins/Oculars/src/Oculars.cpp:1109
 msgid "&Select CCD"
 msgstr "选择 CCD(&S)"
 
-#: plugins/Oculars/src/Oculars.cpp:1130
+#: plugins/Oculars/src/Oculars.cpp:1125
 msgid "&Rotate CCD"
 msgstr "旋转 CCD(&R)"
 
-#: plugins/Oculars/src/Oculars.cpp:1142
+#: plugins/Oculars/src/Oculars.cpp:1137
 msgid "&Reset rotation"
 msgstr "旋转复位(&R)"
 
-#: plugins/Oculars/src/Oculars.cpp:1292
-#: plugins/Oculars/src/gui/OcularDialog.cpp:106
-#: plugins/Oculars/src/gui/OcularDialog.cpp:121
-#: plugins/Oculars/src/gui/OcularDialog.cpp:136
+#: plugins/Oculars/src/Oculars.cpp:1290
+#: plugins/Oculars/src/gui/OcularDialog.cpp:107
+#: plugins/Oculars/src/gui/OcularDialog.cpp:122
+#: plugins/Oculars/src/gui/OcularDialog.cpp:137
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:823
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:830
 msgid "Warning!"
 msgstr "警告！"
 
-#: plugins/Oculars/src/Oculars.cpp:1293
+#: plugins/Oculars/src/Oculars.cpp:1291
 msgid ""
 "Unable to display a sensor boundary: No sensors or telescopes are defined."
 msgstr "无法显示传感器边界：未定义传感器或望远镜。"
 
-#: plugins/Oculars/src/Oculars.cpp:1419
+#: plugins/Oculars/src/Oculars.cpp:1413
 #: plugins/Oculars/src/ui_ocularDialog.h:1464
 msgid "Ocular view"
 msgstr "目镜视场"
 
-#: plugins/Oculars/src/Oculars.cpp:1421
+#: plugins/Oculars/src/Oculars.cpp:1415
 msgid "Oculars popup menu"
 msgstr "目镜弹出菜单"
 
-#: plugins/Oculars/src/Oculars.cpp:1423
+#: plugins/Oculars/src/Oculars.cpp:1417
 msgid "Show crosshairs"
 msgstr "显示十字丝"
 
-#: plugins/Oculars/src/Oculars.cpp:1424
+#: plugins/Oculars/src/Oculars.cpp:1418
 msgid "Image sensor frame"
 msgstr "图像传感器边框"
 
-#: plugins/Oculars/src/Oculars.cpp:1425
+#: plugins/Oculars/src/Oculars.cpp:1419
 msgid "Telrad sight"
 msgstr "Telrad寻星镜视场"
 
-#: plugins/Oculars/src/Oculars.cpp:1428
+#: plugins/Oculars/src/Oculars.cpp:1422
 msgid "Toggle Oculars configuration window"
 msgstr "切换到目镜效果配置窗口"
 
-#: plugins/Oculars/src/Oculars.cpp:1434
+#: plugins/Oculars/src/Oculars.cpp:1428
 msgid "Toggle Oculars button bar"
 msgstr "切换目镜工具栏"
 
-#: plugins/Oculars/src/Oculars.cpp:1437
+#: plugins/Oculars/src/Oculars.cpp:1431
 msgid "Select next telescope"
 msgstr "选择下一个望远镜"
 
-#: plugins/Oculars/src/Oculars.cpp:1440
+#: plugins/Oculars/src/Oculars.cpp:1434
 msgid "Select previous telescope"
 msgstr "选择上一个望远镜"
 
-#: plugins/Oculars/src/Oculars.cpp:1442
+#: plugins/Oculars/src/Oculars.cpp:1436
 msgid "Select next eyepiece"
 msgstr "选择下一个目镜"
 
-#: plugins/Oculars/src/Oculars.cpp:1444
+#: plugins/Oculars/src/Oculars.cpp:1438
 msgid "Select previous eyepiece"
 msgstr "选择上一个目镜"
 
-#: plugins/Oculars/src/Oculars.cpp:1447
+#: plugins/Oculars/src/Oculars.cpp:1441
 msgid "Rotate reticle pattern of the eyepiece clockwise"
 msgstr "顺时针旋转目镜十字丝"
 
-#: plugins/Oculars/src/Oculars.cpp:1452
+#: plugins/Oculars/src/Oculars.cpp:1446
 msgid "Rotate reticle pattern of the eyepiece counterclockwise"
 msgstr "逆时针旋转目镜十字丝"
 
-#: plugins/Oculars/src/Oculars.cpp:1455
+#: plugins/Oculars/src/Oculars.cpp:1449
 msgid "Toggle sensor crop overlay"
 msgstr "切换传感器裁切叠加层"
 
-#: plugins/Oculars/src/Oculars.cpp:1456
+#: plugins/Oculars/src/Oculars.cpp:1450
 msgid "Toggle sensor pixel grid"
 msgstr "切换传感器像素网格"
 
-#: plugins/Oculars/src/Oculars.cpp:1457
+#: plugins/Oculars/src/Oculars.cpp:1451
 msgid "Toggle focuser overlay"
 msgstr "显示聚焦器叠加层"
 
-#: plugins/Oculars/src/Oculars.cpp:1692
+#: plugins/Oculars/src/Oculars.cpp:1687
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr "十字丝的赤经/赤纬 (J2000)"
 
 #. TRANSLATORS: Unit of measure for scale - arc-seconds per pixel
-#: plugins/Oculars/src/Oculars.cpp:1706
+#: plugins/Oculars/src/Oculars.cpp:1701
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:760
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:930
 msgid "\"/px"
 msgstr "\"/像素"
 
-#: plugins/Oculars/src/Oculars.cpp:1728
+#: plugins/Oculars/src/Oculars.cpp:1723
 msgctxt "pixel"
 msgid "px"
 msgstr "像素"
 
-#: plugins/Oculars/src/Oculars.cpp:1997
+#: plugins/Oculars/src/Oculars.cpp:2003
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:567
 msgid "Ocular"
 msgstr "目镜"
 
-#: plugins/Oculars/src/Oculars.cpp:1999
+#: plugins/Oculars/src/Oculars.cpp:2005
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:569
 msgid "Binocular"
 msgstr "双筒望远镜"
 
-#: plugins/Oculars/src/Oculars.cpp:2016
+#: plugins/Oculars/src/Oculars.cpp:2022
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:607
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "目镜焦距：%1 毫米"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:2023
+#: plugins/Oculars/src/Oculars.cpp:2029
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:616
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "目镜表观视场：%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2033
+#: plugins/Oculars/src/Oculars.cpp:2039
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:643
 #, qt-format
 msgid "Lens #%1"
 msgstr "透镜 #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2035
+#: plugins/Oculars/src/Oculars.cpp:2041
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:645
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "透镜 #%1：%2"
 
-#: plugins/Oculars/src/Oculars.cpp:2038
+#: plugins/Oculars/src/Oculars.cpp:2044
 msgid "Lens: none"
 msgstr "透镜：无"
 
-#: plugins/Oculars/src/Oculars.cpp:2052 plugins/Oculars/src/Oculars.cpp:2107
+#: plugins/Oculars/src/Oculars.cpp:2058 plugins/Oculars/src/Oculars.cpp:2113
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:879
 #, qt-format
 msgid "Telescope #%1"
 msgstr "望远镜#%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2061
+#: plugins/Oculars/src/Oculars.cpp:2067
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:979
 #, qt-format
 msgid "Magnification: %1"
 msgstr "放大率：%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2067
+#: plugins/Oculars/src/Oculars.cpp:2073
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:990
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "出射光瞳：%1 毫米"
 
-#: plugins/Oculars/src/Oculars.cpp:2074
+#: plugins/Oculars/src/Oculars.cpp:2080
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:998
 #, qt-format
 msgid "FOV: %1"
 msgstr "视场：%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2095
+#: plugins/Oculars/src/Oculars.cpp:2101
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:747
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:921
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "尺寸：%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2097
+#: plugins/Oculars/src/Oculars.cpp:2103
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:754
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:926
 msgid "Binning"
 msgstr "合并(Binning)"
 
-#: plugins/Oculars/src/Oculars.cpp:2100
+#: plugins/Oculars/src/Oculars.cpp:2106
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:709
 #, qt-format
 msgid "Sensor #%1"
 msgstr "传感器#%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2102
+#: plugins/Oculars/src/Oculars.cpp:2108
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:711
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "传感器#%1：%2"
 
-#: plugins/Oculars/src/Oculars.cpp:2109
+#: plugins/Oculars/src/Oculars.cpp:2115
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:881
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "望远镜#%1：%2"
 
-#: plugins/Oculars/src/Oculars.cpp:2424
+#: plugins/Oculars/src/Oculars.cpp:2430
 msgid "&Lens"
 msgstr "透镜(&L)"
 
-#: plugins/Oculars/src/Oculars.cpp:2425
+#: plugins/Oculars/src/Oculars.cpp:2431
 msgid "&Previous lens"
 msgstr "前一个透镜(&P)"
 
-#: plugins/Oculars/src/Oculars.cpp:2426
+#: plugins/Oculars/src/Oculars.cpp:2432
 msgid "&Next lens"
 msgstr "后一个透镜(&N)"
 
-#: plugins/Oculars/src/Oculars.cpp:2450
+#: plugins/Oculars/src/Oculars.cpp:2456
 msgid "&Telescope"
 msgstr "望远镜(&T)"
 
-#: plugins/Oculars/src/Oculars.cpp:2451
+#: plugins/Oculars/src/Oculars.cpp:2457
 msgid "&Previous telescope"
 msgstr "前一个望远镜(&P)"
 
-#: plugins/Oculars/src/Oculars.cpp:2452
+#: plugins/Oculars/src/Oculars.cpp:2458
 msgid "&Next telescope"
 msgstr "后一个望远镜(&N)"
 
@@ -13730,70 +13732,70 @@ msgstr "目视分辨率"
 msgid "Visual resolution is based on eye properties and magnification"
 msgstr "目视分辨率基于人眼的特性"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:106
+#: plugins/Oculars/src/gui/OcularDialog.cpp:107
 msgid "Cannot delete the last sensor."
 msgstr "不能删除最后一个传感器。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:121
+#: plugins/Oculars/src/gui/OcularDialog.cpp:122
 msgid "Cannot delete the last ocular."
 msgstr "不能删除最后一个目镜。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:136
+#: plugins/Oculars/src/gui/OcularDialog.cpp:137
 msgid "Cannot delete the last telescope."
 msgstr "不能删除最后一个望远镜。"
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
-#: plugins/Oculars/src/gui/OcularDialog.cpp:550
+#: plugins/Oculars/src/gui/OcularDialog.cpp:562
 msgid "tFOV:"
 msgstr "实际视场："
 
 #. TRANSLATORS: Magnification factor for binoculars
-#: plugins/Oculars/src/gui/OcularDialog.cpp:552
+#: plugins/Oculars/src/gui/OcularDialog.cpp:564
 msgid "Magnification factor:"
 msgstr "放大系数"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:553
+#: plugins/Oculars/src/gui/OcularDialog.cpp:565
 #: plugins/Oculars/src/ui_ocularDialog.h:1581
 msgid "Diameter:"
 msgstr "直径："
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:555
+#: plugins/Oculars/src/gui/OcularDialog.cpp:567
 #: plugins/Oculars/src/ui_ocularDialog.h:1546
 msgid "aFOV:"
 msgstr "表观视场："
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:556
+#: plugins/Oculars/src/gui/OcularDialog.cpp:568
 #: plugins/Oculars/src/ui_ocularDialog.h:1547
 #: plugins/Oculars/src/ui_ocularDialog.h:1582
 msgid "Focal length:"
 msgstr "焦距："
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:557
+#: plugins/Oculars/src/gui/OcularDialog.cpp:569
 #: plugins/Oculars/src/ui_ocularDialog.h:1543
 msgid "Field stop:"
 msgstr "视场光阑："
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:569
+#: plugins/Oculars/src/gui/OcularDialog.cpp:581
 msgid "Oculars Plug-in"
 msgstr "目镜效果插件"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:579
+#: plugins/Oculars/src/gui/OcularDialog.cpp:591
 msgid "Barlow lens feature"
 msgstr "巴洛透镜功能"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:580
+#: plugins/Oculars/src/gui/OcularDialog.cpp:592
 msgid "Sensor crop overlay feature"
 msgstr "传感器裁切叠加层功能"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:581
+#: plugins/Oculars/src/gui/OcularDialog.cpp:593
 msgid "Pixel grid feature"
 msgstr "像素网格功能"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:585
+#: plugins/Oculars/src/gui/OcularDialog.cpp:597
 msgid "Overview"
 msgstr "概述"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:588
+#: plugins/Oculars/src/gui/OcularDialog.cpp:600
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece."
 "  This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -13801,39 +13803,39 @@ msgid ""
 "will populate some samples to get you started."
 msgstr "此插件用于模拟通过目镜看到的景象。在此设置框可增删和修改目镜、望远镜或CCD传感器。首次运行时会自动填充一些示例以供使用。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:592
+#: plugins/Oculars/src/gui/OcularDialog.cpp:604
 msgid "You can choose to scale the image you see on the screen."
 msgstr "您可以通过选择不同的组合来缩放在屏幕上的图像。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:593
+#: plugins/Oculars/src/gui/OcularDialog.cpp:605
 msgid ""
 "This is intended to show you a better comparison of what one "
 "eyepiece/telescope combination will be like when compared to another."
 msgstr "这是为了让您更好地比较一个目镜/望远镜组合。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:596
+#: plugins/Oculars/src/gui/OcularDialog.cpp:608
 msgid ""
 "The same eyepiece in two different telescopes of differing focal length will"
 " produce two different exit pupils, changing the view somewhat."
 msgstr "在不同焦距的两个不同望远镜中的相同目镜将产生两个不同的出射光瞳，稍微改变视图。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:599
+#: plugins/Oculars/src/gui/OcularDialog.cpp:611
 msgid ""
 "The trade-off of this is that, with the image scaled, a large part of the "
 "screen can be wasted."
 msgstr "这样权衡的结果就是图像缩放后屏幕的一大部分会被浪费。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:600
+#: plugins/Oculars/src/gui/OcularDialog.cpp:612
 msgid ""
 "Therefore we recommend that you leave it off, unless you feel you have a "
 "need for it."
 msgstr "因此，我建议您只在有需要时使用它。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:601
+#: plugins/Oculars/src/gui/OcularDialog.cpp:613
 msgid "You can toggle a crosshair in the view."
 msgstr "您可以切换视图中的十字丝方向。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:605
+#: plugins/Oculars/src/gui/OcularDialog.cpp:617
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder. This feature draws three concentric circles "
@@ -13843,34 +13845,34 @@ msgstr ""
 "可以开启Telrad寻星镜。此功能会绘制三个同心圆，分别是0.5%1，2.0%1和4.0%1。帮助您通过 telrad (或类似的) "
 "寻星镜看到您期望看到的内容。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:608
+#: plugins/Oculars/src/gui/OcularDialog.cpp:620
 msgid ""
 "You can adjust the diameters or even add a fourth circle if you have a "
 "different finder, or revert to the Telrad standard sizes."
 msgstr "如果你有一个不同的取景器，你可以调整直径，甚至添加第四个圆圈，或恢复到Telrad标准尺寸。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:611
+#: plugins/Oculars/src/gui/OcularDialog.cpp:623
 msgid "If you find any issues, please let me know. Enjoy!"
 msgstr "如果发现了任何问题，请及时告知我们。请尽情使用！"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:614
+#: plugins/Oculars/src/gui/OcularDialog.cpp:626
 msgid "Hot Keys"
 msgstr "快捷键"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:615
+#: plugins/Oculars/src/gui/OcularDialog.cpp:627
 msgid ""
 "The plug-in's key bindings can be edited in the Keyboard shortcuts editor "
 "(F7)."
 msgstr "可以在键盘快捷键编辑器（F7）中编辑插件快捷键。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:618
-#: plugins/Pulsars/src/Pulsar.cpp:288
+#: plugins/Oculars/src/gui/OcularDialog.cpp:630
+#: plugins/Pulsars/src/Pulsar.cpp:302
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:604
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:318
 msgid "Notes"
 msgstr "备注"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:620
+#: plugins/Oculars/src/gui/OcularDialog.cpp:632
 msgid ""
 "The sensor view has a feature to show a sensor crop overlay with information"
 " about the crop size. The size of this rectangle may be adjusted when "
@@ -13880,13 +13882,13 @@ msgstr ""
 "传感器视图具有显示传感器裁切叠加层的功能，其中包含裁切大小的信息。合并处于活动状态时，可以调整此矩形的大小（例如，binning "
 "3将把100px的裁切大小调整为99px）。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:624
+#: plugins/Oculars/src/gui/OcularDialog.cpp:636
 #, qt-format
 msgid ""
 "In this case, information about crop size overlay will be marked by %1."
 msgstr "在这种情况下，关于叠加层裁切大小的的信息将由%1标记。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:625
+#: plugins/Oculars/src/gui/OcularDialog.cpp:637
 msgid ""
 "This mark is also displayed if the crop size is larger than the sensor size."
 msgstr "如果裁切尺寸大于传感器尺寸，也会显示此标识。"
@@ -14287,317 +14289,340 @@ msgid "Hide satellites from the group"
 msgstr "隐藏该分组的卫星"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:2283
+#: plugins/Satellites/src/Satellites.cpp:2298
 msgid "visual"
 msgstr "目视"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:2285
+#: plugins/Satellites/src/Satellites.cpp:2300
 msgid "scientific"
 msgstr "科学"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:2287
+#: plugins/Satellites/src/Satellites.cpp:2302
 msgid "communications"
 msgstr "通讯"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:2289
+#: plugins/Satellites/src/Satellites.cpp:2304
 msgid "navigation"
 msgstr "导航"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:2291
+#: plugins/Satellites/src/Satellites.cpp:2306
 msgid "amateur"
 msgstr "业余无线电"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:2293
+#: plugins/Satellites/src/Satellites.cpp:2308
 msgid "weather"
 msgstr "气象"
 
 #. TRANSLATORS: Satellite group: Earth Resources satellites
-#: plugins/Satellites/src/Satellites.cpp:2295
+#: plugins/Satellites/src/Satellites.cpp:2310
 msgid "earth resources"
 msgstr "地球资源"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:2297
+#: plugins/Satellites/src/Satellites.cpp:2312
 msgid "geostationary"
 msgstr "同步卫星"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:2299
+#: plugins/Satellites/src/Satellites.cpp:2314
 msgid "non-operational"
 msgstr "已退役"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation
 #. (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:2301
+#: plugins/Satellites/src/Satellites.cpp:2316
 msgid "gps"
 msgstr "GPS导航"
 
+#. TRANSLATORS: Satellite group: The Indian Regional Navigation Satellite
+#. System (IRNSS) is an autonomous regional satellite navigation system being
+#. developed by the Indian Space Research Organisation (ISRO) which would be
+#. under complete control of the Indian government.
+#: plugins/Satellites/src/Satellites.cpp:2318
+msgid "irnss"
+msgstr ""
+
+#. TRANSLATORS: Satellite group: The Quasi-Zenith Satellite System (QZSS), is
+#. a proposed three-satellite regional time transfer system and Satellite
+#. Based Augmentation System for the Global Positioning System, that would be
+#. receivable within Japan.
+#: plugins/Satellites/src/Satellites.cpp:2320
+msgid "qzss"
+msgstr ""
+
+#. TRANSLATORS: Satellite group: The Tracking and Data Relay Satellite System
+#. (TDRSS) is a network of communications satellites and ground stations used
+#. by NASA for space communications.
+#: plugins/Satellites/src/Satellites.cpp:2322
+msgid "tdrss"
+msgstr ""
+
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS
 #. constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:2303
+#: plugins/Satellites/src/Satellites.cpp:2324
 msgid "glonass"
 msgstr "GLONASS导航"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the BeiDou
 #. constellation (BeiDou Navigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:2305
+#: plugins/Satellites/src/Satellites.cpp:2326
 msgid "beidou"
 msgstr "北斗导航"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo
 #. constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:2307
+#: plugins/Satellites/src/Satellites.cpp:2328
 msgid "galileo"
 msgstr "伽利略导航"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium
 #. constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2309
+#: plugins/Satellites/src/Satellites.cpp:2330
 msgid "iridium"
 msgstr "铱星"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium NEXT
 #. constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2311
+#: plugins/Satellites/src/Satellites.cpp:2332
 msgid "iridium next"
 msgstr "第二代铱星"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Starlink
 #. constellation (Starlink is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2313
+#: plugins/Satellites/src/Satellites.cpp:2334
 msgid "starlink"
 msgstr "星链"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Spire
 #. constellation (LEMUR satellites)
-#: plugins/Satellites/src/Satellites.cpp:2315
+#: plugins/Satellites/src/Satellites.cpp:2336
 msgid "spire"
 msgstr "Spire"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the OneWeb
 #. constellation (OneWeb is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2317
+#: plugins/Satellites/src/Satellites.cpp:2338
 msgid "oneweb"
 msgstr "OneWeb"
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:2319
+#: plugins/Satellites/src/Satellites.cpp:2340
 msgid "stations"
 msgstr "空间站"
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:2321
+#: plugins/Satellites/src/Satellites.cpp:2342
 msgid "education"
 msgstr "教育"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space
 #. observatories
-#: plugins/Satellites/src/Satellites.cpp:2323
+#: plugins/Satellites/src/Satellites.cpp:2344
 msgid "observatory"
 msgstr "空间天文台"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the INTELSAT
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2325
+#: plugins/Satellites/src/Satellites.cpp:2346
 msgid "intelsat"
 msgstr "国际通信"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLOBALSTAR
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2327
+#: plugins/Satellites/src/Satellites.cpp:2348
 msgid "globalstar"
 msgstr "全球星"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the ORBCOMM
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2329
+#: plugins/Satellites/src/Satellites.cpp:2350
 msgid "orbcomm"
 msgstr "ORBCOMM"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GORIZONT
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2331
+#: plugins/Satellites/src/Satellites.cpp:2352
 msgid "gorizont"
 msgstr "GORIZONT"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the RADUGA satellites
-#: plugins/Satellites/src/Satellites.cpp:2333
+#: plugins/Satellites/src/Satellites.cpp:2354
 msgid "raduga"
 msgstr "RADUGA"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the MOLNIYA
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2335
+#: plugins/Satellites/src/Satellites.cpp:2356
 msgid "molniya"
 msgstr "MOLNIYA"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the COSMOS satellites
-#: plugins/Satellites/src/Satellites.cpp:2337
+#: plugins/Satellites/src/Satellites.cpp:2358
 msgid "cosmos"
 msgstr "宇宙系列"
 
 #. TRANSLATORS: Satellite group: Debris of satellites
-#: plugins/Satellites/src/Satellites.cpp:2339
+#: plugins/Satellites/src/Satellites.cpp:2360
 msgid "debris"
 msgstr "卫星碎片"
 
 #. TRANSLATORS: Satellite group: Crewed satellites
-#: plugins/Satellites/src/Satellites.cpp:2341
+#: plugins/Satellites/src/Satellites.cpp:2362
 msgid "crewed"
 msgstr "载人航天器"
 
 #. TRANSLATORS: Satellite group: Satellites of ISS resupply missions
-#: plugins/Satellites/src/Satellites.cpp:2343
+#: plugins/Satellites/src/Satellites.cpp:2364
 msgid "resupply"
 msgstr "补给"
 
 #. TRANSLATORS: Satellite group: are known to broadcast TV signals
-#: plugins/Satellites/src/Satellites.cpp:2345
+#: plugins/Satellites/src/Satellites.cpp:2366
 msgid "tv"
 msgstr "电视"
 
 #. TRANSLATORS: Satellite group: military satellites
-#: plugins/Satellites/src/Satellites.cpp:2347
+#: plugins/Satellites/src/Satellites.cpp:2368
 msgid "military"
 msgstr "军用"
 
 #. TRANSLATORS: Satellite group: geodetic satellites
-#: plugins/Satellites/src/Satellites.cpp:2349
+#: plugins/Satellites/src/Satellites.cpp:2370
 msgid "geodetic"
 msgstr "测地"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:2354
+#: plugins/Satellites/src/Satellites.cpp:2375
 msgid "The Hubble Space Telescope"
 msgstr "哈勃(Hubble)空间望远镜"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2356
+#: plugins/Satellites/src/Satellites.cpp:2377
 msgid "The International Space Station"
 msgstr "国际空间站"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2358
+#: plugins/Satellites/src/Satellites.cpp:2379
 msgid "China's first space station"
 msgstr "中国第一个空间站"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2360
+#: plugins/Satellites/src/Satellites.cpp:2381
 msgid "Tiangong space station (Chinese large modular space station)"
 msgstr "天宫号空间站（中国空间站）"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2362
+#: plugins/Satellites/src/Satellites.cpp:2383
 msgid "The russian space radio telescope RadioAstron"
 msgstr "俄罗斯射电天文号(RadioAstron)空间射电望远镜"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2364
+#: plugins/Satellites/src/Satellites.cpp:2385
 msgid "International Gamma-Ray Astrophysics Laboratory"
 msgstr "国际伽马射线天体物理实验室"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2366
+#: plugins/Satellites/src/Satellites.cpp:2387
 msgid "The Gamma-Ray Observatory"
 msgstr "伽玛射线观测台"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2368
+#: plugins/Satellites/src/Satellites.cpp:2389
 msgid "The Microvariability and Oscillations of Stars telescope"
 msgstr "恒星微变和振荡望远镜"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2370
+#: plugins/Satellites/src/Satellites.cpp:2391
 msgid "The Interface Region Imaging Spectrograph"
 msgstr " 过渡区成像摄谱仪"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2372
+#: plugins/Satellites/src/Satellites.cpp:2393
 msgid ""
 "The Spectroscopic Planet Observatory for Recognition of Interaction of "
 "Atmosphere"
 msgstr "行星分光观测卫星"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2376
+#: plugins/Satellites/src/Satellites.cpp:2397
 msgid "The Dark Matter Particle Explorer"
 msgstr "暗物质粒子探测器"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2378
+#: plugins/Satellites/src/Satellites.cpp:2399
 msgid "Arcsecond Space Telescope Enabling Research in Astrophysics"
 msgstr "弧秒太空望远镜天体物理学基础研究卫星"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2380
+#: plugins/Satellites/src/Satellites.cpp:2401
 msgid "Reuven Ramaty High Energy Solar Spectroscopic Imager"
 msgstr "太阳高能光谱成像探测器"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2382
+#: plugins/Satellites/src/Satellites.cpp:2403
 msgid "The Chandra X-ray Observatory"
 msgstr "钱德拉X射线天文台"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2386
+#: plugins/Satellites/src/Satellites.cpp:2407
 msgid "ISS (ZARYA)"
 msgstr "国际空间站(ISS)"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2388
+#: plugins/Satellites/src/Satellites.cpp:2409
 msgid "ISS"
 msgstr "国际空间站"
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:2390
+#: plugins/Satellites/src/Satellites.cpp:2411
 msgid "HST"
 msgstr "哈勃太空望远镜(HST)"
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:2392
+#: plugins/Satellites/src/Satellites.cpp:2413
 msgid "SPEKTR-R"
 msgstr "射电天文号(SPEKTR-R)"
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics
 #. Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:2394
+#: plugins/Satellites/src/Satellites.cpp:2415
 msgid "INTEGRAL"
 msgstr "国际伽玛射线天体物理实验室(INTEGRAL)"
 
 #. TRANSLATORS: Satellite name: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:2396
+#: plugins/Satellites/src/Satellites.cpp:2417
 msgid "TIANGONG 1"
 msgstr "天宫一号"
 
 #. TRANSLATORS: Satellite name: name of China's space station module
-#: plugins/Satellites/src/Satellites.cpp:2398
+#: plugins/Satellites/src/Satellites.cpp:2419
 msgid "TIANHE"
-msgstr ""
+msgstr "天和"
 
 #. TRANSLATORS: Satellite name: China's space station name (with name of base
 #. module)
-#: plugins/Satellites/src/Satellites.cpp:2400
+#: plugins/Satellites/src/Satellites.cpp:2421
 msgid "TIANGONG (TIANHE)"
 msgstr "天宫（天和）"
 
-#: plugins/Satellites/src/Satellites.cpp:2403
+#: plugins/Satellites/src/Satellites.cpp:2424
 msgid "The satellite and the observer are in sunlight"
 msgstr "此卫星与观测者均位于阳光下"
 
-#: plugins/Satellites/src/Satellites.cpp:2404
+#: plugins/Satellites/src/Satellites.cpp:2425
 msgid "The satellite is visible"
 msgstr "此卫星可见"
 
-#: plugins/Satellites/src/Satellites.cpp:2405
+#: plugins/Satellites/src/Satellites.cpp:2426
 msgid "The satellite is eclipsed"
 msgstr "此卫星处于地球阴影"
 
-#: plugins/Satellites/src/Satellites.cpp:2406
+#: plugins/Satellites/src/Satellites.cpp:2427
 msgid "The satellite is not visible"
 msgstr "此卫星不可观测"
 
@@ -14713,7 +14738,7 @@ msgid "Radio communication"
 msgstr "无线电通信"
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Satellites/src/Satellite.cpp:455 plugins/Pulsars/src/Pulsar.cpp:274
+#: plugins/Satellites/src/Satellite.cpp:455 plugins/Pulsars/src/Pulsar.cpp:288
 msgctxt "frequency"
 msgid "MHz"
 msgstr "MHz"
@@ -15515,7 +15540,7 @@ msgstr "将望远镜指向给定坐标"
 msgid ""
 "The existing version of the configuration data for telescopes in the "
 "Telescope Control plugin is obsolete."
-msgstr ""
+msgstr "望远镜控制插件中望远镜配置数据的现有版本已过时。"
 
 #. TRANSLATORS: Description for Meade AutoStar compatible mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1768
@@ -17900,129 +17925,129 @@ msgstr "显示脉冲星"
 msgid "Pulsars configuration window"
 msgstr "脉冲星设置窗口"
 
-#: plugins/Pulsars/src/Pulsar.cpp:184
+#: plugins/Pulsars/src/Pulsar.cpp:187
 msgid "pulsar"
 msgstr "脉冲星"
 
-#: plugins/Pulsars/src/Pulsar.cpp:186
+#: plugins/Pulsars/src/Pulsar.cpp:189
 msgid "pulsar with glitches"
 msgstr "有自转突变现象的脉冲星"
 
-#: plugins/Pulsars/src/Pulsar.cpp:186
+#: plugins/Pulsars/src/Pulsar.cpp:189
 msgid "registered glitches"
 msgstr "已观测到自转突变"
 
-#: plugins/Pulsars/src/Pulsar.cpp:197
+#: plugins/Pulsars/src/Pulsar.cpp:211
 msgid "Barycentric period"
 msgstr "质心周期"
 
 #. TRANSLATORS: Unit of measure for period - seconds
-#: plugins/Pulsars/src/Pulsar.cpp:200
+#: plugins/Pulsars/src/Pulsar.cpp:214
 msgctxt "period"
 msgid "s"
 msgstr "秒"
 
-#: plugins/Pulsars/src/Pulsar.cpp:204
+#: plugins/Pulsars/src/Pulsar.cpp:218
 msgid "Time derivative of barycentric period"
 msgstr "质心周期的时间导数"
 
-#: plugins/Pulsars/src/Pulsar.cpp:209
+#: plugins/Pulsars/src/Pulsar.cpp:223
 msgid "Dispersion measure"
 msgstr "色散度量"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
-#: plugins/Pulsars/src/Pulsar.cpp:212
+#: plugins/Pulsars/src/Pulsar.cpp:226
 msgctxt "distance"
 msgid "pc"
 msgstr "秒差距"
 
 #. TRANSLATORS: Unit of measure for distance - centimeters
-#: plugins/Pulsars/src/Pulsar.cpp:214
+#: plugins/Pulsars/src/Pulsar.cpp:228
 msgctxt "distance"
 msgid "cm"
 msgstr "厘米"
 
-#: plugins/Pulsars/src/Pulsar.cpp:221
+#: plugins/Pulsars/src/Pulsar.cpp:235
 msgid "Spin down energy loss rate"
 msgstr "自转减慢能量损失率"
 
 #. TRANSLATORS: Unit of measure for power - erg per second
-#: plugins/Pulsars/src/Pulsar.cpp:224
+#: plugins/Pulsars/src/Pulsar.cpp:238
 msgctxt "power"
 msgid "ergs/s"
 msgstr "尔格/秒"
 
-#: plugins/Pulsars/src/Pulsar.cpp:230
+#: plugins/Pulsars/src/Pulsar.cpp:244
 msgid "Binary period of pulsar"
 msgstr "脉冲双星周期"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: plugins/Pulsars/src/Pulsar.cpp:233 plugins/Exoplanets/src/Exoplanet.cpp:319
+#: plugins/Pulsars/src/Pulsar.cpp:247 plugins/Exoplanets/src/Exoplanet.cpp:319
 msgctxt "period"
 msgid "days"
 msgstr "天"
 
-#: plugins/Pulsars/src/Pulsar.cpp:237 plugins/Exoplanets/src/Exoplanet.cpp:323
+#: plugins/Pulsars/src/Pulsar.cpp:251 plugins/Exoplanets/src/Exoplanet.cpp:323
 msgid "Eccentricity"
 msgstr "偏心率"
 
-#: plugins/Pulsars/src/Pulsar.cpp:242
+#: plugins/Pulsars/src/Pulsar.cpp:256
 msgid "Annual parallax"
 msgstr "年视差"
 
-#: plugins/Pulsars/src/Pulsar.cpp:251
+#: plugins/Pulsars/src/Pulsar.cpp:265
 msgid "Distance based on electron density model"
 msgstr "距离（基于电子密度模型）"
 
-#: plugins/Pulsars/src/Pulsar.cpp:264
+#: plugins/Pulsars/src/Pulsar.cpp:278
 #, no-c-format
 msgid "Profile width at 50% of peak"
 msgstr "轮廓宽度在峰值的50％"
 
 #. TRANSLATORS: Unit of measure for time - milliseconds
-#: plugins/Pulsars/src/Pulsar.cpp:267
+#: plugins/Pulsars/src/Pulsar.cpp:281
 msgctxt "time"
 msgid "ms"
 msgstr "毫秒"
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
-#: plugins/Pulsars/src/Pulsar.cpp:272
+#: plugins/Pulsars/src/Pulsar.cpp:286
 msgid "Time averaged flux density at"
 msgstr "时均辐射通量密度在"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
-#: plugins/Pulsars/src/Pulsar.cpp:276
+#: plugins/Pulsars/src/Pulsar.cpp:290
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:352
 msgctxt "spectral flux density"
 msgid "mJy"
 msgstr "毫央斯基"
 
-#: plugins/Pulsars/src/Pulsar.cpp:376
+#: plugins/Pulsars/src/Pulsar.cpp:390
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr "反常X射线脉冲星和软伽玛射线再现源"
 
-#: plugins/Pulsars/src/Pulsar.cpp:381
+#: plugins/Pulsars/src/Pulsar.cpp:395
 msgid "has one or more binary companions"
 msgstr "存在至少一个伴星"
 
-#: plugins/Pulsars/src/Pulsar.cpp:386
+#: plugins/Pulsars/src/Pulsar.cpp:400
 msgid "with pulsed emission from radio to infrared or higher frequencies"
 msgstr "伴随从射电到红外波段或更高频率的脉冲发射"
 
-#: plugins/Pulsars/src/Pulsar.cpp:391
+#: plugins/Pulsars/src/Pulsar.cpp:405
 msgid "with pulsed emission only at infrared or higher frequencies"
 msgstr "有只在红外线波段或更高频率的脉冲发射"
 
-#: plugins/Pulsars/src/Pulsar.cpp:396
+#: plugins/Pulsars/src/Pulsar.cpp:410
 msgid "with pulsed emission in the radio band"
 msgstr "有在射电波段的脉冲发射"
 
-#: plugins/Pulsars/src/Pulsar.cpp:401
+#: plugins/Pulsars/src/Pulsar.cpp:415
 msgid "with intermittently pulsed radio emission"
 msgstr "有间歇性的脉冲射电发射"
 
-#: plugins/Pulsars/src/Pulsar.cpp:406
+#: plugins/Pulsars/src/Pulsar.cpp:420
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
@@ -22014,7 +22039,7 @@ msgstr "时间间隔必须少于一年！"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:199
 msgid "Code"
-msgstr ""
+msgstr "代码"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:201
 msgid "ZHR"
@@ -22822,7 +22847,7 @@ msgstr "显示小月球停变点所在的赤纬线"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:301
 msgid "Show Polar Circles"
-msgstr ""
+msgstr "显示极圈"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:302
 msgid "Show Line for Zenith Passage"
@@ -22870,11 +22895,11 @@ msgstr "显示自定义方位线2"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:313
 msgid "Show Line for Custom Altitude 1"
-msgstr ""
+msgstr "显示自定义地平纬圈1"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:314
 msgid "Show Line for Custom Altitude 2"
-msgstr ""
+msgstr "显示自定义地平纬圈2"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:315
 msgid "Show Line for Custom Declination 1"
@@ -22906,7 +22931,7 @@ msgstr "小月球停变点"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1429
 msgid "Polar Circle"
-msgstr ""
+msgstr "极圈"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1432
 msgid "Zenith Passage"
@@ -22963,7 +22988,7 @@ msgstr "小月球停变点所在的赤纬线"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:222
 msgid "Declination of the Polar circles"
-msgstr ""
+msgstr "极圈所在的赤纬线"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:223
 msgid "Declination of the Zenith passage"
@@ -23015,12 +23040,15 @@ msgid ""
 "arbitrary locations. The directions are computed based on spherical "
 "trigonometry on a spherical Earth."
 msgstr ""
+"某些宗教，尤其是伊斯兰教，坚持朝一个特定地点祈祷。两个地点的方位线可被显示。默认地点是麦加( "
+"Mecca)的天房(Kaaba)和耶路撒冷(Jerusalem)。但是您可以从Stellarium的位置列表中选择位置，也可以输入任意位置。方向是在球面地球上,"
+" 根据球面三角法计算了的。"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:239
 msgid ""
 "In addition, up to two lines each with arbitrary azimuth, altitude and "
 "declination lines with custom label can be shown."
-msgstr ""
+msgstr "此外，最多两条任意方位角，高度角的线和自定义的赤纬线可以被显示"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:718
 msgid "ArchaeoLines Configuration"
@@ -23080,7 +23108,7 @@ msgstr "二分点所在的赤纬线 (赤道)"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:735
 msgid "Polar Circles"
-msgstr ""
+msgstr "极圈"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:736
 msgid "Selected Object Hour Angle"
@@ -23117,7 +23145,7 @@ msgstr "天底所在的赤纬线"
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:810
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:814
 msgid "From selected object (if any)"
-msgstr ""
+msgstr "从已选的天体(如果有)"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:754
 msgid "Geographic Location 1"
@@ -23155,12 +23183,12 @@ msgstr "自定义方位线1"
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:787
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:791
 msgid "Select from location list"
-msgstr ""
+msgstr "从位置列表中选择"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:789
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:793
 msgid "Pick..."
-msgstr ""
+msgstr "选择..."
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:796
 msgid "Custom Declination 2"
@@ -23172,11 +23200,11 @@ msgstr "自定义方位线2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:801
 msgid "Custom Altitude 1"
-msgstr ""
+msgstr "自定义地平高度1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:802
 msgid "Custom Altitude 2"
-msgstr ""
+msgstr "自定义地平高度2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:817
 msgid "Restore default settings"
@@ -23188,7 +23216,7 @@ msgstr "自定义线"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:153
 msgid "Locations"
-msgstr ""
+msgstr "位置"
 
 #: plugins/Vts/src/Vts.cpp:152
 msgid "Vts"
