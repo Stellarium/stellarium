@@ -189,7 +189,8 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 
 		if (faderO.getInterstate()>0.f)
 		{
-			sPainter.setColor(color, qMin(faderC.getInterstate(), faderO.getInterstate()));
+			float minFader = qMin(faderC.getInterstate(), faderO.getInterstate());
+			sPainter.setColor(color, minFader);
 			sPainter.setFont(fontO);
 			if (flagMask)
 				bshift = ppx*sPainter.getFontMetrics().boundingRect(sNortheast).width()*0.5f;
@@ -216,7 +217,7 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 
 			if (faderW.getInterstate()>0.f)
 			{
-				sPainter.setColor(color, qMin(qMin(faderC.getInterstate(), faderO.getInterstate()), faderW.getInterstate()));
+				sPainter.setColor(color, qMin(minFader, faderW.getInterstate()));
 				sPainter.setFont(fontW);
 				if (flagMask)
 					cshift = ppx*sPainter.getFontMetrics().boundingRect(sNorthnortheast).width()*0.5f;
