@@ -4139,7 +4139,7 @@
                  <item>
                   <widget class="QCheckBox" name="showWindsPointsCheckBox">
                    <property name="toolTip">
-                    <string>Labels for the principal winds (or main winds)</string>
+                    <string>Labels for directions of the principal winds (or main winds).</string>
                    </property>
                    <property name="text">
                     <string/>
@@ -5039,12 +5039,12 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
