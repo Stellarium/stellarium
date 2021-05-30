@@ -46,6 +46,7 @@
 #include "StelGuiItems.hpp"
 #include "StelActionMgr.hpp"
 #include "StelMovementMgr.hpp"
+#include "StelPropertyMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelHips.hpp"
 
@@ -322,7 +323,7 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showEquatorJ2000LineCheckBox,		"actionShow_Equator_J2000_Line");
 	connectCheckBox(ui->showEclipticLineJ2000CheckBox,		"actionShow_Ecliptic_J2000_Line");
 	connectCheckBox(ui->showEclipticLineOfDateCheckBox,		"actionShow_Ecliptic_Line");
-	connectCheckBox(ui->showInvariablePlaneCheckBox,		"actionShow_Invariable_Plane_Line");
+	connectCheckBox(ui->showInvariablePlaneCheckBox,			"actionShow_Invariable_Plane_Line");
 	connectCheckBox(ui->showSolarEquatorCheckBox,			"actionShow_Solar_Equator_Line");
 	connectCheckBox(ui->showMeridianLineCheckBox,			"actionShow_Meridian_Line");
 	connectCheckBox(ui->showLongitudeLineCheckBox,			"actionShow_Longitude_Line");
@@ -337,6 +338,8 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showEclipticGridJ2000CheckBox,		"actionShow_Ecliptic_J2000_Grid");
 	connectCheckBox(ui->showEclipticGridOfDateCheckBox,		"actionShow_Ecliptic_Grid");
 	connectCheckBox(ui->showCardinalPointsCheckBox,			"actionShow_Cardinal_Points");
+	connectBoolProperty(ui->showOrdinalPointsCheckBox,		"LandscapeMgr.ordinalsPointsDisplayed");
+	connectBoolProperty(ui->showWindsPointsCheckBox,			"LandscapeMgr.windsPointsDisplayed");
 	connectCheckBox(ui->showCompassMarksCheckBox,			"actionShow_Compass_Marks");
 	connectCheckBox(ui->showPrecessionCirclesCheckBox,		"actionShow_Precession_Circles");
 	connectCheckBox(ui->showPrimeVerticalLineCheckBox,		"actionShow_Prime_Vertical_Line");
@@ -344,7 +347,7 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showColuresLineCheckBox,			"actionShow_Colure_Lines");
 	connectCheckBox(ui->showCircumpolarCirclesCheckBox,		"actionShow_Circumpolar_Circles");
 	connectCheckBox(ui->showUmbraCheckBox,		                "actionShow_Umbra_Circle");
-	connectCheckBox(ui->showPenumbraCheckBox,		        "actionShow_Penumbra_Circle");
+	connectCheckBox(ui->showPenumbraCheckBox,				"actionShow_Penumbra_Circle");
 	connectCheckBox(ui->showCelestialJ2000PolesCheckBox,		"actionShow_Celestial_J2000_Poles");
 	connectCheckBox(ui->showCelestialPolesCheckBox,			"actionShow_Celestial_Poles");
 	connectCheckBox(ui->showZenithNadirCheckBox,			"actionShow_Zenith_Nadir");
@@ -358,7 +361,7 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showSolsticeJ2000PointsCheckBox,		"actionShow_Solstice_J2000_Points");
 	connectCheckBox(ui->showSolsticePointsCheckBox,			"actionShow_Solstice_Points");
 	connectCheckBox(ui->showAntisolarPointCheckBox,			"actionShow_Antisolar_Point");
-	connectCheckBox(ui->showApexPointsCheckBox,			"actionShow_Apex_Points");
+	connectCheckBox(ui->showApexPointsCheckBox,				"actionShow_Apex_Points");
 	connectCheckBox(ui->showFOVCenterMarkerCheckBox,		"actionShow_FOV_Center_Marker");
 	connectCheckBox(ui->showFOVCircularMarkerCheckBox,		"actionShow_FOV_Circular_Marker");
 	connectCheckBox(ui->showFOVRectangularMarkerCheckBox,		"actionShow_FOV_Rectangular_Marker");
@@ -370,32 +373,32 @@ void ViewDialog::createDialogContent()
 	connectIntProperty(ui->lineThicknessSpinBox,			"GridLinesMgr.lineThickness");
 	connectIntProperty(ui->partThicknessSpinBox,			"GridLinesMgr.partThickness");
 	connectBoolProperty(ui->equatorPartsCheckBox,			"GridLinesMgr.equatorPartsDisplayed");
-	connectBoolProperty(ui->equatorJ2000PartsCheckBox,		"GridLinesMgr.equatorJ2000PartsDisplayed");
+	connectBoolProperty(ui->equatorJ2000PartsCheckBox,	"GridLinesMgr.equatorJ2000PartsDisplayed");
 	connectBoolProperty(ui->eclipticPartsCheckBox,			"GridLinesMgr.eclipticPartsDisplayed");
 	connectBoolProperty(ui->eclipticJ2000PartsCheckBox,		"GridLinesMgr.eclipticJ2000PartsDisplayed");
 	connectBoolProperty(ui->solarEquatorPartsCheckBox,		"GridLinesMgr.solarEquatorPartsDisplayed");
-	connectBoolProperty(ui->longitudePartsCheckBox,			"GridLinesMgr.longitudePartsDisplayed");
+	connectBoolProperty(ui->longitudePartsCheckBox,		"GridLinesMgr.longitudePartsDisplayed");
 	connectBoolProperty(ui->horizonPartsCheckBox,			"GridLinesMgr.horizonPartsDisplayed");
-	connectBoolProperty(ui->meridianPartsCheckBox,			"GridLinesMgr.meridianPartsDisplayed");
-	connectBoolProperty(ui->primeVerticalPartsCheckBox,		"GridLinesMgr.primeVerticalPartsDisplayed");
-	connectBoolProperty(ui->currentVerticalPartsCheckBox,		"GridLinesMgr.currentVerticalPartsDisplayed");
+	connectBoolProperty(ui->meridianPartsCheckBox,		"GridLinesMgr.meridianPartsDisplayed");
+	connectBoolProperty(ui->primeVerticalPartsCheckBox,	"GridLinesMgr.primeVerticalPartsDisplayed");
+	connectBoolProperty(ui->currentVerticalPartsCheckBox,	"GridLinesMgr.currentVerticalPartsDisplayed");
 	connectBoolProperty(ui->colurePartsCheckBox,			"GridLinesMgr.colurePartsDisplayed");
 	connectBoolProperty(ui->precessionPartsCheckBox,		"GridLinesMgr.precessionPartsDisplayed");
-	connectBoolProperty(ui->galacticEquatorPartsCheckBox,		"GridLinesMgr.galacticEquatorPartsDisplayed");
+	connectBoolProperty(ui->galacticEquatorPartsCheckBox,	"GridLinesMgr.galacticEquatorPartsDisplayed");
 	connectBoolProperty(ui->supergalacticEquatorPartsCheckBox,	"GridLinesMgr.supergalacticEquatorPartsDisplayed");
-	connectBoolProperty(ui->equatorLabelsCheckBox,			"GridLinesMgr.equatorPartsLabeled");
-	connectBoolProperty(ui->equatorJ2000LabelsCheckBox,		"GridLinesMgr.equatorJ2000PartsLabeled");
-	connectBoolProperty(ui->eclipticLabelsCheckBox,			"GridLinesMgr.eclipticPartsLabeled");
-	connectBoolProperty(ui->eclipticJ2000LabelsCheckBox,		"GridLinesMgr.eclipticJ2000PartsLabeled");
-	connectBoolProperty(ui->solarEquatorLabelsCheckBox,		"GridLinesMgr.solarEquatorPartsLabeled");
+	connectBoolProperty(ui->equatorLabelsCheckBox,		"GridLinesMgr.equatorPartsLabeled");
+	connectBoolProperty(ui->equatorJ2000LabelsCheckBox,	"GridLinesMgr.equatorJ2000PartsLabeled");
+	connectBoolProperty(ui->eclipticLabelsCheckBox,		"GridLinesMgr.eclipticPartsLabeled");
+	connectBoolProperty(ui->eclipticJ2000LabelsCheckBox,	"GridLinesMgr.eclipticJ2000PartsLabeled");
+	connectBoolProperty(ui->solarEquatorLabelsCheckBox,	"GridLinesMgr.solarEquatorPartsLabeled");
 	connectBoolProperty(ui->longitudeLabelsCheckBox,		"GridLinesMgr.longitudePartsLabeled");
-	connectBoolProperty(ui->horizonLabelsCheckBox,			"GridLinesMgr.horizonPartsLabeled");
-	connectBoolProperty(ui->meridianLabelsCheckBox,			"GridLinesMgr.meridianPartsLabeled");
-	connectBoolProperty(ui->primeVerticalLabelsCheckBox,		"GridLinesMgr.primeVerticalPartsLabeled");
-	connectBoolProperty(ui->currentVerticalLabelsCheckBox,		"GridLinesMgr.currentVerticalPartsLabeled");
+	connectBoolProperty(ui->horizonLabelsCheckBox,		"GridLinesMgr.horizonPartsLabeled");
+	connectBoolProperty(ui->meridianLabelsCheckBox,		"GridLinesMgr.meridianPartsLabeled");
+	connectBoolProperty(ui->primeVerticalLabelsCheckBox,	"GridLinesMgr.primeVerticalPartsLabeled");
+	connectBoolProperty(ui->currentVerticalLabelsCheckBox,	"GridLinesMgr.currentVerticalPartsLabeled");
 	connectBoolProperty(ui->colureLabelsCheckBox,			"GridLinesMgr.colurePartsLabeled");
 	connectBoolProperty(ui->precessionLabelsCheckBox,		"GridLinesMgr.precessionPartsLabeled");
-	connectBoolProperty(ui->galacticEquatorLabelsCheckBox,		"GridLinesMgr.galacticEquatorPartsLabeled");
+	connectBoolProperty(ui->galacticEquatorLabelsCheckBox,	"GridLinesMgr.galacticEquatorPartsLabeled");
 	connectBoolProperty(ui->supergalacticEquatorLabelsCheckBox,	"GridLinesMgr.supergalacticEquatorPartsLabeled");
 
 	connectColorButton(ui->colorEclipticGridJ2000,		"GridLinesMgr.eclipticJ2000GridColor",		"color/ecliptical_J2000_color");
@@ -442,6 +445,10 @@ void ViewDialog::createDialogContent()
 	connectColorButton(ui->colorFOVRectangularMarker,	"SpecialMarkersMgr.fovRectangularMarkerColor",	"color/fov_rectangular_marker_color");
 	connectColorButton(ui->colorCardinalPoints,		"LandscapeMgr.cardinalsPointsColor",		"color/cardinal_color");
 	connectColorButton(ui->colorCompassMarks,		"SpecialMarkersMgr.compassMarksColor",		"color/compass_marks_color");
+
+	connect(ui->showCardinalPointsCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setSelectedCardinalCheckBoxes()));
+	connect(ui->showOrdinalPointsCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setSelectedCardinalCheckBoxes()));
+	setSelectedCardinalCheckBoxes();
 
 	// Projection
 	connect(ui->projectionListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(changeProjection(const QString&)));
@@ -668,6 +675,15 @@ void ViewDialog::updateTabBarListWidgetWidth()
 	// Hack to force the window to be resized...
 	ui->stackListWidget->setMinimumWidth(width);
 	ui->stackListWidget->updateGeometry();
+}
+
+void ViewDialog::setSelectedCardinalCheckBoxes()
+{
+	StelPropertyMgr* propMgr = StelApp::getInstance().getStelPropertyManager();
+	bool cardinals = propMgr->getProperty("LandscapeMgr.cardinalsPointsDisplayed")->getValue().toBool();
+	bool ordinals = propMgr->getProperty("LandscapeMgr.ordinalsPointsDisplayed")->getValue().toBool();
+	ui->showOrdinalPointsCheckBox->setEnabled(cardinals);
+	ui->showWindsPointsCheckBox->setEnabled(cardinals && ordinals);
 }
 
 void ViewDialog::setSelectedCatalogsFromCheckBoxes()

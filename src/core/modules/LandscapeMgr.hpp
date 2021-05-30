@@ -60,6 +60,14 @@ class LandscapeMgr : public StelModule
 		   READ getFlagCardinalsPoints
 		   WRITE setFlagCardinalsPoints
 		   NOTIFY cardinalsPointsDisplayedChanged)
+	Q_PROPERTY(bool ordinalsPointsDisplayed
+		   READ getFlagOrdinalsPoints
+		   WRITE setFlagOrdinalsPoints
+		   NOTIFY ordinalsPointsDisplayedChanged)
+	Q_PROPERTY(bool windsPointsDisplayed
+		   READ getFlagWindsPoints
+		   WRITE setFlagWindsPoints
+		   NOTIFY windsPointsDisplayedChanged)
 	Q_PROPERTY(Vec3f cardinalsPointsColor
 		   READ getColorCardinalPoints
 		   WRITE setColorCardinalPoints
@@ -343,6 +351,16 @@ public slots:
 	//! Set flag for displaying Cardinals Points.
 	void setFlagCardinalsPoints(const bool displayed);
 
+	//! Get flag for displaying Ordinals Points.
+	bool getFlagOrdinalsPoints() const;
+	//! Set flag for displaying Ordinals Points.
+	void setFlagOrdinalsPoints(const bool displayed);
+
+	//! Get flag for displaying Principal Winds Points.
+	bool getFlagWindsPoints() const;
+	//! Set flag for displaying Principal Winds Points.
+	void setFlagWindsPoints(const bool displayed);
+
 	//! Get Cardinals Points color.
 	Vec3f getColorCardinalPoints() const;
 	//! Set Cardinals Points color.
@@ -476,6 +494,8 @@ public slots:
 signals:
 	void atmosphereDisplayedChanged(const bool displayed);
 	void cardinalsPointsDisplayedChanged(const bool displayed);
+	void ordinalsPointsDisplayedChanged(const bool displayed);
+	void windsPointsDisplayedChanged(const bool displayed);
 	void cardinalsPointsColorChanged(const Vec3f & newColor) const;
 	void fogDisplayedChanged(const bool displayed);
 	void landscapeDisplayedChanged(const bool displayed);

@@ -58,19 +58,23 @@ public:
 	virtual ~Cardinals();
 	void draw(const StelCore* core, double latitude) const;
 	void setColor(const Vec3f& c) {color = c;}
-	Vec3f get_color() const {return color;}
+	Vec3f getColor() const {return color;}
 	void updateI18n();
-	void update(double deltaTime) {fader.update(static_cast<int>(deltaTime*1000));}
-	void set_fade_duration(float duration) {fader.setDuration(static_cast<int>(duration*1000.f));}
-	void setFlagShow(bool b){fader = b;}
-	bool getFlagShow() const {return fader;}
+	void update(double deltaTime);
+	void setFadeDuration(float duration);
+	void setFlagShowCardinals(bool b) { faderC = b; }
+	bool getFlagShowCardinals() const { return faderC; }
+	void setFlagShowOrdinals(bool b) { faderO = b; }
+	bool getFlagShowOrdinals() const { return faderO; }
+	void setFlagShowWinds(bool b) { faderW = b; }
+	bool getFlagShowWinds() const { return faderW; }
 private:
 	class StelPropertyMgr* propMgr;
 	//float radius;
-        QFont fontC, fontSC, fontSSC;
+	QFont fontC, fontO, fontW;
 	Vec3f color;
 	QString sNorth, sSouth, sEast, sWest, sNortheast, sSoutheast, sSouthwest, sNorthwest, sNorthnortheast, sEastnortheast, sEastsoutheast, sSouthsoutheast, sSouthsouthwest, sWestsouthwest, sWestnorthwest, sNorthnorthwest;
-	LinearFader fader;
+	LinearFader faderC, faderO, faderW;
 };
 
 
@@ -88,9 +92,9 @@ Cardinals::Cardinals(float _radius)
 	// Default font size is 24
 	fontC.setPixelSize(conf->value("viewing/cardinal_font_size", screenFontSize+11).toInt());
 	// Default font size is 18
-        fontSC.setPixelSize(conf->value("viewing/subcardinal_font_size", screenFontSize+5).toInt());
-	// Draw the sub-subcardinal points even smaller.
-	fontSSC.setPixelSize(conf->value("viewing/subsubcardinal_font_size", screenFontSize+2).toInt());
+	fontO.setPixelSize(conf->value("viewing/ordinal_font_size", screenFontSize+5).toInt());
+	// Draw the principal wind points even smaller.
+	fontW.setPixelSize(conf->value("viewing/wind_font_size", screenFontSize+2).toInt());
 	propMgr = StelApp::getInstance().getStelPropertyManager();
 }
 
@@ -98,145 +102,167 @@ Cardinals::~Cardinals()
 {
 }
 
+void Cardinals::update(double deltaTime)
+{
+	faderC.update(static_cast<int>(deltaTime*1000));
+	faderO.update(static_cast<int>(deltaTime*1000));
+	faderW.update(static_cast<int>(deltaTime*1000));
+}
+
+void Cardinals::setFadeDuration(float duration)
+{
+	faderC.setDuration(static_cast<int>(duration*1000.f));
+	faderO.setDuration(static_cast<int>(duration*1000.f));
+	faderW.setDuration(static_cast<int>(duration*1000.f));
+}
+
 // Draw the cardinals points : N S E W and the subcardinal and sub-subcardinal.
 // Handles special cases at poles
 void Cardinals::draw(const StelCore* core, double latitude) const
 {
-	if (fader.getInterstate()==0.0f)
-		return;
-
 	// fun polar special cases: no cardinals!
 	if ((fabs(latitude - 90.0) < 1e-10) || (fabs(latitude + 90.0) < 1e-10))
 		return;
 
-	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-	const float ppx = core->getCurrentStelProjectorParams().devicePixelsPerPixel;
-	StelPainter sPainter(prj);
-	sPainter.setFont(fontC);
-	float sshift, bshift, cshift, vshift;
-	sshift = bshift = cshift = 0.f;
-	bool flagMask = (core->getProjection(StelCore::FrameJ2000)->getMaskType() != StelProjector::MaskDisk);
+	if (faderC.getInterstate()>0.f)
+	{
+		const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
+		const float ppx = core->getCurrentStelProjectorParams().devicePixelsPerPixel;
+		StelPainter sPainter(prj);
+		sPainter.setFont(fontC);
+		float sshift, bshift, cshift, vshift;
+		sshift = bshift = cshift = 0.f;
+		bool flagMask = (core->getProjection(StelCore::FrameJ2000)->getMaskType() != StelProjector::MaskDisk);
 
-	// direction text
-	QString d[16];
+		// direction text
+		QString d[16];
 
-	d[0] = sNorth;
-	d[1] = sSouth;
-	d[2] = sEast;
-	d[3] = sWest;
-	d[4] = sNortheast;
-	d[5] = sSoutheast;
-	d[6] = sSouthwest;
-	d[7] = sNorthwest;
-	d[8] = sNorthnortheast;
-	d[9] = sEastnortheast;
-	d[10] = sEastsoutheast;
-	d[11] = sSouthsoutheast;
-	d[12] = sSouthsouthwest;
-	d[13] = sWestsouthwest;
-	d[14] = sWestnorthwest;
-	d[15] = sNorthnorthwest;
+		d[0] = sNorth;
+		d[1] = sSouth;
+		d[2] = sEast;
+		d[3] = sWest;
+		d[4] = sNortheast;
+		d[5] = sSoutheast;
+		d[6] = sSouthwest;
+		d[7] = sNorthwest;
+		d[8] = sNorthnortheast;
+		d[9] = sEastnortheast;
+		d[10] = sEastsoutheast;
+		d[11] = sSouthsoutheast;
+		d[12] = sSouthsouthwest;
+		d[13] = sWestsouthwest;
+		d[14] = sWestnorthwest;
+		d[15] = sNorthnorthwest;
 
-	sPainter.setColor(color,fader.getInterstate());
-	sPainter.setBlending(true);
+		sPainter.setColor(color, faderC.getInterstate());
+		sPainter.setBlending(true);
 
-	Vec3f pos;
-	Vec3f xy;
+		Vec3f pos;
+		Vec3f xy;
 
-	if (flagMask)
-		sshift = ppx*sPainter.getFontMetrics().boundingRect(sNorth).width()*0.5f;
+		if (flagMask)
+			sshift = ppx*sPainter.getFontMetrics().boundingRect(sNorth).width()*0.5f;
 
-	vshift = sshift;
-	if (propMgr->getProperty("SpecialMarkersMgr.compassMarksDisplayed")->getValue().toBool())
-		vshift = -sshift*3.f;
+		vshift = sshift;
+		if (propMgr->getProperty("SpecialMarkersMgr.compassMarksDisplayed")->getValue().toBool())
+			vshift = -sshift*3.f;
 
-	// N for North
-	pos.set(-1.f, 0.f, 0.f);
-	if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[0], 0., -sshift, -vshift, false);
+		// N for North
+		pos.set(-1.f, 0.f, 0.f);
+		if (prj->project(pos,xy))
+			sPainter.drawText(xy[0], xy[1], d[0], 0., -sshift, -vshift, false);
 
-	// S for South
-	pos.set(1.f, 0.f, 0.f);
-	if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[1], 0., -sshift, -vshift, false);
+		// S for South
+		pos.set(1.f, 0.f, 0.f);
+		if (prj->project(pos,xy))
+			sPainter.drawText(xy[0], xy[1], d[1], 0., -sshift, -vshift, false);
 
-	// E for East
-	pos.set(0.f, 1.f, 0.f);
-	if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[2], 0., -sshift, -vshift, false);
+		// E for East
+		pos.set(0.f, 1.f, 0.f);
+		if (prj->project(pos,xy))
+			sPainter.drawText(xy[0], xy[1], d[2], 0., -sshift, -vshift, false);
 
-	// W for West
-	pos.set(0.f, -1.f, 0.f);
-	if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[3], 0., -sshift, -vshift, false);
+		// W for West
+		pos.set(0.f, -1.f, 0.f);
+		if (prj->project(pos,xy))
+			sPainter.drawText(xy[0], xy[1], d[3], 0., -sshift, -vshift, false);
 
-	sPainter.setFont(fontSC);
-	if (flagMask)
-		bshift = ppx*sPainter.getFontMetrics().boundingRect(sNortheast).width()*0.5f;
+		if (faderO.getInterstate()>0.f)
+		{
+			sPainter.setColor(color, qMin(faderC.getInterstate(), faderO.getInterstate()));
+			sPainter.setFont(fontO);
+			if (flagMask)
+				bshift = ppx*sPainter.getFontMetrics().boundingRect(sNortheast).width()*0.5f;
 
-	// NE for Northeast
-	pos.set(-1.f, 1.f, 0.f);
-	if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[4], 0., -bshift, -vshift, false);
+			// NE for Northeast
+			pos.set(-1.f, 1.f, 0.f);
+			if (prj->project(pos,xy))
+				sPainter.drawText(xy[0], xy[1], d[4], 0., -bshift, -vshift, false);
 
-	// SE for Southeast
-	pos.set(1.f, 1.f, 0.f);
-	if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[5], 0., -bshift, -vshift, false);
+			// SE for Southeast
+			pos.set(1.f, 1.f, 0.f);
+			if (prj->project(pos,xy))
+				sPainter.drawText(xy[0], xy[1], d[5], 0., -bshift, -vshift, false);
 
-	// SW for Southwest
-	pos.set(1.f, -1.f, 0.f);
-	if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[6], 0., -bshift, -vshift, false);
+			// SW for Southwest
+			pos.set(1.f, -1.f, 0.f);
+			if (prj->project(pos,xy))
+				sPainter.drawText(xy[0], xy[1], d[6], 0., -bshift, -vshift, false);
 
-	// NW for Northwest
-	pos.set(-1.f, -1.f, 0.f);
-	if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[7], 0., -bshift, -vshift, false);
+			// NW for Northwest
+			pos.set(-1.f, -1.f, 0.f);
+			if (prj->project(pos,xy))
+				sPainter.drawText(xy[0], xy[1], d[7], 0., -bshift, -vshift, false);
 
-        sPainter.setFont(fontSSC);
-	if (flagMask)
-		cshift = ppx*sPainter.getFontMetrics().boundingRect(sNorthnortheast).width()*0.5f;
+			if (faderW.getInterstate()>0.f)
+			{
+				sPainter.setColor(color, qMin(qMin(faderC.getInterstate(), faderO.getInterstate()), faderW.getInterstate()));
+				sPainter.setFont(fontW);
+				if (flagMask)
+					cshift = ppx*sPainter.getFontMetrics().boundingRect(sNorthnortheast).width()*0.5f;
 
-	// NNE for North-northeast
-	pos.set(-1.f, 1.f/(1+sqrt(2)), 0.f);
-	if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[8], 0., -cshift, -vshift, false);
+				// NNE for North-northeast
+				pos.set(-1.f, 1.f/(1+sqrt(2)), 0.f);
+				if (prj->project(pos,xy))
+					sPainter.drawText(xy[0], xy[1], d[8], 0., -cshift, -vshift, false);
 
-	// ENE for East-northeast
-	pos.set(-1.f/(1+sqrt(2)), 1.f, 0.f);
-	if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[9], 0., -cshift, -vshift, false);
+				// ENE for East-northeast
+				pos.set(-1.f/(1+sqrt(2)), 1.f, 0.f);
+				if (prj->project(pos,xy))
+					sPainter.drawText(xy[0], xy[1], d[9], 0., -cshift, -vshift, false);
 
-	// ESE for East-southeast
-	pos.set(1.f/(1+sqrt(2)), 1.f, 0.f);
-	if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[10], 0., -cshift, -vshift, false);
+				// ESE for East-southeast
+				pos.set(1.f/(1+sqrt(2)), 1.f, 0.f);
+				if (prj->project(pos,xy))
+					sPainter.drawText(xy[0], xy[1], d[10], 0., -cshift, -vshift, false);
 
-	// SSE for South-southeast
-	pos.set(1.f, 1.f/(1+sqrt(2)), 0.f);
-	if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[11], 0., -cshift, -vshift, false);
+				// SSE for South-southeast
+				pos.set(1.f, 1.f/(1+sqrt(2)), 0.f);
+				if (prj->project(pos,xy))
+					sPainter.drawText(xy[0], xy[1], d[11], 0., -cshift, -vshift, false);
 
-	// SSW for South-southwest
-	pos.set(1.f, -1.f/(1+sqrt(2)), 0.f);
-	if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[12], 0., -cshift, -vshift, false);
+				// SSW for South-southwest
+				pos.set(1.f, -1.f/(1+sqrt(2)), 0.f);
+				if (prj->project(pos,xy))
+					sPainter.drawText(xy[0], xy[1], d[12], 0., -cshift, -vshift, false);
 
-	// WSW for West-southwest
-	pos.set(1.f/(1+sqrt(2)), -1.f, 0.f);
-	if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[13], 0., -cshift, -vshift, false);
+				// WSW for West-southwest
+				pos.set(1.f/(1+sqrt(2)), -1.f, 0.f);
+				if (prj->project(pos,xy))
+					sPainter.drawText(xy[0], xy[1], d[13], 0., -cshift, -vshift, false);
 
-	// WNW for West-northwest
-	pos.set(-1.f/(1+sqrt(2)), -1.f, 0.f);
-	if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[14], 0., -cshift, -vshift, false);
+				// WNW for West-northwest
+				pos.set(-1.f/(1+sqrt(2)), -1.f, 0.f);
+				if (prj->project(pos,xy))
+					sPainter.drawText(xy[0], xy[1], d[14], 0., -cshift, -vshift, false);
 
-	// NNW for North-northwest
-	pos.set(-1.f, -1.f/(1+sqrt(2)), 0.f);
-	if (prj->project(pos,xy))
-		sPainter.drawText(xy[0], xy[1], d[15], 0., -cshift, -vshift, false);
+				// NNW for North-northwest
+				pos.set(-1.f, -1.f/(1+sqrt(2)), 0.f);
+				if (prj->project(pos,xy))
+					sPainter.drawText(xy[0], xy[1], d[15], 0., -cshift, -vshift, false);
+			}
+		}
+	}
 }
 
 // Translate cardinal labels with gettext to current sky language and update font for the language
@@ -579,7 +605,9 @@ void LandscapeMgr::init()
 	setPolyLineThickness(conf->value("landscape/polyline_thickness", 1).toInt());
 
 	cardinalsPoints = new Cardinals();
-	cardinalsPoints->setFlagShow(conf->value("viewing/flag_cardinal_points",true).toBool());
+	cardinalsPoints->setFlagShowCardinals(conf->value("viewing/flag_cardinal_points", true).toBool());
+	cardinalsPoints->setFlagShowOrdinals(conf->value("viewing/flag_ordinal_points", true).toBool());
+	cardinalsPoints->setFlagShowWinds(conf->value("viewing/flag_wind_points", false).toBool());
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
 	setColorCardinalPoints(Vec3f(conf->value("color/cardinal_color", defaultColor).toString()));
@@ -887,6 +915,8 @@ void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc)
 				setFlagFog(false);
 				setFlagLandscape(false);
 				setFlagCardinalsPoints(false);
+				//setFlagOrdinalsPoints(false);
+				//setFlagWindsPoints(false);
 			}
 		}
 		else
@@ -899,7 +929,9 @@ void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc)
 				setFlagAtmosphere(pl->hasAtmosphere() && conf->value("landscape/flag_atmosphere", true).toBool());
 				setFlagFog(pl->hasAtmosphere() && conf->value("landscape/flag_fog", true).toBool());
 				setFlagLandscape(true);
-				setFlagCardinalsPoints(conf->value("viewing/flag_cardinal_points",true).toBool());
+				setFlagCardinalsPoints(conf->value("viewing/flag_cardinal_points", true).toBool());
+				setFlagOrdinalsPoints(conf->value("viewing/flag_ordinal_points", true).toBool());
+				setFlagWindsPoints(conf->value("viewing/flag_wind_points", false).toBool());
 			}
 		}
 	}
@@ -1066,9 +1098,9 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 //! Set flag for displaying Cardinals Points
 void LandscapeMgr::setFlagCardinalsPoints(const bool displayed)
 {
-	if (cardinalsPoints->getFlagShow() != displayed)
+	if (cardinalsPoints->getFlagShowCardinals() != displayed)
 	{
-		cardinalsPoints->setFlagShow(displayed);
+		cardinalsPoints->setFlagShowCardinals(displayed);
 		emit cardinalsPointsDisplayedChanged(displayed);
 	}
 }
@@ -1076,7 +1108,39 @@ void LandscapeMgr::setFlagCardinalsPoints(const bool displayed)
 //! Get flag for displaying Cardinals Points
 bool LandscapeMgr::getFlagCardinalsPoints() const
 {
-	return cardinalsPoints->getFlagShow();
+	return cardinalsPoints->getFlagShowCardinals();
+}
+
+//! Set flag for displaying Ordinals Points
+void LandscapeMgr::setFlagOrdinalsPoints(const bool displayed)
+{
+	if (cardinalsPoints->getFlagShowOrdinals() != displayed)
+	{
+		cardinalsPoints->setFlagShowOrdinals(displayed);
+		emit ordinalsPointsDisplayedChanged(displayed);
+	}
+}
+
+//! Get flag for displaying Ordinals Points
+bool LandscapeMgr::getFlagOrdinalsPoints() const
+{
+	return cardinalsPoints->getFlagShowOrdinals();
+}
+
+//! Set flag for displaying Principal Winds Points
+void LandscapeMgr::setFlagWindsPoints(const bool displayed)
+{
+	if (cardinalsPoints->getFlagShowWinds() != displayed)
+	{
+		cardinalsPoints->setFlagShowWinds(displayed);
+		emit windsPointsDisplayedChanged(displayed);
+	}
+}
+
+//! Get flag for displaying Principal Winds Points
+bool LandscapeMgr::getFlagWindsPoints() const
+{
+	return cardinalsPoints->getFlagShowWinds();
 }
 
 //! Set Cardinals Points color
@@ -1092,7 +1156,7 @@ void LandscapeMgr::setColorCardinalPoints(const Vec3f& v)
 //! Get Cardinals Points color
 Vec3f LandscapeMgr::getColorCardinalPoints() const
 {
-	return cardinalsPoints->get_color();
+	return cardinalsPoints->getColor();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
