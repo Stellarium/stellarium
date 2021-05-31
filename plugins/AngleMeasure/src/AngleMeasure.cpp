@@ -461,8 +461,6 @@ void AngleMeasure::enableAngleMeasure(bool b)
 			//qDebug() << "AngleMeasure::enableAngleMeasure starting timer";
 			messageTimer->start();
 		}
-		// Immediate saving of settings
-		conf->setValue("AngleMeasure/enable_at_startup", flagShowAngleMeasure);
 
 		emit flagAngleMeasureChanged(b);
 	}
@@ -471,7 +469,7 @@ void AngleMeasure::enableAngleMeasure(bool b)
 void AngleMeasure::showEquatorialPA(bool b)
 {
 	flagShowEquatorialPA = b;
-	// Immediate saving of settings
+	// Immediate saving of settingso
 	conf->setValue("AngleMeasure/show_position_angle", flagShowEquatorialPA);
 	emit flagShowEquatorialPAChanged(b);
 }
@@ -592,7 +590,6 @@ void AngleMeasure::restoreDefaultSettings()
 
 void AngleMeasure::loadSettings()
 {
-	enableAngleMeasure(conf->value("AngleMeasure/enable_at_startup", false).toBool());
 	useDmsFormat(conf->value("AngleMeasure/angle_format_dms", false).toBool());
 	equatorialTextColor = Vec3f(conf->value("AngleMeasure/text_color", "0,0.5,1").toString());
 	equatorialLineColor = Vec3f(conf->value("AngleMeasure/line_color", "0,0.5,1").toString());
