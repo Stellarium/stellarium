@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>530</width>
-    <height>409</height>
+    <width>836</width>
+    <height>511</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -381,6 +381,13 @@
             </property>
            </widget>
           </item>
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="followCursorCheckBox">
+            <property name="text">
+             <string>Follow cursor</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
@@ -444,6 +451,23 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>tabs</tabstop>
+  <tabstop>showEquatorial_GroupBox</tabstop>
+  <tabstop>showPositionAngleCheckBox</tabstop>
+  <tabstop>equatorialTextColorToolButton</tabstop>
+  <tabstop>equatorialLineColorToolButton</tabstop>
+  <tabstop>showHorizontal_GroupBox</tabstop>
+  <tabstop>showPositionAngleHorizontalCheckBox</tabstop>
+  <tabstop>horizontalTextColorToolButton</tabstop>
+  <tabstop>horizontalLineColorToolButton</tabstop>
+  <tabstop>azAltStartOnSkyCheckBox</tabstop>
+  <tabstop>azAltEndOnSkyCheckBox</tabstop>
+  <tabstop>useDmsFormatCheckBox</tabstop>
+  <tabstop>followCursorCheckBox</tabstop>
+  <tabstop>restoreDefaultsButton</tabstop>
+  <tabstop>aboutTextBrowser</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
