@@ -247,9 +247,10 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 	if (messageFader.getInterstate() > 0.000001f)
 	{
 		painter.setColor(txtColor[0], txtColor[1], txtColor[2], messageFader.getInterstate());
-		int x = 83;
-		int y = 120;
-		int ls = painter.getFontMetrics().lineSpacing();
+		const double ppx = core->getCurrentStelProjectorParams().devicePixelsPerPixel;
+		int x = 83*ppx;
+		int y = 120*ppx;
+		int ls = ppx*painter.getFontMetrics().lineSpacing();
 		painter.drawText(x, y, messageEnabled);
 		y -= ls;
 		painter.drawText(x, y, messageLeftButton);
