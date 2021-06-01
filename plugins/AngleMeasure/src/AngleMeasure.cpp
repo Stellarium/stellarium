@@ -623,4 +623,3 @@ void AngleMeasure::loadSettings()
 	showHorizontalStartSkylinked(conf->value("AngleMeasure/link_horizontal_start_to_sky", false).toBool());
 	showHorizontalEndSkylinked(conf->value("AngleMeasure/link_horizontal_end_to_sky", false).toBool());
 }
-
