@@ -354,9 +354,9 @@
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="formatBox">
+        <widget class="QGroupBox" name="optionsBox">
          <property name="title">
-          <string>Format</string>
+          <string>Options</string>
          </property>
          <property name="flat">
           <bool>true</bool>
@@ -383,8 +383,11 @@
           </item>
           <item row="1" column="0">
            <widget class="QCheckBox" name="followCursorCheckBox">
+            <property name="toolTip">
+             <string>When set, measurements are displayed near the cursor</string>
+            </property>
             <property name="text">
-             <string>Follow cursor</string>
+             <string>Measurements follow the cursor</string>
             </property>
            </widget>
           </item>

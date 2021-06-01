@@ -179,7 +179,7 @@ private:
 	Vec3d perp2StartPoint;
 	Vec3d perp2EndPoint;
 	double angleEquatorial;
-	bool flagFollowCursor;
+	bool flagFollowCursor;	//!< measurement data block follows cursor rather than start of measurement line
 	bool flagUseDmsFormat;
 	bool flagShowEquatorial;
 	bool flagShowHorizontal;
