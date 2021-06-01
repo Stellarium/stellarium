@@ -31,6 +31,7 @@
 #include "AngleMeasure.hpp"
 #include "AngleMeasureDialog.hpp"
 
+#include <QApplication>
 #include <QDebug>
 #include <QTimer>
 #include <QPixmap>
@@ -460,6 +461,20 @@ void AngleMeasure::enableAngleMeasure(bool b)
 		{
 			//qDebug() << "AngleMeasure::enableAngleMeasure starting timer";
 			messageTimer->start();
+			QApplication::setOverrideCursor(QCursor(Qt::CrossCursor));
+		}
+		else 
+		{
+			// restore the cursor before Angle Measure was invoked
+
+			// if the cursor was hidden (blank cursor), pop that
+			if (QGuiApplication::overrideCursor() && (QGuiApplication::overrideCursor()->shape() == Qt::BlankCursor) )
+			{	
+				QGuiApplication::restoreOverrideCursor();
+			}
+
+			// finally, pop the cross cursor
+			QApplication::restoreOverrideCursor();
 		}
 
 		emit flagAngleMeasureChanged(b);
@@ -469,7 +484,7 @@ void AngleMeasure::enableAngleMeasure(bool b)
 void AngleMeasure::showEquatorialPA(bool b)
 {
 	flagShowEquatorialPA = b;
-	// Immediate saving of settingso
+	// Immediate saving of settings
 	conf->setValue("AngleMeasure/show_position_angle", flagShowEquatorialPA);
 	emit flagShowEquatorialPAChanged(b);
 }

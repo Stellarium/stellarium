@@ -1095,25 +1095,28 @@ void ConfigurationDialog::saveAllSettings()
 	// configuration dialog / tools tab
 	conf->setValue("gui/flag_show_flip_buttons",			propMgr->getStelPropertyValue("StelGui.flagShowFlipButtons").toBool());
 	conf->setValue("video/viewport_effect",				StelApp::getInstance().getViewportEffect());
+
 	conf->setValue("projection/viewport",				StelProjector::maskTypeToString(proj->getMaskType()));
-	conf->setValue("projection/viewport_center_offset_x",	core->getCurrentStelProjectorParams().viewportCenterOffset[0]);
-	conf->setValue("projection/viewport_center_offset_y",	core->getCurrentStelProjectorParams().viewportCenterOffset[1]);
+	conf->setValue("projection/viewport_center_offset_x",		core->getCurrentStelProjectorParams().viewportCenterOffset[0]);
+	conf->setValue("projection/viewport_center_offset_y",		core->getCurrentStelProjectorParams().viewportCenterOffset[1]);
 	conf->setValue("projection/flip_horz",				core->getCurrentStelProjectorParams().flipHorz);
 	conf->setValue("projection/flip_vert",				core->getCurrentStelProjectorParams().flipVert);
-	conf->setValue("viewing/flag_gravity_labels",		proj->getFlagGravityLabels());
+
+	conf->setValue("viewing/flag_gravity_labels",			proj->getFlagGravityLabels());
 	conf->setValue("navigation/auto_zoom_out_resets_direction",	mvmgr->getFlagAutoZoomOutResetsDirection());
-	conf->setValue("gui/flag_mouse_cursor_timeout",	propMgr->getStelPropertyValue("MainView.flagCursorTimeout").toBool());
+
+	conf->setValue("gui/flag_mouse_cursor_timeout",			propMgr->getStelPropertyValue("MainView.flagCursorTimeout").toBool());
 	conf->setValue("gui/mouse_cursor_timeout",			propMgr->getStelPropertyValue("MainView.cursorTimeout").toFloat());
 	conf->setValue("gui/base_font_name",				QGuiApplication::font().family());
 	conf->setValue("gui/screen_font_size",				propMgr->getStelPropertyValue("StelApp.screenFontSize").toInt());
-	conf->setValue("gui/gui_font_size",					propMgr->getStelPropertyValue("StelApp.guiFontSize").toInt());
+	conf->setValue("gui/gui_font_size",				propMgr->getStelPropertyValue("StelApp.guiFontSize").toInt());
 
 
 	conf->setValue("main/screenshot_dir",				StelFileMgr::getScreenshotDir());
-	conf->setValue("main/invert_screenshots_colors",	propMgr->getStelPropertyValue("MainView.flagInvertScreenShotColors").toBool());
-	conf->setValue("main/screenshot_custom_size",		propMgr->getStelPropertyValue("MainView.flagUseCustomScreenshotSize").toBool());
-	conf->setValue("main/screenshot_custom_width",	propMgr->getStelPropertyValue("MainView.customScreenshotWidth").toInt());
-	conf->setValue("main/screenshot_custom_height",	propMgr->getStelPropertyValue("MainView.customScreenshotHeight").toInt());
+	conf->setValue("main/invert_screenshots_colors",		propMgr->getStelPropertyValue("MainView.flagInvertScreenShotColors").toBool());
+	conf->setValue("main/screenshot_custom_size",			propMgr->getStelPropertyValue("MainView.flagUseCustomScreenshotSize").toBool());
+	conf->setValue("main/screenshot_custom_width",			propMgr->getStelPropertyValue("MainView.customScreenshotWidth").toInt());
+	conf->setValue("main/screenshot_custom_height",			propMgr->getStelPropertyValue("MainView.customScreenshotHeight").toInt());
 
 	int screenNum = qApp->desktop()->screenNumber(&StelMainView::getInstance());
 	conf->setValue("video/screen_number", screenNum);

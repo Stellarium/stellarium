@@ -159,7 +159,7 @@ public slots:
 	float getCustomScreenshotMagnification() const {return customScreenshotMagnification;}
 	//! Get the state of the mouse cursor timeout flag
 	bool getFlagCursorTimeout() const {return flagCursorTimeout;}
-	//! Get the state of the mouse cursor timeout flag
+	//! Set the state of the mouse cursor timeout flag
 	void setFlagCursorTimeout(bool b);
 	//! Get the mouse cursor timeout in seconds
 	double getCursorTimeout() const {return cursorTimeoutTimer->interval() / 1000.0;}
@@ -227,12 +227,14 @@ signals:
 	void screenshotFormatChanged(QString format);
 
 	void skyBackgroundColorChanged(Vec3f color);
+
 	void flagCursorTimeoutChanged(bool b);
 	void cursorTimeoutChanged(double t);
 
 private slots:
 	// Do the actual screenshot generation in the main thread with this method.
 	void doScreenshot(void);
+
 	void fpsTimerUpdate();
 	void hideCursor();
 
