@@ -83,7 +83,7 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 	, initFov(60.)
 	, minFov(0.001389)
 	, maxFov(100.)
-	, deltaFov(0.)
+	, deltaFov(0.0)
 	, core(acore)
 	, objectMgr(Q_NULLPTR)
 	, flagLockEquPos(false)
@@ -99,19 +99,22 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 	, keyMoveSpeed(0.00025)
 	, keyZoomSpeed(0.00025)
 	, flagMoveSlow(false)
+	, flagCustomPan(false)
+	, rateX(0.0)
+	, rateY(0.0)
 	, movementsSpeedFactor(1.0)
 	, move()
 	, flagAutoMove(false)
 	, zoomingMode(ZoomNone)
-	, deltaAlt(0.)
-	, deltaAz(0.)
+	, deltaAlt(0.0)
+	, deltaAz(0.0)
 	, flagManualZoom(false)
 	, autoMoveDuration(1.5)
 	, isDragging(false)
 	, hasDragged(false)
 	, previousX(0)
 	, previousY(0)
-	, beforeTimeDragTimeRate(0.)
+	, beforeTimeDragTimeRate(0.0)
 	, dragTimeMode(false)
 	, zoomMove()
 	, flagAutoZoom(false)
@@ -1013,6 +1016,12 @@ void StelMovementMgr::updateMotion(double deltaTime)
 		changeFov(deltaFov);
 	}
 
+	if (flagCustomPan)
+	{
+		deltaAz  = rateX*M_PI_180*deltaTime;
+		deltaAlt = rateY*M_PI_180*deltaTime;
+	}
+
 	panView(deltaAz, deltaAlt);
 	updateAutoZoom(deltaTime);
 }
@@ -1666,5 +1675,19 @@ void StelMovementMgr::handleViewportOffsetMovement(qreal value)
 	double offsetY=oldViewportOffset.v[1] + (targetViewportOffset.v[1]-oldViewportOffset.v[1])*value;
 	//qDebug() << "handleViewportOffsetMovement(" << value << "): Setting viewport offset to " << offsetX << "/" << offsetY;
 	core->setViewportOffset(offsetX, offsetY);
+}
+
+void StelMovementMgr::smoothPan(double deltaX, double deltaY, double ptime, bool s)
+{
+	flagCustomPan = s;
+	if (s)
+	{
+		rateX = deltaX/ptime; // degrees per second
+		rateY = deltaY/ptime; // degrees per second
+		setFlagTracking(false);
+		setFlagLockEquPos(false);
+	}
+	else
+		deltaAz = deltaAlt = 0.0;
 }
 
