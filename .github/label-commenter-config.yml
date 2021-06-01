@@ -29,7 +29,7 @@ labels:
       issue:
         body: Hello @{{ issue.user.login }}! Thank you for suggesting this enhancement.
       pr:
-        body: Hello @{{ issue.user.login }}! Thank you for this enhancement.
+        body: Hello @{{ pull_request.user.login }}! Thank you for this enhancement.
   - name: feature request
     labeled:
       issue:
@@ -81,7 +81,7 @@ labels:
           https://github.com/Stellarium/stellarium-data/releases/tag/weekly-snapshot
       pr:
         body: |
-          Hello @{{ issue.user.login }}! Please check the fresh version (development snapshot) of Stellarium: 
+          Hello @{{ pull_request.user.login }}! Please check the fresh version (development snapshot) of Stellarium: 
           https://github.com/Stellarium/stellarium-data/releases/tag/weekly-snapshot
     unlabeled:
       issue:
@@ -90,5 +90,5 @@ labels:
           https://github.com/Stellarium/stellarium/releases/latest
       pr:
         body: |
-          Hello @{{ issue.user.login }}! Please check the latest stable version of Stellarium: 
+          Hello @{{ pull_request.user.login }}! Please check the latest stable version of Stellarium: 
           https://github.com/Stellarium/stellarium/releases/latest
