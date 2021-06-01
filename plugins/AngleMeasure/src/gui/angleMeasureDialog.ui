@@ -384,10 +384,10 @@
           <item row="1" column="0">
            <widget class="QCheckBox" name="followCursorCheckBox">
             <property name="toolTip">
-             <string>When set, measurements are displayed near the cursor</string>
+             <string>When set, measurements are shown near the end of the line instead of its starting point.</string>
             </property>
             <property name="text">
-             <string>Measurements follow the cursor</string>
+             <string>Show measurements near mouse</string>
             </property>
            </widget>
           </item>
