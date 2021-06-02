@@ -40,6 +40,24 @@ applied by a simple subtraction of the value for ecliptic longitude.</p>
 
 <h2>How this sky culture was made</h2>
 
+<h3>Star names</h3>
+
+Out of more than 1,000 stars, Ptolemy mentions a proper name for only 15.
+The rest are identified by fairly long descriptions such as "The star on
+the end of the tail" for the Polaris. In order to avoid displaying such long
+strings across the screen in Stellarium, we invented short labels for all
+Almagest stars based on the constellation and the order in which they appear in
+the catalogue.  For example, Polaris is given a designation "UMi 1" because
+it is the first star in the constellation of Small Bear (UMi).  See the table
+below for the correspondence between Ptolemy constellations and IAU abbreviations.
+In addition, where Ptolemy describes a star as lying outside of the figure,
+we use lowercase letters in the corresponding label. To see the long description
+for a given star, users should enable "Use additional names of stars" in the
+"View [F3]/Sky" settings and click on the star. The long description will then
+be displayed at the top of the screen.
+
+<h3>Constellation lines</h3>
+
 <p>The process can be described as sketched here with the example of 
 Corvus:</p>
 
