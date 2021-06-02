@@ -338,8 +338,8 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showEclipticGridJ2000CheckBox,		"actionShow_Ecliptic_J2000_Grid");
 	connectCheckBox(ui->showEclipticGridOfDateCheckBox,		"actionShow_Ecliptic_Grid");
 	connectCheckBox(ui->showCardinalPointsCheckBox,			"actionShow_Cardinal_Points");
-	connectBoolProperty(ui->showOrdinalPointsCheckBox,		"LandscapeMgr.ordinalsPointsDisplayed");
-	connectBoolProperty(ui->showWindsPointsCheckBox,			"LandscapeMgr.windsPointsDisplayed");
+	connectBoolProperty(ui->showOrdinal8WRPointsCheckBox,		"LandscapeMgr.ordinalsPointsDisplayed");
+	connectBoolProperty(ui->showOrdinal16WRPointsCheckBox,	"LandscapeMgr.ordinals16WRPointsDisplayed");
 	connectCheckBox(ui->showCompassMarksCheckBox,			"actionShow_Compass_Marks");
 	connectCheckBox(ui->showPrecessionCirclesCheckBox,		"actionShow_Precession_Circles");
 	connectCheckBox(ui->showPrimeVerticalLineCheckBox,		"actionShow_Prime_Vertical_Line");
@@ -447,7 +447,7 @@ void ViewDialog::createDialogContent()
 	connectColorButton(ui->colorCompassMarks,		"SpecialMarkersMgr.compassMarksColor",		"color/compass_marks_color");
 
 	connect(ui->showCardinalPointsCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setSelectedCardinalCheckBoxes()));
-	connect(ui->showOrdinalPointsCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setSelectedCardinalCheckBoxes()));
+	connect(ui->showOrdinal8WRPointsCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setSelectedCardinalCheckBoxes()));
 	setSelectedCardinalCheckBoxes();
 
 	// Projection
@@ -682,8 +682,8 @@ void ViewDialog::setSelectedCardinalCheckBoxes()
 	StelPropertyMgr* propMgr = StelApp::getInstance().getStelPropertyManager();
 	bool cardinals = propMgr->getProperty("LandscapeMgr.cardinalsPointsDisplayed")->getValue().toBool();
 	bool ordinals = propMgr->getProperty("LandscapeMgr.ordinalsPointsDisplayed")->getValue().toBool();
-	ui->showOrdinalPointsCheckBox->setEnabled(cardinals);
-	ui->showWindsPointsCheckBox->setEnabled(cardinals && ordinals);
+	ui->showOrdinal8WRPointsCheckBox->setEnabled(cardinals);
+	ui->showOrdinal16WRPointsCheckBox->setEnabled(cardinals && ordinals);
 }
 
 void ViewDialog::setSelectedCatalogsFromCheckBoxes()

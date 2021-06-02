@@ -4106,7 +4106,7 @@
                  <item>
                   <widget class="QCheckBox" name="showCardinalPointsCheckBox">
                    <property name="toolTip">
-                    <string>Labels for the cardinal directions.</string>
+                    <string>Labels for the cardinal directions (4-wind compass rose).</string>
                    </property>
                    <property name="text">
                     <string>Cardinal points</string>
@@ -4127,9 +4127,9 @@
                   </spacer>
                  </item>
                  <item>
-                  <widget class="QCheckBox" name="showOrdinalPointsCheckBox">
+                  <widget class="QCheckBox" name="showOrdinal8WRPointsCheckBox">
                    <property name="toolTip">
-                    <string>Labels for the intercardinal (or ordinal) directions.</string>
+                    <string>Labels for the intercardinal (or ordinal) directions (8-wind compass rose).</string>
                    </property>
                    <property name="text">
                     <string/>
@@ -4137,9 +4137,9 @@
                   </widget>
                  </item>
                  <item>
-                  <widget class="QCheckBox" name="showWindsPointsCheckBox">
+                  <widget class="QCheckBox" name="showOrdinal16WRPointsCheckBox">
                    <property name="toolTip">
-                    <string>Labels for directions of the principal winds (or main winds).</string>
+                    <string>Labels for the intercardinal (or ordinal) directions (16-wind compass rose).</string>
                    </property>
                    <property name="text">
                     <string/>

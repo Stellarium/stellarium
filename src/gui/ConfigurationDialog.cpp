@@ -858,7 +858,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/flag_galactic_equator_labels",	propMgr->getStelPropertyValue("GridLinesMgr.galacticEquatorPartsLabeled").toBool());
 	conf->setValue("viewing/flag_cardinal_points",			propMgr->getStelPropertyValue("LandscapeMgr.cardinalsPointsDisplayed").toBool());
 	conf->setValue("viewing/flag_ordinal_points",			propMgr->getStelPropertyValue("LandscapeMgr.ordinalsPointsDisplayed").toBool());
-	conf->setValue("viewing/flag_wind_points",				propMgr->getStelPropertyValue("LandscapeMgr.windsPointsDisplayed").toBool());
+	conf->setValue("viewing/flag_16wcr_points",				propMgr->getStelPropertyValue("LandscapeMgr.ordinals16WRPointsDisplayed").toBool());
 	conf->setValue("viewing/flag_compass_marks",			propMgr->getStelPropertyValue("SpecialMarkersMgr.compassMarksDisplayed").toBool());
 	conf->setValue("viewing/flag_prime_vertical_line",		propMgr->getStelPropertyValue("GridLinesMgr.primeVerticalLineDisplayed").toBool());
 	conf->setValue("viewing/flag_prime_vertical_parts",		propMgr->getStelPropertyValue("GridLinesMgr.primeVerticalPartsDisplayed").toBool());

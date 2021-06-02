@@ -53,7 +53,33 @@
 // Class which manages the cardinal points displaying
 class Cardinals
 {
+	Q_ENUMS(CompassDirection)
+
 public:
+
+	enum CompassDirection
+	{
+		// Cardinals (4-wind compass rose)
+		dN		=  1,		// north
+		dS		=  2,		// south
+		dE		=  3,		// east
+		dW		=  4,		// west
+		// Ordinals (8-wind compass rose)
+		dNE		=  5,		// northeast
+		dSE		=  6,		// southeast
+		dNW		=  7,		// northwest
+		dSW		=  8,		// southwest
+		// 16-wind compass rose
+		dNNE	=  9,		// north-northeast
+		dENE	= 10,	// east-northeast
+		dESE	= 11,	// east-southeast
+		dSSE	= 12,	// south-southeast
+		dSSW	= 13,	// south-southwest
+		dWSW	= 14,	// west-southwest
+		dWNW	= 15,	// west-northwest
+		dNNW	= 16		// north-northwest
+	};
+
 	Cardinals(float _radius = 1.);
 	virtual ~Cardinals();
 	void draw(const StelCore* core, double latitude) const;
@@ -62,40 +88,68 @@ public:
 	void updateI18n();
 	void update(double deltaTime);
 	void setFadeDuration(float duration);
-	void setFlagShowCardinals(bool b) { faderC = b; }
-	bool getFlagShowCardinals() const { return faderC; }
-	void setFlagShowOrdinals(bool b) { faderO = b; }
-	bool getFlagShowOrdinals() const { return faderO; }
-	void setFlagShowWinds(bool b) { faderW = b; }
-	bool getFlagShowWinds() const { return faderW; }
+	void setFlagShowCardinals(bool b) { fader4WCR = b; }
+	bool getFlagShowCardinals() const { return fader4WCR; }
+
+	void setFlagShow4WCRLabels(bool b) { fader4WCR = b; }
+	bool getFlagShow4WCRLabels() const { return fader4WCR; }
+	void setFlagShow8WCRLabels(bool b) { fader8WCR = b; }
+	bool getFlagShow8WCRLabels() const { return fader8WCR; }
+	void setFlagShow16WCRLabels(bool b) { fader16WCR = b; }
+	bool getFlagShow16WCRLabels() const { return fader16WCR; }
 private:
 	class StelPropertyMgr* propMgr;
 	//float radius;
-	QFont fontC, fontO, fontW;
+	QFont font4WCR, font8WCR, font16WCR;
 	Vec3f color;
-	QString sNorth, sSouth, sEast, sWest, sNortheast, sSoutheast, sSouthwest, sNorthwest, sNorthnortheast, sEastnortheast, sEastsoutheast, sSouthsoutheast, sSouthsouthwest, sWestsouthwest, sWestnorthwest, sNorthnorthwest;
-	LinearFader faderC, faderO, faderW;
+	QMap<Cardinals::CompassDirection, Vec3f> rose4winds, rose8winds, rose16winds;
+	QMap<Cardinals::CompassDirection, QString> labels;
+	LinearFader fader4WCR, fader8WCR, fader16WCR;
+	int screenFontSize;
 };
 
 
 Cardinals::Cardinals(float _radius)
 	: // radius(_radius),
 	  color(0.6f,0.2f,0.2f)
-	, sNorth("N"), sSouth("S"), sEast("E"), sWest("W")
-	, sNortheast("NE"), sSoutheast("SE"), sSouthwest("SW"), sNorthwest("NW")
-	, sNorthnortheast("NNE"), sEastnortheast("ENE"), sEastsoutheast("ESE"), sSouthsoutheast("SSE"), sSouthsouthwest("SSW"), sWestsouthwest("WSW"), sWestnorthwest("WNW"), sNorthnorthwest("NNW")
 {
 	Q_UNUSED(_radius)
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
-	int screenFontSize = StelApp::getInstance().getScreenFontSize();
-	// Default font size is 24
-	fontC.setPixelSize(conf->value("viewing/cardinal_font_size", screenFontSize+11).toInt());
-	// Default font size is 18
-	fontO.setPixelSize(conf->value("viewing/ordinal_font_size", screenFontSize+5).toInt());
-	// Draw the principal wind points even smaller.
-	fontW.setPixelSize(conf->value("viewing/wind_font_size", screenFontSize+2).toInt());
+	screenFontSize = StelApp::getInstance().getScreenFontSize();
 	propMgr = StelApp::getInstance().getStelPropertyManager();
+	// Default font size is 24
+	font4WCR.setPixelSize(conf->value("viewing/cardinal_font_size", screenFontSize+11).toInt());
+	// Default font size is 18
+	font8WCR.setPixelSize(conf->value("viewing/ordinal_font_size", screenFontSize+5).toInt());
+	// Draw the principal wind points even smaller.
+	font16WCR.setPixelSize(conf->value("viewing/16wcr_font_size", screenFontSize+2).toInt());
+
+	// Directions
+	rose4winds = {
+		{ dN,	Vec3f(-1.f, 0.f, 0.f) },
+		{ dS,	Vec3f(1.f, 0.f, 0.f) },
+		{ dE,	Vec3f(0.f, 1.f, 0.f) },
+		{ dW,	Vec3f(0.f, -1.f, 0.f) }
+	};
+	rose8winds = {
+		{ dNE,	Vec3f(-1.f, 1.f, 0.f) },
+		{ dSE,	Vec3f(1.f, 1.f, 0.f) },
+		{ dSW,	Vec3f(1.f, -1.f, 0.f) },
+		{ dNW,	Vec3f(-1.f, -1.f, 0.f) }
+	};
+	const float cp = 1.f/(1+sqrt(2));
+	const float cn = -1.f*cp;
+	rose16winds = {
+		{ dNNE,	Vec3f(-1.f, cp, 0.f) },
+		{ dENE,	Vec3f(cn, 1.f, 0.f) },
+		{ dESE,	Vec3f(cp, 1.f, 0.f) },
+		{ dSSE,	Vec3f(1.f, cp, 0.f) },
+		{ dSSW,	Vec3f(1.f, cn, 0.f) },
+		{ dWSW,	Vec3f(cp, -1.f, 0.f) },
+		{ dWNW,	Vec3f(cn, -1.f, 0.f) },
+		{ dNNW,	Vec3f(-1.f, cn, 0.f) }
+	};
 }
 
 Cardinals::~Cardinals()
@@ -104,16 +158,16 @@ Cardinals::~Cardinals()
 
 void Cardinals::update(double deltaTime)
 {
-	faderC.update(static_cast<int>(deltaTime*1000));
-	faderO.update(static_cast<int>(deltaTime*1000));
-	faderW.update(static_cast<int>(deltaTime*1000));
+	fader4WCR.update(static_cast<int>(deltaTime*1000));
+	fader8WCR.update(static_cast<int>(deltaTime*1000));
+	fader16WCR.update(static_cast<int>(deltaTime*1000));
 }
 
 void Cardinals::setFadeDuration(float duration)
 {
-	faderC.setDuration(static_cast<int>(duration*1000.f));
-	faderO.setDuration(static_cast<int>(duration*1000.f));
-	faderW.setDuration(static_cast<int>(duration*1000.f));
+	fader4WCR.setDuration(static_cast<int>(duration*1000.f));
+	fader8WCR.setDuration(static_cast<int>(duration*1000.f));
+	fader16WCR.setDuration(static_cast<int>(duration*1000.f));
 }
 
 // Draw the cardinals points : N S E W and the subcardinal and sub-subcardinal.
@@ -124,143 +178,72 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 	if ((fabs(latitude - 90.0) < 1e-10) || (fabs(latitude + 90.0) < 1e-10))
 		return;
 
-	if (faderC.getInterstate()>0.f)
+	if (fader4WCR.getInterstate()>0.f)
 	{
 		const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 		const float ppx = core->getCurrentStelProjectorParams().devicePixelsPerPixel;
 		StelPainter sPainter(prj);
-		sPainter.setFont(fontC);
+		sPainter.setFont(font4WCR);
 		float sshift, bshift, cshift, vshift;
-		sshift = bshift = cshift = 0.f;
+		sshift = bshift = cshift = vshift = 0.f;
 		bool flagMask = (core->getProjection(StelCore::FrameJ2000)->getMaskType() != StelProjector::MaskDisk);
-
-		// direction text
-		QString d[16];
-
-		d[0] = sNorth;
-		d[1] = sSouth;
-		d[2] = sEast;
-		d[3] = sWest;
-		d[4] = sNortheast;
-		d[5] = sSoutheast;
-		d[6] = sSouthwest;
-		d[7] = sNorthwest;
-		d[8] = sNorthnortheast;
-		d[9] = sEastnortheast;
-		d[10] = sEastsoutheast;
-		d[11] = sSouthsoutheast;
-		d[12] = sSouthsouthwest;
-		d[13] = sWestsouthwest;
-		d[14] = sWestnorthwest;
-		d[15] = sNorthnorthwest;
-
-		sPainter.setColor(color, faderC.getInterstate());
-		sPainter.setBlending(true);
-
-		Vec3f pos;
-		Vec3f xy;
-
-		if (flagMask)
-			sshift = ppx*sPainter.getFontMetrics().boundingRect(sNorth).width()*0.5f;
-
-		vshift = sshift;
 		if (propMgr->getProperty("SpecialMarkersMgr.compassMarksDisplayed")->getValue().toBool())
-			vshift = -sshift*3.f;
+			vshift = (screenFontSize + 12)*ppx;
 
-		// N for North
-		pos.set(-1.f, 0.f, 0.f);
-		if (prj->project(pos,xy))
-			sPainter.drawText(xy[0], xy[1], d[0], 0., -sshift, -vshift, false);
-
-		// S for South
-		pos.set(1.f, 0.f, 0.f);
-		if (prj->project(pos,xy))
-			sPainter.drawText(xy[0], xy[1], d[1], 0., -sshift, -vshift, false);
-
-		// E for East
-		pos.set(0.f, 1.f, 0.f);
-		if (prj->project(pos,xy))
-			sPainter.drawText(xy[0], xy[1], d[2], 0., -sshift, -vshift, false);
-
-		// W for West
-		pos.set(0.f, -1.f, 0.f);
-		if (prj->project(pos,xy))
-			sPainter.drawText(xy[0], xy[1], d[3], 0., -sshift, -vshift, false);
-
-		if (faderO.getInterstate()>0.f)
+		Vec3f xy;
+		QString directionLabel;
+		sPainter.setColor(color, fader4WCR.getInterstate());
+		sPainter.setBlending(true);
+		QMapIterator<Cardinals::CompassDirection, Vec3f> it4w(rose4winds);
+		while(it4w.hasNext())
 		{
-			float minFader = qMin(faderC.getInterstate(), faderO.getInterstate());
-			sPainter.setColor(color, minFader);
-			sPainter.setFont(fontO);
+			it4w.next();
+			directionLabel = labels.value(it4w.key(), "");
+
 			if (flagMask)
-				bshift = ppx*sPainter.getFontMetrics().boundingRect(sNortheast).width()*0.5f;
+				sshift = ppx*sPainter.getFontMetrics().boundingRect(directionLabel).width()*0.5f;
 
-			// NE for Northeast
-			pos.set(-1.f, 1.f, 0.f);
-			if (prj->project(pos,xy))
-				sPainter.drawText(xy[0], xy[1], d[4], 0., -bshift, -vshift, false);
+			if (prj->project(it4w.value(), xy))
+				sPainter.drawText(xy[0], xy[1], directionLabel, 0., -sshift, vshift, false);
+		}
 
-			// SE for Southeast
-			pos.set(1.f, 1.f, 0.f);
-			if (prj->project(pos,xy))
-				sPainter.drawText(xy[0], xy[1], d[5], 0., -bshift, -vshift, false);
+		if (fader8WCR.getInterstate()>0.f)
+		{
+			float minFader = qMin(fader4WCR.getInterstate(), fader8WCR.getInterstate());
+			sPainter.setColor(color, minFader);
+			sPainter.setFont(font8WCR);
 
-			// SW for Southwest
-			pos.set(1.f, -1.f, 0.f);
-			if (prj->project(pos,xy))
-				sPainter.drawText(xy[0], xy[1], d[6], 0., -bshift, -vshift, false);
-
-			// NW for Northwest
-			pos.set(-1.f, -1.f, 0.f);
-			if (prj->project(pos,xy))
-				sPainter.drawText(xy[0], xy[1], d[7], 0., -bshift, -vshift, false);
-
-			if (faderW.getInterstate()>0.f)
+			QMapIterator<Cardinals::CompassDirection, Vec3f> it8w(rose8winds);
+			while(it8w.hasNext())
 			{
-				sPainter.setColor(color, qMin(minFader, faderW.getInterstate()));
-				sPainter.setFont(fontW);
+				it8w.next();
+				directionLabel = labels.value(it8w.key(), "");
+
 				if (flagMask)
-					cshift = ppx*sPainter.getFontMetrics().boundingRect(sNorthnortheast).width()*0.5f;
+					bshift = ppx*sPainter.getFontMetrics().boundingRect(directionLabel).width()*0.5f;
 
-				// NNE for North-northeast
-				pos.set(-1.f, 1.f/(1+sqrt(2)), 0.f);
-				if (prj->project(pos,xy))
-					sPainter.drawText(xy[0], xy[1], d[8], 0., -cshift, -vshift, false);
+				if (prj->project(it8w.value(), xy))
+					sPainter.drawText(xy[0], xy[1], directionLabel, 0., -bshift, vshift, false);
+			}
 
-				// ENE for East-northeast
-				pos.set(-1.f/(1+sqrt(2)), 1.f, 0.f);
-				if (prj->project(pos,xy))
-					sPainter.drawText(xy[0], xy[1], d[9], 0., -cshift, -vshift, false);
 
-				// ESE for East-southeast
-				pos.set(1.f/(1+sqrt(2)), 1.f, 0.f);
-				if (prj->project(pos,xy))
-					sPainter.drawText(xy[0], xy[1], d[10], 0., -cshift, -vshift, false);
+			if (fader16WCR.getInterstate()>0.f)
+			{
+				sPainter.setColor(color, qMin(minFader, fader16WCR.getInterstate()));
+				sPainter.setFont(font16WCR);
 
-				// SSE for South-southeast
-				pos.set(1.f, 1.f/(1+sqrt(2)), 0.f);
-				if (prj->project(pos,xy))
-					sPainter.drawText(xy[0], xy[1], d[11], 0., -cshift, -vshift, false);
+				QMapIterator<Cardinals::CompassDirection, Vec3f> it16w(rose16winds);
+				while(it16w.hasNext())
+				{
+					it16w.next();
+					directionLabel = labels.value(it16w.key(), "");
 
-				// SSW for South-southwest
-				pos.set(1.f, -1.f/(1+sqrt(2)), 0.f);
-				if (prj->project(pos,xy))
-					sPainter.drawText(xy[0], xy[1], d[12], 0., -cshift, -vshift, false);
+					if (flagMask)
+						cshift = ppx*sPainter.getFontMetrics().boundingRect(directionLabel).width()*0.5f;
 
-				// WSW for West-southwest
-				pos.set(1.f/(1+sqrt(2)), -1.f, 0.f);
-				if (prj->project(pos,xy))
-					sPainter.drawText(xy[0], xy[1], d[13], 0., -cshift, -vshift, false);
-
-				// WNW for West-northwest
-				pos.set(-1.f/(1+sqrt(2)), -1.f, 0.f);
-				if (prj->project(pos,xy))
-					sPainter.drawText(xy[0], xy[1], d[14], 0., -cshift, -vshift, false);
-
-				// NNW for North-northwest
-				pos.set(-1.f, -1.f/(1+sqrt(2)), 0.f);
-				if (prj->project(pos,xy))
-					sPainter.drawText(xy[0], xy[1], d[15], 0., -cshift, -vshift, false);
+					if (prj->project(it16w.value(), xy))
+						sPainter.drawText(xy[0], xy[1], directionLabel, 0., -cshift, vshift, false);
+				}
 			}
 		}
 	}
@@ -269,38 +252,40 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 // Translate cardinal labels with gettext to current sky language and update font for the language
 void Cardinals::updateI18n()
 {
-	// TRANSLATORS: North
-	sNorth		= qc_("N",   "compass direction");
-	// TRANSLATORS: South
-	sSouth		= qc_("S",   "compass direction");
-	// TRANSLATORS: East
-	sEast		= qc_("E",   "compass direction");
-	// TRANSLATORS: West
-	sWest		= qc_("W",   "compass direction");
-	// TRANSLATORS: Northeast
-	sNortheast	= qc_("NE",  "compass direction");
-	// TRANSLATORS: Southeast
-	sSoutheast	= qc_("SE",  "compass direction");
-	// TRANSLATORS: Southwest
-	sSouthwest	= qc_("SW",  "compass direction");
-	// TRANSLATORS: Northwest
-	sNorthwest	= qc_("NW",  "compass direction");
-	// TRANSLATORS: North-northeast
-	sNorthnortheast = qc_("NNE", "compass direction");
-	// TRANSLATORS: East-northeast
-	sEastnortheast	= qc_("ENE", "compass direction");
-	// TRANSLATORS: East-southeast
-	sEastsoutheast	= qc_("ESE", "compass direction");
-	// TRANSLATORS: South-southeast
-	sSouthsoutheast = qc_("SSE", "compass direction");
-	// TRANSLATORS: South-southwest
-	sSouthsouthwest = qc_("SSW", "compass direction");
-	// TRANSLATORS: West-southwest
-	sWestsouthwest	= qc_("WSW", "compass direction");
-	// TRANSLATORS: West-northwest
-	sWestnorthwest	= qc_("WNW", "compass direction");
-	// TRANSLATORS: North-northwest
-	sNorthnorthwest = qc_("NNW", "compass direction");
+	labels = {
+		// TRANSLATORS: North
+		{ dN,	qc_("N",   "compass direction") },
+		// TRANSLATORS: South
+		{ dS,	qc_("S",   "compass direction") },
+		// TRANSLATORS: East
+		{ dE,	qc_("E",   "compass direction") },
+		// TRANSLATORS: West
+		{ dW,	qc_("W",   "compass direction") },
+		// TRANSLATORS: Northeast
+		{ dNE,	qc_("NE",  "compass direction") },
+		// TRANSLATORS: Southeast
+		{ dSE,	qc_("SE",  "compass direction") },
+		// TRANSLATORS: Southwest
+		{ dSW,	qc_("SW",  "compass direction") },
+		// TRANSLATORS: Northwest
+		{ dNW,	qc_("NW",  "compass direction") },
+		// TRANSLATORS: North-northeast
+		{ dNNE,	qc_("NNE", "compass direction") },
+		// TRANSLATORS: East-northeast
+		{ dENE,	qc_("ENE", "compass direction") },
+		// TRANSLATORS: East-southeast
+		{ dESE,	qc_("ESE", "compass direction") },
+		// TRANSLATORS: South-southeast
+		{ dSSE,	qc_("SSE", "compass direction") },
+		// TRANSLATORS: South-southwest
+		{ dSSW,	qc_("SSW", "compass direction") },
+		// TRANSLATORS: West-southwest
+		{ dWSW,	qc_("WSW", "compass direction") },
+		// TRANSLATORS: West-northwest
+		{ dWNW,  qc_("WNW", "compass direction") },
+		// TRANSLATORS: North-northwest
+		{ dNNW,	qc_("NNW", "compass direction") }
+	};
 }
 
 LandscapeMgr::LandscapeMgr()
@@ -606,9 +591,9 @@ void LandscapeMgr::init()
 	setPolyLineThickness(conf->value("landscape/polyline_thickness", 1).toInt());
 
 	cardinalsPoints = new Cardinals();
-	cardinalsPoints->setFlagShowCardinals(conf->value("viewing/flag_cardinal_points", true).toBool());
-	cardinalsPoints->setFlagShowOrdinals(conf->value("viewing/flag_ordinal_points", true).toBool());
-	cardinalsPoints->setFlagShowWinds(conf->value("viewing/flag_wind_points", false).toBool());
+	cardinalsPoints->setFlagShow4WCRLabels(conf->value("viewing/flag_cardinal_points", true).toBool());
+	cardinalsPoints->setFlagShow8WCRLabels(conf->value("viewing/flag_ordinal_points", true).toBool());
+	cardinalsPoints->setFlagShow16WCRLabels(conf->value("viewing/flag_16wcr_points", false).toBool());
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
 	setColorCardinalPoints(Vec3f(conf->value("color/cardinal_color", defaultColor).toString()));
@@ -917,7 +902,7 @@ void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc)
 				setFlagLandscape(false);
 				setFlagCardinalsPoints(false);
 				//setFlagOrdinalsPoints(false);
-				//setFlagWindsPoints(false);
+				//setFlagOrdinals16WRPoints(false);
 			}
 		}
 		else
@@ -932,7 +917,7 @@ void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc)
 				setFlagLandscape(true);
 				setFlagCardinalsPoints(conf->value("viewing/flag_cardinal_points", true).toBool());
 				setFlagOrdinalsPoints(conf->value("viewing/flag_ordinal_points", true).toBool());
-				setFlagWindsPoints(conf->value("viewing/flag_wind_points", false).toBool());
+				setFlagOrdinals16WRPoints(conf->value("viewing/flag_16wcr_points", false).toBool());
 			}
 		}
 	}
@@ -1096,52 +1081,52 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 	return desc;
 }
 
-//! Set flag for displaying Cardinals Points
+//! Set flag for displaying cardinal points
 void LandscapeMgr::setFlagCardinalsPoints(const bool displayed)
 {
-	if (cardinalsPoints->getFlagShowCardinals() != displayed)
+	if (cardinalsPoints->getFlagShow4WCRLabels() != displayed)
 	{
-		cardinalsPoints->setFlagShowCardinals(displayed);
+		cardinalsPoints->setFlagShow4WCRLabels(displayed);
 		emit cardinalsPointsDisplayedChanged(displayed);
 	}
 }
 
-//! Get flag for displaying Cardinals Points
+//! Get flag for displaying cardinal points
 bool LandscapeMgr::getFlagCardinalsPoints() const
 {
 	return cardinalsPoints->getFlagShowCardinals();
 }
 
-//! Set flag for displaying Ordinals Points
+//! Set flag for displaying ordinal points
 void LandscapeMgr::setFlagOrdinalsPoints(const bool displayed)
 {
-	if (cardinalsPoints->getFlagShowOrdinals() != displayed)
+	if (cardinalsPoints->getFlagShow8WCRLabels() != displayed)
 	{
-		cardinalsPoints->setFlagShowOrdinals(displayed);
+		cardinalsPoints->setFlagShow8WCRLabels(displayed);
 		emit ordinalsPointsDisplayedChanged(displayed);
 	}
 }
 
-//! Get flag for displaying Ordinals Points
+//! Get flag for displaying ordinal points
 bool LandscapeMgr::getFlagOrdinalsPoints() const
 {
-	return cardinalsPoints->getFlagShowOrdinals();
+	return cardinalsPoints->getFlagShow8WCRLabels();
 }
 
-//! Set flag for displaying Principal Winds Points
-void LandscapeMgr::setFlagWindsPoints(const bool displayed)
+//! Set flag for displaying ordinal points
+void LandscapeMgr::setFlagOrdinals16WRPoints(const bool displayed)
 {
-	if (cardinalsPoints->getFlagShowWinds() != displayed)
+	if (cardinalsPoints->getFlagShow16WCRLabels() != displayed)
 	{
-		cardinalsPoints->setFlagShowWinds(displayed);
-		emit windsPointsDisplayedChanged(displayed);
+		cardinalsPoints->setFlagShow16WCRLabels(displayed);
+		emit ordinals16WRPointsDisplayedChanged(displayed);
 	}
 }
 
-//! Get flag for displaying Principal Winds Points
-bool LandscapeMgr::getFlagWindsPoints() const
+//! Get flag for displaying ordinal points
+bool LandscapeMgr::getFlagOrdinals16WRPoints() const
 {
-	return cardinalsPoints->getFlagShowWinds();
+	return cardinalsPoints->getFlagShow16WCRLabels();
 }
 
 //! Set Cardinals Points color

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-06-02 07:34+0700\n"
+"POT-Creation-Date: 2021-06-03 00:13+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,7 +54,7 @@ msgstr ""
 #: src/core/modules/ConstellationMgr.cpp:133 src/core/modules/StarMgr.cpp:467
 #: src/core/modules/GridLinesMgr.cpp:1809
 #: src/core/modules/SpecialMarkersMgr.cpp:263
-#: src/core/modules/LandscapeMgr.cpp:626
+#: src/core/modules/LandscapeMgr.cpp:611
 #: src/core/modules/NomenclatureMgr.cpp:77 src/core/modules/NebulaMgr.cpp:474
 #: src/core/modules/NebulaMgr.cpp:475 src/core/modules/SolarSystem.cpp:295
 #: src/core/modules/MilkyWay.cpp:79 src/core/modules/ZodiacalLight.cpp:87
@@ -499,144 +499,144 @@ msgid "Compass marks"
 msgstr ""
 
 #. TRANSLATORS: North
-#: src/core/modules/LandscapeMgr.cpp:273 src/core/modules/Planet.cpp:1009
+#: src/core/modules/LandscapeMgr.cpp:257 src/core/modules/Planet.cpp:1009
 msgctxt "compass direction"
 msgid "N"
 msgstr ""
 
 #. TRANSLATORS: South
-#: src/core/modules/LandscapeMgr.cpp:275 src/core/modules/Planet.cpp:1001
+#: src/core/modules/LandscapeMgr.cpp:259 src/core/modules/Planet.cpp:1001
 msgctxt "compass direction"
 msgid "S"
 msgstr ""
 
 #. TRANSLATORS: East
-#: src/core/modules/LandscapeMgr.cpp:277 src/core/modules/Planet.cpp:1013
+#: src/core/modules/LandscapeMgr.cpp:261 src/core/modules/Planet.cpp:1013
 msgctxt "compass direction"
 msgid "E"
 msgstr ""
 
 #. TRANSLATORS: West
-#: src/core/modules/LandscapeMgr.cpp:279 src/core/modules/Planet.cpp:1005
+#: src/core/modules/LandscapeMgr.cpp:263 src/core/modules/Planet.cpp:1005
 msgctxt "compass direction"
 msgid "W"
 msgstr ""
 
 #. TRANSLATORS: Northeast
-#: src/core/modules/LandscapeMgr.cpp:281 src/core/modules/Planet.cpp:1011
+#: src/core/modules/LandscapeMgr.cpp:265 src/core/modules/Planet.cpp:1011
 msgctxt "compass direction"
 msgid "NE"
 msgstr ""
 
 #. TRANSLATORS: Southeast
-#: src/core/modules/LandscapeMgr.cpp:283 src/core/modules/Planet.cpp:1015
+#: src/core/modules/LandscapeMgr.cpp:267 src/core/modules/Planet.cpp:1015
 msgctxt "compass direction"
 msgid "SE"
 msgstr ""
 
 #. TRANSLATORS: Southwest
-#: src/core/modules/LandscapeMgr.cpp:285 src/core/modules/Planet.cpp:1003
+#: src/core/modules/LandscapeMgr.cpp:269 src/core/modules/Planet.cpp:1003
 msgctxt "compass direction"
 msgid "SW"
 msgstr ""
 
 #. TRANSLATORS: Northwest
-#: src/core/modules/LandscapeMgr.cpp:287 src/core/modules/Planet.cpp:1007
+#: src/core/modules/LandscapeMgr.cpp:271 src/core/modules/Planet.cpp:1007
 msgctxt "compass direction"
 msgid "NW"
 msgstr ""
 
 #. TRANSLATORS: North-northeast
-#: src/core/modules/LandscapeMgr.cpp:289 src/core/modules/Planet.cpp:1010
+#: src/core/modules/LandscapeMgr.cpp:273 src/core/modules/Planet.cpp:1010
 msgctxt "compass direction"
 msgid "NNE"
 msgstr ""
 
 #. TRANSLATORS: East-northeast
-#: src/core/modules/LandscapeMgr.cpp:291 src/core/modules/Planet.cpp:1012
+#: src/core/modules/LandscapeMgr.cpp:275 src/core/modules/Planet.cpp:1012
 msgctxt "compass direction"
 msgid "ENE"
 msgstr ""
 
 #. TRANSLATORS: East-southeast
-#: src/core/modules/LandscapeMgr.cpp:293 src/core/modules/Planet.cpp:1014
+#: src/core/modules/LandscapeMgr.cpp:277 src/core/modules/Planet.cpp:1014
 msgctxt "compass direction"
 msgid "ESE"
 msgstr ""
 
 #. TRANSLATORS: South-southeast
-#: src/core/modules/LandscapeMgr.cpp:295 src/core/modules/Planet.cpp:1016
+#: src/core/modules/LandscapeMgr.cpp:279 src/core/modules/Planet.cpp:1016
 msgctxt "compass direction"
 msgid "SSE"
 msgstr ""
 
 #. TRANSLATORS: South-southwest
-#: src/core/modules/LandscapeMgr.cpp:297 src/core/modules/Planet.cpp:1002
+#: src/core/modules/LandscapeMgr.cpp:281 src/core/modules/Planet.cpp:1002
 msgctxt "compass direction"
 msgid "SSW"
 msgstr ""
 
 #. TRANSLATORS: West-southwest
-#: src/core/modules/LandscapeMgr.cpp:299 src/core/modules/Planet.cpp:1004
+#: src/core/modules/LandscapeMgr.cpp:283 src/core/modules/Planet.cpp:1004
 msgctxt "compass direction"
 msgid "WSW"
 msgstr ""
 
 #. TRANSLATORS: West-northwest
-#: src/core/modules/LandscapeMgr.cpp:301 src/core/modules/Planet.cpp:1006
+#: src/core/modules/LandscapeMgr.cpp:285 src/core/modules/Planet.cpp:1006
 msgctxt "compass direction"
 msgid "WNW"
 msgstr ""
 
 #. TRANSLATORS: North-northwest
-#: src/core/modules/LandscapeMgr.cpp:303 src/core/modules/Planet.cpp:1008
+#: src/core/modules/LandscapeMgr.cpp:287 src/core/modules/Planet.cpp:1008
 msgctxt "compass direction"
 msgid "NNW"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:627
+#: src/core/modules/LandscapeMgr.cpp:612
 msgid "Atmosphere"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:628
+#: src/core/modules/LandscapeMgr.cpp:613
 msgid "Fog"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:629 src/ui_viewDialog.h:3833
+#: src/core/modules/LandscapeMgr.cpp:614 src/ui_viewDialog.h:3833
 #: src/ui_configurationDialog.h:1791
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:314
 msgid "Cardinal points"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:630
+#: src/core/modules/LandscapeMgr.cpp:615
 msgid "Ground"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:631
+#: src/core/modules/LandscapeMgr.cpp:616
 msgid "Landscape illumination"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:632
+#: src/core/modules/LandscapeMgr.cpp:617
 msgid "Landscape labels"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:633
+#: src/core/modules/LandscapeMgr.cpp:618
 msgid "Light pollution data from locations database"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:635
+#: src/core/modules/LandscapeMgr.cpp:620
 msgid "Increase light pollution"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:636
+#: src/core/modules/LandscapeMgr.cpp:621
 msgid "Reduce light pollution"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:637
+#: src/core/modules/LandscapeMgr.cpp:622
 msgid "Cyclic change in light pollution"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1047 src/scripting/StelScriptMgr.cpp:457
+#: src/core/modules/LandscapeMgr.cpp:1032 src/scripting/StelScriptMgr.cpp:457
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
 #: plugins/Oculars/src/gui/OcularDialog.cpp:585
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
@@ -656,38 +656,38 @@ msgid "Author"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - meter
-#: src/core/modules/LandscapeMgr.cpp:1053 src/gui/StelGuiItems.cpp:775
+#: src/core/modules/LandscapeMgr.cpp:1038 src/gui/StelGuiItems.cpp:775
 #: plugins/Satellites/src/Satellite.cpp:418
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1028
 msgctxt "distance"
 msgid "m"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1056 src/ui_locationDialogGui.h:481
+#: src/core/modules/LandscapeMgr.cpp:1041 src/ui_locationDialogGui.h:481
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:489
 msgid "Location"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for pressure - hectopascals
-#: src/core/modules/LandscapeMgr.cpp:1077
+#: src/core/modules/LandscapeMgr.cpp:1062
 msgctxt "pressure"
 msgid "hPa"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1087
+#: src/core/modules/LandscapeMgr.cpp:1072
 msgid "extinction coefficient"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1090
+#: src/core/modules/LandscapeMgr.cpp:1075
 msgid "Atmospheric conditions"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1094
+#: src/core/modules/LandscapeMgr.cpp:1079
 msgid "Light pollution"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1094
+#: src/core/modules/LandscapeMgr.cpp:1079
 msgid "by Bortle scale"
 msgstr ""
 
@@ -10773,15 +10773,17 @@ msgid "Equatorial grid (J2000)"
 msgstr ""
 
 #: src/ui_viewDialog.h:3831
-msgid "Labels for the cardinal directions."
+msgid "Labels for the cardinal directions (4-wind compass rose)."
 msgstr ""
 
 #: src/ui_viewDialog.h:3835
-msgid "Labels for the intercardinal (or ordinal) directions."
+msgid ""
+"Labels for the intercardinal (or ordinal) directions (8-wind compass rose)."
 msgstr ""
 
 #: src/ui_viewDialog.h:3839
-msgid "Labels for directions of the principal winds (or main winds)."
+msgid ""
+"Labels for the intercardinal (or ordinal) directions (16-wind compass rose)."
 msgstr ""
 
 #: src/ui_viewDialog.h:3842

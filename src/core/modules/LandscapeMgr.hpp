@@ -64,10 +64,10 @@ class LandscapeMgr : public StelModule
 		   READ getFlagOrdinalsPoints
 		   WRITE setFlagOrdinalsPoints
 		   NOTIFY ordinalsPointsDisplayedChanged)
-	Q_PROPERTY(bool windsPointsDisplayed
-		   READ getFlagWindsPoints
-		   WRITE setFlagWindsPoints
-		   NOTIFY windsPointsDisplayedChanged)
+	Q_PROPERTY(bool ordinals16WRPointsDisplayed
+		   READ getFlagOrdinals16WRPoints
+		   WRITE setFlagOrdinals16WRPoints
+		   NOTIFY ordinals16WRPointsDisplayedChanged)
 	Q_PROPERTY(Vec3f cardinalsPointsColor
 		   READ getColorCardinalPoints
 		   WRITE setColorCardinalPoints
@@ -346,20 +346,20 @@ public slots:
 	//! Return the value of flag usage light pollution (and bortle index) from locations database.
 	bool getFlagUseLightPollutionFromDatabase() const;
 
-	//! Get flag for displaying Cardinals Points.
+	//! Get flag for displaying cardinal points (4-wind compass rose directions)
 	bool getFlagCardinalsPoints() const;
-	//! Set flag for displaying Cardinals Points.
+	//! Set flag for displaying cardinal points (4-wind compass rose directions)
 	void setFlagCardinalsPoints(const bool displayed);
 
-	//! Get flag for displaying Ordinals Points.
+	//! Get flag for displaying intercardinal (or ordinal) points (8-wind compass rose directions).
 	bool getFlagOrdinalsPoints() const;
-	//! Set flag for displaying Ordinals Points.
+	//! Set flag for displaying intercardinal (or ordinal) points (8-wind compass rose directions).
 	void setFlagOrdinalsPoints(const bool displayed);
 
-	//! Get flag for displaying Principal Winds Points.
-	bool getFlagWindsPoints() const;
-	//! Set flag for displaying Principal Winds Points.
-	void setFlagWindsPoints(const bool displayed);
+	//! Get flag for displaying intercardinal (or ordinal) points (16-wind compass rose directions).
+	bool getFlagOrdinals16WRPoints() const;
+	//! Set flag for displaying intercardinal (or ordinal) points (16-wind compass rose directions).
+	void setFlagOrdinals16WRPoints(const bool displayed);
 
 	//! Get Cardinals Points color.
 	Vec3f getColorCardinalPoints() const;
@@ -495,7 +495,7 @@ signals:
 	void atmosphereDisplayedChanged(const bool displayed);
 	void cardinalsPointsDisplayedChanged(const bool displayed);
 	void ordinalsPointsDisplayedChanged(const bool displayed);
-	void windsPointsDisplayedChanged(const bool displayed);
+	void ordinals16WRPointsDisplayedChanged(const bool displayed);
 	void cardinalsPointsColorChanged(const Vec3f & newColor) const;
 	void fogDisplayedChanged(const bool displayed);
 	void landscapeDisplayedChanged(const bool displayed);
