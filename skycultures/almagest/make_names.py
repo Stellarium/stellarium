@@ -32,6 +32,14 @@ OUTSIDE = { # 'n' = nearby, 'u' = under, 'a' = around, 'r' = round (?)
 #    XLVIII
     'PsA': (13, 'r'),
 }
+NEBULAE = [
+    # almagest,    modern,     greek,       english
+    ('Tau 30-33', 'M 45',     'Πλειάδες',  'Pleiades'),
+    ('Tau 11-15', 'Mel 25',   'Υάδες',     'Hyades'),
+    ('Leo 33',    'Mel 111',  'πλόκαμος',  'Coma'),
+    ('sco 22',    'NGC 6441', '',          ''),
+]
+
 STARS_FILE = 'star_names.fab'
 DSO_FILE = 'dso_names.fab'
 # HIP           SAO     HD      HR
@@ -75,6 +83,7 @@ def parse_cat(path):
 hr_to_hip = parse_cross_id(CROSS_ID)
 hr_to_mid = {}
 hr_to_con = {}
+alm_to_desc = {}
 with open(STARS_FILE, 'w') as stars, open(DSO_FILE, 'w') as dso:
     for i, (con, idx, hr, modern_id, desc) in enumerate(parse_cat(CAT_FILE), 1):
         if hr:
@@ -102,8 +111,16 @@ with open(STARS_FILE, 'w') as stars, open(DSO_FILE, 'w') as dso:
                     con = con.lower()
                 print(f'{tag}|("{con} {idx}")', file=file)
                 print(f'{tag}|_("{desc}")', file=file)
+                alm_to_desc[f"{con} {idx}"] = desc
         else:
             print(f'No HIP number found for HR {hr} ({modern_id})', file=sys.stderr)
+    for almagest, modern, greek, english in NEBULAE:
+        if greek:
+            print(f'{modern}|_("{greek} ({english})")', file=dso)
+        desc = alm_to_desc.get(almagest)
+        if desc is not None:
+            print(f'{modern}|_("{desc}")', file=dso)
+
 print(f'  found {len(hr_to_mid)} unique stars and {len(PROPER_NAMES)} proper names')
 for hr, cons in hr_to_con.items():
     if len(cons) > 1:
