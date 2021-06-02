@@ -117,6 +117,7 @@ with open(STARS_FILE, 'w') as stars, open(DSO_FILE, 'w') as dso:
     for almagest, modern, greek, english in NEBULAE:
         if greek:
             print(f'{modern}|_("{greek} ({english})")', file=dso)
+        print(f'{modern}|_("{almagest}")', file=dso)
         desc = alm_to_desc.get(almagest)
         if desc is not None:
             print(f'{modern}|_("{desc}")', file=dso)
