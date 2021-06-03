@@ -612,6 +612,8 @@ void LandscapeMgr::init()
 	addAction("actionShow_Atmosphere", displayGroup, N_("Atmosphere"), "atmosphereDisplayed", "A");
 	addAction("actionShow_Fog", displayGroup, N_("Fog"), "fogDisplayed", "F");
 	addAction("actionShow_Cardinal_Points", displayGroup, N_("Cardinal points"), "cardinalsPointsDisplayed", "Q");
+	addAction("actionShow_Intercardinal_Points", displayGroup, N_("Ordinal (Intercardinal) points"), "ordinalsPointsDisplayed");
+	addAction("actionShow_Secondary_Intercardinal_Points", displayGroup, N_("Secondary Intercardinal points"), "ordinals16WRPointsDisplayed");
 	addAction("actionShow_Ground", displayGroup, N_("Ground"), "landscapeDisplayed", "G");
 	addAction("actionShow_LandscapeIllumination", displayGroup, N_("Landscape illumination"), "illuminationDisplayed", "Shift+G");
 	addAction("actionShow_LandscapeLabels", displayGroup, N_("Landscape labels"), "labelsDisplayed", "Ctrl+Shift+G");

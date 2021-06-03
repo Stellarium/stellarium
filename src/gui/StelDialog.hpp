@@ -118,9 +118,9 @@ protected:
 	virtual void createDialogContent()=0;
 
 	//! Helper function to connect a checkbox to the StelAction with the specified name
-	Q_DECL_DEPRECATED_X("Use functor-based connections. https://doc.qt.io/qt-5/signalsandslots-syntaxes.html") static void connectCheckBox(QAbstractButton* checkBox,const QString& actionName);
+	static void connectCheckBox(QAbstractButton* checkBox,const QString& actionName);
 	//! Helper function to connect a checkbox to the given StelAction
-	Q_DECL_DEPRECATED_X("Use functor-based connections. https://doc.qt.io/qt-5/signalsandslots-syntaxes.html") static void connectCheckBox(QAbstractButton *checkBox, StelAction* action);
+	static void connectCheckBox(QAbstractButton *checkBox, StelAction* action);
 
 	//! Helper function to connect a QLineEdit to an integer StelProperty.
 	//! @note This method also works with flag/enum types (TODO. Does it?)

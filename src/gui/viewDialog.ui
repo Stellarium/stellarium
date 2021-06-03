@@ -4139,7 +4139,7 @@
                  <item>
                   <widget class="QCheckBox" name="showOrdinal16WRPointsCheckBox">
                    <property name="toolTip">
-                    <string>Labels for the intercardinal (or ordinal) directions (16-wind compass rose).</string>
+                    <string>Labels for the secondary intercardinal directions (16-wind compass rose).</string>
                    </property>
                    <property name="text">
                     <string/>
@@ -5039,12 +5039,12 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>

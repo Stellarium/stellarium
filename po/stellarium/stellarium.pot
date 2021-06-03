@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-06-03 00:13+0700\n"
+"POT-Creation-Date: 2021-06-04 00:27+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -609,34 +609,42 @@ msgid "Cardinal points"
 msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:615
-msgid "Ground"
+msgid "Ordinal (Intercardinal) points"
 msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:616
-msgid "Landscape illumination"
+msgid "Secondary Intercardinal points"
 msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:617
-msgid "Landscape labels"
+msgid "Ground"
 msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:618
-msgid "Light pollution data from locations database"
+msgid "Landscape illumination"
+msgstr ""
+
+#: src/core/modules/LandscapeMgr.cpp:619
+msgid "Landscape labels"
 msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:620
-msgid "Increase light pollution"
-msgstr ""
-
-#: src/core/modules/LandscapeMgr.cpp:621
-msgid "Reduce light pollution"
+msgid "Light pollution data from locations database"
 msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:622
+msgid "Increase light pollution"
+msgstr ""
+
+#: src/core/modules/LandscapeMgr.cpp:623
+msgid "Reduce light pollution"
+msgstr ""
+
+#: src/core/modules/LandscapeMgr.cpp:624
 msgid "Cyclic change in light pollution"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1032 src/scripting/StelScriptMgr.cpp:457
+#: src/core/modules/LandscapeMgr.cpp:1034 src/scripting/StelScriptMgr.cpp:457
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
 #: plugins/Oculars/src/gui/OcularDialog.cpp:585
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
@@ -656,38 +664,38 @@ msgid "Author"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - meter
-#: src/core/modules/LandscapeMgr.cpp:1038 src/gui/StelGuiItems.cpp:775
+#: src/core/modules/LandscapeMgr.cpp:1040 src/gui/StelGuiItems.cpp:775
 #: plugins/Satellites/src/Satellite.cpp:418
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1028
 msgctxt "distance"
 msgid "m"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1041 src/ui_locationDialogGui.h:481
+#: src/core/modules/LandscapeMgr.cpp:1043 src/ui_locationDialogGui.h:481
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:489
 msgid "Location"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for pressure - hectopascals
-#: src/core/modules/LandscapeMgr.cpp:1062
+#: src/core/modules/LandscapeMgr.cpp:1064
 msgctxt "pressure"
 msgid "hPa"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1072
+#: src/core/modules/LandscapeMgr.cpp:1074
 msgid "extinction coefficient"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1075
+#: src/core/modules/LandscapeMgr.cpp:1077
 msgid "Atmospheric conditions"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1079
+#: src/core/modules/LandscapeMgr.cpp:1081
 msgid "Light pollution"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1079
+#: src/core/modules/LandscapeMgr.cpp:1081
 msgid "by Bortle scale"
 msgstr ""
 
@@ -10783,7 +10791,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:3839
 msgid ""
-"Labels for the intercardinal (or ordinal) directions (16-wind compass rose)."
+"Labels for the secondary intercardinal directions (16-wind compass rose)."
 msgstr ""
 
 #: src/ui_viewDialog.h:3842
