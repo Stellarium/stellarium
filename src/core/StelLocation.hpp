@@ -20,6 +20,7 @@
 #define STELLOCATION_HPP
 
 #include <QString>
+#include <QVariant>
 #include <QMetaType>
 
 class Planet;
@@ -29,7 +30,7 @@ class Planet;
 class StelLocation
 {
 public:
-	StelLocation() : longitude(0.f), latitude(0.f), altitude(0), bortleScaleIndex(2), population(0.f), role('X'), isUserLocation(true) {}
+	StelLocation() : longitude(0.f), latitude(0.f), altitude(0), population(0.f), role('X'), isUserLocation(true) {}
 
 	//! Return a short string which can be used in a list view.
 	QString getID() const;
@@ -65,8 +66,8 @@ public:
 	float latitude;
 	//! Altitude in meter
 	int altitude;
-	//! Light pollution index following Bortle scale
-	int bortleScaleIndex;
+	//! Zenith luminance at moonless night as could be measured by a Sky Quality Meter, in cd/m²
+	QVariant lightPollutionLuminance;
 	//! A hint for associating a landscape to the location
 	QString landscapeKey;
 	//! Population in number of inhabitants
@@ -110,7 +111,7 @@ public:
 	//! Used privately by the StelLocationMgr
 	bool isUserLocation;
 
-	static const int DEFAULT_BORTLE_SCALE_INDEX;
+	static const float DEFAULT_LIGHT_POLLUTION_LUMINANCE;
 private:
 	static QString getRegionFromCode(const QString& code);
 	//Register with Qt

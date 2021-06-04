@@ -52,7 +52,6 @@ Landscape::Landscape(float _radius)
 	, angleRotateZ(0.)
 	, angleRotateZOffset(0.)
 	, sinMinAltitudeLimit(-0.035) //sin(-2 degrees))
-	, defaultBortleIndex(-1)
 	, defaultFogSetting(-1)
 	, defaultExtinctionCoefficient(-1.)
 	, defaultTemperature(-1000.)
@@ -119,9 +118,22 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 		if ((tzString.length() > 0))
 			location.ianaTimeZone=StelLocationMgr::sanitizeTimezoneStringFromLocationDB(tzString);
 
-		defaultBortleIndex = landscapeIni.value("location/light_pollution", -1).toInt();
+		auto defaultBortleIndex = landscapeIni.value("location/light_pollution", -1).toInt();
 		if (defaultBortleIndex<=0) defaultBortleIndex=-1; // neg. values in ini file signal "no change".
 		if (defaultBortleIndex>9) defaultBortleIndex=9; // correct bad values.
+		const auto lum = landscapeIni.value("location/light_pollution_luminance");
+		if (lum.isValid())
+		{
+			defaultLightPollutionLuminance = lum;
+
+			if (defaultBortleIndex>=0)
+			{
+				qWarning() << "Landscape light pollution is specified both as luminance and as Bortle scale index."
+				              "Only one value should be specified, preferably luminance.";
+			}
+		}
+		else if (defaultBortleIndex>=0)
+			defaultLightPollutionLuminance = StelCore::bortleScaleIndexToLuminance(defaultBortleIndex);
 
 		defaultFogSetting = landscapeIni.value("location/display_fog", -1).toInt();
 		defaultExtinctionCoefficient = landscapeIni.value("location/atmospheric_extinction_coefficient", -1.0).toDouble();

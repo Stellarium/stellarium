@@ -67,7 +67,6 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	customStarMagLimit(0.0),
 	customNebulaMagLimit(0.0),
 	customPlanetMagLimit(0.0),
-	bortleScaleIndex(3),
 	inScale(1.f),
 	starShaderProgram(Q_NULLPTR),
 	starShaderVars(StarShaderVars()),
@@ -100,7 +99,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	setFlagNebulaMagnitudeLimit(conf->value("astro/flag_nebula_magnitude_limit", false).toBool());
 	setCustomNebulaMagnitudeLimit(conf->value("astro/nebula_magnitude_limit", 8.5).toDouble());
 
-	setBortleScaleIndex(conf->value("stars/init_bortle_scale", 3).toInt());
+	setLightPollutionLuminance(conf->value("stars/init_light_pollution_luminance", StelCore::bortleScaleIndexToLuminance(3)).toFloat());
 	setRelativeStarScale(conf->value("stars/relative_scale", 1.0).toDouble());
 	setAbsoluteStarScale(conf->value("stars/absolute_scale", 1.0).toDouble());
 	setExtinctionCoefficient(conf->value("landscape/atmospheric_extinction_coefficient", 0.13).toDouble());
@@ -220,7 +219,10 @@ void StelSkyDrawer::update(double)
 	// They should roughly match the scale described at http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
 	static const float bortleToInScale[9] = {2.45f, 1.55f, 1.0f, 0.63f, 0.40f, 0.24f, 0.23f, 0.145f, 0.09f};
 	if (getFlagHasAtmosphere() && core->getJD()>2387627.5) // JD given is J1825.0; ignore Bortle scale index before that.
-	    setInputScale(bortleToInScale[bortleScaleIndex-1]);
+	{
+		const auto bortleScaleIndex = StelCore::luminanceToBortleScaleIndex(lightPollutionLuminance);
+		setInputScale(bortleToInScale[bortleScaleIndex-1]);
+	}
 	else
 	    setInputScale(bortleToInScale[0]);
 
@@ -661,25 +663,17 @@ void StelSkyDrawer::preDraw()
 }
 
 
-// Set the parameters so that the stars disappear at about the limit given by the bortle scale
-// See http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
-void StelSkyDrawer::setBortleScaleIndex(int bIndex)
+void StelSkyDrawer::setLightPollutionLuminance(const double luminance)
 {
-	if(bortleScaleIndex!=bIndex)
-	{
-		// Associate the Bortle index (1 to 9) to inScale value
-		if ((bIndex<1) || (bIndex>9))
-		{
-			qWarning() << "WARNING: Bortle scale index range is [1;9], given" << bIndex;
-		}
-		bortleScaleIndex = qBound(1, bIndex, 9);
-		emit bortleScaleIndexChanged(bortleScaleIndex);
-		// GZ: I moved this block to update()
-		// These value have been calibrated by hand, looking at the faintest star in stellarium at around 40 deg FOV
-		// They should roughly match the scale described at http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
-		// static const float bortleToInScale[9] = {2.45, 1.55, 1.0, 0.63, 0.40, 0.24, 0.23, 0.145, 0.09};
-		// setInputScale(bortleToInScale[bIndex-1]);
-	}
+	if(lightPollutionLuminance==luminance)
+		return;
+	lightPollutionLuminance=luminance;
+	emit lightPollutionLuminanceChanged(luminance);
+}
+
+int StelSkyDrawer::getBortleScaleIndex() const
+{
+	return StelCore::luminanceToBortleScaleIndex(lightPollutionLuminance);
 }
 
 void StelSkyDrawer::setFlagStarSpiky(bool b)
@@ -689,18 +683,6 @@ void StelSkyDrawer::setFlagStarSpiky(bool b)
 		flagStarSpiky=b;
 		emit flagStarSpikyChanged(flagStarSpiky);
 	}
-}
-
-float StelSkyDrawer::getNELMFromBortleScale() const
-{
-	return getNELMFromBortleScale(getBortleScaleIndex());
-}
-
-float StelSkyDrawer::getNELMFromBortleScale(int idx)
-{
-	const float nelms[9] = {7.8f, 7.3f, 6.8f, 6.3f, 5.8f, 5.3f, 4.8f, 4.3f, 4.0f};
-	idx = qBound(1, idx, 9);
-	return nelms[idx-1];
 }
 
 // colors for B-V display

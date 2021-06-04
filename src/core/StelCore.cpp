@@ -1166,7 +1166,7 @@ void StelCore::moveObserverToSelected()
 				loc.state = "";
 				loc.longitude=ni->getLongitude();
 				loc.latitude=ni->getLatitude();
-				loc.bortleScaleIndex=1;
+				loc.lightPollutionLuminance = 0;
 
 				moveObserverTo(loc);
 				objmgr->unSelect(); // no use to keep it: Marker will flicker around the screen.
@@ -2724,6 +2724,65 @@ QString StelCore::getIAUConstellation(const Vec3d positionEqJnow) const
 	}
 	qDebug() << "getIAUconstellation error: Cannot determine, algorithm failed.";
 	return "(?)";
+}
+
+// NELM = naked-eye limiting magnitude
+int StelCore::nelmToBortleScaleIndex(const float nelm)
+{
+	// Ref: Bortle, John E. (February 2001). "Gauging Light Pollution: The Bortle Dark-Sky Scale".
+	//  Sky & Telescope. Sky Publishing Corporation.
+	// https://skyandtelescope.org/astronomy-resources/light-pollution-and-astronomy-the-bortle-dark-sky-scale/
+	if(nelm < 4.0) return 9;
+	if(nelm < 4.5) return 8;
+	if(nelm < 5.0) return 7;
+	if(nelm < 5.5) return 6;
+	if(nelm < 6.0) return 5;
+	if(nelm < 6.5) return 4;
+	if(nelm < 7.0) return 3;
+	if(nelm < 7.5) return 2;
+	return 1;
+}
+
+float StelCore::bortleScaleIndexToNELM(const int index)
+{
+	// This is kind of inverse of nelmToBortleScaleIndex(), where the "representative NELM" is chosen to be
+	// the middle of the interval of the NELM values for the inner indices (2-8), and the same distance from
+	// the boundary for outer indices (1 and 9).
+	switch(index)
+	{
+	case 1: return 7.75;
+	case 2: return 7.25;
+	case 3: return 6.75;
+	case 4: return 6.25;
+	case 5: return 5.75;
+	case 6: return 5.25;
+	case 7: return 4.75;
+	case 8: return 4.25;
+	case 9: return 3.75;
+	default:
+			qWarning().nospace() << "Bortle scale index " << index << " out of range";
+			return 0; // Let the problem be visible
+	}
+}
+
+float StelCore::luminanceToNELM(const float luminance)
+{
+	// Ref: Schaefer, B. E.. "Telescopic limiting magnitudes". Astronomical Society of the Pacific,
+	//  Publications (ISSN 0004-6280), vol. 102, Feb. 1990, p. 212-229.
+	// http://adsbit.harvard.edu/cgi-bin/nph-iarticle_query?bibcode=1990PASP..102..212S
+	//
+	// Using formula (18), assuming observer's acuity Fₛ=1 (as suggested in the text as "typical observer"),
+	// absorption term kᵥ=0.3 (as suggested for "typical weather"), coefficient for Bₛ is adjusted to take
+	// the value in cd/m².
+	//
+	return 8.32f - 2.17147240951626f*std::log(1 + 88.5588612190873f*std::sqrt(luminance));
+}
+
+float StelCore::nelmToLuminance(const float nelm)
+{
+	// This is just the inverse of luminanceToNELM()
+	const auto toSquare = std::exp(3.8315015947420905f-0.46051701859880895f*nelm) - 1;
+	return toSquare*toSquare*0.0001275075653676456f;
 }
 
 Vec3d StelCore::getMouseJ2000Pos() const

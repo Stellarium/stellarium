@@ -27,7 +27,7 @@
 #include <QTimeZone>
 #include <QStringList>
 
-const int StelLocation::DEFAULT_BORTLE_SCALE_INDEX = 2;
+const float StelLocation::DEFAULT_LIGHT_POLLUTION_LUMINANCE = StelCore::bortleScaleIndexToLuminance(2);
 
 int StelLocation::metaTypeId = initMetaType();
 int StelLocation::initMetaType()
@@ -50,7 +50,8 @@ QString StelLocation::serializeToLine() const
 			latitude<0 ? QString("%1S").arg(-latitude, 0, 'f', 6) : QString("%1N").arg(latitude, 0, 'f', 6),
 			longitude<0 ? QString("%1W").arg(-longitude, 0, 'f', 6) : QString("%1E").arg(longitude, 0, 'f', 6),
 			QString::number(altitude),
-			QString::number(bortleScaleIndex)).arg(
+            QString::number(lightPollutionLuminance.isValid() ? lightPollutionLuminance.toFloat() : DEFAULT_LIGHT_POLLUTION_LUMINANCE)
+            ).arg(
 			sanitizedTZ,
 			planetName,
 			landscapeKey);
@@ -70,13 +71,18 @@ QString StelLocation::getID() const
 // GZ TODO: These operators may require sanitizing for timezone names!
 QDataStream& operator<<(QDataStream& out, const StelLocation& loc)
 {
-	out << loc.name << loc.state << loc.region << loc.role << loc.population << loc.latitude << loc.longitude << loc.altitude << loc.bortleScaleIndex << loc.ianaTimeZone << loc.planetName << loc.landscapeKey << loc.isUserLocation;
+	const auto lum = loc.lightPollutionLuminance.toFloat();
+	const int bortleScaleIndex = loc.lightPollutionLuminance.isValid() ? StelCore::luminanceToBortleScaleIndex(lum) : -1;
+	out << loc.name << loc.state << loc.region << loc.role << loc.population << loc.latitude << loc.longitude << loc.altitude << bortleScaleIndex << loc.ianaTimeZone << loc.planetName << loc.landscapeKey << loc.isUserLocation;
 	return out;
 }
 
 QDataStream& operator>>(QDataStream& in, StelLocation& loc)
 {
-	in >> loc.name >> loc.state >> loc.region >> loc.role >> loc.population >> loc.latitude >> loc.longitude >> loc.altitude >> loc.bortleScaleIndex >> loc.ianaTimeZone >> loc.planetName >> loc.landscapeKey >> loc.isUserLocation;
+	int bortleScaleIndex;
+	in >> loc.name >> loc.state >> loc.region >> loc.role >> loc.population >> loc.latitude >> loc.longitude >> loc.altitude >> bortleScaleIndex >> loc.ianaTimeZone >> loc.planetName >> loc.landscapeKey >> loc.isUserLocation;
+	if(bortleScaleIndex > 0)
+		loc.lightPollutionLuminance = StelCore::bortleScaleIndexToLuminance(bortleScaleIndex);
 	return in;
 }
 
@@ -126,12 +132,12 @@ StelLocation StelLocation::createFromLine(const QString& rawline)
 	if (splitline.size()>8)
 	{
 		bool ok;
-		loc.bortleScaleIndex = splitline.at(8).toInt(&ok);
+		loc.lightPollutionLuminance = splitline.at(8).toFloat(&ok);
 		if (ok==false)
-			loc.bortleScaleIndex = DEFAULT_BORTLE_SCALE_INDEX;
+			loc.lightPollutionLuminance = DEFAULT_LIGHT_POLLUTION_LUMINANCE;
 	}
 	else
-		loc.bortleScaleIndex = DEFAULT_BORTLE_SCALE_INDEX;
+		loc.lightPollutionLuminance = DEFAULT_LIGHT_POLLUTION_LUMINANCE;
 
 	if (splitline.size()>9)
 	{
