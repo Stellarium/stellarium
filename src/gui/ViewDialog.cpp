@@ -96,7 +96,7 @@ void ViewDialog::retranslate()
 		populateToolTips();
 		populatePlanetMagnitudeAlgorithmsList();
 		populatePlanetMagnitudeAlgorithmDescription();
-		setBortleScaleToolTip(StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScaleIndex());
+		updateBortleScaleToolTip();
 		populateHipsGroups();
 		updateHips();
 		//Hack to shrink the tabs to optimal size after language change
@@ -188,8 +188,8 @@ void ViewDialog::createDialogContent()
 	populateLightPollution();
 	connectBoolProperty(ui->useLightPollutionFromLocationDataCheckBox, "LandscapeMgr.flagUseLightPollutionFromDatabase");
 	connect(lmgr, SIGNAL(flagUseLightPollutionFromDatabaseChanged(bool)), this, SLOT(populateLightPollution()));
-	connectIntProperty(ui->lightPollutionSpinBox, "StelSkyDrawer.bortleScaleIndex");
-	connect(drawer, SIGNAL(bortleScaleIndexChanged(int)), this, SLOT(setBortleScaleToolTip(int)));
+	connectDoubleProperty(ui->lightPollutionLuminanceDoubleSpinBox, "StelSkyDrawer.lightPollutionLuminance");
+	connect(drawer, &StelSkyDrawer::lightPollutionLuminanceChanged, this, &ViewDialog::updateBortleScaleToolTip);
 
 	// atmosphere details
 	connect(ui->pushButtonAtmosphereDetails, SIGNAL(clicked()), this, SLOT(showAtmosphereDialog()));
@@ -837,33 +837,38 @@ void ViewDialog::updateSelectedTypesCheckBoxes()
 	ui->checkBoxOtherType->setChecked(flags & Nebula::TypeOther);
 }
 
+double ViewDialog::lightPollutionLuminance() const
+{
+    return ui->lightPollutionLuminanceDoubleSpinBox->value();
+}
+
 // 20160411. New function introduced with trunk merge. Not sure yet if useful or bad with property connections?.
 void ViewDialog::populateLightPollution()
 {
 	StelCore *core = StelApp::getInstance().getCore();
 	StelModule *lmgr = StelApp::getInstance().getModule("LandscapeMgr");
-	int bIdx = core->getSkyDrawer()->getBortleScaleIndex();
+	auto lum = core->getSkyDrawer()->getLightPollutionLuminance();
 	if (lmgr->property("flagUseLightPollutionFromDatabase").toBool())
 	{
 		StelLocation loc = core->getCurrentLocation();
-		bIdx = loc.bortleScaleIndex;
 		if (!loc.planetName.contains("Earth")) // location not on Earth...
-			bIdx = 1;
-		if (bIdx<1) // ...or it observatory, or it unknown location
-			bIdx = loc.DEFAULT_BORTLE_SCALE_INDEX;
-		ui->lightPollutionSpinBox->setEnabled(false);
+			lum = 0;
+        else if (!loc.lightPollutionLuminance.isValid()) // ...or it observatory, or it unknown location
+			lum = loc.DEFAULT_LIGHT_POLLUTION_LUMINANCE;
+        else
+            lum = loc.lightPollutionLuminance.toFloat();
+		ui->lightPollutionLuminanceDoubleSpinBox->setEnabled(false);
 	}
 	else
-		ui->lightPollutionSpinBox->setEnabled(true);
+		ui->lightPollutionLuminanceDoubleSpinBox->setEnabled(true);
 
-	ui->lightPollutionSpinBox->setValue(bIdx);
-	setBortleScaleToolTip(bIdx);
+	ui->lightPollutionLuminanceDoubleSpinBox->setValue(lum);
+	updateBortleScaleToolTip();
 }
 
-void ViewDialog::setBortleScaleToolTip(int Bindex)
+void ViewDialog::updateBortleScaleToolTip()
 {
-	int i = Bindex-1;
-	QStringList list, nelm;
+	QStringList list;
 	//TRANSLATORS: Short description for Class 1 of the Bortle scale
 	list.append(q_("Excellent dark-sky site"));
 	//TRANSLATORS: Short description for Class 2 of the Bortle scale
@@ -883,22 +888,16 @@ void ViewDialog::setBortleScaleToolTip(int Bindex)
 	//TRANSLATORS: Short description for Class 9 of the Bortle scale
 	list.append(q_("Inner-city sky"));
 
-	nelm.append("7.6-8.0");
-	nelm.append("7.1-7.5");
-	nelm.append("6.6-7.0");
-	nelm.append("6.1-6.5");
-	nelm.append("5.6-6.0");
-	nelm.append("5.1-5.5");
-	nelm.append("4.6-5.0");
-	nelm.append("4.1-4.5");
-	nelm.append("4.0");
+    const auto lum = lightPollutionLuminance();
+    const auto nelm = StelCore::luminanceToNELM(lum);
+    const auto bortleIndex = StelCore::nelmToBortleScaleIndex(nelm);
 
 	QString tooltip = QString("%1 (%2 %3)")
-			.arg(list.at(i))
+			.arg(list.at(bortleIndex - 1))
 			.arg(q_("The naked-eye limiting magnitude is"))
-			.arg(nelm.at(i));
+			.arg(nelm);
 
-	ui->lightPollutionSpinBox->setToolTip(tooltip);
+	ui->lightPollutionLuminanceDoubleSpinBox->setToolTip(tooltip);
 }
 
 void ViewDialog::populateToolTips()

@@ -42,6 +42,7 @@ public:
 	virtual ~ViewDialog() Q_DECL_OVERRIDE;
 	//! Notify that the application style changed
 	virtual void styleChanged() Q_DECL_OVERRIDE;
+    double lightPollutionLuminance() const;
 
 public slots:
 	virtual void retranslate() Q_DECL_OVERRIDE;
@@ -59,7 +60,7 @@ private slots:
 	void changeLandscape(QListWidgetItem* item);
 	void landscapeChanged(QString id,QString name);
 	void updateZhrDescription(int zhr);
-	void setBortleScaleToolTip(int Bindex);
+	void updateBortleScaleToolTip();
 	void setCurrentLandscapeAsDefault(void);
 	void setCurrentCultureAsDefault(void);
 	void updateDefaultSkyCulture();
