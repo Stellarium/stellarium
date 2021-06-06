@@ -98,8 +98,12 @@ Name: "{group}\{cm:LastRunLog}"; Filename: "{userappdata}\Stellarium\log.txt"
 Name: "{group}\{cm:OutputDataFile}"; Filename: "{userappdata}\Stellarium\output.txt"
 Name: "{group}\{cm:ChangeLog}"; Filename: "{app}\ChangeLog.txt"
 @ISS_GUIDE@
-Name: "{commondesktop}\Stellarium"; Filename: "{app}\stellarium.exe"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"; Tasks: desktopicon\common
-Name: "{userdesktop}\Stellarium"; Filename: "{app}\stellarium.exe"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"; Tasks: desktopicon\user
+Name: "{commondesktop}\Stellarium"; Filename: "{app}\stellarium.exe"; Parameters: "-platform windows:altgr"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"; Tasks: desktopicon\common
+Name: "{commondesktop}\Stellarium {cm:AngleMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--angle-d3d9 -platform windows:altgr"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"; Tasks: desktopicon\common
+@ISS_GUIDE_CD@
+Name: "{userdesktop}\Stellarium"; Filename: "{app}\stellarium.exe"; Parameters: "-platform windows:altgr"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"; Tasks: desktopicon\user
+Name: "{userdesktop}\Stellarium {cm:AngleMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--angle-d3d9 -platform windows:altgr"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico" Tasks: desktopicon\user
+@ISS_GUIDE_UD@
 
 [Registry]
 ; Set file associations for Stellarium scripts

@@ -398,8 +398,12 @@ IF(EXISTS "${CMAKE_SOURCE_DIR}/guide/guide.pdf")
      MESSAGE(STATUS "Found Stellarium User Guide")
      INSTALL(FILES guide/guide.pdf DESTINATION ${SDATALOC}/guide)
      SET(ISS_GUIDE "Name: \"{group}\\{cm:UserGuide}\"; Filename: \"{app}\\guide\\guide.pdf\"")
+     SET(ISS_GUIDE_CD "Name: \"{commondesktop}\\{cm:UserGuide}\"; Filename: \"{app}\\guide\\guide.pdf\"; Task: desktopicon\common")
+     SET(ISS_GUIDE_UD "Name: \"{userdesktop}\\{cm:UserGuide}\"; Filename: \"{app}\\guide\\guide.pdf\"; Task: desktopicon\user")
 ELSE()
      SET(ISS_GUIDE "; No link to Stellarium User Guide")
+     SET(ISS_GUIDE_CD "; No link to Stellarium User Guide")
+     SET(ISS_GUIDE_UD "; No link to Stellarium User Guide")
 ENDIF()
 
 ########### Plugin setup #############
