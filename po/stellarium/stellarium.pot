@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-06-09 20:06+0700\n"
+"POT-Creation-Date: 2021-06-09 20:22+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -483,7 +483,7 @@ msgid "Antisolar point"
 msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:1874
-msgid "The center of the Earth's shadow"
+msgid "The center of the Earth's umbra"
 msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:1875 src/ui_viewDialog.h:3669
@@ -10453,7 +10453,8 @@ msgid "Earth umbra"
 msgstr ""
 
 #: src/ui_viewDialog.h:3540
-msgid "Show point of the center of the Earth's shadow"
+msgid ""
+"Show point of Earth's center of deep shadow in the distance of the Moon."
 msgstr ""
 
 #: src/ui_viewDialog.h:3546
