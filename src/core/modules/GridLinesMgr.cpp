@@ -835,6 +835,12 @@ void SkyLine::draw(StelCore *core) const
 				circle.vertex.append(pos+point);                                   // attach to earth centre
 			}
 			sPainter.drawStelVertexArray(circle, false); // setting true does not paint for cylindrical&friends :-(
+
+			// Special case for Umbra and Penumbra labels
+			Vec3d point(dist, 0.0, 0.0);
+			rot.transfo(point);
+			const float shift=sPainter.getProjector()->getPixelPerRadAtCenter()*(line_type==EARTH_UMBRA ? radii.first[0] : radii.second[0])*0.0000112f/M_PIf;
+			sPainter.drawText(pos+point, (line_type==EARTH_UMBRA ? q_("Umbra") : q_("Penumbra")), 0.f, shift, shift, false);
 			return;
 		}
 		else
