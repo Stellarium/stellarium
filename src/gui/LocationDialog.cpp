@@ -554,12 +554,13 @@ void LocationDialog::setLocationFromList(const QModelIndex& index)
 void LocationDialog::setLocationFromMap(double longitude, double latitude)
 {
 	StelCore *core = StelApp::getInstance().getCore();
+	const double ppx = core->getCurrentStelProjectorParams().devicePixelsPerPixel;
 	if (core->getUseCustomTimeZone())
 		customTimeZone=core->getCurrentTimeZone();
 	reportEdit();
 	StelLocation loc = locationFromFields();
-	loc.latitude = latitude;
-	loc.longitude = longitude;
+	loc.latitude = latitude/ppx;
+	loc.longitude = longitude/ppx;
 	setFieldsFromLocation(loc);
 	core->moveObserverTo(loc, 0.);
 	// Only for locations on Earth: set zone to LMST.
