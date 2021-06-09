@@ -87,6 +87,7 @@ public:
 		SOLSTICES_J2000,
 		SOLSTICES_OF_DATE,
 		ANTISOLAR,
+		EARTH_UMBRA_CENTER,
 		APEX
 	};
 	// Create and precompute positions of a SkyGrid
@@ -1430,6 +1431,13 @@ void SkyPoint::updateLabel()
 			northernLabel = q_("ASP");
 			break;
 		}
+		case EARTH_UMBRA_CENTER:
+		{
+			frameType = StelCore::FrameHeliocentricEclipticJ2000;
+			// TRANSLATORS: Center of the umbra
+			northernLabel = q_("C.U.");
+			break;
+		}
 		case APEX:
 		{
 			frameType = StelCore::FrameObservercentricEclipticJ2000;
@@ -1543,6 +1551,20 @@ void SkyPoint::draw(StelCore *core) const
 			sPainter.drawText(coord, northernLabel, 0, shift, shift, false);
 			break;
 		}
+		case EARTH_UMBRA_CENTER:
+		{
+			const Vec3d pos=earth->getEclipticPos();
+			double lambda, beta;
+			StelUtils::rectToSphe(&lambda, &beta, pos);
+			const double dist=GETSTELMODULE(SolarSystem)->getMoon()->getEclipticPos().length();
+			const Mat4d rot=Mat4d::zrotation(lambda)*Mat4d::yrotation(-beta);
+			Vec3d point(dist, 0.0, 0.0);
+			rot.transfo(point);
+			Vec3d coord = pos+point;
+			sPainter.drawSprite2dMode(coord, 5.f);
+			sPainter.drawText(coord, northernLabel, 0, shift, shift, false);
+			break;
+		}
 		case APEX:
 		{
 			// Observer planet apex (heading point)
@@ -1612,6 +1634,7 @@ GridLinesMgr::GridLinesMgr()
 	solsticeJ2000Points = new SkyPoint(SkyPoint::SOLSTICES_J2000);
 	solsticePoints = new SkyPoint(SkyPoint::SOLSTICES_OF_DATE);
 	antisolarPoint = new SkyPoint(SkyPoint::ANTISOLAR);
+	umbraCenterPoint = new SkyPoint(SkyPoint::EARTH_UMBRA_CENTER);
 	apexPoints = new SkyPoint(SkyPoint::APEX);	
 
 	earth = GETSTELMODULE(SolarSystem)->getEarth();
@@ -1661,6 +1684,7 @@ GridLinesMgr::~GridLinesMgr()
 	delete solsticeJ2000Points;
 	delete solsticePoints;
 	delete antisolarPoint;
+	delete umbraCenterPoint;
 	delete apexPoints;	
 	SkyLine::deinit();
 }
@@ -1754,6 +1778,7 @@ void GridLinesMgr::init()
 	setFlagSolsticeJ2000Points(conf->value("viewing/flag_solstice_J2000_points").toBool());
 	setFlagSolsticePoints(conf->value("viewing/flag_solstice_points").toBool());
 	setFlagAntisolarPoint(conf->value("viewing/flag_antisolar_point").toBool());
+	setFlagUmbraCenterPoint(conf->value("viewing/flag_umbra_center_point").toBool());
 	setFlagApexPoints(conf->value("viewing/flag_apex_points").toBool());
 
 	// Set the line thickness for grids and lines
@@ -1846,6 +1871,7 @@ void GridLinesMgr::init()
 	addAction("actionShow_Solstice_J2000_Points",      displayGroup, N_("Solstice J2000 points"), "solsticeJ2000PointsDisplayed");
 	addAction("actionShow_Solstice_Points",            displayGroup, N_("Solstice points"), "solsticePointsDisplayed");
 	addAction("actionShow_Antisolar_Point",            displayGroup, N_("Antisolar point"), "antisolarPointDisplayed");
+	addAction("actionShow_Umbra_Center_Point",    displayGroup, N_("The center of the Earth's shadow"), "umbraCenterPointDisplayed");
 	addAction("actionShow_Apex_Points",                displayGroup, N_("Apex points"), "apexPointsDisplayed");
 }
 
@@ -1900,6 +1926,7 @@ void GridLinesMgr::update(double deltaTime)
 	solsticeJ2000Points->update(deltaTime);
 	solsticePoints->update(deltaTime);
 	antisolarPoint->update(deltaTime);
+	umbraCenterPoint->update(deltaTime);
 	apexPoints->update(deltaTime);
 	apexPoints->updateLabel();	
 }
@@ -1932,6 +1959,7 @@ void GridLinesMgr::draw(StelCore* core)
 		equinoxPoints->draw(core);
 		solsticePoints->draw(core);
 		longitudeLine->draw(core);
+		umbraCenterPoint->draw(core);
 	}
 
 	// Lines after grids, to be able to e.g. draw equators in different color!
@@ -1958,7 +1986,7 @@ void GridLinesMgr::draw(StelCore* core)
 	equinoxJ2000Points->draw(core);
 	solsticeJ2000Points->draw(core);	
 	apexPoints->draw(core);	
-	antisolarPoint->draw(core);
+	antisolarPoint->draw(core);	
 }
 
 void GridLinesMgr::updateLabels()
@@ -1997,6 +2025,7 @@ void GridLinesMgr::updateLabels()
 	solsticeJ2000Points->updateLabel();
 	solsticePoints->updateLabel();
 	antisolarPoint->updateLabel();
+	umbraCenterPoint->updateLabel();
 	apexPoints->updateLabel();	
 }
 
@@ -2066,7 +2095,8 @@ void GridLinesMgr::setFlagAllPoints(const bool displayed)
 	setFlagSupergalacticPoles(displayed);
 	setFlagCelestialJ2000Poles(displayed);
 	setFlagSolsticeJ2000Points(displayed);
-	setFlagApexPoints(displayed);	
+	setFlagApexPoints(displayed);
+	setFlagUmbraCenterPoint(displayed);
 }
 
 //! Set flag for displaying Azimuthal Grid
@@ -3113,6 +3143,7 @@ void GridLinesMgr::setColorUmbraCircle(const Vec3f& newColor)
 	if(newColor != umbraCircle->getColor())
 	{
 		umbraCircle->setColor(newColor);
+		umbraCenterPoint->setColor(newColor);
 		emit umbraCircleColorChanged(newColor);
 	}
 }
@@ -3495,6 +3526,19 @@ void GridLinesMgr::setColorAntisolarPoint(const Vec3f& newColor)
 	}
 }
 
+void GridLinesMgr::setFlagUmbraCenterPoint(const bool displayed)
+{
+	if(displayed != umbraCenterPoint->isDisplayed())
+	{
+		umbraCenterPoint->setDisplayed(displayed);
+		emit umbraCenterPointDisplayedChanged(displayed);
+	}
+}
+bool GridLinesMgr::getFlagUmbraCenterPoint() const
+{
+	return umbraCenterPoint->isDisplayed();
+}
+
 //! Set flag for displaying vector point
 void GridLinesMgr::setFlagApexPoints(const bool displayed)
 {
@@ -3650,5 +3694,6 @@ void GridLinesMgr::setFontSizeFromApp(int size)
 	equinoxPoints->setFontSize(pointFontSize);
 	solsticeJ2000Points->setFontSize(pointFontSize);
 	solsticePoints->setFontSize(pointFontSize);
-	apexPoints->setFontSize(pointFontSize);	
+	apexPoints->setFontSize(pointFontSize);
+	umbraCenterPoint->setFontSize(pointFontSize);
 }

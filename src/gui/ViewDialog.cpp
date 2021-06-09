@@ -318,12 +318,12 @@ void ViewDialog::createDialogContent()
 	connect(ui->pushButtonAddRemoveLandscapes, SIGNAL(clicked()), this, SLOT(showAddRemoveLandscapesDialog()));
 
 	// Grid and lines
-	connectGroupBox(ui->celestialSphereGroupBox,			"actionShow_Gridlines");
+	connectGroupBox(ui->celestialSphereGroupBox,				"actionShow_Gridlines");
 	connectCheckBox(ui->showEquatorLineCheckBox,			"actionShow_Equator_Line");
 	connectCheckBox(ui->showEquatorJ2000LineCheckBox,		"actionShow_Equator_J2000_Line");
 	connectCheckBox(ui->showEclipticLineJ2000CheckBox,		"actionShow_Ecliptic_J2000_Line");
 	connectCheckBox(ui->showEclipticLineOfDateCheckBox,		"actionShow_Ecliptic_Line");
-	connectCheckBox(ui->showInvariablePlaneCheckBox,		"actionShow_Invariable_Plane_Line");
+	connectCheckBox(ui->showInvariablePlaneCheckBox,			"actionShow_Invariable_Plane_Line");
 	connectCheckBox(ui->showSolarEquatorCheckBox,			"actionShow_Solar_Equator_Line");
 	connectCheckBox(ui->showMeridianLineCheckBox,			"actionShow_Meridian_Line");
 	connectCheckBox(ui->showLongitudeLineCheckBox,			"actionShow_Longitude_Line");
@@ -347,7 +347,8 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showColuresLineCheckBox,			"actionShow_Colure_Lines");
 	connectCheckBox(ui->showCircumpolarCirclesCheckBox,		"actionShow_Circumpolar_Circles");
 	connectCheckBox(ui->showUmbraCheckBox,		                "actionShow_Umbra_Circle");
-	connectCheckBox(ui->showPenumbraCheckBox,			"actionShow_Penumbra_Circle");
+	connectCheckBox(ui->showUmbraCenterCheckBox,	                "actionShow_Umbra_Center_Point");
+	connectCheckBox(ui->showPenumbraCheckBox,				"actionShow_Penumbra_Circle");
 	connectCheckBox(ui->showCelestialJ2000PolesCheckBox,		"actionShow_Celestial_J2000_Poles");
 	connectCheckBox(ui->showCelestialPolesCheckBox,			"actionShow_Celestial_Poles");
 	connectCheckBox(ui->showZenithNadirCheckBox,			"actionShow_Zenith_Nadir");
