@@ -588,22 +588,43 @@ powerful program to assemble your parts is again \program{Blender}.
 In \program{Blender}, import the OBJ files \menu{File>Import>Wavefront
   .obj}. If your OBJ coordinates have Z as vertical axis (common for
 terrestrial models), use ``Z up'', ``-Y Forward'' as import settings
-for the coordinate axes. The model will appear south-up.  Switch on
-textured view if required (\keys{\Alt+Z}). If the scene looks almost
-black now, reconfigure the light to be sunlight. If you have created a
-VRML of some structures in \program{ArcScene}, export that without
-shifting to center, and import the WRL file in \program{Blender} with
-default orientation ``Y up'', ``Z forward''. Models from other sources
-may still be different. In the end, all parts should fit neatly
-together. \program{Blender} is a very powerful program, you can
-enhance your model as you wish.
+for the coordinate axes. The model will appear south-up.
 
-In the end, select all relevant parts which you want to have visible
-in Stellarium (click on the lines in the outline view containing the
-object names to light them up gray, then Rightclick-Select) and press
-\key{\ctrl+J} to optionally join them, then export to a single OBJ
-\menu{File>Export>Wavefront .obj}. In the export options, apply
-``Selection Only'', and ``-Y Forward'' and ``Z Up''%
+Blender may not show anything except the default cube because of
+aggressive camera far plane clipping.  Press \keys{N} and in the
+\menu{View} set at least the far clipping plane as required to see the full
+extent of your terrain model. Then press \menu{View>View All} (or \keys{Home}).
+
+
+
+The landscape may look white now. Switch on textured view if required
+(\keys{\Alt+Z}). If the scene looks almost black now, reconfigure the
+light to be sunlight: Select the lamp in the outliner graph, press the
+lamp icon and in the \menu{Lamp} select ``Sun''. Now the scene should
+be in full color, and the Y axis should point towards grid-south.
+
+After importing the first model, you may consider locking it in place
+to avoid errors. Select the model in the outliner, select the cube
+button below, then open \menu{Transform Locks} and lock all. The other
+model parts may have to be transformed, and numerical transformation
+can be added in the \menu{Transform} settings in this menu.
+
+If you have created a VRML (WRL) of some structures in \program{ArcScene},
+export that without shifting to center, and import the WRL file in
+\program{Blender} with default orientation ``Y up'', ``Z
+forward''. Models from other sources may still be different.
+
+In the end, all parts should fit neatly together. \program{Blender} is
+a very powerful program, you can enhance your model as you wish.
+
+When the model configuration is complete, select all relevant parts
+which you want to have visible in Stellarium (click on the lines in
+the outline view containing the object names to light them up gray,
+then Rightclick-Select, so that the triangle (mesh) icon has a colored
+background circle) and press \key{\ctrl+J} to optionally join them,
+then export to a single OBJ \menu{File>Export>Wavefront .obj}. In the
+export options, apply ``Selection Only'', and ``-Y Forward'' and ``Z
+Up''%
 \footnote{https://blender.stackexchange.com/questions/3352/merging-multiple-obj-files}.
 
 Verify the new model loads correctly, e.g.\ in \program{Meshlab}\footnote{\url{https://www.meshlab.net/}}!
