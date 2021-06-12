@@ -19,29 +19,53 @@
 #include "Telescope.hpp"
 
 #include <QDebug>
-#include <QMetaProperty>
 #include <QSettings>
 
-Telescope::Telescope(QObject * parent)
-	: QObject(parent)
+Telescope::Telescope()
+	: m_diameter(0.)
+	, m_focalLength(0.)
+	, m_hFlipped(false)
+	, m_vFlipped(false)
+	, m_equatorial(false)
 {
 }
 
-void Telescope::initFromSettings(QSettings * theSettings, int telescopeIndex)
+Telescope::Telescope(const QObject& other)
+	: m_name(other.property("name").toString())
+	, m_diameter(other.property("diameter").toDouble())
+	, m_focalLength(other.property("focalLength").toDouble())
+	, m_hFlipped(other.property("hFlipped").toBool())
+	, m_vFlipped(other.property("vFlipped").toBool())
+	, m_equatorial(other.property("equatorial").toBool())
 {
-	QString     prefix    = "telescope/" + QVariant(telescopeIndex).toString() + "/";
-
-	this->setName(theSettings->value(prefix + "name", "").toString());
-	this->setFocalLength(theSettings->value(prefix + "focalLength", "0").toDouble());
-	this->setDiameter(theSettings->value(prefix + "diameter", "0").toDouble());
-	this->setHFlipped(theSettings->value(prefix + "hFlip").toBool());
-	this->setVFlipped(theSettings->value(prefix + "vFlip").toBool());
-	this->setEquatorial(theSettings->value(prefix + "equatorial").toBool());
 }
-/* ****************************************************************************************************************** */
-// MARK: - Accessors & Mutators
-/* ****************************************************************************************************************** */
-auto Telescope::name() const -> QString
+
+Telescope::~Telescope()
+{
+}
+
+static QMap<int, QString> mapping;
+QMap<int, QString> Telescope::propertyMap()
+{
+	if(mapping.isEmpty()) {
+		mapping = QMap<int, QString>();
+		mapping[0] = "name";
+		mapping[1] = "diameter";
+		mapping[2] = "focalLength";
+		mapping[3] = "hFlipped";
+		mapping[4] = "vFlipped";
+		mapping[5] = "equatorial";
+	}
+	return mapping;
+}
+
+/* ********************************************************************* */
+#if 0
+#pragma mark -
+#pragma mark Accessors & Mutators
+#endif
+/* ********************************************************************* */
+const QString Telescope::name() const
 {
 	return m_name;
 }
@@ -51,7 +75,7 @@ void Telescope::setName(QString theValue)
 	m_name = theValue;
 }
 
-auto Telescope::focalLength() const -> double
+double Telescope::focalLength() const
 {
 	return m_focalLength;
 }
@@ -61,7 +85,7 @@ void Telescope::setFocalLength(double theValue)
 	m_focalLength = theValue;
 }
 
-auto Telescope::diameter() const -> double
+double Telescope::diameter() const
 {
 	return m_diameter;
 }
@@ -71,27 +95,27 @@ void Telescope::setDiameter(double theValue)
 	m_diameter = theValue;
 }
 
-auto Telescope::isHFlipped() const -> bool
+bool Telescope::isHFlipped() const
 {
-	return m_flippedHorizontally;
+	return m_hFlipped;
 }
 
 void Telescope::setHFlipped(bool flipped)
 {
-	m_flippedHorizontally = flipped;
+	m_hFlipped = flipped;
 }
 
-auto Telescope::isVFlipped() const -> bool
+bool Telescope::isVFlipped() const
 {
-	return m_flippedVertically;
+	return m_vFlipped;
 }
 
 void Telescope::setVFlipped(bool flipped)
 {
-	m_flippedVertically = flipped;
+	m_vFlipped = flipped;
 }
 
-auto Telescope::isEquatorial() const -> bool
+bool Telescope::isEquatorial() const
 {
 	return m_equatorial;
 }
@@ -101,7 +125,7 @@ void Telescope::setEquatorial(bool eq)
 	m_equatorial = eq;
 }
 
-void Telescope::writeToSettings(QSettings * settings, const int index) const
+void Telescope::writeToSettings(QSettings * settings, const int index)
 {
 	QString prefix = "telescope/" + QVariant(index).toString() + "/";
 	settings->setValue(prefix + "name", this->name());
@@ -112,38 +136,34 @@ void Telescope::writeToSettings(QSettings * settings, const int index) const
 	settings->setValue(prefix + "equatorial", this->isEquatorial());
 }
 
-/* ****************************************************************************************************************** */
-// MARK: - Static Methods
-/* ****************************************************************************************************************** */
-auto Telescope::propertyMap() -> QMap<int, QString>
+/* ********************************************************************* */
+#if 0
+#pragma mark -
+#pragma mark Static Methods
+#endif
+/* ********************************************************************* */
+
+Telescope* Telescope::telescopeFromSettings(QSettings* theSettings, int telescopeIndex)
 {
-	static const auto mapping =
-			QMap<int, QString>{ { 0, QLatin1String("name") },        { 1, QLatin1String("diameter") },
-					    { 2, QLatin1String("focalLength") }, { 3, QLatin1String("hFlipped") },
-					    { 4, QLatin1String("vFlipped") },    { 5, QLatin1String("equatorial") } };
-	return mapping;
+	Telescope* telescope = new Telescope();
+	QString prefix = "telescope/" + QVariant(telescopeIndex).toString() + "/";
+	
+	telescope->setName(theSettings->value(prefix + "name", "").toString());
+	telescope->setFocalLength(theSettings->value(prefix + "focalLength", "0").toDouble());
+	telescope->setDiameter(theSettings->value(prefix + "diameter", "0").toDouble());
+	telescope->setHFlipped(theSettings->value(prefix + "hFlip").toBool());
+	telescope->setVFlipped(theSettings->value(prefix + "vFlip").toBool());
+	telescope->setEquatorial(theSettings->value(prefix + "equatorial").toBool());
+	return telescope;
 }
-
-/* ****************************************************************************************************************** */
-// MARK: - Operators
-/* ****************************************************************************************************************** */
-auto operator<<(QDebug debug, const Telescope & telescope) -> QDebug
+Telescope* Telescope::telescopeModel()
 {
-	return debug.maybeSpace() << &telescope;
-}
-
-auto operator<<(QDebug debug, const Telescope * telescope) -> QDebug
-{
-	QDebugStateSaver    saver(debug);
-
-	const QMetaObject * metaObject = telescope->metaObject();
-	debug.nospace() << "Telescope(";
-	int count = metaObject->propertyCount();
-	for (int i = 0; i < count; ++i) {
-		QMetaProperty metaProperty = metaObject->property(i);
-		const char *  name         = metaProperty.name();
-		debug.nospace() << name << ":" << telescope->property(name);
-	}
-	debug.nospace() << ")";
-	return debug.maybeSpace();
+	Telescope* model = new Telescope();
+	model->setName("My Telescope");
+	model->setDiameter(80);
+	model->setFocalLength(500);
+	model->setHFlipped(true);
+	model->setVFlipped(true);
+	model->setEquatorial(true);
+	return model;
 }

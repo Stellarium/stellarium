@@ -16,32 +16,26 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#pragma once
+#ifndef CCD_HPP
+#define CCD_HPP
 
-#include "OcularsConfig.hpp"
-
-#include <QExplicitlySharedDataPointer>
 #include <QObject>
-#include <QSettings>
 #include <QString>
-#include <QtGlobal>
+#include <QSettings>
 
-class Lens;
 class Telescope;
+class Lens;
 
 //! @ingroup oculars
 class CCD : public QObject
 {
 	Q_OBJECT
-#if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)
-	Q_DISABLE_COPY_MOVE(CCD)
-#endif
 	Q_PROPERTY(QString name READ name WRITE setName)
 	Q_PROPERTY(int resolutionX READ resolutionX WRITE setResolutionX)
 	Q_PROPERTY(int resolutionY READ resolutionY WRITE setResolutionY)
 	Q_PROPERTY(double chipWidth READ chipWidth WRITE setChipWidth)
 	Q_PROPERTY(double chipHeight READ chipHeight WRITE setChipHeight)
-	Q_PROPERTY(double rotationAngle READ rotationAngle WRITE setRotationAngle)
+	Q_PROPERTY(double chipRotAngle READ chipRotAngle WRITE setChipRotAngle)
 	Q_PROPERTY(int binningX READ binningX WRITE setBinningX)
 	Q_PROPERTY(int binningY READ binningY WRITE setBinningY)
 	Q_PROPERTY(double hasOAG READ hasOAG WRITE setHasOAG)
@@ -51,71 +45,80 @@ class CCD : public QObject
 	Q_PROPERTY(double prismPosAngle READ prismPosAngle WRITE setPrismPosAngle)
 
 public:
-	/// Creates a new instance of CCD.
-	//! The newly created instance will have values initialized to represent a usable CCD model.
-	Q_INVOKABLE explicit CCD(QObject * parent = nullptr);
-	~CCD() override = default;
+	CCD();
+	Q_INVOKABLE CCD(const QObject& other);
+	virtual ~CCD();
+	static CCD* ccdFromSettings(QSettings* settings, int ccdIndex);
+	void writeToSettings(QSettings * settings, const int index);
+	static CCD* ccdModel();
 
-	void        initFromSettings(QSettings * settings, int ccdIndex);
-	void        writeToSettings(QSettings * settings, int index) const;
-
-	auto        name() const -> QString;
-	void        setName(QString name);
-	auto        resolutionX() const -> int;
-	void        setResolutionX(int resolution);
-	auto        resolutionY() const -> int;
-	void        setResolutionY(int resolution);
-	auto        chipWidth() const -> double;
-	void        setChipWidth(double width);
-	auto        chipHeight() const -> double;
-	void        setChipHeight(double height);
-	auto        rotationAngle() const -> double;
-	void        setRotationAngle(double angle);
-	auto        binningX() const -> int;
-	void        setBinningX(int binning);
-	auto        binningY() const -> int;
-	void        setBinningY(int binning);
-	auto        hasOAG() const -> bool;
-	void        setHasOAG(bool oag);
-	auto        prismDistance() const -> double;
-	void        setPrismDistance(double distance);
-	auto        prismHeight() const -> double;
-	void        setPrismHeight(double height);
-	auto        prismWidth() const -> double;
-	void        setPrismWidth(double width);
-	auto        prismPosAngle() const -> double;
-	void        setPrismPosAngle(double angle);
+	QString name() const;
+	void setName(QString name);
+	int getCCDID();
+	int resolutionX() const;
+	void setResolutionX(int resolution);
+	int resolutionY() const;
+	void setResolutionY(int resolution);
+	double chipWidth() const;
+	void setChipWidth(double width);
+	double chipHeight() const;
+	void setChipHeight(double height);
+	double chipRotAngle() const;
+	void setChipRotAngle(double angle);
+	int binningX() const;
+	void setBinningX(int binning);
+	int binningY() const;
+	void setBinningY(int binning);
+	bool hasOAG() const;
+	void setHasOAG(bool oag);
+	double prismDistance() const;
+	void setPrismDistance(double distance);
+	double prismHeight() const;
+	void setPrismHeight(double height);
+	double prismWidth() const;
+	void setPrismWidth(double width);
+	double prismPosAngle() const;
+	void setPrismPosAngle(double angle);	
 
 	/**
-    * The formula for this calculation comes from the Yerkes observatory.
-    * fov degrees = 2PI/360degrees * chipDimension mm / telescope FL mm
-    */
-	auto        getActualFOVx(Telescope * telescope, Lens * lens) const -> double;
-	auto        getActualFOVy(Telescope * telescope, Lens * lens) const -> double;
+	  * The formula for this calculation comes from the Yerkes observatory.
+	  * fov degrees = 2PI/360degrees * chipDimension mm / telescope FL mm
+	  */
+	double getActualFOVx(Telescope *telescope, Lens *lens) const;
+	double getActualFOVy(Telescope *telescope, Lens *lens) const;
 	//! focuser size in inches
-	static auto getFocuserFOV(Telescope * telescope, Lens * lens, double focuserSize) -> double;
-	auto        getInnerOAGRadius(Telescope * telescope, Lens * lens) const -> double;
-	auto        getOuterOAGRadius(Telescope * telescope, Lens * lens) const -> double;
-	auto        getOAGActualFOVx(Telescope * telescope, Lens * lens) const -> double;
-	static auto propertyMap() -> QMap<int, QString>;
-
+	double getFocuserFOV(Telescope *telescope, Lens *lens, double focuserSize) const;
+	double getInnerOAGRadius(Telescope *telescope, Lens *lens) const;
+	double getOuterOAGRadius(Telescope *telescope, Lens *lens) const;
+	double getOAGActualFOVx(Telescope *telescope, Lens *lens) const;
+	QMap<int, QString> propertyMap();
 private:
-	int     m_binningX{ 1 };
-	int     m_binningY{ 1 };
-	double  m_chipWidth{ CCDDefaultChipWidth };
-	double  m_chipHeight{ CCDDefaultChipHeigth };
-	QString m_name{ "New CCD" };
-	bool    m_oagEquipped{ false };
-	double  m_oagPrismHeight{ 0.0 };
-	double  m_oagPrismWidth{ 0.0 };
-	double  m_oagPrismDistance{ 0.0 };
-	double  m_oagPrismPositionAngle{ 0.0 }; // degrees
-	int     m_resolutionX{ CCDDefaultResolutionX };
-	int     m_resolutionY{ CCDDefaultResolutionY };
-	double  m_rotationAngle{ 0.0 }; // degrees
+	QString m_name;
+	//! total resolution width in pixels
+	int m_resolutionX;
+	//! total resolution height in pixels
+	int m_resolutionY;
+	//! chip width in millimeters
+	double m_chipWidth;
+	//! chip height in millimeters
+	double m_chipHeight;
+	//! chip rotation angle around its axis (degrees)
+	double m_chipRotAngle;
+	//! Binning for axes X
+	int m_binningX;
+	//! Binning for axes Y
+	int m_binningY;
+	//! Show off axis guider view
+	bool m_has_oag;
+	//! OAG prism height (milimeters)
+	double m_oag_prismHeight;
+	//! OAG prism width (milimeters)
+	double m_oag_prismWidth;
+	//! OAG prisrm distance from the axis center (mimileters)
+	double m_oag_prismDistance;
+	//! OAG prisrm position angle (degrees)
+	double m_oag_prismPosAngle;	
 };
 
-auto operator<<(QDebug debug, const CCD & ccd) -> QDebug;
-auto operator<<(QDebug debug, const CCD * ccd) -> QDebug;
 
-Q_DECLARE_METATYPE(CCD *);
+#endif /* CCD_HPP */

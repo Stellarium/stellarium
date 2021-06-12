@@ -15,11 +15,11 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
-
-#pragma once
+ 
+#ifndef PROPERTYBASEDTABLEMODEL_H
+#define PROPERTYBASEDTABLEMODEL_H
 
 #include <QAbstractTableModel>
-#include <QtGlobal>
 
 //! This class provides a table model for just about any QObject.  It it nice, as a table model implementation per
 //! class is not required.  It does this by using the Qt meta object system.
@@ -36,38 +36,36 @@
 class PropertyBasedTableModel : public QAbstractTableModel
 {
 	Q_OBJECT
-#if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)
-	Q_DISABLE_COPY_MOVE(PropertyBasedTableModel)
-#endif
 public:
-	explicit PropertyBasedTableModel(QObject * parent = Q_NULLPTR);
-	~PropertyBasedTableModel() override;
+	PropertyBasedTableModel(QObject *parent = Q_NULLPTR);
+	virtual ~PropertyBasedTableModel();
 
 	//! Initializes this instance for use.  If you do not call this method, and use this class, your app will crash.
-	//! @param modelData the domain objects you want to model.  They should all be the same type.  This isnstance does
-	//! not
-	//!			take ownership of modelData, or the elements in it.
-	//! @param model an instance of the same type as in modelData, this instance is used to create new instances of your
+	//! @param content the domain objects you want to model.  They should all be the same type.  This isnstance does not
+	//!			take ownership of content, or the elements in it.
+	//! @param model an instance of the same type as in content, this instance is used to create new instances of your
 	//!			domain objects by calling the model objects copy constructor.  This instance takes ownership of model.
-	//! @param properties mas an integer positional index to the property.
-	void init(QList<QObject *> * modelData, QObject * model, const QMap<int, QString> & properties);
+	//! @param mappings mas an integer positional index to the property.
+	void init(QList<QObject *>* content, QObject *model, QMap<int, QString> mappings);
 
-	// Over-rides from QAbstractTableModel
-	auto data(const QModelIndex & item, int role = Qt::DisplayRole) const -> QVariant override;
+	//Over-rides from QAbstractTableModel
+	virtual QVariant data(const QModelIndex &item, int role = Qt::DisplayRole) const;
 
-	auto rowCount(const QModelIndex & parent = QModelIndex()) const -> int override;
-	auto columnCount(const QModelIndex & parent = QModelIndex()) const -> int override;
+	virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
+	virtual int columnCount(const QModelIndex &parent = QModelIndex()) const;
 
-	auto flags(const QModelIndex & index) const -> Qt::ItemFlags override;
-	auto insertRows(int position, int rows, const QModelIndex & index = QModelIndex()) -> bool override;
-	auto setData(const QModelIndex & index, const QVariant & value, int role = Qt::EditRole) -> bool override;
-	auto removeRows(int position, int rows, const QModelIndex & index = QModelIndex()) -> bool override;
+	virtual Qt::ItemFlags flags(const QModelIndex &index) const;
+	virtual bool insertRows(int position, int rows, const QModelIndex &index=QModelIndex());
+	virtual bool setData(const QModelIndex &index, const QVariant &value, int role=Qt::EditRole);
+	virtual bool removeRows(int position, int rows, const QModelIndex &index=QModelIndex());
 
 	void moveRowUp(int position);
 	void moveRowDown(int position);
 
 private:
-	QList<QObject *> * content;
+	QList<QObject *>* content;
 	QMap<int, QString> mappings;
-	QObject *          modelObject;
+	QObject* modelObject;
 };
+
+#endif // PROPERTYBASEDTABLEMODEL_H
