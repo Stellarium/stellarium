@@ -116,7 +116,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		QStringList designations;
 		if (!sciName.isEmpty())
 			designations.append(sciName);
-		if (!varSciName.isEmpty() && varSciName!=sciName)
+		if (!varSciName.isEmpty() && !sciName.contains(varSciName, Qt::CaseInsensitive))
 			designations.append(varSciName);
 
 		QString hip, hipq;
@@ -137,7 +137,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		if (!crossIndexData.isEmpty())
 			designations.append(crossIndexData);
 
-		if (!wdsSciName.isEmpty() && wdsSciName!=sciName)
+		if (!wdsSciName.isEmpty() && !sciName.contains(wdsSciName, Qt::CaseInsensitive))
 			designations.append(wdsSciName);
 
 		QString designationsList = designations.join(" - ");
