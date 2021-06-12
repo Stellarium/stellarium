@@ -492,6 +492,7 @@ void OcularDialog::createDialogContent()
 	connect(ui->semiTransparencyCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateGuiOptions()));
 	connect(ui->checkBoxShowFocuserOverlay, SIGNAL(toggled(bool)), this, SLOT(updateGuiOptions()));
 	connect(ui->checkBoxShowCcdCropOverlay, SIGNAL(toggled(bool)), this, SLOT(updateGuiOptions()));
+	setLabelsDescriptionText(ui->binocularsCheckBox->isChecked());
 	updateGuiOptions();
 }
 
