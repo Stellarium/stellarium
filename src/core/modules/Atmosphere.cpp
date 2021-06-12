@@ -27,6 +27,7 @@
 #include "StelFileMgr.hpp"
 #include "Dithering.hpp"
 
+#include <QFile>
 #include <QDebug>
 #include <QSettings>
 #include <QOpenGLShaderProgram>
@@ -48,19 +49,16 @@ Atmosphere::Atmosphere(void)
 {
 	setFadeDuration(1.5f);
 
-	QOpenGLShader toneReproShader(QOpenGLShader::Vertex);
-	if (!toneReproShader.compileSourceFile(":/shaders/xyYToRGB.glsl"))
-	{
-		qFatal("Error while compiling atmosphere vertex shader: %s", toneReproShader.log().toLatin1().constData());
-	}
-	if (!toneReproShader.log().isEmpty())
-	{
-		qWarning() << "Warnings while compiling atmosphere Tone Reproducer shader: " << toneReproShader.log();
-	}
 	QOpenGLShader vShader(QOpenGLShader::Vertex);
-	if (!vShader.compileSourceFile(":/shaders/atmosphere.vert"))
 	{
-		qFatal("Error while compiling atmosphere vertex shader: %s", vShader.log().toLatin1().constData());
+		QFile vert(":/shaders/atmosphere.vert");
+		if(!vert.open(QFile::ReadOnly))
+			qFatal("Failed to open atmosphere vertex shader source");
+		QFile toneRepro(":/shaders/xyYToRGB.glsl");
+		if(!toneRepro.open(QFile::ReadOnly))
+			qFatal("Failed to open ToneReproducer shader source");
+		if (!vShader.compileSourceCode(vert.readAll()+toneRepro.readAll()))
+			qFatal("Error while compiling atmosphere vertex shader: %s", vShader.log().toLatin1().constData());
 	}
 	if (!vShader.log().isEmpty())
 	{
@@ -83,7 +81,6 @@ Atmosphere::Atmosphere(void)
 	}
 	atmoShaderProgram = new QOpenGLShaderProgram();
 	atmoShaderProgram->addShader(&vShader);
-	atmoShaderProgram->addShader(&toneReproShader);
 	atmoShaderProgram->addShader(&fShader);
 	StelPainter::linkProg(atmoShaderProgram, "atmosphere");
 

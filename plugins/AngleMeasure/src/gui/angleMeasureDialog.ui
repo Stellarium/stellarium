@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>530</width>
-    <height>409</height>
+    <width>836</width>
+    <height>511</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -354,9 +354,9 @@
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="formatBox">
+        <widget class="QGroupBox" name="optionsBox">
          <property name="title">
-          <string>Format</string>
+          <string>Options</string>
          </property>
          <property name="flat">
           <bool>true</bool>
@@ -378,6 +378,16 @@
            <widget class="QCheckBox" name="useDmsFormatCheckBox">
             <property name="text">
              <string>Use dms format for angles</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="followCursorCheckBox">
+            <property name="toolTip">
+             <string>When set, measurements are shown near the end of the line instead of its starting point.</string>
+            </property>
+            <property name="text">
+             <string>Show measurements near mouse</string>
             </property>
            </widget>
           </item>
@@ -444,6 +454,23 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>tabs</tabstop>
+  <tabstop>showEquatorial_GroupBox</tabstop>
+  <tabstop>showPositionAngleCheckBox</tabstop>
+  <tabstop>equatorialTextColorToolButton</tabstop>
+  <tabstop>equatorialLineColorToolButton</tabstop>
+  <tabstop>showHorizontal_GroupBox</tabstop>
+  <tabstop>showPositionAngleHorizontalCheckBox</tabstop>
+  <tabstop>horizontalTextColorToolButton</tabstop>
+  <tabstop>horizontalLineColorToolButton</tabstop>
+  <tabstop>azAltStartOnSkyCheckBox</tabstop>
+  <tabstop>azAltEndOnSkyCheckBox</tabstop>
+  <tabstop>useDmsFormatCheckBox</tabstop>
+  <tabstop>followCursorCheckBox</tabstop>
+  <tabstop>restoreDefaultsButton</tabstop>
+  <tabstop>aboutTextBrowser</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

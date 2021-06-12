@@ -52,6 +52,7 @@ public:
 
 	virtual ~Calendar() {}
 
+public slots:
 	//! Translate e.g. stringlists of part names
 	virtual void retranslate() = 0;
 
@@ -80,6 +81,7 @@ public:
 	//! get a formatted complete string for a date. The default implementation just concatenates all strings from getDateStrings() with a space in between.
 	virtual QString getFormattedDateString() const;
 
+public:
 	constexpr static const double J2000=2451545.0;
 	constexpr static const double jdEpoch=-1721424.5;
 	constexpr static const double mjdEpoch=678576.0;

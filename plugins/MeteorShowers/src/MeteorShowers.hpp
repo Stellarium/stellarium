@@ -38,6 +38,7 @@ public:
 	//! @struct SearchResult
 	struct SearchResult
 	{
+		QString code;
 		QString name;
 		QString type;
 		QDate peak;

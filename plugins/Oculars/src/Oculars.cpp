@@ -338,8 +338,10 @@ void Oculars::deinit()
 	//disconnect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 	disconnect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslateGui()));
 
-	cardinalsNormalTexture.clear();
-	cardinalsMirroredTexture.clear();
+	protractorTexture.clear();
+	protractorFlipVTexture.clear();
+	protractorFlipHTexture.clear();
+	protractorFlipHVTexture.clear();
 }
 
 //! Draw any parts on the screen which are for our module
@@ -641,8 +643,10 @@ void Oculars::init()
 		ready = false;
 	}
 
-	cardinalsNormalTexture = StelApp::getInstance().getTextureManager().createTexture(":/ocular/cardinals.png");
-	cardinalsMirroredTexture = StelApp::getInstance().getTextureManager().createTexture(":/ocular/cardinals-mirrored.png");	
+	protractorTexture = StelApp::getInstance().getTextureManager().createTexture(":/ocular/Protractor.png");
+	protractorFlipHTexture = StelApp::getInstance().getTextureManager().createTexture(":/ocular/ProtractorFlipH.png");
+	protractorFlipVTexture = StelApp::getInstance().getTextureManager().createTexture(":/ocular/ProtractorFlipV.png");
+	protractorFlipHVTexture = StelApp::getInstance().getTextureManager().createTexture(":/ocular/ProtractorFlipHV.png");
 	// enforce check existence of reticle for the current eyepiece
 	updateOcularReticle();
 
@@ -1957,10 +1961,16 @@ void Oculars::paintOcularMask(const StelCore *core)
 			polarAngle -= 90.0;
 
 		painter.setColor(lineColor);
-		if (core->getFlipHorz() && !core->getFlipVert())
-			cardinalsMirroredTexture->bind();
+		bool flipH = core->getFlipHorz();
+		bool flipV = core->getFlipVert();
+		if (flipH && flipV)
+			protractorFlipHVTexture->bind();
+		else if (flipH && !flipV)
+			protractorFlipHTexture->bind();
+		else if (!flipH && flipV)
+			protractorFlipVTexture->bind();
 		else
-			cardinalsNormalTexture->bind();
+			protractorTexture->bind();
 		painter.drawSprite2dMode(centerScreen[0], centerScreen[1], static_cast<float>(inner / params.devicePixelsPerPixel), static_cast<float>(-polarAngle));		
 	}
 }

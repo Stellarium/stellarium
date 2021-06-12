@@ -267,6 +267,15 @@ void StelDialog::connectDoubleProperty(QDoubleSpinBox *spinBox, const QString &p
 	new QDoubleSpinBoxStelPropertyConnectionHelper(prop,spinBox);
 }
 
+void StelDialog::connectDoubleProperty(AngleSpinBox *spinBox, const QString &propName)
+{
+	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propName);
+	Q_ASSERT_X(prop,"StelDialog", "StelProperty does not exist");
+
+	//use a proxy for the connection
+	new AngleSpinBoxStelPropertyConnectionHelper(prop,spinBox);
+}
+
 void StelDialog::connectDoubleProperty(QSlider *slider, const QString &propName,double minValue, double maxValue)
 {
 	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propName);
@@ -283,6 +292,15 @@ void StelDialog::connectStringProperty(QComboBox *comboBox, const QString &propN
 
 	//use a proxy for the connection
 	new QComboBoxStelStringPropertyConnectionHelper(prop,comboBox);
+}
+
+void StelDialog::connectStringProperty(QLineEdit *lineEdit, const QString &propName)
+{
+	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propName);
+	Q_ASSERT_X(prop,"StelDialog", "StelProperty does not exist");
+
+	//use a proxy for the connection
+	new QLineEditStelPropertyConnectionHelper(prop,lineEdit);
 }
 
 void StelDialog::connectBoolProperty(QAbstractButton *checkBox, const QString &propName)
@@ -303,7 +321,7 @@ void StelDialog::connectBoolProperty(QGroupBox *checkBox, const QString &propNam
 
 bool StelDialog::askConfirmation()
 {
-    return (QMessageBox::warning(&StelMainView::getInstance(), q_("Attention!"), q_("Are you sure? This will delete your customized data."), QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes);
+	return (QMessageBox::warning(&StelMainView::getInstance(), q_("Attention!"), q_("Are you sure? This will delete your customized data."), QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes);
 }
 
 void StelDialog::connectColorButton(QToolButton *toolButton, QString propertyName, QString iniName, QString moduleName)
@@ -345,8 +363,8 @@ void StelDialog::askColor()
 		return;
 	}
 	Vec3d vColor = StelApp::getInstance().getStelPropertyManager()->getProperty(propName)->getValue().value<Vec3f>().toVec3d();
-    QColor color = vColor.toQColor();
-    QColor c = QColorDialog::getColor(color, &StelMainView::getInstance() , q_(static_cast<QToolButton*>(QObject::sender())->toolTip()));
+	QColor color = vColor.toQColor();
+	QColor c = QColorDialog::getColor(color, &StelMainView::getInstance() , q_(static_cast<QToolButton*>(QObject::sender())->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3d(c.redF(), c.greenF(), c.blueF());
@@ -552,6 +570,28 @@ void QDoubleSpinBoxStelPropertyConnectionHelper::onPropertyChanged(const QVarian
 	spin->setValue(value.toDouble());
 	spin->blockSignals(b);
 }
+
+AngleSpinBoxStelPropertyConnectionHelper::AngleSpinBoxStelPropertyConnectionHelper(StelProperty *prop, AngleSpinBox *spin)
+	:StelPropertyProxy(prop,spin), spin(spin)
+{
+	QVariant val = prop->getValue();
+	bool ok = val.canConvert<double>();
+	Q_ASSERT_X(ok,"AngleSpinBoxStelPropertyConnectionHelper","Can not convert to double datatype");
+	Q_UNUSED(ok);
+	onPropertyChanged(val);
+
+	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
+	connect(spin, static_cast<void (AngleSpinBox::*)(double)>(&AngleSpinBox::valueChangedDeg),prop,&StelProperty::setValue);
+}
+
+void AngleSpinBoxStelPropertyConnectionHelper::onPropertyChanged(const QVariant &value)
+{
+	//block signals to prevent sending the valueChanged signal, changing the property again
+	bool b = spin->blockSignals(true);
+	spin->setDegrees(value.toDouble());
+	spin->blockSignals(b);
+}
+
 
 QSliderStelPropertyConnectionHelper::QSliderStelPropertyConnectionHelper(StelProperty *prop, double minValue, double maxValue, QSlider *slider)
 	: StelPropertyProxy(prop,slider),slider(slider),minValue(minValue),maxValue(maxValue)

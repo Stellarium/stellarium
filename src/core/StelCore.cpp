@@ -2050,7 +2050,7 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 			// Morrison & Stephenson (1982) algorithm for DeltaT (used by RedShift)
 			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByMorrisonStephenson1982;
-			// FIXME: This is correct valid range?
+			// FIXME: Is it valid range?
 			deltaTstart	= -4000;
 			deltaTfinish	= 2800;
 			break;
@@ -2462,7 +2462,7 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRangeDescription(const double JD
 // TODO2: This could be moved to the SkyDrawer or even some GUI class, as it is used to decide a GUI thing.
 bool StelCore::isBrightDaylight() const
 {
-	if (propMgr->getStelPropertyValue("Oculars.enableOcular", true).toBool())
+	if (propMgr->getStelPropertyValue("Oculars.ocularDisplayed", true).toBool())
 		return false;
 	SolarSystem* ssys = GETSTELMODULE(SolarSystem);
 	if (!ssys->getFlagPlanets())

@@ -665,15 +665,15 @@ void BottomStelBar::updateText(bool updatePos)
 	if (getFlagShowTime())
 	{
 		if (getFlagShowTz())
-			newDateInfo = QString("%1 %2 %3").arg(locmgr.getPrintableDateLocal(jd)).arg(locmgr.getPrintableTimeLocal(jd)).arg(tz);
+			newDateInfo = QString("%1 %2 %3").arg(locmgr.getPrintableDateLocal(jd), locmgr.getPrintableTimeLocal(jd), tz);
 		else
-			newDateInfo = QString("%1 %2").arg(locmgr.getPrintableDateLocal(jd)).arg(locmgr.getPrintableTimeLocal(jd));
+			newDateInfo = QString("%1 %2").arg(locmgr.getPrintableDateLocal(jd), locmgr.getPrintableTimeLocal(jd));
 	}
-	QString newDateAppx = QString("JD %1").arg(jd, 0, 'f', 6);
+	QString newDateAppx = QString("JD %1").arg(jd, 0, 'f', 5); // up to seconds
 	if (getFlagTimeJd())
 	{
 		newDateAppx = newDateInfo;
-		newDateInfo = QString("JD %1").arg(jd, 0, 'f', 6);
+		newDateInfo = QString("JD %1").arg(jd, 0, 'f', 5); // up to seconds
 	}
 
 	QString planetName = core->getCurrentLocation().planetName;
@@ -690,7 +690,7 @@ void BottomStelBar::updateText(bool updatePos)
 	if (tzName.contains("system_default") || (tzName.isEmpty() && planetName=="Earth"))
 		tzName = q_("System default");
 
-	QString currTZ = QString("%1: %2").arg(q_("Time zone")).arg(tzName);
+	QString currTZ = QString("%1: %2").arg(q_("Time zone"), tzName);
 
 	if (tzName.contains("LMST") || tzName.contains("auto") || (planetName=="Earth" && jd<=StelCore::TZ_ERA_BEGINNING && !core->getUseCustomTimeZone()) )
 		currTZ = q_("Local Mean Solar Time");
@@ -747,10 +747,10 @@ void BottomStelBar::updateText(bool updatePos)
 		// or just to the used ephemeris. This has to be read as "Selected DeltaT formula used, but with the ephemeris's nDot applied it corrects DeltaT to..."
 		float ndot=( (EphemWrapper::use_de430(jd) || EphemWrapper::use_de431(jd)) ? -25.8f : -23.8946f );
 
-		datetime->setToolTip(QString("<p style='white-space:pre'>%1T = %2 [n%8 @ %3\"/cy%4%5]<br>%6<br>%7<br>%9</p>").arg(QChar(0x0394)).arg(deltaTInfo).arg(QString::number(ndot, 'f', 4)).arg(QChar(0x00B2)).arg(sigmaInfo).arg(newDateAppx).arg(currTZ).arg(QChar(0x2032)).arg(timeRateInfo));
+		datetime->setToolTip(QString("<p style='white-space:pre'>%1T = %2 [n%8 @ %3\"/cy%4%5]<br>%6<br>%7<br>%9</p>").arg(QChar(0x0394), deltaTInfo, QString::number(ndot, 'f', 4), QChar(0x00B2), sigmaInfo, newDateAppx, currTZ, QChar(0x2032), timeRateInfo));
 	}
 	else
-		datetime->setToolTip(QString("<p style='white-space:pre'>%1<br>%2<br>%3</p>").arg(newDateAppx).arg(currTZ).arg(timeRateInfo));
+		datetime->setToolTip(QString("<p style='white-space:pre'>%1<br>%2<br>%3</p>").arg(newDateAppx, currTZ, timeRateInfo));
 
 	if (qApp->property("text_texture")==true) // CLI option -t given?
 	{
@@ -809,7 +809,7 @@ void BottomStelBar::updateText(bool updatePos)
 		if (newLocation.contains("->")) // a spaceship
 			location->setToolTip(QString());
 		else
-			location->setToolTip(QString("%1 %2; %3").arg(latStr).arg(lonStr).arg(rho));
+			location->setToolTip(QString("%1 %2; %3").arg(latStr, lonStr, rho));
 		if (qApp->property("text_texture")==true) // CLI option -t given?
 		{
 			locationPixmap->setPixmap(getTextPixmap(newLocation, location->font()));

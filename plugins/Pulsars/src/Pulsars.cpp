@@ -228,7 +228,7 @@ void Pulsars::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 	
-	for (const auto& pulsar : psr)
+	for (const auto& pulsar : qAsConst(psr))
 	{
 		if (pulsar && pulsar->initialized)
 			pulsar->draw(core, &painter);
@@ -261,7 +261,7 @@ void Pulsars::drawPointer(StelCore* core, StelPainter& painter)
 	}
 }
 
-QList<StelObjectP> Pulsars::searchAround(const Vec3d& av, double limitFov, const StelCore*) const
+QList<StelObjectP> Pulsars::searchAround(const Vec3d& av, double limitFov, const StelCore* core) const
 {
 	QList<StelObjectP> result;
 
@@ -277,7 +277,7 @@ QList<StelObjectP> Pulsars::searchAround(const Vec3d& av, double limitFov, const
 	{
 		if (pulsar->initialized)
 		{
-			equPos = pulsar->XYZ;
+			equPos = pulsar->getJ2000EquatorialPos(core);
 			equPos.normalize();
 			if (equPos.dot(v) >= cosLimFov)
 			{
@@ -317,7 +317,7 @@ StelObjectP Pulsars::searchByNameI18n(const QString& nameI18n) const
 	return Q_NULLPTR;
 }
 
-QStringList Pulsars::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
+QStringList Pulsars::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (flagShowPulsars && maxNbItem>0)

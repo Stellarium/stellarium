@@ -183,28 +183,28 @@ void OcularDialog::insertNewCCD()
 {
 	int count = ccdTableModel->rowCount();
 	ccdTableModel->insertRows(count, 1);
-	ui->ccdListView->setCurrentIndex(ccdTableModel->index(count - 1, 1));
+	ui->ccdListView->setCurrentIndex(ccdTableModel->index(count, 1));
 }
 
 void OcularDialog::insertNewOcular()
 {
 	int count = ocularTableModel->rowCount();
 	ocularTableModel->insertRows(count, 1);
-	ui->ocularListView->setCurrentIndex(ocularTableModel->index(count - 1, 1));
+	ui->ocularListView->setCurrentIndex(ocularTableModel->index(count, 1));
 }
 
 void OcularDialog::insertNewTelescope()
 {
 	int count = telescopeTableModel->rowCount();
 	telescopeTableModel->insertRows(count, 1);
-	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(count - 1, 1));
+	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(count, 1));
 }
 
 void OcularDialog::insertNewLens()
 {
 	int count = lensTableModel->rowCount();
 	lensTableModel->insertRows(count, 1);
-	ui->lensListView->setCurrentIndex(lensTableModel->index(count - 1, 1));
+	ui->lensListView->setCurrentIndex(lensTableModel->index(count, 1));
 }
 
 void OcularDialog::moveUpSelectedSensor()
@@ -492,6 +492,7 @@ void OcularDialog::createDialogContent()
 	connect(ui->semiTransparencyCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateGuiOptions()));
 	connect(ui->checkBoxShowFocuserOverlay, SIGNAL(toggled(bool)), this, SLOT(updateGuiOptions()));
 	connect(ui->checkBoxShowCcdCropOverlay, SIGNAL(toggled(bool)), this, SLOT(updateGuiOptions()));
+	setLabelsDescriptionText(ui->binocularsCheckBox->isChecked());
 	updateGuiOptions();
 }
 

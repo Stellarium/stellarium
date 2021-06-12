@@ -180,6 +180,8 @@ void AngleSpinBox::stepBy (int steps)
 	formatText();
 	lineEdit()->setCursorPosition(cursorPos);
 	emit(valueChanged());
+	emit(valueChangedDeg(valueDegrees()));
+	emit(valueChangedRad(valueRadians()));
 }
 
 QValidator::State AngleSpinBox::validate(QString& input, int& pos) const
@@ -195,6 +197,8 @@ void AngleSpinBox::clear()
 	radAngle = 0.0;
 	formatText();
 	emit(valueChanged());
+	emit(valueChangedDeg(valueDegrees()));
+	emit(valueChangedRad(valueRadians()));
 }
 
 QAbstractSpinBox::StepEnabled AngleSpinBox::stepEnabled() const
@@ -351,6 +355,8 @@ void AngleSpinBox::updateValue(void)
 
 	formatText();
 	emit(valueChanged());
+	emit(valueChangedDeg(valueDegrees()));
+	emit(valueChangedRad(valueRadians()));
 }
 
 void AngleSpinBox::setRadians(double radians)
@@ -367,6 +373,7 @@ void AngleSpinBox::setDegrees(double degrees)
 
 void AngleSpinBox::formatText(void)
 {
+	const int cursorPos=lineEdit()->cursorPosition();
 	switch (angleSpinBoxFormat)
 	{
 		case DMSLetters:
@@ -410,9 +417,7 @@ void AngleSpinBox::formatText(void)
 			}
 
 			// fix when we have tiny tiny tiny values.
-			if (s < ::pow(10.0, -1 * (decimalPlaces+1)))
-				s= 0.0;
-			else if (s < 0.0 && 0.0 - ::pow(10.0, -1 * (decimalPlaces+1)))
+			if (abs(s) < ::pow(10.0, -1 * (decimalPlaces+1)))
 				s= 0.0;
 
 			QString signInd = positivePrefix(currentPrefixType);
@@ -437,8 +442,8 @@ void AngleSpinBox::formatText(void)
 			angle = fmod(angle,2.0*M_PI);
 			if (angle < 0.0) angle += 2.0*M_PI; // range: [0..2.0*M_PI)
 			angle *= 12./M_PI;
-			h = (unsigned int)angle;
-			m = (unsigned int)((angle-h)*60);
+			h = static_cast<unsigned int>(angle);
+			m = static_cast<unsigned int>((angle-h)*60);
 			s = (angle-h)*3600.-60.*m;
 
 			// we may have seconds as 60 and one less minute...
@@ -456,9 +461,7 @@ void AngleSpinBox::formatText(void)
 			}
 
 			// fix when we have tiny tiny tiny values.
-			if (s < ::pow(10.0, -1 * (decimalPlaces+1)))
-				s= 0.0;
-			else if (s < 0.0 && 0.0 - ::pow(10.0, -1 * (decimalPlaces+1)))
+			if (abs(s) < ::pow(10.0, -1 * (decimalPlaces+1)))
 				s= 0.0;
 
 			if (angleSpinBoxFormat == HMSLetters)
@@ -493,5 +496,6 @@ void AngleSpinBox::formatText(void)
 			break;
 		}
 	}
+	lineEdit()->setCursorPosition(cursorPos);
 }
 

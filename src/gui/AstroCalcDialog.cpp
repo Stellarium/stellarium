@@ -510,15 +510,19 @@ void AstroCalcDialog::createDialogContent()
 	QString style = "QLabel { color: rgb(238, 238, 238); }";
 	ui->celestialPositionsTimeLabel->setStyleSheet(style);
 	ui->altVsTimeLabel->setStyleSheet(style);
+	//ui->altVsTimeTitle->setStyleSheet(style);
 	ui->aziVsTimeLabel->setStyleSheet(style);
+	//ui->aziVsTimeTitle->setStyleSheet(style);
 	ui->monthlyElevationLabel->setStyleSheet(style);
+	//ui->monthlyElevationTitle->setStyleSheet(style);
 	ui->graphsFirstLabel->setStyleSheet(style);	
 	ui->graphsSecondLabel->setStyleSheet(style);	
 	ui->graphsDurationLabel->setStyleSheet(style);
 	ui->graphsYearsLabel->setStyleSheet(style);
 	ui->angularDistanceNote->setStyleSheet(style);
 	ui->angularDistanceLimitLabel->setStyleSheet(style);	
-	ui->transitNotificationLabel->setStyleSheet(style);
+	//ui->angularDistanceTitle->setStyleSheet(style);
+	ui->transitNotificationLabel->setStyleSheet(style);	
 	style = "QCheckBox { color: rgb(238, 238, 238); }";
 	ui->sunAltitudeCheckBox->setStyleSheet(style);
 	ui->moonAltitudeCheckBox->setStyleSheet(style);
@@ -680,6 +684,7 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 		QList<double> aX, aY;
 
 		StelObjectP selectedObject = selectedObjects[0];
+		ui->aziVsTimeTitle->setText(selectedObject->getNameI18n());
 		double currentJD = core->getJD();
 		double shift = core->getUTCOffset(currentJD) / 24.0;
 		double noon = static_cast<int>(currentJD + shift);
@@ -859,7 +864,7 @@ void AstroCalcDialog::setCelestialPositionsHeaderNames()
 		// TRANSLATORS: separation, arc-seconds
 		positionsHeader << QString("%1, \"").arg(q_("Sep."));
 	}
-	else if (celType == 171)
+	else if (celType == 171 || celType == 173 || celType == 174)
 	{
 		// TRANSLATORS: period, days
 		positionsHeader << QString("%1, %2").arg(q_("Per."), qc_("d", "days"));
@@ -945,8 +950,8 @@ void AstroCalcDialog::populateCelestialCategoryList()
 		if (key.startsWith("StarMgr") && key.contains(":"))
 		{
 			kn = key.remove("StarMgr:").toInt();
-			if (kn>1 && kn<=4) // Original IDs: 2, 3, 4
-				category->addItem(q_(it.value()), QString::number(kn + 168)); // AstroCalc IDs: 170, 171, 172
+			if (kn>1 && kn<=6) // Original IDs: 2, 3, 4, 5, 6
+				category->addItem(q_(it.value()), QString::number(kn + 168)); // AstroCalc IDs: 170, 171, 172, 173, 174
 		}
 	}
 	category->addItem(q_("Deep-sky objects"), "169");
@@ -1156,7 +1161,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				break;
 		}
 
-		for (const auto& planet : planets)
+		for (const auto& planet : qAsConst(planets))
 		{
 			passByType = false;
 
@@ -1239,10 +1244,21 @@ void AstroCalcDialog::currentCelestialPositions()
 			celestialObjects = starMgr->getHipparcosDoubleStars();
 			sType = q_("double star");
 		}
-		else if (celTypeId == 171)
+		else if (celTypeId == 171 || celTypeId == 173 || celTypeId == 174)
 		{
 			// variable stars
-			celestialObjects = starMgr->getHipparcosVariableStars();
+			switch (celTypeId)
+			{
+				case 171:
+					celestialObjects = starMgr->getHipparcosVariableStars();
+					break;
+				case 173:
+					celestialObjects = starMgr->getHipparcosAlgolTypeStars();
+					break;
+				case 174:
+					celestialObjects = starMgr->getHipparcosClassicalCepheidsTypeStars();
+					break;
+			}
 			sType = q_("variable star");
 		}
 		else
@@ -1252,7 +1268,7 @@ void AstroCalcDialog::currentCelestialPositions()
 			sType = q_("star with high proper motion");
 		}
 
-		for (const auto& star : celestialObjects)
+		for (const auto& star : qAsConst(celestialObjects))
 		{
 			StelObjectP obj = star.firstKey();
 			if (obj->getVMagnitudeWithExtinction(core) <= mag && obj->isAboveRealHorizon(core))
@@ -1268,7 +1284,7 @@ void AstroCalcDialog::currentCelestialPositions()
 					extra = QString::number(wdsSep, 'f', 3); // arc-seconds
 					sToolTip = StelUtils::decDegToDmsStr(wdsSep / 3600.f);
 				}
-				else if (celTypeId == 171) // variable stars
+				else if (celTypeId == 171 || celTypeId == 173 || celTypeId == 174) // variable stars
 				{
 					if (star.value(obj) > 0.f)
 						extra = QString::number(star.value(obj), 'f', 5); // days
@@ -2451,22 +2467,25 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 	QVariant selectedGroupId = groups->itemData(index);
 
 	QString brLimit = QString::number(brightLimit, 'f', 1);
-	const QMap<QString, QString>itemsMap={
-		{q_("Latest selected object"), "-1"}, {q_("Solar system"), "0"}, {q_("Planets"), "1"}, {q_("Asteroids"), "2"}, {q_("Plutinos"), "3"}, {q_("Comets"), "4"},
-		{q_("Dwarf planets"), "5"},{q_("Cubewanos"), "6"},{q_("Scattered disc objects"), "7"},{q_("Oort cloud objects"), "8"},{q_("Sednoids"), "9"},
-		{q_("Bright stars (<%1 mag)").arg(QString::number(brightLimit - 5.0f, 'f', 1)), "10"},{q_("Bright double stars (<%1 mag)").arg(QString::number(brightLimit - 5.0f, 'f', 1)), "11"},
-		{q_("Bright variable stars (<%1 mag)").arg(QString::number(brightLimit - 5.0f, 'f', 1)), "12"},{q_("Bright star clusters (<%1 mag)").arg(brLimit), "13"},
-		{q_("Planetary nebulae (<%1 mag)").arg(brLimit), "14"},{q_("Bright nebulae (<%1 mag)").arg(brLimit), "15"},{q_("Dark nebulae"), "16"},
-		{q_("Bright galaxies (<%1 mag)").arg(brLimit), "17"},{q_("Symbiotic stars"), "18"},{q_("Emission-line stars"), "19"},{q_("Interstellar objects"), "20"},
-		{q_("Planets and Sun"), "21"},{q_("Sun, planets and moons"), "22"},{q_("Bright Solar system objects (<%1 mag)").arg(QString::number(brightLimit + 2.0f, 'f', 1)), "23"},
-		{q_("Solar system objects: minor bodies"), "24"}
+	const QMap<QString, int>itemsMap={
+		{q_("Latest selected object"), PHCLatestSelectedObject}, {q_("Solar system"), PHCSolarSystem}, {q_("Planets"), PHCPlanets}, {q_("Asteroids"), PHCAsteroids},
+		{q_("Plutinos"), PHCPlutinos}, {q_("Comets"), PHCComets},	{q_("Dwarf planets"), PHCDwarfPlanets},{q_("Cubewanos"), PHCCubewanos},
+		{q_("Scattered disc objects"), PHCScatteredDiscObjects},{q_("Oort cloud objects"), PHCOortCloudObjects},{q_("Sednoids"), PHCSednoids},
+		{q_("Bright stars (<%1 mag)").arg(QString::number(brightLimit - 5.0f, 'f', 1)), PHCBrightStars},{q_("Bright double stars (<%1 mag)").arg(QString::number(brightLimit - 5.0f, 'f', 1)), PHCBrightDoubleStars},
+		{q_("Bright variable stars (<%1 mag)").arg(QString::number(brightLimit - 5.0f, 'f', 1)), PHCBrightVariableStars},{q_("Bright star clusters (<%1 mag)").arg(brLimit), PHCBrightStarClusters},
+		{q_("Planetary nebulae (<%1 mag)").arg(brLimit), PHCPlanetaryNebulae},{q_("Bright nebulae (<%1 mag)").arg(brLimit), PHCBrightNebulae},{q_("Dark nebulae"), PHCDarkNebulae},
+		{q_("Bright galaxies (<%1 mag)").arg(brLimit), PHCBrightGalaxies},{q_("Symbiotic stars"), PHCSymbioticStars},{q_("Emission-line stars"), PHCEmissionLineStars},
+		{q_("Interstellar objects"), PHCInterstellarObjects},{q_("Planets and Sun"), PHCPlanetsSun},{q_("Sun, planets and moons of observer location"), PHCSunPlanetsMoons},
+		{q_("Bright Solar system objects (<%1 mag)").arg(QString::number(brightLimit + 2.0f, 'f', 1)), PHCBrightSolarSystemObjects},
+		{q_("Solar system objects: minor bodies"), PHCSolarSystemMinorBodies},{q_("Moons of first body"), PHCMoonsFirstBody},
+		{q_("Bright carbon stars"), PHCBrightCarbonStars}
 	};
-	QMapIterator<QString, QString> i(itemsMap);
+	QMapIterator<QString, int> i(itemsMap);
 	groups->clear();
 	while (i.hasNext())
 	{
 		i.next();
-		groups->addItem(i.key(), i.value());
+		groups->addItem(i.key(), QString::number(i.value()));
 	}
 
 	index = groups->findData(selectedGroupId, Qt::UserRole, Qt::MatchCaseSensitive);
@@ -2532,6 +2551,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		QVector<double> xs, ys, ysn, ysa, ysc, xm, ym;
 
 		StelObjectP selectedObject = selectedObjects[0];
+		ui->altVsTimeTitle->setText(selectedObject->getNameI18n());
 		const bool onEarth = core->getCurrentPlanet()==solarSystem->getEarth();
 
 		const double currentJD = core->getJD();
@@ -3373,6 +3393,7 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 		// X axis - time; Y axis - altitude
 		QList<double> aX, aY;
 		StelObjectP selectedObject = selectedObjects[0];
+		ui->monthlyElevationTitle->setText(selectedObject->getNameI18n());
 		if (selectedObject->getType() == "Satellite")
 		{
 			ui->monthlyElevationGraph->graph(0)->data()->clear();
@@ -3634,6 +3655,11 @@ void AstroCalcDialog::calculatePhenomena()
 
 	initListPhenomena();
 
+	double startJD = StelUtils::qDateTimeToJd(QDateTime(ui->phenomenFromDateEdit->date()));
+	double stopJD = StelUtils::qDateTimeToJd(QDateTime(ui->phenomenToDateEdit->date().addDays(1)));
+	if (stopJD<=startJD) // Stop warming atmosphere!..
+		return;
+
 	QList<PlanetP> objects;
 	objects.clear();
 	QList<PlanetP> allObjects = solarSystem->getAllPlanets();
@@ -3647,46 +3673,47 @@ void AstroCalcDialog::calculatePhenomena()
 	doubleStar.clear();
 	variableStar.clear();
 	QList<StelObjectP> hipStars = starMgr->getHipparcosStars();
+	QList<StelObjectP> carbonStars = starMgr->getHipparcosCarbonStars();
 	QList<StelACStarData> doubleHipStars = starMgr->getHipparcosDoubleStars();
 	QList<StelACStarData> variableHipStars = starMgr->getHipparcosVariableStars();
 
 	int obj2Type = ui->object2ComboBox->currentData().toInt();
 	switch (obj2Type)
 	{
-		case 0: // All Solar system objects
+		case PHCSolarSystem: // All Solar system objects
 			for (const auto& object : allObjects)
 			{
 				if (object->getPlanetType() != Planet::isUNDEFINED && object->getPlanetType() != Planet::isObserver)
 					objects.append(object);
 			}
 			break;
-		case 1: // Planets
+		case PHCPlanets: // Planets
 			for (const auto& object : allObjects)
 			{
 				if (object->getPlanetType() == Planet::isPlanet && object->getEnglishName() != core->getCurrentPlanet()->getEnglishName() && object->getEnglishName() != currentPlanet)
 					objects.append(object);
 			}
 			break;
-		case 2:
-		case 3:
-		case 4:
-		case 5:
-		case 6:
-		case 7:
-		case 8:
-		case 9:
-		case 20:
+		case PHCAsteroids:
+		case PHCPlutinos:
+		case PHCComets:
+		case PHCDwarfPlanets:
+		case PHCCubewanos:
+		case PHCScatteredDiscObjects:
+		case PHCOortCloudObjects:
+		case PHCSednoids:
+		case PHCInterstellarObjects:
 		{
 			static const QMap<int, Planet::PlanetType>map = {
-				{2, Planet::isAsteroid},
-				{3, Planet::isPlutino},
-				{4, Planet::isComet},
-				{5, Planet::isDwarfPlanet},
-				{6, Planet::isCubewano},
-				{7, Planet::isSDO},
-				{8, Planet::isOCO},
-				{9, Planet::isSednoid},
-				{20, Planet::isInterstellar}};
+				{PHCAsteroids, Planet::isAsteroid},
+				{PHCPlutinos, Planet::isPlutino},
+				{PHCComets, Planet::isComet},
+				{PHCDwarfPlanets, Planet::isDwarfPlanet},
+				{PHCCubewanos, Planet::isCubewano},
+				{PHCScatteredDiscObjects, Planet::isSDO},
+				{PHCOortCloudObjects, Planet::isOCO},
+				{PHCSednoids, Planet::isSednoid},
+				{PHCInterstellarObjects, Planet::isInterstellar}};
 			const Planet::PlanetType pType = map.value(obj2Type, Planet::isUNDEFINED);
 
 			for (const auto& object : allObjects)
@@ -3696,84 +3723,92 @@ void AstroCalcDialog::calculatePhenomena()
 			}
 			break;
 		}
-		case 10: // Stars
-			for (const auto& object : hipStars)
+		case PHCBrightStars: // Stars
+		case PHCBrightCarbonStars: // Bright carbon stars
+		{
+			QList<StelObjectP> stars;
+			if (obj2Type==PHCBrightStars)
+				stars = hipStars;
+			else
+				stars = carbonStars;
+			for (const auto& object : stars)
 			{
 				if (object->getVMagnitude(core) < (brightLimit - 5.0f))
 					star.append(object);
 			}
 			break;
-		case 11: // Double stars
+		}
+		case PHCBrightDoubleStars: // Double stars
 			for (const auto& object : doubleHipStars)
 			{
 				if (object.firstKey()->getVMagnitude(core) < (brightLimit - 5.0f))
 					star.append(object.firstKey());
 			}
 			break;
-		case 12: // Variable stars
+		case PHCBrightVariableStars: // Variable stars
 			for (const auto& object : variableHipStars)
 			{
 				if (object.firstKey()->getVMagnitude(core) < (brightLimit - 5.0f))
 					star.append(object.firstKey());
 			}
 			break;
-		case 13: // Star clusters
+		case PHCBrightStarClusters: // Star clusters
 			for (const auto& object : allDSO)
 			{
 				if (object->getVMagnitude(core) < brightLimit && (object->getDSOType() == Nebula::NebCl || object->getDSOType() == Nebula::NebOc || object->getDSOType() == Nebula::NebGc || object->getDSOType() == Nebula::NebSA || object->getDSOType() == Nebula::NebSC || object->getDSOType() == Nebula::NebCn))
 					dso.append(object);
 			}
 			break;
-		case 14: // Planetary nebulae
+		case PHCPlanetaryNebulae: // Planetary nebulae
 			for (const auto& object : allDSO)
 			{
 				if (object->getVMagnitude(core) < brightLimit && (object->getDSOType() == Nebula::NebPn || object->getDSOType() == Nebula::NebPossPN || object->getDSOType() == Nebula::NebPPN))
 					dso.append(object);
 			}
 			break;
-		case 15: // Bright nebulae
+		case PHCBrightNebulae: // Bright nebulae
 			for (const auto& object : allDSO)
 			{
 				if (object->getVMagnitude(core) < brightLimit && (object->getDSOType() == Nebula::NebN || object->getDSOType() == Nebula::NebBn || object->getDSOType() == Nebula::NebEn || object->getDSOType() == Nebula::NebRn || object->getDSOType() == Nebula::NebHII || object->getDSOType() == Nebula::NebISM || object->getDSOType() == Nebula::NebCn || object->getDSOType() == Nebula::NebSNR))
 					dso.append(object);
 			}
 			break;
-		case 16: // Dark nebulae
+		case PHCDarkNebulae: // Dark nebulae
 			for (const auto& object : allDSO)
 			{
 				if (object->getDSOType() == Nebula::NebDn || object->getDSOType() == Nebula::NebMolCld || object->getDSOType() == Nebula::NebYSO)
 					dso.append(object);
 			}
 			break;
-		case 17: // Galaxies
+		case PHCBrightGalaxies: // Galaxies
 			for (const auto& object : allDSO)
 			{
 				if (object->getVMagnitude(core) < brightLimit && (object->getDSOType() == Nebula::NebGx || object->getDSOType() == Nebula::NebAGx || object->getDSOType() == Nebula::NebRGx || object->getDSOType() == Nebula::NebQSO || object->getDSOType() == Nebula::NebPossQSO || object->getDSOType() == Nebula::NebBLL || object->getDSOType() == Nebula::NebBLA || object->getDSOType() == Nebula::NebIGx))
 					dso.append(object);
 			}
 			break;
-		case 18: // Symbiotic stars
+		case PHCSymbioticStars: // Symbiotic stars
 			for (const auto& object : allDSO)
 			{
 				if (object->getDSOType() == Nebula::NebSymbioticStar)
 					dso.append(object);
 			}
 			break;
-		case 19: // Emission-line stars
+		case PHCEmissionLineStars: // Emission-line stars
 			for (const auto& object : allDSO)
 			{
 				if (object->getDSOType() == Nebula::NebEmissionLineStar)
 					dso.append(object);
 			}
 			break;
-		case 21: // Planets and Sun
+		case PHCPlanetsSun: // Planets and Sun
 			for (const auto& object : allObjects)
 			{
 				if ((object->getPlanetType() == Planet::isPlanet || object->getPlanetType() == Planet::isStar) && object->getEnglishName() != core->getCurrentPlanet()->getEnglishName() && object->getEnglishName() != currentPlanet)
 					objects.append(object);
 			}
 			break;
-		case 22: // Sun, planets and moons
+		case PHCSunPlanetsMoons: // Sun, planets and moons of observer location
 		{
 			PlanetP cp = core->getCurrentPlanet();
 			for (const auto& object : allObjects)
@@ -3783,17 +3818,25 @@ void AstroCalcDialog::calculatePhenomena()
 			}
 			break;
 		}
-		case 23: // Bright Solar system objects
+		case PHCBrightSolarSystemObjects: // Bright Solar system objects
 			for (const auto& object : allObjects)
 			{
 				if (object->getVMagnitude(core) < (brightLimit + 2.0f) && object->getPlanetType() != Planet::isUNDEFINED)
 					objects.append(object);
 			}
 			break;
-		case 24: // Minor bodies of Solar system
+		case PHCSolarSystemMinorBodies: // Minor bodies of Solar system
 			for (const auto& object : allObjects)
 			{
 				if (object->getPlanetType() != Planet::isUNDEFINED && object->getPlanetType() != Planet::isPlanet && object->getPlanetType() != Planet::isStar && object->getPlanetType() != Planet::isMoon && object->getPlanetType() != Planet::isComet && object->getPlanetType() != Planet::isArtificial && object->getPlanetType() != Planet::isObserver && !object->getEnglishName().contains("Pluto", Qt::CaseInsensitive))
+					objects.append(object);
+			}
+			break;
+		case PHCMoonsFirstBody: // Moons of first body
+			PlanetP firstPplanet = solarSystem->searchByEnglishName(currentPlanet);
+			for (const auto& object : allObjects)
+			{
+				if (object->getParent()==firstPplanet && object->getPlanetType() == Planet::isMoon)
 					objects.append(object);
 			}
 			break;
@@ -3804,12 +3847,10 @@ void AstroCalcDialog::calculatePhenomena()
 	if (planet)
 	{
 		const double currentJD = core->getJD();   // save current JD
-		double startJD = StelUtils::qDateTimeToJd(QDateTime(ui->phenomenFromDateEdit->date()));
-		double stopJD = StelUtils::qDateTimeToJd(QDateTime(ui->phenomenToDateEdit->date().addDays(1)));
 		startJD = startJD - core->getUTCOffset(startJD) / 24.;
 		stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
 
-		if (obj2Type == -1)
+		if (obj2Type == PHCLatestSelectedObject)
 		{
 			QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
 			if (!selectedObjects.isEmpty())
@@ -3825,7 +3866,7 @@ void AstroCalcDialog::calculatePhenomena()
 				}
 			}
 		}
-		else if ((obj2Type >= 0 && obj2Type < 10) || (obj2Type >= 20 && obj2Type <= 24))
+		else if ((obj2Type >= PHCSolarSystem && obj2Type < PHCBrightStars) || (obj2Type >= PHCInterstellarObjects && obj2Type <= PHCMoonsFirstBody))
 		{
 			// Solar system objects
 			for (auto& obj : objects)
@@ -3836,9 +3877,12 @@ void AstroCalcDialog::calculatePhenomena()
 				// opposition
 				if (opposition)
 					fillPhenomenaTable(findClosestApproach(planet, mObj, startJD, stopJD, separation, PhenomenaTypeIndex::Opposition), planet, obj, PhenomenaTypeIndex::Opposition);
+				// shadows from moons
+				if (obj2Type==PHCMoonsFirstBody || obj2Type==PHCSolarSystem || obj2Type==PHCBrightSolarSystemObjects)
+					fillPhenomenaTable(findClosestApproach(planet, mObj, startJD, stopJD, separation, PhenomenaTypeIndex::Shadows), planet, obj, PhenomenaTypeIndex::Shadows);
 			}
 		}
-		else if (obj2Type == 10 || obj2Type == 11 || obj2Type == 12)
+		else if (obj2Type == PHCBrightStars || obj2Type == PHCBrightDoubleStars || obj2Type == PHCBrightVariableStars || obj2Type == PHCBrightCarbonStars)
 		{
 			// Stars
 			for (auto& obj : star)
@@ -4006,7 +4050,14 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		const double s2 = object2->getSpheroidAngularSize(core);
 		const double d1 = object1->getJ2000EquatorialPos(core).length();
 		const double d2 = object2->getJ2000EquatorialPos(core).length();
-		if (mode==PhenomenaTypeIndex::Opposition) // opposition
+		if (mode==PhenomenaTypeIndex::Shadows) // shadows
+		{
+			phenomenType = q_("Shadow transit");
+			separation = object1->getJ2000EquatorialPos(core).angle(object2->getJ2000EquatorialPos(core));
+			if (d1<d2) // the moon is behind planet, so the moon in shadow
+				phenomenType = q_("Eclipse");
+		}
+		else if (mode==PhenomenaTypeIndex::Opposition) // opposition
 		{
 			phenomenType = q_("Opposition");
 			// Added a special case - lunar eclipse
@@ -4492,7 +4543,9 @@ double AstroCalcDialog::findDistance(double JD, PlanetP object1, StelObjectP obj
 	core->update(0);
 	double angle = object1->getJ2000EquatorialPos(core).angle(object2->getJ2000EquatorialPos(core));
 	if (mode==PhenomenaTypeIndex::Opposition)
-		angle = M_PI - angle;	
+		angle = M_PI - angle;
+	else if (mode==PhenomenaTypeIndex::Shadows)
+		angle = object1->getHeliocentricEclipticPos().angle(qSharedPointerCast<Planet>(object2)->getHeliocentricEclipticPos());
 	return angle;
 }
 
@@ -4845,7 +4898,7 @@ QMap<double, double> AstroCalcDialog::findOrbitalPointApproach(PlanetP &object1,
 
 bool AstroCalcDialog::findPreciseOrbitalPoint(QPair<double, double>* out, PlanetP object1, double JD, double stopJD, double step, bool minimal)
 {
-	double dist, prevDist;
+	double dist, prevDist, timeDist = qAbs(stopJD-JD);
 
 	if (out == Q_NULLPTR)
 		return false;
@@ -4853,6 +4906,7 @@ bool AstroCalcDialog::findPreciseOrbitalPoint(QPair<double, double>* out, Planet
 	prevDist = findHeliocentricDistance(JD, object1);
 	step /= -2.;
 
+	bool result;
 	while (true)
 	{
 		JD += step;
@@ -4864,21 +4918,14 @@ bool AstroCalcDialog::findPreciseOrbitalPoint(QPair<double, double>* out, Planet
 			out->second = findHeliocentricDistance(JD - step / 2.0, object1);
 			if (minimal)
 			{
-				if (out->second > findHeliocentricDistance(JD - step / 5.0, object1))
-				{
+				result = (out->second > findHeliocentricDistance(JD - step / 5.0, object1));
+				if (result)
 					out->second *= -1;
-					return true;
-				}
-				else
-					return false;
 			}
 			else
-			{
-				if (out->second < findHeliocentricDistance(JD - step / 5.0, object1))
-					return true;
-				else
-					return false;
-			}
+				result = (out->second < findHeliocentricDistance(JD - step / 5.0, object1));
+
+			return result;
 		}
 		if (minimal)
 		{
@@ -4892,7 +4939,7 @@ bool AstroCalcDialog::findPreciseOrbitalPoint(QPair<double, double>* out, Planet
 		}
 		prevDist = dist;
 
-		if (JD > stopJD)
+		if (JD > stopJD || JD < (stopJD - 2*timeDist))
 			return false;
 	}
 }
@@ -5035,9 +5082,7 @@ void AstroCalcDialog::updateTabBarListWidgetWidth()
 
 	QAbstractItemModel* model = ui->stackListWidget->model();
 	if (!model)
-	{
 		return;
-	}
 
 	// stackListWidget->font() does not work properly!
 	// It has a incorrect fontSize in the first loading, which produces the bug#995107.
@@ -5058,6 +5103,7 @@ void AstroCalcDialog::updateTabBarListWidgetWidth()
 
 	// Hack to force the window to be resized...
 	ui->stackListWidget->setMinimumWidth(width);
+	ui->stackListWidget->updateGeometry();
 }
 
 void AstroCalcDialog::updateSolarSystemData()
@@ -5103,33 +5149,33 @@ void AstroCalcDialog::populateWutGroups()
 	category->blockSignals(true);
 
 	wutCategories.clear();
-	wutCategories.insert(q_("Planets"),					EWPlanets);
-	wutCategories.insert(q_("Bright stars"),				EWBrightStars);
+	wutCategories.insert(q_("Planets"),				EWPlanets);
+	wutCategories.insert(q_("Bright stars"),			EWBrightStars);
 	wutCategories.insert(q_("Bright nebulae"),			EWBrightNebulae);
-	wutCategories.insert(q_("Dark nebulae"),				EWDarkNebulae);
-	wutCategories.insert(q_("Galaxies"),					EWGalaxies);
-	wutCategories.insert(q_("Open star clusters"),			EWOpenStarClusters);
+	wutCategories.insert(q_("Dark nebulae"),			EWDarkNebulae);
+	wutCategories.insert(q_("Galaxies"),				EWGalaxies);
+	wutCategories.insert(q_("Open star clusters"),		EWOpenStarClusters);
 	wutCategories.insert(q_("Asteroids"),				EWAsteroids);
-	wutCategories.insert(q_("Comets"),					EWComets);
-	wutCategories.insert(q_("Plutinos"),					EWPlutinos);
-	wutCategories.insert(q_("Dwarf planets"),				EWDwarfPlanets);
-	wutCategories.insert(q_("Cubewanos"),				EWCubewanos);
-	wutCategories.insert(q_("Scattered disc objects"),	 	EWScatteredDiscObjects);
-	wutCategories.insert(q_("Oort cloud objects"),			EWOortCloudObjects);
+	wutCategories.insert(q_("Comets"),				EWComets);
+	wutCategories.insert(q_("Plutinos"),				EWPlutinos);
+	wutCategories.insert(q_("Dwarf planets"),			EWDwarfPlanets);
+	wutCategories.insert(q_("Cubewanos"),			EWCubewanos);
+	wutCategories.insert(q_("Scattered disc objects"), 	EWScatteredDiscObjects);
+	wutCategories.insert(q_("Oort cloud objects"),		EWOortCloudObjects);
 	wutCategories.insert(q_("Sednoids"),				EWSednoids);
-	wutCategories.insert(q_("Planetary nebulae"),			EWPlanetaryNebulae);
-	wutCategories.insert(q_("Bright double stars"),			EWBrightDoubleStars);
-	wutCategories.insert(q_("Bright variable stars"),		EWBrightVariableStars);
+	wutCategories.insert(q_("Planetary nebulae"),		EWPlanetaryNebulae);
+	wutCategories.insert(q_("Bright double stars"),		EWBrightDoubleStars);
+	wutCategories.insert(q_("Bright variable stars"),	EWBrightVariableStars);
 	wutCategories.insert(q_("Bright stars with high proper motion"),	EWBrightStarsWithHighProperMotion);
 	wutCategories.insert(q_("Symbiotic stars"),			EWSymbioticStars);
-	wutCategories.insert(q_("Emission-line stars"),			EWEmissionLineStars);
-	wutCategories.insert(q_("Supernova candidates"),		EWSupernovaeCandidates);
+	wutCategories.insert(q_("Emission-line stars"),		EWEmissionLineStars);
+	wutCategories.insert(q_("Supernova candidates"),	EWSupernovaeCandidates);
 	wutCategories.insert(q_("Supernova remnant candidates"), EWSupernovaeRemnantCandidates);
-	wutCategories.insert(q_("Supernova remnants"),		EWSupernovaeRemnants);
+	wutCategories.insert(q_("Supernova remnants"),	EWSupernovaeRemnants);
 	wutCategories.insert(q_("Clusters of galaxies"), 		EWClustersOfGalaxies);
-	wutCategories.insert(q_("Interstellar objects"),			EWInterstellarObjects);
-	wutCategories.insert(q_("Globular star clusters"),		EWGlobularStarClusters);
-	wutCategories.insert(q_("Regions of the sky"), 			EWRegionsOfTheSky);
+	wutCategories.insert(q_("Interstellar objects"),		EWInterstellarObjects);
+	wutCategories.insert(q_("Globular star clusters"),	EWGlobularStarClusters);
+	wutCategories.insert(q_("Regions of the sky"), 		EWRegionsOfTheSky);
 	wutCategories.insert(q_("Active galaxies"), 			EWActiveGalaxies);
 	if (moduleMgr.isPluginLoaded("Pulsars"))
 	{
@@ -5147,14 +5193,15 @@ void AstroCalcDialog::populateWutGroups()
 		wutCategories.insert(q_("Bright nova stars"), EWBrightNovaStars);
 	if (moduleMgr.isPluginLoaded("Supernovae"))
 		wutCategories.insert(q_("Bright supernova stars"), 	EWBrightSupernovaStars);
-	wutCategories.insert(q_("Interacting galaxies"), 		EWInteractingGalaxies);
-	wutCategories.insert(q_("Deep-sky objects"), 			EWDeepSkyObjects);
-	wutCategories.insert(q_("Messier objects"), 			EWMessierObjects);
-	wutCategories.insert(q_("NGC/IC objects"), 			EWNGCICObjects);
-	wutCategories.insert(q_("Caldwell objects"), 			EWCaldwellObjects);
-	wutCategories.insert(q_("Herschel 400 objects"), 		EWHerschel400Objects);
+	wutCategories.insert(q_("Interacting galaxies"), 	EWInteractingGalaxies);
+	wutCategories.insert(q_("Deep-sky objects"), 		EWDeepSkyObjects);
+	wutCategories.insert(q_("Messier objects"), 		EWMessierObjects);
+	wutCategories.insert(q_("NGC/IC objects"), 		EWNGCICObjects);
+	wutCategories.insert(q_("Caldwell objects"), 		EWCaldwellObjects);
+	wutCategories.insert(q_("Herschel 400 objects"), 	EWHerschel400Objects);
 	wutCategories.insert(q_("Algol-type eclipsing systems"),	EWAlgolTypeVariableStars);
-	wutCategories.insert(q_("The classical cepheids"),		EWClassicalCepheidsTypeVariableStars);
+	wutCategories.insert(q_("The classical cepheids"),	EWClassicalCepheidsTypeVariableStars);
+	wutCategories.insert(q_("Bright carbon stars"),		EWCarbonStars);
 
 	category->clear();
 	category->addItems(wutCategories.keys());
@@ -5319,6 +5366,7 @@ void AstroCalcDialog::calculateWutObjects()
 		QList<PlanetP> allObjects = solarSystem->getAllPlanets();
 		QVector<NebulaP> allDSO = dsoMgr->getAllDeepSkyObjects();
 		QList<StelObjectP> hipStars = starMgr->getHipparcosStars();
+		QList<StelObjectP> carbonStars = starMgr->getHipparcosCarbonStars();
 		QList<StelACStarData> dblHipStars = starMgr->getHipparcosDoubleStars();
 		QList<StelACStarData> varHipStars = starMgr->getHipparcosVariableStars();
 		QList<StelACStarData> algolTypeStars = starMgr->getHipparcosAlgolTypeStars();
@@ -5413,8 +5461,15 @@ void AstroCalcDialog::calculateWutObjects()
 			switch (categoryId)
 			{
 				case EWBrightStars:
+				case EWCarbonStars:
+				{
 					enableAngular = false;
-					for (const auto& object : hipStars)
+					QList<StelObjectP> stars;
+					if (categoryId==EWBrightStars)
+						stars = hipStars;
+					else
+						stars = carbonStars;
+					for (const auto& object : stars)
 					{
 						// Filter for angular size is not applicable
 						mag = object->getVMagnitude(core);
@@ -5439,6 +5494,7 @@ void AstroCalcDialog::calculateWutObjects()
 						}
 					}					
 					break;
+				}
 				case EWBrightNebulae:
 				case EWDarkNebulae:
 				case EWGalaxies:
@@ -6094,6 +6150,7 @@ void AstroCalcDialog::computePlanetaryData()
 
 	const double distanceAu = (posFCB - posSCB).length();
 	const double distanceKm = AU * distanceAu;
+	QString degree = QChar(0x00B0);
 	// TRANSLATORS: Unit of measure for distance - kilometers
 	QString km = qc_("km", "distance");
 	// TRANSLATORS: Unit of measure for distance - millions kilometers
@@ -6113,11 +6170,6 @@ void AstroCalcDialog::computePlanetaryData()
 
 	double spcb1 = firstCBId->getSiderealPeriod();
 	double spcb2 = secondCBId->getSiderealPeriod();
-	int cb1 = qRound(spcb1);
-	int cb2 = qRound(spcb2);
-	QString orbitalResonance = dash;
-	QString orbitalPeriodsRatio = dash;
-	bool spin = false;
 	QString parentFCBName = "";
 	if (firstCelestialBody != "Sun")
 		parentFCBName = firstCBId->getParent()->getEnglishName();
@@ -6125,79 +6177,62 @@ void AstroCalcDialog::computePlanetaryData()
 	if (secondCelestialBody != "Sun")
 		parentSCBName = secondCBId->getParent()->getEnglishName();
 
-	if (firstCelestialBody == parentSCBName)
-	{
-		cb1 = qRound(secondCBId->getSiderealPeriod());
-		cb2 = qRound(secondCBId->getSiderealDay());
-		spin = true;
-	}
-	else if (secondCelestialBody == parentFCBName)
-	{
-		cb1 = qRound(firstCBId->getSiderealPeriod());
-		cb2 = qRound(firstCBId->getSiderealDay());
-		spin = true;
-	}
-	int gcd = StelUtils::gcd(cb1, cb2);
-
 	QString distanceUM = qc_("AU", "distance, astronomical unit");
-	ui->labelLinearDistanceValue->setText(QString("%1 %2 (%3 %4)").arg(distAU).arg(distanceUM).arg(distKM).arg(useKM ? km : Mkm));
+	ui->labelLinearDistanceValue->setText(QString("%1 %2 (%3 %4)").arg(distAU, distanceUM, distKM, useKM ? km : Mkm));
 
 	QString angularDistance = dash;
 	if (firstCelestialBody != currentPlanet && secondCelestialBody != currentPlanet)
-		angularDistance = QString("%1%2 %3' %4\" (%5%2)").arg(d).arg(QChar(0x00B0)).arg(m).arg(s, 0, 'f', 2).arg(dd, 0, 'f', 5);
+		angularDistance = QString("%1%2 %3' %4\" (%5%2)").arg(d).arg(degree).arg(m).arg(s, 0, 'f', 2).arg(dd, 0, 'f', 5);
 	ui->labelAngularDistanceValue->setText(angularDistance);
 
-	if (cb1 > 0 && cb2 > 0)
+	// TRANSLATORS: Part of unit of measure for mean motion - degrees per day
+	QString day = qc_("day", "mean motion");
+	// TRANSLATORS: Unit of measure for period - days
+	QString days = qc_("days", "duration");
+	QString synodicPeriod = dash;
+	QString orbitalPeriodsRatio = dash;
+	if (spcb1 > 0.0 && spcb2 > 0.0 && parentFCBName==parentSCBName && firstCelestialBody!="Sun")
 	{
-		double r1 = qAbs(cb1 / gcd);
-		double r2 = qAbs(cb2 / gcd);
-		orbitalResonance = QString("%1:%2").arg(qRound(r1)).arg(qRound(r2));
-		if (spin)
-			orbitalResonance.append(QString(" (%1)").arg(q_("spin-orbit resonance")));
-	}
-	ui->labelOrbitalResonanceValue->setText(orbitalResonance);
+		double sp = qAbs(1/(1/spcb1 - 1/spcb2));
+		synodicPeriod = QString("%1 %2 (%3 a)").arg(QString::number(sp, 'f', 3), days, QString::number(sp/365.25, 'f', 5));
 
-	if (spcb1 > 0. && spcb2 > 0.)
-	{
 		double minp = spcb2;
 		if (qAbs(spcb1)<=qAbs(spcb2)) { minp = spcb1; }
-		orbitalPeriodsRatio = QString("%1:%2").arg(QString::number(qAbs(spcb1/minp), 'f', 2)).arg(QString::number(qAbs(spcb2/minp), 'f', 2));
+		int a = qRound(qAbs(spcb1/minp)*10);
+		int b = qRound(qAbs(spcb2/minp)*10);
+		int lcm = qAbs(a*b)/StelUtils::gcd(a, b);
+		orbitalPeriodsRatio = QString("%1:%2").arg(lcm/a).arg(lcm/b);
 	}
+	ui->labelSynodicPeriodValue->setText(synodicPeriod);
 	ui->labelOrbitalPeriodsRatioValue->setText(orbitalPeriodsRatio);
+
+	if (spcb1>0. && firstCelestialBody!="Sun")
+		ui->labelMeanMotionFCBValue->setText(QString("%1 %2/%3").arg(QString::number(360./spcb1, 'f', 5), degree, day));
+	else
+		ui->labelMeanMotionFCBValue->setText(dash);
+
+	if (spcb2>0. && secondCelestialBody!="Sun")
+		ui->labelMeanMotionSCBValue->setText(QString("%1 %2/%3").arg(QString::number(360./spcb2, 'f', 5), degree, day));
+	else
+		ui->labelMeanMotionSCBValue->setText(dash);
 
 	// TRANSLATORS: Unit of measure for speed - kilometers per second
 	QString kms = qc_("km/s", "speed");
 
 	double orbVelFCB = firstCBId->getEclipticVelocity().length();
-	QString orbitalVelocityFCB = orbVelFCB<=0. ? dash : QString("%1 %2").arg(QString::number(orbVelFCB * AU/86400., 'f', 3)).arg(kms);
+	QString orbitalVelocityFCB = orbVelFCB<=0. ? dash : QString("%1 %2").arg(QString::number(orbVelFCB * AU/86400., 'f', 3), kms);
 	ui->labelOrbitalVelocityFCBValue->setText(orbitalVelocityFCB);
 
 	double orbVelSCB = secondCBId->getEclipticVelocity().length();
-	QString orbitalVelocitySCB = orbVelSCB<=0. ? dash : QString("%1 %2").arg(QString::number(orbVelSCB * AU/86400., 'f', 3)).arg(kms);
+	QString orbitalVelocitySCB = orbVelSCB<=0. ? dash : QString("%1 %2").arg(QString::number(orbVelSCB * AU/86400., 'f', 3), kms);
 	ui->labelOrbitalVelocitySCBValue->setText(orbitalVelocitySCB);
-
-	// TRANSLATORS: Unit of measure for period - days
-	QString days = qc_("days", "duration");
-	QString synodicPeriod = dash;
-	bool showSP = true;
-	if (firstCelestialBody == secondCelestialBody || firstCelestialBody == "Sun" || secondCelestialBody == "Sun")
-		showSP = false;
-	if ((firstCBId->getPlanetTypeString()=="moon" && parentFCBName!=secondCelestialBody) || (secondCBId->getPlanetTypeString()=="moon" && parentSCBName!=firstCelestialBody))
-		showSP = false;
-	if (spcb1 > 0.0 && spcb2 > 0.0 && showSP)
-	{
-		double sp = qAbs(1/(1/spcb1 - 1/spcb2));
-		synodicPeriod = QString("%1 %2 (%3 a)").arg(QString::number(sp, 'f', 3)).arg(days).arg(QString::number(sp/365.25, 'f', 5));
-	}
-
-	ui->labelSynodicPeriodValue->setText(synodicPeriod);
 
 	double fcbs = 2.0 * AU * firstCBId->getEquatorialRadius();
 	double scbs = 2.0 * AU * secondCBId->getEquatorialRadius();
 	double sratio = fcbs/scbs;
 	int ss = (sratio < 1.0 ? 6 : 2);
 
-	QString sizeRatio = QString("%1 (%2 %4 / %3 %4)").arg(QString::number(sratio, 'f', ss), QString::number(fcbs, 'f', 1), QString::number(scbs, 'f', 1) , km);
+	QString sizeRatio = QString("%1 (%2 %4 / %3 %4)").arg(QString::number(sratio, 'f', ss), QString::number(fcbs, 'f', 1), QString::number(scbs, 'f', 1), km);
 	ui->labelEquatorialRadiiRatioValue->setText(sizeRatio);
 }
 
@@ -6480,6 +6515,7 @@ void AstroCalcDialog::drawAngularDistanceGraph()
 				selectedObject->getID().isEmpty() ? name = q_("Unnamed star") : name = selectedObject->getID();
 		}
 		ui->angularDistancePlot->setToolTip(QString("%1 (%2)").arg(label, name));
+		ui->angularDistanceTitle->setText(QString("%1 (%2)").arg(label, name));
 
 		prepareAngularDistanceAxesAndGraph();
 

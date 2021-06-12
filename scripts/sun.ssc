@@ -2,7 +2,7 @@
 // Name: Sun from different planets
 // Author: Alexander Wolf
 // License: Public Domain
-// Version: 2.0
+// Version: 2.1
 // Description: Look at the Sun from big planets of Solar System and Pluto.
 //
 
@@ -16,10 +16,10 @@ var atmosphere = LandscapeMgr.getFlagAtmosphere();
 var fog = LandscapeMgr.getFlagFog();
 var location = core.getObserverLocation();
 
+core.clear("natural");
 core.wait(1);
 SolarSystem.setFlagLabels(false);
 LabelMgr.deleteAllLabels();
-core.clear("natural");
 core.setGuiVisible(false);
 core.wait(3);
 core.setTimeRate(0);

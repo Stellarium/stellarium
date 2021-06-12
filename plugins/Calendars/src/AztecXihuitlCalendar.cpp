@@ -113,6 +113,14 @@ void AztecXihuitlCalendar::setDate(QVector<int> parts)
 	emit jdChanged(JD);
 }
 
+QVector<int> AztecXihuitlCalendar::aztecXihuitlFromFixed(int rd)
+{
+	const int count = StelUtils::imod(rd-aztecXihuitlCorrelation, 365);
+	const int day = count % 20 + 1;
+	const int month=count/20 + 1;
+	return {month, day};
+}
+
 int AztecXihuitlCalendar::aztecXihuitlOnOrBefore(QVector<int> xihuitl, int rd)
 {
 	return modInterval(aztecXihuitlCorrelation+aztecXihuitlOrdinal(xihuitl), rd, rd-365);

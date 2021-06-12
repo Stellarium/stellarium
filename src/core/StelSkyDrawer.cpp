@@ -28,9 +28,7 @@
 #include "StelCore.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
-#ifndef USE_OLD_QGLWIDGET
 #include "StelMainView.hpp"
-#endif
 
 #include "StelModuleMgr.hpp"
 #include "LandscapeMgr.hpp"
@@ -253,15 +251,14 @@ float StelSkyDrawer::computeLimitMagnitude() const
 	while (std::fabs(lim-a)>0.05f)
 	{
 		computeRCMag(lim, &rcmag);
+		float tmp = lim;
 		if (rcmag.radius<=0.f)
 		{
-			float tmp = lim;
 			lim=(a+lim)*0.5f;
 			b=tmp;
 		}
 		else
 		{
-			float tmp = lim;
 			lim=(b+lim)*0.5f;
 			a=tmp;
 		}
@@ -336,9 +333,7 @@ bool StelSkyDrawer::computeRCMag(float mag, RCMag* rcMag) const
 {
 	rcMag->radius = eye->adaptLuminanceScaledLn(pointSourceMagToLnLuminance(mag), static_cast<float>(starRelativeScale)*1.40f*0.5f);
 	rcMag->radius *=starLinearScale;
-#ifndef USE_OLD_QGLWIDGET
 	rcMag->radius *=StelMainView::getInstance().getCustomScreenshotMagnification();
-#endif
 	// Use now statically min_rmag = 0.5, because higher and too small values look bad
 	if (rcMag->radius < 0.3f)
 	{
@@ -488,7 +483,7 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 	const float pixPerRad = painter->getProjector()->getPixelPerRadAtCenter();
 	// Assume a disk shape
 	float pixRadius = std::sqrt(illuminatedArea/(60.f*60.f)*M_PI_180f*M_PI_180f*(pixPerRad*pixPerRad))/M_PIf;
-
+	float pxRd = pixRadius*3.f+100.f;
 	bool noStarHalo = false;
 
 	if (mag<-15.f)
@@ -499,7 +494,7 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 		painter->setBlending(true, GL_ONE, GL_ONE);
 
 		float rmag = big3dModelHaloRadius*(mag+15.f)/-11.f;
-		float cmag = (rmag>=pixRadius*3.f+100.f) ? 1.f : qMax(0.f, 1.f-(pixRadius*3.f+100-rmag)/100);
+		float cmag = (rmag>=pxRd) ? 1.f : qMax(0.f, 1.f-(pxRd-rmag)/100);
 		Vec3f win;
 		painter->getProjector()->project(v, win);
 		painter->setColor(color*cmag);

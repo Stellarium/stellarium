@@ -49,9 +49,7 @@ StelObjectMgr::~StelObjectMgr()
 void StelObjectMgr::init()
 {
 	// Register all the core actions.
-	QString timeGroup = N_("Date and Time");
-	QString movementGroup = N_("Movement and Selection");
-	QString displayGroup = N_("Display Options");
+	QString timeGroup = N_("Date and Time");	
 	StelActionMgr* actionsMgr = StelApp::getInstance().getStelActionManager();
 	actionsMgr->addAction("actionNext_Transit", timeGroup, N_("Next transit of the selected object"), this, "nextTransit()");
 	actionsMgr->addAction("actionNext_Rising", timeGroup, N_("Next rising of the selected object"), this, "nextRising()");
@@ -198,8 +196,7 @@ void StelObjectMgr::registerStelObjectMgr(StelObjectModule* m)
 
 	objModulesMap.insert(m->objectName(), m->getName());
 
-	//TODO: there should probably be a better way to specify the sub-types
-	// instead of hardcoding them here
+	//TODO: there should probably be a better way to specify the sub-types instead of hardcoding them here
 
 	// Celestial objects from Solar system by type
 	if (m->objectName()=="SolarSystem")
@@ -296,6 +293,9 @@ void StelObjectMgr::registerStelObjectMgr(StelObjectModule* m)
 		objModulesMap["StarMgr:2"] = "Bright double stars";
 		objModulesMap["StarMgr:3"] = "Bright variable stars";
 		objModulesMap["StarMgr:4"] = "Bright stars with high proper motion";
+		objModulesMap["StarMgr:5"] = "Variable stars: Algol-type eclipsing systems";
+		objModulesMap["StarMgr:6"] = "Variable stars: the classical cepheids";
+		objModulesMap["StarMgr:7"] = "Bright carbon stars";
 	}
 	// Nomenclature...
 	if (m->objectName()=="NomenclatureMgr")

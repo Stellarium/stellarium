@@ -33,6 +33,7 @@ public:
 
 	virtual ~CopticCalendar() Q_DECL_OVERRIDE {}
 
+public slots:
 	virtual void retranslate() Q_DECL_OVERRIDE;
 
 	//! Set a calendar date from the Julian day number
@@ -49,6 +50,7 @@ public:
 	//! get a formatted complete string for a date
 	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
+public:
 	//! find RD number for date in the Coptic calendar (may be used in other calendars!)
 	static int fixedFromCoptic(QVector<int> coptic);
 	//! find date in the Coptic calendar from RD number (may be used in other calendars!)

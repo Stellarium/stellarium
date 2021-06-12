@@ -131,6 +131,8 @@ public slots:
 signals:
 	//! Emitted when the value changes.
 	void valueChanged();
+	void valueChangedDeg(double);
+	void valueChangedRad(double);
 
 protected:
 	virtual StepEnabled stepEnabled() const Q_DECL_OVERRIDE;

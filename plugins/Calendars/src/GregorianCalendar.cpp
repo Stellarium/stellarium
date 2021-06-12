@@ -151,3 +151,28 @@ QVector<int> GregorianCalendar::gregorianFromFixed(int rd)
 	int day = rd-fixedFromGregorian({year, month, 1})+1;
 	return {year, month, day};
 }
+
+//! Gregorian Easter sunday (RD) from chapter 9.2
+int GregorianCalendar::easter(int gYear)
+{
+	const int century=StelUtils::intFloorDiv(gYear, 100) + 1;
+	const int shiftedEpact=StelUtils::imod(14+11*StelUtils::imod(gYear, 19)
+					       - StelUtils::intFloorDiv(3*century, 4)
+					       + StelUtils::intFloorDiv(5+8*century, 25), 30);
+	int adjustedEpact=shiftedEpact;
+	if (shiftedEpact==0) adjustedEpact++;
+	else if ((shiftedEpact==1) && (10< StelUtils::imod(gYear, 19))) adjustedEpact++;
+
+	const int paschalMoon=fixedFromGregorian({gYear, april, 19}) - adjustedEpact;
+	return kdayAfter(sunday, paschalMoon);
+}
+
+//! Orthodox Easter sunday (RD) from chapter 9.1
+int GregorianCalendar::orthodoxEaster(int gYear)
+{
+	const int shiftedEpact=StelUtils::imod(14+11*StelUtils::imod(gYear, 19), 30);
+	const int jYear=(gYear>0 ? gYear : gYear-1);
+
+	const int paschalMoon=fixedFromJulian({jYear, april, 19}) - shiftedEpact;
+	return kdayAfter(sunday, paschalMoon);
+}

@@ -70,6 +70,7 @@ NavStars::NavStars()
 	, highlightWhenVisible(false)
 	, limitInfoToNavStars(false)	
 	, tabulatedDisplay(false)
+	, useUTCTime(false)
 	, toolbarButton(Q_NULLPTR)
 {
 	setObjectName("NavStars");
@@ -105,8 +106,9 @@ void NavStars::init()
 		qDebug() << "[NavStars] no coordinates section exists in main config file - creating with defaults";
 		restoreDefaultConfiguration();
 	}
-	// save default state for star labels
+	// save default state for star labels and time zone
 	starLabelsState = propMgr->getStelPropertyValue("StarMgr.flagLabelsDisplayed").toBool();
+	timeZone = propMgr->getStelPropertyValue("StelCore.currentTimeZone").toString();
 
 	// populate settings from main config file.
 	loadConfiguration();
@@ -124,8 +126,8 @@ void NavStars::init()
 	addAction("actionShow_NavStars", N_("Navigational Stars"), N_("Mark the navigational stars"), "navStarsVisible", "");
 
 	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
-	connect(&StelApp::getInstance(), SIGNAL(flagShowDecimalDegreesChanged(bool)), this, SLOT(setUseDecimalDegrees()));
-	setUseDecimalDegrees();
+	connect(&StelApp::getInstance(), SIGNAL(flagShowDecimalDegreesChanged(bool)), this, SLOT(setUseDecimalDegrees(bool)));
+	setUseDecimalDegrees(StelApp::getInstance().getFlagShowDecimalDegrees());
 
 	// Toolbar button
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -146,6 +148,8 @@ void NavStars::init()
 
 void NavStars::deinit()
 {
+	if (getFlagUseUTCTime())
+		propMgr->setStelPropertyValue("StelCore.currentTimeZone", timeZone);
 	markerTexture.clear();
 	stars.clear();
 	starNumbers.clear();
@@ -231,10 +235,10 @@ void NavStars::setNavStarsMarks(const bool b)
 	if (b==getNavStarsMarks())
 		return;
 
-	if (b)
-		propMgr->setStelPropertyValue("StarMgr.flagLabelsDisplayed", !b);
-	else
-		propMgr->setStelPropertyValue("StarMgr.flagLabelsDisplayed", starLabelsState);
+	propMgr->setStelPropertyValue("StarMgr.flagLabelsDisplayed", b ? !b : starLabelsState);
+
+	if (getFlagUseUTCTime())
+		propMgr->setStelPropertyValue("StelCore.currentTimeZone", b ? "UTC" : timeZone);
 
 	markerFader = b;
 	emit navStarsMarksChanged(b);
@@ -245,9 +249,75 @@ bool NavStars::getNavStarsMarks() const
 	return markerFader;
 }
 
-void NavStars::setUseDecimalDegrees()
+void NavStars::setEnableAtStartup(bool b)
 {
-	NavStarsCalculator::useDecimalDegrees = (StelApp::getInstance().getFlagShowDecimalDegrees() ? true : false);
+	if (b!=getEnableAtStartup())
+	{
+		enableAtStartup=b;
+		emit enableAtStartupChanged(b);
+	}
+}
+
+void NavStars::setHighlightWhenVisible(bool b)
+{
+	if (b!=getHighlightWhenVisible())
+	{
+		highlightWhenVisible=b;
+		emit highlightWhenVisibleChanged(b);
+	}
+}
+
+void NavStars::setLimitInfoToNavStars(bool b)
+{
+	if (b!=getLimitInfoToNavStars())
+	{
+		limitInfoToNavStars=b;
+		emit limitInfoToNavStarsChanged(b);
+	}
+}
+
+void NavStars::setUpperLimb(bool b)
+{
+	if (b!=getUpperLimb())
+	{
+		upperLimb=b;
+		emit upperLimbChanged(b);
+	}
+}
+
+void NavStars::setTabulatedDisplay(bool b)
+{
+	if (b!=getTabulatedDisplay())
+	{
+		tabulatedDisplay=b;
+		emit tabulatedDisplayChanged(b);
+	}
+}
+
+void NavStars::setFlagUseUTCTime(bool b)
+{
+	if (b!=getFlagUseUTCTime())
+	{
+		useUTCTime=b;
+		emit flagUseUTCTimeChanged(b);
+
+		if (getNavStarsMarks())
+			propMgr->setStelPropertyValue("StelCore.currentTimeZone", b ? "UTC" : timeZone);
+	}
+}
+
+void NavStars::setShowExtraDecimals(bool b)
+{
+	if (b!=getShowExtraDecimals())
+	{
+		NavStarsCalculator::useExtraDecimals=b;
+		emit showExtraDecimalsChanged(b);
+	}
+}
+
+void NavStars::setUseDecimalDegrees(bool flag)
+{
+	NavStarsCalculator::useDecimalDegrees = flag;
 }
 
 void NavStars::restoreDefaultConfiguration(void)
@@ -272,6 +342,7 @@ void NavStars::loadConfiguration(void)
 	tabulatedDisplay = conf->value("tabulated_display", false).toBool();
 	upperLimb = conf->value("upper_limb", false).toBool();
 	setShowExtraDecimals(conf->value("extra_decimals", false).toBool());
+	useUTCTime = conf->value("use_utc_time", false).toBool();
 
 	conf->endGroup();
 }
@@ -282,12 +353,13 @@ void NavStars::saveConfiguration(void)
 
 	conf->setValue("current_ns_set", getCurrentNavigationalStarsSetKey());
 	conf->setValue("marker_color", markerColor.toStr());
-	conf->setValue("enable_at_startup", enableAtStartup);
-	conf->setValue("highlight_when_visible", highlightWhenVisible);
-	conf->setValue("limit_info_to_nav_stars", limitInfoToNavStars);
-	conf->setValue("tabulated_display", tabulatedDisplay);
-	conf->setValue("upper_limb", upperLimb);
+	conf->setValue("enable_at_startup", getEnableAtStartup());
+	conf->setValue("highlight_when_visible", getHighlightWhenVisible());
+	conf->setValue("limit_info_to_nav_stars", getLimitInfoToNavStars());
+	conf->setValue("tabulated_display", getTabulatedDisplay());
+	conf->setValue("upper_limb", getUpperLimb());
 	conf->setValue("extra_decimals", getShowExtraDecimals());
+	conf->setValue("use_utc_time", getFlagUseUTCTime());
 
 	conf->endGroup();
 }

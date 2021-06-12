@@ -209,7 +209,8 @@ void StelMainScriptAPI::setPlanetocentricCalculations(bool f)
 void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, double altitude, double duration, const QString& name, const QString& planet)
 {
 	StelCore* core = StelApp::getInstance().getCore();
-	StelObjectP ssObj = GETSTELMODULE(SolarSystem)->searchByName(planet);	
+	// backward compatible layer: probably we have Solar system body...
+	PlanetP ssObj = GETSTELMODULE(SolarSystem)->searchByEnglishName(planet);
 	StelLocation loc = core->getCurrentLocation();
 	loc.longitude = static_cast<float>(longitude);
 	loc.latitude = static_cast<float>(latitude);
@@ -879,10 +880,19 @@ void StelMainScriptAPI::selectObjectByName(const QString& name, bool pointer)
 {
 	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
 	omgr->setFlagSelectedObjectPointer(pointer);
-	if (name.isEmpty() || !omgr->findAndSelect(name))
+	bool state = omgr->findAndSelect(name);
+	// backward compatible layer: probably we have Solar system body...
+	if (!state)
 	{
-		omgr->unSelect();
+		StelObjectP obj = qSharedPointerCast<StelObject>(GETSTELMODULE(SolarSystem)->searchByEnglishName(name));
+		if (!obj.isNull())
+			state = omgr->setSelectedObject(obj, StelModule::ReplaceSelection);
+		else
+			state = false;
 	}
+
+	if (name.isEmpty() || !state)
+		omgr->unSelect();
 }
 
 void StelMainScriptAPI::selectConstellationByName(const QString& name)
@@ -899,6 +909,9 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 {
 	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
 	StelObjectP obj = omgr->searchByName(name);
+	// backward compatible layer: probably we have Solar system body...
+	if (obj.isNull())
+		obj = qSharedPointerCast<StelObject>(GETSTELMODULE(SolarSystem)->searchByEnglishName(name));
 
 	return StelObjectMgr::getObjectInfo(obj);
 }
@@ -938,6 +951,15 @@ void StelMainScriptAPI::addToSelectedObjectInfoString(const QString &str, bool r
 	}
 }
 
+void StelMainScriptAPI::setStelProperty(const QString& propertyName, QVariant propertyValue)
+{
+	StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue(propertyName, propertyValue);
+}
+
+QVariant StelMainScriptAPI::getStelProperty(const QString& propertyName)
+{
+	return StelApp::getInstance().getStelPropertyManager()->getStelPropertyValue(propertyName, true);
+}
 
 
 void StelMainScriptAPI::clear(const QString& state)
@@ -969,8 +991,8 @@ void StelMainScriptAPI::clear(const QString& state)
 		StelPropertyMgr* propMgr = StelApp::getInstance().getStelPropertyManager();
 
 		// Hide artificial satellites through StelProperties to avoid crash if plugin was not loaded
-		propMgr->setStelPropertyValue("Satellites.hintsVisible",   false);
-		propMgr->setStelPropertyValue("Satellites.labelsVisible",  false);
+		propMgr->setStelPropertyValue("Satellites.flagHintsVisible",   false);
+		propMgr->setStelPropertyValue("Satellites.flagLabelsVisible",  false);
 		propMgr->setStelPropertyValue("Satellites.flagOrbitLines", false);
 
 		// identical for all states

@@ -667,6 +667,7 @@ void StarMgr::populateHipparcosLists()
 	variableHipStars.clear();
 	algolTypeStars.clear();
 	classicalCepheidsTypeStars.clear();
+	carbonStars.clear();
 	const int pmLimit = 1; // arc-second per year!
 	for (int hip=0; hip<=NR_OF_HIP; hip++)
 	{
@@ -677,6 +678,10 @@ void StarMgr::populateHipparcosLists()
 			const SpecialZoneData<Star1> *const z = hipIndex[hip].z;
 			StelObjectP so = s->createStelObject(a,z);
 			hipparcosStars.push_back(so);
+			// Carbon stars have spectral type, which start with C letter
+			if (convertToSpectralType(s->getSpInt()).startsWith("C", Qt::CaseInsensitive))
+				carbonStars.push_back(so);
+
 			if (!getGcvsVariabilityType(s->getHip()).isEmpty())
 			{
 				QMap<StelObjectP, float> sa;
@@ -749,7 +754,7 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 	// "   677|_("Alpheratz")"
 	// "113368|_("Fomalhaut")"
 	// Note: Stellarium doesn't support sky cultures made prior version 0.10.6 now!
-	QRegExp recordRx("^\\s*(\\d+)\\s*\\|_[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
+	QRegExp recordRx("^\\s*(\\d+)\\s*\\|[_]*[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
 
 	while(!cnFile.atEnd())
 	{
@@ -897,7 +902,13 @@ void StarMgr::loadSciNames(const QString& sciNameFile)
 			{
 				if (sciAdditionalNamesMapI18n.find(hip)!=sciAdditionalNamesMapI18n.end())
 				{
-					sciAdditionalDblNamesMapI18n[hip] = sci_name_i18n;
+					if (sciAdditionalDblNamesMapI18n.find(hip)!=sciAdditionalDblNamesMapI18n.end())
+					{
+						QString sname = sciAdditionalDblNamesMapI18n[hip].append(" - " + sci_name_i18n);
+						sciAdditionalDblNamesMapI18n[hip] = sname;
+					}
+					else
+						sciAdditionalDblNamesMapI18n[hip] = sci_name_i18n;
 					sciAdditionalDblNamesIndexI18n[sci_name_i18n] = hip;
 				}
 				else
@@ -1684,9 +1695,25 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		if (it.key().indexOf(bayerRegEx)==0 || it.key().indexOf(objPrefix)==0)
 		{
 			if (maxNbItem<=0)
-				break;
-			result << getSciAdditionalDblName(it.value());
-			--maxNbItem;
+				break;			
+			QStringList names = getSciAdditionalDblName(it.value()).split(" - ");
+			for (const auto &name : qAsConst(names))
+			{
+				if (useStartOfWords && name.startsWith(objPrefix, Qt::CaseInsensitive))
+					found = true;
+				else if (!useStartOfWords && name.contains(objPrefix, Qt::CaseInsensitive))
+					found = true;
+				else
+					found = false;
+
+				if (found)
+				{
+					if (maxNbItem<=0)
+						break;
+					result.append(name);
+					--maxNbItem;
+				}
+			}
 		}
 		else if (it.key().at(0) != objPrefix.at(0))
 			break;
@@ -1698,8 +1725,24 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		{
 			if (maxNbItem<=0)
 				break;
-			result << getSciAdditionalDblName(it.value());
-			--maxNbItem;
+			QStringList names = getSciAdditionalDblName(it.value()).split(" - ");
+			for (const auto &name : qAsConst(names))
+			{
+				if (useStartOfWords && name.startsWith(objPrefix, Qt::CaseInsensitive))
+					found = true;
+				else if (!useStartOfWords && name.contains(objPrefix, Qt::CaseInsensitive))
+					found = true;
+				else
+					found = false;
+
+				if (found)
+				{
+					if (maxNbItem<=0)
+						break;
+					result.append(name);
+					--maxNbItem;
+				}
+			}
 		}
 		else if (it.key().at(0) != objw.at(0))
 			break;
@@ -1933,7 +1976,7 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 			}
 			else
 			{
-				for (auto star : doubleStars)
+				for (const auto &star : doubleStars)
 				{
 					result << trans.qtranslate(star);
 				}
@@ -1959,7 +2002,7 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 			}
 			else
 			{
-				for (auto star : variableStars)
+				for (const auto &star : variableStars)
 				{
 					result << trans.qtranslate(star);
 				}
@@ -1996,6 +2039,39 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 					result << star.firstKey()->getEnglishName();
 				else
 					result << star.firstKey()->getNameI18n();
+			}
+			break;
+		}
+		case 5: // Variable stars: Algol-type eclipsing systems
+		{
+			for (const auto& star : algolTypeStars)
+			{
+				if (inEnglish)
+					result << star.firstKey()->getEnglishName();
+				else
+					result << star.firstKey()->getNameI18n();
+			}
+			break;
+		}
+		case 6: // Variable stars: the classical cepheids
+		{
+			for (const auto& star : classicalCepheidsTypeStars)
+			{
+				if (inEnglish)
+					result << star.firstKey()->getEnglishName();
+				else
+					result << star.firstKey()->getNameI18n();
+			}
+			break;
+		}
+		case 7: // Bright carbon stars
+		{
+			for (const auto& star : carbonStars)
+			{
+				if (inEnglish)
+					result << star->getEnglishName();
+				else
+					result << star->getNameI18n();
 			}
 			break;
 		}

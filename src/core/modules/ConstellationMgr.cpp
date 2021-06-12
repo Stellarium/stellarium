@@ -326,6 +326,66 @@ void ConstellationMgr::selectAllConstellations()
 	}
 }
 
+void ConstellationMgr::selectConstellation(const QString &englishName)
+{
+	if (!getFlagIsolateSelected())
+		setFlagIsolateSelected(true); // Enable isolated selection
+
+	bool found = false;
+	for (auto* constellation : constellations)
+	{
+		if (constellation->getEnglishName().toLower()==englishName.toLower())
+		{
+			setSelectedConst(constellation);
+			found = true;
+		}
+	}
+	if (!found)
+		qDebug() << "The constellation" << englishName << "is not found";
+}
+
+void ConstellationMgr::selectConstellationByObjectName(const QString &englishName)
+{
+	if (!getFlagIsolateSelected())
+		setFlagIsolateSelected(true); // Enable isolated selection
+
+	if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesIdx()==0) // generic IAU boundaries
+		setSelectedConst(isObjectIn(GETSTELMODULE(StelObjectMgr)->searchByName(englishName).data()));
+	else
+		setSelectedConst(isStarIn(GETSTELMODULE(StelObjectMgr)->searchByName(englishName).data()));
+}
+
+void ConstellationMgr::deselectConstellation(const QString &englishName)
+{
+	if (!getFlagIsolateSelected())
+		setFlagIsolateSelected(true); // Enable isolated selection
+
+	bool found = false;
+	for (auto* constellation : constellations)
+	{
+		if (constellation->getEnglishName().toLower()==englishName.toLower())
+		{
+			unsetSelectedConst(constellation);
+			found = true;
+		}
+	}
+
+	if (selected.size()==0 && found)
+	{
+		// Let's remove the selection for all constellations if the list of selected constellations is empty
+		for (auto* constellation : constellations)
+		{
+			constellation->setFlagLines(false);
+			constellation->setFlagLabels(false);
+			constellation->setFlagArt(false);
+			constellation->setFlagBoundaries(false);
+		}
+	}
+
+	if (!found)
+		qDebug() << "The constellation" << englishName << "is not found";
+}
+
 void ConstellationMgr::setLinesColor(const Vec3f& color)
 {
 	if (color != Constellation::lineColor)
@@ -655,9 +715,10 @@ void ConstellationMgr::drawArt(StelPainter& sPainter) const
 // Draw constellations lines
 void ConstellationMgr::drawLines(StelPainter& sPainter, const StelCore* core) const
 {
+	const float ppx = static_cast<float>(sPainter.getProjector()->getDevicePixelsPerPixel());
 	sPainter.setBlending(true);
-	if (constellationLineThickness>1)
-		sPainter.setLineWidth(constellationLineThickness); // set line thickness
+	if (constellationLineThickness>1 || ppx>1.f)
+		sPainter.setLineWidth(constellationLineThickness*ppx); // set line thickness
 	sPainter.setLineSmooth(true);
 
 	const SphericalCap& viewportHalfspace = sPainter.getProjector()->getBoundingCap();
@@ -665,7 +726,7 @@ void ConstellationMgr::drawLines(StelPainter& sPainter, const StelCore* core) co
 	{
 		constellation->drawOptim(sPainter, core, viewportHalfspace);
 	}
-	if (constellationLineThickness>1)
+	if (constellationLineThickness>1 || ppx>1.f)
 		sPainter.setLineWidth(1); // restore line thickness
 	sPainter.setLineSmooth(false);
 }
@@ -1092,7 +1153,7 @@ void ConstellationMgr::setFlagIsolateSelected(const bool isolate)
 	{
 		isolateSelected = isolate;
 
-		// when turning off isolated selection mode, clear exisiting isolated selections.
+		// when turning off isolated selection mode, clear existing isolated selections.
 		if (!isolateSelected)
 		{
 			for (auto* constellation : constellations)
@@ -1374,15 +1435,16 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 
 void ConstellationMgr::drawBoundaries(StelPainter& sPainter) const
 {
+	const float ppx = static_cast<float>(sPainter.getProjector()->getDevicePixelsPerPixel());
 	sPainter.setBlending(false);
-	if (constellationBoundariesThickness>1)
-		sPainter.setLineWidth(constellationBoundariesThickness); // set line thickness
+	if (constellationBoundariesThickness>1 || ppx>1.f)
+		sPainter.setLineWidth(constellationBoundariesThickness*ppx); // set line thickness
 	sPainter.setLineSmooth(true);
 	for (auto* constellation : constellations)
 	{
 		constellation->drawBoundaryOptim(sPainter);
 	}
-	if (constellationBoundariesThickness>1)
+	if (constellationBoundariesThickness>1 || ppx>1.f)
 		sPainter.setLineWidth(1); // restore line thickness
 	sPainter.setLineSmooth(false);
 }

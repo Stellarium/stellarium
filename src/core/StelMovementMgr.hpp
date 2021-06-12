@@ -374,6 +374,14 @@ public slots:
 	//! @param s - true zoom, false stop
 	void zoomOut(bool s);
 
+	//! Smooth panning a predetermined amount
+	//! @note a speed (degrees per seconds) is defined for both scales as deltaX/ptime and deltaY/ptime.
+	//! @param deltaX - delta for scale X, in degrees
+	//! @param deltaY - delta for scale Y, in degrees
+	//! @param ptime - time for doing one step of delta, in seconds
+	//! @param s - flag to enable panning
+	void smoothPan(double deltaX, double deltaY, double ptime, bool s);
+
 	//! Look immediately towards East.
 	//! @param zero true to center on horizon, false to keep altitude, or when looking to the zenith already, turn eastern horizon to screen bottom.
 	void lookEast(bool zero=false);
@@ -485,6 +493,11 @@ private:
 	double keyMoveSpeed;              // Speed of keys movement
 	double keyZoomSpeed;              // Speed of keys zoom
 	bool flagMoveSlow;
+
+	//flag to enable panning a predetermined amount
+	bool flagCustomPan;
+	double rateX;
+	double rateY;
 
 	// Speed factor for real life time movements, used for fast forward when playing scripts.
 	float movementsSpeedFactor;
