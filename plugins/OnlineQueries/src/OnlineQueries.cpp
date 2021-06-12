@@ -1,8 +1,7 @@
 /*
- * Pointer Coordinates plug-in for Stellarium
+ * OnlineQueries plug-in for Stellarium
  *
- * Copyright (C) 2014 Alexander Wolf
- * Copyright (C) 2016 Georg Zotti (Constellation code)
+ * Copyright (C) 2020-21 Georg Zotti
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License

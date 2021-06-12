@@ -1,7 +1,7 @@
 /*
  * Stellarium OnlineQueries Plug-in
  *
- * Copyright (C) 2011-2015 Simon Parzer, Peter Neubauer, Georg Zotti, Andrei Borza, Florian Schaukowitsch
+ * Copyright (C) 2020-21 Georg Zotti
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -81,7 +81,7 @@ void OnlineQueriesDialog::createDialogContent()
 		connect(ui->custom1PushButton, SIGNAL(clicked()), plugin, SLOT(queryCustomSite1()));
 	}
 	else {
-		ui->tabWidget->setTabText(ui->tabWidget->count()-3, "(Custom 1)");
+		ui->tabWidget->setTabText(ui->tabWidget->count()-3, qc_("(Custom 1)", "tab title"));
 		ui->tabWidget->setTabEnabled(ui->tabWidget->count()-3, false);
 	}
 	if (!plugin->getCustomUrl2().isEmpty())
@@ -90,7 +90,7 @@ void OnlineQueriesDialog::createDialogContent()
 		connect(ui->custom2PushButton, SIGNAL(clicked()), plugin, SLOT(queryCustomSite2()));
 	}
 	else {
-		ui->tabWidget->setTabText(ui->tabWidget->count()-2, "(Custom 2)");
+		ui->tabWidget->setTabText(ui->tabWidget->count()-2, qc_("(Custom 2)", "tab title"));
 		ui->tabWidget->setTabEnabled(ui->tabWidget->count()-2, false);
 	}
 	if (!plugin->getCustomUrl3().isEmpty())
@@ -99,7 +99,7 @@ void OnlineQueriesDialog::createDialogContent()
 		connect(ui->custom3PushButton, SIGNAL(clicked()), plugin, SLOT(queryCustomSite3()));
 	}
 	else {
-		ui->tabWidget->setTabText(ui->tabWidget->count()-1, "(Custom 3)");
+		ui->tabWidget->setTabText(ui->tabWidget->count()-1, qc_("(Custom 3)", "tab title"));
 		ui->tabWidget->setTabEnabled(ui->tabWidget->count()-1, false);
 	}
 }

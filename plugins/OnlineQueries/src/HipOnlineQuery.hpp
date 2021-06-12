@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Georg Zotti (based on F. Chereau's StarnamesSearcher)
+ * Copyright (C) 2020 Georg Zotti (based on F. Chereau's SimbadSearcher)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
