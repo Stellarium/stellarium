@@ -60,10 +60,10 @@ void HipOnlineReply::deleteNetworkReply()
 
 void HipOnlineReply::httpQueryFinished()
 {
-	qDebug() << "StarnamesLookupReply::httpQueryFinished()";
+	//qDebug() << "HipOnlineReply::httpQueryFinished()";
 	if (reply->error()!=QNetworkReply::NoError || reply->bytesAvailable()==0)
 	{
-		qDebug() << "Reply has errors:" << reply->errorString();
+		qDebug() << "HipOnlineReply::httpQueryFinished() has errors:" << reply->errorString();
 		currentStatus = HipQueryErrorOccured;
 		errorString = QString("%1: %2").arg(q_("Network error")).arg(reply->errorString());
 		emit statusChanged();
@@ -74,7 +74,7 @@ void HipOnlineReply::httpQueryFinished()
 	//QByteArray line;
 	//qDebug() << reply->readAll();
 	QString replyString=reply->readAll();
-	qDebug() << replyString;
+	//qDebug() << replyString;
 	htmlResult=replyString;
 
 	currentStatus = HipQueryFinished;
@@ -104,9 +104,9 @@ HipOnlineQuery::HipOnlineQuery(QString baseURL, QObject* parent) : QObject(paren
 // Lookup in external database for the passed HIP number.
 HipOnlineReply* HipOnlineQuery::lookup(const int hipID)
 {
-	// Create the Starnames query
+	// Create the Star ID query
 	QString url=QString(baseURL).arg(QString::number(hipID));
-	qDebug() << "looking up HIP " << hipID << "at "<< url;
+	//qDebug() << "looking up HIP " << hipID << "at "<< url;
 	return new HipOnlineReply(url, networkMgr);
 }
 
@@ -115,7 +115,7 @@ HipOnlineReply* HipOnlineQuery::lookup(const QString name)
 {
 	// Create the Starnames query
 	QString url=QString(baseURL).arg(name);
-	qDebug() << "looking up " << name << "at "<< url;
+	//qDebug() << "looking up " << name << "at "<< url;
 	return new HipOnlineReply(url, networkMgr);
 }
 
@@ -123,9 +123,9 @@ HipOnlineReply* HipOnlineQuery::lookup(const QString name)
 HipOnlineReply* HipOnlineQuery::lookup(const QString url, const int hipID)
 {
 	baseURL=url;
-	// Create the Starnames query
+	// Create the Star ID query
 	QString queryUrl=QString(baseURL).arg(QString::number(hipID));
-	qDebug() << "looking up HIP " << hipID << "at "<< url;
+	//qDebug() << "looking up HIP " << hipID << "at "<< url;
 	return new HipOnlineReply(queryUrl, networkMgr);
 }
 
@@ -135,6 +135,6 @@ HipOnlineReply* HipOnlineQuery::lookup(const QString url, const QString name)
 	baseURL=url;
 	// Create the Starnames query
 	QString queryUrl=QString(baseURL).arg(name);
-	qDebug() << "looking up " << name << "at "<< url;
+	//qDebug() << "looking up " << name << "at "<< url;
 	return new HipOnlineReply(queryUrl, networkMgr);
 }

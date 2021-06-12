@@ -430,7 +430,7 @@ void OnlineQueries::onAavsoHipQueryStatusChanged()
 		  if (xml.hasError()) {
 			qDebug() << "XML error in AAVSO's answer:" << xml.errorString();
 		  }
-		qDebug() << "We have found OID=" << oid;
+		//qDebug() << "We have found OID=" << oid;
 
 		//disconnect(hipOnlineReply, SIGNAL(statusChanged()), this, SLOT(onAavsoHipQueryStatusChanged()));
 		//delete hipOnlineReply;
