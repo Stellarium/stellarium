@@ -193,6 +193,10 @@ Q_IMPORT_PLUGIN(RemoteSyncStelPluginInterface)
 Q_IMPORT_PLUGIN(VtsStelPluginInterface)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_ONLINEQUERIES
+Q_IMPORT_PLUGIN(OnlineQueriesPluginInterface)
+#endif
+
 // Initialize static variables
 StelApp* StelApp::singleton = Q_NULLPTR;
 qint64 StelApp::startMSecs = 0;

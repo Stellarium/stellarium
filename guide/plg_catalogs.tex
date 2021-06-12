@@ -1089,6 +1089,92 @@ current\_ns\_set	& string		& Current set of navigational stars. Possible values:
 \bottomrule
 \end{tabularx}
 
+
+\newpage
+\section{OnlineQueries Plugin}
+\label{sec:plugins:OnlineQueries}
+
+Stellarium includes and provides lots of information about many kinds
+of objects. However, there are scientific websites which provide even
+more specialized information about particular objects. This plugin
+\newFeature{V0.21.1} allows online access to several websites on a
+variety of special topics. To retrieve information, select the
+respective tab and press \button{Query}.
+
+\begin{description}
+\item[Wikipedia] The free online encyclopedia provides information
+  about many bright stars, the planets, moons and many asteroids, as
+  well as many deep-sky objects. The lookup is based on the English
+  proper name and opens a new tab in your webbrowser.
+\item[AAVSO] The \indexterm{International Variable Star
+  Index}\footnote{\url{https://www.aavso.org/vsx/}} of the
+  \indexterm{American Association of Variable Star Observers} (AAVSO)
+  provides data about variable stars in a new browser tab.
+\item[GCVS] The \indexterm{General Catalogue of Variable
+  Stars}\footnote{\url{http://www.sai.msu.su/gcvs/}} of the Sternberg
+  Astronomical Institute and the Institute of Astronomy of the Russian
+  Academy of Sciences in Moscow.
+\item[Ancient-Skies] A private project founded in preparation of the
+  \indexterm{International Year of Astronomy} 2009 which collects
+  information about star names and their mythologies
+  \citep{AncientSkies:2011}. The site is preparing a relaunch in 2021.
+\end{description}
+
+\noindent For technical reasons, there are two kinds of results: Some
+query results are presented in the plugin's dialog, while others with
+more complicated output (more external links, \ldots) are presented in
+your system's webbrowser.
+
+Regardless of the current program language, the result is always
+presented in English or the language of the respective website.
+
+In addition, you can configure up to three further websites. These
+must provide some public website which takes a query for a Hipparcos
+star number or object name.  For example, the website
+\url{https://biblicalastronomy.co/playground/fetch.cfm?Hipp=n}
+provides various data and cross-references for a star with Hipparcos
+number \texttt{n}.
+
+\subsection{Section \big[OnlineQueries\big] in config.ini file}
+%\label{sec:plugins:OnlineQueries:configuration}
+
+You can edit the \file{config.ini} file to change settings of the
+OnlineQueries plugin.  The only strings you should need to touch are
+the \texttt{customN\_\ldots} entries ($\mathtt{N}\in \left\{ 1, 2,
+3\right\}$). The placeholder \texttt{\%1} will be filled by either the
+Hipparcos number (if the respective \texttt{customN\_use\_hip} is
+\texttt{true}) or by the first English name used in Stellarium. The
+other entries decide whether to open the result in a webbrowser (if it
+is further structured) or in the GUI panel. The
+\texttt{customN\_use\_hip} should be \texttt{true} to use a star's
+Hipparcos number, or \texttt{false} to use the English name as key.
+
+
+\begin{center}
+{\scriptsize
+\begin{tabular}{l|l|l}\toprule
+\emph{ID} & \emph{Type} & \emph{Default}\\\midrule
+ancientskies\_url    &string & (don't override)\\ % https://www.ancient-skies.org/api.php?apikey=fZdn9QsNdCAY4KggkV2T\&response=HTML\&entity=star\&catalog=HIPPARCOS\&id=\%1 \\
+aavso\_hip\_url      &string & (don't override)\\ % https://www.aavso.org/vsx/index.php?view=api.object\&ident=HIP\%1 \\
+aavso\_oid\_url      &string & (don't override)\\ % https://www.aavso.org/vsx/index.php?view=detail.top\&oid=\%1      \\
+gcvs\_url            &string & (don't override)\\ % http://www.sai.msu.su/gcvs/cgi-bin/ident.cgi?cat=Hip+\&num=\%1    \\
+wikipedia\_url       &string & (don't override)\\ % https://en.wikipedia.org/wiki/\%1 \\
+\midrule
+custom1\_url         &string & https://biblicalastronomy.co/playground/fetch.cfm?Hipp=\%1 \\
+custom2\_url         &string & \\
+custom3\_url         &string & \\
+custom1\_in\_browser &boolean& false\\
+custom2\_in\_browser &boolean& false\\
+custom3\_in\_browser &boolean& false\\
+custom1\_use\_hip    &boolean& true \\
+custom2\_use\_hip    &boolean& true \\
+custom3\_use\_hip    &boolean& true \\
+\bottomrule
+\end{tabular}
+}
+\end{center}
+
+
 \newpage
 \section{Satellites Plugin}
 \label{sec:plugins:Satellites}
