@@ -26,7 +26,6 @@
 
 #include <QFont>
 #include <QString>
-#include <QPair>
 
 class QPixmap;
 class StelButton;
