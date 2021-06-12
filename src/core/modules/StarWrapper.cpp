@@ -111,18 +111,12 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		const QString commonNameI18 = StarMgr::getCommonName(s->getHip());
 		const QString additionalNameI18 = StarMgr::getAdditionalNames(s->getHip());
 		const QString sciName = StarMgr::getSciName(s->getHip());
-		const QString addSciName = StarMgr::getSciAdditionalName(s->getHip());
-		const QString dblSciName = StarMgr::getSciAdditionalDblName(s->getHip());
 		const QString varSciName = StarMgr::getGcvsName(s->getHip());
 		const QString wdsSciName = StarMgr::getWdsName(s->getHip());
 		QStringList designations;
 		if (!sciName.isEmpty())
 			designations.append(sciName);
-		if (!addSciName.isEmpty())
-			designations.append(addSciName);
-		if (!dblSciName.isEmpty())
-			designations.append(dblSciName);
-		if (!varSciName.isEmpty() && varSciName!=addSciName && varSciName!=dblSciName && varSciName!=sciName)
+		if (!varSciName.isEmpty() && varSciName!=sciName)
 			designations.append(varSciName);
 
 		QString hip, hipq;
@@ -143,7 +137,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		if (!crossIndexData.isEmpty())
 			designations.append(crossIndexData);
 
-		if (!wdsSciName.isEmpty() && wdsSciName!=addSciName && wdsSciName!=sciName)
+		if (!wdsSciName.isEmpty() && wdsSciName!=sciName)
 			designations.append(wdsSciName);
 
 		QString designationsList = designations.join(" - ");
