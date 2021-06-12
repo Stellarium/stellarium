@@ -184,7 +184,6 @@ void OcularDialog::insertNewCCD()
 	int count = ccdTableModel->rowCount();
 	ccdTableModel->insertRows(count, 1);
 	ui->ccdListView->setCurrentIndex(ccdTableModel->index(count, 1));
-	plugin->updateLists();
 }
 
 void OcularDialog::insertNewOcular()
@@ -192,7 +191,6 @@ void OcularDialog::insertNewOcular()
 	int count = ocularTableModel->rowCount();
 	ocularTableModel->insertRows(count, 1);
 	ui->ocularListView->setCurrentIndex(ocularTableModel->index(count, 1));
-	plugin->updateLists();
 }
 
 void OcularDialog::insertNewTelescope()
@@ -200,7 +198,6 @@ void OcularDialog::insertNewTelescope()
 	int count = telescopeTableModel->rowCount();
 	telescopeTableModel->insertRows(count, 1);
 	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(count, 1));
-	plugin->updateLists();
 }
 
 void OcularDialog::insertNewLens()
@@ -208,7 +205,6 @@ void OcularDialog::insertNewLens()
 	int count = lensTableModel->rowCount();
 	lensTableModel->insertRows(count, 1);
 	ui->lensListView->setCurrentIndex(lensTableModel->index(count, 1));
-	plugin->updateLists();
 }
 
 void OcularDialog::moveUpSelectedSensor()
