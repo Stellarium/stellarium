@@ -639,7 +639,7 @@ StelPluginInfo MeteorShowersStelPluginInterface::getPluginInfo() const
 	info.id = "MeteorShowers";
 	info.displayedName = N_("Meteor Showers");
 	info.authors = "Marcos Cardinot";
-	info.contact = "https://github.com/Stellarium/stellarium";
+	info.contact = STELLARIUM_DEV_URL;
 	info.acknowledgements = N_("This plugin was created in the 2013 campaign of the ESA Summer of Code in Space programme.");
 	info.description = N_(
 	"<p>"

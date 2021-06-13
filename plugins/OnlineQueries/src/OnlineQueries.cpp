@@ -59,7 +59,7 @@ StelPluginInfo OnlineQueriesPluginInterface::getPluginInfo() const
 	info.id = "OnlineQueries";
 	info.displayedName = N_("Online Queries");
 	info.authors = "Georg Zotti, Alexander Wolf";
-	info.contact = STELLARIUM_URL;
+	info.contact = STELLARIUM_DEV_URL;
 	info.description = N_("This plugin allows object information retrieval from selected online services.");
 	info.version = ONLINEQUERIES_PLUGIN_VERSION;
 	info.license = ONLINEQUERIES_PLUGIN_LICENSE;

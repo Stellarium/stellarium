@@ -71,6 +71,8 @@ public:
 
 	bool isPluginLoaded(const QString& moduleID);
 
+	QString getStandardSupportLinksInfo(QString moduleName, bool furtherInfo = false);
+
 	//! Get the corresponding module or Q_NULLPTR if can't find it.
 	//! @param moduleID the QObject name of the module instance, by convention it is equal to the class name.
 	//! @param noWarning if true, don't display any warning if the module is not found.

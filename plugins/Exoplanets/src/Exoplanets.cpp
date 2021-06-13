@@ -75,7 +75,7 @@ StelPluginInfo ExoplanetsStelPluginInterface::getPluginInfo() const
 	info.id = "Exoplanets";
 	info.displayedName = N_("Exoplanets");
 	info.authors = "Alexander Wolf";
-	info.contact = "https://github.com/Stellarium/stellarium";
+	info.contact = STELLARIUM_DEV_URL;
 	info.description = N_("This plugin plots the position of stars with exoplanets. Exoplanets data is derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu");
 	info.version = EXOPLANETS_PLUGIN_VERSION;
 	info.license = EXOPLANETS_PLUGIN_LICENSE;

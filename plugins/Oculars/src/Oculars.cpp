@@ -85,7 +85,7 @@ StelPluginInfo OcularsStelPluginInterface::getPluginInfo() const
 	info.id = "Oculars";
 	info.displayedName = N_("Oculars");
 	info.authors = "Timothy Reaves";
-	info.contact = "https://github.com/Stellarium/stellarium";
+	info.contact = STELLARIUM_DEV_URL;
 	info.description = N_("Shows the sky as if looking through a telescope eyepiece. (Only magnification and field of view are simulated.) It can also show a sensor frame and a Telrad sight.");
 	info.version = OCULARS_PLUGIN_VERSION;
 	info.license = OCULARS_PLUGIN_LICENSE;

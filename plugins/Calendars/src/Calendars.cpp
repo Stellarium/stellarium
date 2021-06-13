@@ -74,7 +74,7 @@ StelPluginInfo CalendarsStelPluginInterface::getPluginInfo() const
 	info.id = "Calendars";
 	info.displayedName = N_("Calendars");
 	info.authors = "Georg Zotti";
-	info.contact = "www.stellarium.org";
+	info.contact = STELLARIUM_DEV_URL;
 	info.description = N_("Calendars of the world");
 	info.version = CALENDARS_PLUGIN_VERSION;
 	info.license = CALENDARS_PLUGIN_LICENSE;

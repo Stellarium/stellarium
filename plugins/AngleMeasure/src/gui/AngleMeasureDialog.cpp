@@ -109,16 +109,8 @@ void AngleMeasureDialog::setAboutHtml(void)
 	html += "<p>" + q_("Start and end points in horizontal mode can be linked to the rotating sky, which may be helpful to keep relations between landscape and some celestial object or (with both linked) for Dobsonian starhopping.") + "</p>";
 	html += "<p>" + q_("*goes misty eyed* I recall measuring the size of the Cassini Division when I was a student. It was not the high academic glamor one might expect... It was cloudy... It was rainy... The observatory lab had some old scopes set up at one end, pointing at a <em>photograph</em> of Saturn at the other end of the lab. We measured. We calculated. We wished we were in Hawaii.") + "</p>";
 
-	html += "<h3>" + q_("Links") + "</h3>";
-	html += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg("Angle Measure plugin") + "</p>";
-	html += "<p><ul>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you have a question, you can {get an answer here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://groups.google.com/forum/#!forum/stellarium\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("Bug reports and feature requests can be made {here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://github.com/Stellarium/stellarium/issues\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you want to read full information about this plugin and its history, you can {get info here}.").toHtmlEscaped().replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/AngleMeasure_plugin\">\\1</a>") + "</li>";
-	html += "</ul></p></body></html>";
+	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Angle Measure plugin");
+	html += "</body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if(gui!=Q_NULLPTR)

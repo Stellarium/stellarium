@@ -281,16 +281,8 @@ void TelescopeDialog::setAboutText()
 	aboutPage += "<li>" + q_("the TelescopeServerNexStar telescope server core code (originally licensed under the LGPL, based on TelescopeServerLx200) by <b>Michael Heinz</b>.") + "</li>";
 	aboutPage += "<li>" + q_("INDI by <b>Alessandro Siniscalchi</b>.") + "</li></ul>";
 
-	aboutPage += "<h3>" + q_("Links") + "</h3>";
-	aboutPage += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg("Telescope Control plug-in") + "</p>";
-	aboutPage += "<p><ul>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	aboutPage += "<li>" + q_("If you have a question, you can {get an answer here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://groups.google.com/forum/#!forum/stellarium\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	aboutPage += "<li>" + q_("Bug reports and feature requests can be made {here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://github.com/Stellarium/stellarium/issues\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	aboutPage += "<li>" + q_("If you want to read full information about this plugin and its history, you can {get info here}.").toHtmlEscaped().replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Telescope_Control_plug\">\\1</a>") + "</li>";
-	aboutPage += "</ul></p></body></html>";
+	aboutPage += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Telescope Control plugin");
+	aboutPage += "</body></html>";
 	
 	QString helpPage = "<html><head></head><body>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.

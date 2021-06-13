@@ -279,16 +279,9 @@ void ExoplanetsDialog::setAboutHtml(void)
 	html += QString(q_("The list of potential habitable exoplanets and data about them were taken from \"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability Laboratory%3.")).arg("<a href=\"http://phl.upr.edu/projects/habitable-exoplanets-catalog\">").arg("<a href=\"http://phl.upr.edu/home\">").arg("</a>") + "</p>";
 
 	html += "<p>" + q_("The current catalog contains info about %1 planetary systems, which altogether have %2 exoplanets (including %3 potentially habitable exoplanets).").arg(ep->getCountPlanetarySystems()).arg(ep->getCountAllExoplanets()).arg(ep->getCountHabitableExoplanets()) + "</p>";
-	html += "<h3>" + q_("Links") + "</h3>";
-	html += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg("Exoplanets plugin") + "</p>";
-	html += "<p><ul>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you have a question, you can {get an answer here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://groups.google.com/forum/#!forum/stellarium\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("Bug reports and feature requests can be made {here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://github.com/Stellarium/stellarium/issues\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you want to read full information about this plugin and its history, you can {get info here}.").toHtmlEscaped().replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Exoplanets_plugin\">\\1</a>") + "</li>";
-	html += "</ul></p></body></html>";
+
+	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Exoplanets plugin");
+	html += "</body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if(gui!=Q_NULLPTR)

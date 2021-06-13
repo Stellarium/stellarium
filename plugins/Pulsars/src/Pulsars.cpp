@@ -71,7 +71,7 @@ StelPluginInfo PulsarsStelPluginInterface::getPluginInfo() const
 	info.id = "Pulsars";
 	info.displayedName = N_("Pulsars");
 	info.authors = "Alexander Wolf";
-	info.contact = "https://github.com/Stellarium/stellarium";
+	info.contact = STELLARIUM_DEV_URL;
 	info.description = N_("This plugin plots the position of various pulsars, with object information about each one.");
 	info.version = PULSARS_PLUGIN_VERSION;
 	info.license = PULSARS_PLUGIN_LICENSE;
