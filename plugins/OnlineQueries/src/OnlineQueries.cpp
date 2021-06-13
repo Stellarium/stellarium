@@ -69,6 +69,12 @@ StelPluginInfo OnlineQueriesPluginInterface::getPluginInfo() const
 OnlineQueries::OnlineQueries() :
 	enabled(false),
 	toolbarButton(Q_NULLPTR),
+	custom1UseHip(false),
+	custom2UseHip(false),
+	custom3UseHip(false),
+	custom1inBrowser(false),
+	custom2inBrowser(false),
+	custom3inBrowser(false),
 	hipQuery(Q_NULLPTR),
 	hipOnlineReply(Q_NULLPTR)
 {
@@ -100,6 +106,8 @@ void OnlineQueries::init()
 	// populate settings from main config file.
 	loadConfiguration();
 
+	createToolbarButton();
+
 	hipQuery=new HipOnlineQuery("");
 
 	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveConfiguration()));
@@ -111,7 +119,6 @@ void OnlineQueries::init()
 	addAction("actionShow_OnlineQueries_C1",    N_("Online Queries"), N_("Call custom site 1 on current selection"),  this, "queryCustomSite1()", "");
 	addAction("actionShow_OnlineQueries_C2",    N_("Online Queries"), N_("Call custom site 2 on current selection"),  this, "queryCustomSite2()", "");
 	addAction("actionShow_OnlineQueries_C3",    N_("Online Queries"), N_("Call custom site 3 on current selection"),  this, "queryCustomSite3()", "");
-	createToolbarButton();
 }
 
 void OnlineQueries::deinit()
@@ -131,7 +138,8 @@ void OnlineQueries::setEnabled(bool b)
 
 bool OnlineQueries::configureGui(bool show)
 {
-	dialog->setVisible(show);
+	if (show)
+		dialog->setVisible(true);
 	return true;
 }
 
