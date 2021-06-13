@@ -131,6 +131,8 @@ Oculars::Oculars()
 	, absoluteStarScaleCCD(1.0)
 	, flagMoonScaleMain(false)
 	, flagMinorBodiesScaleMain(false)
+	, flagSunScaleMain(false)
+	, flagPlanetsScaleMain(false)
 	, milkyWaySaturation(1.0)
 	, maxEyepieceAngle(0.0)
 	, flagRequireSelection(true)
@@ -2265,6 +2267,8 @@ void Oculars::unzoomOcular()
 
 	GETSTELMODULE(SolarSystem)->setFlagMoonScale(flagMoonScaleMain);
 	GETSTELMODULE(SolarSystem)->setFlagMinorBodyScale(flagMinorBodiesScaleMain);
+	GETSTELMODULE(SolarSystem)->setFlagSunScale(flagSunScaleMain);
+	GETSTELMODULE(SolarSystem)->setFlagPlanetScale(flagPlanetsScaleMain);
 
 	// Set the screen display
 	core->setFlipHorz(flipHorzMain);
@@ -2297,28 +2301,30 @@ void Oculars::zoom(bool zoomedIn)
 			if (flagHideGridsLines)
 			{
 				// Store current state for later resetting
-				flagGridLinesDisplayedMain	= propMgr->getStelPropertyValue("GridLinesMgr.gridlinesDisplayed").toBool();
-				flagCardinalPointsMain		= propMgr->getStelPropertyValue("LandscapeMgr.cardinalsPointsDisplayed").toBool();
-				flagConstellationLinesMain	= propMgr->getStelPropertyValue("ConstellationMgr.linesDisplayed").toBool();
+				flagGridLinesDisplayedMain		= propMgr->getStelPropertyValue("GridLinesMgr.gridlinesDisplayed").toBool();
+				flagCardinalPointsMain			= propMgr->getStelPropertyValue("LandscapeMgr.cardinalsPointsDisplayed").toBool();
+				flagConstellationLinesMain		= propMgr->getStelPropertyValue("ConstellationMgr.linesDisplayed").toBool();
 				flagConstellationBoundariesMain	= propMgr->getStelPropertyValue("ConstellationMgr.boundariesDisplayed").toBool();
-				flagAsterismLinesMain		= propMgr->getStelPropertyValue("AsterismMgr.linesDisplayed").toBool();
+				flagAsterismLinesMain			= propMgr->getStelPropertyValue("AsterismMgr.linesDisplayed").toBool();
 				flagRayHelpersLinesMain		= propMgr->getStelPropertyValue("AsterismMgr.rayHelpersDisplayed").toBool();
 			}
 
 			StelSkyDrawer *skyDrawer = core->getSkyDrawer();
 			// Current state
-			flagAdaptationMain	= skyDrawer->getFlagLuminanceAdaptation();
-			flagLimitStarsMain	= skyDrawer->getFlagStarMagnitudeLimit();
+			flagAdaptationMain		= skyDrawer->getFlagLuminanceAdaptation();
+			flagLimitStarsMain		= skyDrawer->getFlagStarMagnitudeLimit();
 			flagLimitPlanetsMain	= skyDrawer->getFlagPlanetMagnitudeLimit();
-			flagLimitDSOsMain	= skyDrawer->getFlagNebulaMagnitudeLimit();
-			magLimitStarsMain	= skyDrawer->getCustomStarMagnitudeLimit();
+			flagLimitDSOsMain		= skyDrawer->getFlagNebulaMagnitudeLimit();
+			magLimitStarsMain		= skyDrawer->getCustomStarMagnitudeLimit();
 			magLimitPlanetsMain	= skyDrawer->getCustomPlanetMagnitudeLimit();
-			magLimitDSOsMain	= skyDrawer->getCustomNebulaMagnitudeLimit();
+			magLimitDSOsMain		= skyDrawer->getCustomNebulaMagnitudeLimit();
 			relativeStarScaleMain	= skyDrawer->getRelativeStarScale();
 			absoluteStarScaleMain	= skyDrawer->getAbsoluteStarScale();
 
-			flagMoonScaleMain		= propMgr->getStelPropertyValue("SolarSystem.flagMoonScale").toBool();
+			flagMoonScaleMain			= propMgr->getStelPropertyValue("SolarSystem.flagMoonScale").toBool();
 			flagMinorBodiesScaleMain	= propMgr->getStelPropertyValue("SolarSystem.flagMinorBodyScale").toBool();
+			flagSunScaleMain			= propMgr->getStelPropertyValue("SolarSystem.flagSunScale").toBool();
+			flagPlanetsScaleMain		= propMgr->getStelPropertyValue("SolarSystem.flagPlanetScale").toBool();
 
 			milkyWaySaturation	= propMgr->getStelPropertyValue("MilkyWay.saturation").toDouble();
 
@@ -2381,6 +2387,8 @@ void Oculars::zoomOcular()
 
 	GETSTELMODULE(SolarSystem)->setFlagMoonScale(false);
 	GETSTELMODULE(SolarSystem)->setFlagMinorBodyScale(false);
+	GETSTELMODULE(SolarSystem)->setFlagSunScale(false);
+	GETSTELMODULE(SolarSystem)->setFlagPlanetScale(false);
 
 	movementManager->setFlagTracking(true);
 	movementManager->setFlagEnableZoomKeys(false);
