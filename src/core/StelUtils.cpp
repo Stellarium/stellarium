@@ -376,7 +376,7 @@ QString decDegToDmsStr(const double angle)
 	double s;
 	unsigned int d, m;
 	decDegToDms(angle, sign, d, m, s);
-	return QString("%1%2%3%4\'%5\"").arg(sign?'+':'-').arg(d).arg(QChar(0x00B0)).arg(m,2,10,QLatin1Char('0')).arg((unsigned int)s,2,10,QLatin1Char('0'));
+	return QString("%1%2%3%4\'%5\"").arg(sign?'+':'-').arg(d).arg(QChar(0x00B0)).arg(m,2,10,QLatin1Char('0')).arg(static_cast<unsigned int>(s),2,10,QLatin1Char('0'));
 }
 
 // Convert a dms formatted string to an angle in radian
