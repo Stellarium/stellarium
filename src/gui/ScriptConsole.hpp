@@ -20,6 +20,7 @@
 #ifndef SCRIPTCONSOLE_HPP
 #define SCRIPTCONSOLE_HPP
 
+#include <QFileInfo>
 #include <QObject>
 #include "StelDialog.hpp"
 
@@ -67,7 +68,7 @@ protected:
 private:
 	static const QString getFileMask();
 	StelScriptSyntaxHighlighter* highlighter;
-	bool useUserDir;
+	bool useUserDir; 	//!< if set, file dialog will open on user directory
 	bool hideWindowAtScriptRun;
 	bool clearOutput;
 
@@ -82,7 +83,7 @@ private:
 	//          N: 3|--                   N: 3|-
 	// 4: t/fn  Y: 2|ld   4|-  2|sv       Y: 1|cb   3: t/-
 	//  	    N: 4|--                   N: 4|-
-	QString scriptFileName;
+	QFileInfo lastFile; //!< last opened script file
 	bool isNew;
 	bool dirty;
 

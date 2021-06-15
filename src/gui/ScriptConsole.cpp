@@ -45,7 +45,7 @@ ScriptConsole::ScriptConsole(QObject *parent)
 	, useUserDir(false)
 	, hideWindowAtScriptRun(false)
 	, clearOutput(false)	
-	, scriptFileName("")
+	, lastFile (QFileInfo(""))
 	, isNew(true)
 	, dirty(false)
 {
@@ -175,33 +175,49 @@ void ScriptConsole::loadScript()
 	if (dirty)
 	{
 		// We are loaded and dirty: don't just overwrite!
-        if (QMessageBox::question(&StelMainView::getInstance(), q_("Caution!"), q_("Are you sure you want to load script without saving changes?"), QMessageBox::Yes | QMessageBox::No) == QMessageBox::No)
+        	if (QMessageBox::question(&StelMainView::getInstance(), q_("Caution!"), q_("Are you sure you want to load script without saving changes?"), QMessageBox::Yes | QMessageBox::No) == QMessageBox::No
+		)
+		{
 			return;
+		}
 	}
 	
 	QString openDir;
-	if (getFlagUserDir())
+	if (lastFile.absolutePath() != "")
+	{
+		openDir = lastFile.absolutePath();
+	}
+	else if (getFlagUserDir())
 	{
 		openDir = StelFileMgr::findFile("scripts", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory));		
 		if (openDir.isEmpty() || openDir.contains(StelFileMgr::getInstallationDir()))
+		{
 			openDir = StelFileMgr::getUserDir();
+		}
 	}
 	else
+	{
 		openDir = StelFileMgr::getInstallationDir() + "/scripts";
+	}
 
 	QString filter = q_("Stellarium Script Files");
 	filter.append(" (*.ssc *.inc);;");
 	filter.append(getFileMask());
 	QString aFile = QFileDialog::getOpenFileName(Q_NULLPTR, q_("Load Script"), openDir, filter);
+
 	if (aFile.isNull())
+	{
 		return;
-	scriptFileName = aFile;
-	QFile file(scriptFileName);
+	}
+
+	lastFile = QFileInfo(aFile);
+
+	QFile file(lastFile.canonicalFilePath());
 	if (file.open(QIODevice::ReadOnly))
 	{
 		ui->scriptEdit->setPlainText(file.readAll());
 		dirty = false;
-		ui->includeEdit->setText(StelFileMgr::dirName(scriptFileName));
+		ui->includeEdit->setText(lastFile.canonicalPath());
 		file.close();
 	}
 	ui->tabs->setCurrentIndex(0);
@@ -209,26 +225,35 @@ void ScriptConsole::loadScript()
 
 void ScriptConsole::saveScript()
 {
-	QString saveDir = StelFileMgr::findFile("scripts", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory));
-	if (saveDir.isEmpty())
-		saveDir = StelFileMgr::getUserDir();
+	QString saveDir = "";
+	if (lastFile.absolutePath() != "")
+	{
+		saveDir = lastFile.absolutePath();
+	}
+	else
+	{
+		saveDir = StelFileMgr::findFile("scripts", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory));
+		if (saveDir.isEmpty())
+			saveDir = StelFileMgr::getUserDir();
+	}
 
 	QString defaultFilter("(*.ssc)");
-	// Let's ask file name, when file is new and overwrite him in other case	
-	if (scriptFileName.isEmpty())
+	// Let's ask file name when file is new and overwrite in other case	
+	if (! lastFile.isFile())
 	{
 		QString aFile = QFileDialog::getSaveFileName(Q_NULLPTR, q_("Save Script"), saveDir + "/myscript.ssc", getFileMask(), &defaultFilter);
 		if (aFile.isNull())
 			return;
-		scriptFileName = aFile;
+		lastFile = QFileInfo(aFile);
 	}
-	else
+	else // file name known
 	{
 		// skip save
 		if (!dirty)
 			return;
 	}
-	QFile file(scriptFileName);
+
+	QFile file(lastFile.canonicalFilePath());
 	if (file.open(QIODevice::WriteOnly))
 	{
 		QTextStream out(&file);
@@ -248,7 +273,7 @@ void ScriptConsole::clearButtonPressed()
 		if (QMessageBox::question(&StelMainView::getInstance(), q_("Caution!"), q_("Are you sure you want to clear script?"), QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes)
 		{
 			ui->scriptEdit->clear();
-			scriptFileName = ""; // OK, it's a new file!
+			lastFile = QFileInfo(""); // OK, it's a new file!
 			dirty = false;
 		}
 	}
@@ -268,13 +293,13 @@ void ScriptConsole::preprocessScript()
 	if (sender() == ui->preprocessSSCButton)
 	{
 		qDebug() << "[ScriptConsole] Preprocessing with SSC proprocessor";
-		StelApp::getInstance().getScriptMgr().preprocessScript( scriptFileName, src, dest, ui->includeEdit->text(), errLoc );
+		StelApp::getInstance().getScriptMgr().preprocessScript( lastFile.canonicalFilePath(), src, dest, ui->includeEdit->text(), errLoc );
 	}
 	else
 		qDebug() << "[ScriptConsole] WARNING - unknown preprocessor type";
 
 	ui->scriptEdit->setPlainText(dest);
-	scriptFileName = ""; // OK, it's a new file!
+	lastFile = QFileInfo(""); // OK, it's a new file!
 	dirty = true;
 	ui->tabs->setCurrentIndex( 0 );
 	if( errLoc != -1 ){
@@ -293,7 +318,7 @@ void ScriptConsole::runScript()
 	
 	appendLogLine(QString("Starting script at %1").arg(QDateTime::currentDateTime().toString()));
 	int errLoc = 0;
-	if (!StelApp::getInstance().getScriptMgr().runScriptDirect(scriptFileName, ui->scriptEdit->toPlainText(), errLoc, ui->includeEdit->text()))
+	if (!StelApp::getInstance().getScriptMgr().runScriptDirect(lastFile.canonicalFilePath(), ui->scriptEdit->toPlainText(), errLoc, ui->includeEdit->text()))
 	{
 		QString msg = QString("ERROR - cannot run script");
 		qWarning() << "[ScriptConsole] " + msg;
@@ -353,7 +378,17 @@ void ScriptConsole::appendOutputLine(const QString& s)
 
 void ScriptConsole::includeBrowse()
 {
-	QString aDir = QFileDialog::getExistingDirectory(Q_NULLPTR, q_("Select Script Include Directory"), StelFileMgr::getInstallationDir() + "/scripts");
+	QString aDir;
+	// if a script was saved before, use its directory
+	// TODO there is a repetition of user directory decision/retrieval going on in different places...
+	if (lastFile.absolutePath() != "")
+	{
+		aDir = lastFile.absolutePath();
+	}
+	else // otherwise, use the standard script directory
+	{
+		aDir = QFileDialog::getExistingDirectory(Q_NULLPTR, q_("Select Script Include Directory"), StelFileMgr::getInstallationDir() + "/scripts");
+	}
 	if (!aDir.isNull())
 		ui->includeEdit->setText(aDir);
 }
