@@ -35,7 +35,7 @@ OUTSIDE = { # 'n' = nearby, 'u' = under, 'a' = around, 'r' = round (?)
 NEBULAE = [
     # almagest,    modern,     greek,       english
     ('Tau 30-33', 'M 45',     'Πλειάδες',  'Pleiades'),
-    ('Tau 11-15', 'Mel 25',   'Υάδες',     'Hyades'),
+    ('Tau 11-15', 'Mel 25',   'ʿΥάδες',     'Hyades'),
     ('Leo 33',    'Mel 111',  'πλόκαμος',  'Coma'),
     ('sco 22',    'NGC 6441', '',          ''),
 ]
