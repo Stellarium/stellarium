@@ -317,6 +317,9 @@
               <property name="text">
                <string>Update positions</string>
               </property>
+              <property name="shortcut">
+               <string>Shift+F10</string>
+              </property>
              </widget>
             </item>
            </layout>
@@ -663,6 +666,9 @@
               <property name="text">
                <string>Calculate ephemeris</string>
               </property>
+              <property name="shortcut">
+               <string>Shift+F10</string>
+              </property>
              </widget>
             </item>
            </layout>
@@ -869,6 +875,9 @@
              <widget class="QPushButton" name="transitsCalculateButton">
               <property name="text">
                <string>Calculate transits</string>
+              </property>
+              <property name="shortcut">
+               <string>Shift+F10</string>
               </property>
              </widget>
             </item>
@@ -1197,6 +1206,9 @@
               </property>
               <property name="text">
                <string>Calculate phenomena</string>
+              </property>
+              <property name="shortcut">
+               <string>Shift+F10</string>
               </property>
              </widget>
             </item>
