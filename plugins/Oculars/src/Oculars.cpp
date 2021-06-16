@@ -1426,7 +1426,6 @@ void Oculars::toggleCCD(bool show)
 		absoluteStarScaleCCD=skyDrawer->getAbsoluteStarScale();
 		skyDrawer->setRelativeStarScale(relativeStarScaleMain);
 		skyDrawer->setAbsoluteStarScale(absoluteStarScaleMain);
-		movementManager->setFlagTracking(false);
 		//Zoom out
 		if (getFlagInitFovUsage())
 			movementManager->zoomTo(movementManager->getInitFov());
@@ -2261,7 +2260,6 @@ void Oculars::unzoomOcular()
 	skyDrawer->setFlagNebulaMagnitudeLimit(flagLimitDSOsMain);
 	skyDrawer->setCustomPlanetMagnitudeLimit(magLimitPlanetsMain);
 	skyDrawer->setCustomNebulaMagnitudeLimit(magLimitDSOsMain);
-	movementManager->setFlagTracking(false);
 	movementManager->setFlagEnableZoomKeys(true);
 	movementManager->setFlagEnableMouseNavigation(true);
 
