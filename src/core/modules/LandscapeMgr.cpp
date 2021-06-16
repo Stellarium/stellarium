@@ -60,24 +60,24 @@ public:
 	enum CompassDirection
 	{
 		// Cardinals (4-wind compass rose)
-		dN		=  1,		// north
-		dS		=  2,		// south
-		dE		=  3,		// east
-		dW		=  4,		// west
-		// Ordinals (8-wind compass rose)
-		dNE		=  5,		// northeast
-		dSE		=  6,		// southeast
-		dNW		=  7,		// northwest
-		dSW		=  8,		// southwest
-		// 16-wind compass rose
-		dNNE	=  9,		// north-northeast
+		dN	=  1,	// north
+		dS	=  2,	// south
+		dE	=  3,	// east
+		dW	=  4,	// west
+		// Intercardinals (or ordinals) (8-wind compass rose)
+		dNE	=  5,	// northeast
+		dSE	=  6,	// southeast
+		dNW	=  7,	// northwest
+		dSW	=  8,	// southwest
+		// Secondary Intercardinals (16-wind compass rose)
+		dNNE	=  9,	// north-northeast
 		dENE	= 10,	// east-northeast
 		dESE	= 11,	// east-southeast
 		dSSE	= 12,	// south-southeast
 		dSSW	= 13,	// south-southwest
 		dWSW	= 14,	// west-southwest
 		dWNW	= 15,	// west-northwest
-		dNNW	= 16		// north-northwest
+		dNNW	= 16	// north-northwest
 	};
 
 	Cardinals(float _radius = 1.);
@@ -99,7 +99,6 @@ public:
 	bool getFlagShow16WCRLabels() const { return fader16WCR; }
 private:
 	class StelPropertyMgr* propMgr;
-	//float radius;
 	QFont font4WCR, font8WCR, font16WCR;
 	Vec3f color;
 	QMap<Cardinals::CompassDirection, Vec3f> rose4winds, rose8winds, rose16winds;
@@ -110,8 +109,7 @@ private:
 
 
 Cardinals::Cardinals(float _radius)
-	: // radius(_radius),
-	  color(0.6f,0.2f,0.2f)
+	: color(0.6f,0.2f,0.2f)
 {
 	Q_UNUSED(_radius)
 	QSettings* conf = StelApp::getInstance().getSettings();
@@ -127,30 +125,21 @@ Cardinals::Cardinals(float _radius)
 
 	// Directions
 	rose4winds = {
-		{ dN,	Vec3f(-1.f, 0.f, 0.f) },
-		{ dS,	Vec3f(1.f, 0.f, 0.f) },
-		{ dE,	Vec3f(0.f, 1.f, 0.f) },
-		{ dW,	Vec3f(0.f, -1.f, 0.f) }
+		{ dN, Vec3f(-1.f, 0.f, 0.f) }, { dS, Vec3f(1.f,  0.f, 0.f) },
+		{ dE, Vec3f( 0.f, 1.f, 0.f) }, { dW, Vec3f(0.f, -1.f, 0.f) }
 	};
 	rose8winds = {
-		{ dNE,	Vec3f(-1.f, 1.f, 0.f) },
-		{ dSE,	Vec3f(1.f, 1.f, 0.f) },
-		{ dSW,	Vec3f(1.f, -1.f, 0.f) },
-		{ dNW,	Vec3f(-1.f, -1.f, 0.f) }
+		{ dNE, Vec3f(-1.f,  1.f, 0.f) }, { dSE, Vec3f( 1.f,  1.f, 0.f) },
+		{ dSW, Vec3f( 1.f, -1.f, 0.f) }, { dNW, Vec3f(-1.f, -1.f, 0.f) }
 	};
 	const float cp = 1.f/(1+sqrt(2));
 	const float cn = -1.f*cp;
 	rose16winds = {
-		{ dNNE,	Vec3f(-1.f, cp, 0.f) },
-		{ dENE,	Vec3f(cn, 1.f, 0.f) },
-		{ dESE,	Vec3f(cp, 1.f, 0.f) },
-		{ dSSE,	Vec3f(1.f, cp, 0.f) },
-		{ dSSW,	Vec3f(1.f, cn, 0.f) },
-		{ dWSW,	Vec3f(cp, -1.f, 0.f) },
-		{ dWNW,	Vec3f(cn, -1.f, 0.f) },
-		{ dNNW,	Vec3f(-1.f, cn, 0.f) }
+		{ dNNE, Vec3f(-1.f,   cp, 0.f) }, { dENE, Vec3f(  cn,  1.f, 0.f) },
+		{ dESE, Vec3f(  cp,  1.f, 0.f) }, { dSSE, Vec3f( 1.f,   cp, 0.f) },
+		{ dSSW, Vec3f( 1.f,   cn, 0.f) }, { dWSW, Vec3f(  cp, -1.f, 0.f) },
+		{ dWNW, Vec3f(  cn, -1.f, 0.f) }, { dNNW, Vec3f(-1.f,   cn, 0.f) }
 	};
-
 	// English names for cardinals
 	labels = {
 		{   dN,  "N" }, {   dS,  "S" }, {   dE,  "E" }, {   dW,  "W" },
