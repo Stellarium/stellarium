@@ -322,20 +322,8 @@ Planet::~Planet()
 
 void Planet::translateName(const StelTranslator& trans)
 {
-	if (!nativeName.isEmpty() && getFlagNativeName())
-	{
-		if (getFlagTranslatedName())
-			nameI18 = trans.qtranslate(nativeName);
-		else
-			nameI18 = nativeName;
-	}
-	else
-	{
-		if (getFlagTranslatedName())
-			nameI18 = trans.qtranslate(englishName, getContextString());
-		else
-			nameI18 = englishName;
-	}
+	nameI18 = trans.qtranslate(englishName, getContextString());
+	nativeNameMeaningI18n = (!nativeNameMeaning.isEmpty() ? trans.qtranslate(nativeNameMeaning) : "");
 }
 
 void Planet::setIAUMoonNumber(QString designation)
@@ -409,7 +397,21 @@ QString Planet::getInfoStringName(const StelCore *core, const InfoStringGroup& f
 	oss << "<h2>";
 	if (englishName=="Pluto") // We must prepend minor planet number here. Actually Dwarf Planet Pluto is still a "Planet" object in Stellarium...
 		oss << QString("(134340) ");
-	oss << getNameI18n();  // UI translation can differ from sky translation
+
+	if (getFlagTranslatedName())
+	{
+		if (getFlagNativeName())
+			oss << (nativeNameMeaningI18n.isEmpty() ? getNameI18n() : QString("%1 (%2)").arg(getNativeNameI18n(), getNameI18n()));
+		else
+			oss << getNameI18n();
+	}
+	else
+	{
+		if (getFlagNativeName())
+			oss << (nativeName.isEmpty() ? getEnglishName() : QString("%1 (%2)").arg(getNativeName(), getEnglishName()));
+		else
+			oss << getEnglishName();
+	}
 	oss.setRealNumberNotation(QTextStream::FixedNotation);
 	oss.setRealNumberPrecision(1);
 	if (sphereScale != 1.)
@@ -1329,8 +1331,20 @@ QString Planet::getSkyLabel(const StelCore*) const
 	QString str;
 	QTextStream oss(&str);
 	oss.setRealNumberPrecision(4);
-	oss << getNameI18n();
-
+	if (getFlagTranslatedName())
+	{
+		if (getFlagNativeName())
+			oss << (nativeNameMeaningI18n.isEmpty() ? getNameI18n() : QString("%1 (%2)").arg(getNativeNameI18n(), getNameI18n()));
+		else
+			oss << getNameI18n();
+	}
+	else
+	{
+		if (getFlagNativeName())
+			oss << (nativeName.isEmpty() ? getEnglishName() : QString("%1 (%2)").arg(getNativeName(), getEnglishName()));
+		else
+			oss << getEnglishName();
+	}
 	if (sphereScale != 1.)
 	{
 		oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";

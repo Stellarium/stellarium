@@ -367,15 +367,19 @@ void SolarSystem::recreateTrails()
 void SolarSystem::updateSkyCulture(const QString& skyCultureDir)
 {
 	planetNativeNamesMap.clear();
+	planetNativeNamesMeaningMap.clear();
 
 	QString namesFile = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/planet_names.fab");
 
 	if (namesFile.isEmpty())
 	{
-		for (const auto& p : systemPlanets)
+		for (const auto& p : qAsConst(systemPlanets))
 		{
 			if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
+			{
 				p->setNativeName("");
+				p->setNativeNameMeaning("");
+			}
 		}
 		updateI18n();
 		return;
@@ -397,7 +401,7 @@ void SolarSystem::updateSkyCulture(const QString& skyCultureDir)
 	// which will be available in recRx.capturedTexts()
 	QRegExp recRx("^\\s*(\\w+)\\s+\"(.+)\"\\s+_[(]\"(.+)\"[)]\\n");
 
-	QString record, planetId, nativeName;
+	QString record, planetId, nativeName, nativeNameMeaning;
 
 	// keep track of how many records we processed.
 	int totalRecords=0;
@@ -421,18 +425,23 @@ void SolarSystem::updateSkyCulture(const QString& skyCultureDir)
 		else
 		{
 			planetId = recRx.cap(1).trimmed();
-			nativeName = recRx.cap(3).trimmed(); // Use translatable text
+			nativeName = recRx.cap(2).trimmed();
+			nativeNameMeaning = recRx.cap(3).trimmed();
 			planetNativeNamesMap[planetId] = nativeName;
+			planetNativeNamesMeaningMap[planetId] = nativeNameMeaning;
 			readOk++;
 		}
 	}
 	planetNamesFile.close();
 	qDebug() << "Loaded" << readOk << "/" << totalRecords << "native names of planets";
 
-	for (const auto& p : systemPlanets)
+	for (const auto& p : qAsConst(systemPlanets))
 	{
 		if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
+		{
 			p->setNativeName(planetNativeNamesMap[p->getEnglishName()]);
+			p->setNativeNameMeaning(planetNativeNamesMeaningMap[p->getEnglishName()]);
+		}
 	}
 
 	updateI18n();

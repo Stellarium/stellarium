@@ -1094,7 +1094,7 @@ private:
 	Vec3f trailsColor;
 	Vec3f pointerColor;
 
-	QHash<QString, QString> planetNativeNamesMap;
+	QHash<QString, QString> planetNativeNamesMap, planetNativeNamesMeaningMap;
 	QStringList minorBodies;
 
 	Vec3d lightTimeSunPosition;			// when observing a solar eclipse, we need solar position 8 minutes ago.

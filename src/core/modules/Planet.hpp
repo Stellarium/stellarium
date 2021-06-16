@@ -198,6 +198,8 @@ public:
 	virtual Vec3d getJ2000EquatorialPos(const StelCore *core) const Q_DECL_OVERRIDE;
 	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE;
 	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
+	QString getNativeName(void) const { return nativeName; }
+	QString getNativeNameI18n(void) const { return nativeNameMeaningI18n; }
 	QString getCommonEnglishName(void) const {return englishName;}
 	QString getCommonNameI18n(void) const {return nameI18;}
 	//! Get angular semidiameter, degrees. If planet display is artificially enlarged (e.g. Moon upscale), value will also be increased.
@@ -244,6 +246,7 @@ public:
 	Orbit* getOrbit() const {return orbitPtr;}
 
 	void setNativeName(QString planet) { nativeName = planet; }
+	void setNativeNameMeaning(QString planet) { nativeNameMeaning = planet; }
 
 	//! set the IAU moon number (designation of the moon), if any.
 	void setIAUMoonNumber(QString designation);
@@ -588,6 +591,8 @@ protected:
 	QString englishName;             // english planet name
 	QString nameI18;                 // International translated name
 	QString nativeName;              // Can be used in a skyculture
+	QString nativeNameMeaning;       // Can be used in a skyculture
+	QString nativeNameMeaningI18n;   // Can be used in a skyculture
 	QString texMapName;              // Texture file path
 	QString normalMapName;           // Texture file path
 	RotationElements re;             // Rotation and axis orientation parameters
