@@ -22,6 +22,7 @@
 
 #include "StelObject.hpp"
 #include "StelProjector.hpp"
+#include "StelPropertyMgr.hpp"
 #include "VecMath.hpp"
 #include "GeomMath.hpp"
 #include "StelFader.hpp"
@@ -401,10 +402,6 @@ public:
 	void setFlagNativeName(bool b) { flagNativeName = b; }
 	bool getFlagNativeName(void) const { return flagNativeName; }
 
-	bool flagTranslatedName;
-	void setFlagTranslatedName(bool b) { flagTranslatedName = b; }
-	bool getFlagTranslatedName(void) const { return flagTranslatedName; }
-
 	///////////////////////////////////////////////////////////////////////////
 	// DEPRECATED
 	///// Orbit related code
@@ -562,7 +559,7 @@ protected:
 	Vec3f getCurrentOrbitColor() const;
 	
 	// Return the information string "ready to print" :)
-	QString getSkyLabel(const StelCore* core) const;
+	QString getPlanetLabel() const;
 
 	// Draw the 3d model. Call the proper functions if there are rings etc..
 	void draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenSz, bool drawOnlyRing=false);
@@ -656,8 +653,7 @@ protected:
 	bool atmosphere;                 // Does the planet have an atmosphere?
 	bool halo;                       // Does the planet have a halo?
 	PlanetType pType;                // Type of body
-
-    bool multisamplingEnabled_;
+	bool multisamplingEnabled_;
 
 	static ApparentMagnitudeAlgorithm vMagAlgorithm;
 
@@ -674,6 +670,7 @@ protected:
 	static int orbitsThickness;
 
 private:
+	class StelPropertyMgr* propMgr;
 	QString iauMoonNumber;
 
 	const QString getContextString() const;

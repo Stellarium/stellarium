@@ -445,11 +445,6 @@ float ConstellationMgr::getFontSize() const
 void ConstellationMgr::setConstellationDisplayStyle(ConstellationDisplayStyle style)
 {
 	constellationDisplayStyle=style;
-	if (constellationDisplayStyle==constellationsTranslated)
-		GETSTELMODULE(SolarSystem)->setFlagTranslatedNames(true);
-	else
-		GETSTELMODULE(SolarSystem)->setFlagTranslatedNames(false);
-
 	emit constellationsDisplayStyleChanged(constellationDisplayStyle);
 }
 

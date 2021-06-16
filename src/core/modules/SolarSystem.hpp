@@ -65,7 +65,6 @@ class SolarSystem : public StelObjectModule
 	Q_PROPERTY(bool flagPointer			READ getFlagPointer			WRITE setFlagPointer			NOTIFY flagPointerChanged)
 	// was bool nativeNamesDisplayed
 	Q_PROPERTY(bool flagNativePlanetNames		READ getFlagNativePlanetNames		WRITE setFlagNativePlanetNames		NOTIFY flagNativePlanetNamesChanged)
-	Q_PROPERTY(bool flagTranslatedNames		READ getFlagTranslatedNames		WRITE setFlagTranslatedNames		NOTIFY flagTranslatedNamesChanged)
 	Q_PROPERTY(bool planetsDisplayed		READ getFlagPlanets			WRITE setFlagPlanets			NOTIFY flagPlanetsDisplayedChanged)
 	Q_PROPERTY(bool flagPlanetsOrbitsOnly		READ getFlagPlanetsOrbitsOnly		WRITE setFlagPlanetsOrbitsOnly		NOTIFY flagPlanetsOrbitsOnlyChanged)
 	Q_PROPERTY(bool flagPermanentOrbits		READ getFlagPermanentOrbits		WRITE setFlagPermanentOrbits		NOTIFY flagPermanentOrbitsChanged)
@@ -635,11 +634,6 @@ public slots:
 	//! Get the current value of the flag which enables showing native names for planets or not.
 	bool getFlagNativePlanetNames(void) const;
 
-	//! Set flag which enable use translated names for planets or not.
-	void setFlagTranslatedNames(bool b);
-	//! Get the current value of the flag which enables showing translated names for planets or not.
-	bool getFlagTranslatedNames(void) const;
-
 	//! Set flag which enabled the showing of isolated trails for selected objects only or not
 	void setFlagIsolatedTrails(bool b);
 	//! Get the current value of the flag which enables showing of isolated trails for selected objects only or not.
@@ -728,7 +722,6 @@ signals:
 	void maxTrailPointsChanged(int max);
 	void flagPointerChanged(bool b);
 	void flagNativePlanetNamesChanged(bool b);
-	void flagTranslatedNamesChanged(bool b);
 	void flagPlanetsDisplayedChanged(bool b);
 	void flagPlanetsOrbitsOnlyChanged(bool b);
 	void flagPermanentOrbitsChanged(bool b);
@@ -1060,7 +1053,6 @@ private:
 	bool flagShow;
 	bool flagPointer;                           // show red cross selection pointer?
 	bool flagNativePlanetNames;                 // show native names for planets?
-	bool flagTranslatedNames;                   // show translated names?
 	bool flagIsolatedTrails;
 	int numberIsolatedTrails;
 	int maxTrailPoints;                         // limit trails to a manageable size.

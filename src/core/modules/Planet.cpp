@@ -216,7 +216,6 @@ Planet::Planet(const QString& englishName,
 	       bool hasHalo,
 	       const QString& pTypeStr)
 	: flagNativeName(true),
-	  flagTranslatedName(true),
 	  deltaJDE(StelCore::JD_SECOND),
 	  deltaOrbitJDE(0.0),
 	  closeOrbit(acloseOrbit),
@@ -301,6 +300,7 @@ Planet::Planet(const QString& englishName,
 	{
 		deltaJDE = 0.001*StelCore::JD_SECOND;
 	}
+	propMgr = StelApp::getInstance().getStelPropertyManager();
 }
 
 // called in SolarSystem::init() before first planet is created. May initialize static variables.
@@ -389,34 +389,56 @@ const QString Planet::getContextString() const
 	return context;
 }
 
-QString Planet::getInfoStringName(const StelCore *core, const InfoStringGroup& flags) const
+QString Planet::getPlanetLabel() const
 {
-	Q_UNUSED(core) Q_UNUSED(flags)
 	QString str;
 	QTextStream oss(&str);
-	oss << "<h2>";
 	if (englishName=="Pluto") // We must prepend minor planet number here. Actually Dwarf Planet Pluto is still a "Planet" object in Stellarium...
 		oss << QString("(134340) ");
-
-	if (getFlagTranslatedName())
+	switch (propMgr->getStelPropertyValue("ConstellationMgr.constellationDisplayStyle").toInt())
 	{
-		if (getFlagNativeName())
-			oss << (nativeNameMeaningI18n.isEmpty() ? getNameI18n() : QString("%1 (%2)").arg(getNativeNameI18n(), getNameI18n()));
-		else
+		case 1: // constellationsNative
+		{
+			if (getFlagNativeName())
+				oss << (nativeName.isEmpty() ? getNameI18n() : QString("%1 [%2]").arg(getNativeName(), getNameI18n()));
+			else
+				oss << getNameI18n();
+			break;
+		}
+		case 2: // constellationsTranslated
+		{
+			if (getFlagNativeName())
+				oss << (nativeNameMeaningI18n.isEmpty() ? getNameI18n() : QString("%1 [%2]").arg(getNativeNameI18n(), getNameI18n()));
+			else
+				oss << getNameI18n();
+			break;
+		}
+		case 3: // constellationsEnglish
+		{
+			if (getFlagNativeName())
+				oss << (nativeNameMeaning.isEmpty() ? getEnglishName() : QString("%1 [%2]").arg(nativeNameMeaning, getEnglishName()));
+			else
+				oss << getEnglishName();
+			break;
+		}
+		default:
 			oss << getNameI18n();
-	}
-	else
-	{
-		if (getFlagNativeName())
-			oss << (nativeName.isEmpty() ? getEnglishName() : QString("%1 (%2)").arg(getNativeName(), getEnglishName()));
-		else
-			oss << getEnglishName();
+			break;
 	}
 	oss.setRealNumberNotation(QTextStream::FixedNotation);
 	oss.setRealNumberPrecision(1);
 	if (sphereScale != 1.)
 		oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
-	oss << "</h2>";
+
+	return str;
+}
+
+QString Planet::getInfoStringName(const StelCore *core, const InfoStringGroup& flags) const
+{
+	Q_UNUSED(core) Q_UNUSED(flags)
+	QString str;
+	QTextStream oss(&str);
+	oss << "<h2>" << getPlanetLabel() << "</h2>";
 	return str;
 }
 
@@ -1322,34 +1344,6 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 		map.insert("subsolar_b", phys.second[1]*M_180_PI);
 	}
 	return map;
-}
-
-
-//! Get sky label (sky translation)
-QString Planet::getSkyLabel(const StelCore*) const
-{
-	QString str;
-	QTextStream oss(&str);
-	oss.setRealNumberPrecision(4);
-	if (getFlagTranslatedName())
-	{
-		if (getFlagNativeName())
-			oss << (nativeNameMeaningI18n.isEmpty() ? getNameI18n() : QString("%1 (%2)").arg(getNativeNameI18n(), getNameI18n()));
-		else
-			oss << getNameI18n();
-	}
-	else
-	{
-		if (getFlagNativeName())
-			oss << (nativeName.isEmpty() ? getEnglishName() : QString("%1 (%2)").arg(getNativeName(), getEnglishName()));
-		else
-			oss << getEnglishName();
-	}
-	if (sphereScale != 1.)
-	{
-		oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
-	}
-	return str;
 }
 
 float Planet::getSelectPriority(const StelCore* core) const
@@ -4081,7 +4075,7 @@ void Planet::drawHints(const StelCore* core, const QFont& planetNameFont)
 	// Draw nameI18 + scaling if it's not == 1.
 	float tmp = (hintFader.getInterstate()<=0.f ? 7.f : 10.f) + static_cast<float>(getAngularSize(core)*M_PI/180.)*prj->getPixelPerRadAtCenter()/1.44f; // Shift for nameI18 printing
 	sPainter.setColor(labelColor,labelsFader.getInterstate());
-	sPainter.drawText(static_cast<float>(screenPos[0]),static_cast<float>(screenPos[1]), getSkyLabel(core), 0, tmp, tmp, false);
+	sPainter.drawText(static_cast<float>(screenPos[0]),static_cast<float>(screenPos[1]), getPlanetLabel(), 0, tmp, tmp, false);
 
 	// hint disappears smoothly on close view
 	if (hintFader.getInterstate()<=0)
