@@ -150,6 +150,14 @@ Cardinals::Cardinals(float _radius)
 		{ dWNW,	Vec3f(cn, -1.f, 0.f) },
 		{ dNNW,	Vec3f(-1.f, cn, 0.f) }
 	};
+
+	// English names for cardinals
+	labels = {
+		{   dN,  "N" }, {   dS,  "S" }, {   dE,  "E" }, {   dW,  "W" },
+		{  dNE, "NE" }, {  dSE, "SE" }, {  dSW, "SW" }, {  dNW, "NW" },
+		{ dNNE,"NNE" }, { dENE,"ENE" }, { dESE,"ESE" }, { dSSE,"SSE" },
+		{ dSSW,"SSW" }, { dWSW,"WSW" }, { dWNW,"WNW" }, { dNNW,"NNW" }
+	};
 }
 
 Cardinals::~Cardinals()
@@ -282,7 +290,7 @@ void Cardinals::updateI18n()
 		// TRANSLATORS: West-southwest
 		{ dWSW,	qc_("WSW", "compass direction") },
 		// TRANSLATORS: West-northwest
-		{ dWNW,  qc_("WNW", "compass direction") },
+		{ dWNW, qc_("WNW", "compass direction") },
 		// TRANSLATORS: North-northwest
 		{ dNNW,	qc_("NNW", "compass direction") }
 	};
