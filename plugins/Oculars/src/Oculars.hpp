@@ -474,7 +474,8 @@ private:
 	bool flagMoonScaleMain;	        //!< Flag to track of usage zooming of the Moon
 	bool flagMinorBodiesScaleMain;  //!< Flag to track of usage zooming of minor bodies
 	bool flagSunScaleMain;	        //!< Flag to track of usage zooming of the Sun
-	bool flagPlanetsScaleMain;  //!< Flag to track of usage zooming of major planets
+	bool flagPlanetsScaleMain;	//!< Flag to track of usage zooming of major planets
+	bool flagDSOPropHintMain;	//!< Flag to track of usage proportional hints for DSO
 	double milkyWaySaturation;
 
 	double maxEyepieceAngle;        //!< The maximum aFOV of any eyepiece.
