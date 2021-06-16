@@ -209,17 +209,18 @@ void StelMainScriptAPI::setPlanetocentricCalculations(bool f)
 void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, double altitude, double duration, const QString& name, const QString& planet)
 {
 	StelCore* core = StelApp::getInstance().getCore();
-	// backward compatible layer: probably we have Solar system body...
-	PlanetP ssObj = GETSTELMODULE(SolarSystem)->searchByEnglishName(planet);
 	StelLocation loc = core->getCurrentLocation();
 	loc.longitude = static_cast<float>(longitude);
 	loc.latitude = static_cast<float>(latitude);
 	if (altitude > -1000)
 		loc.altitude = qRound(altitude);
-	if (!ssObj.isNull())
-		loc.planetName = ssObj->getEnglishName();
-	else
-		return; // Avoid crash when planet is not defined or not exist
+	if (!planet.isEmpty())
+	{
+		// backward compatible layer: probably we have Solar system body...
+		PlanetP ssObj = GETSTELMODULE(SolarSystem)->searchByEnglishName(planet);
+		if (!ssObj.isNull())
+			loc.planetName = ssObj->getEnglishName();
+	}
 
 	QRegExp cico( "^\\s*([^,]+),\\s*(\\S.*)$" );
 	if( cico.exactMatch( name ) )
