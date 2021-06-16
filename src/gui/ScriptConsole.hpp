@@ -20,7 +20,6 @@
 #ifndef SCRIPTCONSOLE_HPP
 #define SCRIPTCONSOLE_HPP
 
-#include <QFileInfo>
 #include <QObject>
 #include "StelDialog.hpp"
 
@@ -83,11 +82,12 @@ private:
 	//          N: 3|--                   N: 3|-
 	// 4: t/fn  Y: 2|ld   4|-  2|sv       Y: 1|cb   3: t/-
 	//  	    N: 4|--                   N: 4|-
-	QFileInfo lastFile; //!< last opened script file
+	QString scriptFileName;
 	bool isNew;
 	bool dirty;
 
 	bool getFlagUserDir() { return useUserDir; }
+	static const QString defaultScriptName;
 };
 
 #endif // _SCRIPTCONSOLE_HPP
