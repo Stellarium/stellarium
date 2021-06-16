@@ -41,6 +41,10 @@
 #include "BookmarksDialog.hpp"
 #include "ui_bookmarksDialog.h"
 
+// DRY !
+const QString BookmarksDialog::filter = "JSON (*.json)"; // TODO: include somehow with QFileDialog::setDefaultSuffix() - now the user always needs to type the suffix, otherwise his/her files get filtered away
+const QString BookmarksDialog::defaultBookmarkFilename = "bookmarks.json";
+
 BookmarksDialog::BookmarksDialog(QObject *parent)
 	: StelDialog("Bookmarks", parent)
 {
@@ -49,7 +53,7 @@ BookmarksDialog::BookmarksDialog(QObject *parent)
 	objectMgr = GETSTELMODULE(StelObjectMgr);
 	labelMgr = GETSTELMODULE(LabelMgr);
 	bookmarksListModel = new QStandardItemModel(0, ColumnCount);
-	bookmarksJsonPath = StelFileMgr::findFile("data", static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable)) + "/bookmarks.json";
+	bookmarksJsonPath = StelFileMgr::findFile("data", static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable)) + "/" + defaultBookmarkFilename;
 }
 
 BookmarksDialog::~BookmarksDialog()
@@ -83,7 +87,7 @@ void BookmarksDialog::createDialogContent()
 	connect(ui->bookmarksTreeView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentBookmark(QModelIndex)));
 
 	connect(ui->clearHighlightsButton, SIGNAL(clicked()), this, SLOT(clearHighlightsButtonPressed()));
-	connect(ui->highlightBookmarksButton, SIGNAL(clicked()), this, SLOT(highlightBookrmarksButtonPressed()));
+	connect(ui->highlightBookmarksButton, SIGNAL(clicked()), this, SLOT(highlightBookmarksButtonPressed()));
 
 	connect(ui->importBookmarksButton, SIGNAL(clicked()), this, SLOT(importBookmarks()));
 	connect(ui->exportBookmarksButton, SIGNAL(clicked()), this, SLOT(exportBookmarks()));
@@ -256,7 +260,13 @@ void BookmarksDialog::goToBookmarkButtonPressed()
 	goToBookmark(bookmarksListModel->index(ui->bookmarksTreeView->currentIndex().row(), ColumnUUID).data().toString());
 }
 
-void BookmarksDialog::highlightBookrmarksButtonPressed()
+// TODO: create actions so that this can be called via shortcuts too. ideally, as an on/off toggle.
+void BookmarksDialog::highlightBookmarksButtonPressed()
+{
+	highlightBookmarks();
+}
+
+void BookmarksDialog::highlightBookmarks()
 {
 	QList<Vec3d> highlights;
 	highlights.clear();
@@ -306,6 +316,11 @@ void BookmarksDialog::highlightBookrmarksButtonPressed()
 }
 
 void BookmarksDialog::clearHighlightsButtonPressed()
+{
+	clearHighlights();
+}
+
+void BookmarksDialog::clearHighlights()
 {
 	objectMgr->unSelect();
 	GETSTELMODULE(HighlightMgr)->cleanHighlightList();
@@ -470,12 +485,16 @@ void BookmarksDialog::loadBookmarks()
 
 void BookmarksDialog::importBookmarks()
 {
-	QString originalBookmarksFile = bookmarksJsonPath;
+	QString selection = QFileDialog::getOpenFileName(Q_NULLPTR, q_("Import bookmarks"), bookmarksJsonPath, filter);
+	
+	if (selection.isNull())
+	{
+		return;
+	}
 
-	QString filter = "JSON (*.json)";
-	bookmarksJsonPath = QFileDialog::getOpenFileName(Q_NULLPTR, q_("Import bookmarks"), QDir::homePath(), filter);
+	bookmarksJsonPath = selection;
 
-	if (!bookmarksJsonPath.isEmpty())
+	if (StelFileMgr::exists(bookmarksJsonPath))
 	{
 		GETSTELMODULE(HighlightMgr)->cleanHighlightList();
 		bookmarksListModel->clear();
@@ -484,24 +503,25 @@ void BookmarksDialog::importBookmarks()
 		loadBookmarks();
 		ui->bookmarksTreeView->hideColumn(ColumnUUID);
 
-		bookmarksJsonPath = originalBookmarksFile;
 		saveBookmarks();
 	}
 }
 
 void BookmarksDialog::exportBookmarks()
 {
-	QString originalBookmarksFile = bookmarksJsonPath;
+	QString selection = QFileDialog::getSaveFileName(
+			Q_NULLPTR, 
+			q_("Export bookmarks as..."), 
+			bookmarksJsonPath,
+			filter
+			);
+	if (selection.isNull())
+	{
+		return;
+	}
 
-	QString filter = "JSON (*.json)";
-	bookmarksJsonPath = QFileDialog::getSaveFileName(Q_NULLPTR,
-							 q_("Export bookmarks as..."),
-							 QDir::homePath() + "/bookmarks.json",
-							 filter);
-
+	bookmarksJsonPath = selection;
 	saveBookmarks();
-
-	bookmarksJsonPath = originalBookmarksFile;
 }
 
 void BookmarksDialog::saveBookmarks() const

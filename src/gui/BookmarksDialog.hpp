@@ -27,6 +27,7 @@
 #include <QUuid>
 
 #include "StelDialog.hpp"
+#include "StelFileMgr.hpp"
 #include "StelCore.hpp"
 
 class Ui_bookmarksDialogForm;
@@ -66,7 +67,7 @@ private slots:
 	void goToBookmarkButtonPressed();
 	void clearBookmarksButtonPressed();
 
-	void highlightBookrmarksButtonPressed();
+	void highlightBookmarksButtonPressed();
 	void clearHighlightsButtonPressed();
 
 	void exportBookmarks();
@@ -101,6 +102,15 @@ private:
 	void loadBookmarks();
 	void saveBookmarks() const;
 	void goToBookmark(QString uuid);
+
+	void highlightBookmarks();
+	void clearHighlights();
+
+	// utility to get the (current) bookmark directory 
+	QString getBookmarksDir() const { return StelFileMgr::exists(bookmarksJsonPath) ? StelFileMgr::dirName(bookmarksJsonPath) : QDir::homePath();}
+
+	static const QString filter;
+	static const QString defaultBookmarkFilename;
 };
 
 

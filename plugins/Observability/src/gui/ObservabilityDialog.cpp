@@ -19,7 +19,6 @@
 */
 
 #include <QDebug>
-#include <QFileDialog>
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
