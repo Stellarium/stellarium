@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-06-16 12:18+0700\n"
+"POT-Creation-Date: 2021-06-16 23:33+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15337,39 +15337,46 @@ msgstr ""
 msgid "The southernmost of the remaining 2 stars to the north"
 msgstr ""
 
-#: skycultures/almagest/planet_names.fab:1
-msgid "Zeus/Dios (Jupiter)"
-msgstr ""
-
+#. TRANSLATORS: Native name for Jupiter
 #: skycultures/almagest/planet_names.fab:2
-msgid "Aphrodite (Venus)"
+msgid "Zeus/Dios"
 msgstr ""
 
-#: skycultures/almagest/planet_names.fab:3
-msgid "Ares (Mars)"
-msgstr ""
-
+#. TRANSLATORS: Native name for Venus
 #: skycultures/almagest/planet_names.fab:4
-msgid "Kronos (Saturn)"
+msgid "Aphrodite"
 msgstr ""
 
-#: skycultures/almagest/planet_names.fab:5
-msgid "Hermes (Mercury)"
-msgstr ""
-
+#. TRANSLATORS: Native name for Mars
 #: skycultures/almagest/planet_names.fab:6
-msgid "Helios (Sun)"
+msgid "Ares"
 msgstr ""
 
-#: skycultures/almagest/planet_names.fab:7
-msgid "Selene (Moon)"
-msgstr ""
-
+#. TRANSLATORS: Native name for Saturn
 #: skycultures/almagest/planet_names.fab:8
+msgid "Kronos"
+msgstr ""
+
+#. TRANSLATORS: Native name for Mercury
+#: skycultures/almagest/planet_names.fab:10
+msgid "Hermes"
+msgstr ""
+
+#. TRANSLATORS: Native name for the Sun
+#: skycultures/almagest/planet_names.fab:12
+msgid "Helios"
+msgstr ""
+
+#. TRANSLATORS: Native name for the Moon
+#: skycultures/almagest/planet_names.fab:14
+msgid "Selene"
+msgstr ""
+
+#: skycultures/almagest/planet_names.fab:15
 msgid "Uranus (1781)"
 msgstr ""
 
-#: skycultures/almagest/planet_names.fab:9
+#: skycultures/almagest/planet_names.fab:16
 msgid "Neptun (1846)"
 msgstr ""
 
@@ -16462,9 +16469,9 @@ msgstr ""
 msgid "Unurgunite"
 msgstr ""
 
-#. TRANSLATORS: Native name of the Sun in Boorong culture (English: Day)
+#. TRANSLATORS: Native name of the Sun in Boorong culture
 #: skycultures/boorong/planet_names.fab:2
-msgid "Gnowee"
+msgid "Day"
 msgstr ""
 
 #. TRANSLATORS: Native name of the Moon in Boorong culture
@@ -16472,14 +16479,14 @@ msgstr ""
 msgid "Mityan"
 msgstr ""
 
-#. TRANSLATORS: Native name of Venus in Boorong culture (English: Elder sister)
+#. TRANSLATORS: Native name of Venus in Boorong culture
 #: skycultures/boorong/planet_names.fab:6
-msgid "Chargee Gnowee"
+msgid "Elder sister"
 msgstr ""
 
-#. TRANSLATORS: Native name of Jupiter in Boorong culture (English: Sulphur-crested white cockatoo)
+#. TRANSLATORS: Native name of Jupiter in Boorong culture
 #: skycultures/boorong/planet_names.fab:8
-msgid "Ginabongbearp"
+msgid "Sulphur-crested white cockatoo"
 msgstr ""
 
 #: skycultures/chinese/constellation_names.eng.fab:1
@@ -50335,32 +50342,39 @@ msgstr ""
 #. 2.Pan Nai. (2009). The History of Stellar Observation in China. Shanghai. Academia Press. ISBN 9787807306948.
 #. 3.Yi Shitong. (1980). Chinese and Western Contrast Star Chart. Encyclopedia of China - Astronomy. Beijing. Encyclopedia of China Publishing House.
 #. 4.English-Chinese Glossary of Chinese Star Regions, Asterisms and Star Names|http://www.lcsd.gov.hk/CE/Museum/Space/zh_CN/web/spm/starshine/resources/constemyth/glossary.html
-#: skycultures/chinese/planet_names.fab:1
-#: skycultures/chinese_medieval/planet_names.fab:1
+#. TRANSLATORS: Native name of the Sun in Chinese culture
+#: skycultures/chinese/planet_names.fab:2
+#: skycultures/chinese_medieval/planet_names.fab:2
 msgid "Taiyang"
 msgstr ""
 
-#: skycultures/chinese/planet_names.fab:2
+#. TRANSLATORS: Native name of the Moon in Chinese culture
+#: skycultures/chinese/planet_names.fab:4
 msgid "Yueliang"
 msgstr ""
 
-#: skycultures/chinese/planet_names.fab:3
+#. TRANSLATORS: Native name of Mercury in Chinese culture
+#: skycultures/chinese/planet_names.fab:6
 msgid "Water Star"
 msgstr ""
 
-#: skycultures/chinese/planet_names.fab:4
+#. TRANSLATORS: Native name of Venus in Chinese culture
+#: skycultures/chinese/planet_names.fab:8
 msgid "Metal Star"
 msgstr ""
 
-#: skycultures/chinese/planet_names.fab:5
+#. TRANSLATORS: Native name of Mars in Chinese culture
+#: skycultures/chinese/planet_names.fab:10
 msgid "Fire Star"
 msgstr ""
 
-#: skycultures/chinese/planet_names.fab:6
+#. TRANSLATORS: Native name of Jupiter in Chinese culture
+#: skycultures/chinese/planet_names.fab:12
 msgid "Wood Star"
 msgstr ""
 
-#: skycultures/chinese/planet_names.fab:7
+#. TRANSLATORS: Native name of Saturn in Chinese culture
+#: skycultures/chinese/planet_names.fab:14
 msgid "Earth Star"
 msgstr ""
 
@@ -53447,27 +53461,33 @@ msgstr ""
 msgid "Determinative Star"
 msgstr ""
 
-#: skycultures/chinese_medieval/planet_names.fab:2
+#. TRANSLATORS: Native name of the Moon in Chinese culture
+#: skycultures/chinese_medieval/planet_names.fab:4
 msgid "Taiyin"
 msgstr ""
 
-#: skycultures/chinese_medieval/planet_names.fab:3
+#. TRANSLATORS: Native name of Mercury in Chinese culture
+#: skycultures/chinese_medieval/planet_names.fab:6
 msgid "Chen Star"
 msgstr ""
 
-#: skycultures/chinese_medieval/planet_names.fab:4
+#. TRANSLATORS: Native name of Venus in Chinese culture
+#: skycultures/chinese_medieval/planet_names.fab:8
 msgid "Taibai"
 msgstr ""
 
-#: skycultures/chinese_medieval/planet_names.fab:5
+#. TRANSLATORS: Native name of Mars in Chinese culture
+#: skycultures/chinese_medieval/planet_names.fab:10
 msgid "Yinghuo"
 msgstr ""
 
-#: skycultures/chinese_medieval/planet_names.fab:6
+#. TRANSLATORS: Native name of Jupiter in Chinese culture
+#: skycultures/chinese_medieval/planet_names.fab:12
 msgid "Sui Star"
 msgstr ""
 
-#: skycultures/chinese_medieval/planet_names.fab:7
+#. TRANSLATORS: Native name of Saturn in Chinese culture
+#: skycultures/chinese_medieval/planet_names.fab:14
 msgid "Zhen Star"
 msgstr ""
 
@@ -53543,8 +53563,10 @@ msgstr ""
 msgid "Wicanhpi Owanjila (Star Which Stands in One Place)"
 msgstr ""
 
-#: skycultures/dakota/planet_names.fab:1
-msgid "Morning Star(Venus)"
+#. TRANSLATORS: Native name of Venus in Dakota culture
+#: skycultures/dakota/planet_names.fab:2 skycultures/romanian/star_names.fab:69
+#: skycultures/sami/constellation_names.eng.fab:7
+msgid "Morning Star"
 msgstr ""
 
 #: skycultures/egyptian/constellation_names.eng.fab:1
@@ -53660,39 +53682,39 @@ msgstr ""
 msgid "Sirius"
 msgstr ""
 
-#. TRANSLATORS: Native name of the Sun in Egyptian culture (English: God of Sun)
+#. TRANSLATORS: Native name of the Sun in Egyptian culture
 #: skycultures/egyptian/planet_names.fab:2
-msgid "Amon-Ra (Sun)"
+msgid "God of Sun"
 msgstr ""
 
-#. TRANSLATORS: Native name of the Moon in Egyptian culture (English: The Traveler)
+#. TRANSLATORS: Native name of the Moon in Egyptian culture
 #: skycultures/egyptian/planet_names.fab:4
-msgid "Traveler (Moon)"
+msgid "The Traveler"
 msgstr ""
 
-#. TRANSLATORS: Native name of Mercury in Egyptian culture (English: Unknown)
+#. TRANSLATORS: Native name of Mercury in Egyptian culture
 #: skycultures/egyptian/planet_names.fab:6
-msgid "Sebeg (Mercury)"
+msgid "Unknown"
 msgstr ""
 
-#. TRANSLATORS: Native name of Venus in Egyptian culture (English: Star that Crosses / The God of the Morning)
+#. TRANSLATORS: Native name of Venus in Egyptian culture
 #: skycultures/egyptian/planet_names.fab:8
-msgid "Star that Crosses (Venus)"
+msgid "Star that Crosses / The God of the Morning"
 msgstr ""
 
-#. TRANSLATORS: Native name of Mars in Egyptian culture (English: Red Horus)
+#. TRANSLATORS: Native name of Mars in Egyptian culture
 #: skycultures/egyptian/planet_names.fab:10
-msgid "Red Horus (Mars)"
+msgid "Red Horus"
 msgstr ""
 
-#. TRANSLATORS: Native name of Jupiter in Egyptian culture (English: Horus Who Binds the Two Lands)
+#. TRANSLATORS: Native name of Jupiter in Egyptian culture
 #: skycultures/egyptian/planet_names.fab:12
-msgid "Horus Who Binds the Two Lands (Jupiter)"
+msgid "Horus Who Binds the Two Lands"
 msgstr ""
 
-#. TRANSLATORS: Native name of Saturn in Egyptian culture (English: Horus, the Bull of Heaven)
+#. TRANSLATORS: Native name of Saturn in Egyptian culture
 #: skycultures/egyptian/planet_names.fab:14
-msgid "Horus, the Bull of Heaven (Saturn)"
+msgid "Horus, the Bull of Heaven"
 msgstr ""
 
 #: skycultures/hawaiian_starlines/constellation_names.eng.fab:1
@@ -54292,6 +54314,10 @@ msgstr ""
 msgid "Revatī"
 msgstr ""
 
+#: skycultures/indian/star_names.fab:20
+msgid "Śatabhiṣak"
+msgstr ""
+
 #. TRANSLATORS:   To hear or Ear (Altair)
 #: skycultures/indian/star_names.fab:22
 msgid "Śravaṇa"
@@ -54407,32 +54433,39 @@ msgstr ""
 msgid "Kārtikeya"
 msgstr ""
 
-#: skycultures/indian/planet_names.fab:13
-msgid "Vigorous (Sun)"
-msgstr ""
-
+#. TRANSLATORS: Native name for the Sun
 #: skycultures/indian/planet_names.fab:14
-msgid "Delighter (Moon)"
+msgid "Vigorous"
 msgstr ""
 
-#: skycultures/indian/planet_names.fab:15
-msgid "Wise one (Mercury)"
-msgstr ""
-
+#. TRANSLATORS: Native name for the Moon
 #: skycultures/indian/planet_names.fab:16
-msgid "Bright one (Venus)"
+msgid "Delighter"
 msgstr ""
 
-#: skycultures/indian/planet_names.fab:17
-msgid "Auspicious one (Mars)"
-msgstr ""
-
+#. TRANSLATORS: Native name for Mercury
 #: skycultures/indian/planet_names.fab:18
-msgid "Mentor (Jupiter)"
+msgid "Wise one"
 msgstr ""
 
-#: skycultures/indian/planet_names.fab:19
-msgid "Slow mover (Saturn)"
+#. TRANSLATORS: Native name for Venus
+#: skycultures/indian/planet_names.fab:20
+msgid "Bright one"
+msgstr ""
+
+#. TRANSLATORS: Native name for Mars
+#: skycultures/indian/planet_names.fab:22
+msgid "Auspicious one"
+msgstr ""
+
+#. TRANSLATORS: Native name for Jupiter
+#: skycultures/indian/planet_names.fab:24
+msgid "Mentor"
+msgstr ""
+
+#. TRANSLATORS: Native name for Saturn
+#: skycultures/indian/planet_names.fab:26
+msgid "Slow mover"
 msgstr ""
 
 #: skycultures/japanese_moon_stations/constellation_names.eng.fab:5
@@ -56072,7 +56105,8 @@ msgstr ""
 msgid "Corner Star"
 msgstr ""
 
-#: skycultures/maya/planet_names.fab:1
+#. TRANSLATORS: Native name of Venus in Maya culture
+#: skycultures/maya/planet_names.fab:2
 msgid "Bright Star"
 msgstr ""
 
@@ -56440,36 +56474,47 @@ msgstr ""
 msgid "Breast of the U.KA.DU.A demon"
 msgstr ""
 
-#: skycultures/mulapin/planet_names.fab:1
-msgid "mul.SANGMEGAR (Jupiter)"
-msgstr ""
-
+#. TRANSLATORS: Native name of Jupiter in Babilonian (Mulapin) culture
 #: skycultures/mulapin/planet_names.fab:2
-msgid "mul.DILBAT (Venus)"
+msgid "mul.SANGMEGAR"
 msgstr ""
 
-#: skycultures/mulapin/planet_names.fab:3
-msgid "mul.Salbatanu (Mars)"
-msgstr ""
-
+#. TRANSLATORS: Native name of Venus in Babilonian (Mulapin) culture
 #: skycultures/mulapin/planet_names.fab:4
-#: skycultures/seleucid/planet_names.fab:4
-msgid "Steady Wild Sheep (Saturn)"
+msgid "mul.DILBAT"
 msgstr ""
 
-#: skycultures/mulapin/planet_names.fab:5
-#: skycultures/seleucid/planet_names.fab:5
-msgid "Dancing Wild Sheep (Mercury)"
-msgstr ""
-
+#. TRANSLATORS: Native name of Mars in Babilonian (Mulapin) culture
 #: skycultures/mulapin/planet_names.fab:6
-#: skycultures/seleucid/planet_names.fab:6
-msgid "Shamash (Sun)"
+msgid "mul.Salbatanu"
 msgstr ""
 
-#: skycultures/mulapin/planet_names.fab:7
-#: skycultures/seleucid/planet_names.fab:7
-msgid "SIN (Moon)"
+#. TRANSLATORS: Native name of Saturn in Babilonian (Mulapin) culture
+#. TRANSLATORS: Native name of Saturn in Babilonian (Seleucid) culture
+#: skycultures/mulapin/planet_names.fab:8
+#: skycultures/seleucid/planet_names.fab:8
+msgid "Steady Wild Sheep"
+msgstr ""
+
+#. TRANSLATORS: Native name of Mercury in Babilonian (Mulapin) culture
+#. TRANSLATORS: Native name of Mercury in Babilonian (Seleucid) culture
+#: skycultures/mulapin/planet_names.fab:10
+#: skycultures/seleucid/planet_names.fab:10
+msgid "Dancing Wild Sheep"
+msgstr ""
+
+#. TRANSLATORS: Native name of the Sun in Babilonian (Mulapin) culture
+#. TRANSLATORS: Native name of the Sun in Babilonian (Seleucid) culture
+#: skycultures/mulapin/planet_names.fab:12
+#: skycultures/seleucid/planet_names.fab:12
+msgid "Shamash"
+msgstr ""
+
+#. TRANSLATORS: Native name of the Moon in Babilonian (Mulapin) culture
+#. TRANSLATORS: Native name of the Moon in Babilonian (Seleucid) culture
+#: skycultures/mulapin/planet_names.fab:14
+#: skycultures/seleucid/planet_names.fab:14
+msgid "SIN"
 msgstr ""
 
 #: skycultures/mulapin/dso_names.fab:3 skycultures/seleucid/dso_names.fab:3
@@ -56628,8 +56673,9 @@ msgstr ""
 msgid "Madoo’asinik (Sweating Stones)"
 msgstr ""
 
-#: skycultures/ojibwe/planet_names.fab:1
-msgid "Womens Star (Venus)"
+#. TRANSLATORS: Native name of Venus in Ojibwe culture
+#: skycultures/ojibwe/planet_names.fab:2
+msgid "Womens Star"
 msgstr ""
 
 #: skycultures/romanian/constellation_names.eng.fab:1
@@ -57182,11 +57228,6 @@ msgstr ""
 #: skycultures/western_hlad/star_names.fab:67
 #: skycultures/western_SnT/star_names.fab:67
 msgid "Mebsuta"
-msgstr ""
-
-#: skycultures/romanian/star_names.fab:69
-#: skycultures/sami/constellation_names.eng.fab:7
-msgid "Morning Star"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:70
@@ -58349,8 +58390,9 @@ msgstr ""
 msgid "The Bunch's Driver"
 msgstr ""
 
-#: skycultures/sardinian/planet_names.fab:1
-msgid "Evening Star / Morning Star (Venus)"
+#. TRANSLATORS: Native name of Venus in Sardinian culture
+#: skycultures/sardinian/planet_names.fab:2
+msgid "Evening Star / Morning Star"
 msgstr ""
 
 #: skycultures/seleucid/constellation_names.eng.fab:6
@@ -58795,16 +58837,19 @@ msgstr ""
 msgid "the hands of the Great Twins"
 msgstr ""
 
-#: skycultures/seleucid/planet_names.fab:1
-msgid "MUL.SANGMEGAR (Jupiter)"
-msgstr ""
-
+#. TRANSLATORS: Native name of Jupiter in Babilonian (Seleucid) culture
 #: skycultures/seleucid/planet_names.fab:2
-msgid "MUL.DILBAT (Venus)"
+msgid "MUL.SANGMEGAR"
 msgstr ""
 
-#: skycultures/seleucid/planet_names.fab:3
-msgid "kakkab Salbatanu (Mars)"
+#. TRANSLATORS: Native name of Venus in Babilonian (Seleucid) culture
+#: skycultures/seleucid/planet_names.fab:4
+msgid "MUL.DILBAT"
+msgstr ""
+
+#. TRANSLATORS: Native name of Mars in Babilonian (Seleucid) culture
+#: skycultures/seleucid/planet_names.fab:6
+msgid "kakkab Salbatanu"
 msgstr ""
 
 #: skycultures/siberian/constellation_names.eng.fab:1
@@ -58823,9 +58868,9 @@ msgstr ""
 msgid "Golden stake"
 msgstr ""
 
-#. TRANSLATORS: Native name of Venus in Siberian culture (in English words)
+#. TRANSLATORS: Native name of Venus in Siberian culture
 #: skycultures/siberian/planet_names.fab:2
-msgid "Night Star (Venus)"
+msgid "Night Star"
 msgstr ""
 
 #: skycultures/tukano/constellation_names.eng.fab:1
