@@ -342,9 +342,6 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 
 	setMapForLocation(loc);
 
-	// Set pointer position
-	ui->mapLabel->setCursorPos(loc.longitude, loc.latitude);
-
 	ui->deleteLocationFromListPushButton->setEnabled(StelApp::getInstance().getLocationMgr().canDeleteUserLocation(loc.getID()));
 
 	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
@@ -402,13 +399,6 @@ void LocationDialog::setMapForLocation(const StelLocation& loc)
 	lastPlanet = loc.planetName;
 }
 
-/*void LocationDialog::resizePixmap()
-{
-	int w = ui->mapLabel->width();
-	int h = ui->mapLabel->height();
-	ui->mapLabel->setPixmap(pixmap.scaled(w,h,Qt::KeepAspectRatio,Qt::SmoothTransformation));
-}*/
-
 void LocationDialog::populatePlanetList()
 {
 	Q_ASSERT(ui->planetNameComboBox);
@@ -448,7 +438,7 @@ void LocationDialog::populateCountryList()
 	countryCombo->clear();
 	//For each country, display the localized name and store the original as user
 	//data. Unfortunately, there's no other way to do this than with a loop.
-	for (const auto& name : countryNames)
+	for (const auto& name : qAsConst(countryNames))
 	{
 		countryCombo->addItem(q_(name), name);
 	}
@@ -468,7 +458,7 @@ void LocationDialog::populateTimeZonesList()
 	// Return a list of all the known time zone names (from Qt)
 	QStringList tzNames;
 	auto tzList = QTimeZone::availableTimeZoneIds(); // System dependent set of IANA timezone names.
-	for (const auto& tz : tzList)
+	for (const auto& tz : qAsConst(tzList))
 	{
 		tzNames.append(tz);
 		// Activate this to get a list of known TZ names...

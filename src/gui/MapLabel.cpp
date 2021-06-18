@@ -43,7 +43,9 @@ void MapLabel::setCursorPos(double longitude, double latitude)
 	const int y = (static_cast<int>((latitude-90.)/-180.*map.height() / scale));
 	//draws the location cursor on the map every time position is changed
 	QPainter painter(&map);
-	painter.drawPixmap(x-locCursor.width()/2,y-locCursor.height()/2,locCursor.width(),locCursor.height(),locCursor);
+	const int w = static_cast<int>(locCursor.width()/scale);
+	const int h = static_cast<int>(locCursor.height()/scale);
+	painter.drawPixmap(x-w/2, y-h/2, w, h, locCursor);
 	resizePixmap();
 }
 

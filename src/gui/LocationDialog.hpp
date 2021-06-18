@@ -48,8 +48,6 @@ protected:
 	virtual void createDialogContent() Q_DECL_OVERRIDE;
 	Ui_locationDialogForm* ui;
 
-	//void resizePixmap();
-	
 private:
 	//! Set the values of all the fields from a location info
 	//! Also move the observer to this position
