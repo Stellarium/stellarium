@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-06-15 22:33+0700\n"
+"POT-Creation-Date: 2021-06-18 14:23+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,8 +29,8 @@ msgstr ""
 #: src/core/modules/CustomObject.cpp:88 src/core/modules/Asterism.cpp:195
 #: src/core/modules/Constellation.cpp:277
 #: src/core/modules/NomenclatureItem.cpp:204 src/core/modules/Nebula.cpp:222
-#: src/core/modules/Nebula.cpp:224 src/core/modules/Planet.cpp:467
-#: src/core/modules/Planet.cpp:470 src/core/modules/StarWrapper.cpp:50
+#: src/core/modules/Nebula.cpp:224 src/core/modules/Planet.cpp:491
+#: src/core/modules/Planet.cpp:494 src/core/modules/StarWrapper.cpp:50
 #: src/core/modules/StarWrapper.cpp:261 src/core/modules/StarWrapper.cpp:264
 #: src/gui/AstroCalcDialog.cpp:895 src/ui_configurationDialog.h:1715
 #: plugins/Satellites/src/Satellite.cpp:305
@@ -54,9 +54,9 @@ msgstr ""
 #: src/core/modules/ConstellationMgr.cpp:133 src/core/modules/StarMgr.cpp:437
 #: src/core/modules/GridLinesMgr.cpp:1840
 #: src/core/modules/SpecialMarkersMgr.cpp:263
-#: src/core/modules/LandscapeMgr.cpp:611
+#: src/core/modules/LandscapeMgr.cpp:608
 #: src/core/modules/NomenclatureMgr.cpp:77 src/core/modules/NebulaMgr.cpp:474
-#: src/core/modules/NebulaMgr.cpp:475 src/core/modules/SolarSystem.cpp:295
+#: src/core/modules/NebulaMgr.cpp:475 src/core/modules/SolarSystem.cpp:294
 #: src/core/modules/MilkyWay.cpp:79 src/core/modules/ZodiacalLight.cpp:87
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:151
 #: src/core/StelApp.cpp:621 src/core/StelCore.cpp:257
@@ -311,8 +311,8 @@ msgid "Antapex"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
-#: src/core/modules/GridLinesMgr.cpp:1463 src/core/modules/Planet.cpp:598
-#: src/core/modules/Planet.cpp:892 src/gui/AstroCalcDialog.cpp:6221
+#: src/core/modules/GridLinesMgr.cpp:1463 src/core/modules/Planet.cpp:622
+#: src/core/modules/Planet.cpp:916 src/gui/AstroCalcDialog.cpp:6221
 #: plugins/Satellites/src/Satellite.cpp:326
 #: plugins/Satellites/src/Satellite.cpp:388
 #: plugins/MeteorShowers/src/MeteorShower.cpp:546
@@ -508,152 +508,152 @@ msgid "Compass marks"
 msgstr ""
 
 #. TRANSLATORS: North
-#: src/core/modules/LandscapeMgr.cpp:257 src/core/modules/Planet.cpp:1009
+#: src/core/modules/LandscapeMgr.cpp:254 src/core/modules/Planet.cpp:1033
 msgctxt "compass direction"
 msgid "N"
 msgstr ""
 
 #. TRANSLATORS: South
-#: src/core/modules/LandscapeMgr.cpp:259 src/core/modules/Planet.cpp:1001
+#: src/core/modules/LandscapeMgr.cpp:256 src/core/modules/Planet.cpp:1025
 msgctxt "compass direction"
 msgid "S"
 msgstr ""
 
 #. TRANSLATORS: East
-#: src/core/modules/LandscapeMgr.cpp:261 src/core/modules/Planet.cpp:1013
+#: src/core/modules/LandscapeMgr.cpp:258 src/core/modules/Planet.cpp:1037
 msgctxt "compass direction"
 msgid "E"
 msgstr ""
 
 #. TRANSLATORS: West
-#: src/core/modules/LandscapeMgr.cpp:263 src/core/modules/Planet.cpp:1005
+#: src/core/modules/LandscapeMgr.cpp:260 src/core/modules/Planet.cpp:1029
 msgctxt "compass direction"
 msgid "W"
 msgstr ""
 
 #. TRANSLATORS: Northeast
-#: src/core/modules/LandscapeMgr.cpp:265 src/core/modules/Planet.cpp:1011
+#: src/core/modules/LandscapeMgr.cpp:262 src/core/modules/Planet.cpp:1035
 msgctxt "compass direction"
 msgid "NE"
 msgstr ""
 
 #. TRANSLATORS: Southeast
-#: src/core/modules/LandscapeMgr.cpp:267 src/core/modules/Planet.cpp:1015
+#: src/core/modules/LandscapeMgr.cpp:264 src/core/modules/Planet.cpp:1039
 msgctxt "compass direction"
 msgid "SE"
 msgstr ""
 
 #. TRANSLATORS: Southwest
-#: src/core/modules/LandscapeMgr.cpp:269 src/core/modules/Planet.cpp:1003
+#: src/core/modules/LandscapeMgr.cpp:266 src/core/modules/Planet.cpp:1027
 msgctxt "compass direction"
 msgid "SW"
 msgstr ""
 
 #. TRANSLATORS: Northwest
-#: src/core/modules/LandscapeMgr.cpp:271 src/core/modules/Planet.cpp:1007
+#: src/core/modules/LandscapeMgr.cpp:268 src/core/modules/Planet.cpp:1031
 msgctxt "compass direction"
 msgid "NW"
 msgstr ""
 
 #. TRANSLATORS: North-northeast
-#: src/core/modules/LandscapeMgr.cpp:273 src/core/modules/Planet.cpp:1010
+#: src/core/modules/LandscapeMgr.cpp:270 src/core/modules/Planet.cpp:1034
 msgctxt "compass direction"
 msgid "NNE"
 msgstr ""
 
 #. TRANSLATORS: East-northeast
-#: src/core/modules/LandscapeMgr.cpp:275 src/core/modules/Planet.cpp:1012
+#: src/core/modules/LandscapeMgr.cpp:272 src/core/modules/Planet.cpp:1036
 msgctxt "compass direction"
 msgid "ENE"
 msgstr ""
 
 #. TRANSLATORS: East-southeast
-#: src/core/modules/LandscapeMgr.cpp:277 src/core/modules/Planet.cpp:1014
+#: src/core/modules/LandscapeMgr.cpp:274 src/core/modules/Planet.cpp:1038
 msgctxt "compass direction"
 msgid "ESE"
 msgstr ""
 
 #. TRANSLATORS: South-southeast
-#: src/core/modules/LandscapeMgr.cpp:279 src/core/modules/Planet.cpp:1016
+#: src/core/modules/LandscapeMgr.cpp:276 src/core/modules/Planet.cpp:1040
 msgctxt "compass direction"
 msgid "SSE"
 msgstr ""
 
 #. TRANSLATORS: South-southwest
-#: src/core/modules/LandscapeMgr.cpp:281 src/core/modules/Planet.cpp:1002
+#: src/core/modules/LandscapeMgr.cpp:278 src/core/modules/Planet.cpp:1026
 msgctxt "compass direction"
 msgid "SSW"
 msgstr ""
 
 #. TRANSLATORS: West-southwest
-#: src/core/modules/LandscapeMgr.cpp:283 src/core/modules/Planet.cpp:1004
+#: src/core/modules/LandscapeMgr.cpp:280 src/core/modules/Planet.cpp:1028
 msgctxt "compass direction"
 msgid "WSW"
 msgstr ""
 
 #. TRANSLATORS: West-northwest
-#: src/core/modules/LandscapeMgr.cpp:285 src/core/modules/Planet.cpp:1006
+#: src/core/modules/LandscapeMgr.cpp:282 src/core/modules/Planet.cpp:1030
 msgctxt "compass direction"
 msgid "WNW"
 msgstr ""
 
 #. TRANSLATORS: North-northwest
-#: src/core/modules/LandscapeMgr.cpp:287 src/core/modules/Planet.cpp:1008
+#: src/core/modules/LandscapeMgr.cpp:284 src/core/modules/Planet.cpp:1032
 msgctxt "compass direction"
 msgid "NNW"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:612
+#: src/core/modules/LandscapeMgr.cpp:609
 msgid "Atmosphere"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:613
+#: src/core/modules/LandscapeMgr.cpp:610
 msgid "Fog"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:614 src/ui_viewDialog.h:3441
+#: src/core/modules/LandscapeMgr.cpp:611 src/ui_viewDialog.h:3441
 #: src/ui_configurationDialog.h:1791
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:314
 msgid "Cardinal points"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:615
+#: src/core/modules/LandscapeMgr.cpp:612
 msgid "Ordinal (Intercardinal) points"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:616
+#: src/core/modules/LandscapeMgr.cpp:613
 msgid "Secondary Intercardinal points"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:617
+#: src/core/modules/LandscapeMgr.cpp:614
 msgid "Ground"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:618
+#: src/core/modules/LandscapeMgr.cpp:615
 msgid "Landscape illumination"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:619
+#: src/core/modules/LandscapeMgr.cpp:616
 msgid "Landscape labels"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:620
+#: src/core/modules/LandscapeMgr.cpp:617
 msgid "Light pollution data from locations database"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:622
+#: src/core/modules/LandscapeMgr.cpp:619
 msgid "Increase light pollution"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:623
+#: src/core/modules/LandscapeMgr.cpp:620
 msgid "Reduce light pollution"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:624
+#: src/core/modules/LandscapeMgr.cpp:621
 msgid "Cyclic change in light pollution"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1034 src/scripting/StelScriptMgr.cpp:457
+#: src/core/modules/LandscapeMgr.cpp:1031 src/scripting/StelScriptMgr.cpp:457
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
 #: plugins/Oculars/src/gui/OcularDialog.cpp:594
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
@@ -673,38 +673,38 @@ msgid "Author"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - meter
-#: src/core/modules/LandscapeMgr.cpp:1040 src/gui/StelGuiItems.cpp:775
+#: src/core/modules/LandscapeMgr.cpp:1037 src/gui/StelGuiItems.cpp:775
 #: plugins/Satellites/src/Satellite.cpp:418
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1020
 msgctxt "distance"
 msgid "m"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1043 src/ui_locationDialogGui.h:481
+#: src/core/modules/LandscapeMgr.cpp:1040 src/ui_locationDialogGui.h:481
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:489
 msgid "Location"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for pressure - hectopascals
-#: src/core/modules/LandscapeMgr.cpp:1064
+#: src/core/modules/LandscapeMgr.cpp:1061
 msgctxt "pressure"
 msgid "hPa"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1074
+#: src/core/modules/LandscapeMgr.cpp:1071
 msgid "extinction coefficient"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1077
+#: src/core/modules/LandscapeMgr.cpp:1074
 msgid "Atmospheric conditions"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1081
+#: src/core/modules/LandscapeMgr.cpp:1078
 msgid "Light pollution"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1081
+#: src/core/modules/LandscapeMgr.cpp:1078
 msgid "by Bortle scale"
 msgstr ""
 
@@ -746,13 +746,13 @@ msgstr ""
 msgid "Linear size"
 msgstr ""
 
-#: src/core/modules/NomenclatureItem.cpp:219 src/core/modules/Planet.cpp:676
+#: src/core/modules/NomenclatureItem.cpp:219 src/core/modules/Planet.cpp:700
 msgid "Diameter"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/NomenclatureItem.cpp:220 src/core/modules/Planet.cpp:554
-#: src/core/modules/Planet.cpp:579 src/core/modules/Planet.cpp:677
+#: src/core/modules/NomenclatureItem.cpp:220 src/core/modules/Planet.cpp:578
+#: src/core/modules/Planet.cpp:603 src/core/modules/Planet.cpp:701
 #: src/core/modules/Comet.cpp:164 src/core/modules/Comet.cpp:174
 #: src/gui/StelGuiItems.cpp:805 src/gui/AstroCalcDialog.cpp:6156
 #: plugins/Satellites/src/Satellite.cpp:322
@@ -1441,12 +1441,12 @@ msgstr ""
 msgid "Airmasses"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:209 src/core/modules/Planet.cpp:450
+#: src/core/modules/Nebula.cpp:209 src/core/modules/Planet.cpp:474
 #: src/core/modules/StarWrapper.cpp:215
 msgid "Additional names: "
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:215 src/core/modules/Planet.cpp:457
+#: src/core/modules/Nebula.cpp:215 src/core/modules/Planet.cpp:481
 #: src/core/modules/StarWrapper.cpp:221
 msgid "Additional catalog numbers: "
 msgstr ""
@@ -1504,7 +1504,7 @@ msgid "ly"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:319 src/core/modules/Nebula.cpp:365
-#: src/core/modules/Planet.cpp:589 src/core/modules/StarWrapper.cpp:312
+#: src/core/modules/Planet.cpp:613 src/core/modules/StarWrapper.cpp:312
 #: src/core/modules/StarWrapper.cpp:314 src/gui/AstroCalcDialog.cpp:3134
 #: src/gui/AstroCalcDialog.cpp:3192 src/ui_configurationDialog.h:1700
 #: plugins/Supernovae/src/Supernova.cpp:159 plugins/Novae/src/Nova.cpp:162
@@ -2014,44 +2014,44 @@ msgstr ""
 msgid "See Logfile for instructions."
 msgstr ""
 
-#: src/core/modules/Planet.cpp:428 src/core/modules/Comet.cpp:155
+#: src/core/modules/Planet.cpp:452 src/core/modules/Comet.cpp:155
 #: src/core/modules/StarWrapper.cpp:271 plugins/Quasars/src/Quasar.cpp:133
 msgid "Absolute Magnitude"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:431
+#: src/core/modules/Planet.cpp:455
 msgid "Mean Opposition Magnitude"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:465
+#: src/core/modules/Planet.cpp:489
 msgctxt "type of comet"
 msgid "periodic"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:466
+#: src/core/modules/Planet.cpp:490
 msgctxt "type of comet"
 msgid "non-periodic"
 msgstr ""
 
 #. TRANSLATORS: Ecliptical rectangular coordinates
-#: src/core/modules/Planet.cpp:514
+#: src/core/modules/Planet.cpp:538
 msgctxt "coordinates"
 msgid "Ecliptical"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:537 src/core/modules/Planet.cpp:538
+#: src/core/modules/Planet.cpp:561 src/core/modules/Planet.cpp:562
 msgid "Hourly motion"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:537 src/core/modules/Planet.cpp:1062
-#: src/core/modules/Planet.cpp:1071 src/core/modules/StarWrapper.cpp:328
+#: src/core/modules/Planet.cpp:561 src/core/modules/Planet.cpp:1086
+#: src/core/modules/Planet.cpp:1095 src/core/modules/StarWrapper.cpp:328
 #: plugins/Pulsars/src/Pulsar.cpp:202
 msgctxt "into the direction of"
 msgid "towards"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
-#: src/core/modules/Planet.cpp:552 src/gui/AstroCalcDialog.cpp:876
+#: src/core/modules/Planet.cpp:576 src/gui/AstroCalcDialog.cpp:876
 #: src/gui/AstroCalcDialog.cpp:1146 src/gui/AstroCalcDialog.cpp:1530
 #: src/gui/AstroCalcDialog.cpp:1578 src/gui/AstroCalcDialog.cpp:3102
 #: src/gui/AstroCalcDialog.cpp:6181 src/gui/AstroCalcDialog.cpp:6243
@@ -2064,215 +2064,215 @@ msgstr ""
 #. TRANSLATORS: Unit of measure for distance - millions of kilometers
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #. TRANSLATORS: Unit of measure for distance - millions kilometers
-#: src/core/modules/Planet.cpp:568 src/core/modules/Planet.cpp:586
+#: src/core/modules/Planet.cpp:592 src/core/modules/Planet.cpp:610
 #: src/core/modules/Comet.cpp:166 src/gui/AstroCalcDialog.cpp:6158
 msgctxt "distance"
 msgid "M km"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:571
+#: src/core/modules/Planet.cpp:595
 msgid "Distance from Sun"
 msgstr ""
 
 #. TRANSLATORS: Distance measured in terms of the speed of light
-#: src/core/modules/Planet.cpp:591
+#: src/core/modules/Planet.cpp:615
 msgid "Light time"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:605
+#: src/core/modules/Planet.cpp:629
 msgid "Orbital velocity"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:608
+#: src/core/modules/Planet.cpp:632
 msgid "Heliocentric velocity"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:644
+#: src/core/modules/Planet.cpp:668
 msgid "with rings"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:661
+#: src/core/modules/Planet.cpp:685
 msgid "scaled up to"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:671
+#: src/core/modules/Planet.cpp:695
 msgid "Apparent diameter"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:676
+#: src/core/modules/Planet.cpp:700
 msgid "Equatorial diameter"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:715 src/core/modules/Planet.cpp:723
+#: src/core/modules/Planet.cpp:739 src/core/modules/Planet.cpp:747
 #: src/gui/AstroCalcDialog.cpp:3139 src/gui/AstroCalcDialog.cpp:3197
 #: src/ui_configurationDialog.h:1743
 msgid "Elongation"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:716 src/core/modules/Planet.cpp:724
+#: src/core/modules/Planet.cpp:740 src/core/modules/Planet.cpp:748
 #: src/gui/AstroCalcDialog.cpp:3149 src/gui/AstroCalcDialog.cpp:3207
 #: plugins/Satellites/src/Satellite.cpp:393
 msgid "Phase angle"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:718 src/core/modules/Planet.cpp:726
+#: src/core/modules/Planet.cpp:742 src/core/modules/Planet.cpp:750
 msgid "Illuminated"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:738 src/gui/AstroCalcDialog.cpp:6244
+#: src/core/modules/Planet.cpp:762 src/gui/AstroCalcDialog.cpp:6244
 #: src/gui/AstroCalcDialog.cpp:6388 src/gui/AstroCalcDialog.cpp:6405
 msgid "Angular distance"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:756 src/core/modules/Planet.cpp:900
+#: src/core/modules/Planet.cpp:780 src/core/modules/Planet.cpp:924
 #: src/core/modules/StarWrapper.cpp:348 src/gui/AstroCalcDialog.cpp:6192
 msgctxt "duration"
 msgid "days"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:765
+#: src/core/modules/Planet.cpp:789
 msgid "Sidereal period"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:774
+#: src/core/modules/Planet.cpp:798
 msgid "Synodic period"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:909
+#: src/core/modules/Planet.cpp:933
 msgid "Sidereal day"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:911
+#: src/core/modules/Planet.cpp:935
 msgid "Mean solar day"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:917
+#: src/core/modules/Planet.cpp:941
 msgid "The period of rotation is chaotic"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:922 src/core/modules/Planet.cpp:928
+#: src/core/modules/Planet.cpp:946 src/core/modules/Planet.cpp:952
 msgid "Equatorial rotation velocity"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:952
+#: src/core/modules/Planet.cpp:976
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:954
+#: src/core/modules/Planet.cpp:978
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:956
+#: src/core/modules/Planet.cpp:980
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:958
+#: src/core/modules/Planet.cpp:982
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:960
+#: src/core/modules/Planet.cpp:984
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:962
+#: src/core/modules/Planet.cpp:986
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:964
+#: src/core/modules/Planet.cpp:988
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:966
+#: src/core/modules/Planet.cpp:990
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:974
+#: src/core/modules/Planet.cpp:998
 msgid "Moon age"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:974
+#: src/core/modules/Planet.cpp:998
 msgid "days old"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:994 src/core/modules/Planet.cpp:997
+#: src/core/modules/Planet.cpp:1018 src/core/modules/Planet.cpp:1021
 msgid "Position angle of bright limb"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1061 src/core/modules/Planet.cpp:1070
-#: src/core/modules/Planet.cpp:1106 src/core/modules/Planet.cpp:1113
+#: src/core/modules/Planet.cpp:1085 src/core/modules/Planet.cpp:1094
+#: src/core/modules/Planet.cpp:1130 src/core/modules/Planet.cpp:1137
 msgid "Position Angle of axis"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1062 src/core/modules/Planet.cpp:1063
-#: src/core/modules/Planet.cpp:1071 src/core/modules/Planet.cpp:1072
+#: src/core/modules/Planet.cpp:1086 src/core/modules/Planet.cpp:1087
+#: src/core/modules/Planet.cpp:1095 src/core/modules/Planet.cpp:1096
 msgid "Libration"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1064 src/core/modules/Planet.cpp:1073
-#: src/core/modules/Planet.cpp:1108 src/core/modules/Planet.cpp:1115
+#: src/core/modules/Planet.cpp:1088 src/core/modules/Planet.cpp:1097
+#: src/core/modules/Planet.cpp:1132 src/core/modules/Planet.cpp:1139
 msgid "Subsolar point"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1065 src/core/modules/Planet.cpp:1074
+#: src/core/modules/Planet.cpp:1089 src/core/modules/Planet.cpp:1098
 msgid "Colongitude"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1107 src/core/modules/Planet.cpp:1114
+#: src/core/modules/Planet.cpp:1131 src/core/modules/Planet.cpp:1138
 msgid "Center point"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1126
+#: src/core/modules/Planet.cpp:1150
 msgid "Eclipse obscuration"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1135
+#: src/core/modules/Planet.cpp:1159
 msgid "Eclipse magnitude"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1160
+#: src/core/modules/Planet.cpp:1184
 msgid "Center of solar eclipse (Lat./Long.)"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1171
+#: src/core/modules/Planet.cpp:1195
 msgid "Shadow center point is"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1173
+#: src/core/modules/Planet.cpp:1197
 msgid "km towards azimuth"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1177
+#: src/core/modules/Planet.cpp:1201
 msgid "Magnitude of central eclipse"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1180
+#: src/core/modules/Planet.cpp:1204
 msgctxt "type of solar eclipse"
 msgid "(annular)"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1182
+#: src/core/modules/Planet.cpp:1206
 msgctxt "type of solar eclipse"
 msgid "(total)"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1229
+#: src/core/modules/Planet.cpp:1253
 msgid "Penumbral eclipse magnitude"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1232
+#: src/core/modules/Planet.cpp:1256
 msgid "Umbral eclipse magnitude"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1242
+#: src/core/modules/Planet.cpp:1266
 msgid "Albedo"
 msgstr ""
 
@@ -2308,55 +2308,55 @@ msgid "Orthographic"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:296 src/gui/AstroCalcDialog.cpp:2472
+#: src/core/modules/SolarSystem.cpp:295 src/gui/AstroCalcDialog.cpp:2472
 #: src/gui/AstroCalcDialog.cpp:5153 src/translations.h:63
 msgid "Planets"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:297
+#: src/core/modules/SolarSystem.cpp:296
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:319
 msgid "Planet labels"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:298
+#: src/core/modules/SolarSystem.cpp:297
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:323
 msgid "Planet orbits"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:299
+#: src/core/modules/SolarSystem.cpp:298
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Planet trails"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:300
+#: src/core/modules/SolarSystem.cpp:299
 msgid "Planet trails reset"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:302
+#: src/core/modules/SolarSystem.cpp:301
 msgid "Planet markers"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:303
+#: src/core/modules/SolarSystem.cpp:302
 msgid "Planet selection marker"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:304
+#: src/core/modules/SolarSystem.cpp:303
 msgid "Enlarge Moon"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:305
+#: src/core/modules/SolarSystem.cpp:304
 msgid "Enlarge minor bodies"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:306
+#: src/core/modules/SolarSystem.cpp:305
 msgid "Enlarge Planets"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:307
+#: src/core/modules/SolarSystem.cpp:306
 msgid "Enlarge Sun"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:308
+#: src/core/modules/SolarSystem.cpp:307
 msgid "Native planet names (from starlore)"
 msgstr ""
 
@@ -4236,7 +4236,7 @@ msgstr ""
 msgid "Keys"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:248 src/gui/HelpDialog.cpp:337
+#: src/gui/HelpDialog.cpp:248 src/gui/HelpDialog.cpp:357
 msgid "Further Reading"
 msgstr ""
 
@@ -4252,99 +4252,99 @@ msgstr ""
 msgid "Zoom in/out"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:260
+#: src/gui/HelpDialog.cpp:259
 msgid "Page Up/Down"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:262
+#: src/gui/HelpDialog.cpp:260
 msgid "Ctrl+Up/Down"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:265
+#: src/gui/HelpDialog.cpp:262
 msgid "Time dragging"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:266
+#: src/gui/HelpDialog.cpp:263
 msgid "Ctrl & left mouse drag"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:267
+#: src/gui/HelpDialog.cpp:264
 msgid "Time scrolling: minutes"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:268
+#: src/gui/HelpDialog.cpp:265
 msgid "Ctrl & mouse wheel"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:269
+#: src/gui/HelpDialog.cpp:266
 msgid "Time scrolling: hours"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:270
+#: src/gui/HelpDialog.cpp:267
 msgid "Ctrl+Shift & mouse wheel"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:271
+#: src/gui/HelpDialog.cpp:268
 msgid "Time scrolling: days"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:272
+#: src/gui/HelpDialog.cpp:269
 msgid "Ctrl+Alt & mouse wheel"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:273
+#: src/gui/HelpDialog.cpp:270
 msgid "Time scrolling: years"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:274
+#: src/gui/HelpDialog.cpp:271
 msgid "Ctrl+Alt+Shift & mouse wheel"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:277
+#: src/gui/HelpDialog.cpp:274
 msgid "Select object"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:278
+#: src/gui/HelpDialog.cpp:275
 msgid "Left click"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:281
+#: src/gui/HelpDialog.cpp:278
 msgid "Clear selection"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:283
+#: src/gui/HelpDialog.cpp:280
 msgid "Ctrl & left click"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:285
+#: src/gui/HelpDialog.cpp:282
 msgid "Right click"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:288
+#: src/gui/HelpDialog.cpp:285
 msgid "Add custom marker"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:289
+#: src/gui/HelpDialog.cpp:286
 msgid "Shift & left click"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:291
+#: src/gui/HelpDialog.cpp:288
 msgid "Delete marker closest to mouse cursor"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:292
+#: src/gui/HelpDialog.cpp:289
 msgid "Shift & right click"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:294
+#: src/gui/HelpDialog.cpp:291
 msgid "Delete all custom markers"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:295
+#: src/gui/HelpDialog.cpp:292
 msgid "Shift & Alt & right click"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:298
+#: src/gui/HelpDialog.cpp:295
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
@@ -4355,38 +4355,83 @@ msgstr ""
 msgid "Text User Interface (TUI)"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:329
+#: src/gui/HelpDialog.cpp:328
 msgid "Activate TUI"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:338
+#: src/gui/HelpDialog.cpp:332
+msgid "Special local keys"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:333
+msgid ""
+"All these hotkeys available to run when specific window or tab is opened."
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:334 src/ui_scriptConsole.h:380
+msgid "Script console"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:335 src/ui_scriptConsole.h:383
+msgid "Load script from file"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:337 src/ui_scriptConsole.h:387
+msgid "Save script to file"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:339 src/ui_scriptConsole.h:405
+msgid "Run script"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:341 src/ui_astroCalcDialog.h:1673
+msgid "Astronomical calculations"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:342 src/ui_astroCalcDialog.h:1708
+msgid "Update positions"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:344 src/ui_astroCalcDialog.h:1774
+msgid "Calculate ephemeris"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:346 src/ui_astroCalcDialog.h:1797
+msgid "Calculate transits"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:348 src/ui_astroCalcDialog.h:1817
+msgid "Calculate phenomena"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:358
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:342
+#: src/gui/HelpDialog.cpp:362
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:347
+#: src/gui/HelpDialog.cpp:367
 msgid "{The Stellarium Wiki} - general information."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:352
+#: src/gui/HelpDialog.cpp:372
 msgid "{The landscapes} - user-contributed landscapes for Stellarium."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:357
+#: src/gui/HelpDialog.cpp:377
 msgid "{The scripts} - user-contributed and official scripts for Stellarium."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:362
+#: src/gui/HelpDialog.cpp:382
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -4394,71 +4439,71 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:367
+#: src/gui/HelpDialog.cpp:387
 msgid "{Google Groups} - discuss Stellarium with other users."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:372
+#: src/gui/HelpDialog.cpp:392
 msgid "{Open Collective} - donations to the Stellarium development team."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:438
+#: src/gui/HelpDialog.cpp:458
 msgid "Developers"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:439
+#: src/gui/HelpDialog.cpp:459
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:440 src/gui/HelpDialog.cpp:446
+#: src/gui/HelpDialog.cpp:460 src/gui/HelpDialog.cpp:466
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:441 src/gui/HelpDialog.cpp:442
-#: src/gui/HelpDialog.cpp:443 src/gui/HelpDialog.cpp:448
-#: src/gui/HelpDialog.cpp:449 src/gui/HelpDialog.cpp:450
-#: src/gui/HelpDialog.cpp:451 src/gui/HelpDialog.cpp:452
-#: src/gui/HelpDialog.cpp:453 src/gui/HelpDialog.cpp:454
-#: src/gui/HelpDialog.cpp:455 src/gui/HelpDialog.cpp:456
-#: src/gui/HelpDialog.cpp:457
+#: src/gui/HelpDialog.cpp:461 src/gui/HelpDialog.cpp:462
+#: src/gui/HelpDialog.cpp:463 src/gui/HelpDialog.cpp:468
+#: src/gui/HelpDialog.cpp:469 src/gui/HelpDialog.cpp:470
+#: src/gui/HelpDialog.cpp:471 src/gui/HelpDialog.cpp:472
+#: src/gui/HelpDialog.cpp:473 src/gui/HelpDialog.cpp:474
+#: src/gui/HelpDialog.cpp:475 src/gui/HelpDialog.cpp:476
+#: src/gui/HelpDialog.cpp:477
 #, qt-format
 msgid "Developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:444
+#: src/gui/HelpDialog.cpp:464
 msgid "Former Developers"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:445
+#: src/gui/HelpDialog.cpp:465
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:447
+#: src/gui/HelpDialog.cpp:467
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:458 src/gui/HelpDialog.cpp:459
+#: src/gui/HelpDialog.cpp:478 src/gui/HelpDialog.cpp:479
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:460
+#: src/gui/HelpDialog.cpp:480
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:461
+#: src/gui/HelpDialog.cpp:481
 #, qt-format
 msgid "Tester: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:462
+#: src/gui/HelpDialog.cpp:482
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:103
 #: plugins/Oculars/src/gui/OcularDialog.cpp:595
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:680
@@ -4471,29 +4516,29 @@ msgstr ""
 msgid "Contributors"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:463
+#: src/gui/HelpDialog.cpp:483
 #, qt-format
 msgid ""
 "Several people have made contributions to the project and their work has "
 "made Stellarium better (sorted alphabetically): %1."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:464 plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
+#: src/gui/HelpDialog.cpp:484 plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
 msgid "Acknowledgment"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:465
+#: src/gui/HelpDialog.cpp:485
 msgid ""
 "If the Stellarium planetarium was helpful for your research work, the "
 "following acknowledgment would be appreciated:"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:466
+#: src/gui/HelpDialog.cpp:486
 msgid "This research has made use of the Stellarium planetarium"
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:469
+#: src/gui/HelpDialog.cpp:489
 msgid ""
 "Or you may {download the BibTeX file of the paper} to create another "
 "citation format."
@@ -11166,7 +11211,7 @@ msgstr ""
 msgid "Display no information"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1676 plugins/Oculars/src/Oculars.cpp:2493
+#: src/ui_configurationDialog.h:1676 plugins/Oculars/src/Oculars.cpp:2496
 #: plugins/Observability/src/Observability.cpp:179
 msgid "None"
 msgstr ""
@@ -11871,36 +11916,20 @@ msgstr ""
 msgid "View recent GRS measurements"
 msgstr ""
 
-#: src/ui_scriptConsole.h:380
-msgid "Script console"
-msgstr ""
-
-#: src/ui_scriptConsole.h:383
-msgid "load script from file"
-msgstr ""
-
-#: src/ui_scriptConsole.h:387
-msgid "save script to file"
-msgstr ""
-
 #: src/ui_scriptConsole.h:391
-msgid "clear"
+msgid "Clear"
 msgstr ""
 
 #: src/ui_scriptConsole.h:395
-msgid "pre-process script using SSC preprocessor"
+msgid "Pre-process script using SSC preprocessor"
 msgstr ""
 
 #: src/ui_scriptConsole.h:400
 msgid "Execute:"
 msgstr ""
 
-#: src/ui_scriptConsole.h:405
-msgid "run script"
-msgstr ""
-
 #: src/ui_scriptConsole.h:409
-msgid "stop script"
+msgid "Stop script"
 msgstr ""
 
 #: src/ui_scriptConsole.h:412
@@ -11947,10 +11976,6 @@ msgstr ""
 msgid "..."
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1673
-msgid "Astronomical calculations"
-msgstr ""
-
 #: src/ui_astroCalcDialog.h:1679
 msgid "Positions"
 msgstr ""
@@ -11980,10 +12005,6 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:1707
 msgid "Save positions"
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:1708
-msgid "Update positions"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:1710 src/ui_astroCalcDialog.h:1872
@@ -12093,10 +12114,6 @@ msgstr ""
 msgid "Calculations require time, please be patient"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1774
-msgid "Calculate ephemeris"
-msgstr ""
-
 #: src/ui_astroCalcDialog.h:1775 src/ui_astroCalcDialog.h:1800
 #: src/ui_astroCalcDialog.h:1810
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
@@ -12151,10 +12168,6 @@ msgstr ""
 msgid "Save transits"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1797
-msgid "Calculate transits"
-msgstr ""
-
 #: src/ui_astroCalcDialog.h:1798
 msgid "Celestial object:"
 msgstr ""
@@ -12182,10 +12195,6 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:1813
 msgid "Save phenomena"
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:1817
-msgid "Calculate phenomena"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:1818
@@ -12971,72 +12980,72 @@ msgctxt "tab in plugin windows"
 msgid "About"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:86 plugins/Oculars/src/Oculars.cpp:1510
+#: plugins/Oculars/src/Oculars.cpp:87 plugins/Oculars/src/Oculars.cpp:1511
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:189
 #: plugins/Oculars/src/ui_ocularDialog.h:1429
 msgid "Oculars"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:89
+#: plugins/Oculars/src/Oculars.cpp:90
 msgid ""
 "Shows the sky as if looking through a telescope eyepiece. (Only "
 "magnification and field of view are simulated.) It can also show a sensor "
 "frame and a Telrad sight."
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:993
+#: plugins/Oculars/src/Oculars.cpp:995
 msgid "Please select an object before switching to ocular view."
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1099
+#: plugins/Oculars/src/Oculars.cpp:1101
 msgid "&Previous ocular"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1100
+#: plugins/Oculars/src/Oculars.cpp:1102
 msgid "&Next ocular"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1101
+#: plugins/Oculars/src/Oculars.cpp:1103
 msgid "Select &ocular"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1143
+#: plugins/Oculars/src/Oculars.cpp:1145
 msgid "Toggle &crosshair"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1153
+#: plugins/Oculars/src/Oculars.cpp:1155
 msgid "Configure &Oculars"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1162
+#: plugins/Oculars/src/Oculars.cpp:1164
 msgid "Toggle &CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1170
+#: plugins/Oculars/src/Oculars.cpp:1172
 msgid "Toggle &Telrad"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1179
+#: plugins/Oculars/src/Oculars.cpp:1181
 msgid "&Previous CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1180
+#: plugins/Oculars/src/Oculars.cpp:1182
 msgid "&Next CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1181
+#: plugins/Oculars/src/Oculars.cpp:1183
 msgid "&Select CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1202
+#: plugins/Oculars/src/Oculars.cpp:1204
 msgid "&Rotate CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1214
+#: plugins/Oculars/src/Oculars.cpp:1216
 msgid "&Reset rotation"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1376
+#: plugins/Oculars/src/Oculars.cpp:1378
 #: plugins/Oculars/src/gui/OcularDialog.cpp:121
 #: plugins/Oculars/src/gui/OcularDialog.cpp:138
 #: plugins/Oculars/src/gui/OcularDialog.cpp:155
@@ -13045,209 +13054,209 @@ msgstr ""
 msgid "Warning!"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1376
+#: plugins/Oculars/src/Oculars.cpp:1378
 msgid ""
 "Unable to display a sensor boundary: No sensors or telescopes are defined."
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1511
+#: plugins/Oculars/src/Oculars.cpp:1512
 #: plugins/Oculars/src/ui_ocularDialog.h:1464
 msgid "Ocular view"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1512
+#: plugins/Oculars/src/Oculars.cpp:1513
 msgid "Oculars popup menu"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1513
+#: plugins/Oculars/src/Oculars.cpp:1514
 msgid "Show crosshairs"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1514
+#: plugins/Oculars/src/Oculars.cpp:1515
 msgid "Image sensor frame"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1515
+#: plugins/Oculars/src/Oculars.cpp:1516
 msgid "Telrad sight"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1516
+#: plugins/Oculars/src/Oculars.cpp:1517
 msgid "Toggle Oculars configuration window"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1517
+#: plugins/Oculars/src/Oculars.cpp:1518
 msgid "Toggle Oculars button bar"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1519
+#: plugins/Oculars/src/Oculars.cpp:1520
 msgid "Select next telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1521
+#: plugins/Oculars/src/Oculars.cpp:1522
 msgid "Select previous telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1523
+#: plugins/Oculars/src/Oculars.cpp:1524
 msgid "Select next eyepiece"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1525
+#: plugins/Oculars/src/Oculars.cpp:1526
 msgid "Select previous eyepiece"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1526
+#: plugins/Oculars/src/Oculars.cpp:1527
 msgid "Rotate reticle pattern of the eyepiece clockwise"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1527
+#: plugins/Oculars/src/Oculars.cpp:1528
 msgid "Rotate reticle pattern of the eyepiece counterclockwise"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1528
+#: plugins/Oculars/src/Oculars.cpp:1529
 msgid "Toggle sensor crop overlay"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1529
+#: plugins/Oculars/src/Oculars.cpp:1530
 msgid "Toggle sensor pixel grid"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1530
+#: plugins/Oculars/src/Oculars.cpp:1531
 msgid "Toggle focuser overlay"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1752
+#: plugins/Oculars/src/Oculars.cpp:1753
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for scale - arc-seconds per pixel
-#: plugins/Oculars/src/Oculars.cpp:1763
+#: plugins/Oculars/src/Oculars.cpp:1764
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:688
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:860
 msgid "\"/px"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1782
+#: plugins/Oculars/src/Oculars.cpp:1783
 msgctxt "pixel"
 msgid "px"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2022
+#: plugins/Oculars/src/Oculars.cpp:2023
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:483
 msgid "Ocular"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2024
+#: plugins/Oculars/src/Oculars.cpp:2025
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:485
 msgid "Binocular"
 msgstr ""
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:2044
+#: plugins/Oculars/src/Oculars.cpp:2045
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:528
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr ""
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:2051
+#: plugins/Oculars/src/Oculars.cpp:2052
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:537
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2062
+#: plugins/Oculars/src/Oculars.cpp:2063
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:567
 #, qt-format
 msgid "Lens #%1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2066
+#: plugins/Oculars/src/Oculars.cpp:2067
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:571
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2071
+#: plugins/Oculars/src/Oculars.cpp:2072
 msgid "Lens: none"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2086 plugins/Oculars/src/Oculars.cpp:2147
+#: plugins/Oculars/src/Oculars.cpp:2087 plugins/Oculars/src/Oculars.cpp:2148
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:808
 #, qt-format
 msgid "Telescope #%1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2095
+#: plugins/Oculars/src/Oculars.cpp:2096
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:910
 #, qt-format
 msgid "Magnification: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2102
+#: plugins/Oculars/src/Oculars.cpp:2103
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:921
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2109
+#: plugins/Oculars/src/Oculars.cpp:2110
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:929
 #, qt-format
 msgid "FOV: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2130
+#: plugins/Oculars/src/Oculars.cpp:2131
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:676
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:852
 #, qt-format
 msgid "Dimensions: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2131
+#: plugins/Oculars/src/Oculars.cpp:2132
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:682
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:856
 msgid "Binning"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2135
+#: plugins/Oculars/src/Oculars.cpp:2136
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:636
 #, qt-format
 msgid "Sensor #%1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2139
+#: plugins/Oculars/src/Oculars.cpp:2140
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:640
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2152
+#: plugins/Oculars/src/Oculars.cpp:2153
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:812
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2489
+#: plugins/Oculars/src/Oculars.cpp:2492
 msgid "&Lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2490
+#: plugins/Oculars/src/Oculars.cpp:2493
 msgid "&Previous lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2491
+#: plugins/Oculars/src/Oculars.cpp:2494
 msgid "&Next lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2520
+#: plugins/Oculars/src/Oculars.cpp:2523
 msgid "&Telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2521
+#: plugins/Oculars/src/Oculars.cpp:2524
 msgid "&Previous telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2522
+#: plugins/Oculars/src/Oculars.cpp:2525
 msgid "&Next telescope"
 msgstr ""
 
