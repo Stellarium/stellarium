@@ -187,6 +187,16 @@ public:
 	//! - scale
 	//! - eclipse-obscuration (for Sun only)
 	//! - eclipse-magnitude (for Sun only)
+	//! - central_l (on Earth only; degrees)
+	//! - central_b (on Earth only; degrees)
+	//! - pa_axis (on Earth only; degrees)
+	//! - subsolar_l (on Earth only; degrees)
+	//! - subsolar_b (on Earth only; degrees)
+	//! - libration_l (on Earth for Moon only; degrees)
+	//! - libration_b (on Earth for Moon only; degrees)
+	//! - colongitude (on Earth for Moon only; degrees)
+	//! - penumbral-eclipse-magnitude (on Earth for Moon only)
+	//! - umbral-eclipse-magnitude (on Earth for Moon only)
 	virtual QVariantMap getInfoMap(const StelCore *core) const  Q_DECL_OVERRIDE;
 	virtual double getCloseViewFov(const StelCore* core) const Q_DECL_OVERRIDE;
 	virtual double getSatellitesFov(const StelCore* core) const Q_DECL_OVERRIDE;
@@ -674,6 +684,7 @@ private:
 	QString iauMoonNumber;
 
 	const QString getContextString() const;
+	QPair<double, double> getLunarEclipseMagnitudes() const;
 
 	// Shader-related variables
 	struct PlanetShaderVars {

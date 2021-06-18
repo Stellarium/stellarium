@@ -1215,50 +1215,15 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 		if (englishName == "Moon" && onEarth)
 		{
 			// Show magnitude of lunar eclipse
-			// Use geocentric coordinates
-			StelCore* core1 = StelApp::getInstance().getCore();
-			const bool saveTopocentric = core1->getUseTopocentricCoordinates();
-			core1->setUseTopocentricCoordinates(false);
-			core1->update(0);
-
-			double raMoon, deMoon, raSun, deSun;
-			StelUtils::rectToSphe(&raMoon, &deMoon, getEquinoxEquatorialPos(core1));
-			StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core1));
-
-			// R.A./Dec of Earth's shadow
-			const double raShadow = StelUtils::fmodpos(raSun + M_PI, 2.*M_PI);
-			const double deShadow = -(deSun);
-			const double raDiff = StelUtils::fmodpos(raMoon - raShadow, 2.*M_PI);
-
-			if (raDiff < 3.*M_PI_180 || raDiff > 357.*M_PI_180)
+			QPair<double,double> magnitudes = getLunarEclipseMagnitudes();
+			if (magnitudes.first > 1.e-3)
 			{
-				// Moon's semi-diameter
-				const double mSD=atan(getEquatorialRadius()/eclipticPos.length()) * M_180_PI*3600.; // arcsec
-				const QPair<Vec3d,Vec3d>shadowRadii=ssystem->getEarthShadowRadiiAtLunarDistance();
-				const double f1 = shadowRadii.second[0]; // radius of penumbra at the distance of the Moon
-				const double f2 = shadowRadii.first[0];  // radius of umbra at the distance of the Moon
-
-				double x = cos(deMoon) * sin(raDiff);
-				x *= 3600. * M_180_PI;
-				double y = cos(deShadow) * sin(deMoon) - sin(deShadow) * cos(deMoon) * cos(raDiff);
-				y *= 3600. * M_180_PI;
-				const double m = sqrt(x * x + y * y); // distance between lunar centre and shadow centre
-				const double L1 = f1 + mSD; // distance between center of the Moon and shadow at beginning and end of penumbral eclipse
-				const double L2 = f2 + mSD; // distance between center of the Moon and shadow at beginning and end of partial eclipse
-				const double pMag = (L1 - m) / (2. * mSD); // penumbral magnitude
-				const double uMag = (L2 - m) / (2. * mSD); // umbral magnitude
-
-				if (pMag > 1.e-3)
+				oss << QString("%1: %2%").arg(q_("Penumbral eclipse magnitude"), QString::number(magnitudes.first*100., 'f', 1)) << "<br />";
+				if (magnitudes.second > 1.e-3)
 				{
-					oss << QString("%1: %2%").arg(q_("Penumbral eclipse magnitude")).arg(QString::number(pMag*100., 'f', 1)) << "<br />";
-					if (uMag > 1.e-3)
-					{
-						oss << QString("%1: %2%").arg(q_("Umbral eclipse magnitude")).arg(QString::number(uMag*100., 'f', 1)) << "<br />";
-					}
+					oss << QString("%1: %2%").arg(q_("Umbral eclipse magnitude"), QString::number(magnitudes.second*100., 'f', 1)) << "<br />";
 				}
 			}
-			core1->setUseTopocentricCoordinates(saveTopocentric);
-			core1->update(0); // enforce update cache to avoid odd selection of Moon details!
 		}		
 
 		// Not sure if albedo is at all interesting?
@@ -1333,6 +1298,10 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 		map.insert("subsolar_l", -phys.second[2]*M_180_PI);
 		map.insert("subsolar_b", phys.second[1]*M_180_PI);
 		map.insert("colongitude", StelUtils::fmodpos(450.0+phys.second[2]*M_PI_180, 360.));
+
+		QPair<double,double> magnitudes = getLunarEclipseMagnitudes();
+		map.insert("penumbral-eclipse-magnitude", magnitudes.first);
+		map.insert("umbral-eclipse-magnitude", magnitudes.second);
 	}
 	else if (onEarth && (getEnglishName()!="Sun"))
 	{
@@ -1344,6 +1313,56 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 		map.insert("subsolar_b", phys.second[1]*M_180_PI);
 	}
 	return map;
+}
+
+QPair<double,double> Planet::getLunarEclipseMagnitudes() const
+{
+	QPair<double,double> magnitudes;
+	// Use geocentric coordinates
+	StelCore* core = StelApp::getInstance().getCore();
+	static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+	const bool saveTopocentric = core->getUseTopocentricCoordinates();
+	core->setUseTopocentricCoordinates(false);
+	core->update(0);
+
+	double raMoon, deMoon, raSun, deSun;
+	StelUtils::rectToSphe(&raMoon, &deMoon, getEquinoxEquatorialPos(core));
+	StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
+
+	// R.A./Dec of Earth's shadow
+	const double raShadow = StelUtils::fmodpos(raSun + M_PI, 2.*M_PI);
+	const double deShadow = -(deSun);
+	const double raDiff = StelUtils::fmodpos(raMoon - raShadow, 2.*M_PI);
+
+	if (raDiff < 3.*M_PI_180 || raDiff > 357.*M_PI_180)
+	{
+		// Moon's semi-diameter
+		const double mSD=atan(getEquatorialRadius()/eclipticPos.length()) * M_180_PI*3600.; // arcsec
+		const QPair<Vec3d,Vec3d>shadowRadii=ssystem->getEarthShadowRadiiAtLunarDistance();
+		const double f1 = shadowRadii.second[0]; // radius of penumbra at the distance of the Moon
+		const double f2 = shadowRadii.first[0];  // radius of umbra at the distance of the Moon
+
+		double x = cos(deMoon) * sin(raDiff);
+		x *= 3600. * M_180_PI;
+		double y = cos(deShadow) * sin(deMoon) - sin(deShadow) * cos(deMoon) * cos(raDiff);
+		y *= 3600. * M_180_PI;
+		const double m = sqrt(x * x + y * y); // distance between lunar centre and shadow centre
+		const double L1 = f1 + mSD; // distance between center of the Moon and shadow at beginning and end of penumbral eclipse
+		const double L2 = f2 + mSD; // distance between center of the Moon and shadow at beginning and end of partial eclipse
+		const double pMag = (L1 - m) / (2. * mSD); // penumbral magnitude
+		const double uMag = (L2 - m) / (2. * mSD); // umbral magnitude
+
+		magnitudes.first = pMag;
+		magnitudes.second = uMag;
+	}
+	else
+	{
+		magnitudes.first = 0.;
+		magnitudes.second = 0.;
+	}
+	core->setUseTopocentricCoordinates(saveTopocentric);
+	core->update(0); // enforce update cache to avoid odd selection of Moon details!
+	return magnitudes;
 }
 
 float Planet::getSelectPriority(const StelCore* core) const
