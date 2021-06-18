@@ -256,19 +256,19 @@ void HelpDialog::updateHelpText(void) const
 	htmlText += "<td><b>" + q_("Arrow keys & left mouse drag").toHtmlEscaped() + "</b></td></tr>\n";
 	// zoom in/out
 	htmlText += "<tr><td rowspan='2'>" + q_("Zoom in/out").toHtmlEscaped() + "</td>";
-	htmlText += "<td><b>" + q_("Page Up/Down").toHtmlEscaped() + "</b></td></tr>\n";
-	htmlText += "<tr><td><b>" + q_("Ctrl+Up/Down").toHtmlEscaped() + "</b></td></tr>\n";
+	htmlText += "<td><b>" + hotkeyTextWrapper("Page Up") + "/" + hotkeyTextWrapper("Page Down") + "</b></td></tr>\n";
+	htmlText += "<tr><td><b>" + hotkeyTextWrapper("Ctrl+Up") + "/" + hotkeyTextWrapper("Ctrl+Down") + "</b></td></tr>\n";
 	// time dragging/scrolling
 	htmlText += "<tr><td>" + q_("Time dragging").toHtmlEscaped() + "</td><td><b>" +
-			q_("Ctrl & left mouse drag").toHtmlEscaped() + "</b></td></tr>";
+			QKeySequence(Qt::CTRL).toString(QKeySequence::NativeText) + q_(" & left mouse drag").toHtmlEscaped() + "</b></td></tr>";
 	htmlText += "<tr><td>" + q_("Time scrolling: minutes").toHtmlEscaped() + "</td><td><b>" +
-			q_("Ctrl & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
+			QKeySequence(Qt::CTRL).toString(QKeySequence::NativeText) + q_(" & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
 	htmlText += "<tr><td>" + q_("Time scrolling: hours").toHtmlEscaped() + "</td><td><b>" +
-			q_("Ctrl+Shift & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
+			QKeySequence(Qt::CTRL + Qt::SHIFT).toString(QKeySequence::NativeText) + q_(" & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
 	htmlText += "<tr><td>" + q_("Time scrolling: days").toHtmlEscaped() + "</td><td><b>" +
-			q_("Ctrl+Alt & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
+			QKeySequence(Qt::CTRL + Qt::ALT).toString(QKeySequence::NativeText) + q_(" & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
 	htmlText += "<tr><td>" + q_("Time scrolling: years").toHtmlEscaped() + "</td><td><b>" +
-			q_("Ctrl+Alt+Shift & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
+			QKeySequence(Qt::CTRL + Qt::ALT + Qt::SHIFT).toString(QKeySequence::NativeText) + q_(" & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
 
 	// select object
 	htmlText += "<tr><td>" + q_("Select object").toHtmlEscaped() + "</td>";
@@ -277,19 +277,19 @@ void HelpDialog::updateHelpText(void) const
 	htmlText += "<tr><td>";
 	htmlText += q_("Clear selection").toHtmlEscaped() + "</td>";
 #ifdef Q_OS_MAC
-	htmlText += "<td><b>" + q_("Ctrl & left click").toHtmlEscaped() + "</b></td></tr>\n";
+	htmlText += "<td><b>" + QKeySequence(Qt::CTRL).toString(QKeySequence::NativeText) + q_(" & left click").toHtmlEscaped() + "</b></td></tr>\n";
 #else
 	htmlText += "<td><b>" + q_("Right click").toHtmlEscaped() + "</b></td></tr>\n";
 #endif
 	// add custom marker
 	htmlText += "<tr><td>" + q_("Add custom marker").toHtmlEscaped() + "</td>";
-	htmlText += "<td><b>" + q_("Shift & left click").toHtmlEscaped() + "</b></td></tr>\n";
+	htmlText += "<td><b>" + QKeySequence(Qt::SHIFT).toString(QKeySequence::NativeText) + q_(" & left click").toHtmlEscaped() + "</b></td></tr>\n";
 	// delete one custom marker
 	htmlText += "<tr><td>" + q_("Delete marker closest to mouse cursor").toHtmlEscaped() + "</td>";
-	htmlText += "<td><b>" + q_("Shift & right click").toHtmlEscaped() + "</b></td></tr>\n";
+	htmlText += "<td><b>" + QKeySequence(Qt::SHIFT).toString(QKeySequence::NativeText) + q_(" & right click").toHtmlEscaped() + "</b></td></tr>\n";
 	// delete all custom markers
 	htmlText += "<tr><td>" + q_("Delete all custom markers").toHtmlEscaped() + "</td>";
-	htmlText += "<td><b>" + q_("Shift & Alt & right click").toHtmlEscaped() + "</b></td></tr>\n";
+	htmlText += "<td><b>" + QKeySequence(Qt::SHIFT + Qt::ALT).toString(QKeySequence::NativeText) + q_(" & right click").toHtmlEscaped() + "</b></td></tr>\n";
 
 	htmlText += "</table>\n<p>" +
 			q_("Below are listed only the actions with assigned keys. Further actions may be available via the \"%1\" button.")
@@ -326,27 +326,28 @@ void HelpDialog::updateHelpText(void) const
 	htmlText += "<tr><td colspan='2'>&nbsp;</td></tr>";
 	htmlText += "<tr><td colspan='2'><b><u>" + q_("Text User Interface (TUI)") + ":</u></b></td></tr>\n";
 	htmlText += "<tr><td>" + q_("Activate TUI") + "</td>";
-	htmlText += "<td><b>Alt+T</b></td></tr>\n";
+	htmlText += "<td><b>" + hotkeyTextWrapper("Alt+T") + "</b></td></tr>\n";
 
 	htmlText += "<tr><td colspan='2'>&nbsp;</td></tr>";
 	htmlText += "<tr><td colspan='2'><b><u>" + q_("Special local keys") +	":</u></b></td></tr>\n";
 	htmlText += "<tr><td colspan='2'>" + q_("All these hotkeys available to run when specific window or tab is opened.") + "</td></tr>";
 	htmlText += "<tr><td colspan='2'><b>" + q_("Script console") +	":</b></td></tr>\n";
 	htmlText += "<tr><td>" + q_("Load script from file") + "</td>";
-	htmlText += "<td><b>Ctrl+O</b></td></tr>\n";
+	htmlText += "<td><b>" + hotkeyTextWrapper("Ctrl+O") + "</b></td></tr>\n";
 	htmlText += "<tr><td>" + q_("Save script to file") + "</td>";
-	htmlText += "<td><b>Ctrl+S</b></td></tr>\n";
+	htmlText += "<td><b>" + hotkeyTextWrapper("Ctrl+S") + "</b></td></tr>\n";
 	htmlText += "<tr><td>" + q_("Run script") + "</td>";
-	htmlText += "<td><b>Ctrl+Return</b></td></tr>\n";
+	htmlText += "<td><b>" + hotkeyTextWrapper("Ctrl+Return") + "</b></td></tr>\n";
 	htmlText += "<tr><td colspan='2'><b>" + q_("Astronomical calculations") +	":</b></td></tr>\n";
 	htmlText += "<tr><td>" + q_("Update positions") + "</td>";
-	htmlText += "<td><b>Shift+F10</b></td></tr>\n";
+	QString shiftF10 = hotkeyTextWrapper("Shift+F10");
+	htmlText += "<td><b>" + shiftF10 + "</b></td></tr>\n";
 	htmlText += "<tr><td>" + q_("Calculate ephemeris") + "</td>";
-	htmlText += "<td><b>Shift+F10</b></td></tr>\n";
+	htmlText += "<td><b>" + shiftF10 + "</b></td></tr>\n";
 	htmlText += "<tr><td>" + q_("Calculate transits") + "</td>";
-	htmlText += "<td><b>Shift+F10</b></td></tr>\n";
+	htmlText += "<td><b>" + shiftF10 + "</b></td></tr>\n";
 	htmlText += "<tr><td>" + q_("Calculate phenomena") + "</td>";
-	htmlText += "<td><b>Shift+F10</b></td></tr>\n";
+	htmlText += "<td><b>" + shiftF10 + "</b></td></tr>\n";
 
 	htmlText += "</table>";
 
@@ -400,6 +401,11 @@ void HelpDialog::updateHelpText(void) const
 		ui->helpBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	ui->helpBrowser->insertHtml(htmlText);
 	ui->helpBrowser->scrollToAnchor("top");
+}
+
+QString HelpDialog::hotkeyTextWrapper(const QString hotkey) const
+{
+	return QKeySequence(hotkey).toString(QKeySequence::NativeText);
 }
 
 void HelpDialog::updateAboutText(void) const
