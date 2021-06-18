@@ -341,6 +341,7 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 	core->setCurrentTimeZone(tz);
 
 	setMapForLocation(loc);
+	ui->mapLabel->setCursorPos(loc.longitude, loc.latitude);
 
 	ui->deleteLocationFromListPushButton->setEnabled(StelApp::getInstance().getLocationMgr().canDeleteUserLocation(loc.getID()));
 
@@ -544,13 +545,12 @@ void LocationDialog::setLocationFromList(const QModelIndex& index)
 void LocationDialog::setLocationFromMap(double longitude, double latitude)
 {
 	StelCore *core = StelApp::getInstance().getCore();
-	const double ppx = core->getCurrentStelProjectorParams().devicePixelsPerPixel;
 	if (core->getUseCustomTimeZone())
 		customTimeZone=core->getCurrentTimeZone();
 	reportEdit();
 	StelLocation loc = locationFromFields();
-	loc.latitude = latitude/ppx;
-	loc.longitude = longitude/ppx;
+	loc.latitude = latitude;
+	loc.longitude = longitude;
 	setFieldsFromLocation(loc);
 	core->moveObserverTo(loc, 0.);
 	// Only for locations on Earth: set zone to LMST.
