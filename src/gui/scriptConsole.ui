@@ -177,7 +177,7 @@
            </size>
           </property>
           <property name="toolTip">
-           <string>load script from file</string>
+           <string>Load script from file</string>
           </property>
           <property name="text">
            <string/>
@@ -206,7 +206,7 @@
            </size>
           </property>
           <property name="toolTip">
-           <string>save script to file</string>
+           <string>Save script to file</string>
           </property>
           <property name="text">
            <string/>
@@ -235,7 +235,7 @@
            </size>
           </property>
           <property name="toolTip">
-           <string>clear</string>
+           <string>Clear</string>
           </property>
           <property name="text">
            <string/>
@@ -255,7 +255,7 @@
            </size>
           </property>
           <property name="toolTip">
-           <string>pre-process script using SSC preprocessor</string>
+           <string>Pre-process script using SSC preprocessor</string>
           </property>
           <property name="text">
            <string notr="true">SSC</string>
@@ -324,7 +324,7 @@
            </size>
           </property>
           <property name="toolTip">
-           <string>run script</string>
+           <string>Run script</string>
           </property>
           <property name="text">
            <string/>
@@ -357,7 +357,7 @@
            </size>
           </property>
           <property name="toolTip">
-           <string>stop script</string>
+           <string>Stop script</string>
           </property>
           <property name="text">
            <string/>
@@ -615,6 +615,7 @@
   </customwidget>
  </customwidgets>
  <resources>
+  <include location="../../data/gui/guiRes.qrc"/>
   <include location="../../data/gui/guiRes.qrc"/>
  </resources>
  <connections/>

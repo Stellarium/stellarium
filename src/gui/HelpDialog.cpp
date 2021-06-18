@@ -249,18 +249,15 @@ void HelpDialog::updateHelpText(void) const
 		    "</a></p>\n";
 
 	htmlText += "<h2 id='keys'>" + q_("Keys").toHtmlEscaped() + "</h2>\n";
-	htmlText += "<table cellpadding=\"10%\">\n";
+	htmlText += "<table cellpadding='10%' width='100%'>\n";
 	// Describe keys for those keys which do not have actions.
 	// navigate
 	htmlText += "<tr><td>" + q_("Pan view around the sky").toHtmlEscaped() + "</td>";
 	htmlText += "<td><b>" + q_("Arrow keys & left mouse drag").toHtmlEscaped() + "</b></td></tr>\n";
 	// zoom in/out
-	htmlText += "<tr><td rowspan='2'>" + q_("Zoom in/out").toHtmlEscaped() +
-		    "</td>";
-	htmlText += "<td><b>" + q_("Page Up/Down").toHtmlEscaped() +
-		    "</b></td></tr>\n";
-	htmlText += "<tr><td><b>" + q_("Ctrl+Up/Down").toHtmlEscaped() +
-		    "</b></td></tr>\n";
+	htmlText += "<tr><td rowspan='2'>" + q_("Zoom in/out").toHtmlEscaped() + "</td>";
+	htmlText += "<td><b>" + q_("Page Up/Down").toHtmlEscaped() + "</b></td></tr>\n";
+	htmlText += "<tr><td><b>" + q_("Ctrl+Up/Down").toHtmlEscaped() + "</b></td></tr>\n";
 	// time dragging/scrolling
 	htmlText += "<tr><td>" + q_("Time dragging").toHtmlEscaped() + "</td><td><b>" +
 			q_("Ctrl & left mouse drag").toHtmlEscaped() + "</b></td></tr>";
@@ -297,12 +294,12 @@ void HelpDialog::updateHelpText(void) const
 	htmlText += "</table>\n<p>" +
 			q_("Below are listed only the actions with assigned keys. Further actions may be available via the \"%1\" button.")
 			.arg(ui->editShortcutsButton->text()).toHtmlEscaped() +
-		    "</p><table cellpadding=\"10%\">\n";
+			"</p><table cellpadding='10%' width='100%'>\n";
 
 	// Append all StelAction shortcuts.
 	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
 	typedef QPair<QString, QString> KeyDescription;
-	for (auto group : actionMgr->getGroupList())
+	for (const auto &group : actionMgr->getGroupList())
 	{
 		QList<KeyDescription> descriptions;
 		for (auto* action : actionMgr->getActionList(group))
@@ -314,20 +311,43 @@ void HelpDialog::updateHelpText(void) const
 			descriptions.append(KeyDescription(text, key));
 		}
 		std::sort(descriptions.begin(), descriptions.end());
-		htmlText += "<tr></tr><tr><td><b><u>" + q_(group) +
-			    ":</u></b></td></tr>\n";
-		for (const auto& desc : descriptions)
+		if (descriptions.count()>0)
 		{
-			htmlText += "<tr><td>" + desc.first.toHtmlEscaped() + "</td>";
-			htmlText += "<td><b>" + desc.second.toHtmlEscaped() +
-				    "</b></td></tr>\n";
+			htmlText += "<tr><td colspan='2'>&nbsp;</td></tr>";
+			htmlText += "<tr><td colspan='2'><b><u>" + q_(group) +	":</u></b></td></tr>\n";
+			for (const auto& desc : descriptions)
+			{
+				htmlText += "<tr><td>" + desc.first.toHtmlEscaped() + "</td>";
+				htmlText += "<td><b>" + desc.second.toHtmlEscaped() + "</b></td></tr>\n";
+			}
 		}
 	}
 
-	htmlText += "<tr></tr><tr><td><b><u>" + q_("Text User Interface (TUI)") +
-		    ":</u></b></td></tr>\n";
+	htmlText += "<tr><td colspan='2'>&nbsp;</td></tr>";
+	htmlText += "<tr><td colspan='2'><b><u>" + q_("Text User Interface (TUI)") + ":</u></b></td></tr>\n";
 	htmlText += "<tr><td>" + q_("Activate TUI") + "</td>";
 	htmlText += "<td><b>Alt+T</b></td></tr>\n";
+
+	htmlText += "<tr><td colspan='2'>&nbsp;</td></tr>";
+	htmlText += "<tr><td colspan='2'><b><u>" + q_("Special local keys") +	":</u></b></td></tr>\n";
+	htmlText += "<tr><td colspan='2'>" + q_("All these hotkeys available to run when specific window or tab is opened.") + "</td></tr>";
+	htmlText += "<tr><td colspan='2'><b>" + q_("Script console") +	":</b></td></tr>\n";
+	htmlText += "<tr><td>" + q_("Load script from file") + "</td>";
+	htmlText += "<td><b>Ctrl+O</b></td></tr>\n";
+	htmlText += "<tr><td>" + q_("Save script to file") + "</td>";
+	htmlText += "<td><b>Ctrl+S</b></td></tr>\n";
+	htmlText += "<tr><td>" + q_("Run script") + "</td>";
+	htmlText += "<td><b>Ctrl+Return</b></td></tr>\n";
+	htmlText += "<tr><td colspan='2'><b>" + q_("Astronomical calculations") +	":</b></td></tr>\n";
+	htmlText += "<tr><td>" + q_("Update positions") + "</td>";
+	htmlText += "<td><b>Shift+F10</b></td></tr>\n";
+	htmlText += "<tr><td>" + q_("Calculate ephemeris") + "</td>";
+	htmlText += "<td><b>Shift+F10</b></td></tr>\n";
+	htmlText += "<tr><td>" + q_("Calculate transits") + "</td>";
+	htmlText += "<td><b>Shift+F10</b></td></tr>\n";
+	htmlText += "<tr><td>" + q_("Calculate phenomena") + "</td>";
+	htmlText += "<td><b>Shift+F10</b></td></tr>\n";
+
 	htmlText += "</table>";
 
 	// Regexp to replace {text} with an HTML link.
