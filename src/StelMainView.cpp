@@ -577,6 +577,8 @@ StelMainView::StelMainView(QSettings* settings)
 	Q_ASSERT(!singleton);
 	singleton = this;
 
+	qApp->installEventFilter(this);
+
 	setWindowIcon(QIcon(":/mainWindow/icon.bmp"));
 	initTitleI18n();
 	setObjectName("MainView");
@@ -662,6 +664,17 @@ void StelMainView::resizeEvent(QResizeEvent* event)
 			guiItem->setGeometry(QRectF(0.0,0.0,sz.width(),sz.height()));
 	}
 	QGraphicsView::resizeEvent(event);
+}
+
+bool StelMainView::eventFilter(QObject *obj, QEvent *event)
+{
+	if(event->type() == QEvent::FileOpen)
+	{
+		QFileOpenEvent *openEvent = static_cast<QFileOpenEvent *>(event);
+		//qDebug() << "load script:" << openEvent->file();
+		qApp->setProperty("onetime_startup_script", openEvent->file());
+	}
+	return QGraphicsView::eventFilter(obj, event);
 }
 
 void StelMainView::mouseMoveEvent(QMouseEvent *event)
