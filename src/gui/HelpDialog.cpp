@@ -330,7 +330,7 @@ void HelpDialog::updateHelpText(void) const
 
 	htmlText += "<tr><td colspan='2'>&nbsp;</td></tr>";
 	htmlText += "<tr><td colspan='2'><b><u>" + q_("Special local keys") +	":</u></b></td></tr>\n";
-	htmlText += "<tr><td colspan='2'>" + q_("All these hotkeys are available to run when specific window or tab is opened.") + "</td></tr>";
+	htmlText += "<tr><td colspan='2'>" + q_("All these hotkeys are locally available to run when specific window or tab is opened.") + "</td></tr>";
 	htmlText += "<tr><td colspan='2'><b>" + q_("Script console") +	":</b></td></tr>\n";
 	htmlText += "<tr><td>" + q_("Load script from file") + "</td>";
 	htmlText += "<td><b>" + hotkeyTextWrapper("Ctrl+Shift+O") + "</b></td></tr>\n";
