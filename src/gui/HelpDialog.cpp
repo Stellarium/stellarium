@@ -282,7 +282,7 @@ void HelpDialog::updateHelpText(void) const
 	htmlText += "<tr><td>";
 	htmlText += q_("Clear selection").toHtmlEscaped() + "</td>";
 #ifdef Q_OS_MAC
-	htmlText += "<td><b>" + QKeySequence(Qt::CTRL).toString(QKeySequence::NativeText) + " " + q_("& left click").toHtmlEscaped() + "</b></td></tr>\n";
+	htmlText += "<td><b>" + QKeySequence(Qt::CTRL).toString(QKeySequence::NativeText) + delimiter + q_("& left click").toHtmlEscaped() + "</b></td></tr>\n";
 #else
 	htmlText += "<td><b>" + q_("Right click").toHtmlEscaped() + "</b></td></tr>\n";
 #endif
@@ -304,10 +304,17 @@ void HelpDialog::updateHelpText(void) const
 	// Append all StelAction shortcuts.
 	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
 	typedef QPair<QString, QString> KeyDescription;
+	QList<KeyDescription> groups;
 	for (const auto &group : actionMgr->getGroupList())
 	{
+		groups.append(KeyDescription(q_(group), group));
+	}
+	groups.append(KeyDescription(q_("Text User Interface (TUI)"), "TUI")); // Special case: TUI
+	std::sort(groups.begin(), groups.end());
+	for (const auto &group : groups)
+	{
 		QList<KeyDescription> descriptions;
-		for (auto* action : actionMgr->getActionList(group))
+		for (auto* action : actionMgr->getActionList(group.second))
 		{
 			if (action->getShortcut().isEmpty())
 				continue;
@@ -319,19 +326,21 @@ void HelpDialog::updateHelpText(void) const
 		if (descriptions.count()>0)
 		{
 			htmlText += "<tr><td colspan='2'>&nbsp;</td></tr>";
-			htmlText += "<tr><td colspan='2'><b><u>" + q_(group) +	":</u></b></td></tr>\n";
+			htmlText += "<tr><td colspan='2'><b><u>" + group.first.toHtmlEscaped() + ":</u></b></td></tr>\n";
 			for (const auto& desc : descriptions)
 			{
 				htmlText += "<tr><td>" + desc.first.toHtmlEscaped() + "</td>";
 				htmlText += "<td><b>" + desc.second.toHtmlEscaped() + "</b></td></tr>\n";
 			}
 		}
+		if (group.second=="TUI") // Special case: TUI
+		{
+			htmlText += "<tr><td colspan='2'>&nbsp;</td></tr>";
+			htmlText += "<tr><td colspan='2'><b><u>" + group.first.toHtmlEscaped() + ":</u></b></td></tr>\n";
+			htmlText += "<tr><td>" + q_("Activate TUI") + "</td>";
+			htmlText += "<td><b>" + hotkeyTextWrapper("Alt+T") + "</b></td></tr>\n";
+		}
 	}
-
-	htmlText += "<tr><td colspan='2'>&nbsp;</td></tr>";
-	htmlText += "<tr><td colspan='2'><b><u>" + q_("Text User Interface (TUI)") + ":</u></b></td></tr>\n";
-	htmlText += "<tr><td>" + q_("Activate TUI") + "</td>";
-	htmlText += "<td><b>" + hotkeyTextWrapper("Alt+T") + "</b></td></tr>\n";
 
 	htmlText += "<tr><td colspan='2'>&nbsp;</td></tr>";
 	htmlText += "<tr><td colspan='2'><b><u>" + q_("Special local keys") +	":</u></b></td></tr>\n";
