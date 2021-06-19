@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-03-28 10:19+0700\n"
+"POT-Creation-Date: 2021-06-15 22:33+0700\n"
 "PO-Revision-Date: 2017-11-29 01:19+0000\n"
 "Last-Translator: Üllar Kivila <landersift@hotmail.com>, 2021\n"
 "Language-Team: Estonian (https://www.transifex.com/stellarium/teams/80998/et/)\n"
@@ -137,7 +137,7 @@ msgstr "Näita kõiki"
 
 #: plugins/RemoteControl/webroot/js/ui/combobox.js:124
 msgid "Input did not match any item"
-msgstr "Sisend ei sobi ühegiga"
+msgstr "Sisend ei sobi ühegi esemega"
 
 #: plugins/RemoteControl/webroot/js/ui/search.js:285
 msgid "No current selection"
@@ -201,19 +201,19 @@ msgstr "Tähesajand"
 
 #: index.html:94 tablet7in.html:195
 msgid "Synodic month"
-msgstr ""
+msgstr "Sünoodiline kuu"
 
 #: index.html:95 tablet7in.html:196
 msgid "Draconic month"
-msgstr ""
+msgstr "Drakooniline kuu"
 
 #: index.html:96 tablet7in.html:197
 msgid "Draconic year"
-msgstr ""
+msgstr "Drakooniline aasta"
 
 #: index.html:98 tablet7in.html:210
 msgid "Gaussian year"
-msgstr ""
+msgstr "Gaussi aasta"
 
 #: index.html:101 tablet7in.html:200
 msgid "Anomalistic month"
@@ -313,15 +313,15 @@ msgstr "Linnutee heledus:"
 
 #: index.html:272 tablet7in.html:333
 msgid "Digitized Sky Survey"
-msgstr ""
+msgstr "Digitaalne taevaülevaade"
 
 #: index.html:273 tablet7in.html:334
 msgid "HiPS Survey"
-msgstr ""
+msgstr "HiPS ülevaade"
 
 #: index.html:287 tablet7in.html:351
 msgid "Show planet orbits"
-msgstr "Näita planeetid eorbiite"
+msgstr "Näita planeetide orbiite"
 
 #: index.html:288 tablet7in.html:352
 msgid "Show planet orbits only"
@@ -381,6 +381,7 @@ msgstr "Peegeldusudude kataloog (Van den Bergh, 1966)"
 msgid ""
 "Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975)"
 msgstr ""
+"Lõunataeva udukogudes asuvate tähtede kataloog (van den Bergh jt, 1975)"
 
 #: index.html:512
 msgid "Objects without identifier"
@@ -657,7 +658,7 @@ msgstr "Lemmikud"
 
 #: tablet7in.html:744
 msgid "Show 1"
-msgstr ""
+msgstr "Näita1"
 
 #: tablet7in.html:745
 msgid "Remove Labels and Images"
