@@ -507,6 +507,11 @@ void AstroCalcDialog::createDialogContent()
 
 	updateTabBarListWidgetWidth();
 
+	ui->celestialPositionsUpdateButton->setShortcut(QKeySequence("Shift+F10"));
+	ui->ephemerisPushButton->setShortcut(QKeySequence("Shift+F10"));
+	ui->transitsCalculateButton->setShortcut(QKeySequence("Shift+F10"));
+	ui->phenomenaPushButton->setShortcut(QKeySequence("Shift+F10"));
+
 	// Let's improve visibility of the text
 	QString style = "QLabel { color: rgb(238, 238, 238); }";
 	ui->celestialPositionsTimeLabel->setStyleSheet(style);
