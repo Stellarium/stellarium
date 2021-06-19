@@ -260,15 +260,15 @@ void HelpDialog::updateHelpText(void) const
 	htmlText += "<tr><td><b>" + hotkeyTextWrapper("Ctrl+Up") + "/" + hotkeyTextWrapper("Ctrl+Down") + "</b></td></tr>\n";
 	// time dragging/scrolling
 	htmlText += "<tr><td>" + q_("Time dragging").toHtmlEscaped() + "</td><td><b>" +
-			QKeySequence(Qt::CTRL).toString(QKeySequence::NativeText) + q_(" & left mouse drag").toHtmlEscaped() + "</b></td></tr>";
+			QKeySequence(Qt::CTRL).toString(QKeySequence::NativeText) + " " + q_("& left mouse drag").toHtmlEscaped() + "</b></td></tr>";
 	htmlText += "<tr><td>" + q_("Time scrolling: minutes").toHtmlEscaped() + "</td><td><b>" +
-			QKeySequence(Qt::CTRL).toString(QKeySequence::NativeText) + q_(" & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
+			QKeySequence(Qt::CTRL).toString(QKeySequence::NativeText) + " " + q_("& mouse wheel").toHtmlEscaped() + "</b></td></tr>";
 	htmlText += "<tr><td>" + q_("Time scrolling: hours").toHtmlEscaped() + "</td><td><b>" +
-			QKeySequence(Qt::CTRL + Qt::SHIFT).toString(QKeySequence::NativeText) + q_(" & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
+			QKeySequence(Qt::CTRL + Qt::SHIFT).toString(QKeySequence::NativeText) + " " + q_("& mouse wheel").toHtmlEscaped() + "</b></td></tr>";
 	htmlText += "<tr><td>" + q_("Time scrolling: days").toHtmlEscaped() + "</td><td><b>" +
-			QKeySequence(Qt::CTRL + Qt::ALT).toString(QKeySequence::NativeText) + q_(" & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
+			QKeySequence(Qt::CTRL + Qt::ALT).toString(QKeySequence::NativeText) + " " + q_("& mouse wheel").toHtmlEscaped() + "</b></td></tr>";
 	htmlText += "<tr><td>" + q_("Time scrolling: years").toHtmlEscaped() + "</td><td><b>" +
-			QKeySequence(Qt::CTRL + Qt::ALT + Qt::SHIFT).toString(QKeySequence::NativeText) + q_(" & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
+			QKeySequence(Qt::CTRL + Qt::ALT + Qt::SHIFT).toString(QKeySequence::NativeText) + " " + q_("& mouse wheel").toHtmlEscaped() + "</b></td></tr>";
 
 	// select object
 	htmlText += "<tr><td>" + q_("Select object").toHtmlEscaped() + "</td>";
@@ -277,19 +277,19 @@ void HelpDialog::updateHelpText(void) const
 	htmlText += "<tr><td>";
 	htmlText += q_("Clear selection").toHtmlEscaped() + "</td>";
 #ifdef Q_OS_MAC
-	htmlText += "<td><b>" + QKeySequence(Qt::CTRL).toString(QKeySequence::NativeText) + q_(" & left click").toHtmlEscaped() + "</b></td></tr>\n";
+	htmlText += "<td><b>" + QKeySequence(Qt::CTRL).toString(QKeySequence::NativeText) + " " + q_("& left click").toHtmlEscaped() + "</b></td></tr>\n";
 #else
 	htmlText += "<td><b>" + q_("Right click").toHtmlEscaped() + "</b></td></tr>\n";
 #endif
 	// add custom marker
 	htmlText += "<tr><td>" + q_("Add custom marker").toHtmlEscaped() + "</td>";
-	htmlText += "<td><b>" + QKeySequence(Qt::SHIFT).toString(QKeySequence::NativeText) + q_(" & left click").toHtmlEscaped() + "</b></td></tr>\n";
+	htmlText += "<td><b>" + QKeySequence(Qt::SHIFT).toString(QKeySequence::NativeText) + " " + q_("& left click").toHtmlEscaped() + "</b></td></tr>\n";
 	// delete one custom marker
 	htmlText += "<tr><td>" + q_("Delete marker closest to mouse cursor").toHtmlEscaped() + "</td>";
-	htmlText += "<td><b>" + QKeySequence(Qt::SHIFT).toString(QKeySequence::NativeText) + q_(" & right click").toHtmlEscaped() + "</b></td></tr>\n";
+	htmlText += "<td><b>" + QKeySequence(Qt::SHIFT).toString(QKeySequence::NativeText) + " " + q_("& right click").toHtmlEscaped() + "</b></td></tr>\n";
 	// delete all custom markers
 	htmlText += "<tr><td>" + q_("Delete all custom markers").toHtmlEscaped() + "</td>";
-	htmlText += "<td><b>" + QKeySequence(Qt::SHIFT + Qt::ALT).toString(QKeySequence::NativeText) + q_(" & right click").toHtmlEscaped() + "</b></td></tr>\n";
+	htmlText += "<td><b>" + QKeySequence(Qt::SHIFT + Qt::ALT).toString(QKeySequence::NativeText) + " " + q_("& right click").toHtmlEscaped() + "</b></td></tr>\n";
 
 	htmlText += "</table>\n<p>" +
 			q_("Below are listed only the actions with assigned keys. Further actions may be available via the \"%1\" button.")
