@@ -26,7 +26,8 @@
 
 class StelCore;
 
-//! Base class for any polygon with a fixed position in the sky
+//! Base class for any polygon with a fixed position in the sky.
+//! @note This class is currently not used anywhere. It seems to have been superseded by StelSkyImageTile
 class StelSkyPolygon : public MultiLevelJsonBase
 {
 	Q_OBJECT

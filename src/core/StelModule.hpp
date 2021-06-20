@@ -59,7 +59,7 @@ class StelModule : public QObject
 public:
 	StelModule();
 
-	virtual ~StelModule() {;}
+	virtual ~StelModule() Q_DECL_OVERRIDE {;}
 
 	//! Initialize itself.
 	//! If the initialization takes significant time, the progress should be displayed on the loading bar.

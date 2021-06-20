@@ -39,13 +39,13 @@ class StelObjectMgr : public StelModule
 	Q_OBJECT
 public:
 	StelObjectMgr();
-	virtual ~StelObjectMgr();
+	virtual ~StelObjectMgr() Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init();
-	virtual void draw(StelCore*) {;}
-	virtual void update(double) {;}
+	virtual void init() Q_DECL_OVERRIDE;
+	virtual void draw(StelCore*) Q_DECL_OVERRIDE {;}
+	virtual void update(double) Q_DECL_OVERRIDE {;}
 
 	///////////////////////////////////////////////////////////////////////////
 	//! Add a new StelObject manager into the list of supported modules.
