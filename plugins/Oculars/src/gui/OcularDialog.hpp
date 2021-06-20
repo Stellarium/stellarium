@@ -77,7 +77,7 @@ public slots:
 	void selectOcular(const QModelIndex);
 	void updateLens();
 	void selectLens(const QModelIndex);
-	void updateCCD();
+	void updateCCD();	
 	void selectCCD(const QModelIndex);
 	void updateTelescope();
 	void selectTelescope(const QModelIndex);
@@ -93,6 +93,7 @@ private slots:
 	void updateTelradCustomFOV();	
 	void setupTelradFOVspins(Vec4f fov);
 	void updateGuiOptions();
+	void updateCCDRotationAngles();
 
 private:
 	Oculars* plugin;

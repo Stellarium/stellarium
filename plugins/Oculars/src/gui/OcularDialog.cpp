@@ -403,11 +403,10 @@ void OcularDialog::createDialogContent()
 	connect(ui->ccdListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 		ccdMapper, SLOT(setCurrentModelIndex(QModelIndex)));
 	connect(ui->ccdListView, SIGNAL(doubleClicked(QModelIndex)),
-		     this, SLOT(selectCCD(QModelIndex)));
-	connectDoubleProperty(ui->ccdRotAngle, "Oculars.selectedCCDRotationAngle");
-	connectDoubleProperty(ui->OAGPrismPA, "Oculars.selectedCCDPrismPositionAngle");
-	ui->ccdListView->setSelectionBehavior(QAbstractItemView::SelectRows);
-	ui->ccdListView->setCurrentIndex(ccdTableModel->index(0, 1));
+		     this, SLOT(selectCCD(QModelIndex)));	
+	ui->ccdListView->setSelectionBehavior(QAbstractItemView::SelectRows);	
+	int index = plugin->getSelectedCCDIndex();
+	ui->ccdListView->setCurrentIndex(ccdTableModel->index(index>0 ? index : 0, 1));
 
 	connect(ui->ccdChipY,    SIGNAL(editingFinished()), this, SLOT(updateCCD()));
 	connect(ui->ccdChipX,    SIGNAL(editingFinished()), this, SLOT(updateCCD()));
@@ -421,6 +420,8 @@ void OcularDialog::createDialogContent()
 	connect(ui->OAGPrismW,   SIGNAL(editingFinished()), this, SLOT(updateCCD()));
 	connect(ui->OAGDist,     SIGNAL(editingFinished()), this, SLOT(updateCCD()));
 	connect(ui->OAGPrismPA,  SIGNAL(editingFinished()), this, SLOT(updateCCD()));
+	connect(plugin, SIGNAL(selectedCCDRotationAngleChanged(double)), this, SLOT(updateCCDRotationAngles()));
+	connect(plugin, SIGNAL(selectedCCDPrismPositionAngleChanged(double)), this, SLOT(updateCCDRotationAngles()));
 
 	// The ocular mapper
 	ocularMapper = new QDataWidgetMapper();
@@ -438,7 +439,8 @@ void OcularDialog::createDialogContent()
 	connect(ui->ocularListView, SIGNAL(doubleClicked(QModelIndex)),
 		     this, SLOT(selectOcular(QModelIndex)));
 	ui->ocularListView->setSelectionBehavior(QAbstractItemView::SelectRows);
-	ui->ocularListView->setCurrentIndex(ocularTableModel->index(0, 1));
+	index = plugin->getSelectedOcularIndex();
+	ui->ocularListView->setCurrentIndex(ocularTableModel->index(index>0 ? index : 0, 1));
 
 	// We need particular refresh methods to see immediate feedback.
 	connect(ui->ocularAFov,                 SIGNAL(editingFinished()), this, SLOT(updateOcular()));
@@ -459,7 +461,8 @@ void OcularDialog::createDialogContent()
 	connect(ui->lensListView, SIGNAL(doubleClicked(QModelIndex)),
 		     this, SLOT(selectLens(QModelIndex)));
 	ui->lensListView->setSelectionBehavior(QAbstractItemView::SelectRows);
-	ui->lensListView->setCurrentIndex(lensTableModel->index(0, 1));
+	index = plugin->getSelectedLensIndex();
+	ui->lensListView->setCurrentIndex(lensTableModel->index(index>0 ? index : 0, 1));
 
 	connect(ui->lensMultiplier, SIGNAL(editingFinished()), this, SLOT(updateLens()));
 
@@ -479,7 +482,8 @@ void OcularDialog::createDialogContent()
 	connect(ui->telescopeListView, SIGNAL(doubleClicked(QModelIndex)),
 		     this, SLOT(selectTelescope(QModelIndex)));
 	ui->telescopeListView->setSelectionBehavior(QAbstractItemView::SelectRows);
-	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(0, 1));
+	index = plugin->getSelectedTelescopeIndex();
+	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(index>0 ? index : 0, 1));
 
 	connect(ui->telescopeDiameter, SIGNAL(editingFinished()), this, SLOT(updateTelescope()));
 	connect(ui->telescopeFL,       SIGNAL(editingFinished()), this, SLOT(updateTelescope()));
@@ -502,6 +506,18 @@ void OcularDialog::setupTelradFOVspins(Vec4f fov)
 	ui->doubleSpinBoxTelradFOV2->setValue(static_cast<double>(fov[1]));
 	ui->doubleSpinBoxTelradFOV3->setValue(static_cast<double>(fov[2]));
 	ui->doubleSpinBoxTelradFOV4->setValue(static_cast<double>(fov[3]));
+}
+
+void OcularDialog::updateCCDRotationAngles()
+{
+	if (dialog->isVisible())
+	{
+		if (plugin->getSelectedCCDIndex()==ccdMapper->currentIndex())
+		{
+			ui->ccdRotAngle->setValue(plugin->getSelectedCCDRotationAngle());
+			ui->OAGPrismPA->setValue(plugin->getSelectedCCDPrismPositionAngle());
+		}
+	}
 }
 
 void OcularDialog::updateTelradCustomFOV()

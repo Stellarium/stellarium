@@ -1241,7 +1241,7 @@ void Oculars::incrementCCDIndex()
 	{
 		selectedCCDIndex = 0;
 	}
-	emit(selectedCCDChanged(selectedCCDIndex));
+	emit selectedCCDChanged(selectedCCDIndex);
 }
 
 void Oculars::incrementOcularIndex()
@@ -1263,7 +1263,7 @@ void Oculars::incrementOcularIndex()
 		if (selectedTelescopeIndex == -1)
 			selectTelescopeAtIndex(0);
 	}
-	emit(selectedOcularChanged(selectedOcularIndex));
+	emit selectedOcularChanged(selectedOcularIndex);
 }
 
 void Oculars::incrementTelescopeIndex()
@@ -1273,7 +1273,7 @@ void Oculars::incrementTelescopeIndex()
 	{
 		selectedTelescopeIndex = 0;
 	}
-	emit(selectedTelescopeChanged(selectedTelescopeIndex));
+	emit selectedTelescopeChanged(selectedTelescopeIndex);
 }
 
 void Oculars::incrementLensIndex()
@@ -1283,13 +1283,13 @@ void Oculars::incrementLensIndex()
 	{
 		selectedLensIndex = -1;
 	}
-	emit(selectedLensChanged(selectedLensIndex));
+	emit selectedLensChanged(selectedLensIndex);
 }
 
 void Oculars::disableLens()
 {
 	selectedLensIndex = -1;
-	emit(selectedLensChanged(selectedLensIndex));
+	emit selectedLensChanged(selectedLensIndex);
 }
 
 void Oculars::rotateCCD(int amount)
@@ -1306,7 +1306,8 @@ void Oculars::rotateCCD(int amount)
 	{
 		angle += 360;
 	}
-	ccd->setChipRotAngle(angle);	
+	ccd->setChipRotAngle(angle);
+	emit selectedCCDRotationAngleChanged(angle);
 }
 
 void Oculars::rotatePrism(int amount)
@@ -1324,6 +1325,7 @@ void Oculars::rotatePrism(int amount)
 		angle += 360;
 	}
 	ccd->setPrismPosAngle(angle);
+	emit selectedCCDPrismPositionAngleChanged(angle);
 }
 
 void Oculars::selectCCDAtIndex(int index)
@@ -1331,7 +1333,7 @@ void Oculars::selectCCDAtIndex(int index)
 	if (index > -1 && index < ccds.count())
 	{
 		selectedCCDIndex = index;
-		emit(selectedCCDChanged(index));
+		emit selectedCCDChanged(index);
 	}
 }
 
@@ -1343,7 +1345,7 @@ void Oculars::selectOcularAtIndex(int index)
 	if (index > -1 && index < oculars.count() && (telescopes.count() >= 0 || oculars[index]->isBinoculars()))
 	{
 		selectedOcularIndex = index;
-		emit(selectedOcularChanged(index));
+		emit selectedOcularChanged(index);
 	}
 }
 
@@ -1352,7 +1354,7 @@ void Oculars::selectTelescopeAtIndex(int index)
 	if (index > -1 && index < telescopes.count())
 	{
 		selectedTelescopeIndex = index;
-		emit(selectedTelescopeChanged(index));
+		emit selectedTelescopeChanged(index);
 	}
 }
 
@@ -1361,7 +1363,7 @@ void Oculars::selectLensAtIndex(int index)
 	if (index > -2 && index < lenses.count())
 	{
 		selectedLensIndex = index;
-		emit(selectedLensChanged(index));
+		emit selectedLensChanged(index);
 	}
 }
 
