@@ -107,7 +107,7 @@ public:
 	enum ZoomingMode { ZoomOut=-1, ZoomNone=0, ZoomIn=1};
 
 	StelMovementMgr(StelCore* core);
-	virtual ~StelMovementMgr();
+	virtual ~StelMovementMgr() Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -119,28 +119,28 @@ public:
 	//! - Enabling/disabling the mouse movement
 	//! - Sets the zoom and movement speeds
 	//! - Sets the auto-zoom duration and mode.
-	virtual void init();
+	virtual void init() Q_DECL_OVERRIDE;
 
 	//! Update time-dependent things (triggers a time dragging record if required)
-	virtual void update(double)
+	virtual void update(double) Q_DECL_OVERRIDE
 	{
 		if (dragTimeMode)
 			addTimeDragPoint(QCursor::pos().x(), QCursor::pos().y());
 	}
 	//! Implement required draw function.  Does nothing.
-	virtual void draw(StelCore*) {;}
+	virtual void draw(StelCore*) Q_DECL_OVERRIDE {;}
 	//! Handle keyboard events.
-	virtual void handleKeys(QKeyEvent* event);
+	virtual void handleKeys(QKeyEvent* event) Q_DECL_OVERRIDE;
 	//! Handle mouse movement events.
-	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b);
+	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b) Q_DECL_OVERRIDE;
 	//! Handle mouse wheel events.
-	virtual void handleMouseWheel(class QWheelEvent* event);
+	virtual void handleMouseWheel(class QWheelEvent* event) Q_DECL_OVERRIDE;
 	//! Handle mouse click events.
-	virtual void handleMouseClicks(class QMouseEvent* event);
+	virtual void handleMouseClicks(class QMouseEvent* event) Q_DECL_OVERRIDE;
 	// allow some keypress interaction by plugins.
-	virtual double getCallOrder(StelModuleActionName actionName) const;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 	//! Handle pinch gesture.
-	virtual bool handlePinch(qreal scale, bool started);
+	virtual bool handlePinch(qreal scale, bool started) Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to StelMovementMgr
