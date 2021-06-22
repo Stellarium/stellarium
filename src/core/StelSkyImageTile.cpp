@@ -81,6 +81,14 @@ void StelSkyImageTile::draw(StelCore* core, StelPainter& sPainter, float)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
+	// compute aberration correction vector
+	Vec3d vel(0.0);
+	if ((core) && (core->getUseAberration()) && (core->getCurrentPlanet()))
+	{
+		vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+		vel=StelCore::matVsop87ToJ2000*vel*core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
+	}
+
 	const float limitLuminance = core->getSkyDrawer()->getLimitLuminance();
 	QMultiMap<double, StelSkyImageTile*> result;
 	getTilesToDraw(result, core, prj->getViewportConvexPolygon(0, 0), limitLuminance, true);
@@ -97,7 +105,7 @@ void StelSkyImageTile::draw(StelCore* core, StelPainter& sPainter, float)
 	while (i!=result.begin())
 	{
 		--i;
-		i.value()->drawTile(core, sPainter);
+		i.value()->drawTile(core, sPainter, vel);
 	}
 
 	deleteUnusedSubTiles();
@@ -241,7 +249,7 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 
 // Draw the image on the screen.
 // Assume GL_TEXTURE_2D is enabled
-bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
+bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter, const Vec3d &vel)
 {
 	if (!tex->bind())
 		return false;
@@ -270,9 +278,12 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
 	}
 
 	const bool withExtinction=(getFrameType()!=StelCore::FrameAltAz && core->getSkyDrawer()->getFlagHasAtmosphere() && core->getSkyDrawer()->getExtinction().getExtinctionCoefficient()>=0.01f);
-	
+
 	for (const auto& poly : skyConvexPolygons)
 	{
+		// Not sure: Are all skyConvexPolygons in J2000 frame? This would also simplify code below...
+		Q_ASSERT(getFrameType() == StelCore::FrameJ2000);
+
 		Vec4f extinctedColor = color;
 		if (withExtinction)
 		{
@@ -282,6 +293,7 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
 			Vec3d baryJ2000;
 			double lng, lat, ra, dec; // aux. values for coordinate transformations
 			double eclJ2000, eclJDE;
+			//qDebug() << "Frame: " << getFrameType();
 			switch (getFrameType()) // all possible but AzAlt!
 			{
 				case StelCore::FrameJ2000:
@@ -327,7 +339,7 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
 			extinctedColor[2]*=fabs(extinctionFactor);
 		}
 		sPainter.setColor(extinctedColor);
-		sPainter.drawSphericalRegion(poly.data(), StelPainter::SphericalPolygonDrawModeTextureFill);
+		sPainter.drawSphericalRegion(poly.data(), StelPainter::SphericalPolygonDrawModeTextureFill, Q_NULLPTR, true, 5., vel);
 	}
 
 #ifdef DEBUG_STELSKYIMAGE_TILE
@@ -379,14 +391,14 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 		htmlDescription = map.value("description").toString();
 		if (parent()==Q_NULLPTR)
 		{
-			htmlDescription+= "<h3>URL: "+contructorUrl+"</h3>";
+			htmlDescription+= "<h3>URL: "+constructorUrl+"</h3>";
 		}
 	}
 	else
 	{
 		if (parent()==Q_NULLPTR)
 		{
-			htmlDescription= "<h3>URL: "+contructorUrl+"</h3>";
+			htmlDescription= "<h3>URL: "+constructorUrl+"</h3>";
 		}
 	}
 
