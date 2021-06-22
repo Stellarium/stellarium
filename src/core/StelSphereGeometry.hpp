@@ -136,13 +136,13 @@ public:
 	//! @enum SphericalRegionType define types for all supported regions.
 	enum SphericalRegionType
 	{
-		Point = 0,
-		Cap = 1,
-		AllSky = 2,
-		Polygon = 3,
+		Point         = 0,
+		Cap           = 1,
+		AllSky        = 2,
+		Polygon       = 3,
 		ConvexPolygon = 4,
-		Empty = 5,
-		Invalid = 6
+		Empty         = 5,
+		Invalid       = 6
 	};
 
 	virtual ~SphericalRegion() {;}
@@ -179,10 +179,22 @@ public:
 
 	//! Return an OpenGL compatible array to be displayed using vertex arrays.
 	virtual StelVertexArray getFillVertexArray() const {return getOctahedronPolygon().getFillVertexArray();}
+	//! Return an OpenGL compatible array to be displayed using vertex arrays.
+	//! @note Presumably these general polygons of the base class don't describe geometry that may undergo aberration, so the observerVelocity must be zero.
+	//! Implementation in derived classes should show aberration correction.
+	virtual StelVertexArray getFillVertexArray(const Vec3d &observerVelocityForAberration) {
+		Q_ASSERT(observerVelocityForAberration==Vec3d(0.));
+		return getOctahedronPolygon().getFillVertexArray();}
 
 	//! Get the outline of the contours defining the SphericalPolygon.
 	//! @return a list of vertex which taken 2 by 2 define the contours of the polygon.
 	virtual StelVertexArray getOutlineVertexArray() const {return getOctahedronPolygon().getOutlineVertexArray();}
+	//! Get the outline of the contours defining the SphericalPolygon.
+	//! @note Presumably these general polygons of the base class don't describe geometry that may undergo aberration, so the observerVelocity must be zero.
+	//! Implementation in derived classes should show aberration correction.
+	virtual StelVertexArray getOutlineVertexArray(Vec3d observerVelocityForAberration) {
+		Q_ASSERT(observerVelocityForAberration==Vec3d(0.));
+		return getOctahedronPolygon().getOutlineVertexArray();}
 
 	//! Get the contours defining the SphericalPolygon when combined using a positive winding rule.
 	//! The default implementation returns a list of tessellated triangles derived from the OctahedronPolygon.
@@ -297,49 +309,49 @@ public:
 	SphericalCap(const SphericalCap& other) : SphericalRegion(), n(other.n), d(other.d) {;}
 	inline SphericalCap& operator=(const SphericalCap &other){n=other.n; d=other.d; return *this;}
 
-	virtual SphericalRegionType getType() const {return SphericalRegion::Cap;}
-	virtual OctahedronPolygon getOctahedronPolygon() const;
+	virtual SphericalRegionType getType() const Q_DECL_OVERRIDE {return SphericalRegion::Cap;}
+	virtual OctahedronPolygon getOctahedronPolygon() const Q_DECL_OVERRIDE;
 
 	//! Get the area of the intersection of the halfspace on the sphere in steradian.
-	virtual double getArea() const {return 2.*M_PI*(1.-d);}
+	virtual double getArea() const Q_DECL_OVERRIDE {return 2.*M_PI*(1.-d);}
 
 	//! Return true if the region is empty.
-	virtual bool isEmpty() const {return d>=1.;}
+	virtual bool isEmpty() const Q_DECL_OVERRIDE {return d>=1.;}
 
 	//! Return a point located inside the SphericalCap.
-	virtual Vec3d getPointInside() const {return n;}
+	virtual Vec3d getPointInside() const Q_DECL_OVERRIDE {return n;}
 
 	//! Return itself.
-	virtual SphericalCap getBoundingCap() const {return *this;}
+	virtual SphericalCap getBoundingCap() const Q_DECL_OVERRIDE {return *this;}
 
 	// Contain and intersect	
-	virtual bool contains(const Vec3d &v) const {Q_ASSERT(d==0 || std::fabs(v.lengthSquared()-1.)<0.0000002);return (v*n>=d);}
+	virtual bool contains(const Vec3d &v) const Q_DECL_OVERRIDE {Q_ASSERT(d==0 || std::fabs(v.lengthSquared()-1.)<0.0000002);return (v*n>=d);}
 	virtual bool contains(const Vec3f &v) const {Q_ASSERT(d==0 || std::fabs(v.lengthSquared()-1.f)<0.000002f);return (v.toVec3d()*n>=d);}
-	virtual bool contains(const SphericalConvexPolygon& r) const;
-	virtual bool contains(const SphericalCap& h) const
+	virtual bool contains(const SphericalConvexPolygon& r) const Q_DECL_OVERRIDE;
+	virtual bool contains(const SphericalCap& h) const Q_DECL_OVERRIDE
 	{
 		const double a = n*h.n-d*h.d;
 		return d<=h.d && ( a>=1. || (a>=0. && a*a >= (1.-d*d)*(1.-h.d*h.d)));
 	}
-	virtual bool contains(const AllSkySphericalRegion&) const {return d<=-1;}
-	virtual bool intersects(const SphericalPolygon& r) const;
-	virtual bool intersects(const SphericalConvexPolygon& r) const;
+	virtual bool contains(const AllSkySphericalRegion&) const Q_DECL_OVERRIDE {return d<=-1;}
+	virtual bool intersects(const SphericalPolygon& r) const Q_DECL_OVERRIDE;
+	virtual bool intersects(const SphericalConvexPolygon& r) const Q_DECL_OVERRIDE;
 	//! Returns whether a SphericalCap intersects with this one.
 	//! I managed to make it without sqrt or acos, so it is very fast!
 	//! @see http://f4bien.blogspot.com/2009/05/spherical-geometry-optimisations.html for detailed explanations.
-	virtual bool intersects(const SphericalCap& h) const
+	virtual bool intersects(const SphericalCap& h) const Q_DECL_OVERRIDE
 	{
 		const double a = d*h.d - n*h.n;
 		return d+h.d<=0. || a<=0. || (a<=1. && a*a <= (1.-d*d)*(1.-h.d*h.d));
 	}
-	virtual bool intersects(const AllSkySphericalRegion&) const {return d<=1.;}
+	virtual bool intersects(const AllSkySphericalRegion&) const Q_DECL_OVERRIDE {return d<=1.;}
 
 	//! Serialize the region into a QVariant map matching the JSON format.
 	//! The format is ["CAP", [ra, dec], radius], with ra dec in degree in ICRS frame
 	//! and radius in degree (between 0 and 180 deg)
-	virtual QVariantList toQVariant() const;
+	virtual QVariantList toQVariant() const Q_DECL_OVERRIDE;
 
-	virtual void serialize(QDataStream& out) const {out << n << d;}
+	virtual void serialize(QDataStream& out) const Q_DECL_OVERRIDE {out << n << d;}
 
 	////////////////////////////////////////////////////////////////////
 	// Methods specific to SphericalCap
@@ -563,39 +575,39 @@ public:
 	SphericalPolygon(const OctahedronPolygon& octContour) : octahedronPolygon(octContour) {;}
 	SphericalPolygon(const QList<OctahedronPolygon>& octContours) : octahedronPolygon(octContours) {;}
 
-	virtual SphericalRegionType getType() const {return SphericalRegion::Polygon;}
-	virtual OctahedronPolygon getOctahedronPolygon() const {return octahedronPolygon;}
+	virtual SphericalRegionType getType() const Q_DECL_OVERRIDE {return SphericalRegion::Polygon;}
+	virtual OctahedronPolygon getOctahedronPolygon() const Q_DECL_OVERRIDE {return octahedronPolygon;}
 
 	//! Serialize the region into a QVariant map matching the JSON format.
 	//! The format is:
 	//! @code[[[ra,dec], [ra,dec], [ra,dec], [ra,dec]], [[ra,dec], [ra,dec], [ra,dec]],[...]]@endcode
 	//! it is a list of closed contours, with each points defined by ra dec in degree in the ICRS frame.
-	virtual QVariantList toQVariant() const;
-	virtual void serialize(QDataStream& out) const;
+	virtual QVariantList toQVariant() const Q_DECL_OVERRIDE;
+	virtual void serialize(QDataStream& out) const Q_DECL_OVERRIDE;
 
-	virtual SphericalCap getBoundingCap() const;
+	virtual SphericalCap getBoundingCap() const Q_DECL_OVERRIDE;
 
-	virtual bool contains(const Vec3d& p) const {return octahedronPolygon.contains(p);}
-	virtual bool contains(const SphericalPolygon& r) const {return octahedronPolygon.contains(r.octahedronPolygon);}
-	virtual bool contains(const SphericalConvexPolygon& r) const;
-	virtual bool contains(const SphericalCap& r) const {return octahedronPolygon.contains(r.getOctahedronPolygon());}
-	virtual bool contains(const SphericalPoint& r) const {return octahedronPolygon.contains(r.n);}
-	virtual bool contains(const AllSkySphericalRegion& r) const {return octahedronPolygon.contains(r.getOctahedronPolygon());}
+	virtual bool contains(const Vec3d& p) const Q_DECL_OVERRIDE {return octahedronPolygon.contains(p);}
+	virtual bool contains(const SphericalPolygon& r) const Q_DECL_OVERRIDE {return octahedronPolygon.contains(r.octahedronPolygon);}
+	virtual bool contains(const SphericalConvexPolygon& r) const Q_DECL_OVERRIDE;
+	virtual bool contains(const SphericalCap& r) const Q_DECL_OVERRIDE {return octahedronPolygon.contains(r.getOctahedronPolygon());}
+	virtual bool contains(const SphericalPoint& r) const Q_DECL_OVERRIDE {return octahedronPolygon.contains(r.n);}
+	virtual bool contains(const AllSkySphericalRegion& r) const Q_DECL_OVERRIDE {return octahedronPolygon.contains(r.getOctahedronPolygon());}
 
-	virtual bool intersects(const SphericalPolygon& r) const {return octahedronPolygon.intersects(r.octahedronPolygon);}
-	virtual bool intersects(const SphericalConvexPolygon& r) const;
-	virtual bool intersects(const SphericalCap& r) const {return r.intersects(*this);}
-	virtual bool intersects(const SphericalPoint& r) const {return octahedronPolygon.contains(r.n);}
-	virtual bool intersects(const AllSkySphericalRegion&) const {return !isEmpty();}
+	virtual bool intersects(const SphericalPolygon& r) const Q_DECL_OVERRIDE {return octahedronPolygon.intersects(r.octahedronPolygon);}
+	virtual bool intersects(const SphericalConvexPolygon& r) const Q_DECL_OVERRIDE;
+	virtual bool intersects(const SphericalCap& r) const Q_DECL_OVERRIDE {return r.intersects(*this);}
+	virtual bool intersects(const SphericalPoint& r) const Q_DECL_OVERRIDE {return octahedronPolygon.contains(r.n);}
+	virtual bool intersects(const AllSkySphericalRegion&) const Q_DECL_OVERRIDE {return !isEmpty();}
 
-	virtual SphericalRegionP getIntersection(const SphericalPoint& r) const {return contains(r.n) ? SphericalRegionP(new SphericalPoint(r)) : EmptySphericalRegion::staticInstance;}
-	virtual SphericalRegionP getIntersection(const AllSkySphericalRegion& ) const {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
+	virtual SphericalRegionP getIntersection(const SphericalPoint& r) const Q_DECL_OVERRIDE {return contains(r.n) ? SphericalRegionP(new SphericalPoint(r)) : EmptySphericalRegion::staticInstance;}
+	virtual SphericalRegionP getIntersection(const AllSkySphericalRegion& ) const Q_DECL_OVERRIDE {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
 
-	virtual SphericalRegionP getUnion(const SphericalPoint&) const {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
-	virtual SphericalRegionP getUnion(const EmptySphericalRegion&) const {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
+	virtual SphericalRegionP getUnion(const SphericalPoint&) const Q_DECL_OVERRIDE {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
+	virtual SphericalRegionP getUnion(const EmptySphericalRegion&) const Q_DECL_OVERRIDE {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
 
-	virtual SphericalRegionP getSubtraction(const SphericalPoint&) const {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
-	virtual SphericalRegionP getSubtraction(const EmptySphericalRegion&) const {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
+	virtual SphericalRegionP getSubtraction(const SphericalPoint&) const Q_DECL_OVERRIDE {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
+	virtual SphericalRegionP getSubtraction(const EmptySphericalRegion&) const Q_DECL_OVERRIDE {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
 
 	////////////////////////////////////////////////////////////////////
 	// Methods specific to SphericalPolygon
@@ -646,34 +658,37 @@ public:
 	//! Special constructor for quads.
 	SphericalConvexPolygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2, const Vec3d &e3)  {contour << e0 << e1 << e2 << e3; updateBoundingCap();}
 
-	virtual SphericalRegionType getType() const {return SphericalRegion::ConvexPolygon;}
-	virtual OctahedronPolygon getOctahedronPolygon() const {return OctahedronPolygon(contour);}
-	virtual StelVertexArray getFillVertexArray() const {return StelVertexArray(contour, StelVertexArray::TriangleFan);}
-	virtual StelVertexArray getOutlineVertexArray() const {return StelVertexArray(contour, StelVertexArray::LineLoop);}
-	virtual double getArea() const;
-	virtual bool isEmpty() const {return contour.isEmpty();}
-	virtual Vec3d getPointInside() const;
-	virtual SphericalCap getBoundingCap() const {return cachedBoundingCap;}
-	QVector<SphericalCap> getBoundingSphericalCaps() const;
+	virtual SphericalRegionType getType() const Q_DECL_OVERRIDE {return SphericalRegion::ConvexPolygon;}
+	virtual OctahedronPolygon getOctahedronPolygon() const Q_DECL_OVERRIDE {return OctahedronPolygon(contour);}
+	virtual StelVertexArray getFillVertexArray(const Vec3d &observerVelocityForAberration) Q_DECL_OVERRIDE;
+	virtual StelVertexArray getFillVertexArray() const Q_DECL_OVERRIDE;
+	virtual StelVertexArray getOutlineVertexArray() const Q_DECL_OVERRIDE;
+	virtual StelVertexArray getOutlineVertexArray(Vec3d observerVelocityForAberration) Q_DECL_OVERRIDE;
+	//virtual StelVertexArray getOutlineVertexArray(Vec3d observerVelocityForAberration) const Q_DECL_OVERRIDE;
+	virtual double getArea() const Q_DECL_OVERRIDE;
+	virtual bool isEmpty() const Q_DECL_OVERRIDE {return contour.isEmpty();}
+	virtual Vec3d getPointInside() const Q_DECL_OVERRIDE;
+	virtual SphericalCap getBoundingCap() const Q_DECL_OVERRIDE {return cachedBoundingCap;}
+	QVector<SphericalCap> getBoundingSphericalCaps() const Q_DECL_OVERRIDE;
 	//! Serialize the region into a QVariant map matching the JSON format.
 	//! The format is
 	//! @code["CONVEX_POLYGON", [[ra,dec], [ra,dec], [ra,dec], [ra,dec]]]@endcode
 	//! where the coords are a closed convex contour, with each points defined by ra dec in degree in the ICRS frame.
-	virtual QVariantList toQVariant() const;
-	virtual void serialize(QDataStream& out) const {out << contour;}
+	virtual QVariantList toQVariant() const Q_DECL_OVERRIDE;
+	virtual void serialize(QDataStream& out) const Q_DECL_OVERRIDE {out << contour;}
 
 	// Contain and intersect
-	virtual bool contains(const Vec3d& p) const;
-	virtual bool contains(const SphericalPolygon& r) const;
-	virtual bool contains(const SphericalConvexPolygon& r) const;
-	virtual bool contains(const SphericalCap& r) const;
-	virtual bool contains(const SphericalPoint& r) const {return contains(r.n);}
-	virtual bool contains(const AllSkySphericalRegion&) const {return false;}
-	virtual bool intersects(const SphericalCap& r) const {if (!cachedBoundingCap.intersects(r)) return false; return r.intersects(*this);}
-	virtual bool intersects(const SphericalPolygon& r) const;
-	virtual bool intersects(const SphericalConvexPolygon& r) const;
-	virtual bool intersects(const SphericalPoint& r) const {return contains(r.n);}
-	virtual bool intersects(const AllSkySphericalRegion&) const {return true;}
+	virtual bool contains(const Vec3d& p) const Q_DECL_OVERRIDE;
+	virtual bool contains(const SphericalPolygon& r) const Q_DECL_OVERRIDE;
+	virtual bool contains(const SphericalConvexPolygon& r) const Q_DECL_OVERRIDE;
+	virtual bool contains(const SphericalCap& r) const Q_DECL_OVERRIDE;
+	virtual bool contains(const SphericalPoint& r) const Q_DECL_OVERRIDE {return contains(r.n);}
+	virtual bool contains(const AllSkySphericalRegion&) const Q_DECL_OVERRIDE {return false;}
+	virtual bool intersects(const SphericalCap& r) const Q_DECL_OVERRIDE {if (!cachedBoundingCap.intersects(r)) return false; return r.intersects(*this);}
+	virtual bool intersects(const SphericalPolygon& r) const Q_DECL_OVERRIDE;
+	virtual bool intersects(const SphericalConvexPolygon& r) const Q_DECL_OVERRIDE;
+	virtual bool intersects(const SphericalPoint& r) const Q_DECL_OVERRIDE {return contains(r.n);}
+	virtual bool intersects(const AllSkySphericalRegion&) const Q_DECL_OVERRIDE {return true;}
 
 	////////////////////////// TODO
 //	virtual SphericalRegionP getIntersection(const SphericalPolygon& r) const;
@@ -714,6 +729,8 @@ public:
 protected:
 	//! A list of vertices of the convex contour.
 	QVector<Vec3d> contour;
+	//! A list of vertices, built on the fly from the contour when aberration is required.
+	QVector<Vec3d> aberratedContour;
 
 	//! Cache the bounding cap.
 	SphericalCap cachedBoundingCap;
@@ -817,8 +834,10 @@ public:
 	//! Constructor from one contour.
 	SphericalTexturedPolygon(const QVector<TextureVertex>& contour) {Q_UNUSED(contour); Q_ASSERT(0);}
 
-	//! Return an openGL compatible array of texture coords to be used using vertex arrays.
-	virtual StelVertexArray getFillVertexArray() const {Q_ASSERT(0); return StelVertexArray();}
+	//! Return an OpenGL compatible array of texture coords to be used using vertex arrays.
+	//! This implementation never should appear in practice.
+	virtual StelVertexArray getFillVertexArray() const Q_DECL_OVERRIDE {Q_ASSERT(0); return StelVertexArray();}
+	virtual StelVertexArray getFillVertexArray(const Vec3d &observerVelocityForAberration) Q_DECL_OVERRIDE {Q_ASSERT(0); Q_UNUSED(observerVelocityForAberration) return StelVertexArray();}
 	//! Serialize the region into a QVariant map matching the JSON format.
 	//! The format is:
 	//! @code["TEXTURED_POLYGON", [[[ra,dec], [ra,dec], [ra,dec], [ra,dec]], [[ra,dec], [ra,dec], [ra,dec]],[...]],
@@ -826,8 +845,8 @@ public:
 	//! where the two lists are a list of closed contours, with each points defined by ra dec in degree in the ICRS frame 
 	//! followed by a list of texture coordinates in the u,v texture space (between 0 and 1).
 	//! There must be one texture coordinate for each vertex.
-	virtual QVariantList toQVariant() const;
-	virtual void serialize(QDataStream& out) const {Q_UNUSED(out); Q_ASSERT(0);}
+	virtual QVariantList toQVariant() const Q_DECL_OVERRIDE;
+	virtual void serialize(QDataStream& out) const Q_DECL_OVERRIDE {Q_UNUSED(out); Q_ASSERT(0);}
 
 	////////////////////////////////////////////////////////////////////
 	// Methods specific to SphericalTexturedPolygon
@@ -866,9 +885,13 @@ public:
 		textureCoords << Vec2f(0.f, 0.f) << Vec2f(1.f, 0.f) << Vec2f(1.f, 1.f) << Vec2f(0.f, 1.f);
 	}
 
-	//! Return an openGL compatible array to be displayed using vertex arrays.
+	//! Return an OpenGL compatible array to be displayed using vertex arrays.
 	//! This method is not optimized for SphericalConvexPolygon instances.
-	virtual StelVertexArray getFillVertexArray() const {return StelVertexArray(contour, StelVertexArray::TriangleFan, textureCoords);}
+	//! Return an OpenGL compatible array to be displayed using vertex arrays.
+	//! @param observerVelocityForAberration a vector to add to all contour vertices.
+	virtual StelVertexArray getFillVertexArray(const Vec3d &observerVelocityForAberration) Q_DECL_OVERRIDE;
+	//! Return array without any aberration.
+	virtual StelVertexArray getFillVertexArray() const Q_DECL_OVERRIDE;
 
 	//! Set a single contour defining the SphericalPolygon.
 	//! @param acontour a contour defining the polygon area.
@@ -881,9 +904,9 @@ public:
 	//! where the two lists are a closed convex contours, with each points defined by ra dec in degree in the ICRS frame 
 	//! followed by a list of texture coordinates in the u,v texture space (between 0 and 1).
 	//! There must be one texture coordinate for each vertex.
-	virtual QVariantList toQVariant() const;
+	virtual QVariantList toQVariant() const Q_DECL_OVERRIDE;
 
-	virtual void serialize(QDataStream& out) const {out << contour << textureCoords;}
+	virtual void serialize(QDataStream& out) const Q_DECL_OVERRIDE {out << contour << textureCoords;}
 
 protected:
 	//! A list of uv textures coordinates corresponding to the triangle vertices.

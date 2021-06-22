@@ -1645,7 +1645,7 @@ void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool texture
 }
 
 // Draw the given SphericalPolygon.
-void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPolygonDrawMode drawMode, const SphericalCap* clippingCap, const bool doSubDivise, const double maxSqDistortion)
+void StelPainter::drawSphericalRegion(SphericalRegion* poly, SphericalPolygonDrawMode drawMode, const SphericalCap* clippingCap, const bool doSubDivise, const double maxSqDistortion, const Vec3d &observerVelocity)
 {
 	if (!prj->getBoundingCap().intersects(poly->getBoundingCap()))
 		return;
@@ -1664,12 +1664,12 @@ void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPoly
 		case SphericalPolygonDrawModeTextureFill:
 		case SphericalPolygonDrawModeTextureFillColormodulated:
 			setCullFace(true);
-			// The polygon is already tesselated as triangles
+			// The polygon is already tessellated as triangles
 			if (doSubDivise || prj->intersectViewportDiscontinuity(poly->getBoundingCap()))
 				// flag for color-modulated textured mode (e.g. for Milky Way/extincted)
-				drawSphericalTriangles(poly->getFillVertexArray(), drawMode>=SphericalPolygonDrawModeTextureFill, drawMode==SphericalPolygonDrawModeTextureFillColormodulated, clippingCap, doSubDivise, maxSqDistortion);
+				drawSphericalTriangles(poly->getFillVertexArray(observerVelocity), drawMode>=SphericalPolygonDrawModeTextureFill, drawMode==SphericalPolygonDrawModeTextureFillColormodulated, clippingCap, doSubDivise, maxSqDistortion);
 			else
-				drawStelVertexArray(poly->getFillVertexArray(), false);
+				drawStelVertexArray(poly->getFillVertexArray(observerVelocity), false);
 
 			setCullFace(oldCullFace);
 			break;

@@ -147,7 +147,7 @@ private:
 
 	//! Draw the image on the screen.
 	//! @return true if the tile was actually displayed
-	bool drawTile(StelCore* core, StelPainter& sPainter);
+	bool drawTile(StelCore* core, StelPainter& sPainter, const Vec3d &vel);
 
 	//! Return the minimum resolution
 	double getMinResolution() const {return static_cast<double>(minResolution);}

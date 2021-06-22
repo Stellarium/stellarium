@@ -103,12 +103,13 @@ public:
               float xshift=0.f, float yshift=0.f, bool noGravity=true);
 
 	//! Draw the given SphericalRegion.
-	//! @param region The SphericalRegion to draw.
+	//! @param region The SphericalRegion to draw. If observerVelocity is given, it will be modified.
 	//! @param drawMode define whether to draw the outline or the fill or both.
 	//! @param clippingCap if not set to Q_NULLPTR, tells the painter to try to clip part of the region outside the cap.
 	//! @param doSubDivise if true tesselates the object to follow projection distortions.
+	//! @param observerVelocity precomputed vector shift for aberration correction
 	//! Typically set that to false if you think that the region is fully contained in the viewport.
-	void drawSphericalRegion(const SphericalRegion* region, SphericalPolygonDrawMode drawMode=SphericalPolygonDrawModeFill, const SphericalCap* clippingCap=Q_NULLPTR, bool doSubDivise=true, double maxSqDistortion=5.);
+	void drawSphericalRegion(SphericalRegion *region, SphericalPolygonDrawMode drawMode=SphericalPolygonDrawModeFill, const SphericalCap* clippingCap=Q_NULLPTR, bool doSubDivise=true, double maxSqDistortion=5., const Vec3d &observerVelocity=Vec3d(0.));
 
 	void drawGreatCircleArcs(const StelVertexArray& va, const SphericalCap* clippingCap=Q_NULLPTR);
 
