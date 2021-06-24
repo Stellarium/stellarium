@@ -310,7 +310,7 @@ msgstr "PAS"
 #. TRANSLATORS: Center of the umbra
 #: src/core/modules/GridLinesMgr.cpp:1444
 msgid "C.U."
-msgstr ""
+msgstr "C.O."
 
 #. TRANSLATORS: Apex Point, where the observer planet is heading to
 #: src/core/modules/GridLinesMgr.cpp:1451
@@ -496,7 +496,7 @@ msgstr "Point anti-solaire"
 
 #: src/core/modules/GridLinesMgr.cpp:1880
 msgid "The center of the Earth's umbra"
-msgstr ""
+msgstr "Le centre de l'ombre de la Terre"
 
 #: src/core/modules/GridLinesMgr.cpp:1881 src/ui_viewDialog.h:3669
 msgid "Apex points"
@@ -4460,7 +4460,7 @@ msgstr "Zoom +/-"
 #. TRANSLATORS: The char mean "and"
 #: src/gui/HelpDialog.cpp:265
 msgid "&"
-msgstr ""
+msgstr "&"
 
 #: src/gui/HelpDialog.cpp:267
 msgid "Time dragging"
@@ -4468,7 +4468,7 @@ msgstr "Glisser pour modifier l'heure"
 
 #: src/gui/HelpDialog.cpp:268
 msgid "left mouse drag"
-msgstr ""
+msgstr "glissé du bouton gauche"
 
 #: src/gui/HelpDialog.cpp:269
 msgid "Time scrolling: minutes"
@@ -4477,7 +4477,7 @@ msgstr "Défilement du temps : minutes"
 #: src/gui/HelpDialog.cpp:270 src/gui/HelpDialog.cpp:272
 #: src/gui/HelpDialog.cpp:274 src/gui/HelpDialog.cpp:276
 msgid "mouse wheel"
-msgstr ""
+msgstr "molette souris"
 
 #: src/gui/HelpDialog.cpp:271
 msgid "Time scrolling: hours"
@@ -4505,7 +4505,7 @@ msgstr "Effacer la sélection"
 
 #: src/gui/HelpDialog.cpp:285
 msgid "& left click"
-msgstr ""
+msgstr "& clic gauche"
 
 #: src/gui/HelpDialog.cpp:287
 msgid "Right click"
@@ -4517,7 +4517,7 @@ msgstr "Ajouter un marqueur"
 
 #: src/gui/HelpDialog.cpp:291
 msgid "left click"
-msgstr ""
+msgstr "clic gauche"
 
 #: src/gui/HelpDialog.cpp:293
 msgid "Delete marker closest to mouse cursor"
@@ -4525,7 +4525,7 @@ msgstr "Supprimer le marqueur le plus proche du pointeur"
 
 #: src/gui/HelpDialog.cpp:294 src/gui/HelpDialog.cpp:297
 msgid "right click"
-msgstr ""
+msgstr "clic droit"
 
 #: src/gui/HelpDialog.cpp:296
 msgid "Delete all custom markers"
@@ -4551,13 +4551,15 @@ msgstr "Activer l'interface texte"
 
 #: src/gui/HelpDialog.cpp:337
 msgid "Special local keys"
-msgstr ""
+msgstr "Touches spéciales locales"
 
 #: src/gui/HelpDialog.cpp:338
 msgid ""
 "All these hotkeys are locally available to run when specific window or tab "
 "is opened."
 msgstr ""
+"Tous ces raccourcis claviers sont disponibles localement lorsqu'une fenêtre "
+"ou un onglet spécifique est ouvert."
 
 #: src/gui/HelpDialog.cpp:339 src/ui_scriptConsole.h:380
 msgid "Script console"
@@ -4565,15 +4567,15 @@ msgstr "Console de script"
 
 #: src/gui/HelpDialog.cpp:340 src/ui_scriptConsole.h:383
 msgid "Load script from file"
-msgstr ""
+msgstr "Charger un script depuis un fichier"
 
 #: src/gui/HelpDialog.cpp:342 src/ui_scriptConsole.h:387
 msgid "Save script to file"
-msgstr ""
+msgstr "Enregistrer un script dans un fichier"
 
 #: src/gui/HelpDialog.cpp:344 src/ui_scriptConsole.h:405
 msgid "Run script"
-msgstr ""
+msgstr "Lancer un script"
 
 #: src/gui/HelpDialog.cpp:346 src/ui_astroCalcDialog.h:1661
 msgid "Astronomical calculations"
@@ -10987,6 +10989,8 @@ msgstr "Ombre de la Terre"
 msgid ""
 "Show point of Earth's center of deep shadow in the distance of the Moon."
 msgstr ""
+"Affiche le point central de l'ombre profonde de la Terre à la distance de la"
+" Lune"
 
 #: src/ui_viewDialog.h:3546
 msgid "Equator (of date)"
@@ -12450,11 +12454,11 @@ msgstr "Afficher les mesures récentes GRS"
 
 #: src/ui_scriptConsole.h:391
 msgid "Clear"
-msgstr ""
+msgstr "Effacer"
 
 #: src/ui_scriptConsole.h:395
 msgid "Pre-process script using SSC preprocessor"
-msgstr ""
+msgstr "Pré-traiter le script à l'aide du préprocesseur SSC"
 
 #: src/ui_scriptConsole.h:400
 msgid "Execute:"
@@ -12462,7 +12466,7 @@ msgstr "Lancer :"
 
 #: src/ui_scriptConsole.h:409
 msgid "Stop script"
-msgstr ""
+msgstr "Arrêter le script"
 
 #: src/ui_scriptConsole.h:412
 msgid "Script"
@@ -27911,60 +27915,62 @@ msgstr "Mésoamérique"
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:121
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:285
 msgid "Online Queries"
-msgstr ""
+msgstr "Requêtes en ligne"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:63
 msgid ""
 "This plugin allows object information retrieval from selected online "
 "services."
 msgstr ""
+"Ce plugin permet la récupération d'informations sur les objets à partir de "
+"services en ligne sélectionnés."
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:114
 msgid "Show window for Online Queries"
-msgstr ""
+msgstr "Afficher la fenêtre des requêtes en ligne"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:115
 msgid "Call ancient-skies on current selection"
-msgstr ""
+msgstr "Contacter Ancient-Skies au sujet de la sélection actuelle"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:116
 msgid "Call AAVSO database on current selection"
-msgstr ""
+msgstr "Contacter la base de donnéées AAVSO au sujet de la sélection actuelle"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:117
 msgid "Call GCVS database on current selection"
-msgstr ""
+msgstr "Contacter la base de donnéées GCVS au sujet de la sélection actuelle"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:118
 msgid "Call Wikipedia on current selection"
-msgstr ""
+msgstr "Contacter la Wikipedia au sujet de la sélection actuelle"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:119
 msgid "Call custom site 1 on current selection"
-msgstr ""
+msgstr "Contacter le site personnalisé 1 au sujet de la sélection actuelle"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:120
 msgid "Call custom site 2 on current selection"
-msgstr ""
+msgstr "Contacter le site personnalisé 2 au sujet de la sélection actuelle"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:121
 msgid "Call custom site 3 on current selection"
-msgstr ""
+msgstr "Contacter le site personnalisé 3 au sujet de la sélection actuelle"
 
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:84
 msgctxt "tab title"
 msgid "(Custom 1)"
-msgstr ""
+msgstr "(personnalisé 1)"
 
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:93
 msgctxt "tab title"
 msgid "(Custom 2)"
-msgstr ""
+msgstr "(personnalisé 2)"
 
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:102
 msgctxt "tab title"
 msgid "(Custom 3)"
-msgstr ""
+msgstr "(personnalisé 3)"
 
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:287
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:289
@@ -27974,32 +27980,32 @@ msgstr ""
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:297
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:299
 msgid "Query"
-msgstr ""
+msgstr "Requête"
 
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:288
 msgid "Wikipedia"
-msgstr ""
+msgstr "Wikipedia"
 
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:290
 msgid "AAVSO"
-msgstr ""
+msgstr "AAVSO"
 
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:292
 msgid "GCVS"
-msgstr ""
+msgstr "GCVS"
 
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:294
 msgid "Ancient-Skies"
-msgstr ""
+msgstr "Ancient-Skies"
 
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:296
 msgid "Custom 1"
-msgstr ""
+msgstr "Personnalisé 1"
 
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:298
 msgid "Custom 2"
-msgstr ""
+msgstr "Personnalisé 2"
 
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:300
 msgid "Custom 3"
-msgstr ""
+msgstr "Personnalisé 3"

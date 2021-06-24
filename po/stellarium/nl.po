@@ -3315,7 +3315,7 @@ msgid ""
 "projection</i>. It preserves the area but not the angle."
 msgstr ""
 "De volledige naam van deze projectiemethode is <i>Lambert azimutaal gelijk-"
-"oppervlak projectie</i>. Ze behoudt de oppervlakte maar niet de hoek."
+"oppervlak-projectie</i>. Ze behoudt oppervlaktes maar geen hoeken."
 
 #: src/core/StelProjectorClasses.cpp:145
 msgid "Stereographic"
@@ -3329,11 +3329,11 @@ msgid ""
 msgstr ""
 "De stereografische projectie was in de oudheid al bekend en heette "
 "oorspronkelijk planisfeerprojectie. Ze behoudt de hoeken onder welke curven "
-"elkaar kruisen maar de oppervlakte wordt niet behouden."
+"elkaar kruisen maar niet de oppervlakte."
 
 #: src/core/StelProjectorClasses.cpp:200
 msgid "Fish-eye"
-msgstr "Vissenoog"
+msgstr "Visoog"
 
 #: src/core/StelProjectorClasses.cpp:205
 msgid ""
@@ -3342,9 +3342,9 @@ msgid ""
 "centre of the field of view (like the distortions seen with very wide angle "
 "camera lenses)."
 msgstr ""
-"In vissenoogprojectie of <i>azimutaal equidistante projectie</i> worden "
-"rechte lijnen krommer naarmate ze verder van het midden van het gezichtsveld"
-" liggen (vergelijkbaar met de vervormingen van een extreme groothoeklens)."
+"In visoogprojectie of <i>azimutaal equidistante projectie</i> worden rechte "
+"lijnen krommer naarmate ze verder van het midden van het gezichtsveld liggen"
+" (vergelijkbaar met de vervormingen van een extreme groothoeklens)."
 
 #: src/core/StelProjectorClasses.cpp:261
 msgid "Hammer-Aitoff"
@@ -3355,8 +3355,8 @@ msgid ""
 "The Hammer projection is an equal-area map projection, described by Ernst "
 "Hammer in 1892 and directly inspired by the Aitoff projection."
 msgstr ""
-"De Hammerprojectie is een gelijke-oppervlakte kaartprojectie, beschreven "
-"door Ernst Hammer in 1892 en geïnspireerd door de Aitoffprojectie."
+"De Hammerprojectie is een gelijke-oppervlakte-projectie, beschreven door "
+"Ernst Hammer in 1892 en geïnspireerd door de Aitoffprojectie."
 
 #: src/core/StelProjectorClasses.cpp:316
 msgid "Cylinder"
@@ -4461,7 +4461,7 @@ msgstr "In/uitzoomen"
 #. TRANSLATORS: The char mean "and"
 #: src/gui/HelpDialog.cpp:265
 msgid "&"
-msgstr ""
+msgstr "en"
 
 #: src/gui/HelpDialog.cpp:267
 msgid "Time dragging"
@@ -4469,7 +4469,7 @@ msgstr "Tijd verslepen"
 
 #: src/gui/HelpDialog.cpp:268
 msgid "left mouse drag"
-msgstr ""
+msgstr "links slepen"
 
 #: src/gui/HelpDialog.cpp:269
 msgid "Time scrolling: minutes"
@@ -4478,7 +4478,7 @@ msgstr "Tijd verschuiven: minuten"
 #: src/gui/HelpDialog.cpp:270 src/gui/HelpDialog.cpp:272
 #: src/gui/HelpDialog.cpp:274 src/gui/HelpDialog.cpp:276
 msgid "mouse wheel"
-msgstr ""
+msgstr "muiswiel"
 
 #: src/gui/HelpDialog.cpp:271
 msgid "Time scrolling: hours"
@@ -4518,7 +4518,7 @@ msgstr "Eigen markering toevoegen"
 
 #: src/gui/HelpDialog.cpp:291
 msgid "left click"
-msgstr ""
+msgstr "links klik"
 
 #: src/gui/HelpDialog.cpp:293
 msgid "Delete marker closest to mouse cursor"
@@ -4526,7 +4526,7 @@ msgstr "Markering dichtstbij muiscursor verwijderen"
 
 #: src/gui/HelpDialog.cpp:294 src/gui/HelpDialog.cpp:297
 msgid "right click"
-msgstr ""
+msgstr "rechts klik"
 
 #: src/gui/HelpDialog.cpp:296
 msgid "Delete all custom markers"
@@ -4558,6 +4558,7 @@ msgid ""
 "All these hotkeys are locally available to run when specific window or tab "
 "is opened."
 msgstr ""
+"Volgende toetscombinaties zijn apart beschikbaar in onderstaande dialogen."
 
 #: src/gui/HelpDialog.cpp:339 src/ui_scriptConsole.h:380
 msgid "Script console"
@@ -4786,7 +4787,7 @@ msgstr "Script console venster"
 
 #: src/gui/StelGui.cpp:245
 msgid "Help window"
-msgstr "Help venster"
+msgstr "Helpvenster"
 
 #: src/gui/StelGui.cpp:246
 msgid "Configuration window"
@@ -4798,7 +4799,7 @@ msgstr "Zoekvenster"
 
 #: src/gui/StelGui.cpp:248
 msgid "Sky and viewing options window"
-msgstr "Ruimte- en projectie instellingen"
+msgstr "Beeld"
 
 #: src/gui/StelGui.cpp:249
 msgid "Date/time window"
@@ -10391,7 +10392,7 @@ msgstr "Magnitude limiet:"
 
 #: src/ui_viewDialog.h:3202
 msgid "Use additional names of stars"
-msgstr "Aanvullende namen voor sterren gebruiken"
+msgstr "Aanvullende namen voor sterren"
 
 #: src/ui_viewDialog.h:3203 src/ui_viewDialog.h:3260 src/ui_viewDialog.h:3395
 msgid "Labels and Markers"
@@ -11934,13 +11935,13 @@ msgstr "Aanvullende informatie-instellingen"
 #: src/ui_configurationDialog.h:1822
 msgid "Use short notation for unit of measurement of surface brightness"
 msgstr ""
-"Korte notatie gebruiken voor de maateenheid voor oppervlakte helderheid"
+"Korte notatie gebruiken voor de maateenheid voor oppervlaktehelderheid"
 
 #: src/ui_configurationDialog.h:1823
 msgid "Use unit of measurement mag/arcsec^2 for surface brightness"
 msgstr ""
-"Korte notatie gebruiken voor de maateenheid g/arcsec^2 voor oppervlakte "
-"helderheid"
+"Korte notatie gebruiken voor de maateenheid g/arcsec^2 voor "
+"oppervlaktehelderheid"
 
 #: src/ui_configurationDialog.h:1824
 msgid "Use formatting output for coordinates and time"
@@ -16932,9 +16933,9 @@ msgid ""
 " with the mouse, it can be tracked and it appears as an object in the "
 "'Search' window."
 msgstr ""
-"Een kruisdraad is een object gelijk elke ander object in Stellarium - het "
-"kan worden geselecteerd met de muis, het kan worden gevolgd en het "
-"verschijnt als een object in het 'Zoek' venster."
+"De kruisdraad is een object gelijk elk ander object in Stellarium - het kan "
+"worden geselecteerd met de muis, het kan worden gevolgd en het verschijnt "
+"als een object in het 'Zoek'venster."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:457
 msgid ""
@@ -19551,10 +19552,9 @@ msgid ""
 "temperature depending on the atmosphere of the planets, which are currently "
 "unknown (e.g. Earth mean global surface temperature is about 288 K or 15°C)."
 msgstr ""
-"De verwachting is dat de actuele oppervlakte temperatuur hoger is dan de "
-"equilibrium temperatuur afhankelijk van de planeet atmosfeer, die nu "
-"onbekend zijn (b.v. De gemiddelde globale oppervlaktetemperatuur van de "
-"Aarde is ongeveer 288 K or 15°C)."
+"De verwachting is dat de werkelijke oppervlaktetemperatuur hoger is dan het "
+"equilibrium, afhankelijk van de atmosfeer, die onbekend is (b.v. de "
+"gemiddelde oppervlaktetemperatuur van de Aarde is ongeveer 288 K of 15 °C)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:315
 msgid ""
@@ -19574,9 +19574,9 @@ msgid ""
 "like. ESI depends on the planet's radius, density, escape velocity, and "
 "surface temperature."
 msgstr ""
-"De gelijkenis met de Aarde op een schaal van 0 tot 1, waarbij 1 de "
-"gelijkenis met de Aarde het grootst is. ESI is afhankelijk van planeet "
-"radius, dichtheid, ontsnappingssnelheid en oppervlakte temperatuur."
+"De gelijkenis met de Aarde op een schaal van 0 tot 1, waarbij 1 de grootste "
+"gelijkenis met de Aarde is. ESI is afhankelijk van planeetradius, "
+"-dichtheid, -ontsnappingssnelheid en -oppervlaktetemperatuur."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:320
 msgid "Conservative Sample"
@@ -23804,7 +23804,7 @@ msgstr "Schaduwen niet geactiveerd of niet mogelijk."
 #: plugins/Scenery3d/src/Scenery3d.cpp:750
 #, qt-format
 msgid "Surface bumps %1."
-msgstr "Oppervlakte hobbels %1."
+msgstr "Oppervlaktehobbels %1."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:798
 msgid "Selected cubemap mode not supported, falling back to '6 Textures'"
@@ -23889,8 +23889,8 @@ msgid ""
 "Your hardware does not support cubemapping, please switch to 'Perspective' "
 "projection!"
 msgstr ""
-"Uw hardware ondersteund 'cubemapping' niet, schakel over naar 'Perspectief' "
-"projectie!"
+"Uw hardware ondersteunt cubemapping niet. Schakel over naar "
+"perspectiefprojectie!"
 
 #: plugins/Scenery3d/src/S3DRenderer.cpp:1771
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."

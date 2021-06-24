@@ -1,14 +1,17 @@
 <h1>Almagest</h1>
 
-<p>Staroveká grécka kultúra hviezdnej oblohy je založená na Almageste, zbierke
-astronomického poznania starých astronómov, vrátane výsledkov pozorovaní a
-matematickej astronómie. Zostavená bola Klaudiom Ptolemaiom, ktorý použil
-vlastné, ako aj staršie pozorovania. Bola napísaná v gréčtine, vydaná v
-druhom storočí a po 1500 rokov ostala hlavnou astronomickou
+<p>Táto staroveká grécka kultúra hviezdnej oblohy je založená na Almageste,
+zbierke astronomického poznania starých astronómov, vrátane výsledkov
+pozorovaní a matematickej astronómie. Zostavená bola Claudiom Ptolemaiom,
+ktorý použil staršie, ako aj vlastné, pozorovania. Bola napísaná v gréčtine,
+vydaná v druhom storočí a po 1500 rokov ostala hlavnou astronomickou
 publikáciou. Pôvodne bola napísaná v starej gréčtine ako <i>Mathematiké
-Syntaxis</i>. Meno <i>Almagest</i>, znamená &ldquo;Veľká [kniha]&rdquo; a
-vzniklo z arabského prekladu. Na vytvorenie tejto kultúry oblohy sme použili
-anglický preklad od Toomera (1984).</p>
+Syntaxis</i>. Meno <i>Almagest</i>, znamená &ldquo;Najväčšia [kniha]&rdquo;
+a vzniklo z arabského prekladu. Na vytvorenie tejto kultúry oblohy sme
+použili anglický preklad od Toomera (1984), prepracovali niektoré detaily
+(napr. viac doslovné preklady gréckych namiesto latinských výrazov, ktoré sú
+dnes bežnejšie) a využili sme strojovo čitateľné tabuľky pripravené Erniem
+Wrightom.</p>
 
 <p>Almagest je zložený z 13 sekcií nazývaných knihy. V siedmej a ôsmej knihe
 podáva Ptolemaios zoznam 1022 hviezd v 48 súhvezdiach (z ktorých je asi 5
@@ -34,6 +37,23 @@ jednoduchým odrátaním hodnoty pre dĺžku ekliptiky.</p>
 
 <h2>Ako sme pripravili túto kultúru oblohy</h2>
 
+<h3>mená hviezd</h3>
+
+Z viac ako 1000 hviezd uvádza Ptolemaios vlastné meno len pre 15 z
+nich. Zvyšok je identifikovaný značne dlhými popismi, ako "Hviezda na konci
+chvosta" pre Polárku. Aby sme sa vyhli zobrazovaniu takých dlhých reťazcov
+na obrazovke Stellaria, vymysleli sme kratšie názvy pre všetky hviezdy z
+Almagestu založené na súhvezdí a ich poradí, v akom sa objavujú v
+katalógu. Napríklad, Polárka dostala označenie "UMi 1", pretože je to prvá
+hviezda v súhvezdí Malá medvedica (UMi). Prepojenia medzi ptolemajovskými
+súhvezdiami a IAU skratkami sú v tabuľke nižšie. Tam, kde Ptolemaios
+popisuje hviezdu ležiacu mimo obrazca, používame v zodpovedajúcej skratke
+malé písmená. Aby ste videli dlhé popisy konkrétnej hviezdy, musíte povoliť
+"Použiť ďalšie mená hviezd" v nastaveniach "Zobrazenie [F4]/Obloha" a potom
+kliknúť na danú hviezdu. Vtedy sa na vrchu obrazovky zobrazí dlhý popis.
+
+<h3>Čiary súhvezdí</h3>
+
 <p>Proces môžeme popísať na príklade Havrana:</p>
 
 <p>V súhvezdí Corvus (Havran), &alpha; Crv je hviezda v &quot;Hlave
@@ -49,10 +69,11 @@ Crv hviezda v zadnom krídle. Z hviezdy v hrudi smeruje ďalšia čiara do
 popisu v tabuľke uvádzanej v <i>Almageste</i>.</p>
 
 <p>Mená hviezd a mená objektov hlbokého vesmíru sú založené len na
-Almageste. Napríklad Ptolemaios používa meno
+Almageste. Napríklad Ptolemaios používa vo svojom inom diele
+<i>Tetrabiblos</i> pre Aldebaran meno
 &quot;&lambda;&alpha;&mu;&pi;&alpha;&delta;&#943;&alpha;&sigmaf; (podobná
-pochodni)&quot; pre Aldebaran, ale to v tejto kultúre oblohy nie je
-zavedené, pretože sa neobjavuje v Almageste.</p>
+pochodni)&quot;, ale to v tejto kultúre oblohy nie je zavedené, pretože sa
+neobjavuje v Almageste.</p>
 
 <p>Nasledujúca tabuľka zobrazuje originálne meno súhvezdia v gréčtine a jeho
 preklad (druhý a tretí stĺpec) a naše poznámky k rekonštrukcii (šiesty
@@ -495,6 +516,9 @@ Leipzig, 1898</li>
   <li>Hoffmann, S. M.: Hipparchs Himmelsglobus, Springer, Wiesbaden/ New York,
 2017</li>
   <li>Toomer, G. J.: Ptolemy's Almagest, Duckworth, London, 1984</li>
+  <li>Ernie Wright: <a href="http://www.etwright.org/astro/almagest.html#cat"
+class='external text' rel="nofollow"> Seeing Ancient Stars, Visualization of
+the Almagest Catalog</a>, 2006</li>
  </ul>
 
 <h2>Spôsob férového použitia</h2>

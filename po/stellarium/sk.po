@@ -4428,7 +4428,7 @@ msgstr "Zväčšiť/Zmenšiť"
 #. TRANSLATORS: The char mean "and"
 #: src/gui/HelpDialog.cpp:265
 msgid "&"
-msgstr ""
+msgstr "+"
 
 #: src/gui/HelpDialog.cpp:267
 msgid "Time dragging"
@@ -4436,7 +4436,7 @@ msgstr "Posúvanie času"
 
 #: src/gui/HelpDialog.cpp:268
 msgid "left mouse drag"
-msgstr ""
+msgstr "ťahanie ľavým tlačidlom myši"
 
 #: src/gui/HelpDialog.cpp:269
 msgid "Time scrolling: minutes"
@@ -4445,7 +4445,7 @@ msgstr "Posúvanie času: minúty"
 #: src/gui/HelpDialog.cpp:270 src/gui/HelpDialog.cpp:272
 #: src/gui/HelpDialog.cpp:274 src/gui/HelpDialog.cpp:276
 msgid "mouse wheel"
-msgstr ""
+msgstr "koliesko myši"
 
 #: src/gui/HelpDialog.cpp:271
 msgid "Time scrolling: hours"
@@ -4473,7 +4473,7 @@ msgstr "Zrušiť výber"
 
 #: src/gui/HelpDialog.cpp:285
 msgid "& left click"
-msgstr ""
+msgstr "+ ľavé kliknutie"
 
 #: src/gui/HelpDialog.cpp:287
 msgid "Right click"
@@ -4485,7 +4485,7 @@ msgstr "Pridať vlastnú značku"
 
 #: src/gui/HelpDialog.cpp:291
 msgid "left click"
-msgstr ""
+msgstr "ľavé kliknutie"
 
 #: src/gui/HelpDialog.cpp:293
 msgid "Delete marker closest to mouse cursor"
@@ -4493,7 +4493,7 @@ msgstr "Vymazať značku najbližšie ku kurzoru myši"
 
 #: src/gui/HelpDialog.cpp:294 src/gui/HelpDialog.cpp:297
 msgid "right click"
-msgstr ""
+msgstr "pravé kliknutie"
 
 #: src/gui/HelpDialog.cpp:296
 msgid "Delete all custom markers"
@@ -4525,6 +4525,8 @@ msgid ""
 "All these hotkeys are locally available to run when specific window or tab "
 "is opened."
 msgstr ""
+"Všetky tieto klávesové skratky je možné lokálne použiť, ak je otvorené "
+"konkrétne okno alebo záložka."
 
 #: src/gui/HelpDialog.cpp:339 src/ui_scriptConsole.h:380
 msgid "Script console"

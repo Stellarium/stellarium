@@ -9900,7 +9900,7 @@ msgstr "Obnovit"
 msgid ""
 "Standard list of locations contains only English names (without diacritics!)"
 msgstr ""
-"Standardní seznam umístění obsahuje pouze anglické názvy (bez diakritiky!)"
+"Standardní seznam míst obsahuje pouze anglické názvy (bez diakritiky!)"
 
 #: src/ui_locationDialogGui.h:491
 msgid "Reset Location List"
@@ -23770,11 +23770,11 @@ msgstr "Zobrazit vertikál pro uživatelský azimut 2"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:313
 msgid "Show Line for Custom Altitude 1"
-msgstr ""
+msgstr "Zobrazit uživatelskou výšku nad obzorem 1"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:314
 msgid "Show Line for Custom Altitude 2"
-msgstr ""
+msgstr "Zobrazit uživatelskou výšku nad obzorem 2"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:315
 msgid "Show Line for Custom Declination 1"
@@ -23920,12 +23920,19 @@ msgid ""
 "arbitrary locations. The directions are computed based on spherical "
 "trigonometry on a spherical Earth."
 msgstr ""
+"Některá náboženství, zejména islám, dodržují při svém praktikování "
+"dodržování směru modlitby směrem k určitému místu. Zobrazeny mohou být "
+"azimuty pro dvě místa. Výchozími místy jsou Mekka (Kaaba) a Jeruzalém, ale "
+"můžete vybrat místa ze seznamu míst Stellaria nebo zadat libovolná umístění."
+" Směry jsou vypočítány na základě sférické trigonometrie na sférické Zemi."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:239
 msgid ""
 "In addition, up to two lines each with arbitrary azimuth, altitude and "
 "declination lines with custom label can be shown."
 msgstr ""
+"Navíc lze zobrazit až dvě čáry s libovolným azimutem, výškou nad obzorem a "
+"deklinací s uživatelským popiskem."
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:718
 msgid "ArchaeoLines Configuration"
@@ -24022,7 +24029,7 @@ msgstr "Deklinace procházející nadirem"
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:810
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:814
 msgid "From selected object (if any)"
-msgstr ""
+msgstr "Od vybraného objektu (pokud nějaký je)"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:754
 msgid "Geographic Location 1"
@@ -24060,12 +24067,12 @@ msgstr "Uživatelský azimut 1"
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:787
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:791
 msgid "Select from location list"
-msgstr ""
+msgstr "Vybrat ze seznamu míst"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:789
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:793
 msgid "Pick..."
-msgstr ""
+msgstr "Vybrat..."
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:796
 msgid "Custom Declination 2"
@@ -24077,11 +24084,11 @@ msgstr "Uživatelský azimut 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:801
 msgid "Custom Altitude 1"
-msgstr ""
+msgstr "Uživatelská výška 1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:802
 msgid "Custom Altitude 2"
-msgstr ""
+msgstr "Uživatelská výška 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:817
 msgid "Restore default settings"
@@ -24093,7 +24100,7 @@ msgstr "Uživatelské čáry"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:153
 msgid "Locations"
-msgstr ""
+msgstr "Místa"
 
 #: plugins/Vts/src/Vts.cpp:152
 msgid "Vts"

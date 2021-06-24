@@ -11,8 +11,8 @@
 # Song Li <boltomli@gmail.com>, 2018
 # Allen Zhong <zbl3041992@gmail.com>, 2021
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2021
-# 殳玮 孙 <itun@qq.com>, 2021
 # Ray <ray@isrc.iscas.ac.cn>, 2021
+# 殳玮 孙 <itun@qq.com>, 2021
 # 
 #, fuzzy
 msgid ""
@@ -21,7 +21,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2021-06-19 09:34+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
-"Last-Translator: Ray <ray@isrc.iscas.ac.cn>, 2021\n"
+"Last-Translator: 殳玮 孙 <itun@qq.com>, 2021\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/stellarium/teams/80998/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -310,7 +310,7 @@ msgstr "对日点"
 #. TRANSLATORS: Center of the umbra
 #: src/core/modules/GridLinesMgr.cpp:1444
 msgid "C.U."
-msgstr ""
+msgstr "中央本影区"
 
 #. TRANSLATORS: Apex Point, where the observer planet is heading to
 #: src/core/modules/GridLinesMgr.cpp:1451
@@ -4361,7 +4361,7 @@ msgstr "放大/缩小"
 #. TRANSLATORS: The char mean "and"
 #: src/gui/HelpDialog.cpp:265
 msgid "&"
-msgstr ""
+msgstr "&"
 
 #: src/gui/HelpDialog.cpp:267
 msgid "Time dragging"
@@ -4369,7 +4369,7 @@ msgstr "时间拖动"
 
 #: src/gui/HelpDialog.cpp:268
 msgid "left mouse drag"
-msgstr ""
+msgstr "左键拖动"
 
 #: src/gui/HelpDialog.cpp:269
 msgid "Time scrolling: minutes"
@@ -4378,7 +4378,7 @@ msgstr "时间滚动：分"
 #: src/gui/HelpDialog.cpp:270 src/gui/HelpDialog.cpp:272
 #: src/gui/HelpDialog.cpp:274 src/gui/HelpDialog.cpp:276
 msgid "mouse wheel"
-msgstr ""
+msgstr "鼠标滚轮"
 
 #: src/gui/HelpDialog.cpp:271
 msgid "Time scrolling: hours"
@@ -4406,7 +4406,7 @@ msgstr "消除选取"
 
 #: src/gui/HelpDialog.cpp:285
 msgid "& left click"
-msgstr ""
+msgstr "&鼠标左键"
 
 #: src/gui/HelpDialog.cpp:287
 msgid "Right click"
@@ -4418,7 +4418,7 @@ msgstr "添加自定义标识"
 
 #: src/gui/HelpDialog.cpp:291
 msgid "left click"
-msgstr ""
+msgstr "鼠标左键"
 
 #: src/gui/HelpDialog.cpp:293
 msgid "Delete marker closest to mouse cursor"
@@ -4426,7 +4426,7 @@ msgstr "删除最近鼠标的标记"
 
 #: src/gui/HelpDialog.cpp:294 src/gui/HelpDialog.cpp:297
 msgid "right click"
-msgstr ""
+msgstr "鼠标右键"
 
 #: src/gui/HelpDialog.cpp:296
 msgid "Delete all custom markers"
@@ -4449,13 +4449,13 @@ msgstr "激活TUI"
 
 #: src/gui/HelpDialog.cpp:337
 msgid "Special local keys"
-msgstr ""
+msgstr "特殊本地密钥"
 
 #: src/gui/HelpDialog.cpp:338
 msgid ""
 "All these hotkeys are locally available to run when specific window or tab "
 "is opened."
-msgstr ""
+msgstr "当特定窗口或选项卡打开时，所有这些热键都可以在本地运行。"
 
 #: src/gui/HelpDialog.cpp:339 src/ui_scriptConsole.h:380
 msgid "Script console"
@@ -4463,15 +4463,15 @@ msgstr "脚本控制台"
 
 #: src/gui/HelpDialog.cpp:340 src/ui_scriptConsole.h:383
 msgid "Load script from file"
-msgstr ""
+msgstr "从文件加载脚本"
 
 #: src/gui/HelpDialog.cpp:342 src/ui_scriptConsole.h:387
 msgid "Save script to file"
-msgstr ""
+msgstr "保存脚本至文件"
 
 #: src/gui/HelpDialog.cpp:344 src/ui_scriptConsole.h:405
 msgid "Run script"
-msgstr ""
+msgstr "运行脚本"
 
 #: src/gui/HelpDialog.cpp:346 src/ui_astroCalcDialog.h:1661
 msgid "Astronomical calculations"
@@ -10711,7 +10711,7 @@ msgstr "地球本影"
 #: src/ui_viewDialog.h:3540
 msgid ""
 "Show point of Earth's center of deep shadow in the distance of the Moon."
-msgstr ""
+msgstr "在月球的距离中显示出中央本影区。"
 
 #: src/ui_viewDialog.h:3546
 msgid "Equator (of date)"
@@ -12101,11 +12101,11 @@ msgstr "查看最新的大红斑测量结果"
 
 #: src/ui_scriptConsole.h:391
 msgid "Clear"
-msgstr ""
+msgstr "清除"
 
 #: src/ui_scriptConsole.h:395
 msgid "Pre-process script using SSC preprocessor"
-msgstr ""
+msgstr "使用 SSC 处理器预处理脚本"
 
 #: src/ui_scriptConsole.h:400
 msgid "Execute:"
@@ -12113,7 +12113,7 @@ msgstr "执行："
 
 #: src/ui_scriptConsole.h:409
 msgid "Stop script"
-msgstr ""
+msgstr "停止脚本"
 
 #: src/ui_scriptConsole.h:412
 msgid "Script"
