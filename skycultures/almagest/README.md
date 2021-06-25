@@ -52,8 +52,7 @@ The second part of the data lists the corresponding Yale catalog information for
 
 ### The make_names.py script
 
-The `make_names.py` script parses an "almstars" catalogue file and generates `star_names.fab` and `dso_names.fab` files that can be used by Stellarium.  There are four catalogue files included in the `almstars/` directory and the script uses `cat1.dat`.  If you would like to experiment with a different catalogue - change the value of the
-`CAT_FILE` variable at the top of the script and run the script as follows:
+The `make_names.py` script parses an "almstars" catalogue file and generates `star_names.fab` and `dso_names.fab` files that can be used by Stellarium.  There are four catalogue files included in the `almstars/` directory and the script uses `cat1.dat`.  If you would like to experiment with a different catalogue, change the value of the `CAT_FILE` variable at the top of the script and run the script as follows:
 
 ```sh
 $ python3.9 make_names.py
