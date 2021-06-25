@@ -109,7 +109,7 @@ with open(STARS_FILE, 'w') as stars, open(DSO_FILE, 'w') as dso:
                 if name is not None:
                     print(f'{tag}|_("{greek} {s}")', file=file)
                 if con in OUTSIDE and idx >= OUTSIDE[con][0]:
-                    print(f'# star outside {con}:', file=file))
+                    print(f'# star outside {con}:', file=file)
                     con = con.lower()
                 print(f'{tag}|("{con} {idx}")', file=file)
                 print(f'{tag}|_("{desc}")', file=file)
