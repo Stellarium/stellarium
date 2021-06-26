@@ -30,6 +30,7 @@
 #include "StelSkyDrawer.hpp"
 #include "StelTranslator.hpp"
 #include "StelActionMgr.hpp"
+#include "Planet.hpp"
 
 #include <QMouseEvent>
 #include <QString>
@@ -488,10 +489,21 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 	// Field of view for a searchRadiusPixel pixel diameter circle on screen
 	const double fov_around = core->getMovementMgr()->getCurrentFov()/qMin(prj->getViewportWidth(), prj->getViewportHeight()) * searchRadiusPixel;
 
+	// Apply annual aberration (backwards). Explan. Suppl. 2013, (7.38)
+	Vec3d realV(v);
+	if (core->getUseAberration())
+	{
+		Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+		vel*=core->getAberrationFactor() * (AU/(86400.0*SPEED_OF_LIGHT));
+		realV-=vel;
+		realV.normalize();
+	}
+
+
 	// Collect the objects inside the range
 	QList<StelObjectP> candidates;
 	for (const auto* m : objectsModules)
-		candidates += m->searchAround(v, fov_around, core);
+		candidates += m->searchAround(realV, fov_around, core);
 
 	// This should be exactly the sky's limit magnitude, else visible stars cannot be clicked, or suppressed stars can be found.
 	const float limitMag = core->getSkyDrawer()->getFlagStarMagnitudeLimit() ?
