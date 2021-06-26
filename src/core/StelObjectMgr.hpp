@@ -184,7 +184,8 @@ private:
 	// Should selected object pointer be drawn
 	bool objectPointerVisibility;
 
-	//! Find in a "clever" way an object from its equatorial position.
+	//! Find in a "clever" way an object from its equatorial J2000.0 position.
+	//! If aberration is computed, this first applies aberration backwards and then searches for an object.
 	StelObjectP cleverFind(const StelCore* core, const Vec3d& pos) const;
 
 	//! Find in a "clever" way an object from its screen position.
