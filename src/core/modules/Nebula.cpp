@@ -240,9 +240,9 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		QString mu;
 		if (flagUseShortNotationSurfaceBrightness)
 		{
-			mu = QString("<sup>m</sup>/%1'").arg(QChar(0x2B1C));
+			mu = QString("<sup>m</sup>/□'");
 			if (flagUseArcsecSurfaceBrightness)
-				mu = QString("<sup>m</sup>/%1\"").arg(QChar(0x2B1C));
+				mu = QString("<sup>m</sup>/□\"");
 		}
 		else
 		{
