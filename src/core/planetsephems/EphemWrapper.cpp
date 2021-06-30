@@ -333,9 +333,13 @@ void get_lunar_parent_coordsv(double jde, double xyz[3], double xyzdot[3], void*
 		xyzdot[0]=xyz6[3]; xyzdot[1]=xyz6[4]; xyzdot[2]=xyz6[5];
 	}
 	else
-	{  // fallback to DE-less solution.
+	{       // fallback to DE-less solution.
+		// Compute speed from positional difference within 10 seconds.
+		GetElp82bCoor(jde+10.*StelCore::JD_SECOND, xyzdot);
 		GetElp82bCoor(jde,xyz);
-		xyzdot[0]=xyzdot[1]=xyzdot[2]=0.0; // TODO: Some meaningful way to get speed?
+		xyzdot[0]-=xyz[0]; xyzdot[1]-=xyz[1]; xyzdot[2]-=xyz[2];
+		const double factor=8640.; // 86400/10 seconds
+		xyzdot[0]*=factor; xyzdot[1]*=factor; xyzdot[2]*=factor;
 	}
 }
 
