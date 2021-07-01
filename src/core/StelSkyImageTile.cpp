@@ -91,7 +91,13 @@ void StelSkyImageTile::draw(StelCore* core, StelPainter& sPainter, float)
 
 	const float limitLuminance = core->getSkyDrawer()->getLimitLuminance();
 	QMultiMap<double, StelSkyImageTile*> result;
-	getTilesToDraw(result, core, prj->getViewportConvexPolygon(0, 0), limitLuminance, true);
+	// TODO: adjust that viewportconvexpolygon by aberration to select the right tiles.
+	// I thought the viewportpolygon needs to be enlarged just a bit. (I use 20 arcseconds here as estimate of max. aberration from earth.)
+	//getTilesToDraw(result, core, prj->getViewportConvexPolygon(0,0)->getEnlarged(20./3600.*M_PI_180 *core->getAberrationFactor()), limitLuminance, true);
+	// But it seems not even the AllSky region prevents clipping, so it must be caused somewhere else.
+//	const SphericalCap& hp = prj->getBoundingCap();
+//	getTilesToDraw(result, core, SphericalRegionP(new SphericalCap(hp)), limitLuminance, true);
+	getTilesToDraw(result, core, SphericalRegionP(new AllSkySphericalRegion()), limitLuminance, true);
 
 	int numToBeLoaded=0;
 	for (auto* t : result)

@@ -126,7 +126,6 @@ protected:
 
 	//! list of all the polygons.
 	QList<SphericalRegionP> skyConvexPolygons;
-	// TODO: Add an auxiliary duplicate list to handle aberration
 
 	//! The texture of the tile
 	StelTextureSP tex;
