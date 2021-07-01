@@ -262,6 +262,7 @@ private slots:
 	void saveGraphsSecondId(int index);
 	void updateGraphsDuration(int duration);
 	void drawXVsTimeGraphs();
+	void updateXVsTimeGraphs();
 
 	void drawMonthlyElevationGraph();
 	void updateMonthlyElevationTime();

@@ -397,6 +397,7 @@ void AstroCalcDialog::createDialogContent()
 	ui->graphsDurationSpinBox->setValue(graphsDuration);
 	connect(ui->graphsDurationSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateGraphsDuration(int)));
 	connect(ui->drawGraphsPushButton, SIGNAL(clicked()), this, SLOT(drawXVsTimeGraphs()));
+	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(updateXVsTimeGraphs()));
 
 	ui->angularDistanceLimitSpinBox->setValue(conf->value("astrocalc/angular_distance_limit", 40).toInt());
 	connect(ui->angularDistanceLimitSpinBox, SIGNAL(valueChanged(int)), this, SLOT(saveAngularDistanceLimit(int)));
@@ -2982,6 +2983,23 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 	}
 }
 
+void AstroCalcDialog::updateXVsTimeGraphs()
+{
+	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
+	if (!selectedObjects.isEmpty())
+	{
+		QComboBox* celestialBody = ui->graphsCelestialBodyComboBox;
+		celestialBody->blockSignals(true);
+		int index = celestialBody->findData(selectedObjects[0]->getEnglishName(), Qt::UserRole, Qt::MatchCaseSensitive);
+		if (index>=0)
+			celestialBody->setCurrentIndex(index);
+		celestialBody->blockSignals(false);
+	}
+
+	if (ui->tabWidgetGraphs->currentIndex()==3)
+		drawXVsTimeGraphs();
+}
+
 double AstroCalcDialog::computeGraphValue(const PlanetP &ssObj, const int graphType)
 {
 	double value = 0.;
@@ -5009,6 +5027,9 @@ void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* prev
 		else
 			plotMonthlyElevation = false;
 
+		if (idx==3) // 'Graphs' is visible
+			updateXVsTimeGraphs();
+
 		if(idx==4) // 'Angular distance' is visible
 		{
 			plotAngularDistanceGraph = true;
@@ -5072,6 +5093,8 @@ void AstroCalcDialog::changeGraphsTab(int index)
 		plotMonthlyElevation = true;
 		drawMonthlyElevationGraph(); // Is object already selected?
 	}
+	if (index==3) // Graphs
+		updateXVsTimeGraphs();
 	if (index==4) // Angular Distance
 	{
 		plotAngularDistanceGraph = true;
