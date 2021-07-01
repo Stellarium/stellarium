@@ -2673,6 +2673,12 @@ Vec3d StelCore::getMouseJ2000Pos() const
 		float dy = prj->getViewportPosY()+hh+1-my - static_cast<float>(win.v[1]);
 		prj->unProject(static_cast<double>(prj->getViewportPosX()+wh+mx+dx), static_cast<double>(prj->getViewportPosY()+hh+1-my+dy), mousePosition);
 	}
-
+//	if (getUseAberration() && getCurrentPlanet())
+//	{
+//		Vec3d vel=getCurrentPlanet()->getHeliocentricEclipticVelocity();
+//		vel=StelCore::matVsop87ToJ2000*vel * getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
+//		mousePosition-=vel;
+//		mousePosition.normalize();
+//	}
 	return mousePosition;
 }
