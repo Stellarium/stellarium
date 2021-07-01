@@ -107,8 +107,8 @@ public:
 	//! @param drawMode define whether to draw the outline or the fill or both.
 	//! @param clippingCap if not set to Q_NULLPTR, tells the painter to try to clip part of the region outside the cap.
 	//! @param doSubDivise if true tesselates the object to follow projection distortions.
+	//!        Typically set that to false if you think that the region is fully contained in the viewport.
 	//! @param observerVelocity precomputed vector shift for aberration correction
-	//! Typically set that to false if you think that the region is fully contained in the viewport.
 	void drawSphericalRegion(SphericalRegion *region, SphericalPolygonDrawMode drawMode=SphericalPolygonDrawModeFill, const SphericalCap* clippingCap=Q_NULLPTR, bool doSubDivise=true, double maxSqDistortion=5., const Vec3d &observerVelocity=Vec3d(0.));
 
 	void drawGreatCircleArcs(const StelVertexArray& va, const SphericalCap* clippingCap=Q_NULLPTR);
