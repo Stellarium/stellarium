@@ -88,6 +88,7 @@ private:
 
 	bool getFlagUserDir() { return useUserDir; }
 	static const QString defaultScriptName;
+	static const QString defaultScriptDir;
 };
 
 #endif // _SCRIPTCONSOLE_HPP
