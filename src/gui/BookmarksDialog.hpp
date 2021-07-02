@@ -27,7 +27,6 @@
 #include <QUuid>
 
 #include "StelDialog.hpp"
-#include "StelFileMgr.hpp"
 #include "StelCore.hpp"
 
 class Ui_bookmarksDialogForm;
@@ -90,7 +89,11 @@ private:
 	class StelObjectMgr* objectMgr;
 	class LabelMgr* labelMgr;
 
-	QString bookmarksJsonPath;
+	static const QString bookmarkFileFilter;
+	static const QString defaultBookmarkFilename;
+	const QString stdBookmarksJsonPath; //! internal bookmark path
+	QString userBookmarksJsonPath; 	//! optional (user's) bookmarks path to assist in saving/loading during the session. a next improvement could be to permanently save the location
+
 	QHash<QString, bookmark> bookmarksCollection;
 	QList<int> highlightLabelIDs;
 
@@ -99,18 +102,14 @@ private:
 
 	void addModelRow(int number, QString uuid, QString name, QString nameI18n = "", QString date = "", QString Location = "");
 
-	void loadBookmarks();
-	void saveBookmarks() const;
+	void loadBookmarks(const QString& source);
+	void saveBookmarks(const QString& destination) const;
+
 	void goToBookmark(QString uuid);
 
 	void highlightBookmarks();
 	void clearHighlights();
 
-	// utility to get the (current) bookmark directory 
-	QString getBookmarksDir() const { return StelFileMgr::exists(bookmarksJsonPath) ? StelFileMgr::dirName(bookmarksJsonPath) : QDir::homePath();}
-
-	static const QString filter;
-	static const QString defaultBookmarkFilename;
 };
 
 

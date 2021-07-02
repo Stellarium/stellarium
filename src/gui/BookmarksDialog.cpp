@@ -42,18 +42,19 @@
 #include "ui_bookmarksDialog.h"
 
 // DRY !
-const QString BookmarksDialog::filter = "JSON (*.json)"; // TODO: include somehow with QFileDialog::setDefaultSuffix() - now the user always needs to type the suffix, otherwise his/her files get filtered away
+const QString BookmarksDialog::bookmarkFileFilter = "JSON (*.json)"; // TODO: include somehow with QFileDialog::setDefaultSuffix() - now the user always needs to type the suffix, otherwise his/her files get filtered away
 const QString BookmarksDialog::defaultBookmarkFilename = "bookmarks.json";
 
 BookmarksDialog::BookmarksDialog(QObject *parent)
 	: StelDialog("Bookmarks", parent)
+	, stdBookmarksJsonPath(StelFileMgr::findFile("data", static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable)) + "/" + BookmarksDialog::defaultBookmarkFilename)
+	, userBookmarksJsonPath(stdBookmarksJsonPath)
 {
 	ui = new Ui_bookmarksDialogForm;
 	core = StelApp::getInstance().getCore();
 	objectMgr = GETSTELMODULE(StelObjectMgr);
 	labelMgr = GETSTELMODULE(LabelMgr);
 	bookmarksListModel = new QStandardItemModel(0, ColumnCount);
-	bookmarksJsonPath = StelFileMgr::findFile("data", static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable)) + "/" + defaultBookmarkFilename;
 }
 
 BookmarksDialog::~BookmarksDialog()
@@ -106,7 +107,7 @@ void BookmarksDialog::createDialogContent()
 	ui->dateTimeCheckBox->setStyleSheet(style);
 	ui->locationCheckBox->setStyleSheet(style);
 
-	loadBookmarks();
+	loadBookmarks(stdBookmarksJsonPath);
 }
 
 void BookmarksDialog::setBookmarksHeaderNames()
@@ -232,7 +233,7 @@ void BookmarksDialog::addBookmarkButtonPressed()
 
 		bookmarksCollection.insert(uuid, bm);
 
-		saveBookmarks();
+		saveBookmarks(stdBookmarksJsonPath);
 	}
 }
 
@@ -242,7 +243,7 @@ void BookmarksDialog::removeBookmarkButtonPressed()
 	QString uuid = bookmarksListModel->index(number, ColumnUUID).data().toString();
 	bookmarksListModel->removeRow(number);
 	bookmarksCollection.remove(uuid);
-	saveBookmarks();
+	saveBookmarks(stdBookmarksJsonPath);
 }
 
 void BookmarksDialog::clearBookmarksButtonPressed()
@@ -252,7 +253,7 @@ void BookmarksDialog::clearBookmarksButtonPressed()
 	bookmarksCollection.clear();
 	setBookmarksHeaderNames();
 	ui->bookmarksTreeView->hideColumn(ColumnUUID);
-	saveBookmarks();
+	saveBookmarks(stdBookmarksJsonPath);
 }
 
 void BookmarksDialog::goToBookmarkButtonPressed()
@@ -303,6 +304,7 @@ void BookmarksDialog::highlightBookmarks()
 
 		objectMgr->unSelect();
 		// Add labels for named highlights (name in top right corner)
+		// NOTE: labels follow objects such as SSO, highlights stay behind; i.e. labels and highlights of SSO can float away from each other (see also #1498).
 		int objIdx = labelMgr->labelObject(nameI18n, name, true, fontSize, color, "NE", distance);
 		if (objIdx==-1 && name.contains("marker", Qt::CaseInsensitive)) // marker is not created yet!
 		{
@@ -422,12 +424,12 @@ void BookmarksDialog::goToBookmark(QString uuid)
 	}
 }
 
-void BookmarksDialog::loadBookmarks()
+void BookmarksDialog::loadBookmarks(const QString& source)
 {
 	QVariantMap map;
-	QFile jsonFile(bookmarksJsonPath);
+	QFile jsonFile(source);
 	if (!jsonFile.open(QIODevice::ReadOnly))
-		qWarning() << "[Bookmarks] cannot open" << QDir::toNativeSeparators(bookmarksJsonPath);
+		qWarning() << "[Bookmarks] cannot open " << QDir::toNativeSeparators(source);
 	else
 	{
 		try
@@ -485,26 +487,28 @@ void BookmarksDialog::loadBookmarks()
 
 void BookmarksDialog::importBookmarks()
 {
-	QString selection = QFileDialog::getOpenFileName(Q_NULLPTR, q_("Import bookmarks"), bookmarksJsonPath, filter);
+	QString selection = QFileDialog::getOpenFileName(Q_NULLPTR, q_("Import bookmarks"), userBookmarksJsonPath, bookmarkFileFilter);
 	
 	if (selection.isNull())
 	{
 		return;
 	}
 
-	bookmarksJsonPath = selection;
-
-	if (StelFileMgr::exists(bookmarksJsonPath))
+	if (!StelFileMgr::exists(selection))
 	{
-		GETSTELMODULE(HighlightMgr)->cleanHighlightList();
-		bookmarksListModel->clear();
-		setBookmarksHeaderNames();
-
-		loadBookmarks();
-		ui->bookmarksTreeView->hideColumn(ColumnUUID);
-
-		saveBookmarks();
+		qWarning() << "[Bookmarks] file does not exist ??? : " << selection;
+		return;
 	}
+	
+	userBookmarksJsonPath = selection;
+	GETSTELMODULE(HighlightMgr)->cleanHighlightList();
+	bookmarksListModel->clear();
+	setBookmarksHeaderNames();
+
+	loadBookmarks(userBookmarksJsonPath);
+	ui->bookmarksTreeView->hideColumn(ColumnUUID);
+
+	saveBookmarks(stdBookmarksJsonPath);
 }
 
 void BookmarksDialog::exportBookmarks()
@@ -512,30 +516,30 @@ void BookmarksDialog::exportBookmarks()
 	QString selection = QFileDialog::getSaveFileName(
 			Q_NULLPTR, 
 			q_("Export bookmarks as..."), 
-			bookmarksJsonPath,
-			filter
+			userBookmarksJsonPath,
+			bookmarkFileFilter
 			);
 	if (selection.isNull())
 	{
 		return;
 	}
 
-	bookmarksJsonPath = selection;
-	saveBookmarks();
+	userBookmarksJsonPath = selection;
+	saveBookmarks(userBookmarksJsonPath);
 }
 
-void BookmarksDialog::saveBookmarks() const
+void BookmarksDialog::saveBookmarks(const QString& destination) const
 {
-	if (bookmarksJsonPath.isEmpty())
+	if (destination.isEmpty())
 	{
 		qWarning() << "[Bookmarks] Error saving bookmarks";
 		return;
 	}
-	QFile jsonFile(bookmarksJsonPath);
+	QFile jsonFile(destination);
 	if(!jsonFile.open(QFile::WriteOnly|QFile::Text))
 	{
-		qWarning() << "[Bookmarks] bookmarks can not be saved. A file can not be open for writing:"
-			   << QDir::toNativeSeparators(bookmarksJsonPath);
+		qWarning() << "[Bookmarks] cannot write to: "
+			   << QDir::toNativeSeparators(destination);
 		return;
 	}
 
