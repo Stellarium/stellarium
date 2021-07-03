@@ -1453,10 +1453,35 @@ Vec3d Planet::getJ2000EquatorialPos(const StelCore *core) const
 	// A Planet's own eclipticPos is in VSOP87 ref. frame (practically equal to ecliptic of J2000 for us) coordinates relative to the parent body (sun, planet).
 	// To get J2000 equatorial coordinates, we require heliocentric ecliptical positions (adding up parent positions) of observer and Planet.
 	// Then we use the matrix rotation multiplication with an existing matrix in StelCore to orient from eclipticalJ2000 to equatorialJ2000.
+	// The end result is a non-normalized 3D vector which allows retrieving distances etc.
+	// To apply aberration correction, we need the velocity vector of the observer's planet and apply a little correction
+	// prepare for aberration: Explan. Suppl. 2013, (7.38)
+//	const bool withAberration=core->getUseAberration();
+//	Vec3d vel(0.);
+//	if (withAberration)
+//	{
+//		vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+//		StelCore::matVsop87ToJ2000.transfo(vel);
+//		vel*=core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
+//	}
+
+	Vec3d pos;
 	if (englishName=="Sun")
-		return StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(GETSTELMODULE(SolarSystem)->getLightTimeSunPosition() - core->getObserverHeliocentricEclipticPos());
+		// TODO: Make sure there is nothing more to do!
+		pos = StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(GETSTELMODULE(SolarSystem)->getLightTimeSunPosition() - core->getObserverHeliocentricEclipticPos());
 	else
-		return StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(getHeliocentricEclipticPos() - core->getObserverHeliocentricEclipticPos());
+	{
+		pos = StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(getHeliocentricEclipticPos() - core->getObserverHeliocentricEclipticPos());
+//		if (withAberration)
+//		{
+//			const double dist=pos.length();
+//			pos.normalize();
+//			pos+=vel;
+//			pos.normalize();
+//			pos*=dist;
+//		}
+	}
+	return pos;
 }
 
 // return value in radians!
@@ -1533,11 +1558,12 @@ QVector<const Planet*> Planet::getCandidatesForShadow() const
 	return res;
 }
 
-void Planet::computePosition(const double dateJDE)
+void Planet::computePosition(const double dateJDE, const Vec3d &aberrationPush)
 {
 	if (fabs(lastJDE-dateJDE)>deltaJDE)
 	{
 		coordFunc(dateJDE, eclipticPos, eclipticVelocity, orbitPtr);
+		eclipticPos+=aberrationPush;
 		lastJDE = dateJDE;
 	}
 }
@@ -2026,8 +2052,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 		const double distParsec = std::sqrt(core->getObserverHeliocentricEclipticPos().lengthSquared())*AU/PARSEC;
 
 		// check how much of it is visible
-		const SolarSystem* ssm = GETSTELMODULE(SolarSystem);
-		const double shadowFactor = qMax(0.000128, ssm->getEclipseFactor(core).first);
+		const double shadowFactor = qMax(0.000128, GETSTELMODULE(SolarSystem)->getEclipseFactor(core).first);
 		// See: Hughes, D. W., Brightness during a solar eclipse // Journal of the British Astronomical Association, vol.110, no.4, p.203-205
 		// URL: http://adsabs.harvard.edu/abs/2000JBAA..110..203H
 
@@ -2057,12 +2082,13 @@ float Planet::getVMagnitude(const StelCore* core) const
 			if (englishName=="Moon")
 			{
 				static const double totalityFactor=2.710e-5; // defined previously by AW
-				const QPair<Vec3d,Vec3d>shadowRadii=GETSTELMODULE(SolarSystem)->getEarthShadowRadiiAtLunarDistance();
+				const SolarSystem* ssm = GETSTELMODULE(SolarSystem);
+				const QPair<Vec3d,Vec3d>shadowRadii=ssm->getEarthShadowRadiiAtLunarDistance();
 				const double dist=getEclipticPos().length();  // Lunar distance [AU]
 				const double u=shadowRadii.first[0]  / 3600.; // geocentric angle of earth umbra radius at lunar distance [degrees]
 				const double p=shadowRadii.second[0] / 3600.; // geocentric angle of earth penumbra radius at lunar distance [degrees]
 				const double r=atan(getEquatorialRadius()/dist) * M_180_PI; // geocentric angle of Lunar radius at lunar distance [degrees]
-				const double od=180.-getElongation(GETSTELMODULE(SolarSystem)->getEarth()->getEclipticPos()) * (180.0/M_PI); // opposition distance [degrees]
+				const double od=180.-getElongation(ssm->getEarth()->getEclipticPos()) * (180.0/M_PI); // opposition distance [degrees]
 				if (od>p+r) shadowFactor=1.0;
 				else if (od>u+r) // penumbral transition zone: gradual decline (square curve)
 					shadowFactor=0.6+0.4*sqrt((od-u-r)/(p-u));
