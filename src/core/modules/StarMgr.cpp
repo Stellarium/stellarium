@@ -507,7 +507,7 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc)
 			{
 				// The OS was not able to map the file, revert to slower not mmap based method
 				static const qint64 maxStarBufMd5 = 1024*1024*8;
-				char* mmd5buf = (char*)malloc(maxStarBufMd5);
+				char* mmd5buf = static_cast<char*>(malloc(maxStarBufMd5));
 				while (!file.atEnd())
 				{
 					qint64 sz = file.read(mmd5buf, maxStarBufMd5);
@@ -1165,7 +1165,7 @@ void StarMgr::draw(StelCore* core)
 	StelSkyDrawer* skyDrawer = core->getSkyDrawer();
 	// If stars are turned off don't waste time below
 	// projecting all stars just to draw disembodied labels
-	if (!starsFader.getInterstate())
+	if (!static_cast<bool>(starsFader.getInterstate()))
 		return;
 
 	int maxSearchLevel = getMaxSearchLevel();
