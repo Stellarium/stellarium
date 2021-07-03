@@ -1180,7 +1180,7 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 	{
 		for (const auto& p : qAsConst(systemPlanets))
 		{
-			p->computePosition(dateJDE);
+			p->computePosition(dateJDE, Vec3d(0.));
 		}
 		// BEGIN HACK: 0.16.0post for solar aberration/light time correction
 		// This fixes eclipse bug LP:#1275092) and outer planet rendering bug (LP:#1699648) introduced by the first fix in 0.16.0.
@@ -1189,18 +1189,31 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 		const Vec3d obsPosJDE=observerPlanet->getHeliocentricEclipticPos();
 		const double obsDist=obsPosJDE.length();
 
-		observerPlanet->computePosition(dateJDE-obsDist * (AU / (SPEED_OF_LIGHT * 86400.)));
+		observerPlanet->computePosition(dateJDE-obsDist * (AU / (SPEED_OF_LIGHT * 86400.)), Vec3d(0.));
 		const Vec3d obsPosJDEbefore=observerPlanet->getHeliocentricEclipticPos();
 		lightTimeSunPosition=obsPosJDE-obsPosJDEbefore;
 
 		// We must reset observerPlanet for the next step!
-		observerPlanet->computePosition(dateJDE);
+		observerPlanet->computePosition(dateJDE, Vec3d(0.));
 		// END HACK FOR SOLAR LIGHT TIME/ABERRATION
+		// For higher accuracy, we make two iterations for light time correction. In the final round, we also compute rotation data.
+		// TODO: Check if this middle round is necessary/useful.
 		for (const auto& p : qAsConst(systemPlanets))
 		{
 			p->setExtraInfoString(StelObject::DebugAid, "");
 			const double light_speed_correction = (p->getHeliocentricEclipticPos()-obsPosJDE).length() * (AU / (SPEED_OF_LIGHT * 86400.));
-			p->computePosition(dateJDE-light_speed_correction);
+			p->computePosition(dateJDE-light_speed_correction, Vec3d(0.));
+		}
+		// And another time. May fix sub-arcsecond inaccuracies, and optionally apply aberration in the way described in Explanatory Supplement (2013), 7.55.
+		StelCore *core=StelApp::getInstance().getCore();
+		for (const auto& p : qAsConst(systemPlanets))
+		{
+			p->setExtraInfoString(StelObject::DebugAid, "");
+			const double light_speed_correction = (p->getHeliocentricEclipticPos()-obsPosJDE).length() * (AU / (SPEED_OF_LIGHT * 86400.));
+			Vec3d aberrationPush(0.);
+			if (core->getUseAberration())
+				aberrationPush=light_speed_correction*observerPlanet->getHeliocentricEclipticVelocity() * core->getAberrationFactor();
+			p->computePosition(dateJDE-light_speed_correction, aberrationPush);
 			if      (p->englishName=="Moon")    RotationElements::updatePlanetCorrections(dateJDE-light_speed_correction, RotationElements::EarthMoon);
 			else if (p->englishName=="Mars")    RotationElements::updatePlanetCorrections(dateJDE-light_speed_correction, RotationElements::Mars);
 			else if (p->englishName=="Jupiter") RotationElements::updatePlanetCorrections(dateJDE-light_speed_correction, RotationElements::Jupiter);
@@ -1214,7 +1227,7 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 		for (const auto& p : qAsConst(systemPlanets))
 		{
 			p->setExtraInfoString(StelObject::DebugAid, "");
-			p->computePosition(dateJDE);
+			p->computePosition(dateJDE, Vec3d(0.));
 			if      (p->englishName=="Moon")    RotationElements::updatePlanetCorrections(dateJDE, RotationElements::EarthMoon);
 			else if (p->englishName=="Mars")    RotationElements::updatePlanetCorrections(dateJDE, RotationElements::Mars);
 			else if (p->englishName=="Jupiter") RotationElements::updatePlanetCorrections(dateJDE, RotationElements::Jupiter);
