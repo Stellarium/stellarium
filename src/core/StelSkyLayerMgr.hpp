@@ -40,21 +40,21 @@ class StelSkyLayerMgr : public StelModule
 
 public:
 	StelSkyLayerMgr();
-	~StelSkyLayerMgr();
+	~StelSkyLayerMgr() Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	//! Initialize
-	virtual void init();
+	virtual void init() Q_DECL_OVERRIDE;
 
 	//! Draws sky background
-	virtual void draw(StelCore* core);
+	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
 
 	//! Update state which is time dependent.
-	virtual void update(double) {;}
+	virtual void update(double) Q_DECL_OVERRIDE {;}
 
 	//! Determines the order in which the various modules are drawn.
-	virtual double getCallOrder(StelModuleActionName actionName) const;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Other specific methods

@@ -145,7 +145,7 @@ class SolarSystem : public StelObjectModule
 
 public:
 	SolarSystem();
-	virtual ~SolarSystem();
+	virtual ~SolarSystem() Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -154,45 +154,45 @@ public:
 	//! - loading planetary body orbital and model data from data/ssystem.ini
 	//! - perform initial planet position calculation
 	//! - set display options from application settings
-	virtual void init();
+	virtual void init() Q_DECL_OVERRIDE;
 
-	virtual void deinit();
+	virtual void deinit() Q_DECL_OVERRIDE;
 	
 	//! Draw SolarSystem objects (planets).
 	//! @param core The StelCore object.
 	//! @return The maximum squared distance in pixels that any SolarSystem object
 	//! has travelled since the last update.
-	virtual void draw(StelCore *core);
+	virtual void draw(StelCore *core) Q_DECL_OVERRIDE;
 
 	//! Update time-varying components.
 	//! This includes planet motion trails.
-	virtual void update(double deltaTime);
+	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
 
 	//! Used to determine what order to draw the various StelModules.
-	virtual double getCallOrder(StelModuleActionName actionName) const;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectModule class
 	//! Search for SolarSystem objects in some area around a point.
-	//! @param v A vector representing a point in the sky.
+	//! @param v A vector representing a point in the sky in equatorial J2000 coordinates.
 	//! @param limitFov The radius of the circle around the point v which
 	//! defines the size of the area to search.
 	//! @param core the core object
 	//! @return QList of StelObjectP (pointers) containing all SolarSystem objects
 	//! found in the specified area. This vector is not sorted by distance from v.
-	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
+	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const Q_DECL_OVERRIDE;
 
 	//! Search for a SolarSystem object based on the localised name.
 	//! @param nameI18n the case in-sensitive translated planet name.
 	//! @return a StelObjectP for the object if found, else Q_NULLPTR.
-	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
+	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const Q_DECL_OVERRIDE;
 
 	//! Search for a SolarSystem object based on the English name.
 	//! @param name the case in-sensitive English planet name.
 	//! @return a StelObjectP for the object if found, else Q_NULLPTR.
-	virtual StelObjectP searchByName(const QString& name) const;
+	virtual StelObjectP searchByName(const QString& name) const Q_DECL_OVERRIDE;
 
-	virtual StelObjectP searchByID(const QString &id) const
+	virtual StelObjectP searchByID(const QString &id) const Q_DECL_OVERRIDE
 	{
 		return searchByName(id);
 	}
@@ -203,10 +203,10 @@ public:
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
 	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
-	virtual QStringList listAllObjects(bool inEnglish) const;
-	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const;
-	virtual QString getName() const { return "Solar System"; }
-	virtual QString getStelObjectType() const { return Planet::PLANET_TYPE; }
+	virtual QStringList listAllObjects(bool inEnglish) const Q_DECL_OVERRIDE;
+	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const Q_DECL_OVERRIDE;
+	virtual QString getName() const Q_DECL_OVERRIDE { return "Solar System"; }
+	virtual QString getStelObjectType() const Q_DECL_OVERRIDE { return Planet::PLANET_TYPE; }
 
 public slots:
 	///////////////////////////////////////////////////////////////////////////
