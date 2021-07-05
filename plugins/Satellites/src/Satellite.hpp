@@ -236,7 +236,6 @@ private:
 	//! each end of an orbit, with 1 in the middle.
 	float calculateOrbitSegmentIntensity(int segNum);
 	void calculateSatDataFromLine2(QString tle);
-	Vec2d getEccentricityInclinationFromLine2(QString tle) const;
 	//! Parse TLE line to extract International Designator and launch year.
 	//! Sets #internationalDesignator and #jdLaunchYearJan1.
 	void parseInternationalDesignator(const QString& tle1);
