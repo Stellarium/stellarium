@@ -99,6 +99,10 @@ StelCore::StelCore()
 	, de431Available(false)
 	, de430Active(false)
 	, de431Active(false)
+	, de440Available(false)
+	, de441Available(false)
+	, de440Active(false)
+	, de441Active(false)
 {
 	setObjectName("StelCore");
 	registerMathMetaTypes();
@@ -1971,7 +1975,10 @@ double StelCore::computeDeltaT(const double JD)
 	}
 
 	if (!deltaTdontUseMoon)
-		DeltaT += StelUtils::getMoonSecularAcceleration(JD, deltaTnDot, ((de430Active&&EphemWrapper::jd_fits_de430(JD)) || (de431Active&&EphemWrapper::jd_fits_de431(JD))));
+		DeltaT += StelUtils::getMoonSecularAcceleration(JD, deltaTnDot, ((de440Active&&EphemWrapper::jd_fits_de440(JD)) ||
+										 (de441Active&&EphemWrapper::jd_fits_de441(JD)) ||
+										 (de430Active&&EphemWrapper::jd_fits_de430(JD)) ||
+										 (de431Active&&EphemWrapper::jd_fits_de431(JD))));
 
 	return DeltaT;
 }
@@ -2519,15 +2526,50 @@ void StelCore::setDe431Active(bool status)
 	de431Active = de431Available && status;
 }
 
+
+bool StelCore::de440IsAvailable()
+{
+	return de440Available;
+}
+
+bool StelCore::de441IsAvailable()
+{
+	return de441Available;
+}
+
+bool StelCore::de440IsActive()
+{
+	return de440Active;
+}
+
+bool StelCore::de441IsActive()
+{
+	return de441Active;
+}
+
+void StelCore::setDe440Active(bool status)
+{
+	de440Active = de440Available && status;
+}
+
+void StelCore::setDe441Active(bool status)
+{
+	de441Active = de441Available && status;
+}
+
 void StelCore::initEphemeridesFunctions()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 
 	QString de430ConfigPath = conf->value("astro/de430_path").toString();
 	QString de431ConfigPath = conf->value("astro/de431_path").toString();
+	QString de440ConfigPath = conf->value("astro/de440_path").toString();
+	QString de441ConfigPath = conf->value("astro/de441_path").toString();
 
 	QString de430FilePath;
 	QString de431FilePath;
+	QString de440FilePath;
+	QString de441FilePath;
 
 	//<-- DE430 -->
 	if(de430ConfigPath.remove(QChar('"')).isEmpty())
@@ -2556,6 +2598,34 @@ void StelCore::initEphemeridesFunctions()
 		EphemWrapper::init_de431(de431FilePath.toStdString().c_str());
 	}
 	setDe431Active(de431Available && conf->value("astro/flag_use_de431", false).toBool());
+
+	//<-- DE440 -->
+	if(de440ConfigPath.remove(QChar('"')).isEmpty())
+		de440FilePath = StelFileMgr::findFile("ephem/" + QString(DE440_FILENAME), StelFileMgr::File);
+	else
+		de440FilePath = StelFileMgr::findFile(de440ConfigPath, StelFileMgr::File);
+
+	de440Available=!de440FilePath.isEmpty();
+	if(de440Available)
+	{
+		qDebug() << "DE440 at: " << de440FilePath;
+		EphemWrapper::init_de440(de440FilePath.toStdString().c_str());
+	}
+	setDe440Active(de440Available && conf->value("astro/flag_use_de440", false).toBool());
+
+	//<-- DE441 -->
+	if(de441ConfigPath.remove(QChar('"')).isEmpty())
+		de441FilePath = StelFileMgr::findFile("ephem/" + QString(DE441_FILENAME), StelFileMgr::File);
+	else
+		de441FilePath = StelFileMgr::findFile(de441ConfigPath, StelFileMgr::File);
+
+	de441Available=!de441FilePath.isEmpty();
+	if(de441Available)
+	{
+		qDebug() << "DE441 at: " << de441FilePath;
+		EphemWrapper::init_de441(de441FilePath.toStdString().c_str());
+	}
+	setDe441Active(de441Available && conf->value("astro/flag_use_de441", false).toBool());
 }
 
 // Methods for finding constellation from J2000 position.

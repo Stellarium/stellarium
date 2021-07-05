@@ -737,6 +737,13 @@ public slots:
 	void setDe430Active(bool status);   //!< switch DE430 use to @param status (if de430IsAvailable()). DE430 is only used if date is within range of DE430.
 	void setDe431Active(bool status);   //!< switch DE431 use to @param status (if de431IsAvailable()). DE431 is only used if DE430 is not used and the date is within range of DE431.
 
+	bool de440IsAvailable();            //!< true if DE440 ephemeris file has been found
+	bool de441IsAvailable();            //!< true if DE441 ephemeris file has been found
+	bool de440IsActive();               //!< true if DE440 ephemeris is in use
+	bool de441IsActive();               //!< true if DE441 ephemeris is in use
+	void setDe440Active(bool status);   //!< switch DE440 use to @param status (if de440IsAvailable()). DE440 is only used if date is within range of DE440.
+	void setDe441Active(bool status);   //!< switch DE441 use to @param status (if de441IsAvailable()). DE441 is only used if DE440 is not used and the date is within range of DE441.
+
 	//! Return 3-letter abbreviation of IAU constellation name for position in equatorial coordinates on the current epoch.
 	//! Follows 1987PASP...99..695R: Nancy Roman: Identification of a Constellation from a Position
 	//! Data file from ADC catalog VI/42 with its amendment from 1999-12-30.
@@ -874,11 +881,15 @@ private:
 	int deltaTstart;   // begin year of validity range for the selected DeltaT algorithm. (SET INT_MIN to mark infinite)
 	int deltaTfinish;  // end   year of validity range for the selected DeltaT algorithm. (Set INT_MAX to mark infinite)
 
-	// Variables for DE430/431 ephem calculation
+	// Variables for DE430/431/440/441 ephem calculation
 	bool de430Available; // ephem file found
 	bool de431Available; // ephem file found
 	bool de430Active;    // available and user-activated.
 	bool de431Active;    // available and user-activated.
+	bool de440Available; // ephem file found
+	bool de441Available; // ephem file found
+	bool de440Active;    // available and user-activated.
+	bool de441Active;    // available and user-activated.
 };
 
 #endif // STELCORE_HPP

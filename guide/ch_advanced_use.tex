@@ -163,7 +163,7 @@ following sub-directories.
 \item[\file{textures/}] contains miscellaneous texture files, such as the
   graphics for the toolbar buttons, planet texture maps, etc.
 \item[\file{ephem/}] (optional) may contain data files for planetary
-  ephemerides DE430 and DE431 (see~\ref{sec:ExtraData:ephemerides}).
+  ephemerides DE430, DE431, DE440 and DE441 (see~\ref{sec:ExtraData:ephemerides}).
 \end{description}
 
 If any file exists in both the installation directory and user
@@ -258,7 +258,7 @@ from Stellarium's Github website\footnote{\url{https://github.com/Stellarium/ste
 The file can be placed in a folder named \file{nebulae/default} inside the \emph{user directory}
 (see section~\ref{sec:FilesAndDirectories:DirectoryStructure}).
 
-\subsection{Alternative Planet Ephemerides: DE430, DE431}
+\subsection{Alternative Planet Ephemerides: DE430, DE431, DE440, DE441}
 \label{sec:ExtraData:ephemerides}
 
 \noindent\newFeature{v0.15.0}By default, Stellarium uses the \indexterm{VSOP87} planetary theory,
@@ -269,11 +269,12 @@ for a few more millennia without too great errors, but with degrading accuracy.
 Likewise for the moon, Stellarium by default uses ELP~2000-82B~\citep{1982CeMec..26...63C, 1983A&A...124...50C, ELP2000-82B}.
 
 Since v0.15.0 you can install extra data files which allow access to the
-numerical integration runs \indexterm{DE430} and \indexterm{DE431}
-from NASA's Jet Propulsion Laboratory (JPL)~\citep{DE43x}. The data files have to be
-downloaded separately, and most users will likely not need them. DE430
-provides highly accurate data for the years $+1550\ldots+2650$, while
-DE431 covers years $-13000\ldots+17000$, which allows e.g.\ 
+numerical integration runs \indexterm{DE430} and \indexterm{DE431} \citep{DE43x},
+and meanwhile also \newFeature{V0.21.2} \indexterm{DE440} and \indexterm{DE441} \citep{DE44x},
+from NASA's Jet Propulsion Laboratory (JPL). The data files have to be
+downloaded separately, and most users will likely not need them. DE430 and DE440
+provide highly accurate data for the years $+1550\ldots+2650$, while
+DE431 and DE441 covers years $-13000\ldots+17000$, which allows e.g.\ 
 archaeoastronomical research on Mesolithic landscapes. Outside these
 year ranges, positional computation falls back to VSOP87.
 
@@ -287,8 +288,10 @@ JPL\footnote{\url{ftp://ssd.jpl.nasa.gov/pub/eph/planets/Linux/}. (Also
 \noindent\begin{tabular}{lllr}
 \toprule
 \emph{Ephemeris}&\emph{Filename}& \emph{MD5 hash}& \emph{Size}\\\midrule
-DE430& \file{linux\_p1550p2650.430} &\texttt{707c4262533d52d59abaaaa5e69c5738}& 97.5\,MB\\
-DE431& \file{lnxm13000p17000.431}   &\texttt{fad0f432ae18c330f9e14915fbf8960a}& 2.59\,GB\\\bottomrule
+DE430& \file{linux\_p1550p2650.430}  &\texttt{707c4262533d52d59abaaaa5e69c5738}& 97.5\,MB\\
+DE431& \file{lnxm13000p17000.431}    &\texttt{fad0f432ae18c330f9e14915fbf8960a}& 2.59\,GB\\
+DE440& \file{linux\_p1550p2650.440}  &\texttt{9dc8a9cefd32b0090002407847e718ba}& 97.5\,MB\\
+DE441& \file{linux\_m13000p17000.441}&\texttt{4e3b924463d17b68ec9c4a18240300cd}& 2.59\,GB\\\bottomrule
 \end{tabular}
 
 
@@ -301,14 +304,18 @@ if you have them already stored elsewhere, you may add the path to
 [astro]
 de430_path = C:/Astrodata/JPL_DE43x/linux_p1550p2650.430
 de431_path = C:/Astrodata/JPL_DE43x/lnxm13000p17000.431
+de440_path = C:/Astrodata/JPL_DE44x/linux_p1550p2650.440
+de441_path = C:/Astrodata/JPL_DE44x/linux_m13000p17000.441
 \end{configfile}
 
 For fast access avoid storing them on a network drive or USB pendrive!
 
 You activate use of either ephemeris in the \emph{Configuration} panel
-(\key{F2}). If you activate both, preference will be given for DE430
-if the simulation time allows it. Outside of the valid times, VSOP87
-will always be used.
+(\key{F2}). If you activate more than one, preference will be given
+for DE440 over DE441 if the simulation time allows it. Only if DE44x
+are not enabled, DE430 is given preference over DE431 if simulation
+time allows it.  Outside of the valid times, VSOP87 will always be
+used.
 
 \paragraph{Acknowledgement}
 The optional use of DE430/431 has been supported by the ESA Summer of

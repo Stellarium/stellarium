@@ -29,6 +29,8 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include "gust86.h"
 #include "de431.hpp"
 #include "de430.hpp"
+#include "de441.hpp"
+#include "de440.hpp"
 #include "pluto.h"
 
 #define EPHEM_MERCURY_ID  0
@@ -68,6 +70,16 @@ void EphemWrapper::init_de431(const char* filepath)
 	InitDE431(filepath);
 }
 
+void EphemWrapper::init_de440(const char* filepath)
+{
+	InitDE440(filepath);
+}
+
+void EphemWrapper::init_de441(const char* filepath)
+{
+	InitDE441(filepath);
+}
+
 bool EphemWrapper::jd_fits_de431(const double jd)
 {
 	//Correct limits found via jpl_get_double(). Limits hardcoded to avoid calls each time.
@@ -82,6 +94,20 @@ bool EphemWrapper::jd_fits_de430(const double jd)
 	return ((jd > 2287184.5) && (jd < 2688976.5));
 }
 
+bool EphemWrapper::jd_fits_de441(const double jd)
+{
+	//Correct limits found via jpl_get_double(). Limits hardcoded to avoid calls each time.
+	//return !(jd < -3027215.5 || jd > 7930192.5);
+	//This limits inside those where sun can jump between ecliptic of date and ecliptic2000.
+	// We lose a month in -13000 and a few months in +17000, this should not matter.
+	return ((jd > -3027188.25 ) && (jd < 7930056.87916));
+}
+
+bool EphemWrapper::jd_fits_de440(const double jd)
+{
+	return ((jd > 2287184.5) && (jd < 2688976.5));
+}
+
 bool EphemWrapper::use_de430(const double jd)
 {
 	return StelApp::getInstance().getCore()->de430IsActive() && EphemWrapper::jd_fits_de430(jd);
@@ -90,6 +116,16 @@ bool EphemWrapper::use_de430(const double jd)
 bool EphemWrapper::use_de431(const double jd)
 {
 	return StelApp::getInstance().getCore()->de431IsActive() && EphemWrapper::jd_fits_de431(jd);
+}
+
+bool EphemWrapper::use_de440(const double jd)
+{
+	return StelApp::getInstance().getCore()->de440IsActive() && EphemWrapper::jd_fits_de440(jd);
+}
+
+bool EphemWrapper::use_de441(const double jd)
+{
+	return StelApp::getInstance().getCore()->de441IsActive() && EphemWrapper::jd_fits_de441(jd);
 }
 
 // planet_id is ONLY one of the #defined values 0..8 above.
@@ -103,7 +139,15 @@ void get_planet_helio_coordsv(const double jd, double xyz[3], double xyzdot[3], 
 		return;
 	}
 
-	if(EphemWrapper::use_de430(jd))
+	if(EphemWrapper::use_de440(jd))
+	{
+		deOk=GetDe440Coor(jd, planet_id + 1, xyz6);
+	}
+	else if(EphemWrapper::use_de441(jd))
+	{
+		deOk=GetDe441Coor(jd, planet_id + 1, xyz6);
+	}
+	else if(EphemWrapper::use_de430(jd))
 	{
 		deOk=GetDe430Coor(jd, planet_id + 1, xyz6);
 	}
@@ -131,7 +175,15 @@ void get_planet_helio_osculating_coordsv(double jd0, double jd, double xyz[3], d
 		return;
 	}
 
-	if(EphemWrapper::use_de430(jd))
+	if(EphemWrapper::use_de440(jd))
+	{
+		deOk=GetDe440Coor(jd, planet_id + 1, xyz6);
+	}
+	else if(EphemWrapper::use_de441(jd))
+	{
+		deOk=GetDe441Coor(jd, planet_id + 1, xyz6);
+	}
+	else if(EphemWrapper::use_de430(jd))
 	{
 		deOk=GetDe430Coor(jd, planet_id + 1, xyz6);
 	}
@@ -163,7 +215,15 @@ void get_pluto_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void* un
 		return;
 	}
 
-	if(EphemWrapper::use_de430(jd))
+	if(EphemWrapper::use_de440(jd))
+	{
+		deOk=GetDe440Coor(jd, EPHEM_JPL_PLUTO_ID, xyz6);
+	}
+	else if(EphemWrapper::use_de441(jd))
+	{
+		deOk=GetDe441Coor(jd, EPHEM_JPL_PLUTO_ID, xyz6);
+	}
+	else if(EphemWrapper::use_de430(jd))
 	{
 		deOk=GetDe430Coor(jd, EPHEM_JPL_PLUTO_ID, xyz6);
 	}
@@ -215,7 +275,15 @@ void get_earth_helio_coordsv(const double jd,double xyz[3], double xyzdot[3], vo
 		return;
 	}
 
-	if(EphemWrapper::use_de430(jd))
+	if(EphemWrapper::use_de440(jd))
+	{
+		deOk=GetDe440Coor(jd, EPHEM_JPL_EARTH_ID, xyz6);
+	}
+	else if(EphemWrapper::use_de441(jd))
+	{
+		deOk=GetDe441Coor(jd, EPHEM_JPL_EARTH_ID, xyz6);
+	}
+	else if(EphemWrapper::use_de430(jd))
 	{
 		deOk=GetDe430Coor(jd, EPHEM_JPL_EARTH_ID, xyz6);
 	}
@@ -322,7 +390,11 @@ void get_lunar_parent_coordsv(double jde, double xyz[3], double xyzdot[3], void*
 	Q_UNUSED(unused);
 	double xyz6[6];
 	bool deOk=false;
-	if(EphemWrapper::use_de430(jde))
+	if(EphemWrapper::use_de440(jde))
+		deOk=GetDe440Coor(jde, EPHEM_JPL_MOON_ID, xyz6, EPHEM_JPL_EARTH_ID);
+	else if(EphemWrapper::use_de441(jde))
+		deOk=GetDe441Coor(jde, EPHEM_JPL_MOON_ID, xyz6, EPHEM_JPL_EARTH_ID);
+	else if(EphemWrapper::use_de430(jde))
 		deOk=GetDe430Coor(jde, EPHEM_JPL_MOON_ID, xyz6, EPHEM_JPL_EARTH_ID);
 	else if(EphemWrapper::use_de431(jde))
 		deOk=GetDe431Coor(jde, EPHEM_JPL_MOON_ID, xyz6, EPHEM_JPL_EARTH_ID);
