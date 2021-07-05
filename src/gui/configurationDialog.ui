@@ -444,31 +444,7 @@
              </property>
              <item row="0" column="0">
               <layout class="QGridLayout" name="EphemerisGridLayout">
-               <item row="1" column="1">
-                <widget class="QLabel" name="de431label">
-                 <property name="text">
-                  <string>Not installed</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="1">
-                <widget class="QLabel" name="de430label">
-                 <property name="text">
-                  <string>Not installed</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QCheckBox" name="de431checkBox">
-                 <property name="toolTip">
-                  <string>DE431 provides position data for years -13000...+17000. For special applications only.</string>
-                 </property>
-                 <property name="text">
-                  <string>Use DE431 (long-time data)</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="0">
+               <item row="2" column="0">
                 <widget class="QCheckBox" name="de430checkBox">
                  <property name="toolTip">
                   <string>DE430 provides highest accuracy, only for years 1550...2650.</string>
@@ -478,13 +454,65 @@
                  </property>
                 </widget>
                </item>
-               <item row="2" column="0" colspan="2">
+               <item row="3" column="1">
+                <widget class="QLabel" name="de431label">
+                 <property name="text">
+                  <string>Not installed</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLabel" name="de430label">
+                 <property name="text">
+                  <string>Not installed</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QCheckBox" name="de431checkBox">
+                 <property name="toolTip">
+                  <string>DE431 provides position data for years -13000...+17000. For special applications only.</string>
+                 </property>
+                 <property name="text">
+                  <string>Use DE431 (long-time data)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QCheckBox" name="de441checkBox">
+                 <property name="text">
+                  <string>Use DE441 (long-time data)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0" colspan="2">
                 <widget class="QLabel" name="label_VSOP87used">
                  <property name="toolTip">
                   <string>Using VSOP87 is recommended for years -4000...+8000 only, but delivers useful positions outside this range.</string>
                  </property>
                  <property name="text">
                   <string>VSOP87/ELP2000-82B is used when these are not installed or not activated.</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QCheckBox" name="de440checkBox">
+                 <property name="text">
+                  <string>Use DE440 (high accuracy)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="de441label">
+                 <property name="text">
+                  <string>Not installed</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="de440label">
+                 <property name="text">
+                  <string>Not installed</string>
                  </property>
                 </widget>
                </item>

@@ -192,6 +192,8 @@ void ConfigurationDialog::createDialogContent()
 
 	connect(ui->de430checkBox, SIGNAL(clicked()), this, SLOT(de430ButtonClicked()));
 	connect(ui->de431checkBox, SIGNAL(clicked()), this, SLOT(de431ButtonClicked()));
+	connect(ui->de440checkBox, SIGNAL(clicked()), this, SLOT(de440ButtonClicked()));
+	connect(ui->de441checkBox, SIGNAL(clicked()), this, SLOT(de441ButtonClicked()));
 	resetEphemControls();
 
 	connectBoolProperty(ui->nutationCheckBox, "StelCore.flagUseNutation");
@@ -1619,12 +1621,38 @@ void ConfigurationDialog::de431ButtonClicked()
 	resetEphemControls(); //refresh labels
 }
 
+void ConfigurationDialog::de440ButtonClicked()
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+
+	StelApp::getInstance().getCore()->setDe440Active(!StelApp::getInstance().getCore()->de440IsActive());
+	conf->setValue("astro/flag_use_de440", StelApp::getInstance().getCore()->de440IsActive());
+
+	resetEphemControls(); //refresh labels
+}
+
+void ConfigurationDialog::de441ButtonClicked()
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+
+	StelApp::getInstance().getCore()->setDe441Active(!StelApp::getInstance().getCore()->de441IsActive());
+	conf->setValue("astro/flag_use_de441", StelApp::getInstance().getCore()->de441IsActive());
+
+	resetEphemControls(); //refresh labels
+}
+
 void ConfigurationDialog::resetEphemControls()
 {
 	ui->de430checkBox->setEnabled(StelApp::getInstance().getCore()->de430IsAvailable());
 	ui->de431checkBox->setEnabled(StelApp::getInstance().getCore()->de431IsAvailable());
 	ui->de430checkBox->setChecked(StelApp::getInstance().getCore()->de430IsActive());
 	ui->de431checkBox->setChecked(StelApp::getInstance().getCore()->de431IsActive());
+	ui->de440checkBox->setEnabled(StelApp::getInstance().getCore()->de440IsAvailable());
+	ui->de441checkBox->setEnabled(StelApp::getInstance().getCore()->de441IsAvailable());
+	ui->de440checkBox->setChecked(StelApp::getInstance().getCore()->de440IsActive());
+	ui->de441checkBox->setChecked(StelApp::getInstance().getCore()->de441IsActive());
 
 	if(StelApp::getInstance().getCore()->de430IsActive())
 		ui->de430label->setText("1550..2650");
@@ -1644,6 +1672,25 @@ void ConfigurationDialog::resetEphemControls()
 		else
 			ui->de431label->setText(q_("Not Available"));
 	}
+	if(StelApp::getInstance().getCore()->de440IsActive())
+		ui->de440label->setText("1550..2650");
+	else
+	{
+		if (StelApp::getInstance().getCore()->de440IsAvailable())
+			ui->de440label->setText(q_("Available"));
+		else
+			ui->de440label->setText(q_("Not Available"));
+	}
+	if(StelApp::getInstance().getCore()->de441IsActive())
+		ui->de441label->setText("-13000..17000");
+	else
+	{
+		if (StelApp::getInstance().getCore()->de441IsAvailable())
+			ui->de441label->setText(q_("Available"));
+		else
+			ui->de441label->setText(q_("Not Available"));
+	}
+
 }
 
 void ConfigurationDialog::updateSelectedInfoCheckBoxes()
