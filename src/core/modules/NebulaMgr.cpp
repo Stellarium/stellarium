@@ -778,10 +778,10 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 		loadDSOOutlines(dsoOutlinesPath);
 }
 
-// Look for a nebulae by XYZ coords
+// Look for a nebula by XYZ coords
 NebulaP NebulaMgr::search(const Vec3d& apos)
 {
-	Vec3d pos = apos;
+	Vec3d pos(apos);
 	pos.normalize();
 	NebulaP plusProche;
 	double anglePlusProche=0.0;
@@ -793,7 +793,7 @@ NebulaP NebulaMgr::search(const Vec3d& apos)
 			plusProche=n;
 		}
 	}
-	if (anglePlusProche>0.999)
+	if (anglePlusProche>0.999) // object within ~2.5 degrees
 	{
 		return plusProche;
 	}
