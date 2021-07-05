@@ -282,7 +282,7 @@ void SatellitesDialog::askSatMarkerColor()
 	Satellites* SatellitesMgr = GETSTELMODULE(Satellites);
 	Q_ASSERT(SatellitesMgr);
 
-    QColor c = QColorDialog::getColor(buttonMarkerColor, &StelMainView::getInstance(), "");
+	QColor c = QColorDialog::getColor(buttonMarkerColor, &StelMainView::getInstance(), "");
 	if (c.isValid())
 	{
 		Vec3f vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -310,7 +310,7 @@ void SatellitesDialog::askSatOrbitColor()
 	Satellites* SatellitesMgr = GETSTELMODULE(Satellites);
 	Q_ASSERT(SatellitesMgr);
 
-    QColor c = QColorDialog::getColor(buttonOrbitColor, &StelMainView::getInstance(), "");
+	QColor c = QColorDialog::getColor(buttonOrbitColor, &StelMainView::getInstance(), "");
 	if (c.isValid())
 	{
 		Vec3f vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -338,7 +338,7 @@ void SatellitesDialog::askSatInfoColor()
 	Satellites* SatellitesMgr = GETSTELMODULE(Satellites);
 	Q_ASSERT(SatellitesMgr);
 
-    QColor c = QColorDialog::getColor(buttonInfoColor, &StelMainView::getInstance(), "");
+	QColor c = QColorDialog::getColor(buttonInfoColor, &StelMainView::getInstance(), "");
 	if (c.isValid())
 	{
 		Vec3f vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -474,6 +474,9 @@ void SatellitesDialog::updateSatelliteData()
 		ui->tleSecondLineEdit->setText(QString());
 		ui->stdMagnitudeLineEdit->setText(QString());
 		ui->rcsLineEdit->setText(QString());
+		ui->perigeeLineEdit->setText(QString());
+		ui->apogeeLineEdit->setText(QString());
+		ui->periodLineEdit->setText(QString());
 		ui->labelTleEpochData->setText(QString());
 
 		// get color of first selected item and test against all other selections
@@ -538,6 +541,18 @@ void SatellitesDialog::updateSatelliteData()
 		QString rcsString = dash;
 		if (rcs > 0.f)
 			rcsString = QString::number(rcs, 'f', 3);
+		int perigee = qRound(index.data(SatPerigeeRole).toFloat());
+		QString perigeeString = dash;
+		if (perigee>0)
+			perigeeString = QString::number(perigee);
+		int apogee = qRound(index.data(SatApogeeRole).toFloat());
+		QString apogeeString = dash;
+		if (apogee>0)
+			apogeeString = QString::number(apogee);
+		float period = index.data(SatPeriodRole).toFloat();
+		QString periodString = dash;
+		if (period>0.f)
+			periodString = QString::number(period, 'f', 2);
 		ui->nameEdit->setText(index.data(Qt::DisplayRole).toString());
 		ui->noradNumberEdit->setText(index.data(Qt::UserRole).toString());
 		ui->cosparNumberEdit->setText(index.data(SatCosparIDRole).toString());
@@ -545,6 +560,9 @@ void SatellitesDialog::updateSatelliteData()
 		ui->descriptionTextEdit->setText(index.data(SatDescriptionRole).toString());
 		ui->stdMagnitudeLineEdit->setText(stdMagString);
 		ui->rcsLineEdit->setText(rcsString);
+		ui->perigeeLineEdit->setText(perigeeString);
+		ui->apogeeLineEdit->setText(apogeeString);
+		ui->periodLineEdit->setText(periodString);
 		ui->tleFirstLineEdit->setText(index.data(FirstLineRole).toString());
 		ui->tleFirstLineEdit->setCursorPosition(0);
 		ui->tleSecondLineEdit->setText(index.data(SecondLineRole).toString());
@@ -639,7 +657,7 @@ void SatellitesDialog::updateSatelliteData()
 	// Nice list of checkable, translated groups that allows adding new groups
 	ui->groupsListWidget->blockSignals(true);
 	ui->groupsListWidget->clear();
-	for (const auto& group : globalGroups)
+	for (const auto& group : qAsConst(globalGroups))
 	{
 		QListWidgetItem* item = new QListWidgetItem(q_(group),
 							    ui->groupsListWidget);
@@ -1221,6 +1239,12 @@ void SatellitesDialog::setRightSideToROMode()
 	ui->stdMagnitudeLineEdit->setText(QString());
 	ui->rcsLineEdit->setEnabled(false);
 	ui->rcsLineEdit->setText(QString());
+	ui->perigeeLineEdit->setEnabled(false);
+	ui->perigeeLineEdit->setText(QString());
+	ui->apogeeLineEdit->setEnabled(false);
+	ui->apogeeLineEdit->setText(QString());
+	ui->periodLineEdit->setEnabled(false);
+	ui->periodLineEdit->setText(QString());
 
 	// set default
 	buttonMarkerColor = QColor(QColor::fromRgbF(0.4, 0.4, 0.4));
@@ -1247,6 +1271,9 @@ void SatellitesDialog::setRightSideToRWMode()
 	ui->stdMagnitudeLineEdit->setEnabled(true);
 	ui->rcsLineEdit->setEnabled(true);
 	ui->removeSatellitesButton->setEnabled(true);
+	ui->perigeeLineEdit->setEnabled(true);
+	ui->apogeeLineEdit->setEnabled(true);
+	ui->periodLineEdit->setEnabled(true);
 }
 
 void SatellitesDialog::handleGroupChanges(QListWidgetItem* item)

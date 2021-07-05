@@ -224,7 +224,7 @@ void Satellites::translateData()
 	for (const auto& sat : qAsConst(satellites))
 	{
 		if (sat->initialized)
-			sat->recomputeEpochTLE();
+			sat->recomputeSatData();
 	}
 }
 
