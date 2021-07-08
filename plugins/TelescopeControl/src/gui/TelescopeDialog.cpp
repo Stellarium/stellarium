@@ -263,7 +263,7 @@ void TelescopeDialog::setAboutText()
 	aboutPage += "<h2>" + q_("Telescope Control plug-in") + "</h2><table width=\"90%\">";
 	aboutPage += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + TELESCOPE_CONTROL_PLUGIN_VERSION + "</td></tr>";
 	aboutPage += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + TELESCOPE_CONTROL_PLUGIN_LICENSE + "</td></tr>";
-	aboutPage += "<tr><td rowspan=6><strong>" + q_("Authors") + "</strong></td><td>Johannes Gajdosik</td></td>";
+	aboutPage += "<tr><td rowspan=5><strong>" + q_("Authors") + "</strong></td><td>Johannes Gajdosik</td></td>";
 	aboutPage += "<tr><td>Bogdan Marinov &lt;bogdan.marinov84@gmail.com&gt; (" + q_("Plug-in and GUI programming") + ")</td></tr>";
 	aboutPage += "<tr><td>Gion Kunz &lt;gion.kunz@gmail.com&gt; (" + q_("ASCOM Telescope Client") + ")</td></tr>";
 	aboutPage += "<tr><td>Petr Kubánek (" + q_("RTS2 support") + ")</td></tr>";
@@ -281,16 +281,8 @@ void TelescopeDialog::setAboutText()
 	aboutPage += "<li>" + q_("the TelescopeServerNexStar telescope server core code (originally licensed under the LGPL, based on TelescopeServerLx200) by <b>Michael Heinz</b>.") + "</li>";
 	aboutPage += "<li>" + q_("INDI by <b>Alessandro Siniscalchi</b>.") + "</li></ul>";
 
-	aboutPage += "<h3>" + q_("Links") + "</h3>";
-	aboutPage += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg("Telescope Control plug-in") + "</p>";
-	aboutPage += "<p><ul>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	aboutPage += "<li>" + q_("If you have a question, you can {get an answer here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://groups.google.com/forum/#!forum/stellarium\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	aboutPage += "<li>" + q_("Bug reports and feature requests can be made {here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://github.com/Stellarium/stellarium/issues\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	aboutPage += "<li>" + q_("If you want to read full information about this plugin and its history, you can {get info here}.").toHtmlEscaped().replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Telescope_Control_plug\">\\1</a>") + "</li>";
-	aboutPage += "</ul></p></body></html>";
+	aboutPage += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Telescope Control plugin");
+	aboutPage += "</body></html>";
 	
 	QString helpPage = "<html><head></head><body>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.

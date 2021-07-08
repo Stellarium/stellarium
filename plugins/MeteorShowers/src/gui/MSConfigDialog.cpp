@@ -22,6 +22,7 @@
 #include "MSConfigDialog.hpp"
 #include "StelApp.hpp"
 #include "StelGui.hpp"
+#include "StelModuleMgr.hpp"
 #include "ui_MSConfigDialog.h"
 #include "StelMainView.hpp"
 MSConfigDialog::MSConfigDialog(MeteorShowersMgr* mgr)
@@ -324,17 +325,10 @@ void MSConfigDialog::setAboutHtml()
 	"<li>" + QString(q_("%1Meteor shower%2 - article in Wikipedia").arg("<a href=\"https://en.wikipedia.org/wiki/Meteor_Showers\">")).arg("</a>") + "</li>"
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 	"<li>" + QString(q_("%1International Meteor Organization%2").arg("<a href=\"http://www.imo.net/\">")).arg("</a>") + "</li>"
-	"</ul>"
-	"<h3>" + q_("Links") + "</h3>"
-	"<p>" + QString(q_("Support is provided via the Github website. Be sure to put \"%1\" in the subject when posting.")).arg("Meteor Showers Plugin") + "</p>";
-	html += "<p><ul>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you have a question, you can {get an answer here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://groups.google.com/forum/#!forum/stellarium\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("Bug reports and feature requests can be made {here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://github.com/Stellarium/stellarium/issues\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you want to read full information about this plugin and its history, you can {get info here}.").toHtmlEscaped().replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Meteor_Showers_plugin\">\\1</a>") + "</li>";
-	html += "</ul></p></body></html>";
+	"</ul>";
+
+	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Meteor Showers plugin");
+	html += "</body></html>";
 
 	m_ui->about->setHtml(html);
 	// TRANSLATORS: duration

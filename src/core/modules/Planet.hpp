@@ -22,6 +22,7 @@
 
 #include "StelObject.hpp"
 #include "StelProjector.hpp"
+#include "StelPropertyMgr.hpp"
 #include "VecMath.hpp"
 #include "GeomMath.hpp"
 #include "StelFader.hpp"
@@ -186,6 +187,16 @@ public:
 	//! - scale
 	//! - eclipse-obscuration (for Sun only)
 	//! - eclipse-magnitude (for Sun only)
+	//! - central_l (on Earth only; degrees)
+	//! - central_b (on Earth only; degrees)
+	//! - pa_axis (on Earth only; degrees)
+	//! - subsolar_l (on Earth only; degrees)
+	//! - subsolar_b (on Earth only; degrees)
+	//! - libration_l (on Earth for Moon only; degrees)
+	//! - libration_b (on Earth for Moon only; degrees)
+	//! - colongitude (on Earth for Moon only; degrees)
+	//! - penumbral-eclipse-magnitude (on Earth for Moon only)
+	//! - umbral-eclipse-magnitude (on Earth for Moon only)
 	virtual QVariantMap getInfoMap(const StelCore *core) const  Q_DECL_OVERRIDE;
 	virtual double getCloseViewFov(const StelCore* core) const Q_DECL_OVERRIDE;
 	virtual double getSatellitesFov(const StelCore* core) const Q_DECL_OVERRIDE;
@@ -198,6 +209,8 @@ public:
 	virtual Vec3d getJ2000EquatorialPos(const StelCore *core) const Q_DECL_OVERRIDE;
 	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE;
 	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
+	QString getNativeName(void) const { return nativeName; }
+	QString getNativeNameI18n(void) const { return nativeNameMeaningI18n; }
 	QString getCommonEnglishName(void) const {return englishName;}
 	QString getCommonNameI18n(void) const {return nameI18;}
 	//! Get angular semidiameter, degrees. If planet display is artificially enlarged (e.g. Moon upscale), value will also be increased.
@@ -244,6 +257,7 @@ public:
 	Orbit* getOrbit() const {return orbitPtr;}
 
 	void setNativeName(QString planet) { nativeName = planet; }
+	void setNativeNameMeaning(QString planet) { nativeNameMeaning = planet; }
 
 	//! set the IAU moon number (designation of the moon), if any.
 	void setIAUMoonNumber(QString designation);
@@ -397,10 +411,6 @@ public:
 	bool flagNativeName;
 	void setFlagNativeName(bool b) { flagNativeName = b; }
 	bool getFlagNativeName(void) const { return flagNativeName; }
-
-	bool flagTranslatedName;
-	void setFlagTranslatedName(bool b) { flagTranslatedName = b; }
-	bool getFlagTranslatedName(void) const { return flagTranslatedName; }
 
 	///////////////////////////////////////////////////////////////////////////
 	// DEPRECATED
@@ -559,7 +569,7 @@ protected:
 	Vec3f getCurrentOrbitColor() const;
 	
 	// Return the information string "ready to print" :)
-	QString getSkyLabel(const StelCore* core) const;
+	QString getPlanetLabel() const;
 
 	// Draw the 3d model. Call the proper functions if there are rings etc..
 	void draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenSz, bool drawOnlyRing=false);
@@ -588,6 +598,8 @@ protected:
 	QString englishName;             // english planet name
 	QString nameI18;                 // International translated name
 	QString nativeName;              // Can be used in a skyculture
+	QString nativeNameMeaning;       // Can be used in a skyculture
+	QString nativeNameMeaningI18n;   // Can be used in a skyculture
 	QString texMapName;              // Texture file path
 	QString normalMapName;           // Texture file path
 	RotationElements re;             // Rotation and axis orientation parameters
@@ -651,8 +663,7 @@ protected:
 	bool atmosphere;                 // Does the planet have an atmosphere?
 	bool halo;                       // Does the planet have a halo?
 	PlanetType pType;                // Type of body
-
-    bool multisamplingEnabled_;
+	bool multisamplingEnabled_;
 
 	static ApparentMagnitudeAlgorithm vMagAlgorithm;
 
@@ -669,9 +680,11 @@ protected:
 	static int orbitsThickness;
 
 private:
+	class StelPropertyMgr* propMgr;
 	QString iauMoonNumber;
 
 	const QString getContextString() const;
+	QPair<double, double> getLunarEclipseMagnitudes() const;
 
 	// Shader-related variables
 	struct PlanetShaderVars {

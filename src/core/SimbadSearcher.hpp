@@ -59,7 +59,7 @@ public:
 	//! Get a I18n string describing the current status. It can be used e.g for reporting in widgets.
 	QString getCurrentStatusString() const;
 
-	//! Get the error descrition string. Return empty string if no error occured.
+	//! Get the error description string. Return empty string if no error occured.
 	QString getErrorString() const {return errorString;}
 
 	//! Explicitly delete the internal QNetworkReply. Must not be called from a QNetworkReply signal.

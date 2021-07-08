@@ -216,7 +216,6 @@ Planet::Planet(const QString& englishName,
 	       bool hasHalo,
 	       const QString& pTypeStr)
 	: flagNativeName(true),
-	  flagTranslatedName(true),
 	  deltaJDE(StelCore::JD_SECOND),
 	  deltaOrbitJDE(0.0),
 	  closeOrbit(acloseOrbit),
@@ -301,6 +300,7 @@ Planet::Planet(const QString& englishName,
 	{
 		deltaJDE = 0.001*StelCore::JD_SECOND;
 	}
+	propMgr = StelApp::getInstance().getStelPropertyManager();
 }
 
 // called in SolarSystem::init() before first planet is created. May initialize static variables.
@@ -322,20 +322,8 @@ Planet::~Planet()
 
 void Planet::translateName(const StelTranslator& trans)
 {
-	if (!nativeName.isEmpty() && getFlagNativeName())
-	{
-		if (getFlagTranslatedName())
-			nameI18 = trans.qtranslate(nativeName);
-		else
-			nameI18 = nativeName;
-	}
-	else
-	{
-		if (getFlagTranslatedName())
-			nameI18 = trans.qtranslate(englishName, getContextString());
-		else
-			nameI18 = englishName;
-	}
+	nameI18 = trans.qtranslate(englishName, getContextString());
+	nativeNameMeaningI18n = (!nativeNameMeaning.isEmpty() ? trans.qtranslate(nativeNameMeaning) : "");
 }
 
 void Planet::setIAUMoonNumber(QString designation)
@@ -401,20 +389,56 @@ const QString Planet::getContextString() const
 	return context;
 }
 
+QString Planet::getPlanetLabel() const
+{
+	QString str;
+	QTextStream oss(&str);
+	if (englishName=="Pluto") // We must prepend minor planet number here. Actually Dwarf Planet Pluto is still a "Planet" object in Stellarium...
+		oss << QString("(134340) ");
+	switch (propMgr->getStelPropertyValue("ConstellationMgr.constellationDisplayStyle").toInt())
+	{
+		case 1: // constellationsNative
+		{
+			if (getFlagNativeName())
+				oss << (nativeName.isEmpty() ? getNameI18n() : QString("%1 [%2]").arg(getNativeName(), getNameI18n()));
+			else
+				oss << getNameI18n();
+			break;
+		}
+		case 2: // constellationsTranslated
+		{
+			if (getFlagNativeName())
+				oss << (nativeNameMeaningI18n.isEmpty() ? getNameI18n() : QString("%1 [%2]").arg(getNativeNameI18n(), getNameI18n()));
+			else
+				oss << getNameI18n();
+			break;
+		}
+		case 3: // constellationsEnglish
+		{
+			if (getFlagNativeName())
+				oss << (nativeNameMeaning.isEmpty() ? getEnglishName() : QString("%1 [%2]").arg(nativeNameMeaning, getEnglishName()));
+			else
+				oss << getEnglishName();
+			break;
+		}
+		default:
+			oss << getNameI18n();
+			break;
+	}
+	oss.setRealNumberNotation(QTextStream::FixedNotation);
+	oss.setRealNumberPrecision(1);
+	if (sphereScale != 1.)
+		oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
+
+	return str;
+}
+
 QString Planet::getInfoStringName(const StelCore *core, const InfoStringGroup& flags) const
 {
 	Q_UNUSED(core) Q_UNUSED(flags)
 	QString str;
 	QTextStream oss(&str);
-	oss << "<h2>";
-	if (englishName=="Pluto") // We must prepend minor planet number here. Actually Dwarf Planet Pluto is still a "Planet" object in Stellarium...
-		oss << QString("(134340) ");
-	oss << getNameI18n();  // UI translation can differ from sky translation
-	oss.setRealNumberNotation(QTextStream::FixedNotation);
-	oss.setRealNumberPrecision(1);
-	if (sphereScale != 1.)
-		oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
-	oss << "</h2>";
+	oss << "<h2>" << getPlanetLabel() << "</h2>";
 	return str;
 }
 
@@ -1191,50 +1215,15 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 		if (englishName == "Moon" && onEarth)
 		{
 			// Show magnitude of lunar eclipse
-			// Use geocentric coordinates
-			StelCore* core1 = StelApp::getInstance().getCore();
-			const bool saveTopocentric = core1->getUseTopocentricCoordinates();
-			core1->setUseTopocentricCoordinates(false);
-			core1->update(0);
-
-			double raMoon, deMoon, raSun, deSun;
-			StelUtils::rectToSphe(&raMoon, &deMoon, getEquinoxEquatorialPos(core1));
-			StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core1));
-
-			// R.A./Dec of Earth's shadow
-			const double raShadow = StelUtils::fmodpos(raSun + M_PI, 2.*M_PI);
-			const double deShadow = -(deSun);
-			const double raDiff = StelUtils::fmodpos(raMoon - raShadow, 2.*M_PI);
-
-			if (raDiff < 3.*M_PI_180 || raDiff > 357.*M_PI_180)
+			QPair<double,double> magnitudes = getLunarEclipseMagnitudes();
+			if (magnitudes.first > 1.e-3)
 			{
-				// Moon's semi-diameter
-				const double mSD=atan(getEquatorialRadius()/eclipticPos.length()) * M_180_PI*3600.; // arcsec
-				const QPair<Vec3d,Vec3d>shadowRadii=ssystem->getEarthShadowRadiiAtLunarDistance();
-				const double f1 = shadowRadii.second[0]; // radius of penumbra at the distance of the Moon
-				const double f2 = shadowRadii.first[0];  // radius of umbra at the distance of the Moon
-
-				double x = cos(deMoon) * sin(raDiff);
-				x *= 3600. * M_180_PI;
-				double y = cos(deShadow) * sin(deMoon) - sin(deShadow) * cos(deMoon) * cos(raDiff);
-				y *= 3600. * M_180_PI;
-				const double m = sqrt(x * x + y * y); // distance between lunar centre and shadow centre
-				const double L1 = f1 + mSD; // distance between center of the Moon and shadow at beginning and end of penumbral eclipse
-				const double L2 = f2 + mSD; // distance between center of the Moon and shadow at beginning and end of partial eclipse
-				const double pMag = (L1 - m) / (2. * mSD); // penumbral magnitude
-				const double uMag = (L2 - m) / (2. * mSD); // umbral magnitude
-
-				if (pMag > 1.e-3)
+				oss << QString("%1: %2%").arg(q_("Penumbral eclipse magnitude"), QString::number(magnitudes.first*100., 'f', 1)) << "<br />";
+				if (magnitudes.second > 1.e-3)
 				{
-					oss << QString("%1: %2%").arg(q_("Penumbral eclipse magnitude")).arg(QString::number(pMag*100., 'f', 1)) << "<br />";
-					if (uMag > 1.e-3)
-					{
-						oss << QString("%1: %2%").arg(q_("Umbral eclipse magnitude")).arg(QString::number(uMag*100., 'f', 1)) << "<br />";
-					}
+					oss << QString("%1: %2%").arg(q_("Umbral eclipse magnitude"), QString::number(magnitudes.second*100., 'f', 1)) << "<br />";
 				}
 			}
-			core1->setUseTopocentricCoordinates(saveTopocentric);
-			core1->update(0); // enforce update cache to avoid odd selection of Moon details!
 		}		
 
 		// Not sure if albedo is at all interesting?
@@ -1309,6 +1298,10 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 		map.insert("subsolar_l", -phys.second[2]*M_180_PI);
 		map.insert("subsolar_b", phys.second[1]*M_180_PI);
 		map.insert("colongitude", StelUtils::fmodpos(450.0+phys.second[2]*M_PI_180, 360.));
+
+		QPair<double,double> magnitudes = getLunarEclipseMagnitudes();
+		map.insert("penumbral-eclipse-magnitude", magnitudes.first);
+		map.insert("umbral-eclipse-magnitude", magnitudes.second);
 	}
 	else if (onEarth && (getEnglishName()!="Sun"))
 	{
@@ -1322,20 +1315,54 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 	return map;
 }
 
-
-//! Get sky label (sky translation)
-QString Planet::getSkyLabel(const StelCore*) const
+QPair<double,double> Planet::getLunarEclipseMagnitudes() const
 {
-	QString str;
-	QTextStream oss(&str);
-	oss.setRealNumberPrecision(4);
-	oss << getNameI18n();
+	QPair<double,double> magnitudes;
+	// Use geocentric coordinates
+	StelCore* core = StelApp::getInstance().getCore();
+	static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+	const bool saveTopocentric = core->getUseTopocentricCoordinates();
+	core->setUseTopocentricCoordinates(false);
+	core->update(0);
 
-	if (sphereScale != 1.)
+	double raMoon, deMoon, raSun, deSun;
+	StelUtils::rectToSphe(&raMoon, &deMoon, getEquinoxEquatorialPos(core));
+	StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
+
+	// R.A./Dec of Earth's shadow
+	const double raShadow = StelUtils::fmodpos(raSun + M_PI, 2.*M_PI);
+	const double deShadow = -(deSun);
+	const double raDiff = StelUtils::fmodpos(raMoon - raShadow, 2.*M_PI);
+
+	if (raDiff < 3.*M_PI_180 || raDiff > 357.*M_PI_180)
 	{
-		oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
+		// Moon's semi-diameter
+		const double mSD=atan(getEquatorialRadius()/eclipticPos.length()) * M_180_PI*3600.; // arcsec
+		const QPair<Vec3d,Vec3d>shadowRadii=ssystem->getEarthShadowRadiiAtLunarDistance();
+		const double f1 = shadowRadii.second[0]; // radius of penumbra at the distance of the Moon
+		const double f2 = shadowRadii.first[0];  // radius of umbra at the distance of the Moon
+
+		double x = cos(deMoon) * sin(raDiff);
+		x *= 3600. * M_180_PI;
+		double y = cos(deShadow) * sin(deMoon) - sin(deShadow) * cos(deMoon) * cos(raDiff);
+		y *= 3600. * M_180_PI;
+		const double m = sqrt(x * x + y * y); // distance between lunar centre and shadow centre
+		const double L1 = f1 + mSD; // distance between center of the Moon and shadow at beginning and end of penumbral eclipse
+		const double L2 = f2 + mSD; // distance between center of the Moon and shadow at beginning and end of partial eclipse
+		const double pMag = (L1 - m) / (2. * mSD); // penumbral magnitude
+		const double uMag = (L2 - m) / (2. * mSD); // umbral magnitude
+
+		magnitudes.first = pMag;
+		magnitudes.second = uMag;
 	}
-	return str;
+	else
+	{
+		magnitudes.first = 0.;
+		magnitudes.second = 0.;
+	}
+	core->setUseTopocentricCoordinates(saveTopocentric);
+	core->update(0); // enforce update cache to avoid odd selection of Moon details!
+	return magnitudes;
 }
 
 float Planet::getSelectPriority(const StelCore* core) const
@@ -2559,14 +2586,10 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 		// by putting here, only draw orbit if Planet is visible for clarity
 		drawOrbit(core);  // TODO - fade in here also...
 
-		if (flagLabels && ang_dist>0.25f && maxMagLabels>getVMagnitude(core))
-		{
+		if (flagLabels && ang_dist>0.25f && maxMagLabels>getVMagnitudeWithExtinction(core))
 			labelsFader=true;
-		}
 		else
-		{
 			labelsFader=false;
-		}
 		drawHints(core, planetNameFont);
 
 		draw3dModel(core,transfo,static_cast<float>(screenSz));
@@ -4071,7 +4094,7 @@ void Planet::drawHints(const StelCore* core, const QFont& planetNameFont)
 	// Draw nameI18 + scaling if it's not == 1.
 	float tmp = (hintFader.getInterstate()<=0.f ? 7.f : 10.f) + static_cast<float>(getAngularSize(core)*M_PI/180.)*prj->getPixelPerRadAtCenter()/1.44f; // Shift for nameI18 printing
 	sPainter.setColor(labelColor,labelsFader.getInterstate());
-	sPainter.drawText(static_cast<float>(screenPos[0]),static_cast<float>(screenPos[1]), getSkyLabel(core), 0, tmp, tmp, false);
+	sPainter.drawText(static_cast<float>(screenPos[0]),static_cast<float>(screenPos[1]), getPlanetLabel(), 0, tmp, tmp, false);
 
 	// hint disappears smoothly on close view
 	if (hintFader.getInterstate()<=0)

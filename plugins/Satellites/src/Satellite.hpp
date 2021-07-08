@@ -54,6 +54,9 @@ enum SatelliteDataRole {
 	SatDescriptionRole,
 	SatStdMagnitudeRole,
 	SatRCSRole,
+	SatPerigeeRole,
+	SatApogeeRole,
+	SatPeriodRole,
 	SatTLEEpochRole,
 	SatFlagsRole,
 	SatGroupsRole,
@@ -71,11 +74,11 @@ enum SatFlag
 {
 	SatNoFlags		= 0x0000,
 	SatDisplayed		= 0x0001,
-	SatNotDisplayed	= 0x0002,
+	SatNotDisplayed		= 0x0002,
 	SatUser			= 0x0004,
-	SatOrbit			= 0x0008,
+	SatOrbit		= 0x0008,
 	SatNew			= 0x0010,
-	SatError			= 0x0020,
+	SatError		= 0x0020,
 	SatSmallSize		= 0x0040,
 	SatMediumSize		= 0x0080,
 	SatLargeSize		= 0x0100,
@@ -223,7 +226,7 @@ public:
 	//! Get operational status of satellite
 	QString getOperationalStatus() const;
 
-	void recomputeEpochTLE();
+	void recomputeSatData();
 
 private:
 	//draw orbits methods
@@ -232,8 +235,7 @@ private:
 	//! returns 0 - 1.0 for the DRAWORBIT_FADE_NUMBER segments at
 	//! each end of an orbit, with 1 in the middle.
 	float calculateOrbitSegmentIntensity(int segNum);
-	Vec2d calculatePerigeeApogeeFromLine2(QString tle) const;
-	Vec2d getEccentricityInclinationFromLine2(QString tle) const;
+	void calculateSatDataFromLine2(QString tle);
 	//! Parse TLE line to extract International Designator and launch year.
 	//! Sets #internationalDesignator and #jdLaunchYearJan1.
 	void parseInternationalDesignator(const QString& tle1);
@@ -275,6 +277,10 @@ private:
 	//! Standard visual magnitude of the satellite.
 	double stdMag;
 	double RCS;
+	double perigee;
+	double apogee;
+	double inclination;
+	double eccentricity;
 	//! Operational status code
 	int status;
 	//! Contains the J2000 position.

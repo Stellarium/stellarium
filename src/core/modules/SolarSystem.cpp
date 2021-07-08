@@ -82,7 +82,6 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	, flagShow(false)
 	, flagPointer(false)
 	, flagNativePlanetNames(false)
-	, flagTranslatedNames(false)
 	, flagIsolatedTrails(true)
 	, numberIsolatedTrails(0)
 	, maxTrailPoints(5000)
@@ -367,15 +366,19 @@ void SolarSystem::recreateTrails()
 void SolarSystem::updateSkyCulture(const QString& skyCultureDir)
 {
 	planetNativeNamesMap.clear();
+	planetNativeNamesMeaningMap.clear();
 
 	QString namesFile = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/planet_names.fab");
 
 	if (namesFile.isEmpty())
 	{
-		for (const auto& p : systemPlanets)
+		for (const auto& p : qAsConst(systemPlanets))
 		{
 			if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
+			{
 				p->setNativeName("");
+				p->setNativeNameMeaning("");
+			}
 		}
 		updateI18n();
 		return;
@@ -397,7 +400,7 @@ void SolarSystem::updateSkyCulture(const QString& skyCultureDir)
 	// which will be available in recRx.capturedTexts()
 	QRegExp recRx("^\\s*(\\w+)\\s+\"(.+)\"\\s+_[(]\"(.+)\"[)]\\n");
 
-	QString record, planetId, nativeName;
+	QString record, planetId, nativeName, nativeNameMeaning;
 
 	// keep track of how many records we processed.
 	int totalRecords=0;
@@ -421,18 +424,23 @@ void SolarSystem::updateSkyCulture(const QString& skyCultureDir)
 		else
 		{
 			planetId = recRx.cap(1).trimmed();
-			nativeName = recRx.cap(3).trimmed(); // Use translatable text
+			nativeName = recRx.cap(2).trimmed();
+			nativeNameMeaning = recRx.cap(3).trimmed();
 			planetNativeNamesMap[planetId] = nativeName;
+			planetNativeNamesMeaningMap[planetId] = nativeNameMeaning;
 			readOk++;
 		}
 	}
 	planetNamesFile.close();
 	qDebug() << "Loaded" << readOk << "/" << totalRecords << "native names of planets";
 
-	for (const auto& p : systemPlanets)
+	for (const auto& p : qAsConst(systemPlanets))
 	{
 		if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
+		{
 			p->setNativeName(planetNativeNamesMap[p->getEnglishName()]);
+			p->setNativeNameMeaning(planetNativeNamesMeaningMap[p->getEnglishName()]);
+		}
 	}
 
 	updateI18n();
@@ -1556,7 +1564,8 @@ StelObjectP SolarSystem::searchByNameI18n(const QString& planetNameI18) const
 {
 	for (const auto& p : systemPlanets)
 	{
-		if (p->getNameI18n().toUpper() == planetNameI18.toUpper())
+		QString nativeName = p->getNativeNameI18n().toUpper();
+		if (p->getNameI18n().toUpper() == planetNameI18.toUpper() || (!nativeName.isEmpty() && nativeName == planetNameI18.toUpper()))
 			return qSharedPointerCast<StelObject>(p);
 	}
 	return StelObjectP();
@@ -1567,7 +1576,8 @@ StelObjectP SolarSystem::searchByName(const QString& name) const
 {
 	for (const auto& p : systemPlanets)
 	{
-		if (p->getEnglishName().toUpper() == name.toUpper())
+		QString nativeName = p->getNativeName().toUpper();
+		if (p->getEnglishName().toUpper() == name.toUpper() || (!nativeName.isEmpty() && nativeName == name.toUpper()))
 			return qSharedPointerCast<StelObject>(p);
 	}
 	return StelObjectP();
@@ -1944,6 +1954,8 @@ QStringList SolarSystem::listAllObjects(bool inEnglish) const
 		for (const auto& p : systemPlanets)
 		{
 			result << p->getNameI18n();
+			if (!p->getNativeNameI18n().isEmpty())
+				result << p->getNativeNameI18n() << p->getNativeName();
 		}
 	}
 	return result;
@@ -2301,26 +2313,6 @@ void SolarSystem::setFlagNativePlanetNames(bool b)
 bool SolarSystem::getFlagNativePlanetNames() const
 {
 	return flagNativePlanetNames;
-}
-
-void SolarSystem::setFlagTranslatedNames(bool b)
-{
-	if (b!=flagTranslatedNames)
-	{
-		flagTranslatedNames=b;
-		for (const auto& p : qAsConst(systemPlanets))
-		{
-			if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
-				p->setFlagTranslatedName(flagTranslatedNames);
-		}
-		updateI18n();
-		emit flagTranslatedNamesChanged(b);
-	}
-}
-
-bool SolarSystem::getFlagTranslatedNames() const
-{
-	return flagTranslatedNames;
 }
 
 void SolarSystem::setFlagIsolatedTrails(bool b)
@@ -2845,7 +2837,6 @@ void SolarSystem::reloadPlanets()
 	const bool flagLabels = getFlagLabels();
 	const bool flagOrbits = getFlagOrbits();
 	const bool flagNative = getFlagNativePlanetNames();
-	const bool flagTrans = getFlagTranslatedNames();
 	bool hasSelection = false;
 
 	// Save observer location (fix for LP bug # 969211)
@@ -2912,7 +2903,6 @@ void SolarSystem::reloadPlanets()
 	setFlagLabels(flagLabels);
 	setFlagOrbits(flagOrbits);
 	setFlagNativePlanetNames(flagNative);
-	setFlagTranslatedNames(flagTrans);
 
 	if (hasSelection)
 	{

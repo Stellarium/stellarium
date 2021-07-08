@@ -279,16 +279,9 @@ void ExoplanetsDialog::setAboutHtml(void)
 	html += QString(q_("The list of potential habitable exoplanets and data about them were taken from \"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability Laboratory%3.")).arg("<a href=\"http://phl.upr.edu/projects/habitable-exoplanets-catalog\">").arg("<a href=\"http://phl.upr.edu/home\">").arg("</a>") + "</p>";
 
 	html += "<p>" + q_("The current catalog contains info about %1 planetary systems, which altogether have %2 exoplanets (including %3 potentially habitable exoplanets).").arg(ep->getCountPlanetarySystems()).arg(ep->getCountAllExoplanets()).arg(ep->getCountHabitableExoplanets()) + "</p>";
-	html += "<h3>" + q_("Links") + "</h3>";
-	html += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg("Exoplanets plugin") + "</p>";
-	html += "<p><ul>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you have a question, you can {get an answer here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://groups.google.com/forum/#!forum/stellarium\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("Bug reports and feature requests can be made {here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://github.com/Stellarium/stellarium/issues\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you want to read full information about this plugin and its history, you can {get info here}.").toHtmlEscaped().replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Exoplanets_plugin\">\\1</a>") + "</li>";
-	html += "</ul></p></body></html>";
+
+	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Exoplanets plugin");
+	html += "</body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if(gui!=Q_NULLPTR)
@@ -313,7 +306,7 @@ void ExoplanetsDialog::setInfoHtml(void)
 	html += QString("<p><b>%1</b> &mdash; %2</p>")
 			.arg(q_("Planetary Class"))
 			.arg(q_("Planet classification from host star spectral type (F, G, K, M), habitable zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran, jovian, neptunian) (Earth = G-Warm Terran)."));
-	html += QString("<p><b><a href='http://lasp.colorado.edu/~bagenal/3720/CLASS6/6EquilibriumTemp.html'>%1</a></b> &mdash; %2 %3</p>")
+	html += QString("<p><b><a href='https://en.wikipedia.org/wiki/Planetary_equilibrium_temperature'>%1</a></b> &mdash; %2 %3</p>")
 			.arg(q_("Equilibrium Temperature"))
 			.arg(q_("The planetary equilibrium temperature is a theoretical temperature in (°C) that the planet would be at when considered simply as if it were a black body being heated only by its parent star (assuming a 0.3 bond albedo). As example the planetary equilibrium temperature of Earth is -18.15°C (255 K)."))
 			.arg(q_("Actual surface temperatures are expected to be larger than the equilibrium temperature depending on the atmosphere of the planets, which are currently unknown (e.g. Earth mean global surface temperature is about 288 K or 15°C)."));

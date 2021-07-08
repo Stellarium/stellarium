@@ -111,18 +111,12 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		const QString commonNameI18 = StarMgr::getCommonName(s->getHip());
 		const QString additionalNameI18 = StarMgr::getAdditionalNames(s->getHip());
 		const QString sciName = StarMgr::getSciName(s->getHip());
-		const QString addSciName = StarMgr::getSciAdditionalName(s->getHip());
-		const QString dblSciName = StarMgr::getSciAdditionalDblName(s->getHip());
 		const QString varSciName = StarMgr::getGcvsName(s->getHip());
 		const QString wdsSciName = StarMgr::getWdsName(s->getHip());
 		QStringList designations;
 		if (!sciName.isEmpty())
 			designations.append(sciName);
-		if (!addSciName.isEmpty())
-			designations.append(addSciName);
-		if (!dblSciName.isEmpty())
-			designations.append(dblSciName);
-		if (!varSciName.isEmpty() && varSciName!=addSciName && varSciName!=dblSciName && varSciName!=sciName)
+		if (!varSciName.isEmpty() && !sciName.contains(varSciName, Qt::CaseInsensitive))
 			designations.append(varSciName);
 
 		QString hip, hipq;
@@ -143,10 +137,29 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		if (!crossIndexData.isEmpty())
 			designations.append(crossIndexData);
 
-		if (!wdsSciName.isEmpty() && wdsSciName!=addSciName && wdsSciName!=sciName)
+		if (!wdsSciName.isEmpty() && !sciName.contains(wdsSciName, Qt::CaseInsensitive))
 			designations.append(wdsSciName);
 
-		const QString designationsList = designations.join(" - ");
+		QString designationsList = designations.join(" - ");
+		designations.clear();
+		designations = designationsList.split(" - ");
+		designations.removeDuplicates();
+		int asize = designations.size();
+		if (asize>6) // Special case for many designations (max - 7 items per line); NOTE: Should we add size to the config data for skyculture?
+		{
+			designationsList = "";
+			for(int i=0; i<asize; i++)
+			{
+				designationsList.append(designations.at(i));
+				if (i<asize-1)
+					designationsList.append(" - ");
+
+				if (i>0 && (i % 6)==0 && i<(asize-1))
+					designationsList.append("<br />");
+			}
+		}
+		else
+			designationsList = designations.join(" - ");
 
 		if (flags&Name)
 		{
@@ -154,7 +167,36 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 				oss << commonNameI18;
 
 			if (!additionalNameI18.isEmpty() && StarMgr::getFlagAdditionalNames())
-				oss << " (" << additionalNameI18 << ")";
+			{
+				QString aliases = "";
+				QStringList additionalNames = additionalNameI18.split(" - ");
+				additionalNames.removeDuplicates();
+				asize = additionalNames.size();
+				if (asize>5) // Special case for many AKA (max - 6 items per line)
+				{
+					bool firstLine = true;
+					for(int i=0; i<asize; i++)
+					{
+						aliases.append(additionalNames.at(i));
+						if (i<asize-1)
+							aliases.append(" - ");
+
+						if (i>0)
+						{
+							if ((i % 4)==0 && firstLine)
+							{
+								aliases.append("<br />");
+								firstLine = false;
+							}
+							if (((i-4) % 6)==0 && !firstLine && i>5 && i<(asize-1))
+								aliases.append("<br />");
+						}
+					}
+				}
+				else
+					aliases = additionalNames.join(" - ");
+				oss << " (" << aliases << ")";
+			}
 
 			if (!commonNameI18.isEmpty() && !designationsList.isEmpty() && flags&CatalogNumber)
 				oss << "<br />";

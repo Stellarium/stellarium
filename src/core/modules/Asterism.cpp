@@ -175,16 +175,6 @@ void Asterism::drawName(StelPainter& sPainter) const
 	sPainter.drawText(static_cast<float>(XYname[0]), static_cast<float>(XYname[1]), name, 0., -sPainter.getFontMetrics().boundingRect(name).width()/2, 0, false);
 }
 
-const Asterism* Asterism::isStarIn(const StelObject* s) const
-{
-	for(unsigned int i=0;i<numberOfSegments*2;++i)
-	{
-		if (asterism[i]==s)
-			return this;
-	}
-	return Q_NULLPTR;
-}
-
 void Asterism::update(int deltaTime)
 {
 	lineFader.update(deltaTime);

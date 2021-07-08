@@ -134,16 +134,8 @@ void QuasarsDialog::setAboutHtml(void)
 			.arg(q_("Veron+ 2010"));
 
 	html += "</ul><p>" + q_("The current catalog contains info about %1 quasars.").arg(qsr->getCountQuasars()) + "</p>";
-	html += "<h3>" + q_("Links") + "</h3>";
-	html += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg("Quasars plugin") + "</p>";
-	html += "<p><ul>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you have a question, you can {get an answer here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://groups.google.com/forum/#!forum/stellarium\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("Bug reports and feature requests can be made {here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://github.com/Stellarium/stellarium/issues\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you want to read full information about this plugin and its history, you can {get info here}.").toHtmlEscaped().replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Quasars_plugin\">\\1</a>") + "</li>";
-	html += "</ul></p></body></html>";
+	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Quasars plugin");
+	html += "</body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if(gui!=Q_NULLPTR)

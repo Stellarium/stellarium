@@ -577,6 +577,8 @@ StelMainView::StelMainView(QSettings* settings)
 	Q_ASSERT(!singleton);
 	singleton = this;
 
+	qApp->installEventFilter(this);
+
 	setWindowIcon(QIcon(":/mainWindow/icon.bmp"));
 	initTitleI18n();
 	setObjectName("MainView");
@@ -664,12 +666,30 @@ void StelMainView::resizeEvent(QResizeEvent* event)
 	QGraphicsView::resizeEvent(event);
 }
 
+bool StelMainView::eventFilter(QObject *obj, QEvent *event)
+{
+	if(event->type() == QEvent::FileOpen)
+	{
+		QFileOpenEvent *openEvent = static_cast<QFileOpenEvent *>(event);
+		//qDebug() << "load script:" << openEvent->file();
+		qApp->setProperty("onetime_startup_script", openEvent->file());
+	}
+	return QGraphicsView::eventFilter(obj, event);
+}
+
 void StelMainView::mouseMoveEvent(QMouseEvent *event)
 {
-	// Show the cursor and reset the timeout if it is active.
-	if (QGuiApplication::overrideCursor())
-		QGuiApplication::restoreOverrideCursor();
-	if (flagCursorTimeout) cursorTimeoutTimer->start();
+	if (flagCursorTimeout) 
+	{
+		// Show the previous cursor and reset the timeout if the current is "hidden"
+		if (QGuiApplication::overrideCursor() && (QGuiApplication::overrideCursor()->shape() == Qt::BlankCursor) )
+		{
+			QGuiApplication::restoreOverrideCursor();
+		}
+
+		cursorTimeoutTimer->start();
+	}
+	
 	QGraphicsView::mouseMoveEvent(event);
 }
 
@@ -1254,7 +1274,10 @@ void StelMainView::dumpOpenGLdiagnostics() const
 		qDebug() << " - Non power of two textures" << (oglFeatures&QOpenGLFunctions::NPOTTextures ? "are" : "are NOT") << "available.";
 		qDebug() << " - Non power of two textures" << (oglFeatures&QOpenGLFunctions::NPOTTextureRepeat ? "can" : "CANNOT") << "use GL_REPEAT as wrap parameter.";
 		qDebug() << " - The fixed function pipeline" << (oglFeatures&QOpenGLFunctions::FixedFunctionPipeline ? "is" : "is NOT") << "available.";
-		
+		GLfloat lineWidthRange[2];
+		context->functions()->glGetFloatv(GL_ALIASED_LINE_WIDTH_RANGE, lineWidthRange);
+		qDebug() << "Line widths available from" << lineWidthRange[0] << "to" << lineWidthRange[1];
+
 		qDebug() << "OpenGL shader capabilities and details:";
 		qDebug() << " - Vertex Shader:" << (QOpenGLShader::hasOpenGLShaders(QOpenGLShader::Vertex, context) ? "YES" : "NO");
 		qDebug() << " - Fragment Shader:" << (QOpenGLShader::hasOpenGLShaders(QOpenGLShader::Fragment, context) ? "YES" : "NO");
@@ -1355,16 +1378,34 @@ void StelMainView::drawEnded()
 void StelMainView::setFlagCursorTimeout(bool b)
 {
 	if (b == flagCursorTimeout) return;
+
 	flagCursorTimeout = b;
-	if (b)
+	if (b) 	// enable timer
+	{
 		cursorTimeoutTimer->start();
-	else
+	}
+	else	// disable timer
+	{
+		// Show the previous cursor if the current is "hidden" 
+		if (QGuiApplication::overrideCursor() && (QGuiApplication::overrideCursor()->shape() == Qt::BlankCursor) )
+		{
+			// pop the blank cursor
+			QGuiApplication::restoreOverrideCursor();
+		}
+		// and stop the timer 
 		cursorTimeoutTimer->stop();
+	}
+	
 	emit flagCursorTimeoutChanged(b);
 }
 
 void StelMainView::hideCursor()
 {
+	// timout fired...
+	// if the feature is not asked, do nothing
+	if (!flagCursorTimeout) return;
+
+	// "hide" the current cursor by pushing a Blank cursor
 	QGuiApplication::setOverrideCursor(Qt::BlankCursor);
 }
 

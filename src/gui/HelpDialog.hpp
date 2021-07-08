@@ -66,6 +66,8 @@ private:
 	QNetworkAccessManager * networkManager;
 	QNetworkReply * downloadReply;
 
+	QString hotkeyTextWrapper(const QString hotkey) const;
+
 signals:
 	void checkUpdatesComplete(void);
 

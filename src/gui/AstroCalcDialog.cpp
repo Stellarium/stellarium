@@ -397,6 +397,7 @@ void AstroCalcDialog::createDialogContent()
 	ui->graphsDurationSpinBox->setValue(graphsDuration);
 	connect(ui->graphsDurationSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateGraphsDuration(int)));
 	connect(ui->drawGraphsPushButton, SIGNAL(clicked()), this, SLOT(drawXVsTimeGraphs()));
+	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(updateXVsTimeGraphs()));
 
 	ui->angularDistanceLimitSpinBox->setValue(conf->value("astrocalc/angular_distance_limit", 40).toInt());
 	connect(ui->angularDistanceLimitSpinBox, SIGNAL(valueChanged(int)), this, SLOT(saveAngularDistanceLimit(int)));
@@ -449,6 +450,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(dsoMgr, SIGNAL(flagSizeLimitsUsageChanged(bool)), this, SLOT(calculateWutObjects()));
 	connect(dsoMgr, SIGNAL(minSizeLimitChanged(double)), this, SLOT(calculateWutObjects()));
 	connect(dsoMgr, SIGNAL(maxSizeLimitChanged(double)), this, SLOT(calculateWutObjects()));
+	connect(core, SIGNAL(dateChanged()), this, SLOT(calculateWutObjects()));
 
 	QAction *clearAction = ui->wutMatchingObjectsLineEdit->addAction(QIcon(":/graphicGui/uieBackspaceInputButton.png"), QLineEdit::ActionPosition::TrailingPosition);
 	connect(clearAction, SIGNAL(triggered()), this, SLOT(searchWutClear()));
@@ -506,19 +508,28 @@ void AstroCalcDialog::createDialogContent()
 
 	updateTabBarListWidgetWidth();
 
+	ui->celestialPositionsUpdateButton->setShortcut(QKeySequence("Shift+F10"));
+	ui->ephemerisPushButton->setShortcut(QKeySequence("Shift+F10"));
+	ui->transitsCalculateButton->setShortcut(QKeySequence("Shift+F10"));
+	ui->phenomenaPushButton->setShortcut(QKeySequence("Shift+F10"));
+
 	// Let's improve visibility of the text
 	QString style = "QLabel { color: rgb(238, 238, 238); }";
 	ui->celestialPositionsTimeLabel->setStyleSheet(style);
 	ui->altVsTimeLabel->setStyleSheet(style);
+	//ui->altVsTimeTitle->setStyleSheet(style);
 	ui->aziVsTimeLabel->setStyleSheet(style);
+	//ui->aziVsTimeTitle->setStyleSheet(style);
 	ui->monthlyElevationLabel->setStyleSheet(style);
+	//ui->monthlyElevationTitle->setStyleSheet(style);
 	ui->graphsFirstLabel->setStyleSheet(style);	
 	ui->graphsSecondLabel->setStyleSheet(style);	
 	ui->graphsDurationLabel->setStyleSheet(style);
 	ui->graphsYearsLabel->setStyleSheet(style);
 	ui->angularDistanceNote->setStyleSheet(style);
 	ui->angularDistanceLimitLabel->setStyleSheet(style);	
-	ui->transitNotificationLabel->setStyleSheet(style);
+	//ui->angularDistanceTitle->setStyleSheet(style);
+	ui->transitNotificationLabel->setStyleSheet(style);	
 	style = "QCheckBox { color: rgb(238, 238, 238); }";
 	ui->sunAltitudeCheckBox->setStyleSheet(style);
 	ui->moonAltitudeCheckBox->setStyleSheet(style);
@@ -680,6 +691,7 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 		QList<double> aX, aY;
 
 		StelObjectP selectedObject = selectedObjects[0];
+		ui->aziVsTimeTitle->setText(selectedObject->getNameI18n());
 		double currentJD = core->getJD();
 		double shift = core->getUTCOffset(currentJD) / 24.0;
 		double noon = static_cast<int>(currentJD + shift);
@@ -2546,6 +2558,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		QVector<double> xs, ys, ysn, ysa, ysc, xm, ym;
 
 		StelObjectP selectedObject = selectedObjects[0];
+		ui->altVsTimeTitle->setText(selectedObject->getNameI18n());
 		const bool onEarth = core->getCurrentPlanet()==solarSystem->getEarth();
 
 		const double currentJD = core->getJD();
@@ -2970,6 +2983,23 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 	}
 }
 
+void AstroCalcDialog::updateXVsTimeGraphs()
+{
+	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
+	if (!selectedObjects.isEmpty())
+	{
+		QComboBox* celestialBody = ui->graphsCelestialBodyComboBox;
+		celestialBody->blockSignals(true);
+		int index = celestialBody->findData(selectedObjects[0]->getEnglishName(), Qt::UserRole, Qt::MatchCaseSensitive);
+		if (index>=0)
+			celestialBody->setCurrentIndex(index);
+		celestialBody->blockSignals(false);
+	}
+
+	if (ui->tabWidgetGraphs->currentIndex()==3)
+		drawXVsTimeGraphs();
+}
+
 double AstroCalcDialog::computeGraphValue(const PlanetP &ssObj, const int graphType)
 {
 	double value = 0.;
@@ -3387,6 +3417,7 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 		// X axis - time; Y axis - altitude
 		QList<double> aX, aY;
 		StelObjectP selectedObject = selectedObjects[0];
+		ui->monthlyElevationTitle->setText(selectedObject->getNameI18n());
 		if (selectedObject->getType() == "Satellite")
 		{
 			ui->monthlyElevationGraph->graph(0)->data()->clear();
@@ -3871,7 +3902,7 @@ void AstroCalcDialog::calculatePhenomena()
 				if (opposition)
 					fillPhenomenaTable(findClosestApproach(planet, mObj, startJD, stopJD, separation, PhenomenaTypeIndex::Opposition), planet, obj, PhenomenaTypeIndex::Opposition);
 				// shadows from moons
-				if (obj2Type==PHCMoonsFirstBody || obj2Type==PHCSolarSystem)
+				if (obj2Type==PHCMoonsFirstBody || obj2Type==PHCSolarSystem || obj2Type==PHCBrightSolarSystemObjects)
 					fillPhenomenaTable(findClosestApproach(planet, mObj, startJD, stopJD, separation, PhenomenaTypeIndex::Shadows), planet, obj, PhenomenaTypeIndex::Shadows);
 			}
 		}
@@ -4996,6 +5027,9 @@ void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* prev
 		else
 			plotMonthlyElevation = false;
 
+		if (idx==3) // 'Graphs' is visible
+			updateXVsTimeGraphs();
+
 		if(idx==4) // 'Angular distance' is visible
 		{
 			plotAngularDistanceGraph = true;
@@ -5059,6 +5093,8 @@ void AstroCalcDialog::changeGraphsTab(int index)
 		plotMonthlyElevation = true;
 		drawMonthlyElevationGraph(); // Is object already selected?
 	}
+	if (index==3) // Graphs
+		updateXVsTimeGraphs();
 	if (index==4) // Angular Distance
 	{
 		plotAngularDistanceGraph = true;
@@ -6143,6 +6179,7 @@ void AstroCalcDialog::computePlanetaryData()
 
 	const double distanceAu = (posFCB - posSCB).length();
 	const double distanceKm = AU * distanceAu;
+	QString degree = QChar(0x00B0);
 	// TRANSLATORS: Unit of measure for distance - kilometers
 	QString km = qc_("km", "distance");
 	// TRANSLATORS: Unit of measure for distance - millions kilometers
@@ -6174,8 +6211,39 @@ void AstroCalcDialog::computePlanetaryData()
 
 	QString angularDistance = dash;
 	if (firstCelestialBody != currentPlanet && secondCelestialBody != currentPlanet)
-		angularDistance = QString("%1%2 %3' %4\" (%5%2)").arg(d).arg(QChar(0x00B0)).arg(m).arg(s, 0, 'f', 2).arg(dd, 0, 'f', 5);
+		angularDistance = QString("%1%2 %3' %4\" (%5%2)").arg(d).arg(degree).arg(m).arg(s, 0, 'f', 2).arg(dd, 0, 'f', 5);
 	ui->labelAngularDistanceValue->setText(angularDistance);
+
+	// TRANSLATORS: Part of unit of measure for mean motion - degrees per day
+	QString day = qc_("day", "mean motion");
+	// TRANSLATORS: Unit of measure for period - days
+	QString days = qc_("days", "duration");
+	QString synodicPeriod = dash;
+	QString orbitalPeriodsRatio = dash;
+	if (spcb1 > 0.0 && spcb2 > 0.0 && parentFCBName==parentSCBName && firstCelestialBody!="Sun")
+	{
+		double sp = qAbs(1/(1/spcb1 - 1/spcb2));
+		synodicPeriod = QString("%1 %2 (%3 a)").arg(QString::number(sp, 'f', 3), days, QString::number(sp/365.25, 'f', 5));
+
+		double minp = spcb2;
+		if (qAbs(spcb1)<=qAbs(spcb2)) { minp = spcb1; }
+		int a = qRound(qAbs(spcb1/minp)*10);
+		int b = qRound(qAbs(spcb2/minp)*10);
+		int lcm = qAbs(a*b)/StelUtils::gcd(a, b);
+		orbitalPeriodsRatio = QString("%1:%2").arg(lcm/a).arg(lcm/b);
+	}
+	ui->labelSynodicPeriodValue->setText(synodicPeriod);
+	ui->labelOrbitalPeriodsRatioValue->setText(orbitalPeriodsRatio);
+
+	if (spcb1>0. && firstCelestialBody!="Sun")
+		ui->labelMeanMotionFCBValue->setText(QString("%1 %2/%3").arg(QString::number(360./spcb1, 'f', 5), degree, day));
+	else
+		ui->labelMeanMotionFCBValue->setText(dash);
+
+	if (spcb2>0. && secondCelestialBody!="Sun")
+		ui->labelMeanMotionSCBValue->setText(QString("%1 %2/%3").arg(QString::number(360./spcb2, 'f', 5), degree, day));
+	else
+		ui->labelMeanMotionSCBValue->setText(dash);
 
 	// TRANSLATORS: Unit of measure for speed - kilometers per second
 	QString kms = qc_("km/s", "speed");
@@ -6187,22 +6255,6 @@ void AstroCalcDialog::computePlanetaryData()
 	double orbVelSCB = secondCBId->getEclipticVelocity().length();
 	QString orbitalVelocitySCB = orbVelSCB<=0. ? dash : QString("%1 %2").arg(QString::number(orbVelSCB * AU/86400., 'f', 3), kms);
 	ui->labelOrbitalVelocitySCBValue->setText(orbitalVelocitySCB);
-
-	// TRANSLATORS: Unit of measure for period - days
-	QString days = qc_("days", "duration");
-	QString synodicPeriod = dash;
-	bool showSP = true;
-	if (firstCelestialBody == secondCelestialBody || firstCelestialBody == "Sun" || secondCelestialBody == "Sun")
-		showSP = false;
-	if ((firstCBId->getPlanetTypeString()=="moon" && parentFCBName!=secondCelestialBody) || (secondCBId->getPlanetTypeString()=="moon" && parentSCBName!=firstCelestialBody))
-		showSP = false;
-	if (spcb1 > 0.0 && spcb2 > 0.0 && showSP)
-	{
-		double sp = qAbs(1/(1/spcb1 - 1/spcb2));
-		synodicPeriod = QString("%1 %2 (%3 a)").arg(QString::number(sp, 'f', 3), days, QString::number(sp/365.25, 'f', 5));
-	}
-
-	ui->labelSynodicPeriodValue->setText(synodicPeriod);
 
 	double fcbs = 2.0 * AU * firstCBId->getEquatorialRadius();
 	double scbs = 2.0 * AU * secondCBId->getEquatorialRadius();
@@ -6492,6 +6544,7 @@ void AstroCalcDialog::drawAngularDistanceGraph()
 				selectedObject->getID().isEmpty() ? name = q_("Unnamed star") : name = selectedObject->getID();
 		}
 		ui->angularDistancePlot->setToolTip(QString("%1 (%2)").arg(label, name));
+		ui->angularDistanceTitle->setText(QString("%1 (%2)").arg(label, name));
 
 		prepareAngularDistanceAxesAndGraph();
 

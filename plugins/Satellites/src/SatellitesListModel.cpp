@@ -79,6 +79,12 @@ QVariant SatellitesListModel::data(const QModelIndex& index, int role) const
 			return (sat->stdMag);
 		case SatRCSRole:
 			return (sat->RCS);
+		case SatPerigeeRole:
+			return (sat->perigee);
+		case SatApogeeRole:
+			return (sat->apogee);
+		case SatPeriodRole:
+			return (sat->pSatWrapper->getOrbitalPeriod());
 		case SatTLEEpochRole:
 			return (sat->tleEpoch);
 		case SatFlagsRole:

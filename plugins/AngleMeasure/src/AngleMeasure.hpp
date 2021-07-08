@@ -72,6 +72,7 @@ class AngleMeasure : public StelModule
 {
 	Q_OBJECT
 	Q_PROPERTY(bool enabled                          READ isEnabled                  WRITE enableAngleMeasure           NOTIFY flagAngleMeasureChanged)
+	Q_PROPERTY(bool flagFollowCursor                 READ isFollowCursor             WRITE followCursor                 NOTIFY flagFollowCursorChanged )
 	Q_PROPERTY(bool dmsFormat                        READ isDmsFormat                WRITE useDmsFormat                 NOTIFY dmsFormatChanged )
 	Q_PROPERTY(bool flagShowEquatorial               READ isEquatorial               WRITE showEquatorial               NOTIFY flagShowEquatorialChanged )
 	Q_PROPERTY(bool flagShowHorizontal               READ isHorizontal               WRITE showHorizontal               NOTIFY flagShowHorizontalChanged )
@@ -113,6 +114,7 @@ public:
 
 signals:
 	void flagAngleMeasureChanged(bool b);
+	void flagFollowCursorChanged(bool b);
 	void dmsFormatChanged(bool b);
 	void flagShowEquatorialChanged(bool b);
 	void flagShowHorizontalChanged(bool b);
@@ -127,6 +129,7 @@ signals:
 
 public slots:
 	bool isEnabled() const    { return flagShowAngleMeasure; }
+	bool isFollowCursor() const  { return flagFollowCursor; }
 	bool isDmsFormat() const  { return flagUseDmsFormat; }
 	bool isEquatorial() const { return flagShowEquatorial; }
 	bool isHorizontal() const { return flagShowHorizontal; }
@@ -140,6 +143,7 @@ public slots:
 	Vec3f getHorizontalLineColor() const { return horizontalLineColor; }
 
 	void enableAngleMeasure(bool b);
+	void followCursor(bool b);
 	void useDmsFormat(bool b);      //!< Use d/m/s instead of degree/minute/second symbols.
 	void showEquatorialPA(bool b);
 	void showHorizontalPA(bool b);
@@ -175,6 +179,7 @@ private:
 	Vec3d perp2StartPoint;
 	Vec3d perp2EndPoint;
 	double angleEquatorial;
+	bool flagFollowCursor;	//!< measurement data block follows cursor rather than start of measurement line
 	bool flagUseDmsFormat;
 	bool flagShowEquatorial;
 	bool flagShowHorizontal;
@@ -202,6 +207,9 @@ private:
 	//! @arg angle in radians
 	QString formatAngleString(double angle) const;
 	QString calculatePositionAngle(const Vec3d p1, const Vec3d p2) const;
+
+	//! draw for one set of coordinate system
+	//! @arg FrameType specifies the coordinate system
 	void drawOne(StelCore *core, const StelCore::FrameType frameType, const StelCore::RefractionMode refractionMode, const Vec3f txtColor, const Vec3f lineColor);
 
 	QSettings* conf;

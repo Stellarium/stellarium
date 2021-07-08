@@ -9,7 +9,10 @@ astronomical work for the following 1500 years. It was originally written
 with the title <i>Mathematike Syntaxis</i>, in Ancient Greek. 
 The name <i>Almagest</i>, meaning &ldquo;The Largest [Book]&rdquo;, was 
 developed from Arabian translations. To create this sky culture we used 
-the English translation by Toomer (1984).</p>
+the English translation by Toomer (1984), reworked it in some details 
+(e.g. using more literal translations from Greek instead of Latin terms that 
+are common today) and we made use of computer readable tables prepared
+by Ernie Wright.</p>
 
 <p>The Almagest consists of 13 sections, called books. In the seventh 
 and eighth book, Ptolemy listed a total of 1022 stars in 48 constellations 
@@ -39,6 +42,24 @@ applied by a simple subtraction of the value for ecliptic longitude.</p>
 
 <h2>How this sky culture was made</h2>
 
+<h3>Star names</h3>
+
+Out of more than 1,000 stars, Ptolemy mentions a proper name for only 15.
+The rest are identified by fairly long descriptions such as "The star on
+the end of the tail" for the Polaris. In order to avoid displaying such long
+strings across the screen in Stellarium, we invented short labels for all
+Almagest stars based on the constellation and the order in which they appear in
+the catalogue.  For example, Polaris is given a designation "UMi 1" because
+it is the first star in the constellation of Small Bear (UMi).  See the table
+below for the correspondence between Ptolemy constellations and IAU abbreviations.
+In addition, where Ptolemy describes a star as lying outside of the figure,
+we use lowercase letters in the corresponding label. To see the long description
+for a given star, users should enable "Use additional names of stars" in the
+"View [F4]/Sky" settings and click on the star. The long description will then
+be displayed at the top of the screen.
+
+<h3>Constellation lines</h3>
+
 <p>The process can be described as sketched here with the example of 
 Corvus:</p>
 
@@ -58,7 +79,7 @@ reconnected the stars according to the descriptions in the table
 presented in the <i>Almagest</i>.</p>
 
 <p>The names of stars and names of deep sky objects rely on the Almagest
-only. E.g. Ptolemy uses the name &quot;&lambda;&alpha;&mu;&pi;&alpha;&delta;&#943;&alpha;&sigmaf;
+only, e.g. Ptolemy uses the name &quot;&lambda;&alpha;&mu;&pi;&alpha;&delta;&#943;&alpha;&sigmaf;
 (The Torch-like)&quot; for Aldebaran in his other work, the
 <i>Tetrabiblos</i>, but this is not implemented in this sky culture because
 it doesn't show up in the Almagest.</p>
@@ -468,6 +489,9 @@ the reconstruction (column 6).</p>
   <li>Heiberg, J. L. (Ed.): Claudii Ptolemaei: Syntaxis Mathematica, Teubner, Leipzig, 1898</li>
   <li>Hoffmann, S. M.: Hipparchs Himmelsglobus, Springer, Wiesbaden/ New York, 2017</li>
   <li>Toomer, G. J.: Ptolemy's Almagest, Duckworth, London, 1984</li>
+  <li>Ernie Wright:
+  <a href="http://www.etwright.org/astro/almagest.html#cat" class='external text' rel="nofollow">
+  Seeing Ancient Stars, Visualization of the Almagest Catalog</a>, 2006</li>
  </ul>
 
 <h2>Fair Use</h2>

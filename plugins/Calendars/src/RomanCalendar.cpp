@@ -154,7 +154,7 @@ int RomanCalendar::fixedFromRoman(QVector<int> roman)
 	const int count=roman.at(3);
 	const int leap=roman.at(4);
 
-	int rd;
+	int rd = 0; // Suppress warning
 	switch (event)
 	{
 	case kalends:
