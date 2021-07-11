@@ -6,8 +6,8 @@
 # Translators:
 # alexander duytschaever <alex.a.nder.duy.tschaever@gmail.com>, 2020
 # Dirk Devlies <dirk.devlies@telenet.be>, 2021
-# Harry Mensch, 2021
 # CC KK <kogacarlo@gmail.com>, 2021
+# Harry Mensch, 2021
 # 
 #, fuzzy
 msgid ""
@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2021-06-21 10:58+0700\n"
 "PO-Revision-Date: 2020-01-06 16:35+0000\n"
-"Last-Translator: CC KK <kogacarlo@gmail.com>, 2021\n"
+"Last-Translator: Harry Mensch, 2021\n"
 "Language-Team: Dutch (https://www.transifex.com/stellarium/teams/80998/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -529,6 +529,20 @@ msgid ""
 "translations from Greek instead of Latin terms that are common today) and we"
 " made use of computer readable tables prepared by Ernie Wright."
 msgstr ""
+"Deze oude Griekse hemelcultuur is gebaseerd op de Almagest, een compilatie "
+"van astronomische kennis van voormalige astronomen, inclusief resultaten van"
+" waarnemingen en wiskundige astronomie. Samengevoegd door Claudius "
+"Ptolemaeus, gebruikmakend van zowel oudere als zijn eigen waarnemingen, werd"
+" in het Grieks geschreven, gepubliceerd in de tweede eeuw en bleef het het "
+"belangrijkste astronomische werk voor de volgende 1500 jaar.  Het is "
+"oorspronkelijk geschreven met de titel <i>Mathematike Syntaxis</i>, in het "
+"Oudgrieks. De naam <i>Almagest</i>, wat &ldquo;Het grootste [boek]&rdquo;, "
+"betekent, werd ontwikkeld op basis van Arabische vertalingen. Om deze "
+"memelcultuur te creëren, gebruikten we de Engelse vertaling van Toomer "
+"(1984)., herwerkte het in sommige details (bijvoorbeeld door meer "
+"letterlijke vertalingen uit het Grieks te gebruiken in plaats van Latijnse "
+"termen die tegenwoordig gebruikelijk zijn) en we hebben gebruik gemaakt van "
+"computerleesbare tabellen die zijn opgesteld door Ernie Wright. "
 
 #. type: Content of: <p>
 #: ../../skycultures/almagest/description.en.utf8:17
@@ -620,6 +634,18 @@ msgid ""
 "the star. The long description will then be displayed at the top of the "
 "screen."
 msgstr ""
+"Van meer dan 1.000 sterren hadden maar 15 een goede naam volgens Ptolemaeus."
+" De rest had lange beschrijvingen zoals \"De laatste ster van de staart\" "
+"voor de Poolster. Om lange namen op het Stellarium-scherm te voorkomen "
+"gebruiken we korte codes voor de sterren uit de Almagest, gebaseerd op het "
+"sterrenbeeld en de volgorde waarin ze in de catalogus staan. Voorbeeld: de "
+"Poolster heet \"UMi 1\" omdat het de eerste ster in de Kleine Beer (UMi) is."
+" Zie de tabel hieronder voor sterrenbeelden van Ptolemaeus en overeenkomende"
+" IAU-afkortingen. Als een ster volgens Ptolemaeus buiten het sterrenbeeld "
+"ligt gebruiken we kleine letters. Om de lange beschrijving van Ptolemaeus te"
+" zien vink \"Aanvullende namen van steren gebruiken\" aan in \"Beeld [F4] / "
+"Hemel\" en klik daarna op de ster. De lange beschrijving verschijnt dan "
+"boven in het scherm."
 
 #. type: Content of: <h3>
 #: ../../skycultures/almagest/description.en.utf8:61
@@ -674,6 +700,12 @@ msgid ""
 "this is not implemented in this sky culture because it doesn't show up in "
 "the Almagest."
 msgstr ""
+"De namen van sterren en namen van deepsky objecten zijn alleen afhankelijk "
+"van de Almagest. Bijv. Ptolemaeus gebruikt de naam "
+"&quot;&lambda;&alpha;&mu;&pi;&alpha;&delta;&#943;&alpha;&sigmaf; (De "
+"Fakelachtige)&quot; voor Aldebaran in zijn andere werk, de "
+"<i>Tetrabiblos</i>, maar dit is niet geïmplementeerd in deze hemelcultuur "
+"omdat het niet opduikt in de Almagest."
 
 #. type: Content of: <p>
 #: ../../skycultures/almagest/description.en.utf8:87
@@ -2155,6 +2187,9 @@ msgid ""
 "class='external text' rel=\"nofollow\"> Seeing Ancient Stars, Visualization "
 "of the Almagest Catalog</a>, 2006"
 msgstr ""
+"Ernie Wright: <a href=\"http://www.etwright.org/astro/almagest.html#cat\" "
+"class='external text' rel=\"nofollow\"> Oude sterren zien, Visualisatie van "
+"de Almagest catalogus</a>, 2006"
 
 #. type: Content of: <p>
 #: ../../skycultures/almagest/description.en.utf8:498

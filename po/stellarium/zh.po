@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-06-19 09:34+0700\n"
+"POT-Creation-Date: 2021-07-05 19:23+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Mo Wu <wumo1999@gmail.com>, 2021\n"
 "Language-Team: Chinese (https://www.transifex.com/stellarium/teams/80998/zh/)\n"
@@ -40,7 +40,7 @@ msgstr "自定义标识"
 #: src/core/modules/Nebula.cpp:224 src/core/modules/Planet.cpp:491
 #: src/core/modules/Planet.cpp:494 src/core/modules/StarWrapper.cpp:50
 #: src/core/modules/StarWrapper.cpp:261 src/core/modules/StarWrapper.cpp:264
-#: src/gui/AstroCalcDialog.cpp:900 src/ui_configurationDialog.h:1715
+#: src/gui/AstroCalcDialog.cpp:901 src/ui_configurationDialog.h:1715
 #: plugins/Satellites/src/Satellite.cpp:305
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:523
 #: plugins/Supernovae/src/Supernova.cpp:143 plugins/Novae/src/Nova.cpp:147
@@ -69,7 +69,7 @@ msgstr "星群"
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:151
 #: src/core/StelApp.cpp:621 src/core/StelCore.cpp:257
 #: src/core/StelSkyLayerMgr.cpp:85 src/core/StelSkyLayerMgr.cpp:86
-#: src/StelMainView.cpp:806
+#: src/StelMainView.cpp:819
 msgid "Display Options"
 msgstr "显示选项"
 
@@ -195,12 +195,12 @@ msgstr "卯酉线"
 #. TRANSLATORS: altitude
 #. TRANSLATORS: Satellite altitude
 #: src/core/modules/GridLinesMgr.cpp:732 src/gui/SearchDialog.cpp:310
-#: src/gui/AstroCalcDialog.cpp:847 src/gui/AstroCalcDialog.cpp:1521
-#: src/gui/AstroCalcDialog.cpp:1906 src/gui/AstroCalcDialog.cpp:2797
-#: src/gui/AstroCalcDialog.cpp:3302 src/gui/AstroCalcDialog.cpp:3582
-#: src/gui/AstroCalcDialog.cpp:3584 src/ui_viewDialog.h:3534
+#: src/gui/AstroCalcDialog.cpp:848 src/gui/AstroCalcDialog.cpp:1522
+#: src/gui/AstroCalcDialog.cpp:1907 src/gui/AstroCalcDialog.cpp:2798
+#: src/gui/AstroCalcDialog.cpp:3320 src/gui/AstroCalcDialog.cpp:3600
+#: src/gui/AstroCalcDialog.cpp:3602 src/ui_viewDialog.h:3534
 #: plugins/Satellites/src/Satellite.cpp:328
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1347
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1374
 msgid "Altitude"
 msgstr "地平高度"
 
@@ -320,9 +320,9 @@ msgstr ""
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/GridLinesMgr.cpp:1463 src/core/modules/Planet.cpp:622
-#: src/core/modules/Planet.cpp:916 src/gui/AstroCalcDialog.cpp:6226
+#: src/core/modules/Planet.cpp:916 src/gui/AstroCalcDialog.cpp:6249
 #: plugins/Satellites/src/Satellite.cpp:326
-#: plugins/Satellites/src/Satellite.cpp:388
+#: plugins/Satellites/src/Satellite.cpp:387
 #: plugins/MeteorShowers/src/MeteorShower.cpp:546
 msgctxt "speed"
 msgid "km/s"
@@ -663,7 +663,7 @@ msgstr "光污染周期性变化"
 
 #: src/core/modules/LandscapeMgr.cpp:1031 src/scripting/StelScriptMgr.cpp:457
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
-#: plugins/Oculars/src/gui/OcularDialog.cpp:594
+#: plugins/Oculars/src/gui/OcularDialog.cpp:610
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:125
 #: plugins/Novae/src/gui/NovaeDialog.cpp:123
@@ -682,8 +682,8 @@ msgstr "作者"
 
 #. TRANSLATORS: Unit of measure for distance - meter
 #: src/core/modules/LandscapeMgr.cpp:1037 src/gui/StelGuiItems.cpp:775
-#: plugins/Satellites/src/Satellite.cpp:418
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1020
+#: plugins/Satellites/src/Satellite.cpp:417
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1038
 msgctxt "distance"
 msgid "m"
 msgstr "米"
@@ -762,9 +762,9 @@ msgstr "直径"
 #: src/core/modules/NomenclatureItem.cpp:220 src/core/modules/Planet.cpp:578
 #: src/core/modules/Planet.cpp:603 src/core/modules/Planet.cpp:701
 #: src/core/modules/Comet.cpp:164 src/core/modules/Comet.cpp:174
-#: src/gui/StelGuiItems.cpp:805 src/gui/AstroCalcDialog.cpp:6161
+#: src/gui/StelGuiItems.cpp:805 src/gui/AstroCalcDialog.cpp:6184
 #: plugins/Satellites/src/Satellite.cpp:322
-#: plugins/Satellites/src/Satellite.cpp:381
+#: plugins/Satellites/src/Satellite.cpp:380
 msgctxt "distance"
 msgid "km"
 msgstr "千米"
@@ -1434,7 +1434,7 @@ msgid "Nomenclature labels"
 msgstr "行星表面特征体系命名标签"
 
 #: src/core/modules/Nebula.cpp:148 src/core/StelObject.cpp:252
-#: src/gui/AstroCalcDialog.cpp:3128 src/gui/AstroCalcDialog.cpp:3186
+#: src/gui/AstroCalcDialog.cpp:3146 src/gui/AstroCalcDialog.cpp:3204
 #: plugins/Supernovae/src/Supernova.cpp:127
 msgid "Magnitude"
 msgstr "星等"
@@ -1487,17 +1487,17 @@ msgid "after extinction"
 msgstr "消光后"
 
 #: src/core/modules/Nebula.cpp:249 src/core/modules/Nebula.cpp:251
-#: src/gui/AstroCalcDialog.cpp:1073 src/gui/AstroCalcDialog.cpp:1075
+#: src/gui/AstroCalcDialog.cpp:1074 src/gui/AstroCalcDialog.cpp:1076
 msgctxt "magnitude"
 msgid "mag"
 msgstr "星等"
 
-#: src/core/modules/Nebula.cpp:249 src/gui/AstroCalcDialog.cpp:1073
-#: src/gui/AstroCalcDialog.cpp:1080 src/gui/AstroCalcDialog.cpp:1153
+#: src/core/modules/Nebula.cpp:249 src/gui/AstroCalcDialog.cpp:1074
+#: src/gui/AstroCalcDialog.cpp:1081 src/gui/AstroCalcDialog.cpp:1154
 msgid "arc-min"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:251 src/gui/AstroCalcDialog.cpp:1075
+#: src/core/modules/Nebula.cpp:251 src/gui/AstroCalcDialog.cpp:1076
 msgid "arc-sec"
 msgstr ""
 
@@ -1526,8 +1526,8 @@ msgstr "光年"
 
 #: src/core/modules/Nebula.cpp:319 src/core/modules/Nebula.cpp:365
 #: src/core/modules/Planet.cpp:613 src/core/modules/StarWrapper.cpp:312
-#: src/core/modules/StarWrapper.cpp:314 src/gui/AstroCalcDialog.cpp:3139
-#: src/gui/AstroCalcDialog.cpp:3197 src/ui_configurationDialog.h:1700
+#: src/core/modules/StarWrapper.cpp:314 src/gui/AstroCalcDialog.cpp:3157
+#: src/gui/AstroCalcDialog.cpp:3215 src/ui_configurationDialog.h:1700
 #: plugins/Supernovae/src/Supernova.cpp:159 plugins/Novae/src/Nova.cpp:162
 #: plugins/Exoplanets/src/Exoplanet.cpp:293
 msgid "Distance"
@@ -1965,7 +1965,7 @@ msgstr "原行星云"
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/Nebula.cpp:1396 src/core/modules/StarWrapper.cpp:50
-#: src/core/modules/StarWrapper.cpp:254 src/gui/AstroCalcDialog.cpp:1243
+#: src/core/modules/StarWrapper.cpp:254 src/gui/AstroCalcDialog.cpp:1244
 #: src/translations.h:35
 msgid "star"
 msgstr "恒星"
@@ -2002,8 +2002,8 @@ msgstr ""
 msgid "object of unknown nature"
 msgstr "性质不明对象"
 
-#: src/core/modules/NebulaMgr.cpp:474 src/gui/AstroCalcDialog.cpp:963
-#: src/gui/AstroCalcDialog.cpp:5203
+#: src/core/modules/NebulaMgr.cpp:474 src/gui/AstroCalcDialog.cpp:964
+#: src/gui/AstroCalcDialog.cpp:5226
 msgid "Deep-sky objects"
 msgstr "深空天体"
 
@@ -2012,7 +2012,7 @@ msgid "Toggle DSO type filter"
 msgstr "切换深空天体类型过滤器"
 
 #: src/core/modules/NebulaMgr.cpp:1379 src/gui/StelDialog.cpp:324
-#: src/StelMainView.cpp:933
+#: src/StelMainView.cpp:946
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:747
 msgid "Attention!"
 msgstr ""
@@ -2072,11 +2072,11 @@ msgid "towards"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
-#: src/core/modules/Planet.cpp:576 src/gui/AstroCalcDialog.cpp:881
-#: src/gui/AstroCalcDialog.cpp:1151 src/gui/AstroCalcDialog.cpp:1535
-#: src/gui/AstroCalcDialog.cpp:1583 src/gui/AstroCalcDialog.cpp:3107
-#: src/gui/AstroCalcDialog.cpp:6186 src/gui/AstroCalcDialog.cpp:6248
-#: src/gui/AstroCalcDialog.cpp:6390 plugins/Exoplanets/src/Exoplanet.cpp:322
+#: src/core/modules/Planet.cpp:576 src/gui/AstroCalcDialog.cpp:882
+#: src/gui/AstroCalcDialog.cpp:1152 src/gui/AstroCalcDialog.cpp:1536
+#: src/gui/AstroCalcDialog.cpp:1584 src/gui/AstroCalcDialog.cpp:3125
+#: src/gui/AstroCalcDialog.cpp:6209 src/gui/AstroCalcDialog.cpp:6271
+#: src/gui/AstroCalcDialog.cpp:6413 plugins/Exoplanets/src/Exoplanet.cpp:322
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
 msgctxt "distance, astronomical unit"
 msgid "AU"
@@ -2086,7 +2086,7 @@ msgstr "天文单位"
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #. TRANSLATORS: Unit of measure for distance - millions kilometers
 #: src/core/modules/Planet.cpp:592 src/core/modules/Planet.cpp:610
-#: src/core/modules/Comet.cpp:166 src/gui/AstroCalcDialog.cpp:6163
+#: src/core/modules/Comet.cpp:166 src/gui/AstroCalcDialog.cpp:6186
 msgctxt "distance"
 msgid "M km"
 msgstr "兆千米"
@@ -2125,14 +2125,14 @@ msgid "Equatorial diameter"
 msgstr "赤道直径"
 
 #: src/core/modules/Planet.cpp:739 src/core/modules/Planet.cpp:747
-#: src/gui/AstroCalcDialog.cpp:3144 src/gui/AstroCalcDialog.cpp:3202
+#: src/gui/AstroCalcDialog.cpp:3162 src/gui/AstroCalcDialog.cpp:3220
 #: src/ui_configurationDialog.h:1743
 msgid "Elongation"
 msgstr "距角"
 
 #: src/core/modules/Planet.cpp:740 src/core/modules/Planet.cpp:748
-#: src/gui/AstroCalcDialog.cpp:3154 src/gui/AstroCalcDialog.cpp:3212
-#: plugins/Satellites/src/Satellite.cpp:393
+#: src/gui/AstroCalcDialog.cpp:3172 src/gui/AstroCalcDialog.cpp:3230
+#: plugins/Satellites/src/Satellite.cpp:392
 msgid "Phase angle"
 msgstr "相位角"
 
@@ -2140,14 +2140,14 @@ msgstr "相位角"
 msgid "Illuminated"
 msgstr "被照亮"
 
-#: src/core/modules/Planet.cpp:762 src/gui/AstroCalcDialog.cpp:6249
-#: src/gui/AstroCalcDialog.cpp:6393 src/gui/AstroCalcDialog.cpp:6410
+#: src/core/modules/Planet.cpp:762 src/gui/AstroCalcDialog.cpp:6272
+#: src/gui/AstroCalcDialog.cpp:6416 src/gui/AstroCalcDialog.cpp:6433
 msgid "Angular distance"
 msgstr "角距离"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:780 src/core/modules/Planet.cpp:924
-#: src/core/modules/StarWrapper.cpp:348 src/gui/AstroCalcDialog.cpp:6197
+#: src/core/modules/StarWrapper.cpp:348 src/gui/AstroCalcDialog.cpp:6220
 msgctxt "duration"
 msgid "days"
 msgstr "天"
@@ -2329,8 +2329,8 @@ msgid "Orthographic"
 msgstr "正角投影"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:295 src/gui/AstroCalcDialog.cpp:2477
-#: src/gui/AstroCalcDialog.cpp:5158 src/translations.h:63
+#: src/core/modules/SolarSystem.cpp:295 src/gui/AstroCalcDialog.cpp:2478
+#: src/gui/AstroCalcDialog.cpp:5181 src/translations.h:63
 msgid "Planets"
 msgstr "行星"
 
@@ -2401,11 +2401,11 @@ msgstr "激变变星"
 msgid "eclipsing binary system"
 msgstr "食双星系统"
 
-#: src/core/modules/StarWrapper.cpp:248 src/gui/AstroCalcDialog.cpp:1268
+#: src/core/modules/StarWrapper.cpp:248 src/gui/AstroCalcDialog.cpp:1269
 msgid "variable star"
 msgstr "变星"
 
-#: src/core/modules/StarWrapper.cpp:252 src/gui/AstroCalcDialog.cpp:1251
+#: src/core/modules/StarWrapper.cpp:252 src/gui/AstroCalcDialog.cpp:1252
 msgid "double star"
 msgstr "双星"
 
@@ -2463,7 +2463,7 @@ msgid "Position angle"
 msgstr "位置角"
 
 #: src/core/modules/StarWrapper.cpp:380 src/core/modules/StarWrapper.cpp:382
-#: src/gui/AstroCalcDialog.cpp:3609
+#: src/gui/AstroCalcDialog.cpp:3627
 msgid "Separation"
 msgstr "角距"
 
@@ -2624,8 +2624,8 @@ msgid "Loading plugin"
 msgstr ""
 
 #: src/core/StelCore.cpp:255 src/core/StelObjectMgr.cpp:52
-#: src/gui/StelGui.cpp:228 src/gui/AstroCalcDialog.cpp:1515
-#: src/gui/AstroCalcDialog.cpp:1904 src/gui/AstroCalcDialog.cpp:3602
+#: src/gui/StelGui.cpp:228 src/gui/AstroCalcDialog.cpp:1516
+#: src/gui/AstroCalcDialog.cpp:1905 src/gui/AstroCalcDialog.cpp:3620
 #: src/gui/BookmarksDialog.cpp:114 src/ui_dateTimeDialogGui.h:373
 #: src/ui_dateTimeDialogGui.h:376
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
@@ -3386,18 +3386,18 @@ msgid "Apparent Sidereal Time"
 msgstr "真恒星时"
 
 #. TRANSLATORS: time of transit
-#: src/core/StelObject.cpp:612 src/gui/AstroCalcDialog.cpp:894
-#: src/gui/AstroCalcDialog.cpp:5271
+#: src/core/StelObject.cpp:612 src/gui/AstroCalcDialog.cpp:895
+#: src/gui/AstroCalcDialog.cpp:5294
 msgctxt "celestial event; passage across a meridian"
 msgid "Transit"
 msgstr "中天"
 
-#: src/core/StelObject.cpp:613 src/gui/AstroCalcDialog.cpp:5270
+#: src/core/StelObject.cpp:613 src/gui/AstroCalcDialog.cpp:5293
 msgctxt "celestial event"
 msgid "Rise"
 msgstr "升"
 
-#: src/core/StelObject.cpp:614 src/gui/AstroCalcDialog.cpp:5274
+#: src/core/StelObject.cpp:614 src/gui/AstroCalcDialog.cpp:5297
 msgctxt "celestial event"
 msgid "Set"
 msgstr "落"
@@ -3569,7 +3569,7 @@ msgid "References"
 msgstr ""
 
 #: src/core/StelMovementMgr.cpp:227 src/gui/StelGui.cpp:230
-#: src/StelMainView.cpp:804 src/StelMainView.cpp:805
+#: src/StelMainView.cpp:817 src/StelMainView.cpp:818
 msgid "Miscellaneous"
 msgstr "杂项"
 
@@ -3970,7 +3970,7 @@ msgid "Acknowledgments"
 msgstr "致谢"
 
 #: src/gui/ConfigurationDialog.cpp:1227
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:678
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:696
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:266
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:157
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:136
@@ -3984,8 +3984,8 @@ msgstr "联系信息"
 
 #: src/gui/ConfigurationDialog.cpp:1230 src/scripting/StelScriptMgr.cpp:467
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
-#: plugins/Oculars/src/gui/OcularDialog.cpp:592
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:676
+#: plugins/Oculars/src/gui/OcularDialog.cpp:608
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:694
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:264
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:238
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
@@ -4007,8 +4007,8 @@ msgstr "版本"
 
 #: src/gui/ConfigurationDialog.cpp:1231 src/scripting/StelScriptMgr.cpp:462
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
-#: plugins/Oculars/src/gui/OcularDialog.cpp:593
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:677
+#: plugins/Oculars/src/gui/OcularDialog.cpp:609
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:695
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:239
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
@@ -4332,7 +4332,7 @@ msgstr "Stellarium 帮助"
 msgid "Keys"
 msgstr "快捷键"
 
-#: src/gui/HelpDialog.cpp:248 src/gui/HelpDialog.cpp:363
+#: src/gui/HelpDialog.cpp:248 src/gui/HelpDialog.cpp:372
 msgid "Further Reading"
 msgstr "了解更多"
 
@@ -4429,88 +4429,88 @@ msgid ""
 " available via the \"%1\" button."
 msgstr "以下只列出了被指派了快捷键的动作。更多动作可以通过“%1”按钮查看。"
 
-#: src/gui/HelpDialog.cpp:332
+#: src/gui/HelpDialog.cpp:312
 msgid "Text User Interface (TUI)"
 msgstr "文本用户界面（TUI）"
 
-#: src/gui/HelpDialog.cpp:333
+#: src/gui/HelpDialog.cpp:340
 msgid "Activate TUI"
 msgstr "激活TUI"
 
-#: src/gui/HelpDialog.cpp:337
+#: src/gui/HelpDialog.cpp:346
 msgid "Special local keys"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:338
+#: src/gui/HelpDialog.cpp:347
 msgid ""
 "All these hotkeys are locally available to run when specific window or tab "
 "is opened."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:339 src/ui_scriptConsole.h:380
+#: src/gui/HelpDialog.cpp:348 src/ui_scriptConsole.h:380
 msgid "Script console"
 msgstr "脚本控制台"
 
-#: src/gui/HelpDialog.cpp:340 src/ui_scriptConsole.h:383
+#: src/gui/HelpDialog.cpp:349 src/ui_scriptConsole.h:383
 msgid "Load script from file"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:342 src/ui_scriptConsole.h:387
+#: src/gui/HelpDialog.cpp:351 src/ui_scriptConsole.h:387
 msgid "Save script to file"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:344 src/ui_scriptConsole.h:405
+#: src/gui/HelpDialog.cpp:353 src/ui_scriptConsole.h:405
 msgid "Run script"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:346 src/ui_astroCalcDialog.h:1661
+#: src/gui/HelpDialog.cpp:355 src/ui_astroCalcDialog.h:1661
 msgid "Astronomical calculations"
 msgstr "天文计算"
 
-#: src/gui/HelpDialog.cpp:347 src/ui_astroCalcDialog.h:1696
+#: src/gui/HelpDialog.cpp:356 src/ui_astroCalcDialog.h:1696
 msgid "Update positions"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:350 src/ui_astroCalcDialog.h:1762
+#: src/gui/HelpDialog.cpp:359 src/ui_astroCalcDialog.h:1762
 msgid "Calculate ephemeris"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:352 src/ui_astroCalcDialog.h:1785
+#: src/gui/HelpDialog.cpp:361 src/ui_astroCalcDialog.h:1785
 msgid "Calculate transits"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:354 src/ui_astroCalcDialog.h:1805
+#: src/gui/HelpDialog.cpp:363 src/ui_astroCalcDialog.h:1805
 msgid "Calculate phenomena"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:364
+#: src/gui/HelpDialog.cpp:373
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
 msgstr "以下为外部网络链接，浏览器将被启动:\n"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:368
+#: src/gui/HelpDialog.cpp:377
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr "{FAQ} -关于Stellarium 的常见问答"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:373
+#: src/gui/HelpDialog.cpp:382
 msgid "{The Stellarium Wiki} - general information."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:378
+#: src/gui/HelpDialog.cpp:387
 msgid "{The landscapes} - user-contributed landscapes for Stellarium."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:383
+#: src/gui/HelpDialog.cpp:392
 msgid "{The scripts} - user-contributed and official scripts for Stellarium."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:388
+#: src/gui/HelpDialog.cpp:397
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -4518,74 +4518,74 @@ msgid ""
 msgstr "{Bug 报告及功能请求系统} - 如果出现某些功能异常、缺失或不在跟踪列表中，你可以在此处打开 bug 汇报。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:393
+#: src/gui/HelpDialog.cpp:402
 msgid "{Google Groups} - discuss Stellarium with other users."
 msgstr "{Google Groups} - 与其他用户交流Stellarium"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:398
+#: src/gui/HelpDialog.cpp:407
 msgid "{Open Collective} - donations to the Stellarium development team."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:469
+#: src/gui/HelpDialog.cpp:478
 msgid "Developers"
 msgstr "开发者"
 
-#: src/gui/HelpDialog.cpp:470
+#: src/gui/HelpDialog.cpp:479
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "计划协调&开发经理: %1"
 
-#: src/gui/HelpDialog.cpp:471 src/gui/HelpDialog.cpp:477
+#: src/gui/HelpDialog.cpp:480 src/gui/HelpDialog.cpp:486
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "视觉与其他设计: %1"
 
-#: src/gui/HelpDialog.cpp:472 src/gui/HelpDialog.cpp:473
-#: src/gui/HelpDialog.cpp:474 src/gui/HelpDialog.cpp:479
-#: src/gui/HelpDialog.cpp:480 src/gui/HelpDialog.cpp:481
-#: src/gui/HelpDialog.cpp:482 src/gui/HelpDialog.cpp:483
-#: src/gui/HelpDialog.cpp:484 src/gui/HelpDialog.cpp:485
-#: src/gui/HelpDialog.cpp:486 src/gui/HelpDialog.cpp:487
-#: src/gui/HelpDialog.cpp:488
+#: src/gui/HelpDialog.cpp:481 src/gui/HelpDialog.cpp:482
+#: src/gui/HelpDialog.cpp:483 src/gui/HelpDialog.cpp:488
+#: src/gui/HelpDialog.cpp:489 src/gui/HelpDialog.cpp:490
+#: src/gui/HelpDialog.cpp:491 src/gui/HelpDialog.cpp:492
+#: src/gui/HelpDialog.cpp:493 src/gui/HelpDialog.cpp:494
+#: src/gui/HelpDialog.cpp:495 src/gui/HelpDialog.cpp:496
+#: src/gui/HelpDialog.cpp:497
 #, qt-format
 msgid "Developer: %1"
 msgstr "开发者: %1"
 
-#: src/gui/HelpDialog.cpp:475
+#: src/gui/HelpDialog.cpp:484
 msgid "Former Developers"
 msgstr "前开发者"
 
-#: src/gui/HelpDialog.cpp:476
+#: src/gui/HelpDialog.cpp:485
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr "有一些曾经作出杰出贡献的开发者已不再参与开发。他们的工作曾为这一项目带来巨大的进步："
 
-#: src/gui/HelpDialog.cpp:478
+#: src/gui/HelpDialog.cpp:487
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "说明文件撰写: %1"
 
-#: src/gui/HelpDialog.cpp:489 src/gui/HelpDialog.cpp:490
+#: src/gui/HelpDialog.cpp:498 src/gui/HelpDialog.cpp:499
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX开发: %1"
 
-#: src/gui/HelpDialog.cpp:491
+#: src/gui/HelpDialog.cpp:500
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "连续积分：%1"
 
-#: src/gui/HelpDialog.cpp:492
+#: src/gui/HelpDialog.cpp:501
 #, qt-format
 msgid "Tester: %1"
 msgstr "测试者：%1"
 
-#: src/gui/HelpDialog.cpp:493
+#: src/gui/HelpDialog.cpp:502
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:103
-#: plugins/Oculars/src/gui/OcularDialog.cpp:595
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:680
+#: plugins/Oculars/src/gui/OcularDialog.cpp:611
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:698
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:271
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:241
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:138
@@ -4595,29 +4595,29 @@ msgstr "测试者：%1"
 msgid "Contributors"
 msgstr "贡献者"
 
-#: src/gui/HelpDialog.cpp:494
+#: src/gui/HelpDialog.cpp:503
 #, qt-format
 msgid ""
 "Several people have made contributions to the project and their work has "
 "made Stellarium better (sorted alphabetically): %1."
 msgstr "这几个人对该项目做出了贡献，他们的工作使Stellarium更好（按字母顺序排序）: %1."
 
-#: src/gui/HelpDialog.cpp:495 plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
+#: src/gui/HelpDialog.cpp:504 plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
 msgid "Acknowledgment"
 msgstr "鸣谢"
 
-#: src/gui/HelpDialog.cpp:496
+#: src/gui/HelpDialog.cpp:505
 msgid ""
 "If the Stellarium planetarium was helpful for your research work, the "
 "following acknowledgment would be appreciated:"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:497
+#: src/gui/HelpDialog.cpp:506
 msgid "This research has made use of the Stellarium planetarium"
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:500
+#: src/gui/HelpDialog.cpp:509
 msgid ""
 "Or you may {download the BibTeX file of the paper} to create another "
 "citation format."
@@ -5242,16 +5242,16 @@ msgstr "黄道（ J2000.0）"
 msgid "Right ascension"
 msgstr "赤经"
 
-#: src/gui/SearchDialog.cpp:299 src/gui/AstroCalcDialog.cpp:3177
-#: src/gui/AstroCalcDialog.cpp:3235
+#: src/gui/SearchDialog.cpp:299 src/gui/AstroCalcDialog.cpp:3195
+#: src/gui/AstroCalcDialog.cpp:3253
 msgid "Declination"
 msgstr "赤纬"
 
 #. TRANSLATORS: azimuth
-#: src/gui/SearchDialog.cpp:307 src/gui/AstroCalcDialog.cpp:619
-#: src/gui/AstroCalcDialog.cpp:806 src/gui/AstroCalcDialog.cpp:808
-#: src/gui/AstroCalcDialog.cpp:845 src/gui/AstroCalcDialog.cpp:1519
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1348
+#: src/gui/SearchDialog.cpp:307 src/gui/AstroCalcDialog.cpp:620
+#: src/gui/AstroCalcDialog.cpp:807 src/gui/AstroCalcDialog.cpp:809
+#: src/gui/AstroCalcDialog.cpp:846 src/gui/AstroCalcDialog.cpp:1520
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1375
 msgid "Azimuth"
 msgstr "方位角"
 
@@ -5354,26 +5354,26 @@ msgstr ""
 msgid "Valid range"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:618 src/gui/AstroCalcDialog.cpp:806
-#: src/gui/AstroCalcDialog.cpp:808 src/gui/AstroCalcDialog.cpp:2796
-#: src/gui/AstroCalcDialog.cpp:3582 src/gui/AstroCalcDialog.cpp:3584
+#: src/gui/AstroCalcDialog.cpp:619 src/gui/AstroCalcDialog.cpp:807
+#: src/gui/AstroCalcDialog.cpp:809 src/gui/AstroCalcDialog.cpp:2797
+#: src/gui/AstroCalcDialog.cpp:3600 src/gui/AstroCalcDialog.cpp:3602
 msgid "Local Time"
 msgstr "地方时"
 
-#: src/gui/AstroCalcDialog.cpp:763 src/gui/AstroCalcDialog.cpp:2702
-#: src/gui/AstroCalcDialog.cpp:3453 src/gui/AstroCalcDialog.cpp:6521
+#: src/gui/AstroCalcDialog.cpp:764 src/gui/AstroCalcDialog.cpp:2703
+#: src/gui/AstroCalcDialog.cpp:3471 src/gui/AstroCalcDialog.cpp:6544
 #: src/gui/BookmarksDialog.cpp:180
 msgid "Unnamed star"
 msgstr "未命名恒星"
 
-#: src/gui/AstroCalcDialog.cpp:799 src/gui/AstroCalcDialog.cpp:3559
+#: src/gui/AstroCalcDialog.cpp:800 src/gui/AstroCalcDialog.cpp:3577
 #, qt-format
 msgid "Now about %1"
 msgstr "现在约%1"
 
 #. TRANSLATORS: name of object
-#: src/gui/AstroCalcDialog.cpp:841 src/gui/AstroCalcDialog.cpp:1514
-#: src/gui/AstroCalcDialog.cpp:1903 src/gui/AstroCalcDialog.cpp:5259
+#: src/gui/AstroCalcDialog.cpp:842 src/gui/AstroCalcDialog.cpp:1515
+#: src/gui/AstroCalcDialog.cpp:1904 src/gui/AstroCalcDialog.cpp:5282
 #: src/ui_configurationDialog.h:1739
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:524
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
@@ -5383,556 +5383,556 @@ msgid "Name"
 msgstr "名称"
 
 #. TRANSLATORS: right ascension
-#: src/gui/AstroCalcDialog.cpp:852 src/gui/AstroCalcDialog.cpp:1526
+#: src/gui/AstroCalcDialog.cpp:853 src/gui/AstroCalcDialog.cpp:1527
 msgid "RA (J2000)"
 msgstr "赤经（J2000）"
 
 #. TRANSLATORS: declination
-#: src/gui/AstroCalcDialog.cpp:854 src/gui/AstroCalcDialog.cpp:1528
+#: src/gui/AstroCalcDialog.cpp:855 src/gui/AstroCalcDialog.cpp:1529
 msgid "Dec (J2000)"
 msgstr "赤纬（J2000）"
 
 #. TRANSLATORS: opacity
-#: src/gui/AstroCalcDialog.cpp:859 src/gui/AstroCalcDialog.cpp:5268
+#: src/gui/AstroCalcDialog.cpp:860 src/gui/AstroCalcDialog.cpp:5291
 msgid "Opac."
 msgstr "不透明度"
 
 #. TRANSLATORS: magnitude
-#: src/gui/AstroCalcDialog.cpp:864 src/gui/AstroCalcDialog.cpp:1531
-#: src/gui/AstroCalcDialog.cpp:1908 src/gui/AstroCalcDialog.cpp:5263
+#: src/gui/AstroCalcDialog.cpp:865 src/gui/AstroCalcDialog.cpp:1532
+#: src/gui/AstroCalcDialog.cpp:1909 src/gui/AstroCalcDialog.cpp:5286
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
 msgid "Mag."
 msgstr ""
 
 #. TRANSLATORS: angular size, arc-minutes
-#: src/gui/AstroCalcDialog.cpp:867
+#: src/gui/AstroCalcDialog.cpp:868
 msgid "A.S."
 msgstr "角分"
 
 #. TRANSLATORS: separation, arc-seconds
 #. TRANSLATORS: separation
-#: src/gui/AstroCalcDialog.cpp:871 src/gui/AstroCalcDialog.cpp:5278
+#: src/gui/AstroCalcDialog.cpp:872 src/gui/AstroCalcDialog.cpp:5301
 msgid "Sep."
 msgstr ""
 
 #. TRANSLATORS: period, days
-#: src/gui/AstroCalcDialog.cpp:876
+#: src/gui/AstroCalcDialog.cpp:877
 msgid "Per."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:876
+#: src/gui/AstroCalcDialog.cpp:877
 msgctxt "days"
 msgid "d"
 msgstr "天"
 
 #. TRANSLATORS: distance, AU
-#: src/gui/AstroCalcDialog.cpp:881 src/gui/AstroCalcDialog.cpp:1535
+#: src/gui/AstroCalcDialog.cpp:882 src/gui/AstroCalcDialog.cpp:1536
 msgid "Dist."
 msgstr ""
 
 #. TRANSLATORS: proper motion, arc-second per year
-#: src/gui/AstroCalcDialog.cpp:886
+#: src/gui/AstroCalcDialog.cpp:887
 msgid "P.M."
 msgstr "进动"
 
-#: src/gui/AstroCalcDialog.cpp:886
+#: src/gui/AstroCalcDialog.cpp:887
 msgctxt "arc-second per year"
 msgid "\"/yr"
 msgstr ""
 
 #. TRANSLATORS: surface brightness
-#: src/gui/AstroCalcDialog.cpp:891
+#: src/gui/AstroCalcDialog.cpp:892
 msgid "S.B."
 msgstr "面亮度"
 
 #. TRANSLATORS: elevation
-#: src/gui/AstroCalcDialog.cpp:896 src/gui/AstroCalcDialog.cpp:5273
+#: src/gui/AstroCalcDialog.cpp:897 src/gui/AstroCalcDialog.cpp:5296
 msgid "Elev."
 msgstr ""
 
 #. TRANSLATORS: elongation
-#: src/gui/AstroCalcDialog.cpp:898 src/gui/AstroCalcDialog.cpp:1537
+#: src/gui/AstroCalcDialog.cpp:899 src/gui/AstroCalcDialog.cpp:1538
 msgid "Elong."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:964 src/ui_viewDialog.h:3143
+#: src/gui/AstroCalcDialog.cpp:965 src/ui_viewDialog.h:3143
 msgid "Solar system objects"
 msgstr "太阳系天体"
 
-#: src/gui/AstroCalcDialog.cpp:965
+#: src/gui/AstroCalcDialog.cpp:966
 msgid "Solar system objects: comets"
 msgstr "太阳系天体：彗星"
 
-#: src/gui/AstroCalcDialog.cpp:966 src/gui/AstroCalcDialog.cpp:2486
+#: src/gui/AstroCalcDialog.cpp:967 src/gui/AstroCalcDialog.cpp:2487
 msgid "Solar system objects: minor bodies"
 msgstr "太阳系天体：小行星"
 
-#: src/gui/AstroCalcDialog.cpp:967
+#: src/gui/AstroCalcDialog.cpp:968
 msgid "Solar system objects: planets"
 msgstr "太阳系天体：行星"
 
-#: src/gui/AstroCalcDialog.cpp:1030
+#: src/gui/AstroCalcDialog.cpp:1031
 msgid "Elevation of object at moment of upper culmination"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1033
+#: src/gui/AstroCalcDialog.cpp:1034
 msgid "Angular distance from the Sun at the moment of computation of position"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1051
+#: src/gui/AstroCalcDialog.cpp:1052
 #, qt-format
 msgid "Positions on %1"
 msgstr "位置 %1"
 
-#: src/gui/AstroCalcDialog.cpp:1080
+#: src/gui/AstroCalcDialog.cpp:1081
 msgid "Average angular size"
 msgstr "平均角大小"
 
-#: src/gui/AstroCalcDialog.cpp:1148 src/gui/AstroCalcDialog.cpp:1582
+#: src/gui/AstroCalcDialog.cpp:1149 src/gui/AstroCalcDialog.cpp:1583
 msgid "Planetocentric distance"
 msgstr "与行星中心距离"
 
-#: src/gui/AstroCalcDialog.cpp:1150 src/gui/AstroCalcDialog.cpp:1582
+#: src/gui/AstroCalcDialog.cpp:1151 src/gui/AstroCalcDialog.cpp:1583
 msgid "Topocentric distance"
 msgstr "地面距离"
 
-#: src/gui/AstroCalcDialog.cpp:1153
+#: src/gui/AstroCalcDialog.cpp:1154
 msgid "Angular size (with rings, if any)"
 msgstr "角大小 （如有环则带环）"
 
-#: src/gui/AstroCalcDialog.cpp:1274
+#: src/gui/AstroCalcDialog.cpp:1275
 msgid "star with high proper motion"
 msgstr "高自行星"
 
-#: src/gui/AstroCalcDialog.cpp:1377 src/gui/AstroCalcDialog.cpp:1825
-#: src/gui/AstroCalcDialog.cpp:2091 src/gui/AstroCalcDialog.cpp:3939
-#: src/gui/AstroCalcDialog.cpp:6044
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1423
+#: src/gui/AstroCalcDialog.cpp:1378 src/gui/AstroCalcDialog.cpp:1826
+#: src/gui/AstroCalcDialog.cpp:2092 src/gui/AstroCalcDialog.cpp:3957
+#: src/gui/AstroCalcDialog.cpp:6067
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1450
 msgid "Microsoft Excel Open XML Spreadsheet"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1379 src/gui/AstroCalcDialog.cpp:1827
-#: src/gui/AstroCalcDialog.cpp:2093 src/gui/AstroCalcDialog.cpp:3941
-#: src/gui/AstroCalcDialog.cpp:6046
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1425
+#: src/gui/AstroCalcDialog.cpp:1380 src/gui/AstroCalcDialog.cpp:1828
+#: src/gui/AstroCalcDialog.cpp:2094 src/gui/AstroCalcDialog.cpp:3959
+#: src/gui/AstroCalcDialog.cpp:6069
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1452
 msgid "CSV (Comma delimited)"
 msgstr "CSV (逗号分隔)"
 
-#: src/gui/AstroCalcDialog.cpp:1383
+#: src/gui/AstroCalcDialog.cpp:1384
 msgid "Save celestial positions of objects as..."
 msgstr "将天体的位置保存为..."
 
-#: src/gui/AstroCalcDialog.cpp:1401
+#: src/gui/AstroCalcDialog.cpp:1402
 msgid "Celestial positions of objects"
 msgstr ""
 
 #. TRANSLATORS: phase
-#: src/gui/AstroCalcDialog.cpp:1533 src/gui/AstroCalcDialog.cpp:3134
-#: src/gui/AstroCalcDialog.cpp:3192
+#: src/gui/AstroCalcDialog.cpp:1534 src/gui/AstroCalcDialog.cpp:3152
+#: src/gui/AstroCalcDialog.cpp:3210
 msgid "Phase"
 msgstr "相位"
 
-#: src/gui/AstroCalcDialog.cpp:1831
+#: src/gui/AstroCalcDialog.cpp:1832
 msgid "Save calculated ephemeris as..."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1849 src/ui_astroCalcDialog.h:1672
+#: src/gui/AstroCalcDialog.cpp:1850 src/ui_astroCalcDialog.h:1672
 msgid "Ephemeris"
 msgstr "星历表"
 
-#: src/gui/AstroCalcDialog.cpp:1909 src/gui/AstroCalcDialog.cpp:3611
+#: src/gui/AstroCalcDialog.cpp:1910 src/gui/AstroCalcDialog.cpp:3629
 msgid "Solar Elongation"
 msgstr "日角距"
 
-#: src/gui/AstroCalcDialog.cpp:1910 src/gui/AstroCalcDialog.cpp:3612
+#: src/gui/AstroCalcDialog.cpp:1911 src/gui/AstroCalcDialog.cpp:3630
 msgid "Lunar Elongation"
 msgstr "月角距"
 
-#: src/gui/AstroCalcDialog.cpp:2097
+#: src/gui/AstroCalcDialog.cpp:2098
 msgid "Save calculated transits as..."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2115 src/ui_astroCalcDialog.h:1674
+#: src/gui/AstroCalcDialog.cpp:2116 src/ui_astroCalcDialog.h:1674
 msgid "Transits"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2333
+#: src/gui/AstroCalcDialog.cpp:2334
 msgid "1 minute"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2333
+#: src/gui/AstroCalcDialog.cpp:2334
 msgid "10 minutes"
 msgstr "10分钟"
 
-#: src/gui/AstroCalcDialog.cpp:2333
+#: src/gui/AstroCalcDialog.cpp:2334
 msgid "30 minutes"
 msgstr "30分钟"
 
-#: src/gui/AstroCalcDialog.cpp:2333
+#: src/gui/AstroCalcDialog.cpp:2334
 msgid "1 hour"
 msgstr "1小时"
 
-#: src/gui/AstroCalcDialog.cpp:2333
+#: src/gui/AstroCalcDialog.cpp:2334
 msgid "6 hours"
 msgstr "6小时"
 
-#: src/gui/AstroCalcDialog.cpp:2333
+#: src/gui/AstroCalcDialog.cpp:2334
 msgid "12 hours"
 msgstr "12小时"
 
-#: src/gui/AstroCalcDialog.cpp:2334
+#: src/gui/AstroCalcDialog.cpp:2335
 msgid "1 solar day"
 msgstr "1 太阳日"
 
-#: src/gui/AstroCalcDialog.cpp:2334
+#: src/gui/AstroCalcDialog.cpp:2335
 msgid "5 solar days"
 msgstr "5 太阳日"
 
-#: src/gui/AstroCalcDialog.cpp:2334
+#: src/gui/AstroCalcDialog.cpp:2335
 msgid "10 solar days"
 msgstr "10 太阳日"
 
-#: src/gui/AstroCalcDialog.cpp:2334
+#: src/gui/AstroCalcDialog.cpp:2335
 msgid "15 solar days"
 msgstr "15 太阳日"
 
-#: src/gui/AstroCalcDialog.cpp:2334
+#: src/gui/AstroCalcDialog.cpp:2335
 msgid "30 solar days"
 msgstr "30 太阳日"
 
-#: src/gui/AstroCalcDialog.cpp:2335
+#: src/gui/AstroCalcDialog.cpp:2336
 msgid "60 solar days"
 msgstr "60 太阳日"
 
-#: src/gui/AstroCalcDialog.cpp:2335
+#: src/gui/AstroCalcDialog.cpp:2336
 msgid "100 solar days"
 msgstr "100太阳日"
 
-#: src/gui/AstroCalcDialog.cpp:2335
+#: src/gui/AstroCalcDialog.cpp:2336
 msgid "500 solar days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2335
+#: src/gui/AstroCalcDialog.cpp:2336
 msgid "1 sidereal day"
 msgstr "1 恒星日"
 
-#: src/gui/AstroCalcDialog.cpp:2335
+#: src/gui/AstroCalcDialog.cpp:2336
 msgid "5 sidereal days"
 msgstr "5 恒星日"
 
-#: src/gui/AstroCalcDialog.cpp:2336
+#: src/gui/AstroCalcDialog.cpp:2337
 msgid "10 sidereal days"
 msgstr "10 恒星日"
 
-#: src/gui/AstroCalcDialog.cpp:2336
+#: src/gui/AstroCalcDialog.cpp:2337
 msgid "15 sidereal days"
 msgstr "15 恒星日"
 
-#: src/gui/AstroCalcDialog.cpp:2336
+#: src/gui/AstroCalcDialog.cpp:2337
 msgid "30 sidereal days"
 msgstr "30 恒星日"
 
-#: src/gui/AstroCalcDialog.cpp:2336
+#: src/gui/AstroCalcDialog.cpp:2337
 msgid "60 sidereal days"
 msgstr "60 恒星日"
 
-#: src/gui/AstroCalcDialog.cpp:2336
+#: src/gui/AstroCalcDialog.cpp:2337
 msgid "100 sidereal days"
 msgstr "100恒星日"
 
-#: src/gui/AstroCalcDialog.cpp:2337
+#: src/gui/AstroCalcDialog.cpp:2338
 msgid "500 sidereal days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2337
+#: src/gui/AstroCalcDialog.cpp:2338
 msgid "1 sidereal year"
 msgstr "1恒星年"
 
-#: src/gui/AstroCalcDialog.cpp:2337
+#: src/gui/AstroCalcDialog.cpp:2338
 msgid "1 Julian day"
 msgstr "1 儒略日"
 
-#: src/gui/AstroCalcDialog.cpp:2337
+#: src/gui/AstroCalcDialog.cpp:2338
 msgid "5 Julian days"
 msgstr "5 儒略日"
 
-#: src/gui/AstroCalcDialog.cpp:2337
+#: src/gui/AstroCalcDialog.cpp:2338
 msgid "10 Julian days"
 msgstr "10 儒略日"
 
-#: src/gui/AstroCalcDialog.cpp:2338
+#: src/gui/AstroCalcDialog.cpp:2339
 msgid "15 Julian days"
 msgstr "15 儒略日"
 
-#: src/gui/AstroCalcDialog.cpp:2338
+#: src/gui/AstroCalcDialog.cpp:2339
 msgid "30 Julian days"
 msgstr "30 儒略日"
 
-#: src/gui/AstroCalcDialog.cpp:2338
+#: src/gui/AstroCalcDialog.cpp:2339
 msgid "60 Julian days"
 msgstr "60 儒略日"
 
-#: src/gui/AstroCalcDialog.cpp:2338
+#: src/gui/AstroCalcDialog.cpp:2339
 msgid "100 Julian days"
 msgstr "100儒略日"
 
-#: src/gui/AstroCalcDialog.cpp:2338
+#: src/gui/AstroCalcDialog.cpp:2339
 msgid "1 Julian year"
 msgstr "1 儒略年"
 
-#: src/gui/AstroCalcDialog.cpp:2339
+#: src/gui/AstroCalcDialog.cpp:2340
 msgid "1 Gaussian year"
 msgstr "1 高斯年"
 
-#: src/gui/AstroCalcDialog.cpp:2339
+#: src/gui/AstroCalcDialog.cpp:2340
 msgid "1 synodic month"
 msgstr "1 朔望月"
 
-#: src/gui/AstroCalcDialog.cpp:2339
+#: src/gui/AstroCalcDialog.cpp:2340
 msgid "1 draconic month"
 msgstr "1 交点月"
 
-#: src/gui/AstroCalcDialog.cpp:2339
+#: src/gui/AstroCalcDialog.cpp:2340
 msgid "1 mean tropical month"
 msgstr "1 分至月"
 
-#: src/gui/AstroCalcDialog.cpp:2340
+#: src/gui/AstroCalcDialog.cpp:2341
 msgid "1 anomalistic month"
 msgstr "1 近点月"
 
-#: src/gui/AstroCalcDialog.cpp:2340
+#: src/gui/AstroCalcDialog.cpp:2341
 msgid "1 anomalistic year"
 msgstr "1 近点年"
 
-#: src/gui/AstroCalcDialog.cpp:2340
+#: src/gui/AstroCalcDialog.cpp:2341
 msgid "1 saros"
 msgstr "1 沙罗周期"
 
-#: src/gui/AstroCalcDialog.cpp:2340
+#: src/gui/AstroCalcDialog.cpp:2341
 msgid "custom interval"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2477
+#: src/gui/AstroCalcDialog.cpp:2478
 msgid "Latest selected object"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2477
+#: src/gui/AstroCalcDialog.cpp:2478
 msgid "Solar system"
 msgstr "太阳系"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2477 src/gui/AstroCalcDialog.cpp:5164
+#: src/gui/AstroCalcDialog.cpp:2478 src/gui/AstroCalcDialog.cpp:5187
 #: src/translations.h:67
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
 msgid "Asteroids"
 msgstr "小行星"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2478 src/gui/AstroCalcDialog.cpp:5166
+#: src/gui/AstroCalcDialog.cpp:2479 src/gui/AstroCalcDialog.cpp:5189
 #: src/translations.h:71
 msgid "Plutinos"
 msgstr "冥族小天体"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2478 src/gui/AstroCalcDialog.cpp:5165
+#: src/gui/AstroCalcDialog.cpp:2479 src/gui/AstroCalcDialog.cpp:5188
 #: src/translations.h:65
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Comets"
 msgstr "彗星"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2478 src/gui/AstroCalcDialog.cpp:5167
+#: src/gui/AstroCalcDialog.cpp:2479 src/gui/AstroCalcDialog.cpp:5190
 #: src/translations.h:73
 msgid "Dwarf planets"
 msgstr "矮行星"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2478 src/gui/AstroCalcDialog.cpp:5168
+#: src/gui/AstroCalcDialog.cpp:2479 src/gui/AstroCalcDialog.cpp:5191
 #: src/translations.h:75
 msgid "Cubewanos"
 msgstr "经典柯伊伯带天体"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2479 src/gui/AstroCalcDialog.cpp:5169
+#: src/gui/AstroCalcDialog.cpp:2480 src/gui/AstroCalcDialog.cpp:5192
 #: src/translations.h:77
 msgid "Scattered disc objects"
 msgstr "离散盘天体"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2479 src/gui/AstroCalcDialog.cpp:5170
+#: src/gui/AstroCalcDialog.cpp:2480 src/gui/AstroCalcDialog.cpp:5193
 #: src/translations.h:79
 msgid "Oort cloud objects"
 msgstr "奥尔特云天体"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2479 src/gui/AstroCalcDialog.cpp:5171
+#: src/gui/AstroCalcDialog.cpp:2480 src/gui/AstroCalcDialog.cpp:5194
 #: src/translations.h:81
 msgid "Sednoids"
 msgstr "类塞德娜天体"
 
-#: src/gui/AstroCalcDialog.cpp:2480
+#: src/gui/AstroCalcDialog.cpp:2481
 #, qt-format
 msgid "Bright stars (<%1 mag)"
 msgstr "亮星 (<%1 星等)"
 
-#: src/gui/AstroCalcDialog.cpp:2480
+#: src/gui/AstroCalcDialog.cpp:2481
 #, qt-format
 msgid "Bright double stars (<%1 mag)"
 msgstr "亮双星 (<%1 mag)"
 
-#: src/gui/AstroCalcDialog.cpp:2481
+#: src/gui/AstroCalcDialog.cpp:2482
 #, qt-format
 msgid "Bright variable stars (<%1 mag)"
 msgstr "亮变星 (<%1 mag)"
 
-#: src/gui/AstroCalcDialog.cpp:2481
+#: src/gui/AstroCalcDialog.cpp:2482
 #, qt-format
 msgid "Bright star clusters (<%1 mag)"
 msgstr "亮星团(<%1 星等)"
 
-#: src/gui/AstroCalcDialog.cpp:2482
+#: src/gui/AstroCalcDialog.cpp:2483
 #, qt-format
 msgid "Planetary nebulae (<%1 mag)"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2482
+#: src/gui/AstroCalcDialog.cpp:2483
 #, qt-format
 msgid "Bright nebulae (<%1 mag)"
 msgstr "亮星云 (<%1 星等)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2482 src/gui/AstroCalcDialog.cpp:5161
+#: src/gui/AstroCalcDialog.cpp:2483 src/gui/AstroCalcDialog.cpp:5184
 #: src/translations.h:318 src/ui_viewDialog.h:3386
 #: src/ui_dsoColorsDialog.h:659
 msgid "Dark nebulae"
 msgstr "暗星云"
 
-#: src/gui/AstroCalcDialog.cpp:2483
+#: src/gui/AstroCalcDialog.cpp:2484
 #, qt-format
 msgid "Bright galaxies (<%1 mag)"
 msgstr "亮星系 (<%1 星等)"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2483 src/gui/AstroCalcDialog.cpp:5176
+#: src/gui/AstroCalcDialog.cpp:2484 src/gui/AstroCalcDialog.cpp:5199
 #: src/translations.h:368 src/ui_dsoColorsDialog.h:695
 msgid "Symbiotic stars"
 msgstr "共生星"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2483 src/gui/AstroCalcDialog.cpp:5177
+#: src/gui/AstroCalcDialog.cpp:2484 src/gui/AstroCalcDialog.cpp:5200
 #: src/translations.h:370 src/ui_dsoColorsDialog.h:674
 msgid "Emission-line stars"
 msgstr "发射线星"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2484 src/gui/AstroCalcDialog.cpp:5182
+#: src/gui/AstroCalcDialog.cpp:2485 src/gui/AstroCalcDialog.cpp:5205
 #: src/translations.h:83
 msgid "Interstellar objects"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2484
+#: src/gui/AstroCalcDialog.cpp:2485
 msgid "Planets and Sun"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2484
+#: src/gui/AstroCalcDialog.cpp:2485
 msgid "Sun, planets and moons of observer location"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2485
+#: src/gui/AstroCalcDialog.cpp:2486
 #, qt-format
 msgid "Bright Solar system objects (<%1 mag)"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2486
+#: src/gui/AstroCalcDialog.cpp:2487
 msgid "Moons of first body"
 msgstr ""
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2487 src/gui/AstroCalcDialog.cpp:5210
+#: src/gui/AstroCalcDialog.cpp:2488 src/gui/AstroCalcDialog.cpp:5233
 #: src/translations.h:455
 msgid "Bright carbon stars"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:3056
+#: src/gui/AstroCalcDialog.cpp:3074
 msgid "Magnitude vs. Time"
 msgstr "星等vs. 时间"
 
-#: src/gui/AstroCalcDialog.cpp:3057
+#: src/gui/AstroCalcDialog.cpp:3075
 msgid "Phase vs. Time"
 msgstr "相位vs. 时间"
 
-#: src/gui/AstroCalcDialog.cpp:3058
+#: src/gui/AstroCalcDialog.cpp:3076
 msgid "Distance vs. Time"
 msgstr "距离vs. 时间"
 
-#: src/gui/AstroCalcDialog.cpp:3059
+#: src/gui/AstroCalcDialog.cpp:3077
 msgid "Elongation vs. Time"
 msgstr "距角vs. 时间"
 
-#: src/gui/AstroCalcDialog.cpp:3060
+#: src/gui/AstroCalcDialog.cpp:3078
 msgid "Angular size vs. Time"
 msgstr "角大小vs. 时间"
 
-#: src/gui/AstroCalcDialog.cpp:3061
+#: src/gui/AstroCalcDialog.cpp:3079
 msgid "Phase angle vs. Time"
 msgstr "相位角 vs. 时间"
 
 #. TRANSLATORS: The phrase "Heliocentric distance" may be long in some
 #. languages and you can short it to use in the drop-down list.
-#: src/gui/AstroCalcDialog.cpp:3063
+#: src/gui/AstroCalcDialog.cpp:3081
 msgid "Heliocentric distance vs. Time"
 msgstr "日心距离 vs. 时间"
 
 #. TRANSLATORS: The phrase "Transit altitude" may be long in some languages
 #. and you can short it to use in the drop-down list.
-#: src/gui/AstroCalcDialog.cpp:3065
+#: src/gui/AstroCalcDialog.cpp:3083
 msgid "Transit altitude vs. Time"
 msgstr ""
 
 #. TRANSLATORS: The phrase "Right ascension" may be long in some languages and
 #. you can short it to use in the drop-down list.
-#: src/gui/AstroCalcDialog.cpp:3067
+#: src/gui/AstroCalcDialog.cpp:3085
 msgid "Right ascension vs. Time"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:3068
+#: src/gui/AstroCalcDialog.cpp:3086
 msgid "Declination vs. Time"
 msgstr ""
 
 #. TRANSLATORS: Mega-meter (SI symbol: Mm; Mega-meter is a unit of length in
 #. the metric system,
 #. equal to one million meters)
-#: src/gui/AstroCalcDialog.cpp:3117
+#: src/gui/AstroCalcDialog.cpp:3135
 msgid "Mm"
 msgstr "兆米"
 
-#: src/gui/AstroCalcDialog.cpp:3149 src/gui/AstroCalcDialog.cpp:3207
+#: src/gui/AstroCalcDialog.cpp:3167 src/gui/AstroCalcDialog.cpp:3225
 msgid "Angular size"
 msgstr "角大小"
 
 #. TRANSLATORS: The phrase "Heliocentric distance" may be long in some
 #. languages and you can short it.
-#: src/gui/AstroCalcDialog.cpp:3160 src/gui/AstroCalcDialog.cpp:3218
+#: src/gui/AstroCalcDialog.cpp:3178 src/gui/AstroCalcDialog.cpp:3236
 msgid "Heliocentric distance"
 msgstr "日心距离"
 
 #. TRANSLATORS: The phrase "Transit altitude" may be long in some languages
 #. and you can short it.
-#: src/gui/AstroCalcDialog.cpp:3166 src/gui/AstroCalcDialog.cpp:3224
+#: src/gui/AstroCalcDialog.cpp:3184 src/gui/AstroCalcDialog.cpp:3242
 msgid "Transit altitude"
 msgstr ""
 
 #. TRANSLATORS: The phrase "Right ascension" may be long in some languages and
 #. you can short it.
-#: src/gui/AstroCalcDialog.cpp:3172 src/gui/AstroCalcDialog.cpp:3230
+#: src/gui/AstroCalcDialog.cpp:3190 src/gui/AstroCalcDialog.cpp:3248
 msgctxt "axis name"
 msgid "Right ascension"
 msgstr ""
 
 #. TRANSLATORS: hours.
-#: src/gui/AstroCalcDialog.cpp:3172 src/gui/AstroCalcDialog.cpp:3230
-#: src/gui/AstroCalcDialog.cpp:3343
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:774
+#: src/gui/AstroCalcDialog.cpp:3190 src/gui/AstroCalcDialog.cpp:3248
+#: src/gui/AstroCalcDialog.cpp:3361
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:792
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:181
 #: plugins/Novae/src/gui/NovaeDialog.cpp:175
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:173
@@ -5942,375 +5942,375 @@ msgctxt "time"
 msgid "h"
 msgstr "时"
 
-#: src/gui/AstroCalcDialog.cpp:3301
+#: src/gui/AstroCalcDialog.cpp:3319
 msgid "Date"
 msgstr "日期"
 
-#: src/gui/AstroCalcDialog.cpp:3564
+#: src/gui/AstroCalcDialog.cpp:3582
 #, qt-format
 msgid "Passage of meridian at approximately %1"
 msgstr "子午线通道在约 %1 附近"
 
-#: src/gui/AstroCalcDialog.cpp:3571
+#: src/gui/AstroCalcDialog.cpp:3589
 msgid "Line of civil twilight"
 msgstr "民用晨昏蒙影线"
 
-#: src/gui/AstroCalcDialog.cpp:3573
+#: src/gui/AstroCalcDialog.cpp:3591
 msgid "Line of nautical twilight"
 msgstr "航海晨昏蒙影线"
 
-#: src/gui/AstroCalcDialog.cpp:3575
+#: src/gui/AstroCalcDialog.cpp:3593
 msgid "Line of astronomical twilight"
 msgstr "天文晨昏蒙影线"
 
-#: src/gui/AstroCalcDialog.cpp:3601
+#: src/gui/AstroCalcDialog.cpp:3619
 msgid "Phenomenon"
 msgstr "事件"
 
-#: src/gui/AstroCalcDialog.cpp:3603
+#: src/gui/AstroCalcDialog.cpp:3621
 msgid "Object 1"
 msgstr "对象1"
 
 #. TRANSLATORS: Magnitude of object 1
-#: src/gui/AstroCalcDialog.cpp:3605
+#: src/gui/AstroCalcDialog.cpp:3623
 msgid "Mag. 1"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:3606
+#: src/gui/AstroCalcDialog.cpp:3624
 msgid "Object 2"
 msgstr "对象2"
 
 #. TRANSLATORS: Magnitude of object 2
-#: src/gui/AstroCalcDialog.cpp:3608
+#: src/gui/AstroCalcDialog.cpp:3626
 msgid "Mag. 2"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:3610
+#: src/gui/AstroCalcDialog.cpp:3628
 msgid "Elevation"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:3639 src/gui/AstroCalcDialog.cpp:4068
-#: src/gui/AstroCalcDialog.cpp:4319
+#: src/gui/AstroCalcDialog.cpp:3657 src/gui/AstroCalcDialog.cpp:4086
+#: src/gui/AstroCalcDialog.cpp:4337
 msgid "Opposition"
 msgstr "冲"
 
-#: src/gui/AstroCalcDialog.cpp:3945
+#: src/gui/AstroCalcDialog.cpp:3963
 msgid "Save calculated phenomena as..."
 msgstr "将事件计算另存为"
 
-#: src/gui/AstroCalcDialog.cpp:3963 src/gui/AstroCalcDialog.cpp:3965
+#: src/gui/AstroCalcDialog.cpp:3981 src/gui/AstroCalcDialog.cpp:3983
 #: src/ui_astroCalcDialog.h:1676
 msgid "Phenomena"
 msgstr "事件"
 
-#: src/gui/AstroCalcDialog.cpp:4020
+#: src/gui/AstroCalcDialog.cpp:4038
 msgid "Magnitude of first object"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4023
+#: src/gui/AstroCalcDialog.cpp:4041
 msgid "Magnitude of second object"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4029
+#: src/gui/AstroCalcDialog.cpp:4047
 msgid "Elevation of first object at moment of phenomena"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4031 src/gui/AstroCalcDialog.cpp:4177
+#: src/gui/AstroCalcDialog.cpp:4049 src/gui/AstroCalcDialog.cpp:4195
 msgid "Angular distance from the Sun"
 msgstr "与太阳的角距离"
 
-#: src/gui/AstroCalcDialog.cpp:4034 src/gui/AstroCalcDialog.cpp:4178
+#: src/gui/AstroCalcDialog.cpp:4052 src/gui/AstroCalcDialog.cpp:4196
 msgid "Angular distance from the Moon"
 msgstr "与月球的角距离"
 
-#: src/gui/AstroCalcDialog.cpp:4052 src/gui/AstroCalcDialog.cpp:4230
-#: src/gui/AstroCalcDialog.cpp:4310
+#: src/gui/AstroCalcDialog.cpp:4070 src/gui/AstroCalcDialog.cpp:4248
+#: src/gui/AstroCalcDialog.cpp:4328
 msgid "Conjunction"
 msgstr "合"
 
-#: src/gui/AstroCalcDialog.cpp:4061
+#: src/gui/AstroCalcDialog.cpp:4079
 msgid "Shadow transit"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4064 src/gui/AstroCalcDialog.cpp:4071
-#: src/gui/AstroCalcDialog.cpp:4117 src/gui/AstroCalcDialog.cpp:4123
-#: src/gui/AstroCalcDialog.cpp:4322 src/gui/AstroCalcDialog.cpp:4338
-#: src/gui/AstroCalcDialog.cpp:4344
+#: src/gui/AstroCalcDialog.cpp:4082 src/gui/AstroCalcDialog.cpp:4089
+#: src/gui/AstroCalcDialog.cpp:4135 src/gui/AstroCalcDialog.cpp:4141
+#: src/gui/AstroCalcDialog.cpp:4340 src/gui/AstroCalcDialog.cpp:4356
+#: src/gui/AstroCalcDialog.cpp:4362
 msgid "Eclipse"
 msgstr "食"
 
-#: src/gui/AstroCalcDialog.cpp:4080
+#: src/gui/AstroCalcDialog.cpp:4098
 msgid "Greatest eastern elongation"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4083
+#: src/gui/AstroCalcDialog.cpp:4101
 msgid "Greatest western elongation"
 msgstr ""
 
 #. TRANSLATORS: The planet are stand still in the equatorial coordinates
-#: src/gui/AstroCalcDialog.cpp:4090
+#: src/gui/AstroCalcDialog.cpp:4108
 msgid "Stationary (begin retrograde motion)"
 msgstr ""
 
 #. TRANSLATORS: The planet are stand still in the equatorial coordinates
-#: src/gui/AstroCalcDialog.cpp:4095
+#: src/gui/AstroCalcDialog.cpp:4113
 msgid "Stationary (begin prograde motion)"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4101
+#: src/gui/AstroCalcDialog.cpp:4119
 msgid "Perihelion"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4103
+#: src/gui/AstroCalcDialog.cpp:4121
 msgid "Aphelion"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4110 src/gui/AstroCalcDialog.cpp:4331
+#: src/gui/AstroCalcDialog.cpp:4128 src/gui/AstroCalcDialog.cpp:4349
 msgctxt "passage of the celestial body"
 msgid "Transit"
 msgstr "凌"
 
-#: src/gui/AstroCalcDialog.cpp:4113 src/gui/AstroCalcDialog.cpp:4235
-#: src/gui/AstroCalcDialog.cpp:4334
+#: src/gui/AstroCalcDialog.cpp:4131 src/gui/AstroCalcDialog.cpp:4253
+#: src/gui/AstroCalcDialog.cpp:4352
 msgid "Occultation"
 msgstr "掩"
 
-#: src/gui/AstroCalcDialog.cpp:4136 src/gui/AstroCalcDialog.cpp:4138
-#: src/gui/AstroCalcDialog.cpp:4357 src/gui/AstroCalcDialog.cpp:4359
+#: src/gui/AstroCalcDialog.cpp:4154 src/gui/AstroCalcDialog.cpp:4156
+#: src/gui/AstroCalcDialog.cpp:4375 src/gui/AstroCalcDialog.cpp:4377
 msgid "Superior conjunction"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4136 src/gui/AstroCalcDialog.cpp:4138
-#: src/gui/AstroCalcDialog.cpp:4357 src/gui/AstroCalcDialog.cpp:4359
+#: src/gui/AstroCalcDialog.cpp:4154 src/gui/AstroCalcDialog.cpp:4156
+#: src/gui/AstroCalcDialog.cpp:4375 src/gui/AstroCalcDialog.cpp:4377
 msgid "Inferior conjunction"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4181
+#: src/gui/AstroCalcDialog.cpp:4199
 msgid "Angular distance from the Sun for second object"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4182
+#: src/gui/AstroCalcDialog.cpp:4200
 msgid "Angular distance from the Moon for second object"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5136
+#: src/gui/AstroCalcDialog.cpp:5159
 msgctxt "Celestial object is observed..."
 msgid "In the Evening"
 msgstr "在晚间"
 
-#: src/gui/AstroCalcDialog.cpp:5137
+#: src/gui/AstroCalcDialog.cpp:5160
 msgctxt "Celestial object is observed..."
 msgid "In the Morning"
 msgstr "在凌晨"
 
-#: src/gui/AstroCalcDialog.cpp:5138
+#: src/gui/AstroCalcDialog.cpp:5161
 msgctxt "Celestial object is observed..."
 msgid "Around Midnight"
 msgstr "午夜左右"
 
-#: src/gui/AstroCalcDialog.cpp:5139
+#: src/gui/AstroCalcDialog.cpp:5162
 msgctxt "Celestial object is observed..."
 msgid "In Any Time of the Night"
 msgstr "夜晚任意时间"
 
-#: src/gui/AstroCalcDialog.cpp:5159
+#: src/gui/AstroCalcDialog.cpp:5182
 msgid "Bright stars"
 msgstr "亮星"
 
-#: src/gui/AstroCalcDialog.cpp:5160 src/ui_viewDialog.h:3385
+#: src/gui/AstroCalcDialog.cpp:5183 src/ui_viewDialog.h:3385
 msgid "Bright nebulae"
 msgstr "亮星云"
 
-#: src/gui/AstroCalcDialog.cpp:5162 src/ui_viewDialog.h:3389
+#: src/gui/AstroCalcDialog.cpp:5185 src/ui_viewDialog.h:3389
 #: src/ui_dsoColorsDialog.h:595
 msgid "Galaxies"
 msgstr "星系"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5163 src/translations.h:310
+#: src/gui/AstroCalcDialog.cpp:5186 src/translations.h:310
 #: src/ui_viewDialog.h:3392 src/ui_dsoColorsDialog.h:599
 msgid "Open star clusters"
 msgstr "疏散星团"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5172 src/translations.h:316
+#: src/gui/AstroCalcDialog.cpp:5195 src/translations.h:316
 #: src/ui_viewDialog.h:3384 src/ui_dsoColorsDialog.h:588
 msgid "Planetary nebulae"
 msgstr "行星状星云"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5173 src/translations.h:445
+#: src/gui/AstroCalcDialog.cpp:5196 src/translations.h:445
 msgid "Bright double stars"
 msgstr "亮双星"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5174 src/translations.h:447
+#: src/gui/AstroCalcDialog.cpp:5197 src/translations.h:447
 msgid "Bright variable stars"
 msgstr "亮变星"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5175 src/translations.h:449
+#: src/gui/AstroCalcDialog.cpp:5198 src/translations.h:449
 msgid "Bright stars with high proper motion"
 msgstr "高自行亮星目录"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5178 src/translations.h:346
+#: src/gui/AstroCalcDialog.cpp:5201 src/translations.h:346
 #: src/ui_dsoColorsDialog.h:640
 msgid "Supernova candidates"
 msgstr "备选超新星"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5179 src/translations.h:348
+#: src/gui/AstroCalcDialog.cpp:5202 src/translations.h:348
 #: src/ui_dsoColorsDialog.h:681
 msgid "Supernova remnant candidates"
 msgstr "备选超新星残骸"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5180 src/translations.h:344
+#: src/gui/AstroCalcDialog.cpp:5203 src/translations.h:344
 #: src/ui_viewDialog.h:3391 src/ui_dsoColorsDialog.h:581
 msgid "Supernova remnants"
 msgstr "超新星残骸"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5181 src/translations.h:372
+#: src/gui/AstroCalcDialog.cpp:5204 src/translations.h:372
 #: src/ui_viewDialog.h:3388 src/ui_dsoColorsDialog.h:694
 msgid "Clusters of galaxies"
 msgstr "星系团"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5183 src/translations.h:312
+#: src/gui/AstroCalcDialog.cpp:5206 src/translations.h:312
 #: src/ui_viewDialog.h:3394 src/ui_dsoColorsDialog.h:574
 msgid "Globular star clusters"
 msgstr "球状星团"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5184 src/translations.h:374
+#: src/gui/AstroCalcDialog.cpp:5207 src/translations.h:374
 #: src/ui_dsoColorsDialog.h:710
 msgid "Regions of the sky"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5185 src/translations.h:326
+#: src/gui/AstroCalcDialog.cpp:5208 src/translations.h:326
 #: src/ui_viewDialog.h:3383 src/ui_dsoColorsDialog.h:565
 msgid "Active galaxies"
 msgstr "活动星系"
 
-#: src/gui/AstroCalcDialog.cpp:5190 plugins/Pulsars/src/Pulsars.cpp:72
+#: src/gui/AstroCalcDialog.cpp:5213 plugins/Pulsars/src/Pulsars.cpp:72
 #: plugins/Pulsars/src/Pulsars.cpp:170 plugins/Pulsars/src/Pulsars.cpp:171
 msgid "Pulsars"
 msgstr "脉冲星"
 
-#: src/gui/AstroCalcDialog.cpp:5196
+#: src/gui/AstroCalcDialog.cpp:5219
 msgid "Exoplanetary systems"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5199
+#: src/gui/AstroCalcDialog.cpp:5222
 msgid "Bright nova stars"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5201
+#: src/gui/AstroCalcDialog.cpp:5224
 msgid "Bright supernova stars"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5202 src/translations.h:330
+#: src/gui/AstroCalcDialog.cpp:5225 src/translations.h:330
 #: src/ui_viewDialog.h:3390 src/ui_dsoColorsDialog.h:650
 msgid "Interacting galaxies"
 msgstr "互扰星系"
 
-#: src/gui/AstroCalcDialog.cpp:5204
+#: src/gui/AstroCalcDialog.cpp:5227
 msgid "Messier objects"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5205
+#: src/gui/AstroCalcDialog.cpp:5228
 msgid "NGC/IC objects"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5206
+#: src/gui/AstroCalcDialog.cpp:5229
 msgid "Caldwell objects"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5207
+#: src/gui/AstroCalcDialog.cpp:5230
 msgid "Herschel 400 objects"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5208
+#: src/gui/AstroCalcDialog.cpp:5231
 msgid "Algol-type eclipsing systems"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5209
+#: src/gui/AstroCalcDialog.cpp:5232
 msgid "The classical cepheids"
 msgstr ""
 
 #. TRANSLATORS: angular size
-#: src/gui/AstroCalcDialog.cpp:5283
+#: src/gui/AstroCalcDialog.cpp:5306
 msgid "Ang. Size"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5398 src/ui_astroCalcDialog.h:1869
+#: src/gui/AstroCalcDialog.cpp:5421 src/ui_astroCalcDialog.h:1869
 msgid "Limit angular size:"
 msgstr "限制角大小"
 
-#: src/gui/AstroCalcDialog.cpp:5399 src/ui_astroCalcDialog.h:1867
+#: src/gui/AstroCalcDialog.cpp:5422 src/ui_astroCalcDialog.h:1867
 msgid "Set limits for angular size for visible celestial objects"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5400 src/ui_astroCalcDialog.h:1871
+#: src/gui/AstroCalcDialog.cpp:5423 src/ui_astroCalcDialog.h:1871
 msgid "Minimal angular size for visible celestial objects"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5401 src/ui_astroCalcDialog.h:1874
+#: src/gui/AstroCalcDialog.cpp:5424 src/ui_astroCalcDialog.h:1874
 msgid "Maximum angular size for visible celestial objects"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5697
+#: src/gui/AstroCalcDialog.cpp:5720
 msgid "Limit angular separation:"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5698
+#: src/gui/AstroCalcDialog.cpp:5721
 msgid "Set limits for angular separation for visible double stars"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5699
+#: src/gui/AstroCalcDialog.cpp:5722
 msgid "Minimal angular separation for visible double stars"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5700
+#: src/gui/AstroCalcDialog.cpp:5723
 msgid "Maximum angular separation for visible double stars"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:6048
+#: src/gui/AstroCalcDialog.cpp:6071
 msgid "JSON (Stellarium bookmarks)"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:6052
+#: src/gui/AstroCalcDialog.cpp:6075
 msgid "Save list of objects as..."
 msgstr "将对象列表保存为..."
 
-#: src/gui/AstroCalcDialog.cpp:6072 src/ui_astroCalcDialog.h:1682
+#: src/gui/AstroCalcDialog.cpp:6095 src/ui_astroCalcDialog.h:1682
 msgid "What's Up Tonight"
 msgstr "今夜天象"
 
 #. TRANSLATORS: Part of unit of measure for mean motion - degrees per day
-#: src/gui/AstroCalcDialog.cpp:6195
+#: src/gui/AstroCalcDialog.cpp:6218
 msgctxt "mean motion"
 msgid "day"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:6247 src/gui/AstroCalcDialog.cpp:6409
+#: src/gui/AstroCalcDialog.cpp:6270 src/gui/AstroCalcDialog.cpp:6432
 msgid "Days from today"
 msgstr "从今天开始的日数"
 
-#: src/gui/AstroCalcDialog.cpp:6248 src/gui/AstroCalcDialog.cpp:6390
+#: src/gui/AstroCalcDialog.cpp:6271 src/gui/AstroCalcDialog.cpp:6413
 msgid "Linear distance"
 msgstr "线距离"
 
-#: src/gui/AstroCalcDialog.cpp:6390 src/gui/AstroCalcDialog.cpp:6393
+#: src/gui/AstroCalcDialog.cpp:6413 src/gui/AstroCalcDialog.cpp:6416
 #: plugins/Calendars/src/ui_calendarsDialog.h:832
 msgid "Day"
 msgstr "日"
 
-#: src/gui/AstroCalcDialog.cpp:6451 src/ui_astroCalcDialog.h:1855
+#: src/gui/AstroCalcDialog.cpp:6474 src/ui_astroCalcDialog.h:1855
 msgid "Change of angular distance between the Moon and selected object"
 msgstr "月球与所选物体之间角距离的变化"
 
@@ -6421,36 +6421,36 @@ msgstr "脚本"
 msgid "Shortcut"
 msgstr "快捷键"
 
-#: src/StelMainView.cpp:804
+#: src/StelMainView.cpp:817
 msgid "Save screenshot"
 msgstr "储存画面快照"
 
-#: src/StelMainView.cpp:805
+#: src/StelMainView.cpp:818
 msgid "Reload shaders (for development)"
 msgstr "重新加载着色器（用于开发）"
 
-#: src/StelMainView.cpp:806
+#: src/StelMainView.cpp:819
 msgid "Full-screen mode"
 msgstr "全屏模式"
 
-#: src/StelMainView.cpp:933
+#: src/StelMainView.cpp:946
 msgid ""
 "Shortcuts have conflicts! Please press F7 after program startup and check "
 "following multiple assignments"
 msgstr ""
 
-#: src/StelMainView.cpp:1012
+#: src/StelMainView.cpp:1025
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
 msgstr "OpenGL版本不足。 请更新驱动程序，图形硬件或使用--angle模式（或--mesa模式）选项。"
 
-#: src/StelMainView.cpp:1015
+#: src/StelMainView.cpp:1028
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr "OpenGL版本不足。 请更新驱动程序或图形硬件。"
 
-#: src/StelMainView.cpp:1057
+#: src/StelMainView.cpp:1070
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -6458,7 +6458,7 @@ msgstr ""
 "您的DirectX / OpenGL ES驱动有问题。 有关详细信息，请参阅日志。\n"
 "忽略并抑制此通知在未来，并尝试继续降级模式吗？"
 
-#: src/StelMainView.cpp:1108
+#: src/StelMainView.cpp:1121
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -6466,7 +6466,7 @@ msgstr ""
 "您的OpenGL / Mesa驱动有问题。 有关详细信息，请参阅日志。\n"
 "忽略并抑制此通知在未来，并尝试继续降级模式吗？"
 
-#: src/StelMainView.cpp:1168
+#: src/StelMainView.cpp:1181
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -6474,7 +6474,7 @@ msgstr ""
 "您的OpenGL驱动有问题。 有关详细信息，请参阅日志。\n"
 "忽略并抑制此通知在未来，并尝试继续降级模式吗？"
 
-#: src/StelMainView.cpp:1209
+#: src/StelMainView.cpp:1222
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -6482,7 +6482,7 @@ msgstr ""
 "您的OpenGL驱动有问题。 有关详细信息，请参阅日志。\n"
 "忽略并抑制此通知在未来，并尝试继续降级模式吗？"
 
-#: src/StelMainView.cpp:1321
+#: src/StelMainView.cpp:1334
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -9964,7 +9964,7 @@ msgid "names in English"
 msgstr "英文名"
 
 #: src/ui_searchDialogGui.h:933 src/ui_astroCalcDialog.h:1864
-#: plugins/Satellites/src/ui_satellitesDialog.h:1047
+#: plugins/Satellites/src/ui_satellitesDialog.h:1095
 msgid "Search in list..."
 msgstr "在列表中搜索..."
 
@@ -10499,7 +10499,7 @@ msgid ""
 "screen labels"
 msgstr "使用深天空对象的编号名称，而不是屏幕标签的常用名称"
 
-#: src/ui_viewDialog.h:3412 plugins/Satellites/src/ui_satellitesDialog.h:1009
+#: src/ui_viewDialog.h:3412 plugins/Satellites/src/ui_satellitesDialog.h:1057
 msgid "Labels"
 msgstr "标签"
 
@@ -11210,7 +11210,7 @@ msgid "Additional settings for Graphical User Interface"
 msgstr "图形界面附加设置"
 
 #: src/ui_configurationDialog.h:1617
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1345
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1372
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:488
 msgid "Time"
 msgstr "时间"
@@ -11291,7 +11291,7 @@ msgid ""
 msgstr "保存更改并在下次启动 Stellarium 时恢复"
 
 #: src/ui_configurationDialog.h:1652
-#: plugins/Satellites/src/ui_satellitesDialog.h:1045
+#: plugins/Satellites/src/ui_satellitesDialog.h:1093
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:243
 #: plugins/NavStars/src/ui_navStarsWindow.h:295
 #: plugins/Novae/src/ui_novaeDialog.h:246
@@ -11312,7 +11312,7 @@ msgstr "恢复 Stellarium 的原有设置"
 
 #: src/ui_configurationDialog.h:1656
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:342
-#: plugins/Satellites/src/ui_satellitesDialog.h:1044
+#: plugins/Satellites/src/ui_satellitesDialog.h:1092
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:263
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:242
 #: plugins/NavStars/src/ui_navStarsWindow.h:294
@@ -11366,7 +11366,7 @@ msgstr "完整显示"
 msgid "Display no information"
 msgstr "不要显示信息"
 
-#: src/ui_configurationDialog.h:1676 plugins/Oculars/src/Oculars.cpp:2496
+#: src/ui_configurationDialog.h:1676 plugins/Oculars/src/Oculars.cpp:2498
 #: plugins/Observability/src/Observability.cpp:179
 msgid "None"
 msgstr "无"
@@ -12107,7 +12107,7 @@ msgid "Clear output before script runs"
 msgstr ""
 
 #: src/ui_scriptConsole.h:418
-#: plugins/Satellites/src/ui_satellitesDialog.h:1046
+#: plugins/Satellites/src/ui_satellitesDialog.h:1094
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:244
 #: plugins/NavStars/src/ui_navStarsWindow.h:286
 #: plugins/Novae/src/ui_novaeDialog.h:247
@@ -12269,7 +12269,7 @@ msgid "Save ephemeris"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:1760 src/ui_astroCalcDialog.h:1803
-#: plugins/Satellites/src/ui_satellitesDialog.h:1119
+#: plugins/Satellites/src/ui_satellitesDialog.h:1179
 msgid "Calculations require time, please be patient"
 msgstr "计算需要时间，请耐心等待"
 
@@ -12556,7 +12556,7 @@ msgid "Ephemeris line thickness:"
 msgstr ""
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:197
-#: plugins/Satellites/src/ui_satellitesDialog.h:1010
+#: plugins/Satellites/src/ui_satellitesDialog.h:1058
 msgctxt "pixels"
 msgid "px"
 msgstr ""
@@ -13121,7 +13121,7 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:344
 #: plugins/Oculars/src/ui_ocularDialog.h:1584
-#: plugins/Satellites/src/ui_satellitesDialog.h:1124
+#: plugins/Satellites/src/ui_satellitesDialog.h:1184
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:438
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:275
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:245
@@ -13142,7 +13142,7 @@ msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "关于"
 
-#: plugins/Oculars/src/Oculars.cpp:87 plugins/Oculars/src/Oculars.cpp:1511
+#: plugins/Oculars/src/Oculars.cpp:87 plugins/Oculars/src/Oculars.cpp:1513
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:189
 #: plugins/Oculars/src/ui_ocularDialog.h:1429
 msgid "Oculars"
@@ -13207,218 +13207,218 @@ msgstr "旋转 CCD(&R)"
 msgid "&Reset rotation"
 msgstr "旋转复位(&R)"
 
-#: plugins/Oculars/src/Oculars.cpp:1378
+#: plugins/Oculars/src/Oculars.cpp:1380
 #: plugins/Oculars/src/gui/OcularDialog.cpp:121
 #: plugins/Oculars/src/gui/OcularDialog.cpp:138
 #: plugins/Oculars/src/gui/OcularDialog.cpp:155
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:815
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:822
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:833
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:840
 msgid "Warning!"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1378
+#: plugins/Oculars/src/Oculars.cpp:1380
 msgid ""
 "Unable to display a sensor boundary: No sensors or telescopes are defined."
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1512
+#: plugins/Oculars/src/Oculars.cpp:1514
 #: plugins/Oculars/src/ui_ocularDialog.h:1464
 msgid "Ocular view"
 msgstr "目镜视图"
 
-#: plugins/Oculars/src/Oculars.cpp:1513
+#: plugins/Oculars/src/Oculars.cpp:1515
 msgid "Oculars popup menu"
 msgstr "目镜弹出菜单"
 
-#: plugins/Oculars/src/Oculars.cpp:1514
+#: plugins/Oculars/src/Oculars.cpp:1516
 msgid "Show crosshairs"
 msgstr "显示十字丝"
 
-#: plugins/Oculars/src/Oculars.cpp:1515
+#: plugins/Oculars/src/Oculars.cpp:1517
 msgid "Image sensor frame"
 msgstr "图像传感器画幅"
 
-#: plugins/Oculars/src/Oculars.cpp:1516
+#: plugins/Oculars/src/Oculars.cpp:1518
 msgid "Telrad sight"
 msgstr "红圈寻星镜"
 
-#: plugins/Oculars/src/Oculars.cpp:1517
+#: plugins/Oculars/src/Oculars.cpp:1519
 msgid "Toggle Oculars configuration window"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1518
+#: plugins/Oculars/src/Oculars.cpp:1520
 msgid "Toggle Oculars button bar"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1520
+#: plugins/Oculars/src/Oculars.cpp:1522
 msgid "Select next telescope"
 msgstr "选择下一个望远镜"
 
-#: plugins/Oculars/src/Oculars.cpp:1522
+#: plugins/Oculars/src/Oculars.cpp:1524
 msgid "Select previous telescope"
 msgstr "选择上一个望远镜"
 
-#: plugins/Oculars/src/Oculars.cpp:1524
+#: plugins/Oculars/src/Oculars.cpp:1526
 msgid "Select next eyepiece"
 msgstr "选择下一个目镜"
 
-#: plugins/Oculars/src/Oculars.cpp:1526
+#: plugins/Oculars/src/Oculars.cpp:1528
 msgid "Select previous eyepiece"
 msgstr "选择上一个目镜"
 
-#: plugins/Oculars/src/Oculars.cpp:1527
+#: plugins/Oculars/src/Oculars.cpp:1529
 msgid "Rotate reticle pattern of the eyepiece clockwise"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1528
+#: plugins/Oculars/src/Oculars.cpp:1530
 msgid "Rotate reticle pattern of the eyepiece counterclockwise"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1529
+#: plugins/Oculars/src/Oculars.cpp:1531
 msgid "Toggle sensor crop overlay"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1530
+#: plugins/Oculars/src/Oculars.cpp:1532
 msgid "Toggle sensor pixel grid"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1531
+#: plugins/Oculars/src/Oculars.cpp:1533
 msgid "Toggle focuser overlay"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1753
+#: plugins/Oculars/src/Oculars.cpp:1755
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr "十字丝的赤经/赤纬（J2000.0）"
 
 #. TRANSLATORS: Unit of measure for scale - arc-seconds per pixel
-#: plugins/Oculars/src/Oculars.cpp:1764
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:688
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:860
+#: plugins/Oculars/src/Oculars.cpp:1766
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:693
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:865
 msgid "\"/px"
 msgstr "\"/像素"
 
-#: plugins/Oculars/src/Oculars.cpp:1783
+#: plugins/Oculars/src/Oculars.cpp:1785
 msgctxt "pixel"
 msgid "px"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2023
+#: plugins/Oculars/src/Oculars.cpp:2025
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:483
 msgid "Ocular"
 msgstr "目镜"
 
-#: plugins/Oculars/src/Oculars.cpp:2025
+#: plugins/Oculars/src/Oculars.cpp:2027
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:485
 msgid "Binocular"
 msgstr "双筒"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:2045
+#: plugins/Oculars/src/Oculars.cpp:2047
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:528
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "目镜焦距：%1 毫米"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:2052
+#: plugins/Oculars/src/Oculars.cpp:2054
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:537
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "目镜视场：%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2063
+#: plugins/Oculars/src/Oculars.cpp:2065
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:567
 #, qt-format
 msgid "Lens #%1"
 msgstr "镜头：#%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2067
+#: plugins/Oculars/src/Oculars.cpp:2069
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:571
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "镜头 #%1：%2"
 
-#: plugins/Oculars/src/Oculars.cpp:2072
+#: plugins/Oculars/src/Oculars.cpp:2074
 msgid "Lens: none"
 msgstr "镜头：无"
 
-#: plugins/Oculars/src/Oculars.cpp:2087 plugins/Oculars/src/Oculars.cpp:2148
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:808
+#: plugins/Oculars/src/Oculars.cpp:2089 plugins/Oculars/src/Oculars.cpp:2150
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:813
 #, qt-format
 msgid "Telescope #%1"
 msgstr "望远镜 #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2096
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:910
+#: plugins/Oculars/src/Oculars.cpp:2098
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:915
 #, qt-format
 msgid "Magnification: %1"
 msgstr "放大倍率：%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2103
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:921
+#: plugins/Oculars/src/Oculars.cpp:2105
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:926
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "出射光瞳: %1 毫米"
 
-#: plugins/Oculars/src/Oculars.cpp:2110
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:929
+#: plugins/Oculars/src/Oculars.cpp:2112
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:934
 #, qt-format
 msgid "FOV: %1"
 msgstr "视场：%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2131
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:676
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:852
+#: plugins/Oculars/src/Oculars.cpp:2133
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:681
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:857
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "尺寸：%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2132
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:682
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:856
+#: plugins/Oculars/src/Oculars.cpp:2134
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:687
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:861
 msgid "Binning"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2136
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:636
+#: plugins/Oculars/src/Oculars.cpp:2138
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:641
 #, qt-format
 msgid "Sensor #%1"
 msgstr "传感器 #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2140
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:640
+#: plugins/Oculars/src/Oculars.cpp:2142
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:645
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "传感器 #%1：%2"
 
-#: plugins/Oculars/src/Oculars.cpp:2153
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:812
+#: plugins/Oculars/src/Oculars.cpp:2155
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:817
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "望远镜 #%1：%2"
 
-#: plugins/Oculars/src/Oculars.cpp:2492
+#: plugins/Oculars/src/Oculars.cpp:2494
 msgid "&Lens"
 msgstr "镜头(&L)"
 
-#: plugins/Oculars/src/Oculars.cpp:2493
+#: plugins/Oculars/src/Oculars.cpp:2495
 msgid "&Previous lens"
 msgstr "前一镜头(&P)"
 
-#: plugins/Oculars/src/Oculars.cpp:2494
+#: plugins/Oculars/src/Oculars.cpp:2496
 msgid "&Next lens"
 msgstr "后一镜头(&N)"
 
-#: plugins/Oculars/src/Oculars.cpp:2523
+#: plugins/Oculars/src/Oculars.cpp:2525
 msgid "&Telescope"
 msgstr "望远镜(&T)"
 
-#: plugins/Oculars/src/Oculars.cpp:2524
+#: plugins/Oculars/src/Oculars.cpp:2526
 msgid "&Previous telescope"
 msgstr "前一个望远镜(&P)"
 
-#: plugins/Oculars/src/Oculars.cpp:2525
+#: plugins/Oculars/src/Oculars.cpp:2527
 msgid "&Next telescope"
 msgstr "后一个望远镜(&N)"
 
@@ -13557,107 +13557,107 @@ msgstr "镜头重数：未知"
 msgid "Focal length of eyepiece"
 msgstr "目镜焦距"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:678
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:854
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:683
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:859
 msgid "Dimensions field of view"
 msgstr "视场大小"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:689
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:861
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:694
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:866
 msgid "X scale"
 msgstr "X轴比例尺"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:690
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:862
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:695
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:867
 msgid "Horizontal scale"
 msgstr "水平比例尺"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:694
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:863
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:699
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:868
 msgid "Y scale"
 msgstr "Y轴比例尺"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:695
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:864
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:700
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:869
 msgid "Vertical scale"
 msgstr "垂直比例尺"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:701
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:706
 #, qt-format
 msgid "Rotation: %1"
 msgstr "旋转：%1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:739
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:744
 #, qt-format
 msgid "PA of prism: %1"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:742
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:747
 msgid "Position angle of the off-axis guider' prism"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:891
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:896
 msgid "Magnification provided by these binoculars"
 msgstr "双目镜的放大倍率"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:892
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:897
 msgid "Actual field of view provided by these binoculars"
 msgstr "双筒望远镜的实际视场"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:893
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:898
 msgid "Exit pupil provided by these binoculars"
 msgstr "由这些双筒望远镜提供的出瞳出射光瞳"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:901
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:906
 msgid "Magnification provided by this ocular/lens/telescope combination"
 msgstr "此目镜、镜头和望远镜组合的放大倍率"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:902
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:907
 msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
 msgstr "此目镜、镜头和望远镜组合的实际视场"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:903
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:908
 msgid "Exit pupil provided by this ocular/lens/telescope combination"
 msgstr "由此目镜/透镜/望远镜组合提供的出射光瞳"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:946
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:951
 msgid "Rayleigh criterion"
 msgstr "瑞利判据"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:948
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:953
 msgid "The Rayleigh resolution criterion"
 msgstr "瑞利分辨率判据"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:953
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:958
 msgid "Dawes' limit"
 msgstr "道斯极限"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:955
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:960
 msgid "Dawes' resolution criterion"
 msgstr "道斯解析度判据"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:960
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:965
 msgid "Abbe's limit"
 msgstr "阿贝极限"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:962
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:967
 msgid "Abbe’s diffraction resolution limit"
 msgstr "阿贝的衍射分辨率极限"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:967
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:972
 msgid "Sparrow's limit"
 msgstr "斯帕若极限"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:969
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:974
 msgid "Sparrow's resolution limit"
 msgstr "斯帕若分辨率极限"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:995
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1000
 msgid "Visual resolution"
 msgstr "视觉清晰度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:997
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1002
 msgid "Visual resolution is based on eye properties and magnification"
 msgstr "视觉清晰度基于肉眼的特点和放大倍数"
 
@@ -13674,57 +13674,57 @@ msgid "Cannot delete the last telescope."
 msgstr ""
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
-#: plugins/Oculars/src/gui/OcularDialog.cpp:570
+#: plugins/Oculars/src/gui/OcularDialog.cpp:586
 msgid "tFOV:"
 msgstr "实际视场："
 
 #. TRANSLATORS: Magnification factor for binoculars
-#: plugins/Oculars/src/gui/OcularDialog.cpp:572
+#: plugins/Oculars/src/gui/OcularDialog.cpp:588
 msgid "Magnification factor:"
 msgstr "放大系数"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:573
+#: plugins/Oculars/src/gui/OcularDialog.cpp:589
 #: plugins/Oculars/src/ui_ocularDialog.h:1581
 msgid "Diameter:"
 msgstr "直径："
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:577
+#: plugins/Oculars/src/gui/OcularDialog.cpp:593
 #: plugins/Oculars/src/ui_ocularDialog.h:1546
 msgid "aFOV:"
 msgstr "视场角度："
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:578
+#: plugins/Oculars/src/gui/OcularDialog.cpp:594
 #: plugins/Oculars/src/ui_ocularDialog.h:1547
 #: plugins/Oculars/src/ui_ocularDialog.h:1582
 msgid "Focal length:"
 msgstr "焦距："
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:579
+#: plugins/Oculars/src/gui/OcularDialog.cpp:595
 #: plugins/Oculars/src/ui_ocularDialog.h:1543
 msgid "Field stop:"
 msgstr "视场光阑："
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:591
+#: plugins/Oculars/src/gui/OcularDialog.cpp:607
 msgid "Oculars Plug-in"
 msgstr "目镜插件"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:599
+#: plugins/Oculars/src/gui/OcularDialog.cpp:615
 msgid "Barlow lens feature"
 msgstr "巴洛透镜功能"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:600
+#: plugins/Oculars/src/gui/OcularDialog.cpp:616
 msgid "Sensor crop overlay feature"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:601
+#: plugins/Oculars/src/gui/OcularDialog.cpp:617
 msgid "Pixel grid feature"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:605
+#: plugins/Oculars/src/gui/OcularDialog.cpp:621
 msgid "Overview"
 msgstr "摘要"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:607
+#: plugins/Oculars/src/gui/OcularDialog.cpp:623
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece."
 "  This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -13732,39 +13732,39 @@ msgid ""
 "will populate some samples to get you started."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:608
+#: plugins/Oculars/src/gui/OcularDialog.cpp:624
 msgid "You can choose to scale the image you see on the screen."
 msgstr "选择缩放在屏幕上的图像。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:609
+#: plugins/Oculars/src/gui/OcularDialog.cpp:625
 msgid ""
 "This is intended to show you a better comparison of what one "
 "eyepiece/telescope combination will be like when compared to another."
 msgstr "这是为了让你更好地比较一个目镜/望远镜组合。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:610
+#: plugins/Oculars/src/gui/OcularDialog.cpp:626
 msgid ""
 "The same eyepiece in two different telescopes of differing focal length will"
 " produce two different exit pupils, changing the view somewhat."
 msgstr "在不同焦距的两个不同望远镜中的相同目镜将产生两个不同的出射光瞳，稍微改变视图。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:611
+#: plugins/Oculars/src/gui/OcularDialog.cpp:627
 msgid ""
 "The trade-off of this is that, with the image scaled, a large part of the "
 "screen can be wasted."
 msgstr "这样权衡的结果就是图像缩放后屏幕的一大部分会被浪费。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:612
+#: plugins/Oculars/src/gui/OcularDialog.cpp:628
 msgid ""
 "Therefore we recommend that you leave it off, unless you feel you have a "
 "need for it."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:613
+#: plugins/Oculars/src/gui/OcularDialog.cpp:629
 msgid "You can toggle a crosshair in the view."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:614
+#: plugins/Oculars/src/gui/OcularDialog.cpp:630
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder. This feature draws three concentric circles "
@@ -13772,34 +13772,34 @@ msgid ""
 "with the naked eye through the Telrad (or similar) finder."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:615
+#: plugins/Oculars/src/gui/OcularDialog.cpp:631
 msgid ""
 "You can adjust the diameters or even add a fourth circle if you have a "
 "different finder, or revert to the Telrad standard sizes."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:616
+#: plugins/Oculars/src/gui/OcularDialog.cpp:632
 msgid "If you find any issues, please let me know. Enjoy!"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:619
+#: plugins/Oculars/src/gui/OcularDialog.cpp:635
 msgid "Hot Keys"
 msgstr "快捷键"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:620
+#: plugins/Oculars/src/gui/OcularDialog.cpp:636
 msgid ""
 "The plug-in's key bindings can be edited in the Keyboard shortcuts editor "
 "(F7)."
 msgstr "可以在键盘快捷键编辑器（F7）中编辑插件快捷键。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:623
+#: plugins/Oculars/src/gui/OcularDialog.cpp:639
 #: plugins/Pulsars/src/Pulsar.cpp:302
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:597
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:319
 msgid "Notes"
 msgstr "备注"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:624
+#: plugins/Oculars/src/gui/OcularDialog.cpp:640
 msgid ""
 "The sensor view has a feature to show a sensor crop overlay with information"
 " about the crop size. The size of this rectangle may be adjusted when "
@@ -13807,13 +13807,13 @@ msgid ""
 "binning 3)."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:625
+#: plugins/Oculars/src/gui/OcularDialog.cpp:641
 #, qt-format
 msgid ""
 "In this case, information about crop size overlay will be marked by %1."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:626
+#: plugins/Oculars/src/gui/OcularDialog.cpp:642
 msgid ""
 "This mark is also displayed if the crop size is larger than the sensor size."
 msgstr ""
@@ -14067,7 +14067,7 @@ msgstr "双目镜"
 #: plugins/Oculars/src/ui_ocularDialog.h:1552
 #: plugins/Oculars/src/ui_ocularDialog.h:1562
 #: plugins/Oculars/src/ui_ocularDialog.h:1577
-#: plugins/Satellites/src/ui_satellitesDialog.h:1066
+#: plugins/Satellites/src/ui_satellitesDialog.h:1114
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:595
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:244
 msgid "Name:"
@@ -14178,7 +14178,7 @@ msgstr ""
 #: plugins/Satellites/src/Satellites.cpp:73
 #: plugins/Satellites/src/Satellites.cpp:155
 #: plugins/Satellites/src/Satellites.cpp:241
-#: plugins/Satellites/src/ui_satellitesDialog.h:1099
+#: plugins/Satellites/src/ui_satellitesDialog.h:1159
 msgid "Satellites"
 msgstr "人造卫星"
 
@@ -14573,178 +14573,178 @@ msgstr "距离"
 msgid "Range rate"
 msgstr "距离的变化率"
 
-#: plugins/Satellites/src/Satellite.cpp:330
+#: plugins/Satellites/src/Satellite.cpp:329
 msgid "Perigee/apogee altitudes"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:344
+#: plugins/Satellites/src/Satellite.cpp:343
 msgid "Approx. angular size"
 msgstr ""
 
 #. TRANSLATORS: Revolutions per day - measurement of the frequency of a
 #. rotation
-#: plugins/Satellites/src/Satellite.cpp:353
+#: plugins/Satellites/src/Satellite.cpp:352
 msgctxt "frequency"
 msgid "rpd"
 msgstr ""
 
 #. TRANSLATORS: minutes - orbital period for artificial satellites
-#: plugins/Satellites/src/Satellite.cpp:355
+#: plugins/Satellites/src/Satellite.cpp:354
 msgctxt "period"
 msgid "min"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:357
+#: plugins/Satellites/src/Satellite.cpp:356
 msgid "Orbital period"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:363
+#: plugins/Satellites/src/Satellite.cpp:362
 #: plugins/Exoplanets/src/Exoplanet.cpp:324
 msgid "Inclination"
 msgstr "倾角"
 
-#: plugins/Satellites/src/Satellite.cpp:367
+#: plugins/Satellites/src/Satellite.cpp:366
 msgid "SubPoint (Lat./Long.)"
 msgstr "下点 纬度/经度)"
 
 #. TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered
 #. inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:381
+#: plugins/Satellites/src/Satellite.cpp:380
 msgid "TEME coordinates"
 msgstr "TEME坐标"
 
 #. TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered
 #. inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:388
+#: plugins/Satellites/src/Satellite.cpp:387
 msgid "TEME velocity"
 msgstr "TEME速度"
 
-#: plugins/Satellites/src/Satellite.cpp:398
+#: plugins/Satellites/src/Satellite.cpp:397
 msgid "Sun reflection angle"
 msgstr "太阳反射角度"
 
-#: plugins/Satellites/src/Satellite.cpp:406
-#: plugins/Satellites/src/Satellite.cpp:497
+#: plugins/Satellites/src/Satellite.cpp:405
+#: plugins/Satellites/src/Satellite.cpp:491
 msgctxt "unknown date"
 msgid "unknown"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:413
+#: plugins/Satellites/src/Satellite.cpp:412
 msgctxt "at time"
 msgid "at"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:415
+#: plugins/Satellites/src/Satellite.cpp:414
 msgid "Last updated TLE"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:416
+#: plugins/Satellites/src/Satellite.cpp:415
 msgid "Epoch of the TLE"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:418
+#: plugins/Satellites/src/Satellite.cpp:417
 msgid "Radar cross-section (RCS)"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:427
+#: plugins/Satellites/src/Satellite.cpp:426
 msgid "Group"
 msgstr "组"
 
-#: plugins/Satellites/src/Satellite.cpp:427
+#: plugins/Satellites/src/Satellite.cpp:426
 msgid "Groups"
 msgstr "组群"
 
-#: plugins/Satellites/src/Satellite.cpp:432
+#: plugins/Satellites/src/Satellite.cpp:431
 msgid "Operational status"
 msgstr "操作状态"
 
-#: plugins/Satellites/src/Satellite.cpp:438
+#: plugins/Satellites/src/Satellite.cpp:437
 msgid "Radio communication"
 msgstr ""
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Satellites/src/Satellite.cpp:455 plugins/Pulsars/src/Pulsar.cpp:288
+#: plugins/Satellites/src/Satellite.cpp:454 plugins/Pulsars/src/Pulsar.cpp:288
 msgctxt "frequency"
 msgid "MHz"
 msgstr "兆赫兹"
 
-#: plugins/Satellites/src/Satellite.cpp:455
+#: plugins/Satellites/src/Satellite.cpp:454
 msgctxt "frequency"
 msgid "kHz"
 msgstr "千赫兹"
 
-#: plugins/Satellites/src/Satellite.cpp:736
+#: plugins/Satellites/src/Satellite.cpp:729
 msgctxt "operational status"
 msgid "operational"
 msgstr "使用中"
 
-#: plugins/Satellites/src/Satellite.cpp:737
+#: plugins/Satellites/src/Satellite.cpp:730
 msgctxt "operational status"
 msgid "non-operational"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:738
+#: plugins/Satellites/src/Satellite.cpp:731
 msgctxt "operational status"
 msgid "partially operational"
 msgstr "部分使用"
 
-#: plugins/Satellites/src/Satellite.cpp:739
+#: plugins/Satellites/src/Satellite.cpp:732
 msgctxt "operational status"
 msgid "standby"
 msgstr "支持"
 
-#: plugins/Satellites/src/Satellite.cpp:740
+#: plugins/Satellites/src/Satellite.cpp:733
 msgctxt "operational status"
 msgid "spare"
 msgstr "备用"
 
-#: plugins/Satellites/src/Satellite.cpp:741
+#: plugins/Satellites/src/Satellite.cpp:734
 msgctxt "operational status"
 msgid "extended mission"
 msgstr "扩展任务"
 
-#: plugins/Satellites/src/Satellite.cpp:742
+#: plugins/Satellites/src/Satellite.cpp:735
 msgctxt "operational status"
 msgid "decayed"
 msgstr "损坏"
 
-#: plugins/Satellites/src/Satellite.cpp:744
+#: plugins/Satellites/src/Satellite.cpp:737
 msgctxt "operational status"
 msgid "unknown"
 msgstr "未知"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:675
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:693
 msgid "Stellarium Satellites Plugin"
 msgstr "Stellarium 人造卫星插件"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:682
-#: plugins/Satellites/src/ui_satellitesDialog.h:1123
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:700
+#: plugins/Satellites/src/ui_satellitesDialog.h:1183
 msgid "Iridium flares"
 msgstr "铱星闪光"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:689
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:707
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
 msgstr "此卫星插件可以预测地球轨道上的人造卫星的位置。"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:691
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:709
 msgid "Notes for users"
 msgstr "用户提示"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:692
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:710
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr "仅当观测者位于地球时，卫星与轨道才会显示。"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:693
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:711
 msgid ""
 "Predicted positions are only good for a fairly short time (on the order of "
 "days, weeks or perhaps a month into the past and future). Expect high "
 "weirdness when looking at dates outside this range."
 msgstr "预测的位置仅在较短时间内较为准确（距目前几天、几周或是一个月的时间内）。当您超出了这个时间段，预测的结果可能会有较大的误差。"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:694
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:712
 msgid ""
 "Orbital elements go out of date pretty quickly (over mere weeks, sometimes "
 "days).  To get useful data out, you need to update the TLE data regularly."
@@ -14753,7 +14753,7 @@ msgstr "轨道资料很容易过时（在数周甚至几天后）。如果您需
 #. TRANSLATORS: The translated names of the button and the tab are filled in
 #. automatically. You can check the original names in Stellarium. File names
 #. are not translated.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:696
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:714
 #, qt-format
 msgid ""
 "Clicking the \"%1\" button in the \"%2\" tab of this dialog will revert to "
@@ -14761,36 +14761,36 @@ msgid ""
 "found in the user data directory, under \"modules/Satellites/\"."
 msgstr "在“%2”选项卡中点击“%1”按钮会重置 %3 文件。旧的文件会被备份为 %4，您可以在用户数据目录中找到它。"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:702
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:720
 msgid ""
 "The value of perigee and apogee altitudes compute for mean Earth radius."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:703
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:721
 msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
 msgstr "此卫星插件目前仍在开发阶段，一些功能可能不甚完全，甚至是存在 Bug。"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:707
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:725
 msgid "Altitude classifications for geocentric orbits"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:708
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:726
 msgid ""
 "Low Earth orbit (LEO): geocentric orbits with altitudes of apogee below 4400"
 " km, inclination of orbits in range 0-180 degrees and eccentricity below "
 "0.25."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:709
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:727
 msgid ""
 "Medium Earth orbit (MEO): geocentric orbits with altitude of apogee at least"
 " 4400 km, inclination of orbits in range 0-180 degrees, eccentricity below "
 "0.25 and period at least 1100 minutes."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:710
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:728
 msgid ""
 "Geosynchronous orbit (GSO) and geostationary orbit (GEO) are orbits with "
 "inclination of orbits below 25 degrees, eccentricity below 0.25 and period "
@@ -14798,14 +14798,14 @@ msgid ""
 "rotation period). "
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:711
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:729
 msgid ""
 "Highly elliptical orbit (HEO): geocentric orbits with altitudes of perigee "
 "below 70000 km, inclination of orbits in range 0-180 degrees, eccentricity "
 "at least 0.25 and period below 14000 minutes."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:712
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:730
 msgid ""
 "High geosynchronous orbit (HGSO): geocentric orbits above the altitude of "
 "geosynchronous orbit: inclination of orbits in range 25-180 degrees, "
@@ -14813,18 +14813,18 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:716
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:734
 msgid "TLE data updates"
 msgstr "两行式轨道数据(TLE)更新"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:717
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:735
 msgid ""
 "The Satellites plugin can automatically download TLE data from Internet "
 "sources, and by default the plugin will do this if the existing data is more"
 " than 72 hours old. "
 msgstr "此卫星插件能够自动从网络下载两行式轨道数据(TLE)，默认的更新频率为72小时，超过此时间的旧数据将被更新。 "
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:718
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:736
 #, qt-format
 msgid ""
 "If you disable Internet updates, you may update from a file on your "
@@ -14832,68 +14832,68 @@ msgid ""
 "(see %1 for an example)."
 msgstr "如果您禁用网络更新，则可以从您的本地文件中获取更新。此文件必须使用与 Celestrak 更新相同的格式（示例参见 %1）。"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:719
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:737
 msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
 msgstr "<b>注意：</b>如果在更新数据中的卫星名称中出现了方括号，则其内容会被移除。"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:722
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:740
 msgid "Adding new satellites"
 msgstr "添加新卫星"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:723
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:741
 msgid ""
 "Make sure the satellite(s) you wish to add are included in one of the URLs "
 "listed in the Sources tab of the satellites configuration dialog."
 msgstr "确保要添加的人造卫星包含在人造卫星配置对话框的“源”选项卡中列出的其中一个URL中。"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:724
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:742
 msgid ""
 "Go to the Satellites tab, and click the '+' button.  Select the satellite(s)"
 " you wish to add and select the 'add' button."
 msgstr "转到“卫星”选项卡，然后单击“+”按钮。 选择您要添加的卫星，然后选择“添加”按钮。"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:726
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:744
 msgid "Technical notes"
 msgstr "技术说明"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:727
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:745
 msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data"
 " as the input."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:728
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:746
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6)"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:729
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:747
 msgid ""
 "To calculate an approximate visual magnitude of satellites we use data from "
 "Mike McCants' database (with permissions) of the radar cross-section (RCS) "
 "and standard magnitudes."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:730
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:748
 msgid ""
 "Formula to calculate an approximate visual magnitude of satellites from the "
 "standard magnitude may be found at Mike McCants website"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:731
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:749
 msgid ""
 "We use a spherical shape of satellite to calculate an approximate visual "
 "magnitude from RCS values."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:732
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:750
 msgid "For modelling Starlink magnitudes we use Anthony Mallama's formula"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:751
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:769
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:160
 #: plugins/Novae/src/gui/NovaeDialog.cpp:154
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:152
@@ -14902,7 +14902,7 @@ msgstr ""
 msgid "Next update"
 msgstr "下次更新"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:756
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:774
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:166
 #: plugins/Novae/src/gui/NovaeDialog.cpp:160
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:158
@@ -14911,8 +14911,8 @@ msgstr "下次更新"
 msgid "Internet updates disabled"
 msgstr "Internet 更新已禁用"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:758
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:782
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:776
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:800
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:168
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:214
 #: plugins/Novae/src/gui/NovaeDialog.cpp:162
@@ -14926,7 +14926,7 @@ msgstr "Internet 更新已禁用"
 msgid "Updating now..."
 msgstr "正在更新……"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:763
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:781
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:170
 #: plugins/Novae/src/gui/NovaeDialog.cpp:164
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:162
@@ -14936,7 +14936,7 @@ msgid "< 1 minute"
 msgstr "< 1分钟 "
 
 #. TRANSLATORS: minutes.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:768
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:786
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:175
 #: plugins/Novae/src/gui/NovaeDialog.cpp:169
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:167
@@ -14947,7 +14947,7 @@ msgctxt "time"
 msgid "m"
 msgstr "m"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:785
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:803
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:217
 #: plugins/Novae/src/gui/NovaeDialog.cpp:211
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:233
@@ -14956,30 +14956,30 @@ msgstr "m"
 msgid "Update error"
 msgstr "更新错误"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:798
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:816
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
 msgstr "更新了%1/%2个卫星；增加了%3；删除了%4"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:800
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:818
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
 msgstr "更新了%1/%2个卫星；增加了%3；%4丢失"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:815
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:833
 msgid "Empty string - not saving"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:822
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:840
 msgid "Invalid URL - not saving"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:889
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:907
 msgid "[new source]"
 msgstr "[新源]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:957
-#: plugins/Satellites/src/ui_satellitesDialog.h:1005
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:975
+#: plugins/Satellites/src/ui_satellitesDialog.h:1053
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:203
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
 #: plugins/Novae/src/gui/NovaeDialog.cpp:197
@@ -14994,7 +14994,7 @@ msgstr "[新源]"
 msgid "Update now"
 msgstr "立即更新"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:959
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:977
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:205
 #: plugins/Novae/src/gui/NovaeDialog.cpp:199
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:197
@@ -15003,93 +15003,93 @@ msgstr "立即更新"
 msgid "Update from files"
 msgstr "从文件更新"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:987
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1005
 msgid "[orbit calculation error]"
 msgstr "[轨道计算错误]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:988
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1006
 msgid "[all newly added]"
 msgstr "[均为最新添加]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:989
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1007
 msgid "[all not displayed]"
 msgstr "[未显示的卫星]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:990
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1008
 msgid "[all displayed]"
 msgstr "[显示的卫星]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:991
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1009
 msgid "[small satellites]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:992
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1010
 msgid "[medium satellites]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:993
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1011
 msgid "[large satellites]"
 msgstr ""
 
 #. TRANSLATORS: LEO = Low Earth orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:995
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1013
 msgid "[LEO satellites]"
 msgstr ""
 
 #. TRANSLATORS: GEO = Geosynchronous equatorial orbit (Geostationary orbit)
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:997
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1015
 msgid "[GEO/GSO satellites]"
 msgstr ""
 
 #. TRANSLATORS: MEO = Medium Earth orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:999
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1017
 msgid "[MEO satellites]"
 msgstr ""
 
 #. TRANSLATORS: HEO = Highly elliptical orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1001
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1019
 msgid "[HEO satellites]"
 msgstr ""
 
 #. TRANSLATORS: HGEO = High geosynchronous orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1003
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1021
 msgid "[HGSO satellites]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1004
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1022
 msgid "[all]"
 msgstr "[所有卫星]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1020
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1038
 msgid "RCS"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1021
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1039
 msgid ""
 "Radar cross-section (RCS) is a measure of how detectable an object is with a"
 " radar. A larger RCS indicates that an object is more easily detected."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1022
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1040
 msgid ""
 "The standard magnitude of a satellite is defined as its apparent magnitude "
 "when at half-phase and at a distance 1000 km from the observer."
 msgstr ""
 
 #. TRANSLATORS: duration
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1024
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1042
 msgctxt "time unit"
 msgid " s"
 msgstr ""
 
 #. TRANSLATORS: duration
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1026
-#: plugins/Satellites/src/ui_satellitesDialog.h:1035
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1044
+#: plugins/Satellites/src/ui_satellitesDialog.h:1083
 msgid "Segment length:"
 msgstr ""
 
 #. TRANSLATORS: duration
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1028
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1046
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:294
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:335
 msgctxt "time unit"
@@ -15097,28 +15097,28 @@ msgid " h"
 msgstr ""
 
 #. TRANSLATORS: Displayed in the satellite group selection box.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1059
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1077
 msgid "New group..."
 msgstr "创建新组..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1324
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1351
 msgid "Select TLE Update File"
 msgstr "选择两行式轨道数据(TLE)更新文件"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1346
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1373
 msgid "Brightness"
 msgstr "亮度"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1349
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1376
 msgid "Satellite"
 msgstr "卫星"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1429
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1456
 msgid "Save predicted Iridium flares as..."
 msgstr "保存铱耀斑预测到..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1474
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1476
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1501
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1503
 msgid "Predicted Iridium flares"
 msgstr ""
 
@@ -15160,22 +15160,22 @@ msgstr "获取数据"
 msgid "Catalog Number: %1"
 msgstr "目录编号：%1"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:999
-#: plugins/Satellites/src/ui_satellitesDialog.h:1000
+#: plugins/Satellites/src/ui_satellitesDialog.h:1047
+#: plugins/Satellites/src/ui_satellitesDialog.h:1048
 msgid "Satellites Configuration"
 msgstr "卫星设置"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1002
+#: plugins/Satellites/src/ui_satellitesDialog.h:1050
 msgid "Updates"
 msgstr "更新"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1003
+#: plugins/Satellites/src/ui_satellitesDialog.h:1051
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:571
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:469
 msgid "Update frequency:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1004
+#: plugins/Satellites/src/ui_satellitesDialog.h:1052
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:238
 #: plugins/Novae/src/ui_novaeDialog.h:241
 #: plugins/Quasars/src/ui_quasarsDialog.h:296
@@ -15184,205 +15184,229 @@ msgstr ""
 msgid "Last update:"
 msgstr "最后更新："
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1006
+#: plugins/Satellites/src/ui_satellitesDialog.h:1054
 msgid "On update, add all new satellites from the selected source(s)"
 msgstr "更新时，从选择的来源中添加所有新增卫星"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1007
+#: plugins/Satellites/src/ui_satellitesDialog.h:1055
 msgid "Update satellite data from Internet sources"
 msgstr "从互联网来源更新卫星数据"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1008
+#: plugins/Satellites/src/ui_satellitesDialog.h:1056
 msgid ""
 "On update, remove the satellites that are no longer listed in the update "
 "sources"
 msgstr "更新时，删除不再列入来源中的卫星"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1011
+#: plugins/Satellites/src/ui_satellitesDialog.h:1059
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:255
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:305
 msgid "Font size:"
 msgstr "字号："
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1012
+#: plugins/Satellites/src/ui_satellitesDialog.h:1060
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:286
 msgid "Colors"
 msgstr "颜色"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1014
+#: plugins/Satellites/src/ui_satellitesDialog.h:1062
 msgid "Color of markers, labels and orbits for invisible satellites"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1018
+#: plugins/Satellites/src/ui_satellitesDialog.h:1066
 msgid "Color of markers for satellites in transit through the Sun or the Moon"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1020
+#: plugins/Satellites/src/ui_satellitesDialog.h:1068
 msgid "Show satellites as markers"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1021
+#: plugins/Satellites/src/ui_satellitesDialog.h:1069
 msgid "Hide invisible artificial satellites"
 msgstr "隐藏不可见的人造卫星"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1022
+#: plugins/Satellites/src/ui_satellitesDialog.h:1070
 msgid "Orbit lines"
 msgstr "轨道线"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1024
-#: plugins/Satellites/src/ui_satellitesDialog.h:1041
+#: plugins/Satellites/src/ui_satellitesDialog.h:1072
+#: plugins/Satellites/src/ui_satellitesDialog.h:1089
 msgid "Number of segments used to draw each end of the line"
 msgstr "绘制轨道末端的淡出痕迹使用的线段数量"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1027
+#: plugins/Satellites/src/ui_satellitesDialog.h:1075
 msgid "Duration of a single segment in seconds"
 msgstr "线条中的一个线段所表示的持续时长（秒）"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1030
-#: plugins/Satellites/src/ui_satellitesDialog.h:1037
+#: plugins/Satellites/src/ui_satellitesDialog.h:1078
+#: plugins/Satellites/src/ui_satellitesDialog.h:1085
 msgid "Number of segments used to draw the line"
 msgstr "绘制轨道时使用的线段数量"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1033
+#: plugins/Satellites/src/ui_satellitesDialog.h:1081
 msgid "Duration of a single segment"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1039
+#: plugins/Satellites/src/ui_satellitesDialog.h:1087
 msgid "Number of  segments:"
 msgstr "段落编号："
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1043
+#: plugins/Satellites/src/ui_satellitesDialog.h:1091
 msgid "Fade length:"
 msgstr "淡出长度："
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1049
+#: plugins/Satellites/src/ui_satellitesDialog.h:1097
 msgid "Double-click a satellite to start tracking it."
 msgstr "双击一个卫星以开始跟踪"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1052
+#: plugins/Satellites/src/ui_satellitesDialog.h:1100
 msgid "Add more satellites"
 msgstr "添加更多卫星"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1055
+#: plugins/Satellites/src/ui_satellitesDialog.h:1103
 msgid "Remove the selected satellites"
 msgstr "移除选中的卫星"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1058
+#: plugins/Satellites/src/ui_satellitesDialog.h:1106
 msgid "Change markers color for selected satellites"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1061
+#: plugins/Satellites/src/ui_satellitesDialog.h:1109
 msgid "Change orbits color for selected satellites"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1064
+#: plugins/Satellites/src/ui_satellitesDialog.h:1112
 msgid "Change info color for selected satellites"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1068
-#: plugins/Satellites/src/ui_satellitesDialog.h:1072
+#: plugins/Satellites/src/ui_satellitesDialog.h:1116
+#: plugins/Satellites/src/ui_satellitesDialog.h:1120
 msgid ""
 "The Satellite Catalog Number (also known as NORAD (North American Aerospace "
 "Defense) Catalog Number, NORAD ID)"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1070
+#: plugins/Satellites/src/ui_satellitesDialog.h:1118
 msgid "Catalog number:"
 msgstr "编目号："
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1075
-#: plugins/Satellites/src/ui_satellitesDialog.h:1079
+#: plugins/Satellites/src/ui_satellitesDialog.h:1123
+#: plugins/Satellites/src/ui_satellitesDialog.h:1127
 msgid "The International Designator, also known as COSPAR ID"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1077
+#: plugins/Satellites/src/ui_satellitesDialog.h:1125
 msgid "I.D.:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1081
+#: plugins/Satellites/src/ui_satellitesDialog.h:1129
 msgid "Standard magnitude:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1083
+#: plugins/Satellites/src/ui_satellitesDialog.h:1131
+msgid "Perigee altitude in kilometers"
+msgstr ""
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:1133
+msgid "Perigee:"
+msgstr ""
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:1135
+msgid "Apogee altitude in kilometers"
+msgstr ""
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:1137
+msgid "Apogee:"
+msgstr ""
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:1139
+msgid "Orbital period in minutes"
+msgstr ""
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:1141
+msgid "Period:"
+msgstr ""
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:1143
 msgid "Display orbit line(s) for the selected satellite(s)"
 msgstr "显示选中卫星的轨道线"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1085
+#: plugins/Satellites/src/ui_satellitesDialog.h:1145
 msgid "Orbit"
 msgstr "轨道"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1087
+#: plugins/Satellites/src/ui_satellitesDialog.h:1147
 msgid "Display the selected satellite(s)"
 msgstr "显示选中的卫星"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1089
+#: plugins/Satellites/src/ui_satellitesDialog.h:1149
 msgid "Displayed"
 msgstr "已显示"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1091
+#: plugins/Satellites/src/ui_satellitesDialog.h:1151
 msgid "Do not update (or remove on update) the selected satellite(s)"
 msgstr "不要更新（或更新时删除）选择的卫星"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1093
+#: plugins/Satellites/src/ui_satellitesDialog.h:1153
 msgid "Do not update"
 msgstr "不要更新"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1094
+#: plugins/Satellites/src/ui_satellitesDialog.h:1154
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:216
 msgid "Description:"
 msgstr "描述："
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1095
+#: plugins/Satellites/src/ui_satellitesDialog.h:1155
 msgid "(add personal notes here)"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1096
+#: plugins/Satellites/src/ui_satellitesDialog.h:1156
 msgid "Groups:"
 msgstr "组："
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1097
+#: plugins/Satellites/src/ui_satellitesDialog.h:1157
 msgid "TLE set:"
 msgstr "TLE（两行式轨道根数）设置："
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1098
+#: plugins/Satellites/src/ui_satellitesDialog.h:1158
 msgid "Epoch of the TLE:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1100
+#: plugins/Satellites/src/ui_satellitesDialog.h:1160
 msgid ""
 "Satellites in the marked source lists will be automatically added on the "
 "next update if they are not already in the collection."
 msgstr "已选择的来源列表中尚未被添加的卫星将会在下次更新时自动被添加"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1105
+#: plugins/Satellites/src/ui_satellitesDialog.h:1165
 msgid "Add new source"
 msgstr "添加新来源"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1108
+#: plugins/Satellites/src/ui_satellitesDialog.h:1168
 msgid "Edit selected source"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1111
+#: plugins/Satellites/src/ui_satellitesDialog.h:1171
 msgid "Save source"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1114
+#: plugins/Satellites/src/ui_satellitesDialog.h:1174
 msgid "Remove selected source"
 msgstr "删除选定新来源"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1116
+#: plugins/Satellites/src/ui_satellitesDialog.h:1176
 msgid "Sources"
 msgstr "来源"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1117
+#: plugins/Satellites/src/ui_satellitesDialog.h:1177
 msgid "Flare prediction (days):"
 msgstr "铱闪预测（天）："
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1121
+#: plugins/Satellites/src/ui_satellitesDialog.h:1181
 msgid "Predict Iridium flares"
 msgstr "预测铱星闪光"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1122
+#: plugins/Satellites/src/ui_satellitesDialog.h:1182
 msgid "Save predictions..."
 msgstr "保存预测..."
 
