@@ -229,6 +229,7 @@ Planet::Planet(const QString& englishName,
 	  oneMinusOblateness(1.0-oblateness),
 	  eclipticPos(0.,0.,0.),
 	  eclipticVelocity(0.,0.,0.),
+	  aberrationPush(0.,0.,0.),
 	  haloColor(halocolor),
 	  absoluteMagnitude(-99.0f),
 	  albedo(albedo),
@@ -255,7 +256,7 @@ Planet::Planet(const QString& englishName,
 	  multisamplingEnabled_(StelApp::getInstance().getSettings()->value("video/multisampling", 0).toUInt() != 0),
 	  gl(Q_NULLPTR),
 	  iauMoonNumber(""),
-	  positionsCache(ORBIT_SEGMENTS * 2)
+	  orbitPositionsCache(ORBIT_SEGMENTS * 2)
 {
 	// Initialize pType with the key found in pTypeMap, or mark planet type as undefined.
 	// The latter condition should obviously never happen.
@@ -531,6 +532,8 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	{
 		Vec3d eclPos=(englishName=="Sun" ? GETSTELMODULE(SolarSystem)->getLightTimeSunPosition() : eclipticPos);
 		QString algoName("VSOP87");
+		if (EphemWrapper::use_de441(core->getJDE())) algoName="DE441";
+		if (EphemWrapper::use_de440(core->getJDE())) algoName="DE440";
 		if (EphemWrapper::use_de431(core->getJDE())) algoName="DE431";
 		if (EphemWrapper::use_de430(core->getJDE())) algoName="DE430";
 		if (pType>=isAsteroid) algoName="Keplerian"; // TODO: observer/artificial?
@@ -544,7 +547,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	{
 		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 		// Setting/resetting the time causes a significant slowdown. We must apply some trickery to keep time in sync.
-		Vec3d equPos=getEquinoxEquatorialPos(core);
+		const Vec3d equPos=getEquinoxEquatorialPos(core);
 		double dec_equ, ra_equ;
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,equPos);
 		StelCore* core1 = StelApp::getInstance().getCore(); // we need non-const reference here.
@@ -621,7 +624,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		// TRANSLATORS: Unit of measure for speed - kilometers per second
 		QString kms = qc_("km/s", "speed");
 
-		Vec3d orbitalVel=getEclipticVelocity();
+		const Vec3d orbitalVel=getEclipticVelocity();
 		const double orbVel=orbitalVel.length();
 		if (orbVel>0.)
 		{ // AU/d * km/AU /24
@@ -653,7 +656,7 @@ QString Planet::getInfoStringSize(const StelCore *core, const InfoStringGroup& f
 		QString s1, s2, sizeStr = "";
 		if (rings)
 		{
-			double withoutRings = 2.*getSpheroidAngularSize(core)*M_PI/180.;
+			const double withoutRings = 2.*getSpheroidAngularSize(core)*M_PI/180.;
 			if (withDecimalDegree)
 			{
 				s1 = StelUtils::radToDecDegStr(withoutRings, 5, false, true);
@@ -1456,30 +1459,16 @@ Vec3d Planet::getJ2000EquatorialPos(const StelCore *core) const
 	// The end result is a non-normalized 3D vector which allows retrieving distances etc.
 	// To apply aberration correction, we need the velocity vector of the observer's planet and apply a little correction
 	// prepare for aberration: Explan. Suppl. 2013, (7.38)
-//	const bool withAberration=core->getUseAberration();
-//	Vec3d vel(0.);
-//	if (withAberration)
-//	{
-//		vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
-//		StelCore::matVsop87ToJ2000.transfo(vel);
-//		vel*=core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
-//	}
-
+	const bool withAberration=core->getUseAberration();
 	Vec3d pos;
 	if (englishName=="Sun")
 		// TODO: Make sure there is nothing more to do!
 		pos = StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(GETSTELMODULE(SolarSystem)->getLightTimeSunPosition() - core->getObserverHeliocentricEclipticPos());
 	else
 	{
-		pos = StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(getHeliocentricEclipticPos() - core->getObserverHeliocentricEclipticPos());
-//		if (withAberration)
-//		{
-//			const double dist=pos.length();
-//			pos.normalize();
-//			pos+=vel;
-//			pos.normalize();
-//			pos*=dist;
-//		}
+		pos = StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(getHeliocentricEclipticPos()
+									    - core->getObserverHeliocentricEclipticPos()
+									    + (withAberration ? aberrationPush : Vec3d(0.)));
 	}
 	return pos;
 }
@@ -1563,7 +1552,7 @@ void Planet::computePosition(const double dateJDE, const Vec3d &aberrationPush)
 	if (fabs(lastJDE-dateJDE)>deltaJDE)
 	{
 		coordFunc(dateJDE, eclipticPos, eclipticVelocity, orbitPtr);
-		eclipticPos+=aberrationPush;
+		this->aberrationPush=aberrationPush;
 		lastJDE = dateJDE;
 	}
 }
@@ -1762,7 +1751,8 @@ double Planet::getMeanSolarDay() const
 	return msd;
 }
 
-// Get the Planet position in Cartesian ecliptic (J2000) coordinates in AU, centered on the parent Planet
+// Get the Planet position in Cartesian ecliptic (J2000) coordinates in AU, centered on the parent Planet.
+// This is only needed for orbit drawing.
 Vec3d Planet::getEclipticPos(double dateJDE) const
 {
 	// Use current position if the time match.
@@ -1770,13 +1760,13 @@ Vec3d Planet::getEclipticPos(double dateJDE) const
 		return eclipticPos;
 
 	// Otherwise try to use a cached position.
-	Vec3d *pos = positionsCache[dateJDE];
+	Vec3d *pos=orbitPositionsCache[dateJDE];
 	if (!pos)
 	{
 		pos = new Vec3d;
-		Vec3d velocity;
-		coordFunc(dateJDE, *pos, velocity, orbitPtr);
-		positionsCache.insert(dateJDE, pos);
+		Vec3d velDummy;
+		coordFunc(dateJDE, *pos, velDummy, orbitPtr);
+		orbitPositionsCache.insert(dateJDE, pos);
 	}
 	return *pos;
 }
@@ -2558,6 +2548,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	}
 	else
 	{
+		//mat = Mat4d::translation(eclipticPos+aberrationPush) * rotLocalToParent;
 		mat = Mat4d::translation(eclipticPos) * rotLocalToParent;
 	}
 
@@ -2578,6 +2569,8 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 			}
 			break;
 	}
+	if (englishName!="Sun")
+		mat = Mat4d::translation(aberrationPush) * mat;
 
 	// This removed totally the Planet shaking bug!!!
 	StelProjector::ModelViewTranformP transfo = core->getHeliocentricEclipticModelViewTransform();
@@ -3393,7 +3386,7 @@ void Planet::computeModelMatrix(Mat4d &result) const
 			}
 			break;
 	}
-	result = result * Mat4d::zrotation(M_PI/180.*static_cast<double>(axisRotation + 90.f));
+	result = Mat4d::translation(aberrationPush) * result * Mat4d::zrotation(M_PI/180.*static_cast<double>(axisRotation + 90.f));
 }
 
 Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, QOpenGLShaderProgram* shader, const PlanetShaderVars& shaderVars) const
@@ -4209,6 +4202,7 @@ void Planet::computeOrbit()
 }
 
 // draw orbital path of Planet
+// TODO: How to deal with aberration?
 void Planet::drawOrbit(const StelCore* core)
 {
 	if (!static_cast<bool>(orbitFader.getInterstate()))

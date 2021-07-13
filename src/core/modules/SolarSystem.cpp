@@ -1196,31 +1196,51 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 		// We must reset observerPlanet for the next step!
 		observerPlanet->computePosition(dateJDE, Vec3d(0.));
 		// END HACK FOR SOLAR LIGHT TIME/ABERRATION
-		// For higher accuracy, we make two iterations for light time correction. In the final round, we also compute rotation data.
+		// For higher accuracy, we make two iterations of light time and aberration correction. In the final round, we also compute rotation data.
 		// TODO: Check if this middle round is necessary/useful.
-		for (const auto& p : qAsConst(systemPlanets))
-		{
-			p->setExtraInfoString(StelObject::DebugAid, "");
-			const double light_speed_correction = (p->getHeliocentricEclipticPos()-obsPosJDE).length() * (AU / (SPEED_OF_LIGHT * 86400.));
-			p->computePosition(dateJDE-light_speed_correction, Vec3d(0.));
-		}
+//		for (const auto& p : qAsConst(systemPlanets))
+//		{
+//			p->setExtraInfoString(StelObject::DebugAid, "");
+//			const double light_speed_correction = (p->getHeliocentricEclipticPos()-obsPosJDE).length() * (AU / (SPEED_OF_LIGHT * 86400.));
+//			p->computePosition(dateJDE-light_speed_correction, Vec3d(0.));
+//		}
 		// And another time. May fix sub-arcsecond inaccuracies, and optionally apply aberration in the way described in Explanatory Supplement (2013), 7.55.
 		StelCore *core=StelApp::getInstance().getCore();
+		const bool withAberration=core->getUseAberration();
+		const Vec3d aberrationPushSpeed=observerPlanet->getHeliocentricEclipticVelocity() * core->getAberrationFactor();
 		for (const auto& p : qAsConst(systemPlanets))
 		{
-			p->setExtraInfoString(StelObject::DebugAid, "");
-			const double light_speed_correction = (p->getHeliocentricEclipticPos()-obsPosJDE).length() * (AU / (SPEED_OF_LIGHT * 86400.));
+			//p->setExtraInfoString(StelObject::DebugAid, "");
+			const double lightTimeDays = (p->getHeliocentricEclipticPos()-obsPosJDE).length() * (AU / (SPEED_OF_LIGHT * 86400.));
 			Vec3d aberrationPush(0.);
-			if (core->getUseAberration())
-				aberrationPush=light_speed_correction*observerPlanet->getHeliocentricEclipticVelocity() * core->getAberrationFactor();
-			p->computePosition(dateJDE-light_speed_correction, aberrationPush);
-			if      (p->englishName=="Moon")    RotationElements::updatePlanetCorrections(dateJDE-light_speed_correction, RotationElements::EarthMoon);
-			else if (p->englishName=="Mars")    RotationElements::updatePlanetCorrections(dateJDE-light_speed_correction, RotationElements::Mars);
-			else if (p->englishName=="Jupiter") RotationElements::updatePlanetCorrections(dateJDE-light_speed_correction, RotationElements::Jupiter);
-			else if (p->englishName=="Saturn")  RotationElements::updatePlanetCorrections(dateJDE-light_speed_correction, RotationElements::Saturn);
-			else if (p->englishName=="Uranus")  RotationElements::updatePlanetCorrections(dateJDE-light_speed_correction, RotationElements::Uranus);
-			else if (p->englishName=="Neptune") RotationElements::updatePlanetCorrections(dateJDE-light_speed_correction, RotationElements::Neptune);
+			if (withAberration)
+				aberrationPush=lightTimeDays*aberrationPushSpeed;
+			p->computePosition(dateJDE-lightTimeDays, aberrationPush);
 		}
+		// Extra accuracy with another round. Not sure if useful. Maybe hide behind a new property flag?
+		for (const auto& p : qAsConst(systemPlanets))
+		{
+			//p->setExtraInfoString(StelObject::DebugAid, "");
+			const double lightTimeDays = (p->getHeliocentricEclipticPos()-obsPosJDE).length() * (AU / (SPEED_OF_LIGHT * 86400.));
+			Vec3d aberrationPush(0.);
+			if (withAberration)
+				aberrationPush=lightTimeDays*aberrationPushSpeed;
+			// The next call may alreada do nothing if the time difference to the previous round is not large enough.
+			p->computePosition(dateJDE-lightTimeDays, aberrationPush);
+//			p->setExtraInfoString(StelObject::DebugAid, QString("LightTime %1d; obsSpeed %2/%3/%4 AU/d")
+//					      .arg(QString::number(lightTimeDays, 'f', 3))
+//					      .arg(QString::number(aberrationPushSpeed[0], 'f', 3))
+//					      .arg(QString::number(aberrationPushSpeed[0], 'f', 3))
+//					      .arg(QString::number(aberrationPushSpeed[0], 'f', 3)));
+
+			if      (p->englishName=="Moon")    RotationElements::updatePlanetCorrections(dateJDE-lightTimeDays, RotationElements::EarthMoon);
+			else if (p->englishName=="Mars")    RotationElements::updatePlanetCorrections(dateJDE-lightTimeDays, RotationElements::Mars);
+			else if (p->englishName=="Jupiter") RotationElements::updatePlanetCorrections(dateJDE-lightTimeDays, RotationElements::Jupiter);
+			else if (p->englishName=="Saturn")  RotationElements::updatePlanetCorrections(dateJDE-lightTimeDays, RotationElements::Saturn);
+			else if (p->englishName=="Uranus")  RotationElements::updatePlanetCorrections(dateJDE-lightTimeDays, RotationElements::Uranus);
+			else if (p->englishName=="Neptune") RotationElements::updatePlanetCorrections(dateJDE-lightTimeDays, RotationElements::Neptune);
+		}
+
 	}
 	else
 	{
@@ -1701,23 +1721,33 @@ StelObjectP SolarSystem::search(Vec3d pos, const StelCore* core) const
 	else return StelObjectP();
 }
 
-// Return a stl vector containing the planets located inside the limFov circle around position v
+// Return a QList containing the planets located inside the limFov circle around position v
 QList<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, const StelCore* core) const
 {
 	QList<StelObjectP> result;
 	if (!getFlagPlanets())
 		return result;
 
-	Vec3d v = core->j2000ToEquinoxEqu(vv, StelCore::RefractionOff);
-	v.normalize();
+	const bool withAberration=core->getUseAberration();
+	Vec3d v(vv);
+	v.normalize(); // TODO: start with vv already normalized?
+	if (withAberration)
+	{
+		Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+		StelCore::matVsop87ToJ2000.transfo(vel);
+		vel*=core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
+		v+=vel;
+		v.normalize();
+	}
+
 	double cosLimFov = std::cos(limitFov * M_PI/180.);
 	Vec3d equPos;
 	double cosAngularSize;
 
-	QString weAreHere = core->getCurrentPlanet()->getEnglishName();
+	const QString weAreHere = core->getCurrentPlanet()->getEnglishName();
 	for (const auto& p : systemPlanets)
 	{
-		equPos = p->getEquinoxEquatorialPos(core);
+		equPos = p->getJ2000EquatorialPos(core);
 		equPos.normalize();
 
 		cosAngularSize = std::cos(p->getSpheroidAngularSize(core) * M_PI/180.);
