@@ -4,6 +4,7 @@
 %% TODO: (GZ) I am not sure about the 1-arcsecond accuracy of VSOP! More should be written with due diligence.
 %% 2016-07-28 GZ Extended chapter with more than just VSOP notes.
 %% 2017-12-10 GZ Extended with more warnings for "ignorant historians".
+%% 2021-07-13 GZ Extended with numerical comparison results
 %\chapterimage{chapter-t1-bg} % Chapter heading image
 
 
@@ -16,18 +17,29 @@ you leave your house, i.e., for present times. To save computation
 time, some concessions were made in astronomical accuracy by using
 simplified models which seemed acceptable at that time. However, many
 users started to overstress Stellarium's capabilities to simulate the
-historical sky of many centuries in the past, and found --- or even worse: 
-did not find, but simply published --- the resulting inconsistencies and errors.  
-Unfortunately, celestial motions are indeed more
-complicated than a simple clockwork, and the process of retrofitting
-detailed and accurate models which started around v0.11.0 is not
-completed yet. Therefore, when using Stellarium for scientific work
-like eclipse simulation to illustrate records found in Cuneiform
-tablets, always also use some other reference to compare, and of 
-course specify the program version you used for your work. (The next version 
-may be more accurate or at least provide different results!) You can of
-course contact us if you are willing and able to help improving
-Stellarium's accuracy!
+historical sky of many centuries in the past, and found --- or even
+worse: did not find, but simply published --- the resulting
+inconsistencies and errors.  Unfortunately, celestial motions are
+indeed more complicated than a simple clockwork, and the process of
+retrofitting detailed and accurate models which started around v0.11.0
+(in 2011) has only recently (2021) \newFeature{V0.21.2} come to a
+state where we as developers are beginning to be satisfied. Now, after
+implementation of annual aberration, Stellarium appears to deviate
+from reference solutions in the present time only by fractions of
+arcseconds, and by a few arcseconds in the remote past.  Greater
+accuracy, including relativistic effects or the deflection of light by
+the Solar gravity field, may still be required for critical
+observations of stellar occultations by asteroids, grazing
+occultations of stars by the Moon or similar things. Stellarium does
+not compute these effects. There are more specialized programs on
+these topics, please use them.
+
+Therefore, when using Stellarium for scientific work like eclipse
+simulation to illustrate records found in Cuneiform tablets, always
+also use some other reference to compare, and of course specify the
+program version you used for your work. (Use at least version 0.21.2
+of Stellarium!)  You can of course contact us if you are willing and
+able to help improving Stellarium's accuracy even further!
 
 \section{Date Range}
 \label{sec:Accuracy:DateRange}
@@ -68,11 +80,11 @@ on a par with the best available solutions.
 \section{Planetary Positions}
 \label{sec:Accuracy:Planets}
 
-Stellarium uses the VSOP87 theory~\citep{1988A&A...202..309B} %\footnote{\url{http://vizier.cfa.harvard.edu/viz-bin/ftp-index?/ftp/cats/VI/81}}
+Stellarium uses by default the widespread VSOP87 theory~\citep{1988A&A...202..309B} %\footnote{\url{http://vizier.cfa.harvard.edu/viz-bin/ftp-index?/ftp/cats/VI/81}}
 to calculate the positions of the planets over time.
 This is an analytical ephemeris modeled to match the numerical
 integration run DE200 from NASA JPL, which by itself gives positions for 1850\ldots2050. 
-Its use is recommended for the years -4000\ldots+8000. You can observe the sun leaving the ``ecliptic
+Its use is recommended for the years $-4000\ldots+8000$. You can observe the sun leaving the ``ecliptic
 of date'' and running on the ``ecliptic J2000'' outside this date
 range. This is obviously a mathematical trick to keep
 continuity. Still, positions may be somewhat useful outside this
@@ -172,13 +184,13 @@ but you cannot even be sure which side of Earth could observe it!
 Stellarium follows the widely accepted convention that dates before the Gregorian calendar 
 reform are given in the Julian calendar, introduced by \name[Julius]{Caesar} in 46~BC. 
 This calendar introduces a leap day every fourth year, which is a bit too much. 
-If you want to show summer solstice in the year -2500, you will notice it is not on June 21st. 
+If you want to show summer solstice in the year $-2500$, you will notice it is not on June 21st. 
 This is not an error of Stellarium -- the Gregorian reform had a reason! In prehistoric times, 
 it may be more useful to work with solar ecliptic longitudes. For example, summer solstice is
 when the Sun is at $\lambda=90\degree$.
 
 \name[Julius]{Caesar} introduced a Solar calendar to the Roman empire
-in 46~BC but was assassinated in March 44~BC=-43 (see below).  His
+in 46~BC but was assassinated in March 44~BC=$-43$ (see below).  His
 simple 4-year leap rule was then misapplied by the high priests of
 Rome by adding a leap day every third year.  \name{Augustus} fixed the
 calendar by omitting a few leap days, and only 8~AD was the first
@@ -199,15 +211,60 @@ numbers (JD), you can use them with Stellarium as JD numbers are
 independent from calendar systems. Else, you can utilize the Calendars
 plugin (see section \ref{sec:plugin:Calendars}).
 
-Some have noted a difference of one between dates given as BC versus
+Some users have noted and expressed confusion about a difference of one between dates given as BC (or BCE) versus
 Stellarium's negative years.  Note that historical chronology does not
 know a year Zero! (Try to write this date in Roman numbers!)  Year
-1~AD was preceded by year 1~BC. Astronomers want to simplify
-computations and therefore use a year 0 (equivalent to 1~BC). It is
-simple: 1~BC=0, 2~BC=-1, \ldots 100~BC=-99.  Stellarium is an
-astronomy program and uses astronomical counting.  However, the
-Calendars plugin (see section \ref{sec:plugin:Calendars}) allows
+1~AD (1~CE) was preceded by year 1~BC (1~BCE). Astronomers want to simplify
+computations and therefore use a year $0$ (equivalent to 1~BC). It is
+simple: 1~BC=$0$, 2~BC=$-1$, \ldots 100~BC=$-99$ (Fig.~\ref{fig:Accuracy:Calendar}).  Stellarium is an
+astronomy program and uses astronomical counting. Other programs may behave differently in this respect. However, the
+Calendars plugin (see section \ref{sec:plugin:Calendars}) even allows
 displaying both counting systems.
+
+\begin{figure}[htb]\centering\small
+  \begin{tabular}{l|ccccccccc}
+    & \multicolumn{4}{r}{$\Longleftarrow$ negative}&
+    \multicolumn{1}{c}{0}&
+    \multicolumn{4}{l}{positive $\Longrightarrow$}\\
+    Astronomical & \ldots & -3   & -2   & -1   & 0                        & 1    & 2    & 3    & \ldots\\\hline
+    Historical   & \ldots & 4~BC & 3~BC & 2~BC &\multicolumn{1}{c||}{1~BC}& AD~1 & AD~2 & AD~3 & \ldots\\
+    & \multicolumn{5}{r||}{$\Longleftarrow$ Before Christ}&
+      \multicolumn{4}{l}{After Christ $\Longrightarrow$}
+  \end{tabular}
+  \caption{Counting years around the beginning of the Common Era.}
+  \label{fig:Accuracy:Calendar}
+\end{figure}
+  
+
+\section{Reference data}
+\label{sec:Accuracy:JPLcomparison}
+
+This table \newFeature{v0.21.2}provides comparison data between JPL Horizons and
+Stellarium. The JPL data were fetched in early July 2021 by our
+attentive user Atque. These are apparent geocentric coordinates
+provided by JPL's solutions DE440/DE441 in J2000.0 equatorial
+coordinates, including corrections for nutation, light time and
+aberration. The right part provides the according values computed by
+Stellarium from DE440/DE441 files. The $\Delta T$ model was set to
+``JPL Horizons'', but using DE* means using a different model
+specialized to the DE ephemeris.  Among the causes for differences we
+must take into account:
+\begin{itemize}
+\item Stellarium does not provide corrections for diurnal aberration (should not matter for geocentric positions)
+\item Stellarium does not provide corrections for light deflection in the Sun's gravitational field
+\item Stellarium provides nutation only for 500 years around
+  J2000.0. It is undocumented for how long the underlying model is
+  valid.
+\end{itemize}
+These three may cause differences in the range of a few
+arcseconds. The apparent drift that we can observe in the remote past
+may stem from different assumptions regarding $\Delta T$ (see
+\ref{sec:Concepts:DeltaT}) or from other reasons yet to be identified. 
+
+
+\scriptsize
+\input{tab_accuracy.tex}
+\normalsize
 
 
 
