@@ -2068,7 +2068,7 @@
                <item>
                 <widget class="QCheckBox" name="aberrationCheckBox">
                  <property name="toolTip">
-                  <string>Stellar aberration is an annual shift in positions, amounting to max. about 20 arcseconds for observers on Earth.</string>
+                  <string>Annual aberration is an annual wobble in positions, amounting to max. about 20 arcseconds for observers on Earth.</string>
                  </property>
                  <property name="text">
                   <string>Include aberration</string>
@@ -2080,8 +2080,14 @@
                  <property name="toolTip">
                   <string>Exaggerate aberration (for didactic explanations)</string>
                  </property>
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
                  <property name="maximum">
-                  <double>1000.000000000000000</double>
+                  <double>5.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.100000000000000</double>
                  </property>
                  <property name="value">
                   <double>1.000000000000000</double>
