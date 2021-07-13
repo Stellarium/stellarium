@@ -174,7 +174,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectModule class
 	//! Search for SolarSystem objects in some area around a point.
-	//! @param v A vector representing a point in the sky in equatorial J2000 coordinates.
+	//! @param v A vector representing a point in the sky in equatorial J2000 coordinates (without aberration).
 	//! @param limitFov The radius of the circle around the point v which
 	//! defines the size of the area to search.
 	//! @param core the core object
