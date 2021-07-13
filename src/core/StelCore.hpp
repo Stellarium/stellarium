@@ -519,8 +519,8 @@ public slots:
 
 	//! @return aberration factor. 1 is realistic simulation, but higher values may be useful for didactic purposes.
 	double getAberrationFactor() const {return aberrationFactor;}
-	//! Set whether you want computation and simulation of aberration (a slight wobble of stellar positions due to finite speed of light, about 20 arcseconds when observing from earth).
-	void setAberrationFactor(double factor) { if (!fuzzyEquals(aberrationFactor, factor)) { aberrationFactor=factor; emit aberrationFactorChanged(factor); }}
+	//! Set aberration factor. Values are clamped to 0...5. (Values above 5 cause graphical problems.)
+	void setAberrationFactor(double factor) { if (!fuzzyEquals(aberrationFactor, factor)) { aberrationFactor=qBound(0.,factor, 5.); emit aberrationFactorChanged(factor); }}
 
 	//! @return whether topocentric coordinates are currently used.
 	bool getUseTopocentricCoordinates() const {return flagUseTopocentricCoordinates;}
