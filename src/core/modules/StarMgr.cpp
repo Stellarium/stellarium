@@ -1241,7 +1241,7 @@ void StarMgr::draw(StelCore* core)
 
 
 // Return a QList containing the stars located
-// inside the limFov circle around position v
+// inside the limFov circle around position vv (in J2000 frame without aberration)
 QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const StelCore* core) const
 {
 	QList<StelObjectP > result;

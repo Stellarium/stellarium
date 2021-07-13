@@ -65,6 +65,7 @@ public:
 	//! @param y the y screen position in pixel
 	//! @param action define whether to add to, replace, or remove from the existing selection
 	//! @return true if a object was found at position (this does not necessarily means it is selected)
+	//! @note If aberration is computed, this first applies aberration backwards and then searches for an object.
 	bool findAndSelect(const StelCore* core, int x, int y, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
 
 	//! Find and select an object from its translated name.
@@ -185,10 +186,10 @@ private:
 	bool objectPointerVisibility;
 
 	//! Find in a "clever" way an object from its equatorial J2000.0 position.
-	//! If aberration is computed, this first applies aberration backwards and then searches for an object.
 	StelObjectP cleverFind(const StelCore* core, const Vec3d& pos) const;
 
 	//! Find in a "clever" way an object from its screen position.
+	//! @note If aberration is computed, this first applies aberration backwards and then searches for an object.
 	StelObjectP cleverFind(const StelCore* core, int x, int y) const;
 
 	// Radius in pixel in which objects will be searched when clicking on a point in sky.
