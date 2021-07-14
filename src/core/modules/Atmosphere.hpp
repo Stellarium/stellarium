@@ -107,7 +107,7 @@ private:
 		int rgbMaxValue;
 		int alphaWaOverAlphaDa;
 		int oneOverGamma;
-		int term2TimesOneOverMaxdLpOneOverGamma;
+		int term2TimesOneOverMaxdL;
 		int brightnessScale;
 		int sunPos;
 		int term_x, Ax, Bx, Cx, Dx, Ex;

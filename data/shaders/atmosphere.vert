@@ -47,22 +47,14 @@ void main()
 	highp vec3 unprojectedVertex = skyColor.xyz;
 	highp float Y = skyColor.w;
 	highp float x,y;
-	if (Y>0.01)
-	{
-		highp float cosDistSunq = dot(sunPos,unprojectedVertex);
-		highp float distSun=acos(cosDistSunq);
-		highp float oneOverCosZenithAngle = (unprojectedVertex.z==0.) ? 9999999999999. : 1. / unprojectedVertex.z;
+	highp float cosDistSunq = dot(sunPos,unprojectedVertex);
+	highp float distSun=acos(cosDistSunq);
+	highp float oneOverCosZenithAngle = (unprojectedVertex.z==0.) ? 9999999999999. : 1. / unprojectedVertex.z;
 
-		cosDistSunq*=cosDistSunq;
-		x = term_x * (1. + Ax * exp(Bx*oneOverCosZenithAngle))* (1. + Cx * exp(Dx*distSun) + Ex * cosDistSunq);
-		y = term_y * (1. + Ay * exp(By*oneOverCosZenithAngle))* (1. + Cy * exp(Dy*distSun) + Ey * cosDistSunq);
-		if (x < 0. || y < 0.)
-		{
-			x = 0.25;
-			y = 0.25;
-		}
-	}
-	else
+	cosDistSunq*=cosDistSunq;
+	x = term_x * (1. + Ax * exp(Bx*oneOverCosZenithAngle))* (1. + Cx * exp(Dx*distSun) + Ex * cosDistSunq);
+	y = term_y * (1. + Ay * exp(By*oneOverCosZenithAngle))* (1. + Cy * exp(Dy*distSun) + Ey * cosDistSunq);
+	if (x < 0. || y < 0.)
 	{
 		x = 0.25;
 		y = 0.25;
