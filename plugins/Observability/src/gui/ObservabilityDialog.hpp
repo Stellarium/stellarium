@@ -47,7 +47,7 @@ public slots:
 
 private slots:
 	//! Read the color values from the sliders and set the font color.
-	void setColor();
+	//void setColor();
 	
 	void updateAltitudeLabel(int altitude);
 	void updateHorizonLabel(int horizon);
