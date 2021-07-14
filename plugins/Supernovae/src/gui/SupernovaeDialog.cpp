@@ -22,7 +22,6 @@
 #include <QTimer>
 #include <QDateTime>
 #include <QUrl>
-#include <QFileDialog>
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
