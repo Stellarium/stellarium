@@ -31,45 +31,46 @@
 
 class StelPainter;
 
+//! @class CustomObject
+//! TODO GZ says PLEASE Document this thoroughly! If possible recombine CustomObject and StelMarker & derivatives, or remove one of the two. Or describe why we need both.
+//!
+//! The CustomObject is currently used for custom Markers which can be set and removed interactively. It is drawn exactly at the coordinates given and is not subject to aberration.
 class CustomObject : public StelObject
 {
 	friend class CustomObjectMgr;
 public:
 	static const QString CUSTOMOBJECT_TYPE;
 
-	CustomObject(const QString& codesignation, const Vec3d& coordinates, const bool isVisible);
-	~CustomObject();
+	CustomObject(const QString& codesignation, const Vec3d& coordJ2000, const bool isVisible);
+	~CustomObject() Q_DECL_OVERRIDE;
 
 	//! Get the type of object
-	virtual QString getType(void) const
+	virtual QString getType(void) const Q_DECL_OVERRIDE
 	{
 		return CUSTOMOBJECT_TYPE;
 	}
 
-	virtual QString getID(void) const
+	virtual QString getID(void) const Q_DECL_OVERRIDE
 	{
 		return designation;
 	}
 
-	virtual float getSelectPriority(const StelCore* core) const;
+	virtual float getSelectPriority(const StelCore* core) const Q_DECL_OVERRIDE;
 
 	//! Get an HTML string to describe the object
 	//! @param core A pointer to the core
 	//! @flags a set of flags with information types to include.
-	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const;
-	virtual Vec3f getInfoColor(void) const;
-	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const
-	{
-		return XYZ;
-	}
+	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
+	virtual Vec3f getInfoColor(void) const Q_DECL_OVERRIDE;
+	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const Q_DECL_OVERRIDE;
 	//! Get the visual magnitude of custom object
-	virtual float getVMagnitude(const StelCore* core) const;	
+	virtual float getVMagnitude(const StelCore* core) const Q_DECL_OVERRIDE;
 	//! Get the angular size of custom object
-	virtual double getAngularSize(const StelCore* core) const;
+	virtual double getAngularSize(const StelCore* core) const Q_DECL_OVERRIDE;
 	//! Get the localized name of custom object
-	virtual QString getNameI18n(void) const;
+	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
 	//! Get the english name of custom object
-	virtual QString getEnglishName(void) const
+	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE
 	{
 		return designation;
 	}

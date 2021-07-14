@@ -58,16 +58,15 @@ void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 {
 	StelCore *core = StelApp::getInstance().getCore();
 	Vec3d mousePosition = core->getMouseJ2000Pos();
-	// Shift + LeftClick
+	// Shift + LeftClick -- Add custom marker
 	if (e->modifiers().testFlag(Qt::ShiftModifier) && e->button()==Qt::LeftButton && e->type()==QEvent::MouseButtonPress)
 	{
-		// Add custom marker
 		addCustomObject(QString("%1 %2").arg(N_("Marker")).arg(countMarkers + 1), mousePosition, true);
 
 		e->setAccepted(true);
 		return;
 	}
-	// Shift + Alt + Right click -- Removes all custom markers
+	// Shift + Alt + RightClick -- Removes all custom markers
 	// Changed by snowsailor 5/04/2017
 	if(e->modifiers().testFlag(Qt::ShiftModifier) && e->modifiers().testFlag(Qt::AltModifier) && e->button() == Qt::RightButton && e->type() == QEvent::MouseButtonPress)
 	{
@@ -76,15 +75,15 @@ void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 		e->setAccepted(true);
 		return;
 	}
-	// Shift + RightClick
-	// Added by snowsailor 5/04/2017 -- Removes the closest marker within a radius specified within
+	// Shift + RightClick -- Removes the closest marker within a radius specified within
+	// Added by snowsailor 5/04/2017
 	if (e->modifiers().testFlag(Qt::ShiftModifier) && e->button()==Qt::RightButton && e->type()==QEvent::MouseButtonPress)
 	{
 		const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000, StelCore::RefractionAuto);
 		Vec3d winpos;
 		prj->project(mousePosition, winpos);
-		float xpos = winpos[0];
-		float ypos = winpos[1];
+		double xpos = winpos[0];
+		double ypos = winpos[1];
 
 		CustomObjectP closest;
 		//Smallest valid radius will be at most `radiusLimit`, so radiusLimit + 10 is plenty as the default
@@ -95,7 +94,7 @@ void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 			Vec3d a = cObj->getJ2000EquatorialPos(core);
 			prj->project(a, winpos);
 			//Distance formula to determine how close we clicked to each of the custom objects
-			float dist = std::sqrt(((xpos-winpos[0])*(xpos-winpos[0])) + ((ypos-winpos[1])*(ypos-winpos[1])));
+			float dist = static_cast<float>(std::sqrt(((xpos-winpos[0])*(xpos-winpos[0])) + ((ypos-winpos[1])*(ypos-winpos[1]))));
 			//If the position of the object is within our click radius
 			if(dist <= radiusLimit && dist < smallestRad)
 			{
@@ -247,9 +246,9 @@ void CustomObjectMgr::drawPointer(StelCore* core, StelPainter& painter)
 	if (!newSelected.empty())
 	{
 		const StelObjectP obj = newSelected[0];
-		Vec3d pos=obj->getJ2000EquatorialPos(core);
+		Vec3f pos=obj->getJ2000EquatorialPos(core).toVec3f();
 
-		Vec3d screenpos;
+		Vec3f screenpos;
 		// Compute 2D pos and return if outside screen
 		if (!painter.getProjector()->project(pos, screenpos))
 			return;
@@ -257,11 +256,11 @@ void CustomObjectMgr::drawPointer(StelCore* core, StelPainter& painter)
 		painter.setColor(obj->getInfoColor());
 		texPointer->bind();
 		painter.setBlending(true);
-		painter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getTotalRunTime()*40.);
+		painter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, static_cast<float>(StelApp::getInstance().getTotalRunTime()*40.));
 	}
 }
 
-QList<StelObjectP> CustomObjectMgr::searchAround(const Vec3d& av, double limitFov, const StelCore*) const
+QList<StelObjectP> CustomObjectMgr::searchAround(const Vec3d& av, double limitFov, const StelCore* core) const
 {
 	QList<StelObjectP> result;
 
@@ -274,7 +273,7 @@ QList<StelObjectP> CustomObjectMgr::searchAround(const Vec3d& av, double limitFo
 	{
 		if (cObj->initialized)
 		{
-			equPos = cObj->XYZ;
+			equPos = cObj->getJ2000EquatorialPos(core);
 			equPos.normalize();
 			if (equPos.dot(v) >= cosLimFov)
 			{

@@ -29,15 +29,16 @@
 #include "StelModuleMgr.hpp"
 #include "StelProjector.hpp"
 #include "StelUtils.hpp"
+#include "Planet.hpp"
 
 const QString CustomObject::CUSTOMOBJECT_TYPE = QStringLiteral("CustomObject");
 Vec3f CustomObject::markerColor = Vec3f(0.1f,1.0f,0.1f);
 float CustomObject::markerSize = 1.f;
 float CustomObject::selectPriority = 0.f;
 
-CustomObject::CustomObject(const QString& codesignation, const Vec3d& coordinates, const bool isVisible)
+CustomObject::CustomObject(const QString& codesignation, const Vec3d& coordJ2000, const bool isVisible)
 	: initialized(false)
-	, XYZ(coordinates)
+	, XYZ(coordJ2000)
 	, markerTexture(Q_NULLPTR)
 	, designation(codesignation)
 	, isMarker(isVisible)
@@ -99,6 +100,12 @@ Vec3f CustomObject::getInfoColor(void) const
 	return Vec3f(1.f, 1.f, 1.f);
 }
 
+Vec3d CustomObject::getJ2000EquatorialPos(const StelCore* core) const
+{
+	Q_UNUSED(core)
+	return XYZ;
+}
+
 float CustomObject::getVMagnitude(const StelCore* core) const
 {
 	Q_UNUSED(core);
@@ -120,10 +127,9 @@ void CustomObject::update(double deltaTime)
 
 void CustomObject::draw(StelCore* core, StelPainter *painter)
 {
-	Q_UNUSED(core);
 	Vec3d pos;
 	// Check visibility of custom object
-	if (!(painter->getProjector()->projectCheck(XYZ, pos)))
+	if (!(painter->getProjector()->projectCheck(getJ2000EquatorialPos(core), pos)))
 		return;
 
 	painter->setBlending(true, GL_ONE, GL_ONE);

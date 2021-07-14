@@ -84,10 +84,7 @@ public:
 	//! - redshift
 	virtual QVariantMap getInfoMap(const StelCore *core) const;
 	virtual Vec3f getInfoColor(void) const;
-	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const
-	{
-		return XYZ;
-	}
+	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const;
         virtual float getVMagnitude(const StelCore* core) const;
 	virtual double getAngularSize(const StelCore* core) const;
 	virtual QString getNameI18n(void) const

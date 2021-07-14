@@ -162,7 +162,7 @@ public:
 	//! @param mag_steps number of steps used to describe values in range
 	SpecialZoneArray(QFile* file,bool byte_swap,bool use_mmap,int level,int mag_min,
 			 int mag_range,int mag_steps);
-	~SpecialZoneArray(void);
+	~SpecialZoneArray(void) Q_DECL_OVERRIDE;
 protected:
 	//! Get an array of all SpecialZoneData objects in this catalog.
 	SpecialZoneData<Star> *getZones(void) const
@@ -182,11 +182,11 @@ protected:
 	virtual void draw(StelPainter* sPainter, int index, bool isInsideViewport,
 			  const RCMag *rcmag_table, int limitMagIndex, StelCore* core,
 			  int maxMagStarName, float names_brightness, bool designationUsage,
-			  const QVector<SphericalCap>& boundingCaps) const;
+			  const QVector<SphericalCap>& boundingCaps) const Q_DECL_OVERRIDE;
 
-	virtual void scaleAxis();
+	virtual void scaleAxis() Q_DECL_OVERRIDE;
 	virtual void searchAround(const StelCore* core, int index,const Vec3d &v,double cosLimFov,
-					  QList<StelObjectP > &result);
+					  QList<StelObjectP > &result) Q_DECL_OVERRIDE;
 
 	Star *stars;
 private:

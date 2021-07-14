@@ -30,6 +30,7 @@
 #include "StelSkyDrawer.hpp"
 #include "StelTranslator.hpp"
 #include "StelActionMgr.hpp"
+#include "Planet.hpp"
 
 #include <QMouseEvent>
 #include <QString>
@@ -466,7 +467,7 @@ bool StelObjectMgr::findAndSelect(const QString &name, StelModule::StelModuleSel
 }
 
 
-//! Find and select an object near given equatorial position
+//! Find and select an object near given equatorial J2000 position
 bool StelObjectMgr::findAndSelect(const StelCore* core, const Vec3d& pos, StelModule::StelModuleSelectAction action)
 {
 	StelObjectP tempselect = cleverFind(core, pos);
@@ -480,7 +481,7 @@ bool StelObjectMgr::findAndSelect(const StelCore* core, int x, int y, StelModule
 	return setSelectedObject(tempselect, action);
 }
 
-// Find an object in a "clever" way, v in J2000 frame
+// Find an object in a "clever" way, v in J2000 frame (no aberration!)
 StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) const
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
@@ -489,6 +490,7 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 	const double fov_around = core->getMovementMgr()->getCurrentFov()/qMin(prj->getViewportWidth(), prj->getViewportHeight()) * searchRadiusPixel;
 
 	// Collect the objects inside the range
+	// TODO: normalize v here, and just Q_ASSERT normalized state in the submodules' searchAround() calls.
 	QList<StelObjectP> candidates;
 	for (const auto* m : objectsModules)
 		candidates += m->searchAround(v, fov_around, core);
@@ -530,7 +532,10 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 }
 
 /*************************************************************************
- Find in a "clever" way an object from its equatorial position
+ Find in a "clever" way an object from its screen position
+ If aberration is corrected, we must compute mean J2000 from the clicked position
+ because all cleverfind() is supposed to work with mean J2000 positions.
+ With aberration clause, stars/DSO are found, without the planet moons are found.
 *************************************************************************/
 StelObjectP StelObjectMgr::cleverFind(const StelCore* core, int x, int y) const
 {
@@ -545,7 +550,18 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, int x, int y) const
 		const double dy = y - win.v[1];
 		prj->unProject(x+dx, y+dy, v);
 
-		return cleverFind(core, v);
+		// Apply annual aberration (backwards). Explan. Suppl. 2013, (7.38)
+		Vec3d v2000(v);
+		if (core->getUseAberration())
+		{
+			v2000.normalize(); // just to be sure...
+			Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+			StelCore::matVsop87ToJ2000.transfo(vel);
+			vel*=core->getAberrationFactor() * (AU/(86400.0*SPEED_OF_LIGHT));
+			v2000-=vel;
+			v2000.normalize();
+		}
+		return cleverFind(core, v2000);
 	}
 	return StelObjectP();
 }

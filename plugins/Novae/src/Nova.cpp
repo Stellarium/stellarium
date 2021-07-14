@@ -27,6 +27,7 @@
 #include "StarMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelPainter.hpp"
+#include "Planet.hpp"
 
 #include <QTextStream>
 #include <QDebug>
@@ -325,7 +326,7 @@ void Nova::draw(StelCore* core, StelPainter* painter)
 	if (mag <= mlimit)
 	{
 		const Vec3f color(1.f);
-		Vec3f vf(XYZ.toVec3f());
+		Vec3f vf(getJ2000EquatorialPos(core).toVec3f());
 		Vec3f altAz(vf);
 		altAz.normalize();
 		core->j2000ToAltAzInPlaceNoRefraction(&altAz);
@@ -342,7 +343,23 @@ void Nova::draw(StelCore* core, StelPainter* painter)
 		if (labelsFader.getInterstate()<=0.f && (mag+5.f)<mlimit && smgr->getFlagLabels())
 		{
 			QString name = novaName.isEmpty() ? designation : novaName;
-			painter->drawText(XYZ, name, 0, shift, shift, false);
+			painter->drawText(getJ2000EquatorialPos(core), name, 0, shift, shift, false);
 		}
+	}
+}
+
+Vec3d Nova::getJ2000EquatorialPos(const StelCore* core) const
+{
+	if ((core) && (core->getUseAberration()) && (core->getCurrentPlanet()))
+	{
+		Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+		vel=StelCore::matVsop87ToJ2000*vel*core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
+		Vec3d pos=XYZ+vel;
+		pos.normalize();
+		return pos;
+	}
+	else
+	{
+		return XYZ;
 	}
 }

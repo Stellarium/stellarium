@@ -93,16 +93,7 @@ public:
 	//! Return a map like StelObject::getInfoMap(), but with a few extra tags also available in getMap(), except for designation, RA and DE fields.
 	virtual QVariantMap getInfoMap(const StelCore *core) const;
 	virtual Vec3f getInfoColor(void) const;
-	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const
-	{
-		static const double d2000 = 2451545.0;
-		const double movementFactor = (M_PI/180.)*(0.0001/3600.) * (core->getJDE()-d2000)/365.25;
-		Vec3d v;
-		const double cRA = RA + movementFactor*pmRA;
-		const double cDE = DE + movementFactor*pmDE;
-		StelUtils::spheToRect(cRA, cDE, v);
-		return v;
-	}
+	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const;
 	//! Get the visual magnitude of pulsar
 	virtual float getVMagnitude(const StelCore* core) const;
 	virtual float getVMagnitudeWithExtinction(const StelCore *core) const;

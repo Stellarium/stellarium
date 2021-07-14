@@ -112,6 +112,7 @@ private:
 	double saturation = 1.0;
 
 	struct StelVertexArray* vertexArray;
+	struct StelVertexArray* vertexArrayNoAberration;
 };
 
 #endif // MILKYWAY_HPP

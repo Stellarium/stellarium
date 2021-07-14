@@ -30,6 +30,7 @@
 #include "StelProjector.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelTranslator.hpp"
+#include "Planet.hpp"
 
 #include <QTextStream>
 #include <QDebug>
@@ -467,5 +468,28 @@ void Pulsar::draw(StelCore* core, StelPainter *painter)
 				name = getNameI18n();
 			painter->drawText(coord, name, 0, shift, shift, false);
 		}
+	}
+}
+
+Vec3d Pulsar::getJ2000EquatorialPos(const StelCore* core) const
+{
+	static const double d2000 = 2451545.0;
+	const double movementFactor = (M_PI/180.)*(0.0001/3600.) * (core->getJDE()-d2000)/365.25;
+	Vec3d v;
+	const double cRA = RA + movementFactor*pmRA;
+	const double cDE = DE + movementFactor*pmDE;
+	StelUtils::spheToRect(cRA, cDE, v);
+
+	if ((core) && (core->getUseAberration()) && (core->getCurrentPlanet()))
+	{
+		Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+		vel=StelCore::matVsop87ToJ2000*vel*core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
+		Vec3d pos=v+vel;
+		pos.normalize();
+		return pos;
+	}
+	else
+	{
+		return v;
 	}
 }

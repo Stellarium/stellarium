@@ -33,6 +33,8 @@ class StelPainter;
 //! Because this class is intended for use in scripting (although other uses are also fine), all marker
 //! types and so on are specified by QString descriptions.
 //! The markers are painted very late, i.e. also sky object markers will be written over the landscape.
+//! @note The "Markers" which can be set interactively by mouse click are actually CustomObjects and
+//! managed by the CustomObjectMgr.
 class MarkerMgr : public StelModule
 {
 	Q_OBJECT
@@ -40,21 +42,21 @@ class MarkerMgr : public StelModule
 public:
 	//! Construct a MarkerMgr object.
 	MarkerMgr();
-	virtual ~MarkerMgr();
+	virtual ~MarkerMgr() Q_DECL_OVERRIDE;
  
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	//! Initialize the MarkerMgr object.
-	virtual void init();
+	virtual void init() Q_DECL_OVERRIDE;
 	
 	//! Draw user labels.
-	virtual void draw(StelCore* core);
+	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
 	
 	//! Update time-dependent parts of the module.
-	virtual void update(double deltaTime);
+	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
 
 	//! Defines the order in which the various modules are drawn.
-	virtual double getCallOrder(StelModuleActionName actionName) const;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 
 public slots:
 	//! Create a marker which is attached to a StelObject.
@@ -80,6 +82,8 @@ public slots:
 	//! autoDeleteTimeoutMs ms
 	//! @return a unique ID which can be used to refer to the marker.
 	//! returns -1 if the marker could not be created (e.g. object not found)
+	//! @note The marker will be placed on the object's J2000 coordinates at time of marker creation
+	//!       and will undergo aberration correction.
 	int markerObject(const QString& objectName,
 			 bool visible=true,
 			 const QString& mtype="cross",
@@ -88,10 +92,12 @@ public slots:
 			 bool autoDelete = false,
 			 int autoDeleteTimeoutMs = 0);
 
-	//! Create a marker with equatorial coordinates.
+	//! Create a marker with mean equatorial coordinates.
 	//! @param RA right ascension (e.g. 5h10m31s)
 	//! @param Dec declination (e.g. 25d30m30s)
-	//! @param j2000epoch if true, the marker starts displayed in equatorial coordinates for epoch J2000.0
+	//! @param j2000epoch if true, the coordinates are equatorial for epoch J2000.0.
+	//!        If false, they represent equatorial coordinates for equinox of current date and will be converted to J2000 coordinates at time of creation.
+	//! @note  It is not possible to create a marker in equatorial coordinate of date which changes with precession.
 	//! @param visible if true, the marker starts displayed, else it starts hidden
 	//! @param mtype the type of marker. Keys:
 	//! - cross: simple cross
@@ -111,6 +117,7 @@ public slots:
 	//! @param autoDelete the marker will be automatically deleted after it is displayed once
 	//! @param autoDeleteTimeoutMs if not zero, the marker will be automatically deleted after
 	//! autoDeleteTimeoutMs ms
+	//! @param withAberration The coordinates will be subject to aberration. If false, they represent strict frame coordinates.
 	//! @return a unique ID which can be used to refer to the marker.
 	//! returns -1 if the marker could not be created (e.g. object not found)
 	int markerEquatorial(const QString& RA,
@@ -121,7 +128,8 @@ public slots:
 			     const QString& color="#ffff66",
 			     const float size = 6.f,
 			     bool autoDelete = false,
-			     int autoDeleteTimeoutMs = 0);
+			     int autoDeleteTimeoutMs = 0,
+			     bool withAberration = true);
 
 	//! Create a marker with horizontal coordinates.
 	//! @param az azimuth (e.g. 125d30m30s)
@@ -158,9 +166,9 @@ public slots:
 
 	//! find out if a marker identified by id is presently shown
 	bool getMarkerShow(int id) const;
-	//! set a marker identified by id to be shown or not
+	//! set a marker identified by a positive id to be shown or not
 	void setMarkerShow(int id, bool show);
-	//! Delete a marker by the ID
+	//! Delete a marker identified by positive ID
 	//! @return true if the id existed and was deleted, else false
 	void deleteMarker(int id);
 	//! Delete all markers.

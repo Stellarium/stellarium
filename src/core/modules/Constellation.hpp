@@ -87,8 +87,8 @@ private:
 	void drawName(StelPainter& sPainter, ConstellationMgr::ConstellationDisplayStyle style) const;
 	//! Draw the constellation art
 	void drawArt(StelPainter& sPainter) const;
-	//! Draw the constellation boundary
-	void drawBoundaryOptim(StelPainter& sPainter) const;
+	//! Draw the constellation boundary. obsVelocity used for aberration
+	void drawBoundaryOptim(StelPainter& sPainter, const Vec3d &obsVelocity) const;
 
 	//! Test if a star is part of a Constellation.
 	//! This member tests to see if a star is one of those which make up
@@ -113,8 +113,8 @@ private:
 	//! This method uses the coords of the stars (optimized for use through
 	//! the class ConstellationMgr only).
 	void drawOptim(StelPainter& sPainter, const StelCore* core, const SphericalCap& viewportHalfspace) const;
-	//! Draw the art texture, optimized function to be called through a constellation manager only.
-	void drawArtOptim(StelPainter& sPainter, const SphericalRegion& region) const;
+	//! Draw the art texture, optimized function to be called through a constellation manager only.  obsVelocity used for aberration
+	void drawArtOptim(StelPainter& sPainter, const SphericalRegion& region, const Vec3d& obsVelocity) const;
 	//! Update fade levels according to time since various events.
 	void update(int deltaTime);
 	//! Turn on and off Constellation line rendering.

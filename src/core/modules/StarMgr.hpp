@@ -122,7 +122,7 @@ class StarMgr : public StelObjectModule
 
 public:
 	StarMgr(void);
-	~StarMgr(void);
+	~StarMgr(void) Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -133,46 +133,46 @@ public:
 	//! - Loads the star font (for labels on named stars)
 	//! - Loads the texture of the star selection indicator
 	//! - Sets various display flags from the ini parser object
-	virtual void init();
+	virtual void init() Q_DECL_OVERRIDE;
 
 	//! Draw the stars and the star selection indicator if necessary.
-	virtual void draw(StelCore* core);
+	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
 
 	//! Update any time-dependent features.
 	//! Includes fading in and out stars and labels when they are turned on and off.
-	virtual void update(double deltaTime) {labelsFader.update(static_cast<int>(deltaTime*1000)); starsFader.update(static_cast<int>(deltaTime*1000));}
+	virtual void update(double deltaTime) Q_DECL_OVERRIDE {labelsFader.update(static_cast<int>(deltaTime*1000)); starsFader.update(static_cast<int>(deltaTime*1000));}
 
 	//! Used to determine the order in which the various StelModules are drawn.
-	virtual double getCallOrder(StelModuleActionName actionName) const;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectModule class
 	//! Return a list containing the stars located inside the limFov circle around position v
-	virtual QList<StelObjectP > searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
+	virtual QList<StelObjectP > searchAround(const Vec3d& v, double limitFov, const StelCore* core) const Q_DECL_OVERRIDE;
 
 	//! Return the matching Stars object's pointer if exists or Q_NULLPTR
 	//! @param nameI18n The case in-sensitive localized star common name or HIP/HP, SAO, HD, HR, GCVS or WDS number
 	//! catalog name (format can be HP1234 or HP 1234 or HIP 1234) or sci name
-	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
+	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const Q_DECL_OVERRIDE;
 
 	//! Return the matching star if exists or Q_NULLPTR
 	//! @param name The case in-sensitive english star name
-	virtual StelObjectP searchByName(const QString& name) const;
+	virtual StelObjectP searchByName(const QString& name) const Q_DECL_OVERRIDE;
 
 	//! Same as searchByName(id);
-	virtual StelObjectP searchByID(const QString &id) const;
+	virtual StelObjectP searchByID(const QString &id) const Q_DECL_OVERRIDE;
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const Q_DECL_OVERRIDE;
 	//! @note Loading stars with the common names only.
-	virtual QStringList listAllObjects(bool inEnglish) const;	
-	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const;
-	virtual QString getName() const { return "Stars"; }
-	virtual QString getStelObjectType() const;
+	virtual QStringList listAllObjects(bool inEnglish) const Q_DECL_OVERRIDE;
+	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const Q_DECL_OVERRIDE;
+	virtual QString getName() const Q_DECL_OVERRIDE { return "Stars"; }
+	virtual QString getStelObjectType() const Q_DECL_OVERRIDE;
 
 public slots:
 	///////////////////////////////////////////////////////////////////////////
@@ -190,7 +190,7 @@ public slots:
 	//! Set the amount of star labels. The real amount is also proportional with FOV.
 	//! The limit is set in function of the stars magnitude
 	//! @param a the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
-	void setLabelsAmount(double a) {if(a!=labelsAmount){ labelsAmount=a; emit labelsAmountChanged(a);}}
+	void setLabelsAmount(double a) {if(!qFuzzyCompare(a,labelsAmount)){ labelsAmount=a; emit labelsAmountChanged(a);}}
 	//! Get the amount of star labels. The real amount is also proportional with FOV.
 	//! @return the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
 	double getLabelsAmount(void) const {return labelsAmount;}
@@ -378,7 +378,7 @@ signals:
 	void starsDisplayedChanged(const bool displayed);
 	void designationUsageChanged(const bool flag);
 	void flagAdditionalNamesDisplayedChanged(const bool displayed);
-	void labelsAmountChanged(float a);
+	void labelsAmountChanged(double a);
 
 private:
 	void setCheckFlag(const QString& catalogId, bool b);

@@ -136,8 +136,7 @@ OctahedronPolygon::OctahedronPolygon(const QList<OctahedronPolygon>& octs) : fil
 
 void OctahedronPolygon::appendSubContour(const SubContour& inContour)
 {
-	QVarLengthArray<QVector<SubContour>,8 > resultSides;
-	resultSides.resize(8);
+	QVarLengthArray<QVector<SubContour>,8 > resultSides(8);
 	QVector<SubContour> splittedContour1[2];
 	// Split the contour on the plan Y=0
 	splitContourByPlan(1, inContour, splittedContour1);
@@ -358,7 +357,7 @@ QVector<Vec3d> OctahedronPolygon::tesselateOneSideTriangles(GLUEStesselator* tes
 		gluesTessBeginContour(tess);
 		for (int i=0;i<contours.at(c).size();++i)
 		{
-			gluesTessVertex(tess, const_cast<double*>((const double*)contours[c][i].vertex.data()), (void*)&(contours[c][i].vertex));
+			gluesTessVertex(tess, const_cast<double*>(static_cast<const double*>(contours[c][i].vertex.data())), static_cast<void*>(const_cast<Vec3d *>(&(contours[c][i].vertex))));
 		}
 		gluesTessEndContour(tess);
 	}
@@ -386,10 +385,10 @@ void OctahedronPolygon::updateVertexArray()
 #ifndef NDEBUG
 	gluesTessCallback(tess, GLUES_TESS_BEGIN, (GLvoid(*)()) &checkBeginTrianglesCallback);
 #endif
-	gluesTessCallback(tess, GLUES_TESS_VERTEX_DATA, (GLvoid(*)()) &vertexTrianglesCallback);
-	gluesTessCallback(tess, GLUES_TESS_EDGE_FLAG, (GLvoid(*)()) &noOpCallback);
-	gluesTessCallback(tess, GLUES_TESS_ERROR, (GLvoid(*)()) &errorCallback);
-	gluesTessCallback(tess, GLUES_TESS_COMBINE_DATA, (GLvoid(*)()) &combineTrianglesCallback);
+	gluesTessCallback(tess, GLUES_TESS_VERTEX_DATA,  reinterpret_cast<GLvoid(*)()> (&vertexTrianglesCallback));
+	gluesTessCallback(tess, GLUES_TESS_EDGE_FLAG,    reinterpret_cast<GLvoid(*)()> (&noOpCallback));
+	gluesTessCallback(tess, GLUES_TESS_ERROR,        reinterpret_cast<GLvoid(*)()> (&errorCallback));
+	gluesTessCallback(tess, GLUES_TESS_COMBINE_DATA, reinterpret_cast<GLvoid(*)()> (&combineTrianglesCallback));
 	gluesTessProperty(tess, GLUES_TESS_WINDING_RULE, GLUES_TESS_WINDING_POSITIVE);
 
 	// Call the tesselator on each side
@@ -495,7 +494,7 @@ QVector<SubContour> OctahedronPolygon::tesselateOneSideLineLoop(GLUEStesselator*
 		for (int i=0;i<contours.at(c).size();++i)
 		{
 			Q_ASSERT(contours[c][i].vertex[2]<0.000001);
-			gluesTessVertex(tess, const_cast<double*>((const double*)contours[c][i].vertex.data()), const_cast<void*>((const void*)&(contours[c][i])));
+			gluesTessVertex(tess, const_cast<double*>(static_cast<const double*>(contours[c][i].vertex.data())), const_cast<void*>(static_cast<const void*>(&(contours[c][i]))));
 		}
 		gluesTessEndContour(tess);
 	}
@@ -555,12 +554,12 @@ void OctahedronPolygon::tesselate(TessWindingRule windingRule)
 	// Use GLUES tesselation functions to transform the polygon into a list of triangles
 	GLUEStesselator* tess = gluesNewTess();
 #ifndef NDEBUG
-	gluesTessCallback(tess, GLUES_TESS_BEGIN, (GLvoid(*)()) &checkBeginLineLoopCallback);
+	gluesTessCallback(tess, GLUES_TESS_BEGIN, reinterpret_cast<GLvoid(*)()> (&checkBeginLineLoopCallback));
 #endif
-	gluesTessCallback(tess, GLUES_TESS_END_DATA, (GLvoid(*)()) &endLineLoopCallback);
-	gluesTessCallback(tess, GLUES_TESS_VERTEX_DATA, (GLvoid(*)()) &vertexLineLoopCallback);
-	gluesTessCallback(tess, GLUES_TESS_ERROR, (GLvoid(*)()) &errorCallback);
-	gluesTessCallback(tess, GLUES_TESS_COMBINE_DATA, (GLvoid(*)()) &combineLineLoopCallback);
+	gluesTessCallback(tess, GLUES_TESS_END_DATA,     reinterpret_cast<GLvoid(*)()> (&endLineLoopCallback));
+	gluesTessCallback(tess, GLUES_TESS_VERTEX_DATA,  reinterpret_cast<GLvoid(*)()> (&vertexLineLoopCallback));
+	gluesTessCallback(tess, GLUES_TESS_ERROR,        reinterpret_cast<GLvoid(*)()> (&errorCallback));
+	gluesTessCallback(tess, GLUES_TESS_COMBINE_DATA, reinterpret_cast<GLvoid(*)()> (&combineLineLoopCallback));
 	const double windRule = (windingRule==OctahedronPolygon::WindingPositive) ? GLUES_TESS_WINDING_POSITIVE : GLUES_TESS_WINDING_ABS_GEQ_TWO;
 	gluesTessProperty(tess, GLUES_TESS_WINDING_RULE, windRule);
 	gluesTessProperty(tess, GLUES_TESS_BOUNDARY_ONLY, GL_TRUE);

@@ -50,10 +50,10 @@ public:
 	void initFromQVariantMap(const QVariantMap& map);
 
 	//! Destructor.
-	~MultiLevelJsonBase();
+	~MultiLevelJsonBase() Q_DECL_OVERRIDE;
 
 	//! Return the short name for this image to be used in the loading bar.
-	QString getShortName() const {return shortName;}
+	virtual QString getShortName() const Q_DECL_OVERRIDE {return shortName;}
 
 	//! Return true if an error occured while loading the data.
 	bool hasErrorOccured() const {return errorOccured;}
@@ -65,8 +65,8 @@ public:
 	//! It can be saved as JSON using the StelJsonParser methods.
 	QVariantMap toQVariantMap() const;
 
-	//! Schedule a deletion for all the childs.
-	//! It will practically occur after the delay passed as argument to deleteUnusedTiles() has expired.
+	//! Schedule a deletion for all the children.
+	//! It will practically occur after the deletionDelay has expired.
 	void scheduleChildsDeletion();
 
 private slots:
@@ -90,7 +90,7 @@ protected:
 	QString baseUrl;
 
 	//! The relative URL passed to the constructor
-	QString contructorUrl;
+	QString constructorUrl;
 
 	//! The list of all the created subtiles for this tile
 	QList<MultiLevelJsonBase*> subTiles;
@@ -120,7 +120,7 @@ private:
 	class QNetworkReply* httpReply;
 
 	// The delay after which a scheduled deletion will occur
-	float deletionDelay;
+	double deletionDelay;
 
 	class JsonLoadThread* loadThread;
 

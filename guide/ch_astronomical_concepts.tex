@@ -1057,7 +1057,42 @@ of stars up to about 1,600 light years from the Earth, after which the
 annual parallax is so small it cannot be measured accurately enough.
 
 In Stellarium, the annual parallax can be listed in the object information for stars
-when available. It is not used for the positional calculations.
+when available. It is not accounted for in the positional calculations.
+
+\section{Aberration of Light}
+\label{sec:Concepts:Aberration}
+
+\newFeature{V0.21.2} When you are standing under a rainy but
+windless sky with an umbrella placed vertically over your head, your
+feet will not be hit by raindrops. But when you are walking, raindrops
+which just missed the umbrella may hit your feet. Relative to your
+umbrella and feet, it seems that the raindrops are coming not quite
+vertically from above, but inclined from the direction you are heading
+into, and therefore you tilt the umbrella slightly forward to fend off
+the raindrops from your feet.
+
+Light propagates very fast compared to the motion of the planets, but
+still with a finite velocity. Therefore, just like the raindrops
+mentioned above, light from all celestial objects seem to come in from
+a position slightly distorted towards the point in space the observer
+is heading to.
+
+In search for Stellar parallax, this effect was fortuitously
+discovered and then explained by \name[James]{Bradley} (1693--1762) in
+1725. This was also the final proof for Earth's movement around the
+Sun. For an observer on the moving Earth, the apparent deviation of a
+star from the mean coordinates can reach $20.4"$. As the months pass,
+Earth is changing its direction along its orbit, and so the light
+distortion also changes, i.e., the direction towards the object moves
+against the fixed coordinate axes. The effect is significant when we
+want to compute, for example, stellar occultations by the Moon.
+
+In Stellarium, you can observe a slight annual wobble in all objects'
+positions against the fixed celestial grids. Just enable the
+equatorial grid, zoom in and run through the months. You can also
+exaggerate the aberration effect upto $5\times$ to make it more
+apparent. \footnote{Exaggerating even more causes graphics defects and
+  has been disabled for now.}
 
 \section{Proper Motion}
 \label{sec:Concepts:ProperMotion}
@@ -1085,8 +1120,9 @@ Note however some limitations:
   motion in space requires more computation, which would slow down the
   program.
 \item Double stars are listed in catalogs as two individual stars with
-  their current proper motion which consists of spatial motion and the 
-  orbital motion around their center of gravity. They may be seen flying 
+  their current proper motion which consists of a common spatial motion and the 
+  orbital motion around their common center of gravity. However, their orbital
+  motion around each other is not modelled in Stellarium.  They may be seen flying 
   apart, which is of course not realistic.
 \end{enumerate}
 
