@@ -171,7 +171,7 @@
 #if (defined(OS_2) || defined(__OS2__)) && !defined(OS2)
 #  define OS2
 #endif
-#if defined(_WINDOWS) && !defined(WINDOWS)
+#if defined(_WIN32) && !defined(WINDOWS)
 #  define WINDOWS
 #endif
 #if defined(_WIN32) || defined(_WIN32_WCE) || defined(__WIN32__)

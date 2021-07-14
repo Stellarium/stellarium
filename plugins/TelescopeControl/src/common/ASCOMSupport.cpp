@@ -21,12 +21,12 @@
 #include "ASCOMSupport.hpp"
 
 
-#ifdef Q_OS_WIN
+#ifdef _MSC_VER
 
 #include <atlcomcli.h>
 #include <comdef.h>
 
-#endif // Q_OS_WIN
+#endif // _MSC_VER
 
 bool ASCOMSupport::isASCOMSupported()
 {

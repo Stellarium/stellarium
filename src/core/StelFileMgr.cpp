@@ -91,17 +91,20 @@ void StelFileMgr::init()
 	// OK, now we have the userDir set, add it to the search path
 	fileLocations.append(userDir);
 	
-	// Determine install data directory location
-	QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
-	QString envRoot = env.value("STELLARIUM_DATA_ROOT", ".");
 
-	if (QFileInfo(envRoot + QDir::separator() + QString(CHECK_FILE)).exists())
-	{
-		installDir = envRoot;
-	}	
-	else
-	{
-	#if defined(Q_OS_MAC)
+	// Determine install data directory location
+	QStringList searchPaths;
+	
+	searchPaths += QProcessEnvironment::systemEnvironment().value("STELLARIUM_DATA_ROOT", ".");
+	
+	#if defined(Q_OS_ANDROID)
+		searchPaths += "assets:";
+		for( QFileInfo info : QDir("/storage").entryInfoList(QDir::Dirs|QDir::NoDotDot) ){
+			searchPaths += info.absoluteFilePath() + "/stellarium";
+			searchPaths += info.absoluteFilePath() + "/0/stellarium";
+		}
+		searchPaths += "/sdcard/stellarium";
+	#elif defined(Q_OS_MAC)
 		QString relativePath = "/../Resources";
 		if (QCoreApplication::applicationDirPath().contains("src")) {
 			relativePath = "/../..";
@@ -116,75 +119,41 @@ void StelFileMgr::init()
 		if (!QCoreApplication::applicationDirPath().contains("src")) {
 			ResourcesDir.cd(QString("Resources"));
 		}
-		QFileInfo installLocation(ResourcesDir.absolutePath());
-		QFileInfo checkFile(installLocation.filePath() + QDir::separator() + QString(CHECK_FILE));
+		searchPaths += ResourcesDir.absolutePath();
 	#elif defined(Q_OS_WIN)		
-		QFileInfo installLocation(QCoreApplication::applicationDirPath());
-		QFileInfo checkFile(installLocation.filePath() + QDir::separator() + QString(CHECK_FILE));
+		searchPaths += QCoreApplication::applicationDirPath();
 	#else
 		// Linux, BSD, Solaris etc.
 		// We use the value from the config.h filesystem
-		QFileInfo installLocation(QFile::decodeName(INSTALL_DATADIR));
-		QFileInfo checkFile(QFile::decodeName(INSTALL_DATADIR "/" CHECK_FILE));
+		searchPaths += QFile::decodeName(INSTALL_DATADIR);
 	#endif
+
+	searchPaths += QCoreApplication::applicationDirPath() + QString("/../share/stellarium");
 
 	#ifdef DEBUG
-		if (!checkFile.exists())
-		{	// for DEBUG use sources location 
-			QString debugDataPath = INSTALL_DATADIR_FOR_DEBUG;
-			checkFile = QFileInfo(debugDataPath + QDir::separator() + CHECK_FILE);
-			installLocation = QFileInfo(debugDataPath);
-		}
+		searchPaths += NSTALL_DATADIR_FOR_DEBUG;
 	#endif
 
-		if (checkFile.exists())
-		{
-			installDir = installLocation.filePath();
-		}
-		else
-		{
+	searchPaths += STELLARIUM_SOURCE_DIR;
+
+	for( QString path : searchPaths ){
+		QFileInfo checkFile( path + QDir::separator() + CHECK_FILE );
+		if( checkFile.exists() ){
+			installDir = path;
+			break;
+		}else{
 			qWarning() << "WARNING StelFileMgr::StelFileMgr: could not find install location:"
-					 << QDir::toNativeSeparators(installLocation.filePath())
+					 << QDir::toNativeSeparators(path)
 					 << " (we checked for "
 					 << QDir::toNativeSeparators(checkFile.filePath()) << ").";
-
-			qWarning() << "Maybe this is AppImage or something similar? Let's check relative path...";
-			// This hook has been added after reverse-engineering an AppImage application
-			QString relativePath =  QCoreApplication::applicationDirPath() + QString("/../share/stellarium");
-			checkFile = QFileInfo(relativePath + QDir::separator() + CHECK_FILE);
-			if (checkFile.exists())
-			{
-				installDir = relativePath;
-			}
-			else
-			{
-				qWarning() << "WARNING StelFileMgr::StelFileMgr: could not find install location:"
-						 << QDir::toNativeSeparators(relativePath)
-						 << " (we checked for "
-						 << QDir::toNativeSeparators(checkFile.filePath()) << ").";
-
-				qWarning() << "Maybe this is development environment? Let's check source directory path...";
-
-				QString sourceDirPath = STELLARIUM_SOURCE_DIR; // The variable is defined in CMakeLists.txt file
-				checkFile = QFileInfo(sourceDirPath + QDir::separator() + CHECK_FILE);
-				if (checkFile.exists())
-				{
-					installDir = sourceDirPath;
-				}
-				else
-				{
-					qWarning() << "WARNING StelFileMgr::StelFileMgr: could not find install location:"
-							 << QDir::toNativeSeparators(sourceDirPath)
-							 << " (we checked for "
-							 << QDir::toNativeSeparators(checkFile.filePath()) << ").";
-
-					#ifndef UNIT_TEST
-					// NOTE: Hook for buildbots (using within testEphemeris)
-					qFatal("Couldn't find install directory location.");
-					#endif
-				}
-			}
 		}
+	}
+
+	if( installDir.isEmpty() ){
+		#ifndef UNIT_TEST
+		// NOTE: Hook for buildbots (using within testEphemeris)
+		qFatal("Couldn't find install directory location.");
+		#endif
 	}
 
 	// Then add the installation directory to the search path

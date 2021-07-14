@@ -7,7 +7,7 @@ INSTALL(DIRECTORY ./ DESTINATION ${SDATALOC}/models
 	PATTERN "*.mtl"
 	PATTERN "*.png"
 	PATTERN "*.obj"
-	PATTERN "*.gz"
+	PATTERN "*.gzip"
 	PATTERN "CMakeFiles" EXCLUDE )
 
 INSTALL(DIRECTORY blender/ DESTINATION ${SDATALOC}/models/blender

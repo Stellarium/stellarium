@@ -28,7 +28,7 @@
 #include <QLineEdit>
 
 // this is adapted from DummyDialog.cpp
-class CustomProxy : public QGraphicsProxyWidget
+class DummyDialog::CustomProxy : public QGraphicsProxyWidget
 {
 	public:
 		CustomProxy(QGraphicsItem *parent = Q_NULLPTR, Qt::WindowFlags wFlags = Qt::WindowFlags()) : QGraphicsProxyWidget(parent, wFlags)

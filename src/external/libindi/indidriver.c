@@ -1571,7 +1571,11 @@ FILE *IUGetConfigFP(const char *filename, const char *dev, const char *mode, cha
 
     if (stat(configDir, &st) != 0)
     {
-        if (mkdir(configDir, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH) < 0)
+        if (mkdir(configDir
+#if defined(S_IRWXO) && !defined(_WIN32)
+                   , S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH
+#endif
+                   ) < 0)
         {
             snprintf(errmsg, MAXRBUF, "Unable to create config directory. Error %s: %s", configDir, strerror(errno));
             return NULL;

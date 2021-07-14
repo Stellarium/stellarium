@@ -30,7 +30,7 @@
 #include <cstring>
 #include <algorithm>
 
-#ifdef _WINDOWS
+#ifdef _WIN32
 #include <WinSock2.h>
 #include <windows.h>
 
@@ -38,7 +38,10 @@
 #define net_write(x,y,z) send(x,(const char *)(y),z,0)
 #define net_close closesocket
 
+#ifdef _MSC_VER
 #pragma comment(lib, "Ws2_32.lib")
+#endif
+
 #else
 #include <netdb.h>
 #include <unistd.h>
@@ -110,7 +113,7 @@ void INDI::BaseClient::watchProperty(const char *deviceName, const char *propert
 
 bool INDI::BaseClient::connectServer()
 {
-#ifdef _WINDOWS
+#ifdef _WIN32
     WSADATA wsaData;
     int iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
     if (iResult != NO_ERROR)
@@ -141,7 +144,7 @@ bool INDI::BaseClient::connectServer()
     serv_addr.sin_family      = AF_INET;
     serv_addr.sin_addr.s_addr = ((struct in_addr *)(hp->h_addr_list[0]))->s_addr;
     serv_addr.sin_port        = htons(cPort);
-#ifdef _WINDOWS
+#ifdef _WIN32
     if ((sockfd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) == INVALID_SOCKET)
     {
         IDLog("Socket error: %d\n", WSAGetLastError());
@@ -158,7 +161,7 @@ bool INDI::BaseClient::connectServer()
 
     /* set the socket in non-blocking */
     //set socket nonblocking flag
-#ifdef _WINDOWS
+#ifdef _WIN32
     u_long iMode = 0;
     iResult = ioctlsocket(sockfd, FIONBIO, &iMode);
     if (iResult != NO_ERROR)
@@ -202,7 +205,7 @@ bool INDI::BaseClient::connectServer()
         //we had a timeout
         if (ret == 0)
         {
-#ifdef _WINDOWS
+#ifdef _WIN32
             IDLog("select timeout\n");
 #else
             errno = ETIMEDOUT;
@@ -213,7 +216,7 @@ bool INDI::BaseClient::connectServer()
     }
 
     /* we had a positivite return so a descriptor is ready */
-#ifndef _WINDOWS
+#ifndef _WIN32
     int error     = 0;
     socklen_t len = sizeof(error);
     if (FD_ISSET(sockfd, &rset) || FD_ISSET(sockfd, &wset))
@@ -236,7 +239,7 @@ bool INDI::BaseClient::connectServer()
     }
 #endif
 
-#ifndef _WINDOWS
+#ifndef _WIN32
     int pipefd[2];
     ret = socketpair(PF_UNIX, SOCK_STREAM, 0, pipefd);
 
@@ -276,7 +279,7 @@ bool INDI::BaseClient::disconnectServer()
 
     sConnected = false;
 
-#ifdef _WINDOWS
+#ifdef _WIN32
     net_close(sockfd);
     WSACleanup();
 #else
@@ -380,7 +383,7 @@ void INDI::BaseClient::listenINDI()
     char buffer[MAXINDIBUF];
     char msg[MAXRBUF];
     int err_code = 0;
-#ifdef _WINDOWS
+#ifdef _WIN32
     SOCKET maxfd = 0;
 #else
     int maxfd = 0;
@@ -436,7 +439,7 @@ void INDI::BaseClient::listenINDI()
     if (sockfd > maxfd)
         maxfd = sockfd;
 
-#ifndef _WINDOWS
+#ifndef _WIN32
     FD_SET(m_receiveFd, &rs);
     if (m_receiveFd > maxfd)
         maxfd = m_receiveFd;
@@ -457,7 +460,7 @@ void INDI::BaseClient::listenINDI()
             break;
         }
 
-#ifndef _WINDOWS
+#ifndef _WIN32
         // Received termination string from main thread
         if (n > 0 && FD_ISSET(m_receiveFd, &rs))
         {
@@ -468,7 +471,7 @@ void INDI::BaseClient::listenINDI()
 
         if (n > 0 && FD_ISSET(sockfd, &rs))
         {
-#ifdef _WINDOWS
+#ifdef _WIN32
             n = recv(sockfd, buffer, MAXINDIBUF, 0);
 #else
             n = recv(sockfd, buffer, MAXINDIBUF, MSG_DONTWAIT);

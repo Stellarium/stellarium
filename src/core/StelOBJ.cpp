@@ -69,7 +69,7 @@ bool StelOBJ::load(const QString& filename, const VertexOrder vertexOrder)
 	qCDebug(stelOBJ)<<"Opened file in"<<timer.restart()<<"ms";
 
 	//check if this is a compressed file
-	if(filename.endsWith(".gz"))
+	if(filename.endsWith(".gzip"))
 	{
 		//uncompress into memory
 		QByteArray data = StelUtils::uncompress(file);

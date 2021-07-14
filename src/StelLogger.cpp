@@ -33,10 +33,12 @@ QMutex StelLogger::fileMutex;
 
 void StelLogger::init(const QString& logFilePath)
 {
+#if !defined(Q_OS_ANDROID)
 	logFile.setFileName(logFilePath);
 
 	if (logFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text | QIODevice::Unbuffered))
 		qInstallMessageHandler(StelLogger::debugLogHandler);
+#endif
 
 	// write timestamp
 	writeLog(QString("%1").arg(QDateTime::currentDateTime().toString(Qt::ISODate)));
@@ -77,7 +79,7 @@ void StelLogger::init(const QString& logFilePath)
 	// write memory and CPU info
 #ifdef Q_OS_LINUX
 
-#ifndef BUILD_FOR_MAEMO
+#if !defined(BUILD_FOR_MAEMO) && !defined(Q_OS_ANDROID)
 	QFile infoFile("/proc/meminfo");
 	if(!infoFile.open(QIODevice::ReadOnly | QIODevice::Text))
 		writeLog("Could not get memory info.");
@@ -305,10 +307,14 @@ void StelLogger::writeLog(QString msg)
 	if (!msg.endsWith('\n'))
 		msg.append(QLatin1Char('\n'));
 
+#if defined(Q_OS_ANDROID)
+	qDebug() << msg;
+#else
 	fileMutex.lock();
 	logFile.write(qPrintable(msg), msg.size());
 	log += msg;
 	fileMutex.unlock();
+#endif
 }
 
 QString StelLogger::getMsvcVersionString(int ver)

@@ -2,7 +2,7 @@
 # to generate manual page:
 # pod2man --section=1 -r ${VERSION} --center=" " stellarium.pod stellarium.1
 
-IF(UNIX AND NOT WIN32)
+IF(UNIX AND NOT WIN32 AND NOT ANDROID)
 
 ADD_CUSTOM_TARGET(ManPages ALL)
 
@@ -28,6 +28,6 @@ ELSE(${CMAKE_SYSTEM_NAME} MATCHES "(DragonFly|FreeBSD|NetBSD|OpenBSD)" AND NOT $
      INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/stellarium.1 DESTINATION share/man/man1)
 ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "(DragonFly|FreeBSD|NetBSD|OpenBSD)" AND NOT ${CMAKE_SYSTEM_NAME} MATCHES "kFreeBSD")
 
-ENDIF(UNIX AND NOT WIN32)
+ENDIF(UNIX AND NOT WIN32 AND NOT ANDROID)
 
 

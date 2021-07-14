@@ -270,7 +270,6 @@ private:
 
 	class StelRootItem* rootItem;
 	QGraphicsWidget* guiItem;
-	QGraphicsEffect* nightModeEffect;
 
 	//! The openGL viewport of the graphics scene
 	//! Responsible for main GL setup, rendering is done in the scene background

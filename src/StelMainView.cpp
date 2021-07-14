@@ -58,7 +58,7 @@
 #include <QWindow>
 #include <QMessageBox>
 #include <QStandardPaths>
-#ifdef Q_OS_WIN
+#if defined(Q_OS_WIN) || defined(Q_OS_ANDROID)
 	#include <QPinchGesture>
 #endif
 #include <QOpenGLShader>
@@ -310,10 +310,11 @@ public:
 
 		setAcceptHoverEvents(true);
 
-#ifdef Q_OS_WIN
+#if defined(Q_OS_WIN) || defined(Q_OS_ANDROID)
 		setAcceptTouchEvents(true);
 		grabGesture(Qt::PinchGesture);
 #endif
+
 		setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
 		previousPaintTime = StelApp::getTotalRunTime();
 	}
@@ -420,8 +421,8 @@ protected:
 			mainView->thereWasAnEvent();
 	}
 
-	//*** Gesture and touch support, currently only for Windows
-#ifdef Q_OS_WIN
+	//*** Gesture and touch support, currently only for Windows and Android
+#if defined(Q_OS_WIN) || defined(Q_OS_ANDROID)
 	bool event(QEvent * e) Q_DECL_OVERRIDE
 	{
 		bool r = false;
@@ -436,8 +437,12 @@ protected:
 				if (touchPoints.count() == 1)
 					setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
 
+#if defined(Q_OS_WIN)
 				r = true;
 				break;
+#else
+				return QGraphicsObject::event(e);
+#endif
 			}
 			case QEvent::Gesture:
 				setAcceptedMouseButtons(Q_NULLPTR);
@@ -824,10 +829,9 @@ void StelMainView::init()
 	scene()->addItem(rootItem);
 	//set the default focus to the sky
 	focusSky();
-	nightModeEffect = new NightModeGraphicsEffect(this);
-	updateNightModeProperty(StelApp::getInstance().getVisionModeNight());
 	//install the effect on the whole view
-	rootItem->setGraphicsEffect(nightModeEffect);
+	rootItem->setGraphicsEffect(new NightModeGraphicsEffect(this));
+	updateNightModeProperty(StelApp::getInstance().getVisionModeNight());
 
 	int screen = configuration->value("video/screen_number", 0).toInt();
 	if (screen < 0 || screen >= qApp->screens().count())
@@ -953,7 +957,7 @@ void StelMainView::updateNightModeProperty(bool b)
 {
 	// So that the bottom bar tooltips get properly rendered in night mode.
 	setProperty("nightMode", b);
-	nightModeEffect->setEnabled(b);
+	rootItem->graphicsEffect()->setEnabled(b);
 }
 
 void StelMainView::reloadShaders()
@@ -1518,8 +1522,8 @@ void StelMainView::doScreenshot(void)
 	float pixelRatio = QOpenGLContext::currentContext()->screen()->devicePixelRatio();
 	int imgWidth =stelScene->width();
 	int imgHeight=stelScene->height();
-	bool nightModeWasEnabled=nightModeEffect->isEnabled();
-	nightModeEffect->setEnabled(false);
+	bool effectWasEnabled=rootItem->graphicsEffect()->isEnabled();
+	rootItem->graphicsEffect()->setEnabled(false);
 	if (flagUseCustomScreenshotSize)
 	{
 		// Borrowed from Scenery3d renderer: determine maximum framebuffer size as minimum of texture, viewport and renderbuffer size
@@ -1619,7 +1623,7 @@ void StelMainView::doScreenshot(void)
 	// reset viewport and GUI
 	StelApp::getInstance().getCore()->setCurrentStelProjectorParams(pParams);
 	customScreenshotMagnification=1.0f;
-	nightModeEffect->setEnabled(nightModeWasEnabled);
+	rootItem->graphicsEffect()->setEnabled(effectWasEnabled);
 	stelScene->setSceneRect(0, 0, pParams.viewportXywh[2], pParams.viewportXywh[3]);
 	rootItem->setSize(QSize(pParams.viewportXywh[2], pParams.viewportXywh[3]));
 	StelGui* stelGui = dynamic_cast<StelGui*>(gui);
@@ -1629,16 +1633,6 @@ void StelMainView::doScreenshot(void)
 		stelGui->forceRefreshGui();
 	}
 
-	if (nightModeWasEnabled)
-	{
-		for (int row=0; row<im.height(); ++row)
-			for (int col=0; col<im.width(); ++col)
-			{
-				QRgb rgb=im.pixel(col, row);
-				int gray=qGray(rgb);
-				im.setPixel(col, row, qRgb(gray, 0, 0));
-			}
-	}
 	if (flagInvertScreenShotColors)
 		im.invertPixels();
 

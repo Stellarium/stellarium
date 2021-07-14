@@ -48,7 +48,7 @@ or to drop rows into a text editor or a spreadsheet.
 Known Issues
 ------------
 
-The .bin.gz file saved by the app is not an actual archive, as it can't be
+The .bin.gzip file saved by the app is not an actual archive, as it can't be
 opened with an archive manager. Nevertheless, Stellarium can read it.
 
 
