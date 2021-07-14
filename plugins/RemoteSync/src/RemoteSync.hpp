@@ -184,6 +184,7 @@ private:
 	QString errorString;
 
 	QSettings* conf;
+	bool allowVersionMismatch; // set true to sync even different versions of Stellarium
 
 	// GUI
 	RemoteSyncDialog* configDialog;

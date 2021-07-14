@@ -477,7 +477,7 @@ performed on a ``master'' instance, which acts as a server, are automatically
 replicated on all connected clients. These clients may run on the same device 
 the server runs, or may access the server over a network.
 
-The plugin is still quite experimental, but is provided for testing purposes.
+The plugin is still quite experimental, but is provided for testing and developing purposes.
 You can configure it through the standard plugin settings dialog 
 (\autoref{fig:plugins:RemoteSync:settings}). One Stellarium instance
 can either run in the server mode or connect to an existing server as a client.
@@ -525,7 +525,7 @@ By default, the following things are synchronized:
 	as projection type, sky and view options, landscape settings, line colors, etc.
 \end{itemize}
 
-Because there is currently no full time synchronization implemented, for the best
+\noindent Because there is currently no full time synchronization implemented, for the best
 results all client computers should make sure their system clocks are set as
 close as possible to the server computer's clock (preferably a few milliseconds
 difference at most). This can be done for example by using an NTP server.\footnote{
@@ -575,6 +575,18 @@ core.output(core.getPropertyList());
 Run the script and inspect the output tab. It may take a little guesswork to select the right names, 
 but the general structure of property names like 
 \texttt{<Module>.<Property>} should help you to find your way around.
+
+\subsection{Developer notes}
+
+Usually the synchronisation fails if you attempt to use different
+versions of Stellarium. You can override this behaviour
+\newFeature{v0.21.2} with an entry in the respective section of
+\file{config.ini}:
+
+\begin{configfile}
+  [RemoteSync]
+  allowVersionMismatch = true
+\end{configfile}
 
 \subsection*{Author and Acknowledgements}
 
