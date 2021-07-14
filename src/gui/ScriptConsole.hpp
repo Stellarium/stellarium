@@ -67,7 +67,7 @@ protected:
 private:
 	static const QString getFileMask();
 	StelScriptSyntaxHighlighter* highlighter;
-	bool useUserDir;
+	bool useUserDir; 	//!< if set, file dialog will open on user directory
 	bool hideWindowAtScriptRun;
 	bool clearOutput;
 
@@ -87,6 +87,8 @@ private:
 	bool dirty;
 
 	bool getFlagUserDir() { return useUserDir; }
+	static const QString defaultScriptName;
+	static const QString defaultScriptDir;
 };
 
 #endif // _SCRIPTCONSOLE_HPP

@@ -39,6 +39,9 @@
 #include <QSyntaxHighlighter>
 #include <QTextDocumentFragment>
 
+const QString ScriptConsole::defaultScriptName = "myscript.ssc";
+const QString ScriptConsole::defaultScriptDir = StelFileMgr::getInstallationDir() + "/scripts";
+
 ScriptConsole::ScriptConsole(QObject *parent)
 	: StelDialog("ScriptConsole", parent)
 	, highlighter(Q_NULLPTR)
@@ -79,16 +82,19 @@ void ScriptConsole::styleChanged()
 void ScriptConsole::populateQuickRunList()
 {
 	ui->quickrunCombo->clear();
-	ui->quickrunCombo->addItem(""); // First line is empty!
-	ui->quickrunCombo->addItem(qc_("selected text as script","command"));
-	ui->quickrunCombo->addItem(qc_("remove screen text","command"));
-	ui->quickrunCombo->addItem(qc_("remove screen images","command"));
-	ui->quickrunCombo->addItem(qc_("remove screen markers","command"));
-	ui->quickrunCombo->addItem(qc_("clear map: natural","command"));
-	ui->quickrunCombo->addItem(qc_("clear map: starchart","command"));
-	ui->quickrunCombo->addItem(qc_("clear map: deepspace","command"));
-	ui->quickrunCombo->addItem(qc_("clear map: galactic","command"));
-	ui->quickrunCombo->addItem(qc_("clear map: supergalactic","command"));
+
+	// keep following in sync with ScriptConsole::quickRun() !
+
+	ui->quickrunCombo->addItem(""); // First line is empty! // 0
+	ui->quickrunCombo->addItem(qc_("selected text as script",	"command")); // 1
+	ui->quickrunCombo->addItem(qc_("remove screen text",		"command")); // 2
+	ui->quickrunCombo->addItem(qc_("remove screen images",		"command")); // 3
+	ui->quickrunCombo->addItem(qc_("remove screen markers",		"command")); // 4
+	ui->quickrunCombo->addItem(qc_("clear map: natural",		"command")); // 5
+	ui->quickrunCombo->addItem(qc_("clear map: starchart",		"command")); // 6
+	ui->quickrunCombo->addItem(qc_("clear map: deepspace",		"command")); // 7
+	ui->quickrunCombo->addItem(qc_("clear map: galactic",		"command")); // 8
+	ui->quickrunCombo->addItem(qc_("clear map: supergalactic",	"command")); // 9
 }
 
 void ScriptConsole::createDialogContent()
@@ -97,7 +103,7 @@ void ScriptConsole::createDialogContent()
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 
 	highlighter = new StelScriptSyntaxHighlighter(ui->scriptEdit->document());
-	ui->includeEdit->setText(StelFileMgr::getInstallationDir() + "/scripts");
+	ui->includeEdit->setText(defaultScriptDir);
 
 	populateQuickRunList();
 
@@ -175,33 +181,57 @@ void ScriptConsole::loadScript()
 	if (dirty)
 	{
 		// We are loaded and dirty: don't just overwrite!
-        if (QMessageBox::question(&StelMainView::getInstance(), q_("Caution!"), q_("Are you sure you want to load script without saving changes?"), QMessageBox::Yes | QMessageBox::No) == QMessageBox::No)
+        	if (QMessageBox::question(
+			&StelMainView::getInstance(), 
+			q_("Caution!"), 
+			q_("Are you sure you want to load script without saving changes?"), 
+			QMessageBox::Yes | QMessageBox::No,
+			QMessageBox::No
+			)
+			!= QMessageBox::Yes
+		)
+		{
 			return;
+		}
 	}
 	
 	QString openDir;
-	if (getFlagUserDir())
+	if (!scriptFileName.isEmpty())
+	{
+		openDir = scriptFileName; // QFileDialog will cd to file's directory
+	}
+	else if (getFlagUserDir())
 	{
 		openDir = StelFileMgr::findFile("scripts", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory));		
 		if (openDir.isEmpty() || openDir.contains(StelFileMgr::getInstallationDir()))
+		{
 			openDir = StelFileMgr::getUserDir();
+		}
 	}
 	else
-		openDir = StelFileMgr::getInstallationDir() + "/scripts";
+	{
+		openDir = defaultScriptDir;
+	}
 
 	QString filter = q_("Stellarium Script Files");
 	filter.append(" (*.ssc *.inc);;");
 	filter.append(getFileMask());
 	QString aFile = QFileDialog::getOpenFileName(Q_NULLPTR, q_("Load Script"), openDir, filter);
+
 	if (aFile.isNull())
+	{
 		return;
+	}
+
 	scriptFileName = aFile;
+
 	QFile file(scriptFileName);
 	if (file.open(QIODevice::ReadOnly))
 	{
 		ui->scriptEdit->setPlainText(file.readAll());
 		dirty = false;
-		ui->includeEdit->setText(StelFileMgr::dirName(scriptFileName));
+		// by default, script includes come from the directory of the currenty loaded script
+		ui->includeEdit->setText(StelFileMgr::dirName(scriptFileName)); 
 		file.close();
 	}
 	ui->tabs->setCurrentIndex(0);
@@ -209,25 +239,35 @@ void ScriptConsole::loadScript()
 
 void ScriptConsole::saveScript()
 {
-	QString saveDir = StelFileMgr::findFile("scripts", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory));
-	if (saveDir.isEmpty())
-		saveDir = StelFileMgr::getUserDir();
+	QString saveDir = "";
+	if (!scriptFileName.isEmpty())
+	{
+		saveDir = scriptFileName; // QFileDialog will cd to file's directory
+	}
+	else
+	{
+		saveDir = StelFileMgr::findFile("scripts", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory));
+		if (saveDir.isEmpty())
+			saveDir = StelFileMgr::getUserDir();
+		saveDir += "/" + defaultScriptName;
+	}
 
 	QString defaultFilter("(*.ssc)");
-	// Let's ask file name, when file is new and overwrite him in other case	
+	// Let's ask file name when file is new and overwrite in other case	
 	if (scriptFileName.isEmpty())
 	{
-		QString aFile = QFileDialog::getSaveFileName(Q_NULLPTR, q_("Save Script"), saveDir + "/myscript.ssc", getFileMask(), &defaultFilter);
+		QString aFile = QFileDialog::getSaveFileName(Q_NULLPTR, q_("Save Script"), saveDir, getFileMask(), &defaultFilter);
 		if (aFile.isNull())
 			return;
 		scriptFileName = aFile;
 	}
-	else
+	else // file name known
 	{
 		// skip save
 		if (!dirty)
 			return;
 	}
+
 	QFile file(scriptFileName);
 	if (file.open(QIODevice::WriteOnly))
 	{
@@ -245,7 +285,15 @@ void ScriptConsole::clearButtonPressed()
 {
 	if (ui->tabs->currentIndex() == 0)
 	{
-		if (QMessageBox::question(&StelMainView::getInstance(), q_("Caution!"), q_("Are you sure you want to clear script?"), QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes)
+		if (QMessageBox::question(
+			&StelMainView::getInstance(), 
+			q_("Caution!"), 
+			q_("Are you sure you want to clear script?"), 
+			QMessageBox::Yes | QMessageBox::No,
+			QMessageBox::No
+			) 
+			== QMessageBox::Yes
+		)
 		{
 			ui->scriptEdit->clear();
 			scriptFileName = ""; // OK, it's a new file!
@@ -267,7 +315,7 @@ void ScriptConsole::preprocessScript()
 	int errLoc = 0;
 	if (sender() == ui->preprocessSSCButton)
 	{
-		qDebug() << "[ScriptConsole] Preprocessing with SSC proprocessor";
+		qDebug() << "[ScriptConsole] Preprocessing with SSC preprocessor";
 		StelApp::getInstance().getScriptMgr().preprocessScript( scriptFileName, src, dest, ui->includeEdit->text(), errLoc );
 	}
 	else
@@ -309,7 +357,7 @@ void ScriptConsole::runScript()
 
 void ScriptConsole::scriptStarted()
 {
-	//prevent strating of scripts while any script is running
+	//prevent starting of scripts while any script is running
 	ui->quickrunCombo->setEnabled(false);
 	ui->runButton->setEnabled(false);
 	ui->stopButton->setEnabled(true);
@@ -353,7 +401,20 @@ void ScriptConsole::appendOutputLine(const QString& s)
 
 void ScriptConsole::includeBrowse()
 {
-	QString aDir = QFileDialog::getExistingDirectory(Q_NULLPTR, q_("Select Script Include Directory"), StelFileMgr::getInstallationDir() + "/scripts");
+	QString aDir;
+	// if a script was saved before, use its directory as suggested include path
+	// OR maybe this should start first from the currently set ui->includeEdit->text() ?
+	// TODO there is a repetition of user directory decision/retrieval going on in different places...
+
+	if (!scriptFileName.isEmpty())
+	{
+		aDir = scriptFileName;
+	}
+	else // otherwise, use the standard script directory
+	{
+		aDir = defaultScriptDir;
+	}
+	aDir = QFileDialog::getExistingDirectory(Q_NULLPTR, q_("Select Script Include Directory"), aDir);
 	if (!aDir.isNull())
 		ui->includeEdit->setText(aDir);
 }
@@ -362,7 +423,12 @@ void ScriptConsole::quickRun(int idx)
 {
 	if (idx==0)
 		return;	
+
+	// keep following in sync with ScriptConsole::populateQuickRunList() !
+
 	static const QMap<int, QString>map = {
+		// 0 = no selection
+		// 1 = run selected text as script
 		{2, "LabelMgr.deleteAllLabels();\n"},
 		{3, "ScreenImageMgr.deleteAllImages();\n"},
 		{4, "MarkerMgr.deleteAllMarkers();\n"},
@@ -371,6 +437,8 @@ void ScriptConsole::quickRun(int idx)
 		{7, "core.clear(\"deepspace\");\n"},
 		{8, "core.clear(\"galactic\");\n"},
 		{9, "core.clear(\"supergalactic\");\n"}};
+
+	// using the combobox index as key, if a value is found in the map, run that as script, otherwise run the selected text as script
 	QString scriptText = map.value(idx, QTextDocumentFragment::fromHtml(ui->scriptEdit->textCursor().selectedText(), ui->scriptEdit->document()).toPlainText());
 
 	if (!scriptText.isEmpty())
