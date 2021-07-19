@@ -147,9 +147,8 @@ void StelSkyDrawer::init()
 	initializeOpenGLFunctions();
 
 	// Load star texture no mipmap:
-	//texHalo = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/star16x16.png");
-	//texHaloRayed = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/star16x16_rays.png");
-	texHalo = StelApp::getInstance().getTextureManager().createTexture(flagStarSpiky ? texImgHaloSpiky : texImgHalo);
+	texHalo = StelApp::getInstance().getTextureManager().createTexture(texImgHalo);
+	texHaloRayed = StelApp::getInstance().getTextureManager().createTexture(texImgHaloSpiky);
 	texBigHalo = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/haloLune.png");
 	texSunHalo = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/halo.png");	
 	texSunCorona = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/corona.png");
@@ -383,7 +382,10 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 
 	if (nbPointSources==0)
 		return;
-	texHalo->bind();
+	if (flagStarSpiky)
+		texHaloRayed->bind();
+	else
+		texHalo->bind();
 	sPainter->setBlending(true, GL_ONE, GL_ONE);
 
 	const Mat4f& m = sPainter->getProjector()->getProjectionMatrix();
@@ -507,6 +509,8 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 	flagStarTwinkle = false;
 	const bool saveForcedTwinkle = flagForcedTwinkle;
 	flagForcedTwinkle = false;
+	const bool saveSpiky = flagStarSpiky;
+	flagStarSpiky = false;
 
 	RCMag rcm;
 	computeRCMag(mag, &rcm);
@@ -564,6 +568,7 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 	}
 	flagStarTwinkle=saveTwinkle;
 	flagForcedTwinkle=saveForcedTwinkle;
+	flagStarSpiky=saveSpiky;
 }
 
 float StelSkyDrawer::findWorldLumForMag(float mag, float targetRadius) const
@@ -668,7 +673,6 @@ void StelSkyDrawer::setFlagStarSpiky(bool b)
 	if (b!=flagStarSpiky)
 	{
 		flagStarSpiky=b;
-		texHalo = StelApp::getInstance().getTextureManager().createTexture(flagStarSpiky ? texImgHaloSpiky : texImgHalo);
 		emit flagStarSpikyChanged(flagStarSpiky);
 	}
 }
