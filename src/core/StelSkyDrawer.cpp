@@ -510,7 +510,10 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 	const bool saveForcedTwinkle = flagForcedTwinkle;
 	flagForcedTwinkle = false;
 	const bool saveSpiky = flagStarSpiky;
-	flagStarSpiky = false;
+	if (mag<-5.f) // exclude very bright objects only
+		flagStarSpiky = false;
+	else
+		flagStarSpiky = saveSpiky;
 
 	RCMag rcm;
 	computeRCMag(mag, &rcm);
