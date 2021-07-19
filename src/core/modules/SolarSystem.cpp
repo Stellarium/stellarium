@@ -1725,6 +1725,14 @@ void SolarSystem::updateI18n()
 		p->translateName(trans);
 }
 
+QStringList SolarSystem::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
+{
+	QStringList result;
+	if (getFlagPlanets())
+		result = StelObjectModule::listMatchingObjects(objPrefix, maxNbItem, useStartOfWords);
+	return result;
+}
+
 void SolarSystem::setFlagTrails(bool b)
 {
 	if (getFlagTrails() != b)

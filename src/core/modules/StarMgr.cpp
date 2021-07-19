@@ -1462,7 +1462,7 @@ StelObjectP StarMgr::searchByID(const QString &id) const
 QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
-	if (maxNbItem <= 0)
+	if (maxNbItem <= 0 || !getFlagStars())
 		return result;
 
 	QString objw = objPrefix.toUpper();
