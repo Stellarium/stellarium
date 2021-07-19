@@ -2,7 +2,7 @@ labels:
   - name: invalid
     labeled:
       issue:
-        body: This is not a bug! Or at least we just don't understand your problem (probably the log is not attached and hardware info is missing - so, please follow the issue templates).
+        body: Sorry, we just do not understand your problem (probably the log is not attached and hardware info is missing - so, please follow the issue templates).
         action: close
       pr:
         body: Hello @{{ pull_request.user.login }}! Thank you for suggesting this, but please follow the pull request templates.
@@ -10,6 +10,15 @@ labels:
     unlabeled:
       issue:
         body: Thank you for following the template. The repository owner will reply.
+        action: open
+  - name: not a bug
+    labeled:
+      issue:
+        body: This is not a bug! This is a feature...
+        action: close
+    unlabeled:
+      issue:
+        body: Oops... Sorry for mistake @{{ issue.user.login }}
         action: open
   - name: duplicate
     labeled:
