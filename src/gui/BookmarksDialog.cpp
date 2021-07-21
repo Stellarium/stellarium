@@ -243,6 +243,8 @@ void BookmarksDialog::removeBookmarkButtonPressed()
 
 void BookmarksDialog::clearBookmarksButtonPressed()
 {
+	if (!askConfirmation()) return;
+
 	GETSTELMODULE(HighlightMgr)->cleanHighlightList();
 	bookmarksListModel->clear();
 	bookmarksCollection.clear();
