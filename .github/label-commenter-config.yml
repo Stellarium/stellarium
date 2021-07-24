@@ -20,6 +20,18 @@ labels:
       issue:
         body: Oops... Sorry for mistake @{{ issue.user.login }}
         action: open
+  - name: outdated
+    labeled:
+      issue:
+        body: This report is outdated, such, the problematic code replaced by new tool or feature...
+        action: close
+      pr:
+        body: This pull request is outdated, such, the problematic code replaced by new tool or feature...
+        action: close
+    unlabeled:
+      issue:
+        body: Oops... Sorry for mistake @{{ issue.user.login }}
+        action: open
   - name: duplicate
     labeled:
       issue:
