@@ -1,0 +1,49 @@
+[Buildset]
+BuildItems=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x01\x00\x00\x00\x0b\x00\x00\x00\x00\x01\x00\x00\x00\x14\x00s\x00t\x00e\x00l\x00l\x00a\x00r\x00i\x00u\x00m)
+
+[CMake]
+Build Directory Count=1
+Current Build Directory Index-Host System=0
+
+[CMake][CMake Build Directory 0]
+Build Directory Path=/home/wells/DEV/Stellarium/stellarium/build
+Build Type=Debug
+CMake Binary=/usr/bin/cmake
+CMake Executable=/usr/bin/cmake
+Environment Profile=
+Extra Arguments=
+Install Directory=/usr/local
+Runtime=Host System
+
+[Cppcheck]
+checkMissingInclude=true
+checkPerformance=true
+checkStyle=true
+checkUnusedFunction=true
+
+[Launch]
+Launch Configurations=Launch Configuration 0
+
+[Launch][Launch Configuration 0]
+Configured Launch Modes=execute
+Configured Launchers=nativeAppLauncher
+Name=stellarium
+Type=Native Application
+
+[Launch][Launch Configuration 0][Data]
+Arguments=
+Dependencies=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x01\x00\x00\x00\x0b\x00\x00\x00\x00\x03\x00\x00\x00\x14\x00s\x00t\x00e\x00l\x00l\x00a\x00r\x00i\x00u\x00m\x00\x00\x00\x06\x00s\x00r\x00c\x00\x00\x00\x14\x00s\x00t\x00e\x00l\x00l\x00a\x00r\x00i\x00u\x00m)
+Dependency Action=Build
+EnvironmentGroup=
+Executable=file:///home/wells/DEV/Stellarium/stellarium
+External Terminal=konsole --noclose --workdir %workdir -e %exe
+Project Target=stellarium,src,stellarium
+Use External Terminal=false
+Working Directory=
+isExecutable=false
+
+[Project]
+VersionControlSupport=kdevgit
+
+[SourceFileTemplates]
+LastUsedTemplate=/home/wells/.local/share/kdevfiletemplates/template_descriptions/cpp_basic.desktop
