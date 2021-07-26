@@ -1462,10 +1462,10 @@ StelObjectP StarMgr::searchByID(const QString &id) const
 QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
-	if (maxNbItem <= 0)
+	if (maxNbItem <= 0 || !getFlagStars())
 		return result;
 
-	QString objw = objPrefix.toUpper();
+	QString objw = objPrefix.toUpper();	
 	bool found;
 
 	// Search for common names
@@ -1539,7 +1539,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		while (l.hasNext())
 		{
 			l.next();
-			QStringList names = getAdditionalNames(l.value()).split(" - ");
+			QStringList names = getAdditionalEnglishNames(l.value()).split(" - ");
 			for (const auto &name : qAsConst(names))
 			{
 				if (useStartOfWords && name.startsWith(objw, Qt::CaseInsensitive))
@@ -1737,7 +1737,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		}
 	}
 
-	result.sort();
+	result.sort();	
 	return result;
 }
 

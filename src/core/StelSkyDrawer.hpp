@@ -457,6 +457,7 @@ private:
 	QImage texImgHalo;
 	QImage texImgHaloSpiky;
 	StelTextureSP texHalo;
+	StelTextureSP texHaloRayed;
 
 	//! Load B-V conversion parameters from config file
 	void initColorTableFromConfigFile(class QSettings* conf);
