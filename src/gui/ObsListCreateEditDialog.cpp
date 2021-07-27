@@ -217,7 +217,6 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed()
 {
     const QList<StelObjectP>& selectedObject = objectMgr->getSelectedObject();
     if ( !selectedObject.isEmpty() ) {
-
         // No duplicate item in the same list
         bool is_already_in_list = false;
         QHash<QString,observingListItem>::const_iterator i;
@@ -270,7 +269,7 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed()
 
             QString JDs = "";
             double JD = core->getJD();
-            JDs = StelUtils::julianDayToISO8601String(JD + core->getUTCOffset(JD)/24.).replace("T", " ");
+            JDs = StelUtils::julianDayToISO8601String ( JD + core->getUTCOffset ( JD ) /24. ).replace ( "T", " " );
 
             QString Location = "";
             StelLocation loc = core->getCurrentLocation();
@@ -301,7 +300,7 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed()
                 item.constellation = objectConstellation;
             }
             if ( !JDs.isEmpty() ) {
-                item.jd	= QString::number(JD, 'f', 6);
+                item.jd	= QString::number ( JD, 'f', 6 );
             }
             if ( !Location.isEmpty() ) {
                 QHash<QString, int>::iterator i;
@@ -314,9 +313,7 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed()
                 item.fov = fov;
             }
 
-
             observingListItemCollection.insert ( objectUuid,item );
-
         }
 
     } else {
@@ -354,10 +351,8 @@ void ObsListCreateEditDialog::saveObservedObject()
     }
 
     try {
-
         QVariantMap mapFromJsonFile;
         QVariantMap allListsMap;
-
         if ( jsonFile.size() > 0 ) {
             mapFromJsonFile = StelJsonParser::parse ( jsonFile.readAll() ).toMap();
             allListsMap = mapFromJsonFile.value ( QString ( KEY_OBSERVING_LISTS ) ).toMap();
@@ -372,24 +367,24 @@ void ObsListCreateEditDialog::saveObservedObject()
         // Julian day
         QString JDString = "";
         double JD = core->getJD();
-        JDString = QString::number(JD, 'f', 6);
-        
-        
+        JDString = QString::number ( JD, 'f', 6 );
+
+
         // No JD modifications in modification mode
-        if(!isCreationMode){
-            QString  uuidQs = QString::fromStdString(this->listUuid_);
-            QVariantMap currentList = allListsMap.value(uuidQs).toMap();
-            QVariant existingJD = currentList.value(QString(KEY_JD));
+        if ( !isCreationMode ) {
+            QString  uuidQs = QString::fromStdString ( this->listUuid_ );
+            QVariantMap currentList = allListsMap.value ( uuidQs ).toMap();
+            QVariant existingJD = currentList.value ( QString ( KEY_JD ) );
             QString existingJDs = existingJD.toString();
-            if(existingJDs.isEmpty()){
+            if ( existingJDs.isEmpty() ) {
                 observingListDataList.insert ( QString ( KEY_JD ), JDString );
-            }else{
+            } else {
                 observingListDataList.insert ( QString ( KEY_JD ), existingJDs );
-            }            
+            }
         } else {
             observingListDataList.insert ( QString ( KEY_JD ), JDString );
         }
-        
+
         // Location
         QString Location = "";
         StelLocation loc = core->getCurrentLocation();
@@ -446,13 +441,11 @@ void ObsListCreateEditDialog::saveObservedObject()
         StelJsonParser::write ( mapFromJsonFile, &jsonFile );
         jsonFile.flush();
         jsonFile.close();
-
     } catch ( std::runtime_error &e ) {
         qCritical() << "[ObservingList Creation/Edition] File format is wrong! Error: " << e.what();
         return;
     }
 }
-
 
 /*
  * Slot for button obsListExportListButton
@@ -492,19 +485,17 @@ void ObsListCreateEditDialog::obsListImportListButtonPresssed()
             jsonFile.close();
             QVariantMap observingListMap = map.value ( QString ( KEY_OBSERVING_LISTS ) ).toMap();
 
-            if ( observingListMap.size() ==1 ) {
+            if ( observingListMap.size() == 1 ) {
                 QMap<QString, QVariant>::const_iterator i;
                 listUuid_ = i.value().toString().toStdString();
             } else {
-                //TODO define error message
+                // define error message if needed
                 return;
             }
-
         } catch ( std::runtime_error &e ) {
             qWarning() << "[ObservingList Creation/Edition] File format is wrong! Error: " << e.what();
             return;
         }
-
         loadObservingList();
         observingListJsonPath = originalobservingListJsonPath;
         saveObservedObject();
@@ -533,8 +524,9 @@ void ObsListCreateEditDialog::obsListExitButtonPressed()
 /*
  * Overload StelDialog::close()
 */
-void ObsListCreateEditDialog::close(){
-    this->setVisible(false);;
+void ObsListCreateEditDialog::close()
+{
+    this->setVisible ( false );;
     emit this->exitButtonClicked();
 }
 
@@ -543,7 +535,6 @@ void ObsListCreateEditDialog::close(){
 */
 void ObsListCreateEditDialog::headerClicked ( int index )
 {
-
     switch ( index ) {
     case ColumnName:
         sorting = QString ( SORTING_BY_NAME );
@@ -579,7 +570,6 @@ void ObsListCreateEditDialog::loadObservingList()
     QFile jsonFile ( observingListJsonPath );
     if ( !jsonFile.open ( QIODevice::ReadOnly ) ) {
         qWarning() << "[ObservingList Creation/Edition] cannot open" << QDir::toNativeSeparators ( JSON_FILE_NAME );
-
     } else {
         try {
             map = StelJsonParser::parse ( jsonFile.readAll() ).toMap();
@@ -618,7 +608,6 @@ void ObsListCreateEditDialog::loadObservingList()
                     if ( objectMgr->findAndSelect ( objectName ) ) {
                         const QList<StelObjectP>& selectedObject = objectMgr->getSelectedObject();
                         if ( !selectedObject.isEmpty() ) {
-
                             int lastRow = obsListListModel->rowCount();
                             QString objectUuid = QUuid::createUuid().toString();
                             QString objectNameI18n = selectedObject[0]->getNameI18n();
@@ -705,11 +694,10 @@ void ObsListCreateEditDialog::loadObservingList()
                     qCritical() << "[ObservingList Creation/Edition] conversion error";
                     return;
                 }
-
             }
-
+            
             objectMgr->unSelect();
-
+            
         } catch ( std::runtime_error &e ) {
             qWarning() << "[ObservingList Creation/Edition] File format is wrong! Error: " << e.what();
             return;

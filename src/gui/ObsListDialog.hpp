@@ -105,7 +105,6 @@ private slots:
     //! Select and go to object
     //! @param index the QModelIndex of the list
     void selectAndGoToObject ( QModelIndex index );
-
 };
 
 #endif // OBSLISTDIALOG_H

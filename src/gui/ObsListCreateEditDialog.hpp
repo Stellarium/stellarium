@@ -103,7 +103,6 @@ private slots:
 signals:
     //To notified that the exit button is clicked
     void exitButtonClicked();
-
 };
 
 #endif // OBSLISTCREATEEDITDIALOG_H

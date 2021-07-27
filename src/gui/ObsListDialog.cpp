@@ -300,7 +300,6 @@ void ObsListDialog::loadListsName()
 
     } else {
         try {
-
             map = StelJsonParser::parse ( jsonFile.readAll() ).toMap();
             jsonFile.close();
 
@@ -327,7 +326,6 @@ void ObsListDialog::loadListsName()
                     }
                 }
             }
-
         } catch ( std::runtime_error &e ) {
             qWarning() << "[ObservingList] File format is wrong! Error: " << e.what();
             return;
@@ -360,7 +358,6 @@ void ObsListDialog::loadObservingList ( QString listUuid )
     QFile jsonFile ( observingListJsonPath );
     if ( !jsonFile.open ( QIODevice::ReadOnly ) ) {
         qWarning() << "[ObservingList] cannot open" << QDir::toNativeSeparators ( JSON_FILE_NAME );
-
     } else {
         try {
             map = StelJsonParser::parse ( jsonFile.readAll() ).toMap();
@@ -492,7 +489,6 @@ void ObsListDialog::loadObservingList ( QString listUuid )
                         return;
                     }
                 }
-
             } else {
                 ui->obsListHighlightAllButton->setEnabled ( false );
                 ui->obsListClearHighlightButton->setEnabled ( false );
@@ -500,7 +496,6 @@ void ObsListDialog::loadObservingList ( QString listUuid )
             }
 
             objectMgr->unSelect();
-
         } catch ( std::runtime_error &e ) {
             qWarning() << "[ObservingList] File format is wrong! Error: " << e.what();
             return;
@@ -592,7 +587,6 @@ void ObsListDialog::selectAndGoToObject ( QModelIndex index )
 */
 void ObsListDialog::loadSelectedObservingList ( int selectedIndex )
 {
-
     if ( selectedIndex > 0 ) {
         ui->obsListEditListButton->setEnabled ( true );
         ui->obsListDeleteButton->setEnabled(true);
@@ -625,9 +619,7 @@ void ObsListDialog::obsListDeleteButtonPressed()
     QFile jsonFile ( observingListJsonPath );
     if ( !jsonFile.open ( QIODevice::ReadWrite ) ) {
         qWarning() << "[ObservingList] cannot open" << QDir::toNativeSeparators ( JSON_FILE_NAME );
-
     }else{
-        
         try {
             QVariantMap newMap;
             QVariantMap newObsListMap;
