@@ -84,6 +84,9 @@ private:
     
     //! Load the default list
     void loadDefaultList();
+    
+    //! Load list from JSON file
+    QVariantList loadListFromJson(QFile &jsonFile, QString listUuid);
 
 
 public slots:

@@ -355,37 +355,13 @@ void ObsListDialog::loadDefaultList()
 void ObsListDialog::loadObservingList ( QString listUuid )
 {
     QVariantMap map;
+    QVariantList listOfObjects;
     QFile jsonFile ( observingListJsonPath );
     if ( !jsonFile.open ( QIODevice::ReadOnly ) ) {
         qWarning() << "[ObservingList] cannot open" << QDir::toNativeSeparators ( JSON_FILE_NAME );
     } else {
         try {
-            map = StelJsonParser::parse ( jsonFile.readAll() ).toMap();
-            jsonFile.close();
-
-            observingListItemCollection.clear();
-            QVariantMap observingListMap = map.value ( QString ( KEY_OBSERVING_LISTS ) ).toMap().value ( listUuid ).toMap();
-            QVariantList listOfObjects;
-
-            QString listDescription = observingListMap.value ( QString ( KEY_DESCRIPTION ) ).value<QString>();
-            ui->obsListDescriptionTextEdit->setPlainText ( listDescription );
-
-            // Displaying the creation date
-            QString JDs = observingListMap.value ( QString ( KEY_JD ) ).value<QString>();
-            double JD = JDs.toDouble();
-            QString listCreationDate = JDs = StelUtils::julianDayToISO8601String ( JD + core->getUTCOffset ( JD ) /24. ).replace ( "T", " " );
-            ui->obsListCreationDateLineEdit->setText ( listCreationDate );
-
-            if ( observingListMap.value ( QString ( KEY_OBJECTS ) ).canConvert<QVariantList>() ) {
-                QVariant data = observingListMap.value ( QString ( KEY_OBJECTS ) );
-                listOfObjects = data.value<QVariantList>();
-            } else {
-                qCritical() << "[ObservingList] conversion error";
-                return;
-            }
-
-            // Clear model
-            obsListListModel->removeRows ( 0,obsListListModel->rowCount() );
+            listOfObjects = loadListFromJson(jsonFile, listUuid);
 
             if ( listOfObjects.size() > 0 ) {
                 ui->obsListHighlightAllButton->setEnabled ( true );
@@ -502,6 +478,41 @@ void ObsListDialog::loadObservingList ( QString listUuid )
         }
     }
 }
+
+/*
+ * Load the list from JSON file
+*/
+QVariantList ObsListDialog::loadListFromJson(QFile &jsonFile, QString listUuid)
+{
+    QVariantMap map;
+    map = StelJsonParser::parse ( jsonFile.readAll() ).toMap();
+            jsonFile.close();
+
+            observingListItemCollection.clear();
+            QVariantMap observingListMap = map.value ( QString ( KEY_OBSERVING_LISTS ) ).toMap().value ( listUuid ).toMap();
+            QVariantList listOfObjects;
+
+            QString listDescription = observingListMap.value ( QString ( KEY_DESCRIPTION ) ).value<QString>();
+            ui->obsListDescriptionTextEdit->setPlainText ( listDescription );
+
+            // Displaying the creation date
+            QString JDs = observingListMap.value ( QString ( KEY_JD ) ).value<QString>();
+            double JD = JDs.toDouble();
+            QString listCreationDate = JDs = StelUtils::julianDayToISO8601String ( JD + core->getUTCOffset ( JD ) /24. ).replace ( "T", " " );
+            ui->obsListCreationDateLineEdit->setText ( listCreationDate );
+
+            if ( observingListMap.value ( QString ( KEY_OBJECTS ) ).canConvert<QVariantList>() ) {
+                QVariant data = observingListMap.value ( QString ( KEY_OBJECTS ) );
+                listOfObjects = data.value<QVariantList>();
+            } else {
+                qCritical() << "[ObservingList] conversion error";
+            }
+
+            // Clear model
+            obsListListModel->removeRows ( 0,obsListListModel->rowCount() );
+            return listOfObjects;
+}
+
 
 /*
  * Select and go to object
