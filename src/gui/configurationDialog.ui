@@ -295,7 +295,7 @@
       <item row="1" column="0">
        <widget class="QStackedWidget" name="configurationStackedWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="page_Main">
          <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -1142,12 +1142,12 @@
               </widget>
              </item>
              <item row="5" column="2">
-              <widget class="QCheckBox" name="showBookmarksButtonCheckBox">
+              <widget class="QCheckBox" name="showObsListButtonCheckBox">
                <property name="toolTip">
                 <string>Enable a feature to store favorite views.</string>
                </property>
                <property name="text">
-                <string>Bookmarks</string>
+                <string>Observing lists</string>
                </property>
               </widget>
              </item>

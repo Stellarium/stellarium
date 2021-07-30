@@ -340,8 +340,10 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/AstroCalcExtraEphemerisDialog.cpp
           gui/AstroCalcCustomStepsDialog.hpp
           gui/AstroCalcCustomStepsDialog.cpp
-          gui/BookmarksDialog.hpp
-          gui/BookmarksDialog.cpp
+          gui/ObsListDialog.hpp
+          gui/ObsListDialog.cpp
+          gui/ObsListCreateEditDialog.hpp
+          gui/ObsListCreateEditDialog.cpp
           gui/StelDialog.hpp
           gui/StelDialog_p.hpp
           gui/StelDialog.cpp
@@ -362,7 +364,8 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/astroCalcDialog.ui
           gui/astroCalcExtraEphemerisDialog.ui
           gui/astroCalcCustomStepsDialog.ui
-          gui/bookmarksDialog.ui
+          gui/obsListDialog.ui
+          gui/obsListCreateEditDialog.ui
           gui/addRemoveLandscapesDialog.ui
           gui/dsoColorsDialog.ui
           gui/orbitColorsDialog.ui

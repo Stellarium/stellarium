@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>obsListDialogForm</class>
+ <widget class="QWidget" name="obsListDialogForm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>677</width>
+    <height>442</height>
+   </rect>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="BarFrame" name="TitleBar">
+     <property name="minimumSize">
+      <size>
+       <width>16</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <layout class="QHBoxLayout">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>4</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <spacer>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="stelWindowTitle">
+        <property name="palette">
+         <palette>
+          <active/>
+          <inactive/>
+          <disabled/>
+         </palette>
+        </property>
+        <property name="font">
+         <font/>
+        </property>
+        <property name="text">
+         <string>Observing lists</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="closeStelWindow">
+        <property name="minimumSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QWidget" name="widget" native="true">
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="5" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayoutCombo">
+        <item>
+         <widget class="QLabel" name="obsListComboLabel">
+          <property name="maximumSize">
+           <size>
+            <width>50</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>List(s):</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="obsListComboBox"/>
+        </item>
+       </layout>
+      </item>
+      <item row="11" column="0">
+       <widget class="QLabel" name="obsListTextEditLabel">
+        <property name="text">
+         <string>Observing list description:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="10" column="0">
+       <widget class="QTreeView" name="obsListTreeView">
+        <property name="toolTipDuration">
+         <number>-1</number>
+        </property>
+       </widget>
+      </item>
+      <item row="12" column="0">
+       <widget class="QPlainTextEdit" name="obsListDescriptionTextEdit">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="13" column="0">
+       <widget class="QFrame" name="frame">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayoutButtons">
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QPushButton" name="obsListHighlightAllButton">
+             <property name="toolTip">
+              <string>Highlight all the objects of the selected list</string>
+             </property>
+             <property name="toolTipDuration">
+              <number>3</number>
+             </property>
+             <property name="text">
+              <string>Highlight all</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="obsListClearHighlightButton">
+             <property name="toolTip">
+              <string>Clear all the highlight objects</string>
+             </property>
+             <property name="toolTipDuration">
+              <number>3</number>
+             </property>
+             <property name="text">
+              <string>Clear highlight(s)</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="obsListNewListButton">
+             <property name="toolTip">
+              <string>Create a new observing list</string>
+             </property>
+             <property name="toolTipDuration">
+              <number>3</number>
+             </property>
+             <property name="text">
+              <string>New list</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="obsListEditListButton">
+             <property name="toolTip">
+              <string>Edit the selected list</string>
+             </property>
+             <property name="toolTipDuration">
+              <number>3</number>
+             </property>
+             <property name="text">
+              <string>Edit list</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="obsListDeleteButton">
+             <property name="toolTip">
+              <string>Delete the selected list</string>
+             </property>
+             <property name="text">
+              <string>Delete list</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayoutExit">
+           <item>
+            <spacer name="horizontalSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="obsListExitButton">
+             <property name="toolTip">
+              <string>Exit</string>
+             </property>
+             <property name="text">
+              <string>Exit</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayoutDate">
+        <item>
+         <widget class="QLabel" name="creationDateLabel">
+          <property name="text">
+           <string>Creation date:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="obsListCreationDateLineEdit">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>BarFrame</class>
+   <extends>QFrame</extends>
+   <header>Dialog.hpp</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

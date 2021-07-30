@@ -95,8 +95,8 @@ void StelButton::initCtor(const QPixmap& apixOn,
 	checked = false;
 	flagChangeFocus = false;
 
-	Q_ASSERT(!pixOn.isNull());
-	Q_ASSERT(!pixOff.isNull());
+	//Q_ASSERT(!pixOn.isNull());
+	///Q_ASSERT(!pixOff.isNull());
 
 	if (isTristate_)
 	{
