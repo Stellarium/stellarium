@@ -77,10 +77,9 @@ void ObsListDialog::createDialogContent()
     connect ( ui->obsListDeleteButton, SIGNAL ( clicked() ), this, SLOT ( obsListDeleteButtonPressed() ) );
     connect ( ui->obsListTreeView, SIGNAL ( doubleClicked ( QModelIndex ) ), this, SLOT ( selectAndGoToObject ( QModelIndex ) ) );
 
-    //BookmarksListCombo
     connect ( ui->obsListComboBox, SIGNAL ( activated ( int ) ), this, SLOT ( loadSelectedObservingList ( int ) ) );
 
-    //Initializing the list of observing list
+    //Initialize the list of observing lists
     obsListListModel->setColumnCount ( ColumnCount );
     setObservingListHeaderNames();
 
@@ -100,9 +99,9 @@ void ObsListDialog::createDialogContent()
     //Enable the sort for columns
     ui->obsListTreeView->setSortingEnabled ( true );
 
-    //First item of the combobox is an empty headerStrings
+    //First item of the combobox is an empty headerStrings // Why?
     ui->obsListComboBox->addItem ( "" );
-    //By default buttons are disable
+    //By default buttons are disabled
     ui->obsListEditListButton->setEnabled ( false );
     ui->obsListHighlightAllButton->setEnabled ( false );
     ui->obsListClearHighlightButton->setEnabled ( false );
@@ -141,19 +140,19 @@ void ObsListDialog::styleChanged()
 void ObsListDialog::setObservingListHeaderNames()
 {
     const QStringList headerStrings = {
-        "UUID", // Hided column
+        "UUID", // Hidden column
         q_ ( "Object name" ),
-        q_ ( "Object Name I18N" ), // Hided column
+        q_ ( "Object name i18n" ), // Hidden column
         q_ ( "Type" ),
-        q_ ( "Right ascencion" ),
+        q_ ( "Right ascension" ),
         q_ ( "Declination" ),
         q_ ( "Magnitude" ),
         q_ ( "Constellation" ),
-        q_ ( "Date" ), // Hided column
-        q_ ( "Location" ) // Hided column
+        q_ ( "Date" ), // Hidden column
+        q_ ( "Location" ) // Hidden column
     };
 
-    obsListListModel->setHorizontalHeaderLabels ( headerStrings );;
+    obsListListModel->setHorizontalHeaderLabels ( headerStrings );
 }
 
 /*

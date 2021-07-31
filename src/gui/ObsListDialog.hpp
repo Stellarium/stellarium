@@ -69,7 +69,7 @@ private:
     //! @param uuid id of the record
     //! @param name name or the designation of the object
     //! @param type type of the object
-    //! @param ra right ascencion of the object
+    //! @param ra right ascension of the object
     //! @param dec declination of the object
     //! @param magnitude magnitude of the object
     //! @param constellation constellation in which the object is located
@@ -79,7 +79,7 @@ private:
     //! @param listUuid the uuid of the list
     void loadObservingList ( QString listUuid );
 
-    //! Load the lists names for populate the combo box and get the default list uuid
+    //! Load the lists names to populate the combo box and get the default list uuid
     void loadListsName();
     
     //! Load the default list

@@ -1,5 +1,5 @@
 /*
- * * Stellarium
+ * Stellarium
  * Copyright (C) 2020 Jocelyn GIROD
  *
  * This program is free software; you can redistribute it and/or modify
@@ -119,7 +119,7 @@ void ObsListCreateEditDialog::createDialogContent()
     } else {
         // case of edit mode
         isCreationMode = false;
-        ui->stelWindowTitle->setText ( "Observing list modification mode" );
+        ui->stelWindowTitle->setText ( "Observing list editor" );
         loadObservingList();
     }
 }
@@ -148,12 +148,13 @@ void ObsListCreateEditDialog::styleChanged()
 */
 void ObsListCreateEditDialog::setObservingListHeaderNames()
 {
+    // XXX there is a lot of copy-pasta from ObsListDialog - this will lead to maintenance headaches!
     const QStringList headerStrings = {
-        "UUID", // Hided column
+        "UUID", // Hidden column
         q_ ( "Object name" ),
-        q_ ( "Object Name I18N" ), // Hided column
+        q_ ( "Object name I18N" ), // Hided column
         q_ ( "Type" ),
-        q_ ( "Right ascencion" ),
+        q_ ( "Right ascension" ),
         q_ ( "Declination" ),
         q_ ( "Magnitude" ),
         q_ ( "Constellation" ),
@@ -163,7 +164,6 @@ void ObsListCreateEditDialog::setObservingListHeaderNames()
 
     obsListListModel->setHorizontalHeaderLabels ( headerStrings );
 }
-
 
 /*
  * Add row in the obsListListModel
@@ -208,7 +208,6 @@ void ObsListCreateEditDialog::addModelRow ( int number, QString uuid, QString na
         ui->obsListCreationEditionTreeView->resizeColumnToContents ( i );
     }
 }
-
 
 /*
  * Slot for button obsListAddObjectButton
@@ -370,7 +369,7 @@ void ObsListCreateEditDialog::saveObservedObject()
         JDString = QString::number ( JD, 'f', 6 );
 
 
-        // No JD modifications in modification mode
+        // No JD modifications in editor mode
         if ( !isCreationMode ) {
             QString  uuidQs = QString::fromStdString ( this->listUuid_ );
             QVariantMap currentList = allListsMap.value ( uuidQs ).toMap();
@@ -431,8 +430,8 @@ void ObsListCreateEditDialog::saveObservedObject()
             }
         }
 
-        mapFromJsonFile.insert ( KEY_VERSION, "1.0" );
-        mapFromJsonFile.insert ( KEY_SHORT_NAME, "Observing lists for Stellarium" );
+        mapFromJsonFile.insert ( KEY_VERSION, "1.0" ); // the version might need to be moved to the top of this file, as some constant
+        mapFromJsonFile.insert ( KEY_SHORT_NAME, "Observing list for Stellarium" );
 
         allListsMap.insert ( oblListUuid, observingListDataList );
         mapFromJsonFile.insert ( QString ( KEY_OBSERVING_LISTS ), allListsMap );

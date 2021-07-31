@@ -61,7 +61,7 @@ private:
     QString observingListJsonPath;
     QHash<QString, observingListItem> observingListItemCollection;
 
-    //! Sorting of the list ex: right ascencion
+    //! Sorting of the list ex: right ascension
     QString sorting;
 
     //! Set header names for observing list table
@@ -72,7 +72,7 @@ private:
     //! @param uuid id of the record
     //! @param name name or the designation of the object
     //! @param type type of the object
-    //! @param ra right ascencion of the object
+    //! @param ra right ascension of the object
     //! @param dec declination of the object
     //! @param magnitude magnitude of the object
     //! @param constellation constellation in which the object is located

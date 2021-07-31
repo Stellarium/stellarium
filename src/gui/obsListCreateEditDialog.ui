@@ -82,7 +82,7 @@
          <font/>
         </property>
         <property name="text">
-         <string>Observing Lists creation/edition</string>
+         <string>Observing lists editor</string>
         </property>
        </widget>
       </item>
@@ -223,7 +223,7 @@
            <item>
             <widget class="QPushButton" name="obsListSaveButton">
              <property name="text">
-              <string>Save and Close </string>
+              <string>Save and close </string>
              </property>
             </widget>
            </item>
@@ -332,6 +332,18 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>nameOfListLineEdit</tabstop>
+  <tabstop>descriptionLineEdit</tabstop>
+  <tabstop>obsListCreationEditionTreeView</tabstop>
+  <tabstop>obsListDefaultListCheckBox</tabstop>
+  <tabstop>obsListAddObjectButton</tabstop>
+  <tabstop>obsListRemoveObjectButton</tabstop>
+  <tabstop>obsListExportListButton</tabstop>
+  <tabstop>obsListImportListButton</tabstop>
+  <tabstop>obsListSaveButton</tabstop>
+  <tabstop>obsListExitButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

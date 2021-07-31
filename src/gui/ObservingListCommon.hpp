@@ -36,17 +36,17 @@ struct observingListItem {
 Q_DECLARE_METATYPE ( observingListItem )
 
 enum ObsListColumns {
-    ColumnUUID,	//! UUID of object
-    ColumnName,	//! Name or designation of object
-    ColumnNameI18n,	//! Localized name of object
-    ColumnType, //! Type of the object
-    ColumnRa,	//! Right ascencion of the object
-    ColumnDec,	//! Declination of the object
-    ColumnMagnitude,	//! Magnitude of the object
-    ColumnConstellation, //! Constellation in which the object is located
-    ColumnJD, //! Date in julian day
-    ColumnLocation, //! Location where the object is observed
-    ColumnCount	//! Total number of columns
+    ColumnUUID,			//! UUID of object
+    ColumnName,			//! Name or designation of object
+    ColumnNameI18n,		//! Localized name of object
+    ColumnType, 		//! Type of the object
+    ColumnRa,			//! Right ascension of the object
+    ColumnDec,			//! Declination of the object
+    ColumnMagnitude,		//! Magnitude of the object
+    ColumnConstellation,	//! Constellation in which the object is located
+    ColumnJD, 			//! Date in julian day
+    ColumnLocation, 		//! Location where the object is observed
+    ColumnCount			//! Total number of columns
 };
 
 static constexpr char const * JSON_FILE_NAME = "observingList.json";
