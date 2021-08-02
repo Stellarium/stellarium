@@ -99,6 +99,7 @@ private slots:
     void obsListSaveButtonPressed();
     void obsListExitButtonPressed();
     void headerClicked ( int index );
+    void nameOfListTextChange();
 
 signals:
     //To notified that the exit button is clicked

@@ -88,6 +88,7 @@ void ObsListCreateEditDialog::createDialogContent()
     connect ( ui->obsListRemoveObjectButton, SIGNAL ( clicked() ), this, SLOT ( obsListRemoveObjectButtonPressed() ) );
     connect ( ui->obsListImportListButton, SIGNAL ( clicked() ), this, SLOT ( obsListImportListButtonPresssed() ) );
     connect ( ui->obsListExportListButton, SIGNAL ( clicked() ), this, SLOT ( obsListExportListButtonPressed() ) );
+    connect(ui->nameOfListLineEdit, &QLineEdit::textChanged, this, &ObsListCreateEditDialog::nameOfListTextChange);
 
     //Initializing the list of observing list
     obsListListModel->setColumnCount ( ColumnCount );
@@ -111,6 +112,14 @@ void ObsListCreateEditDialog::createDialogContent()
 
     QHeaderView * header = ui->obsListCreationEditionTreeView->header();
     connect ( header, SIGNAL ( sectionClicked ( int ) ), this, SLOT ( headerClicked ( int ) ) );
+
+    // In case of creation le nameOfListLineEdit is empty and button save/close must be disabled
+    // In case on edition the nameOfListLineEdit is not empty and the button save//close must be enable
+    if(ui->nameOfListLineEdit->text().isEmpty()){
+        ui->obsListSaveButton->setEnabled(false);
+    } else {
+        ui->obsListSaveButton->setEnabled(true);
+    }
 
     if ( listUuid_.size() == 0 ) {
         // case of creation mode
@@ -695,15 +704,30 @@ void ObsListCreateEditDialog::loadObservingList()
                     return;
                 }
             }
-            
+
             objectMgr->unSelect();
-            
+
         } catch ( std::runtime_error &e ) {
             qWarning() << "[ObservingList Creation/Edition] File format is wrong! Error: " << e.what();
             return;
         }
     }
 }
+
+
+/*
+ * Called when the text of the nameOfListLineEdit change
+*/
+void ObsListCreateEditDialog::nameOfListTextChange()
+{
+    if(ui->nameOfListLineEdit->text().isEmpty()){
+        ui->obsListSaveButton->setEnabled(false);
+    } else {
+        ui->obsListSaveButton->setEnabled(true);
+    }
+    
+}
+
 
 /*
  * Destructor of singleton
