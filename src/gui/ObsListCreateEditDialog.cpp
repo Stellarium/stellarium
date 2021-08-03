@@ -82,12 +82,12 @@ void ObsListCreateEditDialog::createDialogContent()
     connect ( &StelApp::getInstance(), SIGNAL ( languageChanged() ), this, SLOT ( retranslate() ) );
     connect ( ui->closeStelWindow, SIGNAL ( clicked() ), this, SLOT ( close() ) );
 
-    connect ( ui->obsListAddObjectButton, SIGNAL ( clicked() ), this, SLOT ( obsListAddObjectButtonPressed() ) );
-    connect ( ui->obsListExitButton, SIGNAL ( clicked() ), this, SLOT ( obsListExitButtonPressed() ) );
-    connect ( ui->obsListSaveButton, SIGNAL ( clicked() ), this, SLOT ( obsListSaveButtonPressed() ) );
-    connect ( ui->obsListRemoveObjectButton, SIGNAL ( clicked() ), this, SLOT ( obsListRemoveObjectButtonPressed() ) );
-    connect ( ui->obsListImportListButton, SIGNAL ( clicked() ), this, SLOT ( obsListImportListButtonPresssed() ) );
-    connect ( ui->obsListExportListButton, SIGNAL ( clicked() ), this, SLOT ( obsListExportListButtonPressed() ) );
+    connect( ui->obsListAddObjectButton, &QPushButton::clicked, this, &ObsListCreateEditDialog::obsListAddObjectButtonPressed);
+    connect(ui->obsListExitButton, &QPushButton::clicked, this, &ObsListCreateEditDialog::obsListExitButtonPressed);
+    connect(ui->obsListSaveButton, &QPushButton::clicked, this, &ObsListCreateEditDialog::obsListSaveButtonPressed);
+    connect(ui->obsListRemoveObjectButton, &QPushButton::clicked, this, &ObsListCreateEditDialog::obsListRemoveObjectButtonPressed);
+    connect(ui->obsListImportListButton, &QPushButton::clicked, this, &ObsListCreateEditDialog::obsListImportListButtonPresssed);
+    connect(ui->obsListExportListButton, &QPushButton::clicked, this, &ObsListCreateEditDialog::obsListExportListButtonPressed);
     connect(ui->nameOfListLineEdit, &QLineEdit::textChanged, this, &ObsListCreateEditDialog::nameOfListTextChange);
 
     //Initializing the list of observing list
@@ -128,7 +128,7 @@ void ObsListCreateEditDialog::createDialogContent()
     } else {
         // case of edit mode
         isCreationMode = false;
-        ui->stelWindowTitle->setText ( "Observing list modification mode" );
+        ui->stelWindowTitle->setText ( "Observing list editor mode" );
         loadObservingList();
     }
 }
@@ -158,11 +158,11 @@ void ObsListCreateEditDialog::styleChanged()
 void ObsListCreateEditDialog::setObservingListHeaderNames()
 {
     const QStringList headerStrings = {
-        "UUID", // Hided column
+        "UUID", // Hidden column
         q_ ( "Object name" ),
-        q_ ( "Object Name I18N" ), // Hided column
+        q_ ( "Object name I18N" ), // Hidden column
         q_ ( "Type" ),
-        q_ ( "Right ascencion" ),
+        q_ ( "Right ascension" ),
         q_ ( "Declination" ),
         q_ ( "Magnitude" ),
         q_ ( "Constellation" ),
@@ -379,7 +379,7 @@ void ObsListCreateEditDialog::saveObservedObject()
         JDString = QString::number ( JD, 'f', 6 );
 
 
-        // No JD modifications in modification mode
+        // No JD modifications in editor mode
         if ( !isCreationMode ) {
             QString  uuidQs = QString::fromStdString ( this->listUuid_ );
             QVariantMap currentList = allListsMap.value ( uuidQs ).toMap();
@@ -440,8 +440,8 @@ void ObsListCreateEditDialog::saveObservedObject()
             }
         }
 
-        mapFromJsonFile.insert ( KEY_VERSION, "1.0" );
-        mapFromJsonFile.insert ( KEY_SHORT_NAME, "Observing lists for Stellarium" );
+        mapFromJsonFile.insert ( KEY_VERSION, FILE_VERSION );
+        mapFromJsonFile.insert ( KEY_SHORT_NAME, "Observing list for Stellarium" );
 
         allListsMap.insert ( oblListUuid, observingListDataList );
         mapFromJsonFile.insert ( QString ( KEY_OBSERVING_LISTS ), allListsMap );

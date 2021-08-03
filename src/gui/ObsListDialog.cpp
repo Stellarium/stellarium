@@ -80,7 +80,7 @@ void ObsListDialog::createDialogContent()
     //BookmarksListCombo
     connect ( ui->obsListComboBox, SIGNAL ( activated ( int ) ), this, SLOT ( loadSelectedObservingList ( int ) ) );
 
-    //Initializing the list of observing list
+    //Initialize the list of observing lists
     obsListListModel->setColumnCount ( ColumnCount );
     setObservingListHeaderNames();
 
@@ -100,13 +100,11 @@ void ObsListDialog::createDialogContent()
     //Enable the sort for columns
     ui->obsListTreeView->setSortingEnabled ( true );
 
-    //First item of the combobox is an empty headerStrings
-    ui->obsListComboBox->addItem ( "" );
     //By default buttons are disable
     ui->obsListEditListButton->setEnabled ( false );
     ui->obsListHighlightAllButton->setEnabled ( false );
     ui->obsListClearHighlightButton->setEnabled ( false );
-    ui->obsListDeleteButton->setEnabled(false);
+    ui->obsListDeleteButton->setEnabled ( false );
 
     QFile jsonFile ( observingListJsonPath );
     if ( jsonFile.exists() ) {
@@ -141,19 +139,19 @@ void ObsListDialog::styleChanged()
 void ObsListDialog::setObservingListHeaderNames()
 {
     const QStringList headerStrings = {
-        "UUID", // Hided column
+        "UUID", // Hidden column
         q_ ( "Object name" ),
-        q_ ( "Object Name I18N" ), // Hided column
+        q_ ( "Object name I18N" ), // Hidden column
         q_ ( "Type" ),
-        q_ ( "Right ascencion" ),
+        q_ ( "Right ascension" ),
         q_ ( "Declination" ),
         q_ ( "Magnitude" ),
         q_ ( "Constellation" ),
-        q_ ( "Date" ), // Hided column
-        q_ ( "Location" ) // Hided column
+        q_ ( "Date" ), // Hidden column
+        q_ ( "Location" ) // Hidden column
     };
 
-    obsListListModel->setHorizontalHeaderLabels ( headerStrings );;
+    obsListListModel->setHorizontalHeaderLabels ( headerStrings );
 }
 
 /*
@@ -305,7 +303,6 @@ void ObsListDialog::loadListsName()
 
             // init combo box
             ui->obsListComboBox->clear();
-            ui->obsListComboBox->addItem ( "" );
 
             // Get the default list uuid
             QString defaultListUuid = map.value ( KEY_DEFAULT_LIST_UUID ).toString();
@@ -361,12 +358,12 @@ void ObsListDialog::loadObservingList ( QString listUuid )
         qWarning() << "[ObservingList] cannot open" << QDir::toNativeSeparators ( JSON_FILE_NAME );
     } else {
         try {
-            listOfObjects = loadListFromJson(jsonFile, listUuid);
+            listOfObjects = loadListFromJson ( jsonFile, listUuid );
 
             if ( listOfObjects.size() > 0 ) {
                 ui->obsListHighlightAllButton->setEnabled ( true );
                 ui->obsListClearHighlightButton->setEnabled ( true );
-                ui->obsListDeleteButton->setEnabled(true);
+                ui->obsListDeleteButton->setEnabled ( true );
 
                 for ( QVariant object: listOfObjects ) {
                     QVariantMap objectMap;
@@ -468,7 +465,7 @@ void ObsListDialog::loadObservingList ( QString listUuid )
             } else {
                 ui->obsListHighlightAllButton->setEnabled ( false );
                 ui->obsListClearHighlightButton->setEnabled ( false );
-                ui->obsListDeleteButton->setEnabled(false);
+                ui->obsListDeleteButton->setEnabled ( false );
             }
 
             objectMgr->unSelect();
@@ -482,35 +479,35 @@ void ObsListDialog::loadObservingList ( QString listUuid )
 /*
  * Load the list from JSON file
 */
-QVariantList ObsListDialog::loadListFromJson(QFile &jsonFile, QString listUuid)
+QVariantList ObsListDialog::loadListFromJson ( QFile &jsonFile, QString listUuid )
 {
     QVariantMap map;
     map = StelJsonParser::parse ( jsonFile.readAll() ).toMap();
-            jsonFile.close();
+    jsonFile.close();
 
-            observingListItemCollection.clear();
-            QVariantMap observingListMap = map.value ( QString ( KEY_OBSERVING_LISTS ) ).toMap().value ( listUuid ).toMap();
-            QVariantList listOfObjects;
+    observingListItemCollection.clear();
+    QVariantMap observingListMap = map.value ( QString ( KEY_OBSERVING_LISTS ) ).toMap().value ( listUuid ).toMap();
+    QVariantList listOfObjects;
 
-            QString listDescription = observingListMap.value ( QString ( KEY_DESCRIPTION ) ).value<QString>();
-            ui->obsListDescriptionTextEdit->setPlainText ( listDescription );
+    QString listDescription = observingListMap.value ( QString ( KEY_DESCRIPTION ) ).value<QString>();
+    ui->obsListDescriptionTextEdit->setPlainText ( listDescription );
 
-            // Displaying the creation date
-            QString JDs = observingListMap.value ( QString ( KEY_JD ) ).value<QString>();
-            double JD = JDs.toDouble();
-            QString listCreationDate = JDs = StelUtils::julianDayToISO8601String ( JD + core->getUTCOffset ( JD ) /24. ).replace ( "T", " " );
-            ui->obsListCreationDateLineEdit->setText ( listCreationDate );
+    // Displaying the creation date
+    QString JDs = observingListMap.value ( QString ( KEY_JD ) ).value<QString>();
+    double JD = JDs.toDouble();
+    QString listCreationDate = JDs = StelUtils::julianDayToISO8601String ( JD + core->getUTCOffset ( JD ) /24. ).replace ( "T", " " );
+    ui->obsListCreationDateLineEdit->setText ( listCreationDate );
 
-            if ( observingListMap.value ( QString ( KEY_OBJECTS ) ).canConvert<QVariantList>() ) {
-                QVariant data = observingListMap.value ( QString ( KEY_OBJECTS ) );
-                listOfObjects = data.value<QVariantList>();
-            } else {
-                qCritical() << "[ObservingList] conversion error";
-            }
+    if ( observingListMap.value ( QString ( KEY_OBJECTS ) ).canConvert<QVariantList>() ) {
+        QVariant data = observingListMap.value ( QString ( KEY_OBJECTS ) );
+        listOfObjects = data.value<QVariantList>();
+    } else {
+        qCritical() << "[ObservingList] conversion error";
+    }
 
-            // Clear model
-            obsListListModel->removeRows ( 0,obsListListModel->rowCount() );
-            return listOfObjects;
+    // Clear model
+    obsListListModel->removeRows ( 0,obsListListModel->rowCount() );
+    return listOfObjects;
 }
 
 
@@ -598,69 +595,54 @@ void ObsListDialog::selectAndGoToObject ( QModelIndex index )
 */
 void ObsListDialog::loadSelectedObservingList ( int selectedIndex )
 {
-    if ( selectedIndex > 0 ) {
-        ui->obsListEditListButton->setEnabled ( true );
-        ui->obsListDeleteButton->setEnabled(true);
-        QString listUuid = ui->obsListComboBox->itemData ( selectedIndex ).toString();
-        selectedObservingListUuid = listUuid.toStdString();
-        loadObservingList ( listUuid );
-    } else {
-        selectedObservingListUuid = "";
-        // Button obsListEditListButton, obsListHighlightAllButton and
-        // obsListClearHighlightButtonmust be disable if no list is selected
-        ui->obsListEditListButton->setEnabled ( false );
-        ui->obsListHighlightAllButton->setEnabled ( false );
-        ui->obsListClearHighlightButton->setEnabled ( false );
-        ui->obsListDeleteButton->setEnabled(false);
-        // Clear list description
-        ui->obsListDescriptionTextEdit->setPlainText ( "" );
-        // Clear model
-        obsListListModel->removeRows ( 0,obsListListModel->rowCount() );
-        qWarning() << "[ObservingList] No list selected !";
-    }
+    ui->obsListEditListButton->setEnabled ( true );
+    ui->obsListDeleteButton->setEnabled ( true );
+    QString listUuid = ui->obsListComboBox->itemData ( selectedIndex ).toString();
+    selectedObservingListUuid = listUuid.toStdString();
+    loadObservingList ( listUuid );
 }
 
 /*
- * Delete the selected list 
+ * Delete the selected list
 */
 void ObsListDialog::obsListDeleteButtonPressed()
 {
-    qDebug() << QString::fromStdString(selectedObservingListUuid);
+    qDebug() << QString::fromStdString ( selectedObservingListUuid );
     QVariantMap map;
     QFile jsonFile ( observingListJsonPath );
     if ( !jsonFile.open ( QIODevice::ReadWrite ) ) {
         qWarning() << "[ObservingList] cannot open" << QDir::toNativeSeparators ( JSON_FILE_NAME );
-    }else{
+    } else {
         try {
             QVariantMap newMap;
             QVariantMap newObsListMap;
             map = StelJsonParser::parse ( jsonFile.readAll() ).toMap();
-            
-            newMap.insert(QString(KEY_DEFAULT_LIST_UUID), map.value(QString(KEY_DEFAULT_LIST_UUID)));
-            QVariantMap obsListMap = map.value(QString(KEY_OBSERVING_LISTS)).toMap();
-            
+
+            newMap.insert ( QString ( KEY_DEFAULT_LIST_UUID ), map.value ( QString ( KEY_DEFAULT_LIST_UUID ) ) );
+            QVariantMap obsListMap = map.value ( QString ( KEY_OBSERVING_LISTS ) ).toMap();
+
             QMap<QString, QVariant>::iterator i;
-            for(i = obsListMap.begin(); i != obsListMap.end(); ++i){
-                if(i.key().compare(QString::fromStdString(selectedObservingListUuid))!=0){
-                    newObsListMap.insert(i.key(),i.value());
+            for ( i = obsListMap.begin(); i != obsListMap.end(); ++i ) {
+                if ( i.key().compare ( QString::fromStdString ( selectedObservingListUuid ) ) !=0 ) {
+                    newObsListMap.insert ( i.key(),i.value() );
                 }
             }
-            
-            newMap.insert(QString(KEY_OBSERVING_LISTS),newObsListMap);
-            newMap.insert(QString(KEY_SHORT_NAME), map.value(QString(KEY_SHORT_NAME)));
-            newMap.insert(QString(KEY_VERSION), map.value(QString(KEY_VERSION)));
+
+            newMap.insert ( QString ( KEY_OBSERVING_LISTS ),newObsListMap );
+            newMap.insert ( QString ( KEY_SHORT_NAME ), map.value ( QString ( KEY_SHORT_NAME ) ) );
+            newMap.insert ( QString ( KEY_VERSION ), map.value ( QString ( KEY_VERSION ) ) );
             objectMgr->unSelect();
             observingListItemCollection.clear();
             // Clear model
             obsListListModel->removeRows ( 0,obsListListModel->rowCount() );
-            ui->obsListCreationDateLineEdit->setText("");
+            ui->obsListCreationDateLineEdit->setText ( "" );
             int currentIndex = ui->obsListComboBox->currentIndex();
-            ui->obsListComboBox->removeItem(currentIndex);
-            
-            int index = ui->obsListComboBox->findData("");
-            ui->obsListComboBox->setCurrentIndex(index);
-            ui->obsListDescriptionTextEdit->setPlainText("");
-        
+            ui->obsListComboBox->removeItem ( currentIndex );
+
+            int index = ui->obsListComboBox->findData ( "" );
+            ui->obsListComboBox->setCurrentIndex ( index );
+            ui->obsListDescriptionTextEdit->setPlainText ( "" );
+
             jsonFile.resize ( 0 );
             StelJsonParser::write ( newMap, &jsonFile );
             jsonFile.flush();
