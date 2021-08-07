@@ -132,14 +132,13 @@ void OnlineQueries::setEnabled(bool b)
 	{
 		enabled = b;
 		emit flagEnabledChanged(b);
+		dialog->setVisible(b);
 	}
-	configureGui(b);
 }
 
 bool OnlineQueries::configureGui(bool show)
 {
-	if (show)
-		dialog->setVisible(show);
+	setEnabled(show);
 	return true;
 }
 
