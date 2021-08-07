@@ -388,13 +388,19 @@ static double c_jdeLastNut=-1e-100;
 //! @return deltaPsi, deltaEps [radians]
 //! @param JDE Julian Day, TT
 //! @note The model promises mas accuracy in the present era but gives no comment on long-time effects. Given that nutation was discovered in the early 18th century,
-//! it seems wise to set the returned values to zero before 1500 and after 2500. To avoid a jump, a linear fade-in/fade-out is applied within 100 days before 1500 and after 2500.
+//! we used to set the returned values to zero before 1500 and after 2500. However, for better comparison with reference values,
+//! we now provide non-zero results for the time range -4000...+8000.
+//! To avoid a jump, a linear fade-in/fade-out is applied within 100 days before and after the limit dates.
 void getNutationAngles(const double JDE, double *deltaPsi, double *deltaEpsilon)
 {
 // 1.1.1500
-#define NUT_BEGIN 2268932.5
+//#define NUT_BEGIN 2268932.5
+// 1.1.-4000
+#define NUT_BEGIN 260057.5
 // 1.1.2500
-#define NUT_END	2634166.5
+//#define NUT_END 2634166.5
+// 1.1.8000
+#define NUT_END	4642999.5
 #define NUT_TRANSITION 100.0
 	if ((JDE<=NUT_BEGIN-NUT_TRANSITION ) || (JDE>=NUT_END + NUT_TRANSITION))
 	{
