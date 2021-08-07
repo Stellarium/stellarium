@@ -5,17 +5,18 @@
 # 
 # Translators:
 # cardinot <mcardinot@gmail.com>, 2017
-# Víctor Vega <vegadark@protonmail.com>, 2021
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2021
+# María José Fernández Pintelos, 2021
+# Víctor Vega <vegadark@protonmail.com>, 2021
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-07-05 19:23+0700\n"
+"POT-Creation-Date: 2021-07-19 18:58+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
-"Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2021\n"
+"Last-Translator: Víctor Vega <vegadark@protonmail.com>, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/stellarium/teams/80998/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14633,8 +14634,8 @@ msgstr ""
 "basadas en datos NORAD TLE"
 
 #: plugins/Satellites/src/Satellites.cpp:156
-msgid "Satellite hints"
-msgstr "Posiciones de satélites"
+msgid "Artificial satellites"
+msgstr "Satélites artificiales"
 
 #: plugins/Satellites/src/Satellites.cpp:157
 msgid "Satellite labels"
@@ -15834,7 +15835,7 @@ msgstr "Magnitud estándar:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1131
 msgid "Perigee altitude in kilometers"
-msgstr ""
+msgstr "Altitud del perigeo en kilómetros"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1133
 msgid "Perigee:"
@@ -15842,7 +15843,7 @@ msgstr "Perigeo:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1135
 msgid "Apogee altitude in kilometers"
-msgstr ""
+msgstr "Altitud del apogeo en kilómetros"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1137
 msgid "Apogee:"
@@ -15850,7 +15851,7 @@ msgstr "Apogeo:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1139
 msgid "Orbital period in minutes"
-msgstr ""
+msgstr "Período orbital en minutos"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1141
 msgid "Period:"

@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-07-05 19:23+0700\n"
+"POT-Creation-Date: 2021-07-19 18:58+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>, 2021\n"
 "Language-Team: Indonesian (https://www.transifex.com/stellarium/teams/80998/id/)\n"
@@ -2272,7 +2272,7 @@ msgstr ""
 
 #: src/core/modules/Planet.cpp:1131 src/core/modules/Planet.cpp:1138
 msgid "Center point"
-msgstr ""
+msgstr "Titik pusat"
 
 #: src/core/modules/Planet.cpp:1150
 msgid "Eclipse obscuration"
@@ -2394,11 +2394,11 @@ msgstr ""
 
 #: src/core/modules/SolarSystem.cpp:305
 msgid "Enlarge Planets"
-msgstr ""
+msgstr "Perbesar Planet"
 
 #: src/core/modules/SolarSystem.cpp:306
 msgid "Enlarge Sun"
-msgstr ""
+msgstr "Perbesar Matahari"
 
 #: src/core/modules/SolarSystem.cpp:307
 msgid "Native planet names (from starlore)"
@@ -2644,7 +2644,7 @@ msgstr ""
 
 #: src/core/StelApp.cpp:684
 msgid "Loading plugin"
-msgstr ""
+msgstr "Memuat plugin"
 
 #: src/core/StelCore.cpp:255 src/core/StelObjectMgr.cpp:52
 #: src/gui/StelGui.cpp:228 src/gui/AstroCalcDialog.cpp:1516
@@ -3007,7 +3007,7 @@ msgstr ""
 
 #: src/core/StelCore.cpp:2308
 msgid "This algorithm is used in the PC planetarium program Guide 7."
-msgstr ""
+msgstr "Algoritme ini dipakai dalam program planetarium PC Guide 7."
 
 #: src/core/StelCore.cpp:2311
 msgid ""
@@ -3422,19 +3422,19 @@ msgstr "Siang hari"
 
 #: src/core/StelObject.cpp:665
 msgid "Polar night"
-msgstr ""
+msgstr "Malam polar"
 
 #: src/core/StelObject.cpp:667
 msgid "This object never rises"
-msgstr ""
+msgstr "Objek ini tidak pernah terbit"
 
 #: src/core/StelObject.cpp:672
 msgid "Polar day"
-msgstr ""
+msgstr "Siang polar"
 
 #: src/core/StelObject.cpp:674
 msgid "Circumpolar (never sets)"
-msgstr ""
+msgstr "Circumpolar (tidak pernah terbenam)"
 
 #: src/core/StelObject.cpp:677
 msgid "Polar dawn"
@@ -3450,43 +3450,43 @@ msgstr ""
 
 #: src/core/StelObject.cpp:702
 msgid "IAU Constellation"
-msgstr ""
+msgstr "Konstelasi IAU"
 
 #: src/core/StelObjectMgr.cpp:54
 msgid "Next transit of the selected object"
-msgstr ""
+msgstr "Transit selanjutnya dari objek yang dipilih"
 
 #: src/core/StelObjectMgr.cpp:55
 msgid "Next rising of the selected object"
-msgstr ""
+msgstr "Terbit selanjutnya dari objek yang dipilih"
 
 #: src/core/StelObjectMgr.cpp:56
 msgid "Next setting of the selected object"
-msgstr ""
+msgstr "Terbenam selanjutnya dari objek yang dipilih"
 
 #: src/core/StelObjectMgr.cpp:57
 msgid "Today's transit of the selected object"
-msgstr ""
+msgstr "Transit hari ini dari objek yang dipilih"
 
 #: src/core/StelObjectMgr.cpp:58
 msgid "Today's rising of the selected object"
-msgstr ""
+msgstr "Terbit hari ini dari objek yang dipilih"
 
 #: src/core/StelObjectMgr.cpp:59
 msgid "Today's setting of the selected object"
-msgstr ""
+msgstr "Terbenam hari ini dari objek yang dipilih"
 
 #: src/core/StelObjectMgr.cpp:60
 msgid "Previous transit of the selected object"
-msgstr ""
+msgstr "Transit sebelumnya dari objek yang dipilih"
 
 #: src/core/StelObjectMgr.cpp:61
 msgid "Previous rising of the selected object"
-msgstr ""
+msgstr "Terbit sebelumnya dari objek yang dipilih"
 
 #: src/core/StelObjectMgr.cpp:62
 msgid "Previous setting of the selected object"
-msgstr ""
+msgstr "Pengaturan sebelumnya dari objek yang dipilih"
 
 #: src/core/StelSkyLayerMgr.cpp:85
 msgid "Deep-sky objects background images"
@@ -3499,7 +3499,7 @@ msgstr ""
 #: src/core/StelSkyCultureMgr.cpp:169
 msgctxt "sky culture classification"
 msgid "ethnographic"
-msgstr ""
+msgstr "etnografis"
 
 #: src/core/StelSkyCultureMgr.cpp:170
 msgid ""
@@ -3510,7 +3510,7 @@ msgstr ""
 #: src/core/StelSkyCultureMgr.cpp:174
 msgctxt "sky culture classification"
 msgid "historical"
-msgstr ""
+msgstr "historis"
 
 #: src/core/StelSkyCultureMgr.cpp:175
 msgid ""
@@ -3521,7 +3521,7 @@ msgstr ""
 #: src/core/StelSkyCultureMgr.cpp:179
 msgctxt "sky culture classification"
 msgid "single"
-msgstr ""
+msgstr "tunggal"
 
 #: src/core/StelSkyCultureMgr.cpp:180
 msgid ""
@@ -3575,12 +3575,12 @@ msgstr "Klasifikasi"
 
 #: src/core/StelSkyCultureMgr.cpp:268
 msgid "No description"
-msgstr ""
+msgstr "Tidak ada deskripsi"
 
 #: src/core/StelSkyCultureMgr.cpp:301
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:202
 msgid "References"
-msgstr ""
+msgstr "Rujukan"
 
 #: src/core/StelMovementMgr.cpp:227 src/gui/StelGui.cpp:230
 #: src/StelMainView.cpp:817 src/StelMainView.cpp:818
@@ -3597,7 +3597,7 @@ msgstr "Pusatkan pada objek yang dipilih"
 
 #: src/core/StelMovementMgr.cpp:229
 msgid "Deselect the selected object"
-msgstr ""
+msgstr "Hapus pilihan dari objek yang dipilih"
 
 #: src/core/StelMovementMgr.cpp:230
 msgid "Zoom in on selected object"
@@ -3629,7 +3629,7 @@ msgstr "Lihat ke arah Selatan"
 
 #: src/core/StelMovementMgr.cpp:239
 msgid "Look towards Zenith"
-msgstr ""
+msgstr "Lihat ke arah Zenith"
 
 #: src/core/StelMovementMgr.cpp:241
 msgid "Look towards North Celestial pole"
@@ -14229,8 +14229,8 @@ msgstr ""
 "TLE"
 
 #: plugins/Satellites/src/Satellites.cpp:156
-msgid "Satellite hints"
-msgstr "Saran satelit"
+msgid "Artificial satellites"
+msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:157
 msgid "Satellite labels"

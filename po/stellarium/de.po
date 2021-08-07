@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-07-05 19:23+0700\n"
+"POT-Creation-Date: 2021-07-19 18:58+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Georg Zotti <Georg.Zotti@univie.ac.at>, 2021\n"
 "Language-Team: German (https://www.transifex.com/stellarium/teams/80998/de/)\n"
@@ -90,7 +90,7 @@ msgstr "Asterismen-Bezeichnungen"
 
 #: src/core/modules/AsterismMgr.cpp:101
 msgid "Toggle single asterism selection mode"
-msgstr ""
+msgstr "Erlaube Einzelauswahl von Asterismen"
 
 #: src/core/modules/AsterismMgr.cpp:102
 msgid "Ray helpers"
@@ -4470,7 +4470,7 @@ msgstr "Zeit ziehen"
 
 #: src/gui/HelpDialog.cpp:268
 msgid "left mouse drag"
-msgstr ""
+msgstr "Maus ziehen bei gedrückter linker Maustaste"
 
 #: src/gui/HelpDialog.cpp:269
 msgid "Time scrolling: minutes"
@@ -4507,7 +4507,7 @@ msgstr "Auswahl aufheben"
 
 #: src/gui/HelpDialog.cpp:285
 msgid "& left click"
-msgstr ""
+msgstr "& linker Mausklick"
 
 #: src/gui/HelpDialog.cpp:287
 msgid "Right click"
@@ -4552,13 +4552,15 @@ msgstr "TUI aktivieren"
 
 #: src/gui/HelpDialog.cpp:346
 msgid "Special local keys"
-msgstr ""
+msgstr "Modale lokale Tasten"
 
 #: src/gui/HelpDialog.cpp:347
 msgid ""
 "All these hotkeys are locally available to run when specific window or tab "
 "is opened."
 msgstr ""
+"Diese Tastenkürzel sind lokal verfügbar, wenn bestimmte Fenster oder Tabs "
+"angezeigt werden."
 
 #: src/gui/HelpDialog.cpp:348 src/ui_scriptConsole.h:380
 msgid "Script console"
@@ -4752,8 +4754,8 @@ msgid ""
 "Or you may {download the BibTeX file of the paper} to create another "
 "citation format."
 msgstr ""
-"Sie können gern auch diese BibTeX Datei [download] nutzen, um Ihr "
-"gewünschtes Zitierformat zu erhalten. "
+"Oder Sie können diese BibTeX-Datei [download] nutzen, um ein anderes "
+"Zitierformat zu erhalten. "
 
 #: src/gui/StelGui.cpp:229
 msgid "Windows"
@@ -5998,7 +6000,7 @@ msgstr "Planeten und Sonne"
 
 #: src/gui/AstroCalcDialog.cpp:2485
 msgid "Sun, planets and moons of observer location"
-msgstr ""
+msgstr "Sonne, Planeten und Monde am Beobachtungsort"
 
 #: src/gui/AstroCalcDialog.cpp:2486
 #, qt-format
@@ -8218,6 +8220,8 @@ msgstr ""
 msgid ""
 "Screensaver of various happenings in the Solar System. 313 events in all!"
 msgstr ""
+"Bildschirmschoner, der verschiedene Ereignisse im Sonnensystem zeigt. "
+"Insgesamt 313 Ereignisse!"
 
 #: src/translations.h:703
 msgid "A tour of the western constellations."
@@ -12423,7 +12427,7 @@ msgstr "Zeige aktuelle GRF-Messungen"
 
 #: src/ui_scriptConsole.h:391
 msgid "Clear"
-msgstr ""
+msgstr "Löschen"
 
 #: src/ui_scriptConsole.h:395
 msgid "Pre-process script using SSC preprocessor"
@@ -13479,6 +13483,8 @@ msgid ""
 "When set, measurements are shown near the end of the line instead of its "
 "starting point."
 msgstr ""
+"Bei Aktivierung werden die Meßwerte beim Linienende statt beim Ausgangspunkt"
+" angezeigt."
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:341
 msgid "Show measurements near mouse"
@@ -14602,8 +14608,8 @@ msgstr ""
 "Berechnung der Positionen künstlicher Erdsatelliten aus NORAD TLE-Daten"
 
 #: plugins/Satellites/src/Satellites.cpp:156
-msgid "Satellite hints"
-msgstr "Symbole für Satelliten"
+msgid "Artificial satellites"
+msgstr "Künstliche Satelliten"
 
 #: plugins/Satellites/src/Satellites.cpp:157
 msgid "Satellite labels"
@@ -21229,9 +21235,9 @@ msgid ""
 " from the Nahualt language of the indigenous tribe that settled in "
 "Nicaragua, which symbolises a native god and a refuge for animals."
 msgstr ""
-"Xolotlan ist der Name des zweit-größten Sees von Nicaragua dessen Name aus "
-"der Nahault Sprache des indigenen Stamms kommt der in Nicaragua siedelte, "
-"welcher einen lokalen Gott dar stellt und einen Zufluchtsort für Tiere."
+"Xolotlan ist der Name des zweitgrößten Sees von Nicaragua. Sein Name kommt "
+"aus der Nahualt-Sprache des indigenen Stamms, der in Nicaragua siedelte. Er "
+"steht für einen lokalen Gott und einen Zufluchtsort für Tiere."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:521
 msgid ""

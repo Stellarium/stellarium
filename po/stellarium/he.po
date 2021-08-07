@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-07-05 19:23+0700\n"
+"POT-Creation-Date: 2021-07-19 18:58+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: חיים שלמה רוזנבך <w0504136601@gmail.com>, 2021\n"
 "Language-Team: Hebrew (https://www.transifex.com/stellarium/teams/80998/he/)\n"
@@ -399,7 +399,7 @@ msgstr "רשת גלאקטית"
 
 #: src/core/modules/GridLinesMgr.cpp:1856 src/ui_viewDialog.h:3807
 msgid "Galactic equator"
-msgstr "Galactic equator"
+msgstr "קו המשווה הגלקטי"
 
 #: src/core/modules/GridLinesMgr.cpp:1857 src/ui_viewDialog.h:3631
 msgid "Supergalactic grid"
@@ -513,55 +513,55 @@ msgstr ""
 #: src/core/modules/SpecialMarkersMgr.cpp:267 src/ui_viewDialog.h:3643
 #: src/ui_configurationDialog.h:1807
 msgid "Compass marks"
-msgstr "Compass marks"
+msgstr "סימני מצפן"
 
 #. TRANSLATORS: North
 #: src/core/modules/LandscapeMgr.cpp:254 src/core/modules/Planet.cpp:1033
 msgctxt "compass direction"
 msgid "N"
-msgstr ""
+msgstr "צ'"
 
 #. TRANSLATORS: South
 #: src/core/modules/LandscapeMgr.cpp:256 src/core/modules/Planet.cpp:1025
 msgctxt "compass direction"
 msgid "S"
-msgstr ""
+msgstr "ד'"
 
 #. TRANSLATORS: East
 #: src/core/modules/LandscapeMgr.cpp:258 src/core/modules/Planet.cpp:1037
 msgctxt "compass direction"
 msgid "E"
-msgstr ""
+msgstr "מז'"
 
 #. TRANSLATORS: West
 #: src/core/modules/LandscapeMgr.cpp:260 src/core/modules/Planet.cpp:1029
 msgctxt "compass direction"
 msgid "W"
-msgstr ""
+msgstr "מע'"
 
 #. TRANSLATORS: Northeast
 #: src/core/modules/LandscapeMgr.cpp:262 src/core/modules/Planet.cpp:1035
 msgctxt "compass direction"
 msgid "NE"
-msgstr ""
+msgstr "צ' מז'"
 
 #. TRANSLATORS: Southeast
 #: src/core/modules/LandscapeMgr.cpp:264 src/core/modules/Planet.cpp:1039
 msgctxt "compass direction"
 msgid "SE"
-msgstr ""
+msgstr "ד' מז'"
 
 #. TRANSLATORS: Southwest
 #: src/core/modules/LandscapeMgr.cpp:266 src/core/modules/Planet.cpp:1027
 msgctxt "compass direction"
 msgid "SW"
-msgstr ""
+msgstr "ד' מע'"
 
 #. TRANSLATORS: Northwest
 #: src/core/modules/LandscapeMgr.cpp:268 src/core/modules/Planet.cpp:1031
 msgctxt "compass direction"
 msgid "NW"
-msgstr ""
+msgstr "צ' מע'"
 
 #. TRANSLATORS: North-northeast
 #: src/core/modules/LandscapeMgr.cpp:270 src/core/modules/Planet.cpp:1034
@@ -1303,7 +1303,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'mons'
 #: src/core/modules/NomenclatureItem.cpp:574
 msgid "Mountain."
-msgstr ""
+msgstr "הר."
 
 #. TRANSLATORS: Description for landform 'oceanus'
 #: src/core/modules/NomenclatureItem.cpp:576
@@ -1417,7 +1417,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'vallis'
 #: src/core/modules/NomenclatureItem.cpp:618
 msgid "Valley."
-msgstr ""
+msgstr "עמק."
 
 #. TRANSLATORS: Description for landform 'vastitas'
 #: src/core/modules/NomenclatureItem.cpp:620
@@ -14219,7 +14219,7 @@ msgstr "Binoculars"
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:595
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:244
 msgid "Name:"
-msgstr "Name:"
+msgstr "שם:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1549
 msgid "Eyepieces"
@@ -14315,7 +14315,7 @@ msgstr "Equatorial Mount"
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:415
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:427
 msgid "Telescopes"
-msgstr "Telescopes"
+msgstr "טלסקופים"
 
 #: plugins/Oculus/src/Oculus.cpp:174
 msgid "Oculus"
@@ -14330,7 +14330,7 @@ msgstr ""
 #: plugins/Satellites/src/Satellites.cpp:241
 #: plugins/Satellites/src/ui_satellitesDialog.h:1159
 msgid "Satellites"
-msgstr "Satellites"
+msgstr "לווינים"
 
 #: plugins/Satellites/src/Satellites.cpp:76
 msgid ""
@@ -14341,8 +14341,8 @@ msgstr ""
 "TLE data"
 
 #: plugins/Satellites/src/Satellites.cpp:156
-msgid "Satellite hints"
-msgstr "Satellite hints"
+msgid "Artificial satellites"
+msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:157
 msgid "Satellite labels"
@@ -14369,7 +14369,7 @@ msgstr ""
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
 #: plugins/Satellites/src/Satellites.cpp:2298
 msgid "visual"
-msgstr "visual"
+msgstr "חזותי"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
 #: plugins/Satellites/src/Satellites.cpp:2300
@@ -14456,7 +14456,7 @@ msgstr ""
 #. constellation (global navigation satellite system by the European Union)
 #: plugins/Satellites/src/Satellites.cpp:2328
 msgid "galileo"
-msgstr "galileo"
+msgstr "גלילאו"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium
 #. constellation (Iridium is a proper name)
@@ -14801,11 +14801,11 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellite.cpp:426
 msgid "Group"
-msgstr ""
+msgstr "קבוצה"
 
 #: plugins/Satellites/src/Satellite.cpp:426
 msgid "Groups"
-msgstr ""
+msgstr "קבוצות"
 
 #: plugins/Satellites/src/Satellite.cpp:431
 msgid "Operational status"
@@ -15128,7 +15128,7 @@ msgstr "m"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:273
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:745
 msgid "Update error"
-msgstr "Update error"
+msgstr "שגיאת עדכון"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:816
 #, qt-format
@@ -15166,7 +15166,7 @@ msgstr "[new source]"
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:573
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:475
 msgid "Update now"
-msgstr "Update now"
+msgstr "עדכן כעת"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:977
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:205
@@ -15285,7 +15285,7 @@ msgstr "Brightness"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1376
 msgid "Satellite"
-msgstr "Satellite"
+msgstr "לווין"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1456
 msgid "Save predicted Iridium flares as..."
@@ -15343,7 +15343,7 @@ msgstr "Satellites Configuration"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1050
 msgid "Updates"
-msgstr "Updates"
+msgstr "עדכונים"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1051
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:571
@@ -15380,7 +15380,7 @@ msgstr ""
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:255
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:305
 msgid "Font size:"
-msgstr "Font size:"
+msgstr "גודל גופן:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1060
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:286
@@ -16011,7 +16011,7 @@ msgstr "Supported devices"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:304
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:492
 msgid "Virtual telescope"
-msgstr "Virtual telescope"
+msgstr "טלסקופ וירטואלי"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:307
 msgid ""
@@ -16748,7 +16748,7 @@ msgstr "#"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:522
 msgid "Status"
-msgstr "Status"
+msgstr "סטטוס"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:539
 #, qt-format
@@ -16800,7 +16800,7 @@ msgstr "remote, unknown"
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:577
 msgid "virtual"
-msgstr "virtual"
+msgstr "וירטואלי"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:581
@@ -16827,7 +16827,7 @@ msgstr "Start the selected local telescope"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1018
 msgid "Stop"
-msgstr "Stop"
+msgstr "הפסק"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1020
 msgid "Stop the selected local telescope"
@@ -16865,7 +16865,7 @@ msgstr "Declination (J2000)"
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:320
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:468
 msgid "Select one"
-msgstr "Select one"
+msgstr "בחר אחד"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:336
 msgid "Slew telescope to"
@@ -17013,7 +17013,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:617
 msgid "URL:"
-msgstr ""
+msgstr "כתובת אתר:"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:618
 msgid "Username:"
@@ -17097,7 +17097,7 @@ msgstr "Show field of view indicators"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:432
 msgid "Files"
-msgstr "Files"
+msgstr "קבצים"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:433
 msgid "Log telescope driver messages to files"
@@ -17191,12 +17191,12 @@ msgstr "פורמט תצוגת תאריך"
 #. TRANSLATORS: 12-hour time format
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:208
 msgid "12h"
-msgstr " 12 שעות"
+msgstr "12 שעות"
 
 #. TRANSLATORS: 24-hour time format
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:210
 msgid "24h"
-msgstr " 24 שעות"
+msgstr "24 שעות"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:211
 msgid "Time display format"
@@ -17225,7 +17225,7 @@ msgstr "Ecliptic line (J2000)"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:369
 msgid "Nebula names"
-msgstr "Nebula names"
+msgstr "שמות ערפיליות"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:373
 msgid "Nebula hints"
@@ -17471,7 +17471,7 @@ msgstr "Get orbital elements"
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
 msgid "Online search"
-msgstr "Online search"
+msgstr "חיפוש מקוון"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
 msgid "Objects found"
@@ -17512,7 +17512,7 @@ msgstr "Update only the orbital elements"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
 msgid "Add objects"
-msgstr "Add objects"
+msgstr "הוסף אובייקטים"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:258
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:270
@@ -17522,7 +17522,7 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:260
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:150
 msgid "Note"
-msgstr "Note"
+msgstr "הערה"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:261
 msgid ""
@@ -17570,7 +17570,7 @@ msgstr ""
 #: plugins/Supernovae/src/Supernovae.cpp:72
 #: plugins/Supernovae/src/Supernovae.cpp:151
 msgid "Historical Supernovae"
-msgstr "Historical Supernovae"
+msgstr "סופרנובות היסטוריות"
 
 #: plugins/Supernovae/src/Supernovae.cpp:75
 msgid "This plugin allows you to see some bright historical supernovae."
@@ -17646,7 +17646,7 @@ msgstr "Institute for Theoretical and Experimental Physics"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:142
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:158
 msgid "in Russia"
-msgstr "in Russia"
+msgstr "ברוסיה"
 
 #. TRANSLATORS: days.
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:187
@@ -17989,7 +17989,7 @@ msgstr "סט של כוכבי ניווט"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:280
 msgid "Note:"
-msgstr "Note:"
+msgstr "הערה:"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:282
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:307
@@ -18046,7 +18046,7 @@ msgstr "Bright Novae configuration window"
 
 #: plugins/Novae/src/Nova.cpp:147
 msgid "nova"
-msgstr "nova"
+msgstr "נובה"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:120
 msgid "Bright Novae Plug-in"
@@ -18268,7 +18268,7 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:247 plugins/Exoplanets/src/Exoplanet.cpp:319
 msgctxt "period"
 msgid "days"
-msgstr ""
+msgstr "ימים"
 
 #: plugins/Pulsars/src/Pulsar.cpp:251 plugins/Exoplanets/src/Exoplanet.cpp:323
 msgid "Eccentricity"
@@ -18682,7 +18682,7 @@ msgstr ""
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:468
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:473
 msgid "Status:"
-msgstr "Status:"
+msgstr "סטטוס:"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:470
 msgid "Server mode"
@@ -18703,7 +18703,7 @@ msgstr ""
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:476
 msgid "127.0.0.1"
-msgstr ""
+msgstr "127.0.0.1"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:478
 msgid "When connection is lost"
@@ -18731,7 +18731,7 @@ msgstr ""
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:487
 msgid "Selection"
-msgstr ""
+msgstr "בחירה"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:490
 msgid "View direction"
@@ -18864,7 +18864,7 @@ msgstr ""
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:1034
 msgid "Astrometry"
-msgstr ""
+msgstr "אסטרומטריה"
 
 #. TRANSLATORS: Exoplanet detection method. TTV=Transit Timing Variation
 #: plugins/Exoplanets/src/Exoplanets.cpp:1036
@@ -18874,7 +18874,7 @@ msgstr ""
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:1038
 msgid "Timing"
-msgstr ""
+msgstr "תזמון"
 
 #. TRANSLATORS: Exoplanet detection method. TTV=Transit Timing Variation
 #: plugins/Exoplanets/src/Exoplanets.cpp:1040
@@ -18884,11 +18884,11 @@ msgstr ""
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:1042
 msgid "Default"
-msgstr ""
+msgstr "ברירת מחדל"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:278
 msgid "planetary system"
-msgstr "planetary system"
+msgstr "מערכת פלנטרית"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:300
 msgid "Metallicity"
@@ -18898,14 +18898,14 @@ msgstr "Metallicity"
 #: plugins/Exoplanets/src/Exoplanet.cpp:320
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:169
 msgid "Mass"
-msgstr "Mass"
+msgstr "מסה"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:308
 #: plugins/Exoplanets/src/Exoplanet.cpp:321
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:179
 msgid "Radius"
-msgstr "Radius"
+msgstr "רדיוס"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:312
 msgid "Effective temperature"
@@ -19266,10 +19266,9 @@ msgid ""
 "observations were critical to Kepler's formulation of his three laws of "
 "planetary motion."
 msgstr ""
-"Tycho Brahe (1546-1601) was a Danish astronomer and nobleman who recorded "
-"accurate astronomical observations of the stars and planets. These "
-"observations were critical to Kepler's formulation of his three laws of "
-"planetary motion."
+"טיכו ברהה (1546-1601) היה אסטרונום ואציל דני שתיעד תצפיות אסטרונומיות "
+"מדויקות בכוכבים וכוכבי הלכת. תצפיות אלה היו קריטיות לניסוחו של קפלר את שלושת"
+" חוקי התנועה הפלנטרית שלו."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:341
 msgid ""
@@ -19349,7 +19348,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:349
 msgid "Dagon was a Semitic deity, often represented as half-man, half-fish."
-msgstr "Dagon was a Semitic deity, often represented as half-man, half-fish."
+msgstr "דגון היה אלוהות שמית, המיוצגת לעתים קרובות כחצי אדם, חצי דג."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:350
 msgid "Tonatiuh was the Aztec god of the Sun."
@@ -20125,6 +20124,8 @@ msgid ""
 "Mesopotamia situated along an ancient channel of the Euphrates river in "
 "modern-day Iraq."
 msgstr ""
+"אורוק הייתה עיר עתיקה של התרבויות השומריות והבבליות במסופוטמיה, ממוקמת לאורך"
+" ערוץ עתיק של נהר הפרת בעירק של ימינו."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:472
 msgid ""
@@ -20149,7 +20150,7 @@ msgstr ""
 msgid ""
 "Tevel means Universe or everything and begins with the letter Taf, the last "
 "letter in the Hebrew alphabet."
-msgstr ""
+msgstr "תבל פירושו יקום או הכל ומתחיל באות ת, האות האחרונה באלף בית העברי."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:476
 msgid "Alef is the first letter in the Hebrew alphabet and also means bull."
@@ -20193,6 +20194,7 @@ msgid ""
 "Petra is a historical and archaeological city in southern Jordan and a "
 "UNESCO World Heritage site."
 msgstr ""
+"פטרה היא עיר היסטורית וארכיאולוגית בדרום ירדן ואתר מורשת עולמית של אונסק\"ו."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:484
 msgid ""
@@ -20436,7 +20438,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:524
 msgid "Albmi means sky in the Northern Sami language of Norway."
-msgstr ""
+msgstr "אלבמי פירושו שמים בשפה הצפון סאמית של נורבגיה"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:525
 msgid ""
@@ -20460,6 +20462,8 @@ msgid ""
 "Jebus was the ancient name of Jerusalem in 2nd millennium BC when populated "
 "by the Canaanite tribe of Jebusites."
 msgstr ""
+"יבוס היה שמה הקדום של ירושלים באלף ה-2 לפני הספירה כאשר אוכלסה על ידי שבט "
+"כנעני של יבוסים."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:529
 msgid ""
@@ -21069,7 +21073,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:892
 msgid "Year of Discovery"
-msgstr ""
+msgstr "שנת הגילוי"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:893
 msgid "Metallicity of host star"
@@ -21103,19 +21107,19 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:933
 msgctxt "temperature scale"
 msgid "Kelvin"
-msgstr ""
+msgstr "קלווין"
 
 #. TRANSLATORS: Name of temperature scale
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:935
 msgctxt "temperature scale"
 msgid "Celsius"
-msgstr ""
+msgstr "צלסיוס"
 
 #. TRANSLATORS: Name of temperature scale
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:937
 msgctxt "temperature scale"
 msgid "Fahrenheit"
-msgstr ""
+msgstr "פרנהייט"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:565
 msgid "Exoplanets Configuration"
@@ -21222,7 +21226,7 @@ msgstr "Plot"
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:619
 msgctxt "tab in plugin windows"
 msgid "Diagram"
-msgstr "Diagram"
+msgstr "תרשים"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:620
 msgid "Table"
@@ -21231,7 +21235,7 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:621
 msgctxt "tab in plugin windows"
 msgid "Info"
-msgstr "Info"
+msgstr "מידע"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:622
 msgctxt "tab in plugin windows"
@@ -21377,11 +21381,11 @@ msgstr "Nights above horizon: %1"
 
 #: plugins/Observability/src/Observability.cpp:191
 msgid "TODAY:"
-msgstr "TODAY:"
+msgstr "היום:"
 
 #: plugins/Observability/src/Observability.cpp:192
 msgid "THIS YEAR:"
-msgstr "THIS YEAR:"
+msgstr "השנה:"
 
 #. TRANSLATORS: The space at the end is significant - another sentence may
 #. follow.
@@ -21614,19 +21618,19 @@ msgstr "Font color and size"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:333
 msgid "Red"
-msgstr "Red"
+msgstr "אדום"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:334
 msgid "Green"
-msgstr "Green"
+msgstr "ירוק"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:335
 msgid "Blue"
-msgstr "Blue"
+msgstr "כחול"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:336
 msgid "Font Size"
-msgstr "Font Size"
+msgstr "גודל גופן"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:337
 msgid "Observing conditions"
@@ -21720,7 +21724,7 @@ msgstr "Change sign of equation"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:253
 msgid "Color of text"
-msgstr ""
+msgstr "צבע הטקסט"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:89
 msgid "The current catalog of Meteor Showers is invalid!"
@@ -22450,7 +22454,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:321
 msgid "Info"
-msgstr "Info"
+msgstr "מידע"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:322
 msgid "Info about meteor showers you can get here:"
@@ -22569,7 +22573,7 @@ msgstr "Last attempt to update"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:476
 msgid "Update"
-msgstr "Update"
+msgstr "עדכון"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:189
 msgid "Meteor Showers: Search"
@@ -22855,7 +22859,7 @@ msgstr "on"
 #: plugins/Scenery3d/src/Scenery3d.cpp:750
 msgctxt "disable"
 msgid "off"
-msgstr "off"
+msgstr "כבוי"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:714
 #, qt-format
@@ -23283,7 +23287,7 @@ msgstr "Load/store with date"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:215
 msgid "Title:"
-msgstr "Title:"
+msgstr "כותרת:"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:59
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:273
@@ -23427,7 +23431,7 @@ msgstr "כוכב־חמה"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1455
 msgid "Venus"
-msgstr "Venus"
+msgstr "נוגה"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:210
 msgid "ArchaeoLines Plug-in"
@@ -26645,7 +26649,7 @@ msgstr ""
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:180
 msgid "Hebrew Calendar"
-msgstr ""
+msgstr "לוח שנה עברי"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:181
 msgid "French Revolution calendar (arithmetic version of 1795)"
@@ -26912,16 +26916,16 @@ msgstr ""
 
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:294
 msgid "Ancient-Skies"
-msgstr ""
+msgstr "שמיים קדומים"
 
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:296
 msgid "Custom 1"
-msgstr ""
+msgstr "מותאם אישית 1"
 
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:298
 msgid "Custom 2"
-msgstr ""
+msgstr "מותאם אישית 2"
 
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:300
 msgid "Custom 3"
-msgstr ""
+msgstr "מותאם אישית 3"

@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-07-05 19:23+0700\n"
+"POT-Creation-Date: 2021-07-19 18:58+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: 殳玮 孙 <itun@qq.com>, 2021\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/stellarium/teams/80998/zh_CN/)\n"
@@ -14218,8 +14218,8 @@ msgid ""
 msgstr "使用基于北美防空联合司令部的两行式轨道数据(NORAD TLE)来预测绕地人造卫星的位置"
 
 #: plugins/Satellites/src/Satellites.cpp:156
-msgid "Satellite hints"
-msgstr "显示人造卫星"
+msgid "Artificial satellites"
+msgstr "人造卫星"
 
 #: plugins/Satellites/src/Satellites.cpp:157
 msgid "Satellite labels"
@@ -15341,27 +15341,27 @@ msgstr "标准星等："
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1131
 msgid "Perigee altitude in kilometers"
-msgstr ""
+msgstr "近地点高度，以公里为单位"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1133
 msgid "Perigee:"
-msgstr ""
+msgstr "近地点："
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1135
 msgid "Apogee altitude in kilometers"
-msgstr ""
+msgstr "远地点高度，以公里为单位"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1137
 msgid "Apogee:"
-msgstr ""
+msgstr "远地点："
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1139
 msgid "Orbital period in minutes"
-msgstr ""
+msgstr "轨道周期, 以分钟为单位"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1141
 msgid "Period:"
-msgstr ""
+msgstr "周期："
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1143
 msgid "Display orbit line(s) for the selected satellite(s)"

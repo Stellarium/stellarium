@@ -5,17 +5,17 @@
 # 
 # Translators:
 # cardinot <mcardinot@gmail.com>, 2017
-# Arda Güler <anonymousgamer111111@gmail.com>, 2020
 # 03bfdb1e3bdfa21b80c8160ea93f1c67_2436d66, 2020
+# Arda Güler <anonymousgamer111111@gmail.com>, 2021
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-07-05 19:23+0700\n"
+"POT-Creation-Date: 2021-07-19 18:58+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
-"Last-Translator: 03bfdb1e3bdfa21b80c8160ea93f1c67_2436d66, 2020\n"
+"Last-Translator: Arda Güler <anonymousgamer111111@gmail.com>, 2021\n"
 "Language-Team: Turkish (https://www.transifex.com/stellarium/teams/80998/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1770,7 +1770,7 @@ msgstr "aydınlatılan tuhaf bulutsu"
 #: src/core/modules/Nebula.cpp:1292
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
-msgstr "belgelendirilmemiş yansıma bulutsular"
+msgstr "belgelendirilmemiş yansıma bulutsuları"
 
 #: src/core/modules/Nebula.cpp:1312
 msgid "circular form"
@@ -5439,7 +5439,7 @@ msgstr "Opak."
 #: src/gui/AstroCalcDialog.cpp:1909 src/gui/AstroCalcDialog.cpp:5286
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
 msgid "Mag."
-msgstr "Büyüklük"
+msgstr "Kad."
 
 #. TRANSLATORS: angular size, arc-minutes
 #: src/gui/AstroCalcDialog.cpp:868
@@ -5485,7 +5485,7 @@ msgstr "Y.P."
 #. TRANSLATORS: elevation
 #: src/gui/AstroCalcDialog.cpp:897 src/gui/AstroCalcDialog.cpp:5296
 msgid "Elev."
-msgstr "Yükseklik"
+msgstr "Yükselti"
 
 #. TRANSLATORS: elongation
 #: src/gui/AstroCalcDialog.cpp:899 src/gui/AstroCalcDialog.cpp:1538
@@ -6230,7 +6230,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:5208 src/translations.h:326
 #: src/ui_viewDialog.h:3383 src/ui_dsoColorsDialog.h:565
 msgid "Active galaxies"
-msgstr "Aktif gökadalar(galaksiler)"
+msgstr "Aktif gökadalar"
 
 #: src/gui/AstroCalcDialog.cpp:5213 plugins/Pulsars/src/Pulsars.cpp:72
 #: plugins/Pulsars/src/Pulsars.cpp:170 plugins/Pulsars/src/Pulsars.cpp:171
@@ -6253,7 +6253,7 @@ msgstr "Parlak süpernova yıldızları"
 #: src/gui/AstroCalcDialog.cpp:5225 src/translations.h:330
 #: src/ui_viewDialog.h:3390 src/ui_dsoColorsDialog.h:650
 msgid "Interacting galaxies"
-msgstr "Etkileşen gökadalar(galaksiler)"
+msgstr "Etkileşen gökadalar"
 
 #: src/gui/AstroCalcDialog.cpp:5227
 msgid "Messier objects"
@@ -7192,7 +7192,7 @@ msgstr "Yansıma bulutsuları"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:328 src/ui_dsoColorsDialog.h:564
 msgid "Radio galaxies"
-msgstr "Radio gökadalar(galaksiler)"
+msgstr "Radio gökadalar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:332
@@ -10149,7 +10149,7 @@ msgstr "Kırılma/Yok olma ayarları..."
 
 #: src/ui_viewDialog.h:3172
 msgid "Settings for sporadic meteors"
-msgstr "Sporadik(arada sırada görülen) göktaşları için ayarlar"
+msgstr "Sporadik (arada sırada görülen) göktaşları için ayarlar"
 
 #: src/ui_viewDialog.h:3174
 msgctxt "Zenithal Hourly Rate"
@@ -11904,7 +11904,7 @@ msgstr "Görüntü kapısı diski"
 
 #: src/ui_configurationDialog.h:1901
 msgid "Hides the mouse cursor when inactive"
-msgstr "Etkin degilken, fare ve isikli gostergeyi sakla"
+msgstr "Etkin değilken, fare ve ışıklı gostergeyi sakla"
 
 #: src/ui_configurationDialog.h:1903
 msgid "Mouse cursor timeout:"
@@ -11919,7 +11919,7 @@ msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
 msgstr ""
-"Aktif haldeyken, 'otomatik uzaklastirma' tusu, baslangic goruntuleme yonunu "
+"Aktif haldeyken, 'otomatik uzaklaştırma' tuşu, baslangıç görüntüleme yönünü "
 "de belirleyecektir."
 
 #: src/ui_configurationDialog.h:1910
@@ -11945,7 +11945,7 @@ msgstr ""
 #: src/ui_configurationDialog.h:1920
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr ""
-"Fare ile genisletmeyi (surukle) ve odaklamayi (fare topu) etkinlestir."
+"Fare ile genişletmeyi (sürükle) ve odaklamayı (fare topu) etkinleştir."
 
 #: src/ui_configurationDialog.h:1922
 msgid "Enable mouse navigation"
@@ -14336,8 +14336,8 @@ msgstr ""
 "tahmini."
 
 #: plugins/Satellites/src/Satellites.cpp:156
-msgid "Satellite hints"
-msgstr "Uydu ipuçları"
+msgid "Artificial satellites"
+msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:157
 msgid "Satellite labels"

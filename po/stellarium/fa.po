@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-07-05 19:23+0700\n"
+"POT-Creation-Date: 2021-07-19 18:58+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: milad 19s, 2021\n"
 "Language-Team: Persian (https://www.transifex.com/stellarium/teams/80998/fa/)\n"
@@ -730,7 +730,7 @@ msgstr "نوع زمین ثبت نشده"
 #. TRANSLATORS: Description for landform 'mare' on Mars
 #: src/core/modules/NomenclatureItem.cpp:133
 msgid "'Sea'; dark albedo areas of no known geological significance."
-msgstr "دریا؛ مناطقی با بازتاب تیره و بدون عارضه جغرافیایی شناخته شده"
+msgstr "دریا : مناطقی با بازتاب تیره و بدون عارضه جغرافیایی شناخته شده"
 
 #. TRANSLATORS: Description for landform 'lacus' on Titan
 #: src/core/modules/NomenclatureItem.cpp:138
@@ -754,7 +754,7 @@ msgstr ""
 
 #: src/core/modules/NomenclatureItem.cpp:216
 msgid "Linear size"
-msgstr ""
+msgstr "اندازه خطی"
 
 #: src/core/modules/NomenclatureItem.cpp:219 src/core/modules/Planet.cpp:700
 msgid "Diameter"
@@ -1155,7 +1155,7 @@ msgstr "ویژگی شکل قوسی."
 #. TRANSLATORS: Description for landform 'astrum'
 #: src/core/modules/NomenclatureItem.cpp:516
 msgid "Radial-patterned feature."
-msgstr "ویژگی شعاع الگویی."
+msgstr "ویژگی الگوی شعاعی"
 
 #. TRANSLATORS: Description for landform 'catena'
 #: src/core/modules/NomenclatureItem.cpp:518
@@ -1467,7 +1467,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:209 src/core/modules/Planet.cpp:474
 #: src/core/modules/StarWrapper.cpp:215
 msgid "Additional names: "
-msgstr ""
+msgstr "نام های اضافی :"
 
 #: src/core/modules/Nebula.cpp:215 src/core/modules/Planet.cpp:481
 #: src/core/modules/StarWrapper.cpp:221
@@ -1994,7 +1994,7 @@ msgstr "خوشه‌ی کهکشانی"
 
 #: src/core/modules/Nebula.cpp:1402
 msgid "part of a galaxy"
-msgstr ""
+msgstr "بخشی از یک کهکشان"
 
 #: src/core/modules/Nebula.cpp:1403
 msgid "region of the sky"
@@ -2224,7 +2224,7 @@ msgstr ""
 
 #: src/core/modules/Planet.cpp:998
 msgid "days old"
-msgstr ""
+msgstr "روزهای گذشته"
 
 #: src/core/modules/Planet.cpp:1018 src/core/modules/Planet.cpp:1021
 msgid "Position angle of bright limb"
@@ -3645,37 +3645,37 @@ msgstr "زمان خورشیدی واقعی محلی"
 #: src/core/StelLocaleMgr.cpp:474
 msgctxt "short day name"
 msgid "Sun"
-msgstr ""
+msgstr "شنبه"
 
 #: src/core/StelLocaleMgr.cpp:475
 msgctxt "short day name"
 msgid "Mon"
-msgstr ""
+msgstr "یک شنبه"
 
 #: src/core/StelLocaleMgr.cpp:476
 msgctxt "short day name"
 msgid "Tue"
-msgstr ""
+msgstr "دوشنبه"
 
 #: src/core/StelLocaleMgr.cpp:477
 msgctxt "short day name"
 msgid "Wed"
-msgstr ""
+msgstr "سه شنبه"
 
 #: src/core/StelLocaleMgr.cpp:478
 msgctxt "short day name"
 msgid "Thu"
-msgstr ""
+msgstr "چهارشنبه"
 
 #: src/core/StelLocaleMgr.cpp:479
 msgctxt "short day name"
 msgid "Fri"
-msgstr ""
+msgstr "پنج شنبه"
 
 #: src/core/StelLocaleMgr.cpp:480
 msgctxt "short day name"
 msgid "Sat"
-msgstr ""
+msgstr "جمعه"
 
 #: src/core/StelLocaleMgr.cpp:483 plugins/Calendars/src/JulianCalendar.cpp:37
 msgctxt "long day name"
@@ -4286,7 +4286,7 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:210
 msgid "This version of Stellarium is outdated!"
-msgstr ""
+msgstr "این نسخه از برنامه ستاره شناسی قدیمی است"
 
 #: src/gui/HelpDialog.cpp:210
 msgid "Download new version."
@@ -5094,17 +5094,17 @@ msgstr ""
 #: src/gui/ScriptConsole.cpp:84
 msgctxt "command"
 msgid "remove screen text"
-msgstr ""
+msgstr "حذف متن صفحه نمایش"
 
 #: src/gui/ScriptConsole.cpp:85
 msgctxt "command"
 msgid "remove screen images"
-msgstr ""
+msgstr "حذف تصاویر صفحه نمایش"
 
 #: src/gui/ScriptConsole.cpp:86
 msgctxt "command"
 msgid "remove screen markers"
-msgstr ""
+msgstr "حذف نشانگر های صفحه نمایش"
 
 #: src/gui/ScriptConsole.cpp:87
 msgctxt "command"
@@ -5149,11 +5149,11 @@ msgstr ""
 
 #: src/gui/ScriptConsole.cpp:220
 msgid "Save Script"
-msgstr ""
+msgstr "ذخیره اسکریپت"
 
 #: src/gui/ScriptConsole.cpp:248
 msgid "Are you sure you want to clear script?"
-msgstr ""
+msgstr "آیا شما مطمئن هستید که می خواهید اسکریپت را پاک کنید؟"
 
 #: src/gui/ScriptConsole.cpp:356
 msgid "Select Script Include Directory"
@@ -5173,7 +5173,7 @@ msgstr ""
 
 #: src/gui/ScriptConsole.cpp:406
 msgid "Stellarium Script"
-msgstr ""
+msgstr "اسکریپت ستاره شناسی"
 
 #: src/gui/ScriptConsole.cpp:408
 msgid "Include File"
@@ -5534,7 +5534,7 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:2334
 msgid "1 minute"
-msgstr ""
+msgstr "1 دقیقه"
 
 #: src/gui/AstroCalcDialog.cpp:2334
 msgid "10 minutes"
@@ -5542,7 +5542,7 @@ msgstr "۱۰ دقیقه"
 
 #: src/gui/AstroCalcDialog.cpp:2334
 msgid "30 minutes"
-msgstr ""
+msgstr "30 دقیقه"
 
 #: src/gui/AstroCalcDialog.cpp:2334
 msgid "1 hour"
@@ -5550,43 +5550,43 @@ msgstr "۱ ساعت"
 
 #: src/gui/AstroCalcDialog.cpp:2334
 msgid "6 hours"
-msgstr ""
+msgstr "6 ساعت"
 
 #: src/gui/AstroCalcDialog.cpp:2334
 msgid "12 hours"
-msgstr ""
+msgstr "12 ساعت"
 
 #: src/gui/AstroCalcDialog.cpp:2335
 msgid "1 solar day"
-msgstr ""
+msgstr "1 روز خورشیدی"
 
 #: src/gui/AstroCalcDialog.cpp:2335
 msgid "5 solar days"
-msgstr ""
+msgstr "5 روز خورشیدی"
 
 #: src/gui/AstroCalcDialog.cpp:2335
 msgid "10 solar days"
-msgstr ""
+msgstr "10 روز خورشیدی"
 
 #: src/gui/AstroCalcDialog.cpp:2335
 msgid "15 solar days"
-msgstr ""
+msgstr "15 روز خورشیدی"
 
 #: src/gui/AstroCalcDialog.cpp:2335
 msgid "30 solar days"
-msgstr ""
+msgstr "30 روز خورشیدی"
 
 #: src/gui/AstroCalcDialog.cpp:2336
 msgid "60 solar days"
-msgstr ""
+msgstr "60 روز خورشیدی"
 
 #: src/gui/AstroCalcDialog.cpp:2336
 msgid "100 solar days"
-msgstr ""
+msgstr "100 روز خورشیدی"
 
 #: src/gui/AstroCalcDialog.cpp:2336
 msgid "500 solar days"
-msgstr ""
+msgstr "500 روز خورشیدی"
 
 #: src/gui/AstroCalcDialog.cpp:2336
 msgid "1 sidereal day"
@@ -6303,7 +6303,7 @@ msgstr "ساعت"
 #: src/gui/AstroCalcCustomStepsDialog.cpp:78
 msgctxt "unit of measurement"
 msgid "solar day"
-msgstr ""
+msgstr "روز خورشیدی"
 
 #: src/gui/AstroCalcCustomStepsDialog.cpp:79
 msgctxt "unit of measurement"
@@ -10080,7 +10080,7 @@ msgstr "آلودگی نوری:"
 
 #: src/ui_viewDialog.h:3187 src/ui_astroCalcDialog.h:1778
 msgid "or"
-msgstr ""
+msgstr "یا"
 
 #: src/ui_viewDialog.h:3189
 msgid ""
@@ -14178,8 +14178,8 @@ msgid ""
 msgstr "پيشبيني موقعيت ماهواره‌هادر مدار زمين بر اساس داده‌هاي NORAD TLE"
 
 #: plugins/Satellites/src/Satellites.cpp:156
-msgid "Satellite hints"
-msgstr "نمايش ماهواره"
+msgid "Artificial satellites"
+msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:157
 msgid "Satellite labels"

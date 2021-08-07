@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-07-05 19:23+0700\n"
+"POT-Creation-Date: 2021-07-19 18:58+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: freemanli <freeman.tam@gmail.com>, 2021\n"
 "Language-Team: Chinese (Taiwan) (https://www.transifex.com/stellarium/teams/80998/zh_TW/)\n"
@@ -4410,7 +4410,7 @@ msgstr "添加自訂標記"
 
 #: src/gui/HelpDialog.cpp:291
 msgid "left click"
-msgstr "&滑鼠左鍵"
+msgstr "滑鼠左鍵"
 
 #: src/gui/HelpDialog.cpp:293
 msgid "Delete marker closest to mouse cursor"
@@ -5848,7 +5848,7 @@ msgstr "行星與太陽"
 
 #: src/gui/AstroCalcDialog.cpp:2485
 msgid "Sun, planets and moons of observer location"
-msgstr "觀測者位置ㄉㄜ太陽、行星與衛星"
+msgstr "觀測位置的太陽、行星與衛星"
 
 #: src/gui/AstroCalcDialog.cpp:2486
 #, qt-format
@@ -7430,7 +7430,7 @@ msgstr "Al-Sufi"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:462
 msgid "Almagest"
-msgstr "至大論"
+msgstr "天文學大成"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:464
@@ -12108,7 +12108,7 @@ msgstr "執行:"
 
 #: src/ui_scriptConsole.h:409
 msgid "Stop script"
-msgstr "停止腳本(script)"
+msgstr "停止腳本 script"
 
 #: src/ui_scriptConsole.h:412
 msgid "Script"
@@ -14214,8 +14214,8 @@ msgid ""
 msgstr "使用 NORAD TLE 的資料預測地球軌道上的人造衛星的位置"
 
 #: plugins/Satellites/src/Satellites.cpp:156
-msgid "Satellite hints"
-msgstr "人造衛星提示"
+msgid "Artificial satellites"
+msgstr "人造衛星"
 
 #: plugins/Satellites/src/Satellites.cpp:157
 msgid "Satellite labels"
@@ -22071,7 +22071,7 @@ msgstr "時間間隔必須小於一年！"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:199
 msgid "Code"
-msgstr ""
+msgstr "代碼"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:201
 msgid "ZHR"
@@ -22880,7 +22880,7 @@ msgstr "顯示次要停頓點所在的赤緯線"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:301
 msgid "Show Polar Circles"
-msgstr ""
+msgstr "顯示極圈"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:302
 msgid "Show Line for Zenith Passage"
@@ -22928,11 +22928,11 @@ msgstr "顯示自製方位角2的垂直線"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:313
 msgid "Show Line for Custom Altitude 1"
-msgstr ""
+msgstr "顯示自訂高度1的格線"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:314
 msgid "Show Line for Custom Altitude 2"
-msgstr ""
+msgstr "顯示自訂高度2的格線"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:315
 msgid "Show Line for Custom Declination 1"
@@ -22964,7 +22964,7 @@ msgstr "月球的次要停頓點"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1429
 msgid "Polar Circle"
-msgstr ""
+msgstr "極圈"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1432
 msgid "Zenith Passage"
@@ -23021,7 +23021,7 @@ msgstr "次要的月球停頓點所在的赤緯線"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:222
 msgid "Declination of the Polar circles"
-msgstr ""
+msgstr "極圈的赤緯線"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:223
 msgid "Declination of the Zenith passage"
@@ -23072,12 +23072,13 @@ msgid ""
 "arbitrary locations. The directions are computed based on spherical "
 "trigonometry on a spherical Earth."
 msgstr ""
+"某些宗教，特別是伊斯蘭教，每次禮拜都面向一個特定方向，有二個位置的方位角線可以被顯示，預設位置是麥加(克爾白)和耶路撒冷，但是您可以從Stellarium的位置列表上選擇或輸入任意位置。這個方向的計算是基於球形地球的球面幾何。"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:239
 msgid ""
 "In addition, up to two lines each with arbitrary azimuth, altitude and "
 "declination lines with custom label can be shown."
-msgstr ""
+msgstr "此外，最多還可顯示二條可具自訂標籤的任意方位角，高度和赤緯線。"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:718
 msgid "ArchaeoLines Configuration"
@@ -23137,7 +23138,7 @@ msgstr "二分點所在的赤緯線(即赤道)"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:735
 msgid "Polar Circles"
-msgstr ""
+msgstr "極圈"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:736
 msgid "Selected Object Hour Angle"
@@ -23174,7 +23175,7 @@ msgstr "過天底所在的赤緯線"
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:810
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:814
 msgid "From selected object (if any)"
-msgstr ""
+msgstr "從已選天體(若有的話)"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:754
 msgid "Geographic Location 1"
@@ -23212,12 +23213,12 @@ msgstr "自訂方位角 1"
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:787
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:791
 msgid "Select from location list"
-msgstr ""
+msgstr "從位置列表中選取"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:789
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:793
 msgid "Pick..."
-msgstr ""
+msgstr "挑選..."
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:796
 msgid "Custom Declination 2"
@@ -23229,11 +23230,11 @@ msgstr "自訂方位角 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:801
 msgid "Custom Altitude 1"
-msgstr ""
+msgstr "自訂高度1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:802
 msgid "Custom Altitude 2"
-msgstr ""
+msgstr "自訂高度2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:817
 msgid "Restore default settings"
@@ -23245,7 +23246,7 @@ msgstr "自訂線條"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:153
 msgid "Locations"
-msgstr ""
+msgstr "位置"
 
 #: plugins/Vts/src/Vts.cpp:152
 msgid "Vts"
@@ -25423,7 +25424,7 @@ msgstr "Dhu al-Ḥijja"
 #: plugins/Calendars/src/IslamicCalendar.cpp:94
 msgctxt "epoch"
 msgid "A.H."
-msgstr ""
+msgstr "希吉拉之後"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:38
 msgctxt "old Hindu month name"
@@ -25489,7 +25490,7 @@ msgstr "Phālguna"
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:86
 msgctxt "epoch"
 msgid "K.Y."
-msgstr ""
+msgstr "爭鬥時"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:87
 msgctxt "short indicator for leap month"
@@ -26137,7 +26138,7 @@ msgstr "Esfand"
 #: plugins/Calendars/src/PersianArithmeticCalendar.cpp:95
 msgctxt "epoch"
 msgid "A.P."
-msgstr ""
+msgstr "伊朗曆"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:159
 msgid "Calendars Plug-in"
@@ -26387,60 +26388,60 @@ msgstr "中部美洲"
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:121
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:285
 msgid "Online Queries"
-msgstr ""
+msgstr "線上查詢"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:63
 msgid ""
 "This plugin allows object information retrieval from selected online "
 "services."
-msgstr ""
+msgstr "這個外掛程式允許從選定的線上服務中檢索天體的資訊"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:114
 msgid "Show window for Online Queries"
-msgstr ""
+msgstr "顯示線上查詢的視窗"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:115
 msgid "Call ancient-skies on current selection"
-msgstr ""
+msgstr "在現行選取上查詢古老天空"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:116
 msgid "Call AAVSO database on current selection"
-msgstr ""
+msgstr "在現行選取上查詢 AAVSO 資料庫"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:117
 msgid "Call GCVS database on current selection"
-msgstr ""
+msgstr "在現行選取上查詢 GCVS 資料庫"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:118
 msgid "Call Wikipedia on current selection"
-msgstr ""
+msgstr "在現行選取上查詢 維基百科 資料庫"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:119
 msgid "Call custom site 1 on current selection"
-msgstr ""
+msgstr "在現行選取上查詢 自訂網站1 資料庫"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:120
 msgid "Call custom site 2 on current selection"
-msgstr ""
+msgstr "在現行選取上查詢 自訂網站2 資料庫"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:121
 msgid "Call custom site 3 on current selection"
-msgstr ""
+msgstr "在現行選取上查詢 自訂網站3 資料庫"
 
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:84
 msgctxt "tab title"
 msgid "(Custom 1)"
-msgstr ""
+msgstr "(自訂 1)"
 
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:93
 msgctxt "tab title"
 msgid "(Custom 2)"
-msgstr ""
+msgstr "(自訂 2)"
 
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:102
 msgctxt "tab title"
 msgid "(Custom 3)"
-msgstr ""
+msgstr "(自訂 3)"
 
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:287
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:289
@@ -26450,32 +26451,32 @@ msgstr ""
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:297
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:299
 msgid "Query"
-msgstr ""
+msgstr "查詢"
 
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:288
 msgid "Wikipedia"
-msgstr ""
+msgstr "維基百科"
 
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:290
 msgid "AAVSO"
-msgstr ""
+msgstr "AAVSO"
 
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:292
 msgid "GCVS"
-msgstr ""
+msgstr "GCVS"
 
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:294
 msgid "Ancient-Skies"
-msgstr ""
+msgstr "古老天空"
 
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:296
 msgid "Custom 1"
-msgstr ""
+msgstr "自訂 1"
 
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:298
 msgid "Custom 2"
-msgstr ""
+msgstr "自訂 2"
 
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:300
 msgid "Custom 3"
-msgstr ""
+msgstr "自訂 3"

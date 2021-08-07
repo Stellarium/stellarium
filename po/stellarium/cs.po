@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-07-05 19:23+0700\n"
+"POT-Creation-Date: 2021-07-19 18:58+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Zdeněk Moravec <moravec@hapteplice.cz>, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/stellarium/teams/80998/cs/)\n"
@@ -14538,8 +14538,8 @@ msgstr ""
 " obrany NORAD."
 
 #: plugins/Satellites/src/Satellites.cpp:156
-msgid "Satellite hints"
-msgstr "Družice"
+msgid "Artificial satellites"
+msgstr "Umělé družice"
 
 #: plugins/Satellites/src/Satellites.cpp:157
 msgid "Satellite labels"
@@ -15728,27 +15728,27 @@ msgstr "Standardní magnituda:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1131
 msgid "Perigee altitude in kilometers"
-msgstr ""
+msgstr "Výška přízemí v kilometrech"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1133
 msgid "Perigee:"
-msgstr ""
+msgstr "Přízemí:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1135
 msgid "Apogee altitude in kilometers"
-msgstr ""
+msgstr "Výška odzemí v kilometrech"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1137
 msgid "Apogee:"
-msgstr ""
+msgstr "Odzemí:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1139
 msgid "Orbital period in minutes"
-msgstr ""
+msgstr "Doba oběhu v minutách"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1141
 msgid "Period:"
-msgstr ""
+msgstr "Doba oběhu:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1143
 msgid "Display orbit line(s) for the selected satellite(s)"
@@ -19181,7 +19181,7 @@ msgstr "Exoplanety"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:174
 msgid "Exoplanets configuration window"
-msgstr "Okno nastavení exoplanet"
+msgstr "Okno nastavení pro Exoplanety"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:1002
@@ -19366,7 +19366,7 @@ msgstr "Úhl. vzdál."
 #. TRANSLATORS: detection method
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:181
 msgid "D. M."
-msgstr "D. m."
+msgstr "M. d."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:218
 msgid "Mass of exoplanet in Jovian masses"
@@ -19402,7 +19402,7 @@ msgstr "Poloměr hvězdy v jednotkách poloměru Slunce"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:244
 msgid "Detection method of exoplanet"
-msgstr "Detekční metoda exoplanety"
+msgstr "Metoda detekce exoplanety"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:273
 msgid "Exoplanets Plug-in"
@@ -19516,9 +19516,9 @@ msgid ""
 "like. ESI depends on the planet's radius, density, escape velocity, and "
 "surface temperature."
 msgstr ""
-"Podobnost Zemi (ESI) na škále od 0 do 1, přičemž 1 odpovídá planetě nejvíce "
-"podobné Zemi. ESI závisí na poloměru planety, její hustotě, únikové "
-"rychlosti, a povrchové teplotě."
+"Podobnost Zemi (angl. zkratka ESI) na škále od 0 do 1, přičemž 1 odpovídá "
+"planetě nejvíce podobné Zemi. ESI závisí na poloměru planety, její hustotě, "
+"únikové rychlosti, a povrchové teplotě."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:320
 msgid "Conservative Sample"
@@ -19547,10 +19547,10 @@ msgid ""
 "be rocky or support surface liquid water. Some might be mini-Neptunes "
 "instead. They are also known as warm superterrans."
 msgstr ""
-"Planety v obyvatelné zóně, které mají poloměr menší od 1,5 do 2,5 poloměru "
-"Země Earth radii nebo hmotnost od 5 do 10 hmotností Země. U těchto planet je"
-" méně pravděpodobné, že jsou kamenné nebo s kapalnou vodou na povrchu. Jsou "
-"také známé pod názvem teplé nad-Země."
+"Planety v obyvatelné zóně, které mají poloměr od 1,5 do 2,5 poloměru Země "
+"nebo hmotnost od 5 do 10 hmotností Země. U těchto planet je méně "
+"pravděpodobné, že jsou kamenné nebo s kapalnou vodou na povrchu. Jsou také "
+"známé pod názvem teplé nad-Země."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:325
 msgid "Proper names"

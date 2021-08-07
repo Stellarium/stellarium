@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# freemanli <freeman.tam@gmail.com>, 2020
+# freemanli <freeman.tam@gmail.com>, 2021
 # 
 #, fuzzy
 msgid ""
@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2021-06-21 10:58+0700\n"
 "PO-Revision-Date: 2020-01-06 16:35+0000\n"
-"Last-Translator: freemanli <freeman.tam@gmail.com>, 2020\n"
+"Last-Translator: freemanli <freeman.tam@gmail.com>, 2021\n"
 "Language-Team: Chinese (Taiwan) (https://www.transifex.com/stellarium/teams/80998/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +23,7 @@ msgstr ""
 #. type: Content of: <h1>
 #: ../../skycultures/al-sufi/description.en.utf8:1
 msgid "Al-Sufi (\"Book of Fixed Stars\")"
-msgstr ""
+msgstr "蘇菲 (《恆星之書》)"
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:2
@@ -50,6 +50,13 @@ msgid ""
 "neglected by Ptolemy, but he did not catalogue them and was faithful to "
 "Ptolemy star catalog."
 msgstr ""
+"《恆星之書》於西元 964 年不久之前所寫。 Paul Kunitzsch 博士將其描述為“著名天文學家阿卜杜勒-拉赫曼·蘇菲，簡稱為阿左飛 Al-"
+"Sufi 或蘇菲，（生於 903 年；死於 986 年）所寫的作品之中最傑出的， 這本書中，蘇菲論述了托勒密的《天文學大成》中所建立和傳達的 48 "
+"個經典星座，將每個星座的描述分成以下四個部分：第一，對星座及其所含恆星的一般討論；這部分也包括蘇菲對托勒密傳統的評論和他自己觀察所注意到的事項。第二，記錄該星座內的傳統阿拉伯星名，以及與托勒密恆星相對應的恆星的準確識別。第三，星座的兩幅圖,"
+" "
+"一個是在天球上看到的，另一個是在天空中看到的。第四，組成該星座的星表，對每顆星星的位置進行口頭描述以及它的經度、緯度和星等大小。這張表的順序與托勒密在《天文學大成》中的星表排列緊密相連。"
+"  <sup><a href=\"#footnote-1\">[1]</a></sup>。除了 Kunitzsch "
+"博士提到的每個星座的四個部分外，蘇菲另外標識被托勒密忽略的 6 等星內的恆星，但他並沒有對它們進行編目，而是忠於托勒密的星表。"
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:3
@@ -69,11 +76,17 @@ msgid ""
 "relationship to the cubit value from Schjellerup<sup><a "
 "href=\"#footnote-3\">[3]</a></sup> and from my research."
 msgstr ""
+"一般討論部分的一個重要觀點是蘇菲對恆星識別採用的方法。 "
+"他以多種方式描述每顆恆星：通過與星座圖繪相對的位置，通過其星等大小，通過它與其他恆星所形成如三角形或弧形的星群，有時通過與銀河相對的位置，以及通過與附近恆星的角距離。"
+" 我計算過蘇菲在他的書中所測量的角距離有 700 多個。 他用於角距離的單位是手肘長、矛長、人的高度、跨度和手指寬。 "
+"蘇菲在他的書中明確指出，一個肘長等於2 度 20 分  <sup><a href=\"#footnote-2\">[2]</a></sup>。 "
+"對於其他單位，Schjellerup 得出了一些數值，但在追蹤探詢 700 個測量值，我得出了不同的值。 下表總結了從 Schjellerup "
+"<sup><a href=\"#footnote-3\">[3]</a></sup> 和從我的研究中所得的單位和相對於手肘長大小的關係。"
 
 #. type: Content of: <h2>
 #: ../../skycultures/al-sufi/description.en.utf8:5
 msgid "Angular distance units used by Al-Sufi"
-msgstr ""
+msgstr "蘇菲使用的角距離單位"
 
 #. type: Content of: <p><p><p><p><p><p><p><p><p>
 #: ../../skycultures/al-sufi/description.en.utf8:9
@@ -93,133 +106,133 @@ msgstr ""
 #: ../../skycultures/maya/description.en.utf8:56
 #: ../../skycultures/maya/description.en.utf8:61
 msgid "&nbsp;"
-msgstr ""
+msgstr "&nbsp;"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:10
 msgid "<b>Schjellerup</b>"
-msgstr ""
+msgstr "<b>Schjellerup</b>"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:11
 msgid "<b>Khalid</b>"
-msgstr ""
+msgstr "<b>Khalid</b>"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:14
 msgid "<b>unit</b>"
-msgstr ""
+msgstr "<b>單位</b>"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:15
 #: ../../skycultures/al-sufi/description.en.utf8:17
 msgid "<b>cubits</b>"
-msgstr ""
+msgstr "<b>手肘長</b>"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:16
 #: ../../skycultures/al-sufi/description.en.utf8:18
 msgid "<b>Angular Value</b>"
-msgstr ""
+msgstr "<b>角距離</b>"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:21
 msgid "spear"
-msgstr ""
+msgstr "矛長"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:22
 #: ../../skycultures/al-sufi/description.en.utf8:24
 msgid "6 cubits"
-msgstr ""
+msgstr "6 手肘長"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:23
 #: ../../skycultures/al-sufi/description.en.utf8:25
 msgid "14°"
-msgstr ""
+msgstr "14°"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:28
 msgid "Man-Height"
-msgstr ""
+msgstr "人高"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:31
 msgid "3 cubits"
-msgstr ""
+msgstr "3 手肘長"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:32
 msgid "7°"
-msgstr ""
+msgstr "7°"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:35
 msgid "cubit"
-msgstr ""
+msgstr "手肘長"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:36
 #: ../../skycultures/al-sufi/description.en.utf8:38
 msgid "1 cubit"
-msgstr ""
+msgstr "1 手肘長"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:37
 #: ../../skycultures/al-sufi/description.en.utf8:39
 msgid "2°20'"
-msgstr ""
+msgstr "2°20'"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:42
 msgid "span"
-msgstr ""
+msgstr "跨度"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:43
 msgid "1/3 of a cubit"
-msgstr ""
+msgstr "手肘長的 1/3"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:44
 msgid "47'"
-msgstr ""
+msgstr "47'"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:45
 msgid "1/2 of a cubit"
-msgstr ""
+msgstr "手肘長的 1/2"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:46
 msgid "1°10'"
-msgstr ""
+msgstr "1°10'"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:49
 msgid "finger"
-msgstr ""
+msgstr "手指寬"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:50
 msgid "1/32 of a cubit"
-msgstr ""
+msgstr "手肘長的 1/32"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:51
 msgid "4.4'"
-msgstr ""
+msgstr "4.4'"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:52
 msgid "1/16 of a cubit"
-msgstr ""
+msgstr "手肘長的 1/16"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:53
 msgid "8.75'"
-msgstr ""
+msgstr "8.75'"
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:57
@@ -230,11 +243,13 @@ msgid ""
 "stars. This means that we are looking at two layers of stars knowledge at "
 "the same time: the Ptolemaic one and the indigenous Arab one."
 msgstr ""
+"蘇菲的書中另一個重要觀點是他記錄了每個星座下的傳統阿拉伯星名，以及與托勒密恆星相對應恆星的準確識別。 "
+"這意味著我們同時在看兩種恆星知識：托勒密的和傳統阿拉伯的。"
 
 #. type: Content of: <h2>
 #: ../../skycultures/al-sufi/description.en.utf8:59
 msgid "The Sky Culture"
-msgstr ""
+msgstr "星空文化"
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:60
@@ -246,6 +261,11 @@ msgid ""
 "class='external text' rel=\"nofollow\">Oxford, Bodleian Library Ms. Marsh "
 "144 dated 1009 AD</a>."
 msgstr ""
+"這個星空文化是是對該書的幾份手稿進行研究的結果，其中最古老的是 <a "
+"href=\"https://iiif.bodleian.ox.ac.uk/iiif/viewer/c1caa84c-f6d2-483f-"
+"9eb4-2439cccdc801#?c=0&m=0&s=0&cv=25&r=0&xywh=-4815%2C-378%2C14782%2C7535\" "
+"class='external text' rel=\"nofollow\">Marsh 144 女士，西元 1009 "
+"年紀錄，牛津博德利圖書館</a>。"
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:61
@@ -260,6 +280,9 @@ msgid ""
 " plus explanations and commentary by Khalid Al-Ajaji<sup><a "
 "href=\"#footnote-4\">[4]</a></sup>."
 msgstr ""
+"首先，這本《恆星之書》手稿是校勘編輯並製成文字。 其次，這是根據蘇菲的描述來確定 48 個星座的每個星星成員，並包括來自 Hipparcos、亮星和 "
+"Bayer 星表的現代恆星名稱來建立了新的表格。 第三，收集和辨識的阿拉伯傳統星名是由蘇菲對應托勒密星表所確定的星名。 前面的所有步驟都包含在加上 "
+"Khalid Al-Ajaji 的解釋和評論《恆星之書》的電子版中<sup><a href=\"#footnote-4\">[4]</a></sup>。"
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:62
@@ -279,6 +302,12 @@ msgid ""
 "star file as secondary names, while names of group of stars were defined "
 "through asterism names and asterism lines files."
 msgstr ""
+"本星空術語的圖繪是取自 《Ulugh Beg manuscript of the Book of Fixed Stars <sup><a "
+"href=\"#footnote-5\">[5]</a></sup>》中的圖像，並被 Kutaibaa Akraa 先生採用於 Stellarium "
+"中。 恆星名稱檔案使用星座內的恆星編號當作主恆星名，星表內的恆星描述當作次恆星名。例如，北極星的的主恆星名為：UMi1，UMi 指的是小熊座 Ursa "
+"Minor ，1 是該星座的第一號星。 如果選擇了恆星的其他名稱，則會顯示次恆星名，它將在螢幕上端顯示 「尾巴末端的星星」。 "
+"星座連線是試圖包括大多數成員恆星來構據星座的形狀。 "
+"對於傳統阿拉伯星星空知識，個別星名被添加到恆星檔案中作為次恆星名，而成群星星的名稱則通過星群名和星群連線檔案加以定義。"
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:63
@@ -289,13 +318,17 @@ msgid ""
 "href=\"#footnote-7\">[7]</a></sup>. The translation was modified in a few "
 "places to agree with Al-Sufi wording."
 msgstr ""
+"從阿拉伯語到英語的恆星描述翻譯是摘自 Ernie Wright 網站 <sup><a "
+"href=\"#footnote-6\">[6]</a></sup>，該網站是從 Toomer 對《天文學大成》的翻譯<sup><a "
+"href=\"#footnote-7\">[7]</a></sup>中轉錄的。 "
+"翻譯詞彙在幾個地方以符合蘇菲的措辭進行了修改。譯註：中文翻譯限於作者的能力是取自翻譯後的英文然後再譯成中文，這個勢必與原來的阿拉伯文意思無法完全吻合甚至會造成誤解，歡迎修正。"
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:64
 msgid ""
 "The single source of the sky culture is the Book of Fixed Stars and the "
 "objective is to give a faithful representation of the book content."
-msgstr ""
+msgstr "星空文化的單一來源是《恆星之書》，目的是忠實地再現書中的內容。"
 
 #. type: Content of: <h3>
 #: ../../skycultures/al-sufi/description.en.utf8:66
@@ -303,7 +336,7 @@ msgstr ""
 #: ../../skycultures/mulapin/description.en.utf8:549
 #: ../../skycultures/seleucid/description.en.utf8:464
 msgid "Fair Use"
-msgstr ""
+msgstr "合理使用"
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:67
@@ -313,6 +346,8 @@ msgid ""
 "contributors, and cite the contributors). The author wishes that this work "
 "be cited according to the common rules."
 msgstr ""
+"此星空術語是依據 CC BY-ND 4.0 國際公共許可證下免費提供的（類似共享，未經諮詢貢獻者請勿更改，並引用貢獻者名稱）。 "
+"作者希望根據通用的規則來引用本作品。"
 
 #. type: Content of: <p><h3>
 #: ../../skycultures/al-sufi/description.en.utf8:69
@@ -333,7 +368,7 @@ msgstr ""
 #: ../../skycultures/tongan/description.en.utf8:85
 #: ../../skycultures/tupi/description.en.utf8:23
 msgid "Author"
-msgstr ""
+msgstr "作者"
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:70
@@ -341,13 +376,14 @@ msgid ""
 "This sky culture was compiled and added to Stellarium by Khalid Al-Ajaji: "
 "turath.alfalak@gmail.com"
 msgstr ""
+"本星空術語是由 Khalid Al-Ajaji: turath.alfalak@gmail.com 所編譯並加入 Stellarium 中。"
 
 #. type: Content of: <h3>
 #: ../../skycultures/al-sufi/description.en.utf8:72
 #: ../../skycultures/chinese/description.en.utf8:2965
 #: ../../skycultures/sami/description.en.utf8:57
 msgid "Notes"
-msgstr ""
+msgstr "注釋"
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:73
@@ -356,11 +392,14 @@ msgid ""
 "Sufi And His Book On The Constellations, XI, pg 57. Northampton [England]: "
 "Variorum Reprints, 1989."
 msgstr ""
+"[1] The Arabs and the Stars, Paul Kunitzsch,The Astronomer Abu'L-Husayn Al-"
+"Sufi And His Book On The Constellations, XI, pg 57. Northampton [England]: "
+"Variorum Reprints, 1989."
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:75
 msgid "[2] See Al-Sufi description in his book of the 14th star in Auriga."
-msgstr ""
+msgstr "[2] 參見蘇菲在他的書中對御夫座第14號星的描述"
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:77
@@ -368,6 +407,8 @@ msgid ""
 "[3] DESCRIPTIONS DES ETOILES FIXES, traduction littérale avec des notes par "
 "H C F C Schjellerup, St Petersbourg, 1874, pg 26-27."
 msgstr ""
+"[3] DESCRIPTIONS DES ETOILES FIXES, traduction littérale avec des notes par "
+"H C F C Schjellerup, St Petersbourg, 1874, pg 26-27."
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:79
@@ -377,6 +418,10 @@ msgid ""
 " class='external text' rel=\"nofollow\">Book of Fixed Stars: Critical "
 "edition with commentary by Khalid AlAjaji</a>."
 msgstr ""
+"[4] <a "
+"href=\"https://drive.google.com/drive/folders/1s6JXzftwjMQ5rgZoGE3718EtBLBZtjzr?usp=sharing\""
+" class='external text' rel=\"nofollow\">Book of Fixed Stars: Critical "
+"edition with commentary by Khalid AlAjaji</a>."
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:81
@@ -386,6 +431,10 @@ msgid ""
 "ibn ʿUmar al-Ṣūfī. Kitāb ṣuwar al-kawākib al-ṯābita, Paris, Bibliothèque "
 "nationale de France Ms. Arabe 5036</a>."
 msgstr ""
+"[5] <a href=\"https://gallica.bnf.fr/ark:/12148/btv1b60006156.r=.langEN\" "
+"class='external text' rel=\"nofollow\">Oulough Beg copy of ʿAbd al-Raḥmān "
+"ibn ʿUmar al-Ṣūfī. Kitāb ṣuwar al-kawākib al-ṯābita, Paris, Bibliothèque "
+"nationale de France Ms. Arabe 5036</a>."
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:83
@@ -394,6 +443,9 @@ msgid ""
 "class='external text' rel=\"nofollow\">Seeing Ancient Stars, Visualization "
 "of the Almagest Catalog</a>."
 msgstr ""
+"[6] <a href=\"http://www.etwright.org/astro/almagest.html#cat\" "
+"class='external text' rel=\"nofollow\">Seeing Ancient Stars, Visualization "
+"of the Almagest Catalog</a>."
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:85
@@ -401,11 +453,13 @@ msgid ""
 "[7] Ptolemy’s ALMAGEST, G. J. Toomer, Princeton University Press, 2nd ed., "
 "1998."
 msgstr ""
+"[7] Ptolemy’s ALMAGEST, G. J. Toomer, Princeton University Press, 2nd ed., "
+"1998."
 
 #. type: Content of: <h1>
 #: ../../skycultures/almagest/description.en.utf8:1
 msgid "Almagest"
-msgstr "至大論"
+msgstr "天文學大成"
 
 #. type: Content of: <p>
 #: ../../skycultures/almagest/description.en.utf8:3
