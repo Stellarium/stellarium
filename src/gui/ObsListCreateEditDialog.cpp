@@ -66,7 +66,6 @@ ObsListCreateEditDialog * ObsListCreateEditDialog::Instance ( string listUuid )
     if ( m_instance == nullptr ) {
         m_instance = new ObsListCreateEditDialog ( listUuid );
     }
-
     return m_instance;
 }
 
@@ -82,13 +81,13 @@ void ObsListCreateEditDialog::createDialogContent()
     connect ( &StelApp::getInstance(), SIGNAL ( languageChanged() ), this, SLOT ( retranslate() ) );
     connect ( ui->closeStelWindow, SIGNAL ( clicked() ), this, SLOT ( close() ) );
 
-    connect( ui->obsListAddObjectButton, &QPushButton::clicked, this, &ObsListCreateEditDialog::obsListAddObjectButtonPressed);
-    connect(ui->obsListExitButton, &QPushButton::clicked, this, &ObsListCreateEditDialog::obsListExitButtonPressed);
-    connect(ui->obsListSaveButton, &QPushButton::clicked, this, &ObsListCreateEditDialog::obsListSaveButtonPressed);
-    connect(ui->obsListRemoveObjectButton, &QPushButton::clicked, this, &ObsListCreateEditDialog::obsListRemoveObjectButtonPressed);
-    connect(ui->obsListImportListButton, &QPushButton::clicked, this, &ObsListCreateEditDialog::obsListImportListButtonPresssed);
-    connect(ui->obsListExportListButton, &QPushButton::clicked, this, &ObsListCreateEditDialog::obsListExportListButtonPressed);
-    connect(ui->nameOfListLineEdit, &QLineEdit::textChanged, this, &ObsListCreateEditDialog::nameOfListTextChange);
+    connect ( ui->obsListAddObjectButton, &QPushButton::clicked, this, &ObsListCreateEditDialog::obsListAddObjectButtonPressed );
+    connect ( ui->obsListExitButton, &QPushButton::clicked, this, &ObsListCreateEditDialog::obsListExitButtonPressed );
+    connect ( ui->obsListSaveButton, &QPushButton::clicked, this, &ObsListCreateEditDialog::obsListSaveButtonPressed );
+    connect ( ui->obsListRemoveObjectButton, &QPushButton::clicked, this, &ObsListCreateEditDialog::obsListRemoveObjectButtonPressed );
+    connect ( ui->obsListImportListButton, &QPushButton::clicked, this, &ObsListCreateEditDialog::obsListImportListButtonPresssed );
+    connect ( ui->obsListExportListButton, &QPushButton::clicked, this, &ObsListCreateEditDialog::obsListExportListButtonPressed );
+    connect ( ui->nameOfListLineEdit, &QLineEdit::textChanged, this, &ObsListCreateEditDialog::nameOfListTextChange );
 
     //Initializing the list of observing list
     obsListListModel->setColumnCount ( ColumnCount );
@@ -113,12 +112,18 @@ void ObsListCreateEditDialog::createDialogContent()
     QHeaderView * header = ui->obsListCreationEditionTreeView->header();
     connect ( header, SIGNAL ( sectionClicked ( int ) ), this, SLOT ( headerClicked ( int ) ) );
 
+    // We hide the closeStelWindow to have only two possibilities to close the dialog:
+    // Save and close and Exit
+    ui->closeStelWindow->setHidden ( true );
+    
+    ui->obsListErrorMessage->setHidden(true);
+
     // In case of creation le nameOfListLineEdit is empty and button save/close must be disabled
     // In case on edition the nameOfListLineEdit is not empty and the button save//close must be enable
-    if(ui->nameOfListLineEdit->text().isEmpty()){
-        ui->obsListSaveButton->setEnabled(false);
+    if ( ui->nameOfListLineEdit->text().isEmpty() ) {
+        ui->obsListSaveButton->setEnabled ( false );
     } else {
-        ui->obsListSaveButton->setEnabled(true);
+        ui->obsListSaveButton->setEnabled ( true );
     }
 
     if ( listUuid_.size() == 0 ) {
@@ -495,8 +500,7 @@ void ObsListCreateEditDialog::obsListImportListButtonPresssed()
             QVariantMap observingListMap = map.value ( QString ( KEY_OBSERVING_LISTS ) ).toMap();
 
             if ( observingListMap.size() == 1 ) {
-                QMap<QString, QVariant>::const_iterator i;
-                listUuid_ = i.value().toString().toStdString();
+                listUuid_ = observingListMap.keys().at ( 0 ).toStdString();
             } else {
                 // define error message if needed
                 return;
@@ -507,7 +511,6 @@ void ObsListCreateEditDialog::obsListImportListButtonPresssed()
         }
         loadObservingList();
         observingListJsonPath = originalobservingListJsonPath;
-        saveObservedObject();
     }
 }
 
@@ -516,9 +519,19 @@ void ObsListCreateEditDialog::obsListImportListButtonPresssed()
 */
 void ObsListCreateEditDialog::obsListSaveButtonPressed()
 {
-    saveObservedObject();
-    this->close();
-    emit exitButtonClicked();
+    if ( !this->listName_.isEmpty() && this->listName_.contains ( ui->nameOfListLineEdit->text() ) ) {
+        QString errorMessage;
+        errorMessage.append("Error: a list with the name ").append(ui->nameOfListLineEdit->text()).append(" already exists !");
+        qWarning() << "[ObservingList Creation/Edition] Error: a list with the name " << ui->nameOfListLineEdit->text() << " already exists !";
+        ui->obsListErrorMessage->setHidden(false);
+        ui->obsListErrorMessage->setText(errorMessage);
+    } else {
+        ui->obsListErrorMessage->setHidden(true);
+        saveObservedObject();
+        this->close();
+        emit exitButtonClicked();
+    }
+
 }
 
 /*
@@ -714,20 +727,27 @@ void ObsListCreateEditDialog::loadObservingList()
     }
 }
 
-
 /*
  * Called when the text of the nameOfListLineEdit change
 */
 void ObsListCreateEditDialog::nameOfListTextChange()
 {
-    if(ui->nameOfListLineEdit->text().isEmpty()){
-        ui->obsListSaveButton->setEnabled(false);
+    ui->obsListErrorMessage->setHidden(true);
+    if ( ui->nameOfListLineEdit->text().isEmpty() ) {
+        ui->obsListSaveButton->setEnabled ( false );
     } else {
-        ui->obsListSaveButton->setEnabled(true);
+        ui->obsListSaveButton->setEnabled ( true );
     }
-    
+
 }
 
+/*
+ * Setter for listName
+*/
+void ObsListCreateEditDialog::setListName ( QList<QString> listName )
+{
+    this->listName_ = listName;
+}
 
 /*
  * Destructor of singleton

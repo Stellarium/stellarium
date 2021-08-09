@@ -319,6 +319,20 @@
         </item>
        </layout>
       </item>
+      <item row="7" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QLabel" name="obsListErrorMessage">
+          <property name="styleSheet">
+           <string notr="true">QLabel {color : red;}</string>
+          </property>
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
      </layout>
     </widget>
    </item>

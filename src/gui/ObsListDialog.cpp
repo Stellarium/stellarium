@@ -36,6 +36,7 @@
 #include "LabelMgr.hpp"
 
 #include "ui_obsListDialog.h"
+#include <QSortFilterProxyModel>
 
 using namespace std;
 
@@ -77,8 +78,9 @@ void ObsListDialog::createDialogContent()
     connect ( ui->obsListDeleteButton, SIGNAL ( clicked() ), this, SLOT ( obsListDeleteButtonPressed() ) );
     connect ( ui->obsListTreeView, SIGNAL ( doubleClicked ( QModelIndex ) ), this, SLOT ( selectAndGoToObject ( QModelIndex ) ) );
 
-    //BookmarksListCombo
+    //obsListCombo settings
     connect ( ui->obsListComboBox, SIGNAL ( activated ( int ) ), this, SLOT ( loadSelectedObservingList ( int ) ) );
+    ui->obsListComboBox->model()->sort(0);
 
     //Initialize the list of observing lists
     obsListListModel->setColumnCount ( ColumnCount );
@@ -283,6 +285,7 @@ void ObsListDialog::invokeObsListCreateEditDialog ( string listUuid )
 {
     createEditDialog_instance = ObsListCreateEditDialog::Instance ( listUuid );
     connect ( createEditDialog_instance, SIGNAL ( exitButtonClicked() ), this, SLOT ( obsListCreateEditDialogClosed() ) );
+    createEditDialog_instance->setListName(listName);
     createEditDialog_instance->setVisible ( true );
 }
 
@@ -317,11 +320,14 @@ void ObsListDialog::loadListsName()
                     QVariant var = i.value();
                     QVariantMap data = var.value<QVariantMap>();
                     QString listName = data.value ( KEY_NAME ).value<QString>();
+                    this->listName.append(listName);
                     ui->obsListComboBox->addItem ( listName, listUuid );
                     if ( defaultListUuid == listUuid ) {
                         defaultListUuid_ = defaultListUuid;
                     }
                 }
+                //ui->obsListComboBox->model()->sort(0);
+                //loadDefaultList();
             }
         } catch ( std::runtime_error &e ) {
             qWarning() << "[ObservingList] File format is wrong! Error: " << e.what();
@@ -679,6 +685,22 @@ void ObsListDialog::obsListCreateEditDialogClosed()
     ObsListCreateEditDialog::kill();
     createEditDialog_instance = Q_NULLPTR;
 }
+
+
+/*
+ * Override of the StelDialog::setVisible((bool) methode
+ * We need to load the default liste when opening the obsListDialog
+*/
+void ObsListDialog::setVisible ( bool v )
+{
+    if (v){
+        StelDialog::setVisible(true);
+        this->loadDefaultList();
+    }else{
+        StelDialog::setVisible(false);
+    }
+}
+
 
 
 

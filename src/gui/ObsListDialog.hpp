@@ -40,6 +40,8 @@ public:
 
     //! Notify that the application style changed
     void styleChanged();
+    
+    void setVisible ( bool v );
 
 protected:
     Ui_obsListDialogForm *ui;
@@ -56,6 +58,7 @@ private:
     QHash<QString, observingListItem> observingListItemCollection;
     QList<int> highlightLabelIDs;
     QString defaultListUuid_;
+    QList<QString> listName;
 
     //! Set header names for observing list table
     void setObservingListHeaderNames();

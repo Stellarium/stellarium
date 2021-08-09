@@ -40,9 +40,11 @@ public:
 
     //! Notify that the application style changed
     void styleChanged();
-    
+
     //! called when click on button close in top right corner
     void close();
+
+    void setListName ( QList<QString> listName );
 
 protected:
     static ObsListCreateEditDialog * m_instance;
@@ -60,6 +62,9 @@ private:
     std::string listUuid_;
     QString observingListJsonPath;
     QHash<QString, observingListItem> observingListItemCollection;
+
+    //List names
+    QList<QString> listName_;
 
     //! Sorting of the list ex: right ascension
     QString sorting;
@@ -87,6 +92,8 @@ private:
     //Private constructor and destructor
     ObsListCreateEditDialog ( std::string listUuid );
     virtual ~ObsListCreateEditDialog();
+
+
 
 
 public slots:
