@@ -1,8 +1,25 @@
-\begin{longtable}{r@{\,}r|r@{h}r@{m}r<{s}|r@{°}r@{'}r<{''}||r@{h}r@{m}r<{s}|r@{°}r@{'}r<{''}}
+% Part of Stellarium User Guide.
+% This table compares results from JPL Horizons to Stellarium. 
+% We compare results in UT, but see differences caused (hopefully only) by DeltaT handling. 
 
+\begin{longtable}{r@{\,}r|r@{h\,}r@{m\,}r<{s}|r@{°\,}r@{'\,}r<{''}||r@{h\,}r@{m\,}r<{s}|r@{°\,}r@{'\,}r<{''}}
+
+\caption{An ephemeris comparison between Stellarium and JPL
+  Horizons. Both are showing results from geocentric apparent
+  coordinates (with slightly different models for precession, nutation
+  and aberration; JPL results are also corrected for light
+  deflection). While results for present times agree very well,
+  results for the past seem to diverge a bit, presumably caused by
+  differences in $\Delta T$ handling.}
+\label{tab:accuracy:UT}\\
 \multicolumn{2}{c}{}&\multicolumn{6}{c||}{JPL Horizons} & \multicolumn{6}{c}{Stellarium 0.21.2$\beta$}\\ 
-UT Date   & Time   & \multicolumn{3}{c}{RA J2000.0} & \multicolumn{3}{c||}{DE2000.0} & \multicolumn{3}{c}{$\alpha_{J2000.0}$} & \multicolumn{3}{c}{$\delta_{J2000.0}$} \\
-\endhead
+UT Date   & Time   & \multicolumn{3}{c}{RA J2000.0} & \multicolumn{3}{c||}{DE J2000.0} & \multicolumn{3}{c}{$\alpha_{J2000.0}$} & \multicolumn{3}{c}{$\delta_{J2000.0}$} \\
+\midrule
+\endfirsthead
+  
+\multicolumn{2}{c}{}&\multicolumn{6}{c||}{JPL Horizons} & \multicolumn{6}{c}{Stellarium 0.21.2$\beta$}\\ 
+UT Date   & Time   & \multicolumn{3}{c}{RA J2000.0} & \multicolumn{3}{c||}{DE J2000.0} & \multicolumn{3}{c}{$\alpha_{J2000.0}$} & \multicolumn{3}{c}{$\delta_{J2000.0}$} \\
+\midrule\endhead
   
 SUN\\
 b2500-Jan-01 & 00:00  &   17 & 24 & 24.70 & -23 & 43 & 11.8 & 17&24&23.01 & -23&43&03.7\\ % -2499-01-01T00:00:00

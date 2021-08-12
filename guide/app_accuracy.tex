@@ -15,8 +15,10 @@ Stellarium originally was developed to present a beautiful simulation
 of the night sky, mostly to understand what is visible in the sky when
 you leave your house, i.e., for present times. To save computation
 time, some concessions were made in astronomical accuracy by using
-simplified models which seemed acceptable at that time. However, many
-users started to overstress Stellarium's capabilities to simulate the
+simplified models which seemed acceptable at that time which was also
+close to the standard epoch of J2000.0. However, time is progressing,
+precession becomes noticeable when pointing telescopes to J2000.0 coordinates, and some 
+users also started to overstress Stellarium's capabilities to simulate the
 historical sky of many centuries in the past, and found --- or even
 worse: did not find, but simply published --- the resulting
 inconsistencies and errors.  Unfortunately, celestial motions are
@@ -31,15 +33,17 @@ accuracy, including relativistic effects or the deflection of light by
 the Solar gravity field, may still be required for critical
 observations of stellar occultations by asteroids, grazing
 occultations of stars by the Moon or similar things. Stellarium does
-not compute these effects. There are more specialized programs on
-these topics, please use them.
+not compute these effects, and is definitely not capable for detailed
+planning of your spacecraft missions to the planets.
+There are more specialized programs for these topics, please use them.
 
 Therefore, when using Stellarium for scientific work like eclipse
 simulation to illustrate records found in Cuneiform tablets, always
 also use some other reference to compare, and of course specify the
 program version you used for your work. (Use at least version 0.21.2
-of Stellarium!)  You can of course contact us if you are willing and
-able to help improving Stellarium's accuracy even further!
+of Stellarium!)  You can of course contact us if you bring a solid background
+in fundamental astronomy and are willing and able to help improving
+Stellarium's accuracy even further!
 
 \section{Date Range}
 \label{sec:Accuracy:DateRange}
@@ -90,7 +94,7 @@ range. This is obviously a mathematical trick to keep
 continuity. Still, positions may be somewhat useful outside this
 range, but don't expect anything reliable 50,000 years in the past! 
 
-The optionally usable JPL DE431 delivers planet positions strictly for
+The optionally usable JPL DE431 and DE441 deliver planet positions strictly for
 -13000\ldots+17000 only, and nothing outside, but likely with higher accuracy. 
 Outside of this range, positions from VSOP87 will be shown again.
 
@@ -142,7 +146,7 @@ by \citet{2011AA:Vondrak, 2012AA:Vondrak}, and IAU2000B Nutation~\citep{Nutation
 This also now allows proper depiction of the changes in ecliptic obliquity
 and display of ``instantaneous precession circles'' around the
 ecliptic poles. These circles are indeed varying according to
-ecliptical obliquity. Nutation is only computed for about 500 years
+ecliptical obliquity. Nutation is only computed for about 6000 years
 around J2000.0. Nobody could have observed it before 1609, and it is
 unclear for how long this model is applicable.
 
@@ -174,7 +178,7 @@ but you cannot say which longitude the eclipse was covering. The probability to 
 eclipse at a certain interesting location will be very small and should by itself not be used as positive argument 
 for any reasonable statement. This is not a problem of Stellarium, 
 but of current knowledge. To repeat, you may find a solar eclipse in the 6th millennium BC, 
-but you cannot even be sure which side of Earth could observe it!
+but you cannot even be sure which side of Earth could have observed it!
 
 \textbf{WANTED:} A model for $\Delta T$ that works in the Mesolithic! 
 
@@ -212,14 +216,16 @@ independent from calendar systems. Else, you can utilize the Calendars
 plugin (see section \ref{sec:plugin:Calendars}).
 
 Some users have noted and expressed confusion about a difference of one between dates given as BC (or BCE) versus
-Stellarium's negative years.  Note that historical chronology does not
-know a year Zero! (Try to write this date in Roman numbers!)  Year
-1~AD (1~CE) was preceded by year 1~BC (1~BCE). Astronomers want to simplify
-computations and therefore use a year $0$ (equivalent to 1~BC). It is
-simple: 1~BC=$0$, 2~BC=$-1$, \ldots 100~BC=$-99$ (Fig.~\ref{fig:Accuracy:Calendar}).  Stellarium is an
-astronomy program and uses astronomical counting. Other programs may behave differently in this respect. However, the
-Calendars plugin (see section \ref{sec:plugin:Calendars}) even allows
-displaying both counting systems.
+Stellarium's negative years.  
+Note that historical chronology does not know a year Zero! (Try to write this date in Roman numbers!)  
+Year AD~1 (1~CE) was preceded by year 1~BC (1~BCE). 
+Astronomers want to simplify computations and therefore use a year $0$ (equivalent to 1~BC). 
+It is simple: 1~BC=$0$, 2~BC=$-1$, \ldots 100~BC=$-99$ (Fig.~\ref{fig:Accuracy:Calendar}). 
+Stellarium is an astronomy program and uses astronomical counting. 
+Other programs may behave differently in this respect, 
+e.g.\ may even use negative signs to indicate years BC. 
+However, the Calendars plugin (see section \ref{sec:plugin:Calendars}) 
+even allows displaying both counting systems.
 
 \begin{figure}[htb]\centering\small
   \begin{tabular}{l|ccccccccc}
@@ -236,30 +242,35 @@ displaying both counting systems.
 \end{figure}
   
 
-\section{Reference data}
+\section{Comparison to Reference Data}
 \label{sec:Accuracy:JPLcomparison}
 
-This table \newFeature{v0.21.2}provides comparison data between JPL Horizons and
+This table \newFeature{v0.21.2}provides comparison data between JPL
+Horizons\footnote{\url{https://ssd.jpl.nasa.gov/horizons.cgi}} and
 Stellarium. The JPL data were fetched in early July 2021 by our
 attentive user Atque. These are apparent geocentric coordinates
 provided by JPL's solutions DE440/DE441 in J2000.0 equatorial
-coordinates, including corrections for nutation, light time and
-aberration. The right part provides the according values computed by
-Stellarium from DE440/DE441 files. The $\Delta T$ model was set to
-``JPL Horizons'', but using DE* means using a different model
-specialized to the DE ephemeris.  Among the causes for differences we
+coordinates, including corrections for nutation, light time,
+aberration, light deflection in the Solar gravity field, and other
+relativistic effects. The right part provides the according values
+computed by Stellarium from DE440/DE441 files, with corrections for
+nutation, light time and aberration. The $\Delta T$ model was set to
+``JPL Horizons'', but when using DE* files a slightly different model
+specialized to the DE ephemeris is used\footnote{For experts: The value
+  for secular acceleration of the Moon in ELP2000-82B, $\dot{n}=-23.8946$,
+  is replaced by $\dot{n}=-25.8$.}  Among the causes for differences we
 must take into account:
 \begin{itemize}
 \item Stellarium does not provide corrections for diurnal aberration (should not matter for geocentric positions)
 \item Stellarium does not provide corrections for light deflection in the Sun's gravitational field
-\item Stellarium provides nutation only for 500 years around
-  J2000.0. It is undocumented for how long the underlying model is
-  valid.
+%\item Stellarium provides nutation only for 500 years around J2000.0. It is undocumented for how long the underlying model is valid.
+\item JPL Horizons uses different models than Stellarium for precession and nutation\footnote{\url{https://ssd.jpl.nasa.gov/?horizons_doc#specific_quantities}}
 \end{itemize}
-These three may cause differences in the range of a few
-arcseconds. The apparent drift that we can observe in the remote past
-may stem from different assumptions regarding $\Delta T$ (see
-\ref{sec:Concepts:DeltaT}) or from other reasons yet to be identified. 
+The first item should not make a difference. The next two may cause
+differences in the range of a few arcseconds. The apparent drift that
+we can observe in the remote past may stem from different assumptions
+regarding $\Delta T$ (see \ref{sec:Concepts:DeltaT}) or from other
+reasons yet to be identified. Competent help welcome!
 
 
 \scriptsize
