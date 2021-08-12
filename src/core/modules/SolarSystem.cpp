@@ -109,7 +109,8 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	, ephemerisJupiterMarkerColor(Vec3f(0.3f, 1.0f, 1.0f))
 	, ephemerisSaturnMarkerColor(Vec3f(0.0f, 1.0f, 0.0f))
 	, allTrails(Q_NULLPTR)
-	, conf(StelApp::getInstance().getSettings())
+	, conf(StelApp::getInstance().getSettings()),
+	lightTimeSunPosition(0.,0.,0.)
 {
 	planetNameFont.setPixelSize(StelApp::getInstance().getScreenFontSize());
 	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
@@ -1182,11 +1183,11 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 		{
 			p->computePosition(dateJDE, Vec3d(0.));
 		}
+		const Vec3d obsPosJDE=observerPlanet->getHeliocentricEclipticPos();
 		// BEGIN HACK: 0.16.0post for solar aberration/light time correction
 		// This fixes eclipse bug LP:#1275092) and outer planet rendering bug (LP:#1699648) introduced by the first fix in 0.16.0.
 		// We compute a "light time corrected position" for the sun and apply it only for rendering, not for other computations.
 		// A complete solution should likely "just" implement aberration for all objects.
-		const Vec3d obsPosJDE=observerPlanet->getHeliocentricEclipticPos();
 		const double obsDist=obsPosJDE.length();
 
 		observerPlanet->computePosition(dateJDE-obsDist * (AU / (SPEED_OF_LIGHT * 86400.)), Vec3d(0.));

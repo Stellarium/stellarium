@@ -518,12 +518,12 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	oss << getCommonInfoString(core, flags);
 
 	// Debug help.
-	//oss << "Apparent Magnitude Algorithm: " << getApparentMagnitudeAlgorithmString() << " " << vMagAlgorithm << "<br>";
-	//Vec3d sunAberr=GETSTELMODULE(SolarSystem)->getLightTimeSunPosition()-GETSTELMODULE(SolarSystem)->getEarth()->eclipticPos;
-	//double lon, lat;
-	//StelUtils::rectToSphe(&lon, &lat, sunAberr);
-	//oss << "Sun (light time corrected) at &lambda;=" << StelUtils::radToDmsStr(StelUtils::fmodpos(lon, 2.*M_PI)) << " &beta;=" << StelUtils::radToDmsStr(lat) << "<br>";
-#ifndef NDEBUG
+	oss << "Apparent Magnitude Algorithm: " << getApparentMagnitudeAlgorithmString() << " " << vMagAlgorithm << "<br>";
+	Vec3d sunAberr=GETSTELMODULE(SolarSystem)->getLightTimeSunPosition()-GETSTELMODULE(SolarSystem)->getEarth()->eclipticPos;
+	double lon, lat;
+	StelUtils::rectToSphe(&lon, &lat, sunAberr);
+	oss << "Sun (light time corrected) at &lambda;=" << StelUtils::radToDmsStr(StelUtils::fmodpos(lon, 2.*M_PI)) << " &beta;=" << StelUtils::radToDmsStr(lat) << "<br>";
+//#ifndef NDEBUG
 	// This is mostly for debugging. Maybe also useful for letting people use our results to cross-check theirs, but we should not act as reference, currently...
 	// maybe separate this out into:
 	//if (flags&EclipticCoordXYZ)
@@ -532,15 +532,15 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	{
 		Vec3d eclPos=(englishName=="Sun" ? GETSTELMODULE(SolarSystem)->getLightTimeSunPosition() : eclipticPos);
 		QString algoName("VSOP87");
-		if (EphemWrapper::use_de441(core->getJDE())) algoName="DE441";
 		if (EphemWrapper::use_de440(core->getJDE())) algoName="DE440";
-		if (EphemWrapper::use_de431(core->getJDE())) algoName="DE431";
-		if (EphemWrapper::use_de430(core->getJDE())) algoName="DE430";
-		if (pType>=isAsteroid) algoName="Keplerian"; // TODO: observer/artificial?
+		else if (EphemWrapper::use_de441(core->getJDE())) algoName="DE441";
+		else if (EphemWrapper::use_de430(core->getJDE())) algoName="DE430";
+		else if (EphemWrapper::use_de431(core->getJDE())) algoName="DE431";
+		else if (pType>=isAsteroid) algoName="Keplerian"; // TODO: observer/artificial?
 		// TRANSLATORS: Ecliptical rectangular coordinates
 		oss << QString("%1 XYZ J2000.0 (%2): %3/%4/%5").arg(qc_("Ecliptical","coordinates"), algoName, QString::number(eclPos[0], 'f', 7), QString::number(eclPos[1], 'f', 7), QString::number(eclPos[2], 'f', 7)) << "<br>";
 	}
-#endif
+//#endif
 
 	// Second test avoids crash when observer is on spaceship
 	if (flags&ProperMotion && !core->getCurrentObserver()->isObserverLifeOver())
@@ -906,6 +906,12 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 
 	if (flags&Extra)
 	{
+
+		oss << QString("DEBUG: AberrationPush: %1/%2/%3 AU<br/>")
+			.arg(QString::number(aberrationPush[0], 'f', 6))
+			.arg(QString::number(aberrationPush[1], 'f', 6))
+			.arg(QString::number(aberrationPush[2], 'f', 6));
+
 		const bool withTables = StelApp::getInstance().getFlagUseFormattingOutput();
 		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 		const double angularSize = 2.*getAngularSize(core)*M_PI_180;
@@ -1461,15 +1467,15 @@ Vec3d Planet::getJ2000EquatorialPos(const StelCore *core) const
 	// prepare for aberration: Explan. Suppl. 2013, (7.38)
 	const bool withAberration=core->getUseAberration();
 	Vec3d pos;
-	if (englishName=="Sun")
-		// TODO: Make sure there is nothing more to do!
-		pos = StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(GETSTELMODULE(SolarSystem)->getLightTimeSunPosition() - core->getObserverHeliocentricEclipticPos());
-	else
-	{
+//	if (englishName=="Sun")
+//		// TODO: Make sure there is nothing more to do!
+//		pos = StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(GETSTELMODULE(SolarSystem)->getLightTimeSunPosition() - core->getObserverHeliocentricEclipticPos());
+//	else
+//	{
 		pos = StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(getHeliocentricEclipticPos()
 									    - core->getObserverHeliocentricEclipticPos()
 									    + (withAberration ? aberrationPush : Vec3d(0.)));
-	}
+//	}
 	return pos;
 }
 
@@ -2542,15 +2548,15 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	}
 
 	Mat4d mat;
-	if (englishName=="Sun")
-	{
-		mat = Mat4d::translation(GETSTELMODULE(SolarSystem)->getLightTimeSunPosition()) * rotLocalToParent;
-	}
-	else
-	{
+//	if (englishName=="Sun")
+//	{
+//		mat = Mat4d::translation(GETSTELMODULE(SolarSystem)->getLightTimeSunPosition()) * rotLocalToParent;
+//	}
+//	else
+//	{
 		//mat = Mat4d::translation(eclipticPos+aberrationPush) * rotLocalToParent;
 		mat = Mat4d::translation(eclipticPos) * rotLocalToParent;
-	}
+//	}
 
 	PlanetP p = parent;
 	switch (re.method) {
@@ -2569,7 +2575,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 			}
 			break;
 	}
-	if (englishName!="Sun")
+//	if (englishName!="Sun")
 		mat = Mat4d::translation(aberrationPush) * mat;
 
 	// This removed totally the Planet shaking bug!!!

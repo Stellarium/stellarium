@@ -865,7 +865,8 @@ public:
 	const QStringList getMinorBodiesList() const { return minorBodies; }
 
 	//! Get lighttime corrected solar position (essential to draw the sun during solar eclipse and compute things like eclipse factor etc, until we get aberration working.)
-	const Vec3d getLightTimeSunPosition() const { return lightTimeSunPosition; }
+	//! TODO: MAKE SURE getEclipticPos() includes aberration!
+	const Vec3d getLightTimeSunPosition() const { return sun->getEclipticPos();  } //   return lightTimeSunPosition; }
 
 private slots:
 	//! Called when a new object is selected.
@@ -1097,6 +1098,8 @@ private:
 
 	Vec3d lightTimeSunPosition;			// when observing a solar eclipse, we need solar position 8 minutes ago.
 							// Direct shift caused problems (LP:#1699648), circumvented with this construction.
+							//TODO: get rid of this!
+
 	// 0.16pre observation GZ: this list contains pointers to all orbit objects,
 	// while the planets don't own their orbit objects.
 	// Would it not be better to hand over the orbit object ownership to the Planet object?
