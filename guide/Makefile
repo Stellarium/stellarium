@@ -66,9 +66,9 @@ ifeq ($(OS),Windows_NT) # variable OS not set under Win10/Ubuntu!
 		MAKE4HT=make4ht.exe
 	endif
 else 
-	# OS not Windows on most Non-Windows environments, but may still be Ubuntu bash on Windows! 
-	# In essence, if tool not found, fall back to that tools' names from the Windows environment.
-	# It is assumed that at least the Windows tools are configured to lie in PATH.
+        # OS not Windows on most Non-Windows environments, but may still be Ubuntu bash on Windows! 
+        # In essence, if tool not found, fall back to that tools' names from the Windows environment.
+        # It is assumed that at least the Windows tools are configured to lie in PATH.
 	ifneq ($(findstring pdflatex, $(shell which pdflatex)),pdflatex)
 		PDFLATEX=pdflatex.exe
 	endif
@@ -166,9 +166,9 @@ html: guide.html
 #Makefile: ;
 # we must call makeindex again just before final run to update page numbers. Not too intuitive, but seems necessary...
 guide.pdf : guide.ind guide.bbl 
-	${PDFLATEX} guide.tex
+	${PDFLATEX} '\PassOptionsToPackage{draft}{graphicx}\input guide.tex'
 	${MAKEINDEX} guide.idx -s StyleInd.ist
-	${PDFLATEX} guide.tex
+	${PDFLATEX} '\PassOptionsToPackage{draft}{graphicx}\input guide.tex'
 	${PDFLATEX} guide.tex
 	@touch -c guide.ind
 	@touch -c guide.bbl
@@ -284,17 +284,17 @@ guide.mk4:
 	@echo   Make:htlatex()     >> $@
 	@echo   Make:htlatex()     >> $@
 	@echo   Make:match("html$",process)                                 >> $@
- 	@echo  Make:match("html$", "tidy -m -xml -utf8 -q -i ${filename}")  >> $@
+	@echo  Make:match("html$", "tidy -m -xml -utf8 -q -i ${filename}")  >> $@
 	@echo end                  >> $@
 
-	
-	
+
+
 # Totally non-tex4ht: Try pandoc? (start to collect arguments here, try "make pandoc")
 # Ubuntu on Windows only has pandoc 1.12. Maybe V2 would be more complete? In any case, tabu or some other package seems to be a problem.
 pandoc:
 		pandoc -f latex -t plain guide.tex
 
-		
+
 # Hint on restoring initial view settings
 # from https://stackoverflow.com/questions/25544002/command-line-tool-to-mark-pdf-to-open-in-single-page-view	
 #guide_pdfmark.ps: Makefile
