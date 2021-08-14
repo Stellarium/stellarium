@@ -335,6 +335,9 @@ void ShortcutsDialog::createDialogContent()
 	QString style = "QLabel { color: rgb(238, 238, 238); }";
 	ui->primaryLabel->setStyleSheet(style);
 	ui->altLabel->setStyleSheet(style);
+
+	// set initial focus to action search
+	ui->lineEditSearch->setFocus();
 }
 
 void ShortcutsDialog::polish()
