@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>654</width>
+    <width>737</width>
     <height>436</height>
    </rect>
   </property>
@@ -297,6 +297,18 @@
    </slots>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>shortcutsTreeView</tabstop>
+  <tabstop>lineEditSearch</tabstop>
+  <tabstop>primaryShortcutEdit</tabstop>
+  <tabstop>primaryBackspaceButton</tabstop>
+  <tabstop>applyButton</tabstop>
+  <tabstop>altShortcutEdit</tabstop>
+  <tabstop>altBackspaceButton</tabstop>
+  <tabstop>restoreDefaultsButton</tabstop>
+  <tabstop>restoreAllDefaultsButton</tabstop>
+  <tabstop>closeStelWindow</tabstop>
+ </tabstops>
  <resources>
   <include location="../../data/gui/guiRes.qrc"/>
  </resources>
