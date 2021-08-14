@@ -1226,7 +1226,7 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 			Vec3d aberrationPush(0.);
 			if (withAberration)
 				aberrationPush=lightTimeDays*aberrationPushSpeed;
-			// The next call may alreada do nothing if the time difference to the previous round is not large enough.
+			// The next call may already do nothing if the time difference to the previous round is not large enough.
 			p->computePosition(dateJDE-lightTimeDays, aberrationPush);
 //			p->setExtraInfoString(StelObject::DebugAid, QString("LightTime %1d; obsSpeed %2/%3/%4 AU/d")
 //					      .arg(QString::number(lightTimeDays, 'f', 3))
