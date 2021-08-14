@@ -907,10 +907,10 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 	if (flags&Extra)
 	{
 
-		oss << QString("DEBUG: AberrationPush: %1/%2/%3 AU<br/>")
-			.arg(QString::number(aberrationPush[0], 'f', 6))
-			.arg(QString::number(aberrationPush[1], 'f', 6))
-			.arg(QString::number(aberrationPush[2], 'f', 6));
+		oss << QString("DEBUG: AberrationPush: %1/%2/%3 km<br/>")
+			.arg(QString::number(AU * aberrationPush[0], 'f', 6))
+			.arg(QString::number(AU * aberrationPush[1], 'f', 6))
+			.arg(QString::number(AU * aberrationPush[2], 'f', 6));
 
 		const bool withTables = StelApp::getInstance().getFlagUseFormattingOutput();
 		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
@@ -1474,7 +1474,7 @@ Vec3d Planet::getJ2000EquatorialPos(const StelCore *core) const
 //	{
 		pos = StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(getHeliocentricEclipticPos()
 									    - core->getObserverHeliocentricEclipticPos()
-									    + (withAberration ? aberrationPush : Vec3d(0.)));
+									    + (withAberration && (englishName!="Moon") ? aberrationPush : Vec3d(0.))); // FIXME: Why exclude the Moon?????
 //	}
 	return pos;
 }
@@ -1558,9 +1558,9 @@ void Planet::computePosition(const double dateJDE, const Vec3d &aberrationPush)
 	if (fabs(lastJDE-dateJDE)>deltaJDE)
 	{
 		coordFunc(dateJDE, eclipticPos, eclipticVelocity, orbitPtr);
-		this->aberrationPush=aberrationPush;
 		lastJDE = dateJDE;
 	}
+	this->aberrationPush=aberrationPush;
 }
 
 // Compute the transformation matrix from the local Planet coordinate system to the parent Planet coordinate system.
@@ -2576,6 +2576,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 			break;
 	}
 //	if (englishName!="Sun")
+		if (englishName!="Moon") // FIXME: Why exclude the Moon???
 		mat = Mat4d::translation(aberrationPush) * mat;
 
 	// This removed totally the Planet shaking bug!!!
@@ -3207,8 +3208,8 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 	{
 		// Let's hide halo when inner planet between Sun and observer (or moon between planet and observer).
 		// Do not hide Earth's moon's halo below ~-45degrees when observing from earth.
-		Vec3d obj = getJ2000EquatorialPos(core);
-		Vec3d par = getParent()->getJ2000EquatorialPos(core);
+		const Vec3d obj = getJ2000EquatorialPos(core);
+		const Vec3d par = getParent()->getJ2000EquatorialPos(core);
 		const double angle = obj.angle(par)*M_180_PI;
 		const double asize = getParent()->getSpheroidAngularSize(core);
 		if (angle<=asize)
@@ -3234,9 +3235,9 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		if (this==ssm->getSun())
 			haloColorToDraw.set(haloColor[0], powf(0.75f, extinctedMag) * haloColor[1], powf(0.42f, 0.9f*extinctedMag) * haloColor[2]);
 		else
-			haloColorToDraw.set(haloColor[0], magFactorGreen * haloColor[1], static_cast<float>(magFactorBlue) * haloColor[2]);
+			haloColorToDraw.set(haloColor[0], magFactorGreen * haloColor[1], magFactorBlue * haloColor[2]);
 		if (this==ssm->getMoon())
-			haloColorToDraw*=0.6f; //GZ: Attempt to make lunar halo less glaring...
+			haloColorToDraw*=0.6f; // make lunar halo less glaring, so that phase is discernible even if zoomed out.
 
 		if (this!=ssm->getSun() || drawSunHalo)
 			core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp.toVec3f(), surfArcMin2, getVMagnitudeWithExtinction(core), haloColorToDraw);
@@ -3392,6 +3393,7 @@ void Planet::computeModelMatrix(Mat4d &result) const
 			}
 			break;
 	}
+	// FIXME: What about the Moon here?
 	result = Mat4d::translation(aberrationPush) * result * Mat4d::zrotation(M_PI/180.*static_cast<double>(axisRotation + 90.f));
 }
 
