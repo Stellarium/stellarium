@@ -459,7 +459,7 @@ class Translations
 		// TRANSLATORS: Name of the sky culture
 		N_("Al-Sufi");
 		// TRANSLATORS: Name of the sky culture
-		N_("Almagest");
+		N_("Greek (Almagest)");
 		// TRANSLATORS: Name of the sky culture
 		N_("Anutan");
 		// TRANSLATORS: Name of the sky culture
