@@ -866,7 +866,7 @@ public:
 
 	//! Get lighttime corrected solar position (essential to draw the sun during solar eclipse and compute things like eclipse factor etc, until we get aberration working.)
 	//! TODO: MAKE SURE getEclipticPos() includes aberration!
-	const Vec3d getLightTimeSunPosition() const { return sun->getEclipticPos();  } //   return lightTimeSunPosition; }
+	//const Vec3d getLightTimeSunPosition() const { return sun->getEclipticPos();  } //   return lightTimeSunPosition; }
 
 private slots:
 	//! Called when a new object is selected.
@@ -1096,7 +1096,7 @@ private:
 	QHash<QString, QString> planetNativeNamesMap, planetNativeNamesMeaningMap;
 	QStringList minorBodies;
 
-	Vec3d lightTimeSunPosition;			// when observing a solar eclipse, we need solar position 8 minutes ago.
+	//Vec3d lightTimeSunPosition;			// when observing a solar eclipse, we need solar position 8 minutes ago.
 							// Direct shift caused problems (LP:#1699648), circumvented with this construction.
 							//TODO: get rid of this!
 
