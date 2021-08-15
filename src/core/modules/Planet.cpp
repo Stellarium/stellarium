@@ -519,7 +519,8 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	// Debug help.
 	oss << "Apparent Magnitude Algorithm: " << getApparentMagnitudeAlgorithmString() << " " << vMagAlgorithm << "<br>";
-	Vec3d sunAberr=GETSTELMODULE(SolarSystem)->getLightTimeSunPosition()-GETSTELMODULE(SolarSystem)->getEarth()->eclipticPos;
+	//Vec3d sunAberr=GETSTELMODULE(SolarSystem)->getLightTimeSunPosition()-GETSTELMODULE(SolarSystem)->getEarth()->eclipticPos;
+	Vec3d sunAberr=GETSTELMODULE(SolarSystem)->getSun()->eclipticPos  +GETSTELMODULE(SolarSystem)->getSun()->getAberrationPush()    -GETSTELMODULE(SolarSystem)->getEarth()->eclipticPos;
 	double lon, lat;
 	StelUtils::rectToSphe(&lon, &lat, sunAberr);
 	oss << "Sun (light time corrected) at &lambda;=" << StelUtils::radToDmsStr(StelUtils::fmodpos(lon, 2.*M_PI)) << " &beta;=" << StelUtils::radToDmsStr(lat) << "<br>";
@@ -530,7 +531,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	// For now: add to EclipticCoordJ2000 group
 	if (flags&EclipticCoordJ2000)
 	{
-		Vec3d eclPos=(englishName=="Sun" ? GETSTELMODULE(SolarSystem)->getLightTimeSunPosition() : eclipticPos);
+		//Vec3d eclPos=(englishName=="Sun" ? GETSTELMODULE(SolarSystem)->getLightTimeSunPosition() : eclipticPos);
 		QString algoName("VSOP87");
 		if (EphemWrapper::use_de440(core->getJDE())) algoName="DE440";
 		else if (EphemWrapper::use_de441(core->getJDE())) algoName="DE441";
@@ -538,7 +539,9 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		else if (EphemWrapper::use_de431(core->getJDE())) algoName="DE431";
 		else if (pType>=isAsteroid) algoName="Keplerian"; // TODO: observer/artificial?
 		// TRANSLATORS: Ecliptical rectangular coordinates
-		oss << QString("%1 XYZ J2000.0 (%2): %3/%4/%5").arg(qc_("Ecliptical","coordinates"), algoName, QString::number(eclPos[0], 'f', 7), QString::number(eclPos[1], 'f', 7), QString::number(eclPos[2], 'f', 7)) << "<br>";
+		oss << QString("%1 XYZ J2000.0 (%2) without aberration: %3/%4/%5 AU").arg(qc_("Ecliptical","coordinates"), algoName, QString::number(eclipticPos[0], 'f', 7), QString::number(eclipticPos[1], 'f', 7), QString::number(eclipticPos[2], 'f', 7)) << "<br>";
+		Vec3d eclAb=eclipticPos+aberrationPush;
+		oss << QString("%1 XYZ J2000.0 (%2) with aberration: %3/%4/%5 AU").arg(qc_("Ecliptical","coordinates"), algoName, QString::number(eclAb[0], 'f', 7), QString::number(eclAb[1], 'f', 7), QString::number(eclAb[2], 'f', 7)) << "<br>";
 	}
 //#endif
 
@@ -927,6 +930,12 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 			.arg(QString::number(AU * earthAberrationPush[1], 'f', 6))
 			.arg(QString::number(AU * earthAberrationPush[2], 'f', 6));
 
+		PlanetP sun = ssystem->getSun();
+		Vec3d sunAberrationPush=sun->getAberrationPush();
+		oss << QString("DEBUG: Sun's AberrationPush: %1/%2/%3 km<br/>")
+			.arg(QString::number(AU * sunAberrationPush[0], 'f', 6))
+			.arg(QString::number(AU * sunAberrationPush[1], 'f', 6))
+			.arg(QString::number(AU * sunAberrationPush[2], 'f', 6));
 
 
 		//PlanetP currentPlanet = core->getCurrentPlanet();
@@ -3141,6 +3150,13 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		
 		// Set the main source of light to be the sun
 		Vec3d sunPos(0.);
+		// HAAAAAAAAAAAAAAA This must be the aberrated sun!?!?
+		if (core->getUseAberration())
+		{
+			sunPos+=ssm->getSun()->getAberrationPush();
+		}
+
+
 		core->getHeliocentricEclipticModelViewTransform()->forward(sunPos);
 		light.position=sunPos;
 
