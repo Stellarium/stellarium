@@ -820,13 +820,16 @@ void SkyLine::draw(StelCore *core) const
 			// It seems better to just switch it off.
 			if (GETSTELMODULE(SolarSystem)->getFlagMoonScale()) return;
 
+			// We compute the shadow circle attached to the geocenter, but must point it in the opposite direction of the sun's aberrated position.
 			const Vec3d pos=earth->getEclipticPos();
+			const Vec3d dir=sun->getAberrationPush() + pos;
 			double lambda, beta;
-			StelUtils::rectToSphe(&lambda, &beta, pos);
+			StelUtils::rectToSphe(&lambda, &beta, dir);
 			const QPair<Vec3d, Vec3d> radii=GETSTELMODULE(SolarSystem)->getEarthShadowRadiiAtLunarDistance();
 			const double radius=(line_type==EARTH_UMBRA ? radii.first[1] : radii.second[1]);
 			const double dist=moon->getEclipticPos().length();  // geocentric Lunar distance [AU]
 			const Mat4d rot=Mat4d::zrotation(lambda)*Mat4d::yrotation(-beta);
+
 			StelVertexArray circle(StelVertexArray::LineLoop);
 			for (int i=0; i<360; ++i)
 			{
@@ -1559,11 +1562,14 @@ void SkyPoint::draw(StelCore *core) const
 		}
 		case EARTH_UMBRA_CENTER:
 		{
+			// We compute the shadow center attached to the geocenter, but must point it in the opposite direction of the sun's aberrated position.
 			const Vec3d pos=earth->getEclipticPos();
+			const Vec3d dir=sun->getAberrationPush() + pos;
 			double lambda, beta;
-			StelUtils::rectToSphe(&lambda, &beta, pos);
+			StelUtils::rectToSphe(&lambda, &beta, dir);
 			const double dist=GETSTELMODULE(SolarSystem)->getMoon()->getEclipticPos().length();
 			const Mat4d rot=Mat4d::zrotation(lambda)*Mat4d::yrotation(-beta);
+
 			Vec3d point(dist, 0.0, 0.0);
 			rot.transfo(point);
 			Vec3d coord = pos+point;
