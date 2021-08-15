@@ -919,6 +919,16 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 		const double siderealDay = getSiderealDay(); // =re.period
 		static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 		PlanetP earth = ssystem->getEarth();
+
+
+		Vec3d earthAberrationPush=earth->getAberrationPush();
+		oss << QString("DEBUG: Earth's AberrationPush: %1/%2/%3 km<br/>")
+			.arg(QString::number(AU * earthAberrationPush[0], 'f', 6))
+			.arg(QString::number(AU * earthAberrationPush[1], 'f', 6))
+			.arg(QString::number(AU * earthAberrationPush[2], 'f', 6));
+
+
+
 		//PlanetP currentPlanet = core->getCurrentPlanet();
 		const bool onEarth = (core->getCurrentPlanet()==earth);
 		// TRANSLATORS: Unit of measure for speed - kilometers per second
@@ -1474,7 +1484,7 @@ Vec3d Planet::getJ2000EquatorialPos(const StelCore *core) const
 //	{
 		pos = StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(getHeliocentricEclipticPos()
 									    - core->getObserverHeliocentricEclipticPos()
-									    + (withAberration && (englishName!="Moon") ? aberrationPush : Vec3d(0.))); // FIXME: Why exclude the Moon?????
+									    + (withAberration ? aberrationPush : Vec3d(0.)));
 //	}
 	return pos;
 }
@@ -2576,7 +2586,6 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 			break;
 	}
 //	if (englishName!="Sun")
-		if (englishName!="Moon") // FIXME: Why exclude the Moon???
 		mat = Mat4d::translation(aberrationPush) * mat;
 
 	// This removed totally the Planet shaking bug!!!
@@ -3393,7 +3402,6 @@ void Planet::computeModelMatrix(Mat4d &result) const
 			}
 			break;
 	}
-	// FIXME: What about the Moon here?
 	result = Mat4d::translation(aberrationPush) * result * Mat4d::zrotation(M_PI/180.*static_cast<double>(axisRotation + 90.f));
 }
 

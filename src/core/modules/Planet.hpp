@@ -520,6 +520,8 @@ public:
 
 	//! Return the list of planets which project some shadow on this planet
 	QVector<const Planet*> getCandidatesForShadow() const;
+
+	Vec3d getAberrationPush() const {return aberrationPush; }
 	
 protected:
 	// These components for getInfoString() can be overridden in subclasses

@@ -1177,7 +1177,9 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 // The order is not important since the position is computed relatively to the mother body
 void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 {
-	if (flagLightTravelTime)
+	StelCore *core=StelApp::getInstance().getCore();
+	const bool withAberration=core->getUseAberration();
+	if (flagLightTravelTime || withAberration) // switching on aberration implies light time correction.
 	{
 		for (const auto& p : qAsConst(systemPlanets))
 		{
@@ -1197,24 +1199,18 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 		// We must reset observerPlanet for the next step!
 		observerPlanet->computePosition(dateJDE, Vec3d(0.));
 		// END HACK FOR SOLAR LIGHT TIME/ABERRATION
-		// For higher accuracy, we make two iterations of light time and aberration correction. In the final round, we also compute rotation data.
-		// TODO: Check if this middle round is necessary/useful.
-//		for (const auto& p : qAsConst(systemPlanets))
-//		{
-//			p->setExtraInfoString(StelObject::DebugAid, "");
-//			const double light_speed_correction = (p->getHeliocentricEclipticPos()-obsPosJDE).length() * (AU / (SPEED_OF_LIGHT * 86400.));
-//			p->computePosition(dateJDE-light_speed_correction, Vec3d(0.));
-//		}
-		// And another time. May fix sub-arcsecond inaccuracies, and optionally apply aberration in the way described in Explanatory Supplement (2013), 7.55.
-		StelCore *core=StelApp::getInstance().getCore();
-		const bool withAberration=core->getUseAberration();
+
+		// For higher accuracy, we now make two iterations of light time and aberration correction. In the final round, we also compute rotation data.
+		// May fix sub-arcsecond inaccuracies, and optionally apply aberration in the way described in Explanatory Supplement (2013), 7.55.
+		// For reasons unknown (See discussion in GH:#1626) we do not add anything for the Moon when observed from Earth!
+		// Presumably the used ephemerides already provide aberration-corrected positions for the Moon?
 		const Vec3d aberrationPushSpeed=observerPlanet->getHeliocentricEclipticVelocity() * core->getAberrationFactor();
 		for (const auto& p : qAsConst(systemPlanets))
 		{
 			//p->setExtraInfoString(StelObject::DebugAid, "");
 			const double lightTimeDays = (p->getHeliocentricEclipticPos()-obsPosJDE).length() * (AU / (SPEED_OF_LIGHT * 86400.));
 			Vec3d aberrationPush(0.);
-			if (withAberration)
+			if (withAberration && (observerPlanet->englishName!="Earth" || p->englishName!="Moon"))
 				aberrationPush=lightTimeDays*aberrationPushSpeed;
 			p->computePosition(dateJDE-lightTimeDays, aberrationPush);
 		}
@@ -1224,7 +1220,7 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 			//p->setExtraInfoString(StelObject::DebugAid, "");
 			const double lightTimeDays = (p->getHeliocentricEclipticPos()-obsPosJDE).length() * (AU / (SPEED_OF_LIGHT * 86400.));
 			Vec3d aberrationPush(0.);
-			if (withAberration)
+			if (withAberration && (observerPlanet->englishName!="Earth" || p->englishName!="Moon"))
 				aberrationPush=lightTimeDays*aberrationPushSpeed;
 			// The next call may already do nothing if the time difference to the previous round is not large enough.
 			p->computePosition(dateJDE-lightTimeDays, aberrationPush);
