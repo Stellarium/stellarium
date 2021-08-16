@@ -97,7 +97,7 @@ public:
 	StelProjectorFisheye(ModelViewTranformP func) : StelProjector(func) {;}
 	virtual QString getNameI18() const Q_DECL_OVERRIDE;
 	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
-	virtual float getMaxFov() const Q_DECL_OVERRIDE {return 360.0f;}
+	virtual float getMaxFov() const Q_DECL_OVERRIDE {return 180.0f;}
 	virtual bool forward(Vec3f &v) const Q_DECL_OVERRIDE;
 	virtual bool backward(Vec3d &v) const Q_DECL_OVERRIDE;
 	virtual float fovToViewScalingFactor(float fov) const Q_DECL_OVERRIDE;
