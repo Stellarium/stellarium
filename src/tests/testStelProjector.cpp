@@ -214,7 +214,7 @@ void TestStelProjector::testStelProjectorFisheye()
 	StelProjector::ModelViewTranformP modelViewTransform;
 	StelProjectorP projection = StelProjectorP(new StelProjectorFisheye(modelViewTransform));
 	float maxFov = projection->getMaxFov();
-	float expectedFov = 360.f;
+	float expectedFov = 180.f;
 	float actualError = qAbs(maxFov - expectedFov);
 	QVERIFY2(actualError <= ERROR_LIMIT, QString("Max. FOV=%1deg expected FOV=%2deg error=%3 acceptable=%4")
 						.arg(QString::number(maxFov, 'f', 3))
