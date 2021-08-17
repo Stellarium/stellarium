@@ -97,6 +97,11 @@ public slots:
 	//! @return the DeltaT for current simulation time.
 	static QString getDeltaT();
 
+	//! get the DeltaT for the simulation date and time as a double
+	//! in seconds
+	//! @return the DeltaT for current simulation time.
+	static double getDeltaTsec();
+
 	//! get the DeltaT equation name for the simulation date and time as a string
 	//! @return name of the DeltaT equation
 	static QString getDeltaTAlgorithm();
