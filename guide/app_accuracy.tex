@@ -245,26 +245,27 @@ even allows displaying both counting systems.
 \section{Comparison to Reference Data}
 \label{sec:Accuracy:JPLcomparison}
 
-This table \newFeature{v0.21.2}provides comparison data between JPL
+Tables~\ref{tab:accuracy:UT} and \ref{tab:accuracy:TT} \newFeature{v0.21.2}
+provide comparison data between JPL
 Horizons\footnote{\url{https://ssd.jpl.nasa.gov/horizons.cgi}} and
-Stellarium. The JPL data were fetched in early July 2021 by our
+Stellarium. The JPL data were fetched in July 2021 by our
 attentive user Atque. These are apparent geocentric coordinates
 provided by JPL's solutions DE440/DE441 in J2000.0 equatorial
-coordinates, including corrections for nutation, light time,
+coordinates, including JPL's corrections for nutation, light time,
 aberration, light deflection in the Solar gravity field, and other
 relativistic effects. The right part provides the according values
-computed by Stellarium from DE440/DE441 files, with corrections for
+computed by Stellarium from DE440/DE441 files, with the current state of corrections for
 nutation, light time and aberration. The $\Delta T$ model was set to
 ``JPL Horizons'', but when using DE* files a slightly different model
 specialized to the DE ephemeris is used\footnote{For experts: The value
   for secular acceleration of the Moon in ELP2000-82B, $\dot{n}=-23.8946$,
-  is replaced by $\dot{n}=-25.8$.}  Among the causes for differences we
-must take into account:
+  is replaced by $\dot{n}=-25.8$.}, resulting in differences in the effective 
+  value of $\Delta T$.  Among the causes for differences we must take into account:
 \begin{itemize}
 \item Stellarium does not provide corrections for diurnal aberration (should not matter for geocentric positions)
 \item Stellarium does not provide corrections for light deflection in the Sun's gravitational field
-%\item Stellarium provides nutation only for 500 years around J2000.0. It is undocumented for how long the underlying model is valid.
-\item JPL Horizons uses different models than Stellarium for precession and nutation\footnote{\url{https://ssd.jpl.nasa.gov/?horizons_doc#specific_quantities}}
+%\item Stellarium provides nutation only for 6000 years around J2000.0. It is undocumented for how long the underlying model is valid.
+\item JPL Horizons uses slightly different models than Stellarium for precession and nutation\footnote{\url{https://ssd.jpl.nasa.gov/?horizons_doc#specific_quantities}}
 \end{itemize}
 The first item should not make a difference. The next two may cause
 differences in the range of a few arcseconds. The apparent drift that
@@ -272,9 +273,20 @@ we can observe in the remote past may stem from different assumptions
 regarding $\Delta T$ (see \ref{sec:Concepts:DeltaT}) or from other
 reasons yet to be identified. Competent help welcome!
 
+\noindent
+\colorbox{light-gray}{\fbox{\parbox[t]{0.975\linewidth}{
+\begin{center}WANTED\end{center}
+
+If you can trace down reasons for remaining inaccuracies and either provide a fix or a decisive hint to us,  
+we can offer a reward in the EUR200--500 range from our donation fund.\\
+
+}}}
+
+
 
 \scriptsize
 \input{tab_accuracy.tex}
+\input{tab_accuracy_tt.tex}
 \normalsize
 
 
