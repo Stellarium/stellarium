@@ -1106,6 +1106,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("projection/viewport_center_offset_y",		core->getCurrentStelProjectorParams().viewportCenterOffset[1]);
 	conf->setValue("projection/flip_horz",				core->getCurrentStelProjectorParams().flipHorz);
 	conf->setValue("projection/flip_vert",				core->getCurrentStelProjectorParams().flipVert);
+	conf->setValue("navigation/max_fov",				mvmgr->getUserMaxFov());
 
 	conf->setValue("viewing/flag_gravity_labels",			proj->getFlagGravityLabels());
 	conf->setValue("navigation/auto_zoom_out_resets_direction",	mvmgr->getFlagAutoZoomOutResetsDirection());

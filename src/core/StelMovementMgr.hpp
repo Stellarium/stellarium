@@ -93,6 +93,10 @@ class StelMovementMgr : public StelModule
 		   READ getFlagEnableZoomKeys
 		   WRITE setFlagEnableZoomKeys
 		   NOTIFY flagEnableZoomKeysChanged)
+	Q_PROPERTY(double userMaxFov
+		   READ getUserMaxFov
+		   WRITE setUserMaxFov
+		   NOTIFY userMaxFovChanged)
 public:
 	//! Possible mount modes defining the reference frame in which head movements occur.
 	//! MountGalactic and MountSupergalactic is currently only available via scripting API: core.clear("galactic") and core.clear("supergalactic")
@@ -430,6 +434,11 @@ public slots:
 	void setViewportHorizontalOffsetTarget(double f) { moveViewport(f,getViewportVerticalOffsetTarget()); }
 	void setViewportVerticalOffsetTarget(double f) { moveViewport(getViewportHorizontalOffsetTarget(),f); }
 
+	//! Set a hard limit for any fov change. Useful in the context of a planetarium with dome
+	//! where a presenter never ever wants to set more than 180° even if the projection would allow it.
+	void setUserMaxFov(double max);
+	double getUserMaxFov() const {return userMaxFov; }
+
 signals:
 	//! Emitted when the tracking property changes
 	void flagTrackingChanged(bool b);
@@ -441,6 +450,7 @@ signals:
 	void flagEnableMouseNavigationChanged(bool b);
 	void flagEnableMoveKeysChanged(bool b);
 	void flagEnableZoomKeysChanged(bool b);
+	void userMaxFovChanged(double fov);
 
 private slots:
 	//! Called when the selected object changes.
@@ -456,7 +466,8 @@ private:
 	double currentFov; // The current FOV in degrees
 	double initFov;    // The FOV at startup
 	double minFov;     // Minimum FOV in degrees
-	double maxFov;     // Maximum FOV in degrees
+	double maxFov;     // Maximum FOV in degrees. Depends on projection.
+	double userMaxFov; // Custom setting. Can be useful in a planetarium context.
 	double deltaFov;   // requested change of FOV (degrees) used during zooming.
 	void setFov(double f)
 	{

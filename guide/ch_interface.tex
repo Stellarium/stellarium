@@ -485,7 +485,10 @@ for changing the general appearance of the main sky view and projections. Some h
   in the sky only scientific designations of the stars instead of their common names.
 \end{description}
 
-\noindent Projection field: Selecting items in this list changes the
+\subsubsection{The Projections field}
+\label{sec:gui:view:sky:projections}
+
+Selecting items in this list changes the
   projection method which Stellarium uses to draw the sky~\citep{Snyder:MapProjections}. Options are:
 
 \begin{description}
@@ -534,10 +537,21 @@ for changing the general appearance of the main sky view and projections. Some h
       Carr\'ee}. The maximum field of view in this mode is 233\degree.
 \end{description}
 
+\noindent Two more settings allow finetuning:
+\begin{description}
+\item[Vertical viewport offset] If you have a wide screen or like wide-angle views,
+you may feel that too much of screen space lies below the horizon. This setting can shift the view up or down.
+\item[Custom FoV limit] Some projections allow very wide views, like 180°
+which covers a complete \newFeature{0.21.2} celestial hemisphere (e.g.\ the entire skydome)
+or even more. In some cases like if you are running a planetarium, you may want
+to limit the vertical field of view so that you won't ever zoom out too far.
+\end{description}
+
 \subsubsection{Atmosphere settings}
 \label{sec:gui:view:sky:atmosphere}
 
-An auxiliary dialog contains detail settings for the atmosphere. Here
+An auxiliary dialog opens when you select \button{Refraction/extinction settings\ldots}
+and contains detail settings for the atmosphere. Here
 you can set atmospheric pressure and temperature which influence
 refraction (see section~\ref{sec:phenomena:Refraction}), and the
 opacity factor $k_v$ for extinction, \emph{magnitude loss per airmass} 

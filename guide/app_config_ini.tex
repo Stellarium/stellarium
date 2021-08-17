@@ -604,8 +604,9 @@ flag\_manual\_zoom              & bool   & Set to \emph{false} for normal zoom b
                                            When set to true, the auto zoom feature only moves in a small amount and must be pressed many times\\%\midrule
 flag\_enable\_move\_keys        & bool   & Set to \emph{false} if you want to disable the arrow keys\\%\midrule
 flag\_enable\_mouse\_navigation & bool   & Set to \emph{false} if you want to disable the mouse navigation.\\%\midrule
-init\_fov                       & float  & Initial field of view, in degrees, typical value: ''60''.\\%\midrule
-min\_fov                        & float  & Minimal field of view, in degrees, typical value: ''0.001389'' (5").\\%\midrule
+init\_fov                       & float  & Initial field of view, in degrees. Typical value: ''60''.\\%\midrule
+min\_fov                        & float  & Minimal field of view, in degrees. Typical value: ''0.001389'' (5").\\%\midrule
+max\_fov                        & float  & Maximal field of view, in degrees. Typical value: ''360.0''.\\%\midrule
 init\_view\_pos                 & floats & Initial viewing direction. This is a vector with x,y,z-coordinates. x being N-S (S +ve), 
                                            y being E-W (E +ve), z being up-down (up +ve). Thus to look South at the horizon use \emph{1,0,0}. 
                                            To look Northwest and up at $45\degree$, use \emph{-1,-1,1} and so on.\\%\midrule
