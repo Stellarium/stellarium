@@ -1508,29 +1508,30 @@ Vec3d Planet::getJ2000EquatorialPos(const StelCore *core) const
 //     In any case, re.obliquity could now be updated during computeTransMatrix()
 double Planet::getRotObliquity(double JDE) const
 {
-	// JDay=2451545.0 for J2000.0
+	// JDE=2451545.0 for J2000.0
 	if (englishName=="Earth")
 		return getPrecessionAngleVondrakEpsilon(JDE);
 	else
 		return static_cast<double>(re.obliquity);
 }
 
-
-bool willCastShadow(const Planet* thisPlanet, const Planet* p)
+// Find out if p casts a shadow onto thisPlanet
+static bool willCastShadow(const Planet* thisPlanet, const Planet* p, const Planet* sun)
 {
-	Vec3d thisPos = thisPlanet->getHeliocentricEclipticPos();
-	Vec3d planetPos = p->getHeliocentricEclipticPos();
+	const Vec3d thisPos = thisPlanet->getHeliocentricEclipticPos();
+	const Vec3d planetPos = p->getHeliocentricEclipticPos();
 	
 	// If the planet p is farther from the sun than this planet, it can't cast shadow on it.
 	if (planetPos.lengthSquared()>thisPos.lengthSquared())
 		return false;
 
-	Vec3d ppVector = planetPos;
+	// Very tentative solution
+	Vec3d ppVector = planetPos; //-sun->getAberrationPush();
 	ppVector.normalize();
 	
 	double shadowDistance = ppVector * thisPos;
 	static const double sunRadius = 696000./AU;
-	double d = planetPos.length() / (p->getEquatorialRadius()/sunRadius+1);
+	const double d = planetPos.length() / (p->getEquatorialRadius()/sunRadius+1);
 	double penumbraRadius = (shadowDistance-d)/d*sunRadius;
 	// TODO: Note that Earth's shadow should be enlarged a bit. (6-7% following Danjon?)
 	
@@ -1551,10 +1552,10 @@ QVector<const Planet*> Planet::getCandidatesForShadow() const
 	
 	for (const auto& planet : satellites)
 	{
-		if (willCastShadow(this, planet.data()))
+		if (willCastShadow(this, planet.data(), sun))
 			res.append(planet.data());
 	}
-	if (willCastShadow(this, parent.data()))
+	if (willCastShadow(this, parent.data(), sun))
 		res.append(parent.data());
 	// Test satellites mutual occultations.
 	if (parent.data() != sun)
@@ -1564,7 +1565,7 @@ QVector<const Planet*> Planet::getCandidatesForShadow() const
 			//skip self-shadowing
 			if(planet.data() == this )
 				continue;
-			if (willCastShadow(this, planet.data()))
+			if (willCastShadow(this, planet.data(), sun))
 				res.append(planet.data());
 		}
 	}
@@ -3150,12 +3151,11 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		
 		// Set the main source of light to be the sun
 		Vec3d sunPos(0.);
-		// HAAAAAAAAAAAAAAA This must be the aberrated sun!?!?
+		// HAAAAAAAAAAAAAAA This must be the aberrated sun!?!? (Maybe theoretically, but this displacement seems more important for the shadows, done elsewhere...)
 		if (core->getUseAberration())
 		{
 			sunPos+=ssm->getSun()->getAberrationPush();
 		}
-
 
 		core->getHeliocentricEclipticModelViewTransform()->forward(sunPos);
 		light.position=sunPos;
@@ -3418,10 +3418,24 @@ void Planet::computeModelMatrix(Mat4d &result) const
 			}
 			break;
 	}
-	result = Mat4d::translation(aberrationPush) * result * Mat4d::zrotation(M_PI/180.*static_cast<double>(axisRotation + 90.f));
+	if (englishName=="Moon")
+	{
+		PlanetP sun=GETSTELMODULE(SolarSystem)->getSun();
+		// in our program we have no aberration push for the moon. We must take that info from the Sun's push instead
+		// It seems that a distance proportional to the distance lunarDistance/solarDistance may be the right way (?)
+		const double earthSunDistance=parent->eclipticPos.length();
+		const double earthMoonDistance=eclipticPos.length();
+		const double factor=earthMoonDistance/earthSunDistance;
+		result = Mat4d::translation(factor*sun->getAberrationPush()) * result * Mat4d::zrotation(M_PI/180.*static_cast<double>(axisRotation + 90.f));
+
+	}
+	else {
+		result = Mat4d::translation(aberrationPush) * result * Mat4d::zrotation(M_PI/180.*static_cast<double>(axisRotation + 90.f));
+	}
+	//result = result * Mat4d::zrotation(M_PI/180.*static_cast<double>(axisRotation + 90.f));
 }
 
-Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, QOpenGLShaderProgram* shader, const PlanetShaderVars& shaderVars) const
+Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, QOpenGLShaderProgram* shader, const PlanetShaderVars& shaderVars) //const
 {
 	RenderData data;
 
@@ -3478,6 +3492,8 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 	GL(shader->setUniformValue(shaderVars.shadowData, data.shadowCandidatesData));
 	GL(shader->setUniformValue(shaderVars.sunInfo, static_cast<GLfloat>(data.mTarget[12]), static_cast<GLfloat>(data.mTarget[13]), static_cast<GLfloat>(data.mTarget[14]), static_cast<GLfloat>(sun->getEquatorialRadius())));
 	GL(shader->setUniformValue(shaderVars.skyBrightness, lmgr->getAtmosphereAverageLuminance()));
+
+	setExtraInfoString(StelObject::DebugAid, QString("SunInfo: %1/%2/%3 ").arg(QString::number(data.mTarget[12], 'f', 7)).arg(QString::number(data.mTarget[13], 'f', 7)).arg(QString::number(data.mTarget[14], 'f', 7)));
 
 	if(shaderVars.orenNayarParameters>=0)
 	{
@@ -4010,7 +4026,7 @@ bool Planet::drawObjShadowMap(StelPainter *painter, QMatrix4x4& shadowMatrix)
 	//computeModelMatrix(modelMatrix);
 	//Mat4d worldToModel = modelMatrix.inverse();
 
-	Vec3d lightDir = light.position.toVec3d();
+	Vec3d lightDir = light.position; //.toVec3d();
 	projector->getModelViewTransform()->backward(lightDir);
 	//Vec3d lightDir(worldToModel[12], worldToModel[13], worldToModel[14]);
 	lightDir.normalize();
