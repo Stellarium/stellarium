@@ -160,6 +160,11 @@ QString StelMainScriptAPI::getDeltaT()
 	return StelUtils::hoursToHmsStr(StelApp::getInstance().getCore()->getDeltaT()/3600.);
 }
 
+double StelMainScriptAPI::getDeltaTsec()
+{
+	return StelApp::getInstance().getCore()->getDeltaT();
+}
+
 QString StelMainScriptAPI::getDeltaTAlgorithm()
 {
 	return StelApp::getInstance().getCore()->getCurrentDeltaTAlgorithmKey();
