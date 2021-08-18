@@ -822,7 +822,7 @@ void SkyLine::draw(StelCore *core) const
 
 			// We compute the shadow circle attached to the geocenter, but must point it in the opposite direction of the sun's aberrated position.
 			const Vec3d pos=earth->getEclipticPos();
-			const Vec3d dir=sun->getAberrationPush() + pos;
+			const Vec3d dir= - sun->getAberrationPush() + pos;
 			double lambda, beta;
 			StelUtils::rectToSphe(&lambda, &beta, dir);
 			const QPair<Vec3d, Vec3d> radii=GETSTELMODULE(SolarSystem)->getEarthShadowRadiiAtLunarDistance();
