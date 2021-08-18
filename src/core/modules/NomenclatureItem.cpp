@@ -148,7 +148,12 @@ QString NomenclatureItem::getNomenclatureTypeDescription(NomenclatureItemType nT
 
 float NomenclatureItem::getSelectPriority(const StelCore* core) const
 {
-	if (planet->getVMagnitude(core)>=20.f)
+	if (!getFlagLabels())
+	{
+		// suppress selection if switched off.
+		return StelObject::getSelectPriority(core)+1.e12f;
+	}
+	else if (planet->getVMagnitude(core)>=20.f)
 	{
 		// The planet is too faint for view (in deep shadow for example), so let's disable selecting the nomenclature
 		return StelObject::getSelectPriority(core)+25.f;
