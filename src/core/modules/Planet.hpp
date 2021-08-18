@@ -571,7 +571,9 @@ protected:
 
 	static StelTextureSP texEarthShadow;     // for lunar eclipses
 
-	void computeModelMatrix(Mat4d &result) const;
+	// Used in drawSphere() to compute shadows, and inside a function to derive eclipse sizes.
+	// For reasons currently unknown we must handle solar eclipses as special case.
+	void computeModelMatrix(Mat4d &result, bool solarEclipseCase) const;
 
 	//! Update the orbit position values.
 	void computeOrbit();

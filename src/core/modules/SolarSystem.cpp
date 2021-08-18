@@ -1968,12 +1968,13 @@ bool SolarSystem::nearLunarEclipse() const
 	// TODO: could replace with simpler test
 	// TODO Source?
 
-	Vec3d e = getEarth()->getEclipticPos();
-	Vec3d m = getMoon()->getEclipticPos();  // relative to earth
-	Vec3d mh = getMoon()->getHeliocentricEclipticPos();  // relative to sun
+	const Vec3d sun = getSun()->getAberrationPush();
+	const Vec3d e = getEarth()->getEclipticPos();
+	const Vec3d m = getMoon()->getEclipticPos();  // relative to earth
+	const Vec3d mh = getMoon()->getHeliocentricEclipticPos();  // relative to sun
 
-	// shadow location at earth + moon distance along earth vector from sun
-	Vec3d en = e;
+	// shadow location at earth + moon distance along earth vector from (aberrated) sun
+	Vec3d en = e-sun;
 	en.normalize();
 	Vec3d shadow = en * (e.length() + m.length());
 
@@ -3113,11 +3114,11 @@ QString SolarSystem::getOrbitColorStyle() const
 	return r;
 }
 
-QPair<double, PlanetP> SolarSystem::getEclipseFactor(const StelCore* core) const
+// TODO: To make the code better understandable, get rid of planet->computeModelMatrix(trans, true) here.
+QPair<double, PlanetP> SolarSystem::getSolarEclipseFactor(const StelCore* core) const
 {
 	PlanetP p;
-	//const Vec3d Lp = getLightTimeSunPosition();  //sun->getEclipticPos();
-	const Vec3d Lp = sun->getEclipticPos();
+	const Vec3d Lp = sun->getEclipticPos() + sun->getAberrationPush();
 	const Vec3d P3 = core->getObserverHeliocentricEclipticPos();
 	const double RS = sun->getEquatorialRadius();
 
@@ -3129,7 +3130,7 @@ QPair<double, PlanetP> SolarSystem::getEclipseFactor(const StelCore* core) const
 			continue;
 
 		Mat4d trans;
-		planet->computeModelMatrix(trans);
+		planet->computeModelMatrix(trans, true);
 
 		const Vec3d C = trans * Vec3d(0., 0., 0.);
 		const double radius = planet->getEquatorialRadius();
