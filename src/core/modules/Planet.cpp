@@ -812,26 +812,21 @@ QString Planet::getInfoStringPeriods(const StelCore *core, const InfoStringGroup
 class SolarEclipse
 {
 private:
-	double raSun = 0, deSun = 0, sdistanceAu = 0, raMoon = 0, deMoon = 0, mdistanceER = 0, gast = 0;
-	double rss = 0, a = 0, b = 0, d = 0, x = 0, y = 0, z = 0, mu = 0, f1 = 0, f2 = 0, tf1 = 0, tf2 = 0;
-	double L1 = 0, L2 = 0, lon = 0, mag = 0, cd = 0, rho1 = 0;
-	double y1 = 0, xi = 0, eta1 = 0, sd1 = 0, cd1 = 0, rho2 = 0, sd = 0, sd1d2 = 0, cd1d2 = 0;
-	double zeta1 = 0, zeta = 0, sd2 = 0, theta = 0, sfn1 = 0, cfn1 = 0;
-	const double SunEarth = 109.12278; // ratio of Sun-Earth radius 696000/6378.1366
-	double lat = 99; // initialize an impossible latitude to indicate no central eclipse
+	static constexpr double SunEarth = 109.12278; // ratio of Sun-Earth radius 696000/6378.1366
 
 public:
-	Vec3d point(const StelCore* score)
+	Vec3d point(const StelCore* core)
 	{
 		static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-		StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(score));
-		StelUtils::rectToSphe(&raMoon, &deMoon, ssystem->getMoon()->getEquinoxEquatorialPos(score));
+		double raSun, deSun, raMoon, deMoon;
+		StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
+		StelUtils::rectToSphe(&raMoon, &deMoon, ssystem->getMoon()->getEquinoxEquatorialPos(core));
 
-		sdistanceAu = ssystem->getSun()->getEquinoxEquatorialPos(score).length();
+		double sdistanceAu = ssystem->getSun()->getEquinoxEquatorialPos(core).length();
 		// Moon's distance in Earth's radius
-		mdistanceER = ssystem->getMoon()->getEquinoxEquatorialPos(score).length() * AU / 6378.1366;
+		double mdistanceER = ssystem->getMoon()->getEquinoxEquatorialPos(core).length() * AU / 6378.1366;
 		// Greenwich Apparent Sidereal Time
-		gast = (get_apparent_sidereal_time(score->getJD(), score->getJDE()));
+		double gast = get_apparent_sidereal_time(core->getJD(), core->getJDE());
 
 		if (raSun < 0.) raSun += M_PI * 2.;
 		if (raMoon < 0.) raMoon += M_PI * 2.;
@@ -839,58 +834,60 @@ public:
 		// Besselian elements
 		// based on Explanatory supplement to the astronomical ephemeris
 		// and the American ephemeris and nautical almanac (1961)
-		rss = sdistanceAu * 23454.7925; // from 1 AU/Earth's radius : 149597870.8/6378.1366
-		b = mdistanceER / rss;
-		a = raSun - ((b * cos(deMoon) * (raMoon - raSun)) / ((1 - b) * cos(deSun)));
-		d = deSun - (b * (deMoon - deSun) / (1 - b));
-		x = cos(deMoon) * sin((raMoon - a));
-		x = mdistanceER * x;
-		y = cos(d) * sin(deMoon);
-		y = y - cos(deMoon) * sin(d) * cos((raMoon - a));
-		y = mdistanceER * y;
-		z = sin(deMoon) * sin(d);
-		z = z + cos(deMoon) * cos(d) * cos((raMoon - a));
-		z = mdistanceER * z;
+		const double rss = sdistanceAu * 23454.7925; // from 1 AU/Earth's radius : 149597870.8/6378.1366
+		const double b = mdistanceER / rss;
+		const double a = raSun - ((b * cos(deMoon) * (raMoon - raSun)) / ((1 - b) * cos(deSun)));
+		const double d = deSun - (b * (deMoon - deSun) / (1 - b));
+		double x = cos(deMoon) * sin((raMoon - a));
+		x *= mdistanceER;
+		double y = cos(d) * sin(deMoon);
+		y -= cos(deMoon) * sin(d) * cos((raMoon - a));
+		y *= mdistanceER;
+		double z = sin(deMoon) * sin(d);
+		z += cos(deMoon) * cos(d) * cos((raMoon - a));
+		z *= mdistanceER;
 		// parameters of the shadow cone
-		f1 = asin((SunEarth + 0.272488) / (rss * (1 - b)));
-		tf1 = tan(f1);
-		f2 = asin((SunEarth - 0.272281) / (rss * (1 - b)));
-		tf2 = tan(f2);
-		L1 = z * tf1 + (0.272488 / cos(f1));
-		L2 = z * tf2 - (0.272281 / cos(f2));
-		mu = gast - a / M_PI_180;
+		const double f1 = asin((SunEarth + 0.272488) / (rss * (1 - b)));
+		const double tf1 = tan(f1);
+		const double f2 = asin((SunEarth - 0.272281) / (rss * (1 - b)));
+		const double tf2 = tan(f2);
+		double L1 = z * tf1 + (0.272488 / cos(f1));
+		double L2 = z * tf2 - (0.272281 / cos(f2));
+		double mu = gast - a / M_PI_180;
 
 		// Find Lat./Long. of center line on Earth's surface
-		cd = cos(d);
-		rho1 = sqrt(1 - 0.00669398 * cd * cd);
+		double cd = cos(d);
+		double rho1 = sqrt(1 - 0.00669398 * cd * cd);
 		// e^2 = 0.00669398 : Earth flattening parameter
 		// IERS 2010 : f = 298.25642 : e^2 = 2f-f^2
-		y1 = y / rho1;
-		xi = x;
-		eta1 = y1;
-		sd = sin(d);
-		sd1 = sd / rho1;
-		cd1 = sqrt(1 - 0.00669398) * cd / rho1;
-		rho2 = sqrt(1 - 0.00669398 * sd * sd);
-		sd1d2 = 0.00669398 * sd * cd / (rho1 * rho2);
-		cd1d2 = sqrt(1 - sd1d2 * sd1d2);
+		double y1 = y / rho1;
+		double xi = x;
+		double eta1 = y1;
+		double sd = sin(d);
+		double sd1 = sd / rho1;
+		double cd1 = sqrt(1 - 0.00669398) * cd / rho1;
+		double rho2 = sqrt(1 - 0.00669398 * sd * sd);
+		double sd1d2 = 0.00669398 * sd * cd / (rho1 * rho2);
+		double cd1d2 = sqrt(1 - sd1d2 * sd1d2);
+		double lon = 0, mag = 0;
+		double lat = 99; // initialize an impossible latitude to indicate no central eclipse
 
 		if ((1 - x * x - y1 * y1) > 0)
 		{
-			zeta1 = sqrt(1 - x * x - y1 * y1);
-			zeta = rho2 * (zeta1 * cd1d2 - eta1 * sd1d2);
-			sd2 = sd * 1.0033641 / rho2;
+			const double zeta1 = sqrt(1 - x * x - y1 * y1);
+			const double zeta = rho2 * (zeta1 * cd1d2 - eta1 * sd1d2);
+			//const double sd2 = sd * 1.0033641 / rho2;
 			L2 = L2 - zeta * tf2;
-			b = -y * sd + zeta * cd;
-			theta = atan2(xi, b) / M_PI_180;
+			double b = -y * sd + zeta * cd;
+			double theta = atan2(xi, b) / M_PI_180;
 			if (theta < 0) theta += 360;
 			if (mu > 360) mu -= 360;
 			lon = mu - theta;
 			if (lon < -180) lon += 360;
 			if (lon > 180) lon -= 360;
-			lon = -lon; // + East, - West
-			sfn1 = eta1 * cd1 + zeta1 * sd1;
-			cfn1 = sqrt(1 - sfn1 * sfn1);
+			lon *= -1.0; // + East, - West
+			double sfn1 = eta1 * cd1 + zeta1 * sd1;
+			double cfn1 = sqrt(1 - sfn1 * sfn1);
 			lat = 1.0033641 * sfn1 / cfn1;
 			lat = atan(lat) / M_PI_180;
 			L1 = L1 - zeta * tf1;
@@ -1171,7 +1168,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 		if (englishName=="Sun")
 		{
 			// Only show during eclipse or transit, show percent?
-			QPair<double, PlanetP> eclObj = ssystem->getEclipseFactor(core);
+			QPair<double, PlanetP> eclObj = ssystem->getSolarEclipseFactor(core);
 			const double eclipseObscuration = 100.*(1.-eclObj.first);
 			if (eclipseObscuration>1.e-7) // needed to avoid false display of 1e-14 or so.
 			{
@@ -1204,8 +1201,8 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 				double raDiff = StelUtils::fmodpos((raMoon - raSun)/M_PI_180, 360.0);
 				if (raDiff < 3. || raDiff > 357.)
 				{
-					SolarEclipse center;
-					Vec3d pos = center.point(core1);
+					SolarEclipse solarEclipse;
+					Vec3d pos = solarEclipse.point(core1);
 
 					if (pos[0] < 90.) // only display when shadow axis is touching Earth
 					{
@@ -1293,7 +1290,7 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 	else
 	{
 		SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-		QPair<double, PlanetP> eclObj = ssystem->getEclipseFactor(core);
+		QPair<double, PlanetP> eclObj = ssystem->getSolarEclipseFactor(core);
 		const double eclipseObscuration = 100.*(1.-eclObj.first);
 		if (eclipseObscuration>1.e-7)
 		{
@@ -2068,7 +2065,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 		const double distParsec = std::sqrt(core->getObserverHeliocentricEclipticPos().lengthSquared())*AU/PARSEC;
 
 		// check how much of it is visible
-		const double shadowFactor = qMax(0.000128, GETSTELMODULE(SolarSystem)->getEclipseFactor(core).first);
+		const double shadowFactor = qMax(0.000128, GETSTELMODULE(SolarSystem)->getSolarEclipseFactor(core).first);
 		// See: Hughes, D. W., Brightness during a solar eclipse // Journal of the British Astronomical Association, vol.110, no.4, p.203-205
 		// URL: http://adsabs.harvard.edu/abs/2000JBAA..110..203H
 
@@ -2549,7 +2546,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	{
 		// Get the eclipse factor to avoid hiding the Moon during a total solar eclipse, or planets in transit over the Solar disk.
 		// Details: https://answers.launchpad.net/stellarium/+question/395139
-		if (GETSTELMODULE(SolarSystem)->getEclipseFactor(core).first==1.0)
+		if (GETSTELMODULE(SolarSystem)->getSolarEclipseFactor(core).first==1.0)
 			return;
 	}
 
@@ -3270,7 +3267,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		if ((this==ssm->getSun()) && (core->getCurrentLocation().planetName == "Earth"))
 		{
 			LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
-			const float eclipseFactor = static_cast<float>(ssm->getEclipseFactor(core).first);
+			const float eclipseFactor = static_cast<float>(ssm->getSolarEclipseFactor(core).first);
 			// This alpha ensures 0 for complete sun, 1 for eclipse better 1e-10, with a strong increase towards full eclipse. We still need to square it.
 			// But without atmosphere we should indeed draw a visible corona!
 			const float alpha= ( !lmgr->getFlagAtmosphere() ? 0.7f : -0.1f*qMax(-10.0f, log10f(eclipseFactor)));
@@ -3397,7 +3394,7 @@ void sRing(Ring3DModel* model, const float rMin, const float rMax, unsigned shor
 }
 
 // Used in drawSphere() to compute shadows.
-void Planet::computeModelMatrix(Mat4d &result) const
+void Planet::computeModelMatrix(Mat4d &result, bool solarEclipseCase) const
 {
 	result = Mat4d::translation(eclipticPos) * rotLocalToParent;
 	PlanetP p = parent;
@@ -3418,7 +3415,10 @@ void Planet::computeModelMatrix(Mat4d &result) const
 			}
 			break;
 	}
-	if (englishName=="Moon")
+	// WEIRD! The following has to be disabled to have correct solar eclipse sizes in InfoString.
+	// However, it has to be active for Lunar eclipse shadow rendering.
+	// Maybe SolarSystem::getSolarEclipseFactor() can be implemented without Planet::computeModelMatrix()
+	if ((englishName=="Moon") && !solarEclipseCase)
 	{
 		PlanetP sun=GETSTELMODULE(SolarSystem)->getSun();
 		// in our program we have no aberration push for the moon. We must take that info from the Sun's push instead
@@ -3445,7 +3445,7 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 	const Mat4f& m = projector->getProjectionMatrix();
 	const QMatrix4x4 qMat = m.convertToQMatrix();
 
-	computeModelMatrix(data.modelMatrix);
+	computeModelMatrix(data.modelMatrix, false);
 	// used to project from solar system into local space
 	data.mTarget = data.modelMatrix.inverse();
 
@@ -3459,7 +3459,7 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 	Mat4d shadowModelMatrix;
 	for (int i=0;i<data.shadowCandidates.size();++i)
 	{
-		data.shadowCandidates.at(i)->computeModelMatrix(shadowModelMatrix);
+		data.shadowCandidates.at(i)->computeModelMatrix(shadowModelMatrix, false);
 		const Vec4d position = data.mTarget * shadowModelMatrix.getColumn(3);
 		data.shadowCandidatesData(0, i) = static_cast<float>(position[0]);
 		data.shadowCandidatesData(1, i) = static_cast<float>(position[1]);

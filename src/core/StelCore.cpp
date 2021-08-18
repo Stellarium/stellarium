@@ -2480,7 +2480,7 @@ bool StelCore::isBrightDaylight() const
 		return false;
 	if (!getSkyDrawer()->getFlagHasAtmosphere())
 		return false;
-	if (ssys->getEclipseFactor(this).first<=0.01) // Total solar eclipse
+	if (ssys->getSolarEclipseFactor(this).first<=0.01) // Total solar eclipse
 		return false;
 
 	// immediately decide upon sky background brightness...

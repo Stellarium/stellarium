@@ -842,7 +842,7 @@ public:
 
 	//! Determines relative amount of sun visible from the observer's position (first element) and the Planet object pointer for eclipsing celestial body (second element).
 	//! In the unlikely event of multiple objects in front of the sun, only the largest will be reported.
-	QPair<double, PlanetP> getEclipseFactor(const StelCore *core) const;
+	QPair<double, PlanetP> getSolarEclipseFactor(const StelCore *core) const;
 
 	//! Retrieve Radius of Umbra and Penumbra at the distance of the Moon.
 	//! Returns a pair (umbra, penumbra) in (geocentric_arcseconds, AU, geometric_AU).
