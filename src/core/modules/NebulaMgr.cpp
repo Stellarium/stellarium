@@ -511,7 +511,7 @@ struct DrawNebulaFuncObject
 		{
 			sPainter->getProjector()->project(n->getJ2000EquatorialPos(core),n->XY);
 			n->drawLabel(*sPainter, maxMagLabels);
-			n->drawHints(*sPainter, maxMagHints);
+			n->drawHints(*sPainter, maxMagHints, core);
 			n->drawOutlines(*sPainter, maxMagHints);
 		}
 	}

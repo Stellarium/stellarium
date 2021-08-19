@@ -704,7 +704,7 @@ void Nebula::drawOutlines(StelPainter &sPainter, float maxMagHints) const
 	}
 }
 
-void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
+void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core) const
 {
 	size_t segments = outlineSegments.size();
 	if (segments>0 && flagUseOutlines)
@@ -820,8 +820,8 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 	{
 		// The rotation angle in drawSprite2dMode() is relative to screen. Make sure to compute correct angle from 90+orientationAngle.
 		// Find an on-screen direction vector from a point offset somewhat in declination from our object.
-		Vec3d XYZrel(XYZ);
-		XYZrel[2]*=0.99;
+		Vec3d XYZrel(getJ2000EquatorialPos(core));
+		XYZrel[2]*=0.95; XYZrel.normalize();
 		Vec3d XYrel;
 		sPainter.getProjector()->project(XYZrel, XYrel);
 		float screenAngle = static_cast<float>(atan2(XYrel[1]-XY[1], XYrel[0]-XY[0]));
