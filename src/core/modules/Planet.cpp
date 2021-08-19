@@ -2101,7 +2101,17 @@ float Planet::getVMagnitude(const StelCore* core) const
 				const double u=shadowRadii.first[0]  / 3600.; // geocentric angle of earth umbra radius at lunar distance [degrees]
 				const double p=shadowRadii.second[0] / 3600.; // geocentric angle of earth penumbra radius at lunar distance [degrees]
 				const double r=atan(getEquatorialRadius()/dist) * M_180_PI; // geocentric angle of Lunar radius at lunar distance [degrees]
-				const double od=180.-getElongation(ssm->getEarth()->getEclipticPos()) * (180.0/M_PI); // opposition distance [degrees]
+
+				// We must compute an elongation from the aberrated sun. The following is adapted from getElongation(), with a tweak to move the Sun to its apparent position.
+				PlanetP sun=ssm->getSun();
+				const Vec3d obsPos=parent->eclipticPos-sun->getAberrationPush();
+				const double observerRq = obsPos.lengthSquared();
+				const Vec3d& planetHelioPos = getHeliocentricEclipticPos() - sun->getAberrationPush();
+				const double planetRq = planetHelioPos.lengthSquared();
+				const double observerPlanetRq = dist*dist; // (obsPos - planetHelioPos).lengthSquared();
+				double aberratedElongation = std::acos((observerPlanetRq  + observerRq - planetRq)/(2.0*std::sqrt(observerPlanetRq*observerRq)));
+				const double od = 180. - aberratedElongation * (180.0/M_PI); // opposition distance [degrees]
+
 				if (od>p+r) shadowFactor=1.0;
 				else if (od>u+r) // penumbral transition zone: gradual decline (square curve)
 					shadowFactor=0.6+0.4*sqrt((od-u-r)/(p-u));
@@ -2143,8 +2153,9 @@ float Planet::getVMagnitude(const StelCore* core) const
 	// Lunar Magnitude from Earth: This is a combination of Russell 1916 (!) with its albedo dysbalance, Krisciunas-Schaefer (1991) for the opposition surge, and Agrawal (2016) for the contribution of earthshine.
 	if ((core->getCurrentLocation().planetName=="Earth") && (englishName=="Moon"))
 	{
+		const Vec3d solarAberrationPush=GETSTELMODULE(SolarSystem)->getSun()->getAberrationPush();
 		double lEarth, bEarth, lMoon, bMoon;
-		StelUtils::rectToSphe(&lEarth, &bEarth, observerHelioPos);
+		StelUtils::rectToSphe(&lEarth, &bEarth, observerHelioPos-solarAberrationPush);
 		StelUtils::rectToSphe(&lMoon, &bMoon, eclipticPos);
 		double dLong=StelUtils::fmodpos(lMoon-lEarth, 2.*M_PI); if (dLong>M_PI) dLong-=2.*M_PI; // now dLong<0 for waxing phases.
 		const double p=dLong*M_180_PI;
@@ -3617,19 +3628,29 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 			GL(moonShaderProgram->setUniformValue(moonShaderVars.earthShadow, 3));
 			// Ad-hoc visibility improvement during lunar eclipses:
 			// During partial umbra phase, make moon brighter so that the bright limb and umbra border has more visibility.
-			// When the moon is half in umbra, we start to raise its brightness.
+			// When the moon is half in umbra, we start to raise its brightness. Near edge of totality we try to simulate the apparent super-bright edge.
+			static const double tweak=1.015; // 1.00 to have maximum push only in full umbra. 1.01 or even 1.02 looks better to show a brilliant last/first edge
 			GLfloat push=1.0f;
-			const double od=180.-getElongation(ssm->getEarth()->getEclipticPos()) * (180.0/M_PI); // opposition distance [degrees]
+
+			// Like in getVMagnitude() we must compute an elongation from the aberrated sun.
+			PlanetP sun=ssm->getSun();
+			const Vec3d obsPos=parent->eclipticPos-sun->getAberrationPush();
+			const double observerRq = obsPos.lengthSquared();
+			const Vec3d& planetHelioPos = getHeliocentricEclipticPos() - sun->getAberrationPush();
+			const double planetRq = planetHelioPos.lengthSquared();
+			const double observerPlanetRq = (obsPos - planetHelioPos).lengthSquared();
+			double aberratedElongation = std::acos((observerPlanetRq  + observerRq - planetRq)/(2.0*std::sqrt(observerPlanetRq*observerRq)));
+			const double od = 180. - aberratedElongation * (180.0/M_PI); // opposition distance [degrees]
 
 			// Compute umbra radius at lunar distance.
 			const double Lambda=getEclipticPos().length();                             // Lunar distance [AU]
 			const double sigma=ssm->getEarthShadowRadiiAtLunarDistance().first[0]/3600.;
 			const double tau=atan(getEquatorialRadius()/Lambda) * M_180_PI; // geocentric angle of Lunar radius [degrees]
 
-			if (od<sigma-tau)     // if the Moon is fully immersed in the shadow
+			if (od<tweak*sigma-tau)     // if the Moon is fully immersed in the shadow
 				push=4.0f;
-			else if (od<sigma)    // If the Moon is half immersed, start pushing with a strong power function that make it apparent only in the last few percents.
-				push+=3.f*(1.f-pow(static_cast<float>((od-sigma+tau)/tau), 1.f/6.f));
+			else if (od<tweak*sigma)    // If the Moon is half immersed, start pushing with a strong power function that make it apparent only in the last few percents.
+				push+=3.f*(1.f-pow(static_cast<float>((od-tweak*sigma+tau)/tau), 1.f/6.f));
 
 			GL(moonShaderProgram->setUniformValue(moonShaderVars.eclipsePush, push)); // constant for now...
 		}
