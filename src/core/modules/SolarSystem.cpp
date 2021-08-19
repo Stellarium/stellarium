@@ -1178,7 +1178,7 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 {
 	StelCore *core=StelApp::getInstance().getCore();
 	const bool withAberration=core->getUseAberration();
-	if (flagLightTravelTime || withAberration) // switching on aberration implies light time correction.
+	if (flagLightTravelTime) // switching off light time correction implies no aberration for the planets.
 	{
 		for (const auto& p : qAsConst(systemPlanets))
 		{
