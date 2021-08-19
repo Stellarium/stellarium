@@ -136,6 +136,9 @@ protected:
 	//! Allow some images to be shown only after this date, e.g. Supernova remnants.
 	double birthJD;
 
+	//! Should usually be true. Allow disabling observation of aberration correction for script-loaded SkyImages.
+	bool withAberration;
+
 private:
 	//! init the StelSkyImageTile
 	void initCtor();
