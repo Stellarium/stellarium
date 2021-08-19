@@ -110,7 +110,6 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	, ephemerisSaturnMarkerColor(Vec3f(0.0f, 1.0f, 0.0f))
 	, allTrails(Q_NULLPTR)
 	, conf(StelApp::getInstance().getSettings())
-	//, lightTimeSunPosition(0.,0.,0.)
 {
 	planetNameFont.setPixelSize(StelApp::getInstance().getScreenFontSize());
 	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
@@ -1186,19 +1185,6 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 			p->computePosition(dateJDE, Vec3d(0.));
 		}
 		const Vec3d obsPosJDE=observerPlanet->getHeliocentricEclipticPos();
-		// BEGIN HACK: 0.16.0post for solar aberration/light time correction
-		// This fixes eclipse bug LP:#1275092) and outer planet rendering bug (LP:#1699648) introduced by the first fix in 0.16.0.
-		// We compute a "light time corrected position" for the sun and apply it only for rendering, not for other computations.
-		// A complete solution should likely "just" implement aberration for all objects.
-//		const double obsDist=obsPosJDE.length();
-//
-//		observerPlanet->computePosition(dateJDE-obsDist * (AU / (SPEED_OF_LIGHT * 86400.)), Vec3d(0.));
-//		const Vec3d obsPosJDEbefore=observerPlanet->getHeliocentricEclipticPos();
-//		lightTimeSunPosition=obsPosJDE-obsPosJDEbefore;
-//
-//		// We must reset observerPlanet for the next step!
-//		observerPlanet->computePosition(dateJDE, Vec3d(0.));
-		// END HACK FOR SOLAR LIGHT TIME/ABERRATION
 
 		// For higher accuracy, we now make two iterations of light time and aberration correction. In the final round, we also compute rotation data.
 		// May fix sub-arcsecond inaccuracies, and optionally apply aberration in the way described in Explanatory Supplement (2013), 7.55.
@@ -1237,7 +1223,6 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 			else if (p->englishName=="Uranus")  RotationElements::updatePlanetCorrections(dateJDE-lightTimeDays, RotationElements::Uranus);
 			else if (p->englishName=="Neptune") RotationElements::updatePlanetCorrections(dateJDE-lightTimeDays, RotationElements::Neptune);
 		}
-
 	}
 	else
 	{
@@ -1252,7 +1237,6 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 			else if (p->englishName=="Uranus")  RotationElements::updatePlanetCorrections(dateJDE, RotationElements::Uranus);
 			else if (p->englishName=="Neptune") RotationElements::updatePlanetCorrections(dateJDE, RotationElements::Neptune);
 		}
-		//lightTimeSunPosition.set(0.,0.,0.);
 	}
 	computeTransMatrices(dateJDE, observerPlanet->getHeliocentricEclipticPos());
 }

@@ -3157,14 +3157,9 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			gl->glDisable(GL_MULTISAMPLE);
 		#endif
 		
-		// Set the main source of light to be the sun
-		Vec3d sunPos(0.);
-		// HAAAAAAAAAAAAAAA This must be the aberrated sun!?!? (Maybe theoretically, but this displacement seems more important for the shadows, done elsewhere...)
-		if (core->getUseAberration())
-		{
-			sunPos+=ssm->getSun()->getAberrationPush();
-		}
-
+		// Set the main source of light to be the sun.
+		// This must be the aberrated sun! (Mostly theoretically, this displacement seems more important for the shadows, done elsewhere...)
+		Vec3d sunPos = ssm->getSun()->getEclipticPos() + ssm->getSun()->getAberrationPush();
 		core->getHeliocentricEclipticModelViewTransform()->forward(sunPos);
 		light.position=sunPos;
 
@@ -3504,7 +3499,7 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 	GL(shader->setUniformValue(shaderVars.sunInfo, static_cast<GLfloat>(data.mTarget[12]), static_cast<GLfloat>(data.mTarget[13]), static_cast<GLfloat>(data.mTarget[14]), static_cast<GLfloat>(sun->getEquatorialRadius())));
 	GL(shader->setUniformValue(shaderVars.skyBrightness, lmgr->getAtmosphereAverageLuminance()));
 
-	setExtraInfoString(StelObject::DebugAid, QString("SunInfo: %1/%2/%3 ").arg(QString::number(data.mTarget[12], 'f', 7)).arg(QString::number(data.mTarget[13], 'f', 7)).arg(QString::number(data.mTarget[14], 'f', 7)));
+	//setExtraInfoString(StelObject::DebugAid, QString("SunInfo: %1/%2/%3 ").arg(QString::number(data.mTarget[12], 'f', 7)).arg(QString::number(data.mTarget[13], 'f', 7)).arg(QString::number(data.mTarget[14], 'f', 7)));
 
 	if(shaderVars.orenNayarParameters>=0)
 	{
