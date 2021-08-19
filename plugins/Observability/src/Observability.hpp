@@ -115,6 +115,7 @@ private:
 	double interpolation(double m, double y1, double y2, double y3);
 	double calcDeltaM(double siderialTime, double m, double latitude, double longitude, double alpha1,
 	  double delta1, double alpha2, double delta2, double alpha3, double delta3, bool isTransit, double h0);
+	static int setJD(const double& JDnow);
 
 	double riseTransitSet[3] = { -1, -1, -1 };
 };

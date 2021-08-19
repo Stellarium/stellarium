@@ -145,8 +145,7 @@ void Observability::prepareCalcRiseSetTransit()
 
 	if (obj.getSelectedObject().length() > 0)
 	{
-		//const double jdStore = core->getJD();
-		//int jd = jdStore;
+		const double jdStore = core->getJD();
 		double siderialTime = core->getLocalSiderealTime();
 		double siderialTimeDeg = siderialTime * M_180_PI;
 
@@ -189,6 +188,21 @@ void Observability::prepareCalcRiseSetTransit()
 		riseTransitSet[0] = calcTimeFromDayFraction(x[0]);
 		riseTransitSet[1] = calcTimeFromDayFraction(x[2]);
 		riseTransitSet[2] = calcTimeFromDayFraction(x[1]);
+	}
+}
+
+int Observability::setJD(const double& JDnow)
+{
+	int JDint = JDnow;
+	double dayFraction = JDnow - JDint;
+
+	if (dayFraction >= 0.5)
+	{
+		return JDint;
+	}
+	else
+	{
+		return JDint - 1;
 	}
 }
 
