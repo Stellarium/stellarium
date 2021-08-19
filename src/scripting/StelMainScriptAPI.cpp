@@ -75,8 +75,8 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 {
 	if(StelSkyLayerMgr* smgr = GETSTELMODULE(StelSkyLayerMgr))
 	{
-		connect(this, SIGNAL(requestLoadSkyImage(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool, StelCore::FrameType)),
-			smgr, SLOT(         loadSkyImage(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool, StelCore::FrameType)));
+		connect(this, SIGNAL(requestLoadSkyImage(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool, StelCore::FrameType, bool)),
+			smgr, SLOT(         loadSkyImage(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool, StelCore::FrameType, bool)));
 		connect(this, SIGNAL(requestRemoveSkyImage(const QString&)), smgr, SLOT(removeSkyLayer(const QString&)));
 	}
 
@@ -461,7 +461,7 @@ void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 				     double lon1, double lat1,
 				     double lon2, double lat2,
 				     double lon3, double lat3,
-				     double minRes, double maxBright, bool visible, const QString &frame)
+				     double minRes, double maxBright, bool visible, const QString &frame, bool withAberration)
 {
 	QString path = "scripts/" + filename;
 	StelCore::FrameType frameType=StelCore::FrameJ2000;
@@ -482,7 +482,7 @@ void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 		qDebug() << "StelMainScriptAPI::loadSkyImage(): unknown frame type " << frame << " requested -- Using Equatorial J2000";
 	}
 
-	emit(requestLoadSkyImage(id, path, lon0, lat0, lon1, lat1, lon2, lat2, lon3, lat3, minRes, maxBright, visible, frameType));
+	emit(requestLoadSkyImage(id, path, lon0, lat0, lon1, lat1, lon2, lat2, lon3, lat3, minRes, maxBright, visible, frameType, withAberration));
 }
 
 // Convenience method:
@@ -491,20 +491,20 @@ void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 				     const QString& lon1, const QString& lat1,
 				     const QString& lon2, const QString& lat2,
 				     const QString& lon3, const QString& lat3,
-				     double minRes, double maxBright, bool visible, const QString& frame)
+				     double minRes, double maxBright, bool visible, const QString& frame, bool withAberration)
 {
 	loadSkyImage(id, filename,
 		     StelUtils::getDecAngle(lon0) *M_180_PI, StelUtils::getDecAngle(lat0)*M_180_PI,
 		     StelUtils::getDecAngle(lon1) *M_180_PI, StelUtils::getDecAngle(lat1)*M_180_PI,
 		     StelUtils::getDecAngle(lon2) *M_180_PI, StelUtils::getDecAngle(lat2)*M_180_PI,
 		     StelUtils::getDecAngle(lon3) *M_180_PI, StelUtils::getDecAngle(lat3)*M_180_PI,
-		     minRes, maxBright, visible, frame);
+		     minRes, maxBright, visible, frame, withAberration);
 }
 
 // Convenience method: (Fixed 2017-03: rotation increased by 90deg, makes upright images now!)
 void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 				     double lon, double lat, double angSize, double rotation,
-				     double minRes, double maxBright, bool visible, const QString &frame)
+				     double minRes, double maxBright, bool visible, const QString &frame, bool withAberration)
 {
 	Vec3f XYZ;
 	static const float RADIUS_NEB = 1.f;
@@ -532,18 +532,18 @@ void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 		     static_cast<double>(cornersRaDec[1][0])*(M_180_PI), static_cast<double>(cornersRaDec[1][1])*(M_180_PI),
 		     static_cast<double>(cornersRaDec[3][0])*(M_180_PI), static_cast<double>(cornersRaDec[3][1])*(M_180_PI),
 		     static_cast<double>(cornersRaDec[2][0])*(M_180_PI), static_cast<double>(cornersRaDec[2][1])*(M_180_PI),
-		     minRes, maxBright, visible, frame);
+		     minRes, maxBright, visible, frame, withAberration);
 }
 
 // Convenience method:
 void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 				     const QString& lon, const QString& lat,
 				     double angSize, double rotation,
-				     double minRes, double maxBright, bool visible, const QString &frame)
+				     double minRes, double maxBright, bool visible, const QString &frame, bool withAberration)
 {
 	loadSkyImage(id, filename, StelUtils::getDecAngle(lon)*M_180_PI,
 		     StelUtils::getDecAngle(lat)*M_180_PI, angSize,
-		     rotation, minRes, maxBright, visible, frame);
+		     rotation, minRes, maxBright, visible, frame, withAberration);
 }
 
 void StelMainScriptAPI::removeSkyImage(const QString& id)
