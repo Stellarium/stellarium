@@ -202,7 +202,7 @@ public:
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const Q_DECL_OVERRIDE;
 	virtual QStringList listAllObjects(bool inEnglish) const Q_DECL_OVERRIDE;
 	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const Q_DECL_OVERRIDE;
 	virtual QString getName() const Q_DECL_OVERRIDE { return "Solar System"; }
@@ -864,10 +864,6 @@ public:
 	//! Get the list of all minor bodies names.
 	const QStringList getMinorBodiesList() const { return minorBodies; }
 
-	//! Get lighttime corrected solar position (essential to draw the sun during solar eclipse and compute things like eclipse factor etc, until we get aberration working.)
-	//! TODO: MAKE SURE getEclipticPos() includes aberration!
-	//const Vec3d getLightTimeSunPosition() const { return sun->getEclipticPos();  } //   return lightTimeSunPosition; }
-
 private slots:
 	//! Called when a new object is selected.
 	void selectedObjectChange(StelModule::StelModuleSelectAction action);
@@ -1095,10 +1091,6 @@ private:
 
 	QHash<QString, QString> planetNativeNamesMap, planetNativeNamesMeaningMap;
 	QStringList minorBodies;
-
-	//Vec3d lightTimeSunPosition;			// when observing a solar eclipse, we need solar position 8 minutes ago.
-							// Direct shift caused problems (LP:#1699648), circumvented with this construction.
-							//TODO: get rid of this!
 
 	// 0.16pre observation GZ: this list contains pointers to all orbit objects,
 	// while the planets don't own their orbit objects.
