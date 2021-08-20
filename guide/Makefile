@@ -66,9 +66,9 @@ ifeq ($(OS),Windows_NT) # variable OS not set under Win10/Ubuntu!
 		MAKE4HT=make4ht.exe
 	endif
 else 
-        # OS not Windows on most Non-Windows environments, but may still be Ubuntu bash on Windows! 
-        # In essence, if tool not found, fall back to that tools' names from the Windows environment.
-        # It is assumed that at least the Windows tools are configured to lie in PATH.
+	# OS not Windows on most Non-Windows environments, but may still be Ubuntu bash on Windows! 
+	# In essence, if tool not found, fall back to that tools' names from the Windows environment.
+	# It is assumed that at least the Windows tools are configured to lie in PATH.
 	ifneq ($(findstring pdflatex, $(shell which pdflatex)),pdflatex)
 		PDFLATEX=pdflatex.exe
 	endif
