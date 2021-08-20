@@ -275,14 +275,14 @@ from NASA's Jet Propulsion Laboratory (JPL). The data files have to be
 downloaded separately, and most users will likely not need them. DE430 and DE440
 provide highly accurate data for the years $+1550\ldots+2650$, while
 DE431 and DE441 covers years $-13000\ldots+17000$, which allows e.g.\ 
-archaeoastronomical research on Mesolithic landscapes. Outside these
+archaeoastronomical research on Mesolithic landscapes. (But see Appendix~\ref{ch:Accuracy}!) Outside these
 year ranges, positional computation falls back to VSOP87.
 
 Some current approximations may still lead to numerical data which differ slightly from best possible ephemerides.  
 Please at least compare with JPL Horizons\footnote{\url{https://ssd.jpl.nasa.gov/horizons.cgi}} for dependable results.
 
 To enable use of these data, download the files from
-JPL\footnote{\url{ftp://ssd.jpl.nasa.gov/pub/eph/planets/Linux/}. (Also
+JPL\footnote{\url{ftp://ssd.jpl.nasa.gov/pub/eph/planets/Linux/} (Also
   download from this directory if you are not running Linux!)}:
 
 \noindent\begin{tabular}{lllr}
@@ -340,7 +340,7 @@ services concurrently for any interested application. In most cases,
 this will be a \program{gpsd} running on your localhost, receiving
 data from some GPS device plugged in via USB.
 Please follow instructions by the \program{gpsd}
-authors\footnote{\url{http://catb.org/gpsd/index.html}} to properly
+authors\footnote{\url{https://gpsd.gitlab.io/gpsd/index.html}} to properly
 configure this system daemon.  A few hints:
 \begin{itemize}
 \item On Ubuntu 16.04 and likely other systems, USB hotplug devices
@@ -536,7 +536,7 @@ stellarium --landscape=ocean
 \subsection{Spout}\newFeature{v0.15.1} 
 \label{sec:CommandLineOptions:Special:Spout}
 Apart from stand-alone use, Stellarium can be used as multimedia source in larger installations, in museums or science exhibitions. 
-\program{Spout}\footnote{\url{http://spout.zeal.co/}} is a technology which enables use of Stellarium's 
+\program{Spout}\footnote{\url{https://spout.zeal.co/}} is a technology which enables use of Stellarium's 
 output window as texture in DirectX applications on Windows. Simply start Stellarium with 
 the \texttt{-\/-spout=sky} command line option. (Currently \program{Spout} output is limited to the main window 
 without GUI panels, but this may change in future versions.) 
@@ -546,9 +546,9 @@ you can use option \texttt{-\/-spout-name=StelSpout2} in addition to create anot
 In such cases, it may be useful to also have separate user data directories and use option \texttt{-\/-user-dir}. 
 
 This mode does not work in ANGLE mode and requires modern graphics hardware with the \texttt{WGL\_NV\_DX\_interop} 
-driver extension running in OpenGL mode. Some NVidia GPUs work without this extension listed explicitly. 
-On a notebook with NVidia Optimus technology, make sure to launch Stellarium on the NVidia hardware. 
-For permanent setting, use the NVidia configuration dialog to configure Stellarium explicitly to run always on the NVidia card.
+driver extension running in OpenGL mode. Some Nvidia GPUs work without this extension listed explicitly. 
+On a notebook with Nvidia Optimus technology, make sure to launch Stellarium on the Nvidia hardware. 
+For permanent setting, use the Nvidia configuration dialog to configure Stellarium explicitly to run always on the Nvidia card.
 
 Note that Spout use disables any multisampling setting (see Appendix~\ref{sec:config.ini:video}). 
 
