@@ -396,36 +396,40 @@ QString Planet::getPlanetLabel() const
 	QTextStream oss(&str);
 	if (englishName=="Pluto") // We must prepend minor planet number here. Actually Dwarf Planet Pluto is still a "Planet" object in Stellarium...
 		oss << QString("(134340) ");
-	switch (propMgr->getStelPropertyValue("ConstellationMgr.constellationDisplayStyle").toInt())
+
+	if (getFlagNativeName())
 	{
-		case 1: // constellationsNative
+		switch (propMgr->getStelPropertyValue("ConstellationMgr.constellationDisplayStyle").toInt())
 		{
-			if (getFlagNativeName())
+			case 1: // constellationsNative
 				oss << (nativeName.isEmpty() ? getNameI18n() : QString("%1 [%2]").arg(getNativeName(), getNameI18n()));
-			else
-				oss << getNameI18n();
-			break;
-		}
-		case 2: // constellationsTranslated
-		{
-			if (getFlagNativeName())
+				break;
+			case 2: // constellationsTranslated
 				oss << (nativeNameMeaningI18n.isEmpty() ? getNameI18n() : QString("%1 [%2]").arg(getNativeNameI18n(), getNameI18n()));
-			else
-				oss << getNameI18n();
-			break;
-		}
-		case 3: // constellationsEnglish
-		{
-			if (getFlagNativeName())
+				break;
+			case 3: // constellationsEnglish
 				oss << (nativeNameMeaning.isEmpty() ? getEnglishName() : QString("%1 [%2]").arg(nativeNameMeaning, getEnglishName()));
-			else
-				oss << getEnglishName();
-			break;
+				break;
+			default:
+				oss << getNameI18n();
+				break;
 		}
-		default:
-			oss << getNameI18n();
-			break;
 	}
+	else
+	{
+		switch (propMgr->getStelPropertyValue("ConstellationMgr.constellationDisplayStyle").toInt())
+		{
+			case 3: // constellationsEnglish
+				oss << getEnglishName();
+				break;
+			case 1: // constellationsNative
+			case 2: // constellationsTranslated
+			default:
+				oss << getNameI18n();
+				break;
+		}
+	}
+
 	oss.setRealNumberNotation(QTextStream::FixedNotation);
 	oss.setRealNumberPrecision(1);
 	if (sphereScale != 1.)
@@ -517,21 +521,19 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	oss << getInfoStringExtraMag(core, flags);
 	oss << getCommonInfoString(core, flags);
 
+#ifndef NDEBUG
 	// Debug help.
-	oss << "Apparent Magnitude Algorithm: " << getApparentMagnitudeAlgorithmString() << " " << vMagAlgorithm << "<br>";
-	//Vec3d sunAberr=GETSTELMODULE(SolarSystem)->getLightTimeSunPosition()-GETSTELMODULE(SolarSystem)->getEarth()->eclipticPos;
+	//oss << "Apparent Magnitude Algorithm: " << getApparentMagnitudeAlgorithmString() << " " << vMagAlgorithm << "<br>";
 	Vec3d sunAberr=GETSTELMODULE(SolarSystem)->getSun()->eclipticPos  +GETSTELMODULE(SolarSystem)->getSun()->getAberrationPush()    -GETSTELMODULE(SolarSystem)->getEarth()->eclipticPos;
 	double lon, lat;
 	StelUtils::rectToSphe(&lon, &lat, sunAberr);
-	oss << "Sun (light time corrected) at &lambda;=" << StelUtils::radToDmsStr(StelUtils::fmodpos(lon, 2.*M_PI)) << " &beta;=" << StelUtils::radToDmsStr(lat) << "<br>";
-//#ifndef NDEBUG
+	oss << "Sun (light time and aberration corrected) at &lambda;=" << StelUtils::radToDmsStr(StelUtils::fmodpos(lon, 2.*M_PI)) << " &beta;=" << StelUtils::radToDmsStr(lat) << "<br>";
 	// This is mostly for debugging. Maybe also useful for letting people use our results to cross-check theirs, but we should not act as reference, currently...
 	// maybe separate this out into:
 	//if (flags&EclipticCoordXYZ)
 	// For now: add to EclipticCoordJ2000 group
 	if (flags&EclipticCoordJ2000)
 	{
-		//Vec3d eclPos=(englishName=="Sun" ? GETSTELMODULE(SolarSystem)->getLightTimeSunPosition() : eclipticPos);
 		QString algoName("VSOP87");
 		if (EphemWrapper::use_de440(core->getJDE())) algoName="DE440";
 		else if (EphemWrapper::use_de441(core->getJDE())) algoName="DE441";
@@ -543,7 +545,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		Vec3d eclAb=eclipticPos+aberrationPush;
 		oss << QString("%1 XYZ J2000.0 (%2) with aberration: %3/%4/%5 AU").arg(qc_("Ecliptical","coordinates"), algoName, QString::number(eclAb[0], 'f', 7), QString::number(eclAb[1], 'f', 7), QString::number(eclAb[2], 'f', 7)) << "<br>";
 	}
-//#endif
+#endif
 
 	// Second test avoids crash when observer is on spaceship
 	if (flags&ProperMotion && !core->getCurrentObserver()->isObserverLifeOver())
@@ -906,12 +908,6 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 
 	if (flags&Extra)
 	{
-
-		oss << QString("DEBUG: AberrationPush: %1/%2/%3 km<br/>")
-			.arg(QString::number(AU * aberrationPush[0], 'f', 6))
-			.arg(QString::number(AU * aberrationPush[1], 'f', 6))
-			.arg(QString::number(AU * aberrationPush[2], 'f', 6));
-
 		const bool withTables = StelApp::getInstance().getFlagUseFormattingOutput();
 		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 		const double angularSize = 2.*getAngularSize(core)*M_PI_180;
@@ -920,6 +916,11 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 		static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 		PlanetP earth = ssystem->getEarth();
 
+#ifndef NDEBUG
+		oss << QString("DEBUG: AberrationPush: %1/%2/%3 km<br/>")
+			.arg(QString::number(AU * aberrationPush[0], 'f', 6))
+			.arg(QString::number(AU * aberrationPush[1], 'f', 6))
+			.arg(QString::number(AU * aberrationPush[2], 'f', 6));
 
 		Vec3d earthAberrationPush=earth->getAberrationPush();
 		oss << QString("DEBUG: Earth's AberrationPush: %1/%2/%3 km<br/>")
@@ -933,7 +934,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 			.arg(QString::number(AU * sunAberrationPush[0], 'f', 6))
 			.arg(QString::number(AU * sunAberrationPush[1], 'f', 6))
 			.arg(QString::number(AU * sunAberrationPush[2], 'f', 6));
-
+#endif
 
 		//PlanetP currentPlanet = core->getCurrentPlanet();
 		const bool onEarth = (core->getCurrentPlanet()==earth);
@@ -1473,26 +1474,18 @@ void Planet::setSiderealPeriod(const double siderealPeriod)
 	deltaOrbitJDE = siderealPeriod/ORBIT_SEGMENTS;
 }
 
+// A Planet's own eclipticPos is in VSOP87 ref. frame (practically equal to ecliptic of J2000 for us) coordinates relative to the parent body (sun, planet).
+// To get J2000 equatorial coordinates, we require heliocentric ecliptical positions (adding up parent positions) of observer and Planet.
+// Then we use the matrix rotation multiplication with an existing matrix in StelCore to orient from eclipticalJ2000 to equatorialJ2000.
+// The end result is a non-normalized 3D vector which allows retrieving distances etc.
+// To apply aberration correction, we need the velocity vector of the observer's planet and apply a little correction in SolarSystem::computePositions()
+// prepare for aberration: Explan. Suppl. 2013, (7.38)
 Vec3d Planet::getJ2000EquatorialPos(const StelCore *core) const
 {
-	// A Planet's own eclipticPos is in VSOP87 ref. frame (practically equal to ecliptic of J2000 for us) coordinates relative to the parent body (sun, planet).
-	// To get J2000 equatorial coordinates, we require heliocentric ecliptical positions (adding up parent positions) of observer and Planet.
-	// Then we use the matrix rotation multiplication with an existing matrix in StelCore to orient from eclipticalJ2000 to equatorialJ2000.
-	// The end result is a non-normalized 3D vector which allows retrieving distances etc.
-	// To apply aberration correction, we need the velocity vector of the observer's planet and apply a little correction
-	// prepare for aberration: Explan. Suppl. 2013, (7.38)
 	const bool withAberration=core->getUseAberration();
-	Vec3d pos;
-//	if (englishName=="Sun")
-//		// TODO: Make sure there is nothing more to do!
-//		pos = StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(GETSTELMODULE(SolarSystem)->getLightTimeSunPosition() - core->getObserverHeliocentricEclipticPos());
-//	else
-//	{
-		pos = StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(getHeliocentricEclipticPos()
-									    - core->getObserverHeliocentricEclipticPos()
-									    + (withAberration ? aberrationPush : Vec3d(0.)));
-//	}
-	return pos;
+	return StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(getHeliocentricEclipticPos()
+								    - core->getObserverHeliocentricEclipticPos()
+								    + (withAberration ? aberrationPush : Vec3d(0.)));
 }
 
 // return value in radians!
@@ -2575,16 +2568,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 		return;
 	}
 
-	Mat4d mat;
-//	if (englishName=="Sun")
-//	{
-//		mat = Mat4d::translation(GETSTELMODULE(SolarSystem)->getLightTimeSunPosition()) * rotLocalToParent;
-//	}
-//	else
-//	{
-		//mat = Mat4d::translation(eclipticPos+aberrationPush) * rotLocalToParent;
-		mat = Mat4d::translation(eclipticPos) * rotLocalToParent;
-//	}
+	Mat4d mat = Mat4d::translation(eclipticPos) * rotLocalToParent;
 
 	PlanetP p = parent;
 	switch (re.method) {
@@ -2598,13 +2582,12 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 		case RotationElements::WGCCRE:
 			while (p && p->parent)
 			{
-				mat = Mat4d::translation(p->eclipticPos) * mat; // * p->rotLocalToParent;
+				mat = Mat4d::translation(p->eclipticPos) * mat;
 				p = p->parent;
 			}
 			break;
 	}
-//	if (englishName!="Sun")
-		mat = Mat4d::translation(aberrationPush) * mat;
+	mat = Mat4d::translation(aberrationPush) * mat;
 
 	// This removed totally the Planet shaking bug!!!
 	StelProjector::ModelViewTranformP transfo = core->getHeliocentricEclipticModelViewTransform();
@@ -3433,12 +3416,10 @@ void Planet::computeModelMatrix(Mat4d &result, bool solarEclipseCase) const
 		const double earthMoonDistance=eclipticPos.length();
 		const double factor=earthMoonDistance/earthSunDistance;
 		result = Mat4d::translation(factor*sun->getAberrationPush()) * result * Mat4d::zrotation(M_PI/180.*static_cast<double>(axisRotation + 90.f));
-
 	}
 	else {
 		result = Mat4d::translation(aberrationPush) * result * Mat4d::zrotation(M_PI/180.*static_cast<double>(axisRotation + 90.f));
 	}
-	//result = result * Mat4d::zrotation(M_PI/180.*static_cast<double>(axisRotation + 90.f));
 }
 
 Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, QOpenGLShaderProgram* shader, const PlanetShaderVars& shaderVars) //const
@@ -3498,8 +3479,6 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 	GL(shader->setUniformValue(shaderVars.shadowData, data.shadowCandidatesData));
 	GL(shader->setUniformValue(shaderVars.sunInfo, static_cast<GLfloat>(data.mTarget[12]), static_cast<GLfloat>(data.mTarget[13]), static_cast<GLfloat>(data.mTarget[14]), static_cast<GLfloat>(sun->getEquatorialRadius())));
 	GL(shader->setUniformValue(shaderVars.skyBrightness, lmgr->getAtmosphereAverageLuminance()));
-
-	//setExtraInfoString(StelObject::DebugAid, QString("SunInfo: %1/%2/%3 ").arg(QString::number(data.mTarget[12], 'f', 7)).arg(QString::number(data.mTarget[13], 'f', 7)).arg(QString::number(data.mTarget[14], 'f', 7)));
 
 	if(shaderVars.orenNayarParameters>=0)
 	{
@@ -3722,7 +3701,6 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	
 	painter->setCullFace(false);
 }
-
 
 // Draw the Hips survey.
 void Planet::drawSurvey(StelCore* core, StelPainter* painter)
@@ -4042,7 +4020,7 @@ bool Planet::drawObjShadowMap(StelPainter *painter, QMatrix4x4& shadowMatrix)
 	//computeModelMatrix(modelMatrix);
 	//Mat4d worldToModel = modelMatrix.inverse();
 
-	Vec3d lightDir = light.position; //.toVec3d();
+	Vec3d lightDir = light.position;
 	projector->getModelViewTransform()->backward(lightDir);
 	//Vec3d lightDir(worldToModel[12], worldToModel[13], worldToModel[14]);
 	lightDir.normalize();
@@ -4251,7 +4229,7 @@ void Planet::computeOrbit()
 	double calc_date;
 	Vec3d parentPos;
 	if (parent)
-		parentPos = parent->getHeliocentricEclipticPos(dateJDE);
+		parentPos = parent->getHeliocentricEclipticPos(dateJDE)+ parent->getAberrationPush(); // aberrationPush is not strictly correct, but helps a lot...
 
 	for(int d = 0; d < ORBIT_SEGMENTS; d++)
 	{
@@ -4266,7 +4244,6 @@ void Planet::computeOrbit()
 }
 
 // draw orbital path of Planet
-// TODO: How to deal with aberration?
 void Planet::drawOrbit(const StelCore* core)
 {
 	if (!static_cast<bool>(orbitFader.getInterstate()))
@@ -4296,7 +4273,7 @@ void Planet::drawOrbit(const StelCore* core)
 	// special case - use current Planet position as center vertex so that draws
 	// on its orbit all the time (since segmented rather than smooth curve)
 	Vec3d savePos = orbit[ORBIT_SEGMENTS/2];
-	orbit[ORBIT_SEGMENTS/2]=getHeliocentricEclipticPos();
+	orbit[ORBIT_SEGMENTS/2]=getHeliocentricEclipticPos()+aberrationPush;
 	orbit[ORBIT_SEGMENTS]=orbit[0];
 	int nbIter = closeOrbit ? ORBIT_SEGMENTS : ORBIT_SEGMENTS-1;
 	QVarLengthArray<float, 1024> vertexArray;
