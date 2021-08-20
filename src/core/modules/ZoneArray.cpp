@@ -466,7 +466,8 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 		// Aberration: vf contains Equatorial J2000 position.
 		if (withAberration)
 		{
-			vf.normalize(); // TODO: not sure if required
+			//Q_ASSERT_X(fabs(vf.lengthSquared()-1.0f)<0.0001f, "ZoneArray aberration", "vertex length not unity");
+			vf.normalize(); // required!
 			vf+=velf;
 			vf.normalize();
 		}

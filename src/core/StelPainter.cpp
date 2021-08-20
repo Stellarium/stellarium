@@ -1520,7 +1520,11 @@ public:
 						   unsigned int, unsigned int, unsigned) const
 	{
 		// XXX: we may optimize more by putting the declaration and the test outside of this method.
-		const Vec3d tmpVertex[3] = {*v0, *v1, *v2};
+		Vec3d tmpVertex[3] = {*v0, *v1, *v2};
+		// required, else assertion at begin of projectSphericalTriangle() fails!
+		tmpVertex[0].normalize();
+		tmpVertex[1].normalize();
+		tmpVertex[2].normalize();
 		if ( (outTexturePos) && (outColors))
 		{
 			const Vec2f tmpTexture[3] = {*t0, *t1, *t2};
