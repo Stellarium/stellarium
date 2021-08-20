@@ -86,7 +86,8 @@ protected:
 		{
 			Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
 			vel=StelCore::matVsop87ToJ2000*vel*core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
-			v.normalize(); // TODO: Required?
+			//Q_ASSERT_X(fabs(v.lengthSquared()-1.0f)<0.0001f, "StarWrapper aberration", "vertex length not unity");
+			v.normalize(); // Required? YES!
 			Vec3d pos=v.toVec3d()+vel;
 			pos.normalize();
 			return pos;
