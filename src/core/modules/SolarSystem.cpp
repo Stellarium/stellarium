@@ -1702,7 +1702,7 @@ StelObjectP SolarSystem::search(Vec3d pos, const StelCore* core) const
 	else return StelObjectP();
 }
 
-// Return a QList containing the planets located inside the limFov circle around position v
+// Return a QList containing the planets located inside the limFov circle around position vv
 QList<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, const StelCore* core) const
 {
 	QList<StelObjectP> result;
