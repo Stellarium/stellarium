@@ -1690,7 +1690,6 @@ void ConfigurationDialog::resetEphemControls()
 		else
 			ui->de441label->setText(q_("Not Available"));
 	}
-
 }
 
 void ConfigurationDialog::updateSelectedInfoCheckBoxes()

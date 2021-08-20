@@ -152,8 +152,8 @@ void MultiLevelJsonBase::initFromUrl(const QString& url)
 	}
 	else
 	{
-		// Use a very short deletion delay to ensure that tile which are outside screen are discarded before they are even downloaded
-		// This is useful to reduce bandwidth when the user moves rapidly
+		// Use a very short deletion delay to ensure that tiles which are outside screen are discarded before they are even downloaded
+		// This is useful to reduce bandwidth when the user moves the view rapidly
 		deletionDelay = 0.001;
 		QUrl qurl;
 		if (url.startsWith("http", Qt::CaseInsensitive))
