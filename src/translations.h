@@ -731,6 +731,57 @@ class Translations
 		N_("This script will help you make practical works for celestial navigation - he sets a random location and hides it from the GUI.");
 
 		// =====================================================================
+		// United Nations geoscheme
+		// TRANSLATORS: https://en.wikipedia.org/wiki/North_Africa
+		N_("Northern Africa");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/East_Africa
+		N_("Eastern Africa");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Central_Africa
+		N_("Central Africa");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Southern_Africa
+		N_("Southern Africa");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/West_Africa
+		N_("Western Africa");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Caribbean
+		N_("Caribbean");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Central_America
+		N_("Central America");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/South_America
+		N_("Southern America");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Northern_America
+		N_("Northern America");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Central_Asia
+		N_("Central Asia");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/East_Asia
+		N_("Eastern Asia");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Southeast_Asia
+		N_("South-eastern Asia");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/South_Asia
+		N_("Southern Asia");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Western_Asia
+		N_("Western Asia");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/North_Asia
+		N_("Northern Asia");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Eastern_Europe
+		N_("Eastern Europe");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Northern_Europe
+		N_("Northern Europe");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Southern_Europe
+		N_("Southern Europe");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Western_Europe
+		N_("Western Europe");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Australasia
+		N_("Australasia");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Melanesia
+		N_("Melanesia");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Micronesia
+		N_("Micronesia");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Polynesia
+		N_("Polynesia");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Antarctica
+		N_("Antarctica");
+
+		// =====================================================================
 		// List of GUI elements (Qt's dialogs)
 		N_("&Undo");
 		N_("&Redo");
