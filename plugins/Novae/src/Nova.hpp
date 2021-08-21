@@ -46,17 +46,17 @@ public:
 
 	//! @param id The official designation for a nova, e.g. "........"
 	Nova(const QVariantMap& map);
-	~Nova();
+	~Nova() Q_DECL_OVERRIDE;
 
 	//! Get a QVariantMap which describes the nova.  Could be used to create a duplicate.
 	QVariantMap getMap(void) const;
 
-	virtual QString getType(void) const
+	virtual QString getType(void) const Q_DECL_OVERRIDE
 	{
 		return NOVA_TYPE;
 	}
 
-	virtual QString getID(void) const
+	virtual QString getID(void) const Q_DECL_OVERRIDE
 	{
 		return getDesignation();
 	}
@@ -64,7 +64,7 @@ public:
 	//! Get an HTML string to describe the object
 	//! @param core A pointer to the core
 	//! @flags a set of flags with information types to include.
-	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const;
+	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
 	//! Return a map like StelObject::getInfoMap(), but with a few extra tags also available in getMap().
 	// TODO: Describe the entries!
 	//! - designation
@@ -78,13 +78,13 @@ public:
 	//! - m6
 	//! - m9
 	//! - distance
-	virtual QVariantMap getInfoMap(const StelCore *core) const;
-	virtual Vec3f getInfoColor(void) const;
-	virtual Vec3d getJ2000EquatorialPos(const StelCore *core) const;
-	virtual float getVMagnitude(const StelCore* core) const;
-	virtual double getAngularSize(const StelCore* core) const;
-	virtual QString getNameI18n(void) const;
-	virtual QString getEnglishName(void) const;
+	virtual QVariantMap getInfoMap(const StelCore *core) const Q_DECL_OVERRIDE;
+	virtual Vec3f getInfoColor(void) const Q_DECL_OVERRIDE;
+	virtual Vec3d getJ2000EquatorialPos(const StelCore *core) const Q_DECL_OVERRIDE;
+	virtual float getVMagnitude(const StelCore* core) const Q_DECL_OVERRIDE;
+	virtual double getAngularSize(const StelCore* core) const Q_DECL_OVERRIDE;
+	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
+	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE;
 	QString getDesignation(void) const;
 
 	void update(double deltaTime);

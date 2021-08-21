@@ -71,7 +71,7 @@ public:
 	MeteorShowersMgr();
 
 	//! Destructor.
-	virtual ~MeteorShowersMgr();
+	virtual ~MeteorShowersMgr() Q_DECL_OVERRIDE;
 
 	//! Restore default catalog.
 	bool restoreDefaultCatalog(const QString& destination);
@@ -120,12 +120,12 @@ public:
 	//
 	// Methods defined in the StelModule class
 	//
-	virtual void init();
-	virtual void deinit();
-	virtual void update(double deltaTime);
-	virtual void draw(StelCore* core);
-	virtual double getCallOrder(StelModuleActionName actionName) const;
-	virtual bool configureGui(bool show=true);
+	virtual void init() Q_DECL_OVERRIDE;
+	virtual void deinit() Q_DECL_OVERRIDE;
+	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
+	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
+	virtual bool configureGui(bool show=true) Q_DECL_OVERRIDE;
 
 signals:
 	void downloadStatusChanged(DownloadStatus);
@@ -345,9 +345,9 @@ class MeteorShowersStelPluginInterface : public QObject, public StelPluginInterf
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const;
-	virtual StelPluginInfo getPluginInfo() const;
-	virtual QObjectList getExtensionList() const { return QObjectList(); }
+	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
+	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
+	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
 };
 
 #endif /*METEORSHOWERSMGR_HPP*/
