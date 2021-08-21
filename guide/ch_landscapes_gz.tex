@@ -137,7 +137,7 @@ Where:
 \item[\var{altitude}] Is the altitude of the site of the landscape in meters.
 \item[\var{country}] (optional) Name of the country the location is in.
 \item[\var{state}] (optional) Name of the state the location is in.
-\item[\var{timezone}] (optional) IANA Timezone code \newFeature{v0.18.3}
+\item[\var{timezone}] (optional) IANA Timezone code \newFeature{0.18.3}
 \item[\var{name}] (optional) Name of the location. This may contain
   spaces, but keep it short to have it fully visible in the
   selection box.
@@ -170,7 +170,7 @@ panel. If they are missing, the parameters do not change to defaults.
 \subsection{Polygonal landscape}
 \label{sec:landscapes:Polygonal}
 
-This landscape type has been added \newFeature{v.0.13} to allow
+This landscape type has been added \newFeature{0.13} to allow
 the use of measured horizons. Users of \program{Cartes du
   Ciel}\footnote{SkyChart / Cartes du Ciel planetarium:
   \url{https://www.ap-i.net/skychart/en/start}} will be happy to hear
@@ -347,7 +347,7 @@ Where:
 \item[\var{bottom\_cap\_color}] (optional;
   default=\texttt{-1.0,0.0,0.0} to signal ``no color''). If set, this
   is used to close any hole in the nadir area (if \var{maptex\_bottom}
-  higher than -90). \newFeature{v0.19.0}
+  higher than -90). \newFeature{0.19.0}
 \item[\var{maptex\_fog}] (optional; default: no fog) is the name of
   the fog image file for this landscape.
 \item[\var{maptex\_fog\_top}] (optional; default=90) is the altitude
@@ -381,7 +381,7 @@ Where:
 \item[\var{polygonal\_angle\_rotatez}] (optional, default=0) see \ref{sec:landscapes:Polygonal}
 \item[\var{horizon\_line\_color}] see \ref{sec:landscapes:Polygonal}
 \item[\var{minimal\_brightness}]  see \ref{sec:landscapes:Polygonal}
-\item[\var{minimal\_altitude}] (optional, default=-2) \newFeature{v0.14.0} Some sky
+\item[\var{minimal\_altitude}] (optional, default=-2) \newFeature{0.14.0} Some sky
   elements, e.g.\ stars, are not drawn below this altitude for
   efficiency. Under certain circumstances (e.g.\ for space station
   panoramas where you may have sky below your feet, or for deep
@@ -505,7 +505,7 @@ Where:
 \item[\var{tex0 ... tex<nbsidetex-1>}] are the side texture file
   names. These should exist in the \file{textures / landscapes /
     landscape} directory in PNG format.
-\item[\var{light0 ... light<nbsidetex-1>}] are optional textures\newFeature{v0.13.1}. If
+\item[\var{light0 ... light<nbsidetex-1>}] are optional textures\newFeature{0.13.1}. If
   they exist, they are used as overlays on top of the respective
   \var{tex<...>} files and represent nocturnal illumination,
   e.g. street lamps, lit windows, red dots on towers, sky glow by city
@@ -567,7 +567,7 @@ Where:
   front of the scenery, i.e. the side textures will overlap over the
   ground texture if \var{ground\_angle\_shift} >
   \var{decor\_angle\_shift}.
-\item[\var{calibrated}] (optional).\newFeature{v0.10.6} Only if true,
+\item[\var{calibrated}] (optional).\newFeature{0.10.6} Only if true,
   \var{decor\_alt\_angle} etc. really work as documented above. The
   (buggy) old code was left to work with the landscapes already
   existing. Note that with ``uncalibrated'' landscapes, sunrise
@@ -1570,7 +1570,7 @@ The possibilities seem limited only by your time and skills!
 If something does not work as described and Stellarium does not show
 your landscape as expected but maybe just a bright magenta-colored
 box, don't panic.  Double and triple-check the entries in
-\file{landscape.ini}. \newFeature{v0.20.2} Make sure the texture is in
+\file{landscape.ini}. \newFeature{0.20.2} Make sure the texture is in
 PNG format and the file name is correct. Check the logfile for error
 messages. If the image is too large, it will be re-scaled on loading,
 but it is more efficient to keep images as small as required. Only few
