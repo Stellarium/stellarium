@@ -132,11 +132,11 @@
 		Astronomy&Astrophysics 534, A22 (2011); 
 		DOI: 10.1051/0004-6361/201117274
 	1.6 Nutation: 
-		Dennis D. McCarthy and Brian J. Lizum: An Abridged Model of the
+		Dennis D. McCarthy and Brian J. Luzum: An Abridged Model of the
 		Precession-Nutation of the Celestial Pole.
 		Celestial Mechanics and Dynamical Astronomy 85: 37-49, 2003.
 		This model provides accuracy better than 1 milli-arcsecond in the
-		time 1995-2050. It is applied for years 1500..2500 only.
+		time 1995-2050. It is applied for years -4000..+8000 only.
 
 2. Included source code
 	2.1 Some computation of the sideral time (sidereal_time.h/c) and pluto
