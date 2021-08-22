@@ -93,11 +93,11 @@ void LocationDialog::createDialogContent()
 	connect(app, SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(app, SIGNAL(flagShowDecimalDegreesChanged(bool)), this, SLOT(setDisplayFormatForSpins(bool)));
 	connect(&app->getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(populatePlanetList(QString)));
-	// Init the SpinBox entries	
+	// Init the SpinBox entries
 	ui->longitudeSpinBox->setPrefixType(AngleSpinBox::Longitude);
 	ui->longitudeSpinBox->setMinimum(-180.0, true);
 	ui->longitudeSpinBox->setMaximum( 180.0, true);
-	ui->longitudeSpinBox->setWrapping(true);	
+	ui->longitudeSpinBox->setWrapping(true);
 	ui->latitudeSpinBox->setPrefixType(AngleSpinBox::Latitude);
 	ui->latitudeSpinBox->setMinimum(-90.0, true);
 	ui->latitudeSpinBox->setMaximum( 90.0, true);
@@ -249,7 +249,7 @@ void LocationDialog::updateFromProgram(const StelLocation& currentLocation)
 	}
 
 	const QString& key1 = currentLocation.getID();
-	const QString& key2 = locationFromFields().getID();	
+	const QString& key2 = locationFromFields().getID();
 	if (key1!=key2)
 	{
 		setFieldsFromLocation(currentLocation);
@@ -439,11 +439,9 @@ void LocationDialog::populateRegionList()
 	regionCombo->clear();
 	//For each region, display the localized name and store the original as user
 	//data. Unfortunately, there's no other way to do this than with a loop.
-	if (ui->planetNameComboBox->itemData(Qt::UserRole).toString().compare("Earth", Qt::CaseInsensitive))
-	{
-		for (const auto& name : qAsConst(regionNames))
-			regionCombo->addItem(q_(name), name);
-	}
+	for (const auto& name : qAsConst(regionNames))
+		regionCombo->addItem(q_(name), name);
+
 	regionCombo->addItem(QChar(0x2014), "");
 	//Restore the selection
 	index = regionCombo->findData(selectedRegionId, Qt::UserRole, Qt::MatchCaseSensitive);
@@ -813,7 +811,7 @@ void LocationDialog::gpsEnableQueryLocation(bool running)
 		StelApp::getInstance().getLocationMgr().locationFromGPS(0);
 		ui->gpsToolButton->setText(q_("GPS disconnecting..."));
 		QTimer::singleShot(1500, this, SLOT(resetGPSbuttonLabel()));
-	}	
+	}
 }
 
 void LocationDialog::gpsReturn(bool success)

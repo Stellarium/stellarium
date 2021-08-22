@@ -100,7 +100,7 @@ define(["jquery", "api/location", "settings", "api/trunc", "./combobox"], functi
 			var op = document.createElement("option");
 			op.innerHTML = data[i].name_i18n; //translated
 			op.value = data[i].name;
-			$loc_country[0].appendChild(op);
+		        $loc_region[0].appendChild(op);
 		}
 
 		parent.append($loc_region);
