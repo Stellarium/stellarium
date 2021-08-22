@@ -1511,12 +1511,12 @@ void Oculars::toggleTelrad()
 void Oculars::initializeActivationActions()
 {
 	QString ocularsGroup = N_("Oculars");
-	actionShowOcular = addAction("actionShow_Ocular", ocularsGroup, N_("Ocular view"), "enableOcular", "Ctrl+O");
+	actionShowOcular = addAction("actionShow_Oculars", ocularsGroup, N_("Ocular view"), "enableOcular", "Ctrl+O");
 	actionMenu = addAction("actionShow_Ocular_Menu", ocularsGroup, N_("Oculars popup menu"), "displayPopupMenu()", "Alt+O");
 	actionShowCrosshairs = addAction("actionShow_Ocular_Crosshairs", ocularsGroup, N_("Show crosshairs"), "enableCrosshairs", "Alt+C");
 	actionShowSensor = addAction("actionShow_Sensor", ocularsGroup, N_("Image sensor frame"), "enableCCD");
 	actionShowTelrad = addAction("actionShow_Telrad", ocularsGroup, N_("Telrad sight"), "enableTelrad", "Ctrl+B");
-	actionConfiguration = addAction("actionOpen_Oculars_Configuration", ocularsGroup, N_("Toggle Oculars configuration window"), ocularDialog, "visible", ""); // Allow assign shortkey
+	actionConfiguration = addAction("actionShow_Oculars_dialog", ocularsGroup, N_("Show settings dialog"), ocularDialog, "visible", ""); // Allow assign shortkey
 	addAction("actionShow_Oculars_GUI", ocularsGroup, N_("Toggle Oculars button bar"), "flagGuiPanelEnabled"); // Allow assign shortkey
 	// Select next telescope via keyboard
 	addAction("actionShow_Telescope_Increment", ocularsGroup, N_("Select next telescope"), "incrementTelescopeIndex()");
@@ -2948,12 +2948,12 @@ void Oculars::setFlagShowOcularsButton(bool b)
 	{
 		if (b==true) {
 			if (toolbarButton==Q_NULLPTR) {
-				// Create the pulsars button
-				toolbarButton = new StelButton(Q_NULLPTR, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, "actionShow_Ocular");
+				// Create the oculars button
+				toolbarButton = new StelButton(Q_NULLPTR, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, "actionShow_Oculars", false, "actionShow_Oculars_dialog");
 			}
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		} else {
-			gui->getButtonBar()->hideButton("actionShow_Ocular");
+			gui->getButtonBar()->hideButton("actionShow_Oculars");
 		}
 	}
 	flagShowOcularsButton = b;

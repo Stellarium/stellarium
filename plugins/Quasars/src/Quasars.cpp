@@ -170,7 +170,7 @@ void Quasars::init()
 
 		// key bindings and other actions
 		addAction("actionShow_Quasars", N_("Quasars"), N_("Show quasars"), "quasarsVisible", "Ctrl+Alt+Q");
-		addAction("actionShow_Quasars_ConfigDialog", N_("Quasars"), N_("Quasars configuration window"), configDialog, "visible", ""); // Allow assign shortkey
+		addAction("actionShow_Quasars_dialog", N_("Quasars"), N_("Show settings dialog"), configDialog, "visible", ""); // Allow assign shortkey
 
 		GlowIcon = new QPixmap(":/graphicGui/miscGlow32x32.png");
 		OnIcon = new QPixmap(":/Quasars/btQuasars-on.png");
@@ -250,9 +250,9 @@ void Quasars::drawPointer(StelCore* core, StelPainter& painter)
 		const StelObjectP obj = newSelected[0];
 		Vec3d pos=obj->getJ2000EquatorialPos(core);
 
-		Vec3d screenpos;
+		Vec3f screenpos;
 		// Compute 2D pos and return if outside screen
-		if (!painter.getProjector()->project(pos, screenpos))
+		if (!painter.getProjector()->project(pos.toVec3f(), screenpos))
 			return;
 
 		const Vec3f& c(obj->getInfoColor());
@@ -604,7 +604,7 @@ void Quasars::saveSettingsToConfig(void)
 int Quasars::getSecondsToUpdate(void)
 {
 	QDateTime nextUpdate = lastUpdate.addSecs(updateFrequencyDays * 3600 * 24);
-	return QDateTime::currentDateTime().secsTo(nextUpdate);
+	return static_cast<int>(QDateTime::currentDateTime().secsTo(nextUpdate));
 }
 
 void Quasars::checkForUpdate(void)
@@ -675,11 +675,11 @@ void Quasars::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
 		//Round to the greatest possible derived unit
 		while (bytesTotal > 1024)
 		{
-			bytesReceived = std::floor(bytesReceived / 1024.);
-			bytesTotal    = std::floor(bytesTotal / 1024.);
+			bytesReceived = static_cast<long long>(std::floor(bytesReceived / 1024.));
+			bytesTotal    = static_cast<long long>(std::floor(bytesTotal / 1024.));
 		}
-		currentValue = bytesReceived;
-		endValue = bytesTotal;
+		currentValue = static_cast<int>(bytesReceived);
+		endValue     = static_cast<int>(bytesTotal);
 	}
 
 	progressBar->setValue(currentValue);
@@ -766,7 +766,7 @@ void Quasars::setFlagShowQuasarsButton(bool b)
 		if (b==true) {
 			if (toolbarButton==Q_NULLPTR) {
 				// Create the quasars button
-				toolbarButton = new StelButton(Q_NULLPTR, *OnIcon, *OffIcon, *GlowIcon, "actionShow_Quasars");
+				toolbarButton = new StelButton(Q_NULLPTR, *OnIcon, *OffIcon, *GlowIcon, "actionShow_Quasars", false, "actionShow_Quasars_dialog");
 			}
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		} else {

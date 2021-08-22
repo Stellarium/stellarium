@@ -206,15 +206,8 @@ void Observability::init()
 {
 	loadConfiguration();
 	
-	StelAction* actionShow = addAction("actionShow_Observability",
-	                                   N_("Observability"),
-	                                   N_("Observability"),
-	                                   "flagShowReport");
-	// actionShow->setChecked(flagShowReport); //Unnecessary?
-	addAction("actionShow_Observability_ConfigDialog",
-	          N_("Observability"),
-	          N_("Observability configuration window"),
-		  configDialog, "visible", ""); // Allow assign shortkey
+	addAction("actionShow_Observability",        N_("Observability"), N_("Observability"),      "flagShowReport");
+	addAction("actionShow_Observability_dialog", N_("Observability"), N_("Show settings dialog"), configDialog, "visible", ""); // Allow assign shortkey
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (gui!=Q_NULLPTR)
@@ -223,7 +216,9 @@ void Observability::init()
 					QPixmap(":/observability/bt_observab_on.png"),
 					QPixmap(":/observability/bt_observab_off.png"),
 					QPixmap(":/graphicGui/miscGlow32x32.png"),
-					actionShow);
+					"actionShow_Observability",
+					false,
+					"actionShow_Observability_dialog");
 		gui->getButtonBar()->addButton(button, "065-pluginsGroup");
 	}
 	
