@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>664</width>
+    <width>680</width>
     <height>634</height>
    </rect>
   </property>
@@ -295,7 +295,7 @@
       <item row="1" column="0">
        <widget class="QStackedWidget" name="configurationStackedWidget">
         <property name="currentIndex">
-         <number>2</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="page_Main">
          <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -1964,68 +1964,6 @@
                </property>
               </widget>
              </item>
-             <item row="17" column="3">
-              <widget class="QCheckBox" name="kineticScrollingCheckBox">
-               <property name="toolTip">
-                <string>Kinetic scrolling means dragging text panels directly instead of dragging window handles.</string>
-               </property>
-               <property name="text">
-                <string>Use kinetic scrolling</string>
-               </property>
-              </widget>
-             </item>
-             <item row="15" column="3">
-              <layout class="QHBoxLayout" name="mouseTimeoutLayout">
-               <item>
-                <widget class="QCheckBox" name="mouseTimeoutCheckbox">
-                 <property name="toolTip">
-                  <string>Hides the mouse cursor when inactive</string>
-                 </property>
-                 <property name="text">
-                  <string>Mouse cursor timeout:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QDoubleSpinBox" name="mouseTimeoutSpinBox">
-                 <property name="maximumSize">
-                  <size>
-                   <width>16777215</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="toolTip">
-                  <string>seconds</string>
-                 </property>
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                 <property name="minimum">
-                  <double>0.000000000000000</double>
-                 </property>
-                 <property name="maximum">
-                  <double>3600.000000000000000</double>
-                 </property>
-                 <property name="value">
-                  <double>10.000000000000000</double>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>30</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-              </layout>
-             </item>
              <item row="0" column="1">
               <widget class="QCheckBox" name="sphericMirrorCheckbox">
                <property name="toolTip">
@@ -2260,6 +2198,16 @@
                </property>
               </widget>
              </item>
+             <item row="4" column="1">
+              <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox">
+               <property name="toolTip">
+                <string>When enabled, the &quot;auto zoom out&quot; key will also set the initial viewing direction</string>
+               </property>
+               <property name="text">
+                <string>Auto-direction at zoom out</string>
+               </property>
+              </widget>
+             </item>
              <item row="16" column="3">
               <layout class="QHBoxLayout" name="horizontalLayout_14">
                <item>
@@ -2278,13 +2226,65 @@
                </item>
               </layout>
              </item>
-             <item row="4" column="1">
-              <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox">
+             <item row="15" column="3">
+              <layout class="QHBoxLayout" name="mouseTimeoutLayout">
+               <item>
+                <widget class="QCheckBox" name="mouseTimeoutCheckbox">
+                 <property name="toolTip">
+                  <string>Hides the mouse cursor when inactive</string>
+                 </property>
+                 <property name="text">
+                  <string>Mouse cursor timeout:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="mouseTimeoutSpinBox">
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="toolTip">
+                  <string>seconds</string>
+                 </property>
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                 <property name="minimum">
+                  <double>0.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>3600.000000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>10.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>30</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+             <item row="12" column="3">
+              <widget class="QCheckBox" name="kineticScrollingCheckBox">
                <property name="toolTip">
-                <string>When enabled, the &quot;auto zoom out&quot; key will also set the initial viewing direction</string>
+                <string>Kinetic scrolling means dragging text panels directly instead of dragging window handles.</string>
                </property>
                <property name="text">
-                <string>Auto-direction at zoom out</string>
+                <string>Use kinetic scrolling</string>
                </property>
               </widget>
              </item>
