@@ -729,22 +729,42 @@ QString Planet::getInfoStringEloPhase(const StelCore *core, const InfoStringGrou
 		const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
 		const double elongation = getElongation(observerHelioPos);
 
-		QString pha, elo;
+		// some users require not "modern elongation" but just the DeltaLambda (GH:#1786)
+		static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+		double raSun, deSun, ra, de, lSun, ecLong, bSun, ecLat;
+		double obl=ssystem->getEarth()->getRotObliquity(core->getJDE());
+		if (core->getUseNutation())
+		{
+			double dEps, dPsi;
+			getNutationAngles(core->getJDE(), &dPsi, &dEps);
+			obl+=dEps;
+		}
+		StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
+		StelUtils::rectToSphe(&ra, &de, getEquinoxEquatorialPos(core));
+		StelUtils::equToEcl(raSun, deSun, obl, &lSun, &bSun);
+		StelUtils::equToEcl(ra, de, obl, &ecLong, &ecLat);
+		double elongAlongEcliptic=StelUtils::fmodpos(ecLong-lSun, M_PI*2.);
+		if (elongAlongEcliptic > M_PI) elongAlongEcliptic-=2.*M_PI;
+
+		QString pha, elo, dLam;
 		if (withDecimalDegree)
 		{
-			pha = StelUtils::radToDecDegStr(getPhaseAngle(observerHelioPos),4,false,true);
-			elo = StelUtils::radToDecDegStr(elongation,4,false,true);
+			pha  = StelUtils::radToDecDegStr(getPhaseAngle(observerHelioPos),4,false,true);
+			elo  = StelUtils::radToDecDegStr(elongation,4,false,true);
+			dLam = StelUtils::radToDecDegStr(elongAlongEcliptic,4,false,true);
 		}
 		else
 		{
-			pha = StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos), true);
-			elo = StelUtils::radToDmsStr(elongation, true);			
+			pha  = StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos), true);
+			elo  = StelUtils::radToDmsStr(elongation, true);
+			dLam = StelUtils::radToDmsStr(elongAlongEcliptic, true);
 		}
 
 		if (withTables)
 		{
 			oss << "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
 			oss << QString("<tr><td>%1:</td><td align=\"right\">%2</td></tr>").arg(q_("Elongation"), elo);
+			oss << QString("<tr><td>%1 (&Delta;&lambda;<sub>s</sub>):</td><td align=\"right\">%2</td></tr>").arg(q_("Elongation"), dLam);
 			oss << QString("<tr><td>%1:</td><td align=\"right\">%2</td></tr>").arg(q_("Phase angle"), pha);
 			if (withIllum)
 				oss << QString("<tr><td>%1:</td><td align=\"right\">%2%</td></tr>").arg(q_("Illuminated")).arg(QString::number(getPhase(observerHelioPos) * 100., 'f', 1));
@@ -753,6 +773,7 @@ QString Planet::getInfoStringEloPhase(const StelCore *core, const InfoStringGrou
 		else
 		{
 			oss << QString("%1: %2<br/>").arg(q_("Elongation"), elo);
+			oss << QString("%1: %2<br/>").arg(q_("Elong. in Ecl.Long."), dLam);
 			oss << QString("%1: %2<br/>").arg(q_("Phase angle"), pha);
 			if (withIllum)
 				oss << QString("%1: %2%<br/>").arg(q_("Illuminated"), QString::number(getPhase(observerHelioPos) * 100., 'f', 1));
