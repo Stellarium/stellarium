@@ -1132,10 +1132,13 @@ void StelLocationMgr::loadRegions()
 				QStringList list=line.split("\t", QString::KeepEmptyParts);
 				#endif
 
-				QString regionName = list.at(1).trimmed();
-				QString countries = list.at(2).trimmed().toLower();
+				QString regionName = list.at(2).trimmed();
+				QString countries;
+				if (list.size()>3)
+					countries = list.at(3).trimmed().toLower();
 				GeoRegion region;
-				region.code = list.at(0).trimmed().toInt();;
+				region.code = list.at(0).trimmed().toInt();
+				region.planet = list.at(1).trimmed();
 				region.regionName = regionName;
 				region.countries = countries;
 
@@ -1164,13 +1167,23 @@ void StelLocationMgr::loadRegions()
 	}
 }
 
-QStringList StelLocationMgr::getAllRegionNames() const
+QStringList StelLocationMgr::getRegionNames(const QString& planet) const
 {
 	QStringList allregions;
-	for (int i=0;i<regions.size();i++)
+	if (planet.isEmpty())
 	{
-		allregions.append(regions.at(i).regionName);
+		for (int i=0;i<regions.size();i++)
+			allregions.append(regions.at(i).regionName);
 	}
+	else
+	{
+		for (int i=0;i<regions.size();i++)
+		{
+			if (planet.contains(regions.at(i).planet, Qt::CaseInsensitive) && !planet.contains("Observer", Qt::CaseInsensitive))
+				allregions.append(regions.at(i).regionName);
+		}
+	}
+
 	return allregions;
 }
 

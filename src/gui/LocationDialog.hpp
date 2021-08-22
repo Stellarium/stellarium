@@ -75,7 +75,7 @@ private:
 	//! The displayed names are localized in the current interface language.
 	//! The original names are kept in the user data field of each QComboBox
 	//! item.
-	void populateRegionList();
+	void populateRegionList(const QString& planet = "");
 
 	//! Populates the drop-down list of time zones.
 	//! The displayed names are localized in the current interface language.

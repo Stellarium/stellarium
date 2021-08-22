@@ -1,26 +1,36 @@
 # United Nations geoscheme (UN M49)
-# code	English name	list of countries (ISO 3166 codes)
-01	Northern Africa	DZ,EG,LY,MA,SD,TN,EH
-02	Eastern Africa	BI,KM,DJ,ER,ET,TF,KE,MG,MW,MU,YT,MZ,RE,RW,SC,SO,SS,TZ,UG,ZM,ZW
-03	Central Africa	AO,CM,CF,TD,CG,CD,GQ,GA,ST
-04	Southern Africa	BW,SZ,LS,NA,ZA
-05	Western Africa	BJ,BF,CV,CI,GM,GH,GN,GW,LR,ML,MR,NE,NG,SH,SN,SL,TG
-06	Caribbean	AI,AG,AW,BS,BB,BQ,KY,CU,CW,DM,DO,GD,GP,HT,JM,MQ,MS,PR,BL,KN,LC,MF,VC,SX,TT,TC,VG,VI
-07	Central America	BZ,CR,SV,GT,HN,MX,NI,PA
-08	Southern America	AR,BO,BV,BR,CL,CO,EC,FK,GF,GY,PY,PE,GS,SR,UY,VE
-09	Northern America	BM,CA,GL,PM,US
-10	Antarctica	AQ
-11	Northern Asia	RU
-12	Central Asia	KZ,KG,TJ,TM,UZ
-13	Eastern Asia	CN,HK,JP,KP,KR,MO,MN,TW
-14	South-eastern Asia	BN,KH,ID,LA,MY,MM,PH,SG,TH,TL,VN
-15	Southern Asia	AF,BD,BT,IN,IR,MV,NP,PK,LK
-16	Western Asia	AM,AZ,BH,CY,GE,IQ,IL,JO,KW,LB,OM,PS,QA,SA,SY,TR,AE,YE
-17	Eastern Europe	BY,BG,CZ,HU,MD,PL,RO,RU,SK,UA
-18	Northern Europe	AX,GG,JE,CQ,DK,EE,FO,FI,IS,IE,IM,LV,LT,NO,SJ,SE,GB
-19	Southern Europe	AL,AD,BA,HR,GI,GR,VA,IT,MT,ME,MK,PT,SM,RS,SI,ES,XK
-20	Western Europe	AT,BE,FR,DE,LI,LU,MC,NL,CH
-21	Australasia	AU,CX,CC,HM,NZ,NF
-22	Melanesia	FJ,NC,PG,SB,VU
-23	Micronesia	GU,KI,MH,FM,NR,MP,PW,UM
-24	Polynesia	AS,CK,PF,NU,PN,WS,TK,TO,TV,WF
+#
+# This file contains a table of UN geoscheme codes. Columns are
+# separated by a single tab. Lines beginning with '#' are comments.
+# All text uses UTF-8 encoding. The columns of the table are as follows:
+#
+# 1. Digital code for geographic region (ourself code)
+# 2. The name of celestial object of the geographic region
+# 3. The usual English name for the coded geographic region
+# 4. The list of ISO 3166-1 alpha-2 codes of countries from the coded 
+#    geographic region (may be empty)
+#
+01	Earth	Northern Africa	DZ,EG,LY,MA,SD,TN,EH
+02	Earth	Eastern Africa	BI,KM,DJ,ER,ET,TF,KE,MG,MW,MU,YT,MZ,RE,RW,SC,SO,SS,TZ,UG,ZM,ZW
+03	Earth	Central Africa	AO,CM,CF,TD,CG,CD,GQ,GA,ST
+04	Earth	Southern Africa	BW,SZ,LS,NA,ZA
+05	Earth	Western Africa	BJ,BF,CV,CI,GM,GH,GN,GW,LR,ML,MR,NE,NG,SH,SN,SL,TG
+06	Earth	Caribbean	AI,AG,AW,BS,BB,BQ,KY,CU,CW,DM,DO,GD,GP,HT,JM,MQ,MS,PR,BL,KN,LC,MF,VC,SX,TT,TC,VG,VI
+07	Earth	Central America	BZ,CR,SV,GT,HN,MX,NI,PA
+08	Earth	Southern America	AR,BO,BV,BR,CL,CO,EC,FK,GF,GY,PY,PE,GS,SR,UY,VE
+09	Earth	Northern America	BM,CA,GL,PM,US
+10	Earth	Antarctica	AQ
+11	Earth	Northern Asia	RU
+12	Earth	Central Asia	KZ,KG,TJ,TM,UZ
+13	Earth	Eastern Asia	CN,HK,JP,KP,KR,MO,MN,TW
+14	Earth	South-eastern Asia	BN,KH,ID,LA,MY,MM,PH,SG,TH,TL,VN
+15	Earth	Southern Asia	AF,BD,BT,IN,IR,MV,NP,PK,LK
+16	Earth	Western Asia	AM,AZ,BH,CY,GE,IQ,IL,JO,KW,LB,OM,PS,QA,SA,SY,TR,AE,YE
+17	Earth	Eastern Europe	BY,BG,CZ,HU,MD,PL,RO,RU,SK,UA
+18	Earth	Northern Europe	AX,GG,JE,CQ,DK,EE,FO,FI,IS,IE,IM,LV,LT,NO,SJ,SE,GB
+19	Earth	Southern Europe	AL,AD,BA,HR,GI,GR,VA,IT,MT,ME,MK,PT,SM,RS,SI,ES,XK
+20	Earth	Western Europe	AT,BE,FR,DE,LI,LU,MC,NL,CH
+21	Earth	Australasia	AU,CX,CC,HM,NZ,NF
+22	Earth	Melanesia	FJ,NC,PG,SB,VU
+23	Earth	Micronesia	GU,KI,MH,FM,NR,MP,PW,UM
+24	Earth	Polynesia	AS,CK,PF,NU,PN,WS,TK,TO,TV,WF

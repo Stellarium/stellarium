@@ -34,6 +34,7 @@ typedef struct
 	int code;
 	QString regionName;
 	QString countries;
+	QString planet;
 } GeoRegion;
 
 class GPSLookupHelper;
@@ -90,8 +91,8 @@ public:
 	//! Find list of locations in a particular region only.
 	LocationMap pickLocationsInRegion(const QString region);
 
-	//! return a QStringList of region names
-	QStringList getAllRegionNames() const;
+	//! return a QStringList of region names by planet (return all list of regions if planet name is empty)
+	QStringList getRegionNames(const QString& planet = "") const;
 
 	//! Pick region name from ISO 3166-1 two-letter country codes
 	static QString pickRegionFromCountryCode(const QString countryCode);

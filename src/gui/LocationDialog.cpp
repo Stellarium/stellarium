@@ -261,7 +261,7 @@ void LocationDialog::disconnectEditSignals()
 	disconnect(ui->longitudeSpinBox, SIGNAL(valueChanged()), this, SLOT(setLocationFromCoords()));
 	disconnect(ui->latitudeSpinBox, SIGNAL(valueChanged()), this, SLOT(setLocationFromCoords()));
 	disconnect(ui->altitudeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setLocationFromCoords(int)));
-	disconnect(ui->planetNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(moveToAnotherPlanet(const QString&)));
+	disconnect(ui->planetNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(moveToAnotherPlanet(const QString&)));	
 	disconnect(ui->regionNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(reportEdit()));
 	disconnect(ui->timeZoneNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(saveTimeZone()));
 	disconnect(ui->cityNameLineEdit, SIGNAL(textEdited(const QString&)), this, SLOT(reportEdit()));
@@ -425,12 +425,12 @@ void LocationDialog::populatePlanetList()
 	planetsCombo->blockSignals(false);
 }
 
-void LocationDialog::populateRegionList()
+void LocationDialog::populateRegionList(const QString& planet)
 {
 	Q_ASSERT(ui->regionNameComboBox);
 
 	QComboBox* regionCombo = ui->regionNameComboBox;
-	QStringList regionNames(StelApp::getInstance().getLocationMgr().getAllRegionNames());
+	QStringList regionNames(StelApp::getInstance().getLocationMgr().getRegionNames(planet));
 
 	//Save the current selection to be restored later
 	regionCombo->blockSignals(true);
@@ -575,6 +575,7 @@ void LocationDialog::moveToAnotherPlanet(const QString&)
 	StelLocation loc = locationFromFields();
 	StelCore* stelCore = StelApp::getInstance().getCore();
 	StelModule* lMgr = StelApp::getInstance().getModule("LandscapeMgr");
+	populateRegionList(loc.planetName);
 	if (loc.planetName != stelCore->getCurrentLocation().planetName)
 	{
 		setFieldsFromLocation(loc);
@@ -598,7 +599,7 @@ void LocationDialog::moveToAnotherPlanet(const QString&)
 		{
 			LocationMap results = locMgr.pickLocationsNearby(loc.planetName, 0.0f, 0.0f, 180.0f);
 			pickedModel->setStringList(results.keys());
-			proxyModel->setSourceModel(pickedModel);
+			proxyModel->setSourceModel(pickedModel);			
 			ui->regionNameComboBox->setCurrentIndex(ui->regionNameComboBox->findData("", Qt::UserRole, Qt::MatchCaseSensitive));
 			// For 0.19, time zone should not change. When we can work out LMST for other planets, we can accept LMST.
 			//if (customTimeZone.isEmpty())  // This is always true!

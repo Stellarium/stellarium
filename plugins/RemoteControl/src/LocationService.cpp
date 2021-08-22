@@ -59,7 +59,7 @@ void LocationService::get(const QByteArray& operation, const APIParameters &para
 	{
 		const StelTranslator& trans = *StelTranslator::globalTranslator;
 
-		QStringList allRegions = StelApp::getInstance().getLocationMgr().getAllRegionNames();
+		QStringList allRegions = StelApp::getInstance().getLocationMgr().getRegionNames();
 		QJsonArray list;
 		for (const auto &str : qAsConst(allRegions))
 		{
