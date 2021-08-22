@@ -112,6 +112,7 @@ public:
 
 	static const int DEFAULT_BORTLE_SCALE_INDEX;
 private:
+	static QString getRegionFromCode(const QString& code);
 	//Register with Qt
 	static int metaTypeId;
 	static int initMetaType();

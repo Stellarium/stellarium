@@ -80,6 +80,24 @@ QDataStream& operator>>(QDataStream& in, StelLocation& loc)
 	return in;
 }
 
+QString StelLocation::getRegionFromCode(const QString &code)
+{
+	QString region;
+	if (code.toInt()>0) // OK, this is code of geographical region
+		region = StelLocationMgr::pickRegionFromCode(code.toInt());
+	else
+	{
+		if (code.size() == 2) // The string equals to 2 chars - this is the ISO 3166-1 alpha 2 code for country
+			region = StelLocationMgr::pickRegionFromCountryCode(code);
+		else
+			region = StelLocationMgr::pickRegionFromCountry(code); // This is the English name of country
+	}
+	if (region.isEmpty())
+		region = code; // OK, this is just region
+
+	return region;
+}
+
 // Parse a location from a line serialization
 StelLocation StelLocation::createFromLine(const QString& rawline)
 {
@@ -87,19 +105,7 @@ StelLocation StelLocation::createFromLine(const QString& rawline)
 	const QStringList& splitline = rawline.split("\t");
 	loc.name    = splitline.at(0).trimmed();
 	loc.state   = splitline.at(1).trimmed();
-	QString code = splitline.at(2).trimmed();
-	if (code.toInt()>0)
-		loc.region = StelLocationMgr::pickRegionFromCode(code.toInt());
-	else
-	{
-		if (code.size() == 2)
-			loc.region = StelLocationMgr::pickRegionFromCountryCode(code);
-		else
-			loc.region = StelLocationMgr::pickRegionFromCountry(code);
-	}
-	if (loc.region.isEmpty())
-		loc.region = code;
-
+	loc.region = getRegionFromCode(splitline.at(2).trimmed());
 	loc.role    = splitline.at(3).at(0).toUpper();
 	if (loc.role.isNull())
 		loc.role = QChar(0x0058); // char 'X'
@@ -141,22 +147,16 @@ StelLocation StelLocation::createFromLine(const QString& rawline)
 		}
 	}
 
+	// Parse planet name
 	if (splitline.size()>10)
-	{
-		// Parse planet name
 		loc.planetName = splitline.at(10).trimmed();
-	}
 	else
-	{
-		// Earth by default
-		loc.planetName = "Earth";
-	}
+		loc.planetName = "Earth"; // Earth by default
 
+	// Parse optional associated landscape key
 	if (splitline.size()>11)
-	{
-		// Parse optional associated landscape key
 		loc.landscapeKey = splitline.at(11).trimmed();
-	}
+
 	return loc;
 }
 
