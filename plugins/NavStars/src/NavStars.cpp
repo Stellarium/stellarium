@@ -123,7 +123,8 @@ void NavStars::init()
 	markerTexture = StelApp::getInstance().getTextureManager().createTexture(path);
 
 	// key bindings and other actions
-	addAction("actionShow_NavStars", N_("Navigational Stars"), N_("Mark the navigational stars"), "navStarsVisible", "");
+	addAction("actionShow_NavStars",        N_("Navigational Stars"), N_("Mark the navigational stars"), "navStarsVisible");
+	addAction("actionShow_NavStars_dialog", N_("Navigational Stars"), N_("Show settings dialog"),        mainWindow, "visible");
 
 	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
 	connect(&StelApp::getInstance(), SIGNAL(flagShowDecimalDegreesChanged(bool)), this, SLOT(setUseDecimalDegrees(bool)));
@@ -140,7 +141,9 @@ void NavStars::init()
 						       QPixmap(":/NavStars/btNavStars-on.png"),
 						       QPixmap(":/NavStars/btNavStars-off.png"),
 						       QPixmap(":/graphicGui/miscGlow32x32.png"),
-						       "actionShow_NavStars");
+						       "actionShow_NavStars",
+						       false,
+						       "actionShow_NavStars_dialog");
 		}
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	}

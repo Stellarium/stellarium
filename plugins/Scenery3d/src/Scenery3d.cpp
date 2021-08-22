@@ -132,19 +132,19 @@ void Scenery3d::handleKeys(QKeyEvent* e)
 	if ((e->type() == QKeyEvent::KeyPress) && (e->modifiers() & S3D_CTRL_MODIFIER))
 	{
 		// Pressing CTRL+ALT: 5x, CTRL+SHIFT: 10x speedup; CTRL+SHIFT+ALT: 50x!
-		float speedup=((e->modifiers() & S3D_SPEEDBASE_MODIFIER)? 10.0f : 1.0f);
-		speedup *= ((e->modifiers() & S3D_SPEEDMUL_MODIFIER)? 5.0f : 1.0f);
+		double speedup=((e->modifiers() & S3D_SPEEDBASE_MODIFIER)? 10.0 : 1.0);
+		speedup *= ((e->modifiers() & S3D_SPEEDMUL_MODIFIER)? 5.0 : 1.0);
 
 		switch (e->key())
 		{
 			case Qt::Key_Plus:      // or
-			case Qt::Key_PageUp:    movementKeyInput[2] =  1.0f * speedup; e->accept(); break;
+			case Qt::Key_PageUp:    movementKeyInput[2] =  1.0 * speedup; e->accept(); break;
 			case Qt::Key_Minus:     // or
-			case Qt::Key_PageDown:  movementKeyInput[2] = -1.0f * speedup; e->accept(); break;
-			case Qt::Key_Up:        movementKeyInput[1] =  1.0f * speedup; e->accept(); break;
-			case Qt::Key_Down:      movementKeyInput[1] = -1.0f * speedup; e->accept(); break;
-			case Qt::Key_Right:     movementKeyInput[0] =  1.0f * speedup; e->accept(); break;
-			case Qt::Key_Left:      movementKeyInput[0] = -1.0f * speedup; e->accept(); break;
+			case Qt::Key_PageDown:  movementKeyInput[2] = -1.0 * speedup; e->accept(); break;
+			case Qt::Key_Up:        movementKeyInput[1] =  1.0 * speedup; e->accept(); break;
+			case Qt::Key_Down:      movementKeyInput[1] = -1.0 * speedup; e->accept(); break;
+			case Qt::Key_Right:     movementKeyInput[0] =  1.0 * speedup; e->accept(); break;
+			case Qt::Key_Left:      movementKeyInput[0] = -1.0 * speedup; e->accept(); break;
 #ifdef QT_DEBUG
 				//leave this out on non-debug builds to reduce conflict chance
 			case Qt::Key_P:         renderer->saveFrusts(); e->accept(); break;
@@ -166,21 +166,21 @@ void Scenery3d::handleKeys(QKeyEvent* e)
 			case Qt::Key_PageUp:
 			case Qt::Key_Minus:
 			case Qt::Key_PageDown:
-				movementKeyInput[2] = 0.0f;
+				movementKeyInput[2] = 0.0;
 #ifndef Q_OS_OSX
 				e->accept();
 #endif
 				break;
 			case Qt::Key_Up:
 			case Qt::Key_Down:
-				movementKeyInput[1] = 0.0f;
+				movementKeyInput[1] = 0.0;
 #ifndef Q_OS_OSX
 				e->accept();
 #endif
 				break;
 			case Qt::Key_Right:
 			case Qt::Key_Left:
-				movementKeyInput[0] = 0.0f;
+				movementKeyInput[0] = 0.0;
 #ifndef Q_OS_OSX
 				e->accept();
 #endif
@@ -351,11 +351,8 @@ void Scenery3d::createToolbarButtons() const
 									       QPixmap(":/Scenery3d/bt_scenery3d_on.png"),
 									       QPixmap(":/Scenery3d/bt_scenery3d_off.png"),
 									       QPixmap(":/graphicGui/miscGlow32x32.png"),
-									       "actionShow_Scenery3d");
-			StelButton* toolbarSettingsButton =	new StelButton(Q_NULLPTR,
-									       QPixmap(":/Scenery3d/bt_scenery3d_settings_on.png"),
-									       QPixmap(":/Scenery3d/bt_scenery3d_settings_off.png"),
-									       QPixmap(":/graphicGui/miscGlow32x32.png"),
+									       "actionShow_Scenery3d",
+									       false,
 									       "actionShow_Scenery3d_dialog");
 			StelButton* toolbarStoredViewButton =	new StelButton(Q_NULLPTR,
 									       QPixmap(":/Scenery3d/bt_scenery3d_eyepoint_on.png"),
@@ -364,7 +361,6 @@ void Scenery3d::createToolbarButtons() const
 									       "actionShow_Scenery3d_storedViewDialog");
 
 			gui->getButtonBar()->addButton(toolbarEnableButton, "065-pluginsGroup");
-			gui->getButtonBar()->addButton(toolbarSettingsButton, "065-pluginsGroup");
 			gui->getButtonBar()->addButton(toolbarStoredViewButton, "065-pluginsGroup");
 		}
 	}
@@ -1092,12 +1088,12 @@ StoredView Scenery3d::getCurrentView()
 	//convert to spherical angles
 	StelUtils::rectToSphe(&view.view_fov[0],&view.view_fov[1],vd);
 	//convert to degrees
-	view.view_fov[0]*=180.0/M_PI;
-	view.view_fov[1]*=180.0/M_PI;
+	view.view_fov[0]*=180.0f/M_PIf;
+	view.view_fov[1]*=180.0f/M_PIf;
 	// we must patch azimuth
-	view.view_fov[0]=180.0-view.view_fov[0];
+	view.view_fov[0]=180.0f-view.view_fov[0];
 	//3rd comp is fov
-	view.view_fov[2] = mvMgr->getAimFov();
+	view.view_fov[2] = static_cast<float>(mvMgr->getAimFov());
 
 	//get current grid pos + eye height
 	Vec3d pos = currentScene->getGridPosition();

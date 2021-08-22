@@ -99,7 +99,8 @@ void PointerCoordinates::init()
 	// populate settings from main config file.
 	loadConfiguration();
 
-	addAction("actionShow_MousePointer_Coordinates", N_("Pointer Coordinates"), N_("Show coordinates of the mouse pointer"), "enabled", "");
+	addAction("actionShow_MousePointer_Coordinates",        N_("Pointer Coordinates"), N_("Show coordinates of the mouse pointer"), "enabled", "");
+	addAction("actionShow_MousePointer_Coordinates_dialog", N_("Pointer Coordinates"), N_("Show settings dialog"), mainWindow, "visible");
 
 	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
 
@@ -121,7 +122,7 @@ void PointerCoordinates::draw(StelCore *core)
 
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000, StelCore::RefractionAuto);
 	StelPainter sPainter(prj);
-	sPainter.setColor(textColor[0], textColor[1], textColor[2], 1.f);
+	sPainter.setColor(textColor, 1.f);
 	font.setPixelSize(getFontSize());
 	sPainter.setFont(font);
 
@@ -393,7 +394,9 @@ void PointerCoordinates::setFlagShowCoordinatesButton(bool b)
 							       QPixmap(":/PointerCoordinates/bt_PointerCoordinates_On.png"),
 							       QPixmap(":/PointerCoordinates/bt_PointerCoordinates_Off.png"),
 							       QPixmap(":/graphicGui/miscGlow32x32.png"),
-							       "actionShow_MousePointer_Coordinates");
+							       "actionShow_MousePointer_Coordinates",
+							       false,
+							       "actionShow_MousePointer_Coordinates_dialog");
 			}
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		} else {
@@ -407,12 +410,7 @@ void PointerCoordinates::setFlagShowCoordinatesButton(bool b)
 void PointerCoordinates::setCurrentCoordinatesPlaceKey(QString key)
 {
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("CoordinatesPlace"));
-	CoordinatesPlace coordPlace = static_cast<CoordinatesPlace>(en.keyToValue(key.toLatin1().data()));
-	if (coordPlace<0)
-	{
-		qWarning() << "[PointerCoordinates] Unknown coordinates place: " << key << "setting \"TopRight\" instead";
-		coordPlace = TopRight;
-	}
+	CoordinatesPlace coordPlace = static_cast<CoordinatesPlace>(qMax(0, en.keyToValue(key.toLatin1().data())));
 	setCurrentCoordinatesPlace(coordPlace);
 }
 
@@ -425,12 +423,7 @@ QString PointerCoordinates::getCurrentCoordinatesPlaceKey() const
 void PointerCoordinates::setCurrentCoordinateSystemKey(QString key)
 {
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("CoordinateSystem"));
-	CoordinateSystem coordSystem = static_cast<CoordinateSystem>(en.keyToValue(key.toLatin1().data()));
-	if (coordSystem<0)
-	{
-		qWarning() << "[PointerCoordinates] Unknown coordinate system: " << key << "setting \"RaDecJ2000\" instead";
-		coordSystem = RaDecJ2000;
-	}
+	CoordinateSystem coordSystem = static_cast<CoordinateSystem>(qMax(0, en.keyToValue(key.toLatin1().data())));
 	setCurrentCoordinateSystem(coordSystem);
 }
 

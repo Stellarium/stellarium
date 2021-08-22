@@ -77,7 +77,9 @@ public:
 	//! @param noBackground define whether the button background image have to be used
 	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff,
 		   const QPixmap& pixHover=QPixmap(),
-		   class StelAction* action=Q_NULLPTR, bool noBackground=false);
+		   class StelAction* action=Q_NULLPTR,
+		   bool noBackground=false,
+		   StelAction *otherAction=Q_NULLPTR);
 	
 	//! Constructor
 	//! @param parent the parent item
@@ -88,7 +90,9 @@ public:
 	//! @param noBackground define whether the button background image have to be used
 	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff,
 		   const QPixmap& pixHover,
-		   const QString& actionId, bool noBackground=false);
+		   const QString& actionId,
+		   bool noBackground=false,
+		   const QString& otherActionId="");
 	//! Constructor
 	//! @param parent the parent item
 	//! @param pixOn the pixmap to display when the button is toggled
@@ -100,7 +104,9 @@ public:
 	//! @param isTristate define whether the button is a tristate or an on/off button
 	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff, const QPixmap& pixNoChange,
 		   const QPixmap& pixHover,
-		   const QString& actionId=QString(), bool noBackground=false, bool isTristate=true);
+		   const QString& actionId=QString(),
+		   bool noBackground=false,
+		   bool isTristate=true);
 	
 	//! Button states
 	enum {ButtonStateOff = 0, ButtonStateOn = 1, ButtonStateNoChange = 2};
@@ -132,6 +138,7 @@ signals:
 	void toggled(bool);
 	//! Triggered when the button state changes
 	void triggered();
+	void triggeredRight();
 	//! Emitted when the hover state change
 	//! @param b true if the mouse entered the button
 	void hoverChanged(bool b);
@@ -142,10 +149,10 @@ public slots:
 	void setChecked(bool b) { setChecked(static_cast<int>(b)); }
 
 protected:
-	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event);
-	virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* event);
-	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event);
-	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+	virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* event) Q_DECL_OVERRIDE;
+	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event) Q_DECL_OVERRIDE;
+	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event) Q_DECL_OVERRIDE;
+	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) Q_DECL_OVERRIDE;
 private slots:
 	void animValueChanged(qreal value);
 	void updateIcon();
@@ -154,7 +161,8 @@ private:
                   const QPixmap& apixOff,
                   const QPixmap& apixNoChange,
                   const QPixmap& apixHover,
-                  StelAction* aaction,
+		  StelAction* anAction,
+		  StelAction* otherAction,
 		  bool noBackground,
 		  bool isTristate);
 	int toggleChecked(int);
@@ -169,7 +177,8 @@ private:
 	bool flagChangeFocus;
 
 	QTimeLine* timeLine;
-	class StelAction* action;
+	class StelAction* action;          // linked action for button press
+	class StelAction* secondAction;    // linked action for rightclick (or Ctrl-Click?)
 	bool noBckground;
 	bool isTristate_;
 	double opacity;
