@@ -425,7 +425,7 @@ void ObsListDialog::loadObservingList ( QString listUuid )
 								if ( loc.name.isEmpty() )
 									Location = QString ( "%1, %2" ).arg ( loc.latitude ).arg ( loc.longitude );
 								else
-									Location = QString ( "%1, %2" ).arg ( loc.name ).arg ( loc.country );
+									Location = QString ( "%1, %2" ).arg ( loc.name ).arg ( loc.region );
 
 								addModelRow ( lastRow,objectUuid,objectName, objectNameI18n, objectType, objectRaStr, objectDecStr, objectMagnitudeStr, objectConstellation );
 

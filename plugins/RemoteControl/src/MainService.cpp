@@ -125,7 +125,7 @@ void MainService::get(const QByteArray& operation, const APIParameters &paramete
 			obj2.insert("latitude",static_cast<double>(loc.latitude));
 			obj2.insert("longitude",static_cast<double>(loc.longitude));
 			obj2.insert("altitude",loc.altitude);
-			obj2.insert("country",loc.country);
+			obj2.insert("region",loc.region);
 			obj2.insert("state",loc.state);
 			obj2.insert("landscapeKey",loc.landscapeKey);
 			obj.insert("location",obj2);

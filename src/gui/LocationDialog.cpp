@@ -65,7 +65,7 @@ void LocationDialog::retranslate()
 	{
 		ui->retranslateUi(dialog);
 		populatePlanetList();
-		populateCountryList();
+		populateRegionList();
 		populateTimeZonesList();
 		populateTooltips();
 	}
@@ -126,7 +126,7 @@ void LocationDialog::createDialogContent()
 	}
 
 	populatePlanetList();
-	populateCountryList();
+	populateRegionList();
 	populateTimeZonesList();
 
 	connect(ui->citySearchLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
@@ -141,7 +141,7 @@ void LocationDialog::createDialogContent()
 	connect(ui->addLocationToListPushButton, SIGNAL(clicked()), this, SLOT(addCurrentLocationToList()));
 	connect(ui->deleteLocationFromListPushButton, SIGNAL(clicked()), this, SLOT(deleteCurrentLocationFromList()));
 	connect(ui->resetListPushButton, SIGNAL(clicked()), this, SLOT(resetLocationList()));
-	connect(ui->countryNameComboBox, SIGNAL(activated(const QString &)), this, SLOT(filterSitesByCountry()));
+	connect(ui->regionNameComboBox, SIGNAL(activated(const QString &)), this, SLOT(filterSitesByRegion()));
 
 	StelCore* core = StelApp::getInstance().getCore();
 	const StelLocation& currentLocation = core->getCurrentLocation();
@@ -262,7 +262,7 @@ void LocationDialog::disconnectEditSignals()
 	disconnect(ui->latitudeSpinBox, SIGNAL(valueChanged()), this, SLOT(setLocationFromCoords()));
 	disconnect(ui->altitudeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setLocationFromCoords(int)));
 	disconnect(ui->planetNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(moveToAnotherPlanet(const QString&)));
-	disconnect(ui->countryNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(reportEdit()));
+	disconnect(ui->regionNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(reportEdit()));
 	disconnect(ui->timeZoneNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(saveTimeZone()));
 	disconnect(ui->cityNameLineEdit, SIGNAL(textEdited(const QString&)), this, SLOT(reportEdit()));
 }
@@ -273,7 +273,7 @@ void LocationDialog::connectEditSignals()
 	connect(ui->latitudeSpinBox, SIGNAL(valueChanged()), this, SLOT(setLocationFromCoords()));
 	connect(ui->altitudeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setLocationFromCoords(int)));
 	connect(ui->planetNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(moveToAnotherPlanet(const QString&)));
-	connect(ui->countryNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(reportEdit()));
+	connect(ui->regionNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(reportEdit()));
 	connect(ui->timeZoneNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(saveTimeZone()));
 	connect(ui->cityNameLineEdit, SIGNAL(textEdited(const QString&)), this, SLOT(reportEdit()));
 }
@@ -302,18 +302,18 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 	}
 	ui->planetNameComboBox->setCurrentIndex(idx);
 
-	idx = ui->countryNameComboBox->findData(loc.country, Qt::UserRole, Qt::MatchCaseSensitive);
+	idx = ui->regionNameComboBox->findData(loc.region, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (idx==-1)
 	{
 		if (ui->planetNameComboBox->currentData(Qt::UserRole).toString()=="Earth")
 		{
-			// Use France as default on Earth
-			idx = ui->countryNameComboBox->findData(QVariant("France"), Qt::UserRole, Qt::MatchCaseSensitive);
+			// Use Western Europe as default on Earth
+			idx = ui->regionNameComboBox->findData(QVariant("Western Europe"), Qt::UserRole, Qt::MatchCaseSensitive);
 		}
 		else
-			idx = ui->countryNameComboBox->findData(QVariant(""), Qt::UserRole, Qt::MatchCaseSensitive);
+			idx = ui->regionNameComboBox->findData(QVariant(""), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
-	ui->countryNameComboBox->setCurrentIndex(idx);
+	ui->regionNameComboBox->setCurrentIndex(idx);
 
 	QString tz = loc.ianaTimeZone;
 	if (loc.planetName=="Earth" && tz.isEmpty())
@@ -425,30 +425,31 @@ void LocationDialog::populatePlanetList()
 	planetsCombo->blockSignals(false);
 }
 
-void LocationDialog::populateCountryList()
+void LocationDialog::populateRegionList()
 {
-	Q_ASSERT(ui->countryNameComboBox);
+	Q_ASSERT(ui->regionNameComboBox);
 
-	QComboBox* countryCombo = ui->countryNameComboBox;
-	QStringList countryNames(StelLocaleMgr::getAllCountryNames());
+	QComboBox* regionCombo = ui->regionNameComboBox;
+	QStringList regionNames(StelApp::getInstance().getLocationMgr().getAllRegionNames());
 
 	//Save the current selection to be restored later
-	countryCombo->blockSignals(true);
-	int index = countryCombo->currentIndex();
-	QVariant selectedCountryId = countryCombo->itemData(index);
-	countryCombo->clear();
-	//For each country, display the localized name and store the original as user
+	regionCombo->blockSignals(true);
+	int index = regionCombo->currentIndex();
+	QVariant selectedRegionId = regionCombo->itemData(index);
+	regionCombo->clear();
+	//For each region, display the localized name and store the original as user
 	//data. Unfortunately, there's no other way to do this than with a loop.
-	for (const auto& name : qAsConst(countryNames))
+	if (ui->planetNameComboBox->itemData(Qt::UserRole).toString().compare("Earth", Qt::CaseInsensitive))
 	{
-		countryCombo->addItem(q_(name), name);
+		for (const auto& name : qAsConst(regionNames))
+			regionCombo->addItem(q_(name), name);
 	}
-	countryCombo->addItem(QChar(0x2014), "");
+	regionCombo->addItem(QChar(0x2014), "");
 	//Restore the selection
-	index = countryCombo->findData(selectedCountryId, Qt::UserRole, Qt::MatchCaseSensitive);
-	countryCombo->setCurrentIndex(index);
-	countryCombo->model()->sort(0);
-	countryCombo->blockSignals(false);
+	index = regionCombo->findData(selectedRegionId, Qt::UserRole, Qt::MatchCaseSensitive);
+	regionCombo->setCurrentIndex(index);
+	regionCombo->model()->sort(0);
+	regionCombo->blockSignals(false);
 }
 
 void LocationDialog::populateTimeZonesList()
@@ -509,14 +510,14 @@ StelLocation LocationDialog::locationFromFields() const
 	loc.latitude = qBound(-90.0, ui->latitudeSpinBox->valueDegrees(), 90.0);
 	loc.longitude = ui->longitudeSpinBox->valueDegrees();
 	loc.altitude = ui->altitudeSpinBox->value();
-	index = ui->countryNameComboBox->currentIndex();
+	index = ui->regionNameComboBox->currentIndex();
 	if (index < 0)
 	{
-		qWarning() << "LocationDialog::locationFromFields(): no valid country name from combo?";
-		loc.country = QString();//As returned by QComboBox::currentText()
+		qWarning() << "LocationDialog::locationFromFields(): no valid region name from combo?";
+		loc.region = QString();//As returned by QComboBox::currentText()
 	}
 	else
-		loc.country = ui->countryNameComboBox->itemData(index).toString();
+		loc.region = ui->regionNameComboBox->itemData(index).toString();
 
 	index = ui->timeZoneNameComboBox->currentIndex();
 	if (index < 0)
@@ -600,7 +601,7 @@ void LocationDialog::moveToAnotherPlanet(const QString&)
 			LocationMap results = locMgr.pickLocationsNearby(loc.planetName, 0.0f, 0.0f, 180.0f);
 			pickedModel->setStringList(results.keys());
 			proxyModel->setSourceModel(pickedModel);
-			ui->countryNameComboBox->setCurrentIndex(ui->countryNameComboBox->findData("", Qt::UserRole, Qt::MatchCaseSensitive));
+			ui->regionNameComboBox->setCurrentIndex(ui->regionNameComboBox->findData("", Qt::UserRole, Qt::MatchCaseSensitive));
 			// For 0.19, time zone should not change. When we can work out LMST for other planets, we can accept LMST.
 			//if (customTimeZone.isEmpty())  // This is always true!
 			//	ui->timeZoneNameComboBox->setCurrentIndex(ui->timeZoneNameComboBox->findData("LMST", Qt::UserRole, Qt::MatchCaseSensitive));
@@ -873,12 +874,12 @@ void LocationDialog::resetLocationList()
 }
 
 // called when user clicks in the country combobox and selects a country. The locations in the list are updated to select only sites in that country.
-void LocationDialog::filterSitesByCountry()
+void LocationDialog::filterSitesByRegion()
 {
-	QString country=ui->countryNameComboBox->currentData().toString();
+	QString region=ui->regionNameComboBox->currentData(Qt::UserRole).toString();
 	StelLocationMgr &locMgr=StelApp::getInstance().getLocationMgr();
 
-	LocationMap results = locMgr.pickLocationsInCountry(country);
+	LocationMap results = locMgr.pickLocationsInRegion(region);
 	pickedModel->setStringList(results.keys());
 	proxyModel->setSourceModel(pickedModel);
 	proxyModel->sort(0, Qt::AscendingOrder);

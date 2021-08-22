@@ -44,7 +44,7 @@ QString StelLocation::serializeToLine() const
 	return QString("%1\t%2\t%3\t%4\t%5\t%6\t%7\t%8\t%9\t%10\t%11\t%12")
 			.arg(name)
 			.arg(state)
-			.arg(country)
+			.arg(region)
 			.arg(role)
 			.arg(population/1000)
 			.arg(latitude<0 ? QString("%1S").arg(-latitude, 0, 'f', 6) : QString("%1N").arg(latitude, 0, 'f', 6))
@@ -61,8 +61,8 @@ QString StelLocation::getID() const
 	if (name.isEmpty())
 		return QString("%1, %2").arg(latitude).arg(longitude);
 
-	if (!country.isEmpty())
-		return QString("%1, %2").arg(name).arg(country);
+	if (!region.isEmpty())
+		return QString("%1, %2").arg(name).arg(region);
 	else
 		return name;
 }
@@ -70,13 +70,13 @@ QString StelLocation::getID() const
 // GZ TODO: These operators may require sanitizing for timezone names!
 QDataStream& operator<<(QDataStream& out, const StelLocation& loc)
 {
-	out << loc.name << loc.state << loc.country << loc.role << loc.population << loc.latitude << loc.longitude << loc.altitude << loc.bortleScaleIndex << loc.ianaTimeZone << loc.planetName << loc.landscapeKey << loc.isUserLocation;
+	out << loc.name << loc.state << loc.region << loc.role << loc.population << loc.latitude << loc.longitude << loc.altitude << loc.bortleScaleIndex << loc.ianaTimeZone << loc.planetName << loc.landscapeKey << loc.isUserLocation;
 	return out;
 }
 
 QDataStream& operator>>(QDataStream& in, StelLocation& loc)
 {
-	in >> loc.name >> loc.state >> loc.country >> loc.role >> loc.population >> loc.latitude >> loc.longitude >> loc.altitude >> loc.bortleScaleIndex >> loc.ianaTimeZone >> loc.planetName >> loc.landscapeKey >> loc.isUserLocation;
+	in >> loc.name >> loc.state >> loc.region >> loc.role >> loc.population >> loc.latitude >> loc.longitude >> loc.altitude >> loc.bortleScaleIndex >> loc.ianaTimeZone >> loc.planetName >> loc.landscapeKey >> loc.isUserLocation;
 	return in;
 }
 
@@ -87,9 +87,18 @@ StelLocation StelLocation::createFromLine(const QString& rawline)
 	const QStringList& splitline = rawline.split("\t");
 	loc.name    = splitline.at(0).trimmed();
 	loc.state   = splitline.at(1).trimmed();
-	loc.country = StelLocaleMgr::countryCodeToString(splitline.at(2).trimmed());	
-	if (loc.country.isEmpty())
-		loc.country = splitline.at(2).trimmed();
+	QString code = splitline.at(2).trimmed();
+	if (code.toInt()>0)
+		loc.region = StelLocationMgr::pickRegionFromCode(code.toInt());
+	else
+	{
+		if (code.size() == 2)
+			loc.region = StelLocationMgr::pickRegionFromCountryCode(code);
+		else
+			loc.region = StelLocationMgr::pickRegionFromCountry(code);
+	}
+	if (loc.region.isEmpty())
+		loc.region = code;
 
 	loc.role    = splitline.at(3).at(0).toUpper();
 	if (loc.role.isNull())

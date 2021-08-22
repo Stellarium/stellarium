@@ -148,14 +148,6 @@ public:
 	//! @param ok set to false if the string was an invalid date.
 	double getJdFromISO8601TimeLocal(const QString& str, bool* ok) const;
 
-	//! Convert a 2 letter country code to string. Returns empty string if countryCode unknown.
-	static QString countryCodeToString(const QString& countryCode);
-	//! Convert a countryName to 2 letter country code. Returns "??" if not found.
-	static QString countryNameToCode(const QString& countryName);
-
-	//! Return an alphabetically ordered list of all the known country names
-	static QStringList getAllCountryNames();
-
 	//! Returns the short name of the \a weekday [0=Sunday, 1=Monday..6]; weekday mod 7)
 	static QString shortDayName(int weekday);
 
@@ -196,16 +188,12 @@ private:
 	static SDateFormat stringToSDateFormat(const QString& df);
 	static QString sDateFormatToString(SDateFormat df);
 	
-	static QMap<QString, QString> countryCodeToStringMap;
-	
 	// Lists for rapid access. These must be recreated on language change by createNameLists().
 	static QStringList shortWeekDays;
 	static QStringList longWeekDays;
 	static QStringList shortMonthNames;
 	static QStringList longMonthNames;
 	static QStringList longGenitiveMonthNames;
-
-	static void generateCountryList();
 };
 
 #endif // STELLOCALEMGR_HPP

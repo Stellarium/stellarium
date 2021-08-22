@@ -53,8 +53,8 @@ public:
 
 	//! Location/city name
 	QString name;
-	//! English country name or empty string
-	QString country;
+	//! English region name (Northern Europe for example) or empty string
+	QString region;
 	//! State/region name (useful if 2 locations of the same country have the same name)
 	QString state;
 	//! English planet name

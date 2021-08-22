@@ -165,7 +165,7 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 		if (ini.contains("longitude"))
 			info.location->longitude = StelUtils::getDecAngle(ini.value("longitude").toString())*M_180_PI;
 		if (ini.contains("country"))
-			info.location->country = ini.value("country").toString();
+			info.location->region = StelLocationMgr::pickRegionFromCountry(ini.value("country").toString());
 		if (ini.contains("state"))
 			info.location->state = ini.value("state").toString();
 		info.location->ianaTimeZone = StelLocationMgr::sanitizeTimezoneStringFromLocationDB(ini.value("timezone", "LMST").toString());
