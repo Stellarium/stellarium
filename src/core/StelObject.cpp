@@ -171,12 +171,12 @@ Vec3f StelObject::computeRTSTime(StelCore *core) const
 	PlanetP cp = core->getCurrentPlanet();
 	const double coeff = cp->getMeanSolarDay() / cp->getSiderealDay();
 
-	Vec3f rts = Vec3f(-100.f,-100.f,-100.f);  // init as "never rises" [abs must be larger than 24!]
+	Vec3f rts(-100.f,-100.f,-100.f);  // init as "never rises" [abs must be larger than 24!]
 
-	double dec, ra, ha, t;
-	StelUtils::rectToSphe(&ra, &dec, getSiderealPosGeometric(core));
-	ra = 2.*M_PI-ra;
-	ha = ra*12./M_PI;
+	double dec, ha, t;
+	StelUtils::rectToSphe(&ha, &dec, getSiderealPosGeometric(core));
+	ha = 2.*M_PI-ha;
+	ha *= 12./M_PI;
 	if (ha>24.)
 		ha -= 24.;
 	// It seems necessary to have ha in [-12,12]!
