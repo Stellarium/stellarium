@@ -684,13 +684,20 @@ void ConstellationMgr::draw(StelCore* core)
 	StelPainter sPainter(prj);
 	sPainter.setFont(asterFont);
 	drawLines(sPainter, core);
-	drawNames(sPainter);
-	drawArt(sPainter);
-	drawBoundaries(sPainter);
+	Vec3d vel(0.);
+	if (core->getUseAberration())
+	{
+		vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+		vel=StelCore::matVsop87ToJ2000*vel;
+		vel*=core->getAberrationFactor() * (AU/(86400.0*SPEED_OF_LIGHT));
+	}
+	drawNames(sPainter, vel);
+	drawArt(sPainter, vel);
+	drawBoundaries(sPainter, vel);
 }
 
 // Draw constellations art textures
-void ConstellationMgr::drawArt(StelPainter& sPainter) const
+void ConstellationMgr::drawArt(StelPainter& sPainter, const Vec3d &obsVelocity) const
 {
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
 	sPainter.setCullFace(true);
@@ -698,7 +705,7 @@ void ConstellationMgr::drawArt(StelPainter& sPainter) const
 	SphericalRegionP region = sPainter.getProjector()->getViewportConvexPolygon();
 	for (auto* constellation : constellations)
 	{
-		constellation->drawArtOptim(sPainter, *region);
+		constellation->drawArtOptim(sPainter, *region, obsVelocity);
 	}
 
 	sPainter.setCullFace(false);
@@ -724,13 +731,18 @@ void ConstellationMgr::drawLines(StelPainter& sPainter, const StelCore* core) co
 }
 
 // Draw the names of all the constellations
-void ConstellationMgr::drawNames(StelPainter& sPainter) const
+void ConstellationMgr::drawNames(StelPainter& sPainter, const Vec3d &obsVelocity) const
 {
 	sPainter.setBlending(true);
 	for (auto* constellation : constellations)
 	{
+		Vec3d XYZname=constellation->XYZname;
+		XYZname.normalize();
+		XYZname+=obsVelocity;
+		XYZname.normalize();
+
 		// Check if in the field of view
-		if (sPainter.getProjector()->projectCheck(constellation->XYZname, constellation->XYname))
+		if (sPainter.getProjector()->projectCheck(XYZname, constellation->XYname))
 			constellation->drawName(sPainter, constellationDisplayStyle);
 	}
 }
@@ -1425,7 +1437,7 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 	return true;
 }
 
-void ConstellationMgr::drawBoundaries(StelPainter& sPainter) const
+void ConstellationMgr::drawBoundaries(StelPainter& sPainter, const Vec3d &obsVelocity) const
 {
 	const float ppx = static_cast<float>(sPainter.getProjector()->getDevicePixelsPerPixel());
 	sPainter.setBlending(false);
@@ -1434,7 +1446,7 @@ void ConstellationMgr::drawBoundaries(StelPainter& sPainter) const
 	sPainter.setLineSmooth(true);
 	for (auto* constellation : constellations)
 	{
-		constellation->drawBoundaryOptim(sPainter);
+		constellation->drawBoundaryOptim(sPainter, obsVelocity);
 	}
 	if (constellationBoundariesThickness>1 || ppx>1.f)
 		sPainter.setLineWidth(1); // restore line thickness

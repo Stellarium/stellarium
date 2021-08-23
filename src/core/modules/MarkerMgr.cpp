@@ -33,12 +33,16 @@
 #include "StelPainter.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelFader.hpp"
+#include "Planet.hpp"
 
 #include <QString>
 #include <QDebug>
 #include <QTimer>
 
 // Base class from which other marker types inherit
+//! TODO: Describe why is this not a StelObject?
+//! TODO: What is a "Marker" in this context, opposed to CustomObject (which has a mouse action that creates visible named "Markers")?
+
 class StelMarker
 {
 public:
@@ -70,6 +74,7 @@ public:
 //! @class SkyMarker
 //! Used to create user markers which are bound to some object on the celestial sphere.
 //! The object in question can be any existing StelObject or celestial coordinates.
+//! One difference to the mouse-clicked CustomObject Markers may be that these SkyMarkers here can be subject to aberration!
 class SkyMarker : public StelMarker
 {
 public:
@@ -96,14 +101,14 @@ public:
 	//! @param size the size of the marker
 	//! @param color choose of a color for the marker
 	//! @param style determines type of marker
-	SkyMarker(Vec3d pos, const float& size, const Vec3f& color, SkyMarker::MarkerType style=Cross);
+	SkyMarker(Vec3d pos, const float& size, const Vec3f& color, SkyMarker::MarkerType style=Cross, const bool withAberration=true);
 
-	virtual ~SkyMarker();
+	virtual ~SkyMarker() Q_DECL_OVERRIDE;
 
 	//! Draw the marker on the sky
 	//! @param core the StelCore object
 	//! @param sPainter the StelPainter to use for drawing operations
-	virtual bool draw(StelCore* core, StelPainter& sPainter);
+	virtual bool draw(StelCore* core, StelPainter& sPainter) Q_DECL_OVERRIDE;
 
 	static SkyMarker::MarkerType stringToMarkerType(const QString& s);
 
@@ -111,6 +116,7 @@ private:
 	StelTextureSP markerTexture;
 	Vec3d markerPosition;
 	SkyMarker::MarkerType markerType;
+	bool withAberration; // if the marker shall strictly mark coordinates, not some sky object, set this to false.
 };
 
 //! @class HorizonMarker
@@ -125,12 +131,12 @@ public:
 	//! @param color the color for the label
 	//! @param style determines type of marker
 	HorizonMarker(const float az, const float alt, const float& size, const Vec3f& color, SkyMarker::MarkerType style=SkyMarker::Cross);
-	virtual ~HorizonMarker();
+	virtual ~HorizonMarker() Q_DECL_OVERRIDE;
 
 	//! draw the marker on the screen
 	//! @param core the StelCore object
 	//! @param sPainter the StelPainter to use for drawing operations
-	virtual bool draw(StelCore* core, StelPainter& sPainter);
+	virtual bool draw(StelCore* core, StelPainter& sPainter) Q_DECL_OVERRIDE;
 private:
 	StelTextureSP markerTexture;
 	SkyMarker::MarkerType markerType;
@@ -178,11 +184,12 @@ bool StelMarker::getFlagShow(void) const
 ////////////////////
 // SkyMarker class //
 ////////////////////
-SkyMarker::SkyMarker(Vec3d pos, const float& size, const Vec3f& color, SkyMarker::MarkerType style)
+SkyMarker::SkyMarker(Vec3d pos, const float& size, const Vec3f& color, SkyMarker::MarkerType style, const bool withAberration)
 	: StelMarker(size, color)
 	, markerTexture(Q_NULLPTR)
 	, markerPosition(pos)
 	, markerType(style)
+	, withAberration(withAberration)
 {
 	// TODO: Use unicode chars for markers or SVG instead?
 	static const QMap<SkyMarker::MarkerType, QString>map={
@@ -209,12 +216,23 @@ SkyMarker::~SkyMarker()
 
 bool SkyMarker::draw(StelCore* core, StelPainter& sPainter)
 {
-	Q_UNUSED(core);
 	if(markerFader.getInterstate() <= 0.f)
 		return false;
 
+	Vec3d point(markerPosition);
+
+	// prepare for aberration: Explan. Suppl. 2013, (7.38)
+	if (withAberration && (core->getUseAberration()))
+	{
+		Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+		vel=StelCore::matVsop87ToJ2000*vel;
+		vel*=core->getAberrationFactor() * (AU/(86400.0*SPEED_OF_LIGHT));
+		point+=vel;
+		point.normalize();
+	}
+
 	Vec3d xyPos;
-	sPainter.getProjector()->project(markerPosition, xyPos);
+	sPainter.getProjector()->project(point, xyPos);
 
 	markerTexture->bind();
 
@@ -282,7 +300,7 @@ bool HorizonMarker::draw(StelCore *core, StelPainter& sPainter)
 		return false;
 
 	Vec3d xyPos;
-	StelProjectorP keepProj=sPainter.getProjector(); // we must reset after painting!
+	const StelProjectorP keepProj=sPainter.getProjector(); // we must reset after painting!
 	StelProjectorP altazProjector=core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 
 	sPainter.setProjector(altazProjector);
@@ -383,7 +401,11 @@ int MarkerMgr::markerObject(const QString& objectName,
 		return -1;
 	}
 	
-	StelMarker* m = new SkyMarker(obj->getJ2000EquatorialPos(StelApp::getInstance().getCore()), size, Vec3f().setFromHtmlColor(color), SkyMarker::stringToMarkerType(mtype));
+	StelCore *core=StelApp::getInstance().getCore();
+	const bool hasAberration=core->getUseAberration();
+	core->setUseAberration(false);
+	StelMarker* m = new SkyMarker(obj->getJ2000EquatorialPos(core), size, Vec3f().setFromHtmlColor(color), SkyMarker::stringToMarkerType(mtype), true);
+	core->setUseAberration(hasAberration);
 	if (m==Q_NULLPTR)
 		return -1;
 
@@ -403,7 +425,8 @@ int MarkerMgr::markerEquatorial(const QString& RA,
 				const QString& color,
 				const float size,
 				bool autoDelete,
-				int autoDeleteTimeoutMs)
+				int autoDeleteTimeoutMs,
+				bool withAberration)
 {
 	double dRA	= StelUtils::getDecAngle(RA);
 	double dDec	= StelUtils::getDecAngle(Dec);
@@ -412,7 +435,7 @@ int MarkerMgr::markerEquatorial(const QString& RA,
 	if (!j2000epoch)
 		pos = StelApp::getInstance().getCore()->equinoxEquToJ2000(pos);
 
-	StelMarker* m = new SkyMarker(pos, size, Vec3f().setFromHtmlColor(color), SkyMarker::stringToMarkerType(mtype));
+	StelMarker* m = new SkyMarker(pos, size, Vec3f().setFromHtmlColor(color), SkyMarker::stringToMarkerType(mtype), withAberration);
 	if (m==Q_NULLPTR)
 		return -1;
 

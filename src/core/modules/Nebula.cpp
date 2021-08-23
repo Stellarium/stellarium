@@ -667,6 +667,11 @@ void Nebula::drawOutlines(StelPainter &sPainter, float maxMagHints) const
 		col.set(0.f,0.f,0.f);
 	sPainter.setColor(col, 1);
 
+	StelCore *core=StelApp::getInstance().getCore();
+	Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+	vel=StelCore::matVsop87ToJ2000*vel;
+	vel*=core->getAberrationFactor() * (AU/(86400.0*SPEED_OF_LIGHT));
+
 	// Show outlines
 	if (segments>0 && flagUseOutlines && oLim<=maxMagHints)
 	{
@@ -683,14 +688,23 @@ void Nebula::drawOutlines(StelPainter &sPainter, float maxMagHints) const
 
 			for (j=0;j<points->size()-1;j++)
 			{
-				sPainter.drawGreatCircleArc(points->at(j), points->at(j+1), &viewportHalfspace);
+				Vec3d point1=points->at(j);
+				Vec3d point2=points->at(j+1);
+				if (core->getUseAberration())
+				{
+					point1+=vel;
+					point1.normalize();
+					point2+=vel;
+					point2.normalize();
+				}
+				sPainter.drawGreatCircleArc(point1, point2, &viewportHalfspace);
 			}
 		}
 		sPainter.setLineSmooth(false);
 	}
 }
 
-void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
+void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core) const
 {
 	size_t segments = outlineSegments.size();
 	if (segments>0 && flagUseOutlines)
@@ -806,8 +820,8 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 	{
 		// The rotation angle in drawSprite2dMode() is relative to screen. Make sure to compute correct angle from 90+orientationAngle.
 		// Find an on-screen direction vector from a point offset somewhat in declination from our object.
-		Vec3d XYZrel(XYZ);
-		XYZrel[2]*=0.99;
+		Vec3d XYZrel(getJ2000EquatorialPos(core));
+		XYZrel[2]*=0.95; XYZrel.normalize();
 		Vec3d XYrel;
 		sPainter.getProjector()->project(XYZrel, XYrel);
 		float screenAngle = static_cast<float>(atan2(XYrel[1]-XY[1], XYrel[0]-XY[0]));
@@ -1400,6 +1414,25 @@ void Nebula::buildTypeStringMap()
 	Nebula::typeStringMap.insert( NebSNRC   , q_("supernova remnant candidate") );
 	Nebula::typeStringMap.insert( NebGxCl   , q_("cluster of galaxies") );
 	Nebula::typeStringMap.insert( NebPartOfGx   , q_("part of a galaxy") );
-	Nebula::typeStringMap.insert( NebRegion   , q_("region of the sky") );
+	Nebula::typeStringMap.insert( NebRegion , q_("region of the sky") );
 	Nebula::typeStringMap.insert( NebUnknown, q_("object of unknown nature") );
+}
+
+Vec3d Nebula::getJ2000EquatorialPos(const StelCore* core) const
+{
+	if ((core) && (core->getUseAberration()) && (core->getCurrentPlanet()))
+	{
+		Vec3d pos=XYZ;
+		Q_ASSERT_X(fabs(pos.lengthSquared()-1.0)<0.0001, "Nebula aberration", "vertex length not unity");
+		//pos.normalize(); // Yay - not required!
+		Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+		vel=StelCore::matVsop87ToJ2000*vel*core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
+		pos+=vel;
+		pos.normalize();
+		return pos;
+	}
+	else
+	{
+		return XYZ;
+	}
 }

@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-06-21 10:58+0700\n"
+"POT-Creation-Date: 2021-08-15 17:12+0700\n"
 "PO-Revision-Date: 2020-01-06 16:35+0000\n"
 "Last-Translator: Manuel Rosales <manuel.rosales.gr@gmail.com>, 2021\n"
 "Language-Team: Galician (https://www.transifex.com/stellarium/teams/80998/gl/)\n"
@@ -509,8 +509,8 @@ msgstr ""
 
 #. type: Content of: <h1>
 #: ../../skycultures/almagest/description.en.utf8:1
-msgid "Almagest"
-msgstr "Almagest"
+msgid "Greek (Almagest)"
+msgstr ""
 
 #. type: Content of: <p>
 #: ../../skycultures/almagest/description.en.utf8:3
@@ -528,6 +528,18 @@ msgid ""
 "translations from Greek instead of Latin terms that are common today) and we"
 " made use of computer readable tables prepared by Ernie Wright."
 msgstr ""
+"Esta antiga cultura ceo grega está baseada no Almagest, unha recompilación "
+"de coñecementos astronómicos de antigos astrónomos que inclúe resultados de "
+"observacións e astronomía matemática. Xuntado por Claudio Ptolomeo, "
+"utilizando observacións máis antigas e propias, foi escrito en grego, "
+"publicado no século II e mantívose como a principal obra astronómica durante"
+" os 1500 anos seguintes. Orixinalmente foi escrito co título <i>Mathematike "
+"Syntaxis</i>, en grego antigo. O nome <i>Almagest</i>, que significa \"O "
+"[libro] máis grande\", desenvolveuse a partir de traducións árabes. Para "
+"crear esta cultura do ceo empregamos a tradución ó inglés de Toomer (1984), "
+"reelaborámola nalgúns detalles (por exemplo, usando traducións máis literais"
+" do grego en lugar de termos latinos que son comúns hoxe en día) e fixemos "
+"uso de táboas lexibles por ordenador preparadas por Ernie Wright ."
 
 #. type: Content of: <p>
 #: ../../skycultures/almagest/description.en.utf8:17
@@ -618,11 +630,24 @@ msgid ""
 "the star. The long description will then be displayed at the top of the "
 "screen."
 msgstr ""
+"De máis de 1.000 estrelas, Ptolomeo menciona o nome propio de tan só 15. O "
+"resto identifícanse mediante descricións bastante longas como \"A estrela no"
+" extremo da cola\" para a Polaris. Para evitar amosar descricións tan longas"
+" na pantalla en Stellarium, fixemos etiquetas curtas para todas as estrelas "
+"do Almagest baseadas na constelación e na orde na que aparecen no catálogo. "
+"Por exemplo, a Polaris recibe a denominación \"UMi 1\" porque é a primeira "
+"estrela da constelación de Osa Menor (UMi). Podes ver na táboa seguinte a "
+"correspondencia entre as constelacións de Ptolomeo e as abreviaturas da IAU."
+" Ademais, onde Ptolomeo describe unha estrela como fóra da figura, usamos "
+"letras minúsculas na etiqueta correspondente. Para ver a descrición longa "
+"dunha estrela determinada, os usuarios deberían habilitar \"Usar nomes "
+"adicionais de estrelas\" na configuración \"Ver [F4] / Ceo\" e facer clic na"
+" estrela. A longa descrición amosarase na parte superior da pantalla."
 
 #. type: Content of: <h3>
 #: ../../skycultures/almagest/description.en.utf8:61
 msgid "Constellation lines"
-msgstr ""
+msgstr "Liñas das constelacións"
 
 #. type: Content of: <p>
 #: ../../skycultures/almagest/description.en.utf8:63
@@ -669,6 +694,11 @@ msgid ""
 "this is not implemented in this sky culture because it doesn't show up in "
 "the Almagest."
 msgstr ""
+"Os nomes de estrelas e de obxectos do ceo profundo só dependen do Almagest. "
+"Por exemplo, Ptolomeo usa o nome &quot;&lambda;&alpha;&mu;&pi; &alpha; "
+"&delta;&# 943;&alpha;&sigmaf; (A que é coma un facho) &quot; para Aldebarán "
+"no seu outro traballo, o Tetrabiblos, pero isto non está implementado nesta "
+"cultura do ceo porque non aparece no Almagest."
 
 #. type: Content of: <p>
 #: ../../skycultures/almagest/description.en.utf8:87
@@ -2147,6 +2177,9 @@ msgid ""
 "class='external text' rel=\"nofollow\"> Seeing Ancient Stars, Visualization "
 "of the Almagest Catalog</a>, 2006"
 msgstr ""
+"Ernie Wright: <a href=\"http://www.etwright.org/astro/almagest.html#cat\" "
+"class='external text' rel=\"nofollow\"> Seeing Ancient Stars, Visualization "
+"of the Almagest Catalog</a>, 2006"
 
 #. type: Content of: <p>
 #: ../../skycultures/almagest/description.en.utf8:498

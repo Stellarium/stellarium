@@ -192,12 +192,14 @@ void ConfigurationDialog::createDialogContent()
 
 	connect(ui->de430checkBox, SIGNAL(clicked()), this, SLOT(de430ButtonClicked()));
 	connect(ui->de431checkBox, SIGNAL(clicked()), this, SLOT(de431ButtonClicked()));
+	connect(ui->de440checkBox, SIGNAL(clicked()), this, SLOT(de440ButtonClicked()));
+	connect(ui->de441checkBox, SIGNAL(clicked()), this, SLOT(de441ButtonClicked()));
 	resetEphemControls();
 
-	ui->nutationCheckBox->setChecked(core->getUseNutation());
-	connect(ui->nutationCheckBox, SIGNAL(toggled(bool)), core, SLOT(setUseNutation(bool)));
-	ui->topocentricCheckBox->setChecked(core->getUseTopocentricCoordinates());
-	connect(ui->topocentricCheckBox, SIGNAL(toggled(bool)), core, SLOT(setUseTopocentricCoordinates(bool)));
+	connectBoolProperty(ui->nutationCheckBox, "StelCore.flagUseNutation");
+	connectBoolProperty(ui->aberrationCheckBox, "StelCore.flagUseAberration");
+	connectDoubleProperty(ui->aberrationSpinBox, "StelCore.aberrationFactor");
+	connectBoolProperty(ui->topocentricCheckBox, "StelCore.flagUseTopocentricCoordinates");
 
 	// Selected object info
 	if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(Q_NULLPTR))
@@ -947,11 +949,13 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("astro/flag_nebula_display_no_texture",	!propMgr->getStelPropertyValue("StelSkyLayerMgr.flagShow").toBool() );
 
 	conf->setValue("astro/flag_size_limits_usage",			propMgr->getStelPropertyValue("NebulaMgr.flagUseSizeLimits").toBool());
-	conf->setValue("astro/size_limit_min",					QString::number(propMgr->getStelPropertyValue("NebulaMgr.minSizeLimit").toDouble(), 'f', 0));
-	conf->setValue("astro/size_limit_max",					QString::number(propMgr->getStelPropertyValue("NebulaMgr.maxSizeLimit").toDouble(), 'f', 0));
+	conf->setValue("astro/size_limit_min",				QString::number(propMgr->getStelPropertyValue("NebulaMgr.minSizeLimit").toDouble(), 'f', 0));
+	conf->setValue("astro/size_limit_max",				QString::number(propMgr->getStelPropertyValue("NebulaMgr.maxSizeLimit").toDouble(), 'f', 0));
 
-	conf->setValue("projection/type",						core->getCurrentProjectionTypeKey());
-	conf->setValue("astro/flag_nutation",					core->getUseNutation());
+	conf->setValue("projection/type",				core->getCurrentProjectionTypeKey());
+	conf->setValue("astro/flag_nutation",				core->getUseNutation());
+	conf->setValue("astro/flag_aberration",				core->getUseAberration());
+	conf->setValue("astro/aberration_factor",			core->getAberrationFactor());
 	conf->setValue("astro/flag_topocentric_coordinates",		core->getUseTopocentricCoordinates());
 
 	// view dialog / DSO tag settings
@@ -1106,6 +1110,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("projection/viewport_center_offset_y",		core->getCurrentStelProjectorParams().viewportCenterOffset[1]);
 	conf->setValue("projection/flip_horz",				core->getCurrentStelProjectorParams().flipHorz);
 	conf->setValue("projection/flip_vert",				core->getCurrentStelProjectorParams().flipVert);
+	conf->setValue("navigation/max_fov",				mvmgr->getUserMaxFov());
 
 	conf->setValue("viewing/flag_gravity_labels",			proj->getFlagGravityLabels());
 	conf->setValue("navigation/auto_zoom_out_resets_direction",	mvmgr->getFlagAutoZoomOutResetsDirection());
@@ -1616,12 +1621,38 @@ void ConfigurationDialog::de431ButtonClicked()
 	resetEphemControls(); //refresh labels
 }
 
+void ConfigurationDialog::de440ButtonClicked()
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+
+	StelApp::getInstance().getCore()->setDe440Active(!StelApp::getInstance().getCore()->de440IsActive());
+	conf->setValue("astro/flag_use_de440", StelApp::getInstance().getCore()->de440IsActive());
+
+	resetEphemControls(); //refresh labels
+}
+
+void ConfigurationDialog::de441ButtonClicked()
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+
+	StelApp::getInstance().getCore()->setDe441Active(!StelApp::getInstance().getCore()->de441IsActive());
+	conf->setValue("astro/flag_use_de441", StelApp::getInstance().getCore()->de441IsActive());
+
+	resetEphemControls(); //refresh labels
+}
+
 void ConfigurationDialog::resetEphemControls()
 {
 	ui->de430checkBox->setEnabled(StelApp::getInstance().getCore()->de430IsAvailable());
 	ui->de431checkBox->setEnabled(StelApp::getInstance().getCore()->de431IsAvailable());
 	ui->de430checkBox->setChecked(StelApp::getInstance().getCore()->de430IsActive());
 	ui->de431checkBox->setChecked(StelApp::getInstance().getCore()->de431IsActive());
+	ui->de440checkBox->setEnabled(StelApp::getInstance().getCore()->de440IsAvailable());
+	ui->de441checkBox->setEnabled(StelApp::getInstance().getCore()->de441IsAvailable());
+	ui->de440checkBox->setChecked(StelApp::getInstance().getCore()->de440IsActive());
+	ui->de441checkBox->setChecked(StelApp::getInstance().getCore()->de441IsActive());
 
 	if(StelApp::getInstance().getCore()->de430IsActive())
 		ui->de430label->setText("1550..2650");
@@ -1640,6 +1671,24 @@ void ConfigurationDialog::resetEphemControls()
 			ui->de431label->setText(q_("Available"));
 		else
 			ui->de431label->setText(q_("Not Available"));
+	}
+	if(StelApp::getInstance().getCore()->de440IsActive())
+		ui->de440label->setText("1550..2650");
+	else
+	{
+		if (StelApp::getInstance().getCore()->de440IsAvailable())
+			ui->de440label->setText(q_("Available"));
+		else
+			ui->de440label->setText(q_("Not Available"));
+	}
+	if(StelApp::getInstance().getCore()->de441IsActive())
+		ui->de441label->setText("-13000..17000");
+	else
+	{
+		if (StelApp::getInstance().getCore()->de441IsAvailable())
+			ui->de441label->setText(q_("Available"));
+		else
+			ui->de441label->setText(q_("Not Available"));
 	}
 }
 

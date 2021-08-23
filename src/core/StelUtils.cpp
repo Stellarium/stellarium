@@ -376,7 +376,7 @@ QString decDegToDmsStr(const double angle)
 	double s;
 	unsigned int d, m;
 	decDegToDms(angle, sign, d, m, s);
-	return QString("%1%2%3%4\'%5\"").arg(sign?'+':'-').arg(d).arg(QChar(0x00B0)).arg(m,2,10,QLatin1Char('0')).arg((unsigned int)s,2,10,QLatin1Char('0'));
+	return QString("%1%2%3%4\'%5\"").arg(sign?'+':'-').arg(d).arg(QChar(0x00B0)).arg(m,2,10,QLatin1Char('0')).arg(static_cast<unsigned int>(s),2,10,QLatin1Char('0'));
 }
 
 // Convert a dms formatted string to an angle in radian
@@ -1936,18 +1936,15 @@ double getDeltaTByStephensonMorrisonHohenkerk2016(const double jDay)
 		+ StephensonMorrisonHohenkerk2016DeltaTtableS15[i][3])*t + StephensonMorrisonHohenkerk2016DeltaTtableS15[i][2];
 }
 
-double getMoonSecularAcceleration(const double jDay, const double nd, const bool useDE43x)
+double getMoonSecularAcceleration(const double jDay, const double nd, const bool useDE4xx)
 {
 	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double t = (yearFraction(year, month, day)-1955.5)/100.0;
+	const double t = (yearFraction(year, month, day)-1955.5)/100.0;
 	// n.dot for secular acceleration of the Moon in ELP2000-82B
-	// have value -23.8946 "/cy/cy (or -25.8 for DE43x usage)
-	double ephND = -23.8946;
-	if (useDE43x)
-		ephND = -25.8;
-
+	// has value -23.8946 "/cy/cy (or -25.8 for DE43x usage)
+	const double ephND = (useDE4xx ? -25.8 : -23.8946);
 	return -0.91072 * (ephND + qAbs(nd))*t*t;
 }
 

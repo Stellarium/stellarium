@@ -352,12 +352,25 @@ void AsterismMgr::drawNames(StelPainter& sPainter) const
 	if (!hasAsterism)
 		return;
 
+	StelCore *core=StelApp::getInstance().getCore();
+	Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+	vel=StelCore::matVsop87ToJ2000*vel;
+	vel*=core->getAberrationFactor() * (AU/(86400.0*SPEED_OF_LIGHT));
+
 	sPainter.setBlending(true);
 	for (auto* asterism : asterisms)
 	{
 		if (!asterism->flagAsterism) continue;
 		// Check if in the field of view
-		if (sPainter.getProjector()->projectCheck(asterism->XYZname, asterism->XYname))
+		Vec3d XYZname=asterism->XYZname;
+		if (core->getUseAberration())
+		{
+			XYZname.normalize();
+			XYZname+=vel;
+			XYZname.normalize();
+		}
+
+		if (sPainter.getProjector()->projectCheck(XYZname, asterism->XYname))
 			asterism->drawName(sPainter);
 	}
 }

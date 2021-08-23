@@ -122,8 +122,10 @@
 	
 %% This will avoid overshooting of the margin notes out of the page.
 \setlength{\marginparwidth}{0.6\marginparwidth}
-%% A command to show the version number when a feature was introduced in the margin. Give only the version number. TODO Decide on formatting etc.
-\newcommand{\newFeature}[1]{\marginpar{\centering{\small #1}}}
+%% A command to show the version number when a feature was introduced in the margin.
+%% Inside, give ONLY the version number like \newFeature{0.21.2}
+%% TODO Decide on formatting etc.
+\newcommand{\newFeature}[1]{\marginpar{\centering{\small v#1}}}
 
 %% A few units. Add what you need in the same style here.
 \newcommand{\cm}{\ensuremath{\,\mathrm{cm}}}

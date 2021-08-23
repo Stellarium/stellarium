@@ -80,16 +80,16 @@ public:
 	};
 
 	Supernovae();
-	virtual ~Supernovae();
+	virtual ~Supernovae() Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init();
-	virtual void deinit();
-	virtual void update(double) {;}
-	virtual void draw(StelCore* core);
+	virtual void init() Q_DECL_OVERRIDE;
+	virtual void deinit() Q_DECL_OVERRIDE;
+	virtual void update(double) Q_DECL_OVERRIDE {;}
+	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
 	virtual void drawPointer(StelCore* core, StelPainter& painter);
-	virtual double getCallOrder(StelModuleActionName actionName) const;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectModule class
@@ -98,34 +98,34 @@ public:
 	//! @param limitFov the field of view around the position v in which to search for supernovae.
 	//! @param core the StelCore to use for computations.
 	//! @return a list containing the supernovae located inside the limitFov circle around position v.
-	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
+	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const Q_DECL_OVERRIDE;
 
 	//! Return the matching supernova object's pointer if exists or Q_NULLPTR.
 	//! @param nameI18n The case in-sensitive localized supernova name
-	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
+	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const Q_DECL_OVERRIDE;
 
 	//! Return the matching supernova if exists or Q_NULLPTR.
 	//! @param name The case in-sensitive english supernova name
-	virtual StelObjectP searchByName(const QString& name) const;
+	virtual StelObjectP searchByName(const QString& name) const Q_DECL_OVERRIDE;
 
 	//! Return the matching supernova if exists, or an "empty" pointer.
 	//! @param id The supernova id
-	virtual StelObjectP searchByID(const QString &id) const
+	virtual StelObjectP searchByID(const QString &id) const Q_DECL_OVERRIDE
 	{
 		return qSharedPointerCast<StelObject>(getByID(id));
 	}
 
-	virtual QStringList listAllObjects(bool inEnglish) const;
+	virtual QStringList listAllObjects(bool inEnglish) const Q_DECL_OVERRIDE;
 
-	virtual QString getName() const { return "Historical Supernovae"; }
-	virtual QString getStelObjectType() const { return Supernova::SUPERNOVA_TYPE; }
+	virtual QString getName() const Q_DECL_OVERRIDE { return "Historical Supernovae"; }
+	virtual QString getStelObjectType() const Q_DECL_OVERRIDE { return Supernova::SUPERNOVA_TYPE; }
 
 	//! get a supernova object by identifier
 	SupernovaP getByID(const QString& id) const;
 
 	//! Implement this to tell the main Stellarium GUI that there is a GUI element to configure this
 	//! plugin.
-	virtual bool configureGui(bool show=true);
+	virtual bool configureGui(bool show=true) Q_DECL_OVERRIDE;
 
 	//! Set up the plugin with default values.  This means clearing out the Supernovae section in the
 	//! main config.ini (if one already exists), and populating it with default values.  It also
@@ -274,9 +274,9 @@ class SupernovaeStelPluginInterface : public QObject, public StelPluginInterface
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const;
-	virtual StelPluginInfo getPluginInfo() const;
-	virtual QObjectList getExtensionList() const { return QObjectList(); }
+	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
+	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
+	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
 };
 
 #endif /* SUPERNOVAE_HPP */

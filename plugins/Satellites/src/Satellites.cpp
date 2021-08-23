@@ -155,7 +155,7 @@ void Satellites::init()
 		QString satGroup = N_("Satellites");
 		addAction("actionShow_Satellite_Hints", satGroup, N_("Artificial satellites"), "flagHintsVisible", "Ctrl+Z");
 		addAction("actionShow_Satellite_Labels", satGroup, N_("Satellite labels"), "flagLabelsVisible", "Alt+Shift+Z");
-		addAction("actionShow_Satellite_ConfigDialog_Global", satGroup, N_("Satellites configuration window"), configDialog, "visible", "Alt+Z");		
+		addAction("actionShow_Satellite_ConfigDialog_Global", satGroup, N_("Shoe settings dialog"), configDialog, "visible", "Alt+Z");
 
 		// Gui toolbar button
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -165,7 +165,9 @@ void Satellites::init()
 						       QPixmap(":/satellites/bt_satellites_on.png"),
 						       QPixmap(":/satellites/bt_satellites_off.png"),
 						       QPixmap(":/graphicGui/miscGlow32x32.png"),
-						       "actionShow_Satellite_Hints");
+						       "actionShow_Satellite_Hints",
+						       false,
+						       "actionShow_Satellite_ConfigDialog_Global");
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		}
 	}

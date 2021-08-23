@@ -1520,7 +1520,11 @@ public:
 						   unsigned int, unsigned int, unsigned) const
 	{
 		// XXX: we may optimize more by putting the declaration and the test outside of this method.
-		const Vec3d tmpVertex[3] = {*v0, *v1, *v2};
+		Vec3d tmpVertex[3] = {*v0, *v1, *v2};
+		// required, else assertion at begin of projectSphericalTriangle() fails!
+		tmpVertex[0].normalize();
+		tmpVertex[1].normalize();
+		tmpVertex[2].normalize();
 		if ( (outTexturePos) && (outColors))
 		{
 			const Vec2f tmpTexture[3] = {*t0, *t1, *t2};
@@ -1556,7 +1560,6 @@ public:
 	}
 
 private:
-	//const StelVertexArray& vertexArray; // UNUSED?
 	StelPainter* painter;
 	const SphericalCap* clippingCap;
 	QVarLengthArray<Vec3f, 4096>* outVertices;
@@ -1565,16 +1568,30 @@ private:
 	double maxSqDistortion;
 };
 
-void StelPainter::drawStelVertexArray(const StelVertexArray& arr, bool checkDiscontinuity)
+void StelPainter::drawStelVertexArray(const StelVertexArray& arr, bool checkDiscontinuity, Vec3d aberration)
 {
 	if (checkDiscontinuity && prj->hasDiscontinuity())
 	{
 		// The projection has discontinuities, so we need to make sure that no triangle is crossing them.
-		drawStelVertexArray(arr.removeDiscontinuousTriangles(this->getProjector().data()), false);
+		drawStelVertexArray(arr.removeDiscontinuousTriangles(this->getProjector().data()), false, aberration);
 		return;
 	}
 
-	setVertexPointer(3, GL_DOUBLE, arr.vertex.constData());
+	if (aberration==Vec3d(0.))
+	{
+		setVertexPointer(3, GL_DOUBLE, arr.vertex.constData());
+	}
+	else
+	{
+		QVector<Vec3d> aberredVertex(arr.vertex.size());
+		for (int i=0; i<arr.vertex.size(); i++)
+		{
+			Vec3d vec=arr.vertex.at(i)+aberration;
+			vec.normalize();
+			aberredVertex[i]=vec;
+			setVertexPointer(3, GL_DOUBLE, aberredVertex.constData());
+		}
+	}
 	if (arr.isTextured())
 	{
 		setTexCoordPointer(2, GL_FLOAT, arr.texCoords.constData());
@@ -1632,7 +1649,7 @@ void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool texture
 }
 
 // Draw the given SphericalPolygon.
-void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPolygonDrawMode drawMode, const SphericalCap* clippingCap, const bool doSubDivise, const double maxSqDistortion)
+void StelPainter::drawSphericalRegion(SphericalRegion* poly, SphericalPolygonDrawMode drawMode, const SphericalCap* clippingCap, const bool doSubDivise, const double maxSqDistortion, const Vec3d &observerVelocity)
 {
 	if (!prj->getBoundingCap().intersects(poly->getBoundingCap()))
 		return;
@@ -1651,12 +1668,12 @@ void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPoly
 		case SphericalPolygonDrawModeTextureFill:
 		case SphericalPolygonDrawModeTextureFillColormodulated:
 			setCullFace(true);
-			// The polygon is already tesselated as triangles
+			// The polygon is already tessellated as triangles
 			if (doSubDivise || prj->intersectViewportDiscontinuity(poly->getBoundingCap()))
 				// flag for color-modulated textured mode (e.g. for Milky Way/extincted)
-				drawSphericalTriangles(poly->getFillVertexArray(), drawMode>=SphericalPolygonDrawModeTextureFill, drawMode==SphericalPolygonDrawModeTextureFillColormodulated, clippingCap, doSubDivise, maxSqDistortion);
+				drawSphericalTriangles(poly->getFillVertexArray(observerVelocity), drawMode>=SphericalPolygonDrawModeTextureFill, drawMode==SphericalPolygonDrawModeTextureFillColormodulated, clippingCap, doSubDivise, maxSqDistortion);
 			else
-				drawStelVertexArray(poly->getFillVertexArray(), false);
+				drawStelVertexArray(poly->getFillVertexArray(observerVelocity), false);
 
 			setCullFace(oldCullFace);
 			break;

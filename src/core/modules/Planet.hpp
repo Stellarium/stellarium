@@ -206,6 +206,11 @@ public:
 	virtual Vec3f getInfoColor(void) const Q_DECL_OVERRIDE;
 	virtual QString getType(void) const Q_DECL_OVERRIDE {return PLANET_TYPE;}
 	virtual QString getID(void) const Q_DECL_OVERRIDE { return englishName; }
+	//! A Planet's own eclipticPos is in VSOP87 ref. frame (practically equal to ecliptic of J2000 for us) coordinates relative to the parent body (sun, planet).
+	//! To get J2000 equatorial coordinates, we require heliocentric ecliptical positions (adding up parent positions) of observer and Planet.
+	//! Then we use the matrix rotation multiplication with an existing matrix in StelCore to orient from eclipticalJ2000 to equatorialJ2000.
+	//! The end result is a non-normalized 3D vector which allows retrieving distances etc.
+	//! The positional computation is called by SolarSystem. If the core's aberration setting is active, the J2000 position will then include it.
 	virtual Vec3d getJ2000EquatorialPos(const StelCore *core) const Q_DECL_OVERRIDE;
 	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE;
 	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
@@ -322,8 +327,9 @@ public:
 	//! Note: The only place where this is not used for Earth is to build up orbits for planet moons w.r.t. the parent planet orientation.
 	double getRotObliquity(double JDE) const;
 
-	//! Compute the position in the parent Planet coordinate system
-	virtual void computePosition(const double dateJDE);
+	//! Compute the position and orbital velocity in the parent Planet coordinate system
+	//! You can add the aberrationPush value according to Edot*lightTime in Explanatory Supplement (2013) formula 7.55.
+	virtual void computePosition(const double dateJDE, const Vec3d &aberrationPush);
 
 	//! Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate.
 	//! This requires both flavours of JD in cases involving Earth.
@@ -364,6 +370,7 @@ public:
 
 	//! Get the Planet position in the parent Planet ecliptic coordinate in AU
 	Vec3d getEclipticPos(double dateJDE) const;
+	//! Get the last computed Planet position in the parent Planet ecliptic coordinate in AU
 	Vec3d getEclipticPos() const {return getEclipticPos(lastJDE);}
 
 	//! Return the heliocentric ecliptical position
@@ -385,6 +392,8 @@ public:
 	Vec3d getHeliocentricEclipticVelocity() const;
 
 	//! Compute and return the distance to the given position in heliocentric ecliptical (J2000) coordinates (in AU)
+	//! Preserves result for later retrieval by getDistance()
+	//! As side effect, improve fps by juggling update frequency (deltaJDE) for asteroids and other minor bodies. They must be fast if close to observer, but can be slow if further away.
 	double computeDistance(const Vec3d& obsHelioPos);
 	//! Return the last computed distance to the given position in heliocentric ecliptical (J2000) coordinates (in AU)
 	double getDistance(void) const {return distance;}
@@ -413,7 +422,6 @@ public:
 	bool getFlagNativeName(void) const { return flagNativeName; }
 
 	///////////////////////////////////////////////////////////////////////////
-	// DEPRECATED
 	///// Orbit related code
 	// Should move to an OrbitPath class which works on a SolarSystemObject, not a Planet
 	void setFlagOrbits(bool b){orbitFader = b;}
@@ -512,6 +520,8 @@ public:
 
 	//! Return the list of planets which project some shadow on this planet
 	QVector<const Planet*> getCandidatesForShadow() const;
+
+	Vec3d getAberrationPush() const {return aberrationPush; }
 	
 protected:
 	// These components for getInfoString() can be overridden in subclasses
@@ -561,7 +571,9 @@ protected:
 
 	static StelTextureSP texEarthShadow;     // for lunar eclipses
 
-	void computeModelMatrix(Mat4d &result) const;
+	// Used in drawSphere() to compute shadows, and inside a function to derive eclipse sizes.
+	// For reasons currently unknown we must handle solar eclipses as special case.
+	void computeModelMatrix(Mat4d &result, bool solarEclipseCase) const;
 
 	//! Update the orbit position values.
 	void computeOrbit();
@@ -612,6 +624,7 @@ protected:
 					 // NEW FEATURE in late 2017. For now, this may be 0/0/0 when we are not yet able to compute it.
 					 // to get velocity, preferrably read getEclipticVelocity() and getHeliocentricEclipticVelocity()
 					 // The "State Vector" [Heafner 1999] can be formed from (JDE, eclipticPos, eclipticVelocity)
+	Vec3d aberrationPush;            // 0.21.2+: a small displacement to be applied if aberred positions are requested.
 	Vec3d screenPos;                 // Used to store temporarily the 2D position on screen. We need double for moons. Observe Styx from Pluto w/o atmosphere to see that.
 	Vec3f haloColor;                 // used for drawing the planet halo. Also, when non-spherical (OBJ) model without texture is used, its color is derived from haloColour*albedo.
 
@@ -739,7 +752,7 @@ private:
 	};
 
 	//! Calculates and uploads the common shader uniforms (projection matrix, texture, lighting&shadow data)
-	RenderData setCommonShaderUniforms(const StelPainter &painter, QOpenGLShaderProgram* shader, const PlanetShaderVars& shaderVars) const;
+	RenderData setCommonShaderUniforms(const StelPainter &painter, QOpenGLShaderProgram* shader, const PlanetShaderVars& shaderVars); // const;
 
 	static PlanetShaderVars planetShaderVars;
 	static QOpenGLShaderProgram* planetShaderProgram;
@@ -784,7 +797,8 @@ private:
 						  const QMap<QByteArray,int>& fixedAttributeLocations=QMap<QByteArray,int>());
 
 	// Cache of positions in the parent ecliptic coordinates in AU.
-	mutable QCache<double, Vec3d> positionsCache;
+	// Used only for orbit plotting
+	mutable QCache<double, Vec3d> orbitPositionsCache;
 };
 
 #endif // PLANET_HPP
