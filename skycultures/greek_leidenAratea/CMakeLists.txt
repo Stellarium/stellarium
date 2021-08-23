@@ -9,4 +9,5 @@ INSTALL(DIRECTORY ./ DESTINATION ${SDATALOC}/skycultures/greek_leidenAratea
 	PATTERN "*_names.fab"
 	PATTERN "description.*.utf8"
 	PATTERN "*.png"
-	PATTERN "CMakeFiles" EXCLUDE )
+	PATTERN "*.jpg"
+ 	PATTERN "CMakeFiles" EXCLUDE )
