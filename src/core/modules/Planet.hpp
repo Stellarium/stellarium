@@ -330,6 +330,10 @@ public:
 	//! Compute the position and orbital velocity in the parent Planet coordinate system
 	//! You can add the aberrationPush value according to Edot*lightTime in Explanatory Supplement (2013) formula 7.55.
 	virtual void computePosition(const double dateJDE, const Vec3d &aberrationPush);
+	//! Compute the position and orbital velocity in the parent Planet coordinate system, and return them in eclPosition and eclVelocity
+	//! These may be preferred when we want to avoid setting the actual position (e.g., RTS computation)
+	virtual void computePosition(const double dateJDE, Vec3d &eclPosition, Vec3d &eclVelocity) const;
+
 
 	//! Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate.
 	//! This requires both flavours of JD in cases involving Earth.
@@ -695,6 +699,11 @@ protected:
 private:
 	class StelPropertyMgr* propMgr;
 	QString iauMoonNumber;
+
+	//! Compute time of rise, transit and set for a solar system object for current location.
+	//! @return Vec3f - time of rise, transit and set; decimal hours
+	//! @note The value -1.f is used as undefined value
+	virtual Vec3d computeRTSTime(StelCore* core) const Q_DECL_OVERRIDE;
 
 	const QString getContextString() const;
 	QPair<double, double> getLunarEclipseMagnitudes() const;

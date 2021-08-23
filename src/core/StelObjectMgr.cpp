@@ -75,8 +75,8 @@ void StelObjectMgr::nextTransit()
 		StelCore* core = StelApp::getInstance().getCore();
 		core->addSolarDays(1.0);
 		double JD = core->getJD();
-		Vec3f rts = selected[0]->getRTSTime(core);
-		core->setJD(static_cast<int>(JD) + static_cast<double>(rts[1]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+		Vec3d rts = selected[0]->getRTSTime(core);
+		core->setJD(static_cast<int>(JD) + ((rts[1] - core->getUTCOffset(JD)) / 24. + 0.5));
 	}
 }
 
@@ -88,9 +88,9 @@ void StelObjectMgr::nextRising()
 		StelCore* core = StelApp::getInstance().getCore();
 		core->addSolarDays(1.0);
 		double JD = core->getJD();
-		Vec3f rts = selected[0]->getRTSTime(core);
-		if (rts[0]>-99.f && rts[0]<100.f)
-			core->setJD(static_cast<int>(JD) + static_cast<double>(rts[0]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+		Vec3d rts = selected[0]->getRTSTime(core);
+		if (rts[0]>-99. && rts[0]<100.)
+			core->setJD(static_cast<int>(JD) + ((rts[0] - core->getUTCOffset(JD)) / 24. + 0.5));
 	}
 }
 
@@ -102,9 +102,9 @@ void StelObjectMgr::nextSetting()
 		StelCore* core = StelApp::getInstance().getCore();
 		core->addSolarDays(1.0);
 		double JD = core->getJD();
-		Vec3f rts = selected[0]->getRTSTime(core);
-		if (rts[2]>-99.f && rts[2]<100.f)
-			core->setJD(static_cast<int>(JD) + static_cast<double>(rts[2]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+		Vec3d rts = selected[0]->getRTSTime(core);
+		if (rts[2]>-99. && rts[2]<100.)
+			core->setJD(static_cast<int>(JD) + ((rts[2] - core->getUTCOffset(JD)) / 24. + 0.5));
 	}
 }
 
@@ -116,8 +116,8 @@ void StelObjectMgr::previousTransit()
 		StelCore* core = StelApp::getInstance().getCore();
 		core->addSolarDays(-1.0);
 		double JD = core->getJD();
-		Vec3f rts = selected[0]->getRTSTime(core);
-		core->setJD(static_cast<int>(JD) + static_cast<double>(rts[1]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+		Vec3d rts = selected[0]->getRTSTime(core);
+		core->setJD(static_cast<int>(JD) + ((rts[1] - core->getUTCOffset(JD)) / 24. + 0.5));
 	}
 }
 
@@ -129,9 +129,9 @@ void StelObjectMgr::previousRising()
 		StelCore* core = StelApp::getInstance().getCore();
 		core->addSolarDays(-1.0);
 		double JD = core->getJD();
-		Vec3f rts = selected[0]->getRTSTime(core);
-		if (rts[0]>-99.f && rts[0]<100.f)
-			core->setJD(static_cast<int>(JD) + static_cast<double>(rts[0]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+		Vec3d rts = selected[0]->getRTSTime(core);
+		if (rts[0]>-99. && rts[0]<100.)
+			core->setJD(static_cast<int>(JD) + ((rts[0] - core->getUTCOffset(JD)) / 24. + 0.5));
 	}
 }
 
@@ -143,9 +143,9 @@ void StelObjectMgr::previousSetting()
 		StelCore* core = StelApp::getInstance().getCore();
 		core->addSolarDays(-1.0);
 		double JD = core->getJD();
-		Vec3f rts = selected[0]->getRTSTime(core);
-		if (rts[2]>-99.f && rts[2]<100.f)
-			core->setJD(static_cast<int>(JD) + static_cast<double>(rts[2]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+		Vec3d rts = selected[0]->getRTSTime(core);
+		if (rts[2]>-99. && rts[2]<100.)
+			core->setJD(static_cast<int>(JD) + ((rts[2] - core->getUTCOffset(JD)) / 24. + 0.5));
 	}
 }
 
@@ -156,8 +156,8 @@ void StelObjectMgr::todayTransit()
 	{
 		StelCore* core = StelApp::getInstance().getCore();
 		double JD = core->getJD();
-		Vec3f rts = selected[0]->getRTSTime(core);
-		core->setJD(static_cast<int>(JD) + static_cast<double>(rts[1]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+		Vec3d rts = selected[0]->getRTSTime(core);
+		core->setJD(static_cast<int>(JD) + ((rts[1] - core->getUTCOffset(JD)) / 24. + 0.5));
 	}
 }
 
@@ -168,9 +168,9 @@ void StelObjectMgr::todayRising()
 	{
 		StelCore* core = StelApp::getInstance().getCore();
 		double JD = core->getJD();
-		Vec3f rts = selected[0]->getRTSTime(core);
-		if (rts[0]>-99.f && rts[0]<100.f)
-			core->setJD(static_cast<int>(JD) + static_cast<double>(rts[0]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+		Vec3d rts = selected[0]->getRTSTime(core);
+		if (rts[0]>-99. && rts[0]<100.)
+			core->setJD(static_cast<int>(JD) + ((rts[0] - core->getUTCOffset(JD)) / 24. + 0.5));
 	}
 }
 
@@ -181,9 +181,9 @@ void StelObjectMgr::todaySetting()
 	{
 		StelCore* core = StelApp::getInstance().getCore();
 		double JD = core->getJD();
-		Vec3f rts = selected[0]->getRTSTime(core);
-		if (rts[2]>-99.f && rts[2]<100.f)
-			core->setJD(static_cast<int>(JD) + static_cast<double>(rts[2]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+		Vec3d rts = selected[0]->getRTSTime(core);
+		if (rts[2]>-99. && rts[2]<100.)
+			core->setJD(static_cast<int>(JD) + ((rts[2] - core->getUTCOffset(JD)) / 24. + 0.5));
 	}
 }
 

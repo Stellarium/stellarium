@@ -838,7 +838,7 @@ private:
 	static constexpr double SunEarth = 109.12278; // ratio of Sun-Earth radius 696000/6378.1366
 
 public:
-	Vec3d point(const StelCore* core)
+	static Vec3d point(const StelCore* core)
 	{
 		static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 		double raSun, deSun, raMoon, deMoon;
@@ -1592,6 +1592,11 @@ void Planet::computePosition(const double dateJDE, const Vec3d &aberrationPush)
 		lastJDE = dateJDE;
 	}
 	this->aberrationPush=aberrationPush;
+}
+
+void Planet::computePosition(const double dateJDE, Vec3d &eclPosition, Vec3d &eclVelocity) const
+{
+		coordFunc(dateJDE, eclPosition, eclVelocity, orbitPtr);
 }
 
 // Compute the transformation matrix from the local Planet coordinate system to the parent Planet coordinate system.
@@ -4339,4 +4344,144 @@ void Planet::setApparentMagnitudeAlgorithm(QString algorithm)
 {
 	// sync default value with ViewDialog and SolarSystem!
 	vMagAlgorithm = vMagAlgorithmMap.key(algorithm, Planet::MallamaHilton_2018);
+}
+
+
+// Source: Meeus, Astronomical Algorithms, 2nd ed. 1994, ch.15
+// NOTE: Limitation for efficiency: If this is a planet moon from another planet, we compute RTS for the mother planet instead!
+Vec3d Planet::computeRTSTime(StelCore *core) const
+{
+	double ho = 0.;
+	if ( (getEnglishName()=="Moon") && (core->getCurrentLocation().planetName=="Earth"))
+		ho = +0.7275*0.95; // horizon parallax factor. FIXME: use parallax factor!
+	else if (getEnglishName()=="Sun")
+		ho = - getAngularSize(core); // semidiameter; Canonical value 16', but this is accurate even from other planets...
+	ho *= M_PI_180;
+
+	if (core->getSkyDrawer()->getFlagHasAtmosphere())
+	{
+		// canonical" refraction at horizon is -34'. Replace by pressure-dependent value here!
+		Refraction refraction=core->getSkyDrawer()->getRefraction();
+		Vec3d zeroAlt(1.0,0.0,0.0);
+		refraction.backward(zeroAlt);
+		ho += asin(zeroAlt[2]);
+	}
+	StelLocation loc=core->getCurrentLocation();
+	const double phi = static_cast<double>(loc.latitude) * M_PI_180;
+	const double L = static_cast<double>(loc.longitude) * M_PI_180;
+	PlanetP obsPlanet = core->getCurrentPlanet();
+	const double coeff = obsPlanet->getMeanSolarDay() / obsPlanet->getSiderealDay(); // earth: coeff=(360.985647/360.);
+
+	Vec3d rts(-100.,-100.,-100.);  // init as "never rises" [abs must be larger than 24!]
+
+	// We must compute coordinates for the current day, previous day and next day, midnight UT. For efficiency, we do not move the SolarSystem, but call the specific ephemeris functions.
+
+	// 1. Find JD for 0UT
+	const double DeltaT=core->getDeltaT();
+	int day, month, year;
+	StelUtils::getDateFromJulianDay(core->getJD(), &year, &month, &day);
+	double currentJD0;
+	StelUtils::getJDFromDate(&currentJD0, year, month, day, 0, 0, 0.f);
+	const double currentJDE0=currentJD0+DeltaT;
+
+	// 2. compute observer planet's and target planet's ecliptical positions for JDE 0h. (Ignore velocities)
+	Vec3d obs1, obs2, obs3, body1, body2, body3, dummy;
+	obsPlanet->computePosition(currentJDE0-1., obs1, dummy);
+	obsPlanet->computePosition(currentJDE0   , obs2, dummy);
+	obsPlanet->computePosition(currentJDE0+1., obs3, dummy);
+	// Limitation for efficiency: If this is a planet moon from another planet, we compute RTS for the mother planet instead!
+	if ((pType==isMoon) && (obsPlanet!=parent))
+	{
+		parent->computePosition(currentJDE0-1., body1, dummy);
+		parent->computePosition(currentJDE0   , body2, dummy);
+		parent->computePosition(currentJDE0+1., body3, dummy);
+	}
+	else
+	{
+		computePosition(currentJDE0-1., body1, dummy);
+		computePosition(currentJDE0   , body2, dummy);
+		computePosition(currentJDE0+1., body3, dummy);
+	}
+
+	// TODO: Light Time Correction, i.e. another round? Or just use the same light time for all computations?
+//	Vec3d Planet::getJ2000EquatorialPos(const StelCore *core) const
+//	{
+//		const bool withAberration=core->getUseAberration();
+//		return StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(getHeliocentricEclipticPos()
+//									    - core->getObserverHeliocentricEclipticPos()
+//									    + (withAberration ? aberrationPush : Vec3d(0.)));
+//	}
+	// And convert to equatorial coordinates of date. We ignore aberration, given the other uncertainties.
+	const Vec3d eq_1=core->j2000ToEquinoxEqu(StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(body1-obs1), StelCore::RefractionOff);
+	const Vec3d eq_2=core->j2000ToEquinoxEqu(StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(body2-obs2), StelCore::RefractionOff);
+	const Vec3d eq_3=core->j2000ToEquinoxEqu(StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(body3-obs3), StelCore::RefractionOff);
+	double ra1, ra2, ra3, de1, de2, de3;
+	StelUtils::rectToSphe(&ra1, &de1, eq_1);
+	StelUtils::rectToSphe(&ra2, &de2, eq_2);
+	StelUtils::rectToSphe(&ra3, &de3, eq_3);
+	// 3. Approximate times:
+	// TODO: Sidereal Time at Greenwich
+
+	const double Theta0=getSiderealTime(currentJD0, currentJDE0) * (M_PI/180.);
+	double cosH0=(sin(ho)-sin(phi)*sin(de2))/(cos(phi)*cos(de2));
+
+
+	double m0=(ra2+L-Theta0)/(M_PI*2.);
+
+	if (cosH0<-1.) // circumpolar
+	{
+		rts[0]=rts[2]=100.;
+	}
+	else if (cosH0>1.) // never rises
+	{
+		rts[0]=rts[2]=-100.;
+	}
+	else
+	{
+		const double H0 = acos(cosH0)*12.*coeff/M_PI;
+
+		rts[0] = StelUtils::fmodpos(m0 - H0, 24.);
+		rts[2] = StelUtils::fmodpos(m0 + H0, 24.);
+	}
+	//
+//
+//	double dec, ha, t;
+//	StelUtils::rectToSphe(&ha, &dec, getSiderealPosGeometric(core));
+//	ha = 2.*M_PI-ha;
+//	ha *= 12./M_PI;
+//	if (ha>24.)
+//		ha -= 24.;
+//	// It seems necessary to have ha in [-12,12]!
+//	if (ha>12.)
+//		ha -= 24.;
+//
+//	const double JD = core->getJD();
+//	const double ct = (JD - static_cast<int>(JD))*24.;
+//
+//	t = ct - ha*coeff;
+//	if (ha>12. && ha<=24.)
+//		t += 24.;
+//
+//	t += static_cast<double>(core->getUTCOffset(JD)) + 12.;
+//	t = StelUtils::fmodpos(t, 24.0);
+//	rts[1] = t;
+//
+//	const double cosH = (sin(ho) - sin(phi)*sin(dec))/(cos(phi)*cos(dec));
+//	if (cosH<-1.) // circumpolar
+//	{
+//		rts[0]=rts[2]=100.;
+//	}
+//	else if (cosH>1.) // never rises
+//	{
+//		rts[0]=rts[2]=-100.;
+//	}
+//	else
+//	{
+//		const double HC = acos(cosH)*12.*coeff/M_PI;
+//
+//		rts[0] = StelUtils::fmodpos(t - HC, 24.);
+//		rts[2] = StelUtils::fmodpos(t + HC, 24.);
+//	}
+//
+	return rts;
 }
