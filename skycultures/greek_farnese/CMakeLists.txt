@@ -9,4 +9,5 @@ INSTALL(DIRECTORY ./ DESTINATION ${SDATALOC}/skycultures/greek_farnese
 	PATTERN "*_names.fab"
 	PATTERN "description.*.utf8"
 	PATTERN "*.png"
+	PATTERN "*.jpg"
 	PATTERN "CMakeFiles" EXCLUDE )
