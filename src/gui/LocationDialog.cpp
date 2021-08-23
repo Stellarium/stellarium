@@ -65,7 +65,7 @@ void LocationDialog::retranslate()
 	{
 		ui->retranslateUi(dialog);
 		populatePlanetList();
-		populateRegionList();
+		populateRegionList(StelApp::getInstance().getCore()->getCurrentLocation().planetName);
 		populateTimeZonesList();
 		populateTooltips();
 	}
@@ -125,8 +125,7 @@ void LocationDialog::createDialogContent()
 		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
 	}
 
-	populatePlanetList();
-	populateRegionList();
+	populatePlanetList();	
 	populateTimeZonesList();
 
 	connect(ui->citySearchLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
@@ -145,6 +144,7 @@ void LocationDialog::createDialogContent()
 
 	StelCore* core = StelApp::getInstance().getCore();
 	const StelLocation& currentLocation = core->getCurrentLocation();
+	populateRegionList(currentLocation.planetName);
 	bool b = (currentLocation.getID() == core->getDefaultLocationID());
 	QSettings* conf = StelApp::getInstance().getSettings();
 	if (conf->value("init_location/location", "auto").toString() == "auto")
