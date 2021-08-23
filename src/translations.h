@@ -780,6 +780,84 @@ class Translations
 		N_("Polynesia");
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Antarctica
 		N_("Antarctica");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Oceanus_Procellarum
+		N_("Oceanus Procellarum");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Tranquillitatis
+		N_("Mare Tranquillitatis");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Fecunditatis
+		N_("Mare Fecunditatis");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Crisium
+		N_("Mare Crisium");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Imbrium
+		N_("Mare Imbrium");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Nubium
+		N_("Mare Nubium");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Cognitum
+		N_("Mare Cognitum");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Serenitatis
+		N_("Mare Serenitatis");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Alphonsus_(crater)
+		N_("Alphonsus");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Insularum
+		N_("Mare Insularum");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Sinus_Medii
+		N_("Sinus Medii");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Tycho_(lunar_crater)
+		N_("Tycho");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Mandel%27shtam_(crater)
+		N_("Mandel'shtam");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Shoemaker_(lunar_crater)
+		N_("Shoemaker");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Von_Kármán_(lunar_crater)
+		N_("Von Karman");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Sinus_Iridum
+		N_("Sinus Iridum");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Australe
+		N_("Mare Australe");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Xanthe_Terra
+		N_("Xanthe Terra");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Terra_Sirenum
+		N_("Sirenum Terra");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Margaritifer_Terra
+		N_("Margaritifer Terra");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Chryse_Planitia
+		N_("Chryse Planitia");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Utopia_Planitia
+		N_("Utopia Planitia");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Terra_Cimmeria
+		N_("Cimmeria Terra");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Isidis_Planitia
+		N_("Isidis Planitia");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Arabia_Terra
+		N_("Arabia Terra");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Elysium_Planitia
+		N_("Elysium Planitia");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Vastitas_Borealis
+		N_("Vastitas Borealis");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Terra_Sabaea
+		N_("Sabaea Terra");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+		N_("Bereghinya Planitia");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+		N_("Akhtamar Planitia");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+		N_("Tinatin Planitia");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+		N_("Kanykey Planitia");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+		N_("Vasilisa Regio");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+		N_("Beta Regio");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+		N_("Dzerassa Planitia");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+		N_("Phoebe Regio");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+		N_("Navka Planitia");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+		N_("Aphrodite Terra");
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Xanadu_(Titan)
+		N_("Xanadu");
 
 		// =====================================================================
 		// List of GUI elements (Qt's dialogs)
