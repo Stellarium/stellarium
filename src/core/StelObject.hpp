@@ -228,7 +228,7 @@ public:
 	//! Get today's time of rise, transit and set for celestial object for current location.
 	//! @return Vec3f - time of rise, transit and set; decimal hours
 	//! @note The value -1.f is used as undefined value
-	Vec3f getRTSTime(StelCore *core) const;
+	Vec3d getRTSTime(StelCore *core) const;
 
 	//! Return object's apparent V magnitude as seen from observer, without including extinction.
 	virtual float getVMagnitude(const StelCore* core) const;
@@ -304,7 +304,7 @@ private:
 	//! Compute time of rise, transit and set for celestial object for current location.
 	//! @return Vec3f - time of rise, transit and set; decimal hours
 	//! @note The value -1.f is used as undefined value
-	virtual Vec3f computeRTSTime(StelCore* core) const;
+	virtual Vec3d computeRTSTime(StelCore* core) const;
 
 	//! Location for additional object info that can be set for special purposes (at least for debugging, but maybe others), even via scripting.
 	//! Modules are allowed to add new strings to be displayed in the various getInfoString() methods of subclasses.
