@@ -8,5 +8,6 @@ INSTALL(FILES info.ini star_names.fab DESTINATION ${SDATALOC}/skycultures/babylo
 INSTALL(DIRECTORY ./ DESTINATION ${SDATALOC}/skycultures/babylonian_mulapin
 	FILES_MATCHING PATTERN "constellation*" 
 	PATTERN "*.fab" 
+	PATTERN "*.jpg" 
 	PATTERN "description.*.utf8" 
 	PATTERN "CMakeFiles" EXCLUDE )
