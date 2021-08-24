@@ -155,7 +155,7 @@ void Satellites::init()
 		QString satGroup = N_("Satellites");
 		addAction("actionShow_Satellite_Hints", satGroup, N_("Artificial satellites"), "flagHintsVisible", "Ctrl+Z");
 		addAction("actionShow_Satellite_Labels", satGroup, N_("Satellite labels"), "flagLabelsVisible", "Alt+Shift+Z");
-		addAction("actionShow_Satellite_ConfigDialog_Global", satGroup, N_("Shoe settings dialog"), configDialog, "visible", "Alt+Z");
+		addAction("actionShow_Satellite_ConfigDialog_Global", satGroup, N_("Show settings dialog"), configDialog, "visible", "Alt+Z");
 
 		// Gui toolbar button
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
