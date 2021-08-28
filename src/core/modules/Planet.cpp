@@ -4414,12 +4414,12 @@ Vec3d Planet::computeRTSTime(StelCore *core) const
 	StelUtils::rectToSphe(&ra1, &de1, eq_1);
 	StelUtils::rectToSphe(&ra2, &de2, eq_2);
 	StelUtils::rectToSphe(&ra3, &de3, eq_3);
-	// Around ra~0 there may be a jump between 23h59m and 0h0m which could crash interpolation. We better make sure to have either negative RA or RA>24 in this case.
-	if (cos(ra2)>0.)
+	// Around ra~12 there may be a jump between 12h and -12h which could crash interpolation. We better make sure to have either negative RA or RA>24 in this case.
+	if (cos(ra2)<0.)
 	{
-		ra1=StelUtils::fmodpos(ra1+M_PI, 2*M_PI)-M_PI;
-		ra2=StelUtils::fmodpos(ra2+M_PI, 2*M_PI)-M_PI;
-		ra3=StelUtils::fmodpos(ra3+M_PI, 2*M_PI)-M_PI;
+		ra1=StelUtils::fmodpos(ra1, 2*M_PI);
+		ra2=StelUtils::fmodpos(ra2, 2*M_PI);
+		ra3=StelUtils::fmodpos(ra3, 2*M_PI);
 	}
 
 	// 3. Approximate times:

@@ -228,7 +228,7 @@ namespace StelUtils
 	}
 
 	//! Convert from Rectangular direction to spherical coordinate components.
-	//! @param lng double* to store longitude in radian
+	//! @param lng double* to store longitude in radian [-pi, pi]
 	//! @param lat double* to store latitude in radian
 	//! @param v the input 3D vector
 	inline void rectToSphe(double *lng, double *lat, const Vec3d& v){
@@ -238,7 +238,7 @@ namespace StelUtils
 	}
 
 	//! Convert from Rectangular direction to spherical coordinate components.
-	//! @param lng float* to store longitude in radian
+	//! @param lng float* to store longitude in radian [-pi, pi]
 	//! @param lat float* to store latitude in radian
 	//! @param v the input 3D vector
 	inline void rectToSphe(float *lng, float *lat, const Vec3d& v){
@@ -249,7 +249,7 @@ namespace StelUtils
 
 
 	//! Convert from Rectangular direction to spherical coordinate components.
-	//! @param lng float* to store longitude in radian
+	//! @param lng float* to store longitude in radian [-pi, pi]
 	//! @param lat float* to store latitude in radian
 	//! @param v the input 3D vector
 	inline void rectToSphe(float *lng, float *lat, const Vec3f& v){
@@ -259,7 +259,7 @@ namespace StelUtils
 	}
 
 	//! Convert from Rectangular direction to spherical coordinate components.
-	//! @param lng double* to store longitude in radian
+	//! @param lng double* to store longitude in radian [-pi, pi]
 	//! @param lat double* to store latitude in radian
 	//! @param v the input 3D vector
 	inline void rectToSphe(double *lng, double *lat, const Vec3f &v){
