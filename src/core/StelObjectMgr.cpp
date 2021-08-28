@@ -705,3 +705,50 @@ QVariantMap StelObjectMgr::getObjectInfo(const StelObjectP obj)
 	}
 	return map;
 }
+
+
+
+void StelObjectMgr::setExtraInfoString(const StelObject::InfoStringGroup& flags, const QString &str)
+{
+	extraInfoStrings.remove(flags); // delete all entries with these flags
+	if (str.length()>0)
+		extraInfoStrings.insert(flags, str);
+}
+void StelObjectMgr::addToExtraInfoString(const StelObject::InfoStringGroup &flags, const QString &str)
+{
+	// Avoid insertion of full duplicates!
+	if (!extraInfoStrings.contains(flags, str))
+		extraInfoStrings.insertMulti(flags, str);
+}
+
+QStringList StelObjectMgr::getExtraInfoStrings(const StelObject::InfoStringGroup& flags) const
+{
+	QStringList list;
+	QMultiMap<StelObject::InfoStringGroup, QString>::const_iterator i = extraInfoStrings.constBegin();
+	while (i != extraInfoStrings.constEnd())
+	{
+		if (i.key() & flags)
+		{
+			QString val=i.value();
+			// TODO: Maybe exclude DebugAid flags from Release builds?
+			if (flags&StelObject::DebugAid)
+				val.prepend("DEBUG: ");
+			// For unclear reasons the sequence of entries can be preserved by *pre*pending in the returned list.
+			list.prepend(val);
+		}
+		++i;
+	}
+	return list;
+}
+
+void StelObjectMgr::removeExtraInfoStrings(const StelObject::InfoStringGroup& flags)
+{
+	QMultiMap<StelObject::InfoStringGroup, QString>::iterator i = extraInfoStrings.begin();
+	while (i != extraInfoStrings.end())
+	{
+		if (i.key() & flags)
+			i=extraInfoStrings.erase(i);
+		else
+			++i;
+	}
+}

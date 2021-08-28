@@ -19,6 +19,7 @@
 
 
 #include "StelObject.hpp"
+#include "StelObjectMgr.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelProjector.hpp"
@@ -153,10 +154,10 @@ Vec3d StelObject::getRTSTime(StelCore *core) const
 Vec3d StelObject::computeRTSTime(StelCore *core) const
 {
 	double hz = 0.;
-	if ( (getEnglishName()=="Moon") && (core->getCurrentLocation().planetName=="Earth"))
-		hz = +0.7275*0.95; // horizon parallax factor
-	else if (getEnglishName()=="Sun")
-		hz = - getAngularSize(core); // semidiameter; Canonical value 16', but this is accurate even from other planets...
+//	if ( (getEnglishName()=="Moon") && (core->getCurrentLocation().planetName=="Earth"))
+//		hz = +0.7275*0.95; // horizon parallax factor
+//	else if (getEnglishName()=="Sun")
+//		hz = - getAngularSize(core); // semidiameter; Canonical value 16', but this is accurate even from other planets...
 	hz *= M_PI_180;
 
 	if (core->getSkyDrawer()->getFlagHasAtmosphere())
@@ -265,6 +266,7 @@ QString StelObject::getMagnitudeInfoString(const StelCore *core, const InfoStrin
 QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
 	StelApp& app = StelApp::getInstance();
+	StelObjectMgr* omgr=GETSTELMODULE(StelObjectMgr);
 	const bool withAtmosphere = core->getSkyDrawer()->getFlagHasAtmosphere();
 	const bool withDecimalDegree = app.getFlagShowDecimalDegrees();
 	const bool useSouthAzimuth = app.getFlagSouthAzimuthUsage();
@@ -302,8 +304,9 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		if (withTables)
 			res += QString("<tr><td>%1 (J2000.0):</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td></td></tr>").arg(RADec, firstCoordinate, secondCoordinate);
 		else
-			res += QString("%1 (J2000.0): %2/%3").arg(RADec, firstCoordinate, secondCoordinate) + "<br>";
+			res += QString("%1 (J2000.0): %2/%3<br/>").arg(RADec, firstCoordinate, secondCoordinate);
 		res += getExtraInfoStrings(RaDecJ2000).join("");
+		res += omgr->getExtraInfoStrings(RaDecJ2000).join("");
 	}
 
 	if (flags&RaDecOfDate)
@@ -324,8 +327,9 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		if (withTables)
 			res += QString("<tr><td>%1 (%4):</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td></td></tr>").arg(RADec, firstCoordinate, secondCoordinate, cepoch);
 		else
-			res += QString("%1 (%4): %2/%3").arg(RADec, firstCoordinate, secondCoordinate, cepoch) + "<br>";
+			res += QString("%1 (%4): %2/%3<br/>").arg(RADec, firstCoordinate, secondCoordinate, cepoch);
 		res += getExtraInfoStrings(RaDecOfDate).join("");
+		res += omgr->getExtraInfoStrings(RaDecOfDate).join("");
 	}
 
 	if (flags&HourAngle)
@@ -374,8 +378,9 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		if (withTables)
 			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td>%4</td></tr>").arg(HADec, firstCoordinate, secondCoordinate, apparent);
 		else
-			res += QString("%1: %2/%3 %4").arg(HADec, firstCoordinate, secondCoordinate, apparent) + "<br>";
+			res += QString("%1: %2/%3 %4<br/>").arg(HADec, firstCoordinate, secondCoordinate, apparent);
 		res += getExtraInfoStrings(HourAngle).join("");
+		res += omgr->getExtraInfoStrings(HourAngle).join("");
 	}
 
 	if (flags&AltAzi)
@@ -422,7 +427,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		if (withTables)
 			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td>%4</td></tr>").arg(AzAlt, firstCoordinate, secondCoordinate, apparent);
 		else
-			res += QString("%1: %2/%3 %4").arg(AzAlt, firstCoordinate, secondCoordinate, apparent) + "<br>";
+			res += QString("%1: %2/%3 %4<br/>").arg(AzAlt, firstCoordinate, secondCoordinate, apparent);
 		res += getExtraInfoStrings(AltAzi).join("");
 	}
 
@@ -446,7 +451,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		if (withTables)
 			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td></td></tr>").arg(GalLongLat, firstCoordinate, secondCoordinate);
 		else
-			res += QString("%1: %2/%3").arg(GalLongLat, firstCoordinate, secondCoordinate) + "<br>";
+			res += QString("%1: %2/%3<br/>").arg(GalLongLat, firstCoordinate, secondCoordinate);
 		res += getExtraInfoStrings(GalacticCoord).join("");
 	}
 
@@ -471,7 +476,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		if (withTables)
 			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td></td></tr>").arg(SGalLongLat, firstCoordinate, secondCoordinate);
 		else
-			res += QString("%1: %2/%3").arg(SGalLongLat, firstCoordinate, secondCoordinate) + "<br>";
+			res += QString("%1: %2/%3<br/>").arg(SGalLongLat, firstCoordinate, secondCoordinate);
 		res += getExtraInfoStrings(SupergalacticCoord).join("");
 	}
 
@@ -507,7 +512,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		if (withTables)
 			res += QString("<tr><td>%1 (J2000.0):</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td></td></tr>").arg(EqlLongLat, firstCoordinate, secondCoordinate);
 		else
-			res += QString("%1 (J2000.0): %2/%3").arg(EqlLongLat, firstCoordinate, secondCoordinate) + "<br>";
+			res += QString("%1 (J2000.0): %2/%3<br/>").arg(EqlLongLat, firstCoordinate, secondCoordinate);
 		res += getExtraInfoStrings(EclipticCoordJ2000).join("");
 	}
 
@@ -540,7 +545,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		if (withTables)
 			res += QString("<tr><td>%1 (%4):</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td></td></tr>").arg(EqlLongLat, firstCoordinate, secondCoordinate, cepoch) + "</table>";
 		else
-			res += QString("%1 (%4): %2/%3").arg(EqlLongLat, firstCoordinate, secondCoordinate, cepoch) + "<br>";
+			res += QString("%1 (%4): %2/%3<br/>").arg(EqlLongLat, firstCoordinate, secondCoordinate, cepoch);
 		res += getExtraInfoStrings(EclipticCoordOfDate).join("");
 
 		// GZ Only for now: display epsilon_A, angle between Earth's Axis and ecl. of date.
@@ -556,7 +561,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			res += QString("<tr><td>%1 (%4):</td><td>%2</td></tr>").arg(eqlObl, firstCoordinate, cepoch);
 		}
 		else
-			res += QString("%1 (%3): %2").arg(eqlObl, firstCoordinate, cepoch) + "<br>";
+			res += QString("%1 (%3): %2<br/>").arg(eqlObl, firstCoordinate, cepoch);
 	}
 
 	if (withTables)
@@ -568,6 +573,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		if (withTables)
 			res += "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
 		res += getExtraInfoStrings(OtherCoord).join("");
+		res += omgr->getExtraInfoStrings(OtherCoord).join("");
 		if (withTables)
 			 res += "</table>";
 	}
@@ -576,8 +582,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	{
 		const double longitude=static_cast<double>(core->getCurrentLocation().longitude);
 		double sidereal=(get_mean_sidereal_time(core->getJD(), core->getJDE())  + longitude) / 15.;
-		sidereal=fmod(sidereal, 24.);
-		if (sidereal < 0.) sidereal+=24.;
+		sidereal=StelUtils::fmodpos(sidereal, 24.);
 		QString STc = q_("Mean Sidereal Time");
 		QString STd = StelUtils::hoursToHmsStr(sidereal);
 
@@ -587,21 +592,21 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(STc, STd);
 		}
 		else
-			res += QString("%1: %2").arg(STc, STd) + "<br>";
+			res += QString("%1: %2<br/>").arg(STc, STd);
 
 		if (core->getUseNutation())
 		{
 			sidereal=(get_apparent_sidereal_time(core->getJD(), core->getJDE()) + longitude) / 15.;
-			sidereal=fmod(sidereal, 24.);
-			if (sidereal < 0.) sidereal+=24.;
+			sidereal=StelUtils::fmodpos(sidereal, 24.);
 			STc = q_("Apparent Sidereal Time");
 			STd = StelUtils::hoursToHmsStr(sidereal);
 			if (withTables)
 				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(STc, STd);
 			else
-				res += QString("%1: %2").arg(STc, STd) + "<br>";
+				res += QString("%1: %2<br/>").arg(STc, STd);
 		}
 		res += getExtraInfoStrings(flags&SiderealTime).join("");
+		res += omgr->getExtraInfoStrings(flags&SiderealTime).join("");
 		if (withTables && !(flags&RTSTime && getType()!=QStringLiteral("Satellite")))
 			res += "</table>";
 	}
@@ -614,9 +619,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		QString sSet = qc_("Set", "celestial event");
 		double sunrise = 0.;
 		double sunset = 24.;
-		bool isSun = false;
-		if (getEnglishName()=="Sun")
-			isSun = true;
+		const bool isSun = (getEnglishName()=="Sun");
 
 		if (withTables && !(flags&SiderealTime && currentPlanet==QStringLiteral("Earth")))
 			res += "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
@@ -626,7 +629,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			if (withTables)
 				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sRise, StelUtils::hoursToHmsStr(rts[0], true));
 			else
-				res += QString("%1: %2").arg(sRise, StelUtils::hoursToHmsStr(rts[0], true)) + "<br />";
+				res += QString("%1: %2<br/>").arg(sRise, StelUtils::hoursToHmsStr(rts[0], true));
 
 			sunrise = rts[0];
 		}
@@ -634,14 +637,14 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		if (withTables)
 			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true));
 		else
-			res += QString("%1: %2").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true)) + "<br />";
+			res += QString("%1: %2<br/>").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true));
 
 		if (rts[2]>-99. && rts[2]<100.)
 		{
 			if (withTables)
 				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sSet, StelUtils::hoursToHmsStr(rts[2], true));
 			else
-				res += QString("%1: %2").arg(sSet, StelUtils::hoursToHmsStr(rts[2], true)) + "<br />";
+				res += QString("%1: %2<br/>").arg(sSet, StelUtils::hoursToHmsStr(rts[2], true));
 
 			sunset = rts[2];
 		}
@@ -653,7 +656,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			if (withTables)
 				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sDay, StelUtils::hoursToHmsStr(lengthOfDay, true));
 			else
-				res += QString("%1: %2").arg(sDay, StelUtils::hoursToHmsStr(lengthOfDay, true)) + "<br />";
+				res += QString("%1: %2<br/>").arg(sDay, StelUtils::hoursToHmsStr(lengthOfDay, true));
 		}
 
 		if (withTables)
@@ -678,6 +681,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		else if (rts[0]<99. && rts[2]>99.)
 			res += q_("Polar dusk") + "<br />";
 		res += getExtraInfoStrings(flags&RTSTime).join(' ');
+		res += omgr->getExtraInfoStrings(flags&RTSTime).join(' ');
 	}
 
 	if (flags&Extra)
@@ -691,16 +695,18 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			else
 				pa = StelUtils::radToDmsStr(par, true);
 
-			res += QString("%1: %2").arg(q_("Parallactic Angle")).arg(pa) + "<br />";
+			res += QString("%1: %2<br/>").arg(q_("Parallactic Angle")).arg(pa);
 		}
 		res += getExtraInfoStrings(Extra).join("");
+		res += omgr->getExtraInfoStrings(Extra).join("");
 	}
 
 	if (flags&IAUConstellation)
 	{
 		QString constel=core->getIAUConstellation(getEquinoxEquatorialPos(core));
-		res += QString("%1: %2").arg(q_("IAU Constellation"), constel) + "<br>";
+		res += QString("%1: %2<br/>").arg(q_("IAU Constellation"), constel);
 		res += getExtraInfoStrings(flags&IAUConstellation).join("");
+		res += omgr->getExtraInfoStrings(flags&IAUConstellation).join("");
 	}
 
 	return res;
@@ -709,8 +715,12 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 // Apply post processing on the info string
 void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flags) const
 {
+	StelObjectMgr* omgr;
+	omgr=GETSTELMODULE(StelObjectMgr);
 	str.append(getExtraInfoStrings(Script).join(' '));
+	str.append(omgr->getExtraInfoStrings(Script).join(' '));
 	str.append(getExtraInfoStrings(DebugAid).join(' ')); // TBD: Remove for Release builds?
+	str.append(omgr->getExtraInfoStrings(DebugAid).join(' ')); // TBD: Remove for Release builds?
 
 	// hack for avoiding an empty line before table
 	str.replace(QRegExp("<br(\\s*/)?><table"), "<table");
