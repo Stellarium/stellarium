@@ -4347,13 +4347,14 @@ void Planet::setApparentMagnitudeAlgorithm(QString algorithm)
 }
 
 
-// Source: Meeus, Astronomical Algorithms, 2nd ed. 1994, ch.15
-// NOTE: Limitation for efficiency: If this is a planet moon from another planet, we compute RTS for the mother planet instead!
+// Source: Meeus, Astronomical Algorithms, 2nd ed. 1998, ch.15
+// NOTE: Limitation for efficiency: If this is a planet moon from another planet, we compute RTS for the parent planet instead!
 Vec3d Planet::computeRTSTime(StelCore *core) const
 {
+	StelObjectMgr* omgr=GETSTELMODULE(StelObjectMgr);
 	double ho = 0.;
 	if ( (getEnglishName()=="Moon") && (core->getCurrentLocation().planetName=="Earth"))
-		ho = +0.7275*0.95; // horizon parallax factor. FIXME: use parallax factor!
+		ho = +0.7275*getEquatorialRadius()/eclipticPos.length(); // horizon parallax factor. (AU corrections cancel out!)
 	else if (getEnglishName()=="Sun")
 		ho = - getAngularSize(core); // semidiameter; Canonical value 16', but this is accurate even from other planets...
 	ho *= M_PI_180;
@@ -4366,82 +4367,140 @@ Vec3d Planet::computeRTSTime(StelCore *core) const
 		refraction.backward(zeroAlt);
 		ho += asin(zeroAlt[2]);
 	}
-	StelLocation loc=core->getCurrentLocation();
+	const StelLocation loc=core->getCurrentLocation();
 	const double phi = static_cast<double>(loc.latitude) * M_PI_180;
-	const double L = static_cast<double>(loc.longitude) * M_PI_180;
+	const double L = static_cast<double>(loc.longitude) * M_PI_180; // OUR longitude. Meeus has it reversed
 	PlanetP obsPlanet = core->getCurrentPlanet();
 	const double coeff = obsPlanet->getMeanSolarDay() / obsPlanet->getSiderealDay(); // earth: coeff=(360.985647/360.);
-
-	Vec3d rts(-100.,-100.,-100.);  // init as "never rises" [abs must be larger than 24!]
 
 	// We must compute coordinates for the current day, previous day and next day, midnight UT. For efficiency, we do not move the SolarSystem, but call the specific ephemeris functions.
 
 	// 1. Find JD for 0UT
-	const double DeltaT=core->getDeltaT();
+	const double DeltaT_d=core->getDeltaT()/86400.;
 	int day, month, year;
 	StelUtils::getDateFromJulianDay(core->getJD(), &year, &month, &day);
 	double currentJD0;
 	StelUtils::getJDFromDate(&currentJD0, year, month, day, 0, 0, 0.f);
-	const double currentJDE0=currentJD0+DeltaT;
+	const double currentJDE0=currentJD0+DeltaT_d;
 
 	// 2. compute observer planet's and target planet's ecliptical positions for JDE 0h. (Ignore velocities)
-	Vec3d obs1, obs2, obs3, body1, body2, body3, dummy;
-	obsPlanet->computePosition(currentJDE0-1., obs1, dummy);
-	obsPlanet->computePosition(currentJDE0   , obs2, dummy);
-	obsPlanet->computePosition(currentJDE0+1., obs3, dummy);
-	// Limitation for efficiency: If this is a planet moon from another planet, we compute RTS for the mother planet instead!
+	Vec3d obs1(0.), obs2(0.), obs3(0.), body1, body2, body3, dummy;
+	if (! ((pType==isMoon) && (obsPlanet==parent)))
+	{
+		obsPlanet->computePosition(currentJDE0-1., obs1, dummy);
+		obsPlanet->computePosition(currentJDE0   , obs2, dummy);
+		obsPlanet->computePosition(currentJDE0+1., obs3, dummy);
+	}
+	// For light time correction, we use getDistance() on the target planet and assume there is not much change from yesterday to tomorrow.
+	const double distanceCorrection=getDistance() * (AU / (SPEED_OF_LIGHT * 86400.));
+	// Limitation for efficiency: If this is a planet moon from another planet, we compute RTS for the parent planet instead!
 	if ((pType==isMoon) && (obsPlanet!=parent))
 	{
-		parent->computePosition(currentJDE0-1., body1, dummy);
-		parent->computePosition(currentJDE0   , body2, dummy);
-		parent->computePosition(currentJDE0+1., body3, dummy);
+		parent->computePosition(currentJDE0-distanceCorrection-1., body1, dummy);
+		parent->computePosition(currentJDE0-distanceCorrection   , body2, dummy);
+		parent->computePosition(currentJDE0-distanceCorrection+1., body3, dummy);
 	}
 	else
 	{
-		computePosition(currentJDE0-1., body1, dummy);
-		computePosition(currentJDE0   , body2, dummy);
-		computePosition(currentJDE0+1., body3, dummy);
+		computePosition(currentJDE0-distanceCorrection-1., body1, dummy);
+		computePosition(currentJDE0-distanceCorrection   , body2, dummy);
+		computePosition(currentJDE0-distanceCorrection+1., body3, dummy);
 	}
 
-	// TODO: Light Time Correction, i.e. another round? Or just use the same light time for all computations?
-//	Vec3d Planet::getJ2000EquatorialPos(const StelCore *core) const
-//	{
-//		const bool withAberration=core->getUseAberration();
-//		return StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(getHeliocentricEclipticPos()
-//									    - core->getObserverHeliocentricEclipticPos()
-//									    + (withAberration ? aberrationPush : Vec3d(0.)));
-//	}
-	// And convert to equatorial coordinates of date. We ignore aberration, given the other uncertainties.
-	const Vec3d eq_1=core->j2000ToEquinoxEqu(StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(body1-obs1), StelCore::RefractionOff);
-	const Vec3d eq_2=core->j2000ToEquinoxEqu(StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(body2-obs2), StelCore::RefractionOff);
-	const Vec3d eq_3=core->j2000ToEquinoxEqu(StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(body3-obs3), StelCore::RefractionOff);
+	// And convert to equatorial coordinates of date. We can also use this day's current aberration, given the other uncertainties/omissions.
+	const Vec3d eq_1=core->j2000ToEquinoxEqu(StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(body1+aberrationPush-obs1), StelCore::RefractionOff);
+	const Vec3d eq_2=core->j2000ToEquinoxEqu(StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(body2+aberrationPush-obs2), StelCore::RefractionOff);
+	const Vec3d eq_3=core->j2000ToEquinoxEqu(StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(body3+aberrationPush-obs3), StelCore::RefractionOff);
 	double ra1, ra2, ra3, de1, de2, de3;
 	StelUtils::rectToSphe(&ra1, &de1, eq_1);
 	StelUtils::rectToSphe(&ra2, &de2, eq_2);
 	StelUtils::rectToSphe(&ra3, &de3, eq_3);
-	// 3. Approximate times:
-	// TODO: Sidereal Time at Greenwich
+	// TODO: at ra~0 there may be a jump between 23h59m and 0h0m which could crash interpolation. We better make sure to have either negative RA or RA>24 in this case.
 
-	const double Theta0=getSiderealTime(currentJD0, currentJDE0) * (M_PI/180.);
+	// 3. Approximate times:
+	// Sidereal Time at Greenwich
+	const double Theta0=obsPlanet->getSiderealTime(currentJD0, currentJDE0) * (M_PI/180.);  // [radians]
 	double cosH0=(sin(ho)-sin(phi)*sin(de2))/(cos(phi)*cos(de2));
 
+	omgr->removeExtraInfoStrings(StelObject::DebugAid);
+	omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>1</sub>: %1 &delta;<sub>1</sub>: %2<br/>").arg(StelUtils::radToHmsStr(ra1)).arg(StelUtils::radToDmsStr(de1)));
+	omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>2</sub>: %1 &delta;<sub>2</sub>: %2<br/>").arg(StelUtils::radToHmsStr(ra2)).arg(StelUtils::radToDmsStr(de2)));
+	omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>3</sub>: %1 &delta;<sub>3</sub>: %2<br/>").arg(StelUtils::radToHmsStr(ra3)).arg(StelUtils::radToDmsStr(de3)));
 
-	double m0=(ra2+L-Theta0)/(M_PI*2.);
+	omgr->addToExtraInfoString(StelObject::DebugAid, QString("h<sub>0</sub>= %1<br/>").arg(StelUtils::radToDmsStr(ho)));
+	omgr->addToExtraInfoString(StelObject::DebugAid, QString("JD<sub>0</sub>= %1<br/>").arg(QString::number(currentJD0, 'f', 3)));
+	omgr->addToExtraInfoString(StelObject::DebugAid, QString("&Theta;<sub>0</sub>= %1<br/>").arg(StelUtils::radToHmsStr(Theta0)));
+	omgr->addToExtraInfoString(StelObject::DebugAid, QString("cos H<sub>0</sub>= %1<br/>").arg(QString::number(cosH0, 'f', 4)));
+
+	double m0=(ra2-L-Theta0)/(M_PI*2.); // fraction of day. Note subtraction of eastern longitude!
+	m0=StelUtils::fmodpos(m0, 1.);
+	double m1, m2; // rising, setting
+
 
 	if (cosH0<-1.) // circumpolar
 	{
-		rts[0]=rts[2]=100.;
+		m1=m2=100.;
 	}
 	else if (cosH0>1.) // never rises
 	{
-		rts[0]=rts[2]=-100.;
+		m1=m2=-100.;
 	}
 	else
 	{
-		const double H0 = acos(cosH0)*12.*coeff/M_PI;
+		const double H0 = acos(cosH0);
+		omgr->addToExtraInfoString(StelObject::DebugAid, QString("H<sub>0</sub>= %1<br/>").arg(QString::number(H0*M_180_PI, 'f', 6)));
 
-		rts[0] = StelUtils::fmodpos(m0 - H0, 24.);
-		rts[2] = StelUtils::fmodpos(m0 + H0, 24.);
+		m1 = StelUtils::fmodpos(m0 - H0/(2.*M_PI), 1.);
+		m2 = StelUtils::fmodpos(m0 + H0/(2.*M_PI), 1.);
+	}
+
+	omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>0</sub>= %1<br/>").arg(QString::number(m0, 'f', 6)));
+	omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>1</sub>= %1<br/>").arg(QString::number(m1, 'f', 6)));
+	omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>2</sub>= %1<br/>").arg(QString::number(m2, 'f', 6)));
+
+	// These are the first approximations. Now details:
+
+	const double theta0_m0=Theta0+360.985647*m0*M_PI_180; // radians
+	const double ra_m0=StelUtils::interpolate3(m0+DeltaT_d, ra1, ra2, ra3);
+//	const double de_m0=StelUtils::interpolate3(m0+DeltaT_d, de1, de2, de3); // not needed
+	double H_m0=theta0_m0+L-ra_m0;
+	double Delta_m0=-H_m0/(M_PI*2.); // should be a tiny correction.
+	// TODO: if larger (may also be close to +/-1), shift to be tiny around zero.
+	Delta_m0=StelUtils::fmodpos(Delta_m0+0.5, 1.0)-0.5;
+	m0+=Delta_m0;
+	omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>m0</sub>: %1<br/>").arg(StelUtils::radToHmsStr(ra1)));
+
+	omgr->addToExtraInfoString(StelObject::DebugAid, QString("H<sub>m0</sub>= %1<br/>").arg(StelUtils::radToDecDegStr(H_m0)));
+	omgr->addToExtraInfoString(StelObject::DebugAid, QString("&Delta;<sub>m0</sub>= %1<br/>").arg(QString::number(Delta_m0, 'f', 6)));
+	omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>0</sub><sup>*</sup>= %1<br/>").arg(QString::number(m0, 'f', 6)));
+
+	if (fabs(cosH0)<1.)
+	{
+		const double theta0_m1=Theta0+360.985647*m1*M_PI_180; // radians
+		const double ra_m1=StelUtils::interpolate3(m1+DeltaT_d, ra1, ra2, ra3);
+		const double de_m1=StelUtils::interpolate3(m1+DeltaT_d, de1, de2, de3); // not needed
+		double H_m1=theta0_m1+L-ra_m1;
+		double h_m1=asin(sin(phi)*sin(de_m1)+cos(phi)*cos(de_m1)*cos(H_m1));
+		double Delta_m1= (h_m1-ho)/(cos(de_m1)*cos(phi)*sin(H_m1)) / (M_PI*2.);
+		Delta_m1=StelUtils::fmodpos(Delta_m1+0.5, 1.0)-0.5;
+		m1+=Delta_m1;
+		omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>m1</sub>: %1 &delta;<sub>m1</sub>: %2<br/>").arg(StelUtils::radToDecDegStr(ra_m1)).arg(StelUtils::radToDecDegStr(de_m1)));
+		omgr->addToExtraInfoString(StelObject::DebugAid, QString("H<sub>m1</sub>= %1<br/>").arg(StelUtils::radToDecDegStr(H_m1)));
+		omgr->addToExtraInfoString(StelObject::DebugAid, QString("&Delta;<sub>m1</sub>= %1<br/>").arg(QString::number(Delta_m1, 'f', 6)));
+		omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>1</sub><sup>*</sup>= %1<br/>").arg(QString::number(m1, 'f', 6)));
+
+		const double theta0_m2=Theta0+360.985647*m2*M_PI_180; // radians
+		const double ra_m2=StelUtils::interpolate3(m2+DeltaT_d, ra1, ra2, ra3);
+		const double de_m2=StelUtils::interpolate3(m2+DeltaT_d, de1, de2, de3); // not needed
+		double H_m2=theta0_m2+L-ra_m2;
+		double h_m2=asin(sin(phi)*sin(de_m2)+cos(phi)*cos(de_m2)*cos(H_m2));
+		double Delta_m2= (h_m2-ho)/(cos(de_m2)*cos(phi)*sin(H_m2)) / (M_PI*2.);
+		Delta_m2=StelUtils::fmodpos(Delta_m2+0.5, 1.0)-0.5;
+		m2+=Delta_m2;
+		omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>m2</sub>: %1 &delta;<sub>m2</sub>: %2<br/>").arg(StelUtils::radToDecDegStr(ra_m2)).arg(StelUtils::radToDecDegStr(de_m2)));
+		omgr->addToExtraInfoString(StelObject::DebugAid, QString("H<sub>m2</sub>= %1<br/>").arg(StelUtils::radToDecDegStr(H_m2)));
+		omgr->addToExtraInfoString(StelObject::DebugAid, QString("&Delta;<sub>m2</sub>= %1<br/>").arg(QString::number(Delta_m2, 'f', 6)));
+		omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>2</sub><sup>*</sup>= %1<br/>").arg(QString::number(m2, 'f', 6)));
 	}
 	//
 //
@@ -4483,5 +4542,5 @@ Vec3d Planet::computeRTSTime(StelCore *core) const
 //		rts[2] = StelUtils::fmodpos(t + HC, 24.);
 //	}
 //
-	return rts;
+	return Vec3d(m1*24., m0*24., m2*24.); // FIXME: keep 100 as signal value?
 }
