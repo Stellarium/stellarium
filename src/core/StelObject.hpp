@@ -265,6 +265,7 @@ public slots:
 	//! Allow additions to the Info String. Can be used by plugins to show extra info for the selected object, or for debugging.
 	//! Hard-set this string group to a single str, or delete all messages when str==""
 	//! @note This should be used with caution. Usually you want to use addToExtraInfoString().
+	//! @note: If this breaks some const declaration, you can use StelObjectMgr::setExtraInfoString() instead.
 	virtual void setExtraInfoString(const InfoStringGroup& flags, const QString &str);
 	//! Add str to the extra string. This should be preferrable over hard setting.
 	//! Can be used by plugins to show extra info for the selected object, or for debugging.
@@ -273,9 +274,11 @@ public slots:
 	//! and must be adapted to table or non-table layout as required.
 	//! The line ending must be given explicitly, usually just end a line with "<br/>", except when it may end up in a Table or appended to a line.
 	//! See getCommonInfoString() or the respective getInfoString() in the subclasses for details of use.
+	//! @note: If this breaks some const declaration, you can use StelObjectMgr::addToExtraInfoString() instead.
 	virtual void addToExtraInfoString(const StelObject::InfoStringGroup& flags, const QString &str);
 	//! Retrieve an (unsorted) QStringList of all extra info strings that match flags.
 	//! Normally the order matches the order of addition, but this cannot be guaranteed.
+	//! @note: Usually objects should keep their extraInfoStrings to themselves. But there are cases where StelObjectMgr::setExtraInfoString() has been set.
 	QStringList getExtraInfoStrings(const InfoStringGroup& flags) const;
 	//! Remove the extraInfoStrings with the given flags.
 	//! This is a finer-grained removal than just extraInfoStrings.remove(flags), as it allows a combination of flags.
@@ -283,6 +286,7 @@ public slots:
 	//! extraInfoStrings having been set with the DebugAid and Script flags have to be removed by separate calls of this method.
 	//! Those which have been set by scripts have to persist at least as long as the selection remains active.
 	//! The behaviour of DebugAid texts depends on the use case.
+	//! @note: Usually objects should keep their extraInfoStrings to themselves. But there are cases where StelObjectMgr::setExtraInfoString() has been set.
 	void removeExtraInfoStrings(const InfoStringGroup& flags);
 
 protected:

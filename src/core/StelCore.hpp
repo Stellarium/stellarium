@@ -504,7 +504,7 @@ public slots:
 	//!       Limits can be queried with getCurrentDeltaTAlgorithmValidRangeDescription()
 
 	double computeDeltaT(const double JD);
-	//! Get current DeltaT.
+	//! Get current DeltaT in seconds.
 	double getDeltaT() const;
 
 	//! @return whether nutation is currently used.
