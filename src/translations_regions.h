@@ -413,7 +413,7 @@ class GeoRegionsTranslations
 		// TRANSLATORS: Name of region on the Moon
 		// TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Tranquillitatis
-		N_("Sea of Tranquility");
+		N_("Sea of Tranquillity");
 		// TRANSLATORS: Name of region on the Moon
 		// TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 		// TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Undarum
