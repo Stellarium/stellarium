@@ -4380,6 +4380,7 @@ Vec3d Planet::computeRTSTime(StelCore *core) const
 	StelUtils::getDateFromJulianDay(core->getJD(), &year, &month, &day);
 	double currentJD0;
 	StelUtils::getJDFromDate(&currentJD0, year, month, day, 0, 0, 0.f);
+	const double tzOffset=core->getUTCOffset(currentJD0);
 	const double currentJDE0=currentJD0+DeltaT_d;
 
 	// 2. compute observer planet's and target planet's ecliptical positions for JDE 0h. (Ignore velocities)
@@ -4427,16 +4428,16 @@ Vec3d Planet::computeRTSTime(StelCore *core) const
 	const double Theta0=obsPlanet->getSiderealTime(currentJD0, currentJDE0) * (M_PI/180.);  // [radians]
 	double cosH0=(sin(ho)-sin(phi)*sin(de2))/(cos(phi)*cos(de2));
 
-	omgr->removeExtraInfoStrings(StelObject::DebugAid);
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>1</sub>: %1=%2 &delta;<sub>1</sub>: %3<br/>").arg(QString::number(ra1, 'f', 4)).arg(StelUtils::radToHmsStr(ra1)).arg(StelUtils::radToDmsStr(de1)));
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>2</sub>: %1=%2 &delta;<sub>2</sub>: %3<br/>").arg(QString::number(ra2, 'f', 4)).arg(StelUtils::radToHmsStr(ra2)).arg(StelUtils::radToDmsStr(de2)));
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>3</sub>: %1=%2 &delta;<sub>3</sub>: %3<br/>").arg(QString::number(ra3, 'f', 4)).arg(StelUtils::radToHmsStr(ra3)).arg(StelUtils::radToDmsStr(de3)));
-
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("&Delta; = %1 km<br/>").arg(QString::number(eclipticPos.length()*AU, 'f', 3)));
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("h<sub>0</sub>= %1<br/>").arg(StelUtils::radToDmsStr(ho)));
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("JD<sub>0</sub>= %1<br/>").arg(QString::number(currentJD0, 'f', 3)));
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("&Theta;<sub>0</sub>= %1<br/>").arg(StelUtils::radToHmsStr(Theta0)));
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("cos H<sub>0</sub>= %1<br/>").arg(QString::number(cosH0, 'f', 4)));
+	//omgr->removeExtraInfoStrings(StelObject::DebugAid);
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>1</sub>: %1=%2 &delta;<sub>1</sub>: %3<br/>").arg(QString::number(ra1, 'f', 4)).arg(StelUtils::radToHmsStr(ra1)).arg(StelUtils::radToDmsStr(de1)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>2</sub>: %1=%2 &delta;<sub>2</sub>: %3<br/>").arg(QString::number(ra2, 'f', 4)).arg(StelUtils::radToHmsStr(ra2)).arg(StelUtils::radToDmsStr(de2)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>3</sub>: %1=%2 &delta;<sub>3</sub>: %3<br/>").arg(QString::number(ra3, 'f', 4)).arg(StelUtils::radToHmsStr(ra3)).arg(StelUtils::radToDmsStr(de3)));
+	//
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("&Delta; = %1 km<br/>").arg(QString::number(eclipticPos.length()*AU, 'f', 3)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("h<sub>0</sub>= %1<br/>").arg(StelUtils::radToDmsStr(ho)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("JD<sub>0</sub>= %1<br/>").arg(QString::number(currentJD0, 'f', 3)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("&Theta;<sub>0</sub>= %1<br/>").arg(StelUtils::radToHmsStr(Theta0)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("cos H<sub>0</sub>= %1<br/>").arg(QString::number(cosH0, 'f', 4)));
 
 	double m0=(ra2-L-Theta0)/(M_PI*2.); // fraction of day. Note subtraction of eastern longitude!
 	m0=StelUtils::fmodpos(m0, 1.);
@@ -4449,15 +4450,15 @@ Vec3d Planet::computeRTSTime(StelCore *core) const
 	else
 	{
 		const double H0 = acos(cosH0);
-		omgr->addToExtraInfoString(StelObject::DebugAid, QString("H<sub>0</sub>= %1<br/>").arg(QString::number(H0*M_180_PI, 'f', 6)));
+		//omgr->addToExtraInfoString(StelObject::DebugAid, QString("H<sub>0</sub>= %1<br/>").arg(QString::number(H0*M_180_PI, 'f', 6)));
 
 		m1 = StelUtils::fmodpos(m0 - H0/(2.*M_PI), 1.);
 		m2 = StelUtils::fmodpos(m0 + H0/(2.*M_PI), 1.);
 	}
 
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>0</sub>= %1<br/>").arg(QString::number(m0, 'f', 6)));
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>1</sub>= %1<br/>").arg(QString::number(m1, 'f', 6)));
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>2</sub>= %1<br/>").arg(QString::number(m2, 'f', 6)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>0</sub>= %1<br/>").arg(QString::number(m0, 'f', 6)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>1</sub>= %1<br/>").arg(QString::number(m1, 'f', 6)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>2</sub>= %1<br/>").arg(QString::number(m2, 'f', 6)));
 
 	// These are the first approximations. Now details:
 
@@ -4469,10 +4470,12 @@ Vec3d Planet::computeRTSTime(StelCore *core) const
 	// if larger (may also be close to +/-1), shift to be tiny around zero.
 	Delta_m0=StelUtils::fmodpos(Delta_m0+0.5, 1.0)-0.5;
 	m0+=Delta_m0;
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>m0</sub>: %1<br/>").arg(StelUtils::radToHmsStr(ra1)));
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("H<sub>m0</sub>= %1<br/>").arg(StelUtils::radToDecDegStr(H_m0)));
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("&Delta;<sub>m0</sub>= %1<br/>").arg(QString::number(Delta_m0, 'f', 6)));
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>0</sub><sup>*</sup>= %1<br/>").arg(QString::number(m0, 'f', 6)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>m0</sub>: %1<br/>").arg(StelUtils::radToHmsStr(ra1)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("H<sub>m0</sub>= %1<br/>").arg(StelUtils::radToDecDegStr(H_m0)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("&Delta;<sub>m0</sub>= %1<br/>").arg(QString::number(Delta_m0, 'f', 6)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>0</sub><sup>*</sup>= %1<br/>").arg(QString::number(m0, 'f', 6)));
+
+	Vec3d RTS(m1, StelUtils::fmodpos(m0*24.+tzOffset, 24.), m2);
 
 	if (fabs(cosH0)<1.)
 	{
@@ -4488,10 +4491,10 @@ Vec3d Planet::computeRTSTime(StelCore *core) const
 			Delta_m1= (h_m1-ho)/(cos(de_m1)*cos(phi)*sin(H_m1)) / (M_PI*2.);
 			Delta_m1=StelUtils::fmodpos(Delta_m1+0.5, 1.0)-0.5;
 			m1+=Delta_m1;
-			omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>m1</sub>: %1 &delta;<sub>m1</sub>: %2<br/>").arg(StelUtils::radToDecDegStr(ra_m1)).arg(StelUtils::radToDecDegStr(de_m1)));
-			omgr->addToExtraInfoString(StelObject::DebugAid, QString("H<sub>m1</sub>= %1<br/>").arg(StelUtils::radToDecDegStr(H_m1)));
-			omgr->addToExtraInfoString(StelObject::DebugAid, QString("&Delta;<sub>m1</sub>= %1<br/>").arg(QString::number(Delta_m1, 'f', 6)));
-			omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>1</sub><sup>*</sup>= %1<br/>").arg(QString::number(m1, 'f', 6)));
+			//omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>m1</sub>: %1 &delta;<sub>m1</sub>: %2<br/>").arg(StelUtils::radToDecDegStr(ra_m1)).arg(StelUtils::radToDecDegStr(de_m1)));
+			//omgr->addToExtraInfoString(StelObject::DebugAid, QString("H<sub>m1</sub>= %1<br/>").arg(StelUtils::radToDecDegStr(H_m1)));
+			//omgr->addToExtraInfoString(StelObject::DebugAid, QString("&Delta;<sub>m1</sub>= %1<br/>").arg(QString::number(Delta_m1, 'f', 6)));
+			//omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>1</sub><sup>*</sup>= %1<br/>").arg(QString::number(m1, 'f', 6)));
 			if (++iterations >= 5)
 				break;
 		}
@@ -4508,15 +4511,15 @@ Vec3d Planet::computeRTSTime(StelCore *core) const
 			Delta_m2= (h_m2-ho)/(cos(de_m2)*cos(phi)*sin(H_m2)) / (M_PI*2.);
 			Delta_m2=StelUtils::fmodpos(Delta_m2+0.5, 1.0)-0.5;
 			m2+=Delta_m2;
-			omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>m2</sub>: %1 &delta;<sub>m2</sub>: %2<br/>").arg(StelUtils::radToDecDegStr(ra_m2)).arg(StelUtils::radToDecDegStr(de_m2)));
-			omgr->addToExtraInfoString(StelObject::DebugAid, QString("H<sub>m2</sub>= %1<br/>").arg(StelUtils::radToDecDegStr(H_m2)));
-			omgr->addToExtraInfoString(StelObject::DebugAid, QString("&Delta;<sub>m2</sub>= %1<br/>").arg(QString::number(Delta_m2, 'f', 6)));
-			omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>2</sub><sup>*</sup>= %1<br/>").arg(QString::number(m2, 'f', 6)));
+			//omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>m2</sub>: %1 &delta;<sub>m2</sub>: %2<br/>").arg(StelUtils::radToDecDegStr(ra_m2)).arg(StelUtils::radToDecDegStr(de_m2)));
+			//omgr->addToExtraInfoString(StelObject::DebugAid, QString("H<sub>m2</sub>= %1<br/>").arg(StelUtils::radToDecDegStr(H_m2)));
+			//omgr->addToExtraInfoString(StelObject::DebugAid, QString("&Delta;<sub>m2</sub>= %1<br/>").arg(QString::number(Delta_m2, 'f', 6)));
+			//omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>2</sub><sup>*</sup>= %1<br/>").arg(QString::number(m2, 'f', 6)));
 			if (++iterations >= 5)
 				break;
 		}
+		RTS[0]=StelUtils::fmodpos(m1*24.+tzOffset, 24.);
+		RTS[2]=StelUtils::fmodpos(m2*24.+tzOffset, 24.);
 	}
-
-	const double tzOffset=core->getUTCOffset(currentJD0);
-	return Vec3d(m1*24.+tzOffset, m0*24.+tzOffset, m2*24.+tzOffset); // FIXME: keep 100 as signal value?
+	return RTS;
 }
