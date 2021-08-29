@@ -71,7 +71,7 @@ public:
 		SiderealTime		= 0x00200000, //!< Mean and Apparent Sidereal Time
 		RTSTime			= 0x00400000, //!< Time of rise, transit and set of celestial object
 		Script                  = 0x00800000, //!< Should be used by Scripts only which can inject extraInfoStrings.
-		DebugAid                = 0x01000000, //!< Should be used in DEBUG builds only, place messages into extraInfoStrings.
+		DebugAid                = 0x01000000, //!< Can be used for development only, place messages into extraInfoStrings. Comment them away or delete for releases.
 		NoFont			= 0x02000000,
 		PlainText		= 0x04000000  //!< Strip HTML tags from output
 	};

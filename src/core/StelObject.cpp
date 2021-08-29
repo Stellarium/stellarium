@@ -921,7 +921,6 @@ QStringList StelObject::getExtraInfoStrings(const InfoStringGroup& flags) const
 		if (i.key() & flags)
 		{
 			QString val=i.value();
-			// TODO: Maybe exclude DebugAid flags from Release builds?
 			if (flags&DebugAid)
 				val.prepend("DEBUG: ");
 			// For unclear reasons the sequence of entries can be preserved by *pre*pending in the returned list.
