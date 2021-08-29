@@ -153,66 +153,173 @@ Vec3d StelObject::getRTSTime(StelCore *core) const
 
 Vec3d StelObject::computeRTSTime(StelCore *core) const
 {
-	double hz = 0.;
-//	if ( (getEnglishName()=="Moon") && (core->getCurrentLocation().planetName=="Earth"))
-//		hz = +0.7275*0.95; // horizon parallax factor
-//	else if (getEnglishName()=="Sun")
-//		hz = - getAngularSize(core); // semidiameter; Canonical value 16', but this is accurate even from other planets...
-	hz *= M_PI_180;
-
-	if (core->getSkyDrawer()->getFlagHasAtmosphere())
+	if (core->getCurrentLocation().planetName=="Earth")
 	{
-		// canonical" refraction at horizon is -34'. Replace by pressure-dependent value here!
-		Refraction refraction=core->getSkyDrawer()->getRefraction();
-		Vec3d zeroAlt(1.0,0.0,0.0);
-		refraction.backward(zeroAlt);
-		hz += asin(zeroAlt[2]);
+		double ho = 0.;
+		if (core->getSkyDrawer()->getFlagHasAtmosphere())
+		{
+			// canonical" refraction at horizon is -34'. Replace by pressure-dependent value here!
+			Refraction refraction=core->getSkyDrawer()->getRefraction();
+			Vec3d zeroAlt(1.0,0.0,0.0);
+			refraction.backward(zeroAlt);
+			ho += asin(zeroAlt[2]);
+		}
+		const StelLocation loc=core->getCurrentLocation();
+		const double phi = static_cast<double>(loc.latitude) * M_PI_180;
+		const double L = static_cast<double>(loc.longitude) * M_PI_180; // OUR longitude. Meeus has it reversed
+		PlanetP obsPlanet = core->getCurrentPlanet();
+		// const double coeff = obsPlanet->getMeanSolarDay() / obsPlanet->getSiderealDay(); // earth: coeff=(360.985647/360.);
+
+		// We must compute coordinates for the current day, previous day and next day, midnight UT. For efficiency, we do not move the SolarSystem, but call the specific ephemeris functions.
+
+		// 1. Find JD for 0UT
+		const double DeltaT_d=core->getDeltaT()/86400.;
+		int day, month, year;
+		StelUtils::getDateFromJulianDay(core->getJD(), &year, &month, &day);
+		double currentJD0;
+		StelUtils::getJDFromDate(&currentJD0, year, month, day, 0, 0, 0.f);
+		const double tzOffset=core->getUTCOffset(currentJD0);
+		const double currentJDE0=currentJD0+DeltaT_d;
+
+		// 2. compute position
+		const Vec3d eq_2=getEquinoxEquatorialPos(core);
+		double ra2, de2;
+		StelUtils::rectToSphe(&ra2, &de2, eq_2);
+		// Around ra~12 there may be a jump between 12h and -12h which could crash interpolation. We better make sure to have either negative RA or RA>24 in this case.
+		if (cos(ra2)<0.)
+		{
+			ra2=StelUtils::fmodpos(ra2, 2*M_PI);
+		}
+
+		// 3. Approximate times:
+		// Sidereal Time at Greenwich
+		const double Theta0=obsPlanet->getSiderealTime(currentJD0, currentJDE0) * (M_PI/180.);  // [radians]
+		double cosH0=(sin(ho)-sin(phi)*sin(de2))/(cos(phi)*cos(de2));
+
+		double m0=(ra2-L-Theta0)/(M_PI*2.); // fraction of day. Note subtraction of eastern longitude!
+		m0=StelUtils::fmodpos(m0, 1.);
+		double m1, m2; // rising, setting
+
+		if (cosH0<-1.) // circumpolar
+			m1=m2=100.;
+		else if (cosH0>1.) // never rises
+			m1=m2=-100.;
+		else
+		{
+			const double H0 = acos(cosH0);
+			m1 = StelUtils::fmodpos(m0 - H0/(2.*M_PI), 1.);
+			m2 = StelUtils::fmodpos(m0 + H0/(2.*M_PI), 1.);
+		}
+
+		// These are the first approximations. Now details:
+
+		const double theta0_m0=Theta0+360.985647*m0*M_PI_180; // radians
+		const double ra_m0=ra2;
+		double H_m0=theta0_m0+L-ra_m0;
+		double Delta_m0=-H_m0/(M_PI*2.); // should be a tiny correction.
+		// if larger (may also be close to +/-1), shift to be tiny around zero.
+		Delta_m0=StelUtils::fmodpos(Delta_m0+0.5, 1.0)-0.5;
+		m0+=Delta_m0;
+
+		Vec3d RTS(m1, StelUtils::fmodpos(m0*24.+tzOffset, 24.), m2);
+
+		if (fabs(cosH0)<1.)
+		{
+			int iterations=0; // add this to limit the loops, just in case.
+			double Delta_m1=1.;
+			while (Delta_m1 > 1./8640.) // Do that until accurate to 10 seconds
+			{
+				const double theta0_m1=Theta0+360.985647*m1*M_PI_180; // radians
+				double H_m1=theta0_m1+L-ra2;
+				double h_m1=asin(sin(phi)*sin(de2)+cos(phi)*cos(de2)*cos(H_m1));
+				Delta_m1= (h_m1-ho)/(cos(de2)*cos(phi)*sin(H_m1)) / (M_PI*2.);
+				Delta_m1=StelUtils::fmodpos(Delta_m1+0.5, 1.0)-0.5;
+				m1+=Delta_m1;
+				if (++iterations >= 5)
+					break;
+			}
+
+			iterations=0;
+			double Delta_m2=1.;
+			while (Delta_m2 > 1./8640.) // Do that until accurate to 10 seconds
+			{
+				const double theta0_m2=Theta0+360.985647*m2*M_PI_180; // radians
+				double H_m2=theta0_m2+L-ra2;
+				double h_m2=asin(sin(phi)*sin(de2)+cos(phi)*cos(de2)*cos(H_m2));
+				Delta_m2= (h_m2-ho)/(cos(de2)*cos(phi)*sin(H_m2)) / (M_PI*2.);
+				Delta_m2=StelUtils::fmodpos(Delta_m2+0.5, 1.0)-0.5;
+				m2+=Delta_m2;
+				if (++iterations >= 5)
+					break;
+			}
+			RTS[0]=StelUtils::fmodpos(m1*24.+tzOffset, 24.);
+			RTS[2]=StelUtils::fmodpos(m2*24.+tzOffset, 24.);
+		}
+		return RTS;
 	}
-	const double phi = static_cast<double>(core->getCurrentLocation().latitude) * M_PI_180;
-	PlanetP cp = core->getCurrentPlanet();
-	const double coeff = cp->getMeanSolarDay() / cp->getSiderealDay();
+	else { // old version
+		double hz = 0.;
+		//	if ( (getEnglishName()=="Moon") && (core->getCurrentLocation().planetName=="Earth"))
+		//		hz = +0.7275*0.95; // horizon parallax factor
+		//	else
+		if (getEnglishName()=="Sun")
+			hz = - getAngularSize(core); // semidiameter; Canonical value 16', but this is accurate even from other planets...
+		hz *= M_PI_180;
 
-	Vec3d rts(-100.,-100.,-100.);  // init as "never rises" [abs must be larger than 24!]
+		if (core->getSkyDrawer()->getFlagHasAtmosphere())
+		{
+			// canonical" refraction at horizon is -34'. Replace by pressure-dependent value here!
+			Refraction refraction=core->getSkyDrawer()->getRefraction();
+			Vec3d zeroAlt(1.0,0.0,0.0);
+			refraction.backward(zeroAlt);
+			hz += asin(zeroAlt[2]);
+		}
+		const double phi = static_cast<double>(core->getCurrentLocation().latitude) * M_PI_180;
+		PlanetP cp = core->getCurrentPlanet();
+		const double coeff = cp->getMeanSolarDay() / cp->getSiderealDay();
 
-	double dec, ha, t;
-	StelUtils::rectToSphe(&ha, &dec, getSiderealPosGeometric(core));
-	ha = 2.*M_PI-ha;
-	ha *= 12./M_PI;
-	if (ha>24.)
-		ha -= 24.;
-	// It seems necessary to have ha in [-12,12]!
-	if (ha>12.)
-		ha -= 24.;
+		Vec3d rts(-100.,-100.,-100.);  // init as "never rises" [abs must be larger than 24!]
 
-	const double JD = core->getJD();
-	const double ct = (JD - static_cast<int>(JD))*24.;
+		double dec, ha, t;
+		StelUtils::rectToSphe(&ha, &dec, getSiderealPosGeometric(core));
+		ha = 2.*M_PI-ha;
+		ha *= 12./M_PI;
+		if (ha>24.)
+			ha -= 24.;
+		// It seems necessary to have ha in [-12,12]!
+		if (ha>12.)
+			ha -= 24.;
 
-	t = ct - ha*coeff; // earth: coeff=(360.985647/360.);
-	if (ha>12. && ha<=24.)
-		t += 24.;
+		const double JD = core->getJD();
+		const double ct = (JD - static_cast<int>(JD))*24.;
 
-	t += core->getUTCOffset(JD) + 12.;
-	t = StelUtils::fmodpos(t, 24.0);
-	rts[1] = t;
+		t = ct - ha*coeff; // earth: coeff=(360.985647/360.);
+		if (ha>12. && ha<=24.)
+			t += 24.;
 
-	const double cosH = (sin(hz) - sin(phi)*sin(dec))/(cos(phi)*cos(dec));
-	if (cosH<-1.) // circumpolar
-	{
-		rts[0]=rts[2]=100.;
+		t += core->getUTCOffset(JD) + 12.;
+		t = StelUtils::fmodpos(t, 24.0);
+		rts[1] = t;
+
+		const double cosH = (sin(hz) - sin(phi)*sin(dec))/(cos(phi)*cos(dec));
+		if (cosH<-1.) // circumpolar
+		{
+			rts[0]=rts[2]=100.;
+		}
+		else if (cosH>1.) // never rises
+		{
+			rts[0]=rts[2]=-100.;
+		}
+		else
+		{
+			const double HC = acos(cosH)*12.*coeff/M_PI;
+
+			rts[0] = StelUtils::fmodpos(t - HC, 24.);
+			rts[2] = StelUtils::fmodpos(t + HC, 24.);
+		}
+
+		return rts;
 	}
-	else if (cosH>1.) // never rises
-	{
-		rts[0]=rts[2]=-100.;
-	}
-	else
-	{
-		const double HC = acos(cosH)*12.*coeff/M_PI;
-
-		rts[0] = StelUtils::fmodpos(t - HC, 24.);
-		rts[2] = StelUtils::fmodpos(t + HC, 24.);
-	}
-
-	return rts;
 }
 
 float StelObject::getSelectPriority(const StelCore* core) const

@@ -4351,7 +4351,10 @@ void Planet::setApparentMagnitudeAlgorithm(QString algorithm)
 // NOTE: Limitation for efficiency: If this is a planet moon from another planet, we compute RTS for the parent planet instead!
 Vec3d Planet::computeRTSTime(StelCore *core) const
 {
-	StelObjectMgr* omgr=GETSTELMODULE(StelObjectMgr);
+	if (core->getCurrentLocation().planetName!="Earth")
+	return StelObject::computeRTSTime(core);
+
+	//StelObjectMgr* omgr=GETSTELMODULE(StelObjectMgr);
 	double ho = 0.;
 	if ( (getEnglishName()=="Moon") && (core->getCurrentLocation().planetName=="Earth"))
 		ho = +0.7275*asin(6378.14/(eclipticPos.length()*AU)); // horizon parallax factor.
