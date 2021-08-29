@@ -4517,5 +4517,6 @@ Vec3d Planet::computeRTSTime(StelCore *core) const
 		}
 	}
 
-	return Vec3d(m1*24.+core->getUTCOffset(currentJD0), m0*24.+core->getUTCOffset(currentJD0), m2*24.+core->getUTCOffset(currentJD0)); // FIXME: keep 100 as signal value?
+	const double tzOffset=core->getUTCOffset(currentJD0);
+	return Vec3d(m1*24.+tzOffset, m0*24.+tzOffset, m2*24.+tzOffset); // FIXME: keep 100 as signal value?
 }
