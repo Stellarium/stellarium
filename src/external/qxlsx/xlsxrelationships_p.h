@@ -37,11 +37,12 @@
 //
 
 #include "xlsxglobal.h"
+
 #include <QList>
 #include <QString>
-class QIODevice;
+#include <QIODevice>
 
-namespace QXlsx {
+QT_BEGIN_NAMESPACE_XLSX
 
 struct XlsxRelationship
 {
@@ -83,5 +84,6 @@ private:
     QList<XlsxRelationship> m_relationships;
 };
 
-}
+QT_END_NAMESPACE_XLSX
+
 #endif // XLSXRELATIONSHIPS_H

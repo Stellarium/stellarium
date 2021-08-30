@@ -38,9 +38,9 @@
 #include "xlsxabstractooxmlfile.h"
 
 #include <QString>
-class QIODevice;
+#include <QIODevice>
 
-namespace QXlsx {
+QT_BEGIN_NAMESPACE_XLSX
 
 class SimpleOOXmlFile : public AbstractOOXmlFile
 {
@@ -55,5 +55,6 @@ public:
     QByteArray xmlData;
 };
 
-}
+QT_END_NAMESPACE_XLSX
+
 #endif // XLSXSIMPLEOOXMLFILE_H
