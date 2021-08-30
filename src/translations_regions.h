@@ -369,6 +369,7 @@ class GeoRegionsTranslations
 		N_("Sea of Moisture");
 		// TRANSLATORS: Name of region on the Moon
 		// TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+		// TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Imbrium
 		N_("Sea of Rains");
 		// TRANSLATORS: Name of region on the Moon
 		// TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
