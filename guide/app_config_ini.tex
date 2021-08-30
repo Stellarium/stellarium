@@ -345,6 +345,13 @@ This section is for developers only.
 \noindent%
 \begin{tabularx}{\textwidth}{l|l|X}\toprule
 \emph{ID}              & \emph{Type} & \emph{Description}\\\midrule
+check\_loading\_constellation\_data & bool & Set to \emph{true} to check loading constellation data.
+                                      This option is needed to debug new skycultures. Default value: \emph{false}.\\
+convert\_locations\_list     & bool & Set to \emph{true} to convert file \file{base\_locations.txt} 
+                                      into file \file{base\_locations.bin}\footnote{To get the standard 
+                                        packed \file{base\_locations.bin.gz} file please run the command
+                                        \verb|gzip -nc base_locations.bin > base_locations.bin.gz|.}. 
+                                      Default value: \emph{false}.\\
 convert\_dso\_catalog        & bool & Set to \emph{true} to convert file \file{catalog.txt} 
                                       into file \file{catalog.dat}. Default value: \emph{false}.\\%\midrule
 convert\_dso\_decimal\_coord & bool & Set to \emph{true} to use decimal values for coordinates 

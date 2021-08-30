@@ -352,7 +352,7 @@ public slots:
 	//! @param duration the time for the transition from the
 	//!        old to the new location.
 	//! @param name A name for the location (which will appear
-	//!        in the status bar. Use "<city>, <country>" for
+	//!        in the status bar. Use "<city>, <region>" for
 	//!        moving across a border.
 	//! @param planet the English name of the new planet.
 	//!        If the planet name is not known (e.g. ""), the
@@ -375,7 +375,7 @@ public slots:
 	//! - longitude : longitude in decimal degrees
 	//! - latitude : latitude in decimal degrees
 	//! - planet : name of planet
-	//! - location : city and country
+	//! - location : city and region
 	//! - sidereal-year : duration of the sidereal year on the planet in Earth's days (since 0.12.0)
 	//! - sidereal-day : duration of the sidereal day on the planet in Earth's hours (since 0.12.0)
 	//! - solar-day : duration of the mean solar day on the planet in Earth's hours (since 0.12.0)

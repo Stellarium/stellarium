@@ -105,7 +105,7 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 		if (landscapeIni.contains("location/longitude"))
 			location.longitude = static_cast<float>(StelUtils::getDecAngle(landscapeIni.value("location/longitude").toString())*M_180_PI);
 		if (landscapeIni.contains("location/country"))
-			location.country = landscapeIni.value("location/country").toString();
+			location.region = StelLocationMgr::pickRegionFromCountry(landscapeIni.value("location/country").toString());
 		if (landscapeIni.contains("location/state"))
 			location.state = landscapeIni.value("location/state").toString();
 		if (landscapeIni.contains("location/name"))

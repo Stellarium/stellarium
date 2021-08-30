@@ -29,6 +29,14 @@ typedef QList<StelLocation> LocationList;
 typedef QMap<QString,StelLocation> LocationMap;
 typedef QMap<QByteArray,QByteArray> TimezoneNameMap;
 
+typedef struct
+{
+	int code;
+	QString regionName;
+	QString countries;
+	QString planet;
+} GeoRegion;
+
 class GPSLookupHelper;
 
 //! @class StelLocationMgr
@@ -80,8 +88,18 @@ public:
 
 	//! Find list of locations within @param radiusDegrees of selected (usually screen-clicked) coordinates.
 	LocationMap pickLocationsNearby(const QString planetName, const float longitude, const float latitude, const float radiusDegrees);
-	//! Find list of locations in a particular country only.
-	LocationMap pickLocationsInCountry(const QString country);
+	//! Find list of locations in a particular region only.
+	LocationMap pickLocationsInRegion(const QString region);
+
+	//! return a QStringList of region names by planet (return all list of regions if planet name is empty)
+	QStringList getRegionNames(const QString& planet = "") const;
+
+	//! Pick region name from ISO 3166-1 two-letter country codes
+	static QString pickRegionFromCountryCode(const QString countryCode);
+	//! Pick region name from country English name
+	static QString pickRegionFromCountry(const QString country);
+	//! Pick region name from region code
+	static QString pickRegionFromCode(int regionCode);
 
 public slots:
 	//! Return the StelLocation for a given string
@@ -134,6 +152,8 @@ private slots:
 	void gpsQueryError(const QString& err);
 #endif
 private:
+	void loadRegions();
+	void loadCountries();
 	void generateBinaryLocationFile(const QString& txtFile, bool isUserLocation, const QString& binFile) const;
 
 	//! Load cities from a file
@@ -152,6 +172,10 @@ private:
 	//! The list has to be maintained based on empirical observations.
 	//! @todo Make it load from a configurable external file.
 	static TimezoneNameMap locationDBToIANAtranslations;
+
+	static QList<GeoRegion> regions;
+	static QMap<QString, QString> countryCodeToRegionMap;
+	static QMap<QString, QString> countryCodeToStringMap;
 	
 	StelLocation lastResortLocation;
 

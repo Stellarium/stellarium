@@ -231,7 +231,7 @@ void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, d
 	if( cico.exactMatch( name ) )
 	{
 		loc.name = cico.cap(1);
-		loc.country = cico.cap(2);
+		loc.region = cico.cap(2);
 	}
 	else
 		loc.name = name;

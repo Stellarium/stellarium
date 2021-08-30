@@ -31,8 +31,6 @@
 
 #include <ctime>
 
-QMap<QString, QString> StelLocaleMgr::countryCodeToStringMap;
-
 StelLocaleMgr::StelLocaleMgr()
 	: skyTranslator(Q_NULLPTR)
 	, planetaryFeaturesTranslator(Q_NULLPTR)
@@ -41,23 +39,6 @@ StelLocaleMgr::StelLocaleMgr()
 	, dateFormat()
 {
 	core = StelApp::getInstance().getCore();
-
-	// Load from file
-	QString path = StelFileMgr::findFile("data/countryCodes.dat");
-	if (path.isEmpty())
-	{
-		qWarning() << "ERROR - could not find country code data file.";
-		return;
-	}
-
-	QFile file(path);
-	if(file.open(QIODevice::ReadOnly))
-	{
-		QDataStream in(&file);	// read the data serialized from the file
-		in.setVersion(QDataStream::Qt_5_2);
-		in >> countryCodeToStringMap;
-		file.close();
-	}
 	createNameLists();
 }
 
@@ -72,58 +53,10 @@ StelLocaleMgr::~StelLocaleMgr()
 	scriptsTranslator = Q_NULLPTR;
 }
 
-// Mehtod which generates and save the map between 2 letters country code and english country names
-void StelLocaleMgr::generateCountryList()
-{
-	// Load ISO 3166-1 two-letter country codes from file (slow)
-	// The format is "[code][tab][country name containing spaces][newline]"
-	qWarning() << "Generating a country list...";
-	QFile textFile(StelFileMgr::findFile("data/iso3166.tab"));
-	if(textFile.open(QFile::ReadOnly | QFile::Text))
-	{
-		QString line;
-		while(!textFile.atEnd())
-		{
-			line = QString::fromUtf8(textFile.readLine());
-			if (line.startsWith("//") || line.startsWith("#"))
-				continue;
-
-			if (!line.isEmpty())
-			{
-				#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
-				QStringList list=line.split("\t", Qt::KeepEmptyParts);
-				#else
-				QStringList list=line.split("\t", QString::KeepEmptyParts);
-				#endif
-				QString code = list.at(0).trimmed().toLower();
-				QString country = list.at(1).trimmed().replace("&", "and");
-
-				qDebug() << code << ":" << country;
-				countryCodeToStringMap.insert(code, country);
-			}
-		}
-		textFile.close();
-	}
-
-	// Save to binary file
-	QFile binaryFile(StelFileMgr::findFile("data/countryCodes.dat"));
-	if(binaryFile.open(QIODevice::WriteOnly))
-	{
-		QDataStream out(&binaryFile);    // save the data serialized to the file
-		out.setVersion(QDataStream::Qt_5_2);
-		out << countryCodeToStringMap;
-		binaryFile.flush();
-		binaryFile.close();
-	}
-}
-
 void StelLocaleMgr::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
-
-	if (conf->value("devel/convert_countries_list", false).toBool())
-		generateCountryList();
 
 	setSkyLanguage(conf->value("localization/sky_locale", "system").toString(), false);
 	setAppLanguage(conf->value("localization/app_locale", "system").toString(), false);
@@ -397,31 +330,6 @@ QString StelLocaleMgr::getQtDateFormatStr() const
 		"ddd, dd.MM.yyyy",
 		"ddd, yyyy.MM.dd"};
 	return dfmt[dateFormat];
-}
-
-// Convert a 2 letter country code to string
-QString StelLocaleMgr::countryCodeToString(const QString& countryCode)
-{
-	QMap<QString, QString>::ConstIterator i = countryCodeToStringMap.find(countryCode);
-	return (i!=countryCodeToStringMap.constEnd()) ? i.value() : QString();
-}
-
-// Convert a string to 2 letter country code
-QString StelLocaleMgr::countryNameToCode(const QString& countryName)
-{
-	return countryCodeToStringMap.key(countryName, "??");
-}
-
-
-// Return a list of all the known country names
-QStringList StelLocaleMgr::getAllCountryNames()
-{
-	QStringList res;
-	//for (QMap<QString, QString>::ConstIterator i = countryCodeToStringMap.constBegin();i!=countryCodeToStringMap.constEnd();++i)
-	//	res.append(i.value());
-	res=countryCodeToStringMap.values();
-	res.sort();
-	return res;
 }
 
 QString StelLocaleMgr::shortDayName(int weekday)
