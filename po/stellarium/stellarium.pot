@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-08-24 07:13+0700\n"
+"POT-Creation-Date: 2021-08-30 18:30+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3580,263 +3580,263 @@ msgid "Not found"
 msgstr ""
 
 #. TRANSLATORS: Local Mean Solar Time. Please use abbreviation.
-#: src/core/StelLocaleMgr.cpp:307
+#: src/core/StelLocaleMgr.cpp:240
 msgctxt "solar time"
 msgid "LMST"
 msgstr ""
 
 #. TRANSLATORS: Local True Solar Time. Please use abbreviation.
-#: src/core/StelLocaleMgr.cpp:313
+#: src/core/StelLocaleMgr.cpp:246
 msgctxt "solar time"
 msgid "LTST"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:474
+#: src/core/StelLocaleMgr.cpp:382
 msgctxt "short day name"
 msgid "Sun"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:475
+#: src/core/StelLocaleMgr.cpp:383
 msgctxt "short day name"
 msgid "Mon"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:476
+#: src/core/StelLocaleMgr.cpp:384
 msgctxt "short day name"
 msgid "Tue"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:477
+#: src/core/StelLocaleMgr.cpp:385
 msgctxt "short day name"
 msgid "Wed"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:478
+#: src/core/StelLocaleMgr.cpp:386
 msgctxt "short day name"
 msgid "Thu"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:479
+#: src/core/StelLocaleMgr.cpp:387
 msgctxt "short day name"
 msgid "Fri"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:480
+#: src/core/StelLocaleMgr.cpp:388
 msgctxt "short day name"
 msgid "Sat"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:483 plugins/Calendars/src/JulianCalendar.cpp:37
+#: src/core/StelLocaleMgr.cpp:391 plugins/Calendars/src/JulianCalendar.cpp:37
 msgctxt "long day name"
 msgid "Sunday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:484 plugins/Calendars/src/JulianCalendar.cpp:38
+#: src/core/StelLocaleMgr.cpp:392 plugins/Calendars/src/JulianCalendar.cpp:38
 msgctxt "long day name"
 msgid "Monday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:485 plugins/Calendars/src/JulianCalendar.cpp:39
+#: src/core/StelLocaleMgr.cpp:393 plugins/Calendars/src/JulianCalendar.cpp:39
 msgctxt "long day name"
 msgid "Tuesday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:486 plugins/Calendars/src/JulianCalendar.cpp:40
+#: src/core/StelLocaleMgr.cpp:394 plugins/Calendars/src/JulianCalendar.cpp:40
 msgctxt "long day name"
 msgid "Wednesday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:487 plugins/Calendars/src/JulianCalendar.cpp:41
+#: src/core/StelLocaleMgr.cpp:395 plugins/Calendars/src/JulianCalendar.cpp:41
 msgctxt "long day name"
 msgid "Thursday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:488 plugins/Calendars/src/JulianCalendar.cpp:42
+#: src/core/StelLocaleMgr.cpp:396 plugins/Calendars/src/JulianCalendar.cpp:42
 msgctxt "long day name"
 msgid "Friday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:489 plugins/Calendars/src/JulianCalendar.cpp:43
+#: src/core/StelLocaleMgr.cpp:397 plugins/Calendars/src/JulianCalendar.cpp:43
 msgctxt "long day name"
 msgid "Saturday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:493
+#: src/core/StelLocaleMgr.cpp:401
 msgctxt "short month name"
 msgid "Dec"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:494
+#: src/core/StelLocaleMgr.cpp:402
 msgctxt "short month name"
 msgid "Jan"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:495
+#: src/core/StelLocaleMgr.cpp:403
 msgctxt "short month name"
 msgid "Feb"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:496
+#: src/core/StelLocaleMgr.cpp:404
 msgctxt "short month name"
 msgid "Mar"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:497
+#: src/core/StelLocaleMgr.cpp:405
 msgctxt "short month name"
 msgid "Apr"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:498
+#: src/core/StelLocaleMgr.cpp:406
 msgctxt "short month name"
 msgid "May"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:499
+#: src/core/StelLocaleMgr.cpp:407
 msgctxt "short month name"
 msgid "Jun"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:500
+#: src/core/StelLocaleMgr.cpp:408
 msgctxt "short month name"
 msgid "Jul"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:501
+#: src/core/StelLocaleMgr.cpp:409
 msgctxt "short month name"
 msgid "Aug"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:502
+#: src/core/StelLocaleMgr.cpp:410
 msgctxt "short month name"
 msgid "Sep"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:503
+#: src/core/StelLocaleMgr.cpp:411
 msgctxt "short month name"
 msgid "Oct"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:504
+#: src/core/StelLocaleMgr.cpp:412
 msgctxt "short month name"
 msgid "Nov"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:508 plugins/Calendars/src/JulianCalendar.cpp:56
+#: src/core/StelLocaleMgr.cpp:416 plugins/Calendars/src/JulianCalendar.cpp:56
 msgctxt "long month name"
 msgid "December"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:509 plugins/Calendars/src/JulianCalendar.cpp:45
+#: src/core/StelLocaleMgr.cpp:417 plugins/Calendars/src/JulianCalendar.cpp:45
 msgctxt "long month name"
 msgid "January"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:510 plugins/Calendars/src/JulianCalendar.cpp:46
+#: src/core/StelLocaleMgr.cpp:418 plugins/Calendars/src/JulianCalendar.cpp:46
 msgctxt "long month name"
 msgid "February"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:511 plugins/Calendars/src/JulianCalendar.cpp:47
+#: src/core/StelLocaleMgr.cpp:419 plugins/Calendars/src/JulianCalendar.cpp:47
 msgctxt "long month name"
 msgid "March"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:512 plugins/Calendars/src/JulianCalendar.cpp:48
+#: src/core/StelLocaleMgr.cpp:420 plugins/Calendars/src/JulianCalendar.cpp:48
 msgctxt "long month name"
 msgid "April"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:513 plugins/Calendars/src/JulianCalendar.cpp:49
+#: src/core/StelLocaleMgr.cpp:421 plugins/Calendars/src/JulianCalendar.cpp:49
 msgctxt "long month name"
 msgid "May"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:514 plugins/Calendars/src/JulianCalendar.cpp:50
+#: src/core/StelLocaleMgr.cpp:422 plugins/Calendars/src/JulianCalendar.cpp:50
 msgctxt "long month name"
 msgid "June"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:515 plugins/Calendars/src/JulianCalendar.cpp:51
+#: src/core/StelLocaleMgr.cpp:423 plugins/Calendars/src/JulianCalendar.cpp:51
 msgctxt "long month name"
 msgid "July"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:516 plugins/Calendars/src/JulianCalendar.cpp:52
+#: src/core/StelLocaleMgr.cpp:424 plugins/Calendars/src/JulianCalendar.cpp:52
 msgctxt "long month name"
 msgid "August"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:517 plugins/Calendars/src/JulianCalendar.cpp:53
+#: src/core/StelLocaleMgr.cpp:425 plugins/Calendars/src/JulianCalendar.cpp:53
 msgctxt "long month name"
 msgid "September"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:518 plugins/Calendars/src/JulianCalendar.cpp:54
+#: src/core/StelLocaleMgr.cpp:426 plugins/Calendars/src/JulianCalendar.cpp:54
 msgctxt "long month name"
 msgid "October"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:519 plugins/Calendars/src/JulianCalendar.cpp:55
+#: src/core/StelLocaleMgr.cpp:427 plugins/Calendars/src/JulianCalendar.cpp:55
 msgctxt "long month name"
 msgid "November"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:522
+#: src/core/StelLocaleMgr.cpp:430
 msgctxt "genitive"
 msgid "December"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:523
+#: src/core/StelLocaleMgr.cpp:431
 msgctxt "genitive"
 msgid "January"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:524
+#: src/core/StelLocaleMgr.cpp:432
 msgctxt "genitive"
 msgid "February"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:525
+#: src/core/StelLocaleMgr.cpp:433
 msgctxt "genitive"
 msgid "March"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:526
+#: src/core/StelLocaleMgr.cpp:434
 msgctxt "genitive"
 msgid "April"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:527
+#: src/core/StelLocaleMgr.cpp:435
 msgctxt "genitive"
 msgid "May"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:528
+#: src/core/StelLocaleMgr.cpp:436
 msgctxt "genitive"
 msgid "June"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:529
+#: src/core/StelLocaleMgr.cpp:437
 msgctxt "genitive"
 msgid "July"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:530
+#: src/core/StelLocaleMgr.cpp:438
 msgctxt "genitive"
 msgid "August"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:531
+#: src/core/StelLocaleMgr.cpp:439
 msgctxt "genitive"
 msgid "September"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:532
+#: src/core/StelLocaleMgr.cpp:440
 msgctxt "genitive"
 msgid "October"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:533
+#: src/core/StelLocaleMgr.cpp:441
 msgctxt "genitive"
 msgid "November"
 msgstr ""
@@ -4155,7 +4155,7 @@ msgid "Custom equation of %1T"
 msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1860 src/gui/ConfigurationDialog.cpp:1897
-#: src/gui/StelGuiItems.cpp:733 src/gui/LocationDialog.cpp:483
+#: src/gui/StelGuiItems.cpp:733 src/gui/LocationDialog.cpp:482
 msgid "System default"
 msgstr ""
 
@@ -4627,11 +4627,11 @@ msgstr ""
 msgid "Time zone"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:738 src/gui/LocationDialog.cpp:481
+#: src/gui/StelGuiItems.cpp:738 src/gui/LocationDialog.cpp:480
 msgid "Local Mean Solar Time"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:741 src/gui/LocationDialog.cpp:482
+#: src/gui/StelGuiItems.cpp:741 src/gui/LocationDialog.cpp:481
 msgid "Local True Solar Time"
 msgstr ""
 
@@ -8267,1249 +8267,1208 @@ msgstr ""
 msgid "Show &hidden files"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Andorra
-#: src/translations_countries.h:32
-msgid "Andorra"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/North_Africa
+#: src/translations_regions.h:33
+msgid "Northern Africa"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/United_Arab_Emirates
-#: src/translations_countries.h:34
-msgid "United Arab Emirates"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/East_Africa
+#: src/translations_regions.h:36
+msgid "Eastern Africa"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Afghanistan
-#: src/translations_countries.h:36
-msgid "Afghanistan"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Central_Africa
+#: src/translations_regions.h:39
+msgid "Central Africa"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Antigua_&_Barbuda
-#: src/translations_countries.h:38
-msgid "Antigua and Barbuda"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Southern_Africa
+#: src/translations_regions.h:42
+msgid "Southern Africa"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Anguilla
-#: src/translations_countries.h:40
-msgid "Anguilla"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/West_Africa
+#: src/translations_regions.h:45
+msgid "Western Africa"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Albania
-#: src/translations_countries.h:42
-msgid "Albania"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Caribbean
+#: src/translations_regions.h:48
+msgid "Caribbean"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Armenia
-#: src/translations_countries.h:44
-msgid "Armenia"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Central_America
+#: src/translations_regions.h:51
+msgid "Central America"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Angola
-#: src/translations_countries.h:46
-msgid "Angola"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/South_America
+#: src/translations_regions.h:54
+msgid "Southern America"
 msgstr ""
 
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Northern_America
+#: src/translations_regions.h:57
+msgid "Northern America"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Antarctica
-#: src/translations_countries.h:48
+#: src/translations_regions.h:60
 msgid "Antarctica"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Argentina
-#: src/translations_countries.h:50
-msgid "Argentina"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/North_Asia
+#: src/translations_regions.h:63
+msgid "Northern Asia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/American_Samoa
-#: src/translations_countries.h:52
-msgid "Samoa (American)"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Central_Asia
+#: src/translations_regions.h:66
+msgid "Central Asia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Austria
-#: src/translations_countries.h:54
-msgid "Austria"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Eastern_Asia
+#: src/translations_regions.h:69
+msgid "Eastern Asia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Australia
-#: src/translations_countries.h:56
-msgid "Australia"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Southeast_Asia
+#: src/translations_regions.h:72
+msgid "South-eastern Asia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Aruba
-#: src/translations_countries.h:58
-msgid "Aruba"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/South_Asia
+#: src/translations_regions.h:75
+msgid "Southern Asia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Åland_Islands
-#: src/translations_countries.h:60
-msgid "Åland Islands"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Western_Asia
+#: src/translations_regions.h:78
+msgid "Western Asia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Azerbaijan
-#: src/translations_countries.h:62
-msgid "Azerbaijan"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Eastern_Europe
+#: src/translations_regions.h:81
+msgid "Eastern Europe"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Bosnia_&_Herzegovina
-#: src/translations_countries.h:64
-msgid "Bosnia and Herzegovina"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Northern_Europe
+#: src/translations_regions.h:84
+msgid "Northern Europe"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Barbados
-#: src/translations_countries.h:66
-msgid "Barbados"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Southern_Europe
+#: src/translations_regions.h:87
+msgid "Southern Europe"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Bangladesh
-#: src/translations_countries.h:68
-msgid "Bangladesh"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Western_Europe
+#: src/translations_regions.h:90
+msgid "Western Europe"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Belgium
-#: src/translations_countries.h:70
-msgid "Belgium"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Australasia
+#: src/translations_regions.h:93
+msgid "Australasia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Burkina_Faso
-#: src/translations_countries.h:72
-msgid "Burkina Faso"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Melanesia
+#: src/translations_regions.h:96
+msgid "Melanesia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Bulgaria
-#: src/translations_countries.h:74
-msgid "Bulgaria"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Bahrain
-#: src/translations_countries.h:76
-msgid "Bahrain"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Burundi
-#: src/translations_countries.h:78
-msgid "Burundi"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Benin
-#: src/translations_countries.h:80
-msgid "Benin"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/St._Barthélemy
-#: src/translations_countries.h:82
-msgid "St Barthelemy"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Bermuda
-#: src/translations_countries.h:84
-msgid "Bermuda"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Brunei
-#: src/translations_countries.h:86
-msgid "Brunei"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Bolivia
-#: src/translations_countries.h:88
-msgid "Bolivia"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Caribbean_Netherlands
-#: src/translations_countries.h:90
-msgid "Bonaire, Sint Eustatius and Saba"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Brazil
-#: src/translations_countries.h:92
-msgid "Brazil"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Bahamas
-#: src/translations_countries.h:94
-msgid "Bahamas"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Bhutan
-#: src/translations_countries.h:96
-msgid "Bhutan"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Bouvet_Island
-#: src/translations_countries.h:98
-msgid "Bouvet Island"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Botswana
-#: src/translations_countries.h:100
-msgid "Botswana"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Belarus
-#: src/translations_countries.h:102
-msgid "Belarus"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Belize
-#: src/translations_countries.h:104
-msgid "Belize"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Canada
-#: src/translations_countries.h:106
-msgid "Canada"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Cocos_(Keeling)_Islands
-#: src/translations_countries.h:108
-msgid "Cocos (Keeling) Islands"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Congo_(DRC)
-#: src/translations_countries.h:110
-msgid "Congo (Dem. Rep.)"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Central_African_Republic
-#: src/translations_countries.h:112
-msgid "Central African Rep."
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Congo_(Republic)
-#: src/translations_countries.h:114
-msgid "Congo"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Switzerland
-#: src/translations_countries.h:116
-msgid "Switzerland"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Ivory_Coast
-#: src/translations_countries.h:118
-msgid "Côte d'Ivoire"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Cook_Islands
-#: src/translations_countries.h:120
-msgid "Cook Islands"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Chile
-#: src/translations_countries.h:122
-msgid "Chile"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Cameroon
-#: src/translations_countries.h:124
-msgid "Cameroon"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/China
-#: src/translations_countries.h:126
-msgid "China"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Colombia
-#: src/translations_countries.h:128
-msgid "Colombia"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Costa_Rica
-#: src/translations_countries.h:130
-msgid "Costa Rica"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Cuba
-#: src/translations_countries.h:132
-msgid "Cuba"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Cape_Verde
-#: src/translations_countries.h:134
-msgid "Cabo Verde"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Curaçao
-#: src/translations_countries.h:136
-msgid "Curaçao"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Christmas_Island
-#: src/translations_countries.h:138
-msgid "Christmas Island"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Cyprus
-#: src/translations_countries.h:140
-msgid "Cyprus"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Czech_Republic
-#: src/translations_countries.h:142
-msgid "Czechia"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Germany
-#: src/translations_countries.h:144
-msgid "Germany"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Djibouti
-#: src/translations_countries.h:146
-msgid "Djibouti"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Denmark
-#: src/translations_countries.h:148
-msgid "Denmark"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Dominica
-#: src/translations_countries.h:150
-msgid "Dominica"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Dominican_Republic
-#: src/translations_countries.h:152
-msgid "Dominican Republic"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Algeria
-#: src/translations_countries.h:154
-msgid "Algeria"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Ecuador
-#: src/translations_countries.h:156
-msgid "Ecuador"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Estonia
-#: src/translations_countries.h:158
-msgid "Estonia"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Egypt
-#: src/translations_countries.h:160
-msgid "Egypt"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Western_Sahara
-#: src/translations_countries.h:162
-msgid "Western Sahara"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Eritrea
-#: src/translations_countries.h:164
-msgid "Eritrea"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Spain
-#: src/translations_countries.h:166
-msgid "Spain"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Ethiopia
-#: src/translations_countries.h:168
-msgid "Ethiopia"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Finland
-#: src/translations_countries.h:170
-msgid "Finland"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Fiji
-#: src/translations_countries.h:172
-msgid "Fiji"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Falkland_Islands
-#: src/translations_countries.h:174
-msgid "Falkland Islands (Malvinas)"
-msgstr ""
-
+#. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Micronesia
-#: src/translations_countries.h:176
+#: src/translations_regions.h:99
 msgid "Micronesia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Faroe_Islands
-#: src/translations_countries.h:178
-msgid "Faroe Islands"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Polynesia
+#: src/translations_regions.h:102
+msgid "Polynesia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/France
-#: src/translations_countries.h:180
-msgid "France"
+#. TRANSLATORS: Name of region on Mercury
+#: src/translations_regions.h:104
+msgid "Aparangi Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Gabon
-#: src/translations_countries.h:182
-msgid "Gabon"
+#. TRANSLATORS: Name of region on Mercury
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Borealis_Planitia
+#: src/translations_regions.h:107
+msgid "Borealis Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/United_Kingdom
-#: src/translations_countries.h:184
-msgid "Britain (UK)"
+#. TRANSLATORS: Name of region on Mercury
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Budh_Planitia
+#: src/translations_regions.h:110
+msgid "Budh Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Grenada
-#: src/translations_countries.h:186
-msgid "Grenada"
+#. TRANSLATORS: Name of region on Mercury
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Caloris_Planitia
+#: src/translations_regions.h:113
+msgid "Caloris Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Georgia
-#: src/translations_countries.h:188
-msgid "Georgia"
+#. TRANSLATORS: Name of region on Mercury
+#: src/translations_regions.h:115
+msgid "Lugus Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/French_Guiana
-#: src/translations_countries.h:190
-msgid "French Guiana"
+#. TRANSLATORS: Name of region on Mercury
+#: src/translations_regions.h:117
+msgid "Mearcair Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Guernsey
-#: src/translations_countries.h:192
-msgid "Guernsey"
+#. TRANSLATORS: Name of region on Mercury
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Odin_Planitia
+#: src/translations_regions.h:120
+msgid "Odin Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Ghana
-#: src/translations_countries.h:194
-msgid "Ghana"
+#. TRANSLATORS: Name of region on Mercury
+#: src/translations_regions.h:122
+msgid "Otaared Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Gibraltar
-#: src/translations_countries.h:196
-msgid "Gibraltar"
+#. TRANSLATORS: Name of region on Mercury
+#: src/translations_regions.h:124
+msgid "Papsukkal Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Greenland
-#: src/translations_countries.h:198
-msgid "Greenland"
+#. TRANSLATORS: Name of region on Mercury
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Sihtu_Planitia
+#: src/translations_regions.h:127
+msgid "Sihtu Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Gambia
-#: src/translations_countries.h:200
-msgid "Gambia"
+#. TRANSLATORS: Name of region on Mercury
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Sobkou_Planitia
+#: src/translations_regions.h:130
+msgid "Sobkou Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Guinea
-#: src/translations_countries.h:202
-msgid "Guinea"
+#. TRANSLATORS: Name of region on Mercury
+#: src/translations_regions.h:132
+msgid "Stilbon Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Guadeloupe
-#: src/translations_countries.h:204
-msgid "Guadeloupe"
+#. TRANSLATORS: Name of region on Mercury
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Suisei_Planitia
+#: src/translations_regions.h:135
+msgid "Suisei Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Equatorial_Guinea
-#: src/translations_countries.h:206
-msgid "Equatorial Guinea"
+#. TRANSLATORS: Name of region on Mercury
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Tir_Planitia
+#: src/translations_regions.h:138
+msgid "Tir Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Greece
-#: src/translations_countries.h:208
-msgid "Greece"
+#. TRANSLATORS: Name of region on Mercury
+#: src/translations_regions.h:140
+msgid "Turms Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/South_Georgia_&_South_Sandwich_Islands
-#: src/translations_countries.h:210
-msgid "South Georgia and the South Sandwich Islands"
+#. TRANSLATORS: Name of region on Mercury
+#: src/translations_regions.h:142
+msgid "Utaridi Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Guatemala
-#: src/translations_countries.h:212
-msgid "Guatemala"
+#. TRANSLATORS: Name of region on Mercury
+#: src/translations_regions.h:144
+msgid "Catuilla Planum"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Guam
-#: src/translations_countries.h:214
-msgid "Guam"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Aphrodite_Terra
+#: src/translations_regions.h:147
+msgid "Aphrodite Terra"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Guinea-Bissau
-#: src/translations_countries.h:216
-msgid "Guinea-Bissau"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Ishtar_Terra
+#: src/translations_regions.h:150
+msgid "Ishtar Terra"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Guyana
-#: src/translations_countries.h:218
-msgid "Guyana"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Lada_Terra
+#: src/translations_regions.h:153
+msgid "Lada Terra"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Hong_Kong
-#: src/translations_countries.h:220
-msgid "Hong Kong"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Alpha_Regio
+#: src/translations_regions.h:156
+msgid "Alpha Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Heard_&_McDonald_Islands
-#: src/translations_countries.h:222
-msgid "Heard Island and McDonald Islands"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Asteria_Regio
+#: src/translations_regions.h:159
+msgid "Asteria Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Honduras
-#: src/translations_countries.h:224
-msgid "Honduras"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:162
+msgid "Atla Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Croatia
-#: src/translations_countries.h:226
-msgid "Croatia"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:165
+msgid "Bell Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Haiti
-#: src/translations_countries.h:228
-msgid "Haiti"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Beta_Regio
+#: src/translations_regions.h:168
+msgid "Beta Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Hungary
-#: src/translations_countries.h:230
-msgid "Hungary"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:171
+msgid "Dione Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Indonesia
-#: src/translations_countries.h:232
-msgid "Indonesia"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:174
+msgid "Dsonkwa Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Ireland
-#: src/translations_countries.h:234
-msgid "Ireland"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:177
+msgid "Eistla Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Israel
-#: src/translations_countries.h:236
-msgid "Israel"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:180
+msgid "Hyndla Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Isle_of_Man
-#: src/translations_countries.h:238
-msgid "Isle of Man"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:183
+msgid "Imdr Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/India
-#: src/translations_countries.h:240
-msgid "India"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:186
+msgid "Ishkus Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/British_Indian_Ocean_Territory
-#: src/translations_countries.h:242
-msgid "British Indian Ocean Territory"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:189
+msgid "Laufey Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Iraq
-#: src/translations_countries.h:244
-msgid "Iraq"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:192
+msgid "Neringa Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Iran
-#: src/translations_countries.h:246
-msgid "Iran"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Ovda_Regio
+#: src/translations_regions.h:195
+msgid "Ovda Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Iceland
-#: src/translations_countries.h:248
-msgid "Iceland"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Phoebe_Regio
+#: src/translations_regions.h:198
+msgid "Phoebe Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Italy
-#: src/translations_countries.h:250
-msgid "Italy"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:201
+msgid "Themis Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Jersey
-#: src/translations_countries.h:252
-msgid "Jersey"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:204
+msgid "Thetis Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Jamaica
-#: src/translations_countries.h:254
-msgid "Jamaica"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:207
+msgid "Ulfrun Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Jordan
-#: src/translations_countries.h:256
-msgid "Jordan"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:210
+msgid "Vasilisa Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Japan
-#: src/translations_countries.h:258
-msgid "Japan"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:213
+msgid "Aibarchin Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Kenya
-#: src/translations_countries.h:260
-msgid "Kenya"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:216
+msgid "Aino Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Kyrgyzstan
-#: src/translations_countries.h:262
-msgid "Kyrgyzstan"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:219
+msgid "Akhtamar Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Cambodia
-#: src/translations_countries.h:264
-msgid "Cambodia"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:222
+msgid "Alma-Merghen Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Kiribati
-#: src/translations_countries.h:266
-msgid "Kiribati"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:225
+msgid "Atalanta Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Comoros
-#: src/translations_countries.h:268
-msgid "Comoros"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:228
+msgid "Audra Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/St._Kitts_&_Nevis
-#: src/translations_countries.h:270
-msgid "St Kitts and Nevis"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:231
+msgid "Bereghinya Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/North_Korea
-#: src/translations_countries.h:272
-msgid "Korea (North)"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:234
+msgid "Dzerassa Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/South_Korea
-#: src/translations_countries.h:274
-msgid "Korea (South)"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:237
+msgid "Fonueha Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Kuwait
-#: src/translations_countries.h:276
-msgid "Kuwait"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:240
+msgid "Ganiki Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Cayman_Islands
-#: src/translations_countries.h:278
-msgid "Cayman Islands"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Guinevere_Planitia
+#: src/translations_regions.h:243
+msgid "Guinevere Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Kazakhstan
-#: src/translations_countries.h:280
-msgid "Kazakhstan"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:246
+msgid "Gunda Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Laos
-#: src/translations_countries.h:282
-msgid "Laos"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:249
+msgid "Helen Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Lebanon
-#: src/translations_countries.h:284
-msgid "Lebanon"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:252
+msgid "Hinemoa Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/St._Lucia
-#: src/translations_countries.h:286
-msgid "St Lucia"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:255
+msgid "Imapinua Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Liechtenstein
-#: src/translations_countries.h:288
-msgid "Liechtenstein"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:258
+msgid "Kanykey Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Sri_Lanka
-#: src/translations_countries.h:290
-msgid "Sri Lanka"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:261
+msgid "Kawelu Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Liberia
-#: src/translations_countries.h:292
-msgid "Liberia"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:264
+msgid "Laimdota Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Lesotho
-#: src/translations_countries.h:294
-msgid "Lesotho"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:267
+msgid "Lavinia Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Lithuania
-#: src/translations_countries.h:296
-msgid "Lithuania"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:270
+msgid "Leda Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Luxembourg
-#: src/translations_countries.h:298
-msgid "Luxembourg"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:273
+msgid "Libuse Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Latvia
-#: src/translations_countries.h:300
-msgid "Latvia"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:276
+msgid "Llorona Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Libya
-#: src/translations_countries.h:302
-msgid "Libya"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:279
+msgid "Louhi Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Morocco
-#: src/translations_countries.h:304
-msgid "Morocco"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:282
+msgid "Lowana Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Monaco
-#: src/translations_countries.h:306
-msgid "Monaco"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:285
+msgid "Mugazo Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Moldova
-#: src/translations_countries.h:308
-msgid "Moldova"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:288
+msgid "Navka Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Montenegro
-#: src/translations_countries.h:310
-msgid "Montenegro"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:291
+msgid "Niobe Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/St._Martin
-#: src/translations_countries.h:312
-msgid "St Martin (French)"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:294
+msgid "Nsomeka Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Madagascar
-#: src/translations_countries.h:314
-msgid "Madagascar"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:297
+msgid "Nuptadi Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Marshall_Islands
-#: src/translations_countries.h:316
-msgid "Marshall Islands"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:300
+msgid "Rusalka Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Macedonia
-#: src/translations_countries.h:318
-msgid "North Macedonia"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Sedna_Planitia
+#: src/translations_regions.h:303
+msgid "Sedna Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Mali
-#: src/translations_countries.h:320
-msgid "Mali"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:306
+msgid "Snegurochka Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Myanmar_(Burma)
-#: src/translations_countries.h:322
-msgid "Myanmar (Burma)"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:309
+msgid "Sogolon Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Mongolia
-#: src/translations_countries.h:324
-msgid "Mongolia"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:312
+msgid "Tahmina Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Macau
-#: src/translations_countries.h:326
-msgid "Macao"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:315
+msgid "Tilli-Hanum Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Northern_Mariana_Islands
-#: src/translations_countries.h:328
-msgid "Northern Mariana Islands"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:318
+msgid "Tinatin Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Martinique
-#: src/translations_countries.h:330
-msgid "Martinique"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:321
+msgid "Undine Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Mauritania
-#: src/translations_countries.h:332
-msgid "Mauritania"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:324
+msgid "Vellamo Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Montserrat
-#: src/translations_countries.h:334
-msgid "Montserrat"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:327
+msgid "Vinmara Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Malta
-#: src/translations_countries.h:336
-msgid "Malta"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:330
+msgid "Wawalag Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Mauritius
-#: src/translations_countries.h:338
-msgid "Mauritius"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:333
+msgid "Zhibek Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Maldives
-#: src/translations_countries.h:340
-msgid "Maldives"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Oceanus_Procellarum
+#: src/translations_regions.h:337
+msgid "Ocean of Storms"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Malawi
-#: src/translations_countries.h:342
-msgid "Malawi"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Anguis
+#: src/translations_regions.h:341
+msgid "Serpent Sea"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Mexico
-#: src/translations_countries.h:344
-msgid "Mexico"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Australe
+#: src/translations_regions.h:345
+msgid "Southern Sea"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Malaysia
-#: src/translations_countries.h:346
-msgid "Malaysia"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Cognitum
+#: src/translations_regions.h:349
+msgid "Sea of Knowledge"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Mozambique
-#: src/translations_countries.h:348
-msgid "Mozambique"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Crisium
+#: src/translations_regions.h:353
+msgid "Sea of Crises"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Namibia
-#: src/translations_countries.h:350
-msgid "Namibia"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Fecunditatis
+#: src/translations_regions.h:357
+msgid "Sea of Fecundity"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/New_Caledonia
-#: src/translations_countries.h:352
-msgid "New Caledonia"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Frigoris
+#: src/translations_regions.h:361
+msgid "Sea of Cold"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Niger
-#: src/translations_countries.h:354
-msgid "Niger"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Humboldtianum
+#: src/translations_regions.h:365
+msgid "Sea of Humboldt"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Norfolk_Island
-#: src/translations_countries.h:356
-msgid "Norfolk Island"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Humorum
+#: src/translations_regions.h:369
+msgid "Sea of Moisture"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Nigeria
-#: src/translations_countries.h:358
-msgid "Nigeria"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:372
+msgid "Sea of Rains"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Nicaragua
-#: src/translations_countries.h:360
-msgid "Nicaragua"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Ingenii
+#: src/translations_regions.h:376
+msgid "Sea of Cleverness"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Netherlands
-#: src/translations_countries.h:362
-msgid "Netherlands"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Insularum
+#: src/translations_regions.h:380
+msgid "Sea of Islands"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Norway
-#: src/translations_countries.h:364
-msgid "Norway"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Marginis
+#: src/translations_regions.h:384
+msgid "Sea of the Edge"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Nepal
-#: src/translations_countries.h:366
-msgid "Nepal"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Moscoviense
+#: src/translations_regions.h:388
+msgid "Sea of Moscow"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Nauru
-#: src/translations_countries.h:368
-msgid "Nauru"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Nectaris
+#: src/translations_regions.h:392
+msgid "Sea of Nectar"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Niue
-#: src/translations_countries.h:370
-msgid "Niue"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Nubium
+#: src/translations_regions.h:396
+msgid "Sea of Clouds"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/New_Zealand
-#: src/translations_countries.h:372
-msgid "New Zealand"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Orientale
+#: src/translations_regions.h:400
+msgid "Eastern sea"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Oman
-#: src/translations_countries.h:374
-msgid "Oman"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Serenitatis
+#: src/translations_regions.h:404
+msgid "Sea of Serenity"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Panama
-#: src/translations_countries.h:376
-msgid "Panama"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Smythii
+#: src/translations_regions.h:408
+msgid "Smyth's Sea"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Peru
-#: src/translations_countries.h:378
-msgid "Peru"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Spumans
+#: src/translations_regions.h:412
+msgid "Foaming Sea"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/French_Polynesia
-#: src/translations_countries.h:380
-msgid "French Polynesia"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Tranquillitatis
+#: src/translations_regions.h:416
+msgid "Sea of Tranquillity"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Papua_New_Guinea
-#: src/translations_countries.h:382
-msgid "Papua New Guinea"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Undarum
+#: src/translations_regions.h:420
+msgid "Sea of Waves"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Philippines
-#: src/translations_countries.h:384
-msgid "Philippines"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Vaporum
+#: src/translations_regions.h:424
+msgid "Sea of Vapors"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Pakistan
-#: src/translations_countries.h:386
-msgid "Pakistan"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:427
+msgid "Northern highlands"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Poland
-#: src/translations_countries.h:388
-msgid "Poland"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Montes_Jura
+#: src/translations_regions.h:431
+msgid "Jura mountains"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/St._Pierre_&_Miquelon
-#: src/translations_countries.h:390
-msgid "St Pierre and Miquelon"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:434
+msgid "Alps province"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Pitcairn_Islands
-#: src/translations_countries.h:392
-msgid "Pitcairn"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:437
+msgid "Caucasus province"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Puerto_Rico
-#: src/translations_countries.h:394
-msgid "Puerto Rico"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Lacus_Somniorum
+#: src/translations_regions.h:441
+msgid "Lake of Dreams"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Palestine
-#: src/translations_countries.h:396
-msgid "Palestine"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Montes_Taurus
+#: src/translations_regions.h:445
+msgid "Taurus mountains"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Portugal
-#: src/translations_countries.h:398
-msgid "Portugal"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Sinus_Roris
+#: src/translations_regions.h:449
+msgid "Bay of Dew"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Palau
-#: src/translations_countries.h:400
-msgid "Palau"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:452
+msgid "Apennines province"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Paraguay
-#: src/translations_countries.h:402
-msgid "Paraguay"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:455
+msgid "Carpatian province"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Qatar
-#: src/translations_countries.h:404
-msgid "Qatar"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Sinus_Aestuum
+#: src/translations_regions.h:459
+msgid "Seething Bay"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Réunion
-#: src/translations_countries.h:406
-msgid "Réunion"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:462
+msgid "Aestuum upland"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Romania
-#: src/translations_countries.h:408
-msgid "Romania"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:465
+msgid "Haemus province"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Serbia
-#: src/translations_countries.h:410
-msgid "Serbia"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:468
+msgid "Procellarum upland"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Russia
-#: src/translations_countries.h:412
-msgid "Russian Federation"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:471
+msgid "Central crater province"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Rwanda
-#: src/translations_countries.h:414
-msgid "Rwanda"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:474
+msgid "Macro-crater province"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Saudi_Arabia
-#: src/translations_countries.h:416
-msgid "Saudi Arabia"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:477
+msgid "Southeastern crater province"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Solomon_Islands
-#: src/translations_countries.h:418
-msgid "Solomon Islands"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:480
+msgid "Cratered plain province"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Seychelles
-#: src/translations_countries.h:420
-msgid "Seychelles"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:483
+msgid "Southwestern crater province"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Sudan
-#: src/translations_countries.h:422
-msgid "Sudan"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:486
+msgid "Nectaris crater province"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Sweden
-#: src/translations_countries.h:424
-msgid "Sweden"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:489
+msgid "Pyrenees province"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Singapore
-#: src/translations_countries.h:426
-msgid "Singapore"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:492
+msgid "Western highlands"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/St._Helena
-#: src/translations_countries.h:428
-msgid "St Helena, Ascension and Tristan da Cunha"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:495
+msgid "Eastern highlands"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Slovenia
-#: src/translations_countries.h:430
-msgid "Slovenia"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Sinus_Medii
+#: src/translations_regions.h:499
+msgid "Bay of the center"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Svalbard_&_Jan_Mayen
-#: src/translations_countries.h:432
-msgid "Svalbard and Jan Mayen"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Palus_Epidemiarum
+#: src/translations_regions.h:503
+msgid "Marsh of Epidemics"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Slovakia
-#: src/translations_countries.h:434
-msgid "Slovakia"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:506
+msgid "Far-side southern lowland"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Sierra_Leone
-#: src/translations_countries.h:436
-msgid "Sierra Leone"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:509
+msgid "Far-side northern lowland"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/San_Marino
-#: src/translations_countries.h:438
-msgid "San Marino"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:512
+msgid "Far-side central highland"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Senegal
-#: src/translations_countries.h:440
-msgid "Senegal"
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional feature names: https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Acidalia_Planitia
+#: src/translations_regions.h:516
+msgid "Acidalia Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Somalia
-#: src/translations_countries.h:442
-msgid "Somalia"
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional feature names: https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Amazonis_Planitia
+#: src/translations_regions.h:520
+msgid "Amazonis Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Suriname
-#: src/translations_countries.h:444
-msgid "Suriname"
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional feature names: https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Arcadia_Planitia
+#: src/translations_regions.h:524
+msgid "Arcadia Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/South_Sudan
-#: src/translations_countries.h:446
-msgid "South Sudan"
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional feature names: https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Argyre_Planitia
+#: src/translations_regions.h:528
+msgid "Argyre Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/São_Tomé_&_Príncipe
-#: src/translations_countries.h:448
-msgid "Sao Tome and Principe"
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional feature names: https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Chryse_Planitia
+#: src/translations_regions.h:532
+msgid "Chryse Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/El_Salvador
-#: src/translations_countries.h:450
-msgid "El Salvador"
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional feature names: https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Elysium_Planitia
+#: src/translations_regions.h:536
+msgid "Elysium Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Sint_Maarten
-#: src/translations_countries.h:452
-msgid "St Maarten (Dutch)"
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional feature names: https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Eridania_Planitia
+#: src/translations_regions.h:540
+msgid "Eridania Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Syria
-#: src/translations_countries.h:454
-msgid "Syrian Arab Republic"
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional feature names: https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Hellas_Planitia
+#: src/translations_regions.h:544
+msgid "Hellas Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Swaziland
-#: src/translations_countries.h:456
-msgid "Eswatini"
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional feature names: https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Isidis_Planitia
+#: src/translations_regions.h:548
+msgid "Isidis Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Turks_&_Caicos_Islands
-#: src/translations_countries.h:458
-msgid "Turks and Caicos Islands"
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional feature names: https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Utopia_Planitia
+#: src/translations_regions.h:552
+msgid "Utopia Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Chad
-#: src/translations_countries.h:460
-msgid "Chad"
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional feature names: https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Aonia_Terra
+#: src/translations_regions.h:556
+msgid "Aonia Terra"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/French_Southern_Territories
-#: src/translations_countries.h:462
-msgid "French Southern Territories"
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional feature names: https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Arabia_Terra
+#: src/translations_regions.h:560
+msgid "Arabia Terra"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Togo
-#: src/translations_countries.h:464
-msgid "Togo"
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional feature names: https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Margaritifer_Terra
+#: src/translations_regions.h:564
+msgid "Margaritifer Terra"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Thailand
-#: src/translations_countries.h:466
-msgid "Thailand"
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional feature names: https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Noachis_Terra
+#: src/translations_regions.h:568
+msgid "Noachis Terra"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Tajikistan
-#: src/translations_countries.h:468
-msgid "Tajikistan"
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional feature names: https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Promethei_Terra
+#: src/translations_regions.h:572
+msgid "Promethei Terra"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Tokelau
-#: src/translations_countries.h:470
-msgid "Tokelau"
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional feature names: https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Tempe_Terra
+#: src/translations_regions.h:576
+msgid "Tempe Terra"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/East_Timor
-#: src/translations_countries.h:472
-msgid "Timor-Leste"
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional feature names: https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Terra_Cimmeria
+#: src/translations_regions.h:580
+msgid "Terra Cimmeria"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Turkmenistan
-#: src/translations_countries.h:474
-msgid "Turkmenistan"
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional feature names: https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Terra_Sabaea
+#: src/translations_regions.h:584
+msgid "Terra Sabaea"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Tunisia
-#: src/translations_countries.h:476
-msgid "Tunisia"
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional feature names: https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Terra_Sirenum
+#: src/translations_regions.h:588
+msgid "Terra Sirenum"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Tonga
-#: src/translations_countries.h:478
-msgid "Tonga"
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional feature names: https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Tyrrhena_Terra
+#: src/translations_regions.h:592
+msgid "Tyrrhena Terra"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Turkey
-#: src/translations_countries.h:480
-msgid "Turkey"
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional feature names: https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Xanthe_Terra
+#: src/translations_regions.h:596
+msgid "Xanthe Terra"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Trinidad_&_Tobago
-#: src/translations_countries.h:482
-msgid "Trinidad and Tobago"
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional feature names: https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Vastitas_Borealis
+#: src/translations_regions.h:600
+msgid "Vastitas Borealis"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Tuvalu
-#: src/translations_countries.h:484
-msgid "Tuvalu"
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional feature names: https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Tharsis
+#: src/translations_regions.h:604
+msgid "Tharsis"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Taiwan
-#: src/translations_countries.h:486
-msgid "Taiwan (Province of China)"
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional feature names: https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Planum_Boreum
+#: src/translations_regions.h:608
+msgid "Planum Boreum"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Tanzania
-#: src/translations_countries.h:488
-msgid "United Republic of Tanzania"
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional feature names: https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Planum_Australe
+#: src/translations_regions.h:612
+msgid "Planum Australe"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Ukraine
-#: src/translations_countries.h:490
-msgid "Ukraine"
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional feature names: https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Lunae_Palus_quadrangle
+#: src/translations_regions.h:616
+msgid "Lunae Planum"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Uganda
-#: src/translations_countries.h:492
-msgid "Uganda"
+#. TRANSLATORS: Name of region on Titan
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
+#: src/translations_regions.h:619
+msgid "Garotman Terra"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/U.S._Outlying_Islands
-#: src/translations_countries.h:494
-msgid "US Minor Outlying Islands"
+#. TRANSLATORS: Name of region on Titan
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
+#: src/translations_regions.h:622
+msgid "Tollan Terra"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/United_States
-#: src/translations_countries.h:496
-msgid "United States of America"
+#. TRANSLATORS: Name of region on Titan
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
+#: src/translations_regions.h:625
+msgid "Tsiipiya Terra"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Uruguay
-#: src/translations_countries.h:498
-msgid "Uruguay"
+#. TRANSLATORS: Name of region on Titan
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
+#: src/translations_regions.h:628
+msgid "Yalaing Terra"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Uzbekistan
-#: src/translations_countries.h:500
-msgid "Uzbekistan"
+#. TRANSLATORS: Name of region on Titan
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Xanadu_(Titan)
+#: src/translations_regions.h:631
+msgid "Xanadu"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Vatican_City
-#: src/translations_countries.h:502
-msgid "Holy See"
+#. TRANSLATORS: Name of region on Titan
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
+#: src/translations_regions.h:634
+msgid "Kraken Mare"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/St._Vincent_&_Grenadines
-#: src/translations_countries.h:504
-msgid "St Vincent and the Grenadines"
+#. TRANSLATORS: Name of region on Titan
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
+#: src/translations_regions.h:637
+msgid "Ligeia Mare"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Venezuela
-#: src/translations_countries.h:506
-msgid "Venezuela"
+#. TRANSLATORS: Name of region on Titan
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
+#: src/translations_regions.h:640
+msgid "Punga Mare"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/British_Virgin_Islands
-#: src/translations_countries.h:508
-msgid "Virgin Islands (British)"
+#. TRANSLATORS: Name of region on Titan
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
+#: src/translations_regions.h:643
+msgid "Concordia Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/U.S._Virgin_Islands
-#: src/translations_countries.h:510
-msgid "Virgin Islands (U.S.)"
+#. TRANSLATORS: Name of region on Titan
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
+#: src/translations_regions.h:646
+msgid "Hetpet Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Vietnam
-#: src/translations_countries.h:512
-msgid "Viet Nam"
+#. TRANSLATORS: Name of region on Titan
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
+#: src/translations_regions.h:649
+msgid "Hotei Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Vanuatu
-#: src/translations_countries.h:514
-msgid "Vanuatu"
+#. TRANSLATORS: Name of region on Titan
+#. TRANSLATORS: https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
+#: src/translations_regions.h:652
+msgid "Ochumare Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Wallis_&_Futuna
-#: src/translations_countries.h:516
-msgid "Wallis and Futuna"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Samoa
-#: src/translations_countries.h:518
-msgid "Samoa"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Yemen
-#: src/translations_countries.h:520
-msgid "Yemen"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Mayotte
-#: src/translations_countries.h:522
-msgid "Mayotte"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/South_Africa
-#: src/translations_countries.h:524
-msgid "South Africa"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Zambia
-#: src/translations_countries.h:526
-msgid "Zambia"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Zimbabwe
-#: src/translations_countries.h:528
-msgid "Zimbabwe"
+#. TRANSLATORS: Name of region on Titan
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Tui_Regio
+#: src/translations_regions.h:655
+msgid "Tui Regio"
 msgstr ""
 
 #: src/ui_dateTimeDialogGui.h:378 src/ui_dateTimeDialogGui.h:383
@@ -9629,7 +9588,7 @@ msgid "Name/City:"
 msgstr ""
 
 #: src/ui_locationDialogGui.h:517
-msgid "Country:"
+msgid "Region:"
 msgstr ""
 
 #: src/ui_locationDialogGui.h:521

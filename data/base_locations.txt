@@ -23,7 +23,7 @@ les Escaldes	Escaldes-Engordany	19	R	15.853	42.50729N	1.53414E	1033	5	Europe/And
 Andorra la Vella	Andorra la Vella	19	C	20.43	42.50779N	1.52109E	1037	5	Europe/Andorra
 Umm Al Quwain City	Imarat Umm al Qaywayn	16	R	62.747	25.56473N	55.55517E	2	6	Asia/Dubai
 Ras Al Khaimah City	Imarat Ra's al Khaymah	16	R	351.943	25.78953N	55.9432E	2	7	Asia/Dubai
-Zayed City	Abu Dhabi	16	N	63.482	23.65416N	53.70522E	124	6	Asia/Dubai
+Zayed City	Abu Dhabi	16	N	63.482	23.65416N	53.70522E	118	6	Asia/Dubai
 Khawr Fakkan	Sharjah	16	N	40.677	25.33132N	56.34199E	20	5	Asia/Dubai
 Dubai	Dubai	16	R	2956.587	25.07725N	55.30927E	24	9	Asia/Dubai
 Dibba Al-Fujairah	Fujairah	16	N	30	25.59246N	56.26176E	16	5	Asia/Dubai
@@ -32,9 +32,9 @@ Sharjah	Sharjah	16	R	1324.473	25.33737N	55.41206E	6	9	Asia/Dubai
 Ar Ruways	Abu Dhabi	16	N	16	24.11028N	52.73056E	16	5	Asia/Dubai
 Al Fujairah City	Fujairah	16	R	86.512	25.11641N	56.34141E	15	6	Asia/Dubai
 Al Ain City	Abu Dhabi	16	N	55.091	24.19167N	55.76056E	275	6	Asia/Dubai
-Ajman City	Ajman	16	R	490.035	25.40177N	55.47878E	16	7	Asia/Dubai
+Ajman City	Ajman	16	R	490.035	25.40177N	55.47878E	2	7	Asia/Dubai
 Adh Dhayd	Sharjah	16	N	24.716	25.28812N	55.88157E	114	5	Asia/Dubai
-Abu Dhabi	Abu Dhabi	16	C	603.492	24.45118N	54.39696E	13	8	Asia/Dubai
+Abu Dhabi	Abu Dhabi	16	C	603.492	24.45118N	54.39696E	6	8	Asia/Dubai
 Khalifah A City	Abu Dhabi	16	N	85.374	24.42588N	54.605E	1	6	Asia/Dubai
 Bani Yas City	Abu Dhabi	16	N	80.498	24.30978N	54.62944E	16	6	Asia/Dubai
 Musaffah	Abu Dhabi	16	N	243.341	24.35893N	54.48267E	10	7	Asia/Dubai
@@ -714,7 +714,7 @@ San Nicolas		06	N	15.2	12.43624N	69.90713W	13	5	America/Aruba
 Oranjestad		06	C	29.998	12.52398N	70.02703W	22	5	America/Aruba
 Mariehamn	Mariehamns stad	18	C	10.682	60.09726N	19.93481E	11	5	Europe/Mariehamn
 Xankandi	Xankandi Sahari	16	N	53.1	39.8177N	46.7528E	850	6	Asia/Baku
-Ahmadbayli	Saatli	16	N	17.242	39.88074N	48.39158E	1	5	Asia/Baku
+Ahmadbayli	Saatli	16	N	17.242	39.88074N	48.39158E	-11	5	Asia/Baku
 Susa	Shusha	16	R	18.662	39.76006N	46.74989E	1339	5	Asia/Baku
 Salyan	Salyan	16	R	36.555	39.59621N	48.98479E	-17	5	Asia/Baku
 Saatli	Saatli	16	R	87	39.93214N	48.36892E	-7	6	Asia/Baku
@@ -724,7 +724,7 @@ Lankaran	Lankaran	16	R	240.3	38.75428N	48.85062E	-22	7	Asia/Baku
 Imishli	Imisli	16	R	34.178	39.87095N	48.05995E	1	5	Asia/Baku
 Fizuli	Fuezuli	16	R	26.765	39.60094N	47.14529E	419	5	Asia/Baku
 Jalilabad	Jalilabad	16	R	36.259	39.20963N	48.49186E	39	5	Asia/Baku
-Pushkino	Bilasuvar Rayon	16	R	18.182	39.45833N	48.545E	15	5	Asia/Baku
+Pushkino	Bilasuvar Rayon	16	R	18.182	39.45833N	48.545E	4	5	Asia/Baku
 Beylagan	Beylaqan	16	R	15.599	39.77556N	47.61861E	58	5	Asia/Baku
 Astara	Astara	16	R	15.19	38.45598N	48.87498E	-22	5	Asia/Baku
 Sirvan	Shirvan	16	R	70.22	39.93778N	48.929E	-15	6	Asia/Baku
@@ -4524,7 +4524,7 @@ Nicosia	Nicosia	16	C	200.452	35.17531N	33.3642E	147	7	Asia/Nicosia
 Limassol	Limassol	16	R	154	34.68406N	33.03794E	27	7	Asia/Nicosia
 Larnaca	Larnaka	16	R	72	34.92291N	33.6233E	9	6	Asia/Nicosia
 Kyrenia	Keryneia	16	R	26.701	35.33634N	33.31729E	20	5	Asia/Famagusta
-Famagusta	Ammochostos	16	R	42.526	35.12489N	33.94135E	21	5	Asia/Famagusta
+Famagusta	Ammochostos	16	R	42.526	35.12489N	33.94135E	12	5	Asia/Famagusta
 Dvur Kralove nad Labem	Kralovehradecky kraj	17	N	16.15	50.43172N	15.81402E	300	5	Europe/Prague
 Znojmo	South Moravian	17	N	35.28	48.8555N	16.0488E	294	5	Europe/Prague
 Zlin	Zlin	17	R	78.759	49.22645N	17.67065E	229	6	Europe/Prague
@@ -5689,8 +5689,8 @@ Burglesum	Bremen	20	N	33	53.16532N	8.68873E	8	5	Europe/Berlin
 Sachsenheim	Baden-Wuerttemberg	20	N	18.594	48.96N	9.06472E	239	5	Europe/Berlin
 Kronberg Tal	Hesse	20	N	17.55	50.17929N	8.5037E	232	5	Europe/Berlin
 Remseck am Neckar	Baden-Wuerttemberg	20	N	26.467	48.87213N	9.27334E	229	5	Europe/Berlin
-Tadjourah	Tadjourah	02	R	22.193	11.78778N	42.88222E	21	5	Africa/Djibouti
-Obock	Obock	02	R	17.776	11.96693N	43.28835E	24	5	Africa/Djibouti
+Tadjourah	Tadjourah	02	R	22.193	11.78778N	42.88222E	3	5	Africa/Djibouti
+Obock	Obock	02	R	17.776	11.96693N	43.28835E	13	5	Africa/Djibouti
 Djibouti	Djibouti	02	C	623.891	11.58901N	43.14503E	6	8	Africa/Djibouti
 'Ali Sabieh	Ali Sabieh	02	R	55	11.15583N	42.7125E	699	6	Africa/Djibouti
 Viborg	Central Jutland	18	R	34.831	56.45319N	9.40201E	50	5	Europe/Copenhagen
@@ -8587,7 +8587,7 @@ Salamina	Attica	19	N	25.37	37.96427N	23.49649E	5	5	Europe/Athens
 Rethymno	Crete	19	N	32.468	35.36555N	24.48232E	14	5	Europe/Athens
 Preveza	Epirus	19	N	17.283	38.95617N	20.7505E	9	5	Europe/Athens
 Pyrgos	West Greece	19	N	22.399	37.67513N	21.44102E	25	5	Europe/Athens
-Piraeus	Attica	19	N	163.688	37.94203N	23.64619E	65	7	Europe/Athens
+Piraeus	Attica	19	N	163.688	37.94203N	23.64619E	29	7	Europe/Athens
 Petroupolis	Attica	19	N	58.979	38.04187N	23.68494E	144	6	Europe/Athens
 Peristeri	Attica	19	N	139.981	38.01539N	23.69187E	66	7	Europe/Athens
 Perama	Attica	19	N	25.389	37.96775N	23.5721E	71	5	Europe/Athens
@@ -8609,12 +8609,12 @@ Livadeia	Central Greece	19	N	21.492	38.43616N	22.87665E	174	5	Europe/Athens
 Larisa	Thessaly	19	R	144.651	39.63689N	22.41761E	84	7	Europe/Athens
 Lamia	Central Greece	19	R	52.006	38.9N	22.43333E	88	6	Europe/Athens
 Metamorfosi	Attica	19	N	29.891	38.06576N	23.76356E	173	5	Europe/Athens
-Kos	South Aegean	19	N	19.244	36.89295N	27.28768E	1	5	Europe/Athens
+Kos	South Aegean	19	N	19.244	36.89295N	27.28768E	10	5	Europe/Athens
 Koropi	Attica	19	N	19.164	37.89886N	23.87181E	130	5	Europe/Athens
 Korinthos	Peloponnese	19	N	30.176	37.94007N	22.9513E	24	5	Europe/Athens
 Kifisia	Attica	19	N	47.332	38.07438N	23.81106E	290	5	Europe/Athens
 Cholargos	Attica	19	N	30.84	38N	23.8E	219	5	Europe/Athens
-Chios	North Aegean	19	N	23.953	38.36875N	26.13718E	1	5	Europe/Athens
+Chios	North Aegean	19	N	23.953	38.36875N	26.13718E	9	5	Europe/Athens
 Chania	Crete	19	N	53.91	35.51124N	24.02921E	24	6	Europe/Athens
 Chalkida	Central Greece	19	N	59.125	38.46354N	23.60284E	22	6	Europe/Athens
 Khalandrion	Attica	19	N	74.192	38.02369N	23.80068E	194	6	Europe/Athens
@@ -8637,7 +8637,7 @@ Dhafni	Attica	19	N	22.913	37.95002N	23.73437E	100	5	Europe/Athens
 Agios Dimitrios	Attica	19	N	71.294	37.93333N	23.73333E	73	6	Europe/Athens
 Agia Varvara	Attica	19	N	26.55	37.98938N	23.66011E	58	5	Europe/Athens
 Agia Paraskevi	Attica	19	N	59.704	38.01667N	23.83333E	216	6	Europe/Athens
-Athens	Attica	19	C	664.046	37.98376N	23.72784E	126	8	Europe/Athens
+Athens	Attica	19	C	664.046	37.98376N	23.72784E	84	8	Europe/Athens
 Aspropyrgos	Attica	19	N	30.251	38.06134N	23.58971E	35	5	Europe/Athens
 Argyroupoli	Attica	19	N	34.097	37.90594N	23.75035E	67	5	Europe/Athens
 Arta	Epirus	19	N	21.895	39.16014N	20.98561E	52	5	Europe/Athens
@@ -9430,7 +9430,7 @@ Netanya	Central District	16	N	171.676	32.33291N	34.85992E	38	7	Asia/Jerusalem
 Ness Ziona	Central District	16	N	38.7	31.92933N	34.79868E	35	5	Asia/Jerusalem
 Nesher	Haifa	16	N	21.245	32.76622N	35.04425E	125	5	Asia/Jerusalem
 Nazerat 'Illit	Northern District	16	N	41.169	32.70816N	35.32469E	506	5	Asia/Jerusalem
-Nazareth	Northern District	16	R	64.8	32.70056N	35.29722E	504	6	Asia/Jerusalem
+Nazareth	Northern District	16	R	64.8	32.70056N	35.29722E	333	6	Asia/Jerusalem
 Nahariyya	Northern District	16	N	51.2	33.00892N	35.09814E	15	6	Asia/Jerusalem
 Migdal Ha`Emeq	Northern District	16	N	24.8	32.67597N	35.23986E	227	5	Asia/Jerusalem
 Mevasseret Ziyyon	Jerusalem	16	N	24.409	31.80186N	35.15072E	711	5	Asia/Jerusalem
@@ -11964,7 +11964,7 @@ Umm Qasr	Basra	16	N	107.62	30.0362N	47.91951E	13	7	Asia/Baghdad
 Tuz Khurmatu	Salah ad Din	16	N	59.886	34.88808N	44.63256E	227	6	Asia/Baghdad
 Tikrit	Salah ad Din	16	R	42.477	34.61581N	43.67861E	112	5	Asia/Baghdad
 Tallkayf	Nineveh	16	N	23.524	36.49118N	43.12114E	279	5	Asia/Baghdad
-Sinah	Duhok	16	N	128.776	36.80851N	43.03935E	669	7	Asia/Baghdad
+Sinah	Duhok	16	N	128.776	36.80851N	43.03935E	604	7	Asia/Baghdad
 Samarra'	Salah ad Din	16	N	158.508	34.1959N	43.88568E	80	7	Asia/Baghdad
 Nahiyat Saddat al Hindiyah	Babil	16	N	30.622	32.71557N	44.27857E	36	5	Asia/Baghdad
 Ruwandiz	Arbil	16	N	22.943	36.61207N	44.52372E	797	5	Asia/Baghdad
@@ -11974,7 +11974,7 @@ Koysinceq	Arbil	16	N	44.987	36.08289N	44.62873E	600	5	Asia/Baghdad
 Kifri	Diyala	16	N	30.143	34.68963N	44.96057E	229	5	Asia/Baghdad
 Kirkuk	Kirkuk	16	R	601.433	35.46806N	44.39222E	346	8	Asia/Baghdad
 Karbala	Muhafazat Karbala'	16	R	434.45	32.61603N	44.02488E	32	7	Asia/Baghdad
-Erbil	Arbil	16	R	932.8	36.18333N	44.01193E	428	8	Asia/Baghdad
+Erbil	Arbil	16	R	932.8	36.18333N	44.01193E	412	8	Asia/Baghdad
 Hit	Al Anbar	16	N	31.901	33.63664N	42.82768E	61	5	Asia/Baghdad
 Halabja	Sulaymaniyah	16	N	57.333	35.17778N	45.98611E	711	6	Asia/Baghdad
 Hadithah	Al Anbar	16	N	30.925	34.13661N	42.37727E	121	5	Asia/Baghdad
@@ -11982,9 +11982,9 @@ Soran	Arbil	16	N	125	36.6532N	44.54407E	679	7	Asia/Baghdad
 Dihok	Duhok	16	R	284	36.86709N	42.98845E	567	7	Asia/Baghdad
 Jamjamal	Sulaymaniyah	16	N	75.634	35.53356N	44.8343E	705	6	Asia/Baghdad
 Bayji	Salah ad Din	16	N	36.454	34.92915N	43.48878E	115	5	Asia/Baghdad
-Batifa	Duhok	16	N	25	37.17454N	43.01233E	860	5	Asia/Baghdad
+Batifa	Duhok	16	N	25	37.17454N	43.01233E	859	5	Asia/Baghdad
 Baqubah	Diyala	16	R	152.55	33.75403N	44.60518E	48	7	Asia/Baghdad
-Baynjiwayn	Sulaymaniyah	16	N	27.116	35.62054N	45.94908E	1256	5	Asia/Baghdad
+Baynjiwayn	Sulaymaniyah	16	N	27.116	35.62054N	45.94908E	1275	5	Asia/Baghdad
 Balad	Salah ad Din	16	N	42.088	34.01485N	44.14574E	53	5	Asia/Baghdad
 Baghdad	Baghdad	16	C	7216	33.34058N	44.40088E	41	9	Asia/Baghdad
 Az Zubayr	Basra	16	N	122.676	30.39213N	47.70175E	13	7	Asia/Baghdad
@@ -11997,7 +11997,7 @@ Ash Shamiyah	Al Qadisiyah	16	N	57.661	31.96257N	44.60075E	23	6	Asia/Baghdad
 Ar Rutbah	Al Anbar	16	N	22.37	33.03718N	40.28586E	620	5	Asia/Baghdad
 Ar Rumaythah	Al Muthanna	16	N	47.248	31.52845N	45.20377E	18	5	Asia/Baghdad
 Ramadi	Al Anbar	16	R	274.539	33.42056N	43.30778E	53	7	Asia/Baghdad
-'Aqrah	Nineveh	16	N	23	36.76038N	43.89428E	716	5	Asia/Baghdad
+'Aqrah	Nineveh	16	N	23	36.76038N	43.89428E	754	5	Asia/Baghdad
 Nasiriyah	Dhi Qar	16	R	400.249	31.05799N	46.25726E	7	7	Asia/Baghdad
 Najaf	An Najaf	16	R	482.576	32.02594N	44.34625E	41	7	Asia/Baghdad
 'Anat al Qadimah	Al Anbar	16	N	19.719	34.46934N	41.94223E	171	5	Asia/Baghdad
@@ -12060,7 +12060,7 @@ Shushtar	Khuzestan	15	N	77.507	32.04972N	48.84843E	50	6	Asia/Tehran
 Shush	Khuzestan	15	N	52.284	32.1942N	48.2436E	71	6	Asia/Tehran
 Shirvan	North Khorasan	15	N	82.79	37.39669N	57.92952E	1093	6	Asia/Tehran
 Shiraz	Fars	15	R	1249.942	29.61031N	52.53113E	1545	9	Asia/Tehran
-Shahr-e Kord	Chaharmahal and Bakhtiari	15	R	129.153	32.32612N	50.8572E	2074	7	Asia/Tehran
+Shahr-e Kord	Chaharmahal and Bakhtiari	15	R	129.153	32.32612N	50.8572E	2066	7	Asia/Tehran
 Shahr-e Babak	Kerman	15	N	52.409	30.1165N	55.1186E	1846	6	Asia/Tehran
 Shadegan	Khuzestan	15	N	37.22	30.64924N	48.66497E	10	5	Asia/Tehran
 Semnan	Semnan	15	R	124.826	35.57691N	53.39205E	1148	7	Asia/Tehran
@@ -12072,7 +12072,7 @@ Sanandaj	Kordestan	15	R	349.176	35.31495N	46.99883E	1494	7	Asia/Tehran
 Salmas	West Azerbaijan	15	N	81.606	38.1973N	44.7653E	1382	6	Asia/Tehran
 Shahin Dezh	West Azerbaijan	15	N	41.442	36.6793N	46.5669E	1370	5	Asia/Tehran
 Sabzevar	Razavi Khorasan	15	N	226.183	36.2126N	57.68191E	974	7	Asia/Tehran
-Rudsar	Gilan	15	N	47.502	37.13696N	50.29174E	-1	5	Asia/Tehran
+Rudsar	Gilan	15	N	47.502	37.13696N	50.29174E	-23	5	Asia/Tehran
 Robat Karim	Tehran	15	N	62.753	35.4846N	51.0829E	1038	6	Asia/Tehran
 Ravar	Kerman	15	N	40.167	31.26562N	56.80545E	1181	5	Asia/Tehran
 Rasht	Gilan	15	R	594.59	37.27611N	49.58862E	4	8	Asia/Tehran
@@ -12110,25 +12110,25 @@ Meybod	Yazd	15	N	51.874	32.25014N	54.01658E	1071	6	Asia/Tehran
 Mahriz	Yazd	15	N	36.72	31.58428N	54.4428E	1475	5	Asia/Tehran
 Masjed Soleyman	Khuzestan	15	N	111.51	31.9364N	49.3039E	240	7	Asia/Tehran
 Bardsir	Kerman	15	N	37.192	29.92266N	56.57433E	2049	5	Asia/Tehran
-Mashhad	Razavi Khorasan	15	R	2307.177	36.29807N	59.60567E	1013	9	Asia/Tehran
+Mashhad	Razavi Khorasan	15	R	2307.177	36.29807N	59.60567E	980	9	Asia/Tehran
 Marvdasht	Fars	15	N	148.858	29.8742N	52.8025E	1603	7	Asia/Tehran
 Marivan	Kordestan	15	N	91.664	35.51829N	46.18298E	1306	6	Asia/Tehran
 Marand	East Azerbaijan	15	N	124.191	38.4329N	45.7749E	1322	7	Asia/Tehran
 Malayer	Hamadan	15	N	176.573	34.30158N	48.82166E	1760	7	Asia/Tehran
 Malard	Tehran	15	N	56.745	35.6659N	50.9767E	1163	6	Asia/Tehran
 Mahabad	West Azerbaijan	15	N	162.434	36.7631N	45.7222E	1324	7	Asia/Tehran
-Langarud	Gilan	15	N	68.148	37.19548N	50.15263E	-1	6	Asia/Tehran
+Langarud	Gilan	15	N	68.148	37.19548N	50.15263E	-19	6	Asia/Tehran
 Kuhdasht	Lorestan Province	15	N	100.208	33.53335N	47.60999E	1190	7	Asia/Tehran
 Kish	Hormozgan	15	N	20.922	26.55778N	54.01944E	6	5	Asia/Tehran
 Khowy	West Azerbaijan	15	N	175.37	38.5503N	44.9521E	1143	7	Asia/Tehran
 Khvansar	Isfahan	15	N	21.146	33.22052N	50.31497E	2230	5	Asia/Tehran
 Khorramshahr	Khuzestan	15	N	330.606	30.44079N	48.18428E	4	7	Asia/Tehran
 Khorramabad	Lorestan Province	15	R	329.825	33.48778N	48.35583E	1182	7	Asia/Tehran
-Khomeyn	Markazi	15	N	77.425	33.63889N	50.08003E	1788	6	Asia/Tehran
+Khomeyn	Markazi	15	N	77.425	33.63889N	50.08003E	1809	6	Asia/Tehran
 Khalkhal	Ardabil	15	N	51.024	37.61837N	48.52928E	1795	6	Asia/Tehran
 Kermanshah	Kermanshah	15	R	621.1	34.31417N	47.065E	1392	8	Asia/Tehran
 Kerman	Kerman	15	R	577.514	30.28321N	57.07879E	1760	8	Asia/Tehran
-Kazerun	Fars	15	N	94.511	29.61919N	51.6535E	847	6	Asia/Tehran
+Kazerun	Fars	15	N	94.511	29.61919N	51.6535E	846	6	Asia/Tehran
 Kashmar	Razavi Khorasan	15	N	96.151	35.23831N	58.46558E	1054	6	Asia/Tehran
 Karaj	Alborz Province	15	R	1448.075	35.83266N	50.99155E	1341	9	Asia/Tehran
 Kangavar	Kermanshah	15	N	53.414	34.5043N	47.9653E	1476	6	Asia/Tehran
@@ -12147,7 +12147,7 @@ Gerash	Fars	15	N	25.316	27.66966N	54.13586E	923	5	Asia/Tehran
 Bandar-e Genaveh	Bushehr	15	N	52.75	29.5791N	50.517E	8	6	Asia/Tehran
 Fuman	Gilan	15	N	27.763	37.224N	49.3125E	33	5	Asia/Tehran
 Firuzabad	Fars	15	N	66.558	28.8438N	52.5707E	1330	6	Asia/Tehran
-Fereydun Kenar	Mazandaran	15	N	34.097	36.68489N	52.51917E	-13	5	Asia/Tehran
+Fereydun Kenar	Mazandaran	15	N	34.097	36.68489N	52.51917E	-20	5	Asia/Tehran
 Fasa	Fars	15	N	98.061	28.9383N	53.6482E	1366	6	Asia/Tehran
 Farsan	Chaharmahal and Bakhtiari	15	N	25.071	32.25694N	50.56095E	2039	5	Asia/Tehran
 Esfarayen	North Khorasan	15	N	59.678	37.07645N	57.51009E	1253	6	Asia/Tehran
@@ -12158,7 +12158,7 @@ Dehloran	Ilam Province	15	N	46.002	32.6941N	47.2679E	224	5	Asia/Tehran
 Dehdasht	Kohgiluyeh and Boyer-Ahmad	15	N	69.726	30.7949N	50.56457E	806	6	Asia/Tehran
 Susangerd	Khuzestan	15	N	41.443	31.5635N	48.18958E	15	5	Asia/Tehran
 Darreh Shahr	Ilam Province	15	N	24.961	33.14447N	47.3799E	660	5	Asia/Tehran
-Darab	Fars	15	N	63.319	28.75171N	54.54065E	1100	6	Asia/Tehran
+Darab	Fars	15	N	63.319	28.75171N	54.54065E	1125	6	Asia/Tehran
 Damghan	Semnan	15	N	67.694	36.1679N	54.34292E	1154	6	Asia/Tehran
 Damavand	Tehran	15	N	29.144	35.71842N	52.06958E	1959	5	Asia/Tehran
 Chenaran	Razavi Khorasan	15	N	46.94	36.64546N	59.12123E	1176	5	Asia/Tehran
@@ -12182,8 +12182,8 @@ Bandar Abbas	Hormozgan	15	R	352.173	27.1865N	56.2808E	9	7	Asia/Tehran
 Bam	Kerman	15	N	99.268	29.106N	58.357E	1061	6	Asia/Tehran
 Bahar	Hamadan	15	N	28.645	34.9072N	48.4414E	1722	5	Asia/Tehran
 Bafq	Yazd	15	N	31.215	31.6035N	55.40249E	991	5	Asia/Tehran
-Babolsar	Mazandaran	15	N	48.051	36.69929N	52.65011E	-12	5	Asia/Tehran
-Babol	Mazandaran	15	N	202.796	36.55102N	52.6786E	-1	7	Asia/Tehran
+Babolsar	Mazandaran	15	N	48.051	36.69929N	52.65011E	-21	5	Asia/Tehran
+Babol	Mazandaran	15	N	202.796	36.55102N	52.6786E	1	7	Asia/Tehran
 Azna	Lorestan Province	15	N	47.482	33.6095N	48.9307E	1494	5	Asia/Tehran
 Hashtrud	East Azerbaijan	15	N	16.888	37.4779N	47.0508E	1651	5	Asia/Tehran
 Astara	Gilan	15	N	39.065	38.4291N	48.872E	-24	5	Asia/Tehran
@@ -12192,7 +12192,7 @@ Asadabad	Hamadan	15	N	59.617	34.78241N	48.12012E	1596	6	Asia/Tehran
 Ardestan	Isfahan	15	N	16.058	33.3761N	52.3694E	1215	5	Asia/Tehran
 Ardakan	Yazd	15	N	58.834	32.31001N	54.01747E	1040	6	Asia/Tehran
 Ardabil	Ardabil	15	R	410.753	38.2498N	48.2933E	1353	7	Asia/Tehran
-Arak	Markazi	15	R	503.647	34.09493N	49.69809E	1728	8	Asia/Tehran
+Arak	Markazi	15	R	503.647	34.09493N	49.69809E	1738	8	Asia/Tehran
 Amol	Mazandaran	15	N	199.382	36.46961N	52.35072E	96	7	Asia/Tehran
 Alvand	Zanjan	15	N	74.889	36.31885N	49.16773E	1836	6	Asia/Tehran
 Shahriar	Tehran	15	N	58.849	35.65884N	51.05775E	1159	6	Asia/Tehran
@@ -12872,7 +12872,7 @@ At Tafilah	Tafielah	16	R	25.429	30.83752N	35.60442E	1041	5	Asia/Amman
 As Salt	Balqa	16	R	80.189	32.03917N	35.72722E	816	6	Asia/Amman
 Safi	Karak	16	N	15.2	31.03608N	35.46544E	-366	5	Asia/Amman
 Ar Ramtha	Irbid	16	N	74.901	32.55873N	36.00816E	536	6	Asia/Amman
-`Anjarah	Ajlun	16	N	17.634	32.30667N	35.75443E	845	5	Asia/Amman
+`Anjarah	Ajlun	16	N	17.634	32.30667N	35.75443E	869	5	Asia/Amman
 Amman	Amman	16	C	1275.857	31.95522N	35.94503E	757	9	Asia/Amman
 Hayy al Quwaysimah	Amman	16	N	32.396	31.91037N	35.94975E	983	5	Asia/Amman
 Mafraq	Mafraq	16	R	57.118	32.34289N	36.20804E	705	6	Asia/Amman
@@ -13622,33 +13622,33 @@ Buzen	Fukuoka	13	N	26.886	33.61153N	131.13002E	20	5	Asia/Tokyo
 Fujiyoshida	Yamanashi	13	N	49.055	35.44032N	138.79586E	1055	5	Asia/Tokyo
 Kuwana	Mie	13	N	140.051	35.05192N	136.66958E	8	7	Asia/Tokyo
 Hokuto	Yamanashi	13	N	45	35.83458N	138.39606E	715	5	Asia/Tokyo
-Webuye	Bungoma	02	N	22.507	0.6004N	34.77119E	1502	5	Africa/Nairobi
+Webuye	Bungoma	02	N	22.507	0.6004N	34.77119E	1491	5	Africa/Nairobi
 Wajir	Wajir	02	R	45.771	1.7471N	40.05732E	258	5	Africa/Nairobi
 Voi	Taita Taveta	02	N	45.483	3.39605S	38.55609E	580	5	Africa/Nairobi
 Thika	Nairobi Area	02	N	200	1.03326S	37.06933E	1506	7	Africa/Nairobi
-Rongai	Nakuru	02	N	30.471	0.17344S	35.86313E	1874	5	Africa/Nairobi
+Rongai	Nakuru	02	N	30.471	0.17344S	35.86313E	1875	5	Africa/Nairobi
 Pumwani	Nairobi Area	02	N	29.616	1.28333S	36.85E	1645	5	Africa/Nairobi
 Nyeri	Nyeri	02	R	51.084	0.42013S	36.94759E	1812	6	Africa/Nairobi
-Nyahururu	Laikipia	02	N	31.978	0.03813N	36.36339E	2335	5	Africa/Nairobi
+Nyahururu	Laikipia	02	N	31.978	0.03813N	36.36339E	2373	5	Africa/Nairobi
 Narok	Narok	02	R	36.061	1.08083S	35.87111E	1881	5	Africa/Nairobi
-Nanyuki	Laikipia	02	N	36.142	0.00624N	37.07398E	2001	5	Africa/Nairobi
-Nakuru	Nakuru	02	R	259.903	0.30719S	36.07225E	1857	7	Africa/Nairobi
-Naivasha	Nakuru	02	N	38.366	0.71383S	36.43261E	2084	5	Africa/Nairobi
+Nanyuki	Laikipia	02	N	36.142	0.00624N	37.07398E	1951	5	Africa/Nairobi
+Nakuru	Nakuru	02	R	259.903	0.30719S	36.07225E	1802	7	Africa/Nairobi
+Naivasha	Nakuru	02	N	38.366	0.71383S	36.43261E	1902	5	Africa/Nairobi
 Nairobi	Nairobi Area	02	C	2750.547	1.28333S	36.81667E	1684	9	Africa/Nairobi
-Mumias	Kakamega	02	N	45.485	0.33474N	34.48796E	1258	5	Africa/Nairobi
-Muhoroni	Kisumu	02	N	15.217	0.15816S	35.19645E	1462	5	Africa/Nairobi
-Moyale	Marsabit	02	N	34.314	3.52661N	39.0561E	974	5	Africa/Nairobi
+Mumias	Kakamega	02	N	45.485	0.33474N	34.48796E	1321	5	Africa/Nairobi
+Muhoroni	Kisumu	02	N	15.217	0.15816S	35.19645E	1290	5	Africa/Nairobi
+Moyale	Marsabit	02	N	34.314	3.52661N	39.0561E	1068	5	Africa/Nairobi
 Mombasa	Mombasa	02	R	799.668	4.05466S	39.66359E	20	8	Africa/Nairobi
-Molo	Nakuru	02	N	27.896	0.24849S	35.73194E	2514	5	Africa/Nairobi
+Molo	Nakuru	02	N	27.896	0.24849S	35.73194E	2451	5	Africa/Nairobi
 Migori	Migori	02	R	35.24	1.06343S	34.47313E	1382	5	Africa/Nairobi
 Meru	Meru	02	R	47.226	0.04626N	37.65587E	1579	5	Africa/Nairobi
 Marsabit	Marsabit	02	R	15.361	2.33468N	37.99086E	1364	5	Africa/Nairobi
 Maralal	Samburu	02	R	20.841	1.09667N	36.69806E	1941	5	Africa/Nairobi
 Mandera	Mandera	02	R	36.076	3.93726N	41.85688E	217	5	Africa/Nairobi
 Malindi	Kilifi	02	N	118.265	3.21799S	40.11692E	7	7	Africa/Nairobi
-Makueni Boma	Makueni	02	N	20.681	1.80388S	37.62405E	1219	5	Africa/Nairobi
+Makueni Boma	Makueni	02	N	20.681	1.80388S	37.62405E	1207	5	Africa/Nairobi
 Machakos	Machakos	02	R	31.971	1.52233S	37.26521E	1619	5	Africa/Nairobi
-Lugulu	Busia	02	N	40.894	0.39337N	34.30399E	1220	5	Africa/Nairobi
+Lugulu	Busia	02	N	40.894	0.39337N	34.30399E	1276	5	Africa/Nairobi
 Lodwar	Turkana	02	R	20.219	3.11988N	35.59642E	500	5	Africa/Nairobi
 Lamu	Lamu	02	R	24.525	2.27169S	40.90201E	14	5	Africa/Nairobi
 Kitui	Kitui	02	R	15.954	1.36696S	38.01055E	1154	5	Africa/Nairobi
@@ -13667,7 +13667,7 @@ Iten	Marakwet District	02	R	42	0.67028N	35.50806E	2355	5	Africa/Nairobi
 Isiolo	Isiolo	02	R	33.207	0.35462N	37.58218E	1095	5	Africa/Nairobi
 Homa Bay	Homa Bay	02	R	40.319	0.52731S	34.45714E	1165	5	Africa/Nairobi
 Garissa	Garissa	02	R	67.861	0.45275S	39.64601E	147	6	Africa/Nairobi
-Embu	Embu	02	R	34.922	0.53987S	37.45743E	1294	5	Africa/Nairobi
+Embu	Embu	02	R	34.922	0.53987S	37.45743E	1336	5	Africa/Nairobi
 Eldoret	Uasin Gishu	02	R	218.446	0.52036N	35.26993E	2095	7	Africa/Nairobi
 Busia	Busia	02	R	51.981	0.46005N	34.11169E	1222	6	Africa/Nairobi
 Bungoma	Bungoma	02	R	55.962	0.5635N	34.56055E	1427	6	Africa/Nairobi
@@ -14156,15 +14156,15 @@ Jelgava	Jelgava	18	R	61.791	56.65N	23.71278E	5	6	Europe/Riga
 Jekabpils	Jekabpils Municipality	18	R	27.078	56.49903N	25.85735E	83	5	Europe/Riga
 Daugavpils	Daugavpils	18	N	111.564	55.88333N	26.53333E	103	7	Europe/Riga
 Cesis	Cesu Rajons	18	R	18.198	57.31188N	25.27456E	102	5	Europe/Riga
-Tobruk	Al Butnan	01	R	121.052	32.08963N	23.95385E	21	7	Africa/Tripoli
+Tobruk	Al Butnan	01	R	121.052	32.08963N	23.95385E	23	7	Africa/Tripoli
 Qaryat Suluq	Banghazi	01	N	15.543	31.66818N	20.25205E	55	5	Africa/Tripoli
 Darnah	Darnah	01	R	78.782	32.76704N	22.63669E	9	6	Africa/Tripoli
 Benghazi	Banghazi	01	R	650.629	32.11486N	20.06859E	3	8	Africa/Tripoli
 Az Zuwaytinah	Al Wahat	01	N	21.015	30.9522N	20.12022E	7	5	Africa/Tripoli
 At Taj	Al Kufrah	01	N	46.05	24.20487N	23.2857E	379	5	Africa/Tripoli
 Tukrah	Al Marj	01	N	23.164	32.53414N	20.57911E	16	5	Africa/Tripoli
-Al Qubbah	Darnah	01	N	24.631	32.75684N	22.24106E	614	5	Africa/Tripoli
-Al Marj	Al Marj	01	R	85.315	32.49257N	20.82909E	334	6	Africa/Tripoli
+Al Qubbah	Darnah	01	N	24.631	32.75684N	22.24106E	598	5	Africa/Tripoli
+Al Marj	Al Marj	01	R	85.315	32.49257N	20.82909E	338	6	Africa/Tripoli
 Al Jawf	Al Kufrah	01	N	17.32	24.1989N	23.29093E	391	5	Africa/Tripoli
 Al Bayda'	Al Jabal al Akhdar	01	R	74.594	32.76272N	21.75506E	631	6	Africa/Tripoli
 Al Abyar	Al Marj	01	N	32.563	32.19N	20.59653E	289	5	Africa/Tripoli
@@ -16095,17 +16095,17 @@ Izki	Ad Dakhiliyah	16	N	36.203	22.93333N	57.76667E	547	5	Asia/Muscat
 `Ibri	Az Zahirah	16	N	101.64	23.22573N	56.51572E	359	7	Asia/Muscat
 Ibra'	Northeastern Governorate	16	R	25.265	22.69057N	58.53337E	446	5	Asia/Muscat
 Bidbid	Ad Dakhiliyah	16	N	21.188	23.40787N	58.1283E	219	5	Asia/Muscat
-Bawshar	Muscat	16	N	159.487	23.57769N	58.39982E	15	7	Asia/Muscat
-Barka'	Al Batinah South	16	N	81.647	23.67872N	57.88605E	14	6	Asia/Muscat
-Bahla'	Ad Dakhiliyah	16	N	54.338	22.97886N	57.3047E	567	6	Asia/Muscat
+Bawshar	Muscat	16	N	159.487	23.57769N	58.39982E	18	7	Asia/Muscat
+Barka'	Al Batinah South	16	N	81.647	23.67872N	57.88605E	13	6	Asia/Muscat
+Bahla'	Ad Dakhiliyah	16	N	54.338	22.97886N	57.3047E	582	6	Asia/Muscat
 Badiyah	Northeastern Governorate	16	N	18.479	22.45N	58.8E	298	5	Asia/Muscat
 As Suwayq	Al Batinah North	16	N	107.143	23.84944N	57.43861E	6	7	Asia/Muscat
 Seeb	Muscat	16	N	237.816	23.67027N	58.18911E	7	7	Asia/Muscat
 Rustaq	Al Batinah South	16	N	79.383	23.39083N	57.42444E	341	6	Asia/Muscat
-Liwa	Al Batinah North	16	N	26.372	24.53077N	56.563E	5	5	Asia/Muscat
-Al Khaburah	Al Batinah North	16	N	50.223	23.97144N	57.09313E	4	6	Asia/Muscat
+Liwa	Al Batinah North	16	N	26.372	24.53077N	56.563E	9	5	Asia/Muscat
+Al Khaburah	Al Batinah North	16	N	50.223	23.97144N	57.09313E	7	6	Asia/Muscat
 Al Buraymi	Al Buraimi	16	R	73.67	24.25088N	55.79312E	297	6	Asia/Muscat
-Adam	Ad Dakhiliyah	16	N	17.283	22.37934N	57.52718E	274	5	Asia/Muscat
+Adam	Ad Dakhiliyah	16	N	17.283	22.37934N	57.52718E	284	5	Asia/Muscat
 Yanqul	Az Zahirah	16	N	16.599	23.58645N	56.53969E	684	5	Asia/Muscat
 Oman Smart Future City	Al Batinah South	16	N	25	23.6527N	57.59926E	69	5	Asia/Muscat
 Veracruz	Panama Oeste	07	N	17.144	8.89319N	79.62338W	35	5	America/Panama
@@ -17408,21 +17408,21 @@ An Nusayrat	Gaza Strip	16	N	36.123	31.44861N	34.3925E	33	5	Asia/Gaza
 Khan Yunis	Gaza Strip	16	N	173.183	31.34018N	34.30627E	55	7	Asia/Gaza
 Jabalya	Gaza Strip	16	N	168.568	31.5272N	34.48347E	43	7	Asia/Gaza
 Gaza	Gaza Strip	16	R	410	31.50161N	34.46672E	38	7	Asia/Gaza
-Dayr al Balah	Gaza Strip	16	N	59.504	31.41834N	34.34933E	14	6	Asia/Gaza
+Dayr al Balah	Gaza Strip	16	N	59.504	31.41834N	34.34933E	17	6	Asia/Gaza
 Bayt Lahya	Gaza Strip	16	N	56.919	31.5464N	34.49514E	33	6	Asia/Gaza
 Bayt Hanun	Gaza Strip	16	N	37.392	31.5353N	34.53579E	55	5	Asia/Gaza
 Bani Suhayla	Gaza Strip	16	N	31.272	31.34337N	34.32337E	82	5	Asia/Gaza
 Al Burayj	Gaza Strip	16	N	34.951	31.43944N	34.40306E	40	5	Asia/Gaza
 `Abasan al Kabirah	Gaza Strip	16	N	18.163	31.31913N	34.34005E	71	5	Asia/Gaza
 Yatta	West Bank	16	N	41.425	31.4459N	35.09443E	808	5	Asia/Hebron
-Tulkarm	West Bank	16	N	44.169	32.31156N	35.0269E	138	5	Asia/Hebron
+Tulkarm	West Bank	16	N	44.169	32.31156N	35.0269E	107	5	Asia/Hebron
 Tubas	West Bank	16	N	15.591	32.32091N	35.36989E	375	5	Asia/Hebron
 Sa`ir	West Bank	16	N	17.775	31.57855N	35.14017E	919	5	Asia/Hebron
 Ramallah	West Bank	16	N	24.599	31.89964N	35.20422E	879	5	Asia/Hebron
 Qalqilyah	West Bank	16	N	43.212	32.18966N	34.97063E	87	5	Asia/Hebron
 Qabatiyah	West Bank	16	N	19.127	32.41035N	35.28087E	308	5	Asia/Hebron
 Nablus	West Bank	16	N	130.326	32.22111N	35.25444E	569	7	Asia/Hebron
-Ma'ale Adummim	West Bank	16	N	38.193	31.7774N	35.29875E	514	5	Asia/Hebron
+Ma'ale Adummim	West Bank	16	N	38.193	31.7774N	35.29875E	498	5	Asia/Hebron
 Janin	West Bank	16	N	34.73	32.45943N	35.30086E	161	5	Asia/Hebron
 Idhna	West Bank	16	N	18.727	31.55874N	34.97436E	471	5	Asia/Hebron
 Halhul	West Bank	16	N	21.076	31.58029N	35.10178E	999	5	Asia/Hebron
@@ -18937,7 +18937,7 @@ Najran	Najran Region	16	R	258.573	17.49326N	44.12766E	1310	7	Asia/Riyadh
 Mecca	Mecca Region	16	R	1323.624	21.42664N	39.82563E	333	9	Asia/Riyadh
 Khamis Mushait	'Asir Region	16	N	387.553	18.3N	42.73333E	1998	7	Asia/Riyadh
 Jizan	Jazan Region	16	R	105.198	16.88917N	42.55111E	19	7	Asia/Riyadh
-Jeddah	Mecca Region	16	N	2867.446	21.49012N	39.18624E	22	9	Asia/Riyadh
+Jeddah	Mecca Region	16	N	2867.446	21.49012N	39.18624E	7	9	Asia/Riyadh
 Ha'il	Ha'il Region	16	R	267.005	27.52188N	41.69073E	1002	7	Asia/Riyadh
 Hafar Al-Batin	Eastern Province	16	N	271.642	28.43279N	45.97077E	310	7	Asia/Riyadh
 Duba	Tabuk Region	16	N	22	27.35134N	35.69014E	13	5	Asia/Riyadh
@@ -18965,10 +18965,10 @@ Medina	Medina Region	16	R	1300	24.46861N	39.61417E	603	9	Asia/Riyadh
 Khobar	Eastern Province	16	N	165.799	26.27944N	50.20833E	8	7	Asia/Riyadh
 Al Kharj	Riyadh Region	16	N	425.3	24.15541N	47.33457E	438	7	Asia/Riyadh
 Al Khafji	Eastern Province	16	N	54.857	28.43905N	48.49132E	3	6	Asia/Riyadh
-Al Jumum	Mecca Region	16	N	22.207	21.61951N	39.69659E	190	5	Asia/Riyadh
+Al Jumum	Mecca Region	16	N	22.207	21.61951N	39.69659E	208	5	Asia/Riyadh
 Al Jubayl	Eastern Province	16	N	237.274	27.0174N	49.62251E	5	7	Asia/Riyadh
 Al Hufuf	Eastern Province	16	N	293.179	25.36467N	49.58764E	159	7	Asia/Riyadh
-Al Bukayriyah	Al-Qassim Region	16	N	25.153	26.13915N	43.65782E	668	5	Asia/Riyadh
+Al Bukayriyah	Al-Qassim Region	16	N	25.153	26.13915N	43.65782E	671	5	Asia/Riyadh
 Al Battaliyah	Eastern Province	16	N	16.606	25.43333N	49.63333E	143	5	Asia/Riyadh
 Al Bahah	Al Bahah Region	16	R	88.419	20.01288N	41.46767E	2176	6	Asia/Riyadh
 Afif	Riyadh Region	16	N	45.525	23.9065N	42.91724E	1045	5	Asia/Riyadh
@@ -18980,7 +18980,7 @@ Abha	'Asir Region	16	R	210.886	18.21639N	42.50528E	2228	7	Asia/Riyadh
 Ash Shafa	Mecca Region	16	N	72.19	21.07268N	40.31842E	2196	6	Asia/Riyadh
 Sabt Alalayah	'Asir Region	16	N	100	19.5773N	41.96357E	1989	7	Asia/Riyadh
 Honiara	Honiara	22	C	56.298	9.43333S	159.95E	49	6	Pacific/Guadalcanal
-Victoria	English River	02	C	22.881	4.62001S	55.45501E	-9999	5	Indian/Mahe
+Victoria	English River	02	C	22.881	4.62001S	55.45501E	4	5	Indian/Mahe
 Zalingei	Central Darfur	01	R	28.687	12.90918N	23.47058E	891	5	Africa/Khartoum
 Wad Medani	Al Jazirah	01	R	332.714	14.40118N	33.51989E	410	7	Africa/Khartoum
 Umm Ruwaba	North Kordofan	01	N	55.742	12.9061N	31.2158E	457	6	Africa/Khartoum
@@ -19336,13 +19336,13 @@ Tadmur	Homs	16	N	51.015	34.5624N	38.28402E	418	6	Asia/Damascus
 Tadif	Aleppo	16	N	34.67	36.34814N	37.5309E	440	5	Asia/Damascus
 Suran	Hama	16	N	30.716	35.29193N	36.74848E	356	5	Asia/Damascus
 Subaykhan	Deir ez-Zor	16	N	25.514	34.85305N	40.59987E	188	5	Asia/Damascus
-Shaykh Miskin	Daraa	16	N	25.92	32.82666N	36.16052E	528	5	Asia/Damascus
+Shaykh Miskin	Daraa	16	N	25.92	32.82666N	36.16052E	530	5	Asia/Damascus
 Saraqib	Idlib	16	N	34.231	35.86447N	36.80591E	366	5	Asia/Damascus
 Salqin	Idlib	16	N	31.608	36.13865N	36.45244E	370	5	Asia/Damascus
 As Salamiyah	Hama	16	N	94.887	35.01127N	37.05324E	461	6	Asia/Damascus
 Safita	Tartus	16	N	27.815	34.82099N	36.11773E	374	5	Asia/Damascus
 Qatana	Rif-dimashq	16	N	18.511	33.43757N	36.07888E	897	5	Asia/Damascus
-Jasim	Daraa	16	N	30.283	32.99125N	36.06093E	645	5	Asia/Damascus
+Jasim	Daraa	16	N	30.283	32.99125N	36.06093E	660	5	Asia/Damascus
 Qarah	Rif-dimashq	16	N	20.656	34.15558N	36.74284E	1287	5	Asia/Damascus
 Nubl	Aleppo	16	N	25.546	36.37867N	36.99294E	413	5	Asia/Damascus
 Masyaf	Hama	16	N	32.262	35.0653N	36.3406E	502	5	Asia/Damascus
@@ -19355,7 +19355,7 @@ Kafranbel	Idlib	16	N	45.652	35.61376N	36.56449E	643	5	Asia/Damascus
 Kafr Laha	Homs	16	N	21.819	34.89469N	36.49582E	376	5	Asia/Damascus
 Jisr ash Shughur	Idlib	16	N	39.311	35.81418N	36.31983E	163	5	Asia/Damascus
 Jayrud	Rif-dimashq	16	N	32.352	33.80709N	36.73861E	815	5	Asia/Damascus
-Jarabulus	Aleppo	16	N	24.997	36.8175N	38.01111E	356	5	Asia/Damascus
+Jarabulus	Aleppo	16	N	24.997	36.8175N	38.01111E	350	5	Asia/Damascus
 Jablah	Latakia	16	N	65.915	35.36211N	35.92759E	26	6	Asia/Damascus
 `Irbin	Rif-dimashq	16	N	42.474	33.53719N	36.36635E	688	5	Asia/Damascus
 Inkhil	Daraa	16	N	29.076	33.01809N	36.12828E	623	5	Asia/Damascus
@@ -19394,7 +19394,7 @@ Al Mayadin	Deir ez-Zor	16	N	54.534	35.01982N	40.45154E	196	6	Asia/Damascus
 Latakia	Latakia	16	R	340.181	35.53168N	35.79011E	29	7	Asia/Damascus
 Al Kiswah	Rif-dimashq	16	N	23.526	33.3581N	36.2419E	724	5	Asia/Damascus
 Al Hasakah	Al-Hasakah	16	R	81.539	36.50237N	40.74772E	305	6	Asia/Damascus
-Al Hirak	Daraa	16	N	23.784	32.74948N	36.30582E	651	5	Asia/Damascus
+Al Hirak	Daraa	16	N	23.784	32.74948N	36.30582E	634	5	Asia/Damascus
 Al Bab	Aleppo	16	N	130.745	36.37051N	37.5157E	460	7	Asia/Damascus
 `Afrin	Aleppo	16	N	48.693	36.51194N	36.86954E	229	5	Asia/Damascus
 Ad Dana	Idlib	16	N	21.987	36.21254N	36.76998E	400	5	Asia/Damascus
@@ -19404,8 +19404,8 @@ Mbabane	Hhohho	04	C	76.218	26.31667S	31.13333E	1209	6	Africa/Mbabane
 Manzini	Manzini	04	R	110.537	26.49884S	31.38004E	601	7	Africa/Mbabane
 Lobamba	Hhohho	04	N	4.557	26.46667S	31.2E	694		Africa/Mbabane
 Cockburn Town		06	C	3.72	21.46122N	71.14188W	7		America/Grand_Turk
-Fada	Ennedi-Ouest	03	R	23.786	17.19186N	21.58081E	559	5	Africa/Ndjamena
-Am-Timan	Salamat	03	R	28.885	11.0433N	20.28342E	416	5	Africa/Ndjamena
+Fada	Ennedi-Ouest	03	R	23.786	17.19186N	21.58081E	562	5	Africa/Ndjamena
+Am-Timan	Salamat	03	R	28.885	11.0433N	20.28342E	441	5	Africa/Ndjamena
 Abeche	Ouadai	03	R	74.188	13.82916N	20.8324E	545	6	Africa/Ndjamena
 Sarh	Moyen-Chari	03	R	102.528	9.14555N	18.38331E	342	7	Africa/Ndjamena
 Pala	Mayo-Kebbi Ouest	03	R	35.466	9.3646N	14.90725E	447	5	Africa/Ndjamena
@@ -20227,7 +20227,7 @@ Taoyuan City	Taiwan	13	N	402.014	24.99368N	121.29696E	103	7	Asia/Taipei
 Zhongxing New Village	Taiwan	13	R	25.549	23.95908N	120.68516E	106	5	Asia/Taipei
 Zanzibar	Zanzibar Urban/West	02	R	403.658	6.16394S	39.19793E	14	7	Africa/Dar_es_Salaam
 Wete	Pemba North	02	R	26.45	5.05589S	39.72938E	53	5	Africa/Dar_es_Salaam
-Vwawa	Songwe	02	R	40.145	9.10806S	32.93472E	1331	5	Africa/Dar_es_Salaam
+Vwawa	Songwe	02	R	40.145	9.10806S	32.93472E	1577	5	Africa/Dar_es_Salaam
 Vikindu	Pwani	02	N	23.307	7.00667S	39.29849E	86	5	Africa/Dar_es_Salaam
 Uyovu	Geita	02	N	60.849	3.28333S	31.52583E	1235	6	Africa/Dar_es_Salaam
 Uvinza	Kigoma	02	N	24.65	5.10361S	30.39111E	996	5	Africa/Dar_es_Salaam
@@ -20264,7 +20264,7 @@ Nyalikungu	Simiyu	02	N	24.648	3.18333S	33.78333E	1354	5	Africa/Dar_es_Salaam
 Nyakabindi	Simiyu	02	N	18.428	2.63333S	33.98333E	1295	5	Africa/Dar_es_Salaam
 Nsunga	Kagera	02	N	20.049	1.14389S	31.39472E	1202	5	Africa/Dar_es_Salaam
 Nshamba	Kagera	02	N	19.815	1.79833S	31.55111E	1540	5	Africa/Dar_es_Salaam
-Njombe	Njombe	02	R	46.724	9.34917S	34.77167E	1676	5	Africa/Dar_es_Salaam
+Njombe	Njombe	02	R	46.724	9.34917S	34.77167E	1960	5	Africa/Dar_es_Salaam
 Nguruka	Kigoma	02	N	39.135	5.10917S	31.04194E	1081	5	Africa/Dar_es_Salaam
 Ngudu	Mwanza	02	N	22.658	2.96667S	33.33333E	1246	5	Africa/Dar_es_Salaam
 Ngerengere	Morogoro	02	N	17.181	6.75S	38.11667E	196	5	Africa/Dar_es_Salaam
@@ -20341,7 +20341,7 @@ Kibara	Mara	02	N	17.211	2.15S	33.45E	1149	5	Africa/Dar_es_Salaam
 Kibakwe	Dodoma	02	N	19.526	6.71667S	36.36667E	1133	5	Africa/Dar_es_Salaam
 Kibaha	Pwani	02	R	23.651	6.76667S	38.91667E	154	5	Africa/Dar_es_Salaam
 Katumba	Mbeya	02	N	108.558	9.23333S	33.61667E	1387	7	Africa/Dar_es_Salaam
-Katoro	Geita	02	N	49.691	2.99983S	31.93261E	1272	5	Africa/Dar_es_Salaam
+Katoro	Geita	02	N	49.691	2.99983S	31.93261E	1297	5	Africa/Dar_es_Salaam
 Katerero	Kagera	02	N	18.43	1.4S	31.73333E	1164	5	Africa/Dar_es_Salaam
 Kasulu	Kigoma	02	N	37.349	4.57667S	30.1025E	1310	5	Africa/Dar_es_Salaam
 Kasamwa	Geita	02	N	27.681	2.85S	32.43333E	1199	5	Africa/Dar_es_Salaam
@@ -20364,7 +20364,7 @@ Igunga	Tabora	02	N	35.644	4.28333S	33.88333E	1090	5	Africa/Dar_es_Salaam
 Igugunu	Singida	02	N	22.81	4.56667S	34.63333E	1376	5	Africa/Dar_es_Salaam
 Ifakara	Morogoro	02	N	49.528	8.13333S	36.68333E	259	5	Africa/Dar_es_Salaam
 Hedaru	Kilimanjaro	02	N	20.231	4.5S	37.9E	640	5	Africa/Dar_es_Salaam
-Geita	Geita	02	R	40	2.8725S	32.2325E	1416	5	Africa/Dar_es_Salaam
+Geita	Geita	02	R	40	2.8725S	32.2325E	1268	5	Africa/Dar_es_Salaam
 Geiro	Morogoro	02	N	37.909	6.15S	36.86667E	1284	5	Africa/Dar_es_Salaam
 Galappo	Manyara	02	N	18.528	4.26667S	35.85E	1379	5	Africa/Dar_es_Salaam
 Dongobesh	Manyara	02	N	18.864	4.06667S	35.38333E	1985	5	Africa/Dar_es_Salaam
@@ -20378,9 +20378,9 @@ Chalinze	Pwani	02	N	34.335	6.63784S	38.35396E	212	5	Africa/Dar_es_Salaam
 Chala	Rukwa	02	N	22.624	7.58333S	31.26667E	1765	5	Africa/Dar_es_Salaam
 Chake Chake	Pemba South	02	R	21.686	5.24586S	39.76659E	19	5	Africa/Dar_es_Salaam
 Butiama	Mara	02	N	16.376	1.76667S	33.96667E	1500	5	Africa/Dar_es_Salaam
-Buseresere	Geita	02	N	52.87	3.04877S	31.88542E	1247	6	Africa/Dar_es_Salaam
+Buseresere	Geita	02	N	52.87	3.04877S	31.88542E	1241	6	Africa/Dar_es_Salaam
 Bungu	Pwani	02	N	27.873	7.63369S	39.05818E	163	5	Africa/Dar_es_Salaam
-Bunda	Mara	02	N	50.944	2.02153S	33.87109E	1259	6	Africa/Dar_es_Salaam
+Bunda	Mara	02	N	50.944	2.02153S	33.87109E	1235	6	Africa/Dar_es_Salaam
 Bukoba	Kagera	02	R	70.628	1.33167S	31.81222E	1149	6	Africa/Dar_es_Salaam
 Bugarama	Kagera	02	N	32.494	2.87056S	30.52806E	1493	5	Africa/Dar_es_Salaam
 Biharamulo	Kagera	02	N	34.038	2.63194S	31.30889E	1479	5	Africa/Dar_es_Salaam
