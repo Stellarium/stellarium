@@ -4351,9 +4351,12 @@ void Planet::setApparentMagnitudeAlgorithm(QString algorithm)
 // NOTE: Limitation for efficiency: If this is a planet moon from another planet, we compute RTS for the parent planet instead!
 Vec3d Planet::computeRTSTime(StelCore *core) const
 {
-	StelObjectMgr* omgr=GETSTELMODULE(StelObjectMgr);
+	const StelLocation loc=core->getCurrentLocation();
+	if (loc.name.contains("->")) // a spaceship
+		return Vec3d(-100.,-100.,-100.);
+
 	double ho = 0.;
-	if ( (getEnglishName()=="Moon") && (core->getCurrentLocation().planetName=="Earth"))
+	if ( (getEnglishName()=="Moon") && (loc.planetName=="Earth"))
 		ho = +0.7275*asin(6378.14/(eclipticPos.length()*AU)); // horizon parallax factor.
 	else if (getEnglishName()=="Sun")
 		ho = - getAngularSize(core) * M_PI_180; // semidiameter; Canonical value 16', but this is accurate even from other planets...
@@ -4366,7 +4369,7 @@ Vec3d Planet::computeRTSTime(StelCore *core) const
 		refraction.backward(zeroAlt);
 		ho += asin(zeroAlt[2]);
 	}
-	const StelLocation loc=core->getCurrentLocation();
+
 	const double phi = static_cast<double>(loc.latitude) * M_PI_180;
 	const double L = static_cast<double>(loc.longitude) * M_PI_180; // OUR longitude. Meeus has it reversed
 	PlanetP obsPlanet = core->getCurrentPlanet();
