@@ -308,7 +308,7 @@
             <item>
              <widget class="QPushButton" name="celestialPositionsSaveButton">
               <property name="text">
-               <string>Save positions</string>
+               <string>Export positions...</string>
               </property>
              </widget>
             </item>
@@ -651,7 +651,7 @@
             <item>
              <widget class="QPushButton" name="ephemerisSaveButton">
               <property name="text">
-               <string>Save ephemeris</string>
+               <string>Export ephemeris...</string>
               </property>
              </widget>
             </item>
@@ -861,7 +861,7 @@
             <item>
              <widget class="QPushButton" name="transitsSaveButton">
               <property name="text">
-               <string>Save transits</string>
+               <string>Export transits...</string>
               </property>
              </widget>
             </item>
@@ -1186,7 +1186,7 @@
             <item>
              <widget class="QPushButton" name="phenomenaSaveButton">
               <property name="text">
-               <string>Save phenomena</string>
+               <string>Export phenomena...</string>
               </property>
              </widget>
             </item>
@@ -2038,7 +2038,7 @@
             <item>
              <widget class="QPushButton" name="saveObjectsButton">
               <property name="text">
-               <string>Save list of objects</string>
+               <string>Export list of objects...</string>
               </property>
              </widget>
             </item>
@@ -2391,7 +2391,6 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../data/gui/guiRes.qrc"/>
   <include location="../../data/gui/guiRes.qrc"/>
  </resources>
  <connections/>
