@@ -533,6 +533,8 @@ class Translations
 		// TRANSLATORS: Name of the sky culture
 		N_("Western (Sky & Telescope)");
 		// TRANSLATORS: Name of the sky culture
+        N_("Western (Sternenkarten)");
+		// TRANSLATORS: Name of the sky cultur
 		N_("Northern Andes");
 		// TRANSLATORS: Name of the sky culture
 		N_("Babylonian (MUL.APIN)");
