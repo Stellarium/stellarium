@@ -922,7 +922,12 @@ void ViewDialog::populateLists()
 	QListWidget* l = ui->culturesListWidget;
 	l->blockSignals(true);
 	l->clear();
-	l->addItems(app.getSkyCultureMgr().getSkyCultureListI18());
+	QStringList starlore = app.getSkyCultureMgr().getSkyCultureListI18();
+	for ( const auto& s : starlore  )
+	{
+		l->addItem(s);
+		l->findItems(s, Qt::MatchExactly).at(0)->setToolTip(s);
+	}
 	l->setCurrentItem(l->findItems(app.getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));
 	l->blockSignals(false);
 	updateSkyCultureText();
