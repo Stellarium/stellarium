@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-08-22 11:40+0700\n"
+"POT-Creation-Date: 2021-09-04 14:06+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: cardinot <mcardinot@gmail.com>, 2017\n"
 "Language-Team: Tajik (https://www.transifex.com/stellarium/teams/80998/tg/)\n"
@@ -317,7 +317,7 @@ msgstr ""
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/GridLinesMgr.cpp:1466 src/core/modules/Planet.cpp:630
-#: src/core/modules/Planet.cpp:942 src/gui/AstroCalcDialog.cpp:6249
+#: src/core/modules/Planet.cpp:963 src/gui/AstroCalcDialog.cpp:6249
 #: plugins/Satellites/src/Satellite.cpp:326
 #: plugins/Satellites/src/Satellite.cpp:387
 #: plugins/MeteorShowers/src/MeteorShower.cpp:546
@@ -513,97 +513,97 @@ msgid "Compass marks"
 msgstr ""
 
 #. TRANSLATORS: North
-#: src/core/modules/LandscapeMgr.cpp:254 src/core/modules/Planet.cpp:1059
+#: src/core/modules/LandscapeMgr.cpp:254 src/core/modules/Planet.cpp:1080
 msgctxt "compass direction"
 msgid "N"
 msgstr ""
 
 #. TRANSLATORS: South
-#: src/core/modules/LandscapeMgr.cpp:256 src/core/modules/Planet.cpp:1051
+#: src/core/modules/LandscapeMgr.cpp:256 src/core/modules/Planet.cpp:1072
 msgctxt "compass direction"
 msgid "S"
 msgstr ""
 
 #. TRANSLATORS: East
-#: src/core/modules/LandscapeMgr.cpp:258 src/core/modules/Planet.cpp:1063
+#: src/core/modules/LandscapeMgr.cpp:258 src/core/modules/Planet.cpp:1084
 msgctxt "compass direction"
 msgid "E"
 msgstr ""
 
 #. TRANSLATORS: West
-#: src/core/modules/LandscapeMgr.cpp:260 src/core/modules/Planet.cpp:1055
+#: src/core/modules/LandscapeMgr.cpp:260 src/core/modules/Planet.cpp:1076
 msgctxt "compass direction"
 msgid "W"
 msgstr ""
 
 #. TRANSLATORS: Northeast
-#: src/core/modules/LandscapeMgr.cpp:262 src/core/modules/Planet.cpp:1061
+#: src/core/modules/LandscapeMgr.cpp:262 src/core/modules/Planet.cpp:1082
 msgctxt "compass direction"
 msgid "NE"
 msgstr ""
 
 #. TRANSLATORS: Southeast
-#: src/core/modules/LandscapeMgr.cpp:264 src/core/modules/Planet.cpp:1065
+#: src/core/modules/LandscapeMgr.cpp:264 src/core/modules/Planet.cpp:1086
 msgctxt "compass direction"
 msgid "SE"
 msgstr ""
 
 #. TRANSLATORS: Southwest
-#: src/core/modules/LandscapeMgr.cpp:266 src/core/modules/Planet.cpp:1053
+#: src/core/modules/LandscapeMgr.cpp:266 src/core/modules/Planet.cpp:1074
 msgctxt "compass direction"
 msgid "SW"
 msgstr ""
 
 #. TRANSLATORS: Northwest
-#: src/core/modules/LandscapeMgr.cpp:268 src/core/modules/Planet.cpp:1057
+#: src/core/modules/LandscapeMgr.cpp:268 src/core/modules/Planet.cpp:1078
 msgctxt "compass direction"
 msgid "NW"
 msgstr ""
 
 #. TRANSLATORS: North-northeast
-#: src/core/modules/LandscapeMgr.cpp:270 src/core/modules/Planet.cpp:1060
+#: src/core/modules/LandscapeMgr.cpp:270 src/core/modules/Planet.cpp:1081
 msgctxt "compass direction"
 msgid "NNE"
 msgstr ""
 
 #. TRANSLATORS: East-northeast
-#: src/core/modules/LandscapeMgr.cpp:272 src/core/modules/Planet.cpp:1062
+#: src/core/modules/LandscapeMgr.cpp:272 src/core/modules/Planet.cpp:1083
 msgctxt "compass direction"
 msgid "ENE"
 msgstr ""
 
 #. TRANSLATORS: East-southeast
-#: src/core/modules/LandscapeMgr.cpp:274 src/core/modules/Planet.cpp:1064
+#: src/core/modules/LandscapeMgr.cpp:274 src/core/modules/Planet.cpp:1085
 msgctxt "compass direction"
 msgid "ESE"
 msgstr ""
 
 #. TRANSLATORS: South-southeast
-#: src/core/modules/LandscapeMgr.cpp:276 src/core/modules/Planet.cpp:1066
+#: src/core/modules/LandscapeMgr.cpp:276 src/core/modules/Planet.cpp:1087
 msgctxt "compass direction"
 msgid "SSE"
 msgstr ""
 
 #. TRANSLATORS: South-southwest
-#: src/core/modules/LandscapeMgr.cpp:278 src/core/modules/Planet.cpp:1052
+#: src/core/modules/LandscapeMgr.cpp:278 src/core/modules/Planet.cpp:1073
 msgctxt "compass direction"
 msgid "SSW"
 msgstr ""
 
 #. TRANSLATORS: West-southwest
-#: src/core/modules/LandscapeMgr.cpp:280 src/core/modules/Planet.cpp:1054
+#: src/core/modules/LandscapeMgr.cpp:280 src/core/modules/Planet.cpp:1075
 msgctxt "compass direction"
 msgid "WSW"
 msgstr ""
 
 #. TRANSLATORS: West-northwest
-#: src/core/modules/LandscapeMgr.cpp:282 src/core/modules/Planet.cpp:1056
+#: src/core/modules/LandscapeMgr.cpp:282 src/core/modules/Planet.cpp:1077
 msgctxt "compass direction"
 msgid "WNW"
 msgstr ""
 
 #. TRANSLATORS: North-northwest
-#: src/core/modules/LandscapeMgr.cpp:284 src/core/modules/Planet.cpp:1058
+#: src/core/modules/LandscapeMgr.cpp:284 src/core/modules/Planet.cpp:1079
 msgctxt "compass direction"
 msgid "NNW"
 msgstr ""
@@ -678,7 +678,7 @@ msgid "Author"
 msgstr "Муаллиф"
 
 #. TRANSLATORS: Unit of measure for distance - meter
-#: src/core/modules/LandscapeMgr.cpp:1037 src/gui/StelGuiItems.cpp:775
+#: src/core/modules/LandscapeMgr.cpp:1037 src/gui/StelGuiItems.cpp:817
 #: plugins/Satellites/src/Satellite.cpp:417
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1038
 msgctxt "distance"
@@ -760,7 +760,7 @@ msgstr ""
 #: src/core/modules/NomenclatureItem.cpp:225 src/core/modules/Planet.cpp:586
 #: src/core/modules/Planet.cpp:611 src/core/modules/Planet.cpp:709
 #: src/core/modules/Comet.cpp:164 src/core/modules/Comet.cpp:174
-#: src/gui/StelGuiItems.cpp:805 src/gui/AstroCalcDialog.cpp:6184
+#: src/gui/StelGuiItems.cpp:847 src/gui/AstroCalcDialog.cpp:6184
 #: plugins/Satellites/src/Satellite.cpp:322
 #: plugins/Satellites/src/Satellite.cpp:380
 msgctxt "distance"
@@ -2012,7 +2012,7 @@ msgstr ""
 
 #: src/core/modules/NebulaMgr.cpp:1379 src/gui/StelDialog.cpp:324
 #: src/StelMainView.cpp:946
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:747
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:749
 msgid "Attention!"
 msgstr ""
 
@@ -2063,8 +2063,8 @@ msgstr ""
 msgid "Hourly motion"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:569 src/core/modules/Planet.cpp:1112
-#: src/core/modules/Planet.cpp:1121 src/core/modules/StarWrapper.cpp:328
+#: src/core/modules/Planet.cpp:569 src/core/modules/Planet.cpp:1133
+#: src/core/modules/Planet.cpp:1142 src/core/modules/StarWrapper.cpp:328
 #: plugins/Pulsars/src/Pulsar.cpp:203
 msgctxt "into the direction of"
 msgid "towards"
@@ -2123,176 +2123,180 @@ msgstr ""
 msgid "Equatorial diameter"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:747 src/core/modules/Planet.cpp:755
-#: src/gui/AstroCalcDialog.cpp:3162 src/gui/AstroCalcDialog.cpp:3220
-#: src/ui_configurationDialog.h:1798
+#: src/core/modules/Planet.cpp:766 src/core/modules/Planet.cpp:767
+#: src/core/modules/Planet.cpp:775 src/gui/AstroCalcDialog.cpp:3162
+#: src/gui/AstroCalcDialog.cpp:3220 src/ui_configurationDialog.h:1798
 msgid "Elongation"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:748 src/core/modules/Planet.cpp:756
+#: src/core/modules/Planet.cpp:768 src/core/modules/Planet.cpp:777
 #: src/gui/AstroCalcDialog.cpp:3172 src/gui/AstroCalcDialog.cpp:3230
 #: plugins/Satellites/src/Satellite.cpp:392
 msgid "Phase angle"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:750 src/core/modules/Planet.cpp:758
+#: src/core/modules/Planet.cpp:770 src/core/modules/Planet.cpp:779
 msgid "Illuminated"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:770 src/gui/AstroCalcDialog.cpp:6272
+#: src/core/modules/Planet.cpp:776
+msgid "Elong. in Ecl.Long."
+msgstr ""
+
+#: src/core/modules/Planet.cpp:791 src/gui/AstroCalcDialog.cpp:6272
 #: src/gui/AstroCalcDialog.cpp:6416 src/gui/AstroCalcDialog.cpp:6433
 msgid "Angular distance"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:788 src/core/modules/Planet.cpp:950
+#: src/core/modules/Planet.cpp:809 src/core/modules/Planet.cpp:971
 #: src/core/modules/StarWrapper.cpp:348 src/gui/AstroCalcDialog.cpp:6220
 msgctxt "duration"
 msgid "days"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:797
+#: src/core/modules/Planet.cpp:818
 msgid "Sidereal period"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:806
+#: src/core/modules/Planet.cpp:827
 msgid "Synodic period"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:959
+#: src/core/modules/Planet.cpp:980
 msgid "Sidereal day"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:961
+#: src/core/modules/Planet.cpp:982
 msgid "Mean solar day"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:967
+#: src/core/modules/Planet.cpp:988
 msgid "The period of rotation is chaotic"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:972 src/core/modules/Planet.cpp:978
+#: src/core/modules/Planet.cpp:993 src/core/modules/Planet.cpp:999
 msgid "Equatorial rotation velocity"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1002
+#: src/core/modules/Planet.cpp:1023
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1004
+#: src/core/modules/Planet.cpp:1025
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1006
+#: src/core/modules/Planet.cpp:1027
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1008
+#: src/core/modules/Planet.cpp:1029
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1010
+#: src/core/modules/Planet.cpp:1031
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1012
+#: src/core/modules/Planet.cpp:1033
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1014
+#: src/core/modules/Planet.cpp:1035
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1016
+#: src/core/modules/Planet.cpp:1037
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1024
+#: src/core/modules/Planet.cpp:1045
 msgid "Moon age"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1024
+#: src/core/modules/Planet.cpp:1045
 msgid "days old"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1044 src/core/modules/Planet.cpp:1047
+#: src/core/modules/Planet.cpp:1065 src/core/modules/Planet.cpp:1068
 msgid "Position angle of bright limb"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1111 src/core/modules/Planet.cpp:1120
-#: src/core/modules/Planet.cpp:1156 src/core/modules/Planet.cpp:1163
+#: src/core/modules/Planet.cpp:1132 src/core/modules/Planet.cpp:1141
+#: src/core/modules/Planet.cpp:1177 src/core/modules/Planet.cpp:1184
 msgid "Position Angle of axis"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1112 src/core/modules/Planet.cpp:1113
-#: src/core/modules/Planet.cpp:1121 src/core/modules/Planet.cpp:1122
+#: src/core/modules/Planet.cpp:1133 src/core/modules/Planet.cpp:1134
+#: src/core/modules/Planet.cpp:1142 src/core/modules/Planet.cpp:1143
 msgid "Libration"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1114 src/core/modules/Planet.cpp:1123
-#: src/core/modules/Planet.cpp:1158 src/core/modules/Planet.cpp:1165
+#: src/core/modules/Planet.cpp:1135 src/core/modules/Planet.cpp:1144
+#: src/core/modules/Planet.cpp:1179 src/core/modules/Planet.cpp:1186
 msgid "Subsolar point"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1115 src/core/modules/Planet.cpp:1124
+#: src/core/modules/Planet.cpp:1136 src/core/modules/Planet.cpp:1145
 msgid "Colongitude"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1157 src/core/modules/Planet.cpp:1164
+#: src/core/modules/Planet.cpp:1178 src/core/modules/Planet.cpp:1185
 msgid "Center point"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1176
+#: src/core/modules/Planet.cpp:1197
 msgid "Eclipse obscuration"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1185
+#: src/core/modules/Planet.cpp:1206
 msgid "Eclipse magnitude"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1210
+#: src/core/modules/Planet.cpp:1231
 msgid "Center of solar eclipse (Lat./Long.)"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1221
+#: src/core/modules/Planet.cpp:1242
 msgid "Shadow center point is"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1223
+#: src/core/modules/Planet.cpp:1244
 msgid "km towards azimuth"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1227
+#: src/core/modules/Planet.cpp:1248
 msgid "Magnitude of central eclipse"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1230
+#: src/core/modules/Planet.cpp:1251
 msgctxt "type of solar eclipse"
 msgid "(annular)"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1232
+#: src/core/modules/Planet.cpp:1253
 msgctxt "type of solar eclipse"
 msgid "(total)"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1247
+#: src/core/modules/Planet.cpp:1268
 msgid "Penumbral eclipse magnitude"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1250
+#: src/core/modules/Planet.cpp:1271
 msgid "Umbral eclipse magnitude"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1257
+#: src/core/modules/Planet.cpp:1278
 msgid "Albedo"
 msgstr ""
 
@@ -3593,263 +3597,263 @@ msgid "Not found"
 msgstr "Ёфт нашуд"
 
 #. TRANSLATORS: Local Mean Solar Time. Please use abbreviation.
-#: src/core/StelLocaleMgr.cpp:307
+#: src/core/StelLocaleMgr.cpp:240
 msgctxt "solar time"
 msgid "LMST"
 msgstr ""
 
 #. TRANSLATORS: Local True Solar Time. Please use abbreviation.
-#: src/core/StelLocaleMgr.cpp:313
+#: src/core/StelLocaleMgr.cpp:246
 msgctxt "solar time"
 msgid "LTST"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:474
+#: src/core/StelLocaleMgr.cpp:382
 msgctxt "short day name"
 msgid "Sun"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:475
+#: src/core/StelLocaleMgr.cpp:383
 msgctxt "short day name"
 msgid "Mon"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:476
+#: src/core/StelLocaleMgr.cpp:384
 msgctxt "short day name"
 msgid "Tue"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:477
+#: src/core/StelLocaleMgr.cpp:385
 msgctxt "short day name"
 msgid "Wed"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:478
+#: src/core/StelLocaleMgr.cpp:386
 msgctxt "short day name"
 msgid "Thu"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:479
+#: src/core/StelLocaleMgr.cpp:387
 msgctxt "short day name"
 msgid "Fri"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:480
+#: src/core/StelLocaleMgr.cpp:388
 msgctxt "short day name"
 msgid "Sat"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:483 plugins/Calendars/src/JulianCalendar.cpp:37
+#: src/core/StelLocaleMgr.cpp:391 plugins/Calendars/src/JulianCalendar.cpp:37
 msgctxt "long day name"
 msgid "Sunday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:484 plugins/Calendars/src/JulianCalendar.cpp:38
+#: src/core/StelLocaleMgr.cpp:392 plugins/Calendars/src/JulianCalendar.cpp:38
 msgctxt "long day name"
 msgid "Monday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:485 plugins/Calendars/src/JulianCalendar.cpp:39
+#: src/core/StelLocaleMgr.cpp:393 plugins/Calendars/src/JulianCalendar.cpp:39
 msgctxt "long day name"
 msgid "Tuesday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:486 plugins/Calendars/src/JulianCalendar.cpp:40
+#: src/core/StelLocaleMgr.cpp:394 plugins/Calendars/src/JulianCalendar.cpp:40
 msgctxt "long day name"
 msgid "Wednesday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:487 plugins/Calendars/src/JulianCalendar.cpp:41
+#: src/core/StelLocaleMgr.cpp:395 plugins/Calendars/src/JulianCalendar.cpp:41
 msgctxt "long day name"
 msgid "Thursday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:488 plugins/Calendars/src/JulianCalendar.cpp:42
+#: src/core/StelLocaleMgr.cpp:396 plugins/Calendars/src/JulianCalendar.cpp:42
 msgctxt "long day name"
 msgid "Friday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:489 plugins/Calendars/src/JulianCalendar.cpp:43
+#: src/core/StelLocaleMgr.cpp:397 plugins/Calendars/src/JulianCalendar.cpp:43
 msgctxt "long day name"
 msgid "Saturday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:493
+#: src/core/StelLocaleMgr.cpp:401
 msgctxt "short month name"
 msgid "Dec"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:494
+#: src/core/StelLocaleMgr.cpp:402
 msgctxt "short month name"
 msgid "Jan"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:495
+#: src/core/StelLocaleMgr.cpp:403
 msgctxt "short month name"
 msgid "Feb"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:496
+#: src/core/StelLocaleMgr.cpp:404
 msgctxt "short month name"
 msgid "Mar"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:497
+#: src/core/StelLocaleMgr.cpp:405
 msgctxt "short month name"
 msgid "Apr"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:498
+#: src/core/StelLocaleMgr.cpp:406
 msgctxt "short month name"
 msgid "May"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:499
+#: src/core/StelLocaleMgr.cpp:407
 msgctxt "short month name"
 msgid "Jun"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:500
+#: src/core/StelLocaleMgr.cpp:408
 msgctxt "short month name"
 msgid "Jul"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:501
+#: src/core/StelLocaleMgr.cpp:409
 msgctxt "short month name"
 msgid "Aug"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:502
+#: src/core/StelLocaleMgr.cpp:410
 msgctxt "short month name"
 msgid "Sep"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:503
+#: src/core/StelLocaleMgr.cpp:411
 msgctxt "short month name"
 msgid "Oct"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:504
+#: src/core/StelLocaleMgr.cpp:412
 msgctxt "short month name"
 msgid "Nov"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:508 plugins/Calendars/src/JulianCalendar.cpp:56
+#: src/core/StelLocaleMgr.cpp:416 plugins/Calendars/src/JulianCalendar.cpp:56
 msgctxt "long month name"
 msgid "December"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:509 plugins/Calendars/src/JulianCalendar.cpp:45
+#: src/core/StelLocaleMgr.cpp:417 plugins/Calendars/src/JulianCalendar.cpp:45
 msgctxt "long month name"
 msgid "January"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:510 plugins/Calendars/src/JulianCalendar.cpp:46
+#: src/core/StelLocaleMgr.cpp:418 plugins/Calendars/src/JulianCalendar.cpp:46
 msgctxt "long month name"
 msgid "February"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:511 plugins/Calendars/src/JulianCalendar.cpp:47
+#: src/core/StelLocaleMgr.cpp:419 plugins/Calendars/src/JulianCalendar.cpp:47
 msgctxt "long month name"
 msgid "March"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:512 plugins/Calendars/src/JulianCalendar.cpp:48
+#: src/core/StelLocaleMgr.cpp:420 plugins/Calendars/src/JulianCalendar.cpp:48
 msgctxt "long month name"
 msgid "April"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:513 plugins/Calendars/src/JulianCalendar.cpp:49
+#: src/core/StelLocaleMgr.cpp:421 plugins/Calendars/src/JulianCalendar.cpp:49
 msgctxt "long month name"
 msgid "May"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:514 plugins/Calendars/src/JulianCalendar.cpp:50
+#: src/core/StelLocaleMgr.cpp:422 plugins/Calendars/src/JulianCalendar.cpp:50
 msgctxt "long month name"
 msgid "June"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:515 plugins/Calendars/src/JulianCalendar.cpp:51
+#: src/core/StelLocaleMgr.cpp:423 plugins/Calendars/src/JulianCalendar.cpp:51
 msgctxt "long month name"
 msgid "July"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:516 plugins/Calendars/src/JulianCalendar.cpp:52
+#: src/core/StelLocaleMgr.cpp:424 plugins/Calendars/src/JulianCalendar.cpp:52
 msgctxt "long month name"
 msgid "August"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:517 plugins/Calendars/src/JulianCalendar.cpp:53
+#: src/core/StelLocaleMgr.cpp:425 plugins/Calendars/src/JulianCalendar.cpp:53
 msgctxt "long month name"
 msgid "September"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:518 plugins/Calendars/src/JulianCalendar.cpp:54
+#: src/core/StelLocaleMgr.cpp:426 plugins/Calendars/src/JulianCalendar.cpp:54
 msgctxt "long month name"
 msgid "October"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:519 plugins/Calendars/src/JulianCalendar.cpp:55
+#: src/core/StelLocaleMgr.cpp:427 plugins/Calendars/src/JulianCalendar.cpp:55
 msgctxt "long month name"
 msgid "November"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:522
+#: src/core/StelLocaleMgr.cpp:430
 msgctxt "genitive"
 msgid "December"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:523
+#: src/core/StelLocaleMgr.cpp:431
 msgctxt "genitive"
 msgid "January"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:524
+#: src/core/StelLocaleMgr.cpp:432
 msgctxt "genitive"
 msgid "February"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:525
+#: src/core/StelLocaleMgr.cpp:433
 msgctxt "genitive"
 msgid "March"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:526
+#: src/core/StelLocaleMgr.cpp:434
 msgctxt "genitive"
 msgid "April"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:527
+#: src/core/StelLocaleMgr.cpp:435
 msgctxt "genitive"
 msgid "May"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:528
+#: src/core/StelLocaleMgr.cpp:436
 msgctxt "genitive"
 msgid "June"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:529
+#: src/core/StelLocaleMgr.cpp:437
 msgctxt "genitive"
 msgid "July"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:530
+#: src/core/StelLocaleMgr.cpp:438
 msgctxt "genitive"
 msgid "August"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:531
+#: src/core/StelLocaleMgr.cpp:439
 msgctxt "genitive"
 msgid "September"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:532
+#: src/core/StelLocaleMgr.cpp:440
 msgctxt "genitive"
 msgid "October"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:533
+#: src/core/StelLocaleMgr.cpp:441
 msgctxt "genitive"
 msgid "November"
 msgstr ""
@@ -4168,7 +4172,7 @@ msgid "Custom equation of %1T"
 msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1860 src/gui/ConfigurationDialog.cpp:1897
-#: src/gui/StelGuiItems.cpp:691 src/gui/LocationDialog.cpp:483
+#: src/gui/StelGuiItems.cpp:733 src/gui/LocationDialog.cpp:482
 msgid "System default"
 msgstr ""
 
@@ -4632,80 +4636,80 @@ msgstr ""
 msgid "Toggle visibility of GUI"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:338 src/gui/StelGuiItems.cpp:965
+#: src/gui/StelGuiItems.cpp:381 src/gui/StelGuiItems.cpp:1007
 msgid "Space"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:693
+#: src/gui/StelGuiItems.cpp:735
 msgid "Time zone"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:696 src/gui/LocationDialog.cpp:481
+#: src/gui/StelGuiItems.cpp:738 src/gui/LocationDialog.cpp:480
 msgid "Local Mean Solar Time"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:699 src/gui/LocationDialog.cpp:482
+#: src/gui/StelGuiItems.cpp:741 src/gui/LocationDialog.cpp:481
 msgid "Local True Solar Time"
 msgstr ""
 
 #. TRANSLATORS: unit of measurement: minutes per second
-#: src/gui/StelGuiItems.cpp:702
+#: src/gui/StelGuiItems.cpp:744
 msgctxt "unit of measurement"
 msgid "min/s"
 msgstr ""
 
 #. TRANSLATORS: unit of measurement: hours per second
-#: src/gui/StelGuiItems.cpp:710
+#: src/gui/StelGuiItems.cpp:752
 msgctxt "unit of measurement"
 msgid "hr/s"
 msgstr ""
 
 #. TRANSLATORS: unit of measurement: days per second
-#: src/gui/StelGuiItems.cpp:716
+#: src/gui/StelGuiItems.cpp:758
 msgctxt "unit of measurement"
 msgid "d/s"
 msgstr ""
 
 #. TRANSLATORS: unit of measurement: years per second
-#: src/gui/StelGuiItems.cpp:722
+#: src/gui/StelGuiItems.cpp:764
 msgctxt "unit of measurement"
 msgid "yr/s"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:724 src/gui/StelGuiItems.cpp:726
+#: src/gui/StelGuiItems.cpp:766 src/gui/StelGuiItems.cpp:768
 msgid "Simulation speed"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:771
+#: src/gui/StelGuiItems.cpp:813
 msgid "flight"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:805
+#: src/gui/StelGuiItems.cpp:847
 msgid "planetocentric distance"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:807
+#: src/gui/StelGuiItems.cpp:849
 msgid "planetocentric observer"
 msgstr ""
 
 #. TRANSLATORS: Field of view. Please use abbreviation.
-#: src/gui/StelGuiItems.cpp:825
+#: src/gui/StelGuiItems.cpp:867
 msgctxt "abbreviation"
 msgid "FOV"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:841
+#: src/gui/StelGuiItems.cpp:883
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:491
 msgid "Field of view"
 msgstr ""
 
 #. TRANSLATORS: Frames per second. Please use abbreviation.
-#: src/gui/StelGuiItems.cpp:860
+#: src/gui/StelGuiItems.cpp:902
 msgctxt "abbreviation"
 msgid "FPS"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:868
+#: src/gui/StelGuiItems.cpp:910
 msgid "Frames per second"
 msgstr ""
 
@@ -7520,419 +7524,424 @@ msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:536
+msgid "Western (Sternenkarten)"
+msgstr ""
+
+#. TRANSLATORS: Name of the sky cultur
+#: src/translations.h:538
 msgid "Northern Andes"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:538
+#: src/translations.h:540
 msgid "Babylonian (MUL.APIN)"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:540
+#: src/translations.h:542
 msgid "Babylonian (Seleucid)"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture and landscape
-#: src/translations.h:542
+#: src/translations.h:544
 msgid "Armintxe Cave"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:544
+#: src/translations.h:546
 msgid "Vanuatu (Netwar)"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:549
+#: src/translations.h:551
 msgid "Guereins"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:551
+#: src/translations.h:553
 msgid "Trees"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:553 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1446
+#: src/translations.h:555 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1448
 msgid "Moon"
 msgstr "Моҳ"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:555
+#: src/translations.h:557
 msgid "Hurricane"
 msgstr "Тӯфон"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:557
+#: src/translations.h:559
 msgid "Ocean"
 msgstr ""
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:559
+#: src/translations.h:561
 msgid "Garching"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:561 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1458
+#: src/translations.h:563 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1460
 msgid "Mars"
 msgstr "Миррих"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:563 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1461
+#: src/translations.h:565 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1463
 msgid "Jupiter"
 msgstr "Муштарӣ"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:565 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1464
+#: src/translations.h:567 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1466
 msgid "Saturn"
 msgstr "Зуҳал"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:567
+#: src/translations.h:569
 msgid "Uranus"
 msgstr "Уран"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:569
+#: src/translations.h:571
 msgid "Neptune"
 msgstr "Нептун"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:571
+#: src/translations.h:573
 msgid "Geneva"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:573
+#: src/translations.h:575
 msgid "Grossmugl"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:575
+#: src/translations.h:577
 msgid "Zero Horizon"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:577 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1443
+#: src/translations.h:579 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1445
 msgid "Sun"
 msgstr "Офтоб"
 
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
-#: src/translations.h:582
+#: src/translations.h:584
 msgid "Vienna Sterngarten"
 msgstr ""
 
 #. TRANSLATORS: Name of 3D scene
-#: src/translations.h:584
+#: src/translations.h:586
 msgid "Testscene"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:589
+#: src/translations.h:591
 msgid "Landscape Tour"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:591
+#: src/translations.h:593
 msgid "Partial Lunar Eclipse"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:593
+#: src/translations.h:595
 msgid "Total Lunar Eclipse"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:595
+#: src/translations.h:597
 msgid "Screensaver"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:597
+#: src/translations.h:599
 msgid "Solar Eclipse 2009"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:599
+#: src/translations.h:601
 msgid "Startup Script"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:601
+#: src/translations.h:603
 msgid "Zodiac"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:603
+#: src/translations.h:605
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:605
+#: src/translations.h:607
 msgid "Double eclipse from Deimos in 2017"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:607
+#: src/translations.h:609
 msgid "Double eclipse from Deimos in 2031"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:609
+#: src/translations.h:611
 msgid "Eclipse from Olympus Mons Jan 2, 2021"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:611
+#: src/translations.h:613
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:613
+#: src/translations.h:615
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:615
+#: src/translations.h:617
 msgid "Solar System Screensaver"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:617
+#: src/translations.h:619
 msgid "Constellations Tour"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:619
+#: src/translations.h:621
 msgid "Western Constellations Tour"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:621
+#: src/translations.h:623
 msgid "Sun from different planets"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:623
+#: src/translations.h:625
 msgid "Earth best views from other bodies"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:625
+#: src/translations.h:627
 msgid "Transit of Venus"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:627
+#: src/translations.h:629
 msgid "Sky Culture Tour"
 msgstr ""
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:629
+#: src/translations.h:631
 msgid "Earth Events from Mercury"
 msgstr ""
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:631
+#: src/translations.h:633
 msgid "Earth Events from a floating city on Venus"
 msgstr ""
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:633
+#: src/translations.h:635
 msgid "Earth Events from Mars"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:635
+#: src/translations.h:637
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:637
+#: src/translations.h:639
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:639
+#: src/translations.h:641
 msgid "Tycho's Supernova"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:641
+#: src/translations.h:643
 msgid "Earth and other Planets from Ceres"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:643
+#: src/translations.h:645
 msgid "Messier Objects Tour"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:645
+#: src/translations.h:647
 msgid "Binocular Highlights"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:647
+#: src/translations.h:649
 msgid "20 Fun Naked-Eye Double Stars"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:649
+#: src/translations.h:651
 msgid "List of largest known stars"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:651
+#: src/translations.h:653
 msgid "Herschel 400 Tour"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:653
+#: src/translations.h:655
 msgid "Binosky: Deep Sky Objects for Binoculars"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:655
+#: src/translations.h:657
 msgid "The Jack Bennett Catalog"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:657
+#: src/translations.h:659
 msgid "Best objects in the New General Catalog"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:659
+#: src/translations.h:661
 msgid "Jupiter and triple shadow phenomena"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:661
+#: src/translations.h:663
 msgid "Jupiter without Galilean satellites"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:663
+#: src/translations.h:665
 msgid "Skybox Tiles"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:665
+#: src/translations.h:667
 msgid "Occultations of bright stars by planets"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:667
+#: src/translations.h:669
 msgid "Mutual occultations of planets"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:669
+#: src/translations.h:671
 msgid "Planet Objects Tour"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:671
+#: src/translations.h:673
 msgid "Analemma"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:673
+#: src/translations.h:675
 msgid "Martian analemma"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:675
+#: src/translations.h:677
 msgid "Saturnian analemma"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:677
+#: src/translations.h:679
 msgid "Uranian analemma"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:679
+#: src/translations.h:681
 msgid "Messier Marathon"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:681
+#: src/translations.h:683
 msgid "Random location"
 msgstr ""
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:687
+#: src/translations.h:689
 msgid "Look around each installed landscape."
 msgstr ""
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:689
+#: src/translations.h:691
 msgid "Look at each installed sky culture."
 msgstr ""
 
-#: src/translations.h:690
+#: src/translations.h:692
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr ""
 
-#: src/translations.h:691
+#: src/translations.h:693
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr ""
 
-#: src/translations.h:692
+#: src/translations.h:694
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr ""
 
-#: src/translations.h:693
+#: src/translations.h:695
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr ""
 
-#: src/translations.h:694
+#: src/translations.h:696
 msgid "Script which runs automatically at startup"
 msgstr ""
 
-#: src/translations.h:695
+#: src/translations.h:697
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
 msgstr ""
 
-#: src/translations.h:696
+#: src/translations.h:698
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
 msgstr ""
 
-#: src/translations.h:697
+#: src/translations.h:699
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
 msgstr ""
 
-#: src/translations.h:698
+#: src/translations.h:700
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
 msgstr ""
 
-#: src/translations.h:699
+#: src/translations.h:701
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 2, 2021."
 msgstr ""
 
-#: src/translations.h:700
+#: src/translations.h:702
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But"
 " occultations of both on the same day are very rare. Here's one that takes "
 "place 1/23/2048. In real speed."
 msgstr ""
 
-#: src/translations.h:701
+#: src/translations.h:703
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -7942,45 +7951,45 @@ msgid ""
 "light up later."
 msgstr ""
 
-#: src/translations.h:702
+#: src/translations.h:704
 msgid ""
 "Screensaver of various happenings in the Solar System. 313 events in all!"
 msgstr ""
 
-#: src/translations.h:703
+#: src/translations.h:705
 msgid "A tour of the western constellations."
 msgstr ""
 
-#: src/translations.h:704
+#: src/translations.h:706
 msgid "A tour of the constellations of the selected sky culture."
 msgstr ""
 
-#: src/translations.h:705
+#: src/translations.h:707
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr ""
 
-#: src/translations.h:706
+#: src/translations.h:708
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 
-#: src/translations.h:707
+#: src/translations.h:709
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
 
-#: src/translations.h:708
+#: src/translations.h:710
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Historical "
 "Supernovae plugin has to be enabled."
 msgstr ""
 
-#: src/translations.h:709
+#: src/translations.h:711
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars "
 "2000-3000"
 msgstr ""
 
-#: src/translations.h:710
+#: src/translations.h:712
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -7988,66 +7997,66 @@ msgid ""
 "moons, Callisto will be the one."
 msgstr ""
 
-#: src/translations.h:711
+#: src/translations.h:713
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-2200"
 msgstr ""
 
-#: src/translations.h:712
+#: src/translations.h:714
 msgid "A tour of Messier Objects"
 msgstr ""
 
-#: src/translations.h:713
+#: src/translations.h:715
 msgid ""
 "Tours around interesting objects, which accessible to observation with "
 "binoculars. The data for the script are taken from the eponymous book by "
 "Gary Seronik."
 msgstr ""
 
-#: src/translations.h:714
+#: src/translations.h:716
 msgid ""
 "This script helps you make an excursion around 20 fun double stars. The list"
 " has been collected by Jerry Lodriguss and published in Sky & Telescope "
 "09/2014. Data taken from his website, http://www.astropix.com/doubles/"
 msgstr ""
 
-#: src/translations.h:715
+#: src/translations.h:717
 msgid "This script helps you make an excursion around largest known stars."
 msgstr ""
 
-#: src/translations.h:716
+#: src/translations.h:718
 msgid "A tour around objects from the Herschel 400 Catalogue"
 msgstr ""
 
-#: src/translations.h:717
+#: src/translations.h:719
 msgid ""
 "Ben Crowell has created Binosky, an observing list of Deep Sky Objects for "
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
 "Right Ascension (2000.0)."
 msgstr ""
 
-#: src/translations.h:718
+#: src/translations.h:720
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
 "The Bennett catalog was contributed by Auke Slotegraaf."
 msgstr ""
 
-#: src/translations.h:719
+#: src/translations.h:721
 msgid ""
 "This list of 111 objects by A.J. Crayon and Steve Coe is used by members of "
 "the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC "
 "achievement award."
 msgstr ""
 
-#: src/translations.h:720
+#: src/translations.h:722
 msgid ""
 "Demonstration of the mid-time of rare events - triple shadow phenomena of "
 "the satellites of Jupiter from 1900 to 2100. All events are given in "
 "Dynamical Time."
 msgstr ""
 
-#: src/translations.h:721
+#: src/translations.h:723
 msgid ""
 "The planet Jupiter sometimes appears to be without moons, when the four "
 "Galilean satellites are simultaneously invisible because they are passing "
@@ -8056,53 +8065,53 @@ msgid ""
 "from 1900 to 2100 in Dynamical Time."
 msgstr ""
 
-#: src/translations.h:722
+#: src/translations.h:724
 msgid ""
 "This script demonstrates interesting phenomena - occultations bright stars "
 "by planets, 2000 to 2040."
 msgstr ""
 
-#: src/translations.h:723
+#: src/translations.h:725
 msgid ""
 "This script demonstrates interesting and very rare phenomena - mutual "
 "occultations of planets, 0 to 2500."
 msgstr ""
 
-#: src/translations.h:724
-msgid "A tour of the Solar System planets"
-msgstr ""
-
-#: src/translations.h:725
-msgid ""
-"A demonstration of the analemma - the path of the Sun across the sky during "
-"the year on Earth."
-msgstr ""
-
 #: src/translations.h:726
-msgid ""
-"A demonstration of the analemma - the path of the Sun across the sky during "
-"the year on Mars."
+msgid "A tour of the Solar System planets"
 msgstr ""
 
 #: src/translations.h:727
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
-"the year on Saturn."
+"the year on Earth."
 msgstr ""
 
 #: src/translations.h:728
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
-"the year on Uranus."
+"the year on Mars."
 msgstr ""
 
 #: src/translations.h:729
+msgid ""
+"A demonstration of the analemma - the path of the Sun across the sky during "
+"the year on Saturn."
+msgstr ""
+
+#: src/translations.h:730
+msgid ""
+"A demonstration of the analemma - the path of the Sun across the sky during "
+"the year on Uranus."
+msgstr ""
+
+#: src/translations.h:731
 msgid ""
 "Messier Marathon on March 20, 2020. The data for the script are taken from "
 "GaoXing's observation log: http://www.xjltp.com/2_huodong/2_030301.htm"
 msgstr ""
 
-#: src/translations.h:730
+#: src/translations.h:732
 msgid ""
 "Creates 6 tiles (North/East/South/West/Up/Down) for a skybox. These can be "
 "further used e.g. in Unity3D or other 3D environments. Output directory and "
@@ -8112,1472 +8121,1647 @@ msgid ""
 "to apply it to your projects."
 msgstr ""
 
-#: src/translations.h:731
+#: src/translations.h:733
 msgid ""
 "This script will help you make practical works for celestial navigation - he"
 " sets a random location and hides it from the GUI."
 msgstr ""
 
-#: src/translations.h:735
+#: src/translations.h:737
 msgid "&Undo"
 msgstr ""
 
-#: src/translations.h:736
+#: src/translations.h:738
 msgid "&Redo"
 msgstr ""
 
-#: src/translations.h:737
+#: src/translations.h:739
 msgid "Cu&t"
 msgstr ""
 
-#: src/translations.h:738
+#: src/translations.h:740
 msgid "&Copy"
 msgstr ""
 
-#: src/translations.h:739
+#: src/translations.h:741
 msgid "&Paste"
 msgstr ""
 
-#: src/translations.h:740 plugins/Oculars/src/ui_ocularDialog.h:1542
+#: src/translations.h:742 plugins/Oculars/src/ui_ocularDialog.h:1542
 #: plugins/Oculars/src/ui_ocularDialog.h:1551
 #: plugins/Oculars/src/ui_ocularDialog.h:1557
 #: plugins/Oculars/src/ui_ocularDialog.h:1576
 msgid "Delete"
 msgstr ""
 
-#: src/translations.h:741
+#: src/translations.h:743
 msgid "Select All"
 msgstr ""
 
-#: src/translations.h:742
+#: src/translations.h:744
 msgid "Look in:"
 msgstr ""
 
-#: src/translations.h:743
+#: src/translations.h:745
 msgid "Directory:"
 msgstr ""
 
-#: src/translations.h:744
+#: src/translations.h:746
 msgid "Folder"
 msgstr ""
 
-#: src/translations.h:745
+#: src/translations.h:747
 msgid "&Choose"
 msgstr ""
 
-#: src/translations.h:746 src/ui_configurationDialog.h:1875
+#: src/translations.h:748 src/ui_configurationDialog.h:1875
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:644
 msgid "Cancel"
 msgstr ""
 
-#: src/translations.h:747
+#: src/translations.h:749
 msgid "&Cancel"
 msgstr ""
 
-#: src/translations.h:748
+#: src/translations.h:750
 msgid "Files of type:"
 msgstr ""
 
-#: src/translations.h:749
+#: src/translations.h:751
 msgid "Date Modified"
 msgstr ""
 
-#: src/translations.h:750
+#: src/translations.h:752
 msgid "Directories"
 msgstr ""
 
-#: src/translations.h:751
+#: src/translations.h:753
 msgid "Computer"
 msgstr ""
 
-#: src/translations.h:752
+#: src/translations.h:754
 msgid "&Open"
 msgstr ""
 
-#: src/translations.h:753
+#: src/translations.h:755
 msgid "&Save"
 msgstr ""
 
-#: src/translations.h:754
+#: src/translations.h:756
 msgid "File &name:"
 msgstr ""
 
-#: src/translations.h:755
+#: src/translations.h:757
 msgid "Copy &Link Location"
 msgstr ""
 
-#: src/translations.h:756
+#: src/translations.h:758
 msgid "Abort"
 msgstr ""
 
-#: src/translations.h:757
+#: src/translations.h:759
 msgid "Ignore"
 msgstr ""
 
-#: src/translations.h:758
+#: src/translations.h:760
 msgid "&Basic colors"
 msgstr ""
 
-#: src/translations.h:759
+#: src/translations.h:761
 msgid "&Pick Screen Color"
 msgstr ""
 
-#: src/translations.h:760
+#: src/translations.h:762
 msgid "&Custom colors"
 msgstr ""
 
-#: src/translations.h:761
+#: src/translations.h:763
 msgid "&Add to Custom Colors"
 msgstr ""
 
-#: src/translations.h:762
+#: src/translations.h:764
 msgid "Hu&e:"
 msgstr ""
 
-#: src/translations.h:763
+#: src/translations.h:765
 msgid "&Sat:"
 msgstr ""
 
-#: src/translations.h:764
+#: src/translations.h:766
 msgid "&Val:"
 msgstr ""
 
-#: src/translations.h:765
+#: src/translations.h:767
 msgid "&Red:"
 msgstr ""
 
-#: src/translations.h:766
+#: src/translations.h:768
 msgid "&Green:"
 msgstr ""
 
-#: src/translations.h:767
+#: src/translations.h:769
 msgid "Bl&ue:"
 msgstr ""
 
-#: src/translations.h:768
+#: src/translations.h:770
 msgid "Select Color"
 msgstr ""
 
-#: src/translations.h:769
+#: src/translations.h:771
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr ""
 
-#: src/translations.h:770
+#: src/translations.h:772
 msgid "Back"
 msgstr ""
 
-#: src/translations.h:771
+#: src/translations.h:773
 msgid "Forward"
 msgstr ""
 
-#: src/translations.h:772
+#: src/translations.h:774
 msgid "Parent Directory"
 msgstr ""
 
-#: src/translations.h:773
+#: src/translations.h:775
 msgid "Create New Folder"
 msgstr ""
 
-#: src/translations.h:774
+#: src/translations.h:776
 msgid "List View"
 msgstr ""
 
-#: src/translations.h:775
+#: src/translations.h:777
 msgid "Detail View"
 msgstr ""
 
-#: src/translations.h:776
+#: src/translations.h:778
 msgid "Recent Places"
 msgstr ""
 
-#: src/translations.h:777
+#: src/translations.h:779
 #, qt-format
 msgid ""
 "%1 already exists.\n"
 "Do you want to replace it?"
 msgstr ""
 
-#: src/translations.h:778
+#: src/translations.h:780
 msgid "&Yes"
 msgstr ""
 
-#: src/translations.h:779
+#: src/translations.h:781
 msgid "&No"
 msgstr ""
 
-#: src/translations.h:780
+#: src/translations.h:782
 msgid "&Select All"
 msgstr ""
 
-#: src/translations.h:781
+#: src/translations.h:783
 msgid "&Step up"
 msgstr ""
 
-#: src/translations.h:782
+#: src/translations.h:784
 msgid "Step &down"
 msgstr ""
 
-#: src/translations.h:783
+#: src/translations.h:785
 msgid "&Rename"
 msgstr ""
 
-#: src/translations.h:784
+#: src/translations.h:786
 msgid "&Delete"
 msgstr ""
 
-#: src/translations.h:785
+#: src/translations.h:787
 msgid "&New Folder"
 msgstr ""
 
-#: src/translations.h:786
+#: src/translations.h:788
 msgid "Show &hidden files"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Andorra
-#: src/translations_countries.h:32
-msgid "Andorra"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/North_Africa
+#: src/translations_regions.h:33
+msgid "Northern Africa"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/United_Arab_Emirates
-#: src/translations_countries.h:34
-msgid "United Arab Emirates"
-msgstr "Аморатҳои Муттаҳидаи Арабӣ"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Afghanistan
-#: src/translations_countries.h:36
-msgid "Afghanistan"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/East_Africa
+#: src/translations_regions.h:36
+msgid "Eastern Africa"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Antigua_&_Barbuda
-#: src/translations_countries.h:38
-msgid "Antigua and Barbuda"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Central_Africa
+#: src/translations_regions.h:39
+msgid "Central Africa"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Anguilla
-#: src/translations_countries.h:40
-msgid "Anguilla"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Southern_Africa
+#: src/translations_regions.h:42
+msgid "Southern Africa"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Albania
-#: src/translations_countries.h:42
-msgid "Albania"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/West_Africa
+#: src/translations_regions.h:45
+msgid "Western Africa"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Armenia
-#: src/translations_countries.h:44
-msgid "Armenia"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Caribbean
+#: src/translations_regions.h:48
+msgid "Caribbean"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Angola
-#: src/translations_countries.h:46
-msgid "Angola"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Central_America
+#: src/translations_regions.h:51
+msgid "Central America"
 msgstr ""
 
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/South_America
+#: src/translations_regions.h:54
+msgid "Southern America"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Northern_America
+#: src/translations_regions.h:57
+msgid "Northern America"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Antarctica
-#: src/translations_countries.h:48
+#: src/translations_regions.h:60
 msgid "Antarctica"
 msgstr "Антарктика"
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Argentina
-#: src/translations_countries.h:50
-msgid "Argentina"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/North_Asia
+#: src/translations_regions.h:63
+msgid "Northern Asia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/American_Samoa
-#: src/translations_countries.h:52
-msgid "Samoa (American)"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Central_Asia
+#: src/translations_regions.h:66
+msgid "Central Asia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Austria
-#: src/translations_countries.h:54
-msgid "Austria"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Eastern_Asia
+#: src/translations_regions.h:69
+msgid "Eastern Asia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Australia
-#: src/translations_countries.h:56
-msgid "Australia"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Southeast_Asia
+#: src/translations_regions.h:72
+msgid "South-eastern Asia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Aruba
-#: src/translations_countries.h:58
-msgid "Aruba"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/South_Asia
+#: src/translations_regions.h:75
+msgid "Southern Asia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Åland_Islands
-#: src/translations_countries.h:60
-msgid "Åland Islands"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Western_Asia
+#: src/translations_regions.h:78
+msgid "Western Asia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Azerbaijan
-#: src/translations_countries.h:62
-msgid "Azerbaijan"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Eastern_Europe
+#: src/translations_regions.h:81
+msgid "Eastern Europe"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Bosnia_&_Herzegovina
-#: src/translations_countries.h:64
-msgid "Bosnia and Herzegovina"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Northern_Europe
+#: src/translations_regions.h:84
+msgid "Northern Europe"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Barbados
-#: src/translations_countries.h:66
-msgid "Barbados"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Southern_Europe
+#: src/translations_regions.h:87
+msgid "Southern Europe"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Bangladesh
-#: src/translations_countries.h:68
-msgid "Bangladesh"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Western_Europe
+#: src/translations_regions.h:90
+msgid "Western Europe"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Belgium
-#: src/translations_countries.h:70
-msgid "Belgium"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Australasia
+#: src/translations_regions.h:93
+msgid "Australasia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Burkina_Faso
-#: src/translations_countries.h:72
-msgid "Burkina Faso"
-msgstr "Буркина-Фассо"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Bulgaria
-#: src/translations_countries.h:74
-msgid "Bulgaria"
-msgstr "Болғория"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Bahrain
-#: src/translations_countries.h:76
-msgid "Bahrain"
-msgstr "Баҳраин"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Burundi
-#: src/translations_countries.h:78
-msgid "Burundi"
-msgstr "Бурундии"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Benin
-#: src/translations_countries.h:80
-msgid "Benin"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Melanesia
+#: src/translations_regions.h:96
+msgid "Melanesia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/St._Barthélemy
-#: src/translations_countries.h:82
-msgid "St Barthelemy"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Bermuda
-#: src/translations_countries.h:84
-msgid "Bermuda"
-msgstr "Ҷазираҳои Бермуд"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Brunei
-#: src/translations_countries.h:86
-msgid "Brunei"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Bolivia
-#: src/translations_countries.h:88
-msgid "Bolivia"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Caribbean_Netherlands
-#: src/translations_countries.h:90
-msgid "Bonaire, Sint Eustatius and Saba"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Brazil
-#: src/translations_countries.h:92
-msgid "Brazil"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Bahamas
-#: src/translations_countries.h:94
-msgid "Bahamas"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Bhutan
-#: src/translations_countries.h:96
-msgid "Bhutan"
-msgstr "Бутан"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Bouvet_Island
-#: src/translations_countries.h:98
-msgid "Bouvet Island"
-msgstr "Ҷазираҳои Буве"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Botswana
-#: src/translations_countries.h:100
-msgid "Botswana"
-msgstr "Боствана"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Belarus
-#: src/translations_countries.h:102
-msgid "Belarus"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Belize
-#: src/translations_countries.h:104
-msgid "Belize"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Canada
-#: src/translations_countries.h:106
-msgid "Canada"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Cocos_(Keeling)_Islands
-#: src/translations_countries.h:108
-msgid "Cocos (Keeling) Islands"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Congo_(DRC)
-#: src/translations_countries.h:110
-msgid "Congo (Dem. Rep.)"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Central_African_Republic
-#: src/translations_countries.h:112
-msgid "Central African Rep."
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Congo_(Republic)
-#: src/translations_countries.h:114
-msgid "Congo"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Switzerland
-#: src/translations_countries.h:116
-msgid "Switzerland"
-msgstr "Швейцария"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Ivory_Coast
-#: src/translations_countries.h:118
-msgid "Côte d'Ivoire"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Cook_Islands
-#: src/translations_countries.h:120
-msgid "Cook Islands"
-msgstr "Ҷазираҳои Кук"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Chile
-#: src/translations_countries.h:122
-msgid "Chile"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Cameroon
-#: src/translations_countries.h:124
-msgid "Cameroon"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/China
-#: src/translations_countries.h:126
-msgid "China"
-msgstr "Чин"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Colombia
-#: src/translations_countries.h:128
-msgid "Colombia"
-msgstr "Коломбия"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Costa_Rica
-#: src/translations_countries.h:130
-msgid "Costa Rica"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Cuba
-#: src/translations_countries.h:132
-msgid "Cuba"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Cape_Verde
-#: src/translations_countries.h:134
-msgid "Cabo Verde"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Curaçao
-#: src/translations_countries.h:136
-msgid "Curaçao"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Christmas_Island
-#: src/translations_countries.h:138
-msgid "Christmas Island"
-msgstr "ҷ. Мавлуди Исо"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Cyprus
-#: src/translations_countries.h:140
-msgid "Cyprus"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Czech_Republic
-#: src/translations_countries.h:142
-msgid "Czechia"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Germany
-#: src/translations_countries.h:144
-msgid "Germany"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Djibouti
-#: src/translations_countries.h:146
-msgid "Djibouti"
-msgstr "Джибути"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Denmark
-#: src/translations_countries.h:148
-msgid "Denmark"
-msgstr "Денмарк"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Dominica
-#: src/translations_countries.h:150
-msgid "Dominica"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Dominican_Republic
-#: src/translations_countries.h:152
-msgid "Dominican Republic"
-msgstr "Ҷумҳурии Доминикан"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Algeria
-#: src/translations_countries.h:154
-msgid "Algeria"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Ecuador
-#: src/translations_countries.h:156
-msgid "Ecuador"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Estonia
-#: src/translations_countries.h:158
-msgid "Estonia"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Egypt
-#: src/translations_countries.h:160
-msgid "Egypt"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Western_Sahara
-#: src/translations_countries.h:162
-msgid "Western Sahara"
-msgstr "Саҳрои Шарқӣ"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Eritrea
-#: src/translations_countries.h:164
-msgid "Eritrea"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Spain
-#: src/translations_countries.h:166
-msgid "Spain"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Ethiopia
-#: src/translations_countries.h:168
-msgid "Ethiopia"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Finland
-#: src/translations_countries.h:170
-msgid "Finland"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Fiji
-#: src/translations_countries.h:172
-msgid "Fiji"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Falkland_Islands
-#: src/translations_countries.h:174
-msgid "Falkland Islands (Malvinas)"
-msgstr ""
-
+#. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Micronesia
-#: src/translations_countries.h:176
+#: src/translations_regions.h:99
 msgid "Micronesia"
 msgstr "Микронезия"
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Faroe_Islands
-#: src/translations_countries.h:178
-msgid "Faroe Islands"
-msgstr "Ҷазираи Фарер"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/France
-#: src/translations_countries.h:180
-msgid "France"
-msgstr "Франсия"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Gabon
-#: src/translations_countries.h:182
-msgid "Gabon"
+#. TRANSLATORS: Name of region on Earth
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Polynesia
+#: src/translations_regions.h:102
+msgid "Polynesia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/United_Kingdom
-#: src/translations_countries.h:184
-msgid "Britain (UK)"
+#. TRANSLATORS: Name of region on Mercury
+#: src/translations_regions.h:104
+msgid "Aparangi Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Grenada
-#: src/translations_countries.h:186
-msgid "Grenada"
+#. TRANSLATORS: Name of region on Mercury
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Borealis_Planitia
+#: src/translations_regions.h:107
+msgid "Borealis Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Georgia
-#: src/translations_countries.h:188
-msgid "Georgia"
-msgstr "Ҷорҷия"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/French_Guiana
-#: src/translations_countries.h:190
-msgid "French Guiana"
-msgstr "Гуанаи Франсузӣ"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Guernsey
-#: src/translations_countries.h:192
-msgid "Guernsey"
+#. TRANSLATORS: Name of region on Mercury
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Budh_Planitia
+#: src/translations_regions.h:110
+msgid "Budh Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Ghana
-#: src/translations_countries.h:194
-msgid "Ghana"
+#. TRANSLATORS: Name of region on Mercury
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Caloris_Planitia
+#: src/translations_regions.h:113
+msgid "Caloris Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Gibraltar
-#: src/translations_countries.h:196
-msgid "Gibraltar"
-msgstr "Ҷабалуттарик"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Greenland
-#: src/translations_countries.h:198
-msgid "Greenland"
+#. TRANSLATORS: Name of region on Mercury
+#: src/translations_regions.h:115
+msgid "Lugus Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Gambia
-#: src/translations_countries.h:200
-msgid "Gambia"
+#. TRANSLATORS: Name of region on Mercury
+#: src/translations_regions.h:117
+msgid "Mearcair Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Guinea
-#: src/translations_countries.h:202
-msgid "Guinea"
+#. TRANSLATORS: Name of region on Mercury
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Odin_Planitia
+#: src/translations_regions.h:120
+msgid "Odin Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Guadeloupe
-#: src/translations_countries.h:204
-msgid "Guadeloupe"
+#. TRANSLATORS: Name of region on Mercury
+#: src/translations_regions.h:122
+msgid "Otaared Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Equatorial_Guinea
-#: src/translations_countries.h:206
-msgid "Equatorial Guinea"
-msgstr "Гвинеяи Экваториалӣ"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Greece
-#: src/translations_countries.h:208
-msgid "Greece"
+#. TRANSLATORS: Name of region on Mercury
+#: src/translations_regions.h:124
+msgid "Papsukkal Planitia"
 msgstr ""
 
+#. TRANSLATORS: Name of region on Mercury
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Sihtu_Planitia
+#: src/translations_regions.h:127
+msgid "Sihtu Planitia"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Mercury
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Sobkou_Planitia
+#: src/translations_regions.h:130
+msgid "Sobkou Planitia"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Mercury
+#: src/translations_regions.h:132
+msgid "Stilbon Planitia"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Mercury
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Suisei_Planitia
+#: src/translations_regions.h:135
+msgid "Suisei Planitia"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Mercury
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Tir_Planitia
+#: src/translations_regions.h:138
+msgid "Tir Planitia"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Mercury
+#: src/translations_regions.h:140
+msgid "Turms Planitia"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Mercury
+#: src/translations_regions.h:142
+msgid "Utaridi Planitia"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Mercury
+#: src/translations_regions.h:144
+msgid "Catuilla Planum"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Aphrodite_Terra
+#: src/translations_regions.h:147
+msgid "Aphrodite Terra"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Ishtar_Terra
+#: src/translations_regions.h:150
+msgid "Ishtar Terra"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Lada_Terra
+#: src/translations_regions.h:153
+msgid "Lada Terra"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Alpha_Regio
+#: src/translations_regions.h:156
+msgid "Alpha Regio"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Asteria_Regio
+#: src/translations_regions.h:159
+msgid "Asteria Regio"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
-#. https://en.wikipedia.org/wiki/South_Georgia_&_South_Sandwich_Islands
-#: src/translations_countries.h:210
-msgid "South Georgia and the South Sandwich Islands"
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:162
+msgid "Atla Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Guatemala
-#: src/translations_countries.h:212
-msgid "Guatemala"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:165
+msgid "Bell Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Guam
-#: src/translations_countries.h:214
-msgid "Guam"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Beta_Regio
+#: src/translations_regions.h:168
+msgid "Beta Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Guinea-Bissau
-#: src/translations_countries.h:216
-msgid "Guinea-Bissau"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:171
+msgid "Dione Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Guyana
-#: src/translations_countries.h:218
-msgid "Guyana"
-msgstr "Гуана"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Hong_Kong
-#: src/translations_countries.h:220
-msgid "Hong Kong"
-msgstr "Гонконг"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Heard_&_McDonald_Islands
-#: src/translations_countries.h:222
-msgid "Heard Island and McDonald Islands"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Honduras
-#: src/translations_countries.h:224
-msgid "Honduras"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Croatia
-#: src/translations_countries.h:226
-msgid "Croatia"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Haiti
-#: src/translations_countries.h:228
-msgid "Haiti"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Hungary
-#: src/translations_countries.h:230
-msgid "Hungary"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Indonesia
-#: src/translations_countries.h:232
-msgid "Indonesia"
-msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Ireland
-#: src/translations_countries.h:234
-msgid "Ireland"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:174
+msgid "Dsonkwa Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Israel
-#: src/translations_countries.h:236
-msgid "Israel"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:177
+msgid "Eistla Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Isle_of_Man
-#: src/translations_countries.h:238
-msgid "Isle of Man"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:180
+msgid "Hyndla Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/India
-#: src/translations_countries.h:240
-msgid "India"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:183
+msgid "Imdr Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/British_Indian_Ocean_Territory
-#: src/translations_countries.h:242
-msgid "British Indian Ocean Territory"
-msgstr "Территорияи Британия ин Уқьёнусии Хинд"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Iraq
-#: src/translations_countries.h:244
-msgid "Iraq"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:186
+msgid "Ishkus Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Iran
-#: src/translations_countries.h:246
-msgid "Iran"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:189
+msgid "Laufey Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Iceland
-#: src/translations_countries.h:248
-msgid "Iceland"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:192
+msgid "Neringa Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Italy
-#: src/translations_countries.h:250
-msgid "Italy"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Ovda_Regio
+#: src/translations_regions.h:195
+msgid "Ovda Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Jersey
-#: src/translations_countries.h:252
-msgid "Jersey"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Phoebe_Regio
+#: src/translations_regions.h:198
+msgid "Phoebe Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Jamaica
-#: src/translations_countries.h:254
-msgid "Jamaica"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:201
+msgid "Themis Regio"
 msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Jordan
-#: src/translations_countries.h:256
-msgid "Jordan"
-msgstr "Ӯрдон"
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Japan
-#: src/translations_countries.h:258
-msgid "Japan"
-msgstr "Япония"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Kenya
-#: src/translations_countries.h:260
-msgid "Kenya"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:204
+msgid "Thetis Regio"
 msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Kyrgyzstan
-#: src/translations_countries.h:262
-msgid "Kyrgyzstan"
-msgstr "Кирғизстон"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Cambodia
-#: src/translations_countries.h:264
-msgid "Cambodia"
-msgstr "Комбоҷа"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Kiribati
-#: src/translations_countries.h:266
-msgid "Kiribati"
-msgstr "Кирибати"
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Comoros
-#: src/translations_countries.h:268
-msgid "Comoros"
-msgstr "Ҷазираҳои Камар"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/St._Kitts_&_Nevis
-#: src/translations_countries.h:270
-msgid "St Kitts and Nevis"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:207
+msgid "Ulfrun Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/North_Korea
-#: src/translations_countries.h:272
-msgid "Korea (North)"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:210
+msgid "Vasilisa Regio"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/South_Korea
-#: src/translations_countries.h:274
-msgid "Korea (South)"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:213
+msgid "Aibarchin Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Kuwait
-#: src/translations_countries.h:276
-msgid "Kuwait"
-msgstr "Кувайт"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Cayman_Islands
-#: src/translations_countries.h:278
-msgid "Cayman Islands"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:216
+msgid "Aino Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Kazakhstan
-#: src/translations_countries.h:280
-msgid "Kazakhstan"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:219
+msgid "Akhtamar Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Laos
-#: src/translations_countries.h:282
-msgid "Laos"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:222
+msgid "Alma-Merghen Planitia"
 msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Lebanon
-#: src/translations_countries.h:284
-msgid "Lebanon"
-msgstr "Ливан"
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/St._Lucia
-#: src/translations_countries.h:286
-msgid "St Lucia"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:225
+msgid "Atalanta Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Liechtenstein
-#: src/translations_countries.h:288
-msgid "Liechtenstein"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:228
+msgid "Audra Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Sri_Lanka
-#: src/translations_countries.h:290
-msgid "Sri Lanka"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:231
+msgid "Bereghinya Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Liberia
-#: src/translations_countries.h:292
-msgid "Liberia"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:234
+msgid "Dzerassa Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Lesotho
-#: src/translations_countries.h:294
-msgid "Lesotho"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:237
+msgid "Fonueha Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Lithuania
-#: src/translations_countries.h:296
-msgid "Lithuania"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:240
+msgid "Ganiki Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Luxembourg
-#: src/translations_countries.h:298
-msgid "Luxembourg"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Guinevere_Planitia
+#: src/translations_regions.h:243
+msgid "Guinevere Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Latvia
-#: src/translations_countries.h:300
-msgid "Latvia"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:246
+msgid "Gunda Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Libya
-#: src/translations_countries.h:302
-msgid "Libya"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:249
+msgid "Helen Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Morocco
-#: src/translations_countries.h:304
-msgid "Morocco"
-msgstr "Морокко"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Monaco
-#: src/translations_countries.h:306
-msgid "Monaco"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:252
+msgid "Hinemoa Planitia"
 msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Moldova
-#: src/translations_countries.h:308
-msgid "Moldova"
-msgstr "Малдав"
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Montenegro
-#: src/translations_countries.h:310
-msgid "Montenegro"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:255
+msgid "Imapinua Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/St._Martin
-#: src/translations_countries.h:312
-msgid "St Martin (French)"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:258
+msgid "Kanykey Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Madagascar
-#: src/translations_countries.h:314
-msgid "Madagascar"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:261
+msgid "Kawelu Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Marshall_Islands
-#: src/translations_countries.h:316
-msgid "Marshall Islands"
-msgstr "Ҷазираҳои Маршалл"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Macedonia
-#: src/translations_countries.h:318
-msgid "North Macedonia"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:264
+msgid "Laimdota Planitia"
 msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Mali
-#: src/translations_countries.h:320
-msgid "Mali"
-msgstr "Мали"
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Myanmar_(Burma)
-#: src/translations_countries.h:322
-msgid "Myanmar (Burma)"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:267
+msgid "Lavinia Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Mongolia
-#: src/translations_countries.h:324
-msgid "Mongolia"
-msgstr "Монголия"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Macau
-#: src/translations_countries.h:326
-msgid "Macao"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:270
+msgid "Leda Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Northern_Mariana_Islands
-#: src/translations_countries.h:328
-msgid "Northern Mariana Islands"
-msgstr "Ҷазираҳои Шимолии Маршал"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Martinique
-#: src/translations_countries.h:330
-msgid "Martinique"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:273
+msgid "Libuse Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Mauritania
-#: src/translations_countries.h:332
-msgid "Mauritania"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:276
+msgid "Llorona Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Montserrat
-#: src/translations_countries.h:334
-msgid "Montserrat"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:279
+msgid "Louhi Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Malta
-#: src/translations_countries.h:336
-msgid "Malta"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:282
+msgid "Lowana Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Mauritius
-#: src/translations_countries.h:338
-msgid "Mauritius"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:285
+msgid "Mugazo Planitia"
 msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Maldives
-#: src/translations_countries.h:340
-msgid "Maldives"
-msgstr "Ҷазираҳои  Малдив"
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Malawi
-#: src/translations_countries.h:342
-msgid "Malawi"
-msgstr "Малави"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Mexico
-#: src/translations_countries.h:344
-msgid "Mexico"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:288
+msgid "Navka Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Malaysia
-#: src/translations_countries.h:346
-msgid "Malaysia"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:291
+msgid "Niobe Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Mozambique
-#: src/translations_countries.h:348
-msgid "Mozambique"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:294
+msgid "Nsomeka Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Namibia
-#: src/translations_countries.h:350
-msgid "Namibia"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:297
+msgid "Nuptadi Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/New_Caledonia
-#: src/translations_countries.h:352
-msgid "New Caledonia"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:300
+msgid "Rusalka Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Niger
-#: src/translations_countries.h:354
-msgid "Niger"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Sedna_Planitia
+#: src/translations_regions.h:303
+msgid "Sedna Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Norfolk_Island
-#: src/translations_countries.h:356
-msgid "Norfolk Island"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:306
+msgid "Snegurochka Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Nigeria
-#: src/translations_countries.h:358
-msgid "Nigeria"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:309
+msgid "Sogolon Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Nicaragua
-#: src/translations_countries.h:360
-msgid "Nicaragua"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:312
+msgid "Tahmina Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Netherlands
-#: src/translations_countries.h:362
-msgid "Netherlands"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:315
+msgid "Tilli-Hanum Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Norway
-#: src/translations_countries.h:364
-msgid "Norway"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:318
+msgid "Tinatin Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Nepal
-#: src/translations_countries.h:366
-msgid "Nepal"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:321
+msgid "Undine Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Nauru
-#: src/translations_countries.h:368
-msgid "Nauru"
-msgstr "Наури"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Niue
-#: src/translations_countries.h:370
-msgid "Niue"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:324
+msgid "Vellamo Planitia"
 msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/New_Zealand
-#: src/translations_countries.h:372
-msgid "New Zealand"
-msgstr "Зеландия Нав"
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Oman
-#: src/translations_countries.h:374
-msgid "Oman"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:327
+msgid "Vinmara Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Panama
-#: src/translations_countries.h:376
-msgid "Panama"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:330
+msgid "Wawalag Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Peru
-#: src/translations_countries.h:378
-msgid "Peru"
+#. TRANSLATORS: Name of region on Venus
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
+#: src/translations_regions.h:333
+msgid "Zhibek Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/French_Polynesia
-#: src/translations_countries.h:380
-msgid "French Polynesia"
-msgstr "Полинезияи Фрасиягӣ"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Papua_New_Guinea
-#: src/translations_countries.h:382
-msgid "Papua New Guinea"
-msgstr "Папуа-Гвинеяи Нав"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Philippines
-#: src/translations_countries.h:384
-msgid "Philippines"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Oceanus_Procellarum
+#: src/translations_regions.h:337
+msgid "Ocean of Storms"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Pakistan
-#: src/translations_countries.h:386
-msgid "Pakistan"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Anguis
+#: src/translations_regions.h:341
+msgid "Serpent Sea"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Poland
-#: src/translations_countries.h:388
-msgid "Poland"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Australe
+#: src/translations_regions.h:345
+msgid "Southern Sea"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/St._Pierre_&_Miquelon
-#: src/translations_countries.h:390
-msgid "St Pierre and Miquelon"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Cognitum
+#: src/translations_regions.h:349
+msgid "Sea of Knowledge"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Pitcairn_Islands
-#: src/translations_countries.h:392
-msgid "Pitcairn"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Crisium
+#: src/translations_regions.h:353
+msgid "Sea of Crises"
 msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Puerto_Rico
-#: src/translations_countries.h:394
-msgid "Puerto Rico"
-msgstr "Пуэрто-Рико"
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Palestine
-#: src/translations_countries.h:396
-msgid "Palestine"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Fecunditatis
+#: src/translations_regions.h:357
+msgid "Sea of Fecundity"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Portugal
-#: src/translations_countries.h:398
-msgid "Portugal"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Frigoris
+#: src/translations_regions.h:361
+msgid "Sea of Cold"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Palau
-#: src/translations_countries.h:400
-msgid "Palau"
-msgstr "Палау"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Paraguay
-#: src/translations_countries.h:402
-msgid "Paraguay"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Humboldtianum
+#: src/translations_regions.h:365
+msgid "Sea of Humboldt"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Qatar
-#: src/translations_countries.h:404
-msgid "Qatar"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Humorum
+#: src/translations_regions.h:369
+msgid "Sea of Moisture"
 msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Réunion
-#: src/translations_countries.h:406
-msgid "Réunion"
-msgstr "Ренион"
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Romania
-#: src/translations_countries.h:408
-msgid "Romania"
-msgstr "Румыния"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Serbia
-#: src/translations_countries.h:410
-msgid "Serbia"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Imbrium
+#: src/translations_regions.h:373
+msgid "Sea of Rains"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Russia
-#: src/translations_countries.h:412
-msgid "Russian Federation"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Ingenii
+#: src/translations_regions.h:377
+msgid "Sea of Cleverness"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Rwanda
-#: src/translations_countries.h:414
-msgid "Rwanda"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Insularum
+#: src/translations_regions.h:381
+msgid "Sea of Islands"
 msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Saudi_Arabia
-#: src/translations_countries.h:416
-msgid "Saudi Arabia"
-msgstr "Арабистони Суудӣ"
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Solomon_Islands
-#: src/translations_countries.h:418
-msgid "Solomon Islands"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Marginis
+#: src/translations_regions.h:385
+msgid "Sea of the Edge"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Seychelles
-#: src/translations_countries.h:420
-msgid "Seychelles"
-msgstr "ҷ. Сейшели"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Sudan
-#: src/translations_countries.h:422
-msgid "Sudan"
-msgstr "Судан"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Sweden
-#: src/translations_countries.h:424
-msgid "Sweden"
-msgstr "Швесия"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Singapore
-#: src/translations_countries.h:426
-msgid "Singapore"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Moscoviense
+#: src/translations_regions.h:389
+msgid "Sea of Moscow"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/St._Helena
-#: src/translations_countries.h:428
-msgid "St Helena, Ascension and Tristan da Cunha"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Nectaris
+#: src/translations_regions.h:393
+msgid "Sea of Nectar"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Slovenia
-#: src/translations_countries.h:430
-msgid "Slovenia"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Nubium
+#: src/translations_regions.h:397
+msgid "Sea of Clouds"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Svalbard_&_Jan_Mayen
-#: src/translations_countries.h:432
-msgid "Svalbard and Jan Mayen"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Orientale
+#: src/translations_regions.h:401
+msgid "Eastern sea"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Slovakia
-#: src/translations_countries.h:434
-msgid "Slovakia"
-msgstr "Ссловакия"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Sierra_Leone
-#: src/translations_countries.h:436
-msgid "Sierra Leone"
-msgstr "Серра Леона"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/San_Marino
-#: src/translations_countries.h:438
-msgid "San Marino"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Serenitatis
+#: src/translations_regions.h:405
+msgid "Sea of Serenity"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Senegal
-#: src/translations_countries.h:440
-msgid "Senegal"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Smythii
+#: src/translations_regions.h:409
+msgid "Smyth's Sea"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Somalia
-#: src/translations_countries.h:442
-msgid "Somalia"
-msgstr "Сомали"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Suriname
-#: src/translations_countries.h:444
-msgid "Suriname"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Spumans
+#: src/translations_regions.h:413
+msgid "Foaming Sea"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/South_Sudan
-#: src/translations_countries.h:446
-msgid "South Sudan"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Tranquillitatis
+#: src/translations_regions.h:417
+msgid "Sea of Tranquillity"
 msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/São_Tomé_&_Príncipe
-#: src/translations_countries.h:448
-msgid "Sao Tome and Principe"
-msgstr "Сан-Томе ва Принсипи"
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/El_Salvador
-#: src/translations_countries.h:450
-msgid "El Salvador"
-msgstr "Ал-Салвадор"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Sint_Maarten
-#: src/translations_countries.h:452
-msgid "St Maarten (Dutch)"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Undarum
+#: src/translations_regions.h:421
+msgid "Sea of Waves"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Syria
-#: src/translations_countries.h:454
-msgid "Syrian Arab Republic"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Vaporum
+#: src/translations_regions.h:425
+msgid "Sea of Vapors"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Swaziland
-#: src/translations_countries.h:456
-msgid "Eswatini"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:428
+msgid "Northern highlands"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Turks_&_Caicos_Islands
-#: src/translations_countries.h:458
-msgid "Turks and Caicos Islands"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Montes_Jura
+#: src/translations_regions.h:432
+msgid "Jura mountains"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Chad
-#: src/translations_countries.h:460
-msgid "Chad"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:435
+msgid "Alps province"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/French_Southern_Territories
-#: src/translations_countries.h:462
-msgid "French Southern Territories"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:438
+msgid "Caucasus province"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Togo
-#: src/translations_countries.h:464
-msgid "Togo"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Lacus_Somniorum
+#: src/translations_regions.h:442
+msgid "Lake of Dreams"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Thailand
-#: src/translations_countries.h:466
-msgid "Thailand"
-msgstr "Тайланд"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Tajikistan
-#: src/translations_countries.h:468
-msgid "Tajikistan"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Montes_Taurus
+#: src/translations_regions.h:446
+msgid "Taurus mountains"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Tokelau
-#: src/translations_countries.h:470
-msgid "Tokelau"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Sinus_Roris
+#: src/translations_regions.h:450
+msgid "Bay of Dew"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/East_Timor
-#: src/translations_countries.h:472
-msgid "Timor-Leste"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:453
+msgid "Apennines province"
 msgstr ""
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Turkmenistan
-#: src/translations_countries.h:474
-msgid "Turkmenistan"
-msgstr "Туркменистон"
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Tunisia
-#: src/translations_countries.h:476
-msgid "Tunisia"
-msgstr "Тунисия"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Tonga
-#: src/translations_countries.h:478
-msgid "Tonga"
-msgstr "Тонгавӣ"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Turkey
-#: src/translations_countries.h:480
-msgid "Turkey"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:456
+msgid "Carpatian province"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Trinidad_&_Tobago
-#: src/translations_countries.h:482
-msgid "Trinidad and Tobago"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Sinus_Aestuum
+#: src/translations_regions.h:460
+msgid "Seething Bay"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Tuvalu
-#: src/translations_countries.h:484
-msgid "Tuvalu"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:463
+msgid "Aestuum upland"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Taiwan
-#: src/translations_countries.h:486
-msgid "Taiwan (Province of China)"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:466
+msgid "Haemus province"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Tanzania
-#: src/translations_countries.h:488
-msgid "United Republic of Tanzania"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:469
+msgid "Procellarum upland"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Ukraine
-#: src/translations_countries.h:490
-msgid "Ukraine"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:472
+msgid "Central crater province"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Uganda
-#: src/translations_countries.h:492
-msgid "Uganda"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:475
+msgid "Macro-crater province"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/U.S._Outlying_Islands
-#: src/translations_countries.h:494
-msgid "US Minor Outlying Islands"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:478
+msgid "Southeastern crater province"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/United_States
-#: src/translations_countries.h:496
-msgid "United States of America"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:481
+msgid "Cratered plain province"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Uruguay
-#: src/translations_countries.h:498
-msgid "Uruguay"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:484
+msgid "Southwestern crater province"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Uzbekistan
-#: src/translations_countries.h:500
-msgid "Uzbekistan"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:487
+msgid "Nectaris crater province"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Vatican_City
-#: src/translations_countries.h:502
-msgid "Holy See"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:490
+msgid "Pyrenees province"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/St._Vincent_&_Grenadines
-#: src/translations_countries.h:504
-msgid "St Vincent and the Grenadines"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:493
+msgid "Western highlands"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Venezuela
-#: src/translations_countries.h:506
-msgid "Venezuela"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:496
+msgid "Eastern highlands"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/British_Virgin_Islands
-#: src/translations_countries.h:508
-msgid "Virgin Islands (British)"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Sinus_Medii
+#: src/translations_regions.h:500
+msgid "Bay of the center"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/U.S._Virgin_Islands
-#: src/translations_countries.h:510
-msgid "Virgin Islands (U.S.)"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Palus_Epidemiarum
+#: src/translations_regions.h:504
+msgid "Marsh of Epidemics"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Vietnam
-#: src/translations_countries.h:512
-msgid "Viet Nam"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:507
+msgid "Far-side southern lowland"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Vanuatu
-#: src/translations_countries.h:514
-msgid "Vanuatu"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:510
+msgid "Far-side northern lowland"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Wallis_&_Futuna
-#: src/translations_countries.h:516
-msgid "Wallis and Futuna"
+#. TRANSLATORS: Name of region on the Moon
+#. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
+#. https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map
+#. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
+#: src/translations_regions.h:513
+msgid "Far-side central highland"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Samoa
-#: src/translations_countries.h:518
-msgid "Samoa"
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional
+#. feature names:
+#. https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Acidalia_Planitia
+#: src/translations_regions.h:517
+msgid "Acidalia Planitia"
 msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Yemen
-#: src/translations_countries.h:520
-msgid "Yemen"
-msgstr "Йемен"
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional
+#. feature names:
+#. https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Amazonis_Planitia
+#: src/translations_regions.h:521
+msgid "Amazonis Planitia"
+msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Mayotte
-#: src/translations_countries.h:522
-msgid "Mayotte"
-msgstr "Майотта"
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional
+#. feature names:
+#. https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Arcadia_Planitia
+#: src/translations_regions.h:525
+msgid "Arcadia Planitia"
+msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/South_Africa
-#: src/translations_countries.h:524
-msgid "South Africa"
-msgstr "Африкои Ҷанубӣ"
-
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Zambia
-#: src/translations_countries.h:526
-msgid "Zambia"
-msgstr ""
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional
+#. feature names:
+#. https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Argyre_Planitia
+#: src/translations_regions.h:529
+msgid "Argyre Planitia"
+msgstr ""
 
-#. TRANSLATORS: https://en.wikipedia.org/wiki/Zimbabwe
-#: src/translations_countries.h:528
-msgid "Zimbabwe"
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional
+#. feature names:
+#. https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Chryse_Planitia
+#: src/translations_regions.h:533
+msgid "Chryse Planitia"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional
+#. feature names:
+#. https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Elysium_Planitia
+#: src/translations_regions.h:537
+msgid "Elysium Planitia"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional
+#. feature names:
+#. https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Eridania_Planitia
+#: src/translations_regions.h:541
+msgid "Eridania Planitia"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional
+#. feature names:
+#. https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Hellas_Planitia
+#: src/translations_regions.h:545
+msgid "Hellas Planitia"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional
+#. feature names:
+#. https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Isidis_Planitia
+#: src/translations_regions.h:549
+msgid "Isidis Planitia"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional
+#. feature names:
+#. https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Utopia_Planitia
+#: src/translations_regions.h:553
+msgid "Utopia Planitia"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional
+#. feature names:
+#. https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Aonia_Terra
+#: src/translations_regions.h:557
+msgid "Aonia Terra"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional
+#. feature names:
+#. https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Arabia_Terra
+#: src/translations_regions.h:561
+msgid "Arabia Terra"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional
+#. feature names:
+#. https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Margaritifer_Terra
+#: src/translations_regions.h:565
+msgid "Margaritifer Terra"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional
+#. feature names:
+#. https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Noachis_Terra
+#: src/translations_regions.h:569
+msgid "Noachis Terra"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional
+#. feature names:
+#. https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Promethei_Terra
+#: src/translations_regions.h:573
+msgid "Promethei Terra"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional
+#. feature names:
+#. https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Tempe_Terra
+#: src/translations_regions.h:577
+msgid "Tempe Terra"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional
+#. feature names:
+#. https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Terra_Cimmeria
+#: src/translations_regions.h:581
+msgid "Terra Cimmeria"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional
+#. feature names:
+#. https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Terra_Sabaea
+#: src/translations_regions.h:585
+msgid "Terra Sabaea"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional
+#. feature names:
+#. https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Terra_Sirenum
+#: src/translations_regions.h:589
+msgid "Terra Sirenum"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional
+#. feature names:
+#. https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Tyrrhena_Terra
+#: src/translations_regions.h:593
+msgid "Tyrrhena Terra"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional
+#. feature names:
+#. https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Xanthe_Terra
+#: src/translations_regions.h:597
+msgid "Xanthe Terra"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional
+#. feature names:
+#. https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Vastitas_Borealis
+#: src/translations_regions.h:601
+msgid "Vastitas Borealis"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional
+#. feature names:
+#. https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Tharsis
+#: src/translations_regions.h:605
+msgid "Tharsis"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional
+#. feature names:
+#. https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Planum_Boreum
+#: src/translations_regions.h:609
+msgid "Planum Boreum"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional
+#. feature names:
+#. https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Planum_Australe
+#: src/translations_regions.h:613
+msgid "Planum Australe"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Mars
+#. TRANSLATORS: See also MOLA global image showing boundaries of regional
+#. feature names:
+#. https://planetarynames.wr.usgs.gov/images/mola_regional_boundaries.pdf
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Lunae_Palus_quadrangle
+#: src/translations_regions.h:617
+msgid "Lunae Planum"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Titan
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
+#: src/translations_regions.h:620
+msgid "Garotman Terra"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Titan
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
+#: src/translations_regions.h:623
+msgid "Tollan Terra"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Titan
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
+#: src/translations_regions.h:626
+msgid "Tsiipiya Terra"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Titan
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
+#: src/translations_regions.h:629
+msgid "Yalaing Terra"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Titan
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Xanadu_(Titan)
+#: src/translations_regions.h:632
+msgid "Xanadu"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Titan
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
+#: src/translations_regions.h:635
+msgid "Kraken Mare"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Titan
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
+#: src/translations_regions.h:638
+msgid "Ligeia Mare"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Titan
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
+#: src/translations_regions.h:641
+msgid "Punga Mare"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Titan
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
+#: src/translations_regions.h:644
+msgid "Concordia Regio"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Titan
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
+#: src/translations_regions.h:647
+msgid "Hetpet Regio"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Titan
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
+#: src/translations_regions.h:650
+msgid "Hotei Regio"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Titan
+#. TRANSLATORS:
+#. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
+#: src/translations_regions.h:653
+msgid "Ochumare Regio"
+msgstr ""
+
+#. TRANSLATORS: Name of region on Titan
+#. TRANSLATORS: https://en.wikipedia.org/wiki/Tui_Regio
+#: src/translations_regions.h:656
+msgid "Tui Regio"
 msgstr ""
 
 #: src/ui_dateTimeDialogGui.h:378 src/ui_dateTimeDialogGui.h:383
@@ -9697,7 +9881,7 @@ msgid "Name/City:"
 msgstr ""
 
 #: src/ui_locationDialogGui.h:517
-msgid "Country:"
+msgid "Region:"
 msgstr ""
 
 #: src/ui_locationDialogGui.h:521
@@ -10386,7 +10570,7 @@ msgid "Hydrogen regions"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: src/ui_viewDialog.h:3414 plugins/Exoplanets/src/Exoplanets.cpp:1032
+#: src/ui_viewDialog.h:3414 plugins/Exoplanets/src/Exoplanets.cpp:1034
 msgid "Other"
 msgstr ""
 
@@ -12103,7 +12287,7 @@ msgid "Planetary Calculator"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:1695
-msgid "Save positions"
+msgid "Export positions..."
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:1698 src/ui_astroCalcDialog.h:1860
@@ -12205,7 +12389,7 @@ msgid "Cleanup ephemerides"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:1758
-msgid "Save ephemeris"
+msgid "Export ephemeris..."
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:1760 src/ui_astroCalcDialog.h:1803
@@ -12215,13 +12399,13 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:1763 src/ui_astroCalcDialog.h:1788
 #: src/ui_astroCalcDialog.h:1798
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "From:"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:1764 src/ui_astroCalcDialog.h:1789
 #: src/ui_astroCalcDialog.h:1799
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:195
 msgid "To:"
 msgstr ""
 
@@ -12264,7 +12448,7 @@ msgid "Cleanup transits"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:1784
-msgid "Save transits"
+msgid "Export transits..."
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:1786
@@ -12293,7 +12477,7 @@ msgid "Cleanup of phenomena"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:1801
-msgid "Save phenomena"
+msgid "Export phenomena..."
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:1806
@@ -12414,7 +12598,7 @@ msgid "Matching objects:"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:1865
-msgid "Save list of objects"
+msgid "Export list of objects..."
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:1876
@@ -12995,6 +13179,7 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:58
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:142
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:143
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:343
 msgid "Angle Measure"
 msgstr ""
@@ -13007,23 +13192,27 @@ msgstr ""
 msgid "Angle measure"
 msgstr ""
 
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:143
+msgid "Angle measure settings"
+msgstr ""
+
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:596
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:599
 msgid "The Angle Measure is enabled:"
 msgstr ""
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:598
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:601
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr ""
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:600
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:603
 msgid "Right-clicking changes the end point only."
 msgstr ""
 
 #. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:602
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:605
 msgid "PA="
 msgstr ""
 
@@ -13239,7 +13428,19 @@ msgid "Telrad sight"
 msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1519
-msgid "Toggle Oculars configuration window"
+#: plugins/Satellites/src/Satellites.cpp:158
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:201
+#: plugins/NavStars/src/NavStars.cpp:127 plugins/Quasars/src/Quasars.cpp:173
+#: plugins/Pulsars/src/Pulsars.cpp:171
+#: plugins/Exoplanets/src/Exoplanets.cpp:174
+#: plugins/Observability/src/Observability.cpp:210
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:96
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:149
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:103
+#: plugins/Scenery3d/src/Scenery3d.cpp:333
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:275
+#: plugins/Calendars/src/Calendars.cpp:164
+msgid "Show settings dialog"
 msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1520
@@ -14173,7 +14374,7 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:73
 #: plugins/Satellites/src/Satellites.cpp:155
-#: plugins/Satellites/src/Satellites.cpp:241
+#: plugins/Satellites/src/Satellites.cpp:243
 #: plugins/Satellites/src/ui_satellitesDialog.h:1159
 msgid "Satellites"
 msgstr ""
@@ -14192,71 +14393,67 @@ msgstr ""
 msgid "Satellite labels"
 msgstr ""
 
-#: plugins/Satellites/src/Satellites.cpp:158
-msgid "Satellites configuration window"
-msgstr ""
-
-#: plugins/Satellites/src/Satellites.cpp:183
+#: plugins/Satellites/src/Satellites.cpp:185
 msgid ""
 "The old satellites.json file is no longer compatible - using default file"
 msgstr ""
 
-#: plugins/Satellites/src/Satellites.cpp:242
+#: plugins/Satellites/src/Satellites.cpp:244
 msgid "Show satellites from the group"
 msgstr ""
 
-#: plugins/Satellites/src/Satellites.cpp:243
+#: plugins/Satellites/src/Satellites.cpp:245
 msgid "Hide satellites from the group"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:2298
+#: plugins/Satellites/src/Satellites.cpp:2300
 msgid "visual"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:2300
+#: plugins/Satellites/src/Satellites.cpp:2302
 msgid "scientific"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:2302
+#: plugins/Satellites/src/Satellites.cpp:2304
 msgid "communications"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:2304
+#: plugins/Satellites/src/Satellites.cpp:2306
 msgid "navigation"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:2306
+#: plugins/Satellites/src/Satellites.cpp:2308
 msgid "amateur"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:2308
+#: plugins/Satellites/src/Satellites.cpp:2310
 msgid "weather"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Earth Resources satellites
-#: plugins/Satellites/src/Satellites.cpp:2310
+#: plugins/Satellites/src/Satellites.cpp:2312
 msgid "earth resources"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:2312
+#: plugins/Satellites/src/Satellites.cpp:2314
 msgid "geostationary"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:2314
+#: plugins/Satellites/src/Satellites.cpp:2316
 msgid "non-operational"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation
 #. (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:2316
+#: plugins/Satellites/src/Satellites.cpp:2318
 msgid "gps"
 msgstr ""
 
@@ -14264,7 +14461,7 @@ msgstr ""
 #. System (IRNSS) is an autonomous regional satellite navigation system being
 #. developed by the Indian Space Research Organisation (ISRO) which would be
 #. under complete control of the Indian government.
-#: plugins/Satellites/src/Satellites.cpp:2318
+#: plugins/Satellites/src/Satellites.cpp:2320
 msgid "irnss"
 msgstr ""
 
@@ -14272,278 +14469,278 @@ msgstr ""
 #. a proposed three-satellite regional time transfer system and Satellite
 #. Based Augmentation System for the Global Positioning System, that would be
 #. receivable within Japan.
-#: plugins/Satellites/src/Satellites.cpp:2320
+#: plugins/Satellites/src/Satellites.cpp:2322
 msgid "qzss"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: The Tracking and Data Relay Satellite System
 #. (TDRSS) is a network of communications satellites and ground stations used
 #. by NASA for space communications.
-#: plugins/Satellites/src/Satellites.cpp:2322
+#: plugins/Satellites/src/Satellites.cpp:2324
 msgid "tdrss"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS
 #. constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:2324
+#: plugins/Satellites/src/Satellites.cpp:2326
 msgid "glonass"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the BeiDou
 #. constellation (BeiDou Navigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:2326
+#: plugins/Satellites/src/Satellites.cpp:2328
 msgid "beidou"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo
 #. constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:2328
+#: plugins/Satellites/src/Satellites.cpp:2330
 msgid "galileo"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium
 #. constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2330
+#: plugins/Satellites/src/Satellites.cpp:2332
 msgid "iridium"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium NEXT
 #. constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2332
+#: plugins/Satellites/src/Satellites.cpp:2334
 msgid "iridium next"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Starlink
 #. constellation (Starlink is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2334
+#: plugins/Satellites/src/Satellites.cpp:2336
 msgid "starlink"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Spire
 #. constellation (LEMUR satellites)
-#: plugins/Satellites/src/Satellites.cpp:2336
+#: plugins/Satellites/src/Satellites.cpp:2338
 msgid "spire"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the OneWeb
 #. constellation (OneWeb is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2338
+#: plugins/Satellites/src/Satellites.cpp:2340
 msgid "oneweb"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:2340
+#: plugins/Satellites/src/Satellites.cpp:2342
 msgid "stations"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:2342
+#: plugins/Satellites/src/Satellites.cpp:2344
 msgid "education"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space
 #. observatories
-#: plugins/Satellites/src/Satellites.cpp:2344
+#: plugins/Satellites/src/Satellites.cpp:2346
 msgid "observatory"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the INTELSAT
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2346
+#: plugins/Satellites/src/Satellites.cpp:2348
 msgid "intelsat"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLOBALSTAR
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2348
+#: plugins/Satellites/src/Satellites.cpp:2350
 msgid "globalstar"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the ORBCOMM
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2350
+#: plugins/Satellites/src/Satellites.cpp:2352
 msgid "orbcomm"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GORIZONT
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2352
+#: plugins/Satellites/src/Satellites.cpp:2354
 msgid "gorizont"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the RADUGA satellites
-#: plugins/Satellites/src/Satellites.cpp:2354
+#: plugins/Satellites/src/Satellites.cpp:2356
 msgid "raduga"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the MOLNIYA
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:2356
+#: plugins/Satellites/src/Satellites.cpp:2358
 msgid "molniya"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the COSMOS satellites
-#: plugins/Satellites/src/Satellites.cpp:2358
+#: plugins/Satellites/src/Satellites.cpp:2360
 msgid "cosmos"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Debris of satellites
-#: plugins/Satellites/src/Satellites.cpp:2360
+#: plugins/Satellites/src/Satellites.cpp:2362
 msgid "debris"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Crewed satellites
-#: plugins/Satellites/src/Satellites.cpp:2362
+#: plugins/Satellites/src/Satellites.cpp:2364
 msgid "crewed"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites of ISS resupply missions
-#: plugins/Satellites/src/Satellites.cpp:2364
+#: plugins/Satellites/src/Satellites.cpp:2366
 msgid "resupply"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: are known to broadcast TV signals
-#: plugins/Satellites/src/Satellites.cpp:2366
+#: plugins/Satellites/src/Satellites.cpp:2368
 msgid "tv"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: military satellites
-#: plugins/Satellites/src/Satellites.cpp:2368
+#: plugins/Satellites/src/Satellites.cpp:2370
 msgid "military"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: geodetic satellites
-#: plugins/Satellites/src/Satellites.cpp:2370
+#: plugins/Satellites/src/Satellites.cpp:2372
 msgid "geodetic"
 msgstr ""
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:2375
+#: plugins/Satellites/src/Satellites.cpp:2377
 msgid "The Hubble Space Telescope"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2377
+#: plugins/Satellites/src/Satellites.cpp:2379
 msgid "The International Space Station"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2379
+#: plugins/Satellites/src/Satellites.cpp:2381
 msgid "China's first space station"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2381
+#: plugins/Satellites/src/Satellites.cpp:2383
 msgid "Tiangong space station (Chinese large modular space station)"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2383
+#: plugins/Satellites/src/Satellites.cpp:2385
 msgid "The russian space radio telescope RadioAstron"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2385
+#: plugins/Satellites/src/Satellites.cpp:2387
 msgid "International Gamma-Ray Astrophysics Laboratory"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2387
+#: plugins/Satellites/src/Satellites.cpp:2389
 msgid "The Gamma-Ray Observatory"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2389
+#: plugins/Satellites/src/Satellites.cpp:2391
 msgid "The Microvariability and Oscillations of Stars telescope"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2391
+#: plugins/Satellites/src/Satellites.cpp:2393
 msgid "The Interface Region Imaging Spectrograph"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2393
+#: plugins/Satellites/src/Satellites.cpp:2395
 msgid ""
 "The Spectroscopic Planet Observatory for Recognition of Interaction of "
 "Atmosphere"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2397
+#: plugins/Satellites/src/Satellites.cpp:2399
 msgid "The Dark Matter Particle Explorer"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2399
+#: plugins/Satellites/src/Satellites.cpp:2401
 msgid "Arcsecond Space Telescope Enabling Research in Astrophysics"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2401
+#: plugins/Satellites/src/Satellites.cpp:2403
 msgid "Reuven Ramaty High Energy Solar Spectroscopic Imager"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2403
+#: plugins/Satellites/src/Satellites.cpp:2405
 msgid "The Chandra X-ray Observatory"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2407
+#: plugins/Satellites/src/Satellites.cpp:2409
 msgid "ISS (ZARYA)"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2409
+#: plugins/Satellites/src/Satellites.cpp:2411
 msgid "ISS"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:2411
+#: plugins/Satellites/src/Satellites.cpp:2413
 msgid "HST"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:2413
+#: plugins/Satellites/src/Satellites.cpp:2415
 msgid "SPEKTR-R"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics
 #. Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:2415
+#: plugins/Satellites/src/Satellites.cpp:2417
 msgid "INTEGRAL"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:2417
+#: plugins/Satellites/src/Satellites.cpp:2419
 msgid "TIANGONG 1"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: name of China's space station module
-#: plugins/Satellites/src/Satellites.cpp:2419
+#: plugins/Satellites/src/Satellites.cpp:2421
 msgid "TIANHE"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: China's space station name (with name of base
 #. module)
-#: plugins/Satellites/src/Satellites.cpp:2421
+#: plugins/Satellites/src/Satellites.cpp:2423
 msgid "TIANGONG (TIANHE)"
 msgstr ""
 
-#: plugins/Satellites/src/Satellites.cpp:2424
+#: plugins/Satellites/src/Satellites.cpp:2426
 msgid "The satellite and the observer are in sunlight"
 msgstr ""
 
-#: plugins/Satellites/src/Satellites.cpp:2425
+#: plugins/Satellites/src/Satellites.cpp:2427
 msgid "The satellite is visible"
 msgstr ""
 
-#: plugins/Satellites/src/Satellites.cpp:2426
+#: plugins/Satellites/src/Satellites.cpp:2428
 msgid "The satellite is eclipsed"
 msgstr ""
 
-#: plugins/Satellites/src/Satellites.cpp:2427
+#: plugins/Satellites/src/Satellites.cpp:2429
 msgid "The satellite is not visible"
 msgstr ""
 
@@ -14938,7 +15135,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:167
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:196
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:674
-#: plugins/EquationOfTime/src/EquationOfTime.cpp:224
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:225
 msgctxt "time"
 msgid "m"
 msgstr ""
@@ -15436,6 +15633,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:80
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:166
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:200
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:201
 msgid "Telescope Control"
 msgstr ""
 
@@ -15446,13 +15644,13 @@ msgid ""
 msgstr ""
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:173
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:233
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:236
 #, qt-format
 msgid "Move telescope #%1 to selected object"
 msgstr ""
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:179
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:241
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:244
 #, qt-format
 msgid "Move telescope #%1 to the point currently in the center of the screen"
 msgstr ""
@@ -15463,8 +15661,8 @@ msgid "Sync telescope #%1 position to selected object"
 msgstr ""
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:191
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:237
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:245
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:240
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:248
 #, qt-format
 msgid "Abort last slew command of telescope #%1"
 msgstr ""
@@ -15473,57 +15671,57 @@ msgstr ""
 msgid "Move a telescope to a given set of coordinates"
 msgstr ""
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:747
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:749
 msgid ""
 "The existing version of the configuration data for telescopes in the "
 "Telescope Control plugin is obsolete."
 msgstr ""
 
 #. TRANSLATORS: Description for Meade AutoStar compatible mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1768
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1770
 msgid ""
 "Any telescope or telescope mount compatible with Meade's AutoStar "
 "controller."
 msgstr ""
 
 #. TRANSLATORS: Description for Meade LX200 (compatible) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1770
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1772
 msgid "Any telescope or telescope mount compatible with Meade LX200."
 msgstr ""
 
 #. TRANSLATORS: Description for Meade ETX70 (#494 Autostar, #506 CCS) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1772
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1774
 msgid ""
 "Meade's ETX70 with the #494 Autostar controller and the #506 Connector Cable"
 " Set."
 msgstr ""
 
 #. TRANSLATORS: Description for Losmandy G-11 mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1774
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1776
 msgid "Losmandy's G-11 telescope mount."
 msgstr ""
 
 #. TRANSLATORS: Description for Wildcard Innovations Argo Navis (Meade mode)
 #. mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1776
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1778
 msgid "Wildcard Innovations' Argo Navis DTC in Meade LX200 emulation mode."
 msgstr ""
 
 #. TRANSLATORS: Description for Celestron NexStar (compatible) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1778
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1780
 msgid "Any telescope or telescope mount compatible with Celestron NexStar."
 msgstr ""
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan (version 3 or later)
 #. mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1780
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1782
 msgid ""
 "Any Sky-Watcher mount that uses version 3 or later of the SynScan hand "
 "controller."
 msgstr ""
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan AZ GOTO mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1782
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1784
 msgid ""
 "The Sky-Watcher SynScan AZ GOTO mount used in a number of telescope models."
 msgstr ""
@@ -16960,7 +17158,7 @@ msgid "On"
 msgstr ""
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:73
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:497
 msgid "Off"
 msgstr ""
 
@@ -17333,6 +17531,7 @@ msgid "[next update info]"
 msgstr ""
 
 #: plugins/NavStars/src/NavStars.cpp:56 plugins/NavStars/src/NavStars.cpp:126
+#: plugins/NavStars/src/NavStars.cpp:127
 msgid "Navigational Stars"
 msgstr ""
 
@@ -17346,7 +17545,7 @@ msgid "Mark the navigational stars"
 msgstr ""
 
 #. TRANSLATORS: The emphasis tags mark a title.
-#: plugins/NavStars/src/NavStars.cpp:394
+#: plugins/NavStars/src/NavStars.cpp:397
 msgid ""
 "The 57 \"selected stars\" that are listed in <em>The Nautical Almanac</em> "
 "jointly published by Her Majesty's Nautical Almanac Office and the US Naval "
@@ -17356,7 +17555,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:400
+#: plugins/NavStars/src/NavStars.cpp:403
 #, qt-format
 msgid ""
 "The 81 stars that are listed in the French Nautical Almanac (The original "
@@ -17364,7 +17563,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:406
+#: plugins/NavStars/src/NavStars.cpp:409
 #, qt-format
 msgid ""
 "The 160 stars that are listed in the Russian Nautical Almanac (The original "
@@ -17372,7 +17571,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:412
+#: plugins/NavStars/src/NavStars.cpp:415
 #, qt-format
 msgid ""
 "The 80 stars that are listed in the German Nautical Almanac (The original "
@@ -17380,89 +17579,89 @@ msgid ""
 "Hydrographic Agency of Germany."
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:596
+#: plugins/NavStars/src/NavStars.cpp:599
 msgctxt "the highest part of the Sun or Moon"
 msgid "upper limb"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:597
+#: plugins/NavStars/src/NavStars.cpp:600
 msgctxt "the lowest part of the Sun or Moon"
 msgid "lower limb"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:612 plugins/NavStars/src/NavStars.cpp:640
-#: plugins/NavStars/src/NavStars.cpp:646
+#: plugins/NavStars/src/NavStars.cpp:615 plugins/NavStars/src/NavStars.cpp:643
+#: plugins/NavStars/src/NavStars.cpp:649
 msgctxt "Greenwich Hour Angle"
 msgid "GHA"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:614 plugins/NavStars/src/NavStars.cpp:644
+#: plugins/NavStars/src/NavStars.cpp:617 plugins/NavStars/src/NavStars.cpp:647
 msgctxt "object Sidereal Hour Angle (ERA, Earth rotation angle)"
 msgid "SHA"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:616 plugins/NavStars/src/NavStars.cpp:650
+#: plugins/NavStars/src/NavStars.cpp:619 plugins/NavStars/src/NavStars.cpp:653
 msgctxt "Local Hour Angle"
 msgid "LHA"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:619
+#: plugins/NavStars/src/NavStars.cpp:622
 msgctxt "Ground Position of object"
 msgid "GP: GHA/DEC"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:622
+#: plugins/NavStars/src/NavStars.cpp:625
 msgctxt "geodetic coordinate system, latitude and longitude of ground point"
 msgid "GP: LAT/LON"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:625
+#: plugins/NavStars/src/NavStars.cpp:628
 msgctxt "geodetic coordinate system, assumed latitude and longitude of user"
 msgid "AP: LAT/LON"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:628
+#: plugins/NavStars/src/NavStars.cpp:631
 msgctxt ""
 "Navigation/horizontal coordinate system, calculated altitude and azimuth"
 msgid "Hc/Zn"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:635
+#: plugins/NavStars/src/NavStars.cpp:638
 msgctxt "Universal Time Coordinated"
 msgid "UTC"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:638
+#: plugins/NavStars/src/NavStars.cpp:641
 msgctxt "Navigation/horizontal coordinate system, sextant measured altitude"
 msgid "Ho"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:642
+#: plugins/NavStars/src/NavStars.cpp:645
 msgctxt "Local Hour Angle"
 msgid "LMST"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:648
+#: plugins/NavStars/src/NavStars.cpp:651
 msgctxt "Declination"
 msgid "DEC"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:652
+#: plugins/NavStars/src/NavStars.cpp:655
 msgctxt "geodetic coordinate system, latitude"
 msgid "LAT"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:654
+#: plugins/NavStars/src/NavStars.cpp:657
 msgctxt "geodetic coordinate system, longitude"
 msgid "LON"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:656
+#: plugins/NavStars/src/NavStars.cpp:659
 msgctxt "Navigation/horizontal coordinate system, calculated altitude"
 msgid "Hc"
 msgstr ""
 
-#: plugins/NavStars/src/NavStars.cpp:658
+#: plugins/NavStars/src/NavStars.cpp:661
 msgctxt "Navigation/horizontal coordinate system, calculated azimuth"
 msgid "Zn"
 msgstr ""
@@ -17735,10 +17934,6 @@ msgstr ""
 msgid "Show quasars"
 msgstr ""
 
-#: plugins/Quasars/src/Quasars.cpp:173
-msgid "Quasars configuration window"
-msgstr ""
-
 #. TRANSLATORS: Jy is Jansky(10-26W/m2/Hz)
 #: plugins/Quasars/src/Quasar.cpp:147
 msgctxt "radio flux density"
@@ -17818,10 +18013,6 @@ msgstr ""
 
 #: plugins/Pulsars/src/Pulsars.cpp:170
 msgid "Show pulsars"
-msgstr ""
-
-#: plugins/Pulsars/src/Pulsars.cpp:171
-msgid "Pulsars configuration window"
 msgstr ""
 
 #: plugins/Pulsars/src/Pulsar.cpp:188
@@ -18039,6 +18230,7 @@ msgstr ""
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:59
 #: plugins/RemoteControl/src/RemoteControl.cpp:153
+#: plugins/RemoteControl/src/RemoteControl.cpp:154
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:282
 msgid "Remote Control"
 msgstr ""
@@ -18057,6 +18249,10 @@ msgstr ""
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:153
 msgid "Remote control"
+msgstr ""
+
+#: plugins/RemoteControl/src/RemoteControl.cpp:154
+msgid "Remote control config"
 msgstr ""
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:133
@@ -18388,102 +18584,98 @@ msgstr ""
 msgid "Show exoplanets"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:174
-msgid "Exoplanets configuration window"
-msgstr ""
-
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1002
+#: plugins/Exoplanets/src/Exoplanets.cpp:1004
 msgid "Hot"
 msgstr ""
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1004
+#: plugins/Exoplanets/src/Exoplanets.cpp:1006
 msgid "Warm"
 msgstr ""
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1006
+#: plugins/Exoplanets/src/Exoplanets.cpp:1008
 msgid "Cold"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1009
+#: plugins/Exoplanets/src/Exoplanets.cpp:1011
 msgid "Miniterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1011
+#: plugins/Exoplanets/src/Exoplanets.cpp:1013
 msgid "Subterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1013
+#: plugins/Exoplanets/src/Exoplanets.cpp:1015
 msgid "Terran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1015
+#: plugins/Exoplanets/src/Exoplanets.cpp:1017
 msgid "Superterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1017
+#: plugins/Exoplanets/src/Exoplanets.cpp:1019
 msgid "Jovian"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1019
+#: plugins/Exoplanets/src/Exoplanets.cpp:1021
 msgid "Neptunian"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1022
+#: plugins/Exoplanets/src/Exoplanets.cpp:1024
 msgid "Primary Transit"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1024
+#: plugins/Exoplanets/src/Exoplanets.cpp:1026
 msgid "Microlensing"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1026
+#: plugins/Exoplanets/src/Exoplanets.cpp:1028
 msgid "Radial Velocity"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1028
+#: plugins/Exoplanets/src/Exoplanets.cpp:1030
 msgid "Imaging"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1030
+#: plugins/Exoplanets/src/Exoplanets.cpp:1032
 msgid "Pulsar"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1034
+#: plugins/Exoplanets/src/Exoplanets.cpp:1036
 msgid "Astrometry"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method. TTV=Transit Timing Variation
-#: plugins/Exoplanets/src/Exoplanets.cpp:1036
+#: plugins/Exoplanets/src/Exoplanets.cpp:1038
 msgid "TTV"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1038
+#: plugins/Exoplanets/src/Exoplanets.cpp:1040
 msgid "Timing"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method. TTV=Transit Timing Variation
-#: plugins/Exoplanets/src/Exoplanets.cpp:1040
+#: plugins/Exoplanets/src/Exoplanets.cpp:1042
 msgid "Primary Transit, TTV"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1042
+#: plugins/Exoplanets/src/Exoplanets.cpp:1044
 msgid "Default"
 msgstr ""
 
@@ -20854,14 +21046,9 @@ msgstr ""
 msgid "Next Full Moon: %1 %2 at %3:%4. "
 msgstr ""
 
+#: plugins/Observability/src/Observability.cpp:209
 #: plugins/Observability/src/Observability.cpp:210
-#: plugins/Observability/src/Observability.cpp:211
-#: plugins/Observability/src/Observability.cpp:215
 msgid "Observability"
-msgstr ""
-
-#: plugins/Observability/src/Observability.cpp:216
-msgid "Observability configuration window"
 msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:146
@@ -21061,7 +21248,8 @@ msgstr ""
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:53
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:95
-#: plugins/EquationOfTime/src/EquationOfTime.cpp:222
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:96
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:223
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:244
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:246
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:258
@@ -21078,7 +21266,7 @@ msgid "Show solution for Equation of Time"
 msgstr ""
 
 #. TRANSLATORS: seconds.
-#: plugins/EquationOfTime/src/EquationOfTime.cpp:226
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:227
 msgctxt "time"
 msgid "s"
 msgstr ""
@@ -21121,7 +21309,7 @@ msgid "The current catalog of Meteor Showers is invalid!"
 msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:146
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:640
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:642
 msgid "Meteor Showers"
 msgstr ""
 
@@ -21133,10 +21321,6 @@ msgstr ""
 msgid "Toggle radiant labels"
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:149
-msgid "Show meteor showers settings dialog"
-msgstr ""
-
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:150
 msgid "Show meteor showers search dialog"
 msgstr ""
@@ -21145,13 +21329,13 @@ msgstr ""
 msgid "Using the default Meteor Showers catalog."
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:643
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:645
 msgid ""
 "This plugin was created in the 2013 campaign of the ESA Summer of Code in "
 "Space programme."
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:645
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:647
 msgid ""
 "<p>This plugin enables you to simulate periodic meteor showers and to "
 "display a marker for each active and inactive radiant.</p><p>By a single "
@@ -21833,7 +22017,7 @@ msgid "Peak"
 msgstr ""
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:436
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:188
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:190
 msgid "Meteor Showers Configuration"
 msgstr ""
 
@@ -21909,18 +22093,13 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:189
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
 msgid "Meteor Showers: Search"
 msgstr ""
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
 msgid "Search"
-msgstr ""
-
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:195
-msgid "dd/MM/yyyy"
 msgstr ""
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
@@ -21929,6 +22108,7 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:57
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:102
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:103
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:291
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:293
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:320
@@ -21943,42 +22123,42 @@ msgstr ""
 msgid "Show coordinates of the mouse pointer"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:143
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:144
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0)"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:159
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:160
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:180
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:181
 msgctxt "abbreviated in the plugin"
 msgid "Az/Alt"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:196
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:197
 msgctxt "abbreviated in the plugin"
 msgid "Gal. Long/Lat"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:212
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:213
 msgctxt "abbreviated in the plugin"
 msgid "Supergal. Long/Lat"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:231
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:232
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:250
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:251
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat (J2000.0)"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:268
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:269
 msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
 msgstr ""
@@ -22091,12 +22271,6 @@ msgstr ""
 msgid "Toggle 3D landscape"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:333
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:275
-#: plugins/Calendars/src/Calendars.cpp:164
-msgid "Show settings dialog"
-msgstr ""
-
 #: plugins/Scenery3d/src/Scenery3d.cpp:334
 msgid "Show viewpoint dialog"
 msgstr ""
@@ -22117,138 +22291,138 @@ msgstr ""
 msgid "Toggle torchlight"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:387
+#: plugins/Scenery3d/src/Scenery3d.cpp:383
 msgid "Scenery3d shaders reloaded"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:440
+#: plugins/Scenery3d/src/Scenery3d.cpp:436
 msgid "Loading scene. Please be patient!"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:442
+#: plugins/Scenery3d/src/Scenery3d.cpp:438
 #, qt-format
 msgid "Loading scene '%1'"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:460
+#: plugins/Scenery3d/src/Scenery3d.cpp:456
 msgid "Loading model..."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:475
+#: plugins/Scenery3d/src/Scenery3d.cpp:471
 msgid "Transforming model..."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:483
-#: plugins/Scenery3d/src/Scenery3d.cpp:503
+#: plugins/Scenery3d/src/Scenery3d.cpp:479
+#: plugins/Scenery3d/src/Scenery3d.cpp:499
 msgid "Calculating collision map..."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:488
+#: plugins/Scenery3d/src/Scenery3d.cpp:484
 msgid "Loading ground..."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:499
+#: plugins/Scenery3d/src/Scenery3d.cpp:495
 msgid "Transforming ground..."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:510
+#: plugins/Scenery3d/src/Scenery3d.cpp:506
 msgid "Finalizing load..."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:525
+#: plugins/Scenery3d/src/Scenery3d.cpp:521
 msgid "Could not load scene, please check log for error messages!"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:529
+#: plugins/Scenery3d/src/Scenery3d.cpp:525
 msgid "Scene successfully loaded."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:589
+#: plugins/Scenery3d/src/Scenery3d.cpp:585
 msgid "Could not load scene info, please check log for error messages!"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:613
+#: plugins/Scenery3d/src/Scenery3d.cpp:609
 #, qt-format
 msgid "Could not find scene ID for %1"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:658
+#: plugins/Scenery3d/src/Scenery3d.cpp:654
 msgid "Please load a scene first!"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:695
+#: plugins/Scenery3d/src/Scenery3d.cpp:691
 #, qt-format
 msgid "Per-Pixel shading %1."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:695
-#: plugins/Scenery3d/src/Scenery3d.cpp:714
-#: plugins/Scenery3d/src/Scenery3d.cpp:750
+#: plugins/Scenery3d/src/Scenery3d.cpp:691
+#: plugins/Scenery3d/src/Scenery3d.cpp:710
+#: plugins/Scenery3d/src/Scenery3d.cpp:746
 msgctxt "enable"
 msgid "on"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:695
-#: plugins/Scenery3d/src/Scenery3d.cpp:714
-#: plugins/Scenery3d/src/Scenery3d.cpp:750
+#: plugins/Scenery3d/src/Scenery3d.cpp:691
+#: plugins/Scenery3d/src/Scenery3d.cpp:710
+#: plugins/Scenery3d/src/Scenery3d.cpp:746
 msgctxt "disable"
 msgid "off"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:714
+#: plugins/Scenery3d/src/Scenery3d.cpp:710
 #, qt-format
 msgid "Shadows %1."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:719
+#: plugins/Scenery3d/src/Scenery3d.cpp:715
 msgid "Shadows deactivated or not possible."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:750
+#: plugins/Scenery3d/src/Scenery3d.cpp:746
 #, qt-format
 msgid "Surface bumps %1."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:798
+#: plugins/Scenery3d/src/Scenery3d.cpp:794
 msgid "Selected cubemap mode not supported, falling back to '6 Textures'"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:917
+#: plugins/Scenery3d/src/Scenery3d.cpp:913
 #, qt-format
 msgid "Lazy cubemapping: %1"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:917
+#: plugins/Scenery3d/src/Scenery3d.cpp:913
 msgid "enabled"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:917
+#: plugins/Scenery3d/src/Scenery3d.cpp:913
 msgid "disabled"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:990
+#: plugins/Scenery3d/src/Scenery3d.cpp:986
 msgid "Cubemap size changed"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:992
+#: plugins/Scenery3d/src/Scenery3d.cpp:988
 #, qt-format
 msgid "Cubemap size not supported, set to %1"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:1013
+#: plugins/Scenery3d/src/Scenery3d.cpp:1009
 msgid "Shadowmap size changed"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:1015
+#: plugins/Scenery3d/src/Scenery3d.cpp:1011
 #, qt-format
 msgid "Shadowmap size not supported, set to %1"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:1139
+#: plugins/Scenery3d/src/Scenery3d.cpp:1135
 msgid "3D Sceneries"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:1142
+#: plugins/Scenery3d/src/Scenery3d.cpp:1138
 msgid ""
 "<p>3D foreground renderer. Walk around, find and avoid obstructions in your "
 "garden, find and demonstrate possible astronomical alignments in temples, "
@@ -22258,7 +22432,7 @@ msgid ""
 "releasing Ctrl before cursor key.</p>"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:1147
+#: plugins/Scenery3d/src/Scenery3d.cpp:1143
 msgid ""
 "Development of this plugin was in parts supported by the Austrian Science "
 "Fund (FWF) project ASTROSIM (P 21208-G19; https://astrosim.univie.ac.at/). "
@@ -22437,128 +22611,128 @@ msgstr ""
 msgid "Grid coordinates (%1): %2m, %3m, %4m"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:480
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:477
 msgid "3D Scenery"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:482
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:479
 msgid "Set as default scene"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:480
 msgid "Load/save viewpoints"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
 msgid "Torch strength:"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:485
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:482
 msgid "Torch range:"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:486
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
 #, qt-format
 msgid "Torchlight (%1)"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:487
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
 #, qt-format
 msgid "Show grid coordinates (%1)"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:489
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:486
 msgid ""
 "Overdraw horizon polygon defined in your landscape. This displays the "
 "inaccuracies in a very large planar model compared to Earth curvature, of "
 "course only for a single point of observation."
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:491
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:488
 msgid "Draw horizon polyline in foreground"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:492
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:489
 msgid "Visual options"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:493
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
 msgid "Per-Pixel lighting"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:494
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:491
 msgid "Shadows"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:495
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:492
 msgid "Simple shadows"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:493
 msgid "Bump mapping"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:497
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:494
 msgid "Cubemap size:"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:498
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:495
 msgid "Shadowmap size:"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
 msgid "Filtering Quality:"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:501
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:498
 msgid "Hardware"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:502
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
 msgid "Low"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:503
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
 msgid "Low + Hardware"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:504
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:501
 msgid "High (slow)"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:505
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:502
 msgid "High + Hardware (slow)"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:507
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:504
 msgid "PCSS"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:508
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:505
 msgid "Cubemapping mode:"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:509
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:506
 msgid "Full cubemap shadows"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:510
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:507
 msgid "Lazy cubemap re-rendering"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:511
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:508
 msgid "Interval:"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:512
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:509
 msgid "Only update dominant face when moving"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:513
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:510
 msgid "Also update second-most dominant face"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:514
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:511
 msgid "Quality/Performance settings"
 msgstr ""
 
@@ -22597,136 +22771,136 @@ msgstr ""
 msgid "A tool for archaeo-/ethnoastronomical alignment studies"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:296
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:298
 msgid "Show Line for Equinox"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:297
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:299
 msgid "Show Line for Solstices"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:298
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:300
 msgid "Show Line for Crossquarter"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:299
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:301
 msgid "Show Line for Major Standstill"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:300
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:302
 msgid "Show Line for Minor Standstill"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:301
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:303
 msgid "Show Polar Circles"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:302
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:304
 msgid "Show Line for Zenith Passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:303
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:305
 msgid "Show Line for Nadir Passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:304
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:306
 msgid "Show Line for Selected Object"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:305
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:307
 msgid "Show Line for Selected Object's Azimuth"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:306
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:308
 msgid "Show Line for Selected Object's Hour Angle"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:307
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:309
 msgid "Show Line for Current Sun"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:308
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:310
 msgid "Show Line for Current Moon"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:309
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:311
 msgid "Show Vertical for Geographic Location 1"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:310
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:312
 msgid "Show Vertical for Geographic Location 2"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:311
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:313
 msgid "Show Vertical for Custom Azimuth 1"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:312
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:314
 msgid "Show Vertical for Custom Azimuth 2"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:313
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:315
 msgid "Show Line for Custom Altitude 1"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:314
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:316
 msgid "Show Line for Custom Altitude 2"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:315
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:317
 msgid "Show Line for Custom Declination 1"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:316
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:318
 msgid "Show Line for Custom Declination 2"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1414
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1416
 msgid "Equinox"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1417
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1419
 msgid "Solstice"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1420
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1422
 msgid "Crossquarter"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1423
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1425
 msgid "Major Lunar Standstill"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1426
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1428
 msgid "Minor Lunar Standstill"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1429
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1431
 msgid "Polar Circle"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1432
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1434
 msgid "Zenith Passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1435
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1437
 msgid "Nadir Passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1440
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1442
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:737
 msgid "Selected Object"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1449
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1451
 msgid "error if you can read this"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1452
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1454
 msgid "Mercury"
 msgstr "Уторид"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1455
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1457
 msgid "Venus"
 msgstr "Зӯҳра"
 
@@ -23004,136 +23178,136 @@ msgstr ""
 msgid "Calendars of the world"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:279
+#: plugins/Calendars/src/Calendars.cpp:281
 #: plugins/Calendars/src/ui_calendarsDialog.h:818
 #: plugins/Calendars/src/ui_calendarsDialog.h:831
 msgctxt "calendar"
 msgid "Julian"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:280
+#: plugins/Calendars/src/Calendars.cpp:282
 #: plugins/Calendars/src/ui_calendarsDialog.h:825
 #: plugins/Calendars/src/ui_calendarsDialog.h:835
 msgctxt "calendar"
 msgid "Gregorian"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:281
+#: plugins/Calendars/src/Calendars.cpp:283
 msgctxt "calendar"
 msgid "ISO week"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:282
+#: plugins/Calendars/src/Calendars.cpp:284
 #: plugins/Calendars/src/ui_calendarsDialog.h:822
 msgctxt "calendar"
 msgid "Icelandic"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:283
+#: plugins/Calendars/src/Calendars.cpp:285
 #: plugins/Calendars/src/ui_calendarsDialog.h:803
 msgctxt "calendar"
 msgid "Roman"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:284
+#: plugins/Calendars/src/Calendars.cpp:286
 #: plugins/Calendars/src/ui_calendarsDialog.h:817
 msgctxt "calendar"
 msgid "Olympic"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:285
+#: plugins/Calendars/src/Calendars.cpp:287
 #: plugins/Calendars/src/ui_calendarsDialog.h:824
 msgctxt "calendar"
 msgid "Egyptian"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:286
+#: plugins/Calendars/src/Calendars.cpp:288
 #: plugins/Calendars/src/ui_calendarsDialog.h:811
 msgctxt "calendar"
 msgid "Armenian"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:287
+#: plugins/Calendars/src/Calendars.cpp:289
 #: plugins/Calendars/src/ui_calendarsDialog.h:812
 msgctxt "calendar"
 msgid "Zoroastrian"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:288
+#: plugins/Calendars/src/Calendars.cpp:290
 #: plugins/Calendars/src/ui_calendarsDialog.h:808
 msgctxt "calendar"
 msgid "Coptic"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:289
+#: plugins/Calendars/src/Calendars.cpp:291
 #: plugins/Calendars/src/ui_calendarsDialog.h:802
 msgctxt "calendar"
 msgid "Ethiopic"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:290
+#: plugins/Calendars/src/Calendars.cpp:292
 msgctxt "calendar"
 msgid "French Rev. (Arithm.)"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:291
+#: plugins/Calendars/src/Calendars.cpp:293
 #: plugins/Calendars/src/ui_calendarsDialog.h:820
 msgctxt "calendar"
 msgid "Islamic"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:292
+#: plugins/Calendars/src/Calendars.cpp:294
 #: plugins/Calendars/src/ui_calendarsDialog.h:809
 msgctxt "calendar"
 msgid "Hebrew"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:293
+#: plugins/Calendars/src/Calendars.cpp:295
 msgctxt "calendar"
 msgid "Persian (Arithm.)"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:294
+#: plugins/Calendars/src/Calendars.cpp:296
 msgctxt "calendar"
 msgid "Old Hindu Solar"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:295
+#: plugins/Calendars/src/Calendars.cpp:297
 msgctxt "calendar"
 msgid "Old Hindu Lunisolar"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:296
+#: plugins/Calendars/src/Calendars.cpp:298
 #: plugins/Calendars/src/ui_calendarsDialog.h:823
 msgctxt "calendar"
 msgid "Maya Long Count"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:297
+#: plugins/Calendars/src/Calendars.cpp:299
 #: plugins/Calendars/src/ui_calendarsDialog.h:816
 msgctxt "calendar"
 msgid "Maya Haab"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:298
+#: plugins/Calendars/src/Calendars.cpp:300
 #: plugins/Calendars/src/ui_calendarsDialog.h:805
 msgctxt "calendar"
 msgid "Maya Tzolkin"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:299
+#: plugins/Calendars/src/Calendars.cpp:301
 #: plugins/Calendars/src/ui_calendarsDialog.h:814
 msgctxt "calendar"
 msgid "Aztec Xihuitl"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:300
+#: plugins/Calendars/src/Calendars.cpp:302
 #: plugins/Calendars/src/ui_calendarsDialog.h:810
 msgctxt "calendar"
 msgid "Aztec Tonalpohualli"
 msgstr ""
 
-#: plugins/Calendars/src/Calendars.cpp:302
+#: plugins/Calendars/src/Calendars.cpp:304
 #: plugins/Calendars/src/ui_calendarsDialog.h:804
 msgctxt "calendar"
 msgid "Balinese Pawukon"
