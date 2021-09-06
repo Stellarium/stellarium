@@ -132,7 +132,7 @@ Cardinals::Cardinals(float _radius)
 		{ dNE, Vec3f(-1.f,  1.f, 0.f) }, { dSE, Vec3f( 1.f,  1.f, 0.f) },
 		{ dSW, Vec3f( 1.f, -1.f, 0.f) }, { dNW, Vec3f(-1.f, -1.f, 0.f) }
 	};
-	const float cp = 1.f/(1+sqrt(2));
+	const float cp = 1.f/(1.f+sqrt(2.f));
 	const float cn = -1.f*cp;
 	rose16winds = {
 		{ dNNE, Vec3f(-1.f,   cp, 0.f) }, { dENE, Vec3f(  cn,  1.f, 0.f) },
