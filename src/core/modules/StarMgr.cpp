@@ -2035,7 +2035,6 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 	}
 
 	result.removeDuplicates();
-	qWarning() << "listAllObjectsByType:" << objType << type << result;
 	return result;
 }
 
