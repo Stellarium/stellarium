@@ -103,6 +103,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	const double vPeriod = StarMgr::getGcvsPeriod(s->getHip());
 	const int vMm = StarMgr::getGcvsMM(s->getHip());
 	const float plxErr = StarMgr::getPlxError(s->getHip());
+	const PMData properMotion = StarMgr::getProperMotion(s->getHip());
 	if (s->getHip())
 	{
 		if ((flags&Name) || (flags&CatalogNumber))
@@ -316,17 +317,17 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		oss << getExtraInfoStrings(Distance).join("");
 	}
 
-	if (flags&ProperMotion)
+	if (flags&ProperMotion && (!isNan(properMotion.first) && !isNan(properMotion.second)))
 	{
-		float dx = 0.1f*s->getDx0();
-		float dy = 0.1f*s->getDx1();
+		float dx = properMotion.first;
+		float dy = properMotion.second;
 		float pa = std::atan2(dx, dy)*M_180_PIf;
 		if (pa<0)
 			pa += 360.f;
 		oss << QString("%1: %2 %3 %4 %5%6").arg(q_("Proper motion"))
-		       .arg(QString::number(std::sqrt(dx*dx + dy*dy), 'f', 1)).arg(qc_("mas/yr", "milliarc second per year"))
+		       .arg(QString::number(std::sqrt(dx*dx + dy*dy), 'f', 2)).arg(qc_("mas/yr", "milliarc second per year"))
 		       .arg(qc_("towards", "into the direction of")).arg(QString::number(pa, 'f', 1)).arg(QChar(0x00B0)) << "<br />";
-		oss << QString("%1: %2 %3 (%4)").arg(q_("Proper motions by axes")).arg(QString::number(dx, 'f', 1)).arg(QString::number(dy, 'f', 1)).arg(qc_("mas/yr", "milliarc second per year")) << "<br />";
+		oss << QString("%1: %2 %3 (%4)").arg(q_("Proper motions by axes")).arg(QString::number(dx, 'f', 2)).arg(QString::number(dy, 'f', 2)).arg(qc_("mas/yr", "milliarc second per year")) << "<br />";
 	}
 
 	if (flags&Extra)

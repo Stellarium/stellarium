@@ -90,6 +90,7 @@ QMap<int, int> StarMgr::hdStarsIndex;
 QMap<int, int> StarMgr::hrStarsIndex;
 QHash<int, QString> StarMgr::referenceMap;
 QHash<int, float> StarMgr::hipParallaxErrors;
+QHash<int, PMData> StarMgr::hipPMData;
 
 QStringList initStringListFromFile(const QString& file_name)
 {
@@ -358,6 +359,14 @@ float StarMgr::getPlxError(int hip)
 	if (it!=hipParallaxErrors.end())
 		return it.value();
 	return 0.f;
+}
+
+PMData StarMgr::getProperMotion(int hip)
+{
+	auto it = hipPMData.find(hip);
+	if (it!=hipPMData.end())
+		return it.value();
+	return QPair<float, float>(NAN, NAN);
 }
 
 void StarMgr::copyDefaultConfigFile()
@@ -1143,6 +1152,65 @@ void StarMgr::loadPlxErr(const QString& plxErrFile)
 	qDebug() << "Loaded" << readOk << "/" << totalRecords << "parallax error data records for stars";
 }
 
+void StarMgr::loadPMData(const QString &pmDataFile)
+{
+	// TODO: This is temporary solution for display parallax errors until format of stars catalogs will not be changed!
+	hipPMData.clear();
+
+	qDebug() << "Loading proper motion data from" << QDir::toNativeSeparators(pmDataFile);
+	QFile ciFile(pmDataFile);
+	if (!ciFile.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+		qWarning() << "WARNING - could not open" << QDir::toNativeSeparators(pmDataFile);
+		return;
+	}
+	const QStringList& allRecords = QString::fromUtf8(ciFile.readAll()).split('\n');
+	ciFile.close();
+
+	int readOk=0;
+	int totalRecords=0;
+	int lineNumber=0;
+	// record structure is delimited with a 'tab' character. Example record strings:
+	// "1	-4.58	-1.61"
+	// "2	179.70	1.40"
+	for (const auto& record : allRecords)
+	{
+		++lineNumber;
+		// skip comments and empty lines
+		if (record.startsWith("//") || record.startsWith("#") || record.isEmpty())
+			continue;
+
+		++totalRecords;
+		const QStringList& fields = record.split('\t');
+		if (fields.size()!=3)
+		{
+			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(pmDataFile)
+				   << " - record does not match record pattern";
+			continue;
+		}
+		else
+		{
+			// The record is the right format.  Extract the fields
+			bool ok;
+			int hip = fields.at(0).toInt(&ok);
+			if (!ok)
+			{
+				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(pmDataFile)
+					   << " - failed to convert " << fields.at(0) << "to a number";
+				continue;
+			}
+			PMData properMotion;
+			properMotion.first = fields.at(1).toFloat(&ok);
+			properMotion.second = fields.at(2).toFloat(&ok);
+			hipPMData[hip] = properMotion;
+
+			++readOk;
+		}
+	}
+
+	qDebug() << "Loaded" << readOk << "/" << totalRecords << "proper motion data records for stars";
+}
+
 int StarMgr::getMaxSearchLevel() const
 {
 	int rval = -1;
@@ -1806,6 +1874,12 @@ void StarMgr::populateStarsDesignations()
 		qWarning() << "WARNING: could not load parallax errors data file: stars/default/hip_plx_err.dat";
 	else
 		loadPlxErr(fic);
+
+	fic = StelFileMgr::findFile("stars/default/hip_pm.dat");
+	if (fic.isEmpty())
+		qWarning() << "WARNING: could not load proper motion data file: stars/default/hip_pm.dat";
+	else
+		loadPMData(fic);
 }
 
 QStringList StarMgr::listAllObjects(bool inEnglish) const

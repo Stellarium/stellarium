@@ -70,6 +70,7 @@ typedef struct
 } crossid;
 
 typedef QMap<StelObjectP, float> StelACStarData;
+typedef QPair<float, float> PMData;
 
 //! @class StarMgr
 //! Stores the star catalogue data.
@@ -340,6 +341,11 @@ public:
 	//! @return the parallax error (mas)
 	static float getPlxError(int hip);
 
+	//! Get the proper motion data for star with a Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return the proper motion (mas/yr for RA and Dec)
+	static PMData getProperMotion(int hip);
+
 	static QString convertToSpectralType(int index);
 	static QString convertToComponentIds(int index);
 
@@ -412,6 +418,10 @@ private:
 	//! @param the path to a file containing the parallax error data.
 	void loadPlxErr(const QString& plxErrFile);
 
+	//! Loads proper motion data from a file.
+	//! @param the path to a file containing the proper motion data.
+	void loadPMData(const QString& pmDataFile);
+
 	//! Gets the maximum search level.
 	// TODO: add a non-lame description - what is the purpose of the max search level?
 	int getMaxSearchLevel() const;
@@ -482,6 +492,7 @@ private:
 	static QMap<int, int> hrStarsIndex;
 
 	static QHash<int, float> hipParallaxErrors;
+	static QHash<int, PMData> hipPMData;
 
 	static QHash<int, QString> referenceMap;
 
