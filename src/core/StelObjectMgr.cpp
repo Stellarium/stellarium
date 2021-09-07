@@ -297,6 +297,7 @@ void StelObjectMgr::registerStelObjectMgr(StelObjectModule* m)
 		objModulesMap["StarMgr:5"] = "Variable stars: Algol-type eclipsing systems";
 		objModulesMap["StarMgr:6"] = "Variable stars: the classical cepheids";
 		objModulesMap["StarMgr:7"] = "Bright carbon stars";
+		objModulesMap["StarMgr:8"] = "Bright barium stars";
 	}
 	// Nomenclature...
 	if (m->objectName()=="NomenclatureMgr")

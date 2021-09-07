@@ -467,6 +467,7 @@ private:
 		PHCSolarSystemMinorBodies		= 24,
 		PHCMoonsFirstBody				= 25,
 		PHCBrightCarbonStars				= 26,
+		PHCBrightBariumStars				= 27,
 		PHCNone	// stop gapper for syntax reasons
 	};
 
@@ -512,6 +513,7 @@ private:
 		EWAlgolTypeVariableStars			= 38,	// http://www.sai.msu.su/gcvs/gcvs/vartype.htm
 		EWClassicalCepheidsTypeVariableStars	= 39,	// http://www.sai.msu.su/gcvs/gcvs/vartype.htm
 		EWCarbonStars					= 40,
+		EWBariumStars					= 41,
 		EWNone	// stop gapper for syntax reasons
 	};
 };

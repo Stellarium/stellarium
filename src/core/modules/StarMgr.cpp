@@ -647,6 +647,7 @@ void StarMgr::populateHipparcosLists()
 	algolTypeStars.clear();
 	classicalCepheidsTypeStars.clear();
 	carbonStars.clear();
+	bariumStars.clear();
 	const int pmLimit = 1; // arc-second per year!
 	for (int hip=0; hip<=NR_OF_HIP; hip++)
 	{
@@ -657,9 +658,14 @@ void StarMgr::populateHipparcosLists()
 			const SpecialZoneData<Star1> *const z = hipIndex[hip].z;
 			StelObjectP so = s->createStelObject(a,z);
 			hipparcosStars.push_back(so);
+			QString spectrum = convertToSpectralType(s->getSpInt());
 			// Carbon stars have spectral type, which start with C letter
-			if (convertToSpectralType(s->getSpInt()).startsWith("C", Qt::CaseInsensitive))
+			if (spectrum.startsWith("C", Qt::CaseInsensitive))
 				carbonStars.push_back(so);
+
+			// Barium stars have spectral type, which contains "Ba" string
+			if (spectrum.contains("Ba", Qt::CaseSensitive))
+				bariumStars.push_back(so);
 
 			if (!getGcvsVariabilityType(s->getHip()).isEmpty())
 			{
@@ -1974,6 +1980,8 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 				starName = inEnglish ? star.firstKey()->getEnglishName() : star.firstKey()->getNameI18n();
 				if (!starName.isEmpty())
 					result << starName;
+				else
+					result << star.firstKey()->getID();
 			}
 			break;
 		}
@@ -1984,6 +1992,8 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 				starName = inEnglish ? star.firstKey()->getEnglishName() : star.firstKey()->getNameI18n();
 				if (!starName.isEmpty())
 					result << starName;
+				else
+					result << star.firstKey()->getID();
 			}
 			break;
 		}
@@ -1994,6 +2004,8 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 				starName = inEnglish ? star.firstKey()->getEnglishName() : star.firstKey()->getNameI18n();
 				if (!starName.isEmpty())
 					result << starName;
+				else
+					result << star.firstKey()->getID();
 			}
 			break;
 		}
@@ -2004,6 +2016,8 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 				starName = inEnglish ? star.firstKey()->getEnglishName() : star.firstKey()->getNameI18n();
 				if (!starName.isEmpty())
 					result << starName;
+				else
+					result << star.firstKey()->getID();
 			}
 			break;
 		}
@@ -2014,6 +2028,8 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 				starName = inEnglish ? star.firstKey()->getEnglishName() : star.firstKey()->getNameI18n();
 				if (!starName.isEmpty())
 					result << starName;
+				else
+					result << star.firstKey()->getID();
 			}
 			break;
 		}
@@ -2024,6 +2040,20 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 				starName = inEnglish ? star->getEnglishName() : star->getNameI18n();
 				if (!starName.isEmpty())
 					result << starName;
+				else
+					result << star->getID();
+			}
+			break;
+		}
+		case 8: // Bright barium stars
+		{
+			for (const auto& star : bariumStars)
+			{
+				starName = inEnglish ? star->getEnglishName() : star->getNameI18n();
+				if (!starName.isEmpty())
+					result << starName;
+				else
+					result << star->getID();
 			}
 			break;
 		}

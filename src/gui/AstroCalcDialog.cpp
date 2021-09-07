@@ -2485,7 +2485,7 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 		{q_("Interstellar objects"), PHCInterstellarObjects},{q_("Planets and Sun"), PHCPlanetsSun},{q_("Sun, planets and moons of observer location"), PHCSunPlanetsMoons},
 		{q_("Bright Solar system objects (<%1 mag)").arg(QString::number(brightLimit + 2.0f, 'f', 1)), PHCBrightSolarSystemObjects},
 		{q_("Solar system objects: minor bodies"), PHCSolarSystemMinorBodies},{q_("Moons of first body"), PHCMoonsFirstBody},
-		{q_("Bright carbon stars"), PHCBrightCarbonStars}
+		{q_("Bright carbon stars"), PHCBrightCarbonStars},{q_("Bright barium stars"), PHCBrightBariumStars}
 	};
 	QMapIterator<QString, int> i(itemsMap);
 	groups->clear();
@@ -3698,6 +3698,7 @@ void AstroCalcDialog::calculatePhenomena()
 	variableStar.clear();
 	QList<StelObjectP> hipStars = starMgr->getHipparcosStars();
 	QList<StelObjectP> carbonStars = starMgr->getHipparcosCarbonStars();
+	QList<StelObjectP> bariumStars = starMgr->getHipparcosBariumStars();
 	QList<StelACStarData> doubleHipStars = starMgr->getHipparcosDoubleStars();
 	QList<StelACStarData> variableHipStars = starMgr->getHipparcosVariableStars();
 
@@ -3749,13 +3750,16 @@ void AstroCalcDialog::calculatePhenomena()
 		}
 		case PHCBrightStars: // Stars
 		case PHCBrightCarbonStars: // Bright carbon stars
+		case PHCBrightBariumStars: // Bright barium stars
 		{
 			QList<StelObjectP> stars;
 			if (obj2Type==PHCBrightStars)
 				stars = hipStars;
+			else if (obj2Type==PHCBrightBariumStars)
+				stars = bariumStars;
 			else
 				stars = carbonStars;
-			for (const auto& object : stars)
+			for (const auto& object : qAsConst(stars))
 			{
 				if (object->getVMagnitude(core) < (brightLimit - 5.0f))
 					star.append(object);
@@ -3906,7 +3910,7 @@ void AstroCalcDialog::calculatePhenomena()
 					fillPhenomenaTable(findClosestApproach(planet, mObj, startJD, stopJD, separation, PhenomenaTypeIndex::Shadows), planet, obj, PhenomenaTypeIndex::Shadows);
 			}
 		}
-		else if (obj2Type == PHCBrightStars || obj2Type == PHCBrightDoubleStars || obj2Type == PHCBrightVariableStars || obj2Type == PHCBrightCarbonStars)
+		else if (obj2Type == PHCBrightStars || obj2Type == PHCBrightDoubleStars || obj2Type == PHCBrightVariableStars || obj2Type == PHCBrightCarbonStars || obj2Type == PHCBrightBariumStars)
 		{
 			// Stars
 			for (auto& obj : star)
@@ -5231,6 +5235,7 @@ void AstroCalcDialog::populateWutGroups()
 	wutCategories.insert(q_("Algol-type eclipsing systems"),	EWAlgolTypeVariableStars);
 	wutCategories.insert(q_("The classical cepheids"),	EWClassicalCepheidsTypeVariableStars);
 	wutCategories.insert(q_("Bright carbon stars"),		EWCarbonStars);
+	wutCategories.insert(q_("Bright barium stars"),		EWBariumStars);
 
 	category->clear();
 	category->addItems(wutCategories.keys());
@@ -5401,6 +5406,7 @@ void AstroCalcDialog::calculateWutObjects()
 		QVector<NebulaP> allDSO = dsoMgr->getAllDeepSkyObjects();
 		QList<StelObjectP> hipStars = starMgr->getHipparcosStars();
 		QList<StelObjectP> carbonStars = starMgr->getHipparcosCarbonStars();
+		QList<StelObjectP> bariumStars = starMgr->getHipparcosBariumStars();
 		QList<StelACStarData> dblHipStars = starMgr->getHipparcosDoubleStars();
 		QList<StelACStarData> varHipStars = starMgr->getHipparcosVariableStars();
 		QList<StelACStarData> algolTypeStars = starMgr->getHipparcosAlgolTypeStars();
@@ -5496,11 +5502,14 @@ void AstroCalcDialog::calculateWutObjects()
 			{
 				case EWBrightStars:
 				case EWCarbonStars:
+				case EWBariumStars:
 				{
 					enableAngular = false;
 					QList<StelObjectP> stars;
 					if (categoryId==EWBrightStars)
 						stars = hipStars;
+					else if (categoryId==EWBariumStars)
+						stars = bariumStars;
 					else
 						stars = carbonStars;
 					for (const auto& object : stars)

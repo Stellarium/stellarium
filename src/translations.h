@@ -453,6 +453,8 @@ class Translations
 		N_("Variable stars: the classical cepheids");
 		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
 		N_("Bright carbon stars");
+		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
+		N_("Bright barium stars");
 		
 		// =====================================================================
 		// Constellation cultures
