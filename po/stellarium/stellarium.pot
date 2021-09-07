@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-09-04 14:06+0700\n"
+"POT-Creation-Date: 2021-09-07 20:05+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,7 +31,7 @@ msgstr ""
 #: src/core/modules/NomenclatureItem.cpp:209 src/core/modules/Nebula.cpp:222
 #: src/core/modules/Nebula.cpp:224 src/core/modules/Planet.cpp:496
 #: src/core/modules/Planet.cpp:499 src/core/modules/StarWrapper.cpp:50
-#: src/core/modules/StarWrapper.cpp:261 src/core/modules/StarWrapper.cpp:264
+#: src/core/modules/StarWrapper.cpp:262 src/core/modules/StarWrapper.cpp:265
 #: src/gui/AstroCalcDialog.cpp:901 src/gui/ObsListDialog.cpp:149
 #: src/gui/ObsListCreateEditDialog.cpp:157 src/ui_configurationDialog.h:1770
 #: plugins/Satellites/src/Satellite.cpp:305
@@ -52,7 +52,7 @@ msgid "asterism"
 msgstr ""
 
 #: src/core/modules/AsterismMgr.cpp:98
-#: src/core/modules/ConstellationMgr.cpp:133 src/core/modules/StarMgr.cpp:437
+#: src/core/modules/ConstellationMgr.cpp:133 src/core/modules/StarMgr.cpp:446
 #: src/core/modules/GridLinesMgr.cpp:1846
 #: src/core/modules/SpecialMarkersMgr.cpp:263
 #: src/core/modules/LandscapeMgr.cpp:608
@@ -121,21 +121,21 @@ msgstr ""
 msgid "Reload the sky culture"
 msgstr ""
 
-#: src/core/modules/StarMgr.cpp:438 src/ui_viewDialog.h:3209
+#: src/core/modules/StarMgr.cpp:447 src/ui_viewDialog.h:3209
 #: src/ui_dsoColorsDialog.h:703
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:254
 msgid "Stars"
 msgstr ""
 
-#: src/core/modules/StarMgr.cpp:439
+#: src/core/modules/StarMgr.cpp:448
 msgid "Stars labels"
 msgstr ""
 
-#: src/core/modules/StarMgr.cpp:441
+#: src/core/modules/StarMgr.cpp:450
 msgid "Increase the magnitude limit for stars"
 msgstr ""
 
-#: src/core/modules/StarMgr.cpp:442
+#: src/core/modules/StarMgr.cpp:451
 msgid "Reduce the magnitude limit for stars"
 msgstr ""
 
@@ -313,7 +313,7 @@ msgstr ""
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/GridLinesMgr.cpp:1466 src/core/modules/Planet.cpp:630
-#: src/core/modules/Planet.cpp:963 src/gui/AstroCalcDialog.cpp:6249
+#: src/core/modules/Planet.cpp:963 src/gui/AstroCalcDialog.cpp:6272
 #: plugins/Satellites/src/Satellite.cpp:326
 #: plugins/Satellites/src/Satellite.cpp:387
 #: plugins/MeteorShowers/src/MeteorShower.cpp:546
@@ -756,7 +756,7 @@ msgstr ""
 #: src/core/modules/NomenclatureItem.cpp:225 src/core/modules/Planet.cpp:586
 #: src/core/modules/Planet.cpp:611 src/core/modules/Planet.cpp:709
 #: src/core/modules/Comet.cpp:164 src/core/modules/Comet.cpp:174
-#: src/gui/StelGuiItems.cpp:847 src/gui/AstroCalcDialog.cpp:6184
+#: src/gui/StelGuiItems.cpp:847 src/gui/AstroCalcDialog.cpp:6207
 #: plugins/Satellites/src/Satellite.cpp:322
 #: plugins/Satellites/src/Satellite.cpp:380
 msgctxt "distance"
@@ -1445,17 +1445,17 @@ msgid "Airmasses"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:209 src/core/modules/Planet.cpp:479
-#: src/core/modules/StarWrapper.cpp:215
+#: src/core/modules/StarWrapper.cpp:216
 msgid "Additional names: "
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:215 src/core/modules/Planet.cpp:486
-#: src/core/modules/StarWrapper.cpp:221
+#: src/core/modules/StarWrapper.cpp:222
 msgid "Additional catalog numbers: "
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:233 src/core/modules/MinorPlanet.cpp:186
-#: src/core/modules/StarWrapper.cpp:55 src/core/modules/StarWrapper.cpp:277
+#: src/core/modules/StarWrapper.cpp:55 src/core/modules/StarWrapper.cpp:278
 #: plugins/Quasars/src/Quasar.cpp:137
 msgid "Color Index (B-V)"
 msgstr ""
@@ -1499,7 +1499,7 @@ msgstr ""
 #. TRANSLATORS: Unit of measure for distance - light years
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:318 src/core/modules/Nebula.cpp:331
-#: src/core/modules/StarWrapper.cpp:307
+#: src/core/modules/StarWrapper.cpp:308
 #: plugins/Supernovae/src/Supernova.cpp:159 plugins/Novae/src/Nova.cpp:162
 #: plugins/Pulsars/src/Pulsar.cpp:272 plugins/Exoplanets/src/Exoplanet.cpp:293
 msgctxt "distance"
@@ -1507,8 +1507,8 @@ msgid "ly"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:319 src/core/modules/Nebula.cpp:365
-#: src/core/modules/Planet.cpp:621 src/core/modules/StarWrapper.cpp:312
-#: src/core/modules/StarWrapper.cpp:314 src/gui/AstroCalcDialog.cpp:3157
+#: src/core/modules/Planet.cpp:621 src/core/modules/StarWrapper.cpp:313
+#: src/core/modules/StarWrapper.cpp:315 src/gui/AstroCalcDialog.cpp:3157
 #: src/gui/AstroCalcDialog.cpp:3215 src/ui_configurationDialog.h:1755
 #: plugins/Supernovae/src/Supernova.cpp:160 plugins/Novae/src/Nova.cpp:163
 #: plugins/Exoplanets/src/Exoplanet.cpp:294
@@ -1537,12 +1537,12 @@ msgstr ""
 msgid "Redshift"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:390 src/core/modules/StarWrapper.cpp:336
+#: src/core/modules/Nebula.cpp:390 src/core/modules/StarWrapper.cpp:337
 msgid "Parallax"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
-#: src/core/modules/Nebula.cpp:390 src/core/modules/StarWrapper.cpp:341
+#: src/core/modules/Nebula.cpp:390 src/core/modules/StarWrapper.cpp:342
 #: plugins/Pulsars/src/Pulsar.cpp:260
 msgctxt "parallax"
 msgid "mas"
@@ -1947,7 +1947,7 @@ msgstr ""
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/Nebula.cpp:1410 src/core/modules/StarWrapper.cpp:50
-#: src/core/modules/StarWrapper.cpp:254 src/gui/AstroCalcDialog.cpp:1244
+#: src/core/modules/StarWrapper.cpp:255 src/gui/AstroCalcDialog.cpp:1244
 #: src/translations.h:35
 msgid "star"
 msgstr ""
@@ -2018,7 +2018,7 @@ msgid "See Logfile for instructions."
 msgstr ""
 
 #: src/core/modules/Planet.cpp:457 src/core/modules/Comet.cpp:155
-#: src/core/modules/StarWrapper.cpp:271 plugins/Quasars/src/Quasar.cpp:134
+#: src/core/modules/StarWrapper.cpp:272 plugins/Quasars/src/Quasar.cpp:134
 msgid "Absolute Magnitude"
 msgstr ""
 
@@ -2047,7 +2047,7 @@ msgid "Hourly motion"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:569 src/core/modules/Planet.cpp:1133
-#: src/core/modules/Planet.cpp:1142 src/core/modules/StarWrapper.cpp:328
+#: src/core/modules/Planet.cpp:1142 src/core/modules/StarWrapper.cpp:329
 #: plugins/Pulsars/src/Pulsar.cpp:203
 msgctxt "into the direction of"
 msgid "towards"
@@ -2057,8 +2057,8 @@ msgstr ""
 #: src/core/modules/Planet.cpp:584 src/gui/AstroCalcDialog.cpp:882
 #: src/gui/AstroCalcDialog.cpp:1152 src/gui/AstroCalcDialog.cpp:1536
 #: src/gui/AstroCalcDialog.cpp:1584 src/gui/AstroCalcDialog.cpp:3125
-#: src/gui/AstroCalcDialog.cpp:6209 src/gui/AstroCalcDialog.cpp:6271
-#: src/gui/AstroCalcDialog.cpp:6413 plugins/Exoplanets/src/Exoplanet.cpp:323
+#: src/gui/AstroCalcDialog.cpp:6232 src/gui/AstroCalcDialog.cpp:6294
+#: src/gui/AstroCalcDialog.cpp:6436 plugins/Exoplanets/src/Exoplanet.cpp:323
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
 msgctxt "distance, astronomical unit"
 msgid "AU"
@@ -2068,7 +2068,7 @@ msgstr ""
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #. TRANSLATORS: Unit of measure for distance - millions kilometers
 #: src/core/modules/Planet.cpp:600 src/core/modules/Planet.cpp:618
-#: src/core/modules/Comet.cpp:166 src/gui/AstroCalcDialog.cpp:6186
+#: src/core/modules/Comet.cpp:166 src/gui/AstroCalcDialog.cpp:6209
 msgctxt "distance"
 msgid "M km"
 msgstr ""
@@ -2126,14 +2126,14 @@ msgstr ""
 msgid "Elong. in Ecl.Long."
 msgstr ""
 
-#: src/core/modules/Planet.cpp:791 src/gui/AstroCalcDialog.cpp:6272
-#: src/gui/AstroCalcDialog.cpp:6416 src/gui/AstroCalcDialog.cpp:6433
+#: src/core/modules/Planet.cpp:791 src/gui/AstroCalcDialog.cpp:6295
+#: src/gui/AstroCalcDialog.cpp:6439 src/gui/AstroCalcDialog.cpp:6456
 msgid "Angular distance"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:809 src/core/modules/Planet.cpp:971
-#: src/core/modules/StarWrapper.cpp:348 src/gui/AstroCalcDialog.cpp:6220
+#: src/core/modules/StarWrapper.cpp:349 src/gui/AstroCalcDialog.cpp:6243
 msgctxt "duration"
 msgid "days"
 msgstr ""
@@ -2367,88 +2367,88 @@ msgstr ""
 msgid "Native planet names (from starlore)"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:233
+#: src/core/modules/StarWrapper.cpp:234
 msgid "eruptive variable star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:235
+#: src/core/modules/StarWrapper.cpp:236
 msgid "pulsating variable star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:237
+#: src/core/modules/StarWrapper.cpp:238
 msgid "rotating variable star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:239
+#: src/core/modules/StarWrapper.cpp:240
 msgid "cataclysmic variable star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:242
+#: src/core/modules/StarWrapper.cpp:243
 msgid "eclipsing binary system"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:248 src/gui/AstroCalcDialog.cpp:1269
+#: src/core/modules/StarWrapper.cpp:249 src/gui/AstroCalcDialog.cpp:1269
 msgid "variable star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:252 src/gui/AstroCalcDialog.cpp:1252
+#: src/core/modules/StarWrapper.cpp:253 src/gui/AstroCalcDialog.cpp:1252
 msgid "double star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:295
+#: src/core/modules/StarWrapper.cpp:296
 msgid "Magnitude range"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:295
+#: src/core/modules/StarWrapper.cpp:296
 msgid "Photometric system"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:326 plugins/Pulsars/src/Pulsar.cpp:201
+#: src/core/modules/StarWrapper.cpp:327 plugins/Pulsars/src/Pulsar.cpp:201
 msgid "Proper motion"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:327 src/core/modules/StarWrapper.cpp:329
+#: src/core/modules/StarWrapper.cpp:328 src/core/modules/StarWrapper.cpp:330
 #: plugins/Pulsars/src/Pulsar.cpp:202 plugins/Pulsars/src/Pulsar.cpp:204
 msgctxt "milliarc second per year"
 msgid "mas/yr"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:329 plugins/Pulsars/src/Pulsar.cpp:204
+#: src/core/modules/StarWrapper.cpp:330 plugins/Pulsars/src/Pulsar.cpp:204
 msgid "Proper motions by axes"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:345 plugins/Quasars/src/Quasar.cpp:145
+#: src/core/modules/StarWrapper.cpp:346 plugins/Quasars/src/Quasar.cpp:145
 #: plugins/Exoplanets/src/Exoplanet.cpp:288
 msgid "Spectral Type"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:348
+#: src/core/modules/StarWrapper.cpp:349
 #: plugins/Exoplanets/src/Exoplanet.cpp:320
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 msgid "Period"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:356
+#: src/core/modules/StarWrapper.cpp:357
 msgid "Next maximum light"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:358
+#: src/core/modules/StarWrapper.cpp:359
 msgid "Next minimum light"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:365
+#: src/core/modules/StarWrapper.cpp:366
 msgid "Rising time"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:367
+#: src/core/modules/StarWrapper.cpp:368
 msgid "Duration of eclipse"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:376
+#: src/core/modules/StarWrapper.cpp:377
 msgid "Position angle"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:380 src/core/modules/StarWrapper.cpp:382
+#: src/core/modules/StarWrapper.cpp:381 src/core/modules/StarWrapper.cpp:383
 #: src/gui/AstroCalcDialog.cpp:3627
 msgid "Separation"
 msgstr ""
@@ -3351,7 +3351,7 @@ msgstr ""
 msgid "Parallactic Angle"
 msgstr ""
 
-#: src/core/StelObject.cpp:702
+#: src/core/StelObject.cpp:702 src/gui/AstroCalcDialog.cpp:5390
 msgid "IAU Constellation"
 msgstr ""
 
@@ -4778,125 +4778,125 @@ msgid ""
 "system objects. May reduce shadow penumbra quality on some objects."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:939
+#: src/gui/ViewDialog.cpp:944
 msgid "Abbreviated"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:940
+#: src/gui/ViewDialog.cpp:945
 msgid "Native"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:941
+#: src/gui/ViewDialog.cpp:946
 msgid "Translated"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1112
+#: src/gui/ViewDialog.cpp:1117
 msgid "No shooting stars"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1114
+#: src/gui/ViewDialog.cpp:1119
 msgid "Normal rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1116
+#: src/gui/ViewDialog.cpp:1121
 msgid "Standard Orionids rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1118
+#: src/gui/ViewDialog.cpp:1123
 msgid "Standard Perseids rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1120
+#: src/gui/ViewDialog.cpp:1125
 msgid "Standard Geminids rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1122
+#: src/gui/ViewDialog.cpp:1127
 msgid "Exceptional Perseid rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1124
+#: src/gui/ViewDialog.cpp:1129
 msgid "Meteor storm rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1126
+#: src/gui/ViewDialog.cpp:1131
 msgid "Exceptional Draconid rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1128
+#: src/gui/ViewDialog.cpp:1133
 msgid "Exceptional Leonid rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1130
+#: src/gui/ViewDialog.cpp:1135
 msgid "Very high rate (1966 Leonids)"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1132
+#: src/gui/ViewDialog.cpp:1137
 msgid "Highest rate ever (1833 Leonids)"
-msgstr ""
-
-#: src/gui/ViewDialog.cpp:1195
-msgctxt "magnitude algorithm"
-msgid "G. Müller (1893)"
-msgstr ""
-
-#: src/gui/ViewDialog.cpp:1196
-msgctxt "magnitude algorithm"
-msgid "Astronomical Almanac (1984)"
-msgstr ""
-
-#: src/gui/ViewDialog.cpp:1197
-msgctxt "magnitude algorithm"
-msgid "Explanatory Supplement (1992)"
-msgstr ""
-
-#: src/gui/ViewDialog.cpp:1198
-msgctxt "magnitude algorithm"
-msgid "Explanatory Supplement (2013)"
-msgstr ""
-
-#: src/gui/ViewDialog.cpp:1199
-msgctxt "magnitude algorithm"
-msgid "Mallama & Hilton (2018)"
 msgstr ""
 
 #: src/gui/ViewDialog.cpp:1200
 msgctxt "magnitude algorithm"
+msgid "G. Müller (1893)"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:1201
+msgctxt "magnitude algorithm"
+msgid "Astronomical Almanac (1984)"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:1202
+msgctxt "magnitude algorithm"
+msgid "Explanatory Supplement (1992)"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:1203
+msgctxt "magnitude algorithm"
+msgid "Explanatory Supplement (2013)"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:1204
+msgctxt "magnitude algorithm"
+msgid "Mallama & Hilton (2018)"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:1205
+msgctxt "magnitude algorithm"
 msgid "Generic"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1226
+#: src/gui/ViewDialog.cpp:1231
 msgid ""
 "The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later) "
 "and gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1229
+#: src/gui/ViewDialog.cpp:1234
 msgid ""
 "The algorithm is based on visual observations 1877-1891 by G. Müller and was "
 "still republished in the <em>Explanatory Supplement to the Astronomical "
 "Ephemeris</em> (1961)."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1232
+#: src/gui/ViewDialog.cpp:1237
 msgid ""
 "The algorithm was published in the 2nd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (1992)."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1235
+#: src/gui/ViewDialog.cpp:1240
 msgid ""
 "The algorithm was published in the 3rd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (2013)."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1238
+#: src/gui/ViewDialog.cpp:1243
 msgid ""
 "The algorithm was published by A. Mallama & J. L. Hilton: <em>Computing "
 "apparent planetary magnitudes for the Astronomical Almanac.</em> "
 "Astronomy&Computing 25 (2018) 10-24."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1241
+#: src/gui/ViewDialog.cpp:1246
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr ""
 
@@ -5267,7 +5267,7 @@ msgid "Local Time"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:764 src/gui/AstroCalcDialog.cpp:2703
-#: src/gui/AstroCalcDialog.cpp:3471 src/gui/AstroCalcDialog.cpp:6544
+#: src/gui/AstroCalcDialog.cpp:3471 src/gui/AstroCalcDialog.cpp:6567
 msgid "Unnamed star"
 msgstr ""
 
@@ -5411,14 +5411,14 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:1378 src/gui/AstroCalcDialog.cpp:1826
 #: src/gui/AstroCalcDialog.cpp:2092 src/gui/AstroCalcDialog.cpp:3957
-#: src/gui/AstroCalcDialog.cpp:6067
+#: src/gui/AstroCalcDialog.cpp:6090
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1450
 msgid "Microsoft Excel Open XML Spreadsheet"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:1380 src/gui/AstroCalcDialog.cpp:1828
 #: src/gui/AstroCalcDialog.cpp:2094 src/gui/AstroCalcDialog.cpp:3959
-#: src/gui/AstroCalcDialog.cpp:6069
+#: src/gui/AstroCalcDialog.cpp:6092
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1452
 msgid "CSV (Comma delimited)"
 msgstr ""
@@ -6143,70 +6143,76 @@ msgstr ""
 msgid "Ang. Size"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5421 src/ui_astroCalcDialog.h:1869
+#. TRANSLATORS: IAU Constellation
+#: src/gui/AstroCalcDialog.cpp:5309
+msgctxt "IAU Constellation"
+msgid "Const."
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:5426 src/ui_astroCalcDialog.h:1869
 msgid "Limit angular size:"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5422 src/ui_astroCalcDialog.h:1867
+#: src/gui/AstroCalcDialog.cpp:5427 src/ui_astroCalcDialog.h:1867
 msgid "Set limits for angular size for visible celestial objects"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5423 src/ui_astroCalcDialog.h:1871
+#: src/gui/AstroCalcDialog.cpp:5428 src/ui_astroCalcDialog.h:1871
 msgid "Minimal angular size for visible celestial objects"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5424 src/ui_astroCalcDialog.h:1874
+#: src/gui/AstroCalcDialog.cpp:5429 src/ui_astroCalcDialog.h:1874
 msgid "Maximum angular size for visible celestial objects"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5720
+#: src/gui/AstroCalcDialog.cpp:5728
 msgid "Limit angular separation:"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5721
+#: src/gui/AstroCalcDialog.cpp:5729
 msgid "Set limits for angular separation for visible double stars"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5722
+#: src/gui/AstroCalcDialog.cpp:5730
 msgid "Minimal angular separation for visible double stars"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5723
+#: src/gui/AstroCalcDialog.cpp:5731
 msgid "Maximum angular separation for visible double stars"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:6071
+#: src/gui/AstroCalcDialog.cpp:6094
 msgid "JSON (Stellarium bookmarks)"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:6075
+#: src/gui/AstroCalcDialog.cpp:6098
 msgid "Save list of objects as..."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:6095 src/ui_astroCalcDialog.h:1682
+#: src/gui/AstroCalcDialog.cpp:6118 src/ui_astroCalcDialog.h:1682
 msgid "What's Up Tonight"
 msgstr ""
 
 #. TRANSLATORS: Part of unit of measure for mean motion - degrees per day
-#: src/gui/AstroCalcDialog.cpp:6218
+#: src/gui/AstroCalcDialog.cpp:6241
 msgctxt "mean motion"
 msgid "day"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:6270 src/gui/AstroCalcDialog.cpp:6432
+#: src/gui/AstroCalcDialog.cpp:6293 src/gui/AstroCalcDialog.cpp:6455
 msgid "Days from today"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:6271 src/gui/AstroCalcDialog.cpp:6413
+#: src/gui/AstroCalcDialog.cpp:6294 src/gui/AstroCalcDialog.cpp:6436
 msgid "Linear distance"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:6413 src/gui/AstroCalcDialog.cpp:6416
+#: src/gui/AstroCalcDialog.cpp:6436 src/gui/AstroCalcDialog.cpp:6439
 #: plugins/Calendars/src/ui_calendarsDialog.h:832
 msgid "Day"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:6474 src/ui_astroCalcDialog.h:1855
+#: src/gui/AstroCalcDialog.cpp:6497 src/ui_astroCalcDialog.h:1855
 msgid "Change of angular distance between the Moon and selected object"
 msgstr ""
 

@@ -5387,6 +5387,7 @@ void AstroCalcDialog::fillWUTTable(QString objectName, QString designation, floa
 	treeItem->setTextAlignment(WUTAngularSize, Qt::AlignRight);
 	treeItem->setText(WUTConstellation, constellation);
 	treeItem->setTextAlignment(WUTConstellation, Qt::AlignHCenter);
+	treeItem->setToolTip(WUTConstellation, q_("IAU Constellation"));
 }
 
 void AstroCalcDialog::calculateWutObjects()
