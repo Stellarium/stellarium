@@ -1909,6 +1909,7 @@ QStringList StarMgr::listAllObjects(bool inEnglish) const
 QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish) const
 {
 	QStringList result;
+	QString starName;
 	int type = objType.toInt();
 	// Use SkyTranslator for translation star names
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
@@ -1970,10 +1971,9 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 		{
 			for (const auto& star : doubleHipStars)
 			{
-				if (inEnglish)
-					result << star.firstKey()->getEnglishName();
-				else
-					result << star.firstKey()->getNameI18n();
+				starName = inEnglish ? star.firstKey()->getEnglishName() : star.firstKey()->getNameI18n();
+				if (!starName.isEmpty())
+					result << starName;
 			}
 			break;
 		}
@@ -1981,10 +1981,9 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 		{
 			for (const auto& star : variableHipStars)
 			{
-				if (inEnglish)
-					result << star.firstKey()->getEnglishName();
-				else
-					result << star.firstKey()->getNameI18n();
+				starName = inEnglish ? star.firstKey()->getEnglishName() : star.firstKey()->getNameI18n();
+				if (!starName.isEmpty())
+					result << starName;
 			}
 			break;
 		}
@@ -1992,10 +1991,9 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 		{
 			for (const auto& star : hipStarsHighPM)
 			{
-				if (inEnglish)
-					result << star.firstKey()->getEnglishName();
-				else
-					result << star.firstKey()->getNameI18n();
+				starName = inEnglish ? star.firstKey()->getEnglishName() : star.firstKey()->getNameI18n();
+				if (!starName.isEmpty())
+					result << starName;
 			}
 			break;
 		}
@@ -2003,10 +2001,9 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 		{
 			for (const auto& star : algolTypeStars)
 			{
-				if (inEnglish)
-					result << star.firstKey()->getEnglishName();
-				else
-					result << star.firstKey()->getNameI18n();
+				starName = inEnglish ? star.firstKey()->getEnglishName() : star.firstKey()->getNameI18n();
+				if (!starName.isEmpty())
+					result << starName;
 			}
 			break;
 		}
@@ -2014,10 +2011,9 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 		{
 			for (const auto& star : classicalCepheidsTypeStars)
 			{
-				if (inEnglish)
-					result << star.firstKey()->getEnglishName();
-				else
-					result << star.firstKey()->getNameI18n();
+				starName = inEnglish ? star.firstKey()->getEnglishName() : star.firstKey()->getNameI18n();
+				if (!starName.isEmpty())
+					result << starName;
 			}
 			break;
 		}
@@ -2025,10 +2021,9 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 		{
 			for (const auto& star : carbonStars)
 			{
-				if (inEnglish)
-					result << star->getEnglishName();
-				else
-					result << star->getNameI18n();
+				starName = inEnglish ? star->getEnglishName() : star->getNameI18n();
+				if (!starName.isEmpty())
+					result << starName;
 			}
 			break;
 		}
@@ -2040,6 +2035,7 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 	}
 
 	result.removeDuplicates();
+	qWarning() << "listAllObjectsByType:" << objType << type << result;
 	return result;
 }
 
