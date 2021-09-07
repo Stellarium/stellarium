@@ -663,8 +663,8 @@ void StarMgr::populateHipparcosLists()
 			if (spectrum.startsWith("C", Qt::CaseInsensitive))
 				carbonStars.push_back(so);
 
-			// Barium stars have spectral type, which contains "Ba" string
-			if (spectrum.contains("Ba", Qt::CaseSensitive))
+			// Barium stars have spectral class G to K and contains "Ba" string
+			if ((spectrum.startsWith("G", Qt::CaseInsensitive) || spectrum.startsWith("F", Qt::CaseInsensitive) || spectrum.startsWith("K", Qt::CaseInsensitive)) && spectrum.contains("Ba", Qt::CaseSensitive))
 				bariumStars.push_back(so);
 
 			if (!getGcvsVariabilityType(s->getHip()).isEmpty())
