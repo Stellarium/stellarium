@@ -1914,8 +1914,13 @@ QStringList StarMgr::listAllObjects(bool inEnglish) const
 
 QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish) const
 {
-	QStringList result;
-	QString starName;
+	QStringList result;	
+	// type 1
+	bool isStarT1 = false;
+	QList<StelObjectP> starsT1;
+	// type 2
+	bool isStarT2 = false;
+	QList<QMap<StelObjectP, float>> starsT2;
 	int type = objType.toInt();
 	// Use SkyTranslator for translation star names
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
@@ -1975,92 +1980,75 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 		}
 		case 2: // Bright double stars
 		{
-			for (const auto& star : doubleHipStars)
-			{
-				starName = inEnglish ? star.firstKey()->getEnglishName() : star.firstKey()->getNameI18n();
-				if (!starName.isEmpty())
-					result << starName;
-				else
-					result << star.firstKey()->getID();
-			}
+			starsT2 = doubleHipStars;
+			isStarT2 = true;
 			break;
 		}
 		case 3: // Bright variable stars
 		{
-			for (const auto& star : variableHipStars)
-			{
-				starName = inEnglish ? star.firstKey()->getEnglishName() : star.firstKey()->getNameI18n();
-				if (!starName.isEmpty())
-					result << starName;
-				else
-					result << star.firstKey()->getID();
-			}
+			starsT2 = variableHipStars;
+			isStarT2 = true;
 			break;
 		}
 		case 4:
 		{
-			for (const auto& star : hipStarsHighPM)
-			{
-				starName = inEnglish ? star.firstKey()->getEnglishName() : star.firstKey()->getNameI18n();
-				if (!starName.isEmpty())
-					result << starName;
-				else
-					result << star.firstKey()->getID();
-			}
+			starsT2 = hipStarsHighPM;
+			isStarT2 = true;
 			break;
 		}
 		case 5: // Variable stars: Algol-type eclipsing systems
 		{
-			for (const auto& star : algolTypeStars)
-			{
-				starName = inEnglish ? star.firstKey()->getEnglishName() : star.firstKey()->getNameI18n();
-				if (!starName.isEmpty())
-					result << starName;
-				else
-					result << star.firstKey()->getID();
-			}
+			starsT2 = algolTypeStars;
+			isStarT2 = true;
 			break;
 		}
 		case 6: // Variable stars: the classical cepheids
 		{
-			for (const auto& star : classicalCepheidsTypeStars)
-			{
-				starName = inEnglish ? star.firstKey()->getEnglishName() : star.firstKey()->getNameI18n();
-				if (!starName.isEmpty())
-					result << starName;
-				else
-					result << star.firstKey()->getID();
-			}
+			starsT2 = classicalCepheidsTypeStars;
+			isStarT2 = true;
 			break;
 		}
 		case 7: // Bright carbon stars
 		{
-			for (const auto& star : carbonStars)
-			{
-				starName = inEnglish ? star->getEnglishName() : star->getNameI18n();
-				if (!starName.isEmpty())
-					result << starName;
-				else
-					result << star->getID();
-			}
+			starsT1 = carbonStars;
+			isStarT1 = true;
 			break;
 		}
 		case 8: // Bright barium stars
 		{
-			for (const auto& star : bariumStars)
-			{
-				starName = inEnglish ? star->getEnglishName() : star->getNameI18n();
-				if (!starName.isEmpty())
-					result << starName;
-				else
-					result << star->getID();
-			}
+			starsT1 = bariumStars;
+			isStarT1 = true;
 			break;
 		}
 		default:
 		{
 			// No stars yet?
 			break;
+		}
+	}
+
+	QString starName;
+	if (isStarT1)
+	{
+		for (const auto& star : qAsConst(starsT1))
+		{
+			starName = inEnglish ? star->getEnglishName() : star->getNameI18n();
+			if (!starName.isEmpty())
+				result << starName;
+			else
+				result << star->getID();
+		}
+	}
+
+	if (isStarT2)
+	{
+		for (const auto& star : qAsConst(starsT2))
+		{
+			starName = inEnglish ? star.firstKey()->getEnglishName() : star.firstKey()->getNameI18n();
+			if (!starName.isEmpty())
+				result << starName;
+			else
+				result << star.firstKey()->getID();
 		}
 	}
 
