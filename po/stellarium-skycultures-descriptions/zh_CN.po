@@ -5,8 +5,8 @@
 # 
 # Translators:
 # 杨 先生 <865194108@qq.com>, 2020
-# 殳玮 孙 <itun@qq.com>, 2020
 # Celestial Phineas <hanghang0713@hotmail.com>, 2021
+# 殳玮 孙 <itun@qq.com>, 2021
 # 
 #, fuzzy
 msgid ""
@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2021-09-05 10:57+0700\n"
 "PO-Revision-Date: 2020-01-06 16:35+0000\n"
-"Last-Translator: Celestial Phineas <hanghang0713@hotmail.com>, 2021\n"
+"Last-Translator: 殳玮 孙 <itun@qq.com>, 2021\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/stellarium/teams/80998/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +25,7 @@ msgstr ""
 #. type: Content of: <h1>
 #: ../../skycultures/al-sufi/description.en.utf8:1
 msgid "Al-Sufi (\"Book of Fixed Stars\")"
-msgstr ""
+msgstr "苏菲 (《恒星之书》)"
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:2
@@ -52,6 +52,12 @@ msgid ""
 "neglected by Ptolemy, but he did not catalogue them and was faithful to "
 "Ptolemy star catalog."
 msgstr ""
+"《恒星之书》（The Book of Fixed Stars）为著名天文学家阿卜杜勒-拉赫曼·苏菲（Abu 'l-Ḥusayn 'Abd al-"
+"Raḥmān ibn 'Umar al-Şūfi, 903-986年），简称为苏菲（Al-Sufi）于公元 964 年之前不久所写。 Paul "
+"Kunitzsch 博士将其描述为苏菲著作中最杰出的。 苏菲在书中论述了托勒密的《天文学大成》中所建立的 48 "
+"个经典星座，将每个星座的描述成以下四个部分：第一，对星座及其所含恒星的一般讨论；这部分也包括苏菲对托勒密传统的评论和他自己观察所注意到的事项。第二，记录该星座内的传统阿拉伯星名，以及与托勒密恒星进行准确配对。第三，星座的两幅图，一幅是在天球外看的角度，另一幅是在天球内看的角度，亦即我们在地球上仰望星空时的角度。第四，组成该星座的星表，对每颗星星的位置进行口头描述以及它的经度、纬度和星等大小。这张表的顺序与托勒密在《天文学大成》中的星表排列联系紧密。"
+"  <sup><a href=\"#footnote-1\">[1]</a></sup>。除了 Kunitzsch "
+"博士提到的每个星座的四个部分外，苏菲另外标识了被托勒密忽略的 6 等星内的恒星，但他并没有对它们进行分类，而是忠于托勒密的星表。"
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:3
@@ -71,11 +77,17 @@ msgid ""
 "relationship to the cubit value from Schjellerup<sup><a "
 "href=\"#footnote-3\">[3]</a></sup> and from my research."
 msgstr ""
+"一般讨论部分的一个重要方面是苏菲对恒星识别采用的方法。 "
+"他以多种方式描述每颗恒星：通过与星座图相关的恒星位置，通过其大小，通过它与其他恒星形成的星群，如三角形或弧形，有时通过与银河系相关的恒星位置，以及通过与附近恒星的角距离。我计算过苏菲在他的书中所测量的角距离有"
+" 700 多个。 他用于角距离的单位是手肘长、矛长、人的高度、跨度和手指宽。 苏菲在他的书中明确指出，一个肘长等于2 度 20 分  <sup><a "
+"href=\"#footnote-2\">[2]</a></sup>。 对于其他单位，Schjellerup 得出了一些数值，但在追踪探询 700 "
+"个测量值，我得出了不同的值。 下表总结了从 Schjellerup <sup><a href=\"#footnote-3\">[3]</a></sup>"
+" 和从我的研究中所得的单位和相对于手肘长大小的关系。"
 
 #. type: Content of: <h2>
 #: ../../skycultures/al-sufi/description.en.utf8:5
 msgid "Angular distance units used by Al-Sufi"
-msgstr ""
+msgstr "苏菲使用的角距离单位"
 
 #. type: Content of: <p><p><p><p><p><p><p><p><p>
 #: ../../skycultures/al-sufi/description.en.utf8:9
@@ -100,40 +112,40 @@ msgstr "&nbsp;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:10
 msgid "<b>Schjellerup</b>"
-msgstr ""
+msgstr "<b>Schjellerup</b>"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:11
 msgid "<b>Khalid</b>"
-msgstr ""
+msgstr "<b>Khalid</b>"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:14
 msgid "<b>unit</b>"
-msgstr ""
+msgstr "<b>单位</b>"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:15
 #: ../../skycultures/al-sufi/description.en.utf8:17
 msgid "<b>cubits</b>"
-msgstr "<b>肘长</b>"
+msgstr "<b>手肘长</b>"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:16
 #: ../../skycultures/al-sufi/description.en.utf8:18
 msgid "<b>Angular Value</b>"
-msgstr ""
+msgstr "<b>角距离</b>"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:21
 msgid "spear"
-msgstr ""
+msgstr "矛长"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:22
 #: ../../skycultures/al-sufi/description.en.utf8:24
 msgid "6 cubits"
-msgstr "6 肘"
+msgstr "6 手肘长"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:23
@@ -149,7 +161,7 @@ msgstr "人高"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:31
 msgid "3 cubits"
-msgstr "3 肘"
+msgstr "3 手肘长"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:32
@@ -159,13 +171,13 @@ msgstr "7°"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:35
 msgid "cubit"
-msgstr "肘长"
+msgstr "手肘长"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:36
 #: ../../skycultures/al-sufi/description.en.utf8:38
 msgid "1 cubit"
-msgstr "1 肘"
+msgstr "1 手肘长"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:37
@@ -176,12 +188,12 @@ msgstr "2°20'"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:42
 msgid "span"
-msgstr ""
+msgstr "跨度"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:43
 msgid "1/3 of a cubit"
-msgstr "1/3 肘"
+msgstr "手肘长的 1/3"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:44
@@ -191,7 +203,7 @@ msgstr "47'"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:45
 msgid "1/2 of a cubit"
-msgstr "1/2 肘"
+msgstr "手肘长的 1/2"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:46
@@ -201,12 +213,12 @@ msgstr "1°10'"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:49
 msgid "finger"
-msgstr "指宽"
+msgstr "手指宽"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:50
 msgid "1/32 of a cubit"
-msgstr "1/32 肘"
+msgstr "手肘长的 1/32"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:51
@@ -216,7 +228,7 @@ msgstr "4.4'"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:52
 msgid "1/16 of a cubit"
-msgstr "1/16 肘"
+msgstr "手肘长的 1/16"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/al-sufi/description.en.utf8:53
@@ -232,11 +244,12 @@ msgid ""
 "stars. This means that we are looking at two layers of stars knowledge at "
 "the same time: the Ptolemaic one and the indigenous Arab one."
 msgstr ""
+"苏菲的书中另一个重要方面是他记录了每个星座下的传统阿拉伯星名，以及与托勒密恒星进行准确配对。 这意味着我们同时看到托勒密的和传统阿拉伯两套恒星知识。"
 
 #. type: Content of: <h2>
 #: ../../skycultures/al-sufi/description.en.utf8:59
 msgid "The Sky Culture"
-msgstr ""
+msgstr "星空文化"
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:60
@@ -248,6 +261,11 @@ msgid ""
 "class='external text' rel=\"nofollow\">Oxford, Bodleian Library Ms. Marsh "
 "144 dated 1009 AD</a>."
 msgstr ""
+"这个星空文化是是对该书的几份手稿进行研究的结果，其中最古老的是 <a "
+"href=\"https://iiif.bodleian.ox.ac.uk/iiif/viewer/c1caa84c-f6d2-483f-"
+"9eb4-2439cccdc801#?c=0&m=0&s=0&cv=25&r=0&xywh=-4815%2C-378%2C14782%2C7535\" "
+"class='external text' rel=\"nofollow\">Marsh 144 女士，公元 1009 "
+"年纪录，牛津博德利图书馆</a>。"
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:61
@@ -262,6 +280,10 @@ msgid ""
 " plus explanations and commentary by Khalid Al-Ajaji<sup><a "
 "href=\"#footnote-4\">[4]</a></sup>."
 msgstr ""
+"首先，对《恒星之书》手稿进行校勘，编辑成文本。 其次，这是根据苏菲的描述来确定 48 个星座的每个成员星，并建立新的星表，并包括来自 "
+"Hipparcos、Bright Stars和 Bayer 星表的现代恒星名称。 第三，收集和辨识苏菲确定的映射到托勒密星表的阿拉伯传统星名。 "
+"前面的所有步骤都包含在以数字形式出版的《恒星之书》和 Khalid Al-Ajaji 的解释和评论中<sup><a "
+"href=\"#footnote-4\">[4]</a></sup>。"
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:62
@@ -281,6 +303,12 @@ msgid ""
 "star file as secondary names, while names of group of stars were defined "
 "through asterism names and asterism lines files."
 msgstr ""
+"本星空文化的图绘是取自 《Ulugh Beg manuscript of the Book of Fixed Stars <sup><a "
+"href=\"#footnote-5\">[5]</a></sup>》中的图像，并被 Kutaibaa Akraa 先生在 Stellarium 采用。"
+" 恒星名称使用星座内的恒星编号当作主恒星名，星表内的恒星描述当作次恒星名。例如，北极星的的主恒星名为：UMi1，UMi 指的是小熊座 Ursa "
+"Minor ，1 是该星座的第一号星。 如果在菜单中选择了“使用附加的恒星名”，则会显示次恒星名，它将在屏幕上端显示 「尾巴末端的星星」。 "
+"星座连线文件是试图包括大多数成员恒星来构据星座的形状。 "
+"对于传统阿拉伯星空知识，个别星名被添加到恒星文件中作为次恒星名，而成群星星的名称则通过星群名和星连线文件加以定义。"
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:63
@@ -291,13 +319,17 @@ msgid ""
 "href=\"#footnote-7\">[7]</a></sup>. The translation was modified in a few "
 "places to agree with Al-Sufi wording."
 msgstr ""
+"从阿拉伯语到英语的恒星描述翻译是摘自 Ernie Wright 网站 <sup><a "
+"href=\"#footnote-6\">[6]</a></sup>，该网站是从 Toomer 对《天文学大成》的翻译<sup><a "
+"href=\"#footnote-7\">[7]</a></sup>中转录的。 "
+"翻译词汇在几个地方以符合苏菲的措辞进行了修改。中文翻译则译自英文，这势必与原来的阿拉伯文意思无法完全吻合。"
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:64
 msgid ""
 "The single source of the sky culture is the Book of Fixed Stars and the "
 "objective is to give a faithful representation of the book content."
-msgstr ""
+msgstr "此星空文化的单一来源是《恒星之书》，目的是忠实地再现书中的内容。"
 
 #. type: Content of: <h2>
 #: ../../skycultures/al-sufi/description.en.utf8:66
@@ -315,6 +347,8 @@ msgid ""
 "contributors, and cite the contributors). The author wishes that this work "
 "be cited according to the common rules."
 msgstr ""
+"此星空术语是依据 星空文化执行CC BY-ND 4.0 International Public Licence许可证 (相同方式分享, "
+"在没有咨询贡献者之前不要改变它，并引用贡献者)。 作者希望根据通用的规则来引用本作品。"
 
 #. type: Content of: <p><h3>
 #: ../../skycultures/al-sufi/description.en.utf8:69
@@ -343,6 +377,7 @@ msgid ""
 "This sky culture was compiled and added to Stellarium by Khalid Al-Ajaji: "
 "turath.alfalak@gmail.com"
 msgstr ""
+"本星空术语是由 Khalid Al-Ajaji: turath.alfalak@gmail.com 所编译并加入 Stellarium 中。"
 
 #. type: Content of: <h3>
 #: ../../skycultures/al-sufi/description.en.utf8:72
@@ -358,11 +393,14 @@ msgid ""
 "Sufi And His Book On The Constellations, XI, pg 57. Northampton [England]: "
 "Variorum Reprints, 1989."
 msgstr ""
+"[1] The Arabs and the Stars, Paul Kunitzsch,The Astronomer Abu'L-Husayn Al-"
+"Sufi And His Book On The Constellations, XI, pg 57. Northampton [England]: "
+"Variorum Reprints, 1989."
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:75
 msgid "[2] See Al-Sufi description in his book of the 14th star in Auriga."
-msgstr ""
+msgstr "[2] 参见苏菲在他的书中对御夫座第14号星的描述"
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:77
@@ -370,6 +408,8 @@ msgid ""
 "[3] DESCRIPTIONS DES ETOILES FIXES, traduction littérale avec des notes par "
 "H C F C Schjellerup, St Petersbourg, 1874, pg 26-27."
 msgstr ""
+"[3] DESCRIPTIONS DES ETOILES FIXES, traduction littérale avec des notes par "
+"H C F C Schjellerup, St Petersbourg, 1874, pg 26-27."
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:79
@@ -379,6 +419,10 @@ msgid ""
 " class='external text' rel=\"nofollow\">Book of Fixed Stars: Critical "
 "edition with commentary by Khalid AlAjaji</a>."
 msgstr ""
+"[4] <a "
+"href=\"https://drive.google.com/drive/folders/1s6JXzftwjMQ5rgZoGE3718EtBLBZtjzr?usp=sharing\""
+" class='external text' rel=\"nofollow\">Book of Fixed Stars: Critical "
+"edition with commentary by Khalid AlAjaji</a>."
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:81
@@ -388,6 +432,10 @@ msgid ""
 "ibn ʿUmar al-Ṣūfī. Kitāb ṣuwar al-kawākib al-ṯābita, Paris, Bibliothèque "
 "nationale de France Ms. Arabe 5036</a>."
 msgstr ""
+"[5] <a href=\"https://gallica.bnf.fr/ark:/12148/btv1b60006156.r=.langEN\" "
+"class='external text' rel=\"nofollow\">Oulough Beg copy of ʿAbd al-Raḥmān "
+"ibn ʿUmar al-Ṣūfī. Kitāb ṣuwar al-kawākib al-ṯābita, Paris, Bibliothèque "
+"nationale de France Ms. Arabe 5036</a>."
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:83
@@ -396,6 +444,9 @@ msgid ""
 "class='external text' rel=\"nofollow\">Seeing Ancient Stars, Visualization "
 "of the Almagest Catalog</a>."
 msgstr ""
+"[6] <a href=\"http://www.etwright.org/astro/almagest.html#cat\" "
+"class='external text' rel=\"nofollow\">Seeing Ancient Stars, Visualization "
+"of the Almagest Catalog</a>."
 
 #. type: Content of: <p>
 #: ../../skycultures/al-sufi/description.en.utf8:85
@@ -403,6 +454,8 @@ msgid ""
 "[7] Ptolemy’s ALMAGEST, G. J. Toomer, Princeton University Press, 2nd ed., "
 "1998."
 msgstr ""
+"[7] Ptolemy’s ALMAGEST, G. J. Toomer, Princeton University Press, 2nd ed., "
+"1998."
 
 #. type: Content of: <h2>
 #: ../../skycultures/anutan/description.en.utf8:1
@@ -589,7 +642,7 @@ msgstr ""
 #: ../../skycultures/anutan/description.en.utf8:20
 #: ../../skycultures/greek_almagest/description.en.utf8:272
 msgid "Aries"
-msgstr "Aries"
+msgstr "白羊座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/anutan/description.en.utf8:21
@@ -636,7 +689,7 @@ msgstr ""
 #: ../../skycultures/boorong/description.en.utf8:131
 #: ../../skycultures/greek_almagest/description.en.utf8:232
 msgid "Delphinus"
-msgstr "Delphinus"
+msgstr "海豚座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/anutan/description.en.utf8:24
@@ -5610,7 +5663,7 @@ msgstr ""
 #: ../../skycultures/boorong/description.en.utf8:121
 #: ../../skycultures/greek_almagest/description.en.utf8:160
 msgid "Lyra"
-msgstr "Lyra"
+msgstr "天琴座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:124
@@ -5852,7 +5905,7 @@ msgstr ""
 #: ../../skycultures/greek_almagest/description.en.utf8:472
 #: ../../skycultures/lokono/description.en.utf8:121
 msgid "Corona Australis"
-msgstr "Corona Australis"
+msgstr "南冕座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:209
@@ -5961,7 +6014,7 @@ msgstr ""
 #. type: Content of: <h3>
 #: ../../skycultures/chinese/description.en.utf8:11
 msgid "Sun, Moon and Planets"
-msgstr "日、月与行星"
+msgstr ""
 
 #. type: Content of: <p>
 #: ../../skycultures/chinese/description.en.utf8:13
@@ -6057,7 +6110,7 @@ msgstr ""
 #: ../../skycultures/western/description.en.utf8:7
 #: ../../skycultures/western_SnT/description.en.utf8:9
 msgid "Star names"
-msgstr "星名"
+msgstr ""
 
 #. type: Content of: <p><p><p>
 #: ../../skycultures/chinese/description.en.utf8:28
@@ -9634,7 +9687,7 @@ msgstr ""
 #: ../../skycultures/chinese/description.en.utf8:1469
 #: ../../skycultures/greek_almagest/description.en.utf8:399
 msgid "Dog"
-msgstr "Dog"
+msgstr ""
 
 #. type: Content of: <p><p><p><p><table><tr><td>
 #: ../../skycultures/chinese/description.en.utf8:1474
@@ -11842,7 +11895,7 @@ msgstr ""
 #: ../../skycultures/chinese/description.en.utf8:2778
 #: ../../skycultures/greek_almagest/description.en.utf8:263
 msgid "Triangle"
-msgstr "Triangle"
+msgstr ""
 
 #. type: Content of: <p><p><p><p><table><tr><td>
 #: ../../skycultures/chinese/description.en.utf8:2783
@@ -13055,7 +13108,7 @@ msgstr ""
 #. type: Content of: <h1>
 #: ../../skycultures/greek_almagest/description.en.utf8:1
 msgid "Greek (Almagest)"
-msgstr ""
+msgstr "希腊  (天文学大成)"
 
 #. type: Content of: <p>
 #: ../../skycultures/greek_almagest/description.en.utf8:3
@@ -13073,6 +13126,12 @@ msgid ""
 "translations from Greek instead of Latin terms that are common today) and we"
 " made use of computer readable tables prepared by Ernie Wright."
 msgstr ""
+"这种古希腊天空文化以《天文学大成》（Almagest）为基础，《天文学大成》是前天文学家的天文知识汇编，包括观测和数学天文学的结果。由克劳狄乌斯·托勒密"
+" (Claudius Ptolemy) 使用较早的观测资料和他自己的观测资料拼凑而成，以希腊文写成，于 2 世纪出版，在接下来的 1500 "
+"年里一直是主要的天文著作。它最初以古希腊语写成，标题是<i>Mathematike Syntaxis</i>。<i> "
+"Almagest</i>这个名字的意思是“最大的[书]”，是从阿拉伯语翻译而来的，中文译名为《天文学大成》。创建本星空文化时，我们使用了 Toomer "
+"(1984) 的英文翻译，在一些细节上对其进行了修改（例如，使用更多希腊语的直译而不是今天常见的拉丁语术语），并且我们使用了 Ernie Wright "
+"准备的计算机可读表格."
 
 #. type: Content of: <p>
 #: ../../skycultures/greek_almagest/description.en.utf8:17
@@ -13089,7 +13148,7 @@ msgid ""
 "preserved). The scale starts with the brightest star with the magnitude of "
 "1, going down to magnitude of 6, for the faintest stars visible."
 msgstr ""
-"《天文学大成》由13个部分组成。在第七和第八本书中，托勒玫列出了48个星座总共1022颗恒星（其中大约5颗星状的天体，如球状星团）。 "
+"《天文学大成》由十三个部分组成，称为册。在第七和第八册中，托勒密列出了48个星座总共1022颗恒星（其中约有5个类星物体，如球状星团）。 "
 "它是一个星体的坐标表，描述它们在星座中的位置（例如\"X "
 "肘处的恒星，经度、纬度、星等\"）。关于进动，托勒密使用黄道坐标。托勒密第一次将星等（一种恒星亮度的定量尺度）包括在内，这可能是从希帕丘斯（Hipparchus）那里获得的（由于希帕丘斯的星表没有保存下来，所以还不能确定）。从最亮的恒星开始，星等为1，降到最微弱的可见恒星的6等。"
 
@@ -13109,14 +13168,14 @@ msgid ""
 "updates to the epoch of the respective globemaker could be applied by a "
 "simple subtraction of the value for ecliptic longitude."
 msgstr ""
-"在计算行星位置时，托勒密使用了地心模型（这是允许的，因为观测者总是站在地球上），因此，它促成了科学信念，即不需要阿里斯塔克的日心模型。然而，对于《天文学大成》的星表来说，这一点都不重要，因为星表总是代表着天空中固定点的一种目录，托勒密宣称星表的目的是提供一个天体表（见Alm.,"
+"在计算行星位置时，托勒密使用了地心模型（这是允许的，因为观测者总是站在地球上），因此，它促成了科学信念，即不需要阿里斯塔克的日心模型。然而，对于《<i>天文学大成</i>》的星表来说，这一点都不重要，因为星表总是代表着天空中固定点的一种目录，托勒密宣称星表的目的是提供一个天体表（见Alm.,"
 " VIII, "
 "3）。他意识到岁差，他想通过使用黄道坐标来简化未来地球仪制造的业务：托勒密所知的岁差使所有恒星平行于黄道移动，因此，通过简单地减去黄道经度的值，就可以更新相应地球时代的纪元。"
 
 #. type: Content of: <h2>
 #: ../../skycultures/greek_almagest/description.en.utf8:43
 msgid "How this sky culture was made"
-msgstr "此星空文化是如何产生的"
+msgstr "此星空文化如何形成"
 
 #. type: Content of: outside any tag (error?)
 #: ../../skycultures/greek_almagest/description.en.utf8:47
@@ -13136,6 +13195,10 @@ msgid ""
 "the star. The long description will then be displayed at the top of the "
 "screen."
 msgstr ""
+"在1000多颗恒星中，托勒密只提到了15颗恒星的专有名称。其余的则通过相当长的描述来识别，比如北极星的“尾巴末端的星星”。为了避免在Stellarium的屏幕上显示如此长的字符串，我们根据星座和它们在目录中出现的顺序为所有最伟大的恒星发明了短标签。例如，北极星被命名为“UMi"
+" 1”，因为它是小熊星座（UMi）中的第一颗恒星。托勒密星座和IAU缩写之间的对应关系见下表。因为它是小熊星座 (UMi) 中的第一颗恒星。托勒密星座与"
+" IAU 缩写的对应关系见下表。此外，在托勒密将恒星描述为位于图形之外，我们在相应的标签中使用小写字母。要查看给定星星的详细描述，用户应在“查看 "
+"[F4]/天空”设置中启用“使用附加的恒星名”，然后单击该星。详细说明随后将显示在屏幕顶部。 "
 
 #. type: Content of: <h3>
 #: ../../skycultures/greek_almagest/description.en.utf8:61
@@ -13169,7 +13232,7 @@ msgid ""
 "After identifying the stars based on their coordinates and names, we "
 "reconnected the stars according to the descriptions in the table presented "
 "in the <i>Almagest</i>."
-msgstr "根据恒星的坐标和名称确定了恒星之后，我们根据《天文学大成》表格中的描述重新连接了恒星。"
+msgstr "根据恒星的坐标和名称确定了恒星之后，我们根据《<i>天文学大成</i>》表格中的描述重新连接了恒星。"
 
 #. type: Content of: <p>
 #: ../../skycultures/greek_almagest/description.en.utf8:81
@@ -13181,6 +13244,8 @@ msgid ""
 "this is not implemented in this sky culture because it doesn't show up in "
 "the Almagest."
 msgstr ""
+"星星的名称和深空天体的名称仅依赖于《天文学大成》，例如，托勒密在他的另一部作品<i>Tetrabiblos</i>中使用了“&lambda;&alpha;&mu;&pi;&alpha;&delta;&#943;&alpha;&sigmaf;"
+" （火炬状）” 作为毕宿五的名字，但这并没有在这种天空文化中实现，因为它没有出现在 《天文学大成》 中。"
 
 #. type: Content of: <p>
 #: ../../skycultures/greek_almagest/description.en.utf8:87
@@ -13232,12 +13297,12 @@ msgstr ""
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:103
 msgid "Small Bear"
-msgstr "小熊座"
+msgstr "小熊"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:104
 msgid "Ursa Minor"
-msgstr "大熊座"
+msgstr "小熊座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:105
@@ -13260,14 +13325,14 @@ msgstr ""
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:111
 msgid "Great Bear"
-msgstr "Great Bear"
+msgstr "大熊"
 
 #. type: Content of: <h3>
 #: ../../skycultures/greek_almagest/description.en.utf8:112
 #: ../../skycultures/lokono/description.en.utf8:91
 #: ../../skycultures/siberian/description.en.utf8:18
 msgid "Ursa Major"
-msgstr "Ursa Major"
+msgstr "大熊座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:117
@@ -13282,12 +13347,12 @@ msgstr "&Delta;&rho;&#940;&kappa;&omega;&nu;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:119
 msgid "Dragon"
-msgstr "Dragon"
+msgstr "天龙"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:120
 msgid "Draco"
-msgstr "Draco"
+msgstr "天龙座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:121
@@ -13309,17 +13374,17 @@ msgstr "&Kappa;&eta;&phi;&epsilon;&#973;&sigmaf;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:127
 msgid "Kepheus"
-msgstr "Kepheus"
+msgstr "国王刻普斯"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:128
 msgid "Cepheus"
-msgstr "Cepheus"
+msgstr "仙王座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:129
 msgid "king, upside down"
-msgstr "king, upside down"
+msgstr "国王，颠倒"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:130
@@ -13336,12 +13401,12 @@ msgstr "&Beta;&omicron;&#974;&tau;&eta;&sigmaf;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:135
 msgid "Ploughman"
-msgstr "Ploughman"
+msgstr "扶犁者"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:136
 msgid "Bo&ouml;tes"
-msgstr "Bo&ouml;tes"
+msgstr "牧夫座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:137
@@ -13361,12 +13426,12 @@ msgstr "&Sigma;&tau;&#941;&phi;&alpha;&nu;&omicron;&sigmaf;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:143
 msgid "Crown"
-msgstr "Crown"
+msgstr "皇冠"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:144
 msgid "Corona Borealis"
-msgstr "Corona Borealis"
+msgstr "北冕座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:145
@@ -13386,13 +13451,13 @@ msgstr "&#700;&Epsilon;&nu;&gamma;&#972;&nu;&alpha;&sigma;&iota;&nu;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:151
 msgid "Kneeler"
-msgstr "Kneeler"
+msgstr "跪拜者"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:152
 #: ../../skycultures/lokono/description.en.utf8:106
 msgid "Hercules"
-msgstr "Hercules"
+msgstr "武仙座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:153
@@ -13412,7 +13477,7 @@ msgstr "&Lambda;&#973;&rho;&alpha;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:159
 msgid "Lyre"
-msgstr "Lyre"
+msgstr "竖琴"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:166
@@ -13422,12 +13487,12 @@ msgstr "&#700;&#714;&Omicron;&rho;&nu;&iota;&sigmaf;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:167
 msgid "Bird"
-msgstr "Bird"
+msgstr "鸟"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:168
 msgid "Cygnus"
-msgstr "Cygnus"
+msgstr "天鹅座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:169
@@ -13447,12 +13512,12 @@ msgstr "&Kappa;&alpha;&sigma;&sigma;&iota;&#941;&pi;&epsilon;&iota;&alpha;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:175
 msgid "Kassiepeia"
-msgstr "Kassiepeia"
+msgstr "王后卡西俄庇亚"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:176
 msgid "Cassiopeia"
-msgstr "Cassiopeia"
+msgstr "仙后座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:177
@@ -13473,7 +13538,7 @@ msgstr "&Pi;&epsilon;&rho;&sigma;&epsilon;&#973;&sigmaf;"
 #: ../../skycultures/greek_almagest/description.en.utf8:183
 #: ../../skycultures/greek_almagest/description.en.utf8:184
 msgid "Perseus"
-msgstr "Perseus"
+msgstr "英仙座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:185
@@ -13502,12 +13567,12 @@ msgstr "&#699;&Eta;&nu;&#943;&omicron;&chi;&omicron;&sigmaf;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:191
 msgid "Charioteer"
-msgstr "Charioteer"
+msgstr "车夫"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:192
 msgid "Auriga"
-msgstr "Auriga"
+msgstr "御夫座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:193
@@ -13527,12 +13592,12 @@ msgstr "&#702;&Omicron;&phi;&iota;&omicron;&#973;&chi;&omicron;&sigmaf;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:199
 msgid "Serpent Bearer"
-msgstr "Serpent Bearer"
+msgstr "蛇夫"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:200
 msgid "Ophiuchus"
-msgstr "Ophiuchus"
+msgstr "蛇夫座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:201
@@ -13557,12 +13622,12 @@ msgstr "&#700;&#714;&Omicron;&phi;&iota;&sigmaf;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:207
 msgid "Snake"
-msgstr "Snake"
+msgstr "蛇"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:208
 msgid "Serpens"
-msgstr "Serpens"
+msgstr "巨蛇座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:209
@@ -13582,12 +13647,12 @@ msgstr "&#702;&Omicron;&iota;&sigma;&tau;&#972;&sigmaf;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:215
 msgid "Arrow"
-msgstr "Arrow"
+msgstr "天矢"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:216
 msgid "Sagitta"
-msgstr "Sagitta"
+msgstr "天箭座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:217
@@ -13607,12 +13672,12 @@ msgstr "&#702;&Alpha;&epsilon;&tau;&#972;&sigmaf;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:223
 msgid "Eagle"
-msgstr "Eagle"
+msgstr "鹰"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:224
 msgid "Aquila"
-msgstr "Aquila"
+msgstr "天鹰座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:225
@@ -13634,7 +13699,7 @@ msgstr "&Delta;&epsilon;&lambda;&phi;&#943;&sigmaf;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:231
 msgid "Dolphin"
-msgstr "Dolphin"
+msgstr "海豚"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:234
@@ -13654,12 +13719,12 @@ msgstr "&Pi;&rho;&omicron;&tau;&omicron;&mu;&#942;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:239
 msgid "Bust [of a horse]"
-msgstr "Bust [of a horse]"
+msgstr "马胸"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:240
 msgid "Equuleus"
-msgstr "Equuleus"
+msgstr "小马座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:246
@@ -13669,13 +13734,13 @@ msgstr "&#699;&#714;&Iota;&pi;&pi;&omicron;&sigmaf;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:247
 msgid "Horse"
-msgstr "Horse"
+msgstr "马"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:248
 #: ../../skycultures/lokono/description.en.utf8:51
 msgid "Pegasus"
-msgstr "Pegasus"
+msgstr "飞马座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:249
@@ -13691,7 +13756,7 @@ msgstr "&#702;&Alpha;&nu;&delta;&rho;&omicron;&mu;&#941;&delta;&alpha;"
 #: ../../skycultures/greek_almagest/description.en.utf8:255
 #: ../../skycultures/greek_almagest/description.en.utf8:256
 msgid "Andromeda"
-msgstr "Andromeda"
+msgstr "仙女座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:257
@@ -13711,7 +13776,7 @@ msgstr "&Tau;&rho;&#943;&gamma;&omega;&nu;&omicron;&sigmaf;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:264
 msgid "Triangulum"
-msgstr "Triangulum"
+msgstr "三角座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:265
@@ -13726,7 +13791,7 @@ msgstr "&Kappa;&rho;&iota;&#972;&sigmaf;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:271
 msgid "Ram"
-msgstr "Ram"
+msgstr "公羊"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:273
@@ -13741,12 +13806,12 @@ msgstr "&Tau;&alpha;&upsilon;&#771;&rho;&omicron;&sigmaf;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:279
 msgid "Bull"
-msgstr "Bull"
+msgstr "公牛"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:280
 msgid "Taurus"
-msgstr "Taurus"
+msgstr "金牛座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:281
@@ -13761,12 +13826,12 @@ msgstr "&Delta;&#943;&delta;&upsilon;&mu;&omicron;&iota;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:287
 msgid "Twins"
-msgstr "Twins"
+msgstr "双胞胎"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:288
 msgid "Gemini"
-msgstr "Gemini"
+msgstr "双子座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:289
@@ -13781,12 +13846,12 @@ msgstr "&Kappa;&alpha;&rho;&kappa;&#943;&nu;&omicron;&sigmaf;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:295
 msgid "Crab"
-msgstr "Crab"
+msgstr "蟹"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:296
 msgid "Cancer"
-msgstr "Cancer"
+msgstr "巨蟹座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:297
@@ -13801,7 +13866,7 @@ msgstr "&Lambda;&#941;&omega;&nu;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:303
 msgid "Lion"
-msgstr "Lion"
+msgstr "狮子座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:305
@@ -13816,12 +13881,12 @@ msgstr "&Pi;&alpha;&rho;&theta;&#941;&nu;&omicron;&sigmaf;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:311
 msgid "Maiden"
-msgstr "Maiden"
+msgstr "处女"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:312
 msgid "Virgo"
-msgstr "Virgo"
+msgstr "室女座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:313
@@ -13846,12 +13911,12 @@ msgstr "&Chi;&eta;&lambda;&alpha;&#943;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:319
 msgid "Claws [of the Scorpion]"
-msgstr "Claws [of the Scorpion]"
+msgstr "蝎钳"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:320
 msgid "Libra"
-msgstr "Libra"
+msgstr "天秤座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:321
@@ -13868,12 +13933,12 @@ msgstr "&Sigma;&kappa;&omicron;&rho;&pi;&#943;&omicron;&sigmaf;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:327
 msgid "Scorpion"
-msgstr "Scorpion"
+msgstr "蝎子"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:328
 msgid "Scorpius"
-msgstr "Scorpius"
+msgstr "天蝎座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:330
@@ -13888,12 +13953,12 @@ msgstr "&Tau;&omicron;&xi;&#972;&tau;&eta;&sigmaf;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:335
 msgid "Archer"
-msgstr "Archer"
+msgstr "射手"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:336
 msgid "Sagittarius"
-msgstr "Sagittarius"
+msgstr "人马座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:337
@@ -13920,17 +13985,17 @@ msgstr "&Alpha;&#943;&gamma;&#972;&kappa;&epsilon;&rho;&omicron;&sigmaf;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:343
 msgid "The One with the Goat's Horn"
-msgstr "The One with the Goat's Horn"
+msgstr "长山羊角者"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:344
 msgid "Capricornus"
-msgstr "Capricornus"
+msgstr "摩羯座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:345
 msgid "fish tail; two legs visible"
-msgstr "鱼尾巴 可见两条腿"
+msgstr "鱼尾巴，可见两条腿"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:350
@@ -13940,12 +14005,12 @@ msgstr "&#703;&Upsilon;&delta;&rho;&omicron;&chi;&#972;&omicron;&sigmaf;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:351
 msgid "Water-Carrier"
-msgstr "Water-Carrier"
+msgstr "水瓶"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:352
 msgid "Aquarius"
-msgstr "Aquarius"
+msgstr "宝瓶座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:353
@@ -13960,12 +14025,12 @@ msgstr "&#702;&Iota;&chi;&theta;&#973;&epsilon;&sigmaf;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:359
 msgid "[2] Fish"
-msgstr "[2] Fish"
+msgstr "双鱼"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:360
 msgid "Pisces"
-msgstr "Pisces"
+msgstr "双鱼座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:362
@@ -13990,12 +14055,12 @@ msgstr "&Kappa;&eta;&#771;&tau;&omicron;&sigmaf;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:367
 msgid "Sea Monster"
-msgstr "Sea Monster"
+msgstr "海怪"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:368
 msgid "Cetus"
-msgstr "Cetus"
+msgstr "鲸鱼座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:370
@@ -14013,7 +14078,7 @@ msgstr "&#702;&Omega;&rho;&#943;&omega;&nu;"
 #: ../../skycultures/lokono/description.en.utf8:116
 #: ../../skycultures/siberian/description.en.utf8:22
 msgid "Orion"
-msgstr "Orion"
+msgstr "猎户座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:378
@@ -14042,12 +14107,12 @@ msgstr "&Pi;&omicron;&tau;&alpha;&mu;&omicron;&#972;&sigmaf;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:383
 msgid "River [nameless]"
-msgstr "River [nameless]"
+msgstr "河流"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:384
 msgid "Eridanus"
-msgstr "Eridanus"
+msgstr "波江座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:385
@@ -14067,12 +14132,12 @@ msgstr "&Lambda;&alpha;&gamma;&omega;&#771;&sigmaf;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:391
 msgid "Hare"
-msgstr "Hare"
+msgstr "兔子"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:392
 msgid "Lepus"
-msgstr "Lepus"
+msgstr "天兔座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:394
@@ -14092,7 +14157,7 @@ msgstr "&Kappa;&#973;&omega;&nu;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:400
 msgid "Canis Major"
-msgstr "Canis Major"
+msgstr "大犬座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:405
@@ -14112,7 +14177,7 @@ msgstr "在狗（Dog）之前"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:408
 msgid "Canis Minor"
-msgstr "Canis Minor"
+msgstr "小犬座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:410
@@ -14142,17 +14207,17 @@ msgstr "&#702;&Alpha;&rho;&gamma;&omega;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:415
 msgid "Ship &quot;Argo&quot;"
-msgstr "Ship &quot;Argo&quot;"
+msgstr "大船阿尔戈号"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:416
 msgid "Argo"
-msgstr "Argo"
+msgstr "南船座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:417
 msgid "smaller than the sum of the IAU-constellations Pup+Pyx+Car+Vel"
-msgstr "小于IAU星座Pup + Pyx + Car + Vel之和"
+msgstr "小于IAU星座船尾座、船底座、船帆座、罗盘座之和"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:418
@@ -14170,12 +14235,12 @@ msgstr "&#701;&#714;&Upsilon;&delta;&rho;&omicron;&sigmaf;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:423
 msgid "Water Snake"
-msgstr "Water Snake"
+msgstr "水蛇"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:424
 msgid "Hydra"
-msgstr "Hydra"
+msgstr "长蛇座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:429
@@ -14190,12 +14255,12 @@ msgstr "&Kappa;&rho;&alpha;&tau;&#768;&eta;&rho;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:431
 msgid "Krater (vessel)"
-msgstr "Krater (vessel)"
+msgstr "酒杯"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:432
 msgid "Crater"
-msgstr "Crater"
+msgstr "巨爵座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:434
@@ -14218,12 +14283,12 @@ msgstr "&Kappa;&oacute;&rho;&alpha;&xi;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:439
 msgid "Raven"
-msgstr "Raven"
+msgstr "乌鸦"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:440
 msgid "Corvus"
-msgstr "Corvus"
+msgstr "乌鸦座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:446
@@ -14233,12 +14298,12 @@ msgstr "&Kappa;&#941;&nu;&tau;&alpha;&upsilon;&rho;&omicron;&sigmaf;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:447
 msgid "Kentauros"
-msgstr "Kentauros"
+msgstr "半人马"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:448
 msgid "Centaurus"
-msgstr "Centaurus"
+msgstr "半人马座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:450
@@ -14258,12 +14323,12 @@ msgstr "&Theta;&eta;&rho;&#943;&omicron;&nu;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:455
 msgid "Beast"
-msgstr "Beast"
+msgstr "野兽"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:456
 msgid "Lupus"
-msgstr "Lupus"
+msgstr "豺狼座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:458
@@ -14289,7 +14354,7 @@ msgstr "&Theta;&upsilon;&mu;&iota;&alpha;&tau;&#942;&rho;&iota;&omicron;&nu;"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:463
 msgid "Altar"
-msgstr "Altar"
+msgstr "圣坛"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:469
@@ -14308,7 +14373,7 @@ msgstr ""
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:471
 msgid "Southern Crown"
-msgstr "Southern Crown"
+msgstr "南冕"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:473
@@ -14330,12 +14395,12 @@ msgstr ""
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:479
 msgid "Southern Fish"
-msgstr "Southern Fish"
+msgstr "南鱼"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:480
 msgid "Piscis Austrinus"
-msgstr "Piscis Austrinus"
+msgstr "南鱼座"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/greek_almagest/description.en.utf8:481
@@ -14393,6 +14458,9 @@ msgid ""
 "class='external text' rel=\"nofollow\"> Seeing Ancient Stars, Visualization "
 "of the Almagest Catalog</a>, 2006"
 msgstr ""
+"Ernie Wright: <a href=\"http://www.etwright.org/astro/almagest.html#cat\" "
+"class='external text' rel=\"nofollow\"> Seeing Ancient Stars, Visualization "
+"of the Almagest Catalog</a>, 2006"
 
 #. type: Content of: <p>
 #: ../../skycultures/greek_almagest/description.en.utf8:498
@@ -21101,7 +21169,7 @@ msgstr ""
 #. type: Content of: <h3>
 #: ../../skycultures/western/description.en.utf8:10
 msgid "Alternative asterism files for Stellarium"
-msgstr "Stellarium 的星群替代文件"
+msgstr "可供选择的Stellarium 的星群文件"
 
 #. type: Content of: <p>
 #: ../../skycultures/western/description.en.utf8:11

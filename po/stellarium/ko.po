@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-09-04 14:06+0700\n"
+"POT-Creation-Date: 2021-09-11 16:20+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Changhwan Kim <namelesswave@gmail.com>, 2021\n"
 "Language-Team: Korean (https://www.transifex.com/stellarium/teams/80998/ko/)\n"
@@ -46,7 +46,7 @@ msgstr "사용자 표지"
 #: src/core/modules/NomenclatureItem.cpp:209 src/core/modules/Nebula.cpp:222
 #: src/core/modules/Nebula.cpp:224 src/core/modules/Planet.cpp:496
 #: src/core/modules/Planet.cpp:499 src/core/modules/StarWrapper.cpp:50
-#: src/core/modules/StarWrapper.cpp:261 src/core/modules/StarWrapper.cpp:264
+#: src/core/modules/StarWrapper.cpp:262 src/core/modules/StarWrapper.cpp:265
 #: src/gui/AstroCalcDialog.cpp:901 src/gui/ObsListDialog.cpp:149
 #: src/gui/ObsListCreateEditDialog.cpp:157 src/ui_configurationDialog.h:1770
 #: plugins/Satellites/src/Satellite.cpp:305
@@ -67,12 +67,12 @@ msgid "asterism"
 msgstr "성군"
 
 #: src/core/modules/AsterismMgr.cpp:98
-#: src/core/modules/ConstellationMgr.cpp:133 src/core/modules/StarMgr.cpp:437
+#: src/core/modules/ConstellationMgr.cpp:133 src/core/modules/StarMgr.cpp:446
 #: src/core/modules/GridLinesMgr.cpp:1846
 #: src/core/modules/SpecialMarkersMgr.cpp:263
 #: src/core/modules/LandscapeMgr.cpp:608
 #: src/core/modules/NomenclatureMgr.cpp:77 src/core/modules/NebulaMgr.cpp:474
-#: src/core/modules/NebulaMgr.cpp:475 src/core/modules/SolarSystem.cpp:294
+#: src/core/modules/NebulaMgr.cpp:475 src/core/modules/SolarSystem.cpp:296
 #: src/core/modules/MilkyWay.cpp:85 src/core/modules/ZodiacalLight.cpp:87
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:151
 #: src/core/StelApp.cpp:622 src/core/StelCore.cpp:265
@@ -136,25 +136,25 @@ msgstr "모든 별자리 선택"
 msgid "Reload the sky culture"
 msgstr "하늘 문화 다시 불러오기"
 
-#: src/core/modules/StarMgr.cpp:438 src/ui_viewDialog.h:3209
+#: src/core/modules/StarMgr.cpp:447 src/ui_viewDialog.h:3221
 #: src/ui_dsoColorsDialog.h:703
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:254
 msgid "Stars"
 msgstr "별"
 
-#: src/core/modules/StarMgr.cpp:439
+#: src/core/modules/StarMgr.cpp:448
 msgid "Stars labels"
 msgstr "별 이름"
 
-#: src/core/modules/StarMgr.cpp:441
+#: src/core/modules/StarMgr.cpp:450
 msgid "Increase the magnitude limit for stars"
 msgstr "별의 한계등급 증가"
 
-#: src/core/modules/StarMgr.cpp:442
+#: src/core/modules/StarMgr.cpp:451
 msgid "Reduce the magnitude limit for stars"
 msgstr "별의 한계등급 감소"
 
-#: src/core/modules/GridLinesMgr.cpp:686 src/ui_viewDialog.h:3583
+#: src/core/modules/GridLinesMgr.cpp:686 src/ui_viewDialog.h:3603
 msgid "Meridian"
 msgstr "자오선"
 
@@ -178,7 +178,7 @@ msgstr "적도"
 msgid "Precession Circle"
 msgstr "세차 원"
 
-#: src/core/modules/GridLinesMgr.cpp:711 src/ui_viewDialog.h:3750
+#: src/core/modules/GridLinesMgr.cpp:711 src/ui_viewDialog.h:3770
 msgid "Horizon"
 msgstr "지평선"
 
@@ -191,12 +191,12 @@ msgid "Supergalactic Equator"
 msgstr "초은하 적도"
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
-#: src/core/modules/GridLinesMgr.cpp:724 src/ui_viewDialog.h:3523
+#: src/core/modules/GridLinesMgr.cpp:724 src/ui_viewDialog.h:3543
 msgid "O./C. longitude"
 msgstr "충/합 경도"
 
 #: src/core/modules/GridLinesMgr.cpp:728
-#: src/core/modules/GridLinesMgr.cpp:1867 src/ui_viewDialog.h:3757
+#: src/core/modules/GridLinesMgr.cpp:1867 src/ui_viewDialog.h:3777
 msgid "Prime Vertical"
 msgstr "동서권"
 
@@ -206,7 +206,7 @@ msgstr "동서권"
 #: src/gui/AstroCalcDialog.cpp:848 src/gui/AstroCalcDialog.cpp:1522
 #: src/gui/AstroCalcDialog.cpp:1907 src/gui/AstroCalcDialog.cpp:2798
 #: src/gui/AstroCalcDialog.cpp:3320 src/gui/AstroCalcDialog.cpp:3600
-#: src/gui/AstroCalcDialog.cpp:3602 src/ui_viewDialog.h:3555
+#: src/gui/AstroCalcDialog.cpp:3602 src/ui_viewDialog.h:3575
 #: plugins/Satellites/src/Satellite.cpp:328
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1374
 msgid "Altitude"
@@ -236,7 +236,7 @@ msgstr "반영"
 msgid "Invariable Plane"
 msgstr "불변 평면"
 
-#: src/core/modules/GridLinesMgr.cpp:761 src/ui_viewDialog.h:3884
+#: src/core/modules/GridLinesMgr.cpp:761 src/ui_viewDialog.h:3904
 msgid "Projected Solar Equator"
 msgstr "태양 적도 투영"
 
@@ -328,7 +328,7 @@ msgstr "배점"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/GridLinesMgr.cpp:1466 src/core/modules/Planet.cpp:630
-#: src/core/modules/Planet.cpp:963 src/gui/AstroCalcDialog.cpp:6249
+#: src/core/modules/Planet.cpp:963 src/gui/AstroCalcDialog.cpp:6281
 #: plugins/Satellites/src/Satellite.cpp:326
 #: plugins/Satellites/src/Satellite.cpp:387
 #: plugins/MeteorShowers/src/MeteorShower.cpp:546
@@ -345,7 +345,7 @@ msgstr "격자와 선"
 msgid "Equatorial grid"
 msgstr "적도좌표계 격자"
 
-#: src/core/modules/GridLinesMgr.cpp:1849 src/ui_viewDialog.h:3778
+#: src/core/modules/GridLinesMgr.cpp:1849 src/ui_viewDialog.h:3798
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Azimuthal grid"
 msgstr "지평좌표계 격자"
@@ -399,21 +399,21 @@ msgstr "황도좌표계 격자 (J2000)"
 msgid "Ecliptic grid"
 msgstr "황도좌표계 격자"
 
-#: src/core/modules/GridLinesMgr.cpp:1861 src/ui_viewDialog.h:3703
+#: src/core/modules/GridLinesMgr.cpp:1861 src/ui_viewDialog.h:3723
 #: src/ui_configurationDialog.h:1816
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:394
 msgid "Galactic grid"
 msgstr "은하좌표계 격자"
 
-#: src/core/modules/GridLinesMgr.cpp:1862 src/ui_viewDialog.h:3828
+#: src/core/modules/GridLinesMgr.cpp:1862 src/ui_viewDialog.h:3848
 msgid "Galactic equator"
 msgstr "은하 적도"
 
-#: src/core/modules/GridLinesMgr.cpp:1863 src/ui_viewDialog.h:3652
+#: src/core/modules/GridLinesMgr.cpp:1863 src/ui_viewDialog.h:3672
 msgid "Supergalactic grid"
 msgstr "초은하좌표계 격자"
 
-#: src/core/modules/GridLinesMgr.cpp:1864 src/ui_viewDialog.h:3656
+#: src/core/modules/GridLinesMgr.cpp:1864 src/ui_viewDialog.h:3676
 msgid "Supergalactic equator"
 msgstr "초은하 적도"
 
@@ -466,15 +466,15 @@ msgstr "황도의 극 (J2000)"
 msgid "Ecliptic poles"
 msgstr "황도의 극"
 
-#: src/core/modules/GridLinesMgr.cpp:1878 src/ui_viewDialog.h:3612
+#: src/core/modules/GridLinesMgr.cpp:1878 src/ui_viewDialog.h:3632
 msgid "Galactic poles"
 msgstr "은하의 극"
 
-#: src/core/modules/GridLinesMgr.cpp:1879 src/ui_viewDialog.h:3611
+#: src/core/modules/GridLinesMgr.cpp:1879 src/ui_viewDialog.h:3631
 msgid "Galactic center and anticenter"
 msgstr "은하 중심과 가장자리"
 
-#: src/core/modules/GridLinesMgr.cpp:1880 src/ui_viewDialog.h:3515
+#: src/core/modules/GridLinesMgr.cpp:1880 src/ui_viewDialog.h:3535
 msgid "Supergalactic poles"
 msgstr "초은하의 극"
 
@@ -494,7 +494,7 @@ msgstr "지점 (J2000)"
 msgid "Solstice points"
 msgstr "지점"
 
-#: src/core/modules/GridLinesMgr.cpp:1885 src/ui_viewDialog.h:3699
+#: src/core/modules/GridLinesMgr.cpp:1885 src/ui_viewDialog.h:3719
 msgid "Antisolar point"
 msgstr "대일점"
 
@@ -502,7 +502,7 @@ msgstr "대일점"
 msgid "The center of the Earth's umbra"
 msgstr "지구 본영의 중심"
 
-#: src/core/modules/GridLinesMgr.cpp:1887 src/ui_viewDialog.h:3690
+#: src/core/modules/GridLinesMgr.cpp:1887 src/ui_viewDialog.h:3710
 msgid "Apex points"
 msgstr "향점"
 
@@ -518,7 +518,7 @@ msgstr "FOV의 원형 표시"
 msgid "Rectangular marker of FOV"
 msgstr "FOV의 직사각형 표시"
 
-#: src/core/modules/SpecialMarkersMgr.cpp:267 src/ui_viewDialog.h:3664
+#: src/core/modules/SpecialMarkersMgr.cpp:267 src/ui_viewDialog.h:3684
 #: src/ui_configurationDialog.h:1862
 msgid "Compass marks"
 msgstr "나침반 표시"
@@ -627,7 +627,7 @@ msgstr "대기"
 msgid "Fog"
 msgstr "안개"
 
-#: src/core/modules/LandscapeMgr.cpp:611 src/ui_viewDialog.h:3462
+#: src/core/modules/LandscapeMgr.cpp:611 src/ui_viewDialog.h:3482
 #: src/ui_configurationDialog.h:1846
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:314
 msgid "Cardinal points"
@@ -771,7 +771,7 @@ msgstr "지름"
 #: src/core/modules/NomenclatureItem.cpp:225 src/core/modules/Planet.cpp:586
 #: src/core/modules/Planet.cpp:611 src/core/modules/Planet.cpp:709
 #: src/core/modules/Comet.cpp:164 src/core/modules/Comet.cpp:174
-#: src/gui/StelGuiItems.cpp:847 src/gui/AstroCalcDialog.cpp:6184
+#: src/gui/StelGuiItems.cpp:847 src/gui/AstroCalcDialog.cpp:6216
 #: plugins/Satellites/src/Satellite.cpp:322
 #: plugins/Satellites/src/Satellite.cpp:380
 msgctxt "distance"
@@ -1473,17 +1473,17 @@ msgid "Airmasses"
 msgstr "대기질량"
 
 #: src/core/modules/Nebula.cpp:209 src/core/modules/Planet.cpp:479
-#: src/core/modules/StarWrapper.cpp:215
+#: src/core/modules/StarWrapper.cpp:216
 msgid "Additional names: "
 msgstr "추가 이름 : "
 
 #: src/core/modules/Nebula.cpp:215 src/core/modules/Planet.cpp:486
-#: src/core/modules/StarWrapper.cpp:221
+#: src/core/modules/StarWrapper.cpp:222
 msgid "Additional catalog numbers: "
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:233 src/core/modules/MinorPlanet.cpp:186
-#: src/core/modules/StarWrapper.cpp:55 src/core/modules/StarWrapper.cpp:277
+#: src/core/modules/StarWrapper.cpp:55 src/core/modules/StarWrapper.cpp:278
 #: plugins/Quasars/src/Quasar.cpp:137
 msgid "Color Index (B-V)"
 msgstr "색지수"
@@ -1527,7 +1527,7 @@ msgstr "배향각"
 #. TRANSLATORS: Unit of measure for distance - light years
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:318 src/core/modules/Nebula.cpp:331
-#: src/core/modules/StarWrapper.cpp:307
+#: src/core/modules/StarWrapper.cpp:308
 #: plugins/Supernovae/src/Supernova.cpp:159 plugins/Novae/src/Nova.cpp:162
 #: plugins/Pulsars/src/Pulsar.cpp:272 plugins/Exoplanets/src/Exoplanet.cpp:293
 msgctxt "distance"
@@ -1535,8 +1535,8 @@ msgid "ly"
 msgstr "광년"
 
 #: src/core/modules/Nebula.cpp:319 src/core/modules/Nebula.cpp:365
-#: src/core/modules/Planet.cpp:621 src/core/modules/StarWrapper.cpp:312
-#: src/core/modules/StarWrapper.cpp:314 src/gui/AstroCalcDialog.cpp:3157
+#: src/core/modules/Planet.cpp:621 src/core/modules/StarWrapper.cpp:313
+#: src/core/modules/StarWrapper.cpp:315 src/gui/AstroCalcDialog.cpp:3157
 #: src/gui/AstroCalcDialog.cpp:3215 src/ui_configurationDialog.h:1755
 #: plugins/Supernovae/src/Supernova.cpp:160 plugins/Novae/src/Nova.cpp:163
 #: plugins/Exoplanets/src/Exoplanet.cpp:294
@@ -1565,12 +1565,12 @@ msgstr "메가 광년"
 msgid "Redshift"
 msgstr "적색편이"
 
-#: src/core/modules/Nebula.cpp:390 src/core/modules/StarWrapper.cpp:336
+#: src/core/modules/Nebula.cpp:390 src/core/modules/StarWrapper.cpp:337
 msgid "Parallax"
 msgstr "시차"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
-#: src/core/modules/Nebula.cpp:390 src/core/modules/StarWrapper.cpp:341
+#: src/core/modules/Nebula.cpp:390 src/core/modules/StarWrapper.cpp:342
 #: plugins/Pulsars/src/Pulsar.cpp:260
 msgctxt "parallax"
 msgid "mas"
@@ -1975,7 +1975,7 @@ msgstr "원시 행성상성운"
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/Nebula.cpp:1410 src/core/modules/StarWrapper.cpp:50
-#: src/core/modules/StarWrapper.cpp:254 src/gui/AstroCalcDialog.cpp:1244
+#: src/core/modules/StarWrapper.cpp:255 src/gui/AstroCalcDialog.cpp:1244
 #: src/translations.h:35
 msgid "star"
 msgstr "항성"
@@ -2013,7 +2013,7 @@ msgid "object of unknown nature"
 msgstr "알 수 없는 천체"
 
 #: src/core/modules/NebulaMgr.cpp:474 src/gui/AstroCalcDialog.cpp:964
-#: src/gui/AstroCalcDialog.cpp:5226
+#: src/gui/AstroCalcDialog.cpp:5230
 msgid "Deep-sky objects"
 msgstr "딥스카이 천체"
 
@@ -2046,7 +2046,7 @@ msgid "See Logfile for instructions."
 msgstr "자세한 내용은 로그 파일을 확인하십시오."
 
 #: src/core/modules/Planet.cpp:457 src/core/modules/Comet.cpp:155
-#: src/core/modules/StarWrapper.cpp:271 plugins/Quasars/src/Quasar.cpp:134
+#: src/core/modules/StarWrapper.cpp:272 plugins/Quasars/src/Quasar.cpp:134
 msgid "Absolute Magnitude"
 msgstr "절대등급"
 
@@ -2075,7 +2075,7 @@ msgid "Hourly motion"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:569 src/core/modules/Planet.cpp:1133
-#: src/core/modules/Planet.cpp:1142 src/core/modules/StarWrapper.cpp:328
+#: src/core/modules/Planet.cpp:1142 src/core/modules/StarWrapper.cpp:329
 #: plugins/Pulsars/src/Pulsar.cpp:203
 msgctxt "into the direction of"
 msgid "towards"
@@ -2085,8 +2085,8 @@ msgstr "향하여"
 #: src/core/modules/Planet.cpp:584 src/gui/AstroCalcDialog.cpp:882
 #: src/gui/AstroCalcDialog.cpp:1152 src/gui/AstroCalcDialog.cpp:1536
 #: src/gui/AstroCalcDialog.cpp:1584 src/gui/AstroCalcDialog.cpp:3125
-#: src/gui/AstroCalcDialog.cpp:6209 src/gui/AstroCalcDialog.cpp:6271
-#: src/gui/AstroCalcDialog.cpp:6413 plugins/Exoplanets/src/Exoplanet.cpp:323
+#: src/gui/AstroCalcDialog.cpp:6241 src/gui/AstroCalcDialog.cpp:6303
+#: src/gui/AstroCalcDialog.cpp:6445 plugins/Exoplanets/src/Exoplanet.cpp:323
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
 msgctxt "distance, astronomical unit"
 msgid "AU"
@@ -2096,7 +2096,7 @@ msgstr "AU"
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #. TRANSLATORS: Unit of measure for distance - millions kilometers
 #: src/core/modules/Planet.cpp:600 src/core/modules/Planet.cpp:618
-#: src/core/modules/Comet.cpp:166 src/gui/AstroCalcDialog.cpp:6186
+#: src/core/modules/Comet.cpp:166 src/gui/AstroCalcDialog.cpp:6218
 msgctxt "distance"
 msgid "M km"
 msgstr "M km"
@@ -2154,14 +2154,14 @@ msgstr "반사 정도"
 msgid "Elong. in Ecl.Long."
 msgstr ""
 
-#: src/core/modules/Planet.cpp:791 src/gui/AstroCalcDialog.cpp:6272
-#: src/gui/AstroCalcDialog.cpp:6416 src/gui/AstroCalcDialog.cpp:6433
+#: src/core/modules/Planet.cpp:791 src/gui/AstroCalcDialog.cpp:6304
+#: src/gui/AstroCalcDialog.cpp:6448 src/gui/AstroCalcDialog.cpp:6465
 msgid "Angular distance"
 msgstr "각거리"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:809 src/core/modules/Planet.cpp:971
-#: src/core/modules/StarWrapper.cpp:348 src/gui/AstroCalcDialog.cpp:6220
+#: src/core/modules/StarWrapper.cpp:349 src/gui/AstroCalcDialog.cpp:6252
 msgctxt "duration"
 msgid "days"
 msgstr "일"
@@ -2343,140 +2343,140 @@ msgid "Orthographic"
 msgstr "정사도법"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:295 src/gui/AstroCalcDialog.cpp:2478
-#: src/gui/AstroCalcDialog.cpp:5181 src/translations.h:63
+#: src/core/modules/SolarSystem.cpp:297 src/gui/AstroCalcDialog.cpp:2478
+#: src/gui/AstroCalcDialog.cpp:5185 src/translations.h:63
 msgid "Planets"
 msgstr "행성"
 
-#: src/core/modules/SolarSystem.cpp:296
+#: src/core/modules/SolarSystem.cpp:298
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:319
 msgid "Planet labels"
 msgstr "행성 이름표"
 
-#: src/core/modules/SolarSystem.cpp:297
+#: src/core/modules/SolarSystem.cpp:299
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:323
 msgid "Planet orbits"
 msgstr "행성 궤도"
 
-#: src/core/modules/SolarSystem.cpp:298
+#: src/core/modules/SolarSystem.cpp:300
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Planet trails"
 msgstr "행성 궤적"
 
-#: src/core/modules/SolarSystem.cpp:299
+#: src/core/modules/SolarSystem.cpp:301
 msgid "Planet trails reset"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:301
+#: src/core/modules/SolarSystem.cpp:303
 msgid "Planet markers"
 msgstr "행성 표지"
 
-#: src/core/modules/SolarSystem.cpp:302
+#: src/core/modules/SolarSystem.cpp:304
 msgid "Planet selection marker"
 msgstr "행성 선택 표지"
 
-#: src/core/modules/SolarSystem.cpp:303
+#: src/core/modules/SolarSystem.cpp:305
 msgid "Enlarge Moon"
 msgstr "달 확대"
 
-#: src/core/modules/SolarSystem.cpp:304
+#: src/core/modules/SolarSystem.cpp:306
 msgid "Enlarge minor bodies"
 msgstr "소천체 확대"
 
-#: src/core/modules/SolarSystem.cpp:305
+#: src/core/modules/SolarSystem.cpp:307
 msgid "Enlarge Planets"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:306
+#: src/core/modules/SolarSystem.cpp:308
 msgid "Enlarge Sun"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:307
+#: src/core/modules/SolarSystem.cpp:309
 msgid "Native planet names (from starlore)"
 msgstr "행성 원어명 (출처: starlore)"
 
-#: src/core/modules/StarWrapper.cpp:233
+#: src/core/modules/StarWrapper.cpp:234
 msgid "eruptive variable star"
 msgstr "폭발변광성"
 
-#: src/core/modules/StarWrapper.cpp:235
+#: src/core/modules/StarWrapper.cpp:236
 msgid "pulsating variable star"
 msgstr "맥동변광성"
 
-#: src/core/modules/StarWrapper.cpp:237
+#: src/core/modules/StarWrapper.cpp:238
 msgid "rotating variable star"
 msgstr "자전변광성"
 
-#: src/core/modules/StarWrapper.cpp:239
+#: src/core/modules/StarWrapper.cpp:240
 msgid "cataclysmic variable star"
 msgstr "격변변광성"
 
-#: src/core/modules/StarWrapper.cpp:242
+#: src/core/modules/StarWrapper.cpp:243
 msgid "eclipsing binary system"
 msgstr "식변광성"
 
-#: src/core/modules/StarWrapper.cpp:248 src/gui/AstroCalcDialog.cpp:1269
+#: src/core/modules/StarWrapper.cpp:249 src/gui/AstroCalcDialog.cpp:1269
 msgid "variable star"
 msgstr "변광성"
 
-#: src/core/modules/StarWrapper.cpp:252 src/gui/AstroCalcDialog.cpp:1252
+#: src/core/modules/StarWrapper.cpp:253 src/gui/AstroCalcDialog.cpp:1252
 msgid "double star"
 msgstr "쌍성"
 
-#: src/core/modules/StarWrapper.cpp:295
+#: src/core/modules/StarWrapper.cpp:296
 msgid "Magnitude range"
 msgstr "등급 범위"
 
-#: src/core/modules/StarWrapper.cpp:295
+#: src/core/modules/StarWrapper.cpp:296
 msgid "Photometric system"
 msgstr "측광체계"
 
-#: src/core/modules/StarWrapper.cpp:326 plugins/Pulsars/src/Pulsar.cpp:201
+#: src/core/modules/StarWrapper.cpp:327 plugins/Pulsars/src/Pulsar.cpp:201
 msgid "Proper motion"
 msgstr "고유운동"
 
-#: src/core/modules/StarWrapper.cpp:327 src/core/modules/StarWrapper.cpp:329
+#: src/core/modules/StarWrapper.cpp:328 src/core/modules/StarWrapper.cpp:330
 #: plugins/Pulsars/src/Pulsar.cpp:202 plugins/Pulsars/src/Pulsar.cpp:204
 msgctxt "milliarc second per year"
 msgid "mas/yr"
 msgstr "mas/yr"
 
-#: src/core/modules/StarWrapper.cpp:329 plugins/Pulsars/src/Pulsar.cpp:204
+#: src/core/modules/StarWrapper.cpp:330 plugins/Pulsars/src/Pulsar.cpp:204
 msgid "Proper motions by axes"
 msgstr "축별 고유운동"
 
-#: src/core/modules/StarWrapper.cpp:345 plugins/Quasars/src/Quasar.cpp:145
+#: src/core/modules/StarWrapper.cpp:346 plugins/Quasars/src/Quasar.cpp:145
 #: plugins/Exoplanets/src/Exoplanet.cpp:288
 msgid "Spectral Type"
 msgstr "분광형"
 
-#: src/core/modules/StarWrapper.cpp:348
+#: src/core/modules/StarWrapper.cpp:349
 #: plugins/Exoplanets/src/Exoplanet.cpp:320
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 msgid "Period"
 msgstr "공전 주기"
 
-#: src/core/modules/StarWrapper.cpp:356
+#: src/core/modules/StarWrapper.cpp:357
 msgid "Next maximum light"
 msgstr "다음 최대 밝기"
 
-#: src/core/modules/StarWrapper.cpp:358
+#: src/core/modules/StarWrapper.cpp:359
 msgid "Next minimum light"
 msgstr "다음 최소 밝기"
 
-#: src/core/modules/StarWrapper.cpp:365
+#: src/core/modules/StarWrapper.cpp:366
 msgid "Rising time"
 msgstr "출 시각"
 
-#: src/core/modules/StarWrapper.cpp:367
+#: src/core/modules/StarWrapper.cpp:368
 msgid "Duration of eclipse"
 msgstr "식 지속 기간"
 
-#: src/core/modules/StarWrapper.cpp:376
+#: src/core/modules/StarWrapper.cpp:377
 msgid "Position angle"
 msgstr "위치각"
 
-#: src/core/modules/StarWrapper.cpp:380 src/core/modules/StarWrapper.cpp:382
+#: src/core/modules/StarWrapper.cpp:381 src/core/modules/StarWrapper.cpp:383
 #: src/gui/AstroCalcDialog.cpp:3627
 msgid "Separation"
 msgstr "분리"
@@ -3407,17 +3407,17 @@ msgstr "겉보기 항성시"
 
 #. TRANSLATORS: time of transit
 #: src/core/StelObject.cpp:612 src/gui/AstroCalcDialog.cpp:895
-#: src/gui/AstroCalcDialog.cpp:5294
+#: src/gui/AstroCalcDialog.cpp:5299
 msgctxt "celestial event; passage across a meridian"
 msgid "Transit"
 msgstr "통과"
 
-#: src/core/StelObject.cpp:613 src/gui/AstroCalcDialog.cpp:5293
+#: src/core/StelObject.cpp:613 src/gui/AstroCalcDialog.cpp:5298
 msgctxt "celestial event"
 msgid "Rise"
 msgstr "출"
 
-#: src/core/StelObject.cpp:614 src/gui/AstroCalcDialog.cpp:5297
+#: src/core/StelObject.cpp:614 src/gui/AstroCalcDialog.cpp:5302
 msgctxt "celestial event"
 msgid "Set"
 msgstr "몰"
@@ -3454,7 +3454,7 @@ msgstr "극황혼"
 msgid "Parallactic Angle"
 msgstr "극정대각"
 
-#: src/core/StelObject.cpp:702
+#: src/core/StelObject.cpp:702 src/gui/AstroCalcDialog.cpp:5395
 msgid "IAU Constellation"
 msgstr "IAU 별자리"
 
@@ -3977,22 +3977,22 @@ msgstr "추가적인 정보는 {개발자 설명문서}에서 보실 수 있습�
 msgid "Select screenshot directory"
 msgstr "스크린샷 경로 지정"
 
-#: src/gui/ConfigurationDialog.cpp:1157
+#: src/gui/ConfigurationDialog.cpp:1158
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "초기 시야각: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:1165
+#: src/gui/ConfigurationDialog.cpp:1166
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "초기 시야 방향 방위각/고도: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:1234
+#: src/gui/ConfigurationDialog.cpp:1235
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:136
 msgid "Acknowledgments"
 msgstr "감사의 말씀"
 
-#: src/gui/ConfigurationDialog.cpp:1236
+#: src/gui/ConfigurationDialog.cpp:1237
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:696
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:266
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:157
@@ -4001,11 +4001,11 @@ msgstr "감사의 말씀"
 msgid "Authors"
 msgstr "저자"
 
-#: src/gui/ConfigurationDialog.cpp:1237
+#: src/gui/ConfigurationDialog.cpp:1238
 msgid "Contact"
 msgstr "연락처"
 
-#: src/gui/ConfigurationDialog.cpp:1239 src/scripting/StelScriptMgr.cpp:467
+#: src/gui/ConfigurationDialog.cpp:1240 src/scripting/StelScriptMgr.cpp:467
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
 #: plugins/Oculars/src/gui/OcularDialog.cpp:608
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:694
@@ -4028,7 +4028,7 @@ msgstr "연락처"
 msgid "Version"
 msgstr "버전"
 
-#: src/gui/ConfigurationDialog.cpp:1240 src/scripting/StelScriptMgr.cpp:462
+#: src/gui/ConfigurationDialog.cpp:1241 src/scripting/StelScriptMgr.cpp:462
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
 #: plugins/Oculars/src/gui/OcularDialog.cpp:609
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:695
@@ -4051,20 +4051,20 @@ msgstr "버전"
 msgid "License"
 msgstr "라이선스"
 
-#: src/gui/ConfigurationDialog.cpp:1244
+#: src/gui/ConfigurationDialog.cpp:1245
 msgctxt "license"
 msgid "unknown"
 msgstr "알 수 없음"
 
-#: src/gui/ConfigurationDialog.cpp:1352
+#: src/gui/ConfigurationDialog.cpp:1353
 msgid "Running script: "
 msgstr "실행 중인 스크립트: "
 
-#: src/gui/ConfigurationDialog.cpp:1359
+#: src/gui/ConfigurationDialog.cpp:1360
 msgid "Running script: [none]"
 msgstr "실행 중인 스크립트: [없음]"
 
-#: src/gui/ConfigurationDialog.cpp:1424
+#: src/gui/ConfigurationDialog.cpp:1425
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -4072,16 +4072,16 @@ msgstr ""
 "새 별 목록을 모두 내려받았습니다!\n"
 "새 별을 보려면 스텔라리움을 재시작하세요."
 
-#: src/gui/ConfigurationDialog.cpp:1428
+#: src/gui/ConfigurationDialog.cpp:1429
 msgid "All available star catalogs have been installed."
 msgstr "모든 별 목록이 설치되었습니다."
 
-#: src/gui/ConfigurationDialog.cpp:1433
+#: src/gui/ConfigurationDialog.cpp:1434
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "%2개 중 %1번째 목록 받기"
 
-#: src/gui/ConfigurationDialog.cpp:1440
+#: src/gui/ConfigurationDialog.cpp:1441
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -4090,7 +4090,7 @@ msgstr ""
 "%1 내려받는 중... \n"
 "(이 창을 닫아도 됩니다.)"
 
-#: src/gui/ConfigurationDialog.cpp:1447
+#: src/gui/ConfigurationDialog.cpp:1448
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -4101,7 +4101,7 @@ msgstr ""
 "별 갯수: %2 백만\n"
 "등급 범위: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1493 src/gui/ConfigurationDialog.cpp:1530
+#: src/gui/ConfigurationDialog.cpp:1494 src/gui/ConfigurationDialog.cpp:1531
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -4110,11 +4110,11 @@ msgstr ""
 "%1을 내려받는 중 오류 발생:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1583
+#: src/gui/ConfigurationDialog.cpp:1584
 msgid "Verifying file integrity..."
 msgstr "파일 무결성 검사 중..."
 
-#: src/gui/ConfigurationDialog.cpp:1587
+#: src/gui/ConfigurationDialog.cpp:1588
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -4123,209 +4123,209 @@ msgstr ""
 "%1을 내려받는 중 오류 발생:\n"
 "파일이 손상되었습니다."
 
-#: src/gui/ConfigurationDialog.cpp:1662 src/gui/ConfigurationDialog.cpp:1671
-#: src/gui/ConfigurationDialog.cpp:1680 src/gui/ConfigurationDialog.cpp:1689
+#: src/gui/ConfigurationDialog.cpp:1663 src/gui/ConfigurationDialog.cpp:1672
+#: src/gui/ConfigurationDialog.cpp:1681 src/gui/ConfigurationDialog.cpp:1690
 msgid "Available"
 msgstr "사용 가능"
 
-#: src/gui/ConfigurationDialog.cpp:1664 src/gui/ConfigurationDialog.cpp:1673
-#: src/gui/ConfigurationDialog.cpp:1682 src/gui/ConfigurationDialog.cpp:1691
+#: src/gui/ConfigurationDialog.cpp:1665 src/gui/ConfigurationDialog.cpp:1674
+#: src/gui/ConfigurationDialog.cpp:1683 src/gui/ConfigurationDialog.cpp:1692
 msgid "Not Available"
 msgstr "사용 불가능"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1762
+#: src/gui/ConfigurationDialog.cpp:1763
 msgid "Algorithm of"
 msgstr "알고리즘"
 
-#: src/gui/ConfigurationDialog.cpp:1775
+#: src/gui/ConfigurationDialog.cpp:1776
 msgid "Without correction"
 msgstr "보정 없음"
 
-#: src/gui/ConfigurationDialog.cpp:1776
+#: src/gui/ConfigurationDialog.cpp:1777
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1777
+#: src/gui/ConfigurationDialog.cpp:1778
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1778
+#: src/gui/ConfigurationDialog.cpp:1779
 msgid "IAU (1952)"
 msgstr "IAU (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1779
+#: src/gui/ConfigurationDialog.cpp:1780
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Astronomical Ephemeris (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1780
+#: src/gui/ConfigurationDialog.cpp:1781
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) & Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1781
+#: src/gui/ConfigurationDialog.cpp:1782
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller & Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1782
+#: src/gui/ConfigurationDialog.cpp:1783
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1783
+#: src/gui/ConfigurationDialog.cpp:1784
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel & Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1784
+#: src/gui/ConfigurationDialog.cpp:1785
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel & Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1785
+#: src/gui/ConfigurationDialog.cpp:1786
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison & Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1786
+#: src/gui/ConfigurationDialog.cpp:1787
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson & Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1787
+#: src/gui/ConfigurationDialog.cpp:1788
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson & Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1788
+#: src/gui/ConfigurationDialog.cpp:1789
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1789
+#: src/gui/ConfigurationDialog.cpp:1790
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1790
+#: src/gui/ConfigurationDialog.cpp:1791
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze & Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1791
+#: src/gui/ConfigurationDialog.cpp:1792
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson & Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1792
+#: src/gui/ConfigurationDialog.cpp:1793
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1794
+#: src/gui/ConfigurationDialog.cpp:1795
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1795
+#: src/gui/ConfigurationDialog.cpp:1796
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1796
+#: src/gui/ConfigurationDialog.cpp:1797
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus & Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1797
+#: src/gui/ConfigurationDialog.cpp:1798
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison & Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1798
+#: src/gui/ConfigurationDialog.cpp:1799
 msgid "Stephenson, Morrison & Hohenkerk (2016)"
 msgstr "Stephenson, Morrison & Hohenkerk (2016)"
 
-#: src/gui/ConfigurationDialog.cpp:1800
+#: src/gui/ConfigurationDialog.cpp:1801
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak & Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1803
+#: src/gui/ConfigurationDialog.cpp:1804
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr "Espenak & Meeus (2006) no extra moon acceleration"
 
-#: src/gui/ConfigurationDialog.cpp:1805
+#: src/gui/ConfigurationDialog.cpp:1806
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1806
+#: src/gui/ConfigurationDialog.cpp:1807
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1807
+#: src/gui/ConfigurationDialog.cpp:1808
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck & Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1808
+#: src/gui/ConfigurationDialog.cpp:1809
 msgid "Reingold & Dershowitz (2002, 2007, 2018)"
 msgstr "Reingold & Dershowitz (2002, 2007, 2018)"
 
-#: src/gui/ConfigurationDialog.cpp:1809
+#: src/gui/ConfigurationDialog.cpp:1810
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1810
+#: src/gui/ConfigurationDialog.cpp:1811
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Khalid, Sultana & Zaidi (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1811
+#: src/gui/ConfigurationDialog.cpp:1812
 msgid "Henriksson (2017)"
 msgstr "헨리크슨 (2017)"
 
-#: src/gui/ConfigurationDialog.cpp:1812
+#: src/gui/ConfigurationDialog.cpp:1813
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "사용자 정의 %1T 공식"
 
-#: src/gui/ConfigurationDialog.cpp:1860 src/gui/ConfigurationDialog.cpp:1897
+#: src/gui/ConfigurationDialog.cpp:1861 src/gui/ConfigurationDialog.cpp:1898
 #: src/gui/StelGuiItems.cpp:733 src/gui/LocationDialog.cpp:482
 msgid "System default"
 msgstr "시스템 기본 설정"
 
-#: src/gui/ConfigurationDialog.cpp:1861
+#: src/gui/ConfigurationDialog.cpp:1862
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "년-월-일 (ISO 8601)"
 
-#: src/gui/ConfigurationDialog.cpp:1862
+#: src/gui/ConfigurationDialog.cpp:1863
 msgid "dd-mm-yyyy"
 msgstr "일-월-년"
 
-#: src/gui/ConfigurationDialog.cpp:1863
+#: src/gui/ConfigurationDialog.cpp:1864
 msgid "mm-dd-yyyy"
 msgstr "월-일-년"
 
-#: src/gui/ConfigurationDialog.cpp:1864
+#: src/gui/ConfigurationDialog.cpp:1865
 msgid "ww, yyyy-mm-dd"
 msgstr "요일, 년-월-일"
 
-#: src/gui/ConfigurationDialog.cpp:1865
+#: src/gui/ConfigurationDialog.cpp:1866
 msgid "ww, dd-mm-yyyy"
 msgstr "요일, 일-월-년"
 
-#: src/gui/ConfigurationDialog.cpp:1866
+#: src/gui/ConfigurationDialog.cpp:1867
 msgid "ww, mm-dd-yyyy"
 msgstr "요일, 월-일-년"
 
-#: src/gui/ConfigurationDialog.cpp:1898
+#: src/gui/ConfigurationDialog.cpp:1899
 msgid "12-hour format"
 msgstr "12시간 형식"
 
-#: src/gui/ConfigurationDialog.cpp:1899
+#: src/gui/ConfigurationDialog.cpp:1900
 msgid "24-hour format"
 msgstr "24시간 형식"
 
-#: src/gui/ConfigurationDialog.cpp:1925
+#: src/gui/ConfigurationDialog.cpp:1926
 msgctxt "disabled"
 msgid "None"
 msgstr "없음"
 
-#: src/gui/ConfigurationDialog.cpp:1926
+#: src/gui/ConfigurationDialog.cpp:1927
 msgid "5/6/5 bits"
 msgstr "5/6/5 비트"
 
-#: src/gui/ConfigurationDialog.cpp:1927
+#: src/gui/ConfigurationDialog.cpp:1928
 msgid "6/6/6 bits"
 msgstr "6/6/6 비트"
 
-#: src/gui/ConfigurationDialog.cpp:1928
+#: src/gui/ConfigurationDialog.cpp:1929
 msgid "8/8/8 bits"
 msgstr "8/8/8 비트"
 
-#: src/gui/ConfigurationDialog.cpp:1929
+#: src/gui/ConfigurationDialog.cpp:1930
 msgid "10/10/10 bits"
 msgstr "10/10/10 비트"
 
@@ -4819,79 +4819,79 @@ msgstr "초당 프레임 수"
 msgid "Are you sure? This will delete your customized data."
 msgstr "사용자의 데이터를 삭제합니다. 계속 하시겠습니까?"
 
-#: src/gui/ViewDialog.cpp:552
+#: src/gui/ViewDialog.cpp:553
 msgid "Loading ..."
 msgstr "불러오는 중 ..."
 
-#: src/gui/ViewDialog.cpp:605
+#: src/gui/ViewDialog.cpp:606
 msgid "properties"
 msgstr "설정"
 
-#: src/gui/ViewDialog.cpp:626
+#: src/gui/ViewDialog.cpp:627
 msgid "Deep Sky"
 msgstr "딥스카이 (심우주)"
 
-#: src/gui/ViewDialog.cpp:627
+#: src/gui/ViewDialog.cpp:628
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:274
 msgid "Solar System"
 msgstr "태양계"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:870
+#: src/gui/ViewDialog.cpp:871
 msgid "Excellent dark-sky site"
 msgstr "매우 어두운 밤하늘"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:872
+#: src/gui/ViewDialog.cpp:873
 msgid "Typical truly dark site"
 msgstr "일반적인 어두운 밤하늘"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:874
+#: src/gui/ViewDialog.cpp:875
 msgid "Rural sky"
 msgstr "시골의 하늘"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:876
+#: src/gui/ViewDialog.cpp:877
 msgid "Rural/suburban transition"
 msgstr "시골과 교외 중간 지역의 하늘"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:878
+#: src/gui/ViewDialog.cpp:879
 msgid "Suburban sky"
 msgstr "교외의 하늘"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:880
+#: src/gui/ViewDialog.cpp:881
 msgid "Bright suburban sky"
 msgstr "밝은 교외의 하늘"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:882
+#: src/gui/ViewDialog.cpp:883
 msgid "Suburban/urban transition"
 msgstr "교외와 도시 중간 지역의 하늘"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:884
+#: src/gui/ViewDialog.cpp:885
 msgid "City sky"
 msgstr "도시의 하늘"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:886
+#: src/gui/ViewDialog.cpp:887
 msgid "Inner-city sky"
 msgstr "도심부의 하늘"
 
-#: src/gui/ViewDialog.cpp:900
+#: src/gui/ViewDialog.cpp:901
 msgid "The naked-eye limiting magnitude is"
 msgstr "육안 한계등급은"
 
-#: src/gui/ViewDialog.cpp:908
+#: src/gui/ViewDialog.cpp:909
 msgid ""
 "Uses a polygonal 3D model for some selected subplanetary objects (small "
 "moons, asteroids, comets) instead of a spherical approximation"
 msgstr "선택된 준행성체(작은 위성, 소행성, 혜성)들에 대해 구형으로 추정하는 대신 3D 다각형 모델 사용"
 
-#: src/gui/ViewDialog.cpp:909
+#: src/gui/ViewDialog.cpp:910
 msgid ""
 "Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar "
 "system objects. May reduce shadow penumbra quality on some objects."
@@ -4899,93 +4899,93 @@ msgstr ""
 "구형이 아닌 태양계 천체들의 그림자를 추정하기 위해 &quot;그림자 지도&quot;를 사용: 몇몇 천체는 반그림자의 품질이 낮아질 수 "
 "있습니다."
 
-#: src/gui/ViewDialog.cpp:939
+#: src/gui/ViewDialog.cpp:945
 msgid "Abbreviated"
 msgstr "생략됨"
 
-#: src/gui/ViewDialog.cpp:940
+#: src/gui/ViewDialog.cpp:946
 msgid "Native"
 msgstr "원어"
 
-#: src/gui/ViewDialog.cpp:941
+#: src/gui/ViewDialog.cpp:947
 msgid "Translated"
 msgstr "변역됨"
 
-#: src/gui/ViewDialog.cpp:1112
+#: src/gui/ViewDialog.cpp:1118
 msgid "No shooting stars"
 msgstr "유성 없음"
 
-#: src/gui/ViewDialog.cpp:1114
+#: src/gui/ViewDialog.cpp:1120
 msgid "Normal rate"
 msgstr "정상 비율"
 
-#: src/gui/ViewDialog.cpp:1116
+#: src/gui/ViewDialog.cpp:1122
 msgid "Standard Orionids rate"
 msgstr "표준 오리온자리 유성우 비율"
 
-#: src/gui/ViewDialog.cpp:1118
+#: src/gui/ViewDialog.cpp:1124
 msgid "Standard Perseids rate"
 msgstr "표준 페르세우스 유성우 비율"
 
-#: src/gui/ViewDialog.cpp:1120
+#: src/gui/ViewDialog.cpp:1126
 msgid "Standard Geminids rate"
 msgstr "표준 쌍둥이자리 유성우 비율"
 
-#: src/gui/ViewDialog.cpp:1122
+#: src/gui/ViewDialog.cpp:1128
 msgid "Exceptional Perseid rate"
 msgstr "예외적인 페르세우스 유성우 비율"
 
-#: src/gui/ViewDialog.cpp:1124
+#: src/gui/ViewDialog.cpp:1130
 msgid "Meteor storm rate"
 msgstr "유성폭풍 비율"
 
-#: src/gui/ViewDialog.cpp:1126
+#: src/gui/ViewDialog.cpp:1132
 msgid "Exceptional Draconid rate"
 msgstr "예외적인 용자리 유성우 비율"
 
-#: src/gui/ViewDialog.cpp:1128
+#: src/gui/ViewDialog.cpp:1134
 msgid "Exceptional Leonid rate"
 msgstr "예외적인 사자자리 유성우 빈도수 비율"
 
-#: src/gui/ViewDialog.cpp:1130
+#: src/gui/ViewDialog.cpp:1136
 msgid "Very high rate (1966 Leonids)"
 msgstr "매우 높은 비율 (1966년 사자자리 유성우)"
 
-#: src/gui/ViewDialog.cpp:1132
+#: src/gui/ViewDialog.cpp:1138
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "역대 최고 비율 (1833년 사자자리 유성우)"
 
-#: src/gui/ViewDialog.cpp:1195
+#: src/gui/ViewDialog.cpp:1201
 msgctxt "magnitude algorithm"
 msgid "G. Müller (1893)"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1196
+#: src/gui/ViewDialog.cpp:1202
 msgctxt "magnitude algorithm"
 msgid "Astronomical Almanac (1984)"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1197
+#: src/gui/ViewDialog.cpp:1203
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (1992)"
 msgstr "Explanatory Supplement (1992)"
 
-#: src/gui/ViewDialog.cpp:1198
+#: src/gui/ViewDialog.cpp:1204
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (2013)"
 msgstr "Explanatory Supplement (2013)"
 
-#: src/gui/ViewDialog.cpp:1199
+#: src/gui/ViewDialog.cpp:1205
 msgctxt "magnitude algorithm"
 msgid "Mallama & Hilton (2018)"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1200
+#: src/gui/ViewDialog.cpp:1206
 msgctxt "magnitude algorithm"
 msgid "Generic"
 msgstr "일반"
 
-#: src/gui/ViewDialog.cpp:1226
+#: src/gui/ViewDialog.cpp:1232
 msgid ""
 "The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later)"
 " and gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
@@ -4993,20 +4993,20 @@ msgstr ""
 "이 알고리즘은 <em>Astronomical Almanac</em>(1984~)에서 사용되었으며, 겉보기등급을 추산합니다(D.L. "
 "해리스)."
 
-#: src/gui/ViewDialog.cpp:1229
+#: src/gui/ViewDialog.cpp:1235
 msgid ""
 "The algorithm is based on visual observations 1877-1891 by G. Müller and was"
 " still republished in the <em>Explanatory Supplement to the Astronomical "
 "Ephemeris</em> (1961)."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1232
+#: src/gui/ViewDialog.cpp:1238
 msgid ""
 "The algorithm was published in the 2nd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (1992)."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1235
+#: src/gui/ViewDialog.cpp:1241
 msgid ""
 "The algorithm was published in the 3rd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (2013)."
@@ -5014,14 +5014,14 @@ msgstr ""
 "이 알고리즘은 <em>Explanatory Supplement to the Astronomical Almanac</em>(2013)의 제"
 " 3판에 출판되었습니다."
 
-#: src/gui/ViewDialog.cpp:1238
+#: src/gui/ViewDialog.cpp:1244
 msgid ""
 "The algorithm was published by A. Mallama & J. L. Hilton: <em>Computing "
 "apparent planetary magnitudes for the Astronomical Almanac.</em> "
 "Astronomy&Computing 25 (2018) 10-24."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1241
+#: src/gui/ViewDialog.cpp:1247
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "겉보기등급은 위상과 반사율에 따라 달라집니다."
 
@@ -5396,7 +5396,7 @@ msgid "Local Time"
 msgstr "지방시"
 
 #: src/gui/AstroCalcDialog.cpp:764 src/gui/AstroCalcDialog.cpp:2703
-#: src/gui/AstroCalcDialog.cpp:3471 src/gui/AstroCalcDialog.cpp:6544
+#: src/gui/AstroCalcDialog.cpp:3471 src/gui/AstroCalcDialog.cpp:6576
 msgid "Unnamed star"
 msgstr "이름 없는 별"
 
@@ -5407,7 +5407,7 @@ msgstr "현재는 %1"
 
 #. TRANSLATORS: name of object
 #: src/gui/AstroCalcDialog.cpp:842 src/gui/AstroCalcDialog.cpp:1515
-#: src/gui/AstroCalcDialog.cpp:1904 src/gui/AstroCalcDialog.cpp:5282
+#: src/gui/AstroCalcDialog.cpp:1904 src/gui/AstroCalcDialog.cpp:5287
 #: src/ui_configurationDialog.h:1794
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:524
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
@@ -5427,13 +5427,13 @@ msgid "Dec (J2000)"
 msgstr "적위 (J2000)"
 
 #. TRANSLATORS: opacity
-#: src/gui/AstroCalcDialog.cpp:860 src/gui/AstroCalcDialog.cpp:5291
+#: src/gui/AstroCalcDialog.cpp:860 src/gui/AstroCalcDialog.cpp:5296
 msgid "Opac."
 msgstr "불투명도"
 
 #. TRANSLATORS: magnitude
 #: src/gui/AstroCalcDialog.cpp:865 src/gui/AstroCalcDialog.cpp:1532
-#: src/gui/AstroCalcDialog.cpp:1909 src/gui/AstroCalcDialog.cpp:5286
+#: src/gui/AstroCalcDialog.cpp:1909 src/gui/AstroCalcDialog.cpp:5291
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
 msgid "Mag."
 msgstr "등급"
@@ -5445,7 +5445,7 @@ msgstr "각크기"
 
 #. TRANSLATORS: separation, arc-seconds
 #. TRANSLATORS: separation
-#: src/gui/AstroCalcDialog.cpp:872 src/gui/AstroCalcDialog.cpp:5301
+#: src/gui/AstroCalcDialog.cpp:872 src/gui/AstroCalcDialog.cpp:5306
 msgid "Sep."
 msgstr "분리"
 
@@ -5480,7 +5480,7 @@ msgid "S.B."
 msgstr "표면 밝기"
 
 #. TRANSLATORS: elevation
-#: src/gui/AstroCalcDialog.cpp:897 src/gui/AstroCalcDialog.cpp:5296
+#: src/gui/AstroCalcDialog.cpp:897 src/gui/AstroCalcDialog.cpp:5301
 msgid "Elev."
 msgstr ""
 
@@ -5489,7 +5489,7 @@ msgstr ""
 msgid "Elong."
 msgstr "이각"
 
-#: src/gui/AstroCalcDialog.cpp:965 src/ui_viewDialog.h:3160
+#: src/gui/AstroCalcDialog.cpp:965 src/ui_viewDialog.h:3172
 msgid "Solar system objects"
 msgstr "태양계 천체"
 
@@ -5539,15 +5539,15 @@ msgid "star with high proper motion"
 msgstr "고유운동이 큰 별들"
 
 #: src/gui/AstroCalcDialog.cpp:1378 src/gui/AstroCalcDialog.cpp:1826
-#: src/gui/AstroCalcDialog.cpp:2092 src/gui/AstroCalcDialog.cpp:3957
-#: src/gui/AstroCalcDialog.cpp:6067
+#: src/gui/AstroCalcDialog.cpp:2092 src/gui/AstroCalcDialog.cpp:3961
+#: src/gui/AstroCalcDialog.cpp:6099
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1450
 msgid "Microsoft Excel Open XML Spreadsheet"
 msgstr "마이크로소프트 엑셀 오픈 XML 스프레드시트"
 
 #: src/gui/AstroCalcDialog.cpp:1380 src/gui/AstroCalcDialog.cpp:1828
-#: src/gui/AstroCalcDialog.cpp:2094 src/gui/AstroCalcDialog.cpp:3959
-#: src/gui/AstroCalcDialog.cpp:6069
+#: src/gui/AstroCalcDialog.cpp:2094 src/gui/AstroCalcDialog.cpp:3963
+#: src/gui/AstroCalcDialog.cpp:6101
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1452
 msgid "CSV (Comma delimited)"
 msgstr "CSV (쉼표로 구분)"
@@ -5755,51 +5755,51 @@ msgid "Solar system"
 msgstr "태양계"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2478 src/gui/AstroCalcDialog.cpp:5187
+#: src/gui/AstroCalcDialog.cpp:2478 src/gui/AstroCalcDialog.cpp:5191
 #: src/translations.h:67
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
 msgid "Asteroids"
 msgstr "소행성"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2479 src/gui/AstroCalcDialog.cpp:5189
+#: src/gui/AstroCalcDialog.cpp:2479 src/gui/AstroCalcDialog.cpp:5193
 #: src/translations.h:71
 msgid "Plutinos"
 msgstr "명왕성족"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2479 src/gui/AstroCalcDialog.cpp:5188
+#: src/gui/AstroCalcDialog.cpp:2479 src/gui/AstroCalcDialog.cpp:5192
 #: src/translations.h:65
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Comets"
 msgstr "혜성"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2479 src/gui/AstroCalcDialog.cpp:5190
+#: src/gui/AstroCalcDialog.cpp:2479 src/gui/AstroCalcDialog.cpp:5194
 #: src/translations.h:73
 msgid "Dwarf planets"
 msgstr "왜행성"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2479 src/gui/AstroCalcDialog.cpp:5191
+#: src/gui/AstroCalcDialog.cpp:2479 src/gui/AstroCalcDialog.cpp:5195
 #: src/translations.h:75
 msgid "Cubewanos"
 msgstr "큐비원족"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2480 src/gui/AstroCalcDialog.cpp:5192
+#: src/gui/AstroCalcDialog.cpp:2480 src/gui/AstroCalcDialog.cpp:5196
 #: src/translations.h:77
 msgid "Scattered disc objects"
 msgstr "산란원반 천체"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2480 src/gui/AstroCalcDialog.cpp:5193
+#: src/gui/AstroCalcDialog.cpp:2480 src/gui/AstroCalcDialog.cpp:5197
 #: src/translations.h:79
 msgid "Oort cloud objects"
 msgstr "오르트 구름 천체"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2480 src/gui/AstroCalcDialog.cpp:5194
+#: src/gui/AstroCalcDialog.cpp:2480 src/gui/AstroCalcDialog.cpp:5198
 #: src/translations.h:81
 msgid "Sednoids"
 msgstr "세드나족"
@@ -5835,8 +5835,8 @@ msgid "Bright nebulae (<%1 mag)"
 msgstr "밝은 성운들 (등급 %1 초과)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2483 src/gui/AstroCalcDialog.cpp:5184
-#: src/translations.h:318 src/ui_viewDialog.h:3407
+#: src/gui/AstroCalcDialog.cpp:2483 src/gui/AstroCalcDialog.cpp:5188
+#: src/translations.h:318 src/ui_viewDialog.h:3427
 #: src/ui_dsoColorsDialog.h:659
 msgid "Dark nebulae"
 msgstr "암흑성운"
@@ -5847,19 +5847,19 @@ msgid "Bright galaxies (<%1 mag)"
 msgstr "밝은 은하들 (등급 %1 초과)"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2484 src/gui/AstroCalcDialog.cpp:5199
+#: src/gui/AstroCalcDialog.cpp:2484 src/gui/AstroCalcDialog.cpp:5203
 #: src/translations.h:368 src/ui_dsoColorsDialog.h:695
 msgid "Symbiotic stars"
 msgstr "공생별"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2484 src/gui/AstroCalcDialog.cpp:5200
+#: src/gui/AstroCalcDialog.cpp:2484 src/gui/AstroCalcDialog.cpp:5204
 #: src/translations.h:370 src/ui_dsoColorsDialog.h:674
 msgid "Emission-line stars"
 msgstr "휘선별"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2485 src/gui/AstroCalcDialog.cpp:5205
+#: src/gui/AstroCalcDialog.cpp:2485 src/gui/AstroCalcDialog.cpp:5209
 #: src/translations.h:83
 msgid "Interstellar objects"
 msgstr "성간 천체"
@@ -5882,9 +5882,15 @@ msgid "Moons of first body"
 msgstr ""
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2488 src/gui/AstroCalcDialog.cpp:5233
+#: src/gui/AstroCalcDialog.cpp:2488 src/gui/AstroCalcDialog.cpp:5237
 #: src/translations.h:455
 msgid "Bright carbon stars"
+msgstr ""
+
+#. TRANSLATORS: Type of stars (for "Lists" in the search tool)
+#: src/gui/AstroCalcDialog.cpp:2488 src/gui/AstroCalcDialog.cpp:5238
+#: src/translations.h:457
+msgid "Bright barium stars"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:3074
@@ -6024,328 +6030,334 @@ msgstr ""
 msgid "Elevation"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:3657 src/gui/AstroCalcDialog.cpp:4086
-#: src/gui/AstroCalcDialog.cpp:4337
+#: src/gui/AstroCalcDialog.cpp:3657 src/gui/AstroCalcDialog.cpp:4090
+#: src/gui/AstroCalcDialog.cpp:4341
 msgid "Opposition"
 msgstr "충"
 
-#: src/gui/AstroCalcDialog.cpp:3963
+#: src/gui/AstroCalcDialog.cpp:3967
 msgid "Save calculated phenomena as..."
 msgstr "계산된 현상을 다음으로 저장..."
 
-#: src/gui/AstroCalcDialog.cpp:3981 src/gui/AstroCalcDialog.cpp:3983
+#: src/gui/AstroCalcDialog.cpp:3985 src/gui/AstroCalcDialog.cpp:3987
 #: src/ui_astroCalcDialog.h:1676
 msgid "Phenomena"
 msgstr "현상"
 
-#: src/gui/AstroCalcDialog.cpp:4038
+#: src/gui/AstroCalcDialog.cpp:4042
 msgid "Magnitude of first object"
 msgstr "첫째 천체의 등급"
 
-#: src/gui/AstroCalcDialog.cpp:4041
+#: src/gui/AstroCalcDialog.cpp:4045
 msgid "Magnitude of second object"
 msgstr "둘째 천체의 등급"
 
-#: src/gui/AstroCalcDialog.cpp:4047
+#: src/gui/AstroCalcDialog.cpp:4051
 msgid "Elevation of first object at moment of phenomena"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4049 src/gui/AstroCalcDialog.cpp:4195
+#: src/gui/AstroCalcDialog.cpp:4053 src/gui/AstroCalcDialog.cpp:4199
 msgid "Angular distance from the Sun"
 msgstr "태양으로부터의 각거리"
 
-#: src/gui/AstroCalcDialog.cpp:4052 src/gui/AstroCalcDialog.cpp:4196
+#: src/gui/AstroCalcDialog.cpp:4056 src/gui/AstroCalcDialog.cpp:4200
 msgid "Angular distance from the Moon"
 msgstr "달로부터의 각거리"
 
-#: src/gui/AstroCalcDialog.cpp:4070 src/gui/AstroCalcDialog.cpp:4248
-#: src/gui/AstroCalcDialog.cpp:4328
+#: src/gui/AstroCalcDialog.cpp:4074 src/gui/AstroCalcDialog.cpp:4252
+#: src/gui/AstroCalcDialog.cpp:4332
 msgid "Conjunction"
 msgstr "합"
 
-#: src/gui/AstroCalcDialog.cpp:4079
+#: src/gui/AstroCalcDialog.cpp:4083
 msgid "Shadow transit"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4082 src/gui/AstroCalcDialog.cpp:4089
-#: src/gui/AstroCalcDialog.cpp:4135 src/gui/AstroCalcDialog.cpp:4141
-#: src/gui/AstroCalcDialog.cpp:4340 src/gui/AstroCalcDialog.cpp:4356
-#: src/gui/AstroCalcDialog.cpp:4362
+#: src/gui/AstroCalcDialog.cpp:4086 src/gui/AstroCalcDialog.cpp:4093
+#: src/gui/AstroCalcDialog.cpp:4139 src/gui/AstroCalcDialog.cpp:4145
+#: src/gui/AstroCalcDialog.cpp:4344 src/gui/AstroCalcDialog.cpp:4360
+#: src/gui/AstroCalcDialog.cpp:4366
 msgid "Eclipse"
 msgstr "식"
 
-#: src/gui/AstroCalcDialog.cpp:4098
+#: src/gui/AstroCalcDialog.cpp:4102
 msgid "Greatest eastern elongation"
 msgstr "동방 최대 이각"
 
-#: src/gui/AstroCalcDialog.cpp:4101
+#: src/gui/AstroCalcDialog.cpp:4105
 msgid "Greatest western elongation"
 msgstr "서방 최대 이각"
 
 #. TRANSLATORS: The planet are stand still in the equatorial coordinates
-#: src/gui/AstroCalcDialog.cpp:4108
+#: src/gui/AstroCalcDialog.cpp:4112
 msgid "Stationary (begin retrograde motion)"
 msgstr ""
 
 #. TRANSLATORS: The planet are stand still in the equatorial coordinates
-#: src/gui/AstroCalcDialog.cpp:4113
+#: src/gui/AstroCalcDialog.cpp:4117
 msgid "Stationary (begin prograde motion)"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4119
+#: src/gui/AstroCalcDialog.cpp:4123
 msgid "Perihelion"
 msgstr "근일점"
 
-#: src/gui/AstroCalcDialog.cpp:4121
+#: src/gui/AstroCalcDialog.cpp:4125
 msgid "Aphelion"
 msgstr "원일점"
 
-#: src/gui/AstroCalcDialog.cpp:4128 src/gui/AstroCalcDialog.cpp:4349
+#: src/gui/AstroCalcDialog.cpp:4132 src/gui/AstroCalcDialog.cpp:4353
 msgctxt "passage of the celestial body"
 msgid "Transit"
 msgstr "통과"
 
-#: src/gui/AstroCalcDialog.cpp:4131 src/gui/AstroCalcDialog.cpp:4253
-#: src/gui/AstroCalcDialog.cpp:4352
+#: src/gui/AstroCalcDialog.cpp:4135 src/gui/AstroCalcDialog.cpp:4257
+#: src/gui/AstroCalcDialog.cpp:4356
 msgid "Occultation"
 msgstr "엄폐"
 
-#: src/gui/AstroCalcDialog.cpp:4154 src/gui/AstroCalcDialog.cpp:4156
-#: src/gui/AstroCalcDialog.cpp:4375 src/gui/AstroCalcDialog.cpp:4377
+#: src/gui/AstroCalcDialog.cpp:4158 src/gui/AstroCalcDialog.cpp:4160
+#: src/gui/AstroCalcDialog.cpp:4379 src/gui/AstroCalcDialog.cpp:4381
 msgid "Superior conjunction"
 msgstr "외합"
 
-#: src/gui/AstroCalcDialog.cpp:4154 src/gui/AstroCalcDialog.cpp:4156
-#: src/gui/AstroCalcDialog.cpp:4375 src/gui/AstroCalcDialog.cpp:4377
+#: src/gui/AstroCalcDialog.cpp:4158 src/gui/AstroCalcDialog.cpp:4160
+#: src/gui/AstroCalcDialog.cpp:4379 src/gui/AstroCalcDialog.cpp:4381
 msgid "Inferior conjunction"
 msgstr "내합"
 
-#: src/gui/AstroCalcDialog.cpp:4199
+#: src/gui/AstroCalcDialog.cpp:4203
 msgid "Angular distance from the Sun for second object"
 msgstr "태양으로부터 두 번째 천체까지의 각거리"
 
-#: src/gui/AstroCalcDialog.cpp:4200
+#: src/gui/AstroCalcDialog.cpp:4204
 msgid "Angular distance from the Moon for second object"
 msgstr "달로부터 두 번째 천체까지의 각거리"
 
-#: src/gui/AstroCalcDialog.cpp:5159
+#: src/gui/AstroCalcDialog.cpp:5163
 msgctxt "Celestial object is observed..."
 msgid "In the Evening"
 msgstr "저녁"
 
-#: src/gui/AstroCalcDialog.cpp:5160
+#: src/gui/AstroCalcDialog.cpp:5164
 msgctxt "Celestial object is observed..."
 msgid "In the Morning"
 msgstr "아침"
 
-#: src/gui/AstroCalcDialog.cpp:5161
+#: src/gui/AstroCalcDialog.cpp:5165
 msgctxt "Celestial object is observed..."
 msgid "Around Midnight"
 msgstr "한밤중"
 
-#: src/gui/AstroCalcDialog.cpp:5162
+#: src/gui/AstroCalcDialog.cpp:5166
 msgctxt "Celestial object is observed..."
 msgid "In Any Time of the Night"
 msgstr "밤 아무 때"
 
-#: src/gui/AstroCalcDialog.cpp:5182
+#: src/gui/AstroCalcDialog.cpp:5186
 msgid "Bright stars"
 msgstr "밝은 별"
 
-#: src/gui/AstroCalcDialog.cpp:5183 src/ui_viewDialog.h:3406
+#: src/gui/AstroCalcDialog.cpp:5187 src/ui_viewDialog.h:3426
 msgid "Bright nebulae"
 msgstr "밝은 성운"
 
-#: src/gui/AstroCalcDialog.cpp:5185 src/ui_viewDialog.h:3410
+#: src/gui/AstroCalcDialog.cpp:5189 src/ui_viewDialog.h:3430
 #: src/ui_dsoColorsDialog.h:595
 msgid "Galaxies"
 msgstr "은하"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5186 src/translations.h:310
-#: src/ui_viewDialog.h:3413 src/ui_dsoColorsDialog.h:599
+#: src/gui/AstroCalcDialog.cpp:5190 src/translations.h:310
+#: src/ui_viewDialog.h:3433 src/ui_dsoColorsDialog.h:599
 msgid "Open star clusters"
 msgstr "산개성단"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5195 src/translations.h:316
-#: src/ui_viewDialog.h:3405 src/ui_dsoColorsDialog.h:588
+#: src/gui/AstroCalcDialog.cpp:5199 src/translations.h:316
+#: src/ui_viewDialog.h:3425 src/ui_dsoColorsDialog.h:588
 msgid "Planetary nebulae"
 msgstr "행성상 성운"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5196 src/translations.h:445
+#: src/gui/AstroCalcDialog.cpp:5200 src/translations.h:445
 msgid "Bright double stars"
 msgstr "밝은 이중성"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5197 src/translations.h:447
+#: src/gui/AstroCalcDialog.cpp:5201 src/translations.h:447
 msgid "Bright variable stars"
 msgstr "밝은 변광성"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5198 src/translations.h:449
+#: src/gui/AstroCalcDialog.cpp:5202 src/translations.h:449
 msgid "Bright stars with high proper motion"
 msgstr "고유운동이 큰 밝은 별들"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5201 src/translations.h:346
+#: src/gui/AstroCalcDialog.cpp:5205 src/translations.h:346
 #: src/ui_dsoColorsDialog.h:640
 msgid "Supernova candidates"
 msgstr "초신성 후보"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5202 src/translations.h:348
+#: src/gui/AstroCalcDialog.cpp:5206 src/translations.h:348
 #: src/ui_dsoColorsDialog.h:681
 msgid "Supernova remnant candidates"
 msgstr "초신성 잔해 후보"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5203 src/translations.h:344
-#: src/ui_viewDialog.h:3412 src/ui_dsoColorsDialog.h:581
+#: src/gui/AstroCalcDialog.cpp:5207 src/translations.h:344
+#: src/ui_viewDialog.h:3432 src/ui_dsoColorsDialog.h:581
 msgid "Supernova remnants"
 msgstr "초신성 잔해"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5204 src/translations.h:372
-#: src/ui_viewDialog.h:3409 src/ui_dsoColorsDialog.h:694
+#: src/gui/AstroCalcDialog.cpp:5208 src/translations.h:372
+#: src/ui_viewDialog.h:3429 src/ui_dsoColorsDialog.h:694
 msgid "Clusters of galaxies"
 msgstr "은하단"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5206 src/translations.h:312
-#: src/ui_viewDialog.h:3415 src/ui_dsoColorsDialog.h:574
+#: src/gui/AstroCalcDialog.cpp:5210 src/translations.h:312
+#: src/ui_viewDialog.h:3435 src/ui_dsoColorsDialog.h:574
 msgid "Globular star clusters"
 msgstr "구상성단"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5207 src/translations.h:374
+#: src/gui/AstroCalcDialog.cpp:5211 src/translations.h:374
 #: src/ui_dsoColorsDialog.h:710
 msgid "Regions of the sky"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5208 src/translations.h:326
-#: src/ui_viewDialog.h:3404 src/ui_dsoColorsDialog.h:565
+#: src/gui/AstroCalcDialog.cpp:5212 src/translations.h:326
+#: src/ui_viewDialog.h:3424 src/ui_dsoColorsDialog.h:565
 msgid "Active galaxies"
 msgstr "활성은하"
 
-#: src/gui/AstroCalcDialog.cpp:5213 plugins/Pulsars/src/Pulsars.cpp:72
+#: src/gui/AstroCalcDialog.cpp:5217 plugins/Pulsars/src/Pulsars.cpp:72
 #: plugins/Pulsars/src/Pulsars.cpp:170 plugins/Pulsars/src/Pulsars.cpp:171
 msgid "Pulsars"
 msgstr "펄서"
 
-#: src/gui/AstroCalcDialog.cpp:5219
+#: src/gui/AstroCalcDialog.cpp:5223
 msgid "Exoplanetary systems"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5222
+#: src/gui/AstroCalcDialog.cpp:5226
 msgid "Bright nova stars"
 msgstr "밝은 신성들"
 
-#: src/gui/AstroCalcDialog.cpp:5224
+#: src/gui/AstroCalcDialog.cpp:5228
 msgid "Bright supernova stars"
 msgstr "밝은 초신성들"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5225 src/translations.h:330
-#: src/ui_viewDialog.h:3411 src/ui_dsoColorsDialog.h:650
+#: src/gui/AstroCalcDialog.cpp:5229 src/translations.h:330
+#: src/ui_viewDialog.h:3431 src/ui_dsoColorsDialog.h:650
 msgid "Interacting galaxies"
 msgstr "상호작용은하"
 
-#: src/gui/AstroCalcDialog.cpp:5227
+#: src/gui/AstroCalcDialog.cpp:5231
 msgid "Messier objects"
 msgstr "메시에 천체"
 
-#: src/gui/AstroCalcDialog.cpp:5228
+#: src/gui/AstroCalcDialog.cpp:5232
 msgid "NGC/IC objects"
 msgstr "NGC/IC 천체"
 
-#: src/gui/AstroCalcDialog.cpp:5229
+#: src/gui/AstroCalcDialog.cpp:5233
 msgid "Caldwell objects"
 msgstr "콜드웰 천체"
 
-#: src/gui/AstroCalcDialog.cpp:5230
+#: src/gui/AstroCalcDialog.cpp:5234
 msgid "Herschel 400 objects"
 msgstr "허셜 400 천체"
 
-#: src/gui/AstroCalcDialog.cpp:5231
+#: src/gui/AstroCalcDialog.cpp:5235
 msgid "Algol-type eclipsing systems"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5232
+#: src/gui/AstroCalcDialog.cpp:5236
 msgid "The classical cepheids"
 msgstr ""
 
 #. TRANSLATORS: angular size
-#: src/gui/AstroCalcDialog.cpp:5306
+#: src/gui/AstroCalcDialog.cpp:5311
 msgid "Ang. Size"
 msgstr "각크기"
 
-#: src/gui/AstroCalcDialog.cpp:5421 src/ui_astroCalcDialog.h:1869
+#. TRANSLATORS: IAU Constellation
+#: src/gui/AstroCalcDialog.cpp:5314
+msgctxt "IAU Constellation"
+msgid "Const."
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:5432 src/ui_astroCalcDialog.h:1869
 msgid "Limit angular size:"
 msgstr "각크기 제한:"
 
-#: src/gui/AstroCalcDialog.cpp:5422 src/ui_astroCalcDialog.h:1867
+#: src/gui/AstroCalcDialog.cpp:5433 src/ui_astroCalcDialog.h:1867
 msgid "Set limits for angular size for visible celestial objects"
 msgstr "천체의 한계 각크기 제한 설정"
 
-#: src/gui/AstroCalcDialog.cpp:5423 src/ui_astroCalcDialog.h:1871
+#: src/gui/AstroCalcDialog.cpp:5434 src/ui_astroCalcDialog.h:1871
 msgid "Minimal angular size for visible celestial objects"
 msgstr "천체의 최소 각크기 한계"
 
-#: src/gui/AstroCalcDialog.cpp:5424 src/ui_astroCalcDialog.h:1874
+#: src/gui/AstroCalcDialog.cpp:5435 src/ui_astroCalcDialog.h:1874
 msgid "Maximum angular size for visible celestial objects"
 msgstr "천체의 최대 각크기 한계"
 
-#: src/gui/AstroCalcDialog.cpp:5720
+#: src/gui/AstroCalcDialog.cpp:5737
 msgid "Limit angular separation:"
 msgstr "각거리 제한:"
 
-#: src/gui/AstroCalcDialog.cpp:5721
+#: src/gui/AstroCalcDialog.cpp:5738
 msgid "Set limits for angular separation for visible double stars"
 msgstr "쌍성의 분리각 제한 설정"
 
-#: src/gui/AstroCalcDialog.cpp:5722
+#: src/gui/AstroCalcDialog.cpp:5739
 msgid "Minimal angular separation for visible double stars"
 msgstr "쌍성의 최소 분리각 한계"
 
-#: src/gui/AstroCalcDialog.cpp:5723
+#: src/gui/AstroCalcDialog.cpp:5740
 msgid "Maximum angular separation for visible double stars"
 msgstr "쌍성의 최대 분리각 한계"
 
-#: src/gui/AstroCalcDialog.cpp:6071
+#: src/gui/AstroCalcDialog.cpp:6103
 msgid "JSON (Stellarium bookmarks)"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:6075
+#: src/gui/AstroCalcDialog.cpp:6107
 msgid "Save list of objects as..."
 msgstr "천체 목록을 다음으로 저장..."
 
-#: src/gui/AstroCalcDialog.cpp:6095 src/ui_astroCalcDialog.h:1682
+#: src/gui/AstroCalcDialog.cpp:6127 src/ui_astroCalcDialog.h:1682
 msgid "What's Up Tonight"
 msgstr "오늘 밤의 현상"
 
 #. TRANSLATORS: Part of unit of measure for mean motion - degrees per day
-#: src/gui/AstroCalcDialog.cpp:6218
+#: src/gui/AstroCalcDialog.cpp:6250
 msgctxt "mean motion"
 msgid "day"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:6270 src/gui/AstroCalcDialog.cpp:6432
+#: src/gui/AstroCalcDialog.cpp:6302 src/gui/AstroCalcDialog.cpp:6464
 msgid "Days from today"
 msgstr "오늘 이후 지난 일 수"
 
-#: src/gui/AstroCalcDialog.cpp:6271 src/gui/AstroCalcDialog.cpp:6413
+#: src/gui/AstroCalcDialog.cpp:6303 src/gui/AstroCalcDialog.cpp:6445
 msgid "Linear distance"
 msgstr "직선거리"
 
-#: src/gui/AstroCalcDialog.cpp:6413 src/gui/AstroCalcDialog.cpp:6416
+#: src/gui/AstroCalcDialog.cpp:6445 src/gui/AstroCalcDialog.cpp:6448
 #: plugins/Calendars/src/ui_calendarsDialog.h:832
 msgid "Day"
 msgstr "일"
 
-#: src/gui/AstroCalcDialog.cpp:6474 src/ui_astroCalcDialog.h:1855
+#: src/gui/AstroCalcDialog.cpp:6506 src/ui_astroCalcDialog.h:1855
 msgid "Change of angular distance between the Moon and selected object"
 msgstr "선택된 천체와 달 사이의 각거리 바꾸기"
 
@@ -7277,12 +7289,12 @@ msgid "Protoplanetary Nebulae"
 msgstr "원시 행성상 성운"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:376 src/ui_viewDialog.h:3316
+#: src/translations.h:376 src/ui_viewDialog.h:3336
 msgid "Messier Catalogue"
 msgstr "메시에 목록"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:378 src/ui_viewDialog.h:3334
+#: src/translations.h:378 src/ui_viewDialog.h:3354
 msgid "Caldwell Catalogue"
 msgstr "콜드웰 목록"
 
@@ -7412,17 +7424,17 @@ msgid "James Dunlop's southern deep sky catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:430 src/ui_viewDialog.h:3328
+#: src/translations.h:430 src/ui_viewDialog.h:3348
 msgid "Trumpler Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:432 src/ui_viewDialog.h:3398
+#: src/translations.h:432 src/ui_viewDialog.h:3418
 msgid "Stock Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:434 src/ui_viewDialog.h:3394
+#: src/translations.h:434 src/ui_viewDialog.h:3414
 msgid "Ruprecht Catalogue"
 msgstr ""
 
@@ -7452,579 +7464,579 @@ msgid "Variable stars: the classical cepheids"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:460
+#: src/translations.h:462
 msgid "Al-Sufi"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:462
+#: src/translations.h:464
 msgid "Greek (Almagest)"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:464
+#: src/translations.h:466
 msgid "Anutan"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:466
+#: src/translations.h:468
 msgid "Arabic Moon Stations"
 msgstr "아라비아"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:468
+#: src/translations.h:470
 msgid "Armintxe"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:470
+#: src/translations.h:472
 msgid "Aztec"
 msgstr "아즈텍"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:472
+#: src/translations.h:474
 msgid "Belarusian"
 msgstr "벨라루스"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:474
+#: src/translations.h:476
 msgid "Boorong"
 msgstr "부롱"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:476 plugins/Calendars/src/ui_calendarsDialog.h:841
+#: src/translations.h:478 plugins/Calendars/src/ui_calendarsDialog.h:841
 msgid "Chinese"
 msgstr "중국"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:478
+#: src/translations.h:480
 msgid "Chinese Contemporary"
 msgstr "현대 중국"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:480
+#: src/translations.h:482
 msgid "Chinese Medieval"
 msgstr "중세 중국"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:482
+#: src/translations.h:484
 msgid "Egyptian"
 msgstr "이집트"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:484
+#: src/translations.h:486
 msgid "Hawaiian Starlines"
 msgstr "하와이"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:486
+#: src/translations.h:488
 msgid "Inuit"
 msgstr "이뉴잇"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:488
+#: src/translations.h:490
 msgid "Indian Vedic"
 msgstr "인도 베다"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:490
+#: src/translations.h:492
 msgid "Japanese Moon Stations"
 msgstr "일본"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:492
+#: src/translations.h:494
 msgid "Kamilaroi/Euahlayi"
 msgstr "가밀라라이/에우알라이"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:494
+#: src/translations.h:496
 msgid "Korean"
 msgstr "한국"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:496
+#: src/translations.h:498
 msgid "Dakota/Lakota/Nakota"
 msgstr "다코타/라코타/나코타"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:498
+#: src/translations.h:500
 msgid "Macedonian"
 msgstr "마케도니아"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:500
+#: src/translations.h:502
 msgid "Maori"
 msgstr "마오리"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:502
+#: src/translations.h:504
 msgid "Maya"
 msgstr "마야"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:504
+#: src/translations.h:506
 msgid "Mongolian"
 msgstr "몽골"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:506
+#: src/translations.h:508
 msgid "Lokono"
 msgstr "로코노"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:508
+#: src/translations.h:510
 msgid "Navajo"
 msgstr "나바호"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:510
+#: src/translations.h:512
 msgid "Norse"
 msgstr "고대 스칸디나비아"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:512
+#: src/translations.h:514
 msgid "Ojibwe"
 msgstr "오지브웨"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:514
+#: src/translations.h:516
 msgid "Romanian"
 msgstr "로마"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:516
+#: src/translations.h:518
 msgid "Sami"
 msgstr "스칸디나비아"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:518
+#: src/translations.h:520
 msgid "Sardinian"
 msgstr "사르디아"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:520
+#: src/translations.h:522
 msgid "Siberian"
 msgstr "시베리아"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:522
+#: src/translations.h:524
 msgid "Tukano"
 msgstr "투카노"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:524
+#: src/translations.h:526
 msgid "Tupi-Guarani"
 msgstr "투피-과라니"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:526
+#: src/translations.h:528
 msgid "Tongan"
 msgstr "통가"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:528
+#: src/translations.h:530
 msgid "Western"
 msgstr "서양"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:530
+#: src/translations.h:532
 msgid "Western (H.A.Rey)"
 msgstr "서양 (H.A.Rey)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:532
+#: src/translations.h:534
 msgid "Western (O.Hlad)"
 msgstr "서양 (O.Hlad)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:534
+#: src/translations.h:536
 msgid "Western (Sky & Telescope)"
 msgstr "서양 (Sky & Telescope)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:536
+#: src/translations.h:538
 msgid "Western (Sternenkarten)"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky cultur
-#: src/translations.h:538
+#: src/translations.h:540
 msgid "Northern Andes"
 msgstr "안데스 북부"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:540
+#: src/translations.h:542
 msgid "Babylonian (MUL.APIN)"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:542
+#: src/translations.h:544
 msgid "Babylonian (Seleucid)"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture and landscape
-#: src/translations.h:544
+#: src/translations.h:546
 msgid "Armintxe Cave"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:546
+#: src/translations.h:548
 msgid "Vanuatu (Netwar)"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:551
+#: src/translations.h:553
 msgid "Guereins"
 msgstr "괴레인스"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:553
+#: src/translations.h:555
 msgid "Trees"
 msgstr "나무"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:555 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1448
+#: src/translations.h:557 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1448
 msgid "Moon"
 msgstr "달"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:557
+#: src/translations.h:559
 msgid "Hurricane"
 msgstr "허리케인 릿지"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:559
+#: src/translations.h:561
 msgid "Ocean"
 msgstr "바다"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:561
+#: src/translations.h:563
 msgid "Garching"
 msgstr "가르힝"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:563 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1460
+#: src/translations.h:565 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1460
 msgid "Mars"
 msgstr "화성"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:565 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1463
+#: src/translations.h:567 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1463
 msgid "Jupiter"
 msgstr "목성"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:567 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1466
+#: src/translations.h:569 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1466
 msgid "Saturn"
 msgstr "토성"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:569
+#: src/translations.h:571
 msgid "Uranus"
 msgstr "천왕성"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:571
+#: src/translations.h:573
 msgid "Neptune"
 msgstr "해왕성"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:573
+#: src/translations.h:575
 msgid "Geneva"
 msgstr "제네바"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:575
+#: src/translations.h:577
 msgid "Grossmugl"
 msgstr "그로스무글"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:577
+#: src/translations.h:579
 msgid "Zero Horizon"
 msgstr "수평선"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:579 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1445
+#: src/translations.h:581 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1445
 msgid "Sun"
 msgstr "태양"
 
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
-#: src/translations.h:584
+#: src/translations.h:586
 msgid "Vienna Sterngarten"
 msgstr "비엔나 스타 가든"
 
 #. TRANSLATORS: Name of 3D scene
-#: src/translations.h:586
+#: src/translations.h:588
 msgid "Testscene"
 msgstr "실험용 풍경"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:591
+#: src/translations.h:593
 msgid "Landscape Tour"
 msgstr "풍경 둘러보기"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:593
+#: src/translations.h:595
 msgid "Partial Lunar Eclipse"
 msgstr "부분월식"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:595
+#: src/translations.h:597
 msgid "Total Lunar Eclipse"
 msgstr "개기월식"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:597
+#: src/translations.h:599
 msgid "Screensaver"
 msgstr "화면 보호기"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:599
+#: src/translations.h:601
 msgid "Solar Eclipse 2009"
 msgstr "2009년 일식"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:601
+#: src/translations.h:603
 msgid "Startup Script"
 msgstr "시작 스크립트"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:603
+#: src/translations.h:605
 msgid "Zodiac"
 msgstr "황도 12궁"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:605
+#: src/translations.h:607
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "수성에서 보는 3번의 일출과 일몰"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:607
+#: src/translations.h:609
 msgid "Double eclipse from Deimos in 2017"
 msgstr "2017년 데이모스에서 보는 2번의 식"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:609
+#: src/translations.h:611
 msgid "Double eclipse from Deimos in 2031"
 msgstr "2031년 데이모스에서 보는 2번의 식"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:611
+#: src/translations.h:613
 msgid "Eclipse from Olympus Mons Jan 2, 2021"
 msgstr "2021년 1월 2일 올림포스 산에서 보는 식"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:613
+#: src/translations.h:615
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "2048년 지구와 목성의 엄폐"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:615
+#: src/translations.h:617
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr "2027년 데이모스에서 보는 3번의 통과와 2번의 식"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:617
+#: src/translations.h:619
 msgid "Solar System Screensaver"
 msgstr "태양계 화면 보호기"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:619
+#: src/translations.h:621
 msgid "Constellations Tour"
 msgstr "별자리 둘러보기"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:621
+#: src/translations.h:623
 msgid "Western Constellations Tour"
 msgstr "서양 별자리 둘러보기"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:623
+#: src/translations.h:625
 msgid "Sun from different planets"
 msgstr "다른 행성들에서 보이는 태양"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:625
+#: src/translations.h:627
 msgid "Earth best views from other bodies"
 msgstr "다른 천체에서 바라본 지구의 가장 좋은 모습"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:627
+#: src/translations.h:629
 msgid "Transit of Venus"
 msgstr "금성의 통과"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:629
+#: src/translations.h:631
 msgid "Sky Culture Tour"
 msgstr "하늘 문화 둘러보기"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:631
+#: src/translations.h:633
 msgid "Earth Events from Mercury"
 msgstr "수성에서 보는 지구의 사건들"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:633
+#: src/translations.h:635
 msgid "Earth Events from a floating city on Venus"
 msgstr "금성의 공중부양 도시에서 보는 지구의 사건들"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:635
+#: src/translations.h:637
 msgid "Earth Events from Mars"
 msgstr "화성에서 보는 지구의 사건들"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:637
+#: src/translations.h:639
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr "화성에서 보는 지구 및 기타 행성들의 최대 이각 및 충"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:639
+#: src/translations.h:641
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr "칼리스토에서 보는 지구와 화성의 최대 이각과 통과"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:641
+#: src/translations.h:643
 msgid "Tycho's Supernova"
 msgstr "티코의 초신성"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:643
+#: src/translations.h:645
 msgid "Earth and other Planets from Ceres"
 msgstr "세레스에서 보는 지구 및 기타 행성들"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:645
+#: src/translations.h:647
 msgid "Messier Objects Tour"
 msgstr "메시에 천체 둘러보기"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:647
+#: src/translations.h:649
 msgid "Binocular Highlights"
 msgstr "쌍안경으로 보기 좋은 천체들"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:649
+#: src/translations.h:651
 msgid "20 Fun Naked-Eye Double Stars"
 msgstr "재미있는 20개의 육안 관측 가능 이중성들"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:651
+#: src/translations.h:653
 msgid "List of largest known stars"
 msgstr "큰 별 목록"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:653
+#: src/translations.h:655
 msgid "Herschel 400 Tour"
 msgstr "허셜의 400개 별 둘러보기"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:655
+#: src/translations.h:657
 msgid "Binosky: Deep Sky Objects for Binoculars"
 msgstr "쌍안천: 쌍안경으로 보는 딥스카이 천체"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:657
+#: src/translations.h:659
 msgid "The Jack Bennett Catalog"
 msgstr "잭 베넷 목록"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:659
+#: src/translations.h:661
 msgid "Best objects in the New General Catalog"
 msgstr "신판일반목록(NGC)의 좋은 천체들"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:661
+#: src/translations.h:663
 msgid "Jupiter and triple shadow phenomena"
 msgstr "목성과 삼중 그림자 현상"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:663
+#: src/translations.h:665
 msgid "Jupiter without Galilean satellites"
 msgstr "갈릴레이 위성을 제외한 목성"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:665
+#: src/translations.h:667
 msgid "Skybox Tiles"
 msgstr "스카이박스 타일"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:667
+#: src/translations.h:669
 msgid "Occultations of bright stars by planets"
 msgstr "행성에 의한 밝은 별의 엄폐"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:669
+#: src/translations.h:671
 msgid "Mutual occultations of planets"
 msgstr "행성 간의 엄폐"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:671
+#: src/translations.h:673
 msgid "Planet Objects Tour"
 msgstr "행성 둘러보기"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:673
+#: src/translations.h:675
 msgid "Analemma"
 msgstr "아날렘마"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:675
+#: src/translations.h:677
 msgid "Martian analemma"
 msgstr "화성에서의 아날렘마"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:677
+#: src/translations.h:679
 msgid "Saturnian analemma"
 msgstr "토성에서의 아날렘마"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:679
+#: src/translations.h:681
 msgid "Uranian analemma"
 msgstr "천왕성에서의 아날렘마"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:681
+#: src/translations.h:683
 msgid "Messier Marathon"
 msgstr "메시에 마라톤"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:683
+#: src/translations.h:685
 msgid "Random location"
 msgstr ""
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:689
+#: src/translations.h:691
 msgid "Look around each installed landscape."
 msgstr "설치된 풍경들을 둘러봅니다."
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:691
+#: src/translations.h:693
 msgid "Look at each installed sky culture."
 msgstr "설치된 하늘 문화들을 둘러봅니다."
 
-#: src/translations.h:692
+#: src/translations.h:694
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "부분월식을 보여주는 스크립트"
 
-#: src/translations.h:693
+#: src/translations.h:695
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "개기월식을 보여주는 스크립트"
 
-#: src/translations.h:694
+#: src/translations.h:696
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr "임의의 천체를 둘러보며 하늘을 느리고 무한하게 여행합니다."
 
-#: src/translations.h:695
+#: src/translations.h:697
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr "2009년에 일어난 개기일식을 보여주는 스크립트 (위치=Rangpur, 방글라데시)"
 
-#: src/translations.h:696
+#: src/translations.h:698
 msgid "Script which runs automatically at startup"
 msgstr "프로그램을 시작할 때 자동으로 실행하는 스크립트"
 
-#: src/translations.h:697
+#: src/translations.h:699
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -8032,13 +8044,13 @@ msgid ""
 msgstr ""
 "이 스크립트는 황도 12궁의 별자리들을 표시합니다. 이 별자리들은 1년 동안 천구에서 태양이 가로지르는 가상의 길 주위의 별자리들입니다."
 
-#: src/translations.h:698
+#: src/translations.h:700
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
 msgstr "특정 지점에서 수성의 궤도와 공전이 교묘하게 맞물리면서 태양이 수성의 하루 동안 3번 뜨고 지게 됩니다."
 
-#: src/translations.h:699
+#: src/translations.h:701
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -8046,7 +8058,7 @@ msgstr ""
 "화성이 태양을 가리기 직전에 포보스가 화성 뒤에서 튀어나와 먼저 식을 이룹니다. 이 현상은 2017년 4월 26일에 전갈자리와 궁수자리 "
 "사이에서 일어납니다."
 
-#: src/translations.h:700
+#: src/translations.h:702
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -8054,11 +8066,11 @@ msgstr ""
 "화성이 태양을 가리기 직전에 포보스가 화성 뒤에서 튀어나와 먼저 식을 이룹니다. 이 현상은 2031년 7월 23일에 황소자리와 쌍둥이자리"
 " 사이에서 일어납니다."
 
-#: src/translations.h:701
+#: src/translations.h:703
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 2, 2021."
 msgstr "올림포스 산에서 포보스가 태양을 가립니다. 이 현상은 2021년 1월 2일에 일어납니다."
 
-#: src/translations.h:702
+#: src/translations.h:704
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But"
 " occultations of both on the same day are very rare. Here's one that takes "
@@ -8067,7 +8079,7 @@ msgstr ""
 "포보스가 지구를 엄폐하는 것은 흔한 일입니다. 그리고 목성를 엄폐하는 것도 흔한 일입니다. 그러나 같은 날에 두 엄폐가 모두 일어나는 "
 "것은 매우 드문 일입니다. 이 스크립트는 2048년 1월 23일에 이런 일이 발생하는 것을 보여줍니다. 속도는 실제 속도입니다."
 
-#: src/translations.h:703
+#: src/translations.h:705
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -8080,45 +8092,45 @@ msgstr ""
 " 뒤 화성이 태양을 가리며 식을 이루고, 포보스는 그 때 화성과 데이모스 사이에서 다시 통과합니다. 포보스가 화성에서 빠져나올 때 "
 "포보스는 아직 식 중이기 때문에 화성의 그림자에서 흐릿하게 빛나고, 잠시 후 밝아집니다."
 
-#: src/translations.h:704
+#: src/translations.h:706
 msgid ""
 "Screensaver of various happenings in the Solar System. 313 events in all!"
 msgstr ""
 
-#: src/translations.h:705
+#: src/translations.h:707
 msgid "A tour of the western constellations."
 msgstr "서양 별자리 둘러보기"
 
-#: src/translations.h:706
+#: src/translations.h:708
 msgid "A tour of the constellations of the selected sky culture."
 msgstr "선택한 하늘 문화의 별자리 둘러보기"
 
-#: src/translations.h:707
+#: src/translations.h:709
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "태양계의 거대 행성들과 명왕성에서 태양을 바라보세요."
 
-#: src/translations.h:708
+#: src/translations.h:710
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr "21세기에 다른 태양계 천체에서 바라본 지구의 가장 좋은 모습을 제공합니다."
 
-#: src/translations.h:709
+#: src/translations.h:711
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr "호주의 시드니에서 2012년 6월 6일에 관측된 금성의 통과입니다."
 
-#: src/translations.h:710
+#: src/translations.h:712
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Historical "
 "Supernovae plugin has to be enabled."
 msgstr ""
 
-#: src/translations.h:711
+#: src/translations.h:713
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars "
 "2000-3000"
 msgstr "2000-3000년 사이에 화성에서 보이는 행성들의 최대 이각 및 충 현상입니다."
 
-#: src/translations.h:712
+#: src/translations.h:714
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -8128,24 +8140,24 @@ msgstr ""
 "2000년부터 3000년까지 칼리스토에서 보는 지구와 화성의 최대 이각과 통과. 왜 칼리스토냐고요? 갈릴레이 위성 4개 중 칼리스토는 "
 "목성의 자기장대에서 벗어난 유일한 위성입니다. 그러므로 만약 인류가 목성의 위성을 식민지로 삼는다면, 칼리스토가 그 대상이 되겠죠."
 
-#: src/translations.h:713
+#: src/translations.h:715
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-2200"
 msgstr "2000-2200년 사이에 세레스에서 보이는 행성들의 최대 이각 및 충 현상입니다."
 
-#: src/translations.h:714
+#: src/translations.h:716
 msgid "A tour of Messier Objects"
 msgstr "메시에 천체 둘러보기"
 
-#: src/translations.h:715
+#: src/translations.h:717
 msgid ""
 "Tours around interesting objects, which accessible to observation with "
 "binoculars. The data for the script are taken from the eponymous book by "
 "Gary Seronik."
 msgstr "쌍안경으로 볼 수 있는 흥미로운 천체들을 둘러봅니다. 스크립트에 쓰인 자료는 개리 세로닉의 책에서 가져왓습니다."
 
-#: src/translations.h:716
+#: src/translations.h:718
 msgid ""
 "This script helps you make an excursion around 20 fun double stars. The list"
 " has been collected by Jerry Lodriguss and published in Sky & Telescope "
@@ -8154,15 +8166,15 @@ msgstr ""
 "흥미로운 이중성 20개를 둘러보게 해 주는 스크립트로, 자료는 제리 로드리구스가 2014년 9월 Sky & Telescope에 발표한 "
 "자료를 그의 웹사이트 http://www.astropix.com/doubles/ 에서 가져왔습니다."
 
-#: src/translations.h:717
+#: src/translations.h:719
 msgid "This script helps you make an excursion around largest known stars."
 msgstr "큰 별들을 둘러볼 수 있게 해 주는 스크립트입니다."
 
-#: src/translations.h:718
+#: src/translations.h:720
 msgid "A tour around objects from the Herschel 400 Catalogue"
 msgstr "허셜의 400개 별 목록을 둘러보는 스크립트입니다."
 
-#: src/translations.h:719
+#: src/translations.h:721
 msgid ""
 "Ben Crowell has created Binosky, an observing list of Deep Sky Objects for "
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
@@ -8171,27 +8183,27 @@ msgstr ""
 "벤 크로웰이 작성한 \"쌍안경을 위한 딥스카이 천체 목록\", 또는 줄여서 \"쌍안천\" 중 31개를 적경(J2000)순으로 보여주는 "
 "스크립트입니다."
 
-#: src/translations.h:720
+#: src/translations.h:722
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
 "The Bennett catalog was contributed by Auke Slotegraaf."
 msgstr "잭 베넷이 작성한 남반구 딥스카이 천체 목록(152개)으로, Auke Slotegraa가 추가했습니다."
 
-#: src/translations.h:721
+#: src/translations.h:723
 msgid ""
 "This list of 111 objects by A.J. Crayon and Steve Coe is used by members of "
 "the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC "
 "achievement award."
 msgstr "피닉스의 사구아로 천문 동아리에서 작성한 목록으로, NGC 천체 111개가 포함되어 있습니다."
 
-#: src/translations.h:722
+#: src/translations.h:724
 msgid ""
 "Demonstration of the mid-time of rare events - triple shadow phenomena of "
 "the satellites of Jupiter from 1900 to 2100. All events are given in "
 "Dynamical Time."
 msgstr "중반기 희귀 현상 소개 - 1900년부터 2100년까지 일어나는 삼중 목성 위성식입니다. 모든 현상은 역학시 기준입니다."
 
-#: src/translations.h:723
+#: src/translations.h:725
 msgid ""
 "The planet Jupiter sometimes appears to be without moons, when the four "
 "Galilean satellites are simultaneously invisible because they are passing "
@@ -8202,47 +8214,47 @@ msgstr ""
 "목성의 갈릴레이 위성들은 간혹 넷 모두 행성 앞에 있거나(통과), 행성 뒤에 있거나(엄폐), 그림자 속에 있어(식) 목성이 위성 없이 "
 "보이기도 합니다. 이 스크립트는 희귀한 이 현상을 1900년부터 2100년까지 역학시 기준으로 보여줍니다."
 
-#: src/translations.h:724
+#: src/translations.h:726
 msgid ""
 "This script demonstrates interesting phenomena - occultations bright stars "
 "by planets, 2000 to 2040."
 msgstr "이 스크립트는 밝은 별이 행성에 의해 엄폐되는 흥미로운 현상을 보여줍니다. 범위는 2000년부터 2040년까지입니다."
 
-#: src/translations.h:725
+#: src/translations.h:727
 msgid ""
 "This script demonstrates interesting and very rare phenomena - mutual "
 "occultations of planets, 0 to 2500."
 msgstr "이 스크립트는 행성이 서로를 엄폐하는 희귀한 현상을 보여줍니다. 범위는 0년부터 2500년까지입니다."
 
-#: src/translations.h:726
+#: src/translations.h:728
 msgid "A tour of the Solar System planets"
 msgstr "태양계 천체 둘러보기"
 
-#: src/translations.h:727
+#: src/translations.h:729
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Earth."
 msgstr "아날렘마 설명 - 지구에서 태양이 하늘에서 한 해 동안 그리는 경로"
 
-#: src/translations.h:728
+#: src/translations.h:730
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Mars."
 msgstr "아날렘마 설명 - 화성에서 태양이 하늘에서 한 해 동안 그리는 경로"
 
-#: src/translations.h:729
+#: src/translations.h:731
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Saturn."
 msgstr "아날렘마 설명 - 토성에서 태양이 하늘에서 한 해 동안 그리는 경로"
 
-#: src/translations.h:730
+#: src/translations.h:732
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Uranus."
 msgstr "아날렘마 설명 - 천왕성에서 태양이 하늘에서 한 해 동안 그리는 경로"
 
-#: src/translations.h:731
+#: src/translations.h:733
 msgid ""
 "Messier Marathon on March 20, 2020. The data for the script are taken from "
 "GaoXing's observation log: http://www.xjltp.com/2_huodong/2_030301.htm"
@@ -8250,7 +8262,7 @@ msgstr ""
 "2020년 3월 20일의 메시에 마라톤. 자료는 가오싱의 관측 기록에서 발췌: "
 "http://www.xjltp.com/2_huodong/2_030301.htm"
 
-#: src/translations.h:732
+#: src/translations.h:734
 msgid ""
 "Creates 6 tiles (North/East/South/West/Up/Down) for a skybox. These can be "
 "further used e.g. in Unity3D or other 3D environments. Output directory and "
@@ -8260,186 +8272,186 @@ msgid ""
 "to apply it to your projects."
 msgstr ""
 
-#: src/translations.h:733
+#: src/translations.h:735
 msgid ""
 "This script will help you make practical works for celestial navigation - he"
 " sets a random location and hides it from the GUI."
 msgstr ""
 
-#: src/translations.h:737
+#: src/translations.h:739
 msgid "&Undo"
 msgstr "실행 취소 (&U)"
 
-#: src/translations.h:738
+#: src/translations.h:740
 msgid "&Redo"
 msgstr "다시 실행 (&R)"
 
-#: src/translations.h:739
+#: src/translations.h:741
 msgid "Cu&t"
 msgstr "잘라내기 (&t)"
 
-#: src/translations.h:740
+#: src/translations.h:742
 msgid "&Copy"
 msgstr "복사 (&C)"
 
-#: src/translations.h:741
+#: src/translations.h:743
 msgid "&Paste"
 msgstr "붙여넣기 (&P)"
 
-#: src/translations.h:742 plugins/Oculars/src/ui_ocularDialog.h:1542
+#: src/translations.h:744 plugins/Oculars/src/ui_ocularDialog.h:1542
 #: plugins/Oculars/src/ui_ocularDialog.h:1551
 #: plugins/Oculars/src/ui_ocularDialog.h:1557
 #: plugins/Oculars/src/ui_ocularDialog.h:1576
 msgid "Delete"
 msgstr "삭제"
 
-#: src/translations.h:743
+#: src/translations.h:745
 msgid "Select All"
 msgstr "모두 선택"
 
-#: src/translations.h:744
+#: src/translations.h:746
 msgid "Look in:"
 msgstr "보기:"
 
-#: src/translations.h:745
+#: src/translations.h:747
 msgid "Directory:"
 msgstr "주소:"
 
-#: src/translations.h:746
+#: src/translations.h:748
 msgid "Folder"
 msgstr "폴더"
 
-#: src/translations.h:747
+#: src/translations.h:749
 msgid "&Choose"
 msgstr "선택 (&C)"
 
-#: src/translations.h:748 src/ui_configurationDialog.h:1875
+#: src/translations.h:750 src/ui_configurationDialog.h:1875
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:644
 msgid "Cancel"
 msgstr "취소"
 
-#: src/translations.h:749
+#: src/translations.h:751
 msgid "&Cancel"
 msgstr "취소 (&C)"
 
-#: src/translations.h:750
+#: src/translations.h:752
 msgid "Files of type:"
 msgstr "파일 유형:"
 
-#: src/translations.h:751
+#: src/translations.h:753
 msgid "Date Modified"
 msgstr "수정한 날짜"
 
-#: src/translations.h:752
+#: src/translations.h:754
 msgid "Directories"
 msgstr "주소"
 
-#: src/translations.h:753
+#: src/translations.h:755
 msgid "Computer"
 msgstr "컴퓨터"
 
-#: src/translations.h:754
+#: src/translations.h:756
 msgid "&Open"
 msgstr "열기 (&O)"
 
-#: src/translations.h:755
+#: src/translations.h:757
 msgid "&Save"
 msgstr "저장 (&S)"
 
-#: src/translations.h:756
+#: src/translations.h:758
 msgid "File &name:"
 msgstr "파일 이름 (&n):"
 
-#: src/translations.h:757
+#: src/translations.h:759
 msgid "Copy &Link Location"
 msgstr "링크 주소 복사 (&L)"
 
-#: src/translations.h:758
+#: src/translations.h:760
 msgid "Abort"
 msgstr "중단"
 
-#: src/translations.h:759
+#: src/translations.h:761
 msgid "Ignore"
 msgstr "무시"
 
-#: src/translations.h:760
+#: src/translations.h:762
 msgid "&Basic colors"
 msgstr "기본 색상 (&B)"
 
-#: src/translations.h:761
+#: src/translations.h:763
 msgid "&Pick Screen Color"
 msgstr "화면 색 고르기 (&P)"
 
-#: src/translations.h:762
+#: src/translations.h:764
 msgid "&Custom colors"
 msgstr "사용자 색상 (&C)"
 
-#: src/translations.h:763
+#: src/translations.h:765
 msgid "&Add to Custom Colors"
 msgstr "사용자 색상에 추가 (&A)"
 
-#: src/translations.h:764
+#: src/translations.h:766
 msgid "Hu&e:"
 msgstr "색조 (&e)"
 
-#: src/translations.h:765
+#: src/translations.h:767
 msgid "&Sat:"
 msgstr "농도 (&S)"
 
-#: src/translations.h:766
+#: src/translations.h:768
 msgid "&Val:"
 msgstr "광도 (&V)"
 
-#: src/translations.h:767
+#: src/translations.h:769
 msgid "&Red:"
 msgstr "빨강 (&R)"
 
-#: src/translations.h:768
+#: src/translations.h:770
 msgid "&Green:"
 msgstr "초록 (&G)"
 
-#: src/translations.h:769
+#: src/translations.h:771
 msgid "Bl&ue:"
 msgstr "파랑 (&u)"
 
-#: src/translations.h:770
+#: src/translations.h:772
 msgid "Select Color"
 msgstr "색상 선택"
 
-#: src/translations.h:771
+#: src/translations.h:773
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "커서를 %1, %2에 놓습니다. 취소하려면 ESC를 누르세요"
 
-#: src/translations.h:772
+#: src/translations.h:774
 msgid "Back"
 msgstr "뒤로"
 
-#: src/translations.h:773
+#: src/translations.h:775
 msgid "Forward"
 msgstr "앞으로"
 
-#: src/translations.h:774
+#: src/translations.h:776
 msgid "Parent Directory"
 msgstr "상위 주소:"
 
-#: src/translations.h:775
+#: src/translations.h:777
 msgid "Create New Folder"
 msgstr "새 폴더 만들기"
 
-#: src/translations.h:776
+#: src/translations.h:778
 msgid "List View"
 msgstr "목록 보기"
 
-#: src/translations.h:777
+#: src/translations.h:779
 msgid "Detail View"
 msgstr "상세 보기"
 
-#: src/translations.h:778
+#: src/translations.h:780
 msgid "Recent Places"
 msgstr "최근 위치"
 
-#: src/translations.h:779
+#: src/translations.h:781
 #, qt-format
 msgid ""
 "%1 already exists.\n"
@@ -8448,39 +8460,39 @@ msgstr ""
 "%1이 이미 존재합니다.\n"
 "새 파일로 덮어쓸까요?"
 
-#: src/translations.h:780
+#: src/translations.h:782
 msgid "&Yes"
 msgstr "네 (&Y)"
 
-#: src/translations.h:781
+#: src/translations.h:783
 msgid "&No"
 msgstr "아니요 (&N)"
 
-#: src/translations.h:782
+#: src/translations.h:784
 msgid "&Select All"
 msgstr "모두 선택 (&S)"
 
-#: src/translations.h:783
+#: src/translations.h:785
 msgid "&Step up"
 msgstr "단계 올리기 (&S)"
 
-#: src/translations.h:784
+#: src/translations.h:786
 msgid "Step &down"
 msgstr "단계 내리기 (&d)"
 
-#: src/translations.h:785
+#: src/translations.h:787
 msgid "&Rename"
 msgstr ""
 
-#: src/translations.h:786
+#: src/translations.h:788
 msgid "&Delete"
 msgstr "&삭제"
 
-#: src/translations.h:787
+#: src/translations.h:789
 msgid "&New Folder"
 msgstr "&새 폴더"
 
-#: src/translations.h:788
+#: src/translations.h:790
 msgid "Show &hidden files"
 msgstr "파일 보이기&숨기기"
 
@@ -10245,260 +10257,237 @@ msgstr ""
 msgid "Max items to display:"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:952 src/ui_viewDialog.h:3886
-#: src/ui_viewDialog.h:3917 src/ui_configurationDialog.h:2029
+#: src/ui_searchDialogGui.h:952 src/ui_viewDialog.h:3906
+#: src/ui_viewDialog.h:3937 src/ui_configurationDialog.h:2029
 #: src/ui_configurationDialog.h:2040
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:336
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:436
 msgid "Options"
 msgstr "설정"
 
-#: src/ui_viewDialog.h:3150
+#: src/ui_viewDialog.h:3162
 msgid "View"
 msgstr "보기"
 
-#: src/ui_viewDialog.h:3156 src/ui_viewDialog.h:3177
+#: src/ui_viewDialog.h:3168 src/ui_viewDialog.h:3189
 msgid "Sky"
 msgstr "하늘"
 
-#: src/ui_viewDialog.h:3158
+#: src/ui_viewDialog.h:3170
 msgctxt "Solar system objects"
 msgid "SSO"
 msgstr "SSO"
 
-#: src/ui_viewDialog.h:3163
+#: src/ui_viewDialog.h:3175
 msgctxt "Deep-Sky Objects"
 msgid "DSO"
 msgstr "딥스카이 천체"
 
-#: src/ui_viewDialog.h:3165
+#: src/ui_viewDialog.h:3177
 msgid "Deep-Sky Objects"
 msgstr "딥스카이 천체"
 
-#: src/ui_viewDialog.h:3168
+#: src/ui_viewDialog.h:3180
 msgid "Markings"
 msgstr "표시"
 
-#: src/ui_viewDialog.h:3170
+#: src/ui_viewDialog.h:3182
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:451
 msgid "Landscape"
 msgstr "풍경"
 
-#: src/ui_viewDialog.h:3172
+#: src/ui_viewDialog.h:3184
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:230
 msgid "Starlore"
 msgstr "하늘 문화"
 
-#: src/ui_viewDialog.h:3174
+#: src/ui_viewDialog.h:3186
 msgid "Surveys"
 msgstr "탐색"
 
-#: src/ui_viewDialog.h:3178
+#: src/ui_viewDialog.h:3190
 msgid "Zodiacal Light brightness:"
 msgstr "황도광 밝기:"
 
-#: src/ui_viewDialog.h:3180
+#: src/ui_viewDialog.h:3192
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "매우 밝은 천체가 보일 때 어두운 별을 희미하게 합니다"
 
-#: src/ui_viewDialog.h:3182
+#: src/ui_viewDialog.h:3194
 msgid "Dynamic eye adaptation"
 msgstr "명암순응"
 
-#: src/ui_viewDialog.h:3183
+#: src/ui_viewDialog.h:3195
 msgid "Atmosphere visualization"
 msgstr "대기권 시각화:"
 
-#: src/ui_viewDialog.h:3185
+#: src/ui_viewDialog.h:3197
 msgid "pressure, temperature, extinction coefficient"
 msgstr "대기압, 온도, 소광계수"
 
-#: src/ui_viewDialog.h:3187
+#: src/ui_viewDialog.h:3199
 msgid "Refraction/Extinction settings..."
 msgstr "굴절/소광 설정..."
 
-#: src/ui_viewDialog.h:3189
+#: src/ui_viewDialog.h:3201
 msgid "Settings for sporadic meteors"
 msgstr "산발적인 유성 설정"
 
-#: src/ui_viewDialog.h:3191
+#: src/ui_viewDialog.h:3203
 msgctxt "Zenithal Hourly Rate"
 msgid "Shooting stars:"
 msgstr "유성:"
 
-#: src/ui_viewDialog.h:3194 src/ui_viewDialog.h:3197
+#: src/ui_viewDialog.h:3206 src/ui_viewDialog.h:3209
 msgid "The zenithal hourly rate for the sporadic meteors"
 msgstr "천정을 기준으로 한 유성이 떨어지는 시간당 비율"
 
-#: src/ui_viewDialog.h:3199
+#: src/ui_viewDialog.h:3211
 msgid "Milky Way brightness/saturation:"
 msgstr "은하수 밝기/채도"
 
-#: src/ui_viewDialog.h:3201
+#: src/ui_viewDialog.h:3213
 msgid ""
 "Changing saturation from totally unsaturated (0.00) to default (1.00) value."
 msgstr "채도를 없음(0.00)부터 기본(1.00)까지 바꿀 수 있습니다."
 
-#: src/ui_viewDialog.h:3203
+#: src/ui_viewDialog.h:3215
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:446
 msgid "Light pollution:"
 msgstr "광공해:"
 
-#: src/ui_viewDialog.h:3204 src/ui_astroCalcDialog.h:1778
+#: src/ui_viewDialog.h:3216 src/ui_astroCalcDialog.h:1778
 msgid "or"
 msgstr "또는"
 
-#: src/ui_viewDialog.h:3206
+#: src/ui_viewDialog.h:3218
 msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution in left box"
 msgstr ""
 
-#: src/ui_viewDialog.h:3208
+#: src/ui_viewDialog.h:3220
 msgid "take from locations database"
 msgstr ""
 
-#: src/ui_viewDialog.h:3210
+#: src/ui_viewDialog.h:3222
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:268
 msgid "Absolute scale:"
 msgstr "절대 크기:"
 
-#: src/ui_viewDialog.h:3212
+#: src/ui_viewDialog.h:3224
 msgid "Show stars with pointed rays"
 msgstr ""
 
-#: src/ui_viewDialog.h:3214
+#: src/ui_viewDialog.h:3226
 msgid "Spiky stars"
 msgstr ""
 
-#: src/ui_viewDialog.h:3216
+#: src/ui_viewDialog.h:3228
 msgid "Limit the magnitude of stars"
 msgstr "별의 한계등급"
 
-#: src/ui_viewDialog.h:3218 src/ui_viewDialog.h:3301 src/ui_viewDialog.h:3428
+#: src/ui_viewDialog.h:3230 src/ui_viewDialog.h:3253 src/ui_viewDialog.h:3448
 msgid "Limit magnitude:"
 msgstr "한계등급:"
 
-#: src/ui_viewDialog.h:3219
+#: src/ui_viewDialog.h:3231
 msgid "Use additional names of stars"
 msgstr "별의 부가적인 이름 사용"
 
-#: src/ui_viewDialog.h:3220 src/ui_viewDialog.h:3281 src/ui_viewDialog.h:3416
+#: src/ui_viewDialog.h:3232 src/ui_viewDialog.h:3307 src/ui_viewDialog.h:3436
 msgid "Labels and Markers"
 msgstr "이름표와 표지 표시"
 
-#: src/ui_viewDialog.h:3221
+#: src/ui_viewDialog.h:3233
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:274
 msgid "Twinkle:"
 msgstr "깜박임:"
 
-#: src/ui_viewDialog.h:3222
+#: src/ui_viewDialog.h:3234
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:262
 msgid "Relative scale:"
 msgstr "상대 크기:"
 
-#: src/ui_viewDialog.h:3224
+#: src/ui_viewDialog.h:3236
 msgid ""
 "Use designations of stars instead of their common names for screen labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:3226 src/ui_viewDialog.h:3432
+#: src/ui_viewDialog.h:3238 src/ui_viewDialog.h:3452
 msgid "Use designations for screen labels"
 msgstr "천체의 이름을 학술적 이름으로 표시"
 
-#: src/ui_viewDialog.h:3227
+#: src/ui_viewDialog.h:3239
 msgid "Projection"
 msgstr "도법"
 
-#: src/ui_viewDialog.h:3228
+#: src/ui_viewDialog.h:3240
 msgid "Vertical viewport offset"
 msgstr "수직 뷰포트 상쇄"
 
-#: src/ui_viewDialog.h:3229
+#: src/ui_viewDialog.h:3241
 msgid "Custom FoV limit"
 msgstr ""
 
-#: src/ui_viewDialog.h:3231
+#: src/ui_viewDialog.h:3243
 msgid "Additional custom limitation (e.g. for planetarium use)"
 msgstr ""
 
-#: src/ui_viewDialog.h:3233
+#: src/ui_viewDialog.h:3245
 msgid "Solar System objects"
 msgstr "태양계 천체"
 
-#: src/ui_viewDialog.h:3235
-msgid "Color of nomenclature labels"
-msgstr "지명 이름 색상"
-
-#: src/ui_viewDialog.h:3239
-msgid "Show hints and labels for planetary features"
-msgstr "행성 지형의 이름표 및 강조 사용"
-
-#: src/ui_viewDialog.h:3241
-msgid "Show planetary nomenclature"
-msgstr "행성 지명 보이기"
-
-#: src/ui_viewDialog.h:3242
-msgid "Scale Moon:"
-msgstr "달 크기:"
-
-#: src/ui_viewDialog.h:3244
-msgid "Scale factor"
-msgstr "축척 계수"
-
-#: src/ui_viewDialog.h:3246
-msgid "Show planet markers"
-msgstr "행성 표지 보이기"
-
-#: src/ui_viewDialog.h:3247
-msgid "Show orbits"
-msgstr "궤도 보이기"
-
 #: src/ui_viewDialog.h:3249
-msgid "Show orbit even if planet is off screen"
-msgstr "행성이 화면 밖에 있더라도 궤도 보이기"
+msgid "Use more accurate 3D models (where available)"
+msgstr "더 정확한 3D 모델 사용 (가능할 때)"
 
 #: src/ui_viewDialog.h:3251
-msgid "permanently"
+msgid "Limit the magnitude of solar system objects"
+msgstr "태양계 천체를 볼 때 등급 제한을 걸기"
+
+#: src/ui_viewDialog.h:3254
+msgid "Scale minor bodies:"
+msgstr "소행성체 크기:"
+
+#: src/ui_viewDialog.h:3256
+#, c-format
+msgid ""
+"Astronomical Almanac (default) has 2% enlargement, Danjon (1951) uses a "
+"slightly different model"
 msgstr ""
 
-#: src/ui_viewDialog.h:3253
-msgid "Configure colors of orbit lines"
-msgstr "궤도 선의 색 조정"
-
-#: src/ui_viewDialog.h:3255
-msgid "Colors..."
-msgstr "색..."
-
-#: src/ui_viewDialog.h:3257
-msgid "Orbits thickness in pixels"
+#: src/ui_viewDialog.h:3258
+msgid "Earth shadow enlargement after Danjon"
 msgstr ""
 
 #: src/ui_viewDialog.h:3259
-msgid "Planets magnitude algorithm:"
-msgstr "행성 등급 알고리즘:"
+msgid "Scale Sun:"
+msgstr ""
+
+#: src/ui_viewDialog.h:3260
+msgid "Hide nomenclature on the celestial body of observer"
+msgstr "관측자가 있는 천체의 명칭 숨기기"
 
 #: src/ui_viewDialog.h:3261
-msgid ""
-"Deactivate this option if you want to see orbit for selected planet and its "
-"moons."
-msgstr "선택한 행성 및 위성의 궤도만 보고 싶다면 이 옵션을 비활성화하세요."
+msgid "Show planet markers"
+msgstr "행성 표지 보이기"
 
 #: src/ui_viewDialog.h:3263
-msgid "Only orbit for selected object"
-msgstr "선택된 천체의 궤도만"
-
-#: src/ui_viewDialog.h:3265
-msgid "Color of trails"
-msgstr "궤적의 색상"
+msgid "Color of nomenclature labels"
+msgstr "지명 이름 색상"
 
 #: src/ui_viewDialog.h:3267
-msgid "Show trails"
-msgstr "궤적 보이기"
+msgid "Show hints and labels for planetary features"
+msgstr "행성 지형의 이름표 및 강조 사용"
 
 #: src/ui_viewDialog.h:3269
-msgid "Trails thickness in pixels"
-msgstr ""
+msgid "Show planetary nomenclature"
+msgstr "행성 지명 보이기"
+
+#: src/ui_viewDialog.h:3270
+msgid "Only orbits of major planets"
+msgstr "주요 행성의 궤도만"
 
 #: src/ui_viewDialog.h:3271
 msgid "Use custom settings of GRS:"
@@ -10508,923 +10497,962 @@ msgstr "측지기준계에서 사용자 설정 사용:"
 msgid "GRS details..."
 msgstr "측지기준계 상세 정보..."
 
-#: src/ui_viewDialog.h:3276
-msgid "Hide nomenclature on the celestial body of observer"
-msgstr "관측자가 있는 천체의 명칭 숨기기"
-
-#: src/ui_viewDialog.h:3280
-msgid "Use more accurate 3D models (where available)"
-msgstr "더 정확한 3D 모델 사용 (가능할 때)"
-
-#: src/ui_viewDialog.h:3283
-msgid "Color of planet labels"
-msgstr "행성 이름 색상"
-
-#: src/ui_viewDialog.h:3286
-msgid ""
-"Activate this option to simulate the effect of real speed of light "
-"(recommended)."
-msgstr "실제 빛의 속도를 시뮬레이션합니다(권장)."
-
-#: src/ui_viewDialog.h:3288
-msgid "Simulate light speed"
-msgstr "광속 시뮬레이션"
-
-#: src/ui_viewDialog.h:3292
+#: src/ui_viewDialog.h:3279
 msgid "Simulate self-shadowing"
 msgstr "자체 그림자 시뮬레이션"
 
-#: src/ui_viewDialog.h:3293
-msgid "Only orbits of major planets"
-msgstr "주요 행성의 궤도만"
-
-#: src/ui_viewDialog.h:3295
+#: src/ui_viewDialog.h:3281
 msgid ""
 "Deactivate this option if you want to see the trails for all Solar system "
 "bodies."
 msgstr "모든 태양계 천체의 궤적을 보고 싶다면 이 옵션을 비활성화하세요."
 
-#: src/ui_viewDialog.h:3297
+#: src/ui_viewDialog.h:3283
 msgid "Only for N latest selected objects:"
 msgstr ""
 
-#: src/ui_viewDialog.h:3299
-msgid "Limit the magnitude of solar system objects"
-msgstr "태양계 천체를 볼 때 등급 제한을 걸기"
-
-#: src/ui_viewDialog.h:3303
-#, c-format
-msgid ""
-"Astronomical Almanac (default) has 2% enlargement, Danjon (1951) uses a "
-"slightly different model"
+#: src/ui_viewDialog.h:3284 src/ui_astroCalcDialog.h:1708
+msgid "Show:"
 msgstr ""
 
-#: src/ui_viewDialog.h:3305
-msgid "Earth shadow enlargement after Danjon"
-msgstr ""
-
-#: src/ui_viewDialog.h:3306
-msgid "Scale minor bodies:"
-msgstr "소행성체 크기:"
-
-#: src/ui_viewDialog.h:3307
-msgid "Scale planets:"
-msgstr ""
-
-#: src/ui_viewDialog.h:3308
-msgid "Scale Sun:"
-msgstr ""
-
-#: src/ui_viewDialog.h:3310
+#: src/ui_viewDialog.h:3286
 msgid "Toggle drawing halo around the Moon"
 msgstr ""
 
-#: src/ui_viewDialog.h:3312
-msgid "Show Moon's halo"
+#: src/ui_viewDialog.h:3288
+msgid "Moon's halo"
 msgstr ""
+
+#: src/ui_viewDialog.h:3290
+msgid "Toggle drawing Sun's glare"
+msgstr ""
+
+#: src/ui_viewDialog.h:3292
+msgid "Sun's glare"
+msgstr ""
+
+#: src/ui_viewDialog.h:3294
+msgid "Toggle permanent drawing Sun's corona when atmosphere is disabled"
+msgstr ""
+
+#: src/ui_viewDialog.h:3296
+msgid "Sun's corona"
+msgstr ""
+
+#: src/ui_viewDialog.h:3297
+msgid "Planets magnitude algorithm:"
+msgstr "행성 등급 알고리즘:"
+
+#: src/ui_viewDialog.h:3299
+msgid ""
+"Deactivate this option if you want to see orbit for selected planet and its "
+"moons."
+msgstr "선택한 행성 및 위성의 궤도만 보고 싶다면 이 옵션을 비활성화하세요."
+
+#: src/ui_viewDialog.h:3301
+msgid "Only orbit for selected object"
+msgstr "선택된 천체의 궤도만"
+
+#: src/ui_viewDialog.h:3302
+msgid "Scale planets:"
+msgstr ""
+
+#: src/ui_viewDialog.h:3303
+msgid "Scale Moon:"
+msgstr "달 크기:"
+
+#: src/ui_viewDialog.h:3305
+msgid "Scale factor"
+msgstr "축척 계수"
+
+#: src/ui_viewDialog.h:3309
+msgid "Color of planet labels"
+msgstr "행성 이름 색상"
+
+#: src/ui_viewDialog.h:3311
+msgid "Show orbits"
+msgstr "궤도 보이기"
 
 #: src/ui_viewDialog.h:3313
-msgid "Show Sun's glare"
+msgid "Show orbit even if planet is off screen"
+msgstr "행성이 화면 밖에 있더라도 궤도 보이기"
+
+#: src/ui_viewDialog.h:3315
+msgid "permanently"
 msgstr ""
 
-#: src/ui_viewDialog.h:3314
+#: src/ui_viewDialog.h:3317
+msgid "Configure colors of orbit lines"
+msgstr "궤도 선의 색 조정"
+
+#: src/ui_viewDialog.h:3319
+msgid "Colors..."
+msgstr "색..."
+
+#: src/ui_viewDialog.h:3321
+msgid "Orbits thickness in pixels"
+msgstr ""
+
+#: src/ui_viewDialog.h:3324
+msgid "Color of trails"
+msgstr "궤적의 색상"
+
+#: src/ui_viewDialog.h:3326
+msgid "Show trails"
+msgstr "궤적 보이기"
+
+#: src/ui_viewDialog.h:3328
+msgid "Trails thickness in pixels"
+msgstr ""
+
+#: src/ui_viewDialog.h:3331
+msgid ""
+"Activate this option to simulate the effect of real speed of light "
+"(recommended)."
+msgstr "실제 빛의 속도를 시뮬레이션합니다(권장)."
+
+#: src/ui_viewDialog.h:3333
+msgid "Simulate light speed"
+msgstr "광속 시뮬레이션"
+
+#: src/ui_viewDialog.h:3334
 msgid "Display objects from catalogs"
 msgstr "표시할 딥스카이 목록"
 
-#: src/ui_viewDialog.h:3319
+#: src/ui_viewDialog.h:3339
 msgid ""
 "A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, "
 "1960)"
 msgstr "은하수 남쪽 Hα 방출 지역 목록 (Rodgers+, 1960)"
 
-#: src/ui_viewDialog.h:3322
+#: src/ui_viewDialog.h:3342
 msgid "A catalogue of Galactic supernova remnants (Green, 2014)"
 msgstr "은하계 초신성 잔해 목록 (Green, 2014)"
 
-#: src/ui_viewDialog.h:3325
+#: src/ui_viewDialog.h:3345
 msgid "The Catalogue of Interacting Galaxies (Vorontsov-Velyaminov+, 2001)"
 msgstr "상호작용은하 목록 (Vorontsov-Velyaminov+, 2001)"
 
-#: src/ui_viewDialog.h:3331
+#: src/ui_viewDialog.h:3351
 msgid "Barnard's Catalogue of 349 Dark Objects in the Sky (Barnard, 1927)"
 msgstr "버나드의 349개 암흑 천체 목록 (Barnard, 1927)"
 
-#: src/ui_viewDialog.h:3337
+#: src/ui_viewDialog.h:3357
 msgid "The Uppsala General Catalogue of Galaxies"
 msgstr "웁살라 일반목록"
 
-#: src/ui_viewDialog.h:3340
+#: src/ui_viewDialog.h:3360
 msgid "Hickson Compact Group (Hickson+, 1982)"
 msgstr "힉슨 밀집은하군 (Hickson+, 1982)"
 
-#: src/ui_viewDialog.h:3343
+#: src/ui_viewDialog.h:3363
 msgid "Catalogue of Reflection Nebulae (van den Bergh, 1966)"
 msgstr ""
 
-#: src/ui_viewDialog.h:3346
+#: src/ui_viewDialog.h:3366
 msgid ""
 "A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, "
 "1915)"
 msgstr "프랑클린-애덤스 차트에 있는 성단 목록 (Melotte, 1915)"
 
-#: src/ui_viewDialog.h:3349
+#: src/ui_viewDialog.h:3369
 msgid "Index Catalogue of Nebulae and Clusters of Stars"
 msgstr "IC 목록의 성운과 성단"
 
-#: src/ui_viewDialog.h:3352
+#: src/ui_viewDialog.h:3372
 msgid "Lynds' Catalogue of Bright Nebulae (Lynds, 1965)"
 msgstr "린즈의 밝은 성운 목록 (Lynds, 1965)"
 
-#: src/ui_viewDialog.h:3355
+#: src/ui_viewDialog.h:3375
 msgid "Atlas of Peculiar Galaxies (Arp, 1966)"
 msgstr "독특한 은하들의 지도 (Arp, 1966)"
 
-#: src/ui_viewDialog.h:3358
+#: src/ui_viewDialog.h:3378
 msgid ""
 "The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992)"
 msgstr "스트라스부르-ESO 은하계 행성상 성운 목록 (Acker+, 1992)"
 
-#: src/ui_viewDialog.h:3361
+#: src/ui_viewDialog.h:3381
 msgid "Catalogue of HII Regions (Sharpless, 1959)"
 msgstr "HII 지역 목록 (Sharpless, 1959)"
 
-#: src/ui_viewDialog.h:3364
+#: src/ui_viewDialog.h:3384
 msgid "Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)"
 msgstr "밝은 산광 은하 성운 목록 (Cederblad, 1946)"
 
-#: src/ui_viewDialog.h:3367
+#: src/ui_viewDialog.h:3387
 msgid "Principal Galaxy Catalog"
 msgstr "주요은하목록"
 
-#: src/ui_viewDialog.h:3370
+#: src/ui_viewDialog.h:3390
 msgid "A Catalog of Rich Clusters of Galaxies (Abell+, 1989)"
 msgstr "구성원이 많은 은하단 목록 (Abell+, 1989)"
 
-#: src/ui_viewDialog.h:3373
+#: src/ui_viewDialog.h:3393
 msgid "Catalog of Open Galactic Clusters (Collinder, 1931)"
 msgstr "은하계 산개 성운 목록 (Collinder, 1931)"
 
-#: src/ui_viewDialog.h:3376
+#: src/ui_viewDialog.h:3396
 msgid ""
 "Catalogue and distances of optically visible H II regions (Dickel+, 1969)"
 msgstr "광학적 관측이 가능한 H II 지역의 목록 및 거리 (Dickel+, 1969)"
 
-#: src/ui_viewDialog.h:3379
+#: src/ui_viewDialog.h:3399
 msgid "Lynds' Catalogue of Dark Nebulae (Lynds, 1962)"
 msgstr "린즈의 암흑성운 목록 (Lynds, 1962)"
 
-#: src/ui_viewDialog.h:3382
+#: src/ui_viewDialog.h:3402
 msgid ""
 "Catalogue of southern stars embedded in nebulosity (van den Bergh and "
 "Herbst, 1975)"
 msgstr ""
 
-#: src/ui_viewDialog.h:3385
+#: src/ui_viewDialog.h:3405
 msgid "ESO/Uppsala Survey of the ESO(B) Atlas (Lauberts, 1982)"
 msgstr "ESO/ESO(B) 아틀라스에서의 업살라 탐색 (라우버트, 1982)"
 
-#: src/ui_viewDialog.h:3388
+#: src/ui_viewDialog.h:3408
 msgid "The Catalogue of Galactic Planetary Nebulae (Kohoutek, 2001)"
 msgstr "은하계 행성상 성운 목록 (Kohoutek, 2001)"
 
-#: src/ui_viewDialog.h:3391
+#: src/ui_viewDialog.h:3411
 msgid "New General Catalogue of Nebulae and Clusters of Stars"
 msgstr "NGC 목록의 성운과 성단"
 
-#: src/ui_viewDialog.h:3396
+#: src/ui_viewDialog.h:3416
 msgctxt "other catalogs"
 msgid "Other"
 msgstr "기타"
 
-#: src/ui_viewDialog.h:3401
+#: src/ui_viewDialog.h:3421
 msgid ""
 "van den Bergh-Hagen Catalogue (Uniform survey of clusters in the Southern "
 "Milky Way; van den Bergh and Hagen, 1975)"
 msgstr ""
 
-#: src/ui_viewDialog.h:3403
+#: src/ui_viewDialog.h:3423
 msgid "Filter by type"
 msgstr "종류별 분류"
 
-#: src/ui_viewDialog.h:3408 src/ui_dsoColorsDialog.h:636
+#: src/ui_viewDialog.h:3428 src/ui_dsoColorsDialog.h:636
 msgid "Hydrogen regions"
 msgstr "수소 영역"
 
 #. TRANSLATORS: Exoplanet detection method
-#: src/ui_viewDialog.h:3414 plugins/Exoplanets/src/Exoplanets.cpp:1034
+#: src/ui_viewDialog.h:3434 plugins/Exoplanets/src/Exoplanets.cpp:1034
 msgid "Other"
 msgstr "기타"
 
-#: src/ui_viewDialog.h:3418
+#: src/ui_viewDialog.h:3438
 msgid "Use hints proportional to angular size of deep-sky objects"
 msgstr "딥스카이 천체의 표지 크기를 천체의 각크기에 비례해서 확대"
 
-#: src/ui_viewDialog.h:3420
+#: src/ui_viewDialog.h:3440
 msgid "Use proportional hints"
 msgstr "비례 강조 사용"
 
-#: src/ui_viewDialog.h:3422
+#: src/ui_viewDialog.h:3442
 msgid ""
 "Use surface brightness of deep-sky objects for scale of the visibility of "
 "their markers and labels."
 msgstr "딥스카이 천체의 이름표와 표지 표시에 표면광도 사용"
 
-#: src/ui_viewDialog.h:3424
+#: src/ui_viewDialog.h:3444
 msgid "Use surface brightness"
 msgstr "표면광도 사용"
 
-#: src/ui_viewDialog.h:3426
+#: src/ui_viewDialog.h:3446
 msgid "Limit magnitude (for unaided/binocular observers) of deep-sky objects."
 msgstr "딥스카이 천체를 볼 때 등급 제한을 걸기 (맨눈 또는 쌍안경 관측)"
 
-#: src/ui_viewDialog.h:3430
+#: src/ui_viewDialog.h:3450
 msgid ""
 "Use designations of deep-sky objects instead of their common names for "
 "screen labels"
 msgstr "딥스카이 천체의 이름을 일반적인 이름 대신 학술적 이름으로 표시"
 
-#: src/ui_viewDialog.h:3433 plugins/Satellites/src/ui_satellitesDialog.h:1057
+#: src/ui_viewDialog.h:3453 plugins/Satellites/src/ui_satellitesDialog.h:1057
 msgid "Labels"
 msgstr "이름표"
 
-#: src/ui_viewDialog.h:3434
+#: src/ui_viewDialog.h:3454
 msgid "Hints"
 msgstr "강조"
 
-#: src/ui_viewDialog.h:3435
+#: src/ui_viewDialog.h:3455
 msgid "Configure colors of markers"
 msgstr "표지의 색상 조정"
 
-#: src/ui_viewDialog.h:3436
+#: src/ui_viewDialog.h:3456
 msgid "Use outlines for big deep-sky objects"
 msgstr "딥스카이 천체의 경계선 사용"
 
-#: src/ui_viewDialog.h:3440
+#: src/ui_viewDialog.h:3460
 msgid "Limit angular size (arcmin):"
 msgstr "각크기 제한하기 (각분):"
 
-#: src/ui_viewDialog.h:3442
+#: src/ui_viewDialog.h:3462
 msgid "Minimal angular size in arcminutes for visible DSO"
 msgstr "관측 가능한 딥스카이 천체들의 최소 각크기 (단위 각분)"
 
-#: src/ui_viewDialog.h:3445
+#: src/ui_viewDialog.h:3465
 msgid "Maximum angular size in arcminutes for visible DSO"
 msgstr "관측 가능한 딥스카이 천체들의 최대 각크기 (단위 각분)"
 
-#: src/ui_viewDialog.h:3447
+#: src/ui_viewDialog.h:3467
 msgid "Use additional names of DSO"
 msgstr "딥스카이 천체의 다른 이름 표시"
 
-#: src/ui_viewDialog.h:3448
+#: src/ui_viewDialog.h:3468
 msgid "Celestial Sphere"
 msgstr "천구"
 
-#: src/ui_viewDialog.h:3450
+#: src/ui_viewDialog.h:3470
 msgid "Color of circular marker of FOV"
 msgstr ""
 
-#: src/ui_viewDialog.h:3453
+#: src/ui_viewDialog.h:3473
 msgid "Color of ecliptic poles (of date)"
 msgstr "황도의 극의 색상 (현재)"
 
-#: src/ui_viewDialog.h:3456
+#: src/ui_viewDialog.h:3476
 msgid "Show colures (great circles through poles and solstices/equinoxes)."
 msgstr "분지선 표시 (두 극과 춘분/추분/동지/하지를 지나는 대원)"
 
-#: src/ui_viewDialog.h:3460
+#: src/ui_viewDialog.h:3480
 msgid "Labels for the cardinal directions (4-wind compass rose)."
 msgstr ""
 
-#: src/ui_viewDialog.h:3464
+#: src/ui_viewDialog.h:3484
 msgid ""
 "Labels for the intercardinal (or ordinal) directions (8-wind compass rose)."
 msgstr ""
 
-#: src/ui_viewDialog.h:3468
+#: src/ui_viewDialog.h:3488
 msgid ""
 "Labels for the secondary intercardinal directions (16-wind compass rose)."
 msgstr ""
 
-#: src/ui_viewDialog.h:3471
+#: src/ui_viewDialog.h:3491
 msgid "Zenith and Nadir"
 msgstr "천정과 천저"
 
-#: src/ui_viewDialog.h:3473 src/ui_viewDialog.h:3529 src/ui_viewDialog.h:3533
-#: src/ui_viewDialog.h:3639 src/ui_viewDialog.h:3670 src/ui_viewDialog.h:3684
-#: src/ui_viewDialog.h:3692 src/ui_viewDialog.h:3696 src/ui_viewDialog.h:3709
-#: src/ui_viewDialog.h:3740 src/ui_viewDialog.h:3840 src/ui_viewDialog.h:3856
-#: src/ui_viewDialog.h:3864 src/ui_viewDialog.h:3871
+#: src/ui_viewDialog.h:3493 src/ui_viewDialog.h:3549 src/ui_viewDialog.h:3553
+#: src/ui_viewDialog.h:3659 src/ui_viewDialog.h:3690 src/ui_viewDialog.h:3704
+#: src/ui_viewDialog.h:3712 src/ui_viewDialog.h:3716 src/ui_viewDialog.h:3729
+#: src/ui_viewDialog.h:3760 src/ui_viewDialog.h:3860 src/ui_viewDialog.h:3876
+#: src/ui_viewDialog.h:3884 src/ui_viewDialog.h:3891
 msgid "Show partitions"
 msgstr ""
 
-#: src/ui_viewDialog.h:3477
+#: src/ui_viewDialog.h:3497
 msgid "Color of rectangular marker of FOV"
 msgstr ""
 
-#: src/ui_viewDialog.h:3480 src/ui_viewDialog.h:3521 src/ui_viewDialog.h:3545
-#: src/ui_viewDialog.h:3553 src/ui_viewDialog.h:3565 src/ui_viewDialog.h:3581
-#: src/ui_viewDialog.h:3632 src/ui_viewDialog.h:3643 src/ui_viewDialog.h:3654
-#: src/ui_viewDialog.h:3705 src/ui_viewDialog.h:3748 src/ui_viewDialog.h:3755
-#: src/ui_viewDialog.h:3826 src/ui_viewDialog.h:3882
+#: src/ui_viewDialog.h:3500 src/ui_viewDialog.h:3541 src/ui_viewDialog.h:3565
+#: src/ui_viewDialog.h:3573 src/ui_viewDialog.h:3585 src/ui_viewDialog.h:3601
+#: src/ui_viewDialog.h:3652 src/ui_viewDialog.h:3663 src/ui_viewDialog.h:3674
+#: src/ui_viewDialog.h:3725 src/ui_viewDialog.h:3768 src/ui_viewDialog.h:3775
+#: src/ui_viewDialog.h:3846 src/ui_viewDialog.h:3902
 msgid "Label partitions"
 msgstr ""
 
-#: src/ui_viewDialog.h:3482
+#: src/ui_viewDialog.h:3502
 msgid "Precession circles"
 msgstr "세차 원"
 
-#: src/ui_viewDialog.h:3484
+#: src/ui_viewDialog.h:3504
 msgid "Color of Prime Vertical"
 msgstr "동서권의 색상"
 
-#: src/ui_viewDialog.h:3487
+#: src/ui_viewDialog.h:3507
 msgid "Show rectangular marker of field of view (FOV)"
 msgstr ""
 
-#: src/ui_viewDialog.h:3489
+#: src/ui_viewDialog.h:3509
 msgid "Rectangular FOV"
 msgstr ""
 
-#: src/ui_viewDialog.h:3491
+#: src/ui_viewDialog.h:3511
 msgid "Width of rectangle, in degrees"
 msgstr ""
 
-#: src/ui_viewDialog.h:3494
+#: src/ui_viewDialog.h:3514
 msgid "Height of rectangle, in degrees"
 msgstr ""
 
-#: src/ui_viewDialog.h:3497
+#: src/ui_viewDialog.h:3517
 msgid "Rotation angle of rectangle, in degrees"
 msgstr ""
 
-#: src/ui_viewDialog.h:3500
+#: src/ui_viewDialog.h:3520
 msgid "Show Galactic equator line."
 msgstr "은하 적도 표시"
 
-#: src/ui_viewDialog.h:3504
+#: src/ui_viewDialog.h:3524
 msgid ""
 "These circles delimit stars which stay always above (respectively below) the"
 " mathematical horizon."
 msgstr "이 원 안에 있는 별은 수학적인 지평면보다 항상 위쪽에 있게 됩니다."
 
-#: src/ui_viewDialog.h:3506
+#: src/ui_viewDialog.h:3526
 msgid "Circumpolar circles"
 msgstr "주극원"
 
-#: src/ui_viewDialog.h:3508
+#: src/ui_viewDialog.h:3528
 msgid "Color of antisolar point"
 msgstr "대일점의 색상"
 
-#: src/ui_viewDialog.h:3512
+#: src/ui_viewDialog.h:3532
 msgid "Equatorial coordinates of J2000.0."
 msgstr "J2000.0에서의 적도좌표계"
 
-#: src/ui_viewDialog.h:3514
+#: src/ui_viewDialog.h:3534
 msgid "Equatorial grid (J2000)"
 msgstr "적도좌표계 격자 (J2000)"
 
-#: src/ui_viewDialog.h:3517
+#: src/ui_viewDialog.h:3537
 msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which"
 " passes through both ecliptic poles, the Sun and opposition point."
 msgstr "충/합 경도선 - 황도의 양쪽 극, 태양, 충 지점을 지나가는 황경(황도 경도)의 선."
 
-#: src/ui_viewDialog.h:3525
+#: src/ui_viewDialog.h:3545
 msgid "Color of the supergalactic grid"
 msgstr "초은하좌표계 격자의 색상"
 
-#: src/ui_viewDialog.h:3527
+#: src/ui_viewDialog.h:3547
 msgid "Equinoxes (J2000)"
 msgstr "분점 (J2000)"
 
-#: src/ui_viewDialog.h:3537
+#: src/ui_viewDialog.h:3557
 msgid "Show ecliptic poles of J2000.0"
 msgstr "J2000.0에서의 황도의 극 보이기"
 
-#: src/ui_viewDialog.h:3539
+#: src/ui_viewDialog.h:3559
 msgid "Ecliptic poles (J2000)"
 msgstr "황도의 극 (J2000)"
 
-#: src/ui_viewDialog.h:3541
+#: src/ui_viewDialog.h:3561
 msgid "Show ecliptic line of current date."
 msgstr "현재의 황도선 표시"
 
-#: src/ui_viewDialog.h:3547
+#: src/ui_viewDialog.h:3567
 msgid "Colures"
 msgstr "분지선"
 
-#: src/ui_viewDialog.h:3549
+#: src/ui_viewDialog.h:3569
 msgid "Show Prime (East-West) Vertical."
 msgstr "동서권 보이기"
 
-#: src/ui_viewDialog.h:3557
+#: src/ui_viewDialog.h:3577
 msgid ""
 "This circle represents the size of Earth's central, deep shadow in the "
 "distance of the Moon."
 msgstr ""
 
-#: src/ui_viewDialog.h:3559
+#: src/ui_viewDialog.h:3579
 msgid "Earth umbra"
 msgstr ""
 
-#: src/ui_viewDialog.h:3561
+#: src/ui_viewDialog.h:3581
 msgid ""
 "Show point of Earth's center of deep shadow in the distance of the Moon."
 msgstr ""
 
-#: src/ui_viewDialog.h:3567
+#: src/ui_viewDialog.h:3587
 msgid "Equator (of date)"
 msgstr "적도 (현재)"
 
-#: src/ui_viewDialog.h:3569
+#: src/ui_viewDialog.h:3589
 msgid "Show meridian line."
 msgstr "자오선 표시"
 
-#: src/ui_viewDialog.h:3573
+#: src/ui_viewDialog.h:3593
 msgid ""
 "Instantaneous circles of earth's axis on its motion around ecliptical poles."
 " Displayed on Earth only."
 msgstr "황도의 극 주변을 도는 지구 자전축이 그리는 원으로, 지구에서만 표시됩니다."
 
-#: src/ui_viewDialog.h:3577
+#: src/ui_viewDialog.h:3597
 msgid "Color of the solstice points (J2000.0)"
 msgstr "지점의 색상 (J2000.0)"
 
-#: src/ui_viewDialog.h:3585
+#: src/ui_viewDialog.h:3605
 msgid "Color of galactic equator"
 msgstr "은하 적도의 색상"
 
-#: src/ui_viewDialog.h:3588
+#: src/ui_viewDialog.h:3608
 msgid "Show ecliptic poles of current date."
 msgstr "현재의 황도의 극 보이기"
 
-#: src/ui_viewDialog.h:3590
+#: src/ui_viewDialog.h:3610
 msgid "Ecliptic poles (of date)"
 msgstr "황도의 극 (현재)"
 
-#: src/ui_viewDialog.h:3592
+#: src/ui_viewDialog.h:3612
 msgid "Color of the solstice points (of date)"
 msgstr "지점의 색상 (현재)"
 
-#: src/ui_viewDialog.h:3596
+#: src/ui_viewDialog.h:3616
 msgid "Color of ecliptic (of date)"
 msgstr "황도의 색상 (현재)"
 
-#: src/ui_viewDialog.h:3599
+#: src/ui_viewDialog.h:3619
 msgid "Color of the opposition/conjunction longitude line"
 msgstr "충/합 경선의 색상"
 
-#: src/ui_viewDialog.h:3602
+#: src/ui_viewDialog.h:3622
 msgid "Color of the galactic grid"
 msgstr "은하좌표계 격자의 색상"
 
-#: src/ui_viewDialog.h:3605
+#: src/ui_viewDialog.h:3625
 msgid "Color of compass marks"
 msgstr ""
 
-#: src/ui_viewDialog.h:3608
+#: src/ui_viewDialog.h:3628
 msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
 msgstr "J2000.0의 황도선 표시 (VSOP87A 기본면)"
 
-#: src/ui_viewDialog.h:3614
+#: src/ui_viewDialog.h:3634
 msgid "Color of galactic poles"
 msgstr "은하 극의 색상"
 
-#: src/ui_viewDialog.h:3617
+#: src/ui_viewDialog.h:3637
 msgid "Show mathematical horizon line."
 msgstr "수학적 수평선을 표시합니다."
 
-#: src/ui_viewDialog.h:3621
+#: src/ui_viewDialog.h:3641
 msgid "Show marker of center for field of view (FOV)"
 msgstr ""
 
-#: src/ui_viewDialog.h:3623
+#: src/ui_viewDialog.h:3643
 msgid "Center of FOV"
 msgstr ""
 
-#: src/ui_viewDialog.h:3625
+#: src/ui_viewDialog.h:3645
 msgid "Show circular marker of field of view (FOV)"
 msgstr ""
 
-#: src/ui_viewDialog.h:3627
+#: src/ui_viewDialog.h:3647
 msgid "Circular FOV"
 msgstr ""
 
-#: src/ui_viewDialog.h:3629
+#: src/ui_viewDialog.h:3649
 msgid "Field of view in degrees"
 msgstr ""
 
-#: src/ui_viewDialog.h:3634
+#: src/ui_viewDialog.h:3654
 msgid "Ecliptic (of date)"
 msgstr "황도 (현재)"
 
-#: src/ui_viewDialog.h:3636
+#: src/ui_viewDialog.h:3656
 msgid "Color of the celestial poles (J2000.0)"
 msgstr "천구의 극의 색상 (J2000.0)"
 
-#: src/ui_viewDialog.h:3645
+#: src/ui_viewDialog.h:3665
 msgid "Ecliptic (J2000)"
 msgstr "황도 (J2000)"
 
-#: src/ui_viewDialog.h:3647
+#: src/ui_viewDialog.h:3667
 msgid "Color of galactic center and anticenter"
 msgstr ""
 
-#: src/ui_viewDialog.h:3650
+#: src/ui_viewDialog.h:3670
 msgid ""
 "Show de Vaucouleurs' Supergalactic coordinates (1976), defined by the "
 "distribution of nearby galaxies."
 msgstr "근방 은하들의 분포를 통해 계산된 보꿀뢰흐의 초은하좌표계(1976) 보이기"
 
-#: src/ui_viewDialog.h:3658
+#: src/ui_viewDialog.h:3678
 msgid ""
 "Show a vertical line (with optional altitude marks) in the screen center."
 msgstr ""
 
-#: src/ui_viewDialog.h:3662
+#: src/ui_viewDialog.h:3682
 msgid "Color of the ecliptic poles (J2000.0)"
 msgstr "황도의 극의 색상 (J2000.0)"
 
-#: src/ui_viewDialog.h:3666
+#: src/ui_viewDialog.h:3686
 msgid "Ecliptical coordinates for J2000.0."
 msgstr "J2000.0에서의 황도좌표계"
 
-#: src/ui_viewDialog.h:3668
+#: src/ui_viewDialog.h:3688
 msgid "Ecliptic grid (J2000)"
 msgstr "황도좌표계 격자 (J2000)"
 
-#: src/ui_viewDialog.h:3673
+#: src/ui_viewDialog.h:3693
 msgid "Solstices (J2000)"
 msgstr "지점 (J2000)"
 
-#: src/ui_viewDialog.h:3675
+#: src/ui_viewDialog.h:3695
 msgid "Color of celestial poles (of date)"
 msgstr "천구의 극의 색상 (현재)"
 
-#: src/ui_viewDialog.h:3678
+#: src/ui_viewDialog.h:3698
 msgid "Color of precession circles"
 msgstr "세차 원의 색상"
 
-#: src/ui_viewDialog.h:3681
+#: src/ui_viewDialog.h:3701
 msgid "Color of equator (of date)"
 msgstr "적도의 색상 (현재)"
 
-#: src/ui_viewDialog.h:3688
+#: src/ui_viewDialog.h:3708
 msgid ""
 "Apex and Antapex indicate where the observer's planet is heading to or "
 "receding from, respectively."
 msgstr "향점과 배점은 각각 관측자가 있는 행성이 향하는 방향과 그 반대 방향을 나타냅니다."
 
-#: src/ui_viewDialog.h:3701
+#: src/ui_viewDialog.h:3721
 msgid "Galactic Coordinates, System II (IAU 1958)."
 msgstr "II형 은하 좌표 (IAU 1958)"
 
-#: src/ui_viewDialog.h:3707
+#: src/ui_viewDialog.h:3727
 msgid "Equator (J2000)"
 msgstr "적도 (J2000)"
 
-#: src/ui_viewDialog.h:3713
+#: src/ui_viewDialog.h:3733
 msgid "Color of cardinal points"
 msgstr "방위기점의 색상"
 
-#: src/ui_viewDialog.h:3716
+#: src/ui_viewDialog.h:3736
 msgid "Ecliptical coordinates for current date. Displayed on Earth only."
 msgstr "현재 기준의 황도좌표계로, 지구에서만 표시됩니다."
 
-#: src/ui_viewDialog.h:3718
+#: src/ui_viewDialog.h:3738
 msgid "Ecliptic grid (of date)"
 msgstr "황도좌표계 격자 (현재)"
 
-#: src/ui_viewDialog.h:3720
+#: src/ui_viewDialog.h:3740
 msgid "Color of equator (J2000.0)"
 msgstr "적도의 색상 (J2000.0)"
 
-#: src/ui_viewDialog.h:3723
+#: src/ui_viewDialog.h:3743
 msgid "Color of the azimuthal grid"
 msgstr "지평좌표계 격자의 색상"
 
-#: src/ui_viewDialog.h:3726
+#: src/ui_viewDialog.h:3746
 msgid "Color of ecliptic (J2000.0)"
 msgstr "황도의 색상 (J2000.0)"
 
-#: src/ui_viewDialog.h:3729
+#: src/ui_viewDialog.h:3749
 msgid "Color of supergalactic equator"
 msgstr "초은하 적도의 색상"
 
-#: src/ui_viewDialog.h:3732
+#: src/ui_viewDialog.h:3752
 msgid "Show celestial equator of current planet and date."
 msgstr "현재 행성 및 날짜에서의 천구의 적도 표시"
 
-#: src/ui_viewDialog.h:3736
+#: src/ui_viewDialog.h:3756
 msgid "Color of altitude line"
 msgstr ""
 
-#: src/ui_viewDialog.h:3744
+#: src/ui_viewDialog.h:3764
 msgid "Color of the equatorial grid (of date)"
 msgstr "적도좌표계 격자의 색상 (현재)"
 
-#: src/ui_viewDialog.h:3746
+#: src/ui_viewDialog.h:3766
 msgid "Solstices (of date)"
 msgstr "지점 (현재)"
 
-#: src/ui_viewDialog.h:3752
+#: src/ui_viewDialog.h:3772
 msgid "Color of meridian"
 msgstr "자오선의 색상"
 
-#: src/ui_viewDialog.h:3759
+#: src/ui_viewDialog.h:3779
 msgid "The line thickness for grids and lines"
 msgstr ""
 
-#: src/ui_viewDialog.h:3761
+#: src/ui_viewDialog.h:3781
 msgid "Thickness: lines"
 msgstr ""
 
-#: src/ui_viewDialog.h:3763 src/ui_viewDialog.h:3892 src/ui_viewDialog.h:3935
-#: src/ui_viewDialog.h:3945 src/ui_viewDialog.h:3952 src/ui_viewDialog.h:3960
+#: src/ui_viewDialog.h:3783 src/ui_viewDialog.h:3912 src/ui_viewDialog.h:3955
+#: src/ui_viewDialog.h:3965 src/ui_viewDialog.h:3972 src/ui_viewDialog.h:3980
 msgid "Thickness of line in pixels"
 msgstr "픽셀 안에 있는 선의 굵기 "
 
-#: src/ui_viewDialog.h:3766
+#: src/ui_viewDialog.h:3786
 msgid "The line thickness for circle partitions"
 msgstr ""
 
-#: src/ui_viewDialog.h:3768
+#: src/ui_viewDialog.h:3788
 msgid "partitions"
 msgstr ""
 
-#: src/ui_viewDialog.h:3770
+#: src/ui_viewDialog.h:3790
 msgid "Thickness of partitions in pixels"
 msgstr ""
 
-#: src/ui_viewDialog.h:3773
+#: src/ui_viewDialog.h:3793
 msgid "Color of Zenith and Nadir"
 msgstr "천정과 천저의 색상"
 
-#: src/ui_viewDialog.h:3776
+#: src/ui_viewDialog.h:3796
 msgid "Altitudes and azimuth (counted from North towards East)."
 msgstr "고도 및 방위각 (북쪽->동쪽 방향으로 계산)"
 
-#: src/ui_viewDialog.h:3780
+#: src/ui_viewDialog.h:3800
 msgid ""
 "This circle represents the outermost rim of Earth's shadow in the distance "
 "of the Moon."
 msgstr ""
 
-#: src/ui_viewDialog.h:3782
+#: src/ui_viewDialog.h:3802
 msgid "Earth penumbra"
 msgstr ""
 
-#: src/ui_viewDialog.h:3784
+#: src/ui_viewDialog.h:3804
 msgid "Show celestial poles of J2000.0."
 msgstr "J2000.0에서의 천구의 극 보이기"
 
-#: src/ui_viewDialog.h:3786
+#: src/ui_viewDialog.h:3806
 msgid "Celestial poles (J2000)"
 msgstr "천구의 극 (J2000)"
 
-#: src/ui_viewDialog.h:3788
+#: src/ui_viewDialog.h:3808
 msgid "Show celestial equator of J2000.0."
 msgstr "J2000.0의 천구 적도 표시"
 
-#: src/ui_viewDialog.h:3792
+#: src/ui_viewDialog.h:3812
 msgid "Color of colures"
 msgstr "분지선의 색상"
 
-#: src/ui_viewDialog.h:3795
+#: src/ui_viewDialog.h:3815
 msgid "Color of umbra circle"
 msgstr ""
 
-#: src/ui_viewDialog.h:3799
+#: src/ui_viewDialog.h:3819
 msgid "Color of the ecliptical grid (J2000.0)"
 msgstr "황도좌표계 격자의 색상 (J2000.0)"
 
-#: src/ui_viewDialog.h:3802
+#: src/ui_viewDialog.h:3822
 msgid "Show equator of de Vaucouleurs' Supergalactic coordinates (1976)."
 msgstr "보꿀뢰흐의 초은하 좌표계(1976)의 적도 보이기"
 
-#: src/ui_viewDialog.h:3806
+#: src/ui_viewDialog.h:3826
 msgid "Color of penumbra circle"
 msgstr ""
 
-#: src/ui_viewDialog.h:3810
+#: src/ui_viewDialog.h:3830
 msgid "Color of the equatorial grid (J2000.0)"
 msgstr "적도좌표계 격자의 색상 (J2000.0)"
 
-#: src/ui_viewDialog.h:3812
+#: src/ui_viewDialog.h:3832
 msgid "Equinoxes (of date)"
 msgstr "분점 (현재)"
 
-#: src/ui_viewDialog.h:3814
+#: src/ui_viewDialog.h:3834
 msgid "Color of Apex and Antapex points"
 msgstr "향점 및 배점의 색상"
 
-#: src/ui_viewDialog.h:3817
+#: src/ui_viewDialog.h:3837
 msgid "Color of the ecliptical grid (of date)"
 msgstr "황도좌표계 격자의 색상 (현재)"
 
-#: src/ui_viewDialog.h:3820
+#: src/ui_viewDialog.h:3840
 msgid "Color of circumpolar circles"
 msgstr "주극원의 색상"
 
-#: src/ui_viewDialog.h:3823
+#: src/ui_viewDialog.h:3843
 msgid "Color of the equinox points (of date)"
 msgstr "분점의 색상 (현재)"
 
-#: src/ui_viewDialog.h:3830
+#: src/ui_viewDialog.h:3850
 msgid "Solar equator projected into space."
 msgstr ""
 
-#: src/ui_viewDialog.h:3834
+#: src/ui_viewDialog.h:3854
 msgid "Color of marker of center of FOV"
 msgstr ""
 
-#: src/ui_viewDialog.h:3837
+#: src/ui_viewDialog.h:3857
 msgid "Color of horizon"
 msgstr "지평선의 색상"
 
-#: src/ui_viewDialog.h:3844
+#: src/ui_viewDialog.h:3864
 msgid "Color of the projected Solar equator line"
 msgstr ""
 
-#: src/ui_viewDialog.h:3848
+#: src/ui_viewDialog.h:3868
 msgid "Color of the invariable plane of the Solar system"
 msgstr ""
 
-#: src/ui_viewDialog.h:3852
+#: src/ui_viewDialog.h:3872
 msgid "Equatorial coordinates of current date and planet."
 msgstr "현재 행성 및 날짜의 적도 좌표."
 
-#: src/ui_viewDialog.h:3854
+#: src/ui_viewDialog.h:3874
 msgid "Equatorial grid (of date)"
 msgstr "적도좌표계 격자 (현재)"
 
-#: src/ui_viewDialog.h:3860
+#: src/ui_viewDialog.h:3880
 msgid "Show celestial poles of current planet and date."
 msgstr "현재 행성 및 날짜에서의 천구의 극 표시"
 
-#: src/ui_viewDialog.h:3862
+#: src/ui_viewDialog.h:3882
 msgid "Celestial poles (of date)"
 msgstr "천구의 극 (현재)"
 
-#: src/ui_viewDialog.h:3868
+#: src/ui_viewDialog.h:3888
 msgid "Color of supergalactic poles"
 msgstr "초은하의 극의 색상"
 
-#: src/ui_viewDialog.h:3875
+#: src/ui_viewDialog.h:3895
 msgid "Color of the equinox points (J2000.0)"
 msgstr "분점의 색상 (J2000.0)"
 
-#: src/ui_viewDialog.h:3878
+#: src/ui_viewDialog.h:3898
 msgid ""
 "A plane perpendicular to the angular momentum vector of the Solar system."
 msgstr ""
 
-#: src/ui_viewDialog.h:3880
+#: src/ui_viewDialog.h:3900
 msgid "Invariable plane of the Solar system"
 msgstr ""
 
-#: src/ui_viewDialog.h:3885
+#: src/ui_viewDialog.h:3905
 msgid "Add/remove landscapes..."
 msgstr "풍경 추가/제거..."
 
-#: src/ui_viewDialog.h:3888
+#: src/ui_viewDialog.h:3908
 msgid "Draw horizon polyline if one is defined."
 msgstr ""
 
-#: src/ui_viewDialog.h:3890
+#: src/ui_viewDialog.h:3910
 msgid "Draw only polygon"
 msgstr ""
 
-#: src/ui_viewDialog.h:3895
+#: src/ui_viewDialog.h:3915
 msgid "Set the planet and position as specified for the selected landscape"
 msgstr ""
 
-#: src/ui_viewDialog.h:3897
+#: src/ui_viewDialog.h:3917
 msgid "Position from landscape"
 msgstr ""
 
-#: src/ui_viewDialog.h:3898
+#: src/ui_viewDialog.h:3918
 msgid "Show landscape labels"
 msgstr "풍경 이름표 보기"
 
-#: src/ui_viewDialog.h:3900
+#: src/ui_viewDialog.h:3920
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
 msgstr "조명층 보이기 (밝은 창문, 광공해, 기타 등등)"
 
-#: src/ui_viewDialog.h:3902
+#: src/ui_viewDialog.h:3922
 msgid "Show illumination "
 msgstr "조명 보이기"
 
-#: src/ui_viewDialog.h:3904
+#: src/ui_viewDialog.h:3924
 msgid "Use minimal brightness as may be specified in landscape.ini"
 msgstr "landscape.ini 안에 정의된 최소 밝기 사용"
 
-#: src/ui_viewDialog.h:3906
+#: src/ui_viewDialog.h:3926
 msgid "from landscape, if given"
 msgstr "풍경에서 가져오기"
 
-#: src/ui_viewDialog.h:3908
+#: src/ui_viewDialog.h:3928
 msgid "Use minimal brightness to leave landscape visible also in darkness"
 msgstr "어둠 속에서도 풍경을 보이게 할 최소 밝기 설정"
 
-#: src/ui_viewDialog.h:3910
+#: src/ui_viewDialog.h:3930
 msgid "Minimal brightness:"
 msgstr "최소 밝기:"
 
-#: src/ui_viewDialog.h:3912
+#: src/ui_viewDialog.h:3932
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
 msgstr "값 범위 0..1 (밤에 어두운 지형 밝기 - 낮에 밝은 지형 밝기)"
 
-#: src/ui_viewDialog.h:3914
+#: src/ui_viewDialog.h:3934
 msgid "Show fog"
 msgstr "안개 보기"
 
-#: src/ui_viewDialog.h:3915
+#: src/ui_viewDialog.h:3935
 msgid "Show ground"
 msgstr "지면 보기"
 
-#: src/ui_viewDialog.h:3916
+#: src/ui_viewDialog.h:3936
 msgid "Use this landscape as default"
 msgstr "이 풍경을 기본값으로 사용"
 
-#: src/ui_viewDialog.h:3919
+#: src/ui_viewDialog.h:3939
 msgid "Use native names for planets from current culture"
 msgstr "현재 하늘 문화에서의 원어 행성 이름을 사용"
 
-#: src/ui_viewDialog.h:3921
+#: src/ui_viewDialog.h:3941
 msgid "Use native names for planets"
 msgstr "원어 행성 이름을 사용"
 
-#: src/ui_viewDialog.h:3923
+#: src/ui_viewDialog.h:3943
 msgid "Color of constellation names"
 msgstr "별자리 이름표의 색상"
 
-#: src/ui_viewDialog.h:3925
+#: src/ui_viewDialog.h:3945
 msgid "Show labels"
 msgstr "별자리 이름표 보기"
 
-#: src/ui_viewDialog.h:3927
+#: src/ui_viewDialog.h:3947
 msgid "Select if you want names abbreviated, original or translated"
 msgstr "이름을 원본, 번역본, 축약명 중 선택"
 
-#: src/ui_viewDialog.h:3931
+#: src/ui_viewDialog.h:3951
 msgid "Color of asterism lines"
 msgstr "성군 선의 색상"
 
-#: src/ui_viewDialog.h:3933
+#: src/ui_viewDialog.h:3953
 msgid "Show asterism lines"
 msgstr "성군 선 보이기"
 
-#: src/ui_viewDialog.h:3938
+#: src/ui_viewDialog.h:3958
 msgid "Color of constellation boundaries"
 msgstr "별자리 경계선의 색상"
 
-#: src/ui_viewDialog.h:3941
+#: src/ui_viewDialog.h:3961
 msgid "Show boundaries of constellations"
 msgstr "별자리의 경계 표시"
 
-#: src/ui_viewDialog.h:3943
+#: src/ui_viewDialog.h:3963
 msgid "Show boundaries"
 msgstr "별자리 경계선 보기"
 
-#: src/ui_viewDialog.h:3948
+#: src/ui_viewDialog.h:3968
 msgid "Color of ray helpers"
 msgstr "광선 도움말의 색상"
 
-#: src/ui_viewDialog.h:3950
+#: src/ui_viewDialog.h:3970
 msgid "Show ray helpers"
 msgstr "광선 도움말 보이기"
 
-#: src/ui_viewDialog.h:3954
+#: src/ui_viewDialog.h:3974
 msgid "Show art in brightness"
 msgstr "별자리 그림의 밝기"
 
-#: src/ui_viewDialog.h:3956
+#: src/ui_viewDialog.h:3976
 msgid "Color of constellation lines"
 msgstr "별자리 선의 색상"
 
-#: src/ui_viewDialog.h:3958
+#: src/ui_viewDialog.h:3978
 msgid "Show constellation lines"
 msgstr "별자리 선 보이기"
 
-#: src/ui_viewDialog.h:3963
+#: src/ui_viewDialog.h:3983
 msgid "Color of asterism names"
 msgstr "성군 이름표의 색상"
 
-#: src/ui_viewDialog.h:3965
+#: src/ui_viewDialog.h:3985
 msgid "Show asterism labels"
 msgstr "성군 이름표 보이기"
 
-#: src/ui_viewDialog.h:3966
+#: src/ui_viewDialog.h:3986
 msgid "Constellations font size"
 msgstr "별자리 글꼴 크기"
 
-#: src/ui_viewDialog.h:3967
+#: src/ui_viewDialog.h:3987
 msgid "Asterisms font size"
 msgstr "성군 글꼴 크기"
 
-#: src/ui_viewDialog.h:3968
+#: src/ui_viewDialog.h:3988
 msgid "Use this sky culture as default"
 msgstr "이 하늘 문화를 기본값으로 사용"
 
@@ -12455,10 +12483,6 @@ msgstr ""
 #: src/ui_astroCalcDialog.h:1706
 msgid "List of objects above horizon"
 msgstr "지평선 위에 있는 천체 목록"
-
-#: src/ui_astroCalcDialog.h:1708
-msgid "Show:"
-msgstr ""
 
 #: src/ui_astroCalcDialog.h:1710
 msgid "Show connecting line between the ephemeris markers"
