@@ -4473,6 +4473,19 @@ QMap<double, double> AstroCalcDialog::findClosestApproach(PlanetP& object1, Stel
 	QMap<double, double> separations;
 	QPair<double, double> extremum;
 
+	if (object2->getType()=="Planet")
+	{
+		PlanetP planet = qSharedPointerCast<Planet>(object2);
+		core->setJD(startJD);
+		core->update(0);
+		if (!planet->hasValidData())
+			return separations;
+		core->setJD(stopJD);
+		core->update(0);
+		if (!planet->hasValidData())
+			return separations;
+	}
+
 	QStringList objects;
 	objects.clear();
 	objects.append(object1->getEnglishName());
