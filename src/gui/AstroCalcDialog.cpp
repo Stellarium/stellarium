@@ -1195,6 +1195,9 @@ void AstroCalcDialog::currentCelestialPositions()
 					break;
 			}
 
+			if (!planet->hasValidData())
+				passByType = false;
+
 			if (passByType && planet != core->getCurrentPlanet() && planet->getVMagnitudeWithExtinction(core) <= mag && planet->isAboveRealHorizon(core))
 			{
 				pos = planet->getJ2000EquatorialPos(core);
@@ -1717,6 +1720,10 @@ void AstroCalcDialog::generateEphemeris()
 			double JD = firstJD + i * currentStep;
 			core->setJD(JD);
 			core->update(0); // force update to get new coordinates
+
+			if (!obj->hasValidData())
+				continue;
+
 			if (useHorizontalCoords)
 			{
 				pos = obj->getAltAzPosAuto(core);
