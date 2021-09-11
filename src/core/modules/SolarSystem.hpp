@@ -83,6 +83,7 @@ class SolarSystem : public StelObjectModule
 	Q_PROPERTY(bool flagSunScale			READ getFlagSunScale			WRITE setFlagSunScale			NOTIFY flagSunScaleChanged)
 	Q_PROPERTY(double sunScale			READ getSunScale			WRITE setSunScale			NOTIFY sunScaleChanged)
 	Q_PROPERTY(double labelsAmount			READ getLabelsAmount			WRITE setLabelsAmount			NOTIFY labelsAmountChanged)
+	Q_PROPERTY(bool flagPermanentSolarCorona	READ getFlagPermanentSolarCorona	WRITE setFlagPermanentSolarCorona	NOTIFY flagPermanentSolarCoronaChanged)
 	// Ephemeris-related properties
 	Q_PROPERTY(bool ephemerisMarkersDisplayed	READ getFlagEphemerisMarkers		WRITE setFlagEphemerisMarkers		NOTIFY ephemerisMarkersChanged)
 	Q_PROPERTY(bool ephemerisHorizontalCoordinates	READ getFlagEphemerisHorizontalCoordinates	WRITE setFlagEphemerisHorizontalCoordinates	NOTIFY ephemerisHorizontalCoordinatesChanged)
@@ -660,6 +661,11 @@ public slots:
 	//! Get the current value of the flag which enables showing of planets orbits only or not.
 	bool getFlagPlanetsOrbitsOnly(void) const;
 
+	//! Set flag which enabled the showing of solar corona when atmosphere is disabled (true) of draw the corona when total solar eclipses is happened only (false)
+	void setFlagPermanentSolarCorona(bool b) {	if (flagPermanentSolarCorona!=b)	{ flagPermanentSolarCorona = b; emit flagPermanentSolarCoronaChanged(b); } }
+	//! Get the current value of the flag which enables showing of solar corona when atmosphere is disabled or when total solar eclipses is happened only.
+	bool getFlagPermanentSolarCorona(void) const { return flagPermanentSolarCorona; }
+
 	//! Set flag which determines if custom settings is using for Great Red Spot on Jupiter
 	void setFlagCustomGrsSettings(bool b);
 	//! Get the current value of the flag which determines if custom settings for Great Red Spot on Jupiter is used or not.
@@ -763,6 +769,7 @@ signals:
 	void customGrsDriftChanged(double drift);
 	void customGrsJDChanged(double JD);
 	void earthShadowEnlargementDanjonChanged(bool b);
+	void flagPermanentSolarCoronaChanged(bool b);
 
 	void labelsColorChanged(const Vec3f & color) const;
 	void pointerColorChanged(const Vec3f & color) const;
@@ -1036,6 +1043,9 @@ private:
 
 	//! The amount of planet labels (between 0 and 10).
 	double labelsAmount;
+
+	// Flag to follow the state of drawing of solar corona
+	bool flagPermanentSolarCorona;
 
 	//! List of all the bodies of the solar system.
 	QList<PlanetP> systemPlanets;

@@ -75,6 +75,7 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	, flagSunScale(false)
 	, sunScale(1.0)
 	, labelsAmount(false)
+	, flagPermanentSolarCorona(true)
 	, flagOrbits(false)
 	, flagLightTravelTime(true)
 	, flagUseObjModels(false)
@@ -220,6 +221,7 @@ void SolarSystem::init()
 	setCustomGrsJD(conf->value("astro/grs_jd", 2456901.5).toDouble());
 
 	setFlagEarthShadowEnlargementDanjon(conf->value("astro/shadow_enlargement_danjon", false).toBool());
+	setFlagPermanentSolarCorona(conf->value("viewing/flag_draw_sun_corona", true).toBool());
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
