@@ -159,7 +159,7 @@ StelTexture::GLData StelTexture::loadFromData(const QByteArray& data)
  Bind the texture so that it can be used for openGL drawing (calls glBindTexture)
  *************************************************************************/
 
-bool StelTexture::bind(int slot)
+bool StelTexture::bind(uint slot)
 {
 	if (id != 0)
 	{
@@ -300,25 +300,16 @@ QByteArray StelTexture::convertToGLFormat(const QImage& image, GLint *format, GL
 	ret.reserve(width * height * bpp);
 	QImage tmp = image.convertToFormat(QImage::Format_ARGB32);
 
-	// flips bits over y
-	int ipl = tmp.bytesPerLine() / 4;
-	for (int y = 0; y < height / 2; ++y)
-	{
-		int *a = (int *) tmp.scanLine(y);
-		int *b = (int *) tmp.scanLine(height - y - 1);
-		for (int x = 0; x < ipl; ++x)
-			qSwap(a[x], b[x]);
-	}
-
 	// convert data
 	// we always use a tightly packed format, with 1-4 bpp
-	for (int i = 0; i < height; ++i)
+	// the image should be flipped over y, so read it backwards from the end
+	for (int i = height - 1; i >= 0; --i)
 	{
-		uint *p = (uint *) tmp.scanLine(i);
+		uint *p = reinterpret_cast<uint *>( tmp.scanLine(i));
 		for (int x = 0; x < width; ++x)
 		{
 			uint c = qToBigEndian(p[x]);
-			const char* ptr = (const char*)&c;
+			const char* ptr = reinterpret_cast<const char*>(&c);
 			switch (*format)
 			{
 				case GL_RGBA:
@@ -400,11 +391,11 @@ bool StelTexture::glLoad(const GLData& data)
 	}
 
 	//do pixel transfer
-	gl->glTexImage2D(GL_TEXTURE_2D, 0, data.format, width, height, 0, data.format,
-			 data.type, data.data.constData());
+	gl->glTexImage2D(GL_TEXTURE_2D, 0, data.format, width, height, 0, static_cast<GLenum>(data.format),
+			 static_cast<GLenum>(data.type), data.data.constData());
 
 	//for now, assume full sized 8 bit GL formats used internally
-	glSize = data.data.size();
+	glSize = static_cast<uint>(data.data.size());
 
 #ifndef NDEBUG
 	if (qApp->property("verbose") == true)

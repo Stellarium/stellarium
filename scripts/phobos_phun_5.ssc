@@ -1,7 +1,7 @@
 //
 // Author: Qam1
 // Name: 3 Transits and 2 Eclipses from Deimos 2027
-// Version: 5.0
+// Version: 5.1
 // License: Public Domain
 // Description: Phobos races ahead of Mars and transits the sun, passes through it and then retrogrades back towards the sun and just partially transits it again (only seen in the southern hemisphere of Deimos), then Mars totally eclipses the sun while Phobos transits in darkness between Mars and Deimos. When Phobos emerges from Mars it is still eclipsed and dimmed in Mars' shadow, only to light up later.
 //
@@ -17,7 +17,7 @@ core.setObserverLocation(113.33, -38.34, 17, 0, "", "Deimos");
 
 core.wait(.5);
 
-MData = core.getObjectPosition("Phobos");
+MData = core.getObjectInfo("Phobos");
 alt = MData["altitude"];
 
 if (alt <0)

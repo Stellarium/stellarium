@@ -50,6 +50,7 @@
 #include <QStringList>
 #include <QDir>
 #include <QSettings>
+#include <stdexcept>
 
 #define CATALOG_FORMAT_VERSION 2 /* Version of format of catalog */
 
@@ -70,7 +71,7 @@ StelPluginInfo PulsarsStelPluginInterface::getPluginInfo() const
 	info.id = "Pulsars";
 	info.displayedName = N_("Pulsars");
 	info.authors = "Alexander Wolf";
-	info.contact = "alex.v.wolf@gmail.com";
+	info.contact = STELLARIUM_DEV_URL;
 	info.description = N_("This plugin plots the position of various pulsars, with object information about each one.");
 	info.version = PULSARS_PLUGIN_VERSION;
 	info.license = PULSARS_PLUGIN_LICENSE;
@@ -158,7 +159,7 @@ void Pulsars::init()
 		// populate settings from main config file.
 		readSettingsFromConfig();
 
-		jsonCatalogPath = StelFileMgr::findFile("modules/Pulsars", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/pulsars.json";
+		jsonCatalogPath = StelFileMgr::findFile("modules/Pulsars", static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable)) + "/pulsars.json";
 		if (jsonCatalogPath.isEmpty())
 			return;
 
@@ -167,9 +168,9 @@ void Pulsars::init()
 
 		// key bindings and other actions
 		addAction("actionShow_Pulsars", N_("Pulsars"), N_("Show pulsars"), "pulsarsVisible", "Ctrl+Alt+P");
-		addAction("actionShow_Pulsars_ConfigDialog", N_("Pulsars"), N_("Pulsars configuration window"), configDialog, "visible");
+		addAction("actionShow_Pulsars_dialog", N_("Pulsars"), N_("Show settings dialog"), configDialog, "visible", ""); // Allow assign shortkey
 
-		GlowIcon = new QPixmap(":/graphicGui/glow32x32.png");
+		GlowIcon = new QPixmap(":/graphicGui/miscGlow32x32.png");
 		OnIcon = new QPixmap(":/Pulsars/btPulsars-on.png");
 		OffIcon = new QPixmap(":/Pulsars/btPulsars-off.png");
 
@@ -210,12 +211,13 @@ void Pulsars::init()
 	updateTimer->start();
 
 	connect(this, SIGNAL(jsonUpdateComplete(void)), this, SLOT(reloadCatalog()));
+	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
 
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 }
 
 /*
- Draw our module. This should print name of first PSR in the main window
+ Draw our module.
 */
 void Pulsars::draw(StelCore* core)
 {
@@ -226,7 +228,7 @@ void Pulsars::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 	
-	for (const auto& pulsar : psr)
+	for (const auto& pulsar : qAsConst(psr))
 	{
 		if (pulsar && pulsar->initialized)
 			pulsar->draw(core, &painter);
@@ -246,20 +248,19 @@ void Pulsars::drawPointer(StelCore* core, StelPainter& painter)
 		const StelObjectP obj = newSelected[0];
 		Vec3d pos=obj->getJ2000EquatorialPos(core);
 
-		Vec3d screenpos;
+		Vec3f screenpos;
 		// Compute 2D pos and return if outside screen
-		if (!painter.getProjector()->project(pos, screenpos))
+		if (!painter.getProjector()->project(pos.toVec3f(), screenpos))
 			return;
 
-		const Vec3f& c(obj->getInfoColor());
-		painter.setColor(c[0],c[1],c[2]);
+		painter.setColor(obj->getInfoColor());
 		texPointer->bind();
 		painter.setBlending(true);
 		painter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getTotalRunTime()*40.);
 	}
 }
 
-QList<StelObjectP> Pulsars::searchAround(const Vec3d& av, double limitFov, const StelCore*) const
+QList<StelObjectP> Pulsars::searchAround(const Vec3d& av, double limitFov, const StelCore* core) const
 {
 	QList<StelObjectP> result;
 
@@ -268,16 +269,16 @@ QList<StelObjectP> Pulsars::searchAround(const Vec3d& av, double limitFov, const
 
 	Vec3d v(av);
 	v.normalize();
-	double cosLimFov = cos(limitFov * M_PI/180.);
+	const double cosLimFov = cos(limitFov * M_PI/180.);
 	Vec3d equPos;
 
 	for (const auto& pulsar : psr)
 	{
 		if (pulsar->initialized)
 		{
-			equPos = pulsar->XYZ;
+			equPos = pulsar->getJ2000EquatorialPos(core);
 			equPos.normalize();
-			if (equPos[0]*v[0] + equPos[1]*v[1] + equPos[2]*v[2]>=cosLimFov)
+			if (equPos.dot(v) >= cosLimFov)
 			{
 				result.append(qSharedPointerCast<StelObject>(pulsar));
 			}
@@ -315,47 +316,39 @@ StelObjectP Pulsars::searchByNameI18n(const QString& nameI18n) const
 	return Q_NULLPTR;
 }
 
-QStringList Pulsars::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
+QStringList Pulsars::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (flagShowPulsars && maxNbItem>0)
 	{
 		QStringList names;
-
-		if (inEnglish)
+		for (const auto& pulsar : psr)
 		{
-			for (const auto& pulsar : psr)
-			{
-				if (!pulsar->getEnglishName().isEmpty())
-					names << pulsar->getEnglishName();
-				names << pulsar->getDesignation();
-			}
-		}
-		else
-		{
-			for (const auto& pulsar : psr)
-			{
-				if (!pulsar->getNameI18n().isEmpty())
-					names << pulsar->getNameI18n();
-				names << pulsar->getDesignation();
-			}
+			if (!pulsar->getNameI18n().isEmpty())
+				names << pulsar->getNameI18n();
+			if (!pulsar->getEnglishName().isEmpty())
+				names << pulsar->getEnglishName();
+			names << pulsar->getDesignation();
 		}
 
-		for (const auto& name : names)
+		QString fullMatch = "";
+		for (const auto& name : qAsConst(names))
 		{
 			if (!matchObjectName(name, objPrefix, useStartOfWords))
-			{
 				continue;
-			}
 
-			result.append(name);
+			if (name==objPrefix)
+				fullMatch = name;
+			else
+				result.append(name);
+
 			if (result.size() >= maxNbItem)
-			{
 				break;
-			}
 		}
 
 		result.sort();
+		if (!fullMatch.isEmpty())
+			result.prepend(fullMatch);
 	}
 	return result;
 }
@@ -620,8 +613,8 @@ void Pulsars::readSettingsFromConfig(void)
 	setGlitchFlag(conf->value("use_separate_colors", false).toBool());
 	setFilteredMode(conf->value("filter_enabled", false).toBool());
 	setFilterValue(conf->value("filter_value", 150.f).toFloat());
-	setMarkerColor(StelUtils::strToVec3f(conf->value("marker_color", "0.4,0.5,1.0").toString()));
-	setGlitchColor(StelUtils::strToVec3f(conf->value("glitch_color", "0.2,0.3,1.0").toString()));
+	setMarkerColor(Vec3f(conf->value("marker_color", "0.4,0.5,1.0").toString()));
+	setGlitchColor(Vec3f(conf->value("glitch_color", "0.2,0.3,1.0").toString()));
 	enableAtStartup = conf->value("enable_at_startup", false).toBool();
 	flagShowPulsarsButton = conf->value("flag_show_pulsars_button", true).toBool();
 
@@ -641,8 +634,8 @@ void Pulsars::saveSettingsToConfig(void)
 	conf->setValue("filter_value", QString::number(getFilterValue(), 'f', 2));
 	conf->setValue("enable_at_startup", enableAtStartup);
 	conf->setValue("flag_show_pulsars_button", flagShowPulsarsButton);
-	conf->setValue("marker_color", StelUtils::vec3fToStr(getMarkerColor()));
-	conf->setValue("glitch_color", StelUtils::vec3fToStr(getGlitchColor()));
+	conf->setValue("marker_color", getMarkerColor().toStr());
+	conf->setValue("glitch_color", getGlitchColor().toStr());
 
 	conf->endGroup();
 }
@@ -650,7 +643,7 @@ void Pulsars::saveSettingsToConfig(void)
 int Pulsars::getSecondsToUpdate(void)
 {
 	QDateTime nextUpdate = lastUpdate.addSecs(updateFrequencyDays * 3600 * 24);
-	return QDateTime::currentDateTime().secsTo(nextUpdate);
+	return static_cast<int>(QDateTime::currentDateTime().secsTo(nextUpdate));
 }
 
 void Pulsars::checkForUpdate(void)
@@ -700,9 +693,7 @@ void Pulsars::startDownload(QString urlString)
 	QNetworkRequest request;
 	request.setUrl(QUrl(updateUrl));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
-	#if QT_VERSION >= 0x050600
 	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
-	#endif
 	downloadReply = networkManager->get(request);
 	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
 
@@ -723,11 +714,11 @@ void Pulsars::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
 		//Round to the greatest possible derived unit
 		while (bytesTotal > 1024)
 		{
-			bytesReceived = std::floor(bytesReceived / 1024.);
-			bytesTotal    = std::floor(bytesTotal / 1024.);
+			bytesReceived = static_cast<qint64>(std::floor(bytesReceived / 1024.));
+			bytesTotal    = static_cast<qint64>(std::floor(bytesTotal / 1024.));
 		}
-		currentValue = bytesReceived;
-		endValue = bytesTotal;
+		currentValue = static_cast<int>(bytesReceived);
+		endValue = static_cast<int>(bytesTotal);
 	}
 
 	progressBar->setValue(currentValue);
@@ -740,23 +731,6 @@ void Pulsars::downloadComplete(QNetworkReply *reply)
 		return;
 
 	disconnect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
-
-	#if QT_VERSION < 0x050600
-	int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
-	if (statusCode == 301 || statusCode == 302 || statusCode == 307)
-	{
-		QUrl rawUrl = reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
-		QUrl redirectUrl(rawUrl.toString(QUrl::RemoveQuery));
-		qDebug() << "[Pulsars] The query has been redirected to" << redirectUrl.toString();
-		updateUrl = redirectUrl.toString();
-		conf->setValue("Pulsars/url", updateUrl);
-		reply->deleteLater();
-		downloadReply = Q_NULLPTR;
-		startDownload(redirectUrl.toString());
-		return;
-	}
-	#endif
-
 	deleteDownloadProgressBar();
 
 	if (reply->error() || reply->bytesAvailable()==0)
@@ -832,7 +806,7 @@ void Pulsars::setFlagShowPulsarsButton(bool b)
 		if (b==true) {
 			if (toolbarButton==Q_NULLPTR) {
 				// Create the pulsars button
-				toolbarButton = new StelButton(Q_NULLPTR, *OnIcon, *OffIcon, *GlowIcon, "actionShow_Pulsars");
+				toolbarButton = new StelButton(Q_NULLPTR, *OnIcon, *OffIcon, *GlowIcon, "actionShow_Pulsars", false, "actionShow_Pulsars_dialog");
 			}
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		} else {
@@ -932,5 +906,6 @@ void Pulsars::setFlagShowPulsars(bool b)
 	{
 		flagShowPulsars=b;
 		emit flagPulsarsVisibilityChanged(b);
+		emit StelApp::getInstance().getCore()->updateSearchLists();
 	}
 }

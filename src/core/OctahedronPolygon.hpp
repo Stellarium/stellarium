@@ -28,7 +28,7 @@
 #include <QVarLengthArray>
 
 //! @struct EdgeVertex
-//! Describe a vertex composing polygon contours, and whether it belong to an edge or not.
+//! Describe a vertex composing polygon contours, and whether it belongs to an edge or not.
 struct EdgeVertex
 {
 	EdgeVertex() : edgeFlag(false) {;}
@@ -36,7 +36,7 @@ struct EdgeVertex
 	EdgeVertex(const Vec3d& v, bool b) : vertex(v), edgeFlag(b) {;}
 	//! The normalized vertex direction.
 	Vec3d vertex;
-	//! Set to true if the vertex is part of at least one edge segment, i.e. it lays on the boundary of the polygon.
+	//! Set to true if the vertex is part of at least one edge segment, i.e. it lies on the boundary of the polygon.
 	bool edgeFlag;
 };
 
@@ -57,8 +57,8 @@ public:
 };
 
 //! @class OctahedronPolygon
-//! Manage a non-convex polygon which can extends on more than 180 deg.
-//! The contours defining the polygon are splitted and projected on the 8 sides of an Octahedron to enable 2D geometry
+//! Manage a non-convex polygon which can extend on more than 180 deg.
+//! The contours defining the polygon are split and projected on the 8 sides of an Octahedron to enable 2D geometry
 //! algorithms to be used.
 class OctahedronPolygon
 {

@@ -100,7 +100,7 @@ void SpoutSender::captureAndSendFrame(GLuint fbo)
 			if(texId)
 			{
 				//use the texture directly
-				spoutLib->SendTexture(texId, GL_TEXTURE_2D, width, height, true, fbo);
+				spoutLib->SendTexture(static_cast<GLuint>(texId), GL_TEXTURE_2D, width, height, true, fbo);
 				return;
 			}
 		}
@@ -113,7 +113,7 @@ void SpoutSender::captureAndSendFrame(GLuint fbo)
 	{
 		//recreate the texture by using glCopyTexImage2D
 		//would GL_BGRA be better here?
-		glCopyTexImage2D(GL_TEXTURE_2D,0,GL_RGBA8,0,0,width,height,0);
+		glCopyTexImage2D(GL_TEXTURE_2D,0,GL_RGBA8,0,0,static_cast<GLsizei>(width),static_cast<GLsizei>(height),0);
 
 		//manual calling of UpdateSender seems buggy, it creates a new sender name
 		//but we don't need to use it
@@ -125,7 +125,7 @@ void SpoutSender::captureAndSendFrame(GLuint fbo)
 	else
 	{
 		//use glCopyTexSubImage2D, should give faster perf (in theory)
-		glCopyTexSubImage2D(GL_TEXTURE_2D,0,0,0,0,0,width,height);
+		glCopyTexSubImage2D(GL_TEXTURE_2D,0,0,0,0,0,static_cast<GLsizei>(width),static_cast<GLsizei>(height));
 	}
 	//unbind tex
 	glBindTexture(GL_TEXTURE_2D, 0);

@@ -81,10 +81,7 @@ public:
 	//! - distance
 	virtual QVariantMap getInfoMap(const StelCore *core) const;
 	virtual Vec3f getInfoColor(void) const;
-	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const
-	{
-		return XYZ;
-	}
+	virtual Vec3d getJ2000EquatorialPos(const StelCore *core) const;
 	virtual float getVMagnitude(const StelCore* core) const;
 	virtual double getAngularSize(const StelCore* core) const;
 	virtual QString getNameI18n(void) const;
@@ -93,7 +90,7 @@ public:
 	void update(double deltaTime);
 
 protected:
-	virtual QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const double alt_app, const int decimals=1) const;
+	virtual QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals=1) const;
 
 private:
 	bool initialized;
@@ -107,7 +104,7 @@ private:
 	// Supernova
 	QString designation;               //! The ID of the supernova
 	QString sntype;			   //! Type of the supernova
-	float maxMagnitude;		   //! Maximal visual magnitude
+	double maxMagnitude;		   //! Maximal visual magnitude
 	double peakJD;			   //! Julian Day of max. vis. mag.
 	double snra;			   //! R.A. for the supernova
 	double snde;			   //! Dec. for the supernova

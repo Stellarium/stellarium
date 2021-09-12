@@ -70,7 +70,7 @@ qint64 SyncMessage::createFullMessage(QByteArray &target) const
 	else
 	{
 		//write header in front
-		SyncHeader header = { (quint8)getMessageType(), static_cast<tPayloadSize>(writtenSize) };
+		SyncHeader header = { static_cast<quint8>(getMessageType()), static_cast<tPayloadSize>(writtenSize) };
 		tmpStream.device()->seek(0);
 		tmpStream<<header;
 
@@ -290,12 +290,12 @@ void SyncRemotePeer::writeMessage(const SyncMessage &msg)
 	}
 }
 
-void SyncRemotePeer::writeData(const QByteArray &data, int size)
+void SyncRemotePeer::writeData(const QByteArray &data, qint64 size)
 {
 	//Only write if connected
 	if(sock->state() == QAbstractSocket::ConnectedState)
 	{
-		stream.writeRawData(data.constData(),size>0?size:data.size());
+		stream.writeRawData(data.constData(),static_cast<int>(size>0ll?size:data.size()));
 		lastSendTime = QDateTime::currentMSecsSinceEpoch();
 	}
 	else

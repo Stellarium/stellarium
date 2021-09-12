@@ -22,6 +22,7 @@
 #include <QFileDialog>
 
 #include "StelApp.hpp"
+#include "StelCore.hpp"
 #include "ui_ObservabilityDialog.h"
 #include "ObservabilityDialog.hpp"
 #include "Observability.hpp"
@@ -111,7 +112,7 @@ void ObservabilityDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()),
-	        plugin, SLOT(resetConfiguration()));
+		this, SLOT(restoreDefaults()));
 	// TODO: The plug-in should emit a signal when settings are changed.
 	// This works, because slots are called in the order they were connected.
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()),
@@ -125,6 +126,17 @@ void ObservabilityDialog::createDialogContent()
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 
 	updateControls();
+}
+
+void ObservabilityDialog::restoreDefaults()
+{
+	if (askConfirmation())
+	{
+		qDebug() << "[Observability] restore defaults...";
+		GETSTELMODULE(Observability)->resetConfiguration();
+	}
+	else
+		qDebug() << "[Observability] restore defaults is canceled...";
 }
 
 void ObservabilityDialog::setAboutHtml(void)
@@ -167,9 +179,9 @@ void ObservabilityDialog::updateControls()
 //	ui->SuperMoon->setChecked(GETSTELMODULE(Observability)->getShowFlags(7));
 
 	Vec3f fontColor = plugin->getFontColor();
-	int red = (int)(100.*fontColor[0]);
-	int green = (int)(100.*fontColor[1]);
-	int blue = (int)(100.*fontColor[2]);
+	int red = static_cast<int>(100.*fontColor[0]);
+	int green = static_cast<int>(100.*fontColor[1]);
+	int blue = static_cast<int>(100.*fontColor[2]);
 	ui->redSlider->setValue(red);
 	ui->greenSlider->setValue(green);
 	ui->blueSlider->setValue(blue);

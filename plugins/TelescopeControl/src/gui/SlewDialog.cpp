@@ -71,6 +71,7 @@ void SlewDialog::createDialogContent()
 	connect(ui->radioButtonDecimal, SIGNAL(toggled(bool)), this, SLOT(setFormatDecimal(bool)));
 
 	connect(ui->pushButtonSlew, SIGNAL(clicked()), this, SLOT(slew()));
+	connect(ui->pushButtonSync, SIGNAL(clicked()), this, SLOT(sync()));
 	connect(ui->pushButtonConfigure, SIGNAL(clicked()), this, SLOT(showConfiguration()));
 
 	connect(telescopeManager, SIGNAL(clientConnected(int, QString)), this, SLOT(addTelescope(int, QString)));
@@ -219,8 +220,24 @@ void SlewDialog::slew()
 	if (!telescope)
 		return;
 
-	StelObjectP selectObject = nullptr;
+	StelObjectP selectObject = Q_NULLPTR;
 	telescope->telescopeGoto(targetPosition, selectObject);
+}
+
+void SlewDialog::sync()
+{
+	double radiansRA  = ui->spinBoxRA->valueRadians();
+	double radiansDec = ui->spinBoxDec->valueRadians();
+
+	Vec3d targetPosition;
+	StelUtils::spheToRect(radiansRA, radiansDec, targetPosition);
+
+	auto telescope = currentTelescope();
+	if (!telescope)
+		return;
+
+	StelObjectP selectObject = Q_NULLPTR;
+	telescope->telescopeSync(targetPosition, selectObject);
 }
 
 void SlewDialog::getCurrentObjectInfo()
@@ -240,7 +257,7 @@ void SlewDialog::getCenterInfo()
 	StelCore *core = StelApp::getInstance().getCore();
 	const StelProjectorP projector = core->getProjection(StelCore::FrameEquinoxEqu);
 	Vec3d centerPosition;
-	Vec2f center = projector->getViewportCenter();
+	Vector2<qreal> center = projector->getViewportCenter();
 	projector->unProject(center[0], center[1], centerPosition);
 	double dec_j2000 = 0;
 	double ra_j2000 = 0;
@@ -325,7 +342,7 @@ void SlewDialog::onCurrentTelescopeChanged()
 {
 	// remove previous controlWidget
 	QLayoutItem* child;
-	while ((child = ui->controlWidgetLayout->takeAt(0)) != 0)
+	while ((child = ui->controlWidgetLayout->takeAt(0)) != Q_NULLPTR)
 	{
 		delete child->widget();
 		delete child;
@@ -345,7 +362,7 @@ void SlewDialog::onCurrentTelescopeChanged()
 void SlewDialog::savePointsToFile()
 {
 	//Open/create the JSON file
-	QString pointsJsonPath = StelFileMgr::findFile("modules/TelescopeControl", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/points.json";
+	QString pointsJsonPath = StelFileMgr::findFile("modules/TelescopeControl", static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable)) + "/points.json";
 	if (pointsJsonPath.isEmpty())
 	{
 		qWarning() << "SlewDialog: Error saving points";
@@ -374,7 +391,7 @@ void SlewDialog::savePointsToFile()
 		storedPointsDescriptions.insert(QString::number(sp.number),point);
 	}
 	//Add the version:
-	storedPointsDescriptions.insert("version", QString(TELESCOPE_CONTROL_PLUGIN_VERSION));
+	storedPointsDescriptions.insert("version", QString(TELESCOPE_CONTROL_CONFIG_VERSION));
 	//Convert the tree to JSON
 	StelJsonParser::write(storedPointsDescriptions, &pointsJsonFile);
 	pointsJsonFile.flush();//Is this necessary?
@@ -384,7 +401,7 @@ void SlewDialog::savePointsToFile()
 void SlewDialog::loadPointsFromFile()
 {
 	QVariantMap result;
-	QString pointsJsonPath = StelFileMgr::findFile("modules/TelescopeControl", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/points.json";
+	QString pointsJsonPath = StelFileMgr::findFile("modules/TelescopeControl", static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable)) + "/points.json";
 
 	if (pointsJsonPath.isEmpty())
 	{
@@ -393,7 +410,7 @@ void SlewDialog::loadPointsFromFile()
 	}
 	if(!QFileInfo(pointsJsonPath).exists())
 	{
-		qWarning() << "SlewDialog::loadPointsFromFile(): No pointss loaded. File is missing:"
+		qWarning() << "SlewDialog::loadPointsFromFile(): No points loaded. File is missing:"
 				   << QDir::toNativeSeparators(pointsJsonPath);
 		storedPointsDescriptions = result;
 		return;
@@ -424,7 +441,7 @@ void SlewDialog::loadPointsFromFile()
 	}
 
 	QString version = map.value("version", "0.0.0").toString();
-	if(version < QString(TELESCOPE_CONTROL_PLUGIN_VERSION))
+	if(version < QString(TELESCOPE_CONTROL_CONFIG_VERSION))
 	{
 		QString newName = pointsJsonPath + ".backup." + QDateTime::currentDateTime().toString("yyyy-MM-dd-hh-mm-ss");
 		if(pointsJsonFile.rename(newName))
@@ -442,9 +459,8 @@ void SlewDialog::loadPointsFromFile()
 			return;
 		}
 	}
-	map.remove("version");//Otherwise it will try to read it as a point
 
-	//Read pointss, if any
+	//Read points, if any
 	QMapIterator<QString, QVariant> node(map);
 
 	if(node.hasNext())
@@ -464,6 +480,7 @@ void SlewDialog::loadPointsFromFile()
 			QVariant var;
 			var.setValue(sp);
 			ui->comboBoxStoredPoints->addItem(sp.name,var);
-		} while (node.hasNext());
+		}
+		while (node.hasNext());
 	}
 }

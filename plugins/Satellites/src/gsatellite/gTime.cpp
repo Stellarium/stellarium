@@ -54,9 +54,9 @@ void gTime::setTime(int year, double day)
 	int A = (year / 100);
 	int B = 2 - A + (A / 4);
 
-	double JDforYear = (int)(365.25 * year) +
-	                   (int)(30.6001 * 14)  +  //MM = 1 then MM=12 + 1 for the expresion (30.6001 * (mm +1))
-	                   1720994.5 + B;
+	double JDforYear = static_cast<int>(365.25 * year) +
+				      static_cast<int>(30.6001 * 14)  +  //MM = 1 then MM=12 + 1 for the expresion (30.6001 * (mm +1))
+				      1720994.5 + B;
 
 	m_time = JDforYear + day;
 }
@@ -95,8 +95,8 @@ gTime::gTime(int nYear, int nMonth, int nDay, int nHour, int nMin, double nSec)
 {
 	// Calculate N, the day of the year (1..366)
 	int N;
-	int F1 = (int)((275.0 * nMonth) / 9.0);
-	int F2 = (int)((nMonth + 9.0) / 12.0);
+	int F1 = static_cast<int>((275.0 * nMonth) / 9.0);
+	int F2 = static_cast<int>((nMonth + 9.0) / 12.0);
 
 	if(isLeapYear(nYear))
 	{
@@ -206,7 +206,7 @@ void gTime::toCalendarDate(int *pYear, int *pMonth , double *pDom) const
 	int Z, C, D, E, month, year;
 
 	jdAdj = m_time + 0.5;
-	Z     = (int)jdAdj;  // integer part
+	Z     = static_cast<int>(jdAdj);  // integer part
 	F     = jdAdj - Z;   // fractional part
 
 	if(Z < 2299161)
@@ -215,16 +215,16 @@ void gTime::toCalendarDate(int *pYear, int *pMonth , double *pDom) const
 	}
 	else
 	{
-		alpha = (int)((Z - 1867216.25) / 36524.25);
-		A     = Z + 1 + alpha - (int)(alpha / 4.0);
+		alpha = static_cast<int>((Z - 1867216.25) / 36524.25);
+		A     = Z + 1 + alpha - static_cast<int>(alpha / 4.0);
 	}
 
 	B     = A + 1524.0;
-	C     = (int)((B - 122.1) / 365.25);
-	D     = (int)(C * 365.25);
-	E     = (int)((B - D) / 30.6001);
+	C     = static_cast<int>((B - 122.1) / 365.25);
+	D     = static_cast<int>(C * 365.25);
+	E     = static_cast<int>((B - D) / 30.6001);
 
-	DOM   = B - D - (int)(E * 30.6001) + F;
+	DOM   = B - D - static_cast<int>(E * 30.6001) + F;
 	month = (E < 13.5) ? (E - 1) : (E - 13);
 	year  = (month > 2.5) ? (C - 4716) : (C - 4715);
 

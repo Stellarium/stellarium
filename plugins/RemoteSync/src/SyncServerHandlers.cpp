@@ -100,6 +100,7 @@ bool ServerAuthHandler::handleMessage(QDataStream &stream, SyncProtocol::tPayloa
 
 bool ServerAliveHandler::handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer)
 {
+	Q_UNUSED(peer)
 	Alive p;
 	return p.deserialize(stream,dataSize);
 }

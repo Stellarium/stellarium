@@ -24,7 +24,10 @@
 #include "StelGui.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
+#include "StelObjectMgr.hpp"
+#include "StelLocaleMgr.hpp"
 #include "StelUtils.hpp"
+#include "StelMainView.hpp"
 #include "ui_MSSearchDialog.h"
 
 MSSearchDialog::MSSearchDialog(MeteorShowersMgr* mgr)
@@ -103,11 +106,11 @@ void MSSearchDialog::checkDates()
 
 	if (jdFrom > jdTo)
 	{
-		QMessageBox::warning(0, "Stellarium", q_("Start date greater than end date!"));
+		QMessageBox::warning(&StelMainView::getInstance(), "Stellarium", q_("Start date greater than end date!"));
 	}
 	else if (jdTo-jdFrom > 365)
 	{
-		QMessageBox::warning(0, "Stellarium", q_("Time interval must be less than one year!"));
+		QMessageBox::warning(&StelMainView::getInstance(), "Stellarium", q_("Time interval must be less than one year!"));
 	}
 	else
 	{
@@ -125,9 +128,10 @@ void MSSearchDialog::searchEvents()
 	for (const auto& r : searchResult)
 	{
 		MSTreeWidgetItem* treeItem = new MSTreeWidgetItem(m_ui->listEvents);
+		treeItem->setText(ColumnCode, r.code);
 		treeItem->setText(ColumnName, r.name);
 		treeItem->setText(ColumnDataType, r.type);
-		treeItem->setText(ColumnPeak, r.peak.toString("d MMMM yyyy"));
+		treeItem->setText(ColumnPeak, QString("%1 %2").arg(r.peak.day()).arg(StelLocaleMgr::longGenitiveMonthName(r.peak.month())));
 		if (r.zhrMin != r.zhrMax)
 			treeItem->setText(ColumnZHR, QString("%1-%2").arg(r.zhrMin).arg(r.zhrMax));
 		else
@@ -135,6 +139,7 @@ void MSSearchDialog::searchEvents()
 
 		// let's store the stuff in the UserRole to allow easier sorting
 		// check MSTreeWidgetItem::operator <()
+		treeItem->setData(ColumnCode, Qt::UserRole, r.code);
 		treeItem->setData(ColumnName, Qt::UserRole, r.name);
 		treeItem->setData(ColumnDataType, Qt::UserRole, r.type);
 		treeItem->setData(ColumnPeak, Qt::UserRole, r.peak);
@@ -155,30 +160,30 @@ void MSSearchDialog::selectEvent(const QModelIndex &modelIndex)
 {
 	// plugin is disabled ? enable it automatically
 	if (!m_mgr->getEnablePlugin())
-	{
 		m_mgr->setEnablePlugin(true);
-	}
 
 	// Change date
-	QString peak = modelIndex.sibling(modelIndex.row(), ColumnPeak).data().toString();
-	StelApp::getInstance().getCore()->setJD(QDate::fromString(peak, "d MMMM yyyy").toJulianDay());
-	m_mgr->repaint();
+	StelCore *core = StelApp::getInstance().getCore();
+	QDate peak = modelIndex.sibling(modelIndex.row(), ColumnPeak).data(Qt::UserRole).toDate();
+	core->setJD(peak.toJulianDay());
 
 	// Find the object
 	QString nameI18n = modelIndex.sibling(modelIndex.row(), ColumnName).data().toString();
 	StelObjectP obj = m_mgr->getMeteorShowers()->searchByNameI18n(nameI18n);
 	if (!obj)
-	{
 		obj = m_mgr->getMeteorShowers()->searchByName(nameI18n);
+
+	if (obj) // Set time near transit...
+	{
+		Vec3f rts = obj->getRTSTime(core);
+		double JD = core->getJD();
+		JD = static_cast<int>(JD) + 0.5 + rts[1]/24.f - core->getUTCOffset(JD)/24.;
+		core->setJD(JD);
 	}
 
-	//Move to object
-	if (obj)
-	{
-		StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
-		mvmgr->moveToObject(obj, mvmgr->getAutoMoveDuration());
-		mvmgr->setFlagTracking(true);
-	}
+	// Move to object
+	if (GETSTELMODULE(StelObjectMgr)->findAndSelectI18n(nameI18n))
+		GETSTELMODULE(StelMovementMgr)->setFlagTracking(true);
 }
 
 void MSSearchDialog::refreshRangeDates()
@@ -191,6 +196,7 @@ void MSSearchDialog::refreshRangeDates()
 void MSSearchDialog::setHeaderNames()
 {
 	QStringList headerStrings;
+	headerStrings << q_("Code");
 	headerStrings << q_("Name");
 	headerStrings << q_("ZHR");
 	headerStrings << q_("Data Type");

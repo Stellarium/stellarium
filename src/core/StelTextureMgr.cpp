@@ -44,22 +44,25 @@ StelTextureMgr::StelTextureMgr(QObject *parent)
 	//otherwise, for large textures loaded in parallel (some scenery3d scenes), the risk of an out-of-memory error is greater on 32bit systems
 	loaderThreadPool->setMaxThreadCount(1);
 #endif
+
+	QOpenGLContext* ctx = QOpenGLContext::currentContext();
+	ctx->functions()->glGetIntegerv(GL_MAX_TEXTURE_SIZE, &maxTexSize);
+	if (maxTexSize<8192)
+		qDebug() << "Max texture size:" << maxTexSize;
 }
 
 StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const StelTexture::StelTextureParams& params)
 {
-	if (afilename.isEmpty())
-		return StelTextureSP();
+	QFileInfo file(afilename);
+	QString canPath;
 
-	QFileInfo info(afilename);
-	QString canPath = info.canonicalFilePath();
-
-	if(canPath.isEmpty()) //file does not exist
+	if(!file.exists())
 	{
-		qWarning()<<"Texture"<<afilename<<"does not exist";
-		return StelTextureSP();
+		canPath="<fuchsia>"; // code name for "utterly broken texture"
+		qWarning()<<"Texture"<<afilename<<"does not exist. Replacing by Fuchsia color.";
 	}
-
+	else
+		canPath = file.canonicalFilePath();
 	//lock it for thread safety
 	QMutexLocker locker(&mutex);
 
@@ -72,7 +75,27 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 
 	QImage image(tex->fullPath);
 	if (image.isNull())
-		return StelTextureSP();
+	{
+		static const char * const fuchsia_xpm[] = {
+		"4 4 1 1",      // <width/columns> <height/rows> <colors> <chars per pixel>
+		"a c #ff00ff", 	// <Colors: just 1 color, Fuchsia Magenta
+		"aaaa",         // <4 rows of 4 Pixels>
+		"aaaa",
+		"aaaa",
+		"aaaa"
+		};
+
+		image=QImage(fuchsia_xpm);
+		if (image.isNull())
+			qWarning() << "Loading Fuchsia replacement failed.";
+	}
+
+	// Try to use a texture image even if of excessive size.
+	if ((image.width()>maxTexSize) || (image.height()>maxTexSize))
+	{
+		qWarning() << "Oversize texture image" << tex->fullPath << "needs rescaling to" << qMin(image.width(), maxTexSize) << "x" << qMin(image.height(), maxTexSize) << "...";
+		image=image.scaled(qMin(image.width(), maxTexSize), qMin(image.height(), maxTexSize), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+	}
 
 	tex->loadParams = params;
 	if (tex->glLoad(image))
@@ -82,8 +105,34 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 	}
 	else
 	{
-		qWarning()<<tex->getErrorMessage();
-		return StelTextureSP();
+		// glLoad failed. Maybe out of memory? Try a tiny replacement file:
+		static const char * const chess_xpm[] = {
+		"8 8 2 1",      // <width/columns> <height/rows> <colors> <chars per pixel>
+		"* c #ffffff", 	// <2 Colors>
+		". c #000000",
+		"*.*.*.*.",     // <8 rows of 8 Pixels>
+		".*.*.*.*",
+		"*.*.*.*.",
+		".*.*.*.*",
+		"*.*.*.*.",
+		".*.*.*.*",
+		"*.*.*.*.",
+		".*.*.*.*"
+		};
+		image=QImage(chess_xpm);
+		qWarning() << "Unclear error: " << tex->getErrorMessage();
+
+		if (tex->glLoad(image))
+		{
+			qWarning() << "Now using checkerboard texture instead of " << tex->fullPath;
+			textureCache.insert(canPath,tex);
+			return tex;
+		}
+		else
+		{
+			qWarning() << "Cannot load any texture for" << tex->fullPath << ":" << tex->getErrorMessage();
+			return StelTextureSP();
+		}
 	}
 }
 

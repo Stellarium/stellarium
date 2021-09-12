@@ -39,7 +39,7 @@ public:
 	//! To see the default services that are registered here, see \ref rcApiReference.
 	RequestHandler(const StaticFileControllerSettings& settings, QObject* parent = Q_NULLPTR);
 	//! The internal APIController, and all registered services are deleted
-	virtual ~RequestHandler();
+	virtual ~RequestHandler() Q_DECL_OVERRIDE;
 
 	//! Called in the main thread each frame, only passed on to APIController::update
 	void update(double deltaTime);
@@ -56,7 +56,7 @@ public:
 	//!  - Otherwise, it is passed to a StaticFileController that has been set up for the \c data/webroot folder.
 	//!
 	//! @note This method runs in an HTTP worker thread, not in the Stellarium main thread, so take caution.
-	virtual void service(HttpRequest& request, HttpResponse& response);
+	virtual void service(HttpRequest& request, HttpResponse& response) Q_DECL_OVERRIDE;
 
 public slots:
 	//! Sets wether a password set with setPassword() is required by all requests.
@@ -64,10 +64,21 @@ public slots:
 	//! @warning Make sure to only call this only when the server is offline because they are not synchronized
 	void setUsePassword(bool v);
 	//! Returns if a password is required to access the remote control
-	//! @warning Make sure to only call this only when the server is offline because they are not synchronized
 	bool getUsePassword() { return usePassword; }
 	//! @warning Make sure to only call this only when the server is offline because they are not synchronized
 	void setPassword(const QString& pw);
+
+	//! Sets wether CORS is enabled.
+	//! @warning Make sure to only call this only when the server is offline because they are not synchronized
+	void setEnableCors(bool v);
+	//! Returns if CORS is enabled
+	bool getEnableCors() const { return enableCors; }
+	//! Set the host for which CORS is enabled. Specify "*" to let any website take control.
+	//! @warning Make sure to only call this only when the server is offline because they are not synchronized
+	void setCorsOrigin(const QString& origin);
+
+
+
 
 private slots:
 	void refreshTemplates();
@@ -80,12 +91,16 @@ private:
 
 	bool usePassword;
 	QString password;
+	bool enableCors;
+	QString corsOrigin;
 	QByteArray passwordReply;
 	APIController* apiController;
 	StaticFileController* staticFiles;
 	QMutex templateMutex;
 
 	static const QByteArray AUTH_REALM;
+
+	void handleCorsPreflightRequest(HttpRequest &request, HttpResponse &response);
 };
 
 #endif

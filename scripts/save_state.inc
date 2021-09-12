@@ -1,7 +1,11 @@
 //
 // Name:        Save and restore display state
+// Version:     0.19.1
 // License:     Public Domain
-// Author:      Matthew Gates
+// Authors:     Matthew Gates (matthewg42) (Original author)
+//              Alexander Wolf (alex-w)
+//              Georg Zotti (gzotti)
+//              Brian W. Mulligan (astrobit)
 // Description: Provide functions for saving and restoring state (view settings etc.)
 //              for use in other scripts via the include feature.  A state is 
 //              associated with some string identifier.  This is arbitrary.  You can 
@@ -9,6 +13,22 @@
 //              restrictions there are...
 //              note - you can pass options to the restoreState function to get it to
 //              ignore some parts of the saved state.  See below for details.
+// Change Log:
+// 2009-05-09   Matthew Gates (matthewg42)
+//     * First version
+// 2010-04-14   Matthew Gates (matthewg42)
+//     * save language
+// 2012-02-19   Matthew Gates (matthewg42)
+//     * add galactic line states
+// 2012-02-20   Matthew Gates (matthewg42)
+//     * remove reference to StelSkyImageMgr.getFlagShow and StelSkyImageMgr.setFlagShow
+// 2012-07-27   Alexander Wolf (alex-w)
+//     * add ecliptic j2000 grid state
+// 2014-09-10   Georg Zotti (gzotti)
+//    * Update Galactic Plane to Galactic Equator
+// 2019-08-14   Brian W. Mulligan (astrobit)
+//    * Fix to work under stellarium 0.19
+//    * Add change log, version, and author list to header
 
 // declare a global variable to store saved state
 var savedStates = new Array();
@@ -27,8 +47,8 @@ function saveState(stateName)
 	savedStates[stateName]["SolarSystemFlagLightTravelTime"] = SolarSystem.getFlagLightTravelTime();
 	savedStates[stateName]["SolarSystemFlagMoonScale"] = SolarSystem.getFlagMoonScale();
 	savedStates[stateName]["SolarSystemMoonScale"] = SolarSystem.getMoonScale();
-	savedStates[stateName]["MeteorMgrZHR"] = MeteorMgr.getZHR();
-	savedStates[stateName]["MeteorMgrFlagShow"] = MeteorMgr.getFlagShow();
+	savedStates[stateName]["MeteorMgrZHR"] = SporadicMeteorMgr.getZHR();
+	savedStates[stateName]["MeteorMgrFlagShow"] = SporadicMeteorMgr.getFlagShow();
 	savedStates[stateName]["GridLinesMgrFlagAzimuthalGrid"] = GridLinesMgr.getFlagAzimuthalGrid();
 	savedStates[stateName]["GridLinesMgrFlagEquatorGrid"] = GridLinesMgr.getFlagEquatorGrid();
 	savedStates[stateName]["GridLinesMgrFlagEquatorLine"] = GridLinesMgr.getFlagEquatorLine();
@@ -50,7 +70,7 @@ function saveState(stateName)
 	savedStates[stateName]["StarMgrFlagSciNames"] = StarMgr.getFlagSciNames(); 
 	savedStates[stateName]["NebulaMgrFlagHints"] = NebulaMgr.getFlagHints();
 	savedStates[stateName]["NebulaMgrFlagShow"] = NebulaMgr.getFlagShow();
-	savedStates[stateName]["NebulaMgrFlagDisplayNoTexture"] = NebulaMgr.getFlagDisplayNoTexture();
+//	savedStates[stateName]["NebulaMgrFlagDisplayNoTexture"] = NebulaMgr.getFlagDisplayNoTexture();
 	savedStates[stateName]["NebulaMgrLabelsAmount"] = NebulaMgr.getLabelsAmount();
 	savedStates[stateName]["NebulaMgrHintsAmount"] = NebulaMgr.getHintsAmount();
 	savedStates[stateName]["LandscapeMgrFlagCardinalsPoints"] = LandscapeMgr.getFlagCardinalsPoints();
@@ -58,13 +78,13 @@ function saveState(stateName)
 	savedStates[stateName]["LandscapeMgrFlagAtmosphere"] = LandscapeMgr.getFlagAtmosphere();
 	savedStates[stateName]["LandscapeMgrFlagFog"] = LandscapeMgr.getFlagFog();
 	savedStates[stateName]["LandscapeMgrCurrentLandscapeID"] = LandscapeMgr.getCurrentLandscapeID();
-	savedStates[stateName]["LandscapeMgrAtmosphereBortleLightPollution"] = LandscapeMgr.getAtmosphereBortleLightPollution();
+	//savedStates[stateName]["LandscapeMgrAtmosphereBortleLightPollution"] = LandscapeMgr.getAtmosphereBortleLightPollution();
 	savedStates[stateName]["StelSkyDrawerRelativeStarScale"] = StelSkyDrawer.getRelativeStarScale();
 	savedStates[stateName]["StelSkyDrawerAbsoluteStarScale"] = StelSkyDrawer.getAbsoluteStarScale();
 	savedStates[stateName]["StelSkyDrawerTwinkleAmount"] = StelSkyDrawer.getTwinkleAmount();
 	savedStates[stateName]["StelSkyDrawerFlagTwinkle"] = StelSkyDrawer.getFlagTwinkle();
-	savedStates[stateName]["StelSkyDrawerFlagPointStar"] = StelSkyDrawer.getFlagPointStar();
-	savedStates[stateName]["StelSkyDrawerBortleScale"] = StelSkyDrawer.getBortleScale();
+	//savedStates[stateName]["StelSkyDrawerFlagPointStar"] = StelSkyDrawer.getFlagPointStar();
+	//savedStates[stateName]["StelSkyDrawerBortleScale"] = StelSkyDrawer.getBortleScale();
 	savedStates[stateName]["StelSkyDrawerFlagLuminanceAdaptation"] = StelSkyDrawer.getFlagLuminanceAdaptation();
 	savedStates[stateName]["MountMode"] = core.getMountMode();
 	savedStates[stateName]["NightMode"] = core.getNightMode();
@@ -129,8 +149,8 @@ function restoreState(stateName, options)
 	SolarSystem.setFlagLightTravelTime(savedStates[stateName]["SolarSystemFlagLightTravelTime"]);
 	SolarSystem.setFlagMoonScale(savedStates[stateName]["SolarSystemFlagMoonScale"]);
 	SolarSystem.setMoonScale(savedStates[stateName]["SolarSystemMoonScale"]);
-	MeteorMgr.setZHR(savedStates[stateName]["MeteorMgrZHR"]);
-	MeteorMgr.setFlagShow(savedStates[stateName]["MeteorMgrFlagShow"]);
+	SporadicMeteorMgr.setZHR(savedStates[stateName]["MeteorMgrZHR"]);
+	SporadicMeteorMgr.setFlagShow(savedStates[stateName]["MeteorMgrFlagShow"]);
 	GridLinesMgr.setFlagAzimuthalGrid(savedStates[stateName]["GridLinesMgrFlagAzimuthalGrid"]);
 	GridLinesMgr.setFlagEquatorGrid(savedStates[stateName]["GridLinesMgrFlagEquatorGrid"]);
 	GridLinesMgr.setFlagEquatorLine(savedStates[stateName]["GridLinesMgrFlagEquatorLine"]);
@@ -152,7 +172,7 @@ function restoreState(stateName, options)
 	StarMgr.setFlagSciNames(savedStates[stateName]["StarMgrFlagSciNames"]);
 	NebulaMgr.setFlagHints(savedStates[stateName]["NebulaMgrFlagHints"]);
 	NebulaMgr.setFlagShow(savedStates[stateName]["NebulaMgrFlagShow"]);
-	NebulaMgr.setFlagDisplayNoTexture(savedStates[stateName]["NebulaMgrFlagDisplayNoTexture"]);
+//	NebulaMgr.setFlagDisplayNoTexture(savedStates[stateName]["NebulaMgrFlagDisplayNoTexture"]);
 	NebulaMgr.setLabelsAmount(savedStates[stateName]["NebulaMgrLabelsAmount"]);
 	NebulaMgr.setHintsAmount(savedStates[stateName]["NebulaMgrHintsAmount"]);
 	LandscapeMgr.setFlagCardinalsPoints(savedStates[stateName]["LandscapeMgrFlagCardinalsPoints"]);
@@ -160,13 +180,13 @@ function restoreState(stateName, options)
 	LandscapeMgr.setFlagAtmosphere(savedStates[stateName]["LandscapeMgrFlagAtmosphere"]);
 	LandscapeMgr.setFlagFog(savedStates[stateName]["LandscapeMgrFlagFog"]);
 	LandscapeMgr.setCurrentLandscapeID(savedStates[stateName]["LandscapeMgrCurrentLandscapeID"]);
-	LandscapeMgr.setAtmosphereBortleLightPollution(savedStates[stateName]["LandscapeMgrAtmosphereBortleLightPollution"]);
+	//LandscapeMgr.setAtmosphereBortleLightPollution(savedStates[stateName]["LandscapeMgrAtmosphereBortleLightPollution"]);
 	StelSkyDrawer.setRelativeStarScale(savedStates[stateName]["StelSkyDrawerRelativeStarScale"]);
 	StelSkyDrawer.setAbsoluteStarScale(savedStates[stateName]["StelSkyDrawerAbsoluteStarScale"]);
 	StelSkyDrawer.setTwinkleAmount(savedStates[stateName]["StelSkyDrawerTwinkleAmount"]);
 	StelSkyDrawer.setFlagTwinkle(savedStates[stateName]["StelSkyDrawerFlagTwinkle"]);
-	StelSkyDrawer.setFlagPointStar(savedStates[stateName]["StelSkyDrawerFlagPointStar"]);
-	StelSkyDrawer.setBortleScale(savedStates[stateName]["StelSkyDrawerBortleScale"]);
+	//StelSkyDrawer.setFlagPointStar(savedStates[stateName]["StelSkyDrawerFlagPointStar"]);
+	//StelSkyDrawer.setBortleScale(savedStates[stateName]["StelSkyDrawerBortleScale"]);
 	StelSkyDrawer.setFlagLuminanceAdaptation(savedStates[stateName]["StelSkyDrawerFlagLuminanceAdaptation"]);
 	core.setMountMode(savedStates[stateName]["MountMode"]);
 	core.setNightMode(savedStates[stateName]["NightMode"]);
@@ -216,5 +236,4 @@ function restoreState(stateName, options)
 
 	core.debug("restoreState() - state restored with ID: " + stateName);
 }
-
 

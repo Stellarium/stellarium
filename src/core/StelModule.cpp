@@ -23,8 +23,9 @@
 
 StelModule::StelModule()
 {
-	//set the default object name to the class name
-	setObjectName(metaObject()->className());
+	// Attempt to set the default object name to the class name
+	// However, this does not work, and every derived class MUST call setObjectName(className) in its constructor by itself.
+	setObjectName(metaObject()->className()); // lgtm [cpp/virtual-call-in-constructor]
 }
 
 /*************************************************************************
@@ -41,4 +42,12 @@ class StelAction* StelModule::addAction(const QString& id, const QString& groupI
 {
 	StelActionMgr* mgr = StelApp::getInstance().getStelActionManager();
 	return mgr->addAction(id, groupId, text, target, slot, shortcut, altShortcut);
+}
+
+ StelAction* StelModule::addAction(const QString& id, const QString& groupId, const QString& text,
+					QObject* contextObject, std::function<void()> lambda,
+					const QString& shortcut, const QString& altShortcut)
+{
+	StelActionMgr* mgr = StelApp::getInstance().getStelActionManager();
+	return mgr->addAction(id, groupId, text, contextObject, lambda, shortcut, altShortcut);
 }

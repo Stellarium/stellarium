@@ -58,16 +58,15 @@ void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 {
 	StelCore *core = StelApp::getInstance().getCore();
 	Vec3d mousePosition = core->getMouseJ2000Pos();
-	// Shift + LeftClick
+	// Shift + LeftClick -- Add custom marker
 	if (e->modifiers().testFlag(Qt::ShiftModifier) && e->button()==Qt::LeftButton && e->type()==QEvent::MouseButtonPress)
 	{
-		// Add custom marker
 		addCustomObject(QString("%1 %2").arg(N_("Marker")).arg(countMarkers + 1), mousePosition, true);
 
 		e->setAccepted(true);
 		return;
 	}
-	// Shift + Alt + Right click -- Removes all custom markers
+	// Shift + Alt + RightClick -- Removes all custom markers
 	// Changed by snowsailor 5/04/2017
 	if(e->modifiers().testFlag(Qt::ShiftModifier) && e->modifiers().testFlag(Qt::AltModifier) && e->button() == Qt::RightButton && e->type() == QEvent::MouseButtonPress)
 	{
@@ -76,15 +75,15 @@ void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 		e->setAccepted(true);
 		return;
 	}
-	// Shift + RightClick
-	// Added by snowsailor 5/04/2017 -- Removes the closest marker within a radius specified within
+	// Shift + RightClick -- Removes the closest marker within a radius specified within
+	// Added by snowsailor 5/04/2017
 	if (e->modifiers().testFlag(Qt::ShiftModifier) && e->button()==Qt::RightButton && e->type()==QEvent::MouseButtonPress)
 	{
 		const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000, StelCore::RefractionAuto);
 		Vec3d winpos;
 		prj->project(mousePosition, winpos);
-		float xpos = winpos[0];
-		float ypos = winpos[1];
+		double xpos = winpos[0];
+		double ypos = winpos[1];
 
 		CustomObjectP closest;
 		//Smallest valid radius will be at most `radiusLimit`, so radiusLimit + 10 is plenty as the default
@@ -95,7 +94,7 @@ void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 			Vec3d a = cObj->getJ2000EquatorialPos(core);
 			prj->project(a, winpos);
 			//Distance formula to determine how close we clicked to each of the custom objects
-			float dist = std::sqrt(((xpos-winpos[0])*(xpos-winpos[0])) + ((ypos-winpos[1])*(ypos-winpos[1])));
+			float dist = static_cast<float>(std::sqrt(((xpos-winpos[0])*(xpos-winpos[0])) + ((ypos-winpos[1])*(ypos-winpos[1]))));
 			//If the position of the object is within our click radius
 			if(dist <= radiusLimit && dist < smallestRad)
 			{
@@ -122,7 +121,7 @@ void CustomObjectMgr::init()
 
 	customObjects.clear();
 
-	setMarkersColor(StelUtils::strToVec3f(conf->value("color/custom_marker_color", "0.1,1.0,0.1").toString()));
+	setMarkersColor(Vec3f(conf->value("color/custom_marker_color", "0.1,1.0,0.1").toString()));
 	setMarkersSize(conf->value("gui/custom_marker_size", 5.f).toFloat());
 	// Limit the click radius to 15px in any direction
 	setActiveRadiusLimit(conf->value("gui/custom_marker_radius_limit", 15).toInt());
@@ -157,6 +156,8 @@ void CustomObjectMgr::addCustomObject(QString designation, Vec3d coordinates, bo
 
 		if (isVisible)
 			countMarkers++;
+
+		emit StelApp::getInstance().getCore()->updateSearchLists();
 	}
 }
 
@@ -200,12 +201,14 @@ void CustomObjectMgr::removeCustomObjects()
 	customObjects.clear();
 	//This marker count can be set to 0 because there will be no markers left and a duplicate will be impossible
 	countMarkers = 0;
+	emit StelApp::getInstance().getCore()->updateSearchLists();
 }
 
 void CustomObjectMgr::removeCustomObject(CustomObjectP obj)
 {
 	setSelected("");
 	customObjects.removeOne(obj);
+	emit StelApp::getInstance().getCore()->updateSearchLists();
 }
 
 void CustomObjectMgr::removeCustomObject(QString englishName)
@@ -216,7 +219,7 @@ void CustomObjectMgr::removeCustomObject(QString englishName)
 		//If we have a match for the thing we want to delete
 		if(cObj && cObj->getEnglishName()==englishName && cObj->initialized)
 			customObjects.removeOne(cObj);
-	}
+	}	
 }
 
 void CustomObjectMgr::draw(StelCore* core)
@@ -243,37 +246,36 @@ void CustomObjectMgr::drawPointer(StelCore* core, StelPainter& painter)
 	if (!newSelected.empty())
 	{
 		const StelObjectP obj = newSelected[0];
-		Vec3d pos=obj->getJ2000EquatorialPos(core);
+		Vec3f pos=obj->getJ2000EquatorialPos(core).toVec3f();
 
-		Vec3d screenpos;
+		Vec3f screenpos;
 		// Compute 2D pos and return if outside screen
 		if (!painter.getProjector()->project(pos, screenpos))
 			return;
 
-		const Vec3f& c(obj->getInfoColor());
-		painter.setColor(c[0],c[1],c[2]);
+		painter.setColor(obj->getInfoColor());
 		texPointer->bind();
 		painter.setBlending(true);
-		painter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getTotalRunTime()*40.);
+		painter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, static_cast<float>(StelApp::getInstance().getTotalRunTime()*40.));
 	}
 }
 
-QList<StelObjectP> CustomObjectMgr::searchAround(const Vec3d& av, double limitFov, const StelCore*) const
+QList<StelObjectP> CustomObjectMgr::searchAround(const Vec3d& av, double limitFov, const StelCore* core) const
 {
 	QList<StelObjectP> result;
 
 	Vec3d v(av);
 	v.normalize();
-	double cosLimFov = cos(limitFov * M_PI/180.);
+	const double cosLimFov = cos(limitFov * M_PI/180.);
 	Vec3d equPos;
 
 	for (const auto& cObj : customObjects)
 	{
 		if (cObj->initialized)
 		{
-			equPos = cObj->XYZ;
+			equPos = cObj->getJ2000EquatorialPos(core);
 			equPos.normalize();
-			if (equPos[0]*v[0] + equPos[1]*v[1] + equPos[2]*v[2]>=cosLimFov)
+			if (equPos.dot(v) >= cosLimFov)
 			{
 				result.append(qSharedPointerCast<StelObject>(cObj));
 			}
@@ -303,11 +305,6 @@ StelObjectP CustomObjectMgr::searchByNameI18n(const QString& nameI18n) const
 	}
 
 	return Q_NULLPTR;
-}
-
-QStringList CustomObjectMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
-{
-	return StelObjectModule::listMatchingObjects(objPrefix, maxNbItem, useStartOfWords, inEnglish);
 }
 
 QStringList CustomObjectMgr::listAllObjects(bool inEnglish) const
@@ -372,7 +369,7 @@ void CustomObjectMgr::setMarkersColor(const Vec3f& c)
 	CustomObject::markerColor = c;
 }
 
-const Vec3f& CustomObjectMgr::getMarkersColor(void) const
+Vec3f CustomObjectMgr::getMarkersColor(void) const
 {
 	return CustomObject::markerColor;
 }

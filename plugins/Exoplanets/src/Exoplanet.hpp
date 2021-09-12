@@ -33,15 +33,15 @@
 //! @ingroup exoplanets
 typedef struct
 {
-	QString planetName;			//! Exoplanet designation
+	QString planetName;		//! Exoplanet designation
 	QString planetProperName;	//! Exoplanet proper name
-	float mass;				//! Exoplanet mass (Mjup)
-	float radius;				//! Exoplanet radius (Rjup)
-	float period;				//! Exoplanet period (days)
-	float semiAxis;				//! Exoplanet orbit semi-major axis (AU)
-	float eccentricity;			//! Exoplanet orbit eccentricity
-	float inclination;				//! Exoplanet orbit inclination
-	float angleDistance;			//! Exoplanet angle distance
+	double mass;				//! Exoplanet mass (Mjup)
+	double radius;				//! Exoplanet radius (Rjup)
+	double period;				//! Exoplanet period (days)
+	double semiAxis;				//! Exoplanet orbit semi-major axis (AU)
+	double eccentricity;			//! Exoplanet orbit eccentricity
+	double inclination;			//! Exoplanet orbit inclination
+	double angleDistance;			//! Exoplanet angle distance
 	int discovered;				//! Exoplanet discovered year
 	QString pclass;				//! Exoplanet classification from host star spectral type (F, G, K, M), habitable zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran, jovian, neptunian)
 	int EqTemp;				//! Exoplanet equilibrium temperature in kelvins (K) assuming a 0.3 bond albedo (Earth = 255 K).
@@ -68,29 +68,29 @@ public:
 
 	//! @param id The official designation for a exoplanet, e.g. "Kepler-10 b"
 	Exoplanet(const QVariantMap& map);
-	~Exoplanet();
+	~Exoplanet() Q_DECL_OVERRIDE;
 
 	//! Get a QVariantMap which describes the exoplanet. Could be used to
 	//! create a duplicate.
 	QVariantMap getMap(void) const;
 
 	//! Get the type of object
-	virtual QString getType(void) const
+	virtual QString getType(void) const Q_DECL_OVERRIDE
 	{
 		return EXOPLANET_TYPE;
 	}
 
-	virtual QString getID(void) const
+	virtual QString getID(void) const Q_DECL_OVERRIDE
 	{
 		return getDesignation();
 	}
 
-	virtual float getSelectPriority(const StelCore* core) const;
+	virtual float getSelectPriority(const StelCore* core) const Q_DECL_OVERRIDE;
 
 	//! Get an HTML string to describe the object
 	//! @param core A pointer to the core
 	//! @flags a set of flags with information types to include.
-	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const;
+	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
 	//! Return a map like StelObject, but with a few extra tags also available in getMap().
 	//! - distance = distance in pc
 	//! - stype = Spectral type of star
@@ -99,20 +99,19 @@ public:
 	//! - sradius = Radius of star in Rsun
 	//! - effectiveTemp = Effective temperature of star in K
 	//! - hasHabitablePlanets (true/false)
-	virtual QVariantMap getInfoMap(const StelCore *core) const;
-	virtual Vec3f getInfoColor(void) const;
-	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const
-	{
-		return XYZ;
-	}
+	virtual QVariantMap getInfoMap(const StelCore *core) const Q_DECL_OVERRIDE;
+	virtual Vec3f getInfoColor(void) const Q_DECL_OVERRIDE;
+	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const Q_DECL_OVERRIDE;
 	//! Get the visual magnitude
-	virtual float getVMagnitude(const StelCore* core) const;
+	virtual float getVMagnitude(const StelCore* core) const Q_DECL_OVERRIDE;
 	//! Get the angular size of host star
-	virtual double getAngularSize(const StelCore* core) const;
+	virtual double getAngularSize(const StelCore* core) const Q_DECL_OVERRIDE;
 	//! Get the localized name of host star
-	virtual QString getNameI18n(void) const;
+	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
 	//! Get the english name
-	virtual QString getEnglishName(void) const;
+	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE;
+
+	bool isVMagnitudeDefined() const;
 
 	QString getDesignation(void) const;
 	QStringList getExoplanetsEnglishNames(void) const;
@@ -138,46 +137,32 @@ public:
 		{
 			case 1:
 				return semiAxisList;
-				break;
 			case 2:
 				return massList;
-				break;
 			case 3:
 				return radiusList;
-				break;
 			case 4:
 				return periodList;
-				break;
 			case 5:
 				return angleDistanceList;
-				break;
 			case 6:
 				return effectiveTempHostStarList;
-				break;
 			case 7:
 				return yearDiscoveryList;
-				break;
 			case 8:
 				return metallicityHostStarList;
-				break;
 			case 9:
 				return vMagHostStarList;
-				break;
 			case 10:
 				return raHostStarList;
-				break;
 			case 11:
 				return decHostStarList;
-				break;
 			case 12:
 				return distanceHostStarList;
-				break;
 			case 13:
 				return massHostStarList;
-				break;
 			case 14:
 				return radiusHostStarList;
-				break;
 			default:
 				return eccentricityList;
 		}
@@ -210,20 +195,21 @@ private:
 	//! Variables for description of properties of exoplanets
 	QString designation;			//! The designation of the host star
 	QString starProperName;			//! The proper name of the host star
-	float RA;				//! J2000 right ascension of host star
-	float DE;				//! J2000 declination of host star
-	float distance;				//! Distance to star in pc
+	double RA;				//! J2000 right ascension of host star // ALMOST USELESS AFTER CONSTRUCTOR!
+	double DE;				//! J2000 declination of host star     // ALMOST USELESS AFTER CONSTRUCTOR!   use XYZ
+	double distance;			//! Distance to star in pc
 	QString stype;				//! Spectral type of star
-	float smass;				//! Mass of star in Msun
-	float smetal;				//! [Fe/H] of star
-	float Vmag;				//! Visual magnitude of star
-	float sradius;				//! Radius of star in Rsun
+	double smass;				//! Mass of star in Msun
+	double smetal;				//! [Fe/H] of star
+	double Vmag;				//! Visual magnitude of star
+	double sradius;				//! Radius of star in Rsun
 	int effectiveTemp;			//! Effective temperature of star in K
 	bool hasHabitableExoplanets;		//! Has potential habitable exoplanets
 	QList<exoplanetData> exoplanets;	//! List of exoplanets
 
 	QStringList englishNames, translatedNames, exoplanetDesignations;
 
+	// Lists with various data for fast creating a diagrams of relations
 	QList<double> eccentricityList, semiAxisList, massList, radiusList, periodList, angleDistanceList,
 		      effectiveTempHostStarList, yearDiscoveryList, metallicityHostStarList, vMagHostStarList,
 		      raHostStarList, decHostStarList, distanceHostStarList, massHostStarList, radiusHostStarList;

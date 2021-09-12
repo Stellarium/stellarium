@@ -87,7 +87,7 @@ typedef enum {
 } State;            /* parsing states */
 
 /* maintain state while parsing */
-struct _LilXML
+struct LilXML_
 {
     State cs;      /* current state */
     int ln;        /* line number for diags */
@@ -101,7 +101,7 @@ struct _LilXML
 };
 
 /* internal representation of a (possibly nested) XML element */
-struct _xml_ele
+struct xml_ele_
 {
     String tag;        /* element tag */
     XMLEle *pe;        /* parent element, or NULL if root */
@@ -116,7 +116,7 @@ struct _xml_ele
 };
 
 /* internal representation of an attribute */
-struct _xml_att
+struct xml_att_
 {
     String name; /* name */
     String valu; /* value */
@@ -1064,8 +1064,12 @@ static int oneXMLchar(LilXML *lp, int c, char ynot[])
                 else
                 {
                     appendString(&lp->ce->pcdata, lp->entity.s);
-                    lp->ce->pcdata_hasent = 1;
+                    //lp->ce->pcdata_hasent = 1;
                 }
+                // JM 2018-09-26: Even if decoded, we always set
+                // pcdata_hasent to 1 since we need to encode it again
+                // before sending it over to clients and drivers.
+                lp->ce->pcdata_hasent = 1;
                 freeString(&lp->entity);
                 lp->cs = INCON;
             }

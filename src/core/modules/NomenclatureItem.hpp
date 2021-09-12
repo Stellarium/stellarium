@@ -38,11 +38,11 @@ class StelPainter;
 class NomenclatureItem : public StelObject
 {
 	friend class NomenclatureMgr;
+	Q_ENUMS(NomenclatureItemType)
 public:
 	static const QString NOMENCLATURE_TYPE;
 
 	// Details: https://planetarynames.wr.usgs.gov/DescriptorTerms
-	Q_ENUMS(NomenclatureItemType)
 	enum NomenclatureItemType
 	{
 		niUNDEFINED		=  0, // Undefined type of feature. THIS IS ONLY IN CASE OF ERROR!
@@ -101,7 +101,8 @@ public:
 		niLenticula		= 53, // type="lenticula"
 		niReticulum		= 54, // type="reticulum"
 		niSatelliteFeature	= 55, // type="satellite feature"
-		niTessera		= 56  // type="tessera"
+		niTessera		= 56, // type="tessera"
+		niSaxum			= 57  // type="saxum"
 	};
 
 	NomenclatureItem(PlanetP nPlanet, int nId, const QString& nName, const QString& nContext, NomenclatureItemType nItemType, float nLatitude, float nLongitude, float nSize);
@@ -140,11 +141,7 @@ public:
 	virtual void translateName(const StelTranslator &trans);
 
 	void draw(StelCore* core, StelPainter *painter);
-
-	QString getNomenclatureTypeString() const;	
-	QString getNomenclatureTypeDescription() const;
 	NomenclatureItemType getNomenclatureType() const { return nType;}
-
 	void update(double deltaTime);
 
 	void setFlagLabels(bool b){ labelsFader = b; }
@@ -153,8 +150,18 @@ public:
 	bool getFlagHideLocalNomenclature() const { return hideLocalNomenclature; }
 	//QString getEnglishPlanetName(void) const {return planet->getEnglishName();}
 	PlanetP getPlanet(void) const { return planet;}
+	//! get latitude [degrees]
 	float getLatitude(void) const {return latitude;}
+	//! get longitude [degrees]
 	float getLongitude(void) const {return longitude;}
+	//! return solar altitude in degrees (Meeus, Astr.Alg.1998 53.3)
+	double getSolarAltitude(const StelCore *core) const;
+
+protected:
+	//! returns a type enum for a given 2-letter code
+	static NomenclatureItemType getNomenclatureItemType(const QString abbrev);
+	//! Should be triggered once at start and then whenever program language setting changes.
+	static void createNameLists();
 
 private:
 	Vec3d XYZpc;                         // holds planetocentric position (from longitude/latitude)
@@ -163,13 +170,17 @@ private:
 	static Vec3f color;
 	static bool hideLocalNomenclature;
 
-	QString getNomenclatureTypeLatinString() const;
+	static QString getNomenclatureTypeLatinString(NomenclatureItemType nType);
+	static QString getNomenclatureTypeString(NomenclatureItemType nType);
+	static QString getNomenclatureTypeDescription(NomenclatureItemType nType, QString englishName);
+	static QMap<NomenclatureItemType, QString>niTypeStringMap;
+	static QMap<NomenclatureItemType, QString>niTypeDescriptionMap;
 
 	PlanetP planet;
 	int identificator;
 	QString englishName, context, nameI18n;
 	NomenclatureItemType nType;       // Type of nomenclature item
-	float latitude, longitude, size;
+	float latitude, longitude, size;  // degrees, degrees, km
 
 	LinearFader labelsFader;
 };

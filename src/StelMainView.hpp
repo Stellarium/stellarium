@@ -51,11 +51,9 @@ class StelMainView : public QGraphicsView
 	Q_PROPERTY(bool fullScreen                 READ isFullScreen                  WRITE setFullScreen                 NOTIFY fullScreenChanged)
 	Q_PROPERTY(bool flagInvertScreenShotColors READ getFlagInvertScreenShotColors WRITE setFlagInvertScreenShotColors NOTIFY flagInvertScreenShotColorsChanged)
 	Q_PROPERTY(bool flagOverwriteScreenshots   READ getFlagOverwriteScreenShots   WRITE setFlagOverwriteScreenShots   NOTIFY flagOverwriteScreenshotsChanged)
-#ifndef USE_OLD_QGLWIDGET
 	Q_PROPERTY(bool flagUseCustomScreenshotSize READ getFlagUseCustomScreenshotSize WRITE setFlagUseCustomScreenshotSize NOTIFY flagUseCustomScreenshotSizeChanged)
 	Q_PROPERTY(int  customScreenshotWidth      READ getCustomScreenshotWidth      WRITE setCustomScreenshotWidth      NOTIFY customScreenshotWidthChanged)
 	Q_PROPERTY(int  customScreenshotHeight     READ getCustomScreenshotHeight     WRITE setCustomScreenshotHeight     NOTIFY customScreenshotHeightChanged)
-#endif
 	Q_PROPERTY(QString screenShotFormat        READ getScreenshotFormat           WRITE setScreenshotFormat           NOTIFY screenshotFormatChanged)
 	Q_PROPERTY(bool flagCursorTimeout          READ getFlagCursorTimeout          WRITE setFlagCursorTimeout          NOTIFY flagCursorTimeoutChanged)
 	Q_PROPERTY(double cursorTimeout            READ getCursorTimeout              WRITE setCursorTimeout              NOTIFY cursorTimeoutChanged)
@@ -72,7 +70,7 @@ public:
 	};
 
 	StelMainView(QSettings* settings);
-	virtual ~StelMainView();
+	virtual ~StelMainView() Q_DECL_OVERRIDE;
 
 	//! Start the main initialization of Stellarium
 	void init();
@@ -144,7 +142,6 @@ public slots:
 	//! Set whether existing files are overwritten when saving screenshot
 	void setFlagOverwriteScreenShots(bool b) {flagOverwriteScreenshots=b; emit flagOverwriteScreenshotsChanged(b);}
 
-#ifndef USE_OLD_QGLWIDGET
 	//! Get whether custom size should be used for screenshots
 	bool getFlagUseCustomScreenshotSize() const {return flagUseCustomScreenshotSize;}
 	//! Set whether custom size should be used for screenshots
@@ -160,15 +157,14 @@ public slots:
 	//! Get screenshot magnification. This should be used by StarMgr, text drawing and other elements which may
 	//! want to enlarge their output in screenshots to keep them visible.
 	float getCustomScreenshotMagnification() const {return customScreenshotMagnification;}
-#endif
 	//! Get the state of the mouse cursor timeout flag
 	bool getFlagCursorTimeout() const {return flagCursorTimeout;}
-	//! Get the state of the mouse cursor timeout flag
+	//! Set the state of the mouse cursor timeout flag
 	void setFlagCursorTimeout(bool b);
 	//! Get the mouse cursor timeout in seconds
 	double getCursorTimeout() const {return cursorTimeoutTimer->interval() / 1000.0;}
 	//! Set the mouse cursor timeout in seconds
-	void setCursorTimeout(double t) {cursorTimeoutTimer->setInterval(t * 1000); emit cursorTimeoutChanged(t);}
+	void setCursorTimeout(double t) {cursorTimeoutTimer->setInterval(static_cast<int>(t * 1000)); emit cursorTimeoutChanged(t);}
 
 	//! Set the minimum frames per second. Usually this minimum will be switched to after there are no
 	//! user events for some seconds to save power. However, if can be useful to set this to a high
@@ -209,6 +205,8 @@ protected:
 	virtual void resizeEvent(QResizeEvent* event) Q_DECL_OVERRIDE;
 	//! Wake up mouse cursor (if it was hidden)
 	virtual void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+
+	bool eventFilter(QObject *obj, QEvent *event) override;
 signals:
 	//! emitted when saveScreenShot is requested with saveScreenShot().
 	//! doScreenshot() does the actual work (it has to do it in the main
@@ -231,12 +229,14 @@ signals:
 	void screenshotFormatChanged(QString format);
 
 	void skyBackgroundColorChanged(Vec3f color);
+
 	void flagCursorTimeoutChanged(bool b);
 	void cursorTimeoutChanged(double t);
 
 private slots:
 	// Do the actual screenshot generation in the main thread with this method.
 	void doScreenshot(void);
+
 	void fpsTimerUpdate();
 	void hideCursor();
 
@@ -284,12 +284,10 @@ private:
 	bool updateQueued;
 	bool flagInvertScreenShotColors;
 	bool flagOverwriteScreenshots; //! if set to true, screenshot is named exactly screenShotPrefix.png and overwrites existing file
-#ifndef USE_OLD_QGLWIDGET
 	bool flagUseCustomScreenshotSize; //! if true, the next 2 values are observed for screenshots.
 	int customScreenshotWidth;            //! used when flagCustomResolutionScreenshots==true
 	int customScreenshotHeight;           //! used when flagCustomResolutionScreenshots==true
 	float customScreenshotMagnification;  //! tracks the magnification factor customScreenshotHeight/NormalWindowHeight
-#endif
 	QString screenShotPrefix;
 	QString screenShotFormat; //! file type like "png" or "jpg".
 	QString screenShotDir;

@@ -29,22 +29,19 @@ class StelPainter;
 class TrailGroup
 {
 public:
-	TrailGroup(float atimeExtent);
+	TrailGroup(float atimeExtent, int maxPoints);
 
 	void draw(StelCore* core, StelPainter*);
 
-	// Add 1 point to all the curves at current time and suppress too old points
+	// Add 1 point to all the curves at current time and remove too old points
 	void update();
-
-	// Set the matrix to use to post process J2000 positions before storing in the trail
-	void setJ2000ToTrailNative(const Mat4d& m);
 
 	void addObject(const StelObjectP&, const Vec3f* col=Q_NULLPTR);
 
 	void setOpacity(float op) {opacity=op;}
 
-	//! Reset all trails points
-	void reset();
+	//! Reset (clear) all trails points, and set maximum trail length to keep up framerate
+	void reset(int maxPoints);
 
 private:
 	class Trail
@@ -57,10 +54,12 @@ private:
 		Vec3f color;
 	};
 
+	StelCore *core;
 	QList<Trail> allTrails;
 
 	// Maximum time extent in days
 	float timeExtent;
+	int maxPoints; //!< Limitation to avoid fps breakdown.
 
 	QList<float> times;
 

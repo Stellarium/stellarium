@@ -44,9 +44,9 @@ template <class Star> struct SpecialZoneData;
 // makes it feasable to store hundreds of millions of them in main memory.
 
 
-static inline float IndexToBV(unsigned char bV)
+static inline float IndexToBV(int bV)
 {
-	return (float)bV*(4.f/127.f)-0.5f;
+	return static_cast<float>(bV)*(4.f/127.f)-0.5f;
 }
 
 
@@ -110,8 +110,8 @@ public:
 	void getJ2000Pos(const ZoneData *z,float movementFactor, Vec3f& pos) const
 	{
 		pos = z->axis0;
-		pos*=((float)(getX0())+movementFactor*getDx0());
-		pos+=((float)(getX1())+movementFactor*getDx1())*z->axis1;
+		pos*=(static_cast<float>(getX0())+movementFactor*getDx0());
+		pos+=(static_cast<float>(getX1())+movementFactor*getDx1())*z->axis1;
 		pos+=z->center;
 	}
 	inline int getBVIndex() const {return d.uint8[12];}
@@ -126,7 +126,7 @@ public:
 	inline int getHip() const
 	{
 		quint32 v = d.uint8[0] | d.uint8[1] << 8 | d.uint8[2] << 16;
-		return ((qint32)v) << 8 >> 8;
+		return (static_cast<qint32>(v)) << 8 >> 8;
 	}
 
 	inline int getComponentIds() const
@@ -137,6 +137,7 @@ public:
 	float getBV(void) const {return IndexToBV(getBVIndex());}
 	bool hasName() const {return getHip();}
 	QString getNameI18n(void) const;
+	QString getDesignation(void) const;
 	int hasComponentID(void) const;
 	void print(void) const;
 };
@@ -171,25 +172,25 @@ public:
 	inline int getX0() const
 	{
 		quint32 v = d[0] | d[1] << 8 | (d[2] & 0xF) << 16;
-		return ((qint32)v) << 12 >> 12;
+		return (static_cast<qint32>(v)) << 12 >> 12;
 	}
 
 	inline int getX1() const
 	{
 		quint32 v = d[2] >> 4 | d[3] << 4 | d[4] << 12;
-		return ((qint32)v) << 12 >> 12;
+		return (static_cast<qint32>(v)) << 12 >> 12;
 	}
 
 	inline int getDx0() const
 	{
 		Uint16 v = d[5] | (d[6] & 0x3F) << 8;
-		return ((Int16)(v << 2)) >> 2;
+		return (static_cast<Int16>(v << 2)) >> 2;
 	}
 
 	inline int getDx1() const
 	{
 		Uint16 v = d[6] >> 6 | d[7] << 2 | (d[8] & 0xF) << 10;
-		return ((Int16)(v << 2)) >> 2;
+		return (static_cast<Int16>(v << 2)) >> 2;
 	}
 
 	inline int getBVIndex() const
@@ -207,12 +208,13 @@ public:
 	void getJ2000Pos(const ZoneData *z,float movementFactor, Vec3f& pos) const
 	{
 		pos = z->axis0;
-		pos*=((float)(getX0())+movementFactor*getDx0());
-		pos+=((float)(getX1())+movementFactor*getDx1())*z->axis1;
+		pos*=(static_cast<float>(getX0())+movementFactor*getDx0());
+		pos+=(static_cast<float>(getX1())+movementFactor*getDx1())*z->axis1;
 		pos+=z->center;
 	}
 	float getBV(void) const {return IndexToBV(getBVIndex());}
 	QString getNameI18n(void) const {return QString();}
+	QString getDesignation(void) const {return QString();}
 	int hasComponentID(void) const {return 0;}
 	bool hasName() const {return false;}
 	void print(void) const;
@@ -241,13 +243,13 @@ public:
 	inline int getX0() const
 	{
 		quint32 v = d[0] | d[1] << 8 | (d[2] & 0x3) << 16;
-		return ((qint32)v) << 14 >> 14;
+		return (static_cast<qint32>(v)) << 14 >> 14;
 	}
 
 	inline int getX1() const
 	{
 		quint32 v = d[2] >> 2 | d[3] << 6 | (d[4] & 0xF) << 14;
-		return ((qint32)v) << 14 >> 14;
+		return (static_cast<qint32>(v)) << 14 >> 14;
 	}
 
 	inline int getBVIndex() const
@@ -265,12 +267,13 @@ public:
 	void getJ2000Pos(const ZoneData *z,float, Vec3f& pos) const
 	{
 		pos = z->axis0;
-		pos*=(float)(getX0());
+		pos*=static_cast<float>(getX0());
 		pos+=z->center;
-		pos+=(float)(getX1())*z->axis1;
+		pos+=static_cast<float>(getX1())*z->axis1;
 	}
 	float getBV() const {return IndexToBV(getBVIndex());}
 	QString getNameI18n() const {return QString();}
+	QString getDesignation() const {return QString();}
 	int hasComponentID() const {return 0;}
 	bool hasName() const {return false;}
 	void print();

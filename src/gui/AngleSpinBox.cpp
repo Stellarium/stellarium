@@ -180,6 +180,8 @@ void AngleSpinBox::stepBy (int steps)
 	formatText();
 	lineEdit()->setCursorPosition(cursorPos);
 	emit(valueChanged());
+	emit(valueChangedDeg(valueDegrees()));
+	emit(valueChangedRad(valueRadians()));
 }
 
 QValidator::State AngleSpinBox::validate(QString& input, int& pos) const
@@ -195,6 +197,8 @@ void AngleSpinBox::clear()
 	radAngle = 0.0;
 	formatText();
 	emit(valueChanged());
+	emit(valueChangedDeg(valueDegrees()));
+	emit(valueChangedRad(valueRadians()));
 }
 
 QAbstractSpinBox::StepEnabled AngleSpinBox::stepEnabled() const
@@ -255,9 +259,9 @@ double AngleSpinBox::stringToDouble(QString input, QValidator::State* state, Pre
 		
 	if (dmsRx.exactMatch(input))
 	{
-		double degree = dmsRx.capturedTexts().at(1).toDouble();
-		double minute = dmsRx.capturedTexts().at(3).toDouble();
-		double second = dmsRx.capturedTexts().at(6).toDouble();
+		double degree = dmsRx.cap(1).toDouble();
+		double minute = dmsRx.cap(3).toDouble();
+		double second = dmsRx.cap(6).toDouble();
 		if (degree > 360.0 || degree < -360.0)
 		{
 			*state = QValidator::Invalid;
@@ -281,9 +285,9 @@ double AngleSpinBox::stringToDouble(QString input, QValidator::State* state, Pre
 	}
 	else if (hmsRx.exactMatch(input))
 	{
-		double hour   = hmsRx.capturedTexts().at(1).toDouble();
-		double minute = hmsRx.capturedTexts().at(3).toDouble();
-		double second = hmsRx.capturedTexts().at(6).toDouble();
+		double hour   = hmsRx.cap(1).toDouble();
+		double minute = hmsRx.cap(3).toDouble();
+		double second = hmsRx.cap(6).toDouble();
 		if (hour >= 24.0 || hour < 0.0)
 		{
 			*state = QValidator::Invalid;
@@ -307,7 +311,7 @@ double AngleSpinBox::stringToDouble(QString input, QValidator::State* state, Pre
 	}
 	else if (decRx.exactMatch(input))
 	{
-		double dec = decRx.capturedTexts().at(1).toDouble();
+		double dec = decRx.cap(1).toDouble();
 		if (dec < 0.0 || dec > 360.0)
 		{
 			*state = QValidator::Invalid;
@@ -351,6 +355,8 @@ void AngleSpinBox::updateValue(void)
 
 	formatText();
 	emit(valueChanged());
+	emit(valueChangedDeg(valueDegrees()));
+	emit(valueChangedRad(valueRadians()));
 }
 
 void AngleSpinBox::setRadians(double radians)
@@ -367,6 +373,7 @@ void AngleSpinBox::setDegrees(double degrees)
 
 void AngleSpinBox::formatText(void)
 {
+	const int cursorPos=lineEdit()->cursorPosition();
 	switch (angleSpinBoxFormat)
 	{
 		case DMSLetters:
@@ -391,8 +398,8 @@ void AngleSpinBox::formatText(void)
 				sign=true;
 			}
 
-			d = (int)angle;
-			m = (int)((angle - d)*60);
+			d = static_cast<int>(angle);
+			m = static_cast<int>((angle - d)*60);
 			s = (angle-d)*3600-60*m;
 
 			// we may have seconds as 60 and one less minute...
@@ -410,9 +417,7 @@ void AngleSpinBox::formatText(void)
 			}
 
 			// fix when we have tiny tiny tiny values.
-			if (s < ::pow(10.0, -1 * (decimalPlaces+1)))
-				s= 0.0;
-			else if (s < 0.0 && 0.0 - ::pow(10.0, -1 * (decimalPlaces+1)))
+			if (abs(s) < ::pow(10.0, -1 * (decimalPlaces+1)))
 				s= 0.0;
 
 			QString signInd = positivePrefix(currentPrefixType);
@@ -437,8 +442,8 @@ void AngleSpinBox::formatText(void)
 			angle = fmod(angle,2.0*M_PI);
 			if (angle < 0.0) angle += 2.0*M_PI; // range: [0..2.0*M_PI)
 			angle *= 12./M_PI;
-			h = (unsigned int)angle;
-			m = (unsigned int)((angle-h)*60);
+			h = static_cast<unsigned int>(angle);
+			m = static_cast<unsigned int>((angle-h)*60);
 			s = (angle-h)*3600.-60.*m;
 
 			// we may have seconds as 60 and one less minute...
@@ -456,9 +461,7 @@ void AngleSpinBox::formatText(void)
 			}
 
 			// fix when we have tiny tiny tiny values.
-			if (s < ::pow(10.0, -1 * (decimalPlaces+1)))
-				s= 0.0;
-			else if (s < 0.0 && 0.0 - ::pow(10.0, -1 * (decimalPlaces+1)))
+			if (abs(s) < ::pow(10.0, -1 * (decimalPlaces+1)))
 				s= 0.0;
 
 			if (angleSpinBoxFormat == HMSLetters)
@@ -489,9 +492,10 @@ void AngleSpinBox::formatText(void)
 		default:
 		{
 			qWarning() << "AngleSpinBox::formatText - WARNING - unknown format" 
-                       << (int)(angleSpinBoxFormat);
+		       << static_cast<int>(angleSpinBoxFormat);
 			break;
 		}
 	}
+	lineEdit()->setCursorPosition(cursorPos);
 }
 

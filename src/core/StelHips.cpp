@@ -20,6 +20,7 @@
 #include "StelHips.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "Planet.hpp"
 #include "StelPainter.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelUtils.hpp"
@@ -40,8 +41,8 @@ class HipsTile
 public:
 	int order;
 	int pix;
-	StelTextureSP texture = StelTextureSP(NULL);
-	StelTextureSP allsky = StelTextureSP(NULL); // allsky low res version of the texture.
+	StelTextureSP texture = StelTextureSP(Q_NULLPTR);
+	StelTextureSP allsky = StelTextureSP(Q_NULLPTR); // allsky low res version of the texture.
 
 	// Used for smooth fade in
 	QTimeLine texFader;
@@ -63,18 +64,19 @@ QUrl HipsSurvey::getUrlFor(const QString& path) const
 	QString args = "";
 	if (base.scheme().isEmpty()) base.setScheme("file");
 	if (base.scheme() != "file")
-		args += QString("?v=%1").arg((int)releaseDate);
+		args += QString("?v=%1").arg(static_cast<int>(releaseDate));
 	return QString("%1/%2%3").arg(base.url()).arg(path).arg(args);
 }
 
 HipsSurvey::HipsSurvey(const QString& url_, double releaseDate_):
 	url(url_),
 	releaseDate(releaseDate_),
-	tiles(1000),
+	planetarySurvey(false),
+	tiles(1000 * 512 * 512), // Cache max cost in pixels (enough for 1000 512x512 tiles).
 	nbVisibleTiles(0),
 	nbLoadedTiles(0)
 {
-	// Immediatly download the properties.
+	// Immediately download the properties.
 	QNetworkRequest req = QNetworkRequest(getUrlFor("properties"));
 	req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
 	req.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
@@ -97,7 +99,14 @@ HipsSurvey::HipsSurvey(const QString& url_, double releaseDate_):
 			releaseDate = StelUtils::qDateTimeToJd(date);
 		}
 		if (properties.contains("hips_frame"))
-			hipsFrame = properties["hips_frame"].toString();
+			hipsFrame = properties["hips_frame"].toString().toLower();
+
+		QStringList DSSSurveys;
+		DSSSurveys << "equatorial" << "galactic" << "ecliptic"; // HiPS frames for DSS surveys
+		if (DSSSurveys.contains(hipsFrame, Qt::CaseInsensitive) && !(properties["creator_did"].toString().contains("moon", Qt::CaseInsensitive)) && !(properties["client_category"].toString().contains("solar system", Qt::CaseInsensitive)))
+			planetarySurvey = false;
+		else
+			planetarySurvey = true;
 
 		emit propertiesChanged();
 		emit statusChanged();
@@ -111,17 +120,7 @@ HipsSurvey::~HipsSurvey()
 
 bool HipsSurvey::isVisible() const
 {
-	return (bool)fader;
-}
-
-bool HipsSurvey::isPlanetarySurvey() const
-{
-	QStringList DSSSurveys;
-	DSSSurveys << "equatorial" << "galactic" << "ecliptic"; // HiPS	frames for DSS surveys
-	if (DSSSurveys.contains(hipsFrame, Qt::CaseInsensitive))
-		return false;
-	else
-		return true;
+	return static_cast<bool>(fader);
 }
 
 void HipsSurvey::setVisible(bool value)
@@ -149,6 +148,16 @@ bool HipsSurvey::getAllsky()
 {
 	if (!allsky.isNull() || noAllsky) return true;
 	if (properties.isEmpty()) return false;
+
+	// Allsky is deprecated after version 1.4.
+	if (properties.contains("hips_version")) {
+		QStringList version = properties["hips_version"].toString().split(".");
+		if ((version.size() >= 2) && (version[0].toInt() * 100 + version[1].toInt() >= 104)) {
+			noAllsky = true;
+			return true;
+		}
+	}
+
 	if (!networkReply)
 	{
 		QString ext = getExt(properties["hips_tile_format"].toString());
@@ -162,16 +171,20 @@ bool HipsSurvey::getAllsky()
 
 		updateProgressBar(0, 100);
 		connect(networkReply, &QNetworkReply::downloadProgress, [this](qint64 received, qint64 total) {
-			updateProgressBar(received, total);
+			updateProgressBar(static_cast<int>(received), static_cast<int>(total));
 		});
 	}
 	if (networkReply->isFinished())
 	{
-		qDebug() << "got allsky";
-		QByteArray data = networkReply->readAll();
-		allsky = QImage::fromData(data);
-		delete networkReply;
-		networkReply = NULL;
+		if (networkReply->error() == QNetworkReply::NoError) {
+			qDebug() << "got allsky";
+			QByteArray data = networkReply->readAll();
+			allsky = QImage::fromData(data);
+		} else {
+			noAllsky = true;
+		}
+		networkReply->deleteLater();
+		networkReply = Q_NULLPTR;
 		emit statusChanged();
 	};
 	return !allsky.isNull();
@@ -179,7 +192,7 @@ bool HipsSurvey::getAllsky()
 
 bool HipsSurvey::isLoading(void) const
 {
-	return (bool)networkReply;
+	return (networkReply != Q_NULLPTR);
 }
 
 void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallback callback)
@@ -189,7 +202,7 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 	bool outside = (angle == 2.0 * M_PI);
 	if (properties.isEmpty()) return;
 	if (!getAllsky()) return;
-	if (fader.getInterstate() == 0.0) return;
+	if (fader.getInterstate() == 0.0f) return;
 	sPainter->setColor(1, 1, 1, fader.getInterstate());
 
 	// Set the projection.
@@ -202,15 +215,37 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 	if (frame)
 		sPainter->setProjector(core->getProjection(frame));
 
+	Vec3d obsVelocity(0.);
+	// Aberration: retrieve observer velocity to apply, and transform it to frametype-dependent orientation
+	if (core->getUseAberration())
+	{
+		static const Mat4d matVsop87ToGalactic=StelCore::matJ2000ToGalactic*StelCore::matVsop87ToJ2000;
+		obsVelocity=core->getCurrentPlanet()->getHeliocentricEclipticVelocity(); // in VSOP87 frame...
+		switch (frame){
+			case StelCore::FrameJ2000:
+				StelCore::matVsop87ToJ2000.transfo(obsVelocity);
+				break;
+			case StelCore::FrameGalactic:
+				matVsop87ToGalactic.transfo(obsVelocity);
+				break;
+			case StelCore::FrameHeliocentricEclipticJ2000:
+				// do nothing. Assume this frame is equal to VSOP87 (which is slightly incorrect!)
+				break;
+			default:
+				qDebug() << "HiPS: Unexpected Frame: " << hipsFrame;
+		}
+		obsVelocity *= core->getAberrationFactor() * (AU/(86400.0*SPEED_OF_LIGHT));
+	}
+
 	// Compute the maximum visible level for the tiles according to the view resolution.
 	// We know that each tile at level L represents an angle of 90 / 2^L
 	// The maximum angle we want to see is the size of a tile in pixels time the angle for one visible pixel.
-	double px = sPainter->getProjector()->getPixelPerRadAtCenter() * angle;
+	double px = static_cast<double>(sPainter->getProjector()->getPixelPerRadAtCenter()) * angle;
 	int tileWidth = getPropertyInt("hips_tile_width");
 
 	int orderMin = getPropertyInt("hips_order_min", 3);
 	int order = getPropertyInt("hips_order");
-	int drawOrder = ceil(log2(px / (4.0 * sqrt(2.0) * tileWidth)));
+	int drawOrder = qRound(ceil(log2(px / (4.0 * std::sqrt(2.0) * tileWidth))));
 	drawOrder = qBound(orderMin, drawOrder, order);
 	int splitOrder = qMax(drawOrder, 4);
 
@@ -221,7 +256,7 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 	const SphericalCap& viewportRegion = sPainter->getProjector()->getBoundingCap();
 	for (int i = 0; i < 12; i++)
 	{
-		drawTile(0, i, drawOrder, splitOrder, outside, viewportRegion, sPainter, callback);
+		drawTile(0, i, drawOrder, splitOrder, outside, viewportRegion, sPainter, obsVelocity, callback);
 	}
 
 	updateProgressBar(nbLoadedTiles, nbVisibleTiles);
@@ -259,18 +294,19 @@ HipsTile* HipsSurvey::getTile(int order, int pix)
 		QString ext = getExt(properties["hips_tile_format"].toString());
 		QUrl path = getUrlFor(QString("Norder%1/Dir%2/Npix%3.%4").arg(order).arg((pix / 10000) * 10000).arg(pix).arg(ext));
 		tile->texture = texMgr.createTextureThread(path.url(), StelTexture::StelTextureParams(true), false);
-		tiles.insert(uid, tile);
 
 		// Use the allsky image until we load the full texture.
 		if (order == orderMin && !allsky.isNull())
 		{
-			int nbw = (int)sqrt(12 * (1 << (2 * order)));
+			int nbw = static_cast<int>(std::sqrt(12 * (1 << (2 * order))));
 			int x = (pix % nbw) * allsky.width() / nbw;
 			int y = (pix / nbw) * allsky.width() / nbw;
 			int s = allsky.width() / nbw;
 			QImage image = allsky.copy(x, y, s, s);
 			tile->allsky = texMgr.createTexture(image, StelTexture::StelTextureParams(true));
 		}
+		int tileWidth = getPropertyInt("hips_tile_width", 512);
+		tiles.insert(uid, tile, tileWidth * tileWidth);
 	}
 	return tile;
 }
@@ -302,11 +338,11 @@ static bool isClipped(int n, double (*pos)[4])
 
 
 void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, bool outside,
-						  const SphericalCap& viewportShape, StelPainter* sPainter, DrawCallback callback)
+						  const SphericalCap& viewportShape, StelPainter* sPainter, Vec3d observerVelocity, DrawCallback callback)
 {
 	Vec3d pos;
 	Mat3d mat3;
-	Vec2f uv[4] = {Vec2f(0, 0), Vec2f(0, 1), Vec2f(1, 0), Vec2f(1, 1)};
+	const Vec2d uv[4] = {Vec2d(0, 0), Vec2d(0, 1), Vec2d(1, 0), Vec2d(1, 1)};
 	HipsTile *tile;
 	int orderMin = getPropertyInt("hips_order_min", 3);
 	QVector<Vec3d> vertsArray;
@@ -330,7 +366,7 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, boo
 	else
 	{
 		double clip_pos[4][4];
-		healpix_get_mat3(1 << order, pix, (double(*)[3])mat3.r);
+		healpix_get_mat3(1 << order, pix, reinterpret_cast<double(*)[3]>(mat3.r));
 		auto proj = sPainter->getProjector();
 		for (int i = 0; i < 4; i++)
 		{
@@ -384,7 +420,7 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, boo
 	}
 
 	// Actually draw the tile, as a single quad.
-	alpha = color[3] * tile->texFader.currentValue();
+	alpha = color[3] * static_cast<float>(tile->texFader.currentValue());
 	if (alpha < 1.0f)
 	{
 		sPainter->setBlending(true);
@@ -396,7 +432,7 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, boo
 		sPainter->setColor(1, 1, 1, 1);
 	}
 	sPainter->setCullFace(true);
-	nb = fillArrays(order, pix, drawOrder, splitOrder, outside, sPainter,
+	nb = fillArrays(order, pix, drawOrder, splitOrder, outside, sPainter, observerVelocity,
 					vertsArray, texArray, indicesArray);
 	if (!callback) {
 		sPainter->setArrays(vertsArray.constData(), texArray.constData());
@@ -412,45 +448,54 @@ skip_render:
 		for (int i = 0; i < 4; i++)
 		{
 			drawTile(order + 1, pix * 4 + i, drawOrder, splitOrder, outside,
-					 viewportShape, sPainter, callback);
+					 viewportShape, sPainter, observerVelocity, callback);
 		}
 	}
 	// Restore the painter color.
-	sPainter->setColor(color[0], color[1], color[2], color[3]);
+	sPainter->setColor(color);
 }
 
 int HipsSurvey::fillArrays(int order, int pix, int drawOrder, int splitOrder,
-						   bool outside, StelPainter* sPainter,
+						   bool outside, StelPainter* sPainter, Vec3d observerVelocity,
 						   QVector<Vec3d>& verts, QVector<Vec2f>& tex, QVector<uint16_t>& indices)
 {
+	Q_UNUSED(sPainter)
 	Mat3d mat3;
 	Vec3d pos;
 	Vec2f texPos;
-	int gridSize = 1 << (splitOrder - drawOrder);
-	int n = gridSize + 1;
-	const int INDICES[2][6][2] = {
+	uint16_t gridSize = static_cast<uint16_t>(1 << (splitOrder - drawOrder));
+	uint16_t n = gridSize + 1;
+	const uint16_t INDICES[2][6][2] = {
 		{{0, 0}, {0, 1}, {1, 0}, {1, 1}, {1, 0}, {0, 1}},
 		{{0, 0}, {1, 0}, {1, 1}, {1, 1}, {0, 1}, {0, 0}},
 	};
 
-	healpix_get_mat3(1 << order, pix, (double(*)[3])mat3.r);
+	healpix_get_mat3(1 << order, pix, reinterpret_cast<double(*)[3]>(mat3.r));
 
 	for (int i = 0; i < n; i++)
 	{
 		for (int j = 0; j < n; j++)
 		{
-			texPos = Vec2f((double)i / gridSize, (double)j / gridSize);
-			pos = mat3 * Vec3d(1.0 - (double)j / gridSize, (double)i / gridSize, 1.0);
+			texPos = Vec2f(static_cast<float>(i) / gridSize, static_cast<float>(j) / gridSize);
+			pos = mat3 * Vec3d(1.0 - static_cast<double>(j) / gridSize, static_cast<double>(i) / gridSize, 1.0);
 			healpix_xy2vec(pos.v, pos.v);
+
+			// Aberration: Assume pos=normalized vertex position on the sphere in HiPS frame equatorial/ecliptical/galactic. Velocity is already transformed to frame
+			if (!planetarySurvey)
+			{
+				pos+=observerVelocity;
+				pos.normalize();
+			}
+
 			verts << pos;
 			tex << texPos;
 		}
 	}
-	for (int i = 0; i < gridSize; i++)
+	for (uint16_t i = 0; i < gridSize; i++)
 	{
-		for (int j = 0; j < gridSize; j++)
+		for (uint16_t j = 0; j < gridSize; j++)
 		{
-			for (int k = 0; k < 6; k++)
+			for (uint16_t k = 0; k < 6; k++)
 			{
 				indices << (INDICES[outside ? 1 : 0][k][1] + i) * n +
 					        INDICES[outside ? 1 : 0][k][0] + j;
@@ -472,6 +517,8 @@ QList<HipsSurveyP> HipsSurvey::parseHipslist(const QString& data)
 		QString key = line.section("=", 0, 0).trimmed();
 		QString value = line.section("=", 1, -1).trimmed();
 		if (key == "hips_service_url") url = value;
+		// special case: https://github.com/Stellarium/stellarium/issues/1276
+		if (url.contains("data.stellarium.org/surveys/dss")) continue;
 		if (key == "hips_release_date")
 		{
 			// XXX: StelUtils::getJulianDayFromISO8601String does not work

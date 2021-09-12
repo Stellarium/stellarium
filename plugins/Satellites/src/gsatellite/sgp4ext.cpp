@@ -544,7 +544,7 @@ void days2mdhms(int year, double days, int& mon, int& day, int& hr, int& minute,
 	double    temp;
 	int lmonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-	dayofyr = (int)std::floor(days);
+	dayofyr = static_cast<int>(std::floor(days));
 	/* ----------------- find month and day of month ---------------- */
 	if ( (year % 4) == 0 )
 		lmonth[1] = 29;
@@ -561,9 +561,9 @@ void days2mdhms(int year, double days, int& mon, int& day, int& hr, int& minute,
 
 	/* ----------------- find hours minutes and seconds ------------- */
 	temp = (days - dayofyr) * 24.0;
-	hr   = (int)std::floor(temp);
+	hr   = static_cast<int>(std::floor(temp));
 	temp = (temp - hr) * 60.0;
-	minute  = (int)std::floor(temp);
+	minute  = static_cast<int>(std::floor(temp));
 	sec  = (temp - minute) * 60.0;
 }  // end days2mdhms
 
@@ -615,8 +615,8 @@ void invjday(double jd, int& year, int& mon, int& day, int& hr, int& minute, dou
 	/* --------------- find year and days of the year --------------- */
 	temp    = jd - 2415019.5;
 	tu      = temp / 365.25;
-	year    = 1900 + (int)std::floor(tu);
-	leapyrs = (int)std::floor((year - 1901) * 0.25);
+	year    = 1900 + static_cast<int>(std::floor(tu));
+	leapyrs = static_cast<int>(std::floor((year - 1901) * 0.25));
 
 	// optional nudge by 8.64x10-7 sec to get even outputs
 	days    = temp - ((year - 1900) * 365.0 + leapyrs) + 0.00000000001;
@@ -625,7 +625,7 @@ void invjday(double jd, int& year, int& mon, int& day, int& hr, int& minute, dou
 	if (days < 1.0)
 	{
 		year    = year - 1;
-		leapyrs = (int)std::floor((year - 1901) * 0.25);
+		leapyrs = static_cast<int>(std::floor((year - 1901) * 0.25));
 		days    = temp - ((year - 1900) * 365.0 + leapyrs);
 	}
 

@@ -28,7 +28,6 @@
 
 AngleMeasureDialog::AngleMeasureDialog()
 	: StelDialog("AngleMeasure")
-	, am(Q_NULLPTR)
 {
 	ui = new Ui_angleMeasureDialog();
 }
@@ -49,7 +48,6 @@ void AngleMeasureDialog::retranslate()
 
 void AngleMeasureDialog::createDialogContent()
 {
-	am = GETSTELMODULE(AngleMeasure);
 	ui->setupUi(dialog);
 
 	// Kinetic scrolling
@@ -62,24 +60,34 @@ void AngleMeasureDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
-	ui->useDmsFormatCheckBox->setChecked(am->isDmsFormat());
-	connect(ui->useDmsFormatCheckBox, SIGNAL(toggled(bool)), am, SLOT(useDmsFormat(bool)));
-	ui->showPositionAngleCheckBox->setChecked(am->isPaDisplayed());
-	connect(ui->showPositionAngleCheckBox, SIGNAL(toggled(bool)), am, SLOT(showPositionAngle(bool)));
-	ui->showPositionAngleHorizontalCheckBox->setChecked(am->isHorPaDisplayed());
-	connect(ui->showPositionAngleHorizontalCheckBox, SIGNAL(toggled(bool)), am, SLOT(showPositionAngleHor(bool)));
-	ui->showEquatorial_GroupBox->setChecked(am->isEquatorial());
-	connect(ui->showEquatorial_GroupBox, SIGNAL(toggled(bool)), am, SLOT(showEquatorial(bool)));
-	ui->showHorizontal_GroupBox->setChecked(am->isHorizontal());
-	connect(ui->showHorizontal_GroupBox, SIGNAL(toggled(bool)), am, SLOT(showHorizontal(bool)));
-	ui->azAltStartOnSkyCheckBox->setChecked(am->isHorizontalStartSkylinked());
-	connect(ui->azAltStartOnSkyCheckBox, SIGNAL(toggled(bool)), am, SLOT(showHorizontalStartSkylinked(bool)));
-	ui->azAltEndOnSkyCheckBox->setChecked(am->isHorizontalEndSkylinked());
-	connect(ui->azAltEndOnSkyCheckBox, SIGNAL(toggled(bool)), am, SLOT(showHorizontalEndSkylinked(bool)));
+	connectBoolProperty(ui->followCursorCheckBox, 			"AngleMeasure.flagFollowCursor");
+	connectBoolProperty(ui->useDmsFormatCheckBox, 			"AngleMeasure.dmsFormat");
+	connectBoolProperty(ui->showPositionAngleCheckBox, 		"AngleMeasure.flagShowEquatorialPA");
+	connectBoolProperty(ui->showPositionAngleHorizontalCheckBox,	"AngleMeasure.flagShowHorizontalPA");
+	connectBoolProperty(ui->showEquatorial_GroupBox,		"AngleMeasure.flagShowEquatorial");
+	connectBoolProperty(ui->showHorizontal_GroupBox,		"AngleMeasure.flagShowHorizontal");
+	connectBoolProperty(ui->azAltStartOnSkyCheckBox,		"AngleMeasure.flagShowHorizontalStartSkylinked");
+	connectBoolProperty(ui->azAltEndOnSkyCheckBox,			"AngleMeasure.flagShowHorizontalEndSkylinked");
 
-	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(resetAngleMeasureSettings()));
+	connectColorButton(ui->equatorialLineColorToolButton,	"AngleMeasure.equatorialLineColor", "AngleMeasure/line_color");
+	connectColorButton(ui->equatorialTextColorToolButton,	"AngleMeasure.equatorialTextColor", "AngleMeasure/text_color");
+	connectColorButton(ui->horizontalLineColorToolButton,	"AngleMeasure.horizontalLineColor", "AngleMeasure/line_color_horizontal");
+	connectColorButton(ui->horizontalTextColorToolButton,	"AngleMeasure.horizontalTextColor", "AngleMeasure/text_color_horizontal");
+
+	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 
 	setAboutHtml();
+}
+
+void AngleMeasureDialog::restoreDefaults()
+{
+	if (askConfirmation())
+	{
+		qDebug() << "[AngleMeasure] restore defaults...";
+		GETSTELMODULE(AngleMeasure)->restoreDefaultSettings();
+	}
+	else
+		qDebug() << "[AngleMeasure] restore defaults is canceled...";
 }
 
 void AngleMeasureDialog::setAboutHtml(void)
@@ -101,16 +109,8 @@ void AngleMeasureDialog::setAboutHtml(void)
 	html += "<p>" + q_("Start and end points in horizontal mode can be linked to the rotating sky, which may be helpful to keep relations between landscape and some celestial object or (with both linked) for Dobsonian starhopping.") + "</p>";
 	html += "<p>" + q_("*goes misty eyed* I recall measuring the size of the Cassini Division when I was a student. It was not the high academic glamor one might expect... It was cloudy... It was rainy... The observatory lab had some old scopes set up at one end, pointing at a <em>photograph</em> of Saturn at the other end of the lab. We measured. We calculated. We wished we were in Hawaii.") + "</p>";
 
-	html += "<h3>" + q_("Links") + "</h3>";
-	html += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg("Angle Measure plugin") + "</p>";
-	html += "<p><ul>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you have a question, you can {get an answer here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://groups.google.com/forum/#!forum/stellarium\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("Bug reports and feature requests can be made {here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://github.com/Stellarium/stellarium/issues\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you want to read full information about this plugin and its history, you can {get info here}.").toHtmlEscaped().replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/AngleMeasure_plugin\">\\1</a>") + "</li>";
-	html += "</ul></p></body></html>";
+	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Angle Measure plugin");
+	html += "</body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if(gui!=Q_NULLPTR)
@@ -119,9 +119,4 @@ void AngleMeasureDialog::setAboutHtml(void)
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
 	}
 	ui->aboutTextBrowser->setHtml(html);
-}
-
-void AngleMeasureDialog::resetAngleMeasureSettings()
-{
-	am->restoreDefaultSettings();
 }

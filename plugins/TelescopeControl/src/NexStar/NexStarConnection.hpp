@@ -39,6 +39,7 @@ public:
 	NexStarConnection(Server &server, const char *serial_device);
 	~NexStarConnection(void) { resetCommunication(); }
 	void sendGoto(unsigned int ra_int, int dec_int);
+	void sendSync(unsigned int ra_int, int dec_int);
 	void sendCommand(NexStarCommand * command);
 	
 private:

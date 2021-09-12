@@ -58,8 +58,9 @@ class TCP : public Interface
 
     virtual std::string label() { return "Ethernet"; }
 
-    virtual const char *host() { return AddressT[0].text; }
-    virtual uint32_t port() { return atoi(AddressT[0].text); }
+    virtual const char *host() const { return AddressT[0].text; }
+    virtual uint32_t port() const { return atoi(AddressT[1].text); }
+    ConnectionType connectionType() const { return static_cast<ConnectionType>(IUFindOnSwitchIndex(&TcpUdpSP)); }
 
     virtual bool ISNewText(const char *dev, const char *name, char *texts[], char *names[], int n);
     virtual bool ISNewSwitch(const char *dev, const char *name, ISState *states, char *names[], int n);
@@ -73,7 +74,7 @@ class TCP : public Interface
   protected:
     // IP Address/Port
     ITextVectorProperty AddressTP;
-    IText AddressT[2];
+    IText AddressT[2] {};
 
     ISwitch TcpUdpS[2];
     ISwitchVectorProperty TcpUdpSP;

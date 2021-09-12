@@ -36,22 +36,23 @@
 // We mean it.
 //
 
-#include "xlsxglobal.h"
-#include "xlsxformat.h"
-#include "xlsxabstractooxmlfile.h"
 #include <QSharedPointer>
 #include <QHash>
 #include <QList>
 #include <QMap>
 #include <QStringList>
 #include <QVector>
+#include <QXmlStreamWriter>
+#include <QXmlStreamReader>
+#include <QIODevice>
 
-class QXmlStreamWriter;
-class QXmlStreamReader;
-class QIODevice;
-class StylesTest;
+// class StylesTest;
 
-namespace QXlsx {
+#include "xlsxglobal.h"
+#include "xlsxformat.h"
+#include "xlsxabstractooxmlfile.h"
+
+QT_BEGIN_NAMESPACE_XLSX
 
 class Format;
 class XlsxColor;
@@ -64,7 +65,7 @@ struct XlsxFormatNumberData
     QString formatString;
 };
 
-class  Styles : public AbstractOOXmlFile
+class Styles : public AbstractOOXmlFile
 {
 public:
     Styles(CreateFlag flag);
@@ -77,11 +78,13 @@ public:
     void saveToXmlFile(QIODevice *device) const;
     bool loadFromXmlFile(QIODevice *device);
 
+#if QT_VERSION >= 0x050600
     QColor getColorByIndex(int idx);
+#endif
 
 private:
     friend class Format;
-    friend class ::StylesTest;
+    // friend class ::StylesTest;
 
     void fixNumFmt(const Format &format);
 
@@ -112,6 +115,8 @@ private:
     bool readColors(QXmlStreamReader &reader);
     bool readIndexedColors(QXmlStreamReader &reader);
 
+    bool readCellStyleXfs(QXmlStreamReader &reader);
+
     QHash<QString, int> m_builtinNumFmtsHash;
     QMap<int, QSharedPointer<XlsxFormatNumberData> > m_customNumFmtIdMap;
     QHash<QString, QSharedPointer<XlsxFormatNumberData> > m_customNumFmtsHash;
@@ -135,5 +140,6 @@ private:
     bool m_emptyFormatAdded;
 };
 
-}
+QT_END_NAMESPACE_XLSX
+
 #endif // XLSXSTYLES_H

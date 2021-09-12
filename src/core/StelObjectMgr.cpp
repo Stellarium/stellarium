@@ -28,13 +28,17 @@
 #include "StelMovementMgr.hpp"
 #include "RefractionExtinction.hpp"
 #include "StelSkyDrawer.hpp"
+#include "StelTranslator.hpp"
+#include "StelActionMgr.hpp"
+#include "Planet.hpp"
 
 #include <QMouseEvent>
 #include <QString>
 #include <QDebug>
 #include <QStringList>
+#include <QSettings>
 
-StelObjectMgr::StelObjectMgr() : objectPointerVisibility(true), searchRadiusPixel(25.f), distanceWeight(1.f)
+StelObjectMgr::StelObjectMgr() : objectPointerVisibility(true), searchRadiusPixel(25.), distanceWeight(1.f)
 {
 	setObjectName("StelObjectMgr");
 }
@@ -43,18 +47,157 @@ StelObjectMgr::~StelObjectMgr()
 {
 }
 
+void StelObjectMgr::init()
+{
+	// Register all the core actions.
+	QString timeGroup = N_("Date and Time");	
+	StelActionMgr* actionsMgr = StelApp::getInstance().getStelActionManager();
+	actionsMgr->addAction("actionNext_Transit", timeGroup, N_("Next transit of the selected object"), this, "nextTransit()");
+	actionsMgr->addAction("actionNext_Rising", timeGroup, N_("Next rising of the selected object"), this, "nextRising()");
+	actionsMgr->addAction("actionNext_Setting", timeGroup, N_("Next setting of the selected object"), this, "nextSetting()");
+	actionsMgr->addAction("actionToday_Transit", timeGroup, N_("Today's transit of the selected object"), this, "todayTransit()");
+	actionsMgr->addAction("actionToday_Rising", timeGroup, N_("Today's rising of the selected object"), this, "todayRising()");
+	actionsMgr->addAction("actionToday_Setting", timeGroup, N_("Today's setting of the selected object"), this, "todaySetting()");
+	actionsMgr->addAction("actionPrevious_Transit", timeGroup, N_("Previous transit of the selected object"), this, "previousTransit()");
+	actionsMgr->addAction("actionPrevious_Rising", timeGroup, N_("Previous rising of the selected object"), this, "previousRising()");
+	actionsMgr->addAction("actionPrevious_Setting", timeGroup, N_("Previous setting of the selected object"), this, "previousSetting()");
+
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	setFlagSelectedObjectPointer(conf->value("viewing/flag_show_selection_marker", true).toBool());
+}
+
+void StelObjectMgr::nextTransit()
+{
+	const QList<StelObjectP> selected = getSelectedObject();
+	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
+	{
+		StelCore* core = StelApp::getInstance().getCore();
+		core->addSolarDays(1.0);
+		double JD = core->getJD();
+		Vec3f rts = selected[0]->getRTSTime(core);
+		core->setJD(static_cast<int>(JD) + static_cast<double>(rts[1]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+	}
+}
+
+void StelObjectMgr::nextRising()
+{
+	const QList<StelObjectP> selected = getSelectedObject();
+	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
+	{
+		StelCore* core = StelApp::getInstance().getCore();
+		core->addSolarDays(1.0);
+		double JD = core->getJD();
+		Vec3f rts = selected[0]->getRTSTime(core);
+		if (rts[0]>-99.f && rts[0]<100.f)
+			core->setJD(static_cast<int>(JD) + static_cast<double>(rts[0]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+	}
+}
+
+void StelObjectMgr::nextSetting()
+{
+	const QList<StelObjectP> selected = getSelectedObject();
+	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
+	{
+		StelCore* core = StelApp::getInstance().getCore();
+		core->addSolarDays(1.0);
+		double JD = core->getJD();
+		Vec3f rts = selected[0]->getRTSTime(core);
+		if (rts[2]>-99.f && rts[2]<100.f)
+			core->setJD(static_cast<int>(JD) + static_cast<double>(rts[2]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+	}
+}
+
+void StelObjectMgr::previousTransit()
+{
+	const QList<StelObjectP> selected = getSelectedObject();
+	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
+	{
+		StelCore* core = StelApp::getInstance().getCore();
+		core->addSolarDays(-1.0);
+		double JD = core->getJD();
+		Vec3f rts = selected[0]->getRTSTime(core);
+		core->setJD(static_cast<int>(JD) + static_cast<double>(rts[1]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+	}
+}
+
+void StelObjectMgr::previousRising()
+{
+	const QList<StelObjectP> selected = getSelectedObject();
+	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
+	{
+		StelCore* core = StelApp::getInstance().getCore();
+		core->addSolarDays(-1.0);
+		double JD = core->getJD();
+		Vec3f rts = selected[0]->getRTSTime(core);
+		if (rts[0]>-99.f && rts[0]<100.f)
+			core->setJD(static_cast<int>(JD) + static_cast<double>(rts[0]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+	}
+}
+
+void StelObjectMgr::previousSetting()
+{
+	const QList<StelObjectP> selected = getSelectedObject();
+	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
+	{
+		StelCore* core = StelApp::getInstance().getCore();
+		core->addSolarDays(-1.0);
+		double JD = core->getJD();
+		Vec3f rts = selected[0]->getRTSTime(core);
+		if (rts[2]>-99.f && rts[2]<100.f)
+			core->setJD(static_cast<int>(JD) + static_cast<double>(rts[2]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+	}
+}
+
+void StelObjectMgr::todayTransit()
+{
+	const QList<StelObjectP> selected = getSelectedObject();
+	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
+	{
+		StelCore* core = StelApp::getInstance().getCore();
+		double JD = core->getJD();
+		Vec3f rts = selected[0]->getRTSTime(core);
+		core->setJD(static_cast<int>(JD) + static_cast<double>(rts[1]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+	}
+}
+
+void StelObjectMgr::todayRising()
+{
+	const QList<StelObjectP> selected = getSelectedObject();
+	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
+	{
+		StelCore* core = StelApp::getInstance().getCore();
+		double JD = core->getJD();
+		Vec3f rts = selected[0]->getRTSTime(core);
+		if (rts[0]>-99.f && rts[0]<100.f)
+			core->setJD(static_cast<int>(JD) + static_cast<double>(rts[0]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+	}
+}
+
+void StelObjectMgr::todaySetting()
+{
+	const QList<StelObjectP> selected = getSelectedObject();
+	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
+	{
+		StelCore* core = StelApp::getInstance().getCore();
+		double JD = core->getJD();
+		Vec3f rts = selected[0]->getRTSTime(core);
+		if (rts[2]>-99.f && rts[2]<100.f)
+			core->setJD(static_cast<int>(JD) + static_cast<double>(rts[2]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+	}
+}
+
 /*************************************************************************
  Add a new StelObject manager into the list of supported modules.
 *************************************************************************/
 void StelObjectMgr::registerStelObjectMgr(StelObjectModule* m)
 {
-	objectsModule.push_back(m);
+	objectsModules.push_back(m);
 	typeToModuleMap.insert(m->getStelObjectType(),m);
 
 	objModulesMap.insert(m->objectName(), m->getName());
 
-	//TODO: there should probably be a better way to specify the sub-types
-	// instead of hardcoding them here
+	//TODO: there should probably be a better way to specify the sub-types instead of hardcoding them here
 
 	// Celestial objects from Solar system by type
 	if (m->objectName()=="SolarSystem")
@@ -107,12 +250,13 @@ void StelObjectMgr::registerStelObjectMgr(StelObjectModule* m)
 		objModulesMap["NebulaMgr:30"] = "Emission-line stars";
 		objModulesMap["NebulaMgr:31"] = "Supernova candidates";
 		objModulesMap["NebulaMgr:32"] = "Supernova remnant candidates";
-		objModulesMap["NebulaMgr:33"] = "Clusters of galaxies";
+		objModulesMap["NebulaMgr:33"] = "Clusters of galaxies";		
+		objModulesMap["NebulaMgr:35"] = "Regions of the sky";
 		objModulesMap["NebulaMgr:100"] = "Messier Catalogue";
 		objModulesMap["NebulaMgr:101"] = "Caldwell Catalogue";
 		objModulesMap["NebulaMgr:102"] = "Barnard Catalogue";
 		objModulesMap["NebulaMgr:103"] = "Sharpless Catalogue";
-		objModulesMap["NebulaMgr:104"] = "Van den Bergh Catalogue";
+		objModulesMap["NebulaMgr:104"] = "van den Bergh Catalogue";
 		objModulesMap["NebulaMgr:105"] = "The Catalogue of Rodgers, Campbell, and Whiteoak";
 		objModulesMap["NebulaMgr:106"] = "Collinder Catalogue";
 		objModulesMap["NebulaMgr:107"] = "Melotte Catalogue";
@@ -129,11 +273,18 @@ void StelObjectMgr::registerStelObjectMgr(StelObjectModule* m)
 		objModulesMap["NebulaMgr:118"] = "The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae";
 		objModulesMap["NebulaMgr:119"] = "A catalogue of Galactic supernova remnants";
 		objModulesMap["NebulaMgr:120"] = "A Catalog of Rich Clusters of Galaxies";
-		objModulesMap["NebulaMgr:121"] = "Hickson Compact Group";
-		objModulesMap["NebulaMgr:122"] = "Abell Catalog of Planetary Nebulae";
-		objModulesMap["NebulaMgr:123"] = "ESO/Uppsala Survey of the ESO(B) Atlas";
+		objModulesMap["NebulaMgr:121"] = "Hickson Compact Group";		
+		objModulesMap["NebulaMgr:122"] = "ESO/Uppsala Survey of the ESO(B) Atlas";
+		objModulesMap["NebulaMgr:123"] = "Catalogue of southern stars embedded in nebulosity";
+		objModulesMap["NebulaMgr:124"] = "Catalogue and distances of optically visible H II regions";
+		objModulesMap["NebulaMgr:125"] = "Trumpler Catalogue";
+		objModulesMap["NebulaMgr:126"] = "Stock Catalogue";
+		objModulesMap["NebulaMgr:127"] = "Ruprecht Catalogue";
+		objModulesMap["NebulaMgr:128"] = "van den Bergh-Hagen Catalogue";
 		objModulesMap["NebulaMgr:150"] = "Dwarf galaxies";
 		objModulesMap["NebulaMgr:151"] = "Herschel 400 Catalogue";
+		objModulesMap["NebulaMgr:152"] = "Jack Bennett's deep sky catalogue";
+		objModulesMap["NebulaMgr:153"] = "James Dunlop's southern deep sky catalogue";
 	}
 	// Interesting stars
 	if (m->objectName()=="StarMgr")
@@ -143,6 +294,10 @@ void StelObjectMgr::registerStelObjectMgr(StelObjectModule* m)
 		objModulesMap["StarMgr:2"] = "Bright double stars";
 		objModulesMap["StarMgr:3"] = "Bright variable stars";
 		objModulesMap["StarMgr:4"] = "Bright stars with high proper motion";
+		objModulesMap["StarMgr:5"] = "Variable stars: Algol-type eclipsing systems";
+		objModulesMap["StarMgr:6"] = "Variable stars: the classical cepheids";
+		objModulesMap["StarMgr:7"] = "Bright carbon stars";
+		objModulesMap["StarMgr:8"] = "Bright barium stars";
 	}
 	// Nomenclature...
 	if (m->objectName()=="NomenclatureMgr")
@@ -203,57 +358,59 @@ void StelObjectMgr::registerStelObjectMgr(StelObjectModule* m)
 		objModulesMap["NomenclatureMgr:53"] = "Geological features: lenticulae";
 		objModulesMap["NomenclatureMgr:54"] = "Geological features: reticula";
 		objModulesMap["NomenclatureMgr:56"] = "Geological features: tesserae";
-		// list of celestial bodies
-		objModulesMap["NomenclatureMgr:Epimetheus"] = "Named geological features of Epimetheus";
-		objModulesMap["NomenclatureMgr:Vesta"]      = "Named geological features of Vesta";
-		objModulesMap["NomenclatureMgr:Mathilde"]   = "Named geological features of Mathilde";
-		objModulesMap["NomenclatureMgr:Venus"]      = "Named geological features of Venus";
-		objModulesMap["NomenclatureMgr:Mercury"]    = "Named geological features of Mercury";
-		objModulesMap["NomenclatureMgr:Iapetus"]    = "Named geological features of Iapetus";
-		objModulesMap["NomenclatureMgr:Ganymede"]   = "Named geological features of Ganymede";
-		objModulesMap["NomenclatureMgr:Ceres"]      = "Named geological features of Ceres";
-		objModulesMap["NomenclatureMgr:Ida"]        = "Named geological features of Ida";
-		objModulesMap["NomenclatureMgr:Triton"]     = "Named geological features of Triton";
-		objModulesMap["NomenclatureMgr:Oberon"]     = "Named geological features of Oberon";
-		objModulesMap["NomenclatureMgr:Itokawa"]    = "Named geological features of Itokawa";
-		objModulesMap["NomenclatureMgr:Thebe"]      = "Named geological features of Thebe";
-		objModulesMap["NomenclatureMgr:Gaspra"]     = "Named geological features of Gaspra";
-		objModulesMap["NomenclatureMgr:Rhea"]       = "Named geological features of Rhea";
-		objModulesMap["NomenclatureMgr:Enceladus"]  = "Named geological features of Enceladus";
-		objModulesMap["NomenclatureMgr:Moon"]       = "Named geological features of the Moon";
-		objModulesMap["NomenclatureMgr:Dione"]      = "Named geological features of Dione";
-		objModulesMap["NomenclatureMgr:Steins"]     = "Named geological features of Steins";
-		objModulesMap["NomenclatureMgr:Phoebe"]     = "Named geological features of Phoebe";
-		objModulesMap["NomenclatureMgr:Puck"]       = "Named geological features of Puck";
-		objModulesMap["NomenclatureMgr:Europa"]     = "Named geological features of Europa";
-		objModulesMap["NomenclatureMgr:Lutetia"]    = "Named geological features of Lutetia";
-		objModulesMap["NomenclatureMgr:Tethys"]     = "Named geological features of Tethys";
-		objModulesMap["NomenclatureMgr:Eros"]       = "Named geological features of Eros";
-		objModulesMap["NomenclatureMgr:Callisto"]   = "Named geological features of Callisto";
-		objModulesMap["NomenclatureMgr:Phobos"]     = "Named geological features of Phobos";
-		objModulesMap["NomenclatureMgr:Proteus"]    = "Named geological features of Proteus";
-		objModulesMap["NomenclatureMgr:Hyperion"]   = "Named geological features of Hyperion";
-		objModulesMap["NomenclatureMgr:Titania"]    = "Named geological features of Titania";
-		objModulesMap["NomenclatureMgr:Deimos"]     = "Named geological features of Deimos";
-		objModulesMap["NomenclatureMgr:Io"]         = "Named geological features of Io";
-		objModulesMap["NomenclatureMgr:Ariel"]      = "Named geological features of Ariel";
-		objModulesMap["NomenclatureMgr:Dactyl"]     = "Named geological features of Dactyl";
-		objModulesMap["NomenclatureMgr:Titan"]      = "Named geological features of Titan";
+		objModulesMap["NomenclatureMgr:57"] = "Geological features: saxa";
+		// list of celestial bodies (alphabetical sorting)
 		objModulesMap["NomenclatureMgr:Amalthea"]   = "Named geological features of Amalthea";
-		objModulesMap["NomenclatureMgr:Umbriel"]    = "Named geological features of Umbriel";
+		objModulesMap["NomenclatureMgr:Ariel"]      = "Named geological features of Ariel";
+		objModulesMap["NomenclatureMgr:Callisto"]   = "Named geological features of Callisto";
+		objModulesMap["NomenclatureMgr:Ceres"]      = "Named geological features of Ceres";
+		objModulesMap["NomenclatureMgr:Charon"]     = "Named geological features of Charon";
+		objModulesMap["NomenclatureMgr:Dactyl"]     = "Named geological features of Dactyl";
+		objModulesMap["NomenclatureMgr:Deimos"]     = "Named geological features of Deimos";
+		objModulesMap["NomenclatureMgr:Dione"]      = "Named geological features of Dione";
+		objModulesMap["NomenclatureMgr:Enceladus"]  = "Named geological features of Enceladus";
+		objModulesMap["NomenclatureMgr:Epimetheus"] = "Named geological features of Epimetheus";
+		objModulesMap["NomenclatureMgr:Eros"]       = "Named geological features of Eros";
+		objModulesMap["NomenclatureMgr:Europa"]     = "Named geological features of Europa";
+		objModulesMap["NomenclatureMgr:Ganymede"]   = "Named geological features of Ganymede";
+		objModulesMap["NomenclatureMgr:Gaspra"]     = "Named geological features of Gaspra";
+		objModulesMap["NomenclatureMgr:Hyperion"]   = "Named geological features of Hyperion";
+		objModulesMap["NomenclatureMgr:Iapetus"]    = "Named geological features of Iapetus";
+		objModulesMap["NomenclatureMgr:Ida"]        = "Named geological features of Ida";
+		objModulesMap["NomenclatureMgr:Io"]         = "Named geological features of Io";
+		objModulesMap["NomenclatureMgr:Itokawa"]    = "Named geological features of Itokawa";
 		objModulesMap["NomenclatureMgr:Janus"]      = "Named geological features of Janus";
+		objModulesMap["NomenclatureMgr:Lutetia"]    = "Named geological features of Lutetia";
 		objModulesMap["NomenclatureMgr:Mars"]       = "Named geological features of Mars";
-		objModulesMap["NomenclatureMgr:Miranda"]    = "Named geological features of Miranda";
+		objModulesMap["NomenclatureMgr:Mathilde"]   = "Named geological features of Mathilde";
+		objModulesMap["NomenclatureMgr:Mercury"]    = "Named geological features of Mercury";
 		objModulesMap["NomenclatureMgr:Mimas"]      = "Named geological features of Mimas";
+		objModulesMap["NomenclatureMgr:Miranda"]    = "Named geological features of Miranda";
+		objModulesMap["NomenclatureMgr:Moon"]       = "Named geological features of the Moon";
+		objModulesMap["NomenclatureMgr:Oberon"]     = "Named geological features of Oberon";
+		objModulesMap["NomenclatureMgr:Phobos"]     = "Named geological features of Phobos";
+		objModulesMap["NomenclatureMgr:Phoebe"]     = "Named geological features of Phoebe";
 		objModulesMap["NomenclatureMgr:Pluto"]      = "Named geological features of Pluto";
+		objModulesMap["NomenclatureMgr:Proteus"]    = "Named geological features of Proteus";
+		objModulesMap["NomenclatureMgr:Puck"]       = "Named geological features of Puck";
+		objModulesMap["NomenclatureMgr:Rhea"]       = "Named geological features of Rhea";
+		objModulesMap["NomenclatureMgr:Ryugu"]      = "Named geological features of Ryugu";
+		objModulesMap["NomenclatureMgr:Steins"]     = "Named geological features of Steins";
+		objModulesMap["NomenclatureMgr:Tethys"]     = "Named geological features of Tethys";
+		objModulesMap["NomenclatureMgr:Thebe"]      = "Named geological features of Thebe";
+		objModulesMap["NomenclatureMgr:Titania"]    = "Named geological features of Titania";
+		objModulesMap["NomenclatureMgr:Titan"]      = "Named geological features of Titan";
+		objModulesMap["NomenclatureMgr:Triton"]     = "Named geological features of Triton";
+		objModulesMap["NomenclatureMgr:Umbriel"]    = "Named geological features of Umbriel";
+		objModulesMap["NomenclatureMgr:Venus"]      = "Named geological features of Venus";
+		objModulesMap["NomenclatureMgr:Vesta"]      = "Named geological features of Vesta";
 	}
 }
-
 
 StelObjectP StelObjectMgr::searchByNameI18n(const QString &name) const
 {
 	StelObjectP rval;
-	for (const auto* m : objectsModule)
+	for (const auto* m : objectsModules)
 	{
 		rval = m->searchByNameI18n(name);
 		if (rval)
@@ -266,7 +423,7 @@ StelObjectP StelObjectMgr::searchByNameI18n(const QString &name) const
 StelObjectP StelObjectMgr::searchByName(const QString &name) const
 {
 	StelObjectP rval;
-	for (const auto* m : objectsModule)
+	for (const auto* m : objectsModules)
 	{
 		rval = m->searchByName(name);
 		if (rval)
@@ -280,7 +437,7 @@ StelObjectP StelObjectMgr::searchByID(const QString &type, const QString &id) co
 	auto it = typeToModuleMap.constFind(type);
 	if(it!=typeToModuleMap.constEnd())
 	{
-		return (*it)->searchByID(id);;
+		return (*it)->searchByID(id);
 	}
 	qWarning()<<"StelObject type"<<type<<"unknown";
 	return Q_NULLPTR;
@@ -311,7 +468,7 @@ bool StelObjectMgr::findAndSelect(const QString &name, StelModule::StelModuleSel
 }
 
 
-//! Find and select an object near given equatorial position
+//! Find and select an object near given equatorial J2000 position
 bool StelObjectMgr::findAndSelect(const StelCore* core, const Vec3d& pos, StelModule::StelModuleSelectAction action)
 {
 	StelObjectP tempselect = cleverFind(core, pos);
@@ -325,44 +482,44 @@ bool StelObjectMgr::findAndSelect(const StelCore* core, int x, int y, StelModule
 	return setSelectedObject(tempselect, action);
 }
 
-// Find an object in a "clever" way, v in J2000 frame
+// Find an object in a "clever" way, v in J2000 frame (no aberration!)
 StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) const
 {
-	StelObjectP sobj;
-	QList<StelObjectP> candidates;
-
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
 	// Field of view for a searchRadiusPixel pixel diameter circle on screen
-	float fov_around = core->getMovementMgr()->getCurrentFov()/qMin(prj->getViewportWidth(), prj->getViewportHeight()) * searchRadiusPixel;
+	const double fov_around = core->getMovementMgr()->getCurrentFov()/qMin(prj->getViewportWidth(), prj->getViewportHeight()) * searchRadiusPixel;
 
 	// Collect the objects inside the range
-	for (const auto* m : objectsModule)
+	// TODO: normalize v here, and just Q_ASSERT normalized state in the submodules' searchAround() calls.
+	QList<StelObjectP> candidates;
+	for (const auto* m : objectsModules)
 		candidates += m->searchAround(v, fov_around, core);
 
-	// GZ 2014-08-17: This should be exactly the sky's limit magnitude (or even more, but not less!), else visible stars cannot be clicked.
-	float limitMag = core->getSkyDrawer()->getLimitMagnitude(); // -2.f;
+	// This should be exactly the sky's limit magnitude, else visible stars cannot be clicked, or suppressed stars can be found.
+	const float limitMag = core->getSkyDrawer()->getFlagStarMagnitudeLimit() ?
+				static_cast<float>(core->getSkyDrawer()->getCustomStarMagnitudeLimit()) :
+				core->getSkyDrawer()->getLimitMagnitude();
 	QList<StelObjectP> tmp;
 	for (const auto& obj : candidates)
 	{
 		if (obj->getSelectPriority(core)<=limitMag)
 			tmp.append(obj);
 	}
-	
 	candidates = tmp;
 	
 	// Now select the object minimizing the function y = distance(in pixel) + magnitude
 	Vec3d winpos;
 	prj->project(v, winpos);
-	float xpos = winpos[0];
-	float ypos = winpos[1];
+	const double xpos = winpos[0];
+	const double ypos = winpos[1];
 
-	float best_object_value;
-	best_object_value = 100000.f;
+	StelObjectP sobj;
+	float best_object_value = 100000.f;
 	for (const auto& obj : candidates)
 	{
 		prj->project(obj->getJ2000EquatorialPos(core), winpos);
-		float distance = std::sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1]))*distanceWeight;
+		float distance = static_cast<float>(std::sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1])))*distanceWeight;
 		float priority =  obj->getSelectPriority(core);
 		// qDebug() << (*iter).getShortInfoString(core) << ": " << priority << " " << distance;
 		if (distance + priority < best_object_value)
@@ -376,7 +533,10 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 }
 
 /*************************************************************************
- Find in a "clever" way an object from its equatorial position
+ Find in a "clever" way an object from its screen position
+ If aberration is corrected, we must compute mean J2000 from the clicked position
+ because all cleverfind() is supposed to work with mean J2000 positions.
+ With aberration clause, stars/DSO are found, without the planet moons are found.
 *************************************************************************/
 StelObjectP StelObjectMgr::cleverFind(const StelCore* core, int x, int y) const
 {
@@ -387,11 +547,22 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, int x, int y) const
 		// Nick Fedoseev patch: improve click match for refracted coordinates
 		Vec3d win;
 		prj->project(v,win);
-		float dx = x - win.v[0];
-		float dy = y - win.v[1];
+		const double dx = x - win.v[0];
+		const double dy = y - win.v[1];
 		prj->unProject(x+dx, y+dy, v);
 
-		return cleverFind(core, v);
+		// Apply annual aberration (backwards). Explan. Suppl. 2013, (7.38)
+		Vec3d v2000(v);
+		if (core->getUseAberration())
+		{
+			v2000.normalize(); // just to be sure...
+			Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+			StelCore::matVsop87ToJ2000.transfo(vel);
+			vel*=core->getAberrationFactor() * (AU/(86400.0*SPEED_OF_LIGHT));
+			v2000-=vel;
+			v2000.normalize();
+		}
+		return cleverFind(core, v2000);
 	}
 	return StelObjectP();
 }
@@ -456,21 +627,18 @@ QList<StelObjectP> StelObjectMgr::getSelectedObject(const QString& type) const
 /*****************************************************************************************
  Find and return the list of at most maxNbItem objects auto-completing passed object name
 *******************************************************************************************/
-QStringList StelObjectMgr::listMatchingObjects(const QString& objPrefix, unsigned int maxNbItem, bool useStartOfWords, bool inEnglish) const
+QStringList StelObjectMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (maxNbItem <= 0)
-	{
 		return result;
-	}
 
 	// For all StelObjectmodules..
-	for (const auto* m : objectsModule)
+	for (const auto* m : objectsModules)
 	{
 		// Get matching object for this module
-		QStringList matchingObj = m->listMatchingObjects(objPrefix, maxNbItem, useStartOfWords, inEnglish);
+		QStringList matchingObj = m->listMatchingObjects(objPrefix, maxNbItem, useStartOfWords);
 		result += matchingObj;
-		maxNbItem-=matchingObj.size();
 	}
 
 	result.sort();
@@ -487,13 +655,17 @@ QStringList StelObjectMgr::listAllModuleObjects(const QString &moduleId, bool in
 	if (moduleId.contains(":"))
 	{
 		subSet = true;
+		#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+		list = moduleId.split(":", Qt::SkipEmptyParts);
+		#else
 		list = moduleId.split(":", QString::SkipEmptyParts);
+		#endif
 		objModule = list.at(0);
 		objType = list.at(1);
 	}
 	else
 		objModule = moduleId;
-	for (auto* m : objectsModule)
+	for (auto* m : objectsModules)
 	{
 		if (m->objectName() == objModule)
 		{

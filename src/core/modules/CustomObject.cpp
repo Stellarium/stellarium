@@ -28,15 +28,17 @@
 #include "StelTranslator.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelProjector.hpp"
+#include "StelUtils.hpp"
+#include "Planet.hpp"
 
 const QString CustomObject::CUSTOMOBJECT_TYPE = QStringLiteral("CustomObject");
 Vec3f CustomObject::markerColor = Vec3f(0.1f,1.0f,0.1f);
 float CustomObject::markerSize = 1.f;
 float CustomObject::selectPriority = 0.f;
 
-CustomObject::CustomObject(const QString& codesignation, const Vec3d& coordinates, const bool isVisible)
+CustomObject::CustomObject(const QString& codesignation, const Vec3d& coordJ2000, const bool isVisible)
 	: initialized(false)
-	, XYZ(coordinates)
+	, XYZ(coordJ2000)
 	, markerTexture(Q_NULLPTR)
 	, designation(codesignation)
 	, isMarker(isVisible)
@@ -95,7 +97,13 @@ QString CustomObject::getInfoString(const StelCore* core, const InfoStringGroup&
 
 Vec3f CustomObject::getInfoColor(void) const
 {
-	return Vec3f(1.0, 1.0, 1.0);
+	return Vec3f(1.f, 1.f, 1.f);
+}
+
+Vec3d CustomObject::getJ2000EquatorialPos(const StelCore* core) const
+{
+	Q_UNUSED(core)
+	return XYZ;
 }
 
 float CustomObject::getVMagnitude(const StelCore* core) const
@@ -114,31 +122,30 @@ double CustomObject::getAngularSize(const StelCore*) const
 
 void CustomObject::update(double deltaTime)
 {
-	labelsFader.update((int)(deltaTime*1000));
+	labelsFader.update(static_cast<int>(deltaTime*1000));
 }
 
 void CustomObject::draw(StelCore* core, StelPainter *painter)
 {
-	Q_UNUSED(core);
 	Vec3d pos;
 	// Check visibility of custom object
-	if (!(painter->getProjector()->projectCheck(XYZ, pos)))
+	if (!(painter->getProjector()->projectCheck(getJ2000EquatorialPos(core), pos)))
 		return;
 
 	painter->setBlending(true, GL_ONE, GL_ONE);
-	painter->setColor(markerColor[0], markerColor[1], markerColor[2], 1.f);
+	painter->setColor(markerColor, 1.f);
 
 	if (isMarker)
 	{
 		markerTexture->bind();
-		float size = getAngularSize(Q_NULLPTR)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
-		float shift = markerSize + size/1.6f;
+		const float size = static_cast<float>(getAngularSize(Q_NULLPTR))*M_PI_180f*painter->getProjector()->getPixelPerRadAtCenter();
+		const float shift = markerSize + size/1.6f;
 
-		painter->drawSprite2dMode(pos[0], pos[1], markerSize);
+		painter->drawSprite2dMode(static_cast<float>(pos[0]), static_cast<float>(pos[1]), markerSize);
 
 		if (labelsFader.getInterstate()<=0.f)
 		{
-			painter->drawText(pos[0], pos[1], getNameI18n(), 0, shift, shift, false);
+			painter->drawText(static_cast<float>(pos[0]), static_cast<float>(pos[1]), getNameI18n(), 0, shift, shift, false);
 		}
 	}
 }

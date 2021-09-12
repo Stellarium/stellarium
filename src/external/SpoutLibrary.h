@@ -34,7 +34,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // Note from FS: We need this because the Spout source is compilable only with MSVC, so we use a C/COM-style interface
 // to access a precompiled .dll, this *should* work with all Windows compilers.
 
-#include <windows.h>
+#include <Windows.h>
 //FS: we probably should not include GL directly here, use Qt's wrapper headers instead
 //#include <GL/GL.h>
 #include <QOpenGLContext>
@@ -98,7 +98,7 @@ struct SPOUTLIBRARY
 	virtual bool GetHostPath(const char *sendername, char *hostpath, int maxchars) = 0; // The path of the host that produced the sender
 	virtual int  GetVerticalSync() = 0;
 	virtual bool SetVerticalSync(bool bSync = true) = 0;
-	virtual bool SelectSenderPanel(const char* message = NULL) = 0;
+	virtual bool SelectSenderPanel(const char* message = Q_NULLPTR) = 0;
 
 	// Access to globals
 	virtual bool GetSpoutSenderName(char * sendername, int maxchars) = 0; // get the global sender name

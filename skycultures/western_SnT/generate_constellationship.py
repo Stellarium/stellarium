@@ -15,7 +15,7 @@ def snt_data():
     returns a dict with each field parsed out.
     """
     #                              mag           ra          npd             bayer              sup       weight    cons
-    data_regex = re.compile(r'([0-9\. -]{5}) ([0-9\. ]{8}) ([0-9\. ]{8}) ([A-ZZa-z0-9 -]{3})([a-zA-Z0-9 ])([0-9])([a-zA-Z]{3})')
+    data_regex = re.compile(r'([0-9\. -]{5}) ([0-9\. ]{8}) ([0-9\. ]{8}) ([A-Za-z0-9 -]{3})([a-zA-Z0-9 ])([0-9])([a-zA-Z]{3})')
     for line in sys.stdin:
         line = line.rstrip('\n\r')
         m = re.match(data_regex, line)
@@ -116,6 +116,12 @@ if __name__ == '__main__':
             # so we skip get_hip and assign it manually.
             if vertex['constellation'] == 'Cyg' and vertex['bayer'] == '31-':
                 current_hip = 99848
+            elif vertex['constellation'] == 'Pup' and vertex['bayer'] == 'alf':
+                # Issue #1438: Ensure line from nu Pup to Canopus ends at Canopus
+                current_hip = 30438
+            elif vertex['constellation'] == 'UMa' and vertex['bayer'] == 'xi':
+                # Issue #1414: Ensure line from nu UMa to xi UMa actually ends at xi UMa
+                current_hip = 55203
             else:
                 current_hip = get_hip(ra=vertex['ra'], dec=vertex['dec'], mag=vertex['mag'])
             if not current_hip:
@@ -133,9 +139,10 @@ if __name__ == '__main__':
         exitval = 1
         print("Caught KeyboardInterrupt", file=sys.stderr)
 
-    # Special case for Mensa and Microscopium constellations (without lines!)
-    constellationship['Men'].append( (26264, 26264,) )
-    constellationship['Mic'].append( (103882, 103882,) )
+    # Special case for Mensa and Microscopium constellations
+    # Use alpha and beta of each constellation to generate the lines
+    constellationship['Men'].append( (29271, 23467,) )
+    constellationship['Mic'].append( (102831, 102989,) )
 
     print("Generating constellationship data...", file=sys.stderr)
     for constellation in sorted(constellationship.keys()):

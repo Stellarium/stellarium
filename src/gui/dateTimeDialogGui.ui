@@ -212,9 +212,6 @@
       <attribute name="title">
        <string>Date and Time</string>
       </attribute>
-      <attribute name="toolTip">
-       <string>Date and Time in Gregorian calendar</string>
-      </attribute>
       <layout class="QGridLayout" name="gridLayout_2">
        <property name="leftMargin">
         <number>0</number>
@@ -621,7 +618,7 @@
              <set>Qt::AlignCenter</set>
             </property>
             <property name="decimals">
-             <number>6</number>
+             <number>5</number>
             </property>
             <property name="minimum">
              <double>-100000000.000000000000000</double>
@@ -686,7 +683,7 @@
              <set>Qt::AlignCenter</set>
             </property>
             <property name="decimals">
-             <number>6</number>
+             <number>5</number>
             </property>
             <property name="minimum">
              <double>-100000000.000000000000000</double>

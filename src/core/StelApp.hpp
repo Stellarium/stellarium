@@ -23,6 +23,7 @@
 #include <QString>
 #include <QObject>
 #include "StelModule.hpp"
+#include "VecMath.hpp"
 
 // Predeclaration of some classes
 class StelCore;
@@ -73,8 +74,13 @@ class StelApp : public QObject
 	Q_PROPERTY(bool flagUseAzimuthFromSouth READ getFlagSouthAzimuthUsage   WRITE setFlagSouthAzimuthUsage   NOTIFY flagUseAzimuthFromSouthChanged)
 	Q_PROPERTY(bool flagUseCCSDesignation   READ getFlagUseCCSDesignation   WRITE setFlagUseCCSDesignation   NOTIFY flagUseCCSDesignationChanged)
 	Q_PROPERTY(bool flagUseFormattingOutput READ getFlagUseFormattingOutput WRITE setFlagUseFormattingOutput NOTIFY flagUseFormattingOutputChanged)
+	Q_PROPERTY(bool flagOverwriteInfoColor  READ getFlagOverwriteInfoColor  WRITE setFlagOverwriteInfoColor  NOTIFY flagOverwriteInfoColorChanged)
+	Q_PROPERTY(Vec3f overwriteInfoColor	READ getOverwriteInfoColor	WRITE setOverwriteInfoColor	 NOTIFY overwriteInfoColorChanged)
+	Q_PROPERTY(Vec3f daylightInfoColor	READ getDaylightInfoColor	WRITE setDaylightInfoColor	 NOTIFY daylightInfoColorChanged)
 	Q_PROPERTY(int  screenFontSize          READ getScreenFontSize          WRITE setScreenFontSize          NOTIFY screenFontSizeChanged)
 	Q_PROPERTY(int  guiFontSize             READ getGuiFontSize             WRITE setGuiFontSize             NOTIFY guiFontSizeChanged)
+
+	Q_PROPERTY(QString version READ getVersion)
 
 public:
 	friend class StelAppGraphicsWidget;
@@ -180,8 +186,8 @@ public:
 
 	//! Get the ratio between real device pixel and "Device Independent Pixel".
 	//! Usually this value is 1, but for a mac with retina screen this will be value 2.
-	float getDevicePixelsPerPixel() const {return devicePixelsPerPixel;}
-	void setDevicePixelsPerPixel(float dppp);
+	qreal getDevicePixelsPerPixel() const {return devicePixelsPerPixel;}
+	void setDevicePixelsPerPixel(qreal dppp);
 	
 	//! Get the scaling ratio to apply on all display elements, like GUI, text etc..
 	//! When this ratio is 1, all pixel sizes used in Stellarium will look OK on a regular
@@ -204,7 +210,7 @@ public:
 	//! The caller is responsible for destroying the GUI.
 	void setGui(StelGuiBase* b) {stelGui=b;}
 
-#ifndef DISABLE_SCRIPTING
+#ifdef ENABLE_SCRIPTING
 	//! Get the script API proxy (for signal handling)
 	StelMainScriptAPIProxy* getMainScriptAPIProxy() const {return scriptAPIProxy;}
 	//! Get the script manager
@@ -240,6 +246,11 @@ public slots:
 	//! Get flag for activating night vision mode.
 	bool getVisionModeNight() const {return flagNightVision;}
 
+	//! Set flag for activating overwrite mode for text color in info panel.
+	void setFlagOverwriteInfoColor(bool);
+	//! Get flag for activating overwrite mode for text color in info panel.
+	bool getFlagOverwriteInfoColor() const {return flagOverwriteInfoColor; }
+
 	//! Set flag for showing decimal degree in various places.
 	void setFlagShowDecimalDegrees(bool b);
 	//! Get flag for showing decimal degree in various places.
@@ -259,6 +270,16 @@ public slots:
 	void setFlagUseCCSDesignation(bool b);
 	//! Get flag for using designations for celestial coordinate systems
 	bool getFlagUseCCSDesignation() const {return flagUseCCSDesignation;}
+
+	//! Define info text color for overwrites
+	void setOverwriteInfoColor(const Vec3f& color);
+	//! Get info text color
+	Vec3f getOverwriteInfoColor() const;
+
+	//! Define info text color for daylight mode
+	void setDaylightInfoColor(const Vec3f& color);
+	//! Get info text color
+	Vec3f getDaylightInfoColor() const;
 
 	//! Get the current number of frame per second.
 	//! @return the FPS averaged on the last second
@@ -298,11 +319,14 @@ signals:
 	void flagUseAzimuthFromSouthChanged(bool);
 	void flagUseCCSDesignationChanged(bool);
 	void flagUseFormattingOutputChanged(bool);
+	void flagOverwriteInfoColorChanged(bool);
 	void colorSchemeChanged(const QString&);
 	void languageChanged();
 	void screenFontSizeChanged(int);
 	void guiFontSizeChanged(int);
 	void fontChanged(QFont);
+	void overwriteInfoColorChanged(const Vec3f & color);
+	void daylightInfoColorChanged(const Vec3f & color);
 
 	//! Called just after a progress bar is added.
 	void progressBarAdded(const StelProgressController*);
@@ -317,7 +341,7 @@ private:
 	//! Handle mouse wheel.
 	void handleWheel(class QWheelEvent* event);
 	//! Handle mouse move.
-	bool handleMove(float x, float y, Qt::MouseButtons b);
+	bool handleMove(qreal x, qreal y, Qt::MouseButtons b);
 	//! Handle key press and release.
 	void handleKeys(class QKeyEvent* event);
 	//! Handle pinch on multi touch devices.
@@ -328,6 +352,8 @@ private:
 	//! Used internally to set the viewport effects.
 	//! @param drawFbo the OpenGL fbo we need to render into.
 	void applyRenderBuffer(quint32 drawFbo=0);
+
+	QString getVersion() const;
 
 	// The StelApp singleton
 	static StelApp* singleton;
@@ -376,7 +402,7 @@ private:
 
 	StelSkyLayerMgr* skyImageMgr;
 
-#ifndef DISABLE_SCRIPTING
+#ifdef ENABLE_SCRIPTING
 	// The script API proxy object (for bridging threads)
 	StelMainScriptAPIProxy* scriptAPIProxy;
 
@@ -388,17 +414,11 @@ private:
 	
 	// Store the ratio between real device pixel in "Device Independent Pixel"
 	// Usually this value is 1, but for a mac with retina screen this will be value 2.
-	float devicePixelsPerPixel;
+	qreal devicePixelsPerPixel;
 
 	// The scaling ratio to apply on all display elements, like GUI, text etc..
 	float globalScalingRatio;
 	
-	// Used to collect wheel events
-	QTimer * wheelEventTimer;
-
-	// Accumulated horizontal and vertical wheel event deltas
-	int wheelEventDelta[2];
-
 	float fps;
 	int frame;
 	double frameTimeAccum;		// Used for fps counter
@@ -412,12 +432,12 @@ private:
 	bool initialized;
 
 	static qint64 startMSecs;
-	static float animationScale;
+	static double animationScale;
 
 	// Temporary variables used to store the last gl window resize
 	// if the core was not yet initialized
-	int saveProjW;
-	int saveProjH;
+	qreal saveProjW;
+	qreal saveProjH;
 
 	//! Store the number of downloaded files for statistics.
 	int nbDownloadedFiles;
@@ -442,6 +462,9 @@ private:
 	bool flagUseAzimuthFromSouth; // Display calculate azimuth from south towards west (as in some astronomical literature)
 	bool flagUseFormattingOutput; // Use tabular coordinate format for infotext
 	bool flagUseCCSDesignation;   // Use symbols like alpha (RA), delta (declination) for coordinate system labels
+	bool flagOverwriteInfoColor; // Overwrite and use color for text in info panel
+	Vec3f overwriteInfoColor;
+	Vec3f daylightInfoColor;
 #ifdef 	ENABLE_SPOUT
 	SpoutSender* spoutSender;
 #endif

@@ -4,23 +4,46 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Harry Mensch <hermmensch@gmail.com>, 2019
-# Patrick Ahles <p.ahles@gmail.com>, 2019
+# Harry Mensch, 2019
+# CC KK <kogacarlo@gmail.com>, 2020
+# Patrick Ahles <p.ahles@gmail.com>, 2020
+# alexander duytschaever <alex.a.nder.duy.tschaever@gmail.com>, 2021
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-02-21 12:42+0700\n"
+"POT-Creation-Date: 2021-06-15 22:33+0700\n"
 "PO-Revision-Date: 2019-01-19 14:25+0000\n"
-"Last-Translator: Patrick Ahles <p.ahles@gmail.com>, 2019\n"
+"Last-Translator: alexander duytschaever <alex.a.nder.duy.tschaever@gmail.com>, 2021\n"
 "Language-Team: Dutch (https://www.transifex.com/stellarium/teams/80998/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: nl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: scripts/analemma.ssc:17
+msgid "Analemma"
+msgstr "Analemma"
+
+#: scripts/analemma.ssc:41
+msgid "Week"
+msgstr "Week"
+
+#: scripts/analemma.ssc:47
+msgid "Near winter solstice"
+msgstr "Dichtbij de winterzonnewende"
+
+#: scripts/analemma.ssc:51
+msgid "Near summer solstice"
+msgstr "Dichtbij de zomerzonnewende"
+
+#: scripts/analemma.ssc:55 scripts/martian_analemma.ssc:48
+#: scripts/saturnian_analemma.ssc:48 scripts/uranian_analemma.ssc:48
+msgid "Yearly path of the Sun"
+msgstr "Jaarlijkse baan van de zon"
 
 #: scripts/bennett.ssc:47
 msgid "The Jack Bennett Catalog of Southern Deep-Sky Objects"
@@ -88,7 +111,7 @@ msgstr "NGC 1647: de Krabcluster"
 
 #: scripts/binocular_highlights.ssc:21
 msgid "Messier's Number One"
-msgstr "Messier's Nummer Een"
+msgstr "Messiers nummer een"
 
 #: scripts/binocular_highlights.ssc:22
 msgid "Auriga's Messier Clusters"
@@ -116,7 +139,7 @@ msgstr "Orion Extra's"
 
 #: scripts/binocular_highlights.ssc:26
 msgid "Orion's Sword"
-msgstr "Orion's zwaard"
+msgstr "Orions zwaard"
 
 #: scripts/binocular_highlights.ssc:26
 msgid "NGC 1981, M42, M43 and Struve 747"
@@ -132,7 +155,7 @@ msgstr "M50 in een stroom van sterrenlicht"
 
 #: scripts/binocular_highlights.ssc:29
 msgid "M46 and M47: A Celestial Odd Couple"
-msgstr "M46 een M47: Een vreemd hemels koppel"
+msgstr "M46 en M47: Een vreemd hemels koppel"
 
 #: scripts/binocular_highlights.ssc:30
 msgid "Collinders in Canis Minor"
@@ -172,7 +195,7 @@ msgstr "M81 en M82"
 
 #: scripts/binocular_highlights.ssc:35
 msgid "M101 in the Mind's Eye"
-msgstr "M101 in Mind's Eye"
+msgstr "M101 in Minds oog"
 
 #: scripts/binocular_highlights.ssc:36
 msgid "A Star-Hop to M51"
@@ -200,7 +223,7 @@ msgstr "Een trio van dubbelen in Ossenhoeder"
 
 #: scripts/binocular_highlights.ssc:42
 msgid "R Cor Bor's Vanishing Act"
-msgstr "R Cor Bor's verdwijnact"
+msgstr "R Cor Bors verdwijnact"
 
 #: scripts/binocular_highlights.ssc:43
 msgid "Two Doubles in Cancer"
@@ -220,7 +243,7 @@ msgstr "Een bezoek aan NGC 2903"
 
 #: scripts/binocular_highlights.ssc:46 scripts/binocular_highlights.ssc:47
 msgid "A Pair of Leo Doubles"
-msgstr "Een paar dubbelen in Leeuw"
+msgstr "Een paar dubbels in Leeuw"
 
 #: scripts/binocular_highlights.ssc:46
 msgid "Tau Leonis"
@@ -262,7 +285,7 @@ msgstr "Oude bolvormige M5"
 
 #: scripts/binocular_highlights.ssc:53
 msgid "Magnificent Omega Centauri"
-msgstr ""
+msgstr "Magnifiek Omega Centauri"
 
 #: scripts/binocular_highlights.ssc:54
 msgid "Chapter 3"
@@ -278,7 +301,7 @@ msgstr "Nu Draconis oplossen"
 
 #: scripts/binocular_highlights.ssc:55
 msgid "Nu Draconis's components are separated by 62\""
-msgstr ""
+msgstr "Nu Draconis componenten worden gescheiden door 62\""
 
 #: scripts/binocular_highlights.ssc:56
 msgid "The Great Hercules Cluster"
@@ -286,11 +309,11 @@ msgstr "De grote Hercules cluster"
 
 #: scripts/binocular_highlights.ssc:57
 msgid "Double Delight Albireo"
-msgstr ""
+msgstr "Dubbel Delight Albireo"
 
 #: scripts/binocular_highlights.ssc:57
 msgid "Albireo's components are separated by 35\""
-msgstr ""
+msgstr "Albireo's componenten worden gescheiden door 35\""
 
 #: scripts/binocular_highlights.ssc:58
 msgid "A Colorful Cygnus Triple"
@@ -367,7 +390,7 @@ msgstr "Brocchi's cluster (Cr 399) of Kapstok"
 
 #: scripts/binocular_highlights.ssc:69
 msgid "Barnard's \"E\""
-msgstr "Barnard's \"E\""
+msgstr "Barnards \"E\""
 
 #: scripts/binocular_highlights.ssc:69
 msgid "B143 near Altair"
@@ -423,7 +446,7 @@ msgstr "Een dubbele voor de vaste hand"
 
 #: scripts/binocular_highlights.ssc:77
 msgid "Nu Scorpii components are separated by 41\""
-msgstr ""
+msgstr "Nu Scorpii componenten worden gescheiden door 41 \""
 
 #: scripts/binocular_highlights.ssc:78
 msgid "Globular Cluster Season"
@@ -435,11 +458,11 @@ msgstr "M4 en M80"
 
 #: scripts/binocular_highlights.ssc:79
 msgid "A Gorgeous Duo"
-msgstr ""
+msgstr "Een prachtig duo"
 
 #: scripts/binocular_highlights.ssc:79
 msgid "M6 and M7"
-msgstr ""
+msgstr "M6 en M7"
 
 #: scripts/binocular_highlights.ssc:80
 msgid "A False Comet"
@@ -451,15 +474,15 @@ msgstr "Cr 316, NGC 6231 en NGC 6242"
 
 #: scripts/binocular_highlights.ssc:81
 msgid "Summer Star Cloud"
-msgstr ""
+msgstr "Zomer Sterrenwolk"
 
 #: scripts/binocular_highlights.ssc:82
 msgid "Milky Way Messiers"
-msgstr ""
+msgstr "Melkweg Messiers"
 
 #: scripts/binocular_highlights.ssc:82
 msgid "M16, M17 and M18"
-msgstr ""
+msgstr "M16, M17 en M18"
 
 #: scripts/binocular_highlights.ssc:83
 msgid "The Lagoon Nebula"
@@ -467,7 +490,7 @@ msgstr "De Lagunenevel"
 
 #: scripts/binocular_highlights.ssc:84
 msgid "M22: A Gem of a Globular"
-msgstr ""
+msgstr "M22: Een juweel of een bolvormige"
 
 #: scripts/binocular_highlights.ssc:84
 msgid "M22 and M28"
@@ -475,7 +498,7 @@ msgstr "M22 en M28"
 
 #: scripts/binocular_highlights.ssc:85
 msgid "A Lonesome Messier"
-msgstr ""
+msgstr "Een eenzame Messier"
 
 #: scripts/binocular_highlights.ssc:86
 msgid "Chapter 4"
@@ -503,7 +526,7 @@ msgstr "Magnifiek Mu Cephei"
 
 #: scripts/binocular_highlights.ssc:89
 msgid "A semiregular variable star"
-msgstr ""
+msgstr "Een semi regulaire variabele ster"
 
 #: scripts/binocular_highlights.ssc:90
 msgid "Watching Delta Cephei"
@@ -547,7 +570,7 @@ msgstr "Oude cluster NGC 752"
 
 #: scripts/binocular_highlights.ssc:98
 msgid "Triangulum's Treasure"
-msgstr ""
+msgstr "Triangulums schat"
 
 #: scripts/binocular_highlights.ssc:99
 msgid "TX Piscium"
@@ -579,7 +602,7 @@ msgstr "Verrekijker hoogtepunten"
 
 #: scripts/binocular_highlights.ssc:126
 msgid "Look through the Meade 10x50 TravelView Binocular"
-msgstr "Gezicht door de Meade 10x50 TravelView verrekijker"
+msgstr "Zicht door de Meade 10x50 TravelView verrekijker"
 
 #: scripts/binosky.ssc:19
 msgid "Binosky: Deep Sky Objects for Binoculars"
@@ -598,7 +621,7 @@ msgid ""
 "Extremely difficult because of their faintness, separation, and nearby "
 "bright stars"
 msgstr ""
-"Extreem moeilijk vanwege hun zwakte, scheiding en nabije heldere sterren"
+"Extreem moeilijk vanwege hun zwakte, scheiding en vlakbij heldere sterren"
 
 #: scripts/double_stars.ssc:29
 msgid "Atlas and Pleione (27 Tauri and 28 Tauri)"
@@ -624,7 +647,7 @@ msgstr "5.6 arcminuten (NNW)"
 #: scripts/double_stars.ssc:30 scripts/double_stars.ssc:42
 #: scripts/double_stars.ssc:47
 msgid "Showcase naked-eye double!"
-msgstr "Showcase blote oog dubbele!"
+msgstr "Een voorbeeld van een blote oog dubbelster!"
 
 #: scripts/double_stars.ssc:31
 msgid "δ Tauri"
@@ -636,7 +659,7 @@ msgstr "δ1-δ2: 17.6 arc-seconden (ESE); δ1-δ3: 43.25 arc-seconden (NE)"
 
 #: scripts/double_stars.ssc:31
 msgid "Easy naked-eye triple"
-msgstr "Gemakkelijke blote oog drietal"
+msgstr "Gemakkelijk voor het blote oog zichtbaar drietal"
 
 #: scripts/double_stars.ssc:32
 msgid "θ Orionis"
@@ -660,7 +683,7 @@ msgstr "4.2 arcminuten (ESE)"
 
 #: scripts/double_stars.ssc:33 scripts/double_stars.ssc:34
 msgid "Moderately difficult optical double"
-msgstr "Matig moeilijke optische dubbel"
+msgstr "Matig moeilijk optisch dubbel"
 
 #: scripts/double_stars.ssc:34
 msgid "ι Orionis"
@@ -803,6 +826,14 @@ msgstr "6.3 arcminuten (WNW)"
 msgid "Separation:"
 msgstr "Scheiding:"
 
+#: scripts/martian_analemma.ssc:17
+msgid "Martian analemma"
+msgstr "Martiaanse analemma"
+
+#: scripts/martian_analemma.ssc:42
+msgid "Sol"
+msgstr "Sol"
+
 #: scripts/morsels_1.ssc:15 scripts/morsels_1.ssc:16 scripts/morsels_1.ssc:18
 #: scripts/morsels_1.ssc:22 scripts/morsels_1.ssc:23 scripts/morsels_1.ssc:29
 #: scripts/morsels_1.ssc:30 scripts/morsels_1.ssc:34 scripts/morsels_1.ssc:36
@@ -862,103 +893,111 @@ msgstr "Bedekking van heldere sterren door planeten"
 msgid "Mutual occultations of planets"
 msgstr "Wederzijdse bedekking van planeten"
 
-#: scripts/supernova.ssc:22
+#: scripts/supernova.ssc:23
 msgid "Europe, Uraniborg."
 msgstr "Europa, Uraniborg."
 
-#: scripts/supernova.ssc:30
+#: scripts/supernova.ssc:31
 msgid "Evening of 20 October 1572"
-msgstr "'s Avonds 20 oktober 1572"
+msgstr "Avond van 20 oktober 1572"
 
-#: scripts/supernova.ssc:39
+#: scripts/supernova.ssc:40
 msgid "Constellation Cassiopeia"
-msgstr "Bedekking Cassiopeia"
+msgstr "Sterrenbeeld Cassiopeia"
 
-#: scripts/supernova.ssc:60
+#: scripts/supernova.ssc:61
 msgid "5 days later..."
 msgstr "5 dagen later..."
 
-#: scripts/supernova.ssc:66
+#: scripts/supernova.ssc:67
 msgid "Next 3 days..."
 msgstr "Volgende 3 dagen..."
 
-#: scripts/supernova.ssc:72
+#: scripts/supernova.ssc:73
 msgid "New star! But people have not seen it yet..."
-msgstr "Nieuwe ster: Maar de mens heeft het nog niet gezien..."
+msgstr "Nieuwe ster; maar de mens heeft het nog niet gezien..."
 
-#: scripts/supernova.ssc:77
+#: scripts/supernova.ssc:78
 msgid "Evening of 31 October 1572"
-msgstr "'s Avonds 31 oktober 1572"
+msgstr "Avond van 31 oktober 1572"
 
-#: scripts/supernova.ssc:85
+#: scripts/supernova.ssc:86
 msgid "Evening of "
 msgstr "'s Avonds"
 
-#: scripts/supernova.ssc:85
+#: scripts/supernova.ssc:86
 msgid " November 1572"
 msgstr "november 1572"
 
-#: scripts/supernova.ssc:92
+#: scripts/supernova.ssc:93
 msgid "Hooray! First observations in Korea and Europe."
 msgstr "Hoera! Eerste observaties in Korea en Europa."
 
-#: scripts/supernova.ssc:100
+#: scripts/supernova.ssc:101
 msgid "First observations in China."
 msgstr "Eerste observaties in China."
 
-#: scripts/supernova.ssc:108
+#: scripts/supernova.ssc:109
 msgid ""
 "The clouds are gone and Tycho Brahe the first time watching a new star!"
 msgstr ""
 "De wolken zijn verdwenen en Tycho Brahe ziet voor het eerst de nieuwe ster!"
 
-#: scripts/supernova.ssc:117
+#: scripts/supernova.ssc:118
 msgid "Next 60 days..."
 msgstr "Volgende 60 dagen..."
 
-#: scripts/supernova.ssc:128
+#: scripts/supernova.ssc:129
 msgid "Next other 40 days..."
 msgstr "De volgende 40 dagen..."
 
+#: scripts/supernova.ssc:150
+msgid "The Historical supernovae plugin is not loaded!"
+msgstr "De \"Historische supernova\" plugin is niet geladen!"
+
 #: scripts/h400_tour.ssc:16
 msgid "The Herschel 400 Catalogue"
-msgstr ""
+msgstr "De Herschel 400 catalogus"
 
 #: scripts/h400_tour.ssc:17
 msgid ""
 "The Herschel 400 is a subset of John Herschel's General Catalogue of Nebulae"
 " and Clusters"
 msgstr ""
+"De Herschel 400 is een subset van de 'Algemene catalogus van nevels en "
+"clusters' van John Herschel"
 
 #: scripts/h400_tour.ssc:18
 msgid ""
 "published in 1864 of 5,000 objects, and hence also of the New General "
 "Catalogue."
 msgstr ""
+"gepubliceerd in 1864 van 5,000 objecten, en daarom ook van de nieuwe "
+"Algemene catalogus."
 
 #: scripts/h400_tour.ssc:19
 msgid "Vital statistics:"
-msgstr ""
+msgstr "Vitale statistieken:"
 
 #: scripts/h400_tour.ssc:20
 msgid "* The catalogue contains 400 objects"
-msgstr ""
+msgstr "* De catalogus bevat 400 objecten"
 
 #: scripts/h400_tour.ssc:21
 msgid "* All objects are from the NGC"
-msgstr ""
+msgstr "* Alle objecten van het NGC"
 
 #: scripts/h400_tour.ssc:22
 msgid "* All visible in mid northern latitudes"
-msgstr ""
+msgstr "* Allen zichtbaar op de noordelijke breedtegraden"
 
 #: scripts/h400_tour.ssc:23
 msgid "* All visible in 150 mm (6\") or larger telescopes"
-msgstr ""
+msgstr "* Allen zichtbaar door 150 mm (6\") of grotere telescopen"
 
 #: scripts/largest_known_stars.ssc:12
 msgid "PZ Cassiopeiae"
-msgstr ""
+msgstr "PZ Cassiopeiae"
 
 #: scripts/largest_known_stars.ssc:13
 msgid ""
@@ -966,20 +1005,25 @@ msgid ""
 "The quoted size is the average size parameter, the true\n"
 "value is from 1,340-1,940."
 msgstr ""
+"PZ Cas is gelokaliseerd in a regio met zware stofbestendigheid.\n"
+"De geciteerde grootte is de gemiddelde parameter grootte, de \n"
+"waarde ligt tussen 1.340-1.940."
 
 #: scripts/largest_known_stars.ssc:14
 msgid "VX Sagittarii"
-msgstr ""
+msgstr "VX Sagittarii"
 
 #: scripts/largest_known_stars.ssc:15
 msgid ""
 "VX Sgr is a pulsating variable with a large visual range\n"
 "and varies significantly in size."
 msgstr ""
+"VX Sgr is a pulserende variabel met een groot zichtbaar range\n"
+"en varieert significant in grootte."
 
 #: scripts/largest_known_stars.ssc:16
 msgid "VV Cephei A"
-msgstr ""
+msgstr "VV Cephei A"
 
 #: scripts/largest_known_stars.ssc:17
 msgid ""
@@ -987,10 +1031,13 @@ msgid ""
 "losing mass to its B-type companion VV Cephei B for at least\n"
 "part of its orbit."
 msgstr ""
+"VV Cep A is een sterk vervormde ster in een binair systeem,\n"
+"verliest massa aan zijn B-type metgezel VV Cephei B voor \n"
+"tenminste een deel van zijn baan."
 
 #: scripts/largest_known_stars.ssc:18
 msgid "RW Cephei"
-msgstr ""
+msgstr "RW Cephei"
 
 #: scripts/largest_known_stars.ssc:19
 msgid ""
@@ -998,10 +1045,13 @@ msgid ""
 "of 3) and spectral type (observed from G8 to M), thus\n"
 "probably also in diameter."
 msgstr ""
+"RW Cep is variabel zowel in helderheid (met op zijn minst\n"
+"een factor 3) als in het spectraal type (geobserveerd van G8\n"
+"tot M), dus waarschijnlijk ook in diameter."
 
 #: scripts/largest_known_stars.ssc:20
 msgid "VY Canis Majoris"
-msgstr ""
+msgstr "VY Canis Majoris"
 
 #: scripts/largest_known_stars.ssc:21
 msgid ""
@@ -1009,10 +1059,13 @@ msgid ""
 "contradicted stellar evolutionary theory, improved measurements\n"
 "and estimates have brought it down to size."
 msgstr ""
+"Eens gedacht dat het een rode hypergigantische ster was zo groot dat het\n"
+"contrasteerde met de stellaire evolutie theorie, verbeterde metingen\n"
+"en ramingen hebben de grootte terug gebracht tot bescheidener waarden."
 
 #: scripts/largest_known_stars.ssc:22
 msgid "AH Scorpii"
-msgstr ""
+msgstr "AH Scorpii"
 
 #: scripts/largest_known_stars.ssc:23
 msgid ""
@@ -1020,188 +1073,646 @@ msgid ""
 "and an estimated 20% in total luminosity. The variation in diameter\n"
 "is not clear because the temperature also varies."
 msgstr ""
+"AH Sco is variabel met bijna 3 magnitudes in de zichtbare range,\n"
+"en een geraamd 20% helderheid in totaal. De variatie in diameter\n"
+"is niet duidelijk omdat de temperatuur ook varieert."
 
 #: scripts/largest_known_stars.ssc:24
 msgid "V766 Centauri A"
-msgstr ""
+msgstr "V766 Centauri A"
 
 #: scripts/largest_known_stars.ssc:25
 msgid ""
 "V766 Centauri A is a highly distorted star in a close binary system,\n"
 "losing mass to the secondary."
 msgstr ""
+"V766 Centauri A is een sterk vervormde ster in een gesloten binair systeem,\n"
+"verliest massa aan de secondaire."
 
 #: scripts/largest_known_stars.ssc:26
 msgid "KW Sagittarii"
-msgstr ""
+msgstr "KW Sagittarii"
 
 #: scripts/largest_known_stars.ssc:27
 msgid "BC Cygni"
-msgstr ""
+msgstr "BC Cygni"
 
 #: scripts/largest_known_stars.ssc:28
 msgid "RT Carinae"
-msgstr ""
+msgstr "RT Carinae"
 
 #: scripts/largest_known_stars.ssc:29
 msgid "Betelgeuse"
-msgstr ""
+msgstr "Betelgeuze"
 
 #: scripts/largest_known_stars.ssc:30
 msgid "Ninth brightest star in the night sky."
-msgstr ""
+msgstr "Negende helderste ster aan de nachtelijke hemel."
 
 #: scripts/largest_known_stars.ssc:31
 msgid "Mu Cephei (Herschel's \"Garnet Star\")"
-msgstr ""
+msgstr "Mu Cephei (Herschels \"Granaatster\")"
 
 #: scripts/largest_known_stars.ssc:32
 msgid "S Persei"
-msgstr ""
+msgstr "S Persei"
 
 #: scripts/largest_known_stars.ssc:33
 msgid "In the Perseus Double Cluster."
-msgstr ""
+msgstr "In de Perseus dubbel cluster."
 
 #: scripts/largest_known_stars.ssc:34
 msgid "RW Cygni"
-msgstr ""
+msgstr "RW Cygni"
 
 #: scripts/largest_known_stars.ssc:35
 msgid "Antares A"
-msgstr ""
+msgstr "Antares A"
 
 #: scripts/largest_known_stars.ssc:36
 msgid "Theta Muscae"
-msgstr ""
+msgstr "Theta Muscae"
 
 #: scripts/largest_known_stars.ssc:37
 msgid "V1749 Cygni"
-msgstr ""
+msgstr "V1749 Cygni"
 
 #: scripts/largest_known_stars.ssc:38
 msgid "TZ Cassiopeiae"
-msgstr ""
+msgstr "TZ Cassiopeiae"
 
 #: scripts/largest_known_stars.ssc:39
 msgid "IX Carinae"
-msgstr ""
+msgstr "IX Carinae"
 
 #: scripts/largest_known_stars.ssc:40
 msgid "TV Geminorum"
-msgstr ""
+msgstr "TV Geminorum"
 
 #: scripts/largest_known_stars.ssc:41
 msgid "T Cephei"
-msgstr ""
+msgstr "T Cephei"
 
 #: scripts/largest_known_stars.ssc:42
 msgid "V382 Carinae"
-msgstr ""
+msgstr "V382 Carinae"
 
 #: scripts/largest_known_stars.ssc:43 scripts/largest_known_stars.ssc:45
 msgid "Yellow hypergiant, one of the rarest types of star."
-msgstr ""
+msgstr "Gele hypergigant, een van de zeldzaamste soorten sterren."
 
 #: scripts/largest_known_stars.ssc:44
 msgid "V509 Cassiopeiae"
-msgstr ""
+msgstr "V509 Cassiopeiae"
 
 #: scripts/largest_known_stars.ssc:46
 msgid "CE Tauri (\"Ruby Star\")"
-msgstr ""
+msgstr "CE Tauri (\"Ruby Star\")"
 
 #: scripts/largest_known_stars.ssc:47
 msgid ""
 "Can be occulted by the Moon, allowing accurate determination\n"
 "of its apparent diameter."
 msgstr ""
+"Kan door de maan worden verduisterd, waardoor een nauwkeurige\n"
+"bepaling mogelijk is van zijn schijnbare diameter."
 
 #: scripts/largest_known_stars.ssc:48
 msgid "R Leporis (\"Hind's Crimson Star\")"
-msgstr ""
+msgstr "R Leporis (\"Hinds donkerrode ster\")"
 
 #: scripts/largest_known_stars.ssc:49
 msgid "One of the largest carbon stars existent in the Milky Way Galaxy."
-msgstr ""
+msgstr "Een van de grootste koolstofsterren in de Melkweg."
 
 #: scripts/largest_known_stars.ssc:50
 msgid "Alpha Herculis (\"Ras Algethi\")"
-msgstr ""
+msgstr "Alpha Herculis (\"Ras Algethi\")"
 
 #: scripts/largest_known_stars.ssc:51
 msgid "Rho Cassiopeiae"
-msgstr ""
+msgstr "Rho Cassiopeiae"
 
 #: scripts/largest_known_stars.ssc:52
 msgid "A yellow hypergiant, one of the rarest types of a star."
-msgstr ""
+msgstr "Een gele hypergigant, een van de zeldzaamste soorten sterren."
 
 #: scripts/largest_known_stars.ssc:53
 msgid "Mira A (Omicron Ceti)"
-msgstr ""
+msgstr "Mira A (Omicron Ceti)"
 
 #: scripts/largest_known_stars.ssc:54
 msgid "Prototype Mira variable"
-msgstr ""
+msgstr "Prototype Mira variabel"
 
 #: scripts/largest_known_stars.ssc:55
 msgid "R Doradus"
-msgstr ""
+msgstr "R Doradus"
 
 #: scripts/largest_known_stars.ssc:56
 msgid "Star with the second largest apparent size after the Sun."
-msgstr ""
+msgstr "Ster met de tweede grootste schijnbare grootte na de zon."
 
 #: scripts/largest_known_stars.ssc:57
 msgid "La Superba (Y Canum Venaticorum)"
-msgstr ""
+msgstr "La Superba (Y Canum Venaticorum)"
 
 #: scripts/largest_known_stars.ssc:58
 msgid "One of the coolest and reddest known stars."
-msgstr ""
+msgstr "Een van de bekende koelste en roodste sterren."
 
 #: scripts/largest_known_stars.ssc:59
 msgid "Deneb (Alpha Cygni)"
-msgstr ""
+msgstr "Deneb (Alpha Cygni)"
 
 #: scripts/largest_known_stars.ssc:60
 msgid "19th brightest star in the night sky."
-msgstr ""
+msgstr "19de helderste ster aan de nachtelijke hemel."
 
 #: scripts/largest_known_stars.ssc:61
 msgid "Rigel A (Beta Orionis A)"
-msgstr ""
+msgstr "Rigel A (Beta Orionis A)"
 
 #: scripts/largest_known_stars.ssc:62
 msgid "Seventh brightest star in the night sky."
-msgstr ""
+msgstr "Zevende helderste ster aan de nachtelijke hemel."
 
 #: scripts/largest_known_stars.ssc:63
 msgid "Canopus (Alpha Carinae)"
-msgstr ""
+msgstr "Canopus (Alpha Carinae)"
 
 #: scripts/largest_known_stars.ssc:64
 msgid "Second brightest star in the night sky."
-msgstr ""
+msgstr "Tweede helderste ster aan de nachtelijke hemel."
 
 #: scripts/largest_known_stars.ssc:65
 msgid "Aldebaran (Alpha Tauri)"
-msgstr ""
+msgstr "Aldebaran (Alpha Tauri)"
 
 #: scripts/largest_known_stars.ssc:66
 msgid "VV Cephei B"
-msgstr ""
+msgstr "VV Cephei B"
 
 #: scripts/largest_known_stars.ssc:67
 msgid "The B-type main sequence companion of VV Cephei A."
-msgstr ""
+msgstr "De B-type hoofdreeks companion van VV Cephei A."
 
 #: scripts/largest_known_stars.ssc:92
 msgid "Solar radii"
-msgstr ""
+msgstr "Zonnestralen"
 
 #: scripts/constellations_tour.ssc:19
 #: scripts/western_constellations_tour.ssc:22
 msgid "Press Ctrl+T to un-hide the toolbar"
+msgstr "Druk op Ctrl+T om de werkbalk zichtbaar te maken"
+
+#: scripts/triple_sunrise_and_sunsets.ssc:17
+msgid "Location: Mercury, 0N, 90E"
+msgstr "Locatie: Mercurius, 0N, 90E"
+
+#: scripts/triple_sunrise_and_sunsets.ssc:51
+msgid "Just Before Sunrise....."
+msgstr "Net voor de zon opkomt"
+
+#: scripts/triple_sunrise_and_sunsets.ssc:54
+msgid "Surface of Mercury"
+msgstr "Oppervlakte van Mercurius"
+
+#: scripts/triple_sunrise_and_sunsets.ssc:57
+msgid "Day"
+msgstr "Dag"
+
+#: scripts/triple_sunrise_and_sunsets.ssc:92
+msgid "Sunrise #1"
+msgstr "Zonsopkomst #1"
+
+#: scripts/triple_sunrise_and_sunsets.ssc:120
+msgid "Retro"
+msgstr "Retro"
+
+#: scripts/triple_sunrise_and_sunsets.ssc:141
+msgid "Sunset #1"
+msgstr "Zonsondergang #1"
+
+#: scripts/triple_sunrise_and_sunsets.ssc:159
+msgid "Sunrise #2"
+msgstr "Zonsopkomst #2"
+
+#: scripts/triple_sunrise_and_sunsets.ssc:173
+msgid "Later in the afternoon"
+msgstr "Later in de middag"
+
+#: scripts/triple_sunrise_and_sunsets.ssc:205
+msgid "Sunset #2"
+msgstr "Zonsondergang #2"
+
+#: scripts/triple_sunrise_and_sunsets.ssc:225
+msgid "Sunrise #3"
+msgstr "Zonsopkomst #3"
+
+#: scripts/triple_sunrise_and_sunsets.ssc:244
+msgid "Sunset #3"
+msgstr "Zonsondergang #3"
+
+#: scripts/saturnian_analemma.ssc:17
+msgid "Saturnian analemma"
+msgstr "Saturnus analemma"
+
+#: scripts/saturnian_analemma.ssc:42 scripts/uranian_analemma.ssc:42
+msgid "Solar day"
+msgstr "Zonnedag"
+
+#: scripts/uranian_analemma.ssc:17
+msgid "Uranian analemma"
+msgstr "Uranus analemma"
+
+#: scripts/messier_marathon.ssc:18
+msgid "Messier Marathon"
+msgstr "Messier marathon"
+
+#: scripts/messier_marathon.ssc:85
+msgid "Difficulty is 0"
+msgstr "Moeilijkheid is 0"
+
+#: scripts/messier_marathon.ssc:86
+msgid "Very diffuse, very dark, very difficult"
+msgstr "Erg diffuus, erg donker, erg moeilijk "
+
+#: scripts/messier_marathon.ssc:87
+msgid "Easier than M74, small"
+msgstr "Eenvoudiger dan M74, klein"
+
+#: scripts/messier_marathon.ssc:88
+msgid "Visible to the naked eye, no difficulty"
+msgstr "Met het blote oog zichtbaar, niet moeilijk"
+
+#: scripts/messier_marathon.ssc:89
+msgid "More difficult than M110 to verify, small"
+msgstr "Moeilijker dan M110 te verifiëren, klein "
+
+#: scripts/messier_marathon.ssc:90
+msgid "In the west of M31, it is easy to detect"
+msgstr "In het westen van M31 is het eenvoudig te detecteren"
+
+#: scripts/messier_marathon.ssc:91
+msgid "Diffuse, great, brighter"
+msgstr "Diffuus, groot, helderder"
+
+#: scripts/messier_marathon.ssc:92
+msgid "Small, easy to locate, not as horror as imagined"
+msgstr "Klein, gemakkelijk te vinden, niet zo moeilijk als gedacht"
+
+#: scripts/messier_marathon.ssc:93
+msgid "Difficult to locate, easy to detect and verify"
+msgstr "Moeilijk te lokaliseren, makkelijk te detecteren en te verifiëren"
+
+#: scripts/messier_marathon.ssc:94
+msgid "Small, easy to locate, don't confuse with NGC663"
+msgstr "Klein, makkelijk te lokaliseren, niet verwarren met NGC663"
+
+#: scripts/messier_marathon.ssc:95
+msgid "Large, scattered, easy"
+msgstr "Groot, verspreid, makkelijk"
+
+#: scripts/messier_marathon.ssc:96
+msgid "Fuzzy, easy to find, accompanied by a small star"
+msgstr "Nevelig, makkelijk te vinden, vergezeld van een kleine ster"
+
+#: scripts/messier_marathon.ssc:97
+msgid "Visible to the naked eye, better than M31"
+msgstr "Met het blote oog zichtbaar, beter dan M31"
+
+#: scripts/messier_marathon.ssc:98
+msgid "Very close to M42, not easy to see the fuzzy"
+msgstr "Dichtbij M42, niet makkelijk te zien te nevelig"
+
+#: scripts/messier_marathon.ssc:99
+msgid "Small, dark, few stars around"
+msgstr "Klein, donker, enkele sterren er omheen"
+
+#: scripts/messier_marathon.ssc:100
+msgid "Easy to locate, easy to detect in a good transparency."
 msgstr ""
+"Makkelijk te lokaliseren, makkelijk te detecteren in een goede "
+"transparantie."
+
+#: scripts/messier_marathon.ssc:101
+msgid "Visible to the naked eye, easier"
+msgstr "Met het blote oog zichtbaar, makkelijker"
+
+#: scripts/messier_marathon.ssc:102 scripts/messier_marathon.ssc:154
+#: scripts/messier_marathon.ssc:175
+msgid "Easy to locate and verify"
+msgstr "Makkelijk te lokaliseren en te verifiëren"
+
+#: scripts/messier_marathon.ssc:103 scripts/messier_marathon.ssc:104
+msgid "Large, scattered"
+msgstr "Groot, verspreid"
+
+#: scripts/messier_marathon.ssc:105
+msgid "Bright, easy to verify, difficult to locate"
+msgstr "Helder, makkelijk te verifiëren, moeilijk te lokaliseren"
+
+#: scripts/messier_marathon.ssc:106
+msgid "Large, difficult to locate, easy to confuse with NGC2506"
+msgstr "Groot, moeilijk te lokaliseren, makkelijk te verwarren met NGC2506"
+
+#: scripts/messier_marathon.ssc:107
+msgid "Easy, more scattered"
+msgstr "Makkelijk, meer verspreid"
+
+#: scripts/messier_marathon.ssc:108
+msgid "Easy, fuzzy"
+msgstr "Makkelijk, nevelig"
+
+#: scripts/messier_marathon.ssc:109
+msgid "Easy, scattered"
+msgstr "Makkelijk, verspreid"
+
+#: scripts/messier_marathon.ssc:110
+msgid "Easy, large, scattered"
+msgstr "Makkelijk, groot, verspreid"
+
+#: scripts/messier_marathon.ssc:111
+msgid "Very close to M96 and M105"
+msgstr "Dichtbij M96 en M105"
+
+#: scripts/messier_marathon.ssc:112
+msgid "Easy to locate and verify, assist to verify M95 and M105"
+msgstr ""
+"Makkelijk te lokaliseren en te verifiëren, helpt om M95 en M105 te "
+"verifiëren"
+
+#: scripts/messier_marathon.ssc:113
+msgid "Dark"
+msgstr "Donker"
+
+#: scripts/messier_marathon.ssc:114
+msgid "Very close, it’s like M81 and M82"
+msgstr "Dichtbij, lijkt op M81 en M82"
+
+#: scripts/messier_marathon.ssc:115
+msgid "There is NGC3628 nearby, don't think you have found a new comet"
+msgstr "NGC3628 is vlakbij, denk niet dat je een nieuwe komeet gevonden hebt"
+
+#: scripts/messier_marathon.ssc:116
+msgid "Like the darkened M33, require a high sky conditions"
+msgstr "Lijkt op de donkere M33, vereist een zeer heldere hemel"
+
+#: scripts/messier_marathon.ssc:117
+msgid "Difficult to locate, 4 stars of the inverted 7 shape beside"
+msgstr "Moeilijk te lokaliseren, 4 sterren in een omgekeerde 7-vorm ernaast"
+
+#: scripts/messier_marathon.ssc:118
+msgid "Easy, you can see the companion galaxy"
+msgstr "Makkelijk, je kunt het bijbehorende sterrenstelsel zien"
+
+#: scripts/messier_marathon.ssc:119
+msgid "Easy to verify"
+msgstr "Makkelijk te verifiëren"
+
+#: scripts/messier_marathon.ssc:120
+msgid "Not easy to locate, small, slightly dark"
+msgstr "Niet makkelijk te lokaliseren, kleine, enigszins donker"
+
+#: scripts/messier_marathon.ssc:121
+msgid "Not easy to locate, bright"
+msgstr "Niet makkelijk te lokaliseren, helder"
+
+#: scripts/messier_marathon.ssc:122
+msgid "Not easy to locate, no bright stars nearby"
+msgstr "Niet makkelijk te lokaliseren, geen heldere sterren in de buurt"
+
+#: scripts/messier_marathon.ssc:123
+msgid "Easy to locate"
+msgstr "Makkelijk te lokaliseren"
+
+#: scripts/messier_marathon.ssc:124
+msgid "Beside M60, it is easy to verify"
+msgstr "Naast M60, het is makkelijk te verifiëren"
+
+#: scripts/messier_marathon.ssc:125
+msgid "It’s an easier one"
+msgstr "Het is en makkelijke"
+
+#: scripts/messier_marathon.ssc:126
+msgid "As bright as M85, easy to verify"
+msgstr "Net zo helder als M85, makkelijk te verifiëren"
+
+#: scripts/messier_marathon.ssc:127
+msgid "Dark, hard to look"
+msgstr "Donker, slecht te zien"
+
+#: scripts/messier_marathon.ssc:128
+msgid "Easy to detect than M89, easy to locate"
+msgstr "Makkelijker te detecteren dan M89, makkelijk te lokaliseren"
+
+#: scripts/messier_marathon.ssc:129
+msgid "Easy to locate, detect once"
+msgstr "Makkelijk te lokaliseren, eenmaal gededecteerd"
+
+#: scripts/messier_marathon.ssc:130
+msgid "There is an NGC4438 near M84 and M86, don't make a mistake"
+msgstr "Er is een NGC4438 naast M84 en M86, maak niet deze vergissing"
+
+#: scripts/messier_marathon.ssc:131
+msgid "M84 are together, closer to NGC4438"
+msgstr "M84 zijn samen, dichterbij NGC4438"
+
+#: scripts/messier_marathon.ssc:132
+msgid "Just above M90, almost like M90"
+msgstr "Net boven M90, bijna zoals M90"
+
+#: scripts/messier_marathon.ssc:133
+msgid "Look hard"
+msgstr "Goed kijken"
+
+#: scripts/messier_marathon.ssc:134
+msgid "This bunch of things in the Virgo Cluster is not easy"
+msgstr "Deze groep van dingen in de Virgo cluster is niet makkelijk"
+
+#: scripts/messier_marathon.ssc:135
+msgid "M99 is easier to verify than M98"
+msgstr "M99 is makkelijker te verifiëren dan M98"
+
+#: scripts/messier_marathon.ssc:136
+msgid "First find M100 and then find M98 and M99"
+msgstr "Zoek eerst M100 en zoek dan M98 en M99"
+
+#: scripts/messier_marathon.ssc:137
+msgid "Far away, but very bright, easy to find"
+msgstr "Ver weg, maar heel helder, makkelijk te vinden"
+
+#: scripts/messier_marathon.ssc:138
+msgid "Small, not easy to locate, a little difficult"
+msgstr "Klein, niet makkelijk te lokaliseren, een beetje moeilijk"
+
+#: scripts/messier_marathon.ssc:139
+msgid "Not easy to locate, easy to verify"
+msgstr "Niet makkelijk te lokaliseren, makkelijk te verifiëren"
+
+#: scripts/messier_marathon.ssc:140
+msgid "Easy to locate and verify, small"
+msgstr "Makkelijk te lokaliseren en te verifiëren, klein"
+
+#: scripts/messier_marathon.ssc:141
+msgid "Easy to verify, a star 5 magnitude nearby"
+msgstr "Makkelijk te verifiëren, een magnitude 5 ster vlakbij"
+
+#: scripts/messier_marathon.ssc:142
+msgid "Visible to the naked eye, big, bright"
+msgstr "Met het blote oog zichtbaar, groot, helder"
+
+#: scripts/messier_marathon.ssc:143
+msgid "Bright and big in the galaxies, not hard to find"
+msgstr "Helder en groot in de sterrenstelsels, niet moeilijk te vinden"
+
+#: scripts/messier_marathon.ssc:144
+msgid "Bright, easy to verify"
+msgstr "Helder, makkelijk te verifiëren"
+
+#: scripts/messier_marathon.ssc:145
+msgid "Easy to verify in a right location"
+msgstr "Makkelijk te verifiëren op de juiste locatie"
+
+#: scripts/messier_marathon.ssc:146
+msgid "Famous, like the shoulder pole star"
+msgstr "Fameus, zoals de schouder poolster"
+
+#: scripts/messier_marathon.ssc:147
+msgid "It may be easier to locate from the Dragon"
+msgstr "Het is misschien makkelijker te lokaliseren vanaf Dracon"
+
+#: scripts/messier_marathon.ssc:148
+msgid "Small, 20 times or more is still easy to detect"
+msgstr "Klein, 20 keer of meer maat toch makkelijk te detecteren"
+
+#: scripts/messier_marathon.ssc:149
+msgid "More difficult than M57, not easy to locate, very small"
+msgstr "Moeilijker dan M57, niet makkelijk te lokaliseren, erg klein"
+
+#: scripts/messier_marathon.ssc:150
+msgid "Easy, small, looks like a cluster of stars 7-8 magnitude"
+msgstr "Makkelijk, klein, lijkt op een cluster van magnitude 7-8 sterren"
+
+#: scripts/messier_marathon.ssc:151
+msgid "Larger than imagined, very scattered, not easy to locate"
+msgstr "Groter dan gedacht, erg verspreid, niet makkelijk te lokaliseren"
+
+#: scripts/messier_marathon.ssc:152
+msgid "Find M71 first, then find M27, and will be easier to locate"
+msgstr "Zoek eerst M71, zoek dan M27, zal gemakkelijker te lokaliseren zijn"
+
+#: scripts/messier_marathon.ssc:153
+msgid "Easy to locate, easy to verify in 50 binos"
+msgstr "Makkelijk te lokaliseren, makkelijk te verifiëren in 50 verrekijkers"
+
+#: scripts/messier_marathon.ssc:155
+msgid "Bright, like M13, easy to find"
+msgstr "Helder, zoals M13, makkelijk te vinden"
+
+#: scripts/messier_marathon.ssc:156
+msgid "Detect it with M12, brighter than M12"
+msgstr "Detecteer het met M12, helderder dan M12"
+
+#: scripts/messier_marathon.ssc:157
+msgid "Difficult to locate, easy to verify"
+msgstr "Moeilijk te vinden, makkelijk te verifiëren"
+
+#: scripts/messier_marathon.ssc:158
+msgid "Small, not easy to verify"
+msgstr "Kleein, makkelijk te verifiëren"
+
+#: scripts/messier_marathon.ssc:159
+msgid "Bright, big, don't forget to detect NGC6144 nearby"
+msgstr "Helder, groot, vergeet niet om NGC6144 in de buurt te detecteren"
+
+#: scripts/messier_marathon.ssc:160
+msgid "Not easy to verify at low power, easy at high power"
+msgstr ""
+"Niet makkelijk te verifiëren bij laag vermogen, makkelijk bij hoog vermogen"
+
+#: scripts/messier_marathon.ssc:161
+msgid "Follow the line of M4 and Antares, easy to verify"
+msgstr "Volg de lijn van M4 en Antares, makkelijk te verifiëren"
+
+#: scripts/messier_marathon.ssc:162
+msgid "Looking down from M19, darker than M19, but easy to verify"
+msgstr ""
+"Zoek naar beneden vanaf M19, donkerde dan M19 maar makkelijk te verifiëren"
+
+#: scripts/messier_marathon.ssc:163
+msgid "Easy to locate, bright, and almost like M13"
+msgstr "Makkelijk te lokaliseren, helder en bijna zoals M13"
+
+#: scripts/messier_marathon.ssc:164
+msgid "Easy to locate M26 by M11"
+msgstr "Makkelijk te lokaliseren M26 bij M11"
+
+#: scripts/messier_marathon.ssc:165
+msgid "Easy"
+msgstr "Makkelijk"
+
+#: scripts/messier_marathon.ssc:166 scripts/messier_marathon.ssc:179
+msgid "Difficult to locate, bright, easy to verify"
+msgstr "Moeilijk te lokaliseren, helder, makkelijk te verifiëren"
+
+#: scripts/messier_marathon.ssc:167
+msgid "Beside M81, vertical to each other"
+msgstr "Naast M81, verticaal onder elkaar"
+
+#: scripts/messier_marathon.ssc:168
+msgid "Large, a little fuzzy"
+msgstr "Groot, een beetje nevelig"
+
+#: scripts/messier_marathon.ssc:168
+msgid "Beside M20"
+msgstr "Naast M20"
+
+#: scripts/messier_marathon.ssc:169
+msgid "It’s not hard to see the diffuse nebula"
+msgstr "Het makkelijk te zien de diffuse nevel"
+
+#: scripts/messier_marathon.ssc:170
+msgid "Visible to the naked eye, extremely easy"
+msgstr "Met het blote oog zichtbaar, extreem makkelijk"
+
+#: scripts/messier_marathon.ssc:171
+msgid "Big, easy"
+msgstr "Groot, makkelijk"
+
+#: scripts/messier_marathon.ssc:171
+msgid "Easy to locate and verify, bright"
+msgstr "Makkelijk te lokaliseren en te verifiëren, helder"
+
+#: scripts/messier_marathon.ssc:172
+msgid "M13 second"
+msgstr "M13 tweede"
+
+#: scripts/messier_marathon.ssc:173
+msgid "Too big, scattered, not easy to verify"
+msgstr "Te groot, verspreid, niet makkelijk te verifiëren"
+
+#: scripts/messier_marathon.ssc:174
+msgid "Bigger than M6"
+msgstr "Groter dan M6"
+
+#: scripts/messier_marathon.ssc:176
+msgid "Brighter than imagined, can be detected with 60 binos"
+msgstr "Groter dan verwacht, kan worden gedetecteerd met 60 verrekijkers"
+
+#: scripts/messier_marathon.ssc:177
+msgid "Darker than M97, long strips, look hard"
+msgstr "Donkerder dan M97, lange stroken, moeilijk te zien"
+
+#: scripts/messier_marathon.ssc:178
+msgid "Easy to verify with more than 20 times binos"
+msgstr "Makkelijk te verifiëren met meer dan 20x verrekijkers"
+
+#: scripts/messier_marathon.ssc:180
+msgid "In the morning light, it looks too hard, dark"
+msgstr "In het morgenlicht, bijna niet te zien, donker"
+
+#: scripts/messier_marathon.ssc:289
+msgid "cannot be seen now"
+msgstr "is nu niet te zien"

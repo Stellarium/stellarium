@@ -1,7 +1,16 @@
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
-add_library(TelescopeControl_common
+IF(WIN32)
+    SET(TelescopeControl_ASCOM_common_SRC
+        ASCOMSupport.hpp
+        ASCOMSupport.cpp
+        OLE.hpp
+        OLE.cpp
+    )
+ENDIF()
+
+add_library(TelescopeControl_common STATIC
     LogFile.hpp
     LogFile.cpp
     Socket.hpp
@@ -14,6 +23,7 @@ add_library(TelescopeControl_common
     SerialPort.cpp
     InterpolatedPosition.hpp
     InterpolatedPosition.cpp
+    ${TelescopeControl_ASCOM_common_SRC}
     )
 
 target_link_libraries(TelescopeControl_common

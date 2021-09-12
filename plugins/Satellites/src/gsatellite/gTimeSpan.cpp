@@ -78,7 +78,7 @@ long  gTimeSpan::getDays() const
 int gTimeSpan::getHours() const
 {
 	double AuxValue = m_timeSpan - (getDays() * KSEC_PER_DAY);
-	return (int)(AuxValue / KSEC_PER_HR);
+	return static_cast<int>(AuxValue / KSEC_PER_HR);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -90,7 +90,7 @@ int gTimeSpan::getMinutes() const
 {
 	double AuxValue = m_timeSpan - (getDays()  * KSEC_PER_DAY)
 	                  - (getHours() * KSEC_PER_HR);
-	return (int)(AuxValue / KSEC_PER_MIN);
+	return static_cast<int>(AuxValue / KSEC_PER_MIN);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -103,7 +103,7 @@ int gTimeSpan::getSeconds() const
 	double AuxValue = m_timeSpan - (getDays()  * KSEC_PER_DAY)
 	                  - (getHours() * KSEC_PER_HR)
 	                  - (getMinutes() * KSEC_PER_MIN);
-	return (int)AuxValue;
+	return static_cast<int>(AuxValue);
 }
 
 ////////////////////////////////////////////////////////////////////////////

@@ -132,7 +132,7 @@ protected:
 
     // Device physical port
     ITextVectorProperty PortTP;
-    IText PortT[1];
+    IText PortT[1] {};
 
     ISwitch BaudRateS[6];
     ISwitchVectorProperty BaudRateSP;

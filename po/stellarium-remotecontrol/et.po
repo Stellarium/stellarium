@@ -3,13 +3,18 @@
 # This file is distributed under the same license as the stellarium-remotecontrol package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Maidur, 2019
+# Üllar Kivila <landersift@hotmail.com>, 2021
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-02-21 12:42+0700\n"
+"POT-Creation-Date: 2021-06-15 22:33+0700\n"
 "PO-Revision-Date: 2017-11-29 01:19+0000\n"
+"Last-Translator: Üllar Kivila <landersift@hotmail.com>, 2021\n"
 "Language-Team: Estonian (https://www.transifex.com/stellarium/teams/80998/et/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,196 +24,196 @@ msgstr ""
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
-msgstr ""
+msgstr "Ei saanud tegevuste nimekirja laadida"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:88
 msgid "Action '%1' not accepted by server: "
-msgstr ""
+msgstr "Server ei võtnud tegevust '%1' vastu:"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:95
 msgid "Error sending action '%1' to server: "
-msgstr ""
+msgstr "Tegevuse '%1' serverisse saatmise viga: "
 
 #: plugins/RemoteControl/webroot/js/api/location.js:33
 #: plugins/RemoteControl/webroot/js/api/location.js:61
 #: plugins/RemoteControl/webroot/js/api/search.js:188
 msgid "Error performing search"
-msgstr ""
+msgstr "Otsingu viga"
 
 #: plugins/RemoteControl/webroot/js/api/location.js:125
 msgid "Could not retrieve country list"
-msgstr ""
+msgstr "Ei saanud riikide nimekirja laadida"
 
 #: plugins/RemoteControl/webroot/js/api/location.js:138
 msgid "Could not retrieve planet list"
-msgstr ""
+msgstr "Ei saanud planeetide nimekirja laadida"
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:28
 msgid "Could not retrieve property list"
-msgstr ""
+msgstr "Ei saanud seadete nimekirja laadida"
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:89
 #: plugins/RemoteControl/webroot/js/api/properties.js:110
 msgid "Property '%1' not accepted by server: "
-msgstr ""
+msgstr "Server ei võtnud seadet '%1' vastu:"
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:96
 msgid "Error sending property '%1' to server: "
-msgstr ""
+msgstr "Seadistuse '%1' serverisse saatmise viga: "
 
 #: plugins/RemoteControl/webroot/js/api/remotecontrol.js:197
 msgid "Error sending command to server: "
-msgstr ""
+msgstr "Serverisse käsu saatmise viga:"
 
 #: plugins/RemoteControl/webroot/js/api/scripts.js:27
 msgid "Could not retrieve script list"
-msgstr ""
+msgstr "Ei saanud skriptide nimekirja laadida"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:35
 msgid "querying"
-msgstr ""
+msgstr "teen päringut"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:44
 msgid "Error (%1)"
-msgstr ""
+msgstr "Viga (%1)"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:60
 msgid "Error performing Simbad lookup"
-msgstr ""
+msgstr "Simbadi otsingu viga"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:219
 #: tablet7in.html:235
 msgid "idle"
-msgstr ""
+msgstr "ootel"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:105
 msgid "Error loading object types"
-msgstr ""
+msgstr "Objekti tüüpide laadimise viga"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:138
 msgid "Error getting object list"
-msgstr ""
+msgstr "Objektide nimekirja lugemise viga"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:200
 msgid "waiting"
-msgstr ""
+msgstr "ootel"
 
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:38
 msgid "Could not retrieve projection list"
-msgstr ""
+msgstr "Ei saanud projektsioonide nimekirja laadida"
 
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:51
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:64
 msgid "Could not retrieve landscape list"
-msgstr ""
+msgstr "Ei saanud maastike nimekirja laadida"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:619
-#: index.html:676 tablet7in.html:724 tablet7in.html:784
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:638
+#: index.html:695 tablet7in.html:733 tablet7in.html:793
 msgid "-none-"
-msgstr ""
+msgstr "-puudub-"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:28
 msgid "(Currently loading: %1)"
-msgstr ""
+msgstr "(Praegu laeb: %1)"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:71
 msgid "Could not retrieve Scenery3d list"
-msgstr ""
+msgstr "Ei saanud 3D maastike nimekirja laadida"
 
 #: plugins/RemoteControl/webroot/js/ui/actions.js:44
 #: plugins/RemoteControl/webroot/js/ui/actions.js:77
 msgid "on"
-msgstr ""
+msgstr "sees"
 
 #: plugins/RemoteControl/webroot/js/ui/actions.js:44
 #: plugins/RemoteControl/webroot/js/ui/actions.js:77
 msgid "off"
-msgstr ""
+msgstr "väljas"
 
 #: plugins/RemoteControl/webroot/js/ui/combobox.js:58
 msgid "Show All Items"
-msgstr ""
+msgstr "Näita kõiki"
 
 #: plugins/RemoteControl/webroot/js/ui/combobox.js:124
 msgid "Input did not match any item"
-msgstr ""
+msgstr "Sisend ei sobi ühegi esemega"
 
 #: plugins/RemoteControl/webroot/js/ui/search.js:285
 msgid "No current selection"
-msgstr ""
+msgstr "Valik puudub"
 
 #: index.html:5 tablet7in.html:5
 msgid "Stellarium remote control plugin"
-msgstr ""
+msgstr "Stellariumi kaugjuhtimise pistikprogramm"
 
 #: index.html:17 tablet7in.html:18
 msgid "Please wait, loading"
-msgstr ""
+msgstr "Palun oota, laeb"
 
 #: index.html:26 tablet7in.html:27
 msgid "Stellarium remote control"
-msgstr ""
+msgstr "Stellariumi kaugjuhtimine"
 
 #: index.html:30 tablet7in.html:31
 msgid "Main controls"
-msgstr ""
+msgstr "Põhikontrollid"
 
 #: index.html:33 tablet7in.html:38
 msgid "DSO"
-msgstr ""
+msgstr "Süvataeva objektid"
 
 #: index.html:36
 msgid "Actions and scripts"
-msgstr ""
+msgstr "Tegevused ja skriptid"
 
 #: index.html:39 tablet7in.html:45
 msgid "Scenery3d"
-msgstr ""
+msgstr "3D maastikud"
 
 #: index.html:77
 msgid "Pause"
-msgstr ""
+msgstr "Paus"
 
 #: index.html:82 tablet7in.html:183
 msgid "Time jumps"
-msgstr ""
+msgstr "Ajahüpped"
 
 #: index.html:86 tablet7in.html:187
 msgid "Solar hour"
-msgstr ""
+msgstr "Päikesetund"
 
 #: index.html:87 tablet7in.html:188
 msgid "Solar day"
-msgstr ""
+msgstr "Päikeseööpäev"
 
 #: index.html:88 tablet7in.html:189
 msgid "Solar week"
-msgstr ""
+msgstr "Päikesenädal"
 
 #: index.html:91 tablet7in.html:192
 msgid "Sidereal year"
-msgstr ""
+msgstr "Täheaasta"
 
 #: index.html:92 tablet7in.html:193
 msgid "Sidereal century"
-msgstr ""
+msgstr "Tähesajand"
 
 #: index.html:94 tablet7in.html:195
 msgid "Synodic month"
-msgstr ""
+msgstr "Sünoodiline kuu"
 
 #: index.html:95 tablet7in.html:196
 msgid "Draconic month"
-msgstr ""
+msgstr "Drakooniline kuu"
 
 #: index.html:96 tablet7in.html:197
 msgid "Draconic year"
-msgstr ""
+msgstr "Drakooniline aasta"
 
 #: index.html:98 tablet7in.html:210
 msgid "Gaussian year"
-msgstr ""
+msgstr "Gaussi aasta"
 
 #: index.html:101 tablet7in.html:200
 msgid "Anomalistic month"
@@ -240,87 +245,107 @@ msgstr ""
 
 #: index.html:110 tablet7in.html:209
 msgid "Julian year"
-msgstr ""
+msgstr "Juuliuse aasta"
 
 #: index.html:111 tablet7in.html:211
 msgid "Julian century"
-msgstr ""
+msgstr "Juuliuse sajand"
 
 #: index.html:123 tablet7in.html:101
 msgid "View towards horizon at Azimuth"
-msgstr ""
+msgstr "Vaata horisondi suunas asimuudil"
 
 #: index.html:144 tablet7in.html:123
 msgid "Vertical View offset"
-msgstr ""
+msgstr "Vertikaalne vaatenihe"
 
 #: index.html:154 tablet7in.html:133
 msgid "Reset"
-msgstr ""
+msgstr "Taasta"
 
 #: index.html:160 tablet7in.html:138
 msgid "FOV"
-msgstr ""
+msgstr "Vaateväli"
 
 #: index.html:213 tablet7in.html:229
 msgid "Enter search term. Use TAB to navigate results."
-msgstr ""
+msgstr "Sisesta otsingusõna. Kasuta TAB klahvi tulemuste valimiseks"
 
 #: index.html:214 tablet7in.html:230
 msgid "Select and focus"
-msgstr ""
+msgstr "Vali ja suuna"
 
 #: index.html:240 tablet7in.html:259
 msgid "Selection mode"
-msgstr ""
+msgstr "Valikurežiim"
 
 #: index.html:240 tablet7in.html:259
 msgid "Center on object"
-msgstr ""
+msgstr "Suuna objektile"
 
 #: index.html:240 tablet7in.html:259
 msgid "Center and zoom to object"
-msgstr ""
+msgstr "Suuna objektile ja suurenda"
 
 #: index.html:240 tablet7in.html:259
 msgid "Just mark the object"
-msgstr ""
+msgstr "Märgi objekt"
 
 #: index.html:242 tablet7in.html:261
 msgid "Quick select"
-msgstr ""
+msgstr "Kiirvalik"
 
 #: index.html:246 tablet7in.html:265
 msgid "Earth"
-msgstr ""
+msgstr "Maa"
 
 #: index.html:246 tablet7in.html:265
 msgid "Pluto"
-msgstr ""
+msgstr "Pluuto"
 
 #: index.html:252 tablet7in.html:294
 msgid "Current selection"
-msgstr ""
+msgstr "Praegune valik"
 
 #: index.html:268 tablet7in.html:321
 msgid "Milky Way brightness:"
-msgstr ""
+msgstr "Linnutee heledus:"
 
 #: index.html:272 tablet7in.html:333
 msgid "Digitized Sky Survey"
-msgstr ""
+msgstr "Digitaalne taevaülevaade"
 
 #: index.html:273 tablet7in.html:334
 msgid "HiPS Survey"
-msgstr ""
+msgstr "HiPS ülevaade"
+
+#: index.html:287 tablet7in.html:351
+msgid "Show planet orbits"
+msgstr "Näita planeetide orbiite"
+
+#: index.html:288 tablet7in.html:352
+msgid "Show planet orbits only"
+msgstr "Näita ainult planeetide orbiite"
+
+#: index.html:289 tablet7in.html:353
+msgid "Show orbit for selected planet"
+msgstr "Näita valitud planeedi orbiiti"
+
+#: index.html:290 tablet7in.html:354
+msgid "Show planet trails"
+msgstr "Näita planeetide liikumisjälgi"
+
+#: index.html:291 tablet7in.html:355
+msgid "Show trail only for selected planet"
+msgstr "Näita ainult valitud planeedi liikumisjälge"
 
 #: index.html:322 tablet7in.html:409
 msgid "Shooting Stars"
-msgstr ""
+msgstr "Langevad tähed"
 
 #: index.html:323 tablet7in.html:410
 msgid "ZHR:"
-msgstr ""
+msgstr "Tunniarv seniidis"
 
 #: index.html:368 tablet7in.html:463
 msgid ""
@@ -328,290 +353,317 @@ msgid ""
 " Displayed on Earth only."
 msgstr ""
 
-#: index.html:377 tablet7in.html:472
+#: index.html:378 tablet7in.html:472
 msgid "Solstices"
-msgstr ""
+msgstr "Pööripäevad"
 
-#: index.html:378 tablet7in.html:473
+#: index.html:379 tablet7in.html:473
 msgid "Crossquarters"
 msgstr ""
 
-#: index.html:379 tablet7in.html:474
+#: index.html:380 tablet7in.html:474
 msgid "Major Standstill"
 msgstr ""
 
-#: index.html:380 tablet7in.html:475
+#: index.html:381 tablet7in.html:475
 msgid "Minor Standstill"
 msgstr ""
 
-#: index.html:389 tablet7in.html:484
+#: index.html:390 tablet7in.html:484
 msgid "Current Planet:"
-msgstr ""
+msgstr "Praegune planeet:"
 
-#: index.html:521 tablet7in.html:610
+#: index.html:426 tablet7in.html:524
+msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
+msgstr "Peegeldusudude kataloog (Van den Bergh, 1966)"
+
+#: index.html:444 tablet7in.html:542
+msgid ""
+"Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975)"
+msgstr ""
+"Lõunataeva udukogudes asuvate tähtede kataloog (van den Bergh jt, 1975)"
+
+#: index.html:512
+msgid "Objects without identifier"
+msgstr "Tähiseta objektid"
+
+#: index.html:537 tablet7in.html:616
 msgid "Bright Nebulae"
-msgstr ""
+msgstr "Eredad udukogud"
 
-#: index.html:522 tablet7in.html:611
+#: index.html:538 tablet7in.html:617
 msgid "Dark Nebulae"
-msgstr ""
+msgstr "Tumedad udukogud"
 
-#: index.html:523 tablet7in.html:612
+#: index.html:539 tablet7in.html:618
 msgid "Planetary Nebulae"
-msgstr ""
+msgstr "Planetaarsed udukogud"
 
-#: index.html:532 tablet7in.html:621
+#: index.html:548 tablet7in.html:627
 msgid "Labels and markers"
-msgstr ""
+msgstr "Nimed ja märgised"
 
-#: index.html:566 tablet7in.html:655
+#: index.html:573 tablet7in.html:652
+msgid "Use associated planet and position"
+msgstr "Kasuta seotud planeeti ja asukohta"
+
+#: index.html:582 tablet7in.html:661
 msgid "Show illumination"
-msgstr ""
+msgstr "Näita valgustatust"
 
-#: index.html:571 tablet7in.html:661
+#: index.html:587 tablet7in.html:667
 msgid "Current landscape"
-msgstr ""
+msgstr "Praegune maastik"
 
-#: index.html:583 tablet7in.html:674
+#: index.html:599 tablet7in.html:680
 msgid "Show lines with thickness"
-msgstr ""
+msgstr "Näita jooni paksusega"
 
-#: index.html:588 tablet7in.html:679
+#: index.html:604 tablet7in.html:685
 msgid "Show asterisms with thickness"
 msgstr ""
 
-#: index.html:592 tablet7in.html:683
+#: index.html:608 tablet7in.html:689
 msgid "Show ray helpers with thickness"
-msgstr ""
+msgstr "Näita suunavaid jooni paksusega"
 
-#: index.html:602 tablet7in.html:695
+#: index.html:616 tablet7in.html:699
+msgid "Show boundaries with thickness"
+msgstr "Näita piire paksusega"
+
+#: index.html:621 tablet7in.html:704
 msgid "Constellation selection isolated"
 msgstr ""
 
-#: index.html:606 tablet7in.html:699
+#: index.html:625 tablet7in.html:708
 msgid "Current sky culture"
-msgstr ""
+msgstr "Praegune taevakultuur"
 
-#: index.html:619 tablet7in.html:724
+#: index.html:638 tablet7in.html:733
 msgid "Active script:"
-msgstr ""
+msgstr "Aktiivne skript:"
 
-#: index.html:620 tablet7in.html:725
+#: index.html:639 tablet7in.html:734
 msgid "Run selected script"
-msgstr ""
+msgstr "Käivita valitud skript"
 
-#: index.html:620 tablet7in.html:725
+#: index.html:639 tablet7in.html:734
 msgid "Stop current script"
-msgstr ""
+msgstr "Peata praegune skript"
 
-#: index.html:625 tablet7in.html:41 tablet7in.html:709
+#: index.html:644 tablet7in.html:41 tablet7in.html:718
 msgid "Actions"
-msgstr ""
+msgstr "Tegevused"
 
-#: index.html:629 tablet7in.html:713
+#: index.html:648 tablet7in.html:722
 msgid "Run/toggle action"
-msgstr ""
+msgstr "Käivita/lülita tegevus"
 
-#: index.html:640 tablet7in.html:748
+#: index.html:659 tablet7in.html:757
 msgid "Planet map"
-msgstr ""
+msgstr "Planeedi kaart"
 
-#: index.html:641 tablet7in.html:749
+#: index.html:660 tablet7in.html:758
 msgid "Planet map pointer"
-msgstr ""
+msgstr "Planeedi kaardi osuti"
 
-#: index.html:645 tablet7in.html:753
+#: index.html:664 tablet7in.html:762
 msgid "Type to search location"
-msgstr ""
+msgstr "Trüki asukoha otsimiseks"
 
-#: index.html:674 tablet7in.html:782
+#: index.html:693 tablet7in.html:791
 msgid "Interaction"
 msgstr ""
 
-#: index.html:675 tablet7in.html:783
+#: index.html:694 tablet7in.html:792
 msgid "Current scene:"
-msgstr ""
+msgstr "Praegune stseen"
 
-#: index.html:678 tablet7in.html:786
+#: index.html:697 tablet7in.html:795
 msgid "View controls"
-msgstr ""
+msgstr "Vaate seaded"
 
-#: index.html:684 tablet7in.html:792
+#: index.html:703 tablet7in.html:801
 msgid "Movement controls"
-msgstr ""
+msgstr "Liikumise seaded"
 
-#: index.html:696 tablet7in.html:804
+#: index.html:715 tablet7in.html:813
 msgid "Torchlight"
-msgstr ""
+msgstr "Taskulamp"
 
-#: index.html:703 tablet7in.html:811
+#: index.html:722 tablet7in.html:820
 msgid "Scene selection"
-msgstr ""
+msgstr "Stseeni valik"
 
-#: index.html:707 tablet7in.html:815
+#: index.html:726 tablet7in.html:824
 msgid "Load selected scene"
-msgstr ""
+msgstr "Lae valitud stseen"
 
-#: index.html:731 tablet7in.html:840
+#: index.html:750 tablet7in.html:849
 msgid "No response from server"
-msgstr ""
+msgstr "Serverilt ei tulnud vastust"
 
-#: index.html:732 tablet7in.html:841
+#: index.html:751 tablet7in.html:850
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
+"Serverilt pole %1 sekundi jooksul vastust. Kas Stellarium töötab veel?"
 
 #: tablet7in.html:32
 msgid "Time Jump"
-msgstr ""
+msgstr "Ajahüpe"
 
 #: tablet7in.html:37
 msgid "Grids"
-msgstr ""
+msgstr "Koordinaatvõrgud"
 
 #: tablet7in.html:97
 msgid "Up/Left"
-msgstr ""
+msgstr "Üles/vasakule"
 
 #: tablet7in.html:97
 msgid "Up"
-msgstr ""
+msgstr "Üles"
 
 #: tablet7in.html:97
 msgid "Up/Right"
-msgstr ""
+msgstr "Üles/paremale"
 
 #: tablet7in.html:97
 msgid "Left"
-msgstr ""
+msgstr "Vasakule"
 
 #: tablet7in.html:97
 msgid "Focus on selected object"
-msgstr ""
+msgstr "Suuna valitud objektile"
 
 #: tablet7in.html:97
 msgid "Focus on selection"
-msgstr ""
+msgstr "Suuna valikule"
 
 #: tablet7in.html:97
 msgid "Right"
-msgstr ""
+msgstr "Paremal"
 
 #: tablet7in.html:97
 msgid "Down/Left"
-msgstr ""
+msgstr "All/vasakul"
 
 #: tablet7in.html:97
 msgid "Down"
-msgstr ""
+msgstr "All"
 
 #: tablet7in.html:97
 msgid "Down/Right"
-msgstr ""
+msgstr "All/paremal"
 
 #: tablet7in.html:266
 msgid "Sirius"
-msgstr ""
+msgstr "Siirius"
 
 #: tablet7in.html:267
 msgid "Arcturus"
-msgstr ""
+msgstr "Arktuurus"
 
 #: tablet7in.html:268
 msgid "Capella"
-msgstr ""
+msgstr "Kapella"
 
 #: tablet7in.html:269
 msgid "Vega"
-msgstr ""
+msgstr "Veega"
 
 #: tablet7in.html:270
 msgid "Deneb"
-msgstr ""
+msgstr "Deeneb"
 
 #: tablet7in.html:271
 msgid "Altair"
-msgstr ""
+msgstr "Altair"
 
 #: tablet7in.html:272
 msgid "Andromeda Galaxy"
-msgstr ""
+msgstr "Andromeeda galaktika"
 
 #: tablet7in.html:273
 msgid "Hercules Cluster"
-msgstr ""
+msgstr "Herkulese kerasparv"
 
 #: tablet7in.html:274
 msgid "Orion Nebula"
-msgstr ""
+msgstr "Orioni udu"
 
 #: tablet7in.html:275
 msgid "Eta Carinae Nebula"
-msgstr ""
+msgstr "Kiilu udukogu"
 
 #: tablet7in.html:276
 msgid "47 Tucanae Cluster"
-msgstr ""
+msgstr "47 Tucanae parv"
 
 #: tablet7in.html:277
 msgid "Aries"
-msgstr ""
+msgstr "Jäär"
 
 #: tablet7in.html:278
 msgid "Taurus"
-msgstr ""
+msgstr "Sõnn"
 
 #: tablet7in.html:279
 msgid "Gemini"
-msgstr ""
+msgstr "Kaksikud"
 
 #: tablet7in.html:280
 msgid "Cancer"
-msgstr ""
+msgstr "Vähk"
 
 #: tablet7in.html:281
 msgid "Leo"
-msgstr ""
+msgstr "Lõvi"
 
 #: tablet7in.html:282
 msgid "Virgo"
-msgstr ""
+msgstr "Neitsi"
 
 #: tablet7in.html:283
 msgid "Libra"
-msgstr ""
+msgstr "Kaalud"
 
 #: tablet7in.html:284
 msgid "Scorpius"
-msgstr ""
+msgstr "Skorpion"
 
 #: tablet7in.html:285
 msgid "Sagittarius"
-msgstr ""
+msgstr "Ambur"
 
 #: tablet7in.html:286
 msgid "Capricornus"
-msgstr ""
+msgstr "Kaljukits"
 
 #: tablet7in.html:287
 msgid "Aquarius"
-msgstr ""
+msgstr "Veevalaja"
 
 #: tablet7in.html:288
 msgid "Pisces"
-msgstr ""
+msgstr "Kalad"
 
-#: tablet7in.html:733
+#: tablet7in.html:507
+msgid "Compass Marks"
+msgstr "Kompassiskaala"
+
+#: tablet7in.html:742
 msgid "Favorites"
-msgstr ""
+msgstr "Lemmikud"
 
-#: tablet7in.html:735
+#: tablet7in.html:744
 msgid "Show 1"
-msgstr ""
+msgstr "Näita1"
 
-#: tablet7in.html:736
+#: tablet7in.html:745
 msgid "Remove Labels and Images"
-msgstr ""
+msgstr "Eemalda nimed ja pildid"
 
-#: tablet7in.html:736
+#: tablet7in.html:745
 msgid "Cleanup Screen"
-msgstr ""
+msgstr "Puhasta ekraan"

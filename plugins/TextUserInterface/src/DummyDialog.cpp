@@ -31,7 +31,7 @@
 class CustomProxy : public QGraphicsProxyWidget
 {
 	public:
-		CustomProxy(QGraphicsItem *parent = Q_NULLPTR, Qt::WindowFlags wFlags = 0) : QGraphicsProxyWidget(parent, wFlags)
+		CustomProxy(QGraphicsItem *parent = Q_NULLPTR, Qt::WindowFlags wFlags = Qt::WindowFlags()) : QGraphicsProxyWidget(parent, wFlags)
 		{
 			setFocusPolicy(Qt::StrongFocus);
 		}
@@ -81,7 +81,7 @@ DummyDialog::~DummyDialog()
 void DummyDialog::close()
 {
 	emit visibleChanged(false);
-	StelMainView::getInstance().scene()->setActiveWindow(0);
+	StelMainView::getInstance().scene()->setActiveWindow(Q_NULLPTR);
 }
 
 void DummyDialog::setVisible(bool v)
@@ -102,7 +102,9 @@ void DummyDialog::setVisible(bool v)
 		proxy = new CustomProxy(Q_NULLPTR, Qt::Tool);
 		proxy->setWidget(dialog);
 		StelMainView::getInstance().scene()->addItem(proxy);
-		proxy->setWindowFrameMargins(2,0,2,2);
+		// Invisible frame around the window to make resizing easier
+		// (this also changes the bounding rectangle size)
+		proxy->setWindowFrameMargins(7,0,7,7);
 		proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache); 
 		proxy->setZValue(100);
 		StelMainView::getInstance().scene()->setActiveWindow(proxy);
@@ -113,7 +115,7 @@ void DummyDialog::setVisible(bool v)
 		dialog->hide();
 		emit visibleChanged(false);
 		//proxy->clearFocus();
-		StelMainView::getInstance().scene()->setActiveWindow(0);
+		StelMainView::getInstance().scene()->setActiveWindow(Q_NULLPTR);
 	}
 }
 

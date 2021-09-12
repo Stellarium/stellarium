@@ -31,7 +31,9 @@
 
 #include <QSettings>
 
-ToastMgr::ToastMgr() : survey(Q_NULLPTR)
+ToastMgr::ToastMgr() :
+	StelModule()
+	, survey(Q_NULLPTR)
 {	
 	setObjectName("ToastMgr");
 	fader = new LinearFader();
@@ -77,7 +79,7 @@ void ToastMgr::draw(StelCore* core)
 
 void ToastMgr::update(double deltaTime)
 {
-	fader->update((int)(deltaTime*1000));
+	fader->update(static_cast<int>(deltaTime*1000));
 }
 
 /*************************************************************************
@@ -103,16 +105,4 @@ void ToastMgr::setFlagShow(const bool displayed)
 bool ToastMgr::getFlagShow() const
 {
 	return *fader;
-}
-
-void ToastMgr::setFlagSurveyShow(bool displayed)
-{
-	qWarning() << "WARNING: ToastMgr.setFlagSurveyShow() is deprecated and will soon be removed. Use ToastMgr.setFlagShow() instead.";
-	setFlagShow(displayed);
-}
-
-bool ToastMgr::getFlagSurveyShow(void) const
-{
-	qWarning() << "WARNING: ToastMgr.getFlagSurveyShow() is deprecated and will soon be removed. Use ToastMgr.getFlagShow() instead.";
-	return getFlagShow();
 }

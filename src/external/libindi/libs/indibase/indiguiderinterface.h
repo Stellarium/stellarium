@@ -41,6 +41,9 @@
  *
  * @author Jasem Mutlaq
  */
+
+#include <stdint.h>
+
 namespace INDI
 {
 
@@ -52,28 +55,28 @@ class GuiderInterface
      * @return IPS_OK if operation is completed successfully, IPS_BUSY if operation will take take to
      * complete, or IPS_ALERT if operation failed.
      */
-    virtual IPState GuideNorth(float ms) = 0;
+    virtual IPState GuideNorth(uint32_t ms) = 0;
 
     /**
      * @brief Guide south for ms milliseconds. South is defined as DEC-
      * @return IPS_OK if operation is completed successfully, IPS_BUSY if operation will take take to
      * complete, or IPS_ALERT if operation failed.
      */
-    virtual IPState GuideSouth(float ms) = 0;
+    virtual IPState GuideSouth(uint32_t ms) = 0;
 
     /**
      * @brief Guide east for ms milliseconds. East is defined as RA+
      * @return IPS_OK if operation is completed successfully, IPS_BUSY if operation will take take to
      * complete, or IPS_ALERT if operation failed.
      */
-    virtual IPState GuideEast(float ms) = 0;
+    virtual IPState GuideEast(uint32_t ms) = 0;
 
     /**
      * @brief Guide west for ms milliseconds. West is defined as RA-
      * @return IPS_OK if operation is completed successfully, IPS_BUSY if operation will take take to
      * complete, or IPS_ALERT if operation failed.
      */
-    virtual IPState GuideWest(float ms) = 0;
+    virtual IPState GuideWest(uint32_t ms) = 0;
 
     /**
      * @brief Call GuideComplete once the guiding pulse is complete.

@@ -42,7 +42,7 @@ class StelPainter;
 //! abbreviation and Hipparcos catalogue numbers (taken from file: constellationship.fab),
 //! another entry in file constellation_names.eng.fab with the defining abbreviated name,
 //! nativeName, and translatable englishName (translation goes into nameI18),
-//! boundary shape from file constellations_boundaries.dat and an (optional) artistic pictorial representation.
+//! boundary shape from file constellation_boundaries.dat and an (optional) artistic pictorial representation.
 //! GZ NEW: The nativeName should be accessible in a GUI option, so that e.g. original names as written in a
 //! concrete book where a skyculture has been taken from can be assured even when translation is available.
 //! TODO: There should be a distinction between constellations and asterisms, which are "inofficial" figures within a sky culture.
@@ -80,15 +80,15 @@ private:
 	//! catalogue numbers which, when connected pairwise, form the lines of the
 	//! constellation.
 	//! @param starMgr a pointer to the StarManager object.
-	//! @return false if can't parse record, else true.
+	//! @return false if can't parse record (invalid result!), else true.
 	bool read(const QString& record, StarMgr *starMgr);
 
 	//! Draw the constellation name
 	void drawName(StelPainter& sPainter, ConstellationMgr::ConstellationDisplayStyle style) const;
 	//! Draw the constellation art
 	void drawArt(StelPainter& sPainter) const;
-	//! Draw the constellation boundary
-	void drawBoundaryOptim(StelPainter& sPainter) const;
+	//! Draw the constellation boundary. obsVelocity used for aberration
+	void drawBoundaryOptim(StelPainter& sPainter, const Vec3d &obsVelocity) const;
 
 	//! Test if a star is part of a Constellation.
 	//! This member tests to see if a star is one of those which make up
@@ -113,8 +113,8 @@ private:
 	//! This method uses the coords of the stars (optimized for use through
 	//! the class ConstellationMgr only).
 	void drawOptim(StelPainter& sPainter, const StelCore* core, const SphericalCap& viewportHalfspace) const;
-	//! Draw the art texture, optimized function to be called through a constellation manager only.
-	void drawArtOptim(StelPainter& sPainter, const SphericalRegion& region) const;
+	//! Draw the art texture, optimized function to be called through a constellation manager only.  obsVelocity used for aberration
+	void drawArtOptim(StelPainter& sPainter, const SphericalRegion& region, const Vec3d& obsVelocity) const;
 	//! Update fade levels according to time since various events.
 	void update(int deltaTime);
 	//! Turn on and off Constellation line rendering.

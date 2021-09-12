@@ -61,14 +61,14 @@ class Observability : public StelModule
 		   )
 public:
 	Observability();
-	virtual ~Observability();
-	virtual void init();
-	virtual void update(double) {;}
-	virtual void draw(StelCore* core);
-	virtual double getCallOrder(StelModuleActionName actionName) const;
+	virtual ~Observability() Q_DECL_OVERRIDE;
+	virtual void init() Q_DECL_OVERRIDE;
+	virtual void update(double) Q_DECL_OVERRIDE {;}
+	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 
 	//! Implement this to tell the main Stellarium GUI that there is a GUI element to configure this plugin.
-	virtual bool configureGui(bool show=true);
+	virtual bool configureGui(bool show=true) Q_DECL_OVERRIDE;
 
 
 	//! Read (or re-read) settings from the main config file.
@@ -284,7 +284,6 @@ private:
 	bool CheckRise(int day);
 
 	//! Some useful constants (almost self-explanatory).
-	// GZ: Made true constants out of those, and improved accuracy of some.
 	static const double Rad2Deg, Rad2Hr, UA, TFrac, halfpi, MoonT, RefFullMoon, MoonPerilune;
 
 	//! Some useful variables(almost self-explanatory).
@@ -363,9 +362,6 @@ private:
 	//! Strings to save ephemeris Times:
 	QString RiseTime, SetTime, CulmTime;
 
-	//! Just the names of the months.
-	QStringList monthNames;
-
 	//! Using for storage date format [i18n]
 	bool dmyFormat;
 
@@ -416,9 +412,9 @@ class ObservabilityStelPluginInterface : public QObject, public StelPluginInterf
        Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
        Q_INTERFACES(StelPluginInterface)
 public:
-       virtual StelModule* getStelModule() const;
-       virtual StelPluginInfo getPluginInfo() const;
-       virtual QObjectList getExtensionList() const { return QObjectList(); }
+       virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
+       virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
+       virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
 };
 
 #endif /*OBSERVABILITY_HPP*/

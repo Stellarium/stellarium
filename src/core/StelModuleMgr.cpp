@@ -29,8 +29,8 @@
 #include "StelPluginInterface.hpp"
 #include "StelPropertyMgr.hpp"
 #include "StelIniParser.hpp"
-
-
+#include "StelLocaleMgr.hpp"
+#include "StelUtils.hpp"
 
 StelModuleMgr::StelModuleMgr() : callingListsToRegenerate(true), pluginDescriptorListLoaded(false)
 {
@@ -191,6 +191,14 @@ void StelModuleMgr::setPluginLoadAtStartup(const QString& key, bool b)
 	}
 }
 
+bool StelModuleMgr::isPluginLoaded(const QString &moduleID)
+{
+	if (pluginDescriptorList.contains(moduleID))
+		return pluginDescriptorList[moduleID].loaded;
+	else
+		return false;
+}
+
 /*************************************************************************
  Generate properly sorted calling lists for each action (e,g, draw, update)
  according to modules orders dependencies
@@ -207,7 +215,7 @@ void StelModuleMgr::generateCallingLists()
 		{
 			mc.value().push_back(m);
 		}
-		qSort(mc.value().begin(), mc.value().end(), StelModuleOrderComparator(mc.key()));
+		std::sort(mc.value().begin(), mc.value().end(), StelModuleOrderComparator(mc.key()));
 	}
 }
 
@@ -296,4 +304,28 @@ QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 
 	pluginDescriptorListLoaded = true;
 	return pluginDescriptorList.values();
+}
+
+QString StelModuleMgr::getStandardSupportLinksInfo(QString moduleName, bool furtherInfo)
+{
+	// Regexp to replace {text} with an HTML link.
+	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
+	QString html;
+	html += "<h3>" + q_("Links") + "</h3>";
+	html += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg(moduleName) + "</p>";
+	html += "<p><ul>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	html += "<li>" + q_("If you have a question, you can {get an answer here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://groups.google.com/forum/#!forum/stellarium\">\\1</a>") + "</li>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	html += "<li>" + q_("Bug reports and feature requests can be made {here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://github.com/Stellarium/stellarium/issues\">\\1</a>") + "</li>";
+	html += "</ul></p>";
+	if (furtherInfo)
+	{
+		QStringList ver = StelUtils::getApplicationVersion().split(".");
+		QString URL = QString("<a href=\"http://stellarium.org/doc/%1.%2/\">\\1</a>").arg(ver[0], ver[1]);
+		// TRANSLATORS: The text between braces is the text of an HTML link.
+		html += "<p>" + q_("Further information can be found in the {developer documentation}.").toHtmlEscaped().replace(a_rx, URL) + "</p>";
+	}
+
+	return html;
 }

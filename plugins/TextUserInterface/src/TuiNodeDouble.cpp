@@ -134,7 +134,7 @@ TuiNodeResponse TuiNodeDouble::handleEditingKey(int key)
 		int i = value *= -1; //BM: Is this deliberate?
 		if (i>=minimum && i<=maximum)
 			value = i;
-		stringValue.setNum(value,'g',-1);;
+		stringValue.setNum(value,'g',-1);
 		response.accepted = true;
 		emit(setValue(value));
 		return response;

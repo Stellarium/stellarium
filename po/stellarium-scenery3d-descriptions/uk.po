@@ -1,0 +1,334 @@
+# SOME DESCRIPTIVE TITLE
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Yuri Chornoivan <yurchor@ukr.net>, 2020
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2020-12-26 18:32+0700\n"
+"PO-Revision-Date: 2020-11-24 18:28+0000\n"
+"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>, 2020\n"
+"Language-Team: Ukrainian (https://www.transifex.com/stellarium/teams/80998/uk/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: uk\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
+
+#. type: Content of: <h2>
+#: ../../scenery3d/Testscene/description.en.utf8:1
+msgid "Testscene"
+msgstr "Тестова сцена"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Testscene/description.en.utf8:3
+msgid ""
+"This scene is mostly useful as testbed for your own developments. You should"
+" make a copy of the scene folder and modify at will, try material settings "
+"or some other details to find out how this plugin behaves. Then build and "
+"present your own work!"
+msgstr ""
+"Найкориснішою ця сцена є для ваших власних розробок. Вам слід створити копію"
+" теки сцени і внести до неї бажані зміни, спробувати параметри матеріалу або"
+" якісь інші параметри, щоб ознайомитися із поведінкою цього додатка. Далі, "
+"зберіть додаток і представте вашу власну роботу!"
+
+#. type: Content of: <h4>
+#: ../../scenery3d/Testscene/description.en.utf8:8
+msgid "Coordinate and orientation tests"
+msgstr "Перевірки координат і орієнтації"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Testscene/description.en.utf8:10
+msgid ""
+"The pillars shown here, as seen from the structure's center, provide an "
+"approximate view (not hi-precision!) to solstice/equinox sunrise/sunset "
+"positions in central European latitudes. The central pillars provide an "
+"east-west-line. The survey coordinate grid visible on the floor does not "
+"align with geographic north.  A rotation of -4.2 deg (test for meridian "
+"convergence) must be compensated, i.e., while the central pillars must "
+"absolutely and always point west-east, the grid lines hit the northern "
+"horizon slightly (4.2 deg) left of north!"
+msgstr ""
+"Показані тут колони, якщо дивитися на них із центру конструкції, "
+"демонструють приблизний вигляд (без високої точності!) позицій сходу і "
+"заходу сонця у дні сонцестоянь та рівнодень на широтах Центральної Європи. "
+"Центральні колони визначають лінію схід-захід. Координатну сітку, яку "
+"зображено на підлозі, не вирівняно за географічною північчю. Слід "
+"компенсувати обертання у -4,2 градуси (перевірка на збіжність меридіанів). "
+"Тобто, хоча центральні колони мають бути абсолютно і завжди розташовані на "
+"лінії захід-схід, лінії сітки сходяться на північному горизонті дещо ліворуч"
+" (на 4,2 градуси) ліворуч від напрямку півночі!"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Testscene/description.en.utf8:19
+msgid ""
+"Walkaround ground coordinates (Ctrl-R, T) should display the coordinates "
+"visible along the south and west border of the ground."
+msgstr ""
+"Окружні наземні координати (Ctrl-R, T) мають показувати координати, видимі "
+"уздовж південної та західної межі поверхні."
+
+#. type: Content of: <h4>
+#: ../../scenery3d/Testscene/description.en.utf8:23
+msgid "Material test"
+msgstr "Матеріальний тест"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Testscene/description.en.utf8:25
+msgid ""
+"This model is also used for testing the plugin's graphical capabilities. You"
+" can play with material parameters to create funny effects like "
+"semitransparent or glow-in-the-dark brick spheres."
+msgstr ""
+"Ця модель також використовується для тестування графічних можливостей "
+"додатка. Ви можете погратися із параметрами матеріалів для створення цікавих"
+" ефектів, зокрема напівпрозорих сфер або блокових сфер, які світяться у "
+"темряві."
+
+#. type: Content of: <p>
+#: ../../scenery3d/Testscene/description.en.utf8:29
+msgid ""
+"To test temporal features, the pillars and spheres are visible only from the"
+" years 2000 until 2020.  Edit the material file to change that!"
+msgstr ""
+"Для тестування часових можливостей, колони і сфери видимі лише у проміжку "
+"років від 2000 до 2020. Внесіть зміни до файла матеріалів, щоб змінити це!"
+
+#. type: Content of: <h4>
+#: ../../scenery3d/Testscene/description.en.utf8:32
+#: ../../scenery3d/Sterngarten/description.en.utf8:56
+msgid "Model"
+msgstr "Модель"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Testscene/description.en.utf8:33
+msgid ""
+"Testscene for Stellarium/scenery3d development. Export from SU8-Kerkythea-"
+"KT2OBJ."
+msgstr ""
+"Тестова сцена для розробки Stellarium/scenery3d. Експортовано з SU8"
+"-Kerkythea-KT2OBJ."
+
+#. type: Content of: <h2>
+#: ../../scenery3d/Sterngarten/description.en.utf8:1
+msgid "Vienna Sterngarten"
+msgstr "Віденський Sterngarten"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Sterngarten/description.en.utf8:3
+msgid ""
+"Sterngarten (\"Star Garden\") is an open-air planetarium in the south-west "
+"of Vienna, demonstrating the solar year."
+msgstr ""
+"Sterngarten («Зоряний садок») — планетарій, який демонструє сонячний рік, і "
+"який розташовано під відкритим небом на південному заході Відня."
+
+#. type: Content of: <h4>
+#: ../../scenery3d/Sterngarten/description.en.utf8:7
+msgid "Idea"
+msgstr "Ідея"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Sterngarten/description.en.utf8:9
+msgid ""
+"Univ.Prof.Dr.Oswald Thomas (1882 Kronstadt - 1963 Vienna). Founder, "
+"Astronomical Bureau (1907) and Austrian Astronomical Society (1924). "
+"Director of first Vienna Planetarium (1927) and Urania observatory."
+msgstr ""
+"Професор, доктор Освальд Томас (1882, Кронштадт – 1963, Відень). Засновник "
+"Астрономічного Бюро (1907) та Австрійського астрономічного товариства "
+"(1924). Директор першого віденського планетарію (1927) та обсерваторії "
+"«Уранія»."
+
+#. type: Content of: <h4>
+#: ../../scenery3d/Sterngarten/description.en.utf8:14
+msgid "Construction"
+msgstr "Будівництво"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Sterngarten/description.en.utf8:16
+msgid ""
+"The Sterngarten was developed by Thomas' student and successor in the "
+"Astronomical Bureau Prof. Hermann Mucke (1935-2019) with his collaborators."
+"  Mucke was also secretary of the Austrian Astronomical Society from "
+"1963-2018, director of Vienna planetarium 1963-2001 and Vienna Urania public"
+" observatory from 1971-2001. For more than 60 years, Mucke and the Society "
+"published the \"Österreichischer Himmelskalender\" (Austrian Celestial "
+"Calendar)  and the monthly journal \"Der Sternenbote\" (The Starry "
+"Messenger)."
+msgstr ""
+"Sterngarten було спроєктовано студентом Томаса і його наступником у "
+"Астрономічному Бюро, проф. Германом Мюке (1935-2019), разом із іншими "
+"співробітниками. Мюке також був секретарем Австрійського астрономічного "
+"товариства у 1963-2018 роках, директором віденського планетарію у 1963-2001 "
+"роках і директором віденської публічної обсерваторії «Уранія» у 1971-2001 "
+"роках. Понад 60 років Мюке і Товариство видавали «Österreichischer "
+"Himmelskalender» (Австрійський небесний календар) та щомісячний журнал «Der "
+"Sternenbote» (Зоряний вісник)."
+
+#. type: Content of: <p>
+#: ../../scenery3d/Sterngarten/description.en.utf8:22
+msgid ""
+"It was built 1997-2001 by the Austrian Astronomical Society, supported by "
+"public and private sponsors."
+msgstr ""
+"Побудовано у 1997-2001 роках Австрійським астрономічним товариством на "
+"громадські та приватні кошти."
+
+#. type: Content of: <h4>
+#: ../../scenery3d/Sterngarten/description.en.utf8:24
+msgid "Purpose"
+msgstr "Призначення"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Sterngarten/description.en.utf8:26
+msgid ""
+"Improvement of basic astronomical knowledge in the general public. "
+"Witnessing celestial facts and changes with the unaided eye, optionally with"
+" a field glass, is offered by our installation, situated in the extreme "
+"southwest of Vienna; always open privately for everybody free of charge. "
+"Frequently guided tours."
+msgstr ""
+"Удосконалення базових астрономічних знань пересічних громадян. Наша "
+"інсталяція, яку розташовано на самому південному заході Відня, надає "
+"можливість пересвідчитися у астрономічних фактах та спостерігати за "
+"астрономічними явищами неозброєним оком або за допомогою польового бінокля. "
+"Інсталяція завжди відкрита для будь-кого безкоштовно. У ній часто "
+"проводяться екскурсії."
+
+#. type: Content of: <h4>
+#: ../../scenery3d/Sterngarten/description.en.utf8:32
+msgid "Components"
+msgstr "Складові"
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:35
+msgid ""
+"Pyramid with platform 7x7m. Seen from 1.5m above Center Plate all angles "
+"fit."
+msgstr ""
+"Піраміда із платформою 7х7 метрів. Піраміду видно з висоти 1,5 метрів над "
+"центральною платформою з усіх кутів."
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:36
+msgid "Horizon Railing, representing the mathematical horizon."
+msgstr "Огорожа-горизонт, відтворює математичний горизонт."
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:37
+msgid ""
+"Surrounding Steps; 200 seats. Entrance by staircase and wheelchair ramp."
+msgstr ""
+"Навколишні сходинки; 200 місць. Вхід сходами, рампа для крісел на колесах."
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:38
+msgid ""
+"Pillars for sunrise and sunset at beginning of the seasons.  Pillar "
+"positions are right on the azimuths of equinoxes and solstices.  Arms "
+"indicate horizon and shifting effect due to refraction.  (Observation of "
+"rising/setting on the mathematical horizon is not possible in the field due "
+"to vegetation and landscape)."
+msgstr ""
+"Колони, що позначають схід і захід сонця на початку пір року. Колони "
+"розташовано за азимутами рівнодень та сонцестоянь. Стрілки позначають "
+"горизонт та ефект зсуву через рефракцію. (Спостереження сходу і заходу на "
+"математичному горизонті є неможливим у полі зору через рослинність та "
+"ландшафт)."
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:42
+msgid ""
+"South Pillar, marked (10&deg;/10&deg; altitude); Transit marks for sun at "
+"seasons' beginning."
+msgstr ""
+"Південна колона, позначена (висота 10&deg;/10&deg;); позначки транзитів для "
+"Сонця на початку пір року."
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:43
+msgid ""
+"North Pillar, marked (10&deg;/10&deg; altitude); on top Shadow Disc with "
+"central hole: North celestial Pole."
+msgstr ""
+"Північна колона, позначена (висота 10&deg;/10&deg;); над Диском Тіні із "
+"центральним отвором: північний небесний полюс."
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:44
+msgid ""
+"Bent Analemma, divided. Spring and summer dates on the horizontal part, "
+"autumn and winter dates on the ascending one, marked (10&deg;/10&deg;) solar"
+" longitude, with zodiacal signs. Ascending part serves as polar gnomon for "
+"the"
+msgstr ""
+"Перегнута Аналема, поділена. Дати для весни та літа на горизонтальній "
+"частині, дати для осені та зими на висхідній частині, позначена "
+"(10&deg;/10&deg;) сонячна довгота, із символами Зодіаку. Висхідна частина "
+"слугує як полярний гномон для"
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:45
+msgid "Sundial, full hours Vh to VIIh marked."
+msgstr "Сонячний годинник, позначено повні години від V до VII."
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:46
+msgid "Information panels."
+msgstr "Інформаційні панелі."
+
+#. type: Content of: <h4>
+#: ../../scenery3d/Sterngarten/description.en.utf8:49
+msgid "Further Information"
+msgstr "Докладніші відомості"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Sterngarten/description.en.utf8:50
+msgid "Websites in German only."
+msgstr "Сайти лише німецькою."
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:52
+msgid ""
+"Österreichischer Astronomischer Verein: <a "
+"href=\"https://www.astroverein.at\">https://www.astroverein.at</a>"
+msgstr ""
+"Österreichischer Astronomischer Verein: <a "
+"href=\"https://www.astroverein.at\">https://www.astroverein.at</a>"
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:53
+msgid ""
+"German Wikipedia article on the <a "
+"href=\"https://de.wikipedia.org/wiki/Sterngarten\">Sterngarten</a>"
+msgstr ""
+"Стаття у німецькій Вікіпедії щодо <a "
+"href=\"https://de.wikipedia.org/wiki/Sterngarten\">Sterngarten</a>"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Sterngarten/description.en.utf8:57
+msgid ""
+"Created by Georg Zotti following plans by H. Mucke; Like countless amateur "
+"and professional astronomers in Austria, Zotti was introduced to astronomy "
+"by Mucke in his primary school days. Mucke's spirit will remain alive in the"
+" Sterngarten."
+msgstr ""
+"Створено Ґеорґом Цотті за планами Г. Мюке. Подібно до численних аматорів та "
+"професійних астрономів у Австрії, Цотті пізнав астрономію завдяки Мюке ще у "
+"початковій школі. Дух Мюке лишатиметься з нами у Sterngarten."
+
+#. type: Content of: <p>
+#: ../../scenery3d/Sterngarten/description.en.utf8:60
+msgid ""
+"Model created in 2010 with Google Sketchup 8, exported from Google Sketchup "
+"8.0.14346."
+msgstr ""
+"Модель створено у 2010 році за допомогою Google Sketchup 8, експортовано з "
+"Google Sketchup 8.0.14346."

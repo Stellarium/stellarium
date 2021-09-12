@@ -31,6 +31,7 @@
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelMainView.hpp"
 //#include "StelTranslator.hpp"
 
 
@@ -79,7 +80,7 @@ void ManualImportWindow::retranslate()
 
 void ManualImportWindow::selectColor()
 {
-	QColor color = QColorDialog::getColor(objectColor);
+    QColor color = QColorDialog::getColor(objectColor,&StelMainView::getInstance());
 	objectColor =  color;
 	ui->lineEditColor->setText(QString("%1, %2, %3").arg(color.redF()).arg(color.greenF()).arg(color.blueF()));
 	setColorButtonColor(color);
@@ -189,7 +190,7 @@ void ManualImportWindow::selectTextureFile(QLineEdit * filePathLineEdit)
 		supportedFormats.append(QString("*.%1").arg(QString(format)));//It's a wee bit long...
 	}
 	QString fileFilter = QString("Texture files (%1)").arg(supportedFormats.join(" "));
-	QString newFilePath = QFileDialog::getOpenFileName(0, QString(), texturesDirectoryPath, fileFilter);
+	QString newFilePath = QFileDialog::getOpenFileName(Q_NULLPTR, QString(), texturesDirectoryPath, fileFilter);
 
 	//Is the file in one of the two "textures" directories?
 	if (newFilePath.isEmpty())

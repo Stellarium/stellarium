@@ -39,13 +39,13 @@ class StelObjectMgr : public StelModule
 	Q_OBJECT
 public:
 	StelObjectMgr();
-	virtual ~StelObjectMgr();
+	virtual ~StelObjectMgr() Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init() {;}
-	virtual void draw(StelCore*) {;}
-	virtual void update(double) {;}
+	virtual void init() Q_DECL_OVERRIDE;
+	virtual void draw(StelCore*) Q_DECL_OVERRIDE {;}
+	virtual void update(double) Q_DECL_OVERRIDE {;}
 
 	///////////////////////////////////////////////////////////////////////////
 	//! Add a new StelObject manager into the list of supported modules.
@@ -65,6 +65,7 @@ public:
 	//! @param y the y screen position in pixel
 	//! @param action define whether to add to, replace, or remove from the existing selection
 	//! @return true if a object was found at position (this does not necessarily means it is selected)
+	//! @note If aberration is computed, this first applies aberration backwards and then searches for an object.
 	bool findAndSelect(const StelCore* core, int x, int y, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
 
 	//! Find and select an object from its translated name.
@@ -84,7 +85,7 @@ public:
 	//! @param maxNbItem the maximum number of returned object names.
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object names by order of relevance, or an empty list if nothing match
-	QStringList listMatchingObjects(const QString& objPrefix, unsigned int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=true) const;
+	QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 
 	QStringList listAllModuleObjects(const QString& moduleId, bool inEnglish) const;
 	QMap<QString, QString> objectModulesMap() const;
@@ -135,7 +136,7 @@ public:
 	StelObjectP searchByID(const QString& type, const QString& id) const;
 
 	//! Set the radius in pixel in which objects will be searched when clicking on a point in sky.
-	void setObjectSearchRadius(float radius) {searchRadiusPixel=radius;}
+	void setObjectSearchRadius(double radius) {searchRadiusPixel=radius;}
 
 	//! Set the weight of the distance factor when choosing the best object to select.
 	//! Default to 1.
@@ -146,6 +147,28 @@ public:
 	//! If obj is Q_NULLPTR, returns a 1-element map [["found", false]]
 	static QVariantMap getObjectInfo(const StelObjectP obj);
 
+public slots:
+	//! Set simulation time to the time of next transit of selected object
+	void nextTransit();
+	//! Set simulation time to the time of previous transit of selected object
+	void previousTransit();
+	//! Set simulation time to the time of today's transit of selected object
+	void todayTransit();
+
+	//! Set simulation time to the time of next rising of selected object (if applicable)
+	void nextRising();
+	//! Set simulation time to the time of previous rising of selected object (if applicable)
+	void previousRising();
+	//! Set simulation time to the time of today's rising of selected object (if applicable)
+	void todayRising();
+
+	//! Set simulation time to the time of next setting of selected object (if applicable)
+	void nextSetting();
+	//! Set simulation time to the time of previous setting of selected object (if applicable)
+	void previousSetting();
+	//! Set simulation time to the time of today's setting of selected object (if applicable)
+	void todaySetting();
+
 signals:
 	//! Indicate that the selected StelObjects has changed.
 	//! @param action define if the user requested that the objects are added to the selection or just replace it
@@ -153,7 +176,7 @@ signals:
 
 private:
 	// The list of StelObjectModule that are referenced in Stellarium
-	QList<StelObjectModule*> objectsModule;
+	QList<StelObjectModule*> objectsModules;
 	QMap<QString, StelObjectModule*> typeToModuleMap;
 	QMap<QString, QString> objModulesMap;
 
@@ -162,14 +185,15 @@ private:
 	// Should selected object pointer be drawn
 	bool objectPointerVisibility;
 
-	//! Find in a "clever" way an object from its equatorial position.
+	//! Find in a "clever" way an object from its equatorial J2000.0 position.
 	StelObjectP cleverFind(const StelCore* core, const Vec3d& pos) const;
 
 	//! Find in a "clever" way an object from its screen position.
+	//! @note If aberration is computed, this first applies aberration backwards and then searches for an object.
 	StelObjectP cleverFind(const StelCore* core, int x, int y) const;
 
 	// Radius in pixel in which objects will be searched when clicking on a point in sky.
-	float searchRadiusPixel;
+	double searchRadiusPixel;
 
 	// Weight of the distance factor when choosing the best object to select.
 	float distanceWeight;

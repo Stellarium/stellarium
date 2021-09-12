@@ -39,7 +39,7 @@ bool ErrorMessage::deserialize(QDataStream &stream, tPayloadSize dataSize)
 {
 	Q_UNUSED(dataSize);
 	message = readString(stream);
-	return !stream.status();;
+	return !stream.status();
 }
 
 ServerChallenge::ServerChallenge()
@@ -84,7 +84,7 @@ bool ServerChallenge::deserialize(QDataStream &stream, tPayloadSize dataSize)
 
 	stream>>clientId;
 
-	return !stream.status();;
+	return !stream.status();
 }
 
 ClientChallengeResponse::ClientChallengeResponse()
@@ -110,7 +110,7 @@ bool ClientChallengeResponse::deserialize(QDataStream &stream, tPayloadSize data
 	stream>>stellariumVersion;
 	stream>>clientId;
 
-	return !stream.status();;
+	return !stream.status();
 }
 
 void Time::serialize(QDataStream &stream) const
@@ -129,7 +129,7 @@ bool Time::deserialize(QDataStream &stream, tPayloadSize dataSize)
 	stream>>jDay;
 	stream>>timeRate;
 
-	return !stream.status();;
+	return !stream.status();
 }
 
 Location::Location()

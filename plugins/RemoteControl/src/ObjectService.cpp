@@ -52,15 +52,13 @@ QStringList ObjectService::performSearch(const QString &text)
 	QString greekText = substituteGreek(text);
 
 	QStringList matches;
-	if(greekText != text) {
-		matches = objMgr->listMatchingObjects(text, 3, useStartOfWords, false);
-		matches += objMgr->listMatchingObjects(text, 3, useStartOfWords, true);
-		matches += objMgr->listMatchingObjects(greekText, (8 - matches.size()), useStartOfWords, false);
-	} else {
-		//no greek replaced, saves 1 call
-		matches = objMgr->listMatchingObjects(text, 5, useStartOfWords, false);
-		matches += objMgr->listMatchingObjects(text, 5, useStartOfWords, true);
+	if(greekText != text)
+	{
+		matches = objMgr->listMatchingObjects(text, 3, useStartOfWords);
+		matches += objMgr->listMatchingObjects(greekText, (8 - matches.size()), useStartOfWords);
 	}
+	else //no greek replaced, saves 1 call
+		matches = objMgr->listMatchingObjects(text, 5, useStartOfWords);
 
 	return matches;
 }
@@ -157,14 +155,12 @@ void ObjectService::get(const QByteArray& operation, const APIParameters &parame
 		}
 		else
 		{
-			StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
-			StelObjectP obj = omgr->searchByName(name);
 			QVariantMap infoMap=StelObjectMgr::getObjectInfo(obj);
 			QJsonObject infoObj=QJsonObject::fromVariantMap(infoMap);
 
 			// We make use of 2 extra values for linked applications. These govern sky brightness and can be used for ambient settings.
 			LandscapeMgr *lmgr=GETSTELMODULE(LandscapeMgr);
-			infoObj.insert("ambientLum", QJsonValue(lmgr->getAtmosphereAverageLuminance()));
+			infoObj.insert("ambientLum", QJsonValue(static_cast<double>(lmgr->getAtmosphereAverageLuminance())));
 			infoObj.insert("ambientInt", QJsonValue(lmgr->getCurrentLandscape()->getBrightness()));
 			response.writeJSON(QJsonDocument(infoObj));
 		}

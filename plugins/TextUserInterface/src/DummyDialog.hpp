@@ -24,8 +24,8 @@
 #include <QString>
 
 //! The TextUserInterface wants to intercept all key presses including those which
-//! are assigned to glocal key bindings in the main GUI definition (i.e. keys
-//! used for actions which are associated with toolbar buttons.
+//! are assigned to global key bindings in the main GUI definition (i.e. keys
+//! used for actions which are associated with toolbar buttons).
 //!
 //! This DummyDialog class allows the plugin to put the QT focus on the dialog
 //! and thus prevent global action key bindings from being handled by the main GUI
@@ -36,7 +36,7 @@ class DummyDialog : public QObject
 	Q_OBJECT
 public:
 	DummyDialog(StelModule* eventHandler);
-	~DummyDialog();
+	~DummyDialog() Q_DECL_OVERRIDE;
 
 public slots:
 	void setVisible(bool);
@@ -46,7 +46,7 @@ signals:
         void visibleChanged(bool);
 
 protected:
-	bool eventFilter(QObject *obj, QEvent *event);
+	bool eventFilter(QObject *obj, QEvent *event) Q_DECL_OVERRIDE;
 	void createDialogContent();
 	class CustomProxy* proxy;
 	QWidget* dialog;

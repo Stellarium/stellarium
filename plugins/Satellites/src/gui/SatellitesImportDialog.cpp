@@ -170,7 +170,7 @@ void SatellitesImportDialog::getData()
 		// XXX: we should check that there is at least one home location.
 		QString homeDirPath = QStandardPaths::standardLocations(QStandardPaths::HomeLocation)[0];
 		sourceFilePaths = QFileDialog::getOpenFileNames(
-		                      &StelMainView::getInstance(),
+				      Q_NULLPTR,
 		                      q_("Select TLE source file(s)..."),
 		                      homeDirPath, "*.*");
 		if (sourceFilePaths.isEmpty())
@@ -369,13 +369,12 @@ void SatellitesImportDialog::populateList()
 		if (existingIDs.contains(i.key()))
 			continue;
 		
-		TleData tle = i.value();
-		QStandardItem* newItem = new QStandardItem(tle.name);
+		TleData tle = i.value();		
+		QStandardItem* newItem = new QStandardItem(QString("%1 (NORAD %2)").arg(tle.name, tle.id)); // Available to search via NORAD number
 		newItem->setFlags(Qt::ItemIsEnabled | Qt::ItemIsUserCheckable);
 		newItem->setCheckState(Qt::Unchecked);
-		newItem->setData(tle.id, Qt::UserRole);
-		QString text = QString(q_("Catalog Number: %1")).arg(tle.id);
-		newItem->setToolTip(text);
+		newItem->setData(tle.id, Qt::UserRole);		
+		newItem->setToolTip(QString(q_("Catalog Number: %1")).arg(tle.id));
 		newSatellitesModel->appendRow(newItem);
 	}
 	existingIDs.clear();

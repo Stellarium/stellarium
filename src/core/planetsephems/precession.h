@@ -62,7 +62,7 @@ double getPrecessionAngleVondrakCurrentEpsilonA(void);
 //! @param JDE Julian day (TT)
 //! @return deltaPsi, radians
 //! @return deltaEps, radians
-//! Ref: Dennis D. McCarthy and Brian J. Lizum: An Abridged Model of the Precession-Nutation of the Celestial Pole.
+//! Ref: Dennis D. McCarthy and Brian J. Luzum: An Abridged Model of the Precession-Nutation of the Celestial Pole.
 //! Celestial Mechanics and Dynamical Astronomy 85: 37-49, 2003.
 //! This model provides accuracy better than 1 milli-arcsecond in the time 1995-2050.
 //! TODO: find out drift rate behaviour e.g. in 17./18. century, maybe use nutation only e.g. 1610-2200?

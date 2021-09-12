@@ -5,16 +5,17 @@
 # 
 # Translators:
 # cardinot <mcardinot@gmail.com>, 2017
-# misibacsi, 2017
+# misibacsi, 2019
+# Péter Jutai <jutaipeter@gmail.com>, 2021
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-02-21 12:42+0700\n"
+"POT-Creation-Date: 2021-06-15 22:33+0700\n"
 "PO-Revision-Date: 2017-11-29 01:19+0000\n"
-"Last-Translator: misibacsi, 2017\n"
+"Last-Translator: Péter Jutai <jutaipeter@gmail.com>, 2021\n"
 "Language-Team: Hungarian (https://www.transifex.com/stellarium/teams/80998/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -108,18 +109,18 @@ msgid "Could not retrieve landscape list"
 msgstr "Nem elérhető a tájkép lista"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:619
-#: index.html:676 tablet7in.html:724 tablet7in.html:784
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:638
+#: index.html:695 tablet7in.html:733 tablet7in.html:793
 msgid "-none-"
 msgstr ""
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:28
 msgid "(Currently loading: %1)"
-msgstr ""
+msgstr "(Jelenleg töltődik: %1)"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:71
 msgid "Could not retrieve Scenery3d list"
-msgstr ""
+msgstr "Scenery3d-lista nem érhető el"
 
 #: plugins/RemoteControl/webroot/js/ui/actions.js:44
 #: plugins/RemoteControl/webroot/js/ui/actions.js:77
@@ -169,11 +170,11 @@ msgstr "Műveletek és szkriptek"
 
 #: index.html:39 tablet7in.html:45
 msgid "Scenery3d"
-msgstr ""
+msgstr "Scenery3d"
 
 #: index.html:77
 msgid "Pause"
-msgstr ""
+msgstr "Szüneteltetés"
 
 #: index.html:82 tablet7in.html:183
 msgid "Time jumps"
@@ -257,7 +258,7 @@ msgstr ""
 
 #: index.html:144 tablet7in.html:123
 msgid "Vertical View offset"
-msgstr ""
+msgstr "Vertikális nézet eltolása"
 
 #: index.html:154 tablet7in.html:133
 msgid "Reset"
@@ -265,7 +266,7 @@ msgstr "Alaphelyzet"
 
 #: index.html:160 tablet7in.html:138
 msgid "FOV"
-msgstr ""
+msgstr "Látómező"
 
 #: index.html:213 tablet7in.html:229
 msgid "Enter search term. Use TAB to navigate results."
@@ -277,19 +278,19 @@ msgstr "Kiválasztás és fókusz"
 
 #: index.html:240 tablet7in.html:259
 msgid "Selection mode"
-msgstr ""
+msgstr "Kiválasztás módja"
 
 #: index.html:240 tablet7in.html:259
 msgid "Center on object"
-msgstr ""
+msgstr "Fókusz az objektumra"
 
 #: index.html:240 tablet7in.html:259
 msgid "Center and zoom to object"
-msgstr ""
+msgstr "Fókusz és nagyítás az objektumra"
 
 #: index.html:240 tablet7in.html:259
 msgid "Just mark the object"
-msgstr ""
+msgstr "Csak jelölés az objektumon"
 
 #: index.html:242 tablet7in.html:261
 msgid "Quick select"
@@ -309,7 +310,7 @@ msgstr "Jelenlegi kijelölés"
 
 #: index.html:268 tablet7in.html:321
 msgid "Milky Way brightness:"
-msgstr ""
+msgstr "Tejútrendszer fényessége:"
 
 #: index.html:272 tablet7in.html:333
 msgid "Digitized Sky Survey"
@@ -318,6 +319,26 @@ msgstr ""
 #: index.html:273 tablet7in.html:334
 msgid "HiPS Survey"
 msgstr ""
+
+#: index.html:287 tablet7in.html:351
+msgid "Show planet orbits"
+msgstr "Bolygópályák mutatása"
+
+#: index.html:288 tablet7in.html:352
+msgid "Show planet orbits only"
+msgstr "Csak a bolygópályák mutatása"
+
+#: index.html:289 tablet7in.html:353
+msgid "Show orbit for selected planet"
+msgstr "Kiválasztott bolygó pályájának mutatása"
+
+#: index.html:290 tablet7in.html:354
+msgid "Show planet trails"
+msgstr "Pályanyomok"
+
+#: index.html:291 tablet7in.html:355
+msgid "Show trail only for selected planet"
+msgstr "Csak a kiválasztott bolygó pályanyoma látsszon"
 
 #: index.html:322 tablet7in.html:409
 msgid "Shooting Stars"
@@ -333,135 +354,157 @@ msgid ""
 " Displayed on Earth only."
 msgstr ""
 
-#: index.html:377 tablet7in.html:472
+#: index.html:378 tablet7in.html:472
 msgid "Solstices"
 msgstr "Napfordulók"
 
-#: index.html:378 tablet7in.html:473
+#: index.html:379 tablet7in.html:473
 msgid "Crossquarters"
-msgstr ""
+msgstr "Negyedévkezdők"
 
-#: index.html:379 tablet7in.html:474
+#: index.html:380 tablet7in.html:474
 msgid "Major Standstill"
-msgstr ""
+msgstr "Nagy holdforduló"
 
-#: index.html:380 tablet7in.html:475
+#: index.html:381 tablet7in.html:475
 msgid "Minor Standstill"
-msgstr ""
+msgstr "Kis holdforduló"
 
-#: index.html:389 tablet7in.html:484
+#: index.html:390 tablet7in.html:484
 msgid "Current Planet:"
 msgstr "Kiválasztott bolygó:"
 
-#: index.html:521 tablet7in.html:610
+#: index.html:426 tablet7in.html:524
+msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
+msgstr "Reflexiós ködök katalógusa (Van den Bergh, 1966)"
+
+#: index.html:444 tablet7in.html:542
+msgid ""
+"Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975)"
+msgstr ""
+"Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975)"
+
+#: index.html:512
+msgid "Objects without identifier"
+msgstr "Azonosító nélküli objektumok"
+
+#: index.html:537 tablet7in.html:616
 msgid "Bright Nebulae"
-msgstr ""
+msgstr "Fényes köd"
 
-#: index.html:522 tablet7in.html:611
+#: index.html:538 tablet7in.html:617
 msgid "Dark Nebulae"
-msgstr ""
+msgstr "Sötét köd"
 
-#: index.html:523 tablet7in.html:612
+#: index.html:539 tablet7in.html:618
 msgid "Planetary Nebulae"
-msgstr ""
+msgstr "Planetáris köd"
 
-#: index.html:532 tablet7in.html:621
+#: index.html:548 tablet7in.html:627
 msgid "Labels and markers"
 msgstr "Címkék és jelölők"
 
-#: index.html:566 tablet7in.html:655
+#: index.html:573 tablet7in.html:652
+msgid "Use associated planet and position"
+msgstr "Társított bolygó és pozíció használata"
+
+#: index.html:582 tablet7in.html:661
 msgid "Show illumination"
 msgstr "Megvilágítás mutatása"
 
-#: index.html:571 tablet7in.html:661
+#: index.html:587 tablet7in.html:667
 msgid "Current landscape"
 msgstr "Jelenlegi tájkép"
 
-#: index.html:583 tablet7in.html:674
+#: index.html:599 tablet7in.html:680
 msgid "Show lines with thickness"
 msgstr ""
 
-#: index.html:588 tablet7in.html:679
+#: index.html:604 tablet7in.html:685
 msgid "Show asterisms with thickness"
 msgstr ""
 
-#: index.html:592 tablet7in.html:683
+#: index.html:608 tablet7in.html:689
 msgid "Show ray helpers with thickness"
 msgstr ""
 
-#: index.html:602 tablet7in.html:695
-msgid "Constellation selection isolated"
+#: index.html:616 tablet7in.html:699
+msgid "Show boundaries with thickness"
 msgstr ""
 
-#: index.html:606 tablet7in.html:699
+#: index.html:621 tablet7in.html:704
+msgid "Constellation selection isolated"
+msgstr "Csillagképkiválasztás elkülönítve"
+
+#: index.html:625 tablet7in.html:708
 msgid "Current sky culture"
 msgstr "Jelenlegi csillagkultúra"
 
-#: index.html:619 tablet7in.html:724
+#: index.html:638 tablet7in.html:733
 msgid "Active script:"
 msgstr "Aktív szkript"
 
-#: index.html:620 tablet7in.html:725
+#: index.html:639 tablet7in.html:734
 msgid "Run selected script"
 msgstr "Kiválasztott szkript futtatása"
 
-#: index.html:620 tablet7in.html:725
+#: index.html:639 tablet7in.html:734
 msgid "Stop current script"
 msgstr "Kiválasztott szkript megállítása"
 
-#: index.html:625 tablet7in.html:41 tablet7in.html:709
+#: index.html:644 tablet7in.html:41 tablet7in.html:718
 msgid "Actions"
 msgstr "Műveletek"
 
-#: index.html:629 tablet7in.html:713
+#: index.html:648 tablet7in.html:722
 msgid "Run/toggle action"
 msgstr "Start/stop"
 
-#: index.html:640 tablet7in.html:748
+#: index.html:659 tablet7in.html:757
 msgid "Planet map"
 msgstr "Bolygótérkép"
 
-#: index.html:641 tablet7in.html:749
+#: index.html:660 tablet7in.html:758
 msgid "Planet map pointer"
 msgstr "Bolygótérkép mutató"
 
-#: index.html:645 tablet7in.html:753
+#: index.html:664 tablet7in.html:762
 msgid "Type to search location"
 msgstr "Hely keresése"
 
-#: index.html:674 tablet7in.html:782
+#: index.html:693 tablet7in.html:791
 msgid "Interaction"
 msgstr ""
 
-#: index.html:675 tablet7in.html:783
+#: index.html:694 tablet7in.html:792
 msgid "Current scene:"
-msgstr ""
+msgstr "Jelenlegi jelenet:"
 
-#: index.html:678 tablet7in.html:786
+#: index.html:697 tablet7in.html:795
 msgid "View controls"
-msgstr ""
+msgstr "Vezérlés megtekintése"
 
-#: index.html:684 tablet7in.html:792
+#: index.html:703 tablet7in.html:801
 msgid "Movement controls"
-msgstr ""
+msgstr "Mozgásvezérlés"
 
-#: index.html:696 tablet7in.html:804
+#: index.html:715 tablet7in.html:813
 msgid "Torchlight"
-msgstr ""
+msgstr "Zseblámpa"
 
-#: index.html:703 tablet7in.html:811
+#: index.html:722 tablet7in.html:820
 msgid "Scene selection"
-msgstr ""
+msgstr "Jelenet kiválasztása"
 
-#: index.html:707 tablet7in.html:815
+#: index.html:726 tablet7in.html:824
 msgid "Load selected scene"
-msgstr ""
+msgstr "Kiválasztott jelenet betöltése"
 
-#: index.html:731 tablet7in.html:840
+#: index.html:750 tablet7in.html:849
 msgid "No response from server"
 msgstr "A szerver nem válaszol"
 
-#: index.html:732 tablet7in.html:841
+#: index.html:751 tablet7in.html:850
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr "Nincs válasz a szervertől %1 másodperce. A Stellarium fut még?"
 
@@ -605,18 +648,22 @@ msgstr "Vízöntő"
 msgid "Pisces"
 msgstr "Halak"
 
-#: tablet7in.html:733
+#: tablet7in.html:507
+msgid "Compass Marks"
+msgstr ""
+
+#: tablet7in.html:742
 msgid "Favorites"
 msgstr "Kedvencek"
 
-#: tablet7in.html:735
+#: tablet7in.html:744
 msgid "Show 1"
 msgstr "Mutat 1"
 
-#: tablet7in.html:736
+#: tablet7in.html:745
 msgid "Remove Labels and Images"
 msgstr "Címkék és képek eltávolítása"
 
-#: tablet7in.html:736
+#: tablet7in.html:745
 msgid "Cleanup Screen"
 msgstr "Képernyő törlése"

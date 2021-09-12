@@ -474,7 +474,7 @@ void HttpRequest::parseMultiPartFile()
 					parameters.insert(fieldName,fileName);
 					qDebug("HttpRequest: set parameter %s=%s",fieldName.data(),fileName.data());
 					uploadedFiles.insert(fieldName,uploadedFile);
-					qDebug("HttpRequest: uploaded file size is %i",(int) uploadedFile->size());
+					qDebug("HttpRequest: uploaded file size is %i",static_cast<int>(uploadedFile->size()));
 				}
 				if (line.contains(boundary+"--"))
 				{

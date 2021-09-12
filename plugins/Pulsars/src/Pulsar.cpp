@@ -30,6 +30,7 @@
 #include "StelProjector.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelTranslator.hpp"
+#include "Planet.hpp"
 
 #include <QTextStream>
 #include <QDebug>
@@ -90,7 +91,9 @@ Pulsar::Pulsar(const QVariantMap& map)
 	dmeasure = map.value("dmeasure").toDouble();
 	eccentricity = map.value("eccentricity").toDouble();
 	RA = StelUtils::getDecAngle(map.value("RA").toString());
-	DE = StelUtils::getDecAngle(map.value("DE").toString());
+	DE = StelUtils::getDecAngle(map.value("DE").toString());	
+	pmRA = map.value("pmRA").toDouble();
+	pmDE = map.value("pmDE").toDouble();
 	w50 = map.value("w50").toFloat();
 	s400 = map.value("s400").toFloat();
 	s600 = map.value("s600").toFloat();
@@ -132,6 +135,8 @@ QVariantMap Pulsar::getMap(void) const
 	map["eccentricity"] = eccentricity;	
 	map["RA"] = RA;
 	map["DE"] = DE;
+	map["pmRA"] = pmRA;
+	map["pmDE"] = pmDE;
 	map["period"] = period;	
 	map["w50"] = w50;
 	map["s400"] = s400;
@@ -171,8 +176,10 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&Name)
 	{
-		QString name = pulsarName.isEmpty() ? QString("<h2>%1</h2>").arg(getDesignation()) : QString("<h2>%1 (%2)</h2>").arg(getNameI18n()).arg(getDesignation());
-		oss << name;
+		oss << "<h2>";
+		if (!getNameI18n().isEmpty())
+			oss << getNameI18n() << "< br />";
+		oss << getDesignation() << "</h2>";
 	}
 
 	if (flags&ObjectType)
@@ -180,11 +187,22 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		if (glitch==0)
 			oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("pulsar")) << "<br />";
 		else
-			oss << QString("%1: <b>%2</b> (%3: %4)").arg(q_("Type"), q_("pulsar with glitches")).arg(q_("registered glitches")).arg(glitch) << "<br />";
+			oss << QString("%1: <b>%2</b> (%3: %4)").arg(q_("Type"), q_("pulsar with glitches"), q_("registered glitches"), QString::number(glitch)) << "<br />";
 	}
 
 	// Ra/Dec etc.
 	oss << getCommonInfoString(core, flags);
+
+	if (flags&ProperMotion && (pmRA!=0.0 && pmDE!=0.0))
+	{
+		float pa = std::atan2(pmRA, pmDE)*M_180_PIf;
+		if (pa<0)
+			pa += 360.f;
+		oss << QString("%1: %2 %3 %4 %5%6").arg(q_("Proper motion"))
+		       .arg(QString::number(std::sqrt(pmRA*pmRA + pmDE*pmDE), 'f', 1)).arg(qc_("mas/yr", "milliarc second per year"))
+		       .arg(qc_("towards", "into the direction of")).arg(QString::number(pa, 'f', 1)).arg(QChar(0x00B0)) << "<br />";
+		oss << QString("%1: %2 %3 (%4)").arg(q_("Proper motions by axes")).arg(QString::number(pmRA, 'f', 1)).arg(QString::number(pmDE, 'f', 1)).arg(qc_("mas/yr", "milliarc second per year")) << "<br />";
+	}
 
 	if (flags&Extra)
 	{
@@ -198,7 +216,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			oss << "<br />";
 		}
 		if (pderivative>0)
-			oss << QString("%1: %2").arg(q_("Time derivative of barycentric period")).arg(QString::number(pderivative, 'e', 5)) << "<br />";
+			oss << QString("%1: %2").arg(q_("Time derivative of barycentric period"), QString::number(pderivative, 'e', 5)) << "<br />";
 
 		if (dmeasure>0)
 		{
@@ -231,7 +249,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			oss << "<br>";
 		}
 		if (eccentricity>0)
-			oss << QString("%1: %2").arg(q_("Eccentricity")).arg(QString::number(eccentricity, 'f', 10)) << "<br />";
+			oss << QString("%1: %2").arg(q_("Eccentricity"), QString::number(eccentricity, 'f', 10)) << "<br />";
 
 		if (parallax>0)
 		{
@@ -273,16 +291,16 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		QString sfd  = qc_("mJy", "spectral flux density");
 
 		if (s400>0)
-			oss << QString("%1 %2%3: %4 %5").arg(flux).arg(400).arg(freq).arg(QString::number(s400, 'f', 2)).arg(sfd) << "<br />";
+			oss << QString("%1 %2%3: %4 %5").arg(flux, QString::number(400), freq, QString::number(s400, 'f', 2), sfd) << "<br />";
 
 		if (s600>0)
-			oss << QString("%1 %2%3: %4 %5").arg(flux).arg(600).arg(freq).arg(QString::number(s600, 'f', 2)).arg(sfd) << "<br />";
+			oss << QString("%1 %2%3: %4 %5").arg(flux, QString::number(600), freq, QString::number(s600, 'f', 2), sfd) << "<br />";
 
 		if (s1400>0)
-			oss << QString("%1 %2%3: %4 %5").arg(flux).arg(1400).arg(freq).arg(QString::number(s1400, 'f', 2)).arg(sfd) << "<br />";
+			oss << QString("%1 %2%3: %4 %5").arg(flux, QString::number(1400), freq, QString::number(s1400, 'f', 2), sfd) << "<br />";
 
 		if (notes.length()>0)
-			oss << "<br />" << QString("%1: %2").arg(q_("Notes")).arg(getPulsarTypeInfoString(notes)) << "<br />";
+			oss << "<br />" << QString("%1: %2").arg(q_("Notes"), getPulsarTypeInfoString(notes)) << "<br />";
 	}
 
 	postProcessInfoString(str, flags);
@@ -313,7 +331,7 @@ QVariantMap Pulsar::getInfoMap(const StelCore *core) const
 
 Vec3f Pulsar::getInfoColor(void) const
 {
-	return Vec3f(1.0, 1.0, 1.0);
+	return Vec3f(1.f, 1.f, 1.f);
 }
 
 float Pulsar::getVMagnitude(const StelCore* core) const
@@ -413,28 +431,19 @@ double Pulsar::getAngularSize(const StelCore*) const
 
 void Pulsar::update(double deltaTime)
 {
-	labelsFader.update((int)(deltaTime*1000));
+	labelsFader.update(static_cast<int>(deltaTime*1000));
 }
 
 void Pulsar::draw(StelCore* core, StelPainter *painter)
 {
-	StelSkyDrawer* sd = core->getSkyDrawer();
-	float mag = getVMagnitudeWithExtinction(core);
-	StelUtils::spheToRect(RA, DE, XYZ);
-
-	Vec3d win;
+	Vec3d win, coord = getJ2000EquatorialPos(core);
 	// Check visibility of pulsar
-	if (!(painter->getProjector()->projectCheck(XYZ, win)))
+	if (!(painter->getProjector()->projectCheck(coord, win)))
 		return;
 
-	painter->setBlending(true, GL_ONE, GL_ONE);
-
-	if (glitch>0 && glitchFlag)
-		painter->setColor(glitchColor[0], glitchColor[1], glitchColor[2], 1.f);
-	else
-		painter->setColor(markerColor[0], markerColor[1], markerColor[2], 1.f);
-
-	float mlimit = sd->getLimitMagnitude();
+	float mag = getVMagnitudeWithExtinction(core);
+	StelSkyDrawer* sd = core->getSkyDrawer();
+	const float mlimit = sd->getLimitMagnitude();
 	bool visible = true;
 	if (filteredMode && s400<filterValue)
 		visible = false;
@@ -445,14 +454,42 @@ void Pulsar::draw(StelCore* core, StelPainter *painter)
 		float size = getAngularSize(Q_NULLPTR)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
 		float shift = 5.f + size/1.6f;		
 
-		painter->drawSprite2dMode(XYZ, distributionMode ? 4.f : 5.f);
+		if (glitch>0 && glitchFlag)
+			painter->setColor(glitchColor, 1.f);
+		else
+			painter->setColor(markerColor, 1.f);
+		painter->setBlending(true, GL_ONE, GL_ONE);
+		painter->drawSprite2dMode(coord, distributionMode ? 4.f : 5.f);
 
 		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+2.f)<mlimit)
 		{
 			QString name = getDesignation();
 			if (!getNameI18n().isEmpty())
 				name = getNameI18n();
-			painter->drawText(XYZ, name, 0, shift, shift, false);
+			painter->drawText(coord, name, 0, shift, shift, false);
 		}
+	}
+}
+
+Vec3d Pulsar::getJ2000EquatorialPos(const StelCore* core) const
+{
+	static const double d2000 = 2451545.0;
+	const double movementFactor = (M_PI/180.)*(0.0001/3600.) * (core->getJDE()-d2000)/365.25;
+	Vec3d v;
+	const double cRA = RA + movementFactor*pmRA;
+	const double cDE = DE + movementFactor*pmDE;
+	StelUtils::spheToRect(cRA, cDE, v);
+
+	if ((core) && (core->getUseAberration()) && (core->getCurrentPlanet()))
+	{
+		Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+		vel=StelCore::matVsop87ToJ2000*vel*core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
+		Vec3d pos=v+vel;
+		pos.normalize();
+		return pos;
+	}
+	else
+	{
+		return v;
 	}
 }

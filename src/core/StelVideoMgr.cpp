@@ -31,7 +31,7 @@
 #endif
 
 
-StelVideoMgr::StelVideoMgr()
+StelVideoMgr::StelVideoMgr() : StelModule()
 {
     setObjectName("StelVideoMgr");
 #ifdef ENABLE_MEDIA
@@ -62,7 +62,7 @@ void StelVideoMgr::loadVideo(const QString& filename, const QString& id, const f
 	// This sets a tiny size so that if window should appear before proper resize, it should not disturb.
 	videoObjects[id]->videoItem->setSize(QSizeF(1,1));
 
-	videoObjects[id]->player = new QMediaPlayer(0, QMediaPlayer::VideoSurface);
+	videoObjects[id]->player = new QMediaPlayer(Q_NULLPTR, QMediaPlayer::VideoSurface);
 	videoObjects[id]->duration=-1; // -1 to signal "unknown".
 	videoObjects[id]->resolution=QSize(); // initialize with "invalid" empty resolution, we must detect this when player is starting!
 	videoObjects[id]->keepVisible=false;
@@ -805,7 +805,7 @@ void StelVideoMgr::update(double deltaTime)
 			qDebug() << "StelVideoMgr::update() for" << id << ": PlayerState:" << (*voIter)->player->state() << "MediaStatus: " << mediaStatus;
 
 		// fader must be updated here, else the video may not be visible when not yet fully loaded?
-		(*voIter)->fader.update((int)(deltaTime*1000));
+		(*voIter)->fader.update(static_cast<int>(deltaTime*1000));
 
 		// It seems we need a more thorough analysis of MediaStatus!
 		// In all not-ready status we immediately leave further handling, usually in the hope that loading is successful really soon.

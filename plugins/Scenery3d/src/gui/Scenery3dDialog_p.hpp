@@ -44,7 +44,7 @@ public:
 		Q_ASSERT(mgr);
 	}
 
-	int rowCount(const QModelIndex &parent) const
+	virtual int rowCount(const QModelIndex &parent) const Q_DECL_OVERRIDE
 	{
 		Q_UNUSED(parent);
 		if(mgr->getIsANGLE())
@@ -58,7 +58,7 @@ public:
 		return 3;
 	}
 
-	QVariant data(const QModelIndex &index, int role) const
+	virtual QVariant data(const QModelIndex &index, int role) const Q_DECL_OVERRIDE
 	{
 		if(role == Qt::DisplayRole || role == Qt::EditRole)
 		{

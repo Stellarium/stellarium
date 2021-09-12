@@ -54,7 +54,9 @@ MainService::MainService(QObject *parent)
 	objMgr = &StelApp::getInstance().getStelObjectMgr();
 	mvmgr = GETSTELMODULE(StelMovementMgr);
 	propMgr = StelApp::getInstance().getStelPropertyManager();
+#ifdef ENABLE_SCRIPTING
 	scriptMgr = &StelApp::getInstance().getScriptMgr();
+#endif
 	skyCulMgr = &StelApp::getInstance().getSkyCultureMgr();
 
 	connect(actionMgr,SIGNAL(actionToggled(QString,bool)),this,SLOT(actionToggled(QString,bool)));
@@ -73,7 +75,7 @@ void MainService::update(double deltaTime)
 	{
 		if(!xZero || !yZero)
 			qDebug()<<"[MainService] move timeout";
-		moveX = moveY = .0f;
+		moveX = moveY = .0;
 	}
 
 	//Similar to StelMovementMgr::updateMotion
@@ -120,10 +122,10 @@ void MainService::get(const QByteArray& operation, const APIParameters &paramete
 			obj2.insert("name",loc.name);
 			obj2.insert("role",QString(loc.role));
 			obj2.insert("planet",loc.planetName);
-			obj2.insert("latitude",loc.latitude);
-			obj2.insert("longitude",loc.longitude);
+			obj2.insert("latitude",static_cast<double>(loc.latitude));
+			obj2.insert("longitude",static_cast<double>(loc.longitude));
 			obj2.insert("altitude",loc.altitude);
-			obj2.insert("country",loc.country);
+			obj2.insert("region",loc.region);
 			obj2.insert("state",loc.state);
 			obj2.insert("landscapeKey",loc.landscapeKey);
 			obj.insert("location",obj2);
@@ -134,7 +136,7 @@ void MainService::get(const QByteArray& operation, const APIParameters &paramete
 			double jday = core->getJD();
 			double deltaT = core->getDeltaT() * StelCore::JD_SECOND;
 
-			double gmtShift = core->getUTCOffset(jday) / 24.0;
+			double gmtShift = static_cast<double>(core->getUTCOffset(jday)) / 24.0;
 
 			QString utcIso = StelUtils::julianDayToISO8601String(jday,true).append('Z');
 			QString localIso = StelUtils::julianDayToISO8601String(jday+gmtShift,true);

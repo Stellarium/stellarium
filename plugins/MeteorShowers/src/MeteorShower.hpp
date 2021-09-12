@@ -64,7 +64,7 @@ public:
 	MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map);
 
 	//! Destructor
-	~MeteorShower();
+	~MeteorShower() Q_DECL_OVERRIDE;
 
 	//! Update
 	//! @param deltaTime the time increment in seconds since the last call.
@@ -106,7 +106,7 @@ public:
 	//
 	// Methods defined in StelObject class
 	//
-	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const;
+	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
 
 	//! Return a map like StelObject, but with a few extra tags:
 	// TODO: Describe the fields!
@@ -117,15 +117,15 @@ public:
 	//! - pop-idx (population index)
 	//! - parent
 	//! - zhr-max (information string)
-	virtual QVariantMap getInfoMap(const StelCore *core) const;
-	virtual QString getType(void) const { return METEORSHOWER_TYPE; }
-	virtual QString getID(void) const { return m_showerID; }
-	virtual QString getEnglishName(void) const { return m_designation.trimmed(); }
-	virtual QString getNameI18n(void) const	{ return q_(m_designation.trimmed()); }
-	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const { return m_position; }
-	virtual float getSelectPriority(const StelCore*) const { return -4.0; }
-	virtual Vec3f getInfoColor(void) const;
-	virtual double getAngularSize(const StelCore*) const { return 0.001; }
+	virtual QVariantMap getInfoMap(const StelCore *core) const Q_DECL_OVERRIDE;
+	virtual QString getType(void) const Q_DECL_OVERRIDE { return METEORSHOWER_TYPE; }
+	virtual QString getID(void) const Q_DECL_OVERRIDE { return m_showerID; }
+	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE { return m_designation.trimmed(); }
+	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE	{ return q_(m_designation.trimmed()); }
+	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const Q_DECL_OVERRIDE { return m_position; }
+	virtual float getSelectPriority(const StelCore*) const Q_DECL_OVERRIDE { return -4.0; }
+	virtual Vec3f getInfoColor(void) const Q_DECL_OVERRIDE;
+	virtual double getAngularSize(const StelCore*) const Q_DECL_OVERRIDE { return 0.001; }
 
 private:
 	MeteorShowersMgr* m_mgr;           //! MeteorShowersMgr instance

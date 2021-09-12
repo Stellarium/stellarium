@@ -10,9 +10,6 @@
     <height>394</height>
    </rect>
   </property>
-  <property name="styleSheet">
-   <string notr="true"/>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <property name="spacing">
     <number>0</number>
@@ -180,17 +177,17 @@
            </size>
           </property>
           <property name="toolTip">
-           <string>load script from file</string>
+           <string>Load script from file</string>
           </property>
           <property name="text">
            <string/>
           </property>
           <property name="icon">
            <iconset resource="../../data/gui/guiRes.qrc">
-            <normaloff>:/graphicGui/folder.png</normaloff>:/graphicGui/folder.png</iconset>
+            <normaloff>:/graphicGui/uibtFolder.png</normaloff>:/graphicGui/uibtFolder.png</iconset>
           </property>
           <property name="shortcut">
-           <string notr="true">Ctrl+O</string>
+           <string notr="true">Ctrl+Shift+O</string>
           </property>
          </widget>
         </item>
@@ -209,17 +206,17 @@
            </size>
           </property>
           <property name="toolTip">
-           <string>save script to file</string>
+           <string>Save script to file</string>
           </property>
           <property name="text">
            <string/>
           </property>
           <property name="icon">
            <iconset resource="../../data/gui/guiRes.qrc">
-            <normaloff>:/graphicGui/filesave.png</normaloff>:/graphicGui/filesave.png</iconset>
+            <normaloff>:/graphicGui/uibtSave.png</normaloff>:/graphicGui/uibtSave.png</iconset>
           </property>
           <property name="shortcut">
-           <string notr="true">Ctrl+S</string>
+           <string notr="true">Ctrl+Shift+S</string>
           </property>
          </widget>
         </item>
@@ -238,14 +235,14 @@
            </size>
           </property>
           <property name="toolTip">
-           <string>clear</string>
+           <string>Clear</string>
           </property>
           <property name="text">
            <string/>
           </property>
           <property name="icon">
            <iconset resource="../../data/gui/guiRes.qrc">
-            <normaloff>:/graphicGui/closeButton.png</normaloff>:/graphicGui/closeButton.png</iconset>
+            <normaloff>:/graphicGui/uibtDelete.png</normaloff>:/graphicGui/uibtDelete.png</iconset>
           </property>
          </widget>
         </item>
@@ -258,14 +255,14 @@
            </size>
           </property>
           <property name="toolTip">
-           <string>pre-process script using SSC preprocessor</string>
+           <string>Pre-process script using SSC preprocessor</string>
           </property>
           <property name="text">
            <string notr="true">SSC</string>
           </property>
           <property name="icon">
            <iconset resource="../../data/gui/guiRes.qrc">
-            <normaloff>:/graphicGui/btFlipVertical-off.png</normaloff>:/graphicGui/btFlipVertical-off.png</iconset>
+            <normaloff>:/graphicGui/uibtProcess.png</normaloff>:/graphicGui/uibtProcess.png</iconset>
           </property>
          </widget>
         </item>
@@ -283,11 +280,34 @@
          </spacer>
         </item>
         <item>
-         <widget class="QComboBox" name="quickrunCombo">
+         <widget class="QLabel" name="quickrunLabel">
           <property name="toolTip">
-           <string>quickly load and run a utility script</string>
+           <string/>
+          </property>
+          <property name="text">
+           <string>Execute:</string>
           </property>
          </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="quickrunCombo">
+          <property name="toolTip">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
         <item>
          <widget class="QPushButton" name="runButton">
@@ -304,14 +324,15 @@
            </size>
           </property>
           <property name="toolTip">
-           <string>run script</string>
+           <string>Run script</string>
           </property>
           <property name="text">
            <string/>
           </property>
           <property name="icon">
            <iconset resource="../../data/gui/guiRes.qrc">
-            <normaloff>:/graphicGui/btScriptRun-off.png</normaloff>:/graphicGui/btScriptRun-off.png</iconset>
+            <normaloff>:/graphicGui/uibtStart.png</normaloff>
+            <disabledoff>:/graphicGui/uibtStart-disabled.png</disabledoff>:/graphicGui/uibtStart.png</iconset>
           </property>
           <property name="shortcut">
            <string notr="true">Ctrl+Return</string>
@@ -336,14 +357,15 @@
            </size>
           </property>
           <property name="toolTip">
-           <string>stop script</string>
+           <string>Stop script</string>
           </property>
           <property name="text">
            <string/>
           </property>
           <property name="icon">
            <iconset resource="../../data/gui/guiRes.qrc">
-            <normaloff>:/graphicGui/btScriptStop-off.png</normaloff>:/graphicGui/btScriptStop-off.png</iconset>
+            <normaloff>:/graphicGui/uibtStop.png</normaloff>
+            <disabledoff>:/graphicGui/uibtStop-disabled.png</disabledoff>:/graphicGui/uibtStop.png</iconset>
           </property>
          </widget>
         </item>
@@ -351,11 +373,6 @@
       </item>
       <item>
        <widget class="QTabWidget" name="tabs">
-        <property name="styleSheet">
-         <string notr="true">QTabBar::tab {
-	min-height: 28px;
-}</string>
-        </property>
         <property name="tabPosition">
          <enum>QTabWidget::North</enum>
         </property>
@@ -380,13 +397,7 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QTextEdit" name="scriptEdit">
-            <property name="font">
-             <font>
-              <family>DejaVu Sans Mono</family>
-              <pointsize>8</pointsize>
-             </font>
-            </property>
+           <widget class="QPlainTextEdit" name="scriptEdit">
             <property name="verticalScrollBarPolicy">
              <enum>Qt::ScrollBarAlwaysOn</enum>
             </property>
@@ -394,7 +405,7 @@
              <enum>Qt::ScrollBarAlwaysOn</enum>
             </property>
             <property name="lineWrapMode">
-             <enum>QTextEdit::NoWrap</enum>
+             <enum>QPlainTextEdit::NoWrap</enum>
             </property>
            </widget>
           </item>
@@ -418,14 +429,7 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QTextBrowser" name="logBrowser">
-            <property name="font">
-             <font>
-              <family>DejaVu Sans Mono</family>
-              <pointsize>8</pointsize>
-             </font>
-            </property>
-           </widget>
+           <widget class="QTextBrowser" name="logBrowser"/>
           </item>
          </layout>
         </widget>
@@ -447,14 +451,48 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QTextBrowser" name="outputBrowser">
-            <property name="font">
-             <font>
-              <family>DejaVu Sans Mono</family>
-              <pointsize>8</pointsize>
-             </font>
+           <widget class="QTextBrowser" name="outputBrowser"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="settingsTab">
+         <attribute name="title">
+          <string>Settings</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="verticalLayout_6">
+          <item>
+           <widget class="QCheckBox" name="useUserDirCheckBox">
+            <property name="text">
+             <string>Load scripts from the User Directory by default</string>
             </property>
            </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="closeWindowAtScriptRunCheckbox">
+            <property name="text">
+             <string>Close window when script runs</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="clearOutputCheckbox">
+            <property name="text">
+             <string>Clear output before script runs</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </widget>
@@ -471,28 +509,16 @@
         <item>
          <widget class="QLabel" name="rowColumnLabel">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>100</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>100</width>
-            <height>16777215</height>
-           </size>
           </property>
           <property name="toolTip">
            <string>Cursor position</string>
           </property>
           <property name="text">
-           <string notr="true">R:0 C:0</string>
+           <string>R:0 C:0</string>
           </property>
          </widget>
         </item>
@@ -589,6 +615,7 @@
   </customwidget>
  </customwidgets>
  <resources>
+  <include location="../../data/gui/guiRes.qrc"/>
   <include location="../../data/gui/guiRes.qrc"/>
  </resources>
  <connections/>

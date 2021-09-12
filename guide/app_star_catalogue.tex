@@ -45,9 +45,9 @@ section~\ref{sec:Directories}).
 The main catalogue data is split into several files:
 
 \begin{description}
-\item[\file{stars\_0\_0v0\_7.cat}]
-\item[\file{stars\_1\_0v0\_7.cat}]
-\item[\file{stars\_2\_0v0\_7.cat}]
+\item[\file{stars\_0\_0v0\_8.cat}]
+\item[\file{stars\_1\_0v0\_8.cat}]
+\item[\file{stars\_2\_0v0\_8.cat}]
 \item[\file{stars\_3\_1v0\_4.cat}]
 \item[\file{stars\_4\_1v0\_2.cat}]
 \item[\file{stars\_5\_2v0\_1.cat}]
@@ -64,6 +64,7 @@ There also exist some control and reference files:
 \item[\file{gcvs\_hip\_part.dat}]
 \item[\file{wds\_hip\_part.dat}]
 \item[\file{cross-id.dat}]
+\item[\file{hip\_plx\_err.dat}]
 \item[\file{stars.ini}]
 \item[\file{name.fab}]
 \end{description}
@@ -80,6 +81,8 @@ which again contains references into the main catalogue files.
 
 The file \file{cross-id.dat} (see section~\ref{sec:StarCatalogues:CrossIdentificationData}) contains cross-identification data between HIP, SAO, HD and HR designations.
 
+The file \file{hip\_plx\_err.dat} contains parallax errors data for HIP stars.
+
 A given catalogue file models stars for one and only one level (i.e. for
 a fixed number of zones), which is recorded in the header of the file.
 Individual star records do not contain full positional coordinates,
@@ -93,9 +96,9 @@ know about the zone model to be able to extract positional data.
 \emph{File} & \emph{Data     } & \emph{Data            } & \emph{Geodesic      } & \emph{\#Records} & \emph{Notes}\\
             & \emph{     Type} & \emph{     Record Size} & \emph{         Level} &                  &             \\
 \midrule
-\file{stars\_0\_0v0\_7.cat} & 0 & 28 bytes & 0 &      4,979 & Hipparcos\\
-\file{stars\_1\_0v0\_7.cat} & 0 & 28 bytes & 1 &     21,806 & Hipparcos\\
-\file{stars\_2\_0v0\_7.cat} & 0 & 28 bytes & 2 &    150,850 & Hipparcos\\
+\file{stars\_0\_0v0\_8.cat} & 0 & 28 bytes & 0 &      4,979 & Hipparcos\\
+\file{stars\_1\_0v0\_8.cat} & 0 & 28 bytes & 1 &     21,806 & Hipparcos\\
+\file{stars\_2\_0v0\_8.cat} & 0 & 28 bytes & 2 &    150,824 & Hipparcos\\
 \file{stars\_3\_1v0\_4.cat} & 1 & 10 bytes & 3 &    425,807 & Tycho 2\\
 \file{stars\_4\_1v0\_2.cat} & 1 & 10 bytes & 4 &  1,692,779 & Tycho 2\\
 \file{stars\_5\_2v0\_1.cat} & 2 &  8 bytes & 5 &  7,083,058 & NOMAD\\
@@ -117,9 +120,9 @@ Stellarium's star catalogues are based on Hipparcos~\citep{1997ESASP1200.....E, 
 \label{sec:Catalogues:stars:sections}
 
 The catalogue files are split into three main sections as described in
-table \emph{File sections}.
+table~\ref{tab:Catalogues:stars:sections}.
 
-\noindent%
+\begin{table}[htb]
 \begin{tabularx}{\textwidth}{l l X}\toprule
 \emph{Section} & \emph{Offset} & \emph{Description}\\\midrule
 File Header Record &  0        & Contains magic number, geodesic subdivision level, and magnitude range\\%\midrule
@@ -131,6 +134,9 @@ Star Data Records  & 32+4$n$   & This section of the file contains fixed-size st
                                  to fill the number of stars for the zone, as specified in the zones section above. 
                                  The value of $n$ used in the offset description is the number of zones, as described above.\\\bottomrule
 \end{tabularx}
+\caption{File sections}
+\label{tab:Catalogues:stars:sections}
+\end{table}
 
 \subsection{Record Types}%\label{record-types}
 \label{sec:Catalogues:stars:record:types}
@@ -165,22 +171,20 @@ Magnitude Steps   & 28 & int & 4 & number of steps used to describes values in t
 \subsubsection{Zone Records}%\label{zone-records}
 \label{sec:Catalogues:stars:record:zone}
 
-%% TODO: There are still href links from the wiki. 
-
 The \emph{Zone Records} section of the file lists the number of star
 records there are per zone. The number of zones is determined from the
-level value in the File Header Record, as described in section
-\href{Star_Catalogue\#Zones}{Zones}. The Zones section is simply a list
-of integer values which describe the number of stars for each zone. The
-total length of the Zones section depends on the number of zones. See
-table~\ref{tab:Catalogues:stars:record:zones}. % \emph{Zones section}.
+level value in the File Header Record, as described in
+section~\ref{sec:Catalogues:SkyModel:Zones}. The Zones section is
+simply a list of integer values which describe the number of stars for
+each zone. The total length of the Zones section depends on the number
+of zones. See table~\ref{tab:Catalogues:stars:record:zones}.
 
 \begin{table}[htbp]
 \begin{tabularx}{\textwidth}{llllX}\toprule
 \emph{Name} & \emph{Offset} & \emph{Type} & \emph{Size} &\emph{Description}\\\midrule
 num stars in zone 0   & 0    & int & 4 &  number of records in this file which are in zone 0\\%\midrule
 num stars in zone 1   & 4    & int & 4 &  number of records is this file which are in zone 1\\
-...                   &      &     &   &\\
+\ldots                &      &     &   &\\
 num stars in zone $n$ & $4n$ & int & 4 &  number of records is this file which are in zone $n$\\\bottomrule
 \end{tabularx}
 \caption{Zones section}
@@ -212,7 +216,8 @@ smaller precision position fields are used, so the actual resolution on
 the sky isn't significantly worse for the type 1 and 2 records in
 practice.
 
-\begin{longtable}{llllp{55mm}}\toprule
+\begin{table}[p]
+\begin{tabular}{llllp{55mm}}\toprule
 \emph{Name} & \emph{Offset} & \emph{Type} & \emph{Size} &\emph{Description}\\\midrule
 hip            &  0 & int                & 3 & Hipparcos catalogue number\\%\midrule
 component\_ids &  3 & unsigned char      & 1 & index to an array of catalogue number suffixes. The list is read from the
@@ -230,9 +235,10 @@ sp\_int        & 11 & unsigned short int & 2 & index into an array of spectral t
 dx0            & 13 & int                & 4 & proper motion of the star in axis 1\\%\midrule
 dx1            & 17 & int                & 4 & proper motion of the star in axis 2\\%\midrule
 plx            & 21 & int                & 4 & parallax of the star. To get the actual value, divide by 10000.\\\bottomrule
+\end{tabular}
 \caption{Star Data Record Type 0}
 \label{tab:StarDataRecord0}
-\end{longtable}
+\end{table}
 
 \begin{table}[htbp]
 \begin{tabularx}{\textwidth}{llllX}\toprule
@@ -263,6 +269,7 @@ mag  & 43 bits & unsigned int &  5 bits & magnitude level in the V-I colour. Thi
 \caption{Star Data Record Type 2}
 \label{tab:StarDataRecord2}
 \end{table}
+\clearpage
 
 \section{Variable Stars}
 \label{sec:StarCatalogues:VariableStars}
@@ -287,7 +294,7 @@ User Directory (see section~\ref{sec:Directories}).
 \subsubsection{File Format}%\label{file-format}
 \label{sec:StarCatalogues:VariableStars:file}
 
-The \file{gcvs\_hip\_part.dat} file contains data about 6916 Variable Stars 
+The \file{gcvs\_hip\_part.dat} file contains data about 6862 Variable Stars 
 (see section~\ref{sec:Phenomena:variableStars}) which have HIP identificators and
 are stored in a plain text format with tab delimiter (Table~\ref{tab:sec:StarCatalogues:VariableStars}).
 
@@ -316,8 +323,7 @@ Spectrum & string & Spectral class of the variable star.\\\bottomrule
 \subsection{GCVS Variability Types}\label{gcvs-variability-types}
 
 An improved system of variability classification is used in the fourth
-edition of the GCVS%~\citep{GCVS4}, %%%%%%%%% TODO: ADD REFERENCE
-, based on recent developments in classification
+edition of the GCVS, based on recent developments in classification
 principles and taking into account the suggestions of a number of
 specialists. Variability types are grouped according to the major
 astrophysical reasons for variability.
@@ -334,8 +340,11 @@ processes, the classification adopted in the Catalogue is far from
 perfect. This is especially the case for explosive, symbiotic and
 novalike variables; X-ray sources; and peculiar objects.
 
-You can read about latest different types of variability at VIZIER\footnote{
-\url{http://cdsarc.u-strasbg.fr/vizier/ftp/cats/B/gcvs/vartype.txt}}.
+The new variability types (ZZO, AM, R, BE, BLBOO, EP, SRS, LPB) have been 
+added in the Name-Lists 67-77 and in the GCVS vol.V.
+
+You can read about latest different types of variability at SAI GCVS page\footnote{
+\url{http://www.sai.msu.su/gcvs/gcvs/vartype.htm}}.
 
 \subsubsection{Eruptive Variable Stars}\label{eruptive-variable-stars}
 
@@ -1041,7 +1050,7 @@ use are given below.
 
 The combination of the above three classification systems for eclipsers
 results in the assignment of multiple classifications for object types.
-These are separated by a solidus ("/") in the data field. Examples are:
+These are separated by a solidus (``/'') in the data field. Examples are:
 E/DM, EA/DS/RS, EB/WR, EW/KW, etc.
 
 \subsubsection{Optically Variable Close Binary Sources of Strong, Variable X-ray Radiation (X-ray Sources)}
@@ -1119,7 +1128,7 @@ rotating hot compact object does not pass through the observer's
 position and the system is not observed as a pulsar, the letter ``P'' in
 the above symbols for X-ray-system types is not used. If an X-ray
 system is also an eclipsing or an ellipsoidal variable, the X-ray symbol
-is preceded by ``E'' or ``ELL'' joined with the X-ray symbol by a "+"
+is preceded by ``E'' or ``ELL'' joined with the X-ray symbol by a ``+''
 sign (e.g., E+X, ELL+X).
 
 \subsubsection{Other Symbols}\label{other-symbols}
@@ -1159,8 +1168,8 @@ symbols that need to be explained will be found in the Type data field:
 \section{Double Stars}
 \label{sec:StarCatalogues:DoubleStars}
 
-Since version 0.15.0 Stellarium supports the subset of double stars
-from WDS\footnote{\url{http://ad.usno.navy.mil/wds/}} which have HIP
+Since version 0.15.0\newFeature{0.15.0} Stellarium supports the subset of double stars
+from WDS\footnote{\url{http://www.astro.gsu.edu/wds/} or \url{https://www.stelledoppie.it/index2.php?section=1}} which have HIP
 identificators (i.e., stars from the Hipparcos catalog). Stellarium's Catalog
 of Double Stars is based on the \citetp{2001AJ....122.3466M}. %\emph{Washington Double Star Catalog} 
 Cross reference data for WDS and HIP designations is based on the 
@@ -1170,8 +1179,8 @@ database SIMBAD  \citep{2000A&AS..143....9W}.
 \subsection{Double Star Catalog File Format}
 \label{sec:StarCatalogues:DoubleStars:format}
 
-\subsubsection{General Description}
-\label{sec:StarCatalogues:DoubleStars:general}
+%\subsubsection{General Description}
+%\label{sec:StarCatalogues:DoubleStars:general}
 
 Stellarium's Double Stars catalog data is kept
 in the \file{stars/default} sub-directory of the Installation Directory and/or
@@ -1194,23 +1203,103 @@ Observation		& int	 & Date of last satisfactory observation (in years).\\%\midru
 Position Angle  & float  & Position Angle at date of last satisfactory observation (in decimal degrees).\\%\midrule
 Separation 		& float  & Separation at date of last satisfactory observation (in arcsec).\\\bottomrule
 \end{tabularx}
+\caption{Format of \file{wds\_hip\_part.dat}}
+\label{tab:StarCatalogues:DoubleStars:file}
 \end{table}
+
+\subsection{Designations}
+\label{sec:StarCatalogues:DoubleStars:Designations}
+
+In version 0.20.4\newFeature{0.20.4} we incorporated support for additional designations 
+for \indexterm{double stars} which have also HIP identification. All these designations 
+were added especially for double star observers and people who use Stellarium as 
+reference software. The cross-identification data for double stars were obtained 
+from \emph{The Cambridge Double Star Atlas}~\citep{2009cdsa.book, 2015cdsa.book.....M}.
+
+In version 0.21.1 we updated cross-identification data according to \emph{The Washington Double Star Catalog} data~\citep{2001AJ....122.3466M}.
+
+\begin{longtable}{l|l|l|p{35mm}}\toprule
+\emph{Obsolete ID} & \emph{Modern ID} & \emph{Observer} & \emph{Active period}\\\midrule
+H I to VI, H N		& H 1 to 6, H N  & W. Herschel 		  	& 1777---1821 \\
+$\Sigma$        	& STF 		 & F. Wilhelm von Struve        & 1814---1843 \\
+$\Sigma$ I, $\Sigma$ II & STFA, STFB 	 & \emph{(Supplemental catalogs)} & 1814---1843 \\
+h   	        	& HJ  		 & J. Herschel 		  	& 1820---1837 \\
+Sh   	        	& SHJ 		 & J. South and J. Herschel  	& 1821---1840 \\
+S  	  	        & S   		 & J. South 			& 1822---1825 \\
+Rmk 	  	        & RMK 		 & C. Rumker			& 1825---1837 \\
+$\Delta$		& DUN 		 & J. Dunlop 			& 1825---1846 \\
+Lal  		        & LAL 		 & J.-J. de Lalande		& 1825---1877 \\
+O$\Sigma$       	& STT 		 & O. von Struve		& 1832---1878 \\
+O$\Sigma\Sigma$ 	& STTA 		 & \emph{(Supplemental catalogs)} & 1832---1878 \\
+BrsO	        	& BSO 		 & \emph{Brisbane Observatory}	& 1834---1851 \\
+Jc   	        	& JC  		 & W.S. Jacob 			& 1836---1879 \\
+Dawes 	        	& DA  		 & W. Dawes 			& 1841---1858 \\
+Gli 	 	        & GLI 		 & J.M. Gilliss 		& 1850---1852 \\
+Knott  	        	& KNT 		 & G. Knott 			& c. 1865 \\
+Hd, HdO   	        & HDO 		 & \emph{Harvard Observatory} 	& 1866---1911 \\
+Stone  	       		& STN 		 & O. Stone			& 1867---1882 \\
+R   	        	& R   		 & H.C. Russell 		& 1870---1882 \\
+$\beta$   		& BU  		 & S. Burnham 			& 1870---1911 \\
+$\beta$ pm 		& BUP 		 & \emph{(Proper motion pairs)} & 1870---1911 \\
+Ho   	        	& HO  		 & G.W. Hough 			& 1873---1897 \\
+MlbO  	        	& MLO 		 & \emph{Melbourne Observatory} & 1873---1898 \\
+Howe   	        	& HWE 		 & H.A. Howe 			& 1875---1879 \\
+CapO	        	& CPO 		 & \emph{Cape Observatory} 	& 1880---1910 \\
+Es 	 	        & ES  		 & Rev. T.E. Espin 		& 1882---1931 \\
+CorO	   	     	& COO 		 & \emph{Cordoba Observatory} 	& 1883---1920 \\
+J   	        	& J   		 & R. Jonckheere		& 1885---1945 \\
+Slr   	        	& SLR 		 & R.P. Sellors 		& 1890---1896 \\
+---		        & A   		 & R. Aitken 			& 1891---1926 \\
+---   	        	& I   		 & R.T.A. Innes			& 1891---1927 \\
+$\lambda$   	        & SEE 		 & T.J.J. See 			& 1892---1897 \\
+Hu   	        	& HU  		 & W.J. Hussey 			& 1892---1914 \\
+$\delta$		& DAW 		 & B.H. Dawson 			& 1904---1924 \\
+---		        & B   		 & W. van den Bos 		& 1903---1935 \\
+Rst   	    	    	& RST 		 & R.A. Rossiter 		& 1920---1946 \\
+$\phi$		    	& FIN 		 & W.S. Finsen			& 1920---1961 \\
+Cou 	        	& COU 		 & P. Couteau			& 1957---1991 \\
+Mlr			& MLR		 & P. Muller 			& 1966---1989 \\
+---		        & HDS  		 & \emph{Hipparcos Catalog} 	& c. 1991 \\
+AC		        & AC  		 & A. Clark			&  \\
+AG		        & AG  		 & \emph{Astronomishe Gesellshaft Katalog} &  \\
+AGC		        & AGC 		 & A.G. Clark 			&  \\
+Arg		        & ARG 		 & F.W.A. Argelander		&  \\
+Dju  	        	& DJU 		 & P. Djurkovic			&  \\
+Don  	        	& DON 		 & H.F. Donner 			&  \\
+Doo  	        	& DOO 		 & E. Doolittle 		&  \\
+Erk  	   		& FRK 		 & W.S. Franks			&  \\
+Gale  	    	    	& GLE 		 & W.F. Gale 			&  \\
+Hld   	        	& HLD 		 & E.S. Holden 			&  \\
+Hrg   		        & HRG 		 & L. Hargrave 			&  \\
+Ku  		        & KU  		 & F. Kustner 			&  \\
+Kui  	        	& KUI 		 & Gerard P. Kuiper 		&  \\
+Pz  	 	        & PZ  		 & G. Piazzi 			&  \\
+Roe   	        	& ROE 		 & E.D. Roe 			&  \\
+Se  	 	        & SE  		 & A. Secchi 			&  \\
+Sei   		        & SEI 		 & J. Scheiner 			&  \\
+Smyth  	 	        & SMY 		 & W.H. Smyth 			&  \\
+Vou  	        	& VOU 		 & J.G.E.G. Voute		&  \\
+Webb  		        & WEB 		 & T.W. Webb 			&  \\
+Wnc  	        	& WNC 		 & F.A. Winnecke 		&  \\
+WNO  	     		& WNO 		 & \emph{US Naval Observatory}  &  \\\bottomrule
+\caption{Additional designations for double stars}
+\label{tab:StarCatalogues:DoubleStars:Designations}
+\end{longtable}
 
 \section{Cross-Identification Data}
 \label{sec:StarCatalogues:CrossIdentificationData}
 
-Since version 0.14.0 Stellarium supports cross-identification between stars from 
+Since version 0.14.0\newFeature{0.14.0} Stellarium supports cross-identification between stars from 
 Hipparcos (HIP)~\citep{2012AstL...38..331A}, 
-Smithsonian Astrophysical Observatory (SAO) Star Catalog J2000.0, %% TODO: ADD CITATION! (SAO), 
-Henry Draper Catalogue and Extension (HD)~\citep{1993yCat.3135....0C} and 
+Smithsonian Astrophysical Observatory (SAO) Star Catalog J2000.0~\citep{1995yCat.1131....0S}, Henry Draper Catalogue and Extension (HD)~\citep{1993yCat.3135....0C} and 
 \citetp{1964cbs..book.....H}  (BSC5 or HR) % $5^{th}$ Revised Ed. of Bright Star Catalog (Hoffleit+, 1991; HR)
 catalogues.
 
 \subsection{Cross-Identification Catalog File Format}
 \label{sec:StarCatalogues:CrossIdentificationData:format}
 
-\subsubsection{General Description}
-\label{sec:StarCatalogues:CrossIdentificationData:general}
+%\subsubsection{General Description}
+%\label{sec:StarCatalogues:CrossIdentificationData:general}
 
 Stellarium's Cross-Identification catalog data is kept
 in the \file{stars/default} sub-directory of the Installation Directory and/or User Directory (see section~\ref{sec:Directories}).
@@ -1228,6 +1317,8 @@ SAO	& int & SAO identificator for the star.\\%\midrule
 HD	& int & HD identificator for the star.\\%\midrule
 HR	& int & HR identificator for the star.\\\bottomrule
 \end{tabularx}
+\caption{Format of \file{cross-id.dat}}
+\label{tab:StarCatalogues:CrossIdentificationData:file}
 \end{table}
 
 %%% Local Variables: 
