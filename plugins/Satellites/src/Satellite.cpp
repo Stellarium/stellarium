@@ -326,10 +326,9 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		oss << QString("%1: %2 %3").arg(q_("Range rate")).arg(rangeRate, 5, 'f', 3).arg(qc_("km/s", "speed")) << "<br/>";
 		// TRANSLATORS: Satellite altitude
 		oss << QString("%1: %2 %3").arg(q_("Altitude")).arg(qRound(height)).arg(km) << "<br/>";
-		Vec2d pa = calculatePerigeeApogeeFromLine2(tleElements.second.data());
 		oss << QString("%1: %2 %3 / %4 %5").arg(q_("Perigee/apogee altitudes"))
-		       .arg(qRound(pa[0])).arg(km)
-		       .arg(qRound(pa[1])).arg(km)
+		       .arg(qRound(perigee)).arg(km)
+		       .arg(qRound(apogee)).arg(km)
 		<< "<br/>";
 	}
 
@@ -463,22 +462,17 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 }
 
 // Calculate perigee and apogee altitudes for mean Earth radius
-Vec2d Satellite::calculatePerigeeApogeeFromLine2(QString tle) const
+void Satellite::calculateSatDataFromLine2(QString tle)
 {
 	// Details: http://www.satobs.org/seesat/Dec-2002/0197.html
 	const double meanEarthRadius = 6371.0088;
 	const double k = 8681663.653;
 	const double meanMotion = tle.left(63).right(11).toDouble();
 	const double semiMajorAxis = std::cbrt((k/meanMotion)*(k/meanMotion));
-	const double eccentricity = QString("0.%1").arg(tle.left(33).right(7)).toDouble();
-	return Vec2d(semiMajorAxis*(1.0 - eccentricity) - meanEarthRadius, semiMajorAxis*(1.0 + eccentricity) - meanEarthRadius);
-}
-
-Vec2d Satellite::getEccentricityInclinationFromLine2(QString tle) const
-{
-	const double inclination = QString(tle.left(16).right(8)).toDouble();
-	const double eccentricity = QString("0.%1").arg(tle.left(33).right(7)).toDouble();
-	return Vec2d(eccentricity, inclination);
+	eccentricity = QString("0.%1").arg(tle.left(33).right(7)).toDouble();
+	perigee = semiMajorAxis*(1.0 - eccentricity) - meanEarthRadius;
+	apogee = semiMajorAxis*(1.0 + eccentricity) - meanEarthRadius;
+	inclination = QString(tle.left(16).right(8)).toDouble();
 }
 
 // Calculate epoch of TLE
@@ -535,9 +529,8 @@ QVariantMap Satellite::getInfoMap(const StelCore *core) const
 	map.insert("TEME-speed-Z", velocity[2]);
 	map.insert("inclination", pSatWrapper->getOrbitalInclination());
 	map.insert("period", pSatWrapper->getOrbitalPeriod());
-	Vec2d pa = calculatePerigeeApogeeFromLine2(tleElements.second.data());
-	map.insert("perigee-altitude", pa[0]);
-	map.insert("apogee-altitude", pa[0]);
+	map.insert("perigee-altitude", perigee);
+	map.insert("apogee-altitude", apogee);
 #if (SATELLITES_PLUGIN_IRIDIUM == 1)
 	if (sunReflAngle>0.)
 	{  // Iridium
@@ -775,11 +768,13 @@ void Satellite::setNewTleElements(const QString& tle1, const QString& tle2)
 	
 	parseInternationalDesignator(tle1);
 	calculateEpochFromLine1(tle1);
+	calculateSatDataFromLine2(tle2);
 }
 
-void Satellite::recomputeEpochTLE()
+void Satellite::recomputeSatData()
 {
 	calculateEpochFromLine1(tleElements.first.data());
+	calculateSatDataFromLine2(tleElements.second.data());
 }
 
 void Satellite::update(double)
@@ -841,8 +836,6 @@ SatFlags Satellite::getFlags() const
 {
 	// There's also a faster, but less readable way: treating them as uint.
 	SatFlags flags;
-	Vec2d orb = getEccentricityInclinationFromLine2(tleElements.second.data());
-	Vec2d apd = calculatePerigeeApogeeFromLine2(tleElements.second.data());
 	double orbitalPeriod = pSatWrapper->getOrbitalPeriod();
 	if (displayed)
 		flags |= SatDisplayed;
@@ -862,15 +855,15 @@ SatFlags Satellite::getFlags() const
 		flags |= SatMediumSize;
 	if (RCS>1.0)
 		flags |= SatLargeSize;
-	if (orb[0] < 0.25 && (orb[1]>=0. && orb[1]<=180.) && apd[1]<4400.)
+	if (eccentricity < 0.25 && (inclination>=0. && inclination<=180.) && apogee<4400.)
 		flags |= SatLEO;
-	if (orb[0] < 0.25 && orb[1]<25. && (orbitalPeriod>=1100. && orbitalPeriod<=2000.))
+	if (eccentricity < 0.25 && inclination<25. && (orbitalPeriod>=1100. && orbitalPeriod<=2000.))
 		flags |= SatGSO;
-	if (orb[0] < 0.25 && (orb[1]>=0. && orb[1]<=180.) && apd[1]>=4400. && orbitalPeriod<1100.)
+	if (eccentricity < 0.25 && (inclination>=0. && inclination<=180.) && apogee>=4400. && orbitalPeriod<1100.)
 		flags |= SatMEO;
-	if (orb[0] >= 0.25 && (orb[1]>=0. && orb[1]<=180.) && apd[0]<=70000. && orbitalPeriod<=14000.)
+	if (eccentricity >= 0.25 && (inclination>=0. && inclination<=180.) && perigee<=70000. && orbitalPeriod<=14000.)
 		flags |= SatHEO;
-	if (orb[0] < 0.25 && (orb[1]>=25. && orb[1]<=180.) && (orbitalPeriod>=1100. && orbitalPeriod<=2000.))
+	if (eccentricity < 0.25 && (inclination>=25. && inclination<=180.) && (orbitalPeriod>=1100. && orbitalPeriod<=2000.))
 		flags |= SatHGSO;
 	return flags;
 }

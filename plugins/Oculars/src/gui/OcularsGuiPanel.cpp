@@ -547,7 +547,7 @@ void OcularsGuiPanel::updateOcularControls()
 
 	ocularControls->setMinimumSize(widgetWidth, widgetHeight);
 	ocularControls->resize(widgetWidth, widgetHeight);
-	setOcularControlsVisible(true);
+	setOcularControlsVisible(ocularsPlugin->getEnableOcular());
 
 	updateTelescopeControls();//Contains a call to updatePosition()
 }
@@ -613,10 +613,15 @@ void OcularsGuiPanel::updateLensControls()
 
 	int oindex = ocularsPlugin->selectedOcularIndex;
 	Ocular* ocular = ocularsPlugin->oculars[oindex];
-	if (ocular->isBinoculars() && ocularsPlugin->flagShowOculars) // Hide the lens info for binoculars in eyepiece mode only
-		setLensControlsVisible(false);
+	if (ocularsPlugin->getEnableCCD() || ocularsPlugin->getEnableOcular())
+	{
+		if (ocular->isBinoculars() && ocularsPlugin->getEnableOcular()) // Hide the lens info for binoculars in eyepiece mode only
+			setLensControlsVisible(false);
+		else
+			setLensControlsVisible(true);
+	}
 	else
-		setLensControlsVisible(true);
+		setLensControlsVisible(false);
 }
 
 void OcularsGuiPanel::updateCcdControls()
@@ -790,7 +795,7 @@ void OcularsGuiPanel::updateCcdControls()
 
 	ccdControls->setMinimumSize(widgetWidth, widgetHeight);
 	ccdControls->resize(widgetWidth, widgetHeight);
-	setCcdControlsVisible(true);
+	setCcdControlsVisible(ocularsPlugin->getEnableCCD());
 
 	updateTelescopeControls();//Contains a call to updatePosition()
 }
@@ -1006,7 +1011,10 @@ void OcularsGuiPanel::updateTelescopeControls()
 
 	telescopeControls->setMinimumSize(widgetWidth, widgetHeight);
 	telescopeControls->resize(widgetWidth, widgetHeight);
-	setTelescopeControlsVisible(true);
+	if (ocularsPlugin->getEnableCCD() || ocularsPlugin->getEnableOcular())
+		setTelescopeControlsVisible(true);
+	else
+		setTelescopeControlsVisible(false);
 
 	updateLensControls();
 	updatePosition();

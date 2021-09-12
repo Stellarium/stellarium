@@ -1,29 +1,6 @@
-/****************************************************************************
-** Copyright (c) 2013-2014 Debao Zhang <hello@debao.me>
-** All right reserved.
-**
-** Permission is hereby granted, free of charge, to any person obtaining
-** a copy of this software and associated documentation files (the
-** "Software"), to deal in the Software without restriction, including
-** without limitation the rights to use, copy, modify, merge, publish,
-** distribute, sublicense, and/or sell copies of the Software, and to
-** permit persons to whom the Software is furnished to do so, subject to
-** the following conditions:
-**
-** The above copyright notice and this permission notice shall be
-** included in all copies or substantial portions of the Software.
-**
-** THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-** EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-** MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-** NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-** LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-** OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-** WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-**
-****************************************************************************/
-#include "xlsxdocpropscore_p.h"
+// xlsxdocpropscore.cpp
 
+#include <QtGlobal>
 #include <QXmlStreamWriter>
 #include <QXmlStreamReader>
 #include <QDir>
@@ -32,7 +9,9 @@
 #include <QDebug>
 #include <QBuffer>
 
-namespace QXlsx {
+#include "xlsxdocpropscore_p.h"
+
+QT_BEGIN_NAMESPACE_XLSX
 
 DocPropsCore::DocPropsCore(CreateFlag flag)
     :AbstractOOXmlFile(flag)
@@ -41,13 +20,12 @@ DocPropsCore::DocPropsCore(CreateFlag flag)
 
 bool DocPropsCore::setProperty(const QString &name, const QString &value)
 {
-    static QStringList validKeys;
-    if (validKeys.isEmpty()) {
-        validKeys << QStringLiteral("title") << QStringLiteral("subject")
-                  << QStringLiteral("keywords") << QStringLiteral("description")
-                  << QStringLiteral("category") << QStringLiteral("status")
-                  << QStringLiteral("created") << QStringLiteral("creator");
-    }
+    static const QStringList validKeys = {
+        QStringLiteral("title"), QStringLiteral("subject"),
+        QStringLiteral("keywords"), QStringLiteral("description"),
+        QStringLiteral("category"), QStringLiteral("status"),
+        QStringLiteral("created"), QStringLiteral("creator")
+    };
 
     if (!validKeys.contains(name))
         return false;
@@ -62,8 +40,9 @@ bool DocPropsCore::setProperty(const QString &name, const QString &value)
 
 QString DocPropsCore::property(const QString &name) const
 {
-    if (m_properties.contains(name))
-        return m_properties[name];
+    auto it = m_properties.constFind(name);
+    if (it != m_properties.constEnd())
+        return it.value();
 
     return QString();
 }
@@ -89,25 +68,32 @@ void DocPropsCore::saveToXmlFile(QIODevice *device) const
     writer.writeNamespace(dcmitype, QStringLiteral("dcmitype"));
     writer.writeNamespace(xsi, QStringLiteral("xsi"));
 
-    if (m_properties.contains(QStringLiteral("title")))
-        writer.writeTextElement(dc, QStringLiteral("title"), m_properties[QStringLiteral("title")]);
+    auto it = m_properties.constFind(QStringLiteral("title"));
+    if (it != m_properties.constEnd())
+        writer.writeTextElement(dc, QStringLiteral("title"), it.value());
 
-    if (m_properties.contains(QStringLiteral("subject")))
-        writer.writeTextElement(dc, QStringLiteral("subject"), m_properties[QStringLiteral("subject")]);
+    it = m_properties.constFind(QStringLiteral("subject"));
+    if (it != m_properties.constEnd())
+        writer.writeTextElement(dc, QStringLiteral("subject"), it.value());
 
-    writer.writeTextElement(dc, QStringLiteral("creator"), m_properties.contains(QStringLiteral("creator")) ? m_properties[QStringLiteral("creator")] : QStringLiteral("Qt Xlsx Library"));
+    it = m_properties.constFind(QStringLiteral("creator"));
+    writer.writeTextElement(dc, QStringLiteral("creator"), it != m_properties.constEnd() ? it.value() : QStringLiteral("Qt Xlsx Library"));
 
-    if (m_properties.contains(QStringLiteral("keywords")))
-        writer.writeTextElement(cp, QStringLiteral("keywords"), m_properties[QStringLiteral("keywords")]);
+    it = m_properties.constFind(QStringLiteral("keywords"));
+    if (it != m_properties.constEnd())
+        writer.writeTextElement(cp, QStringLiteral("keywords"), it.value());
 
-    if (m_properties.contains(QStringLiteral("description")))
-        writer.writeTextElement(dc, QStringLiteral("description"), m_properties[QStringLiteral("description")]);
+    it = m_properties.constFind(QStringLiteral("description"));
+    if (it != m_properties.constEnd())
+        writer.writeTextElement(dc, QStringLiteral("description"), it.value());
 
-    writer.writeTextElement(cp, QStringLiteral("lastModifiedBy"), m_properties.contains(QStringLiteral("creator")) ? m_properties[QStringLiteral("creator")] : QStringLiteral("Qt Xlsx Library"));
+    it = m_properties.constFind(QStringLiteral("creator"));
+    writer.writeTextElement(cp, QStringLiteral("lastModifiedBy"), it != m_properties.constEnd() ? it.value() : QStringLiteral("Qt Xlsx Library"));
 
     writer.writeStartElement(dcterms, QStringLiteral("created"));
     writer.writeAttribute(xsi, QStringLiteral("type"), QStringLiteral("dcterms:W3CDTF"));
-    writer.writeCharacters(m_properties.contains(QStringLiteral("created")) ? m_properties[QStringLiteral("created")] : QDateTime::currentDateTime().toString(Qt::ISODate));
+    it = m_properties.constFind(QStringLiteral("created"));
+    writer.writeCharacters(it != m_properties.constEnd() ? it.value() : QDateTime::currentDateTime().toString(Qt::ISODate));
     writer.writeEndElement();//dcterms:created
 
     writer.writeStartElement(dcterms, QStringLiteral("modified"));
@@ -115,11 +101,13 @@ void DocPropsCore::saveToXmlFile(QIODevice *device) const
     writer.writeCharacters(QDateTime::currentDateTime().toString(Qt::ISODate));
     writer.writeEndElement();//dcterms:created
 
-    if (m_properties.contains(QStringLiteral("category")))
-        writer.writeTextElement(cp, QStringLiteral("category"), m_properties[QStringLiteral("category")]);
+    it = m_properties.constFind(QStringLiteral("category"));
+    if (it != m_properties.constEnd())
+        writer.writeTextElement(cp, QStringLiteral("category"), it.value());
 
-    if (m_properties.contains(QStringLiteral("status")))
-        writer.writeTextElement(cp, QStringLiteral("contentStatus"), m_properties[QStringLiteral("status")]);
+    it = m_properties.constFind(QStringLiteral("status"));
+    if (it != m_properties.constEnd())
+        writer.writeTextElement(cp, QStringLiteral("contentStatus"), it.value());
 
     writer.writeEndElement(); //cp:coreProperties
     writer.writeEndDocument();
@@ -133,35 +121,56 @@ bool DocPropsCore::loadFromXmlFile(QIODevice *device)
     const QString dc = QStringLiteral("http://purl.org/dc/elements/1.1/");
     const QString dcterms = QStringLiteral("http://purl.org/dc/terms/");
 
-    while (!reader.atEnd()) {
+    while (!reader.atEnd())
+    {
          QXmlStreamReader::TokenType token = reader.readNext();
-         if (token == QXmlStreamReader::StartElement) {
-             const QStringRef nsUri = reader.namespaceUri();
-             const QStringRef name = reader.name();
-             if (name == QStringLiteral("subject") && nsUri == dc) {
+
+         if (token == QXmlStreamReader::StartElement)
+         {
+
+             const auto& nsUri = reader.namespaceUri();
+             const auto& name = reader.name();
+
+             if (name == QStringLiteral("subject") && nsUri == dc)
+             {
                  setProperty(QStringLiteral("subject"), reader.readElementText());
-             } else if (name == QStringLiteral("title") && nsUri == dc) {
+             }
+             else if (name == QStringLiteral("title") && nsUri == dc)
+             {
                  setProperty(QStringLiteral("title"), reader.readElementText());
-             } else if (name == QStringLiteral("creator") && nsUri == dc) {
+             }
+             else if (name == QStringLiteral("creator") && nsUri == dc)
+             {
                  setProperty(QStringLiteral("creator"), reader.readElementText());
-             } else if (name == QStringLiteral("description") && nsUri == dc) {
+             }
+             else if (name == QStringLiteral("description") && nsUri == dc)
+             {
                  setProperty(QStringLiteral("description"), reader.readElementText());
-             } else if (name == QStringLiteral("keywords") && nsUri == cp) {
+             }
+             else if (name == QStringLiteral("keywords") && nsUri == cp)
+             {
                  setProperty(QStringLiteral("keywords"), reader.readElementText());
-             } else if (name == QStringLiteral("created") && nsUri == dcterms) {
+             }
+             else if (name == QStringLiteral("created") && nsUri == dcterms)
+             {
                  setProperty(QStringLiteral("created"), reader.readElementText());
-             } else if (name == QStringLiteral("category") && nsUri == cp) {
+             }
+             else if (name == QStringLiteral("category") && nsUri == cp)
+             {
                  setProperty(QStringLiteral("category"), reader.readElementText());
-             } else if (name == QStringLiteral("contentStatus") && nsUri == cp) {
+             }
+             else if (name == QStringLiteral("contentStatus") && nsUri == cp)
+             {
                  setProperty(QStringLiteral("status"), reader.readElementText());
              }
          }
 
-         if (reader.hasError()) {
-             qDebug()<<"Error when read doc props core file."<<reader.errorString();
+         if (reader.hasError())
+         {
+             qDebug() << "Error when read doc props core file." << reader.errorString();
          }
     }
     return true;
 }
 
-} //namespace
+QT_END_NAMESPACE_XLSX

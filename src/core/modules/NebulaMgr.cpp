@@ -54,7 +54,7 @@
 
 // Define version of valid Stellarium DSO Catalog
 // This number must be incremented each time the content or file format of the stars catalogs change
-static const QString StellariumDSOCatalogVersion = "3.12";
+static const QString StellariumDSOCatalogVersion = "3.13";
 
 void NebulaMgr::setLabelsColor(const Vec3f& c) {Nebula::labelColor = c; emit labelsColorChanged(c);}
 const Vec3f NebulaMgr::getLabelsColor(void) const {return Nebula::labelColor;}
@@ -509,9 +509,9 @@ struct DrawNebulaFuncObject
 
 		if (n->majorAxisSize>angularSizeLimit || n->majorAxisSize==0.f || mag <= maxMagHints)
 		{
-			sPainter->getProjector()->project(n->XYZ,n->XY);
+			sPainter->getProjector()->project(n->getJ2000EquatorialPos(core),n->XY);
 			n->drawLabel(*sPainter, maxMagLabels);
-			n->drawHints(*sPainter, maxMagHints);
+			n->drawHints(*sPainter, maxMagHints, core);
 			n->drawOutlines(*sPainter, maxMagHints);
 		}
 	}
@@ -749,8 +749,10 @@ NebulaP NebulaMgr::search(const QString& name)
 void NebulaMgr::loadNebulaSet(const QString& setName)
 {
 	QString srcCatalogPath		= StelFileMgr::findFile("nebulae/" + setName + "/catalog.txt");
-	QString dsoCatalogPath		= StelFileMgr::findFile("nebulae/" + setName + "/catalog.dat");
-	QString dsoOutlinesPath		= StelFileMgr::findFile("nebulae/" + setName + "/outlines.dat");
+	QString dsoCatalogPath	= StelFileMgr::findFile("nebulae/" + setName + "/catalog-" + StellariumDSOCatalogVersion + ".dat");
+	if (dsoCatalogPath.isEmpty()) // Extended edition is not exist, let's try find standard edition
+		dsoCatalogPath		= StelFileMgr::findFile("nebulae/" + setName + "/catalog.dat");
+	QString dsoOutlinesPath	= StelFileMgr::findFile("nebulae/" + setName + "/outlines.dat");
 
 	dsoArray.clear();
 	dsoIndex.clear();
@@ -776,10 +778,10 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 		loadDSOOutlines(dsoOutlinesPath);
 }
 
-// Look for a nebulae by XYZ coords
+// Look for a nebula by XYZ coords
 NebulaP NebulaMgr::search(const Vec3d& apos)
 {
-	Vec3d pos = apos;
+	Vec3d pos(apos);
 	pos.normalize();
 	NebulaP plusProche;
 	double anglePlusProche=0.0;
@@ -791,7 +793,7 @@ NebulaP NebulaMgr::search(const Vec3d& apos)
 			plusProche=n;
 		}
 	}
-	if (anglePlusProche>0.999)
+	if (anglePlusProche>0.999) // object within ~2.5 degrees
 	{
 		return plusProche;
 	}
@@ -1681,7 +1683,7 @@ void NebulaMgr::updateSkyCulture(const QString& skyCultureDir)
 
 		// lines which look like records - we use the RE to extract the fields
 		// which will be available in recRx.capturedTexts()
-		QRegExp recRx("^\\s*([\\w\\s]+)\\s*\\|_[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
+		QRegExp recRx("^\\s*([\\w\\s]+)\\s*\\|[_]*[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
 
 		QString record, dsoId, nativeName;
 		int totalRecords=0;

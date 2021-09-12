@@ -285,7 +285,9 @@ void ArchaeoLines::init()
 						       QPixmap(":/archaeoLines/bt_archaeolines_on.png"),
 						       QPixmap(":/archaeoLines/bt_archaeolines_off.png"),
 						       QPixmap(":/graphicGui/miscGlow32x32.png"),
-						       "actionShow_ArchaeoLines");
+						       "actionShow_ArchaeoLines",
+						       false,
+						       "actionShow_ArchaeoLines_dialog");
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		}
 	}
@@ -1490,10 +1492,11 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 
 	// Initialize a painter and set OpenGL state
 	StelPainter sPainter(prj);
+	const float ppx = static_cast<float>(sPainter.getProjector()->getDevicePixelsPerPixel());
 	sPainter.setBlending(true);
 	sPainter.setLineSmooth(true);
 	const float oldLineWidth=sPainter.getLineWidth();
-	sPainter.setLineWidth(GETSTELMODULE(ArchaeoLines)->getLineWidth());
+	sPainter.setLineWidth(GETSTELMODULE(ArchaeoLines)->getLineWidth()*ppx);
 	sPainter.setColor(color[0], color[1], color[2], intensity*fader.getInterstate());
 	//Vec4f textColor(color[0], color[1], color[2], intensity*fader.getInterstate());
 

@@ -447,13 +447,21 @@ class Translations
 		N_("Bright variable stars");
 		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
 		N_("Bright stars with high proper motion");
+		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
+		N_("Variable stars: Algol-type eclipsing systems");
+		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
+		N_("Variable stars: the classical cepheids");
+		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
+		N_("Bright carbon stars");
+		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
+		N_("Bright barium stars");
 		
 		// =====================================================================
 		// Constellation cultures
 		// TRANSLATORS: Name of the sky culture
 		N_("Al-Sufi");
 		// TRANSLATORS: Name of the sky culture
-		N_("Almagest");
+		N_("Greek (Almagest)");
 		// TRANSLATORS: Name of the sky culture
 		N_("Anutan");
 		// TRANSLATORS: Name of the sky culture
@@ -527,6 +535,8 @@ class Translations
 		// TRANSLATORS: Name of the sky culture
 		N_("Western (Sky & Telescope)");
 		// TRANSLATORS: Name of the sky culture
+		N_("Western (Sternenkarten)");
+		// TRANSLATORS: Name of the sky cultur
 		N_("Northern Andes");
 		// TRANSLATORS: Name of the sky culture
 		N_("Babylonian (MUL.APIN)");
@@ -693,7 +703,7 @@ class Translations
 		N_("Phobos eclipsing the Sun as seen from Olympus Mons on Jan 2, 2021.");
 		N_("Phobos occultations of Earth are common, as are occultations of Jupiter. But occultations of both on the same day are very rare. Here's one that takes place 1/23/2048. In real speed.");
 		N_("Phobos races ahead of Mars and transits the sun, passes through it and then retrogrades back towards the sun and just partially transits it again (only seen in the southern hemisphere of Deimos), then Mars totally eclipses the sun while Phobos transits in darkness between Mars and Deimos. When Phobos emerges from Mars it is still eclipsed and dimmed in Mars' shadow, only to light up later.");
-		N_("Screensaver of various happenings in the Solar System. 300 events in all!");
+		N_("Screensaver of various happenings in the Solar System. 313 events in all!");
 		N_("A tour of the western constellations.");
 		N_("A tour of the constellations of the selected sky culture.");
 		N_("Look at the Sun from big planets of Solar System and Pluto.");

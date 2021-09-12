@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>664</width>
+    <width>680</width>
     <height>634</height>
    </rect>
   </property>
@@ -444,31 +444,7 @@
              </property>
              <item row="0" column="0">
               <layout class="QGridLayout" name="EphemerisGridLayout">
-               <item row="1" column="1">
-                <widget class="QLabel" name="de431label">
-                 <property name="text">
-                  <string>Not installed</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="1">
-                <widget class="QLabel" name="de430label">
-                 <property name="text">
-                  <string>Not installed</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QCheckBox" name="de431checkBox">
-                 <property name="toolTip">
-                  <string>DE431 provides position data for years -13000...+17000. For special applications only.</string>
-                 </property>
-                 <property name="text">
-                  <string>Use DE431 (long-time data)</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="0">
+               <item row="2" column="0">
                 <widget class="QCheckBox" name="de430checkBox">
                  <property name="toolTip">
                   <string>DE430 provides highest accuracy, only for years 1550...2650.</string>
@@ -478,13 +454,65 @@
                  </property>
                 </widget>
                </item>
-               <item row="2" column="0" colspan="2">
+               <item row="3" column="1">
+                <widget class="QLabel" name="de431label">
+                 <property name="text">
+                  <string>Not installed</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLabel" name="de430label">
+                 <property name="text">
+                  <string>Not installed</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QCheckBox" name="de431checkBox">
+                 <property name="toolTip">
+                  <string>DE431 provides position data for years -13000...+17000. For special applications only.</string>
+                 </property>
+                 <property name="text">
+                  <string>Use DE431 (long-time data)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QCheckBox" name="de441checkBox">
+                 <property name="text">
+                  <string>Use DE441 (long-time data)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0" colspan="2">
                 <widget class="QLabel" name="label_VSOP87used">
                  <property name="toolTip">
                   <string>Using VSOP87 is recommended for years -4000...+8000 only, but delivers useful positions outside this range.</string>
                  </property>
                  <property name="text">
                   <string>VSOP87/ELP2000-82B is used when these are not installed or not activated.</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QCheckBox" name="de440checkBox">
+                 <property name="text">
+                  <string>Use DE440 (high accuracy)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="de441label">
+                 <property name="text">
+                  <string>Not installed</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="de440label">
+                 <property name="text">
+                  <string>Not installed</string>
                  </property>
                 </widget>
                </item>
@@ -1142,12 +1170,12 @@
               </widget>
              </item>
              <item row="5" column="2">
-              <widget class="QCheckBox" name="showBookmarksButtonCheckBox">
+              <widget class="QCheckBox" name="showObsListButtonCheckBox">
                <property name="toolTip">
                 <string>Enable a feature to store favorite views.</string>
                </property>
                <property name="text">
-                <string>Bookmarks</string>
+                <string>Observing lists</string>
                </property>
               </widget>
              </item>
@@ -1817,6 +1845,138 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
+             <item row="12" column="1">
+              <layout class="QHBoxLayout" name="horizontalLayout_13">
+               <item>
+                <widget class="QCheckBox" name="enableKeysNavigationCheckBox">
+                 <property name="toolTip">
+                  <string>Allow keyboard to pan and zoom</string>
+                 </property>
+                 <property name="text">
+                  <string>Enable keyboard navigation</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_3">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QPushButton" name="editShortcutsPushButton">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="toolTip">
+                  <string>Edit keyboard shortcuts...</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="../../data/gui/guiRes.qrc">
+                   <normaloff>:/graphicGui/uibtSettings.png</normaloff>
+                   <disabledoff>:/graphicGui/uibtSettings-disabled.png</disabledoff>:/graphicGui/uibtSettings.png</iconset>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="15" column="1">
+              <widget class="QCheckBox" name="enableMouseNavigationCheckBox">
+               <property name="toolTip">
+                <string>Allow mouse to pan (drag) and zoom (mousewheel)</string>
+               </property>
+               <property name="text">
+                <string>Enable mouse navigation</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QCheckBox" name="selectSingleConstellationButton">
+               <property name="toolTip">
+                <string>Hide other constellations when you click one</string>
+               </property>
+               <property name="statusTip">
+                <string>Hide other constellations when you click one</string>
+               </property>
+               <property name="text">
+                <string>Select single constellation</string>
+               </property>
+              </widget>
+             </item>
+             <item row="16" column="1">
+              <layout class="QHBoxLayout" name="horizontalLayout_15">
+               <item>
+                <widget class="QToolButton" name="overwriteTextColorButton">
+                 <property name="toolTip">
+                  <string>Info text color for overwrite</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="overwriteTextColorCheckBox">
+                 <property name="toolTip">
+                  <string>Set one color for text in info panel for all objects</string>
+                 </property>
+                 <property name="text">
+                  <string>Overwrite text color</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="2" column="3">
+              <widget class="QCheckBox" name="topocentricCheckBox">
+               <property name="toolTip">
+                <string>Activate to view as seen from surface of the planet (recommended). If switched off, display planetocentric view.</string>
+               </property>
+               <property name="text">
+                <string>Topocentric coordinates</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="3">
+              <widget class="QCheckBox" name="nutationCheckBox">
+               <property name="toolTip">
+                <string>Nutation is a small wobble of Earth's axis, amounting to a few arcseconds.</string>
+               </property>
+               <property name="text">
+                <string>Include nutation</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="1">
+              <widget class="QCheckBox" name="autoEnableEnvironmentCheckBox">
+               <property name="toolTip">
+                <string>Auto-enable atmosphere and landscape when selecting a celestial body in the location window.</string>
+               </property>
+               <property name="text">
+                <string>Auto-enabling for the environment</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="sphericMirrorCheckbox">
+               <property name="toolTip">
+                <string>Spheric mirror distortion is used when projecting Stellarium onto a spheric mirror for low-cost planetarium systems.</string>
+               </property>
+               <property name="text">
+                <string>Spheric mirror distortion</string>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
              <item row="11" column="1">
               <layout class="QHBoxLayout" name="horizontalLayout_10">
                <item>
@@ -1831,15 +1991,61 @@
                </item>
               </layout>
              </item>
-             <item row="1" column="3">
-              <widget class="QCheckBox" name="decimalDegreeCheckBox">
+             <item row="17" column="1">
+              <widget class="QCheckBox" name="focusOnDaySpinnerCheckBox">
                <property name="toolTip">
-                <string>Use decimal degrees for coordinates</string>
+                <string>Force date/time tab and focus on day input when activating date panel</string>
                </property>
                <property name="text">
-                <string>Use decimal degrees</string>
+                <string>Set keyboard focus to day input</string>
                </property>
               </widget>
+             </item>
+             <item row="4" column="3">
+              <layout class="QHBoxLayout" name="aberrationHorizontalLayout">
+               <item>
+                <widget class="QCheckBox" name="aberrationCheckBox">
+                 <property name="toolTip">
+                  <string>Annual aberration is an annual wobble in positions, amounting to max. about 20 arcseconds for observers on Earth.</string>
+                 </property>
+                 <property name="text">
+                  <string>Include aberration</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="aberrationSpinBox">
+                 <property name="toolTip">
+                  <string>Exaggerate aberration (for didactic explanations)</string>
+                 </property>
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                 <property name="maximum">
+                  <double>5.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.100000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>1.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_4">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
              </item>
              <item row="18" column="1" rowspan="2" colspan="3">
               <layout class="QHBoxLayout" name="fontHorizontalLayout">
@@ -1932,34 +2138,53 @@
                </item>
               </layout>
              </item>
-             <item row="16" column="1">
-              <layout class="QHBoxLayout" name="horizontalLayout_15">
-               <item>
-                <widget class="QToolButton" name="overwriteTextColorButton">
-                 <property name="toolTip">
-                  <string>Info text color for overwrite</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="overwriteTextColorCheckBox">
-                 <property name="toolTip">
-                  <string>Set one color for text in info panel for all objects</string>
-                 </property>
-                 <property name="text">
-                  <string>Overwrite text color</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="8" column="1">
-              <widget class="QCheckBox" name="autoEnableEnvironmentCheckBox">
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="diskViewportCheckbox">
                <property name="toolTip">
-                <string>Auto-enable atmosphere and landscape when selecting a celestial body in the location window.</string>
+                <string>Mask out everything outside a central circle in the main view</string>
                </property>
                <property name="text">
-                <string>Auto-enabling for the environment</string>
+                <string>Disc viewport</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="3">
+              <widget class="QCheckBox" name="decimalDegreeCheckBox">
+               <property name="toolTip">
+                <string>Use decimal degrees for coordinates</string>
+               </property>
+               <property name="text">
+                <string>Use decimal degrees</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QCheckBox" name="gravityLabelCheckbox">
+               <property name="toolTip">
+                <string>Align labels with the screen center</string>
+               </property>
+               <property name="text">
+                <string>Gravity labels</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="3">
+              <widget class="QCheckBox" name="autoChangeLandscapesCheckBox">
+               <property name="toolTip">
+                <string>Automatic change of landscape when planet is changed</string>
+               </property>
+               <property name="text">
+                <string>Auto select landscapes</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="3">
+              <widget class="QCheckBox" name="azimuthFromSouthcheckBox">
+               <property name="toolTip">
+                <string>Activate this option to calculate azimuth from south towards west.</string>
+               </property>
+               <property name="text">
+                <string>Azimuth from South</string>
                </property>
               </widget>
              </item>
@@ -1973,28 +2198,36 @@
                </property>
               </widget>
              </item>
-             <item row="2" column="3">
-              <widget class="QCheckBox" name="topocentricCheckBox">
+             <item row="4" column="1">
+              <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox">
                <property name="toolTip">
-                <string>Activate to view as seen from surface of the planet (recommended). If switched off, display planetocentric view.</string>
+                <string>When enabled, the &quot;auto zoom out&quot; key will also set the initial viewing direction</string>
                </property>
                <property name="text">
-                <string>Topocentric coordinates</string>
+                <string>Auto-direction at zoom out</string>
                </property>
               </widget>
              </item>
-             <item row="1" column="1">
-              <widget class="QCheckBox" name="diskViewportCheckbox">
-               <property name="toolTip">
-                <string>Mask out everything outside a central circle in the main view</string>
-               </property>
-               <property name="text">
-                <string>Disc viewport</string>
-               </property>
-              </widget>
+             <item row="16" column="3">
+              <layout class="QHBoxLayout" name="horizontalLayout_14">
+               <item>
+                <widget class="QToolButton" name="daylightTextColorButton">
+                 <property name="toolTip">
+                  <string>Info text color at daylight</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_2">
+                 <property name="text">
+                  <string>Info text color at daylight</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
              <item row="15" column="3">
-              <layout class="QHBoxLayout" name="_8">
+              <layout class="QHBoxLayout" name="mouseTimeoutLayout">
                <item>
                 <widget class="QCheckBox" name="mouseTimeoutCheckbox">
                  <property name="toolTip">
@@ -2046,16 +2279,6 @@
               </layout>
              </item>
              <item row="12" column="3">
-              <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox">
-               <property name="toolTip">
-                <string>When enabled, the &quot;auto zoom out&quot; key will also set the initial viewing direction</string>
-               </property>
-               <property name="text">
-                <string>Auto-direction at zoom out</string>
-               </property>
-              </widget>
-             </item>
-             <item row="17" column="3">
               <widget class="QCheckBox" name="kineticScrollingCheckBox">
                <property name="toolTip">
                 <string>Kinetic scrolling means dragging text panels directly instead of dragging window handles.</string>
@@ -2064,155 +2287,6 @@
                 <string>Use kinetic scrolling</string>
                </property>
               </widget>
-             </item>
-             <item row="16" column="3">
-              <layout class="QHBoxLayout" name="horizontalLayout_14">
-               <item>
-                <widget class="QToolButton" name="daylightTextColorButton">
-                 <property name="toolTip">
-                  <string>Info text color at daylight</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_2">
-                 <property name="text">
-                  <string>Info text color at daylight</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="15" column="1">
-              <widget class="QCheckBox" name="enableMouseNavigationCheckBox">
-               <property name="toolTip">
-                <string>Allow mouse to pan (drag) and zoom (mousewheel)</string>
-               </property>
-               <property name="text">
-                <string>Enable mouse navigation</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QCheckBox" name="gravityLabelCheckbox">
-               <property name="toolTip">
-                <string>Align labels with the screen center</string>
-               </property>
-               <property name="text">
-                <string>Gravity labels</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QCheckBox" name="selectSingleConstellationButton">
-               <property name="toolTip">
-                <string>Hide other constellations when you click one</string>
-               </property>
-               <property name="statusTip">
-                <string>Hide other constellations when you click one</string>
-               </property>
-               <property name="text">
-                <string>Select single constellation</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="3">
-              <widget class="QCheckBox" name="azimuthFromSouthcheckBox">
-               <property name="toolTip">
-                <string>Activate this option to calculate azimuth from south towards west.</string>
-               </property>
-               <property name="text">
-                <string>Azimuth from South</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="3">
-              <widget class="QCheckBox" name="nutationCheckBox">
-               <property name="toolTip">
-                <string>Nutation is a small wobble of Earth's axis, amounting to a few arcseconds.</string>
-               </property>
-               <property name="text">
-                <string>Include nutation</string>
-               </property>
-              </widget>
-             </item>
-             <item row="8" column="3">
-              <widget class="QCheckBox" name="autoChangeLandscapesCheckBox">
-               <property name="toolTip">
-                <string>Automatic change of landscape when planet is changed</string>
-               </property>
-               <property name="text">
-                <string>Auto select landscapes</string>
-               </property>
-              </widget>
-             </item>
-             <item row="17" column="1">
-              <widget class="QCheckBox" name="focusOnDaySpinnerCheckBox">
-               <property name="toolTip">
-                <string>Force date/time tab and focus on day input when activating date panel</string>
-               </property>
-               <property name="text">
-                <string>Set keyboard focus to day input</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QCheckBox" name="sphericMirrorCheckbox">
-               <property name="toolTip">
-                <string>Spheric mirror distortion is used when projecting Stellarium onto a spheric mirror for low-cost planetarium systems.</string>
-               </property>
-               <property name="text">
-                <string>Spheric mirror distortion</string>
-               </property>
-               <property name="checkable">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="12" column="1">
-              <layout class="QHBoxLayout" name="horizontalLayout_13">
-               <item>
-                <widget class="QCheckBox" name="enableKeysNavigationCheckBox">
-                 <property name="toolTip">
-                  <string>Allow keyboard to pan and zoom</string>
-                 </property>
-                 <property name="text">
-                  <string>Enable keyboard navigation</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_3">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QPushButton" name="editShortcutsPushButton">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="toolTip">
-                  <string>Edit keyboard shortcuts...</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="../../data/gui/guiRes.qrc">
-                   <normaloff>:/graphicGui/uibtSettings.png</normaloff>
-                   <disabledoff>:/graphicGui/uibtSettings-disabled.png</disabledoff>:/graphicGui/uibtSettings.png</iconset>
-                 </property>
-                </widget>
-               </item>
-              </layout>
              </item>
             </layout>
            </widget>

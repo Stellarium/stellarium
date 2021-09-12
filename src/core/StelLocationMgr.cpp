@@ -43,6 +43,10 @@
 
 TimezoneNameMap StelLocationMgr::locationDBToIANAtranslations;
 
+QList<GeoRegion> StelLocationMgr::regions;
+QMap<QString, QString> StelLocationMgr::countryCodeToRegionMap;
+QMap<QString, QString> StelLocationMgr::countryCodeToStringMap;
+
 #ifdef ENABLE_GPS
 #ifdef ENABLE_LIBGPS
 LibGPSLookupHelper::LibGPSLookupHelper(QObject *parent)
@@ -462,6 +466,8 @@ StelLocationMgr::StelLocationMgr()
 
 	QSettings* conf = StelApp::getInstance().getSettings();
 
+	loadCountries();
+	loadRegions();
 	// The line below allows to re-generate the location file, you still need to gunzip it manually afterward.
 	if (conf->value("devel/convert_locations_list", false).toBool())
 		generateBinaryLocationFile("data/base_locations.txt", false, "data/base_locations.bin");
@@ -470,7 +476,7 @@ StelLocationMgr::StelLocationMgr()
 	locations.unite(loadCities("data/user_locations.txt", true));
 	
 	// Init to Paris France because it's the center of the world.
-	lastResortLocation = locationForString(conf->value("init_location/last_location", "Paris, France").toString());
+	lastResortLocation = locationForString(conf->value("init_location/last_location", "Paris, Western Europe").toString());
 }
 
 StelLocationMgr::~StelLocationMgr()
@@ -1001,7 +1007,7 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 			StelLocation loc;
 			loc.name    = (ipCity.isEmpty() ? QString("%1, %2").arg(latitude).arg(longitude) : ipCity);
 			loc.state   = (ipRegion.isEmpty() ? "IPregion"  : ipRegion);
-			loc.country = StelLocaleMgr::countryCodeToString(ipCountryCode.isEmpty() ? "" : ipCountryCode.toLower());
+			loc.region = pickRegionFromCountryCode(ipCountryCode.isEmpty() ? "" : ipCountryCode.toLower());
 			loc.role    = QChar(0x0058); // char 'X'
 			loc.population = 0;
 			loc.latitude = latitude;
@@ -1051,7 +1057,7 @@ LocationMap StelLocationMgr::pickLocationsNearby(const QString planetName, const
 	return results;
 }
 
-LocationMap StelLocationMgr::pickLocationsInCountry(const QString country)
+LocationMap StelLocationMgr::pickLocationsInRegion(const QString region)
 {
 	QMap<QString, StelLocation> results;
 	QMapIterator<QString, StelLocation> iter(locations);
@@ -1059,12 +1065,148 @@ LocationMap StelLocationMgr::pickLocationsInCountry(const QString country)
 	{
 		iter.next();
 		const StelLocation *loc=&iter.value();
-		if (loc->country == country)
+		if (loc->region == region)
 		{
 			results.insert(iter.key(), iter.value());
 		}
 	}
 	return results;
+}
+
+void StelLocationMgr::loadCountries()
+{
+	// Load ISO 3166-1 two-letter country codes from file
+	// The format is "[code][tab][country name containing spaces][newline]"
+	QFile textFile(StelFileMgr::findFile("data/iso3166.tab"));
+	if(textFile.open(QFile::ReadOnly | QFile::Text))
+	{
+		QString line;
+		int readOk=0;
+		while(!textFile.atEnd())
+		{
+			line = QString::fromUtf8(textFile.readLine());
+			if (line.startsWith("//") || line.startsWith("#") || line.isEmpty())
+				continue;
+
+			if (!line.isEmpty())
+			{
+				#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+				QStringList list=line.split("\t", Qt::KeepEmptyParts);
+				#else
+				QStringList list=line.split("\t", QString::KeepEmptyParts);
+				#endif
+				QString code = list.at(0).trimmed().toLower();
+				QString country = list.at(1).trimmed().replace("&", "and");
+				countryCodeToStringMap.insert(code, country);
+				readOk++;
+			}
+		}
+		textFile.close();
+		if (readOk>0)
+			qDebug() << "Loaded" << readOk << "countries";
+		else
+			qDebug() << "ERROR: List of countries was not loaded!";
+	}
+}
+
+void StelLocationMgr::loadRegions()
+{
+	QFile geoFile(StelFileMgr::findFile("data/regions-geoscheme.tab"));
+	if(geoFile.open(QFile::ReadOnly | QFile::Text))
+	{
+		QString line;
+		int readOk=0;
+		regions.clear();
+		countryCodeToRegionMap.clear();
+		while(!geoFile.atEnd())
+		{
+			line = QString::fromUtf8(geoFile.readLine());
+			if (line.startsWith("//") || line.startsWith("#") || line.isEmpty())
+				continue;
+
+			if (!line.isEmpty())
+			{
+				#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+				QStringList list=line.split("\t", Qt::KeepEmptyParts);
+				#else
+				QStringList list=line.split("\t", QString::KeepEmptyParts);
+				#endif
+
+				QString regionName = list.at(2).trimmed();
+				QString countries;
+				if (list.size()>3)
+					countries = list.at(3).trimmed().toLower();
+				GeoRegion region;
+				region.code = list.at(0).trimmed().toInt();
+				region.planet = list.at(1).trimmed();
+				region.regionName = regionName;
+				region.countries = countries;
+
+				if (!countries.isEmpty())
+				{
+					#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+					QStringList country=countries.split(",", Qt::KeepEmptyParts);
+					#else
+					QStringList country=countries.split(",", QString::KeepEmptyParts);
+					#endif
+					for (int i = 0; i<country.size(); i++)
+					{
+						countryCodeToRegionMap.insert(country.at(i), regionName);
+					}
+				}
+
+				regions.push_back(region);
+				readOk++;
+			}
+		}
+		geoFile.close();
+		if (readOk>0)
+			qDebug() << "Loaded" << readOk << "regions";
+		else
+			qDebug() << "ERROR: List of regions was not loaded!";
+	}
+}
+
+QStringList StelLocationMgr::getRegionNames(const QString& planet) const
+{
+	QStringList allregions;
+	if (planet.isEmpty())
+	{
+		for (int i=0;i<regions.size();i++)
+			allregions.append(regions.at(i).regionName);
+	}
+	else
+	{
+		for (int i=0;i<regions.size();i++)
+		{
+			if (planet.contains(regions.at(i).planet, Qt::CaseInsensitive) && !planet.contains("Observer", Qt::CaseInsensitive))
+				allregions.append(regions.at(i).regionName);
+		}
+	}
+
+	return allregions;
+}
+
+QString StelLocationMgr::pickRegionFromCountryCode(const QString countryCode)
+{
+	QMap<QString, QString>::ConstIterator i = countryCodeToRegionMap.find(countryCode);
+	return (i!=countryCodeToRegionMap.constEnd()) ? i.value() : QString();
+}
+
+QString StelLocationMgr::pickRegionFromCountry(const QString country)
+{
+	return pickRegionFromCountryCode(countryCodeToStringMap.key(country, QString()));
+}
+
+QString StelLocationMgr::pickRegionFromCode(int regionCode)
+{
+	QString region;
+	for(int i=0;i<regions.size();i++)
+	{
+		if (regions.at(i).code == regionCode)
+			region = regions.at(i).regionName;
+	}
+	return region;
 }
 
 // Check timezone string and return either the same or the corresponding string that we use in the Stellarium location database.

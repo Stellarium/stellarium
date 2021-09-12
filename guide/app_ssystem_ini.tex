@@ -114,7 +114,7 @@ accuracy of this model is unfortunately untraceable.  However, the IAU
 Working Group on Cartographic Coordinates and Rotational Elements
 (WGCCRE) and modern sources like \citet{ESAA:2013} use rotational
 elements with respect to the ICRF (see section
-\ref{sec:Concepts:Equatorial}). Therefore, starting with version 0.21,\newFeature{v.0.21}
+\ref{sec:Concepts:Equatorial}). Therefore, starting with version 0.21,\newFeature{0.21}
 Stellarium uses these more modern data and can now also show axes with
 precessional or other motions. Data for some planet moons are
 unfortunately still not available in this WGCCRE format, and therefore
@@ -164,7 +164,7 @@ All planet moons are defined only in \file{ssystem\_major.ini}.
 Moons are special in that they orbit another planet. Therefore, the
 rotational elements used to be specified relative to the equatorial
 plane of the parent planet, and \texttt{orbit\_SemiMajorAxis} are
-specified in kilometers.  However, \newFeature{v0.21} as for the
+specified in kilometers.  However, \newFeature{0.21} as for the
 planets (see section \ref{sec:ssystem.ini:Planet} above), current
 \indexterm{IAU} reference material gives axis orientation with right
 ascension and declination values for the pole in ICRF coordinates,
@@ -219,7 +219,7 @@ where
   \item[type] \texttt{moon}
 
   \item[parent] English name of planet or parent body.
-  \item[iau\_moon\_number] a short label (string) consisting of the planet's initial and the moon's Roman number in order of discovery.\newFeature{v0.16.1}
+  \item[iau\_moon\_number] a short label (string) consisting of the planet's initial and the moon's Roman number in order of discovery.\newFeature{0.16.1}
 
   \item[coord\_func] Must be \texttt{kepler\_orbit} (default, can be left away) for moons with orbital elements given, or \texttt{<name>\_special} for 
   \item[orbit\_AscendingNode] $\Omega$
@@ -243,7 +243,7 @@ where
   \item[color] for drawing halo (default: 1,1,1)
   \item[halo] [=true|false] to draw a simple diffuse dot when zoomed out. Default: \texttt{true}
   \item[tex\_map] name of spherical texture map. Many moons have been mapped by visiting spacecraft! For many other moons, Stellarium applies an inverted Lunar texture image.
-  \item[model] \newFeature{v0.16.0}(optional) name of a 3D model for a non-spherical body in the \file{model} subdirectory of the program directory. 
+  \item[model] \newFeature{0.16.0}(optional) name of a 3D model for a non-spherical body in the \file{model} subdirectory of the program directory. 
 
   \item[rot\_equator\_ascending\_node] \emph{deprecated}
   \item[rot\_obliquity] \emph{deprecated}
@@ -294,7 +294,7 @@ Note the inclination and mean longitude of 90 degrees, and that it is \texttt{hi
 \paragraph{Planet Observers}
 \label{sec:ssystem.ini:PlanetObserver}
 
-There are other ``observer'' locations for all planets \newFeature{v0.19.2} which have moons: Earth, Mars, Jupiter, Saturn, Uranus, and Neptune.
+There are other ``observer'' locations for all planets \newFeature{0.19.2} which have moons: Earth, Mars, Jupiter, Saturn, Uranus, and Neptune.
 They have all been provided as neutral view locations above the Northern hemisphere of
 the respective planet. For example:
 \begin{configfile}
@@ -369,7 +369,7 @@ Elements for rotational axis may be given just like for planets when
 they are known. It is recommended to use the modern specification
 (elements \texttt{rot\_pole\_...}).
 
-A few asteroids have been visited by spacecraft, \newFeature{v0.16.0}
+A few asteroids have been visited by spacecraft, \newFeature{0.16.0}
 and for many other asteroids visual observations of stellar occultations 
 by asteroids and light curve measurements have enabled researchers to derive 
 3D shape models of asteroids. If a model is available in the \file{models} 
@@ -449,7 +449,7 @@ duration of \texttt{orbit\_good}, which means the comet is only displayed 780
 days before and after perihelion.
 
 Some comets have been visited by spacecraft so that shape models of their cores 
-may be available and can be configured with a \texttt{model} entry.\newFeature{v0.16.0}
+may be available and can be configured with a \texttt{model} entry.\newFeature{0.16.0}
 
 \paragraph{Parabolic/Hyperbolic Comet}
 \label{sec:ssystem.ini:Comet:Parabolic}

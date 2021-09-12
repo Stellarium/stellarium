@@ -34,13 +34,15 @@
 #include <QSettings>
 #include <QStringList>
 
+//! @class ArtificialPlanet Auxiliary construct used during transitions from one planet to another.
 class ArtificialPlanet : public Planet
 {
 public:
 	ArtificialPlanet(const PlanetP& orig);
 	void setDest(const PlanetP& dest);
 	void computeAverage(double f1);
-	virtual void computePosition(const double dateJDE) Q_DECL_OVERRIDE;
+	//! This does nothing, but avoids a crash.
+	virtual void computePosition(const double dateJDE, const Vec3d &aberrationPush) Q_DECL_OVERRIDE;
 private:
 	void setRot(const Vec3d &r);
 	static Vec3d getRot(const Planet* p);
@@ -138,10 +140,10 @@ Vec3d ArtificialPlanet::getRot(const Planet* p)
 	return r;
 }
 
-void ArtificialPlanet::computePosition(const double dateJDE)
+void ArtificialPlanet::computePosition(const double dateJDE, const Vec3d &aberrationPush)
 {
 	Q_UNUSED(dateJDE)
-	// This does nothing, but avoids a crash.
+	Q_UNUSED(aberrationPush)
 }
 
 void ArtificialPlanet::computeAverage(double f1)

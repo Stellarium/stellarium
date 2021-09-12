@@ -72,7 +72,7 @@ StelPluginInfo SatellitesStelPluginInterface::getPluginInfo() const
 	info.id = "Satellites";
 	info.displayedName = N_("Satellites");
 	info.authors = "Matthew Gates, Jose Luis Canales";
-	info.contact = "https://github.com/Stellarium/stellarium";
+	info.contact = STELLARIUM_DEV_URL;
 	info.description = N_("Prediction of artificial satellite positions in Earth orbit based on NORAD TLE data");
 	info.version = SATELLITES_PLUGIN_VERSION;
 	info.license = SATELLITES_PLUGIN_LICENSE;
@@ -153,9 +153,9 @@ void Satellites::init()
 
 		// key bindings and other actions		
 		QString satGroup = N_("Satellites");
-		addAction("actionShow_Satellite_Hints", satGroup, N_("Satellite hints"), "flagHintsVisible", "Ctrl+Z");
+		addAction("actionShow_Satellite_Hints", satGroup, N_("Artificial satellites"), "flagHintsVisible", "Ctrl+Z");
 		addAction("actionShow_Satellite_Labels", satGroup, N_("Satellite labels"), "flagLabelsVisible", "Alt+Shift+Z");
-		addAction("actionShow_Satellite_ConfigDialog_Global", satGroup, N_("Satellites configuration window"), configDialog, "visible", "Alt+Z");		
+		addAction("actionShow_Satellite_ConfigDialog_Global", satGroup, N_("Show settings dialog"), configDialog, "visible", "Alt+Z");
 
 		// Gui toolbar button
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -165,7 +165,9 @@ void Satellites::init()
 						       QPixmap(":/satellites/bt_satellites_on.png"),
 						       QPixmap(":/satellites/bt_satellites_off.png"),
 						       QPixmap(":/graphicGui/miscGlow32x32.png"),
-						       "actionShow_Satellite_Hints");
+						       "actionShow_Satellite_Hints",
+						       false,
+						       "actionShow_Satellite_ConfigDialog_Global");
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		}
 	}
@@ -224,7 +226,7 @@ void Satellites::translateData()
 	for (const auto& sat : qAsConst(satellites))
 	{
 		if (sat->initialized)
-			sat->recomputeEpochTLE();
+			sat->recomputeSatData();
 	}
 }
 
@@ -863,7 +865,7 @@ bool Satellites::saveDataMap(const QVariantMap& map, QString path)
 	}
 	else
 	{
-		qDebug() << "[Satellites] writing to:" << QDir::toNativeSeparators(path);
+		//qDebug() << "[Satellites] writing to:" << QDir::toNativeSeparators(path);
 		StelJsonParser::write(map, &jsonFile);
 		jsonFile.close();
 		return true;
@@ -1131,6 +1133,21 @@ bool Satellites::add(const TleData& tleData)
 		{
 			satGroups.append("gps");
 			satGroups.append("navigation");
+		}
+		if (tleData.name.startsWith("IRNSS"))
+		{
+			satGroups.append("irnss");
+			satGroups.append("navigation");
+		}
+		if (tleData.name.startsWith("QZS"))
+		{
+			satGroups.append("qzss");
+		}
+		if (tleData.name.startsWith("TDRS"))
+		{
+			satGroups.append("tdrss");
+			satGroups.append("communications");
+			satGroups.append("geostationary");
 		}
 		if (tleData.name.startsWith("BEIDOU"))
 		{
@@ -2299,6 +2316,12 @@ void Satellites::translations()
 	N_("non-operational");
 	// TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
 	N_("gps");
+	// TRANSLATORS: Satellite group: The Indian Regional Navigation Satellite System (IRNSS) is an autonomous regional satellite navigation system being developed by the Indian Space Research Organisation (ISRO) which would be under complete control of the Indian government.
+	N_("irnss");
+	// TRANSLATORS: Satellite group: The Quasi-Zenith Satellite System (QZSS), is a proposed three-satellite regional time transfer system and Satellite Based Augmentation System for the Global Positioning System, that would be receivable within Japan.
+	N_("qzss");
+	// TRANSLATORS: Satellite group: The Tracking and Data Relay Satellite System (TDRSS) is a network of communications satellites and ground stations used by NASA for space communications.
+	N_("tdrss");
 	// TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
 	N_("glonass");
 	// TRANSLATORS: Satellite group: Satellites belonging to the BeiDou constellation (BeiDou Navigation Satellite System)
@@ -2357,6 +2380,8 @@ void Satellites::translations()
 	// TRANSLATORS: Satellite description.
 	N_("China's first space station");
 	// TRANSLATORS: Satellite description.
+	N_("Tiangong space station (Chinese large modular space station)");
+	// TRANSLATORS: Satellite description.
 	N_("The russian space radio telescope RadioAstron");
 	// TRANSLATORS: Satellite description.
 	N_("International Gamma-Ray Astrophysics Laboratory");
@@ -2390,8 +2415,12 @@ void Satellites::translations()
 	N_("SPEKTR-R");
 	// TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics Laboratory (INTEGRAL)
 	N_("INTEGRAL");
-	// TRANSLATORS: China's first space station name
+	// TRANSLATORS: Satellite name: China's first space station name
 	N_("TIANGONG 1");
+	// TRANSLATORS: Satellite name: name of China's space station module
+	N_("TIANHE");
+	// TRANSLATORS: Satellite name: China's space station name (with name of base module)
+	N_("TIANGONG (TIANHE)");
 
 	// Satellites visibility
 	N_("The satellite and the observer are in sunlight");

@@ -35,6 +35,7 @@ src/core/StelSkyCultureMgr.cpp
 src/core/StelMovementMgr.cpp
 src/core/SimbadSearcher.cpp
 src/core/StelLocaleMgr.cpp
+src/core/StelModuleMgr.cpp
 src/gui/ConfigurationDialog.cpp
 src/gui/HelpDialog.cpp
 src/gui/StelGui.cpp
@@ -50,7 +51,8 @@ src/gui/CustomDeltaTEquationDialog.cpp
 src/gui/AstroCalcDialog.cpp
 src/gui/AstroCalcExtraEphemerisDialog.cpp
 src/gui/AstroCalcCustomStepsDialog.cpp
-src/gui/BookmarksDialog.cpp
+src/gui/ObsListDialog.cpp
+src/gui/ObsListCreateEditDialog.cpp
 src/gui/ConfigureDSOColorsDialog.cpp
 src/gui/ConfigureOrbitColorsDialog.cpp
 src/gui/DateTimeDialog.cpp
@@ -60,7 +62,7 @@ src/StelMainView.cpp
 
 # Translations of strings not contained in the source code
 src/translations.h
-src/translations_countries.h
+src/translations_regions.h
 
 # Translations of GUI files generated at build time
 src/ui_dateTimeDialogGui.h
@@ -77,7 +79,8 @@ src/ui_scriptConsole.h
 src/ui_astroCalcDialog.h
 src/ui_astroCalcExtraEphemerisDialog.h
 src/ui_astroCalcCustomStepsDialog.h
-src/ui_bookmarksDialog.h
+src/ui_obsListDialog.h
+src/ui_obsListCreateEditDialog.h
 src/ui_dsoColorsDialog.h
 src/ui_orbitColorsDialog.h
 
@@ -209,3 +212,7 @@ plugins/Calendars/src/OldHinduSolarCalendar.cpp
 plugins/Calendars/src/PersianArithmeticCalendar.cpp
 plugins/Calendars/src/gui/CalendarsDialog.cpp
 plugins/Calendars/src/ui_calendarsDialog.h
+plugins/OnlineQueries/src/HipOnlineQuery.cpp
+plugins/OnlineQueries/src/OnlineQueries.cpp
+plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp
+plugins/OnlineQueries/src/ui_onlineQueriesDialog.h

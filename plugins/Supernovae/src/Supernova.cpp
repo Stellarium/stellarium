@@ -28,6 +28,7 @@
 #include "StelSkyDrawer.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StarMgr.hpp"
+#include "Planet.hpp"
 
 #include <QTextStream>
 #include <QDebug>
@@ -259,7 +260,7 @@ void Supernova::draw(StelCore* core, StelPainter& painter)
 	if (mag <= mlimit)
 	{
 		const Vec3f color(1.f);
-		Vec3f vf(XYZ.toVec3f());
+		Vec3f vf(getJ2000EquatorialPos(core).toVec3f());
 		Vec3f altAz(vf);
 		altAz.normalize();
 		core->j2000ToAltAzInPlaceNoRefraction(&altAz);
@@ -274,6 +275,22 @@ void Supernova::draw(StelCore* core, StelPainter& painter)
 		float shift = 6.f + size/1.8f;
 		StarMgr* smgr = GETSTELMODULE(StarMgr); // It's need for checking displaying of labels for stars
 		if (labelsFader.getInterstate()<=0.f && (mag+5.f)<mlimit && smgr->getFlagLabels())
-			painter.drawText(XYZ, designation, 0, shift, shift, false);
+			painter.drawText(getJ2000EquatorialPos(core), designation, 0, shift, shift, false);
 	}	
+}
+
+Vec3d Supernova::getJ2000EquatorialPos(const StelCore* core) const
+{
+	if ((core) && (core->getUseAberration()) && (core->getCurrentPlanet()))
+	{
+		Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+		vel=StelCore::matVsop87ToJ2000*vel*core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
+		Vec3d pos=XYZ+vel;
+		pos.normalize();
+		return pos;
+	}
+	else
+	{
+		return XYZ;
+	}
 }

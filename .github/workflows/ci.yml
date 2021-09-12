@@ -116,6 +116,13 @@ jobs:
         file-url: 'https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/linux_p1550p2650.430'
         file-name: 'linux_p1550p2650.430'
         location: '../../../.stellarium/ephem'
+        
+    - name: Download JPL DE440 ephemeris
+      uses: carlosperate/download-file-action@v1.0.3
+      with:
+        file-url: 'https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/linux_p1550p2650.440'
+        file-name: 'linux_p1550p2650.440'
+        location: '../../../.stellarium/ephem'
 
     - name: Make coverage
       uses: GabrielBB/xvfb-action@v1

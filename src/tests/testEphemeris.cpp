@@ -29,6 +29,8 @@
 #include "vsop87.h"
 #include "de430.hpp"
 #include "de431.hpp"
+#include "de440.hpp"
+#include "de441.hpp"
 #include "l12.h"
 #include "marssat.h"
 
@@ -48,18 +50,31 @@ void TestEphemeris::initTestCase()
 	StelFileMgr::init();
 
 	de430FilePath = StelFileMgr::findFile("ephem/" + QString(DE430_FILENAME), StelFileMgr::File);
-	de431FilePath = StelFileMgr::findFile("ephem/" + QString(DE431_FILENAME), StelFileMgr::File);	
-
 	if (!de430FilePath.isEmpty())
 	{
 		qWarning() << "Use DE430 ephemeris file" << de430FilePath;
 		EphemWrapper::init_de430(de430FilePath.toLocal8Bit());
 	}
 
+	de431FilePath = StelFileMgr::findFile("ephem/" + QString(DE431_FILENAME), StelFileMgr::File);
 	if (!de431FilePath.isEmpty())
 	{
 		qWarning() << "Use DE431 ephemeris file" << de431FilePath;
 		EphemWrapper::init_de431(de431FilePath.toLocal8Bit());
+	}
+
+	de440FilePath = StelFileMgr::findFile("ephem/" + QString(DE440_FILENAME), StelFileMgr::File);
+	if (!de440FilePath.isEmpty())
+	{
+		qWarning() << "Use DE440 ephemeris file" << de440FilePath;
+		EphemWrapper::init_de440(de440FilePath.toLocal8Bit());
+	}
+
+	de441FilePath = StelFileMgr::findFile("ephem/" + QString(DE441_FILENAME), StelFileMgr::File);
+	if (!de441FilePath.isEmpty())
+	{
+		qWarning() << "Use DE441 ephemeris file" << de441FilePath;
+		EphemWrapper::init_de441(de441FilePath.toLocal8Bit());
 	}
 
 	// test data was obtained from http://ssd.jpl.nasa.gov/horizons.cgi#results
@@ -1816,6 +1831,594 @@ void TestEphemeris::testNeptuneHeliocentricEphemerisDe431()
 			if (jd > -3027188.25 && jd < 7930056.87916)
 			{
 				GetDe431Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
+
+				double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
+				double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
+				double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
+
+				QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
+					 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
+					 .arg(QString::number(    jd, 'f', 2))
+					 .arg(QString::number(xyz[0], 'f', 10))
+					 .arg(QString::number(xyz[1], 'f', 10))
+					 .arg(QString::number(xyz[2], 'f', 10))
+					 .arg(QString::number(     x, 'f', 10))
+					 .arg(QString::number(     y, 'f', 10))
+					 .arg(QString::number(     z, 'f', 10))
+					 .toUtf8());
+			}
+		}
+	}
+}
+
+void TestEphemeris::testMercuryHeliocentricEphemerisDe440()
+{
+	if (de440FilePath.isEmpty())
+		qWarning() << "Ephemeris JPL DE440 unit test has been marked as 'passed' (He cannot be passed, because DE440 file ephemeris is not exists)!";
+	else
+	{
+		const int planet_id = 1; // Mercury (JPL ID)
+		const double acceptableError = 1E-04;
+		double jd, x, y, z;
+		double xyz[6];
+
+		QVariantList mercuryDEx = mercury;
+		while(mercuryDEx.count() >= 3)
+		{
+			jd = mercuryDEx.takeFirst().toDouble();
+			x  = mercuryDEx.takeFirst().toDouble();
+			y  = mercuryDEx.takeFirst().toDouble();
+			z  = mercuryDEx.takeFirst().toDouble();
+
+			if (jd > 2287184.5 && jd < 2688976.5)
+			{
+				GetDe440Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
+
+				double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
+				double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
+				double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
+
+				QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
+					 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
+					 .arg(QString::number(    jd, 'f', 2))
+					 .arg(QString::number(xyz[0], 'f', 10))
+					 .arg(QString::number(xyz[1], 'f', 10))
+					 .arg(QString::number(xyz[2], 'f', 10))
+					 .arg(QString::number(     x, 'f', 10))
+					 .arg(QString::number(     y, 'f', 10))
+					 .arg(QString::number(     z, 'f', 10))
+					 .toUtf8());
+			}
+		}
+	}
+}
+
+void TestEphemeris::testVenusHeliocentricEphemerisDe440()
+{
+	if (de440FilePath.isEmpty())
+		qWarning() << "Ephemeris JPL DE440 unit test has been marked as 'passed' (He cannot be passed, because DE440 file ephemeris is not exists)!";
+	else
+	{
+		const int planet_id = 2; // Venus (JPL ID)
+		const double acceptableError = 1E-05;
+		double jd, x, y, z;
+		double xyz[6];
+
+		QVariantList venusDEx = venus;
+		while(venusDEx.count() >= 3)
+		{
+			jd = venusDEx.takeFirst().toDouble();
+			x  = venusDEx.takeFirst().toDouble();
+			y  = venusDEx.takeFirst().toDouble();
+			z  = venusDEx.takeFirst().toDouble();
+
+			if (jd > 2287184.5 && jd < 2688976.5)
+			{
+				GetDe440Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
+
+				double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
+				double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
+				double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
+
+				QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
+					 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
+					 .arg(QString::number(    jd, 'f', 2))
+					 .arg(QString::number(xyz[0], 'f', 10))
+					 .arg(QString::number(xyz[1], 'f', 10))
+					 .arg(QString::number(xyz[2], 'f', 10))
+					 .arg(QString::number(     x, 'f', 10))
+					 .arg(QString::number(     y, 'f', 10))
+					 .arg(QString::number(     z, 'f', 10))
+					 .toUtf8());
+			}
+		}
+	}
+}
+
+void TestEphemeris::testMarsHeliocentricEphemerisDe440()
+{
+	if (de440FilePath.isEmpty())
+		qWarning() << "Ephemeris JPL DE440 unit test has been marked as 'passed' (He cannot be passed, because DE440 file ephemeris is not exists)!";
+	else
+	{
+		const int planet_id = 4; // Mars (JPL ID)
+		const double acceptableError = 1E-04;
+		double jd, x, y, z;
+		double xyz[6];
+
+		QVariantList marsDEx = mars;
+		while(marsDEx.count() >= 3)
+		{
+			jd = marsDEx.takeFirst().toDouble();
+			x  = marsDEx.takeFirst().toDouble();
+			y  = marsDEx.takeFirst().toDouble();
+			z  = marsDEx.takeFirst().toDouble();
+
+			if (jd > 2287184.5 && jd < 2688976.5)
+			{
+				GetDe440Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
+
+				double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
+				double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
+				double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
+
+				QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
+					 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
+					 .arg(QString::number(    jd, 'f', 2))
+					 .arg(QString::number(xyz[0], 'f', 10))
+					 .arg(QString::number(xyz[1], 'f', 10))
+					 .arg(QString::number(xyz[2], 'f', 10))
+					 .arg(QString::number(     x, 'f', 10))
+					 .arg(QString::number(     y, 'f', 10))
+					 .arg(QString::number(     z, 'f', 10))
+					 .toUtf8());
+			}
+		}
+	}
+}
+
+void TestEphemeris::testJupiterHeliocentricEphemerisDe440()
+{
+	if (de440FilePath.isEmpty())
+		qWarning() << "Ephemeris JPL DE440 unit test has been marked as 'passed' (He cannot be passed, because DE440 file ephemeris is not exists)!";
+	else
+	{
+		const int planet_id = 5; // Jupiter (JPL ID)
+		const double acceptableError = 1E-04;
+		double jd, x, y, z;
+		double xyz[6];
+
+		QVariantList jupiterDEx = jupiter;
+		while(jupiterDEx.count() >= 3)
+		{
+			jd = jupiterDEx.takeFirst().toDouble();
+			x  = jupiterDEx.takeFirst().toDouble();
+			y  = jupiterDEx.takeFirst().toDouble();
+			z  = jupiterDEx.takeFirst().toDouble();
+
+			if (jd > 2287184.5 && jd < 2688976.5)
+			{
+				GetDe440Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
+
+				double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
+				double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
+				double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
+
+				QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
+					 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
+					 .arg(QString::number(    jd, 'f', 2))
+					 .arg(QString::number(xyz[0], 'f', 10))
+					 .arg(QString::number(xyz[1], 'f', 10))
+					 .arg(QString::number(xyz[2], 'f', 10))
+					 .arg(QString::number(     x, 'f', 10))
+					 .arg(QString::number(     y, 'f', 10))
+					 .arg(QString::number(     z, 'f', 10))
+					 .toUtf8());
+			}
+		}
+	}
+}
+
+void TestEphemeris::testSaturnHeliocentricEphemerisDe440()
+{
+	if (de440FilePath.isEmpty())
+		qWarning() << "Ephemeris JPL DE440 unit test has been marked as 'passed' (He cannot be passed, because DE440 file ephemeris is not exists)!";
+	else
+	{
+		const int planet_id = 6; // Saturn (JPL ID)
+		const double acceptableError = 1E-04;
+		double jd, x, y, z;
+		double xyz[6];
+
+		QVariantList saturnDEx = saturn;
+		while(saturnDEx.count() >= 3)
+		{
+			jd = saturnDEx.takeFirst().toDouble();
+			x  = saturnDEx.takeFirst().toDouble();
+			y  = saturnDEx.takeFirst().toDouble();
+			z  = saturnDEx.takeFirst().toDouble();
+
+			if (jd > 2287184.5 && jd < 2688976.5)
+			{
+				GetDe440Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
+
+				double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
+				double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
+				double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
+
+				QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
+					 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
+					 .arg(QString::number(    jd, 'f', 2))
+					 .arg(QString::number(xyz[0], 'f', 10))
+					 .arg(QString::number(xyz[1], 'f', 10))
+					 .arg(QString::number(xyz[2], 'f', 10))
+					 .arg(QString::number(     x, 'f', 10))
+					 .arg(QString::number(     y, 'f', 10))
+					 .arg(QString::number(     z, 'f', 10))
+					 .toUtf8());
+			}
+		}
+	}
+}
+
+void TestEphemeris::testUranusHeliocentricEphemerisDe440()
+{
+	if (de440FilePath.isEmpty())
+		qWarning() << "Ephemeris JPL DE440 unit test has been marked as 'passed' (He cannot be passed, because DE440 file ephemeris is not exists)!";
+	else
+	{
+		const int planet_id = 7; // Uranus (JPL ID)
+		const double acceptableError = 1E-03;
+		double jd, x, y, z;
+		double xyz[6];
+
+		QVariantList uranusDEx = uranus;
+		while(uranusDEx.count() >= 3)
+		{
+			jd = uranusDEx.takeFirst().toDouble();
+			x  = uranusDEx.takeFirst().toDouble();
+			y  = uranusDEx.takeFirst().toDouble();
+			z  = uranusDEx.takeFirst().toDouble();
+
+			if (jd > 2287184.5 && jd < 2688976.5)
+			{
+				GetDe440Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
+
+				double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
+				double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
+				double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
+
+				QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
+					 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
+					 .arg(QString::number(    jd, 'f', 2))
+					 .arg(QString::number(xyz[0], 'f', 10))
+					 .arg(QString::number(xyz[1], 'f', 10))
+					 .arg(QString::number(xyz[2], 'f', 10))
+					 .arg(QString::number(     x, 'f', 10))
+					 .arg(QString::number(     y, 'f', 10))
+					 .arg(QString::number(     z, 'f', 10))
+					 .toUtf8());
+			}
+		}
+	}
+}
+
+void TestEphemeris::testNeptuneHeliocentricEphemerisDe440()
+{
+	if (de440FilePath.isEmpty())
+		qWarning() << "Ephemeris JPL DE440 unit test has been marked as 'passed' (He cannot be passed, because DE440 file ephemeris is not exists)!";
+	else
+	{
+		const int planet_id = 8; // Neptune (JPL ID)
+		const double acceptableError = 1E-03;
+		double jd, x, y, z;
+		double xyz[6];
+
+		QVariantList neptuneDEx = neptune;
+		while(neptuneDEx.count() >= 3)
+		{
+			jd = neptuneDEx.takeFirst().toDouble();
+			x  = neptuneDEx.takeFirst().toDouble();
+			y  = neptuneDEx.takeFirst().toDouble();
+			z  = neptuneDEx.takeFirst().toDouble();
+
+			if (jd > 2287184.5 && jd < 2688976.5)
+			{
+				GetDe440Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
+
+				double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
+				double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
+				double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
+
+				QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
+					 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
+					 .arg(QString::number(    jd, 'f', 2))
+					 .arg(QString::number(xyz[0], 'f', 10))
+					 .arg(QString::number(xyz[1], 'f', 10))
+					 .arg(QString::number(xyz[2], 'f', 10))
+					 .arg(QString::number(     x, 'f', 10))
+					 .arg(QString::number(     y, 'f', 10))
+					 .arg(QString::number(     z, 'f', 10))
+					 .toUtf8());
+			}
+		}
+	}
+}
+
+void TestEphemeris::testMercuryHeliocentricEphemerisDe441()
+{
+	if (de441FilePath.isEmpty())
+		qWarning() << "Ephemeris JPL DE441 unit test has been marked as 'passed' (He cannot be passed, because DE441 file ephemeris is not exists)!";
+	else
+	{
+		const int planet_id = 1; // Mercury (JPL ID)
+		const double acceptableError = 1E-04;
+		double jd, x, y, z;
+		double xyz[6];
+
+		QVariantList mercuryDEx = mercury;
+		while(mercuryDEx.count() >= 3)
+		{
+			jd = mercuryDEx.takeFirst().toDouble();
+			x  = mercuryDEx.takeFirst().toDouble();
+			y  = mercuryDEx.takeFirst().toDouble();
+			z  = mercuryDEx.takeFirst().toDouble();
+
+			if (jd > -3027188.25 && jd < 7930056.87916)
+			{
+				GetDe441Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
+
+				double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
+				double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
+				double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
+
+				QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
+					 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
+					 .arg(QString::number(    jd, 'f', 2))
+					 .arg(QString::number(xyz[0], 'f', 10))
+					 .arg(QString::number(xyz[1], 'f', 10))
+					 .arg(QString::number(xyz[2], 'f', 10))
+					 .arg(QString::number(     x, 'f', 10))
+					 .arg(QString::number(     y, 'f', 10))
+					 .arg(QString::number(     z, 'f', 10))
+					 .toUtf8());
+			}
+		}
+	}
+}
+
+void TestEphemeris::testVenusHeliocentricEphemerisDe441()
+{
+	if (de441FilePath.isEmpty())
+		qWarning() << "Ephemeris JPL DE441 unit test has been marked as 'passed' (He cannot be passed, because DE441 file ephemeris is not exists)!";
+	else
+	{
+		const int planet_id = 2; // Venus (JPL ID)
+		const double acceptableError = 1E-05;
+		double jd, x, y, z;
+		double xyz[6];
+
+		QVariantList venusDEx = venus;
+		while(venusDEx.count() >= 3)
+		{
+			jd = venusDEx.takeFirst().toDouble();
+			x  = venusDEx.takeFirst().toDouble();
+			y  = venusDEx.takeFirst().toDouble();
+			z  = venusDEx.takeFirst().toDouble();
+
+			if (jd > -3027188.25 && jd < 7930056.87916)
+			{
+				GetDe441Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
+
+				double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
+				double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
+				double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
+
+				QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
+					 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
+					 .arg(QString::number(    jd, 'f', 2))
+					 .arg(QString::number(xyz[0], 'f', 10))
+					 .arg(QString::number(xyz[1], 'f', 10))
+					 .arg(QString::number(xyz[2], 'f', 10))
+					 .arg(QString::number(     x, 'f', 10))
+					 .arg(QString::number(     y, 'f', 10))
+					 .arg(QString::number(     z, 'f', 10))
+					 .toUtf8());
+			}
+		}
+	}
+}
+
+void TestEphemeris::testMarsHeliocentricEphemerisDe441()
+{
+	if (de441FilePath.isEmpty())
+		qWarning() << "Ephemeris JPL DE441 unit test has been marked as 'passed' (He cannot be passed, because DE441 file ephemeris is not exists)!";
+	else
+	{
+		const int planet_id = 4; // Mars (JPL ID)
+		const double acceptableError = 1E-04;
+		double jd, x, y, z;
+		double xyz[6];
+
+		QVariantList marsDEx = mars;
+		while(marsDEx.count() >= 3)
+		{
+			jd = marsDEx.takeFirst().toDouble();
+			x  = marsDEx.takeFirst().toDouble();
+			y  = marsDEx.takeFirst().toDouble();
+			z  = marsDEx.takeFirst().toDouble();
+
+			if (jd > -3027188.25 && jd < 7930056.87916)
+			{
+				GetDe441Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
+
+				double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
+				double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
+				double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
+
+				QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
+					 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
+					 .arg(QString::number(    jd, 'f', 2))
+					 .arg(QString::number(xyz[0], 'f', 10))
+					 .arg(QString::number(xyz[1], 'f', 10))
+					 .arg(QString::number(xyz[2], 'f', 10))
+					 .arg(QString::number(     x, 'f', 10))
+					 .arg(QString::number(     y, 'f', 10))
+					 .arg(QString::number(     z, 'f', 10))
+					 .toUtf8());
+			}
+		}
+	}
+}
+
+void TestEphemeris::testJupiterHeliocentricEphemerisDe441()
+{
+	if (de441FilePath.isEmpty())
+		qWarning() << "Ephemeris JPL DE441 unit test has been marked as 'passed' (He cannot be passed, because DE441 file ephemeris is not exists)!";
+	else
+	{
+		const int planet_id = 5; // Jupiter (JPL ID)
+		const double acceptableError = 1E-04;
+		double jd, x, y, z;
+		double xyz[6];
+
+		QVariantList jupiterDEx = jupiter;
+		while(jupiterDEx.count() >= 3)
+		{
+			jd = jupiterDEx.takeFirst().toDouble();
+			x  = jupiterDEx.takeFirst().toDouble();
+			y  = jupiterDEx.takeFirst().toDouble();
+			z  = jupiterDEx.takeFirst().toDouble();
+
+			if (jd > -3027188.25 && jd < 7930056.87916)
+			{
+				GetDe441Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
+
+				double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
+				double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
+				double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
+
+				QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
+					 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
+					 .arg(QString::number(    jd, 'f', 2))
+					 .arg(QString::number(xyz[0], 'f', 10))
+					 .arg(QString::number(xyz[1], 'f', 10))
+					 .arg(QString::number(xyz[2], 'f', 10))
+					 .arg(QString::number(     x, 'f', 10))
+					 .arg(QString::number(     y, 'f', 10))
+					 .arg(QString::number(     z, 'f', 10))
+					 .toUtf8());
+			}
+		}
+	}
+}
+
+void TestEphemeris::testSaturnHeliocentricEphemerisDe441()
+{
+	if (de441FilePath.isEmpty())
+		qWarning() << "Ephemeris JPL DE441 unit test has been marked as 'passed' (He cannot be passed, because DE441 file ephemeris is not exists)!";
+	else
+	{
+		const int planet_id = 6; // Saturn (JPL ID)
+		const double acceptableError = 1E-04;
+		double jd, x, y, z;
+		double xyz[6];
+
+		QVariantList saturnDEx = saturn;
+		while(saturnDEx.count() >= 3)
+		{
+			jd = saturnDEx.takeFirst().toDouble();
+			x  = saturnDEx.takeFirst().toDouble();
+			y  = saturnDEx.takeFirst().toDouble();
+			z  = saturnDEx.takeFirst().toDouble();
+
+			if (jd > -3027188.25 && jd < 7930056.87916)
+			{
+				GetDe441Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
+
+				double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
+				double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
+				double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
+
+				QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
+					 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
+					 .arg(QString::number(    jd, 'f', 2))
+					 .arg(QString::number(xyz[0], 'f', 10))
+					 .arg(QString::number(xyz[1], 'f', 10))
+					 .arg(QString::number(xyz[2], 'f', 10))
+					 .arg(QString::number(     x, 'f', 10))
+					 .arg(QString::number(     y, 'f', 10))
+					 .arg(QString::number(     z, 'f', 10))
+					 .toUtf8());
+			}
+		}
+	}
+}
+
+void TestEphemeris::testUranusHeliocentricEphemerisDe441()
+{
+	if (de441FilePath.isEmpty())
+		qWarning() << "Ephemeris JPL DE441 unit test has been marked as 'passed' (He cannot be passed, because DE441 file ephemeris is not exists)!";
+	else
+	{
+		const int planet_id = 7; // Uranus (JPL ID)
+		const double acceptableError = 1E-03;
+		double jd, x, y, z;
+		double xyz[6];
+
+		QVariantList uranusDEx = uranus;
+		while(uranusDEx.count() >= 3)
+		{
+			jd = uranusDEx.takeFirst().toDouble();
+			x  = uranusDEx.takeFirst().toDouble();
+			y  = uranusDEx.takeFirst().toDouble();
+			z  = uranusDEx.takeFirst().toDouble();
+
+			if (jd > -3027188.25 && jd < 7930056.87916)
+			{
+				GetDe441Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
+
+				double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
+				double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));
+				double actualErrorZ = qAbs(qAbs(z) - qAbs(xyz[2]));
+
+				QVERIFY2(actualErrorX <= acceptableError && actualErrorY <= acceptableError && actualErrorZ <= acceptableError,
+					 QString("JD=%1 X=%2 (%5) Y=%3 (%6) Z=%4 (%7)")
+					 .arg(QString::number(    jd, 'f', 2))
+					 .arg(QString::number(xyz[0], 'f', 10))
+					 .arg(QString::number(xyz[1], 'f', 10))
+					 .arg(QString::number(xyz[2], 'f', 10))
+					 .arg(QString::number(     x, 'f', 10))
+					 .arg(QString::number(     y, 'f', 10))
+					 .arg(QString::number(     z, 'f', 10))
+					 .toUtf8());
+			}
+		}
+	}
+}
+
+void TestEphemeris::testNeptuneHeliocentricEphemerisDe441()
+{
+	if (de441FilePath.isEmpty())
+		qWarning() << "Ephemeris JPL DE441 unit test has been marked as 'passed' (He cannot be passed, because DE441 file ephemeris is not exists)!";
+	else
+	{
+		const int planet_id = 8; // Neptune (JPL ID)
+		const double acceptableError = 1E-03;
+		double jd, x, y, z;
+		double xyz[6];
+
+		QVariantList neptuneDEx = neptune;
+		while(neptuneDEx.count() >= 3)
+		{
+			jd = neptuneDEx.takeFirst().toDouble();
+			x  = neptuneDEx.takeFirst().toDouble();
+			y  = neptuneDEx.takeFirst().toDouble();
+			z  = neptuneDEx.takeFirst().toDouble();
+
+			if (jd > -3027188.25 && jd < 7930056.87916)
+			{
+				GetDe441Coor(jd, planet_id, xyz, CENTRAL_BODY_ID);
 
 				double actualErrorX = qAbs(qAbs(x) - qAbs(xyz[0]));
 				double actualErrorY = qAbs(qAbs(y) - qAbs(xyz[1]));

@@ -36,11 +36,7 @@
 
 #include <QDebug>
 #include <QDir>
-#ifdef USE_OLD_QGLWIDGET
-#include <QGLWidget>
-#else
 #include <QOpenGLWidget>
-#endif
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QGuiApplication>
@@ -81,27 +77,17 @@ Q_LOGGING_CATEGORY(mainview, "stel.MainView")
 // Initialize static variables
 StelMainView* StelMainView::singleton = Q_NULLPTR;
 
-#ifdef USE_OLD_QGLWIDGET
-class StelGLWidget : public QGLWidget
-#else
 class StelGLWidget : public QOpenGLWidget
-#endif
 {
 public:
 	StelGLWidget(const QSurfaceFormat& fmt, StelMainView* parent)
 		:
-#ifdef USE_OLD_QGLWIDGET
-		  QGLWidget(QGLFormat::fromSurfaceFormat(fmt),parent),
-#else
 		  QOpenGLWidget(parent),
-#endif
 		  parent(parent),
 		  initialized(false)
 	{
 		qDebug()<<"StelGLWidget constructor";
-#ifndef USE_OLD_QGLWIDGET
 		setFormat(fmt);
-#endif
 
 		//because we always draw the full background,
 		//lets skip drawing the system background
@@ -129,11 +115,7 @@ public:
 		//GL related stuff of the application
 		//this includes all the init() calls of the modules
 
-#ifdef USE_OLD_QGLWIDGET
-		QOpenGLContext* ctx = context()->contextHandle();
-#else
 		QOpenGLContext* ctx = context();
-#endif
 		Q_ASSERT(ctx == QOpenGLContext::currentContext());
 		StelOpenGL::mainContext = ctx; //throw an error when StelOpenGL functions are executed in another context
 
@@ -562,12 +544,10 @@ StelMainView::StelMainView(QSettings* settings)
 	  updateQueued(false),
 	  flagInvertScreenShotColors(false),
 	  flagOverwriteScreenshots(false),
-#ifndef USE_OLD_QGLWIDGET
 	  flagUseCustomScreenshotSize(false),
 	  customScreenshotWidth(1024),
 	  customScreenshotHeight(768),
 	  customScreenshotMagnification(1.0f),
-#endif
 	  screenShotPrefix("stellarium-"),
 	  screenShotFormat("png"),
 	  screenShotDir(""),
@@ -596,6 +576,8 @@ StelMainView::StelMainView(QSettings* settings)
 	// Can't create 2 StelMainView instances
 	Q_ASSERT(!singleton);
 	singleton = this;
+
+	qApp->installEventFilter(this);
 
 	setWindowIcon(QIcon(":/mainWindow/icon.bmp"));
 	initTitleI18n();
@@ -667,12 +649,6 @@ StelMainView::StelMainView(QSettings* settings)
 	setlocale(LC_NUMERIC, "C");
 	// End workaround
 
-#ifdef USE_OLD_QGLWIDGET
-	// StelGLWidget::initializeGL is seemingly never called automatically with the QGLWidget, so we have to do it ourselves
-	//we have to force context creation here
-	glWidget->makeCurrent();
-	glWidget->initializeGL();
-#endif
 	// We cannot use global mousetracking. Only if mouse is hidden!
 	//setMouseTracking(true);
 }
@@ -690,12 +666,30 @@ void StelMainView::resizeEvent(QResizeEvent* event)
 	QGraphicsView::resizeEvent(event);
 }
 
+bool StelMainView::eventFilter(QObject *obj, QEvent *event)
+{
+	if(event->type() == QEvent::FileOpen)
+	{
+		QFileOpenEvent *openEvent = static_cast<QFileOpenEvent *>(event);
+		//qDebug() << "load script:" << openEvent->file();
+		qApp->setProperty("onetime_startup_script", openEvent->file());
+	}
+	return QGraphicsView::eventFilter(obj, event);
+}
+
 void StelMainView::mouseMoveEvent(QMouseEvent *event)
 {
-	// Show the cursor and reset the timeout if it is active.
-	if (QGuiApplication::overrideCursor())
-		QGuiApplication::restoreOverrideCursor();
-	if (flagCursorTimeout) cursorTimeoutTimer->start();
+	if (flagCursorTimeout) 
+	{
+		// Show the previous cursor and reset the timeout if the current is "hidden"
+		if (QGuiApplication::overrideCursor() && (QGuiApplication::overrideCursor()->shape() == Qt::BlankCursor) )
+		{
+			QGuiApplication::restoreOverrideCursor();
+		}
+
+		cursorTimeoutTimer->start();
+	}
+	
 	QGraphicsView::mouseMoveEvent(event);
 }
 
@@ -871,11 +865,9 @@ void StelMainView::init()
 
 	flagInvertScreenShotColors = configuration->value("main/invert_screenshots_colors", false).toBool();
 	screenShotFormat = configuration->value("main/screenshot_format", "png").toString();
-#ifndef USE_OLD_QGLWIDGET
 	flagUseCustomScreenshotSize=configuration->value("main/screenshot_custom_size", false).toBool();
 	customScreenshotWidth=configuration->value("main/screenshot_custom_width", 1024).toInt();
 	customScreenshotHeight=configuration->value("main/screenshot_custom_height", 768).toInt();
-#endif
 	setFlagCursorTimeout(configuration->value("gui/flag_mouse_cursor_timeout", false).toBool());
 	setCursorTimeout(configuration->value("gui/mouse_cursor_timeout", 10.f).toDouble());
 	setMaxFps(configuration->value("video/maximum_fps",10000.f).toFloat());
@@ -1282,7 +1274,10 @@ void StelMainView::dumpOpenGLdiagnostics() const
 		qDebug() << " - Non power of two textures" << (oglFeatures&QOpenGLFunctions::NPOTTextures ? "are" : "are NOT") << "available.";
 		qDebug() << " - Non power of two textures" << (oglFeatures&QOpenGLFunctions::NPOTTextureRepeat ? "can" : "CANNOT") << "use GL_REPEAT as wrap parameter.";
 		qDebug() << " - The fixed function pipeline" << (oglFeatures&QOpenGLFunctions::FixedFunctionPipeline ? "is" : "is NOT") << "available.";
-		
+		GLfloat lineWidthRange[2];
+		context->functions()->glGetFloatv(GL_ALIASED_LINE_WIDTH_RANGE, lineWidthRange);
+		qDebug() << "Line widths available from" << lineWidthRange[0] << "to" << lineWidthRange[1];
+
 		qDebug() << "OpenGL shader capabilities and details:";
 		qDebug() << " - Vertex Shader:" << (QOpenGLShader::hasOpenGLShaders(QOpenGLShader::Vertex, context) ? "YES" : "NO");
 		qDebug() << " - Fragment Shader:" << (QOpenGLShader::hasOpenGLShaders(QOpenGLShader::Fragment, context) ? "YES" : "NO");
@@ -1383,16 +1378,34 @@ void StelMainView::drawEnded()
 void StelMainView::setFlagCursorTimeout(bool b)
 {
 	if (b == flagCursorTimeout) return;
+
 	flagCursorTimeout = b;
-	if (b)
+	if (b) 	// enable timer
+	{
 		cursorTimeoutTimer->start();
-	else
+	}
+	else	// disable timer
+	{
+		// Show the previous cursor if the current is "hidden" 
+		if (QGuiApplication::overrideCursor() && (QGuiApplication::overrideCursor()->shape() == Qt::BlankCursor) )
+		{
+			// pop the blank cursor
+			QGuiApplication::restoreOverrideCursor();
+		}
+		// and stop the timer 
 		cursorTimeoutTimer->stop();
+	}
+	
 	emit flagCursorTimeoutChanged(b);
 }
 
 void StelMainView::hideCursor()
 {
+	// timout fired...
+	// if the feature is not asked, do nothing
+	if (!flagCursorTimeout) return;
+
+	// "hide" the current cursor by pushing a Blank cursor
 	QGuiApplication::setOverrideCursor(Qt::BlankCursor);
 }
 
@@ -1496,9 +1509,6 @@ void StelMainView::saveScreenShot(const QString& filePrefix, const QString& save
 void StelMainView::doScreenshot(void)
 {
 	QFileInfo shotDir;
-#ifdef USE_OLD_QGLWIDGET
-	QImage im = glWidget->grabFrameBuffer();
-#else
 	// Make a screenshot which may be larger than the current window. This is harder than you would think:
 	// fbObj the framebuffer governs size of the target image, that's the easy part, but it also has its limits.
 	// However, the GUI parts need to be placed properly,
@@ -1618,7 +1628,6 @@ void StelMainView::doScreenshot(void)
 		stelGui->getSkyGui()->setGeometry(0, 0, pParams.viewportXywh[2], pParams.viewportXywh[3]);
 		stelGui->forceRefreshGui();
 	}
-#endif
 
 	if (nightModeWasEnabled)
 	{
@@ -1710,11 +1719,7 @@ QPoint StelMainView::getMousePos() const
 
 QOpenGLContext* StelMainView::glContext() const
 {
-#ifdef USE_OLD_QGLWIDGET
-	return glWidget->context()->contextHandle();
-#else
 	return glWidget->context();
-#endif
 }
 
 void StelMainView::glContextMakeCurrent()

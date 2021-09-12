@@ -1,35 +1,18 @@
-/****************************************************************************
-** Copyright (c) 2013-2014 Debao Zhang <hello@debao.me>
-** All right reserved.
-**
-** Permission is hereby granted, free of charge, to any person obtaining
-** a copy of this software and associated documentation files (the
-** "Software"), to deal in the Software without restriction, including
-** without limitation the rights to use, copy, modify, merge, publish,
-** distribute, sublicense, and/or sell copies of the Software, and to
-** permit persons to whom the Software is furnished to do so, subject to
-** the following conditions:
-**
-** The above copyright notice and this permission notice shall be
-** included in all copies or substantial portions of the Software.
-**
-** THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-** EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-** MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-** NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-** LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-** OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-** WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-**
-****************************************************************************/
+// xlsxcellrange.h
+
 #ifndef QXLSX_XLSXCELLRANGE_H
 #define QXLSX_XLSXCELLRANGE_H
+
+#include <QtGlobal>
+#include <QObject>
+
 #include "xlsxglobal.h"
 #include "xlsxcellreference.h"
 
 QT_BEGIN_NAMESPACE_XLSX
 
-class   CellRange
+// dev57
+class CellRange
 {
 public:
     CellRange();
@@ -57,6 +40,13 @@ public:
     inline CellReference bottomLeft() const { return CellReference(bottom, left); }
     inline CellReference bottomRight() const { return CellReference(bottom, right); }
 
+    inline void operator =(const CellRange &other)
+    {
+        top = other.top;
+        bottom = other.bottom;
+        left = other.left;
+        right = other.right;
+    }
     inline bool operator ==(const CellRange &other) const
     {
         return top==other.top && bottom==other.bottom
@@ -69,7 +59,11 @@ public:
     }
 private:
     void init(const QString &range);
-    int top, left, bottom, right;
+
+    int top;
+    int left;
+    int bottom;
+    int right;
 };
 
 QT_END_NAMESPACE_XLSX

@@ -321,7 +321,7 @@ void StelDialog::connectBoolProperty(QGroupBox *checkBox, const QString &propNam
 
 bool StelDialog::askConfirmation()
 {
-    return (QMessageBox::warning(&StelMainView::getInstance(), q_("Attention!"), q_("Are you sure? This will delete your customized data."), QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes);
+	return (QMessageBox::warning(&StelMainView::getInstance(), q_("Attention!"), q_("Are you sure? This will delete your customized data."), QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes);
 }
 
 void StelDialog::connectColorButton(QToolButton *toolButton, QString propertyName, QString iniName, QString moduleName)
@@ -363,8 +363,8 @@ void StelDialog::askColor()
 		return;
 	}
 	Vec3d vColor = StelApp::getInstance().getStelPropertyManager()->getProperty(propName)->getValue().value<Vec3f>().toVec3d();
-    QColor color = vColor.toQColor();
-    QColor c = QColorDialog::getColor(color, &StelMainView::getInstance() , q_(static_cast<QToolButton*>(QObject::sender())->toolTip()));
+	QColor color = vColor.toQColor();
+	QColor c = QColorDialog::getColor(color, &StelMainView::getInstance() , q_(static_cast<QToolButton*>(QObject::sender())->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3d(c.redF(), c.greenF(), c.blueF());

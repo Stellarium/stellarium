@@ -24,9 +24,11 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  * - VSOP87 and ELP82B
  * - DE430
  * - DE431
+ * - DE440
+ * - DE441
  *
  * Extending the old stellplanet-class, this updated version now
- * includes access to DE430 and DE431 for a more accurate, yet storage-space intensive solution.
+ * includes access to DE430, DE431, DE440 and DE441 for a more accurate, yet storage-space intensive solution.
  */
 
 #ifndef EPHEMWRAPPER_HPP
@@ -34,6 +36,8 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 
 #define DE430_FILENAME  "linux_p1550p2650.430"
 #define DE431_FILENAME  "lnxm13000p17000.431"
+#define DE440_FILENAME  "linux_p1550p2650.440"
+#define DE441_FILENAME  "linux_m13000p17000.441"
 
 class EphemWrapper{
 public:
@@ -43,6 +47,12 @@ public:
     static bool jd_fits_de431(const double jd);
     static bool use_de430(const double jd);
     static bool use_de431(const double jd);
+    static void init_de440(const char* filepath);
+    static void init_de441(const char* filepath);
+    static bool jd_fits_de440(const double jd);
+    static bool jd_fits_de441(const double jd);
+    static bool use_de440(const double jd);
+    static bool use_de441(const double jd);
 };
 
 // These functions have an unused void pointer to be compatible to PosFuncType in SolarSystem and Planet classes.

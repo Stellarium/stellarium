@@ -93,6 +93,10 @@ class StelMovementMgr : public StelModule
 		   READ getFlagEnableZoomKeys
 		   WRITE setFlagEnableZoomKeys
 		   NOTIFY flagEnableZoomKeysChanged)
+	Q_PROPERTY(double userMaxFov
+		   READ getUserMaxFov
+		   WRITE setUserMaxFov
+		   NOTIFY userMaxFovChanged)
 public:
 	//! Possible mount modes defining the reference frame in which head movements occur.
 	//! MountGalactic and MountSupergalactic is currently only available via scripting API: core.clear("galactic") and core.clear("supergalactic")
@@ -103,7 +107,7 @@ public:
 	enum ZoomingMode { ZoomOut=-1, ZoomNone=0, ZoomIn=1};
 
 	StelMovementMgr(StelCore* core);
-	virtual ~StelMovementMgr();
+	virtual ~StelMovementMgr() Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -115,28 +119,28 @@ public:
 	//! - Enabling/disabling the mouse movement
 	//! - Sets the zoom and movement speeds
 	//! - Sets the auto-zoom duration and mode.
-	virtual void init();
+	virtual void init() Q_DECL_OVERRIDE;
 
 	//! Update time-dependent things (triggers a time dragging record if required)
-	virtual void update(double)
+	virtual void update(double) Q_DECL_OVERRIDE
 	{
 		if (dragTimeMode)
 			addTimeDragPoint(QCursor::pos().x(), QCursor::pos().y());
 	}
 	//! Implement required draw function.  Does nothing.
-	virtual void draw(StelCore*) {;}
+	virtual void draw(StelCore*) Q_DECL_OVERRIDE {;}
 	//! Handle keyboard events.
-	virtual void handleKeys(QKeyEvent* event);
+	virtual void handleKeys(QKeyEvent* event) Q_DECL_OVERRIDE;
 	//! Handle mouse movement events.
-	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b);
+	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b) Q_DECL_OVERRIDE;
 	//! Handle mouse wheel events.
-	virtual void handleMouseWheel(class QWheelEvent* event);
+	virtual void handleMouseWheel(class QWheelEvent* event) Q_DECL_OVERRIDE;
 	//! Handle mouse click events.
-	virtual void handleMouseClicks(class QMouseEvent* event);
+	virtual void handleMouseClicks(class QMouseEvent* event) Q_DECL_OVERRIDE;
 	// allow some keypress interaction by plugins.
-	virtual double getCallOrder(StelModuleActionName actionName) const;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 	//! Handle pinch gesture.
-	virtual bool handlePinch(qreal scale, bool started);
+	virtual bool handlePinch(qreal scale, bool started) Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to StelMovementMgr
@@ -374,6 +378,14 @@ public slots:
 	//! @param s - true zoom, false stop
 	void zoomOut(bool s);
 
+	//! Smooth panning a predetermined amount
+	//! @note a speed (degrees per seconds) is defined for both scales as deltaX/ptime and deltaY/ptime.
+	//! @param deltaX - delta for scale X, in degrees
+	//! @param deltaY - delta for scale Y, in degrees
+	//! @param ptime - time for doing one step of delta, in seconds
+	//! @param s - flag to enable panning
+	void smoothPan(double deltaX, double deltaY, double ptime, bool s);
+
 	//! Look immediately towards East.
 	//! @param zero true to center on horizon, false to keep altitude, or when looking to the zenith already, turn eastern horizon to screen bottom.
 	void lookEast(bool zero=false);
@@ -422,6 +434,11 @@ public slots:
 	void setViewportHorizontalOffsetTarget(double f) { moveViewport(f,getViewportVerticalOffsetTarget()); }
 	void setViewportVerticalOffsetTarget(double f) { moveViewport(getViewportHorizontalOffsetTarget(),f); }
 
+	//! Set a hard limit for any fov change. Useful in the context of a planetarium with dome
+	//! where a presenter never ever wants to set more than 180° even if the projection would allow it.
+	void setUserMaxFov(double max);
+	double getUserMaxFov() const {return userMaxFov; }
+
 signals:
 	//! Emitted when the tracking property changes
 	void flagTrackingChanged(bool b);
@@ -433,6 +450,7 @@ signals:
 	void flagEnableMouseNavigationChanged(bool b);
 	void flagEnableMoveKeysChanged(bool b);
 	void flagEnableZoomKeysChanged(bool b);
+	void userMaxFovChanged(double fov);
 
 private slots:
 	//! Called when the selected object changes.
@@ -448,7 +466,8 @@ private:
 	double currentFov; // The current FOV in degrees
 	double initFov;    // The FOV at startup
 	double minFov;     // Minimum FOV in degrees
-	double maxFov;     // Maximum FOV in degrees
+	double maxFov;     // Maximum FOV in degrees. Depends on projection.
+	double userMaxFov; // Custom setting. Can be useful in a planetarium context.
 	double deltaFov;   // requested change of FOV (degrees) used during zooming.
 	void setFov(double f)
 	{
@@ -485,6 +504,11 @@ private:
 	double keyMoveSpeed;              // Speed of keys movement
 	double keyZoomSpeed;              // Speed of keys zoom
 	bool flagMoveSlow;
+
+	//flag to enable panning a predetermined amount
+	bool flagCustomPan;
+	double rateX;
+	double rateY;
 
 	// Speed factor for real life time movements, used for fast forward when playing scripts.
 	float movementsSpeedFactor;

@@ -133,6 +133,7 @@ QList<MeteorShowers::SearchResult> MeteorShowers::searchEvents(QDate dateFrom, Q
 
 			if (found)
 			{
+				r.code = ms->getID();
 				r.name = ms->getNameI18n();
 				r.peak = a.peak;
 				if (a.zhr == -1) {

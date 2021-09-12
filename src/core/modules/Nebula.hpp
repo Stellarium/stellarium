@@ -170,7 +170,7 @@ public:
 	virtual QVariantMap getInfoMap(const StelCore *core) const;
 	virtual QString getType() const {return NEBULA_TYPE;}
 	virtual QString getID() const {return getDSODesignation(); } //this depends on the currently shown catalog flags, should this be changed?
-	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const {return XYZ;}
+	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const;
 	virtual double getCloseViewFov(const StelCore* core = Q_NULLPTR) const;
 	virtual float getVMagnitude(const StelCore* core) const;
 	virtual float getSelectPriority(const StelCore* core) const;
@@ -247,7 +247,7 @@ private:
 	void readDSO(QDataStream& in);
 
 	void drawLabel(StelPainter& sPainter, float maxMagLabel) const;
-	void drawHints(StelPainter& sPainter, float maxMagHints) const;
+	void drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core) const;
 	void drawOutlines(StelPainter& sPainter, float maxMagHints) const;
 
 	bool objectInDisplayedType() const;

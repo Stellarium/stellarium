@@ -57,11 +57,29 @@ private slots:
 	void testUranusHeliocentricEphemerisDe431();
 	void testNeptuneHeliocentricEphemerisDe431();
 
+	// JPL DE440
+	void testMercuryHeliocentricEphemerisDe440();
+	void testVenusHeliocentricEphemerisDe440();
+	void testMarsHeliocentricEphemerisDe440();
+	void testJupiterHeliocentricEphemerisDe440();
+	void testSaturnHeliocentricEphemerisDe440();
+	void testUranusHeliocentricEphemerisDe440();
+	void testNeptuneHeliocentricEphemerisDe440();
+
+	// JPL DE441
+	void testMercuryHeliocentricEphemerisDe441();
+	void testVenusHeliocentricEphemerisDe441();
+	void testMarsHeliocentricEphemerisDe441();
+	void testJupiterHeliocentricEphemerisDe441();
+	void testSaturnHeliocentricEphemerisDe441();
+	void testUranusHeliocentricEphemerisDe441();
+	void testNeptuneHeliocentricEphemerisDe441();
+
 	void testL12Theory();
 	void testMarsSatTheory();
 
 private:
-	QString de430FilePath, de431FilePath;
+	QString de430FilePath, de431FilePath, de440FilePath, de441FilePath;
 	QVariantList mercury, venus, mars, jupiter, saturn, uranus, neptune;
 };
 

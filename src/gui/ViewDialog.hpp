@@ -76,6 +76,8 @@ private slots:
 	void populatePlanetMagnitudeAlgorithmDescription();
 	void setPlanetMagnitudeAlgorithm(int algorithmID);
 
+	void setSelectedCardinalCheckBoxes();
+
 	void setSelectedCatalogsFromCheckBoxes();
 	void setSelectedTypesFromCheckBoxes();
 

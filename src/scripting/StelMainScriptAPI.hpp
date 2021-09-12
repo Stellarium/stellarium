@@ -97,6 +97,11 @@ public slots:
 	//! @return the DeltaT for current simulation time.
 	static QString getDeltaT();
 
+	//! get the DeltaT for the simulation date and time as a double
+	//! in seconds
+	//! @return the DeltaT for current simulation time.
+	static double getDeltaTsec();
+
 	//! get the DeltaT equation name for the simulation date and time as a string
 	//! @return name of the DeltaT equation
 	static QString getDeltaTAlgorithm();
@@ -242,6 +247,19 @@ public slots:
 	//! stars will start with no extra information when they become selected again.
 	static void addToSelectedObjectInfoString(const QString &str, bool replace=false);
 
+	//! Set value for some StelProperty.
+	//! @note This method may be very helpful for change the values in the plugins to avoid crashes when some plugin is not loaded.
+	//! @note See also @ref isModuleLoaded() method
+	//! @param propertyName the name of StelProperty, e.g. "Satellites.flagOrbitLines"
+	//! @param propertyValue the value of StelProperty
+	static void setStelProperty(const QString& propertyName, QVariant propertyValue);
+
+	//! Get value for some StelProperty.
+	//! @note This method may be very helpful for change the values in the plugins to avoid crashes when some plugin is not loaded.
+	//! @note See also @ref isModuleLoaded() method
+	//! @param propertyName the name of StelProperty, e.g. "Satellites.flagOrbitLines"
+	static QVariant getStelProperty(const QString& propertyName);
+
 	//! Clear the display options, setting a "standard" view.
 	//! Preset states:
 	//! - natural : azimuthal mount, atmosphere, landscape,
@@ -334,7 +352,7 @@ public slots:
 	//! @param duration the time for the transition from the
 	//!        old to the new location.
 	//! @param name A name for the location (which will appear
-	//!        in the status bar. Use "<city>, <country>" for
+	//!        in the status bar. Use "<city>, <region>" for
 	//!        moving across a border.
 	//! @param planet the English name of the new planet.
 	//!        If the planet name is not known (e.g. ""), the
@@ -357,7 +375,7 @@ public slots:
 	//! - longitude : longitude in decimal degrees
 	//! - latitude : latitude in decimal degrees
 	//! - planet : name of planet
-	//! - location : city and country
+	//! - location : city and region
 	//! - sidereal-year : duration of the sidereal year on the planet in Earth's days (since 0.12.0)
 	//! - sidereal-day : duration of the sidereal day on the planet in Earth's hours (since 0.12.0)
 	//! - solar-day : duration of the mean solar day on the planet in Earth's hours (since 0.12.0)
@@ -535,14 +553,15 @@ public slots:
 	//! @param maxBright The maximum brightness setting for the image
 	//! @param visible The initial visibility of the image
 	//! @param frame one of EqJ2000|EqDate|EclJ2000|EclDate|Gal(actic)|SuperG(alactic)|AzAlt.
-	//! @note since 2017-03, you can select Frame.
-	//! @note Images in AzAlt frame are not affected by atmosphere effects like refraction or extinction.
+	//! @param withAberration The image, if frame==EqJ2000, undergoes aberration effect. Default: true.
+	//! @note Images in AzAlt frame are not affected by atmosphere effects like refraction or extinction, and also not by aberration.
 	void loadSkyImage(const QString& id, const QString& filename,
 					  double lon0, double lat0,
 					  double lon1, double lat1,
 					  double lon2, double lat2,
 					  double lon3, double lat3,
-					  double minRes=2.5, double maxBright=14, bool visible=true, const QString &frame="EqJ2000");
+					  double minRes=2.5, double maxBright=14, bool visible=true,
+					  const QString &frame="EqJ2000", bool withAberration=true);
 
 
 	//! Convenience function which allows the user to provide longitudinal and latitudinal angles (RA/Dec or Long/Lat or Az/Alt)
@@ -552,7 +571,8 @@ public slots:
 					  const QString& lon1, const QString& lat1,
 					  const QString& lon2, const QString& lat2,
 					  const QString& lon3, const QString& lat3,
-					  double minRes=2.5, double maxBright=14, bool visible=true, const QString& frame="EqJ2000");
+					  double minRes=2.5, double maxBright=14, bool visible=true,
+					  const QString& frame="EqJ2000", bool withAberration=true);
 
 	//! Convenience function which allows loading of a (square) sky image based on a
 	//! central coordinate, angular size and rotation. Note that the edges will not be aligned with edges at center plus/minus size!
@@ -569,11 +589,12 @@ public slots:
 	//! @param maxBright The maximum brightness setting for the image, Vmag/arcmin^2. Use this to blend the brightest possible pixels with DSO. mag 15 or brighter seems ok.
 	//! @param visible The initial visibility of the image
 	//! @param frame one of EqJ2000|EqDate|EclJ2000|EclDate|Gal(actic)|SuperG(alactic)|AzAlt.
-	//! @note since 2017-03, you can select Frame.
+	//! @param withAberration The image, if frame==EqJ2000, undergoes aberration effect. Default: true.
 	//! @note Images in AzAlt frame are not affected by atmosphere effects like refraction or extinction.
 	void loadSkyImage(const QString& id, const QString& filename,
 					  double lon, double lat, double angSize, double rotation,
-					  double minRes=2.5, double maxBright=14, bool visible=true, const QString& frame="EqJ2000");
+					  double minRes=2.5, double maxBright=14, bool visible=true,
+					  const QString& frame="EqJ2000", bool withAberration=true);
 
 	//! Convenience function which allows loading of a (square) sky image based on a
 	//! central coordinate, angular size and rotation.  Parameters are the same
@@ -581,7 +602,8 @@ public slots:
 	//! lon and lat, except here text expressions of angles may be used.
 	void loadSkyImage(const QString& id, const QString& filename,
 					  const QString& lon, const QString& lat, double angSize, double rotation,
-					  double minRes=2.5, double maxBright=14, bool visible=true, const QString& frame="EqJ2000");
+					  double minRes=2.5, double maxBright=14, bool visible=true,
+					  const QString& frame="EqJ2000", bool withAberration=true);
 
 	//! Remove a SkyImage.
 	//! @param id the ID of the image to remove.
@@ -842,6 +864,7 @@ public slots:
 	static QString getEnv(const QString& var);
 
 	//! return whether a particular module has been loaded. Mostly useful to check whether a module available as plugin is active.
+	//! @note See also @ref setStelProperty() and @ref getStelProperty() methods
 	//! @param moduleID the QObject name of the module instance, by convention it is equal to the class name.
 	static bool isModuleLoaded(const QString& moduleID);
 
@@ -861,11 +884,12 @@ public slots:
 
 signals:
 	void requestLoadSkyImage(const QString& id, const QString& filename,
-							 double c1, double c2,
-							 double c3, double c4,
-							 double c5, double c6,
-							 double c7, double c8,
-							 double minRes, double maxBright, bool visible, const StelCore::FrameType frameType);
+							 double lon0, double lat0,
+							 double lon1, double lat1,
+							 double lon2, double lat2,
+							 double lon3, double lat3,
+							 double minRes, double maxBright, bool visible,
+							 const StelCore::FrameType frameType, bool withAberration);
 
 	void requestRemoveSkyImage(const QString& id);
 

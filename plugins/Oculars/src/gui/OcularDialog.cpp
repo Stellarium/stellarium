@@ -183,28 +183,28 @@ void OcularDialog::insertNewCCD()
 {
 	int count = ccdTableModel->rowCount();
 	ccdTableModel->insertRows(count, 1);
-	ui->ccdListView->setCurrentIndex(ccdTableModel->index(count - 1, 1));
+	ui->ccdListView->setCurrentIndex(ccdTableModel->index(count, 1));
 }
 
 void OcularDialog::insertNewOcular()
 {
 	int count = ocularTableModel->rowCount();
 	ocularTableModel->insertRows(count, 1);
-	ui->ocularListView->setCurrentIndex(ocularTableModel->index(count - 1, 1));
+	ui->ocularListView->setCurrentIndex(ocularTableModel->index(count, 1));
 }
 
 void OcularDialog::insertNewTelescope()
 {
 	int count = telescopeTableModel->rowCount();
 	telescopeTableModel->insertRows(count, 1);
-	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(count - 1, 1));
+	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(count, 1));
 }
 
 void OcularDialog::insertNewLens()
 {
 	int count = lensTableModel->rowCount();
 	lensTableModel->insertRows(count, 1);
-	ui->lensListView->setCurrentIndex(lensTableModel->index(count - 1, 1));
+	ui->lensListView->setCurrentIndex(lensTableModel->index(count, 1));
 }
 
 void OcularDialog::moveUpSelectedSensor()
@@ -403,11 +403,10 @@ void OcularDialog::createDialogContent()
 	connect(ui->ccdListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 		ccdMapper, SLOT(setCurrentModelIndex(QModelIndex)));
 	connect(ui->ccdListView, SIGNAL(doubleClicked(QModelIndex)),
-		     this, SLOT(selectCCD(QModelIndex)));
-	connectDoubleProperty(ui->ccdRotAngle, "Oculars.selectedCCDRotationAngle");
-	connectDoubleProperty(ui->OAGPrismPA, "Oculars.selectedCCDPrismPositionAngle");
-	ui->ccdListView->setSelectionBehavior(QAbstractItemView::SelectRows);
-	ui->ccdListView->setCurrentIndex(ccdTableModel->index(0, 1));
+		     this, SLOT(selectCCD(QModelIndex)));	
+	ui->ccdListView->setSelectionBehavior(QAbstractItemView::SelectRows);	
+	int index = plugin->getSelectedCCDIndex();
+	ui->ccdListView->setCurrentIndex(ccdTableModel->index(index>0 ? index : 0, 1));
 
 	connect(ui->ccdChipY,    SIGNAL(editingFinished()), this, SLOT(updateCCD()));
 	connect(ui->ccdChipX,    SIGNAL(editingFinished()), this, SLOT(updateCCD()));
@@ -421,6 +420,8 @@ void OcularDialog::createDialogContent()
 	connect(ui->OAGPrismW,   SIGNAL(editingFinished()), this, SLOT(updateCCD()));
 	connect(ui->OAGDist,     SIGNAL(editingFinished()), this, SLOT(updateCCD()));
 	connect(ui->OAGPrismPA,  SIGNAL(editingFinished()), this, SLOT(updateCCD()));
+	connect(plugin, SIGNAL(selectedCCDRotationAngleChanged(double)), this, SLOT(updateCCDRotationAngles()));
+	connect(plugin, SIGNAL(selectedCCDPrismPositionAngleChanged(double)), this, SLOT(updateCCDRotationAngles()));
 
 	// The ocular mapper
 	ocularMapper = new QDataWidgetMapper();
@@ -438,7 +439,8 @@ void OcularDialog::createDialogContent()
 	connect(ui->ocularListView, SIGNAL(doubleClicked(QModelIndex)),
 		     this, SLOT(selectOcular(QModelIndex)));
 	ui->ocularListView->setSelectionBehavior(QAbstractItemView::SelectRows);
-	ui->ocularListView->setCurrentIndex(ocularTableModel->index(0, 1));
+	index = plugin->getSelectedOcularIndex();
+	ui->ocularListView->setCurrentIndex(ocularTableModel->index(index>0 ? index : 0, 1));
 
 	// We need particular refresh methods to see immediate feedback.
 	connect(ui->ocularAFov,                 SIGNAL(editingFinished()), this, SLOT(updateOcular()));
@@ -459,7 +461,8 @@ void OcularDialog::createDialogContent()
 	connect(ui->lensListView, SIGNAL(doubleClicked(QModelIndex)),
 		     this, SLOT(selectLens(QModelIndex)));
 	ui->lensListView->setSelectionBehavior(QAbstractItemView::SelectRows);
-	ui->lensListView->setCurrentIndex(lensTableModel->index(0, 1));
+	index = plugin->getSelectedLensIndex();
+	ui->lensListView->setCurrentIndex(lensTableModel->index(index>0 ? index : 0, 1));
 
 	connect(ui->lensMultiplier, SIGNAL(editingFinished()), this, SLOT(updateLens()));
 
@@ -479,7 +482,8 @@ void OcularDialog::createDialogContent()
 	connect(ui->telescopeListView, SIGNAL(doubleClicked(QModelIndex)),
 		     this, SLOT(selectTelescope(QModelIndex)));
 	ui->telescopeListView->setSelectionBehavior(QAbstractItemView::SelectRows);
-	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(0, 1));
+	index = plugin->getSelectedTelescopeIndex();
+	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(index>0 ? index : 0, 1));
 
 	connect(ui->telescopeDiameter, SIGNAL(editingFinished()), this, SLOT(updateTelescope()));
 	connect(ui->telescopeFL,       SIGNAL(editingFinished()), this, SLOT(updateTelescope()));
@@ -492,6 +496,7 @@ void OcularDialog::createDialogContent()
 	connect(ui->semiTransparencyCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateGuiOptions()));
 	connect(ui->checkBoxShowFocuserOverlay, SIGNAL(toggled(bool)), this, SLOT(updateGuiOptions()));
 	connect(ui->checkBoxShowCcdCropOverlay, SIGNAL(toggled(bool)), this, SLOT(updateGuiOptions()));
+	setLabelsDescriptionText(ui->binocularsCheckBox->isChecked());
 	updateGuiOptions();
 }
 
@@ -501,6 +506,18 @@ void OcularDialog::setupTelradFOVspins(Vec4f fov)
 	ui->doubleSpinBoxTelradFOV2->setValue(static_cast<double>(fov[1]));
 	ui->doubleSpinBoxTelradFOV3->setValue(static_cast<double>(fov[2]));
 	ui->doubleSpinBoxTelradFOV4->setValue(static_cast<double>(fov[3]));
+}
+
+void OcularDialog::updateCCDRotationAngles()
+{
+	if (dialog->isVisible())
+	{
+		if (plugin->getSelectedCCDIndex()==ccdMapper->currentIndex())
+		{
+			ui->ccdRotAngle->setValue(plugin->getSelectedCCDRotationAngle());
+			ui->OAGPrismPA->setValue(plugin->getSelectedCCDPrismPositionAngle());
+		}
+	}
 }
 
 void OcularDialog::updateTelradCustomFOV()
@@ -624,16 +641,8 @@ void OcularDialog::initAboutText()
 	html +=          q_("In this case, information about crop size overlay will be marked by %1.").arg("[*]") + " ";
 	html +=          q_("This mark is also displayed if the crop size is larger than the sensor size.") + "</p>";
 
-	html += "<h3>" + q_("Links") + "</h3>";
-	html += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg("Oculars plugin") + "</p>";
-	html += "<p><ul>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you have a question, you can {get an answer here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://groups.google.com/forum/#!forum/stellarium\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("Bug reports and feature requests can be made {here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://github.com/Stellarium/stellarium/issues\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you want to read full information about this plugin and its history, you can {get info here}.").toHtmlEscaped().replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Oculars_plugin\">\\1</a>") + "</li>";
-	html += "</ul></p></body></html>";
+	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Oculars plugin");
+	html += "</body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (gui)

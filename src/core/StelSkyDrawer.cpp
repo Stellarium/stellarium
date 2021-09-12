@@ -28,9 +28,7 @@
 #include "StelCore.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
-#ifndef USE_OLD_QGLWIDGET
 #include "StelMainView.hpp"
-#endif
 
 #include "StelModuleMgr.hpp"
 #include "LandscapeMgr.hpp"
@@ -149,9 +147,8 @@ void StelSkyDrawer::init()
 	initializeOpenGLFunctions();
 
 	// Load star texture no mipmap:
-	//texHalo = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/star16x16.png");
-	//texHaloRayed = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/star16x16_rays.png");
-	texHalo = StelApp::getInstance().getTextureManager().createTexture(flagStarSpiky ? texImgHaloSpiky : texImgHalo);
+	texHalo = StelApp::getInstance().getTextureManager().createTexture(texImgHalo);
+	texHaloRayed = StelApp::getInstance().getTextureManager().createTexture(texImgHaloSpiky);
 	texBigHalo = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/haloLune.png");
 	texSunHalo = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/halo.png");	
 	texSunCorona = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/corona.png");
@@ -253,15 +250,14 @@ float StelSkyDrawer::computeLimitMagnitude() const
 	while (std::fabs(lim-a)>0.05f)
 	{
 		computeRCMag(lim, &rcmag);
+		float tmp = lim;
 		if (rcmag.radius<=0.f)
 		{
-			float tmp = lim;
 			lim=(a+lim)*0.5f;
 			b=tmp;
 		}
 		else
 		{
-			float tmp = lim;
 			lim=(b+lim)*0.5f;
 			a=tmp;
 		}
@@ -336,9 +332,7 @@ bool StelSkyDrawer::computeRCMag(float mag, RCMag* rcMag) const
 {
 	rcMag->radius = eye->adaptLuminanceScaledLn(pointSourceMagToLnLuminance(mag), static_cast<float>(starRelativeScale)*1.40f*0.5f);
 	rcMag->radius *=starLinearScale;
-#ifndef USE_OLD_QGLWIDGET
 	rcMag->radius *=StelMainView::getInstance().getCustomScreenshotMagnification();
-#endif
 	// Use now statically min_rmag = 0.5, because higher and too small values look bad
 	if (rcMag->radius < 0.3f)
 	{
@@ -388,7 +382,10 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 
 	if (nbPointSources==0)
 		return;
-	texHalo->bind();
+	if (flagStarSpiky)
+		texHaloRayed->bind();
+	else
+		texHalo->bind();
 	sPainter->setBlending(true, GL_ONE, GL_ONE);
 
 	const Mat4f& m = sPainter->getProjector()->getProjectionMatrix();
@@ -488,7 +485,7 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 	const float pixPerRad = painter->getProjector()->getPixelPerRadAtCenter();
 	// Assume a disk shape
 	float pixRadius = std::sqrt(illuminatedArea/(60.f*60.f)*M_PI_180f*M_PI_180f*(pixPerRad*pixPerRad))/M_PIf;
-
+	float pxRd = pixRadius*3.f+100.f;
 	bool noStarHalo = false;
 
 	if (mag<-15.f)
@@ -499,7 +496,7 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 		painter->setBlending(true, GL_ONE, GL_ONE);
 
 		float rmag = big3dModelHaloRadius*(mag+15.f)/-11.f;
-		float cmag = (rmag>=pixRadius*3.f+100.f) ? 1.f : qMax(0.f, 1.f-(pixRadius*3.f+100-rmag)/100);
+		float cmag = (rmag>=pxRd) ? 1.f : qMax(0.f, 1.f-(pxRd-rmag)/100);
 		Vec3f win;
 		painter->getProjector()->project(v, win);
 		painter->setColor(color*cmag);
@@ -512,6 +509,11 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 	flagStarTwinkle = false;
 	const bool saveForcedTwinkle = flagForcedTwinkle;
 	flagForcedTwinkle = false;
+	const bool saveSpiky = flagStarSpiky;
+	if (mag<-5.f) // exclude very bright objects only
+		flagStarSpiky = false;
+	else
+		flagStarSpiky = saveSpiky;
 
 	RCMag rcm;
 	computeRCMag(mag, &rcm);
@@ -569,6 +571,7 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 	}
 	flagStarTwinkle=saveTwinkle;
 	flagForcedTwinkle=saveForcedTwinkle;
+	flagStarSpiky=saveSpiky;
 }
 
 float StelSkyDrawer::findWorldLumForMag(float mag, float targetRadius) const
@@ -673,7 +676,6 @@ void StelSkyDrawer::setFlagStarSpiky(bool b)
 	if (b!=flagStarSpiky)
 	{
 		flagStarSpiky=b;
-		texHalo = StelApp::getInstance().getTextureManager().createTexture(flagStarSpiky ? texImgHaloSpiky : texImgHalo);
 		emit flagStarSpikyChanged(flagStarSpiky);
 	}
 }

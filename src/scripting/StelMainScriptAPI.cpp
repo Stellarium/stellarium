@@ -75,8 +75,8 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 {
 	if(StelSkyLayerMgr* smgr = GETSTELMODULE(StelSkyLayerMgr))
 	{
-		connect(this, SIGNAL(requestLoadSkyImage(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool, StelCore::FrameType)),
-			smgr, SLOT(         loadSkyImage(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool, StelCore::FrameType)));
+		connect(this, SIGNAL(requestLoadSkyImage(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool, StelCore::FrameType, bool)),
+			smgr, SLOT(         loadSkyImage(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool, StelCore::FrameType, bool)));
 		connect(this, SIGNAL(requestRemoveSkyImage(const QString&)), smgr, SLOT(removeSkyLayer(const QString&)));
 	}
 
@@ -160,6 +160,11 @@ QString StelMainScriptAPI::getDeltaT()
 	return StelUtils::hoursToHmsStr(StelApp::getInstance().getCore()->getDeltaT()/3600.);
 }
 
+double StelMainScriptAPI::getDeltaTsec()
+{
+	return StelApp::getInstance().getCore()->getDeltaT();
+}
+
 QString StelMainScriptAPI::getDeltaTAlgorithm()
 {
 	return StelApp::getInstance().getCore()->getCurrentDeltaTAlgorithmKey();
@@ -209,22 +214,24 @@ void StelMainScriptAPI::setPlanetocentricCalculations(bool f)
 void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, double altitude, double duration, const QString& name, const QString& planet)
 {
 	StelCore* core = StelApp::getInstance().getCore();
-	StelObjectP ssObj = GETSTELMODULE(SolarSystem)->searchByName(planet);	
 	StelLocation loc = core->getCurrentLocation();
 	loc.longitude = static_cast<float>(longitude);
 	loc.latitude = static_cast<float>(latitude);
 	if (altitude > -1000)
 		loc.altitude = qRound(altitude);
-	if (!ssObj.isNull())
-		loc.planetName = ssObj->getEnglishName();
-	else
-		return; // Avoid crash when planet is not defined or not exist
+	if (!planet.isEmpty())
+	{
+		// backward compatible layer: probably we have Solar system body...
+		PlanetP ssObj = GETSTELMODULE(SolarSystem)->searchByEnglishName(planet);
+		if (!ssObj.isNull())
+			loc.planetName = ssObj->getEnglishName();
+	}
 
 	QRegExp cico( "^\\s*([^,]+),\\s*(\\S.*)$" );
 	if( cico.exactMatch( name ) )
 	{
 		loc.name = cico.cap(1);
-		loc.country = cico.cap(2);
+		loc.region = cico.cap(2);
 	}
 	else
 		loc.name = name;
@@ -454,7 +461,7 @@ void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 				     double lon1, double lat1,
 				     double lon2, double lat2,
 				     double lon3, double lat3,
-				     double minRes, double maxBright, bool visible, const QString &frame)
+				     double minRes, double maxBright, bool visible, const QString &frame, bool withAberration)
 {
 	QString path = "scripts/" + filename;
 	StelCore::FrameType frameType=StelCore::FrameJ2000;
@@ -475,7 +482,7 @@ void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 		qDebug() << "StelMainScriptAPI::loadSkyImage(): unknown frame type " << frame << " requested -- Using Equatorial J2000";
 	}
 
-	emit(requestLoadSkyImage(id, path, lon0, lat0, lon1, lat1, lon2, lat2, lon3, lat3, minRes, maxBright, visible, frameType));
+	emit(requestLoadSkyImage(id, path, lon0, lat0, lon1, lat1, lon2, lat2, lon3, lat3, minRes, maxBright, visible, frameType, withAberration));
 }
 
 // Convenience method:
@@ -484,20 +491,20 @@ void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 				     const QString& lon1, const QString& lat1,
 				     const QString& lon2, const QString& lat2,
 				     const QString& lon3, const QString& lat3,
-				     double minRes, double maxBright, bool visible, const QString& frame)
+				     double minRes, double maxBright, bool visible, const QString& frame, bool withAberration)
 {
 	loadSkyImage(id, filename,
 		     StelUtils::getDecAngle(lon0) *M_180_PI, StelUtils::getDecAngle(lat0)*M_180_PI,
 		     StelUtils::getDecAngle(lon1) *M_180_PI, StelUtils::getDecAngle(lat1)*M_180_PI,
 		     StelUtils::getDecAngle(lon2) *M_180_PI, StelUtils::getDecAngle(lat2)*M_180_PI,
 		     StelUtils::getDecAngle(lon3) *M_180_PI, StelUtils::getDecAngle(lat3)*M_180_PI,
-		     minRes, maxBright, visible, frame);
+		     minRes, maxBright, visible, frame, withAberration);
 }
 
 // Convenience method: (Fixed 2017-03: rotation increased by 90deg, makes upright images now!)
 void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 				     double lon, double lat, double angSize, double rotation,
-				     double minRes, double maxBright, bool visible, const QString &frame)
+				     double minRes, double maxBright, bool visible, const QString &frame, bool withAberration)
 {
 	Vec3f XYZ;
 	static const float RADIUS_NEB = 1.f;
@@ -525,18 +532,18 @@ void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 		     static_cast<double>(cornersRaDec[1][0])*(M_180_PI), static_cast<double>(cornersRaDec[1][1])*(M_180_PI),
 		     static_cast<double>(cornersRaDec[3][0])*(M_180_PI), static_cast<double>(cornersRaDec[3][1])*(M_180_PI),
 		     static_cast<double>(cornersRaDec[2][0])*(M_180_PI), static_cast<double>(cornersRaDec[2][1])*(M_180_PI),
-		     minRes, maxBright, visible, frame);
+		     minRes, maxBright, visible, frame, withAberration);
 }
 
 // Convenience method:
 void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 				     const QString& lon, const QString& lat,
 				     double angSize, double rotation,
-				     double minRes, double maxBright, bool visible, const QString &frame)
+				     double minRes, double maxBright, bool visible, const QString &frame, bool withAberration)
 {
 	loadSkyImage(id, filename, StelUtils::getDecAngle(lon)*M_180_PI,
 		     StelUtils::getDecAngle(lat)*M_180_PI, angSize,
-		     rotation, minRes, maxBright, visible, frame);
+		     rotation, minRes, maxBright, visible, frame, withAberration);
 }
 
 void StelMainScriptAPI::removeSkyImage(const QString& id)
@@ -879,10 +886,19 @@ void StelMainScriptAPI::selectObjectByName(const QString& name, bool pointer)
 {
 	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
 	omgr->setFlagSelectedObjectPointer(pointer);
-	if (name.isEmpty() || !omgr->findAndSelect(name))
+	bool state = omgr->findAndSelect(name);
+	// backward compatible layer: probably we have Solar system body...
+	if (!state)
 	{
-		omgr->unSelect();
+		StelObjectP obj = qSharedPointerCast<StelObject>(GETSTELMODULE(SolarSystem)->searchByEnglishName(name));
+		if (!obj.isNull())
+			state = omgr->setSelectedObject(obj, StelModule::ReplaceSelection);
+		else
+			state = false;
 	}
+
+	if (name.isEmpty() || !state)
+		omgr->unSelect();
 }
 
 void StelMainScriptAPI::selectConstellationByName(const QString& name)
@@ -899,6 +915,9 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 {
 	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
 	StelObjectP obj = omgr->searchByName(name);
+	// backward compatible layer: probably we have Solar system body...
+	if (obj.isNull())
+		obj = qSharedPointerCast<StelObject>(GETSTELMODULE(SolarSystem)->searchByEnglishName(name));
 
 	return StelObjectMgr::getObjectInfo(obj);
 }
@@ -938,6 +957,15 @@ void StelMainScriptAPI::addToSelectedObjectInfoString(const QString &str, bool r
 	}
 }
 
+void StelMainScriptAPI::setStelProperty(const QString& propertyName, QVariant propertyValue)
+{
+	StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue(propertyName, propertyValue);
+}
+
+QVariant StelMainScriptAPI::getStelProperty(const QString& propertyName)
+{
+	return StelApp::getInstance().getStelPropertyManager()->getStelPropertyValue(propertyName, true);
+}
 
 
 void StelMainScriptAPI::clear(const QString& state)
@@ -969,8 +997,8 @@ void StelMainScriptAPI::clear(const QString& state)
 		StelPropertyMgr* propMgr = StelApp::getInstance().getStelPropertyManager();
 
 		// Hide artificial satellites through StelProperties to avoid crash if plugin was not loaded
-		propMgr->setStelPropertyValue("Satellites.hintsVisible",   false);
-		propMgr->setStelPropertyValue("Satellites.labelsVisible",  false);
+		propMgr->setStelPropertyValue("Satellites.flagHintsVisible",   false);
+		propMgr->setStelPropertyValue("Satellites.flagLabelsVisible",  false);
 		propMgr->setStelPropertyValue("Satellites.flagOrbitLines", false);
 
 		// identical for all states

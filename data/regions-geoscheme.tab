@@ -1,0 +1,235 @@
+# United Nations geoscheme (UN M49) with extensions
+#
+# This file contains a table of UN geoscheme codes for Earth. The codes 
+# for other Solar system bodies are extension. Columns are separated by 
+# a single tab. Lines beginning with '#' are comments. All text uses 
+# UTF-8 encoding. The columns of the table are as follows:
+#
+# 1. Digital code for geographic region (ourself code)
+# 2. The name of celestial object of the geographic region
+# 3. The usual English name for the coded geographic region
+# 4. The list of ISO 3166-1 alpha-2 codes of countries from the coded 
+#    geographic region (may be empty)
+#
+# Notes:
+# 1. All codes <100 (0xx) are uses for Earth's regions
+# 2. All 1xx codes are using for regions of Mercury
+# 3. All 2xx codes are using for regions of Venus
+# 4. All 3xx codes are using for regions of the Moon
+# 5. All 4xx codes are using for regions of Mars and their moons
+# 6. All 5xx codes are using for regions of Jupiter's moons
+# 7. All 6xx codes are using for regions of Saturn's moons
+# 8. All 7xx codes are using for regions of Uranus' moons
+# 9. All 8xx codes are using for regions of Neptune' moons
+#
+# By default celestial bodies without artificial objects has no regions 
+# in list of below.
+#
+01	Earth	Northern Africa	DZ,EG,LY,MA,SD,TN,EH
+02	Earth	Eastern Africa	BI,KM,DJ,ER,ET,TF,KE,MG,MW,MU,YT,MZ,RE,RW,SC,SO,SS,TZ,UG,ZM,ZW
+03	Earth	Central Africa	AO,CM,CF,TD,CG,CD,GQ,GA,ST
+04	Earth	Southern Africa	BW,SZ,LS,NA,ZA
+05	Earth	Western Africa	BJ,BF,CV,CI,GM,GH,GN,GW,LR,ML,MR,NE,NG,SH,SN,SL,TG
+06	Earth	Caribbean	AI,AG,AW,BS,BB,BQ,KY,CU,CW,DM,DO,GD,GP,HT,JM,MQ,MS,PR,BL,KN,LC,MF,VC,SX,TT,TC,VG,VI
+07	Earth	Central America	BZ,CR,SV,GT,HN,MX,NI,PA
+08	Earth	Southern America	AR,BO,BV,BR,CL,CO,EC,FK,GF,GY,PY,PE,GS,SR,UY,VE
+09	Earth	Northern America	BM,CA,GL,PM,US
+10	Earth	Antarctica	AQ
+11	Earth	Northern Asia	RU
+12	Earth	Central Asia	KZ,KG,TJ,TM,UZ
+13	Earth	Eastern Asia	CN,HK,JP,KP,KR,MO,MN,TW
+14	Earth	South-eastern Asia	BN,KH,ID,LA,MY,MM,PH,SG,TH,TL,VN
+15	Earth	Southern Asia	AF,BD,BT,IN,IR,MV,NP,PK,LK
+16	Earth	Western Asia	AM,AZ,BH,CY,GE,IQ,IL,JO,KW,LB,OM,PS,QA,SA,SY,TR,AE,YE
+17	Earth	Eastern Europe	BY,BG,CZ,HU,MD,PL,RO,RU,SK,UA
+18	Earth	Northern Europe	AX,GG,JE,CQ,DK,EE,FO,FI,IS,IE,IM,LV,LT,NO,SJ,SE,GB
+19	Earth	Southern Europe	AL,AD,BA,HR,GI,GR,VA,IT,MT,ME,MK,PT,SM,RS,SI,ES,XK
+20	Earth	Western Europe	AT,BE,FR,DE,LI,LU,MC,NL,CH
+21	Earth	Australasia	AU,CX,CC,HM,NZ,NF
+22	Earth	Melanesia	FJ,NC,PG,SB,VU
+23	Earth	Micronesia	GU,KI,MH,FM,NR,MP,PW,UM
+24	Earth	Polynesia	AS,CK,PF,NU,PN,WS,TK,TO,TV,WF
+#
+# Mercury
+#
+100	Mercury	Aparangi Planitia
+101	Mercury	Borealis Planitia
+102	Mercury	Budh Planitia
+103	Mercury	Caloris Planitia
+104	Mercury	Lugus Planitia
+105	Mercury	Mearcair Planitia
+106	Mercury	Odin Planitia
+107	Mercury	Otaared Planitia
+108	Mercury	Papsukkal Planitia
+109	Mercury	Sihtu Planitia
+110	Mercury	Sobkou Planitia
+111	Mercury	Stilbon Planitia
+112	Mercury	Suisei Planitia
+113	Mercury	Tir Planitia
+114	Mercury	Turms Planitia
+115	Mercury	Utaridi Planitia
+116	Mercury	Catuilla Planum
+#
+# Venus
+#
+200	Venus	Aphrodite Terra
+201	Venus	Ishtar Terra
+202	Venus	Lada Terra
+203	Venus	Alpha Regio
+204	Venus	Asteria Regio
+205	Venus	Atla Regio
+206	Venus	Bell Regio
+207	Venus	Beta Regio
+208	Venus	Dione Regio
+209	Venus	Dsonkwa Regio
+210	Venus	Eistla Regio
+211	Venus	Hyndla Regio
+212	Venus	Imdr Regio
+213	Venus	Ishkus Regio
+214	Venus	Laufey Regio
+215	Venus	Neringa Regio
+216	Venus	Ovda Regio
+217	Venus	Phoebe Regio
+218	Venus	Themis Regio
+219	Venus	Thetis Regio
+220	Venus	Ulfrun Regio
+221	Venus	Vasilisa Regio
+222	Venus	Aibarchin Planitia
+223	Venus	Aino Planitia
+224	Venus	Akhtamar Planitia
+225	Venus	Alma-Merghen Planitia
+226	Venus	Atalanta Planitia
+227	Venus	Audra Planitia
+228	Venus	Bereghinya Planitia
+229	Venus	Dzerassa Planitia
+230	Venus	Fonueha Planitia
+231	Venus	Ganiki Planitia
+232	Venus	Guinevere Planitia
+233	Venus	Gunda Planitia
+234	Venus	Helen Planitia
+235	Venus	Hinemoa Planitia
+236	Venus	Imapinua Planitia
+237	Venus	Kanykey Planitia
+238	Venus	Kawelu Planitia
+239	Venus	Laimdota Planitia
+240	Venus	Lavinia Planitia
+241	Venus	Leda Planitia
+242	Venus	Libuse Planitia
+243	Venus	Llorona Planitia
+244	Venus	Louhi Planitia
+245	Venus	Lowana Planitia
+246	Venus	Mugazo Planitia
+247	Venus	Navka Planitia
+248	Venus	Niobe Planitia
+249	Venus	Nsomeka Planitia
+250	Venus	Nuptadi Planitia
+251	Venus	Rusalka Planitia
+252	Venus	Sedna Planitia
+253	Venus	Snegurochka Planitia
+254	Venus	Sogolon Planitia
+255	Venus	Tahmina Planitia
+256	Venus	Tilli-Hanum Planitia
+257	Venus	Tinatin Planitia
+258	Venus	Undine Planitia
+259	Venus	Vellamo Planitia
+260	Venus	Vinmara Planitia
+261	Venus	Wawalag Planitia
+262	Venus	Zhibek Planitia
+#
+# The Moon
+#
+300	Moon	Ocean of Storms
+301	Moon	Serpent Sea
+302	Moon	Southern Sea
+303	Moon	Sea of Knowledge
+304	Moon	Sea of Crises
+305	Moon	Sea of Fecundity
+306	Moon	Sea of Cold
+307	Moon	Sea of Humboldt
+308	Moon	Sea of Moisture
+309	Moon	Sea of Rains
+310	Moon	Sea of Cleverness
+311	Moon	Sea of Islands
+312	Moon	Sea of the Edge
+313	Moon	Sea of Moscow
+314	Moon	Sea of Nectar
+315	Moon	Sea of Clouds
+316	Moon	Eastern sea
+317	Moon	Sea of Serenity
+318	Moon	Smyth's Sea
+319	Moon	Foaming Sea
+320	Moon	Sea of Tranquillity
+321	Moon	Sea of Waves
+322	Moon	Sea of Vapors
+323	Moon	Northern highlands
+324	Moon	Jura mountains
+325	Moon	Alps province
+326	Moon	Caucasus province
+327	Moon	Lake of Dreams
+328	Moon	Taurus mountains
+329	Moon	Bay of Dew
+330	Moon	Apennines province
+331	Moon	Carpatian province
+332	Moon	Seething Bay
+333	Moon	Aestuum upland
+334	Moon	Haemus province
+335	Moon	Procellarum upland
+336	Moon	Central crater province
+337	Moon	Macro-crater province
+338	Moon	Southeastern crater province
+339	Moon	Cratered plain province
+340	Moon	Southwestern crater province
+341	Moon	Nectaris crater province
+342	Moon	Pyrenees province
+343	Moon	Western highlands
+344	Moon	Eastern highlands
+345	Moon	Bay of the center
+346	Moon	Marsh of Epidemics
+347	Moon	Far-side southern lowland
+348	Moon	Far-side northern lowland
+349	Moon	Far-side central highland
+#
+# Mars
+#
+400	Mars	Acidalia Planitia
+401	Mars	Amazonis Planitia
+402	Mars	Arcadia Planitia
+403	Mars	Argyre Planitia
+404	Mars	Chryse Planitia
+405	Mars	Elysium Planitia
+406	Mars	Eridania Planitia
+407	Mars	Hellas Planitia
+408	Mars	Isidis Planitia
+409	Mars	Utopia Planitia
+410	Mars	Aonia Terra
+411	Mars	Arabia Terra
+412	Mars	Margaritifer Terra
+413	Mars	Noachis Terra
+414	Mars	Promethei Terra
+415	Mars	Tempe Terra
+416	Mars	Terra Cimmeria
+417	Mars	Terra Sabaea
+418	Mars	Terra Sirenum
+419	Mars	Tyrrhena Terra
+420	Mars	Xanthe Terra
+421	Mars	Vastitas Borealis
+422	Mars	Tharsis
+423	Mars	Planum Boreum
+424	Mars	Planum Australe
+425	Mars	Lunae Planum
+#
+# Moons of Saturn
+#
+600	Titan	Garotman Terra
+601	Titan	Tollan Terra
+602	Titan	Tsiipiya Terra
+603	Titan	Yalaing Terra
+604	Titan	Xanadu
+605	Titan	Kraken Mare
+606	Titan	Ligeia Mare
+607	Titan	Punga Mare
+608	Titan	Concordia Regio
+609	Titan	Hetpet Regio
+610	Titan	Hotei Regio
+611	Titan	Ochumare Regio
+612	Titan	Tui Regio
