@@ -41,4 +41,5 @@ ADD_SUBDIRECTORY( western )
 ADD_SUBDIRECTORY( western_rey )
 ADD_SUBDIRECTORY( western_hlad )
 ADD_SUBDIRECTORY( western_SnT )
-ADD_SUBDIRECTORY( western_sternenkarten )
+# Exclude from standard package
+# ADD_SUBDIRECTORY( western_sternenkarten )
