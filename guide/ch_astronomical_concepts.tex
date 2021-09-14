@@ -186,7 +186,9 @@ catalogs such as the Hipparcos catalog.
 %% see also confusion between "equinox" and "epoch" at https://en.wikipedia.org/wiki/Talk:Epoch_(astronomy)#Epoch_and_Equinox
 However, the story is complicated a little by \indexterm{precession}
 (section~\ref{sec:Concepts:Precession}) and \indexterm{parallax}
-(section~\ref{sec:Concepts:Parallax}). Precession causes a slow drift of the coordinates almost parallel to the \indexterm{ecliptic}, and therefore star catalogs always have to specify their \indexterm{equinox} of
+(section~\ref{sec:Concepts:Parallax}). Precession causes a slow drift
+of the coordinates almost parallel to the \indexterm{ecliptic},
+and therefore star catalogs always have to specify their \indexterm{equinox} of
 validity.
 
 Current catalogs and atlases use coordinates for the
@@ -197,17 +199,21 @@ the astronomical literature \citep{ESAA:2013}. Other catalogs with data
 referring to ``J2000.0'' may have to be slightly adjusted (usually in
 sub-arcsecond rotations) to match the ICRF coordinate system (short ICRS).
 
-Stars close to the celestial poles are permanently visible above the
-horizon and thus called \indexterm{circumpolar}.  Those stars have
-observable \indexterm[culmination, upper]{upper} and
-\indexterm[culmination, lower]{lower culminations} when they pass the
-meridian arc spanning from the celestial pole over the zenith to the
-opposite point on the horizon, or from the celestial pole to the
-horizon below, respectively.
+Stars close to the \indexterm[pole, celestial]{celestial poles} are
+permanently visible above the horizon and thus called
+\indexterm{circumpolar}.  Those stars have observable
+\indexterm[culmination, upper]{upper} and \indexterm[culmination,
+  lower]{lower culminations} when they pass the meridian arc spanning
+from the celestial pole over the zenith to the opposite point on the
+horizon, or from the celestial pole to the horizon below,
+respectively.
 
-These stars also have limits in azimuth which they can reach in their
-daily course, \newFeature{0.21.2} the points of \indexterm[digression,
-  greatest]{greatest digression}.
+Those circumpolar stars which show their upper culmination between
+\indexterm[pole, celestial]{pole} and \indexterm{zenith} also have
+limits in \indexterm{azimuth} which they can reach in their daily course,
+\newFeature{0.21.2} the points of \indexterm[digression,
+  greatest]{greatest digression}. At these points they move vertically
+upwards (in the east) or downwards (in the west), respectively.
 
 Stellarium can draw grid lines for equatorial coordinates. Use the
 button \guibutton{0.6}{bt_eq_grid.png} on the main toolbar to activate

@@ -677,7 +677,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		else if (rts[0]<99.f && rts[2]>99.f)
 			res += q_("Polar dusk") + "<br />";
 
-		// Greatest Digression: limiting azimuth and hour angles for circumpolar stars
+		// Greatest Digression: limiting azimuth and hour angles for stars with upper culmination between pole and zenith
 		// This may fill 2 lines where RTS just says "circumpolar"
 		double dec_equ, ra_equ;
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
@@ -686,7 +686,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		{
 			const double theta=acos(tan(latitude)/tan(dec_equ)); // hour angle
 			double az=asin(cos(dec_equ)/cos(latitude)); // azimuth (eastern)
-			// TRANSLATORS: Greatest Eastern Digression is the maximum azimuth for circumpolar stars
+			// TRANSLATORS: Greatest Eastern Digression is the maximum azimuth for stars with upper culmination between pole and zenith
 			QString event(q_("Max. E. Digression"));
 			// TRANSLATORS: azimuth (abbrev.)
 			QString azStr=(withDesignations? qc_("A", "celestial coordinate system") : qc_("Az.", "celestial coordinate system"));
@@ -716,7 +716,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			else
 				res += QString("%1: %2=%3, %4=%5<br/>").arg(event,  azStr,  firstCoordinate, haStr, secondCoordinate);
 
-			// TRANSLATORS: Greatest Western Digression is the maximum western azimuth for circumpolar stars
+			// TRANSLATORS: Greatest Western Digression is the maximum western azimuth for stars with upper culmination between pole and zenith
 			event=q_("Max. W. Digression");
 			if (withDecimalDegree)
 			{
