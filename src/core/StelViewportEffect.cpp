@@ -148,7 +148,7 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 
 				// sharp image up to the border of the fisheye image, at the cost of
 				// accepting clamping artefacts. You can get rid of the clamping
-				// artefacts by specifying a viewport size a little less then
+				// artefacts by specifying a viewport size a little less than
 				// (1<<n)*(1<<n), for instance 1022*1022. With a viewport size
 				// of 512*512 and viewportFovDiameter=512 you will get clamping
 				// artefacts in the 3 otherwise black hills on the bottom of the image.
@@ -177,7 +177,7 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 		QTextStream in;
 		QString fName = StelFileMgr::findFile(custom_distortion_file);
 		if (fName.isEmpty()) {
-			qWarning() << "WARNING: could not open custom_distortion_file:" << custom_distortion_file;
+			qWarning() << "WARNING: could not find custom_distortion_file:" << custom_distortion_file;
 		} else {
 			file.setFileName(fName);
 			if(file.open(QIODevice::ReadOnly))
@@ -344,4 +344,13 @@ void StelViewportDistorterFisheyeToSphericMirror::paintViewportBuffer(const QOpe
 	GL(gl->glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST));
 	GL(gl->glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST));
 }
+
+void StelViewportFaderEffect::alterBuffer(QOpenGLFramebufferObject* buf) const
+{
+	Q_UNUSED(buf)
+	// TODO: I am still unsure about how to use this. When I want to have a scene fading to black (effect of a light echo or showing star trails),
+	// will the main buffer be changed, or can I only apply an effect to the finally displayed image?
+	// https://stackoverflow.com/questions/6810591/how-to-make-fading-to-black-effect-with-opengl
+}
+
 
