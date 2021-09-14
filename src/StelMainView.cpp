@@ -194,7 +194,7 @@ public:
 
 	virtual ~NightModeGraphicsEffect() Q_DECL_OVERRIDE
 	{
-		// NOTE: Why Q_ASSERT is here and why destructor is not marked as 'override'?
+		// NOTE: Why Q_ASSERT is here?
 		//Q_ASSERT(parent->glContext() == QOpenGLContext::currentContext());
 		//clean up fbo
 		delete fbo;

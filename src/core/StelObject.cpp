@@ -678,7 +678,6 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			res += q_("Polar dusk") + "<br />";
 
 		// Greatest Digression: limiting azimuth and hour angles for stars with upper culmination between pole and zenith
-		// This may fill 2 lines where RTS just says "circumpolar"
 		double dec_equ, ra_equ;
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
 		const double latitude=static_cast<double>(core->getCurrentLocation().latitude)*M_PI_180;
