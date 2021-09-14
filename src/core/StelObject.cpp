@@ -688,6 +688,10 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			double az=asin(cos(dec_equ)/cos(latitude)); // azimuth (eastern)
 			// TRANSLATORS: Greatest Eastern Digression is the maximum azimuth for circumpolar stars
 			QString event(q_("Max. E. Digression"));
+			// TRANSLATORS: azimuth (abbrev.)
+			QString azStr=(withDesignations? qc_("A", "celestial coordinate system") : qc_("Az.", "celestial coordinate system"));
+			// Translators: hour angle  (abbrev.)
+			QString haStr=(withDesignations? qc_("h", "celestial coordinate system") : qc_("HA", "celestial coordinate system"));
 			if (latitude<0.)
 				az=M_PI-az;
 			if (StelApp::getInstance().getFlagSouthAzimuthUsage())
@@ -707,10 +711,10 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			if (withTables)
 			{
 				res += "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
-				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2:</td><td style='text-align:right;'>%3</td><td style='text-align:right;'>/%4:</td><td style='text-align:right;'>%5</td></tr>").arg(event,  q_("A"),  firstCoordinate, q_("h"), secondCoordinate);
+				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2:</td><td style='text-align:right;'>%3</td><td style='text-align:right;'>/%4:</td><td style='text-align:right;'>%5</td></tr>").arg(event,  azStr,  firstCoordinate, haStr, secondCoordinate);
 			}
 			else
-				res += QString("%1: %2=%3, %4=%5<br/>").arg(event,  q_("A"),  firstCoordinate, q_("h"), secondCoordinate);
+				res += QString("%1: %2=%3, %4=%5<br/>").arg(event,  azStr,  firstCoordinate, haStr, secondCoordinate);
 
 			// TRANSLATORS: Greatest Western Digression is the maximum western azimuth for circumpolar stars
 			event=q_("Max. W. Digression");
@@ -727,11 +731,11 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 
 			if (withTables)
 			{
-				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2:</td><td style='text-align:right;'>%3</td><td style='text-align:right;'>/%4:</td><td style='text-align:right;'>%5</td></tr>").arg(event,  q_("A"),  firstCoordinate, q_("h"), secondCoordinate);
+				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2:</td><td style='text-align:right;'>%3</td><td style='text-align:right;'>/%4:</td><td style='text-align:right;'>%5</td></tr>").arg(event,  azStr,  firstCoordinate, haStr, secondCoordinate);
 				res += QString("</table>");
 			}
 			else
-				res += QString("%1: %2=%3, %4=%5<br/>").arg(event, q_("A"),  firstCoordinate, q_("h"), secondCoordinate);
+				res += QString("%1: %2=%3, %4=%5<br/>").arg(event, azStr,  firstCoordinate, haStr, secondCoordinate);
 		}
 		res += getExtraInfoStrings(flags&RTSTime).join(' ');
 	}
