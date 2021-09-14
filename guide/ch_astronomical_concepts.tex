@@ -186,7 +186,9 @@ catalogs such as the Hipparcos catalog.
 %% see also confusion between "equinox" and "epoch" at https://en.wikipedia.org/wiki/Talk:Epoch_(astronomy)#Epoch_and_Equinox
 However, the story is complicated a little by \indexterm{precession}
 (section~\ref{sec:Concepts:Precession}) and \indexterm{parallax}
-(section~\ref{sec:Concepts:Parallax}). Precession causes a slow drift of the coordinates almost parallel to the \indexterm{ecliptic}, and therefore star catalogs always have to specify their \indexterm{equinox} of
+(section~\ref{sec:Concepts:Parallax}). Precession causes a slow drift
+of the coordinates almost parallel to the \indexterm{ecliptic},
+and therefore star catalogs always have to specify their \indexterm{equinox} of
 validity.
 
 Current catalogs and atlases use coordinates for the
@@ -197,17 +199,27 @@ the astronomical literature \citep{ESAA:2013}. Other catalogs with data
 referring to ``J2000.0'' may have to be slightly adjusted (usually in
 sub-arcsecond rotations) to match the ICRF coordinate system (short ICRS).
 
+Stars close to the \indexterm[pole, celestial]{celestial poles} are
+permanently visible above the horizon and thus called
+\indexterm{circumpolar}.  Those stars have observable
+\indexterm[culmination, upper]{upper} and \indexterm[culmination,
+  lower]{lower culminations} when they pass the meridian arc spanning
+from the celestial pole over the zenith to the opposite point on the
+horizon, or from the celestial pole to the horizon below,
+respectively.
+
+Those circumpolar stars which show their upper culmination between
+\indexterm[pole, celestial]{pole} and \indexterm{zenith} also have
+limits in \indexterm{azimuth} which they can reach in their daily course,
+\newFeature{0.21.2} the points of \indexterm[digression,
+  greatest]{greatest digression}. At these points they move vertically
+upwards (in the east) or downwards (in the west), respectively.
 
 Stellarium can draw grid lines for equatorial coordinates. Use the
 button \guibutton{0.6}{bt_eq_grid.png} on the main toolbar to activate
 this grid, or press the \key{E} key to draw the equatorial grid for
 the simulation time. The Markings dialog (\ref{sec:gui:view:markings})
 allows you to set also the grid for J2000.0 standard coordinates.
-
-In case you are observing from another celestial object, the
-equatorial coordinates use a system similar to the one referring to
-the Earth-based coordinates, but parallel to the planet's rotational
-axis.
 
 There are again a few great circles with special names which
 Stellarium can draw in addition, both for simulation time and for
@@ -222,6 +234,11 @@ J2000.0 (see section~\ref{sec:gui:view:markings}).
   \indexterm[Colure!Solstitial]{Solstitial Colure} runs from the NCP through \indexterm{First Point of
   Cancer} \Cancer, SCP and \indexterm{First Point of Capricorn} \Capricorn.
 \end{description}
+
+In case you are observing from another celestial object, the
+equatorial coordinates use a system similar to the one referring to
+the Earth-based coordinates, but parallel to the planet's rotational
+axis.
 
 \subsection{Ecliptical Coordinates}
 \label{sec:Concepts:Ecliptical}
@@ -242,7 +259,7 @@ plane. Earth acts like a spinning top and evades this pull in a
 sideways motion, so that Earth's axis seems to describe a small circle
 over a period of almost 26.000 years (see section~\ref{sec:Concepts:Precession}). 
 
-In addition, ecliptic obliquity against the equatorial coordinates,
+In addition, \indexterm[obliquity, ecliptic]{ecliptic obliquity} against the equatorial coordinates,
 which mirrors the Earth's axial tilt, slowly changes.
 
 Therefore, also for ecliptical coordinates is is required to specify
@@ -265,7 +282,7 @@ However, these circles are simply plotted centered on the instantaneous
 ecliptic pole by the instantaneous value of obliquity. 
 If you observe long enough, you will
 see that these circles vary in size, reflecting the changes in
-ecliptic \indexterm{obliquity}. The real track of where Earth's axis is pointing forms an open helical loop.
+ecliptic \indexterm[obliquity, ecliptic]{obliquity}. The real track of where Earth's axis is pointing forms an open helical loop.
 
 The inner planets are best observed when their apparent distance from
 the Sun, or \indexterm{elongation} reaches a maximum. Unfortunately
@@ -925,7 +942,7 @@ and so on. Luminosity is related to absolute magnitude.
 point towards the same position on the celestial sphere, as can be
 seen in figure~\ref{fig:Obliquity}. The angle between the axis of
 rotation and the perpendicular of the orbital plane is called the
-\indexterm{obliquity of the ecliptic}. It is currently about
+\indexterm[obliquity, ecliptic]{obliquity of the ecliptic}. It is currently about
 $23\degree27'$ and is the angle between equatorial plane
 (\ref{sec:Concepts:Equatorial}) and ecliptical plane
 (\ref{sec:Concepts:Ecliptical}).
