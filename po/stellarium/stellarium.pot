@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-09-14 23:25+0700\n"
+"POT-Creation-Date: 2021-09-15 20:19+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3348,41 +3348,41 @@ msgid "Polar dusk"
 msgstr ""
 
 #. TRANSLATORS: Greatest Eastern Digression is the maximum azimuth for stars with upper culmination between pole and zenith
-#: src/core/StelObject.cpp:690
+#: src/core/StelObject.cpp:689
 msgid "Max. E. Digression"
 msgstr ""
 
 #. TRANSLATORS: azimuth (abbrev.)
-#: src/core/StelObject.cpp:692
+#: src/core/StelObject.cpp:691
 msgctxt "celestial coordinate system"
 msgid "A"
 msgstr ""
 
-#: src/core/StelObject.cpp:692
+#: src/core/StelObject.cpp:691
 msgctxt "celestial coordinate system"
 msgid "Az."
 msgstr ""
 
-#: src/core/StelObject.cpp:694
+#: src/core/StelObject.cpp:693
 msgctxt "celestial coordinate system"
 msgid "h"
 msgstr ""
 
-#: src/core/StelObject.cpp:694
+#: src/core/StelObject.cpp:693
 msgctxt "celestial coordinate system"
 msgid "HA"
 msgstr ""
 
 #. TRANSLATORS: Greatest Western Digression is the maximum western azimuth for stars with upper culmination between pole and zenith
-#: src/core/StelObject.cpp:720
+#: src/core/StelObject.cpp:719
 msgid "Max. W. Digression"
 msgstr ""
 
-#: src/core/StelObject.cpp:754
+#: src/core/StelObject.cpp:753
 msgid "Parallactic Angle"
 msgstr ""
 
-#: src/core/StelObject.cpp:762 src/gui/AstroCalcDialog.cpp:5395
+#: src/core/StelObject.cpp:761 src/gui/AstroCalcDialog.cpp:5395
 msgid "IAU Constellation"
 msgstr ""
 
@@ -8955,7 +8955,7 @@ msgstr ""
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Cognitum
 #: src/translations_regions.h:349
-msgid "Sea of Knowledge"
+msgid "Sea that has Become Known"
 msgstr ""
 
 #. TRANSLATORS: Name of region on the Moon
@@ -8997,7 +8997,7 @@ msgstr ""
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Imbrium
 #: src/translations_regions.h:373
-msgid "Sea of Rains"
+msgid "Sea of Showers"
 msgstr ""
 
 #. TRANSLATORS: Name of region on the Moon
@@ -9046,7 +9046,7 @@ msgstr ""
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon: https://commons.wikimedia.org/wiki/File:1961_U.S.G.S._Physical_Map_of_the_Moon_(wall_map)_-_landmark_Lunar_map%5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Orientale
 #: src/translations_regions.h:401
-msgid "Eastern sea"
+msgid "Eastern Sea"
 msgstr ""
 
 #. TRANSLATORS: Name of region on the Moon
@@ -10135,7 +10135,7 @@ msgid "Sun's glare"
 msgstr ""
 
 #: src/ui_viewDialog.h:3294
-msgid "Toggle permanent drawing Sun's corona when atmosphere is disabled"
+msgid "Toggle permanent drawing of Sun's corona when atmosphere is disabled"
 msgstr ""
 
 #: src/ui_viewDialog.h:3296
