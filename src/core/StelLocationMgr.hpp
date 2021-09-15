@@ -175,7 +175,7 @@ private:
 
 	static QList<GeoRegion> regions;
 	static QMap<QString, QString> countryCodeToRegionMap;
-	static QMap<QString, QString> countryCodeToStringMap;
+	static QMap<QString, QString> countryNameToCodeMap;
 	
 	StelLocation lastResortLocation;
 

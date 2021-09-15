@@ -45,7 +45,7 @@ TimezoneNameMap StelLocationMgr::locationDBToIANAtranslations;
 
 QList<GeoRegion> StelLocationMgr::regions;
 QMap<QString, QString> StelLocationMgr::countryCodeToRegionMap;
-QMap<QString, QString> StelLocationMgr::countryCodeToStringMap;
+QMap<QString, QString> StelLocationMgr::countryNameToCodeMap;
 
 #ifdef ENABLE_GPS
 #ifdef ENABLE_LIBGPS
@@ -500,7 +500,7 @@ StelLocationMgr::StelLocationMgr(const LocationList &locations)
 
 	QSettings* conf = StelApp::getInstance().getSettings();
 	// Init to Paris France because it's the center of the world.
-	lastResortLocation = locationForString(conf->value("init_location/last_location", "Paris, France").toString());
+	lastResortLocation = locationForString(conf->value("init_location/last_location", "Paris, Western Europe").toString());
 }
 
 void StelLocationMgr::setLocations(const LocationList &locations)
@@ -677,6 +677,20 @@ const StelLocation StelLocationMgr::locationForString(const QString& s) const
 	if (iter!=locations.end())
 	{
 		return iter.value();
+	}
+	// Maybe this is a city and country names (old format of the data)?
+	QRegExp cnreg("(.+),\\s+(.+)$");
+	if (cnreg.exactMatch(s))
+	{
+		// NOTE: This method will give wrong data for some Russians and U.S. locations
+		//       (Asian locations for Russia and for locations on Hawaii for U.S.)
+		QString city = cnreg.cap(1).trimmed();
+		QString country = cnreg.cap(2).trimmed();
+		auto iter = locations.find(QString("%1, %2").arg(city, pickRegionFromCountry(country)));
+		if (iter!=locations.end())
+		{
+			return iter.value();
+		}
 	}
 	StelLocation ret;
 	// Maybe it is a coordinate set with elevation?
@@ -1077,6 +1091,7 @@ void StelLocationMgr::loadCountries()
 {
 	// Load ISO 3166-1 two-letter country codes from file
 	// The format is "[code][tab][country name containing spaces][newline]"
+	countryNameToCodeMap.clear();
 	QFile textFile(StelFileMgr::findFile("data/iso3166.tab"));
 	if(textFile.open(QFile::ReadOnly | QFile::Text))
 	{
@@ -1097,7 +1112,7 @@ void StelLocationMgr::loadCountries()
 				#endif
 				QString code = list.at(0).trimmed().toLower();
 				QString country = list.at(1).trimmed().replace("&", "and");
-				countryCodeToStringMap.insert(code, country);
+				countryNameToCodeMap.insert(country, code);
 				readOk++;
 			}
 		}
@@ -1107,6 +1122,9 @@ void StelLocationMgr::loadCountries()
 		else
 			qDebug() << "ERROR: List of countries was not loaded!";
 	}
+	// aliases for some countries to backward compatibility
+	countryNameToCodeMap.insert("Russian Federation", "ru");
+	countryNameToCodeMap.insert("Taiwan (Provice of China)", "tw");
 }
 
 void StelLocationMgr::loadRegions()
@@ -1195,7 +1213,9 @@ QString StelLocationMgr::pickRegionFromCountryCode(const QString countryCode)
 
 QString StelLocationMgr::pickRegionFromCountry(const QString country)
 {
-	return pickRegionFromCountryCode(countryCodeToStringMap.key(country, QString()));
+	QMap<QString, QString>::ConstIterator i = countryNameToCodeMap.find(country);
+	QString code = (i!=countryNameToCodeMap.constEnd()) ? i.value() : QString();
+	return pickRegionFromCountryCode(code);
 }
 
 QString StelLocationMgr::pickRegionFromCode(int regionCode)
@@ -1257,7 +1277,7 @@ QStringList StelLocationMgr::getAllTimezoneNames() const
 	// Accept others after testing against sanitized names, and especially all UT+/- names!
 
 	auto tzList = QTimeZone::availableTimeZoneIds(); // System dependent set of IANA timezone names.
-	for (const auto& tz : tzList)
+	for (const auto& tz : qAsConst(tzList))
 	{
 		QString tzcand=sanitizeTimezoneStringFromLocationDB(tz); // try to find name as we use it in the program.
 		if (!ret.contains(tzcand))
