@@ -77,6 +77,7 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 			{ "historical",   StelSkyCulture::HISTORICAL},
 			{ "ethnographic", StelSkyCulture::ETHNOGRAPHIC},
 			{ "single",       StelSkyCulture::SINGLE},
+			{ "comparative",  StelSkyCulture::COMPARATIVE},
 			{ "personal",     StelSkyCulture::PERSONAL},			
 			{ "incomplete",   StelSkyCulture::INCOMPLETE},
 		};
@@ -178,6 +179,11 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlClassification() const
 			color = "#33ff33"; // "green" area
 			classification = qc_("single", "sky culture classification");
 			description = q_("Represents a single source like a historical atlas, or publications of a single author.");
+			break;
+		case StelSkyCulture::COMPARATIVE:
+			color = "#2090ff"; // "blue" area
+			classification = qc_("comparative", "sky culture classification");
+			description = q_("Compares and confronts elements from at least sky cultures with each other.");
 			break;
 		case StelSkyCulture::TRADITIONAL:
 			color = "#33ff33"; // "green" area
