@@ -3679,8 +3679,8 @@ void AstroCalcDialog::calculatePhenomena()
 
 	initListPhenomena();
 
-	const double startJD = StelUtils::qDateTimeToJd(QDateTime(ui->phenomenFromDateEdit->date()));
-	const double stopJD = StelUtils::qDateTimeToJd(QDateTime(ui->phenomenToDateEdit->date().addDays(1)));
+	double startJD = StelUtils::qDateTimeToJd(QDateTime(ui->phenomenFromDateEdit->date()));
+	double stopJD = StelUtils::qDateTimeToJd(QDateTime(ui->phenomenToDateEdit->date().addDays(1)));
 	if (stopJD<=startJD) // Stop warming atmosphere!..
 		return;
 
