@@ -700,10 +700,10 @@ private:
 	class StelPropertyMgr* propMgr;
 	QString iauMoonNumber;
 
-	//! Compute time of rise, transit and set for a solar system object for current location.
-	//! @return Vec3f - time of rise, transit and set; decimal hours
-	//! @note The value -1.f is used as undefined value
-	virtual Vec3d computeRTSTime(StelCore* core) const Q_DECL_OVERRIDE;
+	//! Compute times of nearest rise, transit and set for a solar system object for current location.
+	//! @return Vec4f - time of rise, transit and set; JD
+	//! @note The fourth element may signal circumpolarity (100.) or permanent invisibility (-100.), resp.
+	virtual Vec4d computeRTSTime(StelCore* core) const Q_DECL_OVERRIDE;
 
 	const QString getContextString() const;
 	QPair<double, double> getLunarEclipseMagnitudes() const;

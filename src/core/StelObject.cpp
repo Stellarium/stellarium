@@ -146,12 +146,12 @@ float StelObject::getVMagnitude(const StelCore* core) const
 	return 99;
 }
 
-Vec3d StelObject::getRTSTime(StelCore *core) const
+Vec4d StelObject::getRTSTime(StelCore *core) const
 {
 	return computeRTSTime(core);
 }
 
-Vec3d StelObject::computeRTSTime(StelCore *core) const
+Vec4d StelObject::computeRTSTime(StelCore *core) const
 {
 	if (core->getCurrentLocation().planetName=="Earth")
 	{
@@ -221,7 +221,7 @@ Vec3d StelObject::computeRTSTime(StelCore *core) const
 		Delta_m0=StelUtils::fmodpos(Delta_m0+0.5, 1.0)-0.5;
 		m0+=Delta_m0;
 
-		Vec3d RTS(m1, StelUtils::fmodpos(m0*24.+tzOffset, 24.), m2);
+		Vec4d RTS(m1, StelUtils::fmodpos(m0*24.+tzOffset, 24.), m2, 0.);
 
 		if (fabs(cosH0)<1.)
 		{
@@ -278,7 +278,7 @@ Vec3d StelObject::computeRTSTime(StelCore *core) const
 		PlanetP cp = core->getCurrentPlanet();
 		const double coeff = cp->getMeanSolarDay() / cp->getSiderealDay();
 
-		Vec3d rts(-100.,-100.,-100.);  // init as "never rises" [abs must be larger than 24!]
+		Vec4d rts(-100.,-100.,-100., 0.);  // init as "never rises" [abs must be larger than 24!]
 
 		double dec, ha, t;
 		StelUtils::rectToSphe(&ha, &dec, getSiderealPosGeometric(core));
@@ -304,11 +304,11 @@ Vec3d StelObject::computeRTSTime(StelCore *core) const
 		const double cosH = (sin(hz) - sin(phi)*sin(dec))/(cos(phi)*cos(dec));
 		if (cosH<-1.) // circumpolar
 		{
-			rts[0]=rts[2]=100.;
+			rts[3]=100.;
 		}
 		else if (cosH>1.) // never rises
 		{
-			rts[0]=rts[2]=-100.;
+			rts[3]=-100.;
 		}
 		else
 		{
@@ -719,40 +719,48 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 
 	if (flags&RTSTime && getType()!=QStringLiteral("Satellite") && !currentPlanet.contains("observer", Qt::CaseInsensitive))
 	{
-		Vec3d rts = getRTSTime(StelApp::getInstance().getCore()); // required not const StelCore!
+		Vec4d rts = getRTSTime(StelApp::getInstance().getCore()); // requires not const StelCore!
 		QString sTransit = qc_("Transit", "celestial event; passage across a meridian");
 		QString sRise = qc_("Rise", "celestial event");
 		QString sSet = qc_("Set", "celestial event");
 		double sunrise = 0.;
 		double sunset = 24.;
 		const bool isSun = (getEnglishName()=="Sun");
+		int hr, min, sec;
+		double hour(0);
 
 		if (withTables && !(flags&SiderealTime && currentPlanet==QStringLiteral("Earth")))
 			res += "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
 
-		if (rts[0]>-99. && rts[0]<100.)
+		if (rts[3]==0.)
 		{
+			StelUtils::getTimeFromJulianDay(rts[0], &hr, &min, &sec);
+			hour=static_cast<double>(hr)+static_cast<double>(min)/60.+static_cast<double>(sec)/3600.;
 			if (withTables)
-				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sRise, StelUtils::hoursToHmsStr(rts[0], true));
+				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sRise, StelUtils::hoursToHmsStr(hour, true));
 			else
-				res += QString("%1: %2<br/>").arg(sRise, StelUtils::hoursToHmsStr(rts[0], true));
+				res += QString("%1: %2<br/>").arg(sRise, StelUtils::hoursToHmsStr(hour, true));
 
-			sunrise = rts[0];
+			sunrise = hour;
 		}
 
+		StelUtils::getTimeFromJulianDay(rts[1], &hr, &min, &sec);
+		hour=static_cast<double>(hr)+static_cast<double>(min)/60.+static_cast<double>(sec)/3600.;
 		if (withTables)
-			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true));
+			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sTransit, StelUtils::hoursToHmsStr(hour, true));
 		else
-			res += QString("%1: %2<br/>").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true));
+			res += QString("%1: %2<br/>").arg(sTransit, StelUtils::hoursToHmsStr(hour, true));
 
-		if (rts[2]>-99. && rts[2]<100.)
+		if (rts[3]==0.)
 		{
+			StelUtils::getTimeFromJulianDay(rts[2], &hr, &min, &sec);
+			hour=static_cast<double>(hr)+static_cast<double>(min)/60.+static_cast<double>(sec)/3600.;
 			if (withTables)
-				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sSet, StelUtils::hoursToHmsStr(rts[2], true));
+				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sSet, StelUtils::hoursToHmsStr(hour, true));
 			else
-				res += QString("%1: %2<br/>").arg(sSet, StelUtils::hoursToHmsStr(rts[2], true));
+				res += QString("%1: %2<br/>").arg(sSet, StelUtils::hoursToHmsStr(hour, true));
 
-			sunset = rts[2];
+			sunset = hour;
 		}
 
 		double lengthOfDay = sunset - sunrise;
@@ -768,24 +776,26 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		if (withTables)
 			res += "</table>";
 
-		if (rts[0]<-99. && rts[2]<-99. )
+		if (rts[3]<0.)
 		{
 			if (isSun)
 				res += q_("Polar night") + "<br />";
 			else
 				res += q_("This object never rises") + "<br />";
 		}
-		else if (rts[0]>99. && rts[2]>99.)
+		else if (rts[3]>0.)
 		{
 			if (isSun)
 				res += q_("Polar day") + "<br />";
 			else
 				res += q_("Circumpolar (never sets)") + "<br />";
 		}
-		else if (rts[0]>99. && rts[2]<99.)
-			res += q_("Polar dawn") + "<br />";
-		else if (rts[0]<99. && rts[2]>99.)
-			res += q_("Polar dusk") + "<br />";
+		// GZ I think these never could have seen before (??)
+		//else if (rts[0]>99. && rts[2]<99.)
+		//	res += q_("Polar dawn") + "<br />";
+		//else if (rts[0]<99. && rts[2]>99.)
+		//	res += q_("Polar dusk") + "<br />";
+
 
 		// Greatest Digression: limiting azimuth and hour angles for stars with upper culmination between pole and zenith
 		double dec_equ, ra_equ;
@@ -1054,7 +1064,7 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	// 'above horizon' flag
 	map.insert("above-horizon", isAboveRealHorizon(core));
 
-	Vec3d rts = getRTSTime(StelApp::getInstance().getCore()).toVec3d();
+	Vec4d rts = getRTSTime(StelApp::getInstance().getCore());
 	map.insert("rise", StelUtils::hoursToHmsStr(rts[0], true));
 	map.insert("rise-dhr", rts[0]);
 	map.insert("transit", StelUtils::hoursToHmsStr(rts[1], true));

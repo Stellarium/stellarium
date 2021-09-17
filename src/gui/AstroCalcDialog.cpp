@@ -920,12 +920,11 @@ void AstroCalcDialog::onChangedEphemerisPosition()
 
 double AstroCalcDialog::computeMaxElevation(StelObjectP obj)
 {
-	// FIXME: This can easily be done from declination and location. Avoid the whole core updating!
-	Vec3d rts = obj->getRTSTime(core);
+	// FIXME: We probably don't need all that, at least not for non-planets. Use declination and location latitude, then add refraction if needed. No need to change time and reset the whole machinery twice!
+	Vec4d rts = obj->getRTSTime(core);
 	const double JD = core->getJD();
-	const double UTCOffset = core->getUTCOffset(JD) / 24.;
 	double az, alt;
-	core->setJD(static_cast<int>(JD) + (rts[1]/24.) - UTCOffset + 0.5);
+	core->setJD(rts[1]);
 	core->update(0);
 	StelUtils::rectToSphe(&az, &alt, obj->getAltAzPosAuto(core));
 	core->setJD(JD);
@@ -1484,8 +1483,8 @@ void AstroCalcDialog::selectCurrentCelestialPosition(const QModelIndex& modelInd
 void AstroCalcDialog::selectCurrentEphemeride(const QModelIndex& modelIndex)
 {
 	// Find the object
-	QString name = modelIndex.sibling(modelIndex.row(), EphemerisCOName).data(Qt::UserRole).toString();
-	double JD = modelIndex.sibling(modelIndex.row(), EphemerisDate).data(Qt::UserRole).toDouble();
+	const QString name = modelIndex.sibling(modelIndex.row(), EphemerisCOName).data(Qt::UserRole).toString();
+	const double JD = modelIndex.sibling(modelIndex.row(), EphemerisDate).data(Qt::UserRole).toDouble();
 
 	if (objectMgr->findAndSelectI18n(name) || objectMgr->findAndSelect(name))
 	{
@@ -1936,7 +1935,7 @@ void AstroCalcDialog::generateTransits()
 		StelObjectP selectedObject = selectedObjects[0];
 		name = ui->transitCelestialBodyNameLabel->text();
 		selectedObject->getEnglishName().isEmpty() ? englishName = name : englishName = selectedObject->getEnglishName();
-		const bool isPlanet = (selectedObject->getType() == "Planet");
+		//const bool isPlanet = (selectedObject->getType() == "Planet");
 
 		if (!name.isEmpty()) // OK, let's calculate!
 		{
@@ -1957,7 +1956,7 @@ void AstroCalcDialog::generateTransits()
 					currentStep = planet->getMeanSolarDay();
 			}
 
-			double currentJD = core->getJD();   // save current JD
+			const double currentJD = core->getJD();   // save current JD
 			double startJD = StelUtils::qDateTimeToJd(QDateTime(ui->transitFromDateEdit->date()));
 			double stopJD = StelUtils::qDateTimeToJd(QDateTime(ui->transitToDateEdit->date()));
 			startJD = startJD - core->getUTCOffset(startJD) / 24.;
@@ -1972,17 +1971,17 @@ void AstroCalcDialog::generateTransits()
 				core->setJD(JD);
 				core->update(0); // force update to get new coordinates
 				UTCshift = core->getUTCOffset(JD) / 24.; // Fix DST shift...
-				Vec3d rts = selectedObject->getRTSTime(core);
-				JD = static_cast<int>(JD) + 0.5 + rts[1]/24. - UTCshift;
+				Vec4d rts = selectedObject->getRTSTime(core);
+				JD = rts[1]; // static_cast<int>(JD) + 0.5 + rts[1]/24. - UTCshift;
 				core->setJD(JD);
 				core->update(0); // force update to get new coordinates
-				if (isPlanet) // A tiny improvement for accuracy
-				{
-					Vec3d rts = selectedObject->getRTSTime(core);
-					JD = static_cast<int>(JD) + 0.5 + rts[1]/24. - UTCshift;
-					core->setJD(JD);
-					core->update(0);
-				}
+				//if (isPlanet) // A tiny improvement for accuracy. GZ: No longer needed with new planets' solution...
+				//{
+				//	Vec3d rts = selectedObject->getRTSTime(core);
+				//	JD = static_cast<int>(JD) + 0.5 + rts[1]/24. - UTCshift;
+				//	core->setJD(JD);
+				//	core->update(0);
+				//}
 
 				StelUtils::rectToSphe(&az, &alt, selectedObject->getAltAzPosAuto(core));
 				if (withDecimalDegree)
@@ -2741,12 +2740,12 @@ void AstroCalcDialog::drawCurrentTimeDiagram()
 	// and only if dialog is visible at all
 	if (!dialog->isVisible() || (!plotAltVsTime && !plotAziVsTime)) return;
 
-	double currentJD = core->getJD();
-	double UTCOffset = core->getUTCOffset(currentJD);
+	const double currentJD = core->getJD();
+	const double UTCOffset = core->getUTCOffset(currentJD);
 	double now = ((currentJD + 0.5 - static_cast<int>(currentJD)) * 86400.0) + UTCOffset * 3600.0;
-
 	if (now > 129600) now -= 86400;
 	if (now < 43200) now += 86400;
+
 	QList<double> ax, ay;
 	ax.append(now);
 	ax.append(now);
@@ -2885,7 +2884,7 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 		// X axis - time; Y axis - altitude
 		QList<double> aX, aY, bY;
 
-		double currentJD = core->getJD();
+		const double currentJD = core->getJD();
 		int year, month, day;
 		double startJD, JD, ltime, UTCshift, width = 1.0;
 		StelUtils::getDateFromJulianDay(currentJD, &year, &month, &day);
@@ -2903,8 +2902,9 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 			{
 				core->setJD(JD);
 				UTCshift = core->getUTCOffset(JD) / 24.; // Fix DST shift...
-				Vec3d rts = ssObj->getRTSTime(core);
-				JD += (rts[1]/24. - UTCshift);
+				Vec4d rts = ssObj->getRTSTime(core);
+				//JD += (rts[1]/24. - UTCshift); // FIXME: New logic has JD, not hours, here.
+				JD = rts[1]; // Maybe that's all?
 			}
 
 			ltime = (JD - startJD) * StelCore::ONE_OVER_JD_SECOND;
@@ -3559,8 +3559,8 @@ void AstroCalcDialog::handleVisibleEnabled()
 
 void AstroCalcDialog::mouseOverLine(QMouseEvent* event)
 {
-	double x = ui->altVsTimePlot->xAxis->pixelToCoord(event->pos().x());
-	double y = ui->altVsTimePlot->yAxis->pixelToCoord(event->pos().y());
+	const double x = ui->altVsTimePlot->xAxis->pixelToCoord(event->pos().x());
+	const double y = ui->altVsTimePlot->yAxis->pixelToCoord(event->pos().y());
 
 	QCPAbstractPlottable* abstractGraph = ui->altVsTimePlot->plottableAt(event->pos(), false);
 	QCPGraph* graph = qobject_cast<QCPGraph*>(abstractGraph);
@@ -3672,15 +3672,15 @@ void AstroCalcDialog::selectCurrentPhenomen(const QModelIndex& modelIndex)
 
 void AstroCalcDialog::calculatePhenomena()
 {
-	QString currentPlanet = ui->object1ComboBox->currentData().toString();
-	double separation = ui->allowedSeparationSpinBox->valueDegrees();
-	bool opposition = ui->phenomenaOppositionCheckBox->isChecked();
-	bool perihelion = ui->phenomenaPerihelionAphelionCheckBox->isChecked();
+	const QString currentPlanet = ui->object1ComboBox->currentData().toString();
+	const double separation = ui->allowedSeparationSpinBox->valueDegrees();
+	const bool opposition = ui->phenomenaOppositionCheckBox->isChecked();
+	const bool perihelion = ui->phenomenaPerihelionAphelionCheckBox->isChecked();
 
 	initListPhenomena();
 
-	double startJD = StelUtils::qDateTimeToJd(QDateTime(ui->phenomenFromDateEdit->date()));
-	double stopJD = StelUtils::qDateTimeToJd(QDateTime(ui->phenomenToDateEdit->date().addDays(1)));
+	const double startJD = StelUtils::qDateTimeToJd(QDateTime(ui->phenomenFromDateEdit->date()));
+	const double stopJD = StelUtils::qDateTimeToJd(QDateTime(ui->phenomenToDateEdit->date().addDays(1)));
 	if (stopJD<=startJD) // Stop warming atmosphere!..
 		return;
 
@@ -4820,6 +4820,7 @@ bool AstroCalcDialog::findPreciseStationaryPoint(QPair<double, double> *out, Pla
 
 double AstroCalcDialog::findRightAscension(double JD, PlanetP object)
 {
+	// TODO: It would pay off to implement those directly using Planet::getHeliocentricEclipticPos(double dateJDE) for observer and target and doing the required Vector math.
 	core->setJD(JD);
 	core->update(0);
 	double ra, dec;
@@ -4974,6 +4975,8 @@ bool AstroCalcDialog::findPreciseOrbitalPoint(QPair<double, double>* out, Planet
 
 double AstroCalcDialog::findHeliocentricDistance(double JD, PlanetP object1)
 {
+	// TODO: avoid setting JD globally? Just find DeltaT and call
+	// return object1->getHeliocentricEclipticPos(JDE).length();
 	core->setJD(JD);
 	core->update(0);
 	return object1->getHeliocentricEclipticPos().length();
@@ -6396,7 +6399,7 @@ void AstroCalcDialog::drawDistanceGraph()
 
 	QList<double> aX, aY1, aY2;
 	Vec3d posFCB, posSCB;
-	double currentJD = core->getJD();
+	const double currentJD = core->getJD();
 	double JD, distanceAu, r, dd;
 	bool sign;
 	for (int i = -305; i <= 305; i++)
@@ -6441,9 +6444,9 @@ void AstroCalcDialog::drawDistanceGraph()
 
 void AstroCalcDialog::mouseOverDistanceGraph(QMouseEvent* event)
 {
-	double x = ui->pcDistanceGraphPlot->xAxis->pixelToCoord(event->pos().x());
-	double y = ui->pcDistanceGraphPlot->yAxis->pixelToCoord(event->pos().y());
-	double y2 = ui->pcDistanceGraphPlot->yAxis2->pixelToCoord(event->pos().y());
+	const double x = ui->pcDistanceGraphPlot->xAxis->pixelToCoord(event->pos().x());
+	const double y = ui->pcDistanceGraphPlot->yAxis->pixelToCoord(event->pos().y());
+	const double y2 = ui->pcDistanceGraphPlot->yAxis2->pixelToCoord(event->pos().y());
 
 	QCPAbstractPlottable* abstractGraph = ui->pcDistanceGraphPlot->plottableAt(event->pos(), false);
 	QCPGraph* graph = qobject_cast<QCPGraph*>(abstractGraph);
@@ -6548,7 +6551,7 @@ void AstroCalcDialog::drawAngularDistanceGraph()
 
 		QList<double> aX, aY;
 		Vec3d selectedObjectPosition, moonPosition;
-		double currentJD = core->getJD();
+		const double currentJD = core->getJD();
 		double JD, distance, dd;
 		bool sign;
 		for (int i = -5; i <= 35; i++)
@@ -6627,8 +6630,8 @@ void AstroCalcDialog::drawAngularDistanceLimitLine()
 
 void AstroCalcDialog::saveTableAsCSV(const QString &fileName, QTreeWidget* tWidget, QStringList &headers)
 {
-	int count = tWidget->topLevelItemCount();
-	int columns = headers.size();
+	const int count = tWidget->topLevelItemCount();
+	const int columns = headers.size();
 
 	QFile table(fileName);
 	if (!table.open(QFile::WriteOnly | QFile::Truncate))
@@ -6661,7 +6664,7 @@ void AstroCalcDialog::saveTableAsCSV(const QString &fileName, QTreeWidget* tWidg
 
 void AstroCalcDialog::saveTableAsBookmarks(const QString &fileName, QTreeWidget* tWidget)
 {
-	int count = tWidget->topLevelItemCount();
+	const int count = tWidget->topLevelItemCount();
 
 	QFile bookmarksFile(fileName);
 	if (!bookmarksFile.open(QFile::WriteOnly | QFile::Truncate))

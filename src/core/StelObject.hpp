@@ -226,9 +226,9 @@ public:
 	bool isAboveRealHorizon(const StelCore* core) const;
 
 	//! Get today's time of rise, transit and set for celestial object for current location.
-	//! @return Vec3f - time of rise, transit and set; decimal hours
-	//! @note The value -1.f is used as undefined value
-	Vec3d getRTSTime(StelCore *core) const;
+	//! @return Vec4d - times of closest rise, transit and set; JD
+	//! @note The fourth element signals circumpolarity (100) or permanent invisibility (-100)
+	Vec4d getRTSTime(StelCore *core) const;
 
 	//! Return object's apparent V magnitude as seen from observer, without including extinction.
 	virtual float getVMagnitude(const StelCore* core) const;
@@ -308,7 +308,7 @@ protected:
 	//! Compute time of rise, transit and set for celestial object for current location.
 	//! @return Vec3f - time of rise, transit and set; decimal hours
 	//! @note The value -1.f is used as undefined value
-	virtual Vec3d computeRTSTime(StelCore* core) const;
+	virtual Vec4d computeRTSTime(StelCore* core) const;
 private:
 
 	//! Location for additional object info that can be set for special purposes (at least for debugging, but maybe others), even via scripting.
