@@ -171,7 +171,7 @@ Vec4d StelObject::computeRTSTime(StelCore *core) const
 		PlanetP obsPlanet = core->getCurrentPlanet();
 		// const double coeff = obsPlanet->getMeanSolarDay() / obsPlanet->getSiderealDay(); // earth: coeff=(360.985647/360.);
 		//const double rotRate = obsPlanet->getMeanSolarDay() / obsPlanet->getSiderealDay(); // earth: coeff=(360.985647/360.);
-		const double rotRate = obsPlanet->getSiderealDay() / obsPlanet->getMeanSolarDay(); // earth: coeff=(360/360.985647);
+		const double rotRate = obsPlanet->getSiderealDay(); // / obsPlanet->getMeanSolarDay(); // earth: coeff=(360/360.985647);
 
 
 		// 1. Find JD for 0UT
@@ -221,11 +221,12 @@ Vec4d StelObject::computeRTSTime(StelCore *core) const
 
 		double mr, ms, flag=0.;
 		double mt=-h2*(0.5*rotRate/M_PI);
+//		double mt=-h2*(0.5*obsPlanet->getSiderealDay()/M_PI);
 
 		if (cosH0<-1.) // circumpolar
 		{	flag=100;
-			mr=mt-0.5*obsPlanet->getMeanSolarDay(); // FIXME: may be 1/2 siderealDay off instead?
-			ms=mt+0.5*obsPlanet->getMeanSolarDay();
+			mr=mt-0.5*obsPlanet->getSiderealDay(); // FIXME: may be 1/2 siderealDay off instead?
+			ms=mt+0.5*obsPlanet->getSiderealDay();
 		}
 		else if (cosH0>1.) // never rises
 		{
@@ -238,8 +239,8 @@ Vec4d StelObject::computeRTSTime(StelCore *core) const
 			const double H0 = acos(cosH0);
 			omgr->addToExtraInfoString(StelObject::DebugAid, QString("H<sub>0</sub>= %1<br/>").arg(QString::number(H0*M_180_PI, 'f', 6)));
 
-			mr = mt - H0/(2.*M_PI);
-			ms = mt + H0/(2.*M_PI);
+			mr = mt - H0*rotRate/(2.*M_PI);
+			ms = mt + H0*rotRate/(2.*M_PI);
 		}
 
 		omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>t</sub>= %1<br/>").arg(QString::number(mt, 'f', 6)));
@@ -248,6 +249,10 @@ Vec4d StelObject::computeRTSTime(StelCore *core) const
 
 		// For fixed objects, we are done!
 		return Vec4d(currentJD+mr, currentJD+mt, currentJD+ms, flag);
+
+		// TODO: Not quite done! Do the final tweaks...
+
+
 	}
 	else { // old version
 		double hz = 0.;

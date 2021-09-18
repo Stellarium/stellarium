@@ -4375,7 +4375,7 @@ Vec4d Planet::computeRTSTime(StelCore *core) const
 	PlanetP obsPlanet = core->getCurrentPlanet();
 	// const double coeff = obsPlanet->getMeanSolarDay() / obsPlanet->getSiderealDay(); // earth: coeff=(360.985647/360.);
 	//const double rotRate = obsPlanet->getMeanSolarDay() / obsPlanet->getSiderealDay(); // earth: coeff=(360.985647/360.);
-	const double rotRate = obsPlanet->getSiderealDay() / obsPlanet->getMeanSolarDay(); // earth: coeff=(360/360.985647);
+	const double rotRate = obsPlanet->getSiderealDay(); // / obsPlanet->getMeanSolarDay(); // earth: coeff=(360/360.985647);
 
 	//// OLD We must compute coordinates for the current day, previous day and next day, midnight UT. For efficiency, we do not move the SolarSystem, but call the specific ephemeris functions.
 
@@ -4485,8 +4485,8 @@ Vec4d Planet::computeRTSTime(StelCore *core) const
 		const double H0 = acos(cosH0);
 		omgr->addToExtraInfoString(StelObject::DebugAid, QString("H<sub>0</sub>= %1<br/>").arg(QString::number(H0*M_180_PI, 'f', 6)));
 
-		mr = mt - H0/(2.*M_PI);
-		ms = mt + H0/(2.*M_PI);
+		mr = mt - H0*rotRate/(2.*M_PI);
+		ms = mt + H0*rotRate/(2.*M_PI);
 	}
 
 	omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>t</sub>= %1<br/>").arg(QString::number(mt, 'f', 6)));
@@ -4495,6 +4495,8 @@ Vec4d Planet::computeRTSTime(StelCore *core) const
 
 	// These are the first approximations. Now details:
 
+	// Find correction for transit:
+	const double ra_mt=StelUtils::interpolate3(mt, ra1, ra2, ra3);
 
 
 
