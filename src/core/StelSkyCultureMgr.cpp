@@ -183,7 +183,7 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlClassification() const
 		case StelSkyCulture::COMPARATIVE:
 			color = "#2090ff"; // "blue" area
 			classification = qc_("comparative", "sky culture classification");
-			description = q_("Compares and confronts elements from at least sky cultures with each other.");
+			description = q_("Compares and confronts elements from at least two sky cultures with each other.");
 			break;
 		case StelSkyCulture::TRADITIONAL:
 			color = "#33ff33"; // "green" area
