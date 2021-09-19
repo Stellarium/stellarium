@@ -463,9 +463,9 @@ class Translations
 		// TRANSLATORS: Name of the sky culture
 		N_("Greek (Almagest)");
 		// TRANSLATORS: Name of the sky culture
-		N_("Greek (Farnese Globe)");
+		N_("Greek (Farnese + Almagest)");
 		// TRANSLATORS: Name of the sky culture
-		N_("Greek (Leiden Aratea)");
+		N_("Greek (Leiden Aratea + Almagest)");
 		// TRANSLATORS: Name of the sky culture
 		N_("Anutan");
 		// TRANSLATORS: Name of the sky culture
