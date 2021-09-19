@@ -76,10 +76,13 @@ public:
 				//! Typically nobody alive today shares the world view of these past cultures.
 				//! The description should provide some insight over sources and how data were retrieved and interpreted,
 				//! and should provide references to (optimally: peer-reviewed) published work.
-		SINGLE		//! Implementation of a single book or atlas usually providing a "snapshot" of a traditional skyculture.
+		SINGLE,		//! Implementation of a single book or atlas usually providing a "snapshot" of a traditional skyculture.
 				//! e.g. Bayer, Schiller, Hevelius, Bode, Rey, ...
 				//! Content (star names, artwork, spelling, ...) should not deviate from what the atlas contains.
-				//! The description should provide information about the presented work, and if possible a link to a digital online version.		
+				//! The description should provide information about the presented work, and if possible a link to a digital online version.
+		COMPARATIVE	//! Special-purpose compositions of artwork from one and stick figures from another skyculture. These figures
+				//! sometimes will appear not to fit together well. This may be intended, to explain and highlight just those differences!
+				//! The description text must clearly explain and identify both sources and how these differences should be interpreted.
 	};
 
 	//! English name
