@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-09-11 16:20+0700\n"
+"POT-Creation-Date: 2021-09-19 17:40+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Zdeněk Moravec <moravec@hapteplice.cz>, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/stellarium/teams/80998/cs/)\n"
@@ -3400,112 +3400,145 @@ msgstr ""
 "navrhl Osborn Maitland Miller (1897-1979) v roce 1942. Póly zde již nejsou "
 "zobrazeny v nekonečnu."
 
-#: src/core/StelObject.cpp:273
+#: src/core/StelObject.cpp:272
 msgctxt "coordinates for current epoch"
 msgid "on date"
 msgstr "k datu"
 
-#: src/core/StelObject.cpp:275
+#: src/core/StelObject.cpp:274
 msgid "(apparent)"
 msgstr "(zdánlivý)"
 
 #. TRANSLATORS: Right ascension/Declination
-#: src/core/StelObject.cpp:285
+#: src/core/StelObject.cpp:284
 msgctxt "celestial coordinate system"
 msgid "RA/Dec"
 msgstr "RA/Dec"
 
 #. TRANSLATORS: Hour angle/Declination
-#: src/core/StelObject.cpp:372
+#: src/core/StelObject.cpp:371
 msgctxt "celestial coordinate system"
 msgid "HA/Dec"
 msgstr "Hod.úhel/Dekl."
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:420
+#: src/core/StelObject.cpp:419
 msgctxt "celestial coordinate system"
 msgid "Az./Alt."
 msgstr "Azimut/výška"
 
 #. TRANSLATORS: Galactic longitude/latitude
-#: src/core/StelObject.cpp:445
+#: src/core/StelObject.cpp:444
 msgctxt "celestial coordinate system"
 msgid "Gal. long./lat."
 msgstr "Gal. dél./šíř."
 
 #. TRANSLATORS: Supergalactic longitude/latitude
-#: src/core/StelObject.cpp:469
+#: src/core/StelObject.cpp:468
 msgctxt "celestial coordinate system"
 msgid "Supergal. long./lat."
 msgstr "Supergal. dél./šíř."
 
-#: src/core/StelObject.cpp:487
+#: src/core/StelObject.cpp:486
 msgctxt "celestial coordinate system"
 msgid "Ecl. long./lat."
 msgstr "Ekl. dél./šíř."
 
-#: src/core/StelObject.cpp:552
+#: src/core/StelObject.cpp:551
 msgid "Ecliptic obliquity"
 msgstr "Sklon ekliptiky"
 
-#: src/core/StelObject.cpp:581
+#: src/core/StelObject.cpp:580
 msgid "Mean Sidereal Time"
 msgstr "Střední hvězdný čas"
 
-#: src/core/StelObject.cpp:597
+#: src/core/StelObject.cpp:596
 msgid "Apparent Sidereal Time"
 msgstr "Zdánlivý hvězdný čas"
 
 #. TRANSLATORS: time of transit
-#: src/core/StelObject.cpp:612 src/gui/AstroCalcDialog.cpp:895
+#: src/core/StelObject.cpp:611 src/gui/AstroCalcDialog.cpp:895
 #: src/gui/AstroCalcDialog.cpp:5299
 msgctxt "celestial event; passage across a meridian"
 msgid "Transit"
 msgstr "Kulminace"
 
-#: src/core/StelObject.cpp:613 src/gui/AstroCalcDialog.cpp:5298
+#: src/core/StelObject.cpp:612 src/gui/AstroCalcDialog.cpp:5298
 msgctxt "celestial event"
 msgid "Rise"
 msgstr "Východ"
 
-#: src/core/StelObject.cpp:614 src/gui/AstroCalcDialog.cpp:5302
+#: src/core/StelObject.cpp:613 src/gui/AstroCalcDialog.cpp:5302
 msgctxt "celestial event"
 msgid "Set"
 msgstr "Západ"
 
-#: src/core/StelObject.cpp:652
+#: src/core/StelObject.cpp:651
 msgid "Daytime"
 msgstr "Denní světlo"
 
-#: src/core/StelObject.cpp:665
+#: src/core/StelObject.cpp:664
 msgid "Polar night"
 msgstr "Polární noc"
 
-#: src/core/StelObject.cpp:667
+#: src/core/StelObject.cpp:666
 msgid "This object never rises"
 msgstr "Objekt nikdy nevychází"
 
-#: src/core/StelObject.cpp:672
+#: src/core/StelObject.cpp:671
 msgid "Polar day"
 msgstr "Polární den"
 
-#: src/core/StelObject.cpp:674
+#: src/core/StelObject.cpp:673
 msgid "Circumpolar (never sets)"
 msgstr "Cirkumpolární (nikdy nezapadá)"
 
-#: src/core/StelObject.cpp:677
+#: src/core/StelObject.cpp:676
 msgid "Polar dawn"
 msgstr "Polární svítání"
 
-#: src/core/StelObject.cpp:679
+#: src/core/StelObject.cpp:678
 msgid "Polar dusk"
 msgstr "Polární soumrak"
 
-#: src/core/StelObject.cpp:694
+#. TRANSLATORS: Greatest Eastern Digression is the maximum azimuth for stars
+#. with upper culmination between pole and zenith
+#: src/core/StelObject.cpp:689
+msgid "Max. E. Digression"
+msgstr "Max. vých. odchylka"
+
+#. TRANSLATORS: azimuth (abbrev.)
+#: src/core/StelObject.cpp:691
+msgctxt "celestial coordinate system"
+msgid "A"
+msgstr "A"
+
+#: src/core/StelObject.cpp:691
+msgctxt "celestial coordinate system"
+msgid "Az."
+msgstr "Az."
+
+#: src/core/StelObject.cpp:693
+msgctxt "celestial coordinate system"
+msgid "h"
+msgstr "h"
+
+#: src/core/StelObject.cpp:693
+msgctxt "celestial coordinate system"
+msgid "HA"
+msgstr "t"
+
+#. TRANSLATORS: Greatest Western Digression is the maximum western azimuth for
+#. stars with upper culmination between pole and zenith
+#: src/core/StelObject.cpp:719
+msgid "Max. W. Digression"
+msgstr "Max. záp. odchylka"
+
+#: src/core/StelObject.cpp:753
 msgid "Parallactic Angle"
 msgstr "Paralaktický úhel"
 
-#: src/core/StelObject.cpp:702 src/gui/AstroCalcDialog.cpp:5395
+#: src/core/StelObject.cpp:761 src/gui/AstroCalcDialog.cpp:5395
 msgid "IAU Constellation"
 msgstr "Zkratka souhvězdí IAU"
 
@@ -3553,12 +3586,12 @@ msgstr "Snímky objektů vzdáleného vesmíru na pozadí"
 msgid "Reload the deep-sky objects background images"
 msgstr "Znovu nahrát snímky objektů vzdáleného vesmíru na pozadí"
 
-#: src/core/StelSkyCultureMgr.cpp:169
+#: src/core/StelSkyCultureMgr.cpp:170
 msgctxt "sky culture classification"
 msgid "ethnographic"
 msgstr "etnografická"
 
-#: src/core/StelSkyCultureMgr.cpp:170
+#: src/core/StelSkyCultureMgr.cpp:171
 msgid ""
 "Provided by ethnographic researchers based on interviews of indigenous "
 "people."
@@ -3566,12 +3599,12 @@ msgstr ""
 "Poskytnutá etnografickými výzkumníky, založená na rozhovorech s domorodými "
 "lidmi."
 
-#: src/core/StelSkyCultureMgr.cpp:174
+#: src/core/StelSkyCultureMgr.cpp:175
 msgctxt "sky culture classification"
 msgid "historical"
 msgstr "historická"
 
-#: src/core/StelSkyCultureMgr.cpp:175
+#: src/core/StelSkyCultureMgr.cpp:176
 msgid ""
 "Provided by historians based on historical written sources from a (usually "
 "short) period of the past."
@@ -3579,12 +3612,12 @@ msgstr ""
 "Poskytnutá historiky, založená na historických písemných zdrojích z (obvykle"
 " krátkého) období v minulosti."
 
-#: src/core/StelSkyCultureMgr.cpp:179
+#: src/core/StelSkyCultureMgr.cpp:180
 msgctxt "sky culture classification"
 msgid "single"
 msgstr "jediná"
 
-#: src/core/StelSkyCultureMgr.cpp:180
+#: src/core/StelSkyCultureMgr.cpp:181
 msgid ""
 "Represents a single source like a historical atlas, or publications of a "
 "single author."
@@ -3592,12 +3625,22 @@ msgstr ""
 "Představuje jeden zdroj, jako je historický atlas nebo publikace jednoho "
 "autora."
 
-#: src/core/StelSkyCultureMgr.cpp:184
+#: src/core/StelSkyCultureMgr.cpp:185
+msgctxt "sky culture classification"
+msgid "comparative"
+msgstr ""
+
+#: src/core/StelSkyCultureMgr.cpp:186
+msgid ""
+"Compares and confronts elements from at least sky cultures with each other."
+msgstr ""
+
+#: src/core/StelSkyCultureMgr.cpp:190
 msgctxt "sky culture classification"
 msgid "traditional"
 msgstr "tradiční"
 
-#: src/core/StelSkyCultureMgr.cpp:185
+#: src/core/StelSkyCultureMgr.cpp:191
 msgid ""
 "Content represents 'common' knowledge by several members of an ethnic "
 "community, and the sky culture has been developed by members of such "
@@ -3606,12 +3649,12 @@ msgstr ""
 "Obsah představuje \"běžné\" znalosti několika členů etnické komunity, a "
 "hvězdná mytologie byla vytvořena členy takové komunity."
 
-#: src/core/StelSkyCultureMgr.cpp:189
+#: src/core/StelSkyCultureMgr.cpp:195
 msgctxt "sky culture classification"
 msgid "personal"
 msgstr "osobní"
 
-#: src/core/StelSkyCultureMgr.cpp:190
+#: src/core/StelSkyCultureMgr.cpp:196
 msgid ""
 "This is a personally developed sky culture which is not founded in published"
 " historical or ethnological research. Stellarium may include it when it is "
@@ -3622,12 +3665,12 @@ msgstr ""
 "zahrnovat, když je \"dostatešně hezká\", aniž by skutečně schvaloval její "
 "obsah."
 
-#: src/core/StelSkyCultureMgr.cpp:194
+#: src/core/StelSkyCultureMgr.cpp:200
 msgctxt "sky culture classification"
 msgid "incomplete"
 msgstr "neúplná"
 
-#: src/core/StelSkyCultureMgr.cpp:195
+#: src/core/StelSkyCultureMgr.cpp:201
 msgid ""
 "The accuracy of the sky culture description cannot be given, although it "
 "looks like it is built on a solid background. More work would be needed."
@@ -3635,20 +3678,20 @@ msgstr ""
 "Přesnost popisu oblohy nelze uvést, i když to vypadá, že je postavena na "
 "pevném základě. Je potřeba další práce."
 
-#: src/core/StelSkyCultureMgr.cpp:199
+#: src/core/StelSkyCultureMgr.cpp:205
 msgctxt "sky culture classification"
 msgid "undefined"
 msgstr "nedefinovaná"
 
-#: src/core/StelSkyCultureMgr.cpp:206
+#: src/core/StelSkyCultureMgr.cpp:212
 msgid "Classification"
 msgstr "Klasifikace"
 
-#: src/core/StelSkyCultureMgr.cpp:268
+#: src/core/StelSkyCultureMgr.cpp:274
 msgid "No description"
 msgstr "Bez popisu"
 
-#: src/core/StelSkyCultureMgr.cpp:301
+#: src/core/StelSkyCultureMgr.cpp:307
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:202
 msgid "References"
 msgstr "Odkazy"
@@ -7573,558 +7616,568 @@ msgstr "Řecká (Almagest)"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:466
+msgid "Greek (Farnese + Almagest)"
+msgstr ""
+
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:468
+msgid "Greek (Leiden Aratea + Almagest)"
+msgstr ""
+
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:470
 msgid "Anutan"
 msgstr "Anutanská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:468
+#: src/translations.h:472
 msgid "Arabic Moon Stations"
 msgstr "Arabské lunární domy"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:470
+#: src/translations.h:474
 msgid "Armintxe"
 msgstr "Armintxe"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:472
+#: src/translations.h:476
 msgid "Aztec"
 msgstr "Aztécká"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:474
+#: src/translations.h:478
 msgid "Belarusian"
 msgstr "Běloruská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:476
+#: src/translations.h:480
 msgid "Boorong"
 msgstr "Booronžská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:478 plugins/Calendars/src/ui_calendarsDialog.h:841
+#: src/translations.h:482 plugins/Calendars/src/ui_calendarsDialog.h:841
 msgid "Chinese"
 msgstr "Čínská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:480
+#: src/translations.h:484
 msgid "Chinese Contemporary"
 msgstr "Čínská moderní"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:482
+#: src/translations.h:486
 msgid "Chinese Medieval"
 msgstr "Čínská středověká"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:484
+#: src/translations.h:488
 msgid "Egyptian"
 msgstr "Egyptská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:486
+#: src/translations.h:490
 msgid "Hawaiian Starlines"
 msgstr "Havajská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:488
+#: src/translations.h:492
 msgid "Inuit"
 msgstr "Inuitská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:490
+#: src/translations.h:494
 msgid "Indian Vedic"
 msgstr "Indickovédská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:492
+#: src/translations.h:496
 msgid "Japanese Moon Stations"
 msgstr "Japonské lunární domy"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:494
+#: src/translations.h:498
 msgid "Kamilaroi/Euahlayi"
 msgstr "Kamilarojská/Euahlajská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:496
+#: src/translations.h:500
 msgid "Korean"
 msgstr "Korejská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:498
+#: src/translations.h:502
 msgid "Dakota/Lakota/Nakota"
 msgstr "Dakotská/Lakotská/Nakotská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:500
+#: src/translations.h:504
 msgid "Macedonian"
 msgstr "Makedonská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:502
+#: src/translations.h:506
 msgid "Maori"
 msgstr "Maorská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:504
+#: src/translations.h:508
 msgid "Maya"
 msgstr "Mayská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:506
+#: src/translations.h:510
 msgid "Mongolian"
 msgstr "Mongolská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:508
+#: src/translations.h:512
 msgid "Lokono"
 msgstr "Lokono"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:510
+#: src/translations.h:514
 msgid "Navajo"
 msgstr "Navažská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:512
+#: src/translations.h:516
 msgid "Norse"
 msgstr "Severská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:514
+#: src/translations.h:518
 msgid "Ojibwe"
 msgstr "Odžibvejská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:516
+#: src/translations.h:520
 msgid "Romanian"
 msgstr "Rumunská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:518
+#: src/translations.h:522
 msgid "Sami"
 msgstr "Sámská (Laponská)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:520
+#: src/translations.h:524
 msgid "Sardinian"
 msgstr "Sardinská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:522
+#: src/translations.h:526
 msgid "Siberian"
 msgstr "Sibiřská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:524
+#: src/translations.h:528
 msgid "Tukano"
 msgstr "Tukánská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:526
+#: src/translations.h:530
 msgid "Tupi-Guarani"
 msgstr "Tupi-Guarani"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:528
+#: src/translations.h:532
 msgid "Tongan"
 msgstr "Tongština"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:530
+#: src/translations.h:534
 msgid "Western"
 msgstr "Západní"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:532
+#: src/translations.h:536
 msgid "Western (H.A.Rey)"
 msgstr "Západní (H. A. Rey)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:534
+#: src/translations.h:538
 msgid "Western (O.Hlad)"
 msgstr "Západní (O. Hlad)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:536
+#: src/translations.h:540
 msgid "Western (Sky & Telescope)"
 msgstr "Západní (Sky & Telescope)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:538
+#: src/translations.h:542
 msgid "Western (Sternenkarten)"
 msgstr "Západní (Sternenkarten)"
 
-#. TRANSLATORS: Name of the sky cultur
-#: src/translations.h:540
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:544
 msgid "Northern Andes"
 msgstr "Severní Andy"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:542
+#: src/translations.h:546
 msgid "Babylonian (MUL.APIN)"
 msgstr "Babylonská (MUL.APIN)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:544
+#: src/translations.h:548
 msgid "Babylonian (Seleucid)"
 msgstr "Babylonská (Seleukovská)"
 
 #. TRANSLATORS: Name of the sky culture and landscape
-#: src/translations.h:546
+#: src/translations.h:550
 msgid "Armintxe Cave"
 msgstr "Jeskyně Armintxe"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:548
+#: src/translations.h:552
 msgid "Vanuatu (Netwar)"
 msgstr "Vanuatu (Netwar)"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:553
+#: src/translations.h:557
 msgid "Guereins"
 msgstr "Guereins"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:555
+#: src/translations.h:559
 msgid "Trees"
 msgstr "Stromy"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:557 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1448
+#: src/translations.h:561 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1448
 msgid "Moon"
 msgstr "Měsíc"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:559
+#: src/translations.h:563
 msgid "Hurricane"
 msgstr "Hurikánový hřeben"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:561
+#: src/translations.h:565
 msgid "Ocean"
 msgstr "Oceán"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:563
+#: src/translations.h:567
 msgid "Garching"
 msgstr "Garching"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:565 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1460
+#: src/translations.h:569 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1460
 msgid "Mars"
 msgstr "Mars"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:567 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1463
+#: src/translations.h:571 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1463
 msgid "Jupiter"
 msgstr "Jupiter"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:569 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1466
+#: src/translations.h:573 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1466
 msgid "Saturn"
 msgstr "Saturn"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:571
+#: src/translations.h:575
 msgid "Uranus"
 msgstr "Uran"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:573
+#: src/translations.h:577
 msgid "Neptune"
 msgstr "Neptun"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:575
+#: src/translations.h:579
 msgid "Geneva"
 msgstr "Ženeva"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:577
+#: src/translations.h:581
 msgid "Grossmugl"
 msgstr "Grossmugl"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:579
+#: src/translations.h:583
 msgid "Zero Horizon"
 msgstr "Ideální obzor"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:581 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1445
+#: src/translations.h:585 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1445
 msgid "Sun"
 msgstr "Slunce"
 
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
-#: src/translations.h:586
+#: src/translations.h:590
 msgid "Vienna Sterngarten"
 msgstr "Vídeň Sterngarten"
 
 #. TRANSLATORS: Name of 3D scene
-#: src/translations.h:588
+#: src/translations.h:592
 msgid "Testscene"
 msgstr "Testovací scéna"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:593
+#: src/translations.h:597
 msgid "Landscape Tour"
 msgstr "Prohlídka krajin"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:595
+#: src/translations.h:599
 msgid "Partial Lunar Eclipse"
 msgstr "Částečné zatmění Měsíce"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:597
+#: src/translations.h:601
 msgid "Total Lunar Eclipse"
 msgstr "Úplné zatmění Měsíce"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:599
+#: src/translations.h:603
 msgid "Screensaver"
 msgstr "Spořič obrazovky"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:601
+#: src/translations.h:605
 msgid "Solar Eclipse 2009"
 msgstr "Zatmění Slunce 2009"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:603
+#: src/translations.h:607
 msgid "Startup Script"
 msgstr "Spouštěcí skript"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:605
+#: src/translations.h:609
 msgid "Zodiac"
 msgstr "Zvěrokruh"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:607
+#: src/translations.h:611
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "Trojitý východ a západ Slunce na Merkuru"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:609
+#: src/translations.h:613
 msgid "Double eclipse from Deimos in 2017"
 msgstr "Dvojité zatmění na Delmos v 2017"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:611
+#: src/translations.h:615
 msgid "Double eclipse from Deimos in 2031"
 msgstr "Dvojité zatmění na Delmos v 2031"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:613
+#: src/translations.h:617
 msgid "Eclipse from Olympus Mons Jan 2, 2021"
 msgstr "Zatmění z Olympus Mons 2. ledna 2021"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:615
+#: src/translations.h:619
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "Zákryt Zěme a Jupitera v 2048"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:617
+#: src/translations.h:621
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr "3 přechody a 2 zatmění z Deimosu 2027"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:619
+#: src/translations.h:623
 msgid "Solar System Screensaver"
 msgstr "Spořič obrazovky Sluneční soustava"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:621
+#: src/translations.h:625
 msgid "Constellations Tour"
 msgstr "Prohlídka souhvězdí"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:623
+#: src/translations.h:627
 msgid "Western Constellations Tour"
 msgstr "Prohlídka západních souhvězdí"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:625
+#: src/translations.h:629
 msgid "Sun from different planets"
 msgstr "Slunce na jiných planetách"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:627
+#: src/translations.h:631
 msgid "Earth best views from other bodies"
 msgstr "Nejlepší pohledy na Zemi z jiných těles"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:629
+#: src/translations.h:633
 msgid "Transit of Venus"
 msgstr "Přechod Venuše"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:631
+#: src/translations.h:635
 msgid "Sky Culture Tour"
 msgstr "Prohlídka nebeských mytologií"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:633
+#: src/translations.h:637
 msgid "Earth Events from Mercury"
 msgstr "Úkazy na Zemi z Merkuru"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:635
+#: src/translations.h:639
 msgid "Earth Events from a floating city on Venus"
 msgstr "Úkazy na Zemi viděné ze vznášejícího se města na Venuši"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:637
+#: src/translations.h:641
 msgid "Earth Events from Mars"
 msgstr "Úkazy na Zemi z Marsu"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:639
+#: src/translations.h:643
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr "Největší elongace a opozice planet a Země z Marsu"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:641
+#: src/translations.h:645
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr "Největší elongace a přechody Země a Marsu viděny z Callisto."
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:643
+#: src/translations.h:647
 msgid "Tycho's Supernova"
 msgstr "Tychonova supernova"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:645
+#: src/translations.h:649
 msgid "Earth and other Planets from Ceres"
 msgstr "Země a další planety z Cerery"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:647
+#: src/translations.h:651
 msgid "Messier Objects Tour"
 msgstr "Prohlídka Messierových objektů"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:649
+#: src/translations.h:653
 msgid "Binocular Highlights"
 msgstr "Nejlepší objekty pro binokuláry"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:651
+#: src/translations.h:655
 msgid "20 Fun Naked-Eye Double Stars"
 msgstr "20 zajímavých dvojhvězd viditelných očima"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:653
+#: src/translations.h:657
 msgid "List of largest known stars"
 msgstr "Seznam největších známých hvězd"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:655
+#: src/translations.h:659
 msgid "Herschel 400 Tour"
 msgstr "Prohlídka objektů z Herschel 400"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:657
+#: src/translations.h:661
 msgid "Binosky: Deep Sky Objects for Binoculars"
 msgstr "Binosky: objekty vzdáleného vesmíru pro binokuláry"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:659
+#: src/translations.h:663
 msgid "The Jack Bennett Catalog"
 msgstr "Katalog Jacka Bennetta"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:661
+#: src/translations.h:665
 msgid "Best objects in the New General Catalog"
 msgstr "Nejlepší objekty v New General Catalog"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:663
+#: src/translations.h:667
 msgid "Jupiter and triple shadow phenomena"
 msgstr "Jupiter a úkazy se třemi stíny"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:665
+#: src/translations.h:669
 msgid "Jupiter without Galilean satellites"
 msgstr "Jupiter bez Galileových měsíců"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:667
+#: src/translations.h:671
 msgid "Skybox Tiles"
 msgstr "Dlaždice z celé oblohy"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:669
+#: src/translations.h:673
 msgid "Occultations of bright stars by planets"
 msgstr "Zákryty jasných hvězd planetami"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:671
+#: src/translations.h:675
 msgid "Mutual occultations of planets"
 msgstr "Vzájemné zákryty planet"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:673
+#: src/translations.h:677
 msgid "Planet Objects Tour"
 msgstr "Prohlídka planet"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:675
+#: src/translations.h:679
 msgid "Analemma"
 msgstr "Analema"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:677
+#: src/translations.h:681
 msgid "Martian analemma"
 msgstr "Marsovská analema"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:679
+#: src/translations.h:683
 msgid "Saturnian analemma"
 msgstr "Saturnovská analema"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:681
+#: src/translations.h:685
 msgid "Uranian analemma"
 msgstr "Uranovská analema"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:683
+#: src/translations.h:687
 msgid "Messier Marathon"
 msgstr "Messierovský Maraton"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:685
+#: src/translations.h:689
 msgid "Random location"
 msgstr "Náhodná poloha"
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:691
+#: src/translations.h:695
 msgid "Look around each installed landscape."
 msgstr "Rozhlédněte se po každé nainstalované krajině."
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:693
+#: src/translations.h:697
 msgid "Look at each installed sky culture."
 msgstr "Prohlédněte si každou nainstalovanou nebeskou mytologii."
 
-#: src/translations.h:694
+#: src/translations.h:698
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "Skript pro ukázku částečného zatmění měsíce."
 
-#: src/translations.h:695
+#: src/translations.h:699
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "Skript pro ukázku úplného zatmění měsíce."
 
-#: src/translations.h:696
+#: src/translations.h:700
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr "Pomalá, nekonečná prohlídka oblohy, pozorování náhodných objektů."
 
-#: src/translations.h:697
+#: src/translations.h:701
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
@@ -8132,11 +8185,11 @@ msgstr ""
 "Skript pro ukázku úplného zatmění Měsíce, ke kterému došlo v roce 2009 "
 "(umístění=Rangpur, Bangladéš)."
 
-#: src/translations.h:698
+#: src/translations.h:702
 msgid "Script which runs automatically at startup"
 msgstr "Skript, který je automaticky spuštěn při startu."
 
-#: src/translations.h:699
+#: src/translations.h:703
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -8145,7 +8198,7 @@ msgstr ""
 "Tento skript zobrazuje postavení Zvěrokruhu. To znamená postavení ležící "
 "podél čáry, kterou Slunce sleduje po celé hvězdné obloze v průběhu roku."
 
-#: src/translations.h:700
+#: src/translations.h:704
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
@@ -8153,7 +8206,7 @@ msgstr ""
 "Díky výstřednostem rotace a oběžné dráhy Merkuru na některých místech za "
 "jeho jeden den zapadá i vychází Slunce až třikrát."
 
-#: src/translations.h:701
+#: src/translations.h:705
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -8161,7 +8214,7 @@ msgstr ""
 "Než může Mars Slunce zastínit, Phobos vyskočí a zakryje ho jako první. "
 "Odehrává se mezi souhvězdím Škorpióna a Střelce 26. dubna 2017."
 
-#: src/translations.h:702
+#: src/translations.h:706
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -8169,12 +8222,12 @@ msgstr ""
 "Než může Mars Slunce zastínit, Phobos vyskočí a zakryje ho jako první. "
 "Odehrává se mezi souhvězdím Býka a Blíženců 26. července 2031."
 
-#: src/translations.h:703
+#: src/translations.h:707
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 2, 2021."
 msgstr ""
 "Phobos zakrývající Slunce pozorovaný z Olympus Mons dne 2. ledna 2021."
 
-#: src/translations.h:704
+#: src/translations.h:708
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But"
 " occultations of both on the same day are very rare. Here's one that takes "
@@ -8184,7 +8237,7 @@ msgstr ""
 "zakrytí obou ve stejný den jsou velmi vzácná. Zde jedno probíhá ve skutečné "
 "rychlosti 21. ledna 2048."
 
-#: src/translations.h:705
+#: src/translations.h:709
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -8199,36 +8252,36 @@ msgstr ""
 "projde temnotou mezi Marsem a Deimosem. Když se Phobos vynoří z Marsu, je "
 "stále zastíněn jeho stínem a později je znovu osvětlen."
 
-#: src/translations.h:706
+#: src/translations.h:710
 msgid ""
 "Screensaver of various happenings in the Solar System. 313 events in all!"
 msgstr ""
 "Spořič obrazovky z různých událostí ve Sluneční soustavě. Celkem 313 úkazů!"
 
-#: src/translations.h:707
+#: src/translations.h:711
 msgid "A tour of the western constellations."
 msgstr "Prohlídka západních souhvězdí."
 
-#: src/translations.h:708
+#: src/translations.h:712
 msgid "A tour of the constellations of the selected sky culture."
 msgstr "Prohlídka souhvězdí z vybrané nebeské mytologie."
 
-#: src/translations.h:709
+#: src/translations.h:713
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "Pohled na Slunce z velkých planet sluneční soustavy a Pluta."
 
-#: src/translations.h:710
+#: src/translations.h:714
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 "Nejlepší pohledy na Zemi z jiných těles sluneční soustavy ve 21. století."
 
-#: src/translations.h:711
+#: src/translations.h:715
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
 "Přechod Venuše, jak byl viděn ze Sydney v Austrálii dne 6. června 2012."
 
-#: src/translations.h:712
+#: src/translations.h:716
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Historical "
 "Supernovae plugin has to be enabled."
@@ -8236,13 +8289,13 @@ msgstr ""
 "Záblesk supenovy pozorované Tychonem Brahem v roce 1572. Zásuvný modul "
 "Historické supernovy musí být zapnutý."
 
-#: src/translations.h:713
+#: src/translations.h:717
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars "
 "2000-3000"
 msgstr "Největší elongace a opozice Země a dalších planet z Marsu 2000-3000."
 
-#: src/translations.h:714
+#: src/translations.h:718
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -8254,7 +8307,7 @@ msgstr ""
 "Pokud bude někdy lidstvo kolonizovat Jupiterovy měsíce, Callisto bude "
 "nejspíš ten první."
 
-#: src/translations.h:715
+#: src/translations.h:719
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-2200"
@@ -8262,11 +8315,11 @@ msgstr ""
 "Největší elongace a opozice Země a dalších viditelných planet z Cerery "
 "2000-2200"
 
-#: src/translations.h:716
+#: src/translations.h:720
 msgid "A tour of Messier Objects"
 msgstr "Prohlídka objektů z Messierova katalogu."
 
-#: src/translations.h:717
+#: src/translations.h:721
 msgid ""
 "Tours around interesting objects, which accessible to observation with "
 "binoculars. The data for the script are taken from the eponymous book by "
@@ -8275,7 +8328,7 @@ msgstr ""
 "Prohlídka zajímavých objektů dostupných pro triedry. Údaje pro skript jsou "
 "převzaty ze stejnomenné knihy Garyho Seronika."
 
-#: src/translations.h:718
+#: src/translations.h:722
 msgid ""
 "This script helps you make an excursion around 20 fun double stars. The list"
 " has been collected by Jerry Lodriguss and published in Sky & Telescope "
@@ -8286,15 +8339,15 @@ msgstr ""
 " 09/2014. Data jsou převzata z jeho webové stránky "
 "http://www.astropix.com/doubles/"
 
-#: src/translations.h:719
+#: src/translations.h:723
 msgid "This script helps you make an excursion around largest known stars."
 msgstr "Tento skript vás provede okolo největších známých hvězd."
 
-#: src/translations.h:720
+#: src/translations.h:724
 msgid "A tour around objects from the Herschel 400 Catalogue"
 msgstr "Prohlídka objektů z katalogu Herschel 400"
 
-#: src/translations.h:721
+#: src/translations.h:725
 msgid ""
 "Ben Crowell has created Binosky, an observing list of Deep Sky Objects for "
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
@@ -8304,7 +8357,7 @@ msgstr ""
 "pozorovatelných binokuláry. Ve skriptu se nachází seznam 31 takových objektů"
 " seřazených podle rektascenze (J2000.0)."
 
-#: src/translations.h:722
+#: src/translations.h:726
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
 "The Bennett catalog was contributed by Auke Slotegraaf."
@@ -8312,7 +8365,7 @@ msgstr ""
 "Katalog objektů vzdáleného vesmíru pro jižní polokouli od Jacka Bennetta "
 "(celkem 152 objectů). Bennettův katalog zapracoval Auke Slotegraaf."
 
-#: src/translations.h:723
+#: src/translations.h:727
 msgid ""
 "This list of 111 objects by A.J. Crayon and Steve Coe is used by members of "
 "the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC "
@@ -8322,7 +8375,7 @@ msgstr ""
 "členy Saguaro Astronomy Club ve Phoenixu v Arizoně pro ocenění při úspěšném "
 "napozorování Best of the NGC."
 
-#: src/translations.h:724
+#: src/translations.h:728
 msgid ""
 "Demonstration of the mid-time of rare events - triple shadow phenomena of "
 "the satellites of Jupiter from 1900 to 2100. All events are given in "
@@ -8332,7 +8385,7 @@ msgstr ""
 " měsíců  od roku 1900 do roku 2100. Všechny úkazy jsou dány v dynamickém "
 "čase."
 
-#: src/translations.h:725
+#: src/translations.h:729
 msgid ""
 "The planet Jupiter sometimes appears to be without moons, when the four "
 "Galilean satellites are simultaneously invisible because they are passing "
@@ -8346,7 +8399,7 @@ msgstr ""
 "(zatmění). Tento skript demonstruje tyto vzácné jevy od roku 1900 do 2100, "
 "časové údaje jsou v dynamickém čase."
 
-#: src/translations.h:726
+#: src/translations.h:730
 msgid ""
 "This script demonstrates interesting phenomena - occultations bright stars "
 "by planets, 2000 to 2040."
@@ -8354,7 +8407,7 @@ msgstr ""
 "Tento skript demonstruje zajímavé jevy - zákryty jasných hvězd planetami v "
 "letech 2000 až 2040."
 
-#: src/translations.h:727
+#: src/translations.h:731
 msgid ""
 "This script demonstrates interesting and very rare phenomena - mutual "
 "occultations of planets, 0 to 2500."
@@ -8362,36 +8415,36 @@ msgstr ""
 "Tento skript demonstruje zajímavé a velmi vzácné jevy - vzájemné zákryty "
 "planet v letech 0 až 2500."
 
-#: src/translations.h:728
+#: src/translations.h:732
 msgid "A tour of the Solar System planets"
 msgstr "Cesta po planetách Sluneční soustavy"
 
-#: src/translations.h:729
+#: src/translations.h:733
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Earth."
 msgstr "Předvedení analemy - cesty Slunce po obloze v průběhu roku na Zemi."
 
-#: src/translations.h:730
+#: src/translations.h:734
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Mars."
 msgstr "Ukázka analemy - cesty Slunce po obloze v průběhu roku na Marsu."
 
-#: src/translations.h:731
+#: src/translations.h:735
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Saturn."
 msgstr ""
 "Předvedení analemy - cesty Slunce po obloze v průběhu roku na Saturnu."
 
-#: src/translations.h:732
+#: src/translations.h:736
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Uranus."
 msgstr "Předvedení analemy - cesty Slunce po obloze v průběhu roku na Uranu."
 
-#: src/translations.h:733
+#: src/translations.h:737
 msgid ""
 "Messier Marathon on March 20, 2020. The data for the script are taken from "
 "GaoXing's observation log: http://www.xjltp.com/2_huodong/2_030301.htm"
@@ -8399,7 +8452,7 @@ msgstr ""
 "Messierovký Maraton dne 20. března 2020. Údaje pro skript jsou převzaty z "
 "GaoXingova pozorovacího deníku: http://www.xjltp.com/2_huodong/2_030301.htm"
 
-#: src/translations.h:734
+#: src/translations.h:738
 msgid ""
 "Creates 6 tiles (North/East/South/West/Up/Down) for a skybox. These can be "
 "further used e.g. in Unity3D or other 3D environments. Output directory and "
@@ -8416,7 +8469,7 @@ msgstr ""
 "OUTPUT_DATA. Přečtěte si prosím skript, abyste pochopili, jak jej použít ve "
 "vašich projektech."
 
-#: src/translations.h:735
+#: src/translations.h:739
 msgid ""
 "This script will help you make practical works for celestial navigation - he"
 " sets a random location and hides it from the GUI."
@@ -8424,180 +8477,180 @@ msgstr ""
 "Tento skript vám pomůže provádět praktická cvičení z nebeské navigace - "
 "nastaví náhodnou polohu a skryje ji před grafickým uživatelským rozhraním."
 
-#: src/translations.h:739
+#: src/translations.h:743
 msgid "&Undo"
 msgstr "&Zpět"
 
-#: src/translations.h:740
+#: src/translations.h:744
 msgid "&Redo"
 msgstr "&Znovu"
 
-#: src/translations.h:741
+#: src/translations.h:745
 msgid "Cu&t"
 msgstr "Vyjmou&t"
 
-#: src/translations.h:742
+#: src/translations.h:746
 msgid "&Copy"
 msgstr "&Kopírovat"
 
-#: src/translations.h:743
+#: src/translations.h:747
 msgid "&Paste"
 msgstr "&Vložit"
 
-#: src/translations.h:744 plugins/Oculars/src/ui_ocularDialog.h:1542
+#: src/translations.h:748 plugins/Oculars/src/ui_ocularDialog.h:1542
 #: plugins/Oculars/src/ui_ocularDialog.h:1551
 #: plugins/Oculars/src/ui_ocularDialog.h:1557
 #: plugins/Oculars/src/ui_ocularDialog.h:1576
 msgid "Delete"
 msgstr "Odstranit"
 
-#: src/translations.h:745
+#: src/translations.h:749
 msgid "Select All"
 msgstr "Vybrat vše"
 
-#: src/translations.h:746
+#: src/translations.h:750
 msgid "Look in:"
 msgstr "Hledat v:"
 
-#: src/translations.h:747
+#: src/translations.h:751
 msgid "Directory:"
 msgstr "Adresář:"
 
-#: src/translations.h:748
+#: src/translations.h:752
 msgid "Folder"
 msgstr "Složka"
 
-#: src/translations.h:749
+#: src/translations.h:753
 msgid "&Choose"
 msgstr "&Zvolit"
 
-#: src/translations.h:750 src/ui_configurationDialog.h:1875
+#: src/translations.h:754 src/ui_configurationDialog.h:1875
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:644
 msgid "Cancel"
 msgstr "Storno"
 
-#: src/translations.h:751
+#: src/translations.h:755
 msgid "&Cancel"
 msgstr "&Storno"
 
-#: src/translations.h:752
+#: src/translations.h:756
 msgid "Files of type:"
 msgstr "Soubory typu:"
 
-#: src/translations.h:753
+#: src/translations.h:757
 msgid "Date Modified"
 msgstr "Datum změny"
 
-#: src/translations.h:754
+#: src/translations.h:758
 msgid "Directories"
 msgstr "Složky"
 
-#: src/translations.h:755
+#: src/translations.h:759
 msgid "Computer"
 msgstr "Počítač"
 
-#: src/translations.h:756
+#: src/translations.h:760
 msgid "&Open"
 msgstr "&Otevřít"
 
-#: src/translations.h:757
+#: src/translations.h:761
 msgid "&Save"
 msgstr "&Uložit"
 
-#: src/translations.h:758
+#: src/translations.h:762
 msgid "File &name:"
 msgstr "Jmé&no souboru:"
 
-#: src/translations.h:759
+#: src/translations.h:763
 msgid "Copy &Link Location"
 msgstr "Kopírovat &umístění odkazu"
 
-#: src/translations.h:760
+#: src/translations.h:764
 msgid "Abort"
 msgstr "Přerušit"
 
-#: src/translations.h:761
+#: src/translations.h:765
 msgid "Ignore"
 msgstr "Ignorovat"
 
-#: src/translations.h:762
+#: src/translations.h:766
 msgid "&Basic colors"
 msgstr "Základní &barvy"
 
-#: src/translations.h:763
+#: src/translations.h:767
 msgid "&Pick Screen Color"
 msgstr "&Vyberte barvu na obrázku"
 
-#: src/translations.h:764
+#: src/translations.h:768
 msgid "&Custom colors"
 msgstr "&Uživatelské barvy"
 
-#: src/translations.h:765
+#: src/translations.h:769
 msgid "&Add to Custom Colors"
 msgstr "Přid&at k uživatelským barvám"
 
-#: src/translations.h:766
+#: src/translations.h:770
 msgid "Hu&e:"
 msgstr "&Odstín:"
 
-#: src/translations.h:767
+#: src/translations.h:771
 msgid "&Sat:"
 msgstr "&Sytost:"
 
-#: src/translations.h:768
+#: src/translations.h:772
 msgid "&Val:"
 msgstr "&Hodnota:"
 
-#: src/translations.h:769
+#: src/translations.h:773
 msgid "&Red:"
 msgstr "Če&rvená:"
 
-#: src/translations.h:770
+#: src/translations.h:774
 msgid "&Green:"
 msgstr "&Zelená:"
 
-#: src/translations.h:771
+#: src/translations.h:775
 msgid "Bl&ue:"
 msgstr "&Modrá:"
 
-#: src/translations.h:772
+#: src/translations.h:776
 msgid "Select Color"
 msgstr "Vybrat barvu"
 
-#: src/translations.h:773
+#: src/translations.h:777
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "Kurzor na %1, %2 Stiskněte ESC pro zrušení"
 
-#: src/translations.h:774
+#: src/translations.h:778
 msgid "Back"
 msgstr "Zpět"
 
-#: src/translations.h:775
+#: src/translations.h:779
 msgid "Forward"
 msgstr "Vpřed"
 
-#: src/translations.h:776
+#: src/translations.h:780
 msgid "Parent Directory"
 msgstr "O úroveň výš"
 
-#: src/translations.h:777
+#: src/translations.h:781
 msgid "Create New Folder"
 msgstr "Vytvořit novou složku"
 
-#: src/translations.h:778
+#: src/translations.h:782
 msgid "List View"
 msgstr "Zobrazení seznamu"
 
-#: src/translations.h:779
+#: src/translations.h:783
 msgid "Detail View"
 msgstr "Detailní zobrazení"
 
-#: src/translations.h:780
+#: src/translations.h:784
 msgid "Recent Places"
 msgstr "Nedávná místa"
 
-#: src/translations.h:781
+#: src/translations.h:785
 #, qt-format
 msgid ""
 "%1 already exists.\n"
@@ -8606,39 +8659,39 @@ msgstr ""
 "%1 již existuje.\n"
 "Chcete jej nahradit?"
 
-#: src/translations.h:782
+#: src/translations.h:786
 msgid "&Yes"
 msgstr "&Ano"
 
-#: src/translations.h:783
+#: src/translations.h:787
 msgid "&No"
 msgstr "&Ne"
 
-#: src/translations.h:784
+#: src/translations.h:788
 msgid "&Select All"
 msgstr "&Vybrat vše"
 
-#: src/translations.h:785
+#: src/translations.h:789
 msgid "&Step up"
 msgstr "&Krok nahoru"
 
-#: src/translations.h:786
+#: src/translations.h:790
 msgid "Step &down"
 msgstr "Krok &níž"
 
-#: src/translations.h:787
+#: src/translations.h:791
 msgid "&Rename"
 msgstr "P&řejmenovat"
 
-#: src/translations.h:788
+#: src/translations.h:792
 msgid "&Delete"
 msgstr "O&dstranit"
 
-#: src/translations.h:789
+#: src/translations.h:793
 msgid "&New Folder"
 msgstr "&Nová složka"
 
-#: src/translations.h:790
+#: src/translations.h:794
 msgid "Show &hidden files"
 msgstr "Zobrazit &skryté soubory"
 
@@ -9030,285 +9083,285 @@ msgstr "Vasilisa Regio"
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:213
 msgid "Aibarchin Planitia"
-msgstr ""
+msgstr "Aibarchin Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:216
 msgid "Aino Planitia"
-msgstr ""
+msgstr "Aino Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:219
 msgid "Akhtamar Planitia"
-msgstr ""
+msgstr "Akhtamar Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:222
 msgid "Alma-Merghen Planitia"
-msgstr ""
+msgstr "Alma-Merghen Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:225
 msgid "Atalanta Planitia"
-msgstr ""
+msgstr "Atalanta Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:228
 msgid "Audra Planitia"
-msgstr ""
+msgstr "Audra Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:231
 msgid "Bereghinya Planitia"
-msgstr ""
+msgstr "Bereghinya Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:234
 msgid "Dzerassa Planitia"
-msgstr ""
+msgstr "Dzerassa Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:237
 msgid "Fonueha Planitia"
-msgstr ""
+msgstr "Fonueha Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:240
 msgid "Ganiki Planitia"
-msgstr ""
+msgstr "Ganiki Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Guinevere_Planitia
 #: src/translations_regions.h:243
 msgid "Guinevere Planitia"
-msgstr ""
+msgstr "Guinevere Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:246
 msgid "Gunda Planitia"
-msgstr ""
+msgstr "Gunda Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:249
 msgid "Helen Planitia"
-msgstr ""
+msgstr "Helen Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:252
 msgid "Hinemoa Planitia"
-msgstr ""
+msgstr "Hinemoa Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:255
 msgid "Imapinua Planitia"
-msgstr ""
+msgstr "Imapinua Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:258
 msgid "Kanykey Planitia"
-msgstr ""
+msgstr "Kanykey Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:261
 msgid "Kawelu Planitia"
-msgstr ""
+msgstr "Kawelu Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:264
 msgid "Laimdota Planitia"
-msgstr ""
+msgstr "Laimdota Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:267
 msgid "Lavinia Planitia"
-msgstr ""
+msgstr "Lavinia Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:270
 msgid "Leda Planitia"
-msgstr ""
+msgstr "Leda Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:273
 msgid "Libuse Planitia"
-msgstr ""
+msgstr "Libuse Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:276
 msgid "Llorona Planitia"
-msgstr ""
+msgstr "Llorona Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:279
 msgid "Louhi Planitia"
-msgstr ""
+msgstr "Louhi Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:282
 msgid "Lowana Planitia"
-msgstr ""
+msgstr "Lowana Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:285
 msgid "Mugazo Planitia"
-msgstr ""
+msgstr "Mugazo Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:288
 msgid "Navka Planitia"
-msgstr ""
+msgstr "Navka Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:291
 msgid "Niobe Planitia"
-msgstr ""
+msgstr "Niobe Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:294
 msgid "Nsomeka Planitia"
-msgstr ""
+msgstr "Nsomeka Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:297
 msgid "Nuptadi Planitia"
-msgstr ""
+msgstr "Nuptadi Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:300
 msgid "Rusalka Planitia"
-msgstr ""
+msgstr "Rusalka Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Sedna_Planitia
 #: src/translations_regions.h:303
 msgid "Sedna Planitia"
-msgstr ""
+msgstr "Sedna Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:306
 msgid "Snegurochka Planitia"
-msgstr ""
+msgstr "Snegurochka Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:309
 msgid "Sogolon Planitia"
-msgstr ""
+msgstr "Sogolon Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:312
 msgid "Tahmina Planitia"
-msgstr ""
+msgstr "Tahmina Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:315
 msgid "Tilli-Hanum Planitia"
-msgstr ""
+msgstr "Tilli-Hanum Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:318
 msgid "Tinatin Planitia"
-msgstr ""
+msgstr "Tinatin Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:321
 msgid "Undine Planitia"
-msgstr ""
+msgstr "Undine Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:324
 msgid "Vellamo Planitia"
-msgstr ""
+msgstr "Vellamo Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:327
 msgid "Vinmara Planitia"
-msgstr ""
+msgstr "Vinmara Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:330
 msgid "Wawalag Planitia"
-msgstr ""
+msgstr "Wawalag Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:333
 msgid "Zhibek Planitia"
-msgstr ""
+msgstr "Zhibek Planitia"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9317,7 +9370,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Oceanus_Procellarum
 #: src/translations_regions.h:337
 msgid "Ocean of Storms"
-msgstr ""
+msgstr "Oceán bouří"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9326,7 +9379,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Anguis
 #: src/translations_regions.h:341
 msgid "Serpent Sea"
-msgstr ""
+msgstr "Moře hada"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9335,7 +9388,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Australe
 #: src/translations_regions.h:345
 msgid "Southern Sea"
-msgstr ""
+msgstr "Moře jižní"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9343,8 +9396,8 @@ msgstr ""
 #. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Cognitum
 #: src/translations_regions.h:349
-msgid "Sea of Knowledge"
-msgstr ""
+msgid "Sea that has Become Known"
+msgstr "Moře poznání"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9353,7 +9406,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Crisium
 #: src/translations_regions.h:353
 msgid "Sea of Crises"
-msgstr ""
+msgstr "Moře nepokojů"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9362,7 +9415,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Fecunditatis
 #: src/translations_regions.h:357
 msgid "Sea of Fecundity"
-msgstr ""
+msgstr "Moře hojnosti"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9371,7 +9424,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Frigoris
 #: src/translations_regions.h:361
 msgid "Sea of Cold"
-msgstr ""
+msgstr "Moře chladu"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9380,7 +9433,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Humboldtianum
 #: src/translations_regions.h:365
 msgid "Sea of Humboldt"
-msgstr ""
+msgstr "Moře Humboldtovo"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9389,7 +9442,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Humorum
 #: src/translations_regions.h:369
 msgid "Sea of Moisture"
-msgstr ""
+msgstr "Moře vláhy"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9397,8 +9450,8 @@ msgstr ""
 #. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Imbrium
 #: src/translations_regions.h:373
-msgid "Sea of Rains"
-msgstr ""
+msgid "Sea of Showers"
+msgstr "Moře dešťů"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9407,7 +9460,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Ingenii
 #: src/translations_regions.h:377
 msgid "Sea of Cleverness"
-msgstr ""
+msgstr "Moře talentů"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9416,7 +9469,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Insularum
 #: src/translations_regions.h:381
 msgid "Sea of Islands"
-msgstr ""
+msgstr "Moře ostrovů"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9425,7 +9478,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Marginis
 #: src/translations_regions.h:385
 msgid "Sea of the Edge"
-msgstr ""
+msgstr "Moře okraje"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9434,7 +9487,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Moscoviense
 #: src/translations_regions.h:389
 msgid "Sea of Moscow"
-msgstr ""
+msgstr "Moře moskevské"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9443,7 +9496,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Nectaris
 #: src/translations_regions.h:393
 msgid "Sea of Nectar"
-msgstr ""
+msgstr "Moře nektaru"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9452,7 +9505,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Nubium
 #: src/translations_regions.h:397
 msgid "Sea of Clouds"
-msgstr ""
+msgstr "Moře oblaků"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9460,8 +9513,8 @@ msgstr ""
 #. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Orientale
 #: src/translations_regions.h:401
-msgid "Eastern sea"
-msgstr ""
+msgid "Eastern Sea"
+msgstr "Moře východní"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9470,7 +9523,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Serenitatis
 #: src/translations_regions.h:405
 msgid "Sea of Serenity"
-msgstr ""
+msgstr "Moře jasu"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9479,7 +9532,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Smythii
 #: src/translations_regions.h:409
 msgid "Smyth's Sea"
-msgstr ""
+msgstr "Moře Smythovo"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9488,7 +9541,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Spumans
 #: src/translations_regions.h:413
 msgid "Foaming Sea"
-msgstr ""
+msgstr "Moře zpěněné"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9497,7 +9550,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Tranquillitatis
 #: src/translations_regions.h:417
 msgid "Sea of Tranquillity"
-msgstr ""
+msgstr "Moře klidu"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9506,7 +9559,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Undarum
 #: src/translations_regions.h:421
 msgid "Sea of Waves"
-msgstr ""
+msgstr "Moře vln"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9515,7 +9568,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Vaporum
 #: src/translations_regions.h:425
 msgid "Sea of Vapors"
-msgstr ""
+msgstr "Moře par"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9523,7 +9576,7 @@ msgstr ""
 #. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:428
 msgid "Northern highlands"
-msgstr ""
+msgstr "Severní vysočina"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9532,7 +9585,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Montes_Jura
 #: src/translations_regions.h:432
 msgid "Jura mountains"
-msgstr ""
+msgstr "Pohoří Jura"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9540,7 +9593,7 @@ msgstr ""
 #. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:435
 msgid "Alps province"
-msgstr ""
+msgstr "Alpská oblast"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9548,7 +9601,7 @@ msgstr ""
 #. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:438
 msgid "Caucasus province"
-msgstr ""
+msgstr "Kavkazská oblast"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9557,7 +9610,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Lacus_Somniorum
 #: src/translations_regions.h:442
 msgid "Lake of Dreams"
-msgstr ""
+msgstr "Jezero snů"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9566,7 +9619,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Montes_Taurus
 #: src/translations_regions.h:446
 msgid "Taurus mountains"
-msgstr ""
+msgstr "Pohoří Taurus"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9575,7 +9628,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Sinus_Roris
 #: src/translations_regions.h:450
 msgid "Bay of Dew"
-msgstr ""
+msgstr "Záliv rosy"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9583,7 +9636,7 @@ msgstr ""
 #. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:453
 msgid "Apennines province"
-msgstr ""
+msgstr "Apeninská oblast"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9591,7 +9644,7 @@ msgstr ""
 #. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:456
 msgid "Carpatian province"
-msgstr ""
+msgstr "Karpatská oblast"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9600,7 +9653,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Sinus_Aestuum
 #: src/translations_regions.h:460
 msgid "Seething Bay"
-msgstr ""
+msgstr "Záliv žáru"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9608,7 +9661,7 @@ msgstr ""
 #. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:463
 msgid "Aestuum upland"
-msgstr ""
+msgstr "Výšina žáru"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9616,7 +9669,7 @@ msgstr ""
 #. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:466
 msgid "Haemus province"
-msgstr ""
+msgstr "Oblast Haemus"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9624,7 +9677,7 @@ msgstr ""
 #. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:469
 msgid "Procellarum upland"
-msgstr ""
+msgstr "Výšina bouří"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9632,7 +9685,7 @@ msgstr ""
 #. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:472
 msgid "Central crater province"
-msgstr ""
+msgstr "Centrální kráterová oblast"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9640,7 +9693,7 @@ msgstr ""
 #. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:475
 msgid "Macro-crater province"
-msgstr ""
+msgstr "Oblast velkých kráterů"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9648,7 +9701,7 @@ msgstr ""
 #. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:478
 msgid "Southeastern crater province"
-msgstr ""
+msgstr "Jihovýchodní kráterová oblast"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9656,7 +9709,7 @@ msgstr ""
 #. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:481
 msgid "Cratered plain province"
-msgstr ""
+msgstr "Oblast kráterové roviny"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9664,7 +9717,7 @@ msgstr ""
 #. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:484
 msgid "Southwestern crater province"
-msgstr ""
+msgstr "Jihozápadní kráterová oblast"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9672,7 +9725,7 @@ msgstr ""
 #. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:487
 msgid "Nectaris crater province"
-msgstr ""
+msgstr "Kráterová oblast Nectaris"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9680,7 +9733,7 @@ msgstr ""
 #. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:490
 msgid "Pyrenees province"
-msgstr ""
+msgstr "Provincie Pyreneje"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9688,7 +9741,7 @@ msgstr ""
 #. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:493
 msgid "Western highlands"
-msgstr ""
+msgstr "Západní vysočina"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9696,7 +9749,7 @@ msgstr ""
 #. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:496
 msgid "Eastern highlands"
-msgstr ""
+msgstr "Východní vysočina"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9705,7 +9758,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Sinus_Medii
 #: src/translations_regions.h:500
 msgid "Bay of the center"
-msgstr ""
+msgstr "Záliv středu"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9714,7 +9767,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Palus_Epidemiarum
 #: src/translations_regions.h:504
 msgid "Marsh of Epidemics"
-msgstr ""
+msgstr "Bažina epidemií"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9722,7 +9775,7 @@ msgstr ""
 #. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:507
 msgid "Far-side southern lowland"
-msgstr ""
+msgstr "Nížina jižní vzdálené strany"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9730,7 +9783,7 @@ msgstr ""
 #. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:510
 msgid "Far-side northern lowland"
-msgstr ""
+msgstr "Nížina severní vzdálené strany"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9738,7 +9791,7 @@ msgstr ""
 #. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:513
 msgid "Far-side central highland"
-msgstr ""
+msgstr "Vysočina centrální vzdálené strany"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9747,7 +9800,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Acidalia_Planitia
 #: src/translations_regions.h:517
 msgid "Acidalia Planitia"
-msgstr ""
+msgstr "Acidalia Planitia"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9756,7 +9809,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Amazonis_Planitia
 #: src/translations_regions.h:521
 msgid "Amazonis Planitia"
-msgstr ""
+msgstr "Amazonis Planitia"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9765,7 +9818,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Arcadia_Planitia
 #: src/translations_regions.h:525
 msgid "Arcadia Planitia"
-msgstr ""
+msgstr "Arcadia Planitia"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9774,7 +9827,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Argyre_Planitia
 #: src/translations_regions.h:529
 msgid "Argyre Planitia"
-msgstr ""
+msgstr "Argyre Planitia"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9783,7 +9836,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Chryse_Planitia
 #: src/translations_regions.h:533
 msgid "Chryse Planitia"
-msgstr ""
+msgstr "Chryse Planitia"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9792,7 +9845,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Elysium_Planitia
 #: src/translations_regions.h:537
 msgid "Elysium Planitia"
-msgstr ""
+msgstr "Elysium Planitia"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9801,7 +9854,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Eridania_Planitia
 #: src/translations_regions.h:541
 msgid "Eridania Planitia"
-msgstr ""
+msgstr "Eridania Planitia"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9810,7 +9863,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Hellas_Planitia
 #: src/translations_regions.h:545
 msgid "Hellas Planitia"
-msgstr ""
+msgstr "Hellas Planitia"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9819,7 +9872,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Isidis_Planitia
 #: src/translations_regions.h:549
 msgid "Isidis Planitia"
-msgstr ""
+msgstr "Isidis Planitia"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9828,7 +9881,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Utopia_Planitia
 #: src/translations_regions.h:553
 msgid "Utopia Planitia"
-msgstr ""
+msgstr "Utopia Planitia"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9837,7 +9890,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Aonia_Terra
 #: src/translations_regions.h:557
 msgid "Aonia Terra"
-msgstr ""
+msgstr "Aonia Terra"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9846,7 +9899,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Arabia_Terra
 #: src/translations_regions.h:561
 msgid "Arabia Terra"
-msgstr ""
+msgstr "Arabia Terra"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9855,7 +9908,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Margaritifer_Terra
 #: src/translations_regions.h:565
 msgid "Margaritifer Terra"
-msgstr ""
+msgstr "Margaritifer Terra"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9864,7 +9917,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Noachis_Terra
 #: src/translations_regions.h:569
 msgid "Noachis Terra"
-msgstr ""
+msgstr "Noachis Terra"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9873,7 +9926,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Promethei_Terra
 #: src/translations_regions.h:573
 msgid "Promethei Terra"
-msgstr ""
+msgstr "Promethei Terra"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9882,7 +9935,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Tempe_Terra
 #: src/translations_regions.h:577
 msgid "Tempe Terra"
-msgstr ""
+msgstr "Tempe Terra"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9891,7 +9944,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Terra_Cimmeria
 #: src/translations_regions.h:581
 msgid "Terra Cimmeria"
-msgstr ""
+msgstr "Terra Cimmeria"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9900,7 +9953,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Terra_Sabaea
 #: src/translations_regions.h:585
 msgid "Terra Sabaea"
-msgstr ""
+msgstr "Terra Sabaea"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9909,7 +9962,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Terra_Sirenum
 #: src/translations_regions.h:589
 msgid "Terra Sirenum"
-msgstr ""
+msgstr "Terra Sirenum"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9918,7 +9971,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Tyrrhena_Terra
 #: src/translations_regions.h:593
 msgid "Tyrrhena Terra"
-msgstr ""
+msgstr "Tyrrhena Terra"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9927,7 +9980,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Xanthe_Terra
 #: src/translations_regions.h:597
 msgid "Xanthe Terra"
-msgstr ""
+msgstr "Xanthe Terra"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9936,7 +9989,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Vastitas_Borealis
 #: src/translations_regions.h:601
 msgid "Vastitas Borealis"
-msgstr ""
+msgstr "Vastitas Borealis"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9945,7 +9998,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Tharsis
 #: src/translations_regions.h:605
 msgid "Tharsis"
-msgstr ""
+msgstr "Tharsis"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9954,7 +10007,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Planum_Boreum
 #: src/translations_regions.h:609
 msgid "Planum Boreum"
-msgstr ""
+msgstr "Planum Boreum"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9963,7 +10016,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Planum_Australe
 #: src/translations_regions.h:613
 msgid "Planum Australe"
-msgstr ""
+msgstr "Planum Australe"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9972,96 +10025,96 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Lunae_Palus_quadrangle
 #: src/translations_regions.h:617
 msgid "Lunae Planum"
-msgstr ""
+msgstr "Lunae Planum"
 
 #. TRANSLATORS: Name of region on Titan
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
 #: src/translations_regions.h:620
 msgid "Garotman Terra"
-msgstr ""
+msgstr "Garotman Terra"
 
 #. TRANSLATORS: Name of region on Titan
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
 #: src/translations_regions.h:623
 msgid "Tollan Terra"
-msgstr ""
+msgstr "Tollan Terra"
 
 #. TRANSLATORS: Name of region on Titan
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
 #: src/translations_regions.h:626
 msgid "Tsiipiya Terra"
-msgstr ""
+msgstr "Tsiipiya Terra"
 
 #. TRANSLATORS: Name of region on Titan
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
 #: src/translations_regions.h:629
 msgid "Yalaing Terra"
-msgstr ""
+msgstr "Yalaing Terra"
 
 #. TRANSLATORS: Name of region on Titan
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Xanadu_(Titan)
 #: src/translations_regions.h:632
 msgid "Xanadu"
-msgstr ""
+msgstr "Xanadu"
 
 #. TRANSLATORS: Name of region on Titan
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
 #: src/translations_regions.h:635
 msgid "Kraken Mare"
-msgstr ""
+msgstr "Kraken Mare"
 
 #. TRANSLATORS: Name of region on Titan
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
 #: src/translations_regions.h:638
 msgid "Ligeia Mare"
-msgstr ""
+msgstr "Ligeia Mare"
 
 #. TRANSLATORS: Name of region on Titan
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
 #: src/translations_regions.h:641
 msgid "Punga Mare"
-msgstr ""
+msgstr "Punga Mare"
 
 #. TRANSLATORS: Name of region on Titan
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
 #: src/translations_regions.h:644
 msgid "Concordia Regio"
-msgstr ""
+msgstr "Concordia Regio"
 
 #. TRANSLATORS: Name of region on Titan
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
 #: src/translations_regions.h:647
 msgid "Hetpet Regio"
-msgstr ""
+msgstr "Hetpet Regio"
 
 #. TRANSLATORS: Name of region on Titan
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
 #: src/translations_regions.h:650
 msgid "Hotei Regio"
-msgstr ""
+msgstr "Hotei Regio"
 
 #. TRANSLATORS: Name of region on Titan
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
 #: src/translations_regions.h:653
 msgid "Ochumare Regio"
-msgstr ""
+msgstr "Ochumare Regio"
 
 #. TRANSLATORS: Name of region on Titan
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Tui_Regio
 #: src/translations_regions.h:656
 msgid "Tui Regio"
-msgstr ""
+msgstr "Tui Regio"
 
 #: src/ui_dateTimeDialogGui.h:378 src/ui_dateTimeDialogGui.h:383
 msgid "Julian Day"
@@ -10184,7 +10237,7 @@ msgstr "Jméno/Město:"
 
 #: src/ui_locationDialogGui.h:517
 msgid "Region:"
-msgstr ""
+msgstr "Oblast:"
 
 #: src/ui_locationDialogGui.h:521
 msgid "Enable daylight saving time"
@@ -10583,11 +10636,11 @@ msgstr "Svislý posun pohledu"
 
 #: src/ui_viewDialog.h:3241
 msgid "Custom FoV limit"
-msgstr ""
+msgstr "Uživatelský limit ZP"
 
 #: src/ui_viewDialog.h:3243
 msgid "Additional custom limitation (e.g. for planetarium use)"
-msgstr ""
+msgstr "Další uživatelské omezení (např. pro použití v planetáriu)"
 
 #: src/ui_viewDialog.h:3245
 msgid "Solar System objects"
@@ -10679,23 +10732,23 @@ msgstr "Zapnout/vypnout kresbu hala okolo Měsíce"
 
 #: src/ui_viewDialog.h:3288
 msgid "Moon's halo"
-msgstr ""
+msgstr "Měsíční halo"
 
 #: src/ui_viewDialog.h:3290
 msgid "Toggle drawing Sun's glare"
-msgstr ""
+msgstr "Přepíná zobrazení sluneční záře"
 
 #: src/ui_viewDialog.h:3292
 msgid "Sun's glare"
-msgstr ""
+msgstr "Sluneční záře"
 
 #: src/ui_viewDialog.h:3294
-msgid "Toggle permanent drawing Sun's corona when atmosphere is disabled"
-msgstr ""
+msgid "Toggle permanent drawing of Sun's corona when atmosphere is disabled"
+msgstr "Přepíná trvalé zobrazení sluneční koróny, když je atmosféra vypnutá"
 
 #: src/ui_viewDialog.h:3296
 msgid "Sun's corona"
-msgstr ""
+msgstr "Sluneční koróna"
 
 #: src/ui_viewDialog.h:3297
 msgid "Planets magnitude algorithm:"
@@ -12054,7 +12107,7 @@ msgstr "Umožňuje uložit oblíbené zobrazení."
 
 #: src/ui_configurationDialog.h:1833 src/ui_obsListDialog.h:248
 msgid "Observing lists"
-msgstr ""
+msgstr "Pozorovací seznamy"
 
 #: src/ui_configurationDialog.h:1836
 msgid "Toggle the usage of background under GUI buttons"
@@ -12297,14 +12350,16 @@ msgid ""
 "Annual aberration is an annual wobble in positions, amounting to max. about "
 "20 arcseconds for observers on Earth."
 msgstr ""
+"Roční aberace je roční kolísání polohy objektu, které dosahuje až 20 "
+"obloukových vteřin pro pozorovatele na Zemi."
 
 #: src/ui_configurationDialog.h:1959
 msgid "Include aberration"
-msgstr ""
+msgstr "Zahrnout aberaci"
 
 #: src/ui_configurationDialog.h:1961
 msgid "Exaggerate aberration (for didactic explanations)"
-msgstr ""
+msgstr "Zveličená aberace (pro názorné vysvětlení)"
 
 #: src/ui_configurationDialog.h:1963
 msgid "Font size: Screen"
@@ -12696,7 +12751,7 @@ msgstr "Kalkulátor planet"
 
 #: src/ui_astroCalcDialog.h:1695
 msgid "Export positions..."
-msgstr ""
+msgstr "Exportovat polohy..."
 
 #: src/ui_astroCalcDialog.h:1698 src/ui_astroCalcDialog.h:1860
 msgid "Show objects brighter than magnitude"
@@ -12794,7 +12849,7 @@ msgstr "Vyčistit efemeridy"
 
 #: src/ui_astroCalcDialog.h:1758
 msgid "Export ephemeris..."
-msgstr ""
+msgstr "Exportovat efemeridu..."
 
 #: src/ui_astroCalcDialog.h:1760 src/ui_astroCalcDialog.h:1803
 #: plugins/Satellites/src/ui_satellitesDialog.h:1179
@@ -12855,7 +12910,7 @@ msgstr "Vyčistit kulminace"
 
 #: src/ui_astroCalcDialog.h:1784
 msgid "Export transits..."
-msgstr ""
+msgstr "Exportovat přechody..."
 
 #: src/ui_astroCalcDialog.h:1786
 msgid "Celestial object:"
@@ -12885,7 +12940,7 @@ msgstr "Vyčistit úkazy"
 
 #: src/ui_astroCalcDialog.h:1801
 msgid "Export phenomena..."
-msgstr ""
+msgstr "Exportovat úkazy..."
 
 #: src/ui_astroCalcDialog.h:1806
 msgid "Calculate also:"
@@ -13010,7 +13065,7 @@ msgstr "Odpovídající objekty:"
 
 #: src/ui_astroCalcDialog.h:1865
 msgid "Export list of objects..."
-msgstr ""
+msgstr "Exportovat seznam objektů..."
 
 #: src/ui_astroCalcDialog.h:1876
 msgid "First celestial body:"
@@ -13106,96 +13161,96 @@ msgstr "Jednotka měření:"
 
 #: src/ui_obsListDialog.h:250
 msgid "List(s):"
-msgstr ""
+msgstr "Seznam(y):"
 
 #: src/ui_obsListDialog.h:251
 msgid "Observing list description:"
-msgstr ""
+msgstr "Popis pozorovacího seznamu:"
 
 #: src/ui_obsListDialog.h:253 src/ui_obsListCreateEditDialog.h:250
 msgid "Highlight all the objects of the selected list"
-msgstr ""
+msgstr "Zvýraznit všechny objekty vybraného seznamu"
 
 #: src/ui_obsListDialog.h:255
 msgid "Highlight all"
-msgstr ""
+msgstr "Zvýraznit vše"
 
 #: src/ui_obsListDialog.h:257 src/ui_obsListCreateEditDialog.h:254
 msgid "Clear all the highlight objects"
-msgstr ""
+msgstr "Zrušit všechny vybrané objekty"
 
 #: src/ui_obsListDialog.h:259
 msgid "Clear highlight(s)"
-msgstr ""
+msgstr "Zrušit zvýraznění"
 
 #: src/ui_obsListDialog.h:261 src/ui_obsListCreateEditDialog.h:258
 msgid "Create a new observing list"
-msgstr ""
+msgstr "Vytvořit nový pozorovací seznam"
 
 #: src/ui_obsListDialog.h:263
 msgid "New list"
-msgstr ""
+msgstr "Nový seznam"
 
 #: src/ui_obsListDialog.h:265 src/ui_obsListCreateEditDialog.h:262
 msgid "Edit the selected list"
-msgstr ""
+msgstr "Upravit vybraný seznam"
 
 #: src/ui_obsListDialog.h:267
 msgid "Edit list"
-msgstr ""
+msgstr "Upravit seznam"
 
 #: src/ui_obsListDialog.h:269
 msgid "Delete the selected list"
-msgstr ""
+msgstr "Smazat vybraný seznam"
 
 #: src/ui_obsListDialog.h:271
 msgid "Delete list"
-msgstr ""
+msgstr "Smazat seznam"
 
 #: src/ui_obsListDialog.h:273 src/ui_obsListDialog.h:275
 #: src/ui_obsListCreateEditDialog.h:266
 msgid "Exit"
-msgstr ""
+msgstr "Ukončit"
 
 #: src/ui_obsListDialog.h:276
 msgid "Creation date:"
-msgstr ""
+msgstr "Vytvořeno dne:"
 
 #: src/ui_obsListCreateEditDialog.h:243
 msgid "Observing Lists creation/edition"
-msgstr ""
+msgstr "Vytvoření/vydání pozorovacích seznamů"
 
 #: src/ui_obsListCreateEditDialog.h:246
 msgid "Set the list as default"
-msgstr ""
+msgstr "Nastavit seznam jako výchozí"
 
 #: src/ui_obsListCreateEditDialog.h:248
 msgid "Set list as default"
-msgstr ""
+msgstr "Nastavit seznam jako výchozí"
 
 #: src/ui_obsListCreateEditDialog.h:252
 msgid "Add object"
-msgstr ""
+msgstr "Přidat objekt"
 
 #: src/ui_obsListCreateEditDialog.h:256
 msgid "Remove object"
-msgstr ""
+msgstr "Odstranit objekt"
 
 #: src/ui_obsListCreateEditDialog.h:260
 msgid "Export list"
-msgstr ""
+msgstr "Exportovat seznam"
 
 #: src/ui_obsListCreateEditDialog.h:264
 msgid "Import list"
-msgstr ""
+msgstr "Importovat seznam"
 
 #: src/ui_obsListCreateEditDialog.h:265
 msgid "Save and Close "
-msgstr ""
+msgstr "Uložit a zavřít"
 
 #: src/ui_obsListCreateEditDialog.h:267
 msgid "Name of the list:"
-msgstr ""
+msgstr "Název seznamu:"
 
 #: src/ui_obsListCreateEditDialog.h:268
 #: plugins/Satellites/src/ui_satellitesDialog.h:1154
@@ -13605,7 +13660,7 @@ msgstr "Měření úhlů"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:143
 msgid "Angle measure settings"
-msgstr ""
+msgstr "Nastavení měření úhlů"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:599
@@ -19134,7 +19189,7 @@ msgstr "Vzdálené ovládání"
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:154
 msgid "Remote control config"
-msgstr ""
+msgstr "Nastavení vzdáleného ovládání"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:133
 msgid "Remote Control Plug-in"
@@ -20538,18 +20593,24 @@ msgid ""
 " to bring drowned sailors to the Caleuche so that they can live in the "
 "afterlife."
 msgstr ""
+"Pincoya je ženský vodní duch z jižní čilské mytologie, který údajně přivádí "
+"utopené námořníky na Caleuche, aby mohli žít v posmrtném životě."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:410
 msgid ""
 "Caleuche is a large ghost ship from southern Chilean mythology which sails "
 "the seas around the island of Chiloé at night."
 msgstr ""
+"Caleuche je velká loď duchů z jižní čilské mytologie, která v noci pluje po "
+"moři kolem ostrova Chiloé."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:411
 msgid ""
 "Lion Rock is a lion-shaped peak overlooking Hong Kong and is a cultural "
 "symbol with deep respect from the local community."
 msgstr ""
+"Lion Rock je vrchol ve tvaru lva s výhledem na Hongkong a je kulturním "
+"symbolem s hlubokým respektem místní komunity."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:412
 msgid ""
@@ -20557,6 +20618,9 @@ msgid ""
 "ambassadorial gateway for foreign visitors wishing to experience Hong Kong "
 "first hand."
 msgstr ""
+"Victoria Peak má výhled na rušný přístav Victoria a je považován za "
+"velvyslaneckou bránu pro zahraniční návštěvníky, kteří chtějí zažít Hong "
+"Kong na vlastní kůži."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:413
 msgid ""
@@ -20564,12 +20628,16 @@ msgid ""
 "represents the earliest astronomers and developers of calendars in ancient "
 "China."
 msgstr ""
+"Xihe (羲 和) je bohyně slunce v čínské mytologii a také představuje nejstarší "
+"astronomy a autory kalendářů ve starověké Číně."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:414
 msgid ""
 "Wangshu (望舒) is the goddess who drives for the Moon and also represents the "
 "Moon in Chinese mythology."
 msgstr ""
+"Wangshu (望 舒) je bohyně, která jezdí na Měsíci a také reprezentuje Měsíc v "
+"čínské mytologii."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:415
 msgid ""
@@ -23505,15 +23573,15 @@ msgstr "Souřadnice Y"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:273
 msgid "Scenery3d plugin loaded!"
-msgstr ""
+msgstr "Zásuvný modul Scenery3d načten!"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:329
 msgid "Scenery3d: 3D landscapes"
-msgstr ""
+msgstr "Scenery3d: 3D krajiny"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:332
 msgid "Toggle 3D landscape"
-msgstr ""
+msgstr "Přepnout 3D krajinu"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:334
 msgid "Show viewpoint dialog"

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-09-11 16:20+0700\n"
+"POT-Creation-Date: 2021-09-19 17:40+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Worachate Boonplod, 2021\n"
 "Language-Team: Thai (https://www.transifex.com/stellarium/teams/80998/th/)\n"
@@ -3361,112 +3361,145 @@ msgid ""
 "longer mapped to infinity."
 msgstr ""
 
-#: src/core/StelObject.cpp:273
+#: src/core/StelObject.cpp:272
 msgctxt "coordinates for current epoch"
 msgid "on date"
 msgstr "ของวัน"
 
-#: src/core/StelObject.cpp:275
+#: src/core/StelObject.cpp:274
 msgid "(apparent)"
 msgstr "(ปรากฏ)"
 
 #. TRANSLATORS: Right ascension/Declination
-#: src/core/StelObject.cpp:285
+#: src/core/StelObject.cpp:284
 msgctxt "celestial coordinate system"
 msgid "RA/Dec"
 msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน"
 
 #. TRANSLATORS: Hour angle/Declination
-#: src/core/StelObject.cpp:372
+#: src/core/StelObject.cpp:371
 msgctxt "celestial coordinate system"
 msgid "HA/Dec"
 msgstr "มุมชั่วโมง/เดคลิเนชัน"
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:420
+#: src/core/StelObject.cpp:419
 msgctxt "celestial coordinate system"
 msgid "Az./Alt."
 msgstr "มุมทิศ/มุมเงย"
 
 #. TRANSLATORS: Galactic longitude/latitude
-#: src/core/StelObject.cpp:445
+#: src/core/StelObject.cpp:444
 msgctxt "celestial coordinate system"
 msgid "Gal. long./lat."
 msgstr "ลองจิจูด/ละติจูดดาราจักร"
 
 #. TRANSLATORS: Supergalactic longitude/latitude
-#: src/core/StelObject.cpp:469
+#: src/core/StelObject.cpp:468
 msgctxt "celestial coordinate system"
 msgid "Supergal. long./lat."
 msgstr "ลองจิจูด/ละติจูดมหาดาราจักร"
 
-#: src/core/StelObject.cpp:487
+#: src/core/StelObject.cpp:486
 msgctxt "celestial coordinate system"
 msgid "Ecl. long./lat."
 msgstr "ลองจิจูด/ละติจูดฟ้า"
 
-#: src/core/StelObject.cpp:552
+#: src/core/StelObject.cpp:551
 msgid "Ecliptic obliquity"
 msgstr "ความเอียงของสุริยวิถี"
 
-#: src/core/StelObject.cpp:581
+#: src/core/StelObject.cpp:580
 msgid "Mean Sidereal Time"
 msgstr "เวลาดาราคติปานกลาง"
 
-#: src/core/StelObject.cpp:597
+#: src/core/StelObject.cpp:596
 msgid "Apparent Sidereal Time"
 msgstr "เวลาดาราคติปรากฏ"
 
 #. TRANSLATORS: time of transit
-#: src/core/StelObject.cpp:612 src/gui/AstroCalcDialog.cpp:895
+#: src/core/StelObject.cpp:611 src/gui/AstroCalcDialog.cpp:895
 #: src/gui/AstroCalcDialog.cpp:5299
 msgctxt "celestial event; passage across a meridian"
 msgid "Transit"
 msgstr "ผ่านเมริเดียน"
 
-#: src/core/StelObject.cpp:613 src/gui/AstroCalcDialog.cpp:5298
+#: src/core/StelObject.cpp:612 src/gui/AstroCalcDialog.cpp:5298
 msgctxt "celestial event"
 msgid "Rise"
 msgstr "ขึ้น"
 
-#: src/core/StelObject.cpp:614 src/gui/AstroCalcDialog.cpp:5302
+#: src/core/StelObject.cpp:613 src/gui/AstroCalcDialog.cpp:5302
 msgctxt "celestial event"
 msgid "Set"
 msgstr "ตก"
 
-#: src/core/StelObject.cpp:652
+#: src/core/StelObject.cpp:651
 msgid "Daytime"
 msgstr "กลางวัน"
 
-#: src/core/StelObject.cpp:665
+#: src/core/StelObject.cpp:664
 msgid "Polar night"
 msgstr "เป็นกลางคืนตลอด 24 ชั่วโมง"
 
-#: src/core/StelObject.cpp:667
+#: src/core/StelObject.cpp:666
 msgid "This object never rises"
 msgstr "วัตถุนี้ไม่ขึ้นเหนือขอบฟ้า"
 
-#: src/core/StelObject.cpp:672
+#: src/core/StelObject.cpp:671
 msgid "Polar day"
 msgstr "เป็นกลางวันตลอด 24 ชั่วโมง"
 
-#: src/core/StelObject.cpp:674
+#: src/core/StelObject.cpp:673
 msgid "Circumpolar (never sets)"
 msgstr "วนรอบขั้ว (ไม่ตก)"
 
-#: src/core/StelObject.cpp:677
+#: src/core/StelObject.cpp:676
 msgid "Polar dawn"
 msgstr "อยู่ในแสงอุษาตลอด 24 ชั่วโมง"
 
-#: src/core/StelObject.cpp:679
+#: src/core/StelObject.cpp:678
 msgid "Polar dusk"
 msgstr "อยู่ในแสงสนธยาตลอด 24 ชั่วโมง"
 
-#: src/core/StelObject.cpp:694
+#. TRANSLATORS: Greatest Eastern Digression is the maximum azimuth for stars
+#. with upper culmination between pole and zenith
+#: src/core/StelObject.cpp:689
+msgid "Max. E. Digression"
+msgstr ""
+
+#. TRANSLATORS: azimuth (abbrev.)
+#: src/core/StelObject.cpp:691
+msgctxt "celestial coordinate system"
+msgid "A"
+msgstr ""
+
+#: src/core/StelObject.cpp:691
+msgctxt "celestial coordinate system"
+msgid "Az."
+msgstr ""
+
+#: src/core/StelObject.cpp:693
+msgctxt "celestial coordinate system"
+msgid "h"
+msgstr ""
+
+#: src/core/StelObject.cpp:693
+msgctxt "celestial coordinate system"
+msgid "HA"
+msgstr ""
+
+#. TRANSLATORS: Greatest Western Digression is the maximum western azimuth for
+#. stars with upper culmination between pole and zenith
+#: src/core/StelObject.cpp:719
+msgid "Max. W. Digression"
+msgstr ""
+
+#: src/core/StelObject.cpp:753
 msgid "Parallactic Angle"
 msgstr "มุมแพรัลแลกซ์"
 
-#: src/core/StelObject.cpp:702 src/gui/AstroCalcDialog.cpp:5395
+#: src/core/StelObject.cpp:761 src/gui/AstroCalcDialog.cpp:5395
 msgid "IAU Constellation"
 msgstr "กลุ่มดาวโดยไอเอยู"
 
@@ -3514,23 +3547,23 @@ msgstr "ภาพวัตถุท้องฟ้าห้วงลึกใน
 msgid "Reload the deep-sky objects background images"
 msgstr "โหลดภาพพื้นหลังของวัตถุท้องฟ้าห้วงลึกอีกครั้ง"
 
-#: src/core/StelSkyCultureMgr.cpp:169
+#: src/core/StelSkyCultureMgr.cpp:170
 msgctxt "sky culture classification"
 msgid "ethnographic"
 msgstr "ชาติพันธุ์"
 
-#: src/core/StelSkyCultureMgr.cpp:170
+#: src/core/StelSkyCultureMgr.cpp:171
 msgid ""
 "Provided by ethnographic researchers based on interviews of indigenous "
 "people."
 msgstr "จากงานวิจัยโดยการสัมภาษณ์ชนพื้นเมืองในกลุ่มชาติพันธุ์"
 
-#: src/core/StelSkyCultureMgr.cpp:174
+#: src/core/StelSkyCultureMgr.cpp:175
 msgctxt "sky culture classification"
 msgid "historical"
 msgstr "ประวัติศาสตร์"
 
-#: src/core/StelSkyCultureMgr.cpp:175
+#: src/core/StelSkyCultureMgr.cpp:176
 msgid ""
 "Provided by historians based on historical written sources from a (usually "
 "short) period of the past."
@@ -3538,66 +3571,76 @@ msgstr ""
 "จากนักประวัติศาสตร์โดยแหล่งข้อมูลที่เป็นลายลักษณ์อักษร (มักเป็นช่วงเวลาสั้น "
 "ๆ) ในอดีต"
 
-#: src/core/StelSkyCultureMgr.cpp:179
+#: src/core/StelSkyCultureMgr.cpp:180
 msgctxt "sky culture classification"
 msgid "single"
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:180
+#: src/core/StelSkyCultureMgr.cpp:181
 msgid ""
 "Represents a single source like a historical atlas, or publications of a "
 "single author."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:184
+#: src/core/StelSkyCultureMgr.cpp:185
+msgctxt "sky culture classification"
+msgid "comparative"
+msgstr ""
+
+#: src/core/StelSkyCultureMgr.cpp:186
+msgid ""
+"Compares and confronts elements from at least sky cultures with each other."
+msgstr ""
+
+#: src/core/StelSkyCultureMgr.cpp:190
 msgctxt "sky culture classification"
 msgid "traditional"
 msgstr "วัฒนธรรม"
 
-#: src/core/StelSkyCultureMgr.cpp:185
+#: src/core/StelSkyCultureMgr.cpp:191
 msgid ""
 "Content represents 'common' knowledge by several members of an ethnic "
 "community, and the sky culture has been developed by members of such "
 "community."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:189
+#: src/core/StelSkyCultureMgr.cpp:195
 msgctxt "sky culture classification"
 msgid "personal"
 msgstr "ส่วนตัว"
 
-#: src/core/StelSkyCultureMgr.cpp:190
+#: src/core/StelSkyCultureMgr.cpp:196
 msgid ""
 "This is a personally developed sky culture which is not founded in published"
 " historical or ethnological research. Stellarium may include it when it is "
 "'pretty enough' without really approving its contents."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:194
+#: src/core/StelSkyCultureMgr.cpp:200
 msgctxt "sky culture classification"
 msgid "incomplete"
 msgstr "ไม่สมบูรณ์"
 
-#: src/core/StelSkyCultureMgr.cpp:195
+#: src/core/StelSkyCultureMgr.cpp:201
 msgid ""
 "The accuracy of the sky culture description cannot be given, although it "
 "looks like it is built on a solid background. More work would be needed."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:199
+#: src/core/StelSkyCultureMgr.cpp:205
 msgctxt "sky culture classification"
 msgid "undefined"
 msgstr "ไม่ระบุ"
 
-#: src/core/StelSkyCultureMgr.cpp:206
+#: src/core/StelSkyCultureMgr.cpp:212
 msgid "Classification"
 msgstr "การจำแนก"
 
-#: src/core/StelSkyCultureMgr.cpp:268
+#: src/core/StelSkyCultureMgr.cpp:274
 msgid "No description"
 msgstr "ไม่มีคำอธิบาย"
 
-#: src/core/StelSkyCultureMgr.cpp:301
+#: src/core/StelSkyCultureMgr.cpp:307
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:202
 msgid "References"
 msgstr "แหล่งอ้างอิง"
@@ -7503,560 +7546,570 @@ msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:466
-msgid "Anutan"
+msgid "Greek (Farnese + Almagest)"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:468
-msgid "Arabic Moon Stations"
-msgstr "ดาวนักษัตรอาหรับ"
+msgid "Greek (Leiden Aratea + Almagest)"
+msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:470
-msgid "Armintxe"
+msgid "Anutan"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:472
+msgid "Arabic Moon Stations"
+msgstr "ดาวนักษัตรอาหรับ"
+
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:474
+msgid "Armintxe"
+msgstr ""
+
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:476
 msgid "Aztec"
 msgstr "แอซเทก"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:474
+#: src/translations.h:478
 msgid "Belarusian"
 msgstr "เบลารุส"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:476
+#: src/translations.h:480
 msgid "Boorong"
 msgstr "บูรอง"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:478 plugins/Calendars/src/ui_calendarsDialog.h:841
+#: src/translations.h:482 plugins/Calendars/src/ui_calendarsDialog.h:841
 msgid "Chinese"
 msgstr "จีน"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:480
+#: src/translations.h:484
 msgid "Chinese Contemporary"
 msgstr "จีนร่วมสมัย"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:482
+#: src/translations.h:486
 msgid "Chinese Medieval"
 msgstr "จีนยุคกลาง"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:484
+#: src/translations.h:488
 msgid "Egyptian"
 msgstr "อียิปต์"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:486
+#: src/translations.h:490
 msgid "Hawaiian Starlines"
 msgstr "เส้นดาวแบบฮาวาย"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:488
+#: src/translations.h:492
 msgid "Inuit"
 msgstr "อินูอิท"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:490
+#: src/translations.h:494
 msgid "Indian Vedic"
 msgstr "อินเดีย"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:492
+#: src/translations.h:496
 msgid "Japanese Moon Stations"
 msgstr "ดาวนักษัตรญี่ปุ่น"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:494
+#: src/translations.h:498
 msgid "Kamilaroi/Euahlayi"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:496
+#: src/translations.h:500
 msgid "Korean"
 msgstr "เกาหลี"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:498
+#: src/translations.h:502
 msgid "Dakota/Lakota/Nakota"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:500
+#: src/translations.h:504
 msgid "Macedonian"
 msgstr "มาซิโดเนีย"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:502
+#: src/translations.h:506
 msgid "Maori"
 msgstr "เมารี"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:504
+#: src/translations.h:508
 msgid "Maya"
 msgstr "มายา"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:506
+#: src/translations.h:510
 msgid "Mongolian"
 msgstr "มองโกเลีย"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:508
+#: src/translations.h:512
 msgid "Lokono"
 msgstr "โลโคโน"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:510
+#: src/translations.h:514
 msgid "Navajo"
 msgstr "นาวาโฮ"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:512
+#: src/translations.h:516
 msgid "Norse"
 msgstr "นอเวย์"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:514
+#: src/translations.h:518
 msgid "Ojibwe"
 msgstr "โอจิบเว"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:516
+#: src/translations.h:520
 msgid "Romanian"
 msgstr "โรมาเนีย"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:518
+#: src/translations.h:522
 msgid "Sami"
 msgstr "เซมี"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:520
+#: src/translations.h:524
 msgid "Sardinian"
 msgstr "ซาร์ดิเนีย"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:522
+#: src/translations.h:526
 msgid "Siberian"
 msgstr "ไซบีเรีย"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:524
+#: src/translations.h:528
 msgid "Tukano"
 msgstr "ทูคาโน"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:526
+#: src/translations.h:530
 msgid "Tupi-Guarani"
 msgstr "ทูปิ-กวารานิ"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:528
+#: src/translations.h:532
 msgid "Tongan"
 msgstr "ตองกา"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:530
+#: src/translations.h:534
 msgid "Western"
 msgstr "ตะวันตก"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:532
+#: src/translations.h:536
 msgid "Western (H.A.Rey)"
 msgstr "ตะวันตก (เอช.เอ. เรย์)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:534
+#: src/translations.h:538
 msgid "Western (O.Hlad)"
 msgstr "ตะวันตก (O.Hlad)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:536
+#: src/translations.h:540
 msgid "Western (Sky & Telescope)"
 msgstr "ตะวันตก (นิตยสาร Sky & Telescope)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:538
+#: src/translations.h:542
 msgid "Western (Sternenkarten)"
 msgstr ""
 
-#. TRANSLATORS: Name of the sky cultur
-#: src/translations.h:540
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:544
 msgid "Northern Andes"
 msgstr "แอนดีสเหนือ"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:542
+#: src/translations.h:546
 msgid "Babylonian (MUL.APIN)"
 msgstr "บาบิโลน (MUL.APIN)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:544
+#: src/translations.h:548
 msgid "Babylonian (Seleucid)"
 msgstr "บาบิโลน (ซิลูซิด)"
 
 #. TRANSLATORS: Name of the sky culture and landscape
-#: src/translations.h:546
+#: src/translations.h:550
 msgid "Armintxe Cave"
 msgstr "ถ้ำอาร์มินเท็ก"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:548
+#: src/translations.h:552
 msgid "Vanuatu (Netwar)"
 msgstr "วานูอาตู (เน็ตวอร์)"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:553
+#: src/translations.h:557
 msgid "Guereins"
 msgstr "Guereins"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:555
+#: src/translations.h:559
 msgid "Trees"
 msgstr "ต้นไม้"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:557 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1448
+#: src/translations.h:561 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1448
 msgid "Moon"
 msgstr "ดวงจันทร์"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:559
+#: src/translations.h:563
 msgid "Hurricane"
 msgstr "เฮอร์ริเคน"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:561
+#: src/translations.h:565
 msgid "Ocean"
 msgstr "มหาสมุทร"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:563
+#: src/translations.h:567
 msgid "Garching"
 msgstr "การ์ชิง"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:565 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1460
+#: src/translations.h:569 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1460
 msgid "Mars"
 msgstr "ดาวอังคาร"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:567 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1463
+#: src/translations.h:571 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1463
 msgid "Jupiter"
 msgstr "ดาวพฤหัสบดี"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:569 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1466
+#: src/translations.h:573 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1466
 msgid "Saturn"
 msgstr "ดาวเสาร์"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:571
+#: src/translations.h:575
 msgid "Uranus"
 msgstr "ดาวยูเรนัส"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:573
+#: src/translations.h:577
 msgid "Neptune"
 msgstr "ดาวเนปจูน"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:575
+#: src/translations.h:579
 msgid "Geneva"
 msgstr "เจนีวา"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:577
+#: src/translations.h:581
 msgid "Grossmugl"
 msgstr "โกรสส์มูเกล"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:579
+#: src/translations.h:583
 msgid "Zero Horizon"
 msgstr "ขอบฟ้าเปิดโล่ง"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:581 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1445
+#: src/translations.h:585 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1445
 msgid "Sun"
 msgstr "ดวงอาทิตย์"
 
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
-#: src/translations.h:586
+#: src/translations.h:590
 msgid "Vienna Sterngarten"
 msgstr "สวนดาราเวียนนา"
 
 #. TRANSLATORS: Name of 3D scene
-#: src/translations.h:588
+#: src/translations.h:592
 msgid "Testscene"
 msgstr "ฉากทดสอบ"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:593
+#: src/translations.h:597
 msgid "Landscape Tour"
 msgstr "ท่องภูมิทัศน์"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:595
+#: src/translations.h:599
 msgid "Partial Lunar Eclipse"
 msgstr "จันทรุปราคาบางส่วน"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:597
+#: src/translations.h:601
 msgid "Total Lunar Eclipse"
 msgstr "จันทรุปราคาเต็มดวง"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:599
+#: src/translations.h:603
 msgid "Screensaver"
 msgstr "ภาพพักหน้าจอ"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:601
+#: src/translations.h:605
 msgid "Solar Eclipse 2009"
 msgstr "สุริยุปราคา ค.ศ. 2009"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:603
+#: src/translations.h:607
 msgid "Startup Script"
 msgstr "สคริปต์เริ่มต้น"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:605
+#: src/translations.h:609
 msgid "Zodiac"
 msgstr "จักรราศี"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:607
+#: src/translations.h:611
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "ดวงอาทิตย์ขึ้นและตกบนดาวพุธสามครั้ง"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:609
+#: src/translations.h:613
 msgid "Double eclipse from Deimos in 2017"
 msgstr "อุปราคาคู่เมื่อมองจากดีมอสใน ค.ศ. 2017"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:611
+#: src/translations.h:615
 msgid "Double eclipse from Deimos in 2031"
 msgstr "อุปราคาคู่เมื่อมองจากดีมอสใน ค.ศ. 2031"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:613
+#: src/translations.h:617
 msgid "Eclipse from Olympus Mons Jan 2, 2021"
 msgstr "สุริยุปราคาจากภูเขาโอลิมปัส 2 มกราคม ค.ศ. 2021"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:615
+#: src/translations.h:619
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "การบังโลกและดาวพฤหัสบดี ค.ศ. 2048"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:617
+#: src/translations.h:621
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr "การผ่านหน้า 3 ครั้ง และอุปราคา 2 ครั้ง เมื่อมองจากดีมอสใน ค.ศ. 2027"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:619
+#: src/translations.h:623
 msgid "Solar System Screensaver"
 msgstr "ภาพพักหน้าจอระบบสุริยะ"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:621
+#: src/translations.h:625
 msgid "Constellations Tour"
 msgstr "ท่องกลุ่มดาว"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:623
+#: src/translations.h:627
 msgid "Western Constellations Tour"
 msgstr "ทัวร์กลุ่มดาวแบบตะวันตก"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:625
+#: src/translations.h:629
 msgid "Sun from different planets"
 msgstr "ดวงอาทิตย์จากดาวเคราะห์ต่าง ๆ"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:627
+#: src/translations.h:631
 msgid "Earth best views from other bodies"
 msgstr "โลกเมื่อมองจากวัตถุอื่น"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:629
+#: src/translations.h:633
 msgid "Transit of Venus"
 msgstr "ดาวศุกร์ผ่านหน้าดวงอาทิตย์"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:631
+#: src/translations.h:635
 msgid "Sky Culture Tour"
 msgstr "ท่องกลุ่มดาวในแต่ละวัฒนธรรม"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:633
+#: src/translations.h:637
 msgid "Earth Events from Mercury"
 msgstr "เหตุการณ์ที่โลกเมื่อมองจากดาวพุธ"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:635
+#: src/translations.h:639
 msgid "Earth Events from a floating city on Venus"
 msgstr "เหตุการณ์เกี่ยวกับโลกเมื่อสังเกตจากนครลอยฟ้าบนดาวศุกร์"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:637
+#: src/translations.h:641
 msgid "Earth Events from Mars"
 msgstr "เหตุการณ์ที่โลกเมื่อมองจากดาวอังคาร"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:639
+#: src/translations.h:643
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr ""
 "โลกและดาวเคราะห์ดวงอื่นเมื่อทำมุมห่างจากดวงอาทิตย์ที่สุดและอยู่ตรงข้ามกับดวงอาทิตย์เมื่อสังเกตจากดาวอังคาร"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:641
+#: src/translations.h:645
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr ""
 "โลกและดาวอังคารเมื่อทำมุมห่างดวงอาทิตย์ที่สุดและผ่านหน้าดวงอาทิตย์เมื่อสังเกตจากคัลลิสโต"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:643
+#: src/translations.h:647
 msgid "Tycho's Supernova"
 msgstr "ซูเปอร์โนวาของทีโค"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:645
+#: src/translations.h:649
 msgid "Earth and other Planets from Ceres"
 msgstr "โลกและดาวเคราะห์ดวงอื่นจากซีรีส"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:647
+#: src/translations.h:651
 msgid "Messier Objects Tour"
 msgstr "ท่องวัตถุเมซีเย"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:649
+#: src/translations.h:653
 msgid "Binocular Highlights"
 msgstr "วัตถุที่น่าสนใจสำหรับกล้องสองตา"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:651
+#: src/translations.h:655
 msgid "20 Fun Naked-Eye Double Stars"
 msgstr "ดาวคู่ที่เห็นด้วยตาเปล่า 20 ระบบ"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:653
+#: src/translations.h:657
 msgid "List of largest known stars"
 msgstr "รายชื่อดาวฤกษ์ขนาดใหญ่ที่สุดเท่าที่รู้จัก"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:655
+#: src/translations.h:659
 msgid "Herschel 400 Tour"
 msgstr "ท่องวัตถุเฮอร์เชล 400"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:657
+#: src/translations.h:661
 msgid "Binosky: Deep Sky Objects for Binoculars"
 msgstr "Binosky: วัตถุท้องฟ้าห้วงลึกสำหรับกล้องสองตา"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:659
+#: src/translations.h:663
 msgid "The Jack Bennett Catalog"
 msgstr "บัญชี Jack Bennett"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:661
+#: src/translations.h:665
 msgid "Best objects in the New General Catalog"
 msgstr "วัตถุที่น่าสนใจที่สุดในบัญชีเอ็นจีซี"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:663
+#: src/translations.h:667
 msgid "Jupiter and triple shadow phenomena"
 msgstr "เงาของดาวบริวารสามดวงบนดาวพฤหัสบดี"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:665
+#: src/translations.h:669
 msgid "Jupiter without Galilean satellites"
 msgstr "ดาวพฤหัสบดีที่ไม่มีดาวบริวารกาลิเลโอ"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:667
+#: src/translations.h:671
 msgid "Skybox Tiles"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:669
+#: src/translations.h:673
 msgid "Occultations of bright stars by planets"
 msgstr "ดาวเคราะห์บังดาวฤกษ์สว่าง"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:671
+#: src/translations.h:675
 msgid "Mutual occultations of planets"
 msgstr "การบังกันระหว่างดาวเคราะห์"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:673
+#: src/translations.h:677
 msgid "Planet Objects Tour"
 msgstr "ท่องวัตถุประเภทดาวเคราะห์"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:675
+#: src/translations.h:679
 msgid "Analemma"
 msgstr "แอนะเลมมา"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:677
+#: src/translations.h:681
 msgid "Martian analemma"
 msgstr "แอนะเลมมาบนดาวอังคาร"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:679
+#: src/translations.h:683
 msgid "Saturnian analemma"
 msgstr "แอนะเลมมาบนดาวเสาร์"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:681
+#: src/translations.h:685
 msgid "Uranian analemma"
 msgstr "แอนะเลมมาบนดาวยูเรนัส"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:683
+#: src/translations.h:687
 msgid "Messier Marathon"
 msgstr "เมซีเยมาราธอน"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:685
+#: src/translations.h:689
 msgid "Random location"
 msgstr "สถานที่แบบสุ่ม"
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:691
+#: src/translations.h:695
 msgid "Look around each installed landscape."
 msgstr "ดูแต่ละภูมิทัศน์ที่ติดตั้งไว้"
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:693
+#: src/translations.h:697
 msgid "Look at each installed sky culture."
 msgstr "ดูกลุ่มดาวของแต่ละวัฒนธรรมที่ติดตั้งไว้"
 
-#: src/translations.h:694
+#: src/translations.h:698
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "สคริปต์แสดงการเกิดจันทรุปราคาบางส่วน"
 
-#: src/translations.h:695
+#: src/translations.h:699
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "สคริปต์แสดงการเกิดจันทรุปราคาเต็มดวง"
 
-#: src/translations.h:696
+#: src/translations.h:700
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr "ท่องไปทั่วท้องฟ้าอย่างช้า ๆ โดยการสุ่มหาวัตถุท้องฟ้า"
 
-#: src/translations.h:697
+#: src/translations.h:701
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
@@ -8064,11 +8117,11 @@ msgstr ""
 "สคริปต์แสดงการเกิดสุริยุปราคาเต็มดวงที่เกิดขึ้นใน ค.ศ. 2009 (สถานที่=รังปุ, "
 "บังกลาเทศ)"
 
-#: src/translations.h:698
+#: src/translations.h:702
 msgid "Script which runs automatically at startup"
 msgstr "สคริปต์ที่ทำงานโดยอัตโนมัติเมื่อเริ่มโปรแกรม"
 
-#: src/translations.h:699
+#: src/translations.h:703
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -8077,7 +8130,7 @@ msgstr ""
 "สคริปต์แสดงกลุ่มดาวจักรราศี "
 "ซึ่งเป็นกลุ่มดาวที่อยู่ในแนวที่ดวงอาทิตย์เคลื่อนผ่านบนทรงกลมฟ้าในรอบปี"
 
-#: src/translations.h:700
+#: src/translations.h:704
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
@@ -8085,7 +8138,7 @@ msgstr ""
 "วงโคจรและการหมุนที่แปลกของดาวพุธ ทำให้ที่จุดหนึ่ง จะเห็นดวงอาทิตย์ขึ้นและตก "
 "3 ครั้ง ภายใน 1 วันดาวพุธ"
 
-#: src/translations.h:701
+#: src/translations.h:705
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -8094,7 +8147,7 @@ msgstr ""
 "และบังดวงอาทิตย์ก่อน โดยเกิดขึ้นในวันที่ 26 เมษายน ค.ศ. 2017 "
 "ระหว่างกลุ่มดาวแมงป่องกับกลุ่มดาวคนยิงธนู"
 
-#: src/translations.h:702
+#: src/translations.h:706
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -8103,11 +8156,11 @@ msgstr ""
 "และบังดวงอาทิตย์ก่อน โดยเกิดขึ้นในวันที่ 23 กรกฎาคม ค.ศ. 2031 "
 "ระหว่างกลุ่มดาววัวกับกลุ่มดาวคนคู่"
 
-#: src/translations.h:703
+#: src/translations.h:707
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 2, 2021."
 msgstr "โฟบอสบังดวงอาทิตย์เมื่อมองจากภูเขาโอลิมปัสในวันที่ 2 มกราคม ค.ศ. 2021"
 
-#: src/translations.h:704
+#: src/translations.h:708
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But"
 " occultations of both on the same day are very rare. Here's one that takes "
@@ -8117,7 +8170,7 @@ msgstr ""
 "แต่การบังโลกและดาวพฤหัสบดีในวันเดียวกันเกิดขึ้นได้ยากมาก "
 "นี่เป็นเหตุการณ์เมื่อวันที่ 23 มกราคม ค.ศ. 2048 ตามเวลาจริง"
 
-#: src/translations.h:705
+#: src/translations.h:709
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -8133,36 +8186,36 @@ msgstr ""
 "เมื่อโฟบอสออกจากการผ่านหน้าดาวอังคาร มันยังคงอยู่ในเงามืดของดาวอังคาร "
 "ก่อนจะสว่างขึ้นมาอีกครั้งเมื่อออกจากเงามืด"
 
-#: src/translations.h:706
+#: src/translations.h:710
 msgid ""
 "Screensaver of various happenings in the Solar System. 313 events in all!"
 msgstr ""
 
-#: src/translations.h:707
+#: src/translations.h:711
 msgid "A tour of the western constellations."
 msgstr "การท่องไปตามกลุ่มดาวแบบตะวันตก"
 
-#: src/translations.h:708
+#: src/translations.h:712
 msgid "A tour of the constellations of the selected sky culture."
 msgstr "การท่องไปตามกลุ่มดาวในวัฒนธรรมที่เลือก"
 
-#: src/translations.h:709
+#: src/translations.h:713
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr ""
 "มองไปที่ดวงอาทิตย์เมื่ออยู่บนดาวเคราะห์ขนาดใหญ่ในระบบสุริยะ และบนพลูโต"
 
-#: src/translations.h:710
+#: src/translations.h:714
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr "โลกเมื่อมองจากวัตถุอื่น ๆ ในระบบสุริยะ ตลอดช่วงคริสต์ศตวรรษที่ 21"
 
-#: src/translations.h:711
+#: src/translations.h:715
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
 "ดาวศุกร์ผ่านหน้าดวงอาทิตย์เมื่อวันที่ 6 มิถุนายน ค.ศ. 2012 สังเกตจากซิดนีย์ "
 "ออสเตรเลีย"
 
-#: src/translations.h:712
+#: src/translations.h:716
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Historical "
 "Supernovae plugin has to be enabled."
@@ -8170,7 +8223,7 @@ msgstr ""
 "การสว่างของซูเปอร์โนวาที่สังเกตโดยทีโค บราห์ เมื่อ ค.ศ. 1572 "
 "ต้องเปิดใช้งานโปรแกรมเสริมซูเปอร์โนวาในประวัติศาสตร์"
 
-#: src/translations.h:713
+#: src/translations.h:717
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars "
 "2000-3000"
@@ -8178,7 +8231,7 @@ msgstr ""
 "โลกและดาวเคราะห์ดวงอื่นเมื่อทำมุมห่างจากดวงอาทิตย์ที่สุดและอยู่ตรงข้ามกับดวงอาทิตย์เมื่อสังเกตจากดาวอังคาร"
 " ค.ศ. 2000-3000"
 
-#: src/translations.h:714
+#: src/translations.h:718
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -8191,7 +8244,7 @@ msgstr ""
 "หากมนุษย์สามารถตั้งถิ่นฐานบนดาวบริวารของดาวพฤหัสบดี "
 "คัลลิสโตน่าจะเป็นไปได้มากที่สุด"
 
-#: src/translations.h:715
+#: src/translations.h:719
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-2200"
@@ -8199,18 +8252,18 @@ msgstr ""
 "โลกและดาวเคราะห์ดวงอื่นเมื่อทำมุมห่างจากดวงอาทิตย์ที่สุดและอยู่ตรงข้ามกับดวงอาทิตย์เมื่อสังเกตจากซีรีส"
 " ค.ศ. 2000-2200"
 
-#: src/translations.h:716
+#: src/translations.h:720
 msgid "A tour of Messier Objects"
 msgstr "ท่องวัตถุเมซีเย"
 
-#: src/translations.h:717
+#: src/translations.h:721
 msgid ""
 "Tours around interesting objects, which accessible to observation with "
 "binoculars. The data for the script are taken from the eponymous book by "
 "Gary Seronik."
 msgstr ""
 
-#: src/translations.h:718
+#: src/translations.h:722
 msgid ""
 "This script helps you make an excursion around 20 fun double stars. The list"
 " has been collected by Jerry Lodriguss and published in Sky & Telescope "
@@ -8219,35 +8272,35 @@ msgstr ""
 "สคริปต์ซึ่งพาคุณท่องไปยังดาวคู่ 20 ระบบ รวบรวมโดย Jerry Lodriguss ตีพิมพ์ใน "
 "Sky & Telescope 09/2014 ข้อมูลจากเว็บไซต์ http://www.astropix.com/doubles/"
 
-#: src/translations.h:719
+#: src/translations.h:723
 msgid "This script helps you make an excursion around largest known stars."
 msgstr "สคริปต์ซึ่งพาคุณท่องไปยังดาวฤกษ์ขนาดใหญ่ที่สุดเท่าที่เรารู้จัก"
 
-#: src/translations.h:720
+#: src/translations.h:724
 msgid "A tour around objects from the Herschel 400 Catalogue"
 msgstr "ท่องไปยังวัตถุต่าง ๆ ในบัญชีเฮอร์เชล 400"
 
-#: src/translations.h:721
+#: src/translations.h:725
 msgid ""
 "Ben Crowell has created Binosky, an observing list of Deep Sky Objects for "
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
 "Right Ascension (2000.0)."
 msgstr ""
 
-#: src/translations.h:722
+#: src/translations.h:726
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
 "The Bennett catalog was contributed by Auke Slotegraaf."
 msgstr ""
 
-#: src/translations.h:723
+#: src/translations.h:727
 msgid ""
 "This list of 111 objects by A.J. Crayon and Steve Coe is used by members of "
 "the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC "
 "achievement award."
 msgstr ""
 
-#: src/translations.h:724
+#: src/translations.h:728
 msgid ""
 "Demonstration of the mid-time of rare events - triple shadow phenomena of "
 "the satellites of Jupiter from 1900 to 2100. All events are given in "
@@ -8257,7 +8310,7 @@ msgstr ""
 "ปรากฏพร้อมกันบนดาวพฤหัสบดี นับตั้งแต่ ค.ศ. 1900 - 2100 "
 "ทุกเหตุการณ์ใช้เวลาพลวัต"
 
-#: src/translations.h:725
+#: src/translations.h:729
 msgid ""
 "The planet Jupiter sometimes appears to be without moons, when the four "
 "Galilean satellites are simultaneously invisible because they are passing "
@@ -8266,53 +8319,53 @@ msgid ""
 "from 1900 to 2100 in Dynamical Time."
 msgstr ""
 
-#: src/translations.h:726
+#: src/translations.h:730
 msgid ""
 "This script demonstrates interesting phenomena - occultations bright stars "
 "by planets, 2000 to 2040."
 msgstr ""
 
-#: src/translations.h:727
+#: src/translations.h:731
 msgid ""
 "This script demonstrates interesting and very rare phenomena - mutual "
 "occultations of planets, 0 to 2500."
 msgstr ""
 
-#: src/translations.h:728
+#: src/translations.h:732
 msgid "A tour of the Solar System planets"
 msgstr "ท่องไปตามดาวเคราะห์ในระบบสุริยะ"
 
-#: src/translations.h:729
+#: src/translations.h:733
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Earth."
 msgstr ""
 
-#: src/translations.h:730
+#: src/translations.h:734
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Mars."
 msgstr ""
 
-#: src/translations.h:731
+#: src/translations.h:735
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Saturn."
 msgstr ""
 
-#: src/translations.h:732
+#: src/translations.h:736
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Uranus."
 msgstr ""
 
-#: src/translations.h:733
+#: src/translations.h:737
 msgid ""
 "Messier Marathon on March 20, 2020. The data for the script are taken from "
 "GaoXing's observation log: http://www.xjltp.com/2_huodong/2_030301.htm"
 msgstr ""
 
-#: src/translations.h:734
+#: src/translations.h:738
 msgid ""
 "Creates 6 tiles (North/East/South/West/Up/Down) for a skybox. These can be "
 "further used e.g. in Unity3D or other 3D environments. Output directory and "
@@ -8322,186 +8375,186 @@ msgid ""
 "to apply it to your projects."
 msgstr ""
 
-#: src/translations.h:735
+#: src/translations.h:739
 msgid ""
 "This script will help you make practical works for celestial navigation - he"
 " sets a random location and hides it from the GUI."
 msgstr ""
 
-#: src/translations.h:739
+#: src/translations.h:743
 msgid "&Undo"
 msgstr "เ&ลิกทำ"
 
-#: src/translations.h:740
+#: src/translations.h:744
 msgid "&Redo"
 msgstr "&ทำซ้ำ"
 
-#: src/translations.h:741
+#: src/translations.h:745
 msgid "Cu&t"
 msgstr "&ตัด"
 
-#: src/translations.h:742
+#: src/translations.h:746
 msgid "&Copy"
 msgstr "&คัดลอก"
 
-#: src/translations.h:743
+#: src/translations.h:747
 msgid "&Paste"
 msgstr "&วาง"
 
-#: src/translations.h:744 plugins/Oculars/src/ui_ocularDialog.h:1542
+#: src/translations.h:748 plugins/Oculars/src/ui_ocularDialog.h:1542
 #: plugins/Oculars/src/ui_ocularDialog.h:1551
 #: plugins/Oculars/src/ui_ocularDialog.h:1557
 #: plugins/Oculars/src/ui_ocularDialog.h:1576
 msgid "Delete"
 msgstr "ลบ"
 
-#: src/translations.h:745
+#: src/translations.h:749
 msgid "Select All"
 msgstr "เลือกทั้งหมด"
 
-#: src/translations.h:746
+#: src/translations.h:750
 msgid "Look in:"
 msgstr "ค้นหาใน:"
 
-#: src/translations.h:747
+#: src/translations.h:751
 msgid "Directory:"
 msgstr "ไดเรกทอรี:"
 
-#: src/translations.h:748
+#: src/translations.h:752
 msgid "Folder"
 msgstr "โฟลเดอร์"
 
-#: src/translations.h:749
+#: src/translations.h:753
 msgid "&Choose"
 msgstr "เ&ลือก"
 
-#: src/translations.h:750 src/ui_configurationDialog.h:1875
+#: src/translations.h:754 src/ui_configurationDialog.h:1875
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:644
 msgid "Cancel"
 msgstr "ยกเลิก"
 
-#: src/translations.h:751
+#: src/translations.h:755
 msgid "&Cancel"
 msgstr "&ยกเลิก"
 
-#: src/translations.h:752
+#: src/translations.h:756
 msgid "Files of type:"
 msgstr "ชนิดไฟล์:"
 
-#: src/translations.h:753
+#: src/translations.h:757
 msgid "Date Modified"
 msgstr "แก้ไขเมื่อ"
 
-#: src/translations.h:754
+#: src/translations.h:758
 msgid "Directories"
 msgstr "ไดเรกทอรี"
 
-#: src/translations.h:755
+#: src/translations.h:759
 msgid "Computer"
 msgstr "คอมพิวเตอร์"
 
-#: src/translations.h:756
+#: src/translations.h:760
 msgid "&Open"
 msgstr "เ&ปิด"
 
-#: src/translations.h:757
+#: src/translations.h:761
 msgid "&Save"
 msgstr "&บันทึก"
 
-#: src/translations.h:758
+#: src/translations.h:762
 msgid "File &name:"
 msgstr "&ชื่อไฟล์:"
 
-#: src/translations.h:759
+#: src/translations.h:763
 msgid "Copy &Link Location"
 msgstr "คัดลอก&ตำแหน่งลิงก์"
 
-#: src/translations.h:760
+#: src/translations.h:764
 msgid "Abort"
 msgstr "ยกเลิก"
 
-#: src/translations.h:761
+#: src/translations.h:765
 msgid "Ignore"
 msgstr "ไม่ใช้"
 
-#: src/translations.h:762
+#: src/translations.h:766
 msgid "&Basic colors"
 msgstr ""
 
-#: src/translations.h:763
+#: src/translations.h:767
 msgid "&Pick Screen Color"
 msgstr ""
 
-#: src/translations.h:764
+#: src/translations.h:768
 msgid "&Custom colors"
 msgstr ""
 
-#: src/translations.h:765
+#: src/translations.h:769
 msgid "&Add to Custom Colors"
 msgstr ""
 
-#: src/translations.h:766
+#: src/translations.h:770
 msgid "Hu&e:"
 msgstr ""
 
-#: src/translations.h:767
+#: src/translations.h:771
 msgid "&Sat:"
 msgstr ""
 
-#: src/translations.h:768
+#: src/translations.h:772
 msgid "&Val:"
 msgstr ""
 
-#: src/translations.h:769
+#: src/translations.h:773
 msgid "&Red:"
 msgstr ""
 
-#: src/translations.h:770
+#: src/translations.h:774
 msgid "&Green:"
 msgstr ""
 
-#: src/translations.h:771
+#: src/translations.h:775
 msgid "Bl&ue:"
 msgstr ""
 
-#: src/translations.h:772
+#: src/translations.h:776
 msgid "Select Color"
 msgstr "เลือกสี"
 
-#: src/translations.h:773
+#: src/translations.h:777
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "ตัวชี้อยู่ที่ %1, %2 กด ESC เพื่อยกเลิก"
 
-#: src/translations.h:774
+#: src/translations.h:778
 msgid "Back"
 msgstr "ย้อนกลับ"
 
-#: src/translations.h:775
+#: src/translations.h:779
 msgid "Forward"
 msgstr "ไปข้างหน้า"
 
-#: src/translations.h:776
+#: src/translations.h:780
 msgid "Parent Directory"
 msgstr ""
 
-#: src/translations.h:777
+#: src/translations.h:781
 msgid "Create New Folder"
 msgstr "สร้างโฟลเดอร์ใหม่"
 
-#: src/translations.h:778
+#: src/translations.h:782
 msgid "List View"
 msgstr "มุมมองรายชื่อ"
 
-#: src/translations.h:779
+#: src/translations.h:783
 msgid "Detail View"
 msgstr "มุมมองรายละเอียด"
 
-#: src/translations.h:780
+#: src/translations.h:784
 msgid "Recent Places"
 msgstr "สถานที่ล่าสุด"
 
-#: src/translations.h:781
+#: src/translations.h:785
 #, qt-format
 msgid ""
 "%1 already exists.\n"
@@ -8510,39 +8563,39 @@ msgstr ""
 "%1 มีอยู่แล้ว\n"
 "คุณต้องการแทนที่ใช่หรือไม่?"
 
-#: src/translations.h:782
+#: src/translations.h:786
 msgid "&Yes"
 msgstr ""
 
-#: src/translations.h:783
+#: src/translations.h:787
 msgid "&No"
 msgstr ""
 
-#: src/translations.h:784
+#: src/translations.h:788
 msgid "&Select All"
 msgstr ""
 
-#: src/translations.h:785
+#: src/translations.h:789
 msgid "&Step up"
 msgstr ""
 
-#: src/translations.h:786
+#: src/translations.h:790
 msgid "Step &down"
 msgstr ""
 
-#: src/translations.h:787
+#: src/translations.h:791
 msgid "&Rename"
 msgstr ""
 
-#: src/translations.h:788
+#: src/translations.h:792
 msgid "&Delete"
 msgstr ""
 
-#: src/translations.h:789
+#: src/translations.h:793
 msgid "&New Folder"
 msgstr ""
 
-#: src/translations.h:790
+#: src/translations.h:794
 msgid "Show &hidden files"
 msgstr ""
 
@@ -9247,7 +9300,7 @@ msgstr ""
 #. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Cognitum
 #: src/translations_regions.h:349
-msgid "Sea of Knowledge"
+msgid "Sea that has Become Known"
 msgstr ""
 
 #. TRANSLATORS: Name of region on the Moon
@@ -9301,7 +9354,7 @@ msgstr ""
 #. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Imbrium
 #: src/translations_regions.h:373
-msgid "Sea of Rains"
+msgid "Sea of Showers"
 msgstr ""
 
 #. TRANSLATORS: Name of region on the Moon
@@ -9364,7 +9417,7 @@ msgstr ""
 #. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Orientale
 #: src/translations_regions.h:401
-msgid "Eastern sea"
+msgid "Eastern Sea"
 msgstr ""
 
 #. TRANSLATORS: Name of region on the Moon
@@ -10590,7 +10643,7 @@ msgid "Sun's glare"
 msgstr ""
 
 #: src/ui_viewDialog.h:3294
-msgid "Toggle permanent drawing Sun's corona when atmosphere is disabled"
+msgid "Toggle permanent drawing of Sun's corona when atmosphere is disabled"
 msgstr ""
 
 #: src/ui_viewDialog.h:3296

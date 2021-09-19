@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-09-11 16:20+0700\n"
+"POT-Creation-Date: 2021-09-19 17:40+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Lubomir Hambalek <lubomir.hambalek@gmail.com>, 2021\n"
 "Language-Team: Slovak (https://www.transifex.com/stellarium/teams/80998/sk/)\n"
@@ -3394,112 +3394,145 @@ msgstr ""
 "navrhol Osborn Maitland Miller (1897–1979) v r. 1942. Póly sa v nej nemapujú"
 " do nekonečna."
 
-#: src/core/StelObject.cpp:273
+#: src/core/StelObject.cpp:272
 msgctxt "coordinates for current epoch"
 msgid "on date"
 msgstr "pre dátum"
 
-#: src/core/StelObject.cpp:275
+#: src/core/StelObject.cpp:274
 msgid "(apparent)"
 msgstr "(zdanlivo)"
 
 #. TRANSLATORS: Right ascension/Declination
-#: src/core/StelObject.cpp:285
+#: src/core/StelObject.cpp:284
 msgctxt "celestial coordinate system"
 msgid "RA/Dec"
 msgstr "RA/Dec"
 
 #. TRANSLATORS: Hour angle/Declination
-#: src/core/StelObject.cpp:372
+#: src/core/StelObject.cpp:371
 msgctxt "celestial coordinate system"
 msgid "HA/Dec"
 msgstr "HA/Dec"
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:420
+#: src/core/StelObject.cpp:419
 msgctxt "celestial coordinate system"
 msgid "Az./Alt."
 msgstr "Az./Alt."
 
 #. TRANSLATORS: Galactic longitude/latitude
-#: src/core/StelObject.cpp:445
+#: src/core/StelObject.cpp:444
 msgctxt "celestial coordinate system"
 msgid "Gal. long./lat."
 msgstr "Gal. dĺžka/šírka"
 
 #. TRANSLATORS: Supergalactic longitude/latitude
-#: src/core/StelObject.cpp:469
+#: src/core/StelObject.cpp:468
 msgctxt "celestial coordinate system"
 msgid "Supergal. long./lat."
 msgstr "Supergal. dĺžka/šírka"
 
-#: src/core/StelObject.cpp:487
+#: src/core/StelObject.cpp:486
 msgctxt "celestial coordinate system"
 msgid "Ecl. long./lat."
 msgstr "Eklipt. dĺžka/šírka"
 
-#: src/core/StelObject.cpp:552
+#: src/core/StelObject.cpp:551
 msgid "Ecliptic obliquity"
 msgstr "Sklon ekliptiky"
 
-#: src/core/StelObject.cpp:581
+#: src/core/StelObject.cpp:580
 msgid "Mean Sidereal Time"
 msgstr "Stredný siderický čas"
 
-#: src/core/StelObject.cpp:597
+#: src/core/StelObject.cpp:596
 msgid "Apparent Sidereal Time"
 msgstr "Zdanlivý siderický čas"
 
 #. TRANSLATORS: time of transit
-#: src/core/StelObject.cpp:612 src/gui/AstroCalcDialog.cpp:895
+#: src/core/StelObject.cpp:611 src/gui/AstroCalcDialog.cpp:895
 #: src/gui/AstroCalcDialog.cpp:5299
 msgctxt "celestial event; passage across a meridian"
 msgid "Transit"
 msgstr "Prechod"
 
-#: src/core/StelObject.cpp:613 src/gui/AstroCalcDialog.cpp:5298
+#: src/core/StelObject.cpp:612 src/gui/AstroCalcDialog.cpp:5298
 msgctxt "celestial event"
 msgid "Rise"
 msgstr "Východ"
 
-#: src/core/StelObject.cpp:614 src/gui/AstroCalcDialog.cpp:5302
+#: src/core/StelObject.cpp:613 src/gui/AstroCalcDialog.cpp:5302
 msgctxt "celestial event"
 msgid "Set"
 msgstr "Západ"
 
-#: src/core/StelObject.cpp:652
+#: src/core/StelObject.cpp:651
 msgid "Daytime"
 msgstr "Deň"
 
-#: src/core/StelObject.cpp:665
+#: src/core/StelObject.cpp:664
 msgid "Polar night"
 msgstr "Polárna noc"
 
-#: src/core/StelObject.cpp:667
+#: src/core/StelObject.cpp:666
 msgid "This object never rises"
 msgstr "Objekt nikdy nevychádza"
 
-#: src/core/StelObject.cpp:672
+#: src/core/StelObject.cpp:671
 msgid "Polar day"
 msgstr "Polárny deň"
 
-#: src/core/StelObject.cpp:674
+#: src/core/StelObject.cpp:673
 msgid "Circumpolar (never sets)"
 msgstr "Cirkumpolárny (nezapadá)"
 
-#: src/core/StelObject.cpp:677
+#: src/core/StelObject.cpp:676
 msgid "Polar dawn"
 msgstr "Polárny úsvit"
 
-#: src/core/StelObject.cpp:679
+#: src/core/StelObject.cpp:678
 msgid "Polar dusk"
 msgstr "Polárny súmrak"
 
-#: src/core/StelObject.cpp:694
+#. TRANSLATORS: Greatest Eastern Digression is the maximum azimuth for stars
+#. with upper culmination between pole and zenith
+#: src/core/StelObject.cpp:689
+msgid "Max. E. Digression"
+msgstr "Najv. V. Digresia"
+
+#. TRANSLATORS: azimuth (abbrev.)
+#: src/core/StelObject.cpp:691
+msgctxt "celestial coordinate system"
+msgid "A"
+msgstr "A"
+
+#: src/core/StelObject.cpp:691
+msgctxt "celestial coordinate system"
+msgid "Az."
+msgstr "Az."
+
+#: src/core/StelObject.cpp:693
+msgctxt "celestial coordinate system"
+msgid "h"
+msgstr "h"
+
+#: src/core/StelObject.cpp:693
+msgctxt "celestial coordinate system"
+msgid "HA"
+msgstr "HA"
+
+#. TRANSLATORS: Greatest Western Digression is the maximum western azimuth for
+#. stars with upper culmination between pole and zenith
+#: src/core/StelObject.cpp:719
+msgid "Max. W. Digression"
+msgstr "Najv. Z. Digresia"
+
+#: src/core/StelObject.cpp:753
 msgid "Parallactic Angle"
 msgstr "Paralaktický uhol"
 
-#: src/core/StelObject.cpp:702 src/gui/AstroCalcDialog.cpp:5395
+#: src/core/StelObject.cpp:761 src/gui/AstroCalcDialog.cpp:5395
 msgid "IAU Constellation"
 msgstr "Súhvezdie IAU"
 
@@ -3547,23 +3580,23 @@ msgstr "Obrázky objektov hlbokého vesmíru na pozadí"
 msgid "Reload the deep-sky objects background images"
 msgstr "Obnoviť obrázky objektov hlbokého vesmíru na pozadí"
 
-#: src/core/StelSkyCultureMgr.cpp:169
+#: src/core/StelSkyCultureMgr.cpp:170
 msgctxt "sky culture classification"
 msgid "ethnographic"
 msgstr "etnografická"
 
-#: src/core/StelSkyCultureMgr.cpp:170
+#: src/core/StelSkyCultureMgr.cpp:171
 msgid ""
 "Provided by ethnographic researchers based on interviews of indigenous "
 "people."
 msgstr "Podľa etnografov, na základe rozhovorov s domorodcami."
 
-#: src/core/StelSkyCultureMgr.cpp:174
+#: src/core/StelSkyCultureMgr.cpp:175
 msgctxt "sky culture classification"
 msgid "historical"
 msgstr "historická"
 
-#: src/core/StelSkyCultureMgr.cpp:175
+#: src/core/StelSkyCultureMgr.cpp:176
 msgid ""
 "Provided by historians based on historical written sources from a (usually "
 "short) period of the past."
@@ -3571,12 +3604,12 @@ msgstr ""
 "Podľa historikov, na základe písomných záznamov z (obvykle krátkeho) obdobia"
 " v minulosti."
 
-#: src/core/StelSkyCultureMgr.cpp:179
+#: src/core/StelSkyCultureMgr.cpp:180
 msgctxt "sky culture classification"
 msgid "single"
 msgstr "jednoduchá"
 
-#: src/core/StelSkyCultureMgr.cpp:180
+#: src/core/StelSkyCultureMgr.cpp:181
 msgid ""
 "Represents a single source like a historical atlas, or publications of a "
 "single author."
@@ -3584,12 +3617,22 @@ msgstr ""
 "Predstavuje jeden zdroj, napríklad historický atlas, alebo publikácie "
 "jedného autora."
 
-#: src/core/StelSkyCultureMgr.cpp:184
+#: src/core/StelSkyCultureMgr.cpp:185
+msgctxt "sky culture classification"
+msgid "comparative"
+msgstr ""
+
+#: src/core/StelSkyCultureMgr.cpp:186
+msgid ""
+"Compares and confronts elements from at least sky cultures with each other."
+msgstr ""
+
+#: src/core/StelSkyCultureMgr.cpp:190
 msgctxt "sky culture classification"
 msgid "traditional"
 msgstr "tradičná"
 
-#: src/core/StelSkyCultureMgr.cpp:185
+#: src/core/StelSkyCultureMgr.cpp:191
 msgid ""
 "Content represents 'common' knowledge by several members of an ethnic "
 "community, and the sky culture has been developed by members of such "
@@ -3598,12 +3641,12 @@ msgstr ""
 "Obsah predstavuje \"všeobecne známe\" poznatky mnohých členov etnickej "
 "komunity, pričom zobrazenie súhvezdí navrhli členovia tejto komunity."
 
-#: src/core/StelSkyCultureMgr.cpp:189
+#: src/core/StelSkyCultureMgr.cpp:195
 msgctxt "sky culture classification"
 msgid "personal"
 msgstr "osobná"
 
-#: src/core/StelSkyCultureMgr.cpp:190
+#: src/core/StelSkyCultureMgr.cpp:196
 msgid ""
 "This is a personally developed sky culture which is not founded in published"
 " historical or ethnological research. Stellarium may include it when it is "
@@ -3614,12 +3657,12 @@ msgstr ""
 "môže zahrnúť, ak bude pútavé, ale nezaručujeme sa za jeho obsahovú "
 "správnosť."
 
-#: src/core/StelSkyCultureMgr.cpp:194
+#: src/core/StelSkyCultureMgr.cpp:200
 msgctxt "sky culture classification"
 msgid "incomplete"
 msgstr "neúplná"
 
-#: src/core/StelSkyCultureMgr.cpp:195
+#: src/core/StelSkyCultureMgr.cpp:201
 msgid ""
 "The accuracy of the sky culture description cannot be given, although it "
 "looks like it is built on a solid background. More work would be needed."
@@ -3627,20 +3670,20 @@ msgstr ""
 "Presnosť opisu zobrazenia oblohy nie je známa, hoci sa zdá, že sa zakladá na"
 " pevných základoch. Je potrebný podrobnejší výskum."
 
-#: src/core/StelSkyCultureMgr.cpp:199
+#: src/core/StelSkyCultureMgr.cpp:205
 msgctxt "sky culture classification"
 msgid "undefined"
 msgstr "nedefinovaná"
 
-#: src/core/StelSkyCultureMgr.cpp:206
+#: src/core/StelSkyCultureMgr.cpp:212
 msgid "Classification"
 msgstr "Klasifikácia"
 
-#: src/core/StelSkyCultureMgr.cpp:268
+#: src/core/StelSkyCultureMgr.cpp:274
 msgid "No description"
 msgstr "Bez popisu"
 
-#: src/core/StelSkyCultureMgr.cpp:301
+#: src/core/StelSkyCultureMgr.cpp:307
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:202
 msgid "References"
 msgstr "Literatúra"
@@ -5975,7 +6018,7 @@ msgstr "Jasné uhlíkové hviezdy"
 #: src/gui/AstroCalcDialog.cpp:2488 src/gui/AstroCalcDialog.cpp:5238
 #: src/translations.h:457
 msgid "Bright barium stars"
-msgstr ""
+msgstr "Jasné báriové hviezdy"
 
 #: src/gui/AstroCalcDialog.cpp:3074
 msgid "Magnitude vs. Time"
@@ -6376,7 +6419,7 @@ msgstr "Uhl. rozmer"
 #: src/gui/AstroCalcDialog.cpp:5314
 msgctxt "IAU Constellation"
 msgid "Const."
-msgstr ""
+msgstr "Súhv."
 
 #: src/gui/AstroCalcDialog.cpp:5432 src/ui_astroCalcDialog.h:1869
 msgid "Limit angular size:"
@@ -7564,558 +7607,568 @@ msgstr "Grécka (Almagest)"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:466
+msgid "Greek (Farnese + Almagest)"
+msgstr ""
+
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:468
+msgid "Greek (Leiden Aratea + Almagest)"
+msgstr ""
+
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:470
 msgid "Anutan"
 msgstr "Anutanská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:468
+#: src/translations.h:472
 msgid "Arabic Moon Stations"
 msgstr "Arabské mesačné zastavenia"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:470
+#: src/translations.h:474
 msgid "Armintxe"
 msgstr "Armintxeská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:472
+#: src/translations.h:476
 msgid "Aztec"
 msgstr "Aztécka"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:474
+#: src/translations.h:478
 msgid "Belarusian"
 msgstr "Bieloruská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:476
+#: src/translations.h:480
 msgid "Boorong"
 msgstr "Aborigénska"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:478 plugins/Calendars/src/ui_calendarsDialog.h:841
+#: src/translations.h:482 plugins/Calendars/src/ui_calendarsDialog.h:841
 msgid "Chinese"
 msgstr "Čínska"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:480
+#: src/translations.h:484
 msgid "Chinese Contemporary"
 msgstr "Čínska (súčasná)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:482
+#: src/translations.h:486
 msgid "Chinese Medieval"
 msgstr "Čínska (stredoveká)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:484
+#: src/translations.h:488
 msgid "Egyptian"
 msgstr "Egyptská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:486
+#: src/translations.h:490
 msgid "Hawaiian Starlines"
 msgstr "Havajské spojnice hviezd"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:488
+#: src/translations.h:492
 msgid "Inuit"
 msgstr "Inuitská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:490
+#: src/translations.h:494
 msgid "Indian Vedic"
 msgstr "Indicko-védska"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:492
+#: src/translations.h:496
 msgid "Japanese Moon Stations"
 msgstr "Japonské mesačné zastavenia"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:494
+#: src/translations.h:498
 msgid "Kamilaroi/Euahlayi"
 msgstr "Kamilarojská/Euahlajiská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:496
+#: src/translations.h:500
 msgid "Korean"
 msgstr "Kórejská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:498
+#: src/translations.h:502
 msgid "Dakota/Lakota/Nakota"
 msgstr "Dakotsko/Lakotsko/Nakotská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:500
+#: src/translations.h:504
 msgid "Macedonian"
 msgstr "Macedónska"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:502
+#: src/translations.h:506
 msgid "Maori"
 msgstr "Maorská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:504
+#: src/translations.h:508
 msgid "Maya"
 msgstr "Mayská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:506
+#: src/translations.h:510
 msgid "Mongolian"
 msgstr "Mongolská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:508
+#: src/translations.h:512
 msgid "Lokono"
 msgstr "Lokonoská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:510
+#: src/translations.h:514
 msgid "Navajo"
 msgstr "Navažská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:512
+#: src/translations.h:516
 msgid "Norse"
 msgstr "Škandinávska"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:514
+#: src/translations.h:518
 msgid "Ojibwe"
 msgstr "Odžibveská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:516
+#: src/translations.h:520
 msgid "Romanian"
 msgstr "Rumunská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:518
+#: src/translations.h:522
 msgid "Sami"
 msgstr "Laponská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:520
+#: src/translations.h:524
 msgid "Sardinian"
 msgstr "Sardínska"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:522
+#: src/translations.h:526
 msgid "Siberian"
 msgstr "Sibírska"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:524
+#: src/translations.h:528
 msgid "Tukano"
 msgstr "Tukanská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:526
+#: src/translations.h:530
 msgid "Tupi-Guarani"
 msgstr "Tupi-Guaranijská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:528
+#: src/translations.h:532
 msgid "Tongan"
 msgstr "Tonganská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:530
+#: src/translations.h:534
 msgid "Western"
 msgstr "Západná"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:532
+#: src/translations.h:536
 msgid "Western (H.A.Rey)"
 msgstr "Západná (H.A.Rey)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:534
+#: src/translations.h:538
 msgid "Western (O.Hlad)"
 msgstr "Západná (O.Hlad)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:536
+#: src/translations.h:540
 msgid "Western (Sky & Telescope)"
 msgstr "Západná (Sky & Telescope)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:538
+#: src/translations.h:542
 msgid "Western (Sternenkarten)"
 msgstr "Západné (Sternenkarten)"
 
-#. TRANSLATORS: Name of the sky cultur
-#: src/translations.h:540
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:544
 msgid "Northern Andes"
 msgstr "Severoandská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:542
+#: src/translations.h:546
 msgid "Babylonian (MUL.APIN)"
 msgstr "Babylonská (MUL.APIN)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:544
+#: src/translations.h:548
 msgid "Babylonian (Seleucid)"
 msgstr "Babylonská (Seleukovská)"
 
 #. TRANSLATORS: Name of the sky culture and landscape
-#: src/translations.h:546
+#: src/translations.h:550
 msgid "Armintxe Cave"
 msgstr "Jaskyňa Armintxe"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:548
+#: src/translations.h:552
 msgid "Vanuatu (Netwar)"
 msgstr "Vanuatská (Netwarská)"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:553
+#: src/translations.h:557
 msgid "Guereins"
 msgstr "Guereins"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:555
+#: src/translations.h:559
 msgid "Trees"
 msgstr "Stromy"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:557 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1448
+#: src/translations.h:561 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1448
 msgid "Moon"
 msgstr "Mesiac"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:559
+#: src/translations.h:563
 msgid "Hurricane"
 msgstr "Hrebeň Hurricane"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:561
+#: src/translations.h:565
 msgid "Ocean"
 msgstr "Oceán"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:563
+#: src/translations.h:567
 msgid "Garching"
 msgstr "Garching"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:565 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1460
+#: src/translations.h:569 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1460
 msgid "Mars"
 msgstr "Mars"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:567 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1463
+#: src/translations.h:571 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1463
 msgid "Jupiter"
 msgstr "Jupiter"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:569 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1466
+#: src/translations.h:573 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1466
 msgid "Saturn"
 msgstr "Saturn"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:571
+#: src/translations.h:575
 msgid "Uranus"
 msgstr "Urán"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:573
+#: src/translations.h:577
 msgid "Neptune"
 msgstr "Neptún"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:575
+#: src/translations.h:579
 msgid "Geneva"
 msgstr "Ženeva"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:577
+#: src/translations.h:581
 msgid "Grossmugl"
 msgstr "Grossmugl"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:579
+#: src/translations.h:583
 msgid "Zero Horizon"
 msgstr "Plochý horizont"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:581 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1445
+#: src/translations.h:585 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1445
 msgid "Sun"
 msgstr "Slnko"
 
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
-#: src/translations.h:586
+#: src/translations.h:590
 msgid "Vienna Sterngarten"
 msgstr "Viedenská Sterngarten"
 
 #. TRANSLATORS: Name of 3D scene
-#: src/translations.h:588
+#: src/translations.h:592
 msgid "Testscene"
 msgstr "Testovacia scéna"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:593
+#: src/translations.h:597
 msgid "Landscape Tour"
 msgstr "Prehliadka terénov"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:595
+#: src/translations.h:599
 msgid "Partial Lunar Eclipse"
 msgstr "Čiastočné zatmenie Mesiaca"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:597
+#: src/translations.h:601
 msgid "Total Lunar Eclipse"
 msgstr "Úplné zatmenie Mesiaca"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:599
+#: src/translations.h:603
 msgid "Screensaver"
 msgstr "Šetrič obrazovky"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:601
+#: src/translations.h:605
 msgid "Solar Eclipse 2009"
 msgstr "Zatmenie Slnka 2009"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:603
+#: src/translations.h:607
 msgid "Startup Script"
 msgstr "Skript pri spustení"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:605
+#: src/translations.h:609
 msgid "Zodiac"
 msgstr "Zvieratník"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:607
+#: src/translations.h:611
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "Trojitý východ a západ Slnka na Merkúre"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:609
+#: src/translations.h:613
 msgid "Double eclipse from Deimos in 2017"
 msgstr "Dvojité zatmenie z Deimosu v r. 2017"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:611
+#: src/translations.h:615
 msgid "Double eclipse from Deimos in 2031"
 msgstr "Dvojité zatmenie z Deimosu v r. 2031"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:613
+#: src/translations.h:617
 msgid "Eclipse from Olympus Mons Jan 2, 2021"
 msgstr "Zatmenie z Olympusu Mons 2. januára 2021"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:615
+#: src/translations.h:619
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "Zákryt Zeme a Jupitera v r. 2048"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:617
+#: src/translations.h:621
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr "3 prechody a 2 zatmenia z Deimosu v r. 2027"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:619
+#: src/translations.h:623
 msgid "Solar System Screensaver"
 msgstr "Šetrič obrazovky so slnečnou sústavou"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:621
+#: src/translations.h:625
 msgid "Constellations Tour"
 msgstr "Prehliadka súhvezdí"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:623
+#: src/translations.h:627
 msgid "Western Constellations Tour"
 msgstr "Prehliadka západných súhvezdí"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:625
+#: src/translations.h:629
 msgid "Sun from different planets"
 msgstr "Slnko z ostatných planét"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:627
+#: src/translations.h:631
 msgid "Earth best views from other bodies"
 msgstr "Najlepšie pohľady na Zem z iných telies"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:629
+#: src/translations.h:633
 msgid "Transit of Venus"
 msgstr "Prechod Venuše"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:631
+#: src/translations.h:635
 msgid "Sky Culture Tour"
 msgstr "Prehliadka kultúr oblohy"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:633
+#: src/translations.h:637
 msgid "Earth Events from Mercury"
 msgstr "Pozemské úkazy z Merkúra"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:635
+#: src/translations.h:639
 msgid "Earth Events from a floating city on Venus"
 msgstr "Pozemské úkazy zo vznášajúceho sa mesta v atmosfére Venuše"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:637
+#: src/translations.h:641
 msgid "Earth Events from Mars"
 msgstr "Pozemské úkazy z Marsu"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:639
+#: src/translations.h:643
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr "Najväčšie elongácie Zeme a opozície ostatných planét z Marsu"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:641
+#: src/translations.h:645
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr "Najväčšie elongácie a prechody Zeme a Marsu pri pohľade z Kallista"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:643
+#: src/translations.h:647
 msgid "Tycho's Supernova"
 msgstr "Tychova supernova"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:645
+#: src/translations.h:649
 msgid "Earth and other Planets from Ceres"
 msgstr "Zem a ostatné planéty z Cerery"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:647
+#: src/translations.h:651
 msgid "Messier Objects Tour"
 msgstr "Prehliadka Messierových objektov"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:649
+#: src/translations.h:653
 msgid "Binocular Highlights"
 msgstr "To najlepšie pre triéder"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:651
+#: src/translations.h:655
 msgid "20 Fun Naked-Eye Double Stars"
 msgstr "20 zábavných dvojhviezd na pozorovanie voľným okom"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:653
+#: src/translations.h:657
 msgid "List of largest known stars"
 msgstr "Zoznam najväčších známych hviezd"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:655
+#: src/translations.h:659
 msgid "Herschel 400 Tour"
 msgstr "Prehliadka Herschel 400"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:657
+#: src/translations.h:661
 msgid "Binosky: Deep Sky Objects for Binoculars"
 msgstr "Binosky: Objekty hlbokého vesmíru pre triédre"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:659
+#: src/translations.h:663
 msgid "The Jack Bennett Catalog"
 msgstr "Katalóg Jacka Bennetta"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:661
+#: src/translations.h:665
 msgid "Best objects in the New General Catalog"
 msgstr "Najlepšie objekty z katalógu NGC"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:663
+#: src/translations.h:667
 msgid "Jupiter and triple shadow phenomena"
 msgstr "Jupiter a úkazy trojitých tieňov"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:665
+#: src/translations.h:669
 msgid "Jupiter without Galilean satellites"
 msgstr "Jupiter bez galileovych mesiačikov"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:667
+#: src/translations.h:671
 msgid "Skybox Tiles"
 msgstr "Políčka Skybox"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:669
+#: src/translations.h:673
 msgid "Occultations of bright stars by planets"
 msgstr "Zákryty jasných hviezd planétami"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:671
+#: src/translations.h:675
 msgid "Mutual occultations of planets"
 msgstr "Vzájomné zákryty planét"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:673
+#: src/translations.h:677
 msgid "Planet Objects Tour"
 msgstr "Prehliadka planetárnych telies"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:675
+#: src/translations.h:679
 msgid "Analemma"
 msgstr "Analema"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:677
+#: src/translations.h:681
 msgid "Martian analemma"
 msgstr "Analema Marsa"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:679
+#: src/translations.h:683
 msgid "Saturnian analemma"
 msgstr "Analema Saturna"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:681
+#: src/translations.h:685
 msgid "Uranian analemma"
 msgstr "Analema Urána"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:683
+#: src/translations.h:687
 msgid "Messier Marathon"
 msgstr "Messierov maratón"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:685
+#: src/translations.h:689
 msgid "Random location"
 msgstr "Náhodná poloha"
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:691
+#: src/translations.h:695
 msgid "Look around each installed landscape."
 msgstr "Rozhliadnutie sa okolo každého nainštalovaného terénu."
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:693
+#: src/translations.h:697
 msgid "Look at each installed sky culture."
 msgstr "Prehliadnite si všetky nainštalované kultúry súhvezdí."
 
-#: src/translations.h:694
+#: src/translations.h:698
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "Skript na demonštrovanie čiastočného zatmenia Mesiaca."
 
-#: src/translations.h:695
+#: src/translations.h:699
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "Skript na demonštrovanie úplného zatmenia Mesiaca."
 
-#: src/translations.h:696
+#: src/translations.h:700
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr "Pomalá, nekonečná prehliadka náhodných objektov na oblohe."
 
-#: src/translations.h:697
+#: src/translations.h:701
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
@@ -8123,11 +8176,11 @@ msgstr ""
 "Skript na demonštrovanie úplného zatmenia Slnka, ktoré nastalo v roku 2009 "
 "(poloha=Rangpur, Bangladéš)."
 
-#: src/translations.h:698
+#: src/translations.h:702
 msgid "Script which runs automatically at startup"
 msgstr "Skript, ktorý sa vykoná pri spustení programu"
 
-#: src/translations.h:699
+#: src/translations.h:703
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -8137,7 +8190,7 @@ msgstr ""
 "ktoré ležia pozdĺž čiary, po ktorej sa pohybuje Slnko cez nebeskú sféru "
 "počas roka."
 
-#: src/translations.h:700
+#: src/translations.h:704
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
@@ -8146,7 +8199,7 @@ msgstr ""
 "niektorých miestach pozorovať východ a západ Slnka trikrát za jeden deň na "
 "Merkúre."
 
-#: src/translations.h:701
+#: src/translations.h:705
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -8154,7 +8207,7 @@ msgstr ""
 "Tesne pred zákrytom Slnka Marsom vyjde najprv Fobos a zakryje ho prvý. Úkaz "
 "nastane medzi Škorpiónom a Strelcom 26. apríla 2017."
 
-#: src/translations.h:702
+#: src/translations.h:706
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -8162,12 +8215,12 @@ msgstr ""
 "Tesne pred zákrytom Slnka Marsom vyjde najprv Fobos a zakryje ho prvý. Úkaz "
 "nastane medzi Býkom a Blížencami 23. júla 2031."
 
-#: src/translations.h:703
+#: src/translations.h:707
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 2, 2021."
 msgstr ""
 "Prechod Fobosu pred Slnkom pozorovaný z Olympusu Mons 2. januára 2021."
 
-#: src/translations.h:704
+#: src/translations.h:708
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But"
 " occultations of both on the same day are very rare. Here's one that takes "
@@ -8177,7 +8230,7 @@ msgstr ""
 "zákryt oboch telies v rovnaký deň je vzácny úkaz. Takto bude prebiehať "
 "dvojitý zákryt 21. januára 2048. Zobrazenie prebieha reálnou rýchlosťou."
 
-#: src/translations.h:705
+#: src/translations.h:709
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -8192,37 +8245,37 @@ msgstr ""
 "Marsom a Deimosom. Keď Fobos opäť vyjde spoza Marsu, stále je ešte zatienený"
 " Marsom, ale po chvíli ho zaleje slnečný svit."
 
-#: src/translations.h:706
+#: src/translations.h:710
 msgid ""
 "Screensaver of various happenings in the Solar System. 313 events in all!"
 msgstr ""
 "Šetrič obrazovky s rôznymi javmi odohrávajúcimi sa v Slnečnej sústave. "
 "Celkovo až 313 javov!"
 
-#: src/translations.h:707
+#: src/translations.h:711
 msgid "A tour of the western constellations."
 msgstr "Prehliadka súhvezdiami západnej kultúry."
 
-#: src/translations.h:708
+#: src/translations.h:712
 msgid "A tour of the constellations of the selected sky culture."
 msgstr "Prehliadka súhvezdí vybratej kultúry."
 
-#: src/translations.h:709
+#: src/translations.h:713
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "Pohľad na Slnko z veľkých planét slnečnej sústavy a z Pluta."
 
-#: src/translations.h:710
+#: src/translations.h:714
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 "Najlepšie pohľady na Zem z iných telies slnečnej sústavy v priebehu 21. "
 "storočia."
 
-#: src/translations.h:711
+#: src/translations.h:715
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr "Prechod Venuše pri pohľade z austrálskeho mesta Sydney, 6. júna 2012."
 
-#: src/translations.h:712
+#: src/translations.h:716
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Historical "
 "Supernovae plugin has to be enabled."
@@ -8230,13 +8283,13 @@ msgstr ""
 "Záblesk supernovy, ktorú pozoroval Tycho Brahe v roku 1572. Musí byť zapnutý"
 " modul Historické supernovy."
 
-#: src/translations.h:713
+#: src/translations.h:717
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars "
 "2000-3000"
 msgstr "Elongácie Zeme a opozície ostatných planét z Marsu v období 2000-3000"
 
-#: src/translations.h:714
+#: src/translations.h:718
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -8248,18 +8301,18 @@ msgstr ""
 "pásu Jupitera. Ak niekedy ľudia bukú kolonizovať Jupiterove mesiace, Kalisto"
 " bude naporúdzi."
 
-#: src/translations.h:715
+#: src/translations.h:719
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-2200"
 msgstr ""
 "Zem. Viditeľné najväčšie elongácie a opozície z Cerery v rokoch 2000-2200"
 
-#: src/translations.h:716
+#: src/translations.h:720
 msgid "A tour of Messier Objects"
 msgstr "Prehliadka Messierových objektov"
 
-#: src/translations.h:717
+#: src/translations.h:721
 msgid ""
 "Tours around interesting objects, which accessible to observation with "
 "binoculars. The data for the script are taken from the eponymous book by "
@@ -8268,7 +8321,7 @@ msgstr ""
 "Prehliadka zaujímavých objektov, ktoré sú pozorovateľné triédrom. Údaje v "
 "skripte sú z rovnomennej knihy Garyho Seronika."
 
-#: src/translations.h:718
+#: src/translations.h:722
 msgid ""
 "This script helps you make an excursion around 20 fun double stars. The list"
 " has been collected by Jerry Lodriguss and published in Sky & Telescope "
@@ -8278,15 +8331,15 @@ msgstr ""
 "Jerry Lodriguss a vyšiel v časopise Sky & Telescope 09/2014. Údaje "
 "pochádzajú z jeho stránky http://www.astropix.com/doubles/"
 
-#: src/translations.h:719
+#: src/translations.h:723
 msgid "This script helps you make an excursion around largest known stars."
 msgstr "Skript predvedie najväčšie známe hviezdy."
 
-#: src/translations.h:720
+#: src/translations.h:724
 msgid "A tour around objects from the Herschel 400 Catalogue"
 msgstr "Prehliadka objektov z katalógu Herschel 400"
 
-#: src/translations.h:721
+#: src/translations.h:725
 msgid ""
 "Ben Crowell has created Binosky, an observing list of Deep Sky Objects for "
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
@@ -8296,7 +8349,7 @@ msgstr ""
 "pozorovanie triédrom. Skript postupne ukáže 31 objektov zoradených podľa "
 "hodinového uhla (epocha 2000.0)."
 
-#: src/translations.h:722
+#: src/translations.h:726
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
 "The Bennett catalog was contributed by Auke Slotegraaf."
@@ -8304,7 +8357,7 @@ msgstr ""
 "Katalóg Jacka Bennetta južných objektov hlbokého vesmíru (spolu 152). "
 "Bennettov katalóg poskytol Auke Slotegraaf."
 
-#: src/translations.h:723
+#: src/translations.h:727
 msgid ""
 "This list of 111 objects by A.J. Crayon and Steve Coe is used by members of "
 "the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC "
@@ -8314,7 +8367,7 @@ msgstr ""
 "Astronomického klubu Saguaro z Phoenixu v Arizone na získanie oceneniaTo "
 "najlepšie z NGC."
 
-#: src/translations.h:724
+#: src/translations.h:728
 msgid ""
 "Demonstration of the mid-time of rare events - triple shadow phenomena of "
 "the satellites of Jupiter from 1900 to 2100. All events are given in "
@@ -8323,7 +8376,7 @@ msgstr ""
 "Ukážka okamihov vzácnych javov trojitého tieňa mesiacov Jupitera od r. 1900 "
 "do 2100. Všetky javy sú udané v DT (dynamickom čase)."
 
-#: src/translations.h:725
+#: src/translations.h:729
 msgid ""
 "The planet Jupiter sometimes appears to be without moons, when the four "
 "Galilean satellites are simultaneously invisible because they are passing "
@@ -8336,7 +8389,7 @@ msgstr ""
 " alebo poza planétu (zákryt), alebo sú v jej tieni (zatmenie). Tento skript "
 "ukazuje tieto javy medzi rokmi 1900 až 2100 v dynamickom čase (DT)."
 
-#: src/translations.h:726
+#: src/translations.h:730
 msgid ""
 "This script demonstrates interesting phenomena - occultations bright stars "
 "by planets, 2000 to 2040."
@@ -8344,7 +8397,7 @@ msgstr ""
 "Tento skript ukazuje zaujímavé javy - zákryty jasných hviezd planétami medzi"
 " rokmi 2000 až 2040."
 
-#: src/translations.h:727
+#: src/translations.h:731
 msgid ""
 "This script demonstrates interesting and very rare phenomena - mutual "
 "occultations of planets, 0 to 2500."
@@ -8352,35 +8405,35 @@ msgstr ""
 "Tento skript ukazuje zaujímavé a veľmi vzácne javy - vzájomné zákryty planét"
 " medzi rokmi 0 až 2500."
 
-#: src/translations.h:728
+#: src/translations.h:732
 msgid "A tour of the Solar System planets"
 msgstr "Prehliadka planétami slnečnej sústavy"
 
-#: src/translations.h:729
+#: src/translations.h:733
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Earth."
 msgstr "Ukážka analemy - dráhy Slnka po oblohe v priebehu pozemského roka."
 
-#: src/translations.h:730
+#: src/translations.h:734
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Mars."
 msgstr "Ukážka analemy - dráhy Slnka po oblohe počas roka na Marse."
 
-#: src/translations.h:731
+#: src/translations.h:735
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Saturn."
 msgstr "Ukážka analemy - dráhy Slnka po oblohe počas roka na Saturne."
 
-#: src/translations.h:732
+#: src/translations.h:736
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Uranus."
 msgstr "Ukážka analemy - dráhy Slnka po oblohe počas roka na Uráne."
 
-#: src/translations.h:733
+#: src/translations.h:737
 msgid ""
 "Messier Marathon on March 20, 2020. The data for the script are taken from "
 "GaoXing's observation log: http://www.xjltp.com/2_huodong/2_030301.htm"
@@ -8388,7 +8441,7 @@ msgstr ""
 "Messierov maratón dňa 20.3.2020. Dáta pre skript pochádzajúco z "
 "pozorovacieho denníka GaoXinga: http://www.xjltp.com/2_huodong/2_030301.htm"
 
-#: src/translations.h:734
+#: src/translations.h:738
 msgid ""
 "Creates 6 tiles (North/East/South/West/Up/Down) for a skybox. These can be "
 "further used e.g. in Unity3D or other 3D environments. Output directory and "
@@ -8404,7 +8457,7 @@ msgstr ""
 "ktorého meno môžete nastaviť premennou prostredia OUTPUT_DATA. Prosím, "
 "prečítajte si skript, aby ste pochopili, ako ho pre svoj projekt použiť."
 
-#: src/translations.h:735
+#: src/translations.h:739
 msgid ""
 "This script will help you make practical works for celestial navigation - he"
 " sets a random location and hides it from the GUI."
@@ -8412,180 +8465,180 @@ msgstr ""
 "Tento skript vám pomôže s praxou pri navigácii na oblohe - nastaví náhodnú "
 "polohu a schová ju v GUI."
 
-#: src/translations.h:739
+#: src/translations.h:743
 msgid "&Undo"
 msgstr "V&rátiť späť"
 
-#: src/translations.h:740
+#: src/translations.h:744
 msgid "&Redo"
 msgstr "&Opakovať vrátené"
 
-#: src/translations.h:741
+#: src/translations.h:745
 msgid "Cu&t"
 msgstr "Vys&trihnúť"
 
-#: src/translations.h:742
+#: src/translations.h:746
 msgid "&Copy"
 msgstr "&Kopírovať"
 
-#: src/translations.h:743
+#: src/translations.h:747
 msgid "&Paste"
 msgstr "&Vložiť"
 
-#: src/translations.h:744 plugins/Oculars/src/ui_ocularDialog.h:1542
+#: src/translations.h:748 plugins/Oculars/src/ui_ocularDialog.h:1542
 #: plugins/Oculars/src/ui_ocularDialog.h:1551
 #: plugins/Oculars/src/ui_ocularDialog.h:1557
 #: plugins/Oculars/src/ui_ocularDialog.h:1576
 msgid "Delete"
 msgstr "Vymazať"
 
-#: src/translations.h:745
+#: src/translations.h:749
 msgid "Select All"
 msgstr "Vybrať všetko"
 
-#: src/translations.h:746
+#: src/translations.h:750
 msgid "Look in:"
 msgstr "Hľadať v:"
 
-#: src/translations.h:747
+#: src/translations.h:751
 msgid "Directory:"
 msgstr "Priečinok:"
 
-#: src/translations.h:748
+#: src/translations.h:752
 msgid "Folder"
 msgstr "Priečinok"
 
-#: src/translations.h:749
+#: src/translations.h:753
 msgid "&Choose"
 msgstr "&Zvoliť"
 
-#: src/translations.h:750 src/ui_configurationDialog.h:1875
+#: src/translations.h:754 src/ui_configurationDialog.h:1875
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:644
 msgid "Cancel"
 msgstr "Zrušiť"
 
-#: src/translations.h:751
+#: src/translations.h:755
 msgid "&Cancel"
 msgstr "&Zrušiť"
 
-#: src/translations.h:752
+#: src/translations.h:756
 msgid "Files of type:"
 msgstr "Súbory typu:"
 
-#: src/translations.h:753
+#: src/translations.h:757
 msgid "Date Modified"
 msgstr "Dátum zmeny"
 
-#: src/translations.h:754
+#: src/translations.h:758
 msgid "Directories"
 msgstr "Priečinky"
 
-#: src/translations.h:755
+#: src/translations.h:759
 msgid "Computer"
 msgstr "Počítač"
 
-#: src/translations.h:756
+#: src/translations.h:760
 msgid "&Open"
 msgstr "&Otvoriť"
 
-#: src/translations.h:757
+#: src/translations.h:761
 msgid "&Save"
 msgstr "&Uložiť"
 
-#: src/translations.h:758
+#: src/translations.h:762
 msgid "File &name:"
 msgstr "&Názov súboru:"
 
-#: src/translations.h:759
+#: src/translations.h:763
 msgid "Copy &Link Location"
 msgstr "&Kopírovať umiestnenie odkazu"
 
-#: src/translations.h:760
+#: src/translations.h:764
 msgid "Abort"
 msgstr "Zrušiť"
 
-#: src/translations.h:761
+#: src/translations.h:765
 msgid "Ignore"
 msgstr "Ignorovať"
 
-#: src/translations.h:762
+#: src/translations.h:766
 msgid "&Basic colors"
 msgstr "&Základné farby"
 
-#: src/translations.h:763
+#: src/translations.h:767
 msgid "&Pick Screen Color"
 msgstr "Vybrať farbu obrazovky"
 
-#: src/translations.h:764
+#: src/translations.h:768
 msgid "&Custom colors"
 msgstr "&Vlastné farby"
 
-#: src/translations.h:765
+#: src/translations.h:769
 msgid "&Add to Custom Colors"
 msgstr "&Pridať k vlastným farbám"
 
-#: src/translations.h:766
+#: src/translations.h:770
 msgid "Hu&e:"
 msgstr "Od&tieň:"
 
-#: src/translations.h:767
+#: src/translations.h:771
 msgid "&Sat:"
 msgstr "&Sýtosť:"
 
-#: src/translations.h:768
+#: src/translations.h:772
 msgid "&Val:"
 msgstr "&Hodnota:"
 
-#: src/translations.h:769
+#: src/translations.h:773
 msgid "&Red:"
 msgstr "Če&rvená:"
 
-#: src/translations.h:770
+#: src/translations.h:774
 msgid "&Green:"
 msgstr "Ze&lená:"
 
-#: src/translations.h:771
+#: src/translations.h:775
 msgid "Bl&ue:"
 msgstr "Mo&drá:"
 
-#: src/translations.h:772
+#: src/translations.h:776
 msgid "Select Color"
 msgstr "Vyberte farbu"
 
-#: src/translations.h:773
+#: src/translations.h:777
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "Kurzor na %1, %2 Zrušíte stlačením ESC"
 
-#: src/translations.h:774
+#: src/translations.h:778
 msgid "Back"
 msgstr "Späť"
 
-#: src/translations.h:775
+#: src/translations.h:779
 msgid "Forward"
 msgstr "Ďalej"
 
-#: src/translations.h:776
+#: src/translations.h:780
 msgid "Parent Directory"
 msgstr "Domovský priečinok"
 
-#: src/translations.h:777
+#: src/translations.h:781
 msgid "Create New Folder"
 msgstr "Vytvoriť nový priečinok"
 
-#: src/translations.h:778
+#: src/translations.h:782
 msgid "List View"
 msgstr "Zoznam"
 
-#: src/translations.h:779
+#: src/translations.h:783
 msgid "Detail View"
 msgstr "Detaily"
 
-#: src/translations.h:780
+#: src/translations.h:784
 msgid "Recent Places"
 msgstr "Nedávne umiestnenia"
 
-#: src/translations.h:781
+#: src/translations.h:785
 #, qt-format
 msgid ""
 "%1 already exists.\n"
@@ -8594,39 +8647,39 @@ msgstr ""
 "Súbor %1 už existuje.\n"
 "Chcete ho nahradiť?"
 
-#: src/translations.h:782
+#: src/translations.h:786
 msgid "&Yes"
 msgstr "Áno"
 
-#: src/translations.h:783
+#: src/translations.h:787
 msgid "&No"
 msgstr "&Nie"
 
-#: src/translations.h:784
+#: src/translations.h:788
 msgid "&Select All"
 msgstr "Vybrať &všetko"
 
-#: src/translations.h:785
+#: src/translations.h:789
 msgid "&Step up"
 msgstr "Krok &hore"
 
-#: src/translations.h:786
+#: src/translations.h:790
 msgid "Step &down"
 msgstr "Krok &dole"
 
-#: src/translations.h:787
+#: src/translations.h:791
 msgid "&Rename"
 msgstr "P&remenovať"
 
-#: src/translations.h:788
+#: src/translations.h:792
 msgid "&Delete"
 msgstr "&Vymazať"
 
-#: src/translations.h:789
+#: src/translations.h:793
 msgid "&New Folder"
 msgstr "&Nový priečinok"
 
-#: src/translations.h:790
+#: src/translations.h:794
 msgid "Show &hidden files"
 msgstr "Zobraziť &skryté súbory"
 
@@ -9331,7 +9384,7 @@ msgstr "Južné more"
 #. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Cognitum
 #: src/translations_regions.h:349
-msgid "Sea of Knowledge"
+msgid "Sea that has Become Known"
 msgstr "More poznania"
 
 #. TRANSLATORS: Name of region on the Moon
@@ -9385,7 +9438,7 @@ msgstr "More vlahy"
 #. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Imbrium
 #: src/translations_regions.h:373
-msgid "Sea of Rains"
+msgid "Sea of Showers"
 msgstr "More dažďov"
 
 #. TRANSLATORS: Name of region on the Moon
@@ -9448,7 +9501,7 @@ msgstr "More mrakov"
 #. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Orientale
 #: src/translations_regions.h:401
-msgid "Eastern sea"
+msgid "Eastern Sea"
 msgstr "Východné more"
 
 #. TRANSLATORS: Name of region on the Moon
@@ -10665,23 +10718,23 @@ msgstr "Prepnúť vykreslenie hala okolo Mesiaca"
 
 #: src/ui_viewDialog.h:3288
 msgid "Moon's halo"
-msgstr ""
+msgstr "Mesačné halo"
 
 #: src/ui_viewDialog.h:3290
 msgid "Toggle drawing Sun's glare"
-msgstr ""
+msgstr "Zapnúť zobrazenie slnečnej žiary"
 
 #: src/ui_viewDialog.h:3292
 msgid "Sun's glare"
-msgstr ""
+msgstr "Slnečná žiara"
 
 #: src/ui_viewDialog.h:3294
-msgid "Toggle permanent drawing Sun's corona when atmosphere is disabled"
-msgstr ""
+msgid "Toggle permanent drawing of Sun's corona when atmosphere is disabled"
+msgstr "Zapnúť vykresľovanie slnečnej koróny pri vypnutej atmosfére"
 
 #: src/ui_viewDialog.h:3296
 msgid "Sun's corona"
-msgstr ""
+msgstr "Slnečná koróna"
 
 #: src/ui_viewDialog.h:3297
 msgid "Planets magnitude algorithm:"

@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-09-11 16:20+0700\n"
+"POT-Creation-Date: 2021-09-19 17:40+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Changhwan Kim <namelesswave@gmail.com>, 2021\n"
 "Language-Team: Korean (https://www.transifex.com/stellarium/teams/80998/ko/)\n"
@@ -3349,112 +3349,145 @@ msgstr ""
 "밀러 원통도법은 점장도법을 변형한 것으로, 1942년 오스본 메잇랜드 밀러가 만들었습니다. 이 도법에서 극 지방은 무한대로 늘어나지 "
 "않습니다."
 
-#: src/core/StelObject.cpp:273
+#: src/core/StelObject.cpp:272
 msgctxt "coordinates for current epoch"
 msgid "on date"
 msgstr "현재"
 
-#: src/core/StelObject.cpp:275
+#: src/core/StelObject.cpp:274
 msgid "(apparent)"
 msgstr "(겉보기)"
 
 #. TRANSLATORS: Right ascension/Declination
-#: src/core/StelObject.cpp:285
+#: src/core/StelObject.cpp:284
 msgctxt "celestial coordinate system"
 msgid "RA/Dec"
 msgstr "적경/적위"
 
 #. TRANSLATORS: Hour angle/Declination
-#: src/core/StelObject.cpp:372
+#: src/core/StelObject.cpp:371
 msgctxt "celestial coordinate system"
 msgid "HA/Dec"
 msgstr "시간각/적위"
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:420
+#: src/core/StelObject.cpp:419
 msgctxt "celestial coordinate system"
 msgid "Az./Alt."
 msgstr "방위각/고도"
 
 #. TRANSLATORS: Galactic longitude/latitude
-#: src/core/StelObject.cpp:445
+#: src/core/StelObject.cpp:444
 msgctxt "celestial coordinate system"
 msgid "Gal. long./lat."
 msgstr "은경/은위"
 
 #. TRANSLATORS: Supergalactic longitude/latitude
-#: src/core/StelObject.cpp:469
+#: src/core/StelObject.cpp:468
 msgctxt "celestial coordinate system"
 msgid "Supergal. long./lat."
 msgstr "초은하 경도/위도"
 
-#: src/core/StelObject.cpp:487
+#: src/core/StelObject.cpp:486
 msgctxt "celestial coordinate system"
 msgid "Ecl. long./lat."
 msgstr "황경/황위"
 
-#: src/core/StelObject.cpp:552
+#: src/core/StelObject.cpp:551
 msgid "Ecliptic obliquity"
 msgstr "황도 경사"
 
-#: src/core/StelObject.cpp:581
+#: src/core/StelObject.cpp:580
 msgid "Mean Sidereal Time"
 msgstr "평균 항성시"
 
-#: src/core/StelObject.cpp:597
+#: src/core/StelObject.cpp:596
 msgid "Apparent Sidereal Time"
 msgstr "겉보기 항성시"
 
 #. TRANSLATORS: time of transit
-#: src/core/StelObject.cpp:612 src/gui/AstroCalcDialog.cpp:895
+#: src/core/StelObject.cpp:611 src/gui/AstroCalcDialog.cpp:895
 #: src/gui/AstroCalcDialog.cpp:5299
 msgctxt "celestial event; passage across a meridian"
 msgid "Transit"
 msgstr "통과"
 
-#: src/core/StelObject.cpp:613 src/gui/AstroCalcDialog.cpp:5298
+#: src/core/StelObject.cpp:612 src/gui/AstroCalcDialog.cpp:5298
 msgctxt "celestial event"
 msgid "Rise"
 msgstr "출"
 
-#: src/core/StelObject.cpp:614 src/gui/AstroCalcDialog.cpp:5302
+#: src/core/StelObject.cpp:613 src/gui/AstroCalcDialog.cpp:5302
 msgctxt "celestial event"
 msgid "Set"
 msgstr "몰"
 
-#: src/core/StelObject.cpp:652
+#: src/core/StelObject.cpp:651
 msgid "Daytime"
 msgstr "낮"
 
-#: src/core/StelObject.cpp:665
+#: src/core/StelObject.cpp:664
 msgid "Polar night"
 msgstr "극야"
 
-#: src/core/StelObject.cpp:667
+#: src/core/StelObject.cpp:666
 msgid "This object never rises"
 msgstr "이 천체는 떠오르지 않습니다"
 
-#: src/core/StelObject.cpp:672
+#: src/core/StelObject.cpp:671
 msgid "Polar day"
 msgstr "백야"
 
-#: src/core/StelObject.cpp:674
+#: src/core/StelObject.cpp:673
 msgid "Circumpolar (never sets)"
 msgstr "주극성 (절대 지지 않음)"
 
-#: src/core/StelObject.cpp:677
+#: src/core/StelObject.cpp:676
 msgid "Polar dawn"
 msgstr "극석"
 
-#: src/core/StelObject.cpp:679
+#: src/core/StelObject.cpp:678
 msgid "Polar dusk"
 msgstr "극황혼"
 
-#: src/core/StelObject.cpp:694
+#. TRANSLATORS: Greatest Eastern Digression is the maximum azimuth for stars
+#. with upper culmination between pole and zenith
+#: src/core/StelObject.cpp:689
+msgid "Max. E. Digression"
+msgstr ""
+
+#. TRANSLATORS: azimuth (abbrev.)
+#: src/core/StelObject.cpp:691
+msgctxt "celestial coordinate system"
+msgid "A"
+msgstr ""
+
+#: src/core/StelObject.cpp:691
+msgctxt "celestial coordinate system"
+msgid "Az."
+msgstr ""
+
+#: src/core/StelObject.cpp:693
+msgctxt "celestial coordinate system"
+msgid "h"
+msgstr ""
+
+#: src/core/StelObject.cpp:693
+msgctxt "celestial coordinate system"
+msgid "HA"
+msgstr ""
+
+#. TRANSLATORS: Greatest Western Digression is the maximum western azimuth for
+#. stars with upper culmination between pole and zenith
+#: src/core/StelObject.cpp:719
+msgid "Max. W. Digression"
+msgstr ""
+
+#: src/core/StelObject.cpp:753
 msgid "Parallactic Angle"
 msgstr "극정대각"
 
-#: src/core/StelObject.cpp:702 src/gui/AstroCalcDialog.cpp:5395
+#: src/core/StelObject.cpp:761 src/gui/AstroCalcDialog.cpp:5395
 msgid "IAU Constellation"
 msgstr "IAU 별자리"
 
@@ -3502,45 +3535,55 @@ msgstr "딥스카이 천체 배경 이미지"
 msgid "Reload the deep-sky objects background images"
 msgstr "딥스카이 천체 배경 사진 다시 불러오기"
 
-#: src/core/StelSkyCultureMgr.cpp:169
+#: src/core/StelSkyCultureMgr.cpp:170
 msgctxt "sky culture classification"
 msgid "ethnographic"
 msgstr "민속적"
 
-#: src/core/StelSkyCultureMgr.cpp:170
+#: src/core/StelSkyCultureMgr.cpp:171
 msgid ""
 "Provided by ethnographic researchers based on interviews of indigenous "
 "people."
 msgstr "토착인과의 면담을 바탕으로 한 민속학자들의 연구를 기반으로 합니다."
 
-#: src/core/StelSkyCultureMgr.cpp:174
+#: src/core/StelSkyCultureMgr.cpp:175
 msgctxt "sky culture classification"
 msgid "historical"
 msgstr "역사적"
 
-#: src/core/StelSkyCultureMgr.cpp:175
+#: src/core/StelSkyCultureMgr.cpp:176
 msgid ""
 "Provided by historians based on historical written sources from a (usually "
 "short) period of the past."
 msgstr "과거에 작성된 역사 기록을 바탕으로 한 역사학자들의 연구를 기반으로 합니다."
 
-#: src/core/StelSkyCultureMgr.cpp:179
+#: src/core/StelSkyCultureMgr.cpp:180
 msgctxt "sky culture classification"
 msgid "single"
 msgstr "단일"
 
-#: src/core/StelSkyCultureMgr.cpp:180
+#: src/core/StelSkyCultureMgr.cpp:181
 msgid ""
 "Represents a single source like a historical atlas, or publications of a "
 "single author."
 msgstr "아틀라스 역사서나 단일 저자가 작성한 출판물 등, 단일 출처를 기반으로 합니다."
 
-#: src/core/StelSkyCultureMgr.cpp:184
+#: src/core/StelSkyCultureMgr.cpp:185
+msgctxt "sky culture classification"
+msgid "comparative"
+msgstr ""
+
+#: src/core/StelSkyCultureMgr.cpp:186
+msgid ""
+"Compares and confronts elements from at least sky cultures with each other."
+msgstr ""
+
+#: src/core/StelSkyCultureMgr.cpp:190
 msgctxt "sky culture classification"
 msgid "traditional"
 msgstr "전통적"
 
-#: src/core/StelSkyCultureMgr.cpp:185
+#: src/core/StelSkyCultureMgr.cpp:191
 msgid ""
 "Content represents 'common' knowledge by several members of an ethnic "
 "community, and the sky culture has been developed by members of such "
@@ -3548,12 +3591,12 @@ msgid ""
 msgstr ""
 "내용물은 특정한 민족 공동체의 '상식'으로 여겨지는 내용을 보이며, 하늘 문화는 해당 공동체의 구성원들을 통해 발전해 왔습니다."
 
-#: src/core/StelSkyCultureMgr.cpp:189
+#: src/core/StelSkyCultureMgr.cpp:195
 msgctxt "sky culture classification"
 msgid "personal"
 msgstr "개인적"
 
-#: src/core/StelSkyCultureMgr.cpp:190
+#: src/core/StelSkyCultureMgr.cpp:196
 msgid ""
 "This is a personally developed sky culture which is not founded in published"
 " historical or ethnological research. Stellarium may include it when it is "
@@ -3562,31 +3605,31 @@ msgstr ""
 "역사적 또는 민속적 연구를 기반으로 하지 않은, 개인이 개발한 하늘 문화입니다. 스텔라리움에서는 내용을 특별히 승인하지 않은 채로 "
 "'충분히 괜찮아서' 포함할 수 있습니다."
 
-#: src/core/StelSkyCultureMgr.cpp:194
+#: src/core/StelSkyCultureMgr.cpp:200
 msgctxt "sky culture classification"
 msgid "incomplete"
 msgstr "미완성"
 
-#: src/core/StelSkyCultureMgr.cpp:195
+#: src/core/StelSkyCultureMgr.cpp:201
 msgid ""
 "The accuracy of the sky culture description cannot be given, although it "
 "looks like it is built on a solid background. More work would be needed."
 msgstr "무엇인가 바탕으로 하였지만, 이 하늘 문화 설명의 정확도는 알 수 없습니다. 추가적인 작업이 필요합니다."
 
-#: src/core/StelSkyCultureMgr.cpp:199
+#: src/core/StelSkyCultureMgr.cpp:205
 msgctxt "sky culture classification"
 msgid "undefined"
 msgstr "정의되지 않음"
 
-#: src/core/StelSkyCultureMgr.cpp:206
+#: src/core/StelSkyCultureMgr.cpp:212
 msgid "Classification"
 msgstr "분류"
 
-#: src/core/StelSkyCultureMgr.cpp:268
+#: src/core/StelSkyCultureMgr.cpp:274
 msgid "No description"
 msgstr "설명 없음"
 
-#: src/core/StelSkyCultureMgr.cpp:301
+#: src/core/StelSkyCultureMgr.cpp:307
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:202
 msgid "References"
 msgstr "참고"
@@ -7475,568 +7518,578 @@ msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:466
-msgid "Anutan"
+msgid "Greek (Farnese + Almagest)"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:468
-msgid "Arabic Moon Stations"
-msgstr "아라비아"
+msgid "Greek (Leiden Aratea + Almagest)"
+msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:470
-msgid "Armintxe"
+msgid "Anutan"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:472
+msgid "Arabic Moon Stations"
+msgstr "아라비아"
+
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:474
+msgid "Armintxe"
+msgstr ""
+
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:476
 msgid "Aztec"
 msgstr "아즈텍"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:474
+#: src/translations.h:478
 msgid "Belarusian"
 msgstr "벨라루스"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:476
+#: src/translations.h:480
 msgid "Boorong"
 msgstr "부롱"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:478 plugins/Calendars/src/ui_calendarsDialog.h:841
+#: src/translations.h:482 plugins/Calendars/src/ui_calendarsDialog.h:841
 msgid "Chinese"
 msgstr "중국"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:480
+#: src/translations.h:484
 msgid "Chinese Contemporary"
 msgstr "현대 중국"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:482
+#: src/translations.h:486
 msgid "Chinese Medieval"
 msgstr "중세 중국"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:484
+#: src/translations.h:488
 msgid "Egyptian"
 msgstr "이집트"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:486
+#: src/translations.h:490
 msgid "Hawaiian Starlines"
 msgstr "하와이"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:488
+#: src/translations.h:492
 msgid "Inuit"
 msgstr "이뉴잇"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:490
+#: src/translations.h:494
 msgid "Indian Vedic"
 msgstr "인도 베다"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:492
+#: src/translations.h:496
 msgid "Japanese Moon Stations"
 msgstr "일본"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:494
+#: src/translations.h:498
 msgid "Kamilaroi/Euahlayi"
 msgstr "가밀라라이/에우알라이"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:496
+#: src/translations.h:500
 msgid "Korean"
 msgstr "한국"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:498
+#: src/translations.h:502
 msgid "Dakota/Lakota/Nakota"
 msgstr "다코타/라코타/나코타"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:500
+#: src/translations.h:504
 msgid "Macedonian"
 msgstr "마케도니아"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:502
+#: src/translations.h:506
 msgid "Maori"
 msgstr "마오리"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:504
+#: src/translations.h:508
 msgid "Maya"
 msgstr "마야"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:506
+#: src/translations.h:510
 msgid "Mongolian"
 msgstr "몽골"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:508
+#: src/translations.h:512
 msgid "Lokono"
 msgstr "로코노"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:510
+#: src/translations.h:514
 msgid "Navajo"
 msgstr "나바호"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:512
+#: src/translations.h:516
 msgid "Norse"
 msgstr "고대 스칸디나비아"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:514
+#: src/translations.h:518
 msgid "Ojibwe"
 msgstr "오지브웨"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:516
+#: src/translations.h:520
 msgid "Romanian"
 msgstr "로마"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:518
+#: src/translations.h:522
 msgid "Sami"
 msgstr "스칸디나비아"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:520
+#: src/translations.h:524
 msgid "Sardinian"
 msgstr "사르디아"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:522
+#: src/translations.h:526
 msgid "Siberian"
 msgstr "시베리아"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:524
+#: src/translations.h:528
 msgid "Tukano"
 msgstr "투카노"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:526
+#: src/translations.h:530
 msgid "Tupi-Guarani"
 msgstr "투피-과라니"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:528
+#: src/translations.h:532
 msgid "Tongan"
 msgstr "통가"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:530
+#: src/translations.h:534
 msgid "Western"
 msgstr "서양"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:532
+#: src/translations.h:536
 msgid "Western (H.A.Rey)"
 msgstr "서양 (H.A.Rey)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:534
+#: src/translations.h:538
 msgid "Western (O.Hlad)"
 msgstr "서양 (O.Hlad)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:536
+#: src/translations.h:540
 msgid "Western (Sky & Telescope)"
 msgstr "서양 (Sky & Telescope)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:538
-msgid "Western (Sternenkarten)"
-msgstr ""
-
-#. TRANSLATORS: Name of the sky cultur
-#: src/translations.h:540
-msgid "Northern Andes"
-msgstr "안데스 북부"
-
-#. TRANSLATORS: Name of the sky culture
 #: src/translations.h:542
-msgid "Babylonian (MUL.APIN)"
+msgid "Western (Sternenkarten)"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:544
-msgid "Babylonian (Seleucid)"
-msgstr ""
+msgid "Northern Andes"
+msgstr "안데스 북부"
 
-#. TRANSLATORS: Name of the sky culture and landscape
+#. TRANSLATORS: Name of the sky culture
 #: src/translations.h:546
-msgid "Armintxe Cave"
+msgid "Babylonian (MUL.APIN)"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:548
+msgid "Babylonian (Seleucid)"
+msgstr ""
+
+#. TRANSLATORS: Name of the sky culture and landscape
+#: src/translations.h:550
+msgid "Armintxe Cave"
+msgstr ""
+
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:552
 msgid "Vanuatu (Netwar)"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:553
+#: src/translations.h:557
 msgid "Guereins"
 msgstr "괴레인스"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:555
+#: src/translations.h:559
 msgid "Trees"
 msgstr "나무"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:557 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1448
+#: src/translations.h:561 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1448
 msgid "Moon"
 msgstr "달"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:559
+#: src/translations.h:563
 msgid "Hurricane"
 msgstr "허리케인 릿지"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:561
+#: src/translations.h:565
 msgid "Ocean"
 msgstr "바다"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:563
+#: src/translations.h:567
 msgid "Garching"
 msgstr "가르힝"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:565 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1460
+#: src/translations.h:569 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1460
 msgid "Mars"
 msgstr "화성"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:567 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1463
+#: src/translations.h:571 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1463
 msgid "Jupiter"
 msgstr "목성"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:569 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1466
+#: src/translations.h:573 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1466
 msgid "Saturn"
 msgstr "토성"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:571
+#: src/translations.h:575
 msgid "Uranus"
 msgstr "천왕성"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:573
+#: src/translations.h:577
 msgid "Neptune"
 msgstr "해왕성"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:575
+#: src/translations.h:579
 msgid "Geneva"
 msgstr "제네바"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:577
+#: src/translations.h:581
 msgid "Grossmugl"
 msgstr "그로스무글"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:579
+#: src/translations.h:583
 msgid "Zero Horizon"
 msgstr "수평선"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:581 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1445
+#: src/translations.h:585 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1445
 msgid "Sun"
 msgstr "태양"
 
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
-#: src/translations.h:586
+#: src/translations.h:590
 msgid "Vienna Sterngarten"
 msgstr "비엔나 스타 가든"
 
 #. TRANSLATORS: Name of 3D scene
-#: src/translations.h:588
+#: src/translations.h:592
 msgid "Testscene"
 msgstr "실험용 풍경"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:593
+#: src/translations.h:597
 msgid "Landscape Tour"
 msgstr "풍경 둘러보기"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:595
+#: src/translations.h:599
 msgid "Partial Lunar Eclipse"
 msgstr "부분월식"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:597
+#: src/translations.h:601
 msgid "Total Lunar Eclipse"
 msgstr "개기월식"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:599
+#: src/translations.h:603
 msgid "Screensaver"
 msgstr "화면 보호기"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:601
+#: src/translations.h:605
 msgid "Solar Eclipse 2009"
 msgstr "2009년 일식"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:603
+#: src/translations.h:607
 msgid "Startup Script"
 msgstr "시작 스크립트"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:605
+#: src/translations.h:609
 msgid "Zodiac"
 msgstr "황도 12궁"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:607
+#: src/translations.h:611
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "수성에서 보는 3번의 일출과 일몰"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:609
+#: src/translations.h:613
 msgid "Double eclipse from Deimos in 2017"
 msgstr "2017년 데이모스에서 보는 2번의 식"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:611
+#: src/translations.h:615
 msgid "Double eclipse from Deimos in 2031"
 msgstr "2031년 데이모스에서 보는 2번의 식"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:613
+#: src/translations.h:617
 msgid "Eclipse from Olympus Mons Jan 2, 2021"
 msgstr "2021년 1월 2일 올림포스 산에서 보는 식"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:615
+#: src/translations.h:619
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "2048년 지구와 목성의 엄폐"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:617
+#: src/translations.h:621
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr "2027년 데이모스에서 보는 3번의 통과와 2번의 식"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:619
+#: src/translations.h:623
 msgid "Solar System Screensaver"
 msgstr "태양계 화면 보호기"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:621
+#: src/translations.h:625
 msgid "Constellations Tour"
 msgstr "별자리 둘러보기"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:623
+#: src/translations.h:627
 msgid "Western Constellations Tour"
 msgstr "서양 별자리 둘러보기"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:625
+#: src/translations.h:629
 msgid "Sun from different planets"
 msgstr "다른 행성들에서 보이는 태양"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:627
+#: src/translations.h:631
 msgid "Earth best views from other bodies"
 msgstr "다른 천체에서 바라본 지구의 가장 좋은 모습"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:629
+#: src/translations.h:633
 msgid "Transit of Venus"
 msgstr "금성의 통과"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:631
+#: src/translations.h:635
 msgid "Sky Culture Tour"
 msgstr "하늘 문화 둘러보기"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:633
+#: src/translations.h:637
 msgid "Earth Events from Mercury"
 msgstr "수성에서 보는 지구의 사건들"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:635
+#: src/translations.h:639
 msgid "Earth Events from a floating city on Venus"
 msgstr "금성의 공중부양 도시에서 보는 지구의 사건들"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:637
+#: src/translations.h:641
 msgid "Earth Events from Mars"
 msgstr "화성에서 보는 지구의 사건들"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:639
+#: src/translations.h:643
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr "화성에서 보는 지구 및 기타 행성들의 최대 이각 및 충"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:641
+#: src/translations.h:645
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr "칼리스토에서 보는 지구와 화성의 최대 이각과 통과"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:643
+#: src/translations.h:647
 msgid "Tycho's Supernova"
 msgstr "티코의 초신성"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:645
+#: src/translations.h:649
 msgid "Earth and other Planets from Ceres"
 msgstr "세레스에서 보는 지구 및 기타 행성들"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:647
+#: src/translations.h:651
 msgid "Messier Objects Tour"
 msgstr "메시에 천체 둘러보기"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:649
+#: src/translations.h:653
 msgid "Binocular Highlights"
 msgstr "쌍안경으로 보기 좋은 천체들"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:651
+#: src/translations.h:655
 msgid "20 Fun Naked-Eye Double Stars"
 msgstr "재미있는 20개의 육안 관측 가능 이중성들"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:653
+#: src/translations.h:657
 msgid "List of largest known stars"
 msgstr "큰 별 목록"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:655
+#: src/translations.h:659
 msgid "Herschel 400 Tour"
 msgstr "허셜의 400개 별 둘러보기"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:657
+#: src/translations.h:661
 msgid "Binosky: Deep Sky Objects for Binoculars"
 msgstr "쌍안천: 쌍안경으로 보는 딥스카이 천체"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:659
+#: src/translations.h:663
 msgid "The Jack Bennett Catalog"
 msgstr "잭 베넷 목록"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:661
+#: src/translations.h:665
 msgid "Best objects in the New General Catalog"
 msgstr "신판일반목록(NGC)의 좋은 천체들"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:663
+#: src/translations.h:667
 msgid "Jupiter and triple shadow phenomena"
 msgstr "목성과 삼중 그림자 현상"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:665
+#: src/translations.h:669
 msgid "Jupiter without Galilean satellites"
 msgstr "갈릴레이 위성을 제외한 목성"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:667
+#: src/translations.h:671
 msgid "Skybox Tiles"
 msgstr "스카이박스 타일"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:669
+#: src/translations.h:673
 msgid "Occultations of bright stars by planets"
 msgstr "행성에 의한 밝은 별의 엄폐"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:671
+#: src/translations.h:675
 msgid "Mutual occultations of planets"
 msgstr "행성 간의 엄폐"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:673
+#: src/translations.h:677
 msgid "Planet Objects Tour"
 msgstr "행성 둘러보기"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:675
+#: src/translations.h:679
 msgid "Analemma"
 msgstr "아날렘마"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:677
+#: src/translations.h:681
 msgid "Martian analemma"
 msgstr "화성에서의 아날렘마"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:679
+#: src/translations.h:683
 msgid "Saturnian analemma"
 msgstr "토성에서의 아날렘마"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:681
+#: src/translations.h:685
 msgid "Uranian analemma"
 msgstr "천왕성에서의 아날렘마"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:683
+#: src/translations.h:687
 msgid "Messier Marathon"
 msgstr "메시에 마라톤"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:685
+#: src/translations.h:689
 msgid "Random location"
 msgstr ""
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:691
+#: src/translations.h:695
 msgid "Look around each installed landscape."
 msgstr "설치된 풍경들을 둘러봅니다."
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:693
+#: src/translations.h:697
 msgid "Look at each installed sky culture."
 msgstr "설치된 하늘 문화들을 둘러봅니다."
 
-#: src/translations.h:694
+#: src/translations.h:698
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "부분월식을 보여주는 스크립트"
 
-#: src/translations.h:695
+#: src/translations.h:699
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "개기월식을 보여주는 스크립트"
 
-#: src/translations.h:696
+#: src/translations.h:700
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr "임의의 천체를 둘러보며 하늘을 느리고 무한하게 여행합니다."
 
-#: src/translations.h:697
+#: src/translations.h:701
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr "2009년에 일어난 개기일식을 보여주는 스크립트 (위치=Rangpur, 방글라데시)"
 
-#: src/translations.h:698
+#: src/translations.h:702
 msgid "Script which runs automatically at startup"
 msgstr "프로그램을 시작할 때 자동으로 실행하는 스크립트"
 
-#: src/translations.h:699
+#: src/translations.h:703
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -8044,13 +8097,13 @@ msgid ""
 msgstr ""
 "이 스크립트는 황도 12궁의 별자리들을 표시합니다. 이 별자리들은 1년 동안 천구에서 태양이 가로지르는 가상의 길 주위의 별자리들입니다."
 
-#: src/translations.h:700
+#: src/translations.h:704
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
 msgstr "특정 지점에서 수성의 궤도와 공전이 교묘하게 맞물리면서 태양이 수성의 하루 동안 3번 뜨고 지게 됩니다."
 
-#: src/translations.h:701
+#: src/translations.h:705
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -8058,7 +8111,7 @@ msgstr ""
 "화성이 태양을 가리기 직전에 포보스가 화성 뒤에서 튀어나와 먼저 식을 이룹니다. 이 현상은 2017년 4월 26일에 전갈자리와 궁수자리 "
 "사이에서 일어납니다."
 
-#: src/translations.h:702
+#: src/translations.h:706
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -8066,11 +8119,11 @@ msgstr ""
 "화성이 태양을 가리기 직전에 포보스가 화성 뒤에서 튀어나와 먼저 식을 이룹니다. 이 현상은 2031년 7월 23일에 황소자리와 쌍둥이자리"
 " 사이에서 일어납니다."
 
-#: src/translations.h:703
+#: src/translations.h:707
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 2, 2021."
 msgstr "올림포스 산에서 포보스가 태양을 가립니다. 이 현상은 2021년 1월 2일에 일어납니다."
 
-#: src/translations.h:704
+#: src/translations.h:708
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But"
 " occultations of both on the same day are very rare. Here's one that takes "
@@ -8079,7 +8132,7 @@ msgstr ""
 "포보스가 지구를 엄폐하는 것은 흔한 일입니다. 그리고 목성를 엄폐하는 것도 흔한 일입니다. 그러나 같은 날에 두 엄폐가 모두 일어나는 "
 "것은 매우 드문 일입니다. 이 스크립트는 2048년 1월 23일에 이런 일이 발생하는 것을 보여줍니다. 속도는 실제 속도입니다."
 
-#: src/translations.h:705
+#: src/translations.h:709
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -8092,45 +8145,45 @@ msgstr ""
 " 뒤 화성이 태양을 가리며 식을 이루고, 포보스는 그 때 화성과 데이모스 사이에서 다시 통과합니다. 포보스가 화성에서 빠져나올 때 "
 "포보스는 아직 식 중이기 때문에 화성의 그림자에서 흐릿하게 빛나고, 잠시 후 밝아집니다."
 
-#: src/translations.h:706
+#: src/translations.h:710
 msgid ""
 "Screensaver of various happenings in the Solar System. 313 events in all!"
 msgstr ""
 
-#: src/translations.h:707
+#: src/translations.h:711
 msgid "A tour of the western constellations."
 msgstr "서양 별자리 둘러보기"
 
-#: src/translations.h:708
+#: src/translations.h:712
 msgid "A tour of the constellations of the selected sky culture."
 msgstr "선택한 하늘 문화의 별자리 둘러보기"
 
-#: src/translations.h:709
+#: src/translations.h:713
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "태양계의 거대 행성들과 명왕성에서 태양을 바라보세요."
 
-#: src/translations.h:710
+#: src/translations.h:714
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr "21세기에 다른 태양계 천체에서 바라본 지구의 가장 좋은 모습을 제공합니다."
 
-#: src/translations.h:711
+#: src/translations.h:715
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr "호주의 시드니에서 2012년 6월 6일에 관측된 금성의 통과입니다."
 
-#: src/translations.h:712
+#: src/translations.h:716
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Historical "
 "Supernovae plugin has to be enabled."
 msgstr ""
 
-#: src/translations.h:713
+#: src/translations.h:717
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars "
 "2000-3000"
 msgstr "2000-3000년 사이에 화성에서 보이는 행성들의 최대 이각 및 충 현상입니다."
 
-#: src/translations.h:714
+#: src/translations.h:718
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -8140,24 +8193,24 @@ msgstr ""
 "2000년부터 3000년까지 칼리스토에서 보는 지구와 화성의 최대 이각과 통과. 왜 칼리스토냐고요? 갈릴레이 위성 4개 중 칼리스토는 "
 "목성의 자기장대에서 벗어난 유일한 위성입니다. 그러므로 만약 인류가 목성의 위성을 식민지로 삼는다면, 칼리스토가 그 대상이 되겠죠."
 
-#: src/translations.h:715
+#: src/translations.h:719
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-2200"
 msgstr "2000-2200년 사이에 세레스에서 보이는 행성들의 최대 이각 및 충 현상입니다."
 
-#: src/translations.h:716
+#: src/translations.h:720
 msgid "A tour of Messier Objects"
 msgstr "메시에 천체 둘러보기"
 
-#: src/translations.h:717
+#: src/translations.h:721
 msgid ""
 "Tours around interesting objects, which accessible to observation with "
 "binoculars. The data for the script are taken from the eponymous book by "
 "Gary Seronik."
 msgstr "쌍안경으로 볼 수 있는 흥미로운 천체들을 둘러봅니다. 스크립트에 쓰인 자료는 개리 세로닉의 책에서 가져왓습니다."
 
-#: src/translations.h:718
+#: src/translations.h:722
 msgid ""
 "This script helps you make an excursion around 20 fun double stars. The list"
 " has been collected by Jerry Lodriguss and published in Sky & Telescope "
@@ -8166,15 +8219,15 @@ msgstr ""
 "흥미로운 이중성 20개를 둘러보게 해 주는 스크립트로, 자료는 제리 로드리구스가 2014년 9월 Sky & Telescope에 발표한 "
 "자료를 그의 웹사이트 http://www.astropix.com/doubles/ 에서 가져왔습니다."
 
-#: src/translations.h:719
+#: src/translations.h:723
 msgid "This script helps you make an excursion around largest known stars."
 msgstr "큰 별들을 둘러볼 수 있게 해 주는 스크립트입니다."
 
-#: src/translations.h:720
+#: src/translations.h:724
 msgid "A tour around objects from the Herschel 400 Catalogue"
 msgstr "허셜의 400개 별 목록을 둘러보는 스크립트입니다."
 
-#: src/translations.h:721
+#: src/translations.h:725
 msgid ""
 "Ben Crowell has created Binosky, an observing list of Deep Sky Objects for "
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
@@ -8183,27 +8236,27 @@ msgstr ""
 "벤 크로웰이 작성한 \"쌍안경을 위한 딥스카이 천체 목록\", 또는 줄여서 \"쌍안천\" 중 31개를 적경(J2000)순으로 보여주는 "
 "스크립트입니다."
 
-#: src/translations.h:722
+#: src/translations.h:726
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
 "The Bennett catalog was contributed by Auke Slotegraaf."
 msgstr "잭 베넷이 작성한 남반구 딥스카이 천체 목록(152개)으로, Auke Slotegraa가 추가했습니다."
 
-#: src/translations.h:723
+#: src/translations.h:727
 msgid ""
 "This list of 111 objects by A.J. Crayon and Steve Coe is used by members of "
 "the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC "
 "achievement award."
 msgstr "피닉스의 사구아로 천문 동아리에서 작성한 목록으로, NGC 천체 111개가 포함되어 있습니다."
 
-#: src/translations.h:724
+#: src/translations.h:728
 msgid ""
 "Demonstration of the mid-time of rare events - triple shadow phenomena of "
 "the satellites of Jupiter from 1900 to 2100. All events are given in "
 "Dynamical Time."
 msgstr "중반기 희귀 현상 소개 - 1900년부터 2100년까지 일어나는 삼중 목성 위성식입니다. 모든 현상은 역학시 기준입니다."
 
-#: src/translations.h:725
+#: src/translations.h:729
 msgid ""
 "The planet Jupiter sometimes appears to be without moons, when the four "
 "Galilean satellites are simultaneously invisible because they are passing "
@@ -8214,47 +8267,47 @@ msgstr ""
 "목성의 갈릴레이 위성들은 간혹 넷 모두 행성 앞에 있거나(통과), 행성 뒤에 있거나(엄폐), 그림자 속에 있어(식) 목성이 위성 없이 "
 "보이기도 합니다. 이 스크립트는 희귀한 이 현상을 1900년부터 2100년까지 역학시 기준으로 보여줍니다."
 
-#: src/translations.h:726
+#: src/translations.h:730
 msgid ""
 "This script demonstrates interesting phenomena - occultations bright stars "
 "by planets, 2000 to 2040."
 msgstr "이 스크립트는 밝은 별이 행성에 의해 엄폐되는 흥미로운 현상을 보여줍니다. 범위는 2000년부터 2040년까지입니다."
 
-#: src/translations.h:727
+#: src/translations.h:731
 msgid ""
 "This script demonstrates interesting and very rare phenomena - mutual "
 "occultations of planets, 0 to 2500."
 msgstr "이 스크립트는 행성이 서로를 엄폐하는 희귀한 현상을 보여줍니다. 범위는 0년부터 2500년까지입니다."
 
-#: src/translations.h:728
+#: src/translations.h:732
 msgid "A tour of the Solar System planets"
 msgstr "태양계 천체 둘러보기"
 
-#: src/translations.h:729
+#: src/translations.h:733
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Earth."
 msgstr "아날렘마 설명 - 지구에서 태양이 하늘에서 한 해 동안 그리는 경로"
 
-#: src/translations.h:730
+#: src/translations.h:734
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Mars."
 msgstr "아날렘마 설명 - 화성에서 태양이 하늘에서 한 해 동안 그리는 경로"
 
-#: src/translations.h:731
+#: src/translations.h:735
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Saturn."
 msgstr "아날렘마 설명 - 토성에서 태양이 하늘에서 한 해 동안 그리는 경로"
 
-#: src/translations.h:732
+#: src/translations.h:736
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Uranus."
 msgstr "아날렘마 설명 - 천왕성에서 태양이 하늘에서 한 해 동안 그리는 경로"
 
-#: src/translations.h:733
+#: src/translations.h:737
 msgid ""
 "Messier Marathon on March 20, 2020. The data for the script are taken from "
 "GaoXing's observation log: http://www.xjltp.com/2_huodong/2_030301.htm"
@@ -8262,7 +8315,7 @@ msgstr ""
 "2020년 3월 20일의 메시에 마라톤. 자료는 가오싱의 관측 기록에서 발췌: "
 "http://www.xjltp.com/2_huodong/2_030301.htm"
 
-#: src/translations.h:734
+#: src/translations.h:738
 msgid ""
 "Creates 6 tiles (North/East/South/West/Up/Down) for a skybox. These can be "
 "further used e.g. in Unity3D or other 3D environments. Output directory and "
@@ -8272,186 +8325,186 @@ msgid ""
 "to apply it to your projects."
 msgstr ""
 
-#: src/translations.h:735
+#: src/translations.h:739
 msgid ""
 "This script will help you make practical works for celestial navigation - he"
 " sets a random location and hides it from the GUI."
 msgstr ""
 
-#: src/translations.h:739
+#: src/translations.h:743
 msgid "&Undo"
 msgstr "실행 취소 (&U)"
 
-#: src/translations.h:740
+#: src/translations.h:744
 msgid "&Redo"
 msgstr "다시 실행 (&R)"
 
-#: src/translations.h:741
+#: src/translations.h:745
 msgid "Cu&t"
 msgstr "잘라내기 (&t)"
 
-#: src/translations.h:742
+#: src/translations.h:746
 msgid "&Copy"
 msgstr "복사 (&C)"
 
-#: src/translations.h:743
+#: src/translations.h:747
 msgid "&Paste"
 msgstr "붙여넣기 (&P)"
 
-#: src/translations.h:744 plugins/Oculars/src/ui_ocularDialog.h:1542
+#: src/translations.h:748 plugins/Oculars/src/ui_ocularDialog.h:1542
 #: plugins/Oculars/src/ui_ocularDialog.h:1551
 #: plugins/Oculars/src/ui_ocularDialog.h:1557
 #: plugins/Oculars/src/ui_ocularDialog.h:1576
 msgid "Delete"
 msgstr "삭제"
 
-#: src/translations.h:745
+#: src/translations.h:749
 msgid "Select All"
 msgstr "모두 선택"
 
-#: src/translations.h:746
+#: src/translations.h:750
 msgid "Look in:"
 msgstr "보기:"
 
-#: src/translations.h:747
+#: src/translations.h:751
 msgid "Directory:"
 msgstr "주소:"
 
-#: src/translations.h:748
+#: src/translations.h:752
 msgid "Folder"
 msgstr "폴더"
 
-#: src/translations.h:749
+#: src/translations.h:753
 msgid "&Choose"
 msgstr "선택 (&C)"
 
-#: src/translations.h:750 src/ui_configurationDialog.h:1875
+#: src/translations.h:754 src/ui_configurationDialog.h:1875
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:644
 msgid "Cancel"
 msgstr "취소"
 
-#: src/translations.h:751
+#: src/translations.h:755
 msgid "&Cancel"
 msgstr "취소 (&C)"
 
-#: src/translations.h:752
+#: src/translations.h:756
 msgid "Files of type:"
 msgstr "파일 유형:"
 
-#: src/translations.h:753
+#: src/translations.h:757
 msgid "Date Modified"
 msgstr "수정한 날짜"
 
-#: src/translations.h:754
+#: src/translations.h:758
 msgid "Directories"
 msgstr "주소"
 
-#: src/translations.h:755
+#: src/translations.h:759
 msgid "Computer"
 msgstr "컴퓨터"
 
-#: src/translations.h:756
+#: src/translations.h:760
 msgid "&Open"
 msgstr "열기 (&O)"
 
-#: src/translations.h:757
+#: src/translations.h:761
 msgid "&Save"
 msgstr "저장 (&S)"
 
-#: src/translations.h:758
+#: src/translations.h:762
 msgid "File &name:"
 msgstr "파일 이름 (&n):"
 
-#: src/translations.h:759
+#: src/translations.h:763
 msgid "Copy &Link Location"
 msgstr "링크 주소 복사 (&L)"
 
-#: src/translations.h:760
+#: src/translations.h:764
 msgid "Abort"
 msgstr "중단"
 
-#: src/translations.h:761
+#: src/translations.h:765
 msgid "Ignore"
 msgstr "무시"
 
-#: src/translations.h:762
+#: src/translations.h:766
 msgid "&Basic colors"
 msgstr "기본 색상 (&B)"
 
-#: src/translations.h:763
+#: src/translations.h:767
 msgid "&Pick Screen Color"
 msgstr "화면 색 고르기 (&P)"
 
-#: src/translations.h:764
+#: src/translations.h:768
 msgid "&Custom colors"
 msgstr "사용자 색상 (&C)"
 
-#: src/translations.h:765
+#: src/translations.h:769
 msgid "&Add to Custom Colors"
 msgstr "사용자 색상에 추가 (&A)"
 
-#: src/translations.h:766
+#: src/translations.h:770
 msgid "Hu&e:"
 msgstr "색조 (&e)"
 
-#: src/translations.h:767
+#: src/translations.h:771
 msgid "&Sat:"
 msgstr "농도 (&S)"
 
-#: src/translations.h:768
+#: src/translations.h:772
 msgid "&Val:"
 msgstr "광도 (&V)"
 
-#: src/translations.h:769
+#: src/translations.h:773
 msgid "&Red:"
 msgstr "빨강 (&R)"
 
-#: src/translations.h:770
+#: src/translations.h:774
 msgid "&Green:"
 msgstr "초록 (&G)"
 
-#: src/translations.h:771
+#: src/translations.h:775
 msgid "Bl&ue:"
 msgstr "파랑 (&u)"
 
-#: src/translations.h:772
+#: src/translations.h:776
 msgid "Select Color"
 msgstr "색상 선택"
 
-#: src/translations.h:773
+#: src/translations.h:777
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "커서를 %1, %2에 놓습니다. 취소하려면 ESC를 누르세요"
 
-#: src/translations.h:774
+#: src/translations.h:778
 msgid "Back"
 msgstr "뒤로"
 
-#: src/translations.h:775
+#: src/translations.h:779
 msgid "Forward"
 msgstr "앞으로"
 
-#: src/translations.h:776
+#: src/translations.h:780
 msgid "Parent Directory"
 msgstr "상위 주소:"
 
-#: src/translations.h:777
+#: src/translations.h:781
 msgid "Create New Folder"
 msgstr "새 폴더 만들기"
 
-#: src/translations.h:778
+#: src/translations.h:782
 msgid "List View"
 msgstr "목록 보기"
 
-#: src/translations.h:779
+#: src/translations.h:783
 msgid "Detail View"
 msgstr "상세 보기"
 
-#: src/translations.h:780
+#: src/translations.h:784
 msgid "Recent Places"
 msgstr "최근 위치"
 
-#: src/translations.h:781
+#: src/translations.h:785
 #, qt-format
 msgid ""
 "%1 already exists.\n"
@@ -8460,39 +8513,39 @@ msgstr ""
 "%1이 이미 존재합니다.\n"
 "새 파일로 덮어쓸까요?"
 
-#: src/translations.h:782
+#: src/translations.h:786
 msgid "&Yes"
 msgstr "네 (&Y)"
 
-#: src/translations.h:783
+#: src/translations.h:787
 msgid "&No"
 msgstr "아니요 (&N)"
 
-#: src/translations.h:784
+#: src/translations.h:788
 msgid "&Select All"
 msgstr "모두 선택 (&S)"
 
-#: src/translations.h:785
+#: src/translations.h:789
 msgid "&Step up"
 msgstr "단계 올리기 (&S)"
 
-#: src/translations.h:786
+#: src/translations.h:790
 msgid "Step &down"
 msgstr "단계 내리기 (&d)"
 
-#: src/translations.h:787
+#: src/translations.h:791
 msgid "&Rename"
 msgstr ""
 
-#: src/translations.h:788
+#: src/translations.h:792
 msgid "&Delete"
 msgstr "&삭제"
 
-#: src/translations.h:789
+#: src/translations.h:793
 msgid "&New Folder"
 msgstr "&새 폴더"
 
-#: src/translations.h:790
+#: src/translations.h:794
 msgid "Show &hidden files"
 msgstr "파일 보이기&숨기기"
 
@@ -9197,7 +9250,7 @@ msgstr ""
 #. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Cognitum
 #: src/translations_regions.h:349
-msgid "Sea of Knowledge"
+msgid "Sea that has Become Known"
 msgstr ""
 
 #. TRANSLATORS: Name of region on the Moon
@@ -9251,7 +9304,7 @@ msgstr ""
 #. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Imbrium
 #: src/translations_regions.h:373
-msgid "Sea of Rains"
+msgid "Sea of Showers"
 msgstr ""
 
 #. TRANSLATORS: Name of region on the Moon
@@ -9314,7 +9367,7 @@ msgstr ""
 #. %5E_-_Geographicus_-_MoonPhysical-usgs-1961.jpg
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Orientale
 #: src/translations_regions.h:401
-msgid "Eastern sea"
+msgid "Eastern Sea"
 msgstr ""
 
 #. TRANSLATORS: Name of region on the Moon
@@ -10532,7 +10585,7 @@ msgid "Sun's glare"
 msgstr ""
 
 #: src/ui_viewDialog.h:3294
-msgid "Toggle permanent drawing Sun's corona when atmosphere is disabled"
+msgid "Toggle permanent drawing of Sun's corona when atmosphere is disabled"
 msgstr ""
 
 #: src/ui_viewDialog.h:3296

@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-09-04 14:06+0700\n"
+"POT-Creation-Date: 2021-09-19 17:40+0700\n"
 "PO-Revision-Date: 2017-11-29 01:17+0000\n"
 "Last-Translator: Latein Lebt, 2021\n"
 "Language-Team: German (https://www.transifex.com/stellarium/teams/80998/de/)\n"
@@ -7323,7 +7323,9 @@ msgstr "Delle Caustiche"
 msgid "Winnecke 4"
 msgstr "Winnecke 4"
 
-#: nebulae/default/names.dat:870 skycultures/western_rey/star_names.fab:26
+#: nebulae/default/names.dat:870
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:49
+#: skycultures/western_rey/star_names.fab:26
 msgid "Pleiades"
 msgstr "Plejaden"
 
@@ -8598,6 +8600,8 @@ msgstr "Neuauflage der Ente"
 #: nebulae/default/names.dat:1224
 #: skycultures/egyptian/constellation_names.eng.fab:6
 #: skycultures/greek_almagest/constellation_names.eng.fab:9
+#: skycultures/greek_farnese/constellation_names.eng.fab:9
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:9
 msgid "Bird"
 msgstr "Vogel"
 
@@ -9350,6 +9354,8 @@ msgstr "Kassiopeia"
 #: skycultures/al-sufi/constellation_names.eng.fab:11
 #: skycultures/chinese_contemporary/constellation_names.eng.fab:63
 #: skycultures/greek_almagest/constellation_names.eng.fab:11
+#: skycultures/greek_farnese/constellation_names.eng.fab:11
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:11
 #: skycultures/western/constellation_names.eng.fab:63
 #: skycultures/western_rey/constellation_names.eng.fab:57
 #: skycultures/western_hlad/constellation_names.eng.fab:64
@@ -12690,6 +12696,8 @@ msgstr "der hinterste der zwei Sterne im Stachel"
 #: skycultures/al-sufi/star_names.fab:1301
 #: skycultures/greek_almagest/star_names.fab:1142
 #: skycultures/greek_almagest/dso_names.fab:17
+#: skycultures/greek_farnese/dso_names.fab:17
+#: skycultures/greek_leidenAratea/dso_names.fab:17
 msgid "The nebulous star to the rear of the sting"
 msgstr "der neblige Stern hinter dem Stern"
 
@@ -14234,7 +14242,7 @@ msgstr ""
 #: skycultures/al-sufi/star_names.fab:2255
 #: skycultures/greek_almagest/star_names.fab:1995
 msgid "The star in the middle of the little altar"
-msgstr ""
+msgstr "Der Stern in der Mitte des kleinen Altars"
 
 #: skycultures/al-sufi/star_names.fab:2256
 msgid "The northernmost of the three stars in the brazier"
@@ -14333,6 +14341,10 @@ msgstr "Schwanzquaste des Löwen"
 #: skycultures/al-sufi/dso_names.fab:4 skycultures/al-sufi/dso_names.fab:7
 #: skycultures/greek_almagest/dso_names.fab:2
 #: skycultures/greek_almagest/dso_names.fab:4
+#: skycultures/greek_farnese/dso_names.fab:2
+#: skycultures/greek_farnese/dso_names.fab:4
+#: skycultures/greek_leidenAratea/dso_names.fab:2
+#: skycultures/greek_leidenAratea/dso_names.fab:4
 msgid "The nebulous mass on the right hand"
 msgstr "die neblige Mass auf der rechten Hand"
 
@@ -14342,11 +14354,15 @@ msgstr ""
 
 #: skycultures/al-sufi/dso_names.fab:10
 #: skycultures/greek_almagest/dso_names.fab:9
+#: skycultures/greek_farnese/dso_names.fab:9
+#: skycultures/greek_leidenAratea/dso_names.fab:9
 msgid "The star on the place where the back joins [the horse's body]"
 msgstr ""
 
 #: skycultures/al-sufi/dso_names.fab:12
 #: skycultures/greek_almagest/dso_names.fab:7
+#: skycultures/greek_farnese/dso_names.fab:7
+#: skycultures/greek_leidenAratea/dso_names.fab:7
 msgid "The middle of the nebulous mass in the chest, called Praesepe"
 msgstr "die Mitte der nebligen Masse in der Brust, genannt Praesepe"
 
@@ -15147,6 +15163,8 @@ msgstr "Kleine Zwillinge"
 #: skycultures/babylonian_mulapin/constellation_names.eng.fab:7
 #: skycultures/babylonian_seleucid/constellation_names.eng.fab:7
 #: skycultures/greek_almagest/constellation_names.eng.fab:25
+#: skycultures/greek_farnese/constellation_names.eng.fab:25
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:24
 msgid "Crab"
 msgstr "Krebs"
 
@@ -15223,6 +15241,8 @@ msgstr "Ziege"
 #: skycultures/chinese/constellation_names.eng.fab:89
 #: skycultures/chinese_medieval/constellation_names.eng.fab:147
 #: skycultures/greek_almagest/constellation_names.eng.fab:38
+#: skycultures/greek_farnese/constellation_names.eng.fab:38
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:37
 #: skycultures/korean/constellation_names.eng.fab:47
 msgid "Dog"
 msgstr "Hund"
@@ -15246,6 +15266,8 @@ msgstr "Schwein"
 
 #: skycultures/babylonian_mulapin/constellation_names.eng.fab:26
 #: skycultures/greek_almagest/constellation_names.eng.fab:19
+#: skycultures/greek_farnese/constellation_names.eng.fab:19
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:18
 msgid "Horse"
 msgstr "Pferd"
 
@@ -15302,6 +15324,8 @@ msgstr "Hahn"
 
 #: skycultures/babylonian_mulapin/constellation_names.eng.fab:38
 #: skycultures/greek_almagest/constellation_names.eng.fab:15
+#: skycultures/greek_farnese/constellation_names.eng.fab:15
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:15
 #: skycultures/indian/constellation_names.eng.fab:113
 #: skycultures/korean/constellation_names.eng.fab:155
 msgid "Arrow"
@@ -15319,6 +15343,8 @@ msgstr "MUSCH-Schlange (Gott)"
 
 #: skycultures/babylonian_mulapin/constellation_names.eng.fab:41
 #: skycultures/greek_almagest/constellation_names.eng.fab:43
+#: skycultures/greek_farnese/constellation_names.eng.fab:43
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:42
 msgid "Raven"
 msgstr "Rabe"
 
@@ -15336,6 +15362,8 @@ msgstr "Gott Zababa"
 
 #: skycultures/babylonian_mulapin/constellation_names.eng.fab:45
 #: skycultures/babylonian_seleucid/constellation_names.eng.fab:44
+#: skycultures/greek_farnese/constellation_names.eng.fab:16
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:16
 msgid "Eagle"
 msgstr "Adler"
 
@@ -15388,6 +15416,8 @@ msgstr "Wilder Hund"
 #: skycultures/babylonian_mulapin/constellation_names.eng.fab:56
 #: skycultures/babylonian_seleucid/constellation_names.eng.fab:55
 #: skycultures/greek_almagest/constellation_names.eng.fab:29
+#: skycultures/greek_farnese/constellation_names.eng.fab:29
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:28
 #: skycultures/maya/constellation_names.eng.fab:6
 msgid "Scorpion"
 msgstr "Skorpion"
@@ -15510,6 +15540,8 @@ msgstr "glitzernde Sterne (Sternhaufen) des Alten Mannes"
 
 #: skycultures/babylonian_seleucid/constellation_names.eng.fab:5
 #: skycultures/greek_almagest/constellation_names.eng.fab:24
+#: skycultures/greek_farnese/constellation_names.eng.fab:24
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:23
 msgid "Twins"
 msgstr "Zwillinge"
 
@@ -17255,6 +17287,8 @@ msgstr "Drei Exzellenzen (im Purpurnen Verbotenen Bezirk)"
 #: skycultures/chinese/constellation_names.eng.fab:198
 #: skycultures/egyptian/constellation_names.eng.fab:8
 #: skycultures/greek_almagest/constellation_names.eng.fab:21
+#: skycultures/greek_farnese/constellation_names.eng.fab:21
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:20
 msgid "Triangle"
 msgstr "Dreieck"
 
@@ -53468,6 +53502,8 @@ msgstr "Zwei Pfosten"
 
 #: skycultures/egyptian/constellation_names.eng.fab:3
 #: skycultures/greek_almagest/constellation_names.eng.fab:26
+#: skycultures/greek_farnese/constellation_names.eng.fab:26
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:25
 msgid "Lion"
 msgstr "Löwe"
 
@@ -53619,45 +53655,65 @@ msgid "Great Bear"
 msgstr "Große Bärin"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:3
+#: skycultures/greek_farnese/constellation_names.eng.fab:3
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:3
 msgid "Dragon"
 msgstr "Drache"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:4
+#: skycultures/greek_farnese/constellation_names.eng.fab:4
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:4
 msgid "King Kepheus"
 msgstr "König Kepheus"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:5
+#: skycultures/greek_farnese/constellation_names.eng.fab:5
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:5
 #: skycultures/macedonian/constellation_names.eng.fab:13
 msgid "Ploughman"
 msgstr "Pflüger"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:6
+#: skycultures/greek_farnese/constellation_names.eng.fab:6
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:6
 msgid "Crown"
 msgstr "Kranz"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:7
+#: skycultures/greek_farnese/constellation_names.eng.fab:7
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:7
 msgid "Kneeler"
 msgstr "Kniender"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:8
+#: skycultures/greek_farnese/constellation_names.eng.fab:8
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:8
 msgid "Lyre"
 msgstr "Leier"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:10
+#: skycultures/greek_farnese/constellation_names.eng.fab:10
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:10
 msgid "Queen Kassiepeia"
 msgstr "Königin Kassiepeia"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:12
+#: skycultures/greek_farnese/constellation_names.eng.fab:12
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:12
 #: skycultures/indian/constellation_names.eng.fab:119
 #: skycultures/korean/constellation_names.eng.fab:77
 msgid "Charioteer"
 msgstr "Wagenlenker"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:13
+#: skycultures/greek_farnese/constellation_names.eng.fab:13
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:13
 msgid "Serpent Bearer"
 msgstr "Schlangenträger"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:14
+#: skycultures/greek_farnese/constellation_names.eng.fab:14
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:14
 #: skycultures/maya/constellation_names.eng.fab:7
 msgid "Snake"
 msgstr "Schlange"
@@ -53667,63 +53723,91 @@ msgid "Eagle with Antinoos"
 msgstr "Adler mit Antinoos"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:17
+#: skycultures/greek_farnese/constellation_names.eng.fab:17
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:17
 #: skycultures/indian/constellation_names.eng.fab:107
 msgid "Dolphin"
 msgstr "Delphin"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:18
+#: skycultures/greek_farnese/constellation_names.eng.fab:18
 msgid "Bust [of a Horse]"
 msgstr "Büste [eines Pferdes]"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:20
+#: skycultures/greek_farnese/constellation_names.eng.fab:20
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:19
 msgid "Princess Andromeda"
 msgstr "Prinzessin Andromeda"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:22
+#: skycultures/greek_farnese/constellation_names.eng.fab:22
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:21
 msgid "Ram"
 msgstr "Widder"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:23
+#: skycultures/greek_farnese/constellation_names.eng.fab:23
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:22
 msgid "Bull"
 msgstr "Stier"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:27
+#: skycultures/greek_farnese/constellation_names.eng.fab:27
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:26
 msgid "Maiden"
 msgstr "Junge Frau"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:28
+#: skycultures/greek_farnese/constellation_names.eng.fab:28
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:27
 msgid "Claws [of Scorpion]"
 msgstr "Scheren [des Skorpion]"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:30
+#: skycultures/greek_farnese/constellation_names.eng.fab:30
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:29
 msgid "Archer"
 msgstr "Bogenschütze"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:31
+#: skycultures/greek_farnese/constellation_names.eng.fab:31
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:30
 msgid "The One with the Goat's Horn"
 msgstr "Das Eine mit dem Ziegenhorn"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:32
+#: skycultures/greek_farnese/constellation_names.eng.fab:32
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:31
 msgid "Water-carrier"
 msgstr "Wasserträger"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:33
+#: skycultures/greek_farnese/constellation_names.eng.fab:33
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:32
 msgid "Fishes"
 msgstr "Fische"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:34
+#: skycultures/greek_farnese/constellation_names.eng.fab:34
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:33
 msgid "Sea Monster"
 msgstr "Seeungeheuer"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:35
+#: skycultures/greek_farnese/constellation_names.eng.fab:35
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:34
 msgid "Hero Orion"
 msgstr "Held Orion"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:36
+#: skycultures/greek_farnese/constellation_names.eng.fab:36
 msgid "River"
 msgstr "Fluß"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:37
+#: skycultures/greek_farnese/constellation_names.eng.fab:37
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:36
 msgid "Hare"
 msgstr "Hase"
 
@@ -53732,38 +53816,56 @@ msgid "The One before the Dog"
 msgstr "Der eine vor dem Hund"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:40
+#: skycultures/greek_farnese/constellation_names.eng.fab:40
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:39
 msgid "The Ship Argo"
 msgstr "Schiff Argo"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:41
+#: skycultures/greek_farnese/constellation_names.eng.fab:41
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:40
 msgid "Water Snake"
 msgstr "Wasserschlange"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:42
+#: skycultures/greek_farnese/constellation_names.eng.fab:42
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:41
 msgid "Vessel"
 msgstr "Weinmischer"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:44
+#: skycultures/greek_farnese/constellation_names.eng.fab:44
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:43
 msgid "Kentaur"
 msgstr "Kentaur"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:45
+#: skycultures/greek_farnese/constellation_names.eng.fab:45
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:44
 msgid "Beast"
 msgstr "Untier"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:46
+#: skycultures/greek_farnese/constellation_names.eng.fab:46
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:45
 msgid "Altar"
 msgstr "Altar"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:47
+#: skycultures/greek_farnese/constellation_names.eng.fab:47
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:46
 msgid "Southern Crown"
 msgstr "Südlicher Kranz"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:48
+#: skycultures/greek_farnese/constellation_names.eng.fab:48
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:47
 msgid "Southern Fish"
 msgstr "Südlicher Fisch"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:49
+#: skycultures/greek_farnese/constellation_names.eng.fab:49
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:48
 msgid "The Lock [in Leo]"
 msgstr "Haarlocke [im Löwen]"
 
@@ -53897,7 +53999,7 @@ msgstr ""
 #: skycultures/greek_almagest/star_names.fab:608
 #: skycultures/greek_almagest/star_names.fab:1352
 msgid "The northernmost of the other 2"
-msgstr ""
+msgstr "Der Nördlichste der anderen Beiden"
 
 #: skycultures/greek_almagest/star_names.fab:267
 msgid "The most advanced of the 3 in the left thigh"
@@ -54267,7 +54369,7 @@ msgstr ""
 
 #: skycultures/greek_almagest/star_names.fab:872
 msgid "The star under the left knee of the rear twin"
-msgstr ""
+msgstr "Der Stern unter dem linken Knie des rechten Zwillings"
 
 #: skycultures/greek_almagest/star_names.fab:874
 msgid "The star in the left groin of the rear twin"
@@ -54782,23 +54884,23 @@ msgstr "Der dritte vom nördlichsten"
 
 #: skycultures/greek_almagest/star_names.fab:1514
 msgid "The 4th from the northernmost"
-msgstr ""
+msgstr "Der Vierte vom Nördlichsten"
 
 #: skycultures/greek_almagest/star_names.fab:1516
 msgid "The 5th from the northernmost"
-msgstr ""
+msgstr "Der Fünfte vom Nördlichsten"
 
 #: skycultures/greek_almagest/star_names.fab:1518
 msgid "The 6th from the northernmost"
-msgstr ""
+msgstr "Der Sechste vom Nördlichsten"
 
 #: skycultures/greek_almagest/star_names.fab:1520
 msgid "The 7th from the northernmost"
-msgstr ""
+msgstr "Der Siebte vom Nördlichsten"
 
 #: skycultures/greek_almagest/star_names.fab:1522
 msgid "The 8th from the northernmost"
-msgstr ""
+msgstr "Der Achte vom Nördlichsten"
 
 #: skycultures/greek_almagest/star_names.fab:1526
 msgid "The most advanced of the 3 stars on the belt"
@@ -54946,7 +55048,7 @@ msgstr ""
 
 #: skycultures/greek_almagest/star_names.fab:1703
 msgid "The star in the neck"
-msgstr ""
+msgstr "Der Stern im Nacken"
 
 #: skycultures/greek_almagest/star_names.fab:1704
 msgid "Προκύων (Prokyon, The One [rising] before the Dog)"
@@ -55174,7 +55276,7 @@ msgstr ""
 
 #: skycultures/greek_almagest/star_names.fab:2001
 msgid "The northernmost of these [2]"
-msgstr ""
+msgstr "Der Nördlichste dieser [2]"
 
 #: skycultures/greek_almagest/star_names.fab:2015
 msgid ""
@@ -55262,36 +55364,83 @@ msgid "Neptun (1846)"
 msgstr "Neptun (1846)"
 
 #: skycultures/greek_almagest/dso_names.fab:5
+#: skycultures/greek_farnese/dso_names.fab:5
+#: skycultures/greek_leidenAratea/dso_names.fab:5
 msgid "φάτνη (Manger)"
 msgstr "φάτνη (Krippe)"
 
 #: skycultures/greek_almagest/dso_names.fab:10
+#: skycultures/greek_farnese/dso_names.fab:10
+#: skycultures/greek_leidenAratea/dso_names.fab:10
 msgid "Πλειάδες (Pleiades)"
 msgstr "Πλειάδες (Pleiaden)"
 
 #: skycultures/greek_almagest/dso_names.fab:11
+#: skycultures/greek_farnese/dso_names.fab:11
+#: skycultures/greek_leidenAratea/dso_names.fab:11
 msgid "Tau 30-33"
 msgstr "Tau 30-33"
 
 #: skycultures/greek_almagest/dso_names.fab:12
+#: skycultures/greek_farnese/dso_names.fab:12
+#: skycultures/greek_leidenAratea/dso_names.fab:12
 msgid "ʿΥάδες (Hyades)"
 msgstr "ʿΥάδες (Hyaden)"
 
 #: skycultures/greek_almagest/dso_names.fab:13
+#: skycultures/greek_farnese/dso_names.fab:13
+#: skycultures/greek_leidenAratea/dso_names.fab:13
 msgid "Tau 11-15"
 msgstr "Tau 11-15"
 
 #: skycultures/greek_almagest/dso_names.fab:14
+#: skycultures/greek_farnese/dso_names.fab:14
+#: skycultures/greek_leidenAratea/dso_names.fab:14
 msgid "πλόκαμος (Coma)"
 msgstr "πλόκαμος (Coma)"
 
 #: skycultures/greek_almagest/dso_names.fab:15
+#: skycultures/greek_farnese/dso_names.fab:15
+#: skycultures/greek_leidenAratea/dso_names.fab:15
 msgid "Leo 33"
 msgstr "Leo 33"
 
 #: skycultures/greek_almagest/dso_names.fab:16
+#: skycultures/greek_farnese/dso_names.fab:16
+#: skycultures/greek_leidenAratea/dso_names.fab:16
 msgid "sco 22"
 msgstr "sco 22"
+
+#: skycultures/greek_farnese/constellation_names.eng.fab:1
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:1
+msgid "Small She-Bear"
+msgstr ""
+
+#: skycultures/greek_farnese/constellation_names.eng.fab:2
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:2
+msgid "Great She-Bear"
+msgstr ""
+
+#: skycultures/greek_farnese/constellation_names.eng.fab:39
+#: skycultures/greek_farnese/constellation_names.eng.fab:51
+msgid "Left Hand of the Atlas Statue"
+msgstr ""
+
+#: skycultures/greek_farnese/constellation_names.eng.fab:50
+msgid "Right Hand of the Atlas Statue"
+msgstr ""
+
+#: skycultures/greek_farnese/constellation_names.eng.fab:52
+msgid "special feature: unclear"
+msgstr ""
+
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:35
+msgid "God Eridanus (River)"
+msgstr ""
+
+#: skycultures/greek_leidenAratea/constellation_names.eng.fab:38
+msgid "Procyon/ Little Dog"
+msgstr ""
 
 #: skycultures/hawaiian_starlines/constellation_names.eng.fab:1
 msgid "The Canoe Bailer of Makali`i"
@@ -55890,7 +56039,7 @@ msgstr "Revatī"
 
 #: skycultures/indian/star_names.fab:20
 msgid "Śatabhiṣak"
-msgstr ""
+msgstr "Śatabhiṣak"
 
 #. TRANSLATORS:   To hear or Ear (Altair)
 #: skycultures/indian/star_names.fab:22
@@ -56025,7 +56174,7 @@ msgstr "Der Weise"
 #. TRANSLATORS: Native name for Venus
 #: skycultures/indian/planet_names.fab:20
 msgid "Bright one"
-msgstr ""
+msgstr "Der Helle"
 
 #. TRANSLATORS: Native name for Mars
 #: skycultures/indian/planet_names.fab:22
@@ -60652,7 +60801,7 @@ msgstr "Ziegenstern"
 #: skycultures/western/star_names.fab:95
 #: skycultures/western_sternenkarten/star_names.fab:95
 msgid "Menkarlina"
-msgstr ""
+msgstr "Menkarlina"
 
 #: skycultures/western/star_names.fab:96
 #: skycultures/western_sternenkarten/star_names.fab:96
@@ -60886,7 +61035,7 @@ msgstr "Al Tarf"
 #: skycultures/western/star_names.fab:163
 #: skycultures/western_sternenkarten/star_names.fab:163
 msgid "Altarf"
-msgstr ""
+msgstr "Altarf"
 
 #: skycultures/western/star_names.fab:165
 #: skycultures/western_sternenkarten/star_names.fab:165
@@ -61082,7 +61231,7 @@ msgstr "Al Shat"
 #: skycultures/western/star_names.fab:228
 #: skycultures/western_sternenkarten/star_names.fab:228
 msgid "Yen"
-msgstr ""
+msgstr "Yen"
 
 #: skycultures/western/star_names.fab:231
 #: skycultures/western_sternenkarten/star_names.fab:231
@@ -63224,7 +63373,7 @@ msgstr "El Nasl"
 #: skycultures/western/star_names.fab:899
 #: skycultures/western_sternenkarten/star_names.fab:899
 msgid "Alnasr"
-msgstr ""
+msgstr "Alnasr"
 
 #: skycultures/western/star_names.fab:901
 #: skycultures/western_sternenkarten/star_names.fab:901
@@ -63473,7 +63622,7 @@ msgstr "Jabhat Acrabi I"
 #: skycultures/western/star_names.fab:971
 #: skycultures/western_sternenkarten/star_names.fab:971
 msgid "Jabhat al Akrab"
-msgstr ""
+msgstr "Jabhat al Akrab"
 
 #: skycultures/western/star_names.fab:972
 #: skycultures/western_sternenkarten/star_names.fab:972
@@ -63613,7 +63762,7 @@ msgstr "Hyadum I"
 #: skycultures/western/star_names.fab:1021
 #: skycultures/western_sternenkarten/star_names.fab:1021
 msgid "Hyadum Primus"
-msgstr ""
+msgstr "Hyadum Primus"
 
 #: skycultures/western/star_names.fab:1022
 #: skycultures/western_sternenkarten/star_names.fab:1022
@@ -64014,7 +64163,7 @@ msgstr "Alsephina"
 #: skycultures/western/star_names.fab:1140
 #: skycultures/western_sternenkarten/star_names.fab:1140
 msgid "Koo She"
-msgstr ""
+msgstr "Koo She"
 
 #: skycultures/western/star_names.fab:1145
 #: skycultures/western_sternenkarten/star_names.fab:1145
