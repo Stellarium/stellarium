@@ -1019,6 +1019,9 @@
              </item>
              <item>
               <widget class="QLineEdit" name="perigeeLineEdit">
+               <property name="toolTip">
+                <string>Perigee altitude in kilometers</string>
+               </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                </property>
@@ -1039,6 +1042,9 @@
              </item>
              <item>
               <widget class="QLineEdit" name="apogeeLineEdit">
+               <property name="toolTip">
+                <string>Apogee altitude in kilometers</string>
+               </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                </property>
@@ -1059,6 +1065,9 @@
              </item>
              <item>
               <widget class="QLineEdit" name="periodLineEdit">
+               <property name="toolTip">
+                <string>Orbital period in minutes</string>
+               </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                </property>
@@ -1130,10 +1139,16 @@
              <item>
               <widget class="QTextEdit" name="descriptionTextEdit">
                <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>60</height>
+                </size>
                </property>
                <property name="readOnly">
                 <bool>false</bool>
@@ -1499,7 +1514,6 @@
   <tabstop>addSourceButton</tabstop>
  </tabstops>
  <resources>
-  <include location="../../../../data/gui/guiRes.qrc"/>
   <include location="../../../../data/gui/guiRes.qrc"/>
  </resources>
  <connections>
