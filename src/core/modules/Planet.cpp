@@ -1529,6 +1529,7 @@ double Planet::getRotObliquity(double JDE) const
 // Find out if p casts a shadow onto thisPlanet
 static bool willCastShadow(const Planet* thisPlanet, const Planet* p, const Planet* sun)
 {
+	Q_UNUSED(sun)
 	const Vec3d thisPos = thisPlanet->getHeliocentricEclipticPos();
 	const Vec3d planetPos = p->getHeliocentricEclipticPos();
 	
