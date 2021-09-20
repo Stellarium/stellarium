@@ -221,16 +221,11 @@ Vec4d StelObject::computeRTSTime(StelCore *core) const
 
 		double mr, ms, flag=0.;
 		double mt=-h2*(0.5*rotRate/M_PI);
-//		double mt=-h2*(0.5*obsPlanet->getSiderealDay()/M_PI);
 
-		if (cosH0<-1.) // circumpolar
-		{	flag=100;
-			mr=mt-0.5*obsPlanet->getSiderealDay(); // FIXME: may be 1/2 siderealDay off instead?
-			ms=mt+0.5*obsPlanet->getSiderealDay();
-		}
-		else if (cosH0>1.) // never rises
+		// circumpolar: set rise and set times to lower culmination, i.e. 1/2 rotation from transit
+		if (fabs(cosH0)>1.)
 		{
-			flag=-100;
+			flag= (cosH0<-1.) ? 100 : -100; // circumpolar / never rises
 			mr=mt-0.5*obsPlanet->getMeanSolarDay(); // FIXME: may be 1/2 siderealDay off instead?
 			ms=mt+0.5*obsPlanet->getMeanSolarDay();
 		}
