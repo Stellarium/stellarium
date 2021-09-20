@@ -703,6 +703,8 @@ private:
 	//! Compute times of nearest rise, transit and set for a solar system object for current location.
 	//! @return Vec4f - time of rise, transit and set; JD
 	//! @note The fourth element may signal circumpolarity (100.) or permanent invisibility (-100.), resp.
+	//! @note This is based on Meeus, Astronomical Algorithms (2nd ed.), but deviates in details.
+	//! @note Limitation for efficiency: If this is a planet moon from another planet, we compute RTS for the parent planet instead!
 	virtual Vec4d computeRTSTime(StelCore* core) const Q_DECL_OVERRIDE;
 
 	const QString getContextString() const;

@@ -226,9 +226,7 @@ Vec4d StelObject::computeRTSTime(StelCore *core) const
 	omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>r</sub>= %1<br/>").arg(QString::number(mr, 'f', 6)));
 	omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>s</sub>= %1<br/>").arg(QString::number(ms, 'f', 6)));
 
-	// For fixed objects, we are done!
-
-	// TODO: Not quite done! Do the final tweaks...
+	// Not quite done! Do the final tweaks...
 	if (fabs(cosH0)<1.)
 	{
 		// RISE

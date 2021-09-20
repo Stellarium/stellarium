@@ -308,6 +308,7 @@ protected:
 	//! Compute time of rise, transit and set for celestial object for current location.
 	//! @return Vec3f - time of rise, transit and set; decimal hours
 	//! @note The value -1.f is used as undefined value
+	//! @note This is an abbreviated version of the method implemented in the Planet class.
 	virtual Vec4d computeRTSTime(StelCore* core) const;
 private:
 

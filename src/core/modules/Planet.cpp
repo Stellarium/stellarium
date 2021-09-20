@@ -4347,16 +4347,18 @@ void Planet::setApparentMagnitudeAlgorithm(QString algorithm)
 }
 
 
-// Source: Meeus, Astronomical Algorithms, 2nd ed. 1998, ch.15
+// Source: Meeus, Astronomical Algorithms, 2nd ed. 1998, ch.15, but with considerable changes.
+// We don't compute positions for midnights, but only for two extra positions 1 JD before and after "now".
 // NOTE: Limitation for efficiency: If this is a planet moon from another planet, we compute RTS for the parent planet instead!
 Vec4d Planet::computeRTSTime(StelCore *core) const
 {
-	if (core->getCurrentLocation().planetName!="Earth")
-	return StelObject::computeRTSTime(core);
+	const StelLocation loc=core->getCurrentLocation();
+	if (loc.name.contains("->")) // a spaceship
+		return Vec4d(0., 0., 0., -100.);
 
 	StelObjectMgr* omgr=GETSTELMODULE(StelObjectMgr);
 	double ho = 0.;
-	if ( (getEnglishName()=="Moon") && (core->getCurrentLocation().planetName=="Earth"))
+	if ( (getEnglishName()=="Moon") && (loc.planetName=="Earth"))
 		ho = +0.7275*asin(6378.14/(eclipticPos.length()*AU)); // horizon parallax factor.
 	else if (getEnglishName()=="Sun")
 		ho = - getAngularSize(core) * M_PI_180; // semidiameter; Canonical value 16', but this is accurate even from other planets...
@@ -4369,105 +4371,67 @@ Vec4d Planet::computeRTSTime(StelCore *core) const
 		refraction.backward(zeroAlt);
 		ho += asin(zeroAlt[2]);
 	}
-	const StelLocation loc=core->getCurrentLocation();
 	const double phi = static_cast<double>(loc.latitude) * M_PI_180;
 	const double L = static_cast<double>(loc.longitude) * M_PI_180; // OUR longitude. Meeus has it reversed
 	PlanetP obsPlanet = core->getCurrentPlanet();
-	// const double coeff = obsPlanet->getMeanSolarDay() / obsPlanet->getSiderealDay(); // earth: coeff=(360.985647/360.);
-	//const double rotRate = obsPlanet->getMeanSolarDay() / obsPlanet->getSiderealDay(); // earth: coeff=(360.985647/360.);
-	const double rotRate = obsPlanet->getSiderealDay(); // / obsPlanet->getMeanSolarDay(); // earth: coeff=(360/360.985647);
-
-	//// OLD We must compute coordinates for the current day, previous day and next day, midnight UT. For efficiency, we do not move the SolarSystem, but call the specific ephemeris functions.
+	const double rotRate = obsPlanet->getSiderealDay();
 
 	// We have coordinates for now and compute for previous day (JD-1) and next day (JD+1). For efficiency, we do not move the SolarSystem, but call the specific ephemeris functions.
-
-	// 1. Find JD for 0UT
-	//const double DeltaT_d=core->getDeltaT()/86400.;
-	//int day, month, year;
-	//StelUtils::getDateFromJulianDay(core->getJD(), &year, &month, &day);
-	//double currentJD0;
-	//StelUtils::getJDFromDate(&currentJD0, year, month, day, 0, 0, 0.f);
-	//const double tzOffset=core->getUTCOffset(currentJD0);
-	//const double currentJDE0=currentJD0+DeltaT_d;
 
 	const double currentJD=core->getJD();
 	const double currentJDE=core->getJDE();
 
-
-	//// OLD 2. compute observer planet's and target planet's ecliptical positions for JDE 0h. (Ignore velocities)
 	// 2. compute observer planet's and target planet's ecliptical positions for JDE+/-1. (Ignore velocities)
-	Vec3d obs0(0.), obs1(0.), obs3(0.), obs4(0.), body0, body1, body3, body4, dummy; // obs2(0.), body2,
+	Vec3d obs1(0.), obs3(0.), body1, body3, dummy;
 	if (! ((pType==isMoon) && (obsPlanet==parent)))
 	{
-		//obsPlanet->computePosition(currentJDE-2., obs0, dummy);
 		obsPlanet->computePosition(currentJDE-1., obs1, dummy);
-		//obsPlanet->computePosition(currentJDE0   , obs2, dummy);
 		obsPlanet->computePosition(currentJDE+1., obs3, dummy);
-		//obsPlanet->computePosition(currentJDE+2., obs4, dummy);
 	}
 	// For light time correction, we use getDistance() on the target planet and assume there is not much change from yesterday to tomorrow.
 	const double distanceCorrection=getDistance() * (AU / (SPEED_OF_LIGHT * 86400.));
 	// Limitation for efficiency: If this is a planet moon from another planet, we compute RTS for the parent planet instead!
 	if ((pType==isMoon) && (obsPlanet!=parent))
 	{
-		//parent->computePosition(currentJDE-distanceCorrection-2., body0, dummy);
 		parent->computePosition(currentJDE-distanceCorrection-1., body1, dummy);
-		//parent->computePosition(currentJDE0-distanceCorrection   , body2, dummy);
 		parent->computePosition(currentJDE-distanceCorrection+1., body3, dummy);
-		//parent->computePosition(currentJDE-distanceCorrection+2., body4, dummy);
 	}
 	else
 	{
-		//computePosition(currentJDE-distanceCorrection-2., body0, dummy);
 		computePosition(currentJDE-distanceCorrection-1., body1, dummy);
-		//computePosition(currentJDE0-distanceCorrection   , body2, dummy);
 		computePosition(currentJDE-distanceCorrection+1., body3, dummy);
-		//computePosition(currentJDE-distanceCorrection+2., body4, dummy);
 	}
 
 	// And convert to equatorial coordinates of date. We can also use this day's current aberration, given the other uncertainties/omissions.
-	//const Vec3d eq_0=core->j2000ToEquinoxEqu(StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(body0+aberrationPush-obs0), StelCore::RefractionOff);
 	const Vec3d eq_1=core->j2000ToEquinoxEqu(StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(body1+aberrationPush-obs1), StelCore::RefractionOff);
-	//const Vec3d eq_2=core->j2000ToEquinoxEqu(StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(body2+aberrationPush-obs2), StelCore::RefractionOff);
 	const Vec3d eq_2=getEquinoxEquatorialPos(core);
 	const Vec3d eq_3=core->j2000ToEquinoxEqu(StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(body3+aberrationPush-obs3), StelCore::RefractionOff);
-	//const Vec3d eq_4=core->j2000ToEquinoxEqu(StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(body4+aberrationPush-obs4), StelCore::RefractionOff);
-	double ra1, ra2, ra3, de1, de2, de3; //, ra0, ra4, de0, de4;
-	//StelUtils::rectToSphe(&ra0, &de0, eq_0);
+	double ra1, ra2, ra3, de1, de2, de3;
 	StelUtils::rectToSphe(&ra1, &de1, eq_1);
 	StelUtils::rectToSphe(&ra2, &de2, eq_2);
 	StelUtils::rectToSphe(&ra3, &de3, eq_3);
-	//StelUtils::rectToSphe(&ra4, &de4, eq_4);
 	// Around ra~12 there may be a jump between 12h and -12h which could crash interpolation. We better make sure to have either negative RA or RA>24 in this case.
 	if (cos(ra2)<0.)
 	{
-		//ra0=StelUtils::fmodpos(ra0, 2*M_PI);
 		ra1=StelUtils::fmodpos(ra1, 2*M_PI);
 		ra2=StelUtils::fmodpos(ra2, 2*M_PI);
 		ra3=StelUtils::fmodpos(ra3, 2*M_PI);
-		//ra4=StelUtils::fmodpos(ra4, 2*M_PI);
 	}
 
 	// 3. Approximate times:
-	// Sidereal Time at Greenwich
-	//const double Theta0=obsPlanet->getSiderealTime(currentJD0, currentJDE0) * (M_PI/180.);  // [radians]
-	// No, we use Sidereal Time of Place!
+	// Sidereal Time of Place
 	const double Theta2=obsPlanet->getSiderealTime(currentJD, currentJDE) * (M_PI/180.) + L;  // [radians]
 	double cosH0=(sin(ho)-sin(phi)*sin(de2))/(cos(phi)*cos(de2));
 
 	omgr->removeExtraInfoStrings(StelObject::DebugAid);
-	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>0</sub>: %1=%2 &delta;<sub>0</sub>: %3<br/>").arg(QString::number(ra0, 'f', 4)).arg(StelUtils::radToHmsStr(ra0)).arg(StelUtils::radToDmsStr(de0)));
 	omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>1</sub>: %1=%2 &delta;<sub>1</sub>: %3<br/>").arg(QString::number(ra1, 'f', 4)).arg(StelUtils::radToHmsStr(ra1)).arg(StelUtils::radToDmsStr(de1)));
 	omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>2</sub>: %1=%2 &delta;<sub>2</sub>: %3<br/>").arg(QString::number(ra2, 'f', 4)).arg(StelUtils::radToHmsStr(ra2)).arg(StelUtils::radToDmsStr(de2)));
 	omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>3</sub>: %1=%2 &delta;<sub>3</sub>: %3<br/>").arg(QString::number(ra3, 'f', 4)).arg(StelUtils::radToHmsStr(ra3)).arg(StelUtils::radToDmsStr(de3)));
-	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>4</sub>: %1=%2 &delta;<sub>4</sub>: %3<br/>").arg(QString::number(ra4, 'f', 4)).arg(StelUtils::radToHmsStr(ra4)).arg(StelUtils::radToDmsStr(de4)));
 
-	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("&Delta; = %1 km<br/>").arg(QString::number(eclipticPos.length()*AU, 'f', 3)));
 	omgr->addToExtraInfoString(StelObject::DebugAid, QString("h<sub>0</sub>= %1<br/>").arg(StelUtils::radToDmsStr(ho)));
 	omgr->addToExtraInfoString(StelObject::DebugAid, QString("JD<sub>2</sub>= %1<br/>").arg(QString::number(currentJD, 'f', 5)));
 	omgr->addToExtraInfoString(StelObject::DebugAid, QString("&Theta;<sub>2</sub>= %1<br/>").arg(StelUtils::radToHmsStr(Theta2)));
 	omgr->addToExtraInfoString(StelObject::DebugAid, QString("cos H<sub>0</sub>= %1<br/>").arg(QString::number(cosH0, 'f', 4)));
-
 
 	double h2=StelUtils::fmodpos(Theta2-ra2, 2.*M_PI); if (h2>M_PI) h2-=2.*M_PI; // Hour angle at currentJD. This should be [-pi, pi]
 	// Find approximation of transit time
@@ -4504,10 +4468,7 @@ Vec4d Planet::computeRTSTime(StelCore *core) const
 	omgr->addToExtraInfoString(StelObject::DebugAid, QString("transit ~ %1<br/>").arg(StelUtils::julianDayToISO8601String(currentJD+mt)));
 	omgr->addToExtraInfoString(StelObject::DebugAid, QString("set     ~ %1<br/>").arg(StelUtils::julianDayToISO8601String(currentJD+ms)));
 
-
-	// These are the first approximations. Now details:
-
-	// Find correction for transit:
+	// 4. Find correction for transit:
 	//double ra_mt=StelUtils::interpolate5(mt, ra0, ra1, ra2, ra3, ra4);
 	double ra_mt=StelUtils::interpolate3(mt, ra1, ra2, ra3);
 	double ht=StelUtils::fmodpos(Theta2-ra_mt, 2.*M_PI); if (ht>M_PI) ht-=2.*M_PI; // Hour angle of the transit RA at currentJD. This should be [-pi, pi]
@@ -4526,7 +4487,7 @@ Vec4d Planet::computeRTSTime(StelCore *core) const
 	omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>t</sub>'' = %1<br/>").arg(QString::number(mt, 'f', 6)));
 
 
-	// At this point we have: Theta2=sidereal time for currentJD, and mr, ms as first approximations for rise and set offsets from currentJD.
+	// 5. Find corrections for rise and set
 	if (fabs(cosH0)<1.)
 	{
 		// RISE
