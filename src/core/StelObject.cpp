@@ -153,165 +153,85 @@ Vec4d StelObject::getRTSTime(StelCore *core) const
 
 Vec4d StelObject::computeRTSTime(StelCore *core) const
 {
-	if (/* DISABLES CODE */ (true)) // (core->getCurrentLocation().planetName=="Earth")
+	StelObjectMgr* omgr=GETSTELMODULE(StelObjectMgr);
+	double ho = 0.;
+	if (core->getSkyDrawer()->getFlagHasAtmosphere())
 	{
-		StelObjectMgr* omgr=GETSTELMODULE(StelObjectMgr);
-		double ho = 0.;
-		if (core->getSkyDrawer()->getFlagHasAtmosphere())
-		{
-			// canonical" refraction at horizon is -34'. Replace by pressure-dependent value here!
-			Refraction refraction=core->getSkyDrawer()->getRefraction();
-			Vec3d zeroAlt(1.0,0.0,0.0);
-			refraction.backward(zeroAlt);
-			ho += asin(zeroAlt[2]);
-		}
-		const StelLocation loc=core->getCurrentLocation();
-		const double phi = static_cast<double>(loc.latitude) * M_PI_180;
-		const double L = static_cast<double>(loc.longitude) * M_PI_180; // OUR longitude. Meeus has it reversed
-		PlanetP obsPlanet = core->getCurrentPlanet();
-		// const double coeff = obsPlanet->getMeanSolarDay() / obsPlanet->getSiderealDay(); // earth: coeff=(360.985647/360.);
-		//const double rotRate = obsPlanet->getMeanSolarDay() / obsPlanet->getSiderealDay(); // earth: coeff=(360.985647/360.);
-		const double rotRate = obsPlanet->getSiderealDay(); // / obsPlanet->getMeanSolarDay(); // earth: coeff=(360/360.985647);
-
-
-		// 1. Find JD for 0UT
-		//const double DeltaT_d=core->getDeltaT()/86400.;
-		//int day, month, year;
-		//StelUtils::getDateFromJulianDay(core->getJD(), &year, &month, &day);
-		//double currentJD0;
-		//StelUtils::getJDFromDate(&currentJD0, year, month, day, 0, 0, 0.f);
-		//const double tzOffset=core->getUTCOffset(currentJD0);
-		//const double currentJDE0=currentJD0+DeltaT_d;
-
-		const double currentJD=core->getJD();
-		const double currentJDE=core->getJDE();
-
-		// And convert to equatorial coordinates of date. We can also use this day's current aberration, given the other uncertainties/omissions.
-		const Vec3d eq_2=getEquinoxEquatorialPos(core);
-		double ra2, de2;
-		StelUtils::rectToSphe(&ra2, &de2, eq_2);
-		// Around ra~12 there may be a jump between 12h and -12h which could crash interpolation. We better make sure to have either negative RA or RA>24 in this case.
-		if (cos(ra2)<0.)
-		{
-			ra2=StelUtils::fmodpos(ra2, 2*M_PI);
-		}
-
-		// 3. Approximate times:
-		// we use Sidereal Time of Place!
-		const double Theta2=obsPlanet->getSiderealTime(currentJD, currentJDE) * (M_PI/180.) + L;  // [radians]
-		double cosH0=(sin(ho)-sin(phi)*sin(de2))/(cos(phi)*cos(de2));
-
-		omgr->removeExtraInfoStrings(StelObject::DebugAid);
-		omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>2</sub>: %1=%2 &delta;<sub>2</sub>: %3<br/>").arg(QString::number(ra2, 'f', 4)).arg(StelUtils::radToHmsStr(ra2)).arg(StelUtils::radToDmsStr(de2)));
-
-		omgr->addToExtraInfoString(StelObject::DebugAid, QString("h<sub>0</sub>= %1<br/>").arg(StelUtils::radToDmsStr(ho)));
-		omgr->addToExtraInfoString(StelObject::DebugAid, QString("JD<sub>2</sub>= %1<br/>").arg(QString::number(currentJD, 'f', 5)));
-		omgr->addToExtraInfoString(StelObject::DebugAid, QString("&Theta;<sub>2</sub>= %1<br/>").arg(StelUtils::radToHmsStr(Theta2)));
-		omgr->addToExtraInfoString(StelObject::DebugAid, QString("cos H<sub>0</sub>= %1<br/>").arg(QString::number(cosH0, 'f', 4)));
-
-
-		double h2=StelUtils::fmodpos(Theta2-ra2, 2.*M_PI); if (h2>M_PI) h2-=2.*M_PI; // Hour angle at currentJD. This should be [-pi, pi]
-		// Find approximation of transit time
-		double JDt=currentJD-h2/(M_PI*2.)*rotRate;
-		omgr->addToExtraInfoString(StelObject::DebugAid, QString("h<sub>2</sub>= %1<br/>").arg(QString::number(h2, 'f', 4)));
-		omgr->addToExtraInfoString(StelObject::DebugAid, QString("JD<sub>t</sub>= %1<br/>").arg(QString::number(JDt, 'f', 4)));
-
-
-		// In terms of chapter 15, where m0, m1 and m2 are fractions of day within the current day, we use mr, mt, ms as fractions of day from currentJD, and they lie within [-1...+1].
-
-		double mr, ms, flag=0.;
-		double mt=-h2*(0.5*rotRate/M_PI);
-
-		// circumpolar: set rise and set times to lower culmination, i.e. 1/2 rotation from transit
-		if (fabs(cosH0)>1.)
-		{
-			flag= (cosH0<-1.) ? 100 : -100; // circumpolar / never rises
-			mr=mt-0.5*obsPlanet->getMeanSolarDay(); // FIXME: may be 1/2 siderealDay off instead?
-			ms=mt+0.5*obsPlanet->getMeanSolarDay();
-		}
-		else
-		{
-			const double H0 = acos(cosH0);
-			omgr->addToExtraInfoString(StelObject::DebugAid, QString("H<sub>0</sub>= %1<br/>").arg(QString::number(H0*M_180_PI, 'f', 6)));
-
-			mr = mt - H0*rotRate/(2.*M_PI);
-			ms = mt + H0*rotRate/(2.*M_PI);
-		}
-
-		omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>t</sub>= %1<br/>").arg(QString::number(mt, 'f', 6)));
-		omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>r</sub>= %1<br/>").arg(QString::number(mr, 'f', 6)));
-		omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>s</sub>= %1<br/>").arg(QString::number(ms, 'f', 6)));
-
-		// For fixed objects, we are done!
-		return Vec4d(currentJD+mr, currentJD+mt, currentJD+ms, flag);
-
-		// TODO: Not quite done! Do the final tweaks...
-
-
+		// canonical" refraction at horizon is -34'. Replace by pressure-dependent value here!
+		Refraction refraction=core->getSkyDrawer()->getRefraction();
+		Vec3d zeroAlt(1.0,0.0,0.0);
+		refraction.backward(zeroAlt);
+		ho += asin(zeroAlt[2]);
 	}
-	else { // old version
-		double hz = 0.;
-		//	if ( (getEnglishName()=="Moon") && (core->getCurrentLocation().planetName=="Earth"))
-		//		hz = +0.7275*0.95; // horizon parallax factor
-		//	else
-		if (getEnglishName()=="Sun")
-			hz = - getAngularSize(core); // semidiameter; Canonical value 16', but this is accurate even from other planets...
-		hz *= M_PI_180;
+	const StelLocation loc=core->getCurrentLocation();
+	const double phi = static_cast<double>(loc.latitude) * M_PI_180;
+	const double L = static_cast<double>(loc.longitude) * M_PI_180; // OUR longitude. Meeus has it reversed
+	PlanetP obsPlanet = core->getCurrentPlanet();
+	const double rotRate = obsPlanet->getSiderealDay();
+	const double currentJD=core->getJD();
+	const double currentJDE=core->getJDE();
 
-		if (core->getSkyDrawer()->getFlagHasAtmosphere())
-		{
-			// canonical" refraction at horizon is -34'. Replace by pressure-dependent value here!
-			Refraction refraction=core->getSkyDrawer()->getRefraction();
-			Vec3d zeroAlt(1.0,0.0,0.0);
-			refraction.backward(zeroAlt);
-			hz += asin(zeroAlt[2]);
-		}
-		const double phi = static_cast<double>(core->getCurrentLocation().latitude) * M_PI_180;
-		PlanetP cp = core->getCurrentPlanet();
-		const double coeff = cp->getMeanSolarDay() / cp->getSiderealDay();
-
-		Vec4d rts(-100.,-100.,-100., 0.);  // init as "never rises" [abs must be larger than 24!]
-
-		double dec, ha, t;
-		StelUtils::rectToSphe(&ha, &dec, getSiderealPosGeometric(core));
-		ha = 2.*M_PI-ha;
-		ha *= 12./M_PI;
-		if (ha>24.)
-			ha -= 24.;
-		// It seems necessary to have ha in [-12,12]!
-		if (ha>12.)
-			ha -= 24.;
-
-		const double JD = core->getJD();
-		const double ct = (JD - static_cast<int>(JD))*24.;
-
-		t = ct - ha*coeff; // earth: coeff=(360.985647/360.);
-		if (ha>12. && ha<=24.)
-			t += 24.;
-
-		t += core->getUTCOffset(JD) + 12.;
-		t = StelUtils::fmodpos(t, 24.0);
-		rts[1] = t;
-
-		const double cosH = (sin(hz) - sin(phi)*sin(dec))/(cos(phi)*cos(dec));
-		if (cosH<-1.) // circumpolar
-		{
-			rts[3]=100.;
-		}
-		else if (cosH>1.) // never rises
-		{
-			rts[3]=-100.;
-		}
-		else
-		{
-			const double HC = acos(cosH)*12.*coeff/M_PI;
-
-			rts[0] = StelUtils::fmodpos(t - HC, 24.);
-			rts[2] = StelUtils::fmodpos(t + HC, 24.);
-		}
-
-		return rts;
+	// And convert to equatorial coordinates of date. We can also use this day's current aberration, given the other uncertainties/omissions.
+	const Vec3d eq_2=getEquinoxEquatorialPos(core);
+	double ra2, de2;
+	StelUtils::rectToSphe(&ra2, &de2, eq_2);
+	// Around ra~12 there may be a jump between 12h and -12h which could crash interpolation. We better make sure to have either negative RA or RA>24 in this case.
+	if (cos(ra2)<0.)
+	{
+		ra2=StelUtils::fmodpos(ra2, 2*M_PI);
 	}
+
+	// 3. Approximate times:
+	// we use Sidereal Time of Place!
+	const double Theta2=obsPlanet->getSiderealTime(currentJD, currentJDE) * (M_PI/180.) + L;  // [radians]
+	double cosH0=(sin(ho)-sin(phi)*sin(de2))/(cos(phi)*cos(de2));
+
+	omgr->removeExtraInfoStrings(StelObject::DebugAid);
+	omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>2</sub>: %1=%2 &delta;<sub>2</sub>: %3<br/>").arg(QString::number(ra2, 'f', 4)).arg(StelUtils::radToHmsStr(ra2)).arg(StelUtils::radToDmsStr(de2)));
+
+	omgr->addToExtraInfoString(StelObject::DebugAid, QString("h<sub>0</sub>= %1<br/>").arg(StelUtils::radToDmsStr(ho)));
+	omgr->addToExtraInfoString(StelObject::DebugAid, QString("JD<sub>2</sub>= %1<br/>").arg(QString::number(currentJD, 'f', 5)));
+	omgr->addToExtraInfoString(StelObject::DebugAid, QString("&Theta;<sub>2</sub>= %1<br/>").arg(StelUtils::radToHmsStr(Theta2)));
+	omgr->addToExtraInfoString(StelObject::DebugAid, QString("cos H<sub>0</sub>= %1<br/>").arg(QString::number(cosH0, 'f', 4)));
+
+
+	double h2=StelUtils::fmodpos(Theta2-ra2, 2.*M_PI); if (h2>M_PI) h2-=2.*M_PI; // Hour angle at currentJD. This should be [-pi, pi]
+	// Find approximation of transit time
+	double JDt=currentJD-h2/(M_PI*2.)*rotRate;
+	omgr->addToExtraInfoString(StelObject::DebugAid, QString("h<sub>2</sub>= %1<br/>").arg(QString::number(h2, 'f', 4)));
+	omgr->addToExtraInfoString(StelObject::DebugAid, QString("JD<sub>t</sub>= %1<br/>").arg(QString::number(JDt, 'f', 4)));
+
+	// In terms of chapter 15, where m0, m1 and m2 are fractions of day within the current day, we use mr, mt, ms as fractions of day from currentJD, and they lie within [-1...+1].
+
+	double mr, ms, flag=0.;
+	double mt=-h2*(0.5*rotRate/M_PI);
+
+	// circumpolar: set rise and set times to lower culmination, i.e. 1/2 rotation from transit
+	if (fabs(cosH0)>1.)
+	{
+		flag= (cosH0<-1.) ? 100 : -100; // circumpolar / never rises
+		mr=mt-0.5*rotRate;
+		ms=mt+0.5*rotRate;
+	}
+	else
+	{
+		const double H0 = acos(cosH0);
+		omgr->addToExtraInfoString(StelObject::DebugAid, QString("H<sub>0</sub>= %1<br/>").arg(QString::number(H0*M_180_PI, 'f', 6)));
+
+		mr = mt - H0*rotRate/(2.*M_PI);
+		ms = mt + H0*rotRate/(2.*M_PI);
+	}
+
+	omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>t</sub>= %1<br/>").arg(QString::number(mt, 'f', 6)));
+	omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>r</sub>= %1<br/>").arg(QString::number(mr, 'f', 6)));
+	omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>s</sub>= %1<br/>").arg(QString::number(ms, 'f', 6)));
+
+	// For fixed objects, we are done!
+	return Vec4d(currentJD+mr, currentJD+mt, currentJD+ms, flag);
+
+	// TODO: Not quite done! Do the final tweaks...
+
+
 }
 
 float StelObject::getSelectPriority(const StelCore* core) const

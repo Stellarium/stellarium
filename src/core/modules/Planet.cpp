@@ -4485,8 +4485,8 @@ Vec4d Planet::computeRTSTime(StelCore *core) const
 	if (fabs(cosH0)>1.)
 	{
 		flag= (cosH0<-1.) ? 100 : -100; // circumpolar / never rises
-		mr=mt-0.5*obsPlanet->getMeanSolarDay(); // FIXME: may be 1/2 siderealDay off instead?
-		ms=mt+0.5*obsPlanet->getMeanSolarDay();
+		mr=mt-0.5*rotRate;
+		ms=mt+0.5*rotRate;
 	}
 	else
 	{

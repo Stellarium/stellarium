@@ -92,7 +92,7 @@ void StelObjectMgr::nextRising()
 		core->update(0);
 		//double JD = core->getJD();
 		Vec4d rts = selected[0]->getRTSTime(core);
-		if (rts[3]==0.)
+		//if (rts[3]==0.)
 			//core->setJD(static_cast<int>(JD) + ((rts[0] - core->getUTCOffset(JD)) / 24. + 0.5));
 			core->setJD(rts[0]);
 	}
@@ -108,7 +108,7 @@ void StelObjectMgr::nextSetting()
 		core->update(0);
 		//double JD = core->getJD();
 		Vec4d rts = selected[0]->getRTSTime(core);
-		if (rts[3]==0.)
+		//if (rts[3]==0.)
 			//core->setJD(static_cast<int>(JD) + ((rts[2] - core->getUTCOffset(JD)) / 24. + 0.5));
 			core->setJD(rts[2]);
 	}
@@ -139,7 +139,7 @@ void StelObjectMgr::previousRising()
 		core->update(0);
 		//double JD = core->getJD();
 		Vec4d rts = selected[0]->getRTSTime(core);
-		if (rts[3]==0.)
+		//if (rts[3]==0.)
 			//core->setJD(static_cast<int>(JD) + ((rts[0] - core->getUTCOffset(JD)) / 24. + 0.5));
 			core->setJD(rts[0]);
 	}
@@ -155,7 +155,7 @@ void StelObjectMgr::previousSetting()
 		core->update(0);
 		//double JD = core->getJD();
 		Vec4d rts = selected[0]->getRTSTime(core);
-		if (rts[3]==0.)
+		//if (rts[3]==0.)
 			//core->setJD(static_cast<int>(JD) + ((rts[2] - core->getUTCOffset(JD)) / 24. + 0.5));
 			core->setJD(rts[2]);
 	}
@@ -182,7 +182,7 @@ void StelObjectMgr::todayRising()
 		StelCore* core = StelApp::getInstance().getCore();
 		//double JD = core->getJD();
 		Vec4d rts = selected[0]->getRTSTime(core);
-		if (rts[3]==0.)
+		//if (rts[3]==0.)
 			//core->setJD(static_cast<int>(JD) + ((rts[0] - core->getUTCOffset(JD)) / 24. + 0.5));
 			core->setJD(rts[0]);
 	}
@@ -196,7 +196,7 @@ void StelObjectMgr::todaySetting()
 		StelCore* core = StelApp::getInstance().getCore();
 		//double JD = core->getJD();
 		Vec4d rts = selected[0]->getRTSTime(core);
-		if (rts[3]==0.)
+		//if (rts[3]==0.)
 			//core->setJD(static_cast<int>(JD) + ((rts[2] - core->getUTCOffset(JD)) / 24. + 0.5));
 			core->setJD(rts[2]);
 	}
