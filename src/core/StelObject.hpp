@@ -225,10 +225,15 @@ public:
 	//! @return true if object an above real horizon (uses test for landscapes)
 	bool isAboveRealHorizon(const StelCore* core) const;
 
-	//! Get today's time of rise, transit and set for celestial object for current location.
-	//! @return Vec4d - times of closest rise, transit and set; JD
-	//! @note The fourth element signals circumpolarity (100) or permanent invisibility (-100)
-	Vec4d getRTSTime(StelCore *core) const;
+	//! Compute time of rise, transit and set for celestial object for current location.
+	//! @return Vec4d - time of rise, transit and set closest to current time; JD.
+	//! @note The fourth element flags particular conditions:
+	//!       *  +100. for circumpolar objects. Rise and set give lower culmination times.
+	//!       *  -100. for objects never rising. Rise and set give transit times.
+	//!       * -1000. is used as "invalid" value. The result should then not be used.
+	//! @note This is an abbreviated version of the method implemented in the Planet class.
+	virtual Vec4d getRTSTime(const StelCore* core) const;
+
 
 	//! Return object's apparent V magnitude as seen from observer, without including extinction.
 	virtual float getVMagnitude(const StelCore* core) const;
@@ -305,11 +310,6 @@ protected:
 	//! This also removes all extraInfoStrings possibly injected by modules (plugins) etc., except for Script and DebugAid types.
 	void postProcessInfoString(QString& str, const InfoStringGroup& flags) const;
 
-	//! Compute time of rise, transit and set for celestial object for current location.
-	//! @return Vec3f - time of rise, transit and set; decimal hours
-	//! @note The value -1.f is used as undefined value
-	//! @note This is an abbreviated version of the method implemented in the Planet class.
-	virtual Vec4d computeRTSTime(StelCore* core) const;
 private:
 
 	//! Location for additional object info that can be set for special purposes (at least for debugging, but maybe others), even via scripting.

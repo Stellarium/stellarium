@@ -526,6 +526,16 @@ public:
 	QVector<const Planet*> getCandidatesForShadow() const;
 
 	Vec3d getAberrationPush() const {return aberrationPush; }
+
+	//! Compute times of nearest rise, transit and set for a solar system object for current location.
+	//! @return Vec4d - time of rise, transit and set closest to current time; JD.
+	//! @note The fourth element flags particular conditions:
+	//!       *  +100. for circumpolar objects. Rise and set give lower culmination times.
+	//!       *  -100. for objects never rising. Rise and set give transit times.
+	//!       * -1000. is used as "invalid" value. The result should then not be used.
+	//! @note This is based on Meeus, Astronomical Algorithms (2nd ed.), but deviates in details.
+	//! @note Limitation for efficiency: If this is a planet moon from another planet, we compute RTS for the parent planet instead!
+	virtual Vec4d getRTSTime(const StelCore* core) const Q_DECL_OVERRIDE;
 	
 protected:
 	// These components for getInfoString() can be overridden in subclasses
@@ -699,13 +709,6 @@ protected:
 private:
 	class StelPropertyMgr* propMgr;
 	QString iauMoonNumber;
-
-	//! Compute times of nearest rise, transit and set for a solar system object for current location.
-	//! @return Vec4f - time of rise, transit and set; JD
-	//! @note The fourth element may signal circumpolarity (100.) or permanent invisibility (-100.), resp.
-	//! @note This is based on Meeus, Astronomical Algorithms (2nd ed.), but deviates in details.
-	//! @note Limitation for efficiency: If this is a planet moon from another planet, we compute RTS for the parent planet instead!
-	virtual Vec4d computeRTSTime(StelCore* core) const Q_DECL_OVERRIDE;
 
 	const QString getContextString() const;
 	QPair<double, double> getLunarEclipseMagnitudes() const;

@@ -4348,13 +4348,13 @@ void Planet::setApparentMagnitudeAlgorithm(QString algorithm)
 
 
 // Source: Meeus, Astronomical Algorithms, 2nd ed. 1998, ch.15, but with considerable changes.
-// We don't compute positions for midnights, but only for two extra positions 1 JD before and after "now".
+// We don't compute positions for midnights, but only for two extra positions 1 JD before and after "now", to allow interpolation of positions.
 // NOTE: Limitation for efficiency: If this is a planet moon from another planet, we compute RTS for the parent planet instead!
-Vec4d Planet::computeRTSTime(StelCore *core) const
+Vec4d Planet::getRTSTime(const StelCore *core) const
 {
 	const StelLocation loc=core->getCurrentLocation();
 	if (loc.name.contains("->")) // a spaceship
-		return Vec4d(0., 0., 0., -100.);
+		return Vec4d(0., 0., 0., -1000.);
 
 	StelObjectMgr* omgr=GETSTELMODULE(StelObjectMgr);
 	double ho = 0.;

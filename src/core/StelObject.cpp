@@ -146,13 +146,12 @@ float StelObject::getVMagnitude(const StelCore* core) const
 	return 99;
 }
 
-Vec4d StelObject::getRTSTime(StelCore *core) const
+Vec4d StelObject::getRTSTime(const StelCore *core) const
 {
-	return computeRTSTime(core);
-}
+	const StelLocation loc=core->getCurrentLocation();
+	if (loc.name.contains("->")) // a spaceship
+		return Vec4d(0., 0., 0., -1000.);
 
-Vec4d StelObject::computeRTSTime(StelCore *core) const
-{
 	StelObjectMgr* omgr=GETSTELMODULE(StelObjectMgr);
 	double ho = 0.;
 	if (core->getSkyDrawer()->getFlagHasAtmosphere())
@@ -163,7 +162,6 @@ Vec4d StelObject::computeRTSTime(StelCore *core) const
 		refraction.backward(zeroAlt);
 		ho += asin(zeroAlt[2]);
 	}
-	const StelLocation loc=core->getCurrentLocation();
 	const double phi = static_cast<double>(loc.latitude) * M_PI_180;
 	const double L = static_cast<double>(loc.longitude) * M_PI_180; // OUR longitude. Meeus has it reversed
 	PlanetP obsPlanet = core->getCurrentPlanet();
@@ -672,9 +670,9 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			res += "</table>";
 	}
 
-	if (flags&RTSTime && getType()!=QStringLiteral("Satellite") && !currentPlanet.contains("observer", Qt::CaseInsensitive))
+	if (flags&RTSTime && getType()!=QStringLiteral("Satellite") && !currentPlanet.contains("observer", Qt::CaseInsensitive) && !(core->getCurrentLocation().name.contains("->")))
 	{
-		Vec4d rts = getRTSTime(StelApp::getInstance().getCore()); // requires not const StelCore!
+		Vec4d rts = getRTSTime(core);
 		QString sTransit = qc_("Transit", "celestial event; passage across a meridian");
 		QString sRise = qc_("Rise", "celestial event");
 		QString sSet = qc_("Set", "celestial event");
@@ -745,7 +743,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			else
 				res += q_("Circumpolar (never sets)") + "<br />";
 		}
-		// GZ I think these never could have seen before (??)
+		// GZ I think these never could have been seen before (??)
 		//else if (rts[0]>99. && rts[2]<99.)
 		//	res += q_("Polar dawn") + "<br />";
 		//else if (rts[0]<99. && rts[2]>99.)
@@ -1019,14 +1017,27 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	// 'above horizon' flag
 	map.insert("above-horizon", isAboveRealHorizon(core));
 
-	Vec4d rts = getRTSTime(StelApp::getInstance().getCore());
-	map.insert("rise", StelUtils::hoursToHmsStr(rts[0], true));
-	map.insert("rise-dhr", rts[0]);
-	map.insert("transit", StelUtils::hoursToHmsStr(rts[1], true));
-	map.insert("transit-dhr", rts[1]);
-	map.insert("set", StelUtils::hoursToHmsStr(rts[2], true));
-	map.insert("set-dhr", rts[2]);
+	Vec4d rts = getRTSTime(core);
+	if (rts[3]>-1000.)
+	{
+		int hr, min, sec;
+		StelUtils::getTimeFromJulianDay(rts[1], &hr, &min, &sec);
+		double hours=hr+static_cast<double>(min)/60. + static_cast<double>(sec)/3600.;
 
+		map.insert("transit", StelUtils::hoursToHmsStr(hours, true));
+		map.insert("transit-dhr", hours);
+		if (rts[3]==0.) // TODO: Decide if we omit entries or deliver data for lower culmination?
+		{
+			StelUtils::getTimeFromJulianDay(rts[0], &hr, &min, &sec);
+			hours=hr+static_cast<double>(min)/60. + static_cast<double>(sec)/3600.;
+			map.insert("rise", StelUtils::hoursToHmsStr(hours, true));
+			map.insert("rise-dhr", hours);
+			StelUtils::getTimeFromJulianDay(rts[2], &hr, &min, &sec);
+			hours=hr+static_cast<double>(min)/60. + static_cast<double>(sec)/3600.;
+			map.insert("set", StelUtils::hoursToHmsStr(hours, true));
+			map.insert("set-dhr", hours);
+		}
+	}
 	return map;
 }
 
