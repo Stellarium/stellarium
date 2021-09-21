@@ -37,6 +37,7 @@ class StelCore;
 class StelObjectMgr : public StelModule
 {
 	Q_OBJECT
+	Q_PROPERTY(double twilightAltitude READ getTwilightAltitude WRITE setTwilightAltitude NOTIFY twilightAltitudeChanged)
 public:
 	StelObjectMgr();
 	virtual ~StelObjectMgr() Q_DECL_OVERRIDE;
@@ -148,6 +149,10 @@ public:
 	static QVariantMap getObjectInfo(const StelObjectP obj);
 
 public slots:
+	//! set twilight altitude [degrees]
+	void setTwilightAltitude(double alt);
+	double getTwilightAltitude() const {return twilightAltitude;}
+
 	//! Set simulation time to the time of next transit of selected object
 	void nextTransit();
 	//! Set simulation time to the time of previous transit of selected object
@@ -181,6 +186,19 @@ public slots:
 	//! @note for permanently invisible objects, this sets to time of transit
 	void todaySetting();
 
+	//! Set simulation time to this day's morning when Sun reaches twilightAltitude
+	void todayMorningTwilight();
+	//! Set simulation time to this day's evening when Sun reaches twilightAltitude
+	void todayEveningTwilight();
+	//! Set simulation time to the previous day's morning when Sun reaches twilightAltitude
+	void previousMorningTwilight();
+	//! Set simulation time to the previous day's evening when Sun reaches twilightAltitude
+	void previousEveningTwilight();
+	//! Set simulation time to the next day's morning when Sun reaches twilightAltitude
+	void nextMorningTwilight();
+	//! Set simulation time to the next day's evening when Sun reaches twilightAltitude
+	void nextEveningTwilight();
+
 	//! @note These functions were copied over from StelObject. Given that setExtraInfoString is non-const and some functions where these methods are useful are const, we can use the StelObjectMgr as "carrier object".
 	//! Allow additions to the Info String. Can be used by plugins to show extra info for the selected object, or for debugging.
 	//! Hard-set this string group to a single str, or delete all messages when str==""
@@ -210,6 +228,9 @@ signals:
 	//! @param action define if the user requested that the objects are added to the selection or just replace it
 	void selectedObjectChanged(StelModule::StelModuleSelectAction);
 
+	//! Signal that the configurable twilight altitude for the sun has changed.
+	void twilightAltitudeChanged(double alt);
+
 private:
 	// The list of StelObjectModule that are referenced in Stellarium
 	QList<StelObjectModule*> objectsModules;
@@ -228,11 +249,14 @@ private:
 	//! @note If aberration is computed, this first applies aberration backwards and then searches for an object.
 	StelObjectP cleverFind(const StelCore* core, int x, int y) const;
 
-	// Radius in pixel in which objects will be searched when clicking on a point in sky.
+	//! Radius in pixel in which objects will be searched when clicking on a point in sky.
 	double searchRadiusPixel;
 
-	// Weight of the distance factor when choosing the best object to select.
+	//! Weight of the distance factor when choosing the best object to select.
 	float distanceWeight;
+
+	//! configurable altitude for the sun for "goto next twilight" actions
+	double twilightAltitude;
 
 	//! Location for additional object info that can be set for special purposes (at least for debugging, but maybe others), even via scripting.
 	//! Modules are allowed to add new strings to be displayed in the various getInfoString() methods of subclasses.

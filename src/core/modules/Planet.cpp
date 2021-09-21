@@ -4351,7 +4351,7 @@ void Planet::setApparentMagnitudeAlgorithm(QString algorithm)
 // We don't compute positions for midnights, but only for two extra positions 1 JD before and after "now", to allow interpolation of positions.
 // Also, the estimate h0 for the Moon in the literature is based on geocentric computation.
 // NOTE: Limitation for efficiency: If this is a planet moon from another planet, we compute RTS for the parent planet instead!
-Vec4d Planet::getRTSTime(const StelCore *core) const
+Vec4d Planet::getRTSTime(const StelCore *core, const double altitude) const
 {
 	const StelLocation loc=core->getCurrentLocation();
 	if (loc.name.contains("->")) // a spaceship
@@ -4374,6 +4374,7 @@ Vec4d Planet::getRTSTime(const StelCore *core) const
 		refraction.backward(zeroAlt);
 		ho += asin(zeroAlt[2]);
 	}
+	ho += altitude*M_PI_180; // Not sure if we use refraction for off-zero settings?
 	const double phi = static_cast<double>(loc.latitude) * M_PI_180;
 	const double L = static_cast<double>(loc.longitude) * M_PI_180; // OUR longitude. Meeus has it reversed
 	PlanetP obsPlanet = core->getCurrentPlanet();

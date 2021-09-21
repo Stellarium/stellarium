@@ -31,6 +31,7 @@
 #include "StelTranslator.hpp"
 #include "StelActionMgr.hpp"
 #include "Planet.hpp"
+#include "SolarSystem.hpp"
 
 #include <QMouseEvent>
 #include <QString>
@@ -38,7 +39,7 @@
 #include <QStringList>
 #include <QSettings>
 
-StelObjectMgr::StelObjectMgr() : objectPointerVisibility(true), searchRadiusPixel(25.), distanceWeight(1.f)
+StelObjectMgr::StelObjectMgr() : objectPointerVisibility(true), searchRadiusPixel(25.), distanceWeight(1.f), twilightAltitude(0.)
 {
 	setObjectName("StelObjectMgr");
 }
@@ -62,9 +63,26 @@ void StelObjectMgr::init()
 	actionsMgr->addAction("actionPrevious_Rising",  timeGroup, N_("Previous rising of the selected object"),  this, "previousRising()");
 	actionsMgr->addAction("actionPrevious_Setting", timeGroup, N_("Previous setting of the selected object"), this, "previousSetting()");
 
+	actionsMgr->addAction("actionNext_MorningTwilight",     timeGroup, N_("Next morning twilight"),     this, "nextMorningTwilight()");
+	actionsMgr->addAction("actionNext_EveningTwilight",     timeGroup, N_("Next evening twilight"),     this, "nextEveningTwilight()");
+	actionsMgr->addAction("actionToday_MorningTwilight",    timeGroup, N_("Today's morning twilight"),  this, "todayMorningTwilight()");
+	actionsMgr->addAction("actionToday_EveningTwilight",    timeGroup, N_("Today's evening twilight"),  this, "todayEveningTwilight()");
+	actionsMgr->addAction("actionPrevious_MorningTwilight", timeGroup, N_("Previous morning twilight"), this, "previousMorningTwilight()");
+	actionsMgr->addAction("actionPrevious_EveningTwilight", timeGroup, N_("Previous evening twilight"), this, "previousEveningTwilight()");
+
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	setFlagSelectedObjectPointer(conf->value("viewing/flag_show_selection_marker", true).toBool());
+	setTwilightAltitude(conf->value("astro/twilight_altitude", -6.).toDouble());
+}
+
+void StelObjectMgr::setTwilightAltitude(double alt)
+{
+	if (!qFuzzyCompare(alt, twilightAltitude))
+	{
+		twilightAltitude=alt;
+		emit twilightAltitudeChanged(alt);
+	}
 }
 
 void StelObjectMgr::nextTransit()
@@ -185,6 +203,72 @@ void StelObjectMgr::todaySetting()
 		if (rts[3]>-1000.)
 			core->setJD(rts[2]);
 	}
+}
+
+void StelObjectMgr::todayMorningTwilight()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	PlanetP sun=GETSTELMODULE(SolarSystem)->getSun();
+	Vec4d rts = sun->getRTSTime(core, twilightAltitude);
+	if (rts[3]>-1000.)
+			core->setJD(rts[0]);
+}
+
+void StelObjectMgr::todayEveningTwilight()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	PlanetP sun=GETSTELMODULE(SolarSystem)->getSun();
+	Vec4d rts = sun->getRTSTime(core, twilightAltitude);
+	if (rts[3]>-1000.)
+			core->setJD(rts[2]);
+}
+
+void StelObjectMgr::previousMorningTwilight()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	PlanetP sun=GETSTELMODULE(SolarSystem)->getSun();
+
+	core->addSolarDays(-1.0);
+	core->update(0);
+	Vec4d rts = sun->getRTSTime(core, twilightAltitude);
+	if (rts[3]>-1000.)
+		core->setJD(rts[0]);
+}
+
+void StelObjectMgr::previousEveningTwilight()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	PlanetP sun=GETSTELMODULE(SolarSystem)->getSun();
+
+	core->addSolarDays(-1.0);
+	core->update(0);
+	Vec4d rts = sun->getRTSTime(core, twilightAltitude);
+	if (rts[3]>-1000.)
+		core->setJD(rts[2]);
+}
+
+void StelObjectMgr::nextMorningTwilight()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	PlanetP sun=GETSTELMODULE(SolarSystem)->getSun();
+
+	core->addSolarDays(1.0);
+	core->update(0);
+	Vec4d rts = sun->getRTSTime(core, twilightAltitude);
+	if (rts[3]>-1000.)
+		core->setJD(rts[0]);
+}
+
+void StelObjectMgr::nextEveningTwilight()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	PlanetP sun=GETSTELMODULE(SolarSystem)->getSun();
+
+	core->addSolarDays(1.0);
+	core->update(0);
+	Vec4d rts = sun->getRTSTime(core, twilightAltitude);
+	if (rts[3]>-1000.)
+		core->setJD(rts[2]);
 }
 
 /*************************************************************************

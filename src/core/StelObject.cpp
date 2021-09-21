@@ -146,17 +146,18 @@ float StelObject::getVMagnitude(const StelCore* core) const
 	return 99;
 }
 
-Vec4d StelObject::getRTSTime(const StelCore *core) const
+Vec4d StelObject::getRTSTime(const StelCore *core, const double altitude) const
 {
 	const StelLocation loc=core->getCurrentLocation();
 	if (loc.name.contains("->")) // a spaceship
 		return Vec4d(0., 0., 0., -1000.);
 
 	//StelObjectMgr* omgr=GETSTELMODULE(StelObjectMgr);
-	double ho = 0.;
+	double ho = altitude*M_PI_180;
 	if (core->getSkyDrawer()->getFlagHasAtmosphere())
 	{
 		// canonical" refraction at horizon is -34'. Replace by pressure-dependent value here!
+		// This fixes 0-degree refraction. Not sure if we use refracted position throughout? Canonical ephemerides have -6/-12/-18 without refraction.
 		Refraction refraction=core->getSkyDrawer()->getRefraction();
 		Vec3d zeroAlt(1.0,0.0,0.0);
 		refraction.backward(zeroAlt);

@@ -528,6 +528,9 @@ public:
 	Vec3d getAberrationPush() const {return aberrationPush; }
 
 	//! Compute times of nearest rise, transit and set for a solar system object for current location.
+	//! @param core the currently active StelCore object
+	//! @param altitude (optional; default=0) altitude of the object, degrees.
+	//!        Setting this to -6. for the Sun will find begin and end for civil twilight.
 	//! @return Vec4d - time of rise, transit and set closest to current time; JD.
 	//! @note The fourth element flags particular conditions:
 	//!       *  +100. for circumpolar objects. Rise and set give lower culmination times.
@@ -535,7 +538,7 @@ public:
 	//!       * -1000. is used as "invalid" value. The result should then not be used.
 	//! @note This is based on Meeus, Astronomical Algorithms (2nd ed.), but deviates in details.
 	//! @note Limitation for efficiency: If this is a planet moon from another planet, we compute RTS for the parent planet instead!
-	virtual Vec4d getRTSTime(const StelCore* core) const Q_DECL_OVERRIDE;
+	virtual Vec4d getRTSTime(const StelCore* core, const double altitude=0.) const Q_DECL_OVERRIDE;
 	
 protected:
 	// These components for getInfoString() can be overridden in subclasses

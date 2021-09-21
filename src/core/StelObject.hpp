@@ -226,13 +226,16 @@ public:
 	bool isAboveRealHorizon(const StelCore* core) const;
 
 	//! Compute time of rise, transit and set for celestial object for current location.
+	//! @param core the currently active StelCore object
+	//! @param altitude (optional; default=0) altitude of the object, degrees.
+	//!        Setting this to -6. for the Sun will find begin and end for civil twilight.
 	//! @return Vec4d - time of rise, transit and set closest to current time; JD.
 	//! @note The fourth element flags particular conditions:
 	//!       *  +100. for circumpolar objects. Rise and set give lower culmination times.
 	//!       *  -100. for objects never rising. Rise and set give transit times.
 	//!       * -1000. is used as "invalid" value. The result should then not be used.
 	//! @note This is an abbreviated version of the method implemented in the Planet class.
-	virtual Vec4d getRTSTime(const StelCore* core) const;
+	virtual Vec4d getRTSTime(const StelCore* core, const double altitude=0.) const;
 
 
 	//! Return object's apparent V magnitude as seen from observer, without including extinction.
