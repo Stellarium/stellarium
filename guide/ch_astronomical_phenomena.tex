@@ -39,6 +39,39 @@ the \key{,} key.
   amounts of energy. By far the safest way to observe the Sun is to
   look at it on a computer screen, courtesy of Stellarium!}
 
+\subsection{Twilight}
+\label{sec:Phenomena:sun:twilight}
+
+The sunlight is scattered in Earth's atmosphere even if the Sun is
+below the horizon. The period after sunset when the Sun is higher than
+$-6°$ is called \indexterm[twilight, civil]{civil twilight}. The sky
+is generally bright enough for outdoor activity or reading the
+newspaper.
+
+As time progresses, the first stars will appear. The phase where the
+Sun is between $-6°$ and $-12°$ below the (mathematical) horizon is
+called \indexterm[twilight, nautical]{nautical twilight}: before the
+invention of satellite navigation, celestial navigation was used to
+find a ship's position on the oceans. This required that it was still
+bright enough so that the horizon line was visible, but already dark
+enough to see enough stars to clearly identify them and measure the
+altitude of a few of them. (See also section \ref{sec:plugins:NavigationalStars}.)
+
+The twilight phase when the Sun is between $-12°$ and $-18°$ is called
+\indexterm[twilight, astronomical]{astronomical twilight}. Only the
+western horizon shows some brightening, but else the natural sky is
+``almost'' as dark as it can get.
+
+In the morning the game is reversed. Dawn starts with astronomical
+twilight, progresses to nautical and civil twilight, and sunrise
+ends the night.
+
+In Stellarium, you can \newFeature{0.21.2} set the time when the Sun
+reaches a configured altitude. See
+section~\ref{sec:gui:help:hotkeys:example} about how to configure the
+program.
+
+
 \section{Stars}
 \label{sec:Phenomena:stars}
 
@@ -603,7 +636,7 @@ The visual magnitude of the planets can be found in astronomical
 almanachs. Over time, several scientific studies have refined these
 models. A few of them have been implemented in Stellarium:
 \begin{description}
-\item[Müller 1893] G. Müller formulated visual magnitudes for the
+\item[M\"uller 1893] G. M\"uller formulated visual magnitudes for the
   planets from visual observations of 1877--1891. They can be found in
   \citet{AstronomicalAlgorithms:1998} and \citet{ESAE:1961}. They give 
   notably lower brightness estimates than the later models, which however 
@@ -933,7 +966,7 @@ surface even during total eclipses. The blue parts of sunlight are scattered and
 so that there is a marked reddening of the light as it passes through the atmosphere, and this 
 makes the Moon appear in a deep red colour. The darkness and colors are notably influenced by 
 atmospheric clarity and clouds. After big volcanic eruptions eclipses are often reported darker.
-\name[André]{Danjon} (1890--1967) has introduced a scale for the apparent brightness of the 
+\name[Andr\'e]{Danjon} (1890--1967) has introduced a scale for the apparent brightness of the 
 fully eclipsed Moon, where 0 is given for extremely dark eclipses and 4 for very bright ones. 
 These unpredictable brightness differences make accurate simulation of the exact appearance impossible, 
 but Stellarium's display gives a pretty good impression for eclipses given as 2-3 on this \indexterm{Danjon scale}. 
@@ -942,7 +975,7 @@ Earth's atmosphere also makes the shadow slightly larger than what can
 be derived by the geometrical sizes and distances of the involved
 objects. The Astronomical Almanac uses a traditional enlargement by 2\% after
 \name[William]{Chauvenet} (1820--1870) while recent eclipse experts prefer another
-formulation which leads to a slightly smaller enlargement after \name[André]{Danjon} \citep{Espenak-Meeus:2009}. You
+formulation which leads to a slightly smaller enlargement after \name[Andr\'e]{Danjon} \citep{Espenak-Meeus:2009}. You
 can select which formulation you prefer (see section~\ref{sec:gui:view:sso}).
 
 \section{Observing Hints}

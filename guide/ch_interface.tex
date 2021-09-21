@@ -466,6 +466,9 @@ for changing the general appearance of the main sky view and projections. Some h
   \emph{Bortle Dark Sky Scale} where 1 means a good dark sky, and 9 is
   a very badly light-polluted sky. See Appendix~\ref{ch:BortleScale}
   for more information.
+\item[Solar altitude for Twilight Finder] You can configure \newFeature{0.21.2} 
+shortcut keys to go to the time when the sun reaches this altitude below the 
+mathematical horizon. See section~\ref{sec:gui:help:hotkeys:example}.
 \item[Shooting stars] Stellarium has a simple meteor simulation
   option. This setting controls how many shooting stars will be shown.
   Note that shooting stars are only visible when the time rate is 1, and
@@ -1347,6 +1350,32 @@ the key has been taken already, a message will tell you.
 
 This tool is available through the Help Tab of the Help window (see section~\ref{sec:gui:help:help}) and the
 Tools Tab of the Configuration window (see section~\ref{sec:gui:configuration:tools}).
+
+\subsection{Example}
+\label{sec:gui:help:hotkeys:example}
+
+If you want \newFeature{0.21.2} to follow the sky view each evening
+with the Sun at the same depth below the horizon, so that the twilight
+is of equal darkness, you may want to assign some actions to intuitive
+shortcut keys. In the Keyboard Shortcut editor
+(Fig.~\ref{fig:gui:hotkeys}), find the \emph{Date and Time} group and
+assign, e.g., the keys on your numeric keypad:
+
+\begin{tabular}{ll}
+  Previous evening twilight & Ctrl+9 \\
+  Previous morning twilight & Ctrl+7 \\
+  Next evening twilight     & Ctrl+3 \\
+  Next morning twilight     & Ctrl+1 \\
+  Today's evening twilight  & Ctrl+6 \\
+  Today's morning twilight  & Ctrl+4 \\
+\end{tabular}
+
+
+
+
+
+
+
 
 
 %%% Local Variables: 

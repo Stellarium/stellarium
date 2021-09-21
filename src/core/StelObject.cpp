@@ -19,6 +19,7 @@
 
 
 #include "StelObject.hpp"
+#include "StelObjectMgr.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelProjector.hpp"
@@ -145,73 +146,135 @@ float StelObject::getVMagnitude(const StelCore* core) const
 	return 99;
 }
 
-Vec3f StelObject::getRTSTime(StelCore *core) const
+Vec4d StelObject::getRTSTime(const StelCore *core, const double altitude) const
 {
-	return computeRTSTime(core);
-}
+	const StelLocation loc=core->getCurrentLocation();
+	if (loc.name.contains("->")) // a spaceship
+		return Vec4d(0., 0., 0., -1000.);
 
-Vec3f StelObject::computeRTSTime(StelCore *core) const
-{
-	double hz = 0.;
-	if ( (getEnglishName()=="Moon") && (core->getCurrentLocation().planetName=="Earth"))
-		hz = +0.7275*0.95; // horizon parallax factor
-	else if (getEnglishName()=="Sun")
-		hz = - getAngularSize(core); // semidiameter; Canonical value 16', but this is accurate even from other planets...
-	hz *= M_PI_180;
-
+	//StelObjectMgr* omgr=GETSTELMODULE(StelObjectMgr);
+	double ho = 0.;
 	if (core->getSkyDrawer()->getFlagHasAtmosphere())
 	{
 		// canonical" refraction at horizon is -34'. Replace by pressure-dependent value here!
+		// This fixes 0-degree refraction. Not sure if we use refracted position throughout? Canonical ephemerides have -6/-12/-18 without refraction.
 		Refraction refraction=core->getSkyDrawer()->getRefraction();
 		Vec3d zeroAlt(1.0,0.0,0.0);
 		refraction.backward(zeroAlt);
-		hz += asin(zeroAlt[2]);
+		ho += asin(zeroAlt[2]);
 	}
-	const double phi = static_cast<double>(core->getCurrentLocation().latitude) * M_PI_180;
-	PlanetP cp = core->getCurrentPlanet();
-	const double coeff = cp->getMeanSolarDay() / cp->getSiderealDay();
+	if (altitude != 0.)
+		ho = altitude*M_PI_180; // Not sure if we use refraction for off-zero settings?
+	const double phi = static_cast<double>(loc.latitude) * M_PI_180;
+	const double L = static_cast<double>(loc.longitude) * M_PI_180; // OUR longitude. Meeus has it reversed
+	PlanetP obsPlanet = core->getCurrentPlanet();
+	const double rotRate = obsPlanet->getSiderealDay();
+	const double currentJD=core->getJD();
+	const double currentJDE=core->getJDE();
 
-	Vec3f rts = Vec3f(-100.f,-100.f,-100.f);  // init as "never rises" [abs must be larger than 24!]
-
-	double dec, ra, ha, t;
-	StelUtils::rectToSphe(&ra, &dec, getSiderealPosGeometric(core));
-	ra = 2.*M_PI-ra;
-	ha = ra*12./M_PI;
-	if (ha>24.)
-		ha -= 24.;
-	// It seems necessary to have ha in [-12,12]!
-	if (ha>12.)
-		ha -= 24.;
-
-	const double JD = core->getJD();
-	const double ct = (JD - static_cast<int>(JD))*24.;
-
-	t = ct - ha*coeff; // earth: coeff=(360.985647/360.);
-	if (ha>12. && ha<=24.)
-		t += 24.;
-
-	t += static_cast<double>(core->getUTCOffset(JD)) + 12.;
-	t = StelUtils::fmodpos(t, 24.0);
-	rts[1] = static_cast<float>(t);
-
-	const double cosH = (sin(hz) - sin(phi)*sin(dec))/(cos(phi)*cos(dec));
-	if (cosH<-1.) // circumpolar
+	// And convert to equatorial coordinates of date. We can also use this day's current aberration, given the other uncertainties/omissions.
+	const Vec3d eq_2=getEquinoxEquatorialPos(core);
+	double ra2, de2;
+	StelUtils::rectToSphe(&ra2, &de2, eq_2);
+	// Around ra~12 there may be a jump between 12h and -12h which could crash interpolation. We better make sure to have either negative RA or RA>24 in this case.
+	if (cos(ra2)<0.)
 	{
-		rts[0]=rts[2]=100.f;
+		ra2=StelUtils::fmodpos(ra2, 2*M_PI);
 	}
-	else if (cosH>1.) // never rises
+
+	// 3. Approximate times:
+	// we use Sidereal Time of Place!
+	const double Theta2=obsPlanet->getSiderealTime(currentJD, currentJDE) * (M_PI/180.) + L;  // [radians]
+	double cosH0=(sin(ho)-sin(phi)*sin(de2))/(cos(phi)*cos(de2));
+
+	//omgr->removeExtraInfoStrings(StelObject::DebugAid);
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>2</sub>: %1=%2 &delta;<sub>2</sub>: %3<br/>").arg(QString::number(ra2, 'f', 4)).arg(StelUtils::radToHmsStr(ra2)).arg(StelUtils::radToDmsStr(de2)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("h<sub>0</sub>= %1<br/>").arg(StelUtils::radToDmsStr(ho)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("JD<sub>2</sub>= %1<br/>").arg(QString::number(currentJD, 'f', 5)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("&Theta;<sub>2</sub>= %1<br/>").arg(StelUtils::radToHmsStr(Theta2)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("cos H<sub>0</sub>= %1<br/>").arg(QString::number(cosH0, 'f', 4)));
+
+
+	double h2=StelUtils::fmodpos(Theta2-ra2, 2.*M_PI); if (h2>M_PI) h2-=2.*M_PI; // Hour angle at currentJD. This should be [-pi, pi]
+	// Find approximation of transit time
+	//double JDt=currentJD-h2/(M_PI*2.)*rotRate;
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("h<sub>2</sub>= %1<br/>").arg(QString::number(h2, 'f', 4)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("JD<sub>t</sub>= %1<br/>").arg(QString::number(JDt, 'f', 4)));
+
+	// In terms of chapter 15, where m0, m1 and m2 are fractions of day within the current day, we use mr, mt, ms as fractions of day from currentJD, and they lie within [-1...+1].
+
+	double mr, ms, flag=0.;
+	double mt=-h2*(0.5*rotRate/M_PI);
+
+	// circumpolar: set rise and set times to lower culmination, i.e. 1/2 rotation from transit
+	if (fabs(cosH0)>1.)
 	{
-		rts[0]=rts[2]=-100.f;
+		flag = (cosH0<-1.) ? 100 : -100; // circumpolar / never rises
+		mr   = (cosH0<-1.) ? mt-0.5*rotRate : mt;
+		ms   = (cosH0<-1.) ? mt+0.5*rotRate : mt;
 	}
 	else
 	{
-		const double HC = acos(cosH)*12.*coeff/M_PI;
+		const double H0 = acos(cosH0);
+		//omgr->addToExtraInfoString(StelObject::DebugAid, QString("H<sub>0</sub>= %1<br/>").arg(QString::number(H0*M_180_PI, 'f', 6)));
 
-		rts[0] = static_cast<float>(StelUtils::fmodpos(t - HC, 24.));
-		rts[2] = static_cast<float>(StelUtils::fmodpos(t + HC, 24.));
+		mr = mt - H0*rotRate/(2.*M_PI);
+		ms = mt + H0*rotRate/(2.*M_PI);
 	}
 
-	return rts;
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>t</sub>= %1<br/>").arg(QString::number(mt, 'f', 6)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>r</sub>= %1<br/>").arg(QString::number(mr, 'f', 6)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>s</sub>= %1<br/>").arg(QString::number(ms, 'f', 6)));
+
+	// Not quite done! Do the final tweaks...
+	if (fabs(cosH0)<1.)
+	{
+		// RISE
+		int iterations=0; // add this to limit the loops, just in case.
+		double Delta_mr=1.;
+		while (Delta_mr > 1./8640.) // Do that until accurate to 10 seconds
+		{
+			const double theta_mr=obsPlanet->getSiderealTime(currentJD+mr, currentJDE+mr) * (M_PI/180.) + L;  // [radians]
+			double hr=StelUtils::fmodpos(theta_mr-ra2, 2.*M_PI); if (hr>M_PI) hr-=2.*M_PI; // Hour angle of the rising RA at currentJD. This should be [-pi, pi]
+			//omgr->addToExtraInfoString(StelObject::DebugAid, QString("h<sub>r</sub>': %1 = %2<br/>").arg(QString::number(hr, 'f', 6)).arg(StelUtils::radToHmsStr(hr, true)));
+
+			double ar=asin(sin(phi)*sin(de2)+cos(phi)*cos(de2)*cos(hr)); // altitude at this hour angle
+
+			Delta_mr= (ar-ho)/(cos(de2)*cos(phi)*sin(hr)) / (M_PI*2.);
+			Delta_mr=StelUtils::fmodpos(Delta_mr+0.5, 1.0)-0.5; // ensure this is a small correction
+			mr+=Delta_mr;
+
+			//omgr->addToExtraInfoString(StelObject::DebugAid, QString("alt<sub>r</sub>': %1 = %2<br/>").arg(QString::number(ar, 'f', 6)).arg(StelUtils::radToDmsStr(ar)));
+			//omgr->addToExtraInfoString(StelObject::DebugAid, QString("&Delta;<sub>mr</sub>'= %1<br/>").arg(QString::number(Delta_mr, 'f', 6)));
+			//omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>r</sub>' = %1<br/>").arg(QString::number(mr, 'f', 6)));
+
+			if (++iterations >= 5)
+				break;
+		}
+		// SET
+		iterations=0; // add this to limit the loops, just in case.
+		double Delta_ms=1.;
+		while (Delta_ms > 1./8640.) // Do that until accurate to 10 seconds
+		{
+			const double theta_ms=obsPlanet->getSiderealTime(currentJD+ms, currentJDE+ms) * (M_PI/180.) + L;  // [radians]
+			double hs=StelUtils::fmodpos(theta_ms-ra2, 2.*M_PI); if (hs>M_PI) hs-=2.*M_PI; // Hour angle of the setting RA at currentJD. This should be [-pi, pi]
+			//omgr->addToExtraInfoString(StelObject::DebugAid, QString("h<sub>s</sub>': %1 = %2<br/>").arg(QString::number(hs, 'f', 6)).arg(StelUtils::radToHmsStr(hs, true)));
+
+			double as=asin(sin(phi)*sin(de2)+cos(phi)*cos(de2)*cos(hs)); // altitude at this hour angle
+
+			Delta_ms= (as-ho)/(cos(de2)*cos(phi)*sin(hs)) / (M_PI*2.);
+			Delta_ms=StelUtils::fmodpos(Delta_ms+0.5, 1.0)-0.5; // ensure this is a small correction
+			ms+=Delta_ms;
+
+			//omgr->addToExtraInfoString(StelObject::DebugAid, QString("alt<sub>s</sub>': %1 = %2<br/>").arg(QString::number(as, 'f', 6)).arg(StelUtils::radToDmsStr(as)));
+			//omgr->addToExtraInfoString(StelObject::DebugAid, QString("&Delta;<sub>ms</sub>'= %1<br/>").arg(QString::number(Delta_ms, 'f', 6)));
+			//omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>s</sub>' = %1<br/>").arg(QString::number(ms, 'f', 6)));
+
+			if (++iterations >= 5)
+				break;
+		}
+	}
+	return Vec4d(currentJD+mr, currentJD+mt, currentJD+ms, flag);
 }
 
 float StelObject::getSelectPriority(const StelCore* core) const
@@ -264,6 +327,7 @@ QString StelObject::getMagnitudeInfoString(const StelCore *core, const InfoStrin
 QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
 	StelApp& app = StelApp::getInstance();
+	StelObjectMgr* omgr=GETSTELMODULE(StelObjectMgr);
 	const bool withAtmosphere = core->getSkyDrawer()->getFlagHasAtmosphere();
 	const bool withDecimalDegree = app.getFlagShowDecimalDegrees();
 	const bool useSouthAzimuth = app.getFlagSouthAzimuthUsage();
@@ -303,6 +367,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		else
 			res += QString("%1 (J2000.0): %2/%3<br/>").arg(RADec, firstCoordinate, secondCoordinate);
 		res += getExtraInfoStrings(RaDecJ2000).join("");
+		res += omgr->getExtraInfoStrings(RaDecJ2000).join("");
 	}
 
 	if (flags&RaDecOfDate)
@@ -325,6 +390,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		else
 			res += QString("%1 (%4): %2/%3<br/>").arg(RADec, firstCoordinate, secondCoordinate, cepoch);
 		res += getExtraInfoStrings(RaDecOfDate).join("");
+		res += omgr->getExtraInfoStrings(RaDecOfDate).join("");
 	}
 
 	if (flags&HourAngle)
@@ -375,6 +441,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		else
 			res += QString("%1: %2/%3 %4<br/>").arg(HADec, firstCoordinate, secondCoordinate, apparent);
 		res += getExtraInfoStrings(HourAngle).join("");
+		res += omgr->getExtraInfoStrings(HourAngle).join("");
 	}
 
 	if (flags&AltAzi)
@@ -567,6 +634,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		if (withTables)
 			res += "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
 		res += getExtraInfoStrings(OtherCoord).join("");
+		res += omgr->getExtraInfoStrings(OtherCoord).join("");
 		if (withTables)
 			 res += "</table>";
 	}
@@ -575,8 +643,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	{
 		const double longitude=static_cast<double>(core->getCurrentLocation().longitude);
 		double sidereal=(get_mean_sidereal_time(core->getJD(), core->getJDE())  + longitude) / 15.;
-		sidereal=fmod(sidereal, 24.);
-		if (sidereal < 0.) sidereal+=24.;
+		sidereal=StelUtils::fmodpos(sidereal, 24.);
 		QString STc = q_("Mean Sidereal Time");
 		QString STd = StelUtils::hoursToHmsStr(sidereal);
 
@@ -591,8 +658,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		if (core->getUseNutation())
 		{
 			sidereal=(get_apparent_sidereal_time(core->getJD(), core->getJDE()) + longitude) / 15.;
-			sidereal=fmod(sidereal, 24.);
-			if (sidereal < 0.) sidereal+=24.;
+			sidereal=StelUtils::fmodpos(sidereal, 24.);
 			STc = q_("Apparent Sidereal Time");
 			STd = StelUtils::hoursToHmsStr(sidereal);
 			if (withTables)
@@ -601,81 +667,91 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 				res += QString("%1: %2<br/>").arg(STc, STd);
 		}
 		res += getExtraInfoStrings(flags&SiderealTime).join("");
+		res += omgr->getExtraInfoStrings(flags&SiderealTime).join("");
 		if (withTables && !(flags&RTSTime && getType()!=QStringLiteral("Satellite")))
 			res += "</table>";
 	}
 
-	if (flags&RTSTime && getType()!=QStringLiteral("Satellite") && !currentPlanet.contains("observer", Qt::CaseInsensitive))
+	if (flags&RTSTime && getType()!=QStringLiteral("Satellite") && !currentPlanet.contains("observer", Qt::CaseInsensitive) && !(core->getCurrentLocation().name.contains("->")))
 	{
-		Vec3f rts = getRTSTime(StelApp::getInstance().getCore()); // required not const StelCore!
+		const double utcShift = core->getUTCOffset(core->getJD()) / 24.; // Fix DST shift...
+		Vec4d rts = getRTSTime(core);
 		QString sTransit = qc_("Transit", "celestial event; passage across a meridian");
 		QString sRise = qc_("Rise", "celestial event");
 		QString sSet = qc_("Set", "celestial event");
-		float sunrise = 0.f;
-		float sunset = 24.f;
-		bool isSun = false;
-		if (getEnglishName()=="Sun")
-			isSun = true;
+		double sunrise = 0.;
+		double sunset = 24.;
+		const bool isSun = (getEnglishName()=="Sun");
+		int hr, min, sec;
+		double hour(0);
 
 		if (withTables && !(flags&SiderealTime && currentPlanet==QStringLiteral("Earth")))
 			res += "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
 
-		if (rts[0]>-99.f && rts[0]<100.f)
+		if (rts[3]==0.)
 		{
+			StelUtils::getTimeFromJulianDay(rts[0]+utcShift, &hr, &min, &sec);
+			hour=static_cast<double>(hr)+static_cast<double>(min)/60.+static_cast<double>(sec)/3600.;
 			if (withTables)
-				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sRise, StelUtils::hoursToHmsStr(rts[0], true));
+				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sRise, StelUtils::hoursToHmsStr(hour, true));
 			else
-				res += QString("%1: %2<br/>").arg(sRise, StelUtils::hoursToHmsStr(rts[0], true));
+				res += QString("%1: %2<br/>").arg(sRise, StelUtils::hoursToHmsStr(hour, true));
 
-			sunrise = rts[0];
+			sunrise = hour;
 		}
 
+		StelUtils::getTimeFromJulianDay(rts[1]+utcShift, &hr, &min, &sec);
+		hour=static_cast<double>(hr)+static_cast<double>(min)/60.+static_cast<double>(sec)/3600.;
 		if (withTables)
-			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true));
+			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sTransit, StelUtils::hoursToHmsStr(hour, true));
 		else
-			res += QString("%1: %2<br/>").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true));
+			res += QString("%1: %2<br/>").arg(sTransit, StelUtils::hoursToHmsStr(hour, true));
 
-		if (rts[2]>-99.f && rts[2]<100.f)
+		if (rts[3]==0.)
 		{
+			StelUtils::getTimeFromJulianDay(rts[2]+utcShift, &hr, &min, &sec);
+			hour=static_cast<double>(hr)+static_cast<double>(min)/60.+static_cast<double>(sec)/3600.;
 			if (withTables)
-				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sSet, StelUtils::hoursToHmsStr(rts[2], true));
+				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sSet, StelUtils::hoursToHmsStr(hour, true));
 			else
-				res += QString("%1: %2<br/>").arg(sSet, StelUtils::hoursToHmsStr(rts[2], true));
+				res += QString("%1: %2<br/>").arg(sSet, StelUtils::hoursToHmsStr(hour, true));
 
-			sunset = rts[2];
+			sunset = hour;
 		}
 
-		float day = sunset - sunrise;
-		if (isSun && day<24.f)
+		double lengthOfDay = sunset - sunrise;
+		if (isSun && lengthOfDay<24.)
 		{
 			QString sDay = q_("Daytime");
 			if (withTables)
-				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sDay, StelUtils::hoursToHmsStr(day, true));
+				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sDay, StelUtils::hoursToHmsStr(lengthOfDay, true));
 			else
-				res += QString("%1: %2<br/>").arg(sDay, StelUtils::hoursToHmsStr(day, true));
+				res += QString("%1: %2<br/>").arg(sDay, StelUtils::hoursToHmsStr(lengthOfDay, true));
 		}
 
 		if (withTables)
 			res += "</table>";
 
-		if (rts[0]<-99.f && rts[2]<-99.f )
+		if (rts[3]<0.)
 		{
 			if (isSun)
 				res += q_("Polar night") + "<br />";
 			else
 				res += q_("This object never rises") + "<br />";
 		}
-		else if (rts[0]>99.f && rts[2]>99.f)
+		else if (rts[3]>0.)
 		{
 			if (isSun)
 				res += q_("Polar day") + "<br />";
 			else
 				res += q_("Circumpolar (never sets)") + "<br />";
 		}
-		else if (rts[0]>99.f && rts[2]<99.f)
-			res += q_("Polar dawn") + "<br />";
-		else if (rts[0]<99.f && rts[2]>99.f)
-			res += q_("Polar dusk") + "<br />";
+		// These never could have been seen before (??)
+		//else if (rts[0]>99. && rts[2]<99.)
+		//	res += q_("Polar dawn") + "<br />";
+		//else if (rts[0]<99. && rts[2]>99.)
+		//	res += q_("Polar dusk") + "<br />";
+
 
 		// Greatest Digression: limiting azimuth and hour angles for stars with upper culmination between pole and zenith
 		double dec_equ, ra_equ;
@@ -737,6 +813,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 				res += QString("%1: %2=%3, %4=%5<br/>").arg(event, azStr,  firstCoordinate, haStr, secondCoordinate);
 		}
 		res += getExtraInfoStrings(flags&RTSTime).join(' ');
+		res += omgr->getExtraInfoStrings(flags&RTSTime).join(' ');
 	}
 
 	if (flags&Extra)
@@ -753,6 +830,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			res += QString("%1: %2<br/>").arg(q_("Parallactic Angle")).arg(pa);
 		}
 		res += getExtraInfoStrings(Extra).join("");
+		res += omgr->getExtraInfoStrings(Extra).join("");
 	}
 
 	if (flags&IAUConstellation)
@@ -760,6 +838,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		QString constel=core->getIAUConstellation(getEquinoxEquatorialPos(core));
 		res += QString("%1: %2<br/>").arg(q_("IAU Constellation"), constel);
 		res += getExtraInfoStrings(flags&IAUConstellation).join("");
+		res += omgr->getExtraInfoStrings(flags&IAUConstellation).join("");
 	}
 
 	return res;
@@ -768,8 +847,12 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 // Apply post processing on the info string
 void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flags) const
 {
+	StelObjectMgr* omgr;
+	omgr=GETSTELMODULE(StelObjectMgr);
 	str.append(getExtraInfoStrings(Script).join(' '));
+	str.append(omgr->getExtraInfoStrings(Script).join(' '));
 	str.append(getExtraInfoStrings(DebugAid).join(' ')); // TBD: Remove for Release builds?
+	str.append(omgr->getExtraInfoStrings(DebugAid).join(' ')); // TBD: Remove for Release builds?
 
 	// hack for avoiding an empty line before table
 	str.replace(QRegExp("<br(\\s*/)?><table"), "<table");
@@ -937,14 +1020,32 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	// 'above horizon' flag
 	map.insert("above-horizon", isAboveRealHorizon(core));
 
-	Vec3d rts = getRTSTime(StelApp::getInstance().getCore()).toVec3d();
-	map.insert("rise", StelUtils::hoursToHmsStr(rts[0], true));
-	map.insert("rise-dhr", rts[0]);
-	map.insert("transit", StelUtils::hoursToHmsStr(rts[1], true));
-	map.insert("transit-dhr", rts[1]);
-	map.insert("set", StelUtils::hoursToHmsStr(rts[2], true));
-	map.insert("set-dhr", rts[2]);
+	Vec4d rts = getRTSTime(core);
+	if (rts[3]>-1000.)
+	{
+		const double utcShift = core->getUTCOffset(core->getJD()) / 24.; // Fix DST shift...
+		int hr, min, sec;
+		StelUtils::getTimeFromJulianDay(rts[1]+utcShift, &hr, &min, &sec);
+		double hours=hr+static_cast<double>(min)/60. + static_cast<double>(sec)/3600.;
 
+		map.insert("transit", StelUtils::hoursToHmsStr(hours, true));
+		map.insert("transit-dhr", hours);
+		if (rts[3]==0.)
+		{
+			StelUtils::getTimeFromJulianDay(rts[0]+utcShift, &hr, &min, &sec);
+			hours=hr+static_cast<double>(min)/60. + static_cast<double>(sec)/3600.;
+			map.insert("rise", StelUtils::hoursToHmsStr(hours, true));
+			map.insert("rise-dhr", hours);
+			StelUtils::getTimeFromJulianDay(rts[2]+utcShift, &hr, &min, &sec);
+			hours=hr+static_cast<double>(min)/60. + static_cast<double>(sec)/3600.;
+			map.insert("set", StelUtils::hoursToHmsStr(hours, true));
+			map.insert("set-dhr", hours);
+		}
+		else {
+			map.insert("rise", "---");
+			map.insert("set", "---");
+		}
+	}
 	return map;
 }
 
@@ -970,7 +1071,6 @@ QStringList StelObject::getExtraInfoStrings(const InfoStringGroup& flags) const
 		if (i.key() & flags)
 		{
 			QString val=i.value();
-			// TODO: Maybe exclude DebugAid flags from Release builds?
 			if (flags&DebugAid)
 				val.prepend("DEBUG: ");
 			// For unclear reasons the sequence of entries can be preserved by *pre*pending in the returned list.

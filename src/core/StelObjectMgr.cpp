@@ -31,6 +31,7 @@
 #include "StelTranslator.hpp"
 #include "StelActionMgr.hpp"
 #include "Planet.hpp"
+#include "SolarSystem.hpp"
 
 #include <QMouseEvent>
 #include <QString>
@@ -38,7 +39,7 @@
 #include <QStringList>
 #include <QSettings>
 
-StelObjectMgr::StelObjectMgr() : objectPointerVisibility(true), searchRadiusPixel(25.), distanceWeight(1.f)
+StelObjectMgr::StelObjectMgr() : objectPointerVisibility(true), searchRadiusPixel(25.), distanceWeight(1.f), twilightAltitude(0.)
 {
 	setObjectName("StelObjectMgr");
 }
@@ -52,19 +53,36 @@ void StelObjectMgr::init()
 	// Register all the core actions.
 	QString timeGroup = N_("Date and Time");	
 	StelActionMgr* actionsMgr = StelApp::getInstance().getStelActionManager();
-	actionsMgr->addAction("actionNext_Transit", timeGroup, N_("Next transit of the selected object"), this, "nextTransit()");
-	actionsMgr->addAction("actionNext_Rising", timeGroup, N_("Next rising of the selected object"), this, "nextRising()");
-	actionsMgr->addAction("actionNext_Setting", timeGroup, N_("Next setting of the selected object"), this, "nextSetting()");
-	actionsMgr->addAction("actionToday_Transit", timeGroup, N_("Today's transit of the selected object"), this, "todayTransit()");
-	actionsMgr->addAction("actionToday_Rising", timeGroup, N_("Today's rising of the selected object"), this, "todayRising()");
-	actionsMgr->addAction("actionToday_Setting", timeGroup, N_("Today's setting of the selected object"), this, "todaySetting()");
+	actionsMgr->addAction("actionNext_Transit",     timeGroup, N_("Next transit of the selected object"),     this, "nextTransit()");
+	actionsMgr->addAction("actionNext_Rising",      timeGroup, N_("Next rising of the selected object"),      this, "nextRising()");
+	actionsMgr->addAction("actionNext_Setting",     timeGroup, N_("Next setting of the selected object"),     this, "nextSetting()");
+	actionsMgr->addAction("actionToday_Transit",    timeGroup, N_("Today's transit of the selected object"),  this, "todayTransit()");
+	actionsMgr->addAction("actionToday_Rising",     timeGroup, N_("Today's rising of the selected object"),   this, "todayRising()");
+	actionsMgr->addAction("actionToday_Setting",    timeGroup, N_("Today's setting of the selected object"),  this, "todaySetting()");
 	actionsMgr->addAction("actionPrevious_Transit", timeGroup, N_("Previous transit of the selected object"), this, "previousTransit()");
-	actionsMgr->addAction("actionPrevious_Rising", timeGroup, N_("Previous rising of the selected object"), this, "previousRising()");
+	actionsMgr->addAction("actionPrevious_Rising",  timeGroup, N_("Previous rising of the selected object"),  this, "previousRising()");
 	actionsMgr->addAction("actionPrevious_Setting", timeGroup, N_("Previous setting of the selected object"), this, "previousSetting()");
+
+	actionsMgr->addAction("actionNext_MorningTwilight",     timeGroup, N_("Next morning twilight"),     this, "nextMorningTwilight()");
+	actionsMgr->addAction("actionNext_EveningTwilight",     timeGroup, N_("Next evening twilight"),     this, "nextEveningTwilight()");
+	actionsMgr->addAction("actionToday_MorningTwilight",    timeGroup, N_("Today's morning twilight"),  this, "todayMorningTwilight()");
+	actionsMgr->addAction("actionToday_EveningTwilight",    timeGroup, N_("Today's evening twilight"),  this, "todayEveningTwilight()");
+	actionsMgr->addAction("actionPrevious_MorningTwilight", timeGroup, N_("Previous morning twilight"), this, "previousMorningTwilight()");
+	actionsMgr->addAction("actionPrevious_EveningTwilight", timeGroup, N_("Previous evening twilight"), this, "previousEveningTwilight()");
 
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	setFlagSelectedObjectPointer(conf->value("viewing/flag_show_selection_marker", true).toBool());
+	setTwilightAltitude(conf->value("astro/twilight_altitude", -6.).toDouble());
+}
+
+void StelObjectMgr::setTwilightAltitude(double alt)
+{
+	if (!qFuzzyCompare(alt, twilightAltitude))
+	{
+		twilightAltitude=alt;
+		emit twilightAltitudeChanged(alt);
+	}
 }
 
 void StelObjectMgr::nextTransit()
@@ -74,9 +92,10 @@ void StelObjectMgr::nextTransit()
 	{
 		StelCore* core = StelApp::getInstance().getCore();
 		core->addSolarDays(1.0);
-		double JD = core->getJD();
-		Vec3f rts = selected[0]->getRTSTime(core);
-		core->setJD(static_cast<int>(JD) + static_cast<double>(rts[1]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+		core->update(0);
+		Vec4d rts = selected[0]->getRTSTime(core);
+		if (rts[3]>-1000.)
+			core->setJD(rts[1]);
 	}
 }
 
@@ -87,10 +106,10 @@ void StelObjectMgr::nextRising()
 	{
 		StelCore* core = StelApp::getInstance().getCore();
 		core->addSolarDays(1.0);
-		double JD = core->getJD();
-		Vec3f rts = selected[0]->getRTSTime(core);
-		if (rts[0]>-99.f && rts[0]<100.f)
-			core->setJD(static_cast<int>(JD) + static_cast<double>(rts[0]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+		core->update(0);
+		Vec4d rts = selected[0]->getRTSTime(core);
+		if (rts[3]>-1000.)
+			core->setJD(rts[0]);
 	}
 }
 
@@ -101,10 +120,10 @@ void StelObjectMgr::nextSetting()
 	{
 		StelCore* core = StelApp::getInstance().getCore();
 		core->addSolarDays(1.0);
-		double JD = core->getJD();
-		Vec3f rts = selected[0]->getRTSTime(core);
-		if (rts[2]>-99.f && rts[2]<100.f)
-			core->setJD(static_cast<int>(JD) + static_cast<double>(rts[2]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+		core->update(0);
+		Vec4d rts = selected[0]->getRTSTime(core);
+		if (rts[3]>-1000.)
+			core->setJD(rts[2]);
 	}
 }
 
@@ -115,9 +134,10 @@ void StelObjectMgr::previousTransit()
 	{
 		StelCore* core = StelApp::getInstance().getCore();
 		core->addSolarDays(-1.0);
-		double JD = core->getJD();
-		Vec3f rts = selected[0]->getRTSTime(core);
-		core->setJD(static_cast<int>(JD) + static_cast<double>(rts[1]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+		core->update(0);
+		Vec4d rts = selected[0]->getRTSTime(core);
+		if (rts[3]>-1000.)
+			core->setJD(rts[1]);
 	}
 }
 
@@ -128,10 +148,10 @@ void StelObjectMgr::previousRising()
 	{
 		StelCore* core = StelApp::getInstance().getCore();
 		core->addSolarDays(-1.0);
-		double JD = core->getJD();
-		Vec3f rts = selected[0]->getRTSTime(core);
-		if (rts[0]>-99.f && rts[0]<100.f)
-			core->setJD(static_cast<int>(JD) + static_cast<double>(rts[0]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+		core->update(0);
+		Vec4d rts = selected[0]->getRTSTime(core);
+		if (rts[3]>-1000.)
+			core->setJD(rts[0]);
 	}
 }
 
@@ -142,10 +162,10 @@ void StelObjectMgr::previousSetting()
 	{
 		StelCore* core = StelApp::getInstance().getCore();
 		core->addSolarDays(-1.0);
-		double JD = core->getJD();
-		Vec3f rts = selected[0]->getRTSTime(core);
-		if (rts[2]>-99.f && rts[2]<100.f)
-			core->setJD(static_cast<int>(JD) + static_cast<double>(rts[2]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+		core->update(0);
+		Vec4d rts = selected[0]->getRTSTime(core);
+		if (rts[3]>-1000.)
+			core->setJD(rts[2]);
 	}
 }
 
@@ -155,9 +175,9 @@ void StelObjectMgr::todayTransit()
 	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
 	{
 		StelCore* core = StelApp::getInstance().getCore();
-		double JD = core->getJD();
-		Vec3f rts = selected[0]->getRTSTime(core);
-		core->setJD(static_cast<int>(JD) + static_cast<double>(rts[1]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+		Vec4d rts = selected[0]->getRTSTime(core);
+		if (rts[3]>-1000.)
+			core->setJD(rts[1]);
 	}
 }
 
@@ -167,10 +187,9 @@ void StelObjectMgr::todayRising()
 	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
 	{
 		StelCore* core = StelApp::getInstance().getCore();
-		double JD = core->getJD();
-		Vec3f rts = selected[0]->getRTSTime(core);
-		if (rts[0]>-99.f && rts[0]<100.f)
-			core->setJD(static_cast<int>(JD) + static_cast<double>(rts[0]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+		Vec4d rts = selected[0]->getRTSTime(core);
+		if (rts[3]>-1000.)
+			core->setJD(rts[0]);
 	}
 }
 
@@ -180,11 +199,76 @@ void StelObjectMgr::todaySetting()
 	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
 	{
 		StelCore* core = StelApp::getInstance().getCore();
-		double JD = core->getJD();
-		Vec3f rts = selected[0]->getRTSTime(core);
-		if (rts[2]>-99.f && rts[2]<100.f)
-			core->setJD(static_cast<int>(JD) + static_cast<double>(rts[2]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+		Vec4d rts = selected[0]->getRTSTime(core);
+		if (rts[3]>-1000.)
+			core->setJD(rts[2]);
 	}
+}
+
+void StelObjectMgr::todayMorningTwilight()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	PlanetP sun=GETSTELMODULE(SolarSystem)->getSun();
+	Vec4d rts = sun->getRTSTime(core, twilightAltitude);
+	if (rts[3]>-1000.)
+			core->setJD(rts[0]);
+}
+
+void StelObjectMgr::todayEveningTwilight()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	PlanetP sun=GETSTELMODULE(SolarSystem)->getSun();
+	Vec4d rts = sun->getRTSTime(core, twilightAltitude);
+	if (rts[3]>-1000.)
+			core->setJD(rts[2]);
+}
+
+void StelObjectMgr::previousMorningTwilight()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	PlanetP sun=GETSTELMODULE(SolarSystem)->getSun();
+
+	core->addSolarDays(-1.0);
+	core->update(0);
+	Vec4d rts = sun->getRTSTime(core, twilightAltitude);
+	if (rts[3]>-1000.)
+		core->setJD(rts[0]);
+}
+
+void StelObjectMgr::previousEveningTwilight()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	PlanetP sun=GETSTELMODULE(SolarSystem)->getSun();
+
+	core->addSolarDays(-1.0);
+	core->update(0);
+	Vec4d rts = sun->getRTSTime(core, twilightAltitude);
+	if (rts[3]>-1000.)
+		core->setJD(rts[2]);
+}
+
+void StelObjectMgr::nextMorningTwilight()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	PlanetP sun=GETSTELMODULE(SolarSystem)->getSun();
+
+	core->addSolarDays(1.0);
+	core->update(0);
+	Vec4d rts = sun->getRTSTime(core, twilightAltitude);
+	if (rts[3]>-1000.)
+		core->setJD(rts[0]);
+}
+
+void StelObjectMgr::nextEveningTwilight()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	PlanetP sun=GETSTELMODULE(SolarSystem)->getSun();
+
+	core->addSolarDays(1.0);
+	core->update(0);
+	Vec4d rts = sun->getRTSTime(core, twilightAltitude);
+	if (rts[3]>-1000.)
+		core->setJD(rts[2]);
 }
 
 /*************************************************************************
@@ -705,4 +789,50 @@ QVariantMap StelObjectMgr::getObjectInfo(const StelObjectP obj)
 		map.insert("found", true);
 	}
 	return map;
+}
+
+
+
+void StelObjectMgr::setExtraInfoString(const StelObject::InfoStringGroup& flags, const QString &str)
+{
+	extraInfoStrings.remove(flags); // delete all entries with these flags
+	if (str.length()>0)
+		extraInfoStrings.insert(flags, str);
+}
+void StelObjectMgr::addToExtraInfoString(const StelObject::InfoStringGroup &flags, const QString &str)
+{
+	// Avoid insertion of full duplicates!
+	if (!extraInfoStrings.contains(flags, str))
+		extraInfoStrings.insertMulti(flags, str);
+}
+
+QStringList StelObjectMgr::getExtraInfoStrings(const StelObject::InfoStringGroup& flags) const
+{
+	QStringList list;
+	QMultiMap<StelObject::InfoStringGroup, QString>::const_iterator i = extraInfoStrings.constBegin();
+	while (i != extraInfoStrings.constEnd())
+	{
+		if (i.key() & flags)
+		{
+			QString val=i.value();
+			if (flags&StelObject::DebugAid)
+				val.prepend("DEBUG: ");
+			// For unclear reasons the sequence of entries can be preserved by *pre*pending in the returned list.
+			list.prepend(val);
+		}
+		++i;
+	}
+	return list;
+}
+
+void StelObjectMgr::removeExtraInfoStrings(const StelObject::InfoStringGroup& flags)
+{
+	QMultiMap<StelObject::InfoStringGroup, QString>::iterator i = extraInfoStrings.begin();
+	while (i != extraInfoStrings.end())
+	{
+		if (i.key() & flags)
+			i=extraInfoStrings.erase(i);
+		else
+			++i;
+	}
 }

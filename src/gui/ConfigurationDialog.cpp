@@ -775,6 +775,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("stars/flag_star_twinkle",				propMgr->getStelPropertyValue("StelSkyDrawer.flagStarTwinkle").toBool());
 	conf->setValue("stars/star_twinkle_amount",			QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.twinkleAmount").toDouble(), 'f', 2));
 	conf->setValue("stars/flag_star_spiky",					propMgr->getStelPropertyValue("StelSkyDrawer.flagStarSpiky").toBool());
+	conf->setValue("astro/twilight_altitude",			propMgr->getStelPropertyValue("StelObjectMgr.twilightAltitude").toDouble());
 	conf->setValue("astro/flag_star_magnitude_limit",		propMgr->getStelPropertyValue("StelSkyDrawer.flagStarMagnitudeLimit").toBool());
 	conf->setValue("astro/star_magnitude_limit",			QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.customStarMagLimit").toDouble(), 'f', 2));
 	conf->setValue("astro/flag_planet_magnitude_limit",		propMgr->getStelPropertyValue("StelSkyDrawer.flagPlanetMagnitudeLimit").toBool());

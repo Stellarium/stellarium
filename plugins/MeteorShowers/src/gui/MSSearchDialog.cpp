@@ -175,10 +175,8 @@ void MSSearchDialog::selectEvent(const QModelIndex &modelIndex)
 
 	if (obj) // Set time near transit...
 	{
-		Vec3f rts = obj->getRTSTime(core);
-		double JD = core->getJD();
-		JD = static_cast<int>(JD) + 0.5 + rts[1]/24.f - core->getUTCOffset(JD)/24.;
-		core->setJD(JD);
+		Vec4d rts = obj->getRTSTime(core);
+		core->setJD(rts[1]);
 	}
 
 	// Move to object

@@ -1688,7 +1688,8 @@ void Observability::loadConfiguration()
 	show_AcroCos = conf->value("show_AcroCos", true).toBool();
 	show_Good_Nights = conf->value("show_Good_Nights", true).toBool();
 	show_Best_Night = conf->value("show_Best_Night", true).toBool();
-	show_Today = conf->value("show_Today", true).toBool();
+	//show_Today = conf->value("show_Today", true).toBool();
+	show_Today = false; // DISABLED for 0.21.2.
 	show_FullMoon = conf->value("show_FullMoon", true).toBool();
 //	show_Crescent = conf->value("show_Crescent", true).toBool();
 //	show_SuperMoon = conf->value("show_SuperMoon", true).toBool();
@@ -1737,7 +1738,9 @@ void Observability::saveConfiguration()
 
 void Observability::enableTodayField(bool enabled)
 {
-	show_Today = enabled;
+	//show_Today = enabled;
+	Q_UNUSED(enabled)
+	show_Today = false; // DISABLED for 0.21.2
 	configChanged = true;
 }
 
