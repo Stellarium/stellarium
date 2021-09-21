@@ -252,8 +252,8 @@ QString StelObject::getMagnitudeInfoString(const StelCore *core, const InfoStrin
 		QString str = QString("%1: <b>%2</b>").arg(q_("Magnitude"), QString::number(getVMagnitude(core), 'f', decimals));
 		const float airmass = getAirmass(core);
 		if (airmass>-1.f) // Don't show extincted magnitude much below horizon where model is meaningless.
-			str += QString(" (%1 <b>%2</b> %3 <b>%4</b> %5)<br/>").arg(q_("reduced to"), QString::number(getVMagnitudeWithExtinction(core), 'f', decimals), q_("by"), QString::number(airmass, 'f', 2), q_("Airmasses"));
-		str += getExtraInfoStrings(Magnitude).join("");
+			str += QString(" (%1 <b>%2</b> %3 <b>%4</b> %5)").arg(q_("reduced to"), QString::number(getVMagnitudeWithExtinction(core), 'f', decimals), q_("by"), QString::number(airmass, 'f', 2), q_("Airmasses"));
+		str += "<br/>" + getExtraInfoStrings(Magnitude).join("");
 		return str;
 	}
 	else
