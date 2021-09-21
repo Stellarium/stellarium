@@ -126,6 +126,7 @@ void ObservabilityDialog::createDialogContent()
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 
 	updateControls();
+	ui->todayCheckBox->hide(); // DISABLED for 0.21.2. No longer needed.
 }
 
 void ObservabilityDialog::restoreDefaults()
