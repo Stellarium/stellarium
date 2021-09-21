@@ -153,7 +153,7 @@ Vec4d StelObject::getRTSTime(const StelCore *core, const double altitude) const
 		return Vec4d(0., 0., 0., -1000.);
 
 	//StelObjectMgr* omgr=GETSTELMODULE(StelObjectMgr);
-	double ho = altitude*M_PI_180;
+	double ho = 0.;
 	if (core->getSkyDrawer()->getFlagHasAtmosphere())
 	{
 		// canonical" refraction at horizon is -34'. Replace by pressure-dependent value here!
@@ -163,6 +163,8 @@ Vec4d StelObject::getRTSTime(const StelCore *core, const double altitude) const
 		refraction.backward(zeroAlt);
 		ho += asin(zeroAlt[2]);
 	}
+	if (altitude != 0.)
+		ho = altitude*M_PI_180; // Not sure if we use refraction for off-zero settings?
 	const double phi = static_cast<double>(loc.latitude) * M_PI_180;
 	const double L = static_cast<double>(loc.longitude) * M_PI_180; // OUR longitude. Meeus has it reversed
 	PlanetP obsPlanet = core->getCurrentPlanet();

@@ -237,7 +237,6 @@ public:
 	//! @note This is an abbreviated version of the method implemented in the Planet class.
 	virtual Vec4d getRTSTime(const StelCore* core, const double altitude=0.) const;
 
-
 	//! Return object's apparent V magnitude as seen from observer, without including extinction.
 	virtual float getVMagnitude(const StelCore* core) const;
 	
@@ -314,7 +313,6 @@ protected:
 	void postProcessInfoString(QString& str, const InfoStringGroup& flags) const;
 
 private:
-
 	//! Location for additional object info that can be set for special purposes (at least for debugging, but maybe others), even via scripting.
 	//! Modules are allowed to add new strings to be displayed in the various getInfoString() methods of subclasses.
 	//! This helps avoiding screen collisions if a plugin wants to display some additional object information.
