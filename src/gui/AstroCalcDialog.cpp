@@ -4980,6 +4980,13 @@ void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* prev
 	if (!current)
 		current = previous;
 
+	// reset all flags to make sure only one is set
+	plotAltVsTime = false;
+	plotAziVsTime = false;
+	plotMonthlyElevation = false;
+	plotAngularDistanceGraph = false;
+	plotDistanceGraph = false;
+
 	ui->stackedWidget->setCurrentIndex(ui->stackListWidget->row(current));
 
 	// special case
@@ -5008,24 +5015,18 @@ void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* prev
 			plotAltVsTime = true;
 			drawAltVsTimeDiagram(); // Is object already selected?
 		}
-		else
-			plotAltVsTime = false;
 
 		if (idx==1) //  'Azi. vs Time' is visible
 		{
 			plotAziVsTime = true;
 			drawAziVsTimeDiagram(); // Is object already selected?
 		}
-		else
-			plotAziVsTime = false;
 
 		if (idx==2) // 'Monthly Elevation' is visible
 		{
 			plotMonthlyElevation = true;
 			drawMonthlyElevationGraph(); // Is object already selected?
-		}
-		else
-			plotMonthlyElevation = false;
+		}		
 
 		if (idx==3) // 'Graphs' is visible
 			updateXVsTimeGraphs();
@@ -5034,9 +5035,7 @@ void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* prev
 		{
 			plotAngularDistanceGraph = true;
 			drawAngularDistanceGraph();
-		}
-		else
-			plotAngularDistanceGraph = false;
+		}		
 	}
 
 	// special case (PCalc)
@@ -5044,10 +5043,8 @@ void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* prev
 	{
 		int index = ui->tabWidgetPC->currentIndex();
 		if (index==0) // First tab: Data
-		{
-			plotDistanceGraph = false;
 			computePlanetaryData();
-		}
+
 		if (index==1) // Second tab: Graphs
 		{
 			plotDistanceGraph = true;
