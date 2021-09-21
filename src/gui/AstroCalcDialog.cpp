@@ -1050,7 +1050,7 @@ void AstroCalcDialog::currentCelestialPositions()
 
 	const double JD = core->getJD();
 	ui->celestialPositionsTimeLabel->setText(q_("Positions on %1").arg(QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD))));
-	Vec3d rts;
+	Vec4d rts;
 	Vec3d observerHelioPos;
 	double angularDistance;
 	PlanetP sun = solarSystem->getSun();
@@ -1962,7 +1962,7 @@ void AstroCalcDialog::generateTransits()
 			startJD = startJD - core->getUTCOffset(startJD) / 24.;
 			stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
 			int elements = static_cast<int>((stopJD - startJD) / currentStep);
-			double JD, UTCshift, az, alt;
+			double JD, /*UTCshift,*/ az, alt;
 			float magnitude;
 			QString altStr, magStr, elongSStr = dash, elongLStr =dash;
 			for (int i = 0; i <= elements; i++)
@@ -1970,18 +1970,11 @@ void AstroCalcDialog::generateTransits()
 				JD = startJD + i * currentStep;
 				core->setJD(JD);
 				core->update(0); // force update to get new coordinates
-				UTCshift = core->getUTCOffset(JD) / 24.; // Fix DST shift...
+				// UTCshift = core->getUTCOffset(JD) / 24.; // Fix DST shift...
 				Vec4d rts = selectedObject->getRTSTime(core);
 				JD = rts[1]; // static_cast<int>(JD) + 0.5 + rts[1]/24. - UTCshift;
 				core->setJD(JD);
 				core->update(0); // force update to get new coordinates
-				//if (isPlanet) // A tiny improvement for accuracy. GZ: No longer needed with new planets' solution...
-				//{
-				//	Vec3d rts = selectedObject->getRTSTime(core);
-				//	JD = static_cast<int>(JD) + 0.5 + rts[1]/24. - UTCshift;
-				//	core->setJD(JD);
-				//	core->update(0);
-				//}
 
 				StelUtils::rectToSphe(&az, &alt, selectedObject->getAltAzPosAuto(core));
 				if (withDecimalDegree)
@@ -2886,7 +2879,7 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 
 		const double currentJD = core->getJD();
 		int year, month, day;
-		double startJD, JD, ltime, UTCshift, width = 1.0;
+		double startJD, JD, ltime, /*UTCshift,*/ width = 1.0;
 		StelUtils::getDateFromJulianDay(currentJD, &year, &month, &day);
 		StelUtils::getJDFromDate(&startJD, year, 1, 1, 0, 0, 0);
 
@@ -2901,7 +2894,7 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 			if (firstGraph==GraphTransitAltitudeVsTime || secondGraph==GraphTransitAltitudeVsTime)
 			{
 				core->setJD(JD);
-				UTCshift = core->getUTCOffset(JD) / 24.; // Fix DST shift...
+				//UTCshift = core->getUTCOffset(JD) / 24.; // Fix DST shift...
 				Vec4d rts = ssObj->getRTSTime(core);
 				//JD += (rts[1]/24. - UTCshift); // FIXME: New logic has JD, not hours, here.
 				JD = rts[1]; // Maybe that's all?

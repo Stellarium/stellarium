@@ -205,7 +205,6 @@ public slots:
 	//! The behaviour of DebugAid texts depends on the use case.
 	void removeExtraInfoStrings(const StelObject::InfoStringGroup& flags);
 
-
 signals:
 	//! Indicate that the selected StelObjects has changed.
 	//! @param action define if the user requested that the objects are added to the selection or just replace it
