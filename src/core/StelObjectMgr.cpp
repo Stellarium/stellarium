@@ -52,14 +52,14 @@ void StelObjectMgr::init()
 	// Register all the core actions.
 	QString timeGroup = N_("Date and Time");	
 	StelActionMgr* actionsMgr = StelApp::getInstance().getStelActionManager();
-	actionsMgr->addAction("actionNext_Transit", timeGroup, N_("Next transit of the selected object"), this, "nextTransit()");
-	actionsMgr->addAction("actionNext_Rising", timeGroup, N_("Next rising of the selected object"), this, "nextRising()");
-	actionsMgr->addAction("actionNext_Setting", timeGroup, N_("Next setting of the selected object"), this, "nextSetting()");
-	actionsMgr->addAction("actionToday_Transit", timeGroup, N_("Today's transit of the selected object"), this, "todayTransit()");
-	actionsMgr->addAction("actionToday_Rising", timeGroup, N_("Today's rising of the selected object"), this, "todayRising()");
-	actionsMgr->addAction("actionToday_Setting", timeGroup, N_("Today's setting of the selected object"), this, "todaySetting()");
+	actionsMgr->addAction("actionNext_Transit",     timeGroup, N_("Next transit of the selected object"),     this, "nextTransit()");
+	actionsMgr->addAction("actionNext_Rising",      timeGroup, N_("Next rising of the selected object"),      this, "nextRising()");
+	actionsMgr->addAction("actionNext_Setting",     timeGroup, N_("Next setting of the selected object"),     this, "nextSetting()");
+	actionsMgr->addAction("actionToday_Transit",    timeGroup, N_("Today's transit of the selected object"),  this, "todayTransit()");
+	actionsMgr->addAction("actionToday_Rising",     timeGroup, N_("Today's rising of the selected object"),   this, "todayRising()");
+	actionsMgr->addAction("actionToday_Setting",    timeGroup, N_("Today's setting of the selected object"),  this, "todaySetting()");
 	actionsMgr->addAction("actionPrevious_Transit", timeGroup, N_("Previous transit of the selected object"), this, "previousTransit()");
-	actionsMgr->addAction("actionPrevious_Rising", timeGroup, N_("Previous rising of the selected object"), this, "previousRising()");
+	actionsMgr->addAction("actionPrevious_Rising",  timeGroup, N_("Previous rising of the selected object"),  this, "previousRising()");
 	actionsMgr->addAction("actionPrevious_Setting", timeGroup, N_("Previous setting of the selected object"), this, "previousSetting()");
 
 	QSettings* conf = StelApp::getInstance().getSettings();
@@ -75,10 +75,9 @@ void StelObjectMgr::nextTransit()
 		StelCore* core = StelApp::getInstance().getCore();
 		core->addSolarDays(1.0);
 		core->update(0);
-		//double JD = core->getJD();
 		Vec4d rts = selected[0]->getRTSTime(core);
-		//core->setJD(static_cast<int>(JD) + ((rts[1] - core->getUTCOffset(JD)) / 24. + 0.5));
-		core->setJD(rts[1]);
+		if (rts[3]>-1000.)
+			core->setJD(rts[1]);
 	}
 }
 
@@ -90,10 +89,8 @@ void StelObjectMgr::nextRising()
 		StelCore* core = StelApp::getInstance().getCore();
 		core->addSolarDays(1.0);
 		core->update(0);
-		//double JD = core->getJD();
 		Vec4d rts = selected[0]->getRTSTime(core);
-		//if (rts[3]==0.)
-			//core->setJD(static_cast<int>(JD) + ((rts[0] - core->getUTCOffset(JD)) / 24. + 0.5));
+		if (rts[3]>-1000.)
 			core->setJD(rts[0]);
 	}
 }
@@ -106,10 +103,8 @@ void StelObjectMgr::nextSetting()
 		StelCore* core = StelApp::getInstance().getCore();
 		core->addSolarDays(1.0);
 		core->update(0);
-		//double JD = core->getJD();
 		Vec4d rts = selected[0]->getRTSTime(core);
-		//if (rts[3]==0.)
-			//core->setJD(static_cast<int>(JD) + ((rts[2] - core->getUTCOffset(JD)) / 24. + 0.5));
+		if (rts[3]>-1000.)
 			core->setJD(rts[2]);
 	}
 }
@@ -122,10 +117,9 @@ void StelObjectMgr::previousTransit()
 		StelCore* core = StelApp::getInstance().getCore();
 		core->addSolarDays(-1.0);
 		core->update(0);
-		//double JD = core->getJD();
 		Vec4d rts = selected[0]->getRTSTime(core);
-		//core->setJD(static_cast<int>(JD) + ((rts[1] - core->getUTCOffset(JD)) / 24. + 0.5));
-		core->setJD(rts[1]);
+		if (rts[3]>-1000.)
+			core->setJD(rts[1]);
 	}
 }
 
@@ -137,10 +131,8 @@ void StelObjectMgr::previousRising()
 		StelCore* core = StelApp::getInstance().getCore();
 		core->addSolarDays(-1.0);
 		core->update(0);
-		//double JD = core->getJD();
 		Vec4d rts = selected[0]->getRTSTime(core);
-		//if (rts[3]==0.)
-			//core->setJD(static_cast<int>(JD) + ((rts[0] - core->getUTCOffset(JD)) / 24. + 0.5));
+		if (rts[3]>-1000.)
 			core->setJD(rts[0]);
 	}
 }
@@ -153,10 +145,8 @@ void StelObjectMgr::previousSetting()
 		StelCore* core = StelApp::getInstance().getCore();
 		core->addSolarDays(-1.0);
 		core->update(0);
-		//double JD = core->getJD();
 		Vec4d rts = selected[0]->getRTSTime(core);
-		//if (rts[3]==0.)
-			//core->setJD(static_cast<int>(JD) + ((rts[2] - core->getUTCOffset(JD)) / 24. + 0.5));
+		if (rts[3]>-1000.)
 			core->setJD(rts[2]);
 	}
 }
@@ -167,10 +157,9 @@ void StelObjectMgr::todayTransit()
 	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
 	{
 		StelCore* core = StelApp::getInstance().getCore();
-		//double JD = core->getJD();
 		Vec4d rts = selected[0]->getRTSTime(core);
-		//core->setJD(static_cast<int>(JD) + ((rts[1] - core->getUTCOffset(JD)) / 24. + 0.5));
-		core->setJD(rts[1]);
+		if (rts[3]>-1000.)
+			core->setJD(rts[1]);
 	}
 }
 
@@ -180,10 +169,8 @@ void StelObjectMgr::todayRising()
 	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
 	{
 		StelCore* core = StelApp::getInstance().getCore();
-		//double JD = core->getJD();
 		Vec4d rts = selected[0]->getRTSTime(core);
-		//if (rts[3]==0.)
-			//core->setJD(static_cast<int>(JD) + ((rts[0] - core->getUTCOffset(JD)) / 24. + 0.5));
+		if (rts[3]>-1000.)
 			core->setJD(rts[0]);
 	}
 }
@@ -194,10 +181,8 @@ void StelObjectMgr::todaySetting()
 	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
 	{
 		StelCore* core = StelApp::getInstance().getCore();
-		//double JD = core->getJD();
 		Vec4d rts = selected[0]->getRTSTime(core);
-		//if (rts[3]==0.)
-			//core->setJD(static_cast<int>(JD) + ((rts[2] - core->getUTCOffset(JD)) / 24. + 0.5));
+		if (rts[3]>-1000.)
 			core->setJD(rts[2]);
 	}
 }

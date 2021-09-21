@@ -156,17 +156,29 @@ public slots:
 	void todayTransit();
 
 	//! Set simulation time to the time of next rising of selected object (if applicable)
+	//! @note for circumpolar objects, this sets to time of lower culmination
+	//! @note for permanently invisible objects, this sets to time of transit
 	void nextRising();
 	//! Set simulation time to the time of previous rising of selected object (if applicable)
+	//! @note for circumpolar objects, this sets to time of lower culmination
+	//! @note for permanently invisible objects, this sets to time of transit
 	void previousRising();
 	//! Set simulation time to the time of today's rising of selected object (if applicable)
+	//! @note for circumpolar objects, this sets to time of lower culmination
+	//! @note for permanently invisible objects, this sets to time of transit
 	void todayRising();
 
 	//! Set simulation time to the time of next setting of selected object (if applicable)
+	//! @note for circumpolar objects, this sets to time of lower culmination
+	//! @note for permanently invisible objects, this sets to time of transit
 	void nextSetting();
 	//! Set simulation time to the time of previous setting of selected object (if applicable)
+	//! @note for circumpolar objects, this sets to time of lower culmination
+	//! @note for permanently invisible objects, this sets to time of transit
 	void previousSetting();
 	//! Set simulation time to the time of today's setting of selected object (if applicable)
+	//! @note for circumpolar objects, this sets to time of lower culmination
+	//! @note for permanently invisible objects, this sets to time of transit
 	void todaySetting();
 
 	//! @note These functions were copied over from StelObject. Given that setExtraInfoString is non-const and some functions where these methods are useful are const, we can use the StelObjectMgr as "carrier object".
