@@ -672,6 +672,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 
 	if (flags&RTSTime && getType()!=QStringLiteral("Satellite") && !currentPlanet.contains("observer", Qt::CaseInsensitive) && !(core->getCurrentLocation().name.contains("->")))
 	{
+		const double utcShift = core->getUTCOffset(core->getJD()) / 24.; // Fix DST shift...
 		Vec4d rts = getRTSTime(core);
 		QString sTransit = qc_("Transit", "celestial event; passage across a meridian");
 		QString sRise = qc_("Rise", "celestial event");
@@ -687,7 +688,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 
 		if (rts[3]==0.)
 		{
-			StelUtils::getTimeFromJulianDay(rts[0], &hr, &min, &sec);
+			StelUtils::getTimeFromJulianDay(rts[0]+utcShift, &hr, &min, &sec);
 			hour=static_cast<double>(hr)+static_cast<double>(min)/60.+static_cast<double>(sec)/3600.;
 			if (withTables)
 				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sRise, StelUtils::hoursToHmsStr(hour, true));
@@ -697,7 +698,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			sunrise = hour;
 		}
 
-		StelUtils::getTimeFromJulianDay(rts[1], &hr, &min, &sec);
+		StelUtils::getTimeFromJulianDay(rts[1]+utcShift, &hr, &min, &sec);
 		hour=static_cast<double>(hr)+static_cast<double>(min)/60.+static_cast<double>(sec)/3600.;
 		if (withTables)
 			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sTransit, StelUtils::hoursToHmsStr(hour, true));
@@ -706,7 +707,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 
 		if (rts[3]==0.)
 		{
-			StelUtils::getTimeFromJulianDay(rts[2], &hr, &min, &sec);
+			StelUtils::getTimeFromJulianDay(rts[2]+utcShift, &hr, &min, &sec);
 			hour=static_cast<double>(hr)+static_cast<double>(min)/60.+static_cast<double>(sec)/3600.;
 			if (withTables)
 				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sSet, StelUtils::hoursToHmsStr(hour, true));
@@ -1020,19 +1021,20 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	Vec4d rts = getRTSTime(core);
 	if (rts[3]>-1000.)
 	{
+		const double utcShift = core->getUTCOffset(core->getJD()) / 24.; // Fix DST shift...
 		int hr, min, sec;
-		StelUtils::getTimeFromJulianDay(rts[1], &hr, &min, &sec);
+		StelUtils::getTimeFromJulianDay(rts[1]+utcShift, &hr, &min, &sec);
 		double hours=hr+static_cast<double>(min)/60. + static_cast<double>(sec)/3600.;
 
 		map.insert("transit", StelUtils::hoursToHmsStr(hours, true));
 		map.insert("transit-dhr", hours);
 		if (rts[3]==0.) // TODO: Decide if we omit entries or deliver data for lower culmination?
 		{
-			StelUtils::getTimeFromJulianDay(rts[0], &hr, &min, &sec);
+			StelUtils::getTimeFromJulianDay(rts[0]+utcShift, &hr, &min, &sec);
 			hours=hr+static_cast<double>(min)/60. + static_cast<double>(sec)/3600.;
 			map.insert("rise", StelUtils::hoursToHmsStr(hours, true));
 			map.insert("rise-dhr", hours);
-			StelUtils::getTimeFromJulianDay(rts[2], &hr, &min, &sec);
+			StelUtils::getTimeFromJulianDay(rts[2]+utcShift, &hr, &min, &sec);
 			hours=hr+static_cast<double>(min)/60. + static_cast<double>(sec)/3600.;
 			map.insert("set", StelUtils::hoursToHmsStr(hours, true));
 			map.insert("set-dhr", hours);
