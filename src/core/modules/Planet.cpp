@@ -4349,6 +4349,7 @@ void Planet::setApparentMagnitudeAlgorithm(QString algorithm)
 
 // Source: Meeus, Astronomical Algorithms, 2nd ed. 1998, ch.15, but with considerable changes.
 // We don't compute positions for midnights, but only for two extra positions 1 JD before and after "now", to allow interpolation of positions.
+// Also, the estimate h0 for the Moon in the literature is based on geocentric computation.
 // NOTE: Limitation for efficiency: If this is a planet moon from another planet, we compute RTS for the parent planet instead!
 Vec4d Planet::getRTSTime(const StelCore *core) const
 {
@@ -4356,10 +4357,12 @@ Vec4d Planet::getRTSTime(const StelCore *core) const
 	if (loc.name.contains("->")) // a spaceship
 		return Vec4d(0., 0., 0., -1000.);
 
-	StelObjectMgr* omgr=GETSTELMODULE(StelObjectMgr);
+	//StelObjectMgr* omgr=GETSTELMODULE(StelObjectMgr);
 	double ho = 0.;
-	if ( (getEnglishName()=="Moon") && (loc.planetName=="Earth"))
-		ho = +0.7275*asin(6378.14/(eclipticPos.length()*AU)); // horizon parallax factor.
+	if ( (getEnglishName()=="Moon") && (loc.planetName=="Earth")) // && core->getUseTopocentricCoordinates())
+		//ho = +0.7275*asin(6378.14/(eclipticPos.length()*AU)); // horizon parallax factor. This is needed for tabulations, but we must do something else.
+		//ho = -0.25*asin(6378.14/(eclipticPos.length()*AU)); // horizon parallax factor.
+		ho = - getAngularSize(core) * M_PI_180; // semidiameter;
 	else if (getEnglishName()=="Sun")
 		ho = - getAngularSize(core) * M_PI_180; // semidiameter; Canonical value 16', but this is accurate even from other planets...
 
@@ -4423,21 +4426,20 @@ Vec4d Planet::getRTSTime(const StelCore *core) const
 	const double Theta2=obsPlanet->getSiderealTime(currentJD, currentJDE) * (M_PI/180.) + L;  // [radians]
 	double cosH0=(sin(ho)-sin(phi)*sin(de2))/(cos(phi)*cos(de2));
 
-	omgr->removeExtraInfoStrings(StelObject::DebugAid);
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>1</sub>: %1=%2 &delta;<sub>1</sub>: %3<br/>").arg(QString::number(ra1, 'f', 4)).arg(StelUtils::radToHmsStr(ra1)).arg(StelUtils::radToDmsStr(de1)));
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>2</sub>: %1=%2 &delta;<sub>2</sub>: %3<br/>").arg(QString::number(ra2, 'f', 4)).arg(StelUtils::radToHmsStr(ra2)).arg(StelUtils::radToDmsStr(de2)));
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>3</sub>: %1=%2 &delta;<sub>3</sub>: %3<br/>").arg(QString::number(ra3, 'f', 4)).arg(StelUtils::radToHmsStr(ra3)).arg(StelUtils::radToDmsStr(de3)));
-
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("h<sub>0</sub>= %1<br/>").arg(StelUtils::radToDmsStr(ho)));
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("JD<sub>2</sub>= %1<br/>").arg(QString::number(currentJD, 'f', 5)));
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("&Theta;<sub>2</sub>= %1<br/>").arg(StelUtils::radToHmsStr(Theta2)));
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("cos H<sub>0</sub>= %1<br/>").arg(QString::number(cosH0, 'f', 4)));
+	//omgr->removeExtraInfoStrings(StelObject::DebugAid);
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>1</sub>: %1=%2 &delta;<sub>1</sub>: %3<br/>").arg(QString::number(ra1, 'f', 4)).arg(StelUtils::radToHmsStr(ra1)).arg(StelUtils::radToDmsStr(de1)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>2</sub>: %1=%2 &delta;<sub>2</sub>: %3<br/>").arg(QString::number(ra2, 'f', 4)).arg(StelUtils::radToHmsStr(ra2)).arg(StelUtils::radToDmsStr(de2)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>3</sub>: %1=%2 &delta;<sub>3</sub>: %3<br/>").arg(QString::number(ra3, 'f', 4)).arg(StelUtils::radToHmsStr(ra3)).arg(StelUtils::radToDmsStr(de3)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("h<sub>0</sub>= %1<br/>").arg(StelUtils::radToDmsStr(ho)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("JD<sub>2</sub>= %1<br/>").arg(QString::number(currentJD, 'f', 5)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("&Theta;<sub>2</sub>= %1<br/>").arg(StelUtils::radToHmsStr(Theta2)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("cos H<sub>0</sub>= %1<br/>").arg(QString::number(cosH0, 'f', 4)));
 
 	double h2=StelUtils::fmodpos(Theta2-ra2, 2.*M_PI); if (h2>M_PI) h2-=2.*M_PI; // Hour angle at currentJD. This should be [-pi, pi]
 	// Find approximation of transit time
 	double JDt=currentJD-h2/(M_PI*2.)*rotRate;
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("h<sub>2</sub>= %1<br/>").arg(QString::number(h2, 'f', 4)));
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("JD<sub>t</sub>= %1<br/>").arg(QString::number(JDt, 'f', 4)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("h<sub>2</sub>= %1<br/>").arg(QString::number(h2, 'f', 4)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("JD<sub>t</sub>= %1<br/>").arg(QString::number(JDt, 'f', 4)));
 
 
 	// In terms of chapter 15, where m0, m1 and m2 are fractions of day within the current day, we use mr, mt, ms as fractions of day from currentJD, and they lie within [-1...+1].
@@ -4455,18 +4457,18 @@ Vec4d Planet::getRTSTime(const StelCore *core) const
 	else
 	{
 		const double H0 = acos(cosH0);
-		omgr->addToExtraInfoString(StelObject::DebugAid, QString("H<sub>0</sub>= %1<br/>").arg(QString::number(H0*M_180_PI, 'f', 6)));
+		//omgr->addToExtraInfoString(StelObject::DebugAid, QString("H<sub>0</sub>= %1<br/>").arg(QString::number(H0*M_180_PI, 'f', 6)));
 
 		mr = mt - H0*rotRate/(2.*M_PI);
 		ms = mt + H0*rotRate/(2.*M_PI);
 	}
 
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>t</sub>= %1<br/>").arg(QString::number(mt, 'f', 6)));
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>r</sub>= %1<br/>").arg(QString::number(mr, 'f', 6)));
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>s</sub>= %1<br/>").arg(QString::number(ms, 'f', 6)));
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("rise    ~ %1<br/>").arg(StelUtils::julianDayToISO8601String(currentJD+mr)));
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("transit ~ %1<br/>").arg(StelUtils::julianDayToISO8601String(currentJD+mt)));
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("set     ~ %1<br/>").arg(StelUtils::julianDayToISO8601String(currentJD+ms)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>t</sub>= %1<br/>").arg(QString::number(mt, 'f', 6)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>r</sub>= %1<br/>").arg(QString::number(mr, 'f', 6)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>s</sub>= %1<br/>").arg(QString::number(ms, 'f', 6)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("rise    ~ %1<br/>").arg(StelUtils::julianDayToISO8601String(currentJD+mr)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("transit ~ %1<br/>").arg(StelUtils::julianDayToISO8601String(currentJD+mt)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("set     ~ %1<br/>").arg(StelUtils::julianDayToISO8601String(currentJD+ms)));
 
 	// 4. Find correction for transit:
 	//double ra_mt=StelUtils::interpolate5(mt, ra0, ra1, ra2, ra3, ra4);
@@ -4481,11 +4483,9 @@ Vec4d Planet::getRTSTime(const StelCore *core) const
 	ra_mt=StelUtils::interpolate3(mt, ra1, ra2, ra3);
 	ht=StelUtils::fmodpos(Theta2-ra_mt, 2.*M_PI); if (ht>M_PI) ht-=2.*M_PI; // Hour angle of the transit RA at currentJD. This should be [-pi, pi]
 	mt=-ht*(0.5*rotRate/M_PI); // moment in units of day from currentJD
-	//mt=-ht*(0.5/M_PI); // moment in units of day
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>t</sub>'': %1=%2 <br/>").arg(QString::number(ra_mt, 'f', 4)).arg(StelUtils::radToHmsStr(ra_mt, true)));
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("h<sub>t</sub>'': %1 = %2<br/>").arg(QString::number(ht, 'f', 6)).arg(StelUtils::radToHmsStr(ht, true)));
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>t</sub>'' = %1<br/>").arg(QString::number(mt, 'f', 6)));
-
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>t</sub>'': %1=%2 <br/>").arg(QString::number(ra_mt, 'f', 4)).arg(StelUtils::radToHmsStr(ra_mt, true)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("h<sub>t</sub>'': %1 = %2<br/>").arg(QString::number(ht, 'f', 6)).arg(StelUtils::radToHmsStr(ht, true)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>t</sub>'' = %1<br/>").arg(QString::number(mt, 'f', 6)));
 
 	// 5. Find corrections for rise and set
 	if (fabs(cosH0)<1.)
@@ -4499,9 +4499,8 @@ Vec4d Planet::getRTSTime(const StelCore *core) const
 			const double ra_mr=StelUtils::interpolate3(mr, ra1, ra2, ra3);
 			const double de_mr=StelUtils::interpolate3(mr, de1, de2, de3);
 			double hr=StelUtils::fmodpos(theta_mr-ra_mr, 2.*M_PI); if (hr>M_PI) hr-=2.*M_PI; // Hour angle of the rising RA at currentJD. This should be [-pi, pi]
-			//mr=-hr*(0.5*rotRate/M_PI); // moment in units of day from currentJD
-			omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>r</sub>': %1=%2 <br/>").arg(QString::number(ra_mr, 'f', 4)).arg(StelUtils::radToHmsStr(ra_mr, true)));
-			omgr->addToExtraInfoString(StelObject::DebugAid, QString("h<sub>r</sub>': %1 = %2<br/>").arg(QString::number(hr, 'f', 6)).arg(StelUtils::radToHmsStr(hr, true)));
+			//omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>r</sub>': %1=%2 <br/>").arg(QString::number(ra_mr, 'f', 4)).arg(StelUtils::radToHmsStr(ra_mr, true)));
+			//omgr->addToExtraInfoString(StelObject::DebugAid, QString("h<sub>r</sub>': %1 = %2<br/>").arg(QString::number(hr, 'f', 6)).arg(StelUtils::radToHmsStr(hr, true)));
 
 			double ar=asin(sin(phi)*sin(de_mr)+cos(phi)*cos(de_mr)*cos(hr)); // altitude at this hour angle
 
@@ -4509,9 +4508,9 @@ Vec4d Planet::getRTSTime(const StelCore *core) const
 			Delta_mr=StelUtils::fmodpos(Delta_mr+0.5, 1.0)-0.5; // ensure this is a small correction
 			mr+=Delta_mr;
 
-			omgr->addToExtraInfoString(StelObject::DebugAid, QString("alt<sub>r</sub>': %1 = %2<br/>").arg(QString::number(ar, 'f', 6)).arg(StelUtils::radToDmsStr(ar)));
-			omgr->addToExtraInfoString(StelObject::DebugAid, QString("&Delta;<sub>mr</sub>'= %1<br/>").arg(QString::number(Delta_mr, 'f', 6)));
-			omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>r</sub>' = %1<br/>").arg(QString::number(mr, 'f', 6)));
+			//omgr->addToExtraInfoString(StelObject::DebugAid, QString("alt<sub>r</sub>': %1 = %2<br/>").arg(QString::number(ar, 'f', 6)).arg(StelUtils::radToDmsStr(ar)));
+			//omgr->addToExtraInfoString(StelObject::DebugAid, QString("&Delta;<sub>mr</sub>'= %1<br/>").arg(QString::number(Delta_mr, 'f', 6)));
+			//omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>r</sub>' = %1<br/>").arg(QString::number(mr, 'f', 6)));
 
 			if (++iterations >= 5)
 				break;
@@ -4525,9 +4524,8 @@ Vec4d Planet::getRTSTime(const StelCore *core) const
 			const double ra_ms=StelUtils::interpolate3(ms, ra1, ra2, ra3);
 			const double de_ms=StelUtils::interpolate3(ms, de1, de2, de3);
 			double hs=StelUtils::fmodpos(theta_ms-ra_ms, 2.*M_PI); if (hs>M_PI) hs-=2.*M_PI; // Hour angle of the setting RA at currentJD. This should be [-pi, pi]
-			//mr=-hr*(0.5*rotRate/M_PI); // moment in units of day from currentJD
-			omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>s</sub>': %1=%2 <br/>").arg(QString::number(ra_ms, 'f', 4)).arg(StelUtils::radToHmsStr(ra_ms, true)));
-			omgr->addToExtraInfoString(StelObject::DebugAid, QString("h<sub>s</sub>': %1 = %2<br/>").arg(QString::number(hs, 'f', 6)).arg(StelUtils::radToHmsStr(hs, true)));
+			//omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>s</sub>': %1=%2 <br/>").arg(QString::number(ra_ms, 'f', 4)).arg(StelUtils::radToHmsStr(ra_ms, true)));
+			//omgr->addToExtraInfoString(StelObject::DebugAid, QString("h<sub>s</sub>': %1 = %2<br/>").arg(QString::number(hs, 'f', 6)).arg(StelUtils::radToHmsStr(hs, true)));
 
 			double as=asin(sin(phi)*sin(de_ms)+cos(phi)*cos(de_ms)*cos(hs)); // altitude at this hour angle
 
@@ -4535,19 +4533,18 @@ Vec4d Planet::getRTSTime(const StelCore *core) const
 			Delta_ms=StelUtils::fmodpos(Delta_ms+0.5, 1.0)-0.5; // ensure this is a small correction
 			ms+=Delta_ms;
 
-			omgr->addToExtraInfoString(StelObject::DebugAid, QString("alt<sub>s</sub>': %1 = %2<br/>").arg(QString::number(as, 'f', 6)).arg(StelUtils::radToDmsStr(as)));
-			omgr->addToExtraInfoString(StelObject::DebugAid, QString("&Delta;<sub>ms</sub>'= %1<br/>").arg(QString::number(Delta_ms, 'f', 6)));
-			omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>s</sub>' = %1<br/>").arg(QString::number(ms, 'f', 6)));
+			//omgr->addToExtraInfoString(StelObject::DebugAid, QString("alt<sub>s</sub>': %1 = %2<br/>").arg(QString::number(as, 'f', 6)).arg(StelUtils::radToDmsStr(as)));
+			//omgr->addToExtraInfoString(StelObject::DebugAid, QString("&Delta;<sub>ms</sub>'= %1<br/>").arg(QString::number(Delta_ms, 'f', 6)));
+			//omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>s</sub>' = %1<br/>").arg(QString::number(ms, 'f', 6)));
 
 			if (++iterations >= 5)
 				break;
 		}
-
 	}
 
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("rise    = %1<br/>").arg(StelUtils::julianDayToISO8601String(currentJD+mr)));
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("transit = %1<br/>").arg(StelUtils::julianDayToISO8601String(currentJD+mt)));
-	omgr->addToExtraInfoString(StelObject::DebugAid, QString("set     = %1<br/>").arg(StelUtils::julianDayToISO8601String(currentJD+ms)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("rise    = %1<br/>").arg(StelUtils::julianDayToISO8601String(currentJD+mr)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("transit = %1<br/>").arg(StelUtils::julianDayToISO8601String(currentJD+mt)));
+	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("set     = %1<br/>").arg(StelUtils::julianDayToISO8601String(currentJD+ms)));
 
 	return Vec4d(currentJD+mr, currentJD+mt, currentJD+ms, flag);
 }
