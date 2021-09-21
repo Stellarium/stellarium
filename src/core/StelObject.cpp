@@ -197,7 +197,7 @@ Vec4d StelObject::getRTSTime(const StelCore *core, const double altitude) const
 
 	double h2=StelUtils::fmodpos(Theta2-ra2, 2.*M_PI); if (h2>M_PI) h2-=2.*M_PI; // Hour angle at currentJD. This should be [-pi, pi]
 	// Find approximation of transit time
-	double JDt=currentJD-h2/(M_PI*2.)*rotRate;
+	//double JDt=currentJD-h2/(M_PI*2.)*rotRate;
 	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("h<sub>2</sub>= %1<br/>").arg(QString::number(h2, 'f', 4)));
 	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("JD<sub>t</sub>= %1<br/>").arg(QString::number(JDt, 'f', 4)));
 
@@ -746,7 +746,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			else
 				res += q_("Circumpolar (never sets)") + "<br />";
 		}
-		// GZ I think these never could have been seen before (??)
+		// These never could have been seen before (??)
 		//else if (rts[0]>99. && rts[2]<99.)
 		//	res += q_("Polar dawn") + "<br />";
 		//else if (rts[0]<99. && rts[2]>99.)
@@ -1030,7 +1030,7 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 
 		map.insert("transit", StelUtils::hoursToHmsStr(hours, true));
 		map.insert("transit-dhr", hours);
-		if (rts[3]==0.) // TODO: Decide if we omit entries or deliver data for lower culmination?
+		if (rts[3]==0.)
 		{
 			StelUtils::getTimeFromJulianDay(rts[0]+utcShift, &hr, &min, &sec);
 			hours=hr+static_cast<double>(min)/60. + static_cast<double>(sec)/3600.;
@@ -1040,6 +1040,10 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 			hours=hr+static_cast<double>(min)/60. + static_cast<double>(sec)/3600.;
 			map.insert("set", StelUtils::hoursToHmsStr(hours, true));
 			map.insert("set-dhr", hours);
+		}
+		else {
+			map.insert("rise", "---");
+			map.insert("set", "---");
 		}
 	}
 	return map;
