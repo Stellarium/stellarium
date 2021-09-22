@@ -4963,15 +4963,6 @@ bool AstroCalcDialog::findPreciseOrbitalPoint(QPair<double, double>* out, Planet
 	}
 }
 
-double AstroCalcDialog::findHeliocentricDistance(double JD, PlanetP object1)
-{
-	// TODO: avoid setting JD globally? Just find DeltaT and call
-	// return object1->getHeliocentricEclipticPos(JDE).length();
-	core->setJD(JD);
-	core->update(0);
-	return object1->getHeliocentricEclipticPos().length();
-}
-
 void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* previous)
 {
 	if (!current)
