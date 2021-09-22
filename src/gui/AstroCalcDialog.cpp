@@ -1195,7 +1195,7 @@ void AstroCalcDialog::currentCelestialPositions()
 					break;
 			}
 
-			if (!planet->hasValidPositionalData())
+			if (!planet->hasValidPositionalData(JD))
 				passByType = false;
 
 			if (passByType && planet != core->getCurrentPlanet() && planet->getVMagnitudeWithExtinction(core) <= mag && planet->isAboveRealHorizon(core))
@@ -1721,7 +1721,7 @@ void AstroCalcDialog::generateEphemeris()
 			core->setJD(JD);
 			core->update(0); // force update to get new coordinates
 
-			if (!obj->hasValidPositionalData())
+			if (!obj->hasValidPositionalData(JD))
 				continue;
 
 			if (useHorizontalCoords)
@@ -4483,13 +4483,7 @@ QMap<double, double> AstroCalcDialog::findClosestApproach(PlanetP& object1, Stel
 	if (object2->getType()=="Planet")
 	{
 		PlanetP planet = qSharedPointerCast<Planet>(object2);
-		core->setJD(stopJD);
-		core->update(0);
-		if (!planet->hasValidPositionalData())
-			return separations;
-		core->setJD(startJD);
-		core->update(0);
-		if (!planet->hasValidPositionalData())
+		if (!planet->hasValidPositionalData(startJD) || !planet->hasValidPositionalData(stopJD))
 			return separations;
 	}
 

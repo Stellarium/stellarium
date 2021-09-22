@@ -4274,7 +4274,7 @@ void Planet::drawOrbit(const StelCore* core)
 	if (hidden || (pType==isObserver)) return;
 	if (orbitPtr && pType>=isArtificial)
 	{
-		if (!hasValidPositionalData())
+		if (!hasValidPositionalData(lastJDE))
 			return;
 	}
 
@@ -4328,12 +4328,12 @@ void Planet::drawOrbit(const StelCore* core)
 		sPainter.setLineWidth(1);
 }
 
-bool Planet::hasValidPositionalData()
+bool Planet::hasValidPositionalData(const double JDE)
 {
 	if (pType<isObserver)
 		return true;
 	else if (orbitPtr && pType>=isArtificial)
-		return static_cast<KeplerOrbit*>(orbitPtr)->objectDateValid(lastJDE);
+		return static_cast<KeplerOrbit*>(orbitPtr)->objectDateValid(JDE);
 	else
 		return false;
 }
