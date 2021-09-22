@@ -4338,6 +4338,18 @@ bool Planet::hasValidPositionalData(const double JDE)
 		return false;
 }
 
+Vec2d Planet::getValidPositionalData()
+{
+	double min=std::numeric_limits<double>::min();
+	double max=std::numeric_limits<double>::max();
+
+	if (orbitPtr && pType>=isArtificial)
+	{
+		return static_cast<KeplerOrbit*>(orbitPtr)->objectDateValidRange();
+	}
+	return Vec2d(min, max);
+}
+
 void Planet::update(int deltaTime)
 {
 	hintFader.update(deltaTime);

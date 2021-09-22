@@ -263,6 +263,18 @@ double KeplerOrbit::calculateSiderealPeriod() const
 	return calculateSiderealPeriod(a, centralMass);
 }
 
+Vec2d KeplerOrbit::objectDateValidRange() const
+{
+	double min=std::numeric_limits<double>::min();
+	double max=std::numeric_limits<double>::max();
+	if (orbitGood>0)
+	{
+		min=t0-orbitGood;
+		max=t0+orbitGood;
+	}
+	return Vec2d(min, max);
+}
+
 GimbalOrbit::GimbalOrbit(double distance, double longitude, double latitude):
 	distance(distance),
 	longitude(longitude),
