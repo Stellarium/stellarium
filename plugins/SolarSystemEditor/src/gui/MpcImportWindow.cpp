@@ -374,11 +374,13 @@ void MpcImportWindow::populateCandidateObjects(QList<SsoElements> objects)
 	//QHash<QString,QString> defaultSsoIdentifiers = ssoManager->getDefaultSsoIdentifiers();
 	QHash<QString,QString> loadedSsoIdentifiers = ssoManager->listAllLoadedSsoIdentifiers();
 
-	//Separate the objects into visual groups in the list
+	//Separate the objects into visual (internally unsorted, anyone?) groups in the list
+
 	//int newDefaultSsoIndex = 0;
-	int newLoadedSsoIndex = 0;
-	int newNovelSsoIndex = 0;
-	int insertionIndex = 0;
+	int newLoadedSsoIndex = 0; // existing objects
+	int newNovelSsoIndex = 0; // new objects
+
+	int insertionIndex = 0; // index of object to be inserted next
 
 	QStandardItemModel * model = candidateObjectsModel;
 	model->clear();
@@ -1038,39 +1040,49 @@ void MpcImportWindow::loadBookmarks()
 		qDebug() << "Bookmarks file can't be read. Hard-coded bookmarks will be used.";
 
 	//Initialize with hard-coded values
-	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition in 2018", "https://www.minorplanetcenter.net/iau/Ephemerides/Bright/2018/Soft00Bright.txt");
-	bookmarks[MpcMinorPlanets].insert("MPC's list of observable critical-list numbered minor planets", "https://www.minorplanetcenter.net/iau/Ephemerides/CritList/Soft00CritList.txt");
-	bookmarks[MpcMinorPlanets].insert("MPC's list of observable distant minor planets", "https://www.minorplanetcenter.net/iau/Ephemerides/Distant/Soft00Distant.txt");
-	bookmarks[MpcMinorPlanets].insert("MPC's list of observable unusual minor planets", "https://www.minorplanetcenter.net/iau/Ephemerides/Unusual/Soft00Unusual.txt");
-	bookmarks[MpcMinorPlanets].insert("MPCORB: near-Earth asteroids (NEAs)", "https://www.minorplanetcenter.net/iau/MPCORB/NEA.txt");
-	bookmarks[MpcMinorPlanets].insert("MPCORB: potentially hazardous asteroids (PHAs)", "https://www.minorplanetcenter.net/iau/MPCORB/PHA.txt");
-	bookmarks[MpcMinorPlanets].insert("MPCORB: TNOs, Centaurs and SDOs", "https://www.minorplanetcenter.net/iau/MPCORB/Distant.txt");
-	bookmarks[MpcMinorPlanets].insert("MPCORB: other unusual objects", "https://www.minorplanetcenter.net/iau/MPCORB/Unusual.txt");
-	bookmarks[MpcMinorPlanets].insert("MPCORB: orbits from the latest DOU MPEC", "https://www.minorplanetcenter.net/iau/MPCORB/DAILY.DAT");
-	bookmarks[MpcMinorPlanets].insert("MPCORB: elements of NEAs for current epochs (today)", "https://www.minorplanetcenter.net/iau/MPCORB/NEAm00.txt");
-	bookmarks[MpcMinorPlanets].insert("MPCORB: orbits from the latest DOU MPEC", "https://www.minorplanetcenter.net/iau/MPCORB/DAILY.DAT");
-	bookmarks[MpcMinorPlanets].insert("MPCAT: Unusual minor planets (including NEOs)", "https://www.minorplanetcenter.net/iau/ECS/MPCAT/unusual.txt");
-	bookmarks[MpcMinorPlanets].insert("MPCAT: Distant minor planets (Centaurs and transneptunians)", "https://www.minorplanetcenter.net/iau/ECS/MPCAT/distant.txt");
-	int start = 0;
-	int finish = 52;
+	// NOTE: this list is reordered anyway when loaded
+
+	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition in 2018", 		"https://www.minorplanetcenter.net/iau/Ephemerides/Bright/2018/Soft00Bright.txt");
+	bookmarks[MpcMinorPlanets].insert("MPC's list of observable critical-list numbered minor planets", 	"https://www.minorplanetcenter.net/iau/Ephemerides/CritList/Soft00CritList.txt");
+	bookmarks[MpcMinorPlanets].insert("MPC's list of observable distant minor planets", 			"https://www.minorplanetcenter.net/iau/Ephemerides/Distant/Soft00Distant.txt");
+	bookmarks[MpcMinorPlanets].insert("MPC's list of observable unusual minor planets", 			"https://www.minorplanetcenter.net/iau/Ephemerides/Unusual/Soft00Unusual.txt");
+
+	bookmarks[MpcMinorPlanets].insert("MPCORB: near-Earth asteroids (NEAs)", 				"https://www.minorplanetcenter.net/iau/MPCORB/NEA.txt");
+	bookmarks[MpcMinorPlanets].insert("MPCORB: potentially hazardous asteroids (PHAs)", 			"https://www.minorplanetcenter.net/iau/MPCORB/PHA.txt");
+	bookmarks[MpcMinorPlanets].insert("MPCORB: TNOs, Centaurs and SDOs", 					"https://www.minorplanetcenter.net/iau/MPCORB/Distant.txt");
+	bookmarks[MpcMinorPlanets].insert("MPCORB: other unusual objects", 					"https://www.minorplanetcenter.net/iau/MPCORB/Unusual.txt");
+	bookmarks[MpcMinorPlanets].insert("MPCORB: elements of NEAs for current epochs (today)", 		"https://www.minorplanetcenter.net/iau/MPCORB/NEAm00.txt");
+	bookmarks[MpcMinorPlanets].insert("MPCORB: orbits from the latest DOU MPEC", 				"https://www.minorplanetcenter.net/iau/MPCORB/DAILY.DAT");
+
+	bookmarks[MpcMinorPlanets].insert("MPCAT: Unusual minor planets (including NEOs)", 			"https://www.minorplanetcenter.net/iau/ECS/MPCAT/unusual.txt");
+	bookmarks[MpcMinorPlanets].insert("MPCAT: Distant minor planets (Centaurs and transneptunians)", 	"https://www.minorplanetcenter.net/iau/ECS/MPCAT/distant.txt");
+
+	const int start = 0;
+	const int finish = 52;
+	const QChar dash = QChar(0x2014);
+
 	QString limits, idx;
+
 	for (int i=start; i<=finish; i++)
 	{
-		limits = QString("%1%2%3").arg(QString::number(i*10000), QChar(0x2014), QString::number(i*10000 + 9999));
 		if (i==start)
-			limits = QString("%1%2%3").arg(QString::number(1), QChar(0x2014), QString::number(9999));
+			limits = QString("%1%2%3").arg(QString::number(1).rightJustified(6), dash, QString::number(9999).rightJustified(6));
 		else if (i==finish)
-			limits = QString("%1...").arg(QString::number(i*10000));
-
-		if ((i+1)<10)
-			idx = QString("0%1").arg(i+1);
+			limits = QString("%1...").arg(QString::number(i*10000).rightJustified(6));
 		else
-			idx = QString::number(i+1);
-		bookmarks[MpcMinorPlanets].insert(QString("MPCAT: Numbered objects (%1)").arg(limits), QString("http://dss.stellarium.org/MPC/mpn-%1.txt").arg(idx));
+			limits = QString("%1%2%3").arg(QString::number(i*10000).rightJustified(6), dash, QString::number(i*10000 + 9999).rightJustified(6));
+
+		idx = QString::number(i+1).rightJustified(2, '0');
+		bookmarks[MpcMinorPlanets].insert(
+			QString("MPCAT: Numbered objects (%1)").arg(limits), 
+			QString("http://dss.stellarium.org/MPC/mpn-%1.txt").arg(idx)
+			);
 	}
-	bookmarks[MpcComets].insert("MPC's list of observable comets", "https://www.minorplanetcenter.net/iau/Ephemerides/Comets/Soft00Cmt.txt");
-	bookmarks[MpcComets].insert("MPCORB: comets", "https://www.minorplanetcenter.net/iau/MPCORB/CometEls.txt");
-	bookmarks[MpcComets].insert("Gideon van Buitenen: comets","http://astro.vanbuitenen.nl/cometelements?format=mpc&mag=obs");
+
+	bookmarks[MpcComets].insert("MPC's list of observable comets",	"https://www.minorplanetcenter.net/iau/Ephemerides/Comets/Soft00Cmt.txt");
+	bookmarks[MpcComets].insert("MPCORB: comets",			"https://www.minorplanetcenter.net/iau/MPCORB/CometEls.txt");
+
+	bookmarks[MpcComets].insert("Gideon van Buitenen: comets",	"http://astro.vanbuitenen.nl/cometelements?format=mpc&mag=obs");
 
 	//Try to save them to a file
 	saveBookmarks();
