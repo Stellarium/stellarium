@@ -460,6 +460,12 @@ StelLocationMgr::StelLocationMgr()
 		locationDBToIANAtranslations.insert( "", "UTC");
 		// Missing on Qt5.9.5/Ubuntu 18.04.4
 		locationDBToIANAtranslations.insert("America/Godthab",   "UTC-03:00");
+		// Missing on Qt5.12.10/Win7
+		locationDBToIANAtranslations.insert("Asia/Qostanay",   "UTC+06:00"); // no DST; https://www.zeitverschiebung.net/en/timezone/asia--qostanay
+		locationDBToIANAtranslations.insert("Europe/Saratov",  "UTC+04:00"); // no DST; https://www.zeitverschiebung.net/en/timezone/europe--saratov
+		locationDBToIANAtranslations.insert("Asia/Atyrau",     "UTC+05:00"); // no DST; https://www.zeitverschiebung.net/en/timezone/asia--atyrau
+		locationDBToIANAtranslations.insert("Asia/Famagusta",  "Asia/Nicosia"); // Asia/Nicosia has no DST, but Asia/Famagusta has DST!
+		locationDBToIANAtranslations.insert("America/Punta_Arenas",  "UTC-03:00"); // no DST; https://www.zeitverschiebung.net/en/timezone/america--punta_arenas
 		// N.B. Further missing TZ names will be printed out in the log.txt. Resolve these by adding into this list.
 		// TODO later: create a text file in user data directory, and auto-update it weekly.
 	}
