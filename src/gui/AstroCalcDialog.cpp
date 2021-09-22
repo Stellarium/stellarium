@@ -4828,13 +4828,40 @@ bool AstroCalcDialog::findPreciseStationaryPoint(QPair<double, double> *out, Pla
 	}
 }
 
+// return J2000 RA of a planetary object (without aberration)
 double AstroCalcDialog::findRightAscension(double JD, PlanetP object)
 {
 	// TODO: It would pay off to implement those directly using Planet::getHeliocentricEclipticPos(double dateJDE) for observer and target and doing the required Vector math.
-	core->setJD(JD);
-	core->update(0);
+	//core->setJD(JD);
+	//core->update(0);
+
+	const double JDE=JD+core->computeDeltaT(JD)/86400.;
+	//PlanetP obsPlanet=core->getCurrentPlanet();
+	//Vec3d obs, body, parent(0.), dummy;
+	//obsPlanet->computePosition(JDE, obs, dummy);
+	//object->computePosition(JDE, body, dummy);
+	//if (! ((object->getPlanetType()==Planet::isMoon) && (obsPlanet!=object->getParent())))
+	//{
+	//	object->getParent()->computePosition(JDE, parent, dummy);
+	//	body+=parent;
+	//}
+	//// light time correction, and repeat...
+	//const double distanceCorrection=(body-obs).length() * (AU / (SPEED_OF_LIGHT * 86400.));
+	//object->computePosition(JDE-distanceCorrection, body, dummy);
+	//if (! ((object->getPlanetType()==Planet::isMoon) && (obsPlanet!=object->getParent())))
+	//{
+	//	object->getParent()->computePosition(JDE-distanceCorrection, parent, dummy);
+	//	body+=parent;
+	//}
+	//// now we have obsPlanet and body coordinates.
+
+	const Vec3d obs=core->getCurrentPlanet()->getHeliocentricEclipticPos(JDE);
+	Vec3d body=object->getHeliocentricEclipticPos(JDE);
+	const double distanceCorrection=(body-obs).length() * (AU / (SPEED_OF_LIGHT * 86400.));
+	body=object->getHeliocentricEclipticPos(JDE-distanceCorrection);
+	Vec3d bodyJ2000=StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(body - obs);
 	double ra, dec;
-	StelUtils::rectToSphe(&ra, &dec, object->getJ2000EquatorialPos(core));
+	StelUtils::rectToSphe(&ra, &dec, bodyJ2000);
 	return ra*M_180_PI;
 }
 
