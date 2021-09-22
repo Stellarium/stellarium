@@ -4473,7 +4473,7 @@ double AstroCalcDialog::findInitialStep(double startJD, double stopJD, QStringLi
 	return step;
 }
 
-// TODO: Improving an accuracy and speed-up the method
+// FIXME: Improving an accuracy and speed-up the method
 QMap<double, double> AstroCalcDialog::findClosestApproach(PlanetP& object1, StelObjectP& object2, double startJD, double stopJD, double maxSeparation, int mode)
 {
 	double dist, prevDist, step, step0;
@@ -4483,7 +4483,7 @@ QMap<double, double> AstroCalcDialog::findClosestApproach(PlanetP& object1, Stel
 
 	if (object2->getType()=="Planet")
 	{
-		// TODO: Improve filtering the Solar system objects by valid positional data
+		// FIXME: Improve filtering the Solar system objects by valid positional data
 		PlanetP planet = qSharedPointerCast<Planet>(object2);
 		if (!planet->hasValidPositionalData(startJD) && !planet->hasValidPositionalData(stopJD))
 			return separations; // exclude a Solar system body with full invalid positional data only
