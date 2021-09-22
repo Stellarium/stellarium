@@ -4338,7 +4338,7 @@ bool Planet::hasValidPositionalData(const double JDE)
 		return false;
 }
 
-Vec2d Planet::getValidPositionalData()
+Vec2d Planet::getValidPositionalDataRange()
 {
 	double min=std::numeric_limits<double>::min();
 	double max=std::numeric_limits<double>::max();
