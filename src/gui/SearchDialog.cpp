@@ -170,6 +170,7 @@ SearchDialog::SearchDialog(QObject* parent)
 	, listModel(Q_NULLPTR)
 	, proxyModel(Q_NULLPTR)
 	, flagHasSelectedText(false)
+	, shiftPressed(false)
 {
 	setObjectName("SearchDialog");
 	ui = new Ui_searchDialogForm;
@@ -194,8 +195,6 @@ SearchDialog::SearchDialog(QObject* parent)
 	setSimbadGetsMorpho(conf->value("search/simbad_query_morpho",     false).toBool());
 	setSimbadGetsTypes( conf->value("search/simbad_query_types",      false).toBool());
 	setSimbadGetsDims(  conf->value("search/simbad_query_dimensions", false).toBool());
-
-	shiftPressed = false;
 
 	// Init CompletionListModel
 	searchListModel = new CompletionListModel();
@@ -1424,4 +1423,16 @@ void SearchDialog::pasteAndGo()
 	ui->lineEditSearchSkyObject->setText(""); // clear current text
 	ui->lineEditSearchSkyObject->paste(); // paste text from clipboard
 	gotoObject(); // go to first finded object
+}
+
+void SearchDialog::setVisible(bool v)
+{
+	StelDialog::setVisible(v);
+
+	// if from a previous search action, the first tab is shown but input line is not in focus,
+	// force focus on input line.
+	if (v && (ui->tabWidget->currentIndex()==0))
+	{
+		ui->lineEditSearchSkyObject->setFocus(Qt::PopupFocusReason);
+	}
 }
