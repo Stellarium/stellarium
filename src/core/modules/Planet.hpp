@@ -222,6 +222,8 @@ public:
 	virtual double getAngularSize(const StelCore* core) const Q_DECL_OVERRIDE;
 	virtual bool hasAtmosphere(void) {return atmosphere;}
 	virtual bool hasHalo(void) {return halo;}
+	//! Returns whether planet positions are valid and useful for the current simulation time. E.g. outdated orbital elements for Kepler orbits (beyond their orbit_good .ini file entries) may lead to invalid positions which should better not be used.
+	//! @note for major planets and moons this method will be always return true
 	bool hasValidPositionalData();
 	float getAxisRotation(void) { return axisRotation;} //! return axisRotation last computed in computeTransMatrix().
 
