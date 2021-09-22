@@ -1,15 +1,17 @@
-<h1>Almagest</h1>
+<h1>Grego (Almagest)</h1>
 
-<p>Esta antiga cultura do ceo grega baséase en Almagest, unha recompilación de
-coñecementos astronómicos de antigos astrónomos incluíndo resultados de
-observacións e astronomía matemática. Compilado por Claudio Ptolomeo,
-empregando observacións máis antigas, así como as súas propias, foi escrito
-en grego, publicado no século II e foi o principal traballo astronómico
-durante os seguintes 1500 anos. Foi orixinalmente escrito co título
-<i>Mathematike Syntaxis</i>, in Grego Antigo.  O nome <i>Almagest</i>, que
-significa &ldquo;O maior [Libro]&rdquo;, foi elaborado a partir de
-traducións árabes. Para crear esta cultura do ceo utilizouse a tradución en
-inglés de Toomer (1984).</p>
+<p>Esta antiga cultura ceo grega está baseada no Almagest, unha recompilación
+de coñecementos astronómicos de antigos astrónomos que inclúe resultados de
+observacións e astronomía matemática. Xuntado por Claudio Ptolomeo,
+utilizando observacións máis antigas e propias, foi escrito en grego,
+publicado no século II e mantívose como a principal obra astronómica durante
+os 1500 anos seguintes. Orixinalmente foi escrito co título <i>Mathematike
+Syntaxis</i>, en grego antigo. O nome <i>Almagest</i>, que significa "O
+[libro] máis grande", desenvolveuse a partir de traducións árabes. Para
+crear esta cultura do ceo empregamos a tradución ó inglés de Toomer (1984),
+reelaborámola nalgúns detalles (por exemplo, usando traducións máis literais
+do grego en lugar de termos latinos que son comúns hoxe en día) e fixemos
+uso de táboas lexibles por ordenador preparadas por Ernie Wright .</p>
 
 <p>O Almagest consta de 13 seccións, chamadas libros. No sétimo e oitavo libros
 Ptolomeo enumerou un total de 1022 estrelas en 48 constelacións (entre as
@@ -40,6 +42,25 @@ substracción do valor para lonxitude eclíptica.</p>
 
 <h2>Como se fixo esta cultura do ceo</h2>
 
+<h3>Nomes de estrelas</h3>
+
+De máis de 1.000 estrelas, Ptolomeo menciona o nome propio de tan só 15. O
+resto identifícanse mediante descricións bastante longas como "A estrela no
+extremo da cola" para a Polaris. Para evitar amosar descricións tan longas
+na pantalla en Stellarium, fixemos etiquetas curtas para todas as estrelas
+do Almagest baseadas na constelación e na orde na que aparecen no
+catálogo. Por exemplo, a Polaris recibe a denominación "UMi 1" porque é a
+primeira estrela da constelación de Osa Menor (UMi). Podes ver na táboa
+seguinte a correspondencia entre as constelacións de Ptolomeo e as
+abreviaturas da IAU. Ademais, onde Ptolomeo describe unha estrela como fóra
+da figura, usamos letras minúsculas na etiqueta correspondente. Para ver a
+descrición longa dunha estrela determinada, os usuarios deberían habilitar
+"Usar nomes adicionais de estrelas" na configuración "Ver [F4] / Ceo" e
+facer clic na estrela. A longa descrición amosarase na parte superior da
+pantalla.
+
+<h3>Liñas das constelacións</h3>
+
 <p>O proceso resúmese aquí co exemplo de Corvus:</p>
 
 <p>Na costelación de Corvus, &alpha; Crv é a estrena na &quot;cabeza do
@@ -55,12 +76,11 @@ peito outra liña vai ata o&quot;pé do corvo&quot;, a estrela &beta; Crv.</p>
 reconectamos as estrelas segundo as descricións na táboa presentada no
 <i>Almagest</i>.</p>
 
-<p>Os nomes das estrelas e os nomes dos obxectos do ceo profundo dependen só do
-Almagest. Por exemplo Ptolomeo usa o
-nome&quot;&lambda;&alpha;&mu;&pi;&alpha;&delta;&#943;&alpha;&sigmaf; (O
-Facho)&quot; para Aldebaran no seu outro traballo, o <i>Tetrabiblos</i>,
-pero isto non se implementa nesta cultura do ceo porque non aparece en
-Almagest.</p>
+<p>Os nomes de estrelas e de obxectos do ceo profundo só dependen do
+Almagest. Por exemplo, Ptolomeo usa o nome &quot;&lambda;&alpha;&mu;&pi;
+&alpha; &delta;&# 943;&alpha;&sigmaf; (A que é coma un facho) &quot; para
+Aldebarán no seu outro traballo, o Tetrabiblos, pero isto non está
+implementado nesta cultura do ceo porque non aparece no Almagest.</p>
 
 <p>A seguinte táboa mostra o nome da constelación orixinal en grego e a súa
 tradución en galego (columnas 2 e 3) e indica as nosas incertezas na
@@ -76,292 +96,290 @@ reconstrución (columna 6).</p>
 	<td><b>liberdade da arte</b></td>
 </tr>
 <tr valign="top">
-	<td>UMi</td>
-	<td>&Mu;&iota;&kappa;&rho;&#942;
-&#702;&#714;&Alpha;&rho;&kappa;&tau;&omicron;&sigmaf;</td>
-	<td>Pequeno Oso</td>
-	<td>Ursa Minor</td>
+	<td><notr>UMi</notr></td>
+	<td><notr>&Mu;&iota;&kappa;&rho;&#942; &#702;&#714;&Alpha;&rho;&kappa;&tau;&omicron;&sigmaf;</notr></td>
+	<td>Small She-Bear</td>
+	<td><notr>Ursa Minor</notr></td>
 	<td>como a constelacion IAU</td>
 	<td></td>
 </tr>
 <tr valign="top">
-	<td>UMa</td>
-	<td>&Mu;&epsilon;&gamma;&alpha;&lambda;&#942;
-&#702;&#714;&Alpha;&rho;&kappa;&tau;&omicron;&sigmaf;</td>
-	<td>Gran Osa</td>
-	<td>Ursa Major</td>
+	<td><notr>UMa</notr></td>
+	<td><notr>&Mu;&epsilon;&gamma;&alpha;&lambda;&#942; &#702;&#714;&Alpha;&rho;&kappa;&tau;&omicron;&sigmaf;</notr></td>
+	<td>Great She-Bear</td>
+	<td><notr>Ursa Major</notr></td>
 	<td>como a constelacion IAU</td>
 	<td></td>
 </tr>
 <tr valign="top">
-	<td>Dra</td>
-	<td>&Delta;&rho;&#940;&kappa;&omega;&nu;</td>
+	<td><notr>Dra</notr></td>
+	<td><notr>&Delta;&rho;&#940;&kappa;&omega;&nu;</notr></td>
 	<td>Dragón</td>
-	<td>Draco</td>
+	<td><notr>Draco</notr></td>
 	<td>todos os triángulos ou cadrados son vértebras ou partes do corpo; a liña da
 cabeza é a lingua</td>
 	<td></td>
 </tr>
 	<tr valign="top">
-	<td>Cep</td>
-	<td>&Kappa;&eta;&phi;&epsilon;&#973;&sigmaf;</td>
+	<td><notr>Cep</notr></td>
+	<td><notr>&Kappa;&eta;&phi;&epsilon;&#973;&sigmaf;</notr></td>
 	<td>Cefeo</td>
-	<td>Cepheus</td>
+	<td><notr>Cepheus</notr></td>
 	<td>Rei, ó revés </td>
 	<td>tres estrelas de cabeza son a tiara; vese como parte do cinto, aínda que
 Almagest di que está debaixo do cinto</td>
 </tr>
 <tr valign="top">
-	<td>Boo</td>
-	<td>&Beta;&omicron;&#974;&tau;&eta;&sigmaf;</td>
+	<td><notr>Boo</notr></td>
+	<td><notr>&Beta;&omicron;&#974;&tau;&eta;&sigmaf;</notr></td>
 	<td>Arado</td>
-	<td>Bo&ouml;tes</td>
+	<td><notr>Bo&ouml;tes</notr></td>
 	<td>ten na man roupa de pastor (&omega;)</td>
 	<td>a estrela HIP 72582engadiuse como estrela do pescozo</td>
 </tr>
 <tr valign="top">
-	<td>CrB</td>
-	<td>&Sigma;&tau;&#941;&phi;&alpha;&nu;&omicron;&sigmaf;</td>
+	<td><notr>CrB</notr></td>
+	<td><notr>&Sigma;&tau;&#941;&phi;&alpha;&nu;&omicron;&sigmaf;</notr></td>
 	<td>Coroa</td>
-	<td>Corona Borealis</td>
+	<td><notr>Corona Borealis</notr></td>
 	<td>como a constelación da IAU; sen detalles para as liñas de texto</td>
 	<td></td>
 </tr>
 <tr valign="top">
-	<td>Her</td>
-	<td>&#700;&Epsilon;&nu;&gamma;&#972;&nu;&alpha;&sigma;&iota;&nu;</td>
+	<td><notr>Her</notr></td>
+	<td><notr>&#703;&Epsilon;&nu;&gamma;&#972;&nu;&alpha;&sigma;&iota;&nu;</notr></td>
 	<td>Axeonllado</td>
-	<td>Hercules</td>
+	<td><notr>Hercules</notr></td>
 	<td>unha das estrelas do pé é a parte superior do persoal de Bootes</td>
 	<td>a estrela HIP 82764 engadiuse como estrela do pescozo</td>
 </tr>
 <tr valign="top">
-	<td>Lyr</td>
-	<td>&Lambda;&#973;&rho;&alpha;</td>
+	<td><notr>Lyr</notr></td>
+	<td><notr>&Lambda;&#973;&rho;&alpha;</notr></td>
 	<td>Lira</td>
-	<td>Lyra</td>
+	<td><notr>Lyra</notr></td>
 	<td></td>
 	<td></td>
 </tr>
 <tr valign="top">
-	<td>Cyg</td>
-	<td>&#700;&#714;&Omicron;&rho;&nu;&iota;&sigmaf;</td>
+	<td><notr>Cyg</notr></td>
+	<td><notr>&#702;&#714;&Omicron;&rho;&nu;&iota;&sigmaf;</notr></td>
 	<td>Paxaro</td>
-	<td>Cygnus</td>
+	<td><notr>Cygnus</notr></td>
 	<td>cisne con patas</td>
 	<td>Puntas das ás conectadas coa cola</td>
 </tr>
 <tr valign="top">
-	<td>Cas</td>
-	<td>&Kappa;&alpha;&sigma;&sigma;&iota;&#941;&pi;&epsilon;&iota;&alpha;</td>
+	<td><notr>Cas</notr></td>
+	<td><notr>&Kappa;&alpha;&sigma;&sigma;&iota;&#941;&pi;&epsilon;&iota;&alpha;</notr></td>
 	<td>Casiopea</td>
-	<td>Cassiopeia</td>
+	<td><notr>Cassiopeia</notr></td>
 	<td>Raíña sentada no trono</td>
 	<td>para evitar confusións non debuxamos o trono</td>
 </tr>
 <tr valign="top">
-	<td>Per</td>
-	<td>&Pi;&epsilon;&rho;&sigma;&epsilon;&#973;&sigmaf;</td>
+	<td><notr>Per</notr></td>
+	<td><notr>&Pi;&epsilon;&rho;&sigma;&epsilon;&#973;&sigmaf;</notr></td>
 	<td>Perseus</td>
-	<td>Perseus</td>
+	<td><notr>Perseus</notr></td>
 	<td>Cúmulo de estrelas dobres NGC 869 e NGC 884 como obxecto do ceo profundo:
 unha das estrelas do cúmulo empregouse para o debuxo</td>
 	<td>engádese unha estrela da Cabeza da Gorgona para que a cabeza pareza máis
 esférica</td>
 </tr>
 <tr valign="top">
-	<td>Aur</td>
-	<td>&#699;&Eta;&nu;&#943;&omicron;&chi;&omicron;&sigmaf;</td>
+	<td><notr>Aur</notr></td>
+	<td><notr>&#703;&Eta;&nu;&#943;&omicron;&chi;&omicron;&sigmaf;</notr></td>
 	<td>Auriga</td>
-	<td>Auriga</td>
+	<td><notr>Auriga</notr></td>
 	<td>leva roupa longa; prenda limitada por ombreiros e basta</td>
 	<td>o Aur engadido como estrela do pescozo; 1 Aur engadido como estrela da basta</td>
 </tr>
 <tr valign="top">
-	<td>Oph</td>
-	<td>&#702;&Omicron;&phi;&iota;&omicron;&#973;&chi;&omicron;&sigmaf;</td>
+	<td><notr>Oph</notr></td>
+	<td><notr>&#702;&Omicron;&phi;&iota;&omicron;&#973;&chi;&omicron;&sigmaf;</notr></td>
 	<td>Portador da serpe</td>
-	<td>Ophiuchus</td>
+	<td><notr>Ophiuchus</notr></td>
 	<td>ten unha serpe na man</td>
 	<td>engadeuse unha estrela para formar o pescozo</td>
 </tr>
 <tr valign="top">
-	<td>Ser</td>
-	<td>&#700;&#714;&Omicron;&phi;&iota;&sigmaf;</td>
+	<td><notr>Ser</notr></td>
+	<td><notr>&#702;&#714;&Omicron;&phi;&iota;&sigmaf;</notr></td>
 	<td>Serpe</td>
-	<td>Serpens</td>
+	<td><notr>Serpens</notr></td>
 	<td>dúas partes separadas da serpe (cabeza e cola); o cadrado é a cabeza</td>
 	<td></td>
 </tr>
 <tr valign="top">
-	<td>Sge</td>
-	<td>&#702;&Omicron;&iota;&sigma;&tau;&#972;&sigmaf;</td>
+	<td><notr>Sge</notr></td>
+	<td><notr>&#702;&Omicron;&iota;&sigma;&tau;&#972;&sigmaf;</notr></td>
 	<td>Frecha</td>
-	<td>Sagitta</td>
+	<td><notr>Sagitta</notr></td>
 	<td>Como constelación IAU, &eta; falta Sge </td>
 	<td></td>
 </tr>
 <tr valign="top">
-	<td>Aql</td>
-	<td>&#702;&Alpha;&epsilon;&tau;&#972;&sigmaf;</td>
+	<td><notr>Aql</notr></td>
+	<td><notr>&#702;&Alpha;&epsilon;&tau;&#972;&sigmaf;</notr></td>
 	<td>Aguia</td>
-	<td>Aquila</td>
+	<td><notr>Aquila</notr></td>
 	<td>&tau; Aql como estrela da cabeza, &beta; coma o pescozo neck, Altair está
 entre os ombreiros, &gamma; e &mu; son os ombreiros</td>
 	<td></td>
 </tr>
 <tr valign="top">
-	<td>Del</td>
-	<td>&Delta;&epsilon;&lambda;&phi;&#943;&sigmaf;</td>
+	<td><notr>Del</notr></td>
+	<td><notr>&Delta;&epsilon;&lambda;&phi;&#943;&sigmaf;</notr></td>
 	<td>Golfiño</td>
-	<td>Delphinus</td>
+	<td><notr>Delphinus</notr></td>
 	<td></td>
 	<td>forma refinada</td>
 </tr>
 <tr valign="top">
-	<td>Equ</td>
-	<td>&Pi;&rho;&omicron;&tau;&omicron;&mu;&#942;</td>
+	<td><notr>Equ</notr></td>
+	<td><notr>&Pi;&rho;&omicron;&tau;&omicron;&mu;&#942;</notr></td>
 	<td>Busto [dun cabalo]</td>
-	<td>Equuleus</td>
+	<td><notr>Equuleus</notr></td>
 	<td></td>
 	<td></td>
 </tr>
 <tr valign="top">
-	<td>Peg</td>
-	<td>&#699;&#714;&Iota;&pi;&pi;&omicron;&sigmaf;</td>
+	<td><notr>Peg</notr></td>
+	<td><notr>&#703;&#714;&Iota;&pi;&pi;&omicron;&sigmaf;</notr></td>
 	<td>Cabalo</td>
-	<td>Pegasus</td>
+	<td><notr>Pegasus</notr></td>
 	<td>con melena e unha á</td>
 	<td></td>
 </tr>
 <tr valign="top">
-	<td>E</td>
-	<td>&#702;&Alpha;&nu;&delta;&rho;&omicron;&mu;&#941;&delta;&alpha;</td>
+	<td><notr>And</notr></td>
+	<td><notr>&#702;&Alpha;&nu;&delta;&rho;&omicron;&mu;&#941;&delta;&alpha;</notr></td>
 	<td>Andromeda</td>
-	<td class='latin'>Andromeda</td>
+	<td class='latin'><notr>Andromeda</notr></td>
 	<td>vestido e cinturón</td>
 	<td></td>
 </tr>
 <tr valign="top">
-	<td>Tri</td>
-	<td>&Tau;&rho;&#943;&gamma;&omega;&nu;&omicron;&sigmaf;</td>
+	<td><notr>Tri</notr></td>
+	<td><notr>&Tau;&rho;&#943;&gamma;&omega;&nu;&omicron;&sigmaf;</notr></td>
 	<td>Triángulo</td>
-	<td>Triangulum</td>
+	<td><notr>Triangulum</notr></td>
 	<td>catro estrelas &#61664; a estrela central dun lado</td>
 	<td></td>
 </tr>
 <tr valign="top">
-	<td>Ari</td>
-	<td>&Kappa;&rho;&iota;&#972;&sigmaf;</td>
+	<td><notr>Ari</notr></td>
+	<td><notr>&Kappa;&rho;&iota;&#972;&sigmaf;</notr></td>
 	<td>Carneiro</td>
-	<td>Aries</td>
+	<td><notr>Aries</notr></td>
 	<td>cabeza ladeada; só un corno</td>
 	<td></td>
 </tr>
 <tr valign="top">
-	<td>Tau</td>
-	<td>&Tau;&alpha;&upsilon;&#771;&rho;&omicron;&sigmaf;</td>
+	<td><notr>Tau</notr></td>
+	<td><notr>&Tau;&alpha;&upsilon;&#771;&rho;&omicron;&sigmaf;</notr></td>
 	<td>Touro</td>
-	<td>Taurus</td>
+	<td><notr>Taurus</notr></td>
 	<td>medio corpo, só dúas patas visibles; dirección de visión cara ó observador</td>
 	<td></td>
 </tr>
 <tr valign="top">
-	<td>Gem</td>
-	<td>&Delta;&#943;&delta;&upsilon;&mu;&omicron;&iota;</td>
+	<td><notr>Gem</notr></td>
+	<td><notr>&Delta;&#943;&delta;&upsilon;&mu;&omicron;&iota;</notr></td>
 	<td>Xemelgos</td>
-	<td>Gemini</td>
+	<td><notr>Gemini</notr></td>
 	<td>unha estrela en común; tocándose entre si coas mans</td>
 	<td></td>
 </tr>
 <tr valign="top">
-	<td>Cnc</td>
-	<td>&Kappa;&alpha;&rho;&kappa;&#943;&nu;&omicron;&sigmaf;</td>
+	<td><notr>Cnc</notr></td>
+	<td><notr>&Kappa;&alpha;&rho;&kappa;&#943;&nu;&omicron;&sigmaf;</notr></td>
 	<td>Cangrexo</td>
-	<td>Cancer</td>
+	<td><notr>Cancer</notr></td>
 	<td>corpo cadrado</td>
 	<td></td>
 </tr>
 <tr valign="top">
-	<td>Leo</td>
-	<td>&Lambda;&#941;&omega;&nu;</td>
+	<td><notr>Leo</notr></td>
+	<td><notr>&Lambda;&#941;&omega;&nu;</notr></td>
 	<td>León</td>
-	<td>Leo</td>
+	<td><notr>Leo</notr></td>
 	<td>abre a mandíbula</td>
 	<td></td>
 </tr>
 <tr valign="top">
-	<td>Vir</td>
-	<td>&Pi;&alpha;&rho;&theta;&#941;&nu;&omicron;&sigmaf;</td>
+	<td><notr>Vir</notr></td>
+	<td><notr>&Pi;&alpha;&rho;&theta;&#941;&nu;&omicron;&sigmaf;</notr></td>
 	<td>Virxe</td>
-	<td>Virgo</td>
+	<td><notr>Virgo</notr></td>
 	<td>sen cabeza separada</td>
 	<td>engadíronse estrelas máis febles para debuxar as ás</td>
 </tr>
 <tr valign="top">
-	<td>Lib</td>
-	<td>&Chi;&eta;&lambda;&alpha;&#943;</td>
+	<td><notr>Lib</notr></td>
+	<td><notr>&Chi;&eta;&lambda;&alpha;&#943;</notr></td>
 	<td>Poutas [de Escorpión]</td>
-	<td>Libra</td>
+	<td><notr>Libra</notr></td>
 	<td>Ptolomeo usa sempre o termo &quot;pouta&quot;, nunca &quot;balanza&quot;</td>
 	<td></td>
 </tr>
 <tr valign="top">
-	<td>Sco</td>
-	<td>&Sigma;&kappa;&omicron;&rho;&pi;&#943;&omicron;&sigmaf;</td>
+	<td><notr>Sco</notr></td>
+	<td><notr>&Sigma;&kappa;&omicron;&rho;&pi;&#943;&omicron;&sigmaf;</notr></td>
 	<td>Escorpión</td>
-	<td>Scorpius</td>
+	<td><notr>Scorpius</notr></td>
 	<td></td>
 	<td>engadíronse brazos arredor da cabeza: &nu; e &rho;</td>
 </tr>
 <tr valign="top">
-	<td>Sgr</td>
-	<td>&Tau;&omicron;&xi;&#972;&tau;&eta;&sigmaf;</td>
+	<td><notr>Sgr</notr></td>
+	<td><notr>&Tau;&omicron;&xi;&#972;&tau;&eta;&sigmaf;</notr></td>
 	<td>Arqueiro</td>
-	<td>Sagittarius</td>
+	<td><notr>Sagittarius</notr></td>
 	<td>un centauro con arco e unha capa detrás</td>
 	<td>incluímos moitas estrelas débiles na nosa figura para que a imaxe fose
 clara.</td>
 </tr>
 <tr valign="top">
-	<td>Cap</td>
-	<td>&Alpha;&#943;&gamma;&#972;&kappa;&epsilon;&rho;&omicron;&sigmaf;</td>
+	<td><notr>Cap</notr></td>
+	<td><notr>&Alpha;&#943;&gamma;&#972;&kappa;&epsilon;&rho;&omicron;&sigmaf;</notr></td>
 	<td>O que ten un corno de cabra</td>
-	<td>Capricornus</td>
+	<td><notr>Capricornus</notr></td>
 	<td>cola de peixe; dúas pernas visibles</td>
 	<td></td>
 </tr>
 <tr valign="top">
-	<td>Aqr</td>
-	<td>&#703;&Upsilon;&delta;&rho;&omicron;&chi;&#972;&omicron;&sigmaf;</td>
+	<td><notr>Aqr</notr></td>
+	<td><notr>&#703;&Upsilon;&delta;&rho;&omicron;&chi;&#972;&omicron;&sigmaf;</notr></td>
 	<td>Augador</td>
-	<td>Aquarius</td>
+	<td><notr>Aquarius</notr></td>
 	<td>auga verténdose da xarra</td>
 	<td></td>
 </tr>
 <tr valign="top">
-	<td>Psc</td>
-	<td>&#702;&Iota;&chi;&theta;&#973;&epsilon;&sigmaf;</td>
+	<td><notr>Psc</notr></td>
+	<td><notr>&#702;&Iota;&chi;&theta;&#973;&epsilon;&sigmaf;</notr></td>
 	<td>[2] Peixe</td>
-	<td>Pisces</td>
+	<td><notr>Pisces</notr></td>
 	<td></td>
 	<td>peixe do norte: 68(h), 67(k), e 65(i) descríbese como cabeza en Almagest
 pero tómanse como aleta porque a boca debería estar en g e &tau; Psc. Outro
 cambio adicional é a aleta de cola, estendida a &rho;</td>
 </tr>
 <tr valign="top">
-	<td>Cet</td>
-	<td>&Kappa;&eta;&#771;&tau;&omicron;&sigmaf;</td>
+	<td><notr>Cet</notr></td>
+	<td><notr>&Kappa;&eta;&#771;&tau;&omicron;&sigmaf;</notr></td>
 	<td>Balea</td>
-	<td>Cetus</td>
+	<td><notr>Cetus</notr></td>
 	<td></td>
 	<td>O corpo non pasa pola estrela &tau;, senón pola estrela &upsilon;</td>
 </tr>
 <tr valign="top">
-	<td>Ori</td>
-	<td>&#702;&Omega;&rho;&#943;&omega;&nu;</td>
+	<td><notr>Ori</notr></td>
+	<td><notr>&#702;&Omega;&rho;&#943;&omega;&nu;</notr></td>
 	<td>Orion</td>
-	<td class='latin'>Orion</td>
+	<td class='latin'><notr>Orion</notr></td>
 	<td></td>
 	<td>A "cabeza" está etiquetada como "nebulosa", o que significa que Ptolomeo
 interpretou &phi;<sub>1</sub>, &phi;<sub>2</sub>, e &lambda; xunto con
@@ -371,34 +389,34 @@ conexión directa coas estrelas do ombreiro, senón conexión cunha estrela
 entre as estrelas dos ombreiros.</td>
 </tr>
 <tr valign="top">
-	<td>Eri</td>
-	<td>&Pi;&omicron;&tau;&alpha;&mu;&omicron;&#972;&sigmaf;</td>
+	<td><notr>Eri</notr></td>
+	<td><notr>&Pi;&omicron;&tau;&alpha;&mu;&omicron;&#972;&sigmaf;</notr></td>
 	<td>Río [sen nome]</td>
-	<td>Eridanus</td>
+	<td><notr>Eridanus</notr></td>
 	<td>Como a constelación da IAU, pero máis curta</td>
 	<td></td>
 </tr>
 <tr valign="top">
-	<td>Lep</td>
-	<td>&Lambda;&alpha;&gamma;&omega;&#771;&sigmaf;</td>
+	<td><notr>Lep</notr></td>
+	<td><notr>&Lambda;&alpha;&gamma;&omega;&#771;&sigmaf;</notr></td>
 	<td>Lebre</td>
-	<td>Lepus</td>
+	<td><notr>Lepus</notr></td>
 	<td></td>
 	<td>colleu as "4 estrelas sobre a orella" como orella</td>
 </tr>
 <tr valign="top">
-	<td>CMa</td>
-	<td>&Kappa;&#973;&omega;&nu;</td>
+	<td><notr>CMa</notr></td>
+	<td><notr>&Kappa;&#973;&omega;&nu;</notr></td>
 	<td>Can</td>
-	<td>Canis Major</td>
+	<td><notr>Canis Major</notr></td>
 	<td></td>
 	<td></td>
 </tr>
 <tr valign="top">
-	<td>CMi</td>
-	<td>&Pi;&rho;&omicron;&kappa;&#973;&omega;&nu;</td>
+	<td><notr>CMi</notr></td>
+	<td><notr>&Pi;&rho;&omicron;&kappa;&#973;&omega;&nu;</notr></td>
 	<td>O que está antes do Can</td>
-	<td>Canis Minor</td>
+	<td><notr>Canis Minor</notr></td>
 	<td></td>
 	<td>No Almagest, o nome da constelación é &quot;O que está antes do Can&quot; ou
 &quot;O anunciador de Sirius&quot; como di Toomer. Porén, a &beta; CMi
@@ -409,28 +427,28 @@ traseiras con &delta;<sub>2</sub> e &delta;<sub>3</sub>; o rabo con HIP
 37634</td>
 </tr>
 <tr valign="top">
-	<td>Arg</td>
-	<td>&#702;&Alpha;&rho;&gamma;&omega;</td>
+	<td><notr>Arg</notr></td>
+	<td><notr>&#702;&Alpha;&rho;&gamma;&omega;</notr></td>
 	<td>Barco &quot;Argo&quot;</td>
-	<td>Argo</td>
+	<td><notr>Argo</notr></td>
 	<td>menor cá suma de constelacións IAU Pup+Pyx+Car+Vel</td>
 	<td>Hai moitas estrelas non integradas na constelación, para crear unha forma
 parecida a un barco; en moitas representacións (incluído o antigo globo de
 Farnese), só se debuxa a metade dun barco.</td>
 </tr>
 <tr valign="top">
-	<td>Hya</td>
-	<td>&#701;&#714;&Upsilon;&delta;&rho;&omicron;&sigmaf;</td>
+	<td><notr>Hya</notr></td>
+	<td><notr>&#703;&#714;&Upsilon;&delta;&rho;&omicron;&sigmaf;</notr></td>
 	<td>Serpe de Auga</td>
-	<td>Hydra</td>
+	<td><notr>Hydra</notr></td>
 	<td>como a constelacion IAU</td>
 	<td></td>
 </tr>
 <tr valign="top">
-	<td>Crt</td>
-	<td>&Kappa;&rho;&alpha;&tau;&#768;&eta;&rho;</td>
+	<td><notr>Crt</notr></td>
+	<td><notr>&Kappa;&rho;&alpha;&tau;&#768;&eta;&rho;</notr></td>
 	<td>Krater [vaixel]</td>
-	<td>Crater</td>
+	<td><notr>Crater</notr></td>
 	<td></td>
 	<td>un Krater é un recipiente especial para a mestura de viño grego que semella
 unha ánfora ou un xarrón: <a
@@ -439,73 +457,74 @@ Ptolomeo describe só unha estrela no fondo (&alpha; Crt) e dúas manshandles
 (&eta;, &theta; Crt)</td>
 </tr>
 <tr valign="top">
-	<td>Crv</td>
-	<td>&Kappa;&oacute;&rho;&alpha;&xi;</td>
+	<td><notr>Crv</notr></td>
+	<td><notr>&Kappa;&oacute;&rho;&alpha;&xi;</notr></td>
 	<td>Corvo</td>
-	<td>Corvus</td>
+	<td><notr>Corvus</notr></td>
 	<td>como a constelacion IAU</td>
 	<td></td>
 </tr>
 <tr valign="top">
-	<td>Cen</td>
-	<td>&Kappa;&#941;&nu;&tau;&alpha;&upsilon;&rho;&omicron;&sigmaf;</td>
+	<td><notr>Cen</notr></td>
+	<td><notr>&Kappa;&#941;&nu;&tau;&alpha;&upsilon;&rho;&omicron;&sigmaf;</notr></td>
 	<td>Centauro</td>
-	<td>Centaurus</td>
+	<td><notr>Centaurus</notr></td>
 	<td></td>
 	<td>desviación da descrición: HIP 65373 no canto de &omega; Cen (cúmulo) tomado
 como estrela das costas. &lsquo;Thyrsus&lsquo; non debuxado (para evitar
 confusións), engadiuse un brazo cara atrás.</td>
 </tr>
 <tr valign="top">
-	<td>Lup</td>
-	<td>&Theta;&eta;&rho;&#943;&omicron;&nu;</td>
+	<td><notr>Lup</notr></td>
+	<td><notr>&Theta;&eta;&rho;&#943;&omicron;&nu;</notr></td>
 	<td>Lobo</td>
-	<td>Lupus</td>
+	<td><notr>Lupus</notr></td>
 	<td></td>
 	<td>&beta; descrita como &lsquo;Extremo da pata traseira&lsquo; -> tomouse como
 estrela na barriga; &tau;<sub>1</sub> pata traseira &Chi; retirada da
 cabeza, porque se non rompe a forma; HIP 73493 tomouse como pata dianteira</td>
 </tr>
 <tr valign="top">
-	<td>Ara</td>
-	<td>&Theta;&upsilon;&mu;&iota;&alpha;&tau;&#942;&rho;&iota;&omicron;&nu;</td>
+	<td><notr>Ara</notr></td>
+	<td><notr>&Theta;&upsilon;&mu;&iota;&alpha;&tau;&#942;&rho;&iota;&omicron;&nu;</notr></td>
 	<td>Altar</td>
-	<td>Ara</td>
+	<td><notr>Ara</notr></td>
 	<td>como a constelacion IAU</td>
 	<td></td>
 </tr>
 <tr valign="top">
-	<td>CrA</td>
-	<td>&Sigma;&tau;&#941;&phi;&alpha;&nu;&omicron;&sigmaf;
-&Nu;&#972;&tau;&iota;&omicron;&sigmaf;</td>
+	<td><notr>CrA</notr></td>
+	<td><notr>&Sigma;&tau;&#941;&phi;&alpha;&nu;&omicron;&sigmaf; &Nu;&#972;&tau;&iota;&omicron;&sigmaf;</notr></td>
 	<td>Coroa do Sur</td>
-	<td>Corona Australis</td>
+	<td><notr>Corona Australis</notr></td>
 	<td>como a constelación IAU; a única incerteza prodúcese con estrelas que só
 teñen número BSC en Almagest, porque estas non se identifican claramente en
 Stellarium</td>
 	<td></td>
 </tr>
 <tr valign="top">
-	<td>PsA</td>
-	<td>&Nu;&#972;&tau;&iota;&omicron;&sigmaf;
-&#700;&Iota;&chi;&theta;&#973;&sigmaf;</td>
+	<td><notr>PsA</notr></td>
+	<td><notr>&Nu;&#972;&tau;&iota;&omicron;&sigmaf; &#702;&Iota;&chi;&theta;&#973;&sigmaf;</notr></td>
 	<td>Peixe do Sur</td>
-	<td>Piscis Austrinus</td>
+	<td><notr>Piscis Austrinus</notr></td>
 	<td>o peixe está deitado sobre o lombo</td>
 	<td>engadimos algunhas estrelas para marcar a cola como tal (&beta; debería ser
 a punta da cola pero usámola como o seu nacemento)</td>
 </tr>
 </table>
 
-<h2>Referencias/Literatura adicional</h2> 
+<h2>Referencias</h2> 
  <ul> 
   <li>Grasshoff, G.: The History of Ptolemy's Star Catalog, Springer, New York,
 1990</li>
   <li>Heiberg, J. L. (Ed.): Claudii Ptolemaei: Syntaxis Mathematica, Teubner,
 Leipzig, 1898</li>
-  <li>Hoffmann, S. M.: Hipparchs Himmelsglobus, Springer, Wiesbaden/ New York,
+  <li>Hoffmann, S. M.: Hipparchs Himmelsglobus, Springer, Wiesbaden / New York,
 2017</li>
   <li>Toomer, G. J.: Ptolemy's Almagest, Duckworth, London, 1984</li>
+  <li>Ernie Wright: <a href="http://www.etwright.org/astro/almagest.html#cat"
+class='external text' rel="nofollow"> Seeing Ancient Stars, Visualization of
+the Almagest Catalog</a>, 2006</li>
  </ul>
 
 <h2>Uso correcto</h2>

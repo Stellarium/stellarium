@@ -1,0 +1,550 @@
+<h1>Greek (Almagest)</h1>
+
+<p>This ancient Greek sky culture is based on the Almagest, a compilation of
+astronomical knowledge of former astronomers including results from
+observations and mathematical astronomy. Pieced together by Claudius
+Ptolemy, using older, as well as his own, observations, it was written in
+Greek, published in the Second Century and remained the main astronomical
+work for the following 1500 years. It was originally written with the title
+<i>Mathematike Syntaxis</i>, in Ancient Greek.  The name <i>Almagest</i>,
+meaning &ldquo;The Largest [Book]&rdquo;, was developed from Arabian
+translations. To create this sky culture we used the English translation by
+Toomer (1984), reworked it in some details (e.g. using more literal
+translations from Greek instead of Latin terms that are common today) and we
+made use of computer readable tables prepared by Ernie Wright.</p>
+
+<p>L’Almageste est un ouvrage en 13 parties. Dans les septième et huitième
+livres, Ptolémée a répertorié 1022 étoiles dans 48 constellations (dont 5
+objets s’apparentant à une étoile, comme les amas globulaires). Il s’agit
+d’un tableau montrant les coordonnées des étoiles ainsi qu’une description
+de leur emplacement au sein de la constellation (par exemple, « l’étoile du
+coude de X, longitude, latitude, magnitude »). Pour décrire la précession
+des équinoxes, Ptolémée a utilisé le système de coordonnées écliptiques. De
+plus, il a été un des premiers à inclure la magnitude, une échelle servant à
+décrire de façon quantitative la luminosité d’une étoile et qui a
+probablement été reprise des travaux d’Hipparque (ce qui n'est pas certain
+puisque le catalogue d’Hipparque n’a pas été préservé). Sur cette échelle,
+les étoiles les plus brillantes ont une magnitude de 1, tandis que les
+étoiles les plus faibles ont une magnitude de 6.</p>
+
+<p>For the computation of planet positions Ptolemy used a geocentric model
+(which is allowed because the observer always stands on Earth) and, thus,
+contributed to the scientific belief that the heliocentric model by
+Aristarch was not needed. However, for the star catalogue of the
+<i>Almagest</i> this does not matter at all because a star catalogue always
+represents a sort of inventory of the fixed dots in the sky and Ptolemy's
+proclaimed aim of the catalogue is to provide a list for making a celestial
+globe (see Alm., VIII, 3). Being aware of precession he wants to ease the
+business of future globemakers by using ecliptical coordinates: Precession
+as known to Ptolemy shifts all stars parallel to the ecliptic, therefore
+updates to the epoch of the respective globemaker could be applied by a
+simple subtraction of the value for ecliptic longitude.</p>
+
+<h2>Comment fut créée cette culture céleste</h2>
+
+<h3>Noms d'étoiles</h3>
+
+Out of more than 1,000 stars, Ptolemy mentions a proper name for only 15.
+The rest are identified by fairly long descriptions such as "The star on the
+end of the tail" for the Polaris. In order to avoid displaying such long
+strings across the screen in Stellarium, we invented short labels for all
+Almagest stars based on the constellation and the order in which they appear
+in the catalogue.  For example, Polaris is given a designation "UMi 1"
+because it is the first star in the constellation of Small Bear (UMi).  See
+the table below for the correspondence between Ptolemy constellations and
+IAU abbreviations.  In addition, where Ptolemy describes a star as lying
+outside of the figure, we use lowercase letters in the corresponding
+label. To see the long description for a given star, users should enable
+"Use additional names of stars" in the "View [F4]/Sky" settings and click on
+the star. The long description will then be displayed at the top of the
+screen.
+
+<h3>Constellation lines</h3>
+
+<p>Le processus peut être décrit comme esquissé ici avec l'exemple du Corbeau :</p>
+
+<p>In the constellation of Corvus (Raven), &alpha; Crv is the star in the
+&quot;head of the raven&quot;. It is connected with the &quot;star in the
+neck&quot;, &epsilon; Crv.  This one is connected with &quot;the star in the
+breast&quot; &zeta; Crv.  From there two lines go to the tips of the
+wings. &gamma; Crv is the star in the advanced wing and &delta; Crv the star
+in the rear wing. From the star in the breast another line goes to the
+&quot;foot of the raven&quot;, the star &beta; Crv.</p>
+
+<p><img width="800" src="corvus_s.png" /></p>
+
+<p>Après avoir identifié les étoiles en fonction de leurs coordonnées et de
+leurs noms, nous avons reconnecté les étoiles selon les descriptions du
+tableau présenté dans <i>l'Almageste</i>.</p>
+
+<p>The names of stars and names of deep sky objects rely on the Almagest only,
+e.g. Ptolemy uses the name
+&quot;&lambda;&alpha;&mu;&pi;&alpha;&delta;&#943;&alpha;&sigmaf; (The
+Torch-like)&quot; for Aldebaran in his other work, the <i>Tetrabiblos</i>,
+but this is not implemented in this sky culture because it doesn't show up
+in the Almagest.</p>
+
+<p>Le tableau suivant présente le nom original de la constellation en grec et
+sa traduction anglaise (colonnes 2 et 3) et indique nos incertitudes dans la
+reconstruction (colonne 6).</p>
+
+<table class="nomenclature">
+<tr valign="top">
+	<td><b>Abréviation</b></td>
+	<td><b>Nom d'origine</b></td>
+	<td><b>Traduction</b> (directe)</td>
+	<td>Nom (latin) UAI</td>
+	<td><b>allusions à la constellation</b></td>
+	<td><b>liberté artistique</b></td>
+</tr>
+<tr valign="top">
+	<td><notr>UMi</notr></td>
+	<td><notr>&Mu;&iota;&kappa;&rho;&#942; &#702;&#714;&Alpha;&rho;&kappa;&tau;&omicron;&sigmaf;</notr></td>
+	<td>Small She-Bear</td>
+	<td><notr>Ursa Minor</notr></td>
+	<td>comme la constellation de l'UAI</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>UMa</notr></td>
+	<td><notr>&Mu;&epsilon;&gamma;&alpha;&lambda;&#942; &#702;&#714;&Alpha;&rho;&kappa;&tau;&omicron;&sigmaf;</notr></td>
+	<td>Great She-Bear</td>
+	<td><notr>Ursa Major</notr></td>
+	<td>comme la constellation de l'UAI</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Dra</notr></td>
+	<td><notr>&Delta;&rho;&#940;&kappa;&omega;&nu;</notr></td>
+	<td>Dragon</td>
+	<td><notr>Draco</notr></td>
+	<td>tous les triangles ou carrés sont des vertèbres ou des parties du corps ; la
+ligne à la tête est la langue</td>
+	<td></td>
+</tr>
+	<tr valign="top">
+	<td><notr>Cep</notr></td>
+	<td><notr>&Kappa;&eta;&phi;&epsilon;&#973;&sigmaf;</notr></td>
+	<td>Céphée</td>
+	<td><notr>Cepheus</notr></td>
+	<td>roi, à l'envers </td>
+	<td>three head stars are tiara; &beta; seen as part of the belt, although
+Almagest says beneath belt</td>
+</tr>
+<tr valign="top">
+	<td><notr>Boo</notr></td>
+	<td><notr>&Beta;&omicron;&#974;&tau;&eta;&sigmaf;</notr></td>
+	<td>Bouvier</td>
+	<td><notr>Bo&ouml;tes</notr></td>
+	<td>porte un bâton de berger à la main (&omega;)</td>
+	<td>star HIP 72582 added as neck star</td>
+</tr>
+<tr valign="top">
+	<td><notr>CrB</notr></td>
+	<td><notr>&Sigma;&tau;&#941;&phi;&alpha;&nu;&omicron;&sigmaf;</notr></td>
+	<td>Couronne boréale</td>
+	<td><notr>Corona Borealis</notr></td>
+	<td>comme la constellation UAI ; aucun détail pour les lignes dans le texte</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Her</notr></td>
+	<td><notr>&#703;&Epsilon;&nu;&gamma;&#972;&nu;&alpha;&sigma;&iota;&nu;</notr></td>
+	<td>Hercule</td>
+	<td><notr>Hercules</notr></td>
+	<td>one of the foot stars is top of staff of Bootes</td>
+	<td>star HIP 82764 added as neck star</td>
+</tr>
+<tr valign="top">
+	<td><notr>Lyr</notr></td>
+	<td><notr>&Lambda;&#973;&rho;&alpha;</notr></td>
+	<td>Lyre</td>
+	<td><notr>Lyra</notr></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Cyg</notr></td>
+	<td><notr>&#702;&#714;&Omicron;&rho;&nu;&iota;&sigmaf;</notr></td>
+	<td>Cygne</td>
+	<td><notr>Cygnus</notr></td>
+	<td>cygne avec des pattes</td>
+	<td>Extrémités des ailes liées à la queue</td>
+</tr>
+<tr valign="top">
+	<td><notr>Cas</notr></td>
+	<td><notr>&Kappa;&alpha;&sigma;&sigma;&iota;&#941;&pi;&epsilon;&iota;&alpha;</notr></td>
+	<td>Cassiopée</td>
+	<td><notr>Cassiopeia</notr></td>
+	<td>Reine assise sur un trône</td>
+	<td>pour éviter toute confusion, nous n'avons pas dessiné le trône</td>
+</tr>
+<tr valign="top">
+	<td><notr>Per</notr></td>
+	<td><notr>&Pi;&epsilon;&rho;&sigma;&epsilon;&#973;&sigmaf;</notr></td>
+	<td>Persée</td>
+	<td><notr>Perseus</notr></td>
+	<td>Double star cluster NGC 869 and NGC 884 as Deep Sky Object - &gt;one of the
+stars in the cluster was used for drawing</td>
+	<td>one of the stars in Gorgon-head is added to make the head look more
+spherical</td>
+</tr>
+<tr valign="top">
+	<td><notr>Aur</notr></td>
+	<td><notr>&#703;&Eta;&nu;&#943;&omicron;&chi;&omicron;&sigmaf;</notr></td>
+	<td>Cocher</td>
+	<td><notr>Auriga</notr></td>
+	<td>porte un vêtement long ; vêtement limité par les épaules et l'ourlet</td>
+	<td>o Aur added as neck star; 1 Aur added as hem star</td>
+</tr>
+<tr valign="top">
+	<td><notr>Oph</notr></td>
+	<td><notr>&#702;&Omicron;&phi;&iota;&omicron;&#973;&chi;&omicron;&sigmaf;</notr></td>
+	<td>Serpentaire</td>
+	<td><notr>Ophiuchus</notr></td>
+	<td>a un serpent dans sa main</td>
+	<td>a star added as neck star</td>
+</tr>
+<tr valign="top">
+	<td><notr>Ser</notr></td>
+	<td><notr>&#702;&#714;&Omicron;&phi;&iota;&sigmaf;</notr></td>
+	<td>Serpent</td>
+	<td><notr>Serpens</notr></td>
+	<td>deux parties distinctes du serpent (tête et queue) ; le carré est la tête</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Sge</notr></td>
+	<td><notr>&#702;&Omicron;&iota;&sigma;&tau;&#972;&sigmaf;</notr></td>
+	<td>Flèche</td>
+	<td><notr>Sagitta</notr></td>
+	<td>Comme la constellation UAI, &eta; Sge est manquante </td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Aql</notr></td>
+	<td><notr>&#702;&Alpha;&epsilon;&tau;&#972;&sigmaf;</notr></td>
+	<td>Aigle</td>
+	<td><notr>Aquila</notr></td>
+	<td>&tau; Aql as head star, &beta; as neck, Altair is between shoulders, &gamma;
+and &mu; are shoulders</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Del</notr></td>
+	<td><notr>&Delta;&epsilon;&lambda;&phi;&#943;&sigmaf;</notr></td>
+	<td>Dauphin</td>
+	<td><notr>Delphinus</notr></td>
+	<td></td>
+	<td>forme affinée</td>
+</tr>
+<tr valign="top">
+	<td><notr>Equ</notr></td>
+	<td><notr>&Pi;&rho;&omicron;&tau;&omicron;&mu;&#942;</notr></td>
+	<td>Buste [d'un cheval]</td>
+	<td><notr>Equuleus</notr></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Peg</notr></td>
+	<td><notr>&#703;&#714;&Iota;&pi;&pi;&omicron;&sigmaf;</notr></td>
+	<td>Pégase</td>
+	<td><notr>Pegasus</notr></td>
+	<td>avec crinière et une aile</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>And</notr></td>
+	<td><notr>&#702;&Alpha;&nu;&delta;&rho;&omicron;&mu;&#941;&delta;&alpha;</notr></td>
+	<td>Andromeda</td>
+	<td class='latin'><notr>Andromeda</notr></td>
+	<td>robe et ceinture</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Tri</notr></td>
+	<td><notr>&Tau;&rho;&#943;&gamma;&omega;&nu;&omicron;&sigmaf;</notr></td>
+	<td>Triangle</td>
+	<td><notr>Triangulum</notr></td>
+	<td>quatre étoiles données &#61664; étoile du milieu d'un côté</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Ari</notr></td>
+	<td><notr>&Kappa;&rho;&iota;&#972;&sigmaf;</notr></td>
+	<td>Ram</td>
+	<td><notr>Aries</notr></td>
+	<td>tête tournée; une seule corne</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Tau</notr></td>
+	<td><notr>&Tau;&alpha;&upsilon;&#771;&rho;&omicron;&sigmaf;</notr></td>
+	<td>Taureau</td>
+	<td><notr>Taurus</notr></td>
+	<td>moitié du corps, seulement deux pattes visibles ; direction de la vue vers
+l'observateur</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Gem</notr></td>
+	<td><notr>&Delta;&#943;&delta;&upsilon;&mu;&omicron;&iota;</notr></td>
+	<td>Gémeaux</td>
+	<td><notr>Gemini</notr></td>
+	<td>une étoile en commun ; se touchant l'un et l'autre avec les mains</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Cnc</notr></td>
+	<td><notr>&Kappa;&alpha;&rho;&kappa;&#943;&nu;&omicron;&sigmaf;</notr></td>
+	<td>Cancer</td>
+	<td><notr>Cancer</notr></td>
+	<td>corps carré</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Leo</notr></td>
+	<td><notr>&Lambda;&#941;&omega;&nu;</notr></td>
+	<td>Lion</td>
+	<td><notr>Leo</notr></td>
+	<td>ouvre la mâchoire</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Vir</notr></td>
+	<td><notr>&Pi;&alpha;&rho;&theta;&#941;&nu;&omicron;&sigmaf;</notr></td>
+	<td>Vierge</td>
+	<td><notr>Virgo</notr></td>
+	<td>pas de tête séparée</td>
+	<td>étoiles plus pâles ajoutées pour dessiner les ailes</td>
+</tr>
+<tr valign="top">
+	<td><notr>Lib</notr></td>
+	<td><notr>&Chi;&eta;&lambda;&alpha;&#943;</notr></td>
+	<td>Balance [du scorpion]</td>
+	<td><notr>Libra</notr></td>
+	<td>Ptolemy always uses the term &quot;claws&quot;, never &quot;the
+balance&quot;.</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Sco</notr></td>
+	<td><notr>&Sigma;&kappa;&omicron;&rho;&pi;&#943;&omicron;&sigmaf;</notr></td>
+	<td>Scorpion</td>
+	<td><notr>Scorpius</notr></td>
+	<td></td>
+	<td>bras ajoutés autour de la tête : &nu; et &rho;</td>
+</tr>
+<tr valign="top">
+	<td><notr>Sgr</notr></td>
+	<td><notr>&Tau;&omicron;&xi;&#972;&tau;&eta;&sigmaf;</notr></td>
+	<td>Sagittaire</td>
+	<td><notr>Sagittarius</notr></td>
+	<td>un centaure avec un arc devant ; &bdquo;manteau&ldquo; derrière</td>
+	<td>nous avons inclus de nombreuses étoiles pâles dans notre silhouette de bâton
+afin de rendre l'image claire.</td>
+</tr>
+<tr valign="top">
+	<td><notr>Cap</notr></td>
+	<td><notr>&Alpha;&#943;&gamma;&#972;&kappa;&epsilon;&rho;&omicron;&sigmaf;</notr></td>
+	<td>Celui avec la corne de chèvre</td>
+	<td><notr>Capricornus</notr></td>
+	<td>queue de poisson ; deux pattes visibles</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Aqr</notr></td>
+	<td><notr>&#703;&Upsilon;&delta;&rho;&omicron;&chi;&#972;&omicron;&sigmaf;</notr></td>
+	<td>Verseau</td>
+	<td><notr>Aquarius</notr></td>
+	<td>eau qui sort de la cruche</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Psc</notr></td>
+	<td><notr>&#702;&Iota;&chi;&theta;&#973;&epsilon;&sigmaf;</notr></td>
+	<td>[2] Poissons</td>
+	<td><notr>Pisces</notr></td>
+	<td></td>
+	<td>northern fish: 68(h), 67(k), and 65(i) described as head in Almagest but we
+took them as fin because mouth should be at g and &tau; Psc. Additional
+change on tail fin: extended to &rho;</td>
+</tr>
+<tr valign="top">
+	<td><notr>Cet</notr></td>
+	<td><notr>&Kappa;&eta;&#771;&tau;&omicron;&sigmaf;</notr></td>
+	<td>Baleine</td>
+	<td><notr>Cetus</notr></td>
+	<td></td>
+	<td>Le corps ne passe pas par l'étoile &tau;, mais par l'étoile &upsilon;</td>
+</tr>
+<tr valign="top">
+	<td><notr>Ori</notr></td>
+	<td><notr>&#702;&Omega;&rho;&#943;&omega;&nu;</notr></td>
+	<td>Orion</td>
+	<td class='latin'><notr>Orion</notr></td>
+	<td></td>
+	<td>The &quot;head&quot; is labeled as &quot;nebulous&quot; which means Ptolemy
+interpreted &phi;<sub>1</sub>, &phi;<sub>2</sub>, and &lambda;, together
+with fainter stars between them as a &quot;cluster&quot; (or association
+which is more extended than the modern &quot;&lambda; Ori
+Assoc.&quot;). Head does not have direct connection to the shoulder stars
+anymore, but a connection to a star between the stars in the shoulders.</td>
+</tr>
+<tr valign="top">
+	<td><notr>Eri</notr></td>
+	<td><notr>&Pi;&omicron;&tau;&alpha;&mu;&omicron;&#972;&sigmaf;</notr></td>
+	<td>Éridan</td>
+	<td><notr>Eridanus</notr></td>
+	<td>Comme la constellation de l'UAI, mais plus courte</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Lep</notr></td>
+	<td><notr>&Lambda;&alpha;&gamma;&omega;&#771;&sigmaf;</notr></td>
+	<td>Lièvre</td>
+	<td><notr>Lepus</notr></td>
+	<td></td>
+	<td>on a pris les « 4 étoiles sur l'oreille » comme oreille</td>
+</tr>
+<tr valign="top">
+	<td><notr>CMa</notr></td>
+	<td><notr>&Kappa;&#973;&omega;&nu;</notr></td>
+	<td>Grand Chien</td>
+	<td><notr>Canis Major</notr></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>CMi</notr></td>
+	<td><notr>&Pi;&rho;&omicron;&kappa;&#973;&omega;&nu;</notr></td>
+	<td>Celui avant le Grand Chien</td>
+	<td><notr>Canis Minor</notr></td>
+	<td></td>
+	<td>In Almagest, the name of the constellation is &quot;The One before the
+Dog&quot; or &quot;Harbinger of Sirius&quot; as Toomer puts it. However,
+&beta; CMi is called &quot;the neck&quot; (of whom is unknown). We drew a
+little dog with &gamma; and &epsilon; as head; &alpha;, &beta;, &eta; and
+HIP36889 as body; forelegs with HIP 35509 and HIP 35614; hindlegs with
+&delta;<sub>2</sub> and &delta;<sub>3</sub>; tail with HIP 37634</td>
+</tr>
+<tr valign="top">
+	<td><notr>Arg</notr></td>
+	<td><notr>&#702;&Alpha;&rho;&gamma;&omega;</notr></td>
+	<td>Navire &quot;Argo&quot;</td>
+	<td><notr>Argo</notr></td>
+	<td>smaller than the sum of the IAU-constellations Pup+Pyx+Car+Vel</td>
+	<td>De nombreuses étoiles, non intégrées dans la constellation, pour créer une
+forme de bateau ; dans de nombreuses représentations (y compris l'ancien
+globe Farnèse), seule la moitié d'un navire est peinte.</td>
+</tr>
+<tr valign="top">
+	<td><notr>Hya</notr></td>
+	<td><notr>&#703;&#714;&Upsilon;&delta;&rho;&omicron;&sigmaf;</notr></td>
+	<td>Hydre</td>
+	<td><notr>Hydra</notr></td>
+	<td>comme la constellation de l'UAI</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Crt</notr></td>
+	<td><notr>&Kappa;&rho;&alpha;&tau;&#768;&eta;&rho;</notr></td>
+	<td>Coupe (récipient)</td>
+	<td><notr>Crater</notr></td>
+	<td></td>
+	<td>une Coupe est un récipient grec spécial pour mélanger le vin, qui ressemble
+à une amphore ou à un vase : <a
+href="https://en.wikipedia.org/wiki/Krater">https://fr.wikipedia.org/wiki/Crat%C3%A8re_(vase)</a>
+Ptolémée ne décrit qu'une seule étoile au pied (&alpha; Crt) et deux
+poignées (&eta;, &theta; Crt)</td>
+</tr>
+<tr valign="top">
+	<td><notr>Crv</notr></td>
+	<td><notr>&Kappa;&oacute;&rho;&alpha;&xi;</notr></td>
+	<td>Corbeau</td>
+	<td><notr>Corvus</notr></td>
+	<td>comme la constellation de l'UAI</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Cen</notr></td>
+	<td><notr>&Kappa;&#941;&nu;&tau;&alpha;&upsilon;&rho;&omicron;&sigmaf;</notr></td>
+	<td>Centaure</td>
+	<td><notr>Centaurus</notr></td>
+	<td></td>
+	<td>écart par rapport à la description : HIP 65373 - HD 116337, au lieu de
+&omega; Cen (amas), prise comme étoile sur le dos. &lsquo;Thyrsus&lsquo; non
+dessiné (pour éviter toute confusion), bras arrière ajouté.</td>
+</tr>
+<tr valign="top">
+	<td><notr>Lup</notr></td>
+	<td><notr>&Theta;&eta;&rho;&#943;&omicron;&nu;</notr></td>
+	<td>Loup</td>
+	<td><notr>Lupus</notr></td>
+	<td></td>
+	<td>&beta; décrite comme &lsquo;fin de la patte arrière&lsquo; -> en tant
+qu'étoile dans le ventre ; &tau;<sub>1</sub> en tant que patte arrière,
+&Chi; retirée de la tête, parce qu'autrement, il en résulte une absence de
+forme ; HIP 73493 - HD 132604, en tant que patte avant.</td>
+</tr>
+<tr valign="top">
+	<td><notr>Ara</notr></td>
+	<td><notr>&Theta;&upsilon;&mu;&iota;&alpha;&tau;&#942;&rho;&iota;&omicron;&nu;</notr></td>
+	<td>Autel</td>
+	<td><notr>Ara</notr></td>
+	<td>comme la constellation de l'UAI</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>CrA</notr></td>
+	<td><notr>&Sigma;&tau;&#941;&phi;&alpha;&nu;&omicron;&sigmaf; &Nu;&#972;&tau;&iota;&omicron;&sigmaf;</notr></td>
+	<td>Couronne australe</td>
+	<td><notr>Corona Australis</notr></td>
+	<td>like IAU constellation; only uncertainty with stars that only got a BSC
+number in the Almagest, because these are not clearly to identify in
+Stellarium</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>PsA</notr></td>
+	<td><notr>&Nu;&#972;&tau;&iota;&omicron;&sigmaf; &#702;&Iota;&chi;&theta;&#973;&sigmaf;</notr></td>
+	<td>Poisson méridional</td>
+	<td><notr>Piscis Austrinus</notr></td>
+	<td>le poisson est étendu sur son dos</td>
+	<td>nous avons ajouté quelques étoiles pour marquer la queue comme telle (&beta;
+devrait être le bout de la queue mais nous l'avons utilisé comme sa racine)</td>
+</tr>
+</table>
+
+<h2>Références</h2> 
+ <ul> 
+  <li>Grasshoff, G.: The History of Ptolemy's Star Catalog, Springer, New York,
+1990</li>
+  <li>Heiberg, J. L. (Ed.): Claudii Ptolemaei: Syntaxis Mathematica, Teubner,
+Leipzig, 1898</li>
+  <li>Hoffmann, S. M.: Hipparchs Himmelsglobus, Springer, Wiesbaden / New York,
+2017</li>
+  <li>Toomer, G. J.: Ptolemy's Almagest, Duckworth, London, 1984</li>
+  <li>Ernie Wright: <a href="http://www.etwright.org/astro/almagest.html#cat"
+class='external text' rel="nofollow"> Seeing Ancient Stars, Visualization of
+the Almagest Catalog</a>, 2006</li>
+ </ul>
+
+<h2>Usage équitable</h2>
+<p>Cette culture céleste trouve son origine dans une année de recherche d'un
+étudiant. Nous la fournissons gratuitement, mais les auteurs de
+contributions méritent certainement d'être cités selon les règles
+communes. Cette culture céleste est fournie sous licence publique
+internationale CC BY-ND 4.0 (partage à l'identique, ne pas la modifier sans
+consultation de ses contributeurs, citer les contributeurs). Merci !</p>
+
+<h2>Merci</h2>
+<p>Les auteurs remercient Patrick Gleason et Georg Zotti pour leur relecture en
+anglais et les discussions intéressantes.</p>
+
+<h2>Auteurs</h2>
+<p>Cette culture céleste a été compilée et ajoutée à Stellarium par Alina
+Schmidt, Lea Jabschinski, Marie von Seggern et Susanne M. Hoffmann :
+service@uhura-uraniae.com</p>
+<p>Rédaction en anglais : les auteurs</p>

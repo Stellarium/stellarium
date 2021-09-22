@@ -1,0 +1,473 @@
+<h1>希腊  (天文学大成)</h1>
+
+<p>这种古希腊天空文化以《天文学大成》（Almagest）为基础，《天文学大成》是前天文学家的天文知识汇编，包括观测和数学天文学的结果。由克劳狄乌斯·托勒密
+(Claudius Ptolemy) 使用较早的观测资料和他自己的观测资料拼凑而成，以希腊文写成，于 2 世纪出版，在接下来的 1500
+年里一直是主要的天文著作。它最初以古希腊语写成，标题是<i>Mathematike Syntaxis</i>。<i>
+Almagest</i>这个名字的意思是“最大的[书]”，是从阿拉伯语翻译而来的，中文译名为《天文学大成》。创建本星空文化时，我们使用了 Toomer
+(1984) 的英文翻译，在一些细节上对其进行了修改（例如，使用更多希腊语的直译而不是今天常见的拉丁语术语），并且我们使用了 Ernie Wright
+准备的计算机可读表格.</p>
+
+<p>《天文学大成》由十三个部分组成，称为册。在第七和第八册中，托勒密列出了48个星座总共1022颗恒星（其中约有5个类星物体，如球状星团）。
+它是一个星体的坐标表，描述它们在星座中的位置（例如"X
+肘处的恒星，经度、纬度、星等"）。关于进动，托勒密使用黄道坐标。托勒密第一次将星等（一种恒星亮度的定量尺度）包括在内，这可能是从希帕丘斯（Hipparchus）那里获得的（由于希帕丘斯的星表没有保存下来，所以还不能确定）。从最亮的恒星开始，星等为1，降到最微弱的可见恒星的6等。</p>
+
+<p>在计算行星位置时，托勒密使用了地心模型（这是允许的，因为观测者总是站在地球上），因此，它促成了科学信念，即不需要阿里斯塔克的日心模型。然而，对于《<i>天文学大成</i>》的星表来说，这一点都不重要，因为星表总是代表着天空中固定点的一种目录，托勒密宣称星表的目的是提供一个天体表（见Alm.,
+VIII,
+3）。他意识到岁差，他想通过使用黄道坐标来简化未来地球仪制造的业务：托勒密所知的岁差使所有恒星平行于黄道移动，因此，通过简单地减去黄道经度的值，就可以更新相应地球时代的纪元。</p>
+
+<h2>此星空文化如何形成</h2>
+
+<h3>Star names</h3>
+
+在1000多颗恒星中，托勒密只提到了15颗恒星的专有名称。其余的则通过相当长的描述来识别，比如北极星的“尾巴末端的星星”。为了避免在Stellarium的屏幕上显示如此长的字符串，我们根据星座和它们在目录中出现的顺序为所有最伟大的恒星发明了短标签。例如，北极星被命名为“UMi
+1”，因为它是小熊星座（UMi）中的第一颗恒星。托勒密星座和IAU缩写之间的对应关系见下表。因为它是小熊星座 (UMi) 中的第一颗恒星。托勒密星座与
+IAU 缩写的对应关系见下表。此外，在托勒密将恒星描述为位于图形之外，我们在相应的标签中使用小写字母。要查看给定星星的详细描述，用户应在“查看
+[F4]/天空”设置中启用“使用附加的恒星名”，然后单击该星。详细说明随后将显示在屏幕顶部。 
+
+<h3>星座连线</h3>
+
+<p>这个过程可以用乌鸦座的例子来描述：</p>
+
+<p>在乌鸦座中&alpha; Crv“乌鸦头”的星。从那里连接到“头之星”&epsilon; Crv。从这里连接到“胸之星”&zeta;
+Crv。从那里有两条线通向翅膀的前端，&gamma; Crv是前翼，&delta;
+Crv是后翼之星。另一条线从胸前的星星延伸到“乌鸦”的脚下，那是&beta; Crv。</p>
+
+<p><img width="800" src="corvus_s.png" /></p>
+
+<p>根据恒星的坐标和名称确定了恒星之后，我们根据《<i>天文学大成</i>》表格中的描述重新连接了恒星。</p>
+
+<p>星星的名称和深空天体的名称仅依赖于《天文学大成》，例如，托勒密在他的另一部作品<i>Tetrabiblos</i>中使用了“&lambda;&alpha;&mu;&pi;&alpha;&delta;&#943;&alpha;&sigmaf;
+（火炬状）” 作为毕宿五的名字，但这并没有在这种天空文化中实现，因为它没有出现在 《天文学大成》 中。</p>
+
+<p>下表显示了希腊的原始星座名称及其英语翻译（第2列和第3列），并说明了我们在重建中的不确定性（第6列）。</p>
+
+<table class="nomenclature">
+<tr valign="top">
+	<td><b>缩写</b></td>
+	<td><b>原生名</b></td>
+	<td><b>翻译</b>（直接）</td>
+	<td><b>IAU (拉丁) 名</b></td>
+	<td><b>暗示星座</b></td>
+	<td><b>艺术来源</b></td>
+</tr>
+<tr valign="top">
+	<td><notr>UMi</notr></td>
+	<td><notr>&Mu;&iota;&kappa;&rho;&#942; &#702;&#714;&Alpha;&rho;&kappa;&tau;&omicron;&sigmaf;</notr></td>
+	<td>Small She-Bear</td>
+	<td><notr>Ursa Minor</notr></td>
+	<td>类似IAU星座</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>UMa</notr></td>
+	<td><notr>&Mu;&epsilon;&gamma;&alpha;&lambda;&#942; &#702;&#714;&Alpha;&rho;&kappa;&tau;&omicron;&sigmaf;</notr></td>
+	<td>Great She-Bear</td>
+	<td><notr>Ursa Major</notr></td>
+	<td>类似IAU星座</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Dra</notr></td>
+	<td><notr>&Delta;&rho;&#940;&kappa;&omega;&nu;</notr></td>
+	<td>天龙</td>
+	<td><notr>Draco</notr></td>
+	<td>所有的三角或方形都是脊椎或身体的一部分，在头部的线条就是舌头</td>
+	<td></td>
+</tr>
+	<tr valign="top">
+	<td><notr>Cep</notr></td>
+	<td><notr>&Kappa;&eta;&phi;&epsilon;&#973;&sigmaf;</notr></td>
+	<td>国王刻普斯</td>
+	<td><notr>Cepheus</notr></td>
+	<td>国王，颠倒 </td>
+	<td>三颗头星是饰品;&beta;被视为腰带的一部分，尽管《天文学大成》说在腰带下面</td>
+</tr>
+<tr valign="top">
+	<td><notr>Boo</notr></td>
+	<td><notr>&Beta;&omicron;&#974;&tau;&eta;&sigmaf;</notr></td>
+	<td>扶犁者</td>
+	<td><notr>Bo&ouml;tes</notr></td>
+	<td>手里拿着牧羊杖(&omega;)</td>
+	<td>‭HIP 72582添加为颈部之星</td>
+</tr>
+<tr valign="top">
+	<td><notr>CrB</notr></td>
+	<td><notr>&Sigma;&tau;&#941;&phi;&alpha;&nu;&omicron;&sigmaf;</notr></td>
+	<td>皇冠</td>
+	<td><notr>Corona Borealis</notr></td>
+	<td>类似IAU星座，文字中没有详细信息</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Her</notr></td>
+	<td><notr>&#703;&Epsilon;&nu;&gamma;&#972;&nu;&alpha;&sigma;&iota;&nu;</notr></td>
+	<td>跪拜者</td>
+	<td><notr>Hercules</notr></td>
+	<td>其中一名足部的星是牧夫们的管理人员</td>
+	<td>HIP 82764添加为颈部之星</td>
+</tr>
+<tr valign="top">
+	<td><notr>Lyr</notr></td>
+	<td><notr>&Lambda;&#973;&rho;&alpha;</notr></td>
+	<td>竖琴</td>
+	<td><notr>Lyra</notr></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Cyg</notr></td>
+	<td><notr>&#702;&#714;&Omicron;&rho;&nu;&iota;&sigmaf;</notr></td>
+	<td>鸟</td>
+	<td><notr>Cygnus</notr></td>
+	<td>天鹅与腿</td>
+	<td>翼尖与尾巴相连</td>
+</tr>
+<tr valign="top">
+	<td><notr>Cas</notr></td>
+	<td><notr>&Kappa;&alpha;&sigma;&sigma;&iota;&#941;&pi;&epsilon;&iota;&alpha;</notr></td>
+	<td>王后卡西俄庇亚</td>
+	<td><notr>Cassiopeia</notr></td>
+	<td>王后坐在宝座上</td>
+	<td>为了避免混淆我们没有画宝座</td>
+</tr>
+<tr valign="top">
+	<td><notr>Per</notr></td>
+	<td><notr>&Pi;&epsilon;&rho;&sigma;&epsilon;&#973;&sigmaf;</notr></td>
+	<td>英仙座</td>
+	<td><notr>Perseus</notr></td>
+	<td>双星团NGC 869和NGC 884是深空天体，星团中的一颗恒星被用来绘图</td>
+	<td>在头部添加了一颗星，使头部看起来更像球</td>
+</tr>
+<tr valign="top">
+	<td><notr>Aur</notr></td>
+	<td><notr>&#703;&Eta;&nu;&#943;&omicron;&chi;&omicron;&sigmaf;</notr></td>
+	<td>车夫</td>
+	<td><notr>Auriga</notr></td>
+	<td>穿长衣服；通过肩膀和下摆限制服装</td>
+	<td>o Aur添加为颈部之星， 1 Aur 添加为下摆之星</td>
+</tr>
+<tr valign="top">
+	<td><notr>Oph</notr></td>
+	<td><notr>&#702;&Omicron;&phi;&iota;&omicron;&#973;&chi;&omicron;&sigmaf;</notr></td>
+	<td>蛇夫</td>
+	<td><notr>Ophiuchus</notr></td>
+	<td>手里有蛇</td>
+	<td>一颗星添加为颈部之星</td>
+</tr>
+<tr valign="top">
+	<td><notr>Ser</notr></td>
+	<td><notr>&#702;&#714;&Omicron;&phi;&iota;&sigmaf;</notr></td>
+	<td>蛇</td>
+	<td><notr>Serpens</notr></td>
+	<td>蛇的两部分(头和尾)，方形是头</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Sge</notr></td>
+	<td><notr>&#702;&Omicron;&iota;&sigma;&tau;&#972;&sigmaf;</notr></td>
+	<td>天矢</td>
+	<td><notr>Sagitta</notr></td>
+	<td>类似IAU星座，&eta; Sge缺失 </td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Aql</notr></td>
+	<td><notr>&#702;&Alpha;&epsilon;&tau;&#972;&sigmaf;</notr></td>
+	<td>鹰</td>
+	<td><notr>Aquila</notr></td>
+	<td>&tau; Aql 是头部之星，&beta; 是颈部，Altair是肩膀之间，&gamma; 和 &mu; 是双肩</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Del</notr></td>
+	<td><notr>&Delta;&epsilon;&lambda;&phi;&#943;&sigmaf;</notr></td>
+	<td>海豚</td>
+	<td><notr>Delphinus</notr></td>
+	<td></td>
+	<td>精致的形状</td>
+</tr>
+<tr valign="top">
+	<td><notr>Equ</notr></td>
+	<td><notr>&Pi;&rho;&omicron;&tau;&omicron;&mu;&#942;</notr></td>
+	<td>马胸</td>
+	<td><notr>Equuleus</notr></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Peg</notr></td>
+	<td><notr>&#703;&#714;&Iota;&pi;&pi;&omicron;&sigmaf;</notr></td>
+	<td>马</td>
+	<td><notr>Pegasus</notr></td>
+	<td>带有鬃毛和一只翅膀</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>And</notr></td>
+	<td><notr>&#702;&Alpha;&nu;&delta;&rho;&omicron;&mu;&#941;&delta;&alpha;</notr></td>
+	<td>仙女座</td>
+	<td class='latin'><notr>Andromeda</notr></td>
+	<td>衣服和皮带</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Tri</notr></td>
+	<td><notr>&Tau;&rho;&#943;&gamma;&omega;&nu;&omicron;&sigmaf;</notr></td>
+	<td>Triangle</td>
+	<td><notr>Triangulum</notr></td>
+	<td>四颗给定的星 &#61664; 一侧的中间星</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Ari</notr></td>
+	<td><notr>&Kappa;&rho;&iota;&#972;&sigmaf;</notr></td>
+	<td>公羊</td>
+	<td><notr>Aries</notr></td>
+	<td>转过头；只有一个角</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Tau</notr></td>
+	<td><notr>&Tau;&alpha;&upsilon;&#771;&rho;&omicron;&sigmaf;</notr></td>
+	<td>公牛</td>
+	<td><notr>Taurus</notr></td>
+	<td>半身，只有两条腿可见；观察者的视角</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Gem</notr></td>
+	<td><notr>&Delta;&#943;&delta;&upsilon;&mu;&omicron;&iota;</notr></td>
+	<td>双胞胎</td>
+	<td><notr>Gemini</notr></td>
+	<td>一颗共有的星；用手触摸对方</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Cnc</notr></td>
+	<td><notr>&Kappa;&alpha;&rho;&kappa;&#943;&nu;&omicron;&sigmaf;</notr></td>
+	<td>蟹</td>
+	<td><notr>Cancer</notr></td>
+	<td>方形身体</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Leo</notr></td>
+	<td><notr>&Lambda;&#941;&omega;&nu;</notr></td>
+	<td>狮子座</td>
+	<td><notr>Leo</notr></td>
+	<td>张开下巴</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Vir</notr></td>
+	<td><notr>&Pi;&alpha;&rho;&theta;&#941;&nu;&omicron;&sigmaf;</notr></td>
+	<td>处女</td>
+	<td><notr>Virgo</notr></td>
+	<td>没有单独的头</td>
+	<td>暗星画出翅膀</td>
+</tr>
+<tr valign="top">
+	<td><notr>Lib</notr></td>
+	<td><notr>&Chi;&eta;&lambda;&alpha;&#943;</notr></td>
+	<td>蝎钳</td>
+	<td><notr>Libra</notr></td>
+	<td>托勒密总是用 &quot;claws&quot;这个词，从不用&quot;the balance&quot;这个词。</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Sco</notr></td>
+	<td><notr>&Sigma;&kappa;&omicron;&rho;&pi;&#943;&omicron;&sigmaf;</notr></td>
+	<td>蝎子</td>
+	<td><notr>Scorpius</notr></td>
+	<td></td>
+	<td>手臂环绕头部: &nu; and &rho;</td>
+</tr>
+<tr valign="top">
+	<td><notr>Sgr</notr></td>
+	<td><notr>&Tau;&omicron;&xi;&#972;&tau;&eta;&sigmaf;</notr></td>
+	<td>射手</td>
+	<td><notr>Sagittarius</notr></td>
+	<td>一个半人马和弓箭；&bdquo;cloak&ldquo; behind</td>
+	<td>为了使画面清晰，我们在线条图中加入了许多暗淡的星。</td>
+</tr>
+<tr valign="top">
+	<td><notr>Cap</notr></td>
+	<td><notr>&Alpha;&#943;&gamma;&#972;&kappa;&epsilon;&rho;&omicron;&sigmaf;</notr></td>
+	<td>长山羊角者</td>
+	<td><notr>Capricornus</notr></td>
+	<td>鱼尾巴，可见两条腿</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Aqr</notr></td>
+	<td><notr>&#703;&Upsilon;&delta;&rho;&omicron;&chi;&#972;&omicron;&sigmaf;</notr></td>
+	<td>水瓶</td>
+	<td><notr>Aquarius</notr></td>
+	<td>水从水罐里出来</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Psc</notr></td>
+	<td><notr>&#702;&Iota;&chi;&theta;&#973;&epsilon;&sigmaf;</notr></td>
+	<td>双鱼</td>
+	<td><notr>Pisces</notr></td>
+	<td></td>
+	<td>北鱼：68(h), 67(k), 及65(i) 在《天文学大成》中被描述为头，但我们把它们当做鳍。因为嘴应在g和&tau;
+Psc。尾翼的额外扩展到&rho;</td>
+</tr>
+<tr valign="top">
+	<td><notr>Cet</notr></td>
+	<td><notr>&Kappa;&eta;&#771;&tau;&omicron;&sigmaf;</notr></td>
+	<td>海怪</td>
+	<td><notr>Cetus</notr></td>
+	<td></td>
+	<td>身体不经过星 &tau;,但经过&upsilon;</td>
+</tr>
+<tr valign="top">
+	<td><notr>Ori</notr></td>
+	<td><notr>&#702;&Omega;&rho;&#943;&omega;&nu;</notr></td>
+	<td>猎户座</td>
+	<td class='latin'><notr>Orion</notr></td>
+	<td></td>
+	<td>“头”被标记为“星云”，这意味着托勒密&phi;<sub>1</sub>, &phi;<sub>2</sub>,和
+&lambda;以及它们之间的较暗恒星解释为一个&quot;星团&quot; （或比现代&quot;lam Ori
+Assoc.&quot;更广泛的关联）。头不再直接与肩上的星相连，而是与肩上星星之间的星相连。</td>
+</tr>
+<tr valign="top">
+	<td><notr>Eri</notr></td>
+	<td><notr>&Pi;&omicron;&tau;&alpha;&mu;&omicron;&#972;&sigmaf;</notr></td>
+	<td>河流</td>
+	<td><notr>Eridanus</notr></td>
+	<td>像IAU星座，但更短</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Lep</notr></td>
+	<td><notr>&Lambda;&alpha;&gamma;&omega;&#771;&sigmaf;</notr></td>
+	<td>兔子</td>
+	<td><notr>Lepus</notr></td>
+	<td></td>
+	<td>将“ 4星放在耳朵上”作为耳朵</td>
+</tr>
+<tr valign="top">
+	<td><notr>CMa</notr></td>
+	<td><notr>&Kappa;&#973;&omega;&nu;</notr></td>
+	<td>Dog</td>
+	<td><notr>Canis Major</notr></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>CMi</notr></td>
+	<td><notr>&Pi;&rho;&omicron;&kappa;&#973;&omega;&nu;</notr></td>
+	<td>在狗（Dog）之前</td>
+	<td><notr>Canis Minor</notr></td>
+	<td></td>
+	<td>在《天文学大成》中，正如Toomer所说，这个星座的名称是s &quot;The One before the Dog&quot; 或者
+&quot;Harbinger of Sirius&quot; 。 但是，&beta; CMi被称为“脖子”。
+我们画了一条以γ和ε为头的小狗。&alpha;, &beta;, &eta;和HIP 36889为主体； HIP 35509和HIP 35614的前腿;
+后腿有&delta;<sub>2</sub> and &delta;<sub>3</sub>; 尾巴是HIP 37634</td>
+</tr>
+<tr valign="top">
+	<td><notr>Arg</notr></td>
+	<td><notr>&#702;&Alpha;&rho;&gamma;&omega;</notr></td>
+	<td>大船阿尔戈号</td>
+	<td><notr>Argo</notr></td>
+	<td>小于IAU星座船尾座、船底座、船帆座、罗盘座之和</td>
+	<td>许多不整合在星座中的恒星形成船形。 在许多描绘中（包括古代的Farnese地球仪），只画了半条船。</td>
+</tr>
+<tr valign="top">
+	<td><notr>Hya</notr></td>
+	<td><notr>&#703;&#714;&Upsilon;&delta;&rho;&omicron;&sigmaf;</notr></td>
+	<td>水蛇</td>
+	<td><notr>Hydra</notr></td>
+	<td>类似IAU星座</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Crt</notr></td>
+	<td><notr>&Kappa;&rho;&alpha;&tau;&#768;&eta;&rho;</notr></td>
+	<td>酒杯</td>
+	<td><notr>Crater</notr></td>
+	<td></td>
+	<td>Krater是一种特殊的希腊葡萄酒混合容器，它看起来像一个双耳瓶或花瓶：<a
+href="https://en.wikipedia.org/wiki/Krater">https://en.wikipedia.org/wiki/Krater托勒密只描述了脚下的一颗星
+(&alpha; Crt) 和两个手柄(&eta;, &theta; Crt)</td>
+</tr>
+<tr valign="top">
+	<td><notr>Crv</notr></td>
+	<td><notr>&Kappa;&oacute;&rho;&alpha;&xi;</notr></td>
+	<td>乌鸦</td>
+	<td><notr>Corvus</notr></td>
+	<td>类似IAU星座</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Cen</notr></td>
+	<td><notr>&Kappa;&#941;&nu;&tau;&alpha;&upsilon;&rho;&omicron;&sigmaf;</notr></td>
+	<td>半人马</td>
+	<td><notr>Centaurus</notr></td>
+	<td></td>
+	<td>偏离描述：臀部是HIP65373而不是 &omega; Cen (星团)后面的恒星。&lsquo;手仗&lsquo;
+没有画出（以避免混淆），增加了后臂。</td>
+</tr>
+<tr valign="top">
+	<td><notr>Lup</notr></td>
+	<td><notr>&Theta;&eta;&rho;&#943;&omicron;&nu;</notr></td>
+	<td>野兽</td>
+	<td><notr>Lupus</notr></td>
+	<td></td>
+	<td>&beta; 描述为“后腿末端”->腹部为星; &tau;<sub>1</sub>表示后腿，&Chi; 从头部移除，因为否则会出现不规则形状；臀部HIP
+73493被视为前腿</td>
+</tr>
+<tr valign="top">
+	<td><notr>Ara</notr></td>
+	<td><notr>&Theta;&upsilon;&mu;&iota;&alpha;&tau;&#942;&rho;&iota;&omicron;&nu;</notr></td>
+	<td>圣坛</td>
+	<td><notr>Ara</notr></td>
+	<td>类似IAU星座</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>CrA</notr></td>
+	<td><notr>&Sigma;&tau;&#941;&phi;&alpha;&nu;&omicron;&sigmaf; &Nu;&#972;&tau;&iota;&omicron;&sigmaf;</notr></td>
+	<td>南冕</td>
+	<td><notr>Corona Australis</notr></td>
+	<td>像IAU星座； 只有在《天文学大成》中仅获得BSC编号的恒星才具有不确定性，因为在Stellarium中无法明确识别这些恒星</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>PsA</notr></td>
+	<td><notr>&Nu;&#972;&tau;&iota;&omicron;&sigmaf; &#702;&Iota;&chi;&theta;&#973;&sigmaf;</notr></td>
+	<td>南鱼</td>
+	<td><notr>Piscis Austrinus</notr></td>
+	<td>鱼躺在他的背上</td>
+	<td>我们添加了一些星来标记尾巴(&beta; 应该是尾巴尖，但我们用它作为尾巴根)</td>
+</tr>
+</table>
+
+<h2>参考文献</h2> 
+ <ul> 
+  <li>Grasshoff, G.: The History of Ptolemy's Star Catalog, Springer, New York,
+1990</li>
+  <li>Heiberg, J. L. (Ed.): Claudii Ptolemaei: Syntaxis Mathematica, Teubner,
+Leipzig, 1898</li>
+  <li>Hoffmann, S. M.: Hipparchs Himmelsglobus, Springer, Wiesbaden / New York,
+2017</li>
+  <li>Toomer, G. J.: Ptolemy's Almagest, Duckworth, London, 1984</li>
+  <li>Ernie Wright: <a href="http://www.etwright.org/astro/almagest.html#cat"
+class='external text' rel="nofollow"> Seeing Ancient Stars, Visualization of
+the Almagest Catalog</a>, 2006</li>
+ </ul>
+
+<h2>合理使用</h2>
+<p>此星空文化源于学生一年的研究。我们提供免费的，但作者的贡献当然值得引用，根据共同的规则。星空文化执行CC BY-ND 4.0 International
+Public Licence许可证 (相同方式分享, 在没有咨询贡献者之前不要改变它，并引用贡献者)。谢谢你！</p>
+
+<h2>感谢</h2>
+<p>作者感谢Patrick Gleason和Georg Zotti进行了英语校对和有趣的讨论。</p>
+
+<h2>作者</h2>
+<p>Alina Schmidt，Lea Jabschinski，Marie von Seggern和Susanne
+M.Hoffmann将这种星空文化汇编并添加到Stellarium中：service@uhura-uraniae.com</p>
+<p>中文翻译：Sun Shuwei</p>
