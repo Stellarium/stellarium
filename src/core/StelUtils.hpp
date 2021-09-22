@@ -389,6 +389,9 @@ namespace StelUtils
 	//! Make from julianDay an hour, minute, second.
 	void getTimeFromJulianDay(const double julianDay, int *hour, int *minute, int *second, int *millis=Q_NULLPTR);
 
+	//! Make hours (decimal format) from julianDay
+	double getHoursFromJulianDay(const double julianDay);
+
 	//! Parse an ISO8601 date string.
 	//! Also handles negative and distant years.
 	bool getDateTimeFromISO8601String(const QString& iso8601Date, int* y, int* m, int* d, int* h, int* min, float* s);

@@ -635,6 +635,14 @@ void getTimeFromJulianDay(const double julianDay, int *hour, int *minute, int *s
 	}
 }
 
+double getHoursFromJulianDay(const double julianDay)
+{
+	int hr, min, sec, millis;
+	getTimeFromJulianDay(julianDay, &hr, &min, &sec, &millis);
+	return static_cast<double>(hr)+static_cast<double>(min)/60.+static_cast<double>(sec + millis/1000.)/3600.;
+}
+
+
 QString julianDayToISO8601String(const double jd, bool addMS)
 {
 	int year, month, day, hour, minute, second, millis=0;

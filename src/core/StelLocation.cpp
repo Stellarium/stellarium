@@ -196,15 +196,15 @@ double StelLocation::distanceKm(const double otherLong, const double otherLat) c
 
 double StelLocation::getAzimuthForLocation(double longObs, double latObs, double longTarget, double latTarget)
 {
-	longObs    *= (M_PI/180.0);
-	latObs     *= (M_PI/180.0);
-	longTarget *= (M_PI/180.0);
-	latTarget  *= (M_PI/180.0);
+	longObs    *= M_PI_180;
+	latObs     *= M_PI_180;
+	longTarget *= M_PI_180;
+	latTarget  *= M_PI_180;
 
 	double az = atan2(sin(longTarget-longObs), cos(latObs)*tan(latTarget)-sin(latObs)*cos(longTarget-longObs));
 	if (StelApp::getInstance().getFlagSouthAzimuthUsage())
 		az += M_PI;
-	return StelUtils::fmodpos((180.0/M_PI) * az, 360.0);
+	return StelUtils::fmodpos(M_180_PI * az, 360.0);
 }
 
 double StelLocation::getAzimuthForLocation(double longTarget, double latTarget) const

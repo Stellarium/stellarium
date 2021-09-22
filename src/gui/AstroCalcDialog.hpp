@@ -357,7 +357,7 @@ private:
 	void populateTimeIntervalsList();	
 	double computeGraphValue(const PlanetP &ssObj, const int graphType);
 
-	void populateFunctionsList();
+	void populateFunctionsList();	
 	double computeMaxElevation(StelObjectP obj);
 
 	void adjustCelestialPositionsColumns();

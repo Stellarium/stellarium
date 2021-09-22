@@ -681,8 +681,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		QString sSet = qc_("Set", "celestial event");
 		double sunrise = 0.;
 		double sunset = 24.;
-		const bool isSun = (getEnglishName()=="Sun");
-		int hr, min, sec;
+		const bool isSun = (getEnglishName()=="Sun");		
 		double hour(0);
 
 		if (withTables && !(flags&SiderealTime && currentPlanet==QStringLiteral("Earth")))
@@ -690,8 +689,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 
 		if (rts[3]==0.)
 		{
-			StelUtils::getTimeFromJulianDay(rts[0]+utcShift, &hr, &min, &sec);
-			hour=static_cast<double>(hr)+static_cast<double>(min)/60.+static_cast<double>(sec)/3600.;
+			hour = StelUtils::getHoursFromJulianDay(rts[0]+utcShift);
 			if (withTables)
 				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sRise, StelUtils::hoursToHmsStr(hour, true));
 			else
@@ -700,8 +698,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			sunrise = hour;
 		}
 
-		StelUtils::getTimeFromJulianDay(rts[1]+utcShift, &hr, &min, &sec);
-		hour=static_cast<double>(hr)+static_cast<double>(min)/60.+static_cast<double>(sec)/3600.;
+		hour = StelUtils::getHoursFromJulianDay(rts[1]+utcShift);
 		if (withTables)
 			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sTransit, StelUtils::hoursToHmsStr(hour, true));
 		else
@@ -709,8 +706,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 
 		if (rts[3]==0.)
 		{
-			StelUtils::getTimeFromJulianDay(rts[2]+utcShift, &hr, &min, &sec);
-			hour=static_cast<double>(hr)+static_cast<double>(min)/60.+static_cast<double>(sec)/3600.;
+			hour = StelUtils::getHoursFromJulianDay(rts[2]+utcShift);
 			if (withTables)
 				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sSet, StelUtils::hoursToHmsStr(hour, true));
 			else

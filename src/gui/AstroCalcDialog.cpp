@@ -920,16 +920,12 @@ void AstroCalcDialog::onChangedEphemerisPosition()
 
 double AstroCalcDialog::computeMaxElevation(StelObjectP obj)
 {
-	// FIXME: We probably don't need all that, at least not for non-planets. Use declination and location latitude, then add refraction if needed. No need to change time and reset the whole machinery twice!
-	Vec4d rts = obj->getRTSTime(core);
-	const double JD = core->getJD();
-	double az, alt;
-	core->setJD(rts[1]);
-	core->update(0);
-	StelUtils::rectToSphe(&az, &alt, obj->getAltAzPosAuto(core));
-	core->setJD(JD);
-	core->update(0);
-	return alt;
+	// NOTE: Without refraction!
+	double ra, dec;
+	const double lat = core->getCurrentLocation().latitude;
+	StelUtils::rectToSphe(&ra, &dec, obj->getEquinoxEquatorialPos(core));
+	dec*=M_180_PI;
+	return (90 - lat + dec)*M_PI_180;
 }
 
 void AstroCalcDialog::populateCelestialCategoryList()
@@ -1049,6 +1045,7 @@ void AstroCalcDialog::currentCelestialPositions()
 	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 
 	const double JD = core->getJD();
+	const double utcShift = core->getUTCOffset(core->getJD()) / 24.; // Fix DST shift...
 	ui->celestialPositionsTimeLabel->setText(q_("Positions on %1").arg(QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD))));
 	Vec4d rts;
 	Vec3d observerHelioPos;
@@ -1085,7 +1082,7 @@ void AstroCalcDialog::currentCelestialPositions()
 			celestialObjects = dsoMgr->getAllDeepSkyObjects().toList();
 		else
 			celestialObjects = dsoMgr->getDeepSkyObjectsByType(celType);
-		for (const auto& obj : celestialObjects)
+		for (const auto& obj : qAsConst(celestialObjects))
 		{
 			if (celTypeId == 12 || celTypeId == 102 || celTypeId == 111) // opacity cannot be extincted
 				magOp = obj->getVMagnitude(core);
@@ -1127,7 +1124,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				rts = obj->getRTSTime(core);
 				if (rts[1]>=0.)
 				{
-					sTransit = StelUtils::hoursToHmsStr(rts[1], true);
+					sTransit = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(rts[1]+utcShift), true);
 					if (withDecimalDegree)
 						sMaxElevation = StelUtils::radToDecDegStr(computeMaxElevation(qSharedPointerCast<StelObject>(obj)), 5, false, true);
 					else
@@ -1216,7 +1213,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				rts = planet->getRTSTime(core);
 				if (rts[1]>=0.)
 				{
-					sTransit = StelUtils::hoursToHmsStr(rts[1], true);
+					sTransit = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(rts[1]+utcShift), true);
 					if (withDecimalDegree)
 						sMaxElevation = StelUtils::radToDecDegStr(computeMaxElevation(qSharedPointerCast<StelObject>(planet)), 5, false, true);
 					else
@@ -1306,7 +1303,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				rts = obj->getRTSTime(core);
 				if (rts[1]>=0.)
 				{
-					sTransit = StelUtils::hoursToHmsStr(rts[1], true);
+					sTransit = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(rts[1]+utcShift), true);
 					if (withDecimalDegree)
 						sMaxElevation = StelUtils::radToDecDegStr(computeMaxElevation(obj), 5, false, true);
 					else
@@ -5344,6 +5341,7 @@ void AstroCalcDialog::fillWUTTable(QString objectName, QString designation, floa
 	QString sTransit = dash;
 	QString sSet = dash;
 	QString sMaxElevation = dash;
+	const double utcShift = core->getUTCOffset(core->getJD()) / 24.; // Fix DST shift...
 
 	WUTTreeWidgetItem* treeItem =  new WUTTreeWidgetItem(ui->wutMatchingObjectsTreeWidget);
 	treeItem->setData(WUTObjectName, Qt::DisplayRole, objectName);
@@ -5351,24 +5349,11 @@ void AstroCalcDialog::fillWUTTable(QString objectName, QString designation, floa
 	treeItem->setText(WUTMagnitude, magnitude > 98.f ? dash : QString::number(magnitude, 'f', 2));
 	treeItem->setTextAlignment(WUTMagnitude, Qt::AlignRight);
 
-	int hr, min, sec;
-	double hour;
+	sTransit = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(RTSTime[1] + utcShift), true);
 	if (RTSTime[3]==0.)
-	{
-		StelUtils::getTimeFromJulianDay(RTSTime[0], &hr, &min, &sec);
-		hour=static_cast<double>(hr) + static_cast<double>(min)/60. + static_cast<double>(sec)/3600.;
-		sRise = StelUtils::hoursToHmsStr(hour, true);
-	}
-	//if (RTSTime[1]>=0.)
-		StelUtils::getTimeFromJulianDay(RTSTime[1], &hr, &min, &sec);
-		hour=static_cast<double>(hr) + static_cast<double>(min)/60. + static_cast<double>(sec)/3600.;
-		sTransit = StelUtils::hoursToHmsStr(hour, true);
+		sRise = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(RTSTime[0] + utcShift), true);
 	if (RTSTime[3]==0.)
-	{
-		StelUtils::getTimeFromJulianDay(RTSTime[2], &hr, &min, &sec);
-		hour=static_cast<double>(hr) + static_cast<double>(min)/60. + static_cast<double>(sec)/3600.;
-		sSet = StelUtils::hoursToHmsStr(hour, true);
-	}
+		sSet = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(RTSTime[2] + utcShift), true);
 
 	treeItem->setText(WUTRiseTime, sRise);
 	treeItem->setTextAlignment(WUTRiseTime, Qt::AlignRight);
