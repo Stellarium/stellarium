@@ -4274,7 +4274,7 @@ void Planet::drawOrbit(const StelCore* core)
 	if (hidden || (pType==isObserver)) return;
 	if (orbitPtr && pType>=isArtificial)
 	{
-		if (!hasValidData())
+		if (!hasValidPositionalData())
 			return;
 	}
 
@@ -4328,7 +4328,7 @@ void Planet::drawOrbit(const StelCore* core)
 		sPainter.setLineWidth(1);
 }
 
-bool Planet::hasValidData()
+bool Planet::hasValidPositionalData()
 {
 	if (pType<isObserver)
 		return true;
