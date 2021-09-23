@@ -77,6 +77,8 @@ public:
 	virtual double getSemimajorAxis() const Q_DECL_OVERRIDE { return (e==1. ? 0. : q / (1.-e)); }
 	virtual double getEccentricity() const Q_DECL_OVERRIDE { return e; }
 	bool objectDateValid(const double JDE) const { return ((orbitGood<=0) || (fabs(t0-JDE)<orbitGood)); }
+	//! Return minimal and maximal JDE values where this orbit should be used. (if orbitGood is configured)
+	Vec2d objectDateValidRange() const;
 	//! Calculate sidereal period in days from semi-major axis and central mass. If SMA<=0 (hyperbolic orbit), return 0.
 	double calculateSiderealPeriod() const;
 	//! @param semiMajorAxis in AU. If SMA<=0 (hyperbolic orbit), return 0.

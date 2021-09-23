@@ -1192,6 +1192,9 @@ void AstroCalcDialog::currentCelestialPositions()
 					break;
 			}
 
+			if (!planet->hasValidPositionalData(JD))
+				passByType = false;
+
 			if (passByType && planet != core->getCurrentPlanet() && planet->getVMagnitudeWithExtinction(core) <= mag && planet->isAboveRealHorizon(core))
 			{
 				pos = planet->getJ2000EquatorialPos(core);
@@ -1713,6 +1716,10 @@ void AstroCalcDialog::generateEphemeris()
 			double JD = firstJD + i * currentStep;
 			core->setJD(JD);
 			core->update(0); // force update to get new coordinates
+
+			if (!obj->hasValidPositionalData(JD))
+				continue;
+
 			if (useHorizontalCoords)
 			{
 				pos = obj->getAltAzPosAuto(core);
@@ -3877,7 +3884,7 @@ void AstroCalcDialog::calculatePhenomena()
 				if (selectedObject!=planet && selectedObject->getType() != "Satellite")
 				{
 					// conjunction
-					fillPhenomenaTable(findClosestApproach(planet, selectedObject, startJD, stopJD, separation, PhenomenaTypeIndex::Conjuction), planet, selectedObject, PhenomenaTypeIndex::Conjuction);
+					fillPhenomenaTable(findClosestApproach(planet, selectedObject, startJD, stopJD, separation, PhenomenaTypeIndex::Conjunction), planet, selectedObject, PhenomenaTypeIndex::Conjunction);
 					// opposition
 					if (opposition)
 						fillPhenomenaTable(findClosestApproach(planet, selectedObject, startJD, stopJD, separation, PhenomenaTypeIndex::Opposition), planet, selectedObject, PhenomenaTypeIndex::Opposition);
@@ -3891,7 +3898,7 @@ void AstroCalcDialog::calculatePhenomena()
 			{
 				// conjunction
 				StelObjectP mObj = qSharedPointerCast<StelObject>(obj);
-				fillPhenomenaTable(findClosestApproach(planet, mObj, startJD, stopJD, separation, PhenomenaTypeIndex::Conjuction), planet, obj, PhenomenaTypeIndex::Conjuction);
+				fillPhenomenaTable(findClosestApproach(planet, mObj, startJD, stopJD, separation, PhenomenaTypeIndex::Conjunction), planet, obj, PhenomenaTypeIndex::Conjunction);
 				// opposition
 				if (opposition)
 					fillPhenomenaTable(findClosestApproach(planet, mObj, startJD, stopJD, separation, PhenomenaTypeIndex::Opposition), planet, obj, PhenomenaTypeIndex::Opposition);
@@ -3907,7 +3914,7 @@ void AstroCalcDialog::calculatePhenomena()
 			{
 				// conjunction
 				StelObjectP mObj = qSharedPointerCast<StelObject>(obj);
-				fillPhenomenaTable(findClosestApproach(planet, mObj, startJD, stopJD, separation, PhenomenaTypeIndex::Conjuction), planet, obj, PhenomenaTypeIndex::Conjuction);
+				fillPhenomenaTable(findClosestApproach(planet, mObj, startJD, stopJD, separation, PhenomenaTypeIndex::Conjunction), planet, obj, PhenomenaTypeIndex::Conjunction);
 			}
 		}
 		else
@@ -3917,7 +3924,7 @@ void AstroCalcDialog::calculatePhenomena()
 			{
 				// conjunction
 				StelObjectP mObj = qSharedPointerCast<StelObject>(obj);
-				fillPhenomenaTable(findClosestApproach(planet, mObj, startJD, stopJD, separation, PhenomenaTypeIndex::Conjuction), planet, obj);
+				fillPhenomenaTable(findClosestApproach(planet, mObj, startJD, stopJD, separation, PhenomenaTypeIndex::Conjunction), planet, obj);
 			}
 		}
 
@@ -4152,7 +4159,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		}
 
 		QString elongStr = "";
-		if (((object1 == sun || object2 == sun) && mode==PhenomenaTypeIndex::Conjuction) || (object2 == sun && mode==PhenomenaTypeIndex::Opposition))
+		if (((object1 == sun || object2 == sun) && mode==PhenomenaTypeIndex::Conjunction) || (object2 == sun && mode==PhenomenaTypeIndex::Opposition))
 			elongStr = dash;
 		else
 		{
@@ -4456,12 +4463,25 @@ double AstroCalcDialog::findInitialStep(double startJD, double stopJD, QStringLi
 	return step;
 }
 
-QMap<double, double> AstroCalcDialog::findClosestApproach(PlanetP& object1, StelObjectP& object2, double startJD, double stopJD, double maxSeparation, int mode)
+QMap<double, double> AstroCalcDialog::findClosestApproach(PlanetP& object1, StelObjectP& object2, const double startJD, const double stopJD, const double maxSeparation, const int mode)
 {
 	double dist, prevDist, step, step0;
 	int sgn, prevSgn = 0;
 	QMap<double, double> separations;
 	QPair<double, double> extremum;
+
+	if (object2->getType()=="Planet")
+	{
+		PlanetP planet = qSharedPointerCast<Planet>(object2);
+		// We shouldn't compute eclipses and shadow transits not for planets and their moons
+		if (mode==PhenomenaTypeIndex::Shadows && object2->getEnglishName()!="Sun" && planet->getParent()!=object1)
+			return separations;
+
+		// If we don't have at least partial overlap between planet valid dates and our interval, skip by returning an empty map.		
+		const Vec2d planetValidityLimits=planet->getValidPositionalDataRange();
+		if ( (planetValidityLimits[0] > stopJD) || (planetValidityLimits[1] < startJD) )
+			return separations;
+	}
 
 	QStringList objects;
 	objects.clear();
@@ -4580,11 +4600,11 @@ QMap<double, double> AstroCalcDialog::findGreatestElongationApproach(PlanetP& ob
 	step0 = findInitialStep(startJD, stopJD, objects);
 	step = step0;
 	double jd = startJD;
-	prevDist = findDistance(jd, object1, object2, PhenomenaTypeIndex::Conjuction);
+	prevDist = findDistance(jd, object1, object2, PhenomenaTypeIndex::Conjunction);
 	jd += step;
 	while (jd <= stopJD)
 	{
-		dist = findDistance(jd, object1, object2, PhenomenaTypeIndex::Conjuction);
+		dist = findDistance(jd, object1, object2, PhenomenaTypeIndex::Conjunction);
 		double factor = qAbs((dist - prevDist) / dist);
 		if (factor > 10.)
 			step = step0 * factor / 10.;
@@ -4599,7 +4619,7 @@ QMap<double, double> AstroCalcDialog::findGreatestElongationApproach(PlanetP& ob
 				step = step0;
 				while (jd <= stopJD)
 				{
-					dist = findDistance(jd, object1, object2, PhenomenaTypeIndex::Conjuction);
+					dist = findDistance(jd, object1, object2, PhenomenaTypeIndex::Conjunction);
 					if (dist<prevDist)
 						break;
 
@@ -4627,19 +4647,19 @@ bool AstroCalcDialog::findPreciseGreatestElongation(QPair<double, double>* out, 
 	if (out == Q_NULLPTR)
 		return false;
 
-	prevDist = findDistance(JD, object1, object2, PhenomenaTypeIndex::Conjuction);
+	prevDist = findDistance(JD, object1, object2, PhenomenaTypeIndex::Conjunction);
 	step = -step / 2.;
 
 	while (true)
 	{
 		JD += step;
-		dist = findDistance(JD, object1, object2, PhenomenaTypeIndex::Conjuction);
+		dist = findDistance(JD, object1, object2, PhenomenaTypeIndex::Conjunction);
 
 		if (qAbs(step) < 1. / 1440.)
 		{
 			out->first = JD - step / 2.0;
-			out->second = findDistance(JD - step / 2.0, object1, object2, PhenomenaTypeIndex::Conjuction);
-			if (out->second > findDistance(JD - 5.0, object1, object2, PhenomenaTypeIndex::Conjuction))
+			out->second = findDistance(JD - step / 2.0, object1, object2, PhenomenaTypeIndex::Conjunction);
+			if (out->second > findDistance(JD - 5.0, object1, object2, PhenomenaTypeIndex::Conjunction))
 			{
 				if (object1->getJ2000EquatorialPos(core).longitude()>object2->getJ2000EquatorialPos(core).longitude())
 					out->second *= -1.0; // let's use negative value for eastern elongations

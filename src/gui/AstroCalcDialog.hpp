@@ -121,7 +121,7 @@ public:
 	};
 
 	enum PhenomenaTypeIndex {
-		Conjuction		= 0,
+		Conjunction		= 0,
 		Opposition		= 1,
 		GreatestElongation	= 2,
 		StationaryPoint		= 3,
@@ -386,7 +386,7 @@ private:
 	//! angular separation ("conjunction" defined as equality of right ascension
 	//! of two bodies), and current solution is not accurate and slow.
 	//! @note modes: 0 - conjuction, 1 - opposition, 2 - greatest elongation
-	QMap<double, double> findClosestApproach(PlanetP& object1, StelObjectP& object2, double startJD, double stopJD, double maxSeparation, int mode);
+	QMap<double, double> findClosestApproach(PlanetP& object1, StelObjectP& object2, const double startJD, const double stopJD, const double maxSeparation, const int mode);
 	// TODO: Doc?
 	double findDistance(double JD, PlanetP object1, StelObjectP object2, int mode);
 	// TODO: Doc?
