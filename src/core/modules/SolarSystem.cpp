@@ -888,6 +888,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				{ "ganymede_special",  &get_ganymede_parent_coordsv},
 				{ "calisto_special",   &get_callisto_parent_coordsv},
 				{ "callisto_special",  &get_callisto_parent_coordsv},
+				{ "amalthea_special",  &get_amalthea_parent_coordsv},
+				{ "thebe_special",     &get_thebe_parent_coordsv},
 				{ "saturn_special",    &get_saturn_helio_coordsv},
 				{ "mimas_special",     &get_mimas_parent_coordsv},
 				{ "enceladus_special", &get_enceladus_parent_coordsv},

@@ -163,6 +163,8 @@ SET(stellarium_lib_SRCS
      core/planetsephems/de440.hpp
      core/planetsephems/de441.cpp
      core/planetsephems/de441.hpp
+     core/planetsephems/rocks.cpp
+     core/planetsephems/rocks.hpp
      core/modules/Atmosphere.cpp
      core/modules/Atmosphere.hpp
      core/modules/Asterism.cpp
