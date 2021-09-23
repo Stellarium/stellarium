@@ -1,10 +1,11 @@
+
 ########### install files ###############
 
 # install info.ini
-INSTALL(FILES info.ini DESTINATION share/${PACKAGE}/skycultures/zulu )
+INSTALL(FILES info.ini  DESTINATION ${SDATALOC}/skycultures/zulu )
 
 # install constellations data, artwork and descriptions
-INSTALL(DIRECTORY ./ DESTINATION share/${PACKAGE}/skycultures/zulu
+INSTALL(DIRECTORY ./ DESTINATION ${SDATALOC}/skycultures/zulu
 	FILES_MATCHING PATTERN "*.fab" 
 	PATTERN "*.png" 
 	PATTERN "description.*.utf8" 
