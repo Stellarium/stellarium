@@ -112,6 +112,8 @@ void PrintSkyDialog::createDialogContent()
 
 void PrintSkyDialog::printFooter(QPrinter * printer, QPainter *painter, int pageNumber)
 {
+	Q_ASSERT(painter);
+	Q_ASSERT(printer);
 	const double jd=StelUtils::getJDFromSystem();
 	QString stelVersion = q_("Stellarium %1").arg(StelUtils::getApplicationVersion());
 	StelLocaleMgr lMgr=StelApp::getInstance().getLocaleMgr();
@@ -130,6 +132,7 @@ void PrintSkyDialog::printFooter(QPrinter * printer, QPainter *painter, int page
 
 	painter->drawText(QRectF(marginLeft, yPos, fullRect.width()-marginLeft-marginRight, 2*fontSize), Qt::AlignLeft, footerText);
 	painter->drawText(QRectF(marginLeft, yPos, fullRect.width()-marginLeft-marginRight, 2*fontSize), Qt::AlignRight, QString("%1 %2").arg(q_("Page")).arg(QString::number(pageNumber)));
+	qDebug() << "printFooter done";
 }
 
 // Draw contents report
@@ -141,6 +144,7 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 	const double jd = core->getJD();
 
 	PrintSky *plugin=GETSTELMODULE(PrintSky);
+	Q_ASSERT(printer);
 	Q_ASSERT(plugin);
 	QPainter painter(printer);
 	const QPageLayout pageLayout=printer->pageLayout();
@@ -166,7 +170,8 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 
 
 	//const int fontsize = static_cast<int>(printer->pageRect().width())/60;
-	const int fontsize = static_cast<int>(pageLayout.paintRectPixels(300).width())/75;
+	//const int fontsize = static_cast<int>(pageLayout.paintRectPixels(300).width())/75;
+	const int fontsize = static_cast<int>(pageLayout.paintRectPixels(300).width())/250;
 	font.setPixelSize(fontsize);
 	painter.setFont(font);
 	//int lineSpacing=fontsize+8;
@@ -210,6 +215,8 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 							 .arg(qc_("m", "altitude, metres"));
 		painter.drawText(surfaceData.adjusted(50, lineSpacing, 0, 0), Qt::AlignLeft, locationStr);
 
+		qDebug() << "PrintSky: Basic info 1 ";
+
 		// It seems when initializing this as non-pointer, the object gets deleted at end on this clause, causing a crash.
 		StelLocaleMgr *lmgr = &StelApp::getInstance().getLocaleMgr();
 		Q_ASSERT(lmgr);
@@ -220,6 +227,7 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 					.arg(lmgr->getPrintableTimeZoneLocal(jd));
 		painter.drawText(surfaceData.adjusted(50, (lineSpacing)*2, 0, 0), Qt::AlignLeft, datetime);
 
+		qDebug() << "PrintSky: Basic info 2";
 		QString fov = QString("%1: %2%3").arg(q_("Vertical field of view")).arg(QString::number(core->getMovementMgr()->getCurrentFov(), 'f', 1)).arg(QChar(0x00B0));
 		painter.drawText(surfaceData.adjusted(50, (lineSpacing)*3, 0, 0), Qt::AlignLeft, fov);
 
@@ -242,6 +250,7 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 				yPos=lineSpacing+10;
 			}
 		}
+		qDebug() << "PrintSky: Basic info 3";
 
 		// Twilight table. TODO: Make a nice table from these badly structured lines.
 		SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
@@ -287,11 +296,14 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 				.arg(q_("Moonset"))
 				.arg(printableRTSTime(moonRTS, 2));
 		painter.drawText(surfaceData.adjusted(50, (lineSpacing)*9, 0, 0), Qt::AlignLeft, rtsStr);
+		qDebug() << "PrintSky: Basic info 3j";
 
 		// TODO: lunar phase or similar general information?
 		// TODO: active meteor showers (check plugin state, get info)
-		printFooter(printer, &painter, pageNumber);
+		// FIXME: printFooter crashes!
+		//printFooter(printer, &painter, pageNumber++);
 		qDebug() << "RTS7";
+
 
 	}
 
@@ -342,6 +354,7 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 			StelUtils::rectToSphe(&ra,&dec, p->getEquinoxEquatorialPos(core));
 			Vec4d RTS=p.data()->getRTSTime(core);
 
+			qDebug() << "PrintSky: Ephemerides a";
 			if ((!plugin->getFlagLimitMagnitude() || p->getVMagnitude(core) <= static_cast<float>(plugin->getLimitMagnitude()))
 					&& englishName!=location.planetName)
 			{
@@ -352,7 +365,8 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 					yPos=70+lineSpacing*2;
 					printer->newPage();
 					pageNumber++;
-					printFooter(printer, &painter, pageNumber);
+					//printFooter(printer, &painter, pageNumber);
+					qDebug() << "PrintSky: Ephemerides " << pageNumber;
 
 					painter.drawText(QRectF(0, 0, printer->paperRect().width(), yPos), Qt::AlignCenter, q_("SOLAR SYSTEM EPHEMERIDES"));
 
@@ -396,6 +410,7 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 			    }
 		}
 	}
+
 	QApplication::restoreOverrideCursor();
 }
 
