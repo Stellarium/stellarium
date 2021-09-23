@@ -32,6 +32,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include "de441.hpp"
 #include "de440.hpp"
 #include "pluto.h"
+#include "htc20b.hpp"
 
 #define EPHEM_MERCURY_ID  0
 #define EPHEM_VENUS_ID    1
@@ -527,4 +528,25 @@ void get_oberon_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void*
 {
 	Q_UNUSED(unused);
 	GetGust86Coor(jd, GUST86_OBERON, xyz, xyzdot);
+}
+
+void get_helene_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
+{
+	Q_UNUSED(unused)
+	int r = htc20(jd, HTC2_HELENE, xyz, xyzdot);
+	Q_UNUSED(r)
+}
+
+void get_telesto_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
+{
+	Q_UNUSED(unused)
+	int r = htc20(jd, HTC2_TELESTO, xyz, xyzdot);
+	Q_UNUSED(r)
+}
+
+void get_calypso_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
+{
+	Q_UNUSED(unused)
+	int r = htc20(jd, HTC2_CALYPSO, xyz, xyzdot);
+	Q_UNUSED(r)
 }
