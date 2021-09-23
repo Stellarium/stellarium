@@ -74,7 +74,7 @@ private:
 
 	//! Printing options
 	QString printableTime(double time, double shift); // DEPRECATED. -- NO LONGER USED.
-	QString printableRTSTime(double decimalHours);
+	QString printableRTSTime(Vec4d rts, int idx); // formats
 
 	QList< QPair<float, float> > getListMagnitudeRadius(StelCore *core);
 };

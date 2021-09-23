@@ -247,45 +247,45 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 		SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
 		PlanetP sun=ssmgr->getSun();
 		PlanetP moon=ssmgr->getMoon();
-		Vec3f sunRTS=sun->getRTSTime(core);
-		Vec3f civilTwilight=sun->getRTSTime(core, -6.);
-		Vec3f nauticalTwilight=sun->getRTSTime(core, -12.);
-		Vec3f astronomicalTwilight=sun->getRTSTime(core, -18.);
-		Vec3f moonRTS=moon->getRTSTime(core);
+		const Vec4d sunRTS=sun->getRTSTime(core);
+		const Vec4d civilTwilight=sun->getRTSTime(core, -6.);
+		const Vec4d nauticalTwilight=sun->getRTSTime(core, -12.);
+		const Vec4d astronomicalTwilight=sun->getRTSTime(core, -18.);
+		const Vec4d moonRTS=moon->getRTSTime(core);
 
 		QString rtsStr = QString("%1: %2 -- %3: %4 -- %5: %6")
 				.arg(q_("Sunrise"))
-				.arg(printableRTSTime(static_cast<double>(sunRTS[0])))
+				.arg(printableRTSTime(sunRTS, 0))
 				.arg(q_("Transit"))
-				.arg(printableRTSTime(static_cast<double>(sunRTS[1])))
+				.arg(printableRTSTime(sunRTS, 1))
 				.arg(q_("Sunset"))
-				.arg(printableRTSTime(static_cast<double>(sunRTS[2])));
+				.arg(printableRTSTime(sunRTS, 2));
 		painter.drawText(surfaceData.adjusted(50, (lineSpacing)*5, 0, 0), Qt::AlignLeft, rtsStr);
 		QString twilightStr = QString("%1 %2: %3 -- %4: %5")
 				.arg(q_("Civil Twilight")).arg(q_("Begin"))
-				.arg(printableRTSTime(static_cast<double>(civilTwilight[0])))
+				.arg(printableRTSTime(civilTwilight, 0))
 				.arg(q_("End"))
-				.arg(printableRTSTime(static_cast<double>(civilTwilight[2])));
+				.arg(printableRTSTime(civilTwilight, 2));
 		painter.drawText(surfaceData.adjusted(50, (lineSpacing)*6, 0, 0), Qt::AlignLeft, twilightStr);
 		twilightStr = QString("%1 %2: %3 -- %4: %5")
 				.arg(q_("Nautical Twilight")).arg(q_("Begin"))
-				.arg(printableRTSTime(static_cast<double>(nauticalTwilight[0])))
+				.arg(printableRTSTime(nauticalTwilight, 0))
 				.arg(q_("End"))
-				.arg(printableRTSTime(static_cast<double>(nauticalTwilight[2])));
+				.arg(printableRTSTime(nauticalTwilight, 2));
 		painter.drawText(surfaceData.adjusted(50, (lineSpacing)*7, 0, 0), Qt::AlignLeft, twilightStr);
 		twilightStr = QString("%1 %2: %3 -- %4: %5")
 				.arg(q_("Astronomical Twilight")).arg(q_("Begin"))
-				.arg(printableRTSTime(static_cast<double>(astronomicalTwilight[0])))
+				.arg(printableRTSTime(astronomicalTwilight, 0))
 				.arg(q_("End"))
-				.arg(printableRTSTime(static_cast<double>(astronomicalTwilight[2])));
+				.arg(printableRTSTime(astronomicalTwilight, 2));
 		painter.drawText(surfaceData.adjusted(50, (lineSpacing)*8, 0, 0), Qt::AlignLeft, twilightStr);
 		rtsStr = QString("%1: %2 -- %3: %4 -- %5: %6")
 				.arg(q_("Moonrise"))
-				.arg(printableRTSTime(static_cast<double>(moonRTS[0])))
+				.arg(printableRTSTime(moonRTS, 0))
 				.arg(q_("Transit"))
-				.arg(printableRTSTime(static_cast<double>(moonRTS[1])))
+				.arg(printableRTSTime(moonRTS, 1))
 				.arg(q_("Moonset"))
-				.arg(printableRTSTime(static_cast<double>(moonRTS[2])));
+				.arg(printableRTSTime(moonRTS, 2));
 		painter.drawText(surfaceData.adjusted(50, (lineSpacing)*9, 0, 0), Qt::AlignLeft, rtsStr);
 
 		// TODO: lunar phase or similar general information?
@@ -340,57 +340,53 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 				continue;
 			double dec, ra;
 			StelUtils::rectToSphe(&ra,&dec, p->getEquinoxEquatorialPos(core));
-
 			Vec4d RTS=p.data()->getRTSTime(core);
 
 			if ((!plugin->getFlagLimitMagnitude() || p->getVMagnitude(core) <= static_cast<float>(plugin->getLimitMagnitude()))
 					&& englishName!=location.planetName)
 			{
-				const int ratioWidth=static_cast<int>(300.*static_cast<double>(fontsize)/45.);
+				const double ratioWidth=(300.*static_cast<double>(fontsize)/45.);
 				if (doHeader)
 				{
-					int xPos=printer->pageRect().left()-ratioWidth/2;
+					double xPos=printer->pageRect().left()-ratioWidth/2;
 					yPos=70+lineSpacing*2;
 					printer->newPage();
 					pageNumber++;
 					printFooter(printer, &painter, pageNumber);
 
-					painter.drawText(QRect(0, 0, printer->paperRect().width(), yPos), Qt::AlignCenter, q_("SOLAR SYSTEM EPHEMERIDES"));
+					painter.drawText(QRectF(0, 0, printer->paperRect().width(), yPos), Qt::AlignCenter, q_("SOLAR SYSTEM EPHEMERIDES"));
 
 					yPos+=lineSpacing;
 
-					painter.drawText(QRect(xPos+=    ratioWidth, yPos, 1.8*ratioWidth, fontsize+lineSpacing), Qt::AlignHCenter, q_("Name"));
-					painter.drawText(QRect(xPos+=1.8*ratioWidth, yPos, 1.1*ratioWidth, fontsize+lineSpacing), Qt::AlignHCenter, q_("RA"));
-					painter.drawText(QRect(xPos+=1.1*ratioWidth, yPos,     ratioWidth, fontsize+lineSpacing), Qt::AlignHCenter, q_("Dec"));
-					painter.drawText(QRect(xPos+=    ratioWidth, yPos, 0.7*ratioWidth, fontsize+lineSpacing), Qt::AlignHCenter, q_("Rising"));
-					painter.drawText(QRect(xPos, yPos-fontsize-lineSpacing/4, ratioWidth*2.1, fontsize+lineSpacing), Qt::AlignHCenter, q_("Local Time"));
-					painter.drawText(QRect(xPos+=0.7*ratioWidth, yPos, 0.7*ratioWidth, fontsize+lineSpacing), Qt::AlignHCenter, q_("Transit"));
-					painter.drawText(QRect(xPos+=0.7*ratioWidth, yPos, 0.7*ratioWidth, fontsize+lineSpacing), Qt::AlignHCenter, q_("Setting"));
-					painter.drawText(QRect(xPos+=0.7*ratioWidth, yPos,     ratioWidth, fontsize+lineSpacing), Qt::AlignRight, q_("Dist.(AU)"));
-					painter.drawText(QRect(xPos+=    ratioWidth, yPos,     ratioWidth, fontsize+lineSpacing), Qt::AlignRight, q_("App.Mag."));
+					painter.drawText(QRectF(xPos+=    ratioWidth, yPos, 1.8*ratioWidth, fontsize+lineSpacing), Qt::AlignHCenter, q_("Name"));
+					painter.drawText(QRectF(xPos+=1.8*ratioWidth, yPos, 1.1*ratioWidth, fontsize+lineSpacing), Qt::AlignHCenter, q_("RA"));
+					painter.drawText(QRectF(xPos+=1.1*ratioWidth, yPos,     ratioWidth, fontsize+lineSpacing), Qt::AlignHCenter, q_("Dec"));
+					painter.drawText(QRectF(xPos+=    ratioWidth, yPos, 0.7*ratioWidth, fontsize+lineSpacing), Qt::AlignHCenter, q_("Rising"));
+					painter.drawText(QRectF(xPos, yPos-fontsize-lineSpacing/4, ratioWidth*2.1, fontsize+lineSpacing), Qt::AlignHCenter, q_("Local Time"));
+					painter.drawText(QRectF(xPos+=0.7*ratioWidth, yPos, 0.7*ratioWidth, fontsize+lineSpacing), Qt::AlignHCenter, q_("Transit"));
+					painter.drawText(QRectF(xPos+=0.7*ratioWidth, yPos, 0.7*ratioWidth, fontsize+lineSpacing), Qt::AlignHCenter, q_("Setting"));
+					painter.drawText(QRectF(xPos+=0.7*ratioWidth, yPos,     ratioWidth, fontsize+lineSpacing), Qt::AlignRight, q_("Dist.(AU)"));
+					painter.drawText(QRectF(xPos+=    ratioWidth, yPos,     ratioWidth, fontsize+lineSpacing), Qt::AlignRight, q_("App.Mag."));
 					yPos+=lineSpacing*1.25;
 					doHeader=false;
 				}
 
-				const double transit=static_cast<double>(RTS[1]);
-				const double rising =static_cast<double>(RTS[0]);
-				const double setting=static_cast<double>(RTS[2]);
 				oddLine=!oddLine;
-				int xPos=printer->pageRect().left()-ratioWidth/2;
+				double xPos=printer->pageRect().left()-ratioWidth/2;
 
 				painter.setPen(Qt::NoPen);
 				painter.setBrush(oddLine? Qt::white: Qt::lightGray);
-				painter.drawRect(QRect(xPos+ratioWidth, yPos, ratioWidth*8, lineSpacing));
+				painter.drawRect(QRectF(xPos+ratioWidth, yPos, ratioWidth*8, lineSpacing));
 				painter.setPen(Qt::SolidLine);
 
-				painter.drawText(QRect(xPos+=    ratioWidth, yPos, 1.8*ratioWidth, fontsize+lineSpacing), Qt::AlignLeft,   QString(" %1").arg(q_(englishName)));
-				painter.drawText(QRect(xPos+=1.8*ratioWidth, yPos, 1.1*ratioWidth, fontsize+lineSpacing), Qt::AlignRight,  QString("%1").arg(StelUtils::radToHmsStr(ra)));
-				painter.drawText(QRect(xPos+=1.1*ratioWidth, yPos,     ratioWidth, fontsize+lineSpacing), Qt::AlignRight,  QString("%1").arg(StelUtils::radToDmsStr(dec)));
-				painter.drawText(QRect(xPos+=    ratioWidth, yPos, 0.7*ratioWidth, fontsize+lineSpacing), Qt::AlignHCenter, QString("%1").arg(printableRTSTime(rising)));
-				painter.drawText(QRect(xPos+=0.7*ratioWidth, yPos, 0.7*ratioWidth, fontsize+lineSpacing), Qt::AlignHCenter, QString("%1").arg(printableRTSTime(transit)));
-				painter.drawText(QRect(xPos+=0.7*ratioWidth, yPos, 0.7*ratioWidth, fontsize+lineSpacing), Qt::AlignHCenter, QString("%1").arg(printableRTSTime(setting)));
-				painter.drawText(QRect(xPos+=0.7*ratioWidth, yPos,     ratioWidth, fontsize+lineSpacing), Qt::AlignRight,  QString("%1").arg(p->getDistance(), 0, 'f', 3));
-				painter.drawText(QRect(xPos+=    ratioWidth, yPos,     ratioWidth, fontsize+lineSpacing), Qt::AlignRight,  QString("%1 ").arg(p->getVMagnitude(core), 0, 'f', 1));
+				painter.drawText(QRectF(xPos+=    ratioWidth, yPos, 1.8*ratioWidth, fontsize+lineSpacing), Qt::AlignLeft,   QString(" %1").arg(q_(englishName)));
+				painter.drawText(QRectF(xPos+=1.8*ratioWidth, yPos, 1.1*ratioWidth, fontsize+lineSpacing), Qt::AlignRight,  QString("%1").arg(StelUtils::radToHmsStr(ra)));
+				painter.drawText(QRectF(xPos+=1.1*ratioWidth, yPos,     ratioWidth, fontsize+lineSpacing), Qt::AlignRight,  QString("%1").arg(StelUtils::radToDmsStr(dec)));
+				painter.drawText(QRectF(xPos+=    ratioWidth, yPos, 0.7*ratioWidth, fontsize+lineSpacing), Qt::AlignHCenter, QString("%1").arg(printableRTSTime(RTS, 0)));
+				painter.drawText(QRectF(xPos+=0.7*ratioWidth, yPos, 0.7*ratioWidth, fontsize+lineSpacing), Qt::AlignHCenter, QString("%1").arg(printableRTSTime(RTS, 1)));
+				painter.drawText(QRectF(xPos+=0.7*ratioWidth, yPos, 0.7*ratioWidth, fontsize+lineSpacing), Qt::AlignHCenter, QString("%1").arg(printableRTSTime(RTS, 2)));
+				painter.drawText(QRectF(xPos+=0.7*ratioWidth, yPos,     ratioWidth, fontsize+lineSpacing), Qt::AlignRight,  QString("%1").arg(p->getDistance(), 0, 'f', 3));
+				painter.drawText(QRectF(xPos+=    ratioWidth, yPos,     ratioWidth, fontsize+lineSpacing), Qt::AlignRight,  QString("%1 ").arg(p->getVMagnitude(core), 0, 'f', 1));
 
 				yPos+=lineSpacing;
 				if (yPos+((lineSpacing)*4)>=printer->pageRect().top()+printer->pageRect().height())
@@ -465,20 +461,19 @@ void PrintSkyDialog::enableOutputOptions(bool enable)
 QString PrintSkyDialog::printableTime(double time, double shift)
 {
 	time=fmod(time+shift/24.+1., 1.); // should ensure 0..1
-	QTime tm(0,0);
-	tm=tm.addSecs(static_cast<int>(time*86400.));
+	QTime tm(0, 0, static_cast<int>(time*86400.));
 	return tm.toString("HH:mm");
 }
 
-// time is given as hours, 0..24. -100 means never rises/sets, 100 is circumpolar
-QString PrintSkyDialog::printableRTSTime(double decimalHours)
+// time is given as jd
+QString PrintSkyDialog::printableRTSTime(Vec4d rts, int idx)
 {
-	if (fabs(decimalHours)>99.)
+	if (fabs(rts[3])>99.)
 		return q_("never");
-	decimalHours=fmod(decimalHours+24., 24.); // should ensure 0..24
-	QTime tm(0,0);
-	tm=tm.addSecs(static_cast<int>(decimalHours*3600.));
-	return tm.toString("HH:mm");
+	StelCore* core=StelApp::getInstance().getCore();
+	const double utcShift = core->getUTCOffset(core->getJD()) / 24.; // Fix DST shift...
+	double hour = StelUtils::getHoursFromJulianDay(rts[idx]+utcShift);
+	return StelUtils::hoursToHmsStr(hour, true);
 }
 
 //! Get relations between magnitude stars and draw radius
