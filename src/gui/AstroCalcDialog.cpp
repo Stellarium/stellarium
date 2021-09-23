@@ -4482,8 +4482,12 @@ QMap<double, double> AstroCalcDialog::findClosestApproach(PlanetP& object1, Stel
 
 	if (object2->getType()=="Planet")
 	{
-		// If we don't have at least partial overlap between planet valid dates and our interval, skip by returning an empty map.
 		PlanetP planet = qSharedPointerCast<Planet>(object2);
+		// We shouldn't compute eclipses and shadow transits not for planets and their moons
+		if (mode==PhenomenaTypeIndex::Shadows && object2->getEnglishName()!="Sun" && planet->getParent()!=object1)
+			return separations;
+
+		// If we don't have at least partial overlap between planet valid dates and our interval, skip by returning an empty map.		
 		const Vec2d planetValidityLimits=planet->getValidPositionalDataRange();
 		if ( (planetValidityLimits[0] > stopJD) || (planetValidityLimits[1] < startJD) )
 			return separations;
