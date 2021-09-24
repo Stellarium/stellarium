@@ -275,6 +275,7 @@ private slots:
 	void saveWutMagnitudeLimit(double mag);
 	void saveWutMinAngularSizeLimit();
 	void saveWutMaxAngularSizeLimit();
+	void saveWutMinAltitude();
 	void saveWutAngularSizeFlag(bool state);
 	void saveWutTimeInterval(int index);
 	void calculateWutObjects();

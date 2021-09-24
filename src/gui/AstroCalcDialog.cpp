@@ -427,13 +427,20 @@ void AstroCalcDialog::createDialogContent()
 	ui->wutAngularSizeLimitMaxSpinBox->setMinimum(0.0, true);
 	ui->wutAngularSizeLimitMaxSpinBox->setMaximum(10.0, true);
 	ui->wutAngularSizeLimitMaxSpinBox->setWrapping(false);
+	ui->wutAltitudeMinSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
+	ui->wutAltitudeMinSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
+	ui->wutAltitudeMinSpinBox->setMinimum(0.0, true);
+	ui->wutAltitudeMinSpinBox->setMaximum(90.0, true);
+	ui->wutAltitudeMinSpinBox->setWrapping(false);
 
 	// Convert from angular minutes
 	ui->wutAngularSizeLimitMinSpinBox->setDegrees(conf->value("astrocalc/wut_angular_limit_min", 10.0).toDouble()/60.0);
 	ui->wutAngularSizeLimitMaxSpinBox->setDegrees(conf->value("astrocalc/wut_angular_limit_max", 600.0).toDouble()/60.0);
+	ui->wutAltitudeMinSpinBox->setDegrees(conf->value("astrocalc/wut_altitude_min", 0.0).toDouble());
 	connect(ui->wutAngularSizeLimitCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveWutAngularSizeFlag(bool)));
 	connect(ui->wutAngularSizeLimitMinSpinBox, SIGNAL(valueChanged()), this, SLOT(saveWutMinAngularSizeLimit()));
 	connect(ui->wutAngularSizeLimitMaxSpinBox, SIGNAL(valueChanged()), this, SLOT(saveWutMaxAngularSizeLimit()));
+	connect(ui->wutAltitudeMinSpinBox, SIGNAL(valueChanged()), this, SLOT(saveWutMinAltitude()));
 
 	ui->wutMagnitudeDoubleSpinBox->setValue(conf->value("astrocalc/wut_magnitude_limit", 10.0).toDouble());
 	connect(ui->wutMagnitudeDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(saveWutMagnitudeLimit(double)));
@@ -5269,6 +5276,12 @@ void AstroCalcDialog::saveWutMaxAngularSizeLimit()
 	calculateWutObjects();
 }
 
+void AstroCalcDialog::saveWutMinAltitude()
+{
+	conf->setValue("astrocalc/wut_altitude_min", QString::number(ui->wutAltitudeMinSpinBox->valueDegrees(), 'f', 2));
+	calculateWutObjects();
+}
+
 void AstroCalcDialog::saveWutAngularSizeFlag(bool state)
 {
 	conf->setValue("astrocalc/wut_angular_limit_flag", state);
@@ -5425,6 +5438,7 @@ void AstroCalcDialog::calculateWutObjects()
 		bool enableAngular = true;
 		const double angularSizeLimitMin = ui->wutAngularSizeLimitMinSpinBox->valueDegrees();
 		const double angularSizeLimitMax = ui->wutAngularSizeLimitMaxSpinBox->valueDegrees();
+		const double altitudeLimitMin = ui->wutAltitudeMinSpinBox->valueDegrees();
 		const float magLimit = static_cast<float>(ui->wutMagnitudeDoubleSpinBox->value());
 		const double JD = core->getJD();
 		const double UTCOffset = core->getUTCOffset(JD) / 24.;
@@ -5533,7 +5547,7 @@ void AstroCalcDialog::calculateWutObjects()
 								if (starName.isEmpty())
 									starName = designation;
 
-								rts = object->getRTSTime(core);
+								rts = object->getRTSTime(core, altitudeLimitMin);
 								alt = computeMaxElevation(object);
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
 
@@ -5663,7 +5677,7 @@ void AstroCalcDialog::calculateWutObjects()
 							designation = QString("%1:%2").arg(d, n);
 							if (!objectsList.contains(designation))
 							{
-								rts = object->getRTSTime(core);
+								rts = object->getRTSTime(core, altitudeLimitMin);
 								alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
 
@@ -5722,7 +5736,7 @@ void AstroCalcDialog::calculateWutObjects()
 							designation = object->getEnglishName();
 							if (!objectsList.contains(designation))
 							{
-								rts = object->getRTSTime(core);
+								rts = object->getRTSTime(core, altitudeLimitMin);
 								alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
 
@@ -5766,7 +5780,7 @@ void AstroCalcDialog::calculateWutObjects()
 								if (starName.isEmpty())
 									starName = designation;
 
-								rts = object->getRTSTime(core);
+								rts = object->getRTSTime(core, altitudeLimitMin);
 								alt = computeMaxElevation(object);
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
 
@@ -5801,7 +5815,7 @@ void AstroCalcDialog::calculateWutObjects()
 								if (starName.isEmpty())
 									starName = designation;
 
-								rts = object->getRTSTime(core);
+								rts = object->getRTSTime(core, altitudeLimitMin);
 								alt = computeMaxElevation(object);
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
 
@@ -5830,7 +5844,7 @@ void AstroCalcDialog::calculateWutObjects()
 								if (starName.isEmpty())
 									starName = designation;
 
-								rts = object->getRTSTime(core);
+								rts = object->getRTSTime(core, altitudeLimitMin);
 								alt = computeMaxElevation(object);
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
 
@@ -5863,7 +5877,7 @@ void AstroCalcDialog::calculateWutObjects()
 							designation = QString("%1:%2").arg(d, n);
 							if (!objectsList.contains(designation))
 							{
-								rts = object->getRTSTime(core);
+								rts = object->getRTSTime(core, altitudeLimitMin);
 								alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
 
@@ -5892,7 +5906,7 @@ void AstroCalcDialog::calculateWutObjects()
 									designation = object->getEnglishName();
 									if (!objectsList.contains(designation) && !designation.isEmpty())
 									{
-										rts = object->getRTSTime(core);
+										rts = object->getRTSTime(core, altitudeLimitMin);
 										alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
 										constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
 
@@ -5922,7 +5936,7 @@ void AstroCalcDialog::calculateWutObjects()
 								if (starName.isEmpty())
 									starName = designation;
 
-								rts = object->getRTSTime(core);
+								rts = object->getRTSTime(core, altitudeLimitMin);
 								alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
 
@@ -5945,7 +5959,7 @@ void AstroCalcDialog::calculateWutObjects()
 							designation = object->getEnglishName();
 							if (!objectsList.contains(designation) && !designation.isEmpty())
 							{
-								rts = object->getRTSTime(core);
+								rts = object->getRTSTime(core, altitudeLimitMin);
 								alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
 
@@ -5967,7 +5981,7 @@ void AstroCalcDialog::calculateWutObjects()
 							designation = object->getEnglishName();
 							if (!objectsList.contains(designation))
 							{
-								rts = object->getRTSTime(core);
+								rts = object->getRTSTime(core, altitudeLimitMin);
 								alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
 
@@ -5989,7 +6003,7 @@ void AstroCalcDialog::calculateWutObjects()
 							designation = object->getEnglishName();
 							if (!objectsList.contains(designation))
 							{
-								rts = object->getRTSTime(core);
+								rts = object->getRTSTime(core, altitudeLimitMin);
 								alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
 
@@ -6045,7 +6059,7 @@ void AstroCalcDialog::calculateWutObjects()
 							designation = QString("%1:%2").arg(d, n);
 							if (!objectsList.contains(designation))
 							{
-								rts = object->getRTSTime(core);
+								rts = object->getRTSTime(core, altitudeLimitMin);
 								alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
 
