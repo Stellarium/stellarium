@@ -47,17 +47,13 @@ const QString AngleSpinBox::positivePrefix(PrefixType prefix)
 	{
 		case NormalPlus:
 			return("+");
-			break;
 		case Longitude:
 			return(q_("E")+" ");
-			break;
 		case Latitude:
 			return(q_("N")+" ");
-			break;
 		case Normal:
 		default:
 			return("");
-			break;
 	}
 }
 
@@ -67,17 +63,13 @@ const QString AngleSpinBox::negativePrefix(PrefixType prefix)
 	{
 		case NormalPlus:
 			return(QLocale().negativeSign());
-			break;
 		case Longitude:
 			return(q_("W")+" ");
-			break;
 		case Latitude:
 			return(q_("S")+" ");
-			break;
 		case Normal:
 		default:
 			return(QLocale().negativeSign());
-			break;
 	}
 }
 
@@ -339,7 +331,7 @@ void AngleSpinBox::updateValue(void)
 	if (state != QValidator::Acceptable)
 		return;
 
-	if (radAngle == a)
+	if (qFuzzyCompare(radAngle, a))
 		return;
 	radAngle = a;
 

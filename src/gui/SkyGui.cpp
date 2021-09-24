@@ -380,7 +380,7 @@ void SkyGui::updateBarsPos()
 	double rangeX = winBar->boundingRectNoHelpLabel().width()+2.*buttonBarPath->getRoundSize()+1.;
 	const qreal newWinBarX = buttonBarPath->getRoundSize()-(1.-animLeftBarTimeLine->currentValue())*rangeX-0.5;
 	const qreal newWinBarY = hh-winBar->boundingRectNoHelpLabel().height()-buttonBar->boundingRectNoHelpLabel().height()-20;
-	if (winBar->pos().x()!=newWinBarX || winBar->pos().y()!=newWinBarY)
+	if (!qFuzzyCompare(winBar->pos().x(), newWinBarX) || !qFuzzyCompare(winBar->pos().y(), newWinBarY))
 	{
 		winBar->setPos(qRound(newWinBarX), qRound(newWinBarY));
 		updatePath = true;
@@ -389,13 +389,13 @@ void SkyGui::updateBarsPos()
 	double rangeY = buttonBar->boundingRectNoHelpLabel().height()+0.5-7.-buttonBarPath->getRoundSize();
 	const qreal newButtonBarX = winBar->boundingRectNoHelpLabel().right()+buttonBarPath->getRoundSize();
 	const qreal newButtonBarY = hh-buttonBar->boundingRectNoHelpLabel().height()-buttonBarPath->getRoundSize()+0.5+(1.-animBottomBarTimeLine->currentValue())*rangeY;
-	if (buttonBar->pos().x()!=newButtonBarX || buttonBar->pos().y()!=newButtonBarY)
+	if (!qFuzzyCompare(buttonBar->pos().x(), newButtonBarX) || !qFuzzyCompare(buttonBar->pos().y(), newButtonBarY))
 	{
 		buttonBar->setPos(qRound(newButtonBarX), qRound(newButtonBarY));
 		updatePath = true;
 	}
 
-	if (lastButtonbarWidth != buttonBar->boundingRectNoHelpLabel().width())
+	if (lastButtonbarWidth != static_cast<int>(buttonBar->boundingRectNoHelpLabel().width()))
 	{
 		updatePath = true;
 		lastButtonbarWidth = static_cast<int>(buttonBar->boundingRectNoHelpLabel().width());

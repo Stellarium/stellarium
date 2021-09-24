@@ -62,12 +62,12 @@ void MapLabel::mousePressEvent(QMouseEvent* event)
 	const int posY = event->pos().y() * scale;
 
 	//checks if position of mouse click is inside the map
-	if((unsigned)(posX-offsetX) > (unsigned)pixmap()->width() || (unsigned)(posY-offsetY) > (unsigned)pixmap()->height())
+	if(static_cast<unsigned>(posX-offsetX) > static_cast<unsigned>(pixmap()->width()) || static_cast<unsigned>(posY-offsetY) > static_cast<unsigned>(pixmap()->height()))
 	{
 		return;
 	}
-	const double lon = ((double)(posX-offsetX))/pixmap()->size().width()*360.-180.;
-	const double lat = 90.-((double)(posY-offsetY))/pixmap()->size().height()*180.;
+	const double lon = (static_cast<double>(posX-offsetX))/pixmap()->size().width()*360.-180.;
+	const double lat = 90.-(static_cast<double>(posY-offsetY))/pixmap()->size().height()*180.;
 	emit(positionChanged(lon, lat));
 }
 
