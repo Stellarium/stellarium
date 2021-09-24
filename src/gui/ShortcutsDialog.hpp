@@ -95,7 +95,7 @@ private:
 	static bool itemIsEditable(QStandardItem *item);
 
 	//! Apply style changes.
-	//! See http://qt-project.org/faq/answer/how_can_my_stylesheet_account_for_custom_properties
+	//! See https://wiki.qt.io/Technical_FAQ#How_can_my_stylesheet_account_for_custom_properties.3F
 	void polish();
 
 	QStandardItem* updateGroup(const QString& group);
@@ -103,7 +103,7 @@ private:
 	//! search for first appearance of item with requested data.
 	QStandardItem* findItemByData(QVariant value, int role, int column = 0) const;
 
-	//! pointer to mgr, for not getting it from StelApp every time.
+	//! pointer to mgr, to avoid getting it from StelApp every time.
 	class StelActionMgr* actionMgr;
 
 	//! list for storing collisions items, so we can easy restore their colors.
