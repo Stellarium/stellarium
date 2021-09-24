@@ -6118,9 +6118,9 @@ void AstroCalcDialog::saveWutObjects()
 	QString filter = q_("Microsoft Excel Open XML Spreadsheet");
 	filter.append(" (*.xlsx);;");
 	filter.append(q_("CSV (Comma delimited)"));
-	filter.append(" (*.csv);;");
-	filter.append(q_("JSON (Stellarium bookmarks)"));
-	filter.append(" (*.json)");
+	filter.append(" (*.csv)");
+	// filter.append(q_("JSON (Stellarium bookmarks)"));
+	// filter.append(" (*.json)");
 	QString defaultFilter("(*.xlsx)");
 	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
 							q_("Save list of objects as..."),
