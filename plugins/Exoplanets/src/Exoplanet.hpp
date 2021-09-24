@@ -181,7 +181,8 @@ private:
 	static bool distributionMode;
 	static bool timelineMode;
 	static bool habitableMode;
-	static bool showDesignations;	
+	static bool showDesignations;
+	static bool showNumbers;
 	static int temperatureScaleID;
 
 	void draw(StelCore* core, StelPainter *painter);

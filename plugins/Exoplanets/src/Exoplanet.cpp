@@ -45,6 +45,7 @@ bool Exoplanet::distributionMode = false;
 bool Exoplanet::timelineMode = false;
 bool Exoplanet::habitableMode = false;
 bool Exoplanet::showDesignations = false;
+bool Exoplanet::showNumbers = false;
 Vec3f Exoplanet::exoplanetMarkerColor = Vec3f(0.4f,0.9f,0.5f);
 Vec3f Exoplanet::habitableExoplanetMarkerColor = Vec3f(1.f,0.5f,0.f);
 int Exoplanet::temperatureScaleID = 1;
@@ -596,6 +597,7 @@ void Exoplanet::draw(StelCore* core, StelPainter *painter)
 
 	bool visible = (timelineMode? isDiscovered(core) : true);
 	Vec3d win;
+	QString text;
 	// Check visibility of exoplanet system
 	if(!visible || !(painter->getProjector()->projectCheck(getJ2000EquatorialPos(core), win))) {return;}
 
@@ -616,9 +618,14 @@ void Exoplanet::draw(StelCore* core, StelPainter *painter)
 
 		float coeff = 4.5f + std::log10(static_cast<float>(sradius) + 0.1f);
 		StarMgr* smgr = GETSTELMODULE(StarMgr); // It's need for checking displaying of labels for stars
-		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+coeff)<mlimit && smgr->getFlagLabels() && showDesignations)
+		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+coeff)<mlimit && smgr->getFlagLabels())
 		{
-			painter->drawText(getJ2000EquatorialPos(core), getNameI18n(), 0, shift, shift, false);
+			if (showDesignations)
+				text = getNameI18n();
+			if (showNumbers)
+				text += text.isEmpty() ? QString("%1").arg(exoplanets.count()) : QString(" (%1)").arg(exoplanets.count());
+			if (!text.isEmpty())
+				painter->drawText(getJ2000EquatorialPos(core), text, 0, shift, shift, false);
 		}
 	}
 }

@@ -262,6 +262,13 @@ public slots:
 	//! @return true if it's visible
 	bool getFlagShowExoplanetsDesignations(void) const;
 
+	//! Enable/disable display of number of exoplanets in exoplanetary system
+	//! @param b boolean flag
+	void setFlagShowExoplanetsNumbers(bool b);
+	//! Get status to display of designations of exoplanets in exoplanetary system
+	//! @return true if it's visible
+	bool getFlagShowExoplanetsNumbers(void) const;
+
 	//! Define whether the button toggling exoplanets should be visible
 	void setFlagShowExoplanetsButton(bool b);
 	bool getFlagShowExoplanetsButton(void) const { return flagShowExoplanetsButton; }
