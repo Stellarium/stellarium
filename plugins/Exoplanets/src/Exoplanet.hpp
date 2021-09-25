@@ -38,15 +38,15 @@ typedef struct
 	double mass;				//! Exoplanet mass (Mjup)
 	double radius;				//! Exoplanet radius (Rjup)
 	double period;				//! Exoplanet period (days)
-	double semiAxis;				//! Exoplanet orbit semi-major axis (AU)
+	double semiAxis;			//! Exoplanet orbit semi-major axis (AU)
 	double eccentricity;			//! Exoplanet orbit eccentricity
 	double inclination;			//! Exoplanet orbit inclination
 	double angleDistance;			//! Exoplanet angle distance
 	int discovered;				//! Exoplanet discovered year
 	QString pclass;				//! Exoplanet classification from host star spectral type (F, G, K, M), habitable zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran, jovian, neptunian)
 	int EqTemp;				//! Exoplanet equilibrium temperature in kelvins (K) assuming a 0.3 bond albedo (Earth = 255 K).
-	int flux;					//! Average stellar flux of the planet in Earth fluxes (Earth = 1.0 SE).
-	int ESI;					//! Exoplanet Earth Similarity Index
+	int flux;				//! Average stellar flux of the planet in Earth fluxes (Earth = 1.0 SE).
+	int ESI;				//! Exoplanet Earth Similarity Index
 	QString detectionMethod;		//! Method of detection of exoplanet
 	bool conservative;			//! Conservative sample
 } exoplanetData;
@@ -133,39 +133,21 @@ public:
 
 	QList<double> getData(int mode)
 	{
-		switch(mode)
-		{
-			case 1:
-				return semiAxisList;
-			case 2:
-				return massList;
-			case 3:
-				return radiusList;
-			case 4:
-				return periodList;
-			case 5:
-				return angleDistanceList;
-			case 6:
-				return effectiveTempHostStarList;
-			case 7:
-				return yearDiscoveryList;
-			case 8:
-				return metallicityHostStarList;
-			case 9:
-				return vMagHostStarList;
-			case 10:
-				return raHostStarList;
-			case 11:
-				return decHostStarList;
-			case 12:
-				return distanceHostStarList;
-			case 13:
-				return massHostStarList;
-			case 14:
-				return radiusHostStarList;
-			default:
-				return eccentricityList;
-		}
+		return QMap<int, QList<double>>{
+			{1, semiAxisList},
+			{2, massList},
+			{3, radiusList},
+			{4, periodList},
+			{5, angleDistanceList},
+			{6, effectiveTempHostStarList},
+			{7, yearDiscoveryList},
+			{8, metallicityHostStarList},
+			{9, vMagHostStarList},
+			{10, raHostStarList},
+			{11, decHostStarList},
+			{12, distanceHostStarList},
+			{13, massHostStarList},
+			{14, radiusHostStarList}}.value(mode,eccentricityList);
 	}
 
 private:

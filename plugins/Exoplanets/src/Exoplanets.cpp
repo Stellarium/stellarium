@@ -744,7 +744,7 @@ void Exoplanets::updateJSON(void)
 {
 	if (updateState==Exoplanets::Updating)
 	{
-		qWarning() << "[Exoplanets] Already updating...  will not start again current update is complete.";
+		qWarning() << "[Exoplanets] Already updating...  will not start again until current update is complete.";
 		return;
 	}
 	qDebug() << "[Exoplanets] Updating exoplanets catalog...";

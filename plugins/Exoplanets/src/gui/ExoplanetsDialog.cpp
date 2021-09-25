@@ -216,25 +216,25 @@ void ExoplanetsDialog::fillExoplanetsTable()
 			if (epdata.contains("planetProperName")) {
 				treeItem->setToolTip(EPSExoplanetName, trans.qtranslate(epdata["planetProperName"].toString().trimmed()));
 			}
-			treeItem->setText(EPSExoplanetMass, epdata.contains("mass") ? QString::number(epdata["mass"].toFloat(), 'f', 2) : dash);
+			treeItem->setText(EPSExoplanetMass, epdata.contains("mass") ? QString::number(epdata["mass"].toDouble(), 'f', 2) : dash);
 			treeItem->setToolTip(EPSExoplanetMass,  q_("Mass of exoplanet in Jovian masses"));
 			treeItem->setTextAlignment(EPSExoplanetMass,  Qt::AlignRight);
-			treeItem->setText(EPSExoplanetRadius, epdata.contains("radius") ? QString::number(epdata["radius"].toFloat(), 'f', 2) : dash);
+			treeItem->setText(EPSExoplanetRadius, epdata.contains("radius") ? QString::number(epdata["radius"].toDouble(), 'f', 2) : dash);
 			treeItem->setToolTip(EPSExoplanetRadius,  q_("Radius of exoplanet in Jovian radii"));
 			treeItem->setTextAlignment(EPSExoplanetRadius,  Qt::AlignRight);
-			treeItem->setText(EPSExoplanetPeriod, epdata.contains("period") ? QString::number(epdata["period"].toFloat(), 'f', 2) : dash);
+			treeItem->setText(EPSExoplanetPeriod, epdata.contains("period") ? QString::number(epdata["period"].toDouble(), 'f', 2) : dash);
 			treeItem->setToolTip(EPSExoplanetPeriod,  q_("Orbital period of exoplanet in days"));
 			treeItem->setTextAlignment(EPSExoplanetPeriod,  Qt::AlignRight);
-			treeItem->setText(EPSExoplanetSemiAxes, epdata.contains("semiAxis") ? QString::number(epdata["semiAxis"].toFloat(), 'f', 4) : dash);
+			treeItem->setText(EPSExoplanetSemiAxes, epdata.contains("semiAxis") ? QString::number(epdata["semiAxis"].toDouble(), 'f', 4) : dash);
 			treeItem->setToolTip(EPSExoplanetSemiAxes,  q_("Semi-major axis of orbit in astronomical units"));
 			treeItem->setTextAlignment(EPSExoplanetSemiAxes,  Qt::AlignRight);
-			treeItem->setText(EPSExoplanetEccentricity, epdata.contains("eccentricity") ? QString::number(epdata["eccentricity"].toFloat(), 'f', 3) : dash);
+			treeItem->setText(EPSExoplanetEccentricity, epdata.contains("eccentricity") ? QString::number(epdata["eccentricity"].toDouble(), 'f', 3) : dash);
 			treeItem->setToolTip(EPSExoplanetEccentricity,  q_("Eccentricity of orbit"));
 			treeItem->setTextAlignment(EPSExoplanetEccentricity,  Qt::AlignRight);
-			treeItem->setText(EPSExoplanetInclination, epdata.contains("inclination") ? QString::number(epdata["inclination"].toFloat(), 'f', 1) : dash);
+			treeItem->setText(EPSExoplanetInclination, epdata.contains("inclination") ? QString::number(epdata["inclination"].toDouble(), 'f', 1) : dash);
 			treeItem->setToolTip(EPSExoplanetInclination,  q_("Inclination of orbit in degrees"));
 			treeItem->setTextAlignment(EPSExoplanetInclination,  Qt::AlignRight);
-			treeItem->setText(EPSExoplanetAngleDistance, epdata.contains("angleDistance") ? QString::number(epdata["angleDistance"].toFloat(), 'f', 6) : dash);
+			treeItem->setText(EPSExoplanetAngleDistance, epdata.contains("angleDistance") ? QString::number(epdata["angleDistance"].toDouble(), 'f', 6) : dash);
 			treeItem->setToolTip(EPSExoplanetAngleDistance,  q_("Angular distance from host star in arcseconds"));
 			treeItem->setTextAlignment(EPSExoplanetAngleDistance,  Qt::AlignRight);
 			treeItem->setText(EPSStarMagnitude, vmag < 98.f ? QString::number(vmag, 'f', 2) : dash);
