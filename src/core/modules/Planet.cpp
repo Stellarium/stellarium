@@ -4462,7 +4462,7 @@ Vec4d Planet::getRTSTime(const StelCore *core, const double altitude) const
 
 	double h2=StelUtils::fmodpos(Theta2-ra2, 2.*M_PI); if (h2>M_PI) h2-=2.*M_PI; // Hour angle at currentJD. This should be [-pi, pi]
 	// Find approximation of transit time
-	double JDt=currentJD-h2/(M_PI*2.)*rotRate;
+	//double JDt=currentJD-h2/(M_PI*2.)*rotRate;
 	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("h<sub>2</sub>= %1<br/>").arg(QString::number(h2, 'f', 4)));
 	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("JD<sub>t</sub>= %1<br/>").arg(QString::number(JDt, 'f', 4)));
 
