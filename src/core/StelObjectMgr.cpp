@@ -39,7 +39,7 @@
 #include <QStringList>
 #include <QSettings>
 
-StelObjectMgr::StelObjectMgr() : objectPointerVisibility(true), searchRadiusPixel(25.), distanceWeight(1.f), twilightAltitude(0.)
+StelObjectMgr::StelObjectMgr() : objectPointerVisibility(true), searchRadiusPixel(25.), distanceWeight(1.f), twilightAltitude(0.), objectAltitude(0.)
 {
 	setObjectName("StelObjectMgr");
 }
@@ -74,6 +74,7 @@ void StelObjectMgr::init()
 	Q_ASSERT(conf);
 	setFlagSelectedObjectPointer(conf->value("viewing/flag_show_selection_marker", true).toBool());
 	setTwilightAltitude(conf->value("astro/twilight_altitude", -6.).toDouble());
+	setObjectAltitude(conf->value("astro/object_altitude", 0.).toDouble());
 }
 
 void StelObjectMgr::setTwilightAltitude(double alt)
@@ -82,6 +83,15 @@ void StelObjectMgr::setTwilightAltitude(double alt)
 	{
 		twilightAltitude=alt;
 		emit twilightAltitudeChanged(alt);
+	}
+}
+
+void StelObjectMgr::setObjectAltitude(double alt)
+{
+	if (!qFuzzyCompare(alt, objectAltitude))
+	{
+		objectAltitude = alt;
+		emit objectAltitudeChanged(alt);
 	}
 }
 
@@ -107,7 +117,7 @@ void StelObjectMgr::nextRising()
 		StelCore* core = StelApp::getInstance().getCore();
 		core->addSolarDays(1.0);
 		core->update(0);
-		Vec4d rts = selected[0]->getRTSTime(core);
+		Vec4d rts = selected[0]->getRTSTime(core, objectAltitude);
 		if (rts[3]>-1000.)
 			core->setJD(rts[0]);
 	}
@@ -121,7 +131,7 @@ void StelObjectMgr::nextSetting()
 		StelCore* core = StelApp::getInstance().getCore();
 		core->addSolarDays(1.0);
 		core->update(0);
-		Vec4d rts = selected[0]->getRTSTime(core);
+		Vec4d rts = selected[0]->getRTSTime(core, objectAltitude);
 		if (rts[3]>-1000.)
 			core->setJD(rts[2]);
 	}
@@ -149,7 +159,7 @@ void StelObjectMgr::previousRising()
 		StelCore* core = StelApp::getInstance().getCore();
 		core->addSolarDays(-1.0);
 		core->update(0);
-		Vec4d rts = selected[0]->getRTSTime(core);
+		Vec4d rts = selected[0]->getRTSTime(core, objectAltitude);
 		if (rts[3]>-1000.)
 			core->setJD(rts[0]);
 	}
@@ -163,7 +173,7 @@ void StelObjectMgr::previousSetting()
 		StelCore* core = StelApp::getInstance().getCore();
 		core->addSolarDays(-1.0);
 		core->update(0);
-		Vec4d rts = selected[0]->getRTSTime(core);
+		Vec4d rts = selected[0]->getRTSTime(core, objectAltitude);
 		if (rts[3]>-1000.)
 			core->setJD(rts[2]);
 	}
@@ -187,7 +197,7 @@ void StelObjectMgr::todayRising()
 	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
 	{
 		StelCore* core = StelApp::getInstance().getCore();
-		Vec4d rts = selected[0]->getRTSTime(core);
+		Vec4d rts = selected[0]->getRTSTime(core, objectAltitude);
 		if (rts[3]>-1000.)
 			core->setJD(rts[0]);
 	}
@@ -199,7 +209,7 @@ void StelObjectMgr::todaySetting()
 	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
 	{
 		StelCore* core = StelApp::getInstance().getCore();
-		Vec4d rts = selected[0]->getRTSTime(core);
+		Vec4d rts = selected[0]->getRTSTime(core, objectAltitude);
 		if (rts[3]>-1000.)
 			core->setJD(rts[2]);
 	}
@@ -790,8 +800,6 @@ QVariantMap StelObjectMgr::getObjectInfo(const StelObjectP obj)
 	}
 	return map;
 }
-
-
 
 void StelObjectMgr::setExtraInfoString(const StelObject::InfoStringGroup& flags, const QString &str)
 {

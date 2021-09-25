@@ -38,6 +38,7 @@ class StelObjectMgr : public StelModule
 {
 	Q_OBJECT
 	Q_PROPERTY(double twilightAltitude READ getTwilightAltitude WRITE setTwilightAltitude NOTIFY twilightAltitudeChanged)
+	Q_PROPERTY(double objectAltitude READ getObjectAltitude WRITE setObjectAltitude NOTIFY objectAltitudeChanged)
 public:
 	StelObjectMgr();
 	virtual ~StelObjectMgr() Q_DECL_OVERRIDE;
@@ -153,6 +154,10 @@ public slots:
 	void setTwilightAltitude(double alt);
 	double getTwilightAltitude() const {return twilightAltitude;}
 
+	//! set object altitude [degrees]
+	void setObjectAltitude(double alt);
+	double getObjectAltitude() const {return objectAltitude;}
+
 	//! Set simulation time to the time of next transit of selected object
 	void nextTransit();
 	//! Set simulation time to the time of previous transit of selected object
@@ -228,8 +233,11 @@ signals:
 	//! @param action define if the user requested that the objects are added to the selection or just replace it
 	void selectedObjectChanged(StelModule::StelModuleSelectAction);
 
-	//! Signal that the configurable twilight altitude for the sun has changed.
+	//! Signal that the configurable twilight altitude for the Sun has changed.
 	void twilightAltitudeChanged(double alt);
+
+	//! Signal that the configurable object altitude finder value has changed.
+	void objectAltitudeChanged(double alt);
 
 private:
 	// The list of StelObjectModule that are referenced in Stellarium
@@ -255,8 +263,11 @@ private:
 	//! Weight of the distance factor when choosing the best object to select.
 	float distanceWeight;
 
-	//! configurable altitude for the sun for "goto next twilight" actions
+	//! configurable altitude for the Sun for "goto next twilight" actions
 	double twilightAltitude;
+
+	//! configurable rise/set altitude
+	double objectAltitude;
 
 	//! Location for additional object info that can be set for special purposes (at least for debugging, but maybe others), even via scripting.
 	//! Modules are allowed to add new strings to be displayed in the various getInfoString() methods of subclasses.

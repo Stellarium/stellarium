@@ -4382,6 +4382,8 @@ Vec4d Planet::getRTSTime(const StelCore *core, const double altitude) const
 
 	//StelObjectMgr* omgr=GETSTELMODULE(StelObjectMgr);
 	double ho = 0.;
+
+	// include semidiameter SD
 	if ( (getEnglishName()=="Moon") && (loc.planetName=="Earth")) // && core->getUseTopocentricCoordinates())
 		//ho = +0.7275*asin(6378.14/(eclipticPos.length()*AU)); // horizon parallax factor. This is needed for tabulations, but we must do something else.
 		//ho = -0.25*asin(6378.14/(eclipticPos.length()*AU)); // horizon parallax factor.
@@ -4389,16 +4391,22 @@ Vec4d Planet::getRTSTime(const StelCore *core, const double altitude) const
 	else if (getEnglishName()=="Sun")
 		ho = - getAngularSize(core) * M_PI_180; // semidiameter; Canonical value 16', but this is accurate even from other planets...
 
+	// include atmospheric refraction
 	if (core->getSkyDrawer()->getFlagHasAtmosphere())
 	{
-		// canonical" refraction at horizon is -34'. Replace by pressure-dependent value here!
+		// canonical" refraction at horizon is -34'. Replace by pressure-dependent value here! TODO
 		Refraction refraction=core->getSkyDrawer()->getRefraction();
 		Vec3d zeroAlt(1.0,0.0,0.0);
 		refraction.backward(zeroAlt);
 		ho += asin(zeroAlt[2]);
 	}
+
+	// include desired altitude 
+	// XXX or OVERWRITE ? in that case, previous computations should be skipped!
+	// otherwise, altitude is added and documentation is to be adapted (eg "altitude ABOVE horizon, after including SD and refraction")
 	if (altitude != 0.)
-		ho = altitude*M_PI_180; // Not sure if we use refraction for off-zero settings?
+		ho += altitude*M_PI_180; // Not sure if we use refraction for off-zero settings?
+	
 	const double phi = static_cast<double>(loc.latitude) * M_PI_180;
 	const double L = static_cast<double>(loc.longitude) * M_PI_180; // OUR longitude. Meeus has it reversed
 	PlanetP obsPlanet = core->getCurrentPlanet();

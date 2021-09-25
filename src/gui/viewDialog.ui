@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>993</width>
-    <height>659</height>
+    <width>1335</width>
+    <height>767</height>
    </rect>
   </property>
   <property name="font">
@@ -384,23 +384,17 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="8" column="0">
-              <layout class="QHBoxLayout" name="twilightFinderLayout">
+             <item row="1" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_zodiacalLight">
                <item>
-                <widget class="QLabel" name="twilightLabel">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
+                <widget class="QCheckBox" name="zodiacalLightCheckBox">
                  <property name="text">
-                  <string>Solar altitude for Twilight Finder:</string>
+                  <string>Zodiacal Light brightness:</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QDoubleSpinBox" name="twilightAltitudeDoubleSpinBox">
+                <widget class="QDoubleSpinBox" name="zodiacalLightBrightnessDoubleSpinBox">
                  <property name="maximumSize">
                   <size>
                    <width>75</width>
@@ -413,14 +407,14 @@
                  <property name="decimals">
                   <number>2</number>
                  </property>
-                 <property name="minimum">
-                  <double>-20.000000000000000</double>
-                 </property>
                  <property name="maximum">
-                  <double>0.000000000000000</double>
+                  <double>10.000000000000000</double>
                  </property>
                  <property name="singleStep">
                   <double>0.100000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>1.000000000000000</double>
                  </property>
                 </widget>
                </item>
@@ -461,6 +455,84 @@
                  </property>
                  <property name="text">
                   <string>Refraction/Extinction settings...</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="8" column="0">
+              <layout class="QHBoxLayout" name="twilightFinderLayout">
+               <item>
+                <widget class="QLabel" name="twilightLabel">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>Solar altitude for Twilight Finder:</string>
+                 </property>
+                 <property name="buddy">
+                  <cstring>twilightAltitudeDoubleSpinBox</cstring>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="twilightAltitudeDoubleSpinBox">
+                 <property name="maximumSize">
+                  <size>
+                   <width>75</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="decimals">
+                  <number>2</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-20.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>0.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.100000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="object_alt_spacer">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QLabel" name="object_alt_label">
+                 <property name="text">
+                  <string>Object altitude:</string>
+                 </property>
+                 <property name="buddy">
+                  <cstring>objectAltitudeDoubleSpinbox</cstring>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="objectAltitudeDoubleSpinbox">
+                 <property name="minimum">
+                  <double>-90.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>90.000000000000000</double>
                  </property>
                 </widget>
                </item>
@@ -528,19 +600,6 @@
                 </spacer>
                </item>
               </layout>
-             </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="adaptationCheckbox">
-               <property name="toolTip">
-                <string>Dim faint stars when a very bright object is visible</string>
-               </property>
-               <property name="text">
-                <string>Dynamic eye adaptation</string>
-               </property>
-               <property name="checked">
-                <bool>false</bool>
-               </property>
-              </widget>
              </item>
              <item row="11" column="0">
               <spacer name="verticalSpacer_8">
@@ -650,6 +709,19 @@
                </item>
               </layout>
              </item>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="adaptationCheckbox">
+               <property name="toolTip">
+                <string>Dim faint stars when a very bright object is visible</string>
+               </property>
+               <property name="text">
+                <string>Dynamic eye adaptation</string>
+               </property>
+               <property name="checked">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
              <item row="0" column="0">
               <layout class="QHBoxLayout" name="horizontalLayout_milkyWay">
                <item>
@@ -706,42 +778,6 @@
                  </property>
                  <property name="singleStep">
                   <double>0.100000000000000</double>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="1" column="0">
-              <layout class="QHBoxLayout" name="horizontalLayout_zodiacalLight">
-               <item>
-                <widget class="QCheckBox" name="zodiacalLightCheckBox">
-                 <property name="text">
-                  <string>Zodiacal Light brightness:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QDoubleSpinBox" name="zodiacalLightBrightnessDoubleSpinBox">
-                 <property name="maximumSize">
-                  <size>
-                   <width>75</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="decimals">
-                  <number>2</number>
-                 </property>
-                 <property name="maximum">
-                  <double>10.000000000000000</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>0.100000000000000</double>
-                 </property>
-                 <property name="value">
-                  <double>1.000000000000000</double>
                  </property>
                 </widget>
                </item>
@@ -5160,12 +5196,12 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
