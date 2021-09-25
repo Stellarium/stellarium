@@ -38,7 +38,7 @@ class StelObjectMgr : public StelModule
 {
 	Q_OBJECT
 	Q_PROPERTY(double twilightAltitude READ getTwilightAltitude WRITE setTwilightAltitude NOTIFY twilightAltitudeChanged)
-	Q_PROPERTY(double objectAltitude READ getObjectAltitude WRITE setObjectAltitude NOTIFY objectAltitudeChanged)
+	Q_PROPERTY(double horizonAltitude READ getHorizonAltitude WRITE setHorizonAltitude NOTIFY horizonAltitudeChanged)
 public:
 	StelObjectMgr();
 	virtual ~StelObjectMgr() Q_DECL_OVERRIDE;
@@ -154,9 +154,9 @@ public slots:
 	void setTwilightAltitude(double alt);
 	double getTwilightAltitude() const {return twilightAltitude;}
 
-	//! set object altitude [degrees]
-	void setObjectAltitude(double alt);
-	double getObjectAltitude() const {return objectAltitude;}
+	//! set horizon altitude [degrees]
+	void setHorizonAltitude(double alt);
+	double getHorizonAltitude() const {return horizonAltitude;}
 
 	//! Set simulation time to the time of next transit of selected object
 	void nextTransit();
@@ -237,7 +237,7 @@ signals:
 	void twilightAltitudeChanged(double alt);
 
 	//! Signal that the configurable object altitude finder value has changed.
-	void objectAltitudeChanged(double alt);
+	void horizonAltitudeChanged(double alt);
 
 private:
 	// The list of StelObjectModule that are referenced in Stellarium
@@ -267,7 +267,7 @@ private:
 	double twilightAltitude;
 
 	//! configurable rise/set altitude
-	double objectAltitude;
+	double horizonAltitude;
 
 	//! Location for additional object info that can be set for special purposes (at least for debugging, but maybe others), even via scripting.
 	//! Modules are allowed to add new strings to be displayed in the various getInfoString() methods of subclasses.

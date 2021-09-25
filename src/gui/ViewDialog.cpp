@@ -180,7 +180,7 @@ void ViewDialog::createDialogContent()
 	connectDoubleProperty(ui->zodiacalLightBrightnessDoubleSpinBox, "ZodiacalLight.intensity");
 	connectBoolProperty(ui->adaptationCheckbox, "StelSkyDrawer.flagLuminanceAdaptation");
 	connectDoubleProperty(ui->twilightAltitudeDoubleSpinBox, "StelObjectMgr.twilightAltitude");
-	connectDoubleProperty(ui->objectAltitudeDoubleSpinbox, "StelObjectMgr.objectAltitude");
+	connectDoubleProperty(ui->horizonAltitudeDoubleSpinbox, "StelObjectMgr.horizonAltitude");
 
 	// Light pollution
 	StelModule* lmgr = StelApp::getInstance().getModule("LandscapeMgr");

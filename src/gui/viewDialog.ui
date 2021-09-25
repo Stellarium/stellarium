@@ -504,7 +504,7 @@
                 </widget>
                </item>
                <item>
-                <spacer name="object_alt_spacer">
+                <spacer name="horizon_alt_spacer">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -517,17 +517,17 @@
                 </spacer>
                </item>
                <item>
-                <widget class="QLabel" name="object_alt_label">
+                <widget class="QLabel" name="horizon_alt_label">
                  <property name="text">
-                  <string>Object altitude:</string>
+                  <string>horizon altitude:</string>
                  </property>
                  <property name="buddy">
-                  <cstring>objectAltitudeDoubleSpinbox</cstring>
+                  <cstring>horizonAltitudeDoubleSpinbox</cstring>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QDoubleSpinBox" name="objectAltitudeDoubleSpinbox">
+                <widget class="QDoubleSpinBox" name="horizonAltitudeDoubleSpinbox">
                  <property name="minimum">
                   <double>-90.000000000000000</double>
                  </property>
