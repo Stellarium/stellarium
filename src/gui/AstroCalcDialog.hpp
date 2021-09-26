@@ -351,7 +351,7 @@ private:
 	void prepareAxesAndGraph();
 	void prepareAziVsTimeAxesAndGraph();
 	void prepareXVsTimeAxesAndGraph();
-	void prepareMonthlyEleveationAxesAndGraph();
+	void prepareMonthlyElevationAxesAndGraph();
 	void prepareDistanceAxesAndGraph();
 	void prepareAngularDistanceAxesAndGraph();
 	//! Populates the drop-down list of time intervals for WUT tool.
@@ -377,7 +377,7 @@ private:
 	static QPair<QString, QString> getStringCoordinates(const Vec3d coord, const bool horizontal, const bool southAzimuth, const bool decimalDegrees);
 	void fillWUTTable(QString objectName, QString designation, float magnitude, Vec4d RTSTime,
 					  double maxElevation, double angularSize, QString constellation, bool decimalDegrees = false);
-	void fillCelestialPositionTable(QString objectName, QString RA, QString Dec, float magnitude,
+	void fillCelestialPositionTable(QString objectName, QString RA, QString Dec, double magnitude,
 					QString angularSize, QString angularSizeToolTip, QString extraData,
 					QString extraDataToolTip, QString transitTime, QString maxElevation,
 					QString sElongation, QString objectType);
