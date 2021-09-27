@@ -134,11 +134,11 @@ AstroCalcDialog::AstroCalcDialog(QObject* parent)
 	propMgr = StelApp::getInstance().getStelPropertyManager();
 	localeMgr = &StelApp::getInstance().getLocaleMgr();
 	conf = StelApp::getInstance().getSettings();
-	ephemerisHeader.clear();
-	phenomenaHeader.clear();
-	positionsHeader.clear();
-	wutHeader.clear();
-	transitHeader.clear();
+	Q_ASSERT(ephemerisHeader.isEmpty());
+	Q_ASSERT(phenomenaHeader.isEmpty());
+	Q_ASSERT(positionsHeader.isEmpty());
+	Q_ASSERT(wutHeader.isEmpty());
+	Q_ASSERT(transitHeader.isEmpty());
 }
 
 AstroCalcDialog::~AstroCalcDialog()
@@ -1661,7 +1661,7 @@ void AstroCalcDialog::generateEphemeris()
 	const bool allNakedEyePlanets = (ui->allNakedEyePlanetsCheckBox->isChecked() && cplanet==solarSystem->getEarth());
 
 	QList<PlanetP> celestialObjects;
-	celestialObjects.clear();
+	Q_ASSERT(celestialObjects.isEmpty());
 
 	int n = 1;
 	if (allNakedEyePlanets)
@@ -3684,17 +3684,17 @@ void AstroCalcDialog::calculatePhenomena()
 		return;
 
 	QList<PlanetP> objects;
-	objects.clear();
+	Q_ASSERT(objects.isEmpty());
 	QList<PlanetP> allObjects = solarSystem->getAllPlanets();
 
 	QList<NebulaP> dso;
-	dso.clear();
+	Q_ASSERT(dso.isEmpty());
 	QVector<NebulaP> allDSO = dsoMgr->getAllDeepSkyObjects();
 
 	QList<StelObjectP> star, doubleStar, variableStar;
-	star.clear();
-	doubleStar.clear();
-	variableStar.clear();
+	Q_ASSERT(star.isEmpty());
+	Q_ASSERT(doubleStar.isEmpty());
+	Q_ASSERT(variableStar.isEmpty());
 	QList<StelObjectP> hipStars = starMgr->getHipparcosStars();
 	QList<StelObjectP> carbonStars = starMgr->getHipparcosCarbonStars();
 	QList<StelObjectP> bariumStars = starMgr->getHipparcosBariumStars();
@@ -4481,7 +4481,7 @@ QMap<double, double> AstroCalcDialog::findClosestApproach(PlanetP& object1, Stel
 	}
 
 	QStringList objects;
-	objects.clear();
+	Q_ASSERT(objects.isEmpty());
 	objects.append(object1->getEnglishName());
 	objects.append(object2->getEnglishName());
 	double step0 = findInitialStep(startJD, stopJD, objects);
@@ -4588,7 +4588,7 @@ QMap<double, double> AstroCalcDialog::findGreatestElongationApproach(PlanetP& ob
 	QPair<double, double> extremum;
 
 	QStringList objects;
-	objects.clear();
+	Q_ASSERT(objects.isEmpty());
 	objects.append(object1->getEnglishName());
 	objects.append(object2->getEnglishName());
 	double step0 = findInitialStep(startJD, stopJD, objects);
@@ -4678,7 +4678,7 @@ QMap<double, double> AstroCalcDialog::findStationaryPointApproach(PlanetP &objec
 	QPair<double, double> extremum;
 
 	QStringList objects;
-	objects.clear();
+	Q_ASSERT(objects.isEmpty());
 	objects.append(object1->getEnglishName());
 	step0 = findInitialStep(startJD, stopJD, objects);
 	step = step0;
@@ -4840,7 +4840,7 @@ QMap<double, double> AstroCalcDialog::findOrbitalPointApproach(PlanetP &object1,
 	QPair<double, double> extremum;
 
 	QStringList objects;
-	objects.clear();
+	Q_ASSERT(objects.isEmpty());
 	objects.append(object1->getEnglishName());
 	double step0 = findInitialStep(startJD, stopJD, objects);
 	double step = step0;
