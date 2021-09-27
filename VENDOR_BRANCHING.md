@@ -49,8 +49,10 @@ For prolific vendors (offering many independent tools/data), it might be necessa
 Now it becomes easy to update external information. Whenever the external information changes:
 
 1. checkout the vendor branch
-1. perform a fresh **vendor drop**: update the vendor branch version of the vendor directory (typically a complete delete of the directory content followed by an explode/unzip/untar/...)
-1. commit
+1. perform a fresh **vendor drop**: 
+	1. empty the vendor folder ; you can use this: ``git ls-files -z | xargs -0 rm -f``
+	2. explode/unzip/untar/...
+1. commit: ``git add -A && git commit``  (see ``git help git-rm`` for details, search for "vendor".)
 1. vendor tag the vendor branch
 1. merge the updated vendor branch to ``master`` (or via an intermediate feature/bugfix branch, often in order to update local stuff)
 1. deal with conflicts when needed. such conflicts are expected to arise when the vendor changed something, and that was also changed locally
