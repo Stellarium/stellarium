@@ -932,7 +932,12 @@ double AstroCalcDialog::computeMaxElevation(StelObjectP obj)
 	const double lat = static_cast<double>(core->getCurrentLocation().latitude);
 	StelUtils::rectToSphe(&ra, &dec, obj->getEquinoxEquatorialPos(core));
 	dec*=M_180_PI;
-	return (90. - lat + dec)*M_PI_180;
+	if (lat>=0.)
+		// star between zenith and southern horizon, or between N pole and zenith
+		return (dec<=lat) ? (90. - lat + dec) : (90. + lat - dec)  *M_PI_180;
+	else
+		// star between zenith and north horizon, or between S pole and zenith
+		return (dec>=lat) ? (90. + lat - dec) : (90. - lat + dec) * M_PI_180;
 }
 
 void AstroCalcDialog::populateCelestialCategoryList()
