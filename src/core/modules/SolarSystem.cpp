@@ -1133,11 +1133,10 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			J2000NPoleDE1,
 			J2000NPoleW0,
 			J2000NPoleW1);
-		// orbit_Period given in days, orbit_visualization_period in days. The latter should have a meaningful default.
-		newP->setSiderealPeriod(
-			pd.value(secname+"/orbit_visualization_period",
-				 fabs(pd.value(secname+"/orbit_Period",
-					       fabs(pd.value(secname+"/orbit_good", 100.).toDouble())).toDouble())).toDouble());
+		// orbit_Period or orbit_visualization_period given in days.
+		// Elliptical Kepler orbits (ecc<0.9) will replace whatever is given by a value computed on the fly.
+		newP->setSiderealPeriod(fabs(pd.value(secname+"/orbit_Period",
+						      pd.value(secname+"/orbit_visualization_period" )).toDouble()));
 
 		if (pd.contains(secname+"/tex_ring")) {
 			const float rMin = pd.value(secname+"/ring_inner_size").toFloat()/AUf;

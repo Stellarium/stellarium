@@ -1477,6 +1477,8 @@ void Planet::setRotationElements(const QString name,
 
 void Planet::setSiderealPeriod(const double siderealPeriod)
 {
+	Q_ASSERT(!qFuzzyCompare(siderealPeriod, 0.) || (orbitPtr && pType!=isObserver) || englishName=="Sun");
+
 	this->siderealPeriod = siderealPeriod;
 	if (orbitPtr && pType!=isObserver)
 	{
