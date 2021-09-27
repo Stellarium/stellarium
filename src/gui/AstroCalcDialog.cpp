@@ -536,7 +536,8 @@ void AstroCalcDialog::createDialogContent()
 	ui->angularDistanceNote->setStyleSheet(style);
 	ui->angularDistanceLimitLabel->setStyleSheet(style);	
 	//ui->angularDistanceTitle->setStyleSheet(style);
-	ui->transitNotificationLabel->setStyleSheet(style);	
+	ui->graphsNoteLabel->setStyleSheet(style);
+	ui->transitNotificationLabel->setStyleSheet(style);
 	style = "QCheckBox { color: rgb(238, 238, 238); }";
 	ui->sunAltitudeCheckBox->setStyleSheet(style);
 	ui->moonAltitudeCheckBox->setStyleSheet(style);
@@ -2878,8 +2879,9 @@ void AstroCalcDialog::prepareAxesAndGraph()
 
 void AstroCalcDialog::drawXVsTimeGraphs()
 {
-	PlanetP ssObj = solarSystem->searchByEnglishName(ui->graphsCelestialBodyComboBox->currentData().toString());
-	if (!ssObj.isNull())
+	PlanetP ssObj = solarSystem->searchByEnglishName(ui->graphsCelestialBodyComboBox->currentData().toString());	
+	// added special case - the tool is not applicable on non-Earth locations
+	if (!ssObj.isNull() && core->getCurrentPlanet()==solarSystem->getEarth())
 	{
 		// X axis - time; Y axis - altitude
 		QList<double> aX, aY, bY;
@@ -2979,6 +2981,12 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 			}
 		}
 
+		ui->graphsPlot->replot();
+	}
+	else
+	{
+		prepareXVsTimeAxesAndGraph();
+		ui->graphsPlot->clearGraphs();
 		ui->graphsPlot->replot();
 	}
 }
@@ -3271,7 +3279,7 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 	ui->graphsPlot->yAxis->setLabel(yAxis1Legend);
 	ui->graphsPlot->yAxis2->setLabel(yAxis2Legend);
 
-	int dYear = (static_cast<int>(core->getCurrentPlanet()->getSiderealPeriod()*graphsDuration) + 1) * 86400;
+	int dYear = (static_cast<int>(solarSystem->getEarth()->getSiderealPeriod()*graphsDuration) + 1) * 86400;
 	ui->graphsPlot->xAxis->setRange(0, dYear);
 	ui->graphsPlot->xAxis->setScaleType(QCPAxis::stLinear);
 	ui->graphsPlot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
@@ -3330,7 +3338,7 @@ void AstroCalcDialog::prepareMonthlyElevationAxesAndGraph()
 	ui->monthlyElevationGraph->xAxis->setLabel(xAxisStr);
 	ui->monthlyElevationGraph->yAxis->setLabel(yAxisStr);
 
-	int dYear = (static_cast<int>(core->getCurrentPlanet()->getSiderealPeriod()) + 1) * 86400;
+	int dYear = (static_cast<int>(solarSystem->getEarth()->getSiderealPeriod()) + 1) * 86400;
 	ui->monthlyElevationGraph->xAxis->setRange(0, dYear);
 	ui->monthlyElevationGraph->xAxis->setScaleType(QCPAxis::stLinear);
 	ui->monthlyElevationGraph->xAxis->setTickLabelType(QCPAxis::ltDateTime);
