@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-09-19 17:40+0700\n"
+"POT-Creation-Date: 2021-09-26 21:12+0700\n"
 "PO-Revision-Date: 2017-11-29 01:17+0000\n"
 "Last-Translator: 殳玮 孙 <itun@qq.com>, 2021\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/stellarium/teams/80998/zh_CN/)\n"
@@ -684,7 +684,7 @@ msgstr "提泰妮娅星"
 #: skycultures/translations.fab:308
 msgctxt "minor planet"
 msgid "Desdemona"
-msgstr "黛斯迪蒙娜星"
+msgstr "苔丝德蒙娜"
 
 #. TRANSLATORS: Asteroid (1162) Larissa
 #. TRANSLATORS: https://en.wikipedia.org/wiki/1162_Larissa
@@ -1894,7 +1894,6 @@ msgstr "笑翠鸟脉冲星"
 #. TRANSLATORS: Proper name of pulsar PSR J1747-2958 (Source:
 #. http://www.physics.mcgill.ca/~pulsar/pwncat_notes.html)
 #: skycultures/translations.fab:842
-#: skycultures/babylonian_mulapin/constellation_names.eng.fab:51
 msgid "Mouse"
 msgstr "老鼠脉冲星"
 
@@ -14248,7 +14247,7 @@ msgstr "章鱼的触手"
 
 #: skycultures/anutan/constellation_names.eng.fab:6
 msgid "Forward Precursor"
-msgstr " 前进的先驱者"
+msgstr " 前导"
 
 #: skycultures/anutan/constellation_names.eng.fab:7
 msgid "Adze"
@@ -14260,7 +14259,7 @@ msgstr "手杖"
 
 #: skycultures/anutan/constellation_names.eng.fab:9
 msgid "Sammara Squirrelfish"
-msgstr "转世的金鳞鱼"
+msgstr "莎姆新东洋金鳞鱼"
 
 #: skycultures/anutan/constellation_names.eng.fab:10
 msgid "Taro Plant"
@@ -14309,7 +14308,7 @@ msgstr "Taki Roto"
 
 #: skycultures/anutan/star_names.fab:14
 msgid "Middle Precursor"
-msgstr "中间的先驱者"
+msgstr "中导"
 
 #. TRANSLATORS: Anutan Name
 #: skycultures/anutan/star_names.fab:16
@@ -14359,7 +14358,7 @@ msgstr "Te Ao Toka"
 
 #: skycultures/anutan/dso_names.fab:10
 msgid "The Restrained Cloud"
-msgstr "受缚的云"
+msgstr "拘束的云"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:1
 msgid "The Two signs"
@@ -15140,9 +15139,8 @@ msgid "Great Swallow"
 msgstr "大燕子"
 
 #: skycultures/babylonian_mulapin/constellation_names.eng.fab:30
-#: skycultures/babylonian_seleucid/constellation_names.eng.fab:29
-msgid "Anunitu"
-msgstr "Anunitu女神"
+msgid "Anunitu (goddess)"
+msgstr "Anunitu (女神)"
 
 #: skycultures/babylonian_mulapin/constellation_names.eng.fab:31
 msgid "Hired Man"
@@ -15241,15 +15239,16 @@ msgid "The Great One (God Ea)"
 msgstr "大神（Ea神）"
 
 #: skycultures/babylonian_mulapin/constellation_names.eng.fab:49
-#: skycultures/babylonian_mulapin/star_names.fab:2
-#: skycultures/babylonian_seleucid/constellation_names.eng.fab:48
-#: skycultures/babylonian_seleucid/star_names.fab:2
-msgid "Star of Eridu"
-msgstr "Eridu之星"
+msgid "Asterism of Eridu"
+msgstr "Eridu星群"
 
 #: skycultures/babylonian_mulapin/constellation_names.eng.fab:50
 msgid "Goddess Ninmakh"
 msgstr "Ninmakh女神"
+
+#: skycultures/babylonian_mulapin/constellation_names.eng.fab:51
+msgid "Khabasiranu Demon"
+msgstr "恶魔Khabasiranu"
 
 #: skycultures/babylonian_mulapin/constellation_names.eng.fab:52
 msgid "Harrow"
@@ -15301,6 +15300,12 @@ msgstr "羊鱼（恶魔）"
 #: skycultures/chinese_medieval/constellation_names.eng.fab:310
 msgid "Wolf"
 msgstr "狼"
+
+#: skycultures/babylonian_mulapin/star_names.fab:2
+#: skycultures/babylonian_seleucid/constellation_names.eng.fab:48
+#: skycultures/babylonian_seleucid/star_names.fab:2
+msgid "Star of Eridu"
+msgstr "Eridu之星"
 
 #: skycultures/babylonian_mulapin/star_names.fab:3
 #: skycultures/babylonian_seleucid/star_names.fab:3
@@ -15456,6 +15461,10 @@ msgstr "方田"
 #: skycultures/babylonian_seleucid/constellation_names.eng.fab:28
 msgid "The Swallow"
 msgstr "燕子"
+
+#: skycultures/babylonian_seleucid/constellation_names.eng.fab:29
+msgid "Anunitu"
+msgstr "Anunitu女神"
 
 #: skycultures/babylonian_seleucid/constellation_names.eng.fab:30
 #: skycultures/egyptian/constellation_names.eng.fab:27
@@ -16184,7 +16193,7 @@ msgstr "Purra"
 #: skycultures/western/star_names.fab:198
 #: skycultures/western_sternenkarten/star_names.fab:198
 msgid "Unurgunite"
-msgstr "Unurgunite"
+msgstr "弧矢增二 Unurgunite"
 
 #. TRANSLATORS: Native name of the Sun in Boorong culture
 #: skycultures/boorong/planet_names.fab:2
@@ -17555,7 +17564,7 @@ msgstr "天苑"
 #: skycultures/chinese/constellation_names.eng.fab:282
 #: skycultures/chinese_medieval/constellation_names.eng.fab:146
 msgid "Celestial Keyhole"
-msgstr "天籥"
+msgstr "天龠"
 
 #: skycultures/chinese/constellation_names.eng.fab:283
 #: skycultures/chinese_medieval/constellation_names.eng.fab:12
@@ -21592,7 +21601,7 @@ msgstr "东海增四"
 #: skycultures/chinese/star_names.fab:905
 #: skycultures/chinese_contemporary/star_names.fab:928
 msgid "Song Added II"
-msgstr "宋增一"
+msgstr "宋增二"
 
 #: skycultures/chinese/star_names.fab:908
 #: skycultures/chinese_contemporary/star_names.fab:931
@@ -23177,7 +23186,7 @@ msgstr "从官二(房宿)"
 #: skycultures/chinese/star_names.fab:1320
 #: skycultures/chinese_contemporary/star_names.fab:1343
 msgid "Retinue Added I (In Room Mansion)"
-msgstr "从官三(房宿)"
+msgstr "从官增一(房宿)"
 
 #: skycultures/chinese/star_names.fab:1325
 #: skycultures/chinese_contemporary/star_names.fab:1348
@@ -25412,27 +25421,27 @@ msgstr "泣增二"
 #: skycultures/chinese/star_names.fab:1879
 #: skycultures/chinese_contemporary/star_names.fab:1902
 msgid "Jade Ornament on Ladies' Wear II"
-msgstr "璃瑜二"
+msgstr "离瑜二"
 
 #: skycultures/chinese/star_names.fab:1880
 #: skycultures/chinese_contemporary/star_names.fab:1903
 msgid "Jade Ornament on Ladies' Wear III"
-msgstr "璃瑜三"
+msgstr "离瑜三"
 
 #: skycultures/chinese/star_names.fab:1881
 #: skycultures/chinese_contemporary/star_names.fab:1904
 msgid "Jade Ornament on Ladies' Wear Added I"
-msgstr "璃瑜增一"
+msgstr "离瑜增一"
 
 #: skycultures/chinese/star_names.fab:1882
 #: skycultures/chinese_contemporary/star_names.fab:1905
 msgid "Jade Ornament on Ladies' Wear Added II"
-msgstr "璃瑜增二"
+msgstr "离瑜增二"
 
 #: skycultures/chinese/star_names.fab:1883
 #: skycultures/chinese_contemporary/star_names.fab:1906
 msgid "Jade Ornament on Ladies' Wear Added III"
-msgstr "璃瑜增三"
+msgstr "离瑜增三"
 
 #: skycultures/chinese/star_names.fab:1886
 #: skycultures/chinese_contemporary/star_names.fab:1909
@@ -51414,7 +51423,7 @@ msgstr "天苑"
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:277
 msgctxt "asterism"
 msgid "Celestial Keyhole"
-msgstr "天籥"
+msgstr "天龠"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:278
 msgctxt "asterism"
@@ -55269,33 +55278,33 @@ msgstr "天蝎座 22"
 #: skycultures/greek_farnese/constellation_names.eng.fab:1
 #: skycultures/greek_leidenAratea/constellation_names.eng.fab:1
 msgid "Small She-Bear"
-msgstr ""
+msgstr "小母熊"
 
 #: skycultures/greek_farnese/constellation_names.eng.fab:2
 #: skycultures/greek_leidenAratea/constellation_names.eng.fab:2
 msgid "Great She-Bear"
-msgstr ""
+msgstr "大母熊"
 
 #: skycultures/greek_farnese/constellation_names.eng.fab:39
 #: skycultures/greek_farnese/constellation_names.eng.fab:51
 msgid "Left Hand of the Atlas Statue"
-msgstr ""
+msgstr "阿特拉斯雕像的左手"
 
 #: skycultures/greek_farnese/constellation_names.eng.fab:50
 msgid "Right Hand of the Atlas Statue"
-msgstr ""
+msgstr "阿特拉斯雕像的右手"
 
 #: skycultures/greek_farnese/constellation_names.eng.fab:52
 msgid "special feature: unclear"
-msgstr ""
+msgstr "特点：不明"
 
 #: skycultures/greek_leidenAratea/constellation_names.eng.fab:35
 msgid "God Eridanus (River)"
-msgstr ""
+msgstr "波江之神"
 
 #: skycultures/greek_leidenAratea/constellation_names.eng.fab:38
 msgid "Procyon/ Little Dog"
-msgstr ""
+msgstr "浣熊/小狗"
 
 #: skycultures/hawaiian_starlines/constellation_names.eng.fab:1
 msgid "The Canoe Bailer of Makali`i"
@@ -58128,7 +58137,7 @@ msgstr "奎宿九 Mirach"
 #: skycultures/western_SnT/star_names.fab:8
 #: skycultures/western_sternenkarten/star_names.fab:9
 msgid "Adhil"
-msgstr "奎宿七 Adhil"
+msgstr "天大将军增一 Adhil"
 
 #: skycultures/romanian/star_names.fab:10
 #: skycultures/western/star_names.fab:246
@@ -58370,7 +58379,7 @@ msgstr "卷舌三 Menkib"
 #: skycultures/western_SnT/star_names.fab:39
 #: skycultures/western_sternenkarten/star_names.fab:508
 msgid "Beid"
-msgstr "九洲殊口二 Beid"
+msgstr "九州殊口二 Beid"
 
 #: skycultures/romanian/star_names.fab:41
 #: skycultures/western/star_names.fab:509
@@ -58378,7 +58387,7 @@ msgstr "九洲殊口二 Beid"
 #: skycultures/western_SnT/star_names.fab:40
 #: skycultures/western_sternenkarten/star_names.fab:509
 msgid "Keid"
-msgstr "九洲殊口增七 Keid"
+msgstr "九州殊口增七 Keid"
 
 #: skycultures/romanian/star_names.fab:42
 #: skycultures/western/star_names.fab:1007
@@ -59076,7 +59085,7 @@ msgstr "亢宿二 Syrma"
 #: skycultures/western_SnT/star_names.fab:144
 #: skycultures/western_sternenkarten/star_names.fab:128
 msgid "Seginus"
-msgstr "招搖 Seginus"
+msgstr "招摇 Seginus"
 
 #: skycultures/romanian/star_names.fab:139
 msgid "Rigil Kent"
@@ -59102,7 +59111,7 @@ msgstr "玄戈增二 Merga"
 #: skycultures/western/star_names.fab:1120
 #: skycultures/western_sternenkarten/star_names.fab:1120
 msgid "Kocab"
-msgstr "帝(北极二) Kocab"
+msgstr "帝 北极二 Kocab"
 
 #: skycultures/romanian/star_names.fab:143
 #: skycultures/western/star_names.fab:667
@@ -59486,7 +59495,7 @@ msgstr "天渊三 Rukbat"
 #: skycultures/western_SnT/star_names.fab:198
 #: skycultures/western_sternenkarten/star_names.fab:404
 msgid "Albireo"
-msgstr "辇道增七"
+msgstr "辇道增七 Albireo"
 
 #: skycultures/romanian/star_names.fab:192
 #: skycultures/western/star_names.fab:886
@@ -59680,7 +59689,7 @@ msgstr "危宿一 Sadalmelik"
 #: skycultures/western_sternenkarten/star_names.fab:275
 #: skycultures/western_sternenkarten/star_names.fab:562
 msgid "Alnair"
-msgstr "鹤一 Alnair"
+msgstr "Alnair"
 
 #: skycultures/romanian/star_names.fab:217
 #: skycultures/western/star_names.fab:796
@@ -59718,7 +59727,7 @@ msgstr "克虑格60"
 #: skycultures/western_SnT/star_names.fab:228
 #: skycultures/western_sternenkarten/star_names.fab:31
 msgid "Situla"
-msgstr "女宿四 Situla"
+msgstr "虚梁三 Situla"
 
 #: skycultures/romanian/star_names.fab:222
 #: skycultures/western/star_names.fab:794
@@ -60415,7 +60424,7 @@ msgstr "Alamak"
 #: skycultures/western/star_names.fab:10
 #: skycultures/western_sternenkarten/star_names.fab:10
 msgid "Nembus"
-msgstr "天大将军三 Almach"
+msgstr "天大将军三 Nembus"
 
 #: skycultures/western/star_names.fab:13
 #: skycultures/western_sternenkarten/star_names.fab:13
@@ -60455,7 +60464,7 @@ msgstr "Alsad"
 #: skycultures/western/star_names.fab:34
 #: skycultures/western_sternenkarten/star_names.fab:34
 msgid "Hydor"
-msgstr "壁垒阵七 Hydor"
+msgstr "垒壁阵七 Hydor"
 
 #: skycultures/western/star_names.fab:35
 #: skycultures/western_sternenkarten/star_names.fab:35
@@ -60471,17 +60480,17 @@ msgstr "Albulaan"
 #: skycultures/western/star_names.fab:37
 #: skycultures/western_sternenkarten/star_names.fab:37
 msgid "Albulan I"
-msgstr "女宿一 Albulan I"
+msgstr "女宿二 Albulan I"
 
 #: skycultures/western/star_names.fab:39
 #: skycultures/western_sternenkarten/star_names.fab:39
 msgid "Bunda"
-msgstr "天垒城一 Albulan I"
+msgstr "天垒城一 Bunda"
 
 #: skycultures/western/star_names.fab:40
 #: skycultures/western_sternenkarten/star_names.fab:40
 msgid "Sadalmulk"
-msgstr "盖屋一"
+msgstr "盖屋一 Sadalmulk"
 
 #: skycultures/western/star_names.fab:41
 #: skycultures/western_sternenkarten/star_names.fab:41
@@ -60564,7 +60573,7 @@ msgstr "吴越增一 Deneb al Okab Borealis"
 #: skycultures/western/star_names.fab:64
 #: skycultures/western_sternenkarten/star_names.fab:64
 msgid "Almizan I"
-msgstr "右旗二  Almizan I"
+msgstr "右旗三  Almizan I"
 
 #: skycultures/western/star_names.fab:65
 #: skycultures/western_sternenkarten/star_names.fab:65
@@ -60723,17 +60732,17 @@ msgstr "五车四 Mahasim"
 #: skycultures/western/star_names.fab:109
 #: skycultures/western_sternenkarten/star_names.fab:109
 msgid "Alhiba II"
-msgstr "咸池二 Alhiba II"
+msgstr "咸池三 Alhiba II"
 
 #: skycultures/western/star_names.fab:110
 #: skycultures/western_sternenkarten/star_names.fab:110
 msgid "Alhiba I"
-msgstr "天湟五 Alhiba I"
+msgstr "天潢五 Alhiba I"
 
 #: skycultures/western/star_names.fab:111
 #: skycultures/western_sternenkarten/star_names.fab:111
 msgid "Alhiba III"
-msgstr "天湟四 Alhiba III"
+msgstr "天潢四 Alhiba III"
 
 #: skycultures/western/star_names.fab:112
 #: skycultures/western_sternenkarten/star_names.fab:112
@@ -60860,7 +60869,7 @@ msgstr "Aulad Althiba"
 #: skycultures/western/star_names.fab:147
 #: skycultures/western_sternenkarten/star_names.fab:147
 msgid "Ceginus"
-msgstr "Ceginus"
+msgstr "七公增十 Ceginus"
 
 #: skycultures/western/star_names.fab:148
 #: skycultures/western_sternenkarten/star_names.fab:148
@@ -60957,7 +60966,7 @@ msgstr "Mirza"
 #: skycultures/western_sternenkarten/star_names.fab:185
 #: skycultures/western_sternenkarten/star_names.fab:195
 msgid "Isis"
-msgstr "Isis"
+msgstr "天狼增三 Isis"
 
 #: skycultures/western/star_names.fab:187
 #: skycultures/western_sternenkarten/star_names.fab:187
@@ -61140,7 +61149,7 @@ msgstr "Rucbar"
 #: skycultures/western/star_names.fab:249
 #: skycultures/western_sternenkarten/star_names.fab:249
 msgid "Achird"
-msgstr "王良三 Ksora"
+msgstr "王良三 Achird"
 
 #: skycultures/western/star_names.fab:250
 #: skycultures/western/star_names.fab:252
@@ -61193,7 +61202,7 @@ msgstr "附路 Fulu"
 #: skycultures/western_sternenkarten/star_names.fab:260
 #: skycultures/western_sternenkarten/star_names.fab:298
 msgid "Castula"
-msgstr "造父五 Castula"
+msgstr "Castula"
 
 #: skycultures/western/star_names.fab:261
 #: skycultures/western_sternenkarten/star_names.fab:261
@@ -61241,12 +61250,12 @@ msgstr "Agena"
 #: skycultures/western_SnT/star_names.fab:125
 #: skycultures/western_sternenkarten/star_names.fab:273
 msgid "Muhlifain"
-msgstr "库楼七"
+msgstr "库楼七 Muhlifai"
 
 #: skycultures/western/star_names.fab:276
 #: skycultures/western_sternenkarten/star_names.fab:276
 msgid "Baten Kentaurus"
-msgstr "Baten Kentaurus"
+msgstr "库楼一 Baten Kentaurus"
 
 #: skycultures/western/star_names.fab:277
 #: skycultures/western_sternenkarten/star_names.fab:277
@@ -61306,7 +61315,7 @@ msgstr "Kalbalrai"
 #: skycultures/western/star_names.fab:300
 #: skycultures/western_sternenkarten/star_names.fab:300
 msgid "Kabalfird"
-msgstr "天构四 Kabalfird"
+msgstr "天钩四 Kabalfird"
 
 #: skycultures/western/star_names.fab:301
 #: skycultures/western_sternenkarten/star_names.fab:301
@@ -61510,7 +61519,7 @@ msgstr "郎位八 Kissin"
 #: skycultures/western/star_names.fab:357
 #: skycultures/western_sternenkarten/star_names.fab:357
 msgid "Al Dafirah"
-msgstr "郎位一"
+msgstr "郎位一 Al Dafirah"
 
 #: skycultures/western/star_names.fab:359
 #: skycultures/western_sternenkarten/star_names.fab:359
@@ -61878,7 +61887,7 @@ msgstr "天厨二 Alsafi"
 #: skycultures/western/star_names.fab:470
 #: skycultures/western_sternenkarten/star_names.fab:470
 msgid "Dziban"
-msgstr "Dziban"
+msgstr "女史增一 Dziban"
 
 #: skycultures/western/star_names.fab:471
 #: skycultures/western_sternenkarten/star_names.fab:471
@@ -61888,7 +61897,7 @@ msgstr "Dziban I"
 #: skycultures/western/star_names.fab:472
 #: skycultures/western_sternenkarten/star_names.fab:472
 msgid "Dziban II"
-msgstr "Dziban II"
+msgstr "女史增一 Dziban II"
 
 #: skycultures/western/star_names.fab:473
 #: skycultures/western_sternenkarten/star_names.fab:473
@@ -62197,7 +62206,7 @@ msgstr "Al Na'ir"
 #: skycultures/western/star_names.fab:564
 #: skycultures/western_sternenkarten/star_names.fab:564
 msgid "Al Nair"
-msgstr "Al Nair"
+msgstr "鹤一 Al Nair"
 
 #: skycultures/western/star_names.fab:565
 #: skycultures/western_sternenkarten/star_names.fab:565
@@ -62321,7 +62330,7 @@ msgstr "柳宿四 Minazal IV"
 #: skycultures/western/star_names.fab:602
 #: skycultures/western_sternenkarten/star_names.fab:602
 msgid "Minchir"
-msgstr "Minchir"
+msgstr "柳宿二 Minchir"
 
 #: skycultures/western/star_names.fab:603
 #: skycultures/western_sternenkarten/star_names.fab:603
@@ -62470,7 +62479,7 @@ msgstr "Minkarasad"
 #: skycultures/western/star_names.fab:644
 #: skycultures/western_sternenkarten/star_names.fab:644
 msgid "Zubrah"
-msgstr "五诸侯增七 Zubrah"
+msgstr "虎贲 Zubrah"
 
 #: skycultures/western/star_names.fab:645
 #: skycultures/western_sternenkarten/star_names.fab:645
@@ -62510,7 +62519,7 @@ msgstr "厕四 Arsh al Jauzah"
 #: skycultures/western/star_names.fab:666
 #: skycultures/western_sternenkarten/star_names.fab:666
 msgid "Zubenelgenubi I"
-msgstr "氐宿一Zubenelgenubi I"
+msgstr "氐宿增七 Zubenelgenubi I"
 
 #: skycultures/western/star_names.fab:668
 #: skycultures/western_sternenkarten/star_names.fab:668
@@ -62525,7 +62534,7 @@ msgstr "Zuben el Genubi"
 #: skycultures/western/star_names.fab:670
 #: skycultures/western_sternenkarten/star_names.fab:670
 msgid "Zubenelgenubi II"
-msgstr "氐宿增七 Zubenelgenubi II"
+msgstr "氐宿一 Zubenelgenubi II"
 
 #: skycultures/western/star_names.fab:673
 #: skycultures/western_sternenkarten/star_names.fab:673
@@ -62617,7 +62626,7 @@ msgstr "Shaukah"
 #: skycultures/western/star_names.fab:693
 #: skycultures/western_sternenkarten/star_names.fab:693
 msgid "Dolones X"
-msgstr "座旗三 Dolones X"
+msgstr "座旗二 Dolones X"
 
 #: skycultures/western/star_names.fab:696
 #: skycultures/western_rey/star_names.fab:21
@@ -62650,7 +62659,7 @@ msgstr "Sulaphat"
 #: skycultures/western/star_names.fab:703
 #: skycultures/western_sternenkarten/star_names.fab:703
 msgid "Aladfar"
-msgstr "辇道二"
+msgstr "辇道二 Aladfar"
 
 #: skycultures/western/star_names.fab:704
 #: skycultures/western_sternenkarten/star_names.fab:704

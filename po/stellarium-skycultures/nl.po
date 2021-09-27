@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-09-19 17:40+0700\n"
+"POT-Creation-Date: 2021-09-26 21:12+0700\n"
 "PO-Revision-Date: 2017-11-29 01:17+0000\n"
 "Last-Translator: alexander duytschaever <alex.a.nder.duy.tschaever@gmail.com>, 2021\n"
 "Language-Team: Dutch (https://www.transifex.com/stellarium/teams/80998/nl/)\n"
@@ -1891,7 +1891,6 @@ msgstr "Kookaburra"
 #. TRANSLATORS: Proper name of pulsar PSR J1747-2958 (Source:
 #. http://www.physics.mcgill.ca/~pulsar/pwncat_notes.html)
 #: skycultures/translations.fab:842
-#: skycultures/babylonian_mulapin/constellation_names.eng.fab:51
 msgid "Mouse"
 msgstr "Muis"
 
@@ -11493,12 +11492,12 @@ msgstr "Sterren op de vierhoek in het hooofd: die aan het eind van de kaak"
 #: skycultures/al-sufi/star_names.fab:648
 #: skycultures/greek_almagest/star_names.fab:531
 msgid "The one touching the nostrils"
-msgstr "Degene die de neusgaten aanraakt"
+msgstr "Die die de neusgaten aanraakt"
 
 #: skycultures/al-sufi/star_names.fab:649
 #: skycultures/greek_almagest/star_names.fab:533
 msgid "The one in the temple"
-msgstr "Degene in de tempel"
+msgstr "Die in de tempel"
 
 #: skycultures/al-sufi/star_names.fab:650
 #: skycultures/greek_almagest/star_names.fab:535
@@ -11540,7 +11539,7 @@ msgstr "De ster achter die in de hand van Ophiuchus"
 #: skycultures/al-sufi/star_names.fab:659
 #: skycultures/greek_almagest/star_names.fab:553
 msgid "The one after the back of the right thigh of Ophiuchus"
-msgstr "Degene achter de achterkant van de dij van Ophiuchus"
+msgstr "Die achter de achterkant van de dij van Ophiuchus"
 
 #: skycultures/al-sufi/star_names.fab:660
 msgid "The southernmost of the two to the rear of the latter"
@@ -11554,7 +11553,7 @@ msgstr "Die achter de rechterhand [van Ophiuchus], op de bocht in de staart"
 #: skycultures/al-sufi/star_names.fab:663
 #: skycultures/greek_almagest/star_names.fab:561
 msgid "The one to the rear of this, likewise on the tail"
-msgstr "Degene achter dit, gelijk aan de staart"
+msgstr "Die achter dit, gelijk aan de staart"
 
 #: skycultures/al-sufi/star_names.fab:664
 #: skycultures/al-sufi/star_names.fab:1851
@@ -11933,12 +11932,12 @@ msgstr "De noordelijkste van de vier sterren in de afsnijding"
 #: skycultures/al-sufi/star_names.fab:940
 #: skycultures/greek_almagest/star_names.fab:766
 msgid "The one close by this"
-msgstr "Degene in de buurt van dit"
+msgstr "Die in de buurt van dit"
 
 #: skycultures/al-sufi/star_names.fab:941
 #: skycultures/greek_almagest/star_names.fab:768
 msgid "The one close again to the latter"
-msgstr "Degene die weer dicht bij de laatste staat"
+msgstr "Die die weer dicht bij de laatste staat"
 
 #: skycultures/al-sufi/star_names.fab:942
 msgid "The southernmost of the four"
@@ -15320,9 +15319,8 @@ msgid "Great Swallow"
 msgstr "Grote zwaluw"
 
 #: skycultures/babylonian_mulapin/constellation_names.eng.fab:30
-#: skycultures/babylonian_seleucid/constellation_names.eng.fab:29
-msgid "Anunitu"
-msgstr "Anunitu"
+msgid "Anunitu (goddess)"
+msgstr ""
 
 #: skycultures/babylonian_mulapin/constellation_names.eng.fab:31
 msgid "Hired Man"
@@ -15421,15 +15419,16 @@ msgid "The Great One (God Ea)"
 msgstr "De grootste (God Ea)"
 
 #: skycultures/babylonian_mulapin/constellation_names.eng.fab:49
-#: skycultures/babylonian_mulapin/star_names.fab:2
-#: skycultures/babylonian_seleucid/constellation_names.eng.fab:48
-#: skycultures/babylonian_seleucid/star_names.fab:2
-msgid "Star of Eridu"
-msgstr "Ster van Eridu"
+msgid "Asterism of Eridu"
+msgstr ""
 
 #: skycultures/babylonian_mulapin/constellation_names.eng.fab:50
 msgid "Goddess Ninmakh"
 msgstr "Godin Ninmakh"
+
+#: skycultures/babylonian_mulapin/constellation_names.eng.fab:51
+msgid "Khabasiranu Demon"
+msgstr ""
 
 #: skycultures/babylonian_mulapin/constellation_names.eng.fab:52
 msgid "Harrow"
@@ -15481,6 +15480,12 @@ msgstr "De zeebarbeel (denon)"
 #: skycultures/chinese_medieval/constellation_names.eng.fab:310
 msgid "Wolf"
 msgstr "Wolf"
+
+#: skycultures/babylonian_mulapin/star_names.fab:2
+#: skycultures/babylonian_seleucid/constellation_names.eng.fab:48
+#: skycultures/babylonian_seleucid/star_names.fab:2
+msgid "Star of Eridu"
+msgstr "Ster van Eridu"
 
 #: skycultures/babylonian_mulapin/star_names.fab:3
 #: skycultures/babylonian_seleucid/star_names.fab:3
@@ -15636,6 +15641,10 @@ msgstr "Veld"
 #: skycultures/babylonian_seleucid/constellation_names.eng.fab:28
 msgid "The Swallow"
 msgstr "De zwaluw"
+
+#: skycultures/babylonian_seleucid/constellation_names.eng.fab:29
+msgid "Anunitu"
+msgstr "Anunitu"
 
 #: skycultures/babylonian_seleucid/constellation_names.eng.fab:30
 #: skycultures/egyptian/constellation_names.eng.fab:27
@@ -53852,7 +53861,7 @@ msgstr "Haas"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:39
 msgid "The One before the Dog"
-msgstr "Degene vóór de hond"
+msgstr "Die vóór de hond"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:40
 #: skycultures/greek_farnese/constellation_names.eng.fab:40
@@ -55091,11 +55100,11 @@ msgstr ""
 
 #: skycultures/greek_almagest/star_names.fab:1704
 msgid "Προκύων (Prokyon, The One [rising] before the Dog)"
-msgstr "Προκύων (Prokyon, Degene die [opkomt] voor de hond)"
+msgstr "Προκύων (Prokyon, Die die [opkomt] voor de hond)"
 
 #: skycultures/greek_almagest/star_names.fab:1706
 msgid "The bright star just over the hindquarters, called Procyon"
-msgstr ""
+msgstr "De heldere ster nabij het achterwerk, genoemd Procyon"
 
 #: skycultures/greek_almagest/star_names.fab:1708
 msgid "The more advanced of the 2 stars in the stern-ornament"
@@ -55453,17 +55462,17 @@ msgstr "Sco 22"
 #: skycultures/greek_farnese/constellation_names.eng.fab:1
 #: skycultures/greek_leidenAratea/constellation_names.eng.fab:1
 msgid "Small She-Bear"
-msgstr ""
+msgstr "Kleine vrouwelijke beer"
 
 #: skycultures/greek_farnese/constellation_names.eng.fab:2
 #: skycultures/greek_leidenAratea/constellation_names.eng.fab:2
 msgid "Great She-Bear"
-msgstr ""
+msgstr "Grote vrouwelijke beer"
 
 #: skycultures/greek_farnese/constellation_names.eng.fab:39
 #: skycultures/greek_farnese/constellation_names.eng.fab:51
 msgid "Left Hand of the Atlas Statue"
-msgstr ""
+msgstr "Linkerhand van Atlas"
 
 #: skycultures/greek_farnese/constellation_names.eng.fab:50
 msgid "Right Hand of the Atlas Statue"
@@ -55479,7 +55488,7 @@ msgstr ""
 
 #: skycultures/greek_leidenAratea/constellation_names.eng.fab:38
 msgid "Procyon/ Little Dog"
-msgstr ""
+msgstr "Procyon / kleine hond"
 
 #: skycultures/hawaiian_starlines/constellation_names.eng.fab:1
 msgid "The Canoe Bailer of Makali`i"

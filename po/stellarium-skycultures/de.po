@@ -7,19 +7,19 @@
 # cardinot <mcardinot@gmail.com>, 2017
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2018
 # Alexander Stohr <alexander.stohr@gmx.de>, 2020
-# Georg Zotti <Georg.Zotti@univie.ac.at>, 2021
 # Susanne M Hoffmann <susanne.m.hoffmann@gmail.com>, 2021
 # Dr. Erich W. Schreiner <ewschreiner@gmail.com>, 2021
 # Latein Lebt, 2021
+# Georg Zotti <Georg.Zotti@univie.ac.at>, 2021
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-09-19 17:40+0700\n"
+"POT-Creation-Date: 2021-09-26 21:12+0700\n"
 "PO-Revision-Date: 2017-11-29 01:17+0000\n"
-"Last-Translator: Latein Lebt, 2021\n"
+"Last-Translator: Georg Zotti <Georg.Zotti@univie.ac.at>, 2021\n"
 "Language-Team: German (https://www.transifex.com/stellarium/teams/80998/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1891,7 +1891,6 @@ msgstr "Kookaburra"
 #. TRANSLATORS: Proper name of pulsar PSR J1747-2958 (Source:
 #. http://www.physics.mcgill.ca/~pulsar/pwncat_notes.html)
 #: skycultures/translations.fab:842
-#: skycultures/babylonian_mulapin/constellation_names.eng.fab:51
 msgid "Mouse"
 msgstr "Maus"
 
@@ -15284,9 +15283,8 @@ msgid "Great Swallow"
 msgstr "Große Schwalbe"
 
 #: skycultures/babylonian_mulapin/constellation_names.eng.fab:30
-#: skycultures/babylonian_seleucid/constellation_names.eng.fab:29
-msgid "Anunitu"
-msgstr "Anunitu (Beiname der Göttin Ischtar)"
+msgid "Anunitu (goddess)"
+msgstr ""
 
 #: skycultures/babylonian_mulapin/constellation_names.eng.fab:31
 msgid "Hired Man"
@@ -15385,15 +15383,16 @@ msgid "The Great One (God Ea)"
 msgstr "der Großartige (Gott Ea)"
 
 #: skycultures/babylonian_mulapin/constellation_names.eng.fab:49
-#: skycultures/babylonian_mulapin/star_names.fab:2
-#: skycultures/babylonian_seleucid/constellation_names.eng.fab:48
-#: skycultures/babylonian_seleucid/star_names.fab:2
-msgid "Star of Eridu"
-msgstr "Stern der Stadt Eridu"
+msgid "Asterism of Eridu"
+msgstr ""
 
 #: skycultures/babylonian_mulapin/constellation_names.eng.fab:50
 msgid "Goddess Ninmakh"
 msgstr "Göttin Ninmach"
+
+#: skycultures/babylonian_mulapin/constellation_names.eng.fab:51
+msgid "Khabasiranu Demon"
+msgstr ""
 
 #: skycultures/babylonian_mulapin/constellation_names.eng.fab:52
 msgid "Harrow"
@@ -15445,6 +15444,12 @@ msgstr "Ziegenfisch (Dämon)"
 #: skycultures/chinese_medieval/constellation_names.eng.fab:310
 msgid "Wolf"
 msgstr "Wolf"
+
+#: skycultures/babylonian_mulapin/star_names.fab:2
+#: skycultures/babylonian_seleucid/constellation_names.eng.fab:48
+#: skycultures/babylonian_seleucid/star_names.fab:2
+msgid "Star of Eridu"
+msgstr "Stern der Stadt Eridu"
 
 #: skycultures/babylonian_mulapin/star_names.fab:3
 #: skycultures/babylonian_seleucid/star_names.fab:3
@@ -15600,6 +15605,10 @@ msgstr "ein Feld [Maßeinheit]"
 #: skycultures/babylonian_seleucid/constellation_names.eng.fab:28
 msgid "The Swallow"
 msgstr "Schwalbe"
+
+#: skycultures/babylonian_seleucid/constellation_names.eng.fab:29
+msgid "Anunitu"
+msgstr "Anunitu (Beiname der Göttin Ischtar)"
 
 #: skycultures/babylonian_seleucid/constellation_names.eng.fab:30
 #: skycultures/egyptian/constellation_names.eng.fab:27
@@ -55414,21 +55423,21 @@ msgstr "sco 22"
 #: skycultures/greek_farnese/constellation_names.eng.fab:1
 #: skycultures/greek_leidenAratea/constellation_names.eng.fab:1
 msgid "Small She-Bear"
-msgstr ""
+msgstr "Kleine Bärin"
 
 #: skycultures/greek_farnese/constellation_names.eng.fab:2
 #: skycultures/greek_leidenAratea/constellation_names.eng.fab:2
 msgid "Great She-Bear"
-msgstr ""
+msgstr "Große Bärin"
 
 #: skycultures/greek_farnese/constellation_names.eng.fab:39
 #: skycultures/greek_farnese/constellation_names.eng.fab:51
 msgid "Left Hand of the Atlas Statue"
-msgstr ""
+msgstr "Linke Hand der Atlasstatue"
 
 #: skycultures/greek_farnese/constellation_names.eng.fab:50
 msgid "Right Hand of the Atlas Statue"
-msgstr ""
+msgstr "Rechte Hand der Atlasstatue"
 
 #: skycultures/greek_farnese/constellation_names.eng.fab:52
 msgid "special feature: unclear"
@@ -58073,7 +58082,7 @@ msgstr "Madoo’asinik (Heiße Steine für Schwitzhütte)"
 #. TRANSLATORS: Native name of Venus in Ojibwe culture
 #: skycultures/ojibwe/planet_names.fab:2
 msgid "Womens Star"
-msgstr ""
+msgstr "Frauenstern"
 
 #: skycultures/romanian/constellation_names.eng.fab:1
 msgid "The Great Chariot"
@@ -60676,7 +60685,7 @@ msgstr "Al Thalimain II"
 #: skycultures/western/star_names.fab:57
 #: skycultures/western_sternenkarten/star_names.fab:57
 msgid "Althalimain"
-msgstr ""
+msgstr "Althalimain"
 
 #: skycultures/western/star_names.fab:58
 #: skycultures/western_sternenkarten/star_names.fab:58
@@ -61117,7 +61126,7 @@ msgstr "Al Wazor"
 #: skycultures/western/star_names.fab:189
 #: skycultures/western_sternenkarten/star_names.fab:189
 msgid "Wezea"
-msgstr ""
+msgstr "Wezea"
 
 #: skycultures/western/star_names.fab:191
 #: skycultures/western_sternenkarten/star_names.fab:191
@@ -61127,7 +61136,7 @@ msgstr "Adara"
 #: skycultures/western/star_names.fab:193
 #: skycultures/western_sternenkarten/star_names.fab:193
 msgid "Phurad"
-msgstr ""
+msgstr "Phurad"
 
 #: skycultures/western/star_names.fab:196
 #: skycultures/western_sternenkarten/star_names.fab:196
@@ -61191,7 +61200,7 @@ msgstr "Secunda Giedi"
 #: skycultures/western/star_names.fab:217
 #: skycultures/western_sternenkarten/star_names.fab:217
 msgid "Al Giedi"
-msgstr ""
+msgstr "Al Giedi"
 
 #: skycultures/western/star_names.fab:219
 #: skycultures/western_sternenkarten/star_names.fab:219
@@ -61216,7 +61225,7 @@ msgstr "Scheddi"
 #: skycultures/western/star_names.fab:225
 #: skycultures/western_sternenkarten/star_names.fab:225
 msgid "Deneb al Giedi"
-msgstr ""
+msgstr "Deneb al Giedi"
 
 #: skycultures/western/star_names.fab:226
 #: skycultures/western_sternenkarten/star_names.fab:226
@@ -61270,7 +61279,7 @@ msgstr "Al Sanam al Nakah"
 #: skycultures/western/star_names.fab:245
 #: skycultures/western_sternenkarten/star_names.fab:245
 msgid "Chaph"
-msgstr ""
+msgstr "Chaph"
 
 #: skycultures/western/star_names.fab:247
 #: skycultures/western_sternenkarten/star_names.fab:247
@@ -61396,12 +61405,12 @@ msgstr "Baten Kentaurus"
 #: skycultures/western/star_names.fab:277
 #: skycultures/western_sternenkarten/star_names.fab:277
 msgid "Al Nair al Kentaurus"
-msgstr ""
+msgstr "Al Nair al Kentaurus"
 
 #: skycultures/western/star_names.fab:279
 #: skycultures/western_sternenkarten/star_names.fab:279
 msgid "Haratan"
-msgstr ""
+msgstr "Haratan"
 
 #: skycultures/western/star_names.fab:281
 #: skycultures/western_sternenkarten/star_names.fab:281
@@ -61416,12 +61425,12 @@ msgstr "Poppers Stern"
 #: skycultures/western/star_names.fab:285
 #: skycultures/western_sternenkarten/star_names.fab:285
 msgid "Ke Kwan"
-msgstr ""
+msgstr "Ke Kwan"
 
 #: skycultures/western/star_names.fab:289
 #: skycultures/western_sternenkarten/star_names.fab:289
 msgid "Alphirk"
-msgstr ""
+msgstr "Alphirk"
 
 #: skycultures/western/star_names.fab:291
 #: skycultures/western_sternenkarten/star_names.fab:291
@@ -61500,7 +61509,7 @@ msgstr "Kafalgidma"
 #: skycultures/western/star_names.fab:314
 #: skycultures/western_sternenkarten/star_names.fab:314
 msgid "Alkaffaljidhina"
-msgstr ""
+msgstr "Alkaffaljidhina"
 
 #: skycultures/western/star_names.fab:316
 #: skycultures/western_sternenkarten/star_names.fab:316
@@ -61520,7 +61529,7 @@ msgstr "Schemali"
 #: skycultures/western/star_names.fab:320
 #: skycultures/western_sternenkarten/star_names.fab:320
 msgid "Baten Kaitos Shemali"
-msgstr ""
+msgstr "Baten Kaitos Shemali"
 
 #: skycultures/western/star_names.fab:322
 #: skycultures/western_sternenkarten/star_names.fab:322
@@ -61725,7 +61734,7 @@ msgstr "Minkar"
 #: skycultures/western/star_names.fab:380
 #: skycultures/western_sternenkarten/star_names.fab:380
 msgid "Algorel"
-msgstr ""
+msgstr "Algorel"
 
 #: skycultures/western/star_names.fab:381
 #: skycultures/western_sternenkarten/star_names.fab:381
@@ -61932,7 +61941,7 @@ msgstr "Taurt"
 #: skycultures/western/star_names.fab:446
 #: skycultures/western_sternenkarten/star_names.fab:446
 msgid "Eltamin"
-msgstr ""
+msgstr "Eltamin"
 
 #: skycultures/western/star_names.fab:448
 #: skycultures/western_sternenkarten/star_names.fab:448
@@ -61959,7 +61968,7 @@ msgstr "Aldib"
 #: skycultures/western/star_names.fab:452
 #: skycultures/western_sternenkarten/star_names.fab:452
 msgid "Taïs"
-msgstr ""
+msgstr "Taïs"
 
 #: skycultures/western/star_names.fab:454
 #: skycultures/western_sternenkarten/star_names.fab:454
@@ -62001,7 +62010,7 @@ msgstr "Nodus I"
 #: skycultures/western/star_names.fab:465
 #: skycultures/western_sternenkarten/star_names.fab:465
 msgid "Juza"
-msgstr ""
+msgstr "Juza"
 
 #: skycultures/western/star_names.fab:466
 #: skycultures/western/star_names.fab:467
@@ -62088,7 +62097,7 @@ msgstr "Dhibain"
 #: skycultures/western/star_names.fab:485
 #: skycultures/western_sternenkarten/star_names.fab:485
 msgid "Aldhibain"
-msgstr ""
+msgstr "Aldhibain"
 
 #: skycultures/western/star_names.fab:486
 #: skycultures/western_sternenkarten/star_names.fab:486
@@ -62143,7 +62152,7 @@ msgstr "Dhalim"
 #: skycultures/western/star_names.fab:502
 #: skycultures/western_sternenkarten/star_names.fab:502
 msgid "Kursa"
-msgstr ""
+msgstr "Kursa"
 
 #: skycultures/western/star_names.fab:507
 #: skycultures/western/star_names.fab:535
@@ -62164,7 +62173,7 @@ msgstr "Theemin"
 #: skycultures/western/star_names.fab:511
 #: skycultures/western_sternenkarten/star_names.fab:511
 msgid "Theemini"
-msgstr ""
+msgstr "Theemini"
 
 #: skycultures/western/star_names.fab:512
 #: skycultures/western/star_names.fab:519
@@ -62580,7 +62589,7 @@ msgstr "Ras Elased Borealis"
 #: skycultures/western/star_names.fab:636
 #: skycultures/western_sternenkarten/star_names.fab:636
 msgid "Rassalas"
-msgstr ""
+msgstr "Rassalas"
 
 #: skycultures/western/star_names.fab:638
 #: skycultures/western_sternenkarten/star_names.fab:638
@@ -62600,7 +62609,7 @@ msgstr "Ras Elased"
 #: skycultures/western/star_names.fab:641
 #: skycultures/western_sternenkarten/star_names.fab:641
 msgid "Asad Australis"
-msgstr ""
+msgstr "Asad Australis"
 
 #: skycultures/western/star_names.fab:642
 #: skycultures/western_sternenkarten/star_names.fab:642
@@ -62685,7 +62694,7 @@ msgstr "Zuben Elschemali"
 #: skycultures/western/star_names.fab:675
 #: skycultures/western_sternenkarten/star_names.fab:675
 msgid "Zubenelchemale"
-msgstr ""
+msgstr "Zubenelchemale"
 
 #: skycultures/western/star_names.fab:676
 #: skycultures/western_sternenkarten/star_names.fab:676
@@ -62705,7 +62714,7 @@ msgstr "Cornu"
 #: skycultures/western/star_names.fab:679
 #: skycultures/western_sternenkarten/star_names.fab:679
 msgid "Zubenalgubi"
-msgstr ""
+msgstr "Zubenalgubi"
 
 #: skycultures/western/star_names.fab:680
 #: skycultures/western/star_names.fab:684
@@ -62737,12 +62746,12 @@ msgstr "Zuben Hakrabi"
 #: skycultures/western/star_names.fab:687
 #: skycultures/western_sternenkarten/star_names.fab:687
 msgid "Men"
-msgstr ""
+msgstr "Men"
 
 #: skycultures/western/star_names.fab:688
 #: skycultures/western_sternenkarten/star_names.fab:688
 msgid "KeKouan"
-msgstr ""
+msgstr "KeKouan"
 
 #: skycultures/western/star_names.fab:690
 #: skycultures/western_sternenkarten/star_names.fab:690
@@ -62790,7 +62799,7 @@ msgstr "Jugum"
 #: skycultures/western/star_names.fab:702
 #: skycultures/western_sternenkarten/star_names.fab:702
 msgid "Sulaphat"
-msgstr ""
+msgstr "Sulaphat"
 
 #: skycultures/western/star_names.fab:703
 #: skycultures/western_sternenkarten/star_names.fab:703
@@ -62835,12 +62844,12 @@ msgstr "Kelb Alrai"
 #: skycultures/western/star_names.fab:724
 #: skycultures/western_sternenkarten/star_names.fab:724
 msgid "Cheleb"
-msgstr ""
+msgstr "Cheleb"
 
 #: skycultures/western/star_names.fab:727
 #: skycultures/western_sternenkarten/star_names.fab:727
 msgid "Yed Post"
-msgstr ""
+msgstr "Yed Post"
 
 #: skycultures/western/star_names.fab:730
 #: skycultures/western_sternenkarten/star_names.fab:730
@@ -62954,7 +62963,7 @@ msgstr "Saif al Jabbar"
 #: skycultures/western/star_names.fab:766
 #: skycultures/western_sternenkarten/star_names.fab:766
 msgid "Algjebbah"
-msgstr ""
+msgstr "Algjebbah"
 
 #: skycultures/western/star_names.fab:767
 #: skycultures/western_sternenkarten/star_names.fab:767
@@ -63143,7 +63152,7 @@ msgstr "Gorgonea Tertia"
 #: skycultures/western/star_names.fab:825
 #: skycultures/western_sternenkarten/star_names.fab:825
 msgid "Gorgonea Terti"
-msgstr ""
+msgstr "Gorgonea Terti"
 
 #: skycultures/western/star_names.fab:826
 #: skycultures/western_sternenkarten/star_names.fab:826
@@ -63173,7 +63182,7 @@ msgstr "Bidelmans Seltsamer Stern"
 #: skycultures/western/star_names.fab:831
 #: skycultures/western_sternenkarten/star_names.fab:831
 msgid "Kerb"
-msgstr ""
+msgstr "Kerb"
 
 #: skycultures/western/star_names.fab:834
 #: skycultures/western_sternenkarten/star_names.fab:834
@@ -63238,7 +63247,7 @@ msgstr "Kaitain"
 #: skycultures/western/star_names.fab:851
 #: skycultures/western_sternenkarten/star_names.fab:851
 msgid "Al Rischa"
-msgstr ""
+msgstr "Al Rischa"
 
 #: skycultures/western/star_names.fab:853
 #: skycultures/western_sternenkarten/star_names.fab:853
@@ -63697,7 +63706,7 @@ msgstr "Gudja"
 #: skycultures/western/star_names.fab:996
 #: skycultures/western_sternenkarten/star_names.fab:996
 msgid "Alava"
-msgstr ""
+msgstr "Alava"
 
 #: skycultures/western/star_names.fab:1000
 #: skycultures/western_rey/star_names.fab:27
@@ -63737,7 +63746,7 @@ msgstr "Nath"
 #: skycultures/western/star_names.fab:1006
 #: skycultures/western_sternenkarten/star_names.fab:1006
 msgid "Al Nath"
-msgstr ""
+msgstr "Al Nath"
 
 #: skycultures/western/star_names.fab:1008
 #: skycultures/western_sternenkarten/star_names.fab:1008
@@ -63827,7 +63836,7 @@ msgstr "Tianguan"
 #: skycultures/western/star_names.fab:1035
 #: skycultures/western_sternenkarten/star_names.fab:1035
 msgid "Alheka"
-msgstr ""
+msgstr "Alheka"
 
 #: skycultures/western/star_names.fab:1039
 #: skycultures/western_sternenkarten/star_names.fab:1039
@@ -63847,7 +63856,7 @@ msgstr "Rasalmudallah"
 #: skycultures/western/star_names.fab:1043
 #: skycultures/western_sternenkarten/star_names.fab:1043
 msgid "Rasalmothallah"
-msgstr ""
+msgstr "Rasalmothallah"
 
 #: skycultures/western/star_names.fab:1044
 #: skycultures/western_sternenkarten/star_names.fab:1044

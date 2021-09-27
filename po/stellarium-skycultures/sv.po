@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-09-19 17:40+0700\n"
+"POT-Creation-Date: 2021-09-26 21:12+0700\n"
 "PO-Revision-Date: 2017-11-29 01:17+0000\n"
 "Last-Translator: Karl Birgersson <birgerssonkarl@outlook.com>, 2021\n"
 "Language-Team: Swedish (https://www.transifex.com/stellarium/teams/80998/sv/)\n"
@@ -1887,7 +1887,6 @@ msgstr ""
 #. TRANSLATORS: Proper name of pulsar PSR J1747-2958 (Source:
 #. http://www.physics.mcgill.ca/~pulsar/pwncat_notes.html)
 #: skycultures/translations.fab:842
-#: skycultures/babylonian_mulapin/constellation_names.eng.fab:51
 msgid "Mouse"
 msgstr "Musen"
 
@@ -15133,9 +15132,8 @@ msgid "Great Swallow"
 msgstr "Stora svalan"
 
 #: skycultures/babylonian_mulapin/constellation_names.eng.fab:30
-#: skycultures/babylonian_seleucid/constellation_names.eng.fab:29
-msgid "Anunitu"
-msgstr "Anunitu"
+msgid "Anunitu (goddess)"
+msgstr ""
 
 #: skycultures/babylonian_mulapin/constellation_names.eng.fab:31
 msgid "Hired Man"
@@ -15234,15 +15232,16 @@ msgid "The Great One (God Ea)"
 msgstr "Den store (guden Ea)"
 
 #: skycultures/babylonian_mulapin/constellation_names.eng.fab:49
-#: skycultures/babylonian_mulapin/star_names.fab:2
-#: skycultures/babylonian_seleucid/constellation_names.eng.fab:48
-#: skycultures/babylonian_seleucid/star_names.fab:2
-msgid "Star of Eridu"
-msgstr "Eridus stjärna"
+msgid "Asterism of Eridu"
+msgstr ""
 
 #: skycultures/babylonian_mulapin/constellation_names.eng.fab:50
 msgid "Goddess Ninmakh"
 msgstr "Gudinnan Ninmakh"
+
+#: skycultures/babylonian_mulapin/constellation_names.eng.fab:51
+msgid "Khabasiranu Demon"
+msgstr ""
 
 #: skycultures/babylonian_mulapin/constellation_names.eng.fab:52
 msgid "Harrow"
@@ -15294,6 +15293,12 @@ msgstr "Mullusfisken (demonen)"
 #: skycultures/chinese_medieval/constellation_names.eng.fab:310
 msgid "Wolf"
 msgstr "Vargen"
+
+#: skycultures/babylonian_mulapin/star_names.fab:2
+#: skycultures/babylonian_seleucid/constellation_names.eng.fab:48
+#: skycultures/babylonian_seleucid/star_names.fab:2
+msgid "Star of Eridu"
+msgstr "Eridus stjärna"
 
 #: skycultures/babylonian_mulapin/star_names.fab:3
 #: skycultures/babylonian_seleucid/star_names.fab:3
@@ -15449,6 +15454,10 @@ msgstr "Fältet"
 #: skycultures/babylonian_seleucid/constellation_names.eng.fab:28
 msgid "The Swallow"
 msgstr "Svalan"
+
+#: skycultures/babylonian_seleucid/constellation_names.eng.fab:29
+msgid "Anunitu"
+msgstr "Anunitu"
 
 #: skycultures/babylonian_seleucid/constellation_names.eng.fab:30
 #: skycultures/egyptian/constellation_names.eng.fab:27
@@ -53640,7 +53649,7 @@ msgstr "Fiskarna"
 #: skycultures/greek_farnese/constellation_names.eng.fab:34
 #: skycultures/greek_leidenAratea/constellation_names.eng.fab:33
 msgid "Sea Monster"
-msgstr ""
+msgstr "Sjöodjuret"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:35
 #: skycultures/greek_farnese/constellation_names.eng.fab:35
@@ -53667,13 +53676,13 @@ msgstr "Den som är före Hunden"
 #: skycultures/greek_farnese/constellation_names.eng.fab:40
 #: skycultures/greek_leidenAratea/constellation_names.eng.fab:39
 msgid "The Ship Argo"
-msgstr ""
+msgstr "Skeppet Argo"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:41
 #: skycultures/greek_farnese/constellation_names.eng.fab:41
 #: skycultures/greek_leidenAratea/constellation_names.eng.fab:40
 msgid "Water Snake"
-msgstr ""
+msgstr "Vattenormen"
 
 #: skycultures/greek_almagest/constellation_names.eng.fab:42
 #: skycultures/greek_farnese/constellation_names.eng.fab:42
@@ -55176,7 +55185,7 @@ msgstr ""
 #. TRANSLATORS: Native name for Venus
 #: skycultures/greek_almagest/planet_names.fab:4
 msgid "Aphrodite"
-msgstr ""
+msgstr "Afrodite"
 
 #. TRANSLATORS: Native name for Mars
 #: skycultures/greek_almagest/planet_names.fab:6
@@ -55245,50 +55254,50 @@ msgstr ""
 #: skycultures/greek_farnese/dso_names.fab:14
 #: skycultures/greek_leidenAratea/dso_names.fab:14
 msgid "πλόκαμος (Coma)"
-msgstr ""
+msgstr "πλόκαμος (Coma)"
 
 #: skycultures/greek_almagest/dso_names.fab:15
 #: skycultures/greek_farnese/dso_names.fab:15
 #: skycultures/greek_leidenAratea/dso_names.fab:15
 msgid "Leo 33"
-msgstr ""
+msgstr "Leo 33"
 
 #: skycultures/greek_almagest/dso_names.fab:16
 #: skycultures/greek_farnese/dso_names.fab:16
 #: skycultures/greek_leidenAratea/dso_names.fab:16
 msgid "sco 22"
-msgstr ""
+msgstr "sco 22"
 
 #: skycultures/greek_farnese/constellation_names.eng.fab:1
 #: skycultures/greek_leidenAratea/constellation_names.eng.fab:1
 msgid "Small She-Bear"
-msgstr ""
+msgstr "Lilla björnhonan"
 
 #: skycultures/greek_farnese/constellation_names.eng.fab:2
 #: skycultures/greek_leidenAratea/constellation_names.eng.fab:2
 msgid "Great She-Bear"
-msgstr ""
+msgstr "Stora björnhonan"
 
 #: skycultures/greek_farnese/constellation_names.eng.fab:39
 #: skycultures/greek_farnese/constellation_names.eng.fab:51
 msgid "Left Hand of the Atlas Statue"
-msgstr ""
+msgstr "Atlasstatyns vänstra hand"
 
 #: skycultures/greek_farnese/constellation_names.eng.fab:50
 msgid "Right Hand of the Atlas Statue"
-msgstr ""
+msgstr "Atlasstatyns högra hand"
 
 #: skycultures/greek_farnese/constellation_names.eng.fab:52
 msgid "special feature: unclear"
-msgstr ""
+msgstr "speciellt kännetecken: oklart"
 
 #: skycultures/greek_leidenAratea/constellation_names.eng.fab:35
 msgid "God Eridanus (River)"
-msgstr ""
+msgstr "Guden Eridanus (Floden)"
 
 #: skycultures/greek_leidenAratea/constellation_names.eng.fab:38
 msgid "Procyon/ Little Dog"
-msgstr ""
+msgstr "Procyon/Lilla hunden"
 
 #: skycultures/hawaiian_starlines/constellation_names.eng.fab:1
 msgid "The Canoe Bailer of Makali`i"
