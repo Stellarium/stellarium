@@ -867,35 +867,36 @@ void ViewDialog::populateLightPollution()
 void ViewDialog::setBortleScaleToolTip(int Bindex)
 {
 	int i = Bindex-1;
-	QStringList list, nelm;
-	//TRANSLATORS: Short description for Class 1 of the Bortle scale
-	list.append(q_("Excellent dark-sky site"));
-	//TRANSLATORS: Short description for Class 2 of the Bortle scale
-	list.append(q_("Typical truly dark site"));
-	//TRANSLATORS: Short description for Class 3 of the Bortle scale
-	list.append(q_("Rural sky"));
-	//TRANSLATORS: Short description for Class 4 of the Bortle scale
-	list.append(q_("Rural/suburban transition"));
-	//TRANSLATORS: Short description for Class 5 of the Bortle scale
-	list.append(q_("Suburban sky"));
-	//TRANSLATORS: Short description for Class 6 of the Bortle scale
-	list.append(q_("Bright suburban sky"));
-	//TRANSLATORS: Short description for Class 7 of the Bortle scale
-	list.append(q_("Suburban/urban transition"));
-	//TRANSLATORS: Short description for Class 8 of the Bortle scale
-	list.append(q_("City sky"));
-	//TRANSLATORS: Short description for Class 9 of the Bortle scale
-	list.append(q_("Inner-city sky"));
+	const QStringList list={
+		//TRANSLATORS: Short description for Class 1 of the Bortle scale
+		q_("Excellent dark-sky site"),
+		//TRANSLATORS: Short description for Class 2 of the Bortle scale
+		q_("Typical truly dark site"),
+		//TRANSLATORS: Short description for Class 3 of the Bortle scale
+		q_("Rural sky"),
+		//TRANSLATORS: Short description for Class 4 of the Bortle scale
+		q_("Rural/suburban transition"),
+		//TRANSLATORS: Short description for Class 5 of the Bortle scale
+		q_("Suburban sky"),
+		//TRANSLATORS: Short description for Class 6 of the Bortle scale
+		q_("Bright suburban sky"),
+		//TRANSLATORS: Short description for Class 7 of the Bortle scale
+		q_("Suburban/urban transition"),
+		//TRANSLATORS: Short description for Class 8 of the Bortle scale
+		q_("City sky"),
+		//TRANSLATORS: Short description for Class 9 of the Bortle scale
+		q_("Inner-city sky")};
 
-	nelm.append("7.6-8.0");
-	nelm.append("7.1-7.5");
-	nelm.append("6.6-7.0");
-	nelm.append("6.1-6.5");
-	nelm.append("5.6-6.0");
-	nelm.append("5.1-5.5");
-	nelm.append("4.6-5.0");
-	nelm.append("4.1-4.5");
-	nelm.append("4.0");
+	static const QStringList nelm={
+		"7.6-8.0",
+		"7.1-7.5",
+		"6.6-7.0",
+		"6.1-6.5",
+		"5.6-6.0",
+		"5.1-5.5",
+		"4.6-5.0",
+		"4.1-4.5",
+		"4.0"};
 
 	QString tooltip = QString("%1 (%2 %3)")
 			.arg(list.at(i))
