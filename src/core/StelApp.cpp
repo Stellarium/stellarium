@@ -434,9 +434,7 @@ void StelApp::init(QSettings* conf)
 
 	SplashScreen::showMessage(q_("Initializing network access..."));
 	networkAccessManager = new QNetworkAccessManager(this);
-	#if QT_VERSION >= 0x050900
 	networkAccessManager->setRedirectPolicy(QNetworkRequest::NoLessSafeRedirectPolicy);
-	#endif
 	SplashScreen::showMessage(q_("Initializing network disk cache..."));
 	// Activate http cache if Qt version >= 4.5
 	QNetworkDiskCache* cache = new QNetworkDiskCache(networkAccessManager);
@@ -1100,12 +1098,8 @@ QString StelApp::getViewportEffect() const
 void StelApp::dumpModuleActionPriorities(StelModule::StelModuleActionName actionName) const
 {
 	const QList<StelModule*> modules = moduleMgr->getCallOrders(actionName);
-	#if QT_VERSION >= 0x050500
 	QMetaEnum me = QMetaEnum::fromType<StelModule::StelModuleActionName>();
 	qDebug() << "Module Priorities for action named" << me.valueToKey(actionName);
-	#else
-	qDebug() << "Module Priorities for action named" << actionName;
-	#endif
 
 	for (auto* module : modules)
 	{
