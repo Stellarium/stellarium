@@ -91,18 +91,40 @@ void RemoteControlDialog::createDialogContent()
 	ui->portNumberSpinBox->setValue(rc->getPort());
 	connect(ui->portNumberSpinBox, SIGNAL(valueChanged(int)), rc, SLOT(setPort(int)));
 
+	ui->enableCorsCheckbox->setChecked(rc->getFlagEnableCors());
+	connect(ui->enableCorsCheckbox, SIGNAL(toggled(bool)), rc, SLOT(setFlagEnableCors(bool)));
+	connect(rc, SIGNAL(flagEnableCorsChanged(bool)), ui->enableCorsCheckbox, SLOT(setChecked(bool)));
+
+	ui->corsOriginEdit->setEnabled(rc->getFlagEnableCors());
+	ui->corsOriginEdit->setText(rc->getCorsOrigin());
+
+	connect(rc,SIGNAL(flagEnableCorsChanged(bool)),ui->corsOriginEdit,SLOT(setEnabled(bool)));
+	connect(ui->corsOriginEdit, SIGNAL(textChanged(QString)), rc, SLOT(setCorsOrigin(QString)));
+
 	ui->restartPanel->setVisible(false);
 	connect(rc, SIGNAL(flagUsePasswordChanged(bool)), this, SLOT(requiresRestart()));
 	connect(rc, SIGNAL(passwordChanged(QString)), this, SLOT(requiresRestart()));
+	connect(rc, SIGNAL(flagEnableCorsChanged(bool)), this, SLOT(requiresRestart()));
+	connect(rc, SIGNAL(corsOriginChanged(QString)), this, SLOT(requiresRestart()));
 	connect(rc, SIGNAL(portChanged(int)), this, SLOT(requiresRestart()));
 
 	connect(ui->resetButton, SIGNAL(clicked(bool)),this,SLOT(restart()));
 
-	connect(ui->saveSettingsButton, SIGNAL(clicked()), rc, SLOT(saveSettings()));
-	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
-	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), rc, SLOT(restoreDefaultSettings()));
+	connect(ui->saveSettingsButton, SIGNAL(clicked()), rc, SLOT(saveSettings()));	
+	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 
 	setAboutHtml();
+}
+
+void RemoteControlDialog::restoreDefaults()
+{
+	if (askConfirmation())
+	{
+		qDebug() << "[RemoteControl] restore defaults...";
+		rc->restoreDefaultSettings();
+	}
+	else
+		qDebug() << "[RemoteControl] restore defaults is canceled...";
 }
 
 void RemoteControlDialog::setAboutHtml(void)
@@ -140,18 +162,8 @@ void RemoteControlDialog::setAboutHtml(void)
 			.toHtmlEscaped().replace(a_rx, "<a href=\"http://www.cultureandcosmos.org/pdfs/21/CCv21_17Zotti.pdf\">\\1</a>") + "</li>";
 	html += "</ul></p>";
 
-	html += "<h3>" + q_("Links") + "</h3>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<p>" + q_("Further information can be found in the {developer documentation}.").toHtmlEscaped().replace(a_rx, "<a href=\"http://stellarium.org/doc/head/\">\\1</a>") + "</p>";
-	html += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg("Remote Control plugin") + "</p>";
-	html += "<p><ul>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you have a question, you can {get an answer here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://groups.google.com/forum/#!forum/stellarium\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("Bug reports and feature requests can be made {here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://github.com/Stellarium/stellarium/issues\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you want to read full information about this plugin and its history, you can {get info here}.").toHtmlEscaped().replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/RemoteControl_plugin\">\\1</a>") + "</li>";
-	html += "</ul></p></body></html>";
+	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Remote Control plugin", true);
+	html += "</body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if(gui!=Q_NULLPTR)

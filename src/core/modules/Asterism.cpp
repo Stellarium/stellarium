@@ -62,14 +62,10 @@ bool Asterism::read(const QString& record, StarMgr *starMgr)
 
 	QString buf(record);
 	QTextStream istr(&buf, QIODevice::ReadOnly);
-	QString abb;
-	istr >> abb >> typeOfAsterism >> numberOfSegments;
+	// We allow mixed-case abbreviations now that they can be displayed on screen. We then need toUpper() in comparisons.
+	istr >> abbreviation >> typeOfAsterism >> numberOfSegments;
 	if (istr.status()!=QTextStream::Ok)
 		return false;
-
-	// It's better to allow mixed-case abbreviations now that they can be displayed on screen. We then need toUpper() in comparisons.
-	//abbreviation = abb.toUpper();
-	abbreviation=abb;
 
 	StelCore *core = StelApp::getInstance().getCore();
 	asterism = new StelObjectP[numberOfSegments*2];
@@ -84,8 +80,6 @@ bool Asterism::read(const QString& record, StarMgr *starMgr)
 				istr >> HP;
 				if(HP == 0)
 				{
-					// TODO: why is this delete commented?
-					// delete[] asterism;
 					return false;
 				}
 				asterism[i]=starMgr->searchHP(static_cast<int>(HP));
@@ -146,14 +140,14 @@ void Asterism::drawOptim(StelPainter& sPainter, const StelCore* core, const Sphe
 		if (lineFader.getInterstate()<=0.0001f)
 			return;
 
-		sPainter.setColor(lineColor[0], lineColor[1], lineColor[2], lineFader.getInterstate());
+		sPainter.setColor(lineColor, lineFader.getInterstate());
 	}
 	else
 	{
 		if (rayHelperFader.getInterstate()<=0.0001f)
 			return;
 
-		sPainter.setColor(rayHelperColor[0], rayHelperColor[1], rayHelperColor[2], rayHelperFader.getInterstate());
+		sPainter.setColor(rayHelperColor, rayHelperFader.getInterstate());
 	}
 
 	Vec3d star1;
@@ -177,18 +171,8 @@ void Asterism::drawName(StelPainter& sPainter) const
 		return;
 
 	QString name = getNameI18n();
-	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], nameFader.getInterstate());
+	sPainter.setColor(labelColor, nameFader.getInterstate());
 	sPainter.drawText(static_cast<float>(XYname[0]), static_cast<float>(XYname[1]), name, 0., -sPainter.getFontMetrics().boundingRect(name).width()/2, 0, false);
-}
-
-const Asterism* Asterism::isStarIn(const StelObject* s) const
-{
-	for(unsigned int i=0;i<numberOfSegments*2;++i)
-	{
-		if (asterism[i]==s)
-			return this;
-	}
-	return Q_NULLPTR;
 }
 
 void Asterism::update(int deltaTime)

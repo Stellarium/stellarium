@@ -69,14 +69,10 @@ bool Constellation::read(const QString& record, StarMgr *starMgr)
 
 	QString buf(record);
 	QTextStream istr(&buf, QIODevice::ReadOnly);
-	QString abb;
-	istr >> abb >> numberOfSegments;
+	// allow mixed-case abbreviations now that they can be displayed on screen. We then need toUpper() in comparisons.
+	istr >> abbreviation >> numberOfSegments;
 	if (istr.status()!=QTextStream::Ok)
 		return false;
-
-	// It's better to allow mixed-case abbreviations now that they can be displayed on screen. We then need toUpper() in comparisons.
-	//abbreviation = abb.toUpper();
-	abbreviation=abb;
 
 	constellation = new StelObjectP[numberOfSegments*2];
 	for (unsigned int i=0;i<numberOfSegments*2;++i)
@@ -85,8 +81,6 @@ bool Constellation::read(const QString& record, StarMgr *starMgr)
 		istr >> HP;
 		if(HP == 0)
 		{
-			// TODO: why is this delete commented?
-			// delete[] constellation;
 			return false;
 		}
 
@@ -94,12 +88,11 @@ bool Constellation::read(const QString& record, StarMgr *starMgr)
 		if (!constellation[i])
 		{
 			qWarning() << "Error in Constellation " << abbreviation << ": can't find star HIP" << HP;
-			// TODO: why is this delete commented?
-			// delete[] constellation;
 			return false;
 		}
 	}
 
+	// Name tag should go to constellation's centre of gravity
 	XYZname.set(0.,0.,0.);
 	for(unsigned int ii=0;ii<numberOfSegments*2;++ii)
 	{
@@ -117,7 +110,7 @@ void Constellation::drawOptim(StelPainter& sPainter, const StelCore* core, const
 
 	if (checkVisibility())
 	{
-		sPainter.setColor(lineColor[0], lineColor[1], lineColor[2], lineFader.getInterstate());
+		sPainter.setColor(lineColor, lineFader.getInterstate());
 
 		Vec3d star1;
 		Vec3d star2;
@@ -156,12 +149,12 @@ void Constellation::drawName(StelPainter& sPainter, ConstellationMgr::Constellat
 				break;
 		}
 
-		sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], nameFader.getInterstate());
+		sPainter.setColor(labelColor, nameFader.getInterstate());
 		sPainter.drawText(static_cast<float>(XYname[0]), static_cast<float>(XYname[1]), name, 0., -sPainter.getFontMetrics().boundingRect(name).width()/2, 0, false);
 	}
 }
 
-void Constellation::drawArtOptim(StelPainter& sPainter, const SphericalRegion& region) const
+void Constellation::drawArtOptim(StelPainter& sPainter, const SphericalRegion& region, const Vec3d& obsVelocity) const
 {
 	if (checkVisibility())
 	{
@@ -174,7 +167,7 @@ void Constellation::drawArtOptim(StelPainter& sPainter, const SphericalRegion& r
 			if (artTexture->bind()==false)
 				return;
 
-			sPainter.drawStelVertexArray(artPolygon);
+			sPainter.drawStelVertexArray(artPolygon, false, obsVelocity);
 		}
 	}
 }
@@ -182,10 +175,12 @@ void Constellation::drawArtOptim(StelPainter& sPainter, const SphericalRegion& r
 // Draw the art texture
 void Constellation::drawArt(StelPainter& sPainter) const
 {
+	// Is this ever used?
+	Q_ASSERT(0);
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
 	sPainter.setCullFace(true);
 	SphericalRegionP region = sPainter.getProjector()->getViewportConvexPolygon();
-	drawArtOptim(sPainter, *region);
+	drawArtOptim(sPainter, *region, Vec3d(0.));
 	sPainter.setCullFace(false);
 }
 
@@ -211,13 +206,13 @@ void Constellation::update(int deltaTime)
 	boundaryFader.update(deltaTime);
 }
 
-void Constellation::drawBoundaryOptim(StelPainter& sPainter) const
+void Constellation::drawBoundaryOptim(StelPainter& sPainter, const Vec3d& obsVelocity) const
 {
 	if (boundaryFader.getInterstate()==0.0f)
 		return;
 
 	sPainter.setBlending(true);
-	sPainter.setColor(boundaryColor[0], boundaryColor[1], boundaryColor[2], boundaryFader.getInterstate());
+	sPainter.setColor(boundaryColor, boundaryFader.getInterstate());
 
 	unsigned int i, j;
 	size_t size;
@@ -235,7 +230,12 @@ void Constellation::drawBoundaryOptim(StelPainter& sPainter) const
 
 		for (j=0;j<points->size()-1;j++)
 		{
-			sPainter.drawGreatCircleArc(points->at(j), points->at(j+1), &viewportHalfspace);
+			Vec3d point0=points->at(j)+obsVelocity;
+			point0.normalize();
+			Vec3d point1=points->at(j+1)+obsVelocity;
+			point1.normalize();
+
+			sPainter.drawGreatCircleArc(point0, point1, &viewportHalfspace);
 		}
 	}
 }
@@ -267,7 +267,7 @@ bool Constellation::checkVisibility() const
 
 QString Constellation::getInfoString(const StelCore *core, const InfoStringGroup &flags) const
 {
-	Q_UNUSED(core);
+	Q_UNUSED(core)
 	QString str;
 	QTextStream oss(&str);
 

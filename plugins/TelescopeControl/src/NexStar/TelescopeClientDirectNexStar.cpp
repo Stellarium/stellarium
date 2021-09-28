@@ -30,6 +30,7 @@
 #include "NexStarCommand.hpp"
 #include "common/LogFile.hpp"
 #include "StelCore.hpp"
+#include "StelUtils.hpp"
 
 #include <QRegExp>
 #include <QStringList>
@@ -52,8 +53,8 @@ TelescopeClientDirectNexStar::TelescopeClientDirectNexStar(const QString &name, 
 	if (paramRx.exactMatch(parameters))
 	{
 		// This QRegExp only matches valid integers
-		serialDeviceName = paramRx.capturedTexts().at(1).trimmed();
-		time_delay       = paramRx.capturedTexts().at(2).toInt();
+		serialDeviceName = paramRx.cap(1).trimmed();
+		time_delay       = paramRx.cap(2).toInt();
 	}
 	else
 	{
@@ -178,7 +179,7 @@ void TelescopeClientDirectNexStar::communicationResetReceived(void)
 	next_pos_time = -0x8000000000000000LL;
 	
 #ifndef QT_NO_DEBUG
-	*log_file << Now() << "TelescopeClientDirectNexStar::communicationResetReceived" << endl;
+	*log_file << Now() << "TelescopeClientDirectNexStar::communicationResetReceived" << StelUtils::getEndLineChar();
 #endif
 }
 
@@ -187,7 +188,7 @@ void TelescopeClientDirectNexStar::raReceived(unsigned int ra_int)
 {
 	last_ra = ra_int;
 #ifndef QT_NO_DEBUG
-	*log_file << Now() << "TelescopeClientDirectNexStar::raReceived: " << ra_int << endl;
+	*log_file << Now() << "TelescopeClientDirectNexStar::raReceived: " << ra_int << StelUtils::getEndLineChar();
 #endif
 }
 
@@ -196,7 +197,7 @@ void TelescopeClientDirectNexStar::raReceived(unsigned int ra_int)
 void TelescopeClientDirectNexStar::decReceived(unsigned int dec_int)
 {
 #ifndef QT_NO_DEBUG
-	*log_file << Now() << "TelescopeClientDirectNexStar::decReceived: " << dec_int << endl;
+	*log_file << Now() << "TelescopeClientDirectNexStar::decReceived: " << dec_int << StelUtils::getEndLineChar();
 #endif
 	const int nexstar_status = 0;
 	sendPosition(last_ra, static_cast<int>(dec_int), nexstar_status);

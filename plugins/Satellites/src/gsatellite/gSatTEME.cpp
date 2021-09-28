@@ -39,9 +39,7 @@
 #include <iostream>
 #include <iomanip>
 
-#include "stdsat.h"
 #include "mathUtils.hpp"
-
 #include "sgp4io.h"
 
 #define CONSTANTS_SET wgs72
@@ -148,7 +146,6 @@ Vec3d gSatTEME::computeSubPoint(gTime ai_Time)
 	resultVector[LONGITUDE] = resultVector[LONGITUDE]/KDEG2RAD;
 	if(resultVector[LONGITUDE] < -180.0) resultVector[LONGITUDE] +=360;
 	else if(resultVector[LONGITUDE] > 180.0) resultVector[LONGITUDE] -= 360;
-
 
 	return resultVector;
 }

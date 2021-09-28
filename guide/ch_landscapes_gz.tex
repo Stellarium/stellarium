@@ -137,7 +137,7 @@ Where:
 \item[\var{altitude}] Is the altitude of the site of the landscape in meters.
 \item[\var{country}] (optional) Name of the country the location is in.
 \item[\var{state}] (optional) Name of the state the location is in.
-\item[\var{timezone}] (optional) IANA Timezone code \newFeature{v0.18.3}
+\item[\var{timezone}] (optional) IANA Timezone code \newFeature{0.18.3}
 \item[\var{name}] (optional) Name of the location. This may contain
   spaces, but keep it short to have it fully visible in the
   selection box.
@@ -156,25 +156,25 @@ panel. If they are missing, the parameters do not change to defaults.
   if absent.) Extinction coefficient (mag/airmass) for this site.
 \item[\var{atmospheric\_temperature}] (optional, no change if absent.)
   Surface air temperature (Degrees Celsius). Used for refraction. Set
-  to -1000 to explicitly declare "no change".
+  to -1000 to explicitly declare ``no change''.
 \item[\var{atmospheric\_pressure}] (optional, no change if absent.)
-  Surface air pressure (mbar; would be 1013 for "normal" sea-level
-  conditions). Used for refraction. Set to -2 to declare "no change",
+  Surface air pressure (mbar; would be 1013 for ``normal'' sea-level
+  conditions). Used for refraction. Set to -2 to declare ``no change'',
   or -1 to compute from altitude.
 \item[\var{display\_fog}] (optional, -1/0/1, default=-1) You may want
   to preconfigure setting 0 for a landscape on the Moon. Set -1 to
-  declare "no change".
+  declare ``no change''.
 \end{description}
 
 
 \subsection{Polygonal landscape}
 \label{sec:landscapes:Polygonal}
 
-This landscape type has been added only recently (since 0.13) to allow
+This landscape type has been added \newFeature{0.13} to allow
 the use of measured horizons. Users of \program{Cartes du
   Ciel}\footnote{SkyChart / Cartes du Ciel planetarium:
-  \url{http://www.ap-i.net/skychart/en/start}} will be happy to hear
-that the format of the list of measurements is compatible.
+  \url{https://www.ap-i.net/skychart/en/start}} will be happy to hear
+that the format of the list of measurements is mostly compatible.
 
 This is the technically simplest of the landscapes, but may be used to
 describe accurately measured horizon profiles. The file that encodes
@@ -183,12 +183,20 @@ present there, it will be used to define object visibility (instead of
 the opacity of the landscape photo textures) and, if
 \var{horizon\_line\_color} is defined, will be plotted.
 
-There is a small caveat: Sometimes, there may appear vertical lines
+There are two little caveats:
+\begin{itemize}
+\item Sometimes, there may appear vertical lines
 from some corners towards the zenith or the mathematical horizon,
 e.g.\ if there is a vertex including azimuth 0 or 180. If this
 irritates you, just offset this azimuth minimally (e.g., 180.00001).
+\item As technical requirement, the zenith is always assumed to remain
+  free and uncovered. It is not possible to define a ``dome cutout''
+  or similar restricted views out of a window. Such effect can be
+  achieved with a Spherical Landscape (see
+  section~\ref{sec:landscapes:Spherical}).
+\end{itemize}
 
-The \file{landscape.ini} file for a polygonal type landscape looks
+\noindent The \file{landscape.ini} file for a polygonal type landscape looks
 like this (this example is based on the \landscape{Geneve} landscape
 which was borrowed from \program{Cartes du Ciel} and comes with Stellarium):
 
@@ -240,9 +248,10 @@ Where:
   elements, e.g.\ stars, are not drawn below this altitude to increase
   performance. Under certain circumstances you may want to specify
   something else here. (since v0.14.0)
-\item[\var{polygonal\_horizon\_inverted}] (optional, default=false) In
-  rare cases like horizon lines for high mountain peaks with many
-  negative horizon values this should be set to true. (since v0.15.0)
+\item[\var{polygonal\_horizon\_inverted}] (optional, default=false;
+  only required in v0.15.0--0.20.2) In rare cases like horizon lines
+  for high mountain peaks with many negative horizon values this
+  should be set to true.
 \end{description}
 
 \subsubsection{Artificial Polygonal Panoramas}
@@ -250,11 +259,17 @@ The online service
 \program{HeyWhatsThat}\footnote{\url{https://www.heywhatsthat.com/}}
 allows an SRTM-based analysis of the viewshed (the visible topographic
 area) for an observing location which also gives names for the
-mountain peaks visible at a given location.  A data download option
-provides users inclined to do some programming with the necessary data
-to create a polygonal landscape for Stellarium.
+mountain peaks visible at a given location. In summer of 2020 a
+dedicated landscape download option for \program{Stellarium} was added
+(see upper-right corner), so that you can install a custom
+landscape. Its package/directory name is
+\texttt{stellarium-landscape}. If you create more than one, you must
+rename the directory. You may also want to extend the scene
+description in \file{landscape.ini}.
 
-In addition, \name{Brian Doyle} has created another online service,
+A data download option provides users inclined to do some programming
+with the necessary data to create a polygonal landscape for
+Stellarium. From this, \name[Brian]{Doyle} has created another online service,
 \program{horiZONE}\footnote{\url{https://briandoylegit.github.io/horiZONE/}},
 which does just this work for you.
 \begin{enumerate}
@@ -262,11 +277,13 @@ which does just this work for you.
   \program{HeyWhatsThat}, enter the ``all panoramas'' tab, and on the
   map click the marker associated with the panorama. Select ``make
   public''.
-\item Then, take the landscape key given to you by \program{HeyWhatsThat}\footnote{
-in the line \texttt{https://www.heywhatsthat.com/?view=N15ABXY}}, add
-a few lines of description that will become visible in Stellarium, and you
-receive a ZIP file ready for installation in Stellarium (see section
-\ref{sec:gui:view:landscape}).
+\item Then, take the landscape key given to you by
+  \program{HeyWhatsThat}\footnote{ in the line
+    \texttt{https://www.heywhatsthat.com/?view=N15ABXY}}, add a few
+  lines of description and other details that will become visible and
+  used in Stellarium, and you receive a ZIP file ready for
+  installation in Stellarium (see section
+  \ref{sec:gui:view:landscape}).
 \end{enumerate}
 
 
@@ -330,7 +347,7 @@ Where:
 \item[\var{bottom\_cap\_color}] (optional;
   default=\texttt{-1.0,0.0,0.0} to signal ``no color''). If set, this
   is used to close any hole in the nadir area (if \var{maptex\_bottom}
-  higher than -90). \newFeature{v0.19.0}
+  higher than -90). \newFeature{0.19.0}
 \item[\var{maptex\_fog}] (optional; default: no fog) is the name of
   the fog image file for this landscape.
 \item[\var{maptex\_fog\_top}] (optional; default=90) is the altitude
@@ -364,7 +381,7 @@ Where:
 \item[\var{polygonal\_angle\_rotatez}] (optional, default=0) see \ref{sec:landscapes:Polygonal}
 \item[\var{horizon\_line\_color}] see \ref{sec:landscapes:Polygonal}
 \item[\var{minimal\_brightness}]  see \ref{sec:landscapes:Polygonal}
-\item[\var{minimal\_altitude}] (optional, default=-2) \newFeature{v0.14.0} Some sky
+\item[\var{minimal\_altitude}] (optional, default=-2) \newFeature{0.14.0} Some sky
   elements, e.g.\ stars, are not drawn below this altitude for
   efficiency. Under certain circumstances (e.g.\ for space station
   panoramas where you may have sky below your feet, or for deep
@@ -488,7 +505,7 @@ Where:
 \item[\var{tex0 ... tex<nbsidetex-1>}] are the side texture file
   names. These should exist in the \file{textures / landscapes /
     landscape} directory in PNG format.
-\item[\var{light0 ... light<nbsidetex-1>}] are optional textures\newFeature{v0.13.1}. If
+\item[\var{light0 ... light<nbsidetex-1>}] are optional textures\newFeature{0.13.1}. If
   they exist, they are used as overlays on top of the respective
   \var{tex<...>} files and represent nocturnal illumination,
   e.g. street lamps, lit windows, red dots on towers, sky glow by city
@@ -550,7 +567,7 @@ Where:
   front of the scenery, i.e. the side textures will overlap over the
   ground texture if \var{ground\_angle\_shift} >
   \var{decor\_angle\_shift}.
-\item[\var{calibrated}] (optional).\newFeature{v0.10.6} Only if true,
+\item[\var{calibrated}] (optional).\newFeature{0.10.6} Only if true,
   \var{decor\_alt\_angle} etc. really work as documented above. The
   (buggy) old code was left to work with the landscapes already
   existing. Note that with ``uncalibrated'' landscapes, sunrise
@@ -749,7 +766,7 @@ like a church, optimal results will be gained with a camera on a
 tripod with a specialized panorama head (Figure~\ref{fig:landscapes:panoHead}) which assures the camera
 rotates around the \emph{entrance pupil}\footnote{In many references
   you will find ``Nodal Point'' mentioned here. But see these:
-  \url{http://en.wikipedia.org/wiki/Cardinal_point_\%28optics\%29\#Nodal_points},
+  \url{https://en.wikipedia.org/wiki/Cardinal_point_\%28optics\%29\#Nodal_points},
   \url{http://web.archive.org/web/20060513074042/http://doug.kerr.home.att.net/pumpkin/Pivot_Point.pdf},
   \url{http://www.janrik.net/PanoPostings/NoParallaxPoint/TheoryOfTheNoParallaxPoint.pdf}
 } of the lens in order to avoid errors by the parallax shift observed
@@ -951,7 +968,7 @@ increasingly hard to avoid.
 
 \paragraph{Using Straight Edges as Guides}
 If the panorama contains straight lines like vertical edges of
-buildings, these can be used to automatically get a correctly levelled
+buildings, these can be used to automatically get a correctly leveled
 horizon: Vertical lines are mapped to vertical lines in
 equirectangular panos! In the \menu{Control Points} tab, select the image
 with the vertical edge in both subframes, and mark points on the
@@ -976,9 +993,9 @@ rings should be linked mostly to their respective upper photos, but
 not necessarily to the  images to its sides. The resulting panorama will then
 show a good horizon line, while stitching artifacts in a grassy or
 otherwise only decorative ground will usually be acceptable and can,
-if needed, be camouflaged in postprocessing.
+if needed, be camouflaged in post-processing.
 
-This optimisation and editing of control points is likely a longish
+This optimization and editing of control points is likely a longish
 iterative process, and these are the late night hours where you will
 finally wish you had used a panorama head\ldots
 
@@ -999,7 +1016,7 @@ area, or use the crop settings to define rectangular areas to use.
 \label{sec:landscapes:Exposure}
 In the \menu{Photos} tab, select \button{Photometric parameters} on the right
 side. The EV column lists the \emph{Exposure Value}. If you see disbalance
-here and in the preview window, you can run a photometric optimisation
+here and in the preview window, you can run a photometric optimization
 with the lowest button on the \menu{Photos} tab. Simply select Low dynamic
 range and press \button{Calculate}. The preview should now show a seamless
 image. If all else fails, you can edit the EV values directly.
@@ -1008,9 +1025,9 @@ Advanced photographers may want to correct exposures in their RAW
 images before creating JPG or TIF images to combine with
 \program{Hugin}. This unfortunately may create exposure disbalance
 because the EXIF tags may not be adjusted accordingly, so based on
-different exposure/f-stop conbinations \program{Hugin} may think it
+different exposure/f-stop combinations \program{Hugin} may think it
 has to re-balance the values. In these cases, don't run the
-photometric optimiser. Some image exposure values have to be changed
+photometric optimizer. Some image exposure values have to be changed
 manually, and the effect supervised in the preview window. Usually the
 smooth blending in the subprogam \program{enblend} called by
 \program{Hugin} will hide remaining differences.
@@ -1021,7 +1038,7 @@ smooth blending in the subprogam \program{enblend} called by
 \label{sec:landscapes:stitching}
 
 When you are happy with the panorama in the preview window and the
-matchpoints promise a good fit, it is time to finally create the
+match-points promise a good fit, it is time to finally create the
 panorama image. \program{Hugin} can create a large number of different
 projections which all have their application. For Stellarium, we can
 only use the equirectangular projection. You still have 2 options:
@@ -1048,7 +1065,7 @@ and photos taken with a wide-angle lens. Increasing this size will
 most likely not lead to higher optical resolution!  The panorama width
 which you can most usefully create depends on the resolution of the
 source images (which leads to the result given by \program{Hugin}) and on your
-needs. If you need arcminute resolution, you would aim for
+needs. If you need arc-minute resolution, you would aim for
 $360\times60=21600$ pixels, which cannot be loaded into graphics
 memory in a single piece, i.e., is too large for Stellarium, and must
 be configured as \var{old\_style} landscape. In this case, 10 or 11 tiles of
@@ -1129,7 +1146,7 @@ A few important commands:
 \end{description}
 
 
-The most obvious postprocessing need for our panorama is making the sky
+The most obvious post-processing need for our panorama is making the sky
 transparent. The optimal tool usually is the ``Fuzzy Select'', which
 is equivalent to the ``Magic Wand'' tool in \program{Photoshop}. Simply mark the
 sky, and then delete it. The checkerboard background indicates
@@ -1154,7 +1171,7 @@ calibration grid, see section~\ref{sec:landscapes:FinalCalibration}.
 \label{sec:landscapes:ImageMagick}
 
 \program{ImageMagick}
-(\program{IM})\footnote{\url{http://www.imagemagick.org/}} can be
+(\program{IM})\footnote{\url{https://www.imagemagick.org/}} can be
 described as ``Swiss Army Knife of image manipulation''. It can do
 most operations usually applied to images in a GUI program, but is
 called from the command line. This allows also to include \program{IM}
@@ -1174,7 +1191,7 @@ There are some  things you might need to know:
 \item The command line is not your enemy, but a way to call expert tools.
 \item The Windows command line processor \program{cmd.exe} is far from user friendly.
 \item There are remedies and alternatives. See notes on \program{clink} (\ref{sec:landscapes:clink})
-  for a considerable improvement, and \program{Cygwin} (\ref{sec:landscapes:cygwin}) for experts.
+  for a considerable improvement, and \program{WSL} (\ref{sec:landscapes:WSL}) for experts.
 \end{itemize}
 
 
@@ -1372,18 +1389,18 @@ the right side. Now you see ``Yaw'', ``Pitch'' and ``Roll'' values of
 camera-to-world orientation listed in the photos list. It should now
 be possible, by changing the values \emph{only for the anchor image}
 and re-optimizing, to come to a panorama with only minimal error. In
-the process, start with Optimising \menu{Positions> incremental from
-  anchor}, then go for view and barrel optimisation, and so on. Always
+the process, start with Optimizing \menu{Positions> incremental from
+  anchor}, then go for view and barrel optimization, and so on. Always
 try to remove foreground match points which have large error and are irrelevant
 for the task to match the horizon. Those are especially cross-matches
-of horizon and subhorizon rows of images. Only vertically and
+of horizon and sub-horizon rows of images. Only vertically and
 horizontally adjacent images should be required to match. For handheld
 panoramas, also links between adjacent images in the non-horizontal rows are usually
 too erroneous to be useful, just remove these match points. Use the
 \menu{Layout} tab in the Fast Panorama Preview to see the relations
 between images (Fig.~\ref{fig:FastPanoPreview}): Red lines have big
 errors, green lines are good, thin gray lines indicate possible
-overlap without specified match points. After each optimisation step,
+overlap without specified match points. After each optimization step,
 export a new pano image, load as layer in \program{GIMP}, and check
 again.
 
@@ -1391,7 +1408,7 @@ again.
   \centering
     \includegraphics[width=\textwidth]{FastPreview.png}
     \caption{\program{Hugin}'s Fast Panorama Preview can be used to check which
-      images are connected to its neighbours. Most important are good
+      images are connected to its neighbors. Most important are good
       matches along the horizon, the images in the lower rows are
       clearly less important. If captured on a tripod, they should
       still match. }
@@ -1423,13 +1440,13 @@ achieve a match to fit your needs.
 
 In case you have taken photographs in several rings but without a panorama tripod, you may have to
 first align only the horizontal images (deselect the lower images to
-exclude from optimisation), and when the horizon ring is aligned
-perfectly, deactivate further optimisation in \program{Hugin} for those photos
-while ``attaching'' (optimising) the lower photos. In \program{Hugin}'s \menu{Photos} tab,
-select \menu{Optimise> Geometric> Custom Parameters}. This opens an
-extra tab \menu{Optimiser}, where you can fine-tune your needs: Switch
+exclude from optimization), and when the horizon ring is aligned
+perfectly, deactivate further optimization in \program{Hugin} for those photos
+while ``attaching'' (optimizing) the lower photos. In \program{Hugin}'s \menu{Photos} tab,
+select \menu{Optimize> Geometric> Custom Parameters}. This opens an
+extra tab \menu{Optimizer}, where you can fine-tune your needs: Switch
 off all variables for the photos in the horizon ring, and make sure
-the lower photos fit in the preview after optimisation.
+the lower photos fit in the preview after optimization.
 
 It may even help to define that the lower rows have been taken with a
 different Lens, so the field of view and distortion settings of the
@@ -1444,7 +1461,7 @@ enough experience what level of error may be acceptable for you.
 \label{sec:landscapes:Artificial}
 
 I have created a
-website\footnote{\url{http://homepage.univie.ac.at/Georg.Zotti/php/panoCam.php}} where
+website\footnote{\url{https://homepage.univie.ac.at/Georg.Zotti/php/panoCam.php}} where
 you can enter geographical coordinates and download a file
 \file{pano.kml}  which helps with image creation from \program{Google Earth}
 imagery. Store this file for a site, let us call it
@@ -1477,7 +1494,7 @@ azimuth.  In this case, don't run the optimizer, but you can
 immediately set an output resolution and stitch
 (see~\ref{sec:landscapes:stitching}). To get rid of the image
 decorations (compass etc), apply masks\footnote{There is a wide
-  overlap in the images to allow generous trimming.}. Postprocessing
+  overlap in the images to allow generous trimming.}. Post-processing
 steps are the same as for photo-panoramas: make sky invisible, crop,
 etc.
 
@@ -1547,6 +1564,20 @@ already be saturated.
 
 The possibilities seem limited only by your time and skills!
 
+\section{Troubleshooting}
+\label{sec:landscapes:Troubleshooting}
+
+If something does not work as described and Stellarium does not show
+your landscape as expected but maybe just a bright magenta-colored
+box, don't panic.  Double and triple-check the entries in
+\file{landscape.ini}. \newFeature{0.20.2} Make sure the texture is in
+PNG format and the file name is correct. Check the logfile for error
+messages. If the image is too large, it will be re-scaled on loading,
+but it is more efficient to keep images as small as required. Only few
+systems can use textures larger than $16384\times16384$~Pixels. If you
+need high resolution, use the \texttt{old\_style} type (see section
+\ref{sec:landscapes:oldStyle}).
+
 \section{Other recommended software}
 \label{sec:landscapes:otherSoftware}
 
@@ -1560,7 +1591,7 @@ image manipulation and other tasks on Windows.
 \program{IrfanView} is a free image viewer for Windows with many
 options. It can show almost any image format, including several camera
 RAW formats, in windowed and full-screen mode. It is definitely
-preferrable over any image viewer built into Windows. Unfortunately
+preferable over any image viewer built into Windows. Unfortunately
 however, it has no panorama viewer function!
 
 \subsection{FSPViewer}
@@ -1589,7 +1620,7 @@ HorizonPosition=33.8
 \label{fig:FSPexample}
 \end{figure}
 
-\subsection{Clink}
+\subsection{Clink and GNUWin32}
 \label{sec:landscapes:clink}
 
 \program{Clink}\footnote{\url{http://mridgers.github.io/clink/}} is a command
@@ -1601,34 +1632,25 @@ command-line completion. It is not essential for our tasks, but a
 general improvement of usability of the Windows command line which
 else has not caused me any trouble.
 
-\subsection{Cygwin}
-\label{sec:landscapes:cygwin}
-
-Compared to Linux, the command line of Windows can be a humbling experience. None of
-the wonderful helpers taken for granted on Linux are
-available. \program{Cygwin}\footnote{\url{https://cygwin.com/index.html}}
-provides a command line console with \program{bash} shell and all the
-niceties like \program{make}, \program{awk}, \program{sed}, etc.\ which seem
-essential for routine work.  If you are used to Linux tools, use
-inline scripts in your \file{Makefile}s and need more than \program{Clink} can
-offer, you should install \program{Cygwin}.
-
-\subsection{GNUWin32}
-\label{sec:landscapes:GNUwin32}
-
-Alternative to \program{Cygwin}, several of those nice tools (\program{sed},
-\program{awk} etc.) have also been made available as standalone commands
-for Windows. If you don't need the inline scripting capabilities in
-\file{Makefile}s which you would get from \program{Cygwin} but just want to call
-\program{awk} or \program{sed} inside your \program{.BAT} scripts, maybe this is enough.
+Compared to Linux, the command line of Windows can still be a humbling
+experience. None of the wonderful helpers taken for granted on Linux
+are available.  Many of the nice tools known and taken for granted by
+Linux users (\program{make}, \program{sed}, \program{awk} etc.) have
+also been made available as standalone commands for Windows. If you
+don't need the inline scripting capabilities in \file{Makefile}s which
+you would get from a more complete Linux installation but just want to
+call \program{awk} or \program{sed} inside your \program{.BAT}
+scripts, maybe this is enough.
 
 \subsection{WSL -- Windows Subsystem for Linux}
 \label{sec:landscapes:WSL}
 
 Finally, the 64-bit editions of Windows~10 come with an optional
 feature that allows you to install a complete Linux distribution like
-Ubuntu inside your Windows system. While you cannot run graphic
-applications, all the command-line tools are available.
+Ubuntu inside your Windows system. Combined with an X11 server like
+XMing\footnote{\url{https://sourceforge.net/projects/xming/}}, you can
+even run graphic applications like Stellarium, and all the
+command-line tools are available.
 
 
 %%% Local Variables:

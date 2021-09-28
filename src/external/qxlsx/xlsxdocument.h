@@ -1,26 +1,17 @@
-//--------------------------------------------------------------------
-//
-// QXlsx
-// MIT License
-// https://github.com/j2doll/QXlsx
-//
-// QtXlsx
-// https://github.com/dbzhang800/QtXlsxWriter
-// http://qtxlsx.debao.me/
-// MIT License
+// xlsxdocument.h
 
 #ifndef QXLSX_XLSXDOCUMENT_H
 #define QXLSX_XLSXDOCUMENT_H
-
-#include "xlsxglobal.h"
-#include "xlsxformat.h"
-#include "xlsxworksheet.h"
 
 #include <QtGlobal>
 #include <QObject>
 #include <QVariant>
 #include <QIODevice>
-class QImage;
+#include <QImage>
+
+#include "xlsxglobal.h"
+#include "xlsxformat.h"
+#include "xlsxworksheet.h"
 
 QT_BEGIN_NAMESPACE_XLSX
 
@@ -31,18 +22,18 @@ class DataValidation;
 class ConditionalFormatting;
 class Chart;
 class CellReference;
-
 class DocumentPrivate;
+
 class Document : public QObject
 {
 	Q_OBJECT
-	Q_DECLARE_PRIVATE(Document)
-
+    Q_DECLARE_PRIVATE(Document) // D-Pointer. Qt classes have a Q_DECLARE_PRIVATE
+                                // macro in the public class. The macro reads: qglobal.h
 public:
 	explicit Document(QObject *parent = NULL);
 	Document(const QString& xlsxName, QObject* parent = NULL);
 	Document(QIODevice* device, QObject* parent = NULL);
-	virtual ~Document();
+	~Document();
 
 	bool write(const CellReference &cell, const QVariant &value, const Format &format=Format());
 	bool write(int row, int col, const QVariant &value, const Format &format=Format());
@@ -50,7 +41,10 @@ public:
 	QVariant read(const CellReference &cell) const;
 	QVariant read(int row, int col) const;
 	
-	bool insertImage(int row, int col, const QImage &image);
+    int insertImage(int row, int col, const QImage &image);
+    bool getImage(int imageIndex, QImage& img);
+    bool getImage(int row, int col, QImage& img);
+    uint getImageCount();
 	
 	Chart *insertChart(int row, int col, const QSize &size);
 	
@@ -91,7 +85,8 @@ public:
 	Cell *cellAt(const CellReference &cell) const;
 	Cell *cellAt(int row, int col) const;
 
-	bool defineName(const QString &name, const QString &formula, const QString &comment=QString(), const QString &scope=QString());
+    bool defineName(const QString &name, const QString &formula,
+                    const QString &comment=QString(), const QString &scope=QString());
 
 	CellRange dimension() const;
 
@@ -100,8 +95,10 @@ public:
 	QStringList documentPropertyNames() const;
 
 	QStringList sheetNames() const;
-	bool addSheet(const QString &name = QString(), AbstractSheet::SheetType type = AbstractSheet::ST_WorkSheet);
-	bool insertSheet(int index, const QString &name = QString(), AbstractSheet::SheetType type = AbstractSheet::ST_WorkSheet);
+    bool addSheet(const QString &name = QString(),
+                  AbstractSheet::SheetType type = AbstractSheet::ST_WorkSheet);
+    bool insertSheet(int index, const QString &name = QString(),
+                     AbstractSheet::SheetType type = AbstractSheet::ST_WorkSheet);
 	bool selectSheet(const QString &name);
 	bool renameSheet(const QString &oldName, const QString &newName);
 	bool copySheet(const QString &srcName, const QString &distName = QString());
@@ -117,13 +114,27 @@ public:
 	bool saveAs(const QString &xlsXname) const;
 	bool saveAs(QIODevice *device) const;
 
+	// copy style from one xlsx file to other
+	static bool copyStyle(const QString &from, const QString &to);
+
 	bool isLoadPackage() const; 
+	bool load() const; // equals to isLoadPackage()
 
 	bool changeimage(int filenoinmidea,QString newfile); // add by liufeijin20181025
 
+    bool autosizeColumnWidth(const CellRange &range);
+    bool autosizeColumnWidth(int column);
+    bool autosizeColumnWidth(int colFirst, int colLast);
+    bool autosizeColumnWidth(void);
+
 private:
-	Q_DISABLE_COPY(Document)
-	DocumentPrivate * const d_ptr;
+    QMap<int, int> getMaximalColumnWidth(int firstRow=1, int lastRow=INT_MAX);
+
+
+private:
+    Q_DISABLE_COPY(Document) // Disables the use of copy constructors and
+                             // assignment operators for the given Class.
+    DocumentPrivate* const d_ptr;
 };
 
 QT_END_NAMESPACE_XLSX

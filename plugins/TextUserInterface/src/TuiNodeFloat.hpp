@@ -48,8 +48,8 @@ public:
 	//! shares the same parent)
 	TuiNodeFloat(const QString& text, QObject* receiver, const char* method, float defValue, 
 		      float min, float max, float inc, TuiNode* parent=Q_NULLPTR, TuiNode* prev=Q_NULLPTR);
-	virtual TuiNodeResponse handleEditingKey(int key);
-	virtual QString getDisplayText() const;
+	virtual TuiNodeResponse handleEditingKey(int key) Q_DECL_OVERRIDE;
+	virtual QString getDisplayText() const Q_DECL_OVERRIDE;
 
 signals:
 	void setValue(float b);

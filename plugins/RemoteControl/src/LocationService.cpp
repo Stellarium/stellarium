@@ -55,13 +55,13 @@ void LocationService::get(const QByteArray& operation, const APIParameters &para
 
 		response.writeJSON(QJsonDocument(list));
 	}
-	else if(operation == "countrylist")
+	else if(operation == "regionlist")
 	{
 		const StelTranslator& trans = *StelTranslator::globalTranslator;
 
-		QStringList allCountries = StelApp::getInstance().getLocaleMgr().getAllCountryNames();
+		QStringList allRegions = StelApp::getInstance().getLocationMgr().getRegionNames();
 		QJsonArray list;
-		for (auto str : allCountries)
+		for (const auto &str : qAsConst(allRegions))
 		{
 			QJsonObject obj;
 			obj.insert("name",str);
@@ -164,7 +164,8 @@ void LocationService::post(const QByteArray& operation, const APIParameters &par
 		QString sAltitude = QString::fromUtf8(parameters.value("altitude"));
 
 		QString name = QString::fromUtf8(parameters.value("name"));
-		QString country = QString::fromUtf8(parameters.value("country"));
+		//QString country = QString::fromUtf8(parameters.value("country"));
+		QString region = QString::fromUtf8(parameters.value("region"));
 		QString planet = QString::fromUtf8(parameters.value("planet"));
 
 		//check each field
@@ -193,9 +194,9 @@ void LocationService::post(const QByteArray& operation, const APIParameters &par
 			loc.name = name;
 			doneSomething = true;
 		}
-		if(!country.isEmpty() && country != loc.country)
+		if(!region.isEmpty() && region != loc.region)
 		{
-			loc.country = country;
+			loc.region = region;
 			doneSomething = true;
 		}
 

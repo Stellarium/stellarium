@@ -50,6 +50,7 @@
 #include <QVariant>
 #include <QVariantMap>
 #include <QDir>
+#include <stdexcept>
 
 #define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
 
@@ -70,7 +71,7 @@ StelPluginInfo NovaeStelPluginInterface::getPluginInfo() const
 	info.id = "Novae";
 	info.displayedName = N_("Bright Novae");
 	info.authors = "Alexander Wolf";
-	info.contact = "https://github.com/Stellarium/stellarium";
+	info.contact = STELLARIUM_DEV_URL;
 	info.description = N_("A plugin that shows some bright novae in the Milky Way galaxy.");
 	info.version = NOVAE_PLUGIN_VERSION;
 	info.license = NOVAE_PLUGIN_LICENSE;
@@ -141,7 +142,7 @@ void Novae::init()
 			return;
 
 		texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
-		addAction("actionShow_Novae_ConfigDialog", N_("Bright Novae"), N_("Bright Novae configuration window"), configDialog, "visible");
+		addAction("actionShow_Novae_ConfigDialog", N_("Bright Novae"), N_("Bright Novae configuration window"), configDialog, "visible", ""); // Allow assign shortkey
 	}
 	catch (std::runtime_error &e)
 	{
@@ -177,6 +178,7 @@ void Novae::init()
 	updateTimer->start();
 
 	connect(this, SIGNAL(jsonUpdateComplete(void)), this, SLOT(reloadCatalog()));
+	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
 
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 }
@@ -272,46 +274,38 @@ StelObjectP Novae::searchByNameI18n(const QString& nameI18n) const
 	return Q_NULLPTR;
 }
 
-QStringList Novae::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
+QStringList Novae::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (maxNbItem <= 0)
-	{
 		return result;
-	}
 
 	QStringList names;
-	if (inEnglish)
+	for (const auto& n : nova)
 	{
-		for (const auto& n : nova)
-		{
-			names.append(n->getEnglishName());
-			names.append(n->getDesignation());
-		}
-	}
-	else
-	{
-		for (const auto& n : nova)
-		{
-			names.append(n->getNameI18n());
-		}
+		names.append(n->getNameI18n());
+		names.append(n->getEnglishName());
+		names.append(n->getDesignation());
 	}
 
+	QString fullMatch = "";
 	for (const auto& name : names)
 	{
 		if (!matchObjectName(name, objPrefix, useStartOfWords))
-		{
 			continue;
-		}
 
-		result.append(name);
+		if (name==objPrefix)
+			fullMatch = name;
+		else
+			result.append(name);
+
 		if (result.size() >= maxNbItem)
-		{
 			break;
-		}
 	}
 
 	result.sort();
+	if (!fullMatch.isEmpty())
+		result.prepend(fullMatch);
 	return result;
 }
 
@@ -626,9 +620,7 @@ void Novae::startDownload(QString urlString)
 	QNetworkRequest request;
 	request.setUrl(QUrl(updateUrl));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
-	#if QT_VERSION >= 0x050600
 	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
-	#endif
 	downloadReply = networkManager->get(request);
 	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
 
@@ -666,23 +658,6 @@ void Novae::downloadComplete(QNetworkReply *reply)
 		return;
 
 	disconnect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
-
-	#if QT_VERSION < 0x050600
-	int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
-	if (statusCode == 301 || statusCode == 302 || statusCode == 307)
-	{
-		QUrl rawUrl = reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
-		QUrl redirectUrl(rawUrl.toString(QUrl::RemoveQuery));
-		qDebug() << "[Novae] The query has been redirected to" << redirectUrl.toString();
-		updateUrl = redirectUrl.toString();
-		conf->setValue("Novae/url", updateUrl);
-		reply->deleteLater();
-		downloadReply = Q_NULLPTR;
-		startDownload(redirectUrl.toString());
-		return;
-	}
-	#endif
-
 	deleteDownloadProgressBar();
 
 	if (reply->error() || reply->bytesAvailable()==0)

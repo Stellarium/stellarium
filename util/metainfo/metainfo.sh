@@ -7,7 +7,7 @@
 ROOT=../..
 ASMETAINFOITS=./as-metainfo.its
 podir=${ROOT}/po/stellarium-metainfo
-metainfo_file=${ROOT}/data/stellarium.appdata.xml
+metainfo_file=${ROOT}/data/org.stellarium.Stellarium.appdata.xml
 
 # first, strip translation from project metadata file
 tmpxmlfile=$(mktemp)
@@ -17,12 +17,11 @@ xmlstarlet ed -d "//*[@xml:lang]" $metainfo_file > $tmpxmlfile
 metainfo_file_basename=$(basename $metainfo_file)
 dataname="stellarium-metainfo"
 
-# create pot file stellarium.appdata.xml -> stellarium.appdata.pot
+# create pot file: org.stellarium.Stellarium.appdata.xml -> stellarium-metainfo.pot
 itstool -i $ASMETAINFOITS -o $podir/$dataname.pot $tmpxmlfile
 esc_tmpxmlfile=$(echo $tmpxmlfile|sed -e 's/[]\/()$*.^|[]/\\&/g')
 sed -i "/^#:/s/$esc_tmpxmlfile/$metainfo_file_basename/" $podir/$dataname.pot
 
-tmpmofiles=""
 tmpdir=$(mktemp -d)
 # find po files in l10n module dir
 for pofile in $(ls $podir/*.po 2> /dev/null); do
@@ -32,16 +31,21 @@ for pofile in $(ls $podir/*.po 2> /dev/null); do
 
     # generate mo files (need to be named after their language)
     mofile="$tmpdir/$lang.mo"
-    msgfmt $pofile -o $mofile
-
-    tmpmofiles="$tmpmofiles $mofile"
+    if [ $lang != "tzm" ]; then
+        msgfmt $pofile -o $mofile
+    fi
 done
 
-if [ -n "$tmpmofiles" ]; then
-    # recreate file, using the untranslated temporary data and the translation
-    itstool -i $ASMETAINFOITS -j $tmpxmlfile -o $metainfo_file $tmpmofiles
-fi
+# recreate file, using the untranslated temporary data and the translation
+itstool -i $ASMETAINFOITS -j $tmpxmlfile -o $metainfo_file $tmpdir/*.mo
 
 # cleanup
 rm -rf $tmpdir
 rm $tmpxmlfile
+
+# update list of releases
+./update_releases_appdata.pl
+
+# format (pretty print)
+xmllint --format --output $metainfo_file $metainfo_file
+

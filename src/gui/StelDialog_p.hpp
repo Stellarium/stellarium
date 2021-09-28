@@ -25,11 +25,13 @@
 #define STELDIALOG_P_HPP
 
 #include "StelPropertyMgr.hpp"
+#include "AngleSpinBox.hpp"
 #include <QAbstractButton>
 #include <QComboBox>
 #include <QSpinBox>
 #include <QDoubleSpinBox>
 #include <QSlider>
+#include <QGroupBox>
 
 //! A StelPropertyProxy that works with QAbstractButton widgets.
 //! When the property changes, the widget's value is updated, while preventing widget signals to be sent.
@@ -44,6 +46,21 @@ protected slots:
 	virtual void onPropertyChanged(const QVariant& value) Q_DECL_OVERRIDE;
 private:
 	QAbstractButton* button;
+};
+
+//! A StelPropertyProxy that works with QGroupBox widgets.
+//! When the property changes, the widget's value is updated, while preventing widget signals to be sent.
+//! This avoids emitting the valueChanged() signal, which would unnecessarily set the property value again, which may lead to problems.
+class QGroupBoxStelPropertyConnectionHelper : public StelPropertyProxy
+{
+	Q_OBJECT
+public:
+	QGroupBoxStelPropertyConnectionHelper(StelProperty* prop,QGroupBox* box);
+
+protected slots:
+	virtual void onPropertyChanged(const QVariant& value) Q_DECL_OVERRIDE;
+private:
+	QGroupBox* box;
 };
 
 //! A StelPropertyProxy that works with QComboBox widgets.
@@ -120,6 +137,21 @@ protected slots:
 	virtual void onPropertyChanged(const QVariant& value) Q_DECL_OVERRIDE;
 private:
 	QDoubleSpinBox* spin;
+};
+
+//! A StelPropertyProxy that works with AngleSpinBox widgets.
+//! When the property changes, the widget's value is updated, while preventing widget signals to be sent.
+//! This avoids emitting the valueChanged() signal, which would unnecessarily set the property value again, which may lead to problems.
+class AngleSpinBoxStelPropertyConnectionHelper : public StelPropertyProxy
+{
+	Q_OBJECT
+public:
+	AngleSpinBoxStelPropertyConnectionHelper(StelProperty* prop,AngleSpinBox* spin);
+
+protected slots:
+	virtual void onPropertyChanged(const QVariant& value) Q_DECL_OVERRIDE;
+private:
+	AngleSpinBox* spin;
 };
 
 class QSliderStelPropertyConnectionHelper : public StelPropertyProxy

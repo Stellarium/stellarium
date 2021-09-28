@@ -23,6 +23,7 @@
 #include <QString>
 #include <QObject>
 #include "StelModule.hpp"
+#include "VecMath.hpp"
 
 // Predeclaration of some classes
 class StelCore;
@@ -73,9 +74,13 @@ class StelApp : public QObject
 	Q_PROPERTY(bool flagUseAzimuthFromSouth READ getFlagSouthAzimuthUsage   WRITE setFlagSouthAzimuthUsage   NOTIFY flagUseAzimuthFromSouthChanged)
 	Q_PROPERTY(bool flagUseCCSDesignation   READ getFlagUseCCSDesignation   WRITE setFlagUseCCSDesignation   NOTIFY flagUseCCSDesignationChanged)
 	Q_PROPERTY(bool flagUseFormattingOutput READ getFlagUseFormattingOutput WRITE setFlagUseFormattingOutput NOTIFY flagUseFormattingOutputChanged)
-	Q_PROPERTY(bool flagOverwriteInfoColor READ getFlagOverwriteInfoColor WRITE setFlagOverwriteInfoColor NOTIFY flagOverwriteInfoColorChanged)
+	Q_PROPERTY(bool flagOverwriteInfoColor  READ getFlagOverwriteInfoColor  WRITE setFlagOverwriteInfoColor  NOTIFY flagOverwriteInfoColorChanged)
+	Q_PROPERTY(Vec3f overwriteInfoColor	READ getOverwriteInfoColor	WRITE setOverwriteInfoColor	 NOTIFY overwriteInfoColorChanged)
+	Q_PROPERTY(Vec3f daylightInfoColor	READ getDaylightInfoColor	WRITE setDaylightInfoColor	 NOTIFY daylightInfoColorChanged)
 	Q_PROPERTY(int  screenFontSize          READ getScreenFontSize          WRITE setScreenFontSize          NOTIFY screenFontSizeChanged)
 	Q_PROPERTY(int  guiFontSize             READ getGuiFontSize             WRITE setGuiFontSize             NOTIFY guiFontSizeChanged)
+
+	Q_PROPERTY(QString version READ getVersion)
 
 public:
 	friend class StelAppGraphicsWidget;
@@ -205,7 +210,7 @@ public:
 	//! The caller is responsible for destroying the GUI.
 	void setGui(StelGuiBase* b) {stelGui=b;}
 
-#ifndef DISABLE_SCRIPTING
+#ifdef ENABLE_SCRIPTING
 	//! Get the script API proxy (for signal handling)
 	StelMainScriptAPIProxy* getMainScriptAPIProxy() const {return scriptAPIProxy;}
 	//! Get the script manager
@@ -266,6 +271,16 @@ public slots:
 	//! Get flag for using designations for celestial coordinate systems
 	bool getFlagUseCCSDesignation() const {return flagUseCCSDesignation;}
 
+	//! Define info text color for overwrites
+	void setOverwriteInfoColor(const Vec3f& color);
+	//! Get info text color
+	Vec3f getOverwriteInfoColor() const;
+
+	//! Define info text color for daylight mode
+	void setDaylightInfoColor(const Vec3f& color);
+	//! Get info text color
+	Vec3f getDaylightInfoColor() const;
+
 	//! Get the current number of frame per second.
 	//! @return the FPS averaged on the last second
 	float getFps() const {return fps;}
@@ -310,6 +325,8 @@ signals:
 	void screenFontSizeChanged(int);
 	void guiFontSizeChanged(int);
 	void fontChanged(QFont);
+	void overwriteInfoColorChanged(const Vec3f & color);
+	void daylightInfoColorChanged(const Vec3f & color);
 
 	//! Called just after a progress bar is added.
 	void progressBarAdded(const StelProgressController*);
@@ -335,6 +352,8 @@ private:
 	//! Used internally to set the viewport effects.
 	//! @param drawFbo the OpenGL fbo we need to render into.
 	void applyRenderBuffer(quint32 drawFbo=0);
+
+	QString getVersion() const;
 
 	// The StelApp singleton
 	static StelApp* singleton;
@@ -383,7 +402,7 @@ private:
 
 	StelSkyLayerMgr* skyImageMgr;
 
-#ifndef DISABLE_SCRIPTING
+#ifdef ENABLE_SCRIPTING
 	// The script API proxy object (for bridging threads)
 	StelMainScriptAPIProxy* scriptAPIProxy;
 
@@ -400,12 +419,6 @@ private:
 	// The scaling ratio to apply on all display elements, like GUI, text etc..
 	float globalScalingRatio;
 	
-	// Used to collect wheel events
-	QTimer * wheelEventTimer;
-
-	// Accumulated horizontal and vertical wheel event deltas
-	int wheelEventDelta[2];
-
 	float fps;
 	int frame;
 	double frameTimeAccum;		// Used for fps counter
@@ -450,6 +463,8 @@ private:
 	bool flagUseFormattingOutput; // Use tabular coordinate format for infotext
 	bool flagUseCCSDesignation;   // Use symbols like alpha (RA), delta (declination) for coordinate system labels
 	bool flagOverwriteInfoColor; // Overwrite and use color for text in info panel
+	Vec3f overwriteInfoColor;
+	Vec3f daylightInfoColor;
 #ifdef 	ENABLE_SPOUT
 	SpoutSender* spoutSender;
 #endif

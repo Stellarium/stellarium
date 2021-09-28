@@ -36,12 +36,25 @@ QString Star1::getNameI18n(void) const
 		if (!commonNameI18.isEmpty()) return commonNameI18;
 		if (StarMgr::getFlagSciNames())
 		{
-			const QString sciName = StarMgr::getSciName(getHip());
-			if (!sciName.isEmpty()) return sciName;
+			const QStringList sciNames = StarMgr::getSciName(getHip()).split(" - ");
+			if (sciNames.count()>0) return sciNames.first();
 			const QString varSciName = StarMgr::getGcvsName(getHip());
-			if (!varSciName.isEmpty() && varSciName!=sciName) return varSciName;			
+			if (!varSciName.isEmpty()) return varSciName;
 			return QString("HIP %1").arg(getHip());
 		}
+	}
+	return QString();
+}
+
+QString Star1::getDesignation() const
+{
+	if (getHip())
+	{
+		const QStringList sciNames = StarMgr::getSciName(getHip()).split(" - ");
+		if (sciNames.count()>0) return sciNames.first();
+		const QString varSciName = StarMgr::getGcvsName(getHip());
+		if (!varSciName.isEmpty()) return varSciName;
+		return QString("HIP %1").arg(getHip());
 	}
 	return QString();
 }
@@ -61,8 +74,8 @@ void Star1::print(void) const
 		 << ", componentIds: " << getComponentIds()
 		 << ", x0: " << getX0()
 		 << ", x1: " << getX1()
-		 << ", bV: " << ((unsigned int)getBV())
-		 << ", mag: " << ((unsigned int)getMag())
+		 << ", bV: " << (static_cast<unsigned int>(getBV()))
+		 << ", mag: " << (static_cast<unsigned int>(getMag()))
 		 << ", spInt: " << getSpInt()
 		 << ", dx0: " << getDx0()
 		 << ", dx1: " << getDx1()

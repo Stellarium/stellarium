@@ -186,7 +186,7 @@ bool StelOpenGLArray::load(const StelOBJ* obj, bool useTangents)
 			const int vtxSize = sizeof(GLfloat) * 8;
 			//alloc data but dont upload
 			m_vertexBuffer.allocate(vertices.size() * vtxSize);
-			m_memoryUsage+=static_cast<size_t>(vertices.size() * vtxSize);
+			m_memoryUsage+=static_cast<size_t>(vertices.size()) * vtxSize;
 			for(int i =0;i<vertices.size();++i)
 			{
 				//copy the first 8 floats from each vertex

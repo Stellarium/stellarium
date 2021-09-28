@@ -35,8 +35,6 @@ class CCD : public QObject
 	Q_PROPERTY(int resolutionY READ resolutionY WRITE setResolutionY)
 	Q_PROPERTY(double chipWidth READ chipWidth WRITE setChipWidth)
 	Q_PROPERTY(double chipHeight READ chipHeight WRITE setChipHeight)
-	Q_PROPERTY(double pixelWidth READ pixelWidth WRITE setPixelWidth)
-	Q_PROPERTY(double pixelHeight READ pixelHeight WRITE setPixelHeight)
 	Q_PROPERTY(double chipRotAngle READ chipRotAngle WRITE setChipRotAngle)
 	Q_PROPERTY(int binningX READ binningX WRITE setBinningX)
 	Q_PROPERTY(int binningY READ binningY WRITE setBinningY)
@@ -65,10 +63,6 @@ public:
 	void setChipWidth(double width);
 	double chipHeight() const;
 	void setChipHeight(double height);
-	double pixelWidth() const;
-	void setPixelWidth(double width);
-	double pixelHeight() const;
-	void setPixelHeight(double height);
 	double chipRotAngle() const;
 	void setChipRotAngle(double angle);
 	int binningX() const;
@@ -92,6 +86,8 @@ public:
 	  */
 	double getActualFOVx(Telescope *telescope, Lens *lens) const;
 	double getActualFOVy(Telescope *telescope, Lens *lens) const;
+	//! focuser size in inches
+	double getFocuserFOV(Telescope *telescope, Lens *lens, double focuserSize) const;
 	double getInnerOAGRadius(Telescope *telescope, Lens *lens) const;
 	double getOuterOAGRadius(Telescope *telescope, Lens *lens) const;
 	double getOAGActualFOVx(Telescope *telescope, Lens *lens) const;
@@ -106,10 +102,6 @@ private:
 	double m_chipWidth;
 	//! chip height in millimeters
 	double m_chipHeight;
-	//! height of 1 pixel in micron (micrometer)
-	double m_pixelWidth;
-	//! width of 1 pixel in micron (micrometer)
-	double m_pixelHeight;
 	//! chip rotation angle around its axis (degrees)
 	double m_chipRotAngle;
 	//! Binning for axes X

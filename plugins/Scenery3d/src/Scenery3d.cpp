@@ -59,6 +59,7 @@ Scenery3d::Scenery3d() :
 	cleanedUp(false),
 	movementKeyInput(0.0,0.0,0.0),
 	oldProjectionType(StelCore::ProjectionPerspective),
+	forceHorizonPolyline(false),
 	loadCancel(false),
 	progressBar(Q_NULLPTR),
 	currentLoadScene(),
@@ -131,19 +132,19 @@ void Scenery3d::handleKeys(QKeyEvent* e)
 	if ((e->type() == QKeyEvent::KeyPress) && (e->modifiers() & S3D_CTRL_MODIFIER))
 	{
 		// Pressing CTRL+ALT: 5x, CTRL+SHIFT: 10x speedup; CTRL+SHIFT+ALT: 50x!
-		float speedup=((e->modifiers() & S3D_SPEEDBASE_MODIFIER)? 10.0f : 1.0f);
-		speedup *= ((e->modifiers() & S3D_SPEEDMUL_MODIFIER)? 5.0f : 1.0f);
+		double speedup=((e->modifiers() & S3D_SPEEDBASE_MODIFIER)? 10.0 : 1.0);
+		speedup *= ((e->modifiers() & S3D_SPEEDMUL_MODIFIER)? 5.0 : 1.0);
 
 		switch (e->key())
 		{
 			case Qt::Key_Plus:      // or
-			case Qt::Key_PageUp:    movementKeyInput[2] =  1.0f * speedup; e->accept(); break;
+			case Qt::Key_PageUp:    movementKeyInput[2] =  1.0 * speedup; e->accept(); break;
 			case Qt::Key_Minus:     // or
-			case Qt::Key_PageDown:  movementKeyInput[2] = -1.0f * speedup; e->accept(); break;
-			case Qt::Key_Up:        movementKeyInput[1] =  1.0f * speedup; e->accept(); break;
-			case Qt::Key_Down:      movementKeyInput[1] = -1.0f * speedup; e->accept(); break;
-			case Qt::Key_Right:     movementKeyInput[0] =  1.0f * speedup; e->accept(); break;
-			case Qt::Key_Left:      movementKeyInput[0] = -1.0f * speedup; e->accept(); break;
+			case Qt::Key_PageDown:  movementKeyInput[2] = -1.0 * speedup; e->accept(); break;
+			case Qt::Key_Up:        movementKeyInput[1] =  1.0 * speedup; e->accept(); break;
+			case Qt::Key_Down:      movementKeyInput[1] = -1.0 * speedup; e->accept(); break;
+			case Qt::Key_Right:     movementKeyInput[0] =  1.0 * speedup; e->accept(); break;
+			case Qt::Key_Left:      movementKeyInput[0] = -1.0 * speedup; e->accept(); break;
 #ifdef QT_DEBUG
 				//leave this out on non-debug builds to reduce conflict chance
 			case Qt::Key_P:         renderer->saveFrusts(); e->accept(); break;
@@ -165,21 +166,21 @@ void Scenery3d::handleKeys(QKeyEvent* e)
 			case Qt::Key_PageUp:
 			case Qt::Key_Minus:
 			case Qt::Key_PageDown:
-				movementKeyInput[2] = 0.0f;
+				movementKeyInput[2] = 0.0;
 #ifndef Q_OS_OSX
 				e->accept();
 #endif
 				break;
 			case Qt::Key_Up:
 			case Qt::Key_Down:
-				movementKeyInput[1] = 0.0f;
+				movementKeyInput[1] = 0.0;
 #ifndef Q_OS_OSX
 				e->accept();
 #endif
 				break;
 			case Qt::Key_Right:
 			case Qt::Key_Left:
-				movementKeyInput[0] = 0.0f;
+				movementKeyInput[0] = 0.0;
 #ifndef Q_OS_OSX
 				e->accept();
 #endif
@@ -223,6 +224,9 @@ void Scenery3d::draw(StelCore* core)
 	{
 		renderer->draw(core,*currentScene);
 	}
+
+	if (forceHorizonPolyline)
+		GETSTELMODULE(LandscapeMgr)->drawPolylineOnly(core); // Allow a check with background line.
 
 	//the message is always drawn
 	if (messageFader.getInterstate() > 0.000001f)
@@ -291,7 +295,7 @@ void Scenery3d::loadConfig()
 {
 	conf->beginGroup(S3D_CONFIG_PREFIX);
 
-	textColor = StelUtils::strToVec3f(conf->value("text_color", "0.5,0.5,1").toString());
+	textColor = Vec3f(conf->value("text_color", "0.5,0.5,1").toString());
 	renderer->setCubemappingMode( static_cast<S3DEnum::CubemappingMode>(conf->value("cubemap_mode",0).toInt()) );
 	renderer->setCubemapSize(conf->value("cubemap_size",2048).toInt());
 	renderer->setShadowmapSize(conf->value("shadowmap_size", 1024).toInt());
@@ -308,6 +312,8 @@ void Scenery3d::loadConfig()
 	renderer->setLazyCubemapInterval(conf->value("cubemap_lazy_interval",1.0).toDouble());
 	renderer->setPixelLightingEnabled(conf->value("flag_pixel_lighting", false).toBool());
 	renderer->setLocationInfoEnabled(conf->value("flag_location_info", false).toBool());
+
+	forceHorizonPolyline = conf->value("force_landscape_polyline", false).toBool();
 
 	bool v1 = conf->value("flag_lazy_dominantface",false).toBool();
 	bool v2 = conf->value("flag_lazy_seconddominantface",true).toBool();
@@ -344,21 +350,17 @@ void Scenery3d::createToolbarButtons() const
 			StelButton* toolbarEnableButton =	new StelButton(Q_NULLPTR,
 									       QPixmap(":/Scenery3d/bt_scenery3d_on.png"),
 									       QPixmap(":/Scenery3d/bt_scenery3d_off.png"),
-									       QPixmap(":/graphicGui/glow32x32.png"),
-									       "actionShow_Scenery3d");
-			StelButton* toolbarSettingsButton =	new StelButton(Q_NULLPTR,
-									       QPixmap(":/Scenery3d/bt_scenery3d_settings_on.png"),
-									       QPixmap(":/Scenery3d/bt_scenery3d_settings_off.png"),
-									       QPixmap(":/graphicGui/glow32x32.png"),
+									       QPixmap(":/graphicGui/miscGlow32x32.png"),
+									       "actionShow_Scenery3d",
+									       false,
 									       "actionShow_Scenery3d_dialog");
 			StelButton* toolbarStoredViewButton =	new StelButton(Q_NULLPTR,
 									       QPixmap(":/Scenery3d/bt_scenery3d_eyepoint_on.png"),
 									       QPixmap(":/Scenery3d/bt_scenery3d_eyepoint_off.png"),
-									       QPixmap(":/graphicGui/glow32x32.png"),
+									       QPixmap(":/graphicGui/miscGlow32x32.png"),
 									       "actionShow_Scenery3d_storedViewDialog");
 
 			gui->getButtonBar()->addButton(toolbarEnableButton, "065-pluginsGroup");
-			gui->getButtonBar()->addButton(toolbarSettingsButton, "065-pluginsGroup");
 			gui->getButtonBar()->addButton(toolbarStoredViewButton, "065-pluginsGroup");
 		}
 	}
@@ -527,7 +529,7 @@ void Scenery3d::loadSceneCompleted()
 
 	//move to the location specified by the scene
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
-	bool landscapeSetsLocation=lmgr->getFlagLandscapeSetsLocation();
+	const bool landscapeSetsLocation=lmgr->getFlagLandscapeSetsLocation();
 	lmgr->setFlagLandscapeSetsLocation(true);
 	lmgr->setCurrentLandscapeName(info.landscapeName, 0.); // took a second, implicitly.
 	// Switched to immediate landscape loading: Else,
@@ -839,6 +841,23 @@ void Scenery3d::setEnableLocationInfo(const bool enableLocationInfo)
 	}
 }
 
+void Scenery3d::setForceHorizonPolyline(const bool forcePolyline)
+{
+	if(forcePolyline != getForceHorizonPolyline())
+	{
+		forceHorizonPolyline=forcePolyline;
+
+		conf->setValue(S3D_CONFIG_PREFIX + "/force_landscape_polyline",forcePolyline);
+
+		emit forceHorizonPolylineChanged(forcePolyline);
+	}
+}
+
+bool Scenery3d::getForceHorizonPolyline() const
+{
+	return forceHorizonPolyline;
+}
+
 bool Scenery3d::getEnableTorchLight() const
 {
 	return renderer->getTorchEnabled();
@@ -1069,12 +1088,12 @@ StoredView Scenery3d::getCurrentView()
 	//convert to spherical angles
 	StelUtils::rectToSphe(&view.view_fov[0],&view.view_fov[1],vd);
 	//convert to degrees
-	view.view_fov[0]*=180.0/M_PI;
-	view.view_fov[1]*=180.0/M_PI;
+	view.view_fov[0]*=180.0f/M_PIf;
+	view.view_fov[1]*=180.0f/M_PIf;
 	// we must patch azimuth
-	view.view_fov[0]=180.0-view.view_fov[0];
+	view.view_fov[0]=180.0f-view.view_fov[0];
 	//3rd comp is fov
-	view.view_fov[2] = mvMgr->getAimFov();
+	view.view_fov[2] = static_cast<float>(mvMgr->getAimFov());
 
 	//get current grid pos + eye height
 	Vec3d pos = currentScene->getGridPosition();
@@ -1115,7 +1134,7 @@ StelPluginInfo Scenery3dStelPluginInterface::getPluginInfo() const
 	info.license = SCENERY3D_PLUGIN_LICENSE;
 	info.displayedName = N_("3D Sceneries");
 	info.authors = "Georg Zotti, Simon Parzer, Peter Neubauer, Andrei Borza, Florian Schaukowitsch";
-	info.contact = "http://homepage.univie.ac.at/Georg.Zotti";
+	info.contact = "https://homepage.univie.ac.at/Georg.Zotti";
 	info.description = N_("<p>3D foreground renderer. Walk around, find and avoid obstructions in your garden, "
 			      "find and demonstrate possible astronomical alignments in temples, see shadows on sundials etc.</p>"
 			      "<p>To move around, press Ctrl+cursor keys. To lift eye height, use Ctrl+PgUp/PgDn. "

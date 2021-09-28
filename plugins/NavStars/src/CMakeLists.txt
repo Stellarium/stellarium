@@ -10,6 +10,8 @@ LINK_DIRECTORIES(${BUILD_DIR}/src)
 SET(NavStars_SRCS
      NavStars.hpp
      NavStars.cpp
+     NavStarsCalculator.hpp
+     NavStarsCalculator.cpp
      gui/NavStarsWindow.hpp
      gui/NavStarsWindow.cpp
 )
@@ -27,6 +29,7 @@ ADD_LIBRARY(NavStars-static STATIC ${NavStars_SRCS} ${NavStars_RES_CXX} ${NavSta
 TARGET_LINK_LIBRARIES(NavStars-static Qt5::Core Qt5::Widgets)
 
 IF(ENABLE_TESTING)
+    add_definitions("-DWITH_TESTING_ON")
     ADD_SUBDIRECTORY(test)
 ENDIF(ENABLE_TESTING)
 

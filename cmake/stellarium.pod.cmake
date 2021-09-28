@@ -42,6 +42,10 @@ Even more diagnostic output in logfile (esp. multimedia handling).
 
 May fix text rendering problems.
 
+=item B<--scale-gui> I<scale factor>
+
+Scaling the GUI according to scale factor.
+
 =item B<-d, --dump-opengl-details>
 
 Dump information about OpenGL support to logfile. Use this is you have 

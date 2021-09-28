@@ -1,0 +1,4 @@
+
+include("navstars-common.inc");
+core.selectObjectByName("Arcturus", false);
+StelMovementMgr.setFlagTracking(true);

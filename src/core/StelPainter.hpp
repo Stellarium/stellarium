@@ -90,7 +90,7 @@ public:
 	//! Draw the string at the given position and angle with the given font.
 	//! If the gravity label flag is set, uses drawTextGravity180.
 	//! @param x horizontal position of the lower left corner of the first character of the text in pixel.
-	//! @param y horizontal position of the lower left corner of the first character of the text in pixel.
+	//! @param y vertical position of the lower left corner of the first character of the text in pixel.
 	//! @param str the text to print.
 	//! @param angleDeg rotation angle in degree. Rotation is around x,y.
 	//! @param xshift shift in pixel in the rotated x direction.
@@ -103,12 +103,13 @@ public:
               float xshift=0.f, float yshift=0.f, bool noGravity=true);
 
 	//! Draw the given SphericalRegion.
-	//! @param region The SphericalRegion to draw.
+	//! @param region The SphericalRegion to draw. If observerVelocity is given, it will be modified.
 	//! @param drawMode define whether to draw the outline or the fill or both.
 	//! @param clippingCap if not set to Q_NULLPTR, tells the painter to try to clip part of the region outside the cap.
 	//! @param doSubDivise if true tesselates the object to follow projection distortions.
-	//! Typically set that to false if you think that the region is fully contained in the viewport.
-	void drawSphericalRegion(const SphericalRegion* region, SphericalPolygonDrawMode drawMode=SphericalPolygonDrawModeFill, const SphericalCap* clippingCap=Q_NULLPTR, bool doSubDivise=true, double maxSqDistortion=5.);
+	//!        Typically set that to false if you think that the region is fully contained in the viewport.
+	//! @param observerVelocity precomputed vector shift for aberration correction
+	void drawSphericalRegion(SphericalRegion *region, SphericalPolygonDrawMode drawMode=SphericalPolygonDrawModeFill, const SphericalCap* clippingCap=Q_NULLPTR, bool doSubDivise=true, double maxSqDistortion=5., const Vec3d &observerVelocity=Vec3d(0.));
 
 	void drawGreatCircleArcs(const StelVertexArray& va, const SphericalCap* clippingCap=Q_NULLPTR);
 
@@ -126,14 +127,14 @@ public:
 	//! Draw a great circle arc between points start and stop.
 	//! The angle between start and stop must be < 180 deg.
 	//! The algorithm ensures that the line will look smooth, even for non linear distortion.
-	//! Each time the small circle crosses the edge of the viewport, the viewportEdgeIntersectCallback is called with the
+	//! Each time the great circle crosses the edge of the viewport, the viewportEdgeIntersectCallback is called with the
 	//! screen 2d position, direction of the currently drawn arc toward the inside of the viewport.
 	//! @param clippingCap if not set to Q_NULLPTR, tells the painter to try to clip part of the region outside the cap.
 	void drawGreatCircleArc(const Vec3d& start, const Vec3d& stop, const SphericalCap* clippingCap=Q_NULLPTR, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, void* userData)=Q_NULLPTR, void* userData=Q_NULLPTR);
 
 	//! Draw a curve defined by a list of points.
 	//! The points should be already tesselated to ensure that the path will look smooth.
-	//! The algorithm take care of cutting the path if it crosses a viewport discontinuity.
+	//! The algorithm takes care of cutting the path if it crosses a viewport discontinuity.
 	void drawPath(const QVector<Vec3d> &points, const QVector<Vec4f> &colors);
 
 	//! Draw a simple circle, 2d viewport coordinates in pixel
@@ -165,10 +166,10 @@ public:
 	void drawPoint2d(float x, float y);
 
 	//! Draw a line between the 2 points.
-	//! @param x1 x position of point 1 in the viewport in pixels.
-	//! @param y1 y position of point 1 in the viewport in pixels.
-	//! @param x2 x position of point 2 in the viewport in pixels.
-	//! @param y2 y position of point 2 in the viewport in pixels.
+	//! @param x1 x position of point 1 in the viewport in pixels. 0 is at left.
+	//! @param y1 y position of point 1 in the viewport in pixels. 0 is at bottom.
+	//! @param x2 x position of point 2 in the viewport in pixels. 0 is at left.
+	//! @param y2 y position of point 2 in the viewport in pixels. 0 is at bottom.
 	void drawLine2d(float x1, float y1, float x2, float y2);
 
 	//! Draw a rectangle using the current texture at the given projected 2d position.
@@ -195,9 +196,9 @@ public:
 	//!        region around the bottom pole, like for a spherical equirectangular horizon panorama (SphericalLandscape class).
 	//!        Example: your light pollution image (pano photo) goes down to just -5 degrees altitude (lowest street lamps below you):
 	//!        bottomAngle = 95 degrees = 95*M_PI/180.0f
-	void sSphere(double radius, double oneMinusOblateness, unsigned int slices, unsigned int stacks,
-		     int orientInside = 0, bool flipTexture = false,
-		     float topAngle = 0.0f, float bottomAngle = static_cast<float>(M_PI));
+	void sSphere(const double radius, const double oneMinusOblateness, const unsigned int slices, const unsigned int stacks,
+		     const bool orientInside = false, const bool flipTexture = false,
+		     const float topAngle = 0.0f, const float bottomAngle = static_cast<float>(M_PI));
 
 	//! Generate a StelVertexArray for a sphere.
 	//! @param radius
@@ -225,7 +226,7 @@ public:
 	//! @param level the number of concentric circles.
 	//! @param vertexArr the vertex array in which the resulting vertices are returned.
 	//! @param texCoordArr the vertex array in which the resulting texture coordinates are returned.
-	static void computeFanDisk(float radius, uint innerFanSlices, uint level, QVector<double>& vertexArr, QVector<float>& texCoordArr);
+	static void computeFanDisk(float radius, uint innerFanSlices, uint level, QVector<Vec3d>& vertexArr, QVector<Vec2f>& texCoordArr);
 
 	//! Draw a fisheye texture in a sphere.
 	void sSphereMap(double radius, unsigned int slices, unsigned int stacks, float textureFov = 2.f*static_cast<float>(M_PI), int orientInside = 0);
@@ -266,6 +267,8 @@ public:
 
 	//! Sets the line width. Default is 1.0f.
 	void setLineWidth(float width);
+	//! Gets the line width.
+	float getLineWidth() const {return glState.lineWidth;}
 
 	//! Sets the color saturation effect value, from 0 (grayscale) to 1 (no effect).
 	void setSaturation(float v) { saturation = v; }
@@ -315,11 +318,13 @@ public:
 	//! If @param indices is Q_NULLPTR, this operation will consume @param count values from the enabled arrays, starting at @param offset.
 	//! Else it will consume @param count elements of @param indices, starting at @param offset, which are used to index into the
 	//! enabled arrays.
+	//! NOTE: Prefer to use drawStelVertexArray, else there are wrap-around rendering artifacts in a few projections.
 	void drawFromArray(DrawingMode mode, int count, int offset=0, bool doProj=true, const unsigned short *indices=Q_NULLPTR);
 
 	//! Draws the primitives defined in the StelVertexArray.
 	//! @param checkDiscontinuity will check and suppress discontinuities if necessary.
-	void drawStelVertexArray(const StelVertexArray& arr, bool checkDiscontinuity=true);
+	//! @param aberration a vector which moves all vertices according to aberration effects. The vector must be transformed to the frame used in the array.
+	void drawStelVertexArray(const StelVertexArray& arr, bool checkDiscontinuity=true, Vec3d aberration=Vec3d(0.));
 
 	//! Link an opengl program and show a message in case of error or warnings.
 	//! @return true if the link was successful.

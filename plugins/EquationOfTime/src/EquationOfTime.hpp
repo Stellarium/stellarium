@@ -63,17 +63,22 @@ class EquationOfTime : public StelModule
 		   READ isEnabled
 		   WRITE enableEquationOfTime
 		   NOTIFY equationOfTimeStateChanged)
+	Q_PROPERTY(Vec3f textColor
+		   READ getTextColor
+		   WRITE setTextColor
+		   NOTIFY textColorChanged
+		   )
 
 public:
 	EquationOfTime();
-	virtual ~EquationOfTime();
+	virtual ~EquationOfTime() Q_DECL_OVERRIDE;
 
-	virtual void init();
-	virtual void deinit();
-	virtual void update(double) {;}
-	virtual void draw(StelCore *core);
-	virtual double getCallOrder(StelModuleActionName actionName) const;
-	virtual bool configureGui(bool show);
+	virtual void init() Q_DECL_OVERRIDE;
+	virtual void deinit() Q_DECL_OVERRIDE;
+	virtual void update(double) Q_DECL_OVERRIDE {;}
+	virtual void draw(StelCore *core) Q_DECL_OVERRIDE;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
+	virtual bool configureGui(bool show) Q_DECL_OVERRIDE;
 
 	//! Set up the plugin with default values.  This means clearing out the EquationOfTime section in the
 	//! main config.ini (if one already exists), and populating it with default values.
@@ -130,11 +135,17 @@ public slots:
 	//! Display plugin button on toolbar
 	void setFlagShowEOTButton(bool b);
 
+	Vec3f getTextColor() const { return textColor; }
+	void setTextColor(const Vec3f& c) { textColor=c; }
+
 private slots:
 	void updateMessageText();
+	//! Call when button "Save settings" in main GUI are pressed
+	void saveSettings() { saveSettingsToConfig(); }
 
 signals:
 	void equationOfTimeStateChanged(bool b);
+	void textColorChanged(Vec3f);
 
 private:
 	// if existing, delete EquationOfTime section in main config.ini, then create with default values
@@ -169,9 +180,9 @@ class EquationOfTimeStelPluginInterface : public QObject, public StelPluginInter
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const;
-	virtual StelPluginInfo getPluginInfo() const;
-	virtual QObjectList getExtensionList() const { return QObjectList(); }
+	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
+	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
+	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
 };
 
 #endif /* EQUATIONOFTIME_HPP */

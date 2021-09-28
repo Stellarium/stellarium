@@ -2,7 +2,7 @@
 // Name: Mutual occultations of planets
 // Author: Alexander Wolf
 // License: Public Domain
-// Version: 1.1
+// Version: 1.2
 // Shortcut: Ctrl+D,M,4
 // Description: This script demonstrates interesting and very rare phenomena - mutual occultations of planets, 0 to 2500.
 //
@@ -67,7 +67,7 @@ NebulaMgr.setFlagHints(false);
 core.setGuiVisible(false);
 var id = LabelMgr.labelScreen(tr("Mutual occultations of planets"), 20, 20, false, 36, color);
 LabelMgr.setLabelShow(id, true);
-var ph = LabelMgr.labelScreen(phenomenalist.length + " " tr("phenomena in all"), 20, 65, false, 28, color);
+var ph = LabelMgr.labelScreen(phenomenalist.length + " " + tr("phenomena in all"), 20, 65, false, 28, color);
 LabelMgr.setLabelShow(ph, true);
 core.wait(2);
 StelMovementMgr.setEquatorialMount(true);

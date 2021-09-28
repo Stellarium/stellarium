@@ -125,7 +125,7 @@ void IDDelete(const char *dev, const char *name, const char *fmt, ...)
         char message[MAXINDIMESSAGE];
         printf("  message='");
         vsnprintf(message, MAXINDIMESSAGE, fmt, ap);
-        printf("%s'\n", escapeXML(message, MAXINDIMESSAGE));
+        printf("%s'\n", entityXML(message));
         va_end(ap);
     }
     printf("/>\n");
@@ -453,7 +453,11 @@ void IUFillText(IText *tp, const char *name, const char *label, const char *init
         strncpy(tp->label, escapedLabel, MAXINDILABEL);
     else
         strncpy(tp->label, escapedName, MAXINDILABEL);
+
+    if (tp->text && tp->text[0])
+        free(tp->text);
     tp->text = NULL;
+
     tp->tvp  = NULL;
     tp->aux0 = NULL;
     tp->aux1 = NULL;
@@ -932,25 +936,26 @@ int dispatch(XMLEle *root, char msg[])
             ROSC *prop = propCache + index;
             switch (prop->type)
             {
+                /* JM 2019-07-18: Why are we using setXXX here? should be defXXX */
                 case INDI_NUMBER:
-                    IDSetNumber((INumberVectorProperty *)(prop->ptr), NULL);
+                    //IDSetNumber((INumberVectorProperty *)(prop->ptr), NULL);
+                    IDDefNumber((INumberVectorProperty *)(prop->ptr), NULL);
                     return 0;
-                    break;
 
                 case INDI_SWITCH:
-                    IDSetSwitch((ISwitchVectorProperty *)(prop->ptr), NULL);
+                    //IDSetSwitch((ISwitchVectorProperty *)(prop->ptr), NULL);
+                    IDDefSwitch((ISwitchVectorProperty *)(prop->ptr), NULL);
                     return 0;
-                    break;
 
                 case INDI_TEXT:
-                    IDSetText((ITextVectorProperty *)(prop->ptr), NULL);
+                    //IDSetText((ITextVectorProperty *)(prop->ptr), NULL);
+                    IDDefText((ITextVectorProperty *)(prop->ptr), NULL);
                     return 0;
-                    break;
 
                 case INDI_BLOB:
-                    IDSetBLOB((IBLOBVectorProperty *)(prop->ptr), NULL);
+                    //IDSetBLOB((IBLOBVectorProperty *)(prop->ptr), NULL);
+                    IDDefBLOB((IBLOBVectorProperty *)(prop->ptr), NULL);
                     return 0;
-                    break;
                 default:
                     return 0;
             }
@@ -1231,11 +1236,14 @@ int IUReadConfig(const char *filename, const char *dev, const char *property, in
     if (fp == NULL)
         return -1;
 
-    fproot = readXMLFile(fp, lp, errmsg);
+    char whynot[MAXRBUF];
+    fproot = readXMLFile(fp, lp, whynot);
+
+    delLilXML(lp);
 
     if (fproot == NULL)
     {
-        snprintf(errmsg, MAXRBUF, "Unable to parse config XML: %s", errmsg);
+        snprintf(errmsg, MAXRBUF, "Unable to parse config XML: %s", whynot);
         fclose(fp);
         return -1;
     }
@@ -1249,6 +1257,7 @@ int IUReadConfig(const char *filename, const char *dev, const char *property, in
         if (crackDN(root, &rdev, &rname, errmsg) < 0)
         {
             fclose(fp);
+            delXMLEle(fproot);
             return -1;
         }
 
@@ -1257,7 +1266,11 @@ int IUReadConfig(const char *filename, const char *dev, const char *property, in
             continue;
 
         if ((property && !strcmp(property, rname)) || property == NULL)
+        {
             dispatch(root, errmsg);
+            if (property)
+                break;
+        }
     }
 
     if (nXMLEle(fproot) > 0 && silent != 1)
@@ -1265,8 +1278,6 @@ int IUReadConfig(const char *filename, const char *dev, const char *property, in
 
     fclose(fp);
     delXMLEle(fproot);
-    delXMLEle(root);
-    delLilXML(lp);
 
     return (0);
 }
@@ -1304,12 +1315,69 @@ void IUSaveDefaultConfig(const char *source_config, const char *dest_config, con
                 int ch = 0;
                 while ((ch = getc(fpin)) != EOF)
                     putc(ch, fpout);
-
-                fclose(fpin);
+        fclose(fpout);
             }
-            fclose(fpout);
+        fclose(fpin);
         }
     }
+}
+
+int IUGetConfigSwitch(const char *dev, const char *property, const char *member, ISState *value)
+{
+    char *rname, *rdev;
+    XMLEle *root = NULL, *fproot = NULL;
+    char errmsg[MAXRBUF];
+    LilXML *lp = newLilXML();
+    int valueFound=0;
+
+    FILE *fp = IUGetConfigFP(NULL, dev, "r", errmsg);
+
+    if (fp == NULL)
+        return -1;
+
+    fproot = readXMLFile(fp, lp, errmsg);
+
+    if (fproot == NULL)
+    {
+        fclose(fp);
+        return -1;
+    }
+
+    for (root = nextXMLEle(fproot, 1); root != NULL; root = nextXMLEle(fproot, 0))
+    {
+        /* pull out device and name */
+        if (crackDN(root, &rdev, &rname, errmsg) < 0)
+        {
+            fclose(fp);
+            delXMLEle(fproot);
+            return -1;
+        }
+
+        // It doesn't belong to our device??
+        if (strcmp(dev, rdev))
+            continue;
+
+        if ((property && !strcmp(property, rname)) || property == NULL)
+        {
+            XMLEle *oneSwitch = NULL;
+            for (oneSwitch = nextXMLEle(root, 1); oneSwitch != NULL; oneSwitch = nextXMLEle(root, 0))
+            {
+                if (!strcmp(member, findXMLAttValu(oneSwitch, "name")))
+                {
+                    if (crackISState(pcdataXMLEle(oneSwitch), value) == 0)
+                        valueFound = 1;
+                    break;
+                }
+            }
+            break;
+        }
+    }
+
+    fclose(fp);
+    delXMLEle(fproot);
+    delLilXML(lp);
+
+    return (valueFound == 1 ? 0 : -1);
 }
 
 int IUGetConfigNumber(const char *dev, const char *property, const char *member, double *value)
@@ -1339,6 +1407,7 @@ int IUGetConfigNumber(const char *dev, const char *property, const char *member,
         if (crackDN(root, &rdev, &rname, errmsg) < 0)
         {
             fclose(fp);
+            delXMLEle(fproot);
             return -1;
         }
 
@@ -1354,6 +1423,64 @@ int IUGetConfigNumber(const char *dev, const char *property, const char *member,
                 if (!strcmp(member, findXMLAttValu(oneNumber, "name")))
                 {
                     *value = atof(pcdataXMLEle(oneNumber));
+                    valueFound = 1;
+                    break;
+                }
+            }
+            break;
+        }
+    }
+
+    fclose(fp);
+    delXMLEle(fproot);
+    delLilXML(lp);
+
+    return (valueFound == 1 ? 0 : -1);
+}
+
+int IUGetConfigText(const char *dev, const char *property, const char *member, char *value, int len)
+{
+    char *rname, *rdev;
+    XMLEle *root = NULL, *fproot = NULL;
+    char errmsg[MAXRBUF];
+    LilXML *lp = newLilXML();
+    int valueFound=0;
+
+    FILE *fp = IUGetConfigFP(NULL, dev, "r", errmsg);
+
+    if (fp == NULL)
+        return -1;
+
+    fproot = readXMLFile(fp, lp, errmsg);
+
+    if (fproot == NULL)
+    {
+        fclose(fp);
+        return -1;
+    }
+
+    for (root = nextXMLEle(fproot, 1); root != NULL; root = nextXMLEle(fproot, 0))
+    {
+        /* pull out device and name */
+        if (crackDN(root, &rdev, &rname, errmsg) < 0)
+        {
+            fclose(fp);
+            delXMLEle(fproot);
+            return -1;
+        }
+
+        // It doesn't belong to our device??
+        if (strcmp(dev, rdev))
+            continue;
+
+        if ((property && !strcmp(property, rname)) || property == NULL)
+        {
+            XMLEle *oneText = NULL;
+            for (oneText = nextXMLEle(root, 1); oneText != NULL; oneText = nextXMLEle(root, 0))
+            {
+                if (!strcmp(member, findXMLAttValu(oneText, "name")))
+                {
+                    strncpy(value, pcdataXMLEle(oneText), len);
                     valueFound = 1;
                     break;
                 }
@@ -1386,13 +1513,41 @@ void IDMessage(const char *dev, const char *fmt, ...)
         char message[MAXINDIMESSAGE];
         printf("  message='");
         vsnprintf(message, MAXINDIMESSAGE, fmt, ap);
-        printf("%s'\n", escapeXML(message, MAXINDIMESSAGE));
+        char *escapedMessage = escapeXML(message, MAXINDIMESSAGE);
+        printf("%s'\n", escapedMessage);
+        free(escapedMessage);
         va_end(ap);
     }
     printf("/>\n");
     fflush(stdout);
 
     pthread_mutex_unlock(&stdout_mutex);
+}
+
+int IUPurgeConfig(const char *filename, const char *dev, char errmsg[])
+{
+    char configFileName[MAXRBUF];
+    char configDir[MAXRBUF];
+
+    snprintf(configDir, MAXRBUF, "%s/.indi/", getenv("HOME"));
+
+    if (filename)
+        strncpy(configFileName, filename, MAXRBUF);
+    else
+    {
+        if (getenv("INDICONFIG"))
+            strncpy(configFileName, getenv("INDICONFIG"), MAXRBUF);
+        else
+            snprintf(configFileName, MAXRBUF, "%s%s_config.xml", configDir, dev);
+    }
+
+    if (remove(configFileName) != 0)
+    {
+        snprintf(errmsg, MAXRBUF, "Unable to purge configuration file %s. Error %s", configFileName, strerror(errno));
+        return -1;
+    }
+
+    return 0;
 }
 
 FILE *IUGetConfigFP(const char *filename, const char *dev, const char *mode, char errmsg[])
@@ -1418,15 +1573,23 @@ FILE *IUGetConfigFP(const char *filename, const char *dev, const char *mode, cha
     {
         if (mkdir(configDir, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH) < 0)
         {
-            snprintf(errmsg, MAXRBUF, "Unable to create config directory. Error %s: %s\n", configDir, strerror(errno));
+            snprintf(errmsg, MAXRBUF, "Unable to create config directory. Error %s: %s", configDir, strerror(errno));
             return NULL;
         }
+    }
+
+    stat(configFileName, &st);
+    /* If file is owned by root and current user is NOT root then abort */
+    if ( (st.st_uid == 0 && getuid() != 0) || (st.st_gid == 0 && getgid() != 0) )
+    {
+        strncpy(errmsg, "Config file is owned by root! This will lead to serious errors. To fix this, run: sudo chown -R $USER:$USER ~/.indi", MAXRBUF);
+        return NULL;
     }
 
     fp = fopen(configFileName, mode);
     if (fp == NULL)
     {
-        snprintf(errmsg, MAXRBUF, "Unable to open config file. Error loading file %s: %s\n", configFileName,
+        snprintf(errmsg, MAXRBUF, "Unable to open config file. Error loading file %s: %s", configFileName,
                  strerror(errno));
         return NULL;
     }
@@ -1572,7 +1735,9 @@ void IDDefText(const ITextVectorProperty *tvp, const char *fmt, ...)
         char message[MAXINDIMESSAGE];
         printf("  message='");
         vsnprintf(message, MAXINDIMESSAGE, fmt, ap);
-        printf("%s'\n", escapeXML(message, MAXINDIMESSAGE));
+        char *escapedMessage = escapeXML(message, MAXINDIMESSAGE);
+        printf("%s'\n", escapedMessage);
+        free(escapedMessage);
         va_end(ap);
     }
     printf(">\n");
@@ -1636,7 +1801,9 @@ void IDDefNumber(const INumberVectorProperty *n, const char *fmt, ...)
         char message[MAXINDIMESSAGE];
         printf("  message='");
         vsnprintf(message, MAXINDIMESSAGE, fmt, ap);
-        printf("%s'\n", escapeXML(message, MAXINDIMESSAGE));
+        char *escapedMessage = escapeXML(message, MAXINDIMESSAGE);
+        printf("%s'\n", escapedMessage);
+        free(escapedMessage);
         va_end(ap);
     }
     printf(">\n");
@@ -1707,7 +1874,9 @@ void IDDefSwitch(const ISwitchVectorProperty *s, const char *fmt, ...)
         char message[MAXINDIMESSAGE];
         printf("  message='");
         vsnprintf(message, MAXINDIMESSAGE, fmt, ap);
-        printf("%s'\n", escapeXML(message, MAXINDIMESSAGE));
+        char *escapedMessage = escapeXML(message, MAXINDIMESSAGE);
+        printf("%s'\n", escapedMessage);
+        free(escapedMessage);
         va_end(ap);
     }
     printf(">\n");
@@ -1766,7 +1935,9 @@ void IDDefLight(const ILightVectorProperty *lvp, const char *fmt, ...)
         char message[MAXINDIMESSAGE];
         printf("  message='");
         vsnprintf(message, MAXINDIMESSAGE, fmt, ap);
-        printf("%s'\n", escapeXML(message, MAXINDIMESSAGE));
+        char *escapedMessage = escapeXML(message, MAXINDIMESSAGE);
+        printf("%s'\n", escapedMessage);
+        free(escapedMessage);
         va_end(ap);
     }
     printf(">\n");
@@ -1813,7 +1984,9 @@ void IDDefBLOB(const IBLOBVectorProperty *b, const char *fmt, ...)
         char message[MAXINDIMESSAGE];
         printf("  message='");
         vsnprintf(message, MAXINDIMESSAGE, fmt, ap);
-        printf("%s'\n", escapeXML(message, MAXINDIMESSAGE));
+        char *escapedMessage = escapeXML(message, MAXINDIMESSAGE);
+        printf("%s'\n", escapedMessage);
+        free(escapedMessage);
         va_end(ap);
     }
     printf(">\n");
@@ -1871,7 +2044,7 @@ void IDSetText(const ITextVectorProperty *tvp, const char *fmt, ...)
         char message[MAXINDIMESSAGE];
         printf("  message='");
         vsnprintf(message, MAXINDIMESSAGE, fmt, ap);
-        printf("%s'\n", escapeXML(message, MAXINDIMESSAGE));
+        printf("%s'\n", entityXML(message));
         va_end(ap);
     }
     printf(">\n");
@@ -1880,7 +2053,7 @@ void IDSetText(const ITextVectorProperty *tvp, const char *fmt, ...)
     {
         IText *tp = &tvp->tp[i];
         printf("  <oneText name='%s'>\n", tp->name);
-        printf("      %s\n", tp->text ? tp->text : "");
+        printf("      %s\n", tp->text ? entityXML(tp->text) : "");
         printf("  </oneText>\n");
     }
 
@@ -1913,7 +2086,7 @@ void IDSetNumber(const INumberVectorProperty *nvp, const char *fmt, ...)
         char message[MAXINDIMESSAGE];
         printf("  message='");
         vsnprintf(message, MAXINDIMESSAGE, fmt, ap);
-        printf("%s'\n", escapeXML(message, MAXINDIMESSAGE));
+        printf("%s'\n", entityXML(message));
         va_end(ap);
     }
     printf(">\n");
@@ -1955,7 +2128,7 @@ void IDSetSwitch(const ISwitchVectorProperty *svp, const char *fmt, ...)
         char message[MAXINDIMESSAGE];
         printf("  message='");
         vsnprintf(message, MAXINDIMESSAGE, fmt, ap);
-        printf("%s'\n", escapeXML(message, MAXINDIMESSAGE));
+        printf("%s'\n", entityXML(message));
         va_end(ap);
     }
     printf(">\n");
@@ -1995,7 +2168,7 @@ void IDSetLight(const ILightVectorProperty *lvp, const char *fmt, ...)
         char message[MAXINDIMESSAGE];
         printf("  message='");
         vsnprintf(message, MAXINDIMESSAGE, fmt, ap);
-        printf("%s'\n", escapeXML(message, MAXINDIMESSAGE));
+        printf("%s'\n", entityXML(message));
         va_end(ap);
     }
     printf(">\n");

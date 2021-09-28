@@ -31,6 +31,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
+#include "StelSkyCultureMgr.hpp"
 
 #include <QSettings>
 #include <QDebug>
@@ -64,7 +65,7 @@ void LocationDialog::retranslate()
 	{
 		ui->retranslateUi(dialog);
 		populatePlanetList();
-		populateCountryList();
+		populateRegionList(StelApp::getInstance().getCore()->getCurrentLocation().planetName);
 		populateTimeZonesList();
 		populateTooltips();
 	}
@@ -88,18 +89,20 @@ void LocationDialog::createDialogContent()
 	ui->mapLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
 	ui->mapLabel->setScaledContents(false);
 
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	StelApp *app = &StelApp::getInstance();
+	connect(app, SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(app, SIGNAL(flagShowDecimalDegreesChanged(bool)), this, SLOT(setDisplayFormatForSpins(bool)));
+	connect(&app->getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(populatePlanetList(QString)));
 	// Init the SpinBox entries
-	ui->longitudeSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 	ui->longitudeSpinBox->setPrefixType(AngleSpinBox::Longitude);
 	ui->longitudeSpinBox->setMinimum(-180.0, true);
 	ui->longitudeSpinBox->setMaximum( 180.0, true);
 	ui->longitudeSpinBox->setWrapping(true);
-	ui->latitudeSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 	ui->latitudeSpinBox->setPrefixType(AngleSpinBox::Latitude);
 	ui->latitudeSpinBox->setMinimum(-90.0, true);
 	ui->latitudeSpinBox->setMaximum( 90.0, true);
 	ui->latitudeSpinBox->setWrapping(false);
+	setDisplayFormatForSpins(app->getFlagShowDecimalDegrees());
 
 	//initialize list model
 	allModel = new QStringListModel(this);
@@ -122,8 +125,7 @@ void LocationDialog::createDialogContent()
 		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
 	}
 
-	populatePlanetList();
-	populateCountryList();
+	populatePlanetList();	
 	populateTimeZonesList();
 
 	connect(ui->citySearchLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
@@ -138,10 +140,11 @@ void LocationDialog::createDialogContent()
 	connect(ui->addLocationToListPushButton, SIGNAL(clicked()), this, SLOT(addCurrentLocationToList()));
 	connect(ui->deleteLocationFromListPushButton, SIGNAL(clicked()), this, SLOT(deleteCurrentLocationFromList()));
 	connect(ui->resetListPushButton, SIGNAL(clicked()), this, SLOT(resetLocationList()));
-	connect(ui->countryNameComboBox, SIGNAL(activated(const QString &)), this, SLOT(filterSitesByCountry()));
+	connect(ui->regionNameComboBox, SIGNAL(activated(const QString &)), this, SLOT(filterSitesByRegion()));
 
 	StelCore* core = StelApp::getInstance().getCore();
 	const StelLocation& currentLocation = core->getCurrentLocation();
+	populateRegionList(currentLocation.planetName);
 	bool b = (currentLocation.getID() == core->getDefaultLocationID());
 	QSettings* conf = StelApp::getInstance().getSettings();
 	if (conf->value("init_location/location", "auto").toString() == "auto")
@@ -191,6 +194,21 @@ void LocationDialog::createDialogContent()
 	ui->citySearchLineEdit->setFocus();
 }
 
+void LocationDialog::setDisplayFormatForSpins(bool flagDecimalDegrees)
+{
+	int places = 2;
+	AngleSpinBox::DisplayFormat format = AngleSpinBox::DMSSymbols;
+	if (flagDecimalDegrees)
+	{
+		places = 6;
+		format = AngleSpinBox::DecimalDeg;
+	}
+	ui->longitudeSpinBox->setDecimals(places);
+	ui->longitudeSpinBox->setDisplayFormat(format);
+	ui->latitudeSpinBox->setDecimals(places);
+	ui->latitudeSpinBox->setDisplayFormat(format);
+}
+
 void LocationDialog::handleDialogSizeChanged(QSizeF size)
 {
 	StelDialog::handleDialogSizeChanged(size);
@@ -213,7 +231,7 @@ void LocationDialog::populateTooltips()
 // Update the widget to make sure it is synchrone if the location is changed programmatically
 void LocationDialog::updateFromProgram(const StelLocation& currentLocation)
 {
-	if (!dialog->isVisible())
+	if (!dialog)
 		return;
 
 	StelCore* stelCore = StelApp::getInstance().getCore();
@@ -231,7 +249,7 @@ void LocationDialog::updateFromProgram(const StelLocation& currentLocation)
 	}
 
 	const QString& key1 = currentLocation.getID();
-	const QString& key2 = locationFromFields().getID();	
+	const QString& key2 = locationFromFields().getID();
 	if (key1!=key2)
 	{
 		setFieldsFromLocation(currentLocation);
@@ -243,8 +261,8 @@ void LocationDialog::disconnectEditSignals()
 	disconnect(ui->longitudeSpinBox, SIGNAL(valueChanged()), this, SLOT(setLocationFromCoords()));
 	disconnect(ui->latitudeSpinBox, SIGNAL(valueChanged()), this, SLOT(setLocationFromCoords()));
 	disconnect(ui->altitudeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setLocationFromCoords(int)));
-	disconnect(ui->planetNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(moveToAnotherPlanet(const QString&)));
-	disconnect(ui->countryNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(reportEdit()));
+	disconnect(ui->planetNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(moveToAnotherPlanet(const QString&)));	
+	disconnect(ui->regionNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(reportEdit()));
 	disconnect(ui->timeZoneNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(saveTimeZone()));
 	disconnect(ui->cityNameLineEdit, SIGNAL(textEdited(const QString&)), this, SLOT(reportEdit()));
 }
@@ -255,7 +273,7 @@ void LocationDialog::connectEditSignals()
 	connect(ui->latitudeSpinBox, SIGNAL(valueChanged()), this, SLOT(setLocationFromCoords()));
 	connect(ui->altitudeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setLocationFromCoords(int)));
 	connect(ui->planetNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(moveToAnotherPlanet(const QString&)));
-	connect(ui->countryNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(reportEdit()));
+	connect(ui->regionNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(reportEdit()));
 	connect(ui->timeZoneNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(saveTimeZone()));
 	connect(ui->cityNameLineEdit, SIGNAL(textEdited(const QString&)), this, SLOT(reportEdit()));
 }
@@ -272,25 +290,30 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 		customTimeZone=core->getCurrentTimeZone();
 
 	ui->cityNameLineEdit->setText(loc.name);
-	int idx = ui->countryNameComboBox->findData(loc.country, Qt::UserRole, Qt::MatchCaseSensitive);
-	if (idx==-1)
-	{
-		// Use France as default
-		idx = ui->countryNameComboBox->findData(QVariant("France"), Qt::UserRole, Qt::MatchCaseSensitive);
-	}
-	ui->countryNameComboBox->setCurrentIndex(idx);
-
 	ui->longitudeSpinBox->setDegrees(loc.longitude);
 	ui->latitudeSpinBox->setDegrees(loc.latitude);
 	ui->altitudeSpinBox->setValue(loc.altitude);
 
-	idx = ui->planetNameComboBox->findData(loc.planetName, Qt::UserRole, Qt::MatchCaseSensitive);
+	int idx = ui->planetNameComboBox->findData(loc.planetName, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (idx==-1)
 	{
 		// Use Earth as default
 		idx = ui->planetNameComboBox->findData(QVariant("Earth"), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->planetNameComboBox->setCurrentIndex(idx);
+
+	idx = ui->regionNameComboBox->findData(loc.region, Qt::UserRole, Qt::MatchCaseSensitive);
+	if (idx==-1)
+	{
+		if (ui->planetNameComboBox->currentData(Qt::UserRole).toString()=="Earth")
+		{
+			// Use Western Europe as default on Earth
+			idx = ui->regionNameComboBox->findData(QVariant("Western Europe"), Qt::UserRole, Qt::MatchCaseSensitive);
+		}
+		else
+			idx = ui->regionNameComboBox->findData(QVariant(""), Qt::UserRole, Qt::MatchCaseSensitive);
+	}
+	ui->regionNameComboBox->setCurrentIndex(idx);
 
 	QString tz = loc.ianaTimeZone;
 	if (loc.planetName=="Earth" && tz.isEmpty())
@@ -318,8 +341,6 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 	core->setCurrentTimeZone(tz);
 
 	setMapForLocation(loc);
-
-	// Set pointer position
 	ui->mapLabel->setCursorPos(loc.longitude, loc.latitude);
 
 	ui->deleteLocationFromListPushButton->setEnabled(StelApp::getInstance().getLocationMgr().canDeleteUserLocation(loc.getID()));
@@ -353,7 +374,7 @@ void LocationDialog::setMapForLocation(const StelLocation& loc)
 	if (loc.planetName=="Earth")
 	{
 		// Special case for earth, we don't want to see the clouds
-		pixmap = QPixmap(":/graphicGui/world.png");
+		pixmap = QPixmap(":/graphicGui/miscWorldMap.png");
 	}
 	else
 	{
@@ -378,13 +399,6 @@ void LocationDialog::setMapForLocation(const StelLocation& loc)
 	// For caching
 	lastPlanet = loc.planetName;
 }
-
-/*void LocationDialog::resizePixmap()
-{
-	int w = ui->mapLabel->width();
-	int h = ui->mapLabel->height();
-	ui->mapLabel->setPixmap(pixmap.scaled(w,h,Qt::KeepAspectRatio,Qt::SmoothTransformation));
-}*/
 
 void LocationDialog::populatePlanetList()
 {
@@ -411,30 +425,29 @@ void LocationDialog::populatePlanetList()
 	planetsCombo->blockSignals(false);
 }
 
-void LocationDialog::populateCountryList()
+void LocationDialog::populateRegionList(const QString& planet)
 {
-	Q_ASSERT(ui->countryNameComboBox);
+	Q_ASSERT(ui->regionNameComboBox);
 
-	QComboBox* countryCombo = ui->countryNameComboBox;
-	QStringList countryNames(StelLocaleMgr::getAllCountryNames());
+	QComboBox* regionCombo = ui->regionNameComboBox;
+	QStringList regionNames(StelApp::getInstance().getLocationMgr().getRegionNames(planet));
 
 	//Save the current selection to be restored later
-	countryCombo->blockSignals(true);
-	int index = countryCombo->currentIndex();
-	QVariant selectedCountryId = countryCombo->itemData(index);
-	countryCombo->clear();
-	//For each country, display the localized name and store the original as user
+	regionCombo->blockSignals(true);
+	int index = regionCombo->currentIndex();
+	QVariant selectedRegionId = regionCombo->itemData(index);
+	regionCombo->clear();
+	//For each region, display the localized name and store the original as user
 	//data. Unfortunately, there's no other way to do this than with a loop.
-	for (const auto& name : countryNames)
-	{
-		countryCombo->addItem(q_(name), name);
-	}
-	countryCombo->addItem(QChar(0x2014), "");
+	for (const auto& name : qAsConst(regionNames))
+		regionCombo->addItem(q_(name), name);
+
+	regionCombo->addItem(QChar(0x2014), "");
 	//Restore the selection
-	index = countryCombo->findData(selectedCountryId, Qt::UserRole, Qt::MatchCaseSensitive);
-	countryCombo->setCurrentIndex(index);
-	countryCombo->model()->sort(0);
-	countryCombo->blockSignals(false);
+	index = regionCombo->findData(selectedRegionId, Qt::UserRole, Qt::MatchCaseSensitive);
+	regionCombo->setCurrentIndex(index);
+	regionCombo->model()->sort(0);
+	regionCombo->blockSignals(false);
 }
 
 void LocationDialog::populateTimeZonesList()
@@ -445,7 +458,7 @@ void LocationDialog::populateTimeZonesList()
 	// Return a list of all the known time zone names (from Qt)
 	QStringList tzNames;
 	auto tzList = QTimeZone::availableTimeZoneIds(); // System dependent set of IANA timezone names.
-	for (const auto& tz : tzList)
+	for (const auto& tz : qAsConst(tzList))
 	{
 		tzNames.append(tz);
 		// Activate this to get a list of known TZ names...
@@ -495,14 +508,14 @@ StelLocation LocationDialog::locationFromFields() const
 	loc.latitude = qBound(-90.0, ui->latitudeSpinBox->valueDegrees(), 90.0);
 	loc.longitude = ui->longitudeSpinBox->valueDegrees();
 	loc.altitude = ui->altitudeSpinBox->value();
-	index = ui->countryNameComboBox->currentIndex();
+	index = ui->regionNameComboBox->currentIndex();
 	if (index < 0)
 	{
-		qWarning() << "LocationDialog::locationFromFields(): no valid country name from combo?";
-		loc.country = QString();//As returned by QComboBox::currentText()
+		qWarning() << "LocationDialog::locationFromFields(): no valid region name from combo?";
+		loc.region = QString();//As returned by QComboBox::currentText()
 	}
 	else
-		loc.country = ui->countryNameComboBox->itemData(index).toString();
+		loc.region = ui->regionNameComboBox->itemData(index).toString();
 
 	index = ui->timeZoneNameComboBox->currentIndex();
 	if (index < 0)
@@ -552,7 +565,7 @@ void LocationDialog::setLocationFromMap(double longitude, double latitude)
 	pickedModel->setStringList(results.keys());
 	proxyModel->setSourceModel(pickedModel);
 	proxyModel->sort(0, Qt::AscendingOrder);
-	ui->citySearchLineEdit->clear();	
+	ui->citySearchLineEdit->setText(""); // https://wiki.qt.io/Technical_FAQ#Why_does_the_memory_keep_increasing_when_repeatedly_pasting_text_and_calling_clear.28.29_in_a_QLineEdit.3F
 }
 
 // Called when the planet name is changed by hand
@@ -562,6 +575,7 @@ void LocationDialog::moveToAnotherPlanet(const QString&)
 	StelLocation loc = locationFromFields();
 	StelCore* stelCore = StelApp::getInstance().getCore();
 	StelModule* lMgr = StelApp::getInstance().getModule("LandscapeMgr");
+	populateRegionList(loc.planetName);
 	if (loc.planetName != stelCore->getCurrentLocation().planetName)
 	{
 		setFieldsFromLocation(loc);
@@ -585,14 +599,14 @@ void LocationDialog::moveToAnotherPlanet(const QString&)
 		{
 			LocationMap results = locMgr.pickLocationsNearby(loc.planetName, 0.0f, 0.0f, 180.0f);
 			pickedModel->setStringList(results.keys());
-			proxyModel->setSourceModel(pickedModel);
-			ui->countryNameComboBox->setCurrentIndex(ui->countryNameComboBox->findData("", Qt::UserRole, Qt::MatchCaseSensitive));
+			proxyModel->setSourceModel(pickedModel);			
+			ui->regionNameComboBox->setCurrentIndex(ui->regionNameComboBox->findData("", Qt::UserRole, Qt::MatchCaseSensitive));
 			// For 0.19, time zone should not change. When we can work out LMST for other planets, we can accept LMST.
 			//if (customTimeZone.isEmpty())  // This is always true!
 			//	ui->timeZoneNameComboBox->setCurrentIndex(ui->timeZoneNameComboBox->findData("LMST", Qt::UserRole, Qt::MatchCaseSensitive));
 		}
 		proxyModel->sort(0, Qt::AscendingOrder);
-		ui->citySearchLineEdit->clear();
+		ui->citySearchLineEdit->setText(""); // https://wiki.qt.io/Technical_FAQ#Why_does_the_memory_keep_increasing_when_repeatedly_pasting_text_and_calling_clear.28.29_in_a_QLineEdit.3F
 		ui->citySearchLineEdit->setFocus();
 		stelCore->moveObserverTo(loc, 0., 0.);
 	}
@@ -675,7 +689,7 @@ void LocationDialog::reportEdit()
 void LocationDialog::addCurrentLocationToList()
 {
 	const StelLocation& loc = locationFromFields();
-	ui->citySearchLineEdit->clear();
+	ui->citySearchLineEdit->setText(""); // https://wiki.qt.io/Technical_FAQ#Why_does_the_memory_keep_increasing_when_repeatedly_pasting_text_and_calling_clear.28.29_in_a_QLineEdit.3F
 	StelApp::getInstance().getLocationMgr().saveUserLocation(loc);
 	isEditingNew=false;
 	ui->addLocationToListPushButton->setEnabled(false);
@@ -686,9 +700,8 @@ void LocationDialog::addCurrentLocationToList()
 	{
 		if (model->index(i,0).data()==id)
 		{
-			//FIXME: scroll caused artifcats in the GUI for long lists. WTF????
-			//ui->citiesListView->scrollTo(model->index(i,0));
 			ui->citiesListView->selectionModel()->select(model->index(i,0), QItemSelectionModel::ClearAndSelect|QItemSelectionModel::Rows);
+			ui->citiesListView->scrollTo(model->index(i,0));
 			setLocationFromList(model->index(i,0));
 			disconnectEditSignals();
 			ui->citySearchLineEdit->setFocus();
@@ -799,7 +812,7 @@ void LocationDialog::gpsEnableQueryLocation(bool running)
 		StelApp::getInstance().getLocationMgr().locationFromGPS(0);
 		ui->gpsToolButton->setText(q_("GPS disconnecting..."));
 		QTimer::singleShot(1500, this, SLOT(resetGPSbuttonLabel()));
-	}	
+	}
 }
 
 void LocationDialog::gpsReturn(bool success)
@@ -853,22 +866,22 @@ void LocationDialog::resetGPSbuttonLabel()
 void LocationDialog::resetLocationList()
 {
 	//reset search before setting model, prevents unnecessary search in full list
-	ui->citySearchLineEdit->clear();
+	ui->citySearchLineEdit->setText(""); // https://wiki.qt.io/Technical_FAQ#Why_does_the_memory_keep_increasing_when_repeatedly_pasting_text_and_calling_clear.28.29_in_a_QLineEdit.3F
 	ui->citySearchLineEdit->setFocus();
 	proxyModel->setSourceModel(allModel);
 	proxyModel->sort(0, Qt::AscendingOrder);
 }
 
 // called when user clicks in the country combobox and selects a country. The locations in the list are updated to select only sites in that country.
-void LocationDialog::filterSitesByCountry()
+void LocationDialog::filterSitesByRegion()
 {
-	QString country=ui->countryNameComboBox->currentData().toString();
+	QString region=ui->regionNameComboBox->currentData(Qt::UserRole).toString();
 	StelLocationMgr &locMgr=StelApp::getInstance().getLocationMgr();
 
-	LocationMap results = locMgr.pickLocationsInCountry(country);
+	LocationMap results = locMgr.pickLocationsInRegion(region);
 	pickedModel->setStringList(results.keys());
 	proxyModel->setSourceModel(pickedModel);
 	proxyModel->sort(0, Qt::AscendingOrder);
-	ui->citySearchLineEdit->clear();
+	ui->citySearchLineEdit->setText(""); // https://wiki.qt.io/Technical_FAQ#Why_does_the_memory_keep_increasing_when_repeatedly_pasting_text_and_calling_clear.28.29_in_a_QLineEdit.3F
 	ui->citySearchLineEdit->setFocus();
 }

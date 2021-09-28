@@ -41,8 +41,6 @@ SET(stellarium_lib_SRCS
      core/MultiLevelJsonBase.cpp
      core/StelSkyImageTile.hpp
      core/StelSkyImageTile.cpp
-     core/StelSkyPolygon.hpp
-     core/StelSkyPolygon.cpp
      core/SphericMirrorCalculator.cpp
      core/SphericMirrorCalculator.hpp
      core/StelApp.cpp
@@ -93,6 +91,7 @@ SET(stellarium_lib_SRCS
      core/StelTranslator.cpp
      core/StelTranslator.hpp
      core/VecMath.hpp
+     core/VecMath.cpp
      core/StelJsonParser.hpp
      core/StelJsonParser.cpp
      core/SimbadSearcher.hpp
@@ -147,14 +146,11 @@ SET(stellarium_lib_SRCS
      core/planetsephems/precession.h
      core/planetsephems/sidereal_time.c
      core/planetsephems/sidereal_time.h
-     #core/planetsephems/stellplanet.c   # replaced by EphemWrapper during de430 work
-     #core/planetsephems/stellplanet.h
      core/planetsephems/jpl_int.h
      core/planetsephems/jpleph.h
      core/planetsephems/jpleph.cpp
      core/planetsephems/EphemWrapper.cpp
      core/planetsephems/EphemWrapper.hpp
-
      core/planetsephems/tass17.c
      core/planetsephems/tass17.h
      core/planetsephems/vsop87.c
@@ -163,7 +159,10 @@ SET(stellarium_lib_SRCS
      core/planetsephems/de430.hpp
      core/planetsephems/de431.cpp
      core/planetsephems/de431.hpp
-
+     core/planetsephems/de440.cpp
+     core/planetsephems/de440.hpp
+     core/planetsephems/de441.cpp
+     core/planetsephems/de441.hpp
      core/modules/Atmosphere.cpp
      core/modules/Atmosphere.hpp
      core/modules/Asterism.cpp
@@ -209,6 +208,8 @@ SET(stellarium_lib_SRCS
      core/modules/Orbit.hpp
      core/modules/Planet.cpp
      core/modules/Planet.hpp
+     core/modules/RotationElements.cpp
+     core/modules/RotationElements.hpp
      core/modules/MinorPlanet.cpp
      core/modules/MinorPlanet.hpp
      core/modules/Comet.cpp
@@ -237,6 +238,8 @@ SET(stellarium_lib_SRCS
      core/modules/ZodiacalLight.cpp
      core/modules/ZoneArray.hpp
      core/modules/ZoneData.hpp
+     core/modules/SpecialMarkersMgr.cpp
+     core/modules/SpecialMarkersMgr.hpp
      StelMainView.hpp
      StelMainView.cpp
      StelSplashScreen.hpp
@@ -246,7 +249,7 @@ SET(stellarium_lib_SRCS
      CLIProcessor.hpp
      CLIProcessor.cpp
      translations.h
-     translations_countries.h
+     translations_regions.h
 )
 
 ### CMake < 3.0 does not AUTOMOC Q_GADGET which some files use, so we have to manually add it
@@ -335,8 +338,12 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/AstroCalcDialog.cpp
           gui/AstroCalcExtraEphemerisDialog.hpp
           gui/AstroCalcExtraEphemerisDialog.cpp
-          gui/BookmarksDialog.hpp
-          gui/BookmarksDialog.cpp
+          gui/AstroCalcCustomStepsDialog.hpp
+          gui/AstroCalcCustomStepsDialog.cpp
+          gui/ObsListDialog.hpp
+          gui/ObsListDialog.cpp
+          gui/ObsListCreateEditDialog.hpp
+          gui/ObsListCreateEditDialog.cpp
           gui/StelDialog.hpp
           gui/StelDialog_p.hpp
           gui/StelDialog.cpp
@@ -356,7 +363,9 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/customDeltaTEquationDialog.ui
           gui/astroCalcDialog.ui
           gui/astroCalcExtraEphemerisDialog.ui
-          gui/bookmarksDialog.ui
+          gui/astroCalcCustomStepsDialog.ui
+          gui/obsListDialog.ui
+          gui/obsListCreateEditDialog.ui
           gui/addRemoveLandscapesDialog.ui
           gui/dsoColorsDialog.ui
           gui/orbitColorsDialog.ui
@@ -445,10 +454,6 @@ IF(ENABLE_MEDIA)
 ENDIF()
 IF(ENABLE_SCRIPTING)
      SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::Script)
-ENDIF()
-IF(USE_OLD_QGLWIDGET)
-     # The Qt5OpenGL library is only required when using the legacy viewport
-     SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::OpenGL)
 ENDIF()
 IF(ENABLE_GPS)
      SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::Positioning Qt5::SerialPort)
@@ -670,6 +675,17 @@ IF(ENABLE_TESTING)
     ADD_TEST(testComputations testComputations)
     SET_TARGET_PROPERTIES(testComputations PROPERTIES FOLDER "src/tests")
 
+    SET(tests_testComparisons_SRCS
+        tests/testComparisons.hpp
+        tests/testComparisons.cpp
+    )
+    ADD_EXECUTABLE(testComparisons ${tests_testComparisons_SRCS})
+    TARGET_LINK_LIBRARIES(testComparisons ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testComparisons)
+    ADD_TEST(testComparisons testComparisons)
+    SET_TARGET_PROPERTIES(testComparisons PROPERTIES FOLDER "src/tests")
+
+
     SET(tests_testExtinction_SRCS
         tests/testExtinction.hpp
         tests/testExtinction.cpp
@@ -720,6 +736,16 @@ IF(ENABLE_TESTING)
     ADD_TEST(testVecMath testVecMath)
     SET_TARGET_PROPERTIES(testVecMath PROPERTIES FOLDER "src/tests")
 
+    SET(tests_testJavaScripting_SRCS
+        tests/testJavaScripting.hpp
+        tests/testJavaScripting.cpp
+    )
+    ADD_EXECUTABLE(testJavaScripting ${tests_testJavaScripting_SRCS})
+    TARGET_LINK_LIBRARIES(testJavaScripting ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testJavaScripting)
+    ADD_TEST(testJavaScripting testJavaScripting)
+    SET_TARGET_PROPERTIES(testJavaScripting PROPERTIES FOLDER "src/tests")
+	
     SET(tests_testStelProjector_SRCS
         tests/testStelProjector.hpp
         tests/testStelProjector.cpp

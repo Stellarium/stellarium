@@ -283,7 +283,7 @@ void TestComputations::testSpheToRectTransformations()
 		latitudeF1		=float(latitude);
 		longitudeF2	=float(longitude);
 		latitudeF2		=float(latitude);
-		eVec3f	= StelUtils::strToVec3f(data.takeFirst().toString());
+		eVec3f	= Vec3f(data.takeFirst().toString());
 		eVec3d	= eVec3f.toVec3d();
 
 		StelUtils::spheToRect(longitudeF1*M_PI_180f, latitudeF1*M_PI_180f, rVec3f);
@@ -332,7 +332,7 @@ void TestComputations::testRectToSpheTransformations()
 	{
 		longitudeE	= data.takeFirst().toFloat();
 		latitudeE		= data.takeFirst().toFloat();
-		rVec3f		= StelUtils::strToVec3f(data.takeFirst().toString());
+		rVec3f		= Vec3f(data.takeFirst().toString());
 		rVec3d		= rVec3f.toVec3d();
 
 		StelUtils::rectToSphe(&longitude, &latitude, rVec3f);
@@ -401,15 +401,15 @@ void TestComputations::testVector2Operators()
 
 	while (data.count() >= 8)
 	{
-		firstF		= StelUtils::strToVec2f(data.takeFirst().toString());
-		secondF	= StelUtils::strToVec2f(data.takeFirst().toString());
+		firstF		= Vec2f(data.takeFirst().toString());
+		secondF	= Vec2f(data.takeFirst().toString());
 		vecF		= firstF;
 		expected	= data.takeFirst().toBool();
-		sumF	= StelUtils::strToVec2f(data.takeFirst().toString());
-		diffF		= StelUtils::strToVec2f(data.takeFirst().toString());
-		mulF		= StelUtils::strToVec2f(data.takeFirst().toString());
-		smF		= StelUtils::strToVec2f(data.takeFirst().toString());
-		cwmF	= StelUtils::strToVec2f(data.takeFirst().toString());
+		sumF	= Vec2f(data.takeFirst().toString());
+		diffF		= Vec2f(data.takeFirst().toString());
+		mulF		= Vec2f(data.takeFirst().toString());
+		smF		= Vec2f(data.takeFirst().toString());
+		cwmF	= Vec2f(data.takeFirst().toString());
 
 		firstD.set((double)firstF[0], (double)firstF[1]);
 		vecD		= firstD;
@@ -573,12 +573,12 @@ void TestComputations::testVector3Operators()
 
 	while (data.count() >= 7)
 	{
-		firstF		= StelUtils::strToVec3f(data.takeFirst().toString());
-		secondF	= StelUtils::strToVec3f(data.takeFirst().toString());
+		firstF		= Vec3f(data.takeFirst().toString());
+		secondF	= Vec3f(data.takeFirst().toString());
 		expected	= data.takeFirst().toBool();
-		sumF	= StelUtils::strToVec3f(data.takeFirst().toString());
-		diffF		= StelUtils::strToVec3f(data.takeFirst().toString());
-		smF		= StelUtils::strToVec3f(data.takeFirst().toString());
+		sumF	= Vec3f(data.takeFirst().toString());
+		diffF		= Vec3f(data.takeFirst().toString());
+		smF		= Vec3f(data.takeFirst().toString());
 
 		firstD	= firstF.toVec3d();
 		secondD	= secondF.toVec3d();
@@ -697,6 +697,61 @@ void TestComputations::testIntMod()
 		int r = StelUtils::imod(a, b);
 
 		QVERIFY2(r==eR, qPrintable(QString("%1 mod %2 = %3 (expected %4)")
+					   .arg(a)
+					   .arg(b)
+					   .arg(r)
+					   .arg(eR)));
+	}
+}
+
+void TestComputations::testIntDiv()
+{
+	QVariantList data;
+
+	data << 1 << 1 << 1;
+	data << 1 << 2 << 0;
+	data << 1 << 3 << 0;
+	data << 4 << 2 << 2;
+	data << 9 << 5 << 1;
+	data << -2 << 5 << 0;
+	data << -9 << 5 << -1; // unfortunately...
+
+	while (data.count() >= 3)
+	{
+		int a = data.takeFirst().toInt();
+		int b = data.takeFirst().toInt();
+		int eR = data.takeFirst().toInt();
+		int r = a/b;
+
+		QVERIFY2(r==eR, qPrintable(QString("Integer division %1 / %2 = %3 (expected %4)")
+					   .arg(a)
+					   .arg(b)
+					   .arg(r)
+					   .arg(eR)));
+	}
+}
+
+void TestComputations::testIntFloorDiv()
+{
+	QVariantList data;
+
+	data << 1 << 1 << 1;
+	data << 1 << 2 << 0;
+	data << 1 << 3 << 0;
+	data << 4 << 2 << 2;
+	data << 9 << 5 << 1;
+	data << -2 << 5 << -1; // should be next lower integer
+	data << -9 << 5 << -2;
+	data << -9 << -5 << 1;
+
+	while (data.count() >= 3)
+	{
+		int a = data.takeFirst().toInt();
+		int b = data.takeFirst().toInt();
+		int eR = data.takeFirst().toInt();
+		int r = StelUtils::intFloorDiv(a, b);
+
+		QVERIFY2(r==eR, qPrintable(QString("Integer division %1 / %2 = %3 (expected %4)")
 					   .arg(a)
 					   .arg(b)
 					   .arg(r)
@@ -852,4 +907,22 @@ void TestComputations::testSign()
 					   .arg(r)
 					   .arg(e)));
 	}
+}
+
+void TestComputations::testInterpolation()
+{
+	QVERIFY(fuzzyEquals(StelUtils::interpolate3(-0.2, 1., 2., 3.), 1.8));
+	QVERIFY(fuzzyEquals(StelUtils::interpolate3( 0.2, 1., 2., 3.), 2.2));
+	const double i3=StelUtils::interpolate3(4.35/24., .884226, .877366, .870531);  // Meeus 1998, Ex.3a
+	QVERIFY2(abs(i3-.8761253) < 0.000001,
+		 qPrintable(QString("Interpol3 returned %1").arg(QString::number(i3, 'g', 7))));
+	const double i5=StelUtils::interpolate5(0.2777778,                             // Meeus 1998, Ex.3e
+					  StelUtils::dmsToRad(0, 54, 36.125),
+					  StelUtils::dmsToRad(0, 54, 24.606),
+					  StelUtils::dmsToRad(0, 54, 15.486),
+					  StelUtils::dmsToRad(0, 54, 08.694),
+					  StelUtils::dmsToRad(0, 54, 04.133));
+	double res5=StelUtils::dmsToRad(0, 54, 13.369);
+	QVERIFY2(abs(i5-res5)<0.000001,
+		 qPrintable(QString("Interpol5 returned %1, not %2").arg(QString::number(i5), 'g', 7).arg(QString::number(res5), 'g', 7)));
 }

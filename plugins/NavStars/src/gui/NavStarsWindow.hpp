@@ -51,8 +51,6 @@ private:
 private slots:
 	void saveSettings();
 	void resetSettings();
-	void setDisplayAtStartupEnabled(int checkState);
-
 	void populateNavigationalStarsSets();
 	void setNavigationalStarsSet(int nsSetID);
 };

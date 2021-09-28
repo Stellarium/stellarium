@@ -116,6 +116,12 @@ if __name__ == '__main__':
             # so we skip get_hip and assign it manually.
             if vertex['constellation'] == 'Cyg' and vertex['bayer'] == '31-':
                 current_hip = 99848
+            elif vertex['constellation'] == 'Pup' and vertex['bayer'] == 'alf':
+                # Issue #1438: Ensure line from nu Pup to Canopus ends at Canopus
+                current_hip = 30438
+            elif vertex['constellation'] == 'UMa' and vertex['bayer'] == 'xi':
+                # Issue #1414: Ensure line from nu UMa to xi UMa actually ends at xi UMa
+                current_hip = 55203
             else:
                 current_hip = get_hip(ra=vertex['ra'], dec=vertex['dec'], mag=vertex['mag'])
             if not current_hip:
@@ -133,9 +139,10 @@ if __name__ == '__main__':
         exitval = 1
         print("Caught KeyboardInterrupt", file=sys.stderr)
 
-    # Special case for Mensa and Microscopium constellations (without lines!)
-    constellationship['Men'].append( (26264, 26264,) )
-    constellationship['Mic'].append( (103882, 103882,) )
+    # Special case for Mensa and Microscopium constellations
+    # Use alpha and beta of each constellation to generate the lines
+    constellationship['Men'].append( (29271, 23467,) )
+    constellationship['Mic'].append( (102831, 102989,) )
 
     print("Generating constellationship data...", file=sys.stderr)
     for constellation in sorted(constellationship.keys()):

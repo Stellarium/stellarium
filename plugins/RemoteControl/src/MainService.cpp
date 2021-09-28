@@ -54,7 +54,9 @@ MainService::MainService(QObject *parent)
 	objMgr = &StelApp::getInstance().getStelObjectMgr();
 	mvmgr = GETSTELMODULE(StelMovementMgr);
 	propMgr = StelApp::getInstance().getStelPropertyManager();
+#ifdef ENABLE_SCRIPTING
 	scriptMgr = &StelApp::getInstance().getScriptMgr();
+#endif
 	skyCulMgr = &StelApp::getInstance().getSkyCultureMgr();
 
 	connect(actionMgr,SIGNAL(actionToggled(QString,bool)),this,SLOT(actionToggled(QString,bool)));
@@ -123,7 +125,7 @@ void MainService::get(const QByteArray& operation, const APIParameters &paramete
 			obj2.insert("latitude",static_cast<double>(loc.latitude));
 			obj2.insert("longitude",static_cast<double>(loc.longitude));
 			obj2.insert("altitude",loc.altitude);
-			obj2.insert("country",loc.country);
+			obj2.insert("region",loc.region);
 			obj2.insert("state",loc.state);
 			obj2.insert("landscapeKey",loc.landscapeKey);
 			obj.insert("location",obj2);

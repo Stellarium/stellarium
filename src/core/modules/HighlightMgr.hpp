@@ -83,7 +83,7 @@ public:
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=false) const;
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 	virtual QStringList listAllObjects(bool inEnglish) const;
 	virtual QString getName() const { return "Highlights"; }
 	virtual QString getStelObjectType() const { return QString(); }
@@ -102,10 +102,10 @@ public slots:
 	void setColor(const Vec3f& c);
 	//! Get the current color used to draw of the highlight markers.
 	//! @return current color
-	const Vec3f& getColor(void) const;
+	Vec3f getColor(void) const;
 
 	//! Set the size of highlight markers.
-	//! @param c The size of the highlight markers
+	//! @param size The size of the highlight markers
 	//! @code
 	//! // example of usage in scripts
 	//! HighlightMgr.setMarkersSize(13.f);

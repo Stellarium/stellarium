@@ -47,9 +47,9 @@ public:
   
 	BarFrame(QWidget* parent) : QFrame(parent), moving(false) {}
   
-	virtual void mousePressEvent(QMouseEvent *event);
-	virtual void mouseReleaseEvent(QMouseEvent *event);
-	virtual void mouseMoveEvent(QMouseEvent *event);
+	virtual void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+	virtual void mouseReleaseEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+	virtual void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
 signals:
 	// should be connected to the StelDialog in createDialogContents()
 	void movedTo(QPoint newPosition);

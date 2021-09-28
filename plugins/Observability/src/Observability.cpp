@@ -198,7 +198,7 @@ void Observability::updateMessageText()
 double Observability::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
-		return StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr")->getCallOrder(actionName)+10.;
+		return StelApp::getInstance().getModuleMgr().getModule("LabelMgr")->getCallOrder(actionName)+110.;
 	return 0;
 }
 
@@ -206,15 +206,8 @@ void Observability::init()
 {
 	loadConfiguration();
 	
-	StelAction* actionShow = addAction("actionShow_Observability",
-	                                   N_("Observability"),
-	                                   N_("Observability"),
-	                                   "flagShowReport");
-	// actionShow->setChecked(flagShowReport); //Unnecessary?
-	addAction("actionShow_Observability_ConfigDialog",
-	          N_("Observability"),
-	          N_("Observability configuration window"),
-	          configDialog, "visible");
+	addAction("actionShow_Observability",        N_("Observability"), N_("Observability"),      "flagShowReport");
+	addAction("actionShow_Observability_dialog", N_("Observability"), N_("Show settings dialog"), configDialog, "visible", ""); // Allow assign shortkey
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (gui!=Q_NULLPTR)
@@ -222,14 +215,17 @@ void Observability::init()
 		button = new StelButton(Q_NULLPTR,
 					QPixmap(":/observability/bt_observab_on.png"),
 					QPixmap(":/observability/bt_observab_off.png"),
-					QPixmap(":/graphicGui/glow32x32.png"),
-					actionShow);
+					QPixmap(":/graphicGui/miscGlow32x32.png"),
+					"actionShow_Observability",
+					false,
+					"actionShow_Observability_dialog");
 		gui->getButtonBar()->addButton(button, "065-pluginsGroup");
 	}
 	
 	updateMessageText();
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 	        this, SLOT(updateMessageText()));
+	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveConfiguration()));
 }
 
 /////////////////////////////////////////////
@@ -238,7 +234,6 @@ void Observability::draw(StelCore* core)
 {
 	if (!flagShowReport)
 		return; // Button is off.
-
 /////////////////////////////////////////////////////////////////
 // PRELIMINARS:
 	bool locChanged, yearChanged;
@@ -803,9 +798,10 @@ void Observability::draw(StelCore* core)
 
 // Print all results:
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
-	int lineSpacing = static_cast<int>(params.devicePixelsPerPixel * 1.3 * fontSize);  // between lines
-	int groupSpacing = static_cast<int>(6*fontSize*params.devicePixelsPerPixel);  // between daily and yearly results
-	int yLine = static_cast<int>(8*fontSize*params.devicePixelsPerPixel) + 110;
+	float ppx = static_cast<float>(params.devicePixelsPerPixel);
+	int lineSpacing = static_cast<int>(ppx * 1.3f * fontSize);  // between lines
+	int groupSpacing = static_cast<int>(6*fontSize*ppx);  // between daily and yearly results
+	int yLine = static_cast<int>(8*fontSize*ppx + 110*ppx);
 	int xLine = 80;
 
 	if (show_Today) 
@@ -1003,7 +999,7 @@ void Observability::updateSunData(StelCore* core)
 	{
 		yearJD[i].first = Jan1stJD + i;
 		yearJD[i].second = yearJD[i].first+core->computeDeltaT(yearJD[i].first)/86400.0;
-		myEarth->computePosition(yearJD[i].second);
+		myEarth->computePosition(yearJD[i].second, Vec3d(0.));
 		myEarth->computeTransMatrix(yearJD[i].first, yearJD[i].second);
 		pos = myEarth->getHeliocentricEclipticPos();
 		sunPos = core->j2000ToEquinoxEqu((StelCore::matVsop87ToJ2000)*(-pos), StelCore::RefractionOff);
@@ -1012,7 +1008,7 @@ void Observability::updateSunData(StelCore* core)
 	};
 
 //Return the Earth to its current time:
-	myEarth->computePosition(myJD.second);
+	myEarth->computePosition(myJD.second, Vec3d(0.));
 	myEarth->computeTransMatrix(myJD.first, myJD.second);
 }
 ///////////////////////////////////////////////////
@@ -1229,14 +1225,14 @@ void Observability::getSunMoonCoords(StelCore *core, QPair<double, double> JD,
 {
 	if (getBack) // Return the Moon and Earth to their current position:
 	{
-		myEarth->computePosition(JD.second);
+		myEarth->computePosition(JD.second, Vec3d(0.));
 		myEarth->computeTransMatrix(JD.first, JD.second);
-		myMoon->computePosition(JD.second);
+		myMoon->computePosition(JD.second, Vec3d(0.));
 		myMoon->computeTransMatrix(JD.first, JD.second);
 	} 
 	else // Compute coordinates:
 	{
-		myEarth->computePosition(JD.second);
+		myEarth->computePosition(JD.second, Vec3d(0.));
 		myEarth->computeTransMatrix(JD.first, JD.second);
 		Vec3d earthPos = myEarth->getHeliocentricEclipticPos();
 		double curSidT;
@@ -1249,7 +1245,7 @@ void Observability::getSunMoonCoords(StelCore *core, QPair<double, double> JD,
 		curSidT = myEarth->getSiderealTime(JD.first, JD.second)/Rad2Deg;
 		RotObserver = (Mat4d::zrotation(curSidT))*ObserverLoc;
 		LocTrans = (StelCore::matVsop87ToJ2000)*(Mat4d::translation(-earthPos));
-		myMoon->computePosition(JD.second);
+		myMoon->computePosition(JD.second, Vec3d(0.));
 		myMoon->computeTransMatrix(JD.first, JD.second);
 		Vec3d moonPos = myMoon->getHeliocentricEclipticPos();
 		sunPos = (core->j2000ToEquinoxEqu(LocTrans*moonPos, StelCore::RefractionOff))-RotObserver;
@@ -1268,14 +1264,14 @@ void Observability::getMoonDistance(StelCore *core, QPair<double, double> JD, do
 {
 	if (getBack) // Return the Moon and Earth to their current position:
 	{
-		myEarth->computePosition(JD.second);
+		myEarth->computePosition(JD.second, Vec3d(0.));
 		myEarth->computeTransMatrix(JD.first, JD.second);
-		myMoon->computePosition(JD.second);
+		myMoon->computePosition(JD.second, Vec3d(0.));
 		myMoon->computeTransMatrix(JD.first, JD.second);
 	} 
 	else
 	{	// Compute coordinates:
-		myEarth->computePosition(JD.second);
+		myEarth->computePosition(JD.second, Vec3d(0.));
 		myEarth->computeTransMatrix(JD.first, JD.second);
 		Vec3d earthPos = myEarth->getHeliocentricEclipticPos();
 //		double curSidT;
@@ -1288,7 +1284,7 @@ void Observability::getMoonDistance(StelCore *core, QPair<double, double> JD, do
 //		curSidT = myEarth->getSiderealTime(JD)/Rad2Deg;
 //		RotObserver = (Mat4d::zrotation(curSidT))*ObserverLoc;
 		LocTrans = (StelCore::matVsop87ToJ2000)*(Mat4d::translation(-earthPos));
-		myMoon->computePosition(JD.second);
+		myMoon->computePosition(JD.second, Vec3d(0.));
 		myMoon->computeTransMatrix(JD.first, JD.second);
 		Pos1 = myMoon->getHeliocentricEclipticPos();
 		Pos2 = core->j2000ToEquinoxEqu(LocTrans*Pos1, StelCore::RefractionOff); //-RotObserver;
@@ -1307,17 +1303,17 @@ void Observability::getPlanetCoords(StelCore *core, QPair<double, double> JD, do
 	if (getBack)
 	{
 	// Return the planet to its current time:
-		myPlanet->computePosition(JD.second);
+		myPlanet->computePosition(JD.second, Vec3d(0.));
 		myPlanet->computeTransMatrix(JD.first, JD.second);
-		myEarth->computePosition(JD.second);
+		myEarth->computePosition(JD.second, Vec3d(0.));
 		myEarth->computeTransMatrix(JD.first, JD.second);
 	} else
 	{
 	// Compute planet's position:
-		myPlanet->computePosition(JD.second);
+		myPlanet->computePosition(JD.second, Vec3d(0.));
 		myPlanet->computeTransMatrix(JD.first, JD.second);
 		Pos1 = myPlanet->getHeliocentricEclipticPos();
-		myEarth->computePosition(JD.second);
+		myEarth->computePosition(JD.second, Vec3d(0.));
 		myEarth->computeTransMatrix(JD.first, JD.second);
 		Pos2 = myEarth->getHeliocentricEclipticPos();
 		LocTrans = (StelCore::matVsop87ToJ2000)*(Mat4d::translation(-Pos2));
@@ -1347,7 +1343,7 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 	{
 		lastType = bodyType;
 
-		myEarth->computePosition(myJD.second);
+		myEarth->computePosition(myJD.second, Vec3d(0.));
 		myEarth->computeTransMatrix(myJD.first, myJD.second);
 		Vec3d earthPos = myEarth->getHeliocentricEclipticPos();
 
@@ -1360,14 +1356,14 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 			curSidT = myEarth->getSiderealTime(myJD.first, myJD.second)/Rad2Deg;
 			RotObserver = (Mat4d::zrotation(curSidT))*ObserverLoc;
 			LocTrans = (StelCore::matVsop87ToJ2000)*(Mat4d::translation(-earthPos));
-			myMoon->computePosition(myJD.second);
+			myMoon->computePosition(myJD.second, Vec3d(0.));
 			myMoon->computeTransMatrix(myJD.first, myJD.second);
 			Pos1 = myMoon->getHeliocentricEclipticPos();
 			Pos2 = (core->j2000ToEquinoxEqu(LocTrans*Pos1, StelCore::RefractionOff))-RotObserver;
 		}
 		else // Planet position
 		{
-			myPlanet->computePosition(myJD.second);
+			myPlanet->computePosition(myJD.second, Vec3d(0.));
 			myPlanet->computeTransMatrix(myJD.first, myJD.second);
 			Pos1 = myPlanet->getHeliocentricEclipticPos();
 			LocTrans = (StelCore::matVsop87ToJ2000)*(Mat4d::translation(-earthPos));
@@ -1688,11 +1684,12 @@ void Observability::loadConfiguration()
 	// Load settings from main config file
 	fontSize = conf->value("font_size",15).toInt();
 	font.setPixelSize(fontSize);
-	fontColor = StelUtils::strToVec3f(conf->value("font_color", "0,0.5,1").toString());
+	fontColor = Vec3f(conf->value("font_color", "0,0.5,1").toString());
 	show_AcroCos = conf->value("show_AcroCos", true).toBool();
 	show_Good_Nights = conf->value("show_Good_Nights", true).toBool();
 	show_Best_Night = conf->value("show_Best_Night", true).toBool();
-	show_Today = conf->value("show_Today", true).toBool();
+	//show_Today = conf->value("show_Today", true).toBool();
+	show_Today = false; // DISABLED for 0.21.2.
 	show_FullMoon = conf->value("show_FullMoon", true).toBool();
 //	show_Crescent = conf->value("show_Crescent", true).toBool();
 //	show_SuperMoon = conf->value("show_SuperMoon", true).toBool();
@@ -1741,7 +1738,9 @@ void Observability::saveConfiguration()
 
 void Observability::enableTodayField(bool enabled)
 {
-	show_Today = enabled;
+	//show_Today = enabled;
+	Q_UNUSED(enabled)
+	show_Today = false; // DISABLED for 0.21.2
 	configChanged = true;
 }
 

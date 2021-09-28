@@ -25,6 +25,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include "NexStarCommand.hpp"
 #include "TelescopeClientDirectNexStar.hpp"
 #include "common/LogFile.hpp"
+#include "StelUtils.hpp"
 
 #include <cmath>
 
@@ -81,7 +82,7 @@ bool NexStarCommandGotoPosition::writeCommandToBuffer(char *&p,char *end)
 	has_been_written_to_buffer = true;
 	#ifdef DEBUG5
 	*log_file << Now() << "NexStarCommandGotoPosition::writeCommandToBuffer:"
-	          << b << endl;
+		  << b << StelUtils::getEndLineChar();
 	#endif
 	
 	return true;
@@ -96,13 +97,13 @@ int NexStarCommandGotoPosition::readAnswerFromBuffer(const char *&buff, const ch
 	{
 		#ifdef DEBUG4
 		*log_file << Now() << "NexStarCommandGotoPosition::readAnswerFromBuffer: slew ok"
-		          << endl;
+			  << StelUtils::getEndLineChar();
 		#endif
 	}
 	else
 	{
 		#ifdef DEBUG4
-		*log_file << Now() << "NexStarCommandGotoPosition::readAnswerFromBuffer: slew failed." << endl;
+		*log_file << Now() << "NexStarCommandGotoPosition::readAnswerFromBuffer: slew failed." << StelUtils::getEndLineChar();
 		#endif
 	}
 	buff++;
@@ -159,7 +160,7 @@ bool NexStarCommandSync::writeCommandToBuffer(char *&p,char *end)
 	has_been_written_to_buffer = true;
 	#ifdef DEBUG5
 	*log_file << Now() << "NexStarCommandSync::writeCommandToBuffer:"
-		  << b << endl;
+		  << b << StelUtils::getEndLineChar();
 	#endif
 
 	return true;
@@ -174,13 +175,13 @@ int NexStarCommandSync::readAnswerFromBuffer(const char *&buff, const char *end)
 	{
 		#ifdef DEBUG4
 		*log_file << Now() << "NexStarCommandSync::readAnswerFromBuffer: sync ok"
-			  << endl;
+			  << StelUtils::getEndLineChar();
 		#endif
 	}
 	else
 	{
 		#ifdef DEBUG4
-		*log_file << Now() << "NexStarCommandSync::readAnswerFromBuffer: sync failed." << endl;
+		*log_file << Now() << "NexStarCommandSync::readAnswerFromBuffer: sync failed." << StelUtils::getEndLineChar();
 		#endif
 	}
 	buff++;
@@ -226,7 +227,7 @@ int NexStarCommandGetRaDec::readAnswerFromBuffer(const char *&buff, const char *
 	{
 		#ifdef DEBUG4
 		*log_file << Now() << "NexStarCommandGetRaDec::readAnswerFromBuffer: "
-		                      "error: ',' expected" << endl;
+				      "error: ',' expected" << StelUtils::getEndLineChar();
 		#endif
 		return -1;
 	}
@@ -246,7 +247,7 @@ int NexStarCommandGetRaDec::readAnswerFromBuffer(const char *&buff, const char *
 	{
 		#ifdef DEBUG4
 		*log_file << Now() << "NexStarCommandGetRaDec::readAnswerFromBuffer: "
-		                      "error: '#' expected" << endl;
+				      "error: '#' expected" << StelUtils::getEndLineChar();
 		#endif
 		return -1;
 	}
@@ -255,7 +256,7 @@ int NexStarCommandGetRaDec::readAnswerFromBuffer(const char *&buff, const char *
 	#ifdef DEBUG4
 	*log_file << Now() << "NexStarCommandGetRaDec::readAnswerFromBuffer: "
 	                      "ra = " << ra << ", dec = " << dec
-	          << endl;
+		  << StelUtils::getEndLineChar();
 	#endif
 	buff = p;
 

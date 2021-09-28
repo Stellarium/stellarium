@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
- 
+
 #ifndef REMOTECONTROL_HPP
 #define REMOTECONTROL_HPP
 
@@ -59,28 +59,34 @@ class RemoteControl : public StelModule
 		   READ getFlagUsePassword
 		   WRITE setFlagUsePassword
 		   NOTIFY flagUsePasswordChanged)
+	Q_PROPERTY(bool enableCors
+		   READ getFlagEnableCors
+		   WRITE setFlagEnableCors
+		   NOTIFY flagEnableCorsChanged)
 public:
 	RemoteControl();
-	virtual ~RemoteControl();
-	
+	virtual ~RemoteControl() Q_DECL_OVERRIDE;
+
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init();
-	virtual void update(double deltaTime);
-	virtual void draw(StelCore* core);
-	virtual double getCallOrder(StelModuleActionName actionName) const;
-	virtual void handleKeys(QKeyEvent* event){event->setAccepted(false);}
+	virtual void init() Q_DECL_OVERRIDE;
+	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
+	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
+	virtual void handleKeys(QKeyEvent* event) Q_DECL_OVERRIDE {event->setAccepted(false);}
 
 	//virtual void handleMouseClicks(class QMouseEvent* event);
 	//virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b);
-	virtual bool configureGui(bool show=true);
+	virtual bool configureGui(bool show=true) Q_DECL_OVERRIDE;
 	///////////////////////////////////////////////////////////////////////////
 	// Property getters
 	bool getFlagEnabled() const {return enabled;}
 	bool getFlagAutoStart() const { return autoStart; }
 	bool getFlagUsePassword() const { return usePassword; }
+	bool getFlagEnableCors() const { return enableCors; }
 
 	QString getPassword() const { return password; }
+	QString getCorsOrigin() const { return corsOrigin; }
 	int getPort() const {return port; }
 
 public slots:
@@ -96,6 +102,14 @@ public slots:
 	//! The password is required by RequestHandler for all HTTP requests.
 	//! Basic HTTP auth is used, without a user name.
 	void setPassword(const QString& password);
+
+	//! If true, Access-Control-Allow-Origin header will be appended to responses.
+	void setFlagEnableCors(bool b);
+
+	//! Sets the CORS origin that is optionally enabled with setFlagEnableCors().
+	void setCorsOrigin(const QString& corsOrigin);
+
+
 	//! Sets the port where the server listens. Must be done before startServer() is called,
 	//! or restart the server to use the new setting.
 	void setPort(const int port);
@@ -129,9 +143,11 @@ signals:
 	void flagEnabledChanged(bool val);
 	void flagAutoStartChanged(bool val);
 	void flagUsePasswordChanged(bool val);
+	void flagEnableCorsChanged(bool val);
 
 	void portChanged(int val);
 	void passwordChanged(const QString& val);
+	void corsOriginChanged(const QString& val);
 
 
 private:
@@ -144,6 +160,8 @@ private:
 	bool autoStart;
 	bool usePassword;
 	QString password;
+	bool enableCors;
+	QString corsOrigin;
 
 	int port;
 	int minThreads;
@@ -170,9 +188,9 @@ class RemoteControlStelPluginInterface : public QObject, public StelPluginInterf
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const;
-	virtual StelPluginInfo getPluginInfo() const;
-	virtual QObjectList getExtensionList() const { return QObjectList(); }
+	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
+	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
+	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
 };
 
 #endif /*REMOTECONTROL_HPP*/

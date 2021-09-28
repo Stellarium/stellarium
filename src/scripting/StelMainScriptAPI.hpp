@@ -60,31 +60,29 @@ public slots:
 	//! @return the Modified Julian Day
 	static double getMJDay();
 
-	//! set the date in ISO format, e.g. "2008-03-24T13:21:01"
-	//! @param dateStr the date string to use.  Formats:
-	//! - ISO, e.g. "2008-03-24T13:21:01"
-	//! - "now" (set sim time to real time)
-	//! - relative, e.g. "+ 4 days", "-2 weeks".  can use these
-	//!   units: seconds, minutes, hours, days, sols, weeks, months, years.
-	//!   You may also append " sidereal" to use sidereal days and so on.
-	//!   You can also use "now" at the start.  For example:
-	//!   "now + 3 hours sidereal"
-	//! @note you must use the plural all the time, even when the number
-	//! of the unit is 1.  i.e. use "+ 1 days" not "+1 day".
-	//! @note when sidereal time is used, the length of time for
-	//! each unit is dependent on the current planet.  By contrast
-	//! when sidereal time is not specified (i.e. solar time is used)
-	//! the value is conventional - i.e. 1 day means 1 Earth Solar day.
-	//! @param spec "local" or "utc" - only has an effect when
-	//! the ISO date type is used. Defaults to "utc".
-	//! @param enableDeltaT is \a true or \a false - enable Delta-T correction or not.
-	//! Defaults to "true".
-	//! @note for fully compatibles behavior of this function with the version 0.11.4
-	//! or earlier, you should call \b core.setDeltaTAlgorithm("WithoutCorrection");
+	//! Sets Stellarium's date using an absolute or relative value.
+	//! @param dateStr Defines the date or offset to use. Possible formats:
+	//! - Date and time according to ISO 8601, without time zone, e.g., "2008-03-24T13:21:01"
+	//! - Use "now" to set Stellarium's time to the system's (presumably) real time.
+	//! - Specify an offset in the form <sign><value><unit> to set the date relative to its
+	//!   current value. <unit> may be one of second, minute, hour, day, sol, week, month,
+	//!   year, with a plural 's' optionally appended, e.g., "+3.25 days", " - 1 year".
+	//! - Use "now" followed by an offset to set the date relative to the system's
+	//!   current value, e.g., "now+1hour".
+	//! - You may append "sidereal" to use units derived from the length of a sidereal day,
+	//!   e.g., "now +2days sidereal".
+	//! @note When sidereal time is used, the length of time for each unit is dependent on
+	//! the current planet.  By contrast, when sidereal time is not specified (i.e., solar
+	//! time is used) the value is conventional so that 1 day means 1 Earth Solar day.
+	//! @param spec May be "local" or "utc". Only has an effect when
+	//! an ISO format string is used. Defaults to "utc".
+	//! @param dateIsDT set to \a true indicates that the given date is formulated in
+	//! Dynamical Time, i.e. with DeltaT added.
+	//! @note For fully compatible behaviour of this function with versions 0.11.4
+	//! or earlier you should call \b core.setDeltaTAlgorithm("WithoutCorrection");
 	//! before running \b core.setDate(); for disabling DeltaT correction.
-	//! @note starting with version 0.13.2 all relative dates are set without DeltaT correction.
-	//! @note starting with version 0.14.0 the final optional Boolean argument has a different meaning and default!
-	//! @param dateIsTT \a true if the given date is formulated in Dynamical Time, i.e. with DeltaT added.
+	//! @note Starting with version 0.13.2 all relative dates are set without DeltaT correction.
+	//! @note Starting with version 0.14.0 the Boolean argument has a different meaning and default!
 	static void setDate(const QString& dateStr, const QString& spec="utc", const bool& dateIsDT=false);
 
 	//! get the simulation date and time as a string in ISO format,
@@ -98,6 +96,11 @@ public slots:
 	//! in HMS format, e.g. "0h1m68.2s"
 	//! @return the DeltaT for current simulation time.
 	static QString getDeltaT();
+
+	//! get the DeltaT for the simulation date and time as a double
+	//! in seconds
+	//! @return the DeltaT for current simulation time.
+	static double getDeltaTsec();
 
 	//! get the DeltaT equation name for the simulation date and time as a string
 	//! @return name of the DeltaT equation
@@ -244,6 +247,19 @@ public slots:
 	//! stars will start with no extra information when they become selected again.
 	static void addToSelectedObjectInfoString(const QString &str, bool replace=false);
 
+	//! Set value for some StelProperty.
+	//! @note This method may be very helpful for change the values in the plugins to avoid crashes when some plugin is not loaded.
+	//! @note See also @ref isModuleLoaded() method
+	//! @param propertyName the name of StelProperty, e.g. "Satellites.flagOrbitLines"
+	//! @param propertyValue the value of StelProperty
+	static void setStelProperty(const QString& propertyName, QVariant propertyValue);
+
+	//! Get value for some StelProperty.
+	//! @note This method may be very helpful for change the values in the plugins to avoid crashes when some plugin is not loaded.
+	//! @note See also @ref isModuleLoaded() method
+	//! @param propertyName the name of StelProperty, e.g. "Satellites.flagOrbitLines"
+	static QVariant getStelProperty(const QString& propertyName);
+
 	//! Clear the display options, setting a "standard" view.
 	//! Preset states:
 	//! - natural : azimuthal mount, atmosphere, landscape,
@@ -336,7 +352,8 @@ public slots:
 	//! @param duration the time for the transition from the
 	//!        old to the new location.
 	//! @param name A name for the location (which will appear
-	//!        in the status bar.
+	//!        in the status bar. Use "<city>, <region>" for
+	//!        moving across a border.
 	//! @param planet the English name of the new planet.
 	//!        If the planet name is not known (e.g. ""), the
 	//!        planet will not be set.
@@ -358,7 +375,7 @@ public slots:
 	//! - longitude : longitude in decimal degrees
 	//! - latitude : latitude in decimal degrees
 	//! - planet : name of planet
-	//! - location : city and country
+	//! - location : city and region
 	//! - sidereal-year : duration of the sidereal year on the planet in Earth's days (since 0.12.0)
 	//! - sidereal-day : duration of the sidereal day on the planet in Earth's hours (since 0.12.0)
 	//! - solar-day : duration of the mean solar day on the planet in Earth's hours (since 0.12.0)
@@ -496,6 +513,20 @@ public slots:
 	//! @return true if gravity labels are enabled, else false
 	static bool getFlagGravityLabels();
 
+	//! Get the current status of the horizontal flip
+	//! @return true if horizontal flip are enabled, else false
+	static bool getFlipHorz();
+	//! Set the horizontal flip status.
+	//! @param flip The new value (true = flipped, false = unflipped).
+	static void setFlipHorz(bool b);
+
+	//! Get the current status of the vertical flip
+	//! @return true if vertical flip are enabled, else false
+	static bool getFlipVert();
+	//! Set the vertical flip status.
+	//! @param flip The new value (true = flipped, false = unflipped).
+	static void setFlipVert(bool b);
+
 	//! Turn on/off gravity labels
 	//! @param b if true, turn on gravity labels, else turn them off
 	static void setFlagGravityLabels(bool b);
@@ -522,14 +553,15 @@ public slots:
 	//! @param maxBright The maximum brightness setting for the image
 	//! @param visible The initial visibility of the image
 	//! @param frame one of EqJ2000|EqDate|EclJ2000|EclDate|Gal(actic)|SuperG(alactic)|AzAlt.
-	//! @note since 2017-03, you can select Frame.
-	//! @note Images in AzAlt frame are not affected by atmosphere effects like refraction or extinction.
+	//! @param withAberration The image, if frame==EqJ2000, undergoes aberration effect. Default: true.
+	//! @note Images in AzAlt frame are not affected by atmosphere effects like refraction or extinction, and also not by aberration.
 	void loadSkyImage(const QString& id, const QString& filename,
 					  double lon0, double lat0,
 					  double lon1, double lat1,
 					  double lon2, double lat2,
 					  double lon3, double lat3,
-					  double minRes=2.5, double maxBright=14, bool visible=true, const QString &frame="EqJ2000");
+					  double minRes=2.5, double maxBright=14, bool visible=true,
+					  const QString &frame="EqJ2000", bool withAberration=true);
 
 
 	//! Convenience function which allows the user to provide longitudinal and latitudinal angles (RA/Dec or Long/Lat or Az/Alt)
@@ -539,7 +571,8 @@ public slots:
 					  const QString& lon1, const QString& lat1,
 					  const QString& lon2, const QString& lat2,
 					  const QString& lon3, const QString& lat3,
-					  double minRes=2.5, double maxBright=14, bool visible=true, const QString& frame="EqJ2000");
+					  double minRes=2.5, double maxBright=14, bool visible=true,
+					  const QString& frame="EqJ2000", bool withAberration=true);
 
 	//! Convenience function which allows loading of a (square) sky image based on a
 	//! central coordinate, angular size and rotation. Note that the edges will not be aligned with edges at center plus/minus size!
@@ -556,11 +589,12 @@ public slots:
 	//! @param maxBright The maximum brightness setting for the image, Vmag/arcmin^2. Use this to blend the brightest possible pixels with DSO. mag 15 or brighter seems ok.
 	//! @param visible The initial visibility of the image
 	//! @param frame one of EqJ2000|EqDate|EclJ2000|EclDate|Gal(actic)|SuperG(alactic)|AzAlt.
-	//! @note since 2017-03, you can select Frame.
+	//! @param withAberration The image, if frame==EqJ2000, undergoes aberration effect. Default: true.
 	//! @note Images in AzAlt frame are not affected by atmosphere effects like refraction or extinction.
 	void loadSkyImage(const QString& id, const QString& filename,
 					  double lon, double lat, double angSize, double rotation,
-					  double minRes=2.5, double maxBright=14, bool visible=true, const QString& frame="EqJ2000");
+					  double minRes=2.5, double maxBright=14, bool visible=true,
+					  const QString& frame="EqJ2000", bool withAberration=true);
 
 	//! Convenience function which allows loading of a (square) sky image based on a
 	//! central coordinate, angular size and rotation.  Parameters are the same
@@ -568,7 +602,8 @@ public slots:
 	//! lon and lat, except here text expressions of angles may be used.
 	void loadSkyImage(const QString& id, const QString& filename,
 					  const QString& lon, const QString& lat, double angSize, double rotation,
-					  double minRes=2.5, double maxBright=14, bool visible=true, const QString& frame="EqJ2000");
+					  double minRes=2.5, double maxBright=14, bool visible=true,
+					  const QString& frame="EqJ2000", bool withAberration=true);
 
 	//! Remove a SkyImage.
 	//! @param id the ID of the image to remove.
@@ -811,7 +846,7 @@ public slots:
 	// re-implemented for 0.15.1 to avoid a busy-loop.
 	//! Pauses the script for \e t seconds
 	//! @param t the number of seconds to wait
-	static void wait(double t);
+	void wait(double t);
 
 	//! Waits until a specified simulation date/time. This function
 	//! will take into account the rate (and direction) in which simulation
@@ -821,7 +856,7 @@ public slots:
 	//! prevent infinite wait time.
 	//! @param dt the date string to use, format like "2012-06-06T4:44:00" or "-1428-03-04T22:23:45"
 	//! @param spec "local" or "utc"
-	static void waitFor(const QString& dt, const QString& spec="utc");
+	void waitFor(const QString& dt, const QString& spec="utc");
 
 	//! Retrieve value of environment variable @param name.
 	//! On desktop Windows and Qt before 5.10, this call may result in data loss if the original
@@ -829,6 +864,7 @@ public slots:
 	static QString getEnv(const QString& var);
 
 	//! return whether a particular module has been loaded. Mostly useful to check whether a module available as plugin is active.
+	//! @note See also @ref setStelProperty() and @ref getStelProperty() methods
 	//! @param moduleID the QObject name of the module instance, by convention it is equal to the class name.
 	static bool isModuleLoaded(const QString& moduleID);
 
@@ -846,57 +882,14 @@ public slots:
 	//! @return The current status of media playback support.
 	static bool isMediaPlaybackSupported(void);
 
-	//
-	// DEPRECATED METHODS
-	//
-
-	//! Show or hide the Milky Way.
-	//! @param b if true, show the Milky Way, if false, hide the Milky Way.
-	//! @deprecated This method will be removed in version 0.20. Use MilkyWay.setFlagShow(b) instead.
-	static void setMilkyWayVisible(bool b);
-
-	//! Set Milky Way intensity.
-	//! @param i value of intensity for the Milky Way
-	//! @deprecated This method will be removed in version 0.20. Use MilkyWay.setIntensity(i) instead.
-	static void setMilkyWayIntensity(double i);
-
-	//! Get Milky Way intensity.
-	//! @return value of Milky Way intensity, e.g. "1.2"
-	//! @deprecated This method will be removed in version 0.20. Use MilkyWay.getIntensity() instead.
-	static double getMilkyWayIntensity();
-
-	//! Show or hide the Zodiacal Light.
-	//! @param b if true, show the Zodiacal Light, if false, hide the Zodiacal Light.
-	//! @deprecated This method will be removed in version 0.20. Use ZodiacalLight.setFlagShow(b) instead.
-	static void setZodiacalLightVisible(bool b);
-
-	//! Set Zodiacal Light intensity.
-	//! @param i value of intensity for the Zodiacal Light
-	//! @deprecated This method will be removed in version 0.20. Use ZodiacalLight.setIntensity(i) instead.
-	static void setZodiacalLightIntensity(double i);
-
-	//! Get Zodiacal Light intensity.
-	//! @return value of Zodiacal Light intensity, e.g. "1.2"
-	//! @deprecated This method will be removed in version 0.20. Use ZodiacalLight.getIntensity() instead.
-	static double getZodiacalLightIntensity();
-
-	//! Show or hide the DSS (photorealistic sky).
-	//! @param b if true, show the DSS, if false, hide the DSS layer.
-	//! @deprecated This method will be removed in version 0.20. Use ToastMgr.setFlagShow(b) instead.
-	static void setDSSMode(bool b);
-	//! Get the current status of DSS mode.
-	//! @return The current status of DSS mode.
-	//! @deprecated This method will be removed in version 0.20. Use ToastMgr.getFlagShow() instead.
-	static bool isDSSModeEnabled();
-
 signals:
-
 	void requestLoadSkyImage(const QString& id, const QString& filename,
-							 double c1, double c2,
-							 double c3, double c4,
-							 double c5, double c6,
-							 double c7, double c8,
-							 double minRes, double maxBright, bool visible, const StelCore::FrameType frameType);
+							 double lon0, double lat0,
+							 double lon1, double lat1,
+							 double lon2, double lat2,
+							 double lon3, double lat3,
+							 double minRes, double maxBright, bool visible,
+							 const StelCore::FrameType frameType, bool withAberration);
 
 	void requestRemoveSkyImage(const QString& id);
 

@@ -78,13 +78,6 @@ private:
 	//! Draw the asterism name
 	void drawName(StelPainter& sPainter) const;
 
-	//! Test if a star is part of a Asterism.
-	//! This member tests to see if a star is one of those which make up
-	//! the lines of a Asterism.
-	//! @return a pointer to the asterism which the star is a part of,
-	//! or Q_NULLPTR if the star is not part of a asterism
-	const Asterism* isStarIn(const StelObject*) const;
-
 	//! Get the translated name for the Asterism.
 	QString getNameI18n() const {return nameI18;}
 	//! Get the English name for the Asterism.

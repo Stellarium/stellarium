@@ -48,8 +48,7 @@
 #include "StelMainView.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
-#include "StelUtils.hpp"
-#ifndef DISABLE_SCRIPTING
+#ifdef ENABLE_SCRIPTING
 #include "StelScriptMgr.hpp"
 #endif
 #include "StelGui.hpp"
@@ -87,7 +86,7 @@ StelPluginInfo TextUserInterfaceStelPluginInterface::getPluginInfo() const
 	info.id = "TextUserInterface";
 	info.displayedName = N_("Text User Interface");
 	info.authors = "Matthew Gates";
-	info.contact = "https://github.com/Stellarium/stellarium";
+	info.contact = STELLARIUM_DEV_URL;
 	info.description = N_("Plugin implementation of 0.9.x series Text User Interface (TUI), used in planetarium systems");
 	info.version = TUI_PLUGIN_VERSION;
 	info.license = TUI_PLUGIN_LICENSE;
@@ -494,7 +493,7 @@ void TextUserInterface::init()
 	m6_1->loopToTheLast();
 	m6->setChildNode(m6_1);
 
-	#ifndef DISABLE_SCRIPTING
+	#ifdef ENABLE_SCRIPTING
 	TuiNode* m7 = new TuiNode(N_("Scripts"), Q_NULLPTR, m6);
 	m7->setParent(this);
 	m6->setNextNode(m7);	
@@ -554,7 +553,7 @@ void TextUserInterface::loadConfiguration(void)
 	tuiDateTime = conf->value("tui/flag_show_tui_datetime", false).toBool();
 	tuiObjInfo = conf->value("tui/flag_show_tui_short_obj_info", false).toBool();
 	tuiGravityUi = conf->value("tui/flag_show_gravity_ui", false).toBool();
-	color = StelUtils::strToVec3f(conf->value("tui/tui_font_color", "0.3,1,0.3").toString());
+	color = Vec3f(conf->value("tui/tui_font_color", "0.3,1,0.3").toString());
 }
 
 /*************************************************************************

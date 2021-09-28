@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>571</width>
-    <height>394</height>
+    <width>628</width>
+    <height>396</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -142,125 +142,24 @@
       <property name="bottomMargin">
        <number>0</number>
       </property>
-      <item row="10" column="5">
-       <widget class="QLabel" name="labelDSOColorEmissionLineStars">
-        <property name="text">
-         <string>Emission-line stars</string>
-        </property>
-       </widget>
-      </item>
-      <item row="10" column="1">
-       <widget class="QLabel" name="labelDSOColorSupernovaRemnants">
-        <property name="text">
-         <string>Supernova remnants</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QLabel" name="labelDSOColorQuasars">
-        <property name="text">
-         <string>Quasars</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="1">
-       <widget class="QLabel" name="labelDSOColorStars">
-        <property name="text">
-         <string>Stars</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="5">
-       <widget class="QLabel" name="labelDSOColorBLLacObjects">
-        <property name="text">
-         <string>BL Lac objects</string>
-        </property>
-       </widget>
-      </item>
-      <item row="7" column="5">
-       <widget class="QLabel" name="labelDSOColorBipolarNebulae">
-        <property name="text">
-         <string>Bipolar nebulae</string>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="5">
-       <widget class="QLabel" name="labelDSOColorProtoplanetaryNebulae">
-        <property name="text">
-         <string>Protoplanetary nebulae</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="5">
-       <widget class="QLabel" name="labelDSOColorNebulae">
-        <property name="text">
-         <string>Nebulae</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="3">
-       <widget class="QLabel" name="labelDSOColorMarkers">
+      <item row="2" column="4">
+       <widget class="QToolButton" name="colorDSOBLLacObjects">
         <property name="toolTip">
-         <string>Markers of deep-sky objects</string>
-        </property>
-        <property name="text">
-         <string>Markers of DSOs</string>
+         <string>Color of markers of BL Lac objects</string>
         </property>
        </widget>
       </item>
-      <item row="4" column="1">
-       <widget class="QLabel" name="labelDSOColorGlobularStarClusters">
+      <item row="2" column="3">
+       <widget class="QLabel" name="labelDSOColorPossibleQuasars">
         <property name="text">
-         <string>Globular star clusters</string>
+         <string>Possible quasars</string>
         </property>
        </widget>
       </item>
-      <item row="9" column="3">
-       <widget class="QLabel" name="labelDSOColorEmissionObjects">
-        <property name="text">
-         <string>Emission objects</string>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="1">
-       <widget class="QLabel" name="labelDSOColorPlanetaryNebulae">
-        <property name="text">
-         <string>Planetary nebulae</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="5">
-       <widget class="QLabel" name="labelDSOColorGalaxies">
-        <property name="text">
-         <string>Galaxies</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="5">
-       <widget class="QLabel" name="labelDSOColorStarClouds">
-        <property name="text">
-         <string>Star clouds</string>
-        </property>
-       </widget>
-      </item>
-      <item row="11" column="1">
-       <widget class="QLabel" name="labelDSOColorSupernovaCandidates">
-        <property name="text">
-         <string>Supernova candidates</string>
-        </property>
-       </widget>
-      </item>
-      <item row="11" column="3">
-       <widget class="QLabel" name="labelDSOColorSupernovaRemnantCandidates">
-        <property name="text">
-         <string>Supernova remnant candidates</string>
-        </property>
-       </widget>
-      </item>
-      <item row="11" column="5">
-       <widget class="QLabel" name="labelDSOColorGalaxyClusters">
-        <property name="text">
-         <string>Clusters of galaxies</string>
+      <item row="5" column="0">
+       <widget class="QToolButton" name="colorDSOStars">
+        <property name="toolTip">
+         <string>Color of markers of stars</string>
         </property>
        </widget>
       </item>
@@ -274,131 +173,17 @@
         </property>
        </widget>
       </item>
-      <item row="9" column="1">
-       <widget class="QLabel" name="labelDSOColorInterstellarMatter">
+      <item row="5" column="5">
+       <widget class="QLabel" name="labelDSOColorNebulae">
         <property name="text">
-         <string>Interstellar matter</string>
+         <string>Nebulae</string>
         </property>
        </widget>
       </item>
-      <item row="8" column="3">
-       <widget class="QLabel" name="labelDSOColorHydrogenRegions">
-        <property name="text">
-         <string>Hydrogen regions</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="5">
-       <widget class="QLabel" name="labelDSOColorInteractingGalaxies">
-        <property name="text">
-         <string>Interacting galaxies</string>
-        </property>
-       </widget>
-      </item>
-      <item row="8" column="1">
-       <widget class="QLabel" name="labelDSOColorEmissionNebulae">
-        <property name="text">
-         <string>Emission nebulae</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="3">
-       <widget class="QLabel" name="labelDSOColorStellarAssociations">
-        <property name="text">
-         <string>Stellar associations</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="5">
-       <widget class="QLabel" name="labelDSOColorOpenStarClusters">
-        <property name="text">
-         <string>Open star clusters</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="3">
-       <widget class="QLabel" name="labelDSOColorNebulosityClusters">
+      <item row="10" column="4">
+       <widget class="QToolButton" name="colorDSOEmissionLineStars">
         <property name="toolTip">
-         <string>Clusters associated with nebulosity</string>
-        </property>
-        <property name="text">
-         <string>Clusters with neb.</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QLabel" name="labelDSOColorBlazars">
-        <property name="text">
-         <string>Blazars</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="3">
-       <widget class="QLabel" name="labelDSOColorRadioGalaxies">
-        <property name="text">
-         <string>Radio galaxies</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="3">
-       <widget class="QLabel" name="labelDSOColorPossibleQuasars">
-        <property name="text">
-         <string>Possible quasars</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLabel" name="labelDSOColorActiveGalaxies">
-        <property name="text">
-         <string>Active galaxies</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLabel" name="labelDSOColorLabels">
-        <property name="toolTip">
-         <string>Labels of deep-sky objects</string>
-        </property>
-        <property name="text">
-         <string>Labels of DSOs</string>
-        </property>
-       </widget>
-      </item>
-      <item row="9" column="5">
-       <widget class="QLabel" name="labelDSOColorYSOs">
-        <property name="toolTip">
-         <string/>
-        </property>
-        <property name="text">
-         <string>Young stellar objects</string>
-        </property>
-       </widget>
-      </item>
-      <item row="7" column="1">
-       <widget class="QLabel" name="labelDSOColorDarkNebulae">
-        <property name="text">
-         <string>Dark nebulae</string>
-        </property>
-       </widget>
-      </item>
-      <item row="8" column="5">
-       <widget class="QLabel" name="labelDSOColorMolecularClouds">
-        <property name="text">
-         <string>Molecular clouds</string>
-        </property>
-       </widget>
-      </item>
-      <item row="10" column="3">
-       <widget class="QLabel" name="labelDSOColorSymbioticStars">
-        <property name="text">
-         <string>Symbiotic stars</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="3">
-       <widget class="QLabel" name="labelDSOColorStarClusters">
-        <property name="text">
-         <string>Star clusters</string>
+         <string>Color of markers of emission-line stars</string>
         </property>
        </widget>
       </item>
@@ -409,66 +194,17 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
-       <widget class="QToolButton" name="colorDSOActiveGalaxies">
-        <property name="toolTip">
-         <string>Color of markers of active galaxies</string>
+      <item row="1" column="3">
+       <widget class="QLabel" name="labelDSOColorRadioGalaxies">
+        <property name="text">
+         <string>Radio galaxies</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="0">
-       <widget class="QToolButton" name="colorDSOLabels">
-        <property name="toolTip">
-         <string>Color of labels of deep-sky objects</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QToolButton" name="colorDSOQuasars">
-        <property name="toolTip">
-         <string>Color of markers of quasars</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <widget class="QToolButton" name="colorDSOMarkers">
-        <property name="toolTip">
-         <string>Color of markers of deep-sky objects</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="2">
-       <widget class="QToolButton" name="colorDSORadioGalaxies">
-        <property name="toolTip">
-         <string>Color of markers of radio galaxies</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="2">
-       <widget class="QToolButton" name="colorDSOPossibleQuasars">
-        <property name="toolTip">
-         <string>Color of markers of possible quasars</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="4">
-       <widget class="QToolButton" name="colorDSOGalaxies">
-        <property name="toolTip">
-         <string>Color of markers of galaxies</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="4">
-       <widget class="QToolButton" name="colorDSOInteractingGalaxies">
-        <property name="toolTip">
-         <string>Color of markers of interacting galaxies</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="4">
-       <widget class="QToolButton" name="colorDSOBLLacObjects">
-        <property name="toolTip">
-         <string>Color of markers of BL Lac objects</string>
+      <item row="1" column="1">
+       <widget class="QLabel" name="labelDSOColorActiveGalaxies">
+        <property name="text">
+         <string>Active galaxies</string>
         </property>
        </widget>
       </item>
@@ -479,24 +215,115 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="0">
-       <widget class="QToolButton" name="colorDSOGlobularStarClusters">
-        <property name="toolTip">
-         <string>Color of markers of globular star clusters</string>
+      <item row="3" column="3">
+       <widget class="QLabel" name="labelDSOColorStarClusters">
+        <property name="text">
+         <string>Star clusters</string>
         </property>
        </widget>
       </item>
-      <item row="5" column="0">
-       <widget class="QToolButton" name="colorDSOStars">
-        <property name="toolTip">
-         <string>Color of markers of stars</string>
+      <item row="9" column="3">
+       <widget class="QLabel" name="labelDSOColorEmissionObjects">
+        <property name="text">
+         <string>Emission objects</string>
         </property>
        </widget>
       </item>
-      <item row="6" column="0">
-       <widget class="QToolButton" name="colorDSOPlanetaryNebulae">
+      <item row="1" column="4">
+       <widget class="QToolButton" name="colorDSOInteractingGalaxies">
         <property name="toolTip">
-         <string>Color of markers of planetary nebulae</string>
+         <string>Color of markers of interacting galaxies</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLabel" name="labelDSOColorGlobularStarClusters">
+        <property name="text">
+         <string>Globular star clusters</string>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="4">
+       <widget class="QToolButton" name="colorDSOYoungStellarObjects">
+        <property name="toolTip">
+         <string>Color of markers of young stellar objects</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="4">
+       <widget class="QToolButton" name="colorDSOStarClouds">
+        <property name="toolTip">
+         <string>Color of markers of star clouds</string>
+        </property>
+       </widget>
+      </item>
+      <item row="10" column="1">
+       <widget class="QLabel" name="labelDSOColorSupernovaRemnants">
+        <property name="text">
+         <string>Supernova remnants</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="4">
+       <widget class="QToolButton" name="colorDSOBipolarNebulae">
+        <property name="toolTip">
+         <string>Color of markers of bipolar nebulae</string>
+        </property>
+       </widget>
+      </item>
+      <item row="11" column="0">
+       <widget class="QToolButton" name="colorDSOSupernovaCandidates">
+        <property name="toolTip">
+         <string>Color of markers of supernova candidates</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QLabel" name="labelDSOColorPlanetaryNebulae">
+        <property name="text">
+         <string>Planetary nebulae</string>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="0">
+       <widget class="QToolButton" name="colorDSOInterstellarMatter">
+        <property name="toolTip">
+         <string>Color of markers of interstellar matter</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="4">
+       <widget class="QToolButton" name="colorDSOGalaxies">
+        <property name="toolTip">
+         <string>Color of markers of galaxies</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="5">
+       <widget class="QLabel" name="labelDSOColorGalaxies">
+        <property name="text">
+         <string>Galaxies</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="2">
+       <widget class="QToolButton" name="colorDSOStellarAssociations">
+        <property name="toolTip">
+         <string>Color of markers of stellar associations</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="5">
+       <widget class="QLabel" name="labelDSOColorOpenStarClusters">
+        <property name="text">
+         <string>Open star clusters</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLabel" name="labelDSOColorBlazars">
+        <property name="text">
+         <string>Blazars</string>
         </property>
        </widget>
       </item>
@@ -514,122 +341,24 @@
         </property>
        </widget>
       </item>
-      <item row="9" column="0">
-       <widget class="QToolButton" name="colorDSOInterstellarMatter">
+      <item row="1" column="0">
+       <widget class="QToolButton" name="colorDSOActiveGalaxies">
         <property name="toolTip">
-         <string>Color of markers of interstellar matter</string>
+         <string>Color of markers of active galaxies</string>
         </property>
        </widget>
       </item>
-      <item row="10" column="0">
-       <widget class="QToolButton" name="colorDSOSupernovaRemnants">
-        <property name="toolTip">
-         <string>Color of markers of supernova remnants</string>
+      <item row="7" column="5">
+       <widget class="QLabel" name="labelDSOColorBipolarNebulae">
+        <property name="text">
+         <string>Bipolar nebulae</string>
         </property>
        </widget>
       </item>
-      <item row="11" column="0">
-       <widget class="QToolButton" name="colorDSOSupernovaCandidates">
+      <item row="0" column="0">
+       <widget class="QToolButton" name="colorDSOLabels">
         <property name="toolTip">
-         <string>Color of markers of supernova candidates</string>
-        </property>
-       </widget>
-      </item>
-      <item row="11" column="2">
-       <widget class="QToolButton" name="colorDSOSupernovaRemnantCandidates">
-        <property name="toolTip">
-         <string>Color of markers of supernova remnant candidates</string>
-        </property>
-       </widget>
-      </item>
-      <item row="10" column="2">
-       <widget class="QToolButton" name="colorDSOSymbioticStars">
-        <property name="toolTip">
-         <string>Color of markers of symbiotic stars</string>
-        </property>
-       </widget>
-      </item>
-      <item row="9" column="2">
-       <widget class="QToolButton" name="colorDSOEmissionObjects">
-        <property name="toolTip">
-         <string>Color of markers of emission objects</string>
-        </property>
-       </widget>
-      </item>
-      <item row="8" column="2">
-       <widget class="QToolButton" name="colorDSOHydrogenRegions">
-        <property name="toolTip">
-         <string>Color of markers of hydrogen regions</string>
-        </property>
-       </widget>
-      </item>
-      <item row="7" column="2">
-       <widget class="QToolButton" name="colorDSOReflectionNebulae">
-        <property name="toolTip">
-         <string>Color of markers of reflection nebulae</string>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="2">
-       <widget class="QToolButton" name="colorDSOPossiblePlanetaryNebulae">
-        <property name="toolTip">
-         <string>Color of markers of possible planetary nebulae</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="2">
-       <widget class="QToolButton" name="colorDSONebulosityClusters">
-        <property name="toolTip">
-         <string>Color of markers of clusters associated with nebulosity</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="2">
-       <widget class="QToolButton" name="colorDSOStellarAssociations">
-        <property name="toolTip">
-         <string>Color of markers of stellar associations</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="2">
-       <widget class="QToolButton" name="colorDSOStarClusters">
-        <property name="toolTip">
-         <string>Color of markers of star clusters</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="4">
-       <widget class="QToolButton" name="colorDSOOpenStarClusters">
-        <property name="toolTip">
-         <string>Color of markers of open star clusters</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="4">
-       <widget class="QToolButton" name="colorDSOStarClouds">
-        <property name="toolTip">
-         <string>Color of markers of star clouds</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="4">
-       <widget class="QToolButton" name="colorDSONebulae">
-        <property name="toolTip">
-         <string>Color of markers of nebulae</string>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="4">
-       <widget class="QToolButton" name="colorDSOProtoplanetaryNebulae">
-        <property name="toolTip">
-         <string>Color of markers of protoplanetary nebulae</string>
-        </property>
-       </widget>
-      </item>
-      <item row="7" column="4">
-       <widget class="QToolButton" name="colorDSOBipolarNebulae">
-        <property name="toolTip">
-         <string>Color of markers of bipolar nebulae</string>
+         <string>Color of labels of deep-sky objects</string>
         </property>
        </widget>
       </item>
@@ -640,17 +369,288 @@
         </property>
        </widget>
       </item>
-      <item row="9" column="4">
-       <widget class="QToolButton" name="colorDSOYoungStellarObjects">
-        <property name="toolTip">
-         <string>Color of markers of young stellar objects</string>
+      <item row="2" column="5">
+       <widget class="QLabel" name="labelDSOColorBLLacObjects">
+        <property name="text">
+         <string>BL Lac objects</string>
         </property>
        </widget>
       </item>
-      <item row="10" column="4">
-       <widget class="QToolButton" name="colorDSOEmissionLineStars">
+      <item row="3" column="2">
+       <widget class="QToolButton" name="colorDSOStarClusters">
         <property name="toolTip">
-         <string>Color of markers of emission-line stars</string>
+         <string>Color of markers of star clusters</string>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="1">
+       <widget class="QLabel" name="labelDSOColorInterstellarMatter">
+        <property name="text">
+         <string>Interstellar matter</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QToolButton" name="colorDSOGlobularStarClusters">
+        <property name="toolTip">
+         <string>Color of markers of globular star clusters</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="3">
+       <widget class="QLabel" name="labelDSOColorNebulosityClusters">
+        <property name="toolTip">
+         <string>Clusters associated with nebulosity</string>
+        </property>
+        <property name="text">
+         <string>Clusters with neb.</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="2">
+       <widget class="QToolButton" name="colorDSOPossiblePlanetaryNebulae">
+        <property name="toolTip">
+         <string>Color of markers of possible planetary nebulae</string>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="5">
+       <widget class="QLabel" name="labelDSOColorYSOs">
+        <property name="toolTip">
+         <string/>
+        </property>
+        <property name="text">
+         <string>Young stellar objects</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="3">
+       <widget class="QLabel" name="labelDSOColorHydrogenRegions">
+        <property name="text">
+         <string>Hydrogen regions</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="4">
+       <widget class="QToolButton" name="colorDSONebulae">
+        <property name="toolTip">
+         <string>Color of markers of nebulae</string>
+        </property>
+       </widget>
+      </item>
+      <item row="11" column="1">
+       <widget class="QLabel" name="labelDSOColorSupernovaCandidates">
+        <property name="text">
+         <string>Supernova candidates</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="QToolButton" name="colorDSOPlanetaryNebulae">
+        <property name="toolTip">
+         <string>Color of markers of planetary nebulae</string>
+        </property>
+       </widget>
+      </item>
+      <item row="11" column="2">
+       <widget class="QToolButton" name="colorDSOSupernovaRemnantCandidates">
+        <property name="toolTip">
+         <string>Color of markers of supernova remnant candidates</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QToolButton" name="colorDSOPossibleQuasars">
+        <property name="toolTip">
+         <string>Color of markers of possible quasars</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="5">
+       <widget class="QLabel" name="labelDSOColorInteractingGalaxies">
+        <property name="text">
+         <string>Interacting galaxies</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QToolButton" name="colorDSOQuasars">
+        <property name="toolTip">
+         <string>Color of markers of quasars</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="2">
+       <widget class="QToolButton" name="colorDSOReflectionNebulae">
+        <property name="toolTip">
+         <string>Color of markers of reflection nebulae</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="3">
+       <widget class="QLabel" name="labelDSOColorStellarAssociations">
+        <property name="text">
+         <string>Stellar associations</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="5">
+       <widget class="QLabel" name="labelDSOColorProtoplanetaryNebulae">
+        <property name="text">
+         <string>Protoplanetary nebulae</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1">
+       <widget class="QLabel" name="labelDSOColorDarkNebulae">
+        <property name="text">
+         <string>Dark nebulae</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QLabel" name="labelDSOColorMarkers">
+        <property name="toolTip">
+         <string>Markers of deep-sky objects</string>
+        </property>
+        <property name="text">
+         <string>Markers of DSOs</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QToolButton" name="colorDSOMarkers">
+        <property name="toolTip">
+         <string>Color of markers of deep-sky objects</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="1">
+       <widget class="QLabel" name="labelDSOColorEmissionNebulae">
+        <property name="text">
+         <string>Emission nebulae</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QToolButton" name="colorDSORadioGalaxies">
+        <property name="toolTip">
+         <string>Color of markers of radio galaxies</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="2">
+       <widget class="QToolButton" name="colorDSONebulosityClusters">
+        <property name="toolTip">
+         <string>Color of markers of clusters associated with nebulosity</string>
+        </property>
+       </widget>
+      </item>
+      <item row="10" column="5">
+       <widget class="QLabel" name="labelDSOColorEmissionLineStars">
+        <property name="text">
+         <string>Emission-line stars</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLabel" name="labelDSOColorQuasars">
+        <property name="text">
+         <string>Quasars</string>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="2">
+       <widget class="QToolButton" name="colorDSOEmissionObjects">
+        <property name="toolTip">
+         <string>Color of markers of emission objects</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="5">
+       <widget class="QLabel" name="labelDSOColorStarClouds">
+        <property name="text">
+         <string>Star clouds</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="5">
+       <widget class="QLabel" name="labelDSOColorMolecularClouds">
+        <property name="text">
+         <string>Molecular clouds</string>
+        </property>
+       </widget>
+      </item>
+      <item row="11" column="3">
+       <widget class="QLabel" name="labelDSOColorSupernovaRemnantCandidates">
+        <property name="text">
+         <string>Supernova remnant candidates</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="4">
+       <widget class="QToolButton" name="colorDSOOpenStarClusters">
+        <property name="toolTip">
+         <string>Color of markers of open star clusters</string>
+        </property>
+       </widget>
+      </item>
+      <item row="10" column="2">
+       <widget class="QToolButton" name="colorDSOSymbioticStars">
+        <property name="toolTip">
+         <string>Color of markers of symbiotic stars</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="4">
+       <widget class="QToolButton" name="colorDSOProtoplanetaryNebulae">
+        <property name="toolTip">
+         <string>Color of markers of protoplanetary nebulae</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="2">
+       <widget class="QToolButton" name="colorDSOHydrogenRegions">
+        <property name="toolTip">
+         <string>Color of markers of hydrogen regions</string>
+        </property>
+       </widget>
+      </item>
+      <item row="11" column="5">
+       <widget class="QLabel" name="labelDSOColorGalaxyClusters">
+        <property name="text">
+         <string>Clusters of galaxies</string>
+        </property>
+       </widget>
+      </item>
+      <item row="10" column="3">
+       <widget class="QLabel" name="labelDSOColorSymbioticStars">
+        <property name="text">
+         <string>Symbiotic stars</string>
+        </property>
+       </widget>
+      </item>
+      <item row="10" column="0">
+       <widget class="QToolButton" name="colorDSOSupernovaRemnants">
+        <property name="toolTip">
+         <string>Color of markers of supernova remnants</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="labelDSOColorLabels">
+        <property name="toolTip">
+         <string>Labels of deep-sky objects</string>
+        </property>
+        <property name="text">
+         <string>Labels of DSOs</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QLabel" name="labelDSOColorStars">
+        <property name="text">
+         <string>Stars</string>
         </property>
        </widget>
       </item>
@@ -658,6 +658,20 @@
        <widget class="QToolButton" name="colorDSOGalaxyClusters">
         <property name="toolTip">
          <string>Color of markers for clusters of galaxies</string>
+        </property>
+       </widget>
+      </item>
+      <item row="12" column="0">
+       <widget class="QToolButton" name="colorDSORegions">
+        <property name="toolTip">
+         <string>Color of markers of regions of the sky</string>
+        </property>
+       </widget>
+      </item>
+      <item row="12" column="1">
+       <widget class="QLabel" name="labelDSOColorRegions">
+        <property name="text">
+         <string>Regions of the sky</string>
         </property>
        </widget>
       </item>

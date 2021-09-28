@@ -22,6 +22,7 @@
 
 #include <QString>
 #include <QObject>
+#include <functional>
 
 // Predeclaration
 class StelCore;
@@ -58,7 +59,7 @@ class StelModule : public QObject
 public:
 	StelModule();
 
-	virtual ~StelModule() {;}
+	virtual ~StelModule() Q_DECL_OVERRIDE {;}
 
 	//! Initialize itself.
 	//! If the initialization takes significant time, the progress should be displayed on the loading bar.
@@ -67,6 +68,10 @@ public:
 	//! Called before the module will be delete, and before the openGL context is suppressed.
 	//! Deinitialize all openGL texture in this method.
 	virtual void deinit() {;}
+
+	//! Return module-specific settings. This can be useful mostly by plugins which may want to keep their settings to their own files.
+	//! The default implementation returns a null pointer!
+	virtual QSettings *getSettings() {return Q_NULLPTR;}
 
 	//! Execute all the drawing functions for this module.
 	//! @param core the core to use for the drawing
@@ -115,9 +120,7 @@ public:
 		ReplaceSelection,	//!< Set the StelObject as the new list of selected ones.
 		RemoveFromSelection	//!< Subtract the StelObject from the current list of selected ones.
 	};
-	#if QT_VERSION >= 0x050500
 	Q_ENUM(StelModuleSelectAction)
-	#endif
 	//! Define the possible action for which an order is defined
 	enum StelModuleActionName
 	{
@@ -127,9 +130,7 @@ public:
 		ActionHandleMouseMoves,  //!< Action associated to the handleMouseMoves() method
 		ActionHandleKeys         //!< Action associated to the handleKeys() method
 	};
-	#if QT_VERSION >= 0x050500
 	Q_ENUM(StelModuleActionName)
-	#endif
 	//! Return the value defining the order of call for the given action
 	//! For example if stars.callOrder[ActionDraw] == 10 and constellation.callOrder[ActionDraw] == 11,
 	//! the stars module will be drawn before the constellations
@@ -168,6 +169,18 @@ protected:
 	                            const QString& shortcut="", const QString& altShortcut="") {
 		return addAction(id, groupId, text, this, slot, shortcut, altShortcut);
 	}
+
+	//! convenience methods to add an action (call to Lambda functor) to the StelActionMgr object.
+	//! @param id unique identifier. Should be called actionMy_Action. (i.e., start with "action" and then "Capitalize_Underscore" style.)
+	//! @param groupId string to be used in the Help menu. The action will be listed in this group.
+	//! @param text short translatable description what the action does.
+	//! @param contextObject The lambda will only be called if this object exists. Use "this" in most cases.
+	//! @param lambda a C++11 Lambda function.
+	//! @param shortcut default shortcut. Can be reconfigured.
+	//! @param altShortcut default alternative shortcut. Can be reconfigured.
+	StelAction* addAction(const QString& id, const QString& groupId, const QString& text,
+						QObject* contextObject, std::function<void()> lambda,
+						const QString& shortcut="", const QString& altShortcut="");
 };
 
 Q_DECLARE_METATYPE(StelModule::StelModuleSelectAction)

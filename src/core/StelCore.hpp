@@ -56,6 +56,8 @@ class StelCore : public QObject
 	Q_PROPERTY(bool flipHorz READ getFlipHorz WRITE setFlipHorz NOTIFY flipHorzChanged)
 	Q_PROPERTY(bool flipVert READ getFlipVert WRITE setFlipVert NOTIFY flipVertChanged)
 	Q_PROPERTY(bool flagUseNutation READ getUseNutation WRITE setUseNutation NOTIFY flagUseNutationChanged)
+	Q_PROPERTY(bool flagUseAberration READ getUseAberration WRITE setUseAberration NOTIFY flagUseAberrationChanged)
+	Q_PROPERTY(double aberrationFactor READ getAberrationFactor WRITE setAberrationFactor NOTIFY aberrationFactorChanged)
 	Q_PROPERTY(bool flagUseTopocentricCoordinates READ getUseTopocentricCoordinates WRITE setUseTopocentricCoordinates NOTIFY flagUseTopocentricCoordinatesChanged)
 	Q_PROPERTY(ProjectionType currentProjectionType READ getCurrentProjectionType WRITE setCurrentProjectionType NOTIFY currentProjectionTypeChanged)
 	//! This is just another way to access the projection type, by string instead of enum
@@ -89,15 +91,15 @@ public:
 	//! Available projection types. A value of 1000 indicates the default projection
 	enum ProjectionType
 	{
-		ProjectionPerspective,	//!< Perspective projection
+		ProjectionPerspective,		//!< Perspective projection
 		ProjectionStereographic,	//!< Stereographic projection
 		ProjectionFisheye,		//!< Fisheye projection
-		ProjectionOrthographic,	//!< Orthographic projection
+		ProjectionOrthographic,		//!< Orthographic projection
 		ProjectionEqualArea,		//!< Equal Area projection
 		ProjectionHammer,		//!< Hammer-Aitoff projection
 		ProjectionSinusoidal,		//!< Sinusoidal projection
 		ProjectionMercator,		//!< Mercator projection
-		ProjectionMiller,			//!< Miller cylindrical projection
+		ProjectionMiller,		//!< Miller cylindrical projection
 		ProjectionCylinder,		//!< Cylinder projection
 	};
 
@@ -178,7 +180,7 @@ public:
 
 	//! Get a new instance of projector using the given modelview transformation.
 	//! If not specified the projection used is the one currently used as default.
-	StelProjectorP getProjection(StelProjector::ModelViewTranformP modelViewTransform, ProjectionType projType=(ProjectionType)1000) const;
+	StelProjectorP getProjection(StelProjector::ModelViewTranformP modelViewTransform, ProjectionType projType=static_cast<ProjectionType>(1000)) const;
 
 	//! Get the current tone reproducer used in the core.
 	StelToneReproducer* getToneReproducer(){return toneReproducer;}
@@ -214,13 +216,14 @@ public:
 	//! Get the projection TypeKey from its translated name for the current locale.
 	QString projectionNameI18nToTypeKey(const QString& nameI18n) const;
 
-	//! Get the current set of parameters to use when creating a new StelProjector.
+	//! Get the current set of parameters.
 	StelProjector::StelProjectorParams getCurrentStelProjectorParams() const;
 	//! Set the set of parameters to use when creating a new StelProjector.
 	void setCurrentStelProjectorParams(const StelProjector::StelProjectorParams& newParams);
 
 	//! Set vision direction
 	void lookAtJ2000(const Vec3d& pos, const Vec3d& up);
+	void setMatAltAzModelView(const Mat4d& mat);
 
 	Vec3d altAzToEquinoxEqu(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
 	Vec3d equinoxEquToAltAz(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
@@ -294,7 +297,7 @@ public:
 	//! Return the observer heliocentric ecliptic position (GZ: presumably J2000)
 	Vec3d getObserverHeliocentricEclipticPos() const;
 
-	//! Get the informations on the current location
+	//! Get the information on the current location
 	const StelLocation& getCurrentLocation() const;
 	//! Get the UTC offset on the current location (in hours)
 	double getUTCOffset(const double JD) const;
@@ -501,13 +504,23 @@ public slots:
 	//!       Limits can be queried with getCurrentDeltaTAlgorithmValidRangeDescription()
 
 	double computeDeltaT(const double JD);
-	//! Get current DeltaT.
+	//! Get current DeltaT in seconds.
 	double getDeltaT() const;
 
 	//! @return whether nutation is currently used.
 	bool getUseNutation() const {return flagUseNutation;}
 	//! Set whether you want computation and simulation of nutation (a slight wobble of Earth's axis, just a few arcseconds).
 	void setUseNutation(bool use) { if (flagUseNutation != use) { flagUseNutation=use; emit flagUseNutationChanged(use); }}
+
+	//! @return whether aberration is currently used.
+	bool getUseAberration() const {return flagUseAberration;}
+	//! Set whether you want computation and simulation of aberration (a slight wobble of stellar positions due to finite speed of light, about 20 arcseconds when observing from earth).
+	void setUseAberration(bool use) { if (flagUseAberration != use) { flagUseAberration=use; emit flagUseAberrationChanged(use); }}
+
+	//! @return aberration factor. 1 is realistic simulation, but higher values may be useful for didactic purposes.
+	double getAberrationFactor() const {return aberrationFactor;}
+	//! Set aberration factor. Values are clamped to 0...5. (Values above 5 cause graphical problems.)
+	void setAberrationFactor(double factor) { if (!fuzzyEquals(aberrationFactor, factor)) { aberrationFactor=qBound(0.,factor, 5.); emit aberrationFactorChanged(factor); }}
 
 	//! @return whether topocentric coordinates are currently used.
 	bool getUseTopocentricCoordinates() const {return flagUseTopocentricCoordinates;}
@@ -724,12 +737,18 @@ public slots:
 	void setDe430Active(bool status);   //!< switch DE430 use to @param status (if de430IsAvailable()). DE430 is only used if date is within range of DE430.
 	void setDe431Active(bool status);   //!< switch DE431 use to @param status (if de431IsAvailable()). DE431 is only used if DE430 is not used and the date is within range of DE431.
 
+	bool de440IsAvailable();            //!< true if DE440 ephemeris file has been found
+	bool de441IsAvailable();            //!< true if DE441 ephemeris file has been found
+	bool de440IsActive();               //!< true if DE440 ephemeris is in use
+	bool de441IsActive();               //!< true if DE441 ephemeris is in use
+	void setDe440Active(bool status);   //!< switch DE440 use to @param status (if de440IsAvailable()). DE440 is only used if date is within range of DE440.
+	void setDe441Active(bool status);   //!< switch DE441 use to @param status (if de441IsAvailable()). DE441 is only used if DE440 is not used and the date is within range of DE441.
+
 	//! Return 3-letter abbreviation of IAU constellation name for position in equatorial coordinates on the current epoch.
 	//! Follows 1987PASP...99..695R: Nancy Roman: Identification of a Constellation from a Position
 	//! Data file from ADC catalog VI/42 with its amendment from 1999-12-30.
 	//! @param positionEqJnow position vector in rectangular equatorial coordinates of current epoch&equinox.
 	QString getIAUConstellation(const Vec3d positionEqJnow) const;
-
 
 signals:
 	//! This signal is emitted when the observer location has changed.
@@ -750,6 +769,9 @@ signals:
 	void timeSyncOccurred(double jDay);
 	//! This signal is emitted when the date has changed.
 	void dateChanged();
+	//! This signal can be emitted when e.g. the date has changed in a way that planet trails or similar things should better be reset.
+	//! TODO: Currently the signal is not used. Think of the proper way to apply it.
+	void dateChangedForTrails();
 	//! This signal is emitted when the date has changed for a month.
 	void dateChangedForMonth();
 	//! This signal is emitted when the date has changed by one year.
@@ -760,6 +782,10 @@ signals:
 	void flipVertChanged(bool b);
 	//! This signal indicates a switch in use of nutation
 	void flagUseNutationChanged(bool b);
+	//! This signal indicates a switch in use of aberration
+	void flagUseAberrationChanged(bool b);
+	//! This signal indicates a change in aberration exaggeration factor
+	void aberrationFactorChanged(double val);
 	//! This signal indicates a switch in use of topocentric coordinates
 	void flagUseTopocentricCoordinatesChanged(bool b);
 	//! Emitted whenever the projection type changes
@@ -772,6 +798,7 @@ signals:
 	void flagGravityLabelsChanged(bool gravity);
 	//! Emitted when button "Save settings" is pushed
 	void configurationDataSaved();
+	void updateSearchLists();
 
 private:
 	StelToneReproducer* toneReproducer;		// Tones conversion between stellarium world and display device
@@ -805,7 +832,7 @@ private:
 	Mat4d matAltAzToEquinoxEqu;                // Transform from topocentric altazimuthal coordinate to Earth Equatorial
 	Mat4d matEquinoxEquToAltAz;                // Transform from Earth Equatorial to topocentric (StelObserver) altazimuthal coordinate
 	Mat4d matHeliocentricEclipticToEquinoxEqu; // Transform from heliocentric ecliptic Cartesian (VSOP87A) to earth equatorial coordinate
-	Mat4d matEquinoxEquToJ2000;                // For Earth, this is almost the inverse precession matrix, =Rz(VSOPbias)Rx(eps0)Rz(-psiA)Rx(-omA)Rz(chiA)
+	Mat4d matEquinoxEquDateToJ2000;            // For Earth, this is almost the inverse precession matrix, =Rz(VSOPbias)Rx(eps0)Rz(-psiA)Rx(-omA)Rz(chiA)
 	Mat4d matJ2000ToEquinoxEqu;                // precession matrix
 	static Mat4d matJ2000ToJ1875;              // Precession matrix for IAU constellation lookup.
 
@@ -822,6 +849,10 @@ private:
 
 	// flag to indicate we want to use nutation (the small-scale wobble of earth's axis)
 	bool flagUseNutation;
+	// flag to indicate we want to use aberration (a small-scale wobble of stellar positions (~20 arceconds on earth) due to finite speed of light and observer in motion on a planet.)
+	bool flagUseAberration;
+	// value to allow exaggerating aberration effects. 1 is natural value, stretching to e.g. 1000 may be useful for explanations.
+	double aberrationFactor;
 	// flag to indicate that we show topocentrically corrected coordinates. (Switching to false for planetocentric coordinates is new for 0.14)
 	bool flagUseTopocentricCoordinates;
 
@@ -850,11 +881,15 @@ private:
 	int deltaTstart;   // begin year of validity range for the selected DeltaT algorithm. (SET INT_MIN to mark infinite)
 	int deltaTfinish;  // end   year of validity range for the selected DeltaT algorithm. (Set INT_MAX to mark infinite)
 
-	// Variables for DE430/431 ephem calculation
+	// Variables for DE430/431/440/441 ephem calculation
 	bool de430Available; // ephem file found
 	bool de431Available; // ephem file found
 	bool de430Active;    // available and user-activated.
 	bool de431Active;    // available and user-activated.
+	bool de440Available; // ephem file found
+	bool de441Available; // ephem file found
+	bool de440Active;    // available and user-activated.
+	bool de441Active;    // available and user-activated.
 };
 
 #endif // STELCORE_HPP

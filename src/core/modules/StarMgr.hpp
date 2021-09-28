@@ -70,6 +70,7 @@ typedef struct
 } crossid;
 
 typedef QMap<StelObjectP, float> StelACStarData;
+typedef QPair<float, float> PMData;
 
 //! @class StarMgr
 //! Stores the star catalogue data.
@@ -114,10 +115,15 @@ class StarMgr : public StelObjectModule
 		   WRITE setFlagAdditionalNames
 		   NOTIFY flagAdditionalNamesDisplayedChanged
 		   )
+	Q_PROPERTY(bool flagDesignationLabels
+		   READ getDesignationUsage
+		   WRITE setDesignationUsage
+		   NOTIFY designationUsageChanged
+		   )
 
 public:
 	StarMgr(void);
-	~StarMgr(void);
+	~StarMgr(void) Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -128,60 +134,50 @@ public:
 	//! - Loads the star font (for labels on named stars)
 	//! - Loads the texture of the star selection indicator
 	//! - Sets various display flags from the ini parser object
-	virtual void init();
+	virtual void init() Q_DECL_OVERRIDE;
 
 	//! Draw the stars and the star selection indicator if necessary.
-	virtual void draw(StelCore* core);
+	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
 
 	//! Update any time-dependent features.
 	//! Includes fading in and out stars and labels when they are turned on and off.
-	virtual void update(double deltaTime) {labelsFader.update(static_cast<int>(deltaTime*1000)); starsFader.update(static_cast<int>(deltaTime*1000));}
+	virtual void update(double deltaTime) Q_DECL_OVERRIDE {labelsFader.update(static_cast<int>(deltaTime*1000)); starsFader.update(static_cast<int>(deltaTime*1000));}
 
 	//! Used to determine the order in which the various StelModules are drawn.
-	virtual double getCallOrder(StelModuleActionName actionName) const;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectModule class
 	//! Return a list containing the stars located inside the limFov circle around position v
-	virtual QList<StelObjectP > searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
+	virtual QList<StelObjectP > searchAround(const Vec3d& v, double limitFov, const StelCore* core) const Q_DECL_OVERRIDE;
 
 	//! Return the matching Stars object's pointer if exists or Q_NULLPTR
 	//! @param nameI18n The case in-sensitive localized star common name or HIP/HP, SAO, HD, HR, GCVS or WDS number
 	//! catalog name (format can be HP1234 or HP 1234 or HIP 1234) or sci name
-	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
+	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const Q_DECL_OVERRIDE;
 
 	//! Return the matching star if exists or Q_NULLPTR
 	//! @param name The case in-sensitive english star name
-	virtual StelObjectP searchByName(const QString& name) const;
+	virtual StelObjectP searchByName(const QString& name) const Q_DECL_OVERRIDE;
 
 	//! Same as searchByName(id);
-	virtual StelObjectP searchByID(const QString &id) const;
+	virtual StelObjectP searchByID(const QString &id) const Q_DECL_OVERRIDE;
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=false) const;
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const Q_DECL_OVERRIDE;
 	//! @note Loading stars with the common names only.
-	virtual QStringList listAllObjects(bool inEnglish) const;	
-	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const;
-	virtual QString getName() const { return "Stars"; }
-	virtual QString getStelObjectType() const;
+	virtual QStringList listAllObjects(bool inEnglish) const Q_DECL_OVERRIDE;
+	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const Q_DECL_OVERRIDE;
+	virtual QString getName() const Q_DECL_OVERRIDE { return "Stars"; }
+	virtual QString getStelObjectType() const Q_DECL_OVERRIDE;
 
 public slots:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods callable from script and GUI
-	//! Set the color used to label bright stars.
-	//! @param c The color of the bright stars labels
-	//! @code
-	//! // example of usage in scripts
-	//! StarMgr.setLabelColor(Vec3f(1.0,0.0,0.0));
-	//! @endcode
-	void setLabelColor(const Vec3f& c) {labelColor = c;}
-	//! Get the current color used to label bright stars.
-	Vec3f getLabelColor(void) const {return labelColor;}
-
 	//! Set display flag for Stars.
 	void setFlagStars(bool b) {starsFader=b; emit starsDisplayedChanged(b);}
 	//! Get display flag for Stars
@@ -195,7 +191,7 @@ public slots:
 	//! Set the amount of star labels. The real amount is also proportional with FOV.
 	//! The limit is set in function of the stars magnitude
 	//! @param a the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
-	void setLabelsAmount(double a) {if(a!=labelsAmount){ labelsAmount=a; emit labelsAmountChanged(a);}}
+	void setLabelsAmount(double a) {if(!qFuzzyCompare(a,labelsAmount)){ labelsAmount=a; emit labelsAmountChanged(a);}}
 	//! Get the amount of star labels. The real amount is also proportional with FOV.
 	//! @return the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
 	double getLabelsAmount(void) const {return labelsAmount;}
@@ -206,6 +202,11 @@ public slots:
 	//! Show scientific or catalog names on stars without common names.
 	static void setFlagSciNames(bool f) {flagSciNames = f;}
 	static bool getFlagSciNames(void) {return flagSciNames;}
+
+	//! Set flag for usage designations of stars for their labels instead common names.
+	void setDesignationUsage(const bool flag) { if(flagDesignations!=flag){ flagDesignations=flag; emit designationUsageChanged(flag);}}
+	//! Get flag for usage designations of stars for their labels instead common names.
+	bool getDesignationUsage(void) {return flagDesignations; }
 
 	//! Show additional star names.
 	void setFlagAdditionalNames(bool flag) { if (flagAdditionalStarNames!=flag){ flagAdditionalStarNames=flag; emit flagAdditionalNamesDisplayedChanged(flag);}}
@@ -231,12 +232,6 @@ public:
 	//! @param hip The Hipparcos number of star
 	//! @return translated scientific name of star
 	static QString getSciName(int hip);
-
-	//! Get the (translated) additional scientific name for a star with a
-	//! specified Hipparcos catalogue number.
-	//! @param hip The Hipparcos number of star
-	//! @return translated additional scientific name of star
-	static QString getSciAdditionalName(int hip);
 
 	//! Get the (translated) scientific name for a variable star with a specified
 	//! Hipparcos catalogue number.
@@ -346,6 +341,11 @@ public:
 	//! @return the parallax error (mas)
 	static float getPlxError(int hip);
 
+	//! Get the proper motion data for star with a Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return the proper motion (mas/yr for RA and Dec)
+	static PMData getProperMotion(int hip);
+
 	static QString convertToSpectralType(int index);
 	static QString convertToComponentIds(int index);
 
@@ -359,8 +359,12 @@ public:
 	//! Get the list of all Hipparcos stars.
 	const QList<StelObjectP>& getHipparcosStars() const { return hipparcosStars; }	
 	const QList<QMap<StelObjectP, float>>& getHipparcosHighPMStars() const { return hipStarsHighPM; }
-	const QList<QMap<StelObjectP, float>>& getHipparcosDoubleStars() const { return doubleHipStars; }
+	const QList<QMap<StelObjectP, float>>& getHipparcosDoubleStars() const { return doubleHipStars; }	
 	const QList<QMap<StelObjectP, float>>& getHipparcosVariableStars() const { return variableHipStars; }
+	const QList<QMap<StelObjectP, float>>& getHipparcosAlgolTypeStars() const { return algolTypeStars; }
+	const QList<QMap<StelObjectP, float>>& getHipparcosClassicalCepheidsTypeStars() const { return classicalCepheidsTypeStars; }
+	const QList<StelObjectP>& getHipparcosCarbonStars() const { return carbonStars; }
+	const QList<StelObjectP>& getHipparcosBariumStars() const { return bariumStars; }
 
 private slots:
 	//! Translate text.
@@ -371,14 +375,17 @@ private slots:
 	//! @param skyCultureDir the name of the directory containing the sky culture to use.
 	void updateSkyCulture(const QString& skyCultureDir);
 
+	//! increase artificial cutoff magnitude slightly (can be linked to an action/hotkey)
 	void increaseStarsMagnitudeLimit();
+	//! decrease artificial cutoff magnitude slightly (can be linked to an action/hotkey)
 	void reduceStarsMagnitudeLimit();
 
 signals:
 	void starLabelsDisplayedChanged(const bool displayed);
 	void starsDisplayedChanged(const bool displayed);
+	void designationUsageChanged(const bool flag);
 	void flagAdditionalNamesDisplayedChanged(const bool displayed);
-	void labelsAmountChanged(float a);
+	void labelsAmountChanged(double a);
 
 private:
 	void setCheckFlag(const QString& catalogId, bool b);
@@ -412,6 +419,10 @@ private:
 	//! @param the path to a file containing the parallax error data.
 	void loadPlxErr(const QString& plxErrFile);
 
+	//! Loads proper motion data from a file.
+	//! @param the path to a file containing the proper motion data.
+	void loadPMData(const QString& pmDataFile);
+
 	//! Gets the maximum search level.
 	// TODO: add a non-lame description - what is the purpose of the max search level?
 	int getMaxSearchLevel() const;
@@ -426,8 +437,8 @@ private:
 	void populateStarsDesignations();
 
 	//! List of all Hipparcos stars.
-	QList<StelObjectP> hipparcosStars;
-	QList<QMap<StelObjectP, float>> doubleHipStars, variableHipStars, hipStarsHighPM;
+	QList<StelObjectP> hipparcosStars, carbonStars, bariumStars;
+	QList<QMap<StelObjectP, float>> doubleHipStars, variableHipStars, algolTypeStars, classicalCepheidsTypeStars, hipStarsHighPM;
 
 	LinearFader labelsFader;
 	LinearFader starsFader;
@@ -467,11 +478,8 @@ private:
 	static QMap<QString, int> additionalNamesIndex;
 	static QMap<QString, int> additionalNamesIndexI18n;
 
-	static QHash<int, QString> sciNamesMapI18n;	
-	static QMap<QString, int> sciNamesIndexI18n;
-
-	static QHash<int, QString> sciAdditionalNamesMapI18n;
-	static QMap<QString, int> sciAdditionalNamesIndexI18n;
+	static QHash<int, QString> sciDesignationsMapI18n;
+	static QMap<QString, int> sciDesignationsIndexI18n;
 
 	static QHash<int, varstar> varStarsMapI18n;
 	static QMap<QString, int> varStarsIndexI18n;
@@ -485,13 +493,14 @@ private:
 	static QMap<int, int> hrStarsIndex;
 
 	static QHash<int, float> hipParallaxErrors;
+	static QHash<int, PMData> hipPMData;
 
 	static QHash<int, QString> referenceMap;
 
 	QFont starFont;
 	static bool flagSciNames;
 	static bool flagAdditionalStarNames;
-	Vec3f labelColor;
+	static bool flagDesignations;
 
 	StelTextureSP texPointer;		// The selection pointer texture
 

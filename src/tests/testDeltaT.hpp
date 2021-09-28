@@ -34,12 +34,13 @@ private slots:
 	void testDeltaTByEspenakMeeus();
 	void testDeltaTByChaprontMeeus();
 	void testDeltaTByChaprontMeeusWideDates();
-	void testDeltaTByMorrisonStephenson1982WideDates();
-	void testDeltaTByStephensonMorrison1984WideDates();
-	void testDeltaTByStephensonMorrison1995WideDates();
-	void testDeltaTByStephensonMorrison2004WideDates();
-	void testDeltaTByStephenson1997WideDates();
-	void testDeltaTByMeeusSimons();
+	void testDeltaTByMorrisonStephenson1982WideDates();	
+	void testDeltaTByStephensonMorrison1984WideDates();	
+	void testDeltaTByStephensonMorrison1995WideDates();	
+	void testDeltaTByStephensonMorrison2004WideDates();	
+	void testDeltaTByStephensonMorrisonHohenkerk2016GenericDates();
+	void testDeltaTByStephenson1997WideDates();	
+	void testDeltaTByMeeusSimons();	
 	void testDeltaTByKhalidSultanaZaidiWideDates();
 	void testDeltaTByMontenbruckPfleger();
 	void testDeltaTByReingoldDershowitzWideDates();
@@ -47,8 +48,10 @@ private slots:
 	void testDeltaTByBorkowski();
 	void testDeltaTByIAU();
 	void testDeltaTByAstronomicalEphemeris();
-	void testDeltaTByTuckermanGoldstine();
+	void testDeltaTByTuckermanGoldstine();		
 	void testDeltaTStandardError();
+private:
+	QVariantList genericData;
 };
 
 #endif // _TESTDELTAT_HPP

@@ -92,14 +92,17 @@ void PointerCoordinates::init()
 {
 	if (!conf->childGroups().contains("PointerCoordinates"))
 	{
-		qDebug() << "PointerCoordinates: no coordinates section exists in main config file - creating with defaults";
+		qDebug() << "[PointerCoordinates] no coordinates section exists in main config file - creating with defaults";
 		restoreDefaultConfiguration();
 	}
 
 	// populate settings from main config file.
 	loadConfiguration();
 
-	addAction("actionShow_MousePointer_Coordinates", N_("Pointer Coordinates"), N_("Show coordinates of the mouse pointer"), "enabled", "");
+	addAction("actionShow_MousePointer_Coordinates",        N_("Pointer Coordinates"), N_("Show coordinates of the mouse pointer"), "enabled", "");
+	addAction("actionShow_MousePointer_Coordinates_dialog", N_("Pointer Coordinates"), N_("Show settings dialog"), mainWindow, "visible");
+
+	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
 
 	enableCoordinates(getFlagEnableAtStartup());
 	setFlagShowCoordinatesButton(flagShowCoordinatesButton);
@@ -119,7 +122,7 @@ void PointerCoordinates::draw(StelCore *core)
 
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000, StelCore::RefractionAuto);
 	StelPainter sPainter(prj);
-	sPainter.setColor(textColor[0], textColor[1], textColor[2], 1.f);
+	sPainter.setColor(textColor, 1.f);
 	font.setPixelSize(getFontSize());
 	sPainter.setFont(font);
 
@@ -224,7 +227,7 @@ void PointerCoordinates::draw(StelCore *core)
 		{
 			double lambda, beta;
 			StelUtils::rectToSphe(&cx,&cy,core->j2000ToEquinoxEqu(mousePosition, StelCore::RefractionOff));
-			StelUtils::equToEcl(cx, cy, core->getCurrentPlanet()->getRotObliquity(core->getJDE()), &lambda, &beta); // Calculate ecliptic position and show it...
+			StelUtils::equToEcl(cx, cy, GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(core->getJDE()), &lambda, &beta); // Calculate ecliptic position and show it...
 			if (lambda<0) lambda+=2.0*M_PI;
 			coordsSystem = qc_("Ecl. Long/Lat", "abbreviated in the plugin");
 			if (withDecimalDegree)
@@ -243,7 +246,7 @@ void PointerCoordinates::draw(StelCore *core)
 		{
 			double lambda, beta;
 			StelUtils::rectToSphe(&cx,&cy, mousePosition);
-			StelUtils::equToEcl(cx, cy, core->getCurrentPlanet()->getRotObliquity(2451545.0), &lambda, &beta); // Calculate ecliptic position and show it...
+			StelUtils::equToEcl(cx, cy, GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0), &lambda, &beta); // Calculate ecliptic position and show it...
 			if (lambda<0) lambda+=2.0*M_PI;
 			coordsSystem = qc_("Ecl. Long/Lat (J2000.0)", "abbreviated in the plugin");
 			if (withDecimalDegree)
@@ -316,7 +319,7 @@ void PointerCoordinates::enableCoordinates(bool b)
 double PointerCoordinates::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
-		return StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr")->getCallOrder(actionName)+10.;
+		return StelApp::getInstance().getModuleMgr().getModule("LabelMgr")->getCallOrder(actionName)+110.;
 	return 0;
 }
 
@@ -349,7 +352,7 @@ void PointerCoordinates::loadConfiguration(void)
 	conf->beginGroup("PointerCoordinates");
 
 	setFlagEnableAtStartup(conf->value("enable_at_startup", false).toBool());
-	textColor = StelUtils::strToVec3f(conf->value("text_color", "1,0.5,0").toString());
+	textColor = Vec3f(conf->value("text_color", "1,0.5,0").toString());
 	setFontSize(conf->value("font_size", 14).toInt());
 	flagShowCoordinatesButton = conf->value("flag_show_button", true).toBool();	
 	setCurrentCoordinatesPlaceKey(conf->value("current_displaying_place", "TopRight").toString());
@@ -390,8 +393,10 @@ void PointerCoordinates::setFlagShowCoordinatesButton(bool b)
 				toolbarButton = new StelButton(Q_NULLPTR,
 							       QPixmap(":/PointerCoordinates/bt_PointerCoordinates_On.png"),
 							       QPixmap(":/PointerCoordinates/bt_PointerCoordinates_Off.png"),
-							       QPixmap(":/graphicGui/glow32x32.png"),
-							       "actionShow_MousePointer_Coordinates");
+							       QPixmap(":/graphicGui/miscGlow32x32.png"),
+							       "actionShow_MousePointer_Coordinates",
+							       false,
+							       "actionShow_MousePointer_Coordinates_dialog");
 			}
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		} else {
@@ -405,12 +410,7 @@ void PointerCoordinates::setFlagShowCoordinatesButton(bool b)
 void PointerCoordinates::setCurrentCoordinatesPlaceKey(QString key)
 {
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("CoordinatesPlace"));
-	CoordinatesPlace coordPlace = static_cast<CoordinatesPlace>(en.keyToValue(key.toLatin1().data()));
-	if (coordPlace<0)
-	{
-		qWarning() << "Unknown coordinates place: " << key << "setting \"TopRight\" instead";
-		coordPlace = TopRight;
-	}
+	CoordinatesPlace coordPlace = static_cast<CoordinatesPlace>(qMax(0, en.keyToValue(key.toLatin1().data())));
 	setCurrentCoordinatesPlace(coordPlace);
 }
 
@@ -423,12 +423,7 @@ QString PointerCoordinates::getCurrentCoordinatesPlaceKey() const
 void PointerCoordinates::setCurrentCoordinateSystemKey(QString key)
 {
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("CoordinateSystem"));
-	CoordinateSystem coordSystem = static_cast<CoordinateSystem>(en.keyToValue(key.toLatin1().data()));
-	if (coordSystem<0)
-	{
-		qWarning() << "Unknown coordinate system: " << key << "setting \"RaDecJ2000\" instead";
-		coordSystem = RaDecJ2000;
-	}
+	CoordinateSystem coordSystem = static_cast<CoordinateSystem>(qMax(0, en.keyToValue(key.toLatin1().data())));
 	setCurrentCoordinateSystem(coordSystem);
 }
 
@@ -440,7 +435,7 @@ QString PointerCoordinates::getCurrentCoordinateSystemKey() const
 QPair<int, int> PointerCoordinates::getCoordinatesPlace(QString text)
 {
 	int x = 0, y = 0;
-	float coeff = 1.5;
+	static const float coeff = 1.5;
 	QFontMetrics fm(font);
 	QSize fs = fm.size(Qt::TextSingleLine, text);
 	switch(getCurrentCoordinatesPlace())
@@ -459,7 +454,7 @@ QPair<int, int> PointerCoordinates::getCoordinatesPlace(QString text)
 		}
 		case RightBottomCorner:
 		{
-			x = gui->getSkyGui()->getSkyGuiWidth() - static_cast<int>(fs.width() - 10*coeff);
+			x = gui->getSkyGui()->getSkyGuiWidth() - static_cast<int>(fs.width() + 10*coeff);
 			y = fs.height();
 			break;
 		}

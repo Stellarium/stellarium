@@ -74,6 +74,7 @@ RemoteSync::RemoteSync()
 	, state(IDLE)
 	, server(Q_NULLPTR)
 	, client(Q_NULLPTR)
+	, allowVersionMismatch(false)
 {
 	setObjectName("RemoteSync");
 
@@ -185,11 +186,13 @@ void RemoteSync::init()
 		qCDebug(remoteSync)<<"Connecting to server from command line";
 		connectToServer();
 	}
+
+	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
 }
 
 void RemoteSync::update(double deltaTime)
 {
-	Q_UNUSED(deltaTime);
+	Q_UNUSED(deltaTime)
 	if(server)
 	{
 		//pass update on to server, client does not need this
@@ -274,7 +277,7 @@ void RemoteSync::startServer()
 {
 	if(state == IDLE)
 	{
-		server = new SyncServer(this);
+		server = new SyncServer(this, allowVersionMismatch);
 		if(server->start(serverPort))
 			setState(SERVER);
 		else
@@ -392,6 +395,7 @@ void RemoteSync::loadSettings()
 	setConnectionLostBehavior(static_cast<ClientBehavior>(conf->value("connectionLostBehavior",1).toInt()));
 	setQuitBehavior(static_cast<ClientBehavior>(conf->value("quitBehavior").toInt()));
 	reconnectTimer.setInterval(conf->value("clientReconnectInterval", 5000).toInt());
+	allowVersionMismatch=conf->value("allowVersionMismatch", false).toBool();
 	conf->endGroup();
 }
 
@@ -406,6 +410,7 @@ void RemoteSync::saveSettings()
 	conf->setValue("connectionLostBehavior", connectionLostBehavior);
 	conf->setValue("quitBehavior", quitBehavior);
 	conf->setValue("clientReconnectInterval", reconnectTimer.interval());
+	conf->setValue("allowVersionMismatch", allowVersionMismatch);
 	conf->endGroup();
 }
 

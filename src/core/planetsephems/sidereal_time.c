@@ -42,13 +42,9 @@ double range_radians (double r)
 	return r;
 }
 
-#define TERMS 63
-/* compute only every tenths of day:  */
-#define LN_NUTATION_EPOCH_THRESHOLD 0.1
-
 /* Calculate the mean sidereal time at the meridian of Greenwich (GMST) of a given date.
  * returns mean sidereal time (degrees).
- * Formula 11.1, 11.4 pg 83
+ * Meeus, Astr. Algorithms, Formula 11.1, 11.4 pg 83. (or 2nd ed. 1998, 12.1, 12.4 pg.87)
  * MAKE SURE argument JD is UT, not TT!
  * GZfix for V0.14: Replace by expression (43) given in:
  * N. Capitaine, P.T.Wallace, J. Chapront: Expressions for IAU 2000 precession quantities.
@@ -105,18 +101,3 @@ double get_apparent_sidereal_time (double JD, double JDE)
 	return meanSidereal+ (deltaPsi*cos(getPrecessionAngleVondrakEpsilon(JDE) + deltaEps))*180./M_PI;
 }
 
-//// return value in degrees
-//double get_mean_ecliptical_obliquity(double JDE)
-//{
-////	struct ln_nutation nutation;
-////	get_nutation(JDE, &nutation);
-////	return nutation.ecliptic;
-//	return getPrecessionAngleVondrakEpsilon(JDE)*180.0/M_PI;
-//}
-
-//double get_nutation_longitude(double JDE)
-//{
-//	struct ln_nutation nutation;
-//	get_nutation(JDE, &nutation);
-//	return nutation.deltaPsi;
-//}

@@ -1,6 +1,6 @@
 
 ########### install files ###############
-INSTALL(FILES ssystem_major.ini ssystem_minor.ini ssystem_1000comets.ini base_locations.bin.gz DejaVuSans.ttf default_cfg.ini DejaVuSansMono.ttf iso639-1.utf8 iso3166.tab countryCodes.dat constellation_boundaries.dat constellations_spans.dat nomenclature.dat DESTINATION ${SDATALOC}/data)
+INSTALL(FILES ssystem_major.ini ssystem_minor.ini ssystem_1000comets.ini base_locations.bin.gz DejaVuSans.ttf default_cfg.ini DejaVuSansMono.ttf iso639-1.utf8 iso3166.tab regions-geoscheme.tab constellation_boundaries.dat constellations_spans.dat nomenclature.dat DESTINATION ${SDATALOC}/data)
 INSTALL(DIRECTORY shaders/ DESTINATION ${SDATALOC}/data/shaders FILES_MATCHING
 	PATTERN "planet*" 
 	)
@@ -71,9 +71,8 @@ IF (BUILD_FOR_MAEMO)
 ENDIF()
 
 IF(UNIX AND NOT APPLE)
-	INSTALL(FILES stellarium.desktop DESTINATION share/applications)
-	INSTALL(FILES stellarium.xpm DESTINATION share/pixmaps)
-	INSTALL(FILES stellarium.appdata.xml DESTINATION share/metainfo)
+	INSTALL(FILES org.stellarium.Stellarium.desktop DESTINATION share/applications)
+	INSTALL(FILES org.stellarium.Stellarium.appdata.xml DESTINATION share/metainfo)
 	INSTALL(FILES stellarium.xml DESTINATION share/mime/packages)
 	INSTALL(FILES icons/16x16/stellarium.png DESTINATION share/icons/hicolor/16x16/apps)
 	INSTALL(FILES icons/32x32/stellarium.png DESTINATION share/icons/hicolor/32x32/apps)

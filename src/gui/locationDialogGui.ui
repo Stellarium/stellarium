@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>630</width>
-    <height>533</height>
+    <height>542</height>
    </rect>
   </property>
   <property name="styleSheet">
@@ -290,7 +290,7 @@
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap>../../data/gui/world.png</pixmap>
+            <pixmap>../../data/gui/miscWorldMap.png</pixmap>
            </property>
            <property name="scaledContents">
             <bool>true</bool>
@@ -352,6 +352,9 @@
               </property>
               <property name="horizontalScrollBarPolicy">
                <enum>Qt::ScrollBarAlwaysOff</enum>
+              </property>
+              <property name="editTriggers">
+               <set>QAbstractItemView::NoEditTriggers</set>
               </property>
               <property name="uniformItemSizes">
                <bool>true</bool>
@@ -726,7 +729,7 @@
              <number>0</number>
             </property>
             <item row="1" column="1">
-             <widget class="QComboBox" name="countryNameComboBox">
+             <widget class="QComboBox" name="regionNameComboBox">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -832,7 +835,7 @@
             <item row="1" column="0">
              <widget class="QLabel" name="label_4">
               <property name="text">
-               <string>Country:</string>
+               <string>Region:</string>
               </property>
              </widget>
             </item>
@@ -882,7 +885,7 @@
   <tabstop>longitudeSpinBox</tabstop>
   <tabstop>altitudeSpinBox</tabstop>
   <tabstop>cityNameLineEdit</tabstop>
-  <tabstop>countryNameComboBox</tabstop>
+  <tabstop>regionNameComboBox</tabstop>
   <tabstop>planetNameComboBox</tabstop>
   <tabstop>timeZoneNameComboBox</tabstop>
   <tabstop>useCustomTimeZoneCheckBox</tabstop>

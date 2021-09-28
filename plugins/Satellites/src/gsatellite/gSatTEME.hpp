@@ -42,6 +42,7 @@
 
 #include "sgp4unit.h"
 #include "sgp4ext.h"
+#include "stdsat.h"
 
 //! @class gSatTEME
 //! @brief Sat position and velocity predictions over TEME reference system.
@@ -132,6 +133,18 @@ public:
 			return 2*M_PI/mm;
 
 		return 0.0;
+	}
+
+	// Get orbital inclination in degrees
+	double getInclination() const
+	{
+		return satrec.inclo*180./M_PI;
+	}
+
+	Vec2d getPerigeeApogee() const
+	{
+		double semiMajorAxis = std::cbrt((xke/satrec.no)*(xke/satrec.no));
+		return Vec2d((semiMajorAxis*(1.0 - satrec.ecco) - 1.0)*KEARTHRADIUS, (semiMajorAxis*(1.0 + satrec.ecco) - 1.0)*KEARTHRADIUS);
 	}
 
 private:

@@ -1,7 +1,7 @@
 //
 // Author: Qam1
 // Name: Double eclipse from Deimos in 2031
-// Version: 5.0
+// Version: 5.1
 // License: Public Domain
 // Description: Just before Mars eclipses the sun, Phobos pops out from behind and eclipses it first. Takes place between Taurus and Gemini on July 23, 2031.
 //
@@ -29,7 +29,7 @@ while (alt < 20)
 
     core.wait(0.1);
 
-    SData = core.getObjectPosition("Sun");
+    SData = core.getObjectInfo("Sun");
     alt = SData["altitude"];
 }
 

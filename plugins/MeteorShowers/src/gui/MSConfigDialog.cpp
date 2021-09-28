@@ -22,8 +22,9 @@
 #include "MSConfigDialog.hpp"
 #include "StelApp.hpp"
 #include "StelGui.hpp"
+#include "StelModuleMgr.hpp"
 #include "ui_MSConfigDialog.h"
-
+#include "StelMainView.hpp"
 MSConfigDialog::MSConfigDialog(MeteorShowersMgr* mgr)
 	: StelDialog("MeteorShowers")
 	, m_mgr(mgr)
@@ -62,7 +63,7 @@ void MSConfigDialog::createDialogContent()
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(m_ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(m_ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
-	connect(m_ui->bRestoreDefaults, SIGNAL(clicked()), m_mgr, SLOT(restoreDefaultSettings()));
+	connect(m_ui->bRestoreDefaults, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 
 	// General tab
 	connect(m_ui->enableAtStartUp, SIGNAL(clicked(bool)), m_mgr, SLOT(setEnableAtStartup(bool)));
@@ -97,6 +98,17 @@ void MSConfigDialog::createDialogContent()
 	}
 
 	init();
+}
+
+void MSConfigDialog::restoreDefaults()
+{
+	if (askConfirmation())
+	{
+		qDebug() << "[MeteorShower] restore defaults...";
+		m_mgr->restoreDefaultSettings();
+	}
+	else
+		qDebug() << "[MeteorShower] restore defaults is canceled...";
 }
 
 void MSConfigDialog::init()
@@ -166,36 +178,36 @@ void MSConfigDialog::refreshMarkersColor()
 void MSConfigDialog::setColorARG()
 {
 	Vec3f c = m_mgr->getColorARG();
-	QColor color(c[0], c[1], c[2]);
-	color = QColorDialog::getColor(color);
+	QColor color(QColor::fromRgbF(c[0], c[1], c[2]));
+    color = QColorDialog::getColor(color,&StelMainView::getInstance());
 	if (color.isValid())
 	{
 		m_ui->setColorARG->setStyleSheet("background-color:" + color.name() + ";");
-		m_mgr->setColorARG(Vec3f(color.red(), color.green(), color.blue()));
+		m_mgr->setColorARG(Vec3f(color.redF(), color.greenF(), color.blueF()));
 	}
 }
 
 void MSConfigDialog::setColorARC()
 {
 	Vec3f c = m_mgr->getColorARC();
-	QColor color(c[0], c[1], c[2]);
-	color = QColorDialog::getColor(color);
+	QColor color(QColor::fromRgbF(c[0], c[1], c[2]));
+    color = QColorDialog::getColor(color,&StelMainView::getInstance());
 	if (color.isValid())
 	{
 		m_ui->setColorARC->setStyleSheet("background-color:" + color.name() + ";");
-		m_mgr->setColorARC(Vec3f(color.red(), color.green(), color.blue()));
+		m_mgr->setColorARC(Vec3f(color.redF(), color.greenF(), color.blueF()));
 	}
 }
 
 void MSConfigDialog::setColorIR()
 {
 	Vec3f c = m_mgr->getColorIR();
-	QColor color(c[0], c[1], c[2]);
-	color = QColorDialog::getColor(color);
+	QColor color(QColor::fromRgbF(c[0], c[1], c[2]));
+    color = QColorDialog::getColor(color,&StelMainView::getInstance());
 	if (color.isValid())
 	{
 		m_ui->setColorIR->setStyleSheet("background-color:" + color.name() + ";");
-		m_mgr->setColorIR(Vec3f(color.red(), color.green(), color.blue()));
+		m_mgr->setColorIR(Vec3f(color.redF(), color.greenF(), color.blueF()));
 	}
 }
 
@@ -313,17 +325,12 @@ void MSConfigDialog::setAboutHtml()
 	"<li>" + QString(q_("%1Meteor shower%2 - article in Wikipedia").arg("<a href=\"https://en.wikipedia.org/wiki/Meteor_Showers\">")).arg("</a>") + "</li>"
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 	"<li>" + QString(q_("%1International Meteor Organization%2").arg("<a href=\"http://www.imo.net/\">")).arg("</a>") + "</li>"
-	"</ul>"
-	"<h3>" + q_("Links") + "</h3>"
-	"<p>" + QString(q_("Support is provided via the Github website. Be sure to put \"%1\" in the subject when posting.")).arg("Meteor Showers Plugin") + "</p>";
-	html += "<p><ul>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you have a question, you can {get an answer here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://groups.google.com/forum/#!forum/stellarium\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("Bug reports and feature requests can be made {here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://github.com/Stellarium/stellarium/issues\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you want to read full information about this plugin and its history, you can {get info here}.").toHtmlEscaped().replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Meteor_Showers_plugin\">\\1</a>") + "</li>";
-	html += "</ul></p></body></html>";
+	"</ul>";
+
+	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Meteor Showers plugin");
+	html += "</body></html>";
 
 	m_ui->about->setHtml(html);
+	// TRANSLATORS: duration
+	m_ui->updateFrequency->setSuffix(qc_(" h","time unit"));
 }

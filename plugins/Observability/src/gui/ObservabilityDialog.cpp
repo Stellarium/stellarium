@@ -112,14 +112,13 @@ void ObservabilityDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()),
-	        plugin, SLOT(resetConfiguration()));
+		this, SLOT(restoreDefaults()));
 	// TODO: The plug-in should emit a signal when settings are changed.
 	// This works, because slots are called in the order they were connected.
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()),
 	        this, SLOT(updateControls()));
 	connect(ui->saveSettingsButton, SIGNAL(clicked()),
 	        plugin, SLOT(saveConfiguration()));
-	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), plugin, SLOT(saveConfiguration()));
 
 	// About tab
 	setAboutHtml();
@@ -127,6 +126,18 @@ void ObservabilityDialog::createDialogContent()
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 
 	updateControls();
+	ui->todayCheckBox->hide(); // DISABLED for 0.21.2. No longer needed.
+}
+
+void ObservabilityDialog::restoreDefaults()
+{
+	if (askConfirmation())
+	{
+		qDebug() << "[Observability] restore defaults...";
+		GETSTELMODULE(Observability)->resetConfiguration();
+	}
+	else
+		qDebug() << "[Observability] restore defaults is canceled...";
 }
 
 void ObservabilityDialog::setAboutHtml(void)

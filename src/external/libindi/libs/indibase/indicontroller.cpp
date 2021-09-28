@@ -46,7 +46,7 @@ void Controller::mapController(const char *propertyName, const char *propertyLab
                                const char *initialValue)
 {
     if (JoystickSettingT == nullptr)
-        JoystickSettingT = (IText *)malloc(sizeof(IText));
+        JoystickSettingT = static_cast<IText *>(malloc(sizeof(IText)));
 
     // Ignore duplicates
     for (int i = 0; i < JoystickSettingTP.ntp; i++)
@@ -55,11 +55,20 @@ void Controller::mapController(const char *propertyName, const char *propertyLab
             return;
     }
 
-    JoystickSettingT = (IText *)realloc(JoystickSettingT, (JoystickSettingTP.ntp + 1) * sizeof(IText));
+    IText *buf = static_cast<IText *>(realloc(JoystickSettingT, (JoystickSettingTP.ntp + 1) * sizeof(IText)));
+    if (buf == nullptr)
+    {
+        free (JoystickSettingT);
+        perror("Failed to allocate memory for joystick controls.");
+        return;
+    }
+    else
+        JoystickSettingT = buf;
 
-    ControllerType *ctype = (ControllerType *)malloc(sizeof(ControllerType));
+    ControllerType *ctype = static_cast<ControllerType *>(malloc(sizeof(ControllerType)));
     *ctype                = type;
 
+    memset(JoystickSettingT + JoystickSettingTP.ntp, 0, sizeof(IText));
     IUFillText(&JoystickSettingT[JoystickSettingTP.ntp], propertyName, propertyLabel, initialValue);
 
     JoystickSettingT[JoystickSettingTP.ntp++].aux0 = ctype;
@@ -160,7 +169,7 @@ bool Controller::ISNewText(const char *dev, const char *name, char *texts[], cha
                 if (tp)
                 {
                     ControllerType cType  = getControllerType(texts[i]);
-                    ControllerType myType = *((ControllerType *)JoystickSettingT[i].aux0);
+                    ControllerType myType = *(static_cast<ControllerType *>(JoystickSettingT[i].aux0));
                     if (cType != myType)
                     {
                         JoystickSettingTP.s = IPS_ALERT;
@@ -200,14 +209,14 @@ bool Controller::ISSnoopDevice(XMLEle *root)
     const char *propName = findXMLAttValu(root, "name");
 
     // Check axis
-    if (!strcmp("JOYSTICK_AXIS", propName))
+    if (!strcmp("JOYSTICK_AXES", propName))
     {
         for (ep = nextXMLEle(root, 1); ep != nullptr; ep = nextXMLEle(root, 0))
         {
             const char *elemName = findXMLAttValu(ep, "name");
             const char *setting  = getControllerSetting(elemName);
             if (setting == nullptr)
-                return false;
+                continue;
 
             mag = atof(pcdataXMLEle(ep));
 
@@ -269,7 +278,7 @@ void Controller::enableJoystick()
             IDSnoopDevice("Joystick", JoystickSettingTP.tp[i].text);
     }
 
-    IDSnoopDevice("Joystick", "JOYSTICK_AXIS");
+    IDSnoopDevice("Joystick", "JOYSTICK_AXES");
     IDSnoopDevice("Joystick", "JOYSTICK_BUTTONS");
 }
 

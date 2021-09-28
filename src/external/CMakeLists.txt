@@ -83,6 +83,8 @@ target_link_libraries(qtcompress_stel ${ZLIB_LIBRARIES} Qt5::Core)
 set_target_properties(qtcompress_stel PROPERTIES AUTOMOC 0)
 SET_TARGET_PROPERTIES(qtcompress_stel PROPERTIES FOLDER "src/external")
 
+# QCustomPlot should not be unbundled, because upstream uses GPL 3, and
+# Stellarium uses GPL 2. Author of QCustomPlot has agreed for GPL 2+ for this.
 set(qcustomplot_SRCS
     qcustomplot/qcustomplot.cpp
     qcustomplot/qcustomplot.h
@@ -91,6 +93,10 @@ add_library(qcustomplot_stel STATIC EXCLUDE_FROM_ALL ${qcustomplot_SRCS})
 target_link_libraries(qcustomplot_stel Qt5::PrintSupport Qt5::Widgets)
 SET_TARGET_PROPERTIES(qcustomplot_stel PROPERTIES FOLDER "src/external")
 
+# QXlsx
+# Source code: https://github.com/QtExcel/QXlsx
+# v1.4.3-stel.0:
+# PL0: Switch to use our copy of qtcompress
 SET(qxlsx_SRCS
     qxlsx/xlsxabstractooxmlfile.cpp
     qxlsx/xlsxabstractsheet.cpp
@@ -104,6 +110,7 @@ SET(qxlsx_SRCS
     qxlsx/xlsxconditionalformatting.cpp
     qxlsx/xlsxcontenttypes.cpp
     qxlsx/xlsxdatavalidation.cpp
+    qxlsx/xlsxdatetype.cpp
     qxlsx/xlsxdocpropsapp.cpp
     qxlsx/xlsxdocpropscore.cpp
     qxlsx/xlsxdocument.cpp
@@ -144,6 +151,7 @@ SET(qxlsx_SRCS
     qxlsx/xlsxcontenttypes_p.h
     qxlsx/xlsxdatavalidation.h
     qxlsx/xlsxdatavalidation_p.h
+    qxlsx/xlsxdatetype.h
     qxlsx/xlsxdocpropsapp_p.h
     qxlsx/xlsxdocpropscore_p.h
     qxlsx/xlsxdocument.h
@@ -179,8 +187,8 @@ set_target_properties(qxlsx_stel PROPERTIES FOLDER "src/external")
 IF(USE_PLUGIN_TELESCOPECONTROL)
     set(INDI_SOVERSION "1")
     set(CMAKE_INDI_VERSION_MAJOR 1)
-    set(CMAKE_INDI_VERSION_MINOR 6)
-    set(CMAKE_INDI_VERSION_RELEASE 0)
+    set(CMAKE_INDI_VERSION_MINOR 8)
+    set(CMAKE_INDI_VERSION_RELEASE 5)
     set(CMAKE_INDI_VERSION_STRING "${CMAKE_INDI_VERSION_MAJOR}.${CMAKE_INDI_VERSION_MINOR}.${CMAKE_INDI_VERSION_RELEASE}")
     set(INDI_VERSION ${CMAKE_INDI_VERSION_MAJOR}.${CMAKE_INDI_VERSION_MINOR}.${CMAKE_INDI_VERSION_RELEASE})
     set(DATA_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/share/indi/")

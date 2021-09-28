@@ -36,7 +36,7 @@ StelPropertyService::StelPropertyService(QObject *parent)
 
 void StelPropertyService::get(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)
 {
-	Q_UNUSED(parameters);
+	Q_UNUSED(parameters)
 
 	if(operation=="list")
 	{
@@ -71,7 +71,7 @@ void StelPropertyService::get(const QByteArray& operation, const APIParameters &
 
 void StelPropertyService::post(const QByteArray &operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response)
 {
-	Q_UNUSED(data);
+	Q_UNUSED(data)
 
 	if(operation=="set")
 	{

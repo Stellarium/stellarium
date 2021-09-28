@@ -103,15 +103,25 @@ void RemoteSyncDialog::createDialogContent()
 	connect(rs, SIGNAL(clientSyncOptionsChanged(SyncClient::SyncOptions)), this, SLOT(updateCheckboxesFromSyncOptions()));
 	connect(ui->buttonGroupSyncOptions, SIGNAL(buttonToggled(int,bool)), this, SLOT(checkboxToggled(int,bool)));
 
-	connect(ui->saveSettingsButton, SIGNAL(clicked()), rs, SLOT(saveSettings()));
-	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
-	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), rs, SLOT(restoreDefaultSettings()));
+	connect(ui->saveSettingsButton, SIGNAL(clicked()), rs, SLOT(saveSettings()));	
+	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 
 	populateExclusionLists();
 	connect(ui->pushButtonSelectProperties, SIGNAL(clicked()), this, SLOT(addPropertiesForExclusion()));
 	connect(ui->pushButtonDeselectProperties, SIGNAL(clicked()), this, SLOT(removePropertiesForExclusion()));
 
 	setAboutHtml();
+}
+
+void RemoteSyncDialog::restoreDefaults()
+{
+	if (askConfirmation())
+	{
+		qCDebug(remoteSync) << "restore defaults...";
+		rs->restoreDefaultSettings();
+	}
+	else
+		qCDebug(remoteSync) << "restore defaults is canceled...";
 }
 
 void RemoteSyncDialog::printErrorMessage(const QString error)
@@ -208,17 +218,8 @@ void RemoteSyncDialog::setAboutHtml(void)
 	html += "<p>" + q_("See manual for detailed description.") + "</p>";
 	html += "<p>" + q_("This plugin was developed during ESA SoCiS 2015&amp;2016.") + "</p>";
 
-	html += "<h3>" + q_("Links") + "</h3>";
-	html += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg("Remote Sync plugin") + "</p>";
-	html += "<p><ul>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you have a question, you can {get an answer here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://groups.google.com/forum/#!forum/stellarium\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("Bug reports and feature requests can be made {here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://github.com/Stellarium/stellarium/issues\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you want to read full information about this plugin and its history, you can {get info here}.").toHtmlEscaped().replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/RemoteSync_plugin\">\\1</a>") + "</li>";
-	html += "</ul></p></body></html>";
-
+	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Remote Sync plugin");
+	html += "</body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if(gui!=Q_NULLPTR)

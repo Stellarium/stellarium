@@ -34,13 +34,15 @@
 #include <QSettings>
 #include <QStringList>
 
+//! @class ArtificialPlanet Auxiliary construct used during transitions from one planet to another.
 class ArtificialPlanet : public Planet
 {
 public:
 	ArtificialPlanet(const PlanetP& orig);
 	void setDest(const PlanetP& dest);
 	void computeAverage(double f1);
-	virtual void computePosition(const double dateJDE) Q_DECL_OVERRIDE;
+	//! This does nothing, but avoids a crash.
+	virtual void computePosition(const double dateJDE, const Vec3d &aberrationPush) Q_DECL_OVERRIDE;
 private:
 	void setRot(const Vec3d &r);
 	static Vec3d getRot(const Planet* p);
@@ -50,7 +52,7 @@ private:
 };
 
 ArtificialPlanet::ArtificialPlanet(const PlanetP& orig) :
-		Planet("art", 0, 0, Vec3f(0,0,0), 0, 0, "", "", "", Q_NULLPTR, Q_NULLPTR, Q_NULLPTR, false, true, false, true, "artificial"),
+		Planet("art", 0, 0, Vec3f(0,0,0), 0, 0, "", "", "", Q_NULLPTR, Q_NULLPTR, Q_NULLPTR, false, true, false, false, "artificial"),
 		dest(Q_NULLPTR), orig_name(orig->getEnglishName()), orig_name_i18n(orig->getNameI18n())
 {
 	// set parent = sun:
@@ -79,12 +81,12 @@ void ArtificialPlanet::setDest(const PlanetP& dest)
 	const RotationElements &r(dest->getRotationElements());
 	lastJDE = StelApp::getInstance().getCore()->getJDE();
 
-	re.offset = r.offset + fmod(re.offset - r.offset + 360.0f*( static_cast<float>(lastJDE-re.epoch)/re.period - static_cast<float>(lastJDE-r.epoch)/r.period), 360.0f);
+	re.offset = r.offset + fmod(re.offset - r.offset + 360.0*( (lastJDE-re.epoch)/re.period - (lastJDE-r.epoch)/r.period), 360.0);
 
 	re.epoch = r.epoch;
 	re.period = r.period;
-	if (re.offset - r.offset < -180.f) re.offset += 360.f; else
-	if (re.offset - r.offset >  180.f) re.offset -= 360.f;
+	if (re.offset - r.offset < -180.) re.offset += 360.; else
+	if (re.offset - r.offset >  180.) re.offset -= 360.;
 }
 
 void ArtificialPlanet::setRot(const Vec3d &r)
@@ -138,10 +140,10 @@ Vec3d ArtificialPlanet::getRot(const Planet* p)
 	return r;
 }
 
-void ArtificialPlanet::computePosition(const double dateJDE)
+void ArtificialPlanet::computePosition(const double dateJDE, const Vec3d &aberrationPush)
 {
 	Q_UNUSED(dateJDE)
-	// This does nothing, but avoids a crash.
+	Q_UNUSED(aberrationPush)
 }
 
 void ArtificialPlanet::computeAverage(double f1)
@@ -166,11 +168,8 @@ void ArtificialPlanet::computeAverage(double f1)
 	setRot(a1*f1 + a2*f2);
 
 	// rotation offset
-	re.offset = static_cast<float>(f1*static_cast<double>(re.offset) + f2*static_cast<double>(dest->getRotationElements().offset));
+	re.offset = f1*re.offset + f2*dest->getRotationElements().offset;
 }
-
-
-
 
 StelObserver::StelObserver(const StelLocation &loc) : currentLocation(loc)
 {
@@ -228,7 +227,8 @@ Vec4d StelObserver::getTopographicOffsetFromCenter(void) const
 	const double latRad=static_cast<double>(currentLocation.latitude)*(M_PI_180);
 	const double u = atan( bByA * tan(latRad));
 	//qDebug() << "getTopographicOffsetFromCenter: a=" << a*AU << "b/a=" << bByA << "b=" << bByA*a *AU  << "latRad=" << latRad << "u=" << u;
-	Q_ASSERT(fabs(u)<= fabs(latRad));
+	// This may fail & crash if on SpaceshipObserver on the way to the Sun (?) --> add test bByA==1
+	Q_ASSERT((bByA==1.) || (fabs(u)<= fabs(latRad)));
 	const double altFix = currentLocation.altitude/(1000.0*AU*a);
 
 	const double rhoSinPhiPrime= bByA * sin(u) + altFix*sin(latRad);

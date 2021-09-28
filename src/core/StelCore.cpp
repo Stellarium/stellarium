@@ -78,7 +78,9 @@ StelCore::StelCore()
 	, currentDeltaTAlgorithm(EspenakMeeus)
 	, position(Q_NULLPTR)
 	, flagUseNutation(true)
-	, flagUseTopocentricCoordinates(true)	
+	, flagUseAberration(true)
+	, aberrationFactor(1.0)
+	, flagUseTopocentricCoordinates(true)
 	, timeSpeed(JD_SECOND)
 	, JD(0.,0.)
 	, presetSkyTime(0.)
@@ -97,6 +99,10 @@ StelCore::StelCore()
 	, de431Available(false)
 	, de430Active(false)
 	, de431Active(false)
+	, de440Available(false)
+	, de441Available(false)
+	, de440Active(false)
+	, de441Active(false)
 {
 	setObjectName("StelCore");
 	registerMathMetaTypes();
@@ -130,6 +136,8 @@ StelCore::StelCore()
 	currentProjectorParams.devicePixelsPerPixel = StelApp::getInstance().getDevicePixelsPerPixel();
 
 	flagUseNutation=conf->value("astro/flag_nutation", true).toBool();
+	flagUseAberration=conf->value("astro/flag_aberration", true).toBool();
+	aberrationFactor=conf->value("astro/aberration_factor", 1.0).toDouble();
 	flagUseTopocentricCoordinates=conf->value("astro/flag_topocentric_coordinates", true).toBool();
 	flagUseDST=conf->value("localization/flag_dst", true).toBool();
 
@@ -205,7 +213,7 @@ void StelCore::init()
 	// Default: ndot = -26.0 "/cy/cy; year = 1820; DeltaT = -20 + 32*u^2, where u = (currentYear-1820)/100
 	setDeltaTCustomYear(conf->value("custom_time_correction/year", 1820.0).toDouble());
 	setDeltaTCustomNDot(conf->value("custom_time_correction/ndot", -26.0).toDouble());
-	setDeltaTCustomEquationCoefficients(StelUtils::strToVec3f(conf->value("custom_time_correction/coefficients", "-20,0,32").toString()).toVec3d());
+	setDeltaTCustomEquationCoefficients(Vec3d(conf->value("custom_time_correction/coefficients", "-20,0,32").toString()));
 
 	// Time stuff
 	setTimeNow();
@@ -699,6 +707,12 @@ void StelCore::lookAtJ2000(const Vec3d& pos, const Vec3d& aup)
 	invertMatAltAzModelView = matAltAzModelView.inverse();
 }
 
+void StelCore::setMatAltAzModelView(const Mat4d& mat)
+{
+	matAltAzModelView = mat;
+	invertMatAltAzModelView = matAltAzModelView.inverse();
+}
+
 Vec3d StelCore::altAzToEquinoxEqu(const Vec3d& v, RefractionMode refMode) const
 {
 	if (refMode==RefractionOff || skyDrawer==Q_NULLPTR || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
@@ -722,10 +736,10 @@ Vec3d StelCore::equinoxEquToAltAz(const Vec3d& v, RefractionMode refMode) const
 Vec3d StelCore::altAzToJ2000(const Vec3d& v, RefractionMode refMode) const
 {
 	if (refMode==RefractionOff || skyDrawer==Q_NULLPTR || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
-		return matEquinoxEquToJ2000*matAltAzToEquinoxEqu*v;
+		return matEquinoxEquDateToJ2000*matAltAzToEquinoxEqu*v;
 	Vec3d r(v);
 	skyDrawer->getRefraction().backward(r);
-	r.transfo4d(matEquinoxEquToJ2000*matAltAzToEquinoxEqu);
+	r.transfo4d(matEquinoxEquDateToJ2000*matAltAzToEquinoxEqu);
 	return r;
 }
 
@@ -752,7 +766,7 @@ Vec3d StelCore::supergalacticToJ2000(const Vec3d& v) const
 Vec3d StelCore::equinoxEquToJ2000(const Vec3d& v, RefractionMode refMode) const
 {
 	if (refMode==RefractionOff || skyDrawer==Q_NULLPTR || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
-		return matEquinoxEquToJ2000*v;
+		return matEquinoxEquDateToJ2000*v;
 	Vec3d r(v);
 	r.transfo4d(matEquinoxEquToAltAz);
 	skyDrawer->getRefraction().backward(r);
@@ -921,19 +935,17 @@ void StelCore::updateTransformMatrices()
 
 	// multiply static J2000 earth axis tilt (eclipticalJ2000<->equatorialJ2000)
 	// in effect, this matrix transforms from VSOP87 ecliptical J2000 to planet-based equatorial coordinates.
-	// For earth, matJ2000ToEquinoxEqu is the precession matrix.
-	// TODO: rename matEquinoxEquToJ2000 to matEquinoxEquDateToJ2000
-	matEquinoxEquToJ2000 = matVsop87ToJ2000 * position->getRotEquatorialToVsop87();
-	matJ2000ToEquinoxEqu = matEquinoxEquToJ2000.transpose();
+	// For earth, matJ2000ToEquinoxEqu is the precession matrix.	
+	matEquinoxEquDateToJ2000 = matVsop87ToJ2000 * position->getRotEquatorialToVsop87();
+	matJ2000ToEquinoxEqu = matEquinoxEquDateToJ2000.transpose();
 	matJ2000ToAltAz = matEquinoxEquToAltAz*matJ2000ToEquinoxEqu;
 	matAltAzToJ2000 = matJ2000ToAltAz.transpose();
 
 	matHeliocentricEclipticToEquinoxEqu = matJ2000ToEquinoxEqu * matVsop87ToJ2000 * Mat4d::translation(-position->getCenterVsop87Pos());
 
-	// These two next have to take into account the position of the observer on the earth/planet of observation.
-	// GZ tmp could be called matAltAzToVsop87
-	Mat4d tmp = matJ2000ToVsop87 * matEquinoxEquToJ2000 * matAltAzToEquinoxEqu;
-	//Mat4d tmp1 = matJ2000ToVsop87 * matEquinoxEquToJ2000;
+	// These two next have to take into account the position of the observer on the earth/planet of observation.	
+	Mat4d matAltAzToVsop87 = matJ2000ToVsop87 * matEquinoxEquDateToJ2000 * matAltAzToEquinoxEqu;
+	//Mat4d tmp1 = matJ2000ToVsop87 * matEquinoxEquDateToJ2000;
 
 	// Before 0.14 getDistanceFromCenter assumed spherical planets. Now uses rectangular coordinates for observer!
 	// In series 0.14 and 0.15, this was erroneous: offset by distance rho, but in the wrong direction.
@@ -945,11 +957,11 @@ void StelCore::updateTransformMatrices()
 		const double sigma=static_cast<double>(position->getCurrentLocation().latitude)*M_PI/180.0 - offset.v[2];
 		const double rho=offset.v[3];
 
-		matAltAzToHeliocentricEclipticJ2000 =  Mat4d::translation(position->getCenterVsop87Pos()) * tmp *
+		matAltAzToHeliocentricEclipticJ2000 =  Mat4d::translation(position->getCenterVsop87Pos()) * matAltAzToVsop87 *
 				Mat4d::translation(Vec3d(rho*sin(sigma), 0., rho*cos(sigma) ));
 
 		matHeliocentricEclipticJ2000ToAltAz =
-				Mat4d::translation(Vec3d(-rho*sin(sigma), 0., -rho*cos(sigma))) * tmp.transpose() *
+				Mat4d::translation(Vec3d(-rho*sin(sigma), 0., -rho*cos(sigma))) * matAltAzToVsop87.transpose() *
 				Mat4d::translation(-position->getCenterVsop87Pos());
 
 		// Here I tried to split tmp matrix. This does not work:
@@ -970,8 +982,8 @@ void StelCore::updateTransformMatrices()
 	}
 	else
 	{
-		matAltAzToHeliocentricEclipticJ2000 =  Mat4d::translation(position->getCenterVsop87Pos()) * tmp;
-		matHeliocentricEclipticJ2000ToAltAz =  tmp.transpose() * Mat4d::translation(-position->getCenterVsop87Pos());
+		matAltAzToHeliocentricEclipticJ2000 =  Mat4d::translation(position->getCenterVsop87Pos()) * matAltAzToVsop87;
+		matHeliocentricEclipticJ2000ToAltAz =  matAltAzToVsop87.transpose() * Mat4d::translation(-position->getCenterVsop87Pos());
 	}
 }
 
@@ -1128,8 +1140,8 @@ void StelCore::moveObserverToSelected()
 			StelLocation loc = getCurrentLocation();
 			if (loc.planetName != pl->getEnglishName())
 			{
-				loc.planetName = pl->getEnglishName();
-				loc.name = "-";
+				loc.planetName = pl->getEnglishName();				
+				loc.name = "landing site";
 				loc.state = "";
 
 				// Let's try guess name of location...
@@ -1184,6 +1196,8 @@ void StelCore::setObserver(StelObserver *obs)
 {
 	delete position;
 	position = obs;
+	if (!getUseCustomTimeZone() && obs->getCurrentLocation().ianaTimeZone.length()>0)
+		setCurrentTimeZone(obs->getCurrentLocation().ianaTimeZone);
 }
 
 // Smoothly move the observer to the given location
@@ -1198,7 +1212,7 @@ void StelCore::moveObserverTo(const StelLocation& target, double duration, doubl
 			// Avoid using a temporary location name to create another temporary one (otherwise it looks like loc1 -> loc2 -> loc3 etc..)
 			curLoc.name = ".";
 		}
-		SpaceShipObserver* newObs = new SpaceShipObserver(curLoc, target, d);
+		SpaceShipObserver* newObs = new SpaceShipObserver(curLoc, target, d);		
 		setObserver(newObs);
 		newObs->update(0);
 	}
@@ -1747,7 +1761,7 @@ void StelCore::addSiderealDays(double d)
 	setJD(getJD() + d);
 }
 
-// Get the sidereal time shifted by the observer longitude
+// Get the sidereal time of the prime meridian (i.e. Rotation Angle) shifted by the observer longitude
 double StelCore::getLocalSiderealTime() const
 {
 	// On Earth, this requires UT deliberately with all its faults, on other planets we use the more regular TT.
@@ -1950,7 +1964,7 @@ double StelCore::computeDeltaT(const double JD)
 		deltaTnDot = deltaTCustomNDot; // n.dot = custom value "/cy/cy
 		int year, month, day;
 		StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
-		double u = (StelUtils::getDecYear(year,month,day)-getDeltaTCustomYear())/100.;
+		double u = (StelUtils::yearFraction(year,month,day)-getDeltaTCustomYear())/100.;
 		DeltaT = deltaTCustomEquationCoeff[0] + u*(deltaTCustomEquationCoeff[1] + u*deltaTCustomEquationCoeff[2]);
 	}
 
@@ -1961,7 +1975,10 @@ double StelCore::computeDeltaT(const double JD)
 	}
 
 	if (!deltaTdontUseMoon)
-		DeltaT += StelUtils::getMoonSecularAcceleration(JD, deltaTnDot, ((de430Active&&EphemWrapper::jd_fits_de430(JD)) || (de431Active&&EphemWrapper::jd_fits_de431(JD))));
+		DeltaT += StelUtils::getMoonSecularAcceleration(JD, deltaTnDot, ((de440Active&&EphemWrapper::jd_fits_de440(JD)) ||
+										 (de441Active&&EphemWrapper::jd_fits_de441(JD)) ||
+										 (de430Active&&EphemWrapper::jd_fits_de430(JD)) ||
+										 (de431Active&&EphemWrapper::jd_fits_de431(JD))));
 
 	return DeltaT;
 }
@@ -2044,7 +2061,7 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 			// Morrison & Stephenson (1982) algorithm for DeltaT (used by RedShift)
 			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByMorrisonStephenson1982;
-			// FIXME: This is correct valid range?
+			// FIXME: Is it valid range?
 			deltaTstart	= -4000;
 			deltaTfinish	= 2800;
 			break;
@@ -2456,14 +2473,14 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRangeDescription(const double JD
 // TODO2: This could be moved to the SkyDrawer or even some GUI class, as it is used to decide a GUI thing.
 bool StelCore::isBrightDaylight() const
 {
-	if (propMgr->getStelPropertyValue("Oculars.enableOcular").toBool())
+	if (propMgr->getStelPropertyValue("Oculars.ocularDisplayed", true).toBool())
 		return false;
 	SolarSystem* ssys = GETSTELMODULE(SolarSystem);
 	if (!ssys->getFlagPlanets())
 		return false;
 	if (!getSkyDrawer()->getFlagHasAtmosphere())
 		return false;
-	if (ssys->getEclipseFactor(this)<=0.01) // Total solar eclipse
+	if (ssys->getSolarEclipseFactor(this).first<=0.01) // Total solar eclipse
 		return false;
 
 	// immediately decide upon sky background brightness...
@@ -2509,15 +2526,50 @@ void StelCore::setDe431Active(bool status)
 	de431Active = de431Available && status;
 }
 
+
+bool StelCore::de440IsAvailable()
+{
+	return de440Available;
+}
+
+bool StelCore::de441IsAvailable()
+{
+	return de441Available;
+}
+
+bool StelCore::de440IsActive()
+{
+	return de440Active;
+}
+
+bool StelCore::de441IsActive()
+{
+	return de441Active;
+}
+
+void StelCore::setDe440Active(bool status)
+{
+	de440Active = de440Available && status;
+}
+
+void StelCore::setDe441Active(bool status)
+{
+	de441Active = de441Available && status;
+}
+
 void StelCore::initEphemeridesFunctions()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 
 	QString de430ConfigPath = conf->value("astro/de430_path").toString();
 	QString de431ConfigPath = conf->value("astro/de431_path").toString();
+	QString de440ConfigPath = conf->value("astro/de440_path").toString();
+	QString de441ConfigPath = conf->value("astro/de441_path").toString();
 
 	QString de430FilePath;
 	QString de431FilePath;
+	QString de440FilePath;
+	QString de441FilePath;
 
 	//<-- DE430 -->
 	if(de430ConfigPath.remove(QChar('"')).isEmpty())
@@ -2546,6 +2598,34 @@ void StelCore::initEphemeridesFunctions()
 		EphemWrapper::init_de431(de431FilePath.toStdString().c_str());
 	}
 	setDe431Active(de431Available && conf->value("astro/flag_use_de431", false).toBool());
+
+	//<-- DE440 -->
+	if(de440ConfigPath.remove(QChar('"')).isEmpty())
+		de440FilePath = StelFileMgr::findFile("ephem/" + QString(DE440_FILENAME), StelFileMgr::File);
+	else
+		de440FilePath = StelFileMgr::findFile(de440ConfigPath, StelFileMgr::File);
+
+	de440Available=!de440FilePath.isEmpty();
+	if(de440Available)
+	{
+		qDebug() << "DE440 at: " << de440FilePath;
+		EphemWrapper::init_de440(de440FilePath.toStdString().c_str());
+	}
+	setDe440Active(de440Available && conf->value("astro/flag_use_de440", false).toBool());
+
+	//<-- DE441 -->
+	if(de441ConfigPath.remove(QChar('"')).isEmpty())
+		de441FilePath = StelFileMgr::findFile("ephem/" + QString(DE441_FILENAME), StelFileMgr::File);
+	else
+		de441FilePath = StelFileMgr::findFile(de441ConfigPath, StelFileMgr::File);
+
+	de441Available=!de441FilePath.isEmpty();
+	if(de441Available)
+	{
+		qDebug() << "DE441 at: " << de441FilePath;
+		EphemWrapper::init_de441(de441FilePath.toStdString().c_str());
+	}
+	setDe441Active(de441Available && conf->value("astro/flag_use_de441", false).toBool());
 }
 
 // Methods for finding constellation from J2000 position.
@@ -2663,6 +2743,12 @@ Vec3d StelCore::getMouseJ2000Pos() const
 		float dy = prj->getViewportPosY()+hh+1-my - static_cast<float>(win.v[1]);
 		prj->unProject(static_cast<double>(prj->getViewportPosX()+wh+mx+dx), static_cast<double>(prj->getViewportPosY()+hh+1-my+dy), mousePosition);
 	}
-
+//	if (getUseAberration() && getCurrentPlanet())
+//	{
+//		Vec3d vel=getCurrentPlanet()->getHeliocentricEclipticVelocity();
+//		vel=StelCore::matVsop87ToJ2000*vel * getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
+//		mousePosition-=vel;
+//		mousePosition.normalize();
+//	}
 	return mousePosition;
 }

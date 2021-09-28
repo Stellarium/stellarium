@@ -23,6 +23,8 @@
 #include "StelGeodesicGrid.hpp"
 #include "StelObject.hpp"
 #include "StelPainter.hpp"
+#include "Planet.hpp"
+#include "StelUtils.hpp"
 
 #include <QDebug>
 #include <QFile>
@@ -80,7 +82,7 @@ void ZoneArray::initTriangle(int index, const Vec3f &c0, const Vec3f &c1, const 
 
 static inline int ReadInt(QFile& file, unsigned int &x)
 {
-	const int rval = (4 == file.read((char*)&x, 4)) ? 0 : -1;
+	const int rval = (4 == file.read(reinterpret_cast<char*>(&x), 4)) ? 0 : -1;
 	return rval;
 }
 
@@ -175,7 +177,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 			}
 			else
 			{
-				rval = new HipZoneArray(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
+				rval = new HipZoneArray(file, byte_swap, use_mmap, static_cast<int>(level), static_cast<int>(mag_min), static_cast<int>(mag_range), static_cast<int>(mag_steps));
 			}
 			break;
 		case 1:
@@ -185,7 +187,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 			}
 			else
 			{
-				rval = new SpecialZoneArray<Star2>(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
+				rval = new SpecialZoneArray<Star2>(file, byte_swap, use_mmap, static_cast<int>(level), static_cast<int>(mag_min), static_cast<int>(mag_range), static_cast<int>(mag_steps));
 			}
 			break;
 		case 2:
@@ -195,7 +197,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 			}
 			else
 			{
-				rval = new SpecialZoneArray<Star3>(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
+				rval = new SpecialZoneArray<Star3>(file, byte_swap, use_mmap, static_cast<int>(level), static_cast<int>(mag_min), static_cast<int>(mag_range), static_cast<int>(mag_steps));
 			}
 			break;
 		default:
@@ -344,7 +346,7 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mm
 				}
 				else
 				{
-					stars = (Star*)mmap_start;
+					stars = reinterpret_cast<Star*>(mmap_start);
 					Star *s = stars;
 					for (unsigned int z=0;z<nr_of_zones;z++)
 					{
@@ -410,7 +412,7 @@ SpecialZoneArray<Star>::~SpecialZoneArray(void)
 
 template<class Star>
 void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsideViewport, const RCMag* rcmag_table,
-				  int limitMagIndex, StelCore* core, int maxMagStarName, float names_brightness,
+				  int limitMagIndex, StelCore* core, int maxMagStarName, float names_brightness, bool designationUsage,
 				  const QVector<SphericalCap> &boundingCaps) const
 {
 	StelSkyDrawer* drawer = core->getSkyDrawer();
@@ -433,6 +435,17 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 	}
 	Q_ASSERT(cutoffMagStep<RCMAG_TABLE_SIZE);
     
+	// prepare for aberration: Explan. Suppl. 2013, (7.38)
+	const bool withAberration=core->getUseAberration();
+	Vec3d vel(0.);
+	if (withAberration)
+	{
+		vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+		StelCore::matVsop87ToJ2000.transfo(vel);
+		vel*=core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
+	}
+	const Vec3f velf=vel.toVec3f();
+
 	// Go through all stars, which are sorted by magnitude (bright stars first)
 	const SpecialZoneData<Star>* zoneToDraw = getZones() + index;
 	const Star* lastStar = zoneToDraw->getStars() + zoneToDraw->size;
@@ -449,6 +462,15 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 		
 		// Get the star position from the array
 		s->getJ2000Pos(zoneToDraw, movementFactor, vf);
+
+		// Aberration: vf contains Equatorial J2000 position.
+		if (withAberration)
+		{
+			//Q_ASSERT_X(fabs(vf.lengthSquared()-1.0f)<0.0001f, "ZoneArray aberration", "vertex length not unity");
+			vf.normalize(); // required!
+			vf+=velf;
+			vf.normalize();
+		}
 		
 		// If the star zone is not strictly contained inside the viewport, eliminate from the 
 		// beginning the stars actually outside viewport.
@@ -489,7 +511,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 			const float offset = tmpRcmag->radius*0.7f;
 			const Vec3f colorr = StelSkyDrawer::indexToColor(s->getBVIndex())*0.75f;
 			sPainter->setColor(colorr,names_brightness);
-			sPainter->drawText(vf.toVec3d(), s->getNameI18n(), 0, offset, offset, false);
+			sPainter->drawText(vf.toVec3d(), designationUsage ? s->getDesignation() : s->getNameI18n(), 0, offset, offset, false);
 		}
 	}
 }
@@ -499,7 +521,7 @@ void SpecialZoneArray<Star>::searchAround(const StelCore* core, int index, const
 					  QList<StelObjectP > &result)
 {
 	static const double d2000 = 2451545.0;
-	const double movementFactor = (M_PI/180.)*(0.0001/3600.) * ((core->getJDE()-d2000)/365.25)/ star_position_scale;
+	const double movementFactor = (M_PI/180.)*(0.0001/3600.) * ((core->getJDE()-d2000)/365.25)/ static_cast<double>(star_position_scale);
 	const SpecialZoneData<Star> *const z = getZones()+index;
 	Vec3f tmp;
 	Vec3f vf = v.toVec3f();

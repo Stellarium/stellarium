@@ -30,5 +30,24 @@
 	<string>true</string>
 	<key>Application Category</key>
 	<string>Education</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+	<dict>
+		<key>CFBundleTypeRole</key>
+		<string>Viewer</string>
+		<key>CFBundleTypeIconFile</key>
+		<string>Icon.icns</string>
+		<key>CFBundleTypeExtensions</key>
+		<array>
+			<string>ssc</string>
+		</array>
+		<key>CFBundleTypeMIMETypes</key>
+		<array>
+			<string>application/x-stellarium-script</string>
+		</array>
+		<key>CFBundleTypeName</key>
+		<string>Stellarium Script</string>
+	</dict>
+	</array>
 </dict>
 </plist>

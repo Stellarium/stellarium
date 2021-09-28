@@ -43,6 +43,10 @@
 
 TimezoneNameMap StelLocationMgr::locationDBToIANAtranslations;
 
+QList<GeoRegion> StelLocationMgr::regions;
+QMap<QString, QString> StelLocationMgr::countryCodeToRegionMap;
+QMap<QString, QString> StelLocationMgr::countryNameToCodeMap;
+
 #ifdef ENABLE_GPS
 #ifdef ENABLE_LIBGPS
 LibGPSLookupHelper::LibGPSLookupHelper(QObject *parent)
@@ -131,7 +135,11 @@ void LibGPSLookupHelper::query()
 //				emit queryError("GPSD query: No Fix.");
 //				return;
 //			}
+#if GPSD_API_MAJOR_VERSION < 9
 			if (newdata->online==0.0) // no device?
+#else
+			if (newdata->online.tv_sec == 0 && newdata->online.tv_nsec == 0) // no device?
+#endif
 			{
 				// This can happen when unplugging the GPS while running Stellarium,
 				// or running gpsd with no GPS receiver.
@@ -158,7 +166,11 @@ void LibGPSLookupHelper::query()
 				//qDebug() << "newdata->online=" << newdata->online;
 				qDebug() << "Solution from " << newdata->satellites_used << "out of " << newdata->satellites_visible << " visible Satellites.";
 				dop_t dop=newdata->dop;
+#if GPSD_API_MAJOR_VERSION < 9
 				qDebug() << "GPSD data: Long" << newdata->fix.longitude << "Lat" << newdata->fix.latitude << "Alt" << newdata->fix.altitude;
+#else
+				qDebug() << "GPSD data: Long" << newdata->fix.longitude << "Lat" << newdata->fix.latitude << "Alt" << newdata->fix.altHAE;
+#endif
 				qDebug() << "Dilution of Precision:";
 				qDebug() << " - xdop:" << dop.xdop << "ydop:" << dop.ydop;
 				qDebug() << " - pdop:" << dop.pdop << "hdop:" << dop.hdop;
@@ -183,7 +195,11 @@ void LibGPSLookupHelper::query()
 			}
 			else
 			{
+#if GPSD_API_MAJOR_VERSION < 9
 				loc.altitude=static_cast<int>(newdata->fix.altitude);
+#else
+				loc.altitude=static_cast<int>(newdata->fix.altHAE);
+#endif
 				if (verbose)
 				{
 					qDebug() << "GPSDfix " << fixmode << ": Location" << QString("lat %1, long %2, alt %3").arg(loc.latitude).arg(loc.longitude).arg(loc.altitude);
@@ -442,12 +458,22 @@ StelLocationMgr::StelLocationMgr()
 		locationDBToIANAtranslations.insert("Asia/Rangoon",      "Asia/Yangon");  // UTC+6:30 Yangon missing on Ubuntu/Qt5.5.1.
 		locationDBToIANAtranslations.insert("Asia/Yangon",       "Asia/Rangoon"); // This can translate from the binary location file back to the zone name as known on Windows.
 		locationDBToIANAtranslations.insert( "", "UTC");
+		// Missing on Qt5.9.5/Ubuntu 18.04.4
+		locationDBToIANAtranslations.insert("America/Godthab",   "UTC-03:00");
+		// Missing on Qt5.12.10/Win7
+		locationDBToIANAtranslations.insert("Asia/Qostanay",   "UTC+06:00"); // no DST; https://www.zeitverschiebung.net/en/timezone/asia--qostanay
+		locationDBToIANAtranslations.insert("Europe/Saratov",  "UTC+04:00"); // no DST; https://www.zeitverschiebung.net/en/timezone/europe--saratov
+		locationDBToIANAtranslations.insert("Asia/Atyrau",     "UTC+05:00"); // no DST; https://www.zeitverschiebung.net/en/timezone/asia--atyrau
+		locationDBToIANAtranslations.insert("Asia/Famagusta",  "Asia/Nicosia"); // Asia/Nicosia has no DST, but Asia/Famagusta has DST!
+		locationDBToIANAtranslations.insert("America/Punta_Arenas",  "UTC-03:00"); // no DST; https://www.zeitverschiebung.net/en/timezone/america--punta_arenas
 		// N.B. Further missing TZ names will be printed out in the log.txt. Resolve these by adding into this list.
 		// TODO later: create a text file in user data directory, and auto-update it weekly.
 	}
 
 	QSettings* conf = StelApp::getInstance().getSettings();
 
+	loadCountries();
+	loadRegions();
 	// The line below allows to re-generate the location file, you still need to gunzip it manually afterward.
 	if (conf->value("devel/convert_locations_list", false).toBool())
 		generateBinaryLocationFile("data/base_locations.txt", false, "data/base_locations.bin");
@@ -456,7 +482,7 @@ StelLocationMgr::StelLocationMgr()
 	locations.unite(loadCities("data/user_locations.txt", true));
 	
 	// Init to Paris France because it's the center of the world.
-	lastResortLocation = locationForString(conf->value("init_location/last_location", "Paris, France").toString());
+	lastResortLocation = locationForString(conf->value("init_location/last_location", "Paris, Western Europe").toString());
 }
 
 StelLocationMgr::~StelLocationMgr()
@@ -480,7 +506,7 @@ StelLocationMgr::StelLocationMgr(const LocationList &locations)
 
 	QSettings* conf = StelApp::getInstance().getSettings();
 	// Init to Paris France because it's the center of the world.
-	lastResortLocation = locationForString(conf->value("init_location/last_location", "Paris, France").toString());
+	lastResortLocation = locationForString(conf->value("init_location/last_location", "Paris, Western Europe").toString());
 }
 
 void StelLocationMgr::setLocations(const LocationList &locations)
@@ -640,11 +666,11 @@ static float parseAngle(const QString& s, bool* ok)
 	QRegExp reg("([+-]?[\\d.]+)°(?:([\\d.]+)')?(?:([\\d.]+)\")?");
 	if (reg.exactMatch(s))
 	{
-		float deg = reg.capturedTexts()[1].toFloat(ok);
+		float deg = reg.cap(1).toFloat(ok);
 		if (!*ok) return 0;
-		float min = reg.capturedTexts()[2].isEmpty()? 0 : reg.capturedTexts()[2].toFloat(ok);
+		float min = reg.cap(2).isEmpty()? 0 : reg.cap(2).toFloat(ok);
 		if (!*ok) return 0;
-		float sec = reg.capturedTexts()[3].isEmpty()? 0 : reg.capturedTexts()[3].toFloat(ok);
+		float sec = reg.cap(3).isEmpty()? 0 : reg.cap(3).toFloat(ok);
 		if (!*ok) return 0;
 		return deg + min / 60 + sec / 3600;
 	}
@@ -658,6 +684,20 @@ const StelLocation StelLocationMgr::locationForString(const QString& s) const
 	{
 		return iter.value();
 	}
+	// Maybe this is a city and country names (old format of the data)?
+	QRegExp cnreg("(.+),\\s+(.+)$");
+	if (cnreg.exactMatch(s))
+	{
+		// NOTE: This method will give wrong data for some Russians and U.S. locations
+		//       (Asian locations for Russia and for locations on Hawaii for U.S.)
+		QString city = cnreg.cap(1).trimmed();
+		QString country = cnreg.cap(2).trimmed();
+		auto iter = locations.find(QString("%1, %2").arg(city, pickRegionFromCountry(country)));
+		if (iter!=locations.end())
+		{
+			return iter.value();
+		}
+	}
 	StelLocation ret;
 	// Maybe it is a coordinate set with elevation?
 	QRegExp csreg("(.+),\\s*(.+),\\s*(.+)");
@@ -665,11 +705,11 @@ const StelLocation StelLocationMgr::locationForString(const QString& s) const
 	{
 		bool ok;
 		// We have a set of coordinates
-		ret.latitude = parseAngle(csreg.capturedTexts()[1].trimmed(), &ok);
+		ret.latitude = parseAngle(csreg.cap(1).trimmed(), &ok);
 		if (!ok) ret.role = '!';
-		ret.longitude = parseAngle(csreg.capturedTexts()[2].trimmed(), &ok);
+		ret.longitude = parseAngle(csreg.cap(2).trimmed(), &ok);
 		if (!ok) ret.role = '!';
-		ret.altitude = csreg.capturedTexts()[3].trimmed().toInt(&ok);
+		ret.altitude = csreg.cap(3).trimmed().toInt(&ok);
 		if (!ok) ret.role = '!';
 		ret.name = QString("%1, %2").arg(QString::number(ret.latitude, 'f', 2), QString::number(ret.longitude, 'f', 2));
 		ret.planetName = "Earth";
@@ -681,11 +721,11 @@ const StelLocation StelLocationMgr::locationForString(const QString& s) const
 	{
 		bool ok;
 		// We have a set of coordinates
-		ret.latitude = parseAngle(reg.capturedTexts()[2].trimmed(), &ok);
+		ret.latitude = parseAngle(reg.cap(2).trimmed(), &ok);
 		if (!ok) ret.role = '!';
-		ret.longitude = parseAngle(reg.capturedTexts()[3].trimmed(), &ok);
+		ret.longitude = parseAngle(reg.cap(3).trimmed(), &ok);
 		if (!ok) ret.role = '!';
-		ret.name = reg.capturedTexts()[1].trimmed();
+		ret.name = reg.cap(1).trimmed();
 		ret.planetName = "Earth";
 		return ret;
 	}
@@ -708,6 +748,7 @@ const StelLocation StelLocationMgr::locationFromCLI() const
 	ret.landscapeKey = conf->value("landscape_name", "guereins").toString();
 	conf->endGroup();
 	conf->remove("location_run_once");
+	ret.state="CLI"; // flag this location with a marker for handling in LandscapeMgr::init(). state is not displayed anywhere, so I expect no issues from that.
 	return ret;
 }
 
@@ -986,7 +1027,7 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 			StelLocation loc;
 			loc.name    = (ipCity.isEmpty() ? QString("%1, %2").arg(latitude).arg(longitude) : ipCity);
 			loc.state   = (ipRegion.isEmpty() ? "IPregion"  : ipRegion);
-			loc.country = StelLocaleMgr::countryCodeToString(ipCountryCode.isEmpty() ? "" : ipCountryCode.toLower());
+			loc.region = pickRegionFromCountryCode(ipCountryCode.isEmpty() ? "" : ipCountryCode.toLower());
 			loc.role    = QChar(0x0058); // char 'X'
 			loc.population = 0;
 			loc.latitude = latitude;
@@ -1036,7 +1077,7 @@ LocationMap StelLocationMgr::pickLocationsNearby(const QString planetName, const
 	return results;
 }
 
-LocationMap StelLocationMgr::pickLocationsInCountry(const QString country)
+LocationMap StelLocationMgr::pickLocationsInRegion(const QString region)
 {
 	QMap<QString, StelLocation> results;
 	QMapIterator<QString, StelLocation> iter(locations);
@@ -1044,12 +1085,154 @@ LocationMap StelLocationMgr::pickLocationsInCountry(const QString country)
 	{
 		iter.next();
 		const StelLocation *loc=&iter.value();
-		if (loc->country == country)
+		if (loc->region == region)
 		{
 			results.insert(iter.key(), iter.value());
 		}
 	}
 	return results;
+}
+
+void StelLocationMgr::loadCountries()
+{
+	// Load ISO 3166-1 two-letter country codes from file
+	// The format is "[code][tab][country name containing spaces][newline]"
+	countryNameToCodeMap.clear();
+	QFile textFile(StelFileMgr::findFile("data/iso3166.tab"));
+	if(textFile.open(QFile::ReadOnly | QFile::Text))
+	{
+		QString line;
+		int readOk=0;
+		while(!textFile.atEnd())
+		{
+			line = QString::fromUtf8(textFile.readLine());
+			if (line.startsWith("//") || line.startsWith("#") || line.isEmpty())
+				continue;
+
+			if (!line.isEmpty())
+			{
+				#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+				QStringList list=line.split("\t", Qt::KeepEmptyParts);
+				#else
+				QStringList list=line.split("\t", QString::KeepEmptyParts);
+				#endif
+				QString code = list.at(0).trimmed().toLower();
+				QString country = list.at(1).trimmed().replace("&", "and");
+				countryNameToCodeMap.insert(country, code);
+				readOk++;
+			}
+		}
+		textFile.close();
+		if (readOk>0)
+			qDebug() << "Loaded" << readOk << "countries";
+		else
+			qDebug() << "ERROR: List of countries was not loaded!";
+	}
+	// aliases for some countries to backward compatibility
+	countryNameToCodeMap.insert("Russian Federation", "ru");
+	countryNameToCodeMap.insert("Taiwan (Provice of China)", "tw");
+}
+
+void StelLocationMgr::loadRegions()
+{
+	QFile geoFile(StelFileMgr::findFile("data/regions-geoscheme.tab"));
+	if(geoFile.open(QFile::ReadOnly | QFile::Text))
+	{
+		QString line;
+		int readOk=0;
+		regions.clear();
+		countryCodeToRegionMap.clear();
+		while(!geoFile.atEnd())
+		{
+			line = QString::fromUtf8(geoFile.readLine());
+			if (line.startsWith("//") || line.startsWith("#") || line.isEmpty())
+				continue;
+
+			if (!line.isEmpty())
+			{
+				#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+				QStringList list=line.split("\t", Qt::KeepEmptyParts);
+				#else
+				QStringList list=line.split("\t", QString::KeepEmptyParts);
+				#endif
+
+				QString regionName = list.at(2).trimmed();
+				QString countries;
+				if (list.size()>3)
+					countries = list.at(3).trimmed().toLower();
+				GeoRegion region;
+				region.code = list.at(0).trimmed().toInt();
+				region.planet = list.at(1).trimmed();
+				region.regionName = regionName;
+				region.countries = countries;
+
+				if (!countries.isEmpty())
+				{
+					#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+					QStringList country=countries.split(",", Qt::KeepEmptyParts);
+					#else
+					QStringList country=countries.split(",", QString::KeepEmptyParts);
+					#endif
+					for (int i = 0; i<country.size(); i++)
+					{
+						countryCodeToRegionMap.insert(country.at(i), regionName);
+					}
+				}
+
+				regions.push_back(region);
+				readOk++;
+			}
+		}
+		geoFile.close();
+		if (readOk>0)
+			qDebug() << "Loaded" << readOk << "regions";
+		else
+			qDebug() << "ERROR: List of regions was not loaded!";
+	}
+}
+
+QStringList StelLocationMgr::getRegionNames(const QString& planet) const
+{
+	QStringList allregions;
+	if (planet.isEmpty())
+	{
+		for (int i=0;i<regions.size();i++)
+			allregions.append(regions.at(i).regionName);
+	}
+	else
+	{
+		for (int i=0;i<regions.size();i++)
+		{
+			if (planet.contains(regions.at(i).planet, Qt::CaseInsensitive) && !planet.contains("Observer", Qt::CaseInsensitive))
+				allregions.append(regions.at(i).regionName);
+		}
+	}
+
+	return allregions;
+}
+
+QString StelLocationMgr::pickRegionFromCountryCode(const QString countryCode)
+{
+	QMap<QString, QString>::ConstIterator i = countryCodeToRegionMap.find(countryCode);
+	return (i!=countryCodeToRegionMap.constEnd()) ? i.value() : QString();
+}
+
+QString StelLocationMgr::pickRegionFromCountry(const QString country)
+{
+	QMap<QString, QString>::ConstIterator i = countryNameToCodeMap.find(country);
+	QString code = (i!=countryNameToCodeMap.constEnd()) ? i.value() : QString();
+	return pickRegionFromCountryCode(code);
+}
+
+QString StelLocationMgr::pickRegionFromCode(int regionCode)
+{
+	QString region;
+	for(int i=0;i<regions.size();i++)
+	{
+		if (regions.at(i).code == regionCode)
+			region = regions.at(i).regionName;
+	}
+	return region;
 }
 
 // Check timezone string and return either the same or the corresponding string that we use in the Stellarium location database.
@@ -1100,7 +1283,7 @@ QStringList StelLocationMgr::getAllTimezoneNames() const
 	// Accept others after testing against sanitized names, and especially all UT+/- names!
 
 	auto tzList = QTimeZone::availableTimeZoneIds(); // System dependent set of IANA timezone names.
-	for (const auto& tz : tzList)
+	for (const auto& tz : qAsConst(tzList))
 	{
 		QString tzcand=sanitizeTimezoneStringFromLocationDB(tz); // try to find name as we use it in the program.
 		if (!ret.contains(tzcand))

@@ -60,6 +60,14 @@ class LandscapeMgr : public StelModule
 		   READ getFlagCardinalsPoints
 		   WRITE setFlagCardinalsPoints
 		   NOTIFY cardinalsPointsDisplayedChanged)
+	Q_PROPERTY(bool ordinalsPointsDisplayed
+		   READ getFlagOrdinalsPoints
+		   WRITE setFlagOrdinalsPoints
+		   NOTIFY ordinalsPointsDisplayedChanged)
+	Q_PROPERTY(bool ordinals16WRPointsDisplayed
+		   READ getFlagOrdinals16WRPoints
+		   WRITE setFlagOrdinals16WRPoints
+		   NOTIFY ordinals16WRPointsDisplayedChanged)
 	Q_PROPERTY(Vec3f cardinalsPointsColor
 		   READ getColorCardinalPoints
 		   WRITE setColorCardinalPoints
@@ -80,6 +88,14 @@ class LandscapeMgr : public StelModule
 		   READ getFlagLabels
 		   WRITE setFlagLabels
 		   NOTIFY labelsDisplayedChanged)
+	Q_PROPERTY(bool flagPolyLineDisplayedOnly
+		   READ getFlagPolyLineDisplayed
+		   WRITE setFlagPolyLineDisplayed
+		   NOTIFY flagPolyLineDisplayedChanged)
+	Q_PROPERTY(int polyLineThickness
+		   READ getPolyLineThickness
+		   WRITE setPolyLineThickness
+		   NOTIFY polyLineThicknessChanged)
 	Q_PROPERTY(bool flagUseLightPollutionFromDatabase
 		   READ getFlagUseLightPollutionFromDatabase
 		   WRITE setFlagUseLightPollutionFromDatabase
@@ -138,8 +154,11 @@ public:
 	//! - Set up landscape-related display flags from ini parser object
 	virtual void init();
 
-	//! Draw the landscape graphics, cardinal points and atmosphere.
+	//! Draw the atmosphere, landscape graphics, and cardinal points.
 	virtual void draw(StelCore* core);
+	//! Draw landscape graphics and cardinal points. This only will redraw a polygonal line (if defined), the gazetteer and the Cardinal points.
+	//! This can be called outside the usual call order, if any foreground has to be overdrawn, e.g. 3D sceneries.
+	void drawPolylineOnly(StelCore* core);
 
 	//! Update time-dependent state.
 	//! Includes:
@@ -296,6 +315,15 @@ public slots:
 	//! Set flag for displaying landscape labels
 	void setFlagLabels(const bool on);
 
+	//! Retrieve flag for rendering polygonal line (if one is defined)
+	bool getFlagPolyLineDisplayed() const {return flagPolyLineDisplayedOnly;}
+	//! Set flag for rendering polygonal line (if one is defined)
+	void setFlagPolyLineDisplayed(bool b) {if(b!=flagPolyLineDisplayedOnly){ flagPolyLineDisplayedOnly=b; emit flagPolyLineDisplayedChanged(b);}}
+	//! Retrieve thickness for rendering polygonal line (if one is defined)
+	int getPolyLineThickness() const {return polyLineThickness;}
+	//! Set thickness for rendering polygonal line (if one is defined)
+	void setPolyLineThickness(int thickness) {polyLineThickness=thickness; emit polyLineThicknessChanged(thickness);}
+
 	//! Return the value of the flag determining if a change of landscape will update the observer location.
 	bool getFlagLandscapeSetsLocation() const {return flagLandscapeSetsLocation;}
 	//! Set the value of the flag determining if a change of landscape will update the observer location.
@@ -318,10 +346,20 @@ public slots:
 	//! Return the value of flag usage light pollution (and bortle index) from locations database.
 	bool getFlagUseLightPollutionFromDatabase() const;
 
-	//! Get flag for displaying Cardinals Points.
+	//! Get flag for displaying cardinal points (4-wind compass rose directions)
 	bool getFlagCardinalsPoints() const;
-	//! Set flag for displaying Cardinals Points.
+	//! Set flag for displaying cardinal points (4-wind compass rose directions)
 	void setFlagCardinalsPoints(const bool displayed);
+
+	//! Get flag for displaying intercardinal (or ordinal) points (8-wind compass rose directions).
+	bool getFlagOrdinalsPoints() const;
+	//! Set flag for displaying intercardinal (or ordinal) points (8-wind compass rose directions).
+	void setFlagOrdinalsPoints(const bool displayed);
+
+	//! Get flag for displaying intercardinal (or ordinal) points (16-wind compass rose directions).
+	bool getFlagOrdinals16WRPoints() const;
+	//! Set flag for displaying intercardinal (or ordinal) points (16-wind compass rose directions).
+	void setFlagOrdinals16WRPoints(const bool displayed);
 
 	//! Get Cardinals Points color.
 	Vec3f getColorCardinalPoints() const;
@@ -456,11 +494,15 @@ public slots:
 signals:
 	void atmosphereDisplayedChanged(const bool displayed);
 	void cardinalsPointsDisplayedChanged(const bool displayed);
+	void ordinalsPointsDisplayedChanged(const bool displayed);
+	void ordinals16WRPointsDisplayedChanged(const bool displayed);
 	void cardinalsPointsColorChanged(const Vec3f & newColor) const;
 	void fogDisplayedChanged(const bool displayed);
 	void landscapeDisplayedChanged(const bool displayed);
 	void illuminationDisplayedChanged(const bool displayed);
 	void labelsDisplayedChanged(const bool displayed);
+	void flagPolyLineDisplayedChanged(const bool enabled);
+	void polyLineThicknessChanged(const int thickness);
 	void flagUseLightPollutionFromDatabaseChanged(const bool usage);
 	void flagLandscapeAutoSelectionChanged(const bool value);
 	void flagLandscapeSetsLocationChanged(const bool value);
@@ -548,6 +590,11 @@ private:
 	bool flagLandscapeAutoSelection;
 
 	bool flagLightPollutionFromDatabase;
+
+	//! control drawing of a Polygonal line, if one is defined.
+	bool flagPolyLineDisplayedOnly;
+	//! thickness of polygonal horizon line
+	int polyLineThickness;
 
 	//! Indicate use of the default minimal brightness value specified in config.ini.
 	bool flagLandscapeUseMinimalBrightness;
