@@ -142,7 +142,7 @@ bool StelSkyCultureMgr::setDefaultSkyCultureID(const QString& id)
 	
 QString StelSkyCultureMgr::getCurrentSkyCultureNameI18() const
 {
-	return q_(currentSkyCulture.englishName);
+	return qc_(currentSkyCulture.englishName, "sky culture");
 }
 
 QString StelSkyCultureMgr::getCurrentSkyCultureEnglishName() const
@@ -240,7 +240,7 @@ QStringList StelSkyCultureMgr::getSkyCultureListI18(void) const
 	while (i.hasNext())
 	{
 		i.next();
-		cultures += q_(i.value().englishName);
+		cultures += qc_(i.value().englishName, "sky culture");
 	}
 	// Sort for GUI use. Note that e.g. German Umlauts are sorted after Z. TODO: Fix this!
 	cultures.sort(Qt::CaseInsensitive);
