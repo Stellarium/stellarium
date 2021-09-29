@@ -929,16 +929,21 @@ void AstroCalcDialog::onChangedEphemerisPosition()
 double AstroCalcDialog::computeMaxElevation(StelObjectP obj)
 {
 	// NOTE: Without refraction!
-	double ra, dec;
+	double ra, dec, elevation;
 	const double lat = static_cast<double>(core->getCurrentLocation().latitude);
 	StelUtils::rectToSphe(&ra, &dec, obj->getEquinoxEquatorialPos(core));
-	dec*=M_180_PI;
+	dec *= M_180_PI;
 	if (lat>=0.)
+	{
 		// star between zenith and southern horizon, or between N pole and zenith
-		return (dec<=lat) ? (90. - lat + dec) : (90. + lat - dec)  *M_PI_180;
+		elevation = (dec<=lat) ? (90. - lat + dec) : (90. + lat - dec);
+	}
 	else
+	{
 		// star between zenith and north horizon, or between S pole and zenith
-		return (dec>=lat) ? (90. + lat - dec) : (90. - lat + dec) * M_PI_180;
+		elevation = (dec>=lat) ? (90. + lat - dec) : (90. - lat + dec);
+	}
+	return elevation * M_PI_180;
 }
 
 void AstroCalcDialog::populateCelestialCategoryList()
@@ -5439,53 +5444,18 @@ void AstroCalcDialog::calculateWutObjects()
 		const double altitudeLimitMin = ui->wutAltitudeMinSpinBox->valueDegrees();
 		const float magLimit = static_cast<float>(ui->wutMagnitudeDoubleSpinBox->value());
 		const double JD = core->getJD();
-		const double UTCOffset = core->getUTCOffset(JD) / 24.;
-		double wutJD, az, alt;
+		double alt;
 		float mag;
 		QSet<QString> objectsList;
 		QString designation, starName, constellation;
-		Vec4d rts;
 
 		ui->wutAngularSizeLimitCheckBox->setText(q_("Limit angular size:"));
 		ui->wutAngularSizeLimitCheckBox->setToolTip(q_("Set limits for angular size for visible celestial objects"));
 		ui->wutAngularSizeLimitMinSpinBox->setToolTip(q_("Minimal angular size for visible celestial objects"));
 		ui->wutAngularSizeLimitMaxSpinBox->setToolTip(q_("Maximum angular size for visible celestial objects"));
 
-		// Direct calculate sunrise/sunset
-		PlanetP sun = GETSTELMODULE(SolarSystem)->getSun();
-		double sunset = -1, sunrise = -1, midnight = -1, lc = 100.0;
-		bool flag = false;
-		for (int i = 0; i < 288; i++) // Check position every 5 minutes...
-		{
-			wutJD = static_cast<int>(JD) - UTCOffset + i * 0.0034722;
-			core->setJD(wutJD);
-			core->update(0);
-			StelUtils::rectToSphe(&az, &alt, sun->getAltAzPosAuto(core));
-			alt = std::fmod(alt, 2.0 * M_PI) * 180. / M_PI;
-			if (alt >= -7. && alt <= -5.)
-			{
-				if (!flag)
-				{
-					sunset = wutJD;
-					flag = true;
-				}
-				else
-					sunrise = wutJD;
-			}
-
-			if (alt < lc)
-			{
-				midnight = wutJD;
-				lc = alt;
-			}
-		}
-		core->setJD(JD);
-
-		if (sunset<0.)
-			sunset = midnight - 0.25;
-		if (sunrise<0.)
-			sunrise = midnight + 0.25;
-
+		// Direct calculate sunrise/sunset (civil twilight)
+		Vec4d rts = GETSTELMODULE(SolarSystem)->getSun()->getRTSTime(core, -7.);
 		QList<double> wutJDList;
 		wutJDList.clear();
 
@@ -5493,16 +5463,16 @@ void AstroCalcDialog::calculateWutObjects()
 		switch (wut->itemData(wut->currentIndex()).toInt())
 		{
 			case 1: // Morning
-				wutJDList << sunrise;
+				wutJDList << rts[0];
 				break;
 			case 2: // Night
-				wutJDList << midnight;
+				wutJDList << rts[1] + 0.5;
 				break;
 			case 3:
-				wutJDList << sunrise << midnight << sunset;
+				wutJDList << rts[0] << rts[1] + 0.5 << rts[2];
 				break;
 			default: // Evening
-				wutJDList << sunset;
+				wutJDList << rts[2];
 				break;
 		}
 
@@ -5529,7 +5499,7 @@ void AstroCalcDialog::calculateWutObjects()
 						stars = bariumStars;
 					else
 						stars = carbonStars;
-					for (const auto& object : stars)
+					for (const auto& object : qAsConst(stars))
 					{
 						// Filter for angular size is not applicable
 						mag = object->getVMagnitude(core);
