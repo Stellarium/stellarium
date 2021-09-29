@@ -28,7 +28,8 @@
 
 OnlineQueriesDialog::OnlineQueriesDialog(QObject* parent) :
 	StelDialog("OnlineQueries", parent),
-	plugin(Q_NULLPTR)
+	plugin(Q_NULLPTR),
+	view(Q_NULLPTR)
 {
 	setObjectName("OnlineQueriesDialog");
 	ui = new Ui_onlineQueriesDialogForm;
@@ -50,9 +51,12 @@ void OnlineQueriesDialog::retranslate()
 void OnlineQueriesDialog::createDialogContent()
 {
 	plugin = GETSTELMODULE(OnlineQueries);
+	Q_ASSERT(plugin);
 
 	//load UI from form file
 	ui->setupUi(dialog);
+	view=ui->webEngineView; Q_ASSERT(view);
+    qDebug() << "view connected";
 
 	//hook up retranslate event
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
@@ -102,15 +106,21 @@ void OnlineQueriesDialog::createDialogContent()
 		ui->tabWidget->setTabText(ui->tabWidget->count()-1, qc_("(Custom 3)", "tab title"));
 		ui->tabWidget->setTabEnabled(ui->tabWidget->count()-1, false);
 	}
+    qDebug() << "dialog created";
+
 }
 
 // TODO: Maybe allow setting a stylesheet? GCVS would be nicer with Courier font.
 void OnlineQueriesDialog::setOutputHtml(QString html)
 {
+    qDebug() << "setOutputHtml...";
 	if (ui->onlineQueriesTextBrowser)
 	{
 		ui->onlineQueriesTextBrowser->setHtml(html);
 		ui->onlineQueriesTextBrowser->setOpenExternalLinks(true);
 	}
+    qDebug() << "setOutputHtml...view";
+    //view->setHtml(html);
+    qDebug() << "setOutputHtml...done";
 }
 

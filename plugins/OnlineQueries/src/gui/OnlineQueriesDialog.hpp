@@ -23,6 +23,7 @@
 
 #include "StelDialog.hpp"
 #include "ui_onlineQueriesDialog.h"
+#include <QtWebEngineWidgets/QWebEngineView>
 
 class OnlineQueries;
 
@@ -45,6 +46,7 @@ private slots:
 private:
 	Ui_onlineQueriesDialogForm* ui;
 	OnlineQueries* plugin;
+	QWebEngineView *view;
 };
 
 #endif
