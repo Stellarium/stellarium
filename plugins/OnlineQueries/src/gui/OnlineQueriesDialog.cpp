@@ -55,7 +55,7 @@ void OnlineQueriesDialog::createDialogContent()
 
 	//load UI from form file
 	ui->setupUi(dialog);
-	view=ui->webEngineView; Q_ASSERT(view);
+    view=ui->webEngineView; Q_ASSERT(view);
     qDebug() << "view connected";
 
 	//hook up retranslate event
@@ -120,7 +120,7 @@ void OnlineQueriesDialog::setOutputHtml(QString html)
 		ui->onlineQueriesTextBrowser->setOpenExternalLinks(true);
 	}
     qDebug() << "setOutputHtml...view";
-    //view->setHtml(html);
+    view->setUrl(plugin->getCustomUrl2());
     qDebug() << "setOutputHtml...done";
 }
 
