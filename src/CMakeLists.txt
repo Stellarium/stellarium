@@ -736,15 +736,17 @@ IF(ENABLE_TESTING)
     ADD_TEST(testVecMath testVecMath)
     SET_TARGET_PROPERTIES(testVecMath PROPERTIES FOLDER "src/tests")
 
-    SET(tests_testJavaScripting_SRCS
-        tests/testJavaScripting.hpp
-        tests/testJavaScripting.cpp
-    )
-    ADD_EXECUTABLE(testJavaScripting ${tests_testJavaScripting_SRCS})
-    TARGET_LINK_LIBRARIES(testJavaScripting ${TESTS_LIBRARIES})
-    ADD_DEPENDENCIES(buildTests testJavaScripting)
-    ADD_TEST(testJavaScripting testJavaScripting)
-    SET_TARGET_PROPERTIES(testJavaScripting PROPERTIES FOLDER "src/tests")
+    IF(ENABLE_SCRIPTING)
+        SET(tests_testJavaScripting_SRCS
+            tests/testJavaScripting.hpp
+            tests/testJavaScripting.cpp
+        )
+        ADD_EXECUTABLE(testJavaScripting ${tests_testJavaScripting_SRCS})
+        TARGET_LINK_LIBRARIES(testJavaScripting ${TESTS_LIBRARIES})
+        ADD_DEPENDENCIES(buildTests testJavaScripting)
+        ADD_TEST(testJavaScripting testJavaScripting)
+        SET_TARGET_PROPERTIES(testJavaScripting PROPERTIES FOLDER "src/tests")
+    ENDIF(ENABLE_SCRIPTING)
 	
     SET(tests_testStelProjector_SRCS
         tests/testStelProjector.hpp
