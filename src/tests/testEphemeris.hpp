@@ -77,6 +77,7 @@ private slots:
 
 	void testL12Theory();
 	void testMarsSatTheory();
+	void testHTC20Theory();
 
 private:
 	QString de430FilePath, de431FilePath, de440FilePath, de441FilePath;
