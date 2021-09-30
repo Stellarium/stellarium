@@ -2194,7 +2194,7 @@ void TestEphemeris::testVenusHeliocentricEphemerisDe441()
 	else
 	{
 		const int planet_id = 2; // Venus (JPL ID)
-		const double acceptableError = 1E-05;
+		const double acceptableError = 1E-04;
 		double jd, x, y, z;
 		double xyz[6];
 
