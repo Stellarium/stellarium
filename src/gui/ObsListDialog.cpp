@@ -47,7 +47,7 @@ ObsListDialog::ObsListDialog ( QObject* parent ) : StelDialog ( "Observing list"
 	objectMgr = GETSTELMODULE ( StelObjectMgr );
 	labelMgr = GETSTELMODULE ( LabelMgr );
 	obsListListModel = new QStandardItemModel ( 0,ColumnCount );
-	observingListJsonPath = StelFileMgr::findFile ( "data", ( StelFileMgr::Flags ) ( StelFileMgr::Directory|StelFileMgr::Writable ) ) + "/" + QString ( JSON_FILE_NAME );
+	observingListJsonPath = StelFileMgr::findFile ( "data", static_cast<StelFileMgr::Flags>( StelFileMgr::Directory|StelFileMgr::Writable ) ) + "/" + QString ( JSON_FILE_NAME );
 	createEditDialog_instance = Q_NULLPTR;
 	defaultListUuid_ = "";
 }
@@ -399,7 +399,7 @@ void ObsListDialog::loadObservingList ( QString listUuid )
 
 								QString objectType = selectedObject[0]->getType();
 
-								float ra, dec;
+								double ra, dec;
 								StelUtils::rectToSphe ( &ra, &dec, selectedObject[0]->getJ2000EquatorialPos ( core ) );
 								objectRaStr = StelUtils::radToHmsStr ( ra, false ).trimmed();
 								objectDecStr = StelUtils::radToDmsStr ( dec, false ).trimmed();
@@ -584,13 +584,13 @@ void ObsListDialog::selectAndGoToObject ( QModelIndex index )
 
 			Vec3d winpos;
 			prj->project ( pos, winpos );
-			float xpos = winpos[0];
-			float ypos = winpos[1];
-			float best_object_value = 1000.f;
+			double xpos = winpos[0];
+			double ypos = winpos[1];
+			double best_object_value = 1000.;
 			for ( const auto& obj : candidates )
 			{
 				prj->project ( obj->getJ2000EquatorialPos ( core ), winpos );
-				float distance = std::sqrt ( ( xpos-winpos[0] ) * ( xpos-winpos[0] ) + ( ypos-winpos[1] ) * ( ypos-winpos[1] ) );
+				double distance = std::sqrt ( ( xpos-winpos[0] ) * ( xpos-winpos[0] ) + ( ypos-winpos[1] ) * ( ypos-winpos[1] ) );
 				if ( distance < best_object_value )
 				{
 					best_object_value = distance;

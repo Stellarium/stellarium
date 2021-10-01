@@ -48,7 +48,7 @@ ObsListCreateEditDialog::ObsListCreateEditDialog ( string listUuid )
 	core = StelApp::getInstance().getCore();
 	objectMgr = GETSTELMODULE ( StelObjectMgr );
 	obsListListModel = new QStandardItemModel ( 0,ColumnCount );
-	observingListJsonPath = StelFileMgr::findFile ( "data", ( StelFileMgr::Flags ) ( StelFileMgr::Directory|StelFileMgr::Writable ) ) + "/" + QString ( JSON_FILE_NAME );
+	observingListJsonPath = StelFileMgr::findFile ( "data", static_cast<StelFileMgr::Flags>( StelFileMgr::Directory|StelFileMgr::Writable ) ) + "/" + QString ( JSON_FILE_NAME );
 	sorting = "";
 }
 
@@ -247,7 +247,7 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed()
 
 			QString objectType = selectedObject[0]->getType();
 
-			float ra, dec;
+			double ra, dec;
 			StelUtils::rectToSphe ( &ra, &dec, selectedObject[0]->getJ2000EquatorialPos ( core ) );
 			objectRaStr = StelUtils::radToHmsStr ( ra, false ).trimmed();
 			objectDecStr = StelUtils::radToDmsStr ( dec, false ).trimmed();
@@ -638,7 +638,7 @@ void ObsListCreateEditDialog::loadObservingList()
 
 							QString objectType = selectedObject[0]->getType();
 
-							float ra, dec;
+							double ra, dec;
 							StelUtils::rectToSphe ( &ra, &dec, selectedObject[0]->getJ2000EquatorialPos ( core ) );
 							objectRaStr = StelUtils::radToHmsStr ( ra, false ).trimmed();
 							objectDecStr = StelUtils::radToDmsStr ( dec, false ).trimmed();

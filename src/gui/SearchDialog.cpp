@@ -200,7 +200,7 @@ SearchDialog::SearchDialog(QObject* parent)
 	searchListModel = new CompletionListModel();
 
 	// Find recent object search data file
-	recentObjectSearchesJsonPath = StelFileMgr::findFile("data", (StelFileMgr::Flags)(StelFileMgr::Directory | StelFileMgr::Writable)) + "/recentObjectSearches.json";
+	recentObjectSearchesJsonPath = StelFileMgr::findFile("data", static_cast<StelFileMgr::Flags>(StelFileMgr::Directory | StelFileMgr::Writable)) + "/recentObjectSearches.json";
 }
 
 SearchDialog::~SearchDialog()
