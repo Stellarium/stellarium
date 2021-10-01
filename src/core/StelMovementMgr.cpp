@@ -260,7 +260,7 @@ void StelMovementMgr::bindingFOVActions()
 	for (int i = 0; i < defaultFOV.size(); ++i)
 	{
 		confval = QString("fov/quick_fov_%1").arg(i);
-		float cfov = conf->value(confval, defaultFOV.at(i)).toFloat();
+		const double cfov = conf->value(confval, defaultFOV.at(i)).toDouble();
 		tfov = QString::number(cfov, 'f', 2);
 		QString actionName = QString("actionSet_FOV_%1").arg(i);
 		QString actionDescription = QString("%1 #%2 (%3%4)").arg(fovText, QString::number(i), tfov, QChar(0x00B0));
@@ -268,7 +268,7 @@ void StelMovementMgr::bindingFOVActions()
 		if (action!=Q_NULLPTR)
 			actionMgr->findAction(actionName)->setText(actionDescription);
 		else
-			addAction(actionName, fovGroup, actionDescription, this, [=](){setFOVDeg(cfov);}, QString("Ctrl+Alt+%1").arg(i));
+			addAction(actionName, fovGroup, actionDescription, this, [=](){setFOVDeg(static_cast<float>(cfov));}, QString("Ctrl+Alt+%1").arg(i));
 	}
 }
 
