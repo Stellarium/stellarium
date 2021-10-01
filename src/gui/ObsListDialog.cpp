@@ -582,15 +582,10 @@ void ObsListDialog::selectAndGoToObject ( QModelIndex index )
 				candidates = GETSTELMODULE ( StarMgr )->searchAround ( pos, 0.5, core );
 			}
 
-			Vec3d winpos;
-			prj->project ( pos, winpos );
-			double xpos = winpos[0];
-			double ypos = winpos[1];
-			double best_object_value = 1000.;
+			double best_object_value = M_PI;
 			for ( const auto& obj : candidates )
 			{
-				prj->project ( obj->getJ2000EquatorialPos ( core ), winpos );
-				double distance = std::sqrt ( ( xpos-winpos[0] ) * ( xpos-winpos[0] ) + ( ypos-winpos[1] ) * ( ypos-winpos[1] ) );
+				double distance=pos.angle(obj->getJ2000EquatorialPos(core));
 				if ( distance < best_object_value )
 				{
 					best_object_value = distance;
