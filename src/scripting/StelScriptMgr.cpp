@@ -606,6 +606,13 @@ bool StelScriptMgr::runScriptDirect(const QString scriptId, const QString &scrip
 	return false;
 }
 
+bool StelScriptMgr::runScriptDirect(const QString& scriptCode, const QString &includePath)
+{
+	QString dummyId("directScript");
+	int dummyErrLoc;
+	return runScriptDirect(dummyId, scriptCode, dummyErrLoc, includePath);
+}
+
 bool StelScriptMgr::prepareScript( QString &script, const QString &fileName, const QString &includePath)
 {
 	QString absPath;

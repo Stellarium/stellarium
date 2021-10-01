@@ -162,6 +162,10 @@ public slots:
 	//! @return false if the named script code could not be prepared or run, true otherwise
 	bool runScriptDirect(const QString scriptId, const QString& scriptCode, int &errLoc, const QString &includePath = QString());
 
+	//! Convenience method similar to runScriptDirect(const QString scriptId, const QString& scriptCode, int &errLoc, const QString &includePath = QString());
+	//! when scriptId and errLoc are not relevant. (Required e.g. in RemoteControl)
+	bool runScriptDirect(const QString& scriptCode, const QString &includePath = QString());
+
 	//! Runs preprocessed script code which has been generated using runPreprocessedScript().
 	//! In general, you do not want to use this method, use runScript() or runScriptDirect() instead.
 	//! @note This is a blocking call! The event queue is held up by calls of QCoreApplication::processEvents().
