@@ -1568,30 +1568,16 @@ private:
 	double maxSqDistortion;
 };
 
-void StelPainter::drawStelVertexArray(const StelVertexArray& arr, bool checkDiscontinuity, Vec3d aberration)
+void StelPainter::drawStelVertexArray(const StelVertexArray& arr, bool checkDiscontinuity)
 {
 	if (checkDiscontinuity && prj->hasDiscontinuity())
 	{
 		// The projection has discontinuities, so we need to make sure that no triangle is crossing them.
-		drawStelVertexArray(arr.removeDiscontinuousTriangles(this->getProjector().data()), false, aberration);
+		drawStelVertexArray(arr.removeDiscontinuousTriangles(this->getProjector().data()), false);
 		return;
 	}
 
-	if (aberration==Vec3d(0.))
-	{
-		setVertexPointer(3, GL_DOUBLE, arr.vertex.constData());
-	}
-	else
-	{
-		QVector<Vec3d> aberredVertex(arr.vertex.size());
-		for (int i=0; i<arr.vertex.size(); i++)
-		{
-			Vec3d vec=arr.vertex.at(i)+aberration;
-			vec.normalize();
-			aberredVertex[i]=vec;
-			setVertexPointer(3, GL_DOUBLE, aberredVertex.constData());
-		}
-	}
+	setVertexPointer(3, GL_DOUBLE, arr.vertex.constData());
 	if (arr.isTextured())
 	{
 		setTexCoordPointer(2, GL_FLOAT, arr.texCoords.constData());

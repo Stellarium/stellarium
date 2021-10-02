@@ -322,9 +322,8 @@ public:
 	void drawFromArray(DrawingMode mode, int count, int offset=0, bool doProj=true, const unsigned short *indices=Q_NULLPTR);
 
 	//! Draws the primitives defined in the StelVertexArray.
-	//! @param checkDiscontinuity will check and suppress discontinuities if necessary.
-	//! @param aberration a vector which moves all vertices according to aberration effects. The vector must be transformed to the frame used in the array.
-	void drawStelVertexArray(const StelVertexArray& arr, bool checkDiscontinuity=true, Vec3d aberration=Vec3d(0.));
+	//! @param checkDiscontinuity will check and suppress discontinuities if necessary.	
+	void drawStelVertexArray(const StelVertexArray& arr, bool checkDiscontinuity=true);
 
 	//! Link an opengl program and show a message in case of error or warnings.
 	//! @return true if the link was successful.
