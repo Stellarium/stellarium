@@ -382,8 +382,8 @@ private:
 
 	//! Draw the constellation lines at the epoch given by the StelCore.
 	void drawLines(StelPainter& sPainter, const StelCore* core) const;
-	//! Draw the constellation art. obsVelocity required for aberration
-	void drawArt(StelPainter& sPainter, const Vec3d &obsVelocity) const;
+	//! Draw the constellation art.
+	void drawArt(StelPainter& sPainter) const;
 	//! Draw the constellation name labels.
 	void drawNames(StelPainter& sPainter, const Vec3d &obsVelocity) const;
 	//! Draw the constellation boundaries.

@@ -154,7 +154,7 @@ void Constellation::drawName(StelPainter& sPainter, ConstellationMgr::Constellat
 	}
 }
 
-void Constellation::drawArtOptim(StelPainter& sPainter, const SphericalRegion& region, const Vec3d& obsVelocity) const
+void Constellation::drawArtOptim(StelPainter& sPainter, const SphericalRegion& region) const
 {
 	if (checkVisibility())
 	{
@@ -167,7 +167,7 @@ void Constellation::drawArtOptim(StelPainter& sPainter, const SphericalRegion& r
 			if (artTexture->bind()==false)
 				return;
 
-			sPainter.drawStelVertexArray(artPolygon, false, obsVelocity);
+			sPainter.drawStelVertexArray(artPolygon, false);
 		}
 	}
 }

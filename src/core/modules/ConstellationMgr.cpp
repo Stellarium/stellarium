@@ -692,12 +692,12 @@ void ConstellationMgr::draw(StelCore* core)
 		vel*=core->getAberrationFactor() * (AU/(86400.0*SPEED_OF_LIGHT));
 	}
 	drawNames(sPainter, vel);
-	drawArt(sPainter, vel);
+	drawArt(sPainter);
 	drawBoundaries(sPainter, vel);
 }
 
 // Draw constellations art textures
-void ConstellationMgr::drawArt(StelPainter& sPainter, const Vec3d &obsVelocity) const
+void ConstellationMgr::drawArt(StelPainter& sPainter) const
 {
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
 	sPainter.setCullFace(true);
@@ -705,7 +705,7 @@ void ConstellationMgr::drawArt(StelPainter& sPainter, const Vec3d &obsVelocity) 
 	SphericalRegionP region = sPainter.getProjector()->getViewportConvexPolygon();
 	for (auto* constellation : constellations)
 	{
-		constellation->drawArtOptim(sPainter, *region, obsVelocity);
+		constellation->drawArtOptim(sPainter, *region);
 	}
 
 	sPainter.setCullFace(false);

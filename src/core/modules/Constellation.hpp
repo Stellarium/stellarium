@@ -111,8 +111,8 @@ private:
 	//! This method uses the coords of the stars (optimized for use through
 	//! the class ConstellationMgr only).
 	void drawOptim(StelPainter& sPainter, const StelCore* core, const SphericalCap& viewportHalfspace) const;
-	//! Draw the art texture, optimized function to be called through a constellation manager only.  obsVelocity used for aberration
-	void drawArtOptim(StelPainter& sPainter, const SphericalRegion& region, const Vec3d& obsVelocity) const;
+	//! Draw the art texture, optimized function to be called through a constellation manager only.
+	void drawArtOptim(StelPainter& sPainter, const SphericalRegion& region) const;
 	//! Update fade levels according to time since various events.
 	void update(int deltaTime);
 	//! Turn on and off Constellation line rendering.
