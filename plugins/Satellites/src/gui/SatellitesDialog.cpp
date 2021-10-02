@@ -702,6 +702,7 @@ void SatellitesDialog::populateAboutPage()
 	html += "<tr><td>Nick Fedoseev &lt;nick.ut2uz@gmail.com&gt;</td></tr>";
 #endif
 	html += "<tr><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
+	html += "<tr><td>Alexander Duytschaever</td></tr>";
 	html += "<tr><td>Georg Zotti</td></tr></table>";
 
 	html += "<p>" + q_("The Satellites plugin predicts the positions of artificial satellites in Earth orbit.") + "</p>";
