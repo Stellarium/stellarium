@@ -4506,11 +4506,9 @@ Vec4d Planet::getRTSTime(const StelCore *core, const double altitude) const
 	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("set     ~ %1<br/>").arg(StelUtils::julianDayToISO8601String(currentJD+ms)));
 
 	// 4. Find correction for transit:
-	//double ra_mt=StelUtils::interpolate5(mt, ra0, ra1, ra2, ra3, ra4);
 	double ra_mt=StelUtils::interpolate3(mt, ra1, ra2, ra3);
 	double ht=StelUtils::fmodpos(Theta2-ra_mt, 2.*M_PI); if (ht>M_PI) ht-=2.*M_PI; // Hour angle of the transit RA at currentJD. This should be [-pi, pi]
 	mt=-ht*(0.5*rotRate/M_PI); // moment in units of day from currentJD
-	////mt=-ht*(0.5/M_PI); // moment in units of day
 	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("&alpha;<sub>t</sub>': %1=%2 <br/>").arg(QString::number(ra_mt, 'f', 4)).arg(StelUtils::radToHmsStr(ra_mt, true)));
 	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("h<sub>t</sub>': %1 = %2<br/>").arg(QString::number(ht, 'f', 6)).arg(StelUtils::radToHmsStr(ht, true)));
 	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>t</sub>' = %1<br/>").arg(QString::number(mt, 'f', 6)));
