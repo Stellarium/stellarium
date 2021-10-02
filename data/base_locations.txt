@@ -35,7 +35,7 @@ Al Ain City	Abu Dhabi	16	N	55.091	24.19167N	55.76056E	275	6	Asia/Dubai
 Ajman City	Ajman	16	R	490.035	25.40177N	55.47878E	2	7	Asia/Dubai
 Adh Dhayd	Sharjah	16	N	24.716	25.28812N	55.88157E	114	5	Asia/Dubai
 Abu Dhabi	Abu Dhabi	16	C	603.492	24.45118N	54.39696E	6	8	Asia/Dubai
-Khalifah A City	Abu Dhabi	16	N	85.374	24.42588N	54.605E	1	6	Asia/Dubai
+Khalifah A City	Abu Dhabi	16	N	85.374	24.42588N	54.605E	0	6	Asia/Dubai
 Bani Yas City	Abu Dhabi	16	N	80.498	24.30978N	54.62944E	16	6	Asia/Dubai
 Musaffah	Abu Dhabi	16	N	243.341	24.35893N	54.48267E	10	7	Asia/Dubai
 Al Shamkhah City	Abu Dhabi	16	N	61.71	24.39268N	54.70779E	18	6	Asia/Dubai
@@ -378,7 +378,7 @@ Aguilares	Tucuman	08	N	32.494	27.4338S	65.61427W	375	5	America/Argentina/Tucuman
 Balvanera	Buenos Aires F.D.	08	N	152.198	34.61032S	58.39766W	35	7	America/Argentina/Buenos_Aires
 Villa Santa Rita	Buenos Aires F.D.	08	N	34	34.61082S	58.481W	25	5	America/Argentina/Buenos_Aires
 Villa Mercedes	San Luis	08	N	96.781	33.67571S	65.45783W	516	6	America/Argentina/San_Luis
-San Miguel	Buenos Aires	08	N	157.532	34.54335S	58.71229W	30	7	America/Argentina/Buenos_Aires
+San Miguel	Buenos Aires	08	N	157.532	34.54335S	58.71229W	37	7	America/Argentina/Buenos_Aires
 San Carlos de Bariloche	Rio Negro	08	N	95.394	41.14557S	71.30822W	839	6	America/Argentina/Salta
 Adrogue	Buenos Aires	08	N	28.265	34.80041S	58.38384W	28	5	America/Argentina/Buenos_Aires
 Ingeniero Pablo Nogues	Buenos Aires	08	N	38.47	34.47775S	58.70652W	15	5	America/Argentina/Buenos_Aires
@@ -414,7 +414,7 @@ Klagenfurt am Woerthersee	Carinthia	20	R	90.61	46.62472N	14.30528E	450	6	Europe/
 Innsbruck	Tyrol	20	R	132.493	47.26266N	11.39454E	587	7	Europe/Vienna
 Innere Stadt	Vienna	20	N	16.45	48.20906N	16.37135E	190	5	Europe/Vienna
 Hoetting	Tyrol	20	N	35.043	47.26815N	11.36868E	666	5	Europe/Vienna
-Hohenems	Vorarlberg	20	N	16.317	47.36667N	9.68306E	417	5	Europe/Vienna
+Hohenems	Vorarlberg	20	N	16.317	47.36121N	9.68694E	522	5	Europe/Vienna
 Hietzing	Vienna	20	N	54.265	48.18623N	16.2965E	201	6	Europe/Vienna
 Hernals	Vienna	20	N	57.546	48.23333N	16.26667E	339	6	Europe/Vienna
 Graz	Styria	20	R	222.326	47.06667N	15.45E	363	7	Europe/Vienna
@@ -707,7 +707,6 @@ Altona Meadows	Victoria	21	N	18.874	37.88413S	144.78367E	9	5	Australia/Melbourne
 Hurstville	New South Wales	21	N	29.744	33.9677S	151.10149E	80	5	Australia/Sydney
 West Pennant Hills	New South Wales	21	N	16.162	33.7457S	151.04764E	167	5	Australia/Sydney
 Melbourne City Centre	Victoria	21	N	60.057	37.81501S	144.96657E	32	6	Australia/Melbourne
-Brisbane central business district	Queensland	21	N	2439.467	27.47134S	153.02736E	17	9	Australia/Brisbane
 Adelaide city centre	South Australia	21	N	19.82	34.92873S	138.60334E	58	5	Australia/Adelaide
 Wollongong city centre	New South Wales	21	N	19.108	34.4279S	150.89268E	10	5	Australia/Sydney
 Tanki Leendert		06	N	21.5	12.53914N	70.02004W	26	5	America/Aruba
@@ -890,7 +889,7 @@ Sherpur	Mymensingh Division	15	N	107.419	25.01881N	90.01751E	25	7	Asia/Dhaka
 Kishorganj	Dhaka	15	N	90.69	24.43944N	90.78291E	16	6	Asia/Dhaka
 Manikchari	Chittagong	15	N	24.813	22.83957N	91.84128E	33	5	Asia/Dhaka
 Bhandaria	Barisal	15	N	30.219	22.48898N	90.06273E	13	5	Asia/Dhaka
-Bibir Hat	Chittagong	15	N	89.03	22.68347N	91.79058E	14	6	Asia/Dhaka
+Bibir Hat	Chittagong	15	N	89.03	22.68347N	91.79058E	13	6	Asia/Dhaka
 Saidpur	Rangpur Division	15	N	199.422	25.77769N	88.89169E	43	7	Asia/Dhaka
 Puthia	Rajshahi Division	15	N	159.406	24.36537N	88.83431E	20	7	Asia/Dhaka
 Natore	Rajshahi Division	15	N	369.138	24.41112N	88.98673E	22	7	Asia/Dhaka
@@ -2502,7 +2501,7 @@ Sinop	Mato Grosso	08	N	116.013	11.86417S	55.5025W	378	7	America/Cuiaba
 Tucuma	Para	08	N	38.508	6.7475S	51.16111W	302	5	America/Belem
 Xinguara	Para	08	N	43.53	7.09829S	49.9435W	252	5	America/Belem
 Cambebba	Ceara	08	N	0	3.62092S	38.82913W	41		America/Fortaleza
-Jardim Paulista	Sao Paulo	08	N	83.667	23.56675S	46.66439W	629	6	America/Sao_Paulo
+Jardim Paulista	Sao Paulo	08	N	83.667	23.56675S	46.66439W	771	6	America/Sao_Paulo
 Trindade	Santa Catarina	08	N	15.1	27.58612S	48.52335W	10	5	America/Sao_Paulo
 Freguesia do Ribeirao da Ilha	Santa Catarina	08	N	21	27.71773S	48.56266W	13	5	America/Sao_Paulo
 Planaltina	Federal District	08	N	189.412	15.61791S	47.64874W	987	7	America/Sao_Paulo
@@ -2599,7 +2598,7 @@ Bayview Village	Ontario	09	N	21.396	43.77639N	79.38028W	162	5	America/Toronto
 Beaconsfield	Quebec	09	N	19.194	45.43341N	73.86586W	33	5	America/Toronto
 Belleville	Ontario	09	N	49.454	44.16682N	77.38277W	93	5	America/Toronto
 Beloeil	Quebec	09	N	18.927	45.56839N	73.20568W	13	5	America/Toronto
-Bendale	Ontario	09	N	29.96	43.76681N	79.25326W	163	5	America/Toronto
+Bendale	Ontario	09	N	29.96	43.76681N	79.25326W	161	5	America/Toronto
 Blainville	Quebec	09	N	46.493	45.66678N	73.88249W	73	5	America/Toronto
 Boisbriand	Quebec	09	N	26.483	45.61678N	73.83249W	30	5	America/Toronto
 Boucherville	Quebec	09	N	39.062	45.59104N	73.43605W	16	5	America/Toronto
@@ -2617,7 +2616,7 @@ Campbell River	British Columbia	09	N	33.43	50.01634N	125.24459W	65	5	America/Van
 Camrose	Alberta	09	N	15.686	53.01684N	112.83525W	739	5	America/Edmonton
 Candiac	Quebec	09	N	15.947	45.38338N	73.51587W	25	5	America/Toronto
 Chambly	Quebec	09	N	22.608	45.45008N	73.28246W	4	5	America/Toronto
-Charlottetown	Prince Edward Island	09	R	42.402	46.23459N	63.1256W	6	5	America/Halifax
+Charlottetown	Prince Edward Island	09	R	42.402	46.23459N	63.1256W	14	5	America/Halifax
 Chateauguay	Quebec	09	N	42.786	45.38338N	73.74919W	19	5	America/Toronto
 Chatham	Ontario	09	N	43.55	42.41224N	82.18494W	183	5	America/Toronto
 Chilliwack	British Columbia	09	N	77	49.16638N	121.95257W	11	6	America/Vancouver
@@ -2642,7 +2641,7 @@ Dorset Park	Ontario	09	N	25.003	43.75386N	79.28215W	164	5	America/Toronto
 Dorval	Quebec	09	N	18.088	45.4473N	73.75335W	27	5	America/Toronto
 Drummondville	Quebec	09	N	59.489	45.88336N	72.48241W	89	6	America/Toronto
 Duncan	British Columbia	09	N	22.199	48.78293N	123.70266W	14	5	America/Vancouver
-East Gwillimbury	Ontario	09	N	23.991	44.10087N	79.43785W	256	5	America/Toronto
+East Gwillimbury	Ontario	09	N	23.991	44.10087N	79.43785W	271	5	America/Toronto
 Edmonton	Alberta	09	R	712.391	53.55014N	113.46871W	610	8	America/Edmonton
 Humbermede	Ontario	09	N	15.545	43.7525N	79.54417W	148	5	America/Toronto
 Esquimalt	British Columbia	09	N	17.655	48.43569N	123.41174W	38	5	America/Vancouver
@@ -2682,7 +2681,7 @@ Leduc	Alberta	09	N	15.561	53.26682N	113.55201W	728	5	America/Edmonton
 Les Coteaux	Quebec	09	N	17.396	45.28338N	74.23254W	44	5	America/Toronto
 Lethbridge	Alberta	09	N	70.617	49.69999N	112.81856W	907	6	America/Edmonton
 Lindsay	Ontario	09	N	20.354	44.35012N	78.73286W	261	5	America/Toronto
-Lloydminster	Alberta	09	N	31.4	53.27237N	110.02256W	652	5	America/Edmonton
+Lloydminster	Alberta	09	N	31.4	53.27237N	110.02256W	657	5	America/Edmonton
 London	Ontario	09	N	346.765	42.98339N	81.23304W	252	7	America/Toronto
 Longueuil	Quebec	09	N	229.33	45.53121N	73.51806W	18	7	America/Toronto
 Lutes Mountain	New Brunswick	09	N	16.311	46.13544N	64.90504W	133	5	America/Moncton
@@ -2707,12 +2706,12 @@ Mont-Saint-Hilaire	Quebec	09	N	15.72	45.56515N	73.1868W	39	5	America/Toronto
 Moose Jaw	Saskatchewan	09	N	32.166	50.40005N	105.53445W	552	5	America/Regina
 Mount Pearl	Newfoundland and Labrador	09	N	24.671	47.51659N	52.78135W	109	5	America/St_Johns
 Nanaimo	British Columbia	09	N	84.905	49.16638N	123.94003W	16	6	America/Vancouver
-Nepean	Ontario	09	N	180	45.33619N	75.7225W	75	7	America/Toronto
+Nepean	Ontario	09	N	180	45.33619N	75.7225W	87	7	America/Toronto
 New Glasgow	Nova Scotia	09	N	18.665	45.58344N	62.64863W	11	5	America/Halifax
 Newmarket	Ontario	09	N	74.295	44.05011N	79.46631W	250	6	America/Toronto
 New Westminster	British Columbia	09	N	58.549	49.20678N	122.91092W	64	6	America/Vancouver
 Niagara Falls	Ontario	09	N	82	43.10012N	79.06627W	184	6	America/Toronto
-Niagara-on-the-Lake	Ontario	09	N	17.511	43.25655N	79.08527W	78	5	America/Toronto
+Niagara-on-the-Lake	Ontario	09	N	17.511	43.25655N	79.08527W	85	5	America/Toronto
 Norfolk County	Ontario	09	N	60.847	42.8334N	80.38297W	235	6	America/Toronto
 North Battleford	Saskatchewan	09	N	19.44	52.77972N	108.2967W	526	5	America/Regina
 North Bay	Ontario	09	N	50.396	46.3168N	79.46633W	206	6	America/Toronto
@@ -2737,7 +2736,7 @@ Pointe-Claire	Quebec	09	N	30.161	45.44868N	73.81669W	45	5	America/Toronto
 Port Alberni	British Columbia	09	N	20.712	49.24133N	124.8028W	22	5	America/Vancouver
 Port Colborne	Ontario	09	N	18.599	42.90012N	79.23288W	188	5	America/Toronto
 Port Coquitlam	British Columbia	09	N	58	49.26637N	122.76932W	16	6	America/Vancouver
-Port Moody	British Columbia	09	N	27.512	49.28124N	122.82457W	30	5	America/Vancouver
+Port Moody	British Columbia	09	N	27.512	49.28124N	122.82457W	44	5	America/Vancouver
 Prince Albert	Saskatchewan	09	N	35.102	53.20008N	105.76772W	431	5	America/Regina
 Prince Edward	Ontario	09	N	25.496	44.00012N	77.24946W	97	5	America/Toronto
 Prince George	British Columbia	09	N	65.558	53.9166N	122.75301W	578	6	America/Vancouver
@@ -2763,7 +2762,7 @@ Saint-Eustache	Quebec	09	N	42.062	45.565N	73.90554W	42	5	America/Toronto
 Saint-Hyacinthe	Quebec	09	N	50.326	45.63076N	72.95699W	32	6	America/Toronto
 Saint-Jean-sur-Richelieu	Quebec	09	N	71.613	45.30713N	73.26259W	32	6	America/Toronto
 Saint-Jerome	Quebec	09	N	54.948	45.78036N	74.00365W	95	6	America/Toronto
-Saint John	New Brunswick	09	N	87.857	45.27076N	66.05616W	1	6	America/Moncton
+Saint John	New Brunswick	09	N	87.857	45.27076N	66.05616W	30	6	America/Moncton
 Saint-Laurent	Quebec	09	N	77.391	45.50008N	73.66585W	41	6	America/Toronto
 Saint-Lazare	Quebec	09	N	17.016	45.40008N	74.13256W	56	5	America/Toronto
 Saint-Leonard	Quebec	09	N	73.423	45.58773N	73.59501W	43	6	America/Toronto
@@ -2771,7 +2770,7 @@ Salaberry-de-Valleyfield	Quebec	09	N	38.662	45.25008N	74.13253W	46	5	America/Tor
 Sarnia	Ontario	09	N	72.125	42.97866N	82.40407W	185	6	America/Toronto
 Saskatoon	Saskatchewan	09	N	198.958	52.13238N	106.66892W	484	7	America/Regina
 Sault Ste. Marie	Ontario	09	N	66.313	46.51677N	84.33325W	186	6	America/Toronto
-Scarborough Village	Ontario	09	N	16.724	43.73899N	79.22124W	167	5	America/Toronto
+Scarborough Village	Ontario	09	N	16.724	43.73899N	79.22124W	159	5	America/Toronto
 Sept-Iles	Quebec	09	N	22.582	50.20011N	66.38208W	5	5	America/Toronto
 Shawinigan	Quebec	09	N	38.211	46.56675N	72.74913W	123	5	America/Toronto
 Sherbrooke	Quebec	09	N	129.447	45.40008N	71.89908W	175	7	America/Toronto
@@ -2804,7 +2803,7 @@ Vaudreuil-Dorion	Quebec	09	N	25.789	45.40008N	74.03251W	22	5	America/Toronto
 Vaughan	Ontario	09	N	238.866	43.8361N	79.49827W	218	7	America/Toronto
 Vernon	British Columbia	09	N	47.274	50.26729N	119.27337W	383	5	America/Vancouver
 Vernon	British Columbia	09	N	48.073	50.0261N	126.36157W	259	5	America/Vancouver
-Victoria	British Columbia	09	R	289.625	48.4359N	123.35155W	41	7	America/Vancouver
+Victoria	British Columbia	09	R	289.625	48.4359N	123.35155W	18	7	America/Vancouver
 Victoriaville	Quebec	09	N	34.426	46.05007N	71.96579W	131	5	America/Toronto
 Waterloo	Ontario	09	N	97.475	43.4668N	80.51639W	325	6	America/Toronto
 Welland	Ontario	09	N	50.331	42.98342N	79.24958W	180	6	America/Toronto
@@ -2813,14 +2812,14 @@ West Hill	Ontario	09	N	27.392	43.76737N	79.1795W	121	5	America/Toronto
 Westmount	Quebec	09	N	20.494	45.48341N	73.59918W	52	5	America/Toronto
 Weston	Ontario	09	N	17.992	43.70359N	79.51513W	133	5	America/Toronto
 Whitehorse	Yukon	09	R	23.272	60.71611N	135.05375W	630	5	America/Whitehorse
-White Rock	British Columbia	09	N	66.45	49.02049N	122.79507W	17	6	America/Vancouver
+White Rock	British Columbia	09	N	66.45	49.02049N	122.79507W	67	6	America/Vancouver
 Windsor	Ontario	09	N	278.013	42.30008N	83.01654W	190	7	America/Toronto
 Winnipeg	Manitoba	09	R	632.063	49.8844N	97.14704W	245	8	America/Winnipeg
 Woburn	Ontario	09	N	53.485	43.76657N	79.22773W	157	6	America/Toronto
 Woodstock	Ontario	09	N	40.404	43.13339N	80.7497W	299	5	America/Toronto
-Yellowknife	Northwest Territories	09	R	15.865	62.45411N	114.37248W	252	5	America/Yellowknife
+Yellowknife	Northwest Territories	09	R	19.569	62.45411N	114.37248W	252	5	America/Yellowknife
 Yorkton	Saskatchewan	09	N	15.669	51.2167N	102.46766W	504	5	America/Regina
-Halifax	Nova Scotia	09	R	359.111	44.6464N	63.57291W	6	7	America/Halifax
+Halifax	Nova Scotia	09	R	359.111	44.6464N	63.57291W	28	7	America/Halifax
 St. John's	Newfoundland and Labrador	09	R	99.182	47.56494N	52.70931W	35	6	America/St_Johns
 Quebec	Quebec	09	R	528.595	46.81228N	71.21454W	54	8	America/Toronto
 Levis	Quebec	09	N	126.396	46.80326N	71.17793W	87	7	America/Toronto
@@ -3319,7 +3318,7 @@ Jiayuguan	Gansu	13	N	122.396	39.81121N	98.28618E	1635	7	Asia/Shanghai
 Hotan	Xinjiang	13	N	114	37.1075N	79.93548E	1384	7	Asia/Urumqi
 Deqen	Tibet	13	N	62.4	29.96178N	90.71875E	3974	6	Asia/Shanghai
 Xinyuan	Xinjiang	13	N	300	43.42649N	83.24959E	953	7	Asia/Urumqi
-Urumqi	Xinjiang	13	R	3029.372	43.80096N	87.60046E	862	9	Asia/Urumqi
+UEruemqi	Xinjiang	13	R	3029.372	43.80096N	87.60046E	862	9	Asia/Urumqi
 Turpan	Xinjiang	13	N	254.9	42.94769N	89.17886E	41	7	Asia/Urumqi
 Shihezi	Xinjiang	13	N	572.772	44.3023N	86.03694E	467	8	Asia/Urumqi
 Qapqal	Xinjiang	13	N	160	43.80194N	81.08722E	638	7	Asia/Urumqi
@@ -3333,6 +3332,9 @@ Baijiantan	Xinjiang	13	N	93.697	45.69298N	85.13942E	291	6	Asia/Urumqi
 Aral	Xinjiang	13	N	260	40.54184N	81.26566E	1014	7	Asia/Urumqi
 Altay	Xinjiang	13	N	139.341	47.84864N	88.13361E	866	7	Asia/Urumqi
 Aksu	Xinjiang	13	N	340.02	41.18418N	80.27921E	1119	7	Asia/Urumqi
+Liangji	Jiangsu	13	N	52.048	33.96389N	117.96944E	28	6	Asia/Shanghai
+Lanshan	Jiangsu	13	N	55.442	33.93611N	117.725E	26	6	Asia/Shanghai
+Qing'an	Jiangsu	13	N	48.234	33.96944N	117.88056E	22	5	Asia/Shanghai
 Malingshan	Jiangsu	13	N	52.711	34.20351N	118.3565E	29	6	Asia/Shanghai
 Chenlou	Jiangsu	13	N	48.327	34.38889N	118.05E	28	5	Asia/Shanghai
 Hegou	Jiangsu	13	N	44.747	34.40833N	118.12222E	28	5	Asia/Shanghai
@@ -3348,11 +3350,17 @@ Zizhuang	Jiangsu	13	N	52.063	34.36152N	117.48816E	34	6	Asia/Shanghai
 Liuji	Jiangsu	13	N	54.785	34.35833N	117.05278E	36	6	Asia/Shanghai
 Jiangzhuang	Jiangsu	13	N	31.991	34.49167N	117.39722E	49	5	Asia/Shanghai
 Daizhuang	Jiangsu	13	N	42.41	34.51389N	117.85278E	29	5	Asia/Shanghai
+Zhangzhuang	Jiangsu	13	N	74.114	34.51944N	117.00556E	37	6	Asia/Shanghai
 Xinglou	Jiangsu	13	N	49.653	34.56667N	117.82778E	27	5	Asia/Shanghai
+Huzhai	Jiangsu	13	N	32.231	34.66944N	117.00833E	37	5	Asia/Shanghai
 Heqiao	Jiangsu	13	N	35.118	34.45278N	116.9E	39	5	Asia/Shanghai
 Fanlou	Jiangsu	13	N	62.859	34.48091N	116.85248E	38	6	Asia/Shanghai
+Hekou	Jiangsu	13	N	47.281	34.57778N	116.81389E	41	5	Asia/Shanghai
 Songlou	Jiangsu	13	N	79.763	34.57231N	116.60239E	40	6	Asia/Shanghai
+Sunlou	Jiangsu	13	N	46.941	34.66667N	116.58333E	40	5	Asia/Shanghai
+Zhuzhai	Jiangsu	13	N	56.908	34.76111N	116.81389E	40	6	Asia/Shanghai
 Zhaozhuang	Jiangsu	13	N	53.193	34.73889N	116.45556E	41	6	Asia/Shanghai
+Anguo	Jiangsu	13	N	82.181	34.83056N	116.81944E	38	6	Asia/Shanghai
 Shizhai	Jiangsu	13	N	62.956	34.80556N	116.63889E	37	6	Asia/Shanghai
 Zunyi	Guizhou	13	N	466.292	27.68667N	106.90722E	867	7	Asia/Shanghai
 Zoucheng	Shandong	13	N	190.537	35.40056N	116.96556E	76	7	Asia/Shanghai
@@ -3386,6 +3394,7 @@ Zhaodun	Jiangsu	13	N	76.691	34.3027N	117.85699E	24	6	Asia/Shanghai
 Zhaoyuan	Shandong	13	N	120	37.36497N	120.40997E	74	7	Asia/Shanghai
 Zhanjiang	Guangdong	13	N	637.79	21.28145N	110.34271E	29	8	Asia/Shanghai
 Zhangzhou	Fujian	13	N	589.831	24.51333N	117.65556E	14	8	Asia/Shanghai
+Zhangzhai	Jiangsu	13	N	74.433	34.61667N	116.95E	34	6	Asia/Shanghai
 Zhangye	Gansu	13	N	100	38.93417N	100.45167E	1481	7	Asia/Shanghai
 Zhangji	Jiangsu	13	N	61.929	34.1375N	117.37556E	34	6	Asia/Shanghai
 Zibo	Shandong	13	N	3129.228	36.79056N	118.06333E	51	9	Asia/Shanghai
@@ -3417,26 +3426,30 @@ Yongfeng	Hunan	13	N	70.783	27.45493N	112.16943E	111	6	Asia/Shanghai
 Yongchuan	Chongqing	13	N	94.465	29.35376N	105.89392E	326	6	Asia/Shanghai
 Yizhuang	Jiangsu	13	N	34.968	34.15651N	117.59367E	26	5	Asia/Shanghai
 Yishui	Shandong	13	N	94.115	35.78472N	118.62806E	156	6	Asia/Shanghai
+Yinma	Shandong	13	N	83.872	36.66083N	119.4625E	20	6	Asia/Shanghai
 Zhongxiang	Hubei	13	N	108.883	31.16611N	112.58306E	50	7	Asia/Shanghai
 Yingshang Chengguanzhen	Anhui	13	N	61.771	32.62945N	116.27013E	26	6	Asia/Shanghai
 Chengzhong	Hubei	13	N	265.886	30.94454N	113.55284E	34	7	Asia/Shanghai
 Yinchuan	Ningxia Hui Autonomous Region	13	R	475.101	38.46806N	106.27306E	1117	7	Asia/Shanghai
 Yima	Henan	13	N	82.509	34.73806N	111.88389E	484	6	Asia/Shanghai
 Yigou	Henan	13	N	59.073	35.81139N	114.31667E	90	6	Asia/Shanghai
-Qingzhou	Shandong	13	N	117.056	36.69667N	118.47972E	98	7	Asia/Shanghai
+Qingzhou	Shandong	13	N	236.406	36.69667N	118.47972E	98	7	Asia/Shanghai
 Yichun	Jiangxi	13	N	152.169	27.83333N	114.4E	99	7	Asia/Shanghai
 Yicheng	Hubei	13	N	61.027	31.70472N	112.25611E	63	6	Asia/Shanghai
 Yicheng	Jiangsu	13	N	95.53	31.36059N	119.82016E	8	6	Asia/Shanghai
 Yichang	Hubei	13	N	476.725	30.71444N	111.28472E	63	7	Asia/Shanghai
 Yibin	Sichuan	13	N	242.111	28.7593N	104.63994E	323	7	Asia/Shanghai
+Yeyuan	Shandong	13	N	97.936	36.41667N	118.5E	123	6	Asia/Shanghai
 Yatou	Shandong	13	N	91.517	37.1566N	122.43762E	12	6	Asia/Shanghai
 Yashan	Guangxi	13	N	56.629	22.1975N	109.94194E	64	6	Asia/Shanghai
 Yaowan	Jiangsu	13	N	60.668	34.18333N	118.06667E	21	6	Asia/Shanghai
+Yaoji	Jiangsu	13	N	65.897	34.06667N	117.81667E	25	6	Asia/Shanghai
 Yanzibu	Jiangsu	13	N	25.714	34.50561N	117.70222E	30	5	Asia/Shanghai
 Yanzhou	Shandong	13	N	77.276	35.55278N	116.82861E	54	6	Asia/Shanghai
 Yantai	Shandong	13	N	2227.733	37.47649N	121.44081E	22	9	Asia/Shanghai
 Yanliang	Shaanxi	13	N	60.891	34.65918N	109.22921E	395	6	Asia/Shanghai
 Yangzhou	Jiangsu	13	N	539.715	32.39722N	119.43583E	14	8	Asia/Shanghai
+Yangtun	Jiangsu	13	N	53.417	34.88333N	116.88333E	36	6	Asia/Shanghai
 Yangshuo	Guangxi	13	N	300	24.78081N	110.48967E	116	7	Asia/Shanghai
 Zhangjiagang	Jiangsu	13	N	66.039	31.865N	120.53889E	13	6	Asia/Shanghai
 Yangquan	Shanxi	13	N	413.394	37.8575N	113.56333E	722	7	Asia/Shanghai
@@ -3459,6 +3472,7 @@ Guixi	Jiangxi	13	N	73.732	28.28857N	117.21329E	51	6	Asia/Shanghai
 Xinzhou	Shanxi	13	N	154.003	38.40917N	112.73333E	794	7	Asia/Shanghai
 Xinzhou	Hubei	13	N	78.767	30.86667N	114.8E	29	6	Asia/Shanghai
 Xinzhi	Shanxi	13	N	72.303	36.49889N	111.70472E	519	6	Asia/Shanghai
+Xinzhai	Shandong	13	N	100.168	36.4N	118.61667E	150	7	Asia/Shanghai
 Xinyu	Jiangxi	13	N	97.48	27.80429N	114.93335E	68	6	Asia/Shanghai
 Hancheng	Henan	13	N	61.633	32.51861N	112.35222E	94	6	Asia/Shanghai
 Xinyang	Henan	13	N	1590.668	32.12278N	114.06556E	89	9	Asia/Shanghai
@@ -3479,10 +3493,11 @@ Ximeicun	Fujian	13	N	94.326	24.98773N	118.3858E	28	6	Asia/Shanghai
 Wacheng	Henan	13	N	66.848	33.78333N	114.51667E	56	6	Asia/Shanghai
 Xihe	Hubei	13	N	90.422	31.68635N	113.46585E	64	6	Asia/Shanghai
 Xichang	Sichuan	13	N	481.796	27.89642N	102.26341E	1558	7	Asia/Shanghai
+Xiazhuang	Shandong	13	N	88.71	36.44917N	119.83556E	17	6	Asia/Shanghai
 Xiazhuang	Shandong	13	N	63.285	34.91611N	118.63889E	60	6	Asia/Shanghai
 Xiazhen	Shandong	13	N	125.667	34.80222N	117.11167E	39	7	Asia/Shanghai
 Haining	Zhejiang	13	N	70.171	30.53629N	120.68638E	7	6	Asia/Shanghai
-Zijinglu	Henan	13	N	56.033	34.76N	112.97139E	136	6	Asia/Shanghai
+Gongyi	Henan	13	N	56.033	34.75534N	113.01137E	223	6	Asia/Shanghai
 Xiaoweizhai	Guizhou	13	N	58.913	26.19028N	107.5125E	757	6	Asia/Shanghai
 Xiaoshan	Zhejiang	13	N	95.234	30.16746N	120.25883E	14	6	Asia/Shanghai
 Xiaolingwei	Jiangsu	13	N	66.031	32.03244N	118.854E	14	6	Asia/Shanghai
@@ -3490,7 +3505,7 @@ Xiaogan	Hubei	13	N	160.437	30.92689N	113.92221E	35	7	Asia/Shanghai
 Xianyang	Shaanxi	13	N	1034.081	34.33778N	108.70261E	387	9	Asia/Shanghai
 Xiantao	Hubei	13	N	239.406	30.3708N	113.44294E	36	7	Asia/Shanghai
 Xianshuigu	Tianjin	13	N	74.028	38.985N	117.38278E	5	6	Asia/Shanghai
-Xiannu	Jiangsu	13	N	83.936	32.42806N	119.56048E	13	6	Asia/Shanghai
+Xiannue	Jiangsu	13	N	83.936	32.42806N	119.56048E	13	6	Asia/Shanghai
 Xianning	Hubei	13	N	179.494	29.84347N	114.32201E	30	7	Asia/Shanghai
 Xianju	Zhejiang	13	N	61.532	28.8547N	120.73168E	60	6	Asia/Shanghai
 Zhuhai	Guangdong	13	N	501.199	22.27694N	113.56778E	35	8	Asia/Shanghai
@@ -3508,6 +3523,7 @@ Wuxue	Hubei	13	N	220.661	29.85058N	115.5525E	23	7	Asia/Shanghai
 Wuxi	Jiangsu	13	N	3543.719	31.56887N	120.28857E	10	9	Asia/Shanghai
 Dongyang	Zhejiang	13	N	130.387	29.26778N	120.22528E	97	7	Asia/Shanghai
 Changde	Hunan	13	N	517.78	29.03205N	111.69844E	38	8	Asia/Shanghai
+Wujing	Shandong	13	N	60.26	36.45N	118.4E	200	6	Asia/Shanghai
 Wuhu	Anhui	13	N	507.524	31.33728N	118.37351E	19	8	Asia/Shanghai
 Wuhan	Hubei	13	R	9785.388	30.58333N	114.26667E	20	9	Asia/Shanghai
 Wuhai	Inner Mongolia	13	N	218.427	39.68442N	106.81583E	1096	7	Asia/Shanghai
@@ -3519,11 +3535,14 @@ Wenling	Zhejiang	13	N	67.433	28.37524N	121.38416E	6	6	Asia/Shanghai
 Tianfu	Shandong	13	N	115.37	37.26366N	122.05228E	50	7	Asia/Shanghai
 Wenchang	Hainan	13	N	115	19.6157N	110.74894E	13	7	Asia/Shanghai
 Weinan	Shaanxi	13	N	172.321	34.50355N	109.50891E	354	7	Asia/Shanghai
+Weimiao	Jiangsu	13	N	51.82	34.58333N	117.06667E	35	6	Asia/Shanghai
+Weiji	Jiangsu	13	N	48.069	34.03333N	117.95E	24	5	Asia/Shanghai
 Weihai	Shandong	13	N	590.347	37.50914N	122.11356E	14	8	Asia/Shanghai
-Weifang	Shandong	13	N	2659.938	36.71N	119.10194E	30	9	Asia/Shanghai
+Weifang	Shandong	13	N	2044.028	36.71N	119.10194E	30	9	Asia/Shanghai
 Wayao	Jiangsu	13	N	37.08	34.38333N	118.23333E	31	5	Asia/Shanghai
 Wanxian	Chongqing	13	N	188.98	30.81601N	108.37407E	232	7	Asia/Shanghai
 Wanning	Hainan	13	N	64.954	18.79931N	110.3841E	15	6	Asia/Shanghai
+Wangji	Jiangsu	13	N	54.578	33.98333N	117.75E	28	6	Asia/Shanghai
 Yinzhu	Shandong	13	N	75.656	35.87861N	119.97528E	8	6	Asia/Shanghai
 Wafangdian	Liaoning	13	N	250.591	39.61833N	122.00806E	103	7	Asia/Shanghai
 Tushan	Jiangsu	13	N	42.853	34.22083N	117.83694E	27	5	Asia/Shanghai
@@ -3540,8 +3559,10 @@ Tianpeng	Sichuan	13	N	60.797	30.98664N	103.93933E	611	6	Asia/Shanghai
 Tianjin	Tianjin	13	R	11090.314	39.14222N	117.17667E	11	9	Asia/Shanghai
 Chengtangcun	Shandong	13	N	105.456	35.08357N	117.19071E	73	7	Asia/Shanghai
 Taozhuang	Shandong	13	N	60.137	34.85N	117.33333E	53	6	Asia/Shanghai
+Taoyuan	Jiangsu	13	N	52.861	33.85278N	117.77028E	29	6	Asia/Shanghai
 Tantou	Fujian	13	N	69.05	26.03033N	119.59739E	10	6	Asia/Shanghai
 Tangzhai	Anhui	13	N	67.936	34.43278N	116.59111E	46	6	Asia/Shanghai
+Tangwu	Shandong	13	N	93.26	36.44667N	118.85972E	149	6	Asia/Shanghai
 Tangshan	Hebei	13	N	3372.102	39.63333N	118.18333E	36	9	Asia/Shanghai
 Tangping	Guangdong	13	N	81.729	22.03177N	111.93537E	19	6	Asia/Shanghai
 Tangjiazhuang	Hebei	13	N	79.489	39.74326N	118.45099E	70	6	Asia/Shanghai
@@ -3557,13 +3578,15 @@ Suyangshan	Jiangsu	13	N	65.333	34.39278N	117.75556E	27	6	Asia/Shanghai
 Suozhen	Shandong	13	N	58.766	36.95389N	118.10472E	20	6	Asia/Shanghai
 Suizhou	Hubei	13	N	323.945	31.71111N	113.36306E	67	7	Asia/Shanghai
 Suixi	Anhui	13	N	74.172	33.89067N	116.77473E	34	6	Asia/Shanghai
-Suicheng	Jiangsu	13	N	61.43	33.8963N	117.93307E	22	6	Asia/Shanghai
+Suicheng	Jiangsu	13	N	256.665	33.8963N	117.93307E	22	7	Asia/Shanghai
 Suining	Sichuan	13	N	124.924	30.50802N	105.57332E	291	7	Asia/Shanghai
 Songjiang	Shanghai	13	N	130.218	31.03443N	121.22326E	3	7	Asia/Shanghai
+Sitou	Shandong	13	N	56.289	36.31275N	118.41185E	269	6	Asia/Shanghai
 Sishui	Shandong	13	N	90.175	35.64889N	117.27583E	112	6	Asia/Shanghai
 Sihu	Jiangsu	13	N	40.43	34.62625N	117.97139E	37	5	Asia/Shanghai
 Shunhe	Jiangsu	13	N	47.33	34.84184N	116.55722E	28	5	Asia/Shanghai
 Laixi	Shandong	13	N	75.849	36.85917N	120.52694E	54	6	Asia/Shanghai
+Shuanggou	Jiangsu	13	N	45.697	34.03528N	117.57806E	29	5	Asia/Shanghai
 Shouxian	Jiangsu	13	N	76.03	34.84648N	116.45884E	35	6	Asia/Shanghai
 Shouguang	Shandong	13	N	79.212	36.88N	118.7375E	26	6	Asia/Shanghai
 Shizuishan	Ningxia Hui Autonomous Region	13	N	136.57	39.23333N	106.76944E	1103	7	Asia/Shanghai
@@ -3578,6 +3601,8 @@ Shilong	Guangdong	13	N	109.733	23.11444N	113.84722E	14	7	Asia/Shanghai
 Tongchuanshi	Shaanxi	13	N	223.603	35.07474N	109.08495E	834	7	Asia/Shanghai
 Shijiazhuang	Hebei	13	R	2834.942	38.04139N	114.47861E	77	9	Asia/Shanghai
 Shiji	Jiangsu	13	N	41.652	34.2N	118.48333E	19	5	Asia/Shanghai
+Shidui	Shandong	13	N	35.367	36.39333N	119.30861E	78	5	Asia/Shanghai
+Shibuzi	Shandong	13	N	58.333	36.12389N	119.10278E	91	6	Asia/Shanghai
 Shenzhen	Guangdong	13	N	10358.381	22.54554N	114.0683E	4	9	Asia/Shanghai
 Yanta	Shandong	13	N	79.196	36.24111N	115.66722E	41	6	Asia/Shanghai
 Shenjiamen	Zhejiang	13	N	95.433	29.95763N	122.29802E	25	6	Asia/Shanghai
@@ -3593,6 +3618,7 @@ Shantou	Guangdong	13	N	5329.024	23.36814N	116.71479E	17	9	Asia/Shanghai
 Shanting	Shandong	13	N	80.843	35.07528N	117.45778E	146	6	Asia/Shanghai
 Shanji	Jiangsu	13	N	50.617	34.20472N	117.59556E	29	6	Asia/Shanghai
 Shanghai	Shanghai	13	R	22315.474	31.22222N	121.45806E	12	9	Asia/Shanghai
+Shaji	Jiangsu	13	N	46.696	33.9N	118.13333E	22	5	Asia/Shanghai
 Shahecheng	Hebei	13	N	125.132	36.93833N	114.50583E	73	7	Asia/Shanghai
 Sanya	Hainan	13	N	144.753	18.24306N	109.505E	11	7	Asia/Shanghai
 Sanming	Fujian	13	N	209.444	26.24861N	117.61861E	126	7	Asia/Shanghai
@@ -3607,6 +3633,8 @@ Qufu	Shandong	13	N	85.144	35.59667N	116.99111E	69	6	Asia/Shanghai
 Quanzhou	Fujian	13	N	184.143	24.91389N	118.58583E	14	7	Asia/Shanghai
 Wuxi	Hunan	13	N	66.442	26.5844N	111.859E	94	6	Asia/Shanghai
 Zhuangyuan	Shandong	13	N	79.106	37.30553N	120.82747E	135	6	Asia/Shanghai
+Qiuji	Jiangsu	13	N	76.343	33.8N	118E	22	6	Asia/Shanghai
+Qishan	Jiangsu	13	N	51.75	34.63333N	116.8E	39	6	Asia/Shanghai
 Qiongshan	Hainan	13	N	87.657	20.00583N	110.35417E	18	6	Asia/Shanghai
 Qionghu	Hunan	13	N	66.145	28.84061N	112.37399E	31	6	Asia/Shanghai
 Qinzhou	Guangxi	13	N	100.996	21.98247N	108.65061E	12	7	Asia/Shanghai
@@ -3620,6 +3648,7 @@ Huai'an	Jiangsu	13	N	555.23	33.58861N	119.01917E	14	8	Asia/Shanghai
 Qingdao	Shandong	13	N	3718.835	36.06488N	120.38042E	16	9	Asia/Shanghai
 Qingyuan	Guangdong	13	N	151.287	23.7N	113.03333E	11	7	Asia/Shanghai
 Hongqiao	Hunan	13	N	58.287	26.76837N	112.10814E	125	6	Asia/Shanghai
+Qiaoguan	Shandong	13	N	82.467	36.56444N	118.88389E	148	6	Asia/Shanghai
 Puyang Chengguanzhen	Henan	13	N	666.322	35.70506N	115.01409E	56	8	Asia/Shanghai
 Puyang	Zhejiang	13	N	3590	29.45679N	119.88872E	76	9	Asia/Shanghai
 Putian	Fujian	13	N	376.558	25.43944N	119.01028E	23	7	Asia/Shanghai
@@ -3637,6 +3666,7 @@ Pingliang	Gansu	13	N	108.156	35.53917N	106.68611E	1354	7	Asia/Shanghai
 Pingdu	Shandong	13	N	91.077	36.78444N	119.94639E	59	6	Asia/Shanghai
 Pingdingshan	Henan	13	N	889.675	33.73847N	113.30119E	88	8	Asia/Shanghai
 Pengcheng	Hebei	13	N	68.442	36.43111N	114.17E	147	6	Asia/Shanghai
+Peicheng	Jiangsu	13	N	195.363	34.73611N	116.92472E	40	7	Asia/Shanghai
 Picheng	Jiangsu	13	N	64.585	34.46667N	117.96667E	29	6	Asia/Shanghai
 Dadukou	Sichuan	13	N	461.513	26.5479N	101.70539E	1110	7	Asia/Shanghai
 Ningyang	Shandong	13	N	82.994	35.76417N	116.79139E	65	6	Asia/Shanghai
@@ -3678,7 +3708,7 @@ Majie	Yunnan	13	N	131.696	25.0319N	102.638E	1894	7	Asia/Shanghai
 Zhijiang	Hubei	13	N	60.169	30.42139N	111.75333E	46	6	Asia/Shanghai
 Macheng	Hubei	13	N	126.366	31.18013N	115.02213E	57	7	Asia/Shanghai
 Maba	Guangdong	13	N	113.609	24.68413N	113.59839E	68	7	Asia/Shanghai
-Lushun	Liaoning	13	N	82.345	38.8N	121.26667E	4	6	Asia/Shanghai
+Lueshun	Liaoning	13	N	82.345	38.8N	121.26667E	4	6	Asia/Shanghai
 Luqiao	Zhejiang	13	N	427.89	28.58023N	121.37491E	7	7	Asia/Shanghai
 Luoyang	Henan	13	N	1390.581	34.68361N	112.45361E	149	9	Asia/Shanghai
 Luoyang	Fujian	13	N	66.188	24.95938N	118.683E	17	6	Asia/Shanghai
@@ -3686,6 +3716,7 @@ Luoyang	Guangdong	13	N	123.144	23.16244N	114.27342E	16	7	Asia/Shanghai
 Luorong	Guangxi	13	N	67.593	24.40583N	109.60861E	76	6	Asia/Shanghai
 Luohe	Henan	13	N	417.356	33.56394N	114.04272E	62	7	Asia/Shanghai
 Luocheng	Sichuan	13	N	73.581	29.38481N	104.02862E	471	6	Asia/Shanghai
+Lulou	Jiangsu	13	N	63.704	34.71667N	116.76667E	40	6	Asia/Shanghai
 Lucheng	Anhui	13	N	89.119	31.23357N	117.28057E	15	6	Asia/Shanghai
 Kangding	Sichuan	13	N	100	30.00222N	101.9569E	2826	7	Asia/Shanghai
 Lubu	Guangdong	13	N	95.82	23.17233N	112.28298E	18	6	Asia/Shanghai
@@ -3693,9 +3724,11 @@ Luancheng	Hebei	13	N	597.13	37.87917N	114.65167E	55	8	Asia/Shanghai
 Loudi	Hunan	13	N	150.684	27.73444N	111.99444E	135	7	Asia/Shanghai
 Longquan	Yunnan	13	N	91.534	24.67193N	102.1613E	1591	6	Asia/Shanghai
 Longgang	Shandong	13	N	60.444	37.65181N	120.33063E	6	6	Asia/Shanghai
+Longgu	Jiangsu	13	N	59.086	34.90333N	116.80667E	37	6	Asia/Shanghai
 Licheng	Jiangsu	13	N	72.276	31.42813N	119.48353E	9	6	Asia/Shanghai
 Guankou	Hunan	13	N	1380	28.15861N	113.62709E	79	9	Asia/Shanghai
 Liuxin	Jiangsu	13	N	65.258	34.36861N	117.115E	38	6	Asia/Shanghai
+Liutuan	Shandong	13	N	48.469	36.93333N	119.38333E	7	5	Asia/Shanghai
 Puning	Guangdong	13	N	118.023	23.31072N	116.16869E	12	7	Asia/Shanghai
 Liuquan	Jiangsu	13	N	51.657	34.43417N	117.29833E	56	6	Asia/Shanghai
 Lishui	Zhejiang	13	N	98.946	28.46042N	119.91029E	72	6	Asia/Shanghai
@@ -3704,21 +3737,24 @@ Linyi	Shandong	13	N	270.669	35.06306N	118.34278E	69	7	Asia/Shanghai
 Linxia Chengguanzhen	Gansu	13	N	202.402	35.60028N	103.20639E	1893	7	Asia/Shanghai
 Linxi	Hebei	13	N	100.316	39.71183N	118.44954E	46	7	Asia/Shanghai
 Linshui	Hebei	13	N	109.955	36.42472N	114.20472E	138	7	Asia/Shanghai
-Linqu	Shandong	13	N	77.472	36.51556N	118.53972E	97	6	Asia/Shanghai
+Linqu	Shandong	13	N	299.646	36.51556N	118.53972E	97	7	Asia/Shanghai
 Linqiong	Sichuan	13	N	55.587	30.41587N	103.46089E	511	6	Asia/Shanghai
 Qingnian	Shandong	13	N	110.046	36.84092N	115.71087E	38	7	Asia/Shanghai
 Linping	Zhejiang	13	N	78.18	30.4225N	120.29722E	15	6	Asia/Shanghai
 Linhai	Zhejiang	13	N	152.937	28.85535N	121.1447E	13	7	Asia/Shanghai
+Linghe	Shandong	13	N	99.069	36.36417N	119.07694E	85	6	Asia/Shanghai
+Lingcheng	Jiangsu	13	N	53.841	33.81639N	118.11361E	20	6	Asia/Shanghai
 Lingcheng	Guangxi	13	N	54.848	22.70722N	110.34917E	102	6	Asia/Shanghai
 Lincheng	Hainan	13	N	64.874	19.90778N	109.68583E	29	6	Asia/Shanghai
 Linfen	Shanxi	13	N	232.566	36.08889N	111.51889E	451	7	Asia/Shanghai
 Xishan	Hunan	13	N	98.162	27.66667N	113.5E	69	6	Asia/Shanghai
+Liji	Jiangsu	13	N	39.691	33.76667N	117.78333E	25	5	Asia/Shanghai
 Lichuan	Hubei	13	N	72.653	30.3N	108.85E	1255	6	Asia/Shanghai
 Licheng	Guangdong	13	N	172.775	23.29549N	113.82465E	24	7	Asia/Shanghai
 Liaocheng	Shandong	13	N	226.93	36.45064N	116.00247E	32	7	Asia/Shanghai
 Lianzhou	Guangdong	13	N	92.827	24.78186N	112.3712E	99	6	Asia/Shanghai
 Hepu	Guangxi	13	N	71.423	21.65921N	109.20011E	12	6	Asia/Shanghai
-Lianran	Yunnan	13	N	106.795	24.92271N	102.48496E	1836	7	Asia/Shanghai
+Anning	Yunnan	13	N	106.795	24.92271N	102.48496E	1836	7	Asia/Shanghai
 Wuwei	Gansu	13	N	493.092	37.92672N	102.63202E	1542	7	Asia/Shanghai
 Liangzhai	Jiangsu	13	N	54.742	34.5N	116.75E	44	6	Asia/Shanghai
 Liangxiang	Beijing	13	N	76.744	39.73598N	116.13295E	47	6	Asia/Shanghai
@@ -3744,11 +3780,12 @@ Kaihua	Yunnan	13	N	64.404	23.3695N	104.27721E	1371	6	Asia/Shanghai
 Kaifeng	Henan	13	N	900	34.7986N	114.30742E	76	8	Asia/Shanghai
 Juye	Shandong	13	N	58.107	35.38737N	116.07168E	36	6	Asia/Shanghai
 Juegang	Jiangsu	13	N	73.317	32.31737N	121.18552E	10	6	Asia/Shanghai
+Jiushan	Shandong	13	N	44.42	36.19611N	118.465E	218	5	Asia/Shanghai
 Jiujiang	Jiangxi	13	N	258.807	29.70475N	116.00206E	41	7	Asia/Shanghai
 Jishui	Henan	13	N	77.54	33.73333N	115.4E	41	6	Asia/Shanghai
 Qianzhou	Hunan	13	N	102.332	28.31925N	109.73346E	201	7	Asia/Shanghai
 Jinzhou	Liaoning	13	N	215.386	39.1N	121.71667E	8	7	Asia/Shanghai
-Jinxiangzhen	Zhejiang	13	N	84.231	27.43265N	120.60625E	10	6	Asia/Shanghai
+Jinxiang	Zhejiang	13	N	84.231	27.43265N	120.60625E	10	6	Asia/Shanghai
 Jinshi	Hunan	13	N	82.906	29.60487N	111.87012E	65	6	Asia/Shanghai
 Jinsha	Jiangsu	13	N	95.647	32.08982N	121.07355E	6	6	Asia/Shanghai
 Jinjiang	Hainan	13	N	68.72	19.72878N	110.00851E	22	6	Asia/Shanghai
@@ -3756,6 +3793,7 @@ Jinji	Guangxi	13	N	56.816	23.22806N	110.82611E	42	6	Asia/Shanghai
 Jining	Shandong	13	N	450.327	35.405N	116.58139E	43	7	Asia/Shanghai
 Jinhua	Zhejiang	13	N	142.206	29.10678N	119.64421E	55	7	Asia/Shanghai
 Jingzhou	Hubei	13	N	177.878	30.35028N	112.19028E	39	7	Asia/Shanghai
+Jingzhi	Shandong	13	N	126.703	36.31N	119.3875E	44	7	Asia/Shanghai
 Tianchang	Hebei	13	N	61.292	37.99806N	114.01556E	281	6	Asia/Shanghai
 Jingmen	Hubei	13	N	167.75	31.03361N	112.20472E	94	7	Asia/Shanghai
 Jingling	Hubei	13	N	224.871	30.65N	113.1E	30	7	Asia/Shanghai
@@ -3776,6 +3814,7 @@ Jiaozuo	Henan	13	N	517.54	35.23972N	113.23306E	138	8	Asia/Shanghai
 Jiaozhou	Shandong	13	N	165.026	36.28389N	120.00333E	10	7	Asia/Shanghai
 Ningde	Fujian	13	N	65.17	26.66167N	119.52278E	20	6	Asia/Shanghai
 Jian'ou	Fujian	13	N	59.187	27.04146N	118.31897E	116	6	Asia/Shanghai
+Jiangzhuang	Shandong	13	N	72.453	36.49444N	119.79417E	14	6	Asia/Shanghai
 Jiangyan	Jiangsu	13	N	70.375	32.50611N	120.14278E	9	6	Asia/Shanghai
 Jianguang	Jiangxi	13	N	61.469	28.19377N	115.7836E	31	6	Asia/Shanghai
 Jiangmen	Guangdong	13	N	532.419	22.58333N	113.08333E	11	8	Asia/Shanghai
@@ -3813,6 +3852,7 @@ Huaihua	Hunan	13	N	127.322	27.56337N	110.00404E	236	7	Asia/Shanghai
 Huaidian	Henan	13	N	89.978	33.43333N	115.03333E	40	6	Asia/Shanghai
 Huaibei	Anhui	13	N	903.039	33.97444N	116.79167E	51	8	Asia/Shanghai
 Hongjiang	Hunan	13	N	59.199	27.11N	109.99556E	197	6	Asia/Shanghai
+Honghe	Shandong	13	N	88.458	36.40278N	118.91806E	110	6	Asia/Shanghai
 Heze	Shandong	13	N	254.602	35.23929N	115.47358E	53	7	Asia/Shanghai
 Hechuan	Chongqing	13	N	97.575	29.99228N	106.26461E	222	6	Asia/Shanghai
 Yiyang	Hunan	13	N	202.608	28.58917N	112.32833E	25	7	Asia/Shanghai
@@ -3837,6 +3877,7 @@ Haimen	Guangdong	13	N	125.427	23.19346N	116.61219E	17	7	Asia/Shanghai
 Haikou	Yunnan	13	N	112.644	24.77985N	102.57548E	1909	7	Asia/Shanghai
 Haikou	Hainan	13	R	615.835	20.04583N	110.34167E	14	8	Asia/Shanghai
 Guye	Hebei	13	N	41.484	39.73054N	118.44085E	44	5	Asia/Shanghai
+Gupi	Jiangsu	13	N	48.748	34.11389N	117.88278E	26	5	Asia/Shanghai
 Guozhen	Shaanxi	13	N	85.415	34.36591N	107.35904E	551	6	Asia/Shanghai
 Guli	Zhejiang	13	N	536	28.88162N	120.03308E	121	8	Asia/Shanghai
 Guiyang	Guizhou	13	R	1171.633	26.58333N	106.71667E	1087	9	Asia/Shanghai
@@ -3845,14 +3886,17 @@ Guiping	Guangxi	13	N	71.066	23.39483N	110.07434E	50	6	Asia/Shanghai
 Guilin	Guangxi	13	N	649.352	25.28194N	110.28639E	160	8	Asia/Shanghai
 Guigang	Guangxi	13	N	76.43	23.11603N	109.59472E	40	6	Asia/Shanghai
 Gucheng Chengguanzhen	Hubei	13	N	74.038	32.26604N	111.63476E	88	6	Asia/Shanghai
+Guanzhuang	Shandong	13	N	50.826	36.26333N	119.19389E	76	6	Asia/Shanghai
 Guanhu	Jiangsu	13	N	97.705	34.42528N	117.99528E	27	6	Asia/Shanghai
 Guangzhou	Guangdong	13	R	11071.424	23.11667N	113.25E	15	9	Asia/Shanghai
 Guangshui	Hubei	13	N	154.771	31.6199N	113.9978E	83	7	Asia/Shanghai
 Gejiu	Yunnan	13	N	136.135	23.36085N	103.15372E	1708	7	Asia/Shanghai
-Gaozhou	Guangdong	13	N	166.069	21.93924N	110.84607E	57	7	Asia/Shanghai
+Gaozuo	Jiangsu	13	N	43.419	33.90306N	118.03972E	20	5	Asia/Shanghai
+Gaozhou	Guangdong	13	N	166.069	21.91965N	110.85678E	28	7	Asia/Shanghai
 Gaoyou	Jiangsu	13	N	90.911	32.78933N	119.44182E	6	6	Asia/Shanghai
 Gaoping	Sichuan	13	N	204.368	30.77576N	106.10294E	283	7	Asia/Shanghai
-Gaomi	Shandong	13	N	150.793	36.38333N	119.75278E	24	7	Asia/Shanghai
+Gaomi	Shandong	13	N	391.986	36.38333N	119.75278E	24	7	Asia/Shanghai
+Gaoliu	Shandong	13	N	67.339	36.8N	118.5E	41	6	Asia/Shanghai
 Gaoliu	Jiangsu	13	N	48.485	34.31667N	118.51667E	21	5	Asia/Shanghai
 Gaogou	Jiangsu	13	N	56.214	34.0175N	119.18861E	5	6	Asia/Shanghai
 Gantang	Hunan	13	N	90	27.4375N	111.97306E	137	6	Asia/Shanghai
@@ -3866,7 +3910,7 @@ Fuling	Chongqing	13	N	166.507	29.70997N	107.39391E	232	7	Asia/Shanghai
 Foshan	Guangdong	13	N	3600	23.02677N	113.13148E	5	9	Asia/Shanghai
 Fenyi	Jiangxi	13	N	58.478	27.81117N	114.66805E	84	6	Asia/Shanghai
 Fengyi	Yunnan	13	N	61.89	25.58399N	100.31181E	1988	6	Asia/Shanghai
-Fengcheng	Jiangsu	13	N	208.791	34.70388N	116.58717E	40	7	Asia/Shanghai
+Fengcheng	Jiangsu	13	N	161.85	34.70388N	116.58717E	40	7	Asia/Shanghai
 Fengrun	Hebei	13	N	65.15	39.83333N	118.11667E	28	6	Asia/Shanghai
 Fengkou	Hubei	13	N	67.139	30.08268N	113.33346E	28	6	Asia/Shanghai
 Feicheng	Shandong	13	N	80.929	35.26056N	117.9675E	114	6	Asia/Shanghai
@@ -3901,6 +3945,7 @@ Daye	Hubei	13	N	61.847	30.08333N	114.95E	25	6	Asia/Shanghai
 Lijiang	Yunnan	13	N	1137.6	26.86879N	100.22072E	2397	9	Asia/Shanghai
 Dazhou	Sichuan	13	N	130.749	31.21592N	107.50092E	309	7	Asia/Shanghai
 Dawukou	Ningxia Hui Autonomous Region	13	N	131.88	39.04194N	106.39583E	1119	7	Asia/Shanghai
+Datun	Jiangsu	13	N	110.258	34.80923N	116.90174E	58	7	Asia/Shanghai
 Datong	Anhui	13	N	61.085	32.62082N	117.06319E	39	6	Asia/Shanghai
 Fenghua	Zhejiang	13	N	76.653	29.65628N	121.4064E	17	6	Asia/Shanghai
 Daokou	Henan	13	N	56.637	35.56389N	114.50583E	64	6	Asia/Shanghai
@@ -3929,11 +3974,14 @@ Chaozhou	Guangdong	13	N	424.787	23.65396N	116.62262E	23	7	Asia/Shanghai
 Chaohu	Anhui	13	N	138.463	31.6N	117.86667E	11	7	Asia/Shanghai
 Changzhou	Jiangsu	13	N	949.018	31.77359N	119.95401E	9	8	Asia/Shanghai
 Changzhi	Shanxi	13	N	699.514	35.20889N	111.73861E	381	8	Asia/Shanghai
+Changyi	Shandong	13	N	302.072	36.85361N	119.39083E	12	7	Asia/Shanghai
 Changsha	Hunan	13	R	3093.98	28.19874N	112.97087E	67	9	Asia/Shanghai
 Changqing	Shandong	13	N	82.598	36.5575N	116.72722E	39	6	Asia/Shanghai
 Changli	Hebei	13	N	64.476	39.70417N	119.15056E	20	6	Asia/Shanghai
 Changleng	Jiangxi	13	N	56.429	28.7N	115.81667E	38	6	Asia/Shanghai
+Changle	Shandong	13	N	259.161	36.70583N	118.8275E	62	7	Asia/Shanghai
 Changdian	Jiangsu	13	N	49.772	34.77586N	116.58339E	35	5	Asia/Shanghai
+Chaigou	Shandong	13	N	79.043	36.24889N	119.62417E	36	6	Asia/Shanghai
 Chahe	Jiangsu	13	N	30.094	34.53333N	117.88333E	26	5	Asia/Shanghai
 Caoqiao	Jiangsu	13	N	65.243	34.3405N	118.11038E	32	6	Asia/Shanghai
 Caohe	Hubei	13	N	67.37	30.2297N	115.43346E	27	6	Asia/Shanghai
@@ -3950,6 +3998,7 @@ Bijie	Guizhou	13	N	77.645	27.30193N	105.28627E	1471	6	Asia/Shanghai
 Bianzhuang	Shandong	13	N	65.381	34.84861N	118.04472E	45	6	Asia/Shanghai
 Biantang	Jiangsu	13	N	46.26	34.42325N	117.64541E	32	5	Asia/Shanghai
 Bengbu	Anhui	13	N	576.648	32.94083N	117.36083E	31	8	Asia/Shanghai
+Beimeng	Shandong	13	N	66.277	36.60444N	119.49556E	32	6	Asia/Shanghai
 Beijing	Beijing	13	C	11716.62	39.9075N	116.39723E	49	9	Asia/Shanghai
 Beihai	Guangxi	13	N	289.568	21.48349N	109.11549E	-9999	7	Asia/Shanghai
 Beidao	Gansu	13	N	74.767	34.56861N	105.89333E	1087	6	Asia/Shanghai
@@ -3966,7 +4015,7 @@ Shangyu	Zhejiang	13	N	770	30.01556N	120.87111E	13	8	Asia/Shanghai
 Babu	Guangxi	13	N	65.603	24.41667N	111.51667E	109	6	Asia/Shanghai
 Anxiang	Hunan	13	N	57.769	29.4N	112.15E	33	6	Asia/Shanghai
 Anshun	Guizhou	13	N	351.936	26.25N	105.93333E	1374	7	Asia/Shanghai
-Anqiu	Shandong	13	N	105.665	36.43417N	119.1925E	58	7	Asia/Shanghai
+Anqiu	Shandong	13	N	364.208	36.43417N	119.1925E	58	7	Asia/Shanghai
 Anqing	Anhui	13	N	358.661	30.51365N	117.04723E	19	7	Asia/Shanghai
 Mabai	Yunnan	13	N	63.569	23.01279N	104.45081E	1501	6	Asia/Shanghai
 Anlu	Hubei	13	N	71.198	31.2575N	113.67833E	49	6	Asia/Shanghai
@@ -3976,6 +4025,8 @@ Ahu	Jiangsu	13	N	55.298	34.37664N	118.60308E	29	6	Asia/Shanghai
 Jiangyou	Sichuan	13	N	127.225	31.76667N	104.71667E	527	7	Asia/Shanghai
 Suzhou	Jiangsu	13	N	5345.961	31.30408N	120.59538E	10	9	Asia/Shanghai
 Zhoushan	Zhejiang	13	N	84.38	29.98869N	122.20488E	2	6	Asia/Shanghai
+Wuduan	Jiangsu	13	N	41.803	34.57444N	117.09528E	35	5	Asia/Shanghai
+Guanshan	Jiangsu	13	N	51.086	33.79833N	117.86639E	21	6	Asia/Shanghai
 Mudu	Jiangsu	13	N	61.902	31.25597N	120.51857E	9	6	Asia/Shanghai
 Songling	Jiangsu	13	N	77.566	31.1933N	120.71758E	5	6	Asia/Shanghai
 Zhongshan	Guangdong	13	N	3121.275	21.31992N	110.5723E	14	9	Asia/Shanghai
@@ -4184,15 +4235,18 @@ Fenghuang	Hunan	13	N	370	27.93557N	109.59961E	449	7	Asia/Shanghai
 Zhu Cheng City	Shandong	13	N	1000	35.99502N	119.40259E	67	9	Asia/Shanghai
 Shangri-La	Yunnan	13	N	130	27.82511N	99.70779E	3283	7	Asia/Shanghai
 Ordos	Inner Mongolia	13	N	1940.653	39.6086N	109.78157E	1310	9	Asia/Shanghai
-Daocheng	Jiangsu	13	N	31.113	29.0379N	100.2974E	3761	5	Asia/Shanghai
+Daocheng	Jiangsu	13	N	31.113	29.0379N	100.2974E	3756	5	Asia/Shanghai
 Wenshan City	Yunnan	13	N	450	23.36306N	104.25047E	1257	7	Asia/Shanghai
 Liupanshui	Guizhou	13	N	251.9	26.59444N	104.83333E	1799	7	Asia/Shanghai
+Damoujia	Shandong	13	N	47.569	36.54356N	119.81326E	13	5	Asia/Shanghai
+Shanwang	Shandong	13	N	63.195	36.5454N	118.711E	246	6	Asia/Shanghai
 Jianshui	Yunnan	13	N	490	24.2774N	101.224E	1939	7	Asia/Shanghai
 Xuzhou	Jiangsu	13	N	1253.991	34.20442N	117.28386E	35	9	Asia/Shanghai
 Lianyungang	Jiangsu	13	N	734.629	34.59845N	119.21556E	1	8	Asia/Shanghai
 Qipan	Jiangsu	13	N	66.419	34.24469N	118.22113E	33	6	Asia/Shanghai
 Huocheng	Xinjiang	13	N	360	44.05305N	80.87173E	639	7	Asia/Urumqi
 Bayan Nur	Inner Mongolia	13	N	1760	40.74143N	107.38599E	1050	9	Asia/Shanghai
+Fangchenggang	Guangxi	13	N	400	21.76945N	108.35661E	15	7	Asia/Shanghai
 Dali Old Town	Yunnan	13	N	82.566	25.68863N	100.15894E	2039	6	Asia/Shanghai
 Haidong Zhen	Yunnan	13	N	21.274	25.70979N	100.26061E	1968	5	Asia/Shanghai
 Yinqiao Zhen	Yunnan	13	N	28.002	25.75429N	100.12346E	1999	5	Asia/Shanghai
@@ -4207,6 +4261,27 @@ Liguo	Shandong	13	N	54.96	34.55287N	117.33296E	18	6	Asia/Shanghai
 Jiawang Zhen	Jiangsu	13	N	49.005	34.42202N	117.46764E	54	5	Asia/Shanghai
 Dashahe	Jiangsu	13	N	51.916	34.53847N	116.62453E	38	6	Asia/Shanghai
 Wanggou	Jiangsu	13	N	67.14	34.67147N	116.49213E	39	6	Asia/Shanghai
+Jing'an	Jiangsu	13	N	57.825	34.49621N	116.92249E	45	6	Asia/Shanghai
+Yingqiu	Shandong	13	N	92.564	36.52663N	118.99285E	100	6	Asia/Shanghai
+Liushan	Shandong	13	N	33.992	36.44972N	118.76016E	202	5	Asia/Shanghai
+Yishan	Shandong	13	N	78.408	36.22107N	118.69663E	213	6	Asia/Shanghai
+Dasheng	Shandong	13	N	31.797	36.32N	118.85541E	133	5	Asia/Shanghai
+Huiqu	Shandong	13	N	59.323	36.27136N	119.04903E	134	6	Asia/Shanghai
+Jinzhongzi	Shandong	13	N	39.054	36.33457N	119.25807E	81	5	Asia/Shanghai
+Wushan	Shandong	13	N	33.881	36.24725N	118.83832E	162	5	Asia/Shanghai
+Zheshan	Shandong	13	N	28.333	36.14877N	118.95135E	188	5	Asia/Shanghai
+Buzhuang	Shandong	13	N	53.474	36.91218N	119.5566E	11	6	Asia/Shanghai
+Longchi	Shandong	13	N	25.923	36.94529N	119.32532E	31	5	Asia/Shanghai
+Xiaying	Shandong	13	N	23.395	37.04248N	119.47654E	11	5	Asia/Shanghai
+Baicheng	Shandong	13	N	77.235	36.32743N	119.77875E	18	6	Asia/Shanghai
+Jinggou	Shandong	13	N	62.917	36.28176N	119.55185E	31	6	Asia/Shanghai
+Kanjia	Shandong	13	N	75.669	36.37227N	119.58208E	10	6	Asia/Shanghai
+Huanglou	Shandong	13	N	80.055	36.64709N	118.60554E	56	6	Asia/Shanghai
+Yidu	Shandong	13	N	105.07	36.77121N	118.42454E	83	7	Asia/Shanghai
+Dongxia	Shandong	13	N	84.083	36.74918N	118.58268E	68	6	Asia/Shanghai
+Heguan	Shandong	13	N	73.47	36.88998N	118.57379E	32	6	Asia/Shanghai
+Miaozi	Shandong	13	N	38.147	36.6386N	118.23138E	175	5	Asia/Shanghai
+Mihe	Shandong	13	N	49.545	36.62096N	118.52872E	99	5	Asia/Shanghai
 Zipaquira	Cundinamarca	08	N	91.235	5.02208N	74.00481W	2607	6	America/Bogota
 Zarzal	Valle del Cauca	08	N	28.761	4.39462N	76.0715W	921	5	America/Bogota
 Zaragoza	Antioquia	08	N	18.795	7.48971N	74.86919W	66	5	America/Bogota
@@ -5774,6 +5849,7 @@ Gartenstadt	Rheinland-Pfalz	20	N	17.745	49.45937N	8.40377E	96	5	Europe/Berlin
 Duesseldorf-Pempelfort	North Rhine-Westphalia	20	N	28.941	51.23812N	6.78678E	43	5	Europe/Berlin
 Burglesum	Bremen	20	N	33	53.16532N	8.68873E	8	5	Europe/Berlin
 Sachsenheim	Baden-Wuerttemberg	20	N	18.594	48.96N	9.06472E	239	5	Europe/Berlin
+Petershausen-West	Baden-Wuerttemberg	20	N	16.021	47.67411N	9.17787E	406	5	Europe/Berlin
 Kronberg Tal	Hesse	20	N	17.55	50.17929N	8.5037E	232	5	Europe/Berlin
 Remseck am Neckar	Baden-Wuerttemberg	20	N	26.467	48.87213N	9.27334E	229	5	Europe/Berlin
 Tadjourah	Tadjourah	02	R	22.193	11.78778N	42.88222E	3	5	Africa/Djibouti
@@ -6465,7 +6541,7 @@ Lorca	Murcia	19	N	91.906	37.67119N	1.7017W	339	6	Europe/Madrid
 Lora del Rio	Andalusia	19	N	19.352	37.65896N	5.52751W	41	5	Europe/Madrid
 Loja	Andalusia	19	N	21.574	37.16887N	4.15129W	453	5	Europe/Madrid
 Llucmajor	Balearic Islands	19	N	36.078	39.49093N	2.89108E	150	5	Europe/Madrid
-Lliria	Valencia	19	N	22.706	39.62894N	0.59783W	174	5	Europe/Madrid
+Lliria	Valencia	19	N	22.706	39.62894N	0.59783W	164	5	Europe/Madrid
 Linares	Andalusia	19	N	61.338	38.09519N	3.63602W	413	6	Europe/Madrid
 Lepe	Andalusia	19	N	25.886	37.25482N	7.20433W	24	5	Europe/Madrid
 Lebrija	Andalusia	19	N	26.434	36.92077N	6.07529W	41	5	Europe/Madrid
@@ -6877,7 +6953,7 @@ Nou Barris	Catalonia	19	N	166.31	41.44163N	2.17727E	85	7	Europe/Madrid
 Pinar de Chamartin	Madrid	19	N	30	40.47903N	3.66836W	737	5	Europe/Madrid
 Playa del Ingles	Canary Islands	19	N	17.158	27.7567N	15.5787W	49	5	Atlantic/Canary
 Puerto del Carmen	Canary Islands	19	N	30	28.92313N	13.66579W	44	5	Atlantic/Canary
-Ceuta	Ceuta	19	R	78.674	35.88919N	5.32042W	-9999	6	Europe/Madrid
+Ceuta	Ceuta	19	R	78.674	35.88919N	5.32042W	22	6	Europe/Madrid
 Moncloa-Aravaca	Madrid	19	N	116.531	40.43547N	3.7317W	615	7	Europe/Madrid
 Eixample	Catalonia	19	N	266.477	41.38896N	2.16179E	44	7	Europe/Madrid
 Les Corts	Catalonia	19	N	82.27	41.38712N	2.13007E	73	6	Europe/Madrid
@@ -7839,6 +7915,7 @@ Wallasey	England	18	N	58.794	53.42324N	3.06497W	14	6	Europe/London
 Walkden	England	18	N	35.937	53.51667N	2.4W	68	5	Europe/London
 Wakefield	England	18	N	78.978	53.68331N	1.49768W	50	6	Europe/London
 Urmston	England	18	N	41.198	53.44852N	2.35419W	26	5	Europe/London
+Upper Norwood	England	18	N	16.082	51.41505N	0.0927W	97	5	Europe/London
 Uckfield	England	18	N	18.452	50.96948N	0.09589E	19	5	Europe/London
 Tynemouth	England	18	N	17.436	55.01788N	1.42559W	35	5	Europe/London
 Tyldesley	England	18	N	35.932	53.51393N	2.46754W	58	5	Europe/London
@@ -7899,6 +7976,7 @@ South Shields	England	18	N	83.655	54.99859N	1.4323W	12	6	Europe/London
 Southsea	England	18	N	18.514	50.78351N	1.09071W	3	5	Europe/London
 Southport	England	18	N	91.703	53.64581N	3.01008W	9	6	Europe/London
 South Ockendon	England	18	N	19.46	51.50799N	0.28333E	18	5	Europe/London
+South Norwood	England	18	N	16.518	51.39944N	0.07469W	57	5	Europe/London
 South Hayling	England	18	N	15.485	50.78773N	0.97697W	5	5	Europe/London
 Southend-on-Sea	England	18	N	295.31	51.53782N	0.71433E	31	7	Europe/London
 South Elmsall	England	18	N	18.835	53.59709N	1.28034W	67	5	Europe/London
@@ -8027,6 +8105,7 @@ Northolt	England	18	N	26	51.54855N	0.36778W	41	5	Europe/London
 Lancing	England	18	N	18.692	50.82882N	0.32247W	7	5	Europe/London
 Northampton	England	18	N	215.963	52.25N	0.88333W	97	7	Europe/London
 Northallerton	England	18	N	16.832	54.33901N	1.43243W	43	5	Europe/London
+Norbury	England	18	N	16.476	51.41667N	0.11667W	46	5	Europe/London
 Newtownards	Northern Ireland	18	N	29.363	54.59236N	5.69092W	9	5	Europe/London
 Newtownabbey	Northern Ireland	18	N	63.86	54.65983N	5.90858W	15	6	Europe/London
 Newton Mearns	Scotland	18	N	24.65	55.77334N	4.33339W	137	5	Europe/London
@@ -8069,6 +8148,7 @@ Mexborough	England	18	N	15.079	53.49389N	1.29243W	28	5	Europe/London
 Merthyr Tydfil	Wales	18	N	43.82	51.74794N	3.37779W	186	5	Europe/London
 Melton Mowbray	England	18	N	27.158	52.76588N	0.88693W	79	5	Europe/London
 Melksham	England	18	N	19.357	51.37281N	2.14002W	41	5	Europe/London
+Meikle Earnock	Scotland	18	N	54.08	55.75N	4.03333W	134	6	Europe/London
 Marple	England	18	N	18.241	53.39452N	2.06292W	147	5	Europe/London
 Marlow	England	18	N	18.261	51.56933N	0.77415W	32	5	Europe/London
 Market Harborough	England	18	N	22.911	52.4776N	0.92053W	81	5	Europe/London
@@ -8528,6 +8608,7 @@ Chalk Farm	England	18	N	24.977	51.54313N	0.14987W	33	5	Europe/London
 Amersham on the Hill	England	18	N	17.719	51.67468N	0.60742W	152	5	Europe/London
 Shadwell	England	18	N	15.11	51.51135N	0.05663W	15	5	Europe/London
 Battersea	England	18	N	75.651	51.47475N	0.15547W	7	6	Europe/London
+Tooting	England	18	N	16.239	51.42524N	0.16394W	19	5	Europe/London
 South Croydon	England	18	N	55.198	51.36217N	0.09421W	60	6	Europe/London
 Hornchurch	England	18	N	25.47	51.55685N	0.21664E	27	5	Europe/London
 Surbiton	England	18	N	38.158	51.39148N	0.29825W	40	5	Europe/London
@@ -8570,7 +8651,6 @@ Deeside	Wales	18	N	32	53.20053N	3.03841W	28	5	Europe/London
 High Peak	England	18	N	92.6	53.36797N	1.84536W	335	6	Europe/London
 Hayling Island	England	18	N	16.887	50.7838N	0.96869W	4	5	Europe/London
 Isle of Lewis	Scotland	18	N	18.5	58.21901N	6.38803W	14	5	Europe/London
-Orkney	Scotland	18	N	20.1	58.98465N	2.95953W	2	5	Europe/London
 Holloway	England	18	N	41.329	51.55237N	0.12497W	45	5	Europe/London
 Harringay	England	18	N	16.5	51.5824N	0.09956W	19	5	Europe/London
 Canning Town	England	18	N	30.806	51.51363N	0.01948E	3	5	Europe/London
@@ -8581,11 +8661,14 @@ Brockley	England	18	N	17.156	51.46369N	0.03652W	25	5	Europe/London
 Blantyre	Scotland	18	N	17.09	55.79634N	4.09485W	68	5	Europe/London
 Vale of Leven	Scotland	18	N	24.64	55.97132N	4.57928W	9	5	Europe/London
 Viewpark	Scotland	18	N	16.02	55.82737N	4.0573W	71	5	Europe/London
-Hawley	England	18	N	15.551	51.42116N	0.22093E	42	5	Europe/London
 Stamford Hill	England	18	N	68.05	51.56872N	0.07334W	34	6	Europe/London
 Burngreave	England	18	N	27.481	53.39302N	1.45789W	65	5	Europe/London
 Archway	England	18	N	215.667	51.56733N	0.13415W	67	7	Europe/London
 Sinfin	England	18	N	15.128	52.88157N	1.48681W	61	5	Europe/London
+Perry Vale	England	18	N	15.618	51.43639N	0.04442W	43	5	Europe/London
+Furzedown	England	18	N	15.504	51.42456N	0.14656W	39	5	Europe/London
+Seven Sisters	England	18	N	15.968	51.57769N	0.07895W	18	5	Europe/London
+Tottenham Hale	England	18	N	15.064	51.59366N	0.05962W	10	5	Europe/London
 Washwood Heath	England	18	N	32.921	52.50054N	1.82657W	100	5	Europe/London
 Saint George's	Saint George	06	C	7.5	12.05288N	61.75226W	26	4	America/Grenada
 Zugdidi	Samegrelo and Zemo Svaneti	16	R	73.006	42.5088N	41.87088E	111	6	Asia/Tbilisi
@@ -12030,7 +12113,7 @@ Shivaji Nagar	Maharashtra	15	N	1000	18.53017N	73.85263E	559	9	Asia/Kolkata
 Greater Noida	Uttar Pradesh	15	N	293.908	28.49615N	77.53601E	212	7	Asia/Kolkata
 Mohali	Punjab	15	N	123.484	30.67995N	76.72211E	312	7	Asia/Kolkata
 Pithampur	Madhya Pradesh	15	N	68.051	22.60197N	75.69649E	595	6	Asia/Kolkata
-Barbil	Odisha	15	N	52.586	22.10194N	85.37752E	457	6	Asia/Kolkata
+Barbil	Odisha	15	N	52.586	22.10194N	85.37752E	465	6	Asia/Kolkata
 Airoli	Maharashtra	15	N	100	19.15096N	72.99625E	5	7	Asia/Kolkata
 Aluva	Kerala	15	N	24.108	10.10764N	76.35158E	13	5	Asia/Kolkata
 Kotkapura	Punjab	15	N	80.741	30.5819N	74.83298E	208	6	Asia/Kolkata
@@ -12056,7 +12139,7 @@ Mandamarri	Telangana	15	N	66.176	18.96506N	79.47475E	172	6	Asia/Kolkata
 Chinnachowk	Andhra Pradesh	15	N	64.053	14.47516N	78.8354E	135	6	Asia/Kolkata
 Kyathampalle	Telangana	15	N	42.275	19.66781N	78.5289E	262	5	Asia/Kolkata
 Gajuwaka	Andhra Pradesh	15	N	258.944	17.7N	83.21667E	17	7	Asia/Kolkata
-Manuguru	Telangana	15	N	32.539	17.93023N	80.82671E	66	5	Asia/Kolkata
+Manuguru	Telangana	15	N	32.539	17.93023N	80.82671E	78	5	Asia/Kolkata
 Kalyandurg	Andhra Pradesh	15	N	29.272	14.54519N	77.10552E	592	5	Asia/Kolkata
 Ponnur	Andhra Pradesh	15	N	56.504	16.07114N	80.54944E	11	6	Asia/Kolkata
 Quthbullapur	Telangana	15	N	225.816	17.50107N	78.45818E	554	7	Asia/Kolkata
@@ -13026,7 +13109,7 @@ Karak City	Karak	16	R	21.678	31.16368N	35.76204E	948	5	Asia/Amman
 Russeifa	Zarqa	16	N	268.237	32.01778N	36.04639E	614	7	Asia/Amman
 Rukban	Mafraq	16	N	85	33.31405N	38.70342E	772	6	Asia/Amman
 Shingu	Wakayama	13	N	31.619	33.73333N	135.98333E	7	5	Asia/Tokyo
-Atsugi	Kanagawa	13	N	229.199	35.44272N	139.36931E	26	7	Asia/Tokyo
+Atsugi	Kanagawa	13	N	223.96	35.44272N	139.36931E	26	7	Asia/Tokyo
 Akashi	Hyogo	13	N	297.279	34.65524N	135.00687E	37	7	Asia/Tokyo
 Zushi	Kanagawa	13	N	60.055	35.29483N	139.57812E	9	6	Asia/Tokyo
 Zama	Kanagawa	13	N	134.671	35.4879N	139.39101E	32	7	Asia/Tokyo
@@ -13038,7 +13121,7 @@ Yugawara	Kanagawa	13	N	27.567	35.15N	139.06667E	204	5	Asia/Tokyo
 Yoshikawa	Saitama	13	N	60.51	35.89232N	139.84184E	4	6	Asia/Tokyo
 Yoshii	Gunma	13	N	25.655	36.25N	138.98333E	125	5	Asia/Tokyo
 Yoshida-kasugacho	Niigata	13	N	25.5	37.68333N	138.88333E	7	5	Asia/Tokyo
-Yorii	Saitama	13	N	38.717	36.11567N	139.19429E	102	5	Asia/Tokyo
+Yorii	Saitama	13	N	32.851	36.11567N	139.19429E	102	5	Asia/Tokyo
 Yono	Saitama	13	N	1077.73	35.88333N	139.63333E	14	9	Asia/Tokyo
 Yonago	Tottori	13	N	141.368	35.43333N	133.33333E	9	7	Asia/Tokyo
 Yokosuka	Kanagawa	13	N	428.992	35.28361N	139.66722E	9	7	Asia/Tokyo
@@ -13065,7 +13148,7 @@ Uto	Kumamoto	13	N	39.234	32.68333N	130.66667E	4	5	Asia/Tokyo
 Usuki	Oita	13	N	35.001	33.12342N	131.80401E	4	5	Asia/Tokyo
 Ushibukamachi	Kumamoto	13	N	16.667	32.20142N	130.02171E	109	5	Asia/Tokyo
 Ureshinomachi-shimojuku	Saga	13	N	18.953	33.11358N	130.00292E	56	5	Asia/Tokyo
-Urayasu	Tokyo	13	N	143.758	35.67056N	139.88861E	6	7	Asia/Tokyo
+Urayasu	Tokyo	13	N	170.091	35.67056N	139.88861E	6	7	Asia/Tokyo
 Uozu	Toyama	13	N	45.848	36.8N	137.4E	13	5	Asia/Tokyo
 Umi	Fukuoka	13	N	39.772	33.56826N	130.51009E	41	5	Asia/Tokyo
 Ujiie	Tochigi	13	N	30.366	36.68333N	139.96667E	164	5	Asia/Tokyo
@@ -13084,7 +13167,7 @@ Tsuruga	Fukui	13	N	68.482	35.64547N	136.0558E	6	6	Asia/Tokyo
 Tsuma	Miyazaki	13	N	34.318	32.1N	131.4E	11	5	Asia/Tokyo
 Tsukumiura	Oita	13	N	21.658	33.07539N	131.86907E	13	5	Asia/Tokyo
 Tsukawaki	Oita	13	N	18.371	33.27668N	131.15628E	336	5	Asia/Tokyo
-Tsubata	Ishikawa	13	N	38.644	36.67012N	136.7403E	10	5	Asia/Tokyo
+Tsubata	Ishikawa	13	N	37.694	36.67012N	136.7403E	10	5	Asia/Tokyo
 Tsubame	Niigata	13	N	44.284	37.6645N	138.92518E	8	5	Asia/Tokyo
 Tsu	Mie	13	R	163.461	34.73333N	136.51667E	1	7	Asia/Tokyo
 Toyota	Aichi	13	N	362.383	35.08333N	137.15E	55	7	Asia/Tokyo
@@ -13092,7 +13175,7 @@ Toyoshina	Nagano	13	N	27.834	36.29991N	137.90108E	553	5	Asia/Tokyo
 Toyooka	Hyogo	13	N	46.5	35.54008N	134.82038E	29	5	Asia/Tokyo
 Toyonaka	Osaka	13	N	384.459	34.78244N	135.46932E	31	7	Asia/Tokyo
 Toyokawa	Aichi	13	N	120.537	34.81667N	137.4E	4	7	Asia/Tokyo
-Toyohashi	Aichi	13	N	378.374	34.76667N	137.38333E	12	7	Asia/Tokyo
+Toyohashi	Aichi	13	N	377.453	34.76667N	137.38333E	12	7	Asia/Tokyo
 Toyohama	Aichi	13	N	21.917	34.70933N	136.93425E	3	5	Asia/Tokyo
 Toyama	Toyama	13	R	325.532	36.7N	137.21667E	11	7	Asia/Tokyo
 Tottori	Tottori	13	R	154.098	35.5N	134.23333E	6	7	Asia/Tokyo
@@ -13108,7 +13191,7 @@ Tokorozawa	Saitama	13	N	339.435	35.79916N	139.46903E	82	7	Asia/Tokyo
 Tokoname	Aichi	13	N	49.554	34.88333N	136.85E	11	5	Asia/Tokyo
 Toki	Gifu	13	N	61.394	35.35N	137.18333E	159	6	Asia/Tokyo
 Tokamachi	Niigata	13	N	41.136	37.13333N	138.76667E	154	5	Asia/Tokyo
-Togitsu	Nagasaki	13	N	29.364	32.83333N	129.85E	1	5	Asia/Tokyo
+Togitsu	Nagasaki	13	N	30.084	32.83333N	129.85E	1	5	Asia/Tokyo
 Tochio-honcho	Niigata	13	N	23.045	37.47642N	138.99513E	65	5	Asia/Tokyo
 Tochigi	Tochigi	13	N	82.133	36.38333N	139.73333E	51	6	Asia/Tokyo
 Toba	Mie	13	N	23.303	34.4833N	136.84186E	6	5	Asia/Tokyo
@@ -13130,7 +13213,7 @@ Tanabe	Wakayama	13	N	69.563	33.73333N	135.36667E	7	6	Asia/Tokyo
 Tamano	Okayama	13	N	67.786	34.51745N	133.94574E	9	6	Asia/Tokyo
 Tamana	Kumamoto	13	N	45.661	32.94716N	130.57446E	5	5	Asia/Tokyo
 Tamamura	Gunma	13	N	42.566	36.3N	139.11667E	68	5	Asia/Tokyo
-Taketoyo	Aichi	13	N	41.679	34.85N	136.91667E	4	5	Asia/Tokyo
+Taketoyo	Aichi	13	N	43.147	34.85N	136.91667E	4	5	Asia/Tokyo
 Takeo	Saga	13	N	34.23	33.19009N	130.02084E	16	5	Asia/Tokyo
 Takehara	Hiroshima	13	N	30.506	34.33833N	132.91667E	19	5	Asia/Tokyo
 Takefu	Fukui	13	N	75.753	35.90393N	136.16687E	34	6	Asia/Tokyo
@@ -13147,7 +13230,7 @@ Takahashi	Okayama	13	N	24.819	34.78333N	133.61667E	66	5	Asia/Tokyo
 Takahama	Aichi	13	N	40.501	34.91667N	136.98333E	7	5	Asia/Tokyo
 Bungo-Takada-shi	Oita	13	N	23.856	33.5567N	131.44506E	6	5	Asia/Tokyo
 Tajimi	Gifu	13	N	107.818	35.31667N	137.13333E	138	7	Asia/Tokyo
-Tahara	Aichi	13	N	38.177	34.66667N	137.26667E	6	5	Asia/Tokyo
+Tahara	Aichi	13	N	60.206	34.66667N	137.26667E	6	6	Asia/Tokyo
 Tagawa	Fukuoka	13	N	51.608	33.63333N	130.8E	46	6	Asia/Tokyo
 Tadotsu	Kagawa	13	N	23.514	34.275N	133.75E	4	5	Asia/Tokyo
 Suzuka	Mie	13	N	191.477	34.88333N	136.58333E	10	7	Asia/Tokyo
@@ -13158,7 +13241,7 @@ Sumoto	Hyogo	13	N	39.546	34.34322N	134.88911E	-1	5	Asia/Tokyo
 Sukumo	Kochi	13	N	25.784	32.93333N	132.73333E	12	5	Asia/Tokyo
 Suita	Osaka	13	N	351.63	34.76143N	135.51567E	4	7	Asia/Tokyo
 Suibara	Niigata	13	N	20.392	37.84608N	139.23039E	6	5	Asia/Tokyo
-Sugito	Saitama	13	N	49.817	36.03107N	139.72636E	10	5	Asia/Tokyo
+Sugito	Saitama	13	N	44.402	36.03107N	139.72636E	10	5	Asia/Tokyo
 Sueyoshicho-ninokata	Kagoshima	13	N	19.986	31.65N	131.01667E	188	5	Asia/Tokyo
 Soka	Saitama	13	N	231.445	35.83643N	139.79957E	6	7	Asia/Tokyo
 Soja	Okayama	13	N	57.469	34.67534N	133.75091E	19	6	Asia/Tokyo
@@ -13174,14 +13257,14 @@ Shiojiri	Nagano	13	N	67.159	36.1N	137.96667E	729	6	Asia/Tokyo
 Shinshiro	Aichi	13	N	36.069	34.9N	137.5E	48	5	Asia/Tokyo
 Shin'ichi	Hiroshima	13	N	21.03	34.55543N	133.27297E	23	5	Asia/Tokyo
 Shingu	Fukuoka	13	N	25.991	33.71399N	130.4313E	4	5	Asia/Tokyo
-Shimonoseki	Yamaguchi	13	N	245.786	33.95N	130.95E	-9999	7	Asia/Tokyo
+Shimonoseki	Yamaguchi	13	N	265.684	33.95N	130.95E	-9999	7	Asia/Tokyo
 Shimodate	Ibaraki	13	N	63.666	36.3N	139.98333E	34	6	Asia/Tokyo
 Shimoda	Shizuoka	13	N	26.704	34.67652N	138.94456E	11	5	Asia/Tokyo
 Minato	Wakayama	13	N	375.339	34.2152N	135.1501E	5	7	Asia/Tokyo
 Nishishinminato	Toyama	13	N	35.994	36.77957N	137.07576E	2	5	Asia/Tokyo
 Shimada	Shizuoka	13	N	75.781	34.81667N	138.18333E	105	6	Asia/Tokyo
 Shimabara	Nagasaki	13	N	38.113	32.78333N	130.36667E	11	5	Asia/Tokyo
-Shiki	Saitama	13	N	65.411	35.83333N	139.58333E	10	6	Asia/Tokyo
+Shiki	Saitama	13	N	76.445	35.83333N	139.58333E	10	6	Asia/Tokyo
 Shido	Kagawa	13	N	22.859	34.32333N	134.17333E	6	5	Asia/Tokyo
 Shibushi	Kagoshima	13	N	18.349	31.476N	131.10114E	11	5	Asia/Tokyo
 Shibukawa	Gunma	13	N	48.322	36.48333N	139E	202	5	Asia/Tokyo
@@ -13241,14 +13324,14 @@ Oita	Oita	13	R	448.907	33.23333N	131.6E	9	7	Asia/Tokyo
 Oiso	Kanagawa	13	N	32.595	35.31558N	139.31625E	71	5	Asia/Tokyo
 Oi	Saitama	13	N	50.593	35.85091N	139.51998E	21	6	Asia/Tokyo
 Ogori-shimogo	Yamaguchi	13	N	23.516	34.1N	131.4E	4	5	Asia/Tokyo
-Ogawa	Saitama	13	N	37.443	36.05342N	139.26612E	90	5	Asia/Tokyo
+Ogawa	Saitama	13	N	28.971	36.05342N	139.26612E	90	5	Asia/Tokyo
 Ogaki	Gifu	13	N	150.57	35.35N	136.61667E	7	7	Asia/Tokyo
 Odawara	Kanagawa	13	N	203.035	35.25556N	139.15972E	15	7	Asia/Tokyo
-Odacho-oda	Shimane	13	N	31.867	35.19025N	132.50846E	27	5	Asia/Tokyo
+Odacho-oda	Shimane	13	N	34.354	35.19025N	132.50846E	27	5	Asia/Tokyo
 Obu	Aichi	13	N	77.864	35.01756N	136.94947E	23	6	Asia/Tokyo
 Obita	Nagasaki	13	N	45.293	32.81667N	129.88333E	19	5	Asia/Tokyo
 Obama	Fukui	13	N	32.896	35.49576N	135.74604E	3	5	Asia/Tokyo
-Nyuzen	Toyama	13	N	27.585	36.93744N	137.50059E	24	5	Asia/Tokyo
+Nyuzen	Toyama	13	N	25.007	36.93744N	137.50059E	24	5	Asia/Tokyo
 Numazu	Shizuoka	13	N	204.318	35.1N	138.86667E	8	7	Asia/Tokyo
 Numata	Gunma	13	N	45.526	36.63333N	139.05E	376	5	Asia/Tokyo
 Nonoichi	Ishikawa	13	N	48.354	36.53333N	136.61667E	20	5	Asia/Tokyo
@@ -13265,7 +13348,7 @@ Nikko	Tochigi	13	N	16.041	36.75N	139.61667E	555	5	Asia/Tokyo
 Niitsu-honcho	Niigata	13	N	65.91	37.80024N	139.1224E	8	6	Asia/Tokyo
 Niimi	Okayama	13	N	23.787	34.98333N	133.46667E	193	5	Asia/Tokyo
 Niihama	Ehime	13	N	123.059	33.96047N	133.30522E	13	7	Asia/Tokyo
-Niigata	Niigata	13	R	505.272	37.88637N	139.00589E	-2	8	Asia/Tokyo
+Niigata	Niigata	13	R	797.591	37.88637N	139.00589E	-2	8	Asia/Tokyo
 Nichinan	Miyazaki	13	N	44.243	31.6N	131.36667E	29	5	Asia/Tokyo
 Naze	Kagoshima	13	N	41.365	28.36667N	129.48333E	192	5	Asia/Tokyo
 Narutocho-mitsuishi	Tokushima	13	N	64.082	34.19933N	134.60932E	2	6	Asia/Tokyo
@@ -13287,7 +13370,7 @@ Nagaoka	Niigata	13	N	195.318	37.45N	138.85E	23	7	Asia/Tokyo
 Nagano	Nagano	13	R	360.176	36.65N	138.18333E	372	7	Asia/Tokyo
 Nagahama	Shiga	13	N	62.089	35.38333N	136.26667E	86	6	Asia/Tokyo
 Nabari	Mie	13	N	88.128	34.61667N	136.08333E	192	6	Asia/Tokyo
-Musashino	Tokyo	13	N	137.479	35.70611N	139.55944E	62	7	Asia/Tokyo
+Musashino	Tokyo	13	N	147.492	35.70611N	139.55944E	62	7	Asia/Tokyo
 Muroto-misakicho	Kochi	13	N	17.601	33.28662N	134.16832E	99	5	Asia/Tokyo
 Muramatsu	Niigata	13	N	19.712	37.69257N	139.17127E	21	5	Asia/Tokyo
 Murakami	Niigata	13	N	31.334	38.23333N	139.48333E	4	5	Asia/Tokyo
@@ -13351,7 +13434,7 @@ Koshigaya	Saitama	13	N	317.437	35.89035N	139.78916E	7	7	Asia/Tokyo
 Konosu	Saitama	13	N	88.493	36.06868N	139.51684E	19	6	Asia/Tokyo
 Konan	Aichi	13	N	100.389	35.33165N	136.87042E	19	7	Asia/Tokyo
 Komoro	Nagano	13	N	46.272	36.31667N	138.43333E	686	5	Asia/Tokyo
-Komono	Mie	13	N	40.74	35N	136.51667E	84	5	Asia/Tokyo
+Komono	Mie	13	N	41.542	35N	136.51667E	84	5	Asia/Tokyo
 Komatsushimacho	Tokushima	13	N	42.598	34N	134.58333E	3	5	Asia/Tokyo
 Komatsu	Ishikawa	13	N	109.045	36.40263N	136.45088E	7	7	Asia/Tokyo
 Komaki	Aichi	13	N	151.025	35.28333N	136.91667E	17	7	Asia/Tokyo
@@ -13387,7 +13470,7 @@ Kashiwa	Chiba	13	N	340.221	35.86224N	139.97732E	24	7	Asia/Tokyo
 Kashima	Saga	13	N	32.41	33.10611N	130.09056E	20	5	Asia/Tokyo
 Kashihara-shi	Nara	13	N	124.521	34.50896N	135.7929E	65	7	Asia/Tokyo
 Kashihara	Osaka	13	N	79.058	34.58333N	135.61667E	18	6	Asia/Tokyo
-Kaseda-shirakame	Kagoshima	13	N	23.71	31.41667N	130.31667E	22	5	Asia/Tokyo
+Kaseda-shirakame	Kagoshima	13	N	39.012	31.41667N	130.31667E	22	5	Asia/Tokyo
 Kasaoka	Okayama	13	N	58.461	34.50597N	133.50391E	9	6	Asia/Tokyo
 Kasamatsucho	Gifu	13	N	22.671	35.36667N	136.76667E	4	5	Asia/Tokyo
 Kariya	Aichi	13	N	139.159	34.98333N	136.98333E	2	7	Asia/Tokyo
@@ -13397,7 +13480,7 @@ Kanuma	Tochigi	13	N	94.903	36.55N	139.73333E	162	6	Asia/Tokyo
 Kanoya	Kagoshima	13	N	82.335	31.38333N	130.85E	23	6	Asia/Tokyo
 Kan'onjicho	Kagawa	13	N	44.363	34.1276N	133.64598E	4	5	Asia/Tokyo
 Kannabecho-yahiro	Hiroshima	13	N	40.766	34.55808N	133.41796E	17	5	Asia/Tokyo
-Kanie	Aichi	13	N	36.592	35.13333N	136.8E	0	5	Asia/Tokyo
+Kanie	Aichi	13	N	37.082	35.13333N	136.8E	0	5	Asia/Tokyo
 Kanekomachi	Gunma	13	N	37.107	36.41097N	138.99621E	193	5	Asia/Tokyo
 Kanda	Fukuoka	13	N	36.122	33.78333N	130.98333E	4	5	Asia/Tokyo
 Kanazawa	Ishikawa	13	R	458.937	36.6N	136.61667E	-1	7	Asia/Tokyo
@@ -13407,7 +13490,7 @@ Kamogatacho-kamogata	Okayama	13	N	18.412	34.53745N	133.58967E	17	5	Asia/Tokyo
 Kamo	Niigata	13	N	32.129	37.66442N	139.03502E	3	5	Asia/Tokyo
 Kamirenjaku	Tokyo	13	N	178.739	35.69423N	139.55495E	59	7	Asia/Tokyo
 Kaminokawa	Tochigi	13	N	30.827	36.43333N	139.91667E	65	5	Asia/Tokyo
-Kamiichi	Toyama	13	N	23.004	36.7N	137.36667E	42	5	Asia/Tokyo
+Kamiichi	Toyama	13	N	20.827	36.7N	137.36667E	42	5	Asia/Tokyo
 Kameyama	Mie	13	N	39.899	34.85N	136.45E	54	5	Asia/Tokyo
 Kameoka	Kyoto	13	N	97.181	35N	135.58333E	129	6	Asia/Tokyo
 Kameda-honcho	Niigata	13	N	32.765	37.87214N	139.1099E	0	5	Asia/Tokyo
@@ -13422,7 +13505,7 @@ Kainan	Wakayama	13	N	43.369	34.15166N	135.21398E	3	5	Asia/Tokyo
 Kagoshima	Kagoshima	13	R	555.352	31.56667N	130.55E	6	8	Asia/Tokyo
 Kadoma	Osaka	13	N	131.727	34.7381N	135.57442E	8	7	Asia/Tokyo
 Izumo	Shimane	13	N	89.286	35.36667N	132.76667E	6	6	Asia/Tokyo
-Izumisano	Osaka	13	N	100.595	34.41667N	135.31667E	6	7	Asia/Tokyo
+Izumisano	Osaka	13	N	100.649	34.41667N	135.31667E	6	7	Asia/Tokyo
 Izumiotsu	Osaka	13	N	80.772	34.5N	135.4E	3	6	Asia/Tokyo
 Izumi	Osaka	13	N	189.085	34.48333N	135.43333E	24	7	Asia/Tokyo
 Izumi	Kagoshima	13	N	39.217	32.08333N	130.36667E	37	5	Asia/Tokyo
@@ -13439,7 +13522,7 @@ Ito	Shizuoka	13	N	71.578	34.96667N	139.08333E	92	6	Asia/Tokyo
 Itami	Hyogo	13	N	193.524	34.78427N	135.40126E	22	7	Asia/Tokyo
 Ishiki	Aichi	13	N	23.966	34.8N	137.01667E	0	5	Asia/Tokyo
 Ishikawa	Okinawa	13	N	22.412	26.42333N	127.82139E	11	5	Asia/Tokyo
-Ishii	Tokushima	13	N	26.394	34.06752N	134.44208E	10	5	Asia/Tokyo
+Ishii	Tokushima	13	N	25.062	34.06752N	134.44208E	10	5	Asia/Tokyo
 Ishige	Ibaraki	13	N	24.948	36.11667N	139.96667E	19	5	Asia/Tokyo
 Ishigaki	Okinawa	13	N	44.802	24.34478N	124.15717E	18	5	Asia/Tokyo
 Isesaki	Gunma	13	N	130.692	36.31667N	139.2E	62	7	Asia/Tokyo
@@ -13448,13 +13531,13 @@ Ise	Mie	13	N	97.314	34.48333N	136.7E	56	6	Asia/Tokyo
 Isawa	Yamanashi	13	N	29.616	35.65N	138.63333E	269	5	Asia/Tokyo
 Isahaya	Nagasaki	13	N	97.371	32.84111N	130.04306E	104	6	Asia/Tokyo
 Inuyama	Aichi	13	N	73.995	35.37995N	136.94295E	56	6	Asia/Tokyo
-Ino	Kochi	13	N	24.123	33.55N	133.43333E	29	5	Asia/Tokyo
+Ino	Kochi	13	N	22.155	33.55N	133.43333E	29	5	Asia/Tokyo
 Innoshima	Hiroshima	13	N	26.141	34.28333N	133.18333E	33	5	Asia/Tokyo
 Inazawa	Aichi	13	N	102.13	35.25N	136.78333E	4	7	Asia/Tokyo
 Ina	Nagano	13	N	62.104	35.82756N	137.95378E	638	6	Asia/Tokyo
 Imaricho-ko	Saga	13	N	57.94	33.27362N	129.87877E	5	6	Asia/Tokyo
 Imaichi	Tochigi	13	N	64.323	36.71667N	139.68333E	391	6	Asia/Tokyo
-Ikoma	Nara	13	N	117.601	34.68333N	135.7E	146	7	Asia/Tokyo
+Ikoma	Nara	13	N	120.741	34.68333N	135.7E	146	7	Asia/Tokyo
 Ikeda	Osaka	13	N	99.476	34.82208N	135.4298E	26	6	Asia/Tokyo
 Ikedacho	Tokushima	13	N	15.895	34.02849N	133.80616E	120	5	Asia/Tokyo
 Ijuin	Kagoshima	13	N	25.217	31.61667N	130.4E	93	5	Asia/Tokyo
@@ -13466,7 +13549,7 @@ Ibusuki	Kagoshima	13	N	29.71	31.23333N	130.65E	2	5	Asia/Tokyo
 Ibaraki	Osaka	13	N	273.992	34.81641N	135.56828E	18	7	Asia/Tokyo
 Ibara	Okayama	13	N	34.424	34.6N	133.46667E	44	5	Asia/Tokyo
 Hotaka	Nagano	13	N	33.195	36.3396N	137.88254E	547	5	Asia/Tokyo
-Horyuji	Nara	13	N	27.431	34.61234N	135.73754E	49	5	Asia/Tokyo
+Horyuji	Nara	13	N	27.341	34.61234N	135.73754E	49	5	Asia/Tokyo
 Honjo	Saitama	13	N	61.868	36.2378N	139.19023E	59	6	Asia/Tokyo
 Hondomachi-hondo	Kumamoto	13	N	40.787	32.45993N	130.16713E	16	5	Asia/Tokyo
 Hofu	Yamaguchi	13	N	116.925	34.05N	131.56667E	4	7	Asia/Tokyo
@@ -13480,21 +13563,21 @@ Hirara	Okinawa	13	N	34.354	24.80379N	125.30222E	31	5	Asia/Tokyo
 Hirakata	Osaka	13	N	406.331	34.81352N	135.64914E	17	7	Asia/Tokyo
 Hirado	Nagasaki	13	N	22.516	33.36853N	129.55247E	5	5	Asia/Tokyo
 Hino	Tokyo	13	N	171.777	35.67306N	139.40028E	85	7	Asia/Tokyo
-Hino	Shiga	13	N	22.767	35N	136.25E	182	5	Asia/Tokyo
+Hino	Shiga	13	N	21.149	35N	136.25E	182	5	Asia/Tokyo
 Himimachi	Toyama	13	N	54.51	36.85609N	136.9885E	5	6	Asia/Tokyo
 Himeji	Hyogo	13	N	481.493	34.81667N	134.7E	8	7	Asia/Tokyo
 Hikone	Shiga	13	N	110.925	35.25N	136.25E	95	7	Asia/Tokyo
-Hiji	Oita	13	N	27.864	33.37081N	131.53025E	23	5	Asia/Tokyo
+Hiji	Oita	13	N	28.524	33.37081N	131.53025E	23	5	Asia/Tokyo
 Hekinan	Aichi	13	N	68.872	34.88333N	136.98333E	3	6	Asia/Tokyo
 Hayama	Kanagawa	13	N	31.136	35.27651N	139.57733E	10	5	Asia/Tokyo
 Hatsukaichi	Hiroshima	13	N	77.341	34.35N	132.33333E	4	6	Asia/Tokyo
 Hatogaya-honcho	Saitama	13	N	53.062	35.83314N	139.7425E	18	6	Asia/Tokyo
 Hashimoto	Wakayama	13	N	57.115	34.31667N	135.61667E	79	6	Asia/Tokyo
 Hanyu	Saitama	13	N	58.686	36.16667N	139.53333E	18	6	Asia/Tokyo
-Hanno	Saitama	13	N	86.262	35.85194N	139.31806E	113	6	Asia/Tokyo
+Hanno	Saitama	13	N	79.123	35.85194N	139.31806E	113	6	Asia/Tokyo
 Handa	Aichi	13	N	116.119	34.88333N	136.93333E	1	7	Asia/Tokyo
 Hamanoichi	Kagoshima	13	N	39.475	31.71667N	130.73333E	-1	5	Asia/Tokyo
-Hamamatsu	Shizuoka	13	N	605.098	34.7N	137.73333E	3	8	Asia/Tokyo
+Hamamatsu	Shizuoka	13	N	791.707	34.7N	137.73333E	3	8	Asia/Tokyo
 Hamakita	Shizuoka	13	N	86.502	34.8N	137.78333E	21	6	Asia/Tokyo
 Hamada	Shimane	13	N	45.75	34.88333N	132.08333E	142	5	Asia/Tokyo
 Hakui	Ishikawa	13	N	24.529	36.88333N	136.78333E	6	5	Asia/Tokyo
@@ -13502,7 +13585,7 @@ Haibara-akanedai	Nara	13	N	18.472	34.53333N	135.95E	345	5	Asia/Tokyo
 Hagi	Yamaguchi	13	N	43.826	34.4N	131.41667E	31	5	Asia/Tokyo
 Katsuren-haebaru	Okinawa	13	N	34.239	26.33294N	127.87403E	9	5	Asia/Tokyo
 Hadano	Kanagawa	13	N	174.281	35.37111N	139.22361E	103	7	Asia/Tokyo
-Hachioji	Tokyo	13	N	579.399	35.65583N	139.32389E	127	8	Asia/Tokyo
+Hachioji	Tokyo	13	N	561.344	35.65583N	139.32389E	127	8	Asia/Tokyo
 Omihachiman	Shiga	13	N	69.189	35.12861N	136.0976E	91	6	Asia/Tokyo
 Gyoda	Saitama	13	N	86.343	36.14074N	139.46011E	25	6	Asia/Tokyo
 Gushikawa	Okinawa	13	N	65.251	26.35937N	127.86735E	61	6	Asia/Tokyo
@@ -13519,7 +13602,7 @@ Gamagori	Aichi	13	N	80.786	34.83333N	137.23333E	23	6	Asia/Tokyo
 Futtsu	Chiba	13	N	51.65	35.3108N	139.81877E	5	6	Asia/Tokyo
 Honcho	Chiba	13	N	560.743	35.70129N	139.98648E	11	8	Asia/Tokyo
 Fukuyama	Hiroshima	13	N	383.298	34.48333N	133.36667E	7	7	Asia/Tokyo
-Fukuroi	Shizuoka	13	N	63.045	34.75N	137.91667E	11	6	Asia/Tokyo
+Fukuroi	Shizuoka	13	N	88.395	34.75N	137.91667E	11	6	Asia/Tokyo
 Fukura	Hyogo	13	N	18.721	34.25765N	134.71535E	6	5	Asia/Tokyo
 Fukuoka	Fukuoka	13	R	1392.289	33.6N	130.41667E	3	9	Asia/Tokyo
 Fukumitsu	Toyama	13	N	19.535	36.55751N	136.86945E	90	5	Asia/Tokyo
@@ -13532,7 +13615,7 @@ Fukayacho	Saitama	13	N	106.595	36.2N	139.28333E	35	7	Asia/Tokyo
 Fujisawa	Kanagawa	13	N	394.624	35.34926N	139.47666E	12	7	Asia/Tokyo
 Fujioka	Tochigi	13	N	18.335	36.25N	139.65E	21	5	Asia/Tokyo
 Fujioka	Gunma	13	N	63.358	36.24624N	139.07204E	94	6	Asia/Tokyo
-Fujinomiya	Shizuoka	13	N	121.515	35.21667N	138.61667E	116	7	Asia/Tokyo
+Fujinomiya	Shizuoka	13	N	132.507	35.21667N	138.61667E	116	7	Asia/Tokyo
 Fujieda	Shizuoka	13	N	132.859	34.86667N	138.26667E	22	7	Asia/Tokyo
 Fuji	Shizuoka	13	N	240.014	35.16667N	138.68333E	9	7	Asia/Tokyo
 Fuchucho	Hiroshima	13	N	50.746	34.5735N	133.23513E	33	6	Asia/Tokyo
@@ -13568,7 +13651,7 @@ Nagato	Yamaguchi	13	N	23.101	34.38333N	131.2E	4	5	Asia/Tokyo
 Hasuda	Saitama	13	N	65.161	35.97113N	139.6491E	13	6	Asia/Tokyo
 Kamifukuoka	Saitama	13	N	52.323	35.87266N	139.51369E	25	6	Asia/Tokyo
 Sayama	Saitama	13	N	160.843	35.85295N	139.41212E	81	7	Asia/Tokyo
-Fussa	Tokyo	13	N	62.296	35.73667N	139.32361E	117	6	Asia/Tokyo
+Fussa	Tokyo	13	N	56.786	35.73667N	139.32361E	117	6	Asia/Tokyo
 Asaka	Saitama	13	N	128.058	35.80472N	139.60194E	25	7	Asia/Tokyo
 Wako	Saitama	13	N	77.435	35.78944N	139.62333E	24	6	Asia/Tokyo
 Shimotoda	Saitama	13	N	118.731	35.815N	139.6853E	5	7	Asia/Tokyo
@@ -13593,21 +13676,21 @@ Yamoto	Miyagi	13	N	32.028	38.42738N	141.21487E	2	5	Asia/Tokyo
 Yamagata	Yamagata	13	R	254.538	38.23333N	140.36667E	321	7	Asia/Tokyo
 Yamada	Iwate	13	N	20.144	39.46667N	141.95E	4	5	Asia/Tokyo
 Yachimata	Chiba	13	N	83.322	35.65N	140.31667E	47	6	Asia/Tokyo
-Watari	Miyagi	13	N	36.321	38.035N	140.85111E	10	5	Asia/Tokyo
+Watari	Miyagi	13	N	33.459	38.035N	140.85111E	10	5	Asia/Tokyo
 Wakuya	Miyagi	13	N	18.334	38.54465N	141.13461E	29	5	Asia/Tokyo
 Ushiku	Ibaraki	13	N	80.02	35.96667N	140.13333E	26	6	Asia/Tokyo
 Tsukuba	Ibaraki	13	N	175.589	36.2N	140.1E	33	7	Asia/Tokyo
 Toride	Ibaraki	13	N	80.716	35.9N	140.08333E	8	6	Asia/Tokyo
 Tono	Iwate	13	N	26.781	39.31667N	141.53333E	328	5	Asia/Tokyo
 Tomobe	Ibaraki	13	N	37.146	36.35N	140.3E	45	5	Asia/Tokyo
-Tomiya	Miyagi	13	N	42.5	38.39306N	140.88611E	64	5	Asia/Tokyo
+Tomiya	Miyagi	13	N	52.433	38.39306N	140.88611E	64	6	Asia/Tokyo
 Togane	Chiba	13	N	66.332	35.55N	140.36667E	9	6	Asia/Tokyo
 Tendo	Yamagata	13	N	65.393	38.35361N	140.36972E	108	6	Asia/Tokyo
-Takahata	Yamagata	13	N	26.347	38.0025N	140.19111E	223	5	Asia/Tokyo
+Takahata	Yamagata	13	N	23.367	38.0025N	140.19111E	223	5	Asia/Tokyo
 Takahagi	Ibaraki	13	N	33.576	36.71667N	140.71667E	6	5	Asia/Tokyo
 Sukagawa	Fukushima	13	N	68.79	37.28333N	140.38333E	261	6	Asia/Tokyo
 Shizukuishi	Iwate	13	N	19.866	39.69414N	140.98442E	192	5	Asia/Tokyo
-Shisui	Chiba	13	N	19.903	35.71667N	140.26667E	40	5	Asia/Tokyo
+Shisui	Chiba	13	N	20.66	35.71667N	140.26667E	40	5	Asia/Tokyo
 Shiroishi	Miyagi	13	N	39.481	38.00333N	140.61833E	57	5	Asia/Tokyo
 Shiroi	Chiba	13	N	55.314	35.8N	140.06667E	17	6	Asia/Tokyo
 Shiogama	Miyagi	13	N	59.526	38.31667N	141.03333E	2	6	Asia/Tokyo
@@ -13694,37 +13777,37 @@ Abiko	Chiba	13	N	131.771	35.86667N	140.01667E	10	7	Asia/Tokyo
 Motomachi	Hokkaido	13	N	22.972	43.82634N	144.09638E	26	5	Asia/Tokyo
 Wakkanai	Hokkaido	13	N	41.556	45.40944N	141.67389E	7	5	Asia/Tokyo
 Tomakomai	Hokkaido	13	N	174.806	42.63694N	141.60333E	7	7	Asia/Tokyo
-Tobetsu	Hokkaido	13	N	21.818	43.21694N	141.51694E	14	5	Asia/Tokyo
+Tobetsu	Hokkaido	13	N	16.694	43.21694N	141.51694E	14	5	Asia/Tokyo
 Mutsu	Aomori	13	N	49.22	41.28944N	141.21694E	6	5	Asia/Tokyo
 Takikawa	Hokkaido	13	N	45.131	43.55278N	141.90639E	31	5	Asia/Tokyo
 Takanosu	Akita	13	N	20.542	40.22268N	140.36611E	27	5	Asia/Tokyo
 Sunagawa	Hokkaido	13	N	20.102	43.48639N	141.90556E	33	5	Asia/Tokyo
 Shizunai-furukawacho	Hokkaido	13	N	22.436	42.33389N	142.36694E	4	5	Asia/Tokyo
-Shiraoi	Hokkaido	13	N	20.804	42.55N	141.35E	5	5	Asia/Tokyo
+Shiraoi	Hokkaido	13	N	17.759	42.55N	141.35E	5	5	Asia/Tokyo
 Shimo-furano	Hokkaido	13	N	25.872	43.35N	142.38333E	170	5	Asia/Tokyo
 Shibetsu	Hokkaido	13	N	21.744	43.65899N	145.13197E	2	5	Asia/Tokyo
 Sapporo	Hokkaido	13	R	1883.027	43.06667N	141.35E	26	9	Asia/Tokyo
 Rumoi	Hokkaido	13	N	26.454	43.93444N	141.64278E	35	5	Asia/Tokyo
-Otofuke	Hokkaido	13	N	40.944	42.99167N	143.20028E	64	5	Asia/Tokyo
+Otofuke	Hokkaido	13	N	44.235	42.99167N	143.20028E	64	5	Asia/Tokyo
 Otaru	Hokkaido	13	N	143.792	43.18944N	141.00222E	30	7	Asia/Tokyo
 Odate	Akita	13	N	64.543	40.27178N	140.55756E	66	6	Asia/Tokyo
 Obihiro	Hokkaido	13	N	173.89	42.91722N	143.20444E	44	7	Asia/Tokyo
 Noshiro	Akita	13	N	51.079	40.20838N	140.0274E	13	6	Asia/Tokyo
 Nemuro	Hokkaido	13	N	31.223	43.32361N	145.575E	24	5	Asia/Tokyo
 Nayoro	Hokkaido	13	N	26.457	44.35056N	142.45778E	97	5	Asia/Tokyo
-Honcho	Hokkaido	13	N	30.008	41.8944N	140.69386E	72	5	Asia/Tokyo
+Honcho	Hokkaido	13	N	28.514	41.8944N	140.69386E	72	5	Asia/Tokyo
 Namioka	Aomori	13	N	20.681	40.71069N	140.59048E	28	5	Asia/Tokyo
+Nakashibetsu	Hokkaido	13	N	24.014	43.54849N	144.97181E	31	5	Asia/Tokyo
 Muroran	Hokkaido	13	N	96.197	42.31722N	140.98806E	8	6	Asia/Tokyo
-Mombetsu	Hokkaido	13	N	26.895	44.3525N	143.3525E	16	5	Asia/Tokyo
+Mombetsu	Hokkaido	13	N	22.983	44.3525N	143.3525E	16	5	Asia/Tokyo
 Misawa	Aomori	13	N	42.805	40.68682N	141.38969E	37	5	Asia/Tokyo
-Yoichi	Hokkaido	13	N	22.788	43.20389N	140.77028E	2	5	Asia/Tokyo
-Makubetsu	Hokkaido	13	N	25.935	45.37139N	141.82111E	33	5	Asia/Tokyo
+Yoichi	Hokkaido	13	N	18.993	43.20389N	140.77028E	2	5	Asia/Tokyo
+Makubetsu	Hokkaido	13	N	26.61	45.37139N	141.82111E	33	5	Asia/Tokyo
 Kushiro	Hokkaido	13	N	183.612	42.975N	144.37472E	6	7	Asia/Tokyo
 Kuroishi	Aomori	13	N	38.615	40.64581N	140.58354E	45	5	Asia/Tokyo
 Shimokizukuri	Aomori	13	N	18.907	40.81609N	140.37539E	3	5	Asia/Tokyo
 Kitami	Hokkaido	13	N	113.137	43.80306N	143.89083E	79	7	Asia/Tokyo
 Kamiiso	Hokkaido	13	N	38.098	41.82013N	140.64482E	2	5	Asia/Tokyo
-Iwanai	Hokkaido	13	N	15.584	42.97444N	140.50889E	6	5	Asia/Tokyo
 Iwamizawa	Hokkaido	13	N	85.107	43.20028N	141.75972E	17	6	Asia/Tokyo
 Ishikari	Hokkaido	13	N	57.301	43.23972N	141.35389E	0	6	Asia/Tokyo
 Ichinohe	Iwate	13	N	15.825	40.21965N	141.28986E	243	5	Asia/Tokyo
@@ -13744,13 +13827,16 @@ Aomori	Aomori	13	R	298.394	40.81667N	140.73333E	7	7	Asia/Tokyo
 Abashiri	Hokkaido	13	N	42.498	44.02127N	144.26971E	4	5	Asia/Tokyo
 Goshogawara	Aomori	13	N	49.11	40.80444N	140.44139E	9	5	Asia/Tokyo
 Aso	Kumamoto	13	N	27.978	32.93726N	131.08008E	520	5	Asia/Tokyo
-Nanto-shi	Toyama	13	N	55.315	36.56922N	136.91162E	70	6	Asia/Tokyo
+Nanto-shi	Toyama	13	N	47.976	36.56922N	136.91162E	70	5	Asia/Tokyo
 Kawage	Mie	13	N	17.948	34.80447N	136.54645E	14	5	Asia/Tokyo
 Neyagawa	Osaka	13	N	238.549	34.76615N	135.62759E	9	7	Asia/Tokyo
 Hitachi-Naka	Ibaraki	13	N	156.811	36.39659N	140.53479E	31	7	Asia/Tokyo
 Inashiki	Ibaraki	13	N	46.994	35.95633N	140.32356E	5	5	Asia/Tokyo
 Kurobe-shi	Toyama	13	N	42.613	36.90123N	137.44955E	15	5	Asia/Tokyo
+Tama	Tokyo	13	N	148.285	35.6436N	139.46844E	108	7	Asia/Tokyo
 Onojo	Fukuoka	13	N	94.957	33.53567N	130.47861E	25	6	Asia/Tokyo
+Kikugawa	Shizuoka	13	N	48.484	34.70291N	138.11978E	19	5	Asia/Tokyo
+Kosai	Shizuoka	13	N	59.77	34.70053N	137.52253E	30	6	Asia/Tokyo
 Minokamo	Gifu	13	N	51.543	35.48199N	137.02166E	175	6	Asia/Tokyo
 Gujo	Gifu	13	N	46.918	35.73691N	136.95852E	314	5	Asia/Tokyo
 Joetsu	Niigata	13	N	204.137	37.14828N	138.23642E	10	7	Asia/Tokyo
@@ -14423,7 +14509,7 @@ Agadir	Souss-Massa	01	R	698.31	30.42018N	9.59815W	31	8	Africa/Casablanca
 Skhirate	Rabat-Sale-Kenitra	01	N	44.85	33.8527N	7.03171W	51	5	Africa/Casablanca
 Boujniba	Beni Mellal-Khenifra	01	N	15.041	32.90046N	6.77464W	847	5	Africa/Casablanca
 Errachidia	Draa-Tafilalet	01	N	92.374	31.9314N	4.42663W	1039	6	Africa/Casablanca
-Dakhla	Souss-Massa	01	N	55.618	30.41145N	9.55344W	94	6	Africa/Casablanca
+Dakhla	Souss-Massa	01	N	55.618	30.41145N	9.55344W	83	6	Africa/Casablanca
 Sale Al Jadida	Rabat-Sale-Kenitra	01	N	200	33.99722N	6.74047W	119	7	Africa/Casablanca
 Bni Bouayach	Tanger-Tetouan-Al Hoceima	01	N	18.271	35.10506N	3.84028W	118	5	Africa/Casablanca
 Monte-Carlo	Municipality of Monaco	20	N	16.012	43.73976N	7.42732E	45	5	Europe/Monaco
@@ -16178,7 +16264,7 @@ Siddharthanagar	Lumbini Province	15	N	63.367	27.5N	83.45E	107	6	Asia/Kathmandu
 Bhadrapur	Province 1	15	N	19.523	26.54404N	88.09436E	91	5	Asia/Kathmandu
 Banepa	Bagmati Province	15	N	17.153	27.63245N	85.52192E	1477	5	Asia/Kathmandu
 Baglung	Province 4	15	N	23.296	28.27189N	83.58975E	1212	5	Asia/Kathmandu
-Birendranagar	Karnali Pradesh	15	R	31.381	28.59669N	81.61658E	619	5	Asia/Kathmandu
+Birendranagar	Karnali Pradesh	15	R	31.381	28.59669N	81.61658E	697	5	Asia/Kathmandu
 Dipayal	Sudurpashchim Pradesh	15	R	23.416	29.26083N	80.94E	565	5	Asia/Kathmandu
 Nepalgunj	Lumbini Province	15	N	64.4	28.05N	81.61667E	150	6	Asia/Kathmandu
 Panauti	Bagmati Province	15	N	46.595	27.58466N	85.52122E	1440	5	Asia/Kathmandu
@@ -16215,7 +16301,7 @@ Tauranga	Bay of Plenty	21	N	110.338	37.68611S	176.16667E	18	7	Pacific/Auckland
 Papakura	Auckland	21	N	28.01	37.06573S	174.94393E	27	5	Pacific/Auckland
 Whakatane	Bay of Plenty	21	R	18.602	37.95855S	176.98545E	11	5	Pacific/Auckland
 Ashburton	Canterbury	21	N	30.1	43.89834S	171.73011E	106	5	Pacific/Auckland
-Rangiora	Canterbury	21	N	18.4	43.30437S	172.58356E	40	5	Pacific/Auckland
+Rangiora	Canterbury	21	N	18.4	43.30437S	172.58356E	36	5	Pacific/Auckland
 Whangarei	Northland	21	R	50.9	35.73167S	174.32391E	7	6	Pacific/Auckland
 Cambridge	Waikato	21	N	15.192	37.87822S	175.4402E	67	5	Pacific/Auckland
 Rotorua	Bay of Plenty	21	N	65.901	38.13874S	176.24516E	287	6	Pacific/Auckland
@@ -17722,10 +17808,10 @@ Aveiro	Aveiro	19	R	54.162	40.64427N	8.64554W	19	6	Europe/Lisbon
 Arcos de Valdevez	Viana do Castelo	19	N	22.847	41.84668N	8.41905W	42	5	Europe/Lisbon
 Alfena	Porto	19	N	15.211	41.23671N	8.52454W	117	5	Europe/Lisbon
 Aguas Santas	Porto	19	N	27.686	41.21017N	8.57599W	112	5	Europe/Lisbon
-Quinta Do Conde	District of Setubal	19	N	25.606	38.56528N	9.04316W	39	5	Europe/Lisbon
+Quinta Do Conde	District of Setubal	19	N	25.606	38.56528N	9.04316W	38	5	Europe/Lisbon
 Alfragide	Lisbon	19	N	17.044	38.73203N	9.2192W	127	5	Europe/Lisbon
 Alvalade	Lisbon	19	N	31.813	38.75328N	9.14397W	91	5	Europe/Lisbon
-Ponta Delgada	Azores	19	R	20.056	37.73952N	25.66874W	1	5	Atlantic/Azores
+Ponta Delgada	Azores	19	R	20.056	37.73952N	25.66874W	12	5	Atlantic/Azores
 Azeitao	District of Setubal	19	N	18.877	38.51919N	9.0139W	127	5	Europe/Lisbon
 Ngerulmud	Melekeok	23	C	0	7.50077N	134.6238E	72		Pacific/Palau
 Villarrica	Guaira	08	R	41.157	25.74946S	56.43518W	143	5	America/Asuncion
@@ -19351,7 +19437,7 @@ Kenema	Eastern Province	05	R	143.137	7.87687N	11.19025W	182	7	Africa/Freetown
 Kabala	Northern Province	05	N	17.948	9.58893N	11.55256W	433	5	Africa/Freetown
 Freetown	Western Area	05	C	802.639	8.48714N	13.2356W	38	8	Africa/Freetown
 Bo	Southern Province	05	R	174.354	7.96472N	11.73833W	104	7	Africa/Freetown
-Goderich	Western Area	05	N	19.209	8.42756N	13.28598W	15	5	Africa/Freetown
+Goderich	Western Area	05	N	19.209	8.42756N	13.28598W	10	5	Africa/Freetown
 San Marino	San Marino	19	C	4.5	43.93667N	12.44639E	683		Europe/San_Marino
 Ziguinchor	Ziguinchor	05	R	159.778	12.56801N	16.27326W	19	7	Africa/Dakar
 Velingara	Kolda	05	N	22.441	13.15N	14.11667W	50	5	Africa/Dakar
@@ -20559,7 +20645,7 @@ Zolotonosha	Cherkasy Oblast	17	N	27.818	49.66926N	32.03637E	96	5	Europe/Kiev
 Zolochiv	Lviv Oblast	17	N	22.608	49.80755N	24.90056E	267	5	Europe/Kiev
 Znamyanka	Kirovohrad Oblast	17	N	22.444	48.72066N	32.65822E	207	5	Europe/Kiev
 Zmiiv	Kharkiv	17	N	16.095	49.67453N	36.34775E	93	5	Europe/Kiev
-Zhytomyr	Zhytomyr	17	R	282.192	50.26487N	28.67669E	228	7	Europe/Kiev
+Zhytomyr	Zhytomyr	17	R	263.507	50.26487N	28.67669E	228	7	Europe/Kiev
 Zhmerynka	Vinnytsya Oblast	17	N	34.498	49.03523N	28.11405E	322	5	Europe/Kiev
 Zhovti Vody	Dnipropetrovsk Oblast	17	N	44.128	48.34518N	33.49743E	148	5	Europe/Kiev
 Zdolbuniv	Rivne	17	N	23.697	50.5206N	26.24251E	195	5	Europe/Kiev
@@ -20643,7 +20729,7 @@ Pervomaiskyi	Kharkiv	17	N	30	49.38742N	36.21471E	191	5	Europe/Kiev
 Pervomaisk	Luhansk	17	N	41.48	48.62988N	38.54806E	154	5	Europe/Zaporozhye
 Pervomaysk	Mykolayiv Oblast	17	N	64.909	48.04478N	30.84784E	73	6	Europe/Kiev
 Pershotravensk	Dnipropetrovsk Oblast	17	N	28.178	48.3479N	36.39637E	129	5	Europe/Kiev
-Pereiaslav-Khmelnytskyi	Kiev	17	N	36.527	50.06739N	31.44969E	88	5	Europe/Kiev
+Pereiaslav	Kiev	17	N	36.527	50.06739N	31.44969E	88	5	Europe/Kiev
 Perevalsk	Luhansk	17	N	29.22	48.43779N	38.84384E	227	5	Europe/Zaporozhye
 Pavlohrad	Dnipropetrovsk Oblast	17	N	105.238	48.53214N	35.86878E	71	7	Europe/Kiev
 Ovruch	Zhytomyr	17	N	16.398	51.3246N	28.80351E	165	5	Europe/Kiev
@@ -20799,9 +20885,9 @@ Amvrosiivka	Donetsk Oblast	17	N	21.307	47.79348N	38.47768E	141	5	Europe/Kiev
 Alushta	Crimea	17	N	29.586	44.67728N	34.4097E	40	5	Europe/Simferopol
 Alchevsk	Luhansk	17	N	116	48.46893N	38.81669E	211	7	Europe/Zaporozhye
 Okhtyrka	Sumy	17	N	49.818	50.31036N	34.89879E	111	5	Europe/Kiev
-Horishni Plavni	Poltava Oblast	17	N	51.215	49.00835N	33.62926E	82	6	Europe/Kiev
-Slavutych	Kiev	17	N	25	51.5225N	30.71806E	131	5	Europe/Kiev
-Yuzhnoukrayinsk	Mykolayiv Oblast	17	N	39.674	47.82879N	31.17513E	132	5	Europe/Kiev
+Horishni Plavni	Poltava Oblast	17	N	51.215	49.00835N	33.62926E	71	6	Europe/Kiev
+Slavutych	Kiev	17	N	25	51.5225N	30.71806E	145	5	Europe/Kiev
+Yuzhnoukrayinsk	Mykolayiv Oblast	17	N	39.674	47.82879N	31.17513E	100	5	Europe/Kiev
 Varash	Rivne	17	N	42	51.3509N	25.84738E	167	5	Europe/Kiev
 Novoyavorivs'k	Lviv Oblast	17	N	28.807	49.93023N	23.57357E	297	5	Europe/Kiev
 Reni	Odessa	17	N	18.53	45.45421N	28.27731E	7	5	Europe/Kiev
@@ -22474,7 +22560,7 @@ Bangor	Maine	09	N	32.391	44.80118N	68.77781W	33	5	America/New_York
 Biddeford	Maine	09	N	21.282	43.49258N	70.45338W	23	5	America/New_York
 Brunswick	Maine	09	N	15.175	43.91452N	69.96533W	21	5	America/New_York
 Lewiston	Maine	09	N	36.202	44.10035N	70.21478W	69	5	America/New_York
-Portland	Maine	09	N	66.881	43.65737N	70.2589W	10	6	America/New_York
+Portland	Maine	09	N	66.881	43.65737N	70.2589W	31	6	America/New_York
 Saco	Maine	09	N	19.078	43.50092N	70.44283W	23	5	America/New_York
 Sanford	Maine	09	N	20.893	43.43925N	70.77422W	96	5	America/New_York
 South Portland	Maine	09	N	25.556	43.64147N	70.24088W	10	5	America/New_York
@@ -22656,7 +22742,7 @@ Laconia	New Hampshire	09	N	16.227	43.52785N	71.47035W	152	5	America/New_York
 Manchester	New Hampshire	09	N	110.229	42.99564N	71.45479W	81	7	America/New_York
 Merrimack	New Hampshire	09	N	26.726	42.86509N	71.4934W	52	5	America/New_York
 Nashua	New Hampshire	09	N	87.97	42.76537N	71.46757W	52	6	America/New_York
-Portsmouth	New Hampshire	09	N	21.53	43.07704N	70.75766W	1	5	America/New_York
+Portsmouth	New Hampshire	09	N	21.53	43.07704N	70.75766W	13	5	America/New_York
 Rochester	New Hampshire	09	N	30.038	43.30453N	70.97562W	73	5	America/New_York
 Salem	New Hampshire	09	N	29.549	42.78842N	71.20089W	43	5	America/New_York
 Asbury Park	New Jersey	09	N	15.818	40.22039N	74.01208W	7	5	America/New_York
@@ -22749,7 +22835,7 @@ Tinton Falls	New Jersey	09	N	17.772	40.30428N	74.10042W	14	5	America/New_York
 Trenton	New Jersey	09	R	84.225	40.21705N	74.74294W	23	6	America/New_York
 Union	New Jersey	09	N	56.771	40.6976N	74.2632W	35	6	America/New_York
 Union City	New Jersey	09	N	69.156	40.77955N	74.02375W	56	6	America/New_York
-Voorhees	New Jersey	09	N	29.131	39.84499N	74.95495W	42	5	America/New_York
+Voorhees	New Jersey	09	N	29.131	39.84499N	74.95495W	39	5	America/New_York
 Wayne	New Jersey	09	N	57.915	40.92538N	74.27654W	56	6	America/New_York
 West Milford	New Jersey	09	N	26.968	41.13121N	74.36737W	214	5	America/New_York
 West New York	New Jersey	09	N	53.366	40.78788N	74.01431W	56	6	America/New_York
@@ -23209,7 +23295,7 @@ Weirton	West Virginia	09	N	19.175	40.41896N	80.58952W	233	5	America/New_York
 Weirton Heights	West Virginia	09	N	19.45	40.4084N	80.53924W	365	5	America/New_York
 Wheeling	West Virginia	09	N	27.648	40.06396N	80.72091W	208	5	America/New_York
 Ansonia	Connecticut	09	N	18.854	41.34621N	73.079W	19	5	America/New_York
-Bridgeport	Connecticut	09	N	147.629	41.17923N	73.18945W	3	7	America/New_York
+Bridgeport	Connecticut	09	N	147.629	41.17923N	73.18945W	14	7	America/New_York
 Bristol	Connecticut	09	N	60.452	41.67176N	72.94927W	95	6	America/New_York
 Branford	Connecticut	09	N	29.438	41.27954N	72.8151W	20	5	America/New_York
 Cheshire	Connecticut	09	N	29.443	41.49899N	72.90066W	82	5	America/New_York
@@ -23265,7 +23351,7 @@ Yuma	Arizona	09	N	94.139	32.72532N	114.6244W	43	6	America/Phoenix
 Adelanto	California	09	N	33.166	34.58277N	117.40922W	881	5	America/Los_Angeles
 Agoura	California	09	N	20.537	34.14306N	118.73787W	283	5	America/Los_Angeles
 Agoura Hills	California	09	N	20.915	34.13639N	118.77453W	504	5	America/Los_Angeles
-Alameda	California	09	N	78.63	37.77099N	122.26087W	1	6	America/Los_Angeles
+Alameda	California	09	N	78.63	37.77099N	122.26087W	11	6	America/Los_Angeles
 Albany	California	09	N	19.735	37.88687N	122.29775W	13	5	America/Los_Angeles
 Alhambra	California	09	N	85.551	34.09529N	118.12701W	153	6	America/Los_Angeles
 Aliso Viejo	California	09	N	50.195	33.56504N	117.72712W	133	6	America/Los_Angeles
@@ -23568,7 +23654,7 @@ San Bernardino	California	09	N	216.108	34.10834N	117.28977W	324	7	America/Los_An
 San Bruno	California	09	N	43.185	37.63049N	122.41108W	5	5	America/Los_Angeles
 San Carlos	California	09	N	29.931	37.50716N	122.26052W	6	5	America/Los_Angeles
 San Clemente	California	09	N	65.526	33.42697N	117.61199W	71	6	America/Los_Angeles
-San Diego	California	09	N	1394.928	32.71571N	117.16472W	15	9	America/Los_Angeles
+San Diego	California	09	N	1394.928	32.71571N	117.16472W	20	9	America/Los_Angeles
 San Dimas	California	09	N	34.63	34.10668N	117.80673W	295	5	America/Los_Angeles
 San Fernando	California	09	N	24.931	34.28195N	118.43897W	327	5	America/Los_Angeles
 San Francisco	California	09	N	864.816	37.77493N	122.41942W	28	8	America/Los_Angeles
@@ -23593,7 +23679,7 @@ Santa Clarita	California	09	N	182.371	34.39166N	118.54259W	368	7	America/Los_Ang
 Santa Cruz	California	09	N	64.22	36.97412N	122.0308W	8	6	America/Los_Angeles
 Santa Fe Springs	California	09	N	18.026	33.94724N	118.08535W	45	5	America/Los_Angeles
 Santa Maria	California	09	N	105.093	34.95303N	120.43572W	68	7	America/Los_Angeles
-Santa Monica	California	09	N	93.22	34.01949N	118.49138W	32	6	America/Los_Angeles
+Santa Monica	California	09	N	93.22	34.01949N	118.49138W	38	6	America/Los_Angeles
 Santa Paula	California	09	N	30.546	34.35417N	119.05927W	87	5	America/Los_Angeles
 Santa Rosa	California	09	N	174.972	38.44047N	122.71443W	55	7	America/Los_Angeles
 Santee	California	09	N	57.787	32.83838N	116.97392W	108	6	America/Los_Angeles
@@ -23999,7 +24085,7 @@ Kailua	Hawaii	24	N	38.635	21.40241N	157.74054W	8	5	Pacific/Honolulu
 Kaneohe	Hawaii	24	N	34.597	21.39994N	157.79895W	46	5	Pacific/Honolulu
 Kihei	Hawaii	24	N	20.881	20.76462N	156.44578W	21	5	Pacific/Honolulu
 Makakilo City	Hawaii	24	N	15.383	21.34694N	158.08583W	134	5	Pacific/Honolulu
-Mililani Town	Hawaii	24	N	27.629	21.4504N	158.01503W	206	5	Pacific/Honolulu
+Mililani Town	Hawaii	24	N	27.629	21.4504N	158.01503W	209	5	Pacific/Honolulu
 Pearl City	Hawaii	24	N	47.698	21.39734N	157.97516W	31	5	Pacific/Honolulu
 Wahiawa	Hawaii	24	N	17.821	21.50279N	158.02464W	290	5	Pacific/Honolulu
 Wailuku	Hawaii	24	N	15.313	20.89133N	156.50604W	77	5	Pacific/Honolulu
