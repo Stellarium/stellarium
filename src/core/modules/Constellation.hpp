@@ -84,9 +84,7 @@ private:
 	bool read(const QString& record, StarMgr *starMgr);
 
 	//! Draw the constellation name
-	void drawName(StelPainter& sPainter, ConstellationMgr::ConstellationDisplayStyle style) const;
-	//! Draw the constellation art
-	void drawArt(StelPainter& sPainter) const;
+	void drawName(StelPainter& sPainter, ConstellationMgr::ConstellationDisplayStyle style) const;	
 	//! Draw the constellation boundary. obsVelocity used for aberration
 	void drawBoundaryOptim(StelPainter& sPainter, const Vec3d &obsVelocity) const;
 

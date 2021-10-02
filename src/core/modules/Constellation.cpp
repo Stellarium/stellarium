@@ -172,18 +172,6 @@ void Constellation::drawArtOptim(StelPainter& sPainter, const SphericalRegion& r
 	}
 }
 
-// Draw the art texture
-void Constellation::drawArt(StelPainter& sPainter) const
-{
-	// Is this ever used?
-	Q_ASSERT(0);
-	sPainter.setBlending(true, GL_ONE, GL_ONE);
-	sPainter.setCullFace(true);
-	SphericalRegionP region = sPainter.getProjector()->getViewportConvexPolygon();
-	drawArtOptim(sPainter, *region, Vec3d(0.));
-	sPainter.setCullFace(false);
-}
-
 const Constellation* Constellation::isStarIn(const StelObject* s) const
 {
 	for(unsigned int i=0;i<numberOfSegments*2;++i)
