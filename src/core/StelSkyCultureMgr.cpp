@@ -369,7 +369,7 @@ QString StelSkyCultureMgr::skyCultureI18ToDirectory(const QString& cultureName) 
 	while (i.hasNext())
 	{
 		i.next();
-		if (q_(i.value().englishName) == cultureName)
+		if (qc_(i.value().englishName, "sky culture") == cultureName)
 			return i.key();
 	}
 	return "";
