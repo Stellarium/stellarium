@@ -7,6 +7,7 @@ Examples:
 - geonames data (https://www.geonames.org/recent-changes.html), https://github.com/Stellarium/stellarium-data/tags
 - quasar data (https://github.com/Stellarium/stellarium/blob/master/plugins/Quasars/util/quasars.tsv)
 - Almagest data (minor fixes, of course - this is essentially frozen data)
+- HTC algorithms (Helene, Telesto, and Calypso (Lagrangian satellites of Dione) - taken from ftp://ftp.imcce.fr/pub/ephem/satel/htc20/htc20.f ? )
 - various libraries (https://github.com/Stellarium/stellarium/tree/master/src/external)
 
 The problem with copy-pasting external data is **code (or data) rot** (and also: "*copy-paste is evil!*").
