@@ -17,7 +17,7 @@ Importing external artifacts therefore requires a specific (and in this case a *
 
 ## The idea
 1. keep external information alive (and updated) on a **separate** branch, called a "**vendor branch**" (eg ``vendor/geonames``). Every dataset/tool lives in its own vendor branch. This branch tracks a pristine Git copy/mirror of the external data.
-1. the external information is stored in a separate directory (eg ``external/<vendor>/<toolname>``)
+1. optionally, the external information is stored in a separate directory (eg ``external/<vendor>/<toolname>``)
 1. a ``VENDOR`` file explains where the external/original information can be found, so that it can be updated when necessary.
 1. **vendor tags** describe which version of the vendor artifacts have been imported (eg ``vendor/geonames/2021-08-21``)
 1. that branch is merged to wherever it is needed (normally the feature branch, which will eventually be merged to ``master``)
@@ -31,15 +31,15 @@ Basically, two use cases exist: you import a new artifact from scratch, or you w
 ## 1 importing new artifacts from scratch
 
 1. checkout the feature branch that will import the data in the project
-1. create a directory for the vendor artifacts, e.g. ``external/geonames``
+1. if needed (in order to ingest many files), create a directory for the vendor artifacts, e.g. ``external/geonames``
 1. create and checkout a vendor branch, e.g. ``vendor/geonames``
 1. unzip/copy/import/... the external data. This is called a *vendor drop*.
 1. make sure that file/directory *names* do not contain version information as a kind of implicit versioning scheme! rename when needed.
 1. commit the vendor data
 1. tag the vendor branch, e.g. ``vendor/geonames/1.0``. if the vendor does not provide a clear version number, use the ISO date of the drop : ``vendor/geonames/2021-09-09T1200``
-1. switch to the feature branch
+1. **switch to the feature/master/whatever local branch**
 1. merge the vendor branch 
-1. create (add) a ``VENDOR`` file *in* the vendor directory (or a similar name, in the unlikely chance that the file name is already in use) to hold source location data and, if needed, instructions
+1. EITHER create (add) a ``VENDOR`` file *in* the vendor directory (or a similar name, in the unlikely chance that the file name is already in use) OR edit an existing vendor file to include detailed source location data and, if needed, instructions how to find back the data. Avoid top-level (domain) adresses, try to make life easy for anyone wanting to update the data. Make sure to include the keyword "VENDOR" somewhere so that it can be found if needed.
 1. if needed, do whatever is needed to transform the data *in the feature branch*. try to provide a scripted way to transform data, rather than rely on manual operations, so that this can be run again whenever the external data is re-imported.
 
 For prolific vendors (offering many independent tools/data), it might be necessary to create subdirectory and separate branches per product.
@@ -50,12 +50,14 @@ Now it becomes easy to update external information. Whenever the external inform
 
 1. checkout the vendor branch
 1. perform a fresh **vendor drop**: 
-	1. empty the vendor folder ; you can use this: ``git ls-files -z | xargs -0 rm -f``
-	2. explode/unzip/untar/...
+	1. empty the vendor folder OR delete the vendor file ; you can use this: ``git ls-files -z | xargs -0 rm -f``
+	2. replace/explode/unzip/untar/...
 1. commit: ``git add -A && git commit``  (see ``git help git-rm`` for details, search for "vendor".)
 1. vendor tag the vendor branch
 1. merge the updated vendor branch to ``master`` (or via an intermediate feature/bugfix branch, often in order to update local stuff)
 1. deal with conflicts when needed. such conflicts are expected to arise when the vendor changed something, and that was also changed locally
+
+This is also needed when the external data dsappears: in that case, mention that the external data is no longer available to the public to avoid developers searching for it (or even worse, continue with a copy that still exists elsewhere!! Such a copy does not belong on the vendor branch).
 
 ## Notes
 
