@@ -33,6 +33,7 @@
 #include "de441.hpp"
 #include "l12.h"
 #include "marssat.h"
+#include "htc20b.hpp"
 
 #include <math.h>
 
@@ -2678,6 +2679,55 @@ void TestEphemeris::testMarsSatTheory()
 			 .arg(QString::number(        t1, 'f', 10))
 			 .arg(QString::number(        t2, 'f', 10))
 			 .arg(QString::number(        t3, 'f', 10))
+			 .toUtf8());
+	}
+}
+
+void TestEphemeris::testHTC20Theory()
+{
+	/* Sample output from the test code below for 'htc20b 2451590':
+	Helen -351737.078  126965.254  -33017.275
+	Teles  222550.256 -182154.616   71289.412
+	Calyp -278795.483  -66349.449   64265.081
+	*/
+
+	double AU_IN_KM = 1.495978707e+8;
+	double pos[3], vel[3];
+	double acceptableError = 1E-3; // need re-check
+	double t1, t2, t3, ID, ae1, ae2, ae3;
+	double JD = 2451590.;
+	int r;
+	QString name;
+
+	QVariantList testData;
+	testData << "Helene"  << HTC2_HELENE  << -351737.078 <<  126965.254 << -33017.275;
+	testData << "Telesto" << HTC2_TELESTO <<  222550.256 << -182154.616 <<  71289.412;
+	testData << "Calypso" << HTC2_CALYPSO << -278795.483 <<  -66349.449 <<  64265.081;
+
+	while (testData.count() >= 5)
+	{
+		name = testData.takeFirst().toString();
+		ID   = testData.takeFirst().toInt();
+		// position
+		t1   = testData.takeFirst().toDouble();
+		t2   = testData.takeFirst().toDouble();
+		t3   = testData.takeFirst().toDouble();
+
+		r = htc20(JD, ID, pos, vel);
+		ae1 = qAbs(qAbs(pos[0]*AU_IN_KM) - qAbs(t1));
+		ae2 = qAbs(qAbs(pos[1]*AU_IN_KM) - qAbs(t2));
+		ae3 = qAbs(qAbs(pos[2]*AU_IN_KM) - qAbs(t3));
+
+		QVERIFY2(ae1 <= acceptableError && ae2 <= acceptableError && ae3 <= acceptableError,
+			 QString("%8; JD=%1 P[0]=%2 (%5) P[1]=%3 (%6) P[2]=%4 (%7)")
+			 .arg(QString::number(JD, 'f', 2))
+			 .arg(QString::number(pos[0]*AU_IN_KM, 'f', 3))
+			 .arg(QString::number(pos[1]*AU_IN_KM, 'f', 3))
+			 .arg(QString::number(pos[2]*AU_IN_KM, 'f', 3))
+			 .arg(QString::number(t1, 'f', 3))
+			 .arg(QString::number(t2, 'f', 3))
+			 .arg(QString::number(t3, 'f', 3))
+			 .arg(name)
 			 .toUtf8());
 	}
 }

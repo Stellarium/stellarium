@@ -961,6 +961,8 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 		const bool onEarth = (core->getCurrentPlanet()==earth);
 		// TRANSLATORS: Unit of measure for speed - kilometers per second
 		QString kms = qc_("km/s", "speed");
+		// TRANSLATORS: Unit of measure for speed - meters per second
+		QString mps = qc_("m/s", "speed");
 
 		// This is a string you can activate for debugging. It shows the distance between observer and center of the body you are standing on.
 		// May be helpful for debugging critical parallax corrections for eclipses.
@@ -990,13 +992,19 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 			if (qAbs(re.W1)>0.)
 			{
 				const double eqRotVel = (2.0*M_PI*AU/(360.*86400.0))*getEquatorialRadius()*re.W1;
-				oss << QString("%1: %2 %3<br/>").arg(q_("Equatorial rotation velocity")).arg(qAbs(eqRotVel), 0, 'f', 3).arg(kms);
+				if (eqRotVel>1.)
+					oss << QString("%1: %2 %3<br/>").arg(q_("Equatorial rotation velocity")).arg(qAbs(eqRotVel), 0, 'f', 3).arg(kms);
+				else
+					oss << QString("%1: %2 %3<br/>").arg(q_("Equatorial rotation velocity")).arg(qAbs(eqRotVel*1000.), 0, 'f', 3).arg(mps);
+
 			}
 			else if (qAbs(re.period)>0.)
 			{
 				const double eqRotVel = 2.0*M_PI*(AU*getEquatorialRadius())/(getSiderealDay()*86400.0);
-				if (eqRotVel>0.1) // it seems that objects with unspecified re.period have re.period=orbitPeriod, with useless eqRotVel ~0.
+				if (eqRotVel>1.)
 					oss << QString("%1: %2 %3<br/>").arg(q_("Equatorial rotation velocity")).arg(qAbs(eqRotVel), 0, 'f', 3).arg(kms);
+				else
+					oss << QString("%1: %2 %3<br/>").arg(q_("Equatorial rotation velocity")).arg(qAbs(eqRotVel*1000.), 0, 'f', 3).arg(mps);
 			}
 		}
 
