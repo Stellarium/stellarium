@@ -34,6 +34,7 @@
 #include "l12.h"
 #include "marssat.h"
 #include "htc20b.hpp"
+#include "gust86.h"
 
 #include <math.h>
 
@@ -2694,9 +2695,9 @@ void TestEphemeris::testHTC20Theory()
 	double AU_IN_KM = 1.495978707e+8;
 	double pos[3], vel[3];
 	double acceptableError = 1E-3; // need re-check
-	double t1, t2, t3, ID, ae1, ae2, ae3;
+	double t1, t2, t3, ae1, ae2, ae3;
 	double JD = 2451590.;
-	int r;
+	int r, ID;
 	QString name;
 
 	QVariantList testData;
