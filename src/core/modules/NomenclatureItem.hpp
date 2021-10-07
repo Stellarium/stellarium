@@ -105,39 +105,39 @@ public:
 		niSaxum			= 57  // type="saxum"
 	};
 
-	NomenclatureItem(PlanetP nPlanet, int nId, const QString& nName, const QString& nContext, NomenclatureItemType nItemType, float nLatitude, float nLongitude, float nSize);
-	virtual ~NomenclatureItem();
+	NomenclatureItem(PlanetP nPlanet, int nId, const QString& nName, const QString& nContext, NomenclatureItemType nItemType, double nLatitude, double nLongitude, double nSize);
+	virtual ~NomenclatureItem() Q_DECL_OVERRIDE;
 
 	//! Get the type of object
-	virtual QString getType(void) const
+	virtual QString getType(void) const Q_DECL_OVERRIDE
 	{
 		return NOMENCLATURE_TYPE;
 	}
 
-	virtual QString getID(void) const
+	virtual QString getID(void) const Q_DECL_OVERRIDE
 	{
 		return QString("%1").arg(identificator);
 	}
 
-	virtual float getSelectPriority(const StelCore* core) const;
+	virtual float getSelectPriority(const StelCore* core) const Q_DECL_OVERRIDE;
 
 	//! Get an HTML string to describe the object
 	//! @param core A pointer to the core
 	//! @flags a set of flags with information types to include.
-	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const;
-	virtual Vec3f getInfoColor(void) const;
-	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const;
+	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
+	virtual Vec3f getInfoColor(void) const Q_DECL_OVERRIDE;
+	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const Q_DECL_OVERRIDE;
 	//! Get the visual magnitude of a nomenclature item. Dummy method, returns 99.
-	virtual float getVMagnitude(const StelCore* core) const;
+	virtual float getVMagnitude(const StelCore* core) const Q_DECL_OVERRIDE;
 	//! Get the angular size of nomenclature item.
-	virtual double getAngularSize(const StelCore* core) const;
+	virtual double getAngularSize(const StelCore* core) const Q_DECL_OVERRIDE;
 	//! Get the localized name of nomenclature item.
-	virtual QString getNameI18n(void) const;
+	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
 	//! Get the english name of nomenclature item.
-	virtual QString getEnglishName(void) const;
+	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
-	//! Translate planet name using the passed translator
+	//! Translate feature name using the passed translator
 	virtual void translateName(const StelTranslator &trans);
 
 	void draw(StelCore* core, StelPainter *painter);
@@ -151,9 +151,9 @@ public:
 	//QString getEnglishPlanetName(void) const {return planet->getEnglishName();}
 	PlanetP getPlanet(void) const { return planet;}
 	//! get latitude [degrees]
-	float getLatitude(void) const {return latitude;}
+	float getLatitude(void) const {return static_cast<float>(latitude);}
 	//! get longitude [degrees]
-	float getLongitude(void) const {return longitude;}
+	float getLongitude(void) const {return static_cast<float>(longitude);}
 	//! return solar altitude in degrees (Meeus, Astr.Alg.1998 53.3)
 	double getSolarAltitude(const StelCore *core) const;
 
@@ -180,7 +180,7 @@ private:
 	int identificator;
 	QString englishName, context, nameI18n;
 	NomenclatureItemType nType;       // Type of nomenclature item
-	float latitude, longitude, size;  // degrees, degrees, km
+	double latitude, longitude, size;  // degrees, degrees, km
 
 	LinearFader labelsFader;
 };

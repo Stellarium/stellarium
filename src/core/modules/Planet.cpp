@@ -1246,12 +1246,12 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 						double distance = loc.distanceKm(pos[1], pos[0]);
 						double azimuth = loc.getAzimuthForLocation(pos[1], pos[0]);
 
-						oss << QString("%1 %2 %3 %4%5")
+						oss << QString("%1 %2 %3 %4%5<br/>")
 								 .arg(q_("Shadow center point is"))
 								 .arg(QString::number(distance, 'f', 1))
 								 .arg(q_("km towards azimuth"))
 								 .arg(QString::number(azimuth, 'f', 1))
-								 .arg(QChar(0x00B0)) << "<br/>";
+								 .arg(QChar(0x00B0));
 						oss << QString("%1: %2 ")
 								 .arg(q_("Magnitude of central eclipse"))
 								 .arg(QString::number(pos[2], 'f', 3));
@@ -1273,10 +1273,10 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 			QPair<double,double> magnitudes = getLunarEclipseMagnitudes();
 			if (magnitudes.first > 1.e-3)
 			{
-				oss << QString("%1: %2%").arg(q_("Penumbral eclipse magnitude"), QString::number(magnitudes.first*100., 'f', 1)) << "<br />";
+				oss << QString("%1: %2%<br/>").arg(q_("Penumbral eclipse magnitude"), QString::number(magnitudes.first*100., 'f', 1));
 				if (magnitudes.second > 1.e-3)
 				{
-					oss << QString("%1: %2%").arg(q_("Umbral eclipse magnitude"), QString::number(magnitudes.second*100., 'f', 1)) << "<br />";
+					oss << QString("%1: %2%<br/>").arg(q_("Umbral eclipse magnitude"), QString::number(magnitudes.second*100., 'f', 1));
 				}
 			}
 		}		

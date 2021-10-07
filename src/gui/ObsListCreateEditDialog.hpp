@@ -39,16 +39,16 @@ public:
 	static void kill();
 
 	//! Notify that the application style changed
-	void styleChanged();
+	void styleChanged() Q_DECL_OVERRIDE;
 
 	//! called when click on button close in top right corner
-	void close();
+	void close() Q_DECL_OVERRIDE;
 
 protected:
 	static ObsListCreateEditDialog * m_instance;
 	Ui_obsListCreateEditDialogForm *ui;
 	//! Initialize the dialog widgets and connect the signals/slots.
-	virtual void createDialogContent();
+	virtual void createDialogContent() Q_DECL_OVERRIDE;
 
 private:
 	//! To know if the dialog is open in creation mode or editionn mode
@@ -86,11 +86,11 @@ private:
 
 	//Private constructor and destructor
 	ObsListCreateEditDialog ( std::string listUuid );
-	virtual ~ObsListCreateEditDialog();
+	virtual ~ObsListCreateEditDialog() Q_DECL_OVERRIDE;
 
 
 public slots:
-	void retranslate();
+	void retranslate() Q_DECL_OVERRIDE;
 private slots:
 	void obsListAddObjectButtonPressed();
 	void obsListRemoveObjectButtonPressed();

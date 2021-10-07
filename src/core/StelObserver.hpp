@@ -92,14 +92,14 @@ class SpaceShipObserver : public StelObserver
 	Q_OBJECT
 public:
 	SpaceShipObserver(const StelLocation& startLoc, const StelLocation& target, double transitSeconds=1., double timeToGo=-1.0);
-	~SpaceShipObserver();
+	~SpaceShipObserver() Q_DECL_OVERRIDE;
 
 	//! Update StelObserver info if needed. Default implementation does nothing.
-	virtual bool update(double deltaTime);
-	virtual const QSharedPointer<Planet> getHomePlanet() const;
-	virtual bool isObserverLifeOver() const {return timeToGo <= 0.;}
-	virtual bool isTraveling() const {return !isObserverLifeOver();}
-	virtual StelObserver* getNextObserver() const {return new StelObserver(moveTargetLocation);}
+	virtual bool update(double deltaTime) Q_DECL_OVERRIDE;
+	virtual const QSharedPointer<Planet> getHomePlanet() const Q_DECL_OVERRIDE;
+	virtual bool isObserverLifeOver() const Q_DECL_OVERRIDE {return timeToGo <= 0.;}
+	virtual bool isTraveling() const Q_DECL_OVERRIDE {return !isObserverLifeOver();}
+	virtual StelObserver* getNextObserver() const Q_DECL_OVERRIDE {return new StelObserver(moveTargetLocation);}
 
 	//! Returns the target location
 	StelLocation getTargetLocation() const { return moveTargetLocation; }
