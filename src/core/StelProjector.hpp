@@ -229,6 +229,12 @@ public:
 	//! @return true if the projected coordinate is valid.
 	bool project(const Vec3f& v, Vec3f& win) const;
 
+	//! Project the vector v from the current frame into the viewport.
+	//! @param v the vector in the current frame.
+	//! @param win the projected vector in the viewport 2D frame.
+	//! @return true if the projected coordinate is valid.
+	bool project(const Vec3d& v, Vec3f& win) const;
+
 	virtual void project(int n, const Vec3d* in, Vec3f* out);
 
 	virtual void project(int n, const Vec3f* in, Vec3f* out);

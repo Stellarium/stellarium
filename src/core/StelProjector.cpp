@@ -308,6 +308,14 @@ bool StelProjector::project(const Vec3f& v, Vec3f& win) const
 	return projectInPlace(win);
 }
 
+bool StelProjector::project(const Vec3d& v, Vec3f& win) const
+{
+	Vec3d wind = v;
+	bool res= projectInPlace(wind);
+	win = wind.toVec3f();
+	return res;
+}
+
 void StelProjector::project(int n, const Vec3d* in, Vec3f* out)
 {
 	Vec3d v;
