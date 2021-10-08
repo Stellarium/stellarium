@@ -102,7 +102,8 @@ public:
 	virtual void draw(StelPainter* sPainter, int index,bool is_inside,
 					  const RCMag* rcmag_table, int limitMagIndex, StelCore* core,
 					  int maxMagStarName, float names_brightness, bool designationUsage,
-					  const QVector<SphericalCap>& boundingCaps) const = 0;
+					  const QVector<SphericalCap>& boundingCaps,
+					  const bool withAberration, const Vec3f vel) const = 0;
 
 	//! Get whether or not the catalog was successfully loaded.
 	//! @return @c true if at least one zone was loaded, otherwise @c false
@@ -173,16 +174,21 @@ protected:
 	//! Draw stars and their names onto the viewport.
 	//! @param sPainter the painter to use 
 	//! @param index zone index to draw
-	//! @param isInsideViewport whether the zone is inside the current viewport
+	//! @param isInsideViewport whether the zone is inside the current viewport. If false, we need to test more to skip stars.
 	//! @param rcmag_table table of magnitudes
 	//! @param limitMagIndex index from rcmag_table at which stars are not visible anymore
 	//! @param core core to use for drawing
 	//! @param maxMagStarName magnitude limit of stars that display labels
 	//! @param names_brightness brightness of labels
+	//! @param designationUsage
+	//! @param boundingCaps
+	//! @param withAberration true if aberration to be applied
+	//! @param vel velocity vector of observer planet
 	virtual void draw(StelPainter* sPainter, int index, bool isInsideViewport,
 			  const RCMag *rcmag_table, int limitMagIndex, StelCore* core,
 			  int maxMagStarName, float names_brightness, bool designationUsage,
-			  const QVector<SphericalCap>& boundingCaps) const Q_DECL_OVERRIDE;
+			  const QVector<SphericalCap>& boundingCaps,
+			  const bool withAberration, const Vec3f vel) const Q_DECL_OVERRIDE;
 
 	virtual void scaleAxis() Q_DECL_OVERRIDE;
 	virtual void searchAround(const StelCore* core, int index,const Vec3d &v,double cosLimFov,

@@ -45,6 +45,8 @@
 #include "RefractionExtinction.hpp"
 #include "StelModuleMgr.hpp"
 #include "ConstellationMgr.hpp"
+#include "Planet.hpp"
+#include "StelUtils.hpp"
 
 #include <QTextStream>
 #include <QFile>
@@ -460,7 +462,7 @@ void StarMgr::drawPointer(StelPainter& sPainter, const StelCore* core)
 		const StelObjectP obj = newSelected[0];
 		Vec3d pos=obj->getJ2000EquatorialPos(core);
 
-		Vec3d screenpos;
+		Vec3f screenpos;
 		// Compute 2D pos and return if outside screen
 		if (!sPainter.getProjector()->project(pos, screenpos))
 			return;
@@ -520,13 +522,13 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc)
 				while (!file.atEnd())
 				{
 					qint64 sz = file.read(mmd5buf, maxStarBufMd5);
-					md5Hash.addData(mmd5buf, sz);
+					md5Hash.addData(mmd5buf, static_cast<int>(sz));
 				}
 				free(mmd5buf);
 			}
 			else
 			{
-				md5Hash.addData(reinterpret_cast<const char*>(cat), cat_sz);
+				md5Hash.addData(reinterpret_cast<const char*>(cat), static_cast<int>(cat_sz));
 				file.unmap(cat);
 			}
 			file.close();
@@ -1251,6 +1253,17 @@ void StarMgr::draw(StelCore* core)
 	// Set temporary static variable for optimization
 	const float names_brightness = labelsFader.getInterstate() * starsFader.getInterstate();
 
+	// prepare for aberration: Explan. Suppl. 2013, (7.38)
+	const bool withAberration=core->getUseAberration();
+	Vec3d vel(0.);
+	if (withAberration)
+	{
+		vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+		StelCore::matVsop87ToJ2000.transfo(vel);
+		vel*=core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
+	}
+	const Vec3f velf=vel.toVec3f();
+
 	// Prepare openGL for drawing many stars
 	StelPainter sPainter(prj);
 	sPainter.setFont(starFont);
@@ -1301,9 +1314,9 @@ void StarMgr::draw(StelCore* core)
 		int zone;
 		
 		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
-			z->draw(&sPainter, zone, true, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, flagDesignations, viewportCaps);
+			z->draw(&sPainter, zone, true, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, flagDesignations, viewportCaps, withAberration, velf);
 		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
-			z->draw(&sPainter, zone, false, rcmag_table, limitMagIndex, core, maxMagStarName,names_brightness, flagDesignations, viewportCaps);
+			z->draw(&sPainter, zone, false, rcmag_table, limitMagIndex, core, maxMagStarName,names_brightness, flagDesignations, viewportCaps, withAberration, velf);
 	}
 	exit_loop:
 
