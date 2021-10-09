@@ -44,6 +44,7 @@
 #include "ConstellationMgr.hpp"
 #include "Planet.hpp"
 #include "StelUtils.hpp"
+#include "SolarSystem.hpp"
 
 #include <QTextStream>
 #include <QFile>
@@ -1312,6 +1313,20 @@ void StarMgr::draw(StelCore* core)
 
 	// Prepare a table for storing precomputed RCMag for all ZoneArrays
 	RCMag rcmag_table[RCMAG_TABLE_SIZE];
+
+	// Try to filter away stars hidden by the Moon!
+	bool filterMoon=false;
+	PlanetP moon = GETSTELMODULE(SolarSystem)->getMoon();
+	Vec3d moonPos=moon->getJ2000EquatorialPos(core);
+	const double moonRadius = moon->getEquatorialRadius() * moon->getSphereScale();
+	double angularSize = atan2(moonRadius, moonPos.norm());
+	moonPos.normalize();
+	SphericalCap moonCap(moonPos, cos(angularSize));
+	for (auto  cap : viewportCaps)
+	{
+	    if (cap.intersects(moonCap))
+		filterMoon=true;
+	}
 	
 	// Draw all the stars of all the selected zones
 	for (const auto* z : qAsConst(gridLevels))
@@ -1355,9 +1370,9 @@ void StarMgr::draw(StelCore* core)
 		int zone;
 		
 		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
-			z->draw(&sPainter, zone, true, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps, withAberration, velf);
+			z->draw(&sPainter, zone, true, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps, withAberration, velf, filterMoon, moonCap);
 		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
-			z->draw(&sPainter, zone, false, rcmag_table, limitMagIndex, core, maxMagStarName,names_brightness, viewportCaps, withAberration, velf);
+			z->draw(&sPainter, zone, false, rcmag_table, limitMagIndex, core, maxMagStarName,names_brightness, viewportCaps, withAberration, velf, filterMoon, moonCap);
 	}
 	exit_loop:
 
