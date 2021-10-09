@@ -3141,9 +3141,9 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 
 	// Find extinction settings to change colors. The method is rather ad-hoc.
-	float extinctedMag=getVMagnitudeWithExtinction(core)-getVMagnitude(core); // this is net value of extinction, in mag.
-	float magFactorGreen=powf(0.85f, 0.6f*extinctedMag);
-	float magFactorBlue=powf(0.6f, 0.5f*extinctedMag);
+	const float extinctedMag=getVMagnitudeWithExtinction(core)-getVMagnitude(core); // this is net value of extinction, in mag.
+	const float magFactorGreen=powf(0.85f, 0.6f*extinctedMag);
+	const float magFactorBlue=powf(0.6f, 0.5f*extinctedMag);
 
 	if (screenSz>1.f)
 	{
@@ -3184,8 +3184,8 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		light.position=sunPos;
 
 		// Set the light parameters taking sun as the light source
-		light.diffuse.set(1.f,static_cast<float>(magFactorGreen)*1.f,static_cast<float>(magFactorBlue)*1.f);
-		light.ambient.set(0.02f,static_cast<float>(magFactorGreen)*0.02f,static_cast<float>(magFactorBlue)*0.02f);
+		light.diffuse.set(1.f,  magFactorGreen*1.f,  magFactorBlue*1.f);
+		light.ambient.set(0.02f,magFactorGreen*0.02f,magFactorBlue*0.02f);
 
 		if (this==ssm->getMoon())
 		{
@@ -3770,7 +3770,7 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 	RenderData rData = setCommonShaderUniforms(*painter, shader, *shaderVars);
 	QVector<Vec3f> projectedVertsArray;
 	QVector<Vec3f> vertsArray;
-	double angle = getSpheroidAngularSize(core) * M_PI / 180.;
+	double angle = getSpheroidAngularSize(core) * M_PI_180;
 
 	if (rings)
 	{
@@ -3795,7 +3795,7 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 
 	// Apply a rotation otherwize the hips surveys don't get rendered at the
 	// proper position.  Not sure why...
-	painter->getProjector()->getModelViewTransform()->combine(Mat4d::zrotation(M_PI / 2.0));
+	painter->getProjector()->getModelViewTransform()->combine(Mat4d::zrotation(M_PI * 0.5));
 	painter->getProjector()->getModelViewTransform()->combine(Mat4d::scaling(Vec3d(1, 1, oneMinusOblateness)));
 
 	survey->draw(painter, angle, [&](const QVector<Vec3d>& verts, const QVector<Vec2f>& tex, const QVector<uint16_t>& indices) {
@@ -3803,15 +3803,14 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 		vertsArray.resize(verts.size());
 		for (int i = 0; i < verts.size(); i++)
 		{
-			Vec3d v;
-			v = verts[i];
+			Vec3d v = verts[i];
 			painter->getProjector()->project(v, v);
-			projectedVertsArray[i] = Vec3f(static_cast<float>(v[0]), static_cast<float>(v[1]), static_cast<float>(v[2]));
+			projectedVertsArray[i] = v.toVec3f();
 			v = Mat4d::scaling(equatorialRadius) * verts[i];
 			v = Mat4d::scaling(Vec3d(1, 1, oneMinusOblateness)) * v;
 			// Undo the rotation we applied for the survey fix.
-			v = Mat4d::zrotation(M_PI / 2.0) * v;
-			vertsArray[i] = Vec3f(static_cast<float>(v[0]), static_cast<float>(v[1]), static_cast<float>(v[2]));
+			v = Mat4d::zrotation(M_PI * 0.5) * v;
+			vertsArray[i] = v.toVec3f();
 		}
 		GL(shader->setAttributeArray(shaderVars->vertex, reinterpret_cast<const GLfloat*>(projectedVertsArray.constData()), 3));
 		GL(shader->enableAttributeArray(shaderVars->vertex));
