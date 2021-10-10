@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-10-03 16:10+0700\n"
+"POT-Creation-Date: 2021-10-07 19:43+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Karl Birgersson <birgerssonkarl@outlook.com>, 2021\n"
 "Language-Team: Swedish (https://www.transifex.com/stellarium/teams/80998/sv/)\n"
@@ -516,97 +516,97 @@ msgid "Compass marks"
 msgstr "Kompassmärken"
 
 #. TRANSLATORS: North
-#: src/core/modules/LandscapeMgr.cpp:254 src/core/modules/Planet.cpp:1080
+#: src/core/modules/LandscapeMgr.cpp:254 src/core/modules/Planet.cpp:1088
 msgctxt "compass direction"
 msgid "N"
 msgstr "N"
 
 #. TRANSLATORS: South
-#: src/core/modules/LandscapeMgr.cpp:256 src/core/modules/Planet.cpp:1072
+#: src/core/modules/LandscapeMgr.cpp:256 src/core/modules/Planet.cpp:1080
 msgctxt "compass direction"
 msgid "S"
 msgstr "S"
 
 #. TRANSLATORS: East
-#: src/core/modules/LandscapeMgr.cpp:258 src/core/modules/Planet.cpp:1084
+#: src/core/modules/LandscapeMgr.cpp:258 src/core/modules/Planet.cpp:1092
 msgctxt "compass direction"
 msgid "E"
 msgstr "Ö"
 
 #. TRANSLATORS: West
-#: src/core/modules/LandscapeMgr.cpp:260 src/core/modules/Planet.cpp:1076
+#: src/core/modules/LandscapeMgr.cpp:260 src/core/modules/Planet.cpp:1084
 msgctxt "compass direction"
 msgid "W"
 msgstr "V"
 
 #. TRANSLATORS: Northeast
-#: src/core/modules/LandscapeMgr.cpp:262 src/core/modules/Planet.cpp:1082
+#: src/core/modules/LandscapeMgr.cpp:262 src/core/modules/Planet.cpp:1090
 msgctxt "compass direction"
 msgid "NE"
 msgstr "NÖ"
 
 #. TRANSLATORS: Southeast
-#: src/core/modules/LandscapeMgr.cpp:264 src/core/modules/Planet.cpp:1086
+#: src/core/modules/LandscapeMgr.cpp:264 src/core/modules/Planet.cpp:1094
 msgctxt "compass direction"
 msgid "SE"
 msgstr "SÖ"
 
 #. TRANSLATORS: Southwest
-#: src/core/modules/LandscapeMgr.cpp:266 src/core/modules/Planet.cpp:1074
+#: src/core/modules/LandscapeMgr.cpp:266 src/core/modules/Planet.cpp:1082
 msgctxt "compass direction"
 msgid "SW"
 msgstr "SV"
 
 #. TRANSLATORS: Northwest
-#: src/core/modules/LandscapeMgr.cpp:268 src/core/modules/Planet.cpp:1078
+#: src/core/modules/LandscapeMgr.cpp:268 src/core/modules/Planet.cpp:1086
 msgctxt "compass direction"
 msgid "NW"
 msgstr "NV"
 
 #. TRANSLATORS: North-northeast
-#: src/core/modules/LandscapeMgr.cpp:270 src/core/modules/Planet.cpp:1081
+#: src/core/modules/LandscapeMgr.cpp:270 src/core/modules/Planet.cpp:1089
 msgctxt "compass direction"
 msgid "NNE"
 msgstr "NNÖ"
 
 #. TRANSLATORS: East-northeast
-#: src/core/modules/LandscapeMgr.cpp:272 src/core/modules/Planet.cpp:1083
+#: src/core/modules/LandscapeMgr.cpp:272 src/core/modules/Planet.cpp:1091
 msgctxt "compass direction"
 msgid "ENE"
 msgstr "ÖNÖ"
 
 #. TRANSLATORS: East-southeast
-#: src/core/modules/LandscapeMgr.cpp:274 src/core/modules/Planet.cpp:1085
+#: src/core/modules/LandscapeMgr.cpp:274 src/core/modules/Planet.cpp:1093
 msgctxt "compass direction"
 msgid "ESE"
 msgstr "ÖSÖ"
 
 #. TRANSLATORS: South-southeast
-#: src/core/modules/LandscapeMgr.cpp:276 src/core/modules/Planet.cpp:1087
+#: src/core/modules/LandscapeMgr.cpp:276 src/core/modules/Planet.cpp:1095
 msgctxt "compass direction"
 msgid "SSE"
 msgstr "SSÖ"
 
 #. TRANSLATORS: South-southwest
-#: src/core/modules/LandscapeMgr.cpp:278 src/core/modules/Planet.cpp:1073
+#: src/core/modules/LandscapeMgr.cpp:278 src/core/modules/Planet.cpp:1081
 msgctxt "compass direction"
 msgid "SSW"
 msgstr "SSV"
 
 #. TRANSLATORS: West-southwest
-#: src/core/modules/LandscapeMgr.cpp:280 src/core/modules/Planet.cpp:1075
+#: src/core/modules/LandscapeMgr.cpp:280 src/core/modules/Planet.cpp:1083
 msgctxt "compass direction"
 msgid "WSW"
 msgstr "VSV"
 
 #. TRANSLATORS: West-northwest
-#: src/core/modules/LandscapeMgr.cpp:282 src/core/modules/Planet.cpp:1077
+#: src/core/modules/LandscapeMgr.cpp:282 src/core/modules/Planet.cpp:1085
 msgctxt "compass direction"
 msgid "WNW"
 msgstr "VNV"
 
 #. TRANSLATORS: North-northwest
-#: src/core/modules/LandscapeMgr.cpp:284 src/core/modules/Planet.cpp:1079
+#: src/core/modules/LandscapeMgr.cpp:284 src/core/modules/Planet.cpp:1087
 msgctxt "compass direction"
 msgid "NNW"
 msgstr "NNV"
@@ -2077,8 +2077,8 @@ msgstr "Ekliptisk"
 msgid "Hourly motion"
 msgstr "Timvis rörelse"
 
-#: src/core/modules/Planet.cpp:569 src/core/modules/Planet.cpp:1133
-#: src/core/modules/Planet.cpp:1142 src/core/modules/StarWrapper.cpp:329
+#: src/core/modules/Planet.cpp:569 src/core/modules/Planet.cpp:1141
+#: src/core/modules/Planet.cpp:1150 src/core/modules/StarWrapper.cpp:329
 #: plugins/Pulsars/src/Pulsar.cpp:203
 msgctxt "into the direction of"
 msgid "towards"
@@ -2163,7 +2163,7 @@ msgid "Angular distance"
 msgstr "Vinkelavstånd"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:809 src/core/modules/Planet.cpp:971
+#: src/core/modules/Planet.cpp:809 src/core/modules/Planet.cpp:973
 #: src/core/modules/StarWrapper.cpp:349 src/gui/AstroCalcDialog.cpp:6240
 msgctxt "duration"
 msgid "days"
@@ -2177,140 +2177,147 @@ msgstr "Siderisk omloppstid"
 msgid "Synodic period"
 msgstr "Synodisk omloppstid"
 
-#: src/core/modules/Planet.cpp:980
+#. TRANSLATORS: Unit of measure for speed - meters per second
+#: src/core/modules/Planet.cpp:965
+msgctxt "speed"
+msgid "m/s"
+msgstr "m/s"
+
+#: src/core/modules/Planet.cpp:982
 msgid "Sidereal day"
 msgstr "Stjärndygn"
 
-#: src/core/modules/Planet.cpp:982
+#: src/core/modules/Planet.cpp:984
 msgid "Mean solar day"
 msgstr "Medelsoldygn"
 
-#: src/core/modules/Planet.cpp:988
+#: src/core/modules/Planet.cpp:990
 msgid "The period of rotation is chaotic"
 msgstr "Rotationsperioden är kaotisk"
 
-#: src/core/modules/Planet.cpp:993 src/core/modules/Planet.cpp:999
+#: src/core/modules/Planet.cpp:996 src/core/modules/Planet.cpp:998
+#: src/core/modules/Planet.cpp:1005 src/core/modules/Planet.cpp:1007
 msgid "Equatorial rotation velocity"
 msgstr "Rotationshastighet vid ekvatorn"
 
-#: src/core/modules/Planet.cpp:1023
+#: src/core/modules/Planet.cpp:1031
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "Nymåne"
 
-#: src/core/modules/Planet.cpp:1025
+#: src/core/modules/Planet.cpp:1033
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "Tilltagande skära"
 
-#: src/core/modules/Planet.cpp:1027
+#: src/core/modules/Planet.cpp:1035
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "Första kvarteret"
 
-#: src/core/modules/Planet.cpp:1029
+#: src/core/modules/Planet.cpp:1037
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "Tilltagande kullrig"
 
-#: src/core/modules/Planet.cpp:1031
+#: src/core/modules/Planet.cpp:1039
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "Fullmåne"
 
-#: src/core/modules/Planet.cpp:1033
+#: src/core/modules/Planet.cpp:1041
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "Avtagande kullrig"
 
-#: src/core/modules/Planet.cpp:1035
+#: src/core/modules/Planet.cpp:1043
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "Tredje kvarteret"
 
-#: src/core/modules/Planet.cpp:1037
+#: src/core/modules/Planet.cpp:1045
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "Avtagande skära"
 
-#: src/core/modules/Planet.cpp:1045
+#: src/core/modules/Planet.cpp:1053
 msgid "Moon age"
 msgstr "Månens ålder"
 
-#: src/core/modules/Planet.cpp:1045
+#: src/core/modules/Planet.cpp:1053
 msgid "days old"
 msgstr "dagar gammal"
 
-#: src/core/modules/Planet.cpp:1065 src/core/modules/Planet.cpp:1068
+#: src/core/modules/Planet.cpp:1073 src/core/modules/Planet.cpp:1076
 msgid "Position angle of bright limb"
 msgstr "Positionsvinkel för den ljusa kanten"
 
-#: src/core/modules/Planet.cpp:1132 src/core/modules/Planet.cpp:1141
-#: src/core/modules/Planet.cpp:1177 src/core/modules/Planet.cpp:1184
+#: src/core/modules/Planet.cpp:1140 src/core/modules/Planet.cpp:1149
+#: src/core/modules/Planet.cpp:1185 src/core/modules/Planet.cpp:1192
 msgid "Position Angle of axis"
 msgstr "Axelns positionsvinkel"
 
-#: src/core/modules/Planet.cpp:1133 src/core/modules/Planet.cpp:1134
-#: src/core/modules/Planet.cpp:1142 src/core/modules/Planet.cpp:1143
+#: src/core/modules/Planet.cpp:1141 src/core/modules/Planet.cpp:1142
+#: src/core/modules/Planet.cpp:1150 src/core/modules/Planet.cpp:1151
 msgid "Libration"
 msgstr "Libration"
 
-#: src/core/modules/Planet.cpp:1135 src/core/modules/Planet.cpp:1144
-#: src/core/modules/Planet.cpp:1179 src/core/modules/Planet.cpp:1186
+#: src/core/modules/Planet.cpp:1143 src/core/modules/Planet.cpp:1152
+#: src/core/modules/Planet.cpp:1187 src/core/modules/Planet.cpp:1194
 msgid "Subsolar point"
 msgstr "Punkt under solen"
 
-#: src/core/modules/Planet.cpp:1136 src/core/modules/Planet.cpp:1145
+#: src/core/modules/Planet.cpp:1144 src/core/modules/Planet.cpp:1153
 msgid "Colongitude"
 msgstr "Kolongitud"
 
-#: src/core/modules/Planet.cpp:1178 src/core/modules/Planet.cpp:1185
+#: src/core/modules/Planet.cpp:1186 src/core/modules/Planet.cpp:1193
 msgid "Center point"
 msgstr "Centralpunkt"
 
-#: src/core/modules/Planet.cpp:1197
+#: src/core/modules/Planet.cpp:1205
 msgid "Eclipse obscuration"
 msgstr "Förmörkad del"
 
-#: src/core/modules/Planet.cpp:1206
+#: src/core/modules/Planet.cpp:1214
 msgid "Eclipse magnitude"
 msgstr "Storlek på förmörkelse"
 
-#: src/core/modules/Planet.cpp:1231
+#: src/core/modules/Planet.cpp:1239
 msgid "Center of solar eclipse (Lat./Long.)"
 msgstr "Centrum på solförmörkelse (lat./long.)"
 
-#: src/core/modules/Planet.cpp:1242
+#: src/core/modules/Planet.cpp:1250
 msgid "Shadow center point is"
 msgstr "Centralpunkt för skugga är"
 
-#: src/core/modules/Planet.cpp:1244
+#: src/core/modules/Planet.cpp:1252
 msgid "km towards azimuth"
 msgstr "km mot azimut"
 
-#: src/core/modules/Planet.cpp:1248
+#: src/core/modules/Planet.cpp:1256
 msgid "Magnitude of central eclipse"
 msgstr "Magnitud på centralförmörkelse"
 
-#: src/core/modules/Planet.cpp:1251
+#: src/core/modules/Planet.cpp:1259
 msgctxt "type of solar eclipse"
 msgid "(annular)"
 msgstr "(ringformig)"
 
-#: src/core/modules/Planet.cpp:1253
+#: src/core/modules/Planet.cpp:1261
 msgctxt "type of solar eclipse"
 msgid "(total)"
 msgstr "(total)"
 
-#: src/core/modules/Planet.cpp:1268
+#: src/core/modules/Planet.cpp:1276
 msgid "Penumbral eclipse magnitude"
 msgstr "Storlek på halvskuggeförmörkelse"
 
-#: src/core/modules/Planet.cpp:1271
+#: src/core/modules/Planet.cpp:1279
 msgid "Umbral eclipse magnitude"
 msgstr "Storlek på kärnskuggeförmörkelse"
 
-#: src/core/modules/Planet.cpp:1278
+#: src/core/modules/Planet.cpp:1286
 msgid "Albedo"
 msgstr "Albedo"
 
@@ -4696,7 +4703,7 @@ msgstr "Utvecklare: %1"
 #: src/gui/HelpDialog.cpp:485
 #, qt-format
 msgid "Sky cultures researcher: %1"
-msgstr ""
+msgstr "Himmelskultursforskare: %1"
 
 #: src/gui/HelpDialog.cpp:486
 msgid "Former Developers"
@@ -6086,14 +6093,14 @@ msgstr "Vinkelstorlek"
 #: src/gui/AstroCalcDialog.cpp:3195
 msgctxt "axis name"
 msgid "Heliocentric distance"
-msgstr ""
+msgstr "Heliocentriskt avstånd"
 
 #. TRANSLATORS: The phrase "Transit altitude" may be long in some languages
 #. and you can abbreviate it.
 #: src/gui/AstroCalcDialog.cpp:3201
 msgctxt "axis name"
 msgid "Transit altitude"
-msgstr ""
+msgstr "Passagehöjd"
 
 #. TRANSLATORS: The phrase "Right ascension" may be long in some languages and
 #. you can abbreviate it.
@@ -6502,7 +6509,7 @@ msgstr "Dag"
 
 #: src/gui/AstroCalcDialog.cpp:6494
 msgid "Angular distance between the Moon and selected object"
-msgstr ""
+msgstr "Vinkelavstånd mellan månen och valt objekt"
 
 #: src/gui/AstroCalcCustomStepsDialog.cpp:76
 msgctxt "unit of measurement"
@@ -9879,227 +9886,227 @@ msgstr ""
 #: skycultures/translations_skycultures.fab:10
 msgctxt "sky culture"
 msgid "Arabic (Al-Sufi)"
-msgstr ""
+msgstr "Arabisk (Al-Sufi)"
 
 #: skycultures/translations_skycultures.fab:12
 msgctxt "sky culture"
 msgid "Anutan"
-msgstr ""
+msgstr "Anutisk"
 
 #: skycultures/translations_skycultures.fab:14
 msgctxt "sky culture"
 msgid "Arabic Moon Stations"
-msgstr ""
+msgstr "Arabiska månstationer"
 
 #: skycultures/translations_skycultures.fab:16
 msgctxt "sky culture"
 msgid "Armintxe Cave"
-msgstr ""
+msgstr "Armintxegrottan"
 
 #: skycultures/translations_skycultures.fab:18
 msgctxt "sky culture"
 msgid "Aztec"
-msgstr ""
+msgstr "Aztekisk"
 
 #: skycultures/translations_skycultures.fab:20
 msgctxt "sky culture"
 msgid "Babylonian (MUL.APIN)"
-msgstr ""
+msgstr "Babylonisk (MUL.APIN)"
 
 #: skycultures/translations_skycultures.fab:22
 msgctxt "sky culture"
 msgid "Babylonian (Seleucid)"
-msgstr ""
+msgstr "Babylonisk (Seleucid)"
 
 #: skycultures/translations_skycultures.fab:24
 msgctxt "sky culture"
 msgid "Belarusian"
-msgstr ""
+msgstr "Vitrysk"
 
 #: skycultures/translations_skycultures.fab:26
 msgctxt "sky culture"
 msgid "Boorong"
-msgstr ""
+msgstr "Boorong"
 
 #: skycultures/translations_skycultures.fab:28
 msgctxt "sky culture"
 msgid "Chinese"
-msgstr ""
+msgstr "Kinesisk"
 
 #: skycultures/translations_skycultures.fab:30
 msgctxt "sky culture"
 msgid "Chinese Contemporary"
-msgstr ""
+msgstr "Kinesisk samtida"
 
 #: skycultures/translations_skycultures.fab:32
 msgctxt "sky culture"
 msgid "Chinese Medieval"
-msgstr ""
+msgstr "Kinesisk medeltida"
 
 #: skycultures/translations_skycultures.fab:34
 msgctxt "sky culture"
 msgid "Dakota/Lakota/Nakota"
-msgstr ""
+msgstr "Dakota/Lakota/Nakota"
 
 #: skycultures/translations_skycultures.fab:36
 msgctxt "sky culture"
 msgid "Egyptian"
-msgstr ""
+msgstr "Egyptisk"
 
 #: skycultures/translations_skycultures.fab:38
 msgctxt "sky culture"
 msgid "Greek (Almagest)"
-msgstr ""
+msgstr "Grekisk (Almagest)"
 
 #: skycultures/translations_skycultures.fab:40
 msgctxt "sky culture"
 msgid "Greek (Farnese + Almagest)"
-msgstr ""
+msgstr "Grekisk (Farnese + Almagest)"
 
 #: skycultures/translations_skycultures.fab:42
 msgctxt "sky culture"
 msgid "Greek (Leiden Aratea + Almagest)"
-msgstr ""
+msgstr "Grekisk (Leiden Aratea + Almagest)"
 
 #: skycultures/translations_skycultures.fab:44
 msgctxt "sky culture"
 msgid "Hawaiian Starlines"
-msgstr ""
+msgstr "Hawaiianska stjärnlinjer"
 
 #: skycultures/translations_skycultures.fab:46
 msgctxt "sky culture"
 msgid "Inuit"
-msgstr ""
+msgstr "Inuitisk"
 
 #: skycultures/translations_skycultures.fab:48
 msgctxt "sky culture"
 msgid "Indian Vedic"
-msgstr ""
+msgstr "Indisk vedisk"
 
 #: skycultures/translations_skycultures.fab:50
 msgctxt "sky culture"
 msgid "Japanese Moon Stations"
-msgstr ""
+msgstr "Japanska månstationer"
 
 #: skycultures/translations_skycultures.fab:52
 msgctxt "sky culture"
 msgid "Kamilaroi/Euahlayi"
-msgstr ""
+msgstr "Kamilaroi/Euahlayi"
 
 #: skycultures/translations_skycultures.fab:54
 msgctxt "sky culture"
 msgid "Korean"
-msgstr ""
+msgstr "Koreansk"
 
 #: skycultures/translations_skycultures.fab:56
 msgctxt "sky culture"
 msgid "Lokono"
-msgstr ""
+msgstr "Lokono"
 
 #: skycultures/translations_skycultures.fab:58
 msgctxt "sky culture"
 msgid "Macedonian"
-msgstr ""
+msgstr "Makedonisk"
 
 #: skycultures/translations_skycultures.fab:60
 msgctxt "sky culture"
 msgid "Maori"
-msgstr ""
+msgstr "Maorisk"
 
 #: skycultures/translations_skycultures.fab:62
 msgctxt "sky culture"
 msgid "Maya"
-msgstr ""
+msgstr "Mayansk"
 
 #: skycultures/translations_skycultures.fab:64
 msgctxt "sky culture"
 msgid "Mongolian"
-msgstr ""
+msgstr "Mongolisk"
 
 #: skycultures/translations_skycultures.fab:66
 msgctxt "sky culture"
 msgid "Navajo"
-msgstr ""
+msgstr "Navajo"
 
 #: skycultures/translations_skycultures.fab:68
 msgctxt "sky culture"
 msgid "Norse"
-msgstr ""
+msgstr "Fornnordisk"
 
 #: skycultures/translations_skycultures.fab:70
 msgctxt "sky culture"
 msgid "Northern Andes"
-msgstr ""
+msgstr "Norra Anderna"
 
 #: skycultures/translations_skycultures.fab:72
 msgctxt "sky culture"
 msgid "Ojibwe"
-msgstr ""
+msgstr "Ojibwe"
 
 #: skycultures/translations_skycultures.fab:74
 msgctxt "sky culture"
 msgid "Romanian"
-msgstr ""
+msgstr "Rumänsk"
 
 #: skycultures/translations_skycultures.fab:76
 msgctxt "sky culture"
 msgid "Russian (Siberian)"
-msgstr ""
+msgstr "Rysk (sibirisk)"
 
 #: skycultures/translations_skycultures.fab:78
 msgctxt "sky culture"
 msgid "Sami"
-msgstr ""
+msgstr "Samisk"
 
 #: skycultures/translations_skycultures.fab:80
 msgctxt "sky culture"
 msgid "Sardinian"
-msgstr ""
+msgstr "Sardinsk"
 
 #: skycultures/translations_skycultures.fab:82
 msgctxt "sky culture"
 msgid "Tongan"
-msgstr ""
+msgstr "Tongansk"
 
 #: skycultures/translations_skycultures.fab:84
 msgctxt "sky culture"
 msgid "Tukano"
-msgstr ""
+msgstr "Tukano"
 
 #: skycultures/translations_skycultures.fab:86
 msgctxt "sky culture"
 msgid "Tupi-Guarani"
-msgstr ""
+msgstr "Tupi-Guarani"
 
 #: skycultures/translations_skycultures.fab:88
 msgctxt "sky culture"
 msgid "Vanuatu (Netwar)"
-msgstr ""
+msgstr "Vanuatuansk (Netwar)"
 
 #: skycultures/translations_skycultures.fab:90
 msgctxt "sky culture"
 msgid "Western"
-msgstr ""
+msgstr "Västerländsk"
 
 #: skycultures/translations_skycultures.fab:92
 msgctxt "sky culture"
 msgid "Western (H.A. Rey)"
-msgstr ""
+msgstr "Västerländsk (H.A. Rey)"
 
 #: skycultures/translations_skycultures.fab:94
 msgctxt "sky culture"
 msgid "Western (O.Hlad)"
-msgstr ""
+msgstr "Västerländsk (O.Hlad)"
 
 #: skycultures/translations_skycultures.fab:96
 msgctxt "sky culture"
 msgid "Western (Sky & Telescope)"
-msgstr ""
+msgstr "Västerländsk (Sky & Telescope)"
 
 #: skycultures/translations_skycultures.fab:98
 msgctxt "sky culture"
 msgid "Western (Sternenkarten)"
-msgstr ""
+msgstr "Västerländsk (Sternenkarten)"
 
 #: src/ui_dateTimeDialogGui.h:378 src/ui_dateTimeDialogGui.h:383
 msgid "Julian Day"
@@ -19283,7 +19290,7 @@ msgstr ""
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:1051
 msgid "Secondary Transit"
-msgstr ""
+msgstr "Sekundär passage"
 
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:1053
@@ -21486,7 +21493,7 @@ msgstr "Slå på visning av beteckningar för exoplanter"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:594
 msgid "Enable display number of exoplanets in the system"
-msgstr ""
+msgstr "Slå på visning av antal exoplaneter i systemet"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:596
 msgid "Show exoplanets button on toolbar"

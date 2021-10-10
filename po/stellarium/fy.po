@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-10-03 16:10+0700\n"
+"POT-Creation-Date: 2021-10-07 19:43+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: cardinot <mcardinot@gmail.com>, 2017\n"
 "Language-Team: Western Frisian (https://www.transifex.com/stellarium/teams/80998/fy/)\n"
@@ -513,97 +513,97 @@ msgid "Compass marks"
 msgstr ""
 
 #. TRANSLATORS: North
-#: src/core/modules/LandscapeMgr.cpp:254 src/core/modules/Planet.cpp:1080
+#: src/core/modules/LandscapeMgr.cpp:254 src/core/modules/Planet.cpp:1088
 msgctxt "compass direction"
 msgid "N"
 msgstr ""
 
 #. TRANSLATORS: South
-#: src/core/modules/LandscapeMgr.cpp:256 src/core/modules/Planet.cpp:1072
+#: src/core/modules/LandscapeMgr.cpp:256 src/core/modules/Planet.cpp:1080
 msgctxt "compass direction"
 msgid "S"
 msgstr ""
 
 #. TRANSLATORS: East
-#: src/core/modules/LandscapeMgr.cpp:258 src/core/modules/Planet.cpp:1084
+#: src/core/modules/LandscapeMgr.cpp:258 src/core/modules/Planet.cpp:1092
 msgctxt "compass direction"
 msgid "E"
 msgstr ""
 
 #. TRANSLATORS: West
-#: src/core/modules/LandscapeMgr.cpp:260 src/core/modules/Planet.cpp:1076
+#: src/core/modules/LandscapeMgr.cpp:260 src/core/modules/Planet.cpp:1084
 msgctxt "compass direction"
 msgid "W"
 msgstr ""
 
 #. TRANSLATORS: Northeast
-#: src/core/modules/LandscapeMgr.cpp:262 src/core/modules/Planet.cpp:1082
+#: src/core/modules/LandscapeMgr.cpp:262 src/core/modules/Planet.cpp:1090
 msgctxt "compass direction"
 msgid "NE"
 msgstr ""
 
 #. TRANSLATORS: Southeast
-#: src/core/modules/LandscapeMgr.cpp:264 src/core/modules/Planet.cpp:1086
+#: src/core/modules/LandscapeMgr.cpp:264 src/core/modules/Planet.cpp:1094
 msgctxt "compass direction"
 msgid "SE"
 msgstr ""
 
 #. TRANSLATORS: Southwest
-#: src/core/modules/LandscapeMgr.cpp:266 src/core/modules/Planet.cpp:1074
+#: src/core/modules/LandscapeMgr.cpp:266 src/core/modules/Planet.cpp:1082
 msgctxt "compass direction"
 msgid "SW"
 msgstr ""
 
 #. TRANSLATORS: Northwest
-#: src/core/modules/LandscapeMgr.cpp:268 src/core/modules/Planet.cpp:1078
+#: src/core/modules/LandscapeMgr.cpp:268 src/core/modules/Planet.cpp:1086
 msgctxt "compass direction"
 msgid "NW"
 msgstr ""
 
 #. TRANSLATORS: North-northeast
-#: src/core/modules/LandscapeMgr.cpp:270 src/core/modules/Planet.cpp:1081
+#: src/core/modules/LandscapeMgr.cpp:270 src/core/modules/Planet.cpp:1089
 msgctxt "compass direction"
 msgid "NNE"
 msgstr ""
 
 #. TRANSLATORS: East-northeast
-#: src/core/modules/LandscapeMgr.cpp:272 src/core/modules/Planet.cpp:1083
+#: src/core/modules/LandscapeMgr.cpp:272 src/core/modules/Planet.cpp:1091
 msgctxt "compass direction"
 msgid "ENE"
 msgstr ""
 
 #. TRANSLATORS: East-southeast
-#: src/core/modules/LandscapeMgr.cpp:274 src/core/modules/Planet.cpp:1085
+#: src/core/modules/LandscapeMgr.cpp:274 src/core/modules/Planet.cpp:1093
 msgctxt "compass direction"
 msgid "ESE"
 msgstr ""
 
 #. TRANSLATORS: South-southeast
-#: src/core/modules/LandscapeMgr.cpp:276 src/core/modules/Planet.cpp:1087
+#: src/core/modules/LandscapeMgr.cpp:276 src/core/modules/Planet.cpp:1095
 msgctxt "compass direction"
 msgid "SSE"
 msgstr ""
 
 #. TRANSLATORS: South-southwest
-#: src/core/modules/LandscapeMgr.cpp:278 src/core/modules/Planet.cpp:1073
+#: src/core/modules/LandscapeMgr.cpp:278 src/core/modules/Planet.cpp:1081
 msgctxt "compass direction"
 msgid "SSW"
 msgstr ""
 
 #. TRANSLATORS: West-southwest
-#: src/core/modules/LandscapeMgr.cpp:280 src/core/modules/Planet.cpp:1075
+#: src/core/modules/LandscapeMgr.cpp:280 src/core/modules/Planet.cpp:1083
 msgctxt "compass direction"
 msgid "WSW"
 msgstr ""
 
 #. TRANSLATORS: West-northwest
-#: src/core/modules/LandscapeMgr.cpp:282 src/core/modules/Planet.cpp:1077
+#: src/core/modules/LandscapeMgr.cpp:282 src/core/modules/Planet.cpp:1085
 msgctxt "compass direction"
 msgid "WNW"
 msgstr ""
 
 #. TRANSLATORS: North-northwest
-#: src/core/modules/LandscapeMgr.cpp:284 src/core/modules/Planet.cpp:1079
+#: src/core/modules/LandscapeMgr.cpp:284 src/core/modules/Planet.cpp:1087
 msgctxt "compass direction"
 msgid "NNW"
 msgstr ""
@@ -2063,8 +2063,8 @@ msgstr ""
 msgid "Hourly motion"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:569 src/core/modules/Planet.cpp:1133
-#: src/core/modules/Planet.cpp:1142 src/core/modules/StarWrapper.cpp:329
+#: src/core/modules/Planet.cpp:569 src/core/modules/Planet.cpp:1141
+#: src/core/modules/Planet.cpp:1150 src/core/modules/StarWrapper.cpp:329
 #: plugins/Pulsars/src/Pulsar.cpp:203
 msgctxt "into the direction of"
 msgid "towards"
@@ -2149,7 +2149,7 @@ msgid "Angular distance"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:809 src/core/modules/Planet.cpp:971
+#: src/core/modules/Planet.cpp:809 src/core/modules/Planet.cpp:973
 #: src/core/modules/StarWrapper.cpp:349 src/gui/AstroCalcDialog.cpp:6240
 msgctxt "duration"
 msgid "days"
@@ -2163,140 +2163,147 @@ msgstr ""
 msgid "Synodic period"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:980
-msgid "Sidereal day"
+#. TRANSLATORS: Unit of measure for speed - meters per second
+#: src/core/modules/Planet.cpp:965
+msgctxt "speed"
+msgid "m/s"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:982
+msgid "Sidereal day"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:984
 msgid "Mean solar day"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:988
+#: src/core/modules/Planet.cpp:990
 msgid "The period of rotation is chaotic"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:993 src/core/modules/Planet.cpp:999
+#: src/core/modules/Planet.cpp:996 src/core/modules/Planet.cpp:998
+#: src/core/modules/Planet.cpp:1005 src/core/modules/Planet.cpp:1007
 msgid "Equatorial rotation velocity"
-msgstr ""
-
-#: src/core/modules/Planet.cpp:1023
-msgctxt "Moon phase"
-msgid "New Moon"
-msgstr ""
-
-#: src/core/modules/Planet.cpp:1025
-msgctxt "Moon phase"
-msgid "Waxing Crescent"
-msgstr ""
-
-#: src/core/modules/Planet.cpp:1027
-msgctxt "Moon phase"
-msgid "First Quarter"
-msgstr ""
-
-#: src/core/modules/Planet.cpp:1029
-msgctxt "Moon phase"
-msgid "Waxing Gibbous"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:1031
 msgctxt "Moon phase"
-msgid "Full Moon"
+msgid "New Moon"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:1033
 msgctxt "Moon phase"
-msgid "Waning Gibbous"
+msgid "Waxing Crescent"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:1035
 msgctxt "Moon phase"
-msgid "Third Quarter"
+msgid "First Quarter"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:1037
 msgctxt "Moon phase"
+msgid "Waxing Gibbous"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:1039
+msgctxt "Moon phase"
+msgid "Full Moon"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:1041
+msgctxt "Moon phase"
+msgid "Waning Gibbous"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:1043
+msgctxt "Moon phase"
+msgid "Third Quarter"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:1045
+msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1045
+#: src/core/modules/Planet.cpp:1053
 msgid "Moon age"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1045
+#: src/core/modules/Planet.cpp:1053
 msgid "days old"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1065 src/core/modules/Planet.cpp:1068
+#: src/core/modules/Planet.cpp:1073 src/core/modules/Planet.cpp:1076
 msgid "Position angle of bright limb"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1132 src/core/modules/Planet.cpp:1141
-#: src/core/modules/Planet.cpp:1177 src/core/modules/Planet.cpp:1184
+#: src/core/modules/Planet.cpp:1140 src/core/modules/Planet.cpp:1149
+#: src/core/modules/Planet.cpp:1185 src/core/modules/Planet.cpp:1192
 msgid "Position Angle of axis"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1133 src/core/modules/Planet.cpp:1134
-#: src/core/modules/Planet.cpp:1142 src/core/modules/Planet.cpp:1143
+#: src/core/modules/Planet.cpp:1141 src/core/modules/Planet.cpp:1142
+#: src/core/modules/Planet.cpp:1150 src/core/modules/Planet.cpp:1151
 msgid "Libration"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1135 src/core/modules/Planet.cpp:1144
-#: src/core/modules/Planet.cpp:1179 src/core/modules/Planet.cpp:1186
+#: src/core/modules/Planet.cpp:1143 src/core/modules/Planet.cpp:1152
+#: src/core/modules/Planet.cpp:1187 src/core/modules/Planet.cpp:1194
 msgid "Subsolar point"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1136 src/core/modules/Planet.cpp:1145
+#: src/core/modules/Planet.cpp:1144 src/core/modules/Planet.cpp:1153
 msgid "Colongitude"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1178 src/core/modules/Planet.cpp:1185
+#: src/core/modules/Planet.cpp:1186 src/core/modules/Planet.cpp:1193
 msgid "Center point"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1197
+#: src/core/modules/Planet.cpp:1205
 msgid "Eclipse obscuration"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1206
+#: src/core/modules/Planet.cpp:1214
 msgid "Eclipse magnitude"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1231
+#: src/core/modules/Planet.cpp:1239
 msgid "Center of solar eclipse (Lat./Long.)"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1242
+#: src/core/modules/Planet.cpp:1250
 msgid "Shadow center point is"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1244
+#: src/core/modules/Planet.cpp:1252
 msgid "km towards azimuth"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1248
+#: src/core/modules/Planet.cpp:1256
 msgid "Magnitude of central eclipse"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1251
+#: src/core/modules/Planet.cpp:1259
 msgctxt "type of solar eclipse"
 msgid "(annular)"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1253
+#: src/core/modules/Planet.cpp:1261
 msgctxt "type of solar eclipse"
 msgid "(total)"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1268
+#: src/core/modules/Planet.cpp:1276
 msgid "Penumbral eclipse magnitude"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1271
+#: src/core/modules/Planet.cpp:1279
 msgid "Umbral eclipse magnitude"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1278
+#: src/core/modules/Planet.cpp:1286
 msgid "Albedo"
 msgstr ""
 

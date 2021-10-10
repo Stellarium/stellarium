@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-09-26 21:12+0700\n"
+"POT-Creation-Date: 2021-10-05 17:49+0700\n"
 "PO-Revision-Date: 2020-01-06 16:35+0000\n"
 "Last-Translator: Tanmoy Saha <t4saha@gmail.com>, 2020\n"
 "Language-Team: Bengali (https://www.transifex.com/stellarium/teams/80998/bn/)\n"
@@ -291,7 +291,7 @@ msgstr ""
 
 #. type: Content of: <h3>
 #: ../../skycultures/al-sufi/description.en.utf8:72
-#: ../../skycultures/chinese/description.en.utf8:2962
+#: ../../skycultures/chinese/description.en.utf8:2960
 #: ../../skycultures/sami/description.en.utf8:57
 msgid "Notes"
 msgstr "বিঃদ্রঃ"
@@ -525,7 +525,7 @@ msgstr "ছোটো মুখ বা চোখ"
 #: ../../skycultures/boorong/description.en.utf8:96
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:129
 #: ../../skycultures/lokono/description.en.utf8:41
-#: ../../skycultures/siberian/description.en.utf8:13
+#: ../../skycultures/russian_siberian/description.en.utf8:13
 #: ../../skycultures/tongan/description.en.utf8:66
 msgid "Pleiades"
 msgstr "কৃত্তিকা"
@@ -2001,7 +2001,7 @@ msgstr ""
 #. type: Content of: <h3>
 #: ../../skycultures/aztec/description.en.utf8:31
 #: ../../skycultures/belarusian/description.en.utf8:31
-#: ../../skycultures/chinese/description.en.utf8:2970
+#: ../../skycultures/chinese/description.en.utf8:2969
 #: ../../skycultures/chinese_contemporary/description.en.utf8:14
 #: ../../skycultures/chinese_medieval/description.en.utf8:29
 #: ../../skycultures/dakota/description.en.utf8:50
@@ -3513,7 +3513,7 @@ msgstr "স্টিফান হার্নিশ (Planetarium Jena এর প
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:539
 #: ../../skycultures/belarusian/description.en.utf8:42
 #: ../../skycultures/boorong/description.en.utf8:220
-#: ../../skycultures/chinese/description.en.utf8:2981
+#: ../../skycultures/chinese/description.en.utf8:2980
 #: ../../skycultures/dakota/description.en.utf8:57
 #: ../../skycultures/greek_almagest/description.en.utf8:505
 #: ../../skycultures/inuit/description.en.utf8:31
@@ -4699,7 +4699,7 @@ msgstr "দিন; সূর্য"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:76
-#: ../../skycultures/chinese/description.en.utf8:68
+#: ../../skycultures/chinese/description.en.utf8:66
 #: ../../skycultures/lokono/description.en.utf8:16
 #: ../../skycultures/mongolian/description.en.utf8:141
 #: ../../skycultures/tongan/description.en.utf8:53
@@ -4815,7 +4815,7 @@ msgstr "কুয়োল নামক প্রানী"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:116
-#: ../../skycultures/chinese/description.en.utf8:69
+#: ../../skycultures/chinese/description.en.utf8:67
 #: ../../skycultures/lokono/description.en.utf8:21
 #: ../../skycultures/tongan/description.en.utf8:52
 msgid "Moon"
@@ -5041,7 +5041,7 @@ msgstr "ছায়াপথ"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:196
 #: ../../skycultures/lokono/description.en.utf8:31
-#: ../../skycultures/siberian/description.en.utf8:7
+#: ../../skycultures/russian_siberian/description.en.utf8:7
 #: ../../skycultures/tongan/description.en.utf8:47
 msgid "Milky Way"
 msgstr "ছায়াপথ"
@@ -5131,57 +5131,48 @@ msgstr "চৈনিক"
 #: ../../skycultures/chinese/description.en.utf8:3
 msgid ""
 "Chinese astronomy was developed independently and Chinese had its own system"
-" to connect the stars. Chinese Traditional Sky Culture has far-reaching "
-"implications in East Asia. In ancient China, constellations and planets were"
-" associated with astrology."
+" to connect the stars, known as \"Xingguan\" (Chinese: 星官; pinyin: xīngguān,"
+" meaning: Star officials). Chinese Traditional Sky Culture has far-reaching "
+"implications in East Asia. In ancient China, Xingguans and planets were "
+"associated with astrology. After thousands of years of evolution, the "
+"current Xingguans and star names was finalized in the 17th to 19th "
+"centuries."
 msgstr ""
-"চীনা জ্যোতির্বিদ্যা স্বাধীনভাবে বিকশিত হয়েছিল এবং সেই সঙ্গে তারাদের সাথে "
-"সংযোগ স্থাপন করে নিজস্ব তারামন্ডল ব্যবস্থাও বিদ্যমান ছিল। চীনা ঐতিহ্যবাহী এই"
-" সংস্কৃতি সমগ্র পূর্ব এশিয়ায় সুদূরপ্রসারী প্রভাব ফেলেছিল । তবে প্রাচীন "
-"চীনে নক্ষত্র এবং গ্রহগুলি মূলত জ্যোতিষশাস্ত্রের সাথে যুক্ত ছিল ।"
 
 #. type: Content of: <p>
 #: ../../skycultures/chinese/description.en.utf8:4
 msgid ""
-"Stellarium currently provides roughly 300 Chinese Xingguans (Chinese: 星官; "
-"pinyin: xīngguān, meaning: Star officials) sets, and is without any Chinese "
-"star names. A project conducted by community member G.S.K.Lee is now "
-"underway to construct a complete Chinese sky culture set for Stellarium "
-"based on the information inside <i>Complete Studies of Astronomical "
-"Instruments</i> (Chinese: 仪象考成; pinyin: Yíxiàng kǎochéng), an imperial "
-"record of astronomy finished in 1756.It was revised in 1844, "
-"published.<i>The Continuation of Complete Studies of Astronomical "
-"Instruments</i> (Chinese: 仪象考成续编; pinyin: Yíxiàngkǎochéng xùbiān), which is "
-"the major reference to the traditional Chinese Xingguans and star names used"
-" today."
+"Stellarium currently provides 300 Chinese Xingguans and more than 3000 "
+"Chinese star names from <i>Complete Studies of Astronomical</i> (Chinese: "
+"仪象考成; pinyin: Yíxiàng kǎochéng) and <i>The Continuation of Complete Studies "
+"of Astronomical</i> (Chinese: 仪象考成续编; pinyin: Yíxiàngkǎochéng xùbiān). "
+"<i>Complete Studies of Astronomical</i> is an imperial record of astronomy "
+"finished in 1756. In 1844, the Imperial Astronomical Observatory made a "
+"revision to it and published <i>The Continuation of Complete Studies of "
+"Astronomical</i>, which is the major reference to the traditional Chinese "
+"Xingguans and star names used today. Yi Shitong has conducted textual "
+"research and summary of these records in his book<i>Chinese and Western "
+"Contrast Star Chart and Catalogue 1950.0</i> (Chinese: 中西对照恒星图表1950.0; "
+"pinyin: Zhōngxī Duìzhào Héngxīng Túbiǎo)."
 msgstr ""
 
 #. type: Content of: <p>
 #: ../../skycultures/chinese/description.en.utf8:5
 msgid ""
 "Chinese Traditional Sky Culture is Based on the information inside "
-"<i>Chinese and Western Contrast Stars Chart and Star Catalogue 1950.0</i> "
-"(Chinese：中西对照恒星图表1950.0; pinyin: Zhōngxī Duìzhào Héngxīng Túbiǎo ) by Yi "
-"Shitong，and <i>Complete Studies of Astronomical Instruments</i> "
-"(Chinese：仪象考成)."
+"<i>Chinese and Western Contrast Star Chart and Catalogue 1950.0</i> and "
+"<i>Complete Studies of Astronomical</i>."
 msgstr ""
-"এটি তৈরী করা হয়েছে ই শিটং রচিত <i>চীনা ও পাশ্চাত্য মিলিত নক্ষত্র মানচিত্র ও "
-"তালিকা ১৯৫০.০</i> (চীনা：中西对照恒星图表১৯৫০.০; ফিনয়িন: Zhōngxī Duìzhào Héngxīng "
-"Túbiǎo ) ও <i>জ্যোতির্বিদ্যা সংক্রান্ত সরঞ্জামগুলির ক্রমাগত সমীক্ষা</i> "
-"(Chinese：仪象考成) উপর ভিত্তি করে ।"
 
 #. type: Content of: <p>
 #: ../../skycultures/chinese/description.en.utf8:6
 msgid ""
 "In addition, some stars have been added according to <i>The History of "
-"Stellar Observation in China</i> (Chinese：中国恒星观测史; pinyin: Zhōngguó Héngxīng"
-" Guāncèshǐ)  by Pan Nai, if these stars are not certified in <i> Chinese and"
-" Western Contrast Star Chart and Catalogue1950.0(Star Catalogue)</i>."
+"Stellar Observation in China</i> (Chinese: 中国恒星观测史; pinyin: Zhōngguó "
+"Héngxīng Guāncèshǐ)  by Pan Nai, if these stars are not certified in <i> "
+"Chinese and Western Contrast Star Chart and Catalogue1950.0(Star "
+"Catalogue)</i>."
 msgstr ""
-"এছাড়াও, <i>চীনা ও পাশ্চাত্য মিলিত নক্ষত্র মানচিত্র ও তালিকা ১৯৫০.০ (নক্ষত্র"
-" তালিকা) বইয়ের বাইরেও কিছু তারার নাম নেওয়া হয়েছে প্যান নাই রচিত <i>চীনা "
-"আকাশ পর্যবেক্ষণের ইতিহাস</i> (চীনা :中国恒星观测史; ফিনয়িন: Zhōngguó Héngxīng "
-"Guāncèshǐ) বই থেকে ।"
 
 #. type: Content of: <p>
 #: ../../skycultures/chinese/description.en.utf8:7
@@ -5211,43 +5202,28 @@ msgstr "সূর্য, চাঁদ ও গ্রহমন্ডলী"
 #: ../../skycultures/chinese/description.en.utf8:13
 msgid ""
 "The Western countries named the planets in mythical characters. The ancient "
-"Chinese understanding of five planets is based on five-element concepts. The"
-" wood is green, the fire is red, the earth is yellow, the metal is white, "
-"the water is black. So, Mercury is named Water Star, Venus is named Metal "
-"Star, Mars is named Fire Star, Jupiter is named Wood Star, Saturn is named "
-"Earth Star."
+"Chinese understanding of five planets is based on five-element concepts. "
+"Therefore, Mercury is named Water Star, Venus is named Metal Star, Mars is "
+"named Fire Star, Jupiter is named Wood Star, Saturn is named Earth Star."
 msgstr ""
-"পাশ্চাত্য দেশগিতে সাধারণত গ্রহদের নাম পৌরাণিক কাহিনীর চরিত্রদের উপর রাখা হয়ে"
-" থাকে, তবে প্রাচীন চীনে গ্রহদের নাম রাখা হয়েছিল পঞ্চতত্বের নামে - গাছ হল "
-"সবুজ, আগুন হল লাল, মাটি হল ধূসর হলুদ, ধাতু হল উজ্জ্বল সাদা, জল হল কলো । তাই "
-"বুধকে বলা হয় জলের গ্রহ, শুক্র হল ধতুর গ্রহ, মঙ্গল হল আগুনের গ্রহ, বৃহস্পতি "
-"হল সবুজের গ্রহ ও শনি হল মাটির গ্রহ ।"
 
 #. type: Content of: <p><p>
 #: ../../skycultures/chinese/description.en.utf8:14
 msgid ""
 "In Chinese, the sun and the moon are named after Yin and Yang (with prefix "
-"\"great\" (Chinese:太, pinyin:tài)), respectively Taiyang (Sun, Chinese:太阳) "
-"and Taiyin (Moon，Chinese:太阴, pinyin:tàiyīn). Their other name belongs to "
-"pictographic characters. Ri (Sun,Chinese:日) And Yue (Moon,Chinese:月). But "
-"the more commonly used name for the moon is Yueliang "
-"(Chinese:月亮,pinyin：yuèliàng)."
+"\"great\" (Chinese:太; pinyin: tài)), respectively Taiyang (Sun, Chinese: 太阳;"
+" pinyin: Tàiyáng) and Taiyin (Moon, Chinese:太阴; pinyin: Tàiyīn). Their other"
+" name belongs to pictographic characters. Ri (Sun, Chinese: 日) And Yue "
+"(Moon, Chinese: 月). But the more commonly used name for the moon is Yueliang"
+" (Chinese: 月亮; pinyin: Yuèliàng)."
 msgstr ""
-"চীনে, সূর্য ও চাঁদের নাম ইয়িন ও ইয়াং(সাথে শুরুতে \"মহান\" (চীনা:太, "
-"ফিনয়িন:tài)), অর্থাৎ যথাক্রমে টাইয়াং (সূর্য, চীনা:太阳) ও টাইয়িন "
-"(চাৃদ，চীনা:太阴, ফিনয়িন:tàiyīn) । তাদের অন্যান্য প্রচলিত নামগুলি নেওয়া হয়েছে "
-"প্রাচীন ছবি থেকে । রি (সূর্য়,চীনা:日) ও য়ুই (চাঁদ,চীনা:月)। তবে চাঁদের চলিত "
-"নামটি হল য়ুইলিয়াং (চীনা:月亮,ফিনয়িন：yuèliàng)।"
 
 #. type: Content of: <p><p>
 #: ../../skycultures/chinese/description.en.utf8:15
 msgid ""
-"The sun, the moon and the five planets form Seven Luminaries "
-"(Chinese:七曜,pinyin:qīyào), which correspond to the Five Elements and Yin and"
-" Yang."
+"The sun, the moon and the five planets form Seven Luminaries (Chinese: 七曜; "
+"pinyin: qīyào), which correspond to the Five Elements and Yin and Yang."
 msgstr ""
-"সূর্য, চাঁদ ও পাঁচটি গ্রহকে একসাথে সপ্ত প্রজ্ঞা (চীনা:七曜,ফিনয়িন:qīyào) বলা "
-"হয় ।"
 
 #. type: Content of: <p><h3>
 #: ../../skycultures/chinese/description.en.utf8:17
@@ -5258,10 +5234,11 @@ msgstr "সিংকুয়াং"
 #: ../../skycultures/chinese/description.en.utf8:19
 msgid ""
 "Traditional Chinese astronomy has a system of dividing the celestial sphere "
-"into asterisms or constellations, known as \"Xingguan\"."
+"into asterisms or constellations, known as \"Xingguan\". Modern "
+"constellations refer to specific areas of the celestial sphere. Xingguans "
+"refer only to the way stars are distributed, with no specific boundaries "
+"between Xingguans."
 msgstr ""
-"চিরায়িত চৈনিক জ্যোতির্বিজ্ঞানে নক্ষত্রমন্ডল ও নক্ষত্রপুঞ্জগুলিকে "
-"\"সিংকুয়াং\" বলা হত ।"
 
 #. type: Content of: <p><p>
 #: ../../skycultures/chinese/description.en.utf8:20
@@ -5277,128 +5254,79 @@ msgstr ""
 #: ../../skycultures/chinese/description.en.utf8:21
 msgid ""
 "The Xingguans are generally smaller than the constellations of Hellenistic "
-"tradition. The Song dynasty (13th-century), Suzhou Stone Carving "
-"Astronomical Map shows a total of 283 Xingguans, comprising a total of 1,565"
-" individual stars. The Xingguans are divided into 31 regions, the Twenty-"
-"Eight Mansions along the ecliptic, and the Three Enclosures of the northern "
-"sky. Due to the influence of precession, six Xingguans near the southern "
-"horizon are getting more and more south. They were no longer easy to be "
-"observed by astronomers in the Ming and Qing Dynasties, so they were no "
-"longer recorded in <i>Complete Studies of Astronomical Instruments</i>."
+"tradition. A Xingguan contain more than dozens of stars, and fewer are only "
+"one. Medieval Chinese Astronomical Maps generally show a total of 283 "
+"Xingguans, comprising a total of 1,464 individual stars. The Xingguans are "
+"divided into 31 regions, the Twenty-Eight Mansions (Chinese: 二十八宿；pinyin: "
+"Èrshíbā Xiù) along the ecliptic, and the Three Enclosures (Chinese: 三垣; "
+"pinyin: Sānyuán) of the northern sky. Due to the influence of precession, "
+"six Xingguans near the southern horizon are getting more and more south. "
+"They were no longer easy to be observed by astronomers in the Ming and Qing "
+"Dynasties, so they were no longer recorded in <i>Complete Studies of "
+"Astronomical</i>."
 msgstr ""
 
 #. type: Content of: <p><p>
 #: ../../skycultures/chinese/description.en.utf8:22
 msgid ""
-"Before the Ming Dynasty, Xingguans did not include the sky around the south "
-"celestial pole. The Southern Asterisms was added as a fifth group in the "
-"late Ming Dynasty based on European star charts, comprising an additional 23"
-" Xingguans."
+"Before the late Ming Dynasty (17th century), there were no Xingguans around "
+"the southern celestial pole. The Southern Sky (Chinese: 近南极星区; pinyin: "
+"JìnnánJí Xīngqū) was added as a 32th region in the late Ming Dynasty based "
+"on European star charts, comprising an additional 23 Xingguans. The Southern"
+" Sky are now also treated as part of the traditional Chinese system."
 msgstr ""
-"মিং রাজবংশের আগে, দক্ষিণের সিংকুয়াংগুলির অস্তিত্ব ছিল না । এগুলি পরে , মূলত "
-"মিং সাম্রাজ্যের শেষের দিকে, পাশ্চাত্য তালিকা থেকে পঞ্চম দল হিসাবে যোগ করা "
-"হয়েছে, মোট ২৩টি সিংকুয়াং । "
 
 #. type: Content of: <p><p>
 #: ../../skycultures/chinese/description.en.utf8:23
 msgid ""
-"In this way, <i>Complete Studies of Astronomical Instruments</i> has 300 "
-"Xingguans in total."
+"Since the late Ming Dynasty, Western missionaries entered the Imperial "
+"Astronomical Observatory. They have followed the names of the Xingguans, but"
+" changed the corresponding stars of some Xingguans, and added some stars to "
+"almost every Xingguan, called \"added stars\" (Chinese: 增星; pinyin: "
+"zēngxīng). The original stars are called \"primary stars\" (Chinese: 正星; "
+"pinyin: zhèngxīng). A Xingguan of two or more stars, each star has a number."
+"  The name of the stars in <i>The Continuation of Complete Studies of "
+"Astronomical</i> is the Xingguan plus a number. But there are also a few "
+"Xingguans, each star has a special name."
 msgstr ""
 
-#. type: Content of: <p><p><p>
+#. type: Content of: <p><p>
 #: ../../skycultures/chinese/description.en.utf8:24
 msgid ""
-"Modern constellations refer to specific areas of the celestial sphere. "
-"Xingguans refer only to the way stars are distributed, with no specific "
-"boundaries between Xingguans."
+"In this way, <i>The Continuation of Complete Studies of Astronomical</i> has"
+" 300 Xingguans and 3240 stars in total."
 msgstr ""
-"সিংকুয়াং ও নক্ষত্রমন্ডল এক নয় । যেখানে মন্ডল গুলি আকাশের একটি অঞ্চলকে "
-"নির্দেশ করে, সেখানে সিংকুয়াংগুলি আকাশে তারাদের প্যাটার্নকে বোঝায় ।"
+
+#. type: Content of: <p><p>
+#: ../../skycultures/chinese/description.en.utf8:25
+msgid ""
+"Until the Revolution of 1911, China no longer regarded Xingguan as the "
+"official constellation system. Unlike Xingguans, traditional Chinese star "
+"names are still used in modern Chinese astronomy, even more common than "
+"Western names."
+msgstr ""
+
+#. type: Content of: <p><p>
+#: ../../skycultures/chinese/description.en.utf8:27
+msgid "<em>Astronomical Map of Complete Studies of Astronomical (1757)</em>"
+msgstr ""
 
 #. type: Content of: <p><h3>
-#: ../../skycultures/chinese/description.en.utf8:26
-#: ../../skycultures/greek_almagest/description.en.utf8:45
-#: ../../skycultures/western/description.en.utf8:7
-#: ../../skycultures/western_SnT/description.en.utf8:9
-msgid "Star names"
-msgstr "তারাদের নামকরণ"
-
-#. type: Content of: <p><p><p>
-#: ../../skycultures/chinese/description.en.utf8:28
-msgid ""
-"A Xingguan contain more than dozens of stars, and fewer are only one. A "
-"Xingguan of two or more stars, each star has a number. The naming of stars "
-"in ancient China is the name of the Xingguan plus a number. But there are "
-"also a few Xingguans, each star has a special name."
-msgstr ""
-"অধিকাংশ সিংকুয়াংয়ে কয়েক ডজন তারা রয়েছে । দুটি বা খুব অল্প সংখ্যক তারা "
-"বিশিষ্ট সিংকুয়াংগুলির প্রত্যেক তারাগুলিকে একটি সংক্যার দ্বারা চিহ্ণিত করা হত"
-" । তাই তারাদের প্রথাগত নামে প্রতিসম বন্টনের মাধ্যমে একটি সংখ্যা ও যে "
-"সিংকুযাংয়ে সেটি অবস্থিত তার নাম ব্যবহার করা হয় । তবে কিছু বিশেষ তারাদের "
-"তালাদা নাম দেওয়া হয়েছিল ।"
-
-#. type: Content of: <p><p><p>
-#: ../../skycultures/chinese/description.en.utf8:29
-msgid ""
-"In the Chinese catalogue, some of the stars are \"Principal\" "
-"(Chinese:正星pinyin:zhèngxīng). These stars were first discovered and well-"
-"known. On the contrary, some of the stars are \"added\" "
-"(Chinese:增星,pinyin:zēngxīng). They were recorded and named in later "
-"catalogues."
-msgstr ""
-
-#. type: Content of: <p><p><p>
 #: ../../skycultures/chinese/description.en.utf8:30
-msgid ""
-"<i>The Continuation of Complete Studies of Astronomical Instruments</i> has "
-"3240 Stars names in total. Yi Shitong has conducted textual research and "
-"summary of these records in his book <i>Chinese and Western Contrast Star "
-"Chart and Catalogue 1950.0</i> (Chinese:中西对照恒星图表 1950.0)."
-msgstr ""
-"<i>জ্যোতির্বিদ্যা সংক্রান্ত সরঞ্জামগুলির ক্রমাগত সমীক্ষার সম্প্রসারণ</i> "
-"বইয়ে ৩২৪০টি তারার নাম রয়েছে । ই শিটং তাঁর গবেষণা লব্ধ তথ্যের বিবরণ তাঁর রচিত"
-" বই <i>চীনা ও পাশ্চাত্য মিলিত নক্ষত্র মানচিত্র ও তালিকা ১৯৫০.০</i> "
-"(চীনা:中西对照恒星图表 ১৯৫০.০) এ সংকলিত করে গেছেন ।"
-
-#. type: Content of: <p><p><p>
-#: ../../skycultures/chinese/description.en.utf8:31
-msgid ""
-"Unlike Xingguans, traditional Chinese star names are still in common usage "
-"today, even more common than Bayer/Flamsteed designations."
-msgstr ""
-"বাস্তবিক ক্ষেত্রে যদিও সিংকুয়াং গুলি এখন আর ব্যবহৃত না হয় না, তবে তারাদের "
-"প্রথাগত নামগুলি এখনও Bayer/Flamsteed এর মত আধুনিক নামকরণের থেকেও বেশি "
-"জনপ্রিয় ।"
-
-#. type: Content of: <p><p><p>
-#: ../../skycultures/chinese/description.en.utf8:33
-msgid ""
-"<em>Astronomical Map of Complete Studies of Astronomical Instruments "
-"(1757)</em>"
-msgstr ""
-"<em>জ্যোতির্বিদ্যা সংক্রান্ত সরঞ্জামগুলির ক্রমাগত সমীক্ষার নকশা (১৭৫৭)</em>"
-
-#. type: Content of: <p><p><h3>
-#: ../../skycultures/chinese/description.en.utf8:36
 msgid "Three Enclosures"
 msgstr "উত্তরের তিনটি পরিবেষ্টন"
 
-#. type: Content of: <p><p><p>
-#: ../../skycultures/chinese/description.en.utf8:38
+#. type: Content of: <p><p>
+#: ../../skycultures/chinese/description.en.utf8:32
 msgid ""
-"Three Enclosures is three regions in the area around the ecliptic. Three "
-"Enclosures is Purple Forbidden Enclosure (Chinese:紫微垣, pinyin:Zǐwēiyuán), "
-"Supreme Palace Enclosure (Chinese:太微垣, pinyin:Tàiwēiyuán), Heavenly Market "
-"Enclosure (Chinese:天市垣, pinyin:Tiānshìyuán)."
+"Three Enclosures is three regions in the northern sky surrounded by the "
+"ecliptic. Three Enclosures is Purple Forbidden Enclosure (Chinese: 紫微垣; "
+"pinyin: Zǐwēiyuán), Supreme Palace Enclosure (Chinese: 太微垣; pinyin: "
+"Tàiwēiyuán), Heavenly Market Enclosure (Chinese: 天市垣; pinyin: Tiānshìyuán)."
 msgstr ""
-"পরিবেষ্টন ত্রয়ী হল সৌরপথের তিনটি বিভাজন - বেগুনি নিষিদ্ধ পরিবেষ্টন "
-"(চীনা:紫微垣, ফিনয়িন:Zǐwēiyuán), মহোত্তম প্রাসাদ পরিবেষ্টন (চীনা:太微垣, "
-"ফিনয়িন:Tàiwēiyuán), স্বর্গীয় বাজার পরিবেষ্টন (চীনা:天市垣, ফিনয়িন:Tiānshìyuán) "
-"।"
 
-#. type: Content of: <p><p><p>
-#: ../../skycultures/chinese/description.en.utf8:39
+#. type: Content of: <p><p>
+#: ../../skycultures/chinese/description.en.utf8:33
 msgid ""
 "Each Enclosure has two walls, called the left wall and the right wall which "
 "are the main Xingguans. The walls are surrounded by many Xingguans. There "
@@ -5410,8 +5338,8 @@ msgstr ""
 "যায়, এমনকি এর সংলগ্ন থাকা অনেক সিংকুয়াংগুলিকেও এই পরিবেষ্টনের অংশ বলে মনে "
 "করা হয় ।"
 
-#. type: Content of: <p><p><p>
-#: ../../skycultures/chinese/description.en.utf8:40
+#. type: Content of: <p><p>
+#: ../../skycultures/chinese/description.en.utf8:34
 msgid ""
 "Purple Forbidden enclosure is the inner palace of the emperor, it covers the"
 " northernmost area of the night sky. From the viewpoint of the ancient "
@@ -5427,8 +5355,8 @@ msgstr ""
 "সেফিয়ুস, সুন্দরী ক্যাশিওপিয়া, সারথী, রাখাল মন্ডল সহ আংশিক ভাল্লুক, শিকারী "
 "কুকুর, সিংহ শাবক, বীর হারকিউলিস মন্ডলের সমতুল ও ৩৭টি সিংকুয়াং নিয়ে গঠিত ।"
 
-#. type: Content of: <p><p><ul><li>
-#: ../../skycultures/chinese/description.en.utf8:42
+#. type: Content of: <p><ul><li>
+#: ../../skycultures/chinese/description.en.utf8:36
 msgid ""
 "<a href=\"https://en.wikipedia.org/wiki/Purple_Forbidden_enclosure\">Purple "
 "Forbidden enclosure (Wikipedia)</a>"
@@ -5436,8 +5364,8 @@ msgstr ""
 "<a href=\"https://en.wikipedia.org/wiki/Purple_Forbidden_enclosure\">বেগুনি "
 "নিষিদ্ধ পরিবেষ্টন (উইকিপিডিয়া)</a>"
 
-#. type: Content of: <p><p><p>
-#: ../../skycultures/chinese/description.en.utf8:44
+#. type: Content of: <p><p>
+#: ../../skycultures/chinese/description.en.utf8:38
 msgid ""
 "Supreme Palace Enclosure is the place where the emperor and the courtiers "
 "deal with their politics. Supreme Palace Enclosure has a variety of "
@@ -5450,8 +5378,8 @@ msgstr ""
 "হয়েছে । এটি আধুনিক কন্যা, বেরিনিসের চুল, সিংহ মন্ডল সহ আংশিক শিকারী কুকুর, "
 "ভল্লুক ও সিংহ শাবক মন্ডলের সমতুল ও ২০টি সিংকুয়াং নিয়ে গঠিত ।"
 
-#. type: Content of: <p><p><ul><li>
-#: ../../skycultures/chinese/description.en.utf8:46
+#. type: Content of: <p><ul><li>
+#: ../../skycultures/chinese/description.en.utf8:40
 msgid ""
 "<a href=\"https://en.wikipedia.org/wiki/Supreme_Palace_enclosure\">Supreme "
 "Palace Enclosure (Wikipedia)</a>"
@@ -5459,8 +5387,8 @@ msgstr ""
 "<a href=\"https://en.wikipedia.org/wiki/Supreme_Palace_enclosure\">মহোত্তম "
 "প্রাসাদ পরিবেষ্টন (উইকিপিডিয়া)</a>"
 
-#. type: Content of: <p><p><p>
-#: ../../skycultures/chinese/description.en.utf8:48
+#. type: Content of: <p><p>
+#: ../../skycultures/chinese/description.en.utf8:42
 msgid ""
 "Heavenly Market Enclosure is a bazaar in the sky, a place where ordinary "
 "people live. The Heavenly Market Enclosure covers the modern constellations "
@@ -5473,8 +5401,8 @@ msgstr ""
 "সাপুড়ে, ঈগল, উত্তর মূকুট সহ আংশিক বীর হারকিউলিস মন্ডলের সমতুল ও ১৯টি "
 "সিংকুয়াং নিয়ে গঠিত ।"
 
-#. type: Content of: <p><p><ul><li>
-#: ../../skycultures/chinese/description.en.utf8:50
+#. type: Content of: <p><ul><li>
+#: ../../skycultures/chinese/description.en.utf8:44
 msgid ""
 "<a href=\"https://en.wikipedia.org/wiki/Heavenly_Market_enclosure\">Heavenly"
 " Market Enclosure (Wikipedia)</a>"
@@ -5482,2157 +5410,2174 @@ msgstr ""
 "<a href=\"https://en.wikipedia.org/wiki/Heavenly_Market_enclosure\">স্বর্গীয়"
 " বাজার পরিবেষ্টন (উইকিপিডিয়া)</a>"
 
-#. type: Content of: <p><p><h3>
-#: ../../skycultures/chinese/description.en.utf8:53
+#. type: Content of: <p><h3>
+#: ../../skycultures/chinese/description.en.utf8:47
 msgid "Twenty-Eight Mansions"
 msgstr "২৮টি খন্ড বা ঘর"
 
-#. type: Content of: <p><p><p>
+#. type: Content of: <p><p>
+#: ../../skycultures/chinese/description.en.utf8:49
+msgid ""
+"The Twenty-Eight Mansions (Chinese: 二十八宿; pinyin:Èrshíbā Xiù) also known as "
+"28 Lunar Mansions are the ancient China divisions of the ecliptic and the "
+"sky area near the equator to divide the ecliptic into 28 regions according "
+"to the right ascension. Each region is called a Mansion (Chinese: 宿; "
+"pinyin:Xiù), The ancients let the Moon change a Mansion every day to rest."
+msgstr ""
+
+#. type: Content of: <p><p>
+#: ../../skycultures/chinese/description.en.utf8:50
+msgid ""
+"Each Mansion has a Xingguan of the same name near the ecliptic, which is the"
+" main Xingguan. Where the Xingguans in this area belongs to the Mansion."
+msgstr ""
+
+#. type: Content of: <p><p>
+#: ../../skycultures/chinese/description.en.utf8:51
+msgid ""
+"Each Xingguans has a main star know as determinative star (Chinese: 距星; "
+"pinyin: jùxīng). In ancient China, the determinative stars of Twenty-eight "
+"Mansions was the benchmark for determining the longitude of the equatorial "
+"coordinate system. The right ascension difference between the determinative "
+"stars of two adjacent Mansions is the equatorial mansion degrees (Chinese: "
+"宿度; pinyin: xiùdù) of the western Mansion. The traditional equatorial "
+"coordinate system of China divides the equator into 365.25 degrees, and the "
+"Sun runs one day for one degree, which is also the sum of the equatorial "
+"mansion degrees of the 28 Mansion."
+msgstr ""
+
+#. type: Content of: <p><p>
+#: ../../skycultures/chinese/description.en.utf8:52
+msgid ""
+"Due to the influence of precession, the equatorial mansion degrees of each "
+"Mansion has been slowly changing, and some determinative stars have also "
+"changed in history."
+msgstr ""
+
+#. type: Content of: <p><p>
+#: ../../skycultures/chinese/description.en.utf8:53
+msgid ""
+"On traditional Chinese star maps, there are 28 lines passing through the "
+"determinative stars of The Twenty-Eight Mansions from the north celestial "
+"pole as their boundaries to facilitate the positioning of celestial bodies."
+msgstr ""
+
+#. type: Content of: <p><p>
+#: ../../skycultures/chinese/description.en.utf8:54
+msgid ""
+"If a celestial body is east of the determinative star of a Mansion, and its "
+"right ascension does not exceed the determinative star of the next Mansion, "
+"the difference in right ascension between this celestial body and the "
+"determinative star, is know as mansion distance degrees (Chinese: 入宿度; "
+"pinyin: rùxiùdù)."
+msgstr ""
+
+#. type: Content of: <p><p>
 #: ../../skycultures/chinese/description.en.utf8:55
 msgid ""
-"The Twenty-Eight Mansions (28 Lunar Mansions) are the ancient China "
-"divisions of the ecliptic and the sky area near the equator to divide the "
-"ecliptic into 28 regions according to the right ascension. Each region is "
-"called a Mansion (Chinese:宿,pinyin:xiù)，The Ancients let the Moon change a "
-"Mansion every day to rest."
+"Coupled with the polar distance degrees(Chinese: 去极度; pinyin: qùjídù), which"
+" is the angular distance between the star and the north celestial pole, we "
+"can determine the position of a star on the celestial sphere. Mansion "
+"distance degrees and polar distance degrees together constitute the two "
+"components of the ancient Chinese equatorial coordinate system."
 msgstr ""
-"এগুলি সুপ্রাচীন চীনে ব্যবহৃত হত (২৮টি চন্দ্র তিথি) এবং দিগংশ ধরে নিরক্ষরেখা "
-"বরাবর সমগ্র সৌরপথের ২৮টি খন্ড । এগুলিকে বলা হত ঘর (চীনা:宿,ফিনয়িন:xiù)，চাঁদ "
-"প্রতিদিন এক ঘর থেকে পরের ঘরে প্রবেশ করে ।"
 
-#. type: Content of: <p><p><p>
+#. type: Content of: <p><p>
 #: ../../skycultures/chinese/description.en.utf8:56
 msgid ""
-"Each mansion has a Xingguan of the same name near the ecliptic, which is the"
-" main Xingguan. Where the constellation in this area belongs to the Mansion."
+"The Twenty-Eight Mansions are grouped into Four Symbols (Chinese: 四象; "
+"pinyin: sìxiàng), each associated with a compass direction and containing "
+"seven Mansions, corresponds to Seven Luminaries. The correspondence between "
+"the Twenty-Eight Mansions and the Four Symbols is based on the sky at dusk "
+"on the vernal equinox in a certain period of ancient times. At this time, "
+"the Vermilion Bird is in the south, the Azure Dragon is in the east, the "
+"Black Tortoise is in the north, and the White Tiger is in the west."
 msgstr ""
-"প্রত্যেক ঘরের সঙ্গে সামঞ্জস্য রেখে সৌরপথ বরাবর একই নামে একটি করে সিংকুয়াং "
-"রয়েছে ।"
 
-#. type: Content of: <p><p><p>
-#: ../../skycultures/chinese/description.en.utf8:57
-msgid ""
-"The star used to measure the Right ascension standard is called the "
-"Determinative Star (Chinese:距星,pinyin:jùxīng) of the Mansions. The "
-"difference between the Determinative Star of the Mansion and the "
-"Determinative Star of the next Mansion on the Right ascension is the "
-"equatorial lodge degrees (Chinese:宿度,pinyin:xiùdù) of the Mansion. The "
-"traditional equatorial coordinate system of China divides the equator into "
-"365.25 degrees, and the Sun runs one day for one degree."
-msgstr ""
-"প্রত্যেক ঘরের সঙ্গে সামঞ্জস্য রেখে সৌরপথ বরাবর একই নামে একটি করে সিংকুয়াং রয়েছে ।</p>\n"
-"<p>প্রত্যেক ঘরের একটি তারার অবস্থানকে সেই ঘরের অবস্থান নির্ধারন করা হত সেটিকে নির্ণায়ক তারা (চীনা:距星,ফিনয়িন:jùxīng) বলা হয় । কোনো ঘরের নির্ণায়ক তারার সাথে পরের ঘরের নির্ণায়ক তারার অবস্থানে তথাৎ কে বলা হয় বিস্তার (চীনা:宿度,ফিনয়িন:xiùdù)। প্রথাগতভাবে চীনে আকাশকে ৩২৫.২৫ ডিগ্রিতে বিভাজন করা হয়েছিল, এবং সূর্য প্রতিদিন এই হিসাবে এক ডিগ্রি করে এগিয়ে চলত ।"
-
-#. type: Content of: <p><p><p><p><p>
+#. type: Content of: <p><h3>
 #: ../../skycultures/chinese/description.en.utf8:58
-msgid ""
-"The Twenty-Eight Mansions are grouped into Four Symbols "
-"(Chinese:象pinyin:xiàng), each associated with a compass direction and "
-"containing seven Mansions，corresponds to Seven Luminaries."
-msgstr ""
-"এই ২৮টি ঘরকে দিক অনুসারে আবার ৪টি দলে ফেলা হয়েছে (চীনা:象ফিনয়িন:xiàng), "
-"প্রতিটি দলে তাই ৭টি করে ঘর আছে এবং সেগুলি ৭টি প্রজ্ঞার অংশ ।"
-
-#. type: Content of: <p><p><p><p><h3>
-#: ../../skycultures/chinese/description.en.utf8:60
 msgid "The List of The Twenty-Eight Mansions (J2000)"
 msgstr "২৮টি ঘরের তালিকা (J2000)"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:63
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:61
 msgid "Seven Luminaries"
 msgstr "সপ্ত প্রজ্ঞা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:65
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:63
 msgid "Wood"
 msgstr "গাছ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:66
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:64
 msgid "Metal"
 msgstr "ধাতু"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:67
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:65
 msgid "Earth"
 msgstr "মাটি"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:70
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:68
 msgid "Fire"
 msgstr "আগুন"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:71
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:69
 msgid "Water"
 msgstr "জল"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:74
-#: ../../skycultures/chinese/description.en.utf8:162
-#: ../../skycultures/chinese/description.en.utf8:250
-#: ../../skycultures/chinese/description.en.utf8:338
-#: ../../skycultures/chinese/description.en.utf8:442
-#: ../../skycultures/chinese/description.en.utf8:2912
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:72
+#: ../../skycultures/chinese/description.en.utf8:160
+#: ../../skycultures/chinese/description.en.utf8:248
+#: ../../skycultures/chinese/description.en.utf8:336
+#: ../../skycultures/chinese/description.en.utf8:440
+#: ../../skycultures/chinese/description.en.utf8:2910
 msgid "Chinese Name"
 msgstr "চীনা নাম"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:85
-#: ../../skycultures/chinese/description.en.utf8:173
-#: ../../skycultures/chinese/description.en.utf8:261
-#: ../../skycultures/chinese/description.en.utf8:349
-#: ../../skycultures/chinese/description.en.utf8:443
-#: ../../skycultures/chinese/description.en.utf8:2913
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:83
+#: ../../skycultures/chinese/description.en.utf8:171
+#: ../../skycultures/chinese/description.en.utf8:259
+#: ../../skycultures/chinese/description.en.utf8:347
+#: ../../skycultures/chinese/description.en.utf8:441
+#: ../../skycultures/chinese/description.en.utf8:2911
 msgid "Pinyin"
 msgstr "ফিনয়িন"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:96
-#: ../../skycultures/chinese/description.en.utf8:184
-#: ../../skycultures/chinese/description.en.utf8:272
-#: ../../skycultures/chinese/description.en.utf8:360
-#: ../../skycultures/chinese/description.en.utf8:444
-#: ../../skycultures/chinese/description.en.utf8:2914
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:94
+#: ../../skycultures/chinese/description.en.utf8:182
+#: ../../skycultures/chinese/description.en.utf8:270
+#: ../../skycultures/chinese/description.en.utf8:358
+#: ../../skycultures/chinese/description.en.utf8:442
+#: ../../skycultures/chinese/description.en.utf8:2912
 msgid "Translation"
 msgstr ""
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:97
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:95
 msgid "Azure Dragon of the East"
 msgstr "পূর্বের নীল ড্রাগন"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:98
-#: ../../skycultures/chinese/description.en.utf8:1018
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:96
+#: ../../skycultures/chinese/description.en.utf8:1016
 msgid "Horn Mansion"
 msgstr "শিং"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:99
-#: ../../skycultures/chinese/description.en.utf8:1102
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:97
+#: ../../skycultures/chinese/description.en.utf8:1100
 msgid "Neck Mansion"
 msgstr "গলা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:100
-#: ../../skycultures/chinese/description.en.utf8:1158
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:98
+#: ../../skycultures/chinese/description.en.utf8:1156
 msgid "Root Mansion"
 msgstr "শিকড়"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:101
-#: ../../skycultures/chinese/description.en.utf8:1242
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:99
+#: ../../skycultures/chinese/description.en.utf8:1240
 msgid "Room Mansion"
 msgstr "ঘর"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:102
-#: ../../skycultures/chinese/description.en.utf8:1305
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:100
+#: ../../skycultures/chinese/description.en.utf8:1303
 msgid "Heart Mansion"
 msgstr "হৃদয়"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:103
-#: ../../skycultures/chinese/description.en.utf8:1326
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:101
+#: ../../skycultures/chinese/description.en.utf8:1324
 msgid "Tail Mansion"
 msgstr "লেজ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:104
-#: ../../skycultures/chinese/description.en.utf8:1375
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:102
+#: ../../skycultures/chinese/description.en.utf8:1373
 msgid "Winnowing Basket Mansion"
 msgstr "কুলো"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:107
-#: ../../skycultures/chinese/description.en.utf8:195
-#: ../../skycultures/chinese/description.en.utf8:283
-#: ../../skycultures/chinese/description.en.utf8:371
-msgid "Number of Xinguans"
-msgstr "সিংকুয়াং সংখ্যা"
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:105
+#: ../../skycultures/chinese/description.en.utf8:193
+#: ../../skycultures/chinese/description.en.utf8:281
+#: ../../skycultures/chinese/description.en.utf8:369
+msgid "Number of xingguans"
+msgstr ""
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:118
-#: ../../skycultures/chinese/description.en.utf8:206
-#: ../../skycultures/chinese/description.en.utf8:294
-#: ../../skycultures/chinese/description.en.utf8:382
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:116
+#: ../../skycultures/chinese/description.en.utf8:204
+#: ../../skycultures/chinese/description.en.utf8:292
+#: ../../skycultures/chinese/description.en.utf8:380
 msgid "Determinative Star"
 msgstr "নির্ণায়ক তারা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:129
-#: ../../skycultures/chinese/description.en.utf8:217
-#: ../../skycultures/chinese/description.en.utf8:305
-#: ../../skycultures/chinese/description.en.utf8:393
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:127
+#: ../../skycultures/chinese/description.en.utf8:215
+#: ../../skycultures/chinese/description.en.utf8:303
+#: ../../skycultures/chinese/description.en.utf8:391
 msgid "RA of Determinative Star"
 msgstr "অবস্থান (বিষুবাংশ)"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:140
-#: ../../skycultures/chinese/description.en.utf8:228
-#: ../../skycultures/chinese/description.en.utf8:316
-#: ../../skycultures/chinese/description.en.utf8:404
-msgid "Equatorial Lodge Degrees 1"
-msgstr "বিস্তার ১"
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:138
+#: ../../skycultures/chinese/description.en.utf8:226
+#: ../../skycultures/chinese/description.en.utf8:314
+#: ../../skycultures/chinese/description.en.utf8:402
+msgid "Equatorial Mansion Degrees 1"
+msgstr ""
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:151
-#: ../../skycultures/chinese/description.en.utf8:239
-#: ../../skycultures/chinese/description.en.utf8:327
-#: ../../skycultures/chinese/description.en.utf8:415
-msgid "Equatorial Lodge Degrees 2"
-msgstr "বিস্তার ২"
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:149
+#: ../../skycultures/chinese/description.en.utf8:237
+#: ../../skycultures/chinese/description.en.utf8:325
+#: ../../skycultures/chinese/description.en.utf8:413
+msgid "Equatorial Mansion Degrees 2"
+msgstr ""
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:185
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:183
 msgid "Black Tortoise of the North"
 msgstr "উত্তরের কালো কচ্ছপ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:186
-#: ../../skycultures/chinese/description.en.utf8:1403
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:184
+#: ../../skycultures/chinese/description.en.utf8:1401
 msgid "Dipper Mansion"
 msgstr "হাতা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:187
-#: ../../skycultures/chinese/description.en.utf8:1480
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:185
+#: ../../skycultures/chinese/description.en.utf8:1478
 msgid "Ox Mansion"
 msgstr "ষাঁড়"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:188
-#: ../../skycultures/chinese/description.en.utf8:1564
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:186
+#: ../../skycultures/chinese/description.en.utf8:1562
 msgid "Girl Mansion"
 msgstr "কন্যা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:189
-#: ../../skycultures/chinese/description.en.utf8:1627
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:187
+#: ../../skycultures/chinese/description.en.utf8:1625
 msgid "Emptiness Mansion"
 msgstr "ফাঁকা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:190
-#: ../../skycultures/chinese/description.en.utf8:1704
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:188
+#: ../../skycultures/chinese/description.en.utf8:1702
 msgid "Rooftop Mansion"
 msgstr "ছাদ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:191
-#: ../../skycultures/chinese/description.en.utf8:1788
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:189
+#: ../../skycultures/chinese/description.en.utf8:1786
 msgid "Encampment Mansion"
 msgstr "শিবির"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:192
-#: ../../skycultures/chinese/description.en.utf8:1872
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:190
+#: ../../skycultures/chinese/description.en.utf8:1870
 msgid "Wall Mansion"
 msgstr "প্রাচীর"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:273
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:271
 msgid "White Tiger of the West"
 msgstr "পশ্চিমের সাদা বাঘ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:274
-#: ../../skycultures/chinese/description.en.utf8:1921
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:272
+#: ../../skycultures/chinese/description.en.utf8:1919
 msgid "Legs Mansion"
 msgstr "পা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:275
-#: ../../skycultures/chinese/description.en.utf8:1991
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:273
+#: ../../skycultures/chinese/description.en.utf8:1989
 msgid "Bond Mansion"
 msgstr "জোড়"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:276
-#: ../../skycultures/chinese/description.en.utf8:2040
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:274
+#: ../../skycultures/chinese/description.en.utf8:2038
 msgid "Stomach Mansion"
 msgstr "পাকস্থলী"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:277
-#: ../../skycultures/chinese/description.en.utf8:2096
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:275
+#: ../../skycultures/chinese/description.en.utf8:2094
 msgid "Hairy Head Mansion"
 msgstr "চুলো মাথা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:278
-#: ../../skycultures/chinese/description.en.utf8:2166
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:276
+#: ../../skycultures/chinese/description.en.utf8:2164
 msgid "Net Mansion"
 msgstr "জাল"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:279
-#: ../../skycultures/chinese/description.en.utf8:2278
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:277
+#: ../../skycultures/chinese/description.en.utf8:2276
 msgid "Turtle Beak Mansion"
 msgstr "কচ্ছপের মুখ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:280
-#: ../../skycultures/chinese/description.en.utf8:2306
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:278
+#: ../../skycultures/chinese/description.en.utf8:2304
 msgid "Three Stars Mansion"
 msgstr "তিনটি তারা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:361
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:359
 msgid "Vermilion Bird of the South"
 msgstr "দক্ষিণের সিঁদুরে পাখি"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:362
-#: ../../skycultures/chinese/description.en.utf8:2362
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:360
+#: ../../skycultures/chinese/description.en.utf8:2360
 msgid "Well Mansion"
 msgstr "কুয়ো"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:363
-#: ../../skycultures/chinese/description.en.utf8:2509
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:361
+#: ../../skycultures/chinese/description.en.utf8:2507
 msgid "Ghosts Mansion"
 msgstr "ভুত"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:364
-#: ../../skycultures/chinese/description.en.utf8:2565
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:362
+#: ../../skycultures/chinese/description.en.utf8:2563
 msgid "Willow Mansion"
 msgstr "উইলো গাছ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:365
-#: ../../skycultures/chinese/description.en.utf8:2586
-#: ../../skycultures/chinese/description.en.utf8:2593
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:363
+#: ../../skycultures/chinese/description.en.utf8:2584
+#: ../../skycultures/chinese/description.en.utf8:2591
 msgid "Star Mansion"
 msgstr "তারকা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:366
-#: ../../skycultures/chinese/description.en.utf8:2628
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:364
+#: ../../skycultures/chinese/description.en.utf8:2626
 msgid "Extended Net Mansion"
 msgstr "বর্ধিত জাল"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:367
-#: ../../skycultures/chinese/description.en.utf8:2649
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:365
+#: ../../skycultures/chinese/description.en.utf8:2647
 msgid "Wings Mansion"
 msgstr "ডানা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:368
-#: ../../skycultures/chinese/description.en.utf8:2670
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:366
+#: ../../skycultures/chinese/description.en.utf8:2668
 msgid "Chariot Mansion"
 msgstr "রথ"
 
-#. type: Content of: <p><p><p><p><p>
-#: ../../skycultures/chinese/description.en.utf8:426
-msgid "note 1：Equatorial Lodge Degrees 1:Modern equatorial coordinate system."
-msgstr "বি:দ্র: ১：বিস্তার ১: আধুনিক ভূ-বিষুব স্থানাঙ্ক ব্যবস্থা ।"
-
-#. type: Content of: <p><p><p><p><p>
-#: ../../skycultures/chinese/description.en.utf8:427
+#. type: Content of: <p><p>
+#: ../../skycultures/chinese/description.en.utf8:424
 msgid ""
-"note 2：Equatorial Lodge Degrees 2:The traditional equatorial coordinate "
-"system of China, divides the equator into 365.25 degrees"
+"note 1: Equatorial Mansion Degrees 1:Modern equatorial coordinate system."
 msgstr ""
-"বি:দ্র: ২：বিস্তার ২: চীনে প্রচলিত চিরায়িত ভূ-বিষুব স্থানাঙ্ক ব্যবস্থা , "
-"নিরক্ষরেখা ৩৬৫.২৫ ডিগ্রিতে বিভক্ত ।"
 
-#. type: Content of: <p><p><p><p><ul><li><notr><a>
-#: ../../skycultures/chinese/description.en.utf8:430
+#. type: Content of: <p><p>
+#: ../../skycultures/chinese/description.en.utf8:425
+msgid ""
+"note 2: Equatorial Mansion Degrees 2:The traditional equatorial coordinate "
+"system of China, divides the equator into 365.25 degrees."
+msgstr ""
+
+#. type: Content of: <p><ul><li><notr><a>
+#: ../../skycultures/chinese/description.en.utf8:428
 msgid "Twenty-Eight Mansions (Wikipedia)"
 msgstr ""
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:434
-#: ../../skycultures/chinese/description.en.utf8:2733
-msgid "The Southern Asterisms"
-msgstr "দক্ষিণের নক্ষত্রপুঞ্জ"
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:432
+#: ../../skycultures/chinese/description.en.utf8:2731
+msgid "The Southern Sky"
+msgstr ""
 
-#. type: Content of: <p><p><p><p><p>
-#: ../../skycultures/chinese/description.en.utf8:436
+#. type: Content of: <p><p>
+#: ../../skycultures/chinese/description.en.utf8:434
 msgid ""
 "The sky around the south celestial pole was unknown to ancient Chinese. "
 "Therefore, it was not included in the Three Enclosures and Twenty-Eight "
-"Mansions system. However, by the end of the Ming Dynasty, Xu Guangqi "
-"(Chinese:徐光启,pinyin:Xú Guāngqǐ) introduced another 23 Xingguans based on the"
-" knowledge of European star charts. These Xingguans were since incorporated "
-"into the traditional Chinese star maps."
+"Mansions system. However, in the late Ming Dynasty, Xu Guangqi (Chinese: "
+"徐光启; pinyin: Xú Guāngqǐ) introduced another 23 Xingguans based on the "
+"European star charts. These Xingguans were since incorporated into the "
+"traditional Chinese star maps. These Xingguans are actually variations of "
+"Western constellations, and they are mostly named after animals."
 msgstr ""
-"প্রাচীনকালে চীনা বিশারদদের কাছে দক্ষিণের আকাশ অজানা ছিল । তাই এখানে কোনো "
-"পরিবেষ্টন দেখা য়ায় না । তবে, মিং রাজবংশের শেষের দিকে, শু গুয়াংকি "
-"(চীনা:徐光启,ফিনয়িন:Xú Guāngqǐ) ইউরোপীয় তালিকা থেকে ২৩টি সিংকুয়াং তৈরী করেন । "
-"এগুলি তারপর থেকে চীনা নকশায় স্থান পেয়েছে ।"
 
-#. type: Content of: <p><p><p><p><h3>
-#: ../../skycultures/chinese/description.en.utf8:438
+#. type: Content of: <p><h3>
+#: ../../skycultures/chinese/description.en.utf8:436
 msgid "The list of Xingguans"
 msgstr "সিংকুয়াং তালিকা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:445
-msgid "Number of Principle Stars"
-msgstr "মূল তারার সংখ্যা"
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:443
+msgid "Number of Primary Stars"
+msgstr ""
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:446
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:444
 msgid "Number of Added Stars"
 msgstr "সংযুক্ত তারার সংখ্যা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:451
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:449
 msgid "Purple Forbidden Enclosure"
 msgstr "নিষিদ্ধ বেগুনী পরিবেষ্টন"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:458
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:456
 msgid "Northern Pole"
 msgstr "উত্তর মেরু"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:465
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:463
 msgid "Four Advisors"
 msgstr "চার উপদেষ্টা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:472
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:470
 msgid "Celestial Great One"
 msgstr "স্বর্গীয় মহোত্তম"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:479
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:477
 msgid "First Great One"
 msgstr "প্রথম মহোত্তম"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:486
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:484
 msgid "Purple Forbidden Left Wall"
 msgstr "নিষিদ্ধ বেগুনী বাম প্রাচীর"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:493
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:491
 msgid "Purple Forbidden Right Wall"
 msgstr "নিষিদ্ধ বেগুনী ডান প্রাচীর"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:500
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:498
 msgid "Hidden Virtue"
 msgstr "গোপন গুণ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:507
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:505
 msgid "Royal Secretary"
 msgstr "প্রধান সচীব"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:514
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:512
 msgid "Female Protocol"
 msgstr "স্ত্রী আচার"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:521
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:519
 msgid "Official of Royal Archives"
 msgstr "সরকারী নথি সংগ্রহালয়"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:528
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:526
 msgid "Maids-in-waiting"
 msgstr "অপেক্ষারত দাসীর দল"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:535
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:533
 msgid "Celestial Pillar"
 msgstr "স্বর্গীয় স্তম্ভ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:542
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:540
 msgid "Chief Judge"
 msgstr "প্রধান বিচারপতি"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:549
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:547
 msgid "Curved Array"
 msgstr "বক্র সেনা বিন্যাস"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:556
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:554
 msgid "Six Jia"
 msgstr "ছয় জিয়া"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:563
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:561
 msgid "Great Emperor of Heaven"
 msgstr "স্বর্গের মহান সম্রাট"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:570
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:568
 msgid "Interior Seats of the Five Emperors"
 msgstr "পাঁচ সম্রাটের অভ্যন্তরীন আসন"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:577
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:575
 msgid "Canopy of the Emperor"
 msgstr "সম্রাটের ছাউনি"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:584
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:582
 msgid "Canopy Support (Vassal of Canopy of the Emperor )"
 msgstr "ছাউনির দন্ড (ছাউনির সামন্ত)"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:591
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:589
 msgid "Guest House"
 msgstr "প্রকান্ড প্রাসাদ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:598
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:596
 msgid "Inner Steps"
 msgstr "ভিতরের সিঁড়ি"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:605
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:603
 msgid "Celestial Kitchen"
 msgstr "স্বর্গের রান্নাঘর"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:612
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:610
 msgid "Eight Kinds of Crops"
 msgstr "আট রকমের শষ্য"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:619
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:617
 msgid "Celestial Flail"
 msgstr "শস্য মাড়াই করার লাঠি বা যন্ত্র"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:626
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:624
 msgid "Inner Kitchen"
 msgstr "ভিতরের বান্নাঘর"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:633
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:631
 msgid "Administrative Center"
 msgstr "প্রশাসনিক কেন্দ্র"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:640
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:638
 msgid "Three Top Instructors"
 msgstr "তিন শীর্ষ প্রশিক্ষক"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:647
-#: ../../skycultures/chinese/description.en.utf8:759
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:645
+#: ../../skycultures/chinese/description.en.utf8:757
 msgid "Three Excellencies"
 msgstr "তিন মহাপরিচালক"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:654
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:652
 msgid "Celestial Bed"
 msgstr "স্বর্গীয় বিছানা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:661
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:659
 msgid "Royals"
 msgstr "রাজপরিবার"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:668
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:666
 msgid "Celestial Prison"
 msgstr "স্বর্গের কয়েদখানা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:675
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:673
 msgid "Guard of the Sun"
 msgstr "সূর্যের প্রহরী"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:682
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:680
 msgid "Eunuch"
 msgstr "নপুংসক"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:689
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:687
 msgid "Prime Minister"
 msgstr "প্রধানমন্ত্রী"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:696
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:694
 msgid "Sombre Lance"
 msgstr "কালো তলোয়ার"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:703
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:701
 msgid "Judge for Nobility"
 msgstr "মর্যাদা বিচারক"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:710
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:708
 msgid "Northern Dipper"
 msgstr "উত্তরের হাতা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:717
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:715
 msgid "Assistant (Vassal of Northern Dipper)"
 msgstr "সহায়ক (উত্তরের হাতার মালিক)"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:724
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:722
 msgid "Celestial Spear"
 msgstr "স্বর্গীয় বর্শা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:731
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:729
 msgid "Supreme Palace Enclosure"
 msgstr "মহোত্তম প্রাসাদ পরিবেষ্টন"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:738
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:736
 msgid "Supreme Palace Left Wall"
 msgstr "মহোত্তম প্রাসাদ পরিবেষ্টনের বাম প্রাচীর"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:745
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:743
 msgid "Supreme Palace Right Wall"
 msgstr "মহোত্তম প্রাসাদ পরিবেষ্টনের ডান প্রাচীর"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:752
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:750
 msgid "Usher to the Court"
 msgstr "বিচারকক্ষের উপস্থাপক"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:766
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:764
 msgid "Nine Senior Officers"
 msgstr "নয় বরিষ্ঠ অধিকর্তা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:773
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:771
 msgid "Five Lords"
 msgstr "পাঁচ অধিপতি"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:780
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:778
 msgid "Inner Screen"
 msgstr "ভিতরের পর্দা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:787
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:785
 msgid "Seats of the Five Emperors"
 msgstr "পাঁচ অধিপতির সিংহাসন"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:794
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:792
 msgid "Officer of Honour"
 msgstr "মর্যাদার অধিকর্তা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:801
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:799
 msgid "Crown Prince"
 msgstr "যুবরাজ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:808
-#: ../../skycultures/chinese/description.en.utf8:1298
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:806
+#: ../../skycultures/chinese/description.en.utf8:1296
 msgid "Retinue"
 msgstr "অনুচরবৃন্দ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:815
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:813
 msgid "Captain of the Bodyguards"
 msgstr "দেহরক্ষীদের সর্দার"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:822
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:820
 msgid "Emperor's Bodyguard"
 msgstr "সম্রাটের দেহরক্ষী"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:829
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:827
 msgid "Royal Guards"
 msgstr "রাজরক্ষী"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:836
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:834
 msgid "Officers of the Imperial Guard"
 msgstr "রাজরক্ষীদের অধিকর্তা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:843
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:841
 msgid "The Hall of Glory"
 msgstr "গৌরবান্বিত দালান"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:850
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:848
 msgid "Astronomical Observatory"
 msgstr "মানমন্দির"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:857
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:855
 msgid "Junior Officers"
 msgstr "নিম্ন অধিকর্তা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:864
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:862
 msgid "Long Wall"
 msgstr "লম্বা প্রাচীর"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:871
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:869
 msgid "Three Steps"
 msgstr "তিন পা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:878
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:876
 msgid "Heavenly Market Enclosure"
 msgstr "স্বর্গীয় বাজার পরিবেষ্টন"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:885
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:883
 msgid "Heavenly Market Left Wall"
 msgstr "স্বর্গীয় বাজার পরিবেষ্টনের বাম প্রাচীর"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:892
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:890
 msgid "Heavenly Market Right Wall"
 msgstr "স্বর্গীয় বাজার পরিবেষ্টনের ডান প্রাচীর"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:899
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:897
 msgid "Municipal Office"
 msgstr "পৌরনিগম"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:906
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:904
 msgid "Commodity Market"
 msgstr "পণ্য বাজার"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:913
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:911
 msgid "Official for the Royal Clan"
 msgstr "অভিজাত দলের প্রতিনিধি"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:920
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:918
 msgid "Official of Religious Ceremonies"
 msgstr "পুরোহিত"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:927
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:925
 msgid "Patriarchal Clan"
 msgstr "পিতৃতান্ত্রিক গোষ্ঠী"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:934
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:932
 msgid "Textile Ruler"
 msgstr "ফিতে"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:941
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:939
 msgid "Butcher's Shops"
 msgstr "কসাইখানা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:948
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:946
 msgid "Astrologer"
 msgstr "জ্যোতিষী"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:955
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:953
 msgid "Emperor's Seat"
 msgstr "সম্রাটের কেদারা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:962
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:960
 msgid "Eunuch Official"
 msgstr "বৃহন্নলা প্রতিনিধি"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:969
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:967
 msgid "Jewel Market"
 msgstr "গয়নার বাজার"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:976
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:974
 msgid "Dipper for Liquids"
 msgstr "ডাবু"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:983
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:981
 msgid "Dipper for Solids"
 msgstr "হাতা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:990
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:988
 msgid "Coiled Thong"
 msgstr "গোটানো গামছা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:997
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:995
 msgid "Seven Excellencies"
 msgstr "সপ্ত প্রজ্ঞা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1004
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1002
 msgid "Celestial Discipline"
 msgstr "স্বর্গীয় শৃঙ্খলা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1011
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1009
 msgid "Woman's Bed"
 msgstr "মেয়েদের বিছানা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1025
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1023
 msgid "Horn"
 msgstr "শিং"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1032
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1030
 msgid "Flat Road"
 msgstr "সমতল রাস্তা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1039
-#: ../../skycultures/chinese/description.en.utf8:1494
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1037
+#: ../../skycultures/chinese/description.en.utf8:1492
 msgid "Celestial Farmland"
 msgstr "স্বর্গীয় ক্ষেত"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1046
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1044
 msgid "Recommending Virtuous Men"
 msgstr "সুপারিশিত সার্থক পুরুষ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1053
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1051
 msgid "Tripod of the Zhou"
 msgstr "ঝৌ এর তেপায়া"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1060
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1058
 msgid "Celestial Gate"
 msgstr "স্বর্গীয় দরজা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1067
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1065
 msgid "Justice"
 msgstr "সুবিচার"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1074
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1072
 msgid "Arsenal"
 msgstr "অস্ত্রাগার"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1081
-#: ../../skycultures/chinese/description.en.utf8:2229
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1079
+#: ../../skycultures/chinese/description.en.utf8:2227
 msgid "Pillars"
 msgstr "স্তম্ভের সারি"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1088
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1086
 msgid "Railings"
 msgstr "বেড়া"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1095
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1093
 msgid "Southern Gate"
 msgstr "দক্ষিণের দরজা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1109
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1107
 msgid "Neck"
 msgstr "গলা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1116
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1114
 msgid "Great Horn"
 msgstr "বিশাল শিং"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1123
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1121
 msgid "Left Conductor"
 msgstr "বাম পথপ্রদর্শক"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1130
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1128
 msgid "Right Conductor"
 msgstr "ডান পথপ্রদর্শক"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1137
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1135
 msgid "Trials"
 msgstr "বিচার প্রক্রিয়া"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1144
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1142
 msgid "Gate of Yang"
 msgstr "ইয়াং এর দরজা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1151
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1149
 msgid "Executions"
 msgstr "মৃত্যুদন্ড"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1165
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1163
 msgid "Root"
 msgstr "শিকড়"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1172
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1170
 msgid "Celestial Milk"
 msgstr "স্বর্গীয় দুধ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1179
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1177
 msgid "Twinkling Indicator"
 msgstr "টিমটিমে নিশান"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1186
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1184
 msgid "Celestial Lance"
 msgstr "স্বর্গীয় বল্লম"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1193
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1191
 msgid "Mattress of the Emperor"
 msgstr "রাজ গদি"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1200
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1198
 msgid "Boats and Lake"
 msgstr "নৌকা ও হ্রদ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1207
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1205
 msgid "Battle Chariots"
 msgstr "রথের যুদ্ধ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1214
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1212
 msgid "Imperial Guards"
 msgstr "রাজ রক্ষী"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1221
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1219
 msgid "Chariots and Cavalry"
 msgstr "রথ ও সৈন্য"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1228
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1226
 msgid "Celestial Spokes"
 msgstr "স্বর্গীয় চরকা চরকা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1235
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1233
 msgid "Chariots and Cavalry General"
 msgstr "রথ ও সৈন্যদলের প্রধান"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1249
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1247
 msgid "Room"
 msgstr "ঘর"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1256
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1254
 msgid "Lock (Vassal of Room)"
 msgstr "তালা (ঘরের সামন্ত)"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1263
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1261
 msgid "Door Bolt"
 msgstr "দরজার কীল"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1270
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1268
 msgid "Punishment"
 msgstr "শাস্তি"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1277
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1275
 msgid "Eastern Door"
 msgstr "পূর্বের দরজা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1284
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1282
 msgid "Western Door"
 msgstr "পশ্চিমের দরজা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1291
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1289
 msgid "Solar Star"
 msgstr "সূর্যের মত"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1312
+#: ../../skycultures/chinese/description.en.utf8:1310
 #: ../../skycultures/japanese_moon_stations/description.en.utf8:69
 msgid "Heart"
 msgstr "হৃদয়"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1319
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1317
 msgid "Group of Soldiers"
 msgstr "সেনাদল"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1333
+#: ../../skycultures/chinese/description.en.utf8:1331
 #: ../../skycultures/japanese_moon_stations/description.en.utf8:76
 msgid "Tail"
 msgstr "লেজ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1340
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1338
 msgid "Changing Room (Vassal of Tail)"
 msgstr "পোষাক ঘর (লেজের সামন্ত)"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1347
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1345
 msgid "Tortoise"
 msgstr "কচ্ছপ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1354
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1352
 msgid "Celestial River"
 msgstr "স্বর্গীয় নদী"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1361
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1359
 msgid "Fu Yue"
 msgstr "ফু য়ুই"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1368
-#: ../../skycultures/chinese/description.en.utf8:2928
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1366
+#: ../../skycultures/chinese/description.en.utf8:2926
 msgid "Fish"
 msgstr "মাছ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1382
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1380
 msgid "Winnowing Basket"
 msgstr "কুলো"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1389
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1387
 msgid "Chaff"
 msgstr "শষ্য"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1396
-#: ../../skycultures/chinese/description.en.utf8:1732
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1394
+#: ../../skycultures/chinese/description.en.utf8:1730
 msgid "Pestle"
 msgstr "হামান দিস্তা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1410
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1408
 msgid "Dipper"
 msgstr "হাতা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1417
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1415
 msgid "Establishment"
 msgstr "প্রতিষ্ঠান"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1424
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1422
 msgid "Celestial Keyhole"
 msgstr "স্বর্গীয় চাবির ফুটো"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1431
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1429
 msgid "Market Officer"
 msgstr "বাজারের প্রধান"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1438
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1436
 msgid "River Turtle"
 msgstr "নদীর কচ্ছপ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1445
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1443
 msgid "Celestial Cock"
 msgstr "স্বর্গীয় মোরোগ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1452
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1450
 msgid "Territory of Dog"
 msgstr "কুকুরের এলাকা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1459
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1457
 msgid "Celestial Spring"
 msgstr "স্বর্গীয় ঝরনা"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1466
+#: ../../skycultures/chinese/description.en.utf8:1464
 #: ../../skycultures/greek_almagest/description.en.utf8:399
 #: ../../skycultures/greek_farnese/description.en.utf8:241
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:222
 msgid "Dog"
 msgstr "কুকুর"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1473
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1471
 msgid "Peasant"
 msgstr "চাষী"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1487
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1485
 msgid "Ox"
 msgstr "ষাঁড়"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1501
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1499
 msgid "Nine Water Wells"
 msgstr "নয়টি কুঁয়ো"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1508
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1506
 msgid "Drum at the River"
 msgstr "নদীর ধারে রাখা বাজনা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1515
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1513
 msgid "Weaving Girl"
 msgstr "তাঁত বোনা মেয়ে"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1522
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1520
 msgid "Left Flag"
 msgstr "বাম পতাকা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1529
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1527
 msgid "Right Flag"
 msgstr "ডান পতাকা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1536
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1534
 msgid "Celestial Drumstick"
 msgstr "স্বর্গীয় বাজনার কাঠি"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1543
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1541
 msgid "Network of Dykes"
 msgstr "আলের সারি"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1550
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1548
 msgid "Clepsydra Terrace"
 msgstr "জলঘড়ি"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1557
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1555
 msgid "Imperial Passageway"
 msgstr "রাজার চলাচলের পথ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1571
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1569
 msgid "Girl"
 msgstr "কন্যা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1578
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1576
 msgid "Twelve States"
 msgstr "বারোটি রাজ্য"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1585
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1583
 msgid "Pearls on Ladies' Wear"
 msgstr "মুক্তোর মালা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1592
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1590
 msgid "Rotten Gourd"
 msgstr "পচা কুমড়ো"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1599
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1597
 msgid "Good Gourd"
 msgstr "টাটকা কুমড়ো"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1606
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1604
 msgid "Celestial Ford"
 msgstr "স্বর্গীয় বাহন"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1613
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1611
 msgid "Xi Zhong"
 msgstr "শি ঝং"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1620
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1618
 msgid "Basket for Mulberry Leaves"
 msgstr "তুঁত পাতা ভর্তি ঝুড়ি"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1634
+#: ../../skycultures/chinese/description.en.utf8:1632
 #: ../../skycultures/japanese_moon_stations/description.en.utf8:124
 msgid "Emptiness"
 msgstr "ফাঁকা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1641
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1639
 msgid "Deified Judge of Life"
 msgstr "জীবনের পবিত্র বিচারক"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1648
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1646
 msgid "Deified Judge of Rank"
 msgstr "মর্যাদার পবিত্র বিচারক"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1655
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1653
 msgid "Deified Judge of Disaster and Good Fortune"
 msgstr "বিপর্যয় ও ভাগ্যের পবিত্র বিচারক"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1662
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1660
 msgid "Deified Judge of Right and Wrong"
 msgstr "ঠিক ও ভুলের পবিত্র বিচারক"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1669
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1667
 msgid "Crying"
 msgstr "কাঁদুনে"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1676
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1674
 msgid "Weeping"
 msgstr "ফুঁপিয়ে কান্না"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1683
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1681
 msgid "Celestial Ramparts"
 msgstr "স্বর্গীয় কেল্লা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1690
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1688
 msgid "Decayed Mortar"
 msgstr "মরচে ধরা কামান"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1697
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1695
 msgid "Jade Ornament on Ladies' Wear"
 msgstr "জেড পাথরের অলঙ্কার"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1711
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1709
 msgid "Rooftop"
 msgstr "ছাদ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1718
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1716
 msgid "Tomb (Vassal of Rooftop)"
 msgstr "কবর (ছাদের সামন্ত)"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1725
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1723
 msgid "Humans"
 msgstr "মানুষ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1739
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1737
 msgid "Mortar"
 msgstr "কামান"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1746
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1744
 msgid "Big Yard for Chariots"
 msgstr "রথশালা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1753
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1751
 msgid "Celestial Hook"
 msgstr "স্বর্গীয় কাঁটা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1760
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1758
 msgid "Zaofu"
 msgstr "যাওফু"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1767
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1765
 msgid "Roofing"
 msgstr "ছাদ নির্মাণ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1774
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1772
 msgid "Temple"
 msgstr "মন্দির"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1781
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1779
 msgid "Celestial Money"
 msgstr "স্বর্গীয় মুদ্রা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1795
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1793
 msgid "Encampment"
 msgstr "শিবির"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1802
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1800
 msgid "Resting Palace (Vassal of Encampment)"
 msgstr "বিশ্রামাগার (শিবিরের সামন্ত)"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1809
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1807
 msgid "Thunder and Lightning"
 msgstr "বজ্র বিদ্যুৎ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1816
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1814
 msgid "Line of Ramparts"
 msgstr "কেল্লার পরিসীমা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1823
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1821
 msgid "Palace Guard"
 msgstr "কেল্লার প্রহরী"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1830
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1828
 msgid "Axe"
 msgstr "কুঠার"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1837
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1835
 msgid "North Gate of the Military Camp"
 msgstr "সেনা ছাউনির উত্তরের দরজা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1844
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1842
 msgid "Net for Catching Birds"
 msgstr "পাখি ধরার জাল"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1851
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1849
 msgid "Materials for Making Tents"
 msgstr "তাঁবুর উপকরণ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1858
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1856
 msgid "Official for Materials Supply"
 msgstr "উপকরণ যোগানদার অধিকর্তা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1865
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1863
 msgid "Flying Serpent"
 msgstr "উড়ন্ত সাপ"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1879
+#: ../../skycultures/chinese/description.en.utf8:1877
 #: ../../skycultures/japanese_moon_stations/description.en.utf8:145
 msgid "Wall"
 msgstr "প্রাচীর"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1886
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1884
 msgid "Thunderbolt"
 msgstr "বিদ্যুতের ঝলকানি"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1893
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1891
 msgid "Cloud and Rain"
 msgstr "মেঘ ও বৃষ্টি"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1900
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1898
 msgid "Celestial Stable"
 msgstr "স্বর্গীয় আস্তাবল"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1907
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1905
 msgid "Sickle"
 msgstr "কাস্তে"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1914
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1912
 msgid "Official for Earthworks and Buildings"
 msgstr "রাজমিস্ত্রিদের অধিকর্তা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1928
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1926
 msgid "Legs"
 msgstr "পা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1935
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1933
 msgid "Outer Fence"
 msgstr "বাইরের বেড়া"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1942
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1940
 msgid "Celestial Pigsty"
 msgstr "স্বর্গীয় খোঁয়াড়"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1949
-#: ../../skycultures/chinese/description.en.utf8:2719
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1947
+#: ../../skycultures/chinese/description.en.utf8:2717
 msgid "Master of Constructions"
 msgstr "রাজমিস্ত্রি"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1956
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1954
 msgid "Southern Military Gate"
 msgstr "সেনা ছাউনির দক্ষিণের দরজা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1963
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1961
 msgid "Flying Corridor"
 msgstr "ঝুল বারান্দা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1970
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1968
 msgid "Auxiliary Road"
 msgstr "সহায়ক রাস্তা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1977
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1975
 msgid "Wang Liang"
 msgstr "ওয়াং লিয়াং"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1984
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1982
 msgid "Whip"
 msgstr "চাবুক"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:1998
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:1996
 msgid "Bond"
 msgstr "জোড়"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2005
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2003
 msgid "Official in Charge of the Forest"
 msgstr "জঙ্গলের ভারপ্রাপ্ত অধিকর্তা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2012
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2010
 msgid "Official in Charge of Pasturing"
 msgstr "চারণভূমির ভারপ্রাপ্ত অধিকর্তা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2019
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2017
 msgid "Square Celestial Granary"
 msgstr "স্বর্গীয় চৌকো খামার"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2026
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2024
 msgid "Ricks of Grain"
 msgstr "শষ্যের গাদা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2033
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2031
 msgid "Great General of Heaven"
 msgstr "স্বর্গের বিখ্যাত সেনাপতি"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2047
+#: ../../skycultures/chinese/description.en.utf8:2045
 #: ../../skycultures/japanese_moon_stations/description.en.utf8:178
 msgid "Stomach"
 msgstr "পাকস্থলী"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2054
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2052
 msgid "Celestial Foodstuff"
 msgstr "স্বর্গীয় খাবার"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2061
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2059
 msgid "Circular Celestial Granary"
 msgstr "স্বর্গীয় গোলাকার খামার"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2068
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2066
 msgid "Mausoleum"
 msgstr "দরগা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2075
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2073
 msgid "Celestial Boat"
 msgstr "স্বর্গীয় নৌকা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2082
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2080
 msgid "Heap of Corpses"
 msgstr "মৃতের স্তুপ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2089
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2087
 msgid "Stored Water"
 msgstr "সঞ্চিত জল"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2103
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2101
 msgid "Hairy Head"
 msgstr "চুলো মাথা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2110
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2108
 msgid "Celestial Concave"
 msgstr "স্বর্গীয় খিলান"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2117
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2115
 msgid "Lunar Star"
 msgstr "চাঁদের মত"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2124
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2122
 msgid "Celestial Yin Force"
 msgstr "স্বর্গীয় ইয়িন সেনা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2131
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2129
 msgid "Hay"
 msgstr "খড়ের গাদা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2138
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2136
 msgid "Celestial Meadows"
 msgstr "স্বর্গীয় তৃণভূমি"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2145
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2143
 msgid "Rolled Tongue"
 msgstr "গোটানো জিভ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2152
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2150
 msgid "Celestial Slander"
 msgstr "স্বর্গীয় অপবাদ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2159
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2157
 msgid "Whetstone"
 msgstr "শাণ দেওয়ার পাথর"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2173
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2171
 msgid "Net"
 msgstr "জাল"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2180
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2178
 msgid "Whisper (Vassal of Net)"
 msgstr "ফিসফিস করা (জালের সামন্ত)"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2187
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2185
 msgid "Celestial Street"
 msgstr "স্বর্গীয় রাস্তা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2194
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2192
 msgid "Celestial Tally"
 msgstr "স্বর্গীয় হিসাব"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2201
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2199
 msgid "Feudal Kings"
 msgstr "সামন্ত রাজা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2208
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2206
 msgid "Celestial High Terrace"
 msgstr "স্বর্গীয় চাতাল"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2215
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2213
 msgid "Interpreters of Nine Dialects"
 msgstr "হরবোলা নয় ভাষার"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2222
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2220
 msgid "Five Chariots"
 msgstr "পাঁচটি রথ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2236
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2234
 msgid "Celestial Pier"
 msgstr "স্বর্গীয় থাম"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2243
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2241
 msgid "Pool of Harmony"
 msgstr "নোনা পুকুর"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2250
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2248
 msgid "Celestial Pass"
 msgstr "স্বর্গীয় যাত্রাপথ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2257
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2255
 msgid "Banner of Three Stars"
 msgstr "তিন তারা পতাকা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2264
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2262
 msgid "Imperial Military Flag"
 msgstr "রাজ সেনাবাহিনীর পতাকা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2271
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2269
 msgid "Celestial Orchard"
 msgstr "স্বর্গীয় বাগান"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2285
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2283
 msgid "Turtle Beak"
 msgstr "কচ্ছপের ঠোঁট"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2292
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2290
 msgid "Deity in Charge of Monsters"
 msgstr "রাক্ষসদের দেবতা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2299
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2297
 msgid "Seat Flags"
 msgstr "আসন"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2313
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2311
 msgid "Three Stars"
 msgstr "তিন তারা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2320
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2318
 msgid "Send Armed Forces To Suppress (Vassal of Three Stars)"
 msgstr "দমন করার জন্য সশস্ত্র বাহিনী প্রেরণ (তিনতারার সামন্ত)"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2327
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2325
 msgid "Jade Well"
 msgstr "জেড পাথরের প্রাচীর"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2334
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2332
 msgid "Screen"
 msgstr "পর্দা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2341
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2339
 msgid "Military well"
 msgstr "সেনাদের কুয়ো"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2348
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2346
 msgid "Toilet"
 msgstr "প্রস্রাবাগার"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2355
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2353
 msgid "Excrement"
 msgstr "মলমূত্র"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2369
+#: ../../skycultures/chinese/description.en.utf8:2367
 #: ../../skycultures/japanese_moon_stations/description.en.utf8:225
 msgid "Well"
 msgstr "কুয়ো"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2376
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2374
 msgid "Battle Axe (Vassal of Well)"
 msgstr "য়ুদ্ধের কুঠার (কুয়োর সামন্ত)"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2383
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2381
 msgid "South River"
 msgstr "দক্ষিণের নদী"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2390
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2388
 msgid "North River"
 msgstr "উত্তরের নদী"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2397
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2395
 msgid "Celestial Wine Cup"
 msgstr "স্বর্গীয় মদের পেয়ালা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2404
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2402
 msgid "Five Feudal Kings"
 msgstr "পাঁচ সামন্ত রাজা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2411
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2409
 msgid "Accumulated Water"
 msgstr "জমা জল"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2418
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2416
 msgid "Pile of Firewood"
 msgstr "জ্বালানী কাঠের গাদা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2425
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2423
 msgid "Official for Irrigation"
 msgstr "সেচকার্যের অধিকর্তা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2432
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2430
 msgid "Water Level"
 msgstr "জলস্তর"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2439
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2437
 msgid "Four Channels"
 msgstr "চারটি খাল"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2446
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2444
 msgid "Market for Soldiers"
 msgstr "সেনাদের বাজার"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2453
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2451
 msgid "Wild Cockerel"
 msgstr "বুনো মোরগ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2460
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2458
 msgid "Grandfather"
 msgstr "ঠাকুরদা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2467
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2465
 msgid "Son"
 msgstr "ছেলে"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2474
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2472
 msgid "Grandson"
 msgstr "নাতি"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2481
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2479
 msgid "Palace Gate"
 msgstr "মহলের দরজা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2488
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2486
 msgid "Celestial Wolf"
 msgstr "স্বর্গীয় নেকড়ে"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2495
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2493
 msgid "Bow and Arrow"
 msgstr "তীর ও ধনুক"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2502
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2500
 msgid "Old Man"
 msgstr "বুড়ো লোক"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2516
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2514
 msgid "Ghosts"
 msgstr "ভুত"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2523
-#: ../../skycultures/chinese/description.en.utf8:2935
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2521
+#: ../../skycultures/chinese/description.en.utf8:2933
 msgid "Cumulative Corpses"
 msgstr "মৃতের স্তুপ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2530
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2528
 msgid "Beacon Fire"
 msgstr "মশাল"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2537
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2535
 msgid "Celestial Dog"
 msgstr "স্বর্গীয় কুকুর"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2544
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2542
 msgid "Outer Kitchen"
 msgstr "বাইরের রান্নাঘর"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2551
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2549
 msgid "Celestial Earth God's Temple"
 msgstr "স্বর্গীয় পৃথিবীর দেবতার মন্দির"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2558
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2556
 msgid "Judge for Estimating the Age of Animals"
 msgstr "প্রানীদের জীবনকাল নির্ধারণের বিচারক"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2572
+#: ../../skycultures/chinese/description.en.utf8:2570
 #: ../../skycultures/japanese_moon_stations/description.en.utf8:239
 msgid "Willow"
 msgstr "উইলো গাছ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2579
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2577
 msgid "Banner of Wine Shop"
 msgstr "মদের দোকানের নিশান"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2600
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2598
 msgid "Celestial Premier"
 msgstr "স্বর্গীয় অমাত্য"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2607
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2605
 msgid "Celestial Cereals"
 msgstr "স্বর্গীয় খাদ্যশষ্য"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2614
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2612
 msgid "Xuanyuan"
 msgstr "জুয়ানিয়ানুয়ান"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2621
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2619
 msgid "High Judge"
 msgstr "মহান বিচারক"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2635
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2633
 msgid "Extended Net"
 msgstr "বর্ধিত জাল"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2642
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2640
 msgid "Celestial Temple"
 msgstr "স্বর্গীয় মন্দির"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2656
+#: ../../skycultures/chinese/description.en.utf8:2654
 #: ../../skycultures/japanese_moon_stations/description.en.utf8:260
 msgid "Wings"
 msgstr "ডানা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2663
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2661
 msgid "Dongou"
 msgstr "দোংউ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2677
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2675
 msgid "Chariot"
 msgstr "রথ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2684
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2682
 msgid "Changsha (Vassal of Chariot)"
 msgstr "চাংশা (রথের সামন্ত)"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2691
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2689
 msgid "Left Linchpin (Vassal of Chariot)"
 msgstr "বাম চাকার খিল (রথের সামন্ত)"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2698
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2696
 msgid "Right Linchpin (Vassal of Chariot)"
 msgstr "ডান চাকার খিল (রথের সামন্ত)"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2705
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2703
 msgid "Green Hill"
 msgstr "সবুজ পাহাড়"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2712
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2710
 msgid "Military Gate"
 msgstr "সেনা দরজা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2726
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2724
 msgid "House for Musical Instruments"
 msgstr "বাদ্যযন্ত্রের ঘর"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2740
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2738
 msgid "Sea and Mountain"
 msgstr "সমুদ্র ও পাহাড়"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2747
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2745
 msgid "Cross"
 msgstr "ক্রস"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2754
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2752
 msgid "Horse's Tail"
 msgstr "ঘোড়ার লেজ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2761
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2759
 msgid "Horse's Abdomen"
 msgstr "ঘোড়ার তলপেট"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2768
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2766
 msgid "Bee"
 msgstr "মৌমাছি"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2775
+#: ../../skycultures/chinese/description.en.utf8:2773
 #: ../../skycultures/greek_almagest/description.en.utf8:263
 #: ../../skycultures/greek_farnese/description.en.utf8:139
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:113
 msgid "Triangle"
 msgstr "ত্রিভূজ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2782
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2780
 msgid "Exotic Bird"
 msgstr "বিদেশী পাখি"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2789
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2787
 msgid "Peafowl"
 msgstr "ময়ূর"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2796
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2794
 msgid "Persia"
 msgstr "পার্সিয়া"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2803
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2801
 msgid "Snake's Tail"
 msgstr "সাপের লেজ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2810
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2808
 msgid "Snake's Abdomen"
 msgstr "সাপের তলপেট"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2817
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2815
 msgid "Snake's Head"
 msgstr "সাপের মাথা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2824
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2822
 msgid "Bird's Beak"
 msgstr "পাখির ঠোঁট"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2831
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2829
 msgid "Crane"
 msgstr "সারস"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2838
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2836
 msgid "Firebird"
 msgstr "আগুন পাখি"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2845
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2843
 msgid "Crooked Running Water"
 msgstr "আঁকাবাঁকা চলমান জল"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2852
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2850
 msgid "White Patched Nearby"
 msgstr "কাছাকাছি থাকা সাদা ছোপ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2859
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2857
 msgid "White Patches Attached"
 msgstr "সংযুক্ত সাদা ছোপ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2866
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2864
 msgid "Goldfish"
 msgstr "গোল্ডফিস"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2873
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2871
 msgid "Sea Rock"
 msgstr "সামুদ্রিক পাথর"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2880
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2878
 msgid "Flying Fish"
 msgstr "উড়ুক্কু মাছ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2887
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2885
 msgid "Southern Boat"
 msgstr "দক্ষিণের বজরা"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2894
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2892
 msgid "Little Dipper"
 msgstr "ছোটো হাতা"
 
-#. type: Content of: <p><p><p><p><p>
-#: ../../skycultures/chinese/description.en.utf8:2899
-msgid "note 1：The Xingguans with \"*\"，Was officially deleted in 1752."
+#. type: Content of: <p><p>
+#: ../../skycultures/chinese/description.en.utf8:2897
+msgid "note 1: The Xingguans with \"*\", Was officially deleted in 1752."
 msgstr ""
-"বিঃদ্রঃ ১：\"*\" দেওয়া সিংকুয়াংগুলি，১৭৫২ সালে আধিকারিকভাবে বাতিল করা হয়েছে ।"
 
-#. type: Content of: <p><p><p><p><p>
-#: ../../skycultures/chinese/description.en.utf8:2900
+#. type: Content of: <p><p>
+#: ../../skycultures/chinese/description.en.utf8:2898
 msgid ""
-"note 2：The vassal Xingguan is not a Xingguan, but a part of the Xingguan it "
-"is a vassal of."
+"note 2: The vassal Xingguan is not a separate Xingguan, but a vassal of the "
+"parent Xingguan."
 msgstr ""
-"বিঃদ্রঃ ২：সামন্ত সিংকুয়াংটি আসলে শিংকুয়াং নয়, এটির অংশগুলি কোনো সমস্ত "
-"সিংকুয়াং এর সামন্ত ।"
 
-#. type: Content of: <p><p><p><p><h3>
-#: ../../skycultures/chinese/description.en.utf8:2903
+#. type: Content of: <p><h3>
+#: ../../skycultures/chinese/description.en.utf8:2901
 msgid "Deep Space Objects"
 msgstr "মহাজাগতিক জ্যোতিষ্ক"
 
-#. type: Content of: <p><p><p><p><p>
-#: ../../skycultures/chinese/description.en.utf8:2906
+#. type: Content of: <p><p>
+#: ../../skycultures/chinese/description.en.utf8:2904
 msgid ""
-"Ancient China also found some deep space objects. Included in the Xingguans."
+"Some deep space objects were also discovered in ancient China, which were "
+"also included in the Xingguans."
 msgstr ""
-"প্রাচীন চীনারা অনেকগুলি মহাজাগতিক জ্যোতিষ্ক চিহ্ণিত করেছিলেন । এগুলি "
-"সিংকুয়াং গুলিতে দেখানো হয়েছে ।"
 
-#. type: Content of: <p><p><p><p><p>
-#: ../../skycultures/chinese/description.en.utf8:2907
+#. type: Content of: <p><p>
+#: ../../skycultures/chinese/description.en.utf8:2905
 msgid "Include the following:"
 msgstr "নীচে দেখুন:"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2911
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2909
 msgid "General name"
 msgstr "বর্তমান নাম"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2915
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2913
 msgid "Nick name"
 msgstr "প্রচলিত নাম"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2921
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2919
 msgid "God's Palace"
 msgstr "ঈশ্বরের অধিষ্ঠান"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2922
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2920
 msgid "Northern Jewel Box Cluster"
 msgstr "উত্তরের গয়নার বাক্স তারকাগুচ্ছ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2929
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2927
 msgid "Ptolemy Cluster"
 msgstr "টলেমীর তারকাগুচ্ছ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2936
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2934
 msgid "Beehive Cluster"
 msgstr "মৌচাক তারকাগুচ্ছ"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2942
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2940
 msgid "Arsenal Added I"
 msgstr "অস্ত্রাগার সংযুক্তি ১"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2943
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2941
 msgid "Omega Centauri"
 msgstr "ওমেগা সেন্টুরাই"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2949
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2947
 msgid "Legs Mansion XXI"
 msgstr "পা ২১"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2950
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2948
 msgid "Andromeda Galaxy"
 msgstr "অ্যান্ড্রোমিডা নক্ষত্রলোক"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2956
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2954
 msgid "Sea and Mountain II"
 msgstr "সমুদ্র ও পাহাড় ২"
 
-#. type: Content of: <p><p><p><p><table><tr><td>
-#: ../../skycultures/chinese/description.en.utf8:2957
-msgid "Homunculus Nebula，Eta Carinae"
-msgstr "বামন নীহারিকা，ইটা ক্যারিনা"
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/chinese/description.en.utf8:2955
+msgid "Homunculus Nebula, Eta Carinae"
+msgstr ""
 
-#. type: Content of: <p><p><p><p><p>
-#: ../../skycultures/chinese/description.en.utf8:2964
+#. type: Content of: <p><p>
+#: ../../skycultures/chinese/description.en.utf8:2962
 msgid ""
 "This Sky Culture is Based on the information inside <i>Chinese and Western "
-"Contrast Stars Chart and Star Catalogue 1950.0(Star Catalogue)</i> "
-"(Chinese：中西对照恒星图表1950.0(星表分册)) and <i>Complete Studies of Astronomical "
-"Instruments</i> (Chinese：仪象考成)."
+"Contrast Star Chart and Catalogue 1950.0 (Star Catalogue)</i> (Chinese: "
+"中西对照恒星图表1950.0(星表分册)) and <i>Complete Studies of Astronomical</i> (Chinese: "
+"仪象考成)."
 msgstr ""
-"এটি তৈরী করা হয়েছে <i>চীনা ও পাশ্চাত্য মিলিত নক্ষত্র মানচিত্র ও তালিকা "
-"১৯৫০.০ (নক্ষত্র তালিকা)</i> (চীনা :中西对照恒星图表1950.0(星表分册)) ও <i>জ্যোতির্বিদ্যা"
-" সংক্রান্ত সরঞ্জামগুলির ক্রমাগত সমীক্ষা</i> (চীনা :仪象考成) এর উপর ভিত্তি করে ।"
 
-#. type: Content of: <p><p><p><p>
-#: ../../skycultures/chinese/description.en.utf8:2965
+#. type: Content of: <p><p>
+#: ../../skycultures/chinese/description.en.utf8:2963
 msgid ""
 "Thanks to Liu Chunbin for the collation of the <i>Chinese and Western "
-"Contrast Stars Chart and Star Catalogue 1950.0(Star Catalogue)</i>. He "
-"produced <i>Chinese Star Catalogue for Stellarium</i> (Chinese：Stellarium "
+"Contrast Star Chart and Catalogue 1950.0 (Star Catalogue)</i>. He produced "
+"<i>Chinese Star Catalogue for Stellarium</i> (Chinese: Stellarium "
 "中国星官体系下中文星名扩展包) which is a very important reference."
 msgstr ""
-"Liu Chunbin কে অসংখ্য ধন্যবাদ, <i>চীনা ও পাশ্চাত্য মিলিত নক্ষত্র মানচিত্র ও "
-"তালিকা ১৯৫০.০ (নক্ষত্র তালিকা)</i> এর পাঠনির্ণয়ের জন্য । তাঁর তৈরী "
-"<i>স্টেলারিয়ামের জন্য চৈনিক নক্ষত্র তালিকা</i> (চীনা :স্টেলারিয়াম "
-"中国星官体系下中文星名扩展包) একটি গুরুত্বপূর্ণ উপাদান ।"
 
-#. type: Content of: <p><p><p><p>
-#: ../../skycultures/chinese/description.en.utf8:2966
+#. type: Content of: <p><p>
+#: ../../skycultures/chinese/description.en.utf8:2964
 msgid ""
 "Some stars have been added according to <i>The History of Stellar "
-"Observation in China</i> (Chinese：中国恒星观测史)."
+"Observation in China</i> (Chinese: 中国恒星观测史)."
 msgstr ""
-"কিছু তারা নেওয়া হয়েছে <i>চীনা আকাশ পর্যবেক্ষণের ইতিহাস</i> (চীনা :中国恒星观测史) "
-"থেকে ।"
+
+#. type: Content of: <p><p>
+#: ../../skycultures/chinese/description.en.utf8:2965
+msgid ""
+"For the translation of constellations, we use the <i>English-Chinese "
+"Glossary of Chinese Star Regions, Asterisms and Star Names</i> (Chinese: "
+"中国星区、星官及星名英译表) by Hong Kong Space Museum. Only a small portion of the "
+"translation is changed, for example, when the translations of the two "
+"different Xingguans are the same."
+msgstr ""
+
+#. type: Content of: <p><p>
+#: ../../skycultures/chinese/description.en.utf8:2966
+msgid ""
+"There are seven stars with Chinese star names without corresponding HIP "
+"numbers, so they cannot be displayed in Stellarium. They are Sea and "
+"Mountain II (η Car), Five Chariots Added XVIII (12 Aur), Recommending "
+"Virtuous Man Added VI (39 Vir) , Great Horn Added II (CN Boo), Hairy Head "
+"Added X (24 Tau), Heart Added VII (18 Oph), South River Added XI (GC 10303)."
+msgstr ""
 
 #. type: Content of: <p><p><p><p>
 #: ../../skycultures/chinese/description.en.utf8:2967
-msgid ""
-"For the translation of constellations, we use the <i>English-Chinese "
-"Glossary of Chinese Star Regions, Asterisms and Star Names</i> "
-"(Chinese：中国星区、星官及星名英译表) by Hong Kong Space Museum. Only a small portion of "
-"the translation is changed, for example, when the translations of the two "
-"different Xingguans are the same."
-msgstr ""
-"অনুবাদের ক্ষেত্রে, হংকং মহাকাশ জাদুঘর প্রবর্তিত <i>চীনা তারামন্ডল ও তারার "
-"নামের চীনা-ইংরাজী শব্দকোশ</i> (চীনা :中国星区、星官及星名英译表) ব্যবহার করা হয়েছে । তবে "
-"খুব অল্প ক্ষেত্রে অনুবাদ একটু পাল্টানো হয়েছে, য়েমন, যখন দুটি সিংকুয়াং এর নাম"
-" একই দাঁড়িয়েছে ।"
-
-#. type: Content of: <p><p><p><p>
-#: ../../skycultures/chinese/description.en.utf8:2968
 msgid ""
 "The cultural connotations of the name cannot be explained perfectly, because"
 " thousands of years passed, the connotations behind some names are "
 "controversial. these are only possible translations. Chinese characters are "
 "ideographic characters, which leads to some completely different names "
-"having the same pronunciation. Therefore, pinyin transliteration is provided"
-" only to make star names readable."
+"having the same pronunciation. Therefore, the pinyin transliteration is "
+"provided only to make star names readable."
 msgstr ""
-"নামের সাংস্কৃতিক অর্থ অন্য ভাযায় সবসময় পুরোপুরি ব্যাখ্যা করা যায় না, কারণ "
-"এক্ষেত্রে কয়েক হাজার বছর কেটে গেছে, এমনকি কিছু নামের ব্যখ্যাগুলি খুবই "
-"বিতর্কিত। তাই এগুলি কেবল সম্ভাব্য অনুবাদ । চীনা বর্ণগুলি অনেকটা চিত্রলিপির "
-"মত, তাই অনেক সময় একই উচ্চারণ হলেও তাদের অর্থ সম্পূর্ণ আলাদা । এই কারণে, "
-"ফিনয়িন ভাষা: উচ্চারণ জানার জন্য বর্ণান্তরণ দেওয়া হয়েছে ।"
 
-#. type: Content of: <p><p><p><ul><li>
-#: ../../skycultures/chinese/description.en.utf8:2973
+#. type: Content of: <p><p><p><p><p><ul><li>
+#: ../../skycultures/chinese/description.en.utf8:2972
 msgid ""
 "<a "
 "href=\"http://www.lcsd.gov.hk/CE/Museum/Space/en_US/web/spm/starshine/resources/constemyth/glossary.html"
@@ -7640,30 +7585,30 @@ msgid ""
 "Names</a>"
 msgstr ""
 
-#. type: Content of: <p><p><p><ul><li>
-#: ../../skycultures/chinese/description.en.utf8:2974
+#. type: Content of: <p><p><p><p><p><ul><li>
+#: ../../skycultures/chinese/description.en.utf8:2973
 msgid ""
 "<a href=\"http://aeea.nmns.edu.tw/aeea/contents_list/star_sign.html\">AEEA "
 "Astronomy Education Information-Ancient Chinese constellation system </a>"
 msgstr ""
 
-#. type: Content of: <p><p><p><ul><li>
-#: ../../skycultures/chinese/description.en.utf8:2975
+#. type: Content of: <p><p><p><p><p><ul><li>
+#: ../../skycultures/chinese/description.en.utf8:2974
 msgid ""
 "<a href=\"http://en.wikipedia.org/wiki/Chinese_constellations\">Chinese "
 "constellations (Wikipedia)</a>"
 msgstr ""
 
-#. type: Content of: <p><p><p><ul><li>
-#: ../../skycultures/chinese/description.en.utf8:2976
+#. type: Content of: <p><p><p><p><p><ul><li>
+#: ../../skycultures/chinese/description.en.utf8:2975
 msgid ""
 "<a "
 "href=\"https://en.wikipedia.org/wiki/Traditional_Chinese_star_names\">Traditional"
 " Chinese star names (Wikipedia)</a>"
 msgstr ""
 
-#. type: Content of: <p><p><p><ul><li>
-#: ../../skycultures/chinese/description.en.utf8:2977
+#. type: Content of: <p><p><p><p><p><ul><li>
+#: ../../skycultures/chinese/description.en.utf8:2976
 msgid ""
 "<a "
 "href=\"http://www.chinapage.com/astronomy/astronomy.html\">http://www.chinapage.com/astronomy/astronomy.html</a>"
@@ -7672,28 +7617,23 @@ msgstr ""
 #.  a href="http://www.lcsd.gov.hk/CE/Museum/Space/en_US/web/spm/starshine
 #. /interactive-star-maps.html"
 #. /a
-#. type: Content of: <p><p><p><p>
-#: ../../skycultures/chinese/description.en.utf8:2983
+#. type: Content of: <p><p><p><p><p><p>
+#: ../../skycultures/chinese/description.en.utf8:2982
 msgid ""
 "This sky culture was initially contributed by <i>Karrie Berglund</i> of "
 "Digitalis Education Solutions, Inc. based on Hong Kong Space Museum star "
 "maps (no longer available online)."
 msgstr ""
 
-#. type: Content of: <p><p><p><p>
-#: ../../skycultures/chinese/description.en.utf8:2984
+#. type: Content of: <p><p><p><p><p><p>
+#: ../../skycultures/chinese/description.en.utf8:2983
 msgid ""
 "Sun Shuwei <a "
 "href=\"mailto:sunshuwei.hi@foxmail.com\">sunshuwei.hi@foxmail.com</a> "
-"replenishes more than 200 Xingguans and more than 3,000 stars，based "
+"replenishes more than 200 Xingguans and more than 3,000 stars, based "
 "primarily on the book<i>Chinese and Western Contrast Star Chart and "
 "Catalogue 1950.0</i> by Yi Shitong, and add the description."
 msgstr ""
-"Sun Shuwei <a "
-"href=\"mailto:sunshuwei.hi@foxmail.com\">sunshuwei.hi@foxmail.com</a> মূলত ই"
-" শিটং রচিত <i>চীনা ও পাশ্চাত্য মিলিত নক্ষত্র মানচিত্র ও তালিকা ১৯৫০.০</i> "
-"বইটির উপর ভিত্তি করে ২০০ টিরও বেশি সিংকুয়াং এবং ৩০০০ এরও বেশি তারার নাম ও "
-"অবস্থান পুনর্গঠণ করেছেন এবং বিশদ বিবরণ লিখেছেন ।"
 
 #. type: Content of: <h2>
 #: ../../skycultures/chinese_contemporary/description.en.utf8:1
@@ -7884,21 +7824,11 @@ msgid ""
 " measured its coordinate position, and other stars in the Xingguan were "
 "rarely mentioned. However, some important constellations will be selected "
 "more stars for observation and recording. In ancient China, astronomers used"
-" the lunar lodge degrees (determinative star distance) and polar distance "
-"degrees to record the position of the stars. <b>In ancient China, the "
+" mansion distance degrees (determinative star distance) and polar distance "
+"degrees to record the position of stars. <b>In ancient China, the "
 "determinative stars of Twenty-eight Lunar Mansions was the benchmark for "
 "determining the longitude of the equatorial coordinate system</b>."
 msgstr ""
-"নির্ণায়ক তারকা এক্ষেত্রে একটি গুরুত্বপূর্ণ ধারণা । মধ্যযুগীয় সময়ে, চীনা "
-"জ্যোতির্বিজ্ঞানীরা সমস্ত তারার নাম দেননি এবং প্রত্যেকটি সিংকুয়াং নির্ণায়ক "
-"তারা বা একটি প্রধান তারার নামে নামাঙ্কিত করেছেন । প্রাচীন চীনে, মূলত "
-"নির্ণায়ক তারার অবস্থান পরিমাপ করা হত এবং সিংকুয়াং এর অন্যান্য তারাগুলির "
-"উল্লেখ নেই বললেই চলে । যাইহোক, তবে পর্যবেক্ষণ এবং তথ্যের প্রয়োজনীয়তার কারণে "
-"কিছু গুরুত্বপূর্ণ উজ্জ্বল নক্ষত্রগুলির অবস্থান পরিমাপ করা হয়েছিল । প্রাচীন "
-"চীনে, জ্যোতির্বিজ্ঞানীরা চন্দ্র অবস্থান (নির্ণায়ক তারকা থেকে দূরত্ব) এবং "
-"মেরু দূরত্ব (ডিগ্রি) ব্যবহার করে তারাগুলির অবস্থান রেকর্ড করেন । "
-"<b>সেক্ষেত্রে ২৮টি চন্দ্র অবস্থানের নির্ণায়ক তারাগুলি নিরক্ষীয় দ্রাঘিমাংশ "
-"নির্ধারণের জন্য ব্যবহৃত হত</b> ।"
 
 #. type: Content of: <p>
 #: ../../skycultures/chinese_medieval/description.en.utf8:9
@@ -8614,6 +8544,13 @@ msgstr ""
 msgid "How this sky culture was made"
 msgstr "প্রনালী"
 
+#. type: Content of: <p><h3>
+#: ../../skycultures/greek_almagest/description.en.utf8:45
+#: ../../skycultures/western/description.en.utf8:7
+#: ../../skycultures/western_SnT/description.en.utf8:9
+msgid "Star names"
+msgstr "তারাদের নামকরণ"
+
 #. type: Content of: outside any tag (error?)
 #: ../../skycultures/greek_almagest/description.en.utf8:47
 msgid ""
@@ -9158,7 +9095,7 @@ msgstr "শরীরটা &tau; নয়  &upsilon; তারাটি দিয়�
 #: ../../skycultures/greek_farnese/description.en.utf8:223
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:204
 #: ../../skycultures/lokono/description.en.utf8:116
-#: ../../skycultures/siberian/description.en.utf8:22
+#: ../../skycultures/russian_siberian/description.en.utf8:22
 msgid "Orion"
 msgstr "কালপুরুষ"
 
@@ -9890,7 +9827,7 @@ msgid ""
 "In the Greek original (Aratos, ~300 BCE), there was no constellation "
 "Equuleus. The Farnese Globe (as well as the Mainz Globe and the Kugel Globe)"
 " depicts the Dolphin rather largely, covering the space of Equ. That is why "
-"I follow this Aratean tradition also for the Leiden Aratea."
+"I chose to follow this Aratean tradition also for the Leiden Aratea."
 msgstr ""
 
 #. type: Content of: <p><table><tr><td>
@@ -11818,7 +11755,7 @@ msgstr "কোকোই সারস"
 
 #. type: Content of: <h3>
 #: ../../skycultures/lokono/description.en.utf8:91
-#: ../../skycultures/siberian/description.en.utf8:18
+#: ../../skycultures/russian_siberian/description.en.utf8:18
 msgid "Ursa Major"
 msgstr "ভালুক ছানা"
 
@@ -16493,7 +16430,7 @@ msgstr ""
 
 #. type: Content of: <h3>
 #: ../../skycultures/sami/description.en.utf8:8
-#: ../../skycultures/siberian/description.en.utf8:28
+#: ../../skycultures/russian_siberian/description.en.utf8:28
 #: ../../skycultures/tukano/description.en.utf8:43
 msgid "Sources"
 msgstr "তথ্যসূত্র"
@@ -16723,12 +16660,12 @@ msgstr ""
 "গবেষণার ফসল ।"
 
 #. type: Content of: <h2>
-#: ../../skycultures/siberian/description.en.utf8:1
-msgid "Siberian"
-msgstr "সাইবেরিয়ান"
+#: ../../skycultures/russian_siberian/description.en.utf8:1
+msgid "Russian (Siberian)"
+msgstr ""
 
 #. type: Content of: <p>
-#: ../../skycultures/siberian/description.en.utf8:2
+#: ../../skycultures/russian_siberian/description.en.utf8:2
 msgid ""
 "The names of the constellations of Siberian peoples is rather poorly "
 "studied. This region has the large territory and the knowledge about "
@@ -16742,7 +16679,7 @@ msgstr ""
 "নামগুলি ব্যবহার করা হয়েছে ।"
 
 #. type: Content of: <p>
-#: ../../skycultures/siberian/description.en.utf8:8
+#: ../../skycultures/russian_siberian/description.en.utf8:8
 msgid ""
 "The names of the Milky Way are quite numerous, but they can be distinguished"
 " into two groups - the names coming from the past (e.g., <em>Goose "
@@ -16756,7 +16693,7 @@ msgstr ""
 "আক্রমনের ইতিহাসের যোগসূত্র লক্ষ করা যায় ।"
 
 #. type: Content of: <p>
-#: ../../skycultures/siberian/description.en.utf8:14
+#: ../../skycultures/russian_siberian/description.en.utf8:14
 msgid ""
 "The Pleiades has a many names and their more than the Milky Way names, but "
 "all of them in Siberia can be reduced to the notion for a star cluster as a "
@@ -16767,7 +16704,7 @@ msgstr ""
 " ।"
 
 #. type: Content of: <p>
-#: ../../skycultures/siberian/description.en.utf8:19
+#: ../../skycultures/russian_siberian/description.en.utf8:19
 msgid ""
 "In Siberia often used name for this constellation is <em>Elk</em> (although "
 "in Eastern Siberia the name \"Bear\" is used more frequently)."
@@ -16776,7 +16713,7 @@ msgstr ""
 "পরিচিত (তবে পূর্ব সাইবেরিয়াতে ভল্লুক নামটিও কোথাও কোথাও ব্যবহৃত হয়) ।"
 
 #. type: Content of: <p>
-#: ../../skycultures/siberian/description.en.utf8:23
+#: ../../skycultures/russian_siberian/description.en.utf8:23
 msgid ""
 "In Siberia in the constellation of Orion is usually used only three stars of"
 " his belt, who called <em>Kichigi</em> (the Threshers) - is typical for "
@@ -16789,12 +16726,12 @@ msgstr ""
 "অংশে এটি সমগ্র ভল্লুক মন্ডলকে ঢাকা দিয়ে দেয় ।"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/siberian/description.en.utf8:30
+#: ../../skycultures/russian_siberian/description.en.utf8:30
 msgid "Svjatskij, D.O. Astronomija Drevnej Rusi. - M., 2007. - 664 s."
 msgstr "Svjatskij, D.O. Astronomija Drevnej Rusi. - M., ২০০৭. - ৬৬৪ s."
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/siberian/description.en.utf8:31
+#: ../../skycultures/russian_siberian/description.en.utf8:31
 msgid ""
 "Svjatskij, D.O. Pod svodom hrustal'nogo neba: Ocherki po astral'noj "
 "mifologii v oblasti religioznogo i narodnogo mirovozzrenija. Izd. 2-e M.: "
@@ -16805,7 +16742,7 @@ msgstr ""
 "Knizhnyj dvor \"LIBROKOM\", ২০১১. - ১৯২ s."
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/siberian/description.en.utf8:32
+#: ../../skycultures/russian_siberian/description.en.utf8:32
 msgid ""
 "Rut, M.E. Slovar' astronimov. Zvezdnoe nebo po-russki. - M.: AST-PRESS "
 "KNIGA, 2010. - 288 s."
@@ -16814,7 +16751,7 @@ msgstr ""
 "KNIGA, ২০১০. - ২৮৮ s."
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/siberian/description.en.utf8:33
+#: ../../skycultures/russian_siberian/description.en.utf8:33
 msgid "Karpenko, Ju.A. Nazvanija zvezdnogo neba. - M.: Nauka, 1981. - 184 s."
 msgstr "Karpenko, Ju.A. Nazvanija zvezdnogo neba. - M.: Nauka, ১৯৮১. - ১৮৪ s."
 

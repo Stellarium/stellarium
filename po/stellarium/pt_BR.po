@@ -18,15 +18,16 @@
 # Vinicius Oliveira <prof.vinic@gmail.com>, 2021
 # Tiago <tiago.henrique.cco@gmail.com>, 2021
 # Carlos Roberto Almeida França <crafranca@gmail.com>, 2021
+# Isaac Pinheiro <isaacpnh@gmail.com>, 2021
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-10-03 16:10+0700\n"
+"POT-Creation-Date: 2021-10-07 19:43+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
-"Last-Translator: Carlos Roberto Almeida França <crafranca@gmail.com>, 2021\n"
+"Last-Translator: Isaac Pinheiro <isaacpnh@gmail.com>, 2021\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/stellarium/teams/80998/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -93,7 +94,7 @@ msgstr "Rótulos do Asterismo"
 
 #: src/core/modules/AsterismMgr.cpp:101
 msgid "Toggle single asterism selection mode"
-msgstr ""
+msgstr "Alternar para modo de seleção de asterismo único"
 
 #: src/core/modules/AsterismMgr.cpp:102
 msgid "Ray helpers"
@@ -526,97 +527,97 @@ msgid "Compass marks"
 msgstr "Marcações da bússola"
 
 #. TRANSLATORS: North
-#: src/core/modules/LandscapeMgr.cpp:254 src/core/modules/Planet.cpp:1080
+#: src/core/modules/LandscapeMgr.cpp:254 src/core/modules/Planet.cpp:1088
 msgctxt "compass direction"
 msgid "N"
 msgstr "N"
 
 #. TRANSLATORS: South
-#: src/core/modules/LandscapeMgr.cpp:256 src/core/modules/Planet.cpp:1072
+#: src/core/modules/LandscapeMgr.cpp:256 src/core/modules/Planet.cpp:1080
 msgctxt "compass direction"
 msgid "S"
 msgstr "S"
 
 #. TRANSLATORS: East
-#: src/core/modules/LandscapeMgr.cpp:258 src/core/modules/Planet.cpp:1084
+#: src/core/modules/LandscapeMgr.cpp:258 src/core/modules/Planet.cpp:1092
 msgctxt "compass direction"
 msgid "E"
 msgstr "L"
 
 #. TRANSLATORS: West
-#: src/core/modules/LandscapeMgr.cpp:260 src/core/modules/Planet.cpp:1076
+#: src/core/modules/LandscapeMgr.cpp:260 src/core/modules/Planet.cpp:1084
 msgctxt "compass direction"
 msgid "W"
 msgstr "O"
 
 #. TRANSLATORS: Northeast
-#: src/core/modules/LandscapeMgr.cpp:262 src/core/modules/Planet.cpp:1082
+#: src/core/modules/LandscapeMgr.cpp:262 src/core/modules/Planet.cpp:1090
 msgctxt "compass direction"
 msgid "NE"
 msgstr "NE"
 
 #. TRANSLATORS: Southeast
-#: src/core/modules/LandscapeMgr.cpp:264 src/core/modules/Planet.cpp:1086
+#: src/core/modules/LandscapeMgr.cpp:264 src/core/modules/Planet.cpp:1094
 msgctxt "compass direction"
 msgid "SE"
 msgstr "SE"
 
 #. TRANSLATORS: Southwest
-#: src/core/modules/LandscapeMgr.cpp:266 src/core/modules/Planet.cpp:1074
+#: src/core/modules/LandscapeMgr.cpp:266 src/core/modules/Planet.cpp:1082
 msgctxt "compass direction"
 msgid "SW"
 msgstr "SO"
 
 #. TRANSLATORS: Northwest
-#: src/core/modules/LandscapeMgr.cpp:268 src/core/modules/Planet.cpp:1078
+#: src/core/modules/LandscapeMgr.cpp:268 src/core/modules/Planet.cpp:1086
 msgctxt "compass direction"
 msgid "NW"
 msgstr "NO"
 
 #. TRANSLATORS: North-northeast
-#: src/core/modules/LandscapeMgr.cpp:270 src/core/modules/Planet.cpp:1081
+#: src/core/modules/LandscapeMgr.cpp:270 src/core/modules/Planet.cpp:1089
 msgctxt "compass direction"
 msgid "NNE"
 msgstr "NNE"
 
 #. TRANSLATORS: East-northeast
-#: src/core/modules/LandscapeMgr.cpp:272 src/core/modules/Planet.cpp:1083
+#: src/core/modules/LandscapeMgr.cpp:272 src/core/modules/Planet.cpp:1091
 msgctxt "compass direction"
 msgid "ENE"
 msgstr "LNE"
 
 #. TRANSLATORS: East-southeast
-#: src/core/modules/LandscapeMgr.cpp:274 src/core/modules/Planet.cpp:1085
+#: src/core/modules/LandscapeMgr.cpp:274 src/core/modules/Planet.cpp:1093
 msgctxt "compass direction"
 msgid "ESE"
 msgstr "LSE"
 
 #. TRANSLATORS: South-southeast
-#: src/core/modules/LandscapeMgr.cpp:276 src/core/modules/Planet.cpp:1087
+#: src/core/modules/LandscapeMgr.cpp:276 src/core/modules/Planet.cpp:1095
 msgctxt "compass direction"
 msgid "SSE"
 msgstr "SSE"
 
 #. TRANSLATORS: South-southwest
-#: src/core/modules/LandscapeMgr.cpp:278 src/core/modules/Planet.cpp:1073
+#: src/core/modules/LandscapeMgr.cpp:278 src/core/modules/Planet.cpp:1081
 msgctxt "compass direction"
 msgid "SSW"
 msgstr "SSO"
 
 #. TRANSLATORS: West-southwest
-#: src/core/modules/LandscapeMgr.cpp:280 src/core/modules/Planet.cpp:1075
+#: src/core/modules/LandscapeMgr.cpp:280 src/core/modules/Planet.cpp:1083
 msgctxt "compass direction"
 msgid "WSW"
 msgstr "OSO"
 
 #. TRANSLATORS: West-northwest
-#: src/core/modules/LandscapeMgr.cpp:282 src/core/modules/Planet.cpp:1077
+#: src/core/modules/LandscapeMgr.cpp:282 src/core/modules/Planet.cpp:1085
 msgctxt "compass direction"
 msgid "WNW"
 msgstr "ONO"
 
 #. TRANSLATORS: North-northwest
-#: src/core/modules/LandscapeMgr.cpp:284 src/core/modules/Planet.cpp:1079
+#: src/core/modules/LandscapeMgr.cpp:284 src/core/modules/Planet.cpp:1087
 msgctxt "compass direction"
 msgid "NNW"
 msgstr "NNO"
@@ -817,7 +818,7 @@ msgstr "arco"
 #: src/core/modules/NomenclatureItem.cpp:405
 msgctxt "landform"
 msgid "astrum"
-msgstr ""
+msgstr "astrum"
 
 #. TRANSLATORS: Chain of craters
 #: src/core/modules/NomenclatureItem.cpp:407
@@ -884,7 +885,7 @@ msgstr "fácula"
 #: src/core/modules/NomenclatureItem.cpp:427
 msgctxt "landform"
 msgid "farrum"
-msgstr ""
+msgstr "farrum"
 
 #. TRANSLATORS: A very low curvilinear ridge with a scalloped pattern
 #: src/core/modules/NomenclatureItem.cpp:429
@@ -909,7 +910,7 @@ msgstr "calha"
 #: src/core/modules/NomenclatureItem.cpp:435
 msgctxt "landform"
 msgid "fretum"
-msgstr ""
+msgstr "fretum"
 
 #. TRANSLATORS: Long, narrow depression
 #: src/core/modules/NomenclatureItem.cpp:437
@@ -973,7 +974,7 @@ msgstr "linha"
 #: src/core/modules/NomenclatureItem.cpp:455
 msgctxt "landform"
 msgid "lingula"
-msgstr ""
+msgstr "lingula"
 
 #. TRANSLATORS: Dark spot, may be irregular
 #: src/core/modules/NomenclatureItem.cpp:457
@@ -1079,7 +1080,7 @@ msgstr "Recurso satelital"
 #: src/core/modules/NomenclatureItem.cpp:489
 msgctxt "landform"
 msgid "saxum"
-msgstr ""
+msgstr "saxum"
 
 #. TRANSLATORS: Lobate or irregular scarp
 #: src/core/modules/NomenclatureItem.cpp:491
@@ -1360,7 +1361,7 @@ msgstr "Característica crio-vulcânica"
 #. TRANSLATORS: Description for landform 'promontorium'
 #: src/core/modules/NomenclatureItem.cpp:593
 msgid "'Cape'; headland promontoria."
-msgstr ""
+msgstr "'Cabo'; cabeceira do promontório."
 
 #. TRANSLATORS: Description for landform 'regio'
 #: src/core/modules/NomenclatureItem.cpp:595
@@ -1413,7 +1414,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'sinus'
 #: src/core/modules/NomenclatureItem.cpp:611
 msgid "'Bay'; small plain."
-msgstr ""
+msgstr "'Baía'; pequena planície."
 
 #. TRANSLATORS: Description for landform 'sulcus'
 #: src/core/modules/NomenclatureItem.cpp:613
@@ -2098,8 +2099,8 @@ msgstr "Eclíptica"
 msgid "Hourly motion"
 msgstr "Movimento horário"
 
-#: src/core/modules/Planet.cpp:569 src/core/modules/Planet.cpp:1133
-#: src/core/modules/Planet.cpp:1142 src/core/modules/StarWrapper.cpp:329
+#: src/core/modules/Planet.cpp:569 src/core/modules/Planet.cpp:1141
+#: src/core/modules/Planet.cpp:1150 src/core/modules/StarWrapper.cpp:329
 #: plugins/Pulsars/src/Pulsar.cpp:203
 msgctxt "into the direction of"
 msgid "towards"
@@ -2176,7 +2177,7 @@ msgstr "Iluminado"
 
 #: src/core/modules/Planet.cpp:776
 msgid "Elong. in Ecl.Long."
-msgstr ""
+msgstr "Elong. em Ecl.Long."
 
 #: src/core/modules/Planet.cpp:791 src/gui/AstroCalcDialog.cpp:6292
 #: src/gui/AstroCalcDialog.cpp:6436 src/gui/AstroCalcDialog.cpp:6453
@@ -2184,7 +2185,7 @@ msgid "Angular distance"
 msgstr "Distância angular"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:809 src/core/modules/Planet.cpp:971
+#: src/core/modules/Planet.cpp:809 src/core/modules/Planet.cpp:973
 #: src/core/modules/StarWrapper.cpp:349 src/gui/AstroCalcDialog.cpp:6240
 msgctxt "duration"
 msgid "days"
@@ -2198,140 +2199,147 @@ msgstr "Período Sideral"
 msgid "Synodic period"
 msgstr "Período sinódico"
 
-#: src/core/modules/Planet.cpp:980
+#. TRANSLATORS: Unit of measure for speed - meters per second
+#: src/core/modules/Planet.cpp:965
+msgctxt "speed"
+msgid "m/s"
+msgstr "m/s"
+
+#: src/core/modules/Planet.cpp:982
 msgid "Sidereal day"
 msgstr "Dia Sideral"
 
-#: src/core/modules/Planet.cpp:982
+#: src/core/modules/Planet.cpp:984
 msgid "Mean solar day"
 msgstr "Dia Solar Médio"
 
-#: src/core/modules/Planet.cpp:988
+#: src/core/modules/Planet.cpp:990
 msgid "The period of rotation is chaotic"
 msgstr "O período de rotação é caótico"
 
-#: src/core/modules/Planet.cpp:993 src/core/modules/Planet.cpp:999
+#: src/core/modules/Planet.cpp:996 src/core/modules/Planet.cpp:998
+#: src/core/modules/Planet.cpp:1005 src/core/modules/Planet.cpp:1007
 msgid "Equatorial rotation velocity"
 msgstr "Velocidade de rotação no equador"
 
-#: src/core/modules/Planet.cpp:1023
+#: src/core/modules/Planet.cpp:1031
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "Lua nova"
 
-#: src/core/modules/Planet.cpp:1025
+#: src/core/modules/Planet.cpp:1033
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "Lua crescente"
 
-#: src/core/modules/Planet.cpp:1027
+#: src/core/modules/Planet.cpp:1035
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "Quarto crescente"
 
-#: src/core/modules/Planet.cpp:1029
+#: src/core/modules/Planet.cpp:1037
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "Lua crescente gibosa"
 
-#: src/core/modules/Planet.cpp:1031
+#: src/core/modules/Planet.cpp:1039
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "Lua cheia"
 
-#: src/core/modules/Planet.cpp:1033
+#: src/core/modules/Planet.cpp:1041
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "Lua minguante gibosa"
 
-#: src/core/modules/Planet.cpp:1035
+#: src/core/modules/Planet.cpp:1043
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "Quarto minguante"
 
-#: src/core/modules/Planet.cpp:1037
+#: src/core/modules/Planet.cpp:1045
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "Lua minguante"
 
-#: src/core/modules/Planet.cpp:1045
+#: src/core/modules/Planet.cpp:1053
 msgid "Moon age"
 msgstr "Idade da Lua"
 
-#: src/core/modules/Planet.cpp:1045
+#: src/core/modules/Planet.cpp:1053
 msgid "days old"
 msgstr "dias de idade"
 
-#: src/core/modules/Planet.cpp:1065 src/core/modules/Planet.cpp:1068
+#: src/core/modules/Planet.cpp:1073 src/core/modules/Planet.cpp:1076
 msgid "Position angle of bright limb"
 msgstr "Ângulo de posição do bordo brilhante"
 
-#: src/core/modules/Planet.cpp:1132 src/core/modules/Planet.cpp:1141
-#: src/core/modules/Planet.cpp:1177 src/core/modules/Planet.cpp:1184
+#: src/core/modules/Planet.cpp:1140 src/core/modules/Planet.cpp:1149
+#: src/core/modules/Planet.cpp:1185 src/core/modules/Planet.cpp:1192
 msgid "Position Angle of axis"
 msgstr "Posição angular do eixo"
 
-#: src/core/modules/Planet.cpp:1133 src/core/modules/Planet.cpp:1134
-#: src/core/modules/Planet.cpp:1142 src/core/modules/Planet.cpp:1143
+#: src/core/modules/Planet.cpp:1141 src/core/modules/Planet.cpp:1142
+#: src/core/modules/Planet.cpp:1150 src/core/modules/Planet.cpp:1151
 msgid "Libration"
 msgstr "Libração"
 
-#: src/core/modules/Planet.cpp:1135 src/core/modules/Planet.cpp:1144
-#: src/core/modules/Planet.cpp:1179 src/core/modules/Planet.cpp:1186
+#: src/core/modules/Planet.cpp:1143 src/core/modules/Planet.cpp:1152
+#: src/core/modules/Planet.cpp:1187 src/core/modules/Planet.cpp:1194
 msgid "Subsolar point"
 msgstr "Ponto subsolar"
 
-#: src/core/modules/Planet.cpp:1136 src/core/modules/Planet.cpp:1145
+#: src/core/modules/Planet.cpp:1144 src/core/modules/Planet.cpp:1153
 msgid "Colongitude"
 msgstr "Colongitude"
 
-#: src/core/modules/Planet.cpp:1178 src/core/modules/Planet.cpp:1185
+#: src/core/modules/Planet.cpp:1186 src/core/modules/Planet.cpp:1193
 msgid "Center point"
 msgstr "Ponto central"
 
-#: src/core/modules/Planet.cpp:1197
+#: src/core/modules/Planet.cpp:1205
 msgid "Eclipse obscuration"
 msgstr "Obscurecimento do eclipse"
 
-#: src/core/modules/Planet.cpp:1206
+#: src/core/modules/Planet.cpp:1214
 msgid "Eclipse magnitude"
 msgstr "Magnitude do eclipse"
 
-#: src/core/modules/Planet.cpp:1231
+#: src/core/modules/Planet.cpp:1239
 msgid "Center of solar eclipse (Lat./Long.)"
 msgstr "Centro do eclipse solar (Lat./Long.)"
 
-#: src/core/modules/Planet.cpp:1242
+#: src/core/modules/Planet.cpp:1250
 msgid "Shadow center point is"
 msgstr "O ponto central da sombra é"
 
-#: src/core/modules/Planet.cpp:1244
+#: src/core/modules/Planet.cpp:1252
 msgid "km towards azimuth"
 msgstr "km até o azimute "
 
-#: src/core/modules/Planet.cpp:1248
+#: src/core/modules/Planet.cpp:1256
 msgid "Magnitude of central eclipse"
 msgstr "Magnitude do eclipse central"
 
-#: src/core/modules/Planet.cpp:1251
+#: src/core/modules/Planet.cpp:1259
 msgctxt "type of solar eclipse"
 msgid "(annular)"
 msgstr "(anular)"
 
-#: src/core/modules/Planet.cpp:1253
+#: src/core/modules/Planet.cpp:1261
 msgctxt "type of solar eclipse"
 msgid "(total)"
 msgstr "(total)"
 
-#: src/core/modules/Planet.cpp:1268
+#: src/core/modules/Planet.cpp:1276
 msgid "Penumbral eclipse magnitude"
 msgstr "Magnitude do eclipse penumbral"
 
-#: src/core/modules/Planet.cpp:1271
+#: src/core/modules/Planet.cpp:1279
 msgid "Umbral eclipse magnitude"
 msgstr "Magnitude do eclipse umbral"
 
-#: src/core/modules/Planet.cpp:1278
+#: src/core/modules/Planet.cpp:1286
 msgid "Albedo"
 msgstr "Albedo"
 
@@ -2631,7 +2639,7 @@ msgstr "Inicializando objetos customizados..."
 
 #: src/core/StelApp.cpp:595
 msgid "Initializing highlights..."
-msgstr ""
+msgstr "Inicializando destaques..."
 
 #: src/core/StelApp.cpp:603
 msgid "Initializing scripting..."
@@ -2647,7 +2655,7 @@ msgstr "Modo noturno"
 
 #: src/core/StelApp.cpp:647
 msgid "Initializing SPOUT sender..."
-msgstr ""
+msgstr "Inicializando remetente SPOUD..."
 
 #: src/core/StelApp.cpp:657
 msgid "Cannot create Spout sender. See log for details."
@@ -2756,7 +2764,7 @@ msgstr "Avançar um mês sinódico"
 
 #: src/core/StelCore.cpp:288
 msgid "Add 1 saros"
-msgstr ""
+msgstr "Adicionar 1 saros"
 
 #: src/core/StelCore.cpp:289
 msgid "Add 1 draconic month"
@@ -2808,7 +2816,7 @@ msgstr "Avançar um ano gaussiano"
 
 #: src/core/StelCore.cpp:301
 msgid "Add 1 calendric month"
-msgstr ""
+msgstr "Adicionar 1 mês calendário"
 
 #: src/core/StelCore.cpp:302
 msgid "Subtract 1 sidereal day"
@@ -2832,7 +2840,7 @@ msgstr "Retroceder um mês sinódico"
 
 #: src/core/StelCore.cpp:307
 msgid "Subtract 1 saros"
-msgstr ""
+msgstr "Remover 1 saros"
 
 #: src/core/StelCore.cpp:308
 msgid "Subtract 1 draconic month"
@@ -2884,7 +2892,7 @@ msgstr "Retroceder um ano gaussiano"
 
 #: src/core/StelCore.cpp:320
 msgid "Subtract 1 calendric month"
-msgstr ""
+msgstr "Remover 1 mês calendário"
 
 #: src/core/StelCore.cpp:322
 msgid "Set home planet to selected planet"
@@ -3134,6 +3142,9 @@ msgid ""
 "<em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' "
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
+"E. M. Reingold & N. Dershowitz apresentam dados polinomiais em <em>Cálculos "
+"calendários</em> (4ª ed. 2018) e nas suas <em>Tabulações calendárias</em> "
+"(2002). Baseado em <em>Algoritmos astronômicos</em> de Jean Meeus (1991)."
 
 #: src/core/StelCore.cpp:2355
 #, qt-format
@@ -3237,6 +3248,9 @@ msgid ""
 "Acceleration of the Moon and the Universe - the Mass of the Graviton</em> "
 "(%1) and based on C. Schoch's formula (1931)."
 msgstr ""
+"Esta solução de G. Henriksson foi publicado no artigo <em>A aceleração da "
+"Lua e do universo - a massa da gravidade</em> (%1) e baseado na formula de "
+"C. Schoch (1931)."
 
 #: src/core/StelCore.cpp:2382
 #, qt-format
@@ -3410,6 +3424,8 @@ msgid ""
 "projection</i>, sometimes called the Sanson-Flamsteed or the Mercator equal-"
 "area projection."
 msgstr ""
+"A projeção senoidal é uma<i>projeção de área pseudocilíndrica</i>, as vezes "
+"chamada de Sanson-Flamsteed ou de projeção de área igual a Mercator."
 
 #: src/core/StelProjectorClasses.cpp:512
 msgid "Miller cylindrical"
@@ -3421,6 +3437,9 @@ msgid ""
 "proposed by Osborn Maitland Miller (1897-1979) in 1942. The poles are no "
 "longer mapped to infinity."
 msgstr ""
+"A projeção cilíndrica Miller é uma projeção Mercator modificada, proposta "
+"por Osborn Maitland Miller (1897-1979) em 1942. Os polos não são mais "
+"mapeados para o infinito."
 
 #: src/core/StelObject.cpp:336
 msgctxt "coordinates for current epoch"
@@ -3519,34 +3538,34 @@ msgstr "Circumpolar (nunca se põe)"
 #. with upper culmination between pole and zenith
 #: src/core/StelObject.cpp:761
 msgid "Max. E. Digression"
-msgstr ""
+msgstr "Maior desvio oriental"
 
 #. TRANSLATORS: azimuth (abbrev.)
 #: src/core/StelObject.cpp:763
 msgctxt "celestial coordinate system"
 msgid "A"
-msgstr ""
+msgstr "A"
 
 #: src/core/StelObject.cpp:763
 msgctxt "celestial coordinate system"
 msgid "Az."
-msgstr ""
+msgstr "Az."
 
 #: src/core/StelObject.cpp:765
 msgctxt "celestial coordinate system"
 msgid "h"
-msgstr ""
+msgstr "h"
 
 #: src/core/StelObject.cpp:765
 msgctxt "celestial coordinate system"
 msgid "HA"
-msgstr ""
+msgstr "HA"
 
 #. TRANSLATORS: Greatest Western Digression is the maximum western azimuth for
 #. stars with upper culmination between pole and zenith
 #: src/core/StelObject.cpp:791
 msgid "Max. W. Digression"
-msgstr ""
+msgstr "Maior desvio ocidental"
 
 #: src/core/StelObject.cpp:826
 msgid "Parallactic Angle"
@@ -3594,27 +3613,27 @@ msgstr "Ocaso anterior do objeto selecionado"
 
 #: src/core/StelObjectMgr.cpp:66
 msgid "Next morning twilight"
-msgstr ""
+msgstr "Próximo crepúsculo matinal"
 
 #: src/core/StelObjectMgr.cpp:67
 msgid "Next evening twilight"
-msgstr ""
+msgstr "Próximo crepúsculo vespertino"
 
 #: src/core/StelObjectMgr.cpp:68
 msgid "Today's morning twilight"
-msgstr ""
+msgstr "Crepúsculo da matinal de hoje"
 
 #: src/core/StelObjectMgr.cpp:69
 msgid "Today's evening twilight"
-msgstr ""
+msgstr "Crepúsculo vespertino de hoje"
 
 #: src/core/StelObjectMgr.cpp:70
 msgid "Previous morning twilight"
-msgstr ""
+msgstr "Crepúsculo matinal anterior"
 
 #: src/core/StelObjectMgr.cpp:71
 msgid "Previous evening twilight"
-msgstr ""
+msgstr "Crepúsculo vespertino anterior"
 
 #: src/core/StelSkyLayerMgr.cpp:85
 msgid "Deep-sky objects background images"
@@ -3666,13 +3685,15 @@ msgstr ""
 #: src/core/StelSkyCultureMgr.cpp:185
 msgctxt "sky culture classification"
 msgid "comparative"
-msgstr ""
+msgstr "comparativo"
 
 #: src/core/StelSkyCultureMgr.cpp:186
 msgid ""
 "Compares and confronts elements from at least two sky cultures with each "
 "other."
 msgstr ""
+"Compara e confronta elementos de pelo menos duas culturas celestes entre "
+"elas."
 
 #: src/core/StelSkyCultureMgr.cpp:190
 msgctxt "sky culture classification"
@@ -4440,15 +4461,15 @@ msgstr "MM-DD-AAAA"
 
 #: src/gui/ConfigurationDialog.cpp:1866
 msgid "ww, yyyy-mm-dd"
-msgstr ""
+msgstr "ss, aaaa-mm-dd"
 
 #: src/gui/ConfigurationDialog.cpp:1867
 msgid "ww, dd-mm-yyyy"
-msgstr ""
+msgstr "ss, dd-mm-aaaa"
 
 #: src/gui/ConfigurationDialog.cpp:1868
 msgid "ww, mm-dd-yyyy"
-msgstr ""
+msgstr "ss, mm-dd-aaaa"
 
 #: src/gui/ConfigurationDialog.cpp:1900
 msgid "12-hour format"
@@ -4461,7 +4482,7 @@ msgstr "Formato de 24 horas"
 #: src/gui/ConfigurationDialog.cpp:1927
 msgctxt "disabled"
 msgid "None"
-msgstr ""
+msgstr "Nenhum"
 
 #: src/gui/ConfigurationDialog.cpp:1928
 msgid "5/6/5 bits"
@@ -4527,7 +4548,7 @@ msgstr "Aproximar/afastar"
 #. TRANSLATORS: The char mean "and"
 #: src/gui/HelpDialog.cpp:265
 msgid "&"
-msgstr ""
+msgstr "e"
 
 #: src/gui/HelpDialog.cpp:267
 msgid "Time dragging"
@@ -4535,7 +4556,7 @@ msgstr "Arrastando o tempo"
 
 #: src/gui/HelpDialog.cpp:268
 msgid "left mouse drag"
-msgstr ""
+msgstr "arraste com o botão esquerdo do mouse"
 
 #: src/gui/HelpDialog.cpp:269
 msgid "Time scrolling: minutes"
@@ -4544,7 +4565,7 @@ msgstr "Tempo de deslocamento: minutos"
 #: src/gui/HelpDialog.cpp:270 src/gui/HelpDialog.cpp:272
 #: src/gui/HelpDialog.cpp:274 src/gui/HelpDialog.cpp:276
 msgid "mouse wheel"
-msgstr ""
+msgstr "roda do mouse"
 
 #: src/gui/HelpDialog.cpp:271
 msgid "Time scrolling: hours"
@@ -4572,7 +4593,7 @@ msgstr "Limpar seleção"
 
 #: src/gui/HelpDialog.cpp:285
 msgid "& left click"
-msgstr ""
+msgstr "e clique com o botão esquerdo"
 
 #: src/gui/HelpDialog.cpp:287
 msgid "Right click"
@@ -4584,7 +4605,7 @@ msgstr "Adicionar marcador personalizado"
 
 #: src/gui/HelpDialog.cpp:291
 msgid "left click"
-msgstr ""
+msgstr "clique com o botão esquerdo"
 
 #: src/gui/HelpDialog.cpp:293
 msgid "Delete marker closest to mouse cursor"
@@ -4592,7 +4613,7 @@ msgstr "Eliminar o marcador mais próximo do cursor do mouse"
 
 #: src/gui/HelpDialog.cpp:294 src/gui/HelpDialog.cpp:297
 msgid "right click"
-msgstr ""
+msgstr "clique com o botão direito"
 
 #: src/gui/HelpDialog.cpp:296
 msgid "Delete all custom markers"
@@ -4617,13 +4638,15 @@ msgstr "Ativar ITU"
 
 #: src/gui/HelpDialog.cpp:346
 msgid "Special local keys"
-msgstr ""
+msgstr "atalhos locais especiais"
 
 #: src/gui/HelpDialog.cpp:347
 msgid ""
 "All these hotkeys are locally available to run when specific window or tab "
 "is opened."
 msgstr ""
+"Todas estas teclas de atalho estão disponíveis para execução localmente "
+"quando uma janela específica está aberta."
 
 #: src/gui/HelpDialog.cpp:348 src/ui_scriptConsole.h:380
 msgid "Script console"
@@ -4631,15 +4654,15 @@ msgstr "Console de apresentações"
 
 #: src/gui/HelpDialog.cpp:349 src/ui_scriptConsole.h:383
 msgid "Load script from file"
-msgstr ""
+msgstr "Carregar texto do arquivo"
 
 #: src/gui/HelpDialog.cpp:351 src/ui_scriptConsole.h:387
 msgid "Save script to file"
-msgstr ""
+msgstr "Salvar texto do arquivo"
 
 #: src/gui/HelpDialog.cpp:353 src/ui_scriptConsole.h:405
 msgid "Run script"
-msgstr ""
+msgstr "Executar texto"
 
 #: src/gui/HelpDialog.cpp:355 src/ui_astroCalcDialog.h:1693
 msgid "Astronomical calculations"
@@ -4742,7 +4765,7 @@ msgstr "Desenvolvedor: %1"
 #: src/gui/HelpDialog.cpp:485
 #, qt-format
 msgid "Sky cultures researcher: %1"
-msgstr ""
+msgstr "Pesquisador de culturas celestes: %1"
 
 #: src/gui/HelpDialog.cpp:486
 msgid "Former Developers"
@@ -4807,10 +4830,12 @@ msgid ""
 "If the Stellarium planetarium was helpful for your research work, the "
 "following acknowledgment would be appreciated:"
 msgstr ""
+"Se o Stellarium planetarium ajudou em seu trabalho de pesquisa, agradecemos "
+"o seguinte reconhecimento:"
 
 #: src/gui/HelpDialog.cpp:508
 msgid "This research has made use of the Stellarium planetarium"
-msgstr ""
+msgstr "Esta pesquisa foi feita utilizando o Stellarium planetarium"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:511
@@ -4818,6 +4843,8 @@ msgid ""
 "Or you may {download the BibTeX file of the paper} to create another "
 "citation format."
 msgstr ""
+"Ou você pode {baixar o arquivo BibTeX do artigo} para criar outro formato de"
+" citação."
 
 #: src/gui/StelGui.cpp:229
 msgid "Windows"
@@ -4889,7 +4916,7 @@ msgstr "Janela de Cálculos Astronômicos"
 
 #: src/gui/StelGui.cpp:253
 msgid "Observing list"
-msgstr ""
+msgstr "Lista de observação"
 
 #: src/gui/StelGui.cpp:254
 msgid "Copy selected object information to clipboard"
@@ -4934,7 +4961,7 @@ msgstr "min/s"
 #: src/gui/StelGuiItems.cpp:752
 msgctxt "unit of measurement"
 msgid "hr/s"
-msgstr ""
+msgstr "hr/s"
 
 #. TRANSLATORS: unit of measurement: days per second
 #: src/gui/StelGuiItems.cpp:758
@@ -4954,7 +4981,7 @@ msgstr "Velocidade de simulação"
 
 #: src/gui/StelGuiItems.cpp:813
 msgid "flight"
-msgstr ""
+msgstr "voo"
 
 #: src/gui/StelGuiItems.cpp:847
 msgid "planetocentric distance"
@@ -5131,7 +5158,7 @@ msgstr "A maior taxa de todas (Leônidas em 1833)"
 #: src/gui/ViewDialog.cpp:1203
 msgctxt "magnitude algorithm"
 msgid "G. Müller (1893)"
-msgstr ""
+msgstr "G. Müller (1893)"
 
 #: src/gui/ViewDialog.cpp:1204
 msgctxt "magnitude algorithm"
@@ -5151,7 +5178,7 @@ msgstr "Suplemento Explicativo (2013)"
 #: src/gui/ViewDialog.cpp:1207
 msgctxt "magnitude algorithm"
 msgid "Mallama & Hilton (2018)"
-msgstr ""
+msgstr "Mallama & Hilton (2018)"
 
 #: src/gui/ViewDialog.cpp:1208
 msgctxt "magnitude algorithm"

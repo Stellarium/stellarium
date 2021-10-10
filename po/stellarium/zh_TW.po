@@ -6,17 +6,17 @@
 # Translators:
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2017
 # 殳玮 孙 <itun@qq.com>, 2018
-# freemanli <freeman.tam@gmail.com>, 2021
 # Enfong Tsao <doggie22768384@gmail.com>, 2021
+# freemanli <freeman.tam@gmail.com>, 2021
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-10-03 16:10+0700\n"
+"POT-Creation-Date: 2021-10-07 19:43+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
-"Last-Translator: Enfong Tsao <doggie22768384@gmail.com>, 2021\n"
+"Last-Translator: freemanli <freeman.tam@gmail.com>, 2021\n"
 "Language-Team: Chinese (Taiwan) (https://www.transifex.com/stellarium/teams/80998/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -516,97 +516,97 @@ msgid "Compass marks"
 msgstr "羅盤刻度"
 
 #. TRANSLATORS: North
-#: src/core/modules/LandscapeMgr.cpp:254 src/core/modules/Planet.cpp:1080
+#: src/core/modules/LandscapeMgr.cpp:254 src/core/modules/Planet.cpp:1088
 msgctxt "compass direction"
 msgid "N"
 msgstr "北"
 
 #. TRANSLATORS: South
-#: src/core/modules/LandscapeMgr.cpp:256 src/core/modules/Planet.cpp:1072
+#: src/core/modules/LandscapeMgr.cpp:256 src/core/modules/Planet.cpp:1080
 msgctxt "compass direction"
 msgid "S"
 msgstr "南"
 
 #. TRANSLATORS: East
-#: src/core/modules/LandscapeMgr.cpp:258 src/core/modules/Planet.cpp:1084
+#: src/core/modules/LandscapeMgr.cpp:258 src/core/modules/Planet.cpp:1092
 msgctxt "compass direction"
 msgid "E"
 msgstr "東"
 
 #. TRANSLATORS: West
-#: src/core/modules/LandscapeMgr.cpp:260 src/core/modules/Planet.cpp:1076
+#: src/core/modules/LandscapeMgr.cpp:260 src/core/modules/Planet.cpp:1084
 msgctxt "compass direction"
 msgid "W"
 msgstr "西"
 
 #. TRANSLATORS: Northeast
-#: src/core/modules/LandscapeMgr.cpp:262 src/core/modules/Planet.cpp:1082
+#: src/core/modules/LandscapeMgr.cpp:262 src/core/modules/Planet.cpp:1090
 msgctxt "compass direction"
 msgid "NE"
 msgstr "東北"
 
 #. TRANSLATORS: Southeast
-#: src/core/modules/LandscapeMgr.cpp:264 src/core/modules/Planet.cpp:1086
+#: src/core/modules/LandscapeMgr.cpp:264 src/core/modules/Planet.cpp:1094
 msgctxt "compass direction"
 msgid "SE"
 msgstr "東南"
 
 #. TRANSLATORS: Southwest
-#: src/core/modules/LandscapeMgr.cpp:266 src/core/modules/Planet.cpp:1074
+#: src/core/modules/LandscapeMgr.cpp:266 src/core/modules/Planet.cpp:1082
 msgctxt "compass direction"
 msgid "SW"
 msgstr "西南"
 
 #. TRANSLATORS: Northwest
-#: src/core/modules/LandscapeMgr.cpp:268 src/core/modules/Planet.cpp:1078
+#: src/core/modules/LandscapeMgr.cpp:268 src/core/modules/Planet.cpp:1086
 msgctxt "compass direction"
 msgid "NW"
 msgstr "西北"
 
 #. TRANSLATORS: North-northeast
-#: src/core/modules/LandscapeMgr.cpp:270 src/core/modules/Planet.cpp:1081
+#: src/core/modules/LandscapeMgr.cpp:270 src/core/modules/Planet.cpp:1089
 msgctxt "compass direction"
 msgid "NNE"
 msgstr "北北東"
 
 #. TRANSLATORS: East-northeast
-#: src/core/modules/LandscapeMgr.cpp:272 src/core/modules/Planet.cpp:1083
+#: src/core/modules/LandscapeMgr.cpp:272 src/core/modules/Planet.cpp:1091
 msgctxt "compass direction"
 msgid "ENE"
 msgstr "東北東"
 
 #. TRANSLATORS: East-southeast
-#: src/core/modules/LandscapeMgr.cpp:274 src/core/modules/Planet.cpp:1085
+#: src/core/modules/LandscapeMgr.cpp:274 src/core/modules/Planet.cpp:1093
 msgctxt "compass direction"
 msgid "ESE"
 msgstr "東南東"
 
 #. TRANSLATORS: South-southeast
-#: src/core/modules/LandscapeMgr.cpp:276 src/core/modules/Planet.cpp:1087
+#: src/core/modules/LandscapeMgr.cpp:276 src/core/modules/Planet.cpp:1095
 msgctxt "compass direction"
 msgid "SSE"
 msgstr "南南東"
 
 #. TRANSLATORS: South-southwest
-#: src/core/modules/LandscapeMgr.cpp:278 src/core/modules/Planet.cpp:1073
+#: src/core/modules/LandscapeMgr.cpp:278 src/core/modules/Planet.cpp:1081
 msgctxt "compass direction"
 msgid "SSW"
 msgstr "南南西"
 
 #. TRANSLATORS: West-southwest
-#: src/core/modules/LandscapeMgr.cpp:280 src/core/modules/Planet.cpp:1075
+#: src/core/modules/LandscapeMgr.cpp:280 src/core/modules/Planet.cpp:1083
 msgctxt "compass direction"
 msgid "WSW"
 msgstr "西南西"
 
 #. TRANSLATORS: West-northwest
-#: src/core/modules/LandscapeMgr.cpp:282 src/core/modules/Planet.cpp:1077
+#: src/core/modules/LandscapeMgr.cpp:282 src/core/modules/Planet.cpp:1085
 msgctxt "compass direction"
 msgid "WNW"
 msgstr "西北西"
 
 #. TRANSLATORS: North-northwest
-#: src/core/modules/LandscapeMgr.cpp:284 src/core/modules/Planet.cpp:1079
+#: src/core/modules/LandscapeMgr.cpp:284 src/core/modules/Planet.cpp:1087
 msgctxt "compass direction"
 msgid "NNW"
 msgstr "北北西"
@@ -2066,8 +2066,8 @@ msgstr "黃道"
 msgid "Hourly motion"
 msgstr "每小時移動"
 
-#: src/core/modules/Planet.cpp:569 src/core/modules/Planet.cpp:1133
-#: src/core/modules/Planet.cpp:1142 src/core/modules/StarWrapper.cpp:329
+#: src/core/modules/Planet.cpp:569 src/core/modules/Planet.cpp:1141
+#: src/core/modules/Planet.cpp:1150 src/core/modules/StarWrapper.cpp:329
 #: plugins/Pulsars/src/Pulsar.cpp:203
 msgctxt "into the direction of"
 msgid "towards"
@@ -2144,7 +2144,7 @@ msgstr "被照明的"
 
 #: src/core/modules/Planet.cpp:776
 msgid "Elong. in Ecl.Long."
-msgstr ""
+msgstr "黃經上的距角"
 
 #: src/core/modules/Planet.cpp:791 src/gui/AstroCalcDialog.cpp:6292
 #: src/gui/AstroCalcDialog.cpp:6436 src/gui/AstroCalcDialog.cpp:6453
@@ -2152,7 +2152,7 @@ msgid "Angular distance"
 msgstr "角距離"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:809 src/core/modules/Planet.cpp:971
+#: src/core/modules/Planet.cpp:809 src/core/modules/Planet.cpp:973
 #: src/core/modules/StarWrapper.cpp:349 src/gui/AstroCalcDialog.cpp:6240
 msgctxt "duration"
 msgid "days"
@@ -2166,140 +2166,147 @@ msgstr "恆星周期"
 msgid "Synodic period"
 msgstr "朔望周期"
 
-#: src/core/modules/Planet.cpp:980
+#. TRANSLATORS: Unit of measure for speed - meters per second
+#: src/core/modules/Planet.cpp:965
+msgctxt "speed"
+msgid "m/s"
+msgstr "公尺/秒"
+
+#: src/core/modules/Planet.cpp:982
 msgid "Sidereal day"
 msgstr "恆星日"
 
-#: src/core/modules/Planet.cpp:982
+#: src/core/modules/Planet.cpp:984
 msgid "Mean solar day"
 msgstr "平太陽日"
 
-#: src/core/modules/Planet.cpp:988
+#: src/core/modules/Planet.cpp:990
 msgid "The period of rotation is chaotic"
 msgstr "旋轉週期是不規則的"
 
-#: src/core/modules/Planet.cpp:993 src/core/modules/Planet.cpp:999
+#: src/core/modules/Planet.cpp:996 src/core/modules/Planet.cpp:998
+#: src/core/modules/Planet.cpp:1005 src/core/modules/Planet.cpp:1007
 msgid "Equatorial rotation velocity"
 msgstr "赤道轉速"
 
-#: src/core/modules/Planet.cpp:1023
+#: src/core/modules/Planet.cpp:1031
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "新月"
 
-#: src/core/modules/Planet.cpp:1025
+#: src/core/modules/Planet.cpp:1033
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "眉月"
 
-#: src/core/modules/Planet.cpp:1027
+#: src/core/modules/Planet.cpp:1035
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "上弦月"
 
-#: src/core/modules/Planet.cpp:1029
+#: src/core/modules/Planet.cpp:1037
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "盈凸月"
 
-#: src/core/modules/Planet.cpp:1031
+#: src/core/modules/Planet.cpp:1039
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "滿月"
 
-#: src/core/modules/Planet.cpp:1033
+#: src/core/modules/Planet.cpp:1041
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "虧凸月"
 
-#: src/core/modules/Planet.cpp:1035
+#: src/core/modules/Planet.cpp:1043
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "下弦月"
 
-#: src/core/modules/Planet.cpp:1037
+#: src/core/modules/Planet.cpp:1045
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "殘月"
 
-#: src/core/modules/Planet.cpp:1045
+#: src/core/modules/Planet.cpp:1053
 msgid "Moon age"
 msgstr "月齡"
 
-#: src/core/modules/Planet.cpp:1045
+#: src/core/modules/Planet.cpp:1053
 msgid "days old"
 msgstr "天"
 
-#: src/core/modules/Planet.cpp:1065 src/core/modules/Planet.cpp:1068
+#: src/core/modules/Planet.cpp:1073 src/core/modules/Planet.cpp:1076
 msgid "Position angle of bright limb"
 msgstr "亮邊緣的方位角"
 
-#: src/core/modules/Planet.cpp:1132 src/core/modules/Planet.cpp:1141
-#: src/core/modules/Planet.cpp:1177 src/core/modules/Planet.cpp:1184
+#: src/core/modules/Planet.cpp:1140 src/core/modules/Planet.cpp:1149
+#: src/core/modules/Planet.cpp:1185 src/core/modules/Planet.cpp:1192
 msgid "Position Angle of axis"
 msgstr "軸的方位角"
 
-#: src/core/modules/Planet.cpp:1133 src/core/modules/Planet.cpp:1134
-#: src/core/modules/Planet.cpp:1142 src/core/modules/Planet.cpp:1143
+#: src/core/modules/Planet.cpp:1141 src/core/modules/Planet.cpp:1142
+#: src/core/modules/Planet.cpp:1150 src/core/modules/Planet.cpp:1151
 msgid "Libration"
 msgstr "天平動"
 
-#: src/core/modules/Planet.cpp:1135 src/core/modules/Planet.cpp:1144
-#: src/core/modules/Planet.cpp:1179 src/core/modules/Planet.cpp:1186
+#: src/core/modules/Planet.cpp:1143 src/core/modules/Planet.cpp:1152
+#: src/core/modules/Planet.cpp:1187 src/core/modules/Planet.cpp:1194
 msgid "Subsolar point"
 msgstr "日下點"
 
-#: src/core/modules/Planet.cpp:1136 src/core/modules/Planet.cpp:1145
+#: src/core/modules/Planet.cpp:1144 src/core/modules/Planet.cpp:1153
 msgid "Colongitude"
 msgstr "餘經度"
 
-#: src/core/modules/Planet.cpp:1178 src/core/modules/Planet.cpp:1185
+#: src/core/modules/Planet.cpp:1186 src/core/modules/Planet.cpp:1193
 msgid "Center point"
 msgstr "中心點"
 
-#: src/core/modules/Planet.cpp:1197
+#: src/core/modules/Planet.cpp:1205
 msgid "Eclipse obscuration"
 msgstr "食的遮蔽率"
 
-#: src/core/modules/Planet.cpp:1206
+#: src/core/modules/Planet.cpp:1214
 msgid "Eclipse magnitude"
 msgstr "食分"
 
-#: src/core/modules/Planet.cpp:1231
+#: src/core/modules/Planet.cpp:1239
 msgid "Center of solar eclipse (Lat./Long.)"
 msgstr "日食影子中心位置(緯度/經度)"
 
-#: src/core/modules/Planet.cpp:1242
+#: src/core/modules/Planet.cpp:1250
 msgid "Shadow center point is"
 msgstr "距離日食影子中心"
 
-#: src/core/modules/Planet.cpp:1244
+#: src/core/modules/Planet.cpp:1252
 msgid "km towards azimuth"
 msgstr "公里，方位角"
 
-#: src/core/modules/Planet.cpp:1248
+#: src/core/modules/Planet.cpp:1256
 msgid "Magnitude of central eclipse"
 msgstr "日食影子中心的食分"
 
-#: src/core/modules/Planet.cpp:1251
+#: src/core/modules/Planet.cpp:1259
 msgctxt "type of solar eclipse"
 msgid "(annular)"
 msgstr "(日環食)"
 
-#: src/core/modules/Planet.cpp:1253
+#: src/core/modules/Planet.cpp:1261
 msgctxt "type of solar eclipse"
 msgid "(total)"
 msgstr "(日全食)"
 
-#: src/core/modules/Planet.cpp:1268
+#: src/core/modules/Planet.cpp:1276
 msgid "Penumbral eclipse magnitude"
 msgstr "半影食分"
 
-#: src/core/modules/Planet.cpp:1271
+#: src/core/modules/Planet.cpp:1279
 msgid "Umbral eclipse magnitude"
 msgstr "本影食分"
 
-#: src/core/modules/Planet.cpp:1278
+#: src/core/modules/Planet.cpp:1286
 msgid "Albedo"
 msgstr "反照率"
 
@@ -3430,34 +3437,34 @@ msgstr "拱極(位於恆顯區)"
 #. with upper culmination between pole and zenith
 #: src/core/StelObject.cpp:761
 msgid "Max. E. Digression"
-msgstr ""
+msgstr "東大離角(極方位距)"
 
 #. TRANSLATORS: azimuth (abbrev.)
 #: src/core/StelObject.cpp:763
 msgctxt "celestial coordinate system"
 msgid "A"
-msgstr ""
+msgstr "A"
 
 #: src/core/StelObject.cpp:763
 msgctxt "celestial coordinate system"
 msgid "Az."
-msgstr ""
+msgstr "方位角"
 
 #: src/core/StelObject.cpp:765
 msgctxt "celestial coordinate system"
 msgid "h"
-msgstr ""
+msgstr "h"
 
 #: src/core/StelObject.cpp:765
 msgctxt "celestial coordinate system"
 msgid "HA"
-msgstr ""
+msgstr "時角"
 
 #. TRANSLATORS: Greatest Western Digression is the maximum western azimuth for
 #. stars with upper culmination between pole and zenith
 #: src/core/StelObject.cpp:791
 msgid "Max. W. Digression"
-msgstr ""
+msgstr "西大離角(極方位距)"
 
 #: src/core/StelObject.cpp:826
 msgid "Parallactic Angle"
@@ -3505,27 +3512,27 @@ msgstr "選取天體的前次落下"
 
 #: src/core/StelObjectMgr.cpp:66
 msgid "Next morning twilight"
-msgstr ""
+msgstr "下一次曙光"
 
 #: src/core/StelObjectMgr.cpp:67
 msgid "Next evening twilight"
-msgstr ""
+msgstr "下一次暮光"
 
 #: src/core/StelObjectMgr.cpp:68
 msgid "Today's morning twilight"
-msgstr ""
+msgstr "今日曙光"
 
 #: src/core/StelObjectMgr.cpp:69
 msgid "Today's evening twilight"
-msgstr ""
+msgstr "今日暮光"
 
 #: src/core/StelObjectMgr.cpp:70
 msgid "Previous morning twilight"
-msgstr ""
+msgstr "上一次曙光"
 
 #: src/core/StelObjectMgr.cpp:71
 msgid "Previous evening twilight"
-msgstr ""
+msgstr "上一次暮光"
 
 #: src/core/StelSkyLayerMgr.cpp:85
 msgid "Deep-sky objects background images"
@@ -3571,13 +3578,13 @@ msgstr "呈現像是某個來自單一的歷史星圖，或是單一作者的著
 #: src/core/StelSkyCultureMgr.cpp:185
 msgctxt "sky culture classification"
 msgid "comparative"
-msgstr ""
+msgstr "比較"
 
 #: src/core/StelSkyCultureMgr.cpp:186
 msgid ""
 "Compares and confronts elements from at least two sky cultures with each "
 "other."
-msgstr ""
+msgstr "從至少兩種星空述語中對照比較其元素。"
 
 #: src/core/StelSkyCultureMgr.cpp:190
 msgctxt "sky culture classification"
@@ -4622,7 +4629,7 @@ msgstr "開發者: %1"
 #: src/gui/HelpDialog.cpp:485
 #, qt-format
 msgid "Sky cultures researcher: %1"
-msgstr ""
+msgstr "星空述語研究者： %1"
 
 #: src/gui/HelpDialog.cpp:486
 msgid "Former Developers"
@@ -4765,7 +4772,7 @@ msgstr "天文數值計算視窗"
 
 #: src/gui/StelGui.cpp:253
 msgid "Observing list"
-msgstr ""
+msgstr "觀測列表"
 
 #: src/gui/StelGui.cpp:254
 msgid "Copy selected object information to clipboard"
@@ -5939,7 +5946,7 @@ msgstr "明亮的碳星"
 #: src/gui/AstroCalcDialog.cpp:2493 src/gui/AstroCalcDialog.cpp:5252
 #: src/translations.h:457
 msgid "Bright barium stars"
-msgstr ""
+msgstr "明亮鋇星"
 
 #: src/gui/AstroCalcDialog.cpp:3091
 msgid "Magnitude vs. Time"
@@ -6003,14 +6010,14 @@ msgstr "角度大小"
 #: src/gui/AstroCalcDialog.cpp:3195
 msgctxt "axis name"
 msgid "Heliocentric distance"
-msgstr ""
+msgstr "日心距離"
 
 #. TRANSLATORS: The phrase "Transit altitude" may be long in some languages
 #. and you can abbreviate it.
 #: src/gui/AstroCalcDialog.cpp:3201
 msgctxt "axis name"
 msgid "Transit altitude"
-msgstr ""
+msgstr "中天高度"
 
 #. TRANSLATORS: The phrase "Right ascension" may be long in some languages and
 #. you can abbreviate it.
@@ -6356,7 +6363,7 @@ msgstr "角度大小"
 #: src/gui/AstroCalcDialog.cpp:5334
 msgctxt "IAU Constellation"
 msgid "Const."
-msgstr ""
+msgstr "星座"
 
 #: src/gui/AstroCalcDialog.cpp:5452 src/ui_astroCalcDialog.h:1902
 msgid "Limit angular size:"
@@ -6419,7 +6426,7 @@ msgstr "天"
 
 #: src/gui/AstroCalcDialog.cpp:6494
 msgid "Angular distance between the Moon and selected object"
-msgstr ""
+msgstr "月球與所選天體的角距離"
 
 #: src/gui/AstroCalcCustomStepsDialog.cpp:76
 msgctxt "unit of measurement"
@@ -6493,11 +6500,11 @@ msgstr "沙羅(saros)周期"
 
 #: src/gui/ObsListDialog.cpp:147 src/gui/ObsListCreateEditDialog.cpp:155
 msgid "Object name"
-msgstr ""
+msgstr "天體名稱"
 
 #: src/gui/ObsListDialog.cpp:148 src/gui/ObsListCreateEditDialog.cpp:156
 msgid "Localized Object Name"
-msgstr ""
+msgstr "當地的天體名稱"
 
 #: src/gui/ObsListDialog.cpp:153 src/gui/ObsListCreateEditDialog.cpp:161
 #: src/ui_configurationDialog.h:1779
@@ -6506,15 +6513,15 @@ msgstr "星座"
 
 #: src/gui/ObsListCreateEditDialog.cpp:260
 msgid "Unnamed object"
-msgstr ""
+msgstr "未命名天體"
 
 #: src/gui/ObsListCreateEditDialog.cpp:465
 msgid "Export observing list as..."
-msgstr ""
+msgstr "匯出觀測列表為 ..."
 
 #: src/gui/ObsListCreateEditDialog.cpp:480
 msgid "Import observing list"
-msgstr ""
+msgstr "匯入觀測列表"
 
 #: src/gui/DateTimeDialog.cpp:239 src/gui/DateTimeDialog.cpp:240
 msgid "Date and Time in Julian calendar"
@@ -8011,7 +8018,7 @@ msgid ""
 "Right Ascension (2000.0)."
 msgstr ""
 "Ben Crowell "
-"所建的雙筒星空(Binosky)，這是可從雙筒望遠鏡可見的深空天體列表。在此腳本(script)中，我們提供了其中的31個，順序按赤經度(2000.0)排列。"
+"所建的雙筒星空(Binosky)，這是可從雙筒望遠鏡可見的深空天體的觀測列表。在此腳本(script)中，我們提供了其中的31個，順序按赤經度(2000.0)排列。"
 
 #: src/translations.h:631
 msgid ""
@@ -8335,55 +8342,55 @@ msgstr "顯示隱藏檔(&h)"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/North_Africa
 #: src/translations_regions.h:33
 msgid "Northern Africa"
-msgstr ""
+msgstr "北非"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/East_Africa
 #: src/translations_regions.h:36
 msgid "Eastern Africa"
-msgstr ""
+msgstr "東非"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Central_Africa
 #: src/translations_regions.h:39
 msgid "Central Africa"
-msgstr ""
+msgstr "中非"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Southern_Africa
 #: src/translations_regions.h:42
 msgid "Southern Africa"
-msgstr ""
+msgstr "南非"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/West_Africa
 #: src/translations_regions.h:45
 msgid "Western Africa"
-msgstr ""
+msgstr "西非"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Caribbean
 #: src/translations_regions.h:48
 msgid "Caribbean"
-msgstr ""
+msgstr "加勒比地區"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Central_America
 #: src/translations_regions.h:51
 msgid "Central America"
-msgstr ""
+msgstr "中美洲"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/South_America
 #: src/translations_regions.h:54
 msgid "Southern America"
-msgstr ""
+msgstr "南美洲"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Northern_America
 #: src/translations_regions.h:57
 msgid "Northern America"
-msgstr ""
+msgstr "北美洲"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Antarctica
@@ -8395,73 +8402,73 @@ msgstr "南極洲"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/North_Asia
 #: src/translations_regions.h:63
 msgid "Northern Asia"
-msgstr ""
+msgstr "北亞"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Central_Asia
 #: src/translations_regions.h:66
 msgid "Central Asia"
-msgstr ""
+msgstr "中亞"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Eastern_Asia
 #: src/translations_regions.h:69
 msgid "Eastern Asia"
-msgstr ""
+msgstr "東亞"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Southeast_Asia
 #: src/translations_regions.h:72
 msgid "South-eastern Asia"
-msgstr ""
+msgstr "東南亞"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/South_Asia
 #: src/translations_regions.h:75
 msgid "Southern Asia"
-msgstr ""
+msgstr "南亞"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Western_Asia
 #: src/translations_regions.h:78
 msgid "Western Asia"
-msgstr ""
+msgstr "西亞"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Eastern_Europe
 #: src/translations_regions.h:81
 msgid "Eastern Europe"
-msgstr ""
+msgstr "東歐"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Northern_Europe
 #: src/translations_regions.h:84
 msgid "Northern Europe"
-msgstr ""
+msgstr "北歐"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Southern_Europe
 #: src/translations_regions.h:87
 msgid "Southern Europe"
-msgstr ""
+msgstr "南歐"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Western_Europe
 #: src/translations_regions.h:90
 msgid "Western Europe"
-msgstr ""
+msgstr "西歐"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Australasia
 #: src/translations_regions.h:93
 msgid "Australasia"
-msgstr ""
+msgstr "澳大拉西亞"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Melanesia
 #: src/translations_regions.h:96
 msgid "Melanesia"
-msgstr ""
+msgstr "美拉尼西亞"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Micronesia
@@ -8473,531 +8480,531 @@ msgstr "密克羅尼西亞聯邦"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Polynesia
 #: src/translations_regions.h:102
 msgid "Polynesia"
-msgstr ""
+msgstr "玻里尼西亞"
 
 #. TRANSLATORS: Name of region on Mercury
 #: src/translations_regions.h:104
 msgid "Aparangi Planitia"
-msgstr ""
+msgstr "Aparangi 平原"
 
 #. TRANSLATORS: Name of region on Mercury
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Borealis_Planitia
 #: src/translations_regions.h:107
 msgid "Borealis Planitia"
-msgstr ""
+msgstr "北極 平原"
 
 #. TRANSLATORS: Name of region on Mercury
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Budh_Planitia
 #: src/translations_regions.h:110
 msgid "Budh Planitia"
-msgstr ""
+msgstr "部陀 平原"
 
 #. TRANSLATORS: Name of region on Mercury
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Caloris_Planitia
 #: src/translations_regions.h:113
 msgid "Caloris Planitia"
-msgstr ""
+msgstr "卡洛里 平原"
 
 #. TRANSLATORS: Name of region on Mercury
 #: src/translations_regions.h:115
 msgid "Lugus Planitia"
-msgstr ""
+msgstr "Lugus 平原"
 
 #. TRANSLATORS: Name of region on Mercury
 #: src/translations_regions.h:117
 msgid "Mearcair Planitia"
-msgstr ""
+msgstr "Mearcair 平原"
 
 #. TRANSLATORS: Name of region on Mercury
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Odin_Planitia
 #: src/translations_regions.h:120
 msgid "Odin Planitia"
-msgstr ""
+msgstr "奧丁 平原"
 
 #. TRANSLATORS: Name of region on Mercury
 #: src/translations_regions.h:122
 msgid "Otaared Planitia"
-msgstr ""
+msgstr "Otaared 平原"
 
 #. TRANSLATORS: Name of region on Mercury
 #: src/translations_regions.h:124
 msgid "Papsukkal Planitia"
-msgstr ""
+msgstr "Papsukkal 平原"
 
 #. TRANSLATORS: Name of region on Mercury
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Sihtu_Planitia
 #: src/translations_regions.h:127
 msgid "Sihtu Planitia"
-msgstr ""
+msgstr "Sihtu 平原"
 
 #. TRANSLATORS: Name of region on Mercury
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Sobkou_Planitia
 #: src/translations_regions.h:130
 msgid "Sobkou Planitia"
-msgstr ""
+msgstr "Sobkou 平原"
 
 #. TRANSLATORS: Name of region on Mercury
 #: src/translations_regions.h:132
 msgid "Stilbon Planitia"
-msgstr ""
+msgstr "Stilbon 平原"
 
 #. TRANSLATORS: Name of region on Mercury
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Suisei_Planitia
 #: src/translations_regions.h:135
 msgid "Suisei Planitia"
-msgstr ""
+msgstr "Suisei 平原"
 
 #. TRANSLATORS: Name of region on Mercury
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Tir_Planitia
 #: src/translations_regions.h:138
 msgid "Tir Planitia"
-msgstr ""
+msgstr "Tir 平原"
 
 #. TRANSLATORS: Name of region on Mercury
 #: src/translations_regions.h:140
 msgid "Turms Planitia"
-msgstr ""
+msgstr "Turms 平原"
 
 #. TRANSLATORS: Name of region on Mercury
 #: src/translations_regions.h:142
 msgid "Utaridi Planitia"
-msgstr ""
+msgstr "Utaridi 平原"
 
 #. TRANSLATORS: Name of region on Mercury
 #: src/translations_regions.h:144
 msgid "Catuilla Planum"
-msgstr ""
+msgstr "Catuilla 高原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Aphrodite_Terra
 #: src/translations_regions.h:147
 msgid "Aphrodite Terra"
-msgstr ""
+msgstr "阿佛洛狄忒 台地"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Ishtar_Terra
 #: src/translations_regions.h:150
 msgid "Ishtar Terra"
-msgstr ""
+msgstr "伊絲塔 台地"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Lada_Terra
 #: src/translations_regions.h:153
 msgid "Lada Terra"
-msgstr ""
+msgstr "Lada 台地"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Alpha_Regio
 #: src/translations_regions.h:156
 msgid "Alpha Regio"
-msgstr ""
+msgstr "Alpha 區"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Asteria_Regio
 #: src/translations_regions.h:159
 msgid "Asteria Regio"
-msgstr ""
+msgstr "阿斯忒里亞 區"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:162
 msgid "Atla Regio"
-msgstr ""
+msgstr "Atla 區"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:165
 msgid "Bell Regio"
-msgstr ""
+msgstr "貝爾 區"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Beta_Regio
 #: src/translations_regions.h:168
 msgid "Beta Regio"
-msgstr ""
+msgstr "Beta 區"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:171
 msgid "Dione Regio"
-msgstr ""
+msgstr "狄俄涅 區"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:174
 msgid "Dsonkwa Regio"
-msgstr ""
+msgstr "Dsonkwa 區"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:177
 msgid "Eistla Regio"
-msgstr ""
+msgstr "Eistla 區"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:180
 msgid "Hyndla Regio"
-msgstr ""
+msgstr "海恩德拉 區"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:183
 msgid "Imdr Regio"
-msgstr ""
+msgstr "Imdr 區"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:186
 msgid "Ishkus Regio"
-msgstr ""
+msgstr "Ishkus 區"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:189
 msgid "Laufey Regio"
-msgstr ""
+msgstr "勞菲 區"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:192
 msgid "Neringa Regio"
-msgstr ""
+msgstr "內林加 區"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Ovda_Regio
 #: src/translations_regions.h:195
 msgid "Ovda Regio"
-msgstr ""
+msgstr "奧華特 區"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Phoebe_Regio
 #: src/translations_regions.h:198
 msgid "Phoebe Regio"
-msgstr ""
+msgstr "福柏 區"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:201
 msgid "Themis Regio"
-msgstr ""
+msgstr "忒彌斯 區"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:204
 msgid "Thetis Regio"
-msgstr ""
+msgstr "忒提斯 區"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:207
 msgid "Ulfrun Regio"
-msgstr ""
+msgstr "Ulfrun 區"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:210
 msgid "Vasilisa Regio"
-msgstr ""
+msgstr "Vasilisa 區"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:213
 msgid "Aibarchin Planitia"
-msgstr ""
+msgstr "Aibarchin 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:216
 msgid "Aino Planitia"
-msgstr ""
+msgstr "Aino 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:219
 msgid "Akhtamar Planitia"
-msgstr ""
+msgstr "阿克塔瑪 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:222
 msgid "Alma-Merghen Planitia"
-msgstr ""
+msgstr "Alma-Merghen 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:225
 msgid "Atalanta Planitia"
-msgstr ""
+msgstr "阿塔蘭塔 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:228
 msgid "Audra Planitia"
-msgstr ""
+msgstr "Audra 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:231
 msgid "Bereghinya Planitia"
-msgstr ""
+msgstr "Bereghinya 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:234
 msgid "Dzerassa Planitia"
-msgstr ""
+msgstr "Dzerassa 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:237
 msgid "Fonueha Planitia"
-msgstr ""
+msgstr "Fonueha 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:240
 msgid "Ganiki Planitia"
-msgstr ""
+msgstr "Ganiki 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Guinevere_Planitia
 #: src/translations_regions.h:243
 msgid "Guinevere Planitia"
-msgstr ""
+msgstr "桂妮薇兒 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:246
 msgid "Gunda Planitia"
-msgstr ""
+msgstr "Gunda 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:249
 msgid "Helen Planitia"
-msgstr ""
+msgstr "海倫 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:252
 msgid "Hinemoa Planitia"
-msgstr ""
+msgstr "Hinemoa 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:255
 msgid "Imapinua Planitia"
-msgstr ""
+msgstr "Imapinua 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:258
 msgid "Kanykey Planitia"
-msgstr ""
+msgstr "Kanykey 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:261
 msgid "Kawelu Planitia"
-msgstr ""
+msgstr "Kawelu 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:264
 msgid "Laimdota Planitia"
-msgstr ""
+msgstr "Laimdota 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:267
 msgid "Lavinia Planitia"
-msgstr ""
+msgstr "Lavinia 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:270
 msgid "Leda Planitia"
-msgstr ""
+msgstr "勒達 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:273
 msgid "Libuse Planitia"
-msgstr ""
+msgstr "Libuse 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:276
 msgid "Llorona Planitia"
-msgstr ""
+msgstr "Llorona 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:279
 msgid "Louhi Planitia"
-msgstr ""
+msgstr "婁希 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:282
 msgid "Lowana Planitia"
-msgstr ""
+msgstr "Lowana 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:285
 msgid "Mugazo Planitia"
-msgstr ""
+msgstr "Mugazo 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:288
 msgid "Navka Planitia"
-msgstr ""
+msgstr "納芙卡 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:291
 msgid "Niobe Planitia"
-msgstr ""
+msgstr "尼俄柏 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:294
 msgid "Nsomeka Planitia"
-msgstr ""
+msgstr "Nsomeka 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:297
 msgid "Nuptadi Planitia"
-msgstr ""
+msgstr "Nuptadi 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:300
 msgid "Rusalka Planitia"
-msgstr ""
+msgstr "露莎卡 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Sedna_Planitia
 #: src/translations_regions.h:303
 msgid "Sedna Planitia"
-msgstr ""
+msgstr "賽德娜 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:306
 msgid "Snegurochka Planitia"
-msgstr ""
+msgstr "雪姑娘 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:309
 msgid "Sogolon Planitia"
-msgstr ""
+msgstr "Sogolon 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:312
 msgid "Tahmina Planitia"
-msgstr ""
+msgstr "Tahmina 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:315
 msgid "Tilli-Hanum Planitia"
-msgstr ""
+msgstr "Tilli-Hanum 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:318
 msgid "Tinatin Planitia"
-msgstr ""
+msgstr "Tinatin 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:321
 msgid "Undine Planitia"
-msgstr ""
+msgstr "溫蒂妮 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:324
 msgid "Vellamo Planitia"
-msgstr ""
+msgstr "Vellamo 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:327
 msgid "Vinmara Planitia"
-msgstr ""
+msgstr "Vinmara 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:330
 msgid "Wawalag Planitia"
-msgstr ""
+msgstr "Wawalag 平原"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:333
 msgid "Zhibek Planitia"
-msgstr ""
+msgstr "Zhibek 平原"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9006,7 +9013,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Oceanus_Procellarum
 #: src/translations_regions.h:337
 msgid "Ocean of Storms"
-msgstr ""
+msgstr "風暴洋"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -11906,7 +11913,7 @@ msgstr "啟用儲存最愛視角的功能"
 
 #: src/ui_configurationDialog.h:1833 src/ui_obsListDialog.h:248
 msgid "Observing lists"
-msgstr ""
+msgstr "觀測列表"
 
 #: src/ui_configurationDialog.h:1836
 msgid "Toggle the usage of background under GUI buttons"
@@ -12935,7 +12942,7 @@ msgstr ""
 
 #: src/ui_obsListDialog.h:251
 msgid "Observing list description:"
-msgstr ""
+msgstr "觀測列表描述："
 
 #: src/ui_obsListDialog.h:253 src/ui_obsListCreateEditDialog.h:250
 msgid "Highlight all the objects of the selected list"
@@ -12955,7 +12962,7 @@ msgstr ""
 
 #: src/ui_obsListDialog.h:261 src/ui_obsListCreateEditDialog.h:258
 msgid "Create a new observing list"
-msgstr ""
+msgstr "建立一個新的觀測列表"
 
 #: src/ui_obsListDialog.h:263
 msgid "New list"
@@ -12988,7 +12995,7 @@ msgstr ""
 
 #: src/ui_obsListCreateEditDialog.h:243
 msgid "Observing Lists creation/edition"
-msgstr ""
+msgstr "建立/編輯觀測列表"
 
 #: src/ui_obsListCreateEditDialog.h:246
 msgid "Set the list as default"
