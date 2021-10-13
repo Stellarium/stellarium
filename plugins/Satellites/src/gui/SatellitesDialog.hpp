@@ -105,7 +105,7 @@ private slots:
 	void saveSettings(void);
 	void addSatellites(const TleDataList& newSatellites);
 	void removeSatellites();
-	//! Apply the "Displayed" and "Orbit" boxes to the selected satellite(s).
+	//! Apply the "Displayed", "Orbit", "Do not update" boxes to the selected satellite(s).
 	void setFlags();
 	//! Find out if a group is added or toggled in the group selector.
 	void handleGroupChanges(QListWidgetItem* item);
@@ -129,7 +129,9 @@ private slots:
 	// change description text
 	void descriptionTextChanged();
 
+	// Right side of GUI (satelliteDataForm, properties of selected satellite(s)) should be read only and clean by default (for example group selection in left top corner is changed)
 	void setRightSideToROMode();
+	// The status of elements on right side of GUI may be changed when one or more satellites are selected
 	void setRightSideToRWMode();
 
 private:
@@ -163,7 +165,7 @@ private:
 #endif
 
 	Ui_satellitesDialog* ui;
-	bool satelliteModified;
+	bool satelliteModified; // currently not used
 	
 	QTimer* updateTimer;
 	

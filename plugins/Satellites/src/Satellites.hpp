@@ -60,8 +60,7 @@ the SGP4/SDP4 algorithms (J.L. Canales' gsat library).
 
 <i>Name and identifiers</i>
 
-Each satellite has a name. It's displayed as a label of the satellite hint and in the list of satellites. Names are not unique though, so they are used only
-for presentation purposes.
+Each satellite has a name. It's displayed as a label of the satellite hint and in the list of satellites. Names are not unique though, so they are used only for presentation purposes.
 
 In the <b>Satellite Catalog</b> satellites are uniquely identified by their NORAD number, which is encoded in TLEs.
 
@@ -75,14 +74,11 @@ By convention, group names are in lowercase. The GUI translates some of the grou
 
 <b>Satellite Catalog</b>
 
-The satellite catalog is stored on the disk in [JSON](http://www.json.org/)
-format, in a file named "satellites.json". A default copy is embedded in the
-plug-in at compile time. A working copy is kept in the user data directory.
+The satellite catalog is stored on disk in [JSON](http://www.json.org/) format, in a file named "satellites.json". A default copy is embedded in the plug-in at compile time. A working copy is kept in the user data directory.
 
 <b>Configuration</b>
 
-The plug-ins' configuration data is stored in Stellarium's main configuration
-file.
+The plug-in's configuration data is stored in Stellarium's main configuration file.
 
 @}
 */
@@ -259,11 +255,11 @@ public:
 	//! Get a sorted list of group names.
 	//! See @ref groups for details. Use getGroups() if you don't need a list.
 	QStringList getGroupIdList() const;
-	//! Add this group to the global list.
+	//! Add a group to the global list.
 	void addGroup(const QString& groupId);
 
 	//! get satellite objects filtered by group.  If an empty string is used for the
-	//! group name, return all satallites
+	//! group name, return all satellites
 	QHash<QString,QString> getSatellites(const QString& group=QString(), Status vis=Both) const;
 	//! Get a model representing the list of satellites.
 	SatellitesListModel* getSatellitesListModel();
@@ -569,7 +565,7 @@ private:
 	void markLastUpdate();
 
 	//! Check format of the catalog of satellites
-	//! @return valid boolean, e.g. "true"
+	//! @return true if valid
 	bool checkJsonFileFormat();
 
 	void setSatGroupVisible(const QString& groupId, bool visible);
@@ -592,6 +588,7 @@ private:
 	QList<SatelliteP> satellites;
 	SatellitesListModel* satelliteListModel;
 
+	// magnitude and RCS data
 	QHash<int, double> qsMagList, rcsList;
 	
 	//! Union of the groups used by all loaded satellites - see @ref groups.

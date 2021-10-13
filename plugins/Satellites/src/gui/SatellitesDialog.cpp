@@ -207,7 +207,7 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->satellitesList, SIGNAL(doubleClicked(QModelIndex)),
 		     this, SLOT(trackSatellite(QModelIndex)));
 
-	// Two-state input, three-state display
+	// Two-state input, three-state display (partial checked state when multiple satellites selected)
 	setRightSideToROMode();
 	connect(ui->displayedCheckbox, SIGNAL(clicked(bool)), ui->displayedCheckbox, SLOT(setChecked(bool)));
 	connect(ui->orbitCheckbox,     SIGNAL(clicked(bool)), ui->orbitCheckbox,     SLOT(setChecked(bool)));
@@ -257,6 +257,7 @@ void SatellitesDialog::createDialogContent()
 	// About tab
 	populateAboutPage();
 	populateInfo();
+
 	populateFilterMenu();
 	populateSourcesList();
 
@@ -420,6 +421,8 @@ void SatellitesDialog::filterListByGroup(int index)
 		filterModel->setSecondaryFilters(QString(), SatHEO);
 	else if (groupId == "[HGSO]")
 		filterModel->setSecondaryFilters(QString(), SatHGSO);
+	else if (groupId == "[notassigned]")
+		filterModel->setSecondaryFilters(QString(), SatNotAssigned);
 	else
 		filterModel->setSecondaryFilters(groupId, SatNoFlags);
 
@@ -460,7 +463,7 @@ void SatellitesDialog::updateSatelliteData()
 	Q_ASSERT(SatellitesMgr);
 	Vec3f mColor, oColor, iColor;
 
-	// set default
+	// set default // XXX oy-pasta
 	buttonMarkerColor = QColor(QColor::fromRgbF(0.4, 0.4, 0.4));
 	buttonOrbitColor = QColor(QColor::fromRgbF(0.4, 0.4, 0.4));
 	buttonInfoColor = QColor(QColor::fromRgbF(0.4, 0.4, 0.4));
@@ -588,7 +591,7 @@ void SatellitesDialog::updateSatelliteData()
 	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
 	ui->satellitesList->repaint();
 
-	// Things that are cumulative in a multi-selection
+	// Things that are cumulative in a multi-selection (in order to decide on the three-state value)
 	GroupSet globalGroups = GETSTELMODULE(Satellites)->getGroups();
 	GroupSet groupsUsedBySome;
 	GroupSet groupsUsedByAll = globalGroups;
@@ -616,7 +619,7 @@ void SatellitesDialog::updateSatelliteData()
 			if (ui->displayedCheckbox->isChecked())
 				ui->displayedCheckbox->setCheckState(Qt::PartiallyChecked);
 
-		// "Orbit" box
+		// "Orbit" checkbox
 		if (flags.testFlag(SatOrbit))
 		{
 			if (!ui->orbitCheckbox->isChecked())
@@ -631,7 +634,7 @@ void SatellitesDialog::updateSatelliteData()
 			if (ui->orbitCheckbox->isChecked())
 				ui->orbitCheckbox->setCheckState(Qt::PartiallyChecked);
 
-		// User ("do not update") box
+		// User ("do not update") checkbox
 		if (flags.testFlag(SatUser))
 		{
 			if (!ui->userCheckBox->isChecked())
@@ -996,6 +999,7 @@ void SatellitesDialog::populateFilterMenu()
 	ui->groupFilterCombo->model()->sort(0);
 
 	// Add special groups - their IDs deliberately use JSON-incompatible chars.
+	ui->groupFilterCombo->insertItem(0, q_("[not assigned]"), QVariant("[notassigned]"));
 	ui->groupFilterCombo->insertItem(0, q_("[orbit calculation error]"), QVariant("[orbiterror]"));
 	ui->groupFilterCombo->insertItem(0, q_("[all newly added]"), QVariant("[newlyadded]"));
 	ui->groupFilterCombo->insertItem(0, q_("[all not displayed]"), QVariant("[undisplayed]"));
@@ -1183,16 +1187,20 @@ void SatellitesDialog::setFlags()
 
 		// If a checkbox is partially checked, the respective flag is not
 		// changed.
+
+		// displayed
 		if (ui->displayedCheckbox->isChecked())
 			flags |= SatDisplayed;
 		else if (ui->displayedCheckbox->checkState() == Qt::Unchecked)
 			flags &= ~SatDisplayed;
 
+		// show orbit
 		if (ui->orbitCheckbox->isChecked())
 			flags |= SatOrbit;
 		else if (ui->orbitCheckbox->checkState() == Qt::Unchecked)
 			flags &= ~SatOrbit;
 
+		// do not update
 		if (ui->userCheckBox->isChecked())
 			flags |= SatUser;
 		else if (ui->userCheckBox->checkState() == Qt::Unchecked)
@@ -1204,7 +1212,6 @@ void SatellitesDialog::setFlags()
 	saveSatellites();
 }
 
-// Right side of GUI should be read only and clean by default (for example group in left top corner is was changed at the moment)
 void SatellitesDialog::setRightSideToROMode()
 {
 	ui->removeSatellitesButton->setEnabled(false);
@@ -1240,7 +1247,7 @@ void SatellitesDialog::setRightSideToROMode()
 	ui->periodLineEdit->setEnabled(false);
 	ui->periodLineEdit->setText(QString());
 
-	// set default
+	// set default // XXX copy-pasta
 	buttonMarkerColor = QColor(QColor::fromRgbF(0.4, 0.4, 0.4));
 	buttonOrbitColor = QColor(QColor::fromRgbF(0.4, 0.4, 0.4));
 	buttonInfoColor = QColor(QColor::fromRgbF(0.4, 0.4, 0.4));
@@ -1249,7 +1256,6 @@ void SatellitesDialog::setRightSideToROMode()
 	ui->satInfoColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonInfoColor.name() + "; }");
 }
 
-// The status of elements on right side of GUI may be changed when satellite is selected
 void SatellitesDialog::setRightSideToRWMode()
 {
 	ui->displayedCheckbox->setEnabled(true);
@@ -1309,7 +1315,7 @@ void SatellitesDialog::trackSatellite(const QModelIndex& index)
 	if (!sat->orbitValid)
 		return;
 
-	// Turn on Satellite rendering if it is not already on	
+	// Turn on "Satellite displayed" checkbox if it is not already on	
 	if (!ui->displayedCheckbox->isChecked())
 	{
 		ui->displayedCheckbox->setChecked(true);

@@ -73,12 +73,19 @@ typedef QSet<QString> GroupSet;
 enum SatFlag
 {
 	SatNoFlags		= 0x0000,
-	SatDisplayed		= 0x0001,
-	SatNotDisplayed		= 0x0002,
-	SatUser			= 0x0004,
-	SatOrbit		= 0x0008,
+
+	// user settings per satellits
+	SatDisplayed		= 0x0001, // show this sat
+	SatNotDisplayed		= 0x0002, // do not show this sat
+
+	SatUser			= 0x0004, // "do not update" this sat - i.e. SatFrozen
+	SatOrbit		= 0x0008, // show orbit of this sat
+
+	// computed states, see also enum Status in Satellites.hpp
 	SatNew			= 0x0010,
 	SatError		= 0x0020,
+
+	// recent computed groups
 	SatSmallSize		= 0x0040,
 	SatMediumSize		= 0x0080,
 	SatLargeSize		= 0x0100,
@@ -86,7 +93,8 @@ enum SatFlag
 	SatMEO			= 0x0400,
 	SatGSO			= 0x0800,
 	SatHEO			= 0x1000,
-	SatHGSO			= 0x2000
+	SatHGSO			= 0x2000,
+	SatNotAssigned		= 0x4000  // not in any group
 };
 typedef QFlags<SatFlag> SatFlags;
 Q_DECLARE_OPERATORS_FOR_FLAGS(SatFlags)
@@ -117,13 +125,13 @@ public:
 	enum OptStatus
 	{
 		StatusOperational		= 1,
-		StatusNonoperational	= 2,
+		StatusNonoperational		= 2,
 		StatusPartiallyOperational	= 3,
 		StatusStandby			= 4,
 		StatusSpare			= 5,
-		StatusExtendedMission	= 6,
+		StatusExtendedMission		= 6,
 		StatusDecayed			= 7,
-		StatusUnknown		= 0
+		StatusUnknown			= 0
 	};
 
 	//! \param identifier unique identifier (currently the Catalog Number)
@@ -211,7 +219,7 @@ public:
 	void setNew() {newlyAdded = true;}
 	bool isNew() const {return newlyAdded;}
 	
-	//! Get internal flags as a single value.
+	//! Compute the internal flags as a single enum.
 	SatFlags getFlags() const;
 	//! Sets the internal flags in one operation (only display flags)!
 	void setFlags(const SatFlags& flags);

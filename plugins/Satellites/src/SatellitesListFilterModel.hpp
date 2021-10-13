@@ -30,7 +30,7 @@ class SatellitesListFilterModel : public QSortFilterProxyModel
 	Q_OBJECT
 
 	//! Only satellites with this flag raised will be returned.
-	//! Use Satellite::NoFlags for no filtering.
+	//! Use Satellite::SatNoFlags for no filtering.
 	//! Setting the flag with setFilterFlag() or setSecondaryFilters()
 	//! will cause the model to be re-filtered.
 	Q_PROPERTY(SatFlag filterFlag
@@ -67,7 +67,9 @@ protected:
 	                      const QModelIndex& source_parent) const;
 	
 private:
+	//! the filter flag is... what? TODO
 	SatFlag filterFlag;
+	//! the group filter is one of the filter groups selected by the user from the filter combobox; it contains computed as well as user defined groups
 	QString filterGroup;
 };
 

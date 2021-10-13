@@ -31,7 +31,6 @@
 #include "StelLocaleMgr.hpp"
 
 #include <QTextStream>
-#include <QRegExp>
 #include <QDebug>
 #include <QVariant>
 #include <QSettings>
@@ -47,27 +46,27 @@
 
 #define sqr(a) ((a)*(a))
 
-const QString Satellite::SATELLITE_TYPE = QStringLiteral("Satellite");
+const QString 	Satellite::SATELLITE_TYPE = QStringLiteral("Satellite");
 
 // static data members - will be initialised in the Satellites class (the StelObjectMgr)
-StelTextureSP Satellite::hintTexture;
-bool Satellite::showLabels = true;
-float Satellite::hintBrightness = 0.f;
-float Satellite::hintScale = 1.f;
-SphericalCap Satellite::viewportHalfspace = SphericalCap();
-int Satellite::orbitLineSegments = 90;
-int Satellite::orbitLineFadeSegments = 4;
-int Satellite::orbitLineSegmentDuration = 20;
-bool Satellite::orbitLinesFlag = true;
-bool Satellite::iconicModeFlag = false;
-bool Satellite::hideInvisibleSatellitesFlag = false;
-Vec3f Satellite::invisibleSatelliteColor = Vec3f(0.2f,0.2f,0.2f);
-Vec3f Satellite::transitSatelliteColor = Vec3f(0.f,0.f,0.f);
-double Satellite::timeRateLimit = 1.0; // one JD per second by default
+StelTextureSP 	Satellite::hintTexture;
+bool 		Satellite::showLabels = true;
+float 		Satellite::hintBrightness = 0.f;
+float 		Satellite::hintScale = 1.f;
+SphericalCap	Satellite::viewportHalfspace = SphericalCap();
+int 		Satellite::orbitLineSegments = 90;
+int 		Satellite::orbitLineFadeSegments = 4;
+int 		Satellite::orbitLineSegmentDuration = 20;
+bool 		Satellite::orbitLinesFlag = true;
+bool 		Satellite::iconicModeFlag = false;
+bool 		Satellite::hideInvisibleSatellitesFlag = false;
+Vec3f 		Satellite::invisibleSatelliteColor = Vec3f(0.2f,0.2f,0.2f);
+Vec3f 		Satellite::transitSatelliteColor = Vec3f(0.f,0.f,0.f);
+double 		Satellite::timeRateLimit = 1.0; // one JD per second by default
 
 #if (SATELLITES_PLUGIN_IRIDIUM == 1)
-double Satellite::sunReflAngle = 180.;
-//double Satellite::timeShift = 0.;
+double 		Satellite::sunReflAngle = 180.;
+//double 	Satellite::timeShift = 0.;
 #endif
 
 Satellite::Satellite(const QString& identifier, const QVariantMap& map)
@@ -865,6 +864,9 @@ SatFlags Satellite::getFlags() const
 		flags |= SatHEO;
 	if (eccentricity < 0.25 && (inclination>=25. && inclination<=180.) && (orbitalPeriod>=1100. && orbitalPeriod<=2000.))
 		flags |= SatHGSO;
+	if (groups.isEmpty())
+		flags |= SatNotAssigned;
+
 	return flags;
 }
 
@@ -887,7 +889,11 @@ void Satellite::parseInternationalDesignator(const QString& tle1)
 	int year = rawString.left(2).toInt(&ok);
 	if (!rawString.isEmpty() && ok)
 	{
-		// Y2K bug :) I wonder what NORAD will do in 2057. :)
+		// Y2K bug :) Q: I wonder what NORAD will do in 2057. :) 
+		/* A: see 
+			- https://celestrak.com/columns/v04n03/#FAQ04
+			- https://celestrak.com/NORAD/documentation/gp-data-formats.php (TODO?)
+		*/
 		if (year < 57)
 			year += 2000;
 		else
@@ -930,7 +936,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 		if (!iconicModeFlag)
 		{
 			Vec3f color(1.f,1.f,1.f);
-			// Special case: crossing of the satellite of the Moon or the Sun
+			// Special case: crossing/transiting Moon or Sun
 			if (XYZ.angle(moon->getJ2000EquatorialPos(core))*M_180_PI <= moon->getSpheroidAngularSize(core) || XYZ.angle(sun->getJ2000EquatorialPos(core))*M_180_PI <= sun->getSpheroidAngularSize(core))
 			{
 				painter.setColor(transitSatelliteColor, 1.f);

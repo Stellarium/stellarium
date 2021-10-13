@@ -51,12 +51,13 @@ bool SatellitesListFilterModel::filterAcceptsRow(int source_row, const QModelInd
 	
 	// Check flag
 	// TODO: find out if the NoFlags trick actually works
+	// TODO explain what is happening / what the intention is - a test is made whether a flag is set, but for what purpose?
 	QVariant data = index.data(SatFlagsRole);
 	SatFlags flags = data.value<SatFlags>();
 	if (!(flags & filterFlag).testFlag(filterFlag))
 		return false;
-	
-	// Check group
+
+	// group filter
 	if (!filterGroup.isEmpty())
 	{
 		data = index.data(SatGroupsRole);
@@ -65,6 +66,7 @@ bool SatellitesListFilterModel::filterAcceptsRow(int source_row, const QModelInd
 			return false;
 	}
 	
+	// TEXT FILTERS:
 	// Check name
 	if (index.data(Qt::DisplayRole).toString().contains(filterRegExp()))
 		return true;

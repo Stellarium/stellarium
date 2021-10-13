@@ -288,7 +288,7 @@ bool Satellites::backupCatalog(bool deleteOriginal)
 		return false;
 	}
 
-	QString backupPath = catalogPath + ".old";
+	QString backupPath = catalogPath + ".old";  // FIXME replace with datetime stamp as generic routine to backup files
 	if (QFileInfo(backupPath).exists())
 		QFile(backupPath).remove();
 
@@ -1017,6 +1017,7 @@ void Satellites::addGroup(const QString& groupId)
 	groups.insert(groupId);
 }
 
+// XXX never used?
 QHash<QString,QString> Satellites::getSatellites(const QString& group, Status vis) const
 {
 	QHash<QString,QString> result;
@@ -1027,11 +1028,13 @@ QHash<QString,QString> Satellites::getSatellites(const QString& group, Status vi
 		{
 			if ((group.isEmpty() || sat->groups.contains(group)) && ! result.contains(sat->id))
 			{
-				if (vis==Both ||
+				if (
+				   (vis==Both) ||
 				   (vis==Visible && sat->displayed) ||
 				   (vis==NotVisible && !sat->displayed) ||
 				   (vis==OrbitError && !sat->orbitValid) ||
-				   (vis==NewlyAdded && sat->isNew()))
+				   (vis==NewlyAdded && sat->isNew())
+				   )
 					result.insert(sat->id, sat->name);
 			}
 		}
@@ -1833,7 +1836,7 @@ void Satellites::parseTleFile(QFile& openFile,
 	TleData lastData;
 	lastData.addThis = addFlagValue;
 
-	// Celestrak's "status code" list
+	// Celestrak's "status code" list (https://celestrak.com/satcat/status.php)
 	const QMap<QString, Satellite::OptStatus> satOpStatusMap = {
 		{ "+", Satellite::StatusOperational },
 		{ "-", Satellite::StatusNonoperational },
@@ -1932,10 +1935,21 @@ void Satellites::loadExtraData()
 		while (!qsmFile.atEnd())
 		{
 			QString line = QString(qsmFile.readLine());
+
+			// 01-05: ID
 			int id   = line.mid(0,5).trimmed().toInt();
+			// 07   : status
+			// 09-17: desig
+			// 19-33: name
+			// 34-37: mag
 			QString smag = line.mid(33,4).trimmed();
 			if (!smag.isEmpty())
 				qsMagList.insert(id, smag.toDouble());
+			// 40-42: sz1
+			// 44-46: sz2
+			// 48-50: sz3
+			// 52-54: RCS
+			// 56-	: comments
 		}
 		qsmFile.close();
 	}
@@ -1947,10 +1961,13 @@ void Satellites::loadExtraData()
 		while (!rcsFile.atEnd())
 		{
 			QString line = QString(rcsFile.readLine());
+			// 01-05: ID
 			int id   = line.mid(0,5).trimmed().toInt();
+			// 06-10: RCS (float)
 			QString srcs = line.mid(5,5).trimmed();
 			if (!srcs.isEmpty())
 				rcsList.insert(id, srcs.toDouble());
+			// 11-13: ? XXX what field is this? where is the data taken from?
 		}
 		rcsFile.close();
 	}
