@@ -9,6 +9,7 @@ Examples:
 - Almagest data (minor fixes, of course - this is essentially frozen data)
 - HTC algorithms (Helene, Telesto, and Calypso (Lagrangian satellites of Dione) - taken from ftp://ftp.imcce.fr/pub/ephem/satel/htc20/htc20.f ? )
 - various libraries (https://github.com/Stellarium/stellarium/tree/master/src/external)
+- The SPG4/SDPG4 algorithm (https://en.wikipedia.org/wiki/Simplified_perturbations_models that was updated 2020-03-12) (used in https://github.com/Stellarium/stellarium/blob/e75b00e6c249747c198fe0e2badd77a4adab9415/plugins/Satellites/src/Satellites.hpp#L56-L57)
 
 The problem with copy-pasting external data is **code (or data) rot** (and also: "*copy-paste is evil!*").
 
