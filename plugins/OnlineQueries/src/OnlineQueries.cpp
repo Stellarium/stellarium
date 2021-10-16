@@ -72,6 +72,9 @@ OnlineQueries::OnlineQueries() :
 	custom1UseHip(false),
 	custom2UseHip(false),
 	custom3UseHip(false),
+	wikipediaInBrowser(false),
+	aavsoInBrowser(false),
+	gcvsInBrowser(false),
 	custom1inBrowser(false),
 	custom2inBrowser(false),
 	custom3inBrowser(false),
@@ -178,6 +181,9 @@ void OnlineQueries::loadConfiguration(void)
 		qWarning() << "OnlineQueries: custom3_url invalid: no '%1' found in " << customUrl3;
 		customUrl3 = "";
 	}
+	wikipediaInBrowser=conf->value("wikipedia_in_browser", false).toBool();
+	aavsoInBrowser=conf->value("aavso_in_browser", false).toBool();
+	gcvsInBrowser=conf->value("gcvs_in_browser", false).toBool();
 	custom1inBrowser=conf->value("custom1_in_browser", false).toBool();
 	custom2inBrowser=conf->value("custom2_in_browser", false).toBool();
 	custom3inBrowser=conf->value("custom3_in_browser", false).toBool();
@@ -198,6 +204,9 @@ void OnlineQueries::saveConfiguration(void)
 	conf->setValue("custom1_url", customUrl1);
 	conf->setValue("custom2_url", customUrl2);
 	conf->setValue("custom3_url", customUrl3);
+	conf->setValue("wikipedia_in_browser", wikipediaInBrowser);
+	conf->setValue("aavso_in_browser", aavsoInBrowser);
+	conf->setValue("gcvs_in_browser", gcvsInBrowser);
 	conf->setValue("custom1_in_browser", custom1inBrowser);
 	conf->setValue("custom2_in_browser", custom2inBrowser);
 	conf->setValue("custom3_in_browser", custom3inBrowser);
@@ -234,7 +243,7 @@ void OnlineQueries::createToolbarButton() const
 
 void OnlineQueries::queryWikipedia()
 {
-	query(wikipediaUrl, false, true);
+	query(wikipediaUrl, false, wikipediaInBrowser);
 }
 
 // 2-step query.
@@ -264,7 +273,7 @@ void OnlineQueries::queryAAVSO()
 
 void OnlineQueries::queryGCVS()
 {
-	query(gcvsUrl, true, false);
+	query(gcvsUrl, true, gcvsInBrowser);
 }
 
 void OnlineQueries::queryAncientSkies()
@@ -320,10 +329,10 @@ void OnlineQueries::query(QString url, bool useHip, bool useBrowser)
 		}
 		else
 		{
-			hipOnlineReply=hipQuery->lookup(url, hipNr);
-
-			onHipQueryStatusChanged();
-			connect(hipOnlineReply, SIGNAL(statusChanged()), this, SLOT(onHipQueryStatusChanged()));
+			setOutputUrl(QUrl(url.arg(hipNr)));
+			//hipOnlineReply=hipQuery->lookup(url, hipNr);
+			//onHipQueryStatusChanged();
+			//connect(hipOnlineReply, SIGNAL(statusChanged()), this, SLOT(onHipQueryStatusChanged()));
 		}
 	}
 	else
@@ -380,10 +389,10 @@ void OnlineQueries::query(QString url, bool useHip, bool useBrowser)
 		}
 		else
 		{
-			hipOnlineReply=hipQuery->lookup(url, objName);
-
-			onHipQueryStatusChanged();
-			connect(hipOnlineReply, SIGNAL(statusChanged()), this, SLOT(onHipQueryStatusChanged()));
+			setOutputUrl(QUrl(url.arg(objName)));
+			//hipOnlineReply=hipQuery->lookup(url, objName);
+			//onHipQueryStatusChanged();
+			//connect(hipOnlineReply, SIGNAL(statusChanged()), this, SLOT(onHipQueryStatusChanged()));
 		}
 	}
 }
@@ -449,8 +458,15 @@ void OnlineQueries::onAavsoHipQueryStatusChanged()
 		// It's prettier to call the browser externally.
 		if (oid>0)
 		{
+		    if (aavsoInBrowser)
+		    {
 			setOutputHtml(QString("<h1>AAVSO</h1><p>Opened AAVSO page on OID=%1 in your webbrowser.</p>").arg(QString::number(oid)));
 			QDesktopServices::openUrl(QUrl(aavsoOidUrl.arg(oid)));
+		    }
+		    else
+		    {
+			setOutputUrl(QUrl(aavsoOidUrl.arg(oid)));
+		    }
 		}
 		else
 			setOutputHtml(QString("<h1>AAVSO</h1><p>AAVSO has no entry for this star.</p>"));
@@ -468,4 +484,10 @@ void OnlineQueries::setOutputHtml(QString html)
 {
 	if (dialog)
 		dialog->setOutputHtml(html);
+}
+
+void OnlineQueries::setOutputUrl(QUrl url)
+{
+	if (dialog)
+		dialog->setOutputUrl(url);
 }

@@ -27,7 +27,7 @@
 #include "StelTranslator.hpp"
 
 OnlineQueriesDialog::OnlineQueriesDialog(QObject* parent) :
-	StelDialog("OnlineQueries", parent),
+	StelDialogSeparate("OnlineQueries", parent),
 	plugin(Q_NULLPTR),
 	view(Q_NULLPTR)
 {
@@ -55,8 +55,8 @@ void OnlineQueriesDialog::createDialogContent()
 
 	//load UI from form file
 	ui->setupUi(dialog);
-    view=ui->webEngineView; Q_ASSERT(view);
-    qDebug() << "view connected";
+	view=ui->webEngineView; Q_ASSERT(view);
+	qDebug() << "view connected";
 
 	//hook up retranslate event
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
@@ -65,13 +65,12 @@ void OnlineQueriesDialog::createDialogContent()
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	// Kinetic scrolling and style sheet for output
-	kineticScrollingList << ui->onlineQueriesTextBrowser;
+	kineticScrollingList << ui->webEngineView;
 	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (gui)
 	{
 		enableKineticScrolling(gui->getFlagUseKineticScrolling());
 		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
-		ui->onlineQueriesTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	}
 
 	connect(ui->wikipediaPushButton,    SIGNAL(clicked()), plugin, SLOT(queryWikipedia()));
@@ -106,21 +105,26 @@ void OnlineQueriesDialog::createDialogContent()
 		ui->tabWidget->setTabText(ui->tabWidget->count()-1, qc_("(Custom 3)", "tab title"));
 		ui->tabWidget->setTabEnabled(ui->tabWidget->count()-1, false);
 	}
-    qDebug() << "dialog created";
+	qDebug() << "dialog created";
 
 }
 
 // TODO: Maybe allow setting a stylesheet? GCVS would be nicer with Courier font.
 void OnlineQueriesDialog::setOutputHtml(QString html)
 {
-    qDebug() << "setOutputHtml...";
-	if (ui->onlineQueriesTextBrowser)
-	{
-		ui->onlineQueriesTextBrowser->setHtml(html);
-		ui->onlineQueriesTextBrowser->setOpenExternalLinks(true);
-	}
+//    qDebug() << "setOutputHtml...";
+//	if (ui->onlineQueriesTextBrowser)
+//	{
+//		ui->onlineQueriesTextBrowser->setHtml(html);
+//		ui->onlineQueriesTextBrowser->setOpenExternalLinks(true);
+//	}
     qDebug() << "setOutputHtml...view";
-    view->setUrl(plugin->getCustomUrl2());
+//    view->setUrl(plugin->getCustomUrl2());
+    view->setHtml(html);
     qDebug() << "setOutputHtml...done";
 }
 
+void OnlineQueriesDialog::setOutputUrl(QUrl url)
+{
+    view->setUrl(url);
+}

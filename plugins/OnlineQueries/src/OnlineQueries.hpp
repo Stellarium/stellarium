@@ -102,6 +102,7 @@ private:
 	void query(QString url, bool useHip, bool useBrowser);
 	void createToolbarButton() const;
 	void setOutputHtml(QString html); //!< Forward html to GUI dialog
+	void setOutputUrl(QUrl url); //!< Forward URL to GUI dialog
 	OnlineQueriesDialog* dialog;
 	QSettings* conf;
 	bool enabled;
@@ -121,9 +122,12 @@ private:
 	bool custom1UseHip; //!< Use HIP number, not common name, in query?
 	bool custom2UseHip; //!< Use HIP number, not common name, in query?
 	bool custom3UseHip; //!< Use HIP number, not common name, in query?
-	bool custom1inBrowser; //!< True if custom1 URL should be opened in a webbrowser, not in our panel
-	bool custom2inBrowser; //!< True if custom2 URL should be opened in a webbrowser, not in our panel
-	bool custom3inBrowser; //!< True if custom3 URL should be opened in a webbrowser, not in our panel
+	bool wikipediaInBrowser; //!< True if Wikipedia URL should be opened in the system webbrowser, not in our panel
+	bool aavsoInBrowser;     //!< True if AAVSO     URL should be opened in the system webbrowser, not in our panel
+	bool gcvsInBrowser;      //!< True if GCVS      URL should be opened in the system webbrowser, not in our panel
+	bool custom1inBrowser;   //!< True if custom1   URL should be opened in the system webbrowser, not in our panel
+	bool custom2inBrowser;   //!< True if custom2   URL should be opened in the system webbrowser, not in our panel
+	bool custom3inBrowser;   //!< True if custom3   URL should be opened in the system webbrowser, not in our panel
 
 	HipOnlineQuery *hipQuery;              // one is actually enough!
 	HipOnlineReply *hipOnlineReply;        // Common reply object

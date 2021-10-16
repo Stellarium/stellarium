@@ -183,59 +183,18 @@
          </property>
          <item row="0" column="2">
           <layout class="QGridLayout" name="gridLayout">
-           <item row="3" column="0">
-            <widget class="QGroupBox" name="groupBox_bottom_row3_col0">
+           <item row="1" column="0">
+            <widget class="QWebEngineView" name="webEngineView" native="true">
              <property name="minimumSize">
               <size>
                <width>0</width>
-               <height>36</height>
+               <height>180</height>
               </size>
              </property>
-             <property name="title">
-              <string>Bottom dummy</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QTextBrowser" name="onlineQueriesTextBrowser">
-             <property name="enabled">
-              <bool>true</bool>
-             </property>
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="frameShape">
-              <enum>QFrame::StyledPanel</enum>
-             </property>
-             <property name="lineWidth">
-              <number>1</number>
-             </property>
-             <property name="verticalScrollBarPolicy">
-              <enum>Qt::ScrollBarAsNeeded</enum>
-             </property>
-             <property name="horizontalScrollBarPolicy">
-              <enum>Qt::ScrollBarAlwaysOff</enum>
-             </property>
-             <property name="autoFormatting">
-              <set>QTextEdit::AutoAll</set>
-             </property>
-             <property name="html">
-              <string notr="true">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Sans Serif'; font-size:9pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-             </property>
-             <property name="openExternalLinks">
-              <bool>true</bool>
+             <property name="url" stdset="0">
+              <url>
+               <string>about:blank</string>
+              </url>
              </property>
             </widget>
            </item>
@@ -369,35 +328,6 @@ p, li { white-space: pre-wrap; }
                </item>
               </layout>
              </widget>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QGroupBox" name="groupBox_right_row1_col1">
-             <property name="title">
-              <string>Right dummy</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QWebEngineView" name="webEngineView" native="true">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>180</height>
-              </size>
-             </property>
-             <property name="url" stdset="0">
-              <url>
-               <string>about:blank</string>
-              </url>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QGroupBox" name="groupBox">
-             <property name="title">
-              <string>right lower dummy</string>
-             </property>
             </widget>
            </item>
           </layout>

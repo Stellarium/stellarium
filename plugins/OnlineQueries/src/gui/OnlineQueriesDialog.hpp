@@ -21,13 +21,13 @@
 #ifndef ONLINEQUERIESDIALOG_HPP
 #define ONLINEQUERIESDIALOG_HPP
 
-#include "StelDialog.hpp"
+#include "StelDialogSeparate.hpp"
 #include "ui_onlineQueriesDialog.h"
 #include <QtWebEngineWidgets/QWebEngineView>
 
 class OnlineQueries;
 
-class OnlineQueriesDialog : public StelDialog
+class OnlineQueriesDialog : public StelDialogSeparate
 {
 	Q_OBJECT
 public:
@@ -37,6 +37,7 @@ public:
 public slots:
 	void retranslate();
 	void setOutputHtml(QString html);
+	void setOutputUrl(QUrl url);
 
 protected:
 	void createDialogContent();
