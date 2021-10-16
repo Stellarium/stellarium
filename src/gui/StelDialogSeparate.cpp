@@ -62,7 +62,7 @@ void StelDialogSeparate::setVisible(bool v)
 		}
 		else
 		{
-			dialog = new QDialog(Q_NULLPTR, Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
+			dialog = new QDialog(&StelMainView::getInstance(), Qt::Tool | Qt::FramelessWindowHint);
 			connect(dialog, SIGNAL(rejected()), this, SLOT(close()));
 			createDialogContent();
 			if (gui)
