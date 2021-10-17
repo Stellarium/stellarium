@@ -65,6 +65,13 @@ QLineEdit {
         font-size: 100%;
 }
 
+QTextEdit:focus,
+QPlainTextEdit:focus,
+QListWidget:focus,
+QLineEdit:focus {
+	border: 2px solid rgb(161, 161, 161);
+}
+
 QTextEdit:disabled,
 QListWidget:disabled,
 QLineEdit:disabled {
@@ -75,7 +82,7 @@ QTextBrowser {
 	border: 0 solid rgb(0, 0, 0);
 	background: rgb(90, 90, 90);
 	color: rgb(3, 3, 3);
-        font-size: 100%;
+	font-size: 100%;
 }
 
 QGroupBox {
@@ -325,6 +332,10 @@ QPushButton {
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(183, 184, 185), stop: 1 rgb(111, 113, 114));
 }
 
+QPushButton:focus {
+	border: 2px solid rgb(161, 161, 161);
+}
+
 QPushButton:disabled {
         color: rgb(61, 61, 61);
         border: 1px solid rgb(61, 61, 61);
@@ -356,6 +367,10 @@ QPushButton:checked {
 QCheckBox {
 	color: rgb(3, 3, 3);
 	background: none;
+}
+
+QCheckBox:focus {
+	border: 2px solid rgb(161, 161, 161);
 }
 
 QCheckBox:disabled {
@@ -489,6 +504,15 @@ QComboBox {
 	border: 1px solid rgb(0, 0, 0);
 	color: rgb(31, 31, 31);
 	min-height: 22px;
+}
+
+QSpinBox:focus,
+QTimeEdit:focus,
+QDoubleSpinBox:focus,
+AngleSpinBox:focus,
+QDateTimeEdit:focus,
+QComboBox:focus {
+	border: 1px solid rgb(100, 100, 100);
 }
 
 QSpinBox::up-button,
