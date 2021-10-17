@@ -368,8 +368,10 @@ QCheckBox {
 	color: rgb(3, 3, 3);
 	background: none;
 }
-
-QCheckBox:focus {
+/*
+ * Only the space checkbox should show a focus highlight!
+ */
+SpaceCheckBox:focus {
 	border: 2px solid rgb(161, 161, 161);
 }
 
@@ -493,11 +495,7 @@ QRadioButton::indicator:unchecked:disabled {
  * Spinners
  */
 
-QSpinBox,
-QTimeEdit,
-QDoubleSpinBox,
-AngleSpinBox,
-QDateTimeEdit,
+QAbstractSpinBox, /* QSpinBox, QDoubleSpinBox, AngleSpinBox, QDateTimeEdit, QDateEdit, QTimeEdit */
 QComboBox {
 	padding-right: 0;
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(180, 180, 183), stop: 1 rgb(93, 95, 98));
@@ -506,20 +504,13 @@ QComboBox {
 	min-height: 22px;
 }
 
-QSpinBox:focus,
-QTimeEdit:focus,
-QDoubleSpinBox:focus,
-AngleSpinBox:focus,
-QDateTimeEdit:focus,
+QAbstractSpinBox:focus, /* QSpinBox, QDoubleSpinBox, AngleSpinBox, QDateTimeEdit, QDateEdit, QTimeEdit */
 QComboBox:focus {
-	border: 1px solid rgb(100, 100, 100);
+	border: 2px solid rgb(100, 100, 100);
 }
 
-QSpinBox::up-button,
-QTimeEdit::up-button,
-QDoubleSpinBox::up-button,
-AngleSpinBox::up-button,
-QDateTimeEdit::up-button {
+QAbstractSpinBox::up-button
+{
 	subcontrol-origin: border;
 	subcontrol-position: top right;
 	width: 20px;
@@ -530,11 +521,7 @@ QDateTimeEdit::up-button {
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(97, 97, 97), stop: 1 rgb(70, 70, 70));
 }
 
-QSpinBox::down-button,
-QTimeEdit::down-button,
-QDoubleSpinBox::down-button,
-AngleSpinBox::down-button,
-QDateTimeEdit::down-button {
+QAbstractSpinBox::down-button {
 	subcontrol-origin: border;
 	subcontrol-position: bottom right;
 	width: 20px;
@@ -545,11 +532,7 @@ QDateTimeEdit::down-button {
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(70, 70, 70), stop: 1 rgb(40, 40, 40));
 }
 
-QSpinBox::up-button:hover,
-QTimeEdit::up-button:hover,
-QDoubleSpinBox::up-button:hover,
-AngleSpinBox::up-button:hover,
-QDateTimeEdit::up-button:hover {
+QAbstractSpinBox::up-button:hover {
 	subcontrol-origin: border;
 	subcontrol-position: top right;
 	width: 20px;
@@ -560,11 +543,7 @@ QDateTimeEdit::up-button:hover {
     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(87, 87, 77), stop: 1 rgb(70, 70, 70));
 }
 
-QSpinBox::down-button:hover,
-QTimeEdit::down-button:hover,
-QDoubleSpinBox::down-button:hover,
-AngleSpinBox::down-button:hover,
-QDateTimeEdit::down-button:hover {
+QAbstractSpinBox::down-button:hover {
 	subcontrol-origin: border;
 	subcontrol-position: bottom right;
 	width: 20px;
@@ -631,38 +610,28 @@ QComboBox {
  */
 
 QComboBox:disabled,
-QSpinBox:disabled,
-QDoubleSpinBox:disabled,
-AngleSpinBox:disabled,
-QDateTimeEdit:disabled {
+QAbstractSpinBox:disabled
+{
         border: 1px solid rgb(31, 31, 31);
         color: rgb(61, 61, 61);
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(150, 150, 153, 100%), stop: 1 rgba(120, 120, 120, 100%));
 }
 
 QComboBox:focus, QComboBox:hover,
-QSpinBox:focus, QSpinBox:hover,
-QDoubleSpinBox:focus, QDoubleSpinBox:hover,
-AngleSpinBox:focus, AngleSpinBox:hover,
-QDateTimeEdit:focus, QDateTimeEdit:hover {
+QAbstractSpinBox:focus, QAbstractSpinBox:hover
+{
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(180, 180, 163), stop: 1 rgb(93, 95, 78));
 }
 
-QSpinBox::up-button:disabled,
-TimeEdit::up-button:disabled,
-QDoubleSpinBox::up-button:disabled,
-AngleSpinBox::up-button:disabled,
-QDateTimeEdit::up-button:disabled {
+QAbstractSpinBox::up-button:disabled
+{
 	background: rgb(75, 75, 75);
         border-top: 1px solid rgb(31, 31, 31);
         border-right: 1px solid rgb(31, 31, 31);
 }
 
-QSpinBox::down-button:disabled,
-QTimeEdit::down-button:disabled,
-QDoubleSpinBox::down-button:disabled,
-AngleSpinBox::down-button:disabled,
-QDateTimeEdit::down-button:disabled {
+QAbstractSpinBox::down-button:disabled
+{
 	background: rgb(70, 70, 70);
         border-bottom: 1px solid rgb(31, 31, 31);
         border-right: 1px solid rgb(31, 31, 31);
