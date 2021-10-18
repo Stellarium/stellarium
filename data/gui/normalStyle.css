@@ -331,8 +331,10 @@ QPushButton {
         font-size: 100%;
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(183, 184, 185), stop: 1 rgb(111, 113, 114));
 }
-
-QPushButton:focus {
+/*
+ * Only the space-pressable pushbutton should show a focus highlight!
+ */
+SpacePushButton:focus {
 	border: 2px solid rgb(161, 161, 161);
 }
 
