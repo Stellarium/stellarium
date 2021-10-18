@@ -224,7 +224,7 @@ protected slots:
 	//! connect from StelApp to handle font and font size changes.
 	void handleFontChanged();
 
-	void updateNightModeProperty(bool n);
+	virtual void updateNightModeProperty(bool n);
 };
 
 class CustomProxy : public QGraphicsProxyWidget

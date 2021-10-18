@@ -24,11 +24,57 @@
 #include "StelGui.hpp"
 
 //#include <QDebug>
+#include <QWidget>
 #include <QDialog>
+#include <QGraphicsColorizeEffect>
+
+class NightCover: public QWidget{
+public:
+    NightCover(QWidget *parent = Q_NULLPTR, Qt::WindowFlags f = Qt::FramelessWindowHint|Qt::WindowTransparentForInput)
+	: QWidget(parent, f)
+    {
+	setAttribute(Qt::WA_TransparentForMouseEvents);
+	setStyleSheet("QWidget{background: none;"
+					 "color: rgba(128, 32, 0, 0.5);"
+			      "background-color: rgba(128, 32, 0, 0.5);"
+			       "selection-color: rgba(128, 32, 0, 0.5);"
+		    "selection-background-color: rgba(128, 32, 0, 0.5);"
+		    "alternate-background-color: rgba(128, 32, 0, 0.5);}");
+    }
+
+protected:
+    virtual void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE
+    {
+	Q_UNUSED(event)
+	QRect parentRect=reinterpret_cast<QWidget*>(parent())->geometry();
+	qDebug() << "Frame geometry:" << parentRect.x() << parentRect.y() << parentRect.width() << parentRect.height();
+	setGeometry(0, 0, parentRect.width(), parentRect.height());
+	QPainter painter(this);
+	painter.setRenderHint(QPainter::Antialiasing);
+	painter.setBrush(QBrush(QColor(128,16,0, 50)));
+	painter.setPen(Qt::NoPen);
+	painter.drawRect(rect());
+    }
+};
+
 
 StelDialogSeparate::StelDialogSeparate(QString dialogName, QObject* parent)
-	: StelDialog(dialogName, parent)
+	: StelDialog(dialogName, parent),
+	nightCover(Q_NULLPTR),
+	nightModeEffect(Q_NULLPTR)
 {
+    // It seems the nightModeEffect does not work properly. The NightCover looks better!
+//    nightModeEffect=new QGraphicsColorizeEffect(this);
+//    nightModeEffect->setColor(QColor(127, 32, 0));
+//    nightModeEffect->setStrength(0.0);
+}
+
+StelDialogSeparate::~StelDialogSeparate()
+{
+    if (nightCover)
+	delete nightCover;
+    if (nightModeEffect)
+	delete nightModeEffect;
 }
 
 void StelDialogSeparate::setVisible(bool v)
@@ -69,8 +115,10 @@ void StelDialogSeparate::setVisible(bool v)
 			connect(&StelApp::getInstance(), SIGNAL(visionNightModeChanged(bool)), this, SLOT(updateNightModeProperty(bool)));
 			updateNightModeProperty(StelApp::getInstance().getVisionModeNight());
 
+			reinterpret_cast<QDialog*>(dialog)->setSizeGripEnabled(true);
 			QSizeF size = dialog->size();
-			connect(dialog, SIGNAL(sizeChanged(QSizeF)), this, SLOT(handleDialogSizeChanged(QSizeF)));
+			// TODO: It seems we must subclass QDialog and fill in a resizeEvent handler to store new sizes?
+			//connect(reinterpret_cast<QDialog*>(dialog), SIGNAL(sizeChanged(QSizeF)), this, SLOT(handleDialogSizeChanged(QSizeF)));
 
 			int newX, newY;
 			// Retrieve panel locations from config.ini, but shift if required to a visible position.
@@ -133,6 +181,10 @@ void StelDialogSeparate::setVisible(bool v)
 			dialog->show();
 		}
 		dialog->setFocus();
+		if (nightModeEffect)
+		    dialog->setGraphicsEffect(nightModeEffect);
+		else
+		    nightCover=new NightCover(dialog);
 	}
 	else
 	{
@@ -142,3 +194,15 @@ void StelDialogSeparate::setVisible(bool v)
 	emit visibleChanged(v);
 }
 
+void StelDialogSeparate::updateNightModeProperty(bool n)
+{
+	if (nightModeEffect)
+		nightModeEffect->setStrength(n ? 0.5 : 0.0);
+	if (nightCover)
+	{
+	    if (n)
+		nightCover->show();
+	    else
+		nightCover->hide();
+	}
+}

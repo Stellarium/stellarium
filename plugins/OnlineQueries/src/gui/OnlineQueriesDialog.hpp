@@ -32,15 +32,15 @@ class OnlineQueriesDialog : public StelDialogSeparate
 	Q_OBJECT
 public:
 	OnlineQueriesDialog(QObject* parent = Q_NULLPTR);
-	~OnlineQueriesDialog();
+	~OnlineQueriesDialog() Q_DECL_OVERRIDE;
 
 public slots:
-	void retranslate();
+	void retranslate() Q_DECL_OVERRIDE;
 	void setOutputHtml(QString html);
 	void setOutputUrl(QUrl url);
 
 protected:
-	void createDialogContent();
+	void createDialogContent() Q_DECL_OVERRIDE;
 
 private slots:
 

@@ -23,6 +23,8 @@
 
 #include "StelDialog.hpp"
 
+class QGraphicsColorizeEffect;
+class NightCover;
 
 //! @class StelDialogSeparate Base class for windows NOT embedded in the graphics scene.
 //! Some GUI elements like QWebEngineView don't like to be embedded into our MainView.
@@ -36,11 +38,18 @@ class StelDialogSeparate : public StelDialog
 	Q_OBJECT
 public:
 	StelDialogSeparate(QString dialogName="Default", QObject* parent=Q_NULLPTR);
-	virtual ~StelDialogSeparate() Q_DECL_OVERRIDE {}
+	virtual ~StelDialogSeparate() Q_DECL_OVERRIDE;
 
 public slots:
 	//! On the first call with "true" populates the window contents.
 	virtual void setVisible(bool) Q_DECL_OVERRIDE;
+
+protected slots:
+	virtual void updateNightModeProperty(bool n) Q_DECL_OVERRIDE;
+
+protected:
+	NightCover *nightCover;
+	QGraphicsColorizeEffect *nightModeEffect; // This seems not to work properly!
 };
 
 #endif // STELDIALOGSEPARATE_HPP
