@@ -22,8 +22,6 @@
 #include "StelDialogSeparate.hpp"
 #include "StelMainView.hpp"
 #include "StelGui.hpp"
-#include "StelActionMgr.hpp"
-#include "StelPropertyMgr.hpp"
 
 //#include <QDebug>
 #include <QDialog>

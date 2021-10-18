@@ -21,6 +21,7 @@
 #include "OnlineQueriesDialog.hpp"
 #include "OnlineQueries.hpp"
 
+#include <QPushButton>
 #include "StelModuleMgr.hpp"
 #include "StelApp.hpp"
 #include "StelGui.hpp"
@@ -77,51 +78,42 @@ void OnlineQueriesDialog::createDialogContent()
 	connect(ui->aavsoPushButton,        SIGNAL(clicked()), plugin, SLOT(queryAAVSO()));
 	connect(ui->gcvsPushButton,         SIGNAL(clicked()), plugin, SLOT(queryGCVS()));
 	connect(ui->ancientSkiesPushButton, SIGNAL(clicked()), plugin, SLOT(queryAncientSkies()));
-	// set custom tab titles to hostnames, or deactivate unconfigured tabs
+	// set custom tab buttons to hostnames, or deactivate unconfigured buttons
 	if (!plugin->getCustomUrl1().isEmpty())
 	{
-		ui->tabWidget->setTabText(ui->tabWidget->count()-3, QUrl(plugin->getCustomUrl1()).host());
+		ui->custom1PushButton->setText(QUrl(plugin->getCustomUrl1()).host());
 		connect(ui->custom1PushButton, SIGNAL(clicked()), plugin, SLOT(queryCustomSite1()));
 	}
 	else {
-		ui->tabWidget->setTabText(ui->tabWidget->count()-3, qc_("(Custom 1)", "tab title"));
-		ui->tabWidget->setTabEnabled(ui->tabWidget->count()-3, false);
+		ui->custom1PushButton->setText(qc_("(Custom 1)", "GUI label"));
+		ui->custom1PushButton->setEnabled(false);
 	}
 	if (!plugin->getCustomUrl2().isEmpty())
 	{
-		ui->tabWidget->setTabText(ui->tabWidget->count()-2, QUrl(plugin->getCustomUrl2()).host());
+		ui->custom2PushButton->setText(QUrl(plugin->getCustomUrl2()).host());
 		connect(ui->custom2PushButton, SIGNAL(clicked()), plugin, SLOT(queryCustomSite2()));
 	}
 	else {
-		ui->tabWidget->setTabText(ui->tabWidget->count()-2, qc_("(Custom 2)", "tab title"));
-		ui->tabWidget->setTabEnabled(ui->tabWidget->count()-2, false);
+		ui->custom2PushButton->setText(qc_("(Custom 2)", "GUI label"));
+		ui->custom2PushButton->setEnabled(false);
 	}
 	if (!plugin->getCustomUrl3().isEmpty())
 	{
-		ui->tabWidget->setTabText(ui->tabWidget->count()-1, QUrl(plugin->getCustomUrl3()).host());
+		ui->custom3PushButton->setText(QUrl(plugin->getCustomUrl3()).host());
 		connect(ui->custom3PushButton, SIGNAL(clicked()), plugin, SLOT(queryCustomSite3()));
 	}
 	else {
-		ui->tabWidget->setTabText(ui->tabWidget->count()-1, qc_("(Custom 3)", "tab title"));
-		ui->tabWidget->setTabEnabled(ui->tabWidget->count()-1, false);
+		ui->custom3PushButton->setText(qc_("(Custom 3)", "GUI label"));
+		ui->custom3PushButton->setEnabled(false);
 	}
+	connect(ui->backPushButton,    &QPushButton::clicked, [=]{view->triggerPageAction(QWebEnginePage::Back);});
+	connect(ui->forwardPushButton, &QPushButton::clicked, [=]{view->triggerPageAction(QWebEnginePage::Forward);});
 	qDebug() << "dialog created";
-
 }
 
-// TODO: Maybe allow setting a stylesheet? GCVS would be nicer with Courier font.
 void OnlineQueriesDialog::setOutputHtml(QString html)
 {
-//    qDebug() << "setOutputHtml...";
-//	if (ui->onlineQueriesTextBrowser)
-//	{
-//		ui->onlineQueriesTextBrowser->setHtml(html);
-//		ui->onlineQueriesTextBrowser->setOpenExternalLinks(true);
-//	}
-    qDebug() << "setOutputHtml...view";
-//    view->setUrl(plugin->getCustomUrl2());
     view->setHtml(html);
-    qDebug() << "setOutputHtml...done";
 }
 
 void OnlineQueriesDialog::setOutputUrl(QUrl url)
