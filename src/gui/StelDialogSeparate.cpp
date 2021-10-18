@@ -34,12 +34,13 @@ public:
 	: QWidget(parent, f)
     {
 	setAttribute(Qt::WA_TransparentForMouseEvents);
+	// We cannot define this style in the global QSS file, as the background defined for QWidget gets inherited.
 	setStyleSheet("QWidget{background: none;"
-					 "color: rgba(128, 32, 0, 0.5);"
-			      "background-color: rgba(128, 32, 0, 0.5);"
-			       "selection-color: rgba(128, 32, 0, 0.5);"
-		    "selection-background-color: rgba(128, 32, 0, 0.5);"
-		    "alternate-background-color: rgba(128, 32, 0, 0.5);}");
+					 "color: rgba(80, 8, 0, 0.33);"
+			      "background-color: rgba(80, 8, 0, 0.33);"
+			       "selection-color: rgba(80, 8, 0, 0.33);"
+		    "selection-background-color: rgba(80, 8, 0, 0.33);"
+		    "alternate-background-color: rgba(80, 8, 0, 0.33);}");
     }
 
 protected:
