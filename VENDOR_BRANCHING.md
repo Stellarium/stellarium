@@ -23,6 +23,7 @@ The basic problem with copy-pasting external artifacts is **code (or data) rot**
 	- http://jsoc.stanford.edu/cvs/JSOC/proj/timed/apps/Attic/jpleph.c?hidecvsroot=1&search=None&hideattic=1&sortby=rev&logsort=date&rev=1.1&content-type=text%2Fvnd.viewcvs-markup&diff_format=h
 	- https://apollo.astro.amu.edu.pl/PAD/pmwiki.php?n=Dybol.JPLEph 
 	- http://celestia.simulatorlabbs.com/CelSL/src/celephem/
+- the [gsatellite directory](https://github.com/Stellarium/stellarium/tree/master/plugins/Satellites/src/gsatellite) seems to contain a lot of external code that has been modified locally.
 
 ### The problem
 
@@ -80,8 +81,7 @@ This is also needed when the external data disappears: in that case, mention tha
 
 ### How to deal with module files that are updated externally and still not vendored internally
 
-TODO: this needs to be worked out to show that this is possible.
-The basic idea is to create a vendor branch with the new artifact, and will include some manual "undo-redo" work.
+The basic idea is to create a vendor branch with the new artifact, and do some manual "undo-redo" work.
 
 ### Version information in vendor file/directory paths
 
