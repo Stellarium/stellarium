@@ -25,6 +25,7 @@
 StelWebEngineView::StelWebEngineView(QWidget *parent): QWebEngineView(parent)
 {
     QApplication::instance()->installEventFilter(this);
+    setContextMenuPolicy(Qt::NoContextMenu);
 }
 
 bool StelWebEngineView::eventFilter(QObject *object, QEvent *event) {
