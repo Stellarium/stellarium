@@ -22,6 +22,7 @@
 #define STELDIALOGSEPARATE_HPP
 
 #include "StelDialog.hpp"
+#include <QDialog>
 
 class QGraphicsColorizeEffect;
 class NightCover;
@@ -51,6 +52,31 @@ protected slots:
 protected:
 	NightCover *nightCover;
 	QGraphicsColorizeEffect *nightModeEffect; // This seems not to work properly!
+};
+
+//! This class allows storing size changes when its sizeChanged() signal is connected to some handler.
+class CustomDialog : public QDialog
+{
+	Q_OBJECT
+public:
+	CustomDialog(QWidget *parent = Q_NULLPTR, Qt::WindowFlags f = Qt::WindowFlags())
+	: QDialog(parent, f)
+	{
+		setFocusPolicy(Qt::StrongFocus);
+	}
+
+signals:
+	void sizeChanged(QSizeF);
+
+protected:
+	virtual void resizeEvent(QResizeEvent *event)
+	{
+		if (event->size() != event->oldSize())
+		{
+			emit sizeChanged(event->size());
+		}
+		QDialog::resizeEvent(event);
+	}
 };
 
 #endif // STELDIALOGSEPARATE_HPP

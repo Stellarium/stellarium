@@ -107,7 +107,7 @@ void StelDialogSeparate::setVisible(bool v)
 		}
 		else
 		{
-			dialog = new QDialog(&StelMainView::getInstance(), Qt::Tool | Qt::FramelessWindowHint);
+			dialog = new CustomDialog(&StelMainView::getInstance(), Qt::Tool | Qt::FramelessWindowHint);
 			connect(dialog, SIGNAL(rejected()), this, SLOT(close()));
 			createDialogContent();
 			if (gui)
@@ -116,10 +116,9 @@ void StelDialogSeparate::setVisible(bool v)
 			connect(&StelApp::getInstance(), SIGNAL(visionNightModeChanged(bool)), this, SLOT(updateNightModeProperty(bool)));
 			updateNightModeProperty(StelApp::getInstance().getVisionModeNight());
 
-			reinterpret_cast<QDialog*>(dialog)->setSizeGripEnabled(true);
+			reinterpret_cast<CustomDialog*>(dialog)->setSizeGripEnabled(true);
 			QSizeF size = dialog->size();
-			// TODO: It seems we must subclass QDialog and fill in a resizeEvent handler to store new sizes?
-			//connect(reinterpret_cast<QDialog*>(dialog), SIGNAL(sizeChanged(QSizeF)), this, SLOT(handleDialogSizeChanged(QSizeF)));
+			connect(reinterpret_cast<CustomDialog*>(dialog), SIGNAL(sizeChanged(QSizeF)), this, SLOT(handleDialogSizeChanged(QSizeF)));
 
 			int newX, newY;
 			// Retrieve panel locations from config.ini, but shift if required to a visible position.
