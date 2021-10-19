@@ -64,7 +64,7 @@ sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc
                  graphviz doxygen gettext git \
                  qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev \
                  qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev \
-                 libgps-dev libqt5positioning5 libqt5positioning5-plugins
+                 libgps-dev libqt5positioning5 libqt5positioning5-plugins qtwebengine5-dev
 ```
 
 #### Fedora / CentOS
@@ -72,7 +72,7 @@ sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc
 ```
 sudo yum install cmake gcc graphviz doxygen gettext git \
                  qt5-base-devel qt5-qttools-devel qt5-qtscript-devel qt5-qtsvg-devel qt5-qtmultimedia-devel \
-                 qt5-qtserialport-devel qt5-qtlocation-devel qt5-qtpositioning-devel
+                 qt5-qtserialport-devel qt5-qtlocation-devel qt5-qtpositioning-devel qtwebengine5-devel
 ```
 
 #### Linux with outdated Qt
@@ -309,6 +309,7 @@ List of supported parameters (passed as `-DPARAMETER=VALUE`):
 | USE_PLUGIN_METEORSHOWERS      | bool   | ON      | Enable building the Meteor Showers plugin
 | USE_PLUGIN_NAVSTARS           | bool   | ON      | Enable building the Navigational Stars plugin
 | USE_PLUGIN_NOVAE              | bool   | ON      | Enable building the Bright Novae plugin
+| USE_PLUGIN_ONLINEQUERIES      | bool   | ON      | Enable building the Online Queries plugin
 | USE_PLUGIN_POINTERCOORDINATES | bool   | ON      | Enable building the Pointer Coordinates plugin
 | USE_PLUGIN_SCENERY3D          | bool   | ON      | Enable building the 3D Scenery plugin
 | USE_PLUGIN_REMOTECONTROL      | bool   | ON      | Enable building the Remote Control plugin

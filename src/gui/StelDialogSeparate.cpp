@@ -49,7 +49,6 @@ protected:
     {
 	Q_UNUSED(event)
 	QRect parentRect=reinterpret_cast<QWidget*>(parent())->geometry();
-	qDebug() << "Frame geometry:" << parentRect.x() << parentRect.y() << parentRect.width() << parentRect.height();
 	setGeometry(0, 0, parentRect.width(), parentRect.height());
 	QPainter painter(this);
 	painter.setRenderHint(QPainter::Antialiasing);
