@@ -31,7 +31,8 @@ class NightCover;
 //! Another motivation may be to have windows on another screen.
 //!
 //! The dialog behaves almost like @class StelDialog. However, given how night mode is applied as screen effect,
-//! this dialog does not adhere to the global night mode.
+//! this dialog does not adhere to the global night mode. Therefore a semitransparent QWidget (@class NightCover)
+//! is placed on top. This does not filter away all blue light, but at least dims bright non-red colors.
 //!
 class StelDialogSeparate : public StelDialog
 {

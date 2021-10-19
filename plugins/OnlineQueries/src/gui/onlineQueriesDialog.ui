@@ -287,7 +287,7 @@
               </layout>
              </item>
              <item>
-              <widget class="QWebEngineView" name="webEngineView" native="true">
+              <widget class="StelWebEngineView" name="webEngineView" native="true">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                  <horstretch>0</horstretch>
@@ -353,6 +353,12 @@
    <class>QWebEngineView</class>
    <extends>QWidget</extends>
    <header>QtWebEngineWidgets/qwebengineview.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>StelWebEngineView</class>
+   <extends>QWebEngineView</extends>
+   <header>StelWebEngineView.hpp</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -15,6 +15,8 @@ SET(ONLINEQUERIES_SRCS
      HipOnlineQuery.cpp
      gui/OnlineQueriesDialog.hpp
      gui/OnlineQueriesDialog.cpp
+     gui/StelWebEngineView.hpp
+     gui/StelWebEngineView.cpp
 )
 
 SET(ONLINEQUERIES_UIS

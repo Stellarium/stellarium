@@ -20,6 +20,7 @@
 
 #include "OnlineQueriesDialog.hpp"
 #include "OnlineQueries.hpp"
+#include "StelWebEngineView.hpp"
 
 #include <QPushButton>
 #include "StelModuleMgr.hpp"
@@ -111,12 +112,12 @@ void OnlineQueriesDialog::createDialogContent()
 	qDebug() << "dialog created";
 }
 
-void OnlineQueriesDialog::setOutputHtml(QString html)
+void OnlineQueriesDialog::setOutputHtml(QString html) const
 {
     view->setHtml(html);
 }
 
-void OnlineQueriesDialog::setOutputUrl(QUrl url)
+void OnlineQueriesDialog::setOutputUrl(QUrl url) const
 {
     view->setUrl(url);
 }
