@@ -27,6 +27,7 @@
 #include <QWidget>
 #include <QDialog>
 #include <QGraphicsColorizeEffect>
+#include <QSizeGrip>
 
 class NightCover: public QWidget{
 public:
@@ -196,6 +197,17 @@ void StelDialogSeparate::setVisible(bool v)
 
 void StelDialogSeparate::updateNightModeProperty(bool n)
 {
+	StelDialog::updateNightModeProperty(n);
+	// It seems we cannot code a nightMode property for the QSizeGrip in the global QSS sheet :-(
+	QList<QSizeGrip*> grips=dialog->findChildren<QSizeGrip*>();
+	for (const auto &g: grips)
+	{
+		if (n)
+			g->setStyleSheet("QSizeGrip { background: rgb( 65,   0,   0);}");
+		else
+			g->setStyleSheet("QSizeGrip { background: rgb(101, 101, 101);}");
+	}
+
 	if (nightModeEffect)
 		nightModeEffect->setStrength(n ? 0.5 : 0.0);
 	if (nightCover)

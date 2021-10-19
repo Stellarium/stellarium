@@ -41,6 +41,12 @@ QToolTip {
 	background: rgb(101, 0, 0);
 }
 
+QSizeGrip {
+	width: 12px;
+	height: 12px;
+	background: rgb(101, 101, 101);
+}
+
 QTextEdit,
 QPlainTextEdit,
 QListWidget,
