@@ -41,6 +41,7 @@ public slots:
 
 protected:
 	void createDialogContent() Q_DECL_OVERRIDE;
+	void setAboutHtml();
 
 private:
 	Ui_onlineQueriesDialogForm* ui;

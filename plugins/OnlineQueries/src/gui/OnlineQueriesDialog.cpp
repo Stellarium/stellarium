@@ -47,6 +47,7 @@ void OnlineQueriesDialog::retranslate()
 	if (dialog)
 	{
 		ui->retranslateUi(dialog);
+		setAboutHtml();
 	}
 }
 
@@ -58,7 +59,6 @@ void OnlineQueriesDialog::createDialogContent()
 	//load UI from form file
 	ui->setupUi(dialog);
 	view=ui->webEngineView; Q_ASSERT(view);
-	qDebug() << "view connected";
 
 	//hook up retranslate event
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
@@ -74,6 +74,7 @@ void OnlineQueriesDialog::createDialogContent()
 		enableKineticScrolling(gui->getFlagUseKineticScrolling());
 		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
 	}
+	setAboutHtml();
 
 	connect(ui->wikipediaPushButton,    SIGNAL(clicked()), plugin, SLOT(queryWikipedia()));
 	connect(ui->aavsoPushButton,        SIGNAL(clicked()), plugin, SLOT(queryAAVSO()));
@@ -109,7 +110,6 @@ void OnlineQueriesDialog::createDialogContent()
 	}
 	connect(ui->backPushButton,    &QPushButton::clicked, [=]{view->triggerPageAction(QWebEnginePage::Back);});
 	connect(ui->forwardPushButton, &QPushButton::clicked, [=]{view->triggerPageAction(QWebEnginePage::Forward);});
-	qDebug() << "dialog created";
 }
 
 void OnlineQueriesDialog::setOutputHtml(QString html) const
@@ -120,4 +120,45 @@ void OnlineQueriesDialog::setOutputHtml(QString html) const
 void OnlineQueriesDialog::setOutputUrl(QUrl url) const
 {
     view->setUrl(url);
+}
+
+void OnlineQueriesDialog::setAboutHtml()
+{
+	// Regexp to replace {text} with an HTML link.
+	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
+
+	QString html = "<html><head></head><body>";
+	html += "<h2>" + q_("OnlineQueries Plug-in") + "</h2><table width=\"90%\">";
+	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + ONLINEQUERIES_PLUGIN_VERSION + "</td></tr>";
+	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + ONLINEQUERIES_PLUGIN_LICENSE + "</td></tr>";
+	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Georg Zotti</td></tr>";
+	//html += "<tr><td><strong>" + q_("Contributors") + ":</strong></td><td> List with br separators </td></tr>";
+	html += "</table>";
+
+	html += "<p>" + q_("The OnlineQueries plugin provides an interface to various online sources for astronomical information.") + "</p>";
+	html += "<ul><li>" + q_("Wikipedia, the free online encyclopedia") + "</li>";
+	html += "<li>" + q_("AAVSO, the International Variable Star Index of the American Association for Variable Star Observers") + "</li>";
+	html += "<li>" + q_("GCVS, the General Catalogue of Variable Stars of the Sternberg Astronomical Institute and the Institute of Astronomy of the Russian Academy of Sciences in Moscow") + "</li>";
+	html += "<li>" + q_("Ancient-Skies, a private project which collects information about star names and their mythologies") + "</li>";
+	html += "<li>" + q_("3 custom websites of your choice") + "</li>";
+	html += "</ul>";
+	html += "<p>" + q_("Regardless of the current program language, the result is always presented in English or the language of the respective website.") + "</p>";
+
+	html += "<h3>" + q_("Publications") + "</h3>";
+	html += "<p>"  + q_("If you use this plugin in your publications, please cite:") + "</p>";
+	html += "<ul>";
+	html += "<li>" + QString("{Georg Zotti, Susanne M. Hoffmann, Doris Vickers, Rüdiger Schultz, Alexander Wolf: Revisiting Star Names: Stellarium and the Ancient Skies Database.} Proc. SEAC2021 (in preparation)")
+			 .toHtmlEscaped() /*.replace(a_rx, "<a href=\"https://equinoxpub.com/PATH-TO.pdf\">\\1</a>")*/ + "</li>";
+	html += "</ul>";
+
+	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("OnlineQueries plugin");
+	html += "</body></html>";
+
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if(gui!=Q_NULLPTR)
+	{
+		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
+		ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
+	}
+	ui->aboutTextBrowser->setHtml(html);
 }
