@@ -24,7 +24,6 @@
 #include "StelDialog.hpp"
 #include <QDialog>
 
-class QGraphicsColorizeEffect;
 class NightCover;
 
 //! @class StelDialogSeparate Base class for windows NOT embedded in the graphics scene.
@@ -51,7 +50,6 @@ protected slots:
 
 protected:
 	NightCover *nightCover;
-	QGraphicsColorizeEffect *nightModeEffect; // This seems not to work properly!
 };
 
 //! This class allows storing size changes when its sizeChanged() signal is connected to some handler.

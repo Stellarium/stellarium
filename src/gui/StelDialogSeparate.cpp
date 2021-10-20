@@ -26,7 +26,6 @@
 //#include <QDebug>
 #include <QWidget>
 #include <QDialog>
-#include <QGraphicsColorizeEffect>
 #include <QSizeGrip>
 
 class NightCover: public QWidget{
@@ -61,21 +60,14 @@ protected:
 
 StelDialogSeparate::StelDialogSeparate(QString dialogName, QObject* parent)
 	: StelDialog(dialogName, parent),
-	nightCover(Q_NULLPTR),
-	nightModeEffect(Q_NULLPTR)
+	nightCover(Q_NULLPTR)
 {
-    // It seems the nightModeEffect does not work properly. The NightCover looks better!
-//    nightModeEffect=new QGraphicsColorizeEffect(this);
-//    nightModeEffect->setColor(QColor(127, 32, 0));
-//    nightModeEffect->setStrength(0.0);
 }
 
 StelDialogSeparate::~StelDialogSeparate()
 {
     if (nightCover)
 	delete nightCover;
-    if (nightModeEffect)
-	delete nightModeEffect;
 }
 
 void StelDialogSeparate::setVisible(bool v)
@@ -92,7 +84,6 @@ void StelDialogSeparate::setVisible(bool v)
 			if (gui)
 				dialog->setStyleSheet(gui->getStelStyle().qtStyleSheet);
 			dialog->show();
-			//StelMainView::getInstance().scene()->setActiveWindow(proxy);
 			// If the main window has been resized, it is possible the dialog
 			// will be off screen.  Check for this and move it to a visible
 			// position if necessary
@@ -102,7 +93,6 @@ void StelDialogSeparate::setVisible(bool v)
 			if (newPos.y()>=screenSize.height())
 				newPos.setY(screenSize.height() - dialog->size().height());
 			if (newPos != dialog->pos())
-				//proxy->setPos(newPos);
 				dialog->move(newPos.toPoint());
 		}
 		else
@@ -181,10 +171,7 @@ void StelDialogSeparate::setVisible(bool v)
 			dialog->show();
 		}
 		dialog->setFocus();
-		if (nightModeEffect)
-		    dialog->setGraphicsEffect(nightModeEffect);
-		else
-		    nightCover=new NightCover(dialog);
+		nightCover=new NightCover(dialog);
 	}
 	else
 	{
@@ -207,8 +194,6 @@ void StelDialogSeparate::updateNightModeProperty(bool n)
 			g->setStyleSheet("QSizeGrip { background: rgb(101, 101, 101);}");
 	}
 
-	if (nightModeEffect)
-		nightModeEffect->setStrength(n ? 0.5 : 0.0);
 	if (nightCover)
 	{
 	    if (n)
