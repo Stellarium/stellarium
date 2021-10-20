@@ -112,8 +112,8 @@ void StelDialog::setVisible(bool v)
 			if (gui)
 				dialog->setStyleSheet(gui->getStelStyle().qtStyleSheet);
 			// Ensure that tooltip get rendered in red in night mode.
-			connect(&StelApp::getInstance(), SIGNAL(visionNightModeChanged(bool)), this, SLOT(updateNightModeProperty()));
-			updateNightModeProperty();
+			connect(&StelApp::getInstance(), SIGNAL(visionNightModeChanged(bool)), this, SLOT(updateNightModeProperty(bool)));
+			updateNightModeProperty(StelApp::getInstance().getVisionModeNight());
 
 			proxy = new CustomProxy(parent, Qt::Tool);
 			proxy->setWidget(dialog);
@@ -403,9 +403,9 @@ void StelDialog::enableKineticScrolling(bool b)
 	}
 }
 
-void StelDialog::updateNightModeProperty()
+void StelDialog::updateNightModeProperty(bool n)
 {
-	dialog->setProperty("nightMode", StelApp::getInstance().getVisionModeNight());
+	dialog->setProperty("nightMode", n);
 }
 
 void StelDialog::handleMovedTo(QPoint newPos)

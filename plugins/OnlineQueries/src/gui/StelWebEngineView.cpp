@@ -18,35 +18,37 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef ONLINEQUERIESDIALOG_HPP
-#define ONLINEQUERIESDIALOG_HPP
+#include "StelWebEngineView.hpp"
+#include <QMouseEvent>
+#include <QApplication>
 
-#include "StelDialogSeparate.hpp"
-#include "ui_onlineQueriesDialog.h"
-
-class OnlineQueries;
-class StelWebEngineView;
-
-class OnlineQueriesDialog : public StelDialogSeparate
+StelWebEngineView::StelWebEngineView(QWidget *parent): QWebEngineView(parent)
 {
-	Q_OBJECT
-public:
-	OnlineQueriesDialog(QObject* parent = Q_NULLPTR);
-	~OnlineQueriesDialog() Q_DECL_OVERRIDE;
+    QApplication::instance()->installEventFilter(this);
+    setContextMenuPolicy(Qt::NoContextMenu);
+}
 
-public slots:
-	void retranslate() Q_DECL_OVERRIDE;
-	void setOutputHtml(QString html) const;
-	void setOutputUrl(QUrl url) const;
+bool StelWebEngineView::eventFilter(QObject *object, QEvent *event) {
+    if (object->parent() == this && event->type() == QEvent::MouseButtonRelease) {
+	mouseReleaseEvent(static_cast<QMouseEvent *>(event));
+    }
 
-protected:
-	void createDialogContent() Q_DECL_OVERRIDE;
-	void setAboutHtml();
+    return false;
+}
 
-private:
-	Ui_onlineQueriesDialogForm* ui;
-	OnlineQueries* plugin;
-	StelWebEngineView *view;
-};
-
-#endif
+void StelWebEngineView::mouseReleaseEvent(QMouseEvent *e)
+{
+	switch (e->button())
+	{
+		case Qt::BackButton:
+		    qDebug() << "Back pressed";
+		    back();
+		    break;
+		case Qt::ForwardButton:
+		    qDebug() << "Forward pressed";
+		    forward();
+		    break;
+		default:
+		    QWidget::mouseReleaseEvent(e);
+	}
+}

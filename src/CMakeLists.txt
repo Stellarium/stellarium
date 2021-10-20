@@ -349,6 +349,8 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/StelDialog.hpp
           gui/StelDialog_p.hpp
           gui/StelDialog.cpp
+          gui/StelDialogSeparate.hpp
+          gui/StelDialogSeparate.cpp
      )
 
      ################# compiles .ui files ############

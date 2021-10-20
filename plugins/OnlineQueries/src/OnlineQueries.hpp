@@ -57,8 +57,7 @@ public:
 	virtual ~OnlineQueries() Q_DECL_OVERRIDE;
 
 	virtual void init() Q_DECL_OVERRIDE;
-	virtual void deinit() Q_DECL_OVERRIDE;
-	virtual void update(double) Q_DECL_OVERRIDE {;}
+	virtual void update(double) Q_DECL_OVERRIDE {}
 	virtual void draw(StelCore *core) Q_DECL_OVERRIDE {Q_UNUSED(core)}
 	virtual bool configureGui(bool show) Q_DECL_OVERRIDE;
 
@@ -98,10 +97,11 @@ private slots:
 	void onAavsoHipQueryStatusChanged(); //!< To be connected
 
 private:
-	//! The actual query worker: build name or HIP number from currently selected object, and present result in dialog or external browser
-	void query(QString url, bool useHip, bool useBrowser);
+	//! The actual query worker: build name or HIP number from currently selected object
+	void query(QString url, bool useHip);
 	void createToolbarButton() const;
 	void setOutputHtml(QString html); //!< Forward html to GUI dialog
+	void setOutputUrl(QUrl url); //!< Forward URL to GUI dialog
 	OnlineQueriesDialog* dialog;
 	QSettings* conf;
 	bool enabled;
@@ -121,9 +121,6 @@ private:
 	bool custom1UseHip; //!< Use HIP number, not common name, in query?
 	bool custom2UseHip; //!< Use HIP number, not common name, in query?
 	bool custom3UseHip; //!< Use HIP number, not common name, in query?
-	bool custom1inBrowser; //!< True if custom1 URL should be opened in a webbrowser, not in our panel
-	bool custom2inBrowser; //!< True if custom2 URL should be opened in a webbrowser, not in our panel
-	bool custom3inBrowser; //!< True if custom3 URL should be opened in a webbrowser, not in our panel
 
 	HipOnlineQuery *hipQuery;              // one is actually enough!
 	HipOnlineReply *hipOnlineReply;        // Common reply object

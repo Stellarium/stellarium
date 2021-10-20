@@ -18,35 +18,25 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef ONLINEQUERIESDIALOG_HPP
-#define ONLINEQUERIESDIALOG_HPP
+#ifndef STELWEBENGINEVIEW_HPP
+#define STELWEBENGINEVIEW_HPP
 
-#include "StelDialogSeparate.hpp"
-#include "ui_onlineQueriesDialog.h"
+#include <QWebEngineView>
 
-class OnlineQueries;
-class StelWebEngineView;
+//! @class StelWebEngineView A trivial extension of QWebEngineView. 
+//! This class provides a mouse button handler override which uses the mouse back/forward buttons for navigation.
+//! To use in an .ui file in QCreator designer, add a QWebEngineView first,
+//! then define it as "placeholder" for StelWebEngineView and import this header.
 
-class OnlineQueriesDialog : public StelDialogSeparate
-{
+class StelWebEngineView: public QWebEngineView {
 	Q_OBJECT
 public:
-	OnlineQueriesDialog(QObject* parent = Q_NULLPTR);
-	~OnlineQueriesDialog() Q_DECL_OVERRIDE;
-
-public slots:
-	void retranslate() Q_DECL_OVERRIDE;
-	void setOutputHtml(QString html) const;
-	void setOutputUrl(QUrl url) const;
-
+	StelWebEngineView(QWidget *parent=Q_NULLPTR);
 protected:
-	void createDialogContent() Q_DECL_OVERRIDE;
-	void setAboutHtml();
-
-private:
-	Ui_onlineQueriesDialogForm* ui;
-	OnlineQueries* plugin;
-	StelWebEngineView *view;
+	//! override to catch mouse button events.
+	virtual bool eventFilter(QObject *object, QEvent *event) Q_DECL_OVERRIDE;
+	//! improves mouse button navigation in the Web View by using back/forward buttons.
+	virtual void mouseReleaseEvent(QMouseEvent *e) Q_DECL_OVERRIDE;
 };
 
 #endif
