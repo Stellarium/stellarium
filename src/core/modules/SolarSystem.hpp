@@ -58,6 +58,7 @@ class SolarSystem : public StelObjectModule
 	Q_PROPERTY(bool flagOrbits			READ getFlagOrbits			WRITE setFlagOrbits			NOTIFY flagOrbitsChanged)
 	Q_PROPERTY(bool trailsDisplayed			READ getFlagTrails			WRITE setFlagTrails			NOTIFY trailsDisplayedChanged)
 	Q_PROPERTY(int maxTrailPoints			READ getMaxTrailPoints			WRITE setMaxTrailPoints			NOTIFY maxTrailPointsChanged)
+	Q_PROPERTY(int maxTrailTimeExtent		READ getMaxTrailTimeExtent		WRITE setMaxTrailTimeExtent		NOTIFY maxTrailTimeExtentChanged)
 	Q_PROPERTY(int trailsThickness			READ getTrailsThickness			WRITE setTrailsThickness		NOTIFY trailsThicknessChanged)
 	// was bool hintsDisplayed. This is a "forwarding property" only, without own variable.
 	Q_PROPERTY(bool flagHints			READ getFlagHints			WRITE setFlagHints			NOTIFY flagHintsChanged)
@@ -235,6 +236,14 @@ public slots:
 	void setMaxTrailPoints(int max);
 	//! Get maximum number of trail points. Too many points may slow down the application. 5000 seems to be a good balance.
 	int getMaxTrailPoints() const {return maxTrailPoints;}
+
+	//! Set maximum number of trail time extent in years.
+	//! Too many points may slow down the application. One year (365 days) seems to be a good balance.
+	//! If drawing many trails slows down the application, you can set a new maximum trail time extent or step length.
+	//! Note that the fadeout may require more points or a decent simulation speed.
+	void setMaxTrailTimeExtent(int max);
+	//! Get maximum number of trail time extent in years. Too many points may slow down the application. One year (365 days) seems to be a good balance.
+	int getMaxTrailTimeExtent() const {return maxTrailTimeExtent;}
 
 	//! Set flag which determines if planet hints are drawn or hidden along labels
 	void setFlagHints(bool b);
@@ -732,6 +741,7 @@ signals:
 	void trailsThicknessChanged(int v);
 	void orbitsThicknessChanged(int v);
 	void maxTrailPointsChanged(int max);
+	void maxTrailTimeExtentChanged(int max);
 	void flagPointerChanged(bool b);
 	void flagNativePlanetNamesChanged(bool b);
 	void flagPlanetsDisplayedChanged(bool b);
@@ -1069,6 +1079,7 @@ private:
 	bool flagIsolatedTrails;
 	int numberIsolatedTrails;
 	int maxTrailPoints;                         // limit trails to a manageable size.
+	int maxTrailTimeExtent;
 	int trailsThickness;
 	bool flagIsolatedOrbits;
 	bool flagPlanetsOrbitsOnly;

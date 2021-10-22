@@ -86,6 +86,7 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	, flagIsolatedTrails(true)
 	, numberIsolatedTrails(0)
 	, maxTrailPoints(5000)
+	, maxTrailTimeExtent(1)
 	, trailsThickness(1)
 	, flagIsolatedOrbits(true)
 	, flagPlanetsOrbitsOnly(false)
@@ -209,6 +210,7 @@ void SolarSystem::init()
 	setFlagIsolatedTrails(conf->value("viewing/flag_isolated_trails", true).toBool());
 	setNumberIsolatedTrails(conf->value("viewing/number_isolated_trails", 1).toInt());
 	setMaxTrailPoints(conf->value("viewing/max_trail_points", 5000).toInt());
+	setMaxTrailTimeExtent(conf->value("viewing/max_trail_time_extent", 1).toInt());
 	setFlagIsolatedOrbits(conf->value("viewing/flag_isolated_orbits", true).toBool());
 	setFlagPlanetsOrbitsOnly(conf->value("viewing/flag_planets_orbits_only", false).toBool());
 	setFlagPermanentOrbits(conf->value("astro/flag_permanent_orbits", false).toBool());
@@ -330,7 +332,7 @@ void SolarSystem::recreateTrails()
 	// Create a trail group containing all the planets orbiting the sun (not including satellites)
 	if (allTrails!=Q_NULLPTR)
 		delete allTrails;
-	allTrails = new TrailGroup(365.f, maxTrailPoints);
+	allTrails = new TrailGroup(maxTrailTimeExtent * 365.f, maxTrailPoints);
 
 	unsigned long cnt = static_cast<unsigned long>(selectedSSO.size());
 	if (cnt>0 && getFlagIsolatedTrails())
@@ -1788,6 +1790,16 @@ void SolarSystem::setMaxTrailPoints(int max)
 		allTrails->reset(max);
 		recreateTrails();
 		emit maxTrailPointsChanged(max);
+	}
+}
+
+void SolarSystem::setMaxTrailTimeExtent(int max)
+{
+	if (maxTrailTimeExtent != max && maxTrailTimeExtent > 0)
+	{
+		maxTrailTimeExtent = max;
+		recreateTrails();
+		emit maxTrailTimeExtentChanged(max);
 	}
 }
 
