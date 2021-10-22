@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-10-07 19:43+0700\n"
+"POT-Creation-Date: 2021-10-22 18:34+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -52,7 +52,7 @@ msgid "asterism"
 msgstr ""
 
 #: src/core/modules/AsterismMgr.cpp:98
-#: src/core/modules/ConstellationMgr.cpp:133 src/core/modules/StarMgr.cpp:446
+#: src/core/modules/ConstellationMgr.cpp:133 src/core/modules/StarMgr.cpp:448
 #: src/core/modules/GridLinesMgr.cpp:1846
 #: src/core/modules/SpecialMarkersMgr.cpp:263
 #: src/core/modules/LandscapeMgr.cpp:608
@@ -121,21 +121,21 @@ msgstr ""
 msgid "Reload the sky culture"
 msgstr ""
 
-#: src/core/modules/StarMgr.cpp:447 src/ui_viewDialog.h:3248
+#: src/core/modules/StarMgr.cpp:449 src/ui_viewDialog.h:3248
 #: src/ui_dsoColorsDialog.h:703
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:254
 msgid "Stars"
 msgstr ""
 
-#: src/core/modules/StarMgr.cpp:448
+#: src/core/modules/StarMgr.cpp:450
 msgid "Stars labels"
 msgstr ""
 
-#: src/core/modules/StarMgr.cpp:450
+#: src/core/modules/StarMgr.cpp:452
 msgid "Increase the magnitude limit for stars"
 msgstr ""
 
-#: src/core/modules/StarMgr.cpp:451
+#: src/core/modules/StarMgr.cpp:453
 msgid "Reduce the magnitude limit for stars"
 msgstr ""
 
@@ -670,6 +670,7 @@ msgstr ""
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:455
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:213
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:162
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:134
 msgid "Author"
 msgstr ""
 
@@ -3984,6 +3985,7 @@ msgstr ""
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:128
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:211
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:160
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:132
 msgid "Version"
 msgstr ""
 
@@ -4007,6 +4009,7 @@ msgstr ""
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:129
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:212
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:161
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:133
 msgid "License"
 msgstr ""
 
@@ -8073,10 +8076,12 @@ msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr ""
 
 #: src/translations.h:683
+#: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:255
 msgid "Back"
 msgstr ""
 
 #: src/translations.h:684
+#: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:257
 msgid "Forward"
 msgstr ""
 
@@ -9587,6 +9592,7 @@ msgid "Help"
 msgstr ""
 
 #: src/ui_helpDialogGui.h:246
+#: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:261
 msgid "About"
 msgstr ""
 
@@ -9868,7 +9874,6 @@ msgid "names in English"
 msgstr ""
 
 #: src/ui_searchDialogGui.h:933 src/ui_astroCalcDialog.h:1896
-#: plugins/Satellites/src/ui_satellitesDialog.h:1099
 msgid "Search in list..."
 msgstr ""
 
@@ -15234,6 +15239,10 @@ msgstr ""
 msgid "Fade length:"
 msgstr ""
 
+#: plugins/Satellites/src/ui_satellitesDialog.h:1099
+msgid "Search ..."
+msgstr ""
+
 #: plugins/Satellites/src/ui_satellitesDialog.h:1101
 msgid "Double-click a satellite to start tracking it."
 msgstr ""
@@ -18061,12 +18070,14 @@ msgstr ""
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:158
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:241
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:195
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:147
 msgid "Publications"
 msgstr ""
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:159
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:242
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:196
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:148
 msgid "If you use this plugin in your publications, please cite:"
 msgstr ""
 
@@ -26050,106 +26061,158 @@ msgstr ""
 msgid "Mesoamerica"
 msgstr ""
 
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:60
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:59
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:108
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:109
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:110
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:111
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:112
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:113
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:114
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:115
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:116
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:117
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:118
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:119
-#: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:286
+#: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:253
 msgid "Online Queries"
 msgstr ""
 
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:63
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:62
 msgid ""
 "This plugin allows object information retrieval from selected online "
 "services."
 msgstr ""
 
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:112
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:108
 msgid "Show window for Online Queries"
 msgstr ""
 
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:113
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:109
 msgid "Call ancient-skies on current selection"
 msgstr ""
 
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:114
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:110
 msgid "Call AAVSO database on current selection"
 msgstr ""
 
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:115
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:111
 msgid "Call GCVS database on current selection"
 msgstr ""
 
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:116
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:112
 msgid "Call Wikipedia on current selection"
 msgstr ""
 
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:117
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:113
 msgid "Call custom site 1 on current selection"
 msgstr ""
 
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:118
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:114
 msgid "Call custom site 2 on current selection"
 msgstr ""
 
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:119
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:115
 msgid "Call custom site 3 on current selection"
 msgstr ""
 
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:84
-msgctxt "tab title"
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:285
+msgid "Please select an object first!"
+msgstr ""
+
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:294
+msgctxt "OnlineQueries"
+msgid "Not a star!"
+msgstr ""
+
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:301
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:315
+msgctxt "OnlineQueries"
+msgid "Not a HIPPARCOS star!"
+msgstr ""
+
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:348
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:354
+msgid "ERROR"
+msgstr ""
+
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:348
+msgid ""
+"We can request data for stars, planets and deep-sky objects. A valid name "
+"for this object could not be found. Please enable a few DSO catalogs to form "
+"at least a numerical name."
+msgstr ""
+
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:354
+msgid "We can request data for stars, planets and deep-sky objects only."
+msgstr ""
+
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:90
+msgctxt "GUI label"
 msgid "(Custom 1)"
 msgstr ""
 
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:93
-msgctxt "tab title"
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:99
+msgctxt "GUI label"
 msgid "(Custom 2)"
 msgstr ""
 
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:102
-msgctxt "tab title"
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:108
+msgctxt "GUI label"
 msgid "(Custom 3)"
 msgstr ""
 
-#: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:288
-#: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:290
-#: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:292
-#: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:294
-#: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:296
-#: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:298
-#: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:300
-msgid "Query"
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:131
+msgid "OnlineQueries Plug-in"
 msgstr ""
 
-#: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:289
-msgid "Wikipedia"
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:138
+msgid ""
+"The OnlineQueries plugin provides an interface to various online sources for "
+"astronomical information."
 msgstr ""
 
-#: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:291
-msgid "AAVSO"
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:139
+msgid "Wikipedia, the free online encyclopedia"
 msgstr ""
 
-#: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:293
-msgid "GCVS"
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:140
+msgid ""
+"AAVSO, the International Variable Star Index of the American Association for "
+"Variable Star Observers"
 msgstr ""
 
-#: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:295
-msgid "Ancient-Skies"
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:141
+msgid ""
+"GCVS, the General Catalogue of Variable Stars of the Sternberg Astronomical "
+"Institute and the Institute of Astronomy of the Russian Academy of Sciences "
+"in Moscow"
 msgstr ""
 
-#: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:297
-msgid "Custom 1"
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:142
+msgid ""
+"Ancient-Skies, a private project which collects information about star names "
+"and their mythologies"
 msgstr ""
 
-#: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:299
-msgid "Custom 2"
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:143
+msgid "3 custom websites of your choice"
 msgstr ""
 
-#: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:301
-msgid "Custom 3"
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:145
+msgid ""
+"Regardless of the current program language, the result is always presented "
+"in English or the language of the respective website."
+msgstr ""
+
+#: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:256
+msgid "(Custom 1)"
+msgstr ""
+
+#: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:258
+msgid "(Custom 3)"
+msgstr ""
+
+#: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:259
+msgid "(Custom 2)"
+msgstr ""
+
+#: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:260
+msgid "Queries"
 msgstr ""
