@@ -33,6 +33,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include "de440.hpp"
 #include "pluto.h"
 #include "htc20b.hpp"
+#include "StelUtils.hpp"
 
 #define EPHEM_MERCURY_ID  0
 #define EPHEM_VENUS_ID    1
@@ -414,6 +415,18 @@ void get_lunar_parent_coordsv(double jde, double xyz[3], double xyzdot[3], void*
 		const double factor=8640.; // 86400/10 seconds
 		xyzdot[0]*=factor; xyzdot[1]*=factor; xyzdot[2]*=factor;
 	}
+	// Apply a tiny sub-arcsecond correction to compensate for the difference between figure centre (visible) and centre of gravity (ephemeris position).
+	// This is important for eclipse and occultation observations.
+	// See note in "Astronomical Phenomena for the year 2017", Naut.Alm.Office, USNO and HM Naut. Alm. Office, UK Hydrographic Office, 2014, p.69
+	// TBD: Find a better reference for this!
+	Vec3d XYZ(xyz);
+	double lng, lat, r;
+	StelUtils::rectToSphe(&lng, &lat, &r, XYZ);
+	lng+= 0.50/3600. * M_PI_180;
+	lat+=-0.25/3600. * M_PI_180;
+	StelUtils::spheToRect(lng, lat, r, XYZ);
+	xyz[0]=XYZ.v[0]; xyz[1]=XYZ.v[1]; xyz[2]=XYZ.v[2];
+
 }
 
 void get_phobos_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)

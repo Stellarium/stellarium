@@ -268,6 +268,27 @@ namespace StelUtils
 		*lng = atan2(static_cast<double>(v[1]),static_cast<double>(v[0]));
 	}
 
+	//! Convert from spherical coordinates (including distance) to Rectangular direction.
+	//! @param lng longitude in radian
+	//! @param lat latitude in radian
+	//! @param r length of radius vector (distance)
+	//! @param v the resulting 3D unit vector
+	inline void spheToRect(const double lng, const double lat, const double r, Vec3d& v){
+		const double cosLat = cos(lat);
+		v.set(cos(lng) * cosLat * r, sin(lng) * cosLat * r, sin(lat) * r);
+	}
+
+	//! Convert from Rectangular direction to spherical coordinate components (including distance).
+	//! @param lng double* to store longitude in radian [-pi, pi]
+	//! @param lat double* to store latitude in radian
+	//! @param r double*   length of radius vector (distance)
+	//! @param v the input 3D vector
+	inline void rectToSphe(double *lng, double *lat, double *r, const Vec3d& v){
+		*r = v.length();
+		*lat = asin(v[2] / *r);
+		*lng = atan2(v[1],v[0]);
+	}
+
 	//! Coordinate Transformation from equatorial to ecliptical
 	inline void equToEcl(const double raRad, const double decRad, const double eclRad, double *lambdaRad, double *betaRad){
 		*lambdaRad=std::atan2(std::sin(raRad)*std::cos(eclRad)+std::tan(decRad)*std::sin(eclRad), std::cos(raRad));
