@@ -24,6 +24,8 @@ The basic problem with copy-pasting external artifacts is **code (or data) rot**
 	- https://apollo.astro.amu.edu.pl/PAD/pmwiki.php?n=Dybol.JPLEph 
 	- http://celestia.simulatorlabbs.com/CelSL/src/celephem/
 - the [gsatellite directory](https://github.com/Stellarium/stellarium/tree/master/plugins/Satellites/src/gsatellite) seems to contain a lot of external code that has been modified locally.
+- possibly most of the code stored under `[src/external](https://github.com/Stellarium/stellarium/tree/master/src/external)/`
+- although less likely, copy-pasted snippets from Qt examples could be candidates ([example](https://github.com/Stellarium/stellarium/blob/2db52c18bc87aaefa00d3d4a280969349634af8f/src/gui/StelGuiItems.cpp#L352)), although often too ephemeral (sic).
 
 ### The problem
 
