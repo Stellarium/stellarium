@@ -25,7 +25,10 @@ The basic problem with copy-pasting external artifacts is **code (or data) rot**
 	- http://celestia.simulatorlabbs.com/CelSL/src/celephem/
 - the [gsatellite directory](https://github.com/Stellarium/stellarium/tree/master/plugins/Satellites/src/gsatellite) seems to contain a lot of external code that has been modified locally.
 - possibly most of the code stored under `[src/external](https://github.com/Stellarium/stellarium/tree/master/src/external)/`
-- although less likely, copy-pasted snippets from Qt examples could be candidates ([example](https://github.com/Stellarium/stellarium/blob/2db52c18bc87aaefa00d3d4a280969349634af8f/src/gui/StelGuiItems.cpp#L352)), although often too ephemeral (sic).
+- although less likely, copy-pasted snippets from Qt examples could be candidates ([example](https://github.com/Stellarium/stellarium/blob/2db52c18bc87aaefa00d3d4a280969349634af8f/src/gui/StelGuiItems.cpp#L352))
+- [meshwarp sample code](http://paulbourke.net/dataformats/meshwarp/) : yes, the sample code.
+
+Although some examples abve are unlikely to ever change - or be very ephemeral (sic) - the reasoning is always: prevent rather than cure, and exercise a lot, until it becomes second nature. Just keep Murphy's Law in mind...
 
 ### The problem
 
@@ -92,4 +95,8 @@ Sometimes, developers add directories/files with path names containing version i
 This is a bad practice, often done by developers that do not have access to a good VCS.
 
 In such cases, the version information should be removed before committing the vendor drop; this will present the additional advantage that the history of such a file becomes available. This is a delicate step, as the "pristine copy" is no longer fulfilled. If filename information is part of the correct functioning of the imported artifacts (eg it is also referenced in vendor scripts, in linked data, etc), then you are facing a difficult problem. In such a case, it might be better to not rename the vendor file paths at all and accept that file history must be discovered by other means (eg a manual diff).
+
+### Using data from other users
+
+This approach also works for users that want to keep track of other user's configuration data or scripts while at the same time apply local changes.
 
