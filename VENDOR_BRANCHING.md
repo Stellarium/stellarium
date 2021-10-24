@@ -106,6 +106,10 @@ This is also needed when the external data disappears: in that case, mention tha
 
 ## Notes
 
+### When conflicts are no longer manageable
+
+In some cases, merging vendor updates may become too difficult if not impossible. Nevertheless, vendor drops will continue to provide the means to port changes, by allowing the developer to study what changed in the vendor branch, and apply those changes manually.
+
 ### Importing vendor code written in other languages
 
 If the artifact is not usable without extensive rewriting (e.g. Fortran code in a C++ project), it might still make sense to vendor the original file and keep it as a neutral (uncompiled) text file that will serve as an excellent reference.
