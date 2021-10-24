@@ -24,7 +24,7 @@ The basic problem with copy-pasting external artifacts is **code (or data) rot**
 	- https://apollo.astro.amu.edu.pl/PAD/pmwiki.php?n=Dybol.JPLEph 
 	- http://celestia.simulatorlabbs.com/CelSL/src/celephem/
 - the [gsatellite directory](https://github.com/Stellarium/stellarium/tree/master/plugins/Satellites/src/gsatellite) seems to contain a lot of external code that has been modified locally.
-- [SOFA sourcecode](https://www.iausofa.org/) (*Standards Of Fundamental Astronomy*), also mentioned in [Planet.cpp](https://github.com/Stellarium/stellarium/blob/ba80d33d4bc83d72fc15cca53f798cd9439482cf/src/core/modules/Planet.cpp#L1648): see the [changes](https://www.iausofa.org/current.html) (especially the [C library](https://www.iausofa.org/current_C.html). the [archive](https://www.iausofa.org/archive.html))
+- [SOFA sourcecode](https://www.iausofa.org/) (*Standards Of Fundamental Astronomy*), also mentioned in [Planet.cpp](https://github.com/Stellarium/stellarium/blob/ba80d33d4bc83d72fc15cca53f798cd9439482cf/src/core/modules/Planet.cpp#L1648): see the [changes](https://www.iausofa.org/current.html) (especially the [C library](https://www.iausofa.org/current_C.html), the [archive](https://www.iausofa.org/archive.html))
 - although less likely, copy-pasted snippets from Qt examples *could* be candidates ([example](https://github.com/Stellarium/stellarium/blob/2db52c18bc87aaefa00d3d4a280969349634af8f/src/gui/StelGuiItems.cpp#L352))
 
 Potential candidates, other examples
@@ -42,7 +42,7 @@ The external version of such artifacts will often continue to evolve, but these 
 
 Importing external artifacts therefore requires a specific (and in this case a *simple* as well as generic) approach: the **Vendor Branch** mechanism. Other approaches exist, such as subtrees and submodules (in case Git is used for the external artifacts), but have inconveniences and are not discussed here; the proposed approach is *simple to apply to novice programmers*.
 
-## The idea
+## The solution
 1. Keep external information alive (and updated) on a **separate** branch, called a "**vendor branch**" (e.g. ``vendor/geonames``). Every dataset/tool lives in its own vendor branch. A vendor branch tracks a *pristine* copy/mirror of the external data.
 1. Optionally, the external information is stored in a separate directory (e.g. ``external/<vendor>/<toolname>``). But the approach works just as fine for individual files.
 1. A ``VENDOR`` file explains where the external/original information can be found, so that it can be updated when necessary.
@@ -61,13 +61,16 @@ Basically, two use cases exist: (1) import a new artifact from scratch, or (2) u
 1. if needed (in order to ingest many files), create a directory for the vendor artifacts, e.g. ``external/geonames``
 1. create and checkout a vendor branch, e.g. ``vendor/geonames``
 1. unzip/copy/import/... the external data. This is called a *vendor drop*.
-1. make sure that file/directory *names* do not contain version information as a kind of implicit versioning scheme. rename when needed.
-1. commit the vendor data
-1. tag the vendor branch, e.g. ``vendor/geonames/1.0``. if the vendor does not provide a clear version number, use the ISO date of the drop : ``vendor/geonames/2021-09-09T1200``
-1. switch to the feature/master/whatever local branch
-1. merge the vendor branch 
-1. EITHER create (add) a ``VENDOR`` file *in* the vendor directory (or a similar name, in the unlikely chance that the file name is already in use) OR edit an existing vendor file to include detailed source location data and, if needed, instructions how to find back the data. Avoid top-level (domain) adresses, try to make life easy for anyone wanting to update the data. Make sure to include the keyword "VENDOR" somewhere so that it can be found if needed.
-1. if needed, do whatever is needed to transform the data *in the feature branch*. try to provide a scripted way to transform data, rather than rely on manual operations, so that this can be run again whenever the external data is re-imported.
+1. Make sure that file/directory *names* do not contain version information as a kind of implicit versioning scheme. Rename when needed.
+1. Commit the vendor data
+1. Tag the vendor branch, e.g. ``vendor/geonames/1.0``. If the vendor does not provide a clear version number, use the UTC date/time of the drop, formatted as ISO: ``vendor/geonames/2021-09-09T1200``
+1. Switch to the feature/master/whatever local branch
+1. Merge the vendor branch 
+1. Create relevant metadata that helps finding back the source: detailed source location data, and if needed, instructions how to find back the data. Avoid top-level (domain) adresses, try to make life easy for anyone wanting to update the data. Make sure to include the keyword "VENDOR" somewhere so that it can be found if needed. 
+EITHER 
+	- create (add) a ``VENDOR`` file *in* the vendor directory (or a similar name, in the unlikely chance that the file name is already in use), OR 
+	- edit an existing vendor file (e.g. when only 1 file has been copied, rather than a directory)
+1. If needed, do whatever is needed to transform the data *in the feature branch*. Try to provide a scripted way to transform data, rather than rely on manual operations, so that this can be run again whenever the external data is re-imported.
 
 For prolific vendors (offering many independent tools/data), it might be necessary to create subdirectory and separate branches per product.
 
@@ -75,14 +78,14 @@ For prolific vendors (offering many independent tools/data), it might be necessa
 
 Now it becomes easy to update external information. Whenever the external information changes:
 
-1. checkout the vendor branch
-1. perform a fresh **vendor drop**: 
+1. Checkout the vendor branch
+1. Perform a fresh **vendor drop**: 
 	1. empty the vendor folder OR delete the vendor file ; you can use this: ``git ls-files -z | xargs -0 rm -f``
 	2. replace/explode/unzip/untar/...
-1. commit: ``git add -A && git commit``  (see ``git help git-rm`` for details, search for "vendor".)
-1. vendor tag the vendor branch
-1. merge the updated vendor branch to ``master`` (or via an intermediate feature/bugfix branch, often in order to update local stuff)
-1. deal with conflicts when needed. such conflicts are expected to arise when the vendor changed something, and that was also changed locally
+1. Commit: ``git add -A && git commit``  (see ``git help git-rm`` for details, search for "vendor".)
+1. Vendor tag the vendor branch
+1. Merge the updated vendor branch to ``master`` (or via an intermediate feature/bugfix branch, often in order to update local stuff)
+1. Deal with conflicts when needed. Such conflicts are expected to arise when the vendor changed something, and that was also changed locally.
 
 This is also needed when the external data disappears: in that case, mention that the external data is no longer available to the public to avoid developers searching for it (or even worse, continue with a copy that still exists elsewhere!! Such a copy does not belong on the vendor branch).
 
