@@ -24,7 +24,7 @@ The basic problem with copy-pasting external artifacts is **code (or data) rot**
 	- https://apollo.astro.amu.edu.pl/PAD/pmwiki.php?n=Dybol.JPLEph 
 	- http://celestia.simulatorlabbs.com/CelSL/src/celephem/
 - the [gsatellite directory](https://github.com/Stellarium/stellarium/tree/master/plugins/Satellites/src/gsatellite) seems to contain a lot of external code that has been modified locally.
-- [SOFA sourcecode](https://www.iausofa.org/) (*Standards Of Fundamental Astronomy*), also mentioned in [Planet.cpp](https://github.com/Stellarium/stellarium/blob/ba80d33d4bc83d72fc15cca53f798cd9439482cf/src/core/modules/Planet.cpp#L1648): see the [changes](https://www.iausofa.org/current.html) (especially the [C library](https://www.iausofa.org/current_C.html))
+- [SOFA sourcecode](https://www.iausofa.org/) (*Standards Of Fundamental Astronomy*), also mentioned in [Planet.cpp](https://github.com/Stellarium/stellarium/blob/ba80d33d4bc83d72fc15cca53f798cd9439482cf/src/core/modules/Planet.cpp#L1648): see the [changes](https://www.iausofa.org/current.html) (especially the [C library](https://www.iausofa.org/current_C.html). the [archive](https://www.iausofa.org/archive.html))
 - although less likely, copy-pasted snippets from Qt examples *could* be candidates ([example](https://github.com/Stellarium/stellarium/blob/2db52c18bc87aaefa00d3d4a280969349634af8f/src/gui/StelGuiItems.cpp#L352))
 
 Potential candidates, other examples
