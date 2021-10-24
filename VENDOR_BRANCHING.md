@@ -6,7 +6,7 @@
 
 Stellarium is constantly benefiting from open source artifacts and enriched with text/data/source files that are **copy-pasted** from places outside of Stellarium.
 
-Sometimes this can be solved by using package managers that automate the importig of external "stuff" (typically code) and allow to fine tune which version is to be imported; Python's `pip` is a great example of this. But package managers do not allow to customise the imported code out of the box (in the `pip` example, one needs to use `-e` to start with).
+Sometimes this can be solved by using package managers that automate the importing of external "stuff" (typically code) and allow to fine tune which version is to be imported; Python's `pip` is a great example of this. But package managers do not allow to customise the imported code out of the box (in the `pip` example, one needs to use `-e` to start with).
 
 The basic problem with copy-pasting external artifacts is **code (or data) rot** (and also: "*copy-paste is evil*"). E.g. external artifact changes will not magically appear in Stellarium.
 
@@ -16,7 +16,7 @@ The basic problem with copy-pasting external artifacts is **code (or data) rot**
 - quasar data (https://github.com/Stellarium/stellarium/blob/master/plugins/Quasars/util/quasars.tsv)
 - Almagest data (minor fixes, of course - this is essentially frozen data)
 - HTC algorithms (Helene, Telesto, and Calypso (Lagrangian satellites of Dione) - taken from ftp://ftp.imcce.fr/pub/ephem/satel/htc20/htc20.f ? )
-- various libraries (https://github.com/Stellarium/stellarium/tree/master/src/external)
+- various libraries under [src/external](https://github.com/Stellarium/stellarium/tree/master/src/external)
 - The SPG4/SDPG4 algorithm (https://en.wikipedia.org/wiki/Simplified_perturbations_models that was updated 2020-03-12) (used in https://github.com/Stellarium/stellarium/blob/e75b00e6c249747c198fe0e2badd77a4adab9415/plugins/Satellites/src/Satellites.hpp#L56-L57)
 - and, of course, how could we forget: the various ephemeris algorithms, see https://github.com/Stellarium/stellarium/commits/master/src/core/planetsephems (a good example is `jpleph.cpp`). Some random googling in an attempt to find the originals reveals these (also in use in other software such as Celestia), just to illustrate the issue:
 	- https://github.com/Bill-Gray/jpl_eph/blob/master/jpleph.h
@@ -24,16 +24,15 @@ The basic problem with copy-pasting external artifacts is **code (or data) rot**
 	- https://apollo.astro.amu.edu.pl/PAD/pmwiki.php?n=Dybol.JPLEph 
 	- http://celestia.simulatorlabbs.com/CelSL/src/celephem/
 - the [gsatellite directory](https://github.com/Stellarium/stellarium/tree/master/plugins/Satellites/src/gsatellite) seems to contain a lot of external code that has been modified locally.
-- possibly most of the code stored under `[src/external](https://github.com/Stellarium/stellarium/tree/master/src/external)/`
+- [SOFA sourcecode](https://www.iausofa.org/) (*Standards Of Fundamental Astronomy*), also mentioned in [Planet.cpp](https://github.com/Stellarium/stellarium/blob/ba80d33d4bc83d72fc15cca53f798cd9439482cf/src/core/modules/Planet.cpp#L1648): see the [changes](https://www.iausofa.org/current.html) (especially the [C library](https://www.iausofa.org/current_C.html))
 - although less likely, copy-pasted snippets from Qt examples *could* be candidates ([example](https://github.com/Stellarium/stellarium/blob/2db52c18bc87aaefa00d3d4a280969349634af8f/src/gui/StelGuiItems.cpp#L352))
 
 Potential candidates, other examples
 
-- [SOFA sourcecode](https://www.iausofa.org/) (*Standards Of Fundamental Astronomy*), also mentioned in [Planet.cpp](https://github.com/Stellarium/stellarium/blob/ba80d33d4bc83d72fc15cca53f798cd9439482cf/src/core/modules/Planet.cpp#L1648)
 - [meshwarp sample code](http://paulbourke.net/dataformats/meshwarp/) : yes, the sample code.
 - [time ephemerides](http://timeephem.sourceforge.net/index.php)
 
-Although some examples abve are unlikely to ever change - or be very ephemeral (sic) - the reasoning is always: prevent rather than cure, and exercise a lot, until it becomes second nature. Just keep Murphy's Law in mind...
+Although some examples above are unlikely to ever change - or be very ephemeral (sic) - the reasoning is always: prevent rather than cure, and exercise a lot, until it becomes second nature. Just keep Murphy's Law in mind...
 
 ### The problem
 
@@ -41,13 +40,13 @@ Notice how it is not always obvious to trace back original file. In the case of 
 
 The external version of such artifacts will often continue to evolve, but these modifications obviously will not be magically reflected in our repository, thus *sometimes, if not often* leading to artifacts slowly getting totally outdated (hence the term "code rot"). 
 
-Importing external artifacts therefore requires a specific (and in this case a *simple* as wel as generic) approach: the **Vendor Branch** mechanism. Other approaches exist, such as subtrees and submodules (in case Git is used for the external artifacts), but have inconveniences and are not discussed here; the proposed approach is *simple to apply to novice programmers*.
+Importing external artifacts therefore requires a specific (and in this case a *simple* as well as generic) approach: the **Vendor Branch** mechanism. Other approaches exist, such as subtrees and submodules (in case Git is used for the external artifacts), but have inconveniences and are not discussed here; the proposed approach is *simple to apply to novice programmers*.
 
 ## The idea
-1. Keep external information alive (and updated) on a **separate** branch, called a "**vendor branch**" (eg ``vendor/geonames``). Every dataset/tool lives in its own vendor branch. A vendor branch tracks a *pristine* copy/mirror of the external data.
-1. Optionally, the external information is stored in a separate directory (eg ``external/<vendor>/<toolname>``). But the approach works just as fine for individual files.
+1. Keep external information alive (and updated) on a **separate** branch, called a "**vendor branch**" (e.g. ``vendor/geonames``). Every dataset/tool lives in its own vendor branch. A vendor branch tracks a *pristine* copy/mirror of the external data.
+1. Optionally, the external information is stored in a separate directory (e.g. ``external/<vendor>/<toolname>``). But the approach works just as fine for individual files.
 1. A ``VENDOR`` file explains where the external/original information can be found, so that it can be updated when necessary.
-1. **vendor tags** describe which version of the vendor artifacts have been imported (eg ``vendor/geonames/2021-08-21``)
+1. **vendor tags** describe which version of the vendor artifacts have been imported (e.g. ``vendor/geonames/2021-08-21``)
 1. The vendor branch is merged to wherever it is needed (normally a feature branch, which will eventually be merged to ``master``)
 1. If needed, external information is modified *locally* (usually via a feature/master branch, but *never* in its vendor branch)
 1. Ideally, issues in the vendor artifacts should be reported to the vendor, so that updates can then be imported via a *vendor drop*. Alternatively, the developer can solve issues locally, but *never* in the vendor branch.
@@ -99,7 +98,7 @@ Sometimes, developers add directories/files with path names containing version i
 
 This is a bad practice, often done by developers that do not have access to a good VCS.
 
-In such cases, the version information should be removed before committing the vendor drop; this will present the additional advantage that the history of such a file becomes available. This is a delicate step, as the "pristine copy" is no longer fulfilled. If filename information is part of the correct functioning of the imported artifacts (eg it is also referenced in vendor scripts, in linked data, etc), then you are facing a difficult problem. In such a case, it might be better to not rename the vendor file paths at all and accept that file history must be discovered by other means (eg a manual diff).
+In such cases, the version information should be removed before committing the vendor drop; this will present the additional advantage that the history of such a file becomes available. This is a delicate step, as the "pristine copy" is no longer fulfilled. If filename information is part of the correct functioning of the imported artifacts (e.g. it is also referenced in vendor scripts, in linked data, etc), then you are facing a difficult problem. In such a case, it might be better to not rename the vendor file paths at all and accept that file history must be discovered by other means (e.g. a manual diff).
 
 ### Using data from other users
 
