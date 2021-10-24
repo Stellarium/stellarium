@@ -25,8 +25,13 @@ The basic problem with copy-pasting external artifacts is **code (or data) rot**
 	- http://celestia.simulatorlabbs.com/CelSL/src/celephem/
 - the [gsatellite directory](https://github.com/Stellarium/stellarium/tree/master/plugins/Satellites/src/gsatellite) seems to contain a lot of external code that has been modified locally.
 - possibly most of the code stored under `[src/external](https://github.com/Stellarium/stellarium/tree/master/src/external)/`
-- although less likely, copy-pasted snippets from Qt examples could be candidates ([example](https://github.com/Stellarium/stellarium/blob/2db52c18bc87aaefa00d3d4a280969349634af8f/src/gui/StelGuiItems.cpp#L352))
+- although less likely, copy-pasted snippets from Qt examples *could* be candidates ([example](https://github.com/Stellarium/stellarium/blob/2db52c18bc87aaefa00d3d4a280969349634af8f/src/gui/StelGuiItems.cpp#L352))
+
+Potential candidates, other examples
+
+- [SOFA sourcecode](https://www.iausofa.org/) (*Standards Of Fundamental Astronomy*), also mentioned in [Planet.cpp](https://github.com/Stellarium/stellarium/blob/ba80d33d4bc83d72fc15cca53f798cd9439482cf/src/core/modules/Planet.cpp#L1648)
 - [meshwarp sample code](http://paulbourke.net/dataformats/meshwarp/) : yes, the sample code.
+- [time ephemerides](http://timeephem.sourceforge.net/index.php)
 
 Although some examples abve are unlikely to ever change - or be very ephemeral (sic) - the reasoning is always: prevent rather than cure, and exercise a lot, until it becomes second nature. Just keep Murphy's Law in mind...
 
