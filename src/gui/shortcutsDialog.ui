@@ -6,9 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>654</width>
+    <width>737</width>
     <height>436</height>
    </rect>
+  </property>
+  <property name="focusPolicy">
+   <enum>Qt::StrongFocus</enum>
   </property>
   <property name="windowTitle">
    <string notr="true"/>
@@ -109,6 +112,9 @@
           <height>16</height>
          </size>
         </property>
+        <property name="focusPolicy">
+         <enum>Qt::ClickFocus</enum>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -207,6 +213,9 @@
            <property name="enabled">
             <bool>false</bool>
            </property>
+           <property name="focusPolicy">
+            <enum>Qt::StrongFocus</enum>
+           </property>
            <property name="icon">
             <iconset resource="../../data/gui/guiRes.qrc">
              <normaloff>:/graphicGui/uibtBackspace.png</normaloff>
@@ -219,6 +228,9 @@
            <property name="enabled">
             <bool>false</bool>
            </property>
+           <property name="focusPolicy">
+            <enum>Qt::StrongFocus</enum>
+           </property>
            <property name="text">
             <string>Restore Defaults</string>
            </property>
@@ -229,6 +241,9 @@
            <property name="enabled">
             <bool>false</bool>
            </property>
+           <property name="focusPolicy">
+            <enum>Qt::StrongFocus</enum>
+           </property>
            <property name="text">
             <string>Apply</string>
            </property>
@@ -238,6 +253,9 @@
           <widget class="QPushButton" name="altBackspaceButton">
            <property name="enabled">
             <bool>false</bool>
+           </property>
+           <property name="focusPolicy">
+            <enum>Qt::StrongFocus</enum>
            </property>
            <property name="icon">
             <iconset resource="../../data/gui/guiRes.qrc">
@@ -267,6 +285,9 @@
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
+           </property>
+           <property name="focusPolicy">
+            <enum>Qt::StrongFocus</enum>
            </property>
            <property name="text">
             <string>Restore All Defaults</string>
@@ -302,6 +323,18 @@
    <header>gui/StelCloseButton.hpp</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>shortcutsTreeView</tabstop>
+  <tabstop>lineEditSearch</tabstop>
+  <tabstop>primaryShortcutEdit</tabstop>
+  <tabstop>primaryBackspaceButton</tabstop>
+  <tabstop>altShortcutEdit</tabstop>
+  <tabstop>altBackspaceButton</tabstop>
+  <tabstop>applyButton</tabstop>
+  <tabstop>restoreDefaultsButton</tabstop>
+  <tabstop>restoreAllDefaultsButton</tabstop>
+  <tabstop>closeStelWindow</tabstop>
+ </tabstops>
  <resources>
   <include location="../../data/gui/guiRes.qrc"/>
  </resources>
