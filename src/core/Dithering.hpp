@@ -53,9 +53,6 @@ inline Vec3f calcRGBMaxValue(StelPainter::DitheringMode mode)
 {
 	switch(mode)
 	{
-		default:
-		case StelPainter::DitheringMode::Disabled:
-			return Vec3f(0.);
 		case StelPainter::DitheringMode::Color666:
 			return Vec3f(63);
 		case StelPainter::DitheringMode::Color565:
@@ -64,6 +61,9 @@ inline Vec3f calcRGBMaxValue(StelPainter::DitheringMode mode)
 			return Vec3f(255);
 		case StelPainter::DitheringMode::Color101010:
 			return Vec3f(1023);
+		case StelPainter::DitheringMode::Disabled: // and
+		default:
+		    return Vec3f(0.);
 	}
 }
 

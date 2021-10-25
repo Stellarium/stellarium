@@ -250,7 +250,7 @@ bool StelSkyLayerMgr::loadSkyImage(const QString& id, const QString& filename,
 								   double long1, double lat1,
 								   double long2, double lat2,
 								   double long3, double lat3,
-								   double minRes, double maxBright, bool visible, StelCore::FrameType frameType)
+								   double minRes, double maxBright, bool visible, StelCore::FrameType frameType, bool withAberration)
 {
 	if (allSkyLayers.contains(id))
 	{
@@ -272,6 +272,7 @@ bool StelSkyLayerMgr::loadSkyImage(const QString& id, const QString& filename,
 	vm["maxBrightness"] = QVariant(maxBright);
 	vm["minResolution"] = QVariant(minRes);
 	vm["shortName"] = QVariant(id);
+	vm["withAberration"] = QVariant(withAberration);
 
 	// textureCoords (define the ordering of worldCoords)
 	cl.clear();

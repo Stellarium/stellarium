@@ -56,12 +56,12 @@ class TelescopeClient : public QObject, public StelObject
 public:
 	static const QString TELESCOPECLIENT_TYPE;
 	static TelescopeClient *create(const QString &url);
-	virtual ~TelescopeClient(void) {}
+	virtual ~TelescopeClient(void) Q_DECL_OVERRIDE {}
 	
 	// Method inherited from StelObject
-	QString getEnglishName(void) const {return name;}
-	QString getNameI18n(void) const {return nameI18n;}
-	Vec3f getInfoColor(void) const
+	QString getEnglishName(void) const Q_DECL_OVERRIDE {return name;}
+	QString getNameI18n(void) const Q_DECL_OVERRIDE {return nameI18n;}
+	Vec3f getInfoColor(void) const Q_DECL_OVERRIDE
 	{
 		return Vec3f(1.f, 1.f, 1.f);
 	}
@@ -73,15 +73,15 @@ public:
 	//! @param core the StelCore object
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString containing an HMTL encoded description of the Telescope.
-	QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const;
-	QString getType(void) const {return TELESCOPECLIENT_TYPE;}
-	QString getID() const {return name;}
-	virtual double getAngularSize(const StelCore*) const {Q_ASSERT(0); return 0;}	// TODO
+	QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
+	QString getType(void) const Q_DECL_OVERRIDE {return TELESCOPECLIENT_TYPE;}
+	QString getID() const Q_DECL_OVERRIDE {return name;}
+	virtual double getAngularSize(const StelCore*) const Q_DECL_OVERRIDE {Q_ASSERT(0); return 0;}	// TODO
 		
 	// Methods specific to telescope
 	virtual void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject) = 0;
 	virtual void telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject) = 0;
-	virtual void telescopeAbortSlew() {};
+	virtual void telescopeAbortSlew() {}
 
 	//!
 	//! \brief move
@@ -112,7 +112,7 @@ protected:
 	}
 private:
 	virtual bool isInitialized(void) const {return true;}
-	float getSelectPriority(const StelCore* core) const {Q_UNUSED(core); return -10.f;}
+	float getSelectPriority(const StelCore* core) const Q_DECL_OVERRIDE {Q_UNUSED(core); return -10.f;}
 private:
 	QList<double> oculars; // fov of the oculars
 };
@@ -132,12 +132,12 @@ public:
 		desired_pos[1] = XYZ[1] = 0.0;
 		desired_pos[2] = XYZ[2] = 0.0;
 	}
-	~TelescopeClientDummy(void) {}
-	bool isConnected(void) const
+	~TelescopeClientDummy(void) Q_DECL_OVERRIDE {}
+	bool isConnected(void) const Q_DECL_OVERRIDE
 	{
 		return true;
 	}
-	bool prepareCommunication(void)
+	bool prepareCommunication(void) Q_DECL_OVERRIDE
 	{
 		XYZ = XYZ * 31.0 + desired_pos;
 		const double lq = XYZ.lengthSquared();
@@ -147,22 +147,22 @@ public:
 			XYZ = desired_pos;
 		return true;
 	}
-	void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject)
+	void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject) Q_DECL_OVERRIDE
 	{
 		Q_UNUSED(selectObject)
 		desired_pos = j2000Pos;
 		desired_pos.normalize();
 	}
-	void telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject)
+	void telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject) Q_DECL_OVERRIDE
 	{
 		Q_UNUSED(selectObject)
 		Q_UNUSED(j2000Pos)
 	}
-	bool hasKnownPosition(void) const
+	bool hasKnownPosition(void) const Q_DECL_OVERRIDE
 	{
 		return true;
 	}
-	Vec3d getJ2000EquatorialPos(const StelCore*) const
+	Vec3d getJ2000EquatorialPos(const StelCore*) const Q_DECL_OVERRIDE
 	{
 		return XYZ;
 	}
@@ -182,23 +182,23 @@ class TelescopeTCP : public TelescopeClient
 	Q_OBJECT
 public:
 	TelescopeTCP(const QString &name, const QString &params, Equinox eq = EquinoxJ2000);
-	~TelescopeTCP(void)
+	~TelescopeTCP(void) Q_DECL_OVERRIDE
 	{
 		hangup();
 	}
-	bool isConnected(void) const
+	bool isConnected(void) const Q_DECL_OVERRIDE
 	{
 		//return (tcpSocket->isValid() && !wait_for_connection_establishment);
 		return (tcpSocket->state() == QAbstractSocket::ConnectedState);
 	}
 	
 private:
-	Vec3d getJ2000EquatorialPos(const StelCore* core=Q_NULLPTR) const;
-	bool prepareCommunication();
-	void performCommunication();
-	void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject);
-	void telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject);
-	bool isInitialized(void) const
+	Vec3d getJ2000EquatorialPos(const StelCore* core=Q_NULLPTR) const Q_DECL_OVERRIDE;
+	bool prepareCommunication() Q_DECL_OVERRIDE;
+	void performCommunication() Q_DECL_OVERRIDE;
+	void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject) Q_DECL_OVERRIDE;
+	void telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject) Q_DECL_OVERRIDE;
+	bool isInitialized(void) const Q_DECL_OVERRIDE
 	{
 		return (!address.isNull());
 	}
@@ -219,7 +219,7 @@ private:
 	int time_delay;
 
 	InterpolatedPosition interpolatedPosition;
-	virtual bool hasKnownPosition(void) const
+	virtual bool hasKnownPosition(void) const Q_DECL_OVERRIDE
 	{
 		return interpolatedPosition.isKnown();
 	}

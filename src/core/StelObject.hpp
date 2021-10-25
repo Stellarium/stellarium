@@ -71,7 +71,7 @@ public:
 		SiderealTime		= 0x00200000, //!< Mean and Apparent Sidereal Time
 		RTSTime			= 0x00400000, //!< Time of rise, transit and set of celestial object
 		Script                  = 0x00800000, //!< Should be used by Scripts only which can inject extraInfoStrings.
-		DebugAid                = 0x01000000, //!< Should be used in DEBUG builds only, place messages into extraInfoStrings.
+		DebugAid                = 0x01000000, //!< Can be used for development only, place messages into extraInfoStrings. Comment them away or delete for releases.
 		NoFont			= 0x02000000,
 		PlainText		= 0x04000000  //!< Strip HTML tags from output
 	};
@@ -85,15 +85,15 @@ public:
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
 	static const InfoStringGroupFlags ShortInfo = static_cast<InfoStringGroupFlags>(Name|CatalogNumber|Magnitude|RaDecJ2000);
 
-	virtual ~StelObject() {}
+	virtual ~StelObject() Q_DECL_OVERRIDE {}
 
 	//! Default implementation of the getRegion method.
 	//! Return the spatial region of the object.
-	virtual SphericalRegionP getRegion() const {return SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(Q_NULLPTR)));}
+	virtual SphericalRegionP getRegion() const Q_DECL_OVERRIDE {return SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(Q_NULLPTR)));}
 
 	//! Default implementation of the getPointInRegion method.
 	//! Return the J2000 Equatorial Position of the object.
-	virtual Vec3d getPointInRegion() const {return getJ2000EquatorialPos(Q_NULLPTR);}
+	virtual Vec3d getPointInRegion() const Q_DECL_OVERRIDE {return getJ2000EquatorialPos(Q_NULLPTR);}
 	
 	//! Write I18n information about the object in QString.
 	//! @param core the StelCore object to use
@@ -225,10 +225,17 @@ public:
 	//! @return true if object an above real horizon (uses test for landscapes)
 	bool isAboveRealHorizon(const StelCore* core) const;
 
-	//! Get today's time of rise, transit and set for celestial object for current location.
-	//! @return Vec3f - time of rise, transit and set; decimal hours
-	//! @note The value -1.f is used as undefined value
-	Vec3f getRTSTime(StelCore *core) const;
+	//! Compute time of rise, transit and set for celestial object for current location.
+	//! @param core the currently active StelCore object
+	//! @param altitude (optional; default=0) altitude of the object, degrees.
+	//!        Setting this to -6. for the Sun will find begin and end for civil twilight.
+	//! @return Vec4d - time of rise, transit and set closest to current time; JD.
+	//! @note The fourth element flags particular conditions:
+	//!       *  +100. for circumpolar objects. Rise and set give lower culmination times.
+	//!       *  -100. for objects never rising. Rise and set give transit times.
+	//!       * -1000. is used as "invalid" value. The result should then not be used.
+	//! @note This is an abbreviated version of the method implemented in the Planet class.
+	virtual Vec4d getRTSTime(const StelCore* core, const double altitude=0.) const;
 
 	//! Return object's apparent V magnitude as seen from observer, without including extinction.
 	virtual float getVMagnitude(const StelCore* core) const;
@@ -265,6 +272,7 @@ public slots:
 	//! Allow additions to the Info String. Can be used by plugins to show extra info for the selected object, or for debugging.
 	//! Hard-set this string group to a single str, or delete all messages when str==""
 	//! @note This should be used with caution. Usually you want to use addToExtraInfoString().
+	//! @note: If this breaks some const declaration, you can use StelObjectMgr::setExtraInfoString() instead.
 	virtual void setExtraInfoString(const InfoStringGroup& flags, const QString &str);
 	//! Add str to the extra string. This should be preferrable over hard setting.
 	//! Can be used by plugins to show extra info for the selected object, or for debugging.
@@ -273,9 +281,11 @@ public slots:
 	//! and must be adapted to table or non-table layout as required.
 	//! The line ending must be given explicitly, usually just end a line with "<br/>", except when it may end up in a Table or appended to a line.
 	//! See getCommonInfoString() or the respective getInfoString() in the subclasses for details of use.
+	//! @note: If this breaks some const declaration, you can use StelObjectMgr::addToExtraInfoString() instead.
 	virtual void addToExtraInfoString(const StelObject::InfoStringGroup& flags, const QString &str);
 	//! Retrieve an (unsorted) QStringList of all extra info strings that match flags.
 	//! Normally the order matches the order of addition, but this cannot be guaranteed.
+	//! @note: Usually objects should keep their extraInfoStrings to themselves. But there are cases where StelObjectMgr::setExtraInfoString() has been set.
 	QStringList getExtraInfoStrings(const InfoStringGroup& flags) const;
 	//! Remove the extraInfoStrings with the given flags.
 	//! This is a finer-grained removal than just extraInfoStrings.remove(flags), as it allows a combination of flags.
@@ -283,6 +293,7 @@ public slots:
 	//! extraInfoStrings having been set with the DebugAid and Script flags have to be removed by separate calls of this method.
 	//! Those which have been set by scripts have to persist at least as long as the selection remains active.
 	//! The behaviour of DebugAid texts depends on the use case.
+	//! @note: Usually objects should keep their extraInfoStrings to themselves. But there are cases where StelObjectMgr::setExtraInfoString() has been set.
 	void removeExtraInfoStrings(const InfoStringGroup& flags);
 
 protected:
@@ -300,12 +311,8 @@ protected:
 	//! Apply post processing on the info string.
 	//! This also removes all extraInfoStrings possibly injected by modules (plugins) etc., except for Script and DebugAid types.
 	void postProcessInfoString(QString& str, const InfoStringGroup& flags) const;
-private:
-	//! Compute time of rise, transit and set for celestial object for current location.
-	//! @return Vec3f - time of rise, transit and set; decimal hours
-	//! @note The value -1.f is used as undefined value
-	Vec3f computeRTSTime(StelCore* core) const;
 
+private:
 	//! Location for additional object info that can be set for special purposes (at least for debugging, but maybe others), even via scripting.
 	//! Modules are allowed to add new strings to be displayed in the various getInfoString() methods of subclasses.
 	//! This helps avoiding screen collisions if a plugin wants to display some additional object information.

@@ -228,7 +228,7 @@ namespace StelUtils
 	}
 
 	//! Convert from Rectangular direction to spherical coordinate components.
-	//! @param lng double* to store longitude in radian
+	//! @param lng double* to store longitude in radian [-pi, pi]
 	//! @param lat double* to store latitude in radian
 	//! @param v the input 3D vector
 	inline void rectToSphe(double *lng, double *lat, const Vec3d& v){
@@ -238,7 +238,7 @@ namespace StelUtils
 	}
 
 	//! Convert from Rectangular direction to spherical coordinate components.
-	//! @param lng float* to store longitude in radian
+	//! @param lng float* to store longitude in radian [-pi, pi]
 	//! @param lat float* to store latitude in radian
 	//! @param v the input 3D vector
 	inline void rectToSphe(float *lng, float *lat, const Vec3d& v){
@@ -249,7 +249,7 @@ namespace StelUtils
 
 
 	//! Convert from Rectangular direction to spherical coordinate components.
-	//! @param lng float* to store longitude in radian
+	//! @param lng float* to store longitude in radian [-pi, pi]
 	//! @param lat float* to store latitude in radian
 	//! @param v the input 3D vector
 	inline void rectToSphe(float *lng, float *lat, const Vec3f& v){
@@ -259,13 +259,34 @@ namespace StelUtils
 	}
 
 	//! Convert from Rectangular direction to spherical coordinate components.
-	//! @param lng double* to store longitude in radian
+	//! @param lng double* to store longitude in radian [-pi, pi]
 	//! @param lat double* to store latitude in radian
 	//! @param v the input 3D vector
 	inline void rectToSphe(double *lng, double *lat, const Vec3f &v){
 		double r = static_cast<double>(v.length());
 		*lat = asin(static_cast<double>(v[2])/r);
 		*lng = atan2(static_cast<double>(v[1]),static_cast<double>(v[0]));
+	}
+
+	//! Convert from spherical coordinates (including distance) to Rectangular direction.
+	//! @param lng longitude in radian
+	//! @param lat latitude in radian
+	//! @param r length of radius vector (distance)
+	//! @param v the resulting 3D unit vector
+	inline void spheToRect(const double lng, const double lat, const double r, Vec3d& v){
+		const double cosLat = cos(lat);
+		v.set(cos(lng) * cosLat * r, sin(lng) * cosLat * r, sin(lat) * r);
+	}
+
+	//! Convert from Rectangular direction to spherical coordinate components (including distance).
+	//! @param lng double* to store longitude in radian [-pi, pi]
+	//! @param lat double* to store latitude in radian
+	//! @param r double*   length of radius vector (distance)
+	//! @param v the input 3D vector
+	inline void rectToSphe(double *lng, double *lat, double *r, const Vec3d& v){
+		*r = v.length();
+		*lat = asin(v[2] / *r);
+		*lng = atan2(v[1],v[0]);
 	}
 
 	//! Coordinate Transformation from equatorial to ecliptical
@@ -388,6 +409,9 @@ namespace StelUtils
 
 	//! Make from julianDay an hour, minute, second.
 	void getTimeFromJulianDay(const double julianDay, int *hour, int *minute, int *second, int *millis=Q_NULLPTR);
+
+	//! Make hours (decimal format) from julianDay
+	double getHoursFromJulianDay(const double julianDay);
 
 	//! Parse an ISO8601 date string.
 	//! Also handles negative and distant years.
@@ -785,10 +809,10 @@ namespace StelUtils
 	//! For adapting from -26 to -23.895, use -0.91072 * (-23.895 + 26.0) = -1.9170656
 	//! @param jDay the JD
 	//! @param ndot value of n-dot (secular acceleration of the Moon) which should be used in the lunar ephemeris instead of the default values.
-	//! @param useDE43x true if function should adapt calculation of the secular acceleration of the Moon to the DE43x ephemeris
+	//! @param useDE4xx true if function should adapt calculation of the secular acceleration of the Moon to the DE43x/DE44x ephemerides
 	//! @return SecularAcceleration in seconds
-	//! @note n-dot for secular acceleration of the Moon in ELP2000-82B is -23.8946 "/cy/cy and for DE43x is -25.8 "/cy/cy
-	double getMoonSecularAcceleration(const double jDay, const double ndot, const bool useDE43x);
+	//! @note n-dot for secular acceleration of the Moon in ELP2000-82B is -23.8946 "/cy/cy and for DE43x/DE44x is -25.8 "/cy/cy
+	double getMoonSecularAcceleration(const double jDay, const double ndot, const bool useDE4xx);
 
 	//! Get the standard error (sigma) for the value of DeltaT
 	//! @param jDay the JD

@@ -145,6 +145,8 @@ signals:
 
 public slots:
 	virtual void retranslate() Q_DECL_OVERRIDE;
+	//! On the first call with "true" populates the window contents. Also sets focus to entry line.
+	virtual void setVisible(bool v) Q_DECL_OVERRIDE;
 	//! This style only displays the text search field and the search button
 	void setSimpleStyle();
 

@@ -194,7 +194,7 @@ public:
 
 	virtual ~NightModeGraphicsEffect() Q_DECL_OVERRIDE
 	{
-		// NOTE: Why Q_ASSERT is here and why destructor is not marked as 'override'?
+		// NOTE: Why Q_ASSERT is here?
 		//Q_ASSERT(parent->glContext() == QOpenGLContext::currentContext());
 		//clean up fbo
 		delete fbo;
@@ -211,7 +211,7 @@ protected:
 		gl->glGetIntegerv(GL_FRAMEBUFFER_BINDING, &mainFBO);
 
 		double pixelRatio = paintDevice->devicePixelRatioF();
-		QSize size(paintDevice->width() * pixelRatio, paintDevice->height() * pixelRatio);
+		QSize size(static_cast<int>(paintDevice->width() * pixelRatio), static_cast<int>(paintDevice->height() * pixelRatio));
 		if (fbo && fbo->size() != size)
 		{
 			delete fbo;
@@ -1515,9 +1515,9 @@ void StelMainView::doScreenshot(void)
 	// HiDPI screens interfere, and the viewing angle has to be maintained.
 	// First, image size:
 	glWidget->makeCurrent();
-	float pixelRatio = QOpenGLContext::currentContext()->screen()->devicePixelRatio();
-	int imgWidth =stelScene->width();
-	int imgHeight=stelScene->height();
+	float pixelRatio = static_cast<float>(QOpenGLContext::currentContext()->screen()->devicePixelRatio());
+	int imgWidth =static_cast<int>(stelScene->width());
+	int imgHeight=static_cast<int>(stelScene->height());
 	bool nightModeWasEnabled=nightModeEffect->isEnabled();
 	nightModeEffect->setEnabled(false);
 	if (flagUseCustomScreenshotSize)
@@ -1539,7 +1539,11 @@ void StelMainView::doScreenshot(void)
 #ifdef GL_RENDERBUFFER_FREE_MEMORY_ATI
 			GLint freeGLmemoryAMD[4];
 			context->functions()->glGetIntegerv(GL_RENDERBUFFER_FREE_MEMORY_ATI, freeGLmemoryAMD);
-			qCDebug(mainview)<<"Free GPU memory (AMD version):" << (uint)freeGLmemoryAMD[1]/1024 << "+" << (uint)freeGLmemoryAMD[3]/1024 << " of " << (uint)freeGLmemoryAMD[0]/1024 << "+" << (uint)freeGLmemoryAMD[2]/1024 << "kB -- we ask for " << customScreenshotWidth*customScreenshotHeight*8 / 1024 <<"kB";
+			qCDebug(mainview)<<"Free GPU memory (AMD version):" << static_cast<uint>(freeGLmemoryAMD[1])/1024 << "+"
+					  << static_cast<uint>(freeGLmemoryAMD[3])/1024 << " of "
+					  << static_cast<uint>(freeGLmemoryAMD[0])/1024 << "+"
+					  << static_cast<uint>(freeGLmemoryAMD[2])/1024 << "kB -- we ask for "
+					  << customScreenshotWidth*customScreenshotHeight*8 / 1024 <<"kB";
 #endif
 #endif
 			GLint texSize,viewportSize[2],rbSize;
@@ -1569,10 +1573,10 @@ void StelMainView::doScreenshot(void)
 	fbFormat.setInternalTextureFormat(isGLES ? GL_RGBA : GL_RGB); // try to avoid transparent background!
 	if(const auto multisamplingLevel = configuration->value("video/multisampling", 0).toInt())
         fbFormat.setSamples(multisamplingLevel);
-	QOpenGLFramebufferObject * fbObj = new QOpenGLFramebufferObject(imgWidth * pixelRatio, imgHeight * pixelRatio, fbFormat);
+	QOpenGLFramebufferObject * fbObj = new QOpenGLFramebufferObject(static_cast<int>(imgWidth * pixelRatio), static_cast<int>(imgHeight * pixelRatio), fbFormat);
 	fbObj->bind();
 	// Now the painter has to be convinced to paint to the potentially larger image frame.
-	QOpenGLPaintDevice fbObjPaintDev(imgWidth * pixelRatio, imgHeight * pixelRatio);
+	QOpenGLPaintDevice fbObjPaintDev(static_cast<int>(imgWidth * pixelRatio), static_cast<int>(imgHeight * pixelRatio));
 
 	// It seems the projector has its own knowledge about image size. We must adjust fov and image size, but reset afterwards.
 	StelProjector::StelProjectorParams pParams=StelApp::getInstance().getCore()->getCurrentStelProjectorParams();

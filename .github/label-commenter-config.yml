@@ -41,7 +41,7 @@ labels:
     labeled:
       issue:
         body: This issue is easy for contributing. Everyone can work on this.
-  - name: incomplete
+  - name: more info
     labeled:
       issue:
         body: The hardware info, steps of reproduction and log file are really important and help us resolve over 90% issues fast. Of course, in some specific cases we need more data, but we ask the required data separately...
@@ -79,7 +79,7 @@ labels:
       issue:
         body: |
           Hello @{{ issue.user.login }}! Please see FAQ in the wiki:
-          https://github.com/Stellarium/stellarium/wiki/FAQ
+          https://github.com/Stellarium/stellarium/wiki/FAQ or https://github.com/Stellarium/stellarium/wiki/Common-Problems-for-the-current-version
         action: close
   - name: mobile
     labeled:

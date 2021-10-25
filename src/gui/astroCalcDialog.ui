@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>766</width>
-    <height>431</height>
+    <height>447</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -292,7 +292,7 @@
       <item row="1" column="0">
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>4</number>
         </property>
         <widget class="QWidget" name="stackedWidgetPage1">
          <layout class="QGridLayout" name="gridLayout_2">
@@ -308,7 +308,7 @@
             <item>
              <widget class="QPushButton" name="celestialPositionsSaveButton">
               <property name="text">
-               <string>Save positions</string>
+               <string>Export positions...</string>
               </property>
              </widget>
             </item>
@@ -651,7 +651,7 @@
             <item>
              <widget class="QPushButton" name="ephemerisSaveButton">
               <property name="text">
-               <string>Save ephemeris</string>
+               <string>Export ephemeris...</string>
               </property>
              </widget>
             </item>
@@ -861,7 +861,7 @@
             <item>
              <widget class="QPushButton" name="transitsSaveButton">
               <property name="text">
-               <string>Save transits</string>
+               <string>Export transits...</string>
               </property>
              </widget>
             </item>
@@ -1186,7 +1186,7 @@
             <item>
              <widget class="QPushButton" name="phenomenaSaveButton">
               <property name="text">
-               <string>Save phenomena</string>
+               <string>Export phenomena...</string>
               </property>
              </widget>
             </item>
@@ -1697,14 +1697,7 @@
               </item>
               <item row="2" column="0" colspan="2">
                <layout class="QGridLayout" name="gridLayout_17">
-                <item row="1" column="0">
-                 <widget class="QLabel" name="graphsSecondLabel">
-                  <property name="text">
-                   <string>Second graph:</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="1">
+                <item row="2" column="1">
                  <widget class="QComboBox" name="graphsSecondComboBox">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -1723,33 +1716,27 @@
                   </property>
                  </widget>
                 </item>
-                <item row="0" column="1">
-                 <widget class="QComboBox" name="graphsFirstComboBox">
+                <item row="2" column="2">
+                 <widget class="QPushButton" name="drawGraphsPushButton">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
-                  <property name="editable">
-                   <bool>true</bool>
-                  </property>
-                  <property name="insertPolicy">
-                   <enum>QComboBox::NoInsert</enum>
-                  </property>
-                  <property name="sizeAdjustPolicy">
-                   <enum>QComboBox::AdjustToContents</enum>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="0">
-                 <widget class="QLabel" name="graphsFirstLabel">
                   <property name="text">
-                   <string>First graph:</string>
+                   <string>Draw graphs</string>
                   </property>
                  </widget>
                 </item>
-                <item row="0" column="2">
+                <item row="2" column="0">
+                 <widget class="QLabel" name="graphsSecondLabel">
+                  <property name="text">
+                   <string>Second graph:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="2">
                  <layout class="QHBoxLayout" name="horizontalLayout_29">
                   <item>
                    <widget class="QLabel" name="graphsDurationLabel">
@@ -1802,16 +1789,39 @@
                   </item>
                  </layout>
                 </item>
-                <item row="1" column="2">
-                 <widget class="QPushButton" name="drawGraphsPushButton">
+                <item row="1" column="0">
+                 <widget class="QLabel" name="graphsFirstLabel">
+                  <property name="text">
+                   <string>First graph:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QComboBox" name="graphsFirstComboBox">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
+                  <property name="editable">
+                   <bool>true</bool>
+                  </property>
+                  <property name="insertPolicy">
+                   <enum>QComboBox::NoInsert</enum>
+                  </property>
+                  <property name="sizeAdjustPolicy">
+                   <enum>QComboBox::AdjustToContents</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0" colspan="3">
+                 <widget class="QLabel" name="graphsNoteLabel">
                   <property name="text">
-                   <string>Draw graphs</string>
+                   <string>Important note: this tool works on Earth only!</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
                   </property>
                  </widget>
                 </item>
@@ -1917,27 +1927,6 @@
         </widget>
         <widget class="QWidget" name="stackedWidgetPage6">
          <layout class="QGridLayout" name="gridLayout">
-          <item row="0" column="0" rowspan="3">
-           <layout class="QVBoxLayout" name="verticalLayout_3">
-            <item>
-             <widget class="QLabel" name="label_3">
-              <property name="text">
-               <string>Select a category:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QListWidget" name="wutCategoryListWidget">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
           <item row="0" column="1">
            <layout class="QHBoxLayout" name="horizontalLayout_12">
             <item>
@@ -1997,7 +1986,7 @@
             </item>
            </layout>
           </item>
-          <item row="2" column="1">
+          <item row="3" column="1">
            <layout class="QVBoxLayout" name="verticalLayout_5">
             <item>
              <widget class="QLabel" name="label_4">
@@ -2038,7 +2027,28 @@
             <item>
              <widget class="QPushButton" name="saveObjectsButton">
               <property name="text">
-               <string>Save list of objects</string>
+               <string>Export list of objects...</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="0" rowspan="4">
+           <layout class="QVBoxLayout" name="verticalLayout_3">
+            <item>
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>Select a category:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QListWidget" name="wutCategoryListWidget">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
               </property>
              </widget>
             </item>
@@ -2101,6 +2111,43 @@
               </property>
               <property name="toolTip">
                <string>Maximum angular size for visible celestial objects</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="2" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayout_22">
+            <item>
+             <widget class="QLabel" name="label_6">
+              <property name="text">
+               <string>Above altitude:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_13">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="AngleSpinBox" name="wutAltitudeMinSpinBox">
+              <property name="minimumSize">
+               <size>
+                <width>140</width>
+                <height>0</height>
+               </size>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2391,7 +2438,6 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../data/gui/guiRes.qrc"/>
   <include location="../../data/gui/guiRes.qrc"/>
  </resources>
  <connections/>

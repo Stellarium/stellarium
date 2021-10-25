@@ -75,6 +75,7 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	, flagSunScale(false)
 	, sunScale(1.0)
 	, labelsAmount(false)
+	, flagPermanentSolarCorona(true)
 	, flagOrbits(false)
 	, flagLightTravelTime(true)
 	, flagUseObjModels(false)
@@ -85,6 +86,7 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	, flagIsolatedTrails(true)
 	, numberIsolatedTrails(0)
 	, maxTrailPoints(5000)
+	, maxTrailTimeExtent(1)
 	, trailsThickness(1)
 	, flagIsolatedOrbits(true)
 	, flagPlanetsOrbitsOnly(false)
@@ -208,6 +210,7 @@ void SolarSystem::init()
 	setFlagIsolatedTrails(conf->value("viewing/flag_isolated_trails", true).toBool());
 	setNumberIsolatedTrails(conf->value("viewing/number_isolated_trails", 1).toInt());
 	setMaxTrailPoints(conf->value("viewing/max_trail_points", 5000).toInt());
+	setMaxTrailTimeExtent(conf->value("viewing/max_trail_time_extent", 1).toInt());
 	setFlagIsolatedOrbits(conf->value("viewing/flag_isolated_orbits", true).toBool());
 	setFlagPlanetsOrbitsOnly(conf->value("viewing/flag_planets_orbits_only", false).toBool());
 	setFlagPermanentOrbits(conf->value("astro/flag_permanent_orbits", false).toBool());
@@ -220,6 +223,7 @@ void SolarSystem::init()
 	setCustomGrsJD(conf->value("astro/grs_jd", 2456901.5).toDouble());
 
 	setFlagEarthShadowEnlargementDanjon(conf->value("astro/shadow_enlargement_danjon", false).toBool());
+	setFlagPermanentSolarCorona(conf->value("viewing/flag_draw_sun_corona", true).toBool());
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
@@ -328,7 +332,7 @@ void SolarSystem::recreateTrails()
 	// Create a trail group containing all the planets orbiting the sun (not including satellites)
 	if (allTrails!=Q_NULLPTR)
 		delete allTrails;
-	allTrails = new TrailGroup(365.f, maxTrailPoints);
+	allTrails = new TrailGroup(maxTrailTimeExtent * 365.f, maxTrailPoints);
 
 	unsigned long cnt = static_cast<unsigned long>(selectedSSO.size());
 	if (cnt>0 && getFlagIsolatedTrails())
@@ -895,6 +899,9 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				{ "titan_special",     &get_titan_parent_coordsv},
 				{ "hyperion_special",  &get_hyperion_parent_coordsv},
 				{ "iapetus_special",   &get_iapetus_parent_coordsv},
+				{ "helene_special",    &get_helene_parent_coordsv},
+				{ "telesto_special",   &get_telesto_parent_coordsv},
+				{ "calypso_special",   &get_calypso_parent_coordsv},
 				{ "uranus_special",    &get_uranus_helio_coordsv},
 				{ "miranda_special",   &get_miranda_parent_coordsv},
 				{ "ariel_special",     &get_ariel_parent_coordsv},
@@ -1131,11 +1138,10 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			J2000NPoleDE1,
 			J2000NPoleW0,
 			J2000NPoleW1);
-		// orbit_Period given in days, orbit_visualization_period in days. The latter should have a meaningful default.
-		newP->setSiderealPeriod(
-			pd.value(secname+"/orbit_visualization_period",
-				 fabs(pd.value(secname+"/orbit_Period",
-					       fabs(pd.value(secname+"/orbit_good", 100.).toDouble())).toDouble())).toDouble());
+		// orbit_Period or orbit_visualization_period given in days.
+		// Elliptical Kepler orbits (ecc<0.9) will replace whatever is given by a value computed on the fly.
+		newP->setSiderealPeriod(fabs(pd.value(secname+"/orbit_Period",
+						      pd.value(secname+"/orbit_visualization_period" )).toDouble()));
 
 		if (pd.contains(secname+"/tex_ring")) {
 			const float rMin = pd.value(secname+"/ring_inner_size").toFloat()/AUf;
@@ -1176,37 +1182,52 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 // The order is not important since the position is computed relatively to the mother body
 void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 {
-	if (flagLightTravelTime)
+	StelCore *core=StelApp::getInstance().getCore();
+	const bool withAberration=core->getUseAberration();
+	if (flagLightTravelTime) // switching off light time correction implies no aberration for the planets.
 	{
 		for (const auto& p : qAsConst(systemPlanets))
 		{
-			p->computePosition(dateJDE);
+			p->computePosition(dateJDE, Vec3d(0.));
 		}
-		// BEGIN HACK: 0.16.0post for solar aberration/light time correction
-		// This fixes eclipse bug LP:#1275092) and outer planet rendering bug (LP:#1699648) introduced by the first fix in 0.16.0.
-		// We compute a "light time corrected position" for the sun and apply it only for rendering, not for other computations.
-		// A complete solution should likely "just" implement aberration for all objects.
 		const Vec3d obsPosJDE=observerPlanet->getHeliocentricEclipticPos();
-		const double obsDist=obsPosJDE.length();
 
-		observerPlanet->computePosition(dateJDE-obsDist * (AU / (SPEED_OF_LIGHT * 86400.)));
-		const Vec3d obsPosJDEbefore=observerPlanet->getHeliocentricEclipticPos();
-		lightTimeSunPosition=obsPosJDE-obsPosJDEbefore;
-
-		// We must reset observerPlanet for the next step!
-		observerPlanet->computePosition(dateJDE);
-		// END HACK FOR SOLAR LIGHT TIME/ABERRATION
+		// For higher accuracy, we now make two iterations of light time and aberration correction. In the final round, we also compute rotation data.
+		// May fix sub-arcsecond inaccuracies, and optionally apply aberration in the way described in Explanatory Supplement (2013), 7.55.
+		// For reasons unknown (See discussion in GH:#1626) we do not add anything for the Moon when observed from Earth!
+		// Presumably the used ephemerides already provide aberration-corrected positions for the Moon?
+		const Vec3d aberrationPushSpeed=observerPlanet->getHeliocentricEclipticVelocity() * core->getAberrationFactor();
 		for (const auto& p : qAsConst(systemPlanets))
 		{
-			p->setExtraInfoString(StelObject::DebugAid, "");
-			const double light_speed_correction = (p->getHeliocentricEclipticPos()-obsPosJDE).length() * (AU / (SPEED_OF_LIGHT * 86400.));
-			p->computePosition(dateJDE-light_speed_correction);
-			if      (p->englishName=="Moon")    RotationElements::updatePlanetCorrections(dateJDE-light_speed_correction, RotationElements::EarthMoon);
-			else if (p->englishName=="Mars")    RotationElements::updatePlanetCorrections(dateJDE-light_speed_correction, RotationElements::Mars);
-			else if (p->englishName=="Jupiter") RotationElements::updatePlanetCorrections(dateJDE-light_speed_correction, RotationElements::Jupiter);
-			else if (p->englishName=="Saturn")  RotationElements::updatePlanetCorrections(dateJDE-light_speed_correction, RotationElements::Saturn);
-			else if (p->englishName=="Uranus")  RotationElements::updatePlanetCorrections(dateJDE-light_speed_correction, RotationElements::Uranus);
-			else if (p->englishName=="Neptune") RotationElements::updatePlanetCorrections(dateJDE-light_speed_correction, RotationElements::Neptune);
+			//p->setExtraInfoString(StelObject::DebugAid, "");
+			const double lightTimeDays = (p->getHeliocentricEclipticPos()-obsPosJDE).length() * (AU / (SPEED_OF_LIGHT * 86400.));
+			Vec3d aberrationPush(0.);
+			if (withAberration && (observerPlanet->englishName!="Earth" || p->englishName!="Moon"))
+				aberrationPush=lightTimeDays*aberrationPushSpeed;
+			p->computePosition(dateJDE-lightTimeDays, aberrationPush);
+		}
+		// Extra accuracy with another round. Not sure if useful. Maybe hide behind a new property flag?
+		for (const auto& p : qAsConst(systemPlanets))
+		{
+			//p->setExtraInfoString(StelObject::DebugAid, "");
+			const double lightTimeDays = (p->getHeliocentricEclipticPos()-obsPosJDE).length() * (AU / (SPEED_OF_LIGHT * 86400.));
+			Vec3d aberrationPush(0.);
+			if (withAberration && (observerPlanet->englishName!="Earth" || p->englishName!="Moon"))
+				aberrationPush=lightTimeDays*aberrationPushSpeed;
+			// The next call may already do nothing if the time difference to the previous round is not large enough.
+			p->computePosition(dateJDE-lightTimeDays, aberrationPush);
+//			p->setExtraInfoString(StelObject::DebugAid, QString("LightTime %1d; obsSpeed %2/%3/%4 AU/d")
+//					      .arg(QString::number(lightTimeDays, 'f', 3))
+//					      .arg(QString::number(aberrationPushSpeed[0], 'f', 3))
+//					      .arg(QString::number(aberrationPushSpeed[0], 'f', 3))
+//					      .arg(QString::number(aberrationPushSpeed[0], 'f', 3)));
+
+			if      (p->englishName=="Moon")    RotationElements::updatePlanetCorrections(dateJDE-lightTimeDays, RotationElements::EarthMoon);
+			else if (p->englishName=="Mars")    RotationElements::updatePlanetCorrections(dateJDE-lightTimeDays, RotationElements::Mars);
+			else if (p->englishName=="Jupiter") RotationElements::updatePlanetCorrections(dateJDE-lightTimeDays, RotationElements::Jupiter);
+			else if (p->englishName=="Saturn")  RotationElements::updatePlanetCorrections(dateJDE-lightTimeDays, RotationElements::Saturn);
+			else if (p->englishName=="Uranus")  RotationElements::updatePlanetCorrections(dateJDE-lightTimeDays, RotationElements::Uranus);
+			else if (p->englishName=="Neptune") RotationElements::updatePlanetCorrections(dateJDE-lightTimeDays, RotationElements::Neptune);
 		}
 	}
 	else
@@ -1214,7 +1235,7 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 		for (const auto& p : qAsConst(systemPlanets))
 		{
 			p->setExtraInfoString(StelObject::DebugAid, "");
-			p->computePosition(dateJDE);
+			p->computePosition(dateJDE, Vec3d(0.));
 			if      (p->englishName=="Moon")    RotationElements::updatePlanetCorrections(dateJDE, RotationElements::EarthMoon);
 			else if (p->englishName=="Mars")    RotationElements::updatePlanetCorrections(dateJDE, RotationElements::Mars);
 			else if (p->englishName=="Jupiter") RotationElements::updatePlanetCorrections(dateJDE, RotationElements::Jupiter);
@@ -1222,7 +1243,6 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 			else if (p->englishName=="Uranus")  RotationElements::updatePlanetCorrections(dateJDE, RotationElements::Uranus);
 			else if (p->englishName=="Neptune") RotationElements::updatePlanetCorrections(dateJDE, RotationElements::Neptune);
 		}
-		lightTimeSunPosition.set(0.,0.,0.);
 	}
 	computeTransMatrices(dateJDE, observerPlanet->getHeliocentricEclipticPos());
 }
@@ -1688,23 +1708,33 @@ StelObjectP SolarSystem::search(Vec3d pos, const StelCore* core) const
 	else return StelObjectP();
 }
 
-// Return a stl vector containing the planets located inside the limFov circle around position v
+// Return a QList containing the planets located inside the limFov circle around position vv
 QList<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, const StelCore* core) const
 {
 	QList<StelObjectP> result;
 	if (!getFlagPlanets())
 		return result;
 
-	Vec3d v = core->j2000ToEquinoxEqu(vv, StelCore::RefractionOff);
-	v.normalize();
+	const bool withAberration=core->getUseAberration();
+	Vec3d v(vv);
+	v.normalize(); // TODO: start with vv already normalized?
+	if (withAberration)
+	{
+		Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+		StelCore::matVsop87ToJ2000.transfo(vel);
+		vel*=core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
+		v+=vel;
+		v.normalize();
+	}
+
 	double cosLimFov = std::cos(limitFov * M_PI/180.);
 	Vec3d equPos;
 	double cosAngularSize;
 
-	QString weAreHere = core->getCurrentPlanet()->getEnglishName();
+	const QString weAreHere = core->getCurrentPlanet()->getEnglishName();
 	for (const auto& p : systemPlanets)
 	{
-		equPos = p->getEquinoxEquatorialPos(core);
+		equPos = p->getJ2000EquatorialPos(core);
 		equPos.normalize();
 
 		cosAngularSize = std::cos(p->getSpheroidAngularSize(core) * M_PI/180.);
@@ -1760,6 +1790,16 @@ void SolarSystem::setMaxTrailPoints(int max)
 		allTrails->reset(max);
 		recreateTrails();
 		emit maxTrailPointsChanged(max);
+	}
+}
+
+void SolarSystem::setMaxTrailTimeExtent(int max)
+{
+	if (maxTrailTimeExtent != max && maxTrailTimeExtent > 0)
+	{
+		maxTrailTimeExtent = max;
+		recreateTrails();
+		emit maxTrailTimeExtentChanged(max);
 	}
 }
 
@@ -1928,12 +1968,13 @@ bool SolarSystem::nearLunarEclipse() const
 	// TODO: could replace with simpler test
 	// TODO Source?
 
-	Vec3d e = getEarth()->getEclipticPos();
-	Vec3d m = getMoon()->getEclipticPos();  // relative to earth
-	Vec3d mh = getMoon()->getHeliocentricEclipticPos();  // relative to sun
+	const Vec3d sun = getSun()->getAberrationPush();
+	const Vec3d e = getEarth()->getEclipticPos();
+	const Vec3d m = getMoon()->getEclipticPos();  // relative to earth
+	const Vec3d mh = getMoon()->getHeliocentricEclipticPos();  // relative to sun
 
-	// shadow location at earth + moon distance along earth vector from sun
-	Vec3d en = e;
+	// shadow location at earth + moon distance along earth vector from (aberrated) sun
+	Vec3d en = e-sun;
 	en.normalize();
 	Vec3d shadow = en * (e.length() + m.length());
 
@@ -3073,10 +3114,11 @@ QString SolarSystem::getOrbitColorStyle() const
 	return r;
 }
 
-QPair<double, PlanetP> SolarSystem::getEclipseFactor(const StelCore* core) const
+// TODO: To make the code better understandable, get rid of planet->computeModelMatrix(trans, true) here.
+QPair<double, PlanetP> SolarSystem::getSolarEclipseFactor(const StelCore* core) const
 {
 	PlanetP p;
-	const Vec3d Lp = getLightTimeSunPosition();  //sun->getEclipticPos();
+	const Vec3d Lp = sun->getEclipticPos() + sun->getAberrationPush();
 	const Vec3d P3 = core->getObserverHeliocentricEclipticPos();
 	const double RS = sun->getEquatorialRadius();
 
@@ -3088,7 +3130,7 @@ QPair<double, PlanetP> SolarSystem::getEclipseFactor(const StelCore* core) const
 			continue;
 
 		Mat4d trans;
-		planet->computeModelMatrix(trans);
+		planet->computeModelMatrix(trans, true);
 
 		const Vec3d C = trans * Vec3d(0., 0., 0.);
 		const double radius = planet->getEquatorialRadius();

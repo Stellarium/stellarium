@@ -1,35 +1,13 @@
-/****************************************************************************
-** Copyright (c) 2013-2014 Debao Zhang <hello@debao.me>
-** All right reserved.
-**
-** Permission is hereby granted, free of charge, to any person obtaining
-** a copy of this software and associated documentation files (the
-** "Software"), to deal in the Software without restriction, including
-** without limitation the rights to use, copy, modify, merge, publish,
-** distribute, sublicense, and/or sell copies of the Software, and to
-** permit persons to whom the Software is furnished to do so, subject to
-** the following conditions:
-**
-** The above copyright notice and this permission notice shall be
-** included in all copies or substantial portions of the Software.
-**
-** THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-** EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-** MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-** NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-** LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-** OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-** WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-**
-****************************************************************************/
+// xlsxdatavalidation.cpp
+
+#include <QtGlobal>
+#include <QXmlStreamReader>
+#include <QXmlStreamWriter>
 
 #include "xlsxdatavalidation.h"
 #include "xlsxdatavalidation_p.h"
 #include "xlsxworksheet.h"
 #include "xlsxcellrange.h"
-
-#include <QXmlStreamReader>
-#include <QXmlStreamWriter>
 
 QT_BEGIN_NAMESPACE_XLSX
 
@@ -38,6 +16,7 @@ DataValidationPrivate::DataValidationPrivate()
     , errorStyle(DataValidation::Stop), allowBlank(false), isPromptMessageVisible(true)
     , isErrorMessageVisible(true)
 {
+
 }
 
 DataValidationPrivate::DataValidationPrivate(DataValidation::ValidationType type, DataValidation::ValidationOperator op, const QString &formula1, const QString &formula2, bool allowBlank)
@@ -45,6 +24,7 @@ DataValidationPrivate::DataValidationPrivate(DataValidation::ValidationType type
     , errorStyle(DataValidation::Stop), allowBlank(allowBlank), isPromptMessageVisible(true)
     , isErrorMessageVisible(true), formula1(formula1), formula2(formula2)
 {
+
 }
 
 DataValidationPrivate::DataValidationPrivate(const DataValidationPrivate &other)
@@ -53,10 +33,12 @@ DataValidationPrivate::DataValidationPrivate(const DataValidationPrivate &other)
     , errorStyle(DataValidation::Stop), allowBlank(false), isPromptMessageVisible(true)
     , isErrorMessageVisible(true)
 {
+
 }
 
 DataValidationPrivate::~DataValidationPrivate()
 {
+
 }
 
 /*!
@@ -116,6 +98,7 @@ DataValidationPrivate::~DataValidationPrivate()
 DataValidation::DataValidation(ValidationType type, ValidationOperator op, const QString &formula1, const QString &formula2, bool allowBlank)
     :d(new DataValidationPrivate(type, op, formula1, formula2, allowBlank))
 {
+
 }
 
 /*!
@@ -124,6 +107,7 @@ DataValidation::DataValidation(ValidationType type, ValidationOperator op, const
 DataValidation::DataValidation()
     :d(new DataValidationPrivate())
 {
+
 }
 
 /*!
@@ -132,6 +116,7 @@ DataValidation::DataValidation()
 DataValidation::DataValidation(const DataValidation &other)
     :d(other.d)
 {
+
 }
 
 /*!
@@ -383,32 +368,33 @@ void DataValidation::addRange(const CellRange &range)
  */
 bool DataValidation::saveToXml(QXmlStreamWriter &writer) const
 {
-    static QMap<DataValidation::ValidationType, QString> typeMap;
-    static QMap<DataValidation::ValidationOperator, QString> opMap;
-    static QMap<DataValidation::ErrorStyle, QString> esMap;
-    if (typeMap.isEmpty()) {
-        typeMap.insert(DataValidation::None, QStringLiteral("none"));
-        typeMap.insert(DataValidation::Whole, QStringLiteral("whole"));
-        typeMap.insert(DataValidation::Decimal, QStringLiteral("decimal"));
-        typeMap.insert(DataValidation::List, QStringLiteral("list"));
-        typeMap.insert(DataValidation::Date, QStringLiteral("date"));
-        typeMap.insert(DataValidation::Time, QStringLiteral("time"));
-        typeMap.insert(DataValidation::TextLength, QStringLiteral("textLength"));
-        typeMap.insert(DataValidation::Custom, QStringLiteral("custom"));
+    static const QMap<DataValidation::ValidationType, QString> typeMap = {
+        {DataValidation::None, QStringLiteral("none")},
+        {DataValidation::Whole, QStringLiteral("whole")},
+        {DataValidation::Decimal, QStringLiteral("decimal")},
+        {DataValidation::List, QStringLiteral("list")},
+        {DataValidation::Date, QStringLiteral("date")},
+        {DataValidation::Time, QStringLiteral("time")},
+        {DataValidation::TextLength, QStringLiteral("textLength")},
+        {DataValidation::Custom, QStringLiteral("custom")}
+    };
 
-        opMap.insert(DataValidation::Between, QStringLiteral("between"));
-        opMap.insert(DataValidation::NotBetween, QStringLiteral("notBetween"));
-        opMap.insert(DataValidation::Equal, QStringLiteral("equal"));
-        opMap.insert(DataValidation::NotEqual, QStringLiteral("notEqual"));
-        opMap.insert(DataValidation::LessThan, QStringLiteral("lessThan"));
-        opMap.insert(DataValidation::LessThanOrEqual, QStringLiteral("lessThanOrEqual"));
-        opMap.insert(DataValidation::GreaterThan, QStringLiteral("greaterThan"));
-        opMap.insert(DataValidation::GreaterThanOrEqual, QStringLiteral("greaterThanOrEqual"));
+    static const QMap<DataValidation::ValidationOperator, QString> opMap = {
+        {DataValidation::Between, QStringLiteral("between")},
+        {DataValidation::NotBetween, QStringLiteral("notBetween")},
+        {DataValidation::Equal, QStringLiteral("equal")},
+        {DataValidation::NotEqual, QStringLiteral("notEqual")},
+        {DataValidation::LessThan, QStringLiteral("lessThan")},
+        {DataValidation::LessThanOrEqual, QStringLiteral("lessThanOrEqual")},
+        {DataValidation::GreaterThan, QStringLiteral("greaterThan")},
+        {DataValidation::GreaterThanOrEqual, QStringLiteral("greaterThanOrEqual")}
+    };
 
-        esMap.insert(DataValidation::Stop, QStringLiteral("stop"));
-        esMap.insert(DataValidation::Warning, QStringLiteral("warning"));
-        esMap.insert(DataValidation::Information, QStringLiteral("information"));
-    }
+    static const QMap<DataValidation::ErrorStyle, QString> esMap = {
+        {DataValidation::Stop, QStringLiteral("stop")},
+        {DataValidation::Warning, QStringLiteral("warning")},
+        {DataValidation::Information, QStringLiteral("information")}
+    };
 
     writer.writeStartElement(QStringLiteral("dataValidation"));
     if (validationType() != DataValidation::None)
@@ -435,9 +421,10 @@ bool DataValidation::saveToXml(QXmlStreamWriter &writer) const
         writer.writeAttribute(QStringLiteral("prompt"), promptMessage());
 
     QStringList sqref;
-    foreach (CellRange range, ranges())
+    const auto rangeList = ranges();
+    for (const CellRange &range : rangeList)
         sqref.append(range.toString());
-    writer.writeAttribute(QStringLiteral("sqref"), sqref.join(QLatin1Char(' ')));
+    writer.writeAttribute(QStringLiteral("sqref"), sqref.join(QLatin1String(" ")));
 
     if (!formula1().isEmpty())
         writer.writeTextElement(QStringLiteral("formula1"), formula1());
@@ -456,51 +443,56 @@ DataValidation DataValidation::loadFromXml(QXmlStreamReader &reader)
 {
     Q_ASSERT(reader.name() == QLatin1String("dataValidation"));
 
-    static QMap<QString, DataValidation::ValidationType> typeMap;
-    static QMap<QString, DataValidation::ValidationOperator> opMap;
-    static QMap<QString, DataValidation::ErrorStyle> esMap;
-    if (typeMap.isEmpty()) {
-        typeMap.insert(QStringLiteral("none"), DataValidation::None);
-        typeMap.insert(QStringLiteral("whole"), DataValidation::Whole);
-        typeMap.insert(QStringLiteral("decimal"), DataValidation::Decimal);
-        typeMap.insert(QStringLiteral("list"), DataValidation::List);
-        typeMap.insert(QStringLiteral("date"), DataValidation::Date);
-        typeMap.insert(QStringLiteral("time"), DataValidation::Time);
-        typeMap.insert(QStringLiteral("textLength"), DataValidation::TextLength);
-        typeMap.insert(QStringLiteral("custom"), DataValidation::Custom);
+    static const QMap<QString, DataValidation::ValidationType> typeMap = {
+        {QStringLiteral("none"), DataValidation::None},
+        {QStringLiteral("whole"), DataValidation::Whole},
+        {QStringLiteral("decimal"), DataValidation::Decimal},
+        {QStringLiteral("list"), DataValidation::List},
+        {QStringLiteral("date"), DataValidation::Date},
+        {QStringLiteral("time"), DataValidation::Time},
+        {QStringLiteral("textLength"), DataValidation::TextLength},
+        {QStringLiteral("custom"), DataValidation::Custom}
+    };
 
-        opMap.insert(QStringLiteral("between"), DataValidation::Between);
-        opMap.insert(QStringLiteral("notBetween"), DataValidation::NotBetween);
-        opMap.insert(QStringLiteral("equal"), DataValidation::Equal);
-        opMap.insert(QStringLiteral("notEqual"), DataValidation::NotEqual);
-        opMap.insert(QStringLiteral("lessThan"), DataValidation::LessThan);
-        opMap.insert(QStringLiteral("lessThanOrEqual"), DataValidation::LessThanOrEqual);
-        opMap.insert(QStringLiteral("greaterThan"), DataValidation::GreaterThan);
-        opMap.insert(QStringLiteral("greaterThanOrEqual"), DataValidation::GreaterThanOrEqual);
+    static const QMap<QString, DataValidation::ValidationOperator> opMap = {
+        {QStringLiteral("between"), DataValidation::Between},
+        {QStringLiteral("notBetween"), DataValidation::NotBetween},
+        {QStringLiteral("equal"), DataValidation::Equal},
+        {QStringLiteral("notEqual"), DataValidation::NotEqual},
+        {QStringLiteral("lessThan"), DataValidation::LessThan},
+        {QStringLiteral("lessThanOrEqual"), DataValidation::LessThanOrEqual},
+        {QStringLiteral("greaterThan"), DataValidation::GreaterThan},
+        {QStringLiteral("greaterThanOrEqual"), DataValidation::GreaterThanOrEqual}
+    };
 
-        esMap.insert(QStringLiteral("stop"), DataValidation::Stop);
-        esMap.insert(QStringLiteral("warning"), DataValidation::Warning);
-        esMap.insert(QStringLiteral("information"), DataValidation::Information);
-    }
+    static const QMap<QString, DataValidation::ErrorStyle> esMap = {
+        {QStringLiteral("stop"), DataValidation::Stop},
+        {QStringLiteral("warning"), DataValidation::Warning},
+        {QStringLiteral("information"), DataValidation::Information}
+    };
 
     DataValidation validation;
     QXmlStreamAttributes attrs = reader.attributes();
 
     QString sqref = attrs.value(QLatin1String("sqref")).toString();
-    foreach (QString range, sqref.split(QLatin1Char(' ')))
+    const auto sqrefParts = sqref.split(QLatin1Char(' '));
+    for (const QString &range : sqrefParts)
         validation.addRange(range);
 
     if (attrs.hasAttribute(QLatin1String("type"))) {
         QString t = attrs.value(QLatin1String("type")).toString();
-        validation.setValidationType(typeMap.contains(t) ? typeMap[t] : DataValidation::None);
+        auto it = typeMap.constFind(t);
+        validation.setValidationType(it != typeMap.constEnd() ? it.value() : DataValidation::None);
     }
     if (attrs.hasAttribute(QLatin1String("errorStyle"))) {
         QString es = attrs.value(QLatin1String("errorStyle")).toString();
-        validation.setErrorStyle(esMap.contains(es) ? esMap[es] : DataValidation::Stop);
+        auto it = esMap.constFind(es);
+        validation.setErrorStyle(it != esMap.constEnd() ? it.value() : DataValidation::Stop);
     }
     if (attrs.hasAttribute(QLatin1String("operator"))) {
         QString op = attrs.value(QLatin1String("operator")).toString();
-        validation.setValidationOperator(opMap.contains(op) ? opMap[op] : DataValidation::Between);
+        auto it = opMap.constFind(op);
+        validation.setValidationOperator(it != opMap.constEnd() ? it.value() : DataValidation::Between);
     }
     if (attrs.hasAttribute(QLatin1String("allowBlank"))) {
         validation.setAllowBlank(true);

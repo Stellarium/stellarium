@@ -37,9 +37,9 @@ NomenclatureItem::NomenclatureItem(PlanetP nPlanet,
 				   const QString& nName,
 				   const QString& nContext,
 				   NomenclatureItemType nItemType,
-				   float nLatitude,
-				   float nLongitude,
-				   float nSize)
+				   double nLatitude,
+				   double nLongitude,
+				   double nSize)
 	: XYZ(0.0)
 	, jde(0.0)
 	, planet(nPlanet)
@@ -52,7 +52,7 @@ NomenclatureItem::NomenclatureItem(PlanetP nPlanet,
 	, longitude(nLongitude)
 	, size(nSize)
 {
-	StelUtils::spheToRect((static_cast<double>(longitude) /*+ planet->getAxisRotation()*/) * M_PI/180.0, static_cast<double>(latitude) * M_PI/180.0, XYZpc);
+	StelUtils::spheToRect(longitude /*+ planet->getAxisRotation()*/ * M_PI/180.0, latitude * M_PI/180.0, XYZpc);
 }
 
 NomenclatureItem::~NomenclatureItem()
@@ -148,7 +148,12 @@ QString NomenclatureItem::getNomenclatureTypeDescription(NomenclatureItemType nT
 
 float NomenclatureItem::getSelectPriority(const StelCore* core) const
 {
-	if (planet->getVMagnitude(core)>=20.f)
+	if (!getFlagLabels())
+	{
+		// suppress selection if switched off.
+		return StelObject::getSelectPriority(core)+1.e12f;
+	}
+	else if (planet->getVMagnitude(core)>=20.f)
 	{
 		// The planet is too faint for view (in deep shadow for example), so let's disable selecting the nomenclature
 		return StelObject::getSelectPriority(core)+25.f;
@@ -211,7 +216,7 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 	// Ra/Dec etc.
 	oss << getCommonInfoString(core, flags);
 
-	if (flags&Size && size>0.f)
+	if (flags&Size && size>0.)
 	{
 		QString sz = q_("Linear size");
 		// Satellite Features are almost(?) exclusively lettered craters, and all are on the Moon. Assume craters.
@@ -270,7 +275,7 @@ float NomenclatureItem::getVMagnitude(const StelCore* core) const
 
 double NomenclatureItem::getAngularSize(const StelCore* core) const
 {
-	return std::atan2(static_cast<double>(size)*planet->getSphereScale()/AU, getJ2000EquatorialPos(core).length()) * M_180_PI;
+	return std::atan2(size*planet->getSphereScale()/AU, getJ2000EquatorialPos(core).length()) * M_180_PI;
 }
 
 void NomenclatureItem::update(double deltaTime)
@@ -319,8 +324,8 @@ double NomenclatureItem::getSolarAltitude(const StelCore *core) const
 	QPair<Vec4d, Vec3d> ssop=planet->getSubSolarObserverPoints(core);
 	double sign=planet->isRotatingRetrograde() ? -1. : 1.;
 	double colongitude=450.*M_PI_180-sign*ssop.second[2];
-	double h=asin(sin(ssop.second[0])*sin(static_cast<double>(latitude)*M_PI_180) +
-		      cos(ssop.second[0])*cos(static_cast<double>(latitude)*M_PI_180)*sin(colongitude-static_cast<double>(longitude)*M_PI_180));
+	double h=asin(sin(ssop.second[0])*sin(latitude*M_PI_180) +
+		      cos(ssop.second[0])*cos(latitude*M_PI_180)*sin(colongitude-longitude*M_PI_180));
 	return h*M_180_PI;
 }
 

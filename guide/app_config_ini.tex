@@ -45,7 +45,8 @@ planets\_orbits\_color\_style      & string & one\_color & Set the style of orbi
 flag\_nebula\_magnitude\_limit     & bool   & false & Set to \emph{true} to activate limit for showing deep-sky objects.\\%\midrule
 flag\_star\_magnitude\_limit       & bool   & false & Set to \emph{true} to activate limit for showing stars\\%\midrule
 flag\_planet\_magnitude\_limit     & bool   & false & Set to \emph{true} to activate limit for showing planets.\\\midrule
-extinction\_mode\_below\_horizon   & string & zero & Set extinction mode for atmosphere below horizon. Possible values: \emph{zero}, \emph{mirror} and \emph{major\_planets}.\\\midrule
+extinction\_mode\_below\_horizon   & string & zero & Set extinction mode for atmosphere below horizon. Possible values: \emph{zero}, \emph{mirror} and \emph{major\_planets}.\\
+twilight\_altitude                 & float  & -6.0 & Solar altitude for going to previous/next twilight.\\\midrule
 %
 flag\_stars                        & bool   & true  & Set to \emph{false} to hide the stars on start-up\\%\midrule
 flag\_star\_name                   & bool   & true  & Set to \emph{false} to hide the star labels on start-up\\%\midrule
@@ -141,6 +142,7 @@ wut\_time\_interval            & int    & 0     & Identificator for time interva
 wut\_angular\_limit\_flag      & bool   & false & Set to \emph{true} to use the angular size filter.\\%\midrule
 wut\_angular\_limit\_min       & float  & 1.0   & Minimal allowed angular size, arcminutes.\\%\midrule
 wut\_angular\_limit\_max       & float  & 600.0 & Maximal allowed angular size, arcminutes.\\%\midrule
+wut\_altitude\_min             & float  & 0.0   & Minimal allowed altitude for compute rise and set times, degrees.\\%\midrule
 graphs\_celestial\_body        & string & Moon  & Default celestial body for draw of graphs.\\%\midrule
 graphs\_duration               & int    & 1     & How much years account into calculation of graphs.\\%\midrule
 graphs\_first\_id              & int    & 1     & Identificator for left graph (blue line).\\%\midrule
@@ -345,6 +347,13 @@ This section is for developers only.
 \noindent%
 \begin{tabularx}{\textwidth}{l|l|X}\toprule
 \emph{ID}              & \emph{Type} & \emph{Description}\\\midrule
+check\_loading\_constellation\_data & bool & Set to \emph{true} to check loading constellation data.
+                                      This option is needed to debug new skycultures. Default value: \emph{false}.\\
+convert\_locations\_list     & bool & Set to \emph{true} to convert file \file{base\_locations.txt} 
+                                      into file \file{base\_locations.bin}\footnote{To get the standard 
+                                        packed \file{base\_locations.bin.gz} file please run the command
+                                        \verb|gzip -nc base_locations.bin > base_locations.bin.gz|.}. 
+                                      Default value: \emph{false}.\\
 convert\_dso\_catalog        & bool & Set to \emph{true} to convert file \file{catalog.txt} 
                                       into file \file{catalog.dat}. Default value: \emph{false}.\\%\midrule
 convert\_dso\_decimal\_coord & bool & Set to \emph{true} to use decimal values for coordinates 
@@ -604,8 +613,9 @@ flag\_manual\_zoom              & bool   & Set to \emph{false} for normal zoom b
                                            When set to true, the auto zoom feature only moves in a small amount and must be pressed many times\\%\midrule
 flag\_enable\_move\_keys        & bool   & Set to \emph{false} if you want to disable the arrow keys\\%\midrule
 flag\_enable\_mouse\_navigation & bool   & Set to \emph{false} if you want to disable the mouse navigation.\\%\midrule
-init\_fov                       & float  & Initial field of view, in degrees, typical value: ''60''.\\%\midrule
-min\_fov                        & float  & Minimal field of view, in degrees, typical value: ''0.001389'' (5").\\%\midrule
+init\_fov                       & float  & Initial field of view, in degrees. Typical value: ''60''.\\%\midrule
+min\_fov                        & float  & Minimal field of view, in degrees. Typical value: ''0.001389'' (5").\\%\midrule
+max\_fov                        & float  & Maximal field of view, in degrees. Typical value: ''360.0''.\\%\midrule
 init\_view\_pos                 & floats & Initial viewing direction. This is a vector with x,y,z-coordinates. x being N-S (S +ve), 
                                            y being E-W (E +ve), z being up-down (up +ve). Thus to look South at the horizon use \emph{1,0,0}. 
                                            To look Northwest and up at $45\degree$, use \emph{-1,-1,1} and so on.\\%\midrule
@@ -879,6 +889,10 @@ moon\_scale                   & float & Sets the moon scale factor, sometimes us
 flag\_minorbodies\_scaled     & bool & Set to \emph{true} if you want to see minor bodies enlarged \\
 minorbodies\_scale            & float & Set scale factor for minor bodies, to see them in unnatural detail. Typical value: \emph{10}\\
 \midrule
+flag\_draw\_moon\_halo           & bool  & Display halo around the Moon\\
+flag\_draw\_sun\_halo            & bool  & Display Sun's glare\\
+flag\_draw\_sun\_corona          & bool  & Display Sun's corona when atmosphere is disabled\\
+\midrule
 flag\_fov\_center\_marker        & bool  & Set to \emph{true} to enable drawing a field of view center marker \\
 flag\_fov\_circular\_marker      & bool  & Set to \emph{true} to enable drawing a circular FOV marker \\
 size\_fov\_circular\_marker      & float & size of the circular FOV marker, degrees \\
@@ -926,7 +940,7 @@ DateTime      & int,int     &  1338,944     & Position of time panel\\\bottomrul
 \subsection{\big[DialogSizes\big]}
 %\label{sec:config.ini:DialogSizes}
 
-\newFeature{v0.15.1}
+\newFeature{0.15.1}
 GUI panels can be resized by dragging on their lower corners or borders.  
 Enlarged sizes are stored here, and on next start they will appear in this size.
 The entries in this section define the size.
@@ -947,7 +961,7 @@ AstroCalc     & int,int     &  913,493      & Size of AstroCalc panel\\\bottomru
 
 This section defines the source list of the HiPS surveys, as well as other
 HiPS related options.
-\newFeature{v0.18.0}
+\newFeature{0.18.0}
 
 \noindent%
 \begin{tabularx}{\textwidth}{l|l|X}\toprule

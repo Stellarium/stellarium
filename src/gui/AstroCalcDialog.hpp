@@ -121,7 +121,7 @@ public:
 	};
 
 	enum PhenomenaTypeIndex {
-		Conjuction		= 0,
+		Conjunction		= 0,
 		Opposition		= 1,
 		GreatestElongation	= 2,
 		StationaryPoint		= 3,
@@ -139,6 +139,7 @@ public:
 		WUTMaxElevation,        //! max. elevation
 		WUTSetTime,             //! set time
 		WUTAngularSize,         //! angular size
+		WUTConstellation,       //! IAU constellation
 		WUTCount                //! total number of columns
 	};
 
@@ -274,6 +275,7 @@ private slots:
 	void saveWutMagnitudeLimit(double mag);
 	void saveWutMinAngularSizeLimit();
 	void saveWutMaxAngularSizeLimit();
+	void saveWutMinAltitude();
 	void saveWutAngularSizeFlag(bool state);
 	void saveWutTimeInterval(int index);
 	void calculateWutObjects();
@@ -349,14 +351,14 @@ private:
 	void prepareAxesAndGraph();
 	void prepareAziVsTimeAxesAndGraph();
 	void prepareXVsTimeAxesAndGraph();
-	void prepareMonthlyEleveationAxesAndGraph();
+	void prepareMonthlyElevationAxesAndGraph();
 	void prepareDistanceAxesAndGraph();
 	void prepareAngularDistanceAxesAndGraph();
 	//! Populates the drop-down list of time intervals for WUT tool.
 	void populateTimeIntervalsList();	
 	double computeGraphValue(const PlanetP &ssObj, const int graphType);
 
-	void populateFunctionsList();
+	void populateFunctionsList();	
 	double computeMaxElevation(StelObjectP obj);
 
 	void adjustCelestialPositionsColumns();
@@ -373,8 +375,9 @@ private:
 	//! @arg decimalDegrees use decimal format, not DMS/HMS
 	//! @return QPair(lngStr, latStr) formatted output strings
 	static QPair<QString, QString> getStringCoordinates(const Vec3d coord, const bool horizontal, const bool southAzimuth, const bool decimalDegrees);
-	void fillWUTTable(QString objectName, QString designation, float magnitude, Vec3f RTSTime, double maxElevation, double angularSize, bool decimalDegrees = false);
-	void fillCelestialPositionTable(QString objectName, QString RA, QString Dec, float magnitude,
+	void fillWUTTable(QString objectName, QString designation, float magnitude, Vec4d RTSTime,
+					  double maxElevation, double angularSize, QString constellation, bool decimalDegrees = false);
+	void fillCelestialPositionTable(QString objectName, QString RA, QString Dec, double magnitude,
 					QString angularSize, QString angularSizeToolTip, QString extraData,
 					QString extraDataToolTip, QString transitTime, QString maxElevation,
 					QString sElongation, QString objectType);
@@ -384,7 +387,7 @@ private:
 	//! angular separation ("conjunction" defined as equality of right ascension
 	//! of two bodies), and current solution is not accurate and slow.
 	//! @note modes: 0 - conjuction, 1 - opposition, 2 - greatest elongation
-	QMap<double, double> findClosestApproach(PlanetP& object1, StelObjectP& object2, double startJD, double stopJD, double maxSeparation, int mode);
+	QMap<double, double> findClosestApproach(PlanetP& object1, StelObjectP& object2, const double startJD, const double stopJD, const double maxSeparation, const int mode);
 	// TODO: Doc?
 	double findDistance(double JD, PlanetP object1, StelObjectP object2, int mode);
 	// TODO: Doc?
@@ -410,12 +413,12 @@ private:
 	//! Calculation perihelion and aphelion points
 	QMap<double, double> findOrbitalPointApproach(PlanetP& object1, double startJD, double stopJD);
 	bool findPreciseOrbitalPoint(QPair<double, double>* out, PlanetP object1, double JD, double stopJD, double step, bool minimal);
-	double findHeliocentricDistance(double JD, PlanetP object1);
+	inline double findHeliocentricDistance(double JD, PlanetP object1) const {return object1->getHeliocentricEclipticPos(JD+core->computeDeltaT(JD)/86400.).length();}
 
 	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph, plotAngularDistanceGraph, plotAziVsTime;
 	int altVsTimePositiveLimit, monthlyElevationPositiveLimit, graphsDuration;
 	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, wutHeader, transitHeader;
-	static float brightLimit;
+	static double brightLimit;
 	static double minY, maxY, minYme, maxYme, minYsun, maxYsun, minYmoon, maxYmoon, transitX, minY1, maxY1, minY2, maxY2,
 			     minYld, maxYld, minYad, maxYad, minYadm, maxYadm, minYaz, maxYaz;
 	static QString yAxis1Legend, yAxis2Legend;
@@ -465,6 +468,7 @@ private:
 		PHCSolarSystemMinorBodies		= 24,
 		PHCMoonsFirstBody				= 25,
 		PHCBrightCarbonStars				= 26,
+		PHCBrightBariumStars				= 27,
 		PHCNone	// stop gapper for syntax reasons
 	};
 
@@ -510,6 +514,7 @@ private:
 		EWAlgolTypeVariableStars			= 38,	// http://www.sai.msu.su/gcvs/gcvs/vartype.htm
 		EWClassicalCepheidsTypeVariableStars	= 39,	// http://www.sai.msu.su/gcvs/gcvs/vartype.htm
 		EWCarbonStars					= 40,
+		EWBariumStars					= 41,
 		EWNone	// stop gapper for syntax reasons
 	};
 };

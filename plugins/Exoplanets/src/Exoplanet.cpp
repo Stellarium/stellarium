@@ -30,6 +30,7 @@
 #include "StelSkyDrawer.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StarMgr.hpp"
+#include "Planet.hpp"
 
 #include <QTextStream>
 #include <QDebug>
@@ -44,6 +45,7 @@ bool Exoplanet::distributionMode = false;
 bool Exoplanet::timelineMode = false;
 bool Exoplanet::habitableMode = false;
 bool Exoplanet::showDesignations = false;
+bool Exoplanet::showNumbers = false;
 Vec3f Exoplanet::exoplanetMarkerColor = Vec3f(0.4f,0.9f,0.5f);
 Vec3f Exoplanet::habitableExoplanetMarkerColor = Vec3f(1.f,0.5f,0.f);
 int Exoplanet::temperatureScaleID = 1;
@@ -595,8 +597,9 @@ void Exoplanet::draw(StelCore* core, StelPainter *painter)
 
 	bool visible = (timelineMode? isDiscovered(core) : true);
 	Vec3d win;
+	QString text;
 	// Check visibility of exoplanet system
-	if(!visible || !(painter->getProjector()->projectCheck(XYZ, win))) {return;}
+	if(!visible || !(painter->getProjector()->projectCheck(getJ2000EquatorialPos(core), win))) {return;}
 
 	StelSkyDrawer* sd = core->getSkyDrawer();
 	const float mlimit = sd->getLimitMagnitude();
@@ -611,13 +614,34 @@ void Exoplanet::draw(StelCore* core, StelPainter *painter)
 
 		painter->setBlending(true, GL_ONE, GL_ONE);
 		painter->setColor(color, 1);
-		painter->drawSprite2dMode(XYZ, distributionMode ? 4.f : 5.f);
+		painter->drawSprite2dMode(getJ2000EquatorialPos(core), distributionMode ? 4.f : 5.f);
 
 		float coeff = 4.5f + std::log10(static_cast<float>(sradius) + 0.1f);
 		StarMgr* smgr = GETSTELMODULE(StarMgr); // It's need for checking displaying of labels for stars
-		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+coeff)<mlimit && smgr->getFlagLabels() && showDesignations)
+		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+coeff)<mlimit && smgr->getFlagLabels())
 		{
-			painter->drawText(XYZ, getNameI18n(), 0, shift, shift, false);
+			if (showDesignations)
+				text = getNameI18n();
+			if (showNumbers)
+				text += text.isEmpty() ? QString("%1").arg(exoplanets.count()) : QString(" (%1)").arg(exoplanets.count());
+			if (!text.isEmpty())
+				painter->drawText(getJ2000EquatorialPos(core), text, 0, shift, shift, false);
 		}
+	}
+}
+
+Vec3d Exoplanet::getJ2000EquatorialPos(const StelCore* core) const
+{
+	if ((core) && (core->getUseAberration()) && (core->getCurrentPlanet()))
+	{
+		Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+		vel=StelCore::matVsop87ToJ2000*vel*core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
+		Vec3d pos=XYZ+vel;
+		pos.normalize();
+		return pos;
+	}
+	else
+	{
+		return XYZ;
 	}
 }

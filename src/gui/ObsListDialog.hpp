@@ -32,11 +32,11 @@ class Ui_obsListDialogForm;
 
 class ObsListDialog : public StelDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    ObsListDialog ( QObject* parent );
-    virtual ~ObsListDialog();
+	ObsListDialog ( QObject* parent );
+	virtual ~ObsListDialog() Q_DECL_OVERRIDE;
 
     //! Notify that the application style changed
     void styleChanged();
@@ -44,9 +44,9 @@ public:
     void setVisible ( bool v );
 
 protected:
-    Ui_obsListDialogForm *ui;
-    //! Initialize the dialog widgets and connect the signals/slots.
-    virtual void createDialogContent();
+	Ui_obsListDialogForm *ui;
+	//! Initialize the dialog widgets and connect the signals/slots.
+	virtual void createDialogContent() Q_DECL_OVERRIDE;
 
 private:
     QStandardItemModel * obsListListModel;
@@ -60,12 +60,12 @@ private:
     QString defaultListUuid_;
     QList<QString> listName;
 
-    //! Set header names for observing list table
-    void setObservingListHeaderNames();
+	//! Set header names for observing list table
+	void setObservingListHeaderNames();
 
-    void invokeObsListCreateEditDialog ( std::string listUuid );
+	void invokeObsListCreateEditDialog ( std::string listUuid );
 
-    ObsListCreateEditDialog * createEditDialog_instance;
+	ObsListCreateEditDialog * createEditDialog_instance;
 
     //! Add row in the obsListListModel
     //! @param number row number
@@ -78,9 +78,9 @@ private:
     //! @param constellation constellation in which the object is located
     void addModelRow ( int number, QString uuid, QString name, QString nameI18n, QString type, QString ra, QString dec, QString magnitude, QString constellation );
 
-    //! Load the selected observing list
-    //! @param listUuid the uuid of the list
-    void loadObservingList ( QString listUuid );
+	//! Load the selected observing list
+	//! @param listUuid the uuid of the list
+	void loadObservingList ( QString listUuid );
 
     //! Load the lists names to populate the combo box and get the default list uuid
     void loadListsName();
@@ -91,26 +91,32 @@ private:
     //! Load list from JSON file
     QVariantList loadListFromJson(QFile &jsonFile, QString listUuid);
 
+	//! Load the default list
+	void loadDefaultList();
+
+	//! Load list from JSON file
+	QVariantList loadListFromJson(QFile &jsonFile, QString listUuid);
+
 
 public slots:
-    void retranslate();
+	virtual void retranslate() Q_DECL_OVERRIDE;
 
 private slots:
-    void obsListHighLightAllButtonPressed();
-    void obsListClearHighLightButtonPressed();
-    void obsListNewListButtonPressed();
-    void obsListEditButtonPressed();
-    void obsListCreateEditDialogClosed();
-    void obsListExitButtonPressed();
-    void obsListDeleteButtonPressed();
+	void obsListHighLightAllButtonPressed();
+	void obsListClearHighLightButtonPressed();
+	void obsListNewListButtonPressed();
+	void obsListEditButtonPressed();
+	void obsListCreateEditDialogClosed();
+	void obsListExitButtonPressed();
+	void obsListDeleteButtonPressed();
 
-    //! Method called when a list name is selected in the combobox
-    //! @param selectedIndex the index of the list name in the combo box
-    void loadSelectedObservingList ( int selectedIndex );
+	//! Method called when a list name is selected in the combobox
+	//! @param selectedIndex the index of the list name in the combo box
+	void loadSelectedObservingList ( int selectedIndex );
 
-    //! Select and go to object
-    //! @param index the QModelIndex of the list
-    void selectAndGoToObject ( QModelIndex index );
+	//! Select and go to object
+	//! @param index the QModelIndex of the list
+	void selectAndGoToObject ( QModelIndex index );
 };
 
 #endif // OBSLISTDIALOG_H

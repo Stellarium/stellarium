@@ -74,6 +74,12 @@ bool SatellitesListFilterModel::filterAcceptsRow(int source_row, const QModelInd
 	QString id = data.toString();
 	if (id.contains(filterRegExp()))
 		return true;
+
+	// search descriptions
+	data = index.data(SatDescriptionRole);
+	QString descr = data.toString();
+	if (descr.contains(filterRegExp()))
+		return true;
 	
 	// TODO: Possible check for "NORAD NNNN".
 	return false;

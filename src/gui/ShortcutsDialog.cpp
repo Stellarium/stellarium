@@ -43,7 +43,7 @@ bool ShortcutsFilterModel::filterAcceptsRow(int source_row, const QModelIndex &s
 	
 	if (source_parent.isValid())
 	{
-		QModelIndex index = source_parent.child(source_row, filterKeyColumn());
+		QModelIndex index = source_parent.model()->index(source_row, filterKeyColumn(), source_parent);
 		QString data = sourceModel()->data(index, filterRole()).toString();
 		return data.contains(filterRegExp());
 	}
@@ -335,6 +335,9 @@ void ShortcutsDialog::createDialogContent()
 	QString style = "QLabel { color: rgb(238, 238, 238); }";
 	ui->primaryLabel->setStyleSheet(style);
 	ui->altLabel->setStyleSheet(style);
+
+	// set initial focus to action search
+	ui->lineEditSearch->setFocus();
 }
 
 void ShortcutsDialog::polish()
@@ -402,7 +405,7 @@ QStandardItem* ShortcutsDialog::findItemByData(QVariant value, int role, int col
 				return subitem;
 		}
 	}
-	return 0;
+	return Q_NULLPTR;
 }
 
 void ShortcutsDialog::updateShortcutsItem(StelAction *action,

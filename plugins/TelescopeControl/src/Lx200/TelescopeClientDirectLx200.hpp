@@ -45,18 +45,18 @@ class TelescopeClientDirectLx200 : public TelescopeClient, public Server
 	Q_OBJECT
 public:
 	TelescopeClientDirectLx200(const QString &name, const QString &parameters, Equinox eq = EquinoxJ2000);
-	~TelescopeClientDirectLx200(void)
+	~TelescopeClientDirectLx200(void) Q_DECL_OVERRIDE
 	{
 		//hangup();
 	}
 	
 	//======================================================================
 	// Methods inherited from TelescopeClient
-	bool isConnected(void) const;
+	bool isConnected(void) const Q_DECL_OVERRIDE;
 	
 	//======================================================================
 	// Methods inherited from Server
-	virtual void step(long long int timeout_micros);
+	virtual void step(long long int timeout_micros) Q_DECL_OVERRIDE;
 	void communicationResetReceived(void);
 	void longFormatUsedReceived(bool long_format);
 	void raReceived(unsigned int ra_int);
@@ -65,26 +65,26 @@ public:
 private:
 	//======================================================================
 	// Methods inherited from TelescopeClient
-	Vec3d getJ2000EquatorialPos(const StelCore* core=Q_NULLPTR) const;
-	bool prepareCommunication();
-	void performCommunication();
-	void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject);
-	void telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject);
-	bool isInitialized(void) const;
+	Vec3d getJ2000EquatorialPos(const StelCore* core=Q_NULLPTR) const Q_DECL_OVERRIDE;
+	bool prepareCommunication() Q_DECL_OVERRIDE;
+	void performCommunication() Q_DECL_OVERRIDE;
+	void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject) Q_DECL_OVERRIDE;
+	void telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject) Q_DECL_OVERRIDE;
+	bool isInitialized(void) const Q_DECL_OVERRIDE;
 	
 	//======================================================================
 	// Methods inherited from Server
 	void sendPosition(unsigned int ra_int, int dec_int, int status);
 	//TODO: Find out if this method is needed. It's called by Connection.
-	void gotoReceived(unsigned int ra_int, int dec_int);
-	void syncReceived(unsigned int ra_int, int dec_int);
+	void gotoReceived(unsigned int ra_int, int dec_int) Q_DECL_OVERRIDE;
+	void syncReceived(unsigned int ra_int, int dec_int) Q_DECL_OVERRIDE;
 	
 private:
 	void hangup(void);
 	int time_delay;
 	
 	InterpolatedPosition interpolatedPosition;
-	virtual bool hasKnownPosition(void) const
+	virtual bool hasKnownPosition(void) const Q_DECL_OVERRIDE
 	{
 		return interpolatedPosition.isKnown();
 	}

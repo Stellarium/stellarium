@@ -1,0 +1,545 @@
+<h1>Greek (Almagest)</h1>
+
+<p>This ancient Greek sky culture is based on the Almagest, a compilation of
+astronomical knowledge of former astronomers including results from
+observations and mathematical astronomy. Pieced together by Claudius
+Ptolemy, using older, as well as his own, observations, it was written in
+Greek, published in the Second Century and remained the main astronomical
+work for the following 1500 years. It was originally written with the title
+<i>Mathematike Syntaxis</i>, in Ancient Greek.  The name <i>Almagest</i>,
+meaning &ldquo;The Largest [Book]&rdquo;, was developed from Arabian
+translations. To create this sky culture we used the English translation by
+Toomer (1984), reworked it in some details (e.g. using more literal
+translations from Greek instead of Latin terms that are common today) and we
+made use of computer readable tables prepared by Ernie Wright.</p>
+
+<p>Almagest se sastoji od 13 dijelova, nazvanih knjigama. Ptolomej  je u sedmoj
+i osmoj knjizi naveo ukupno 1022 zvijezde u 48 zviježđa (među kojima je i 5
+objekata sličnih zvijezdama poslije definiranih kao kuglasti zvjezdani
+skupovi). To je tablica koordinata zvijezda s opisom njihovog položaja u
+zviježđu (poput "zvijezda na laktu X, širine, dužine i magnitude"). S
+obzirom na precesiju, Ptolomej je koristio ekliptičke koordinate. Ptolomej
+je jedan od prvih  u to vrijeme uključio magnitudu, kvantitativnu ljestvicu
+zvjezdanog sjaja, vjerojatno usvojenu od Hipparha (što nije sigurno jer
+Hiparhov&rsquo katalog nije sačuvan). Ljestvica započinje najsjajnijom
+zvijezdom magnitude 1, postepeno se spuštajući se na 6. magnitudu za jedva
+vidljive zvijezde.</p>
+
+<p>Za izračunavanje položaja planeta Ptolomej je koristio geocentrični model
+(što je 'dopušteno' jer promatrač uvijek stoji na Zemlji) i tako pridonio
+znanstvenom uvjerenju da heliocentrični model Aristarha nije potreban.
+Međutim, za <i>Almagest</i>  katalog zvijezda, to uopće nije važno jer
+katalog zvijezda uvijek predstavlja svojevrsni popis nepokretnih točaka na
+nebu, a Ptolomejev proklamirani cilj kataloga bio  je pružiti popis za
+izradu nebeskog globusa (vidi Alm., VIII, 3). Budući da je bio svjestan
+postojanja  precesije, želio je olakšati posao budućim proizvođačima globusa
+koristeći ekliptične koordinate: Ptolomeju tada poznata precesija pomicala
+je sve zvijezde paralelno s ekliptikom, pa su se korekcije, za buduća
+razdoblja kad se globus izrađivao, mogle primijeniti jednostavnim
+oduzimanjem vrijednosti ekliptičke dužine.</p>
+
+<h2>Kako se izradila ova kultura zviježđa</h2>
+
+<h3>Nazivi zvijezda</h3>
+
+Out of more than 1,000 stars, Ptolemy mentions a proper name for only 15.
+The rest are identified by fairly long descriptions such as "The star on the
+end of the tail" for the Polaris. In order to avoid displaying such long
+strings across the screen in Stellarium, we invented short labels for all
+Almagest stars based on the constellation and the order in which they appear
+in the catalogue.  For example, Polaris is given a designation "UMi 1"
+because it is the first star in the constellation of Small Bear (UMi).  See
+the table below for the correspondence between Ptolemy constellations and
+IAU abbreviations.  In addition, where Ptolemy describes a star as lying
+outside of the figure, we use lowercase letters in the corresponding
+label. To see the long description for a given star, users should enable
+"Use additional names of stars" in the "View [F4]/Sky" settings and click on
+the star. The long description will then be displayed at the top of the
+screen.
+
+<h3>Constellation lines</h3>
+
+<p>Proces se može opisati uz pomoć ovdje predstavljene skice za Corvus</p>
+
+<p>U zviježđu Corvus (Gavran), &alpha; Crv je zvijezda &quot;glave
+gavrana&quot;. Spojena je s &quot;zvijezdom vrata&quot;, &epsilon; Crv.  Ta
+je spojena s &quot;zvijezdom na prsima &quot; &zeta; Crv. Iz te točke dvije
+linije idu vrhova krila. &gamma; Crv je zvijezda prednjeg krila a &delta;
+Crv zvijezda zadnjeg krila. Od zvijezde na prsima još jedna linija ide do
+&quot;nožice gavrana &quot;, zvijezde &beta; Crv.</p>
+
+<p><img width="800" src="corvus_s.png" /></p>
+
+<p>Nakon identificiranja zvijezda temeljem njihovih koordinata i naziva,
+spojili smo zvijezde linijama prema opisima danim u tablici
+<i>Almagesta</i>.</p>
+
+<p>The names of stars and names of deep sky objects rely on the Almagest only,
+e.g. Ptolemy uses the name
+&quot;&lambda;&alpha;&mu;&pi;&alpha;&delta;&#943;&alpha;&sigmaf; (The
+Torch-like)&quot; for Aldebaran in his other work, the <i>Tetrabiblos</i>,
+but this is not implemented in this sky culture because it doesn't show up
+in the Almagest.</p>
+
+<p>Sljedeća tablica prikazuje izvorno ime zviježđa na grčkom i njegov prijevod
+(stupac 2 i 3) a (stupac 6) označava našu nesigurnost u rekonstrukciji
+zviježđa prema dostupnim opisima.</p>
+
+<table class="nomenclature">
+<tr valign="top">
+	<td><b>Skraćenica</b></td>
+	<td><b>Izvorni naziv</b></td>
+	<td><b>Prijevod</b>(direktni)</td>
+	<td><b>IAU (latinski) naziv</b></td>
+	<td><b>pomoć pri određivanju zviježđa</b></td>
+	<td><b>umjetnička sloboda</b></td>
+</tr>
+<tr valign="top">
+	<td><notr>UMi</notr></td>
+	<td><notr>&Mu;&iota;&kappa;&rho;&#942; &#702;&#714;&Alpha;&rho;&kappa;&tau;&omicron;&sigmaf;</notr></td>
+	<td>Small She-Bear</td>
+	<td><notr>Ursa Minor</notr></td>
+	<td>kao IAU zviježđe</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>UMa</notr></td>
+	<td><notr>&Mu;&epsilon;&gamma;&alpha;&lambda;&#942; &#702;&#714;&Alpha;&rho;&kappa;&tau;&omicron;&sigmaf;</notr></td>
+	<td>Great She-Bear</td>
+	<td><notr>Ursa Major</notr></td>
+	<td>kao IAU zviježđe</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Dra</notr></td>
+	<td><notr>&Delta;&rho;&#940;&kappa;&omega;&nu;</notr></td>
+	<td>Zmaj</td>
+	<td><notr>Draco</notr></td>
+	<td>svi trokuti i četverokuti su kralješci ili dijelovi tijela; linija iz glave
+predstavlja jezik</td>
+	<td></td>
+</tr>
+	<tr valign="top">
+	<td><notr>Cep</notr></td>
+	<td><notr>&Kappa;&eta;&phi;&epsilon;&#973;&sigmaf;</notr></td>
+	<td>Cefej</td>
+	<td><notr>Cepheus</notr></td>
+	<td>kralj, naglavce </td>
+	<td>tri zvijezde glave predstavljaju tijaru; &beta; viđenu kao dio pojasa, iako
+Almagest kaže ispod pojasa</td>
+</tr>
+<tr valign="top">
+	<td><notr>Boo</notr></td>
+	<td><notr>&Beta;&omicron;&#974;&tau;&eta;&sigmaf;</notr></td>
+	<td>Orač</td>
+	<td><notr>Bo&ouml;tes</notr></td>
+	<td>u ruci ima pastirski štap (&omega;)</td>
+	<td>zvijezda HIP 72582 dodana kao zvijezda vrata</td>
+</tr>
+<tr valign="top">
+	<td><notr>CrB</notr></td>
+	<td><notr>&Sigma;&tau;&#941;&phi;&alpha;&nu;&omicron;&sigmaf;</notr></td>
+	<td>Kruna</td>
+	<td><notr>Corona Borealis</notr></td>
+	<td>like IAU constellation; no details for lines in the text</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Her</notr></td>
+	<td><notr>&#703;&Epsilon;&nu;&gamma;&#972;&nu;&alpha;&sigma;&iota;&nu;</notr></td>
+	<td>Klečatelj</td>
+	<td><notr>Hercules</notr></td>
+	<td>jedna od zvijezda nogu je najviša točka štapa u Bootesu</td>
+	<td>zvijezda HIP 82764 dodana kao zvijezda vrata</td>
+</tr>
+<tr valign="top">
+	<td><notr>Lyr</notr></td>
+	<td><notr>&Lambda;&#973;&rho;&alpha;</notr></td>
+	<td>Lira</td>
+	<td><notr>Lyra</notr></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Cyg</notr></td>
+	<td><notr>&#702;&#714;&Omicron;&rho;&nu;&iota;&sigmaf;</notr></td>
+	<td>Ptica</td>
+	<td><notr>Cygnus</notr></td>
+	<td>Labud s nogama</td>
+	<td>Tips of wings connected with tail</td>
+</tr>
+<tr valign="top">
+	<td><notr>Cas</notr></td>
+	<td><notr>&Kappa;&alpha;&sigma;&sigma;&iota;&#941;&pi;&epsilon;&iota;&alpha;</notr></td>
+	<td>Kasiopeja</td>
+	<td><notr>Cassiopeia</notr></td>
+	<td>Kraljica koja sjedi na prijestolju</td>
+	<td>kako bi izbjegli pomutnju prijestolje nije iscrtano</td>
+</tr>
+<tr valign="top">
+	<td><notr>Per</notr></td>
+	<td><notr>&Pi;&epsilon;&rho;&sigma;&epsilon;&#973;&sigmaf;</notr></td>
+	<td>Perseus</td>
+	<td><notr>Perseus</notr></td>
+	<td>Double star cluster NGC 869 and NGC 884 as Deep Sky Object - &gt;one of the
+stars in the cluster was used for drawing</td>
+	<td>one of the stars in Gorgon-head is added to make the head look more
+spherical</td>
+</tr>
+<tr valign="top">
+	<td><notr>Aur</notr></td>
+	<td><notr>&#703;&Eta;&nu;&#943;&omicron;&chi;&omicron;&sigmaf;</notr></td>
+	<td>Kočijaš</td>
+	<td><notr>Auriga</notr></td>
+	<td>Nosi dugi ogrtač, ogrtač je ograničen na ramena i porub</td>
+	<td>o Aur dodana kao zvijezda vrata; 1 Aur je dodana kao rubna zvijezda</td>
+</tr>
+<tr valign="top">
+	<td><notr>Oph</notr></td>
+	<td><notr>&#702;&Omicron;&phi;&iota;&omicron;&#973;&chi;&omicron;&sigmaf;</notr></td>
+	<td>Zmijonosac</td>
+	<td><notr>Ophiuchus</notr></td>
+	<td>nosi zmiju u ruci</td>
+	<td>a star added as neck star</td>
+</tr>
+<tr valign="top">
+	<td><notr>Ser</notr></td>
+	<td><notr>&#702;&#714;&Omicron;&phi;&iota;&sigmaf;</notr></td>
+	<td>Zmija</td>
+	<td><notr>Serpens</notr></td>
+	<td>dva odvojena dijela zmije (glava i rep); kvadrat je glava</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Sge</notr></td>
+	<td><notr>&#702;&Omicron;&iota;&sigma;&tau;&#972;&sigmaf;</notr></td>
+	<td>Strelica</td>
+	<td><notr>Sagitta</notr></td>
+	<td>kao IAU zviježđe, &eta; Sge nedostaje </td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Aql</notr></td>
+	<td><notr>&#702;&Alpha;&epsilon;&tau;&#972;&sigmaf;</notr></td>
+	<td>Orao</td>
+	<td><notr>Aquila</notr></td>
+	<td>&tau; Aql as head star, &beta; as neck, Altair is between shoulders, &gamma;
+and &mu; are shoulders</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Del</notr></td>
+	<td><notr>&Delta;&epsilon;&lambda;&phi;&#943;&sigmaf;</notr></td>
+	<td>Delfin</td>
+	<td><notr>Delphinus</notr></td>
+	<td></td>
+	<td>uglađeni oblik</td>
+</tr>
+<tr valign="top">
+	<td><notr>Equ</notr></td>
+	<td><notr>&Pi;&rho;&omicron;&tau;&omicron;&mu;&#942;</notr></td>
+	<td>Prsa [konja]</td>
+	<td><notr>Equuleus</notr></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Peg</notr></td>
+	<td><notr>&#703;&#714;&Iota;&pi;&pi;&omicron;&sigmaf;</notr></td>
+	<td>Konj</td>
+	<td><notr>Pegasus</notr></td>
+	<td>s grivom i jednim krilom</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>And</notr></td>
+	<td><notr>&#702;&Alpha;&nu;&delta;&rho;&omicron;&mu;&#941;&delta;&alpha;</notr></td>
+	<td>Andromeda</td>
+	<td class='latin'><notr>Andromeda</notr></td>
+	<td>haljina i pojas</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Tri</notr></td>
+	<td><notr>&Tau;&rho;&#943;&gamma;&omega;&nu;&omicron;&sigmaf;</notr></td>
+	<td>Trokut</td>
+	<td><notr>Triangulum</notr></td>
+	<td>četiri dane zvijezde &#61664; srednja zvijezda pomaknuta u jednu stranu</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Ari</notr></td>
+	<td><notr>&Kappa;&rho;&iota;&#972;&sigmaf;</notr></td>
+	<td>Ovan</td>
+	<td><notr>Aries</notr></td>
+	<td>okrenuta glava, samo jedan rog</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Tau</notr></td>
+	<td><notr>&Tau;&alpha;&upsilon;&#771;&rho;&omicron;&sigmaf;</notr></td>
+	<td>Bik</td>
+	<td><notr>Taurus</notr></td>
+	<td>pola tijela, samo dvije noge vidljive; smjer pogleda prema promatraču</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Gem</notr></td>
+	<td><notr>&Delta;&#943;&delta;&upsilon;&mu;&omicron;&iota;</notr></td>
+	<td>Blizanci</td>
+	<td><notr>Gemini</notr></td>
+	<td>jedna zajednička zvijezda; međusobni dodir rukama</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Cnc</notr></td>
+	<td><notr>&Kappa;&alpha;&rho;&kappa;&#943;&nu;&omicron;&sigmaf;</notr></td>
+	<td>Rak</td>
+	<td><notr>Cancer</notr></td>
+	<td>kvadratno tijelo</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Leo</notr></td>
+	<td><notr>&Lambda;&#941;&omega;&nu;</notr></td>
+	<td>Lav</td>
+	<td><notr>Leo</notr></td>
+	<td>otvara čeljust</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Vir</notr></td>
+	<td><notr>&Pi;&alpha;&rho;&theta;&#941;&nu;&omicron;&sigmaf;</notr></td>
+	<td>Djevica</td>
+	<td><notr>Virgo</notr></td>
+	<td>nema odvojene glave</td>
+	<td>slabije sjajne zvijezde dodane kako bi iscrtali krila</td>
+</tr>
+<tr valign="top">
+	<td><notr>Lib</notr></td>
+	<td><notr>&Chi;&eta;&lambda;&alpha;&#943;</notr></td>
+	<td>Kliješta [Škorpiona]</td>
+	<td><notr>Libra</notr></td>
+	<td>Ptolomej je uvijek koristio termin &quot;kliješta&quot;,
+nikad&quot;krakovi&quot;.</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Sco</notr></td>
+	<td><notr>&Sigma;&kappa;&omicron;&rho;&pi;&#943;&omicron;&sigmaf;</notr></td>
+	<td>Škorpion</td>
+	<td><notr>Scorpius</notr></td>
+	<td></td>
+	<td>ruke dodane oko glave &nu; i &rho;</td>
+</tr>
+<tr valign="top">
+	<td><notr>Sgr</notr></td>
+	<td><notr>&Tau;&omicron;&xi;&#972;&tau;&eta;&sigmaf;</notr></td>
+	<td>Strijelac</td>
+	<td><notr>Sagittarius</notr></td>
+	<td>kentaur s lukom naprijed; &bdquo;plaštem&ldquo; odostraga</td>
+	<td>uključeno je mnogo slabije sjajnih zvijezda u lik kako bi slika bila
+jasnija.</td>
+</tr>
+<tr valign="top">
+	<td><notr>Cap</notr></td>
+	<td><notr>&Alpha;&#943;&gamma;&#972;&kappa;&epsilon;&rho;&omicron;&sigmaf;</notr></td>
+	<td>Onaj s kozjim rogom</td>
+	<td><notr>Capricornus</notr></td>
+	<td>riblji rep; dvije vidljive noge</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Aqr</notr></td>
+	<td><notr>&#703;&Upsilon;&delta;&rho;&omicron;&chi;&#972;&omicron;&sigmaf;</notr></td>
+	<td>Vodenjak</td>
+	<td><notr>Aquarius</notr></td>
+	<td>voda izvan vrča</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Psc</notr></td>
+	<td><notr>&#702;&Iota;&chi;&theta;&#973;&epsilon;&sigmaf;</notr></td>
+	<td>[2] Ribe</td>
+	<td><notr>Pisces</notr></td>
+	<td></td>
+	<td>northern fish: 68(h), 67(k), and 65(i) described as head in Almagest but we
+took them as fin because mouth should be at g and &tau; Psc. Additional
+change on tail fin: extended to &rho;</td>
+</tr>
+<tr valign="top">
+	<td><notr>Cet</notr></td>
+	<td><notr>&Kappa;&eta;&#771;&tau;&omicron;&sigmaf;</notr></td>
+	<td>Morsko čudovište</td>
+	<td><notr>Cetus</notr></td>
+	<td></td>
+	<td>Tijelo ne ide kroz zvijezdu &tau;, nego kroz zvijezdu &upsilon;</td>
+</tr>
+<tr valign="top">
+	<td><notr>Ori</notr></td>
+	<td><notr>&#702;&Omega;&rho;&#943;&omega;&nu;</notr></td>
+	<td>Orion</td>
+	<td class='latin'><notr>Orion</notr></td>
+	<td></td>
+	<td>The &quot;head&quot; is labeled as &quot;nebulous&quot; which means Ptolemy
+interpreted &phi;<sub>1</sub>, &phi;<sub>2</sub>, and &lambda;, together
+with fainter stars between them as a &quot;cluster&quot; (or association
+which is more extended than the modern &quot;&lambda; Ori
+Assoc.&quot;). Head does not have direct connection to the shoulder stars
+anymore, but a connection to a star between the stars in the shoulders.</td>
+</tr>
+<tr valign="top">
+	<td><notr>Eri</notr></td>
+	<td><notr>&Pi;&omicron;&tau;&alpha;&mu;&omicron;&#972;&sigmaf;</notr></td>
+	<td>Rijeka [bezimena]</td>
+	<td><notr>Eridanus</notr></td>
+	<td>Like IAU constellation, but shorter</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Lep</notr></td>
+	<td><notr>&Lambda;&alpha;&gamma;&omega;&#771;&sigmaf;</notr></td>
+	<td>Zec</td>
+	<td><notr>Lepus</notr></td>
+	<td></td>
+	<td>uzete su "4 zvijezde iznad ušiju" kao uho</td>
+</tr>
+<tr valign="top">
+	<td><notr>CMa</notr></td>
+	<td><notr>&Kappa;&#973;&omega;&nu;</notr></td>
+	<td>Pas</td>
+	<td><notr>Canis Major</notr></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>CMi</notr></td>
+	<td><notr>&Pi;&rho;&omicron;&kappa;&#973;&omega;&nu;</notr></td>
+	<td>Onaj prije Psa</td>
+	<td><notr>Canis Minor</notr></td>
+	<td></td>
+	<td>In Almagest, the name of the constellation is &quot;The One before the
+Dog&quot; or &quot;Harbinger of Sirius&quot; as Toomer puts it. However,
+&beta; CMi is called &quot;the neck&quot; (of whom is unknown). We drew a
+little dog with &gamma; and &epsilon; as head; &alpha;, &beta;, &eta; and
+HIP36889 as body; forelegs with HIP 35509 and HIP 35614; hindlegs with
+&delta;<sub>2</sub> and &delta;<sub>3</sub>; tail with HIP 37634</td>
+</tr>
+<tr valign="top">
+	<td><notr>Arg</notr></td>
+	<td><notr>&#702;&Alpha;&rho;&gamma;&omega;</notr></td>
+	<td>Brod &quot;Argo&quot;</td>
+	<td><notr>Argo</notr></td>
+	<td>smaller than the sum of the IAU-constellations Pup+Pyx+Car+Vel</td>
+	<td>Mnoge zvijezde nisu integrirane u zviježđe kako bi tvorile oblik nalik
+brodu; u mnogim je prikazima (uključujući drevni farnski globus) naslikana
+samo polovica broda.</td>
+</tr>
+<tr valign="top">
+	<td><notr>Hya</notr></td>
+	<td><notr>&#703;&#714;&Upsilon;&delta;&rho;&omicron;&sigmaf;</notr></td>
+	<td>Vodena zmija</td>
+	<td><notr>Hydra</notr></td>
+	<td>kao IAU zviježđe</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Crt</notr></td>
+	<td><notr>&Kappa;&rho;&alpha;&tau;&#768;&eta;&rho;</notr></td>
+	<td>Vrč (posuda)</td>
+	<td><notr>Crater</notr></td>
+	<td></td>
+	<td>Krater je posebna grčka posuda za mješanje vina koja izgleda poput amfore
+ili vaze: <a
+href="https://en.wikipedia.org/wiki/Krater">https://en.wikipedia.org/wiki/Krater</a>
+Ptolomej opisuje samo jednu zvijezdu u podnožju (&alpha; Crt) te dvije ručke
+(&eta;, &theta; Crt)</td>
+</tr>
+<tr valign="top">
+	<td><notr>Crv</notr></td>
+	<td><notr>&Kappa;&oacute;&rho;&alpha;&xi;</notr></td>
+	<td>Gavran</td>
+	<td><notr>Corvus</notr></td>
+	<td>kao IAU zviježđe</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Cen</notr></td>
+	<td><notr>&Kappa;&#941;&nu;&tau;&alpha;&upsilon;&rho;&omicron;&sigmaf;</notr></td>
+	<td>Kentaur</td>
+	<td><notr>Centaurus</notr></td>
+	<td></td>
+	<td>deviation from description: HIP 65373 instead of &omega; Cen (cluster) taken
+as star on the back. &lsquo;Thyrsus&lsquo; not drawn (to avoid confusion),
+backward arm added.</td>
+</tr>
+<tr valign="top">
+	<td><notr>Lup</notr></td>
+	<td><notr>&Theta;&eta;&rho;&#943;&omicron;&nu;</notr></td>
+	<td>Zvijer</td>
+	<td><notr>Lupus</notr></td>
+	<td></td>
+	<td>&beta; described as &lsquo;End of hind leg&lsquo; -> taken as star in the
+belly; &tau;<sub>1</sub> as hindleg &Chi; removed from head, because
+otherwise shapelessness arises; HIP 73493 taken as foreleg</td>
+</tr>
+<tr valign="top">
+	<td><notr>Ara</notr></td>
+	<td><notr>&Theta;&upsilon;&mu;&iota;&alpha;&tau;&#942;&rho;&iota;&omicron;&nu;</notr></td>
+	<td>Oltar</td>
+	<td><notr>Ara</notr></td>
+	<td>kao IAU zviježđe</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>CrA</notr></td>
+	<td><notr>&Sigma;&tau;&#941;&phi;&alpha;&nu;&omicron;&sigmaf; &Nu;&#972;&tau;&iota;&omicron;&sigmaf;</notr></td>
+	<td>Južna Kruna</td>
+	<td><notr>Corona Australis</notr></td>
+	<td>like IAU constellation; only uncertainty with stars that only got a BSC
+number in the Almagest, because these are not clearly to identify in
+Stellarium</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>PsA</notr></td>
+	<td><notr>&Nu;&#972;&tau;&iota;&omicron;&sigmaf; &#702;&Iota;&chi;&theta;&#973;&sigmaf;</notr></td>
+	<td>Južna Riba</td>
+	<td><notr>Piscis Austrinus</notr></td>
+	<td>the fish is laying on his back</td>
+	<td>we added a few stars to mark the tail as such (&beta; should be the tip of
+the tail but we used it as its root)</td>
+</tr>
+</table>
+
+<h2>Reference</h2> 
+ <ul> 
+  <li>Grasshoff, G.: The History of Ptolemy's Star Catalog, Springer, New York,
+1990</li>
+  <li>Heiberg, J. L. (Ed.): Claudii Ptolemaei: Syntaxis Mathematica, Teubner,
+Leipzig, 1898</li>
+  <li>Hoffmann, S. M.: Hipparchs Himmelsglobus, Springer, Wiesbaden / New York,
+2017</li>
+  <li>Toomer, G. J.: Ptolemy's Almagest, Duckworth, London, 1984</li>
+  <li>Ernie Wright: <a href="http://www.etwright.org/astro/almagest.html#cat"
+class='external text' rel="nofollow"> Seeing Ancient Stars, Visualization of
+the Almagest Catalog</a>, 2006</li>
+ </ul>
+
+<h2>Pravo korištenja</h2>
+<p>Ova kultura zviježđa potječe od jednogodišnjeg studentskog
+istraživanja. Materijal pružamo besplatno, ali autori priloga svakako
+zaslužuju da ih citiramo prema uobičajenim pravilima. Ova kultura zviježđa
+je pružena prema  Međunarodnoj javnoj licenci CC BY-ND 4.0 (dijelite ali ne
+radite izmjene bez savjetovanja sa autorima koji se uvijek moraju
+navoditi). Hvala Vam.</p>
+
+<h2>Zahvala</h2>
+<p>Autori zahvaljuju Patricku Gleasonu and Georgu Zotti za gramatičku provjeru
+i interesantne rasprave.</p>
+
+<h2>Autori</h2>
+<p>Kulturu zviježđa su sastavile i dodale u Stellarium Alina Schmidt, Lea
+Jabschinski, Marie von Seggern i Susanne M. Hoffmann:
+service@uhura-uraniae.com</p>
+<p>Written in English: the authors</p>

@@ -56,6 +56,8 @@ class StelCore : public QObject
 	Q_PROPERTY(bool flipHorz READ getFlipHorz WRITE setFlipHorz NOTIFY flipHorzChanged)
 	Q_PROPERTY(bool flipVert READ getFlipVert WRITE setFlipVert NOTIFY flipVertChanged)
 	Q_PROPERTY(bool flagUseNutation READ getUseNutation WRITE setUseNutation NOTIFY flagUseNutationChanged)
+	Q_PROPERTY(bool flagUseAberration READ getUseAberration WRITE setUseAberration NOTIFY flagUseAberrationChanged)
+	Q_PROPERTY(double aberrationFactor READ getAberrationFactor WRITE setAberrationFactor NOTIFY aberrationFactorChanged)
 	Q_PROPERTY(bool flagUseTopocentricCoordinates READ getUseTopocentricCoordinates WRITE setUseTopocentricCoordinates NOTIFY flagUseTopocentricCoordinatesChanged)
 	Q_PROPERTY(ProjectionType currentProjectionType READ getCurrentProjectionType WRITE setCurrentProjectionType NOTIFY currentProjectionTypeChanged)
 	//! This is just another way to access the projection type, by string instead of enum
@@ -502,13 +504,23 @@ public slots:
 	//!       Limits can be queried with getCurrentDeltaTAlgorithmValidRangeDescription()
 
 	double computeDeltaT(const double JD);
-	//! Get current DeltaT.
+	//! Get current DeltaT in seconds.
 	double getDeltaT() const;
 
 	//! @return whether nutation is currently used.
 	bool getUseNutation() const {return flagUseNutation;}
 	//! Set whether you want computation and simulation of nutation (a slight wobble of Earth's axis, just a few arcseconds).
 	void setUseNutation(bool use) { if (flagUseNutation != use) { flagUseNutation=use; emit flagUseNutationChanged(use); }}
+
+	//! @return whether aberration is currently used.
+	bool getUseAberration() const {return flagUseAberration;}
+	//! Set whether you want computation and simulation of aberration (a slight wobble of stellar positions due to finite speed of light, about 20 arcseconds when observing from earth).
+	void setUseAberration(bool use) { if (flagUseAberration != use) { flagUseAberration=use; emit flagUseAberrationChanged(use); }}
+
+	//! @return aberration factor. 1 is realistic simulation, but higher values may be useful for didactic purposes.
+	double getAberrationFactor() const {return aberrationFactor;}
+	//! Set aberration factor. Values are clamped to 0...5. (Values above 5 cause graphical problems.)
+	void setAberrationFactor(double factor) { if (!fuzzyEquals(aberrationFactor, factor)) { aberrationFactor=qBound(0.,factor, 5.); emit aberrationFactorChanged(factor); }}
 
 	//! @return whether topocentric coordinates are currently used.
 	bool getUseTopocentricCoordinates() const {return flagUseTopocentricCoordinates;}
@@ -725,6 +737,13 @@ public slots:
 	void setDe430Active(bool status);   //!< switch DE430 use to @param status (if de430IsAvailable()). DE430 is only used if date is within range of DE430.
 	void setDe431Active(bool status);   //!< switch DE431 use to @param status (if de431IsAvailable()). DE431 is only used if DE430 is not used and the date is within range of DE431.
 
+	bool de440IsAvailable();            //!< true if DE440 ephemeris file has been found
+	bool de441IsAvailable();            //!< true if DE441 ephemeris file has been found
+	bool de440IsActive();               //!< true if DE440 ephemeris is in use
+	bool de441IsActive();               //!< true if DE441 ephemeris is in use
+	void setDe440Active(bool status);   //!< switch DE440 use to @param status (if de440IsAvailable()). DE440 is only used if date is within range of DE440.
+	void setDe441Active(bool status);   //!< switch DE441 use to @param status (if de441IsAvailable()). DE441 is only used if DE440 is not used and the date is within range of DE441.
+
 	//! Return 3-letter abbreviation of IAU constellation name for position in equatorial coordinates on the current epoch.
 	//! Follows 1987PASP...99..695R: Nancy Roman: Identification of a Constellation from a Position
 	//! Data file from ADC catalog VI/42 with its amendment from 1999-12-30.
@@ -763,6 +782,10 @@ signals:
 	void flipVertChanged(bool b);
 	//! This signal indicates a switch in use of nutation
 	void flagUseNutationChanged(bool b);
+	//! This signal indicates a switch in use of aberration
+	void flagUseAberrationChanged(bool b);
+	//! This signal indicates a change in aberration exaggeration factor
+	void aberrationFactorChanged(double val);
 	//! This signal indicates a switch in use of topocentric coordinates
 	void flagUseTopocentricCoordinatesChanged(bool b);
 	//! Emitted whenever the projection type changes
@@ -826,6 +849,10 @@ private:
 
 	// flag to indicate we want to use nutation (the small-scale wobble of earth's axis)
 	bool flagUseNutation;
+	// flag to indicate we want to use aberration (a small-scale wobble of stellar positions (~20 arceconds on earth) due to finite speed of light and observer in motion on a planet.)
+	bool flagUseAberration;
+	// value to allow exaggerating aberration effects. 1 is natural value, stretching to e.g. 1000 may be useful for explanations.
+	double aberrationFactor;
 	// flag to indicate that we show topocentrically corrected coordinates. (Switching to false for planetocentric coordinates is new for 0.14)
 	bool flagUseTopocentricCoordinates;
 
@@ -854,11 +881,15 @@ private:
 	int deltaTstart;   // begin year of validity range for the selected DeltaT algorithm. (SET INT_MIN to mark infinite)
 	int deltaTfinish;  // end   year of validity range for the selected DeltaT algorithm. (Set INT_MAX to mark infinite)
 
-	// Variables for DE430/431 ephem calculation
+	// Variables for DE430/431/440/441 ephem calculation
 	bool de430Available; // ephem file found
 	bool de431Available; // ephem file found
 	bool de430Active;    // available and user-activated.
 	bool de431Active;    // available and user-activated.
+	bool de440Available; // ephem file found
+	bool de441Available; // ephem file found
+	bool de440Active;    // available and user-activated.
+	bool de441Active;    // available and user-activated.
 };
 
 #endif // STELCORE_HPP

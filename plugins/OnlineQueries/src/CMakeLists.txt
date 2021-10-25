@@ -15,6 +15,8 @@ SET(ONLINEQUERIES_SRCS
      HipOnlineQuery.cpp
      gui/OnlineQueriesDialog.hpp
      gui/OnlineQueriesDialog.cpp
+     gui/StelWebEngineView.hpp
+     gui/StelWebEngineView.cpp
 )
 
 SET(ONLINEQUERIES_UIS
@@ -23,12 +25,15 @@ SET(ONLINEQUERIES_UIS
 
 QT5_WRAP_UI(ONLINEQUERIES_UIS_H ${ONLINEQUERIES_UIS})
 
+FIND_PACKAGE(Qt5WebEngine REQUIRED)
+FIND_PACKAGE(Qt5WebEngineWidgets REQUIRED)
+
 ################# compiles resources files ############
 SET(ONLINEQUERIES_RES ../resources/OnlineQueries.qrc)
 QT5_ADD_RESOURCES(ONLINEQUERIES_RES_CXX ${ONLINEQUERIES_RES})
 
 ADD_LIBRARY(OnlineQueries-static STATIC ${ONLINEQUERIES_SRCS} ${ONLINEQUERIES_RES_CXX} ${ONLINEQUERIES_UIS_H})
-TARGET_LINK_LIBRARIES(OnlineQueries-static Qt5::Core Qt5::Network Qt5::Widgets)
+TARGET_LINK_LIBRARIES(OnlineQueries-static Qt5::Core Qt5::Network Qt5::Widgets Qt5::WebEngine Qt5::WebEngineWidgets)
 SET_TARGET_PROPERTIES(OnlineQueries-static PROPERTIES OUTPUT_NAME "OnlineQueries")
 SET_TARGET_PROPERTIES(OnlineQueries-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 ADD_DEPENDENCIES(AllStaticPlugins OnlineQueries-static)

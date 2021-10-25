@@ -143,7 +143,7 @@ void NomenclatureMgr::loadNomenclature()
 		int featureId;
 		QString name, planet = "", planetName = "", context = "";
 		NomenclatureItem::NomenclatureItemType ntype;
-		float latitude, longitude, size;
+		double latitude, longitude, size;
 		QStringList faultPlanets;
 
 		while (!buf.atEnd())
@@ -180,11 +180,11 @@ void NomenclatureMgr::loadNomenclature()
 				QString ntypecode	= recRx.cap(4).trimmed();
 				ntype = NomenclatureItem::getNomenclatureItemType(ntypecode.toUpper());
 				// Read the latitude of feature
-				latitude	= recRx.cap(5).toFloat();
+				latitude	= recRx.cap(5).toDouble();
 				// Read the longitude of feature
-				longitude	= recRx.cap(6).toFloat();
+				longitude	= recRx.cap(6).toDouble();
 				// Read the size of feature
-				size		= recRx.cap(7).toFloat();
+				size		= recRx.cap(7).toDouble();
 
 				if (planetName.isEmpty() || planet!=planetName)
 				{

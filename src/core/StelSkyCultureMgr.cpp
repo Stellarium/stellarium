@@ -77,6 +77,7 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 			{ "historical",   StelSkyCulture::HISTORICAL},
 			{ "ethnographic", StelSkyCulture::ETHNOGRAPHIC},
 			{ "single",       StelSkyCulture::SINGLE},
+			{ "comparative",  StelSkyCulture::COMPARATIVE},
 			{ "personal",     StelSkyCulture::PERSONAL},			
 			{ "incomplete",   StelSkyCulture::INCOMPLETE},
 		};
@@ -141,7 +142,7 @@ bool StelSkyCultureMgr::setDefaultSkyCultureID(const QString& id)
 	
 QString StelSkyCultureMgr::getCurrentSkyCultureNameI18() const
 {
-	return q_(currentSkyCulture.englishName);
+	return qc_(currentSkyCulture.englishName, "sky culture");
 }
 
 QString StelSkyCultureMgr::getCurrentSkyCultureEnglishName() const
@@ -178,6 +179,11 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlClassification() const
 			color = "#33ff33"; // "green" area
 			classification = qc_("single", "sky culture classification");
 			description = q_("Represents a single source like a historical atlas, or publications of a single author.");
+			break;
+		case StelSkyCulture::COMPARATIVE:
+			color = "#2090ff"; // "blue" area
+			classification = qc_("comparative", "sky culture classification");
+			description = q_("Compares and confronts elements from at least two sky cultures with each other.");
 			break;
 		case StelSkyCulture::TRADITIONAL:
 			color = "#33ff33"; // "green" area
@@ -234,7 +240,7 @@ QStringList StelSkyCultureMgr::getSkyCultureListI18(void) const
 	while (i.hasNext())
 	{
 		i.next();
-		cultures += q_(i.value().englishName);
+		cultures += qc_(i.value().englishName, "sky culture");
 	}
 	// Sort for GUI use. Note that e.g. German Umlauts are sorted after Z. TODO: Fix this!
 	cultures.sort(Qt::CaseInsensitive);
@@ -363,7 +369,7 @@ QString StelSkyCultureMgr::skyCultureI18ToDirectory(const QString& cultureName) 
 	while (i.hasNext())
 	{
 		i.next();
-		if (q_(i.value().englishName) == cultureName)
+		if (qc_(i.value().englishName, "sky culture") == cultureName)
 			return i.key();
 	}
 	return "";

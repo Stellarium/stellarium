@@ -175,7 +175,9 @@ void Calendars::init()
 						       QPixmap(":/Calendars/bt_Calendars_On.png"),
 						       QPixmap(":/Calendars/bt_Calendars_Off.png"),
 						       QPixmap(":/graphicGui/miscGlow32x32.png"),
-						       "actionShow_Calendars");
+						       "actionShow_Calendars",
+						       false,
+						       "actionShow_Calendars_dialog");
 			//qDebug() << "add button...";
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		}

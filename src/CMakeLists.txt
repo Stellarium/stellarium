@@ -41,8 +41,6 @@ SET(stellarium_lib_SRCS
      core/MultiLevelJsonBase.cpp
      core/StelSkyImageTile.hpp
      core/StelSkyImageTile.cpp
-     core/StelSkyPolygon.hpp
-     core/StelSkyPolygon.cpp
      core/SphericMirrorCalculator.cpp
      core/SphericMirrorCalculator.hpp
      core/StelApp.cpp
@@ -148,8 +146,6 @@ SET(stellarium_lib_SRCS
      core/planetsephems/precession.h
      core/planetsephems/sidereal_time.c
      core/planetsephems/sidereal_time.h
-     #core/planetsephems/stellplanet.c   # replaced by EphemWrapper during de430 work
-     #core/planetsephems/stellplanet.h
      core/planetsephems/jpl_int.h
      core/planetsephems/jpleph.h
      core/planetsephems/jpleph.cpp
@@ -163,6 +159,12 @@ SET(stellarium_lib_SRCS
      core/planetsephems/de430.hpp
      core/planetsephems/de431.cpp
      core/planetsephems/de431.hpp
+     core/planetsephems/de440.cpp
+     core/planetsephems/de440.hpp
+     core/planetsephems/de441.cpp
+     core/planetsephems/de441.hpp
+     core/planetsephems/htc20b.cpp
+     core/planetsephems/htc20b.hpp
      core/modules/Atmosphere.cpp
      core/modules/Atmosphere.hpp
      core/modules/Asterism.cpp
@@ -249,7 +251,7 @@ SET(stellarium_lib_SRCS
      CLIProcessor.hpp
      CLIProcessor.cpp
      translations.h
-     translations_countries.h
+     translations_regions.h
 )
 
 ### CMake < 3.0 does not AUTOMOC Q_GADGET which some files use, so we have to manually add it
@@ -347,6 +349,8 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/StelDialog.hpp
           gui/StelDialog_p.hpp
           gui/StelDialog.cpp
+          gui/StelDialogSeparate.hpp
+          gui/StelDialogSeparate.cpp
      )
 
      ################# compiles .ui files ############
@@ -736,15 +740,17 @@ IF(ENABLE_TESTING)
     ADD_TEST(testVecMath testVecMath)
     SET_TARGET_PROPERTIES(testVecMath PROPERTIES FOLDER "src/tests")
 
-    SET(tests_testJavaScripting_SRCS
-        tests/testJavaScripting.hpp
-        tests/testJavaScripting.cpp
-    )
-    ADD_EXECUTABLE(testJavaScripting ${tests_testJavaScripting_SRCS})
-    TARGET_LINK_LIBRARIES(testJavaScripting ${TESTS_LIBRARIES})
-    ADD_DEPENDENCIES(buildTests testJavaScripting)
-    ADD_TEST(testJavaScripting testJavaScripting)
-    SET_TARGET_PROPERTIES(testJavaScripting PROPERTIES FOLDER "src/tests")
+    IF(ENABLE_SCRIPTING)
+        SET(tests_testJavaScripting_SRCS
+            tests/testJavaScripting.hpp
+            tests/testJavaScripting.cpp
+        )
+        ADD_EXECUTABLE(testJavaScripting ${tests_testJavaScripting_SRCS})
+        TARGET_LINK_LIBRARIES(testJavaScripting ${TESTS_LIBRARIES})
+        ADD_DEPENDENCIES(buildTests testJavaScripting)
+        ADD_TEST(testJavaScripting testJavaScripting)
+        SET_TARGET_PROPERTIES(testJavaScripting PROPERTIES FOLDER "src/tests")
+    ENDIF(ENABLE_SCRIPTING)
 	
     SET(tests_testStelProjector_SRCS
         tests/testStelProjector.hpp

@@ -3,7 +3,7 @@ define(["jquery", "./remotecontrol", "./updatequeue"], function($, rc, UpdateQue
     "use strict";
 
     var lastName;
-    var lastCountry;
+    var lastRegion;
     var lastAltitude;
     var lastLat;
     var lastLon;
@@ -85,9 +85,9 @@ define(["jquery", "./remotecontrol", "./updatequeue"], function($, rc, UpdateQue
             $(publ).trigger('nameChanged', loc.name);
             lastName = loc.name;
         }
-        if (lastCountry !== loc.country) {
-            $(publ).trigger('countryChanged', loc.country);
-            lastCountry = loc.country;
+	if (lastRegion !== loc.region) {
+	    $(publ).trigger('regionChanged', loc.region);
+	    lastRegion= loc.region;
         }
         if (lastAltitude !== loc.altitude) {
             $(publ).trigger('altitudeChanged', loc.altitude);
@@ -114,9 +114,9 @@ define(["jquery", "./remotecontrol", "./updatequeue"], function($, rc, UpdateQue
         performNearbySearch: performNearbySearch,
         performLocationSearch: performLocationSearch,
 
-        loadCountryList: function(callback) {
+        loadRegionList: function(callback) {
             $.ajax({
-                url: "/api/location/countrylist",
+                url: "/api/location/regionlist",
                 success: callback,
                 error: function(xhr, status, errorThrown) {
                     console.log("Error updating country list");
@@ -140,8 +140,8 @@ define(["jquery", "./remotecontrol", "./updatequeue"], function($, rc, UpdateQue
             });
         },
 
-        setCountry: function(country) {
-            queueData("country", country);
+        setRegion: function(region) {
+            queueData("region", region);
         },
 
         setPlanet: function(planet) {

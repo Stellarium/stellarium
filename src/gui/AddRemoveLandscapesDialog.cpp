@@ -194,7 +194,7 @@ void AddRemoveLandscapesDialog::updateSidePane(int newRow)
 	//Name
 	ui->labelLandscapeName->setText("<h3>"+landscapeManager->loadLandscapeName(landscapeID)+"</h3>");
 	//Size in MiB
-	double landscapeSize = landscapeManager->loadLandscapeSize(landscapeID) / (double)(1024*1024);
+	double landscapeSize = landscapeManager->loadLandscapeSize(landscapeID) / static_cast<double>(1024*1024);
 	// TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
 	ui->labelLandscapeSize->setText(QString(q_("Size on disk: %1 MiB")).arg(landscapeSize, 0, 'f', 2));
 }

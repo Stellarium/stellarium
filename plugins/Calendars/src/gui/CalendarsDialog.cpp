@@ -195,8 +195,8 @@ void CalendarsDialog::setAboutHtml(void)
 	html += "<h3>" + q_("Publications") + "</h3>";
 	html += "<p>"  + q_("If you use this plugin in your publications, please cite:") + "</p>";
 	html += "<p><ul>";
-	html += "<li>" + QString("{Georg Zotti, Susanne Hoffmann, Alexander Wolf, Fabien Chéreau, Guillaume Chéreau: The simulated sky: Stellarium for cultural astronomy research.} Journal for Skyscape Archaeology, 6.2, 2020, pp. XX-XX.")
-			.toHtmlEscaped().replace(a_rx, "<a href=\"https://equinoxpub.com/PATH-TO.pdf\">\\1</a>") + "</li>";
+	html += "<li>" + QString("{Georg Zotti, Susanne M. Hoffmann, Alexander Wolf, Fabien Chéreau, Guillaume Chéreau: The simulated sky: Stellarium for cultural astronomy research.} Journal for Skyscape Archaeology, 6.2, 2021, pp. 221-258.")
+			.toHtmlEscaped().replace(a_rx, "<a href=\"https://doi.org/10.1558/jsa.17822\">\\1</a>") + "</li>";
 	html += "</ul></p>";
 
 	html += "<h3>" + q_("References") + "</h3>";

@@ -411,7 +411,8 @@ SpecialZoneArray<Star>::~SpecialZoneArray(void)
 template<class Star>
 void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsideViewport, const RCMag* rcmag_table,
 				  int limitMagIndex, StelCore* core, int maxMagStarName, float names_brightness, bool designationUsage,
-				  const QVector<SphericalCap> &boundingCaps) const
+				  const QVector<SphericalCap> &boundingCaps,
+				  const bool withAberration, const Vec3f vel) const
 {
 	StelSkyDrawer* drawer = core->getSkyDrawer();
 	Vec3f vf;
@@ -449,6 +450,15 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 		
 		// Get the star position from the array
 		s->getJ2000Pos(zoneToDraw, movementFactor, vf);
+
+		// Aberration: vf contains Equatorial J2000 position.
+		if (withAberration)
+		{
+			//Q_ASSERT_X(fabs(vf.lengthSquared()-1.0f)<0.0001f, "ZoneArray aberration", "vertex length not unity");
+			vf.normalize(); // required!
+			vf+=vel;
+			vf.normalize();
+		}
 		
 		// If the star zone is not strictly contained inside the viewport, eliminate from the 
 		// beginning the stars actually outside viewport.

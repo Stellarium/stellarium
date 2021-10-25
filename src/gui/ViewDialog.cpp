@@ -179,6 +179,7 @@ void ViewDialog::createDialogContent()
 	connectBoolProperty(ui->zodiacalLightCheckBox, "ZodiacalLight.flagZodiacalLightDisplayed");
 	connectDoubleProperty(ui->zodiacalLightBrightnessDoubleSpinBox, "ZodiacalLight.intensity");
 	connectBoolProperty(ui->adaptationCheckbox, "StelSkyDrawer.flagLuminanceAdaptation");
+	connectDoubleProperty(ui->twilightAltitudeDoubleSpinBox, "StelObjectMgr.twilightAltitude");
 
 	// Light pollution
 	StelModule* lmgr = StelApp::getInstance().getModule("LandscapeMgr");
@@ -233,6 +234,7 @@ void ViewDialog::createDialogContent()
 	connectIntProperty(ui->planetIsolatedTrailsSpinBox, "SolarSystem.numberIsolatedTrails");
 	connectBoolProperty(ui->drawMoonHaloCheckBox, "SolarSystem.flagDrawMoonHalo");
 	connectBoolProperty(ui->drawSunGlareCheckBox, "SolarSystem.flagDrawSunHalo");
+	connectBoolProperty(ui->drawSunCoronaCheckBox, "SolarSystem.flagPermanentSolarCorona");
 	connectBoolProperty(ui->shadowEnlargementDanjonCheckBox, "SolarSystem.earthShadowEnlargementDanjon");
 	populateTrailsControls(ssmgr->getFlagTrails());
 	connect(ssmgr,SIGNAL(trailsDisplayedChanged(bool)), this, SLOT(populateTrailsControls(bool)));
@@ -455,6 +457,7 @@ void ViewDialog::createDialogContent()
 	connect(ui->projectionListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(changeProjection(const QString&)));
 	connect(StelApp::getInstance().getCore(), SIGNAL(currentProjectionTypeChanged(StelCore::ProjectionType)),this,SLOT(projectionChanged()));
 	connectDoubleProperty(ui->viewportOffsetSpinBox, "StelMovementMgr.viewportVerticalOffsetTarget");
+	connectDoubleProperty(ui->userMaxFovSpinBox, "StelMovementMgr.userMaxFov");
 
 	// Starlore
 	connect(ui->useAsDefaultSkyCultureCheckBox, SIGNAL(clicked()), this, SLOT(setCurrentCultureAsDefault()));
@@ -864,35 +867,36 @@ void ViewDialog::populateLightPollution()
 void ViewDialog::setBortleScaleToolTip(int Bindex)
 {
 	int i = Bindex-1;
-	QStringList list, nelm;
-	//TRANSLATORS: Short description for Class 1 of the Bortle scale
-	list.append(q_("Excellent dark-sky site"));
-	//TRANSLATORS: Short description for Class 2 of the Bortle scale
-	list.append(q_("Typical truly dark site"));
-	//TRANSLATORS: Short description for Class 3 of the Bortle scale
-	list.append(q_("Rural sky"));
-	//TRANSLATORS: Short description for Class 4 of the Bortle scale
-	list.append(q_("Rural/suburban transition"));
-	//TRANSLATORS: Short description for Class 5 of the Bortle scale
-	list.append(q_("Suburban sky"));
-	//TRANSLATORS: Short description for Class 6 of the Bortle scale
-	list.append(q_("Bright suburban sky"));
-	//TRANSLATORS: Short description for Class 7 of the Bortle scale
-	list.append(q_("Suburban/urban transition"));
-	//TRANSLATORS: Short description for Class 8 of the Bortle scale
-	list.append(q_("City sky"));
-	//TRANSLATORS: Short description for Class 9 of the Bortle scale
-	list.append(q_("Inner-city sky"));
+	const QStringList list={
+		//TRANSLATORS: Short description for Class 1 of the Bortle scale
+		q_("Excellent dark-sky site"),
+		//TRANSLATORS: Short description for Class 2 of the Bortle scale
+		q_("Typical truly dark site"),
+		//TRANSLATORS: Short description for Class 3 of the Bortle scale
+		q_("Rural sky"),
+		//TRANSLATORS: Short description for Class 4 of the Bortle scale
+		q_("Rural/suburban transition"),
+		//TRANSLATORS: Short description for Class 5 of the Bortle scale
+		q_("Suburban sky"),
+		//TRANSLATORS: Short description for Class 6 of the Bortle scale
+		q_("Bright suburban sky"),
+		//TRANSLATORS: Short description for Class 7 of the Bortle scale
+		q_("Suburban/urban transition"),
+		//TRANSLATORS: Short description for Class 8 of the Bortle scale
+		q_("City sky"),
+		//TRANSLATORS: Short description for Class 9 of the Bortle scale
+		q_("Inner-city sky")};
 
-	nelm.append("7.6-8.0");
-	nelm.append("7.1-7.5");
-	nelm.append("6.6-7.0");
-	nelm.append("6.1-6.5");
-	nelm.append("5.6-6.0");
-	nelm.append("5.1-5.5");
-	nelm.append("4.6-5.0");
-	nelm.append("4.1-4.5");
-	nelm.append("4.0");
+	static const QStringList nelm={
+		"7.6-8.0",
+		"7.1-7.5",
+		"6.6-7.0",
+		"6.1-6.5",
+		"5.6-6.0",
+		"5.1-5.5",
+		"4.6-5.0",
+		"4.1-4.5",
+		"4.0"};
 
 	QString tooltip = QString("%1 (%2 %3)")
 			.arg(list.at(i))
@@ -921,7 +925,12 @@ void ViewDialog::populateLists()
 	QListWidget* l = ui->culturesListWidget;
 	l->blockSignals(true);
 	l->clear();
-	l->addItems(app.getSkyCultureMgr().getSkyCultureListI18());
+	QStringList starlore = app.getSkyCultureMgr().getSkyCultureListI18();
+	for ( const auto& s : starlore  )
+	{
+		l->addItem(s);
+		l->findItems(s, Qt::MatchExactly).at(0)->setToolTip(s);
+	}
 	l->setCurrentItem(l->findItems(app.getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));
 	l->blockSignals(false);
 	updateSkyCultureText();
@@ -1214,31 +1223,17 @@ void ViewDialog::setPlanetMagnitudeAlgorithm(int algorithmID)
 void ViewDialog::populatePlanetMagnitudeAlgorithmDescription()
 {
 	int currentAlgorithm = ui->planetMagnitudeAlgorithmComboBox->findData(Planet::getApparentMagnitudeAlgorithm(), Qt::UserRole, Qt::MatchCaseSensitive);
-	if (currentAlgorithm==-1)
-	{
-		// Use Mallama&Hilton 2018 as default
+	if (currentAlgorithm==-1) // Use Mallama&Hilton 2018 as default
 		currentAlgorithm = ui->planetMagnitudeAlgorithmComboBox->findData(Planet::MallamaHilton_2018, Qt::UserRole, Qt::MatchCaseSensitive);
-	}
-	QString info = "";
-	switch (currentAlgorithm) {
-		case Planet::AstronomicalAlmanac_1984:
-			info = q_("The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later) and gives V (instrumental) magnitudes (allegedly from D.L. Harris).");
-			break;
-		case Planet::Mueller_1893:
-			info = q_("The algorithm is based on visual observations 1877-1891 by G. Müller and was still republished in the <em>Explanatory Supplement to the Astronomical Ephemeris</em> (1961).");
-			break;
-		case Planet::ExplanatorySupplement_1992:
-			info = q_("The algorithm was published in the 2nd edition of the <em>Explanatory Supplement to the Astronomical Almanac</em> (1992).");
-			break;
-		case Planet::ExplanatorySupplement_2013:
-			info = q_("The algorithm was published in the 3rd edition of the <em>Explanatory Supplement to the Astronomical Almanac</em> (2013).");
-			break;
-		case Planet::MallamaHilton_2018:
-			info = q_("The algorithm was published by A. Mallama & J. L. Hilton: <em>Computing apparent planetary magnitudes for the Astronomical Almanac.</em> Astronomy&Computing 25 (2018) 10-24.");
-			break;
-		default:
-			info = q_("Visual magnitude based on phase angle and albedo.");
-			break;
-	}
+
+	const QMap<int, QString>planetMagnitudeAlgorithmMap = {
+		{ Planet::AstronomicalAlmanac_1984, q_("The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later) and gives V (instrumental) magnitudes (allegedly from D.L. Harris).") },
+		{ Planet::Mueller_1893, q_("The algorithm is based on visual observations 1877-1891 by G. Müller and was still republished in the <em>Explanatory Supplement to the Astronomical Ephemeris</em> (1961).") },
+		{ Planet::ExplanatorySupplement_1992, q_("The algorithm was published in the 2nd edition of the <em>Explanatory Supplement to the Astronomical Almanac</em> (1992).") },
+		{ Planet::ExplanatorySupplement_2013, q_("The algorithm was published in the 3rd edition of the <em>Explanatory Supplement to the Astronomical Almanac</em> (2013).") },
+		{ Planet::MallamaHilton_2018, q_("The algorithm was published by A. Mallama & J. L. Hilton: <em>Computing apparent planetary magnitudes for the Astronomical Almanac.</em> Astronomy&Computing 25 (2018) 10-24.") }
+	};
+
+	QString info = planetMagnitudeAlgorithmMap.value(currentAlgorithm, q_("Visual magnitude based on phase angle and albedo."));
 	ui->planetMagnitudeAlgorithmDescription->setText(QString("<small>%1</small>").arg(info));
 }

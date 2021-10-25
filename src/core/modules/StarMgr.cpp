@@ -45,6 +45,8 @@
 #include "RefractionExtinction.hpp"
 #include "StelModuleMgr.hpp"
 #include "ConstellationMgr.hpp"
+#include "Planet.hpp"
+#include "StelUtils.hpp"
 
 #include <QTextStream>
 #include <QFile>
@@ -90,6 +92,7 @@ QMap<int, int> StarMgr::hdStarsIndex;
 QMap<int, int> StarMgr::hrStarsIndex;
 QHash<int, QString> StarMgr::referenceMap;
 QHash<int, float> StarMgr::hipParallaxErrors;
+QHash<int, PMData> StarMgr::hipPMData;
 
 QStringList initStringListFromFile(const QString& file_name)
 {
@@ -360,6 +363,14 @@ float StarMgr::getPlxError(int hip)
 	return 0.f;
 }
 
+PMData StarMgr::getProperMotion(int hip)
+{
+	auto it = hipPMData.find(hip);
+	if (it!=hipPMData.end())
+		return it.value();
+	return QPair<float, float>(NAN, NAN);
+}
+
 void StarMgr::copyDefaultConfigFile()
 {
 	try
@@ -451,7 +462,7 @@ void StarMgr::drawPointer(StelPainter& sPainter, const StelCore* core)
 		const StelObjectP obj = newSelected[0];
 		Vec3d pos=obj->getJ2000EquatorialPos(core);
 
-		Vec3d screenpos;
+		Vec3f screenpos;
 		// Compute 2D pos and return if outside screen
 		if (!sPainter.getProjector()->project(pos, screenpos))
 			return;
@@ -507,17 +518,17 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc)
 			{
 				// The OS was not able to map the file, revert to slower not mmap based method
 				static const qint64 maxStarBufMd5 = 1024*1024*8;
-				char* mmd5buf = (char*)malloc(maxStarBufMd5);
+				char* mmd5buf = static_cast<char*>(malloc(maxStarBufMd5));
 				while (!file.atEnd())
 				{
 					qint64 sz = file.read(mmd5buf, maxStarBufMd5);
-					md5Hash.addData(mmd5buf, sz);
+					md5Hash.addData(mmd5buf, static_cast<int>(sz));
 				}
 				free(mmd5buf);
 			}
 			else
 			{
-				md5Hash.addData(reinterpret_cast<const char*>(cat), cat_sz);
+				md5Hash.addData(reinterpret_cast<const char*>(cat), static_cast<int>(cat_sz));
 				file.unmap(cat);
 			}
 			file.close();
@@ -638,6 +649,7 @@ void StarMgr::populateHipparcosLists()
 	algolTypeStars.clear();
 	classicalCepheidsTypeStars.clear();
 	carbonStars.clear();
+	bariumStars.clear();
 	const int pmLimit = 1; // arc-second per year!
 	for (int hip=0; hip<=NR_OF_HIP; hip++)
 	{
@@ -648,9 +660,14 @@ void StarMgr::populateHipparcosLists()
 			const SpecialZoneData<Star1> *const z = hipIndex[hip].z;
 			StelObjectP so = s->createStelObject(a,z);
 			hipparcosStars.push_back(so);
+			QString spectrum = convertToSpectralType(s->getSpInt());
 			// Carbon stars have spectral type, which start with C letter
-			if (convertToSpectralType(s->getSpInt()).startsWith("C", Qt::CaseInsensitive))
+			if (spectrum.startsWith("C", Qt::CaseInsensitive))
 				carbonStars.push_back(so);
+
+			// Barium stars have spectral class G to K and contains "Ba" string
+			if ((spectrum.startsWith("G", Qt::CaseInsensitive) || spectrum.startsWith("K", Qt::CaseInsensitive)) && spectrum.contains("Ba", Qt::CaseSensitive))
+				bariumStars.push_back(so);
 
 			if (!getGcvsVariabilityType(s->getHip()).isEmpty())
 			{
@@ -679,8 +696,9 @@ void StarMgr::populateHipparcosLists()
 				doubleHipStars.push_back(sd);
 			}
 			// use separate variables for avoid the overflow (esp. for Barnard's star)
-			float pmX = 0.1f * s->getDx0();
-			float pmY = 0.1f * s->getDx1();
+			PMData properMotion = getProperMotion(s->getHip());
+			float pmX = properMotion.first;
+			float pmY = properMotion.second;
 			float pm = 0.001f * std::sqrt((pmX*pmX) + (pmY*pmY));
 			if (qAbs(pm)>=pmLimit)
 			{
@@ -1143,6 +1161,65 @@ void StarMgr::loadPlxErr(const QString& plxErrFile)
 	qDebug() << "Loaded" << readOk << "/" << totalRecords << "parallax error data records for stars";
 }
 
+void StarMgr::loadPMData(const QString &pmDataFile)
+{
+	// TODO: This is temporary solution for display parallax errors until format of stars catalogs will not be changed!
+	hipPMData.clear();
+
+	qDebug() << "Loading proper motion data from" << QDir::toNativeSeparators(pmDataFile);
+	QFile ciFile(pmDataFile);
+	if (!ciFile.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+		qWarning() << "WARNING - could not open" << QDir::toNativeSeparators(pmDataFile);
+		return;
+	}
+	const QStringList& allRecords = QString::fromUtf8(ciFile.readAll()).split('\n');
+	ciFile.close();
+
+	int readOk=0;
+	int totalRecords=0;
+	int lineNumber=0;
+	// record structure is delimited with a 'tab' character. Example record strings:
+	// "1	-4.58	-1.61"
+	// "2	179.70	1.40"
+	for (const auto& record : allRecords)
+	{
+		++lineNumber;
+		// skip comments and empty lines
+		if (record.startsWith("//") || record.startsWith("#") || record.isEmpty())
+			continue;
+
+		++totalRecords;
+		const QStringList& fields = record.split('\t');
+		if (fields.size()!=3)
+		{
+			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(pmDataFile)
+				   << " - record does not match record pattern";
+			continue;
+		}
+		else
+		{
+			// The record is the right format.  Extract the fields
+			bool ok;
+			int hip = fields.at(0).toInt(&ok);
+			if (!ok)
+			{
+				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(pmDataFile)
+					   << " - failed to convert " << fields.at(0) << "to a number";
+				continue;
+			}
+			PMData properMotion;
+			properMotion.first = fields.at(1).toFloat(&ok);
+			properMotion.second = fields.at(2).toFloat(&ok);
+			hipPMData[hip] = properMotion;
+
+			++readOk;
+		}
+	}
+
+	qDebug() << "Loaded" << readOk << "/" << totalRecords << "proper motion data records for stars";
+}
+
 int StarMgr::getMaxSearchLevel() const
 {
 	int rval = -1;
@@ -1165,7 +1242,7 @@ void StarMgr::draw(StelCore* core)
 	StelSkyDrawer* skyDrawer = core->getSkyDrawer();
 	// If stars are turned off don't waste time below
 	// projecting all stars just to draw disembodied labels
-	if (!starsFader.getInterstate())
+	if (!static_cast<bool>(starsFader.getInterstate()))
 		return;
 
 	int maxSearchLevel = getMaxSearchLevel();
@@ -1175,6 +1252,17 @@ void StarMgr::draw(StelCore* core)
 
 	// Set temporary static variable for optimization
 	const float names_brightness = labelsFader.getInterstate() * starsFader.getInterstate();
+
+	// prepare for aberration: Explan. Suppl. 2013, (7.38)
+	const bool withAberration=core->getUseAberration();
+	Vec3d vel(0.);
+	if (withAberration)
+	{
+		vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+		StelCore::matVsop87ToJ2000.transfo(vel);
+		vel*=core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
+	}
+	const Vec3f velf=vel.toVec3f();
 
 	// Prepare openGL for drawing many stars
 	StelPainter sPainter(prj);
@@ -1226,9 +1314,9 @@ void StarMgr::draw(StelCore* core)
 		int zone;
 		
 		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
-			z->draw(&sPainter, zone, true, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, flagDesignations, viewportCaps);
+			z->draw(&sPainter, zone, true, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, flagDesignations, viewportCaps, withAberration, velf);
 		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
-			z->draw(&sPainter, zone, false, rcmag_table, limitMagIndex, core, maxMagStarName,names_brightness, flagDesignations, viewportCaps);
+			z->draw(&sPainter, zone, false, rcmag_table, limitMagIndex, core, maxMagStarName,names_brightness, flagDesignations, viewportCaps, withAberration, velf);
 	}
 	exit_loop:
 
@@ -1241,7 +1329,7 @@ void StarMgr::draw(StelCore* core)
 
 
 // Return a QList containing the stars located
-// inside the limFov circle around position v
+// inside the limFov circle around position vv (in J2000 frame without aberration)
 QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const StelCore* core) const
 {
 	QList<StelObjectP > result;
@@ -1806,6 +1894,12 @@ void StarMgr::populateStarsDesignations()
 		qWarning() << "WARNING: could not load parallax errors data file: stars/default/hip_plx_err.dat";
 	else
 		loadPlxErr(fic);
+
+	fic = StelFileMgr::findFile("stars/default/hip_pm.dat");
+	if (fic.isEmpty())
+		qWarning() << "WARNING: could not load proper motion data file: stars/default/hip_pm.dat";
+	else
+		loadPMData(fic);
 }
 
 QStringList StarMgr::listAllObjects(bool inEnglish) const
@@ -1834,7 +1928,13 @@ QStringList StarMgr::listAllObjects(bool inEnglish) const
 
 QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish) const
 {
-	QStringList result;
+	QStringList result;	
+	// type 1
+	bool isStarT1 = false;
+	QList<StelObjectP> starsT1;
+	// type 2
+	bool isStarT2 = false;
+	QList<QMap<StelObjectP, float>> starsT2;
 	int type = objType.toInt();
 	// Use SkyTranslator for translation star names
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
@@ -1894,74 +1994,75 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 		}
 		case 2: // Bright double stars
 		{
-			for (const auto& star : doubleHipStars)
-			{
-				if (inEnglish)
-					result << star.firstKey()->getEnglishName();
-				else
-					result << star.firstKey()->getNameI18n();
-			}
+			starsT2 = doubleHipStars;
+			isStarT2 = true;
 			break;
 		}
 		case 3: // Bright variable stars
 		{
-			for (const auto& star : variableHipStars)
-			{
-				if (inEnglish)
-					result << star.firstKey()->getEnglishName();
-				else
-					result << star.firstKey()->getNameI18n();
-			}
+			starsT2 = variableHipStars;
+			isStarT2 = true;
 			break;
 		}
 		case 4:
 		{
-			for (const auto& star : hipStarsHighPM)
-			{
-				if (inEnglish)
-					result << star.firstKey()->getEnglishName();
-				else
-					result << star.firstKey()->getNameI18n();
-			}
+			starsT2 = hipStarsHighPM;
+			isStarT2 = true;
 			break;
 		}
 		case 5: // Variable stars: Algol-type eclipsing systems
 		{
-			for (const auto& star : algolTypeStars)
-			{
-				if (inEnglish)
-					result << star.firstKey()->getEnglishName();
-				else
-					result << star.firstKey()->getNameI18n();
-			}
+			starsT2 = algolTypeStars;
+			isStarT2 = true;
 			break;
 		}
 		case 6: // Variable stars: the classical cepheids
 		{
-			for (const auto& star : classicalCepheidsTypeStars)
-			{
-				if (inEnglish)
-					result << star.firstKey()->getEnglishName();
-				else
-					result << star.firstKey()->getNameI18n();
-			}
+			starsT2 = classicalCepheidsTypeStars;
+			isStarT2 = true;
 			break;
 		}
 		case 7: // Bright carbon stars
 		{
-			for (const auto& star : carbonStars)
-			{
-				if (inEnglish)
-					result << star->getEnglishName();
-				else
-					result << star->getNameI18n();
-			}
+			starsT1 = carbonStars;
+			isStarT1 = true;
+			break;
+		}
+		case 8: // Bright barium stars
+		{
+			starsT1 = bariumStars;
+			isStarT1 = true;
 			break;
 		}
 		default:
 		{
 			// No stars yet?
 			break;
+		}
+	}
+
+	QString starName;
+	if (isStarT1)
+	{
+		for (const auto& star : qAsConst(starsT1))
+		{
+			starName = inEnglish ? star->getEnglishName() : star->getNameI18n();
+			if (!starName.isEmpty())
+				result << starName;
+			else
+				result << star->getID();
+		}
+	}
+
+	if (isStarT2)
+	{
+		for (const auto& star : qAsConst(starsT2))
+		{
+			starName = inEnglish ? star.firstKey()->getEnglishName() : star.firstKey()->getNameI18n();
+			if (!starName.isEmpty())
+				result << starName;
+			else
+				result << star.firstKey()->getID();
 		}
 	}
 
