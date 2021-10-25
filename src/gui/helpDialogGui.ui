@@ -300,7 +300,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="editShortcutsButton">
+           <widget class="SpacePushButton" name="editShortcutsButton">
             <property name="text">
              <string extracomment="Same text as in the Configuration window!">Edit keyboard shortcuts...</string>
             </property>
@@ -453,6 +453,11 @@
    <class>StelCloseButton</class>
    <extends>QPushButton</extends>
    <header>gui/StelCloseButton.hpp</header>
+  </customwidget>
+  <customwidget>
+   <class>SpacePushButton</class>
+   <extends>QPushButton</extends>
+   <header>SpacePushButton.hpp</header>
   </customwidget>
  </customwidgets>
  <resources/>

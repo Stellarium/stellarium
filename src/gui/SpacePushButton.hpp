@@ -23,7 +23,7 @@
 #include <QPushButton>
 
 //! @class SpacePushButton
-//! A QPushButton which can be triggered by pressing Space when it has focus.
+//! A QPushButton which can be triggered by pressing (actually: releasing) Space when it has focus.
 //! To use this class in the QtCreator UI designer, add a regular QPushButton to the UI,
 //! then right-click on it and change its type to SpacePushButton.
 //! Then it makes sense to put this button into a useful GUI tab order.
@@ -36,7 +36,7 @@ public:
 	
 protected:
     //! This triggers the button on pressing the Space bar.
-    virtual void keyPressEvent(QKeyEvent *e) Q_DECL_OVERRIDE;
+    virtual void keyReleaseEvent(QKeyEvent *e) Q_DECL_OVERRIDE;
 };
 
 #endif // SPACEPUSHBUTTON_HPP

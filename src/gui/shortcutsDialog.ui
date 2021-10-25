@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>737</width>
+    <width>654</width>
     <height>436</height>
    </rect>
   </property>
@@ -209,7 +209,7 @@
           </widget>
          </item>
          <item row="1" column="2">
-          <widget class="QPushButton" name="primaryBackspaceButton">
+          <widget class="SpacePushButton" name="primaryBackspaceButton">
            <property name="enabled">
             <bool>false</bool>
            </property>
@@ -224,7 +224,7 @@
           </widget>
          </item>
          <item row="2" column="3">
-          <widget class="QPushButton" name="restoreDefaultsButton">
+          <widget class="SpacePushButton" name="restoreDefaultsButton">
            <property name="enabled">
             <bool>false</bool>
            </property>
@@ -237,7 +237,7 @@
           </widget>
          </item>
          <item row="1" column="3">
-          <widget class="QPushButton" name="applyButton">
+          <widget class="SpacePushButton" name="applyButton">
            <property name="enabled">
             <bool>false</bool>
            </property>
@@ -250,7 +250,7 @@
           </widget>
          </item>
          <item row="2" column="2">
-          <widget class="QPushButton" name="altBackspaceButton">
+          <widget class="SpacePushButton" name="altBackspaceButton">
            <property name="enabled">
             <bool>false</bool>
            </property>
@@ -279,7 +279,7 @@
           </widget>
          </item>
          <item row="1" column="4" rowspan="2">
-          <widget class="QPushButton" name="restoreAllDefaultsButton">
+          <widget class="SpacePushButton" name="restoreAllDefaultsButton">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
              <horstretch>0</horstretch>
@@ -321,6 +321,11 @@
    <class>StelCloseButton</class>
    <extends>QPushButton</extends>
    <header>gui/StelCloseButton.hpp</header>
+  </customwidget>
+  <customwidget>
+   <class>SpacePushButton</class>
+   <extends>QPushButton</extends>
+   <header>SpacePushButton.hpp</header>
   </customwidget>
  </customwidgets>
  <tabstops>

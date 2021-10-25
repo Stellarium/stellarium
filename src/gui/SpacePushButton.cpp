@@ -25,13 +25,13 @@ SpacePushButton::SpacePushButton(QWidget* parent)
 {
 }
 
-void SpacePushButton::keyPressEvent(QKeyEvent *e)
+void SpacePushButton::keyReleaseEvent(QKeyEvent *e)
 {
 	switch (e->key()) {
 	case Qt::Key_Space:
-		animateClick();
+		click();
 		break;
 	default:
-		QPushButton::keyPressEvent(e);
+		QPushButton::keyReleaseEvent(e);
     }
 }
