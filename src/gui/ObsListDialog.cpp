@@ -80,7 +80,6 @@ void ObsListDialog::createDialogContent()
 
     //obsListCombo settings
     connect ( ui->obsListComboBox, SIGNAL ( activated ( int ) ), this, SLOT ( loadSelectedObservingList ( int ) ) );
-    ui->obsListComboBox->model()->sort(0);
 
     //Initialize the list of observing lists
     obsListListModel->setColumnCount ( ColumnCount );
@@ -285,7 +284,7 @@ void ObsListDialog::invokeObsListCreateEditDialog ( string listUuid )
 {
     createEditDialog_instance = ObsListCreateEditDialog::Instance ( listUuid );
     connect ( createEditDialog_instance, SIGNAL ( exitButtonClicked() ), this, SLOT ( obsListCreateEditDialogClosed() ) );
-    createEditDialog_instance->setListName(listName);
+    createEditDialog_instance->setListName ( listName );
     createEditDialog_instance->setVisible ( true );
 }
 
@@ -311,30 +310,63 @@ void ObsListDialog::loadListsName()
             QString defaultListUuid = map.value ( KEY_DEFAULT_LIST_UUID ).toString();
 
             QVariantMap observingListsMap = map.value ( QString ( KEY_OBSERVING_LISTS ) ).toMap();
+            populateListNameInComboBox ( observingListsMap );
+            populateDataInComboBox ( observingListsMap, defaultListUuid );
 
-            QMap<QString, QVariant>::iterator i;
-            for ( i = observingListsMap.begin(); i != observingListsMap.end(); ++i ) {
-                QString listUuid = i.key();
-
-                if ( i.value().canConvert<QVariantMap>() ) {
-                    QVariant var = i.value();
-                    QVariantMap data = var.value<QVariantMap>();
-                    QString listName = data.value ( KEY_NAME ).value<QString>();
-                    this->listName.append(listName);
-                    ui->obsListComboBox->addItem ( listName, listUuid );
-                    if ( defaultListUuid == listUuid ) {
-                        defaultListUuid_ = defaultListUuid;
-                    }
-                }
-                //ui->obsListComboBox->model()->sort(0);
-                //loadDefaultList();
-            }
         } catch ( std::runtime_error &e ) {
             qWarning() << "[ObservingList] File format is wrong! Error: " << e.what();
             return;
         }
     }
 }
+
+
+/*
+ * Populate the list names into combo box
+*/
+void ObsListDialog::populateListNameInComboBox ( QVariantMap map )
+{
+    QMap<QString, QVariant>::iterator i;
+    for ( i = map.begin(); i != map.end(); ++i ) {
+        if ( i.value().canConvert<QVariantMap>() ) {
+            QVariant var = i.value();
+            QVariantMap data = var.value<QVariantMap>();
+            QString listName = data.value ( KEY_NAME ).value<QString>();
+            listNamesModel.append ( listName );
+        }
+    }
+    listNamesModel.sort ( Qt::CaseInsensitive );
+    ui->obsListComboBox->addItems ( listNamesModel );
+}
+
+/*
+ * Populate data into combo box
+*/
+void ObsListDialog::populateDataInComboBox ( QVariantMap map, QString defaultListUuid )
+{
+    QMap<QString, QVariant>::iterator i;
+    for ( i = map.begin(); i != map.end(); ++i ) {
+        QString listUuid = i.key();
+        if ( i.value().canConvert<QVariantMap>() ) {
+            QVariant var = i.value();
+            QVariantMap data = var.value<QVariantMap>();
+            QString listName = data.value ( KEY_NAME ).value<QString>();
+
+            foreach ( QString str, listNamesModel ) {
+                if ( QString::compare ( str, listName ) == 0 ) {
+                    int index = listNamesModel.indexOf ( listName, 0 );
+                    ui->obsListComboBox->setItemData ( index,listUuid );
+                    break;
+                }
+            }
+        }
+        if ( defaultListUuid == listUuid ) {
+            defaultListUuid_ = defaultListUuid;
+        }
+    }
+}
+
+
 
 /*
  * Load the default list
@@ -418,7 +450,7 @@ void ObsListDialog::loadObservingList ( QString listUuid )
                                 if ( loc.name.isEmpty() ) {
                                     Location = QString ( "%1, %2" ).arg ( loc.latitude ).arg ( loc.longitude );
                                 } else {
-                                    Location = QString ( "%1, %2" ).arg ( loc.name ).arg ( loc.country );
+                                    Location = QString ( "%1, %2" ).arg ( loc.name ).arg ( loc.region );
                                 }
 
                                 addModelRow ( lastRow,objectUuid,objectName, objectNameI18n, objectType, objectRaStr, objectDecStr, objectMagnitudeStr, objectConstellation );
@@ -676,7 +708,10 @@ void ObsListDialog::obsListCreateEditDialogClosed()
 {
     // We must reload the list of list name
     loadListsName();
-    int index = ui->obsListComboBox->findData ( QString::fromStdString ( selectedObservingListUuid ) ) ;
+    int index = 0;
+    if ( !selectedObservingListUuid.empty() ) {
+        index = ui->obsListComboBox->findData ( QString::fromStdString ( selectedObservingListUuid ) ) ;
+    }
     if ( index != -1 ) {
         ui->obsListComboBox->setCurrentIndex ( index );
         loadSelectedObservingList ( index );
@@ -693,11 +728,11 @@ void ObsListDialog::obsListCreateEditDialogClosed()
 */
 void ObsListDialog::setVisible ( bool v )
 {
-    if (v){
-        StelDialog::setVisible(true);
+    if ( v ) {
+        StelDialog::setVisible ( true );
         this->loadDefaultList();
-    }else{
-        StelDialog::setVisible(false);
+    } else {
+        StelDialog::setVisible ( false );
     }
 }
 

@@ -22,6 +22,7 @@
 
 #include <QObject>
 #include <QStandardItemModel>
+#include <QSortFilterProxyModel>
 
 #include "StelDialog.hpp"
 #include "StelCore.hpp"
@@ -59,6 +60,7 @@ private:
     QList<int> highlightLabelIDs;
     QString defaultListUuid_;
     QList<QString> listName;
+    QStringList listNamesModel;
 
     //! Set header names for observing list table
     void setObservingListHeaderNames();
@@ -90,6 +92,12 @@ private:
     
     //! Load list from JSON file
     QVariantList loadListFromJson(QFile &jsonFile, QString listUuid);
+    
+    //! Populate list names into combo box
+    void populateListNameInComboBox(QVariantMap map);
+    
+    //! Populate data into combo box
+    void populateDataInComboBox(QVariantMap map, QString defaultListUuid);
 
 
 public slots:
@@ -103,6 +111,8 @@ private slots:
     void obsListCreateEditDialogClosed();
     void obsListExitButtonPressed();
     void obsListDeleteButtonPressed();
+    
+    
 
     //! Method called when a list name is selected in the combobox
     //! @param selectedIndex the index of the list name in the combo box
