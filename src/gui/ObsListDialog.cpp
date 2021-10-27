@@ -49,6 +49,7 @@ ObsListDialog::ObsListDialog ( QObject* parent ) : StelDialog ( "Observing list"
     labelMgr = GETSTELMODULE ( LabelMgr );
     obsListListModel = new QStandardItemModel ( 0,ColumnCount );
     observingListJsonPath = StelFileMgr::findFile ( "data", ( StelFileMgr::Flags ) ( StelFileMgr::Directory|StelFileMgr::Writable ) ) + "/" + QString ( JSON_FILE_NAME );
+    bookmarksJsonPath = StelFileMgr::findFile ( "data", ( StelFileMgr::Flags ) ( StelFileMgr::Directory|StelFileMgr::Writable ) ) + "/" + QString ( JSON_BOOKMARKS_FILE_NAME );
     createEditDialog_instance = Q_NULLPTR;
     defaultListUuid_ = "";
 }
@@ -107,11 +108,20 @@ void ObsListDialog::createDialogContent()
     ui->obsListClearHighlightButton->setEnabled ( false );
     ui->obsListDeleteButton->setEnabled ( false );
 
+
+    // For no regression we must take into account the legacy bookmarks file
+    QFile jsonBookmarksFile ( bookmarksJsonPath );
+    if ( jsonBookmarksFile.exists() ) {
+        qDebug() << "Fichiers bookmarks détecté";
+        loadBookmarksInObservingList();
+    }
+
     QFile jsonFile ( observingListJsonPath );
     if ( jsonFile.exists() ) {
         loadListsName();
         loadDefaultList();
     }
+
 }
 
 /*
@@ -546,6 +556,167 @@ QVariantList ObsListDialog::loadListFromJson ( QFile &jsonFile, QString listUuid
     // Clear model
     obsListListModel->removeRows ( 0,obsListListModel->rowCount() );
     return listOfObjects;
+}
+
+
+/*
+ * Load the bookmarks of bookmarks.json file into observing lists file
+ * For no regression with must take into account the legacy bookmarks.json file
+*/
+void ObsListDialog::loadBookmarksInObservingList()
+{
+    QHash<QString, bookmark> bookmarksCollection;
+    QVariantMap map;
+
+    QFile jsonFile ( bookmarksJsonPath );
+    if ( !jsonFile.open ( QIODevice::ReadOnly ) ) {
+        qWarning() << "[ObservingList] cannot open" << QDir::toNativeSeparators ( bookmarksJsonPath );
+    } else {
+
+        try {
+
+            map = StelJsonParser::parse ( jsonFile.readAll() ).toMap();
+            jsonFile.close();
+            QVariantMap bookmarksMap = map.value ( KEY_BOOKMARKS ).toMap();
+
+            for ( auto bookmarkKey : bookmarksMap.keys() ) {
+
+                QVariantMap bookmarkData = bookmarksMap.value ( bookmarkKey ).toMap();
+                bookmark item;
+
+                QString JDs = "";
+
+                item.name = bookmarkData.value ( KEY_NAME ).toString();
+                QString nameI18n = bookmarkData.value ( KEY_NAME_I18N ).toString();
+                if ( !nameI18n.isEmpty() ) {
+                    item.nameI18n = nameI18n;
+                }
+
+                QString JD = bookmarkData.value ( KEY_JD ).toString();
+                if ( !JD.isEmpty() ) {
+                    item.jd = JD;
+                    JDs = StelUtils::julianDayToISO8601String ( JD.toDouble() + core->getUTCOffset ( JD.toDouble() ) /24. ).replace ( "T", " " );
+                }
+
+                QString Location = bookmarkData.value ( KEY_LOCATION ).toString();
+                if ( !Location.isEmpty() ) {
+                    item.location = Location;
+                }
+
+                QString RA = bookmarkData.value ( KEY_RA ).toString();
+                if ( !RA.isEmpty() ) {
+                    item.ra = RA;
+                }
+
+                QString Dec = bookmarkData.value ( KEY_DEC ).toString();
+                if ( !Dec.isEmpty() ) {
+                    item.dec = Dec;
+                }
+
+                item.isVisibleMarker = bookmarkData.value ( KEY_IS_VISIBLE_MARKER, false ).toBool();
+                double fov = bookmarkData.value ( KEY_FOV ).toDouble();
+                if ( fov > 0.0 ) {
+                    item.fov = fov;
+                }
+
+                bookmarksCollection.insert ( bookmarkKey, item );
+
+            }
+            
+            saveBookmarks(bookmarksCollection);
+
+        } catch ( std::runtime_error &e ) {
+            qWarning() << "[ObservingList] File format is wrong! Error: " << e.what();
+            return;
+        }
+    }
+}
+
+
+/*
+ * Save the bookmarks into observing list file
+*/
+void ObsListDialog::saveBookmarks ( QHash<QString, bookmark> bookmarksCollection )
+{
+    QFile jsonFile ( observingListJsonPath );
+    if ( !jsonFile.open ( QIODevice::ReadWrite|QIODevice::Text ) ) {
+        qWarning() << "[ObservingList] bookmarks list can not be saved. A file can not be open for reading and writing:"
+                   << QDir::toNativeSeparators ( observingListJsonPath );
+        return;
+    }
+
+    try {
+        
+        QVariantMap mapFromJsonFile;
+        QVariantMap allListsMap;
+        QVariantMap observingListDataList;
+        if ( jsonFile.size() > 0 ) {
+            mapFromJsonFile = StelJsonParser::parse ( jsonFile.readAll() ).toMap();
+            allListsMap = mapFromJsonFile.value ( QString ( KEY_OBSERVING_LISTS ) ).toMap();
+        }
+        
+        // Description
+        QString description = QString(BOOKMARKS_LIST_DESCRIPTION);
+        observingListDataList.insert ( QString ( KEY_DESCRIPTION ), description );
+        
+        // Julian day
+        QString JDString = "";
+        double JD = core->getJD();
+        JDString = QString::number ( JD, 'f', 6 );
+        observingListDataList.insert ( QString ( KEY_JD ), JDString );
+        
+        // Location
+        QString Location = "";
+        StelLocation loc = core->getCurrentLocation();
+        if ( loc.name.isEmpty() ) {
+            Location = QString ( "%1, %2" ).arg ( loc.latitude ).arg ( loc.longitude );
+        } else {
+            Location = QString ( "%1, %2" ).arg ( loc.name ).arg ( loc.region );
+        }
+        observingListDataList.insert ( QString ( KEY_LOCATION ), Location );
+        
+        // Name of the liste
+        observingListDataList.insert ( QString ( KEY_NAME ), BOOKMARKS_LIST_NAME );
+        
+        // List of objects
+        QVariantList listOfObjects;
+        QHashIterator<QString, bookmark> i ( bookmarksCollection );
+        while ( i.hasNext() ) {
+            i.next();
+
+            bookmark item = i.value();
+            QVariantMap obl;
+            QString objectName = item.name;
+            obl.insert ( QString ( KEY_DESIGNATION ), objectName );
+            listOfObjects.push_back ( obl );
+        }
+        
+        observingListDataList.insert ( QString ( KEY_OBJECTS ), listOfObjects );
+        observingListDataList.insert ( QString ( KEY_SORTING ), SORTING_BY_NAME );
+        
+        QList<QString> keys = bookmarksCollection.keys();
+        QString oblListUuid;
+        if(keys.empty()){
+            oblListUuid = QUuid::createUuid().toString();
+        } else {
+           oblListUuid =  keys.at(0); 
+        }
+        
+        mapFromJsonFile.insert ( KEY_VERSION, FILE_VERSION );
+        mapFromJsonFile.insert ( KEY_SHORT_NAME,SHORT_NAME_VALUE );
+
+        allListsMap.insert ( oblListUuid, observingListDataList );
+        mapFromJsonFile.insert ( QString ( KEY_OBSERVING_LISTS ), allListsMap );
+        
+        jsonFile.resize ( 0 );
+        StelJsonParser::write ( mapFromJsonFile, &jsonFile );
+        jsonFile.flush();
+        jsonFile.close();
+        
+    } catch ( std::runtime_error &e ) {
+        qCritical() << "[ObservingList] File format is wrong! Error: " << e.what();
+        return;
+    }
 }
 
 

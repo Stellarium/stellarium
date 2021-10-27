@@ -56,6 +56,7 @@ private:
     class LabelMgr* labelMgr;
     std::string selectedObservingListUuid;
     QString observingListJsonPath;
+    QString bookmarksJsonPath;
     QHash<QString, observingListItem> observingListItemCollection;
     QList<int> highlightLabelIDs;
     QString defaultListUuid_;
@@ -89,6 +90,10 @@ private:
     
     //! Load the default list
     void loadDefaultList();
+    
+    //! Load the bookmarks of bookmarks.json file into observing lists file
+    void loadBookmarksInObservingList();
+    void saveBookmarks(QHash<QString, bookmark> bookmarksCollection);
     
     //! Load list from JSON file
     QVariantList loadListFromJson(QFile &jsonFile, QString listUuid);

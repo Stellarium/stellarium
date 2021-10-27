@@ -35,6 +35,22 @@ struct observingListItem {
 };
 Q_DECLARE_METATYPE ( observingListItem )
 
+//TODO certain champ peuvent ne pas servir - penser à les supprimer
+// à vérifier après la V2
+struct bookmark
+{
+	QString name;
+	QString nameI18n;
+	QString ra;
+	QString dec;
+	bool isVisibleMarker;
+	QString jd;
+	QString location;
+	double fov;
+
+};
+Q_DECLARE_METATYPE(bookmark)
+
 enum ObsListColumns {
     ColumnUUID,	    //! UUID of object
     ColumnName,	    //! Name or designation of object
@@ -49,13 +65,26 @@ enum ObsListColumns {
     ColumnCount	    //! Total number of columns
 };
 
+//TODO certaine clé peuvent ne pas servir - penser à les supprimer
+// à vérifier après la V2
+
 static constexpr char const * JSON_FILE_NAME = "observingList.json";
 static constexpr char const * FILE_VERSION = "1.0";
 
+static constexpr char const * JSON_BOOKMARKS_FILE_NAME = "bookmarks.json";
+static constexpr char const * BOOKMARKS_LIST_NAME = "bookmarks list";
+static constexpr char const * BOOKMARKS_LIST_DESCRIPTION = "Bookmarks of previous Stellarium version";
+static constexpr char const * SHORT_NAME_VALUE = "Observing list for Stellarium";
+
 static constexpr char const * KEY_DEFAULT_LIST_UUID = "defaultListUuid";
 static constexpr char const * KEY_OBSERVING_LISTS = "observingLists";
+static constexpr char const * KEY_BOOKMARKS = "bookmarks";
 static constexpr char const * KEY_NAME = "name";
+static constexpr char const * KEY_NAME_I18N = "nameI18n";
 static constexpr char const * KEY_JD = "jd";
+static constexpr char const * KEY_RA = "ra";
+static constexpr char const * KEY_DEC = "dec";
+static constexpr char const * KEY_FOV = "fov";
 static constexpr char const * KEY_DESCRIPTION = "description";
 static constexpr char const * KEY_OBJECTS = "objects";
 static constexpr char const * KEY_DESIGNATION = "designation";
@@ -63,13 +92,14 @@ static constexpr char const * KEY_SORTING = "sorting";
 static constexpr char const * KEY_LOCATION = "location";
 static constexpr char const * KEY_VERSION = "version";
 static constexpr char const * KEY_SHORT_NAME = "shortName";
+static constexpr char const * KEY_IS_VISIBLE_MARKER = "isVisibleMarker";
 
 static constexpr char const * SORTING_BY_NAME = "name";
 static constexpr char const * SORTING_BY_TYPE = "type";
 static constexpr char const * SORTING_BY_RA = "right ascension";
 static constexpr char const * SORTING_BY_DEC = "declination";
 static constexpr char const * SORTING_BY_MAGNITUDE = "magnitude";
-static constexpr char const * SORTING_BY_CONSTTELLATION = "constellation";
+static constexpr char const * SORTING_BY_CONSTELLATION = "constellation";
 
 
 #endif // OBSLISTDIALOG_H

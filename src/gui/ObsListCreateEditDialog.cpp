@@ -410,8 +410,7 @@ void ObsListCreateEditDialog::saveObservedObject()
         observingListDataList.insert ( QString ( KEY_LOCATION ), Location );
 
         // Name of the liste
-        QString name = ui->nameOfListLineEdit->text();
-        observingListDataList.insert ( QString ( KEY_NAME ), name );
+        observingListDataList.insert ( QString ( KEY_NAME ), listName );
 
         // List of objects
         QVariantList listOfObjects;
@@ -446,7 +445,7 @@ void ObsListCreateEditDialog::saveObservedObject()
         }
 
         mapFromJsonFile.insert ( KEY_VERSION, FILE_VERSION );
-        mapFromJsonFile.insert ( KEY_SHORT_NAME, "Observing list for Stellarium" );
+        mapFromJsonFile.insert ( KEY_SHORT_NAME, SHORT_NAME_VALUE );
 
         allListsMap.insert ( oblListUuid, observingListDataList );
         mapFromJsonFile.insert ( QString ( KEY_OBSERVING_LISTS ), allListsMap );
@@ -574,7 +573,7 @@ void ObsListCreateEditDialog::headerClicked ( int index )
         sorting = QString ( SORTING_BY_MAGNITUDE );
         break;
     case ColumnConstellation:
-        sorting = QString ( SORTING_BY_CONSTTELLATION );;
+        sorting = QString ( SORTING_BY_CONSTELLATION );;
         break;
     default:
         sorting = "";
