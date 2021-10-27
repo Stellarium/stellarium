@@ -1375,6 +1375,10 @@ void StelApp::setViewportEffect(const QString& name)
 	{
 		viewportEffect = new StelViewportDistorterFisheyeToSphericMirror(w, h);
 	}
+	else if (name == "viewportFaderEffect")
+	{
+		viewportEffect = new StelViewportFaderEffect();
+	}
 	else
 	{
 		qDebug() << "unknown viewport effect name:" << name;

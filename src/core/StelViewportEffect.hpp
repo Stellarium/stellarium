@@ -74,13 +74,11 @@ class StelViewportFaderEffect : public StelViewportEffect
 {
 public:
 	StelViewportFaderEffect() {}
-	//~StelViewportFaderEffect() Q_DECL_OVERRIDE;
 	virtual QString getName() const Q_DECL_OVERRIDE {return "viewportFaderEffect";}
 	//! Alter the GL frame buffer, this method must not display anything.
 	//! The implementation in this class reduces the brightness of the existing buffer.
-	virtual void alterBuffer(QOpenGLFramebufferObject* buf) const Q_DECL_OVERRIDE;
-	//virtual void paintViewportBuffer(const QOpenGLFramebufferObject* buf) const Q_DECL_OVERRIDE;
-//private:
+	// virtual void alterBuffer(QOpenGLFramebufferObject* buf) const Q_DECL_OVERRIDE;
+	virtual void paintViewportBuffer(const QOpenGLFramebufferObject* buf) const Q_DECL_OVERRIDE;
 };
 
 #endif // STELVIEWPORTEFFECT_HPP

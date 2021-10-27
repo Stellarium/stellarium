@@ -345,12 +345,13 @@ void StelViewportDistorterFisheyeToSphericMirror::paintViewportBuffer(const QOpe
 	GL(gl->glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST));
 }
 
-void StelViewportFaderEffect::alterBuffer(QOpenGLFramebufferObject* buf) const
+void StelViewportFaderEffect::paintViewportBuffer(const QOpenGLFramebufferObject* buf) const
 {
-	Q_UNUSED(buf)
-	// TODO: I am still unsure about how to use this. When I want to have a scene fading to black (effect of a light echo or showing star trails),
-	// will the main buffer be changed, or can I only apply an effect to the finally displayed image?
-	// https://stackoverflow.com/questions/6810591/how-to-make-fading-to-black-effect-with-opengl
+	StelPainter sPainter(StelApp::getInstance().getCore()->getProjection2d());
+	QOpenGLFunctions* gl = sPainter.glFuncs();
+	sPainter.setColor(1,1,1);
+	GL(gl->glBindTexture(GL_TEXTURE_2D, buf->texture()));
+	GL(gl->glBlendColor(1, 1, 1, 0.08));
+	sPainter.setBlending(true, GL_CONSTANT_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
+	sPainter.drawRect2d(0, 0, buf->width(), buf->height());
 }
-
-
