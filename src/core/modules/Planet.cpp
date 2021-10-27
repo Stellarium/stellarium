@@ -2865,7 +2865,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 double Planet::getAngularRadius(const StelCore* core) const
 {
 	const double rad = (rings ? rings->getSize() : equatorialRadius);
-	return std::atan2(rad*sphereScale,getJ2000EquatorialPos(core).norm()) * M_180_PI;
+	return std::asin(rad*sphereScale/getJ2000EquatorialPos(core).norm()) * M_180_PI;
 }
 
 

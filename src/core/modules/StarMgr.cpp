@@ -1319,10 +1319,10 @@ void StarMgr::draw(StelCore* core)
 	PlanetP moon = GETSTELMODULE(SolarSystem)->getMoon();
 	Vec3d moonPos=moon->getJ2000EquatorialPos(core);
 	const double moonRadius = moon->getEquatorialRadius() * moon->getSphereScale();
-	double angularSize = atan2(moonRadius, moonPos.norm());
+	double angularSize = asin(moonRadius / moonPos.norm());
 	moonPos.normalize();
 	SphericalCap moonCap(moonPos, cos(angularSize));
-	for (auto  cap : viewportCaps)
+	for (auto  &cap : viewportCaps)
 	{
 	    if (cap.intersects(moonCap))
 		filterMoon=true;
