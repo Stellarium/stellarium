@@ -73,7 +73,7 @@ static constexpr char const * FILE_VERSION = "1.0";
 
 static constexpr char const * JSON_BOOKMARKS_FILE_NAME = "bookmarks.json";
 static constexpr char const * BOOKMARKS_LIST_NAME = "bookmarks list";
-static constexpr char const * BOOKMARKS_LIST_DESCRIPTION = "Bookmarks of previous Stellarium version";
+static constexpr char const * BOOKMARKS_LIST_DESCRIPTION = "Bookmarks of previous Stellarium version.";
 static constexpr char const * SHORT_NAME_VALUE = "Observing list for Stellarium";
 
 static constexpr char const * KEY_DEFAULT_LIST_UUID = "defaultListUuid";
@@ -100,6 +100,13 @@ static constexpr char const * SORTING_BY_RA = "right ascension";
 static constexpr char const * SORTING_BY_DEC = "declination";
 static constexpr char const * SORTING_BY_MAGNITUDE = "magnitude";
 static constexpr char const * SORTING_BY_CONSTELLATION = "constellation";
+
+static constexpr int COLUMN_NUMBER_NAME = 1;
+static constexpr int COLUMN_NUMBER_TYPE = 3;
+static constexpr int COLUMN_NUMBER_RA = 4;
+static constexpr int COLUMN_NUMBER_DEC = 5;
+static constexpr int COLUMN_NUMBER_MAGNITUDE = 6;
+static constexpr int COLUMN_NUMBER_CONSTELLATION = 7;
 
 
 #endif // OBSLISTDIALOG_H

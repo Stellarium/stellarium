@@ -94,15 +94,19 @@ private:
     //! Load the bookmarks of bookmarks.json file into observing lists file
     void loadBookmarksInObservingList();
     void saveBookmarks(QHash<QString, bookmark> bookmarksCollection);
+    bool checkIfBookmarksListExists(QVariantMap allListsMap);
     
     //! Load list from JSON file
-    QVariantList loadListFromJson(QFile &jsonFile, QString listUuid);
+    QVariantList loadListFromJson(QVariantMap map, QString listUuid);
     
     //! Populate list names into combo box
     void populateListNameInComboBox(QVariantMap map);
     
     //! Populate data into combo box
     void populateDataInComboBox(QVariantMap map, QString defaultListUuid);
+    
+    //! Sort the obsListTreeView by the column name given in parameter
+    void sortObsListTreeViewByColumnName(QString columnName);
 
 
 public slots:

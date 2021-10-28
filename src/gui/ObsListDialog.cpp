@@ -406,7 +406,12 @@ void ObsListDialog::loadObservingList ( QString listUuid )
         qWarning() << "[ObservingList] cannot open" << QDir::toNativeSeparators ( JSON_FILE_NAME );
     } else {
         try {
-            listOfObjects = loadListFromJson ( jsonFile, listUuid );
+
+            map = StelJsonParser::parse ( jsonFile.readAll() ).toMap();
+            QVariantMap observingListMap = map.value ( QString ( KEY_OBSERVING_LISTS ) ).toMap().value ( listUuid ).toMap();
+            QString sortingBy = observingListMap.value ( KEY_SORTING ).toString();
+
+            listOfObjects = loadListFromJson ( map, listUuid );
 
             if ( listOfObjects.size() > 0 ) {
                 ui->obsListHighlightAllButton->setEnabled ( true );
@@ -517,21 +522,23 @@ void ObsListDialog::loadObservingList ( QString listUuid )
             }
 
             objectMgr->unSelect();
+            if ( !sortingBy.isEmpty() ) {
+                sortObsListTreeViewByColumnName ( sortingBy );
+            }
+            jsonFile.close();
         } catch ( std::runtime_error &e ) {
-            qWarning() << "[ObservingList] File format is wrong! Error: " << e.what();
+            qWarning() << "[ObservingList] Load selected observing list: File format is wrong! Error: " << e.what();
+            jsonFile.close();
             return;
         }
     }
 }
 
 /*
- * Load the list from JSON file
+ * Load the list from JSON file QVariantMap map
 */
-QVariantList ObsListDialog::loadListFromJson ( QFile &jsonFile, QString listUuid )
+QVariantList ObsListDialog::loadListFromJson ( QVariantMap map, QString listUuid )
 {
-    QVariantMap map;
-    map = StelJsonParser::parse ( jsonFile.readAll() ).toMap();
-    jsonFile.close();
 
     observingListItemCollection.clear();
     QVariantMap observingListMap = map.value ( QString ( KEY_OBSERVING_LISTS ) ).toMap().value ( listUuid ).toMap();
@@ -622,11 +629,11 @@ void ObsListDialog::loadBookmarksInObservingList()
                 bookmarksCollection.insert ( bookmarkKey, item );
 
             }
-            
-            saveBookmarks(bookmarksCollection);
+
+            saveBookmarks ( bookmarksCollection );
 
         } catch ( std::runtime_error &e ) {
-            qWarning() << "[ObservingList] File format is wrong! Error: " << e.what();
+            qWarning() << "[ObservingList] Load bookmarks in observing list: File format is wrong! Error: " << e.what();
             return;
         }
     }
@@ -646,7 +653,7 @@ void ObsListDialog::saveBookmarks ( QHash<QString, bookmark> bookmarksCollection
     }
 
     try {
-        
+
         QVariantMap mapFromJsonFile;
         QVariantMap allListsMap;
         QVariantMap observingListDataList;
@@ -654,17 +661,22 @@ void ObsListDialog::saveBookmarks ( QHash<QString, bookmark> bookmarksCollection
             mapFromJsonFile = StelJsonParser::parse ( jsonFile.readAll() ).toMap();
             allListsMap = mapFromJsonFile.value ( QString ( KEY_OBSERVING_LISTS ) ).toMap();
         }
-        
+
+        if ( checkIfBookmarksListExists ( allListsMap ) ) {
+            //the bookmarks file is already loaded
+            return;
+        }
+
         // Description
-        QString description = QString(BOOKMARKS_LIST_DESCRIPTION);
+        QString description = QString ( BOOKMARKS_LIST_DESCRIPTION );
         observingListDataList.insert ( QString ( KEY_DESCRIPTION ), description );
-        
+
         // Julian day
         QString JDString = "";
         double JD = core->getJD();
         JDString = QString::number ( JD, 'f', 6 );
         observingListDataList.insert ( QString ( KEY_JD ), JDString );
-        
+
         // Location
         QString Location = "";
         StelLocation loc = core->getCurrentLocation();
@@ -674,10 +686,10 @@ void ObsListDialog::saveBookmarks ( QHash<QString, bookmark> bookmarksCollection
             Location = QString ( "%1, %2" ).arg ( loc.name ).arg ( loc.region );
         }
         observingListDataList.insert ( QString ( KEY_LOCATION ), Location );
-        
+
         // Name of the liste
         observingListDataList.insert ( QString ( KEY_NAME ), BOOKMARKS_LIST_NAME );
-        
+
         // List of objects
         QVariantList listOfObjects;
         QHashIterator<QString, bookmark> i ( bookmarksCollection );
@@ -690,34 +702,56 @@ void ObsListDialog::saveBookmarks ( QHash<QString, bookmark> bookmarksCollection
             obl.insert ( QString ( KEY_DESIGNATION ), objectName );
             listOfObjects.push_back ( obl );
         }
-        
+
         observingListDataList.insert ( QString ( KEY_OBJECTS ), listOfObjects );
         observingListDataList.insert ( QString ( KEY_SORTING ), SORTING_BY_NAME );
-        
+
         QList<QString> keys = bookmarksCollection.keys();
         QString oblListUuid;
-        if(keys.empty()){
+        if ( keys.empty() ) {
             oblListUuid = QUuid::createUuid().toString();
         } else {
-           oblListUuid =  keys.at(0); 
+            oblListUuid =  keys.at ( 0 );
         }
-        
+
         mapFromJsonFile.insert ( KEY_VERSION, FILE_VERSION );
         mapFromJsonFile.insert ( KEY_SHORT_NAME,SHORT_NAME_VALUE );
 
         allListsMap.insert ( oblListUuid, observingListDataList );
         mapFromJsonFile.insert ( QString ( KEY_OBSERVING_LISTS ), allListsMap );
-        
+
         jsonFile.resize ( 0 );
         StelJsonParser::write ( mapFromJsonFile, &jsonFile );
         jsonFile.flush();
         jsonFile.close();
-        
+
     } catch ( std::runtime_error &e ) {
         qCritical() << "[ObservingList] File format is wrong! Error: " << e.what();
         return;
     }
 }
+
+
+/*
+ * Check if bookmarks list already exists in observing list file,
+ * in fact if the file of bookarks has already be loaded.
+*/
+bool ObsListDialog::checkIfBookmarksListExists ( QVariantMap allListsMap )
+{
+
+    for ( auto bookmarkKey : allListsMap.keys() ) {
+
+        QVariantMap bookmarkData = allListsMap.value ( bookmarkKey ).toMap();
+        QString listName = bookmarkData.value ( KEY_NAME ).toString();
+
+        if ( QString::compare ( QString ( BOOKMARKS_LIST_NAME ), listName ) == 0 ) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 
 
 /*
@@ -907,6 +941,25 @@ void ObsListDialog::setVisible ( bool v )
     }
 }
 
+/*
+ * Sort the obsListTreeView by the column name given in parameter
+*/
+void ObsListDialog::sortObsListTreeViewByColumnName ( QString columnName )
+{
+    if ( QString::compare ( columnName,SORTING_BY_NAME ) == 0 ) {
+        obsListListModel->sort ( COLUMN_NUMBER_NAME, Qt::AscendingOrder );
+    } else if ( QString::compare ( columnName,SORTING_BY_TYPE ) == 0 ) {
+        obsListListModel->sort ( COLUMN_NUMBER_TYPE, Qt::AscendingOrder );
+    } else if ( QString::compare ( columnName,SORTING_BY_RA ) == 0 ) {
+        obsListListModel->sort ( COLUMN_NUMBER_RA, Qt::AscendingOrder );
+    } else if ( QString::compare ( columnName,SORTING_BY_DEC ) == 0 ) {
+        obsListListModel->sort ( COLUMN_NUMBER_DEC, Qt::AscendingOrder );
+    } else if ( QString::compare ( columnName,SORTING_BY_MAGNITUDE ) == 0 ) {
+        obsListListModel->sort ( COLUMN_NUMBER_MAGNITUDE, Qt::AscendingOrder );
+    } else if ( QString::compare ( columnName,SORTING_BY_CONSTELLATION ) == 0 ) {
+        obsListListModel->sort ( COLUMN_NUMBER_CONSTELLATION, Qt::AscendingOrder );
+    }
+}
 
 
 
