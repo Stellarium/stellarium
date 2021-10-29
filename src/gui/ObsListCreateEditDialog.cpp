@@ -385,10 +385,12 @@ void ObsListCreateEditDialog::saveObservedObject()
 
 
         // No JD modifications in editor mode
+        QString existingSorting;
         if ( !isCreationMode ) {
             QString  uuidQs = QString::fromStdString ( this->listUuid_ );
             QVariantMap currentList = allListsMap.value ( uuidQs ).toMap();
             QVariant existingJD = currentList.value ( QString ( KEY_JD ) );
+            existingSorting = currentList.value(QString(KEY_SORTING)).toString();
             QString existingJDs = existingJD.toString();
             if ( existingJDs.isEmpty() ) {
                 observingListDataList.insert ( QString ( KEY_JD ), JDString );
@@ -426,7 +428,14 @@ void ObsListCreateEditDialog::saveObservedObject()
         }
 
         observingListDataList.insert ( QString ( KEY_OBJECTS ), listOfObjects );
-        observingListDataList.insert ( QString ( KEY_SORTING ), sorting );
+        
+        
+        if(sorting.isEmpty()){
+            observingListDataList.insert ( QString ( KEY_SORTING ), existingSorting );
+        }else {
+            observingListDataList.insert ( QString ( KEY_SORTING ), sorting );
+        }
+        
 
         QString oblListUuid;
         if ( isCreationMode ) {
