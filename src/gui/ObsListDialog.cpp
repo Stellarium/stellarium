@@ -337,6 +337,8 @@ void ObsListDialog::loadListsName()
 void ObsListDialog::populateListNameInComboBox ( QVariantMap map )
 {
     QMap<QString, QVariant>::iterator i;
+    ui->obsListComboBox->clear();
+    listNamesModel.clear();
     for ( i = map.begin(); i != map.end(); ++i ) {
         if ( i.value().canConvert<QVariantMap>() ) {
             QVariant var = i.value();
@@ -391,6 +393,9 @@ void ObsListDialog::loadDefaultList()
             selectedObservingListUuid = defaultListUuid_.toStdString();
             loadObservingList ( defaultListUuid_ );
         }
+    } else {
+        ui->obsListComboBox->setCurrentIndex ( 0 );
+        loadSelectedObservingList(0);
     }
 }
 
@@ -662,6 +667,11 @@ void ObsListDialog::saveBookmarks ( QHash<QString, bookmark> bookmarksCollection
             allListsMap = mapFromJsonFile.value ( QString ( KEY_OBSERVING_LISTS ) ).toMap();
         }
 
+        QString defaultListValue = mapFromJsonFile.value(QString(KEY_DEFAULT_LIST_UUID)).toString();
+        if(defaultListValue.isEmpty()){
+            mapFromJsonFile.insert ( KEY_DEFAULT_LIST_UUID, "" );
+        }
+        
         if ( checkIfBookmarksListExists ( allListsMap ) ) {
             //the bookmarks file is already loaded
             return;
