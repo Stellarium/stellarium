@@ -830,6 +830,7 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 	if (!ok)
 		return SsoElements();
 	result.insert("orbit_MeanAnomaly", meanAnomalyAtEpoch);
+	result.insert("orbit_good", 5000); // default validity for osculating elements, days
 
 	// add period for visualization of orbit
 	if (semiMajorAxis>0)
