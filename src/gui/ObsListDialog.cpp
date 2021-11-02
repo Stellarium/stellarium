@@ -58,6 +58,8 @@ ObsListDialog::~ObsListDialog()
 {
     delete ui;
     delete obsListListModel;
+    ui = Q_NULLPTR;
+    obsListListModel = Q_NULLPTR;
 }
 
 /*
@@ -395,7 +397,7 @@ void ObsListDialog::loadDefaultList()
         }
     } else {
         ui->obsListComboBox->setCurrentIndex ( 0 );
-        loadSelectedObservingList(0);
+        loadSelectedObservingList ( 0 );
     }
 }
 
@@ -667,11 +669,11 @@ void ObsListDialog::saveBookmarks ( QHash<QString, bookmark> bookmarksCollection
             allListsMap = mapFromJsonFile.value ( QString ( KEY_OBSERVING_LISTS ) ).toMap();
         }
 
-        QString defaultListValue = mapFromJsonFile.value(QString(KEY_DEFAULT_LIST_UUID)).toString();
-        if(defaultListValue.isEmpty()){
+        QString defaultListValue = mapFromJsonFile.value ( QString ( KEY_DEFAULT_LIST_UUID ) ).toString();
+        if ( defaultListValue.isEmpty() ) {
             mapFromJsonFile.insert ( KEY_DEFAULT_LIST_UUID, "" );
         }
-        
+
         if ( checkIfBookmarksListExists ( allListsMap ) ) {
             //the bookmarks file is already loaded
             return;
@@ -860,52 +862,62 @@ void ObsListDialog::loadSelectedObservingList ( int selectedIndex )
 */
 void ObsListDialog::obsListDeleteButtonPressed()
 {
-    qDebug() << QString::fromStdString ( selectedObservingListUuid );
-    QVariantMap map;
-    QFile jsonFile ( observingListJsonPath );
-    if ( !jsonFile.open ( QIODevice::ReadWrite ) ) {
-        qWarning() << "[ObservingList] cannot open" << QDir::toNativeSeparators ( JSON_FILE_NAME );
-    } else {
-        try {
-            QVariantMap newMap;
-            QVariantMap newObsListMap;
-            map = StelJsonParser::parse ( jsonFile.readAll() ).toMap();
+    bool res = askConfirmation();
 
-            newMap.insert ( QString ( KEY_DEFAULT_LIST_UUID ), map.value ( QString ( KEY_DEFAULT_LIST_UUID ) ) );
-            QVariantMap obsListMap = map.value ( QString ( KEY_OBSERVING_LISTS ) ).toMap();
+    if ( res ) {
+        QVariantMap map;
+        QFile jsonFile ( observingListJsonPath );
+        if ( !jsonFile.open ( QIODevice::ReadWrite ) ) {
+            qWarning() << "[ObservingList] cannot open" << QDir::toNativeSeparators ( JSON_FILE_NAME );
+        } else {
+            try {
+                QVariantMap newMap;
+                QVariantMap newObsListMap;
+                map = StelJsonParser::parse ( jsonFile.readAll() ).toMap();
 
-            QMap<QString, QVariant>::iterator i;
-            for ( i = obsListMap.begin(); i != obsListMap.end(); ++i ) {
-                if ( i.key().compare ( QString::fromStdString ( selectedObservingListUuid ) ) !=0 ) {
-                    newObsListMap.insert ( i.key(),i.value() );
+                newMap.insert ( QString ( KEY_DEFAULT_LIST_UUID ), map.value ( QString ( KEY_DEFAULT_LIST_UUID ) ) );
+                QVariantMap obsListMap = map.value ( QString ( KEY_OBSERVING_LISTS ) ).toMap();
+
+                QMap<QString, QVariant>::iterator i;
+                for ( i = obsListMap.begin(); i != obsListMap.end(); ++i ) {
+                    if ( i.key().compare ( QString::fromStdString ( selectedObservingListUuid ) ) !=0 ) {
+                        newObsListMap.insert ( i.key(),i.value() );
+                    }
                 }
+
+                newMap.insert ( QString ( KEY_OBSERVING_LISTS ),newObsListMap );
+                newMap.insert ( QString ( KEY_SHORT_NAME ), map.value ( QString ( KEY_SHORT_NAME ) ) );
+                newMap.insert ( QString ( KEY_VERSION ), map.value ( QString ( KEY_VERSION ) ) );
+                objectMgr->unSelect();
+                observingListItemCollection.clear();
+
+                // Clear model
+                obsListListModel->removeRows ( 0,obsListListModel->rowCount() );
+                ui->obsListCreationDateLineEdit->setText ( "" );
+                ui->obsListDescriptionTextEdit->setPlainText ( "" );
+                int currentIndex = ui->obsListComboBox->currentIndex();
+                ui->obsListComboBox->removeItem ( currentIndex );
+                selectedObservingListUuid = "";
+
+
+                jsonFile.resize ( 0 );
+                StelJsonParser::write ( newMap, &jsonFile );
+                jsonFile.flush();
+                jsonFile.close();
+
+                if ( ui->obsListComboBox->count() > 0 ) {
+                    ui->obsListComboBox->setCurrentIndex ( 0 );
+                    loadSelectedObservingList ( 0 );
+                }
+
+            } catch ( std::runtime_error &e ) {
+                qWarning() << "[ObservingList] File format is wrong! Error: " << e.what();
+                return;
             }
-
-            newMap.insert ( QString ( KEY_OBSERVING_LISTS ),newObsListMap );
-            newMap.insert ( QString ( KEY_SHORT_NAME ), map.value ( QString ( KEY_SHORT_NAME ) ) );
-            newMap.insert ( QString ( KEY_VERSION ), map.value ( QString ( KEY_VERSION ) ) );
-            objectMgr->unSelect();
-            observingListItemCollection.clear();
-            // Clear model
-            obsListListModel->removeRows ( 0,obsListListModel->rowCount() );
-            ui->obsListCreationDateLineEdit->setText ( "" );
-            int currentIndex = ui->obsListComboBox->currentIndex();
-            ui->obsListComboBox->removeItem ( currentIndex );
-
-            int index = ui->obsListComboBox->findData ( "" );
-            ui->obsListComboBox->setCurrentIndex ( index );
-            ui->obsListDescriptionTextEdit->setPlainText ( "" );
-
-            jsonFile.resize ( 0 );
-            StelJsonParser::write ( newMap, &jsonFile );
-            jsonFile.flush();
-            jsonFile.close();
-
-        } catch ( std::runtime_error &e ) {
-            qWarning() << "[ObservingList] File format is wrong! Error: " << e.what();
-            return;
         }
     }
+
+
 }
 
 /*

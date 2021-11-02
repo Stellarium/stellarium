@@ -56,6 +56,8 @@ ObsListCreateEditDialog::~ObsListCreateEditDialog()
 {
     delete ui;
     delete obsListListModel;
+    ui = Q_NULLPTR;
+    obsListListModel = Q_NULLPTR;
 }
 
 /**

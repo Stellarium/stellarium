@@ -98,6 +98,7 @@ private:
 
 public slots:
     void retranslate();
+    
 private slots:
     void obsListAddObjectButtonPressed();
     void obsListRemoveObjectButtonPressed();
