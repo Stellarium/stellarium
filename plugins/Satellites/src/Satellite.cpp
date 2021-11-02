@@ -31,7 +31,6 @@
 #include "StelLocaleMgr.hpp"
 
 #include <QTextStream>
-#include <QRegExp>
 #include <QDebug>
 #include <QVariant>
 #include <QSettings>

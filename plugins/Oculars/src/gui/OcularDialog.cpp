@@ -598,9 +598,6 @@ void OcularDialog::setLabelsDescriptionText(bool state)
 
 void OcularDialog::initAboutText()
 {
-	// Regexp to replace {text} with an HTML link.
-	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
-
 	//BM: Most of the text for now is the original contents of the About widget.
 	QString html = "<html><head><title></title></head><body>";
 

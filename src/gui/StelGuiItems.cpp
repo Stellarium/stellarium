@@ -46,7 +46,6 @@
 #include <QGraphicsTextItem>
 #include <QTimeLine>
 #include <QMouseEvent>
-#include <QRegExp>
 #include <QPixmapCache>
 #include <QProgressBar>
 #include <QGraphicsWidget>

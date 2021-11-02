@@ -684,9 +684,6 @@ void SatellitesDialog::saveSatellites(void)
 
 void SatellitesDialog::populateAboutPage()
 {
-	// Regexp to replace {text} with an HTML link.
-	//QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
-
 	QString jsonFileName("<tt>satellites.json</tt>");
 	QString oldJsonFileName("<tt>satellites.json.old</tt>");
 	QString html = "<html><head></head><body>";

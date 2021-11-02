@@ -82,9 +82,6 @@ void EquationOfTimeWindow::createDialogContent()
 
 void EquationOfTimeWindow::setAboutHtml()
 {
-	// Regexp to replace {text} with an HTML link.
-	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
-
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Equation of Time plug-in") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + EQUATIONOFTIME_PLUGIN_VERSION + "</td></tr>";
