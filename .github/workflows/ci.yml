@@ -63,7 +63,8 @@ jobs:
     - name: Configure CMake
       shell: bash
       run: |
-        export PATH="/usr/local/opt/qt@5/bin:/opt/homebrew/bin:/opt/homebrew/lib:/opt/homebrew/include:$PATH"
+        export PATH="/usr/local/opt/qt@5/bin:/usr/local/bin:/usr/local/lib:/usr/local/include:$PATH"
+        export CPATH="/usr/local/include:$CPATH"
         mkdir -p build
         cd build
         cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On ${{ github.workspace }}
