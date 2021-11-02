@@ -32,18 +32,13 @@ QString Star1::getNameI18n(void) const
 {
 	if (getHip())
 	{
-		const QString commonNameI18 = StarMgr::getCommonName(getHip());
-		if (!commonNameI18.isEmpty()) return commonNameI18;
-		if (StarMgr::getFlagSciNames())
-		{
-			const QStringList sciNames = StarMgr::getSciName(getHip()).split(" - ");
-			if (sciNames.count()>0) return sciNames.first();
-			const QStringList sciExtraNames = StarMgr::getSciExtraName(getHip()).split(" - ");
-			if (sciExtraNames.count()>0) return sciExtraNames.first();
-			const QString varSciName = StarMgr::getGcvsName(getHip());
-			if (!varSciName.isEmpty()) return varSciName;
-			return QString("HIP %1").arg(getHip());
-		}
+		QStringList starNames;
+		starNames << StarMgr::getCommonName(getHip()) << getDesignation();
+		starNames.removeAll(QString(""));
+		if (starNames.count()>0)
+			return starNames.first();
+		else
+			return QString();
 	}
 	return QString();
 }
@@ -52,13 +47,19 @@ QString Star1::getDesignation() const
 {
 	if (getHip())
 	{
-		const QStringList sciNames = StarMgr::getSciName(getHip()).split(" - ");
-		if (sciNames.count()>0) return sciNames.first();
-		const QStringList sciExtraNames = StarMgr::getSciExtraName(getHip()).split(" - ");
-		if (sciExtraNames.count()>0) return sciExtraNames.first();
-		const QString varSciName = StarMgr::getGcvsName(getHip());
-		if (!varSciName.isEmpty()) return varSciName;
-		return QString("HIP %1").arg(getHip());
+		QStringList starNames;
+		if (StarMgr::getFlagSciNames())
+		{
+			starNames << StarMgr::getSciName(getHip()).split(" - ");
+			starNames << StarMgr::getSciExtraName(getHip()).split(" - ");
+			starNames << StarMgr::getGcvsName(getHip());
+			starNames << QString("HIP %1").arg(getHip());
+		}
+		starNames.removeAll(QString(""));
+		if (starNames.count()>0)
+			return starNames.first();
+		else
+			return QString();
 	}
 	return QString();
 }
