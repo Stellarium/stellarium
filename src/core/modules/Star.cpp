@@ -48,14 +48,14 @@ QString Star1::getDesignation() const
 	if (getHip())
 	{
 		QStringList starNames;
-		if (StarMgr::getFlagSciNames())
+		if (StarMgr::getFlagSciNames()) // The scientific designations can be used for western sky cultures only
 		{
 			starNames << StarMgr::getSciName(getHip()).split(" - ");
-			if (StarMgr::getFlagOldDoublesDesignation())
+			if (StarMgr::getFlagOldDoublesDesignation()) // append the old designations of double stars
 				starNames << StarMgr::getSciExtraName(getHip()).split(" - ");
-			if (StarMgr::getFlagVarStarsDesignation())
+			if (StarMgr::getFlagVarStarsDesignation()) // append the designations of variable stars (from GCVS)
 				starNames << StarMgr::getGcvsName(getHip());
-			if (StarMgr::getFlagHIPDesignation())
+			if (StarMgr::getFlagHIPDesignation()) // append the HIP numbers of stars
 				starNames << QString("HIP %1").arg(getHip());
 		}
 		starNames.removeAll(QString(""));
