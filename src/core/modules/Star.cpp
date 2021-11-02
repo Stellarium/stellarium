@@ -38,6 +38,8 @@ QString Star1::getNameI18n(void) const
 		{
 			const QStringList sciNames = StarMgr::getSciName(getHip()).split(" - ");
 			if (sciNames.count()>0) return sciNames.first();
+			const QStringList sciExtraNames = StarMgr::getSciExtraName(getHip()).split(" - ");
+			if (sciExtraNames.count()>0) return sciExtraNames.first();
 			const QString varSciName = StarMgr::getGcvsName(getHip());
 			if (!varSciName.isEmpty()) return varSciName;
 			return QString("HIP %1").arg(getHip());
@@ -52,6 +54,8 @@ QString Star1::getDesignation() const
 	{
 		const QStringList sciNames = StarMgr::getSciName(getHip()).split(" - ");
 		if (sciNames.count()>0) return sciNames.first();
+		const QStringList sciExtraNames = StarMgr::getSciExtraName(getHip()).split(" - ");
+		if (sciExtraNames.count()>0) return sciExtraNames.first();
 		const QString varSciName = StarMgr::getGcvsName(getHip());
 		if (!varSciName.isEmpty()) return varSciName;
 		return QString("HIP %1").arg(getHip());

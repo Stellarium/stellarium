@@ -233,6 +233,12 @@ public:
 	//! @return translated scientific name of star
 	static QString getSciName(int hip);
 
+	//! Get the (translated) scientific extra name for a star with a specified
+	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return translated scientific name of star
+	static QString getSciExtraName(int hip);
+
 	//! Get the (translated) scientific name for a variable star with a specified
 	//! Hipparcos catalogue number.
 	//! @param hip The Hipparcos number of star
@@ -401,7 +407,8 @@ private:
 	//! Loads scientific names for stars from a file.
 	//! Called when the SkyCulture is updated.
 	//! @param the path to a file containing the scientific names for bright stars.
-	void loadSciNames(const QString& sciNameFile);
+	//! @param flag to load the extra designations
+	void loadSciNames(const QString& sciNameFile, const bool extraData);
 
 	//! Loads GCVS from a file.
 	//! @param the path to a file containing the GCVS.
@@ -480,6 +487,8 @@ private:
 
 	static QHash<int, QString> sciDesignationsMapI18n;
 	static QMap<QString, int> sciDesignationsIndexI18n;
+	static QHash<int, QString> sciExtraDesignationsMapI18n;
+	static QMap<QString, int> sciExtraDesignationsIndexI18n;
 
 	static QHash<int, varstar> varStarsMapI18n;
 	static QMap<QString, int> varStarsIndexI18n;

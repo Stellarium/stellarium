@@ -82,6 +82,8 @@ QMap<QString,int> StarMgr::additionalNamesIndex;
 QMap<QString,int> StarMgr::additionalNamesIndexI18n;
 QHash<int,QString> StarMgr::sciDesignationsMapI18n;
 QMap<QString,int> StarMgr::sciDesignationsIndexI18n;
+QHash<int,QString> StarMgr::sciExtraDesignationsMapI18n;
+QMap<QString,int> StarMgr::sciExtraDesignationsIndexI18n;
 QHash<int, varstar> StarMgr::varStarsMapI18n;
 QMap<QString, int> StarMgr::varStarsIndexI18n;
 QHash<int, wds> StarMgr::wdsStarsMapI18n;
@@ -214,6 +216,14 @@ QString StarMgr::getSciName(int hip)
 {
 	auto it = sciDesignationsMapI18n.find(hip);
 	if (it!=sciDesignationsMapI18n.end())
+		return it.value();
+	return QString();
+}
+
+QString StarMgr::getSciExtraName(int hip)
+{
+	auto it = sciExtraDesignationsMapI18n.find(hip);
+	if (it!=sciExtraDesignationsMapI18n.end())
 		return it.value();
 	return QString();
 }
@@ -824,12 +834,21 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 
 
 // Load scientific names from file
-void StarMgr::loadSciNames(const QString& sciNameFile)
+void StarMgr::loadSciNames(const QString& sciNameFile, const bool extraData)
 {
-	sciDesignationsMapI18n.clear();
-	sciDesignationsIndexI18n.clear();
+	if (extraData)
+	{
+		sciExtraDesignationsMapI18n.clear();
+		sciExtraDesignationsIndexI18n.clear();
+		qDebug() << "Loading scientific star extra names from" << QDir::toNativeSeparators(sciNameFile);
+	}
+	else
+	{
+		sciDesignationsMapI18n.clear();
+		sciDesignationsIndexI18n.clear();
+		qDebug() << "Loading scientific star names from" << QDir::toNativeSeparators(sciNameFile);
+	}
 
-	qDebug() << "Loading scientific star names from" << QDir::toNativeSeparators(sciNameFile);
 	QFile snFile(sciNameFile);
 	if (!snFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
@@ -881,21 +900,38 @@ void StarMgr::loadSciNames(const QString& sciNameFile)
 			}
 
 			sci_name.replace('_',' ');
-			// Don't set the main sci name if it's already set - it's additional sci name
-			if (sciDesignationsMapI18n.find(hip)!=sciDesignationsMapI18n.end())
+			if (extraData)
 			{
-				QString sname = sciDesignationsMapI18n[hip].append(" - " + sci_name);
-				sciDesignationsMapI18n[hip] = sname;
+				// Don't set the main sci name if it's already set - it's additional sci name
+				if (sciExtraDesignationsMapI18n.find(hip)!=sciExtraDesignationsMapI18n.end())
+				{
+					QString sname = sciExtraDesignationsMapI18n[hip].append(" - " + sci_name);
+					sciExtraDesignationsMapI18n[hip] = sname;
+				}
+				else
+					sciExtraDesignationsMapI18n[hip] = sci_name;
+				sciExtraDesignationsIndexI18n[sci_name] = hip;
 			}
 			else
-				sciDesignationsMapI18n[hip] = sci_name;
-			sciDesignationsIndexI18n[sci_name] = hip;
-
+			{
+				// Don't set the main sci name if it's already set - it's additional sci name
+				if (sciDesignationsMapI18n.find(hip)!=sciDesignationsMapI18n.end())
+				{
+					QString sname = sciDesignationsMapI18n[hip].append(" - " + sci_name);
+					sciDesignationsMapI18n[hip] = sname;
+				}
+				else
+					sciDesignationsMapI18n[hip] = sci_name;
+				sciDesignationsIndexI18n[sci_name] = hip;
+			}
 			++readOk;
 		}
 	}
 
-	qDebug() << "Loaded" << readOk << "/" << totalRecords << "scientific star names";
+	if (extraData)
+		qDebug() << "Loaded" << readOk << "/" << totalRecords << "scientific star extra names";
+	else
+		qDebug() << "Loaded" << readOk << "/" << totalRecords << "scientific star names";
 }
 
 // Load GCVS from file
@@ -1528,6 +1564,14 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 	if (itdi!=sciDesignationsIndexI18n.end())
 		return searchHP(itdi.value());
 
+	// Search by scientific name
+	auto eitd = sciExtraDesignationsIndexI18n.find(name); // case sensitive!
+	if (eitd!=sciExtraDesignationsIndexI18n.end())
+		return searchHP(eitd.value());
+	auto eitdi = sciExtraDesignationsIndexI18n.find(objw); // case insensitive!
+	if (eitdi!=sciExtraDesignationsIndexI18n.end())
+		return searchHP(eitdi.value());
+
 	// Search by GCVS name
 	auto it4 = varStarsIndexI18n.find(objw);
 	if (it4!=varStarsIndexI18n.end())
@@ -1719,6 +1763,64 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			break;
 	}
 
+	for (auto it = sciExtraDesignationsIndexI18n.lowerBound(objPrefix); it != sciExtraDesignationsIndexI18n.end(); ++it)
+	{
+		if (it.key().indexOf(bayerRegEx)==0 || it.key().indexOf(objPrefix)==0)
+		{
+			if (maxNbItem<=0)
+				break;
+			QStringList names = getSciExtraName(it.value()).split(" - ");
+			for (const auto &name : qAsConst(names))
+			{
+				if (useStartOfWords && name.startsWith(objPrefix, Qt::CaseInsensitive))
+					found = true;
+				else if (!useStartOfWords && name.contains(objPrefix, Qt::CaseInsensitive))
+					found = true;
+				else
+					found = false;
+
+				if (found)
+				{
+					if (maxNbItem<=0)
+						break;
+					result.append(name);
+					--maxNbItem;
+				}
+			}
+		}
+		else if (it.key().at(0) != objPrefix.at(0))
+			break;
+	}
+
+	for (auto it = sciExtraDesignationsIndexI18n.lowerBound(objw); it != sciExtraDesignationsIndexI18n.end(); ++it)
+	{
+		if (it.key().indexOf(bayerRegExCI)==0 || it.key().indexOf(objw)==0)
+		{
+			if (maxNbItem<=0)
+				break;
+			QStringList names = getSciExtraName(it.value()).split(" - ");
+			for (const auto &name : qAsConst(names))
+			{
+				if (useStartOfWords && name.startsWith(objPrefix, Qt::CaseInsensitive))
+					found = true;
+				else if (!useStartOfWords && name.contains(objPrefix, Qt::CaseInsensitive))
+					found = true;
+				else
+					found = false;
+
+				if (found)
+				{
+					if (maxNbItem<=0)
+						break;
+					result.append(name);
+					--maxNbItem;
+				}
+			}
+		}
+		else if (it.key().at(0) != objw.at(0))
+			break;
+	}
+
 	// Search for sci names for var stars
 	for (auto it = varStarsIndexI18n.lowerBound(objw); it != varStarsIndexI18n.end(); ++it)
 	{
@@ -1869,7 +1971,13 @@ void StarMgr::populateStarsDesignations()
 	if (fic.isEmpty())
 		qWarning() << "WARNING: could not load scientific star names file: stars/default/name.fab";
 	else
-		loadSciNames(fic);
+		loadSciNames(fic, false);
+
+	fic = StelFileMgr::findFile("stars/default/extra_name.fab");
+	if (fic.isEmpty())
+		qWarning() << "WARNING: could not load scientific star extra names file: stars/default/extra_name.fab";
+	else
+		loadSciNames(fic, true);
 
 	fic = StelFileMgr::findFile("stars/default/gcvs_hip_part.dat");
 	if (fic.isEmpty())

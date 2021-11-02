@@ -112,11 +112,14 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		const QString commonNameI18 = StarMgr::getCommonName(s->getHip());
 		const QString additionalNameI18 = StarMgr::getAdditionalNames(s->getHip());
 		const QString sciName = StarMgr::getSciName(s->getHip());
+		const QString sciExtraName = StarMgr::getSciExtraName(s->getHip());
 		const QString varSciName = StarMgr::getGcvsName(s->getHip());
 		const QString wdsSciName = StarMgr::getWdsName(s->getHip());
 		QStringList designations;
 		if (!sciName.isEmpty())
 			designations.append(sciName);
+		if (!sciExtraName.isEmpty())
+			designations.append(sciExtraName);
 		if (!varSciName.isEmpty() && !sciName.contains(varSciName, Qt::CaseInsensitive))
 			designations.append(varSciName);
 
