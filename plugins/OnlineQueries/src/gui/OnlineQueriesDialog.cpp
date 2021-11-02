@@ -28,6 +28,10 @@
 #include "StelGui.hpp"
 #include "StelTranslator.hpp"
 
+#ifndef WITH_QTWEBENGINE
+#include <QDesktopServices>
+#endif
+
 OnlineQueriesDialog::OnlineQueriesDialog(QObject* parent) :
 	StelDialogSeparate("OnlineQueries", parent),
 	plugin(Q_NULLPTR),
@@ -108,18 +112,29 @@ void OnlineQueriesDialog::createDialogContent()
 		ui->custom3PushButton->setText(qc_("(Custom 3)", "GUI label"));
 		ui->custom3PushButton->setEnabled(false);
 	}
+
+#ifdef WITH_QTWEBENGINE
 	connect(ui->backPushButton,    &QPushButton::clicked, [=]{view->triggerPageAction(QWebEnginePage::Back);});
 	connect(ui->forwardPushButton, &QPushButton::clicked, [=]{view->triggerPageAction(QWebEnginePage::Forward);});
+#else
+	ui->backPushButton->hide();
+	ui->forwardPushButton->hide();
+#endif
 }
 
 void OnlineQueriesDialog::setOutputHtml(QString html) const
 {
-    view->setHtml(html);
+	view->setHtml(html);
 }
 
 void OnlineQueriesDialog::setOutputUrl(QUrl url) const
 {
-    view->setUrl(url);
+#ifdef WITH_QTWEBENGINE
+	view->setUrl(url);
+#else
+	QDesktopServices::openUrl(url);
+	view->setHtml(QString("<p>" + qc_("Opened %1 in your webbrowser", "OnlineQueries") + "</p>").arg(url.host()));
+#endif
 }
 
 void OnlineQueriesDialog::setAboutHtml()

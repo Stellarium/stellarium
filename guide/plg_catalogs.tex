@@ -1103,17 +1103,18 @@ of objects. However, there are scientific websites which provide even
 more specialized information about particular objects. This plugin
 \newFeature{0.21.1} allows online access to several websites on a
 variety of special topics. To retrieve information, select the
-respective tab and press \button{Query}.
+respective tab and press \button{Query}. The result is displayed in a browser view\footnote{%
+For technical reasons, on some platforms the result is displayed in the system's default web browser.}.
 
 \begin{description}
 \item[Wikipedia] The free online encyclopedia provides information
   about many bright stars, the planets, moons and many asteroids, as
   well as many deep-sky objects. The lookup is based on the English
-  proper name and opens a new tab in your webbrowser.
+  proper name.
 \item[AAVSO] The \indexterm{International Variable Star
   Index}\footnote{\url{https://www.aavso.org/vsx/}} of the
   \indexterm{American Association of Variable Star Observers} (AAVSO)
-  provides data about variable stars in a new browser tab.
+  provides data about variable stars.
 \item[GCVS] The \indexterm{General Catalogue of Variable
   Stars}\footnote{\url{http://www.sai.msu.su/gcvs/}} of the Sternberg
   Astronomical Institute and the Institute of Astronomy of the Russian
@@ -1148,7 +1149,7 @@ Hipparcos number, or \texttt{false} to use the English name as key.
 
 
 \begin{center}
-{\scriptsize
+{\small
 \begin{tabular}{l|l|l}\toprule
 \emph{ID} & \emph{Type} & \emph{Default}\\\midrule
 ancientskies\_url    &string & (don't override)\\ % https://www.ancient-skies.org/api.php?apikey=fZdn9QsNdCAY4KggkV2T\&response=HTML\&entity=star\&catalog=HIPPARCOS\&id=\%1 \\
