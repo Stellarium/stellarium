@@ -72,6 +72,9 @@ static const int StarCatalogFormatVersion = 12;
 bool StarMgr::flagSciNames = true;
 bool StarMgr::flagAdditionalStarNames = true;
 bool StarMgr::flagDesignations = false;
+bool StarMgr::flagOldDoublesDesignation = false;
+bool StarMgr::flagVarStarsDesignation = false;
+bool StarMgr::flagHIPDesignation = false;
 QHash<int,QString> StarMgr::commonNamesMap;
 QHash<int,QString> StarMgr::commonNamesMapI18n;
 QHash<int,QString> StarMgr::additionalNamesMap;
@@ -443,6 +446,9 @@ void StarMgr::init()
 	setFlagLabels(conf->value("astro/flag_star_name",true).toBool());
 	setFlagAdditionalNames(conf->value("astro/flag_star_additional_names",true).toBool());
 	setDesignationUsage(conf->value("astro/flag_star_designation_usage", false).toBool());
+	setFlagOldDoublesDesignation(conf->value("astro/flag_star_designation_old_doubles", false).toBool());
+	setFlagVarStarsDesignation(conf->value("astro/flag_star_designation_var_stars", false).toBool());
+	setFlagHIPDesignation(conf->value("astro/flag_star_designation_hip", false).toBool());
 	setLabelsAmount(conf->value("stars/labels_amount",3.).toDouble());
 
 	objectMgr->registerStelObjectMgr(this);

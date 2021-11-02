@@ -51,9 +51,12 @@ QString Star1::getDesignation() const
 		if (StarMgr::getFlagSciNames())
 		{
 			starNames << StarMgr::getSciName(getHip()).split(" - ");
-			starNames << StarMgr::getSciExtraName(getHip()).split(" - ");
-			starNames << StarMgr::getGcvsName(getHip());
-			starNames << QString("HIP %1").arg(getHip());
+			if (StarMgr::getFlagOldDoublesDesignation())
+				starNames << StarMgr::getSciExtraName(getHip()).split(" - ");
+			if (StarMgr::getFlagVarStarsDesignation())
+				starNames << StarMgr::getGcvsName(getHip());
+			if (StarMgr::getFlagHIPDesignation())
+				starNames << QString("HIP %1").arg(getHip());
 		}
 		starNames.removeAll(QString(""));
 		if (starNames.count()>0)

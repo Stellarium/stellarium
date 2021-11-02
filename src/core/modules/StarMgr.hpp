@@ -120,6 +120,21 @@ class StarMgr : public StelObjectModule
 		   WRITE setDesignationUsage
 		   NOTIFY designationUsageChanged
 		   )
+	Q_PROPERTY(bool flagOldDoublesDesignation
+		   READ getFlagOldDoublesDesignation
+		   WRITE setFlagOldDoublesDesignation
+		   NOTIFY flagOldDoublesDesignationChanged
+		   )
+	Q_PROPERTY(bool flagVarStarsDesignation
+		   READ getFlagVarStarsDesignation
+		   WRITE setFlagVarStarsDesignation
+		   NOTIFY flagVarStarsDesignationChanged
+		   )
+	Q_PROPERTY(bool flagHIPDesignation
+		   READ getFlagHIPDesignation
+		   WRITE setFlagHIPDesignation
+		   NOTIFY flagHIPDesignationChanged
+		   )
 
 public:
 	StarMgr(void);
@@ -207,6 +222,21 @@ public slots:
 	void setDesignationUsage(const bool flag) { if(flagDesignations!=flag){ flagDesignations=flag; emit designationUsageChanged(flag);}}
 	//! Get flag for usage designations of stars for their labels instead common names.
 	bool getDesignationUsage(void) {return flagDesignations; }
+
+	//! Set flag for usage old designations of double stars.
+	void setFlagOldDoublesDesignation(const bool flag) { if(flagOldDoublesDesignation!=flag){ flagOldDoublesDesignation=flag; emit flagOldDoublesDesignationChanged(flag);}}
+	//! Get flag for usage old designations of double stars.
+	static bool getFlagOldDoublesDesignation(void) {return flagOldDoublesDesignation; }
+
+	//! Set flag for usage designations of variable stars.
+	void setFlagVarStarsDesignation(const bool flag) { if(flagVarStarsDesignation!=flag){ flagVarStarsDesignation=flag; emit flagVarStarsDesignationChanged(flag);}}
+	//! Get flag for usage designations of variable stars.
+	static bool getFlagVarStarsDesignation(void) {return flagVarStarsDesignation; }
+
+	//! Set flag for usage Hipparcos catalog designations of stars.
+	void setFlagHIPDesignation(const bool flag) { if(flagHIPDesignation!=flag){ flagHIPDesignation=flag; emit flagHIPDesignationChanged(flag);}}
+	//! Get flag for usage Hipparcos catalog designations of stars.
+	static bool getFlagHIPDesignation(void) {return flagHIPDesignation; }
 
 	//! Show additional star names.
 	void setFlagAdditionalNames(bool flag) { if (flagAdditionalStarNames!=flag){ flagAdditionalStarNames=flag; emit flagAdditionalNamesDisplayedChanged(flag);}}
@@ -390,6 +420,9 @@ signals:
 	void starLabelsDisplayedChanged(const bool displayed);
 	void starsDisplayedChanged(const bool displayed);
 	void designationUsageChanged(const bool flag);
+	void flagOldDoublesDesignationChanged(const bool flag);
+	void flagVarStarsDesignationChanged(const bool flag);
+	void flagHIPDesignationChanged(const bool flag);
 	void flagAdditionalNamesDisplayedChanged(const bool displayed);
 	void labelsAmountChanged(double a);
 
@@ -510,6 +543,9 @@ private:
 	static bool flagSciNames;
 	static bool flagAdditionalStarNames;
 	static bool flagDesignations;
+	static bool flagOldDoublesDesignation;
+	static bool flagVarStarsDesignation;
+	static bool flagHIPDesignation;
 
 	StelTextureSP texPointer;		// The selection pointer texture
 
