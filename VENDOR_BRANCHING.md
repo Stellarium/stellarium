@@ -4,31 +4,31 @@
 
 ## Introduction
 
-Stellarium is constantly benefiting from open source artifacts and enriched with text/data/source files that are **copy-pasted** from places outside of Stellarium.
+Stellarium is constantly benefiting from open source artifacts and being enriched with text/data/source files that are **copy-pasted** from places outside of Stellarium.
 
-The basic problem with copy-pasting external artifacts is **code (or data) rot** (and also: "*copy-paste is evil*"). More in detail, **external artifact changes** will not magically appear in Stellarium.
+The basic problem with the copy-pasting of external artifacts is **code (or data) rot** (and also: "*copy-paste is evil*"). More in detail, **external changes** will not magically appear in Stellarium.
 
-Sometimes this can be solved by using package managers that automate the importing of external "stuff" (typically code) and allow to fine tune which version is to be imported; Python's `pip -e` is a great example of this. But package managers do not allow to modify the imported code out of the box.
+Sometimes this can be solved by using package managers that automate the importing of external "stuff" (typically code) and allow to fine tune which version is to be imported; Python's `pip -e` is a great example of this. But package managers do not allow to modify the imported code out of the box *and* benefit from external updates.
 
-Sometimes this is solved by manual labor: porting the external changes in Stellaium. Obviously not many developer will like this kind of work, and it is also prone to bugs.
+Sometimes this problenm is thensolved by manual labor: porting the external changes in Stellarium, a laborous approach prone to bugs.
 
 ### Examples:
 
-Here are some existing artifacts that over the years have been copy-pasted in Stellarium:
+Here are some existing artifacts that have been copy-pasted in Stellarium over the years:
 
-- geonames data (https://www.geonames.org/recent-changes.html), https://github.com/Stellarium/stellarium-data/tags
-- quasar data (https://github.com/Stellarium/stellarium/blob/master/plugins/Quasars/util/quasars.tsv)
+- geonames data ([external changes](https://www.geonames.org/recent-changes.html)), https://github.com/Stellarium/stellarium-data/tags
+- [quasar data](https://github.com/Stellarium/stellarium/blob/master/plugins/Quasars/util/quasars.tsv)
 - Almagest data (minor fixes, of course - this is essentially frozen data)
 - HTC algorithms (Helene, Telesto, and Calypso (Lagrangian satellites of Dione) - taken from ftp://ftp.imcce.fr/pub/ephem/satel/htc20/htc20.f ? )
 - various libraries under [src/external](https://github.com/Stellarium/stellarium/tree/master/src/external):
 	- the [gsatellite directory](https://github.com/Stellarium/stellarium/tree/master/plugins/Satellites/src/gsatellite) seems to contain a lot of external code that has been modified locally.
-- The SPG4/SDPG4 algorithm (https://en.wikipedia.org/wiki/Simplified_perturbations_models that was updated 2020-03-12) (used in https://github.com/Stellarium/stellarium/blob/e75b00e6c249747c198fe0e2badd77a4adab9415/plugins/Satellites/src/Satellites.hpp#L56-L57)
-- and, of course, how could we forget: the [various ephemeris algorithms](https://github.com/Stellarium/stellarium/commits/master/src/core/planetsephems) (a good example is `jpleph.cpp`). Some random googling in an attempt to find the originals reveals these (also in use in other software such as Celestia, where the same problem exists), just to illustrate the issue:
+- The SPG4/SDPG4 algorithm (see also [WP](https://en.wikipedia.org/wiki/Simplified_perturbations_models) updated 2020-03-12) (used in the [satellite plugin](https://github.com/Stellarium/stellarium/blob/e75b00e6c249747c198fe0e2badd77a4adab9415/plugins/Satellites/src/Satellites.hpp#L56-L57) )
+- and, of course, how could we forget: the [various ephemeris algorithms](https://github.com/Stellarium/stellarium/commits/master/src/core/planetsephems) (a good example is `jpleph.cpp`). Their true soource is [JPL](https://ssd.jpl.nasa.gov/planets/eph_export.html) Some random googling shows that the problem exists elsewhere too (e.g. Celestia):
 	- https://github.com/Bill-Gray/jpl_eph/blob/master/jpleph.h
-	- http://jsoc.stanford.edu/cvs/JSOC/proj/timed/apps/Attic/jpleph.c?hidecvsroot=1&search=None&hideattic=1&sortby=rev&logsort=date&rev=1.1&content-type=text%2Fvnd.viewcvs-markup&diff_format=h
+	- [Stanford JSOC](http://jsoc.stanford.edu/cvs/JSOC/proj/timed/apps/Attic/jpleph.c?hidecvsroot=1&search=None&hideattic=1&sortby=rev&logsort=date&rev=1.1&content-type=text%2Fvnd.viewcvs-markup&diff_format=h)
 	- https://apollo.astro.amu.edu.pl/PAD/pmwiki.php?n=Dybol.JPLEph 
-	- http://celestia.simulatorlabbs.com/CelSL/src/celephem/
-- [SOFA sourcecode](https://www.iausofa.org/) (*Standards Of Fundamental Astronomy*), also mentioned in [Planet.cpp](https://github.com/Stellarium/stellarium/blob/ba80d33d4bc83d72fc15cca53f798cd9439482cf/src/core/modules/Planet.cpp#L1648): see the [changes](https://www.iausofa.org/current.html) (especially the [C library](https://www.iausofa.org/current_C.html), the [archive](https://www.iausofa.org/archive.html))
+	- [Celestia](http://celestia.simulatorlabbs.com/CelSL/src/celephem/)
+- [SOFA sourcecode](https://www.iausofa.org/) (*Standards Of Fundamental Astronomy*), also mentioned in [Planet.cpp](https://github.com/Stellarium/stellarium/blob/ba80d33d4bc83d72fc15cca53f798cd9439482cf/src/core/modules/Planet.cpp#L1648): see the [recent changes](https://www.iausofa.org/current.html) (especially the [C library](https://www.iausofa.org/current_C.html), and the [archive](https://www.iausofa.org/archive.html))
 
 Potential candidates, other examples
 
@@ -40,11 +40,13 @@ Although some examples above are unlikely to ever change - or be very ephemeral 
 
 ### The problem
 
-Notice how it is not always obvious to trace back the original files. In the case of ephemerides, these reside in "ancient", core Stellarium files, it is extremely likely that they were copied (and *maybe* recent changes are incorporated in Stellarium). One aspect of the vendor branch procedure details how to include such meta information so as to help find back the source at all times.
+Notice how it is not always obvious to trace back the original files. In the case of ephemeride routines, these reside in "ancient", core Stellarium files, it is extremely likely that they were copied (and *maybe* recent changes are incorporated in Stellarium). One aspect of the vendor branch procedure details how to include such meta information so as to help find back the source at all times.
 
 The external version of such artifacts will often continue to evolve, but these modifications obviously will not be magically reflected in our repository, thus *sometimes, if not often* leading to artifacts slowly getting totally outdated (hence the term "code rot"). 
 
 Importing external artifacts therefore requires a specific (and in this case a *simple* as well as generic) approach: the **Vendor Branch** mechanism. Other approaches exist, such as subtrees and submodules (in case Git is used for the external artifacts), but have inconveniences and are not discussed here; the proposed approach is *simple to apply to novice programmers*. The approach is valid in any VCS, such as Git, Mercurial, ClearCase, TFS, cvs, you name it.
+
+Importing external artefacts in vendor branches will also provide insight in what changed in those artefacts, just by inspecting the "diff" between successive vendor versions. Normally such changes should also be announced the vendor.
 
 ## The solution
 1. Keep external information alive (and updated) on a **separate** branch, called a "**vendor branch**" (e.g. ``vendor/geonames``). Every copied dataset/tool/sourcecode lives in its own vendor branch. A vendor branch tracks a *pristine* copy/mirror of the external data.
@@ -113,6 +115,16 @@ In some cases, merging vendor updates may become too difficult if not impossible
 ### Importing vendor code written in other languages
 
 If the artifact is not usable without extensive rewriting (e.g. Fortran code in a C++ project), it might still make sense to vendor the original file and keep it as a neutral (uncompiled) text file that will serve as an excellent reference.
+
+This also applies for cases where explanatory/example (pseudo) sourcecode is offered; this code is essential documentation that the vendor will update occasionally. 
+
+A typical example is the set of [JPL DExxx development ephemerides](https://ssd.jpl.nasa.gov/planets/eph_export.html), that are accompanied by important documentation *that is to be stored in the vendor branch too*:
+
+- https://ssd.jpl.nasa.gov/ftp/eph/planets/ascii/ascii_format.txt
+- https://ssd.jpl.nasa.gov/ftp/eph/planets/fortran/ (complete!) (includes https://ssd.jpl.nasa.gov/ftp/eph/planets/fortran/userguide.txt)
+- https://ssd.jpl.nasa.gov/ftp/eph/planets/other_readers.txt
+
+Should any of those "other readers" be used in any way in Stellarium, then these belong in separate vendor branches.
 
 ### How to deal with module files that are updated externally and still not vendored internally
 
