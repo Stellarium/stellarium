@@ -10,11 +10,13 @@ The basic problem with the copy-pasting of external artifacts is **code (or data
 
 Sometimes this can be solved by using package managers that automate the importing of external "stuff" (typically code) and allow to fine tune which version is to be imported; Python's `pip -e` is a great example of this. But package managers do not allow to modify the imported code out of the box *and* benefit from external updates.
 
-Sometimes this problenm is thensolved by manual labor: porting the external changes in Stellarium, a laborous approach prone to bugs.
+Sometimes this problem is then solved by manual labor: porting the external changes in Stellarium, a laborous approach prone to bugs.
+
+Usually references of some form are added to the source code, e.g. ftp, snail mail, http, ... The problem is that these references might disappear at some point in the future.
 
 ### Examples:
 
-Here are some existing artifacts that have been copy-pasted in Stellarium over the years:
+Here are several existing artifacts that have been copy-pasted in Stellarium over the years:
 
 - geonames data ([external changes](https://www.geonames.org/recent-changes.html)), https://github.com/Stellarium/stellarium-data/tags
 - [quasar data](https://github.com/Stellarium/stellarium/blob/master/plugins/Quasars/util/quasars.tsv)
@@ -23,7 +25,7 @@ Here are some existing artifacts that have been copy-pasted in Stellarium over t
 - various libraries under [src/external](https://github.com/Stellarium/stellarium/tree/master/src/external):
 	- the [gsatellite directory](https://github.com/Stellarium/stellarium/tree/master/plugins/Satellites/src/gsatellite) seems to contain a lot of external code that has been modified locally.
 - The SPG4/SDPG4 algorithm (see also [WP](https://en.wikipedia.org/wiki/Simplified_perturbations_models) updated 2020-03-12) (used in the [satellite plugin](https://github.com/Stellarium/stellarium/blob/e75b00e6c249747c198fe0e2badd77a4adab9415/plugins/Satellites/src/Satellites.hpp#L56-L57) )
-- and, of course, how could we forget: the [various ephemeris algorithms](https://github.com/Stellarium/stellarium/commits/master/src/core/planetsephems) (a good example is `jpleph.cpp`). Their true soource is [JPL](https://ssd.jpl.nasa.gov/planets/eph_export.html) Some random googling shows that the problem exists elsewhere too (e.g. Celestia):
+- and, of course, how could we forget: the [various ephemeris algorithms](https://github.com/Stellarium/stellarium/commits/master/src/core/planetsephems) (a good example is `jpleph.cpp` and `vsop87.c`). Their true source is [JPL](https://ssd.jpl.nasa.gov/planets/eph_export.html) and VSOP ([FTP](ftp://ftp.imcce.fr/pub/ephem/planets/vsop87)). Some random googling shows that the problem exists elsewhere too (e.g. Celestia):
 	- https://github.com/Bill-Gray/jpl_eph/blob/master/jpleph.h
 	- [Stanford JSOC](http://jsoc.stanford.edu/cvs/JSOC/proj/timed/apps/Attic/jpleph.c?hidecvsroot=1&search=None&hideattic=1&sortby=rev&logsort=date&rev=1.1&content-type=text%2Fvnd.viewcvs-markup&diff_format=h)
 	- https://apollo.astro.amu.edu.pl/PAD/pmwiki.php?n=Dybol.JPLEph 
@@ -125,6 +127,25 @@ A typical example is the set of [JPL DExxx development ephemerides](https://ssd.
 - https://ssd.jpl.nasa.gov/ftp/eph/planets/other_readers.txt
 
 Should any of those "other readers" be used in any way in Stellarium, then these belong in separate vendor branches.
+
+### example: VSOP87 data
+
+VSOP87 is outdated, but the approach remains the same for VSOP2013 (as well as JPL).
+
+The data available as VSOP [FTP](ftp://ftp.imcce.fr/pub/ephem/planets/vsop87) has - a long time ago - been manually (and heroically) merged/transformed into a [sourcecode file](https://github.com/Stellarium/stellarium/blob/v0.21.2/src/core/planetsephems/vsop87.c). Such a transformed file is very difficult to update should a change appeaqr in the original. Note that the current VSOP87 artifacts seem to be the ultimate (maybe only) version (and at first sight there were no modifications *- wow, code without bugs...*), later ephemeris iterations seem to take a different approach (eg VSOP2010, VSOP2013 using Chebyshev polynomials rather than elliptic elements). In 2013 (after VSOP2013), a small change happened in VSOP2010; such a change could have been identified with correct vendor branching (but was also [announced](ftp://ftp.imcce.fr/pub/ephem/planets/vsop2010/revision-notice.pdf).
+
+Including the raw data files would be ideal, but a massive overkill with an unacceptable impact on executable size as well as startup time. 
+
+A solution could be to use scripts that process the original data files available via ftp, and convert the data files in a form than can be included in Stellarium; this is what very likely occurred when creating `vsop87.c`: notice how that file is in fact a huge data file with a small executable "appendix". Scripts should be run that "somehow" transform the VSOP data files into an `.hpp` file that is then included in the `vsop87.c` file, that in itself refers to the example Fortran code that will be managed in the vendor branch (see below). Normally, generated files (such as the proposed `.hpp`) should not be versioned, but it would be too heavy to put the burden to recompile those files every time. Instead, the generation should be left to the core Stellarium team. The generated header file should certainly bear a big wanring "THIS IS A GENERATED FILE" (with sufficient explanation by what script it was generated).
+
+What belongs in the vendor branch of (eg) [VSOP2013](ftp://ftp.imcce.fr/pub/ephem/planets/vsop2013) (e.g. branch AND directory `vendor/IMCCE.FR/ephem/planets/VSOP/2013`) ?
+
+- PDF/Word/text files
+- Fortran example code (`.f`)
+
+These files describe formats and algorithms and therefore represent the essential documentation that developers need in order to maintain the transformation scripts and `.C` files, without having to dig for them on the Internet. (It is unlikely that these files will change, nevertheless they are managed by an outside entity and therefore should be tracked with a vendor branch.)
+
+**Optionally**, a copy of the data files *could* be stored at [Stellarium-data](https://github.com/Stellarium/stellarium-data/), but we may assume that [IMCCE](https://www.imcce.fr/) (*L’Institut de mécanique céleste et de calcul des éphémérides*) can offer sufficient guarantees to maintain the data for a very long time period.
 
 ### How to deal with module files that are updated externally and still not vendored internally
 
