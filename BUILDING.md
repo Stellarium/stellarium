@@ -96,6 +96,10 @@ export LD_LIBRARY_PATH=$QTDIR/lib:$LD_LIBRARY_PATH
 ./stellarium
 ```
 
+#### Linux without QtWebEngine
+
+On some distributions (known for ARM systems, like Raspberry OS (Raspbian)) there is no QtWebEngine. You must call cmake with the -DWITH_QTWEBENGINE=0 option in the next step. The result is shown in the system webbrowser.
+
 #### MacOS
 
 - Install the latest version of [Apple's Developer Tools](https://developer.apple.com/xcode/). 
@@ -140,19 +144,27 @@ You may using the distribution from the Qt Company to install the [latest stable
 export PATH=~/Qt/5.12/clang_64/bin:$PATH
 ```
 
+#### MacOS on ARM without QtWebEngine
+
+On the new ARM-based Macs, there is no support for QtWebEngine. You must call cmake with the -DWITH_QTWEBENGINE=0 option in the next step. The result is shown in the system webbrowser.
+
 #### Windows
 
 - Install the [Microsoft Visual Studio Community 2017](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=15) or [Microsoft Visual Studio Community 2019](https://visualstudio.microsoft.com/downloads/) (or "better" - e.g. Professional) from Microsoft Website. Qt 5.15 requires MSVC2019.
 - To get the source code of Stellarium you need to install some git environment. [Git for Windows](https://git-scm.com/download/win) seems ok, or the Git Bash and Git GUI, whatever seems suitable for you. But it is not necessary.
-- Get the [latest version of Qt from Qt Company](http://www.qt.io/download-open-source/). We recommend to use Qt 5.12 or later.  You must select Qt Script and msvc2017/msvc2019 among so many checkboxes.
+- Get the [latest version of Qt5 from Qt Company](http://www.qt.io/download-open-source/). We recommend to use Qt 5.12 or later.  You must select Qt Script and msvc2017/msvc2019 among so many checkboxes.
 
 After installing all required libraries and tools you should configure the build environment.
 
 Add `C:\Qt\Qt5.15.11` to your `PATH` variable - you should add string `C:\Qt\Qt5.15.11\msvc2019;C:\Qt\Qt5.15.11\msvc2019\bin` for 32-bit or `C:\Qt\Qt5.15.11\msvc2019_64;C:\Qt\Qt5.15.11\msvc2019_64\bin` for 64-bit to `PATH` variable.
 (Replace the version numbers of Qt and the version of Visual Studio (2017/2019) with the version that you have installed)
 
-**Known limitations with Qt 5.15.x:**
+**ANGLE issues:**
+
 - The ANGLE library should be taken from Qt 5.6, all later versions don't work and can be downloaded for [x64](https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/libGLES-x64.zip) and [x32](https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/libGLES-Win32.zip). (Don't ask us why. Find a solution!)
+
+**Known limitations with Qt 5.15.x:**
+
 - Qt 5.15.0 and 5.15.1 have a buggy `lconvert` and should not be used. Also `lconvert` on Qt 5.15.2 still allocates GBs of memory for translation of a few MBs of strings, if it can get it.
 
 **Note:** After changes to the `PATH` variable you should reboot the computer to apply those changes.
@@ -314,10 +326,30 @@ List of supported parameters (passed as `-DPARAMETER=VALUE`):
 | USE_PLUGIN_SCENERY3D          | bool   | ON      | Enable building the 3D Scenery plugin
 | USE_PLUGIN_REMOTECONTROL      | bool   | ON      | Enable building the Remote Control plugin
 | USE_PLUGIN_REMOTESYNC         | bool   | ON      | Enable building the Remote Sync plugin
+| WITH_QTWEBENGINE              | bool   | ON      | Enable using QtWebEngine. This must be disabled on ARM platforms!
 
 Notes:
  \* `/usr/local` on Unix-like systems, `C:\Program Files` or `C:\Program Files (x86)`
    on Windows depending on OS type (32 or 64 bit) and build configuration.
+
+## Test-run compiled program without installing
+
+After compilation, you may run the program when you are in the right directory. 
+
+### Linux
+Assuming the stellarium sources are in DEV/stellarium and build in DEV/stellarium/build/unix
+```
+cd DEV/stellarium
+./build/unix/src/stellarium
+```
+
+### Windows
+
+Most users will work with QtCreator which sets its own paths for debug and release builds. 
+Running with the designated buttons (green arrow) from inside QtCreator should work. 
+You can also create a link for the executable in the src subdirectory of the build directory. 
+Move this link to the source directory and edit its properties to run inside the source directory. 
+Then you can double-click this link, or even place it in your task bar.
 
 ## Code testing
 
