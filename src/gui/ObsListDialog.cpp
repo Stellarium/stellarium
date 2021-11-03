@@ -259,6 +259,14 @@ void ObsListDialog::obsListHighLightAllButtonPressed()
 */
 void ObsListDialog::obsListClearHighLightButtonPressed()
 {
+    clearHighlight();
+}
+
+/*
+ * Clear highlight
+*/
+void ObsListDialog::clearHighlight()
+{
     objectMgr->unSelect();
     GETSTELMODULE ( HighlightMgr )->cleanHighlightList();
     // Clear labels
@@ -296,7 +304,7 @@ void ObsListDialog::invokeObsListCreateEditDialog ( string listUuid )
 {
     createEditDialog_instance = ObsListCreateEditDialog::Instance ( listUuid );
     connect ( createEditDialog_instance, SIGNAL ( exitButtonClicked() ), this, SLOT ( obsListCreateEditDialogClosed() ) );
-    createEditDialog_instance->setListName ( listName );
+    createEditDialog_instance->setListName ( listName_ );
     createEditDialog_instance->setVisible ( true );
 }
 
@@ -341,12 +349,14 @@ void ObsListDialog::populateListNameInComboBox ( QVariantMap map )
     QMap<QString, QVariant>::iterator i;
     ui->obsListComboBox->clear();
     listNamesModel.clear();
+    listName_.clear();
     for ( i = map.begin(); i != map.end(); ++i ) {
         if ( i.value().canConvert<QVariantMap>() ) {
             QVariant var = i.value();
             QVariantMap data = var.value<QVariantMap>();
             QString listName = data.value ( KEY_NAME ).value<QString>();
             listNamesModel.append ( listName );
+            listName_.append(listName);
         }
     }
     listNamesModel.sort ( Qt::CaseInsensitive );
@@ -891,12 +901,18 @@ void ObsListDialog::obsListDeleteButtonPressed()
                 objectMgr->unSelect();
                 observingListItemCollection.clear();
 
-                // Clear model
+                // Clear row in model
                 obsListListModel->removeRows ( 0,obsListListModel->rowCount() );
                 ui->obsListCreationDateLineEdit->setText ( "" );
                 ui->obsListDescriptionTextEdit->setPlainText ( "" );
                 int currentIndex = ui->obsListComboBox->currentIndex();
                 ui->obsListComboBox->removeItem ( currentIndex );
+                
+                //TODO pas utile car listeName_ est réinitialiséé et rechargée dans loadListsName().
+                //TODO a supprimer après les tests finaux.
+                //QString listName = ui->obsListComboBox->itemText(currentIndex);
+                //listName_.removeOne(listName);
+                
                 selectedObservingListUuid = "";
 
 
@@ -904,6 +920,9 @@ void ObsListDialog::obsListDeleteButtonPressed()
                 StelJsonParser::write ( newMap, &jsonFile );
                 jsonFile.flush();
                 jsonFile.close();
+                
+                clearHighlight();
+                loadListsName();
 
                 if ( ui->obsListComboBox->count() > 0 ) {
                     ui->obsListComboBox->setCurrentIndex ( 0 );
@@ -943,6 +962,9 @@ void ObsListDialog::obsListCreateEditDialogClosed()
         ui->obsListComboBox->setCurrentIndex ( index );
         loadSelectedObservingList ( index );
     }
+    
+    //TODO remove after
+    qDebug() << "obsListCreateEditDialogClosed() before kill ObsListCreateEditDialog";
 
     ObsListCreateEditDialog::kill();
     createEditDialog_instance = Q_NULLPTR;

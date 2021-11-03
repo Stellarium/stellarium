@@ -353,13 +353,20 @@ void ObsListCreateEditDialog::obsListRemoveObjectButtonPressed()
 */
 void ObsListCreateEditDialog::saveObservedObject()
 {
+    bool isFileExits = false;
     QString listName = ui->nameOfListLineEdit->text();
     if ( observingListJsonPath.isEmpty() || listName.isEmpty() ) {
         qWarning() << "[ObservingList Creation/Edition] Error saving observing list";
         return;
     }
+    
 
     QFile jsonFile ( observingListJsonPath );
+    
+    if(jsonFile.exists()){
+        isFileExits = true;
+    }
+    
     if ( !jsonFile.open ( QIODevice::ReadWrite|QIODevice::Text ) ) {
         qWarning() << "[ObservingList Creation/Edition] observing list can not be saved. A file can not be open for reading and writing:"
                    << QDir::toNativeSeparators ( observingListJsonPath );
@@ -446,6 +453,26 @@ void ObsListCreateEditDialog::saveObservedObject()
             oblListUuid = QString::fromStdString ( listUuid_ );
         }
 
+        if(ui->obsListDefaultListCheckBox->isChecked()){
+            mapFromJsonFile.insert ( KEY_DEFAULT_LIST_UUID, oblListUuid );
+        } else {
+            QString defaultListUuid = mapFromJsonFile.value ( KEY_DEFAULT_LIST_UUID ).toString();
+            if(defaultListUuid.isEmpty()){
+                mapFromJsonFile.insert ( KEY_DEFAULT_LIST_UUID, "" );
+            }
+        }
+        
+        //TODO delete after
+        /*if(!isFileExits && !ui->obsListDefaultListCheckBox->isChecked()){
+            mapFromJsonFile.insert ( KEY_DEFAULT_LIST_UUID, "" );
+        } else if(ui->obsListDefaultListCheckBox->isChecked()){
+            mapFromJsonFile.insert ( KEY_DEFAULT_LIST_UUID, oblListUuid );
+        } else {
+            QString defaultListUuid = mapFromJsonFile.value ( KEY_DEFAULT_LIST_UUID ).toString();
+            if(defaultListUuid.isEmpty()){
+                mapFromJsonFile.insert ( KEY_DEFAULT_LIST_UUID, "" );
+            }
+        }
         if ( ui->obsListDefaultListCheckBox->isChecked() ) {
             mapFromJsonFile.insert ( KEY_DEFAULT_LIST_UUID, oblListUuid );
         } else {
@@ -453,7 +480,7 @@ void ObsListCreateEditDialog::saveObservedObject()
             if ( defaultListUuid == oblListUuid ) {
                 mapFromJsonFile.insert ( KEY_DEFAULT_LIST_UUID, "" );
             }
-        }
+        }*/
 
         mapFromJsonFile.insert ( KEY_VERSION, FILE_VERSION );
         mapFromJsonFile.insert ( KEY_SHORT_NAME, SHORT_NAME_VALUE );

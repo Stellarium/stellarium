@@ -60,7 +60,7 @@ private:
     QHash<QString, observingListItem> observingListItemCollection;
     QList<int> highlightLabelIDs;
     QString defaultListUuid_;
-    QList<QString> listName;
+    QList<QString> listName_;
     QStringList listNamesModel;
 
     //! Set header names for observing list table
@@ -107,6 +107,9 @@ private:
     
     //! Sort the obsListTreeView by the column name given in parameter
     void sortObsListTreeViewByColumnName(QString columnName);
+    
+    //! Clear highlights
+    void clearHighlight();
 
 
 public slots:
