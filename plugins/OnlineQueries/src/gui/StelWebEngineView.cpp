@@ -19,6 +19,9 @@
  */
 
 #include "StelWebEngineView.hpp"
+
+#ifdef WITH_QTWEBENGINE
+
 #include <QMouseEvent>
 #include <QApplication>
 
@@ -52,3 +55,8 @@ void StelWebEngineView::mouseReleaseEvent(QMouseEvent *e)
 		    QWidget::mouseReleaseEvent(e);
 	}
 }
+#else
+StelWebEngineView::StelWebEngineView(QWidget *parent): QTextBrowser(parent)
+{
+}
+#endif

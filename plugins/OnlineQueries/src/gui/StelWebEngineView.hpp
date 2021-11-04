@@ -21,6 +21,8 @@
 #ifndef STELWEBENGINEVIEW_HPP
 #define STELWEBENGINEVIEW_HPP
 
+#ifdef WITH_QTWEBENGINE
+
 #include <QWebEngineView>
 
 //! @class StelWebEngineView A trivial extension of QWebEngineView. 
@@ -39,4 +41,16 @@ protected:
 	virtual void mouseReleaseEvent(QMouseEvent *e) Q_DECL_OVERRIDE;
 };
 
+#else
+#include <QTextBrowser>
+
+//! @class StelWebEngineView Almost dummy class identical to @class QTextBrowser.
+//! This is compiled on platforms without QWebEngine. It has QTextBrowser's setHtml(),
+//! but any URL opening must be forwarded to the system's webbrowser.
+class StelWebEngineView: public QTextBrowser {
+	Q_OBJECT
+public:
+	StelWebEngineView(QWidget *parent=Q_NULLPTR);
+};
+#endif
 #endif

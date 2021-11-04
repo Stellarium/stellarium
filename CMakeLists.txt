@@ -375,6 +375,8 @@ IF(ENABLE_SCRIPTING)
      ENDIF()
 ENDIF()
 
+SET(WITH_QTWEBENGINE 1 CACHE BOOL "Enable this if your platform supports it.")
+
 SET(STELLARIUM_GUI_MODE Standard CACHE STRING "Choose the type of GUI to build, options are: Standard, None")
 
 SET(GENERATE_PACKAGE_TARGET 1 CACHE BOOL "Set to 1 or true if you want to have make package target")
