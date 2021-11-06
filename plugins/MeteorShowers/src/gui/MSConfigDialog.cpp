@@ -230,7 +230,7 @@ void MSConfigDialog::setAboutHtml()
 		"</tr>"
 		"<tr>"
 			"<td><strong>" + q_("Contributors") + ":</strong></td>"
-			"<td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td>"
+			"<td>Alexander Wolf</td>"
 		"</tr>"
 	"</table>"
 	"<p>"

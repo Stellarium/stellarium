@@ -94,7 +94,6 @@ void CalendarsDialog::createDialogContent()
 
 	connectBoolProperty(ui->julianCheckBox,             "Calendars.flagShowJulian");
 	connectBoolProperty(ui->gregorianCheckBox,          "Calendars.flagShowGregorian");
-	connectBoolProperty(ui->gregorianCheckBox,          "Calendars.flagShowGregorian");
 	connectBoolProperty(ui->isoCheckBox,                "Calendars.flagShowISO");
 	connectBoolProperty(ui->romanCheckBox,              "Calendars.flagShowRoman");
 	connectBoolProperty(ui->olympicCheckBox,            "Calendars.flagShowOlympic");

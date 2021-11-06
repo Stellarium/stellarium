@@ -268,7 +268,7 @@ void TelescopeDialog::setAboutText()
 	aboutPage += "<tr><td>Gion Kunz &lt;gion.kunz@gmail.com&gt; (" + q_("ASCOM Telescope Client") + ")</td></tr>";
 	aboutPage += "<tr><td>Petr Kubánek (" + q_("RTS2 support") + ")</td></tr>";
 	aboutPage += "<tr><td>Alessandro Siniscalchi &lt;asiniscalchi@gmail.com&gt; (" + q_("INDI Telescope Client") + ")</td></tr>";
-	aboutPage += "<tr><td rowspan=3><strong>" + q_("Contributors") + ":</strong></td><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
+	aboutPage += "<tr><td rowspan=3><strong>" + q_("Contributors") + ":</strong></td><td>Alexander Wolf</td></tr>";
 	aboutPage += "<tr><td>Michael Heinz</td></tr>";
 	aboutPage += "<tr><td>Alexandros Kosiaris</td></tr>";
 	aboutPage += "</table>";
