@@ -538,8 +538,7 @@ public slots:
 	//! @todo allow alpha in images?
 	//! @param id a string ID to be used when referring to this
 	//! image (e.g. when changing the displayed status or deleting it.
-	//! @param filename the file name of the image.  If a relative
-	//! path is specified, "scripts/" will be prefixed before the
+	//! @param filename the file name of the image. "scripts/" will be prefixed before the
 	//! image is searched for using StelFileMgr.
 	//! @param lon0 The right ascension/longitude/azimuth of the first corner of the image in degrees (bottom left)
 	//! @param lat0 The declination/latitude/altitude of the first corner of the image in degrees (bottom left)
