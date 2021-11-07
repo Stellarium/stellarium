@@ -1083,9 +1083,9 @@
                 <number>22</number>
                </property>
                <item>
-                <widget class="QCheckBox" name="oldDoubleStarsDesignationsCheckBox">
+                <widget class="QCheckBox" name="dblStarsDesignationsCheckBox">
                  <property name="toolTip">
-                  <string>Old designations of double stars</string>
+                  <string>Show traditional designations of double stars if proper name, Bayer or Flamsteed designations is not exist for the star.</string>
                  </property>
                  <property name="text">
                   <string comment="double stars">Dbl. stars</string>
@@ -1095,7 +1095,7 @@
                <item>
                 <widget class="QCheckBox" name="varStarsDesignationsCheckBox">
                  <property name="toolTip">
-                  <string>Designations of variable stars</string>
+                  <string>Show designations of variable stars if proper name, Bayer or Flamsteed designations, or traditional designation of double star is not exist for the star.</string>
                  </property>
                  <property name="text">
                   <string comment="variable stars">Var. stars</string>
@@ -1105,7 +1105,7 @@
                <item>
                 <widget class="QCheckBox" name="hipDesignationsCheckBox">
                  <property name="toolTip">
-                  <string>Designations from Hipparcos catalog (HIP)</string>
+                  <string>Show designations from Hipparcos catalog (HIP) if it exist and star doesn't have other traditional designations.</string>
                  </property>
                  <property name="text">
                   <string notr="true">HIP</string>

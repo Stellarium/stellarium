@@ -937,7 +937,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("astro/flag_star_name",					propMgr->getStelPropertyValue("StarMgr.flagLabelsDisplayed").toBool());
 	conf->setValue("astro/flag_star_additional_names",		propMgr->getStelPropertyValue("StarMgr.flagAdditionalNamesDisplayed").toBool());
 	conf->setValue("astro/flag_star_designation_usage",		propMgr->getStelPropertyValue("StarMgr.flagDesignationLabels").toBool());
-	conf->setValue("astro/flag_star_designation_old_doubles",	propMgr->getStelPropertyValue("StarMgr.flagOldDoublesDesignation").toBool());
+	conf->setValue("astro/flag_star_designation_dbl_stars",	propMgr->getStelPropertyValue("StarMgr.flagDblStarsDesignation").toBool());
 	conf->setValue("astro/flag_star_designation_var_stars",	propMgr->getStelPropertyValue("StarMgr.flagVarStarsDesignation").toBool());
 	conf->setValue("astro/flag_star_designation_hip",		propMgr->getStelPropertyValue("StarMgr.flagHIPDesignation").toBool());
 	conf->setValue("stars/labels_amount",					propMgr->getStelPropertyValue("StarMgr.labelsAmount").toDouble());

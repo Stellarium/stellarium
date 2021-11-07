@@ -120,10 +120,10 @@ class StarMgr : public StelObjectModule
 		   WRITE setDesignationUsage
 		   NOTIFY designationUsageChanged
 		   )
-	Q_PROPERTY(bool flagOldDoublesDesignation
-		   READ getFlagOldDoublesDesignation
-		   WRITE setFlagOldDoublesDesignation
-		   NOTIFY flagOldDoublesDesignationChanged
+	Q_PROPERTY(bool flagDblStarsDesignation
+		   READ getFlagDblStarsDesignation
+		   WRITE setFlagDblStarsDesignation
+		   NOTIFY flagDblStarsDesignationChanged
 		   )
 	Q_PROPERTY(bool flagVarStarsDesignation
 		   READ getFlagVarStarsDesignation
@@ -223,10 +223,10 @@ public slots:
 	//! Get flag for usage designations of stars for their labels instead common names.
 	bool getDesignationUsage(void) {return flagDesignations; }
 
-	//! Set flag for usage old designations of double stars.
-	void setFlagOldDoublesDesignation(const bool flag) { if(flagOldDoublesDesignation!=flag){ flagOldDoublesDesignation=flag; emit flagOldDoublesDesignationChanged(flag);}}
-	//! Get flag for usage old designations of double stars.
-	static bool getFlagOldDoublesDesignation(void) {return flagOldDoublesDesignation; }
+	//! Set flag for usage traditional designations of double stars.
+	void setFlagDblStarsDesignation(const bool flag) { if(flagDblStarsDesignation!=flag){ flagDblStarsDesignation=flag; emit flagDblStarsDesignationChanged(flag);}}
+	//! Get flag for usage traditional designations of double stars.
+	static bool getFlagDblStarsDesignation(void) {return flagDblStarsDesignation; }
 
 	//! Set flag for usage designations of variable stars.
 	void setFlagVarStarsDesignation(const bool flag) { if(flagVarStarsDesignation!=flag){ flagVarStarsDesignation=flag; emit flagVarStarsDesignationChanged(flag);}}
@@ -420,7 +420,7 @@ signals:
 	void starLabelsDisplayedChanged(const bool displayed);
 	void starsDisplayedChanged(const bool displayed);
 	void designationUsageChanged(const bool flag);
-	void flagOldDoublesDesignationChanged(const bool flag);
+	void flagDblStarsDesignationChanged(const bool flag);
 	void flagVarStarsDesignationChanged(const bool flag);
 	void flagHIPDesignationChanged(const bool flag);
 	void flagAdditionalNamesDisplayedChanged(const bool displayed);
@@ -543,7 +543,7 @@ private:
 	static bool flagSciNames;
 	static bool flagAdditionalStarNames;
 	static bool flagDesignations;
-	static bool flagOldDoublesDesignation;
+	static bool flagDblStarsDesignation;
 	static bool flagVarStarsDesignation;
 	static bool flagHIPDesignation;
 

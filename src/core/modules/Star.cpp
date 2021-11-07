@@ -51,7 +51,7 @@ QString Star1::getDesignation() const
 		if (StarMgr::getFlagSciNames()) // The scientific designations can be used for western sky cultures only
 		{
 			starNames << StarMgr::getSciName(getHip()).split(" - ");
-			if (StarMgr::getFlagOldDoublesDesignation()) // append the old designations of double stars
+			if (StarMgr::getFlagDblStarsDesignation()) // append the traditional designations of double stars
 				starNames << StarMgr::getSciExtraName(getHip()).split(" - ");
 			if (StarMgr::getFlagVarStarsDesignation()) // append the designations of variable stars (from GCVS)
 				starNames << StarMgr::getGcvsName(getHip());
