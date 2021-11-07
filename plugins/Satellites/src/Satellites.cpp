@@ -1163,7 +1163,7 @@ bool Satellites::add(const TleData& tleData)
 				satGroups.append("navigation");
 			}
 		}
-		if (tleData.name.startsWith("GSAT") && tleData.name.contains("PRN"))
+		if (tleData.name.startsWith("GSAT") && (tleData.name.contains("PRN") || tleData.name.contains("GALILEO")))
 		{
 			satGroups.append("galileo");
 			satGroups.append("navigation");
