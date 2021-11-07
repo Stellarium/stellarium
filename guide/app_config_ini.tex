@@ -40,21 +40,21 @@ apparent\_magnitude\_algorithm     & string & Mallama2018 & Set algorithm for co
                                                    Possible values: \emph{Mallama2018}, \emph{ExpSup2013}, \emph{ExpSup1992}, \emph{AstrAlm1984}, \emph{Mueller1893} and \emph{Generic}.\\%\midrule
 nebula\_magnitude\_limit           & float  & 8.5  & Value of limiting magnitude for the deep-sky objects.\\%\midrule
 star\_magnitude\_limit             & float  & 6.5  & Value of limiting magnitude for the stars. Sometimes you don't want to display more stars when zooming in. \\%\midrule
-planet\_magnitude\_limit  		   & float  & 6.5  & Value of limiting magnitude for the planets. Sometimes you don't want to display more planets when zooming in. \\%\midrule
+planet\_magnitude\_limit           & float  & 6.5  & Value of limiting magnitude for the planets. Sometimes you don't want to display more planets when zooming in. \\%\midrule
 planets\_orbits\_color\_style      & string & one\_color & Set the style of orbits color. Possible values: \emph{one\_color}, \emph{groups} and \emph{max}.\\%\midrule
 flag\_nebula\_magnitude\_limit     & bool   & false & Set to \emph{true} to activate limit for showing deep-sky objects.\\%\midrule
 flag\_star\_magnitude\_limit       & bool   & false & Set to \emph{true} to activate limit for showing stars\\%\midrule
 flag\_planet\_magnitude\_limit     & bool   & false & Set to \emph{true} to activate limit for showing planets.\\\midrule
-extinction\_mode\_below\_horizon   & string & zero & Set extinction mode for atmosphere below horizon. Possible values: \emph{zero}, \emph{mirror} and \emph{major\_planets}.\\
+extinction\_mode\_below\_horizon   & string & zero & Set extinction mode for atmosphere below horizon. Possible values: \emph{zero}, \emph{mirror} and \emph{max}.\\
 twilight\_altitude                 & float  & -6.0 & Solar altitude for going to previous/next twilight.\\\midrule
 %
-flag\_stars                        & bool   & true  & Set to \emph{false} to hide the stars on start-up\\%\midrule
-flag\_star\_name                   & bool   & true  & Set to \emph{false} to hide the star labels on start-up\\%\midrule
+flag\_stars                        & bool   & true  & Set to \emph{false} to hide the stars on start-up\\
+flag\_star\_name                   & bool   & true  & Set to \emph{false} to hide the star labels on start-up\\
 flag\_star\_additional\_names      & bool   & true  & Set \emph{true} to use additional names (also known as) for stars.\\\midrule
 %
-flag\_star\_designation\_usage     & bool   & false & If \emph{true}, use designations of stars on the sky (on-screen labels) instead of their common names.\\%\midrule
-flag\_star\_designation\_old\_doubles 	& bool   & false & If \emph{true}, append old designations of double stars to the on-screen labels.\\%\midrule
-flag\_star\_designation\_var\_stars     & bool   & false & If \emph{true}, append designations of variable stars to the on-screen labels.\\%\midrule
+flag\_star\_designation\_usage     & bool   & false & If \emph{true}, use designations of stars on the sky (on-screen labels) instead of their common names.\\
+flag\_star\_designation\_old\_doubles & bool& false & If \emph{true}, append old designations of double stars to the on-screen labels.\\
+flag\_star\_designation\_var\_stars   & bool& false & If \emph{true}, append designations of variable stars to the on-screen labels.\\
 flag\_star\_designation\_hip  	   & bool   & false & If \emph{true}, append HIP designations of stars to the on-screen labels.\\\midrule
 %
 flag\_planets                      & bool   & true  & Set to \emph{false} to hide the planet labels on start-up\\%\midrule
