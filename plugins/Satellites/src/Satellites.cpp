@@ -288,7 +288,7 @@ bool Satellites::backupCatalog(bool deleteOriginal)
 		return false;
 	}
 
-	QString backupPath = catalogPath + ".old";  // FIXME replace with datetime stamp as generic routine to backup files
+	QString backupPath = catalogPath + ".old";  // FIXME replace with datetime stamp as generic routine to backup files in order to protect against important losses
 	if (QFileInfo(backupPath).exists())
 		QFile(backupPath).remove();
 

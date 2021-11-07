@@ -185,6 +185,8 @@ private:
 	QColor buttonMarkerColor, buttonOrbitColor, buttonInfoColor;
 
 	static const QString dash;
+
+	static const QColor defaultMarkerColor, defaultOrbitColor, defaultInfoColor;
 };
 
 #if(SATELLITES_PLUGIN_IRIDIUM == 1)

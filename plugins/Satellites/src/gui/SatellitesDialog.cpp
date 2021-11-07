@@ -61,6 +61,10 @@ using namespace QXlsx;
 
 const QString SatellitesDialog::dash = QChar(0x2014);
 
+const QColor SatellitesDialog::defaultMarkerColor	= QColor::fromRgbF(0.4, 0.4, 0.4);
+const QColor SatellitesDialog::defaultOrbitColor 	= QColor::fromRgbF(0.4, 0.4, 0.4);
+const QColor SatellitesDialog::defaultInfoColor 	= QColor::fromRgbF(0.4, 0.4, 0.4);
+
 SatellitesDialog::SatellitesDialog()
 	: StelDialog("Satellites")
 	, satelliteModified(false)
@@ -463,10 +467,9 @@ void SatellitesDialog::updateSatelliteData()
 	Q_ASSERT(SatellitesMgr);
 	Vec3f mColor, oColor, iColor;
 
-	// set default // XXX copy-pasta
-	buttonMarkerColor = QColor(QColor::fromRgbF(0.4, 0.4, 0.4));
-	buttonOrbitColor = QColor(QColor::fromRgbF(0.4, 0.4, 0.4));
-	buttonInfoColor = QColor(QColor::fromRgbF(0.4, 0.4, 0.4));
+	buttonMarkerColor = defaultMarkerColor;
+	buttonOrbitColor = defaultOrbitColor;
+	buttonInfoColor = defaultInfoColor;
 
 	if (selection.count() > 1)
 	{
@@ -581,11 +584,11 @@ void SatellitesDialog::updateSatelliteData()
 	}
 
 	// colourize the colorpicker button
-	buttonMarkerColor=mColor.toQColor(); // .setRgbF(mColor.v[0], mColor.v[1], mColor.v[2]);
+	buttonMarkerColor = mColor.toQColor(); // .setRgbF(mColor.v[0], mColor.v[1], mColor.v[2]);
 	ui->satMarkerColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonMarkerColor.name() + "; }");
-	buttonOrbitColor=oColor.toQColor(); // .setRgbF(oColor.v[0], oColor.v[1], oColor.v[2]);
+	buttonOrbitColor = oColor.toQColor(); // .setRgbF(oColor.v[0], oColor.v[1], oColor.v[2]);
 	ui->satOrbitColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonOrbitColor.name() + "; }");
-	buttonInfoColor=iColor.toQColor(); // .setRgbF(iColor.v[0], iColor.v[1], iColor.v[2]);
+	buttonInfoColor = iColor.toQColor(); // .setRgbF(iColor.v[0], iColor.v[1], iColor.v[2]);
 	ui->satInfoColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonInfoColor.name() + "; }");
 
 	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
@@ -1247,10 +1250,9 @@ void SatellitesDialog::setRightSideToROMode()
 	ui->periodLineEdit->setEnabled(false);
 	ui->periodLineEdit->setText(QString());
 
-	// set default // XXX copy-pasta
-	buttonMarkerColor = QColor(QColor::fromRgbF(0.4, 0.4, 0.4));
-	buttonOrbitColor = QColor(QColor::fromRgbF(0.4, 0.4, 0.4));
-	buttonInfoColor = QColor(QColor::fromRgbF(0.4, 0.4, 0.4));
+	buttonMarkerColor = defaultMarkerColor;
+	buttonOrbitColor = defaultOrbitColor;
+	buttonInfoColor = defaultInfoColor;
 	ui->satMarkerColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonMarkerColor.name() + "; }");
 	ui->satOrbitColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonOrbitColor.name() + "; }");
 	ui->satInfoColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonInfoColor.name() + "; }");

@@ -74,7 +74,7 @@ By convention, group names are in lowercase. The GUI translates some of the grou
 
 <b>Satellite Catalog</b>
 
-The satellite catalog is stored on disk in [JSON](http://www.json.org/) format, in a file named "satellites.json". A default copy is embedded in the plug-in at compile time. A working copy is kept in the user data directory.
+The satellite catalog is stored on disk in [JSON](http://www.json.org/) format, in a file named "satellites.json". A default copy is embedded in the plug-in at compile time. A working copy is kept in the user data directory. Test for GitHub diff, are lines now soft wrapped?
 
 <b>Configuration</b>
 
