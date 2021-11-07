@@ -463,7 +463,7 @@ void SatellitesDialog::updateSatelliteData()
 	Q_ASSERT(SatellitesMgr);
 	Vec3f mColor, oColor, iColor;
 
-	// set default // XXX oy-pasta
+	// set default // XXX copy-pasta
 	buttonMarkerColor = QColor(QColor::fromRgbF(0.4, 0.4, 0.4));
 	buttonOrbitColor = QColor(QColor::fromRgbF(0.4, 0.4, 0.4));
 	buttonInfoColor = QColor(QColor::fromRgbF(0.4, 0.4, 0.4));

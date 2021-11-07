@@ -541,7 +541,7 @@ private:
 	//! @param deleteOriginal if true, the original file is removed, else not
 	//! @return true on OK, false on failure
 	bool backupCatalog(bool deleteOriginal=false);
-	//! Read the version number from the "creator" value in the catalog file.
+	//! Read the version number from the "creator" or "version" (??) value in the catalog file.
 	//! @return version string, e.g. "0.6.1"
 	const QString readCatalogVersion();
 

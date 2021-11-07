@@ -8,6 +8,8 @@
 # edit the module.ini file to remove all sections except the
 # [module] section.
 #
+# FIXME: is this script still used?
+#
 
 use strict;
 use warnings;

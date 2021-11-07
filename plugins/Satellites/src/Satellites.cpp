@@ -82,7 +82,7 @@ StelPluginInfo SatellitesStelPluginInterface::getPluginInfo() const
 // WARNING! Update also the version number in resources/satellites.json,
 // otherwise the local copy of that file will be overwritten every time
 // Stellarium starts. (Less of a problem if it manages to get one update.)
-QString Satellites::SatellitesCatalogVersion = "0.12.0";
+QString Satellites::SatellitesCatalogVersion = "0.12.0"; // XXX  0.12.4 ?
 
 Satellites::Satellites()
 	: satelliteListModel(Q_NULLPTR)
@@ -829,6 +829,7 @@ const QString Satellites::readCatalogVersion()
 		return jsonVersion;
 	}
 
+	// pure "SemVer-alike" field
 	if (map.contains("version"))
 	{
 		QString version = map.value("version").toString();
@@ -836,6 +837,7 @@ const QString Satellites::readCatalogVersion()
 		if (vRx.exactMatch(version))
 			jsonVersion = vRx.cap(1);
 	}
+	// same, preceded by "Satellites catalog format version..."
 	else if (map.contains("creator"))
 	{
 		QString creator = map.value("creator").toString();
@@ -958,7 +960,7 @@ QVariantMap Satellites::createDataMap(void)
 	// TODO: Since v0.21 uncomment this line:
 	// map["creator"] = QString("Satellites plugin version %1").arg(SATELLITES_PLUGIN_VERSION);
 	// and remove this line:
-	map["creator"] = QString("Satellites plugin version %1").arg(SatellitesCatalogVersion);
+	map["creator"] = QString("Satellites catalog format version %1").arg(SatellitesCatalogVersion);
 	map["version"] = QString("%1").arg(SatellitesCatalogVersion);
 	map["hintColor"] = defHintCol;
 	map["shortName"] = "satellite orbital data";
