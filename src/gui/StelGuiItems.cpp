@@ -32,6 +32,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelActionMgr.hpp"
 #include "StelProgressController.hpp"
+#include "StelPropertyMgr.hpp"
 #include "StelObserver.hpp"
 #include "SkyGui.hpp"
 #include "EphemWrapper.hpp"
@@ -841,7 +842,7 @@ void BottomStelBar::updateText(bool updatePos)
 			lon *= -1;
 		}
 		lonStr = QString("%1%2%3").arg(pm).arg(lon).arg(QChar(0x00B0));
-		QString rho;
+		QString rho, weather;
 		if (core->getUseTopocentricCoordinates())
 			rho = QString("%1 %2 %3").arg(q_("planetocentric distance")).arg(core->getCurrentObserver()->getDistanceFromCenter() * AU).arg(qc_("km", "distance"));
 		else
@@ -850,7 +851,17 @@ void BottomStelBar::updateText(bool updatePos)
 		if (newLocation.contains("->")) // a spaceship
 			location->setToolTip(QString());
 		else
-			location->setToolTip(QString("%1 %2; %3").arg(latStr, lonStr, rho));
+		{
+			if (core->getCurrentPlanet()->hasAtmosphere())
+			{
+				const StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
+				weather = QString("%1: %2 %3; %4: %5 %6C").arg(q_("Atmospheric pressure"), QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.atmospherePressure").toFloat(), 'f', 2), qc_("mbar", "pressure unit"), q_("temperature"), QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.atmosphereTemperature").toFloat(), 'f', 1), QChar(0x00B0));
+				location->setToolTip(QString("<p style='white-space:pre'>%1 %2; %3<br>%4</p>").arg(latStr, lonStr, rho, weather));
+			}
+			else
+				location->setToolTip(QString("%1 %2; %3").arg(latStr, lonStr, rho));
+		}
+
 		if (qApp->property("text_texture")==true) // CLI option -t given?
 		{
 			locationPixmap->setPixmap(getTextPixmap(newLocation, location->font()));
