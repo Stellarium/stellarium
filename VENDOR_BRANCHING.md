@@ -31,6 +31,7 @@ Here are several existing artifacts that have been copy-pasted in Stellarium ove
 	- https://apollo.astro.amu.edu.pl/PAD/pmwiki.php?n=Dybol.JPLEph 
 	- [Celestia](http://celestia.simulatorlabbs.com/CelSL/src/celephem/)
 - [SOFA sourcecode](https://www.iausofa.org/) (*Standards Of Fundamental Astronomy*), also mentioned in [Planet.cpp](https://github.com/Stellarium/stellarium/blob/ba80d33d4bc83d72fc15cca53f798cd9439482cf/src/core/modules/Planet.cpp#L1648): see the [recent changes](https://www.iausofa.org/current.html) (especially the [C library](https://www.iausofa.org/current_C.html), and the [archive](https://www.iausofa.org/archive.html))
+- tons of tools imported for the web version (https://github.com/Stellarium/stellarium-web-engine/tree/master/ext_src)
 
 Potential candidates, other examples
 
