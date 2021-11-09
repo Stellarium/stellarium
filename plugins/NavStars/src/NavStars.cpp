@@ -590,11 +590,11 @@ void NavStars::extraInfo(StelCore* core, const StelObjectP& selectedObject)
 
 	if ("Sun" == englishName || "Moon" == englishName) 
 	{
-		// Adjust Ho if target is Sun or Moon by adding/subtracting half the angular diameter.
-		double d = selectedObject->getAngularSize(core);
-		if (upperLimb)
-			d *= -1;
-		calc.addAltAppRad(((d / 2) * M_PI) / 180.);
+		// Adjust Ho if target is Sun or Moon by adding/subtracting the angular radius.
+		double obj_radius_in_degrees = selectedObject->getAngularSize(core);
+		if (!upperLimb)
+			obj_radius_in_degrees *= -1;
+		calc.addAltAppRad((obj_radius_in_degrees * M_PI) / 180.);
 		extraText = upperLimb ?
 			" (" + QString(qc_("upper limb", "the highest part of the Sun or Moon")) + ")" :
 			" (" + QString(qc_("lower limb", "the lowest part of the Sun or Moon")) + ")";
