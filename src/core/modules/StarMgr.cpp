@@ -1603,7 +1603,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	if (maxNbItem <= 0 || !getFlagStars())
 		return result;
 
-	QString objw = objPrefix.toUpper();	
+	QString objw = objPrefix.toUpper();
 	bool found;
 
 	// Search for common names
@@ -1842,8 +1842,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	}
 
 	// Add exact Hp catalogue numbers
-	QRegExp hpRx("^(HIP|HP)\\s*(\\d+)\\s*$");
-	hpRx.setCaseSensitivity(Qt::CaseInsensitive);
+	QRegExp hpRx("^(HIP|HP)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (hpRx.exactMatch(objw))
 	{
 		bool ok;
@@ -1860,8 +1859,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	}
 
 	// Add exact SAO catalogue numbers
-	QRegExp saoRx("^(SAO)\\s*(\\d+)\\s*$");
-	saoRx.setCaseSensitivity(Qt::CaseInsensitive);
+	QRegExp saoRx("^(SAO)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (saoRx.exactMatch(objw))
 	{
 		int saoNum = saoRx.cap(2).toInt();
@@ -1878,8 +1876,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	}
 
 	// Add exact HD catalogue numbers
-	QRegExp hdRx("^(HD)\\s*(\\d+)\\s*$");
-	hdRx.setCaseSensitivity(Qt::CaseInsensitive);
+	QRegExp hdRx("^(HD)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (hdRx.exactMatch(objw))
 	{
 		int hdNum = hdRx.cap(2).toInt();
@@ -1896,8 +1893,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	}
 
 	// Add exact HR catalogue numbers
-	QRegExp hrRx("^(HR)\\s*(\\d+)\\s*$");
-	hrRx.setCaseSensitivity(Qt::CaseInsensitive);
+	QRegExp hrRx("^(HR)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (hrRx.exactMatch(objw))
 	{
 		int hrNum = hrRx.cap(2).toInt();
@@ -1915,8 +1911,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 
 
 	// Add exact WDS catalogue numbers
-	QRegExp wdsRx("^(WDS)\\s*(\\S+)\\s*$");
-	wdsRx.setCaseSensitivity(Qt::CaseInsensitive);
+	QRegExp wdsRx("^(WDS)\\s*(\\S+)\\s*$", Qt::CaseInsensitive);
 	if (wdsRx.exactMatch(objw))
 	{
 		for (auto wds = wdsStarsIndexI18n.lowerBound(objw); wds != wdsStarsIndexI18n.end(); ++wds)
