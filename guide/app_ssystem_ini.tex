@@ -338,9 +338,12 @@ Stellarium.
 
 \begin{description}
 \item[coord\_func] is \texttt{kepler\_orbit} by
-  default\newFeature{0.20}.\footnote{Previous editions used the name
-    \texttt{comet\_orbit}. Now the \texttt{coord\_func} line can be
-    left away, defaulting to \texttt{kepler\_orbit}.}
+  default\newFeature{0.20}. For compatibility and interoperability
+  with older versions we will keep the old default of
+  \texttt{comet\_orbit} for some longer time.\footnote{Previous
+    editions used the name \texttt{comet\_orbit}. Now the
+    \texttt{coord\_func} line can be left away, defaulting to
+    \texttt{kepler\_orbit}.}
 \item[parent] defaults to \texttt{Sun} and can be omitted.
 
 \item[orbit\_Epoch] JDE when these elements are valid. Defaults to
@@ -373,7 +376,7 @@ type=asteroid
 minor_planet_number=4
 name=Vesta
 
-coord_func=kepler_orbit
+coord_func=comet_orbit
 parent=Sun
 orbit_Epoch=2457000.5
 orbit_MeanAnomaly=20.86389
@@ -490,7 +493,7 @@ orbital elements for different epochs of one apparition.
 type=comet  
 name=1P/Halley
 
-coord_func=kepler_orbit [can be omitted]
+coord_func=comet_orbit [can be omitted]
 parent=Sun [can be omitted]
 orbit_ArgOfPericenter=111.7154
 orbit_AscendingNode=58.8583
@@ -531,7 +534,7 @@ may be available and can be configured with a \texttt{model} entry.\newFeature{0
 type=comet
 name=C/2013 US10 (Catalina)
 
-coord_func=kepler_orbit [can be omitted]
+coord_func=comet_orbit [can be omitted]
 parent=Sun [can be omitted]
 orbit_ArgOfPericenter=340.3533
 orbit_AscendingNode=186.141
