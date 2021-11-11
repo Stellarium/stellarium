@@ -126,7 +126,7 @@ void SolarSystemManagerWindow::newImportMPC()
 	mpcImportWindow->setVisible(true);
 }
 
-void SolarSystemManagerWindow::openMainWindow()
+void SolarSystemManagerWindow::showSSE()
 {
 	setVisible(true);
 }
