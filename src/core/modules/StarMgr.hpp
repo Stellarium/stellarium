@@ -120,6 +120,21 @@ class StarMgr : public StelObjectModule
 		   WRITE setDesignationUsage
 		   NOTIFY designationUsageChanged
 		   )
+	Q_PROPERTY(bool flagDblStarsDesignation
+		   READ getFlagDblStarsDesignation
+		   WRITE setFlagDblStarsDesignation
+		   NOTIFY flagDblStarsDesignationChanged
+		   )
+	Q_PROPERTY(bool flagVarStarsDesignation
+		   READ getFlagVarStarsDesignation
+		   WRITE setFlagVarStarsDesignation
+		   NOTIFY flagVarStarsDesignationChanged
+		   )
+	Q_PROPERTY(bool flagHIPDesignation
+		   READ getFlagHIPDesignation
+		   WRITE setFlagHIPDesignation
+		   NOTIFY flagHIPDesignationChanged
+		   )
 
 public:
 	StarMgr(void);
@@ -208,6 +223,21 @@ public slots:
 	//! Get flag for usage designations of stars for their labels instead common names.
 	bool getDesignationUsage(void) {return flagDesignations; }
 
+	//! Set flag for usage traditional designations of double stars.
+	void setFlagDblStarsDesignation(const bool flag) { if(flagDblStarsDesignation!=flag){ flagDblStarsDesignation=flag; emit flagDblStarsDesignationChanged(flag);}}
+	//! Get flag for usage traditional designations of double stars.
+	static bool getFlagDblStarsDesignation(void) {return flagDblStarsDesignation; }
+
+	//! Set flag for usage designations of variable stars.
+	void setFlagVarStarsDesignation(const bool flag) { if(flagVarStarsDesignation!=flag){ flagVarStarsDesignation=flag; emit flagVarStarsDesignationChanged(flag);}}
+	//! Get flag for usage designations of variable stars.
+	static bool getFlagVarStarsDesignation(void) {return flagVarStarsDesignation; }
+
+	//! Set flag for usage Hipparcos catalog designations of stars.
+	void setFlagHIPDesignation(const bool flag) { if(flagHIPDesignation!=flag){ flagHIPDesignation=flag; emit flagHIPDesignationChanged(flag);}}
+	//! Get flag for usage Hipparcos catalog designations of stars.
+	static bool getFlagHIPDesignation(void) {return flagHIPDesignation; }
+
 	//! Show additional star names.
 	void setFlagAdditionalNames(bool flag) { if (flagAdditionalStarNames!=flag){ flagAdditionalStarNames=flag; emit flagAdditionalNamesDisplayedChanged(flag);}}
 	static bool getFlagAdditionalNames(void) { return flagAdditionalStarNames; }
@@ -232,6 +262,12 @@ public:
 	//! @param hip The Hipparcos number of star
 	//! @return translated scientific name of star
 	static QString getSciName(int hip);
+
+	//! Get the (translated) scientific extra name for a star with a specified
+	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return translated scientific name of star
+	static QString getSciExtraName(int hip);
 
 	//! Get the (translated) scientific name for a variable star with a specified
 	//! Hipparcos catalogue number.
@@ -384,6 +420,9 @@ signals:
 	void starLabelsDisplayedChanged(const bool displayed);
 	void starsDisplayedChanged(const bool displayed);
 	void designationUsageChanged(const bool flag);
+	void flagDblStarsDesignationChanged(const bool flag);
+	void flagVarStarsDesignationChanged(const bool flag);
+	void flagHIPDesignationChanged(const bool flag);
 	void flagAdditionalNamesDisplayedChanged(const bool displayed);
 	void labelsAmountChanged(double a);
 
@@ -401,7 +440,8 @@ private:
 	//! Loads scientific names for stars from a file.
 	//! Called when the SkyCulture is updated.
 	//! @param the path to a file containing the scientific names for bright stars.
-	void loadSciNames(const QString& sciNameFile);
+	//! @param flag to load the extra designations
+	void loadSciNames(const QString& sciNameFile, const bool extraData);
 
 	//! Loads GCVS from a file.
 	//! @param the path to a file containing the GCVS.
@@ -480,6 +520,8 @@ private:
 
 	static QHash<int, QString> sciDesignationsMapI18n;
 	static QMap<QString, int> sciDesignationsIndexI18n;
+	static QHash<int, QString> sciExtraDesignationsMapI18n;
+	static QMap<QString, int> sciExtraDesignationsIndexI18n;
 
 	static QHash<int, varstar> varStarsMapI18n;
 	static QMap<QString, int> varStarsIndexI18n;
@@ -501,6 +543,9 @@ private:
 	static bool flagSciNames;
 	static bool flagAdditionalStarNames;
 	static bool flagDesignations;
+	static bool flagDblStarsDesignation;
+	static bool flagVarStarsDesignation;
+	static bool flagHIPDesignation;
 
 	StelTextureSP texPointer;		// The selection pointer texture
 

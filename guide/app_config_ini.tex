@@ -40,17 +40,23 @@ apparent\_magnitude\_algorithm     & string & Mallama2018 & Set algorithm for co
                                                    Possible values: \emph{Mallama2018}, \emph{ExpSup2013}, \emph{ExpSup1992}, \emph{AstrAlm1984}, \emph{Mueller1893} and \emph{Generic}.\\%\midrule
 nebula\_magnitude\_limit           & float  & 8.5  & Value of limiting magnitude for the deep-sky objects.\\%\midrule
 star\_magnitude\_limit             & float  & 6.5  & Value of limiting magnitude for the stars. Sometimes you don't want to display more stars when zooming in. \\%\midrule
-planet\_magnitude\_limit  		   & float  & 6.5  & Value of limiting magnitude for the planets. Sometimes you don't want to display more planets when zooming in. \\%\midrule
+planet\_magnitude\_limit           & float  & 6.5  & Value of limiting magnitude for the planets. Sometimes you don't want to display more planets when zooming in. \\%\midrule
 planets\_orbits\_color\_style      & string & one\_color & Set the style of orbits color. Possible values: \emph{one\_color}, \emph{groups} and \emph{max}.\\%\midrule
 flag\_nebula\_magnitude\_limit     & bool   & false & Set to \emph{true} to activate limit for showing deep-sky objects.\\%\midrule
 flag\_star\_magnitude\_limit       & bool   & false & Set to \emph{true} to activate limit for showing stars\\%\midrule
 flag\_planet\_magnitude\_limit     & bool   & false & Set to \emph{true} to activate limit for showing planets.\\\midrule
-extinction\_mode\_below\_horizon   & string & zero & Set extinction mode for atmosphere below horizon. Possible values: \emph{zero}, \emph{mirror} and \emph{major\_planets}.\\
+extinction\_mode\_below\_horizon   & string & zero & Set extinction mode for atmosphere below horizon. Possible values: \emph{zero}, \emph{mirror} and \emph{max}.\\
 twilight\_altitude                 & float  & -6.0 & Solar altitude for going to previous/next twilight.\\\midrule
 %
-flag\_stars                        & bool   & true  & Set to \emph{false} to hide the stars on start-up\\%\midrule
-flag\_star\_name                   & bool   & true  & Set to \emph{false} to hide the star labels on start-up\\%\midrule
-flag\_star\_additional\_names      & bool   & true  & Set \emph{true} to use additional names (also known as) for stars.\\%\midrule
+flag\_stars                        & bool   & true  & Set to \emph{false} to hide the stars on start-up\\
+flag\_star\_name                   & bool   & true  & Set to \emph{false} to hide the star labels on start-up\\
+flag\_star\_additional\_names      & bool   & true  & Set \emph{true} to use all available proper names for stars.\\\midrule
+%
+flag\_star\_designation\_usage     & bool   & false & If \emph{true}, use designations of stars on the sky (on-screen labels) instead of their common names.\\
+flag\_star\_designation\_dbl       & bool   & false & If \emph{true}, and star doesn't have common name and Bayer or Flamsteed designations then use first of traditional designations of double stars to the on-screen labels.\\
+flag\_star\_designation\_var       & bool   & false & If \emph{true}, and star doesn't have common name or Bayer, Flamsteed or double star designation then use designation of variable stars as the on-screen label.\\
+flag\_star\_designation\_hip       & bool   & false & If \emph{true}, use HIP designations of stars for the on-screen labels if common name or traditional designations do not exist for star.\\\midrule
+%
 flag\_planets                      & bool   & true  & Set to \emph{false} to hide the planet labels on start-up\\%\midrule
 flag\_planets\_hints               & bool   & true  & Set to \emph{false} to hide the planet hints on startup (names and circular highlights)\\%\midrule
 flag\_planets\_orbits              & bool   & false & Set to \emph{true} to show the planet orbits on startup\\%\midrule
@@ -577,7 +583,7 @@ date\_display\_format & string & date display format: can be \emph{system\_defau
 \subsection{\big[main\big]}
 %\label{sec:config.ini:main}
 
-\begin{tabularx}{\textwidth}{l|l|X}\toprule
+\begin{longtable}{l|l|p{77mm}}\toprule
 \emph{ID}                 & \emph{Type} & \emph{Description}\\\midrule
 invert\_screenshots\_colors & bool   & If \emph{true}, Stellarium will saving the screenshorts with inverted colors.\\%\midrule
 screenshot\_dir             & string & Path for saving screenshots\\%\midrule
@@ -594,7 +600,7 @@ check\_requirements         & bool   & Set to \emph{false} if you want to disabl
                                        Expect problems if hardware is below requirements!\\
 geoip\_api\_url             & string & URL for JSON interface of GeoIP service.\\
 \bottomrule
-\end{tabularx}
+\end{longtable}
 
 \subsection{\big[navigation\big]}
 %\label{sec:config.ini:navigation}

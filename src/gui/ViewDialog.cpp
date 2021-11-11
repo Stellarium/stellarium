@@ -171,6 +171,9 @@ void ViewDialog::createDialogContent()
 	connectDoubleProperty(ui->starsLabelsHorizontalSlider,"StarMgr.labelsAmount",0.0,10.0);
 	connectBoolProperty(ui->checkBoxAdditionalNamesStars, "StarMgr.flagAdditionalNamesDisplayed");
 	connectBoolProperty(ui->checkBoxStarDesignationsOnlyUsage, "StarMgr.flagDesignationLabels");
+	connectBoolProperty(ui->dblStarsDesignationsCheckBox, "StarMgr.flagDblStarsDesignation");
+	connectBoolProperty(ui->varStarsDesignationsCheckBox, "StarMgr.flagVarStarsDesignation");
+	connectBoolProperty(ui->hipDesignationsCheckBox, "StarMgr.flagHIPDesignation");
 
 	// Sky section
 	connectBoolProperty(ui->milkyWayCheckBox, "MilkyWay.flagMilkyWayDisplayed");
