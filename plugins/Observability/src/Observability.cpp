@@ -618,10 +618,13 @@ void Observability::draw(StelCore* core)
 	}
 	else if (isMoon)
 	{
-		lineObservableRange.clear();
-		lineAcroCos.clear();
-		lineHeli.clear();
-		solvedMoon = calculateSolarSystemEvents(core, 2);
+		if (show_FullMoon)
+		{
+			lineObservableRange.clear();
+			lineAcroCos.clear();
+			lineHeli.clear();
+			calculateSolarSystemEvents(core, 2);
+		}
 	}
 	else if (show_Year)
 	{
