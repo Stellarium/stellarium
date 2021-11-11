@@ -446,8 +446,8 @@ void StarMgr::init()
 	setFlagLabels(conf->value("astro/flag_star_name",true).toBool());
 	setFlagAdditionalNames(conf->value("astro/flag_star_additional_names",true).toBool());
 	setDesignationUsage(conf->value("astro/flag_star_designation_usage", false).toBool());
-	setFlagDblStarsDesignation(conf->value("astro/flag_star_designation_dbl_stars", false).toBool());
-	setFlagVarStarsDesignation(conf->value("astro/flag_star_designation_var_stars", false).toBool());
+	setFlagDblStarsDesignation(conf->value("astro/flag_star_designation_dbl", false).toBool());
+	setFlagVarStarsDesignation(conf->value("astro/flag_star_designation_var", false).toBool());
 	setFlagHIPDesignation(conf->value("astro/flag_star_designation_hip", false).toBool());
 	setLabelsAmount(conf->value("stars/labels_amount",3.).toDouble());
 
