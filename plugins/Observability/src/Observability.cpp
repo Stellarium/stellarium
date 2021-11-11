@@ -608,7 +608,7 @@ void Observability::draw(StelCore* core)
 ////////////////////////////////////////////////////////////
 // NOW WE ANALYZE THE SOURCE OBSERVABILITY FOR THE WHOLE YEAR:
 
-// Compute yearly ephemeris (only if necessary, and not for Sun nor Moon):
+// Compute yearly ephemeris (only if necessary, and not for Sun):
 
 
 	if (isSun) 
@@ -616,7 +616,17 @@ void Observability::draw(StelCore* core)
 		lineBestNight.clear();
 		lineObservableRange.clear();
 	}
-	else if (!isMoon && show_Year)
+	else if (isMoon)
+	{
+		if (show_FullMoon)
+		{
+			lineObservableRange.clear();
+			lineAcroCos.clear();
+			lineHeli.clear();
+			calculateSolarSystemEvents(core, 2);
+		}
+	}
+	else if (show_Year)
 	{
 		if (!isStar && (souChanged || yearChanged)) // Object moves.
 			updatePlanetData(core); // Re-compute ephemeris.
