@@ -69,16 +69,15 @@ void SolarSystemManagerWindow::createDialogContent()
 	}
 
 	//Signals
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
-	        this, SLOT(retranslate()));
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
-	connect(ui->pushButtonCopyFile, SIGNAL(clicked()), this, SLOT(copyConfiguration()));
-	connect(ui->pushButtonReplaceFile, SIGNAL(clicked()), this, SLOT(replaceConfiguration()));
-	connect(ui->pushButtonAddFile, SIGNAL(clicked()), this, SLOT(addConfiguration()));
-	connect(ui->pushButtonRemove, SIGNAL(clicked()), this, SLOT(removeObjects()));
-	connect(ui->pushButtonImportMPC, SIGNAL(clicked()), this, SLOT(newImportMPC()));
-	//connect(ui->pushButtonManual, SIGNAL(clicked()), this, SLOT(newImportManual()));
+	connect(&StelApp::getInstance(), 	SIGNAL(languageChanged()), this,	SLOT(retranslate()));
+	connect(ui->closeStelWindow, 		SIGNAL(clicked()), this, 		SLOT(close()));
+	connect(ui->TitleBar, 			SIGNAL(movedTo(QPoint)), this,		SLOT(handleMovedTo(QPoint)));
+	connect(ui->pushButtonCopyFile, 	SIGNAL(clicked()), this, 		SLOT(copyConfiguration()));
+	connect(ui->pushButtonReplaceFile, 	SIGNAL(clicked()), this, 		SLOT(replaceConfiguration()));
+	connect(ui->pushButtonAddFile, 		SIGNAL(clicked()), this, 		SLOT(addConfiguration()));
+	connect(ui->pushButtonRemove, 		SIGNAL(clicked()), this, 		SLOT(removeObjects()));
+	connect(ui->pushButtonImportMPC,	SIGNAL(clicked()), this, 		SLOT(newImportMPC()));
+	//connect(ui->pushButtonManual,		SIGNAL(clicked()), this, 		SLOT(newImportManual()));
 
 	connect(ssEditor, SIGNAL(solarSystemChanged()), this, SLOT(populateSolarSystemList()));
 	connect(ui->pushButtonReset, SIGNAL(clicked()), this, SLOT(resetSSOdefaults()));
@@ -125,6 +124,11 @@ void SolarSystemManagerWindow::newImportMPC()
 	Q_ASSERT(mpcImportWindow);
 
 	mpcImportWindow->setVisible(true);
+}
+
+void SolarSystemManagerWindow::openMainWindow()
+{
+	setVisible(true);
 }
 
 void SolarSystemManagerWindow::newImportManual()
@@ -214,6 +218,10 @@ void SolarSystemManagerWindow::copyConfiguration()
 
 void SolarSystemManagerWindow::replaceConfiguration()
 {
+	if (!askConfirmation()) {
+		return;
+	}
+	
 	QString filter = q_("Configuration files");
 	filter.append(" (*.ini)");
 	QString filePath = QFileDialog::getOpenFileName(Q_NULLPTR, q_("Select a file to replace the Solar System minor bodies"), QDir::homePath(), filter);

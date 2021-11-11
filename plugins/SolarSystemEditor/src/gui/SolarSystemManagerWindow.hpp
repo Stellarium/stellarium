@@ -66,6 +66,7 @@ private slots:
 	void removeObjects();
 
 	void newImportMPC();
+	void openMainWindow();
 
 	void newImportManual();
 	void resetImportManual(bool);

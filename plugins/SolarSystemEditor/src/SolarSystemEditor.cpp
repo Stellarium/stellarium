@@ -136,6 +136,7 @@ void SolarSystemEditor::init()
 	isInitialized = true;
 
 	// key bindings and other actions
+	addAction("actionShow_SSE", N_("Solar System Editor"), N_("Open Solar System editor"), mainWindow, "openMainWindow()", "Ctrl+Alt+Shift+S"); // it's a pity that such a window is so difficult to reach!
 	addAction("actionShow_MPC_Import", N_("Solar System Editor"), N_("Import orbital elements in MPC format..."), mainWindow, "newImportMPC()", "Ctrl+Alt+S");
 }
 
