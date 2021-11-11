@@ -65,10 +65,8 @@ private slots:
 	void populateSolarSystemList();
 	void removeObjects();
 
-	// open the MPC import widow
+	// open the MPC import window
 	void newImportMPC();
-	// open the main Solar System editor window
-	void showSSE();
 
 	void newImportManual();
 	void resetImportManual(bool);

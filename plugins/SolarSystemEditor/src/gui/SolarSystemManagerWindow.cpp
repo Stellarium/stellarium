@@ -126,11 +126,6 @@ void SolarSystemManagerWindow::newImportMPC()
 	mpcImportWindow->setVisible(true);
 }
 
-void SolarSystemManagerWindow::showSSE()
-{
-	setVisible(true);
-}
-
 void SolarSystemManagerWindow::newImportManual()
 {
 	if (manualImportWindow == Q_NULLPTR)
