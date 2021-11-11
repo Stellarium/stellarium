@@ -821,16 +821,24 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 		return SsoElements();
 	}
 	//Epoch is at .0 TT, i.e. midnight
-	double epochJD;
-	StelUtils::getJDFromDate(&epochJD, year, month, day, 0, 0, 0);
-	result.insert("orbit_Epoch", epochJD);
+	double epochJDE;
+	StelUtils::getJDFromDate(&epochJDE, year, month, day, 0, 0, 0);
+	result.insert("orbit_Epoch", epochJDE);
 
 	column = oneLineElements.mid(26, 9).trimmed();
 	double meanAnomalyAtEpoch = column.toDouble(&ok);//degrees
 	if (!ok)
 		return SsoElements();
 	result.insert("orbit_MeanAnomaly", meanAnomalyAtEpoch);
-	result.insert("orbit_good", 5000); // default validity for osculating elements, days
+	// We assume from now on that orbit_good is 1/2 orbital duration for elliptical orbits if not given explicitly.
+	// This allows following full ellipses. However, elsewhere we should signal to users when
+	// it should be assumed that elements are outdated and thus positions wrong. (Let's take "1000 earth days" for that.)
+	if (eccentricity >=1.)
+	{
+	    // This should actually never happen for minor planets!
+	    qWarning() << "Strange eccentricity for " << name << ":" << eccentricity;
+	    result.insert("orbit_good", 1000); // default validity for osculating elements for parabolic/hyperbolic comets, days
+	}
 
 	// add period for visualization of orbit
 	if (semiMajorAxis>0)

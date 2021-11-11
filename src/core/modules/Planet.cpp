@@ -520,6 +520,11 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	oss << getInfoStringExtraMag(core, flags);
 	oss << getCommonInfoString(core, flags);
+	if (!hasValidPositionalData(core->getJDE()))
+	{
+	    oss << q_("NOTE: orbital elements outdated -- consider updating!") << "<br/>";
+	}
+
 
 #ifndef NDEBUG
 	// Debug help.
@@ -4343,7 +4348,7 @@ void Planet::drawOrbit(const StelCore* core)
 		sPainter.setLineWidth(1);
 }
 
-bool Planet::hasValidPositionalData(const double JDE)
+bool Planet::hasValidPositionalData(const double JDE) const
 {
 	if (pType<isObserver)
 		return true;
@@ -4353,7 +4358,7 @@ bool Planet::hasValidPositionalData(const double JDE)
 		return false;
 }
 
-Vec2d Planet::getValidPositionalDataRange()
+Vec2d Planet::getValidPositionalDataRange() const
 {
 	double min=std::numeric_limits<double>::min();
 	double max=std::numeric_limits<double>::max();

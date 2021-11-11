@@ -226,11 +226,11 @@ public:
 	//! E.g. outdated orbital elements for Kepler orbits (beyond their orbit_good .ini file entries)
 	//! may lead to invalid positions which should better not be used.
 	//! @note for major planets and moons this method will always return true
-	bool hasValidPositionalData(const double JDE);
+	bool hasValidPositionalData(const double JDE) const;
 	//! Returns JDE dates of presumably valid data for positional calculation.
 	//! For the major planets and moons, this is always (std::numeric_limits<double>::min(), std::numeric_limits<double>::max())
 	//! For planets with Keplerian orbits, this is (epoch-orbit_good, epoch+orbit_good)
-	Vec2d getValidPositionalDataRange();
+	Vec2d getValidPositionalDataRange() const;
 	float getAxisRotation(void) { return axisRotation;} //! return axisRotation last computed in computeTransMatrix().
 
 	///////////////////////////////////////////////////////////////////////////
