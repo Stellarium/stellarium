@@ -520,11 +520,6 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	oss << getInfoStringExtraMag(core, flags);
 	oss << getCommonInfoString(core, flags);
-	if (!hasValidPositionalData(core->getJDE()))
-	{
-	    oss << q_("NOTE: orbital elements outdated -- consider updating!") << "<br/>";
-	}
-
 
 #ifndef NDEBUG
 	// Debug help.
@@ -649,6 +644,10 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	oss << getInfoStringPeriods(core, flags);
 	oss << getInfoStringSize(core, flags);
 	oss << getInfoStringExtra(core, flags);
+	if (!hasValidPositionalData(core->getJDE()))
+	{
+	    oss << q_("NOTE: orbital elements outdated -- consider updating!") << "<br/>";
+	}
 	postProcessInfoString(str, flags);
 	return str;
 }
