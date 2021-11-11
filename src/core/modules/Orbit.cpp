@@ -127,7 +127,8 @@ void KeplerOrbit::InitEll(const double dt, double &rCosNu, double &rSinNu)
 	rSinNu = h1*sin(E);
 }
 
-KeplerOrbit::KeplerOrbit(double pericenterDistance,
+KeplerOrbit::KeplerOrbit(double epochJDE,
+			double pericenterDistance,
 			double eccentricity,
 			double inclination,
 			double ascendingNode,
@@ -139,7 +140,8 @@ KeplerOrbit::KeplerOrbit(double pericenterDistance,
 			double parentRotAscendingnode,
 			double parentRotJ2000Longitude,
 			double centralMass)
-	: q(pericenterDistance),
+	: epochJDE(epochJDE),
+	  q(pericenterDistance),
 	  e(eccentricity),
 	  i(inclination),
 	  Om(ascendingNode),
@@ -153,6 +155,11 @@ KeplerOrbit::KeplerOrbit(double pericenterDistance,
 {
 	// For Comets and Minor planets, this just builds a unity matrix. For moons, it rotates into the equatorial system of the parent planet
 	setParentOrientation(parentRotObliquity, parentRotAscendingnode, parentRotJ2000Longitude);
+	if (orbitGood<0.)
+	{
+	    const double period=calculateSiderealPeriod();
+	    orbitGood=(period==0. ? 1000. : period*0.5);
+	}
 }
 
 //! For planet moons which have orbits given in relation to their parent planet's equator.
@@ -269,8 +276,8 @@ Vec2d KeplerOrbit::objectDateValidRange() const
 	double max=std::numeric_limits<double>::max();
 	if (orbitGood>0)
 	{
-		min=t0-orbitGood;
-		max=t0+orbitGood;
+		min=epochJDE-orbitGood;
+		max=epochJDE+orbitGood;
 	}
 	return Vec2d(min, max);
 }
