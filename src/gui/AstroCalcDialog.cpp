@@ -4492,8 +4492,8 @@ QMap<double, double> AstroCalcDialog::findClosestApproach(PlanetP& object1, Stel
 		if (mode==PhenomenaTypeIndex::Shadows && object2->getEnglishName()!="Sun" && planet->getParent()!=object1)
 			return separations;
 
-		// If we don't have at least partial overlap between planet valid dates and our interval, skip by returning an empty map.		
-		const Vec2d planetValidityLimits=planet->getValidPositionalDataRange();
+		// If we don't have at least partial overlap between planet valid dates and our interval, skip by returning an empty map.
+		const Vec2d planetValidityLimits=planet->getValidPositionalDataRange(Planet::PositionQuality::Position);
 		if ( (planetValidityLimits[0] > stopJD) || (planetValidityLimits[1] < startJD) )
 			return separations;
 	}

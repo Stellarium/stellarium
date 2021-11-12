@@ -4352,24 +4352,26 @@ bool Planet::hasValidPositionalData(const double JDE, const PositionQuality purp
 	if (pType<isObserver)
 		return true;
 	else if (orbitPtr && pType>=isArtificial)
-	    switch (purpose) {
-	    case Position:
-		return static_cast<KeplerOrbit*>(orbitPtr)->objectDateValid(JDE);
-	    case OrbitPlotting:
-		return static_cast<KeplerOrbit*>(orbitPtr)->objectDateGoodEnoughForOrbits(JDE);
-	    }
+	{
+		switch (purpose) {
+		    case Position:
+			return static_cast<KeplerOrbit*>(orbitPtr)->objectDateValid(JDE);
+		    case OrbitPlotting:
+			return static_cast<KeplerOrbit*>(orbitPtr)->objectDateGoodEnoughForOrbits(JDE);
+		}
+	}
 	else
 		return false;
 }
 
-Vec2d Planet::getValidPositionalDataRange() const
+Vec2d Planet::getValidPositionalDataRange(const PositionQuality purpose) const
 {
 	double min=std::numeric_limits<double>::min();
 	double max=std::numeric_limits<double>::max();
 
 	if (orbitPtr && pType>=isArtificial)
 	{
-		return static_cast<KeplerOrbit*>(orbitPtr)->objectDateValidRange();
+		return static_cast<KeplerOrbit*>(orbitPtr)->objectDateValidRange(purpose==Planet::PositionQuality::Position);
 	}
 	return Vec2d(min, max);
 }

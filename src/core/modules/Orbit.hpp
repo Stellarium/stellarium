@@ -2,7 +2,7 @@
 //
 // Initial structure of orbit computation; EllipticalOrbit: Copyright (C) 2001, Chris Laurel <claurel@shatters.net>
 // CometOrbit: Copyright (c) 2007,2008 Johannes Gajdosik
-//             Amendments (c) 2013 Georg Zotti (GZ).
+//             Amendments (c) 2013 Georg Zotti
 // Combination to KeplerOrbit, GimbalOrbit (c) 2020 Georg Zotti
 //
 // This program is free software; you can redistribute it and/or
@@ -49,16 +49,21 @@ protected:
 
 //! KeplerOrbit describes an undisturbed orbit in a two-body system.
 //! This is used for minor bodies orbiting the sun, but also for planet moons.
-//! Orbital elements are valid for a relatively short time span (orbitGood)
+//! Orbital elements are considered valid for a relatively short time span (orbitGood)
 //! around epoch only and should be updated periodically,
 //! because the other planets perturbate the orbiting bodies.
 //! To avoid using outdated elements, the KeplerOrbit object can be queried
-//! using objectDateValid() whether it makes sense to use the retrieved positions.
+//! using objectDateValid(JDE) whether it makes sense to assume the retrieved positions
+//! are close enough to reality to find the object in a telescope. Another test is
+//! objectDateGoodEnoughForOrbits(JDE), which test a bit more relaxed, for the sake
+//! of retrieving positions for graphics.
 //! @note This class was called CometOrbit previously, but was now recombined
 //! with the former EllipticalOrbit class. They did almost the same.
 //! @note Algorithms from:
 //!   - Meeus: Astronomical Algorithms 1998
 //!   - Heafner: Fundamental Ephemeris Computations 1999
+//! @todo Add state vector equations from Heafner to create orbits from position+velocity,
+//! or change orbits from velocity changes.
 class KeplerOrbit : public Orbit {
 public:
     //! Constructor.
@@ -104,16 +109,20 @@ public:
 	//! Returns semimajor axis [AU] for elliptic orbit, 0 for a parabolic orbit, and a negative value [AU] for hyperbolic orbit.
 	virtual double getSemimajorAxis() const Q_DECL_OVERRIDE { return (e==1. ? 0. : q / (1.-e)); }
 	virtual double getEccentricity() const Q_DECL_OVERRIDE { return e; }
-	//! return whether a position returned for JDE would be good enough for at least plotting the orbit.
-	//! This is limited to dates within orbitGood around epoch.
-	//! If orbitGood is zero, this is always true.
-	bool objectDateGoodEnoughForOrbits(const double JDE) const { return ((orbitGood==0.) || (fabs(epochJDE-JDE)<orbitGood)); }
 	//! return whether a position returned for JDE can be regarded accurate enough for telescope use.
 	//! This is limited to dates within 1 year or epoch, or within orbitGood around epoch, whichever is smaller.
 	//! If orbitGood is zero, this is always true.
+	//! @note This will still return false positives after close encounters with major masses which change orbital parameters.
+	//! However, it should catch the usual case of outdated orbital elements which should be updated at least yearly.
 	bool objectDateValid(const double JDE) const { return ((orbitGood==0.) || (fabs(epochJDE-JDE)<qMin(orbitGood, 365.0))); }
-	//! Return minimal and maximal JDE values where this orbit should be used. (if orbitGood is configured)
-	Vec2d objectDateValidRange() const;
+	//! return whether a position returned for JDE would be good enough for at least plotting the orbit.
+	//! This is true for dates within orbitGood around epoch.
+	//! If orbitGood is zero, this is always true.
+	//! @note This relieves conditions of objectDateValid(JDE) somewhat, for the sake of illustratory completeness.
+	bool objectDateGoodEnoughForOrbits(const double JDE) const { return ((orbitGood==0.) || (fabs(epochJDE-JDE)<orbitGood)); }
+	//! Return minimal and maximal JDE values where this orbit should be used.
+	//! @returns the limits where objectDateValid returns true
+	Vec2d objectDateValidRange(const bool strict) const;
 	//! Calculate sidereal period in days from semi-major axis and central mass. If SMA<=0 (hyperbolic orbit), return 0.
 	double calculateSiderealPeriod() const;
 	//! @param semiMajorAxis in AU. If SMA<=0 (hyperbolic orbit), return 0.

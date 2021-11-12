@@ -135,7 +135,7 @@ KeplerOrbit::KeplerOrbit(double epochJDE,
 			double argOfPerhelion,
 			double timeAtPerihelion,
 			double orbitGoodDays,
-			double meanMotion,              // GZ: for parabolics, this is W/dt in Heafner's lettering
+			double meanMotion,              // for parabolics, this is W/dt in Heafner's lettering
 			double parentRotObliquity,
 			double parentRotAscendingnode,
 			double parentRotJ2000Longitude,
@@ -195,7 +195,6 @@ void Orbit::setParentOrientation(const double parentRotObliquity, const double p
 	rotateToVsop87[7] =                 s_obl*cj;
 	rotateToVsop87[8] =                 c_obl;
 }
-
 
 void KeplerOrbit::positionAtTimevInVSOP87Coordinates(double JDE, double *v)
 {
@@ -270,14 +269,22 @@ double KeplerOrbit::calculateSiderealPeriod() const
 	return calculateSiderealPeriod(a, centralMass);
 }
 
-Vec2d KeplerOrbit::objectDateValidRange() const
+Vec2d KeplerOrbit::objectDateValidRange(const bool strict) const
 {
 	double min=std::numeric_limits<double>::min();
 	double max=std::numeric_limits<double>::max();
 	if (orbitGood>0)
 	{
+	    if (strict)
+	    {
+		min=epochJDE-qMin(orbitGood, 365.);
+		max=epochJDE+qMin(orbitGood, 365.);
+	    }
+	    else
+	    {
 		min=epochJDE-orbitGood;
 		max=epochJDE+orbitGood;
+	    }
 	}
 	return Vec2d(min, max);
 }

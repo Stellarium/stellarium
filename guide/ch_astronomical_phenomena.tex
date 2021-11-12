@@ -631,16 +631,18 @@ metallic cores). Because of this, they have an average density which is
 much less than the terrestrial planets. Saturn's mean density is only
 about $0.7 \g/\cm^3$ -- it would float in water!
 
-\subsection{Magnitudes of the Planets}
-The visual magnitude of the planets can be found in astronomical
+\subsection{Apparent Magnitudes of the Planets}
+The apparent magnitude of the planets can be found in astronomical
 almanachs. Over time, several scientific studies have refined these
 models. A few of them have been implemented in Stellarium:
 \begin{description}
-\item[M\"uller 1893] G. M\"uller formulated visual magnitudes for the
+\item[M\"uller 1893] G. M\"uller formulated
+  \indexterm[magnitudes, visual]{visual magnitudes} for the
   planets from visual observations of 1877--1891. They can be found in
   \citet{AstronomicalAlgorithms:1998} and \citet{ESAE:1961}. They give 
   notably lower brightness estimates than the later models, which however 
-  provide Johnson V (instrumental) magnitudes. Several important 
+  provide \indexterm[magnitudes, instrumental]{instrumental magnitudes}
+  in the Johnson V photometric system. Several important 
   historical studies from the early 20th century are based on these estimates.
 \item[Astronomical Almanac 1984] This model was used in the
   Astronomical Almanac starting in 1984. The expressions are allegedly
@@ -661,6 +663,25 @@ innumerable smaller bodies in orbit around the Sun. These are
 generally the \emph{dwarf planets} (Ceres, Pluto, Eris), the other
 \emph{minor planets}, also known as \emph{planetoids} or
 \emph{asteroids}, and comets.
+
+While the positions of the major planets can meanwhile be computed for
+many millennia in the past and future, the minor bodies have only been
+systematically observed since the beginning of the 19th
+century.\footnote{The first discovered asteroid, (1) Ceres, was in
+  fact discovered on January 1, 1801.} The small masses occasionally
+pass by the larger planets which exert gravitational forces, so that
+the orbits of the minor bodies are not stable and cannot be computed
+for long periods. The positions are computed by using
+\indexterm{osculating orbital elements}, which describe the motions on
+instantaneous \indexterm{Kepler orbits}\footnote{The mathematician and
+  astronomer \name[Johannes]{Kepler} (1571--1630) discovered that
+  planets do not move on circles (which had been postulated since
+  antiquity), but on ``conical sections'', i.e., ellipses, parabolae
+  or even hyperbolae. The latter two can be observed for far-out
+  comets and recently even interstellar objects passing the Sun.}. If
+you want to compute positions of these objects with Stellarium, you
+need to have valid (current) \indexterm{orbital elements}. See
+Appendix~\ref{sec:ssystem.ini:minor} for more details.
 
 \subsection{Asteroids}
 \label{sec:Phenomena:Asteroids}
@@ -683,7 +704,9 @@ time a very long way from the Sun. Comets are composed of rock, dust
 and ices. When they come close to the Sun, the heat evaporates the
 ices, causing a gaseous release. This gas and loose material which
 comes away from the body of the comet is swept away from the Sun by
-the Solar wind, forming the tail.
+the Solar wind, forming the tail. The outgassing may also change the
+orbit of the comet, so that its orbital elements should be used only
+for a few months around their \indexterm{epoch}. 
 
 Most larger comets exhibit two kinds of tail: a straight gas tail
 (often blue-green in photographs), and a wider, occasionally curved
@@ -692,9 +715,9 @@ dust tail (reflecting whitish sunlight).
 Comets whose orbit brings them close to the Sun more frequently than
 every 200 years are considered to be \emph{short period} comets, the
 most famous of which is probably Comet Halley, named after the British
-astronomer \name[Edmund]{Halley} (1656--1741/42\footnote{Halley lived 
+astronomer \name[Edmund]{Halley} (1656--1741/42\footnote{\name{Halley} lived 
 in a time when Great Britain still used the Julian calendar and started 
-the years in March. He died January 14th, 1741 (Julian), 
+the years in March. He died on January 14th, 1741 (British Julian), 
 which was called January 25th 1742 (Gregorian) in most other European countries.}), 
 which has an orbital period of roughly 76~years.
 
@@ -920,7 +943,7 @@ galaxies}, \emph{lenticular galaxies} and \emph{irregular galaxies}.
 \label{sec:Eclipses}
 
 Eclipses occur when an apparently large celestial body (planet, moon
-etc.) moves between the observer (that's you!) and a more distant object
+etc.) moves between the observer and a more distant object
 -- the more distant object being eclipsed by the nearer one.
 
 \subsection{Solar Eclipses}

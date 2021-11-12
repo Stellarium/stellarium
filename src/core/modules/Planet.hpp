@@ -238,10 +238,12 @@ public:
 	//! For observation, date should be within the orbit_good value, or within 1 year from epoch of the orbital elements.
 	//! @note for major planets and moons this method will always return true
 	bool hasValidPositionalData(const double JDE, const PositionQuality purpose) const;
-	//! Returns JDE dates of presumably valid data for positional calculation.
+	//! Returns JDE dates of presumably valid data for positional calculation or acceptable range for graphics.
 	//! For the major planets and moons, this is always (std::numeric_limits<double>::min(), std::numeric_limits<double>::max())
-	//! For planets with Keplerian orbits, this is (epoch-orbit_good, epoch+orbit_good)
-	Vec2d getValidPositionalDataRange() const;
+	//! For planets with Keplerian orbits, this is [epoch-orbit_good, epoch+orbit_good] or,
+	//! if purpose=Position, [epoch-min(orbit_good, 365), epoch+min(orbit_good, 365)].
+	//! This should help to detect and avoid using outdated orbital elements.
+	Vec2d getValidPositionalDataRange(const PositionQuality purpose) const;
 	float getAxisRotation(void) { return axisRotation;} //! return axisRotation last computed in computeTransMatrix().
 
 	///////////////////////////////////////////////////////////////////////////
