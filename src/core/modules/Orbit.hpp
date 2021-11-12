@@ -104,7 +104,14 @@ public:
 	//! Returns semimajor axis [AU] for elliptic orbit, 0 for a parabolic orbit, and a negative value [AU] for hyperbolic orbit.
 	virtual double getSemimajorAxis() const Q_DECL_OVERRIDE { return (e==1. ? 0. : q / (1.-e)); }
 	virtual double getEccentricity() const Q_DECL_OVERRIDE { return e; }
-	bool objectDateValid(const double JDE) const { return ((orbitGood==0.) || (fabs(epochJDE-JDE)<orbitGood)); }
+	//! return whether a position returned for JDE would be good enough for at least plotting the orbit.
+	//! This is limited to dates within orbitGood around epoch.
+	//! If orbitGood is zero, this is always true.
+	bool objectDateGoodEnoughForOrbits(const double JDE) const { return ((orbitGood==0.) || (fabs(epochJDE-JDE)<orbitGood)); }
+	//! return whether a position returned for JDE can be regarded accurate enough for telescope use.
+	//! This is limited to dates within 1 year or epoch, or within orbitGood around epoch, whichever is smaller.
+	//! If orbitGood is zero, this is always true.
+	bool objectDateValid(const double JDE) const { return ((orbitGood==0.) || (fabs(epochJDE-JDE)<qMin(orbitGood, 365.0))); }
 	//! Return minimal and maximal JDE values where this orbit should be used. (if orbitGood is configured)
 	Vec2d objectDateValidRange() const;
 	//! Calculate sidereal period in days from semi-major axis and central mass. If SMA<=0 (hyperbolic orbit), return 0.

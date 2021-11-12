@@ -1208,7 +1208,7 @@ void AstroCalcDialog::currentCelestialPositions()
 					break;
 			}
 
-			if (!planet->hasValidPositionalData(JD))
+			if (!planet->hasValidPositionalData(JD, Planet::PositionQuality::OrbitPlotting))
 				passByType = false;
 
 			if (passByType && planet != core->getCurrentPlanet() && static_cast<double>(planet->getVMagnitudeWithExtinction(core)) <= mag && planet->isAboveRealHorizon(core))
@@ -1732,7 +1732,7 @@ void AstroCalcDialog::generateEphemeris()
 			core->setJD(JD);
 			core->update(0); // force update to get new coordinates
 
-			if (!obj->hasValidPositionalData(JD))
+			if (!obj->hasValidPositionalData(JD, Planet::PositionQuality::OrbitPlotting))
 				continue;
 
 			if (useHorizontalCoords)

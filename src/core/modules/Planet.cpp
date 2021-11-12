@@ -644,7 +644,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	oss << getInfoStringPeriods(core, flags);
 	oss << getInfoStringSize(core, flags);
 	oss << getInfoStringExtra(core, flags);
-	if (!hasValidPositionalData(core->getJDE()))
+	if (!hasValidPositionalData(core->getJDE(), PositionQuality::Position))
 	{
 	    oss << q_("NOTE: orbital elements outdated -- consider updating!") << "<br/>";
 	}
@@ -4293,7 +4293,7 @@ void Planet::drawOrbit(const StelCore* core)
 	if (hidden || (pType==isObserver)) return;
 	if (orbitPtr && pType>=isArtificial)
 	{
-		if (!hasValidPositionalData(lastJDE))
+		if (!hasValidPositionalData(lastJDE, PositionQuality::OrbitPlotting))
 			return;
 	}
 
@@ -4347,12 +4347,17 @@ void Planet::drawOrbit(const StelCore* core)
 		sPainter.setLineWidth(1);
 }
 
-bool Planet::hasValidPositionalData(const double JDE) const
+bool Planet::hasValidPositionalData(const double JDE, const PositionQuality purpose) const
 {
 	if (pType<isObserver)
 		return true;
 	else if (orbitPtr && pType>=isArtificial)
+	    switch (purpose) {
+	    case Position:
 		return static_cast<KeplerOrbit*>(orbitPtr)->objectDateValid(JDE);
+	    case OrbitPlotting:
+		return static_cast<KeplerOrbit*>(orbitPtr)->objectDateGoodEnoughForOrbits(JDE);
+	    }
 	else
 		return false;
 }
