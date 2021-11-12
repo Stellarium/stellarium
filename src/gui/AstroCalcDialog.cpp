@@ -1208,7 +1208,7 @@ void AstroCalcDialog::currentCelestialPositions()
 					break;
 			}
 
-			if (!planet->hasValidPositionalData(JD))
+			if (!planet->hasValidPositionalData(JD, Planet::PositionQuality::OrbitPlotting))
 				passByType = false;
 
 			if (passByType && planet != core->getCurrentPlanet() && static_cast<double>(planet->getVMagnitudeWithExtinction(core)) <= mag && planet->isAboveRealHorizon(core))
@@ -1732,7 +1732,7 @@ void AstroCalcDialog::generateEphemeris()
 			core->setJD(JD);
 			core->update(0); // force update to get new coordinates
 
-			if (!obj->hasValidPositionalData(JD))
+			if (!obj->hasValidPositionalData(JD, Planet::PositionQuality::OrbitPlotting))
 				continue;
 
 			if (useHorizontalCoords)
@@ -4492,8 +4492,8 @@ QMap<double, double> AstroCalcDialog::findClosestApproach(PlanetP& object1, Stel
 		if (mode==PhenomenaTypeIndex::Shadows && object2->getEnglishName()!="Sun" && planet->getParent()!=object1)
 			return separations;
 
-		// If we don't have at least partial overlap between planet valid dates and our interval, skip by returning an empty map.		
-		const Vec2d planetValidityLimits=planet->getValidPositionalDataRange();
+		// If we don't have at least partial overlap between planet valid dates and our interval, skip by returning an empty map.
+		const Vec2d planetValidityLimits=planet->getValidPositionalDataRange(Planet::PositionQuality::Position);
 		if ( (planetValidityLimits[0] > stopJD) || (planetValidityLimits[1] < startJD) )
 			return separations;
 	}

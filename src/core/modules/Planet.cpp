@@ -644,6 +644,10 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	oss << getInfoStringPeriods(core, flags);
 	oss << getInfoStringSize(core, flags);
 	oss << getInfoStringExtra(core, flags);
+	if (!hasValidPositionalData(core->getJDE(), PositionQuality::Position))
+	{
+	    oss << q_("NOTE: orbital elements outdated -- consider updating!") << "<br/>";
+	}
 	postProcessInfoString(str, flags);
 	return str;
 }
@@ -4289,7 +4293,7 @@ void Planet::drawOrbit(const StelCore* core)
 	if (hidden || (pType==isObserver)) return;
 	if (orbitPtr && pType>=isArtificial)
 	{
-		if (!hasValidPositionalData(lastJDE))
+		if (!hasValidPositionalData(lastJDE, PositionQuality::OrbitPlotting))
 			return;
 	}
 
@@ -4343,24 +4347,31 @@ void Planet::drawOrbit(const StelCore* core)
 		sPainter.setLineWidth(1);
 }
 
-bool Planet::hasValidPositionalData(const double JDE)
+bool Planet::hasValidPositionalData(const double JDE, const PositionQuality purpose) const
 {
 	if (pType<isObserver)
 		return true;
 	else if (orbitPtr && pType>=isArtificial)
-		return static_cast<KeplerOrbit*>(orbitPtr)->objectDateValid(JDE);
+	{
+		switch (purpose) {
+		    case Position:
+			return static_cast<KeplerOrbit*>(orbitPtr)->objectDateValid(JDE);
+		    case OrbitPlotting:
+			return static_cast<KeplerOrbit*>(orbitPtr)->objectDateGoodEnoughForOrbits(JDE);
+		}
+	}
 	else
 		return false;
 }
 
-Vec2d Planet::getValidPositionalDataRange()
+Vec2d Planet::getValidPositionalDataRange(const PositionQuality purpose) const
 {
 	double min=std::numeric_limits<double>::min();
 	double max=std::numeric_limits<double>::max();
 
 	if (orbitPtr && pType>=isArtificial)
 	{
-		return static_cast<KeplerOrbit*>(orbitPtr)->objectDateValidRange();
+		return static_cast<KeplerOrbit*>(orbitPtr)->objectDateValidRange(purpose==Planet::PositionQuality::Position);
 	}
 	return Vec2d(min, max);
 }

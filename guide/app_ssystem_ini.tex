@@ -320,6 +320,53 @@ light time correction should be at least approximately equal.
 \subsection{File ssystem\_minor.ini}
 \label{sec:ssystem.ini:minor}
 
+Orbital elements for minor bodies are always given for a particular
+\indexterm{equinox} like J2000.0 (which indicates the coordinate
+reference system) and \indexterm{epoch} (date). The other planets pull
+on the objects and change their orbits, most usually leading to the
+objects appearing too early or too late in their orbits, but also
+changing the other orbital elements. In addition, outgassing events of
+comets can act like jet propulsion and change orbits in unpredictable
+ways.  It is heavily recommended to update the orbital elements on a
+regular basis ($2\times$/year?), or at least before you go out and are
+actually observing minor bodies.  Use the Solar System Editor plugin
+for this task (section~\ref{sec:plugins:SolarSystemEditor}).
+
+You may find element sets for different equinoxes, like B1950.0. These
+have to be converted to equinox J2000.0 data before being useful in
+Stellarium.
+
+\begin{description}
+\item[coord\_func] is \texttt{kepler\_orbit} by
+  default\newFeature{0.20}. For compatibility and interoperability
+  with older versions we will keep the old default of
+  \texttt{comet\_orbit} for some longer time.\footnote{Previous
+    editions used the name \texttt{comet\_orbit}. Now the
+    \texttt{coord\_func} line can be left away, defaulting to
+    \texttt{kepler\_orbit}.}
+\item[parent] defaults to \texttt{Sun} and can be omitted.
+
+\item[orbit\_Epoch] JDE when these elements are valid. Defaults to
+  2451545.0 = the J2000.0 standard epoch.
+
+\item[orbit\_good] can be given in days to limit computation of the
+  object to the time range
+  $\mathtt{epoch}\pm\mathtt{orbit\_good}$. If\newFeature{0.21.3}
+  specified as \texttt{0} there is no check for out-of-range dates. If
+  specified as \texttt{-1}, half the orbital period is used. The main
+  purpose of this parameter is to avoid an element clash or the
+  inadvertent use of outdated comet orbit elements when a periodic
+  comet reappears.
+
+\item[orbit\_ArgOfPericenter] $\omega$ [degrees]
+\item[orbit\_AscendingNode] $\Omega$  [degrees]
+\item[orbit\_Eccentricity] $e=0$ circular, $0<e<1$ elliptic, $e=1$ parabolic, $e>1$ hyperbolic
+\item[orbit\_Inclination] $i$ [degrees] inclination against J2000 ecliptic
+\item[orbit\_SemiMajorAxis] $a$ [AU]
+\item[orbit\_visualization\_period] [days] %TODO does that default to sth meaningful? Do we need it at all?
+\end{description}
+The other parameters are like those for the major planets. 
+
 \subsubsection{Minor Planet section}
 \label{sec:ssystem.ini:MinorPlanet}
 
@@ -331,13 +378,14 @@ name=Vesta
 
 coord_func=comet_orbit
 parent=Sun
+orbit_Epoch=2457000.5
+orbit_MeanAnomaly=20.86389
+orbit_MeanMotion=0.27154465
+
 orbit_ArgOfPericenter=151.19843
 orbit_AscendingNode=103.85141
 orbit_Eccentricity=0.0887401
-orbit_Epoch=2457000.5
 orbit_Inclination=7.14043
-orbit_MeanAnomaly=20.86389
-orbit_MeanMotion=0.27154465
 orbit_SemiMajorAxis=2.3617933
 orbit_visualization_period=1325.46
 
@@ -353,27 +401,39 @@ tex_map=vesta.png
 model=4vesta_21_MLfix.obj
 \end{configfile}
 
-\texttt{type} can be \texttt{asteroid, dwarf planet, cubewano,
+\begin{description}
+\item[type] can be \texttt{asteroid, dwarf planet, cubewano,
   plutino, scattered disc object, Oort cloud object}. With the
 exception of Pluto (which is included in \file{ssystem\_major.ini} and cannot be changed), 
 all positions for minor bodies are computed with the orbiting elements given in this way. 
+\end{description}
 
-Note that although all minor planets orbit the sun in an
-elliptical orbit, the \texttt{coord\_func=comet\_orbit}. However, it
-is more common for minor planets to specify epoch, mean anomaly and
-mean motion.
+Minor planets further specify
+\begin{description}
+\item[orbit\_Epoch], JDE when these elements are valid.
+\item[orbit\_MeanAnomaly] $M$ mean anomaly, degrees. 
+\item[orbit\_MeanMotion] $n$ mean motion [degrees/day].
+\end{description}
 
-Visual magnitude is modelled from absolute magnitude $H$ and slope parameter $G$.
+Visual magnitude is modelled from
+\begin{description}
+\item[absolute\_magnitude] $H$
+\item[slope\_parameter] $G$.
+\end{description}
 
 Elements for rotational axis may be given just like for planets when
 they are known. It is recommended to use the modern specification
 (elements \texttt{rot\_pole\_...}).
 
+\begin{description}
+\item[model]
 A few asteroids have been visited by spacecraft, \newFeature{0.16.0}
 and for many other asteroids visual observations of stellar occultations 
 by asteroids and light curve measurements have enabled researchers to derive 
 3D shape models of asteroids. If a model is available in the \file{models} 
 subdirectory of the program directory, this can be configured with a \texttt{model} entry.
+\end{description}
+
 
 \subsubsection{Comet section}
 \label{sec:ssystem.ini:Comet}
@@ -383,9 +443,18 @@ major planets cause fast changes in their orbital elements, so that
 each apparition should be specified with a dedicated section in
 \file{ssystem\_minor.ini}.
 
-The coord\_func is always specified as \texttt{comet\_orbit}.  Note the
-specification of a time (JDE) at pericenter which is typical for
-comets.
+Note the specification of
+\begin{description}
+\item[orbit\_PericenterDistance] $q$ [AU]
+\item[orbit\_TimeAtPericenter] $T$  JDE of closest approach to the Sun.
+\end{description}
+which is more typical for comets which may have no orbital period when
+they are on parabolic or hyperbolic orbits. Frequently orbital
+elements are given for a date very close to perihelion so that the
+perihel date can be used as default for the optional
+\texttt{orbit\_Epoch}. However, this assumption does not always hold,
+so we\newFeature{0.21.3} recommend to state \texttt{orbit\_Epoch} explicitly.
+
 
 Comet brightness is evaluated from
 \begin{equation}
@@ -401,16 +470,20 @@ comets. From the literature \citep{AstronomicalAlgorithms:1998} (equation 33.13)
 \end{equation}
 from which $\kappa=2\cdot\mathtt{slope\_parameter}$. In any case, $\kappa$ is typically [5\ldots15] and specific for each comet.
 
-\texttt{albedo} is used to set the brightness for rendering the body,
+\begin{description}
+\item[albedo] is used to set the brightness for rendering the body,
 if you are close enough. 
+\end{description}
 
 A large number of elements for historical comets is provided in the
 file \file{ssystem\_1000comets.ini} in the installation directory. You
 can copy\&paste what you need into your
 \file{ssystem\_minor.ini} or add all with the Solar System Editor plugin (section~\ref{sec:plugins:SolarSystemEditor}). 
-Unfortunately it is not possible to specify
-several sets of orbital elements for different epochs of one apparition which would
-allow automatic changes.
+
+
+With a clever combination of elements and \texttt{orbit\_good}
+entries, \newFeature{0.21.3} it is possible to specify several sets of
+orbital elements for different epochs of one apparition.
 
 \paragraph{Periodic Comet}
 \label{sec:ssystem.ini:Comet:Periodic}
@@ -420,7 +493,7 @@ allow automatic changes.
 type=comet  
 name=1P/Halley
 
-coord_func=comet_orbit
+coord_func=comet_orbit [can be omitted]
 parent=Sun [can be omitted]
 orbit_ArgOfPericenter=111.7154
 orbit_AscendingNode=58.8583
@@ -443,10 +516,12 @@ tex_map=nomap.png
 model=1682q1halley_MLfix.obj [optional]
 \end{configfile}
 
-You may want to e.g.\ change the name in this entry
-to \texttt{name=1P/Halley (1982i)}. Note a rather short
-duration of \texttt{orbit\_good}, which means the comet is only displayed 780
-days before and after perihelion.
+You may want to e.g.\ change the name in this entry to
+\texttt{name=1P/Halley (1982i)}. Note a rather short duration of
+\texttt{orbit\_good}, which means the comet is only displayed 780 days
+before and after perihelion. (Actually, before and after
+\texttt{orbit\_Epoch}, but this is not given explicitly, so it
+defaults to \texttt{orbit\_TimeAtPericenter}.)
 
 Some comets have been visited by spacecraft so that shape models of their cores 
 may be available and can be configured with a \texttt{model} entry.\newFeature{0.16.0}
@@ -459,8 +534,8 @@ may be available and can be configured with a \texttt{model} entry.\newFeature{0
 type=comet
 name=C/2013 US10 (Catalina)
 
-coord_func=comet_orbit
-parent=Sun 
+coord_func=comet_orbit [can be omitted]
+parent=Sun [can be omitted]
 orbit_ArgOfPericenter=340.3533
 orbit_AscendingNode=186.141
 orbit_Eccentricity=1.000372
@@ -484,7 +559,7 @@ tex_map=nomap.png
 This has basically the same format. Note that eccentricity is larger than 1,
 this means the comet is following a slightly hyperbolic
 orbit. Stellarium shows data for this comet for almost 3 years
-(\texttt{orbit\_good=1000} days) from perihelion.
+(\texttt{orbit\_good=1000} days) from the epoch (defaults to pericenter time).
 
 
 

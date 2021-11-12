@@ -127,19 +127,21 @@ void KeplerOrbit::InitEll(const double dt, double &rCosNu, double &rSinNu)
 	rSinNu = h1*sin(E);
 }
 
-KeplerOrbit::KeplerOrbit(double pericenterDistance,
+KeplerOrbit::KeplerOrbit(double epochJDE,
+			double pericenterDistance,
 			double eccentricity,
 			double inclination,
 			double ascendingNode,
 			double argOfPerhelion,
 			double timeAtPerihelion,
 			double orbitGoodDays,
-			double meanMotion,              // GZ: for parabolics, this is W/dt in Heafner's lettering
+			double meanMotion,              // for parabolics, this is W/dt in Heafner's lettering
 			double parentRotObliquity,
 			double parentRotAscendingnode,
 			double parentRotJ2000Longitude,
 			double centralMass)
-	: q(pericenterDistance),
+	: epochJDE(epochJDE),
+	  q(pericenterDistance),
 	  e(eccentricity),
 	  i(inclination),
 	  Om(ascendingNode),
@@ -153,6 +155,11 @@ KeplerOrbit::KeplerOrbit(double pericenterDistance,
 {
 	// For Comets and Minor planets, this just builds a unity matrix. For moons, it rotates into the equatorial system of the parent planet
 	setParentOrientation(parentRotObliquity, parentRotAscendingnode, parentRotJ2000Longitude);
+	if (orbitGood<0.)
+	{
+	    const double period=calculateSiderealPeriod();
+	    orbitGood=(period==0. ? 1000. : period*0.5);
+	}
 }
 
 //! For planet moons which have orbits given in relation to their parent planet's equator.
@@ -188,7 +195,6 @@ void Orbit::setParentOrientation(const double parentRotObliquity, const double p
 	rotateToVsop87[7] =                 s_obl*cj;
 	rotateToVsop87[8] =                 c_obl;
 }
-
 
 void KeplerOrbit::positionAtTimevInVSOP87Coordinates(double JDE, double *v)
 {
@@ -263,14 +269,22 @@ double KeplerOrbit::calculateSiderealPeriod() const
 	return calculateSiderealPeriod(a, centralMass);
 }
 
-Vec2d KeplerOrbit::objectDateValidRange() const
+Vec2d KeplerOrbit::objectDateValidRange(const bool strict) const
 {
 	double min=std::numeric_limits<double>::min();
 	double max=std::numeric_limits<double>::max();
 	if (orbitGood>0)
 	{
-		min=t0-orbitGood;
-		max=t0+orbitGood;
+	    if (strict)
+	    {
+		min=epochJDE-qMin(orbitGood, 365.);
+		max=epochJDE+qMin(orbitGood, 365.);
+	    }
+	    else
+	    {
+		min=epochJDE-orbitGood;
+		max=epochJDE+orbitGood;
+	    }
 	}
 	return Vec2d(min, max);
 }

@@ -798,9 +798,9 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				long_of_pericenter = arg_of_pericenter + ascending_node;
 			}
 
+			const double epoch = pd.value(secname+"/orbit_Epoch",J2000).toDouble();
 			double time_at_pericenter = pd.value(secname+"/orbit_TimeAtPericenter",-1e100).toDouble();
 			if (time_at_pericenter <= -1e100) {
-				const double epoch = pd.value(secname+"/orbit_Epoch",J2000).toDouble();
 				double mean_anomaly = pd.value(secname+"/orbit_MeanAnomaly",-1e100).toDouble()*(M_PI/180.0);
 				if (mean_anomaly <= -1e10) {
 					double mean_longitude = pd.value(secname+"/orbit_MeanLongitude",-1e100).toDouble()*(M_PI/180.0);
@@ -851,18 +851,19 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				parent_rot_j2000_longitude = atan2(J2000NodeOrigin*OrbitAxis1,J2000NodeOrigin*OrbitAxis0);
 			}
 
-			const double orbitGoodDays=pd.value(secname+"/orbit_good", parent->englishName!="Sun" ? 0 : (type.contains("comet", Qt::CaseInsensitive) ? 1000 : 5000)).toDouble(); // "Moons" have permanently good orbits.
+			const double orbitGoodDays=pd.value(secname+"/orbit_good", parent->englishName!="Sun" ? 0. : -1.).toDouble(); // "Moons" have permanently good orbits.
 			const double inclination = pd.value(secname+"/orbit_Inclination", 0.0).toDouble()*(M_PI/180.0);
 
 			// Create a Keplerian orbit. This has been called CometOrbit before 0.20.
 			//qDebug() << "Creating KeplerOrbit for" << parent->englishName << "---" << englishName;
-			KeplerOrbit *orb = new KeplerOrbit(pericenterDistance,     // [AU]
+			KeplerOrbit *orb = new KeplerOrbit(epoch,                  // JDE
+							   pericenterDistance,     // [AU]
 							   eccentricity,           // 0..>1 (>>1 for Interstellar objects)
 							   inclination,            // [radians]
 							   ascending_node,         // [radians]
 							   arg_of_pericenter,      // [radians]
-							   time_at_pericenter,     // JD
-							   orbitGoodDays,          // orbitGoodDays. 0=always good.
+							   time_at_pericenter,     // JDE
+							   orbitGoodDays,          // orbitGoodDays. 0=always good, -1=compute_half_orbit_duration
 							   meanMotion,             // [radians/day]
 							   parentRotObliquity,     // [radians]
 							   parent_rot_asc_node,    // [radians]

@@ -2,7 +2,7 @@
 //
 // Initial structure of orbit computation; EllipticalOrbit: Copyright (C) 2001, Chris Laurel <claurel@shatters.net>
 // CometOrbit: Copyright (c) 2007,2008 Johannes Gajdosik
-//             Amendments (c) 2013 Georg Zotti (GZ).
+//             Amendments (c) 2013 Georg Zotti
 // Combination to KeplerOrbit, GimbalOrbit (c) 2020 Georg Zotti
 //
 // This program is free software; you can redistribute it and/or
@@ -47,21 +47,54 @@ protected:
     double rotateToVsop87[9]; //! Rotation matrix.
 };
 
-// This class was called CometOrbit, but was now recombined with the former EllipticalOrbit class. They did almost the same.
+//! KeplerOrbit describes an undisturbed orbit in a two-body system.
+//! This is used for minor bodies orbiting the sun, but also for planet moons.
+//! Orbital elements are considered valid for a relatively short time span (orbitGood)
+//! around epoch only and should be updated periodically,
+//! because the other planets perturbate the orbiting bodies.
+//! To avoid using outdated elements, the KeplerOrbit object can be queried
+//! using objectDateValid(JDE) whether it makes sense to assume the retrieved positions
+//! are close enough to reality to find the object in a telescope. Another test is
+//! objectDateGoodEnoughForOrbits(JDE), which test a bit more relaxed, for the sake
+//! of retrieving positions for graphics.
+//! @note This class was called CometOrbit previously, but was now recombined
+//! with the former EllipticalOrbit class. They did almost the same.
+//! @note Algorithms from:
+//!   - Meeus: Astronomical Algorithms 1998
+//!   - Heafner: Fundamental Ephemeris Computations 1999
+//! @todo Add state vector equations from Heafner to create orbits from position+velocity,
+//! or change orbits from velocity changes.
 class KeplerOrbit : public Orbit {
 public:
-	KeplerOrbit(double pericenterDistance,
+    //! Constructor.
+    //! @param epochJDE                JDE epoch of orbital elements.
+    //! @param pericenterDistance      [AU] pericenter distance
+    //! @param eccentricity            0..>1 (>>1 for Interstellar objects)
+    //! @param inclination             [radians]
+    //! @param ascendingNode           [radians]
+    //! @param argOfPerhelion          [radians]
+    //! @param timeAtPerihelion        JDE
+    //! @param orbitGoodDays           [earth days] can be used to exclude computation for dates too far outside epoch.
+    //!                                 0: always good (use that for planet moons. Not really correct, but most users won't care)
+    //!                                -1: signal "auto-compute to 1/2 the orbital period or 1000 days if there is no period [e>=1]")
+    //! @param meanMotion              [radians/day] for parabolics, this is W/dt in Heafner's lettering
+    //! @param parentRotObliquity      [radians] Comets/Minor Planets only have parent==sun, no need for these? --> Oh yes, these relate VSOP/J2000 eq frames!
+    //! @param parentRotAscendingnode  [radians]
+    //! @param parentRotJ2000Longitude [radians]
+    //! @param centralMass central mass in Solar masses. Velocity value depends on this!
+	KeplerOrbit(double epochJDE,
+		    double pericenterDistance,
 		    double eccentricity,
 		    double inclination,
 		    double ascendingNode,
 		    double argOfPerhelion,
 		    double timeAtPerihelion,
 		    double orbitGoodDays,
-		    double meanMotion,			// GZ: for parabolics, this is W/dt in Heafner's lettering
-		    double parentRotObliquity,		// Comets/Minor Planets only have parent==sun, no need for these? Oh yes, VSOP/J2000 eq frames!
+		    double meanMotion,
+		    double parentRotObliquity,
 		    double parentRotAscendingnode,
 		    double parentRotJ2000Longitude,
-		    double centralMass = 1.0            // central mass in Solar masses. Velocity value depends on this!
+		    double centralMass = 1.0
 		   );
 	//! Compute the object position for a specified Julian day.
 	//! @param JDE Julian Ephemeris Day
@@ -76,9 +109,20 @@ public:
 	//! Returns semimajor axis [AU] for elliptic orbit, 0 for a parabolic orbit, and a negative value [AU] for hyperbolic orbit.
 	virtual double getSemimajorAxis() const Q_DECL_OVERRIDE { return (e==1. ? 0. : q / (1.-e)); }
 	virtual double getEccentricity() const Q_DECL_OVERRIDE { return e; }
-	bool objectDateValid(const double JDE) const { return ((orbitGood<=0) || (fabs(t0-JDE)<orbitGood)); }
-	//! Return minimal and maximal JDE values where this orbit should be used. (if orbitGood is configured)
-	Vec2d objectDateValidRange() const;
+	//! return whether a position returned for JDE can be regarded accurate enough for telescope use.
+	//! This is limited to dates within 1 year or epoch, or within orbitGood around epoch, whichever is smaller.
+	//! If orbitGood is zero, this is always true.
+	//! @note This will still return false positives after close encounters with major masses which change orbital parameters.
+	//! However, it should catch the usual case of outdated orbital elements which should be updated at least yearly.
+	bool objectDateValid(const double JDE) const { return ((orbitGood==0.) || (fabs(epochJDE-JDE)<qMin(orbitGood, 365.0))); }
+	//! return whether a position returned for JDE would be good enough for at least plotting the orbit.
+	//! This is true for dates within orbitGood around epoch.
+	//! If orbitGood is zero, this is always true.
+	//! @note This relieves conditions of objectDateValid(JDE) somewhat, for the sake of illustratory completeness.
+	bool objectDateGoodEnoughForOrbits(const double JDE) const { return ((orbitGood==0.) || (fabs(epochJDE-JDE)<orbitGood)); }
+	//! Return minimal and maximal JDE values where this orbit should be used.
+	//! @returns the limits where objectDateValid returns true
+	Vec2d objectDateValidRange(const bool strict) const;
 	//! Calculate sidereal period in days from semi-major axis and central mass. If SMA<=0 (hyperbolic orbit), return 0.
 	double calculateSiderealPeriod() const;
 	//! @param semiMajorAxis in AU. If SMA<=0 (hyperbolic orbit), return 0.
@@ -86,6 +130,7 @@ public:
 	static double calculateSiderealPeriod(const double semiMajorAxis, const double centralMass);
 
 private:
+	const double epochJDE; //!< epoch (date of validity) of the elements.
 	const double q;  //!< pericenter distance [AU]
 	const double e;  //!< eccentricity
 	const double i;  //!< inclination [radians]
@@ -94,7 +139,7 @@ private:
 	const double t0; //!< time of perihel, JDE
 	const double n;  //!< mean motion (for parabolic orbits: W/dt in Heafner's presentation, ch5.5) [radians/day]
 	const double centralMass; //!< Mass in Solar masses. Velocity depends on this.
-	const double orbitGood; //!< orb. elements are only valid for this time from perihel [days]. Don't draw the object outside. Values <=0 mean "always good" (objects on undisturbed elliptic orbit)
+	double orbitGood; //!< orb. elements are only valid for this time from perihel [days]. Don't draw the object outside. Values <=0 mean "always good" (objects on undisturbed elliptic orbit)
 	Vec3d rdot;       //!< velocity vector. Caches velocity from last position computation, [AU/d]
 	bool updateTails; //!< flag to signal that comet tails must be recomputed.
 	void InitEll(const double dt, double &rCosNu, double &rSinNu);

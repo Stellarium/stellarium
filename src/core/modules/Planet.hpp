@@ -84,11 +84,12 @@ public:
 	Q_ENUMS(PlanetType)
 	Q_ENUMS(PlanetOrbitColorStyle)
 	Q_ENUMS(ApparentMagnitudeAlgorithm)
+	Q_ENUMS(PositionQuality)
 	//! numeric typecodes for the type descriptions in ssystem.ini
-	// GZ: Until 0.13 QStrings were used for types.
-	// GZ: Enums are slightly faster than string comparisons in time-critical comparisons.
-	// GZ: If other types are introduced, add here and the string in init().
-	// GZ TODO for 0.19: Preferably convert this into a bitfield and allow several bits set:
+	// Until 0.13 QStrings were used for types.
+	// Enums are slightly faster than string comparisons in time-critical comparisons.
+	// If other types are introduced, add here and the string in init().
+	// TBD for 0.19 or later: Preferably convert this into a bitfield and allow several bits set:
 	// Cubewanos, SDO, OCO, Sednoids are Asteroids, Pluto is a Plutino and DwarfPlanet, Ceres is Asteroid and DwarfPlanet etc.!
 	// Maybe even add queries like Planet::isAsteroid() { return (planetType & Planet::isAsteroid);}
 	enum PlanetType
@@ -127,6 +128,14 @@ public:
 		MallamaHilton_2018,         // A. Mallama, J. L. Hilton: Computing apparent planetary magnitudes for the Astronomical Almanac. Astron.&Computing 25 (2018) 10-24
 		UndefinedAlgorithm,
 		Generic                     // Visual magnitude based on phase angle and albedo. The formula source for this is totally unknown!
+	};
+
+	//! enums to indicate for which purpose we check positional quality.
+	//! Objects on KeplerOrbits may be too far from their epoch to provide useful data.
+	enum PositionQuality
+	{
+		Position,                   // Good enough for positions.
+		OrbitPlotting		    // Good enough for orbitplotting?
 	};
 
 public:
@@ -225,12 +234,16 @@ public:
 	//! Returns whether planet positions are valid and useful for the current simulation time.
 	//! E.g. outdated orbital elements for Kepler orbits (beyond their orbit_good .ini file entries)
 	//! may lead to invalid positions which should better not be used.
+	//! @param purpose signal whether result should be good enough for observation of just for plotting orbit data.
+	//! For observation, date should be within the orbit_good value, or within 1 year from epoch of the orbital elements.
 	//! @note for major planets and moons this method will always return true
-	bool hasValidPositionalData(const double JDE);
-	//! Returns JDE dates of presumably valid data for positional calculation.
+	bool hasValidPositionalData(const double JDE, const PositionQuality purpose) const;
+	//! Returns JDE dates of presumably valid data for positional calculation or acceptable range for graphics.
 	//! For the major planets and moons, this is always (std::numeric_limits<double>::min(), std::numeric_limits<double>::max())
-	//! For planets with Keplerian orbits, this is (epoch-orbit_good, epoch+orbit_good)
-	Vec2d getValidPositionalDataRange();
+	//! For planets with Keplerian orbits, this is [epoch-orbit_good, epoch+orbit_good] or,
+	//! if purpose=Position, [epoch-min(orbit_good, 365), epoch+min(orbit_good, 365)].
+	//! This should help to detect and avoid using outdated orbital elements.
+	Vec2d getValidPositionalDataRange(const PositionQuality purpose) const;
 	float getAxisRotation(void) { return axisRotation;} //! return axisRotation last computed in computeTransMatrix().
 
 	///////////////////////////////////////////////////////////////////////////
