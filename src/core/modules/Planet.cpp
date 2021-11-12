@@ -4360,7 +4360,7 @@ bool Planet::hasValidPositionalData(const double JDE, const PositionQuality purp
 			return static_cast<KeplerOrbit*>(orbitPtr)->objectDateGoodEnoughForOrbits(JDE);
 		}
 	}
-	else
+	//else
 		return false;
 }
 
