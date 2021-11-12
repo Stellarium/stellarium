@@ -154,7 +154,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		posGridBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
 		posGridBuffer.create();
 		posGridBuffer.bind();
-		posGridBuffer.allocate(posGrid, (1+skyResolutionX)*(1+skyResolutionY)*8);
+		posGridBuffer.allocate(posGrid, static_cast<int>((1+skyResolutionX)*(1+skyResolutionY))*8);
 		posGridBuffer.release();
 		
 		// Generate the indices used to draw the quads
