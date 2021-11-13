@@ -587,7 +587,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 		if (commentRx.exactMatch(record))
 			continue;
 
-		// prevent leaving zeros on numbers from being interpretted as octal numbers
+		// prevent leading zeros on numbers from being interpreted as octal numbers
 		record.replace(" 0", " ");
 		QTextStream rStr(&record);
 		rStr >> shortname >> texfile >> x1 >> y1 >> hp1 >> x2 >> y2 >> hp2 >> x3 >> y3 >> hp3;
@@ -616,7 +616,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 				qWarning() << "ERROR: could not find texture, " << QDir::toNativeSeparators(texfile);
 			}
 
-			cons->artTexture = StelApp::getInstance().getTextureManager().createTextureThread(texturePath);
+			cons->artTexture = StelApp::getInstance().getTextureManager().createTextureThread(texturePath, StelTexture::StelTextureParams(true));
 
 			int texSizeX = 0, texSizeY = 0;
 			if (cons->artTexture==Q_NULLPTR || !cons->artTexture->getDimensions(texSizeX, texSizeY))
@@ -625,20 +625,20 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 			}
 
 			StelCore* core = StelApp::getInstance().getCore();
-			Vec3d s1 = hipStarMgr->searchHP(static_cast<int>(hp1))->getJ2000EquatorialPos(core);
-			Vec3d s2 = hipStarMgr->searchHP(static_cast<int>(hp2))->getJ2000EquatorialPos(core);
-			Vec3d s3 = hipStarMgr->searchHP(static_cast<int>(hp3))->getJ2000EquatorialPos(core);
+			const Vec3d s1 = hipStarMgr->searchHP(static_cast<int>(hp1))->getJ2000EquatorialPos(core);
+			const Vec3d s2 = hipStarMgr->searchHP(static_cast<int>(hp2))->getJ2000EquatorialPos(core);
+			const Vec3d s3 = hipStarMgr->searchHP(static_cast<int>(hp3))->getJ2000EquatorialPos(core);
 
 			// To transform from texture coordinate to 2d coordinate we need to find X with XA = B
-			// A formed of 4 points in texture coordinate, B formed with 4 points in 3d coordinate
-			// We need 3 stars and the 4th point is deduced from the other to get an normal base
+			// A formed of 4 points in texture coordinate, B formed with 4 points in 3d coordinate space
+			// We need 3 stars and the 4th point is deduced from the others to get a normal base
 			// X = B inv(A)
 			Vec3d s4 = s1 + ((s2 - s1) ^ (s3 - s1));
 			Mat4d B(s1[0], s1[1], s1[2], 1, s2[0], s2[1], s2[2], 1, s3[0], s3[1], s3[2], 1, s4[0], s4[1], s4[2], 1);
 			Mat4d A(x1, texSizeY - static_cast<int>(y1), 0., 1., x2, texSizeY - static_cast<int>(y2), 0., 1., x3, texSizeY - static_cast<int>(y3), 0., 1., x1, texSizeY - static_cast<int>(y1), texSizeX, 1.);
 			Mat4d X = B * A.inverse();
 
-			// Tesselate on the plan assuming a tangential projection for the image
+			// Tessellate on the plane assuming a tangential projection for the image
 			static const int nbPoints=5;
 			QVector<Vec2f> texCoords;
 			texCoords.reserve(nbPoints*nbPoints*6);
@@ -658,7 +658,13 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 			QVector<Vec3d> contour;
 			contour.reserve(texCoords.size());
 			for (const auto& v : texCoords)
-				contour << X * Vec3d(static_cast<double>(v[0]) * texSizeX, static_cast<double>(v[1]) * texSizeY, 0.);
+			{
+				Vec3d vertex = X * Vec3d(static_cast<double>(v[0]) * texSizeX, static_cast<double>(v[1]) * texSizeY, 0.);
+				// Originally the projected texture plane remained as tangential plane.
+				// The vertices should however be reduced to the sphere for correct aberration:
+				vertex.normalize();
+				contour << vertex;
+			}
 
 			cons->artPolygon.vertex=contour;
 			cons->artPolygon.texCoords=texCoords;
@@ -975,7 +981,7 @@ void ConstellationMgr::update(double deltaTime)
 {
 	//calculate FOV fade value, linear fade between artIntensityMaximumFov and artIntensityMinimumFov
 	double fov = StelApp::getInstance().getCore()->getMovementMgr()->getCurrentFov();
-	Constellation::artIntensityFovScale = qBound(0.0,(fov - artIntensityMinimumFov) / (artIntensityMaximumFov - artIntensityMinimumFov),1.0);
+	Constellation::artIntensityFovScale = static_cast<float>(qBound(0.0,(fov - artIntensityMinimumFov) / (artIntensityMaximumFov - artIntensityMinimumFov),1.0));
 
 	const int delta = static_cast<int>(deltaTime*1000);
 	for (auto* constellation : constellations)
@@ -1026,7 +1032,7 @@ double ConstellationMgr::getArtIntensityMaximumFov() const
 
 void ConstellationMgr::setArtFadeDuration(const float duration)
 {
-	if (artFadeDuration != duration)
+    if (!qFuzzyCompare(artFadeDuration, duration))
 	{
 		artFadeDuration = duration;
 

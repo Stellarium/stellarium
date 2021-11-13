@@ -167,7 +167,7 @@ StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const Stel
 	tex->fullPath = canPath;
 	if (!lazyLoading)
 	{
-		//use load() instead of bind() to prevent potential - if very unlikey - OpenGL errors
+		//use load() instead of bind() to prevent potential - if very unlikely - OpenGL errors
 		//because GL must be called in the main thread
 		tex->load();
 	}
