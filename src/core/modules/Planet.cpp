@@ -1152,7 +1152,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 			{
 				oss << QString("%1: %2<br/>").arg(q_("Position Angle of axis"), paAxisStr);
 				oss << QString("%1: %2 %3 %4 (%5)<br/>").arg(q_("Libration"), totalLibrationStr, qc_("towards", "into the direction of"), librationAngleStr, limbStr);
-				oss << QString("%1: %2/%3").arg(q_("Libration"), libLStr, libBStr) << "<br/>";
+				oss << QString("%1: %2/%3<br/>").arg(q_("Libration"), libLStr, libBStr);
 				oss << QString("%1: %2/%3<br/>").arg(q_("Subsolar point"), subsolarLStr, subsolarBStr);
 				oss << QString("%1: %2<br/>").arg(q_("Colongitude"), colongitudeStr);
 			}
