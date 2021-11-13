@@ -581,7 +581,7 @@ QVariant Worksheet::read(int row, int column) const
 Cell *Worksheet::cellAt(const CellReference &row_column) const
 {
 	if (!row_column.isValid())
-		return 0;
+		return Q_NULLPTR;
 
 	return cellAt(row_column.row(), row_column.column());
 }
@@ -595,9 +595,9 @@ Cell *Worksheet::cellAt(int row, int col) const
 	Q_D(const Worksheet);
     auto it = d->cellTable.constFind(row);
     if (it == d->cellTable.constEnd())
-		return 0;
+		return Q_NULLPTR;
     if (!it->contains(col))
-		return 0;
+		return Q_NULLPTR;
 
     return (*it)[col].data();
 }
@@ -1379,13 +1379,13 @@ void Worksheet::saveToXmlFile(QIODevice *device) const
 			writer.writeStartElement(QStringLiteral("col"));
 			writer.writeAttribute(QStringLiteral("min"), QString::number(col_info->firstColumn));
 			writer.writeAttribute(QStringLiteral("max"), QString::number(col_info->lastColumn));
-			if (col_info->width)
+			if (col_info->width > 0.)
 				writer.writeAttribute(QStringLiteral("width"), QString::number(col_info->width, 'g', 15));
 			if (!col_info->format.isEmpty())
 				writer.writeAttribute(QStringLiteral("style"), QString::number(col_info->format.xfIndex()));
 			if (col_info->hidden)
 				writer.writeAttribute(QStringLiteral("hidden"), QStringLiteral("1"));
-			if (col_info->width)
+			if (col_info->width > 0.)
 				writer.writeAttribute(QStringLiteral("customWidth"), QStringLiteral("1"));
 			if (col_info->outlineLevel)
 				writer.writeAttribute(QStringLiteral("outlineLevel"), QString::number(col_info->outlineLevel));

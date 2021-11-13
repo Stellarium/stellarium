@@ -402,7 +402,7 @@ void Styles::writeFonts(QXmlStreamWriter &writer) const
 {
     writer.writeStartElement(QStringLiteral("fonts"));
     writer.writeAttribute(QStringLiteral("count"), QString::number(m_fontsList.count()));
-    for (size_t i=0; i<m_fontsList.size(); ++i)
+    for (int i=0; i<m_fontsList.size(); ++i)
         writeFont(writer, m_fontsList[i], false);
     writer.writeEndElement();//fonts
 }
@@ -493,7 +493,7 @@ void Styles::writeFills(QXmlStreamWriter &writer) const
     writer.writeStartElement(QStringLiteral("fills"));
     writer.writeAttribute(QStringLiteral("count"), QString::number(m_fillsList.size()));
 
-    for (size_t i=0; i<m_fillsList.size(); ++i)
+    for (int i=0; i<m_fillsList.size(); ++i)
         writeFill(writer, m_fillsList[i]);
 
     writer.writeEndElement(); //fills
@@ -551,7 +551,7 @@ void Styles::writeBorders(QXmlStreamWriter &writer) const
 {
     writer.writeStartElement(QStringLiteral("borders"));
     writer.writeAttribute(QStringLiteral("count"), QString::number(m_bordersList.count()));
-    for (size_t i=0; i<m_bordersList.size(); ++i)
+    for (int i=0; i<m_bordersList.size(); ++i)
         writeBorder(writer, m_bordersList[i]);
     writer.writeEndElement();//borders
 }
