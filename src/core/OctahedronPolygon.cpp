@@ -383,7 +383,7 @@ void OctahedronPolygon::updateVertexArray()
 	// Use GLUES tesselation functions to transform the polygon into a list of triangles
 	GLUEStesselator* tess = gluesNewTess();
 #ifndef NDEBUG
-	gluesTessCallback(tess, GLUES_TESS_BEGIN, (GLvoid(*)()) &checkBeginTrianglesCallback);
+	gluesTessCallback(tess, GLUES_TESS_BEGIN,        reinterpret_cast<GLvoid(*)()> (&checkBeginTrianglesCallback));
 #endif
 	gluesTessCallback(tess, GLUES_TESS_VERTEX_DATA,  reinterpret_cast<GLvoid(*)()> (&vertexTrianglesCallback));
 	gluesTessCallback(tess, GLUES_TESS_EDGE_FLAG,    reinterpret_cast<GLvoid(*)()> (&noOpCallback));
@@ -417,7 +417,7 @@ void OctahedronPolygon::updateVertexArray()
 			else
 			{
 				//  Discard vertex..
-				//qDebug() << "Found a fucking CW triangle";
+				//qDebug() << "Found a CW triangle - discarding!";
 			}
 		}
 
@@ -467,7 +467,7 @@ void OctahedronPolygon::updateVertexArray()
 		Q_ASSERT(SphericalConvexPolygon::checkValidContour(c));
 	}
 #else
-	// If I don't let this like that, the bahaviour will fail in Release mode!!!!
+	// If I don't let this like that, the behaviour will fail in Release mode!!!!
 	// It is either a bug in GCC either a memory problem which appears only when optimizations are activated.
 	QVector<Vec3d> c;
 	c.resize(3);
@@ -674,7 +674,7 @@ void OctahedronPolygon::splitContourByPlan(int onLine, const SubContour& inputCo
 	for (i=0;i<inputContour.size();++i)
 	{
 		currentVertex = inputContour.at(i);
-		if (currentVertex.vertex[onLine]==0)
+		if (qFuzzyCompare(currentVertex.vertex[onLine], 0.))
 			currentVertex.vertex[onLine]=1e-98;
 		currentQuadrant = getSide(currentVertex.vertex, onLine);
 		if (currentQuadrant==previousQuadrant)
@@ -716,7 +716,7 @@ void OctahedronPolygon::splitContourByPlan(int onLine, const SubContour& inputCo
 	for (;i<inputContour.size();++i)
 	{
 		currentVertex = inputContour.at(i);
-		if (currentVertex.vertex[onLine]==0)
+		if (qFuzzyCompare(currentVertex.vertex[onLine], 0.))
 			currentVertex.vertex[onLine]=1e-98;
 		currentQuadrant = getSide(currentVertex.vertex, onLine);
 		if (currentQuadrant==previousQuadrant)
