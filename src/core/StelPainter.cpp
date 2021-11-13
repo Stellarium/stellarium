@@ -1586,11 +1586,12 @@ void StelPainter::drawStelVertexArray(const StelVertexArray& arr, bool checkDisc
 		QVector<Vec3d> aberredVertex(arr.vertex.size());
 		for (int i=0; i<arr.vertex.size(); i++)
 		{
+			Q_ASSERT(qFuzzyCompare(arr.vertex.at(i).lengthSquared(), 1.0));
 			Vec3d vec=arr.vertex.at(i)+aberration;
 			vec.normalize();
 			aberredVertex[i]=vec;
-			setVertexPointer(3, GL_DOUBLE, aberredVertex.constData());
 		}
+		setVertexPointer(3, GL_DOUBLE, aberredVertex.constData());
 	}
 	if (arr.isTextured())
 	{
