@@ -43,11 +43,13 @@ QString Star1::getNameI18n(void) const
 	return QString();
 }
 
-QString Star1::getDesignation() const
+QString Star1::getScreenNameI18n(void) const
 {
 	if (getHip())
 	{
 		QStringList starNames;
+		if (!StarMgr::getDesignationUsage())
+			starNames << StarMgr::getCommonName(getHip());
 		if (StarMgr::getFlagSciNames()) // The scientific designations can be used for western sky cultures only
 		{
 			starNames << StarMgr::getSciName(getHip()).split(" - ");
@@ -58,6 +60,24 @@ QString Star1::getDesignation() const
 			if (StarMgr::getFlagHIPDesignation()) // append the HIP numbers of stars
 				starNames << QString("HIP %1").arg(getHip());
 		}
+		starNames.removeAll(QString(""));
+		if (starNames.count()>0)
+			return starNames.first();
+		else
+			return QString();
+	}
+	return QString();
+}
+
+QString Star1::getDesignation() const
+{
+	if (getHip())
+	{
+		QStringList starNames;
+		starNames << StarMgr::getSciName(getHip()).split(" - ");
+		starNames << StarMgr::getSciExtraName(getHip()).split(" - ");
+		starNames << StarMgr::getGcvsName(getHip());
+		starNames << QString("HIP %1").arg(getHip());
 		starNames.removeAll(QString(""));
 		if (starNames.count()>0)
 			return starNames.first();

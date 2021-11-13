@@ -1356,9 +1356,9 @@ void StarMgr::draw(StelCore* core)
 		int zone;
 		
 		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
-			z->draw(&sPainter, zone, true, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, flagDesignations, viewportCaps, withAberration, velf);
+			z->draw(&sPainter, zone, true, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps, withAberration, velf);
 		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
-			z->draw(&sPainter, zone, false, rcmag_table, limitMagIndex, core, maxMagStarName,names_brightness, flagDesignations, viewportCaps, withAberration, velf);
+			z->draw(&sPainter, zone, false, rcmag_table, limitMagIndex, core, maxMagStarName,names_brightness, viewportCaps, withAberration, velf);
 	}
 	exit_loop:
 

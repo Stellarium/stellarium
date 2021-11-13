@@ -221,7 +221,7 @@ public slots:
 	//! Set flag for usage designations of stars for their labels instead common names.
 	void setDesignationUsage(const bool flag) { if(flagDesignations!=flag){ flagDesignations=flag; emit designationUsageChanged(flag);}}
 	//! Get flag for usage designations of stars for their labels instead common names.
-	bool getDesignationUsage(void) {return flagDesignations; }
+	static bool getDesignationUsage(void) {return flagDesignations; }
 
 	//! Set flag for usage traditional designations of double stars.
 	void setFlagDblStarsDesignation(const bool flag) { if(flagDblStarsDesignation!=flag){ flagDblStarsDesignation=flag; emit flagDblStarsDesignationChanged(flag);}}
