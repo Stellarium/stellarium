@@ -2718,6 +2718,7 @@ void TestEphemeris::testHTC20Theory()
 		ae1 = qAbs(qAbs(pos[0]*AU_IN_KM) - qAbs(t1));
 		ae2 = qAbs(qAbs(pos[1]*AU_IN_KM) - qAbs(t2));
 		ae3 = qAbs(qAbs(pos[2]*AU_IN_KM) - qAbs(t3));
+		Q_UNUSED(r)
 
 		QVERIFY2(ae1 <= acceptableError && ae2 <= acceptableError && ae3 <= acceptableError,
 			 QString("%8; JD=%1 P[0]=%2 (%5) P[1]=%3 (%6) P[2]=%4 (%7)")
