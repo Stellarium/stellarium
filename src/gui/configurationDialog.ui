@@ -963,19 +963,6 @@
                </attribute>
               </widget>
              </item>
-             <item row="12" column="1">
-              <widget class="QCheckBox" name="checkBoxExtra">
-               <property name="toolTip">
-                <string>Spectral class, nebula type, etc.</string>
-               </property>
-               <property name="text">
-                <string>Additional information</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
-              </widget>
-             </item>
              <item row="0" column="1">
               <widget class="QCheckBox" name="checkBoxVisualMag">
                <property name="text">
@@ -1030,6 +1017,29 @@
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedFields</string>
                </attribute>
+              </widget>
+             </item>
+             <item row="13" column="1">
+              <widget class="QCheckBox" name="checkBoxExtra">
+               <property name="toolTip">
+                <string>Spectral class, nebula type, etc.</string>
+               </property>
+               <property name="text">
+                <string>Additional information</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="12" column="1">
+              <widget class="QCheckBox" name="checkBoxSolarLunarPosition">
+               <property name="toolTip">
+                <string>Show Solar and Lunar positions if observed from Earth</string>
+               </property>
+               <property name="text">
+                <string>Solar and Lunar position</string>
+               </property>
               </widget>
              </item>
             </layout>

@@ -644,6 +644,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	oss << getInfoStringPeriods(core, flags);
 	oss << getInfoStringSize(core, flags);
 	oss << getInfoStringExtra(core, flags);
+	oss << getSolarLunarInfoString(core, flags);
 	if (!hasValidPositionalData(core->getJDE(), PositionQuality::Position))
 	{
 	    oss << q_("NOTE: orbital elements outdated -- consider updating!") << "<br/>";

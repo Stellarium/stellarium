@@ -70,10 +70,11 @@ public:
 		IAUConstellation        = 0x00100000, //!< Three-letter constellation code (And, Boo, Cas, ...)
 		SiderealTime		= 0x00200000, //!< Mean and Apparent Sidereal Time
 		RTSTime			= 0x00400000, //!< Time of rise, transit and set of celestial object
-		Script                  = 0x00800000, //!< Should be used by Scripts only which can inject extraInfoStrings.
-		DebugAid                = 0x01000000, //!< Can be used for development only, place messages into extraInfoStrings. Comment them away or delete for releases.
-		NoFont			= 0x02000000,
-		PlainText		= 0x04000000  //!< Strip HTML tags from output
+		SolarLunarPosition      = 0x00800000, //!< Show Solar and Lunar horizontal position (on Earth location only)
+		Script                  = 0x01000000, //!< Should be used by Scripts only which can inject extraInfoStrings.
+		DebugAid                = 0x02000000, //!< Can be used for development only, place messages into extraInfoStrings. Comment them away or delete for releases.
+		NoFont			= 0x04000000,
+		PlainText		= 0x08000000  //!< Strip HTML tags from output
 	};
 	Q_DECLARE_FLAGS(InfoStringGroup, InfoStringGroupFlags)
 
@@ -81,7 +82,7 @@ public:
 	static const InfoStringGroupFlags AllInfo = static_cast<InfoStringGroupFlags>(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|
 									   Distance|Elongation|Size|Velocity|ProperMotion|Extra|HourAngle|AbsoluteMagnitude|
 									   GalacticCoord|SupergalacticCoord|OtherCoord|ObjectType|EclipticCoordJ2000|
-									   EclipticCoordOfDate|IAUConstellation|SiderealTime|RTSTime);
+									   EclipticCoordOfDate|IAUConstellation|SiderealTime|RTSTime|SolarLunarPosition);
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
 	static const InfoStringGroupFlags ShortInfo = static_cast<InfoStringGroupFlags>(Name|CatalogNumber|Magnitude|RaDecJ2000);
 
@@ -307,6 +308,10 @@ protected:
 	//! @param flags
 	//! @param decimals significant digits after the comma.
 	virtual QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals=1) const;
+
+	//! Add a section to the InfoString with just horizontal data for the Sun and Moon, when observed from Earth.
+	//! The application of this is to have quick info while observing other objects.
+	QString getSolarLunarInfoString(const StelCore *core, const InfoStringGroup& flags) const;
 
 	//! Apply post processing on the info string.
 	//! This also removes all extraInfoStrings possibly injected by modules (plugins) etc., except for Script and DebugAid types.
