@@ -167,7 +167,13 @@ void Constellation::drawArtOptim(StelPainter& sPainter, const SphericalRegion& r
 			if (artTexture->bind()==false)
 				return;
 
+#ifdef Q_OS_LINUX
+			// Unfortunately applying aberration to the constellation artwork causes ugly artifacts visible on Linux.
+			// It is better to disable aberration in this case and have a tiny texture shift where it usually does not need to critically match.
+			sPainter.drawStelVertexArray(artPolygon, false, Vec3d(0.));
+#else
 			sPainter.drawStelVertexArray(artPolygon, false, obsVelocity);
+#endif
 		}
 	}
 }
