@@ -38,6 +38,8 @@ Potential candidates, other examples
 - [meshwarp sample code](http://paulbourke.net/dataformats/meshwarp/) : yes, the sample code.
 - [time ephemerides](http://timeephem.sourceforge.net/index.php)
 - although less likely, copy-pasted snippets from Qt examples *could* be candidates ([example](https://github.com/Stellarium/stellarium/blob/2db52c18bc87aaefa00d3d4a280969349634af8f/src/gui/StelGuiItems.cpp#L352))
+- [DASTCOM](https://ssd.jpl.nasa.gov/horizons/manual.html#dastcom) documentation and Fortran code
+- API documentation, e.g. for [HORIZONS](https://ssd-api.jpl.nasa.gov/doc/horizons_file.html)
 
 Although some examples above are unlikely to ever change - or be very ephemeral (sic) - the reasoning is always: prevent rather than cure, and exercise a lot, until it becomes second nature. Just keep Murphy's Law in mind...
 
