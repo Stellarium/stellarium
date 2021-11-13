@@ -305,8 +305,11 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed()
 				item.jd	= QString::number ( JD, 'f', 6 );
 
 			if ( !Location.isEmpty() )
-				QHash<QString, int>::iterator i;
+			{
+				// FIXME: gcc warned about an indentation problem. I added the brackets here. But what did you intend to do with the iterator?
+				//QHash<QString, int>::iterator i;
 				item.location = Location;
+			}
 
 			if ( !visibleFlag )
 				item.isVisibleMarker = visibleFlag;
