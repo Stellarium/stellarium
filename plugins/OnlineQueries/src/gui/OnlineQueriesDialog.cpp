@@ -133,7 +133,7 @@ void OnlineQueriesDialog::setOutputUrl(QUrl url) const
 	view->setUrl(url);
 #else
 	QDesktopServices::openUrl(url);
-	view->setHtml(QString("<p>" + qc_("Opened %1 in your webbrowser", "OnlineQueries") + "</p>").arg(url.host()));
+	view->setHtml(QString("<p>" + qc_("Opened %1 in your web browser", "OnlineQueries") + "</p>").arg(url.host()));
 #endif
 }
 
