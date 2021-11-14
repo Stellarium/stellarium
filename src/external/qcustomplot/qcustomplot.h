@@ -242,7 +242,6 @@ public:
     \ref ssDot and \ref ssPixmap) can be controlled with the \ref setSize function. Scatters are
     drawn with the pen and brush specified with \ref setPen and \ref setBrush.
   */
-  Q_ENUMS(ScatterShape)
   enum ScatterShape { ssNone       ///< no scatter symbols are drawn (e.g. in QCPGraph, data only represented with lines)
                       ,ssDot       ///< \enumimage{ssDot.png} a single pixel (use \ref ssDisc or \ref ssCircle if you want a round shape with a certain radius)
                       ,ssCross     ///< \enumimage{ssCross.png} a cross
@@ -262,6 +261,7 @@ public:
                       ,ssPixmap    ///< a custom pixmap specified by \ref setPixmap, centered on the data point coordinates
                       ,ssCustom    ///< custom painter operations are performed per scatter (As QPainterPath, see \ref setCustomPath)
                     };
+  Q_ENUM(ScatterShape)
 
   QCPScatterStyle();
   QCPScatterStyle(ScatterShape shape, double size=6);
@@ -416,7 +416,7 @@ class QCP_LIB_DECL QCPLayerable : public QObject
   Q_PROPERTY(bool antialiased READ antialiased WRITE setAntialiased)
   /// \endcond
 public:
-  QCPLayerable(QCustomPlot *plot, QString targetLayer=QString(), QCPLayerable *parentLayerable=0);
+  QCPLayerable(QCustomPlot *plot, QString targetLayer=QString(), QCPLayerable *parentLayerable=Q_NULLPTR);
   ~QCPLayerable();
   
   // getters:
@@ -433,7 +433,7 @@ public:
   void setAntialiased(bool enabled);
   
   // introduced virtual methods:
-  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=0) const;
+  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=Q_NULLPTR) const;
   
   // non-property methods:
   bool realVisibility() const;
@@ -646,9 +646,9 @@ public:
                      ,upMargins    ///< Phase in which the margins are calculated and set
                      ,upLayout     ///< Final phase in which the layout system places the rects of the elements
                    };
-  Q_ENUMS(UpdatePhase)
+  Q_ENUM(UpdatePhase)
 
-  explicit QCPLayoutElement(QCustomPlot *parentPlot=0);
+  explicit QCPLayoutElement(QCustomPlot *parentPlot=Q_NULLPTR);
   virtual ~QCPLayoutElement();
   
   // getters:
@@ -660,7 +660,7 @@ public:
   QCP::MarginSides autoMargins() const { return mAutoMargins; }
   QSize minimumSize() const { return mMinimumSize; }
   QSize maximumSize() const { return mMaximumSize; }
-  QCPMarginGroup *marginGroup(QCP::MarginSide side) const { return mMarginGroups.value(side, (QCPMarginGroup*)0); }
+  QCPMarginGroup *marginGroup(QCP::MarginSide side) const { return mMarginGroups.value(side, static_cast<QCPMarginGroup*>(Q_NULLPTR)); }
   QHash<QCP::MarginSide, QCPMarginGroup*> marginGroups() const { return mMarginGroups; }
   
   // setters:
@@ -681,7 +681,7 @@ public:
   virtual QList<QCPLayoutElement*> elements(bool recursive) const;
   
   // reimplemented virtual methods:
-  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=0) const;
+  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=Q_NULLPTR) const;
   
 protected:
   // property members:
@@ -850,7 +850,7 @@ public:
   virtual QCPLayoutElement* takeAt(int index);
   virtual bool take(QCPLayoutElement* element);
   virtual void simplify() {}
-  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=0) const;
+  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=Q_NULLPTR) const;
   
   // non-virtual methods:
   void addElement(QCPLayoutElement *element, Qt::Alignment alignment);
@@ -883,7 +883,6 @@ public:
     
     \see QCPItemLine::setHead, QCPItemLine::setTail, QCPItemCurve::setHead, QCPItemCurve::setTail, QCPAxis::setLowerEnding, QCPAxis::setUpperEnding
   */
-  Q_ENUMS(EndingStyle)
   enum EndingStyle { esNone          ///< No ending decoration
                      ,esFlatArrow    ///< A filled arrow head with a straight/flat back (a triangle)
                      ,esSpikeArrow   ///< A filled arrow head with an indented back
@@ -895,7 +894,8 @@ public:
                      ,esHalfBar      ///< A bar perpendicular to the line, pointing out to only one side (to which side can be changed with \ref setInverted)
                      ,esSkewedBar    ///< A bar that is skewed (skew controllable via \ref setLength)
                    };
-  
+  Q_ENUM(EndingStyle)
+
   QCPLineEnding();
   QCPLineEnding(EndingStyle style, double width=8, double length=10, bool inverted=false);
   
@@ -1054,7 +1054,7 @@ public:
   enum LabelType { ltNumber    ///< Tick coordinate is regarded as normal number and will be displayed as such. (see \ref setNumberFormat)
                    ,ltDateTime ///< Tick coordinate is regarded as a date/time (seconds since 1970-01-01T00:00:00 UTC) and will be displayed and formatted as such. (for details, see \ref setDateTimeFormat)
                  };
-  Q_ENUMS(LabelType)
+  Q_ENUM(LabelType)
   /*!
     Defines on which side of the axis the tick labels (numbers) shall appear.
     
@@ -1063,7 +1063,7 @@ public:
   enum LabelSide { lsInside    ///< Tick labels will be displayed inside the axis rect and clipped to the inner axis rect
                    ,lsOutside  ///< Tick labels will be displayed outside the axis rect
                  };
-  Q_ENUMS(LabelSide)
+  Q_ENUM(LabelSide)
   /*!
     Defines the scale of an axis.
     \see setScaleType
@@ -1071,7 +1071,7 @@ public:
   enum ScaleType { stLinear       ///< Linear scaling
                    ,stLogarithmic ///< Logarithmic scaling with correspondingly transformed plots and (major) tick marks at every base power (see \ref setScaleLogBase).
                  };
-  Q_ENUMS(ScaleType)
+  Q_ENUM(ScaleType)
   /*!
     Defines the selectable parts of an axis.
     \see setSelectableParts, setSelectedParts
@@ -1199,7 +1199,7 @@ public:
   void setUpperEnding(const QCPLineEnding &ending);
   
   // reimplemented virtual methods:
-  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=0) const;
+  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=Q_NULLPTR) const;
   
   // non-property methods:
   Qt::Orientation orientation() const { return mOrientation; }
@@ -1434,7 +1434,7 @@ public:
 
   // introduced virtual methods:
   virtual void clearData() = 0;
-  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=0) const = 0;
+  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=Q_NULLPTR) const = 0;
   virtual bool addToLegend();
   virtual bool removeFromLegend() const;
   
@@ -1520,7 +1520,7 @@ protected:
   QSet<QCPItemPosition*> mChildrenX, mChildrenY;
   
   // introduced virtual methods:
-  virtual QCPItemPosition *toQCPItemPosition() { return 0; }
+  virtual QCPItemPosition *toQCPItemPosition() { return Q_NULLPTR; }
   
   // non-virtual methods:
   void addChildX(QCPItemPosition* pos); // called from pos when this anchor is set as parent
@@ -1628,7 +1628,7 @@ public:
   Q_SLOT void setSelected(bool selected);
   
   // reimplemented virtual methods:
-  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=0) const = 0;
+  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=Q_NULLPTR) const = 0;
   
   // non-virtual methods:
   QList<QCPItemPosition*> positions() const { return mPositions; }
@@ -1698,7 +1698,7 @@ public:
   enum LayerInsertMode { limBelow  ///< Layer is inserted below other layer
                          ,limAbove ///< Layer is inserted above other layer
                        };
-  Q_ENUMS(LayerInsertMode)
+  Q_ENUM(LayerInsertMode)
   
   /*!
     Defines with what timing the QCustomPlot surface is refreshed after a replot.
@@ -1710,7 +1710,7 @@ public:
                          ,rpHint     ///< Whether to use immediate repaint or queued update depends on whether the plotting hint \ref QCP::phForceRepaint is set, see \ref setPlottingHints.
                        };
   
-  explicit QCustomPlot(QWidget *parent = 0);
+  explicit QCustomPlot(QWidget *parent = Q_NULLPTR);
   virtual ~QCustomPlot();
   
   // getters:
@@ -1764,7 +1764,7 @@ public:
   // specialized interface for QCPGraph:
   QCPGraph *graph(int index) const;
   QCPGraph *graph() const;
-  QCPGraph *addGraph(QCPAxis *keyAxis=0, QCPAxis *valueAxis=0);
+  QCPGraph *addGraph(QCPAxis *keyAxis=Q_NULLPTR, QCPAxis *valueAxis=Q_NULLPTR);
   bool removeGraph(QCPGraph *graph);
   bool removeGraph(int index);
   int clearGraphs();
@@ -1790,7 +1790,7 @@ public:
   bool setCurrentLayer(const QString &name);
   bool setCurrentLayer(QCPLayer *layer);
   int layerCount() const;
-  bool addLayer(const QString &name, QCPLayer *otherLayer=0, LayerInsertMode insertMode=limAbove);
+  bool addLayer(const QString &name, QCPLayer *otherLayer=Q_NULLPTR, LayerInsertMode insertMode=limAbove);
   bool removeLayer(QCPLayer *layer);
   bool moveLayer(QCPLayer *layer, QCPLayer *otherLayer, LayerInsertMode insertMode=limAbove);
   
@@ -1885,7 +1885,7 @@ protected:
   
   // non-virtual methods:
   void updateLayerIndices() const;
-  QCPLayerable *layerableAt(const QPointF &pos, bool onlySelectable, QVariant *selectionDetails=0) const;
+  QCPLayerable *layerableAt(const QPointF &pos, bool onlySelectable, QVariant *selectionDetails=Q_NULLPTR) const;
   void drawBackground(QCPPainter *painter);
   
   friend class QCPLegend;
@@ -1907,7 +1907,7 @@ public:
   enum ColorInterpolation { ciRGB  ///< Color channels red, green and blue are linearly interpolated
                             ,ciHSV ///< Color channels hue, saturation and value are linearly interpolated (The hue is interpolated over the shortest angle distance)
                           };
-  Q_ENUMS(ColorInterpolation)
+  Q_ENUM(ColorInterpolation)
   
   /*!
     Defines the available presets that can be loaded with \ref loadPreset. See the documentation
@@ -1926,7 +1926,7 @@ public:
                         ,gpJet       ///< Hue variation similar to a spectrum, often used in numerical visualization (creates banding illusion but allows more precise magnitude estimates)
                         ,gpHues      ///< Full hue cycle, with highest and lowest color red (suitable for periodic data, such as angles and phases, see \ref setPeriodic)
                       };
-  Q_ENUMS(GradientPreset)
+  Q_ENUM(GradientPreset)
   
   QCPColorGradient(GradientPreset preset=gpCold);
   bool operator==(const QCPColorGradient &other) const;
@@ -2009,7 +2009,7 @@ public:
   QCPAxis *axis(QCPAxis::AxisType type, int index=0) const;
   QList<QCPAxis*> axes(QCPAxis::AxisTypes types) const;
   QList<QCPAxis*> axes() const;
-  QCPAxis *addAxis(QCPAxis::AxisType type, QCPAxis *axis=0);
+  QCPAxis *addAxis(QCPAxis::AxisType type, QCPAxis *axis=Q_NULLPTR);
   QList<QCPAxis*> addAxes(QCPAxis::AxisTypes types);
   bool removeAxis(QCPAxis *axis);
   QCPLayoutInset *insetLayout() const { return mInsetLayout; }
@@ -2109,7 +2109,7 @@ public:
   Q_SLOT void setSelected(bool selected);
   
   // reimplemented virtual methods:
-  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=0) const;
+  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=Q_NULLPTR) const;
   
 signals:
   void selectionChanged(bool selected);
@@ -2233,7 +2233,7 @@ public:
   void setSelectedTextColor(const QColor &color);
   
   // reimplemented virtual methods:
-  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=0) const;
+  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=Q_NULLPTR) const;
   
   // non-virtual methods:
   QCPAbstractLegendItem *item(int index) const;
@@ -2323,7 +2323,7 @@ public:
   Q_SLOT void setSelected(bool selected);
   
   // reimplemented virtual methods:
-  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=0) const;
+  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=Q_NULLPTR) const;
   
 signals:
   void selectionChanged(bool selected);
@@ -2512,7 +2512,7 @@ public:
                    ,lsStepCenter ///< line is drawn as steps where the step is in between two data points
                    ,lsImpulse    ///< each data point is represented by a line parallel to the value axis, which reaches from the data point to the zero-value-line
                  };
-  Q_ENUMS(LineStyle)
+  Q_ENUM(LineStyle)
   /*!
     Defines what kind of error bars are drawn for each data point
   */
@@ -2521,7 +2521,7 @@ public:
                    ,etValue ///< Error bars for the value dimension of the data point are shown
                    ,etBoth  ///< Error bars for both key and value dimensions of the data point are shown
                  };
-  Q_ENUMS(ErrorType)
+  Q_ENUM(ErrorType)
   
   explicit QCPGraph(QCPAxis *keyAxis, QCPAxis *valueAxis);
   virtual ~QCPGraph();
@@ -2567,7 +2567,7 @@ public:
   
   // reimplemented virtual methods:
   virtual void clearData();
-  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=0) const;
+  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=Q_NULLPTR) const;
   using QCPAbstractPlottable::rescaleAxes;
   using QCPAbstractPlottable::rescaleKeyAxis;
   using QCPAbstractPlottable::rescaleValueAxis;
@@ -2699,7 +2699,7 @@ public:
   
   // reimplemented virtual methods:
   virtual void clearData();
-  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=0) const;
+  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=Q_NULLPTR) const;
   
 protected:
   // property members:
@@ -2840,7 +2840,7 @@ public:
                    ,wtAxisRectRatio ///< Bar width is given by a fraction of the axis rect size
                    ,wtPlotCoords    ///< Bar width is in key coordinates and thus scales with the key axis range
                  };
-   Q_ENUMS(WidthType)
+   Q_ENUM(WidthType)
   
   explicit QCPBars(QCPAxis *keyAxis, QCPAxis *valueAxis);
   virtual ~QCPBars();
@@ -2876,7 +2876,7 @@ public:
   
   // reimplemented virtual methods:
   virtual void clearData();
-  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=0) const;
+  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=Q_NULLPTR) const;
   
 protected:
   // property members:
@@ -2964,7 +2964,7 @@ public:
   
   // non-property methods:
   virtual void clearData();
-  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=0) const;
+  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=Q_NULLPTR) const;
   
 protected:
   // property members:
@@ -2982,7 +2982,7 @@ protected:
   virtual QCPRange getValueRange(bool &foundRange, SignDomain inSignDomain=sdBoth) const;
   
   // introduced virtual methods:
-  virtual void drawQuartileBox(QCPPainter *painter, QRectF *quartileBox=0) const;
+  virtual void drawQuartileBox(QCPPainter *painter, QRectF *quartileBox=Q_NULLPTR) const;
   virtual void drawMedian(QCPPainter *painter) const;
   virtual void drawWhiskers(QCPPainter *painter) const;
   virtual void drawOutliers(QCPPainter *painter) const;
@@ -3080,7 +3080,7 @@ public:
   
   // reimplemented virtual methods:
   virtual void clearData();
-  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=0) const;
+  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=Q_NULLPTR) const;
   
 signals:
   void dataRangeChanged(QCPRange newRange);
@@ -3161,7 +3161,7 @@ public:
   enum ChartStyle { csOhlc         ///< Open-High-Low-Close bar representation
                    ,csCandlestick  ///< Candlestick representation
                   };
-  Q_ENUMS(ChartStyle)
+  Q_ENUM(ChartStyle)
   
   explicit QCPFinancial(QCPAxis *keyAxis, QCPAxis *valueAxis);
   virtual ~QCPFinancial();
@@ -3200,7 +3200,7 @@ public:
   
   // reimplemented virtual methods:
   virtual void clearData();
-  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=0) const;
+  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=Q_NULLPTR) const;
   
   // static methods:
   static QCPFinancialDataMap timeSeriesToOhlc(const QVector<double> &time, const QVector<double> &value, double timeBinSize, double timeBinOffset = 0);
@@ -3252,7 +3252,7 @@ public:
   void setSelectedPen(const QPen &pen);
   
   // reimplemented virtual methods:
-  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=0) const;
+  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=Q_NULLPTR) const;
   
   QCPItemPosition * const point1;
   QCPItemPosition * const point2;
@@ -3297,7 +3297,7 @@ public:
   void setTail(const QCPLineEnding &tail);
   
   // reimplemented virtual methods:
-  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=0) const;
+  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=Q_NULLPTR) const;
   
   QCPItemPosition * const start;
   QCPItemPosition * const end;
@@ -3342,7 +3342,7 @@ public:
   void setTail(const QCPLineEnding &tail);
   
   // reimplemented virtual methods:
-  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=0) const;
+  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=Q_NULLPTR) const;
   
   QCPItemPosition * const start;
   QCPItemPosition * const startDir;
@@ -3388,7 +3388,7 @@ public:
   void setSelectedBrush(const QBrush &brush);
   
   // reimplemented virtual methods:
-  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=0) const;
+  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=Q_NULLPTR) const;
   
   QCPItemPosition * const topLeft;
   QCPItemPosition * const bottomRight;
@@ -3469,7 +3469,7 @@ public:
   void setPadding(const QMargins &padding);
   
   // reimplemented virtual methods:
-  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=0) const;
+  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=Q_NULLPTR) const;
   
   QCPItemPosition * const position;
   QCPItemAnchor * const topLeft;
@@ -3534,7 +3534,7 @@ public:
   void setSelectedBrush(const QBrush &brush);
   
   // reimplemented virtual methods:
-  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=0) const;
+  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=Q_NULLPTR) const;
   
   QCPItemPosition * const topLeft;
   QCPItemPosition * const bottomRight;
@@ -3595,7 +3595,7 @@ public:
   void setSelectedPen(const QPen &pen);
   
   // reimplemented virtual methods:
-  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=0) const;
+  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=Q_NULLPTR) const;
   
   QCPItemPosition * const topLeft;
   QCPItemPosition * const bottomRight;
@@ -3624,7 +3624,7 @@ protected:
   
   // non-virtual methods:
   void updateScaledPixmap(QRect finalRect=QRect(), bool flipHorz=false, bool flipVert=false);
-  QRect getFinalRect(bool *flippedHorz=0, bool *flippedVert=0) const;
+  QRect getFinalRect(bool *flippedHorz=Q_NULLPTR, bool *flippedVert=Q_NULLPTR) const;
   QPen mainPen() const;
 };
 
@@ -3655,7 +3655,7 @@ public:
                      ,tsCircle     ///< A circle
                      ,tsSquare     ///< A square
                    };
-  Q_ENUMS(TracerStyle)
+  Q_ENUM(TracerStyle)
 
   QCPItemTracer(QCustomPlot *parentPlot);
   virtual ~QCPItemTracer();
@@ -3683,7 +3683,7 @@ public:
   void setInterpolating(bool enabled);
 
   // reimplemented virtual methods:
-  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=0) const;
+  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=Q_NULLPTR) const;
   
   // non-virtual methods:
   void updatePosition();
@@ -3741,7 +3741,7 @@ public:
   void setStyle(BracketStyle style);
   
   // reimplemented virtual methods:
-  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=0) const;
+  virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=Q_NULLPTR) const;
   
   QCPItemPosition * const left;
   QCPItemPosition * const right;
