@@ -702,7 +702,7 @@
                 <string>Display user customized information</string>
                </property>
                <property name="text">
-                <string>Customized</string>
+                <string comment="info group name">Customized</string>
                </property>
               </widget>
              </item>
@@ -712,7 +712,7 @@
                 <string>Display all information available</string>
                </property>
                <property name="text">
-                <string>All available</string>
+                <string comment="info group name">All available</string>
                </property>
               </widget>
              </item>
@@ -722,7 +722,7 @@
                 <string>Display no information</string>
                </property>
                <property name="text">
-                <string>None</string>
+                <string comment="info group name">None</string>
                </property>
               </widget>
              </item>
@@ -732,7 +732,7 @@
                 <string>Display less information</string>
                </property>
                <property name="text">
-                <string>Short</string>
+                <string comment="info group name">Short</string>
                </property>
               </widget>
              </item>
@@ -742,7 +742,7 @@
                 <string>Display a preconfigured set of information</string>
                </property>
                <property name="text">
-                <string>Default</string>
+                <string comment="info group name">Default</string>
                </property>
               </widget>
              </item>
