@@ -4350,7 +4350,7 @@ void Planet::drawOrbit(const StelCore* core)
 
 bool Planet::hasValidPositionalData(const double JDE, const PositionQuality purpose) const
 {
-	if (pType<isObserver)
+    if ((pType<isObserver) || (englishName=="Pluto"))
 		return true;
 	else if (orbitPtr && pType>=isArtificial)
 	{
@@ -4361,8 +4361,7 @@ bool Planet::hasValidPositionalData(const double JDE, const PositionQuality purp
 			return static_cast<KeplerOrbit*>(orbitPtr)->objectDateGoodEnoughForOrbits(JDE);
 		}
 	}
-	//else
-		return false;
+	return false;
 }
 
 Vec2d Planet::getValidPositionalDataRange(const PositionQuality purpose) const
