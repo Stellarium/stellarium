@@ -60,7 +60,8 @@ the SGP4/SDP4 algorithms (J.L. Canales' gsat library).
 
 <i>Name and identifiers</i>
 
-Each satellite has a name. It's displayed as a label of the satellite hint and in the list of satellites. Names are not unique though, so they are used only for presentation purposes.
+Each satellite has a name. It's displayed as a label of the satellite hint and in the list of satellites. Names are not unique though, so they are used only
+for presentation purposes.
 
 In the <b>Satellite Catalog</b> satellites are uniquely identified by their NORAD number, which is encoded in TLEs.
 
@@ -74,7 +75,10 @@ By convention, group names are in lowercase. The GUI translates some of the grou
 
 <b>Satellite Catalog</b>
 
-The satellite catalog is stored on disk in [JSON](http://www.json.org/) format, in a file named "satellites.json". A default copy is embedded in the plug-in at compile time. A working copy is kept in the user data directory. Test for GitHub diff, are lines now soft wrapped?
+The satellite catalog is stored on disk in [JSON](http://www.json.org/) format,
+in a file named "satellites.json". A default copy is embedded 
+in the plug-in at compile time. A working copy is kept in the
+user data directory. Test for GitHub diff, are lines now soft wrapped?
 
 <b>Configuration</b>
 
