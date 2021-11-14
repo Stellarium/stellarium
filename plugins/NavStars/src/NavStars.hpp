@@ -63,7 +63,6 @@ file (section [NavigationalStars]).
 class NavStars : public StelModule
 {
 	Q_OBJECT
-	Q_ENUMS(NavigationalStarsSet)
 	Q_PROPERTY(bool navStarsVisible		READ getNavStarsMarks		WRITE setNavStarsMarks		NOTIFY navStarsMarksChanged)
 	Q_PROPERTY(bool displayAtStartup	READ getEnableAtStartup		WRITE setEnableAtStartup	NOTIFY enableAtStartupChanged)
 	Q_PROPERTY(bool highlightWhenVisible	READ getHighlightWhenVisible	WRITE setHighlightWhenVisible   NOTIFY highlightWhenVisibleChanged)
@@ -82,6 +81,7 @@ public:
 		Russian,		//!< Russian set (Морской астрономический ежегодник)
 		German		//!< German set (Nautisches Jahrbuch)
 	};
+	Q_ENUM(NavigationalStarsSet)
 
 	NavStars();
 	virtual ~NavStars() Q_DECL_OVERRIDE;

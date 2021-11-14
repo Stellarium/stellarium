@@ -50,68 +50,10 @@
 
 #include <stdexcept>
 
-// Class which manages the cardinal points displaying
-class Cardinals
-{
-	Q_ENUMS(CompassDirection)
 
-public:
-
-	enum CompassDirection
-	{
-		// Cardinals (4-wind compass rose)
-		dN	=  1,	// north
-		dS	=  2,	// south
-		dE	=  3,	// east
-		dW	=  4,	// west
-		// Intercardinals (or ordinals) (8-wind compass rose)
-		dNE	=  5,	// northeast
-		dSE	=  6,	// southeast
-		dNW	=  7,	// northwest
-		dSW	=  8,	// southwest
-		// Secondary Intercardinals (16-wind compass rose)
-		dNNE	=  9,	// north-northeast
-		dENE	= 10,	// east-northeast
-		dESE	= 11,	// east-southeast
-		dSSE	= 12,	// south-southeast
-		dSSW	= 13,	// south-southwest
-		dWSW	= 14,	// west-southwest
-		dWNW	= 15,	// west-northwest
-		dNNW	= 16	// north-northwest
-	};
-
-	Cardinals(float _radius = 1.);
-	virtual ~Cardinals();
-	void draw(const StelCore* core, double latitude) const;
-	void setColor(const Vec3f& c) {color = c;}
-	Vec3f getColor() const {return color;}
-	void updateI18n();
-	void update(double deltaTime);
-	void setFadeDuration(float duration);
-	void setFlagShowCardinals(bool b) { fader4WCR = b; }
-	bool getFlagShowCardinals() const { return fader4WCR; }
-
-	void setFlagShow4WCRLabels(bool b) { fader4WCR = b; }
-	bool getFlagShow4WCRLabels() const { return fader4WCR; }
-	void setFlagShow8WCRLabels(bool b) { fader8WCR = b; }
-	bool getFlagShow8WCRLabels() const { return fader8WCR; }
-	void setFlagShow16WCRLabels(bool b) { fader16WCR = b; }
-	bool getFlagShow16WCRLabels() const { return fader16WCR; }
-private:
-	class StelPropertyMgr* propMgr;
-	QFont font4WCR, font8WCR, font16WCR;
-	Vec3f color;
-	QMap<Cardinals::CompassDirection, Vec3f> rose4winds, rose8winds, rose16winds;
-	QMap<Cardinals::CompassDirection, QString> labels;
-	LinearFader fader4WCR, fader8WCR, fader16WCR;
-	int screenFontSize;
-};
-
-
-Cardinals::Cardinals(float _radius)
+Cardinals::Cardinals()
 	: color(0.6f,0.2f,0.2f)
 {
-	Q_UNUSED(_radius)
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	screenFontSize = StelApp::getInstance().getScreenFontSize();

@@ -104,8 +104,6 @@ class SearchDialog : public StelDialog
 	Q_PROPERTY(bool simbadGetTypes  READ getSimbadGetsTypes  WRITE setSimbadGetsTypes  NOTIFY simbadGetsTypesChanged)
 	Q_PROPERTY(bool simbadGetDims   READ getSimbadGetsDims   WRITE setSimbadGetsDims   NOTIFY simbadGetsDimsChanged)
 
-	Q_ENUMS(CoordinateSystem)
-
 public:
 	//! Available coordinate systems
 	enum CoordinateSystem
@@ -118,6 +116,7 @@ public:
 		ecliptic,
 		eclipticJ2000
 	};
+	Q_ENUM(CoordinateSystem)
 
 	SearchDialog(QObject* parent);
 	virtual ~SearchDialog() Q_DECL_OVERRIDE;

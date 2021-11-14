@@ -86,9 +86,6 @@ class ArchaeoLine : public QObject
 	Q_PROPERTY(bool flagLabel READ isLabelVisible WRITE setLabelVisible NOTIFY flagLabelChanged)
 	Q_PROPERTY(double definingAngle READ getDefiningAngle WRITE setDefiningAngle NOTIFY definingAngleChanged)
 
-	//Need to register Enum with Qt to be able to use it as Q_PROPERTY
-	//or in signals/slots
-	Q_ENUMS(Line)
 public:
 	enum Line { // we must start with the planet lines to allow proper handling in the combobox.
 		CurrentPlanetNone, // actually a placeholder for counting/testing. By itself it makes no sense, i.e. deactivates the planet line
@@ -119,6 +116,7 @@ public:
 		CustomAltitude1,
 		CustomAltitude2
 	};
+	Q_ENUM(Line)
 
 	ArchaeoLine(ArchaeoLine::Line lineType, double definingAngle);
 	virtual ~ArchaeoLine(){}

@@ -81,10 +81,6 @@ public:
 	static const QString PLANET_TYPE;
 	friend class SolarSystem;
 
-	Q_ENUMS(PlanetType)
-	Q_ENUMS(PlanetOrbitColorStyle)
-	Q_ENUMS(ApparentMagnitudeAlgorithm)
-	Q_ENUMS(PositionQuality)
 	//! numeric typecodes for the type descriptions in ssystem.ini
 	// Until 0.13 QStrings were used for types.
 	// Enums are slightly faster than string comparisons in time-critical comparisons.
@@ -111,6 +107,7 @@ public:
 		isInterstellar, // ssystem.ini: type="interstellar object"
 		isUNDEFINED     // ssystem.ini: type=<anything else>. THIS IS ONLY IN CASE OF ERROR!
 	};
+	Q_ENUM(PlanetType)
 
 	enum PlanetOrbitColorStyle
 	{
@@ -118,6 +115,7 @@ public:
 		ocsGroups,		// Separate colors for each group of Solar system bodies
 		ocsMajorPlanets		// Separate colors for each of major planets of Solar system
 	};
+	Q_ENUM(PlanetOrbitColorStyle)
 
 	enum ApparentMagnitudeAlgorithm
 	{
@@ -129,6 +127,7 @@ public:
 		UndefinedAlgorithm,
 		Generic                     // Visual magnitude based on phase angle and albedo. The formula source for this is totally unknown!
 	};
+	Q_ENUM(ApparentMagnitudeAlgorithm)
 
 	//! enums to indicate for which purpose we check positional quality.
 	//! Objects on KeplerOrbits may be too far from their epoch to provide useful data.
@@ -137,6 +136,7 @@ public:
 		Position,                   // Good enough for positions.
 		OrbitPlotting		    // Good enough for orbitplotting?
 	};
+	Q_ENUM(PositionQuality)
 
 public:
 	Planet(const QString& englishName,

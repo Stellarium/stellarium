@@ -50,7 +50,6 @@ running in a network. See manual for detailed description.
 class RemoteSync : public StelModule
 {
 	Q_OBJECT
-	Q_ENUMS(SyncState ClientBehaviour)
 
 public:
 	enum SyncState
@@ -62,6 +61,7 @@ public:
 		CLIENT_CLOSING, //Plugin is disconnecting from the server
 		CLIENT_WAIT_RECONNECT //Plugin is waiting to try reconnecting again
 	};
+	Q_ENUM(SyncState)
 
 	//! Defines behavior when client connection is lost/server quits
 	enum ClientBehavior
@@ -70,6 +70,7 @@ public:
 		RECONNECT, //automatically try to reconnect
 		QUIT //quit the client
 	};
+	Q_ENUM(ClientBehavior)
 
 	RemoteSync();
 	virtual ~RemoteSync() Q_DECL_OVERRIDE;

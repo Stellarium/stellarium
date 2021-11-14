@@ -54,8 +54,6 @@ private:
 class StelMovementMgr : public StelModule
 {
 	Q_OBJECT
-	Q_ENUMS(MountMode)
-	Q_ENUMS(ZoomingMode)
 	Q_PROPERTY(bool equatorialMount
 		   READ getEquatorialMount
 		   WRITE setEquatorialMount
@@ -102,9 +100,11 @@ public:
 	//! MountGalactic and MountSupergalactic is currently only available via scripting API: core.clear("galactic") and core.clear("supergalactic")
 	// TODO: add others: MountEcliptical, MountEq2000, MountEcliptical2000 and implement proper variants.
 	enum MountMode { MountAltAzimuthal, MountEquinoxEquatorial, MountGalactic, MountSupergalactic};
+	Q_ENUM(MountMode)
 
 	//! Named constants for zoom operations.
 	enum ZoomingMode { ZoomOut=-1, ZoomNone=0, ZoomIn=1};
+	Q_ENUM(ZoomingMode)
 
 	StelMovementMgr(StelCore* core);
 	virtual ~StelMovementMgr() Q_DECL_OVERRIDE;

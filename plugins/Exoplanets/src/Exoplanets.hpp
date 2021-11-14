@@ -70,7 +70,6 @@ typedef QSharedPointer<Exoplanet> ExoplanetP;
 class Exoplanets : public StelObjectModule
 {
 	Q_OBJECT
-	Q_ENUMS(TemperatureScale)
 	Q_PROPERTY(bool showExoplanets
 		   READ getFlagShowExoplanets
 		   WRITE setFlagShowExoplanets
@@ -96,6 +95,7 @@ public:
 		DownloadError,			//!< Error during download phase
 		OtherError				//!< Other error
 	};
+	Q_ENUM(UpdateState)
 	//! @enum TemperatureScale
 	//! Available temperature scales
 	enum TemperatureScale
@@ -104,7 +104,8 @@ public:
 		Celsius		= 1,
 		Fahrenheit	= 2
 	};
-	
+	Q_ENUM(TemperatureScale)
+
 	Exoplanets();
 	virtual ~Exoplanets() Q_DECL_OVERRIDE;
 

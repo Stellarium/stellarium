@@ -50,8 +50,6 @@ file (section [PointerCoordinates]).
 class PointerCoordinates : public StelModule
 {
 	Q_OBJECT
-	Q_ENUMS(CoordinatesPlace)
-	Q_ENUMS(CoordinateSystem)
 	Q_PROPERTY(bool enabled
 		   READ isEnabled
 		   WRITE enableCoordinates
@@ -69,6 +67,7 @@ public:
 		NearMouseCursor,	//!< Near mouse cursor
 		Custom			//!< The custom position on the screen
 	};
+	Q_ENUM(CoordinatesPlace)
 
 	//! @enum CoordinateSystem
 	//! Available coordinate systems
@@ -83,7 +82,7 @@ public:
 		Galactic,
 		Supergalactic
 	};
-
+	Q_ENUM(CoordinateSystem)
 
 	PointerCoordinates();
 	virtual ~PointerCoordinates() Q_DECL_OVERRIDE;

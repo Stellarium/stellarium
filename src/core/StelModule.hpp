@@ -53,8 +53,6 @@ class StelModule : public QObject
 	// Do not add Q_OBJECT here!!
 	// This make this class compiled by the Qt moc compiler and for some unknown reasons makes it impossible to dynamically
 	// load plugins on windows.
-	Q_ENUMS(StelModuleSelectAction)
-	Q_ENUMS(StelModuleActionName)
 
 public:
 	StelModule();

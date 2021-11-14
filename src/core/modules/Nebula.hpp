@@ -40,7 +40,6 @@ friend class NebulaMgr;
 	Q_GADGET
 	Q_FLAGS(CatalogGroup)
 	Q_FLAGS(TypeGroup)
-	Q_ENUMS(NebulaType)
 public:
 	static const QString NEBULA_TYPE;
 
@@ -141,6 +140,7 @@ public:
 		NebRegion		= 35,	//!< Region of the sky
 		NebUnknown		= 36		//!< m Unknown type, catalog errors, "Unidentified Southern Objects" etc.
 	};
+	Q_ENUM(NebulaType)
 
 	Nebula();
 	~Nebula() Q_DECL_OVERRIDE;

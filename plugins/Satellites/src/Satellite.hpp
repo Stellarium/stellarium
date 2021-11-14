@@ -109,7 +109,6 @@ class Satellite : public StelObject
 	friend class SatellitesDialog;
 	friend class SatellitesListModel;
 
-	Q_ENUMS(OptStatus)
 public:
 	static const QString SATELLITE_TYPE;
 
@@ -125,6 +124,7 @@ public:
 		StatusDecayed			= 7,
 		StatusUnknown		= 0
 	};
+	Q_ENUM(OptStatus)
 
 	//! \param identifier unique identifier (currently the Catalog Number)
 	//! \param data a QMap which contains the details of the satellite

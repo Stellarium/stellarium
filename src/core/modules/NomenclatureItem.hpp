@@ -38,7 +38,6 @@ class StelPainter;
 class NomenclatureItem : public StelObject
 {
 	friend class NomenclatureMgr;
-	Q_ENUMS(NomenclatureItemType)
 public:
 	static const QString NOMENCLATURE_TYPE;
 
@@ -104,6 +103,7 @@ public:
 		niTessera		= 56, // type="tessera"
 		niSaxum			= 57  // type="saxum"
 	};
+	Q_ENUM(NomenclatureItemType)
 
 	NomenclatureItem(PlanetP nPlanet, int nId, const QString& nName, const QString& nContext, NomenclatureItemType nItemType, double nLatitude, double nLongitude, double nSize);
 	virtual ~NomenclatureItem() Q_DECL_OVERRIDE;

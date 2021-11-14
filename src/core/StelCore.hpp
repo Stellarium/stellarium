@@ -49,10 +49,6 @@ class StelObserver;
 class StelCore : public QObject
 {
 	Q_OBJECT
-	Q_ENUMS(FrameType)
-	Q_ENUMS(ProjectionType)
-	Q_ENUMS(RefractionMode)
-	Q_ENUMS(DeltaTAlgorithm)
 	Q_PROPERTY(bool flipHorz READ getFlipHorz WRITE setFlipHorz NOTIFY flipHorzChanged)
 	Q_PROPERTY(bool flipVert READ getFlipVert WRITE setFlipVert NOTIFY flipVertChanged)
 	Q_PROPERTY(bool flagUseNutation READ getUseNutation WRITE setUseNutation NOTIFY flagUseNutationChanged)
@@ -86,6 +82,7 @@ public:
 		FrameGalactic,				//!< Galactic reference frame centered on observer.
 		FrameSupergalactic			//!< Supergalactic reference frame centered on observer.
 	};
+	Q_ENUM(FrameType)
 
 	//! @enum ProjectionType
 	//! Available projection types. A value of 1000 indicates the default projection
@@ -102,6 +99,7 @@ public:
 		ProjectionMiller,		//!< Miller cylindrical projection
 		ProjectionCylinder,		//!< Cylinder projection
 	};
+	Q_ENUM(ProjectionType)
 
 	//! @enum RefractionMode
 	//! Available refraction mode.
@@ -111,6 +109,7 @@ public:
 		RefractionOn,		//!< Always add refraction (i.e. apparent coordinates)
 		RefractionOff		//!< Never add refraction (i.e. geometric coordinates)
 	};
+	Q_ENUM(RefractionMode)
 
 	//! @enum DeltaTAlgorithm
 	//! Available DeltaT algorithms
@@ -150,6 +149,7 @@ public:
 		Henriksson2017,			//!< Henriksson (2017) algorithm for DeltaT (The solution for Schoch formula for DeltaT (1931), but with ndot=-30.128"/cy^2)
 		Custom					//!< User defined coefficients for quadratic equation for DeltaT
 	};
+	Q_ENUM(DeltaTAlgorithm)
 
 	StelCore();
 	virtual ~StelCore();
