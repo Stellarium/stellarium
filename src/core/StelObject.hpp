@@ -78,12 +78,16 @@ public:
 	};
 	Q_DECLARE_FLAGS(InfoStringGroup, InfoStringGroupFlags)
 
-	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
+	//! A pre-defined "all available" set of specifiers for the getInfoString flags argument to getInfoString
 	static const InfoStringGroupFlags AllInfo = static_cast<InfoStringGroupFlags>(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|
 									   Distance|Elongation|Size|Velocity|ProperMotion|Extra|HourAngle|AbsoluteMagnitude|
 									   GalacticCoord|SupergalacticCoord|OtherCoord|ObjectType|EclipticCoordJ2000|
 									   EclipticCoordOfDate|IAUConstellation|SiderealTime|RTSTime|SolarLunarPosition);
-	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
+	//! A pre-defined "default" set of specifiers for the getInfoString flags argument to getInfoString
+	//! It appears useful to propose this set as post-install settings and let users configure more on demand.
+	static const InfoStringGroupFlags DefaultInfo = static_cast<InfoStringGroupFlags>(Name|CatalogNumber|Magnitude|RaDecOfDate|HourAngle|AltAzi|OtherCoord|
+											  Distance|Elongation|Size|Velocity|Extra|IAUConstellation|SiderealTime|RTSTime);
+	//! A pre-defined "shortest useful" set of specifiers for the getInfoString flags argument to getInfoString
 	static const InfoStringGroupFlags ShortInfo = static_cast<InfoStringGroupFlags>(Name|CatalogNumber|Magnitude|RaDecJ2000);
 
 	virtual ~StelObject() Q_DECL_OVERRIDE {}

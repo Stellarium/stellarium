@@ -309,26 +309,30 @@ You can fine-tune the bits of information to display for the selected object in 
 
 \begin{longtable}{l|l|l}\toprule
 \emph{ID} & \emph{Type} & \emph{Description}\\\midrule
-flag\_show\_absolutemagnitude & bool & absolute magnitude for objects.\\%\midrule
-flag\_show\_altaz             & bool & horizontal coordinates for objects.\\%\midrule
-flag\_show\_catalognumber     & bool & catalog designations for objects.\\%\midrule
-flag\_show\_distance          & bool & distance to object.\\%\midrule
-flag\_show\_extra             & bool & extra info for object.\\%\midrule
-flag\_show\_hourangle         & bool & hour angle for object.\\%\midrule
-flag\_show\_magnitude         & bool & magnitude for object.\\%\midrule
-flag\_show\_name              & bool & common name for object.\\%\midrule
-flag\_show\_radecj2000        & bool & equatorial coordinates (J2000.0 frame) of object.\\%\midrule
-flag\_show\_radecofdate       & bool & equatorial coordinates (of date) of object.\\%\midrule
-flag\_show\_galcoord          & bool & galactic coordinates (System~II) of object.\\%\midrule
-flag\_show\_supergalcoord     & bool & supergalactic coordinates of object.\\%\midrule
-flag\_show\_eclcoordj2000     & bool & ecliptic coordinates (J2000.0 frame) of object.\\%\midrule
-flag\_show\_eclcoordofdate    & bool & ecliptic coordinates (of date) of object.\\%\midrule
-flag\_show\_type              & bool & type of object.\\%\midrule
-flag\_show\_size              & bool & size of object.\\%\midrule
-flag\_show\_sidereal\_time    & bool & sidereal time.\\%\midrule
-flag\_show\_rts\_time         & bool & rise, transit and set times.\\%\midrule
-flag\_show\_velocity          & bool & velocity of object.\\%\midrule
-flag\_show\_constellation     & bool & show 3-letter IAU\index{IAU} constellation label.\\\bottomrule
+flag\_show\_name              & bool & common name for object.\\
+flag\_show\_catalognumber     & bool & catalog designations for objects.\\
+flag\_show\_type              & bool & type of object.\\
+flag\_show\_magnitude         & bool & magnitude for object.\\
+flag\_show\_absolutemagnitude & bool & absolute magnitude for objects.\\
+flag\_show\_radecj2000        & bool & equatorial coordinates (J2000.0 frame) of object.\\
+flag\_show\_radecofdate       & bool & equatorial coordinates (of date) of object.\\
+flag\_show\_hourangle         & bool & hour angle for object.\\
+flag\_show\_altaz             & bool & horizontal coordinates for objects.\\
+flag\_show\_eclcoordj2000     & bool & ecliptic coordinates (J2000.0 frame) of object.\\
+flag\_show\_eclcoordofdate    & bool & ecliptic coordinates (of date) of object.\\
+flag\_show\_galcoord          & bool & galactic coordinates (System~II) of object.\\
+flag\_show\_supergalcoord     & bool & supergalactic coordinates of object.\\
+flag\_show\_othercoord        & bool & other coordinates of object (from plugins).\\
+flag\_show\_constellation     & bool & show 3-letter IAU\index{IAU} constellation label.\\
+flag\_show\_sidereal\_time    & bool & sidereal time.\\
+flag\_show\_elongation        & bool & elongation from the Sun for solar system objects.\\
+flag\_show\_distance          & bool & distance to object.\\
+flag\_show\_velocity          & bool & velocity of object.\\
+flag\_show\_propermotion      & bool & proper motion of object.\\
+flag\_show\_size              & bool & size of object.\\
+flag\_show\_rts\_time         & bool & rise, transit and set times.\\
+flag\_show\_solar\_lunar      & bool & horizontal coordinates for Sun and Moon.\\
+flag\_show\_extra             & bool & extra info for object.\\\bottomrule
 \end{longtable}
 
 \subsection{\big[custom\_time\_correction\big]}
@@ -487,8 +491,8 @@ flag\_show\_compass\_button            & bool  & false & Show a button to toggle
 flag\_show\_buttons\_background        & bool  & true  & If \emph{true}, use background under buttons on bottom bar.\\\midrule
 flag\_overwrite\_info\_color           & bool  & false & Set \emph{true} to use one color for test in info panel for all objects.\\\midrule
 %
-selected\_object\_info            & string & all  & Values: \emph{all}, \emph{short}, \emph{none}, 
-                                                    and \emph{custom} (since V0.12.0; see~\ref{sec:gui:configuration:info}).\\\midrule
+selected\_object\_info            & string & all  & Values: \emph{default}, \emph{all}, \emph{short}, \emph{none}, 
+                                                    and \emph{custom} (see~\ref{sec:gui:configuration:info}).\\\midrule
 custom\_marker\_size             & float   & 5.0 & Size of custom marker.\\%\midrule
 custom\_marker\_radius\_limit    & int   & 15 & Limit the click radius for mouse cursor position in any direction for removing of closest custom marker.\\\midrule
 %% NO LONGER HERE!
