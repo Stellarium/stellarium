@@ -393,6 +393,8 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			oss << QString("%1: %2.").arg(q_("Morphological description"), getMorphologicalTypeDescription()) << "<br />";
 	}
 
+	oss << getSolarLunarInfoString(core, flags);
+
 	postProcessInfoString(str, flags);
 
 	return str;

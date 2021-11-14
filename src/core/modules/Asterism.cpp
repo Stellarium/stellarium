@@ -194,6 +194,7 @@ QString Asterism::getInfoString(const StelCore *core, const InfoStringGroup &fla
 	if (flags&ObjectType)
 		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("asterism")) << "<br />";
 
+	oss << getSolarLunarInfoString(core, flags);
 	postProcessInfoString(str, flags);
 
 	return str;

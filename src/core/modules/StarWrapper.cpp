@@ -55,6 +55,7 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 		oss << QString("%1: <b>%2</b>").arg(q_("Color Index (B-V)"), QString::number(getBV(), 'f', 2)) << "<br />";
 	
 	oss << getCommonInfoString(core, flags);
+	oss << getSolarLunarInfoString(core, flags);
 
 	StelObject::postProcessInfoString(str, flags);
 
@@ -387,6 +388,8 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			}
 		}
 	}
+
+	oss << getSolarLunarInfoString(core, flags);
 
 	StelObject::postProcessInfoString(str, flags);
 

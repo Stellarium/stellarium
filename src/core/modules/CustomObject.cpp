@@ -91,6 +91,7 @@ QString CustomObject::getInfoString(const StelCore* core, const InfoStringGroup&
 
 	// Ra/Dec etc.
 	oss << getCommonInfoString(core, flags);
+	oss << getSolarLunarInfoString(core, flags);
 	postProcessInfoString(str, flags);
 	return str;
 }

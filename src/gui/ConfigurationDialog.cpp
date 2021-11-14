@@ -608,6 +608,8 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 		flags |= StelObject::SiderealTime;
 	if (ui->checkBoxRTSTime->isChecked())
 		flags |= StelObject::RTSTime;
+	if (ui->checkBoxSolarLunarPosition->isChecked())
+		flags |= StelObject::SolarLunarPosition;
 
 	gui->setInfoTextFilters(flags);
 	// overwrite custom selected info settings
@@ -666,6 +668,8 @@ void ConfigurationDialog::setCustomSelectedInfo()
 		flags |= StelObject::SiderealTime;
 	if (conf->value("custom_selected_info/flag_show_rts_time", false).toBool())
 		flags |= StelObject::RTSTime;
+	if (conf->value("custom_selected_info/flag_show_solar_lunar", false).toBool())
+		flags |= StelObject::SolarLunarPosition;
 
 	gui->setInfoTextFilters(flags);
 	updateSelectedInfoCheckBoxes();
@@ -702,6 +706,7 @@ void ConfigurationDialog::saveCustomSelectedInfo()
 	conf->setValue("flag_show_constellation",		static_cast<bool>(flags & StelObject::IAUConstellation));
 	conf->setValue("flag_show_sidereal_time",		static_cast<bool>(flags & StelObject::SiderealTime));
 	conf->setValue("flag_show_rts_time",			static_cast<bool>(flags & StelObject::RTSTime));
+	conf->setValue("flag_show_solar_lunar",			static_cast<bool>(flags & StelObject::SolarLunarPosition));
 	conf->endGroup();
 }
 
@@ -1725,6 +1730,7 @@ void ConfigurationDialog::updateSelectedInfoCheckBoxes()
 	ui->checkBoxConstellation->setChecked(flags & StelObject::IAUConstellation);
 	ui->checkBoxSiderealTime->setChecked(flags & StelObject::SiderealTime);
 	ui->checkBoxRTSTime->setChecked(flags & StelObject::RTSTime);
+	ui->checkBoxSolarLunarPosition->setChecked(flags & StelObject::SolarLunarPosition);
 }
 
 void ConfigurationDialog::updateTabBarListWidgetWidth()
