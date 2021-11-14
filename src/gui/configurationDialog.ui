@@ -696,13 +696,13 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="0" column="1">
-              <widget class="QRadioButton" name="briefSelectedInfoRadio">
+             <item row="0" column="4">
+              <widget class="QRadioButton" name="customSelectedInfoRadio">
                <property name="toolTip">
-                <string>Display less information</string>
+                <string>Display user customized information</string>
                </property>
                <property name="text">
-                <string>Short</string>
+                <string comment="info group name">Customized</string>
                </property>
               </widget>
              </item>
@@ -712,27 +712,37 @@
                 <string>Display all information available</string>
                </property>
                <property name="text">
-                <string>All available</string>
+                <string comment="info group name">All available</string>
                </property>
               </widget>
              </item>
-             <item row="0" column="2">
+             <item row="0" column="3">
               <widget class="QRadioButton" name="noSelectedInfoRadio">
                <property name="toolTip">
                 <string>Display no information</string>
                </property>
                <property name="text">
-                <string>None</string>
+                <string comment="info group name">None</string>
                </property>
               </widget>
              </item>
-             <item row="0" column="3">
-              <widget class="QRadioButton" name="customSelectedInfoRadio">
+             <item row="0" column="2">
+              <widget class="QRadioButton" name="briefSelectedInfoRadio">
                <property name="toolTip">
-                <string>Display user settings information</string>
+                <string>Display less information</string>
                </property>
                <property name="text">
-                <string>Customized</string>
+                <string comment="info group name">Short</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QRadioButton" name="defaultSelectedInfoRadio">
+               <property name="toolTip">
+                <string>Display a preconfigured set of information</string>
+               </property>
+               <property name="text">
+                <string comment="info group name">Default</string>
                </property>
               </widget>
              </item>
@@ -1040,6 +1050,9 @@
                <property name="text">
                 <string>Solar and Lunar position</string>
                </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
               </widget>
              </item>
             </layout>

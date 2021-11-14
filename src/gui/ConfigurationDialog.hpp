@@ -74,6 +74,7 @@ private slots:
 	void setNoSelectedInfo();
 	void setAllSelectedInfo();
 	void setBriefSelectedInfo();
+	void setDefaultSelectedInfo();
 	void setCustomSelectedInfo();
 	//! Set the selected object info fields from the "Displayed Fields" boxes.
 	//! Called when any of the boxes has been clicked. Sets the

@@ -202,9 +202,13 @@ void ConfigurationDialog::createDialogContent()
 	connectBoolProperty(ui->topocentricCheckBox, "StelCore.flagUseTopocentricCoordinates");
 
 	// Selected object info
-	if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(Q_NULLPTR))
+	if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::None))
 	{
 		ui->noSelectedInfoRadio->setChecked(true);
+	}
+	else if (gui->getInfoTextFilters() == StelObject::DefaultInfo)
+	{
+	    ui->defaultSelectedInfoRadio->setChecked(true);
 	}
 	else if (gui->getInfoTextFilters() == StelObject::ShortInfo)
 	{
@@ -229,6 +233,7 @@ void ConfigurationDialog::createDialogContent()
 
 	connect(ui->noSelectedInfoRadio, SIGNAL(released()), this, SLOT(setNoSelectedInfo()));
 	connect(ui->allSelectedInfoRadio, SIGNAL(released()), this, SLOT(setAllSelectedInfo()));
+	connect(ui->defaultSelectedInfoRadio, SIGNAL(released()), this, SLOT(setDefaultSelectedInfo()));
 	connect(ui->briefSelectedInfoRadio, SIGNAL(released()), this, SLOT(setBriefSelectedInfo()));
 	connect(ui->customSelectedInfoRadio, SIGNAL(released()), this, SLOT(setCustomSelectedInfo()));
 	connect(ui->buttonGroupDisplayedFields, SIGNAL(buttonClicked(int)), this, SLOT(setSelectedInfoFromCheckBoxes()));
@@ -535,21 +540,27 @@ void ConfigurationDialog::setSphericMirror(bool b)
 	}
 }
 
-void ConfigurationDialog::setNoSelectedInfo(void)
+void ConfigurationDialog::setNoSelectedInfo()
 {
 	gui->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::None));
 	updateSelectedInfoCheckBoxes();
 }
 
-void ConfigurationDialog::setAllSelectedInfo(void)
+void ConfigurationDialog::setAllSelectedInfo()
 {
 	gui->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::AllInfo));
 	updateSelectedInfoCheckBoxes();
 }
 
-void ConfigurationDialog::setBriefSelectedInfo(void)
+void ConfigurationDialog::setBriefSelectedInfo()
 {
 	gui->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::ShortInfo));
+	updateSelectedInfoCheckBoxes();
+}
+
+void ConfigurationDialog::setDefaultSelectedInfo()
+{
+	gui->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::DefaultInfo));
 	updateSelectedInfoCheckBoxes();
 }
 
@@ -1055,8 +1066,10 @@ void ConfigurationDialog::saveAllSettings()
 
 	// configuration dialog / selected object info tab
 	const StelObject::InfoStringGroup& flags = gui->getInfoTextFilters();
-	if (flags == StelObject::InfoStringGroup(Q_NULLPTR))
+	if (flags == StelObject::InfoStringGroup(StelObject::None))
 		conf->setValue("gui/selected_object_info", "none");
+	else if (flags == StelObject::InfoStringGroup(StelObject::DefaultInfo))
+	    conf->setValue("gui/selected_object_info", "default");
 	else if (flags == StelObject::InfoStringGroup(StelObject::ShortInfo))
 		conf->setValue("gui/selected_object_info", "short");
 	else if (flags == StelObject::InfoStringGroup(StelObject::AllInfo))

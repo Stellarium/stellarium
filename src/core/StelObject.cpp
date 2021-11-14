@@ -1118,7 +1118,7 @@ QString StelObject::getSolarLunarInfoString(const StelCore *core, const InfoStri
 	    altStr = (withDecimalDegree ? StelUtils::radToDecDegStr(alt, 2) : StelUtils::radToDmsStr(alt,false));
 
 	    // TRANSLATORS: Azimuth/Altitude
-	    const QString SolarAzAlt = (withDesignations ? "Solar A/a" : qc_("Solar Az./Alt.", "celestial coordinate system"));
+	    const QString SolarAzAlt = (withDesignations ? qc_("Solar A/a", "celestial coordinate system") : qc_("Solar Az./Alt.", "celestial coordinate system"));
 	    if (withTables)
 	    {
 		oss << QString("<tr><td>%1:</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td></tr>").arg(SolarAzAlt, azStr, altStr);
@@ -1136,7 +1136,7 @@ QString StelObject::getSolarLunarInfoString(const StelCore *core, const InfoStri
 	    altStr = (withDecimalDegree ? StelUtils::radToDecDegStr(alt, 2) : StelUtils::radToDmsStr(alt,false));
 
 	    // TRANSLATORS: Azimuth/Altitude
-	    const QString LunarAzAlt = (withDesignations ? "Lunar A/a" : qc_("Lunar Az./Alt.", "celestial coordinate system"));
+	    const QString LunarAzAlt = (withDesignations ? qc_("Lunar A/a", "celestial coordinate system") : qc_("Lunar Az./Alt.", "celestial coordinate system"));
 	    if (withTables)
 	    {
 		oss << QString("<tr><td>%1:</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td></tr>").arg(LunarAzAlt, azStr, altStr);

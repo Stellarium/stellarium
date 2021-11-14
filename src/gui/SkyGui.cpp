@@ -36,7 +36,7 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent),
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
-	QString objectInfo = conf->value("gui/selected_object_info", "all").toString();
+	QString objectInfo = conf->value("gui/selected_object_info", "default").toString();
 	if (objectInfo == "all")
 	{
 		infoTextFilters = StelObject::InfoStringGroup(StelObject::AllInfo);
@@ -100,12 +100,15 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent),
 			infoTextFilters |= StelObject::SiderealTime;
 		if (conf->value("flag_show_rts_time", false).toBool())
 			infoTextFilters |= StelObject::RTSTime;
+		if (conf->value("flag_show_solar_lunar", false).toBool())
+		    infoTextFilters |= StelObject::SolarLunarPosition;
 		conf->endGroup();
 	}
 	else
 	{
-		qWarning() << "config.ini option gui/selected_object_info is invalid, using \"all\"";
-		infoTextFilters = StelObject::InfoStringGroup(StelObject::AllInfo);
+		if (objectInfo != "default")
+			qWarning() << "config.ini option gui/selected_object_info is invalid, using \"default\"";
+		infoTextFilters = StelObject::InfoStringGroup(StelObject::DefaultInfo);
 	}
 	if (qApp->property("text_texture")==true) // CLI option -t given?
 		infoPixmap=new QGraphicsPixmapItem(this);
