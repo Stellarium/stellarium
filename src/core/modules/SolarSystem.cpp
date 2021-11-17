@@ -1907,7 +1907,7 @@ void SolarSystem::setFlagOrbits(bool b)
 			if (selected == p || selected == p->parent)
 				p->setFlagOrbits(b);
 			else
-				p->setFlagOrbits(false);
+				p->setFlagOrbits(true);
 		}
 	}
 	if(old != flagOrbits)
