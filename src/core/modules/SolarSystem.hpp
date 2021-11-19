@@ -1005,6 +1005,9 @@ private:
 	//! Draw a nice animated pointer around the object.
 	void drawPointer(const StelCore* core);
 
+	//! Draw ephemeris lines and markers
+	void drawEphemerisItems(const StelCore* core);
+
 	//! Draw a nice markers for ephemeris of objects.
 	void drawEphemerisMarkers(const StelCore* core);
 

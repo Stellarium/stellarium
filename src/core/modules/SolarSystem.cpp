@@ -1286,16 +1286,8 @@ struct biggerDistance : public std::binary_function<PlanetP, PlanetP, bool>
 // We are supposed to be in heliocentric coordinate
 void SolarSystem::draw(StelCore* core)
 {
-	bool ephmerisDrawn = false;
-
-	if (getFlagEphemerisAlwaysOn())
-	{
-		ephmerisDrawn = true;
-		if (getFlagEphemerisMarkers())
-			drawEphemerisMarkers(core);
-		if (getFlagEphemerisLine())
-			drawEphemerisLine(core);
-	}
+	// AstroCalcDialog
+	drawEphemerisItems(core);
 
 	if (!flagShow)
 		return;
@@ -1336,13 +1328,14 @@ void SolarSystem::draw(StelCore* core)
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer() && getFlagPointer())
 		drawPointer(core);
+}
 
-	// AstroCalcDialog
-	if (!ephmerisDrawn)
+void SolarSystem::drawEphemerisItems(const StelCore* core)
+{
+	if (flagShow || (!flagShow && getFlagEphemerisAlwaysOn()))
 	{
 		if (getFlagEphemerisMarkers())
-			drawEphemerisMarkers(core);		
-
+			drawEphemerisMarkers(core);
 		if (getFlagEphemerisLine())
 			drawEphemerisLine(core);
 	}
