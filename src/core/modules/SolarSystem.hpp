@@ -98,6 +98,7 @@ class SolarSystem : public StelObjectModule
 	Q_PROPERTY(int ephemerisDataLimit		READ getEphemerisDataLimit		WRITE setEphemerisDataLimit		NOTIFY ephemerisDataLimitChanged)
 	Q_PROPERTY(bool ephemerisSmartDates		READ getFlagEphemerisSmartDates		WRITE setFlagEphemerisSmartDates	NOTIFY ephemerisSmartDatesChanged)
 	Q_PROPERTY(bool ephemerisScaleMarkersDisplayed	READ getFlagEphemerisScaleMarkers	WRITE setFlagEphemerisScaleMarkers	NOTIFY ephemerisScaleMarkersChanged)
+	Q_PROPERTY(bool ephemerisAlwaysOn		READ getFlagEphemerisAlwaysOn		WRITE setFlagEphemerisAlwaysOn		NOTIFY ephemerisAlwaysOnChanged)
 	// Great Red Spot (GRS) properties
 	Q_PROPERTY(bool flagCustomGrsSettings		READ getFlagCustomGrsSettings		WRITE setFlagCustomGrsSettings		NOTIFY flagCustomGrsSettingsChanged)
 	Q_PROPERTY(int customGrsLongitude		READ getCustomGrsLongitude		WRITE setCustomGrsLongitude		NOTIFY customGrsLongitudeChanged)
@@ -767,6 +768,7 @@ signals:
 	void ephemerisDatesChanged(bool b);
 	void ephemerisMagnitudesChanged(bool b);
 	void ephemerisLineChanged(bool b);
+	void ephemerisAlwaysOnChanged(bool b);
 	void ephemerisLineThicknessChanged(int v);
 	void ephemerisSkipDataChanged(bool b);
 	void ephemerisSkipMarkersChanged(bool b);
@@ -902,6 +904,11 @@ private slots:
 	void setFlagEphemerisLine(bool b);
 	//! Get the current value of the flag which enabled the showing of ephemeris line between markers or not
 	bool getFlagEphemerisLine() const;
+
+	//! Set flag which enables ephemeris lines and marks always on
+	void setFlagEphemerisAlwaysOn(bool b);
+	//! Get the current value of the flag which makes ephemeris lines and marks always on
+	bool getFlagEphemerisAlwaysOn() const;
 
 	//! Set the thickness of ephemeris line
 	void setEphemerisLineThickness(int v);
@@ -1088,6 +1095,7 @@ private:
 	bool ephemerisMagnitudesDisplayed;
 	bool ephemerisHorizontalCoordinates;
 	bool ephemerisLineDisplayed;
+	bool ephemerisAlwaysOn;
 	int ephemerisLineThickness;
 	bool ephemerisSkipDataDisplayed;
 	bool ephemerisSkipMarkersDisplayed;

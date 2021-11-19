@@ -94,7 +94,7 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	, ephemerisDatesDisplayed(false)
 	, ephemerisMagnitudesDisplayed(false)
 	, ephemerisHorizontalCoordinates(false)
-	, ephemerisLineDisplayed(false)
+	, ephemerisLineDisplayed(false)	
 	, ephemerisLineThickness(1)
 	, ephemerisSkipDataDisplayed(false)
 	, ephemerisSkipMarkersDisplayed(false)
@@ -102,6 +102,7 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	, ephemerisDataLimit(1)
 	, ephemerisSmartDatesDisplayed(true)
 	, ephemerisScaleMarkersDisplayed(false)
+	, ephemerisAlwaysOn(false)
 	, ephemerisGenericMarkerColor(Vec3f(1.0f, 1.0f, 0.0f))
 	, ephemerisSecondaryMarkerColor(Vec3f(0.7f, 0.7f, 1.0f))
 	, ephemerisSelectedMarkerColor(Vec3f(1.0f, 0.7f, 0.0f))
@@ -253,6 +254,7 @@ void SolarSystem::init()
 
 	// Ephemeris stuff
 	setFlagEphemerisMarkers(conf->value("astrocalc/flag_ephemeris_markers", true).toBool());
+	setFlagEphemerisAlwaysOn(conf->value("astrocalc/flag_ephemeris_alwayson", true).toBool());
 	setFlagEphemerisDates(conf->value("astrocalc/flag_ephemeris_dates", false).toBool());
 	setFlagEphemerisMagnitudes(conf->value("astrocalc/flag_ephemeris_magnitudes", false).toBool());
 	setFlagEphemerisHorizontalCoordinates(conf->value("astrocalc/flag_ephemeris_horizontal", false).toBool());
@@ -1284,6 +1286,17 @@ struct biggerDistance : public std::binary_function<PlanetP, PlanetP, bool>
 // We are supposed to be in heliocentric coordinate
 void SolarSystem::draw(StelCore* core)
 {
+	bool ephmerisDrawn = false;
+
+	if (getFlagEphemerisAlwaysOn())
+	{
+		ephmerisDrawn = true;
+		if (getFlagEphemerisMarkers())
+			drawEphemerisMarkers(core);
+		if (getFlagEphemerisLine())
+			drawEphemerisLine(core);
+	}
+
 	if (!flagShow)
 		return;
 
@@ -1325,11 +1338,14 @@ void SolarSystem::draw(StelCore* core)
 		drawPointer(core);
 
 	// AstroCalcDialog
-	if (getFlagEphemerisMarkers())
-		drawEphemerisMarkers(core);		
+	if (!ephmerisDrawn)
+	{
+		if (getFlagEphemerisMarkers())
+			drawEphemerisMarkers(core);		
 
-	if (getFlagEphemerisLine())
-		drawEphemerisLine(core);
+		if (getFlagEphemerisLine())
+			drawEphemerisLine(core);
+	}
 }
 
 Vec3f SolarSystem::getEphemerisMarkerColor(int index) const
@@ -2089,6 +2105,21 @@ void SolarSystem::setFlagEphemerisLine(bool b)
 bool SolarSystem::getFlagEphemerisLine() const
 {
 	return ephemerisLineDisplayed;
+}
+
+bool SolarSystem::getFlagEphemerisAlwaysOn() const
+{
+	return ephemerisAlwaysOn;
+}
+
+void SolarSystem::setFlagEphemerisAlwaysOn(bool b)
+{
+	if (b != ephemerisAlwaysOn)
+	{
+		ephemerisAlwaysOn = b;
+		conf->setValue("astrocalc/flag_ephemeris_alwayson", b); // Immediate saving of state
+		emit ephemerisAlwaysOnChanged(b);
+	}
 }
 
 void SolarSystem::setFlagEphemerisHorizontalCoordinates(bool b)

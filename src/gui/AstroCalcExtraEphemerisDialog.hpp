@@ -39,6 +39,7 @@ public slots:
 
 private slots:
 	void setOptionStatus();
+	void setOptionAlwaysOn();
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots.
