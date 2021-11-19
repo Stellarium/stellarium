@@ -50,7 +50,6 @@ void AstroCalcExtraEphemerisDialog::createDialogContent()
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
-	connect(ui->alwaysOnCheckBox, SIGNAL(clicked()), this, SLOT(setOptionAlwaysOn()));
 	connect(ui->skipDataCheckBox, SIGNAL(clicked()), this, SLOT(setOptionStatus()));
 
 	connectBoolProperty(ui->skipDataCheckBox,	"SolarSystem.ephemerisSkippedData");
@@ -67,9 +66,4 @@ void AstroCalcExtraEphemerisDialog::createDialogContent()
 void AstroCalcExtraEphemerisDialog::setOptionStatus()
 {
 	ui->skipMarkersCheckBox->setEnabled(ui->skipDataCheckBox->isChecked());
-}
-
-void AstroCalcExtraEphemerisDialog::setOptionAlwaysOn()
-{
-	ui->skipMarkersCheckBox->setEnabled(ui->alwaysOnCheckBox->isChecked());
 }
