@@ -298,27 +298,6 @@
                </item>
               </layout>
              </item>
-             <item>
-              <widget class="StelWebEngineView" name="webEngineView" native="true">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>180</height>
-                </size>
-               </property>
-               <property name="url" stdset="0">
-                <url>
-                 <string>about:blank</string>
-                </url>
-               </property>
-              </widget>
-             </item>
             </layout>
            </widget>
            <widget class="QWidget" name="tab_about">
@@ -359,18 +338,6 @@
    <class>BarFrame</class>
    <extends>QFrame</extends>
    <header>Dialog.hpp</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>QWebEngineView</class>
-   <extends>QWidget</extends>
-   <header>QtWebEngineWidgets/qwebengineview.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>StelWebEngineView</class>
-   <extends>QWebEngineView</extends>
-   <header>StelWebEngineView.hpp</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

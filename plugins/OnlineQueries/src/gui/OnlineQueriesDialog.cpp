@@ -44,6 +44,7 @@ OnlineQueriesDialog::OnlineQueriesDialog(QObject* parent) :
 OnlineQueriesDialog::~OnlineQueriesDialog()
 {
 	delete ui;
+	if (view) delete view;
 }
 
 void OnlineQueriesDialog::retranslate()
@@ -62,7 +63,13 @@ void OnlineQueriesDialog::createDialogContent()
 
 	//load UI from form file
 	ui->setupUi(dialog);
-	view=ui->webEngineView; Q_ASSERT(view);
+	// Given possible unavailability of QtWebEngine on some platforms,
+	// we must add this dynamically here:
+	view=new StelWebEngineView();
+	Q_ASSERT(view);
+	view->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+	view->setMinimumSize(0, 180);
+	ui->verticalLayout->addWidget(view);
 
 	//hook up retranslate event
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
@@ -71,7 +78,7 @@ void OnlineQueriesDialog::createDialogContent()
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	// Kinetic scrolling and style sheet for output
-	kineticScrollingList << ui->webEngineView;
+	kineticScrollingList << view;
 	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (gui)
 	{

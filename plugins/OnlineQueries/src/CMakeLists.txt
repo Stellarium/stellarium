@@ -25,12 +25,21 @@ SET(ONLINEQUERIES_UIS
 
 QT5_WRAP_UI(ONLINEQUERIES_UIS_H ${ONLINEQUERIES_UIS})
 
-IF(WITH_QTWEBENGINE)
-    FIND_PACKAGE(Qt5WebEngine REQUIRED)
-    FIND_PACKAGE(Qt5WebEngineWidgets REQUIRED)
-    ADD_DEFINITIONS(-DWITH_QTWEBENGINE)
-    SET(QTWEBENGINE_LIBS Qt5::WebEngine Qt5::WebEngineWidgets)
-ENDIF(WITH_QTWEBENGINE)
+IF ( ("${CMAKE_SYSTEM_NAME}" MATCHES "Linux") AND ("${CMAKE_SYSTEM_VERSION}" MATCHES "Microsoft") )
+    MESSAGE(STATUS "This looks like a WSL/Linux system. Due to X11 issues, \
+                    for the time being we must show webpages of OnlineQueries in the system web browser.")
+ELSE( ("${CMAKE_SYSTEM_NAME}" MATCHES "Linux") AND ("${CMAKE_SYSTEM_VERSION}" MATCHES "Microsoft") )
+    FIND_PACKAGE(Qt5WebEngine QUIET)
+    FIND_PACKAGE(Qt5WebEngineWidgets QUIET)
+    IF(Qt5WebEngine_FOUND AND Qt5WebEngineWidgets_FOUND)
+        ADD_DEFINITIONS(-DWITH_QTWEBENGINE)
+        SET(QTWEBENGINE_LIBS Qt5::WebEngine Qt5::WebEngineWidgets)
+    ELSE(Q5tWebEngine_FOUND AND Qt5WebEngineWidgets_FOUND)
+        MESSAGE(WARNING "Qt5WebEngine and/or Qt5WebEngineWidgets not found. \
+                         If these packages exist for your platform, install and rerun. \
+                         Else the program will call the system web browser where required.")
+    ENDIF(Qt5WebEngine_FOUND AND Qt5WebEngineWidgets_FOUND)
+ENDIF( ("${CMAKE_SYSTEM_NAME}" MATCHES "Linux") AND ("${CMAKE_SYSTEM_VERSION}" MATCHES "Microsoft") )
 
 ################# compiles resources files ############
 SET(ONLINEQUERIES_RES ../resources/OnlineQueries.qrc)
