@@ -295,7 +295,7 @@ int main(int argc, char **argv)
 				// Config versions less than 0.6.0 are not supported, otherwise we will try to use it
 				if (v1==0 && v2<6)
 				{
-					// The config file is too old to try an importation
+					// The config file is too old to try an import
 					qDebug() << "The current config file is from a version too old for parameters to be imported ("
 							 << (version.isEmpty() ? "<0.6.0" : version) << ").\n"
 							 << "It will be replaced by the default config file.";
@@ -306,7 +306,7 @@ int main(int argc, char **argv)
 					qDebug() << "Attempting to use an existing older config file.";
 					confSettings->setValue("main/version", QString(PACKAGE_VERSION)); // Upgrade version of config.ini
 					clearCache();
-					qDebug() << "Clear cache and update config.ini...";
+					qDebug() << "Cleared cache and updated config.ini...";
 				}
 			}
 		}
