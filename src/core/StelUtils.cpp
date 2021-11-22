@@ -416,11 +416,10 @@ double getDecAngle(const QString& str)
 				    ")"                                   // end
 				    "\\s*([NSEW]?)"                       // [point] (9)
 				   );
-	QRegularExpression rex(reStr, QRegularExpression::CaseInsensitiveOption);
-	QRegularExpressionMatch match=rex.match(str);
-	if( match.hasMatch() )
+	QRegExp rex(reStr, Qt::CaseInsensitive);
+	if( rex.exactMatch(str) )
 	{
-		QStringList caps = match.capturedTexts();
+		QStringList caps = rex.capturedTexts();
 #if 0
 		std::cout << "reg exp: ";
 		for( int i = 1; i <= rex.captureCount() ; ++i ){
