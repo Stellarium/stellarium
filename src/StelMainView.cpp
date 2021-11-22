@@ -51,6 +51,7 @@
 #include <QPluginLoader>
 #include <QScreen>
 #include <QSettings>
+#include <QRegularExpression>
 #include <QtPlugin>
 #include <QThread>
 #include <QTimer>
@@ -1042,13 +1043,14 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 	// If we have ANGLE, check esp. for insufficient ps_2 level.
 	if (isANGLE)
 	{
-		QRegExp angleVsPsRegExp(" vs_(\\d)_(\\d) ps_(\\d)_(\\d)");
-		int angleVSPSpos=angleVsPsRegExp.indexIn(glRenderer);
+		QRegularExpression angleVsPsRegExp(" vs_(\\d)_(\\d) ps_(\\d)_(\\d)");
+		int angleVSPSpos=glRenderer.indexOf(angleVsPsRegExp);
 
 		if (angleVSPSpos >-1)
 		{
-			float vsVersion=angleVsPsRegExp.cap(1).toFloat() + 0.1f*angleVsPsRegExp.cap(2).toFloat();
-			float psVersion=angleVsPsRegExp.cap(3).toFloat() + 0.1f*angleVsPsRegExp.cap(4).toFloat();
+			QRegularExpressionMatch match=angleVsPsRegExp.match(glRenderer);
+			float vsVersion=match.captured(1).toFloat() + 0.1f*match.captured(2).toFloat();
+			float psVersion=match.captured(3).toFloat() + 0.1f*match.captured(4).toFloat();
 			qDebug() << "VS Version Number detected: " << vsVersion;
 			qDebug() << "PS Version Number detected: " << psVersion;
 			if ((vsVersion<2.0f) || (psVersion<3.0f))
@@ -1095,12 +1097,12 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 	// Do a similar test for MESA: Ensure we have at least Mesa 10, Mesa 9 on FreeBSD (used for hardware-acceleration of AMD IGP) was reported to lose the stars.
 	if (isMesa)
 	{
-		QRegExp mesaRegExp("Mesa (\\d+\\.\\d+)"); // we need only major version. Minor should always be here. Test?
-		int mesaPos=mesaRegExp.indexIn(glDriver);
+		QRegularExpression mesaRegExp("Mesa (\\d+\\.\\d+)"); // we need only major version. Minor should always be here. Test?
+		int mesaPos=glDriver.indexOf(mesaRegExp);
 
 		if (mesaPos >-1)
 		{
-			float mesaVersion=mesaRegExp.cap(1).toFloat();
+			float mesaVersion=mesaRegExp.match(glDriver).captured(1).toFloat();
 			qDebug() << "MESA Version Number detected: " << mesaVersion;
 			if ((mesaVersion<10.0f))
 			{
@@ -1149,14 +1151,14 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 	// On these systems, we show a warning panel that can be suppressed by a config option which is automatically added on first run.
 	// Again, based on a sample size of one, Macs have been reported already to always work in this case.
 #ifndef Q_OS_MAC
-	QRegExp glslRegExp("^(\\d\\.\\d\\d)");
-	int pos=glslRegExp.indexIn(glslString);
+	QRegularExpression glslRegExp("^(\\d\\.\\d\\d)");
+	int pos=glslString.indexOf(glslRegExp);
 	// VC4 drivers on Raspberry Pi reports ES 1.0.16 or so, we must step down to one cipher after decimal.
-	QRegExp glslesRegExp("ES (\\d\\.\\d)");
-	int posES=glslesRegExp.indexIn(glslString);
+	QRegularExpression glslesRegExp("ES (\\d\\.\\d)");
+	int posES=glslString.indexOf(glslesRegExp);
 	if (pos >-1)
 	{
-		float glslVersion=glslRegExp.cap(1).toFloat();
+		float glslVersion=glslRegExp.match(glslString).captured(1).toFloat();
 		qDebug() << "GLSL Version Number detected: " << glslVersion;
 		if (glslVersion<1.3f)
 		{
@@ -1197,7 +1199,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 	}
 	else if (posES >-1)
 	{
-		float glslesVersion=glslesRegExp.cap(1).toFloat();
+		float glslesVersion=glslesRegExp.match(glslString).captured(1).toFloat();
 		qDebug() << "GLSL ES Version Number detected: " << glslesVersion;
 		if (glslesVersion<1.0f) // TBD: is this possible at all?
 		{

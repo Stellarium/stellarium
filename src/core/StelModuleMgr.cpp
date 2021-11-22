@@ -21,6 +21,7 @@
 #include <QPluginLoader>
 #include <QSettings>
 #include <QDir>
+#include <QRegularExpression>
 
 #include "StelModuleMgr.hpp"
 #include "StelApp.hpp"
@@ -309,7 +310,7 @@ QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 QString StelModuleMgr::getStandardSupportLinksInfo(QString moduleName, bool furtherInfo)
 {
 	// Regexp to replace {text} with an HTML link.
-	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
+	const QRegularExpression a_rx("[{]([^{]*)[}]");
 	QString html;
 	html += "<h3>" + q_("Links") + "</h3>";
 	html += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg(moduleName) + "</p>";

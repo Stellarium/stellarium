@@ -34,7 +34,7 @@
 #include "planetsephems/sidereal_time.h"
 #include "planetsephems/precession.h"
 
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QDebug>
 #include <QSettings>
 
@@ -851,9 +851,9 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 	str.append(omgr->getExtraInfoStrings(DebugAid).join(' ')); // TBD: Remove for Release builds?
 
 	// hack for avoiding an empty line before table
-	str.replace(QRegExp("<br(\\s*/)?><table"), "<table");
+	str.replace(QRegularExpression("<br(\\s*/)?><table"), "<table");
 	// chomp trailing line breaks
-	str.replace(QRegExp("<br(\\s*/)?>\\s*$"), "");
+	str.replace(QRegularExpression("<br(\\s*/)?>\\s*$"), "");
 
 	if (flags&PlainText)
 	{
@@ -861,12 +861,12 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 		str.replace("</b>", "");
 		str.replace("<h2>", "");
 		str.replace("</h2>", "\n");
-		str.replace(QRegExp("<br(\\s*/)?>"), "\n");
+		str.replace(QRegularExpression("<br(\\s*/)?>"), "\n");
 		str.replace("<tr>", "");
-		str.replace(QRegExp("<td(\\w*)?>"), "");
+		str.replace(QRegularExpression("<td(\\w*)?>"), "");
 		str.replace("<td>", "");
 		str.replace("</tr>", "\n");
-		str.replace(QRegExp("<table(\\w*)?>"), "");
+		str.replace(QRegularExpression("<table(\\w*)?>"), "");
 		str.replace("</table>", "");
 	}
 	else if(!(flags&NoFont))

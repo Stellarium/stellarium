@@ -400,11 +400,11 @@ void SolarSystem::updateSkyCulture(const QString& skyCultureDir)
 
 	// Now parse the file
 	// lines to ignore which start with a # or are empty
-	QRegExp commentRx("^(\\s*#.*|\\s*)$");
+	QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
 
 	// lines which look like records - we use the RE to extract the fields
 	// which will be available in recRx.capturedTexts()
-	QRegExp recRx("^\\s*(\\w+)\\s+\"(.+)\"\\s+_[(]\"(.+)\"[)]\\n");
+	QRegularExpression recRx("^\\s*(\\w+)\\s+\"(.+)\"\\s+_[(]\"(.+)\"[)]\\n");
 
 	QString record, planetId, nativeName, nativeNameMeaning;
 
@@ -418,20 +418,21 @@ void SolarSystem::updateSkyCulture(const QString& skyCultureDir)
 		lineNumber++;
 
 		// Skip comments
-		if (commentRx.exactMatch(record))
+		if (commentRx.match(record).hasMatch())
 			continue;
 
 		totalRecords++;
 
-		if (!recRx.exactMatch(record))
+		QRegularExpressionMatch match=recRx.match(record);
+		if (!match.hasMatch())
 		{
 			qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in planet names file" << QDir::toNativeSeparators(namesFile);
 		}
 		else
 		{
-			planetId = recRx.cap(1).trimmed();
-			nativeName = recRx.cap(2).trimmed();
-			nativeNameMeaning = recRx.cap(3).trimmed();
+			planetId          = match.captured(1).trimmed();
+			nativeName        = match.captured(2).trimmed();
+			nativeNameMeaning = match.captured(3).trimmed();
 			planetNativeNamesMap[planetId] = nativeName;
 			planetNativeNamesMeaningMap[planetId] = nativeNameMeaning;
 			readOk++;

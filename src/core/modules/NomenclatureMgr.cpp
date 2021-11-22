@@ -34,6 +34,7 @@
 #include <QFile>
 #include <QDir>
 #include <QBuffer>
+#include <QRegularExpression>
 
 NomenclatureMgr::NomenclatureMgr() : StelObjectModule()
 {
@@ -93,7 +94,7 @@ void NomenclatureMgr::loadNomenclature()
 	nomenclatureItems.clear();	
 
 	// regular expression to find the comments and empty lines
-	QRegExp commentRx("^(\\s*#.*|\\s*)$");
+	QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
 
 	// regular expression to find the nomenclature data
 	// Rules:
@@ -106,10 +107,8 @@ void NomenclatureMgr::loadNomenclature()
 	//	latitude of surface feature		: float (decimal degrees)
 	//	longitude of surface feature		: float (decimal degrees)
 	//	diameter of surface feature		: float (kilometers)
-	QRegExp recRx("^\\s*(\\w+)\\s+(\\d+)\\s+_[(]\"(.*)\"[)]\\s+(\\w+)\\s+([\\-\\+\\.\\d]+)\\s+([\\-\\+\\.\\d]+)\\s+([\\-\\+\\.\\d]+)(.*)");
-	QRegExp ctxRx("(.*)\",\\s*\"(.*)");
-	QString record, ctxt;
-
+	QRegularExpression recRx("^\\s*(\\w+)\\s+(\\d+)\\s+_[(]\"(.*)\"[)]\\s+(\\w+)\\s+([\\-\\+\\.\\d]+)\\s+([\\-\\+\\.\\d]+)\\s+([\\-\\+\\.\\d]+)(.*)");
+	QRegularExpression ctxRx("(.*)\",\\s*\"(.*)");
 
 	QString surfNamesFile = StelFileMgr::findFile("data/nomenclature.dat"); // compressed version of file nomenclature.fab
 	if (!surfNamesFile.isEmpty()) // OK, the file is exist!
@@ -148,28 +147,30 @@ void NomenclatureMgr::loadNomenclature()
 
 		while (!buf.atEnd())
 		{
-			record = QString::fromUtf8(buf.readLine());
+			QString record = QString::fromUtf8(buf.readLine());
 			lineNumber++;
 
 			// Skip comments
-			if (commentRx.exactMatch(record))
+			if (commentRx.match(record).hasMatch())
 				continue;
 
 			totalRecords++;
-			if (!recRx.exactMatch(record))
+			QRegularExpressionMatch recMatch=recRx.match(record);
+			if (!recMatch.hasMatch())
 				qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in surface nomenclature file" << QDir::toNativeSeparators(surfNamesFile);
 			else
 			{
 				// Read the planet name
-				planet	= recRx.cap(1).trimmed();
+				planet	= recMatch.captured(1).trimmed();
 				// Read the ID of feature
-				featureId	= recRx.cap(2).toInt();
+				featureId	= recMatch.captured(2).toInt();
 				// Read the name of feature and context
-				ctxt		= recRx.cap(3).trimmed();
-				if (ctxRx.exactMatch(ctxt))
+				QString ctxt	= recMatch.captured(3).trimmed();
+				QRegularExpressionMatch ctxMatch=ctxRx.match(ctxt);
+				if (ctxMatch.hasMatch())
 				{
-					name = ctxRx.cap(1).trimmed();
-					context = ctxRx.cap(2).trimmed();
+					name = ctxMatch.captured(1).trimmed();
+					context = ctxMatch.captured(2).trimmed();
 				}
 				else
 				{
@@ -177,14 +178,14 @@ void NomenclatureMgr::loadNomenclature()
 					context = "";
 				}
 				// Read the type of feature
-				QString ntypecode	= recRx.cap(4).trimmed();
+				QString ntypecode	= recMatch.captured(4).trimmed();
 				ntype = NomenclatureItem::getNomenclatureItemType(ntypecode.toUpper());
 				// Read the latitude of feature
-				latitude	= recRx.cap(5).toDouble();
+				latitude	= recMatch.captured(5).toDouble();
 				// Read the longitude of feature
-				longitude	= recRx.cap(6).toDouble();
+				longitude	= recMatch.captured(6).toDouble();
 				// Read the size of feature
-				size		= recRx.cap(7).toDouble();
+				size		= recMatch.captured(7).toDouble();
 
 				if (planetName.isEmpty() || planet!=planetName)
 				{

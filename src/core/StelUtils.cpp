@@ -31,7 +31,7 @@
 #include <QFile>
 #include <QDebug>
 #include <QLocale>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QProcess>
 #include <QSysInfo>
 #include <cmath> // std::fmod
@@ -93,12 +93,13 @@ QString getOperatingSystemInfo()
 
 double hmsStrToHours(const QString& s)
 {
-	QRegExp reg("(\\d+)h(\\d+)m(\\d+)s");
-	if (!reg.exactMatch(s))
+	QRegularExpression reg("(\\d+)h(\\d+)m(\\d+)s");
+	QRegularExpressionMatch match=reg.match(s);
+	if (!match.hasMatch())
 		return 0.;
-	uint hrs = reg.cap(1).toUInt();
-	uint min = reg.cap(2).toUInt();
-	int sec = reg.cap(3).toInt();
+	uint hrs = match.captured(1).toUInt();
+	uint min = match.captured(2).toUInt();
+	int sec  = match.captured(3).toInt();
 
 	return hmsToHours(hrs, min, sec);
 }
@@ -382,13 +383,14 @@ QString decDegToDmsStr(const double angle)
 // Convert a dms formatted string to an angle in radian
 double dmsStrToRad(const QString& s)
 {
-	QRegExp reg("([\\+\\-])(\\d+)d(\\d+)'(\\d+)\"");
-	if (!reg.exactMatch(s))
+	QRegularExpression reg("([\\+\\-])(\\d+)d(\\d+)'(\\d+)\"");
+	QRegularExpressionMatch match=reg.match(s);
+	if (!match.hasMatch())
 		return 0;
-	bool sign = (reg.cap(1) == "-");
-	int deg = reg.cap(2).toInt();
-	uint min = reg.cap(3).toUInt();
-	int sec = reg.cap(4).toInt();
+	bool sign = (match.captured(1) == "-");
+	int deg   = match.captured(2).toInt();
+	uint min  = match.captured(3).toUInt();
+	int sec   = match.captured(4).toInt();
 
 	double rad = dmsToRad(qAbs(deg), min, sec);
 	if (sign)
@@ -399,24 +401,26 @@ double dmsStrToRad(const QString& s)
 
 double getDecAngle(const QString& str)
 {
-	QRegExp rex("([-+]?)\\s*"                         // [sign] (1)
-		    "(?:"                                 // either
-		    "(\\d+(?:\\.\\d+)?)\\s*"               // fract (2)
-		    "([dhms°º]?)"                          // [dhms] (3) \u00B0\u00BA
-		    "|"                                   // or
-		    "(?:(\\d+)\\s*([hHdD°º])\\s*)?"         // [int degs] (4) (5)
-		    "(?:"                                   // either
-		    "(?:(\\d+)\\s*['mM]\\s*)?"              //  [int mins]  (6)
-		    "(\\d+(?:\\.\\d+)?)\\s*[\"sS]"          //  fract secs  (7)
-		    "|"                                     // or
-		    "(\\d+(?:\\.\\d+)?)\\s*['mM]"           //  fract mins (8)
-		    ")"                                     // end
-		    ")"                                   // end
-		    "\\s*([NSEW]?)",                      // [point] (9)
-		    Qt::CaseInsensitive);
-	if( rex.exactMatch(str) )
+	 static const QString reStr("([-+]?)\\s*"                         // [sign] (1)
+				    "(?:"                                 // either
+				    "(\\d+(?:\\.\\d+)?)\\s*"              // fract (2)
+				    "([dhms°º]?)"                         // [dhms] (3) \u00B0\u00BA
+				    "|"                                   // or
+				    "(?:(\\d+)\\s*([hHdD°º])\\s*)?"       // [int degs] (4) (5)
+				    "(?:"                                 // either
+				    "(?:(\\d+)\\s*['mM]\\s*)?"            //  [int mins]  (6)
+				    "(\\d+(?:\\.\\d+)?)\\s*[\"sS]"        //  fract secs  (7)
+				    "|"                                   // or
+				    "(\\d+(?:\\.\\d+)?)\\s*['mM]"         //  fract mins (8)
+				    ")"                                   // end
+				    ")"                                   // end
+				    "\\s*([NSEW]?)"                       // [point] (9)
+				   );
+	QRegularExpression rex(reStr, QRegularExpression::CaseInsensitiveOption);
+	QRegularExpressionMatch match=rex.match(str);
+	if( match.hasMatch() )
 	{
-		QStringList caps = rex.capturedTexts();
+		QStringList caps = match.capturedTexts();
 #if 0
 		std::cout << "reg exp: ";
 		for( int i = 1; i <= rex.captureCount() ; ++i ){
@@ -1126,22 +1130,23 @@ double getJulianDayFromISO8601String(const QString& iso8601Date, bool* ok)
 bool getDateTimeFromISO8601String(const QString& iso8601Date, int* y, int* m, int* d, int* h, int* min, float* s)
 {
 	// Represents an ISO8601 complete date string.
-	QRegExp finalRe("^([+\\-]?\\d+)[:\\-](\\d\\d)[:\\-](\\d\\d)T(\\d?\\d):(\\d\\d):(\\d\\d(?:\\.\\d*)?)$");
-	if (finalRe.exactMatch(iso8601Date) && finalRe.captureCount()==6)
+	QRegularExpression finalRe("^([+\\-]?\\d+)[:\\-](\\d\\d)[:\\-](\\d\\d)T(\\d?\\d):(\\d\\d):(\\d\\d(?:\\.\\d*)?)$");
+	QRegularExpressionMatch match=finalRe.match(iso8601Date);
+	if (match.hasMatch() && finalRe.captureCount()==6)
 	{
 		bool error = false;
 		bool ok;
-		*y = finalRe.cap(1).toInt(&ok);
+		*y = match.captured(1).toInt(&ok);
 		error = error || !ok;
-		*m = finalRe.cap(2).toInt(&ok);
+		*m = match.captured(2).toInt(&ok);
 		error = error || !ok;
-		*d = finalRe.cap(3).toInt(&ok);
+		*d = match.captured(3).toInt(&ok);
 		error = error || !ok;
-		*h = finalRe.cap(4).toInt(&ok);
+		*h = match.captured(4).toInt(&ok);
 		error = error || !ok;
-		*min = finalRe.cap(5).toInt(&ok);
+		*min = match.captured(5).toInt(&ok);
 		error = error || !ok;
-		*s = finalRe.cap(6).toFloat(&ok);
+		*s = match.captured(6).toFloat(&ok);
 		error = error || !ok;
 		if (!error)
 			return true;

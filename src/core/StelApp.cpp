@@ -88,6 +88,7 @@
 #include <QGuiApplication>
 #include <QScreen>
 #include <QDateTime>
+#include <QRegularExpression>
 #ifdef ENABLE_SPOUT
 #include <QMessageBox>
 #include "SpoutSender.hpp"
@@ -339,13 +340,14 @@ void StelApp::setupNetworkProxy()
 				// http://proxy.loc:3128/
 				// http://2001:62a:4:203:6ab5:99ff:fef2:560b:3128/
 				// http://foo:bar@2001:62a:4:203:6ab5:99ff:fef2:560b:3128/
-				QRegExp pre("^([^:]+://)?(?:([^:]+):([^@]*)@)?(.+):([\\d]+)");
-				if (pre.indexIn(proxyString) >= 0)
+				QRegularExpression pre("^([^:]+://)?(?:([^:]+):([^@]*)@)?(.+):([\\d]+)");
+				QRegularExpressionMatch preMatch=pre.match(proxyString);
+				if (proxyString.indexOf(pre) >= 0)
 				{
-					proxyUser = pre.cap(2);
-					proxyPass = pre.cap(3);
-					proxyHost = pre.cap(4);
-					proxyPort = pre.cap(5);
+					proxyUser = preMatch.captured(2);
+					proxyPass = preMatch.captured(3);
+					proxyHost = preMatch.captured(4);
+					proxyPort = preMatch.captured(5);
 				}
 				else
 				{

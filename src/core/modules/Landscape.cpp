@@ -38,6 +38,7 @@
 #include <QFile>
 #include <QDir>
 #include <QtAlgorithms>
+#include <QRegularExpression>
 
 Landscape::Landscape(float _radius)
 	: radius(static_cast<double>(_radius))
@@ -73,7 +74,7 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 	name = landscapeIni.value("landscape/name").toString();
 	author = landscapeIni.value("landscape/author").toString();
 	description = landscapeIni.value("landscape/description").toString();
-	description = description.replace(QRegExp("\\\\n\\s*\\\\n"), "<br />");
+	description = description.replace(QRegularExpression("\\\\n\\s*\\\\n"), "<br />");
 	description = description.replace("\\n", " ");
 	if (name.isEmpty())
 	{
@@ -170,17 +171,16 @@ void Landscape::createPolygonalHorizon(const QString& lineFileName, const float 
 		qWarning() << "Landscape Horizon line data file" << QDir::toNativeSeparators(lineFileName) << "not found.";
 		return;
 	}
-	QRegExp emptyLine("^\\s*$");
+	QRegularExpression emptyLine("^\\s*$");
 	QTextStream in(&file);
 	while (!in.atEnd())
 	{
 		// Build list of vertices. The checks can certainly become more robust.
 		QString line = in.readLine();
 		if (line.length()==0) continue;
-		if (emptyLine.exactMatch((line))) continue;
+		if (emptyLine.match(line).hasMatch()) continue;
 		if (line.at(0)=='#') continue; // skip comment lines.
-		//QStringList list = line.split(QRegExp("\\b\\s+\\b"));
-		const QStringList list = line.trimmed().split(QRegExp("\\s+"));
+		const QStringList list = line.trimmed().split(QRegularExpression("\\s+"));
 		if (list.count() < 2)
 		{
 			qWarning() << "Landscape polygon file" << QDir::toNativeSeparators(lineFileName) << "has bad line:" << line << "with" << list.count() << "elements";

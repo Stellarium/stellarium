@@ -36,7 +36,6 @@
 #include "StelModuleMgr.hpp"
 #include "LandscapeMgr.hpp"
 
-#include <QRegExp>
 #include <QDebug>
 #include <QElapsedTimer>
 

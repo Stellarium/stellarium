@@ -34,7 +34,7 @@
 #include "RefractionExtinction.hpp"
 #include "Orbit.hpp"
 
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QDebug>
 #include <QElapsedTimer>
 
@@ -255,11 +255,12 @@ void MinorPlanet::translateName(const StelTranslator &translator)
 
 QString MinorPlanet::renderProvisionalDesignationinHtml(QString plainTextName)
 {
-	QRegExp provisionalDesignationPattern("^(\\d{4}\\s[A-Z]{2})(\\d*)$");
-	if (provisionalDesignationPattern.indexIn(plainTextName) == 0)
+	QRegularExpression provisionalDesignationPattern("^(\\d{4}\\s[A-Z]{2})(\\d*)$");
+	QRegularExpressionMatch match=provisionalDesignationPattern.match(plainTextName);
+	if (plainTextName.indexOf(provisionalDesignationPattern) == 0)
 	{
-		QString main = provisionalDesignationPattern.cap(1);
-		QString suffix = provisionalDesignationPattern.cap(2);
+		QString main = match.captured(1);
+		QString suffix = match.captured(2);
 		if (!suffix.isEmpty())
 		{
 			return (QString("%1<sub>%2</sub>").arg(main).arg(suffix));

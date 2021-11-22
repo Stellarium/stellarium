@@ -48,6 +48,7 @@
 #include <QTimeZone>
 #include <QFile>
 #include <QDir>
+#include <QRegularExpression>
 
 #include <iostream>
 #include <fstream>
@@ -2668,28 +2669,28 @@ QString StelCore::getIAUConstellation(const Vec3d positionEqJnow) const
 			return "err";
 		}
 		iau_constelspan span;
-		QRegExp emptyLine("^\\s*$");
+		QRegularExpression emptyLine("^\\s*$");
 		QTextStream in(&file);
 		while (!in.atEnd())
 		{
 			// Build list of entries. The checks can certainly become more robust. Actually the file must have 4-part lines.
 			QString line = in.readLine();
 			if (line.length()==0) continue;
-			if (emptyLine.exactMatch((line))) continue;
+			if (emptyLine.match(line).hasMatch()) continue;
 			if (line.at(0)=='#') continue; // skip comment lines.
-			//QStringList list = line.split(QRegExp("\\b\\s+\\b"));
-			QStringList list = line.trimmed().split(QRegExp("\\s+"));
+			//QStringList list = line.split(QRegularExpression("\\b\\s+\\b"));
+			QStringList list = line.trimmed().split(QRegularExpression("\\s+"));
 			if (list.count() != 4)
 			{
 				qWarning() << "IAU constellation file constellations_spans.dat has bad line:" << line << "with" << list.count() << "elements";
 				continue;
 			}
 			//qDebug() << "Creating span for decl=" << list.at(2) << " from RA=" << list.at(0) << "to" << list.at(1) << ": " << list.at(3);
-			QStringList numList=list.at(0).split(QRegExp(":"));
+			QStringList numList=list.at(0).split(QRegularExpression(":"));
 			span.RAlow= atof(numList.at(0).toLatin1()) + atof(numList.at(1).toLatin1())/60. + atof(numList.at(2).toLatin1())/3600.;
-			numList=list.at(1).split(QRegExp(":"));
+			numList=list.at(1).split(QRegularExpression(":"));
 			span.RAhigh=atof(numList.at(0).toLatin1()) + atof(numList.at(1).toLatin1())/60. + atof(numList.at(2).toLatin1())/3600.;
-			numList=list.at(2).split(QRegExp(":"));
+			numList=list.at(2).split(QRegularExpression(":"));
 			span.decLow=atof(numList.at(0).toLatin1());
 			if (span.decLow<0.0)
 				span.decLow -= atof(numList.at(1).toLatin1())/60.;
