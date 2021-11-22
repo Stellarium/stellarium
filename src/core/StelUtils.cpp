@@ -401,31 +401,39 @@ double dmsStrToRad(const QString& s)
 
 double getDecAngle(const QString& str)
 {
-	 static const QString reStr("([-+]?)\\s*"                         // [sign] (1)
-				    "(?:"                                 // either
-				    "(\\d+(?:\\.\\d+)?)\\s*"              // fract (2)
-				    "([dhms°º]?)"                         // [dhms] (3) \u00B0\u00BA
-				    "|"                                   // or
-				    "(?:(\\d+)\\s*([hHdD°º])\\s*)?"       // [int degs] (4) (5)
-				    "(?:"                                 // either
-				    "(?:(\\d+)\\s*['mM]\\s*)?"            //  [int mins]  (6)
-				    "(\\d+(?:\\.\\d+)?)\\s*[\"sS]"        //  fract secs  (7)
-				    "|"                                   // or
-				    "(\\d+(?:\\.\\d+)?)\\s*['mM]"         //  fract mins (8)
-				    ")"                                   // end
-				    ")"                                   // end
-				    "\\s*([NSEW]?)"                       // [point] (9)
-				   );
+	static const QString reStr("([-+]?)\\s*"                         // [sign]  (1)
+				   "(?:"                                 // either
+				   "(\\d+(?:\\.\\d+)?)\\s*"              //  fract  (2)
+				   "([dhms°º]?)"                         //  [dhms] (3) \u00B0\u00BA
+				   "|"                                   // or
+				   "(?:(\\d+)\\s*([hHdD°º])\\s*)?"       //  [int degs]   (4) (5)
+				   "(?:"                                 //  either
+				   "(?:(\\d+)\\s*['mM]\\s*)?"            //   [int mins]  (6)
+				   "(\\d+(?:\\.\\d+)?)\\s*[\"sS]"        //   fract secs  (7)
+				   "|"                                   //  or
+				   "(\\d+(?:\\.\\d+)?)\\s*['mM]"         //   fract mins  (8)
+				   ")"                                   //  end
+				   ")"                                   // end
+				   "\\s*([NSEW]?)"                       // [point] (9)
+				  );
+
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 12, 0))
+	QRegularExpression rex(QRegularExpression::anchoredPattern(reStr), QRegularExpression::CaseInsensitiveOption);
+	QRegularExpressionMatch match=rex.match(str);
+	if( match.hasMatch() )
+	{
+		QStringList caps = match.capturedTexts();
+#else
 	QRegExp rex(reStr, Qt::CaseInsensitive);
 	if( rex.exactMatch(str) )
 	{
 		QStringList caps = rex.capturedTexts();
+#endif
 #if 0
-		std::cout << "reg exp: ";
+		qDebug() << "reg exp: ";
 		for( int i = 1; i <= rex.captureCount() ; ++i ){
-			std::cout << i << "=\"" << caps.at(i).toStdString() << "\" ";
+			qDebug() << i << "=\"" << caps.at(i) << "\" ";
 		}
-		std::cout << std::endl;
 #endif
 		double d = 0;
 		double m = 0;
