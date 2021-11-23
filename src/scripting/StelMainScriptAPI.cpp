@@ -62,7 +62,7 @@
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QSet>
 #include <QStringList>
 #include <QTemporaryFile>
@@ -227,11 +227,12 @@ void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, d
 			loc.planetName = ssObj->getEnglishName();
 	}
 
-	QRegExp cico( "^\\s*([^,]+),\\s*(\\S.*)$" );
-	if( cico.exactMatch( name ) )
+	QRegularExpression cico( "^\\s*([^,]+),\\s*(\\S.*)$" );
+	QRegularExpressionMatch match=cico.match(name);
+	if( match.hasMatch() )
 	{
-		loc.name = cico.cap(1);
-		loc.region = cico.cap(2);
+		loc.name = match.captured(1);
+		loc.region = match.captured(2);
 	}
 	else
 		loc.name = name;
@@ -785,12 +786,13 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 	if (ok)
 		return jd;
 
-	QRegExp nowRe("(now)?"
+	QRegularExpression nowRe("(now)?"
 		      "\\s*([-+])"
 		      "\\s*(\\d+(?:\\.\\d+)?(?:[eE][-+]?\\d+)?)"
 		      "\\s*(second|minute|hour|day|sol|week|month|year)s?"
 		      "(?:\\s+(sidereal))?");
-	if (nowRe.exactMatch(tdt))
+	QRegularExpressionMatch nowMatch=nowRe.match(tdt);
+	if (nowMatch.hasMatch())
 	{
 		double delta;
 		double unit;
@@ -798,19 +800,19 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 		double yearLength = 365.242190419; // duration of Earth's mean tropical year
 		double monthLength = 27.321582241; // duration of Earth's mean tropical month
 
-		if (nowRe.cap(1)=="now")
+		if (nowMatch.captured(1)=="now")
 			jd = StelUtils::getJDFromSystem();
 		else
 			jd = core->getJD();
 
-		if (nowRe.cap(5) == "sidereal")
+		if (nowMatch.captured(5) == "sidereal")
 		{
 			dayLength = core->getLocalSiderealDayLength();
 			yearLength = core->getLocalSiderealYearLength();
 			monthLength = 27.321661; // duration of Earth's sidereal month
 		}
 
-		QString unitString = nowRe.cap(4);
+		QString unitString = nowMatch.captured(4);
 		if ( unitString == "second")
 			unit = dayLength / (24*3600.);
 		else if (unitString == "minute")
@@ -829,15 +831,15 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 			unit = yearLength;
 		else
 		{
-			qWarning() << "StelMainScriptAPI::setDate - unknown time unit:" << nowRe.cap(4);
+			qWarning() << "StelMainScriptAPI::setDate - unknown time unit:" << unitString;
 			unit = 0;
 		}
 
-		delta = nowRe.cap(3).toDouble();
+		delta = nowMatch.captured(3).toDouble();
 
-		if (nowRe.cap(2) == "+")
+		if (nowMatch.captured(2) == "+")
 			jd += (unit * delta);
-		else if (nowRe.cap(2) == "-")
+		else if (nowMatch.captured(2) == "-")
 			jd -= (unit * delta);
 		return jd;
 	}

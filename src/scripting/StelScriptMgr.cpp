@@ -44,7 +44,7 @@
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QSet>
 #include <QStringList>
 #include <QTemporaryFile>
@@ -391,10 +391,10 @@ QStringList StelScriptMgr::getScriptList() const
 	QStringList scriptFiles;
 
 	QSet<QString> files = StelFileMgr::listContents("scripts", StelFileMgr::File, true);
-	QRegExp fileRE("^.*\\.ssc$");
+	QRegularExpression fileRE("^.*\\.ssc$");
 	for (const auto& f : files)
 	{
-		if (fileRE.exactMatch(f))
+		if (fileRE.match(f).hasMatch())
 			scriptFiles << f;
 	}
 	return scriptFiles;
@@ -425,14 +425,15 @@ QString StelScriptMgr::getHeaderSingleLineCommentText(const QString& s, const QS
 	QTextStream textStream(&file);
 	textStream.setCodec("UTF-8");
 
-	QRegExp nameExp("^\\s*//\\s*" + id + ":\\s*(.+)$");
+	QRegularExpression nameExp("^\\s*//\\s*" + id + ":\\s*(.+)$");
 	while (!textStream.atEnd())
 	{
 		QString line = textStream.readLine();
-		if (nameExp.exactMatch(line))
+		QRegularExpressionMatch nameMatch=nameExp.match(line);
+		if (nameMatch.hasMatch())
 		{
 			file.close();
-			return nameExp.cap(1).trimmed();
+			return nameMatch.captured(1).trimmed();
 		}
 	}
 	file.close();
@@ -447,7 +448,7 @@ QString StelScriptMgr::getHtmlDescription(const QString &s, bool generateDocumen
 	html += "<h2>" + q_(getName(s).trimmed()) + "</h2>";
 	QString d = getDescription(s).trimmed();
 	d.replace("\n", "<br />");
-	d.replace(QRegExp("\\s{2,}"), " ");
+	d.replace(QRegularExpression("\\s{2,}"), " ");
 	html += "<p>" + q_(d) + "</p>";
 	html += "<p>";
 
@@ -522,26 +523,28 @@ QString StelScriptMgr::getDescription(const QString& s) const
 
 	QString desc = "";
 	bool inDesc = false;
-	QRegExp descExp("^\\s*//\\s*Description:\\s*([^\\s].+)\\s*$");
-	QRegExp descNewlineExp("^\\s*//\\s*$");
-	QRegExp descContExp("^\\s*//\\s*([^\\s].*)\\s*$");
+	QRegularExpression descExp("^\\s*//\\s*Description:\\s*([^\\s].+)\\s*$");
+	QRegularExpression descNewlineExp("^\\s*//\\s*$");
+	QRegularExpression descContExp("^\\s*//\\s*([^\\s].*)\\s*$");
 	while (!textStream.atEnd())
 	{
 		QString line = textStream.readLine();
-		if (!inDesc && descExp.exactMatch(line))
+		QRegularExpressionMatch descMatch=descExp.match(line);
+		if (!inDesc && descMatch.hasMatch())
 		{
 			inDesc = true;
-			desc = descExp.cap(1) + " ";
+			desc = descMatch.captured(1) + " ";
 			desc.replace("\n","");
 		}
 		else if (inDesc)
 		{
 			QString d("");
-			if (descNewlineExp.exactMatch(line))
+			QRegularExpressionMatch descContMatch=descContExp.match(line);
+			if (descNewlineExp.match(line).hasMatch())
 				d = "\n";
-			else if (descContExp.exactMatch(line))
+			else if (descContMatch.hasMatch())
 			{
-				d = descContExp.cap(1) + " ";
+				d = descContMatch.captured(1) + " ";
 				d.replace("\n","");
 			}
 			else
@@ -805,14 +808,15 @@ bool StelScriptMgr::preprocessScript(const QString fileName, const QString &inpu
 	
 void StelScriptMgr::expand(const QString fileName, const QString &input, QString &output, const QString &scriptDir, int &errLoc){
 	QStringList lines = input.split("\n");
-	QRegExp includeRe("^include\\s*\\(\\s*\"([^\"]+)\"\\s*\\)\\s*;\\s*(//.*)?$");
+	QRegularExpression includeRe("^include\\s*\\(\\s*\"([^\"]+)\"\\s*\\)\\s*;\\s*(//.*)?$");
 	int curline = 0;
 	for (const auto& line : lines)
 	{
 		curline++;
-		if (includeRe.exactMatch(line))
+		QRegularExpressionMatch includeMatch=includeRe.match(line);
+		if (includeMatch.hasMatch())
 		{
-			QString incName = includeRe.cap(1);
+			QString incName = includeMatch.captured(1);
 			QString incPath;
 
 			// Search for the include file.  Rules are:
