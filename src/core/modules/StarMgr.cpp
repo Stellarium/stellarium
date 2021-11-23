@@ -52,7 +52,7 @@
 #include <QFile>
 #include <QSettings>
 #include <QString>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QDebug>
 #include <QFileInfo>
 #include <QDir>
@@ -751,24 +751,25 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 	int lineNumber=0;
 	QString record;
 	// Allow empty and comment lines where first char (after optional blanks) is #
-	QRegExp commentRx("^(\\s*#.*|\\s*)$");
+	QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
 	// record structure is delimited with a | character.  We will
-	// use a QRegExp to extract the fields. with white-space padding permitted
+	// use a QRegularExpression to extract the fields. with white-space padding permitted
 	// (i.e. it will be stripped automatically) Example record strings:
 	// "   677|_("Alpheratz")"
 	// "113368|_("Fomalhaut")"
-	// Note: Stellarium doesn't support sky cultures made prior version 0.10.6 now!
-	QRegExp recordRx("^\\s*(\\d+)\\s*\\|[_]*[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
+	// Note: Stellarium doesn't support sky cultures made prior to version 0.10.6 now!
+	QRegularExpression recordRx("^\\s*(\\d+)\\s*\\|[_]*[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
 
 	while(!cnFile.atEnd())
 	{
 		record = QString::fromUtf8(cnFile.readLine());
 		lineNumber++;
-		if (commentRx.exactMatch(record))
+		if (commentRx.match(record).hasMatch())
 			continue;
 
 		totalRecords++;
-		if (!recordRx.exactMatch(record))
+		QRegularExpressionMatch recMatch=recordRx.match(record);
+		if (!recMatch.hasMatch())
 		{
 			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(commonNameFile)
 				   << " - record does not match record pattern";
@@ -778,14 +779,14 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 		{
 			// The record is the right format.  Extract the fields
 			bool ok;
-			int hip = recordRx.cap(1).toInt(&ok);
+			int hip = recMatch.captured(1).toInt(&ok);
 			if (!ok)
 			{
 				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(commonNameFile)
-					   << " - failed to convert " << recordRx.cap(1) << "to a number";
+					   << " - failed to convert " << recMatch.captured(1) << "to a number";
 				continue;
 			}
-			QString englishCommonName = recordRx.cap(2).trimmed();
+			QString englishCommonName = recMatch.captured(2).trimmed();
 			if (englishCommonName.isEmpty())
 			{
 				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(commonNameFile)
@@ -820,7 +821,7 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 				commonNamesIndex[englishNameCap] = hip;
 			}
 
-			QString reference = recordRx.cap(3).trimmed();
+			QString reference = recMatch.captured(3).trimmed();
 			if (!reference.isEmpty())
 			{
 				if (referenceMap.find(hip)!=referenceMap.end())
@@ -1517,34 +1518,38 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 {
 	QString objw = name.toUpper();
 
-	// Search by HP number if it's an HP formated number
-	QRegExp rx("^\\s*(HP|HIP)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
-	if (rx.exactMatch(objw))
-		return searchHP(rx.cap(2).toInt());
+	// Search by HP number if it's an HP formatted number
+	QRegularExpression rx("^\\s*(HP|HIP)\\s*(\\d+)\\s*$", QRegularExpression::CaseInsensitiveOption);
+	QRegularExpressionMatch match=rx.match(objw);
+	if (match.hasMatch())
+		return searchHP(match.captured(2).toInt());
 
-	// Search by SAO number if it's an SAO formated number
-	QRegExp rx2("^\\s*(SAO)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
-	if (rx2.exactMatch(objw))
+	// Search by SAO number if it's an SAO formatted number
+	QRegularExpression rx2("^\\s*(SAO)\\s*(\\d+)\\s*$", QRegularExpression::CaseInsensitiveOption);
+	match=rx2.match(objw);
+	if (match.hasMatch())
 	{
-		auto sao = saoStarsIndex.find(rx2.cap(2).toInt());
+		auto sao = saoStarsIndex.find(match.captured(2).toInt());
 		if (sao!=saoStarsIndex.end())
 			return searchHP(sao.value());
 	}
 
-	// Search by HD number if it's an HD formated number
-	QRegExp rx3("^\\s*(HD)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
-	if (rx3.exactMatch(objw))
+	// Search by HD number if it's an HD formatted number
+	QRegularExpression rx3("^\\s*(HD)\\s*(\\d+)\\s*$", QRegularExpression::CaseInsensitiveOption);
+	match=rx3.match(objw);
+	if (match.hasMatch())
 	{
-		auto hd = hdStarsIndex.find(rx3.cap(2).toInt());
+		auto hd = hdStarsIndex.find(match.captured(2).toInt());
 		if (hd!=hdStarsIndex.end())
 			return searchHP(hd.value());
 	}
 
-	// Search by HR number if it's an HR formated number
-	QRegExp rx4("^\\s*(HR)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
-	if (rx4.exactMatch(objw))
+	// Search by HR number if it's an HR formatted number
+	QRegularExpression rx4("^\\s*(HR)\\s*(\\d+)\\s*$", QRegularExpression::CaseInsensitiveOption);
+	match=rx4.match(objw);
+	if (match.hasMatch())
 	{
-		auto hr = hrStarsIndex.find(rx4.cap(2).toInt());
+		auto hr = hrStarsIndex.find(match.captured(2).toInt());
 		if (hr!=hrStarsIndex.end())
 			return searchHP(hr.value());
 	}
@@ -1700,9 +1705,9 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 
 	// Search for sci names
 	QString bayerPattern = objPrefix;
-	QRegExp bayerRegEx(bayerPattern);
+	QRegularExpression bayerRegEx(bayerPattern);
 	QString bayerPatternCI = objw;
-	QRegExp bayerRegExCI(bayerPatternCI);
+	QRegularExpression bayerRegExCI(bayerPatternCI);
 
 	// if the first character is a Greek letter, check if there's an index
 	// after it, such as "alpha1 Cen".
@@ -1842,11 +1847,12 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	}
 
 	// Add exact Hp catalogue numbers
-	QRegExp hpRx("^(HIP|HP)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
-	if (hpRx.exactMatch(objw))
+	QRegularExpression hpRx("^(HIP|HP)\\s*(\\d+)\\s*$", QRegularExpression::CaseInsensitiveOption);
+	QRegularExpressionMatch match=hpRx.match(objw);
+	if (match.hasMatch())
 	{
 		bool ok;
-		int hpNum = hpRx.cap(2).toInt(&ok);
+		int hpNum = match.captured(2).toInt(&ok);
 		if (ok)
 		{
 			StelObjectP s = searchHP(hpNum);
@@ -1859,10 +1865,11 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	}
 
 	// Add exact SAO catalogue numbers
-	QRegExp saoRx("^(SAO)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
-	if (saoRx.exactMatch(objw))
+	QRegularExpression saoRx("^(SAO)\\s*(\\d+)\\s*$", QRegularExpression::CaseInsensitiveOption);
+	match=saoRx.match(objw);
+	if (match.hasMatch())
 	{
-		int saoNum = saoRx.cap(2).toInt();
+		int saoNum = match.captured(2).toInt();
 		auto sao = saoStarsIndex.find(saoNum);
 		if (sao!=saoStarsIndex.end())
 		{
@@ -1876,10 +1883,11 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	}
 
 	// Add exact HD catalogue numbers
-	QRegExp hdRx("^(HD)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
-	if (hdRx.exactMatch(objw))
+	QRegularExpression hdRx("^(HD)\\s*(\\d+)\\s*$", QRegularExpression::CaseInsensitiveOption);
+	match=hdRx.match(objw);
+	if (match.hasMatch())
 	{
-		int hdNum = hdRx.cap(2).toInt();
+		int hdNum = match.captured(2).toInt();
 		auto hd = hdStarsIndex.find(hdNum);
 		if (hd!=hdStarsIndex.end())
 		{
@@ -1893,10 +1901,11 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	}
 
 	// Add exact HR catalogue numbers
-	QRegExp hrRx("^(HR)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
-	if (hrRx.exactMatch(objw))
+	QRegularExpression hrRx("^(HR)\\s*(\\d+)\\s*$", QRegularExpression::CaseInsensitiveOption);
+	match=hrRx.match(objw);
+	if (match.hasMatch())
 	{
-		int hrNum = hrRx.cap(2).toInt();
+		int hrNum = match.captured(2).toInt();
 		auto hr = hrStarsIndex.find(hrNum);
 		if (hr!=hrStarsIndex.end())
 		{
@@ -1909,10 +1918,9 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		}
 	}
 
-
 	// Add exact WDS catalogue numbers
-	QRegExp wdsRx("^(WDS)\\s*(\\S+)\\s*$", Qt::CaseInsensitive);
-	if (wdsRx.exactMatch(objw))
+	QRegularExpression wdsRx("^(WDS)\\s*(\\S+)\\s*$", QRegularExpression::CaseInsensitiveOption);
+	if (wdsRx.match(objw).hasMatch())
 	{
 		for (auto wds = wdsStarsIndexI18n.lowerBound(objw); wds != wdsStarsIndexI18n.end(); ++wds)
 		{
@@ -1931,7 +1939,6 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	result.sort();	
 	return result;
 }
-
 
 //! Define font file name and size to use for star names display
 void StarMgr::setFontSize(int newFontSize)
