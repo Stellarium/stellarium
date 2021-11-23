@@ -17,6 +17,8 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QRegularExpression>
+
 #include "ArchaeoLines.hpp"
 #include "ArchaeoLinesDialog.hpp"
 #include "ui_archaeoLinesDialog.h"
@@ -204,7 +206,7 @@ void ArchaeoLinesDialog::createDialogContent()
 void ArchaeoLinesDialog::setAboutHtml(void)
 {
 	// Regexp to replace {text} with an HTML link.
-	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
+	QRegularExpression a_rx("[{]([^{]*)[}]");
 
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("ArchaeoLines Plug-in") + "</h2><table width=\"90%\">";

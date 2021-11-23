@@ -18,6 +18,8 @@
  */
 
 #include <QHostInfo>
+#include <QRegularExpression>
+
 #include "RemoteControl.hpp"
 #include "RemoteControlDialog.hpp"
 #include "ui_remoteControlDialog.h"
@@ -142,7 +144,7 @@ void RemoteControlDialog::setAboutHtml(void)
 	// TODO Add longer instructions?
 
 	// Regexp to replace {text} with an HTML link.
-	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
+	QRegularExpression a_rx("[{]([^{]*)[}]");
 
 	html += "<p>" + q_("It is also possible to send commands via command line, e.g..");
 	html += "<pre>\n"

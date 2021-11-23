@@ -38,6 +38,7 @@
 #include <QVariantMap>
 #include <QVariant>
 #include <QList>
+#include <QRegularExpression>
 
 const QString Exoplanet::EXOPLANET_TYPE=QStringLiteral("Exoplanet");
 StelTextureSP Exoplanet::markerTexture;
@@ -524,12 +525,13 @@ QVariantMap Exoplanet::getInfoMap(const StelCore *core) const
 QString Exoplanet::getPlanetaryClassI18n(QString ptype) const
 {
 	QString result = "";
-	QRegExp dataRx("^(\\w)-(\\w+)\\s(\\w+)$");
-	if (dataRx.exactMatch(ptype))
+	QRegularExpression dataRx("^(\\w)-(\\w+)\\s(\\w+)$");
+	QRegularExpressionMatch dataMatch=dataRx.match(ptype);
+	if (dataMatch.hasMatch())
 	{
-		QString spectral = dataRx.cap(1).trimmed();
-		QString zone = dataRx.cap(2).trimmed();
-		QString size = dataRx.cap(3).trimmed();
+		QString spectral = dataMatch.captured(1).trimmed();
+		QString zone = dataMatch.captured(2).trimmed();
+		QString size = dataMatch.captured(3).trimmed();
 
 		result = QString("%1-%2 %3")
 				.arg(spectral)
