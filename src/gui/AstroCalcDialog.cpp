@@ -4455,7 +4455,7 @@ double AstroCalcDialog::findInitialStep(double startJD, double stopJD, QStringLi
 {
 	double step = (stopJD - startJD) / 16.0;
 	double limit = 24.8 * 365.25;
-	QRegExp mp("^[(](\\d+)[)]\\s(.+)$");
+	QRegularExpression mp("^[(](\\d+)[)]\\s(.+)$");
 
 	if (objects.contains("Moon", Qt::CaseInsensitive))
 		limit = 0.25;

@@ -38,6 +38,7 @@
 #include <QSysInfo>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
+#include <QRegularExpression>
 
 #include "ui_helpDialogGui.h"
 #include "HelpDialog.hpp"
@@ -366,7 +367,7 @@ void HelpDialog::updateHelpText(void) const
 	htmlText += "</table>";
 
 	// Regexp to replace {text} with an HTML link.
-	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
+	QRegularExpression a_rx("[{]([^{]*)[}]");
 
 	// WARNING! Section titles are re-used above!
 	htmlText += "<h2 id=\"links\">" + q_("Further Reading").toHtmlEscaped() + "</h2>\n";
@@ -424,35 +425,35 @@ QString HelpDialog::hotkeyTextWrapper(const QString hotkey) const
 
 void HelpDialog::updateAboutText(void) const
 {
-	QStringList contributors;
-	contributors << "Vladislav Bataron" << "Barry Gerdes" << "Peter Walser" << "Michal Sojka"
-		     << "Nick Fedoseev" << "Clement Sommelet" << "Ivan Marti-Vidal" << "Nicolas Martignoni"
-		     << "Oscar Roig Felius" << "M.S. Adityan" << "Tomasz Buchert" << "Adam Majer"
-		     << "Roland Bosa" << "Łukasz 'sil2100' Zemczak" << "Gábor Péterffy"
-		     << "Mircea Lite" << "Alexey Dokuchaev" << "William Formyduval" << "Daniel De Mickey"
-		     << "François Scholder" << "Anton Samoylov" << "Mykyta Sytyi" << "Shantanu Agarwal"
-		     << "Teemu Nätkinniemi" << "Kutaibaa Akraa" << "J.L.Canales" << "Leonid Froenchenko"
-		     << "Peter Mousley" << "Greg Alexander" << "Yuri Chornoivan" << "Daniel Michalik"
-		     << "Hleb Valoshka" << "Matthias Drochner" << "Kenan Dervišević" << "Alex Gamper"
-		     << "Volker Hören" << "Max Digruber" << "Dan Smale" << "Victor Reijs"
-		     << "Tanmoy Saha" << "Oleg Ginzburg" << "Peter Hickey" << "Bernd Kreuss"
-		     << "Alexander Miller" << "Eleni Maria Stea" << "Kirill Snezhko"
-		     << "Simon Parzer" << "Peter Neubauer" << "Andrei Borza" << "Allan Johnson"
-		     << "Felix Zeltner" << "Paolo Cancedda" << "Ross Mitchell" << "David Baucum"
-		     << "Maciej Serylak" << "Adriano Steffler" << "Sibi Antony" << "Tony Furr"
-		     << "misibacsi" << "Pavel Klimenko" << "Rumen G. Bogdanovski" << "Colin Gaudion"
-		     << "Annette S. Lee" << "Vancho Stojkoski" << "Robert S. Fuller" << "Giuseppe Putzolu"
-		     << "henrysky" << "Nick Kanel" << "Petr Kubánek" << "Matwey V. Kornilov"
-		     << "Alessandro Siniscalchi" << "Ruslan Kabatsayev" << "Pawel Stolowski"
-		     << "Antoine Jacoutot" << "Sebastian Jennen" << "Matt Hughes" << "Sun Shuwei"
-		     << "Alexey Sokolov" << "Paul Krizak" << "ChrUnger" << "Minmin Gong" << "Andy Kirkham"
-		     << "Michael Dickens" << "Patrick (zero0cool0)" << "Martín Bernardi" << "Sebastian Garcia"
-		     << "Wolfgang Laun" << "Alexandros Kosiaris" << "Alexander Duytschaever" << "Jocelyn Girod"
-		     << "Atque";
+    QStringList contributors({
+		     "Vladislav Bataron", "Barry Gerdes", "Peter Walser", "Michal Sojka",
+		     "Nick Fedoseev", "Clement Sommelet", "Ivan Marti-Vidal", "Nicolas Martignoni",
+		     "Oscar Roig Felius", "M.S. Adityan", "Tomasz Buchert", "Adam Majer",
+		     "Roland Bosa", "Łukasz 'sil2100' Zemczak", "Gábor Péterffy",
+		     "Mircea Lite", "Alexey Dokuchaev", "William Formyduval", "Daniel De Mickey",
+		     "François Scholder", "Anton Samoylov", "Mykyta Sytyi", "Shantanu Agarwal",
+		     "Teemu Nätkinniemi", "Kutaibaa Akraa", "J.L.Canales", "Leonid Froenchenko",
+		     "Peter Mousley", "Greg Alexander", "Yuri Chornoivan", "Daniel Michalik",
+		     "Hleb Valoshka", "Matthias Drochner", "Kenan Dervišević", "Alex Gamper",
+		     "Volker Hören", "Max Digruber", "Dan Smale", "Victor Reijs",
+		     "Tanmoy Saha", "Oleg Ginzburg", "Peter Hickey", "Bernd Kreuss",
+		     "Alexander Miller", "Eleni Maria Stea", "Kirill Snezhko",
+		     "Simon Parzer", "Peter Neubauer", "Andrei Borza", "Allan Johnson",
+		     "Felix Zeltner", "Paolo Cancedda", "Ross Mitchell", "David Baucum",
+		     "Maciej Serylak", "Adriano Steffler", "Sibi Antony", "Tony Furr",
+		     "misibacsi", "Pavel Klimenko", "Rumen G. Bogdanovski", "Colin Gaudion",
+		     "Annette S. Lee", "Vancho Stojkoski", "Robert S. Fuller", "Giuseppe Putzolu",
+		     "henrysky", "Nick Kanel", "Petr Kubánek", "Matwey V. Kornilov",
+		     "Alessandro Siniscalchi", "Ruslan Kabatsayev", "Pawel Stolowski",
+		     "Antoine Jacoutot", "Sebastian Jennen", "Matt Hughes", "Sun Shuwei",
+		     "Alexey Sokolov", "Paul Krizak", "ChrUnger", "Minmin Gong", "Andy Kirkham",
+		     "Michael Dickens",  "Patrick (zero0cool0)", "Martín Bernardi", "Sebastian Garcia",
+		     "Wolfgang Laun", "Alexandros Kosiaris", "Alexander Duytschaever", "Jocelyn Girod",
+	"Atque"});
 	contributors.sort();
 
 	// Regexp to replace {text} with an HTML link.
-	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
+	QRegularExpression a_rx("[{]([^{]*)[}]");
 
 	// populate About tab
 	QString newHtml = "<h1>" + StelUtils::getApplicationName() + "</h1>";

@@ -30,6 +30,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QSettings>
 #include <QTextDocument>
+#include <QRegularExpression>
 
 InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent),
 	infoPixmap(Q_NULLPTR)
@@ -193,12 +194,12 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 		if (qApp->property("text_texture")==true) // CLI option -t given?
 		{
 			// Extract color from HTML.
-			QRegExp colorRegExp("<font color=(#[0-9a-f]{6,6})>");
-			int colorInt=colorRegExp.indexIn(s);
+			QRegularExpression colorRegExp("<font color=(#[0-9a-f]{6,6})>");
+			int colorInt=s.indexOf(colorRegExp);
 			QString colorStr;
 
 			if (colorInt>-1)
-				colorStr=colorRegExp.cap(1);
+				colorStr=colorRegExp.match(s).captured(1);
 			else
 				colorStr="#ffffff";
 

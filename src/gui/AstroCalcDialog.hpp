@@ -27,6 +27,7 @@
 #include <QMap>
 #include <QVector>
 #include <QTimer>
+#include <QRegularExpression>
 
 #include "StelDialog.hpp"
 #include "StelCore.hpp"
@@ -535,17 +536,21 @@ private:
 
 		if (column == AstroCalcDialog::CColumnName)
 		{
-			QRegExp dso("^(\\w+)\\s*(\\d+)\\s*(.*)$");
-			QRegExp mp("^[(](\\d+)[)]\\s(.+)$");
-			int a = 0, b = 0;			
-			if (dso.exactMatch(text(column)))
-				a = dso.cap(2).toInt();
-			if (a==0 && mp.exactMatch(text(column)))
-				a = mp.cap(1).toInt();
-			if (dso.exactMatch(other.text(column)))
-				b = dso.cap(2).toInt();
-			if (b==0 && mp.exactMatch(other.text(column)))
-				b = mp.cap(1).toInt();
+			QRegularExpression dso("^(\\w+)\\s*(\\d+)\\s*(.*)$");
+			QRegularExpression mp("^[(](\\d+)[)]\\s(.+)$");
+			QRegularExpressionMatch dsoMatch=dso.match(text(column));
+			QRegularExpressionMatch mpMatch=mp.match(text(column));
+			QRegularExpressionMatch dsoOtherMatch=dso.match(other.text(column));
+			QRegularExpressionMatch mpOtherMatch=mp.match(other.text(column));
+			int a = 0, b = 0;
+			if (dsoMatch.hasMatch())
+				a = dsoMatch.captured(2).toInt();
+			if (a==0 && mpMatch.hasMatch())
+				a = mpMatch.captured(1).toInt();
+			if (dsoOtherMatch.hasMatch())
+				b = dsoOtherMatch.captured(2).toInt();
+			if (b==0 && mpOtherMatch.hasMatch())
+				b = mpOtherMatch.captured(1).toInt();
 			if (a>0 && b>0)
 				return a < b;
 			else
@@ -685,17 +690,21 @@ private:
 
 		if (column == AstroCalcDialog::WUTObjectName)
 		{
-			QRegExp dso("^(\\w+)\\s*(\\d+)\\s*(.*)$");
-			QRegExp mp("^[(](\\d+)[)]\\s(.+)$");
+			QRegularExpression dso("^(\\w+)\\s*(\\d+)\\s*(.*)$");
+			QRegularExpression mp("^[(](\\d+)[)]\\s(.+)$");
+			QRegularExpressionMatch dsoMatch=dso.match(text(column));
+			QRegularExpressionMatch mpMatch=mp.match(text(column));
+			QRegularExpressionMatch dsoOtherMatch=dso.match(other.text(column));
+			QRegularExpressionMatch mpOtherMatch=mp.match(other.text(column));
 			int a = 0, b = 0;
-			if (dso.exactMatch(text(column)))
-				a = dso.cap(2).toInt();
-			if (a==0 && mp.exactMatch(text(column)))
-				a = mp.cap(1).toInt();
-			if (dso.exactMatch(other.text(column)))
-				b = dso.cap(2).toInt();
-			if (b==0 && mp.exactMatch(other.text(column)))
-				b = mp.cap(1).toInt();
+			if (dsoMatch.hasMatch())
+				a = dsoMatch.captured(2).toInt();
+			if (a==0 && mpMatch.hasMatch())
+				a = mpMatch.captured(1).toInt();
+			if (dsoOtherMatch.hasMatch())
+				b = dsoOtherMatch.captured(2).toInt();
+			if (b==0 && mpOtherMatch.hasMatch())
+				b = mpOtherMatch.captured(1).toInt();
 			if (a>0 && b>0)
 				return a < b;
 			else
