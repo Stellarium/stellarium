@@ -41,7 +41,7 @@
 #include <QDebug>
 #include <QFile>
 #include <QSettings>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QString>
 #include <QStringList>
 #include <QDir>
@@ -493,11 +493,11 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 
 	int totalRecords=0;
 	QString record;
-	QRegExp commentRx("^(\\s*#.*|\\s*)$"); // pure comment lines or empty lines
+	QRegularExpression commentRx("^(\\s*#.*|\\s*)$"); // pure comment lines or empty lines
 	while (!in.atEnd())
 	{
 		record = QString::fromUtf8(in.readLine());
-		if (!commentRx.exactMatch(record))
+		if (!commentRx.match(record).hasMatch())
 			totalRecords++;
 	}
 	in.seek(0);
@@ -516,7 +516,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	{
 		record = QString::fromUtf8(in.readLine());
 		currentLineNumber++;
-		if (commentRx.exactMatch(record))
+		if (commentRx.match(record).hasMatch())
 			continue;
 
 		cons = new Constellation;
@@ -560,7 +560,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	while (!fic.atEnd())
 	{
 		record = QString::fromUtf8(fic.readLine());
-		if (!commentRx.exactMatch(record))
+		if (!commentRx.match(record).hasMatch())
 			totalRecords++;
 	}
 	fic.seek(0);
@@ -584,7 +584,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	{
 		++currentLineNumber;
 		record = QString::fromUtf8(fic.readLine());
-		if (commentRx.exactMatch(record))
+		if (commentRx.match(record).hasMatch())
 			continue;
 
 		// prevent leading zeros on numbers from being interpreted as octal numbers
@@ -814,17 +814,13 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 
 	// Now parse the file
 	// lines to ignore which start with a # or are empty
-	QRegExp commentRx("^(\\s*#.*|\\s*)$");
+	QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
 
 	// lines which look like records - we use the RE to extract the fields
 	// which will be available in recRx.capturedTexts()
 	// abbreviation is allowed to start with a dot to mark as "hidden".
-	QRegExp recRx("^\\s*(\\.?\\w+)\\s+\"(.*)\"\\s+_[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
-	QRegExp ctxRx("(.*)\",\\s*\"(.*)");
-
-	// Some more variables to use in the parsing
-	Constellation *aster;
-	QString record, shortName, ctxt;
+	QRegularExpression recRx("^\\s*(\\.?\\w+)\\s+\"(.*)\"\\s+_[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
+	QRegularExpression ctxRx("(.*)\",\\s*\"(.*)");
 
 	// keep track of how many records we processed.
 	int totalRecords=0;
@@ -832,32 +828,34 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 	int lineNumber=0;
 	while (!commonNameFile.atEnd())
 	{
-		record = QString::fromUtf8(commonNameFile.readLine());
+		QString record = QString::fromUtf8(commonNameFile.readLine());
 		lineNumber++;
 
 		// Skip comments
-		if (commentRx.exactMatch(record))
+		if (commentRx.match(record).hasMatch())
 			continue;
 
 		totalRecords++;
 
-		if (!recRx.exactMatch(record))
+		QRegularExpressionMatch recMatch=recRx.match(record);
+		if (!recMatch.hasMatch())
 		{
 			qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in constellation names file" << QDir::toNativeSeparators(namesFile) << ":" << record;
 		}
 		else
 		{
-			shortName = recRx.cap(1);
-			aster = findFromAbbreviation(shortName);
+			QString shortName = recMatch.captured(1);
+			Constellation *aster = findFromAbbreviation(shortName);
 			// If the constellation exists, set the English name
 			if (aster != Q_NULLPTR)
 			{
-				aster->nativeName = recRx.cap(2);
-				ctxt = recRx.cap(3);
-				if (ctxRx.exactMatch(ctxt))
+				aster->nativeName = recMatch.captured(2);
+				QString ctxt = recMatch.captured(3);
+				QRegularExpressionMatch ctxMatch=ctxRx.match(ctxt);
+				if (ctxMatch.hasMatch())
 				{
-					aster->englishName = ctxRx.cap(1);
-					aster->context = ctxRx.cap(2);
+					aster->englishName = ctxMatch.captured(1);
+					aster->context = ctxMatch.captured(2);
 				}
 				else
 				{
@@ -917,11 +915,11 @@ void ConstellationMgr::loadSeasonalRules(const QString& rulesFile)
 
 	// Now parse the file
 	// lines to ignore which start with a # or are empty
-	QRegExp commentRx("^(\\s*#.*|\\s*)$");
+	QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
 
 	// lines which look like records - we use the RE to extract the fields
 	// which will be available in recRx.capturedTexts()
-	QRegExp recRx("^\\s*(\\w+)\\s+(\\w+)\\s+(\\w+)\\n");
+	QRegularExpression recRx("^\\s*(\\w+)\\s+(\\w+)\\s+(\\w+)\\n");
 
 	// Some more variables to use in the parsing
 	Constellation *aster;
@@ -937,24 +935,25 @@ void ConstellationMgr::loadSeasonalRules(const QString& rulesFile)
 		lineNumber++;
 
 		// Skip comments
-		if (commentRx.exactMatch(record))
+		if (commentRx.match(record).hasMatch())
 			continue;
 
 		totalRecords++;
 
-		if (!recRx.exactMatch(record))
+		QRegularExpressionMatch recMatch=recRx.match(record);
+		if (!recMatch.hasMatch())
 		{
 			qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in seasonal rules file" << QDir::toNativeSeparators(rulesFile);
 		}
 		else
 		{
-			shortName = recRx.cap(1);
+			shortName = recMatch.captured(1);
 			aster = findFromAbbreviation(shortName);
 			// If the constellation exists, set the English name
 			if (aster != Q_NULLPTR)
 			{
-				aster->beginSeason = recRx.cap(2).toInt();
-				aster->endSeason = recRx.cap(3).toInt();
+				aster->beginSeason = recMatch.captured(2).toInt();
+				aster->endSeason = recMatch.captured(3).toInt();
 				readOk++;
 			}
 			else
@@ -1341,7 +1340,6 @@ void ConstellationMgr::unsetSelectedConst(Constellation * c)
 bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 {
 	Constellation *cons = Q_NULLPTR;
-	unsigned int i, j;
 
 	// delete existing boundaries if any exist
 	for (auto* segment : allBoundarySegments)
@@ -1363,20 +1361,20 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 
 	double DE, RA;
 	Vec3d XYZ;
-	unsigned num, numc;
+	unsigned numc;
 	vector<Vec3d> *points = Q_NULLPTR;
-	QString consname, record, data = "";
-	i = 0;
+	QString consname, data = "";
+	unsigned int i = 0;
 
 	// Added support of comments for constellation_boundaries.dat file
-	QRegExp commentRx("^(\\s*#.*|\\s*)$");
+	QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
 	while (!dataFile.atEnd())
 	{
 		// Read the line
-		record = QString::fromUtf8(dataFile.readLine());
+		QString record = QString::fromUtf8(dataFile.readLine());
 
 		// Skip comments
-		if (commentRx.exactMatch(record))
+		if (commentRx.match(record).hasMatch())
 			continue;
 
 		// Append the data
@@ -1387,14 +1385,14 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 	QTextStream istr(&data);
 	while (!istr.atEnd())
 	{
-		num = 0;
+		unsigned num = 0;
 		istr >> num;
 		if(num == 0)
 			continue; // empty line
 
 		points = new vector<Vec3d>;
 
-		for (j=0;j<num;j++)
+		for (unsigned int j=0;j<num;j++)
 		{
 			istr >> RA >> DE;
 
@@ -1412,7 +1410,7 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 		istr >> numc;
 		// there are 2 constellations per boundary
 
-		for (j=0;j<numc;j++)
+		for (unsigned int j=0;j<numc;j++)
 		{
 			istr >> consname;
 			// not used?
