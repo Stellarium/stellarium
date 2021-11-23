@@ -40,6 +40,7 @@
 #include <QTimeZone>
 #include <QTimer>
 #include <QApplication>
+#include <QRegularExpression>
 
 TimezoneNameMap StelLocationMgr::locationDBToIANAtranslations;
 
@@ -663,14 +664,15 @@ static float parseAngle(const QString& s, bool* ok)
 	ret = s.toFloat(ok);
 	if (*ok) return ret;
 	// Try GPS coordinate like +121°33'38.28"
-	QRegExp reg("([+-]?[\\d.]+)°(?:([\\d.]+)')?(?:([\\d.]+)\")?");
-	if (reg.exactMatch(s))
+	QRegularExpression reg("([+-]?[\\d.]+)°(?:([\\d.]+)')?(?:([\\d.]+)\")?");
+	QRegularExpressionMatch match=reg.match(s);
+	if (match.hasMatch())
 	{
-		float deg = reg.cap(1).toFloat(ok);
+		float deg = match.captured(1).toFloat(ok);
 		if (!*ok) return 0;
-		float min = reg.cap(2).isEmpty()? 0 : reg.cap(2).toFloat(ok);
+		float min = match.captured(2).isEmpty()? 0 : match.captured(2).toFloat(ok);
 		if (!*ok) return 0;
-		float sec = reg.cap(3).isEmpty()? 0 : reg.cap(3).toFloat(ok);
+		float sec = match.captured(3).isEmpty()? 0 : match.captured(3).toFloat(ok);
 		if (!*ok) return 0;
 		return deg + min / 60 + sec / 3600;
 	}
@@ -685,13 +687,14 @@ const StelLocation StelLocationMgr::locationForString(const QString& s) const
 		return iter.value();
 	}
 	// Maybe this is a city and country names (old format of the data)?
-	QRegExp cnreg("(.+),\\s+(.+)$");
-	if (cnreg.exactMatch(s))
+	QRegularExpression cnreg("(.+),\\s+(.+)$");
+	QRegularExpressionMatch cnMatch=cnreg.match(s);
+	if (cnMatch.hasMatch())
 	{
 		// NOTE: This method will give wrong data for some Russians and U.S. locations
 		//       (Asian locations for Russia and for locations on Hawaii for U.S.)
-		QString city = cnreg.cap(1).trimmed();
-		QString country = cnreg.cap(2).trimmed();
+		QString city = cnMatch.captured(1).trimmed();
+		QString country = cnMatch.captured(2).trimmed();
 		auto iter = locations.find(QString("%1, %2").arg(city, pickRegionFromCountry(country)));
 		if (iter!=locations.end())
 		{
@@ -700,32 +703,34 @@ const StelLocation StelLocationMgr::locationForString(const QString& s) const
 	}
 	StelLocation ret;
 	// Maybe it is a coordinate set with elevation?
-	QRegExp csreg("(.+),\\s*(.+),\\s*(.+)");
-	if (csreg.exactMatch(s))
+	QRegularExpression csreg("(.+),\\s*(.+),\\s*(.+)");
+	QRegularExpressionMatch csMatch=csreg.match(s);
+	if (csMatch.hasMatch())
 	{
 		bool ok;
 		// We have a set of coordinates
-		ret.latitude = parseAngle(csreg.cap(1).trimmed(), &ok);
+		ret.latitude = parseAngle(csMatch.captured(1).trimmed(), &ok);
 		if (!ok) ret.role = '!';
-		ret.longitude = parseAngle(csreg.cap(2).trimmed(), &ok);
+		ret.longitude = parseAngle(csMatch.captured(2).trimmed(), &ok);
 		if (!ok) ret.role = '!';
-		ret.altitude = csreg.cap(3).trimmed().toInt(&ok);
+		ret.altitude = csMatch.captured(3).trimmed().toInt(&ok);
 		if (!ok) ret.role = '!';
 		ret.name = QString("%1, %2").arg(QString::number(ret.latitude, 'f', 2), QString::number(ret.longitude, 'f', 2));
 		ret.planetName = "Earth";
 		return ret;
 	}
 	// Maybe it is a coordinate set without elevation? (e.g. GPS 25.107363,121.558807 )
-	QRegExp reg("(?:(.+)\\s+)?(.+),\\s*(.+)"); // FIXME: Seems regexp is not very good
-	if (reg.exactMatch(s))
+	QRegularExpression reg("(?:(.+)\\s+)?(.+),\\s*(.+)"); // FIXME: Seems regexp is not very good
+	QRegularExpressionMatch match=reg.match(s);
+	if (match.hasMatch())
 	{
 		bool ok;
 		// We have a set of coordinates
-		ret.latitude = parseAngle(reg.cap(2).trimmed(), &ok);
+		ret.latitude = parseAngle(match.captured(2).trimmed(), &ok);
 		if (!ok) ret.role = '!';
-		ret.longitude = parseAngle(reg.cap(3).trimmed(), &ok);
+		ret.longitude = parseAngle(match.captured(3).trimmed(), &ok);
 		if (!ok) ret.role = '!';
-		ret.name = reg.cap(1).trimmed();
+		ret.name = match.captured(1).trimmed();
 		ret.planetName = "Earth";
 		return ret;
 	}
