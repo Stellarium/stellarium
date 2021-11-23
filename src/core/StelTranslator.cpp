@@ -24,7 +24,7 @@
 #include <QFile>
 #include <QDebug>
 #include <QStringList>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QLocale>
 #include <QDir>
 #include <QTranslator>
@@ -186,7 +186,7 @@ void StelTranslator::initIso639_1LanguageCodes(const QString& fileName)
 	while (!inf.atEnd())
 	{
 		QString record = QString::fromUtf8(inf.readLine());
-		record.remove(QRegExp("[\\n\\r]*$")); // chomp new lines
+		record.remove(QRegularExpression("[\\n\\r]*$")); // chomp new lines
 		#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
 		const QStringList& fields = record.split("\t", Qt::SkipEmptyParts);
 		#else
