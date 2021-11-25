@@ -50,6 +50,7 @@
 #include <QUrl>
 #include <QUrlQuery>
 #include <QDir>
+#include <QRegularExpression>
 #include <stdexcept>
 
 MpcImportWindow::MpcImportWindow()
@@ -883,11 +884,11 @@ void MpcImportWindow::readQueryReply(QNetworkReply * reply)
 		file.write(reply->readAll());		
 		file.close();
 
-		QRegExp cometProvisionalDesignation("[PCDXI]/");
-		QRegExp cometDesignation("(\\d)+[PCDXI]/");
+		QRegularExpression cometProvisionalDesignation("[PCDXI]/");
+		QRegularExpression cometDesignation("(\\d)+[PCDXI]/");
 		QString queryData = ui->lineEditQuery->text().trimmed();
 
-		if (cometDesignation.indexIn(queryData) == 0 || cometProvisionalDesignation.indexIn(queryData) == 0)
+		if (queryData.indexOf(cometDesignation) == 0 || queryData.indexOf(cometProvisionalDesignation) == 0)
 			objects = readElementsFromFile(MpcComets, file.fileName());
 		else
 			objects = readElementsFromFile(MpcMinorPlanets, file.fileName());
