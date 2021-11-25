@@ -36,7 +36,7 @@ QT_BEGIN_NAMESPACE
 class QDataWidgetMapper;
 class QDoubleValidator;
 class QIntValidator;
-class QRegExpValidator;
+class QRegularExpressionValidator;
 class QModelIndex;
 class QStandardItemModel;
 QT_END_NAMESPACE
@@ -110,7 +110,7 @@ private:
 	QDataWidgetMapper*		lensMapper;
 	QList<Lens *>*			lenses;
 	PropertyBasedTableModel*	lensTableModel;
-	QRegExpValidator*		validatorName;
+	QRegularExpressionValidator*	validatorName;
 };
 
 #endif // OCULARDIALOG_HPP

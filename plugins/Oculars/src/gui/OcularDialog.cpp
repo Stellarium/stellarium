@@ -38,6 +38,7 @@
 #include <QStandardItemModel>
 #include <QMessageBox>
 #include <limits>
+#include <QRegularExpression>
 
 OcularDialog::OcularDialog(Oculars* pluginPtr,
 			   QList<CCD *>* ccds,
@@ -72,8 +73,8 @@ OcularDialog::OcularDialog(Oculars* pluginPtr,
 			     lensModel,
 			     lensModel->propertyMap());
 
-	QRegExp nameExp("^\\S.*");
-	validatorName = new QRegExpValidator(nameExp, this);
+	QRegularExpression nameExp("^\\S.*");
+	validatorName = new QRegularExpressionValidator(nameExp, this);
 }
 
 OcularDialog::~OcularDialog()
