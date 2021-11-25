@@ -56,7 +56,7 @@
 #include <QVariant>
 #include <QDir>
 #include <QTemporaryFile>
-#include <QRegExp>
+#include <QRegularExpression>
 
 StelModule* SatellitesStelPluginInterface::getStelModule() const
 {
@@ -441,10 +441,11 @@ StelObjectP Satellites::searchByNoradNumber(const QString &noradNumber) const
 		return Q_NULLPTR;
 	
 	// If the search string is a catalogue number...
-	QRegExp regExp("^(NORAD)\\s*(\\d+)\\s*$");
-	if (regExp.exactMatch(noradNumber))
+	QRegularExpression regExp("^(NORAD)\\s*(\\d+)\\s*$");
+	QRegularExpressionMatch match=regExp.match(noradNumber);
+	if (match.hasMatch())
 	{
-		QString numberString = regExp.cap(2);
+		QString numberString = match.captured(2);
 		
 		for (const auto& sat : satellites)
 		{
@@ -476,10 +477,11 @@ QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbI
 	QString objw = objPrefix.toUpper();
 
 	QString numberPrefix;
-	QRegExp regExp("^(NORAD)\\s*(\\d+)\\s*$");
-	if (regExp.exactMatch(objw))
+	QRegularExpression regExp("^(NORAD)\\s*(\\d+)\\s*$");
+	QRegularExpressionMatch match=regExp.match(objw);
+	if (match.hasMatch())
 	{
-		QString numberString = regExp.cap(2);
+		QString numberString = match.captured(2);
 		bool ok;
 		/* int number = */ numberString.toInt(&ok);
 		if (ok)
@@ -671,11 +673,11 @@ void Satellites::loadSettings()
 	// Backward compatibility: try to detect and read an old-style array.
 	// TODO: Assume that the user hasn't modified their conf in a stupid way?
 //	if (conf->contains("tle_url0")) // This can skip some operations...
-	QRegExp keyRE("^tle_url\\d+$");
+	QRegularExpression keyRE("^tle_url\\d+$");
 	QStringList urls;
 	for (const auto& key : conf->childKeys())
 	{
-		if (keyRE.exactMatch(key))
+		if (keyRE.match(key).hasMatch())
 		{
 			QString url = conf->value(key).toString();
 			conf->remove(key); // Delete old-style keys
@@ -832,16 +834,18 @@ const QString Satellites::readCatalogVersion()
 	if (map.contains("version"))
 	{
 		QString version = map.value("version").toString();
-		QRegExp vRx("(\\d+\\.\\d+\\.\\d+)");
-		if (vRx.exactMatch(version))
-			jsonVersion = vRx.cap(1);
+		QRegularExpression vRx("(\\d+\\.\\d+\\.\\d+)");
+		QRegularExpressionMatch match=vRx.match(version);
+		if (match.hasMatch())
+			jsonVersion = match.captured(1);
 	}
 	else if (map.contains("creator"))
 	{
 		QString creator = map.value("creator").toString();
-		QRegExp vRx(".*(\\d+\\.\\d+\\.\\d+).*");
-		if (vRx.exactMatch(creator))
-			jsonVersion = vRx.cap(1);
+		QRegularExpression vRx(".*(\\d+\\.\\d+\\.\\d+).*");
+		QRegularExpressionMatch match=vRx.match(creator);
+		if (match.hasMatch())
+			jsonVersion = match.captured(1);
 	}
 
 	//qDebug() << "[Satellites] catalogue version from file:" << jsonVersion;
@@ -1856,22 +1860,22 @@ void Satellites::parseTleFile(QFile& openFile,
 			
 			// The thing in square brackets after the name is actually
 			// Celestrak's "status code". Parse it!
-			QRegExp statusRx("\\s*\\[(\\D{1})\\]\\s*$");
-			statusRx.setMinimal(true);
-			if (statusRx.indexIn(line)>-1)
-				lastData.status = satOpStatusMap.value(statusRx.cap(1).toUpper(), Satellite::StatusUnknown);
+			QRegularExpression statusRx("\\s*\\[(\\D{1})\\]\\s*$", QRegularExpression::InvertedGreedinessOption );
+			QRegularExpressionMatch match;
+			if (line.indexOf(statusRx, 0, &match)>-1)
+				lastData.status = satOpStatusMap.value(match.captured(1).toUpper(), Satellite::StatusUnknown);
 
 			//TODO: We need to think of some kind of escaping these
 			//characters in the JSON parser. --BM
-			line.replace(QRegExp("\\s*\\[([^\\]])*\\]\\s*$"),"");  // remove "status code" from name
+			line.replace(QRegularExpression("\\s*\\[([^\\]])*\\]\\s*$"),"");  // remove "status code" from name
 			lastData.name = line;
 		}
 		else
 		{
 			// TODO: Yet another place suitable for a standard TLE regex. --BM
-			if (QRegExp("^1 .*").exactMatch(line))
+			if (QRegularExpression("^1 .*").match(line).hasMatch())
 				lastData.first = line;
-			else if (QRegExp("^2 .*").exactMatch(line))
+			else if (QRegularExpression("^2 .*").match(line).hasMatch())
 			{
 				lastData.second = line;
 				// The Satellite Catalogue Number is the second number
@@ -1915,7 +1919,7 @@ QString Satellites::getSatIdFromLine2(const QString& line)
 	if (!id.isEmpty())
 	{
 		// Strip any leading zeros as they should be unique ints as strings.
-		id.remove(QRegExp("^[0]*"));
+		id.remove(QRegularExpression("^[0]*"));
 	}
 	return id;
 }
