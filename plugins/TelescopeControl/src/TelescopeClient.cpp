@@ -37,7 +37,7 @@
 #include <QDebug>
 #include <QHostAddress>
 #include <QHostInfo>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QString>
 #include <QTcpSocket>
 #include <QTextStream>
@@ -60,19 +60,20 @@ TelescopeClient *TelescopeClient::create(const QString &url)
 	// equinox = J2000
 	// params  = localhost:10000:500000
 	//
-	// The params part is optional.  We will use QRegExp to validate
+	// The params part is optional.  We will use QRegularExpression to validate
 	// the url and extact the components.
 
 	// note, in a reg exp, [^:] matches any chararacter except ':'
-	QRegExp urlSchema("^([^:]*):([^:]*):([^:]*)(?::(.*))?$");
+	QRegularExpression urlSchema("^([^:]*):([^:]*):([^:]*)(?::(.*))?$");
+	QRegularExpressionMatch urlMatch=urlSchema.match(url);
 	QString name, type, equinox, params;
-	if (urlSchema.exactMatch(url))
+	if (urlMatch.hasMatch())
 	{
 		// trimmed removes whitespace on either end of a QString
-		name = urlSchema.cap(1).trimmed();
-		type = urlSchema.cap(2).trimmed();
-		equinox = urlSchema.cap(3).trimmed();
-		params = urlSchema.cap(4).trimmed();
+		name = urlMatch.captured(1).trimmed();
+		type = urlMatch.captured(2).trimmed();
+		equinox = urlMatch.captured(3).trimmed();
+		params = urlMatch.captured(4).trimmed();
 	}
 	else
 	{
@@ -161,7 +162,7 @@ void TelescopeClient::move(double angle, double speed)
 }
 
 //! returns the current system time in microseconds since the Epoch
-//! Prior to revision 6308, it was necessary to put put this method in an
+//! Prior to revision 6308, it was necessary to put this method in an
 //! #ifdef block, as duplicate function definition caused errors during static
 //! linking.
 qint64 getNow(void)
@@ -179,8 +180,6 @@ qint64 getNow(void)
 	gettimeofday(&tv, Q_NULLPTR);
 	t = tv.tv_sec * 1000000LL + tv.tv_usec;
 #endif
-	// GZ JDfix for 0.14 I am 99.9% sure we no longer need the anti-correction
-	//return t - core->getDeltaT(StelUtils::getJDFromSystem())*1000000; // Delta T anti-correction
 	return t;
 }
 
@@ -201,16 +200,15 @@ TelescopeTCP::TelescopeTCP(const QString &name, const QString &params, Equinox e
 	// port       = 10000 (int)
 	// time_delay = 500000 (int)
 
-	QRegExp paramRx("^([^:]*):(\\d+):(\\d+)$");
+	QRegularExpression paramRx("^([^:]*):(\\d+):(\\d+)$");
+	QRegularExpressionMatch paramMatch=paramRx.match(params);
 	QString host;
 
-	if (paramRx.exactMatch(params))
+	if (paramMatch.hasMatch())
 	{
-		// I will not use the ok param to toInt as the
-		// QRegExp only matches valid integers.
-		host		= paramRx.cap(1).trimmed();
-		port		= static_cast<quint16>(paramRx.cap(2).toUInt());
-		time_delay	= paramRx.cap(3).toInt();
+		host		= paramMatch.captured(1).trimmed();
+		port		= static_cast<quint16>(paramMatch.captured(2).toUInt());
+		time_delay	= paramMatch.captured(3).toInt();
 	}
 	else
 	{

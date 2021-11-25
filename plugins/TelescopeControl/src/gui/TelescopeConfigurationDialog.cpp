@@ -40,6 +40,7 @@
 #include <QFile>
 #include <QFrame>
 #include <QTimer>
+#include <QRegularExpression>
 #include <QtSerialPort/QSerialPortInfo>
 
 TelescopeConfigurationDialog::TelescopeConfigurationDialog()
@@ -49,14 +50,14 @@ TelescopeConfigurationDialog::TelescopeConfigurationDialog()
 
 	telescopeManager = GETSTELMODULE(TelescopeControl);
 
-	telescopeNameValidator = new QRegExpValidator(QRegExp("[^:\"]+"), this); // Test the update for JSON
+	telescopeNameValidator = new QRegularExpressionValidator(QRegularExpression("[^:\"]+"), this); // Test the update for JSON
 	hostNameValidator =
-	  new QRegExpValidator(QRegExp("[a-zA-Z0-9\\-\\.]+"), this); // TODO: Write a proper host/IP regexp?
-	circleListValidator = new QRegExpValidator(QRegExp("[0-9,\\.\\s]+"), this);
+	  new QRegularExpressionValidator(QRegularExpression("[a-zA-Z0-9\\-\\.]+"), this); // TODO: Write a proper host/IP regexp?
+	circleListValidator = new QRegularExpressionValidator(QRegularExpression("[0-9,\\.\\s]+"), this);
 #ifdef Q_OS_WIN
-	serialPortValidator = new QRegExpValidator(QRegExp("COM[0-9]+"), this);
+	serialPortValidator = new QRegularExpressionValidator(QRegularExpression("COM[0-9]+"), this);
 #else
-	serialPortValidator = new QRegExpValidator(QRegExp("/.*"), this);
+	serialPortValidator = new QRegularExpressionValidator(QRegularExpression("/.*"), this);
 #endif
 }
 

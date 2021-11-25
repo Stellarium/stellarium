@@ -40,6 +40,7 @@
 #include <QHeaderView>
 #include <QSettings>
 #include <QStandardItem>
+#include <QRegularExpression>
 
 using namespace TelescopeControlGlobals;
 
@@ -256,7 +257,7 @@ void TelescopeDialog::createDialogContent()
 void TelescopeDialog::setAboutText()
 {
 	// Regexp to replace {text} with an HTML link.
-	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
+	QRegularExpression a_rx("[{]([^{]*)[}]");
 
 	//TODO: Expand
 	QString aboutPage = "<html><head></head><body>";
