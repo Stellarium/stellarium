@@ -35,6 +35,11 @@ class OnlineQueriesDialog;
 @{
 The %Online Queries plugin provides online lookup to retrieve additional data from selected web services.
 
+The results are presented in a QWebEngine view on platforms which support this. Unfortunately on some platforms
+the module seems to be available but fails to intialize properly. A manual entry in the config file can be used
+to actively disable the QWebEngineView based content box and open the URL in the system webbrowser.
+If none is configured, Qt's own error messages will be visible in stderr.
+
 <b>Configuration</b>
 
 The plug-ins' configuration data is stored in Stellarium's main configuration
@@ -83,6 +88,7 @@ public slots:
 	QString getCustomUrl1() const { return customUrl1;}
 	QString getCustomUrl2() const { return customUrl2;}
 	QString getCustomUrl3() const { return customUrl3;}
+	bool webEngineDisabled() const { return disableWebView;}
 
 private slots:
 	//! Set up the plugin with default values.  This means clearing out the OnlineQueries section in the
@@ -101,10 +107,11 @@ private:
 	void query(QString url, bool useHip);
 	void createToolbarButton() const;
 	void setOutputHtml(QString html); //!< Forward html to GUI dialog
-	void setOutputUrl(QUrl url); //!< Forward URL to GUI dialog
+	void setOutputUrl(QUrl url);      //!< Forward URL to GUI dialog
 	OnlineQueriesDialog* dialog;
 	QSettings* conf;
-	bool enabled;
+	bool enabled;                     //!< show dialog?
+	bool disableWebView;              //!< Disable the webview on platforms where QtWebView compiles, but fails to work properly. (Seen on Odroid boards.)
 
 	StelButton* toolbarButton;
 

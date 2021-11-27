@@ -23,14 +23,11 @@
 #include "StelWebEngineView.hpp"
 
 #include <QPushButton>
+#include <QDesktopServices>
 #include "StelModuleMgr.hpp"
 #include "StelApp.hpp"
 #include "StelGui.hpp"
 #include "StelTranslator.hpp"
-
-#ifndef WITH_QTWEBENGINE
-#include <QDesktopServices>
-#endif
 
 OnlineQueriesDialog::OnlineQueriesDialog(QObject* parent) :
 	StelDialogSeparate("OnlineQueries", parent),
@@ -64,8 +61,17 @@ void OnlineQueriesDialog::createDialogContent()
 	//load UI from form file
 	ui->setupUi(dialog);
 	// Given possible unavailability of QtWebEngine on some platforms,
-	// we must add this dynamically here:
-	view=new StelWebEngineView();
+	// we must add this dynamically here. In addition, there are platforms where QtWebEngine appears to be available,
+	// but fails to initialize properly at runtime. We therefore can only add this as QWidget.
+	// If manually disabled, we use a QTextBrowser.
+	if (plugin->webEngineDisabled())
+	{
+		view = new QTextBrowser();
+	}
+	else
+	{
+		view = new StelWebEngineView();
+	}
 	Q_ASSERT(view);
 	view->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 	view->setMinimumSize(0, 180);
@@ -121,8 +127,16 @@ void OnlineQueriesDialog::createDialogContent()
 	}
 
 #ifdef WITH_QTWEBENGINE
-	connect(ui->backPushButton,    &QPushButton::clicked, [=]{view->triggerPageAction(QWebEnginePage::Back);});
-	connect(ui->forwardPushButton, &QPushButton::clicked, [=]{view->triggerPageAction(QWebEnginePage::Forward);});
+	if (plugin->webEngineDisabled())
+	{
+		ui->backPushButton->hide();
+		ui->forwardPushButton->hide();
+	}
+	else
+	{
+		connect(ui->backPushButton,    &QPushButton::clicked, [=]{static_cast<StelWebEngineView*>(view)->triggerPageAction(QWebEnginePage::Back);});
+		connect(ui->forwardPushButton, &QPushButton::clicked, [=]{static_cast<StelWebEngineView*>(view)->triggerPageAction(QWebEnginePage::Forward);});
+	}
 #else
 	ui->backPushButton->hide();
 	ui->forwardPushButton->hide();
@@ -131,13 +145,28 @@ void OnlineQueriesDialog::createDialogContent()
 
 void OnlineQueriesDialog::setOutputHtml(QString html) const
 {
-	view->setHtml(html);
+	if (plugin->webEngineDisabled())
+	{
+		static_cast<QTextBrowser*>(view)->setHtml(html);
+	}
+	else
+	{
+		static_cast<StelWebEngineView*>(view)->setHtml(html);
+	}
 }
 
 void OnlineQueriesDialog::setOutputUrl(QUrl url) const
 {
 #ifdef WITH_QTWEBENGINE
-	view->setUrl(url);
+	if (plugin->webEngineDisabled())
+	{
+		QDesktopServices::openUrl(url);
+		static_cast<QTextBrowser*>(view)->setHtml(QString("<p>" + qc_("Opened %1 in your web browser", "OnlineQueries") + "</p>").arg(url.host()));
+	}
+	else
+	{
+		static_cast<StelWebEngineView*>(view)->setUrl(url);
+	}
 #else
 	QDesktopServices::openUrl(url);
 	view->setHtml(QString("<p>" + qc_("Opened %1 in your web browser", "OnlineQueries") + "</p>").arg(url.host()));

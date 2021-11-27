@@ -67,6 +67,7 @@ StelPluginInfo OnlineQueriesPluginInterface::getPluginInfo() const
 
 OnlineQueries::OnlineQueries() :
 	enabled(false),
+	disableWebView(false),
 	toolbarButton(Q_NULLPTR),
 	custom1UseHip(false),
 	custom2UseHip(false),
@@ -146,6 +147,8 @@ void OnlineQueries::restoreDefaultConfiguration(void)
 void OnlineQueries::loadConfiguration(void)
 {
 	conf->beginGroup("OnlineQueries");
+
+	disableWebView =conf->value("disable_webview", false).toBool();
 	ancientSkiesUrl=conf->value("ancientskies_url", "https://www.ancient-skies.org/api.php?apikey=fZdn9QsNdCAY4KggkV2T&response=HTML&entity=star&catalog=HIPPARCOS&id=%1").toString();
 	aavsoHipUrl    =conf->value("aavso_hip_url",    "https://www.aavso.org/vsx/index.php?view=api.object&ident=HIP%1").toString();
 	aavsoOidUrl    =conf->value("aavso_oid_url",    "https://www.aavso.org/vsx/index.php?view=detail.top&oid=%1").toString();
@@ -189,6 +192,7 @@ void OnlineQueries::saveConfiguration(void)
 	conf->setValue("custom1_use_hip", custom1UseHip);
 	conf->setValue("custom2_use_hip", custom2UseHip);
 	conf->setValue("custom3_use_hip", custom3UseHip);
+	conf->setValue("disable_webview", disableWebView);
 	conf->endGroup();
 }
 
@@ -206,7 +210,7 @@ void OnlineQueries::createToolbarButton() const
 							       QPixmap(":/OnlineQueries/bt_OnlineQueries_Off.png"),
 							       QPixmap(":/graphicGui/glow32x32.png"),
 							       "actionShow_OnlineQueries");
-			qCDebug(onlineQueries) << "adding Button to toolbar ...";
+			//qCDebug(onlineQueries) << "adding Button to toolbar ...";
 
 			gui->getButtonBar()->addButton(button, "065-pluginsGroup");
 		}

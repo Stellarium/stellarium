@@ -1103,8 +1103,14 @@ of objects. However, there are scientific websites which provide even
 more specialized information about particular objects. This plugin
 \newFeature{0.21.1} allows online access to several websites on a
 variety of special topics. To retrieve information, select the
-respective tab and press \button{Query}. The result is displayed in a browser view\footnote{%
-For technical reasons, on some platforms the result is displayed in the system's default web browser.}.
+respective tab and press \button{Query}. The result is displayed in a
+browser view\footnote{%
+  For technical reasons, on some platforms the
+  result is displayed in the system's default web browser.  On some
+  other platforms, e.g. Windows/WSL with Ubuntu or some ARM computers, the
+  web view fails to work properly.  On these platforms you should
+  manually edit \file{config.ini} and set the
+  \texttt{disable\_webview} entry in the config file.}.
 
 \begin{description}
 \item[Wikipedia] The free online encyclopedia provides information
@@ -1125,15 +1131,17 @@ For technical reasons, on some platforms the result is displayed in the system's
   \citep{AncientSkies:2011}. The site is preparing a relaunch in 2021.
 \end{description}
 
-\noindent Regardless of the current program language, the result is always
-presented in English or the language of the respective website.
-
 In addition, you can configure up to three further websites. These
 must provide some public website which takes a query for a Hipparcos
 star number or object name.  For example, the website
 \url{https://biblicalastronomy.co/playground/fetch.cfm?Hipp=n}
 provides various data and cross-references for a star with Hipparcos
 number \texttt{n}.
+
+Regardless of the current program language, the result is always
+presented in English or the language of the respective website.
+
+% \paragraph{Note:}
 
 \subsection{Section \big[OnlineQueries\big] in config.ini file}
 %\label{sec:plugins:OnlineQueries:configuration}
@@ -1163,7 +1171,8 @@ custom2\_url         &string & \\
 custom3\_url         &string & \\
 custom1\_use\_hip    &boolean& true \\
 custom2\_use\_hip    &boolean& true \\
-custom3\_use\_hip    &boolean& true \\
+custom3\_use\_hip    &boolean& true \\\midrule
+disable\_webview     &boolean&false \\
 \bottomrule
 \end{tabular}
 }
