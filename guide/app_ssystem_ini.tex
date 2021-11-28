@@ -410,7 +410,7 @@ all positions for minor bodies are computed with the orbiting elements given in 
 
 Minor planets further specify
 \begin{description}
-\item[orbit\_Epoch], JDE when these elements are valid.
+\item[orbit\_Epoch], JDE when these elements are valid. Defaults to J2000.0, i.e., 2451545.0. 
 \item[orbit\_MeanAnomaly] $M$ mean anomaly, degrees. 
 \item[orbit\_MeanMotion] $n$ mean motion [degrees/day].
 \end{description}
@@ -446,13 +446,14 @@ each apparition should be specified with a dedicated section in
 Note the specification of
 \begin{description}
 \item[orbit\_PericenterDistance] $q$ [AU]
-\item[orbit\_TimeAtPericenter] $T$  JDE of closest approach to the Sun.
+\item[orbit\_TimeAtPericenter] $T$  JDE of closest approach to the Sun
+\item[orbit\_Epoch], JDE when these elements are valid (optional).
 \end{description}
 which is more typical for comets which may have no orbital period when
 they are on parabolic or hyperbolic orbits. Frequently orbital
 elements are given for a date very close to perihelion so that the
-perihel date can be used as default for the optional
-\texttt{orbit\_Epoch}. However, this assumption does not always hold,
+perihel date $T$ is used whereever 
+\texttt{orbit\_Epoch} is not given. However, this assumption does not always hold,
 so we\newFeature{0.21.3} recommend to state \texttt{orbit\_Epoch} explicitly.
 
 

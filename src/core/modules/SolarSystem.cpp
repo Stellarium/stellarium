@@ -744,7 +744,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		}
 		else
 #endif
-		if ((coordFuncName=="kepler_orbit") || (coordFuncName=="comet_orbit") || (coordFuncName=="ell_orbit")) // ell_orbit used for planet moons. TODO in V0.21: remove non-kepler_orbit!
+		if ((coordFuncName=="kepler_orbit") || (coordFuncName=="comet_orbit") || (coordFuncName=="ell_orbit")) // ell_orbit used for planet moons. TBD in V1.0: remove non-kepler_orbit!
 		{
 			// ell_orbit was used for planet moons, comet_orbit for minor bodies. The only difference is that pericenter distance for moons is given in km, not AU.
 			// Read the orbital elements			
@@ -801,8 +801,11 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				long_of_pericenter = arg_of_pericenter + ascending_node;
 			}
 
-			const double epoch = pd.value(secname+"/orbit_Epoch",J2000).toDouble();
 			double time_at_pericenter = pd.value(secname+"/orbit_TimeAtPericenter",-1e100).toDouble();
+			// In earlier times (up to 0.21.2) we did not care much to store orbital epoch for comets but silently assumed T for it in various places.
+			// However, the distinction is relevant to discern element sets for various valid ranges.
+			// Comet orbits epoch should default to T while planets or moons default to J2000.
+			const double epoch = pd.value(secname+"/orbit_Epoch", type=="comet" ? time_at_pericenter : J2000).toDouble();
 			if (time_at_pericenter <= -1e100) {
 				double mean_anomaly = pd.value(secname+"/orbit_MeanAnomaly",-1e100).toDouble()*(M_PI/180.0);
 				if (mean_anomaly <= -1e10) {
