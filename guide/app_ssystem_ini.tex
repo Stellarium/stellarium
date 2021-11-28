@@ -443,11 +443,11 @@ major planets cause fast changes in their orbital elements, so that
 each apparition should be specified with a dedicated section in
 \file{ssystem\_minor.ini}.
 
-Note the specification of
+Most elements are similar to minor planets. But note the specification of
 \begin{description}
 \item[orbit\_PericenterDistance] $q$ [AU]
 \item[orbit\_TimeAtPericenter] $T$  JDE of closest approach to the Sun
-\item[orbit\_Epoch], JDE when these elements are valid (optional).
+\item[orbit\_Epoch] JDE when these elements are valid (optional).
 \end{description}
 which is more typical for comets which may have no orbital period when
 they are on parabolic or hyperbolic orbits. Frequently orbital
@@ -456,6 +456,9 @@ perihel date $T$ is used whereever
 \texttt{orbit\_Epoch} is not given. However, this assumption does not always hold,
 so we\newFeature{0.21.3} recommend to state \texttt{orbit\_Epoch} explicitly.
 
+\begin{description}
+\item[ref] Reference, e.g.\ some MPC Circular (optional). \newFeature{0.21.3} May be used in future versions.
+\end{description}
 
 Comet brightness is evaluated from
 \begin{equation}

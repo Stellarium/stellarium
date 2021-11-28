@@ -499,48 +499,67 @@ bool SolarSystemEditor::removeSsoWithName(QString name)
 SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElements) const
 {
 	SsoElements result;
-	//qDebug() << "readMpcOneLineCometElements started...";
-
-	QRegularExpression mpcParser("^\\s*(\\d{4})?([A-Z])((?:\\w{6}|\\s{6})?[0a-zA-Z])?\\s+(\\d{4})\\s+(\\d{2})\\s+(\\d{1,2}\\.\\d{3,4})\\s+(\\d{1,2}\\.\\d{5,6})\\s+(\\d\\.\\d{5,6})\\s+(\\d{1,3}\\.\\d{3,4})\\s+(\\d{1,3}\\.\\d{3,4})\\s+(\\d{1,3}\\.\\d{3,4})\\s+(?:(\\d{4})(\\d\\d)(\\d\\d))?\\s+(\\-?\\d{1,2}\\.\\d)\\s+(\\d{1,2}\\.\\d)\\s+(\\S.{1,54}\\S)(?:\\s+(\\S.*))?$");//
-	QRegularExpressionMatch mpcMatch;
-	int match = oneLineElements.indexOf(mpcParser, 0, &mpcMatch);
-	//qDebug() << "RegExp captured:" << match << mpcParser.capturedTexts();
-
-	if (match < 0)
+	// New and exact definition, directly from https://minorplanetcenter.net/iau/info/CometOrbitFormat.html
+	// We parse by documented columns and process extracted strings later.
+	QRegularExpression mpcParser("^([[:print:]]{4})"      //    1 -   4  i4     1. Periodic comet number
+				    "([CPDIA])"               //    5        a1     2. Orbit type (generally `C', `P' or `D') -- A=reclassified as Asteroid? I=Interstellar.
+				    "([[:print:]]{7}).{2}"    //    6 -  12  a7     3. Provisional designation (in packed form)
+				    "([[:print:]]{4})."       //   15 -  18  i4     4. Year of perihelion passage
+				    "([[:print:]]{2})."       //   20 -  21  i2     5. Month of perihelion passage
+				    "([[:print:]]{7})."       //   23 -  29  f7.4   6. Day of perihelion passage (TT)
+				    "([[:print:]]{9}).{2}"    //   31 -  39  f9.6   7. Perihelion distance (AU)
+				    "([[:print:]]{8}).{2}"    //   42 -  49  f8.6   8. Orbital eccentricity
+				    "([[:print:]]{8}).{2}"    //   52 -  59  f8.4   9. Argument of perihelion, J2000.0 (degrees)
+				    "([[:print:]]{8}).{2}"    //   62 -  69  f8.4  10. Longitude of the ascending node, J2000.0 (degrees)
+				    "([[:print:]]{8}).{2}"    //   72 -  79  f8.4  11. Inclination in degrees, J2000.0 (degrees)
+				    "([[:print:]]{4})"        //   82 -  85  i4    12. Year of epoch for perturbed solutions
+				    "([[:print:]]{2})"        //   86 -  87  i2    13. Month of epoch for perturbed solutions
+				    "([[:print:]]{2})\\s{2}"  //   88 -  89  i2    14. Day of epoch for perturbed solutions
+				    "([[:print:]]{4})\\s"     //   92 -  95  f4.1  15. Absolute magnitude
+				    "([[:print:]]{4})\\s{2}"  //   97 - 100  f4.0  16. Slope parameter
+				    "([[:print:]]{56})\\s"    //  103 - 158  a56   17. Designation and Name
+				    "([[:print:]]{1,9}).*$"   //  160 - 168  a9    18. Reference
+	    );
+	if (!mpcParser.isValid())
+	{
+		qWarning() << "Bad Regular Expression:" << mpcParser.errorString();
+		qWarning() << "Error offset:" << mpcParser.patternErrorOffset();
+	}
+	QRegularExpressionMatch mpcMatch=mpcParser.match(oneLineElements);
+	//qDebug() << "RegExp captured:" << mpcMatch.capturedTexts();
+	if (!mpcMatch.hasMatch())
 	{
 		qWarning() << "No match for" << oneLineElements;
 		return result;
 	}
 
-	QString numberString = mpcMatch.captured(1).trimmed();
-	//QChar cometType = mpcParser.cap(2).at(0);
+	QString periodicNumberString = mpcMatch.captured(1).trimmed();
+	//QChar orbitType = mpcMatch.captured(2).at(0);
 	QString provisionalDesignation = mpcMatch.captured(3).trimmed();
-
-	if (numberString.isEmpty() && provisionalDesignation.isEmpty())
-	{
-		qWarning() << "Comet is missing both comet number AND provisional designation.";
-		return result;
-	}
-
 	QString name = mpcMatch.captured(17).trimmed();
 
+	if (periodicNumberString.isEmpty() && provisionalDesignation.isEmpty())
+	{
+		qWarning() << "Comet" << name << "is missing both comet number AND provisional designation.";
+		return result;
+	}
+	if (name.isEmpty())
+	{
+	    return result;
+	}
 	//Fragment suffix
 	if (provisionalDesignation.length() == 1)
 	{
 		QChar fragmentIndex = provisionalDesignation.at(0);
 		name.append(' ');
-		name.append(fragmentIndex.toUpper());
-	}
-
-	if (name.isEmpty())
-	{
-		return SsoElements();
+		name.append(fragmentIndex); // .toUpper()); // TBD: really toUpper?
 	}
 	result.insert("name", name);
 
 	QString sectionName = convertToGroupName(name);
 	if (sectionName.isEmpty())
 	{
+		qWarning() << "Cannot derive a comet name from" << name << ". Skipping.";
 		return SsoElements();
 	}
 	result.insert("section_name", sectionName);
@@ -548,50 +567,63 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	//After a name has been determined, insert the essential keys
 	//result.insert("parent", "Sun"); // 0.16: omit obvious default.
 	result.insert("type", "comet");
-	//"kepler_orbit" is used for all cases:
+	//"kepler_orbit" could be used for all cases:
 	//"ell_orbit" interprets distances as kilometers, not AUs
 	// result.insert("coord_func", "kepler_orbit"); // 0.20: omit default
-	result.insert("coord_func", "comet_orbit"); // 0.20: add this default for compatibility with earlier versions!
-	// GZ: moved next line below!
-	//result.insert("orbit_good", 1000); // default validity for osculating elements, days
-
+	result.insert("coord_func", "comet_orbit"); // 0.20: add this default for compatibility with earlier versions! TBD: remove for 1.0
 	//result.insert("color", "1.0, 1.0, 1.0");  // 0.16: omit obvious default.
 	//result.insert("tex_map", "nomap.png");    // 0.16: omit obvious default.
 
-	bool ok = false;
-	//TODO: Use this for VALIDATION!
+	bool ok1=false, ok2=false, ok3=false, ok4=false, ok5=false;
 
-	int year	= mpcMatch.captured(4).toInt();
-	int month	= mpcMatch.captured(5).toInt();
-	double dayFraction	= mpcMatch.captured(6).toDouble(&ok);
-	int day = static_cast<int>(dayFraction);
-	QDate datePerihelionPassage(year, month, day);
-	int fraction = static_cast<int>((dayFraction - day) * 24 * 60 * 60);
-	int seconds = fraction % 60; fraction /= 60;
-	int minutes = fraction % 60; fraction /= 60;
-	int hours = fraction % 24;
-	//qDebug() << hours << minutes << seconds << fraction;
-	QTime timePerihelionPassage(hours, minutes, seconds, 0);
-	QDateTime dtPerihelionPassage(datePerihelionPassage, timePerihelionPassage, Qt::UTC);
-	double jdPerihelionPassage = StelUtils::qDateTimeToJd(dtPerihelionPassage);
-	result.insert("orbit_TimeAtPericenter", jdPerihelionPassage);
+	int year	= mpcMatch.captured(4).toInt(&ok1);
+	int month	= mpcMatch.captured(5).toInt(&ok2);
+	double dayFraction	= mpcMatch.captured(6).toDouble(&ok3);
 
-	double perihelionDistance = mpcMatch.captured(7).toDouble(&ok);//AU
-	result.insert("orbit_PericenterDistance", perihelionDistance);
+	//QDate datePerihelionPassage(year, month, day);
+	//int fraction = static_cast<int>((dayFraction - day) * 24 * 60 * 60);
+	//int seconds = fraction % 60; fraction /= 60;
+	//int minutes = fraction % 60; fraction /= 60;
+	//int hours = fraction % 24;
+	////qDebug() << hours << minutes << seconds << fraction;
+	//QTime timePerihelionPassage(hours, minutes, seconds, 0);
+	//QDateTime dtPerihelionPassage(datePerihelionPassage, timePerihelionPassage, Qt::UTC);
+	//double jdPerihelionPassage = StelUtils::qDateTimeToJd(dtPerihelionPassage);
+	double jde;
+	if (ok1 && ok2 && ok3)
+	{
+		StelUtils::getJDFromDate(&jde, year, month, 0, 0, 0, 0.f);
+		jde+=dayFraction;
+		result.insert("orbit_TimeAtPericenter", jde);
+	}
+	else
+	{
+		qWarning() << "Cannot read perihelion date for comet " << name;
+		return SsoElements();
+	}
 
-	double eccentricity = mpcMatch.captured(8).toDouble(&ok);//NOT degrees, but without dimension.
-	result.insert("orbit_Eccentricity", eccentricity);
+	double perihelionDistance = mpcMatch.captured(7).toDouble(&ok1); //AU
+	double eccentricity = mpcMatch.captured(8).toDouble(&ok2); //NOT degrees, but without dimension.
+	double argumentOfPerihelion = mpcMatch.captured(9).toDouble(&ok3);//J2000.0, degrees
+	double longitudeOfTheAscendingNode = mpcMatch.captured(10).toDouble(&ok4);//J2000.0, degrees
+	double inclination = mpcMatch.captured(11).toDouble(&ok5);
+	if (ok1 && ok2 && ok3 && ok4 && ok5)
+	{
+		result.insert("orbit_PericenterDistance", perihelionDistance);
+		result.insert("orbit_Eccentricity", eccentricity);
+		result.insert("orbit_ArgOfPericenter", argumentOfPerihelion);
+		result.insert("orbit_AscendingNode", longitudeOfTheAscendingNode);
+		result.insert("orbit_Inclination", inclination);
 
-	double argumentOfPerihelion = mpcMatch.captured(9).toDouble(&ok);//J2000.0, degrees
-	result.insert("orbit_ArgOfPericenter", argumentOfPerihelion);
+	}
+	else
+	{
+		qWarning() << "Cannot read main elements for comet " << name;
+		return SsoElements();
+	}
 
-	double longitudeOfTheAscendingNode = mpcMatch.captured(10).toDouble(&ok);//J2000.0, degrees
-	result.insert("orbit_AscendingNode", longitudeOfTheAscendingNode);
-
-	double inclination = mpcMatch.captured(11).toDouble(&ok);
-	result.insert("orbit_Inclination", inclination);
-
-	// GZ: We should reduce orbit_good for elliptical orbits to one half period before/after perihel!
+	// We should reduce orbit_good for elliptical orbits to one half period before/after perihel!
+	// TBD: Can be removed in 1.0, relegating to handling by the loader.
 	if (eccentricity < 1.0)
 	{
 		// Heafner, Fundamental Ephemeris Computations, p.71
@@ -604,13 +636,32 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	else
 		result.insert("orbit_good", 1000); // default validity for osculating elements, days
 
-	double absoluteMagnitude = mpcMatch.captured(15).toDouble(&ok);
-	result.insert("absolute_magnitude", absoluteMagnitude);
+	// Epoch
+	year    = mpcMatch.captured(12).toInt(&ok1);
+	month   = mpcMatch.captured(13).toInt(&ok2);
+	int day = mpcMatch.captured(14).toInt(&ok3);
+	if (ok1 && ok2 && ok3)
+	{
+		StelUtils::getJDFromDate(&jde, year, month, day, 0, 0, 0.f);
+		result.insert("orbit_Epoch", jde);
+	}
+	else
+	{
+		qDebug() << "Warning: Cannot read element epoch date for comet " << name << ". Will use T at load time.";
+	}
 
-	//This is not the same "slope parameter" as used in asteroids. Better name?
-	double slopeParameter = mpcMatch.captured(16).toDouble(&ok);
-	result.insert("slope_parameter", slopeParameter);
+	double absoluteMagnitude = mpcMatch.captured(15).toDouble(&ok1);
+	if (ok1)
+		result.insert("absolute_magnitude", absoluteMagnitude);
+	double slopeParameter = mpcMatch.captured(16).toDouble(&ok2);
+	if (ok2)
+		result.insert("slope_parameter", slopeParameter);
+	if (!(ok1 && ok2))
+	{
+		qDebug() << "Warning: Problem reading magnitude parameters for comet " << name;
+	}
 
+	result.insert("ref", mpcMatch.captured(18));
 	result.insert("radius", 5); //Fictitious default assumption
 	result.insert("albedo", 0.1); // GZ 2014-01-10: Comets are very dark, should even be 0.03!
 	result.insert("dust_lengthfactor", 0.4); // dust tail length w.r.t. gas tail length
