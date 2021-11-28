@@ -30,7 +30,7 @@ FIND_PACKAGE(Qt5WebEngineWidgets QUIET)
 IF(Qt5WebEngine_FOUND AND Qt5WebEngineWidgets_FOUND)
     ADD_DEFINITIONS(-DWITH_QTWEBENGINE)
     SET(QTWEBENGINE_LIBS Qt5::WebEngine Qt5::WebEngineWidgets)
-ELSE(Q5tWebEngine_FOUND AND Qt5WebEngineWidgets_FOUND)
+ELSE(Qt5WebEngine_FOUND AND Qt5WebEngineWidgets_FOUND)
     MESSAGE(WARNING "Qt5WebEngine and/or Qt5WebEngineWidgets not found. \
                      If these packages exist for your platform, install and rerun. \
                      Else the program will call the system web browser where required.")
