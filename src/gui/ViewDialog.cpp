@@ -263,6 +263,13 @@ void ViewDialog::createDialogContent()
 	connect(ssmgr, SIGNAL(flagCustomGrsSettingsChanged(bool)), ui->pushButtonGrsDetails, SLOT(setEnabled(bool)));
 	connect(ui->pushButtonGrsDetails, SIGNAL(clicked()), this, SLOT(showGreatRedSpotDialog()));
 
+	// Link Solar System Editor button if available...
+	StelModule *sse=StelApp::getInstance().getModuleMgr().getModule("SolarSystemEditor");
+	if (sse)
+		connect(ui->pushButtonSSE, &QPushButton::clicked, [=]{sse->configureGui(true);});
+	else
+		ui->pushButtonSSE->hide();
+
 	// Shooting stars section
 	StelModule* mmgr = StelApp::getInstance().getModule("SporadicMeteorMgr");
 	Q_ASSERT(mmgr);
