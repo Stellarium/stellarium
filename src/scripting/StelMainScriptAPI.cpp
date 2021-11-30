@@ -1380,3 +1380,21 @@ bool StelMainScriptAPI::isMediaPlaybackSupported(void)
 	return false;
 	#endif
 }
+
+// Experimental. Try to play with physical display properties for tonemapping.
+void StelMainScriptAPI::setDisplayMaxLuminance(double cdPerSqM)
+{
+    StelApp::getInstance().getCore()->getToneReproducer()->setMaxDisplayLuminance(static_cast<float>(cdPerSqM));
+}
+double StelMainScriptAPI::getDisplayMaxLuminance()
+{
+    return static_cast<double>(StelApp::getInstance().getCore()->getToneReproducer()->getMaxDisplayLuminance());
+}
+void StelMainScriptAPI::setDisplayGamma(double gamma)
+{
+    StelApp::getInstance().getCore()->getToneReproducer()->setDisplayGamma(static_cast<float>(gamma));
+}
+double StelMainScriptAPI::getDisplayGamma()
+{
+    return static_cast<double>(StelApp::getInstance().getCore()->getToneReproducer()->getDisplayGamma());
+}

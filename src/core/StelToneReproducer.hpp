@@ -87,21 +87,33 @@ public:
 	
 	//! Set the maximum luminance of the display (CRT, screen etc..)
 	//! This value is used to scale the RGB range
-	//! @param maxdL the maximum lumiance in cd/m^2. Initial default value is 120 cd/m^2
+	//! @param maxdL the maximum lumiance in cd/m^2. Initial default value is 100 cd/m^2.
+	//! Higher values indicate "This display can faithfully reproduce brighter lights,
+	//! therefore the sky will usually appear darker".
 	void setMaxDisplayLuminance(float maxdL)
 	{
 		oneOverMaxdL = 1.f/maxdL; lnOneOverMaxdL=std::log(oneOverMaxdL); term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
 	}
 
+	//! Get the previously set maximum luminance of the display (CRT, screen etc..)
+	//! This value is used to scale the RGB range
+	//! @return the maximum display lumiance in cd/m^2. Typical default values for CRT is 120 cd/m^2,
+	//! LCD panels often have more, which may have been adjusted previously by setMaxDisplayLuminance().
+	float getMaxDisplayLuminance() const
+	{
+		return 1.f/oneOverMaxdL;
+	}
 	//! Get the display gamma
-	//! @return the display gamma. Default value is 2.2222 for a CRT
+	//! @return the display gamma. Default value is 2.2222 for a CRT, and
+	//! sRGB LCD (and similar modern) panels try to reproduce that.
 	float getDisplayGamma() const
 	{
 		return 1.f/oneOverGamma;
 	}
 	
 	//! Set the display gamma
-	//! @param gamma the gamma. Initial default value is 2.2222
+	//! @param gamma the gamma. Initial default value is 2.2222 for a CRT, and
+	//! sRGB LCD (and similar modern) panels try to reproduce that.
 	void setDisplayGamma(float gamma)
 	{
 		oneOverGamma = 1.f/gamma; term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
