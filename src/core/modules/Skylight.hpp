@@ -28,11 +28,6 @@
 #include <cmath>
 #include <QDebug>
 
-typedef struct {
-	float zenithAngle;  // zenithAngle : angular distance to the zenith in radian
-	float distSun;      // distSun     : angular distance to the sun in radian
-	float color[3];     // 3 component color, can be RGB or CIE color system
-} skylightStruct;
 
 typedef struct {
 	float pos[3];       // Vector to the position (vertical = pos[2])
@@ -47,8 +42,6 @@ public:
 	// Set the fixed parameters and precompute what can be
 	// This function has to be called once before any call to get_*_value()
 	void setParams(float sunZenithAngle, float turbidity);
-	// Compute the sky color at the given position in the xyY color system and store it in position.color
-	// void getxyYValue(skylightStruct * position);
 	// Return the current zenith color
 	inline void getZenithColor(float * v) const;
 
