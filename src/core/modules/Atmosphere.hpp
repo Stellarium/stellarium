@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef ATMOSTPHERE_HPP
-#define ATMOSTPHERE_HPP
+#ifndef ATMOSPHERE_HPP
+#define ATMOSPHERE_HPP
 
 #include "Skylight.hpp"
 #include "VecMath.hpp"
@@ -33,7 +33,7 @@ class StelProjector;
 class StelToneReproducer;
 class StelCore;
 
-//! Compute and display the daylight sky color using openGL.
+//! Compute and display the daylight sky color using OpenGL.
 //! The sky brightness is computed with the SkyBright class, the color with the SkyLight.
 //! Don't use this class directly but use it through the LandscapeMgr.
 class Atmosphere
@@ -120,4 +120,4 @@ private:
 	GLuint bayerPatternTex=0;
 };
 
-#endif // ATMOSTPHERE_HPP
+#endif // ATMOSPHERE_HPP
