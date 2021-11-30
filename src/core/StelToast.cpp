@@ -324,6 +324,7 @@ void ToastSurvey::draw(StelPainter* sPainter)
 		// Get the luminance scaled between 0 and 1
 		StelToneReproducer* eye = core->getToneReproducer();
 		float aLum =eye->adaptLuminanceScaled(lum);
+		Q_ASSERT(aLum>0.f);
 
 		// Bound a maximum luminance. GZ: Is there any reference/reason, or just trial and error?
 		aLum = qMin(1.0f, aLum*2.f); // Was 0.38 for MilkyWay. TOAST is allowed to look a bit artificial though...
@@ -336,9 +337,12 @@ void ToastSurvey::draw(StelPainter* sPainter)
 		float atmFactor=qMax(0.35f, 50.0f*(0.02f-atmLum)); // keep visible in twilight, but this is enough for some effect with the moon.
 		color*=atmFactor*atmFactor;
 
-		if (color[0]<0) color[0]=0;
-		if (color[1]<0) color[1]=0;
-		if (color[2]<0) color[2]=0;
+		Q_ASSERT_X(color[0]>=0.f, "StelToast::draw()", "color R has unexpected value");
+		Q_ASSERT_X(color[1]>=0.f, "StelToast::draw()", "color G has unexpected value");
+		Q_ASSERT_X(color[2]>=0.f, "StelToast::draw()", "color B has unexpected value");
+		//if (color[0]<0) color[0]=0;
+		//if (color[1]<0) color[1]=0;
+		//if (color[2]<0) color[2]=0;
 	}
 
 	// We also get the viewport shape to discard invisible tiles.
