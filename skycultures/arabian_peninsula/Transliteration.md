@@ -29,7 +29,7 @@
 | ه | h | 'h' as in home|
 | و | w | 'w' as in water|
 | ي | y | 'y' as in yellow|
-|short vowel   | a | 'a' as in German|
+|short vowel   | a | 'a' as in loyal|
 |short vowel   | i | 'i' as in tip|
 |short vowel   | u | 'u' as in put|
 |long vowel   | ā | 'a' as in father|
