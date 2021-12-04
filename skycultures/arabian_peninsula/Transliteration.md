@@ -1,4 +1,4 @@
-| Arabic letter | Transliteration |
+| Arabic letter | Transliteration |Pronunciation|
 |--|--|--|
 | ء | ʾ | 'u' as in up|
 | ا | ā | 'a' as in father |
