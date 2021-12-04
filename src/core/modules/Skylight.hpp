@@ -228,58 +228,58 @@ signals:
 	void flagSRGBChanged(bool val);
 	
 public slots:
-	void setAYt(const double val){AYt=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/AYt", val); emit AYtChanged(val); computeLuminanceDistributionCoefs();}
-	void setBYt(const double val){BYt=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/BYt", val); emit BYtChanged(val); computeLuminanceDistributionCoefs();}
-	void setCYt(const double val){CYt=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/CYt", val); emit CYtChanged(val); computeLuminanceDistributionCoefs();}
-	void setDYt(const double val){DYt=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/DYt", val); emit DYtChanged(val); computeLuminanceDistributionCoefs();}
-	void setEYt(const double val){EYt=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/EYt", val); emit EYtChanged(val); computeLuminanceDistributionCoefs();}
-	void setAYc(const double val){AYc=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/AYc", val); emit AYcChanged(val); computeLuminanceDistributionCoefs();}
-	void setBYc(const double val){BYc=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/BYc", val); emit BYcChanged(val); computeLuminanceDistributionCoefs();}
-	void setCYc(const double val){CYc=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/CYc", val); emit CYcChanged(val); computeLuminanceDistributionCoefs();}
-	void setDYc(const double val){DYc=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/DYc", val); emit DYcChanged(val); computeLuminanceDistributionCoefs();}
-	void setEYc(const double val){EYc=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/EYc", val); emit EYcChanged(val); computeLuminanceDistributionCoefs();}
-	void setAxt(const double val){Axt=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/Axt", val); emit AxtChanged(val); computeColorDistributionCoefs();}
-	void setBxt(const double val){Bxt=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/Bxt", val); emit BxtChanged(val); computeColorDistributionCoefs();}
-	void setCxt(const double val){Cxt=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/Cxt", val); emit CxtChanged(val); computeColorDistributionCoefs();}
-	void setDxt(const double val){Dxt=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/Dxt", val); emit DxtChanged(val); computeColorDistributionCoefs();}
-	void setExt(const double val){Ext=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/Ext", val); emit ExtChanged(val); computeColorDistributionCoefs();}
-	void setAxc(const double val){Axc=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/Axc", val); emit AxcChanged(val); computeColorDistributionCoefs();}
-	void setBxc(const double val){Bxc=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/Bxc", val); emit BxcChanged(val); computeColorDistributionCoefs();}
-	void setCxc(const double val){Cxc=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/Cxc", val); emit CxcChanged(val); computeColorDistributionCoefs();}
-	void setDxc(const double val){Dxc=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/Dxc", val); emit DxcChanged(val); computeColorDistributionCoefs();}
-	void setExc(const double val){Exc=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/Exc", val); emit ExcChanged(val); computeColorDistributionCoefs();}
-	void setAyt(const double val){Ayt=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/Ayt", val); emit AytChanged(val); computeColorDistributionCoefs();}
-	void setByt(const double val){Byt=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/Byt", val); emit BytChanged(val); computeColorDistributionCoefs();}
-	void setCyt(const double val){Cyt=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/Cyt", val); emit CytChanged(val); computeColorDistributionCoefs();}
-	void setDyt(const double val){Dyt=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/Dyt", val); emit DytChanged(val); computeColorDistributionCoefs();}
-	void setEyt(const double val){Eyt=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/Eyt", val); emit EytChanged(val); computeColorDistributionCoefs();}
-	void setAyc(const double val){Ayc=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/Ayc", val); emit AycChanged(val); computeColorDistributionCoefs();}
-	void setByc(const double val){Byc=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/Byc", val); emit BycChanged(val); computeColorDistributionCoefs();}
-	void setCyc(const double val){Cyc=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/Cyc", val); emit CycChanged(val); computeColorDistributionCoefs();}
-	void setDyc(const double val){Dyc=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/Dyc", val); emit DycChanged(val); computeColorDistributionCoefs();}
-	void setEyc(const double val){Eyc=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/Eyc", val); emit EycChanged(val); computeColorDistributionCoefs();}
-	void setZX11(const double val){zX11=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/zX11", val); emit zX11Changed(val); computeZenithColor();}
-	void setZX12(const double val){zX12=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/zX12", val); emit zX12Changed(val); computeZenithColor();}
-	void setZX13(const double val){zX13=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/zX13", val); emit zX13Changed(val); computeZenithColor();}
-	void setZX21(const double val){zX21=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/zX21", val); emit zX21Changed(val); computeZenithColor();}
-	void setZX22(const double val){zX22=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/zX22", val); emit zX22Changed(val); computeZenithColor();}
-	void setZX23(const double val){zX23=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/zX23", val); emit zX23Changed(val); computeZenithColor();}
-	void setZX24(const double val){zX24=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/zX24", val); emit zX24Changed(val); computeZenithColor();}
-	void setZX31(const double val){zX31=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/zX31", val); emit zX31Changed(val); computeZenithColor();}
-	void setZX32(const double val){zX32=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/zX32", val); emit zX32Changed(val); computeZenithColor();}
-	void setZX33(const double val){zX33=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/zX33", val); emit zX33Changed(val); computeZenithColor();}
-	void setZX34(const double val){zX34=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/zX34", val); emit zX34Changed(val); computeZenithColor();}
-	void setZY11(const double val){zY11=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/zY11", val); emit zY11Changed(val); computeZenithColor();}
-	void setZY12(const double val){zY12=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/zY12", val); emit zY12Changed(val); computeZenithColor();}
-	void setZY13(const double val){zY13=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/zY13", val); emit zY13Changed(val); computeZenithColor();}
-	void setZY21(const double val){zY21=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/zY21", val); emit zY21Changed(val); computeZenithColor();}
-	void setZY22(const double val){zY22=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/zY22", val); emit zY22Changed(val); computeZenithColor();}
-	void setZY23(const double val){zY23=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/zY23", val); emit zY23Changed(val); computeZenithColor();}
-	void setZY24(const double val){zY24=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/zY24", val); emit zY24Changed(val); computeZenithColor();}
-	void setZY31(const double val){zY31=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/zY31", val); emit zY31Changed(val); computeZenithColor();}
-	void setZY32(const double val){zY32=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/zY32", val); emit zY32Changed(val); computeZenithColor();}
-	void setZY33(const double val){zY33=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/zY33", val); emit zY33Changed(val); computeZenithColor();}
-	void setZY34(const double val){zY34=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/zY34", val); emit zY34Changed(val); computeZenithColor();}
+	void setAYt(const double val){AYt=val;   StelApp::getInstance().getSettings()->setValue("Skylight/AYt",  val); emit AYtChanged(val);  computeLuminanceDistributionCoefs();}
+	void setBYt(const double val){BYt=val;   StelApp::getInstance().getSettings()->setValue("Skylight/BYt",  val); emit BYtChanged(val);  computeLuminanceDistributionCoefs();}
+	void setCYt(const double val){CYt=val;   StelApp::getInstance().getSettings()->setValue("Skylight/CYt",  val); emit CYtChanged(val);  computeLuminanceDistributionCoefs();}
+	void setDYt(const double val){DYt=val;   StelApp::getInstance().getSettings()->setValue("Skylight/DYt",  val); emit DYtChanged(val);  computeLuminanceDistributionCoefs();}
+	void setEYt(const double val){EYt=val;   StelApp::getInstance().getSettings()->setValue("Skylight/EYt",  val); emit EYtChanged(val);  computeLuminanceDistributionCoefs();}
+	void setAYc(const double val){AYc=val;   StelApp::getInstance().getSettings()->setValue("Skylight/AYc",  val); emit AYcChanged(val);  computeLuminanceDistributionCoefs();}
+	void setBYc(const double val){BYc=val;   StelApp::getInstance().getSettings()->setValue("Skylight/BYc",  val); emit BYcChanged(val);  computeLuminanceDistributionCoefs();}
+	void setCYc(const double val){CYc=val;   StelApp::getInstance().getSettings()->setValue("Skylight/CYc",  val); emit CYcChanged(val);  computeLuminanceDistributionCoefs();}
+	void setDYc(const double val){DYc=val;   StelApp::getInstance().getSettings()->setValue("Skylight/DYc",  val); emit DYcChanged(val);  computeLuminanceDistributionCoefs();}
+	void setEYc(const double val){EYc=val;   StelApp::getInstance().getSettings()->setValue("Skylight/EYc",  val); emit EYcChanged(val);  computeLuminanceDistributionCoefs();}
+	void setAxt(const double val){Axt=val;   StelApp::getInstance().getSettings()->setValue("Skylight/Axt",  val); emit AxtChanged(val);  computeColorDistributionCoefs();}
+	void setBxt(const double val){Bxt=val;   StelApp::getInstance().getSettings()->setValue("Skylight/Bxt",  val); emit BxtChanged(val);  computeColorDistributionCoefs();}
+	void setCxt(const double val){Cxt=val;   StelApp::getInstance().getSettings()->setValue("Skylight/Cxt",  val); emit CxtChanged(val);  computeColorDistributionCoefs();}
+	void setDxt(const double val){Dxt=val;   StelApp::getInstance().getSettings()->setValue("Skylight/Dxt",  val); emit DxtChanged(val);  computeColorDistributionCoefs();}
+	void setExt(const double val){Ext=val;   StelApp::getInstance().getSettings()->setValue("Skylight/Ext",  val); emit ExtChanged(val);  computeColorDistributionCoefs();}
+	void setAxc(const double val){Axc=val;   StelApp::getInstance().getSettings()->setValue("Skylight/Axc",  val); emit AxcChanged(val);  computeColorDistributionCoefs();}
+	void setBxc(const double val){Bxc=val;   StelApp::getInstance().getSettings()->setValue("Skylight/Bxc",  val); emit BxcChanged(val);  computeColorDistributionCoefs();}
+	void setCxc(const double val){Cxc=val;   StelApp::getInstance().getSettings()->setValue("Skylight/Cxc",  val); emit CxcChanged(val);  computeColorDistributionCoefs();}
+	void setDxc(const double val){Dxc=val;   StelApp::getInstance().getSettings()->setValue("Skylight/Dxc",  val); emit DxcChanged(val);  computeColorDistributionCoefs();}
+	void setExc(const double val){Exc=val;   StelApp::getInstance().getSettings()->setValue("Skylight/Exc",  val); emit ExcChanged(val);  computeColorDistributionCoefs();}
+	void setAyt(const double val){Ayt=val;   StelApp::getInstance().getSettings()->setValue("Skylight/Ayt",  val); emit AytChanged(val);  computeColorDistributionCoefs();}
+	void setByt(const double val){Byt=val;   StelApp::getInstance().getSettings()->setValue("Skylight/Byt",  val); emit BytChanged(val);  computeColorDistributionCoefs();}
+	void setCyt(const double val){Cyt=val;   StelApp::getInstance().getSettings()->setValue("Skylight/Cyt",  val); emit CytChanged(val);  computeColorDistributionCoefs();}
+	void setDyt(const double val){Dyt=val;   StelApp::getInstance().getSettings()->setValue("Skylight/Dyt",  val); emit DytChanged(val);  computeColorDistributionCoefs();}
+	void setEyt(const double val){Eyt=val;   StelApp::getInstance().getSettings()->setValue("Skylight/Eyt",  val); emit EytChanged(val);  computeColorDistributionCoefs();}
+	void setAyc(const double val){Ayc=val;   StelApp::getInstance().getSettings()->setValue("Skylight/Ayc",  val); emit AycChanged(val);  computeColorDistributionCoefs();}
+	void setByc(const double val){Byc=val;   StelApp::getInstance().getSettings()->setValue("Skylight/Byc",  val); emit BycChanged(val);  computeColorDistributionCoefs();}
+	void setCyc(const double val){Cyc=val;   StelApp::getInstance().getSettings()->setValue("Skylight/Cyc",  val); emit CycChanged(val);  computeColorDistributionCoefs();}
+	void setDyc(const double val){Dyc=val;   StelApp::getInstance().getSettings()->setValue("Skylight/Dyc",  val); emit DycChanged(val);  computeColorDistributionCoefs();}
+	void setEyc(const double val){Eyc=val;   StelApp::getInstance().getSettings()->setValue("Skylight/Eyc",  val); emit EycChanged(val);  computeColorDistributionCoefs();}
+	void setZX11(const double val){zX11=val; StelApp::getInstance().getSettings()->setValue("Skylight/zX11", val); emit zX11Changed(val); computeZenithColor();}
+	void setZX12(const double val){zX12=val; StelApp::getInstance().getSettings()->setValue("Skylight/zX12", val); emit zX12Changed(val); computeZenithColor();}
+	void setZX13(const double val){zX13=val; StelApp::getInstance().getSettings()->setValue("Skylight/zX13", val); emit zX13Changed(val); computeZenithColor();}
+	void setZX21(const double val){zX21=val; StelApp::getInstance().getSettings()->setValue("Skylight/zX21", val); emit zX21Changed(val); computeZenithColor();}
+	void setZX22(const double val){zX22=val; StelApp::getInstance().getSettings()->setValue("Skylight/zX22", val); emit zX22Changed(val); computeZenithColor();}
+	void setZX23(const double val){zX23=val; StelApp::getInstance().getSettings()->setValue("Skylight/zX23", val); emit zX23Changed(val); computeZenithColor();}
+	void setZX24(const double val){zX24=val; StelApp::getInstance().getSettings()->setValue("Skylight/zX24", val); emit zX24Changed(val); computeZenithColor();}
+	void setZX31(const double val){zX31=val; StelApp::getInstance().getSettings()->setValue("Skylight/zX31", val); emit zX31Changed(val); computeZenithColor();}
+	void setZX32(const double val){zX32=val; StelApp::getInstance().getSettings()->setValue("Skylight/zX32", val); emit zX32Changed(val); computeZenithColor();}
+	void setZX33(const double val){zX33=val; StelApp::getInstance().getSettings()->setValue("Skylight/zX33", val); emit zX33Changed(val); computeZenithColor();}
+	void setZX34(const double val){zX34=val; StelApp::getInstance().getSettings()->setValue("Skylight/zX34", val); emit zX34Changed(val); computeZenithColor();}
+	void setZY11(const double val){zY11=val; StelApp::getInstance().getSettings()->setValue("Skylight/zY11", val); emit zY11Changed(val); computeZenithColor();}
+	void setZY12(const double val){zY12=val; StelApp::getInstance().getSettings()->setValue("Skylight/zY12", val); emit zY12Changed(val); computeZenithColor();}
+	void setZY13(const double val){zY13=val; StelApp::getInstance().getSettings()->setValue("Skylight/zY13", val); emit zY13Changed(val); computeZenithColor();}
+	void setZY21(const double val){zY21=val; StelApp::getInstance().getSettings()->setValue("Skylight/zY21", val); emit zY21Changed(val); computeZenithColor();}
+	void setZY22(const double val){zY22=val; StelApp::getInstance().getSettings()->setValue("Skylight/zY22", val); emit zY22Changed(val); computeZenithColor();}
+	void setZY23(const double val){zY23=val; StelApp::getInstance().getSettings()->setValue("Skylight/zY23", val); emit zY23Changed(val); computeZenithColor();}
+	void setZY24(const double val){zY24=val; StelApp::getInstance().getSettings()->setValue("Skylight/zY24", val); emit zY24Changed(val); computeZenithColor();}
+	void setZY31(const double val){zY31=val; StelApp::getInstance().getSettings()->setValue("Skylight/zY31", val); emit zY31Changed(val); computeZenithColor();}
+	void setZY32(const double val){zY32=val; StelApp::getInstance().getSettings()->setValue("Skylight/zY32", val); emit zY32Changed(val); computeZenithColor();}
+	void setZY33(const double val){zY33=val; StelApp::getInstance().getSettings()->setValue("Skylight/zY33", val); emit zY33Changed(val); computeZenithColor();}
+	void setZY34(const double val){zY34=val; StelApp::getInstance().getSettings()->setValue("Skylight/zY34", val); emit zY34Changed(val); computeZenithColor();}
 
 	double getAYt(void) const {return AYt; }
 	double getBYt(void) const {return BYt; }
@@ -400,9 +400,9 @@ private:
 // Return the current zenith color in xyY color system
 inline void Skylight::getZenithColor(float * v) const
 {
-	v[0] = zenithColorX;
-	v[1] = zenithColorY;
-	v[2] = zenithLuminance;
+	v[0] = static_cast<float>(zenithColorX);
+	v[1] = static_cast<float>(zenithColorY);
+	v[2] = static_cast<float>(zenithLuminance);
 }
 
 // Compute CIE luminance for zenith in cd/m^2

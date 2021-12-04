@@ -273,8 +273,8 @@ public slots:
 	//! Return a map of landscape names to landscape IDs (directory names).
 	static QMap<QString,QString> getNameToDirMap();
 
-	// GZ additions... TODO: emit only if value has changed!
-	void setAtmLumFactor(double val){atmLumFactor=val; emit atmLumFactorChanged(val);}
+	// GZ additions
+	void setAtmLumFactor(double val){if (!qFuzzyCompare(val,atmLumFactor)) {atmLumFactor=val; emit atmLumFactorChanged(val);}}
 	double getAtmLumFactor(void) const {return atmLumFactor;}
 
 	//! Retrieve a list of the names of all the available landscapes in
@@ -575,7 +575,7 @@ signals:
 	void flagLandscapeSetsMinimalBrightnessChanged(const bool value);
 	void defaultMinimalBrightnessChanged(const double value);
 	void setFlagEnvironmentAutoEnableChanged(const bool enabled);
-	void atmLumFactorChanged(const float factor);
+	void atmLumFactorChanged(const double factor);
 
 	//! Emitted whenever the default landscape is changed
 	//! @param id the landscape id of the new default landscape

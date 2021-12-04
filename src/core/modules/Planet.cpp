@@ -3376,7 +3376,6 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			core->getSkyDrawer()->drawSunCorona(&sPainter, tmp.toVec3f(), 512.f/192.f*screenSz, haloColorToDraw, alpha*alpha, rotationAngle);
 		}
 	}
-
 }
 
 struct Planet3DModel

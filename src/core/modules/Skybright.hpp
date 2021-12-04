@@ -31,7 +31,6 @@
 //! - B. Schaefer: Archaeoastronomy XV, 2000.
 //!
 //! TASKS TO IMPROVE:
-//!
 //! Some components of the Schaefer model as given in BASIC sourcecode in the 1998 S&T article are strongly simplified. E.g.,
 //! - setDate should be taken always in the Gregorian Calendar, or circumvented altogether:
 //! - RA takes the right ascension of the sun. --> Could be replaced with the proper value!

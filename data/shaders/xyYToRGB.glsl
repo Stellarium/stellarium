@@ -27,7 +27,6 @@ uniform highp float brightnessScale;
 uniform bool doSRGB;
 
 
-// Around 0.17 this file was split into atmosphere.frag and xyYToRGB.glsl. Re-split that after sorting this out.
 vec3 xyYToRGB(highp float x, highp float y, highp float Y)
 {
 	///////////////////////////////////////////////////////////////////////////
