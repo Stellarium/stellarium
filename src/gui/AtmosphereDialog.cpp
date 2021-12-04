@@ -25,7 +25,7 @@
 
 AtmosphereDialog::AtmosphereDialog()
 	: StelDialog("Atmosphere")
-	, skylight(NULL)
+	, skylight(Q_NULLPTR)
 {
 	ui = new Ui_atmosphereDialogForm;
 }
@@ -55,7 +55,7 @@ void AtmosphereDialog::createDialogContent()
 	connectDoubleProperty(ui->extinctionDoubleSpinBox,"StelSkyDrawer.extinctionCoefficient");
 
 	connect(ui->standardAtmosphereButton, SIGNAL(clicked()), this, SLOT(setStandardAtmosphere()));
-	// TODO: after rebase, change the UI elements below to property changing.
+
 	connectDoubleProperty(ui->doubleSpinBox_globalBrightness, "LandscapeMgr.atmLumFactor");
 
 	connectBoolProperty(ui->checkBox_TfromK, "StelSkyDrawer.flagTfromK");
@@ -155,6 +155,7 @@ void AtmosphereDialog::setStandardAtmosphere()
 
 void AtmosphereDialog::setIncrements(int idx)
 {
+	Q_UNUSED(idx)
 	double val=ui->comboBox_skylightDecimals->currentData().toDouble();
 	ui->doubleSpinBox_zX11->setSingleStep(val);
 	ui->doubleSpinBox_zX12->setSingleStep(val);
@@ -215,132 +216,132 @@ void AtmosphereDialog::setIncrements(int idx)
 
 void AtmosphereDialog::resetYPreet()
 {
-	ui->doubleSpinBox_AYT->setValue( 0.1787f);
-	ui->doubleSpinBox_AY ->setValue(-1.4630f);
-	ui->doubleSpinBox_BYT->setValue(-0.3554f);
-	ui->doubleSpinBox_BY ->setValue(+0.4275f);
-	ui->doubleSpinBox_CYT->setValue(-0.0227f);
-	ui->doubleSpinBox_CY ->setValue(+5.3251f);
-	ui->doubleSpinBox_DYT->setValue( 0.1206f);
-	ui->doubleSpinBox_DY ->setValue(-2.5771f);
-	ui->doubleSpinBox_EYT->setValue(-0.0670f);
-	ui->doubleSpinBox_EY ->setValue(+0.3703f);
+	ui->doubleSpinBox_AYT->setValue( 0.1787);
+	ui->doubleSpinBox_AY ->setValue(-1.4630);
+	ui->doubleSpinBox_BYT->setValue(-0.3554);
+	ui->doubleSpinBox_BY ->setValue(+0.4275);
+	ui->doubleSpinBox_CYT->setValue(-0.0227);
+	ui->doubleSpinBox_CY ->setValue(+5.3251);
+	ui->doubleSpinBox_DYT->setValue( 0.1206);
+	ui->doubleSpinBox_DY ->setValue(-2.5771);
+	ui->doubleSpinBox_EYT->setValue(-0.0670);
+	ui->doubleSpinBox_EY ->setValue(+0.3703);
 }
 
 void AtmosphereDialog::resetxPreet()
 {
-	ui->doubleSpinBox_AxT->setValue(-0.0193f);
-	ui->doubleSpinBox_Ax ->setValue(-0.2592f);
-	ui->doubleSpinBox_BxT->setValue(-0.0665f);
-	ui->doubleSpinBox_Bx ->setValue(+0.0008f);
-	ui->doubleSpinBox_CxT->setValue(-0.0004f);
-	ui->doubleSpinBox_Cx ->setValue(+0.2125f);
-	ui->doubleSpinBox_DxT->setValue(-0.0641f);
-	ui->doubleSpinBox_Dx ->setValue(-0.8989f);
-	ui->doubleSpinBox_ExT->setValue(-0.0033f);
-	ui->doubleSpinBox_Ex ->setValue(+0.0452f);
+	ui->doubleSpinBox_AxT->setValue(-0.0193);
+	ui->doubleSpinBox_Ax ->setValue(-0.2592);
+	ui->doubleSpinBox_BxT->setValue(-0.0665);
+	ui->doubleSpinBox_Bx ->setValue(+0.0008);
+	ui->doubleSpinBox_CxT->setValue(-0.0004);
+	ui->doubleSpinBox_Cx ->setValue(+0.2125);
+	ui->doubleSpinBox_DxT->setValue(-0.0641);
+	ui->doubleSpinBox_Dx ->setValue(-0.8989);
+	ui->doubleSpinBox_ExT->setValue(-0.0033);
+	ui->doubleSpinBox_Ex ->setValue(+0.0452);
 }
 
 void AtmosphereDialog::resetyPreet()
 {
-	ui->doubleSpinBox_AyT->setValue(-0.0167f);
-	ui->doubleSpinBox_Ay ->setValue(-0.2608f);
-	ui->doubleSpinBox_ByT->setValue(-0.0950f);
-	ui->doubleSpinBox_By ->setValue(+0.0092f);
-	ui->doubleSpinBox_CyT->setValue(-0.0079f);
-	ui->doubleSpinBox_Cy ->setValue(+0.2102f);
-	ui->doubleSpinBox_DyT->setValue(-0.0441f);
-	ui->doubleSpinBox_Dy ->setValue(-1.6537f);
-	ui->doubleSpinBox_EyT->setValue(-0.0109f);
-	ui->doubleSpinBox_Ey ->setValue(+0.0529f);
+	ui->doubleSpinBox_AyT->setValue(-0.0167);
+	ui->doubleSpinBox_Ay ->setValue(-0.2608);
+	ui->doubleSpinBox_ByT->setValue(-0.0950);
+	ui->doubleSpinBox_By ->setValue(+0.0092);
+	ui->doubleSpinBox_CyT->setValue(-0.0079);
+	ui->doubleSpinBox_Cy ->setValue(+0.2102);
+	ui->doubleSpinBox_DyT->setValue(-0.0441);
+	ui->doubleSpinBox_Dy ->setValue(-1.6537);
+	ui->doubleSpinBox_EyT->setValue(-0.0109);
+	ui->doubleSpinBox_Ey ->setValue(+0.0529);
 }
 
 void AtmosphereDialog::resetYStel()
 {
 	resetYPreet();
-	ui->doubleSpinBox_AYT->setValue( 0.2787f);
-	ui->doubleSpinBox_AY ->setValue(-1.0630f);
-	ui->doubleSpinBox_CY ->setValue(+6.3251f);
+	ui->doubleSpinBox_AYT->setValue( 0.2787);
+	ui->doubleSpinBox_AY ->setValue(-1.0630);
+	ui->doubleSpinBox_CY ->setValue(+6.3251);
 
 }
 
 void AtmosphereDialog::resetxStel()
 {
-	ui->doubleSpinBox_AxT->setValue(-0.0148f);
-	ui->doubleSpinBox_Ax ->setValue(-0.1703f);
-	ui->doubleSpinBox_BxT->setValue(-0.0664f);
-	ui->doubleSpinBox_Bx ->setValue(+0.0011f);
-	ui->doubleSpinBox_CxT->setValue(-0.0005f);
-	ui->doubleSpinBox_Cx ->setValue(+0.2127f);
-	ui->doubleSpinBox_DxT->setValue(-0.0641f);
-	ui->doubleSpinBox_Dx ->setValue(-0.8992f);
-	ui->doubleSpinBox_ExT->setValue(-0.0035f);
-	ui->doubleSpinBox_Ex ->setValue(+0.0453f);
+	ui->doubleSpinBox_AxT->setValue(-0.0148);
+	ui->doubleSpinBox_Ax ->setValue(-0.1703);
+	ui->doubleSpinBox_BxT->setValue(-0.0664);
+	ui->doubleSpinBox_Bx ->setValue(+0.0011);
+	ui->doubleSpinBox_CxT->setValue(-0.0005);
+	ui->doubleSpinBox_Cx ->setValue(+0.2127);
+	ui->doubleSpinBox_DxT->setValue(-0.0641);
+	ui->doubleSpinBox_Dx ->setValue(-0.8992);
+	ui->doubleSpinBox_ExT->setValue(-0.0035);
+	ui->doubleSpinBox_Ex ->setValue(+0.0453);
 }
 
 void AtmosphereDialog::resetyStel()
 {
-	ui->doubleSpinBox_AyT->setValue(-0.0131f);
-	ui->doubleSpinBox_Ay ->setValue(-0.2498f);
-	ui->doubleSpinBox_ByT->setValue(-0.0951f);
-	ui->doubleSpinBox_By ->setValue(+0.0092f);  // ident
-	ui->doubleSpinBox_CyT->setValue(-0.0082f);
-	ui->doubleSpinBox_Cy ->setValue(+0.2404f);
-	ui->doubleSpinBox_DyT->setValue(-0.0438f);
-	ui->doubleSpinBox_Dy ->setValue(-1.0539f);
-	ui->doubleSpinBox_EyT->setValue(-0.0109f); // ident
-	ui->doubleSpinBox_Ey ->setValue(+0.0531f);
+	ui->doubleSpinBox_AyT->setValue(-0.0131);
+	ui->doubleSpinBox_Ay ->setValue(-0.2498);
+	ui->doubleSpinBox_ByT->setValue(-0.0951);
+	ui->doubleSpinBox_By ->setValue(+0.0092); // ident
+	ui->doubleSpinBox_CyT->setValue(-0.0082);
+	ui->doubleSpinBox_Cy ->setValue(+0.2404);
+	ui->doubleSpinBox_DyT->setValue(-0.0438);
+	ui->doubleSpinBox_Dy ->setValue(-1.0539);
+	ui->doubleSpinBox_EyT->setValue(-0.0109); // ident
+	ui->doubleSpinBox_Ey ->setValue(+0.0531);
 }
 
 //void resetZYPreet();
 void AtmosphereDialog::resetZxPreet()
 {
-	ui->doubleSpinBox_zX11->setValue( 0.00166f);
-	ui->doubleSpinBox_zX12->setValue(-0.00375f);
-	ui->doubleSpinBox_zX13->setValue(+0.00209f);
-	ui->doubleSpinBox_zX21->setValue(-0.02903f);
-	ui->doubleSpinBox_zX22->setValue(+0.06377f);
-	ui->doubleSpinBox_zX23->setValue(-0.03202f);
-	ui->doubleSpinBox_zX24->setValue(+0.00394f);
-	ui->doubleSpinBox_zX31->setValue( 0.11693f);
-	ui->doubleSpinBox_zX32->setValue(-0.21196f);
-	ui->doubleSpinBox_zX33->setValue(+0.06052f);
-	ui->doubleSpinBox_zX34->setValue(+0.25886f);
+	ui->doubleSpinBox_zX11->setValue( 0.00166);
+	ui->doubleSpinBox_zX12->setValue(-0.00375);
+	ui->doubleSpinBox_zX13->setValue(+0.00209);
+	ui->doubleSpinBox_zX21->setValue(-0.02903);
+	ui->doubleSpinBox_zX22->setValue(+0.06377);
+	ui->doubleSpinBox_zX23->setValue(-0.03202);
+	ui->doubleSpinBox_zX24->setValue(+0.00394);
+	ui->doubleSpinBox_zX31->setValue( 0.11693);
+	ui->doubleSpinBox_zX32->setValue(-0.21196);
+	ui->doubleSpinBox_zX33->setValue(+0.06052);
+	ui->doubleSpinBox_zX34->setValue(+0.25886);
 }
 
 void AtmosphereDialog::resetZyPreet()
 {
-	ui->doubleSpinBox_zY11->setValue(  0.00275f);
-	ui->doubleSpinBox_zY12->setValue( -0.00610f);
-	ui->doubleSpinBox_zY13->setValue( +0.00317f);
-	ui->doubleSpinBox_zY21->setValue( -0.04214f);
-	ui->doubleSpinBox_zY22->setValue( +0.08970f);
-	ui->doubleSpinBox_zY23->setValue( -0.04153f);
-	ui->doubleSpinBox_zY24->setValue( +0.00516f);
-	ui->doubleSpinBox_zY31->setValue(  0.15346f);
-	ui->doubleSpinBox_zY32->setValue( -0.26756f);
-	ui->doubleSpinBox_zY33->setValue( +0.06670f);
-	ui->doubleSpinBox_zY34->setValue( +0.26688f);
+	ui->doubleSpinBox_zY11->setValue(  0.00275);
+	ui->doubleSpinBox_zY12->setValue( -0.00610);
+	ui->doubleSpinBox_zY13->setValue( +0.00317);
+	ui->doubleSpinBox_zY21->setValue( -0.04214);
+	ui->doubleSpinBox_zY22->setValue( +0.08970);
+	ui->doubleSpinBox_zY23->setValue( -0.04153);
+	ui->doubleSpinBox_zY24->setValue( +0.00516);
+	ui->doubleSpinBox_zY31->setValue(  0.15346);
+	ui->doubleSpinBox_zY32->setValue( -0.26756);
+	ui->doubleSpinBox_zY33->setValue( +0.06670);
+	ui->doubleSpinBox_zY34->setValue( +0.26688);
 }
 //void resetZYStel();
 void AtmosphereDialog::resetZxStel()
 {
 	resetZxPreet();
-	ui->doubleSpinBox_zX11->setValue( 0.00216f); // FC
-	ui->doubleSpinBox_zX31->setValue( 0.10169f); // FC
+	ui->doubleSpinBox_zX11->setValue( 0.00216); // FC
+	ui->doubleSpinBox_zX31->setValue( 0.10169); // FC
 }
 
 void AtmosphereDialog::resetZyStel()
 {
 	resetZyPreet();
-	ui->doubleSpinBox_zY31->setValue(  0.15346f); // FC
+	ui->doubleSpinBox_zY31->setValue(  0.15346); // FC
 }
 
 void AtmosphereDialog::setTfromK(double k)
 {
 	if (ui->checkBox_TfromK->isChecked())
 	{
-		double T=25.f*(k-0.16f)+1.f;
+		double T=25.*(k-0.16)+1.;
 		ui->doubleSpinBox_T->setValue(T);
 		StelSkyDrawer* skyDrawer = StelApp::getInstance().getCore()->getSkyDrawer();
 

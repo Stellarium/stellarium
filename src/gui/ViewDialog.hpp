@@ -75,7 +75,7 @@ public slots:
 
 private slots:
 
-	void setLightPollutionSpinBoxStatus();
+	//void setLightPollutionSpinBoxStatus();
 	// Two new from the unwanted trunk-rework Not sure if we need them at all?
 	void populateLightPollution();
 	void populatePlanetMagnitudeAlgorithmsList();

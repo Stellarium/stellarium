@@ -470,7 +470,7 @@ void LandscapeMgr::draw(StelCore* core)
 		SolarSystem* ssys = GETSTELMODULE(SolarSystem);
 		PlanetP sun=ssys->getSun();
 		QFont font;
-		font.setPixelSize(StelApp::getInstance().getBaseFontSize());
+		font.setPixelSize(StelApp::getInstance().getScreenFontSize());
 		sun->draw(core, 0, font);
 	}
 

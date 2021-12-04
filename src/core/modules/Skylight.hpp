@@ -381,9 +381,9 @@ private:
 
 	bool flagSRGB;             // Apply sRGB color conversion. If false, applies AdobeRGB(1998) (Stellarium's original default)
 
-	float term_x;              // Precomputed term for x calculation
-	float term_y;              // Precomputed term for y calculation
-	float term_Y;              // Precomputed term for luminance calculation. We will actually not use it because luminance comes from SkyBright (Schaefer's model)
+	double term_x;              // Precomputed term for x calculation
+	double term_y;              // Precomputed term for y calculation
+	double term_Y;              // Precomputed term for luminance calculation. We will actually not use it because luminance comes from SkyBright (Schaefer's model)
 
 	float sunPos[3];
 
@@ -408,8 +408,8 @@ inline void Skylight::getZenithColor(float * v) const
 // Compute CIE luminance for zenith in cd/m^2
 inline void Skylight::computeZenithLuminance(void)
 {
-	zenithLuminance = 1000.f * ((4.0453f*T - 4.9710f) * std::tan( (0.4444f - T*(1.f/120.f)) * (M_PIf-2.f*thetas) ) -
-		0.2155f*T + 2.4192f);
+	zenithLuminance = 1000. * ((4.0453*T - 4.9710) * std::tan( (0.4444 - T*(1./120.)) * (M_PI-2.*thetas) ) -
+		0.2155*T + 2.4192);
 	zenithLuminance=qMax(zenithLuminance, 0.00000000001);
 }
 

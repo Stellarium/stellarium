@@ -139,7 +139,7 @@ void Skylight::setParamsv(const float * _sunPos, float _turbidity)
 	// Set the two main variables
 	//thetas = M_PI_2 - std::asin((float)sunPos[2]);
 	// GZ why not directly acos?
-	thetas = std::acos((float)sunPos[2]);
+	thetas = std::acosf(sunPos[2]);
 	T = _turbidity;
 
 	// Precomputation of the distribution coefficients and zenith luminances/color

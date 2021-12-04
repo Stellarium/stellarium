@@ -246,15 +246,6 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 	}
 
 	// Calculate the atmosphere RGB for each point of the grid
-	float sunPos[3];
-	sunPos[0] = _sunPos[0];
-	sunPos[1] = _sunPos[1];
-	sunPos[2] = _sunPos[2];
-
-	float moon_pos[3];
-	moon_pos[0] = moonPos[0];
-	moon_pos[1] = moonPos[1];
-	moon_pos[2] = moonPos[2];
 
 	// GZ: This used a constant Preetham Turbidity of 5 which is already quite hazy.
 	// TODO: We should do something with the k value set in the atmosphere/extinction settings.
