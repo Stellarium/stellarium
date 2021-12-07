@@ -551,6 +551,21 @@ bool StelObjectMgr::findAndSelect(const QString &name, StelModule::StelModuleSel
 		return setSelectedObject(obj, action);
 }
 
+bool StelObjectMgr::findAndSelect(const QString &name, const QString &objtype, StelModule::StelModuleSelectAction action)
+{
+	for (const auto* m : qAsConst(objectsModules))
+	{
+		if (m->getStelObjectType()==objtype)
+		{
+			StelObjectP obj = m->searchByName(name);
+			if (!obj)
+				return false;
+			else
+				return setSelectedObject(obj, action);
+		}
+	}
+	return false;
+}
 
 //! Find and select an object near given equatorial J2000 position
 bool StelObjectMgr::findAndSelect(const StelCore* core, const Vec3d& pos, StelModule::StelModuleSelectAction action)

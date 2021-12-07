@@ -2982,14 +2982,15 @@ void SolarSystem::reloadPlanets()
 	setFlagOrbits(flagOrbits);
 	setFlagNativePlanetNames(flagNative);
 
+	// Restore translations
+	updateI18n();
+
 	if (hasSelection)
 	{
 		// Restore selection...
-		objMgr->setSelectedObject(selectedObject);
+		StelObjectP obj = selectedObject[0];
+		objMgr->findAndSelect(obj->getEnglishName(), obj->getType());
 	}
-
-	// Restore translations
-	updateI18n();
 
 	emit solarSystemDataReloaded();
 }

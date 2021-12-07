@@ -81,6 +81,13 @@ public:
 	//! @return true if a object with the passed name was found
 	bool findAndSelect(const QString &name, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
 
+	//! Find and select an object from its standard program name and object type name.
+	//! @param action define whether to add to, replace, or remove from the existing selection
+	//! @param name the case sensitive object translated name
+	//! @param objtype the type of the object
+	//! @return true if a object with the passed name was found
+	bool findAndSelect(const QString &name, const QString &objtype, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
+
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names.
