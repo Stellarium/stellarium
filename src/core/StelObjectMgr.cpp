@@ -516,6 +516,21 @@ StelObjectP StelObjectMgr::searchByName(const QString &name) const
 	return rval;
 }
 
+StelObjectP StelObjectMgr::searchByName(const QString &name, const QString &objType) const
+{
+	StelObjectP rval;
+	for (const auto* m : objectsModules)
+	{
+		if (m->getStelObjectType()==objType)
+		{
+			rval = m->searchByName(name);
+			if (rval)
+				return rval;
+		}
+	}
+	return rval;
+}
+
 StelObjectP StelObjectMgr::searchByID(const QString &type, const QString &id) const
 {
 	auto it = typeToModuleMap.constFind(type);
@@ -553,18 +568,12 @@ bool StelObjectMgr::findAndSelect(const QString &name, StelModule::StelModuleSel
 
 bool StelObjectMgr::findAndSelect(const QString &name, const QString &objtype, StelModule::StelModuleSelectAction action)
 {
-	for (const auto* m : qAsConst(objectsModules))
-	{
-		if (m->getStelObjectType()==objtype)
-		{
-			StelObjectP obj = m->searchByName(name);
-			if (!obj)
-				return false;
-			else
-				return setSelectedObject(obj, action);
-		}
-	}
-	return false;
+	// Then look for another object
+	StelObjectP obj = searchByName(name, objtype);
+	if (!obj)
+		return false;
+	else
+		return setSelectedObject(obj, action);
 }
 
 //! Find and select an object near given equatorial J2000 position

@@ -134,6 +134,9 @@ public:
 	//! Find any kind of object by its standard program name.
 	StelObjectP searchByName(const QString &name) const;
 
+	//! Find any kind of object by its standard program name and its object type name.
+	StelObjectP searchByName(const QString &name, const QString &objType) const;
+
 	//! Find an object of the given type and ID
 	//! @param type the type of the object as given by StelObject::getType()
 	//! @param id the ID of the object as given by StelObject::getID()
