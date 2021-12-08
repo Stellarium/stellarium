@@ -83,6 +83,10 @@ class StelMovementMgr : public StelModule
 		   READ getFlagEnableMouseNavigation
 		   WRITE setFlagEnableMouseNavigation
 		   NOTIFY flagEnableMouseNavigationChanged)
+	Q_PROPERTY(bool flagEnableMouseZooming
+		   READ getFlagEnableMouseZooming
+		   WRITE setFlagEnableMouseZooming
+		   NOTIFY flagEnableMouseZoomingChanged)
 	Q_PROPERTY(bool flagEnableMoveKeys
 		   READ getFlagEnableMoveKeys
 		   WRITE setFlagEnableMoveKeys
@@ -224,6 +228,11 @@ public slots:
 	bool getFlagEnableMouseNavigation() const {return flagEnableMouseNavigation;}
 	//! Set whether mouse can control movement
 	void setFlagEnableMouseNavigation(bool b) {flagEnableMouseNavigation=b; emit flagEnableMouseNavigationChanged(b); }
+
+	//! Get whether mouse can control zooming
+	bool getFlagEnableMouseZooming() const {return flagEnableMouseZooming;}
+	//! Set whether mouse can control zooming
+	void setFlagEnableMouseZooming(bool b) {flagEnableMouseZooming=b; emit flagEnableMouseZoomingChanged(b); }
 
 	//! Get the state of flag for indication of mount mode
 	bool getFlagIndicationMountMode() const {return flagIndicationMountMode;}
@@ -448,6 +457,7 @@ signals:
 	void viewportHorizontalOffsetTargetChanged(double f);
 	void viewportVerticalOffsetTargetChanged(double f);
 	void flagEnableMouseNavigationChanged(bool b);
+	void flagEnableMouseZoomingChanged(bool b);
 	void flagEnableMoveKeysChanged(bool b);
 	void flagEnableZoomKeysChanged(bool b);
 	void userMaxFovChanged(double fov);
@@ -497,6 +507,7 @@ private:
 
 	bool flagEnableMoveAtScreenEdge; // allow mouse at edge of screen to move view
 	bool flagEnableMouseNavigation;
+	bool flagEnableMouseZooming;
 	double mouseZoomSpeed;
 
 	bool flagEnableZoomKeys;
