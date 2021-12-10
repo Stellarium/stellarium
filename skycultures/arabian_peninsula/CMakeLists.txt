@@ -8,5 +8,5 @@ INSTALL(FILES info.ini DESTINATION ${SDATALOC}/skycultures/arabian_peninsula )
 INSTALL(DIRECTORY ./ DESTINATION ${SDATALOC}/skycultures/arabian_peninsula
 	FILES_MATCHING PATTERN "*.fab" 
 	PATTERN "description.*.utf8"
-	PATTERN "*.png"
+	PATTERN "*.jpg"
 	PATTERN "CMakeFiles" EXCLUDE )
