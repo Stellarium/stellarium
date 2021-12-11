@@ -17,17 +17,17 @@
 |	CON2801	|	الذراع	|	al-Dhraʿ	|	The Arm	|	The two stars of Canis Minor, the arm of the lion (5th mansion of the Moon).	|	2	|
 |	CON4501	|	الكليبين	|	al-Klaibain	|	The Two Little Dogs	|	An asterism of the two stars: δ CMa and ε CMa. There heliacal rising is used for timing (same time as the 6th mansion of the Moon). The name is common in central Arabia.	|	2,3	|
 |	CON2803	|	النثرة	|	al-Nathrah	|	The Nostrils	|	M 44 and two adjacent stars representing the nose tip of the Arab lion (6th mansion of the Moon).	|	2	|
-|	CON2804	|	الطرف	|	al-Ṭarf	|	The Eyes	|	Eyes of the lion (7th mansion of the Moon)).	|	2	|
-|	CON2805	|	الجبهة	|	al-Ǧabhah	|	The Forehead	|	Forhead of the lion (8th mansion of the Moon).	|	2	|
+|	CON2804	|	الطرف	|	al-Ṭarf	|	The Eyes	|	Eyes of the lion (7th mansion of the Moon).	|	2	|
+|	CON2805	|	الجبهة	|	al-Ǧabhah	|	The Forehead	|	Forehead of the lion (8th mansion of the Moon).	|	2	|
 |	CON2806	|	الزبرة	|	al-Zubrah	|	The Mane	|	Mane of the lion (9th mansion of the Moon).	|	2	|
 |	CON2808	|	العوا	|	al-ʿAwwā	|	The Bend	|	an arc of 5 stars. The arabic al-ʿAwwā could mean also the Howlers, dogs barking at the lion (11th mansion of the Moon).	|	2	|
 |	CON2810	|	الغفر	|	al-Ġafr	|	The Cover	|	Three star asterism (13th mansion of the Moon)	|	2	|
 |	CON2901	|	الزبانى	|	al-Zubānā	|	Claws Of The Scorpion	|	The two bright stars of Libra (14th mansion of the Moon).	|	2	|
-|	CON2902	|	الإكليل	|	al-Iklīl	|	The Diadem	|	The arc of the three stars on the forhead of Scorpius (15th mansion of the Moon).	|	2	|
+|	CON2902	|	الإكليل	|	al-Iklīl	|	The Diadem	|	The arc of the three stars on the forehead of Scorpius (15th mansion of the Moon).	|	2	|
 |	CON2906	|	الشولة	|	al-Šawlah	|	Raised Tail Of The Scorpion	|	The sting of Scorpius (17th mansion of the Moon).	|	2	|
 |	CON2999	|	العقرب	|	aal-ʿAqrab	|	The Scorpion	|	The scorpion image	|	2	|
 |	CON3005	|	البلدة	|	al-Baldah	|	The Empty Place	|	An area with no bright stars in Sagittarius (19th mansion of the Moon).	|	2	|
-|	CON3099	|	النعايم	|	al-Naʿāyem	|	The Ostriches	|	Four stars in the milky way representing four ostriches drinking at the river and another four away from the milky way representing four ostriches returning from the river. A nineth star between and above the two groups is included. All the stars are in the Sagittarius constellation (18th mansion of the Moon).	|	2	|
+|	CON3099	|	النعايم	|	al-Naʿāyem	|	The Ostriches	|	Four stars in the milky way representing four ostriches drinking at the river and another four away from the milky way representing four ostriches returning from the river. A ninth star between and above the two groups is included. All the stars are in the Sagittarius constellation (18th mansion of the Moon).	|	2	|
 |	CON3199	|	سعد الذابح	|	Saʿd al-Dhabiḥ	|	The Lucky Star Of The Slaughterer	|	Ancient Arab asterism representing a man slaughtering a sheep (20th mansion of the Moon).	|	2	|
 |	CON3299	|	سعد بلع	|	Saʿd bulaʿ	|	The Lucky Star Of The Swallower	|	Ancient Arab asterism representing a man swallowing a bite (21th mansion of the Moon).	|	2	|
 |	CON3399	|	سعد السعود	|	Saʿd al-suʿūd	|	The Luckiest Of The Lucky Stars	|	Ancient Arab asterism three stars that rises in the morning in the spring (22nd mansion of the Moon).	|	2	|
@@ -38,7 +38,7 @@
 |	CON4213	|	زوابن الجوزا	|	Zawābin al-Ǧawzā	|	Claws Of Al-Jawza	|	Names of the stars: α, γ, β, and κ Ori, orally communicated from the Qasseem region of Saudi Arabia.	|	1	|
 |	CON4213	|	الزبَّن	|	al-Zibban	|	Claws Of Al-Jawza	|	Names of the stars: α, γ, β, and κ Ori, orally communicated from the Qasseem region of Saudi Arabia.	|	1	|
 |	CON2650	|	مسجد الثريا	|	Masǧid al-Thrayyā	|	Mosque Of Al-Thurayya	|	A triangle of stars that rise before al-Thurayya (The Pleiades). It is composed of the three stars: α Ari, α Tri, and β Tri. The source of this name is oral tradition in the region of Wadi al-Dawasir in southwestern Saudi Arabia.	|	1	|
-|	CON4299	|	الجوزا	|	al-Ǧawā	|	Al-Jawza	|	AlJawza is a proper name for a woman. this constellation is a woman shape for the Orion stars. It is the same as that of ancient Arabs. Some oral traditions will give the name to only the three stars of Orion belt.	|	2,3	|
+|	CON4299	|	الجوزا	|	al-Ǧawā	|	Al-Jawza	|	Al-Jawza is a proper name for a woman. this constellation is a woman shape for the Orion stars. It is the same as that of ancient Arabs. Some oral traditions will give the name to only the three stars of Orion belt.	|	2,3	|
 |	Planets	|	|	|	|	|	|
 |	Venus	|	نجمة الصبح	|	Naǧmat al-ṣibḥ	|	Morning Star	|	A name for Venus when it sets after the Sun.	|	1	|
 |	Venus	|	نجمة االعشا	|	Naǧmat al-ʿŠā	|	Evening Star	|	A name for Venus when it rises before the Sun.	|	1	|
@@ -64,7 +64,7 @@
 |	HIP65378	|	السات	|	al-Satt	|	The Sixth	|	The star ζ UMa, sixth to rise of the seven stars of the Big Dipper.	|	5	|
 |	HIP67301	|	السويبع	|	al-Swaibiʿ	|	The Seventh	|	The star η UMa, seventh to rise of the seven stars of the Big Dipper.	|	7	|
 |	HIP69673	|	الرقيب	|	al-Reqīb	|	The Watcher	|	The star α Boo. The source of this name is in the tradition of Ḥayel region.	|	6	|
-|	HIP69673	|	الاحيمر	|	al-Iḥaimir	|	The Reddish One	|	The star α Boo. The source of this name is in the traditions of sea farers and fishers of the west and east costs of the Arabian Peninsula.	|	1	|
+|	HIP69673	|	الاحيمر	|	al-Iḥaimir	|	The Reddish One	|	The star α Boo. The source of this name is in the traditions of seafarers and fishers of the west and east costs of the Arabian Peninsula.	|	1	|
 |	HIP91262	|	النسر المكتف	|	al-Nasr al-Mkattaf	|	The Closed Wings Eagle	|	The star α Lyr (Vega), named because the two stars: ζ Lyr and ε Lyr forms the closed wings. Source is Ḥayel region.	|	1	|
 |	HIP24608	|	المباري	|	al-Mbarī	|	The Parallel One	|	The star Capella, parallels al-Thurayya (The Pleiades)	|	8	|
 |	HIP24608	|	الجنيب	|	al-Ǧinīb	|	The Sided One	|	The star Capella, on the far side of al-Thurayya (The Pleiades)	|	1	|

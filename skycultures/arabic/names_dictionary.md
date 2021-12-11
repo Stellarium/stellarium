@@ -65,7 +65,7 @@
 |	CON2802	|	الذراع المبسوطة	|	al-Ḏiraʿ al-mabsūṭah	|	The extended arm	|	The two heads of the twins are the extended arm of the lion.	|	1,2,3,4	|
 |	CON2803	|	النثرة	|	al-Naṯrah	|	The nostrils	|	M 44 and two adjacent stars representing the nose tip of the graet Arab lion.	|	1,2,3,4	|
 |	CON2804	|	الطرف	|	al-Ṭarf	|	The eyes	|	Eyes of the lion	|	1,2,3,4	|
-|	CON2805	|	الجبهة	|	al-Ǧabhah	|	The forehead	|	Forhead of the lion	|	1,2,3,4	|
+|	CON2805	|	الجبهة	|	al-Ǧabhah	|	The forehead	|	Forehead of the lion	|	1,2,3,4	|
 |	CON2806	|	الزبرة	|	al-Zubrah	|	The mane	|	Mane of the lion	|	1,2,3,4	|
 |	CON2808	|	العوا	|	al-ʿAwwā	|	The bend	|	an arc of 5 stars. The arabic al-ʿAwwā could mean also the Howlers, dogs barking at the lion.	|	1,2,3,4	|
 |	CON2810	|	الغفر	|	al-Ġafr	|	The cover	|	Three star asterism, The 15th mansion of the moon. It was also said that the name al-Ġafr is from al-ġufrah which is the hair at the end of the lion's tail.	|	1,2,3,4	|
