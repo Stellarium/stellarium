@@ -1124,7 +1124,7 @@ QString StelObject::getSolarLunarInfoString(const StelCore *core, const InfoStri
 		oss << QString("<tr><td>%1:</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td></tr>").arg(SolarAzAlt, azStr, altStr);
 	    }
 	    else
-		oss << QString("%1: %2/%3 %4<br/>").arg(SolarAzAlt, azStr, altStr);
+		oss << QString("%1: %2/%3<br/>").arg(SolarAzAlt, azStr, altStr);
 	}
 	if (getEnglishName()!="Moon")
 	{
@@ -1142,7 +1142,7 @@ QString StelObject::getSolarLunarInfoString(const StelCore *core, const InfoStri
 		oss << QString("<tr><td>%1:</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td></tr>").arg(LunarAzAlt, azStr, altStr);
 	    }
 	    else
-		oss << QString("%1: %2/%3 %4<br/>").arg(LunarAzAlt, azStr, altStr);
+		oss << QString("%1: %2/%3<br/>").arg(LunarAzAlt, azStr, altStr);
 	}
 	if (withTables)
 	    oss << "</table>";
