@@ -15,7 +15,7 @@
 |	CON2603	|	البطين	|	al-Bṭain	|	The Little Abdomen	|	The little abdomen of al-Ḥamal (28th mansion of the Moon).	|	2	|
 |	CON2604	|	الثريا	|	al-Thrayyā	|	Al-Thurayya	|	al-Thurayyā is a proper name of the Pleiades (first mansion of the Moon).	|	3	|
 |	CON2801	|	الذراع	|	al-Dhraʿ	|	The Arm	|	The two stars of Canis Minor, the arm of the lion (5th mansion of the Moon).	|	2	|
-|	CON4501	|	الكليبين	|	al-Klaibain	|	The Two Little Dogs	|	An asterism of the two stars: δ CMa and ε CMa. There heliacal rising is used for timing (same time as the 6th mansion of the Moon). The name is common in central Arabia.	|	2,3	|
+|	CON4501	|	الكليبين	|	al-Klaibain	|	The Two Little Dogs	|	An asterism of the two stars: δ CMa and ε CMa. Their heliacal rising is used for timing (same time as the 6th mansion of the Moon). The name is common in central Arabia.	|	2,3	|
 |	CON2803	|	النثرة	|	al-Nathrah	|	The Nostrils	|	M 44 and two adjacent stars representing the nose tip of the Arab lion (6th mansion of the Moon).	|	2	|
 |	CON2804	|	الطرف	|	al-Ṭarf	|	The Eyes	|	Eyes of the lion (7th mansion of the Moon).	|	2	|
 |	CON2805	|	الجبهة	|	al-Ǧabhah	|	The Forehead	|	Forehead of the lion (8th mansion of the Moon).	|	2	|
