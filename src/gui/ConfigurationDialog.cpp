@@ -262,6 +262,7 @@ void ConfigurationDialog::createDialogContent()
 	ui->editShortcutsPushButton->setEnabled(state);
 	connect(ui->enableKeysNavigationCheckBox, SIGNAL(toggled(bool)), this, SLOT(setKeyNavigationState(bool)));
 	connectBoolProperty(ui->enableMouseNavigationCheckBox,  "StelMovementMgr.flagEnableMouseNavigation");
+	connectBoolProperty(ui->enableMouseZoomingCheckBox,  "StelMovementMgr.flagEnableMouseZooming");
 
 	connect(ui->fixedDateTimeCurrentButton, SIGNAL(clicked()), this, SLOT(setFixedDateTimeToCurrent()));
 	connect(ui->editShortcutsPushButton, SIGNAL(clicked()), this, SLOT(showShortcutsWindow()));
@@ -1111,6 +1112,7 @@ void ConfigurationDialog::saveAllSettings()
 	// configuration dialog / navigation tab
 	conf->setValue("navigation/flag_enable_zoom_keys",		mvmgr->getFlagEnableZoomKeys());
 	conf->setValue("navigation/flag_enable_mouse_navigation",	mvmgr->getFlagEnableMouseNavigation());
+	conf->setValue("navigation/flag_enable_mouse_zooming",		mvmgr->getFlagEnableMouseZooming());
 	conf->setValue("navigation/flag_enable_move_keys",		mvmgr->getFlagEnableMoveKeys());
 	conf->setValue("navigation/startup_time_mode",			core->getStartupTimeMode());
 	conf->setValue("navigation/today_time",				core->getInitTodayTime());

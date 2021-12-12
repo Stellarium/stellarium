@@ -2265,7 +2265,7 @@ void Oculars::unzoomOcular()
 	skyDrawer->setCustomPlanetMagnitudeLimit(magLimitPlanetsMain);
 	skyDrawer->setCustomNebulaMagnitudeLimit(magLimitDSOsMain);
 	movementManager->setFlagEnableZoomKeys(true);
-	movementManager->setFlagEnableMouseNavigation(true);
+	movementManager->setFlagEnableMouseZooming(true);
 
 	GETSTELMODULE(SolarSystem)->setFlagMoonScale(flagMoonScaleMain);
 	GETSTELMODULE(SolarSystem)->setFlagMinorBodyScale(flagMinorBodiesScaleMain);
@@ -2397,7 +2397,7 @@ void Oculars::zoomOcular()
 
 	movementManager->setFlagTracking(true);
 	movementManager->setFlagEnableZoomKeys(false);
-	movementManager->setFlagEnableMouseNavigation(false);
+	movementManager->setFlagEnableMouseZooming(false);
 	
 	// We won't always have a selected object
 	if (StelApp::getInstance().getStelObjectMgr().getWasSelected())
