@@ -232,7 +232,9 @@ bool SkyMarker::draw(StelCore* core, StelPainter& sPainter)
 	}
 
 	Vec3d xyPos;
-	sPainter.getProjector()->project(point, xyPos);
+	// Compute 2D pos and return if outside screen
+	if (!sPainter.getProjector()->project(point, xyPos))
+		return false;
 
 	markerTexture->bind();
 
