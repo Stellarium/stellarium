@@ -97,16 +97,15 @@ void NomenclatureMgr::loadSpecialNomenclature()
 	for (const auto& p: ss)
 	{
 		double size = p->getPolarRadius()*AU*0.75; // 75% of polar radius
-		NomenclatureItemP nomNP = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("North pole"), "", ntype, 90., 0., size));
+		NomenclatureItemP nomNP = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("North Pole"), "", ntype, 90., 0., size));
 		if (!nomNP.isNull())
 			nomenclatureItems.insert(p, nomNP);
 		featureId++;
-		NomenclatureItemP nomSP = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("South pole"), "", ntype, -90., 0., size));
+		NomenclatureItemP nomSP = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("South Pole"), "", ntype, -90., 0., size));
 		if (!nomSP.isNull())
 			nomenclatureItems.insert(p, nomSP);
 		featureId++;
 	}
-
 }
 
 void NomenclatureMgr::loadNomenclature()
