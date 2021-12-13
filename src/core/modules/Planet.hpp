@@ -361,6 +361,14 @@ public:
 	//! This requires both flavours of JD in cases involving Earth.
 	void computeTransMatrix(double JD, double JDE);
 
+	//! Retrieve planetocentric rectangular coordinates of a location on the ellipsoid surface, or with altitude altMetres above the ellipsoid surface.
+	//! Meeus, Astr. Alg. 2nd ed, Ch.11.
+	//! @param longDeg longitude of location, degrees. (currently unused. Set to 0.)
+	//! @param latDeg planetographic latitude, degrees.
+	//! @param altMetres altitude above ellipsoid surface (metres)
+	//! @return [rhoCosPhiPrime*a, rhoSinPhiPrime*a, phiPrime, rho*a] where a=equatorial radius
+	Vec4d getRectangularCoordinates(const double longDeg, const double latDeg, const double altMetres=0.) const;
+
 	//! Get the phase angle (radians) for an observer at pos obsPos in heliocentric coordinates (in AU)
 	double getPhaseAngle(const Vec3d& obsPos) const;
 	//! Get the elongation angle (radians) for an observer at pos obsPos in heliocentric coordinates (in AU)

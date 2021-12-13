@@ -1691,6 +1691,33 @@ void Planet::computeTransMatrix(double JD, double JDE)
 	//addToExtraInfoString(DebugAid, debugAid);
 }
 
+// Retrieve planetocentric rectangular coordinates of a location on the ellipsoid surface
+// Meeus, Astr. Alg. 2nd ed, Ch.11.
+// @return [rhoCosPhiPrime*a, rhoSinPhiPrime*a, phiPrime, rho*a] where a=equatorial radius
+Vec4d Planet::getRectangularCoordinates(const double longDeg, const double latDeg, const double altMetres) const
+{
+	// We may extend the use of this method later.
+	Q_UNUSED(longDeg)
+	const double a = getEquatorialRadius();
+	const double bByA = getOneMinusOblateness(); // b/a;
+
+	// See some previous issues at https://github.com/Stellarium/stellarium/issues/391
+	const double latRad=latDeg*M_PI_180;
+	const double u = atan( bByA * tan(latRad));
+	//qDebug() << "getTopographicOffsetFromCenter: a=" << a*AU << "b/a=" << bByA << "b=" << bByA*a *AU  << "latRad=" << latRad << "u=" << u;
+	// This may fail & crash if on SpaceshipObserver on the way to the Sun (?) --> add test bByA==1
+	Q_ASSERT((bByA==1.) || (fabs(u)<= fabs(latRad)));
+	const double altFix = altMetres/(1000.0*AU*a);
+
+	const double rhoSinPhiPrime= bByA * sin(u) + altFix*sin(latRad);
+	const double rhoCosPhiPrime=        cos(u) + altFix*cos(latRad);
+
+	const double rho = sqrt(rhoSinPhiPrime*rhoSinPhiPrime+rhoCosPhiPrime*rhoCosPhiPrime);
+	double phiPrime=asin(rhoSinPhiPrime/rho);
+	return Vec4d(rhoCosPhiPrime*a, rhoSinPhiPrime*a, phiPrime, rho*a);
+}
+
+
 Mat4d Planet::getRotEquatorialToVsop87(void) const
 {
 	Mat4d rval = rotLocalToParent;

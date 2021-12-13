@@ -165,7 +165,7 @@ protected:
 	static void createNameLists();
 
 private:
-	Vec3d XYZpc;                         // holds planetocentric position (from longitude/latitude)
+	Vec3d XYZpc;                         // holds planetocentric direction vector (unit length, from longitude/latitude)
 	mutable Vec3d XYZ;                   // holds J2000 position
 	mutable double jde;                  // jde time of XYZ value
 	static Vec3f color;

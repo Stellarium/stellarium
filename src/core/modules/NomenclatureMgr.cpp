@@ -254,8 +254,7 @@ void NomenclatureMgr::draw(StelCore* core)
 
 	for (const auto& p : nomenclatureItems.uniqueKeys())
 	{
-		// Early exit if the planet is not visible or too small to render the
-		// labels.
+		// Early exit if the planet is not visible or too small to render the labels.
 		const Vec3d equPos = p->getJ2000EquatorialPos(core);
 		const double r = p->getEquatorialRadius() * static_cast<double>(p->getSphereScale());
 		double angularSize = atan2(r, equPos.length());
