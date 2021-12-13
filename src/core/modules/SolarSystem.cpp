@@ -972,6 +972,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 						    osculatingFunc, // should be Q_NULLPTR
 						    closeOrbit,
 						    hidden,
+						    pd.value(secname+"/halo", true).toBool(),
 						    type));
 			QSharedPointer<MinorPlanet> mp =  newP.dynamicCast<MinorPlanet>();
 			//Number, Provisional designation

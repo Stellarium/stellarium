@@ -55,6 +55,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	flagForcedTwinkle(false),
 	twinkleAmount(0.0),
 	flagDrawBigStarHalo(true),
+	flagDrawPlanetHalo(true),
 	flagStarSpiky(false),
 	flagStarMagnitudeLimit(false),
 	flagNebulaMagnitudeLimit(false),
@@ -99,6 +100,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	setCustomPlanetMagnitudeLimit(conf->value("astro/planet_magnitude_limit", 6.5).toDouble());
 	setFlagNebulaMagnitudeLimit((conf->value("astro/flag_nebula_magnitude_limit", false).toBool()));
 	setCustomNebulaMagnitudeLimit(conf->value("astro/nebula_magnitude_limit", 8.5).toDouble());
+	setFlagDrawPlanetHalo(conf->value("astro/flag_planet_halo",true).toBool());
 
 	setBortleScaleIndex(conf->value("stars/init_bortle_scale", 3).toInt());
 	setRelativeStarScale(conf->value("stars/relative_scale", 1.0).toDouble());
@@ -535,11 +537,11 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 	}
 
 	// Fade the halo away when the disk is too big
-	if (pixRadius>=tStop)
+	if (!flagDrawPlanetHalo || pixRadius>=tStop)
 	{
 		rcm.luminance=0.f;
 	}
-	if (pixRadius>tStart && pixRadius<tStop)
+	if (flagDrawPlanetHalo && pixRadius>tStart && pixRadius<tStop)
 	{
 		rcm.luminance=(tStop-pixRadius)/(tStop-tStart);
 	}

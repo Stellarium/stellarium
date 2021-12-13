@@ -52,6 +52,7 @@ public:
 		    OsculatingFunctType *osculatingFunc,
 		    bool closeOrbit,
 		    bool hidden,
+		    bool hasHalo,
 		    const QString &pTypeStr);
 
 	~MinorPlanet() Q_DECL_OVERRIDE;

@@ -56,6 +56,7 @@ class StelSkyDrawer : public QObject, protected QOpenGLFunctions
 	Q_PROPERTY(bool flagStarTwinkle READ getFlagTwinkle WRITE setFlagTwinkle NOTIFY flagTwinkleChanged)
 	Q_PROPERTY(int bortleScaleIndex READ getBortleScaleIndex WRITE setBortleScaleIndex NOTIFY bortleScaleIndexChanged)
 	Q_PROPERTY(bool flagDrawBigStarHalo READ getFlagDrawBigStarHalo WRITE setFlagDrawBigStarHalo NOTIFY flagDrawBigStarHaloChanged)
+	Q_PROPERTY(bool flagDrawPlanetHalo READ getFlagDrawPlanetHalo WRITE setFlagDrawPlanetHalo NOTIFY flagDrawPlanetHaloChanged)
 	Q_PROPERTY(bool flagStarSpiky READ getFlagStarSpiky WRITE setFlagStarSpiky NOTIFY flagStarSpikyChanged)
 
 	Q_PROPERTY(bool flagStarMagnitudeLimit READ getFlagStarMagnitudeLimit WRITE setFlagStarMagnitudeLimit NOTIFY flagStarMagnitudeLimitChanged)
@@ -222,6 +223,10 @@ public slots:
 	void setFlagDrawBigStarHalo(bool b) {if(b!=flagDrawBigStarHalo){ flagDrawBigStarHalo=b; emit flagDrawBigStarHaloChanged(b);}}
 	//! Get flag for drawing a halo around bright stars.
 	bool getFlagDrawBigStarHalo() const {return flagDrawBigStarHalo;}
+	//! Set flag for drawing a halo around planets.
+	void setFlagDrawPlanetHalo(bool b) {if(b!=flagDrawPlanetHalo){ flagDrawPlanetHalo=b; emit flagDrawPlanetHaloChanged(b);}}
+	//! Get flag for drawing a halo around planets.
+	bool getFlagDrawPlanetHalo() const {return flagDrawPlanetHalo;}
 
 	//! Set flag to draw stars with rays
 	void setFlagStarSpiky(bool b);
@@ -326,6 +331,8 @@ signals:
 	void bortleScaleIndexChanged(int index);
 	//! Emitted when flag to draw big halo around stars changed
 	void flagDrawBigStarHaloChanged(bool b);
+	//! Emitted whenever the draw planet halo flag is toggled
+	void flagDrawPlanetHaloChanged(bool b);
 	//! Emitted on change of star texture
 	void flagStarSpikyChanged(bool b);
 
@@ -413,6 +420,7 @@ private:
 	bool flagForcedTwinkle;
 	double twinkleAmount;
 	bool flagDrawBigStarHalo;
+	bool flagDrawPlanetHalo;
 	bool flagStarSpiky;
 
 	//! Informing the drawer whether atmosphere is displayed.

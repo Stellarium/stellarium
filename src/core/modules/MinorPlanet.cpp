@@ -52,6 +52,7 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 			 OsculatingFunctType *osculatingFunc,
 			 bool acloseOrbit,
 			 bool hidden,
+			 bool hasHalo,
 			 const QString &pTypeStr)
 	: Planet (englishName,
 		  radius,
@@ -68,7 +69,7 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 		  acloseOrbit,
 		  hidden,
 		  false, //No atmosphere
-		  true,  //Halo
+		  hasHalo,
 		  pTypeStr),
 	minorPlanetNumber(0),
 	slopeParameter(-10.0f), // -10 == mark as uninitialized: used in getVMagnitude()
