@@ -68,6 +68,7 @@ QString NomenclatureItem::getNomenclatureTypeString(NomenclatureItemType nType)
 QString NomenclatureItem::getNomenclatureTypeLatinString(NomenclatureItemType nType)
 {
 	static const QMap<NomenclatureItemType, QString>map = {
+		{ niPole   , "pole" },
 		{ niArcus  , "arcus" },
 		{ niAstrum , "astrum" },
 		{ niCatena , "catena" },
@@ -192,6 +193,7 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 {
 	QString str;
 	QTextStream oss(&str);
+	NomenclatureItem::NomenclatureItemType niType = getNomenclatureType();
 
 	if (flags&Name)
 	{
@@ -202,35 +204,35 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 		oss << "</h2>";
 	}
 
-	if (flags&ObjectType && getNomenclatureType()!=NomenclatureItem::niUNDEFINED)
+	if (flags&ObjectType && niType!=NomenclatureItem::niUNDEFINED)
 	{
 		QString tstr  = getNomenclatureTypeString(nType);
 		QString latin = getNomenclatureTypeLatinString(nType); // not always latin!
 		QString ts    = q_("Type");
 		if (tstr!=latin && !latin.isEmpty())
-			oss << QString("%1: <b>%2</b> (%3: %4)<br/>").arg(ts).arg(tstr).arg(q_("geologic term")).arg(latin);
+			oss << QString("%1: <b>%2</b> (%3: %4)<br/>").arg(ts, tstr, q_("geologic term"), latin);
 		else
-			oss << QString("%1: <b>%2</b><br/>").arg(ts).arg(tstr);
+			oss << QString("%1: <b>%2</b><br/>").arg(ts, tstr);
 	}
 
 	// Ra/Dec etc.
 	oss << getCommonInfoString(core, flags);
 
-	if (flags&Size && size>0.)
+	if (flags&Size && size>0. && nType!=NomenclatureItem::niPole)
 	{
 		QString sz = q_("Linear size");
 		// Satellite Features are almost(?) exclusively lettered craters, and all are on the Moon. Assume craters.
-		if ((getNomenclatureType()==NomenclatureItem::niCrater) || (getNomenclatureType()==NomenclatureItem::niSatelliteFeature))
+		if ((niType==NomenclatureItem::niCrater) || (niType==NomenclatureItem::niSatelliteFeature))
 			sz = q_("Diameter");
 		oss << QString("%1: %2 %3<br/>").arg(sz).arg(QString::number(size, 'f', 2)).arg(qc_("km", "distance"));
 	}
 
-	if (flags&Extra)
+	if (flags&Extra && niType!=NomenclatureItem::niPole)
 	{
 		oss << QString("%1: %2/%3<br/>").arg(q_("Planetographic long./lat.")).arg(StelUtils::decDegToDmsStr(longitude)).arg(StelUtils::decDegToDmsStr(latitude));
 		oss << QString("%1: %2<br/>").arg(q_("Celestial body")).arg(planet->getNameI18n());
 		QString description = getNomenclatureTypeDescription(nType, planet->getEnglishName());
-		if (getNomenclatureType()!=NomenclatureItem::niUNDEFINED && !description.isEmpty())
+		if (niType!=NomenclatureItem::niUNDEFINED && !description.isEmpty())
 			oss << QString("%1: %2<br/>").arg(q_("Landform description"), description);
 		oss << QString("%1: %2°<br/>").arg(q_("Solar altitude")).arg(QString::number(getSolarAltitude(core), 'f', 1));
 	}
@@ -250,7 +252,9 @@ Vec3d NomenclatureItem::getJ2000EquatorialPos(const StelCore* core) const
 	jde = core->getJDE();
 	const Vec3d equPos = planet->getJ2000EquatorialPos(core);
 	// Calculate the radius of the planet. It is necessary to re-scale it
-	const double r = planet->getEquatorialRadius() * static_cast<double>(planet->getSphereScale());
+	double r = planet->getEquatorialRadius() * static_cast<double>(planet->getSphereScale());
+	if (nType==NomenclatureItem::niPole)
+		r = planet->getPolarRadius() * static_cast<double>(planet->getSphereScale());
 
 	Vec3d XYZ0;
 //	// For now, assume spherical planets, simply scale by radius.
@@ -310,9 +314,12 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 
 	// check visibility of feature
 	Vec3d srcPos;
-	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (equPos.length() >= XYZ.length()) && (screenSize>50. && screenSize<750.))
+	NomenclatureItem::NomenclatureItemType niType = getNomenclatureType();
+	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (equPos.length() >= XYZ.length()) && (niType==NomenclatureItem::niPole || (screenSize>50. && screenSize<750.)))
 	{
 		float brightness=(getSolarAltitude(core)<0. ? 0.25f : 1.0f);
+		if (niType==NomenclatureItem::niPole)
+			brightness = 0.5f;
 		painter->setColor(color*brightness, 1.0f);
 		painter->drawCircle(static_cast<float>(srcPos[0]), static_cast<float>(srcPos[1]), 2.f);
 		painter->drawText(static_cast<float>(srcPos[0]), static_cast<float>(srcPos[1]), nameI18n, 0, 5.f, 5.f, false);
@@ -397,6 +404,8 @@ QMap<NomenclatureItem::NomenclatureItemType, QString> NomenclatureItem::niTypeDe
 void NomenclatureItem::createNameLists()
 {
     niTypeStringMap = {
+	// TRANSLATORS: north and south poles
+	{ niPole, qc_("pole", "special point") },
 	// TRANSLATORS: Geographic area distinguished by amount of reflected light
 	{ niAlbedoFeature, qc_("albedo feature", "landform") },
 	// TRANSLATORS: Arc-shaped feature
@@ -625,5 +634,6 @@ void NomenclatureItem::createNameLists()
 	{ niVastitas, q_("Extensive plain.")},
 	// TRANSLATORS: Description for landform 'virga'
 	{ niVirga, q_("A streak or stripe of color.")},
-	{ niLandingSite, ""}};
+	{ niLandingSite, ""},
+	{ niPole, ""}};
 }

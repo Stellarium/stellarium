@@ -134,6 +134,8 @@ private:
 	//! Load nomenclature for solar system bodies
 	void loadNomenclature();
 
+	void loadSpecialNomenclature();
+
 	// Font used for displaying our text
 	QFont font;
 	QSettings* conf;

@@ -101,7 +101,8 @@ public:
 		niReticulum		= 54, // type="reticulum"
 		niSatelliteFeature	= 55, // type="satellite feature"
 		niTessera		= 56, // type="tessera"
-		niSaxum			= 57  // type="saxum"
+		niSaxum			= 57, // type="saxum"
+		niPole			= 100 // poles, special type
 	};
 	Q_ENUM(NomenclatureItemType)
 
