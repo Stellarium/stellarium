@@ -305,8 +305,18 @@ QList<StelObjectP> NomenclatureMgr::searchAround(const Vec3d& av, double limitFo
 {
 	QList<StelObjectP> result;
 
+	const bool withAberration=core->getUseAberration();
 	Vec3d v(av);
 	v.normalize();
+	if (withAberration)
+	{
+	    Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+	    StelCore::matVsop87ToJ2000.transfo(vel);
+	    vel*=core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
+	    v+=vel;
+	    v.normalize();
+	}
+
 	const double cosLimFov = cos(limitFov * M_PI/180.);
 	Vec3d equPos;
 
