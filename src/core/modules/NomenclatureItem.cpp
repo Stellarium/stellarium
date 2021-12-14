@@ -156,9 +156,10 @@ float NomenclatureItem::getSelectPriority(const StelCore* core) const
 			// The planet is too faint for view (in deep shadow for example), so let's disable selecting the nomenclature
 			return StelObject::getSelectPriority(core)+25.f;
 		}
-		else if (getNomenclatureType()==NomenclatureItem::niSpecialPoint)
+		else if ((getNomenclatureType()==NomenclatureItem::niSpecialPoint) &&
+			 (planet->getAngularSize(core)*M_PI_180 * static_cast<double>(core->getProjection(StelCore::FrameJ2000)->getPixelPerRadAtCenter())>=25.))
 		{
-			// high priority to selection
+			// high priority to selection if planet has some minimal size.
 			return StelObject::getSelectPriority(core)-25.f;
 		}
 		else if (getAngularSize(core)*M_PI/180.*static_cast<double>(core->getProjection(StelCore::FrameJ2000)->getPixelPerRadAtCenter())>=25.)
