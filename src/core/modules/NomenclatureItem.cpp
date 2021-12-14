@@ -68,7 +68,7 @@ QString NomenclatureItem::getNomenclatureTypeString(NomenclatureItemType nType)
 QString NomenclatureItem::getNomenclatureTypeLatinString(NomenclatureItemType nType)
 {
 	static const QMap<NomenclatureItemType, QString>map = {
-		{ niPole   , "pole" },
+		{ niSpecialPoint, "pole" },
 		{ niArcus  , "arcus" },
 		{ niAstrum , "astrum" },
 		{ niCatena , "catena" },
@@ -149,23 +149,28 @@ QString NomenclatureItem::getNomenclatureTypeDescription(NomenclatureItemType nT
 
 float NomenclatureItem::getSelectPriority(const StelCore* core) const
 {
-	if (!getFlagLabels())
+	if (getFlagLabels())
 	{
-		// suppress selection if switched off.
-		return StelObject::getSelectPriority(core)+1.e12f;
-	}
-	else if (planet->getVMagnitude(core)>=20.f)
-	{
-		// The planet is too faint for view (in deep shadow for example), so let's disable selecting the nomenclature
-		return StelObject::getSelectPriority(core)+25.f;
-	}
-	else if (getFlagLabels() && (getAngularSize(core)*M_PI/180.*static_cast<double>(core->getProjection(StelCore::FrameJ2000)->getPixelPerRadAtCenter())>=25.))
-	{
-		// The item may be good selectable when it over 25px size only
-		return StelObject::getSelectPriority(core)-25.f;
+		if (planet->getVMagnitude(core)>=20.f)
+		{
+			// The planet is too faint for view (in deep shadow for example), so let's disable selecting the nomenclature
+			return StelObject::getSelectPriority(core)+25.f;
+		}
+		else if (getNomenclatureType()==NomenclatureItem::niSpecialPoint)
+		{
+			// high priority to selection
+			return StelObject::getSelectPriority(core)-25.f;
+		}
+		else if (getAngularSize(core)*M_PI/180.*static_cast<double>(core->getProjection(StelCore::FrameJ2000)->getPixelPerRadAtCenter())>=25.)
+		{
+			// The item may be good selectable when it over 25px size only
+			return StelObject::getSelectPriority(core)-20.f;
+		}
+		else
+			return StelObject::getSelectPriority(core)-2.f;
 	}
 	else
-		return StelObject::getSelectPriority(core)-2.f;
+		return StelObject::getSelectPriority(core)+1.e12f; // suppress selection if switched off.
 }
 
 QString NomenclatureItem::getNameI18n() const
@@ -218,7 +223,7 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 	// Ra/Dec etc.
 	oss << getCommonInfoString(core, flags);
 
-	if (flags&Size && size>0. && nType!=NomenclatureItem::niPole)
+	if (flags&Size && size>0. && nType!=NomenclatureItem::niSpecialPoint)
 	{
 		QString sz = q_("Linear size");
 		// Satellite Features are almost(?) exclusively lettered craters, and all are on the Moon. Assume craters.
@@ -227,7 +232,7 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 		oss << QString("%1: %2 %3<br/>").arg(sz).arg(QString::number(size, 'f', 2)).arg(qc_("km", "distance"));
 	}
 
-	if (flags&Extra && niType!=NomenclatureItem::niPole)
+	if (flags&Extra && niType!=NomenclatureItem::niSpecialPoint)
 	{
 		oss << QString("%1: %2/%3<br/>").arg(q_("Planetographic long./lat.")).arg(StelUtils::decDegToDmsStr(longitude)).arg(StelUtils::decDegToDmsStr(latitude));
 		oss << QString("%1: %2<br/>").arg(q_("Celestial body")).arg(planet->getNameI18n());
@@ -310,10 +315,10 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 	// check visibility of feature
 	Vec3d srcPos;
 	NomenclatureItem::NomenclatureItemType niType = getNomenclatureType();
-	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (equPos.length() >= XYZ.length()) && (niType==NomenclatureItem::niPole || (screenSize>50. && screenSize<750.)))
+	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (equPos.length() >= XYZ.length()) && (niType==NomenclatureItem::niSpecialPoint || (screenSize>50. && screenSize<750.)))
 	{
 		float brightness=(getSolarAltitude(core)<0. ? 0.25f : 1.0f);
-		if (niType==NomenclatureItem::niPole)
+		if (niType==NomenclatureItem::niSpecialPoint)
 			brightness = 0.5f;
 		painter->setColor(color*brightness, 1.0f);
 		painter->drawCircle(static_cast<float>(srcPos[0]), static_cast<float>(srcPos[1]), 2.f);
@@ -400,7 +405,7 @@ void NomenclatureItem::createNameLists()
 {
     niTypeStringMap = {
 	// TRANSLATORS: north and south poles
-	{ niPole, qc_("pole", "special point") },
+	{ niSpecialPoint, qc_("pole", "special point") },
 	// TRANSLATORS: Geographic area distinguished by amount of reflected light
 	{ niAlbedoFeature, qc_("albedo feature", "landform") },
 	// TRANSLATORS: Arc-shaped feature
@@ -630,5 +635,5 @@ void NomenclatureItem::createNameLists()
 	// TRANSLATORS: Description for landform 'virga'
 	{ niVirga, q_("A streak or stripe of color.")},
 	{ niLandingSite, ""},
-	{ niPole, ""}};
+	{ niSpecialPoint, ""}};
 }
