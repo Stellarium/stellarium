@@ -68,7 +68,7 @@ QString NomenclatureItem::getNomenclatureTypeString(NomenclatureItemType nType)
 QString NomenclatureItem::getNomenclatureTypeLatinString(NomenclatureItemType nType)
 {
 	static const QMap<NomenclatureItemType, QString>map = {
-		{ niSpecialPoint, "pole" },
+		{ niSpecialPoint, "point" },
 		{ niArcus  , "arcus" },
 		{ niAstrum , "astrum" },
 		{ niCatena , "catena" },
@@ -149,29 +149,28 @@ QString NomenclatureItem::getNomenclatureTypeDescription(NomenclatureItemType nT
 
 float NomenclatureItem::getSelectPriority(const StelCore* core) const
 {
+	float priority = StelObject::getSelectPriority(core);
 	if (getFlagLabels())
 	{
+		const float scale = getAngularSizeRatio(core);
 		if (planet->getVMagnitude(core)>=20.f)
 		{
 			// The planet is too faint for view (in deep shadow for example), so let's disable selecting the nomenclature
-			return StelObject::getSelectPriority(core)+25.f;
+			priority += 25.f;
 		}
-		else if ((getNomenclatureType()==NomenclatureItem::niSpecialPoint) &&
-			 (planet->getAngularSize(core)*M_PI_180 * static_cast<double>(core->getProjection(StelCore::FrameJ2000)->getPixelPerRadAtCenter())>=25.))
+		else if (scale>=0.015)
 		{
-			// high priority to selection if planet has some minimal size.
-			return StelObject::getSelectPriority(core)-25.f;
-		}
-		else if (getAngularSize(core)*M_PI/180.*static_cast<double>(core->getProjection(StelCore::FrameJ2000)->getPixelPerRadAtCenter())>=25.)
-		{
-			// The item may be good selectable when it over 25px size only
-			return StelObject::getSelectPriority(core)-20.f;
+			// The item may be good selectable when it over 37px size only
+			priority -= (20.f + scale*100.f);
+			//priority = planet->getSelectPriority(core) - scale*100.f;
 		}
 		else
-			return StelObject::getSelectPriority(core)-2.f;
+			priority -= 2.f;
 	}
 	else
-		return StelObject::getSelectPriority(core)+1.e12f; // suppress selection if switched off.
+		priority += 1.e12f; // suppress selection if switched off.
+
+	return priority;
 }
 
 QString NomenclatureItem::getNameI18n() const
@@ -233,12 +232,12 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 		oss << QString("%1: %2 %3<br/>").arg(sz).arg(QString::number(size, 'f', 2)).arg(qc_("km", "distance"));
 	}
 
-	if (flags&Extra && niType!=NomenclatureItem::niSpecialPoint)
+	if (flags&Extra)
 	{
 		oss << QString("%1: %2/%3<br/>").arg(q_("Planetographic long./lat.")).arg(StelUtils::decDegToDmsStr(longitude)).arg(StelUtils::decDegToDmsStr(latitude));
 		oss << QString("%1: %2<br/>").arg(q_("Celestial body")).arg(planet->getNameI18n());
 		QString description = getNomenclatureTypeDescription(nType, planet->getEnglishName());
-		if (niType!=NomenclatureItem::niUNDEFINED && !description.isEmpty())
+		if (niType!=NomenclatureItem::niUNDEFINED && niType!=NomenclatureItem::niSpecialPoint && !description.isEmpty())
 			oss << QString("%1: %2<br/>").arg(q_("Landform description"), description);
 		oss << QString("%1: %2°<br/>").arg(q_("Solar altitude")).arg(QString::number(getSolarAltitude(core), 'f', 1));
 	}
@@ -283,6 +282,11 @@ double NomenclatureItem::getAngularSize(const StelCore* core) const
 	return std::atan2(size*planet->getSphereScale()/AU, getJ2000EquatorialPos(core).length()) * M_180_PI;
 }
 
+float NomenclatureItem::getAngularSizeRatio(const StelCore *core) const
+{
+	return getAngularSize(core)/core->getProjection(StelCore::FrameJ2000)->getFov();
+}
+
 void NomenclatureItem::update(double deltaTime)
 {
 	labelsFader.update(static_cast<int>(deltaTime*1000));
@@ -307,16 +311,11 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 			return;
 	}
 
-	const double screenSize = getAngularSize(core)*M_PI/180.*static_cast<double>(painter->getProjector()->getPixelPerRadAtCenter());
-
-	// We can use ratio of angular size to the FOV to checking visibility of features also!
-	// double scale = getAngularSize(core)/painter->getProjector()->getFov();
-	// if (painter->getProjector()->projectCheck(XYZ, srcPos) && (dist >= XYZ.length()) && (scale>0.04 && scale<0.5))
-
 	// check visibility of feature
 	Vec3d srcPos;
+	const float scale = getAngularSizeRatio(core);
 	NomenclatureItem::NomenclatureItemType niType = getNomenclatureType();
-	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (equPos.length() >= XYZ.length()) && (niType==NomenclatureItem::niSpecialPoint || (screenSize>50. && screenSize<750.)))
+	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (equPos.length() >= XYZ.length()) && (scale>0.04f && (scale<0.5f || niType==NomenclatureItem::niSpecialPoint)))
 	{
 		float brightness=(getSolarAltitude(core)<0. ? 0.25f : 1.0f);
 		if (niType==NomenclatureItem::niSpecialPoint)
@@ -405,8 +404,7 @@ QMap<NomenclatureItem::NomenclatureItemType, QString> NomenclatureItem::niTypeDe
 void NomenclatureItem::createNameLists()
 {
     niTypeStringMap = {
-	// TRANSLATORS: north and south poles
-	{ niSpecialPoint, qc_("pole", "special point") },
+	{ niSpecialPoint, qc_("point", "special point") },
 	// TRANSLATORS: Geographic area distinguished by amount of reflected light
 	{ niAlbedoFeature, qc_("albedo feature", "landform") },
 	// TRANSLATORS: Arc-shaped feature

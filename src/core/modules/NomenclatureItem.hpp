@@ -171,6 +171,9 @@ private:
 	static Vec3f color;
 	static bool hideLocalNomenclature;
 
+	// ratio of angular size of feature to the FOV
+	float getAngularSizeRatio(const StelCore *core) const;
+
 	static QString getNomenclatureTypeLatinString(NomenclatureItemType nType);
 	static QString getNomenclatureTypeString(NomenclatureItemType nType);
 	static QString getNomenclatureTypeDescription(NomenclatureItemType nType, QString englishName);
