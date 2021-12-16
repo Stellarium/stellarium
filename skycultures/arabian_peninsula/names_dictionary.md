@@ -25,7 +25,7 @@
 |	CON2901	|	الزبانى	|	al-Zubānā	|	Claws Of The Scorpion	|	The two bright stars of Libra (14th mansion of the Moon).	|	2	|
 |	CON2902	|	الإكليل	|	al-Iklīl	|	The Diadem	|	The arc of the three stars on the forehead of Scorpius (15th mansion of the Moon).	|	2	|
 |	CON2906	|	الشولة	|	al-Šawlah	|	Raised Tail Of The Scorpion	|	The sting of Scorpius (17th mansion of the Moon).	|	2	|
-|	CON2999	|	العقرب	|	aal-ʿAqrab	|	The Scorpion	|	The scorpion image	|	2	|
+|	CON2999	|	العقرب	|	al-ʿAqrab	|	The Scorpion	|	The scorpion image	|	2	|
 |	CON3005	|	البلدة	|	al-Baldah	|	The Empty Place	|	An area with no bright stars in Sagittarius (19th mansion of the Moon).	|	2	|
 |	CON3099	|	النعايم	|	al-Naʿāyem	|	The Ostriches	|	Four stars in the milky way representing four ostriches drinking at the river and another four away from the milky way representing four ostriches returning from the river. A ninth star between and above the two groups is included. All the stars are in the Sagittarius constellation (18th mansion of the Moon).	|	2	|
 |	CON3199	|	سعد الذابح	|	Saʿd al-Dhabiḥ	|	The Lucky Star Of The Slaughterer	|	Ancient Arab asterism representing a man slaughtering a sheep (20th mansion of the Moon).	|	2	|
@@ -38,7 +38,7 @@
 |	CON4213	|	زوابن الجوزا	|	Zawābin al-Ǧawzā	|	Claws Of Al-Jawza	|	Names of the stars: α, γ, β, and κ Ori, orally communicated from the Qasseem region of Saudi Arabia.	|	1	|
 |	CON4213	|	الزبَّن	|	al-Zibban	|	Claws Of Al-Jawza	|	Names of the stars: α, γ, β, and κ Ori, orally communicated from the Qasseem region of Saudi Arabia.	|	1	|
 |	CON2650	|	مسجد الثريا	|	Masǧid al-Thrayyā	|	Mosque Of Al-Thurayya	|	A triangle of stars that rise before al-Thurayya (The Pleiades). It is composed of the three stars: α Ari, α Tri, and β Tri. The source of this name is oral tradition in the region of Wadi al-Dawasir in southwestern Saudi Arabia.	|	1	|
-|	CON4299	|	الجوزا	|	al-Ǧawā	|	Al-Jawza	|	Al-Jawza is a proper name for a woman. this constellation is a woman shape for the Orion stars. It is the same as that of ancient Arabs. Some oral traditions will give the name to only the three stars of Orion belt.	|	2,3	|
+|	CON4299	|	الجوزا	|	al-Ǧawzā	|	Al-Jawza	|	Al-Jawza is a proper name for a woman. this constellation is a woman shape for the Orion stars. It is the same as that of ancient Arabs. Some oral traditions will give the name to only the three stars of Orion belt.	|	2,3	|
 |	Planets	|	|	|	|	|	|
 |	Venus	|	نجمة الصبح	|	Naǧmat al-ṣibḥ	|	Morning Star	|	A name for Venus when it sets after the Sun.	|	1	|
 |	Venus	|	نجمة االعشا	|	Naǧmat al-ʿŠā	|	Evening Star	|	A name for Venus when it rises before the Sun.	|	1	|
@@ -69,7 +69,7 @@
 |	HIP24608	|	المباري	|	al-Mbarī	|	The Parallel One	|	The star Capella, parallels al-Thurayya (The Pleiades)	|	8	|
 |	HIP24608	|	الجنيب	|	al-Ǧinīb	|	The Sided One	|	The star Capella, on the far side of al-Thurayya (The Pleiades)	|	1	|
 |	HIP97649	|	النسر الباسط	|	al-Nasr al-Basiṭ	|	The Spread Wings Eagle	|	The star α Aql (Altair), named because the two stars: γ Aql and β Aql forms the spread wings. Source is Ḥayel region.	|	1	|
-|	HIP97649	|	الكانون	|	aal-Kanūn	|	Al-Kanoon	|	Another name of The Spread wings Eagle mentioned in the poetry of al-Ḫalāwī.	|	4	|
+|	HIP97649	|	الكانون	|	al-Kanūn	|	Al-Kanoon	|	Another name of The Spread wings Eagle mentioned in the poetry of al-Ḫalāwī.	|	4	|
 |	HIP677	|	المؤخر 2	|	al-Mwaḫḫar 2	|	The Rear Bucket Mouth 2	|	See CON2504	|	2	|
 |	HIP1067	|	المؤخر 1	|	al-Mwaḫḫar 1	|	The Rear Bucket Mouth 1	|	See CON2504	|	2	|
 |	HIP113881	|	المقدم 2	|	al-Mqaddam 2	|	The Front Bucket Mouth 2	|	See CON2502	|	2	|
