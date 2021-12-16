@@ -209,6 +209,19 @@ public slots:
 	//! Set simulation time to the next day's evening when Sun reaches twilightAltitude
 	void nextEveningTwilight();
 
+	//! Set simulation time to this day's morning when selected object reaches current altitude
+	void todayMorningAtAltitude();
+	//! Set simulation time to the next morning when selected object reaches current altitude
+	void nextMorningAtAltitude();
+	//! Set simulation time to the previous morning when selected object reaches current altitude
+	void previousMorningAtAltitude();
+	//! Set simulation time to this day's evening when selected object reaches current altitude
+	void todayEveningAtAltitude();
+	//! Set simulation time to the next evening when selected object reaches current altitude
+	void nextEveningAtAltitude();
+	//! Set simulation time to the previous evening when selected object reaches current altitude
+	void previousEveningAtAltitude();
+
 	//! @note These functions were copied over from StelObject. Given that setExtraInfoString is non-const and some functions where these methods are useful are const, we can use the StelObjectMgr as "carrier object".
 	//! Allow additions to the Info String. Can be used by plugins to show extra info for the selected object, or for debugging.
 	//! Hard-set this string group to a single str, or delete all messages when str==""
