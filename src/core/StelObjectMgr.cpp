@@ -70,6 +70,13 @@ void StelObjectMgr::init()
 	actionsMgr->addAction("actionPrevious_MorningTwilight", timeGroup, N_("Previous morning twilight"), this, "previousMorningTwilight()");
 	actionsMgr->addAction("actionPrevious_EveningTwilight", timeGroup, N_("Previous evening twilight"), this, "previousEveningTwilight()");
 
+	actionsMgr->addAction("actionNext_MorningAtAltitude",     timeGroup, N_("Selected object at altitude at next morning"),      this, "nextMorningAtAltitude()");
+	actionsMgr->addAction("actionToday_MorningAtAltitude",    timeGroup, N_("Selected object at altitude this morning"),         this, "todayMorningAtAltitude()");
+	actionsMgr->addAction("actionPrevious_MorningAtAltitude", timeGroup, N_("Selected object at altitude at previous morning"),  this, "previousMorningAtAltitude()");
+	actionsMgr->addAction("actionNext_EveningAtAltitude",     timeGroup, N_("Selected object at altitude at next evening"),      this, "nextEveningAtAltitude()");
+	actionsMgr->addAction("actionToday_EveningAtAltitude",    timeGroup, N_("Selected object at altitude this evening"),         this, "todayEveningAtAltitude()");
+	actionsMgr->addAction("actionPrevious_EveningAtAltitude", timeGroup, N_("Selected object at altitude at previous evening"),  this, "previousEveningAtAltitude()");
+
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	setFlagSelectedObjectPointer(conf->value("viewing/flag_show_selection_marker", true).toBool());
@@ -269,6 +276,116 @@ void StelObjectMgr::nextEveningTwilight()
 	Vec4d rts = sun->getRTSTime(core, twilightAltitude);
 	if (rts[3]>-1000.)
 		core->setJD(rts[2]);
+}
+
+void StelObjectMgr::todayMorningAtAltitude()
+{
+	const QList<StelObjectP> selected = getSelectedObject();
+	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
+	{
+		double az, alt, altitude;
+		bool sign;
+		StelCore* core = StelApp::getInstance().getCore();
+		StelUtils::rectToSphe(&az, &alt, selected[0]->getAltAzPosGeometric(core));
+		StelUtils::radToDecDeg(alt, sign, altitude);
+		if (!sign) { altitude *= -1.; }
+		Vec4d rts = selected[0]->getRTSTime(core, altitude);
+		if (rts[3]>-1000.)
+			core->setJD(rts[0]);
+	}
+}
+
+void StelObjectMgr::nextMorningAtAltitude()
+{
+	const QList<StelObjectP> selected = getSelectedObject();
+	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
+	{
+		double az, alt, altitude;
+		bool sign;
+		StelCore* core = StelApp::getInstance().getCore();
+		StelUtils::rectToSphe(&az, &alt, selected[0]->getAltAzPosGeometric(core));
+		StelUtils::radToDecDeg(alt, sign, altitude);
+		if (!sign) { altitude *= -1.; }
+		core->addSolarDays(1.0);
+		core->update(0);
+		Vec4d rts = selected[0]->getRTSTime(core, altitude);
+		if (rts[3]>-1000.)
+			core->setJD(rts[0]);
+	}
+}
+
+void StelObjectMgr::previousMorningAtAltitude()
+{
+	const QList<StelObjectP> selected = getSelectedObject();
+	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
+	{
+		double az, alt, altitude;
+		bool sign;
+		StelCore* core = StelApp::getInstance().getCore();
+		StelUtils::rectToSphe(&az, &alt, selected[0]->getAltAzPosGeometric(core));
+		StelUtils::radToDecDeg(alt, sign, altitude);
+		if (!sign) { altitude *= -1.; }
+		core->addSolarDays(-1.0);
+		core->update(0);
+		Vec4d rts = selected[0]->getRTSTime(core, altitude);
+		if (rts[3]>-1000.)
+			core->setJD(rts[0]);
+	}
+}
+
+void StelObjectMgr::todayEveningAtAltitude()
+{
+	const QList<StelObjectP> selected = getSelectedObject();
+	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
+	{
+		double az, alt, altitude;
+		bool sign;
+		StelCore* core = StelApp::getInstance().getCore();
+		StelUtils::rectToSphe(&az, &alt, selected[0]->getAltAzPosGeometric(core));
+		StelUtils::radToDecDeg(alt, sign, altitude);
+		if (!sign) { altitude *= -1.; }
+		Vec4d rts = selected[0]->getRTSTime(core, altitude);
+		if (rts[3]>-1000.)
+			core->setJD(rts[2]);
+	}
+}
+
+void StelObjectMgr::nextEveningAtAltitude()
+{
+	const QList<StelObjectP> selected = getSelectedObject();
+	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
+	{
+		double az, alt, altitude;
+		bool sign;
+		StelCore* core = StelApp::getInstance().getCore();
+		StelUtils::rectToSphe(&az, &alt, selected[0]->getAltAzPosGeometric(core));
+		StelUtils::radToDecDeg(alt, sign, altitude);
+		if (!sign) { altitude *= -1.; }
+		core->addSolarDays(1.0);
+		core->update(0);
+		Vec4d rts = selected[0]->getRTSTime(core, altitude);
+		if (rts[3]>-1000.)
+			core->setJD(rts[2]);
+	}
+}
+
+void StelObjectMgr::previousEveningAtAltitude()
+{
+	const QList<StelObjectP> selected = getSelectedObject();
+	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
+	{
+		double az, alt, altitude;
+		bool sign;
+		StelCore* core = StelApp::getInstance().getCore();
+		StelUtils::rectToSphe(&az, &alt, selected[0]->getAltAzPosGeometric(core));
+		StelUtils::radToDecDeg(alt, sign, altitude);
+		if (!sign) { altitude *= -1.; }
+		core->addSolarDays(-1.0);
+		core->update(0);
+		Vec4d rts = selected[0]->getRTSTime(core, altitude);
+		if (rts[3]>-1000.)
+			core->setJD(rts[2]);
+	}
 }
 
 /*************************************************************************
