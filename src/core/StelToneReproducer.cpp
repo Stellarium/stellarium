@@ -56,6 +56,7 @@ void StelToneReproducer::setInputScale(float scale)
 	
 /*********************************************************************
  Set the eye adaptation luminance for the display (and precompute what can be)
+ See Devlin et al., Tone Reproduction and Physically Based Spectral Rendering, section 4.2. 
 *********************************************************************/
 void StelToneReproducer::setDisplayAdaptationLuminance(float _Lda)
 {

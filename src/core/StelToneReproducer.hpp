@@ -87,7 +87,7 @@ public:
 	
 	//! Set the maximum luminance of the display (CRT, screen etc..)
 	//! This value is used to scale the RGB range
-	//! @param maxdL the maximum lumiance in cd/m^2. Initial default value is 100 cd/m^2.
+	//! @param maxdL the maximum luminance in cd/m^2. Initial default value is 100 cd/m^2.
 	//! Higher values indicate "This display can faithfully reproduce brighter lights,
 	//! therefore the sky will usually appear darker".
 	void setMaxDisplayLuminance(float maxdL)
@@ -157,7 +157,7 @@ public:
 	//! @return the converted display set at the pFact power. Luminance with 1 corresponding to full display white. The value can be more than 1 when saturated.
 	float adaptLuminanceScaledLn(float lnWorldLuminance, float pFact=0.5f) const
 	{
-		const float lnPix0p0001 = -8.0656104861f;
+		const float lnPix0p0001 = static_cast<float>(log(M_PI*1e-4)); //  -8.0656104861f; // conversion factor, log(lambert to cd/m^2). See Devlin et al. 4.2
 		return std::exp(((lnInputScale+lnWorldLuminance+lnPix0p0001)*alphaWaOverAlphaDa+lnTerm2+lnOneOverMaxdL)*pFact);
 	}
 	
@@ -166,7 +166,7 @@ public:
 	//! @param xyY an array of 3 floats which are replaced by the converted RGB values
 	void xyYToRGB(float* xyY) const;
 	
-	void getShadersParams(float& a, float& b, float & c) const
+	void getShadersParams(float& a, float& b, float& c) const
 	{
 		a=alphaWaOverAlphaDa;
 		b=oneOverGamma;
