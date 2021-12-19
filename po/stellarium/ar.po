@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-12-12 14:44+0700\n"
+"POT-Creation-Date: 2021-12-17 10:35+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Khalid AlAjaji, 2021\n"
 "Language-Team: Arabic (https://www.transifex.com/stellarium/teams/80998/ar/)\n"
@@ -83,7 +83,7 @@ msgstr "أسماء التشكيلات النجمية"
 
 #: src/core/modules/AsterismMgr.cpp:101
 msgid "Toggle single asterism selection mode"
-msgstr ""
+msgstr "تفعيل اختيار تشكيل نجمي واحد"
 
 #: src/core/modules/AsterismMgr.cpp:102
 msgid "Ray helpers"
@@ -306,7 +306,7 @@ msgstr "نقطة نظير الشمس"
 #. TRANSLATORS: Center of the umbra
 #: src/core/modules/GridLinesMgr.cpp:1447
 msgid "C.U."
-msgstr ""
+msgstr "مركز الظل"
 
 #. TRANSLATORS: Apex Point, where the observer planet is heading to
 #: src/core/modules/GridLinesMgr.cpp:1454
@@ -492,7 +492,7 @@ msgstr "نقطة نظير الشمس"
 
 #: src/core/modules/GridLinesMgr.cpp:1886
 msgid "The center of the Earth's umbra"
-msgstr ""
+msgstr "مركز ظل الأرض"
 
 #: src/core/modules/GridLinesMgr.cpp:1887 src/ui_viewDialog.h:3765
 msgid "Apex points"
@@ -623,15 +623,15 @@ msgstr "الضباب"
 #: src/ui_configurationDialog.h:1873
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:314
 msgid "Cardinal points"
-msgstr "‎الجهات الأصلية والفرعية‎"
+msgstr "‎الجهات الأصلية"
 
 #: src/core/modules/LandscapeMgr.cpp:554
 msgid "Ordinal (Intercardinal) points"
-msgstr ""
+msgstr "الجهات الفرعية"
 
 #: src/core/modules/LandscapeMgr.cpp:555
 msgid "Secondary Intercardinal points"
-msgstr ""
+msgstr "الجهات الفرعية الثانوية"
 
 #: src/core/modules/LandscapeMgr.cpp:556
 msgid "Ground"
@@ -679,7 +679,7 @@ msgstr "تغيير قيمة التلوث الضوئي بالمرور الدور�
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:163
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:182
 msgid "Author"
-msgstr "<P DIR=RTL><b>المؤلف</b>"
+msgstr "<P DIR=RTL>المؤلف"
 
 #. TRANSLATORS: Unit of measure for distance - meter
 #: src/core/modules/LandscapeMgr.cpp:979 src/gui/StelGuiItems.cpp:817
@@ -2116,7 +2116,7 @@ msgstr "‎السرعة بالنسبة للشمس‎"
 
 #: src/core/modules/Planet.cpp:650
 msgid "NOTE: orbital elements outdated -- consider updating!"
-msgstr ""
+msgstr "تنبيه: العناصر المدارية قديمة -- التحديث مطلوب"
 
 #: src/core/modules/Planet.cpp:681
 msgid "with rings"
@@ -2138,7 +2138,7 @@ msgstr "‎القطر الاستوائي‎"
 #: src/core/modules/Planet.cpp:780 src/gui/AstroCalcDialog.cpp:3179
 #: src/gui/AstroCalcDialog.cpp:3237 src/ui_configurationDialog.h:1817
 msgid "Elongation"
-msgstr "‎الاستطالة‎"
+msgstr "الاستطالة‎‎"
 
 #: src/core/modules/Planet.cpp:773 src/core/modules/Planet.cpp:782
 #: src/gui/AstroCalcDialog.cpp:3189 src/gui/AstroCalcDialog.cpp:3247
@@ -2152,7 +2152,7 @@ msgstr "‎مضاء بنسبة‎"
 
 #: src/core/modules/Planet.cpp:781
 msgid "Elong. in Ecl.Long."
-msgstr ""
+msgstr "‎الاستطالة بالطول الكسوفي‎"
 
 #: src/core/modules/Planet.cpp:796 src/gui/AstroCalcDialog.cpp:6292
 #: src/gui/AstroCalcDialog.cpp:6436 src/gui/AstroCalcDialog.cpp:6453
@@ -2178,7 +2178,7 @@ msgstr "‎الدورة الاقترانية‎"
 #: src/core/modules/Planet.cpp:970
 msgctxt "speed"
 msgid "m/s"
-msgstr ""
+msgstr "‎متر في الثانية‎"
 
 #: src/core/modules/Planet.cpp:987
 msgid "Sidereal day"
@@ -3488,34 +3488,34 @@ msgstr "‎في الدائرة القطبية - لايغيب أبداً‎"
 #. with upper culmination between pole and zenith
 #: src/core/StelObject.cpp:761
 msgid "Max. E. Digression"
-msgstr ""
+msgstr "‎الانحراف الشرقي الأعظم‎"
 
 #. TRANSLATORS: azimuth (abbrev.)
 #: src/core/StelObject.cpp:763
 msgctxt "celestial coordinate system"
 msgid "A"
-msgstr ""
+msgstr "‎السمت‎"
 
 #: src/core/StelObject.cpp:763
 msgctxt "celestial coordinate system"
 msgid "Az."
-msgstr ""
+msgstr "‎السمت‎"
 
 #: src/core/StelObject.cpp:765
 msgctxt "celestial coordinate system"
 msgid "h"
-msgstr ""
+msgstr "‎زاوية الساعة‎"
 
 #: src/core/StelObject.cpp:765
 msgctxt "celestial coordinate system"
 msgid "HA"
-msgstr ""
+msgstr "‎زاوية الساعة‎"
 
 #. TRANSLATORS: Greatest Western Digression is the maximum western azimuth for
 #. stars with upper culmination between pole and zenith
 #: src/core/StelObject.cpp:791
 msgid "Max. W. Digression"
-msgstr ""
+msgstr "‎الانحراف الغربي الأعظم‎"
 
 #: src/core/StelObject.cpp:826
 msgid "Parallactic Angle"
@@ -3529,23 +3529,23 @@ msgstr "‎اختصار إسم الكوكبة حسب الإتحاد الفلكي
 #: src/core/StelObject.cpp:1121
 msgctxt "celestial coordinate system"
 msgid "Solar A/a"
-msgstr ""
+msgstr "‎الارتفاع/السمت الشمسي‎"
 
 #: src/core/StelObject.cpp:1121
 msgctxt "celestial coordinate system"
 msgid "Solar Az./Alt."
-msgstr ""
+msgstr "‎الارتفاع/السمت الشمسي‎"
 
 #. TRANSLATORS: Azimuth/Altitude
 #: src/core/StelObject.cpp:1139
 msgctxt "celestial coordinate system"
 msgid "Lunar A/a"
-msgstr ""
+msgstr "‎الارتفاع/السمت القمري‎"
 
 #: src/core/StelObject.cpp:1139
 msgctxt "celestial coordinate system"
 msgid "Lunar Az./Alt."
-msgstr ""
+msgstr "‎الارتفاع/السمت القمري‎"
 
 #: src/core/StelObjectMgr.cpp:56
 msgid "Next transit of the selected object"
@@ -3585,27 +3585,51 @@ msgstr "الغياب السابق للجرم المختار"
 
 #: src/core/StelObjectMgr.cpp:66
 msgid "Next morning twilight"
-msgstr ""
+msgstr "فجر اليوم القادم"
 
 #: src/core/StelObjectMgr.cpp:67
 msgid "Next evening twilight"
-msgstr ""
+msgstr "شفق اليوم القادم"
 
 #: src/core/StelObjectMgr.cpp:68
 msgid "Today's morning twilight"
-msgstr ""
+msgstr "فجر هذا اليوم"
 
 #: src/core/StelObjectMgr.cpp:69
 msgid "Today's evening twilight"
-msgstr ""
+msgstr "شفق هذا اليوم"
 
 #: src/core/StelObjectMgr.cpp:70
 msgid "Previous morning twilight"
-msgstr ""
+msgstr "فجر اليوم السابق"
 
 #: src/core/StelObjectMgr.cpp:71
 msgid "Previous evening twilight"
-msgstr ""
+msgstr "شفق اليوم السابق"
+
+#: src/core/StelObjectMgr.cpp:73
+msgid "Selected object at altitude at next morning"
+msgstr "الجرم المختار صباح اليوم التالي على ارتفاع"
+
+#: src/core/StelObjectMgr.cpp:74
+msgid "Selected object at altitude this morning"
+msgstr "الجرم المختار صباح هذا اليوم على ارتفاع"
+
+#: src/core/StelObjectMgr.cpp:75
+msgid "Selected object at altitude at previous morning"
+msgstr "الجرم المختار صباح اليوم السابق على ارتفاع"
+
+#: src/core/StelObjectMgr.cpp:76
+msgid "Selected object at altitude at next evening"
+msgstr "الجرم المختار مساء اليوم التالي على ارتفاع"
+
+#: src/core/StelObjectMgr.cpp:77
+msgid "Selected object at altitude this evening"
+msgstr "الجرم المختار مساء هذا اليوم على ارتفاع"
+
+#: src/core/StelObjectMgr.cpp:78
+msgid "Selected object at altitude at previous evening"
+msgstr "الجرم المختار مساء اليوم السابق على ارتفاع"
 
 #: src/core/StelSkyLayerMgr.cpp:85
 msgid "Deep-sky objects background images"
@@ -3655,13 +3679,13 @@ msgstr "تمثل مصدراً فردياً مثل أطلس تاريخي أو م�
 #: src/core/StelSkyCultureMgr.cpp:186
 msgctxt "sky culture classification"
 msgid "comparative"
-msgstr ""
+msgstr "مقارن"
 
 #: src/core/StelSkyCultureMgr.cpp:187
 msgid ""
 "Compares and confronts elements from at least two sky cultures with each "
 "other."
-msgstr ""
+msgstr "يقارن ويقابل بين عناصر تراثين فلكيين على الأقل."
 
 #: src/core/StelSkyCultureMgr.cpp:191
 msgctxt "sky culture classification"
@@ -4133,11 +4157,11 @@ msgstr "<P DIR=RTL>شكر"
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:138
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:207
 msgid "Authors"
-msgstr "<P DIR=RTL>المؤلفون<P DIR=RTL>"
+msgstr "<p dir=rtl>المؤلفون"
 
 #: src/gui/ConfigurationDialog.cpp:1263
 msgid "Contact"
-msgstr "<P DIR=RTL>للمراسلة"
+msgstr "<p dir=rtl>للمراسلة"
 
 #: src/gui/ConfigurationDialog.cpp:1265 src/scripting/StelScriptMgr.cpp:468
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:97
@@ -4161,7 +4185,7 @@ msgstr "<P DIR=RTL>للمراسلة"
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:161
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:180
 msgid "Version"
-msgstr "<P DIR=RTL>الإصدار<P DIR=RTL>"
+msgstr "<p dir=rtl>الإصدار"
 
 #: src/gui/ConfigurationDialog.cpp:1266 src/scripting/StelScriptMgr.cpp:463
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:98
@@ -4185,7 +4209,7 @@ msgstr "<P DIR=RTL>الإصدار<P DIR=RTL>"
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:162
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:181
 msgid "License"
-msgstr "<P DIR=RTL><b>الرخصة</b>"
+msgstr "<p dir=rtl>الرخصة"
 
 #: src/gui/ConfigurationDialog.cpp:1270
 msgctxt "license"
@@ -4516,11 +4540,11 @@ msgstr "و"
 
 #: src/gui/HelpDialog.cpp:268
 msgid "Time dragging"
-msgstr "سحب الوقت"
+msgstr "تغيير الوقت"
 
 #: src/gui/HelpDialog.cpp:269
 msgid "left mouse drag"
-msgstr ""
+msgstr "السحب بزر الفأرة الأيسر"
 
 #: src/gui/HelpDialog.cpp:270
 msgid "Time scrolling: minutes"
@@ -4529,7 +4553,7 @@ msgstr "تغيير الوقت: دقائق"
 #: src/gui/HelpDialog.cpp:271 src/gui/HelpDialog.cpp:273
 #: src/gui/HelpDialog.cpp:275 src/gui/HelpDialog.cpp:277
 msgid "mouse wheel"
-msgstr ""
+msgstr "عجلة الفأرة"
 
 #: src/gui/HelpDialog.cpp:272
 msgid "Time scrolling: hours"
@@ -4557,7 +4581,7 @@ msgstr "ألغ الاختيار"
 
 #: src/gui/HelpDialog.cpp:286
 msgid "& left click"
-msgstr ""
+msgstr "& النقرة اليسرى"
 
 #: src/gui/HelpDialog.cpp:288
 msgid "Right click"
@@ -4602,13 +4626,13 @@ msgstr "فعّل واجهة المستخددم النصية"
 
 #: src/gui/HelpDialog.cpp:347
 msgid "Special local keys"
-msgstr ""
+msgstr "مفاتيح محلية خاصة"
 
 #: src/gui/HelpDialog.cpp:348
 msgid ""
 "All these hotkeys are locally available to run when specific window or tab "
 "is opened."
-msgstr ""
+msgstr "كل هذه المفاتيح متاحة محليا للاستعمال حين فتح نافذة أو علامة تبويب."
 
 #: src/gui/HelpDialog.cpp:349 src/ui_scriptConsole.h:380
 msgid "Script console"
@@ -4616,15 +4640,15 @@ msgstr "شاشة البرامج النصية - السكريبتات"
 
 #: src/gui/HelpDialog.cpp:350 src/ui_scriptConsole.h:383
 msgid "Load script from file"
-msgstr ""
+msgstr "حمل البرنامج النصي من ملف"
 
 #: src/gui/HelpDialog.cpp:352 src/ui_scriptConsole.h:387
 msgid "Save script to file"
-msgstr ""
+msgstr "احفظ البرنامج النصي في ملف"
 
 #: src/gui/HelpDialog.cpp:354 src/ui_scriptConsole.h:405
 msgid "Run script"
-msgstr ""
+msgstr "شغِّل البرنامج النصي"
 
 #: src/gui/HelpDialog.cpp:356 src/ui_astroCalcDialog.h:1693
 msgid "Astronomical calculations"
@@ -4723,7 +4747,7 @@ msgstr "المطور :%1"
 #: src/gui/HelpDialog.cpp:486
 #, qt-format
 msgid "Sky cultures researcher: %1"
-msgstr ""
+msgstr "باحث في التراثات الفلكية: %1"
 
 #: src/gui/HelpDialog.cpp:487
 msgid "Former Developers"
@@ -4781,17 +4805,19 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:507 plugins/Pulsars/src/gui/PulsarsDialog.cpp:149
 msgid "Acknowledgment"
-msgstr "<p dir=rtl>شكر"
+msgstr "شكر"
 
 #: src/gui/HelpDialog.cpp:508
 msgid ""
 "If the Stellarium planetarium was helpful for your research work, the "
 "following acknowledgment would be appreciated:"
 msgstr ""
+"إذا كان برنامج ستيللاريوم مساعدا لك في عملك البحثي، فإن الذكر التالي سيكون "
+"محل تقدير:"
 
 #: src/gui/HelpDialog.cpp:509
 msgid "This research has made use of the Stellarium planetarium"
-msgstr ""
+msgstr "هذا البحث قد استعان ببرنامج ستيللاريوم"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:512
@@ -4799,6 +4825,7 @@ msgid ""
 "Or you may {download the BibTeX file of the paper} to create another "
 "citation format."
 msgstr ""
+"أو يمكنك {تحميل ملف BibTex للورقة العلمية} لإنشاء تنسيق آخر لذكر البرنامج."
 
 #: src/gui/StelGui.cpp:229
 msgid "Windows"
@@ -4870,7 +4897,7 @@ msgstr "‎نافذة الحسابات الفلكية‎"
 
 #: src/gui/StelGui.cpp:253
 msgid "Observing list"
-msgstr ""
+msgstr "قائمة الرصد"
 
 #: src/gui/StelGui.cpp:254
 msgid "Copy selected object information to clipboard"
@@ -4946,16 +4973,16 @@ msgstr "راصد من مركز الكوكب"
 
 #: src/gui/StelGuiItems.cpp:858
 msgid "Atmospheric pressure"
-msgstr ""
+msgstr "الضغط الجوي"
 
 #: src/gui/StelGuiItems.cpp:858
 msgctxt "pressure unit"
 msgid "mbar"
-msgstr ""
+msgstr "ميللي بار"
 
 #: src/gui/StelGuiItems.cpp:858
 msgid "temperature"
-msgstr ""
+msgstr "الحرارة"
 
 #. TRANSLATORS: Field of view. Please use abbreviation.
 #: src/gui/StelGuiItems.cpp:877
@@ -5560,11 +5587,11 @@ msgstr "Secular acceleration of the Moon"
 
 #: src/gui/AstroCalcDialog.cpp:187 src/gui/AstroCalcDialog.cpp:264
 msgid "Gregorian dates. Valid range:"
-msgstr "التاريخ الجريجوري. المدى المقبول:"
+msgstr "التقويم الجريجوري. النطاق المقبول:"
 
 #: src/gui/AstroCalcDialog.cpp:339
 msgid "Valid range"
-msgstr "نطاق التواريخ المقبولة"
+msgstr "النطاق المقبول"
 
 #: src/gui/AstroCalcDialog.cpp:627 src/gui/AstroCalcDialog.cpp:815
 #: src/gui/AstroCalcDialog.cpp:817 src/gui/AstroCalcDialog.cpp:2802
@@ -6047,7 +6074,7 @@ msgstr "الكواكب والشمس"
 
 #: src/gui/AstroCalcDialog.cpp:2490
 msgid "Sun, planets and moons of observer location"
-msgstr ""
+msgstr "الشمس والكواكب والأقمار في موقع الراصد"
 
 #: src/gui/AstroCalcDialog.cpp:2491
 #, qt-format
@@ -6056,19 +6083,19 @@ msgstr "أجرام النظام الشمسي اللامعة (<%1 قدراً)"
 
 #: src/gui/AstroCalcDialog.cpp:2492
 msgid "Moons of first body"
-msgstr ""
+msgstr "أقمار الجسم الأول"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:2493 src/gui/AstroCalcDialog.cpp:5251
 #: src/translations.h:455
 msgid "Bright carbon stars"
-msgstr ""
+msgstr "نجوم كربونية لامعة"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:2493 src/gui/AstroCalcDialog.cpp:5252
 #: src/translations.h:457
 msgid "Bright barium stars"
-msgstr ""
+msgstr "نجوم باريومية لامعة"
 
 #: src/gui/AstroCalcDialog.cpp:3091
 msgid "Magnitude vs. Time"
@@ -6132,14 +6159,14 @@ msgstr "الحجم الزاوي"
 #: src/gui/AstroCalcDialog.cpp:3195
 msgctxt "axis name"
 msgid "Heliocentric distance"
-msgstr ""
+msgstr "المسافة بالنسبة إلى الشمس"
 
 #. TRANSLATORS: The phrase "Transit altitude" may be long in some languages
 #. and you can abbreviate it.
 #: src/gui/AstroCalcDialog.cpp:3201
 msgctxt "axis name"
 msgid "Transit altitude"
-msgstr ""
+msgstr "ارتفاع العبور"
 
 #. TRANSLATORS: The phrase "Right ascension" may be long in some languages and
 #. you can abbreviate it.
@@ -6264,7 +6291,7 @@ msgstr "اقتران"
 
 #: src/gui/AstroCalcDialog.cpp:4100
 msgid "Shadow transit"
-msgstr ""
+msgstr "عبور الظل"
 
 #: src/gui/AstroCalcDialog.cpp:4103 src/gui/AstroCalcDialog.cpp:4110
 #: src/gui/AstroCalcDialog.cpp:4156 src/gui/AstroCalcDialog.cpp:4162
@@ -6485,7 +6512,7 @@ msgstr "الحجم الزاوي"
 #: src/gui/AstroCalcDialog.cpp:5334
 msgctxt "IAU Constellation"
 msgid "Const."
-msgstr ""
+msgstr "الكوكبة"
 
 #: src/gui/AstroCalcDialog.cpp:5452 src/ui_astroCalcDialog.h:1902
 msgid "Limit angular size:"
@@ -6548,7 +6575,7 @@ msgstr "يوم"
 
 #: src/gui/AstroCalcDialog.cpp:6494
 msgid "Angular distance between the Moon and selected object"
-msgstr ""
+msgstr "البعد الزاوي بين القمر والجرم المختار"
 
 #: src/gui/AstroCalcCustomStepsDialog.cpp:76
 msgctxt "unit of measurement"
@@ -6639,11 +6666,11 @@ msgstr "جرم غير مسمّى"
 
 #: src/gui/ObsListCreateEditDialog.cpp:468
 msgid "Export observing list as..."
-msgstr ""
+msgstr "صدر قائمة الرصد كـ ..."
 
 #: src/gui/ObsListCreateEditDialog.cpp:483
 msgid "Import observing list"
-msgstr ""
+msgstr "استورد قائمة الرصد"
 
 #: src/gui/DateTimeDialog.cpp:239 src/gui/DateTimeDialog.cpp:240
 msgid "Date and Time in Julian calendar"
@@ -7652,12 +7679,12 @@ msgstr "نجوم متغيرة مهمة"
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:451
 msgid "Variable stars: Algol-type eclipsing systems"
-msgstr ""
+msgstr "النجوم المتغيرة: من نوع نظام نجم الغول الكسوفي"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:453
 msgid "Variable stars: the classical cepheids"
-msgstr ""
+msgstr "النجوم المتغيرة: القيفاوسيات الكلاسيكية"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:462
@@ -8076,7 +8103,7 @@ msgstr ""
 #: src/translations.h:615
 msgid ""
 "Screensaver of various happenings in the Solar System. 313 events in all!"
-msgstr ""
+msgstr "حافظ الشاشة لأحداث متنوعة في النظام الشمسي. مجموعها 313 حدث!"
 
 #: src/translations.h:616
 msgid "A tour of the western constellations."
@@ -8544,25 +8571,25 @@ msgstr "غرب أفريقيا"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Caribbean
 #: src/translations_regions.h:48
 msgid "Caribbean"
-msgstr ""
+msgstr "الكاريبي"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Central_America
 #: src/translations_regions.h:51
 msgid "Central America"
-msgstr ""
+msgstr "وسط أمريكا"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/South_America
 #: src/translations_regions.h:54
 msgid "Southern America"
-msgstr ""
+msgstr "جنوب أمريكا"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Northern_America
 #: src/translations_regions.h:57
 msgid "Northern America"
-msgstr ""
+msgstr "شمال أمريكا"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Antarctica
@@ -8574,73 +8601,73 @@ msgstr "أنتاركتيكا - القارة المتجمدة الجنوبية"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/North_Asia
 #: src/translations_regions.h:63
 msgid "Northern Asia"
-msgstr ""
+msgstr "شمال آسيا"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Central_Asia
 #: src/translations_regions.h:66
 msgid "Central Asia"
-msgstr ""
+msgstr "وسط آسيا"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Eastern_Asia
 #: src/translations_regions.h:69
 msgid "Eastern Asia"
-msgstr ""
+msgstr "شرق آسيا"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Southeast_Asia
 #: src/translations_regions.h:72
 msgid "South-eastern Asia"
-msgstr ""
+msgstr "جنوب شرق آسيا"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/South_Asia
 #: src/translations_regions.h:75
 msgid "Southern Asia"
-msgstr ""
+msgstr "جنوب آسيا"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Western_Asia
 #: src/translations_regions.h:78
 msgid "Western Asia"
-msgstr ""
+msgstr "غرب آسيا"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Eastern_Europe
 #: src/translations_regions.h:81
 msgid "Eastern Europe"
-msgstr ""
+msgstr "شرق أوروبا"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Northern_Europe
 #: src/translations_regions.h:84
 msgid "Northern Europe"
-msgstr ""
+msgstr "شمال أوروبا"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Southern_Europe
 #: src/translations_regions.h:87
 msgid "Southern Europe"
-msgstr ""
+msgstr "جنوب أوروبا"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Western_Europe
 #: src/translations_regions.h:90
 msgid "Western Europe"
-msgstr ""
+msgstr "غرب أوروبا"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Australasia
 #: src/translations_regions.h:93
 msgid "Australasia"
-msgstr ""
+msgstr "أسترالاسيا"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Melanesia
 #: src/translations_regions.h:96
 msgid "Melanesia"
-msgstr ""
+msgstr "ميلانيزيا"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Micronesia
@@ -8652,531 +8679,531 @@ msgstr "ميكرونيجا"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Polynesia
 #: src/translations_regions.h:102
 msgid "Polynesia"
-msgstr ""
+msgstr "بولينيزيا"
 
 #. TRANSLATORS: Name of region on Mercury
 #: src/translations_regions.h:104
 msgid "Aparangi Planitia"
-msgstr ""
+msgstr "Aparangi Planitia"
 
 #. TRANSLATORS: Name of region on Mercury
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Borealis_Planitia
 #: src/translations_regions.h:107
 msgid "Borealis Planitia"
-msgstr ""
+msgstr "Borealis Planitia"
 
 #. TRANSLATORS: Name of region on Mercury
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Budh_Planitia
 #: src/translations_regions.h:110
 msgid "Budh Planitia"
-msgstr ""
+msgstr "Budh Planitia"
 
 #. TRANSLATORS: Name of region on Mercury
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Caloris_Planitia
 #: src/translations_regions.h:113
 msgid "Caloris Planitia"
-msgstr ""
+msgstr "Caloris Planitia"
 
 #. TRANSLATORS: Name of region on Mercury
 #: src/translations_regions.h:115
 msgid "Lugus Planitia"
-msgstr ""
+msgstr "Lugus Planitia"
 
 #. TRANSLATORS: Name of region on Mercury
 #: src/translations_regions.h:117
 msgid "Mearcair Planitia"
-msgstr ""
+msgstr "Mearcair Planitia"
 
 #. TRANSLATORS: Name of region on Mercury
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Odin_Planitia
 #: src/translations_regions.h:120
 msgid "Odin Planitia"
-msgstr ""
+msgstr "Odin Planitia"
 
 #. TRANSLATORS: Name of region on Mercury
 #: src/translations_regions.h:122
 msgid "Otaared Planitia"
-msgstr ""
+msgstr "Otaared Planitia"
 
 #. TRANSLATORS: Name of region on Mercury
 #: src/translations_regions.h:124
 msgid "Papsukkal Planitia"
-msgstr ""
+msgstr "Papsukkal Planitia"
 
 #. TRANSLATORS: Name of region on Mercury
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Sihtu_Planitia
 #: src/translations_regions.h:127
 msgid "Sihtu Planitia"
-msgstr ""
+msgstr "Sihtu Planitia"
 
 #. TRANSLATORS: Name of region on Mercury
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Sobkou_Planitia
 #: src/translations_regions.h:130
 msgid "Sobkou Planitia"
-msgstr ""
+msgstr "Sobkou Planitia"
 
 #. TRANSLATORS: Name of region on Mercury
 #: src/translations_regions.h:132
 msgid "Stilbon Planitia"
-msgstr ""
+msgstr "Stilbon Planitia"
 
 #. TRANSLATORS: Name of region on Mercury
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Suisei_Planitia
 #: src/translations_regions.h:135
 msgid "Suisei Planitia"
-msgstr ""
+msgstr "Suisei Planitia"
 
 #. TRANSLATORS: Name of region on Mercury
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Tir_Planitia
 #: src/translations_regions.h:138
 msgid "Tir Planitia"
-msgstr ""
+msgstr "Tir Planitia"
 
 #. TRANSLATORS: Name of region on Mercury
 #: src/translations_regions.h:140
 msgid "Turms Planitia"
-msgstr ""
+msgstr "Turms Planitia"
 
 #. TRANSLATORS: Name of region on Mercury
 #: src/translations_regions.h:142
 msgid "Utaridi Planitia"
-msgstr ""
+msgstr "Utaridi Planitia"
 
 #. TRANSLATORS: Name of region on Mercury
 #: src/translations_regions.h:144
 msgid "Catuilla Planum"
-msgstr ""
+msgstr "Catuilla Planum"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Aphrodite_Terra
 #: src/translations_regions.h:147
 msgid "Aphrodite Terra"
-msgstr ""
+msgstr "Aphrodite Terra"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Ishtar_Terra
 #: src/translations_regions.h:150
 msgid "Ishtar Terra"
-msgstr ""
+msgstr "Ishtar Terra"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Lada_Terra
 #: src/translations_regions.h:153
 msgid "Lada Terra"
-msgstr ""
+msgstr "Lada Terra"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Alpha_Regio
 #: src/translations_regions.h:156
 msgid "Alpha Regio"
-msgstr ""
+msgstr "Alpha Regio"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Asteria_Regio
 #: src/translations_regions.h:159
 msgid "Asteria Regio"
-msgstr ""
+msgstr "Asteria Regio"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:162
 msgid "Atla Regio"
-msgstr ""
+msgstr "Atla Regio"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:165
 msgid "Bell Regio"
-msgstr ""
+msgstr "Bell Regio"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Beta_Regio
 #: src/translations_regions.h:168
 msgid "Beta Regio"
-msgstr ""
+msgstr "Beta Regio"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:171
 msgid "Dione Regio"
-msgstr ""
+msgstr "Dione Regio"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:174
 msgid "Dsonkwa Regio"
-msgstr ""
+msgstr "Dsonkwa Regio"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:177
 msgid "Eistla Regio"
-msgstr ""
+msgstr "Eistla Regio"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:180
 msgid "Hyndla Regio"
-msgstr ""
+msgstr "Hyndla Regio"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:183
 msgid "Imdr Regio"
-msgstr ""
+msgstr "Imdr Regio"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:186
 msgid "Ishkus Regio"
-msgstr ""
+msgstr "Ishkus Regio"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:189
 msgid "Laufey Regio"
-msgstr ""
+msgstr "Laufey Regio"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:192
 msgid "Neringa Regio"
-msgstr ""
+msgstr "Neringa Regio"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Ovda_Regio
 #: src/translations_regions.h:195
 msgid "Ovda Regio"
-msgstr ""
+msgstr "Ovda Regio"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Phoebe_Regio
 #: src/translations_regions.h:198
 msgid "Phoebe Regio"
-msgstr ""
+msgstr "Phoebe Regio"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:201
 msgid "Themis Regio"
-msgstr ""
+msgstr "Themis Regio"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:204
 msgid "Thetis Regio"
-msgstr ""
+msgstr "Thetis Regio"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:207
 msgid "Ulfrun Regio"
-msgstr ""
+msgstr "Ulfrun Regio"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:210
 msgid "Vasilisa Regio"
-msgstr ""
+msgstr "Vasilisa Regio"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:213
 msgid "Aibarchin Planitia"
-msgstr ""
+msgstr "Aibarchin Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:216
 msgid "Aino Planitia"
-msgstr ""
+msgstr "Aino Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:219
 msgid "Akhtamar Planitia"
-msgstr ""
+msgstr "Akhtamar Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:222
 msgid "Alma-Merghen Planitia"
-msgstr ""
+msgstr "Alma-Merghen Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:225
 msgid "Atalanta Planitia"
-msgstr ""
+msgstr "Atalanta Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:228
 msgid "Audra Planitia"
-msgstr ""
+msgstr "Audra Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:231
 msgid "Bereghinya Planitia"
-msgstr ""
+msgstr "Bereghinya Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:234
 msgid "Dzerassa Planitia"
-msgstr ""
+msgstr "Dzerassa Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:237
 msgid "Fonueha Planitia"
-msgstr ""
+msgstr "Fonueha Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:240
 msgid "Ganiki Planitia"
-msgstr ""
+msgstr "Ganiki Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Guinevere_Planitia
 #: src/translations_regions.h:243
 msgid "Guinevere Planitia"
-msgstr ""
+msgstr "Guinevere Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:246
 msgid "Gunda Planitia"
-msgstr ""
+msgstr "Gunda Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:249
 msgid "Helen Planitia"
-msgstr ""
+msgstr "Helen Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:252
 msgid "Hinemoa Planitia"
-msgstr ""
+msgstr "Hinemoa Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:255
 msgid "Imapinua Planitia"
-msgstr ""
+msgstr "Imapinua Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:258
 msgid "Kanykey Planitia"
-msgstr ""
+msgstr "Kanykey Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:261
 msgid "Kawelu Planitia"
-msgstr ""
+msgstr "Kawelu Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:264
 msgid "Laimdota Planitia"
-msgstr ""
+msgstr "Laimdota Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:267
 msgid "Lavinia Planitia"
-msgstr ""
+msgstr "Lavinia Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:270
 msgid "Leda Planitia"
-msgstr ""
+msgstr "Leda Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:273
 msgid "Libuse Planitia"
-msgstr ""
+msgstr "Libuse Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:276
 msgid "Llorona Planitia"
-msgstr ""
+msgstr "Llorona Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:279
 msgid "Louhi Planitia"
-msgstr ""
+msgstr "Louhi Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:282
 msgid "Lowana Planitia"
-msgstr ""
+msgstr "Lowana Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:285
 msgid "Mugazo Planitia"
-msgstr ""
+msgstr "Mugazo Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:288
 msgid "Navka Planitia"
-msgstr ""
+msgstr "Navka Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:291
 msgid "Niobe Planitia"
-msgstr ""
+msgstr "Niobe Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:294
 msgid "Nsomeka Planitia"
-msgstr ""
+msgstr "Nsomeka Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:297
 msgid "Nuptadi Planitia"
-msgstr ""
+msgstr "Nuptadi Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:300
 msgid "Rusalka Planitia"
-msgstr ""
+msgstr "Rusalka Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Sedna_Planitia
 #: src/translations_regions.h:303
 msgid "Sedna Planitia"
-msgstr ""
+msgstr "Sedna Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:306
 msgid "Snegurochka Planitia"
-msgstr ""
+msgstr "Snegurochka Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:309
 msgid "Sogolon Planitia"
-msgstr ""
+msgstr "Sogolon Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:312
 msgid "Tahmina Planitia"
-msgstr ""
+msgstr "Tahmina Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:315
 msgid "Tilli-Hanum Planitia"
-msgstr ""
+msgstr "Tilli-Hanum Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:318
 msgid "Tinatin Planitia"
-msgstr ""
+msgstr "Tinatin Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:321
 msgid "Undine Planitia"
-msgstr ""
+msgstr "Undine Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:324
 msgid "Vellamo Planitia"
-msgstr ""
+msgstr "Vellamo Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:327
 msgid "Vinmara Planitia"
-msgstr ""
+msgstr "Vinmara Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:330
 msgid "Wawalag Planitia"
-msgstr ""
+msgstr "Wawalag Planitia"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:333
 msgid "Zhibek Planitia"
-msgstr ""
+msgstr "Zhibek Planitia"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9185,7 +9212,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Oceanus_Procellarum
 #: src/translations_regions.h:337
 msgid "Ocean of Storms"
-msgstr ""
+msgstr "Ocean of Storms"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9194,7 +9221,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Anguis
 #: src/translations_regions.h:341
 msgid "Serpent Sea"
-msgstr ""
+msgstr "Serpent Sea"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9203,7 +9230,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Australe
 #: src/translations_regions.h:345
 msgid "Southern Sea"
-msgstr ""
+msgstr "Southern Sea"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9212,7 +9239,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Cognitum
 #: src/translations_regions.h:349
 msgid "Sea that has Become Known"
-msgstr ""
+msgstr "Sea that has Become Known"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9221,7 +9248,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Crisium
 #: src/translations_regions.h:353
 msgid "Sea of Crises"
-msgstr ""
+msgstr "Sea of Crises"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9230,7 +9257,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Fecunditatis
 #: src/translations_regions.h:357
 msgid "Sea of Fecundity"
-msgstr ""
+msgstr "Sea of Fecundity"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9239,7 +9266,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Frigoris
 #: src/translations_regions.h:361
 msgid "Sea of Cold"
-msgstr ""
+msgstr "Sea of Cold"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9248,7 +9275,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Humboldtianum
 #: src/translations_regions.h:365
 msgid "Sea of Humboldt"
-msgstr ""
+msgstr "Sea of Humboldt"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9257,7 +9284,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Humorum
 #: src/translations_regions.h:369
 msgid "Sea of Moisture"
-msgstr ""
+msgstr "Sea of Moisture"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9266,7 +9293,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Imbrium
 #: src/translations_regions.h:373
 msgid "Sea of Showers"
-msgstr ""
+msgstr "Sea of Showers"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9275,7 +9302,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Ingenii
 #: src/translations_regions.h:377
 msgid "Sea of Cleverness"
-msgstr ""
+msgstr "Sea of Cleverness"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9284,7 +9311,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Insularum
 #: src/translations_regions.h:381
 msgid "Sea of Islands"
-msgstr ""
+msgstr "Sea of Islands"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9293,7 +9320,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Marginis
 #: src/translations_regions.h:385
 msgid "Sea of the Edge"
-msgstr ""
+msgstr "Sea of the Edge"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9302,7 +9329,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Moscoviense
 #: src/translations_regions.h:389
 msgid "Sea of Moscow"
-msgstr ""
+msgstr "Sea of Moscow"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9311,7 +9338,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Nectaris
 #: src/translations_regions.h:393
 msgid "Sea of Nectar"
-msgstr ""
+msgstr "Sea of Nectar"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9320,7 +9347,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Nubium
 #: src/translations_regions.h:397
 msgid "Sea of Clouds"
-msgstr ""
+msgstr "Sea of Clouds"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9329,7 +9356,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Orientale
 #: src/translations_regions.h:401
 msgid "Eastern Sea"
-msgstr ""
+msgstr "Eastern Sea"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9338,7 +9365,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Serenitatis
 #: src/translations_regions.h:405
 msgid "Sea of Serenity"
-msgstr ""
+msgstr "Sea of Serenity"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9347,7 +9374,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Smythii
 #: src/translations_regions.h:409
 msgid "Smyth's Sea"
-msgstr ""
+msgstr "Smyth's Sea"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9356,7 +9383,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Spumans
 #: src/translations_regions.h:413
 msgid "Foaming Sea"
-msgstr ""
+msgstr "Foaming Sea"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9365,7 +9392,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Tranquillitatis
 #: src/translations_regions.h:417
 msgid "Sea of Tranquillity"
-msgstr ""
+msgstr "Sea of Tranquillity"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9374,7 +9401,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Undarum
 #: src/translations_regions.h:421
 msgid "Sea of Waves"
-msgstr ""
+msgstr "Sea of Waves"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9383,7 +9410,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Vaporum
 #: src/translations_regions.h:425
 msgid "Sea of Vapors"
-msgstr ""
+msgstr "Sea of Vapors"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9391,7 +9418,7 @@ msgstr ""
 #. _Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:428
 msgid "Northern highlands"
-msgstr ""
+msgstr "Northern highlands"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9400,7 +9427,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Montes_Jura
 #: src/translations_regions.h:432
 msgid "Jura mountains"
-msgstr ""
+msgstr "Jura mountains"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9408,7 +9435,7 @@ msgstr ""
 #. _Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:435
 msgid "Alps province"
-msgstr ""
+msgstr "Alps province"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9416,7 +9443,7 @@ msgstr ""
 #. _Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:438
 msgid "Caucasus province"
-msgstr ""
+msgstr "Caucasus province"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9425,7 +9452,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Lacus_Somniorum
 #: src/translations_regions.h:442
 msgid "Lake of Dreams"
-msgstr ""
+msgstr "Lake of Dreams"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9434,7 +9461,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Montes_Taurus
 #: src/translations_regions.h:446
 msgid "Taurus mountains"
-msgstr ""
+msgstr "Taurus mountains"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9443,7 +9470,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Sinus_Roris
 #: src/translations_regions.h:450
 msgid "Bay of Dew"
-msgstr ""
+msgstr "Bay of Dew"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9451,7 +9478,7 @@ msgstr ""
 #. _Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:453
 msgid "Apennines province"
-msgstr ""
+msgstr "Apennines province"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9459,7 +9486,7 @@ msgstr ""
 #. _Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:456
 msgid "Carpatian province"
-msgstr ""
+msgstr "Carpatian province"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9468,7 +9495,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Sinus_Aestuum
 #: src/translations_regions.h:460
 msgid "Seething Bay"
-msgstr ""
+msgstr "Seething Bay"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9476,7 +9503,7 @@ msgstr ""
 #. _Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:463
 msgid "Aestuum upland"
-msgstr ""
+msgstr "Aestuum upland"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9484,7 +9511,7 @@ msgstr ""
 #. _Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:466
 msgid "Haemus province"
-msgstr ""
+msgstr "Haemus province"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9492,7 +9519,7 @@ msgstr ""
 #. _Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:469
 msgid "Procellarum upland"
-msgstr ""
+msgstr "Procellarum upland"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9500,7 +9527,7 @@ msgstr ""
 #. _Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:472
 msgid "Central crater province"
-msgstr ""
+msgstr "Central crater province"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9508,7 +9535,7 @@ msgstr ""
 #. _Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:475
 msgid "Macro-crater province"
-msgstr ""
+msgstr "Macro-crater province"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9516,7 +9543,7 @@ msgstr ""
 #. _Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:478
 msgid "Southeastern crater province"
-msgstr ""
+msgstr "Southeastern crater province"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9524,7 +9551,7 @@ msgstr ""
 #. _Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:481
 msgid "Cratered plain province"
-msgstr ""
+msgstr "Cratered plain province"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9532,7 +9559,7 @@ msgstr ""
 #. _Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:484
 msgid "Southwestern crater province"
-msgstr ""
+msgstr "Southwestern crater province"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9540,7 +9567,7 @@ msgstr ""
 #. _Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:487
 msgid "Nectaris crater province"
-msgstr ""
+msgstr "Nectaris crater province"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9548,7 +9575,7 @@ msgstr ""
 #. _Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:490
 msgid "Pyrenees province"
-msgstr ""
+msgstr "Pyrenees province"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9556,7 +9583,7 @@ msgstr ""
 #. _Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:493
 msgid "Western highlands"
-msgstr ""
+msgstr "Western highlands"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9564,7 +9591,7 @@ msgstr ""
 #. _Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:496
 msgid "Eastern highlands"
-msgstr ""
+msgstr "Eastern highlands"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9573,7 +9600,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Sinus_Medii
 #: src/translations_regions.h:500
 msgid "Bay of the center"
-msgstr ""
+msgstr "Bay of the center"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9582,7 +9609,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Palus_Epidemiarum
 #: src/translations_regions.h:504
 msgid "Marsh of Epidemics"
-msgstr ""
+msgstr "Marsh of Epidemics"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9590,7 +9617,7 @@ msgstr ""
 #. _Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:507
 msgid "Far-side southern lowland"
-msgstr ""
+msgstr "Far-side southern lowland"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9598,7 +9625,7 @@ msgstr ""
 #. _Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:510
 msgid "Far-side northern lowland"
-msgstr ""
+msgstr "Far-side northern lowland"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9606,7 +9633,7 @@ msgstr ""
 #. _Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:513
 msgid "Far-side central highland"
-msgstr ""
+msgstr "Far-side central highland"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9615,7 +9642,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Acidalia_Planitia
 #: src/translations_regions.h:517
 msgid "Acidalia Planitia"
-msgstr ""
+msgstr "Acidalia Planitia"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9624,7 +9651,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Amazonis_Planitia
 #: src/translations_regions.h:521
 msgid "Amazonis Planitia"
-msgstr ""
+msgstr "Amazonis Planitia"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9633,7 +9660,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Arcadia_Planitia
 #: src/translations_regions.h:525
 msgid "Arcadia Planitia"
-msgstr ""
+msgstr "Arcadia Planitia"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9642,7 +9669,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Argyre_Planitia
 #: src/translations_regions.h:529
 msgid "Argyre Planitia"
-msgstr ""
+msgstr "Argyre Planitia"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9651,7 +9678,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Chryse_Planitia
 #: src/translations_regions.h:533
 msgid "Chryse Planitia"
-msgstr ""
+msgstr "Chryse Planitia"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9660,7 +9687,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Elysium_Planitia
 #: src/translations_regions.h:537
 msgid "Elysium Planitia"
-msgstr ""
+msgstr "Elysium Planitia"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9669,7 +9696,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Eridania_Planitia
 #: src/translations_regions.h:541
 msgid "Eridania Planitia"
-msgstr ""
+msgstr "Eridania Planitia"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9678,7 +9705,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Hellas_Planitia
 #: src/translations_regions.h:545
 msgid "Hellas Planitia"
-msgstr ""
+msgstr "Hellas Planitia"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9687,7 +9714,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Isidis_Planitia
 #: src/translations_regions.h:549
 msgid "Isidis Planitia"
-msgstr ""
+msgstr "Isidis Planitia"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9696,7 +9723,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Utopia_Planitia
 #: src/translations_regions.h:553
 msgid "Utopia Planitia"
-msgstr ""
+msgstr "Utopia Planitia"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9705,7 +9732,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Aonia_Terra
 #: src/translations_regions.h:557
 msgid "Aonia Terra"
-msgstr ""
+msgstr "Aonia Terra"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9714,7 +9741,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Arabia_Terra
 #: src/translations_regions.h:561
 msgid "Arabia Terra"
-msgstr ""
+msgstr "Arabia Terra"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9723,7 +9750,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Margaritifer_Terra
 #: src/translations_regions.h:565
 msgid "Margaritifer Terra"
-msgstr ""
+msgstr "Margaritifer Terra"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9732,7 +9759,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Noachis_Terra
 #: src/translations_regions.h:569
 msgid "Noachis Terra"
-msgstr ""
+msgstr "Noachis Terra"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9741,7 +9768,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Promethei_Terra
 #: src/translations_regions.h:573
 msgid "Promethei Terra"
-msgstr ""
+msgstr "Promethei Terra"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9750,7 +9777,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Tempe_Terra
 #: src/translations_regions.h:577
 msgid "Tempe Terra"
-msgstr ""
+msgstr "Tempe Terra"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9759,7 +9786,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Terra_Cimmeria
 #: src/translations_regions.h:581
 msgid "Terra Cimmeria"
-msgstr ""
+msgstr "Terra Cimmeria"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9768,7 +9795,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Terra_Sabaea
 #: src/translations_regions.h:585
 msgid "Terra Sabaea"
-msgstr ""
+msgstr "Terra Sabaea"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9777,7 +9804,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Terra_Sirenum
 #: src/translations_regions.h:589
 msgid "Terra Sirenum"
-msgstr ""
+msgstr "Terra Sirenum"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9786,7 +9813,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Tyrrhena_Terra
 #: src/translations_regions.h:593
 msgid "Tyrrhena Terra"
-msgstr ""
+msgstr "Tyrrhena Terra"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9795,7 +9822,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Xanthe_Terra
 #: src/translations_regions.h:597
 msgid "Xanthe Terra"
-msgstr ""
+msgstr "Xanthe Terra"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9804,7 +9831,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Vastitas_Borealis
 #: src/translations_regions.h:601
 msgid "Vastitas Borealis"
-msgstr ""
+msgstr "Vastitas Borealis"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9813,7 +9840,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Tharsis
 #: src/translations_regions.h:605
 msgid "Tharsis"
-msgstr ""
+msgstr "Tharsis"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9822,7 +9849,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Planum_Boreum
 #: src/translations_regions.h:609
 msgid "Planum Boreum"
-msgstr ""
+msgstr "Planum Boreum"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9831,7 +9858,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Planum_Australe
 #: src/translations_regions.h:613
 msgid "Planum Australe"
-msgstr ""
+msgstr "Planum Australe"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -9840,331 +9867,331 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Lunae_Palus_quadrangle
 #: src/translations_regions.h:617
 msgid "Lunae Planum"
-msgstr ""
+msgstr "Lunae Planum"
 
 #. TRANSLATORS: Name of region on Titan
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
 #: src/translations_regions.h:620
 msgid "Garotman Terra"
-msgstr ""
+msgstr "Garotman Terra"
 
 #. TRANSLATORS: Name of region on Titan
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
 #: src/translations_regions.h:623
 msgid "Tollan Terra"
-msgstr ""
+msgstr "Tollan Terra"
 
 #. TRANSLATORS: Name of region on Titan
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
 #: src/translations_regions.h:626
 msgid "Tsiipiya Terra"
-msgstr ""
+msgstr "Tsiipiya Terra"
 
 #. TRANSLATORS: Name of region on Titan
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
 #: src/translations_regions.h:629
 msgid "Yalaing Terra"
-msgstr ""
+msgstr "Yalaing Terra"
 
 #. TRANSLATORS: Name of region on Titan
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Xanadu_(Titan)
 #: src/translations_regions.h:632
 msgid "Xanadu"
-msgstr ""
+msgstr "Xanadu"
 
 #. TRANSLATORS: Name of region on Titan
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
 #: src/translations_regions.h:635
 msgid "Kraken Mare"
-msgstr ""
+msgstr "Kraken Mare"
 
 #. TRANSLATORS: Name of region on Titan
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
 #: src/translations_regions.h:638
 msgid "Ligeia Mare"
-msgstr ""
+msgstr "Ligeia Mare"
 
 #. TRANSLATORS: Name of region on Titan
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
 #: src/translations_regions.h:641
 msgid "Punga Mare"
-msgstr ""
+msgstr "Punga Mare"
 
 #. TRANSLATORS: Name of region on Titan
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
 #: src/translations_regions.h:644
 msgid "Concordia Regio"
-msgstr ""
+msgstr "Concordia Regio"
 
 #. TRANSLATORS: Name of region on Titan
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
 #: src/translations_regions.h:647
 msgid "Hetpet Regio"
-msgstr ""
+msgstr "Hetpet Regio"
 
 #. TRANSLATORS: Name of region on Titan
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
 #: src/translations_regions.h:650
 msgid "Hotei Regio"
-msgstr ""
+msgstr "Hotei Regio"
 
 #. TRANSLATORS: Name of region on Titan
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
 #: src/translations_regions.h:653
 msgid "Ochumare Regio"
-msgstr ""
+msgstr "Ochumare Regio"
 
 #. TRANSLATORS: Name of region on Titan
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Tui_Regio
 #: src/translations_regions.h:656
 msgid "Tui Regio"
-msgstr ""
+msgstr "Tui Regio"
 
 #: skycultures/translations_skycultures.fab:10
 msgctxt "sky culture"
 msgid "Al-Sufi"
-msgstr ""
+msgstr "الصوفي (كتاب الكواكب)"
 
 #: skycultures/translations_skycultures.fab:12
 msgctxt "sky culture"
 msgid "Anutan"
-msgstr ""
+msgstr "الأنوتاوي"
 
 #: skycultures/translations_skycultures.fab:14
 msgctxt "sky culture"
 msgid "Arabian Peninsula"
-msgstr ""
+msgstr "الجزيرة العربية"
 
 #: skycultures/translations_skycultures.fab:16
 msgctxt "sky culture"
 msgid "Arabic"
-msgstr ""
+msgstr "العربي"
 
 #: skycultures/translations_skycultures.fab:18
 msgctxt "sky culture"
 msgid "Arabic Lunar Stations"
-msgstr ""
+msgstr "منازل القمر العربية"
 
 #: skycultures/translations_skycultures.fab:20
 msgctxt "sky culture"
 msgid "Armintxe Cave"
-msgstr ""
+msgstr "كهف أرمينتسي"
 
 #: skycultures/translations_skycultures.fab:22
 msgctxt "sky culture"
 msgid "Aztec"
-msgstr ""
+msgstr "الأزتك"
 
 #: skycultures/translations_skycultures.fab:24
 msgctxt "sky culture"
 msgid "Babylonian (MUL.APIN)"
-msgstr ""
+msgstr "البابلية - مل.أبين"
 
 #: skycultures/translations_skycultures.fab:26
 msgctxt "sky culture"
 msgid "Babylonian (Seleucid)"
-msgstr ""
+msgstr "البابلية - الفترة السلوقية"
 
 #: skycultures/translations_skycultures.fab:28
 msgctxt "sky culture"
 msgid "Belarusian"
-msgstr ""
+msgstr "البلاروسي"
 
 #: skycultures/translations_skycultures.fab:30
 msgctxt "sky culture"
 msgid "Boorong"
-msgstr ""
+msgstr "البورونج"
 
 #: skycultures/translations_skycultures.fab:32
 msgctxt "sky culture"
 msgid "Chinese"
-msgstr ""
+msgstr "الصيني"
 
 #: skycultures/translations_skycultures.fab:34
 msgctxt "sky culture"
 msgid "Chinese Contemporary"
-msgstr ""
+msgstr "الصيني المعاصر"
 
 #: skycultures/translations_skycultures.fab:36
 msgctxt "sky culture"
 msgid "Chinese Medieval"
-msgstr ""
+msgstr "الصيني العصور الوسطى"
 
 #: skycultures/translations_skycultures.fab:38
 msgctxt "sky culture"
 msgid "Dakota/Lakota/Nakota"
-msgstr ""
+msgstr "داكوتا/لاكوتا/ناكوتا"
 
 #: skycultures/translations_skycultures.fab:40
 msgctxt "sky culture"
 msgid "Egyptian"
-msgstr ""
+msgstr "المصري"
 
 #: skycultures/translations_skycultures.fab:42
 msgctxt "sky culture"
 msgid "Greek (Almagest)"
-msgstr ""
+msgstr "اليوناني (المجسطي)"
 
 #: skycultures/translations_skycultures.fab:44
 msgctxt "sky culture"
 msgid "Greek (Farnese + Almagest)"
-msgstr ""
+msgstr "اليوناني (فارنيزي + المجسطي)"
 
 #: skycultures/translations_skycultures.fab:46
 msgctxt "sky culture"
 msgid "Greek (Leiden Aratea + Almagest)"
-msgstr ""
+msgstr "اليوناني (ليدن أراتيا + المجسطي)"
 
 #: skycultures/translations_skycultures.fab:48
 msgctxt "sky culture"
 msgid "Hawaiian Starlines"
-msgstr ""
+msgstr "خطوط النجوم الهاوائية"
 
 #: skycultures/translations_skycultures.fab:50
 msgctxt "sky culture"
 msgid "Inuit"
-msgstr ""
+msgstr "إنيويت"
 
 #: skycultures/translations_skycultures.fab:52
 msgctxt "sky culture"
 msgid "Indian Vedic"
-msgstr ""
+msgstr "الهندي الفيدي"
 
 #: skycultures/translations_skycultures.fab:54
 msgctxt "sky culture"
 msgid "Japanese Moon Stations"
-msgstr ""
+msgstr "منازل القمر اليابانية"
 
 #: skycultures/translations_skycultures.fab:56
 msgctxt "sky culture"
 msgid "Kamilaroi/Euahlayi"
-msgstr ""
+msgstr "كاميلاروي/يواهلايي"
 
 #: skycultures/translations_skycultures.fab:58
 msgctxt "sky culture"
 msgid "Korean"
-msgstr ""
+msgstr "الكوري"
 
 #: skycultures/translations_skycultures.fab:60
 msgctxt "sky culture"
 msgid "Lokono"
-msgstr ""
+msgstr "لوكونو"
 
 #: skycultures/translations_skycultures.fab:62
 msgctxt "sky culture"
 msgid "Macedonian"
-msgstr ""
+msgstr "المقدوني"
 
 #: skycultures/translations_skycultures.fab:64
 msgctxt "sky culture"
 msgid "Maori"
-msgstr ""
+msgstr "ماوري"
 
 #: skycultures/translations_skycultures.fab:66
 msgctxt "sky culture"
 msgid "Maya"
-msgstr ""
+msgstr "المايا"
 
 #: skycultures/translations_skycultures.fab:68
 msgctxt "sky culture"
 msgid "Mongolian"
-msgstr ""
+msgstr "المنغولي"
 
 #: skycultures/translations_skycultures.fab:70
 msgctxt "sky culture"
 msgid "Navajo"
-msgstr ""
+msgstr "النافاهو"
 
 #: skycultures/translations_skycultures.fab:72
 msgctxt "sky culture"
 msgid "Norse"
-msgstr ""
+msgstr "النرويجي"
 
 #: skycultures/translations_skycultures.fab:74
 msgctxt "sky culture"
 msgid "Northern Andes"
-msgstr ""
+msgstr "شمال الأنديز"
 
 #: skycultures/translations_skycultures.fab:76
 msgctxt "sky culture"
 msgid "Ojibwe"
-msgstr ""
+msgstr "أوجيبوي"
 
 #: skycultures/translations_skycultures.fab:78
 msgctxt "sky culture"
 msgid "Romanian"
-msgstr ""
+msgstr "الروماني"
 
 #: skycultures/translations_skycultures.fab:80
 msgctxt "sky culture"
 msgid "Russian (Siberian)"
-msgstr ""
+msgstr "الروسي (سيبيريا)"
 
 #: skycultures/translations_skycultures.fab:82
 msgctxt "sky culture"
 msgid "Sami"
-msgstr ""
+msgstr "السامي"
 
 #: skycultures/translations_skycultures.fab:84
 msgctxt "sky culture"
 msgid "Sardinian"
-msgstr ""
+msgstr "السرديني"
 
 #: skycultures/translations_skycultures.fab:86
 msgctxt "sky culture"
 msgid "Tongan"
-msgstr ""
+msgstr "تونغان"
 
 #: skycultures/translations_skycultures.fab:88
 msgctxt "sky culture"
 msgid "Tukano"
-msgstr ""
+msgstr "توكانو"
 
 #: skycultures/translations_skycultures.fab:90
 msgctxt "sky culture"
 msgid "Tupi-Guarani"
-msgstr ""
+msgstr "توبي-جواراني"
 
 #: skycultures/translations_skycultures.fab:92
 msgctxt "sky culture"
 msgid "Vanuatu (Netwar)"
-msgstr ""
+msgstr "فانواتو (نيتوار)"
 
 #: skycultures/translations_skycultures.fab:94
 msgctxt "sky culture"
 msgid "Western"
-msgstr ""
+msgstr "الغربي"
 
 #: skycultures/translations_skycultures.fab:96
 msgctxt "sky culture"
 msgid "Western (H.A. Rey)"
-msgstr ""
+msgstr "الغربي (هـ. أ. ري)"
 
 #: skycultures/translations_skycultures.fab:98
 msgctxt "sky culture"
 msgid "Western (O.Hlad)"
-msgstr ""
+msgstr "الغربي (أو. هلاد)"
 
 #: skycultures/translations_skycultures.fab:100
 msgctxt "sky culture"
 msgid "Western (Sky & Telescope)"
-msgstr ""
+msgstr "الغربي (مجلة السماء والتلسكوب)"
 
 #: skycultures/translations_skycultures.fab:102
 msgctxt "sky culture"
 msgid "Western (Sternenkarten)"
-msgstr ""
+msgstr "الغربي (خرائط النجوم)"
 
 #: src/ui_dateTimeDialogGui.h:378 src/ui_dateTimeDialogGui.h:383
 msgid "Julian Day"
@@ -10288,7 +10315,7 @@ msgstr "المدينة/اسم الموقع"
 
 #: src/ui_locationDialogGui.h:517
 msgid "Region:"
-msgstr ""
+msgstr "المنطقة"
 
 #: src/ui_locationDialogGui.h:521
 msgid "Enable daylight saving time"
@@ -10559,7 +10586,7 @@ msgstr "المسح السماوي"
 
 #: src/ui_viewDialog.h:3229
 msgid "Solar altitude for Twilight Finder:"
-msgstr ""
+msgstr "ارتفاع الشمس وقت طلوع الفجر وغياب الشفق"
 
 #: src/ui_viewDialog.h:3230
 msgid "Atmosphere visualization"
@@ -10675,39 +10702,44 @@ msgstr "نجوم مشعّة"
 
 #: src/ui_viewDialog.h:3279
 msgid "Show all available proper names"
-msgstr ""
+msgstr "إعرض جميع أسماء النجم الأخرى المتاحة"
 
 #: src/ui_viewDialog.h:3281
 msgid "Show additional star names"
-msgstr ""
+msgstr "إعرض أسماء النجم الأخرى"
 
 #: src/ui_viewDialog.h:3283
 msgid ""
 "Show traditional designations of double stars if proper name, Bayer or "
 "Flamsteed designations do not exist for the star."
 msgstr ""
+"إعرض المعرفات التقليدية للنجوم المزدوجة، إذا لم يكن للنجم اسم أو معرف في "
+"دليل باير أو دليل فلامستيد."
 
 #: src/ui_viewDialog.h:3285
 msgctxt "double stars"
 msgid "Dbl. stars"
-msgstr ""
+msgstr "النجوم المزدوجة"
 
 #: src/ui_viewDialog.h:3287
 msgid ""
 "Show designations of variable stars if proper name, Bayer or Flamsteed "
 "designations, or designation of double star do not exist for the star."
 msgstr ""
+"إعرض معرفات النجوم المتغيرة، إذا لم يوجد للنجم اسم أو معرف في أدلة باير "
+"وفلامستيد، ولم يكن له معرف في النجوم المزدوجة."
 
 #: src/ui_viewDialog.h:3289
 msgctxt "variable stars"
 msgid "Var. stars"
-msgstr ""
+msgstr "النجوم المتغيرة"
 
 #: src/ui_viewDialog.h:3291
 msgid ""
 "Show designations from Hipparcos catalog (HIP) if available and star doesn't"
 " have other traditional designations."
 msgstr ""
+"إعرض معرف النجم من دليل هيباركوس إذا كان موجوداً، ولم يكن للنجم معرف تقليدي."
 
 #: src/ui_viewDialog.h:3293
 msgid "Projection"
@@ -10719,11 +10751,11 @@ msgstr "<P DIR=RTL>الفرق العمودي في منظر العرض</P>"
 
 #: src/ui_viewDialog.h:3295
 msgid "Custom FoV limit"
-msgstr ""
+msgstr "حد حقل الرؤية المخصص"
 
 #: src/ui_viewDialog.h:3297
 msgid "Additional custom limitation (e.g. for planetarium use)"
-msgstr ""
+msgstr "حد إضافي مخصص (للاستعمال في القبب الفلكية مثلاً)"
 
 #: src/ui_viewDialog.h:3299
 msgid "Solar System objects"
@@ -10799,23 +10831,23 @@ msgstr "إظهار وإخفاء هالة القمر"
 
 #: src/ui_viewDialog.h:3331
 msgid "Moon's halo"
-msgstr ""
+msgstr "هالة القمر"
 
 #: src/ui_viewDialog.h:3333
 msgid "Toggle drawing Sun's glare"
-msgstr ""
+msgstr "تفعيل وتعطيل عرض وهج الشمس"
 
 #: src/ui_viewDialog.h:3335
 msgid "Sun's glare"
-msgstr ""
+msgstr "وهج الشمس"
 
 #: src/ui_viewDialog.h:3337
 msgid "Toggle permanent drawing of Sun's corona when atmosphere is disabled"
-msgstr ""
+msgstr "فعّل أو عطّل عرض إكليل الشمس حينما يكون إظهار الغلاف الجوي معطلاً"
 
 #: src/ui_viewDialog.h:3339
 msgid "Sun's corona"
-msgstr ""
+msgstr "إكليل الشمس"
 
 #: src/ui_viewDialog.h:3341
 msgid ""
@@ -10838,8 +10870,8 @@ msgid ""
 "Astronomical Almanac (default) has 2% enlargement, Danjon (1951) uses a "
 "slightly different model"
 msgstr ""
-"يستخدم Astronomical Almanac (الافتراضي) 2% تضخيما لظل الأرض، بينما يستخدم "
-"دانجون (1951) نموذجا يختلف قليلا"
+"التقويم الفلكي Astronomical Almanac (الافتراضي) يضخم بنسبة 2% ، بينما يستعمل"
+" Danjon (1951) نموذجا يختلف قليلا."
 
 #: src/ui_viewDialog.h:3348
 msgid "Earth shadow enlargement after Danjon"
@@ -10914,7 +10946,7 @@ msgstr "سماكة المسار بالبكسل"
 
 #: src/ui_viewDialog.h:3388
 msgid "Solar System Editor..."
-msgstr ""
+msgstr "محرر النظام الشمسي"
 
 #: src/ui_viewDialog.h:3389
 msgid "Display objects from catalogs"
@@ -11134,16 +11166,21 @@ msgstr ""
 #: src/ui_viewDialog.h:3535
 msgid "Labels for the cardinal directions (4-wind compass rose)."
 msgstr ""
+"أسماء الجهات الأصلية (الموجودة على وردة البوصلة ذات اتجاهات الريح الأربع)"
 
 #: src/ui_viewDialog.h:3539
 msgid ""
 "Labels for the intercardinal (or ordinal) directions (8-wind compass rose)."
 msgstr ""
+"أسماء الجهات الأصلية والفرعية (الموجودة على وردة البوصلة ذات اتجاهات الريح "
+"الثمان)"
 
 #: src/ui_viewDialog.h:3543
 msgid ""
 "Labels for the secondary intercardinal directions (16-wind compass rose)."
 msgstr ""
+"أسماء الجهات الفرعية الثانوية (الموجودة على وردة البوصلة ذات اتجاهات الريح "
+"الستة عشر)"
 
 #: src/ui_viewDialog.h:3546
 msgid "Zenith and Nadir"
@@ -11272,7 +11309,7 @@ msgstr "ظل الأرض"
 #: src/ui_viewDialog.h:3636
 msgid ""
 "Show point of Earth's center of deep shadow in the distance of the Moon."
-msgstr ""
+msgstr "إعرض نقطة مركز ظل الأرض العميق على نفس بعد القمر."
 
 #: src/ui_viewDialog.h:3642
 msgid "Equator (of date)"
@@ -11859,7 +11896,7 @@ msgstr "استخدم DE431 (بيانات لمدد طويلة)"
 
 #: src/ui_configurationDialog.h:1713
 msgid "Use DE441 (long-time data)"
-msgstr ""
+msgstr "استعمل DE441 (بيانات فترة طويلة)"
 
 #: src/ui_configurationDialog.h:1715
 msgid ""
@@ -11877,7 +11914,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1718
 msgid "Use DE440 (high accuracy)"
-msgstr ""
+msgstr "استعمل DE440 (دقة عالية)"
 
 #: src/ui_configurationDialog.h:1721
 msgid "Default options"
@@ -11955,12 +11992,12 @@ msgstr "اتجاه الرؤية عند التشغيل"
 
 #: src/ui_configurationDialog.h:1740
 msgid "Display user customized information"
-msgstr ""
+msgstr "إعرض المعلومات المختارة"
 
 #: src/ui_configurationDialog.h:1742
 msgctxt "info group name"
 msgid "Customized"
-msgstr ""
+msgstr "معلومات مختارة"
 
 #: src/ui_configurationDialog.h:1744
 msgid "Display all information available"
@@ -11969,7 +12006,7 @@ msgstr "أظهر جميع المعلومات المتوفرة"
 #: src/ui_configurationDialog.h:1746
 msgctxt "info group name"
 msgid "All available"
-msgstr ""
+msgstr "كل المعلومات"
 
 #: src/ui_configurationDialog.h:1748
 msgid "Display no information"
@@ -11978,7 +12015,7 @@ msgstr "لاتظهر أي معلومات"
 #: src/ui_configurationDialog.h:1750
 msgctxt "info group name"
 msgid "None"
-msgstr ""
+msgstr "لا تظهر أي معلومات"
 
 #: src/ui_configurationDialog.h:1752
 msgid "Display less information"
@@ -11987,16 +12024,16 @@ msgstr "أظهر معلومات اقل"
 #: src/ui_configurationDialog.h:1754
 msgctxt "info group name"
 msgid "Short"
-msgstr ""
+msgstr "معلومات مختصرة"
 
 #: src/ui_configurationDialog.h:1756
 msgid "Display a preconfigured set of information"
-msgstr ""
+msgstr "إعرض مجموعة من المعلومات المعدة"
 
 #: src/ui_configurationDialog.h:1758
 msgctxt "info group name"
 msgid "Default"
-msgstr ""
+msgstr "الافتراضية"
 
 #: src/ui_configurationDialog.h:1759
 msgid "Displayed fields"
@@ -12123,11 +12160,11 @@ msgstr "معلومات إضافية"
 
 #: src/ui_configurationDialog.h:1823
 msgid "Show Solar and Lunar positions if observed from Earth"
-msgstr ""
+msgstr "أظهر موقع الشمس والقمر حين الرصد من الأرض"
 
 #: src/ui_configurationDialog.h:1825
 msgid "Solar and Lunar position"
-msgstr ""
+msgstr "موقع الشمس والقمر"
 
 #: src/ui_configurationDialog.h:1826
 msgid "Show additional buttons"
@@ -12189,7 +12226,7 @@ msgstr "فعّل ميزة حفظ المناظر المفضلة"
 
 #: src/ui_configurationDialog.h:1860 src/ui_obsListDialog.h:248
 msgid "Observing lists"
-msgstr ""
+msgstr "قوائم الرصد"
 
 #: src/ui_configurationDialog.h:1863
 msgid "Toggle the usage of background under GUI buttons"
@@ -12333,7 +12370,7 @@ msgstr "خيارات عرض القبة السماوية"
 
 #: src/ui_configurationDialog.h:1938
 msgid "Allow mouse to pan (drag)"
-msgstr ""
+msgstr "اسمح للفأرة بالسحب"
 
 #: src/ui_configurationDialog.h:1940
 msgid "Enable mouse navigation"
@@ -12465,14 +12502,16 @@ msgid ""
 "Annual aberration is an annual wobble in positions, amounting to max. about "
 "20 arcseconds for observers on Earth."
 msgstr ""
+"الانحراف السنوي تذبذب سنوي للمواقع، يصل في أقصاه إلى 20 ثانية قوسية للراصد "
+"على الأرض."
 
 #: src/ui_configurationDialog.h:2006
 msgid "Include aberration"
-msgstr ""
+msgstr "ضمِّن الانحراف"
 
 #: src/ui_configurationDialog.h:2008
 msgid "Exaggerate aberration (for didactic explanations)"
-msgstr ""
+msgstr "بالغ في قيمة الانحراف (لأغراض الشرح التعليمي)"
 
 #: src/ui_configurationDialog.h:2011
 msgid "Allow keyboard to pan and zoom"
@@ -12545,11 +12584,11 @@ msgstr "خط التطبيق"
 
 #: src/ui_configurationDialog.h:2047
 msgid "Allow mouse to zoom (mousewheel)"
-msgstr ""
+msgstr "اسمح للفأرة بالتكبير (عجلة الفأرة)"
 
 #: src/ui_configurationDialog.h:2049
 msgid "Enable mouse zooming"
-msgstr ""
+msgstr "فعِّل التكبير بالفأرة"
 
 #: src/ui_configurationDialog.h:2051
 msgid "Force date/time tab and focus on day input when activating date panel"
@@ -12744,11 +12783,11 @@ msgstr "استعرض قياسات البقعة الحمراء العظيمة ا�
 
 #: src/ui_scriptConsole.h:391
 msgid "Clear"
-msgstr ""
+msgstr "امسح"
 
 #: src/ui_scriptConsole.h:395
 msgid "Pre-process script using SSC preprocessor"
-msgstr ""
+msgstr "عالج البرنامج النصي  بواسطة SSC preprocessor معالجة مسبقة"
 
 #: src/ui_scriptConsole.h:400
 msgid "Execute:"
@@ -12756,7 +12795,7 @@ msgstr "نفذ:"
 
 #: src/ui_scriptConsole.h:409
 msgid "Stop script"
-msgstr ""
+msgstr "أوقف البرنامج النصي"
 
 #: src/ui_scriptConsole.h:412
 msgid "Script"
@@ -12832,7 +12871,7 @@ msgstr "حاسبة الكواكب"
 
 #: src/ui_astroCalcDialog.h:1727
 msgid "Export positions..."
-msgstr ""
+msgstr "صدِّر المواقع..."
 
 #: src/ui_astroCalcDialog.h:1730 src/ui_astroCalcDialog.h:1892
 msgid "Show objects brighter than magnitude"
@@ -12930,7 +12969,7 @@ msgstr "امسح التقاويم"
 
 #: src/ui_astroCalcDialog.h:1790
 msgid "Export ephemeris..."
-msgstr ""
+msgstr "صدِّر التقويم الفلكي..."
 
 #: src/ui_astroCalcDialog.h:1792 src/ui_astroCalcDialog.h:1835
 #: plugins/Satellites/src/ui_satellitesDialog.h:1192
@@ -12990,7 +13029,7 @@ msgstr "امسح العبورات"
 
 #: src/ui_astroCalcDialog.h:1816
 msgid "Export transits..."
-msgstr ""
+msgstr "صدِّر العبورات..."
 
 #: src/ui_astroCalcDialog.h:1818
 msgid "Celestial object:"
@@ -13020,7 +13059,7 @@ msgstr "امسح الظواهر"
 
 #: src/ui_astroCalcDialog.h:1833
 msgid "Export phenomena..."
-msgstr ""
+msgstr "صدِّر الظواهر..."
 
 #: src/ui_astroCalcDialog.h:1838
 msgid "Calculate also:"
@@ -13145,7 +13184,7 @@ msgstr "الأجرام المطابقة"
 
 #: src/ui_astroCalcDialog.h:1897
 msgid "Export list of objects..."
-msgstr ""
+msgstr "صدِّر قائمة الأجرام..."
 
 #: src/ui_astroCalcDialog.h:1898
 msgid "Select a category:"
@@ -13173,11 +13212,11 @@ msgstr "<p dir=ltr>المسافة الزاوية:"
 
 #: src/ui_astroCalcDialog.h:1916
 msgid "Mean motion of second celestial body:"
-msgstr ""
+msgstr "الحركة المتوسطة للجسم السماوي الثاني:"
 
 #: src/ui_astroCalcDialog.h:1917
 msgid "Mean motion of first celestial body:"
-msgstr ""
+msgstr "الحركة المتوسطة للجسم السماوي الأول:"
 
 #: src/ui_astroCalcDialog.h:1918
 msgid "Orbital velocity of second celestial body:"
@@ -13185,7 +13224,7 @@ msgstr "<p dir=ltr>السرعة المدارية للجسم السماوي ال�
 
 #: src/ui_astroCalcDialog.h:1919
 msgid "Orbital periods ratio:"
-msgstr ""
+msgstr "نسبة الفترات المدارية:"
 
 #: src/ui_astroCalcDialog.h:1920
 msgid "Equatorial diameters ratio:"
@@ -13227,7 +13266,7 @@ msgstr "استخدم علامات صغيرة عند تفعيل الخطوط"
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:202
 msgid "Lines and markers always on"
-msgstr ""
+msgstr "الخطوط والعلامات دائما موجودة"
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:203
 msgid "Ephemeris line thickness:"
@@ -13249,96 +13288,96 @@ msgstr "وحدة القياس:"
 
 #: src/ui_obsListDialog.h:250
 msgid "List(s):"
-msgstr ""
+msgstr "القوائم:"
 
 #: src/ui_obsListDialog.h:251
 msgid "Observing list description:"
-msgstr ""
+msgstr "وصف قائمة الرصد:"
 
 #: src/ui_obsListDialog.h:253 src/ui_obsListCreateEditDialog.h:250
 msgid "Highlight all the objects of the selected list"
-msgstr ""
+msgstr "ميِّز كل الأجرام في القائمة المختارة"
 
 #: src/ui_obsListDialog.h:255
 msgid "Highlight all"
-msgstr ""
+msgstr "ميِّز الكل"
 
 #: src/ui_obsListDialog.h:257 src/ui_obsListCreateEditDialog.h:254
 msgid "Clear all the highlight objects"
-msgstr ""
+msgstr "ألغ كل تمييز للأجرام"
 
 #: src/ui_obsListDialog.h:259
 msgid "Clear highlight(s)"
-msgstr ""
+msgstr "ألغ التمييز"
 
 #: src/ui_obsListDialog.h:261 src/ui_obsListCreateEditDialog.h:258
 msgid "Create a new observing list"
-msgstr ""
+msgstr "أنشئ قائمة رصد جديدة"
 
 #: src/ui_obsListDialog.h:263
 msgid "New list"
-msgstr ""
+msgstr "قائمة جديدة"
 
 #: src/ui_obsListDialog.h:265 src/ui_obsListCreateEditDialog.h:262
 msgid "Edit the selected list"
-msgstr ""
+msgstr "حرِّر القائمة المختارة"
 
 #: src/ui_obsListDialog.h:267
 msgid "Edit list"
-msgstr ""
+msgstr "حرِّر القائمة"
 
 #: src/ui_obsListDialog.h:269
 msgid "Delete the selected list"
-msgstr ""
+msgstr "احذف القائمة المختارة"
 
 #: src/ui_obsListDialog.h:271
 msgid "Delete list"
-msgstr ""
+msgstr "احذف القائمة"
 
 #: src/ui_obsListDialog.h:273 src/ui_obsListDialog.h:275
 #: src/ui_obsListCreateEditDialog.h:266
 msgid "Exit"
-msgstr ""
+msgstr "خروج"
 
 #: src/ui_obsListDialog.h:276
 msgid "Creation date:"
-msgstr ""
+msgstr "تاريخ الإنشاء:"
 
 #: src/ui_obsListCreateEditDialog.h:243
 msgid "Observing Lists creation/edition"
-msgstr ""
+msgstr "إنشاء/تحرير قوائم الرصد"
 
 #: src/ui_obsListCreateEditDialog.h:246
 msgid "Set the list as default"
-msgstr ""
+msgstr "اجعل هذه القائمة الإفتراضية"
 
 #: src/ui_obsListCreateEditDialog.h:248
 msgid "Set list as default"
-msgstr ""
+msgstr "اجعل القائمة افتراضية"
 
 #: src/ui_obsListCreateEditDialog.h:252
 msgid "Add object"
-msgstr ""
+msgstr "أضف جرماً"
 
 #: src/ui_obsListCreateEditDialog.h:256
 msgid "Remove object"
-msgstr ""
+msgstr "احذف جرماً"
 
 #: src/ui_obsListCreateEditDialog.h:260
 msgid "Export list"
-msgstr ""
+msgstr "صدِّر قائمة"
 
 #: src/ui_obsListCreateEditDialog.h:264
 msgid "Import list"
-msgstr ""
+msgstr "استورد قائمة"
 
 #: src/ui_obsListCreateEditDialog.h:265
 msgid "Save and Close "
-msgstr ""
+msgstr "حفظ وإغلاق"
 
 #: src/ui_obsListCreateEditDialog.h:267
 msgid "Name of the list:"
-msgstr ""
+msgstr "اسم القائمة:"
 
 #: src/ui_obsListCreateEditDialog.h:268
 #: plugins/Satellites/src/ui_satellitesDialog.h:1167
@@ -13748,7 +13787,7 @@ msgstr "‎قياس البعد الزاوي‎"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:143
 msgid "Angle measure settings"
-msgstr ""
+msgstr "إعدادات قياس البعد الزاوي"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:599
@@ -13863,10 +13902,11 @@ msgid ""
 "When set, measurements are shown near the end of the line instead of its "
 "starting point."
 msgstr ""
+"عند تفعيل هذا الخيار، تظهر القياسات في نهاية الخط بدلاً عن نقطة بدايته."
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:341
 msgid "Show measurements near mouse"
-msgstr ""
+msgstr "أظهر القياسات بالقرب من الفأرة"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:344
 #: plugins/Oculars/src/ui_ocularDialog.h:1584
@@ -14550,7 +14590,7 @@ msgid ""
 "with the naked eye through the Telrad (or similar) finder."
 msgstr ""
 "تستطيع إظهار دوائر تلراد المساعدة للتوجيه. هذه الميزة ترسم لك ثلاث دوائر "
-"متمركزة بحجم 0.5%, 2.0%, و 4.0%, لمساعدتك في رؤية ما تتوقع رؤيته بالعين "
+"متمركزة بحجم 0.5%1، 2.0%1، و 4.0%1، لمساعدتك في رؤية ما تتوقع رؤيته بالعين "
 "المجردة خلال دوائر تلراد أو ما شابهها."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:629
@@ -14990,7 +15030,7 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:156
 msgid "Artificial satellites"
-msgstr ""
+msgstr "الأقمار الصناعية"
 
 #: plugins/Satellites/src/Satellites.cpp:157
 msgid "Satellite labels"
@@ -15069,7 +15109,7 @@ msgstr "أقمار نظام تحديد الموقع"
 #. under complete control of the Indian government.
 #: plugins/Satellites/src/Satellites.cpp:2324
 msgid "irnss"
-msgstr ""
+msgstr "irnss"
 
 #. TRANSLATORS: Satellite group: The Quasi-Zenith Satellite System (QZSS), is
 #. a proposed three-satellite regional time transfer system and Satellite
@@ -15077,14 +15117,14 @@ msgstr ""
 #. receivable within Japan.
 #: plugins/Satellites/src/Satellites.cpp:2326
 msgid "qzss"
-msgstr ""
+msgstr "qzss"
 
 #. TRANSLATORS: Satellite group: The Tracking and Data Relay Satellite System
 #. (TDRSS) is a network of communications satellites and ground stations used
 #. by NASA for space communications.
 #: plugins/Satellites/src/Satellites.cpp:2328
 msgid "tdrss"
-msgstr ""
+msgstr "tdrss"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS
 #. constellation (GLObal NAvigation Satellite System)
@@ -15238,7 +15278,7 @@ msgstr "‎محطة الصين الفضائية الأولى‎"
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:2387
 msgid "Tiangong space station (Chinese large modular space station)"
-msgstr ""
+msgstr "محطة تيانجونج (المحطة الصينية التركيبية الكبيرة )"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:2389
@@ -15328,13 +15368,13 @@ msgstr "TIANGONG 1"
 #. TRANSLATORS: Satellite name: name of China's space station module
 #: plugins/Satellites/src/Satellites.cpp:2425
 msgid "TIANHE"
-msgstr ""
+msgstr "TIANHE"
 
 #. TRANSLATORS: Satellite name: China's space station name (with name of base
 #. module)
 #: plugins/Satellites/src/Satellites.cpp:2427
 msgid "TIANGONG (TIANHE)"
-msgstr ""
+msgstr "TIANGONG (TIANHE)"
 
 #: plugins/Satellites/src/Satellites.cpp:2430
 msgid "The satellite and the observer are in sunlight"
@@ -16108,7 +16148,7 @@ msgstr "طول نهاية الخط"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1099
 msgid "Search ..."
-msgstr ""
+msgstr "ابحث..."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1101
 msgid "Double-click a satellite to start tracking it."
@@ -16163,29 +16203,29 @@ msgstr "قدر اللمعان القياسي: "
 #: plugins/Satellites/src/ui_satellitesDialog.h:1135
 #: plugins/Satellites/src/ui_satellitesDialog.h:1139
 msgid "Perigee altitude in kilometers"
-msgstr ""
+msgstr "الارتفاع عند الحضيض بالكيلومترات"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1137
 msgid "Perigee:"
-msgstr ""
+msgstr "الحضيض:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1142
 #: plugins/Satellites/src/ui_satellitesDialog.h:1146
 msgid "Apogee altitude in kilometers"
-msgstr ""
+msgstr "الارتفاع عند الأوج بالكيلومترات"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1144
 msgid "Apogee:"
-msgstr ""
+msgstr "الأوج:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1149
 #: plugins/Satellites/src/ui_satellitesDialog.h:1153
 msgid "Orbital period in minutes"
-msgstr ""
+msgstr "الفترة المدارية بالدقائق"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1151
 msgid "Period:"
-msgstr ""
+msgstr "الفترة:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1156
 msgid "Display orbit line(s) for the selected satellite(s)"
@@ -16213,7 +16253,7 @@ msgstr "لاتحدث"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1168
 msgid "(add personal notes here)"
-msgstr ""
+msgstr "(أضف الملاحظات الشخصية هنا)"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1169
 msgid "Groups:"
@@ -16351,6 +16391,8 @@ msgid ""
 "The existing version of the configuration data for telescopes in the "
 "Telescope Control plugin is obsolete."
 msgstr ""
+"بيانات الإعدادات الموجودة حاليا للتلسكوبات في إضافة التحكم بالتلسكوبات "
+"منتهية الصلاحية."
 
 #. TRANSLATORS: Description for Meade AutoStar compatible mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1770
@@ -16394,7 +16436,7 @@ msgid ""
 "Any Sky-Watcher mount that uses version 3 or later of the SynScan hand "
 "controller."
 msgstr ""
-"أي حامل سكاي واتشر يستخدم الإصدار الثالث أو مابعده للمتحكم اليدوي سينسكان"
+"أي حامل سكاي واتشر يستخدم الإصدار الثالث أو ما بعده للمتحكم اليدوي سينسكان"
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan AZ GOTO mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1784
@@ -17396,7 +17438,7 @@ msgid ""
 msgstr ""
 "<p dir=rtl><b>SynScan</b> هو اسم جهاز التحكم اليدوي المستخدم مع  Sky-Watcher"
 " GoTo mounts ويظهر أنه إذا كان الإصدار هو 3.0 أو أحدث فسيكون متوافقا مع هذه "
-"اللإضافة لأنها تستخدم بروتوكول النكستار NexStar protocol."
+"الإضافة لأنها تستخدم بروتوكول النكستار NexStar protocol."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:487
 msgid "Argo Navis is a 'Digital Telescope Computer' by Wildcard Innovations."
@@ -19193,7 +19235,7 @@ msgstr "التحكم عن بعد"
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:154
 msgid "Remote control config"
-msgstr ""
+msgstr "إعدادات التحكم عن بعد"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:135
 msgid "Remote Control Plug-in"
@@ -19232,14 +19274,14 @@ msgstr "This plugin uses the {QtWebApp HTTP server} by Stefan Frings."
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:196
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:195
 msgid "Publications"
-msgstr "المطبوعات"
+msgstr "<p dir=rtl>المطبوعات"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:161
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:244
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:197
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:196
 msgid "If you use this plugin in your publications, please cite:"
-msgstr "إذا استخدمت هذه الإضافة في مطبوعاتك، يرجى الإشارة إلى:"
+msgstr "<p dir=rtl>إذا استخدمت هذه الإضافة في مطبوعاتك، يرجى الإشارة إلى:"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:206
 #, qt-format
@@ -19636,12 +19678,12 @@ msgstr "الافتراضية"
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:1052
 msgid "Secondary Transit"
-msgstr ""
+msgstr "العبور الثانوي"
 
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:1054
 msgid "Disk Kinematics"
-msgstr ""
+msgstr "حركة القرص"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:281
 msgid "planetary system"
@@ -22349,7 +22391,7 @@ msgstr "فعّل عرض تسميات الكواكب الخارجية"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:594
 msgid "Enable display number of exoplanets in the system"
-msgstr ""
+msgstr "مكِّن عرض عدد الكواكب الخارجية في النظام"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:596
 msgid "Show exoplanets button on toolbar"
@@ -23647,7 +23689,7 @@ msgstr "الفترة الزمنية يجب أن تكون أقل من سنة!"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:197
 msgid "Code"
-msgstr ""
+msgstr "الرمز"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:199
 msgid "ZHR"
@@ -24456,11 +24498,11 @@ msgstr "الإسم"
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:274
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:748
 msgid "ArchaeoLines"
-msgstr "‎الخطوط الآثارية الفلكية‎"
+msgstr "الخطوط الآثارية الفلكية‎"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:62
 msgid "A tool for archaeo-/ethnoastronomical alignment studies"
-msgstr "<P DIR=RTL>أداة للدراسات الآثارية والعرقية الفلكية"
+msgstr "<p dir=rtl>أداة للدراسات الآثارية والعرقية الفلكية"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:298
 msgid "Show Line for Equinox"
@@ -24484,7 +24526,7 @@ msgstr "أظهر خط الوقوف القمري الأصغر"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:303
 msgid "Show Polar Circles"
-msgstr ""
+msgstr "أظهر الدوائر القطبية"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:304
 msgid "Show Line for Zenith Passage"
@@ -24532,11 +24574,11 @@ msgstr "أظهر الخط العمودي باتجاه السمت المخصص 2"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:315
 msgid "Show Line for Custom Altitude 1"
-msgstr ""
+msgstr "أظهر الخط للارتفاع المخصص 1"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:316
 msgid "Show Line for Custom Altitude 2"
-msgstr ""
+msgstr "أظهر الخط للارتفاع المخصص 2"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:317
 msgid "Show Line for Custom Declination 1"
@@ -24568,7 +24610,7 @@ msgstr "وقوف القمر الأصغر"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1431
 msgid "Polar Circle"
-msgstr ""
+msgstr "دائرة قطبية"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1434
 msgid "Zenith Passage"
@@ -24597,7 +24639,7 @@ msgstr "الزهرة"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:212
 msgid "ArchaeoLines Plug-in"
-msgstr "إضافة الخطوط الآثارية الفلكية"
+msgstr "<P DIR=RTL>إضافة الخطوط الآثارية الفلكية</p>"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:219
 msgid ""
@@ -24605,7 +24647,7 @@ msgid ""
 "relevant to archaeo- or ethnoastronomical studies."
 msgstr ""
 "<P DIR=RTL>إضافة الخطوط الآثارية الفلكية تعرض مجموعة من أقواس الميل ذات "
-"العلاقة الشديدة بالدراسات الآثارية والعرقية الفلكية"
+"العلاقة القوية بالدراسات الآثارية والعرقية الفلكية"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:220
 msgid "Declinations of equinoxes (i.e. equator) and the solstices"
@@ -24628,7 +24670,7 @@ msgstr "<P DIR=RTL>ميولات وقوفات القمر الصغرى</p>"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:224
 msgid "Declination of the Polar circles"
-msgstr ""
+msgstr "<P DIR=RTL>ميل الدوائر القطبية</p>"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:225
 msgid "Declination of the Zenith passage"
@@ -24682,12 +24724,18 @@ msgid ""
 "arbitrary locations. The directions are computed based on spherical "
 "trigonometry on a spherical Earth."
 msgstr ""
+"بعض الديانات، وبالأخص الإسلام، تلتزم باتجاه الصلاة إلى موقع محدد. يمكن عرض "
+"سمت الاتجاه لموقعين. الموقعان الافتراضيان هما مكة (الكعبة) والقدس، ولكن "
+"يمكنك الاختيار من قائمة المواقع في ستيللاريوم أو تحديد أي موقع. الاتجاهات "
+"تحسب بناءً على المثلثات الكروية على أرض كروية."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:241
 msgid ""
 "In addition, up to two lines each with arbitrary azimuth, altitude and "
 "declination lines with custom label can be shown."
 msgstr ""
+"بالإضافة لذلك، يمكن عرض خطين بتحديد سمت وارتفاع وميل مخصص مع إمكانية "
+"تسميتهما تسمية خاصة."
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:718
 msgid "ArchaeoLines Configuration"
@@ -24743,11 +24791,11 @@ msgstr "خطوط الوقوف القمرية الصغرى"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:734
 msgid "Equinox line (Equator)"
-msgstr "(خط الاعتدال (الاستواء"
+msgstr "خط الاعتدال (الاستواء)"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:735
 msgid "Polar Circles"
-msgstr ""
+msgstr "الدوائر القطبية"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:736
 msgid "Selected Object Hour Angle"
@@ -24784,7 +24832,7 @@ msgstr "ميل عبور النظير"
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:810
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:814
 msgid "From selected object (if any)"
-msgstr ""
+msgstr "من جرم مختار (إذا وجد)"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:754
 msgid "Geographic Location 1"
@@ -24808,7 +24856,7 @@ msgstr "الموقع الجغرافي 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:777
 msgid "Custom Declination 1"
-msgstr "الميل المخصص 1"
+msgstr "ميل مخصص 1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:783
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:798
@@ -24822,16 +24870,16 @@ msgstr "سمت مخصص 1"
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:787
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:791
 msgid "Select from location list"
-msgstr ""
+msgstr "اختر من قائمة المواقع"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:789
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:793
 msgid "Pick..."
-msgstr ""
+msgstr "اختر..."
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:796
 msgid "Custom Declination 2"
-msgstr "الميل المخصص 2"
+msgstr "ميل مخصص 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:800
 msgid "Custom Azimuth 2"
@@ -24839,11 +24887,11 @@ msgstr "سمت مخصص 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:801
 msgid "Custom Altitude 1"
-msgstr ""
+msgstr "ارتفاع مخصص 1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:802
 msgid "Custom Altitude 2"
-msgstr ""
+msgstr "ارتفاع مخصص 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:817
 msgid "Restore default settings"
@@ -24855,7 +24903,7 @@ msgstr "خطوط مخصصة"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:153
 msgid "Locations"
-msgstr ""
+msgstr "المواقع"
 
 #: plugins/Vts/src/Vts.cpp:152
 msgid "Vts"
@@ -28004,65 +28052,67 @@ msgstr "ميزوأميريكا"
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:116
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:241
 msgid "Online Queries"
-msgstr ""
+msgstr "الاستفسارات الشبكية"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:62
 msgid ""
 "This plugin allows object information retrieval from selected online "
 "services."
 msgstr ""
+"<p dir=rtl>هذه الإضافة تتيح الحصول على المعلومات من بعض الخدمات المختارة "
+"الموجودة على الشبكة"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:109
 msgid "Show window for Online Queries"
-msgstr ""
+msgstr "أظهر نافذة الاستفسارات الشبكية"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:110
 msgid "Call ancient-skies on current selection"
-msgstr ""
+msgstr "اطلب ancient-skies للاستفسار عن الجرم المختار الحالي"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:111
 msgid "Call AAVSO database on current selection"
-msgstr ""
+msgstr "اطلب AAVSO database للاستفسار عن الجرم المختار الحالي"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:112
 msgid "Call GCVS database on current selection"
-msgstr ""
+msgstr "اطلب GCVS database للاستفسار عن الجرم المختار الحالي"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:113
 msgid "Call Wikipedia on current selection"
-msgstr ""
+msgstr "اطلب الويكيبيديا للاستفسار عن الجرم المختار الحالي"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:114
 msgid "Call custom site 1 on current selection"
-msgstr ""
+msgstr "اطلب الموقع المخصص 1 للاستفسار عن الجرم المختار الحالي"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:115
 msgid "Call custom site 2 on current selection"
-msgstr ""
+msgstr "اطلب الموقع المخصص 2 للاستفسار عن الجرم المختار الحالي"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:116
 msgid "Call custom site 3 on current selection"
-msgstr ""
+msgstr "اطلب الموقع المخصص 3 للاستفسار عن الجرم المختار الحالي"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:289
 msgid "Please select an object first!"
-msgstr ""
+msgstr "الرجاء اختيار جرم قبل الاستفسار!"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:298
 msgctxt "OnlineQueries"
 msgid "Not a star!"
-msgstr ""
+msgstr "ليس نجماً!"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:305
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:319
 msgctxt "OnlineQueries"
 msgid "Not a HIPPARCOS star!"
-msgstr ""
+msgstr "ليس نجما موجودا في دليل هيباركوس!"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:352
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:358
 msgid "ERROR"
-msgstr ""
+msgstr "خطأ"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:352
 msgid ""
@@ -28070,52 +28120,58 @@ msgid ""
 "for this object could not be found. Please enable a few DSO catalogs to form"
 " at least a numerical name."
 msgstr ""
+"يمكن طلب البيانات للنجوم، والكواكب، وأجرام الفضاء السحيق. لم يعثر على اسم "
+"صالح لهذا الجرم. الرجاء تفعيل بعض أدلة أجرام الفضاء السحيق لتكوين معرف رقمي."
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:358
 msgid "We can request data for stars, planets and deep-sky objects only."
-msgstr ""
+msgstr "نستطيع طلب البيانات للنجوم، والكواكب، وأجرام الفضاء السحيق فقط."
 
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:107
 msgctxt "GUI label"
 msgid "(Custom 1)"
-msgstr ""
+msgstr "مخصص 1"
 
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:116
 msgctxt "GUI label"
 msgid "(Custom 2)"
-msgstr ""
+msgstr "مخصص 2"
 
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:125
 msgctxt "GUI label"
 msgid "(Custom 3)"
-msgstr ""
+msgstr "مخصص 3"
 
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:164
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:172
 #, qt-format
 msgctxt "OnlineQueries"
 msgid "Opened %1 in your web browser"
-msgstr ""
+msgstr "فتح %1 في المتصفح"
 
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:179
 msgid "OnlineQueries Plug-in"
-msgstr ""
+msgstr "<p dir=rtl>إضافة الاستفسارات الشبكية"
 
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:186
 msgid ""
 "The OnlineQueries plugin provides an interface to various online sources for"
 " astronomical information."
 msgstr ""
+"<p dir=rtl>توفر إضافة الاستفسارات الشبكية واجهة إلى عدة مصادر للمعلومات "
+"الفلكية على الشبكة."
 
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:187
 msgid "Wikipedia, the free online encyclopedia"
-msgstr ""
+msgstr "<p dir=rtl>ويكيبيديا، الموسوعة الحرة على الشبكة"
 
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:188
 msgid ""
 "AAVSO, the International Variable Star Index of the American Association for"
 " Variable Star Observers"
 msgstr ""
+"<p dir=rtl>مؤشر النجوم المتغيرة العالمي AAVSO من الجمعية الأمريكية لراصدي "
+"النجوم المتغيرة"
 
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:189
 msgid ""
@@ -28123,35 +28179,42 @@ msgid ""
 "Institute and the Institute of Astronomy of the Russian Academy of Sciences "
 "in Moscow"
 msgstr ""
+"<p dir=rtl>الدليل العام للنجوم المتغيرة، GCVS، من Sternberg Astronomical "
+"Institute and the Institute of Astronomy of the Russian Academy of Sciences "
+"في موسكو"
 
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:190
 msgid ""
 "Ancient-Skies, a private project which collects information about star names"
 " and their mythologies"
 msgstr ""
+"<p dir=rtl>مشروع السماوات القديمة، Ancient-Skies، لجمع معلومات وأسماء النجوم"
+" وأساطيرها."
 
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:191
 msgid "3 custom websites of your choice"
-msgstr ""
+msgstr "<p dir=rtl>ثلاثة مواقع مخصصة من اختيارك"
 
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:193
 msgid ""
 "Regardless of the current program language, the result is always presented "
 "in English or the language of the respective website."
 msgstr ""
+"<p dir=rtl>تعرض المعلومات بالإنجليزية أو بلغة موقع الاستفسار، ولا علاقة لها "
+"باللغة المختارة في ستيللاريوم."
 
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:244
 msgid "(Custom 1)"
-msgstr ""
+msgstr "(مخصص 1)"
 
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:246
 msgid "(Custom 3)"
-msgstr ""
+msgstr "(مخصص 2)"
 
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:247
 msgid "(Custom 2)"
-msgstr ""
+msgstr "(مخصص 3)"
 
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:248
 msgid "Queries"
-msgstr ""
+msgstr "الاستفسارات"

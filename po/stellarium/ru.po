@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-12-12 14:44+0700\n"
+"POT-Creation-Date: 2021-12-17 10:35+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2021\n"
 "Language-Team: Russian (https://www.transifex.com/stellarium/teams/80998/ru/)\n"
@@ -3636,6 +3636,30 @@ msgstr "Предыдущие утренние сумерки"
 #: src/core/StelObjectMgr.cpp:71
 msgid "Previous evening twilight"
 msgstr "Предыдущие вечерние сумерки"
+
+#: src/core/StelObjectMgr.cpp:73
+msgid "Selected object at altitude at next morning"
+msgstr "Выбранный объект на высоте на следующее утро"
+
+#: src/core/StelObjectMgr.cpp:74
+msgid "Selected object at altitude this morning"
+msgstr "Выбранный объект на высоте этим утром"
+
+#: src/core/StelObjectMgr.cpp:75
+msgid "Selected object at altitude at previous morning"
+msgstr "Выбранный объект на высоте предыдущим утром"
+
+#: src/core/StelObjectMgr.cpp:76
+msgid "Selected object at altitude at next evening"
+msgstr "Выбранный объект на высоте на следующий вечер"
+
+#: src/core/StelObjectMgr.cpp:77
+msgid "Selected object at altitude this evening"
+msgstr "Выбранный объект на высоте этим вечером"
+
+#: src/core/StelObjectMgr.cpp:78
+msgid "Selected object at altitude at previous evening"
+msgstr "Выбранный объект на высоте на предыдущим вечером"
 
 #: src/core/StelSkyLayerMgr.cpp:85
 msgid "Deep-sky objects background images"

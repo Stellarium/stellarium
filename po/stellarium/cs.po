@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-12-12 14:44+0700\n"
+"POT-Creation-Date: 2021-12-17 10:35+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Zdeněk Moravec <moravec@hapteplice.cz>, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/stellarium/teams/80998/cs/)\n"
@@ -3627,6 +3627,30 @@ msgstr "Předchozí ranní soumrak"
 #: src/core/StelObjectMgr.cpp:71
 msgid "Previous evening twilight"
 msgstr "Předchozí večerní soumrak"
+
+#: src/core/StelObjectMgr.cpp:73
+msgid "Selected object at altitude at next morning"
+msgstr "Vybraný objekt v dané výšce příští ráno"
+
+#: src/core/StelObjectMgr.cpp:74
+msgid "Selected object at altitude this morning"
+msgstr "Vybraný objekt v dané výšce toto ráno"
+
+#: src/core/StelObjectMgr.cpp:75
+msgid "Selected object at altitude at previous morning"
+msgstr "Vybraný objekt v dané výšce předchozí ráno"
+
+#: src/core/StelObjectMgr.cpp:76
+msgid "Selected object at altitude at next evening"
+msgstr "Vybraný objekt v dané výšce příští večer"
+
+#: src/core/StelObjectMgr.cpp:77
+msgid "Selected object at altitude this evening"
+msgstr "Vybraný objekt v dané výšce toto večer"
+
+#: src/core/StelObjectMgr.cpp:78
+msgid "Selected object at altitude at previous evening"
+msgstr "Vybraný objekt v dané výšce předchozí večer"
 
 #: src/core/StelSkyLayerMgr.cpp:85
 msgid "Deep-sky objects background images"
@@ -12412,7 +12436,7 @@ msgstr "Nastavení planetária"
 
 #: src/ui_configurationDialog.h:1938
 msgid "Allow mouse to pan (drag)"
-msgstr ""
+msgstr "Povolit přesunutí pomocí myši (táhnutím)"
 
 #: src/ui_configurationDialog.h:1940
 msgid "Enable mouse navigation"
@@ -12628,11 +12652,11 @@ msgstr "Font aplikace"
 
 #: src/ui_configurationDialog.h:2047
 msgid "Allow mouse to zoom (mousewheel)"
-msgstr ""
+msgstr "Povolit přibližování pomocí myši (kolečkem)"
 
 #: src/ui_configurationDialog.h:2049
 msgid "Enable mouse zooming"
-msgstr ""
+msgstr "Povolit přibližování pomocí myši"
 
 #: src/ui_configurationDialog.h:2051
 msgid "Force date/time tab and focus on day input when activating date panel"
@@ -20851,6 +20875,9 @@ msgid ""
 "(Cien años de soledad) the classic novel by Gabriel García Marquez. Macondo "
 "is a fictional place where magic and reality are mixed."
 msgstr ""
+"Macondo je mýtická vesnice z románu Sto roků samoty (Cien años de soledad), "
+"klasického románu Gabriela Garcíi Marqueze. Macondo je fiktivní místo, kde "
+"se mísí magie a realita."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:417
 msgid ""
@@ -20858,28 +20885,37 @@ msgid ""
 " orbiting a star, connecting it with the external world by introducing new "
 "knowledge using his inventions as well as his stories."
 msgstr ""
+"Melquíades je fiktivní postava, která chodí po Macondu jako planeta "
+"obíhající kolem hvězdy a spojuje ji s vnějším světem tím, že zavádí nové "
+"poznatky pomocí svých vynálezů a příběhů."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:418
 msgid ""
 "Poerava is the word in the Cook Islands Maori language for a large mystical "
 "black pearl of utter beauty and perfection."
 msgstr ""
+"Poerava je slovo v maorském jazyce Cookových ostrovů pro velkou mystickou "
+"černou perlu absolutní krásy a dokonalosti."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:419
 msgid ""
 "Pipitea is a small, white and gold pearl found in Penrhyn lagoon in the "
 "northern group of the Cook Islands."
 msgstr ""
+"Pipitea je malá, bílá a zlatá perla nalezená v laguně Penrhyn v severní "
+"skupině Cookových ostrovů."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:420
 msgid ""
 "Dìwö in Bribri language means the sun (bigger than the sun we know) and that"
 " never turns off."
 msgstr ""
+"Dìwö v jazyce Bribri znamená slunce (větší než slunce, které známe), které "
+"nikdy nezhasne."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:421
 msgid "Ditsö̀ is the name that the god Sibö̀ gave to the first Bribri people."
-msgstr ""
+msgstr "Ditsö̀  je jméno, které dal bůh Sibö̀  prvním lidem Bribri."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:422
 msgid ""
@@ -20887,10 +20923,13 @@ msgid ""
 "character in the book Priče iz davnine (Croatian Tales of Long Ago) by the "
 "Croatian author Ivana Brlić-Mažuranić."
 msgstr ""
+"Stribor je bůh větrů ve slovanské mytologii, stejně jako literární postava v"
+" knize Priče iz davnine (Chorvatské příběhy z dávných dob) chorvatské "
+"autorky Ivany Brlić-Mažuranić."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:423
 msgid "Veles is a major Slavic god of earth, waters and the underworld."
-msgstr ""
+msgstr "Veles je významný slovanský bůh země, vod a podsvětí."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:424
 msgid ""
@@ -20898,6 +20937,9 @@ msgid ""
 "Carlos and San Ambrosio Seminary. He opened the way to education for all, "
 "and began the experimental teaching of physics in Cuba."
 msgstr ""
+"Felix Varela (1788–1853) jako první vyučoval přírodní vědy na Kubě na "
+"semináři v San Carlos a San Ambrosio. Otevřel cestu ke vzdělání pro všechny "
+"a zahájil experimentální výuku fyziky na Kubě."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:425
 msgid ""
@@ -20905,12 +20947,16 @@ msgid ""
 " in the research of yellow fever, determining that it was transmitted "
 "through mosquitoes."
 msgstr ""
+"Carlos Juan Finlay (1833–1915) byl epidemiolog uznávaný jako průkopník ve "
+"výzkumu žluté zimnice, který zjistil, že se přenáší prostřednictvím komárů."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:426
 msgid ""
 "Alasia is the first historically recorded name of Cyprus, dating back to "
 "mid-fifteenth century BC."
 msgstr ""
+"Alasia je první historicky zaznamenaný název Kypru, který se datuje do "
+"poloviny 15. století před naším letopočtem."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:427
 msgid ""
@@ -20918,6 +20964,9 @@ msgid ""
 "the fifth century BC Idalion Tablet. Also known as the Onasilou Plate, it is"
 " considered as the oldest legal contract found in the world."
 msgstr ""
+"Onasilos je nejstarší historicky zaznamenaný lékař na Kypru, zapsaný na "
+"desce Idalion z pátého století před naším letopočtem. Také je známa "
+"Onasilova deska, která je považována za nejstarší právní smlouvu na světě."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:428
 msgid ""
@@ -20925,6 +20974,8 @@ msgid ""
 " absolutno (The Factory for the Absolute) by influential Czech writer Karel "
 "Čapek."
 msgstr ""
+"Absolutno je fiktivní zázračná látka ve sci-fi románu Továrna na absolutno "
+"od vlivného českého spisovatele Karla Čapka."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:429
 msgid ""
@@ -20932,6 +20983,8 @@ msgid ""
 "Makropulos Affair), dealing with problems of immortality and consequences of"
 " an artificial prolongation of life."
 msgstr ""
+"Makropulos je název ze hry Karla Čapka Věc Makropulos, pojednávající o "
+"problémech nesmrtelnosti a důsledcích umělého prodlužování života."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:430
 msgid ""

@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-12-12 14:44+0700\n"
+"POT-Creation-Date: 2021-12-17 10:35+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: ks k, 2021\n"
 "Language-Team: Korean (https://www.transifex.com/stellarium/teams/80998/ko/)\n"
@@ -3578,6 +3578,30 @@ msgstr "어제 아침 노을"
 msgid "Previous evening twilight"
 msgstr "어제 저녁 노을"
 
+#: src/core/StelObjectMgr.cpp:73
+msgid "Selected object at altitude at next morning"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:74
+msgid "Selected object at altitude this morning"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:75
+msgid "Selected object at altitude at previous morning"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:76
+msgid "Selected object at altitude at next evening"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:77
+msgid "Selected object at altitude this evening"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:78
+msgid "Selected object at altitude at previous evening"
+msgstr ""
+
 #: src/core/StelSkyLayerMgr.cpp:85
 msgid "Deep-sky objects background images"
 msgstr "딥스카이 천체 배경 이미지"
@@ -4898,7 +4922,7 @@ msgstr "행성 중심에서의 관측자"
 
 #: src/gui/StelGuiItems.cpp:858
 msgid "Atmospheric pressure"
-msgstr ""
+msgstr "대기 압력"
 
 #: src/gui/StelGuiItems.cpp:858
 msgctxt "pressure unit"
@@ -4907,7 +4931,7 @@ msgstr ""
 
 #: src/gui/StelGuiItems.cpp:858
 msgid "temperature"
-msgstr ""
+msgstr "온도"
 
 #. TRANSLATORS: Field of view. Please use abbreviation.
 #: src/gui/StelGuiItems.cpp:877
@@ -7532,7 +7556,7 @@ msgstr "성운에 묻힌 남쪽 별의 목록"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:420
 msgid "Catalogue and distances of optically visible H II regions"
-msgstr ""
+msgstr "광학적으로 보이는 H II 영역의 목록 및 거리"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:422
@@ -7547,32 +7571,32 @@ msgstr "허셜 400 목록"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:426
 msgid "Jack Bennett's deep sky catalogue"
-msgstr ""
+msgstr "잭 베넷의 심원 천체 목록"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:428
 msgid "James Dunlop's southern deep sky catalogue"
-msgstr ""
+msgstr "제임스 던롭의 남반구 심원 천체 목록"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:430 src/ui_viewDialog.h:3403
 msgid "Trumpler Catalogue"
-msgstr ""
+msgstr "트럼플러 목록"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:432 src/ui_viewDialog.h:3473
 msgid "Stock Catalogue"
-msgstr ""
+msgstr "스톡 목록"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:434 src/ui_viewDialog.h:3469
 msgid "Ruprecht Catalogue"
-msgstr ""
+msgstr "루프레히트 목록"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:436
 msgid "van den Bergh-Hagen Catalogue"
-msgstr ""
+msgstr "반덴베르그하겐 목록"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:441
@@ -7587,12 +7611,12 @@ msgstr "흥미로운 변광성"
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:451
 msgid "Variable stars: Algol-type eclipsing systems"
-msgstr ""
+msgstr "변광성: 알골형 일식 체제"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:453
 msgid "Variable stars: the classical cepheids"
-msgstr ""
+msgstr "변광성: 고전적인 세페이드"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:462
@@ -7913,7 +7937,7 @@ msgstr "메시에 마라톤"
 #. TRANSLATORS: Name of script
 #: src/translations.h:594
 msgid "Random location"
-msgstr ""
+msgstr "임의의 위치"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:600
@@ -8006,7 +8030,7 @@ msgstr ""
 #: src/translations.h:615
 msgid ""
 "Screensaver of various happenings in the Solar System. 313 events in all!"
-msgstr ""
+msgstr "태양계에서 일어나는 다양한 사건의 화면 보호기입니다. 모두 313개 종목입니다!"
 
 #: src/translations.h:616
 msgid "A tour of the western constellations."
@@ -8033,7 +8057,7 @@ msgstr "호주의 시드니에서 2012년 6월 6일에 관측된 금성의 통�
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Historical "
 "Supernovae plugin has to be enabled."
-msgstr ""
+msgstr "티코 브라헤가 1572년에 관측한 초신성의 섬광입니다. 역사적 초신성 플러그인을 사용하도록 설정해야 합니다."
 
 #: src/translations.h:622
 msgid ""
@@ -8182,12 +8206,17 @@ msgid ""
 " environment variable OUTPUT_DATA. Please read the script to understand how "
 "to apply it to your projects."
 msgstr ""
+"스카이박스에 대해 6개의 타일(북/동/남/서/위/아래)을 만듭니다. 이것들은 예를 들어 Unity3D  또는 기타 3D 환경에서 더 "
+"사용될 수 있습니다. 출력 디렉토리 및 파일 이름은 환경 변수 STEL_SKYBOX_DIR 및 STEL_SKYBOX_BASENAME을 "
+"사용하여 설정할 수 있습니다. 데이터 파일도 작성되며 환경 변수 OUTPUT_DATA로 이름을 설정할 수 있습니다. 스크립트를 읽고 "
+"프로젝트에 적용하는 방법을 이해하십시오. "
 
 #: src/translations.h:644
 msgid ""
 "This script will help you make practical works for celestial navigation - he"
 " sets a random location and hides it from the GUI."
 msgstr ""
+"이 스크립트는 천체 탐색을 위한 실용적인 작업을 만드는 데 도움이 될 것입니다. 그는 임의의 위치를 설정하고 GUI에서 숨깁니다."
 
 #: src/translations.h:648
 msgid "&Undo"
@@ -8473,73 +8502,73 @@ msgstr "남극 대륙"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/North_Asia
 #: src/translations_regions.h:63
 msgid "Northern Asia"
-msgstr ""
+msgstr "북아시아"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Central_Asia
 #: src/translations_regions.h:66
 msgid "Central Asia"
-msgstr ""
+msgstr "중앙아시아"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Eastern_Asia
 #: src/translations_regions.h:69
 msgid "Eastern Asia"
-msgstr ""
+msgstr "동아시아"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Southeast_Asia
 #: src/translations_regions.h:72
 msgid "South-eastern Asia"
-msgstr ""
+msgstr "동남아시아"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/South_Asia
 #: src/translations_regions.h:75
 msgid "Southern Asia"
-msgstr ""
+msgstr "남아시아"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Western_Asia
 #: src/translations_regions.h:78
 msgid "Western Asia"
-msgstr ""
+msgstr "서아시아"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Eastern_Europe
 #: src/translations_regions.h:81
 msgid "Eastern Europe"
-msgstr ""
+msgstr "동유럽"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Northern_Europe
 #: src/translations_regions.h:84
 msgid "Northern Europe"
-msgstr ""
+msgstr "북유럽"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Southern_Europe
 #: src/translations_regions.h:87
 msgid "Southern Europe"
-msgstr ""
+msgstr "남유럽"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Western_Europe
 #: src/translations_regions.h:90
 msgid "Western Europe"
-msgstr ""
+msgstr "서유럽"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Australasia
 #: src/translations_regions.h:93
 msgid "Australasia"
-msgstr ""
+msgstr "오스트랄라시아"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Melanesia
 #: src/translations_regions.h:96
 msgid "Melanesia"
-msgstr ""
+msgstr "멜라네시아"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Micronesia
@@ -8551,531 +8580,531 @@ msgstr "미크로네시아"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Polynesia
 #: src/translations_regions.h:102
 msgid "Polynesia"
-msgstr ""
+msgstr "폴리네시아"
 
 #. TRANSLATORS: Name of region on Mercury
 #: src/translations_regions.h:104
 msgid "Aparangi Planitia"
-msgstr ""
+msgstr "아파랑기 평원"
 
 #. TRANSLATORS: Name of region on Mercury
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Borealis_Planitia
 #: src/translations_regions.h:107
 msgid "Borealis Planitia"
-msgstr ""
+msgstr "보리알리스 평원"
 
 #. TRANSLATORS: Name of region on Mercury
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Budh_Planitia
 #: src/translations_regions.h:110
 msgid "Budh Planitia"
-msgstr ""
+msgstr "부드 평원"
 
 #. TRANSLATORS: Name of region on Mercury
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Caloris_Planitia
 #: src/translations_regions.h:113
 msgid "Caloris Planitia"
-msgstr ""
+msgstr "캐롤리스 평원"
 
 #. TRANSLATORS: Name of region on Mercury
 #: src/translations_regions.h:115
 msgid "Lugus Planitia"
-msgstr ""
+msgstr "루구스 평원"
 
 #. TRANSLATORS: Name of region on Mercury
 #: src/translations_regions.h:117
 msgid "Mearcair Planitia"
-msgstr ""
+msgstr "메아카이르 평원"
 
 #. TRANSLATORS: Name of region on Mercury
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Odin_Planitia
 #: src/translations_regions.h:120
 msgid "Odin Planitia"
-msgstr ""
+msgstr "오딘 평원"
 
 #. TRANSLATORS: Name of region on Mercury
 #: src/translations_regions.h:122
 msgid "Otaared Planitia"
-msgstr ""
+msgstr "오타레드 평원"
 
 #. TRANSLATORS: Name of region on Mercury
 #: src/translations_regions.h:124
 msgid "Papsukkal Planitia"
-msgstr ""
+msgstr "팝숙칼 평원"
 
 #. TRANSLATORS: Name of region on Mercury
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Sihtu_Planitia
 #: src/translations_regions.h:127
 msgid "Sihtu Planitia"
-msgstr ""
+msgstr "시투 평원"
 
 #. TRANSLATORS: Name of region on Mercury
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Sobkou_Planitia
 #: src/translations_regions.h:130
 msgid "Sobkou Planitia"
-msgstr ""
+msgstr "솝코우 평원"
 
 #. TRANSLATORS: Name of region on Mercury
 #: src/translations_regions.h:132
 msgid "Stilbon Planitia"
-msgstr ""
+msgstr "스틸본 평원"
 
 #. TRANSLATORS: Name of region on Mercury
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Suisei_Planitia
 #: src/translations_regions.h:135
 msgid "Suisei Planitia"
-msgstr ""
+msgstr "스이세이 평원"
 
 #. TRANSLATORS: Name of region on Mercury
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Tir_Planitia
 #: src/translations_regions.h:138
 msgid "Tir Planitia"
-msgstr ""
+msgstr "티르 평원"
 
 #. TRANSLATORS: Name of region on Mercury
 #: src/translations_regions.h:140
 msgid "Turms Planitia"
-msgstr ""
+msgstr "투름 평원"
 
 #. TRANSLATORS: Name of region on Mercury
 #: src/translations_regions.h:142
 msgid "Utaridi Planitia"
-msgstr ""
+msgstr "우타리디 평원"
 
 #. TRANSLATORS: Name of region on Mercury
 #: src/translations_regions.h:144
 msgid "Catuilla Planum"
-msgstr ""
+msgstr "카투일라 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Aphrodite_Terra
 #: src/translations_regions.h:147
 msgid "Aphrodite Terra"
-msgstr ""
+msgstr "아프로디테 대지"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Ishtar_Terra
 #: src/translations_regions.h:150
 msgid "Ishtar Terra"
-msgstr ""
+msgstr "이슈타르 대지"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Lada_Terra
 #: src/translations_regions.h:153
 msgid "Lada Terra"
-msgstr ""
+msgstr "라다 대지"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Alpha_Regio
 #: src/translations_regions.h:156
 msgid "Alpha Regio"
-msgstr ""
+msgstr "알파 지역"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Asteria_Regio
 #: src/translations_regions.h:159
 msgid "Asteria Regio"
-msgstr ""
+msgstr "아스테리아 지역"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:162
 msgid "Atla Regio"
-msgstr ""
+msgstr "아틀라 지역"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:165
 msgid "Bell Regio"
-msgstr ""
+msgstr "벨 지역"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Beta_Regio
 #: src/translations_regions.h:168
 msgid "Beta Regio"
-msgstr ""
+msgstr "베타 지역"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:171
 msgid "Dione Regio"
-msgstr ""
+msgstr "디오네 지역"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:174
 msgid "Dsonkwa Regio"
-msgstr ""
+msgstr "드손콰 지역"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:177
 msgid "Eistla Regio"
-msgstr ""
+msgstr "엘스틀라 지역"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:180
 msgid "Hyndla Regio"
-msgstr ""
+msgstr "힌들라 지역"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:183
 msgid "Imdr Regio"
-msgstr ""
+msgstr "임드르 지역"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:186
 msgid "Ishkus Regio"
-msgstr ""
+msgstr "이스쿠스 지역"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:189
 msgid "Laufey Regio"
-msgstr ""
+msgstr "라우피 지역"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:192
 msgid "Neringa Regio"
-msgstr ""
+msgstr "네링가 지역"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Ovda_Regio
 #: src/translations_regions.h:195
 msgid "Ovda Regio"
-msgstr ""
+msgstr "오브다 지역"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Phoebe_Regio
 #: src/translations_regions.h:198
 msgid "Phoebe Regio"
-msgstr ""
+msgstr "포에베 지역"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:201
 msgid "Themis Regio"
-msgstr ""
+msgstr "테미스 지역"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:204
 msgid "Thetis Regio"
-msgstr ""
+msgstr "테티스 지역"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:207
 msgid "Ulfrun Regio"
-msgstr ""
+msgstr "울프런 지역"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:210
 msgid "Vasilisa Regio"
-msgstr ""
+msgstr "바실리사 지역"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:213
 msgid "Aibarchin Planitia"
-msgstr ""
+msgstr "알바르친 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:216
 msgid "Aino Planitia"
-msgstr ""
+msgstr "아이노 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:219
 msgid "Akhtamar Planitia"
-msgstr ""
+msgstr "아크타마르 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:222
 msgid "Alma-Merghen Planitia"
-msgstr ""
+msgstr "알마-머그헨 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:225
 msgid "Atalanta Planitia"
-msgstr ""
+msgstr "아탈란타 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:228
 msgid "Audra Planitia"
-msgstr ""
+msgstr "오드라 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:231
 msgid "Bereghinya Planitia"
-msgstr ""
+msgstr "베레그힌야 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:234
 msgid "Dzerassa Planitia"
-msgstr ""
+msgstr "드제라사 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:237
 msgid "Fonueha Planitia"
-msgstr ""
+msgstr "포누에하 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:240
 msgid "Ganiki Planitia"
-msgstr ""
+msgstr "가니키 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Guinevere_Planitia
 #: src/translations_regions.h:243
 msgid "Guinevere Planitia"
-msgstr ""
+msgstr "귀네비어 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:246
 msgid "Gunda Planitia"
-msgstr ""
+msgstr "군다 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:249
 msgid "Helen Planitia"
-msgstr ""
+msgstr "헬렌 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:252
 msgid "Hinemoa Planitia"
-msgstr ""
+msgstr "히네모아 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:255
 msgid "Imapinua Planitia"
-msgstr ""
+msgstr "이마푸누아 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:258
 msgid "Kanykey Planitia"
-msgstr ""
+msgstr "카니키 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:261
 msgid "Kawelu Planitia"
-msgstr ""
+msgstr "카웰루 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:264
 msgid "Laimdota Planitia"
-msgstr ""
+msgstr "래임도타 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:267
 msgid "Lavinia Planitia"
-msgstr ""
+msgstr "라비니아 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:270
 msgid "Leda Planitia"
-msgstr ""
+msgstr "레다 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:273
 msgid "Libuse Planitia"
-msgstr ""
+msgstr "리부셰 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:276
 msgid "Llorona Planitia"
-msgstr ""
+msgstr "요로나 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:279
 msgid "Louhi Planitia"
-msgstr ""
+msgstr "로우히 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:282
 msgid "Lowana Planitia"
-msgstr ""
+msgstr "로와나 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:285
 msgid "Mugazo Planitia"
-msgstr ""
+msgstr "무가조 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:288
 msgid "Navka Planitia"
-msgstr ""
+msgstr "나브카 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:291
 msgid "Niobe Planitia"
-msgstr ""
+msgstr "니오베 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:294
 msgid "Nsomeka Planitia"
-msgstr ""
+msgstr "느소메카 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:297
 msgid "Nuptadi Planitia"
-msgstr ""
+msgstr "눕타디 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:300
 msgid "Rusalka Planitia"
-msgstr ""
+msgstr "루살카 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Sedna_Planitia
 #: src/translations_regions.h:303
 msgid "Sedna Planitia"
-msgstr ""
+msgstr "세드나 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:306
 msgid "Snegurochka Planitia"
-msgstr ""
+msgstr "스네구로카 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:309
 msgid "Sogolon Planitia"
-msgstr ""
+msgstr "소고론 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:312
 msgid "Tahmina Planitia"
-msgstr ""
+msgstr "타흐미나 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:315
 msgid "Tilli-Hanum Planitia"
-msgstr ""
+msgstr "틸리-하문 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:318
 msgid "Tinatin Planitia"
-msgstr ""
+msgstr "티나틴 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:321
 msgid "Undine Planitia"
-msgstr ""
+msgstr "운디네 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:324
 msgid "Vellamo Planitia"
-msgstr ""
+msgstr "벨라모 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:327
 msgid "Vinmara Planitia"
-msgstr ""
+msgstr "빈마라 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:330
 msgid "Wawalag Planitia"
-msgstr ""
+msgstr "와와라그 평원"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:333
 msgid "Zhibek Planitia"
-msgstr ""
+msgstr "지베크 평원"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9084,7 +9113,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Oceanus_Procellarum
 #: src/translations_regions.h:337
 msgid "Ocean of Storms"
-msgstr ""
+msgstr "폭풍의 대양"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9093,7 +9122,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Anguis
 #: src/translations_regions.h:341
 msgid "Serpent Sea"
-msgstr ""
+msgstr "뱀의 바다"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9102,7 +9131,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Australe
 #: src/translations_regions.h:345
 msgid "Southern Sea"
-msgstr ""
+msgstr "남해"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9111,7 +9140,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Cognitum
 #: src/translations_regions.h:349
 msgid "Sea that has Become Known"
-msgstr ""
+msgstr "알려지게 된 바다"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9120,7 +9149,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Crisium
 #: src/translations_regions.h:353
 msgid "Sea of Crises"
-msgstr ""
+msgstr "위기의 바다"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9129,7 +9158,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Fecunditatis
 #: src/translations_regions.h:357
 msgid "Sea of Fecundity"
-msgstr ""
+msgstr "풍요의 바다"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9138,7 +9167,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Frigoris
 #: src/translations_regions.h:361
 msgid "Sea of Cold"
-msgstr ""
+msgstr "추위의 바다"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9147,7 +9176,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Humboldtianum
 #: src/translations_regions.h:365
 msgid "Sea of Humboldt"
-msgstr ""
+msgstr "홈볼트의 바다"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9156,7 +9185,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Humorum
 #: src/translations_regions.h:369
 msgid "Sea of Moisture"
-msgstr ""
+msgstr "습기의 바다"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9165,7 +9194,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Imbrium
 #: src/translations_regions.h:373
 msgid "Sea of Showers"
-msgstr ""
+msgstr "비의 바다"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9174,7 +9203,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Ingenii
 #: src/translations_regions.h:377
 msgid "Sea of Cleverness"
-msgstr ""
+msgstr "지혜의 바다"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9183,7 +9212,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Insularum
 #: src/translations_regions.h:381
 msgid "Sea of Islands"
-msgstr ""
+msgstr "섬의 바다"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9192,7 +9221,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Marginis
 #: src/translations_regions.h:385
 msgid "Sea of the Edge"
-msgstr ""
+msgstr "변두리의 바다"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9201,7 +9230,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Moscoviense
 #: src/translations_regions.h:389
 msgid "Sea of Moscow"
-msgstr ""
+msgstr "모스크바의 바다"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9210,7 +9239,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Nectaris
 #: src/translations_regions.h:393
 msgid "Sea of Nectar"
-msgstr ""
+msgstr "감로주의 바다"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9219,7 +9248,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Nubium
 #: src/translations_regions.h:397
 msgid "Sea of Clouds"
-msgstr ""
+msgstr "구름의 바다"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9993,7 +10022,7 @@ msgstr "노스어"
 #: skycultures/translations_skycultures.fab:74
 msgctxt "sky culture"
 msgid "Northern Andes"
-msgstr "북부 안데스"
+msgstr "북안데스"
 
 #: skycultures/translations_skycultures.fab:76
 msgctxt "sky culture"

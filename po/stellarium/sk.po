@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-12-12 14:44+0700\n"
+"POT-Creation-Date: 2021-12-17 10:35+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Lubomir Hambalek <lubomir.hambalek@gmail.com>, 2021\n"
 "Language-Team: Slovak (https://www.transifex.com/stellarium/teams/80998/sk/)\n"
@@ -3621,6 +3621,30 @@ msgstr "Predošlý ranný súmrak"
 #: src/core/StelObjectMgr.cpp:71
 msgid "Previous evening twilight"
 msgstr "Predošlý večerný súmrak"
+
+#: src/core/StelObjectMgr.cpp:73
+msgid "Selected object at altitude at next morning"
+msgstr "Zvolený objekt vo výške zajtra ráno"
+
+#: src/core/StelObjectMgr.cpp:74
+msgid "Selected object at altitude this morning"
+msgstr "Zvolený objekt vo výške dnes ráno"
+
+#: src/core/StelObjectMgr.cpp:75
+msgid "Selected object at altitude at previous morning"
+msgstr "Zvolený objekt vo výške včera ráno"
+
+#: src/core/StelObjectMgr.cpp:76
+msgid "Selected object at altitude at next evening"
+msgstr "Zvolený objekt vo výške zajtra večer"
+
+#: src/core/StelObjectMgr.cpp:77
+msgid "Selected object at altitude this evening"
+msgstr "Zvolený objekt vo výške dnes večer"
+
+#: src/core/StelObjectMgr.cpp:78
+msgid "Selected object at altitude at previous evening"
+msgstr "Zvolený objekt vo výške včera večer"
 
 #: src/core/StelSkyLayerMgr.cpp:85
 msgid "Deep-sky objects background images"
@@ -12391,7 +12415,7 @@ msgstr "Nastavenia pre planetárium"
 
 #: src/ui_configurationDialog.h:1938
 msgid "Allow mouse to pan (drag)"
-msgstr ""
+msgstr "Povoliť posúvanie (ťahanie) myšou"
 
 #: src/ui_configurationDialog.h:1940
 msgid "Enable mouse navigation"
@@ -12607,11 +12631,11 @@ msgstr "Písmo programu"
 
 #: src/ui_configurationDialog.h:2047
 msgid "Allow mouse to zoom (mousewheel)"
-msgstr ""
+msgstr "Povoliť približovanie (kolieskom) myšou"
 
 #: src/ui_configurationDialog.h:2049
 msgid "Enable mouse zooming"
-msgstr ""
+msgstr "Povoliť približovanie myšou"
 
 #: src/ui_configurationDialog.h:2051
 msgid "Force date/time tab and focus on day input when activating date panel"

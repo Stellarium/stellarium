@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-12-12 14:44+0700\n"
+"POT-Creation-Date: 2021-12-17 10:35+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: חיים שלמה רוזנבך, 2021\n"
 "Language-Team: Hebrew (https://www.transifex.com/stellarium/teams/80998/he/)\n"
@@ -1572,7 +1572,7 @@ msgstr "מילי - קשת השנייה"
 
 #: src/core/modules/Nebula.cpp:394 src/ui_searchDialogGui.h:916
 msgid "Morphological description"
-msgstr ""
+msgstr "תיאור צוּרָנִי"
 
 #: src/core/modules/Nebula.cpp:1146
 msgctxt "Shapley-Sawyer Concentration Class"
@@ -1937,11 +1937,11 @@ msgstr "חומר בין כוכבי"
 
 #: src/core/modules/Nebula.cpp:1409
 msgid "emission object"
-msgstr "emission object"
+msgstr "עצם פליטה"
 
 #: src/core/modules/Nebula.cpp:1410
 msgid "BL Lac object"
-msgstr "BL Lac object"
+msgstr "עצם BL Lac"
 
 #: src/core/modules/Nebula.cpp:1411
 msgid "blazar"
@@ -1976,15 +1976,15 @@ msgstr "כוכב"
 
 #: src/core/modules/Nebula.cpp:1418
 msgid "symbiotic star"
-msgstr ""
+msgstr "כוכב סימביוטי"
 
 #: src/core/modules/Nebula.cpp:1419
 msgid "emission-line star"
-msgstr ""
+msgstr "כוכב קו-פליטה"
 
 #: src/core/modules/Nebula.cpp:1420
 msgid "supernova candidate"
-msgstr ""
+msgstr "מועמד סופרנובה"
 
 #: src/core/modules/Nebula.cpp:1421
 msgid "supernova remnant candidate"
@@ -2000,7 +2000,7 @@ msgstr "חלק מגלקסיה"
 
 #: src/core/modules/Nebula.cpp:1424
 msgid "region of the sky"
-msgstr ""
+msgstr "אזור שמים"
 
 #: src/core/modules/Nebula.cpp:1425
 msgid "object of unknown nature"
@@ -2033,7 +2033,7 @@ msgstr "Found"
 
 #: src/core/modules/NebulaMgr.cpp:1380
 msgid "Expected"
-msgstr ""
+msgstr "צָפוּי"
 
 #: src/core/modules/NebulaMgr.cpp:1380
 msgid "See Logfile for instructions."
@@ -2102,11 +2102,11 @@ msgstr "מרחק מהשמש"
 #. TRANSLATORS: Distance measured in terms of the speed of light
 #: src/core/modules/Planet.cpp:623
 msgid "Light time"
-msgstr ""
+msgstr "זמן אור"
 
 #: src/core/modules/Planet.cpp:637
 msgid "Orbital velocity"
-msgstr ""
+msgstr "מהירות מסלולית"
 
 #: src/core/modules/Planet.cpp:640
 msgid "Heliocentric velocity"
@@ -2118,7 +2118,7 @@ msgstr ""
 
 #: src/core/modules/Planet.cpp:681
 msgid "with rings"
-msgstr ""
+msgstr "עם טבעות"
 
 #: src/core/modules/Planet.cpp:698
 msgid "scaled up to"
@@ -2136,7 +2136,7 @@ msgstr "קוטר משווני"
 #: src/core/modules/Planet.cpp:780 src/gui/AstroCalcDialog.cpp:3179
 #: src/gui/AstroCalcDialog.cpp:3237 src/ui_configurationDialog.h:1817
 msgid "Elongation"
-msgstr ""
+msgstr "אלונגציה"
 
 #: src/core/modules/Planet.cpp:773 src/core/modules/Planet.cpp:782
 #: src/gui/AstroCalcDialog.cpp:3189 src/gui/AstroCalcDialog.cpp:3247
@@ -2150,7 +2150,7 @@ msgstr ""
 
 #: src/core/modules/Planet.cpp:781
 msgid "Elong. in Ecl.Long."
-msgstr ""
+msgstr "אלונגציה באורך אקליפטי"
 
 #: src/core/modules/Planet.cpp:796 src/gui/AstroCalcDialog.cpp:6292
 #: src/gui/AstroCalcDialog.cpp:6436 src/gui/AstroCalcDialog.cpp:6453
@@ -2276,7 +2276,7 @@ msgstr ""
 
 #: src/core/modules/Planet.cpp:1219
 msgid "Eclipse magnitude"
-msgstr ""
+msgstr "עוצמת הליקוי"
 
 #: src/core/modules/Planet.cpp:1244
 msgid "Center of solar eclipse (Lat./Long.)"
@@ -2302,11 +2302,11 @@ msgstr "(טבעתי)"
 #: src/core/modules/Planet.cpp:1266
 msgctxt "type of solar eclipse"
 msgid "(total)"
-msgstr ""
+msgstr "(מלא)"
 
 #: src/core/modules/Planet.cpp:1281
 msgid "Penumbral eclipse magnitude"
-msgstr ""
+msgstr "עוצמת הליקוי החלקי"
 
 #: src/core/modules/Planet.cpp:1284
 msgid "Umbral eclipse magnitude"
@@ -2434,7 +2434,7 @@ msgstr "טווח עוצמה"
 
 #: src/core/modules/StarWrapper.cpp:300
 msgid "Photometric system"
-msgstr ""
+msgstr "מערכת פוטומטרית"
 
 #: src/core/modules/StarWrapper.cpp:331 plugins/Pulsars/src/Pulsar.cpp:201
 msgid "Proper motion"
@@ -2475,7 +2475,7 @@ msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:372
 msgid "Duration of eclipse"
-msgstr ""
+msgstr "משך הליקוי"
 
 #: src/core/modules/StarWrapper.cpp:381
 msgid "Position angle"
@@ -2732,11 +2732,11 @@ msgstr "הוסף 100 שנות כוכבים"
 
 #: src/core/StelCore.cpp:288
 msgid "Add 1 synodic month"
-msgstr "Add 1 synodic month"
+msgstr "הוסף חודש סינודי 1"
 
 #: src/core/StelCore.cpp:289
 msgid "Add 1 saros"
-msgstr ""
+msgstr "הוסף סארוס 1"
 
 #: src/core/StelCore.cpp:290
 msgid "Add 1 draconic month"
@@ -2748,15 +2748,15 @@ msgstr "הוסף שנה דרקונית 1"
 
 #: src/core/StelCore.cpp:292
 msgid "Add 1 anomalistic month"
-msgstr "Add 1 anomalistic month"
+msgstr "הוסף חודש אנומליסטי 1"
 
 #: src/core/StelCore.cpp:293
 msgid "Add 1 anomalistic year"
-msgstr "Add 1 anomalistic year"
+msgstr "הוסף שנה אנומליסטית 1"
 
 #: src/core/StelCore.cpp:294
 msgid "Add 100 anomalistic years"
-msgstr "Add 100 anomalistic years"
+msgstr "הוסף 100 שנים אנומליסטיות"
 
 #: src/core/StelCore.cpp:295
 msgid "Add 1 mean tropical month"
@@ -2784,7 +2784,7 @@ msgstr "Add 1 Julian century"
 
 #: src/core/StelCore.cpp:301
 msgid "Add 1 Gaussian year"
-msgstr "Add 1 Gaussian year"
+msgstr "הוסף שנה גאוסית 1"
 
 #: src/core/StelCore.cpp:302
 msgid "Add 1 calendric month"
@@ -2808,11 +2808,11 @@ msgstr "הפחת 100 שנות כוכבים"
 
 #: src/core/StelCore.cpp:307
 msgid "Subtract 1 synodic month"
-msgstr "Subtract 1 synodic month"
+msgstr "הפחת חודש סינודי 1"
 
 #: src/core/StelCore.cpp:308
 msgid "Subtract 1 saros"
-msgstr ""
+msgstr "הפחת סארוס 1"
 
 #: src/core/StelCore.cpp:309
 msgid "Subtract 1 draconic month"
@@ -2824,15 +2824,15 @@ msgstr "הפחת שנה דרקונית 1"
 
 #: src/core/StelCore.cpp:311
 msgid "Subtract 1 anomalistic month"
-msgstr "Subtract 1 anomalistic month"
+msgstr "הפחת חודש אנומליסטי 1"
 
 #: src/core/StelCore.cpp:312
 msgid "Subtract 1 anomalistic year"
-msgstr "Subtract 1 anomalistic year"
+msgstr "הפחת שנה אנומליסטית 1"
 
 #: src/core/StelCore.cpp:313
 msgid "Subtract 100 anomalistic years"
-msgstr "Subtract 100 anomalistic years"
+msgstr "הפחת 100 שנים אנומליסטיות"
 
 #: src/core/StelCore.cpp:314
 msgid "Subtract 1 mean tropical month"
@@ -2860,7 +2860,7 @@ msgstr "Subtract 1 Julian century"
 
 #: src/core/StelCore.cpp:320
 msgid "Subtract 1 Gaussian year"
-msgstr "Subtract 1 Gaussian year"
+msgstr "הפחת שנה גאוסית 1"
 
 #: src/core/StelCore.cpp:321
 msgid "Subtract 1 calendric month"
@@ -3284,7 +3284,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:145
 msgid "Stereographic"
-msgstr "Stereographic"
+msgstr "סטריאוגרפי"
 
 #: src/core/StelProjectorClasses.cpp:150
 msgid ""
@@ -3338,7 +3338,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:365
 msgid "Mercator"
-msgstr "Mercator"
+msgstr "מרקטור"
 
 #: src/core/StelProjectorClasses.cpp:370
 msgid ""
@@ -3422,7 +3422,7 @@ msgstr "אורך/רוחב סופר-גלקטי"
 #: src/core/StelObject.cpp:553
 msgctxt "celestial coordinate system"
 msgid "Ecl. long./lat."
-msgstr ""
+msgstr "אורך/רוחב אקליפטי"
 
 #: src/core/StelObject.cpp:618
 msgid "Ecliptic obliquity"
@@ -3455,7 +3455,7 @@ msgstr ""
 
 #: src/core/StelObject.cpp:721
 msgid "Daytime"
-msgstr ""
+msgstr "שעות היום"
 
 #: src/core/StelObject.cpp:734
 msgid "Polar night"
@@ -3508,7 +3508,7 @@ msgstr "סטייה מע' מקס'"
 
 #: src/core/StelObject.cpp:826
 msgid "Parallactic Angle"
-msgstr ""
+msgstr "זָוִית פָּרָלַקְטִית"
 
 #: src/core/StelObject.cpp:835 src/gui/AstroCalcDialog.cpp:5416
 msgid "IAU Constellation"
@@ -3594,6 +3594,30 @@ msgstr ""
 
 #: src/core/StelObjectMgr.cpp:71
 msgid "Previous evening twilight"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:73
+msgid "Selected object at altitude at next morning"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:74
+msgid "Selected object at altitude this morning"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:75
+msgid "Selected object at altitude at previous morning"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:76
+msgid "Selected object at altitude at next evening"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:77
+msgid "Selected object at altitude this evening"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:78
+msgid "Selected object at altitude at previous evening"
 msgstr ""
 
 #: src/core/StelSkyLayerMgr.cpp:85
@@ -3693,11 +3717,11 @@ msgstr ""
 
 #: src/core/StelSkyCultureMgr.cpp:213
 msgid "Classification"
-msgstr ""
+msgstr "סווג"
 
 #: src/core/StelSkyCultureMgr.cpp:275
 msgid "No description"
-msgstr ""
+msgstr "אין תיאור"
 
 #: src/core/StelSkyCultureMgr.cpp:308
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:203
@@ -3719,7 +3743,7 @@ msgstr "מרכז על האובייקט שנבחר"
 
 #: src/core/StelMovementMgr.cpp:233
 msgid "Deselect the selected object"
-msgstr ""
+msgstr "בטל בחירת האובייקט הנבחר"
 
 #: src/core/StelMovementMgr.cpp:234
 msgid "Zoom in on selected object"
@@ -3772,7 +3796,7 @@ msgstr ""
 #: src/core/StelMovementMgr.cpp:283
 msgctxt "mount mode"
 msgid "Equatorial mount"
-msgstr ""
+msgstr "מעמד משווני"
 
 #: src/core/StelMovementMgr.cpp:285
 msgctxt "mount mode"
@@ -4397,11 +4421,11 @@ msgstr "yyyy-mm-dd (ISO 8601)"
 
 #: src/gui/ConfigurationDialog.cpp:1889
 msgid "dd-mm-yyyy"
-msgstr "dd-mm-yyyy"
+msgstr "יום-חודש-שנה"
 
 #: src/gui/ConfigurationDialog.cpp:1890
 msgid "mm-dd-yyyy"
-msgstr "mm-dd-yyyy"
+msgstr "חודש-יום-שנה"
 
 #: src/gui/ConfigurationDialog.cpp:1891
 msgid "ww, yyyy-mm-dd"
@@ -4849,7 +4873,7 @@ msgstr "חלון חישובים אסטרונומיים"
 
 #: src/gui/StelGui.cpp:253
 msgid "Observing list"
-msgstr ""
+msgstr "רשימת תצפית"
 
 #: src/gui/StelGui.cpp:254
 msgid "Copy selected object information to clipboard"
@@ -4899,7 +4923,7 @@ msgstr "שע'/שני'"
 #: src/gui/StelGuiItems.cpp:758
 msgctxt "unit of measurement"
 msgid "d/s"
-msgstr ""
+msgstr "י' / שני'"
 
 #. TRANSLATORS: unit of measurement: years per second
 #: src/gui/StelGuiItems.cpp:764
@@ -4917,7 +4941,7 @@ msgstr ""
 
 #: src/gui/StelGuiItems.cpp:847
 msgid "planetocentric distance"
-msgstr ""
+msgstr "מרחק פלנטוצנטרי"
 
 #: src/gui/StelGuiItems.cpp:849
 msgid "planetocentric observer"
@@ -5177,7 +5201,7 @@ msgstr ""
 
 #: src/gui/LocationDialog.cpp:813
 msgid "GPS disconnecting..."
-msgstr ""
+msgstr "GPS מתנתק..."
 
 #: src/gui/LocationDialog.cpp:825
 msgid "GPS location fix"
@@ -5185,7 +5209,7 @@ msgstr ""
 
 #: src/gui/LocationDialog.cpp:848
 msgid "GPS:FAILED"
-msgstr ""
+msgstr "GPS:נכשל"
 
 #: src/gui/LocationDialog.cpp:860 src/ui_locationDialogGui.h:511
 msgid "Get location from GPS"
@@ -5334,11 +5358,11 @@ msgstr ""
 
 #: src/gui/ScriptConsole.cpp:197
 msgid "Stellarium Script Files"
-msgstr ""
+msgstr "קבצי סקריפט סטלריום"
 
 #: src/gui/ScriptConsole.cpp:200
 msgid "Load Script"
-msgstr ""
+msgstr "טען סקריפט"
 
 #: src/gui/ScriptConsole.cpp:225
 msgid "Save Script"
@@ -5416,7 +5440,7 @@ msgstr "עלייה ישרה"
 #: src/gui/AstroCalcDialog.cpp:3270 src/gui/ObsListDialog.cpp:151
 #: src/gui/ObsListCreateEditDialog.cpp:159
 msgid "Declination"
-msgstr "נטיה"
+msgstr "נטייה"
 
 #. TRANSLATORS: azimuth
 #: src/gui/SearchDialog.cpp:306 src/gui/AstroCalcDialog.cpp:628
@@ -5565,7 +5589,7 @@ msgstr "Dec (J2000)"
 #. TRANSLATORS: opacity
 #: src/gui/AstroCalcDialog.cpp:868 src/gui/AstroCalcDialog.cpp:5316
 msgid "Opac."
-msgstr ""
+msgstr "אטימות"
 
 #. TRANSLATORS: magnitude
 #: src/gui/AstroCalcDialog.cpp:873 src/gui/AstroCalcDialog.cpp:1546
@@ -5623,7 +5647,7 @@ msgstr "גובה"
 #. TRANSLATORS: elongation
 #: src/gui/AstroCalcDialog.cpp:907 src/gui/AstroCalcDialog.cpp:1552
 msgid "Elong."
-msgstr ""
+msgstr "אלונג'"
 
 #: src/gui/AstroCalcDialog.cpp:977 src/ui_viewDialog.h:3211
 msgid "Solar system objects"
@@ -5656,7 +5680,7 @@ msgstr "Positions on %1"
 
 #: src/gui/AstroCalcDialog.cpp:1093
 msgid "Average angular size"
-msgstr ""
+msgstr "קוטר זוויתי ממוצע"
 
 #: src/gui/AstroCalcDialog.cpp:1162 src/gui/AstroCalcDialog.cpp:1596
 msgid "Planetocentric distance"
@@ -5694,7 +5718,7 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:1416
 msgid "Celestial positions of objects"
-msgstr ""
+msgstr "עמדות שמימיות של עצמים"
 
 #. TRANSLATORS: phase
 #: src/gui/AstroCalcDialog.cpp:1548 src/gui/AstroCalcDialog.cpp:3169
@@ -6084,7 +6108,7 @@ msgstr "מגה-מטר"
 
 #: src/gui/AstroCalcDialog.cpp:3184 src/gui/AstroCalcDialog.cpp:3242
 msgid "Angular size"
-msgstr "גודל זוויתי"
+msgstr "קוטר זוויתי"
 
 #. TRANSLATORS: The phrase "Heliocentric distance" may be long in some
 #. languages and you can abbreviate it.
@@ -7401,7 +7425,7 @@ msgstr "חומר בין כוכבי"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:352 src/ui_dsoColorsDialog.h:570
 msgid "Emission objects"
-msgstr "Emission objects"
+msgstr "עצמי פליטה"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:354 src/ui_dsoColorsDialog.h:617
@@ -7751,7 +7775,7 @@ msgstr "Double eclipse from Deimos in 2031"
 #. TRANSLATORS: Name of script
 #: src/translations.h:522
 msgid "Eclipse from Olympus Mons Jan 2, 2021"
-msgstr ""
+msgstr "ליקוי חמה מאולימפוס מונס 2 בינואר 2021"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:524
@@ -7883,7 +7907,7 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:574
 msgid "Jupiter without Galilean satellites"
-msgstr ""
+msgstr "צדק ללא לוויינים גליליים"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:576
@@ -8005,7 +8029,7 @@ msgstr ""
 
 #: src/translations.h:612
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 2, 2021."
-msgstr ""
+msgstr "פובוס מאפיל על השמש כפי שנראה מאולימפוס מונס ב-2 בינואר 2021."
 
 #: src/translations.h:613
 msgid ""
@@ -8390,15 +8414,15 @@ msgstr "צור תיקיה חדשה"
 
 #: src/translations.h:687
 msgid "List View"
-msgstr ""
+msgstr "תצוגת רשימה"
 
 #: src/translations.h:688
 msgid "Detail View"
-msgstr ""
+msgstr "תצוגת פרטים"
 
 #: src/translations.h:689
 msgid "Recent Places"
-msgstr ""
+msgstr "מקומות אחרונים"
 
 #: src/translations.h:690
 #, qt-format
@@ -9877,12 +9901,12 @@ msgstr ""
 #: skycultures/translations_skycultures.fab:14
 msgctxt "sky culture"
 msgid "Arabian Peninsula"
-msgstr ""
+msgstr "חצי האי ערב"
 
 #: skycultures/translations_skycultures.fab:16
 msgctxt "sky culture"
 msgid "Arabic"
-msgstr ""
+msgstr "ערבי"
 
 #: skycultures/translations_skycultures.fab:18
 msgctxt "sky culture"
@@ -9897,7 +9921,7 @@ msgstr ""
 #: skycultures/translations_skycultures.fab:22
 msgctxt "sky culture"
 msgid "Aztec"
-msgstr ""
+msgstr "אצטקי"
 
 #: skycultures/translations_skycultures.fab:24
 msgctxt "sky culture"
@@ -9912,7 +9936,7 @@ msgstr ""
 #: skycultures/translations_skycultures.fab:28
 msgctxt "sky culture"
 msgid "Belarusian"
-msgstr ""
+msgstr "בלארוסי"
 
 #: skycultures/translations_skycultures.fab:30
 msgctxt "sky culture"
@@ -9922,7 +9946,7 @@ msgstr ""
 #: skycultures/translations_skycultures.fab:32
 msgctxt "sky culture"
 msgid "Chinese"
-msgstr ""
+msgstr "סיני"
 
 #: skycultures/translations_skycultures.fab:34
 msgctxt "sky culture"
@@ -9932,7 +9956,7 @@ msgstr ""
 #: skycultures/translations_skycultures.fab:36
 msgctxt "sky culture"
 msgid "Chinese Medieval"
-msgstr ""
+msgstr "סיני ימי-ביניימי"
 
 #: skycultures/translations_skycultures.fab:38
 msgctxt "sky culture"
@@ -10057,7 +10081,7 @@ msgstr "סרדינית"
 #: skycultures/translations_skycultures.fab:86
 msgctxt "sky culture"
 msgid "Tongan"
-msgstr ""
+msgstr "טונגני"
 
 #: skycultures/translations_skycultures.fab:88
 msgctxt "sky culture"
@@ -10127,7 +10151,7 @@ msgstr "ערוך קיצורי מקשים..."
 
 #: src/ui_helpDialogGui.h:252
 msgid "Check updates"
-msgstr ""
+msgstr "בדוק עדכונים"
 
 #: src/ui_helpDialogGui.h:253
 msgid "Refresh"
@@ -10360,7 +10384,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:919
 msgid "Dimensions"
-msgstr ""
+msgstr "ממדים"
 
 #: src/ui_searchDialogGui.h:920
 msgid "Max. search radius"
@@ -10488,7 +10512,7 @@ msgstr "Starlore"
 
 #: src/ui_viewDialog.h:3225
 msgid "Surveys"
-msgstr ""
+msgstr "סקרים"
 
 #: src/ui_viewDialog.h:3229
 msgid "Solar altitude for Twilight Finder:"
@@ -10721,7 +10745,7 @@ msgstr "עובי מסלול בפיקסלים"
 
 #: src/ui_viewDialog.h:3327 src/ui_astroCalcDialog.h:1740
 msgid "Show:"
-msgstr ""
+msgstr "הצג:"
 
 #: src/ui_viewDialog.h:3329
 msgid "Toggle drawing halo around the Moon"
@@ -10737,7 +10761,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:3335
 msgid "Sun's glare"
-msgstr ""
+msgstr "בוהק השמש"
 
 #: src/ui_viewDialog.h:3337
 msgid "Toggle permanent drawing of Sun's corona when atmosphere is disabled"
@@ -10745,7 +10769,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:3339
 msgid "Sun's corona"
-msgstr ""
+msgstr "עטרת השמש"
 
 #: src/ui_viewDialog.h:3341
 msgid ""
@@ -10828,7 +10852,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:3379
 msgid "Color of planet labels"
-msgstr ""
+msgstr "צבע תוויות כוכבי לכת"
 
 #: src/ui_viewDialog.h:3382
 msgid "Color of trails"
@@ -11221,7 +11245,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:3652
 msgid "Color of the solstice points (J2000.0)"
-msgstr ""
+msgstr "צבע נקודות ההיפוך (J2000.0)"
 
 #: src/ui_viewDialog.h:3660
 msgid "Color of galactic equator"
@@ -11237,7 +11261,7 @@ msgstr "קטבים אקליפטיים (בתאריך)"
 
 #: src/ui_viewDialog.h:3667
 msgid "Color of the solstice points (of date)"
-msgstr ""
+msgstr "צבע נקודות ההיפוך (בתאריך)"
 
 #: src/ui_viewDialog.h:3671
 msgid "Color of ecliptic (of date)"
@@ -11253,7 +11277,7 @@ msgstr "צבע הרשת הגלקטית"
 
 #: src/ui_viewDialog.h:3680
 msgid "Color of compass marks"
-msgstr ""
+msgstr "צבע סימני מצפן"
 
 #: src/ui_viewDialog.h:3683
 msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
@@ -11301,7 +11325,7 @@ msgstr "מילקה (J2000)"
 
 #: src/ui_viewDialog.h:3722
 msgid "Color of galactic center and anticenter"
-msgstr ""
+msgstr "צבע המרכז הגלקטי ונוגד המרכז"
 
 #: src/ui_viewDialog.h:3725
 msgid ""
@@ -11574,7 +11598,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:3972
 msgid "Position from landscape"
-msgstr ""
+msgstr "עמדה מהנוף"
 
 #: src/ui_viewDialog.h:3973
 msgid "Show landscape labels"
@@ -11676,11 +11700,11 @@ msgstr "Show art in brightness"
 
 #: src/ui_viewDialog.h:4031
 msgid "Color of constellation lines"
-msgstr ""
+msgstr "צבע קווי קבוצות כוכבים"
 
 #: src/ui_viewDialog.h:4033
 msgid "Show constellation lines"
-msgstr ""
+msgstr "הצג קווי קבוצות כוכבים"
 
 #: src/ui_viewDialog.h:4038
 msgid "Color of asterism names"
@@ -11692,7 +11716,7 @@ msgstr "הצג תוויות אסטריזם"
 
 #: src/ui_viewDialog.h:4041
 msgid "Constellations font size"
-msgstr ""
+msgstr "גודל גופן קבוצות כוכבים"
 
 #: src/ui_viewDialog.h:4042
 msgid "Asterisms font size"
@@ -11952,7 +11976,7 @@ msgstr "קואורדינטות משווניות, שוויון של J2000.0"
 
 #: src/ui_configurationDialog.h:1771
 msgid "Right ascension/Declination (J2000)"
-msgstr "Right ascension/Declination (J2000)"
+msgstr "עלייה ישרה/נטייה (J2000)"
 
 #: src/ui_configurationDialog.h:1772
 msgid "Absolute magnitude"
@@ -11972,11 +11996,11 @@ msgstr "Ecliptic coordinates (J2000)"
 
 #: src/ui_configurationDialog.h:1779
 msgid "Velocity"
-msgstr ""
+msgstr "מהירות"
 
 #: src/ui_configurationDialog.h:1783
 msgid "Right ascension/Declination (of date)"
-msgstr "Right ascension/Declination (of date)"
+msgstr "עלייה ישרה/נטייה (בתאריך)"
 
 #: src/ui_configurationDialog.h:1784
 msgid "Sidereal time"
@@ -12095,7 +12119,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1847
 msgid "DSS survey"
-msgstr ""
+msgstr "סקר שמים עמוקים"
 
 #: src/ui_configurationDialog.h:1849
 msgid "A button to toggle ecliptic grid of date"
@@ -12141,7 +12165,7 @@ msgstr "כפתור מסך מלא"
 
 #: src/ui_configurationDialog.h:1881
 msgid "Centering button"
-msgstr ""
+msgstr "כפתור מירכוז"
 
 #: src/ui_configurationDialog.h:1890
 msgid "Star catalog updates"
@@ -12468,7 +12492,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:2044
 msgid "Application font"
-msgstr ""
+msgstr "גופן יישום"
 
 #: src/ui_configurationDialog.h:2047
 msgid "Allow mouse to zoom (mousewheel)"
@@ -12496,7 +12520,7 @@ msgstr "Screenshot Directory"
 
 #: src/ui_configurationDialog.h:2057
 msgid "File format"
-msgstr ""
+msgstr "תבנית קובץ"
 
 #: src/ui_configurationDialog.h:2058
 msgid "Invert colors"
@@ -12504,7 +12528,7 @@ msgstr "Invert colors"
 
 #: src/ui_configurationDialog.h:2059
 msgid "Custom size"
-msgstr ""
+msgstr "גודל מותאם אישית"
 
 #: src/ui_configurationDialog.h:2062 src/ui_scriptConsole.h:416
 msgid "Close window when script runs"
@@ -12894,7 +12918,7 @@ msgstr "and"
 
 #: src/ui_astroCalcDialog.h:1808
 msgid "Second celestial body"
-msgstr ""
+msgstr "גוף שמימי שני"
 
 #: src/ui_astroCalcDialog.h:1812
 msgid ""
@@ -12941,7 +12965,7 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:1833
 msgid "Export phenomena..."
-msgstr ""
+msgstr "ייצוא תופעות..."
 
 #: src/ui_astroCalcDialog.h:1838
 msgid "Calculate also:"
@@ -12949,7 +12973,7 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:1839
 msgid "oppositions"
-msgstr ""
+msgstr "נגודים"
 
 #: src/ui_astroCalcDialog.h:1840
 msgid "perihelion and aphelion"
@@ -13018,7 +13042,7 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:1874
 msgid "Second graph:"
-msgstr ""
+msgstr "גרף שני:"
 
 #: src/ui_astroCalcDialog.h:1876 src/ui_astroCalcDialog.h:1880
 msgid "How many years to display"
@@ -13026,7 +13050,7 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:1878
 msgid "Duration:"
-msgstr ""
+msgstr "משך:"
 
 #: src/ui_astroCalcDialog.h:1882
 msgctxt "duration"
@@ -13035,7 +13059,7 @@ msgstr "שנים"
 
 #: src/ui_astroCalcDialog.h:1883
 msgid "First graph:"
-msgstr ""
+msgstr "גרף ראשון:"
 
 #: src/ui_astroCalcDialog.h:1884 src/ui_astroCalcDialog.h:1887
 msgid "Important note: this tool works on Earth only!"
@@ -13051,7 +13075,7 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:1889
 msgid "Lunar Distance"
-msgstr ""
+msgstr "מרחק ירח"
 
 #: src/ui_astroCalcDialog.h:1890
 msgid "Show objects which are up:"
@@ -13071,11 +13095,11 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:1910
 msgid "First celestial body:"
-msgstr ""
+msgstr "גוף שמימי ראשון:"
 
 #: src/ui_astroCalcDialog.h:1911
 msgid "Second celestial body:"
-msgstr ""
+msgstr "גוף שמימי שני:"
 
 #: src/ui_astroCalcDialog.h:1912
 msgid "Synodic period:"
@@ -13111,7 +13135,7 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:1921
 msgid "Linear distance:"
-msgstr ""
+msgstr "מרחק לינארי:"
 
 #: src/ui_astroCalcDialog.h:1922
 msgid "Data"
@@ -13203,7 +13227,7 @@ msgstr "ערוך את הרשימה שנבחרה"
 
 #: src/ui_obsListDialog.h:267
 msgid "Edit list"
-msgstr ""
+msgstr "ערוך רשימה"
 
 #: src/ui_obsListDialog.h:269
 msgid "Delete the selected list"
@@ -13294,7 +13318,7 @@ msgstr "ערפיליות פל' אפשריות"
 
 #: src/ui_dsoColorsDialog.h:561
 msgid "Color of markers of emission-line stars"
-msgstr ""
+msgstr "צבע סמנים של כוכבי קו-פליטה"
 
 #: src/ui_dsoColorsDialog.h:567
 msgid "Color of markers of blazars"
@@ -13306,7 +13330,7 @@ msgstr "Color of markers of interacting galaxies"
 
 #: src/ui_dsoColorsDialog.h:576
 msgid "Color of markers of young stellar objects"
-msgstr ""
+msgstr "צבע סמנים של עצמים קדם-כוכביים"
 
 #: src/ui_dsoColorsDialog.h:579
 msgid "Color of markers of star clouds"
@@ -13318,7 +13342,7 @@ msgstr "Color of markers of bipolar nebulae"
 
 #: src/ui_dsoColorsDialog.h:586
 msgid "Color of markers of supernova candidates"
-msgstr ""
+msgstr "צבע סמנים של מועמדי סופרנובה"
 
 #: src/ui_dsoColorsDialog.h:590
 msgid "Color of markers of interstellar matter"
@@ -13370,7 +13394,7 @@ msgstr "צבע סמנים של ערפיליות פלנטריות אפשריות"
 
 #: src/ui_dsoColorsDialog.h:635
 msgid "Young stellar objects"
-msgstr ""
+msgstr "עצמים קדם-כוכביים"
 
 #: src/ui_dsoColorsDialog.h:638
 msgid "Color of markers of nebulae"
@@ -13382,7 +13406,7 @@ msgstr "צבע סמנים של ערפיליות פלנטריות"
 
 #: src/ui_dsoColorsDialog.h:645
 msgid "Color of markers of supernova remnant candidates"
-msgstr ""
+msgstr "צבע סמנים של מועמדי שארית סופרנובה"
 
 #: src/ui_dsoColorsDialog.h:648
 msgid "Color of markers of possible quasars"
@@ -13427,7 +13451,7 @@ msgstr "קוואזרים"
 
 #: src/ui_dsoColorsDialog.h:677
 msgid "Color of markers of emission objects"
-msgstr "Color of markers of emission objects"
+msgstr "צבע סמנים של עצמי פליטה"
 
 #: src/ui_dsoColorsDialog.h:680
 msgid "Molecular clouds"
@@ -13439,7 +13463,7 @@ msgstr "צבע סמנים של צבירי כוכבים פתוחים"
 
 #: src/ui_dsoColorsDialog.h:686
 msgid "Color of markers of symbiotic stars"
-msgstr ""
+msgstr "צבע סמנים של כוכבים סימביוטיים"
 
 #: src/ui_dsoColorsDialog.h:689
 msgid "Color of markers of protoplanetary nebulae"
@@ -13467,7 +13491,7 @@ msgstr "צבע סמנים של צבירי גלקסיות"
 
 #: src/ui_dsoColorsDialog.h:708
 msgid "Color of markers of regions of the sky"
-msgstr ""
+msgstr "צבע סמנים של אזורי שמים"
 
 #: src/ui_orbitColorsDialog.h:389
 msgid "Style of orbit colors"
@@ -17408,7 +17432,7 @@ msgstr "עלייה ישרה (J2000)"
 
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:97
 msgid "Declination (J2000)"
-msgstr "נטיה (J2000)"
+msgstr "נטייה (J2000)"
 
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:291
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:320
@@ -22836,7 +22860,7 @@ msgstr "עודכן בהצלחה!"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:154
 msgid "Failed!"
-msgstr "Failed!"
+msgstr "נכשל!"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:158
 msgid "Outdated!"
@@ -23174,12 +23198,12 @@ msgstr "אורך/רוחב סופר-גלקטי"
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:232
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat"
-msgstr "Ecl. Long/Lat"
+msgstr "אורך/רוחב אקליפטי"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:251
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat (J2000.0)"
-msgstr "Ecl. Long/Lat (J2000.0)"
+msgstr "אורך/רוחב אקליפטי (J2000.0)"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:269
 msgctxt "abbreviated in the plugin"
@@ -23216,11 +23240,11 @@ msgstr "Custom position"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:202
 msgid "Right ascension/Declination (J2000.0)"
-msgstr "Right ascension/Declination (J2000.0)"
+msgstr "עלייה ישרה/נטייה (J2000.0)"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:203
 msgid "Right ascension/Declination"
-msgstr "Right ascension/Declination"
+msgstr "עלייה ישרה/נטייה"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:205
 msgid "Ecliptic Longitude/Latitude"
@@ -24122,7 +24146,7 @@ msgstr "חוגי הקטבים"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:736
 msgid "Selected Object Hour Angle"
-msgstr ""
+msgstr "זוית השעה של עצם נבחר"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:739
 msgid "Change color"
@@ -24263,7 +24287,7 @@ msgstr "גרגוריאני"
 #: plugins/Calendars/src/Calendars.cpp:283
 msgctxt "calendar"
 msgid "ISO week"
-msgstr ""
+msgstr "שבוע ISO"
 
 #: plugins/Calendars/src/Calendars.cpp:284
 #: plugins/Calendars/src/ui_calendarsDialog.h:822
@@ -27446,17 +27470,17 @@ msgstr ""
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:107
 msgctxt "GUI label"
 msgid "(Custom 1)"
-msgstr ""
+msgstr "(מותאם אישית 1)"
 
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:116
 msgctxt "GUI label"
 msgid "(Custom 2)"
-msgstr ""
+msgstr "(מותאם אישית 2)"
 
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:125
 msgctxt "GUI label"
 msgid "(Custom 3)"
-msgstr ""
+msgstr "(מותאם אישית 3)"
 
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:164
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:172
@@ -27467,7 +27491,7 @@ msgstr ""
 
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:179
 msgid "OnlineQueries Plug-in"
-msgstr ""
+msgstr "תוסף שאילתות מקוונות"
 
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:186
 msgid ""
@@ -27510,15 +27534,15 @@ msgstr ""
 
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:244
 msgid "(Custom 1)"
-msgstr ""
+msgstr "(מותאם אישית 1)"
 
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:246
 msgid "(Custom 3)"
-msgstr ""
+msgstr "(מותאם אישית 3)"
 
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:247
 msgid "(Custom 2)"
-msgstr ""
+msgstr "(מותאם אישית 2)"
 
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:248
 msgid "Queries"

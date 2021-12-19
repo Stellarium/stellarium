@@ -3035,16 +3035,14 @@ void AstroCalcDialog::mouseOverGraphs(QMouseEvent* event)
 	if (x > ui->graphsPlot->xAxis->range().lower && x < ui->graphsPlot->xAxis->range().upper
 	    && y > ui->graphsPlot->yAxis->range().lower && y < ui->graphsPlot->yAxis->range().upper)
 	{
+		QToolTip::hideText();
 		if (graph)
 		{
 			ltime = (x / StelCore::ONE_OVER_JD_SECOND) + startJD ;
 			QString info = QString("%1<br />%2: %3<br />%4: %5").arg(StelUtils::julianDayToISO8601String(ltime).replace("T", " "), ui->graphsPlot->yAxis->label() , QString::number(y, 'f', 2), ui->graphsPlot->yAxis2->label(), QString::number(y2, 'f', 2));
 
-			QToolTip::hideText();
 			QToolTip::showText(event->globalPos(), info, ui->graphsPlot, ui->graphsPlot->rect());
 		}
-		else
-			QToolTip::hideText();
 	}
 
 	ui->graphsPlot->update();

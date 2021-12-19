@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-12-12 14:44+0700\n"
+"POT-Creation-Date: 2021-12-17 10:35+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Karl Birgersson <birgerssonkarl@outlook.com>, 2021\n"
 "Language-Team: Swedish (https://www.transifex.com/stellarium/teams/80998/sv/)\n"
@@ -3623,6 +3623,30 @@ msgstr "Föregående gryning"
 #: src/core/StelObjectMgr.cpp:71
 msgid "Previous evening twilight"
 msgstr "Föregående skymning"
+
+#: src/core/StelObjectMgr.cpp:73
+msgid "Selected object at altitude at next morning"
+msgstr "Valt objekt vid höjd under nästa morgon"
+
+#: src/core/StelObjectMgr.cpp:74
+msgid "Selected object at altitude this morning"
+msgstr "Valt objekt vid höjd under denna morgon"
+
+#: src/core/StelObjectMgr.cpp:75
+msgid "Selected object at altitude at previous morning"
+msgstr "Valt objekt vid höjd under föregående morgon"
+
+#: src/core/StelObjectMgr.cpp:76
+msgid "Selected object at altitude at next evening"
+msgstr "Valt objekt vid höjd under nästa kväll"
+
+#: src/core/StelObjectMgr.cpp:77
+msgid "Selected object at altitude this evening"
+msgstr "Valt objekt vid höjd under denna kväll"
+
+#: src/core/StelObjectMgr.cpp:78
+msgid "Selected object at altitude at previous evening"
+msgstr "Valt objekt vid höjd under föregående kväll"
 
 #: src/core/StelSkyLayerMgr.cpp:85
 msgid "Deep-sky objects background images"
@@ -12358,7 +12382,7 @@ msgstr "Planetariumalternativ"
 
 #: src/ui_configurationDialog.h:1938
 msgid "Allow mouse to pan (drag)"
-msgstr ""
+msgstr "Tillåt panorering med musen (dragning)"
 
 #: src/ui_configurationDialog.h:1940
 msgid "Enable mouse navigation"
@@ -12574,11 +12598,11 @@ msgstr "Applikationsteckensnitt"
 
 #: src/ui_configurationDialog.h:2047
 msgid "Allow mouse to zoom (mousewheel)"
-msgstr ""
+msgstr "Tillåt zoomning med musen (hjulet)"
 
 #: src/ui_configurationDialog.h:2049
 msgid "Enable mouse zooming"
-msgstr ""
+msgstr "Slå på zoomning med musen"
 
 #: src/ui_configurationDialog.h:2051
 msgid "Force date/time tab and focus on day input when activating date panel"
@@ -22940,7 +22964,7 @@ msgstr "Tidsintervallet måste vara mindre än ett år!"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:197
 msgid "Code"
-msgstr ""
+msgstr "Kod"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:199
 msgid "ZHR"

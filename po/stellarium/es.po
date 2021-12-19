@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-12-12 14:44+0700\n"
+"POT-Creation-Date: 2021-12-17 10:35+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Víctor Vega <vegadark@protonmail.com>, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/stellarium/teams/80998/es/)\n"
@@ -3649,6 +3649,30 @@ msgstr "Crepúsculo matutino anterior"
 #: src/core/StelObjectMgr.cpp:71
 msgid "Previous evening twilight"
 msgstr "Crepúsculo vespertino anterior"
+
+#: src/core/StelObjectMgr.cpp:73
+msgid "Selected object at altitude at next morning"
+msgstr "Objeto seleccionado en altitud a la mañana siguiente"
+
+#: src/core/StelObjectMgr.cpp:74
+msgid "Selected object at altitude this morning"
+msgstr "Objeto seleccionado en altitud esta mañana"
+
+#: src/core/StelObjectMgr.cpp:75
+msgid "Selected object at altitude at previous morning"
+msgstr "Objeto seleccionado en altitud la mañana anterior"
+
+#: src/core/StelObjectMgr.cpp:76
+msgid "Selected object at altitude at next evening"
+msgstr "Objeto seleccionado en altitud a la noche siguiente"
+
+#: src/core/StelObjectMgr.cpp:77
+msgid "Selected object at altitude this evening"
+msgstr "Objeto seleccionado en altitud esta noche"
+
+#: src/core/StelObjectMgr.cpp:78
+msgid "Selected object at altitude at previous evening"
+msgstr "Objeto seleccionado en altitud la noche anterior"
 
 #: src/core/StelSkyLayerMgr.cpp:85
 msgid "Deep-sky objects background images"
@@ -12493,7 +12517,7 @@ msgstr "Opciones del planetario"
 
 #: src/ui_configurationDialog.h:1938
 msgid "Allow mouse to pan (drag)"
-msgstr ""
+msgstr "Permitir que el mouse se mueva (arrastrar)"
 
 #: src/ui_configurationDialog.h:1940
 msgid "Enable mouse navigation"
@@ -12712,11 +12736,11 @@ msgstr "Fuente de aplicación"
 
 #: src/ui_configurationDialog.h:2047
 msgid "Allow mouse to zoom (mousewheel)"
-msgstr ""
+msgstr "Permitir que el mouse haga zoom (rueda del mouse)"
 
 #: src/ui_configurationDialog.h:2049
 msgid "Enable mouse zooming"
-msgstr ""
+msgstr "Habilitar zoom del mouse"
 
 #: src/ui_configurationDialog.h:2051
 msgid "Force date/time tab and focus on day input when activating date panel"

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-12-12 14:44+0700\n"
+"POT-Creation-Date: 2021-12-17 10:35+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Worachate Boonplod, 2021\n"
 "Language-Team: Thai (https://www.transifex.com/stellarium/teams/80998/th/)\n"
@@ -3587,6 +3587,30 @@ msgstr ""
 
 #: src/core/StelObjectMgr.cpp:71
 msgid "Previous evening twilight"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:73
+msgid "Selected object at altitude at next morning"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:74
+msgid "Selected object at altitude this morning"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:75
+msgid "Selected object at altitude at previous morning"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:76
+msgid "Selected object at altitude at next evening"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:77
+msgid "Selected object at altitude this evening"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:78
+msgid "Selected object at altitude at previous evening"
 msgstr ""
 
 #: src/core/StelSkyLayerMgr.cpp:85
@@ -12299,7 +12323,7 @@ msgstr "ตัวเลือกท้องฟ้าจำลอง"
 
 #: src/ui_configurationDialog.h:1938
 msgid "Allow mouse to pan (drag)"
-msgstr ""
+msgstr "ใช้เมาส์ในการกวาด (ลากเมาส์)"
 
 #: src/ui_configurationDialog.h:1940
 msgid "Enable mouse navigation"
@@ -12511,11 +12535,11 @@ msgstr "แบบอักษรของแอปพลิเคชัน"
 
 #: src/ui_configurationDialog.h:2047
 msgid "Allow mouse to zoom (mousewheel)"
-msgstr ""
+msgstr "ใช้เมาส์ในการซูม (ล้อของเมาส์)"
 
 #: src/ui_configurationDialog.h:2049
 msgid "Enable mouse zooming"
-msgstr ""
+msgstr "เปิดใช้การซูมด้วยเมาส์"
 
 #: src/ui_configurationDialog.h:2051
 msgid "Force date/time tab and focus on day input when activating date panel"

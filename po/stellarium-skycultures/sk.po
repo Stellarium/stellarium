@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-10-05 17:48+0700\n"
+"POT-Creation-Date: 2021-12-16 17:32+0700\n"
 "PO-Revision-Date: 2017-11-29 01:17+0000\n"
 "Last-Translator: Lubomir Hambalek <lubomir.hambalek@gmail.com>, 2021\n"
 "Language-Team: Slovak (https://www.transifex.com/stellarium/teams/80998/sk/)\n"
@@ -5916,6 +5916,9 @@ msgid "Faust V051"
 msgstr "Faust V051"
 
 #: nebulae/default/names.dat:466 nebulae/default/names.dat:468
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:16
+#: skycultures/arabic/constellation_names.eng.fab:78
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:25
 msgid "The Eyes"
 msgstr "Oči"
 
@@ -8951,7 +8954,7 @@ msgstr "Stĺpy studne - Uzol lana vedra"
 
 #: skycultures/al-sufi/asterism_names.eng.fab:75
 msgid "The lucky star of the young sheep"
-msgstr "Štastná hviezda jahňaťa"
+msgstr "Šťastná hviezda jahňaťa"
 
 #: skycultures/al-sufi/asterism_names.eng.fab:76
 msgid "The lucky star of the one with great endeavour"
@@ -8959,7 +8962,7 @@ msgstr "Šťastná hviezda usilovného"
 
 #: skycultures/al-sufi/asterism_names.eng.fab:77
 msgid "The lucky star of the excellent one"
-msgstr "Štastná hviezda vynikajúceho"
+msgstr "Šťastná hviezda vynikajúceho"
 
 #. TRANSLATORS: Mattar is a proper name meaning rain
 #: skycultures/al-sufi/asterism_names.eng.fab:79
@@ -8999,9 +9002,17 @@ msgid "The little abdomen"
 msgstr "Malé brucho"
 
 #. TRANSLATORS: Al-Thurayya is a proper name referring to the Pleiades
+#. TRANSLATORS: Al-Thurayya is a proper name
+#. TRANSLATORS: Al-Thurayya is a proper name for the Pleiades
 #: skycultures/al-sufi/asterism_names.eng.fab:93
 #: skycultures/al-sufi/dso_names.fab:1
-#: skycultures/arabic_moon_stations/constellation_names.eng.fab:3
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:12
+#: skycultures/arabian_peninsula/dso_names.fab:2
+#: skycultures/arabic/constellation_names.eng.fab:36
+#: skycultures/arabic/constellation_names.eng.fab:65
+#: skycultures/arabic/dso_names.fab:13
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:21
+#: skycultures/arabic_lunar_stations/dso_names.fab:4
 msgid "Al-Thurayya"
 msgstr "Al-Turájja"
 
@@ -9037,7 +9048,7 @@ msgstr "Hviezdy dažďa (druhé rozprávanie)"
 #. TRANSLATORS: Al-Jawza is a proper name
 #: skycultures/al-sufi/asterism_names.eng.fab:105
 msgid "Bow of Al-Jawza"
-msgstr "Luk Al-Džavzu"
+msgstr "Luk Al-Džavzy"
 
 #: skycultures/al-sufi/asterism_names.eng.fab:107
 msgid "Nostrils [of the lion]"
@@ -9133,11 +9144,11 @@ msgstr "Šťastná hviezda vraha"
 
 #: skycultures/al-sufi/asterism_names.eng.fab:136
 msgid "The lucky star of Nashira"
-msgstr "Štastná hviezda Nashiry"
+msgstr "Šťastná hviezda Naširy"
 
 #: skycultures/al-sufi/asterism_names.eng.fab:138
 msgid "The lucky star of the king"
-msgstr "Štastná hviezda kráľa"
+msgstr "Šťastná hviezda kráľa"
 
 #: skycultures/al-sufi/asterism_names.eng.fab:139
 msgid "The luckiest of the lucky stars"
@@ -9145,11 +9156,11 @@ msgstr "Najšťastnejšia zo šťastných hviezd"
 
 #: skycultures/al-sufi/asterism_names.eng.fab:140
 msgid "The lucky star of the swallower"
-msgstr "Štastná hviezda prehĺtača"
+msgstr "Šťastná hviezda prehĺtača"
 
 #: skycultures/al-sufi/asterism_names.eng.fab:141
 msgid "The lucky star of the tents"
-msgstr "Štastná hviezda stanov"
+msgstr "Šťastná hviezda stanov"
 
 #: skycultures/al-sufi/asterism_names.eng.fab:143
 msgid "The ringed rope"
@@ -9170,7 +9181,7 @@ msgstr "Okrúhla značka"
 #. TRANSLATORS: Al-Jawza is a proper name
 #: skycultures/al-sufi/asterism_names.eng.fab:150
 msgid "The backbone of Al-Jawza - The belt of Al-Jawza - The string"
-msgstr "Chrbtica Al-Džavzu - Opasok Al-Džavzu - Struna"
+msgstr "Chrbtica Al-Džavzy - Opasok Al-Džavzy - Struna"
 
 #: skycultures/al-sufi/asterism_names.eng.fab:151
 msgid "Sword of Orion - The facial line tattoo"
@@ -9179,12 +9190,12 @@ msgstr "Orionov meč - Tetovanie na tvári"
 #. TRANSLATORS: Al-Jawza is a proper name
 #: skycultures/al-sufi/asterism_names.eng.fab:153
 msgid "Hair braids of Al-Jawza - Crown of Al-Jawza"
-msgstr "Vlasové korálky Al-Džavzu - Koruna Al-Džavzu"
+msgstr "Vrkoče Al-Džavzy - Koruna Al-Džavzy"
 
 #. TRANSLATORS: Al-Jawza is a proper name
 #: skycultures/al-sufi/asterism_names.eng.fab:155
 msgid "The front footstool of Al-Jawza"
-msgstr "Predná podnožka Al-Džavzu"
+msgstr "Predná podnožka Al-Džavzy"
 
 #: skycultures/al-sufi/asterism_names.eng.fab:156
 msgid "The ostriches nest"
@@ -9201,7 +9212,7 @@ msgstr "Mladé pštrosy"
 
 #: skycultures/al-sufi/asterism_names.eng.fab:161
 msgid "The camels that quenched their thirst - The rear footstool of Al-Jawza"
-msgstr "Ťavy, ktoré uhasili smäd - Zadná podnožka Al-Džavzu"
+msgstr "Ťavy, ktoré uhasili smäd - Zadná podnožka Al-Džavzy"
 
 #: skycultures/al-sufi/asterism_names.eng.fab:163
 msgid "The virgins"
@@ -10109,7 +10120,7 @@ msgstr "Hviezda medzi prednými nohami [Veľkej Medvedice] a Blížencami"
 msgid "The dark camel"
 msgstr "Tmavá ťava"
 
-#: skycultures/al-sufi/star_names.fab:99
+#: skycultures/al-sufi/star_names.fab:99 skycultures/arabic/star_names.fab:9
 msgid "The Oryx"
 msgstr "Gazela Oryx"
 
@@ -10126,7 +10137,10 @@ msgid "Liver of the lion"
 msgstr "Pečeň leva"
 
 #. TRANSLATORS: Proper name
-#: skycultures/al-sufi/star_names.fab:104
+#. TRANSLATORS: Al-Suha is a proper name
+#. TRANSLATORS: This is a proper name
+#: skycultures/al-sufi/star_names.fab:104 skycultures/arabic/star_names.fab:12
+#: skycultures/arabic_lunar_stations/star_names.fab:7
 msgid "Al-Suha"
 msgstr "Al-Suha"
 
@@ -11315,7 +11329,7 @@ msgstr "Pozorovateľ Al-Turájja"
 
 #. TRANSLATORS: Ayyuq Al-Thurayya is a proper name meaning the obstructor of
 #. Al-Thurayya
-#: skycultures/al-sufi/star_names.fab:559
+#: skycultures/al-sufi/star_names.fab:559 skycultures/arabic/star_names.fab:72
 msgid "Ayyuq Al-Thurayya"
 msgstr "Ajjuk Al-Turájja"
 
@@ -13287,35 +13301,40 @@ msgstr "Hviezda pod pravým zadným kolenom"
 #. TRANSLATORS: Al-Jawza is a proper Arabic name of Orion
 #: skycultures/al-sufi/star_names.fab:1737
 msgid "Shoulder of Al-Jawza"
-msgstr "Plece Al-Džavzu"
+msgstr "Plece Al-Džavzy"
 
 #. TRANSLATORS: Al-Jawza is a proper Arabic name of Orion
 #: skycultures/al-sufi/star_names.fab:1739
 msgid "Hand of Al-Jawza"
-msgstr "Ruka Al-Džavzu"
+msgstr "Ruka Al-Džavzy"
 
 #. TRANSLATORS: Al-Jawza is a proper Arabic name of Orion
 #: skycultures/al-sufi/star_names.fab:1741
 #: skycultures/al-sufi/star_names.fab:1749
 msgid "Shepherd of Al-Jawza"
-msgstr "Pastier Al-Džavzu"
+msgstr "Pastier Al-Džavzy"
 
 #. TRANSLATORS: Al-Najidh is a proper name
+#. TRANSLATORS: This is a proper name
 #: skycultures/al-sufi/star_names.fab:1743
 #: skycultures/al-sufi/star_names.fab:1751
+#: skycultures/arabic/star_names.fab:150
+#: skycultures/arabic_lunar_stations/star_names.fab:95
 msgid "Al-Najidh"
 msgstr "Al-Nadžidh"
 
 #. TRANSLATORS: Al-Mirzam is a proper name meaning the star of sound of
 #. thunder
+#. TRANSLATORS: Al-Mirzam is a proper name
 #: skycultures/al-sufi/star_names.fab:1745
+#: skycultures/arabian_peninsula/star_names.fab:64
 msgid "Al-Mirzam"
 msgstr "Al-Mirzam"
 
 #. TRANSLATORS: Al-Jawza is a proper Arabic name of Orion
 #: skycultures/al-sufi/star_names.fab:1747
 msgid "Leg of Al-Jawza"
-msgstr "Noha Al-Džavzu"
+msgstr "Noha Al-Džavzy"
 
 #: skycultures/al-sufi/star_names.fab:1789
 msgid ""
@@ -14072,12 +14091,18 @@ msgid "The star outside, under the right hind leg"
 msgstr "Hviezde mimo, pod pravou zadnou nohou"
 
 #. TRANSLATORS: Al-wazn is a proper name
+#. TRANSLATORS: This is a proper name
 #: skycultures/al-sufi/star_names.fab:2199
+#: skycultures/arabic/star_names.fab:183
+#: skycultures/arabic_lunar_stations/star_names.fab:122
 msgid "Al-Wazn"
 msgstr "Al-Wazn"
 
 #. TRANSLATORS: Hadari is a proper name
+#. TRANSLATORS: This is a proper name
 #: skycultures/al-sufi/star_names.fab:2201
+#: skycultures/arabic/star_names.fab:179
+#: skycultures/arabic_lunar_stations/star_names.fab:118
 msgid "Hadari"
 msgstr "Hadari"
 
@@ -14274,6 +14299,1586 @@ msgstr "Stredná z hmlistej masy v hrudi, volanej Jasličky"
 msgid "Nose tip of the lion"
 msgstr "Špička nosa leva"
 
+#. TRANSLATORS: Aba Bzay is a proper name
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:2
+msgid "The Two Guards - The Two Refugees - The Family Of Aba Bzay"
+msgstr "Dvaja strážcovia - Dvaja utečenci - Rodina Abu Bzaya"
+
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:3
+msgid "Al-Naayem - The Seven - Daughters Of Na'sh"
+msgstr "Al-Naayem - Sedem - Dcéry Na'ša"
+
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:4
+msgid "The Saddle Of The Camel"
+msgstr "Sedlo ťavy"
+
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:5
+msgid "The Wool Spindle"
+msgstr "Vreteno"
+
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:6
+msgid "The Front"
+msgstr "Predok"
+
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:7
+msgid "The Rear"
+msgstr "Zadok"
+
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:8
+msgid "The Bucket Cord"
+msgstr "Lano s vedrom"
+
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:9
+msgid "The Two Marks"
+msgstr "Dve znamenia"
+
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:10
+#: skycultures/arabic/constellation_names.eng.fab:63
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:20
+msgid "The Little Abdomen"
+msgstr "Bruško"
+
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:13
+#: skycultures/arabic/constellation_names.eng.fab:40
+#: skycultures/arabic/star_names.fab:62
+#: skycultures/arabic_lunar_stations/star_names.fab:32
+msgid "The Arm"
+msgstr "Rameno"
+
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:14
+msgid "The Two Little Dogs"
+msgstr "Dva malé psy"
+
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:15
+#: skycultures/arabic/constellation_names.eng.fab:77
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:24
+msgid "The Nostrils"
+msgstr "Nozdry"
+
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:17
+#: skycultures/arabic/constellation_names.eng.fab:79
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:26
+msgid "The Forehead"
+msgstr "Čelo"
+
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:18
+#: skycultures/arabic/constellation_names.eng.fab:81
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:27
+msgid "The Mane"
+msgstr "Hriva"
+
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:19
+#: skycultures/arabic/constellation_names.eng.fab:82
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:28
+msgid "The Bend"
+msgstr "Ohyb"
+
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:20
+#: skycultures/arabic/constellation_names.eng.fab:83
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:29
+msgid "The Cover"
+msgstr "Kryt"
+
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:21
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:30
+msgid "Claws Of The Scorpion"
+msgstr "Klepetá Škorpióna"
+
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:22
+#: skycultures/arabic/constellation_names.eng.fab:87
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:31
+msgid "The Diadem"
+msgstr "Diadém"
+
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:23
+#: skycultures/arabian_peninsula/star_names.fab:52
+#: skycultures/arabic/star_names.fab:136
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:32
+#: skycultures/arabic_lunar_stations/star_names.fab:84
+msgid "Raised Tail Of The Scorpion"
+msgstr "Zdvihnutý chvost Škorpióna"
+
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:24
+#: skycultures/arabic/constellation_names.eng.fab:89
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:33
+#: skycultures/romanian/constellation_names.eng.fab:35
+msgid "The Scorpion"
+msgstr "Škorpión"
+
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:25
+#: skycultures/arabic/constellation_names.eng.fab:95
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:37
+msgid "The Empty Place"
+msgstr "Prázdne miesto"
+
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:26
+#: skycultures/arabic/constellation_names.eng.fab:90
+#: skycultures/arabic/constellation_names.eng.fab:123
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:38
+msgid "The Ostriches"
+msgstr "Pštrosy"
+
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:27
+#: skycultures/arabic/constellation_names.eng.fab:96
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:39
+msgid "The Lucky Star Of The Slaughterer"
+msgstr "Šťastná hviezda bijca"
+
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:28
+#: skycultures/arabic/constellation_names.eng.fab:97
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:40
+msgid "The Lucky Star Of The Swallower"
+msgstr "Šťastná hviezda prehĺtača"
+
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:29
+#: skycultures/arabic/constellation_names.eng.fab:98
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:41
+msgid "The Luckiest Of The Lucky Stars"
+msgstr "Najšťastnejšia zo šťastných hviezd"
+
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:30
+#: skycultures/arabic/constellation_names.eng.fab:99
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:42
+msgid "The Lucky Star Of The Tents"
+msgstr "Šťastná hviezda stanov"
+
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:31
+#: skycultures/arabian_peninsula/star_names.fab:53
+#: skycultures/arabic/star_names.fab:146
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:50
+#: skycultures/arabic_lunar_stations/star_names.fab:91
+msgid "The Circular Mark"
+msgstr "Okrúhle znamenie"
+
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:32
+#: skycultures/arabic/constellation_names.eng.fab:115
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:52
+msgid "Stoopness [Of The Camel Neck]"
+msgstr "Ohyb [ťavieho krku]"
+
+#. TRANSLATORS: Al-Jawza is a proper name
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:34
+msgid "Back Of Al-Jawza"
+msgstr "Chrbát Al-Džavzy"
+
+#. TRANSLATORS: Al-Jawza is a proper name
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:36
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:38
+msgid "Claws Of Al-Jawza"
+msgstr "Pazúre Al-Džavzy"
+
+#. TRANSLATORS: Al-Thurayya is a proper name
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:40
+msgid "Mosque Of Al-Thurayya"
+msgstr "Al-Turájjova mešita"
+
+#. TRANSLATORS: Al-Jawza is a proper name
+#: skycultures/arabian_peninsula/constellation_names.eng.fab:42
+#: skycultures/arabic/constellation_names.eng.fab:118
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:54
+msgid "Al-Jawza"
+msgstr "Al-Džavza"
+
+#. TRANSLATORS: Al-Hawdan is a proper name
+#: skycultures/arabian_peninsula/planet_names.fab:2
+msgid "Morning Star - Evening Star - The Sip - The Star Of Al-Hawdan"
+msgstr "Zornička - Večernica - Dúšok - Al-Havdanova hviezda"
+
+#: skycultures/arabian_peninsula/star_names.fab:1
+#: skycultures/arabic/star_names.fab:1
+#: skycultures/arabic_lunar_stations/star_names.fab:1
+msgid "The Kid"
+msgstr "Dieťa"
+
+#: skycultures/arabian_peninsula/star_names.fab:2
+msgid "The Two Guards 1"
+msgstr "Dvaja strážcovia 1"
+
+#: skycultures/arabian_peninsula/star_names.fab:3
+msgid "The Two Guards 2"
+msgstr "Dvaja strážcovia 2"
+
+#: skycultures/arabian_peninsula/star_names.fab:4
+msgid "The Two Refugees 1"
+msgstr "Dvaja utečenci 1"
+
+#: skycultures/arabian_peninsula/star_names.fab:5
+msgid "The Two Refugees 2"
+msgstr "Dvaja utečenci 2"
+
+#: skycultures/arabian_peninsula/star_names.fab:6
+msgid "Al aba Bzay 1"
+msgstr "Al aba Bzaj 1"
+
+#: skycultures/arabian_peninsula/star_names.fab:7
+msgid "Al aba bzay 2"
+msgstr "Al aba Bzaj 2"
+
+#. TRANSLATORS: Al-Khilj is a proper name
+#: skycultures/arabian_peninsula/star_names.fab:9
+msgid "Al-Khilj 1"
+msgstr "Al-Childž 1"
+
+#. TRANSLATORS: Al-Khilj is a proper name
+#: skycultures/arabian_peninsula/star_names.fab:11
+msgid "Al-Khilj 2"
+msgstr "Al-Childž 2"
+
+#. TRANSLATORS: Khilj is a proper name
+#: skycultures/arabian_peninsula/star_names.fab:13
+msgid "The first Khilj 1"
+msgstr "Prvý Childž 1"
+
+#. TRANSLATORS: Al-Khilj is a proper name
+#: skycultures/arabian_peninsula/star_names.fab:15
+msgid "The first Khilj 2"
+msgstr "Prvý Childž 2"
+
+#: skycultures/arabian_peninsula/star_names.fab:16
+msgid "The first two 1"
+msgstr "Prvé dve 1"
+
+#: skycultures/arabian_peninsula/star_names.fab:17
+msgid "The first two 2"
+msgstr "Prvé dve 2"
+
+#. TRANSLATORS: Al-Khilj is a proper name
+#: skycultures/arabian_peninsula/star_names.fab:19
+msgid "The Latter Khilj 1"
+msgstr "Neskorší Childž 1"
+
+#. TRANSLATORS: Al-Khilj is a proper name
+#: skycultures/arabian_peninsula/star_names.fab:21
+msgid "The Latter Khilj 2"
+msgstr "Neskorší Childž 2"
+
+#: skycultures/arabian_peninsula/star_names.fab:22
+msgid "The fourth ones 1"
+msgstr "Štvrté 1"
+
+#: skycultures/arabian_peninsula/star_names.fab:23
+msgid "The fourth ones 2"
+msgstr "Štvrté 2"
+
+#: skycultures/arabian_peninsula/star_names.fab:24
+msgid "The Fifth"
+msgstr "Piata"
+
+#: skycultures/arabian_peninsula/star_names.fab:25
+msgid "The Sixth"
+msgstr "Šiesta"
+
+#: skycultures/arabian_peninsula/star_names.fab:26
+msgid "The Seventh"
+msgstr "Siedma"
+
+#: skycultures/arabian_peninsula/star_names.fab:27
+#: skycultures/arabic/star_names.fab:42
+msgid "The Watcher"
+msgstr "Strážca"
+
+#: skycultures/arabian_peninsula/star_names.fab:28
+msgid "The Reddish One"
+msgstr "Červená"
+
+#: skycultures/arabian_peninsula/star_names.fab:29
+msgid "The Closed Wings Eagle"
+msgstr "Orol so zloženými krídlami"
+
+#: skycultures/arabian_peninsula/star_names.fab:30
+msgid "The Parallel One"
+msgstr "Rovnobežná"
+
+#: skycultures/arabian_peninsula/star_names.fab:31
+msgid "The Sided One"
+msgstr "Postranná"
+
+#: skycultures/arabian_peninsula/star_names.fab:32
+msgid "The Spread Wings Eagle"
+msgstr "Orol s roztiahnutými krídlami"
+
+#. TRANSLATORS: Al-Kanoon is a proper name
+#: skycultures/arabian_peninsula/star_names.fab:34
+msgid "Al-Kanoon"
+msgstr "Al-Kanoon"
+
+#: skycultures/arabian_peninsula/star_names.fab:35
+msgid "The Rear 2"
+msgstr "Zadok 2"
+
+#: skycultures/arabian_peninsula/star_names.fab:36
+msgid "The Rear 1"
+msgstr "Zadok 1"
+
+#: skycultures/arabian_peninsula/star_names.fab:37
+msgid "The Front 2"
+msgstr "Predok 2"
+
+#: skycultures/arabian_peninsula/star_names.fab:38
+msgid "The Front 1"
+msgstr "Predok 1"
+
+#: skycultures/arabian_peninsula/star_names.fab:39
+msgid "The Little Follower"
+msgstr "Malý následovník"
+
+#: skycultures/arabian_peninsula/star_names.fab:40
+msgid "The Latter"
+msgstr "Neskoršia"
+
+#. TRANSLATORS: Al-Mjaidih is a proper name
+#: skycultures/arabian_peninsula/star_names.fab:42
+msgid "Al-Mjaidih"
+msgstr "Al-Mdžaidih"
+
+#: skycultures/arabian_peninsula/star_names.fab:43
+#: skycultures/arabic/star_names.fab:114
+#: skycultures/arabic_lunar_stations/star_names.fab:66
+msgid "The Claws 1"
+msgstr "Pazúre 1"
+
+#: skycultures/arabian_peninsula/star_names.fab:44
+#: skycultures/arabic/star_names.fab:115
+#: skycultures/arabic_lunar_stations/star_names.fab:67
+msgid "The Claws 2"
+msgstr "Pazúre 2"
+
+#: skycultures/arabian_peninsula/star_names.fab:45
+#: skycultures/arabic/star_names.fab:116
+#: skycultures/arabic_lunar_stations/star_names.fab:68
+msgid "The Claws 3"
+msgstr "Pazúre 3"
+
+#: skycultures/arabian_peninsula/star_names.fab:46
+#: skycultures/arabic/star_names.fab:117
+#: skycultures/arabic_lunar_stations/star_names.fab:69
+msgid "The Claws 4"
+msgstr "Pazúre 4"
+
+#: skycultures/arabian_peninsula/star_names.fab:47
+#: skycultures/arabic/star_names.fab:118
+#: skycultures/arabic_lunar_stations/star_names.fab:70
+msgid "The Claws 5"
+msgstr "Pazúre 5"
+
+#: skycultures/arabian_peninsula/star_names.fab:48
+#: skycultures/arabic/star_names.fab:119
+#: skycultures/arabic_lunar_stations/star_names.fab:71
+msgid "The Claws 6"
+msgstr "Pazúre 6"
+
+#: skycultures/arabian_peninsula/star_names.fab:49
+#: skycultures/arabic/star_names.fab:124
+#: skycultures/arabic_lunar_stations/star_names.fab:72
+msgid "Star Of Weather Change"
+msgstr "Hviezda zmeny počasia"
+
+#: skycultures/arabian_peninsula/star_names.fab:50
+msgid "The High Unarmed One"
+msgstr "Vysoký bezbranný"
+
+#: skycultures/arabian_peninsula/star_names.fab:51
+#: skycultures/arabic/star_names.fab:126
+#: skycultures/arabic_lunar_stations/star_names.fab:74
+msgid "The Heart"
+msgstr "Srdce"
+
+#. TRANSLATORS: Al-Jawza is a proper name
+#: skycultures/arabian_peninsula/star_names.fab:55
+msgid "Northern Horn Of Al-Jawza"
+msgstr "Severný roh Al-Džavzy"
+
+#. TRANSLATORS: Al-Jawza is a proper name
+#: skycultures/arabian_peninsula/star_names.fab:57
+msgid "Northern Claw Of Al-Jawza"
+msgstr "Severný pazúr Al-Džavzy"
+
+#. TRANSLATORS: Al-Jawza is a proper Arabic name of orion
+#. TRANSLATORS: Al-Jawza is a proper name
+#: skycultures/arabian_peninsula/star_names.fab:58
+#: skycultures/arabic/star_names.fab:152
+#: skycultures/arabic_lunar_stations/star_names.fab:97
+msgid "Leg Of Al-Jawza"
+msgstr "Noha Al-Džavzy"
+
+#. TRANSLATORS: Al-Jawza is a proper name
+#: skycultures/arabian_peninsula/star_names.fab:60
+msgid "Southern Horn Of Al-Jawza"
+msgstr "Južný roh Al-Džavzy"
+
+#. TRANSLATORS: Al-Jawza is a proper name
+#: skycultures/arabian_peninsula/star_names.fab:62
+msgid "Southern Claw Of Al-Jawza"
+msgstr "Južný pazúr Al-Džavzy"
+
+#. TRANSLATORS: Al-Shi'la is a proper name
+#: skycultures/arabian_peninsula/star_names.fab:66
+msgid "Al-Shi'la"
+msgstr "Al-Ši'la"
+
+#. TRANSLATORS: Suhayl is a proper name
+#. TRANSLATORS: ٍSuhayl is a proper name
+#. TRANSLATORS: This is a proper name
+#: skycultures/arabian_peninsula/star_names.fab:68
+#: skycultures/arabic/star_names.fab:168
+#: skycultures/arabic_lunar_stations/star_names.fab:107
+msgid "Suhayl"
+msgstr "Suhayl"
+
+#: skycultures/arabian_peninsula/star_names.fab:69
+msgid "The Oath Star"
+msgstr "Hviezda prísahy"
+
+#. TRANSLATORS: Aba Alsihil is a proper name
+#: skycultures/arabian_peninsula/star_names.fab:71
+msgid "Aba al-sihil"
+msgstr "Aba al-sihil"
+
+#. TRANSLATORS: Al-Miss.hil is a proper name
+#: skycultures/arabian_peninsula/star_names.fab:73
+msgid "Al-Miss.hil"
+msgstr "Al-Miss.hil"
+
+#. TRANSLATORS: As-S.hali is a proper name
+#: skycultures/arabian_peninsula/star_names.fab:75
+msgid "al-Naayem 1"
+msgstr "Al-Naayem 1"
+
+#: skycultures/arabian_peninsula/star_names.fab:76
+msgid "al-Naayem 2"
+msgstr "Al-Naayem 2"
+
+#: skycultures/arabic/constellation_names.eng.fab:1
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:1
+msgid "The Two Oryx Calves"
+msgstr "Dve teľatá priamorožca"
+
+#: skycultures/arabic/constellation_names.eng.fab:2
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:2
+msgid "The Axe Of The Grindstone"
+msgstr "Os brúsneho kameňa"
+
+#. TRANSLATORS: Na'sh is a proper name meaning bier
+#. TRANSLATORS: Na'sh is a proper name
+#: skycultures/arabic/constellation_names.eng.fab:4
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:4
+msgid "Daughters Of Na'sh"
+msgstr "Dcéry Na'šu"
+
+#: skycultures/arabic/constellation_names.eng.fab:5
+msgid "The Gazelles And Their Youngsters"
+msgstr "Gazely s mladými"
+
+#: skycultures/arabic/constellation_names.eng.fab:6
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:5
+msgid "The First Leap"
+msgstr "Prvý skok"
+
+#: skycultures/arabic/constellation_names.eng.fab:7
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:6
+msgid "The Second Leap"
+msgstr "Druhý skok"
+
+#: skycultures/arabic/constellation_names.eng.fab:8
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:7
+msgid "The Third Leap"
+msgstr "Tretí skok"
+
+#: skycultures/arabic/constellation_names.eng.fab:9
+msgid "The Two Preceding To The Water"
+msgstr "Dve pred vodou"
+
+#: skycultures/arabic/constellation_names.eng.fab:10
+msgid "The Pool"
+msgstr "Mláka"
+
+#: skycultures/arabic/constellation_names.eng.fab:11
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:8
+msgid "The Two Wolves"
+msgstr "Dvaja vlci"
+
+#: skycultures/arabic/constellation_names.eng.fab:12
+msgid "The Wolf Claws"
+msgstr "Vlčie pazúre"
+
+#: skycultures/arabic/constellation_names.eng.fab:13
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:9
+msgid "The Mother Camels"
+msgstr "Ťavie matky"
+
+#: skycultures/arabic/constellation_names.eng.fab:14
+msgid "The Three Stone Support"
+msgstr "Tri kamenné podpery"
+
+#: skycultures/arabic/constellation_names.eng.fab:15
+msgid "The Pot"
+msgstr "Hrniec"
+
+#: skycultures/arabic/constellation_names.eng.fab:16
+msgid "The Shepherd And The Sheep"
+msgstr "Pastier s ovcami"
+
+#: skycultures/arabic/constellation_names.eng.fab:17
+msgid "The Two Separated Stars"
+msgstr "Dve oddelené hviezdy"
+
+#: skycultures/arabic/constellation_names.eng.fab:18
+#: skycultures/arabic/star_names.fab:43
+msgid "The Armed One"
+msgstr "Ozbrojený"
+
+#: skycultures/arabic/constellation_names.eng.fab:19
+msgid "The Spear"
+msgstr "Kopija"
+
+#: skycultures/arabic/constellation_names.eng.fab:20
+msgid "The Unarmed One"
+msgstr "Neozbrojený"
+
+#: skycultures/arabic/constellation_names.eng.fab:21
+msgid "The Hyenas And Their Youngsters"
+msgstr "Hyeny a ich mladé"
+
+#: skycultures/arabic/constellation_names.eng.fab:23
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:10
+msgid "The Bowl Of The Poor"
+msgstr "Miska chudobných"
+
+#: skycultures/arabic/constellation_names.eng.fab:24
+msgid "The Desert Garden And The Goats"
+msgstr "Púštna záhrada a kozy"
+
+#: skycultures/arabic/constellation_names.eng.fab:25
+msgid "The Northern Line"
+msgstr "Severná čiara"
+
+#: skycultures/arabic/constellation_names.eng.fab:26
+msgid "The Southern Line"
+msgstr "Južná čiara"
+
+#: skycultures/arabic/constellation_names.eng.fab:27
+#: skycultures/arabic/star_names.fab:51
+#: skycultures/arabic_lunar_stations/star_names.fab:23
+msgid "The Landing Eagle"
+msgstr "Pristávajúci orol"
+
+#: skycultures/arabic/constellation_names.eng.fab:28
+#: skycultures/arabic/star_names.fab:86
+#: skycultures/arabic_lunar_stations/star_names.fab:48
+msgid "The Flying Eagle"
+msgstr "Letiaci orol"
+
+#: skycultures/arabic/constellation_names.eng.fab:29
+msgid "The Knights"
+msgstr "Rytieri"
+
+#: skycultures/arabic/constellation_names.eng.fab:30
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:14
+msgid "The She-Camel"
+msgstr "Samica ťavy"
+
+#: skycultures/arabic/constellation_names.eng.fab:31
+msgid "Head Of The She-Camel"
+msgstr "Hlava samice ťavy"
+
+#: skycultures/arabic/constellation_names.eng.fab:32
+msgid "Neck Of The She-Camel"
+msgstr "Krk samice ťavy"
+
+#: skycultures/arabic/constellation_names.eng.fab:33
+msgid "Legs Of The She-Camel"
+msgstr "Nohy samice ťavy"
+
+#: skycultures/arabic/constellation_names.eng.fab:37
+msgid "The She-Camel's Hump - The Henna Tinted Hand"
+msgstr "Hrb samice ťavy - Ruka maľovaná hennou"
+
+#: skycultures/arabic/constellation_names.eng.fab:38
+#: skycultures/arabic/star_names.fab:60
+#: skycultures/arabic_lunar_stations/star_names.fab:30
+msgid "The Shoulder Blade"
+msgstr "Lopatka"
+
+#: skycultures/arabic/constellation_names.eng.fab:39
+#: skycultures/arabic/star_names.fab:61
+#: skycultures/arabic_lunar_stations/star_names.fab:31
+msgid "The Shoulder"
+msgstr "Plece"
+
+#: skycultures/arabic/constellation_names.eng.fab:41
+#: skycultures/arabic/star_names.fab:63
+#: skycultures/arabic_lunar_stations/star_names.fab:33
+msgid "The Elbow"
+msgstr "Lakeť"
+
+#: skycultures/arabic/constellation_names.eng.fab:42
+#: skycultures/arabic/star_names.fab:67
+#: skycultures/arabic_lunar_stations/star_names.fab:36
+msgid "The Forearm"
+msgstr "Predlaktie"
+
+#: skycultures/arabic/constellation_names.eng.fab:43
+#: skycultures/arabic/star_names.fab:68
+#: skycultures/arabic_lunar_stations/star_names.fab:37
+msgid "The Wrist"
+msgstr "Zápästie"
+
+#: skycultures/arabic/constellation_names.eng.fab:44
+msgid "The Leprous Hand"
+msgstr "Leprózna ruka"
+
+#. TRANSLATORS: Al-Ayyuq is a proper name meaning the obstructor
+#: skycultures/arabic/constellation_names.eng.fab:47
+msgid "Al-Ayyuq And The Posts"
+msgstr "Al-Ajjúk a stĺpy"
+
+#: skycultures/arabic/constellation_names.eng.fab:48
+msgid "The Northern Tent"
+msgstr "Severný stan"
+
+#: skycultures/arabic/constellation_names.eng.fab:49
+msgid "The Young Camel"
+msgstr "Mladá ťava"
+
+#: skycultures/arabic/constellation_names.eng.fab:50
+#: skycultures/arabic/star_names.fab:98
+#: skycultures/arabic_lunar_stations/star_names.fab:54
+msgid "The Caracal"
+msgstr "Karakal"
+
+#: skycultures/arabic/constellation_names.eng.fab:51
+msgid "The Well Bucket"
+msgstr "Vedro zo studne"
+
+#: skycultures/arabic/constellation_names.eng.fab:52
+msgid "The Bucket Rope Knot"
+msgstr "Uzol na lane k vedru"
+
+#: skycultures/arabic/constellation_names.eng.fab:53
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:16
+msgid "The Front Bucket Mouth"
+msgstr "Predné ústie vedra"
+
+#: skycultures/arabic/constellation_names.eng.fab:54
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:17
+msgid "The Rear Bucket Mouth"
+msgstr "Zadné ústie vedra"
+
+#: skycultures/arabic/constellation_names.eng.fab:55
+msgid "The Bucket Rope"
+msgstr "Lano k vedru"
+
+#: skycultures/arabic/constellation_names.eng.fab:57
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:18
+#: skycultures/babylonian_seleucid/constellation_names.eng.fab:46
+msgid "The Fish"
+msgstr "Ryba"
+
+#: skycultures/arabic/constellation_names.eng.fab:58
+msgid "The Empty Place Of The Fox"
+msgstr "Prázdne miesto líšky"
+
+#: skycultures/arabic/constellation_names.eng.fab:59
+msgid "The Lamb"
+msgstr "Jahňa"
+
+#: skycultures/arabic/constellation_names.eng.fab:61
+msgid "The Two Forelegs Of The Lamb"
+msgstr "Dve predné nohy jahňaťa"
+
+#: skycultures/arabic/constellation_names.eng.fab:62
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:19
+msgid "The Two Signs"
+msgstr "Dve znamenia"
+
+#. TRANSLATORS: This is a proper name
+#: skycultures/arabic/constellation_names.eng.fab:69
+#: skycultures/arabic/star_names.fab:103
+#: skycultures/arabic_lunar_stations/star_names.fab:58
+msgid "Al-Dabaran"
+msgstr "Al-Dabaran"
+
+#. TRANSLATORS: Al-Dabaran is a proper name meaning the follower
+#: skycultures/arabic/constellation_names.eng.fab:72
+msgid "The Two Dogs Of Al-Dabaran"
+msgstr "Dva psy Al-Dabarana"
+
+#: skycultures/arabic/constellation_names.eng.fab:73
+msgid "The Young She-Camels"
+msgstr "Mladé samice ťavy"
+
+#: skycultures/arabic/constellation_names.eng.fab:74
+msgid "The Lion"
+msgstr "Lev"
+
+#: skycultures/arabic/constellation_names.eng.fab:75
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:22
+msgid "The Retracted Arm"
+msgstr "Stiahnuté rameno"
+
+#: skycultures/arabic/constellation_names.eng.fab:76
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:23
+msgid "The Extended Arm"
+msgstr "Natiahnuté rameno"
+
+#: skycultures/arabic/constellation_names.eng.fab:84
+msgid "The Tassel"
+msgstr "Strapec"
+
+#: skycultures/arabic/constellation_names.eng.fab:88
+#: skycultures/arabic/dso_names.fab:15
+msgid "The Scorpion's Sting"
+msgstr "Žihadlo Škorpióna"
+
+#: skycultures/arabic/constellation_names.eng.fab:91
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:34
+msgid "The Ostriches Drinking At The River"
+msgstr "Pštrosy pijúce pri rieke"
+
+#: skycultures/arabic/constellation_names.eng.fab:92
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:35
+msgid "The Ostriches Leaving The River"
+msgstr "Pštrosy odchádzajúce od rieky"
+
+#: skycultures/arabic/constellation_names.eng.fab:93
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:36
+msgid "The Ostrich Nest - The Necklace"
+msgstr "Pštrosie hniezdo - Náhrdelník"
+
+#: skycultures/arabic/constellation_names.eng.fab:94
+msgid "The Dome-Like Tent"
+msgstr "Kupolovitý stan"
+
+#. TRANSLATORS: Nashira is a proper name
+#: skycultures/arabic/constellation_names.eng.fab:101
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:43
+msgid "The Lucky Star Of Nashira"
+msgstr "Šťastná hviezda Naširy"
+
+#: skycultures/arabic/constellation_names.eng.fab:102
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:44
+msgid "The Lucky Star Of The King"
+msgstr "Šťastná hviezda kráľa"
+
+#: skycultures/arabic/constellation_names.eng.fab:103
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:45
+msgid "The Lucky Star Of The Young Sheep"
+msgstr "Šťastná hviezda jahňaťa"
+
+#: skycultures/arabic/constellation_names.eng.fab:104
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:46
+msgid "The Lucky Star Of The One With Great Endeavour"
+msgstr "Šťastná hviezda usilovného"
+
+#: skycultures/arabic/constellation_names.eng.fab:105
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:47
+msgid "The Lucky Star Of The Excellent One"
+msgstr "Šťastná hviezda vynikajúceho"
+
+#. TRANSLATORS: Matar is a proper name meaning rain
+#. TRANSLATORS: Matar is a proper name meaning rain.
+#: skycultures/arabic/constellation_names.eng.fab:107
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:49
+msgid "The Lucky Star Of Matar"
+msgstr "Šťastná hviezda Mataru"
+
+#: skycultures/arabic/constellation_names.eng.fab:108
+msgid "The Ringed Rope"
+msgstr "Kruhový povraz"
+
+#: skycultures/arabic/constellation_names.eng.fab:109
+msgid "The Circular Mark‎"
+msgstr "Okrúhle znamenie"
+
+#: skycultures/arabic/constellation_names.eng.fab:110
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:51
+msgid "The String"
+msgstr "Reťaz"
+
+#: skycultures/arabic/constellation_names.eng.fab:111
+msgid "The Young Maids"
+msgstr "Mladé slúžky"
+
+#: skycultures/arabic/constellation_names.eng.fab:113
+msgid "Hair Braids Of Al-Jawza"
+msgstr "Vrkoče Al-Džavzy"
+
+#: skycultures/arabic/constellation_names.eng.fab:114
+msgid "Bow Of Al-Jawza"
+msgstr "Luk Al-Džavzy"
+
+#: skycultures/arabic/constellation_names.eng.fab:116
+msgid "Stars Of Abundant Rain"
+msgstr "Hviezdy hojného dažďa"
+
+#: skycultures/arabic/constellation_names.eng.fab:119
+msgid "The Front Footstool Of Al-Jawza"
+msgstr "Predná podnožka Al-Džavzy"
+
+#: skycultures/arabic/constellation_names.eng.fab:120
+msgid "The Rear Footstool Of Al-Jawza"
+msgstr "Zadná podnožka Al-Džavzy"
+
+#: skycultures/arabic/constellation_names.eng.fab:121
+msgid "The Virgins"
+msgstr "Panny"
+
+#: skycultures/arabic/constellation_names.eng.fab:122
+msgid "The Ravens"
+msgstr "Havrany"
+
+#: skycultures/arabic/constellation_names.eng.fab:124
+msgid "The Ostriches Nest, The Eggs And Egg Shells"
+msgstr "Pštrosie hniezdo, vajcia a škrupiny"
+
+#: skycultures/arabic/constellation_names.eng.fab:125
+msgid "The Oryxes"
+msgstr "Gazely Oryx"
+
+#: skycultures/arabic/constellation_names.eng.fab:126
+msgid "The Tied Camels"
+msgstr "Uviazané ťavy"
+
+#: skycultures/arabic/constellation_names.eng.fab:127
+msgid "The Trough"
+msgstr "Koryto"
+
+#: skycultures/arabic/constellation_names.eng.fab:128
+msgid "The Southern Tent"
+msgstr "Južný stan"
+
+#: skycultures/arabic/constellation_names.eng.fab:129
+msgid "The Date Clusters"
+msgstr "Strapce ďatlí"
+
+#: skycultures/arabic/constellation_names.eng.fab:130
+msgid "The Horses And The Foals"
+msgstr "Kone a žriebätká"
+
+#: skycultures/arabic/constellation_names.eng.fab:131
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:55
+msgid "The Two Shrikes"
+msgstr "Dva strakoše"
+
+#: skycultures/arabic/constellation_names.eng.fab:132
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:56
+msgid "The Two Doves"
+msgstr "Dve holubice"
+
+#: skycultures/arabic/constellation_names.eng.fab:133
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:57
+msgid "The Two Male Ostriches"
+msgstr "Dvaja pštrosí samci"
+
+#: skycultures/arabic/constellation_names.eng.fab:134
+msgid "The Young Ostriches"
+msgstr "Mladé pštrosy"
+
+#: skycultures/arabic/constellation_names.eng.fab:135
+msgid "The Larks"
+msgstr "Škovránky"
+
+#: skycultures/arabic/constellation_names.eng.fab:136
+msgid "The Sandgrouses"
+msgstr "Stepiare"
+
+#: skycultures/arabic/constellation_names.eng.fab:137
+msgid "The Wild Asses"
+msgstr "Divoké osly"
+
+#: skycultures/arabic/constellation_names.eng.fab:138
+msgid "The Ladder"
+msgstr "Rebrík"
+
+#: skycultures/arabic/dso_names.fab:8
+#: skycultures/arabic_lunar_stations/dso_names.fab:1
+msgid "The Wrist 1"
+msgstr "Zápästie 1"
+
+#: skycultures/arabic/dso_names.fab:9
+#: skycultures/arabic_lunar_stations/dso_names.fab:2
+msgid "The Wrist 2"
+msgstr "Zápästie 2"
+
+#: skycultures/arabic/dso_names.fab:10
+msgid "The She-Camel's Brand 1"
+msgstr "Značka samice ťavy 1"
+
+#: skycultures/arabic/dso_names.fab:11
+msgid "The She-Camel's Brand 2"
+msgstr "Značka samice ťavy 2"
+
+#: skycultures/arabic/dso_names.fab:14
+#: skycultures/arabic_lunar_stations/dso_names.fab:5
+msgid "The Lion's Nostrils"
+msgstr "Nozdry leva"
+
+#. TRANSLATORS: Al-Mushtari is the native proper name for Jupiter, derived
+#. from shining like lightning. See Ref. # 2.
+#. TRANSLATORS: Al-Mushtari is the native proper name for Jupiter, derived
+#. from shining like light shining. See Ref. # 2.
+#: skycultures/arabic/planet_names.fab:2
+#: skycultures/arabic_lunar_stations/planet_names.fab:2
+msgid "The Shining One"
+msgstr "Žiariaci"
+
+#. TRANSLATORS: Az- Zuharah is the native proper name for Venus, derived from
+#. brightness and beauty. See Ref. # 2.
+#: skycultures/arabic/planet_names.fab:4
+#: skycultures/arabic_lunar_stations/planet_names.fab:4
+msgid "The Beautiful Bright One"
+msgstr "Krásna jasná"
+
+#. TRANSLATORS: Al-Merrikh is the native proper name for Mars, derived from
+#. Marakh (ARABIC: مرخ), a plant which is used to start fire. See Ref. # 2.
+#: skycultures/arabic/planet_names.fab:6
+#: skycultures/arabic_lunar_stations/planet_names.fab:6
+msgid "The Fire Starter"
+msgstr "Podpaľač"
+
+#. TRANSLATORS: Zuhal is the native proper name for Saturn, derived from
+#. remoteness.  See Ref. # 2.
+#: skycultures/arabic/planet_names.fab:8
+msgid "The Remote one"
+msgstr "Vzdialený"
+
+#. TRANSLATORS: Utarid is the native proper name for Mercury, derived from
+#. unstableness (mercurial).  See Ref. # 2.
+#: skycultures/arabic/planet_names.fab:10
+#: skycultures/arabic_lunar_stations/planet_names.fab:10
+msgid "The Unstable"
+msgstr "Nestály"
+
+#. TRANSLATORS: Ush-shams is the native proper name for the Sun.
+#: skycultures/arabic/planet_names.fab:12
+#: skycultures/arabic_lunar_stations/planet_names.fab:12
+msgid "Ush-Shams"
+msgstr "Uš-Šams"
+
+#. TRANSLATORS: Al-Qamar is the native proper name for the Moon, derived from
+#. strong whiteness.  See Ref. # 2. and Taj al-Arous lexicon.
+#: skycultures/arabic/planet_names.fab:14
+#: skycultures/arabic_lunar_stations/planet_names.fab:14
+msgid "The Strongly White"
+msgstr "Silno biely"
+
+#: skycultures/arabic/star_names.fab:2
+#: skycultures/arabic_lunar_stations/star_names.fab:2
+msgid "The Two Calves 1"
+msgstr "Dve teľatá 1"
+
+#: skycultures/arabic/star_names.fab:3
+#: skycultures/arabic_lunar_stations/star_names.fab:3
+msgid "The Two Calves 2"
+msgstr "Dve teľatá 2"
+
+#: skycultures/arabic/star_names.fab:4
+msgid "The Two Front Ones 1"
+msgstr "Dve predné 1"
+
+#: skycultures/arabic/star_names.fab:5
+msgid "The Two Front Ones 2"
+msgstr "Dve predné 2"
+
+#: skycultures/arabic/star_names.fab:6
+msgid "The Two Lame Ones 1"
+msgstr "Dvaja chromí 1"
+
+#: skycultures/arabic/star_names.fab:7
+msgid "The Two Lame Ones 2"
+msgstr "Dvaja chromí 2"
+
+#: skycultures/arabic/star_names.fab:8
+#: skycultures/arabic_lunar_stations/star_names.fab:4
+msgid "The Dark Camel"
+msgstr "Tmavá ťava"
+
+#: skycultures/arabic/star_names.fab:10
+#: skycultures/arabic_lunar_stations/star_names.fab:5
+msgid "The Little Goat"
+msgstr "Malá koza"
+
+#. TRANSLATORS: Aslam is a proper name
+#: skycultures/arabic/star_names.fab:14
+msgid "Aslam"
+msgstr "Aslam"
+
+#. TRANSLATORS: As-Saydaq is a proper name
+#: skycultures/arabic/star_names.fab:16
+msgid "As-Saydaq"
+msgstr "As-Sajdak"
+
+#: skycultures/arabic/star_names.fab:17
+#: skycultures/arabic_lunar_stations/star_names.fab:8
+msgid "The Leader"
+msgstr "Vodca"
+
+#: skycultures/arabic/star_names.fab:18
+msgid "The Two Preceding To The Water 1"
+msgstr "Dve pred vodou 1"
+
+#: skycultures/arabic/star_names.fab:19
+msgid "The Two Preceding To The Water 2"
+msgstr "Dve pred vodou 2"
+
+#: skycultures/arabic/star_names.fab:20
+#: skycultures/arabic_lunar_stations/star_names.fab:9
+msgid "Liver Of The Lion"
+msgstr "Pečeň leva"
+
+#: skycultures/arabic/star_names.fab:22
+msgid "The She-Camel's Hump"
+msgstr "Hrb samice ťavy"
+
+#: skycultures/arabic/star_names.fab:23
+msgid "The Trotting Camel"
+msgstr "Klusajúca ťava"
+
+#: skycultures/arabic/star_names.fab:24
+#: skycultures/arabic_lunar_stations/star_names.fab:11
+msgid "The Baby Camel"
+msgstr "Mláďa ťavy"
+
+#: skycultures/arabic/star_names.fab:25
+msgid "The Three Stone Support 1"
+msgstr "Tri kamenné podpery 1"
+
+#: skycultures/arabic/star_names.fab:26
+msgid "The Three Stone Support 2"
+msgstr "Tri kamenné podpery 2"
+
+#: skycultures/arabic/star_names.fab:27
+msgid "The Three Stone Support 3"
+msgstr "Tri kamenné podpery 3"
+
+#: skycultures/arabic/star_names.fab:28
+#: skycultures/arabic_lunar_stations/star_names.fab:12
+msgid "The Two Wolves 1"
+msgstr "Dvaja vlci 1"
+
+#: skycultures/arabic/star_names.fab:29
+#: skycultures/arabic_lunar_stations/star_names.fab:13
+msgid "The Two Wolves 2"
+msgstr "Dvaja vlci 2"
+
+#: skycultures/arabic/star_names.fab:30
+msgid "The Two Black Birds 1"
+msgstr "Dva čierne vtáky 1"
+
+#: skycultures/arabic/star_names.fab:31
+msgid "The Two Black Birds 2"
+msgstr "Dva čierne vtáky 2"
+
+#: skycultures/arabic/star_names.fab:32
+msgid "The Two Falcons 1"
+msgstr "Dva sokoly 1"
+
+#: skycultures/arabic/star_names.fab:33
+msgid "The Two Falcons 2"
+msgstr "Dva sokoly 2"
+
+#: skycultures/arabic/star_names.fab:34
+#: skycultures/arabic_lunar_stations/star_names.fab:14
+msgid "The Male Hyena"
+msgstr "Hyena"
+
+#: skycultures/arabic/star_names.fab:35
+#: skycultures/arabic_lunar_stations/star_names.fab:15
+msgid "The [Northern] Shepherd"
+msgstr "[Severný] Pastier"
+
+#: skycultures/arabic/star_names.fab:36
+#: skycultures/arabic_lunar_stations/star_names.fab:16
+msgid "The [Northern] Shepherd Dog"
+msgstr "Pes [severného] Pastiera"
+
+#: skycultures/arabic/star_names.fab:37
+msgid "The Two Stars Of Separation 1"
+msgstr "Dve hviezdy odlúčenia 1"
+
+#: skycultures/arabic/star_names.fab:38
+#: skycultures/arabic_lunar_stations/star_names.fab:17
+msgid "The White One"
+msgstr "Biela"
+
+#: skycultures/arabic/star_names.fab:39
+msgid "The Two Stars Of Separation 2"
+msgstr "Dve hviezdy odlúčenia 2"
+
+#: skycultures/arabic/star_names.fab:40
+#: skycultures/arabic_lunar_stations/star_names.fab:18
+msgid "The Horse Forehead Star"
+msgstr "Hviezda čela koňa"
+
+#: skycultures/arabic/star_names.fab:41
+#: skycultures/arabic_lunar_stations/star_names.fab:19
+msgid "The High One With The Spear"
+msgstr "Vysoký s kopijou"
+
+#: skycultures/arabic/star_names.fab:44
+#: skycultures/arabic_lunar_stations/star_names.fab:20
+msgid "The Spear 1"
+msgstr "Kopija 1"
+
+#: skycultures/arabic/star_names.fab:45
+#: skycultures/arabic_lunar_stations/star_names.fab:21
+msgid "The Spear 2"
+msgstr "Kopija 2"
+
+#: skycultures/arabic/star_names.fab:46
+msgid "The Front Spear Tassel"
+msgstr "Predný strapec kopije"
+
+#: skycultures/arabic/star_names.fab:47
+msgid "The Rear Spear Tassel"
+msgstr "Zadný strapec kopije"
+
+#: skycultures/arabic/star_names.fab:48
+msgid "Flag Of The High One"
+msgstr "Zástava vysokého"
+
+#. TRANSLATORS: Al-Fakkah is an incomlete circle
+#: skycultures/arabic/star_names.fab:50
+#: skycultures/arabic_lunar_stations/star_names.fab:22
+msgid "The Bright Star Of Al-Fakkah"
+msgstr "Jasná hviezda Al-Fakkacha"
+
+#: skycultures/arabic/star_names.fab:52
+msgid "The Landing Eagle Claws 1"
+msgstr "Pazúre pristávajúceho orla 1"
+
+#: skycultures/arabic/star_names.fab:53
+msgid "The Landing Eagle Claws 2"
+msgstr "Pazúre pristávajúceho orla 2"
+
+#: skycultures/arabic/star_names.fab:54
+#: skycultures/arabic_lunar_stations/star_names.fab:24
+msgid "The Rear Knight"
+msgstr "Zadný rytier"
+
+#: skycultures/arabic/star_names.fab:55
+#: skycultures/arabic_lunar_stations/star_names.fab:25
+msgid "The Knights 1"
+msgstr "Rytieri 1"
+
+#: skycultures/arabic/star_names.fab:56
+#: skycultures/arabic_lunar_stations/star_names.fab:26
+msgid "The Knights 2"
+msgstr "Rytieri 2"
+
+#: skycultures/arabic/star_names.fab:57
+#: skycultures/arabic_lunar_stations/star_names.fab:27
+msgid "The Knights 3"
+msgstr "Rytieri 3"
+
+#: skycultures/arabic/star_names.fab:58
+#: skycultures/arabic_lunar_stations/star_names.fab:28
+msgid "The Knights 4"
+msgstr "Rytieri 4"
+
+#: skycultures/arabic/star_names.fab:59
+#: skycultures/arabic_lunar_stations/star_names.fab:29
+msgid "The Knights 5"
+msgstr "Rytieri 5"
+
+#: skycultures/arabic/star_names.fab:64
+#: skycultures/arabic_lunar_stations/star_names.fab:34
+msgid "Bend Of The Hand"
+msgstr "Ohyb ruky"
+
+#: skycultures/arabic/star_names.fab:65
+#: skycultures/arabic_lunar_stations/star_names.fab:35
+msgid "Tip Of The Elbow"
+msgstr "Špička lakťa"
+
+#. TRANSLATORS: Al-Ayyuq is a proper name meaning the obstructor
+#. TRANSLATORS: This is a proper name
+#: skycultures/arabic/star_names.fab:70
+#: skycultures/arabic_lunar_stations/star_names.fab:39
+msgid "Al-Ayyuq"
+msgstr "Al-Ajjúk"
+
+#. TRANSLATORS: Al-Thurayya is a proper name
+#: skycultures/arabic/star_names.fab:74
+msgid "Al-Thurayya watcher"
+msgstr "Strážca Al-Turájja"
+
+#. TRANSLATORS: Al-Ayyuq is a proper name meaning the obstructor
+#. TRANSLATORS: Al-Ayyuq is a proper name
+#: skycultures/arabic/star_names.fab:76
+#: skycultures/arabic_lunar_stations/star_names.fab:41
+msgid "Foot Of Al-Ayyuq"
+msgstr "Chodidlo Al-Ajjúka"
+
+#: skycultures/arabic/star_names.fab:77
+#: skycultures/arabic_lunar_stations/star_names.fab:42
+msgid "The Posts 1"
+msgstr "Stĺpy 1"
+
+#: skycultures/arabic/star_names.fab:78
+#: skycultures/arabic_lunar_stations/star_names.fab:43
+msgid "The Posts 2"
+msgstr "Stĺpy 2"
+
+#: skycultures/arabic/star_names.fab:79
+#: skycultures/arabic_lunar_stations/star_names.fab:44
+msgid "The Posts 3"
+msgstr "Stĺpy 3"
+
+#: skycultures/arabic/star_names.fab:80
+msgid "The Associates Of Al-Ayyuq 1"
+msgstr "Spoločníci Al-Ajjúka 1"
+
+#: skycultures/arabic/star_names.fab:81
+msgid "The Associates Of Al-Ayyuq 2"
+msgstr "Spoločníci Al-Ajjúka 2"
+
+#: skycultures/arabic/star_names.fab:82
+msgid "The Associates Of Al-Ayyuq 3"
+msgstr "Spoločníci Al-Ajjúka 3"
+
+#: skycultures/arabic/star_names.fab:83
+#: skycultures/arabic_lunar_stations/star_names.fab:45
+msgid "The [Southern] Shepherd"
+msgstr "[Južný] Pastier"
+
+#: skycultures/arabic/star_names.fab:84
+#: skycultures/arabic_lunar_stations/star_names.fab:46
+msgid "First Dog Of The [Southern] Shepherd"
+msgstr "Prvý pes [južného] pastiera"
+
+#: skycultures/arabic/star_names.fab:85
+#: skycultures/arabic_lunar_stations/star_names.fab:47
+msgid "Second Dog Of The [Southern] Shepherd"
+msgstr "Druhý pes [južného] pastiera"
+
+#: skycultures/arabic/star_names.fab:87
+msgid "The Post Of The Cross"
+msgstr "Základňa kríža"
+
+#: skycultures/arabic/star_names.fab:88
+#: skycultures/arabic_lunar_stations/star_names.fab:49
+msgid "The Rear Bucket Mouth 2"
+msgstr "Zadné ústie vedra 2"
+
+#: skycultures/arabic/star_names.fab:89
+#: skycultures/arabic_lunar_stations/star_names.fab:50
+msgid "The Rear Bucket Mouth 1"
+msgstr "Zadné ústie vedra 1"
+
+#: skycultures/arabic/star_names.fab:90
+#: skycultures/arabic_lunar_stations/star_names.fab:51
+msgid "The Front Bucket Mouth 2"
+msgstr "Predné ústie vedra 2"
+
+#: skycultures/arabic/star_names.fab:91
+#: skycultures/arabic_lunar_stations/star_names.fab:52
+msgid "The Front Bucket Mouth 1"
+msgstr "Predné ústie vedra 1"
+
+#: skycultures/arabic/star_names.fab:92
+msgid "The Lower Cross Beam 2"
+msgstr "Spodná lata kríža 2"
+
+#: skycultures/arabic/star_names.fab:93
+msgid "The Lower Cross Beam 1"
+msgstr "Spodná lata kríža 1"
+
+#: skycultures/arabic/star_names.fab:94
+msgid "The Upper Cross Beam 2"
+msgstr "Vrchná lata kríža 2"
+
+#: skycultures/arabic/star_names.fab:95
+msgid "The Upper Cross Beam 1"
+msgstr "Vrchná lata kríža 1"
+
+#: skycultures/arabic/star_names.fab:96
+#: skycultures/arabic_lunar_stations/star_names.fab:53
+msgid "Abdomen Of The Fish"
+msgstr "Brucho ryby"
+
+#: skycultures/arabic/star_names.fab:97
+msgid "Abdomen Of The Whale"
+msgstr "Brucho veľryby"
+
+#: skycultures/arabic/star_names.fab:100
+#: skycultures/arabic_lunar_stations/star_names.fab:55
+msgid "The Two Forelegs 1"
+msgstr "Dve predné nohy 1"
+
+#: skycultures/arabic/star_names.fab:102
+#: skycultures/arabic_lunar_stations/star_names.fab:56
+msgid "The Two Forelegs 2"
+msgstr "Dve predné nohy 2"
+
+#: skycultures/arabic/star_names.fab:104
+msgid "The Male Camel"
+msgstr "Samec ťavy"
+
+#: skycultures/arabic/star_names.fab:105
+msgid "The Wood Stirring Rod"
+msgstr "Drevené miešadlo"
+
+#: skycultures/arabic/star_names.fab:106
+msgid "The Camel Herder"
+msgstr "Pastier tiav"
+
+#: skycultures/arabic/star_names.fab:107
+#: skycultures/arabic_lunar_stations/star_names.fab:59
+msgid "Stars Of Abundant Rain 1"
+msgstr "Hviezdy hojného dažďa 1"
+
+#: skycultures/arabic/star_names.fab:108
+#: skycultures/arabic_lunar_stations/star_names.fab:60
+msgid "Stars Of Abundant Rain 2"
+msgstr "Hviezdy hojného dažďa 2"
+
+#: skycultures/arabic/star_names.fab:109
+#: skycultures/arabic_lunar_stations/star_names.fab:61
+msgid "Stars Of Abundant Rain 3"
+msgstr "Hviezdy hojného dažďa 3"
+
+#. TRANSLATORS: Az-zir is a proper name
+#. TRANSLATORS: This is a proper name
+#: skycultures/arabic/star_names.fab:111
+#: skycultures/arabic_lunar_stations/star_names.fab:63
+msgid "Az-Zir"
+msgstr "Az-Zir"
+
+#. TRANSLATORS: Al-Maysan is a proper name
+#. TRANSLATORS: This is a proper name
+#: skycultures/arabic/star_names.fab:113
+#: skycultures/arabic_lunar_stations/star_names.fab:65
+msgid "Al-Maysan"
+msgstr "Al-Majsan"
+
+#: skycultures/arabic/star_names.fab:120
+msgid "The Eyelashes 1"
+msgstr "Mihalnice 1"
+
+#: skycultures/arabic/star_names.fab:121
+msgid "The Eyelashes 2"
+msgstr "Mihalnice 2"
+
+#: skycultures/arabic/star_names.fab:122
+msgid "The Eyelashes 3"
+msgstr "Mihalnice 3"
+
+#: skycultures/arabic/star_names.fab:123
+msgid "The Eyelashes 4"
+msgstr "Mihalnice 4"
+
+#: skycultures/arabic/star_names.fab:125
+#: skycultures/arabic_lunar_stations/star_names.fab:73
+msgid "The Unarmed High One"
+msgstr "Neozbrojený vysoký"
+
+#: skycultures/arabic/star_names.fab:127
+#: skycultures/arabic_lunar_stations/star_names.fab:75
+msgid "Veins Of The Heart 1"
+msgstr "Cievy srdca 1"
+
+#: skycultures/arabic/star_names.fab:128
+#: skycultures/arabic_lunar_stations/star_names.fab:76
+msgid "Veins Of The Heart 2"
+msgstr "Cievy srdca 2"
+
+#: skycultures/arabic/star_names.fab:129
+#: skycultures/arabic_lunar_stations/star_names.fab:77
+msgid "Tail Segments Of The Scorpion 1"
+msgstr "Články chvosta škorpióna 1"
+
+#: skycultures/arabic/star_names.fab:130
+#: skycultures/arabic_lunar_stations/star_names.fab:78
+msgid "Tail Segments Of The Scorpion 2"
+msgstr "Články chvosta škorpióna 2"
+
+#: skycultures/arabic/star_names.fab:131
+#: skycultures/arabic_lunar_stations/star_names.fab:79
+msgid "Tail Segments Of The Scorpion 3"
+msgstr "Články chvosta škorpióna 3"
+
+#: skycultures/arabic/star_names.fab:132
+#: skycultures/arabic_lunar_stations/star_names.fab:80
+msgid "Tail Segments Of The Scorpion 4"
+msgstr "Články chvosta škorpióna 4"
+
+#: skycultures/arabic/star_names.fab:133
+#: skycultures/arabic_lunar_stations/star_names.fab:81
+msgid "Tail Segments Of The Scorpion 5"
+msgstr "Články chvosta škorpióna 5"
+
+#: skycultures/arabic/star_names.fab:134
+#: skycultures/arabic_lunar_stations/star_names.fab:82
+msgid "Tail Segments Of The Scorpion 6"
+msgstr "Články chvosta škorpióna 6"
+
+#: skycultures/arabic/star_names.fab:135
+#: skycultures/arabic_lunar_stations/star_names.fab:83
+msgid "Tail Segments Of The Scorpion 7"
+msgstr "Články chvosta škorpióna 7"
+
+#: skycultures/arabic/star_names.fab:138
+msgid "The Follower"
+msgstr "Následovník"
+
+#: skycultures/arabic/star_names.fab:139
+#: skycultures/arabic_lunar_stations/star_names.fab:85
+msgid "The Two Shrikes 1"
+msgstr "Dva strakoše 1"
+
+#: skycultures/arabic/star_names.fab:140
+#: skycultures/arabic_lunar_stations/star_names.fab:86
+msgid "The Two Shrikes 2"
+msgstr "Dva strakoše 2"
+
+#: skycultures/arabic/star_names.fab:141
+#: skycultures/arabic_lunar_stations/star_names.fab:87
+msgid "The Two Doves 1"
+msgstr "Dve holubice 1"
+
+#: skycultures/arabic/star_names.fab:142
+#: skycultures/arabic_lunar_stations/star_names.fab:88
+msgid "The Two Doves 2"
+msgstr "Dve holubice 2"
+
+#: skycultures/arabic/star_names.fab:143
+msgid "The Sheep"
+msgstr "Ovca"
+
+#: skycultures/arabic/star_names.fab:144
+#: skycultures/arabic_lunar_stations/star_names.fab:89
+msgid "The Two Male Ostriches 1"
+msgstr "Dvaja pštrosí samci 1"
+
+#: skycultures/arabic/star_names.fab:145
+#: skycultures/arabic_lunar_stations/star_names.fab:90
+msgid "The Two Male Ostriches 2"
+msgstr "Dvaja pštrosí samci 2"
+
+#. TRANSLATORS: Al-Jawza is a proper Arabic name of orion
+#. TRANSLATORS: Al-Jawza is a proper name
+#: skycultures/arabic/star_names.fab:148
+#: skycultures/arabic_lunar_stations/star_names.fab:93
+msgid "Shoulder Of Al-Jawza"
+msgstr "Plece Al-Džavzy"
+
+#. TRANSLATORS: The southern Shi'ra is a proper Arabic name of Sirius
+#. TRANSLATORS: Al-Shi'ra is a proper name of Sirius
+#: skycultures/arabic/star_names.fab:154
+#: skycultures/arabic_lunar_stations/star_names.fab:99
+msgid "The Southern Shi'ra"
+msgstr "Južná Shi'ra"
+
+#. TRANSLATORS: The crossing Shi'ra is a proper Arabic name of Sirius
+#: skycultures/arabic/star_names.fab:156
+msgid "The Crossing Shi'ra"
+msgstr "Križujúca Ši'ra"
+
+#. TRANSLATORS: Mirzam is an associate star of the crossing Shi'ra which is a
+#. proper Arabic name of Sirius
+#: skycultures/arabic/star_names.fab:158
+#: skycultures/arabic_lunar_stations/star_names.fab:101
+msgid "Mirzam Of The Crossing Shi'ra"
+msgstr "Mirzam Križujúcej Ši'ry"
+
+#. TRANSLATORS: Mirzam is an associate star of Al-Shi'ra which is a proper
+#. Arabic name of Sirius
+#: skycultures/arabic/star_names.fab:160
+msgid "Mirzam Of Al-Shi'ra"
+msgstr "Mirzam Al Ši'ry"
+
+#. TRANSLATORS: The northern Shi'ra is a proper Arabic name of Procyon
+#. TRANSLATORS: Al-Shi'ra is a proper name
+#: skycultures/arabic/star_names.fab:162
+#: skycultures/arabic_lunar_stations/star_names.fab:103
+msgid "The Northern Shi'ra"
+msgstr "Severná Shi'ra"
+
+#. TRANSLATORS: The tearful Shi'ra is a proper Arabic name of Procyon
+#: skycultures/arabic/star_names.fab:164
+msgid "The Tearful Shi'ra"
+msgstr "Slziaci Ši'ra"
+
+#. TRANSLATORS: Mirzam is an associate star of the tearful Shi'ra, which is a
+#. proper Arabic name of Procyon. The two stars together are called the Arm.
+#: skycultures/arabic/star_names.fab:166
+#: skycultures/arabic_lunar_stations/star_names.fab:105
+msgid "Mirzam of The Arm"
+msgstr "Mirzam Ramena"
+
+#. TRANSLATORS: Suhayl Balqayn is a proper name
+#. TRANSLATORS: This is a proper name
+#: skycultures/arabic/star_names.fab:170
+#: skycultures/arabic_lunar_stations/star_names.fab:109
+msgid "Suhayl Balqayn"
+msgstr "Suhail Balkain"
+
+#. TRANSLATORS: Suhayl Hadari is a proper name
+#. TRANSLATORS: This is a proper name
+#: skycultures/arabic/star_names.fab:172
+#: skycultures/arabic_lunar_stations/star_names.fab:111
+msgid "Suhayl Hadari"
+msgstr "Suhail Hadari"
+
+#. TRANSLATORS: Suhayl Al-wazn is a proper name
+#. TRANSLATORS: This is a proper name
+#: skycultures/arabic/star_names.fab:174
+#: skycultures/arabic_lunar_stations/star_names.fab:113
+msgid "Suhayl Al-Wazn"
+msgstr "Suhail Al-Wazn"
+
+#. TRANSLATORS: Suhayl Raqashi is a proper name
+#. TRANSLATORS: This is a proper name
+#: skycultures/arabic/star_names.fab:176
+#: skycultures/arabic_lunar_stations/star_names.fab:115
+msgid "Suhayl Raqashi"
+msgstr "Suhail Rakaši"
+
+#: skycultures/arabic/star_names.fab:177
+msgid "The Sole One"
+msgstr "Jediná"
+
+#: skycultures/arabic/star_names.fab:181
+#: skycultures/arabic_lunar_stations/star_names.fab:120
+msgid "Oath Star"
+msgstr "Hviezda prísahy"
+
+#. TRANSLATORS: Al-Muqil is a proper name
+#: skycultures/arabic/star_names.fab:185
+msgid "Al-Muqil"
+msgstr "Al-Mukil"
+
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:11
+msgid "The Camel Head"
+msgstr "Hlava ťavy"
+
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:12
+msgid "The Camel Neck"
+msgstr "Krk ťavy"
+
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:13
+msgid "The Camel Front Legs"
+msgstr "Predné nohy ťavy"
+
+#: skycultures/arabic_lunar_stations/constellation_names.eng.fab:15
+msgid "The Bucket Rope Knot - The Well Poles"
+msgstr "Uzol lana k vedru - Stĺpy studne"
+
+#. TRANSLATORS: Zuhal is the native proper name for Saturn, derived from
+#. remoteness.  See Ref. # 2.
+#: skycultures/arabic_lunar_stations/planet_names.fab:8
+msgid "The Remote One"
+msgstr "Vzdialený"
+
+#: skycultures/arabic_lunar_stations/star_names.fab:10
+msgid "The Camel Hump"
+msgstr "Hrb ťavy"
+
+#: skycultures/arabic_lunar_stations/star_names.fab:116
+msgid "The sole one"
+msgstr "Jediná"
+
 #: skycultures/anutan/constellation_names.eng.fab:1
 msgid "The Bamboo"
 msgstr "Bambus"
@@ -14408,563 +16013,6 @@ msgstr "Te Ao Toka"
 #: skycultures/anutan/dso_names.fab:10
 msgid "The Restrained Cloud"
 msgstr "Zdržanlivý oblak"
-
-#: skycultures/arabic_moon_stations/constellation_names.eng.fab:1
-msgid "The Two signs"
-msgstr "Dve znamenia"
-
-#: skycultures/arabic_moon_stations/constellation_names.eng.fab:2
-msgid "The Little belly"
-msgstr "Bruško"
-
-#: skycultures/arabic_moon_stations/constellation_names.eng.fab:4
-#: skycultures/arabic_moon_stations/star_names.fab:14
-msgid "The Follower"
-msgstr "Následovník"
-
-#: skycultures/arabic_moon_stations/constellation_names.eng.fab:5
-msgid "The Side Mark"
-msgstr "Postranná značka"
-
-#: skycultures/arabic_moon_stations/constellation_names.eng.fab:6
-msgid "The Neck bend"
-msgstr "Ohyb krku"
-
-#: skycultures/arabic_moon_stations/constellation_names.eng.fab:7
-msgid "The Arm"
-msgstr "Rameno"
-
-#: skycultures/arabic_moon_stations/constellation_names.eng.fab:8
-msgid "The Lion nose"
-msgstr "Nos Leva"
-
-#: skycultures/arabic_moon_stations/constellation_names.eng.fab:9
-msgid "The Lion eyes"
-msgstr "Oči Leva"
-
-#: skycultures/arabic_moon_stations/constellation_names.eng.fab:10
-msgid "The Lion Forehead"
-msgstr "Čelo Leva"
-
-#: skycultures/arabic_moon_stations/constellation_names.eng.fab:11
-msgid "The Lion mane"
-msgstr "Hriva Leva"
-
-#: skycultures/arabic_moon_stations/constellation_names.eng.fab:12
-#: skycultures/arabic_moon_stations/star_names.fab:43
-msgid "The Star of weather change"
-msgstr "Hviezda zmeny počasia"
-
-#: skycultures/arabic_moon_stations/constellation_names.eng.fab:13
-msgid "The Bend"
-msgstr "Ohyb"
-
-#: skycultures/arabic_moon_stations/constellation_names.eng.fab:14
-msgid "The High one"
-msgstr "Vysoký"
-
-#: skycultures/arabic_moon_stations/constellation_names.eng.fab:15
-msgid "The tail tuft"
-msgstr "Chumáč chvosta"
-
-#: skycultures/arabic_moon_stations/constellation_names.eng.fab:16
-msgid "The Scorpion Claws"
-msgstr "Klepetá Škorpióna"
-
-#: skycultures/arabic_moon_stations/constellation_names.eng.fab:17
-msgid "The ornamented headband"
-msgstr "Zdobená čelenka"
-
-#: skycultures/arabic_moon_stations/constellation_names.eng.fab:18
-#: skycultures/arabic_moon_stations/star_names.fab:71
-msgid "The Heart"
-msgstr "Srdce"
-
-#: skycultures/arabic_moon_stations/constellation_names.eng.fab:19
-#: skycultures/arabic_moon_stations/star_names.fab:78
-msgid "The Scorpion sting"
-msgstr "Žihadlo Škorpióna"
-
-#: skycultures/arabic_moon_stations/constellation_names.eng.fab:20
-msgid "The Ostriches"
-msgstr "Pštrosy"
-
-#: skycultures/arabic_moon_stations/constellation_names.eng.fab:21
-msgid "The Empty place"
-msgstr "Prázdne miesto"
-
-#: skycultures/arabic_moon_stations/constellation_names.eng.fab:22
-msgid "The Lucky stars of the slaughterer"
-msgstr "Šťastné hviezdy vraha"
-
-#: skycultures/arabic_moon_stations/constellation_names.eng.fab:23
-msgid "The Lucky stars of the swallower"
-msgstr "Štastné hviezdy prehĺtača"
-
-#: skycultures/arabic_moon_stations/constellation_names.eng.fab:24
-msgid "The Lucky stars of the Luckiest ones"
-msgstr "Šťastné hviezdy najšťastnejších"
-
-#: skycultures/arabic_moon_stations/constellation_names.eng.fab:25
-msgid "The Lucky stars of the tents"
-msgstr "Štastné hviezdy stanov"
-
-#: skycultures/arabic_moon_stations/constellation_names.eng.fab:26
-msgid "The Front mouth of the bucket"
-msgstr "Predné ústie vedra"
-
-#: skycultures/arabic_moon_stations/constellation_names.eng.fab:27
-msgid "The Rear mouth of the bucket"
-msgstr "Zadné ústie vedra"
-
-#: skycultures/arabic_moon_stations/constellation_names.eng.fab:28
-#: skycultures/arabic_moon_stations/star_names.fab:4
-msgid "The Bucket cord"
-msgstr "Držiak vedra"
-
-#: skycultures/arabic_moon_stations/star_names.fab:1
-msgid "The Hand dyed with Henna"
-msgstr "Ruka zafarbená hennou"
-
-#: skycultures/arabic_moon_stations/star_names.fab:2
-msgid "The First Frog"
-msgstr "Prvá žaba"
-
-#: skycultures/arabic_moon_stations/star_names.fab:3
-msgid "The Second Frog"
-msgstr "Druhá žaba"
-
-#: skycultures/arabic_moon_stations/star_names.fab:5
-msgid "The Oath star"
-msgstr "Hviezda prísahy"
-
-#: skycultures/arabic_moon_stations/star_names.fab:6
-msgid "The Caracal"
-msgstr "Karakal"
-
-#: skycultures/arabic_moon_stations/star_names.fab:7
-msgid "The Two signs 1"
-msgstr "Dve znamenia 1"
-
-#: skycultures/arabic_moon_stations/star_names.fab:8
-msgid "The Two signs 2"
-msgstr "Dve znamenia 2"
-
-#: skycultures/arabic_moon_stations/star_names.fab:9
-msgid "The Two friendly ones 1"
-msgstr "Dvaja priateľskí 1"
-
-#: skycultures/arabic_moon_stations/star_names.fab:10
-msgid "The Two friendly ones 2"
-msgstr "Dvaja priateľskí 2"
-
-#: skycultures/arabic_moon_stations/star_names.fab:11
-msgid "The Kid"
-msgstr "Dieťa"
-
-#: skycultures/arabic_moon_stations/star_names.fab:12
-msgid "The Elbow"
-msgstr "Lakeť"
-
-#: skycultures/arabic_moon_stations/star_names.fab:13
-msgid "The Shoulder side"
-msgstr "Strana pleca"
-
-#: skycultures/arabic_moon_stations/star_names.fab:15
-msgid "The Foot of Al-Jawza"
-msgstr "Chodidlo Al-Džavzu"
-
-#: skycultures/arabic_moon_stations/star_names.fab:16
-msgid "The Obstructor"
-msgstr "Prekážajúci"
-
-#: skycultures/arabic_moon_stations/star_names.fab:17
-msgid "AlNajith"
-msgstr "AlNajith"
-
-#: skycultures/arabic_moon_stations/star_names.fab:18
-msgid "The String of beads 1"
-msgstr "Korálkový náhrdelník 1"
-
-#: skycultures/arabic_moon_stations/star_names.fab:19
-msgid "The String of beads 2"
-msgstr "Korálkový náhrdelník 2"
-
-#: skycultures/arabic_moon_stations/star_names.fab:20
-msgid "The String of beads 3"
-msgstr "Korálkový náhrdelník 3"
-
-#: skycultures/arabic_moon_stations/star_names.fab:21
-msgid "The gazelles 1"
-msgstr "Gazely 1"
-
-#: skycultures/arabic_moon_stations/star_names.fab:22
-msgid "The gazelles 2"
-msgstr "Gazely 2"
-
-#: skycultures/arabic_moon_stations/star_names.fab:23
-msgid "The gazelles 3"
-msgstr "Gazely 3"
-
-#: skycultures/arabic_moon_stations/star_names.fab:24
-msgid "The Shoulder side of Al-Jawza"
-msgstr "Strana pleca Al-Džavzu"
-
-#: skycultures/arabic_moon_stations/star_names.fab:25
-msgid "The Precedent of Southern Shi'ra"
-msgstr "Predchádzajúci Južnej Shi'ry"
-
-#: skycultures/arabic_moon_stations/star_names.fab:26
-msgid "Suhayl"
-msgstr "Suhayl"
-
-#: skycultures/arabic_moon_stations/star_names.fab:27
-msgid "The Neck bend 1"
-msgstr "Ohyb krku 1"
-
-#: skycultures/arabic_moon_stations/star_names.fab:28
-msgid "The Neck bend 2"
-msgstr "Ohyb krku 2"
-
-#: skycultures/arabic_moon_stations/star_names.fab:29
-msgid "The Southern Shi'ra"
-msgstr "Južná Shi'ra"
-
-#: skycultures/arabic_moon_stations/star_names.fab:30
-msgid "The Precedent of the Northern Shi'ra"
-msgstr "Predchádzajúci Severnej Shi'ry"
-
-#: skycultures/arabic_moon_stations/star_names.fab:31
-msgid "The Arm 1"
-msgstr "Rameno 1"
-
-#: skycultures/arabic_moon_stations/star_names.fab:32
-msgid "The Arm 2"
-msgstr "Rameno 2"
-
-#: skycultures/arabic_moon_stations/star_names.fab:33
-msgid "The Northern Shi'ra"
-msgstr "Severná Shi'ra"
-
-#: skycultures/arabic_moon_stations/star_names.fab:34
-msgid "The Lone one"
-msgstr "Osamelý"
-
-#: skycultures/arabic_moon_stations/star_names.fab:35
-msgid "The Forehead 1"
-msgstr "Čelo 1"
-
-#: skycultures/arabic_moon_stations/star_names.fab:36
-msgid "The Forehead 2"
-msgstr "Čelo 2"
-
-#: skycultures/arabic_moon_stations/star_names.fab:37
-msgid "The Forehead 3"
-msgstr "Čelo 3"
-
-#: skycultures/arabic_moon_stations/star_names.fab:38
-msgid "The Forehead 4"
-msgstr "Čelo 4"
-
-#: skycultures/arabic_moon_stations/star_names.fab:39
-msgid "The Two first ones 1"
-msgstr "Dvaja prví 1"
-
-#: skycultures/arabic_moon_stations/star_names.fab:40
-msgid "The Two first ones 2"
-msgstr "Dvaja prví 2"
-
-#: skycultures/arabic_moon_stations/star_names.fab:41
-msgid "The Mane 1"
-msgstr "Hriva 1"
-
-#: skycultures/arabic_moon_stations/star_names.fab:42
-msgid "The Mane 2"
-msgstr "Hriva 2"
-
-#: skycultures/arabic_moon_stations/star_names.fab:44
-msgid "The Bend 1"
-msgstr "Ohyb 1"
-
-#: skycultures/arabic_moon_stations/star_names.fab:45
-msgid "The Bend 2"
-msgstr "Ohyb 2"
-
-#: skycultures/arabic_moon_stations/star_names.fab:46
-msgid "The Bend 3"
-msgstr "Ohyb 3"
-
-#: skycultures/arabic_moon_stations/star_names.fab:47
-msgid "The Bend 4"
-msgstr "Ohyb 4"
-
-#: skycultures/arabic_moon_stations/star_names.fab:48
-msgid "The Bend 5"
-msgstr "Ohyb 5"
-
-#: skycultures/arabic_moon_stations/star_names.fab:49
-msgid "The Obscure one"
-msgstr "Nevýrazný"
-
-#: skycultures/arabic_moon_stations/star_names.fab:50
-msgid "The Wild donkey"
-msgstr "Divoký osol"
-
-#: skycultures/arabic_moon_stations/star_names.fab:51
-msgid "The Lion liver"
-msgstr "Levia pečeň"
-
-#: skycultures/arabic_moon_stations/star_names.fab:52
-msgid "The Young she-goat"
-msgstr "Kozľa"
-
-#: skycultures/arabic_moon_stations/star_names.fab:53
-msgid "The Unarmed high one"
-msgstr "Neozbrojený vysoký"
-
-#: skycultures/arabic_moon_stations/star_names.fab:54
-msgid "The neglected one"
-msgstr "Zanedbaný"
-
-#: skycultures/arabic_moon_stations/star_names.fab:55
-msgid "The Tail tuft 1"
-msgstr "Chumáč chvosta 1"
-
-#: skycultures/arabic_moon_stations/star_names.fab:56
-msgid "The Tail tuft 2"
-msgstr "Chumáč chvosta 2"
-
-#: skycultures/arabic_moon_stations/star_names.fab:57
-msgid "The Tail tuft 3"
-msgstr "Chumáč chvosta 3"
-
-#: skycultures/arabic_moon_stations/star_names.fab:58
-msgid "The Bright one of the fractured bowl"
-msgstr "Jasná z prasknutej misy"
-
-#: skycultures/arabic_moon_stations/star_names.fab:59
-msgid "The Leader"
-msgstr "Vodca"
-
-#: skycultures/arabic_moon_stations/star_names.fab:60
-msgid "The Spear"
-msgstr "Kopija"
-
-#: skycultures/arabic_moon_stations/star_names.fab:61
-msgid "The Armed High one"
-msgstr "Ozbrojený vysoký"
-
-#: skycultures/arabic_moon_stations/star_names.fab:62
-msgid "The Brighter of the two calves"
-msgstr "Jasnejšie z dvoch teliat"
-
-#: skycultures/arabic_moon_stations/star_names.fab:63
-msgid "The Scorpion claws 1"
-msgstr "Klepetá škorpióna 1"
-
-#: skycultures/arabic_moon_stations/star_names.fab:64
-msgid "The Scorpion claws 2"
-msgstr "Klepetá škorpióna 2"
-
-#: skycultures/arabic_moon_stations/star_names.fab:65
-msgid "The Dimmer of the two calves"
-msgstr "Matnejšie z dvoch teliat"
-
-#: skycultures/arabic_moon_stations/star_names.fab:66
-msgid "The Male Hyena"
-msgstr "Hyena"
-
-#: skycultures/arabic_moon_stations/star_names.fab:67
-msgid "The headband 1"
-msgstr "Čelenka 1"
-
-#: skycultures/arabic_moon_stations/star_names.fab:68
-msgid "The headband 2"
-msgstr "Čelenka 2"
-
-#: skycultures/arabic_moon_stations/star_names.fab:69
-msgid "The headband 3"
-msgstr "Čelenka 3"
-
-#: skycultures/arabic_moon_stations/star_names.fab:70
-msgid "The Veins of the heart 1"
-msgstr "Cievy srdca 1"
-
-#: skycultures/arabic_moon_stations/star_names.fab:72
-msgid "The Veins of the heart 2"
-msgstr "Cievy srdca 2"
-
-#: skycultures/arabic_moon_stations/star_names.fab:73
-msgid "The Trotting Camel"
-msgstr "Klusajúca ťava"
-
-#: skycultures/arabic_moon_stations/star_names.fab:74
-msgid "The Mother camels 1"
-msgstr "Ťavie matky 1"
-
-#: skycultures/arabic_moon_stations/star_names.fab:75
-msgid "The Mother camels 2"
-msgstr "Ťavie matky 2"
-
-#: skycultures/arabic_moon_stations/star_names.fab:76
-msgid "The Mother camels 3"
-msgstr "Ťavie matky 3"
-
-#: skycultures/arabic_moon_stations/star_names.fab:77
-msgid "The Mother camels 4"
-msgstr "Ťavie matky 4"
-
-#: skycultures/arabic_moon_stations/star_names.fab:79
-msgid "The Shepherd"
-msgstr "Pastier"
-
-#: skycultures/arabic_moon_stations/star_names.fab:80
-msgid "The dog of the shepherd"
-msgstr "Pastierov pes"
-
-#: skycultures/arabic_moon_stations/star_names.fab:81
-msgid "The Baby camel"
-msgstr "Malá ťava"
-
-#: skycultures/arabic_moon_stations/star_names.fab:82
-msgid "The ostriches coming to the river 1"
-msgstr "Pštrosy idúce k rieke 1"
-
-#: skycultures/arabic_moon_stations/star_names.fab:83
-msgid "The ostriches coming to the river 2"
-msgstr "Pštrosy idúce k rieke 2"
-
-#: skycultures/arabic_moon_stations/star_names.fab:84
-msgid "The ostriches coming to the river 3"
-msgstr "Pštrosy idúce k rieke 3"
-
-#: skycultures/arabic_moon_stations/star_names.fab:85
-msgid "The ostriches coming to the river 4"
-msgstr "Pštrosy idúce k rieke 4"
-
-#: skycultures/arabic_moon_stations/star_names.fab:86
-msgid "The Shepherd of the Ostriches"
-msgstr "Pastier pštrosov"
-
-#: skycultures/arabic_moon_stations/star_names.fab:87
-msgid "The Swooping Eagle"
-msgstr "Strmhlav útočiaci orol"
-
-#: skycultures/arabic_moon_stations/star_names.fab:88
-msgid "The ostriches leaving the river 1"
-msgstr "Pštrosy odchádzajúce od rieky 1"
-
-#: skycultures/arabic_moon_stations/star_names.fab:89
-msgid "The ostriches leaving the river 2"
-msgstr "Pštrosy odchádzajúce od rieky 2"
-
-#: skycultures/arabic_moon_stations/star_names.fab:90
-msgid "The ostriches leaving the river 3"
-msgstr "Pštrosy odchádzajúce od rieky 3"
-
-#: skycultures/arabic_moon_stations/star_names.fab:91
-msgid "The ostriches leaving the river 4"
-msgstr "Pštrosy odchádzajúce od rieky 4"
-
-#: skycultures/arabic_moon_stations/star_names.fab:92
-msgid "The Knights 1"
-msgstr "Rytieri 1"
-
-#: skycultures/arabic_moon_stations/star_names.fab:93
-msgid "The Knights 2"
-msgstr "Rytieri 2"
-
-#: skycultures/arabic_moon_stations/star_names.fab:94
-msgid "The Knights 3"
-msgstr "Rytieri 3"
-
-#: skycultures/arabic_moon_stations/star_names.fab:95
-msgid "The Knights 4"
-msgstr "Rytieri 4"
-
-#: skycultures/arabic_moon_stations/star_names.fab:96
-msgid "The Knights 5"
-msgstr "Rytieri 5"
-
-#: skycultures/arabic_moon_stations/star_names.fab:97
-msgid "The Flying eagle"
-msgstr "Letiaci orol"
-
-#: skycultures/arabic_moon_stations/star_names.fab:98
-msgid "The Rear knight"
-msgstr "Zadný rytier"
-
-#: skycultures/arabic_moon_stations/star_names.fab:99
-msgid "The Lucky star of Nashirah 1"
-msgstr "Štastná hviezda Nashiry 1"
-
-#: skycultures/arabic_moon_stations/star_names.fab:100
-msgid "The Lucky star of Nashirah 2"
-msgstr "Štastná hviezda Nashiry 2"
-
-#: skycultures/arabic_moon_stations/star_names.fab:101
-msgid "The Lucky star of the king 1"
-msgstr "Štastná hviezda kráľa 1"
-
-#: skycultures/arabic_moon_stations/star_names.fab:102
-msgid "The Lucky star of the king 2"
-msgstr "Štastná hviezda kráľa 2"
-
-#: skycultures/arabic_moon_stations/star_names.fab:103
-msgid "The Lucky star of the young sheep 1"
-msgstr "Štastná hviezda jahňaťa 1"
-
-#: skycultures/arabic_moon_stations/star_names.fab:104
-msgid "The Lucky star of the young sheep 2"
-msgstr "Štastná hviezda jahňaťa 2"
-
-#: skycultures/arabic_moon_stations/star_names.fab:105
-msgid "The Lucky star of the hero 1"
-msgstr "Štastná hviezda hrdinu 1"
-
-#: skycultures/arabic_moon_stations/star_names.fab:106
-msgid "The Lucky star of the hero 2"
-msgstr "Štastná hviezda hrdinu 2"
-
-#: skycultures/arabic_moon_stations/star_names.fab:107
-msgid "The Lucky star of the rain 1"
-msgstr "Štastná hviezda dažďa 1"
-
-#: skycultures/arabic_moon_stations/star_names.fab:108
-msgid "The Lucky star of the rain 2"
-msgstr "Štastná hviezda dažďa 2"
-
-#: skycultures/arabic_moon_stations/star_names.fab:109
-msgid "The Lucky star of the excellent 1"
-msgstr "Štastná hviezda vynikajúceho 1"
-
-#: skycultures/arabic_moon_stations/star_names.fab:110
-msgid "The Lucky star of the excellent 2"
-msgstr "Štastná hviezda vynikajúceho 2"
-
-#: skycultures/arabic_moon_stations/star_names.fab:111
-msgid "The Front mouth of the bucket 1"
-msgstr "Predné ústie vedra 1"
-
-#: skycultures/arabic_moon_stations/star_names.fab:112
-msgid "The Front mouth of the bucket 2"
-msgstr "Predné ústie vedra 2"
-
-#: skycultures/arabic_moon_stations/star_names.fab:113
-msgid "The Rear mouth of the bucket 1"
-msgstr "Zadné ústie vedra 1"
-
-#: skycultures/arabic_moon_stations/star_names.fab:114
-msgid "The Rear mouth of the bucket 2"
-msgstr "Zadné ústie vedra 2"
-
-#: skycultures/arabic_moon_stations/star_names.fab:115
-msgid "The Bucket knot 1"
-msgstr "Uzol vedra 1"
-
-#: skycultures/arabic_moon_stations/star_names.fab:116
-msgid "The Bucket knot 2"
-msgstr "Uzol vedra 2"
 
 #: skycultures/armintxe/constellation_names.eng.fab:1
 msgid "Big Bison"
@@ -15562,10 +16610,6 @@ msgstr "Váhy"
 #: skycultures/babylonian_seleucid/constellation_names.eng.fab:43
 msgid "Asterism of Zababa"
 msgstr "Asterizmus Zababy"
-
-#: skycultures/babylonian_seleucid/constellation_names.eng.fab:46
-msgid "The Fish"
-msgstr "Ryba"
 
 #: skycultures/babylonian_seleucid/constellation_names.eng.fab:47
 msgid "The Great One"
@@ -58118,10 +59162,6 @@ msgstr "Býk"
 #: skycultures/romanian/constellation_names.eng.fab:33
 msgid "The Man"
 msgstr "Muž"
-
-#: skycultures/romanian/constellation_names.eng.fab:35
-msgid "The Scorpion"
-msgstr "Škorpión"
 
 #: skycultures/romanian/constellation_names.eng.fab:36
 msgid "The Axe"

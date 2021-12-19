@@ -14,17 +14,17 @@
 # Jan Willing <yesn.wanting@gmail.com>, 2020
 # Frank Tönies <fraies@web.de>, 2021
 # Susanne M Hoffmann <susanne.m.hoffmann@gmail.com>, 2021
-# Latein Lebt, 2021
 # Georg Zotti <Georg.Zotti@univie.ac.at>, 2021
+# Latein Lebt, 2021
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-12-12 14:44+0700\n"
+"POT-Creation-Date: 2021-12-17 10:35+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
-"Last-Translator: Georg Zotti <Georg.Zotti@univie.ac.at>, 2021\n"
+"Last-Translator: Latein Lebt, 2021\n"
 "Language-Team: German (https://www.transifex.com/stellarium/teams/80998/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3653,6 +3653,30 @@ msgstr "Vorige Morgendämmerung"
 #: src/core/StelObjectMgr.cpp:71
 msgid "Previous evening twilight"
 msgstr "Vorige Abenddämmerung"
+
+#: src/core/StelObjectMgr.cpp:73
+msgid "Selected object at altitude at next morning"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:74
+msgid "Selected object at altitude this morning"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:75
+msgid "Selected object at altitude at previous morning"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:76
+msgid "Selected object at altitude at next evening"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:77
+msgid "Selected object at altitude this evening"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:78
+msgid "Selected object at altitude at previous evening"
+msgstr ""
 
 #: src/core/StelSkyLayerMgr.cpp:85
 msgid "Deep-sky objects background images"
@@ -12485,7 +12509,7 @@ msgstr "Planetariumseinstellungen"
 
 #: src/ui_configurationDialog.h:1938
 msgid "Allow mouse to pan (drag)"
-msgstr ""
+msgstr "Maus zum Verschieben verwenden (Ziehen)"
 
 #: src/ui_configurationDialog.h:1940
 msgid "Enable mouse navigation"
@@ -12703,11 +12727,11 @@ msgstr "Programm-Schriftart"
 
 #: src/ui_configurationDialog.h:2047
 msgid "Allow mouse to zoom (mousewheel)"
-msgstr ""
+msgstr "Maus zum Vergrößern verwenden (Mausrad)"
 
 #: src/ui_configurationDialog.h:2049
 msgid "Enable mouse zooming"
-msgstr ""
+msgstr "Vergrößerung mit der Maus aktivieren"
 
 #: src/ui_configurationDialog.h:2051
 msgid "Force date/time tab and focus on day input when activating date panel"
@@ -21146,14 +21170,14 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:436
 msgid "Citalá means River of stars in the native Nahuat language."
-msgstr "Citalá heißt „Sternenfluss“ in der klassischen Nahuatl-Sprache."
+msgstr "Citalá heißt »Sternenfluss« in der klassischen Nahuatl-Sprache."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:437
 msgid ""
 "Cayahuanca means The rock looking at the stars in the native Nahuat "
 "language."
 msgstr ""
-"Cayahuanca heißt „der Fels, der zu den Sternen schaut“ in der klassischen "
+"Cayahuanca heißt »der Fels, der zu den Sternen schaut« in der klassischen "
 "Nahuatl-Sprache."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:438
@@ -21613,7 +21637,7 @@ msgid ""
 "Intan means diamond in the Malay language (Bahasa Melayu), alluding to the "
 "shining of a star."
 msgstr ""
-"Intan bedeutet „Diamant“ in der malaiischen Sprache (Bahasa Melayu), das auf"
+"Intan bedeutet »Diamant« in der malaiischen Sprache (Bahasa Melayu), das auf"
 " das Funkeln eines Sterns anspielt."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:499
@@ -21621,7 +21645,7 @@ msgid ""
 "Baiduri means opal in Malay language (Bahasa Melayu), alluding to the "
 "mysterious beauty of the planet."
 msgstr ""
-"Baiduri heißt „Opal“ in der malaiischen Sprache (Bahasa Melayu), das auf die"
+"Baiduri heißt »Opal« in der malaiischen Sprache (Bahasa Melayu), das auf die"
 " geheimnisvolle Schönheit des Planeten anspielt.  "
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:500
