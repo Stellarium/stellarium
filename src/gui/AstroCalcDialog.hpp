@@ -265,6 +265,7 @@ private slots:
 	void updateGraphsDuration(int duration);
 	void drawXVsTimeGraphs();
 	void updateXVsTimeGraphs();
+	void mouseOverGraphs(QMouseEvent *event);
 
 	void drawMonthlyElevationGraph();
 	void updateMonthlyElevationTime();

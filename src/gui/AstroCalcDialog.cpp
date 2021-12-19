@@ -397,7 +397,8 @@ void AstroCalcDialog::createDialogContent()
 	ui->graphsDurationSpinBox->setValue(graphsDuration);
 	connect(ui->graphsDurationSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateGraphsDuration(int)));
 	connect(ui->drawGraphsPushButton, SIGNAL(clicked()), this, SLOT(drawXVsTimeGraphs()));
-	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(updateXVsTimeGraphs()));
+	connect(ui->graphsPlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseOverGraphs(QMouseEvent*)));
+	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(updateXVsTimeGraphs()));	
 
 	ui->angularDistanceLimitSpinBox->setValue(conf->value("astrocalc/angular_distance_limit", 40).toInt());
 	connect(ui->angularDistanceLimitSpinBox, SIGNAL(valueChanged(int)), this, SLOT(saveAngularDistanceLimit(int)));
@@ -3015,6 +3016,39 @@ void AstroCalcDialog::updateXVsTimeGraphs()
 
 	if (ui->tabWidgetGraphs->currentIndex()==3)
 		drawXVsTimeGraphs();
+}
+
+void AstroCalcDialog::mouseOverGraphs(QMouseEvent* event)
+{
+	double x = ui->graphsPlot->xAxis->pixelToCoord(event->pos().x());
+	double y = ui->graphsPlot->yAxis->pixelToCoord(event->pos().y());
+	double y2 = ui->graphsPlot->yAxis2->pixelToCoord(event->pos().y());
+
+	QCPAbstractPlottable* abstractGraph = ui->graphsPlot->plottableAt(event->pos(), false);
+	QCPGraph* graph = qobject_cast<QCPGraph*>(abstractGraph);
+
+	int year, month, day;
+	double startJD, ltime;
+	StelUtils::getDateFromJulianDay(core->getJD(), &year, &month, &day);
+	StelUtils::getJDFromDate(&startJD, year, 1, 1, 0, 0, 0);
+
+	if (x > ui->graphsPlot->xAxis->range().lower && x < ui->graphsPlot->xAxis->range().upper
+	    && y > ui->graphsPlot->yAxis->range().lower && y < ui->graphsPlot->yAxis->range().upper)
+	{
+		if (graph)
+		{
+			ltime = (x / StelCore::ONE_OVER_JD_SECOND) + startJD ;
+			QString info = QString("%1<br />%2: %3<br />%4: %5").arg(StelUtils::julianDayToISO8601String(ltime).replace("T", " "), ui->graphsPlot->yAxis->label() , QString::number(y, 'f', 2), ui->graphsPlot->yAxis2->label(), QString::number(y2, 'f', 2));
+
+			QToolTip::hideText();
+			QToolTip::showText(event->globalPos(), info, ui->graphsPlot, ui->graphsPlot->rect());
+		}
+		else
+			QToolTip::hideText();
+	}
+
+	ui->graphsPlot->update();
+	ui->graphsPlot->replot();
 }
 
 double AstroCalcDialog::computeGraphValue(const PlanetP &ssObj, const int graphType)
