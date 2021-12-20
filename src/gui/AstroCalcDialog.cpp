@@ -492,7 +492,7 @@ void AstroCalcDialog::createDialogContent()
 	currentTimeLine = new QTimer(this);
 	connect(currentTimeLine, SIGNAL(timeout()), this, SLOT(drawCurrentTimeDiagram()));
 	connect(currentTimeLine, SIGNAL(timeout()), this, SLOT(computePlanetaryData()));
-	connect(currentTimeLine, SIGNAL(timeout()), this, SLOT(drawDistanceGraph()));
+	connect(core, SIGNAL(dateChanged()), this, SLOT(drawDistanceGraph()));
 	currentTimeLine->start(500); // Update 'now' line position every 0.5 seconds
 
 	connect(ui->firstCelestialBodyComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveFirstCelestialBody(int)));
@@ -796,12 +796,11 @@ void AstroCalcDialog::mouseOverAziLine(QMouseEvent* event)
 	QCPAbstractPlottable* abstractGraph = ui->aziVsTimePlot->plottableAt(event->pos(), false);
 	QCPGraph* graph = qobject_cast<QCPGraph*>(abstractGraph);
 
-	if (x > ui->aziVsTimePlot->xAxis->range().lower && x < ui->aziVsTimePlot->xAxis->range().upper
-	    && y > ui->aziVsTimePlot->yAxis->range().lower && y < ui->aziVsTimePlot->yAxis->range().upper)
+	if (ui->aziVsTimePlot->xAxis->range().contains(x) && ui->aziVsTimePlot->yAxis->range().contains(y))
 	{
+		QString info = "";
 		if (graph)
 		{
-			QString info;
 			double JD;
 			if (graph->name() == "[Now]")
 			{
@@ -817,12 +816,8 @@ void AstroCalcDialog::mouseOverAziLine(QMouseEvent* event)
 				else
 					info = QString("%1<br />%2: %3<br />%4: %5").arg(ui->aziVsTimePlot->graph(0)->name(), q_("Local Time"), LT, q_("Azimuth"), StelUtils::decDegToDmsStr(y));
 			}
-
-			QToolTip::hideText();
-			QToolTip::showText(event->globalPos(), info, ui->aziVsTimePlot, ui->aziVsTimePlot->rect());
 		}
-		else
-			QToolTip::hideText();
+		ui->aziVsTimePlot->setToolTip(info);
 	}
 
 	ui->aziVsTimePlot->update();
@@ -3035,14 +3030,18 @@ void AstroCalcDialog::mouseOverGraphs(QMouseEvent* event)
 	if (x > ui->graphsPlot->xAxis->range().lower && x < ui->graphsPlot->xAxis->range().upper
 	    && y > ui->graphsPlot->yAxis->range().lower && y < ui->graphsPlot->yAxis->range().upper)
 	{
-		QToolTip::hideText();
+		QString info = "";
 		if (graph)
 		{
-			ltime = (x / StelCore::ONE_OVER_JD_SECOND) + startJD ;
-			QString info = QString("%1<br />%2: %3<br />%4: %5").arg(StelUtils::julianDayToISO8601String(ltime).replace("T", " "), ui->graphsPlot->yAxis->label() , QString::number(y, 'f', 2), ui->graphsPlot->yAxis2->label(), QString::number(y2, 'f', 2));
+			ltime = (x / StelCore::ONE_OVER_JD_SECOND) + startJD;
 
-			QToolTip::showText(event->globalPos(), info, ui->graphsPlot, ui->graphsPlot->rect());
+			if (graph->name() == "[0]")
+				info = QString("%1<br />%2: %3").arg(StelUtils::julianDayToISO8601String(ltime).replace("T", " "), ui->graphsPlot->yAxis->label() , QString::number(y, 'f', 2));
+
+			if (graph->name() == "[1]")
+				info = QString("%1<br />%2: %3").arg(StelUtils::julianDayToISO8601String(ltime).replace("T", " "), ui->graphsPlot->yAxis2->label() , QString::number(y2, 'f', 2));
 		}
+		ui->graphsPlot->setToolTip(info);
 	}
 
 	ui->graphsPlot->update();
@@ -3616,9 +3615,9 @@ void AstroCalcDialog::mouseOverLine(QMouseEvent* event)
 
 	if (ui->altVsTimePlot->xAxis->range().contains(x) && ui->altVsTimePlot->yAxis->range().contains(y))
 	{
+		QString info = "";
 		if (graph)
 		{
-			QString info;
 			double JD;
 			if (graph->name() == "[Now]")
 			{
@@ -3650,12 +3649,8 @@ void AstroCalcDialog::mouseOverLine(QMouseEvent* event)
 				else
 					info = QString("%1<br />%2: %3<br />%4: %5").arg(ui->altVsTimePlot->graph(0)->name(), q_("Local Time"), LT, q_("Altitude"), StelUtils::decDegToDmsStr(y));
 			}
-
-			QToolTip::hideText();
-			QToolTip::showText(event->globalPos(), info, ui->altVsTimePlot, ui->altVsTimePlot->rect());
 		}
-		else
-			QToolTip::hideText();
+		ui->altVsTimePlot->setToolTip(info);
 	}
 
 	ui->altVsTimePlot->update();
@@ -6366,13 +6361,11 @@ void AstroCalcDialog::prepareDistanceAxesAndGraph()
 	ui->pcDistanceGraphPlot->setBackground(QBrush(QColor(86, 87, 90)));
 	ui->pcDistanceGraphPlot->graph(0)->setPen(axisPenL);
 	ui->pcDistanceGraphPlot->graph(0)->setLineStyle(QCPGraph::lsLine);
-	ui->pcDistanceGraphPlot->graph(0)->rescaleAxes(true);
 
 	ui->pcDistanceGraphPlot->addGraph(ui->pcDistanceGraphPlot->xAxis, ui->pcDistanceGraphPlot->yAxis2);
 	ui->pcDistanceGraphPlot->setBackground(QBrush(QColor(86, 87, 90)));
 	ui->pcDistanceGraphPlot->graph(1)->setPen(axisPenR);
 	ui->pcDistanceGraphPlot->graph(1)->setLineStyle(QCPGraph::lsLine);
-	ui->pcDistanceGraphPlot->graph(1)->rescaleAxes(true);
 }
 
 void AstroCalcDialog::drawDistanceGraph()
@@ -6387,12 +6380,9 @@ void AstroCalcDialog::drawDistanceGraph()
 	QComboBox* fbody = ui->firstCelestialBodyComboBox;
 	QComboBox* sbody = ui->secondCelestialBodyComboBox;
 
-	QString firstCelestialBody = fbody->currentData(Qt::UserRole).toString();
-	QString secondCelestialBody = sbody->currentData(Qt::UserRole).toString();
-	QString currentPlanet = core->getCurrentPlanet()->getEnglishName();
-
-	PlanetP firstCBId = solarSystem->searchByEnglishName(firstCelestialBody);
-	PlanetP secondCBId = solarSystem->searchByEnglishName(secondCelestialBody);
+	PlanetP currentPlanet = core->getCurrentPlanet();
+	PlanetP firstCBId = solarSystem->searchByEnglishName(fbody->currentData(Qt::UserRole).toString());
+	PlanetP secondCBId = solarSystem->searchByEnglishName(sbody->currentData(Qt::UserRole).toString());
 
 	if (firstCBId==secondCBId)
 	{
@@ -6404,9 +6394,9 @@ void AstroCalcDialog::drawDistanceGraph()
 
 	QList<double> aX, aY1, aY2;
 	const double currentJD = core->getJD();
-	for (int i = -305; i <= 305; i++)
+	for (int i = -151; i <= 151; i++)
 	{
-		double JD = currentJD + i;
+		double JD = currentJD + i*2;
 		core->setJD(JD);
 		Vec3d posFCB = firstCBId->getJ2000EquatorialPos(core);
 		Vec3d posSCB = secondCBId->getJ2000EquatorialPos(core);
@@ -6416,9 +6406,9 @@ void AstroCalcDialog::drawDistanceGraph()
 		double dd;
 		bool sign;
 		StelUtils::radToDecDeg(r, sign, dd);
-		aX.append(i);
+		aX.append(i*2);
 		aY1.append(distanceAu);
-		if (firstCelestialBody != currentPlanet && secondCelestialBody != currentPlanet)
+		if (firstCBId != currentPlanet && secondCBId != currentPlanet)
 			aY2.append(dd);
 		core->update(0.0);
 	}
@@ -6458,24 +6448,19 @@ void AstroCalcDialog::mouseOverDistanceGraph(QMouseEvent* event)
 
 	if (ui->pcDistanceGraphPlot->xAxis->range().contains(x) && ui->pcDistanceGraphPlot->yAxis->range().contains(y))
 	{
+		QString info;
 		if (graph)
 		{
-			QString info;
 			if (graph->name()=="[LD]")
-				info = QString("%1: %2 %3<br />%7: %8").arg(q_("Linear distance"), QString::number(y), qc_("AU", "distance, astronomical unit"), q_("Day"), QString::number(x));
+				info = QString("%1: %2 %3<br />%7: %8").arg(q_("Linear distance"), QString::number(y), qc_("AU", "distance, astronomical unit"), q_("Day"), QString::number(x, 'f', 2));
 
 			if (graph->name()=="[AD]")
-				info = QString("%1: %2%3<br />%7: %8").arg(q_("Angular distance"), QString::number(y2), QChar(0x00B0), q_("Day"), QString::number(x));
-
-			QToolTip::hideText();
-			QToolTip::showText(event->globalPos(), info, ui->pcDistanceGraphPlot, ui->pcDistanceGraphPlot->rect());
+				info = QString("%1: %2%3<br />%7: %8").arg(q_("Angular distance"), QString::number(y2), QChar(0x00B0), q_("Day"), QString::number(x, 'f', 2));
 		}
-		else
-			QToolTip::hideText();
+		ui->pcDistanceGraphPlot->setToolTip(info);
 	}
 
 	ui->pcDistanceGraphPlot->update();
-	ui->pcDistanceGraphPlot->rescaleAxes();
 	ui->pcDistanceGraphPlot->replot();
 }
 
