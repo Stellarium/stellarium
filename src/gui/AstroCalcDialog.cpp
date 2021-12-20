@@ -799,7 +799,6 @@ void AstroCalcDialog::mouseOverAziLine(QMouseEvent* event)
 	if (x > ui->aziVsTimePlot->xAxis->range().lower && x < ui->aziVsTimePlot->xAxis->range().upper
 	    && y > ui->aziVsTimePlot->yAxis->range().lower && y < ui->aziVsTimePlot->yAxis->range().upper)
 	{
-		QToolTip::hideText();
 		if (graph)
 		{
 			QString info;
@@ -819,8 +818,11 @@ void AstroCalcDialog::mouseOverAziLine(QMouseEvent* event)
 					info = QString("%1<br />%2: %3<br />%4: %5").arg(ui->aziVsTimePlot->graph(0)->name(), q_("Local Time"), LT, q_("Azimuth"), StelUtils::decDegToDmsStr(y));
 			}
 
+			QToolTip::hideText();
 			QToolTip::showText(event->globalPos(), info, ui->aziVsTimePlot, ui->aziVsTimePlot->rect());
-		}		
+		}
+		else
+			QToolTip::hideText();
 	}
 
 	ui->aziVsTimePlot->update();
@@ -2961,11 +2963,6 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 		ui->graphsPlot->graph(1)->setData(x, yb);
 		ui->graphsPlot->graph(1)->setName("[1]");
 
-		ui->graphsPlot->addGraph(ui->graphsPlot->xAxis, ui->graphsPlot->yAxis);
-		ui->graphsPlot->graph(2)->setPen(QPen(Qt::white, 1, Qt::DotLine));
-		ui->graphsPlot->graph(2)->setLineStyle(QCPGraph::lsLine);
-		ui->graphsPlot->graph(2)->setName("[cursor]");
-
 		if (graphsDuration>1)
 		{
 			int JDshift = static_cast<int>(core->getCurrentPlanet()->getSiderealPeriod());
@@ -2979,7 +2976,7 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 				ayj.append(minY1);
 				ayj.append(maxY1);
 				QVector<double> xj = axj.toVector(), yj = ayj.toVector();
-				int j = 3 + i;
+				int j = 2 + i;
 				ui->graphsPlot->addGraph(ui->graphsPlot->xAxis, ui->graphsPlot->yAxis);
 				ui->graphsPlot->graph(j)->setPen(QPen(Qt::red, 1, Qt::DashLine));
 				ui->graphsPlot->graph(j)->setLineStyle(QCPGraph::lsLine);
@@ -3026,35 +3023,27 @@ void AstroCalcDialog::mouseOverGraphs(QMouseEvent* event)
 	double x = ui->graphsPlot->xAxis->pixelToCoord(event->pos().x());
 	double y = ui->graphsPlot->yAxis->pixelToCoord(event->pos().y());
 	double y2 = ui->graphsPlot->yAxis2->pixelToCoord(event->pos().y());
-	QList<double> ax, ay;
+
+	QCPAbstractPlottable* abstractGraph = ui->graphsPlot->plottableAt(event->pos(), false);
+	QCPGraph* graph = qobject_cast<QCPGraph*>(abstractGraph);
+
 	int year, month, day;
-	double startJD, ltime, xg;
+	double startJD, ltime;
 	StelUtils::getDateFromJulianDay(core->getJD(), &year, &month, &day);
 	StelUtils::getJDFromDate(&startJD, year, 1, 1, 0, 0, 0);
 
 	if (x > ui->graphsPlot->xAxis->range().lower && x < ui->graphsPlot->xAxis->range().upper
 	    && y > ui->graphsPlot->yAxis->range().lower && y < ui->graphsPlot->yAxis->range().upper)
 	{
-		ltime = (x / StelCore::ONE_OVER_JD_SECOND) + startJD ;
-		QString info = QString("%1<br />%2: %3<br />%4: %5").arg(StelUtils::julianDayToISO8601String(ltime).replace("T", " "), ui->graphsPlot->yAxis->label() , QString::number(y, 'f', 2), ui->graphsPlot->yAxis2->label(), QString::number(y2, 'f', 2));
-		ui->graphsPlot->setToolTip(info);
-		xg = x;
-	}
-	else
-	{
-		ui->graphsPlot->setToolTip("");
-		xg = -10.;
-	}
+		QToolTip::hideText();
+		if (graph)
+		{
+			ltime = (x / StelCore::ONE_OVER_JD_SECOND) + startJD ;
+			QString info = QString("%1<br />%2: %3<br />%4: %5").arg(StelUtils::julianDayToISO8601String(ltime).replace("T", " "), ui->graphsPlot->yAxis->label() , QString::number(y, 'f', 2), ui->graphsPlot->yAxis2->label(), QString::number(y2, 'f', 2));
 
-	// additional data: cursor at position
-	ax.append(xg);
-	ax.append(xg);
-	ay.append(ui->graphsPlot->yAxis->range().lower);
-	ay.append(ui->graphsPlot->yAxis->range().upper);
-	QVector<double> xj = ax.toVector(), yj = ay.toVector();
-	ui->graphsPlot->graph(2)->setData(xj, yj);
-	ax.clear();
-	ay.clear();
+			QToolTip::showText(event->globalPos(), info, ui->graphsPlot, ui->graphsPlot->rect());
+		}
+	}
 
 	ui->graphsPlot->update();
 	ui->graphsPlot->replot();
@@ -3627,7 +3616,6 @@ void AstroCalcDialog::mouseOverLine(QMouseEvent* event)
 
 	if (ui->altVsTimePlot->xAxis->range().contains(x) && ui->altVsTimePlot->yAxis->range().contains(y))
 	{
-		QToolTip::hideText();
 		if (graph)
 		{
 			QString info;
@@ -3663,8 +3651,11 @@ void AstroCalcDialog::mouseOverLine(QMouseEvent* event)
 					info = QString("%1<br />%2: %3<br />%4: %5").arg(ui->altVsTimePlot->graph(0)->name(), q_("Local Time"), LT, q_("Altitude"), StelUtils::decDegToDmsStr(y));
 			}
 
+			QToolTip::hideText();
 			QToolTip::showText(event->globalPos(), info, ui->altVsTimePlot, ui->altVsTimePlot->rect());
 		}
+		else
+			QToolTip::hideText();
 	}
 
 	ui->altVsTimePlot->update();
@@ -6467,7 +6458,6 @@ void AstroCalcDialog::mouseOverDistanceGraph(QMouseEvent* event)
 
 	if (ui->pcDistanceGraphPlot->xAxis->range().contains(x) && ui->pcDistanceGraphPlot->yAxis->range().contains(y))
 	{
-		QToolTip::hideText();
 		if (graph)
 		{
 			QString info;
@@ -6477,8 +6467,11 @@ void AstroCalcDialog::mouseOverDistanceGraph(QMouseEvent* event)
 			if (graph->name()=="[AD]")
 				info = QString("%1: %2%3<br />%7: %8").arg(q_("Angular distance"), QString::number(y2), QChar(0x00B0), q_("Day"), QString::number(x));
 
+			QToolTip::hideText();
 			QToolTip::showText(event->globalPos(), info, ui->pcDistanceGraphPlot, ui->pcDistanceGraphPlot->rect());
 		}
+		else
+			QToolTip::hideText();
 	}
 
 	ui->pcDistanceGraphPlot->update();
