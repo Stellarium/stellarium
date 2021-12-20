@@ -492,12 +492,12 @@ void AstroCalcDialog::createDialogContent()
 	currentTimeLine = new QTimer(this);
 	connect(currentTimeLine, SIGNAL(timeout()), this, SLOT(drawCurrentTimeDiagram()));
 	connect(currentTimeLine, SIGNAL(timeout()), this, SLOT(computePlanetaryData()));
-	connect(core, SIGNAL(dateChanged()), this, SLOT(drawDistanceGraph()));
-	currentTimeLine->start(500); // Update 'now' line position every 0.5 seconds
+	currentTimeLine->start(1000); // Update 'now' line position every second
 
 	connect(ui->firstCelestialBodyComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveFirstCelestialBody(int)));
 	connect(ui->secondCelestialBodyComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveSecondCelestialBody(int)));	
 	connect(ui->pcDistanceGraphPlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseOverDistanceGraph(QMouseEvent*)));
+	connect(core, SIGNAL(dateChanged()), this, SLOT(drawDistanceGraph()));
 
 	connect(solarSystem, SIGNAL(solarSystemDataReloaded()), this, SLOT(updateSolarSystemData()));
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateAstroCalcData()));
@@ -6392,11 +6392,17 @@ void AstroCalcDialog::drawDistanceGraph()
 		return;
 	}
 
+	int limit = 76, step = 4;
+	if (firstCBId->getParent() == currentPlanet || secondCBId->getParent() == currentPlanet)
+	{
+		limit = 151; step = 2;
+	}
+
 	QList<double> aX, aY1, aY2;
 	const double currentJD = core->getJD();
-	for (int i = -151; i <= 151; i++)
+	for (int i = (-1*limit); i <= limit; i++)
 	{
-		double JD = currentJD + i*2;
+		double JD = currentJD + i*step;
 		core->setJD(JD);
 		Vec3d posFCB = firstCBId->getJ2000EquatorialPos(core);
 		Vec3d posSCB = secondCBId->getJ2000EquatorialPos(core);
@@ -6406,7 +6412,7 @@ void AstroCalcDialog::drawDistanceGraph()
 		double dd;
 		bool sign;
 		StelUtils::radToDecDeg(r, sign, dd);
-		aX.append(i*2);
+		aX.append(i*step);
 		aY1.append(distanceAu);
 		if (firstCBId != currentPlanet && secondCBId != currentPlanet)
 			aY2.append(dd);
@@ -6451,11 +6457,12 @@ void AstroCalcDialog::mouseOverDistanceGraph(QMouseEvent* event)
 		QString info;
 		if (graph)
 		{
+			const double currentJD = core->getJD();
 			if (graph->name()=="[LD]")
-				info = QString("%1: %2 %3<br />%7: %8").arg(q_("Linear distance"), QString::number(y), qc_("AU", "distance, astronomical unit"), q_("Day"), QString::number(x, 'f', 2));
+				info = QString("%1<br />%2: %3%4").arg(StelUtils::julianDayToISO8601String(currentJD + x).replace("T", " "), q_("Linear distance"), QString::number(y), qc_("AU", "distance, astronomical unit"));
 
 			if (graph->name()=="[AD]")
-				info = QString("%1: %2%3<br />%7: %8").arg(q_("Angular distance"), QString::number(y2), QChar(0x00B0), q_("Day"), QString::number(x, 'f', 2));
+				info = QString("%1<br />%2: %3%4").arg(StelUtils::julianDayToISO8601String(currentJD + x).replace("T", " "), q_("Angular distance"), QString::number(y2), QChar(0x00B0));
 		}
 		ui->pcDistanceGraphPlot->setToolTip(info);
 	}
