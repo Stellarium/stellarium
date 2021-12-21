@@ -237,9 +237,8 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 	{
 		if (nType==NomenclatureItemType::niSpecialPointEast || nType==NomenclatureItemType::niSpecialPointWest)
 		{
-			QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core);
-			double pointLongitude = (nType==NomenclatureItemType::niSpecialPointEast) ? subObs.first[2] + M_PI_2 : subObs.first[2] - M_PI_2;
-			oss << QString("%1: %2/%3<br/>").arg(q_("Planetographic long./lat.")).arg(StelUtils::radToDmsStr(pointLongitude), StelUtils::decDegToDmsStr(latitude));
+			// Special longitudes are inverse to the nomenclature longitudes? Check retrograde fixes etc.
+			oss << QString("%1: %2/%3<br/>").arg(q_("Planetographic long./lat.")).arg(StelUtils::decDegToDmsStr(360.-longitude), StelUtils::decDegToDmsStr(latitude));
 		}
 		else
 			oss << QString("%1: %2/%3<br/>").arg(q_("Planetographic long./lat.")).arg(StelUtils::decDegToDmsStr(longitude), StelUtils::decDegToDmsStr(latitude));
@@ -264,22 +263,22 @@ Vec3d NomenclatureItem::getJ2000EquatorialPos(const StelCore* core) const
 	if (fuzzyEquals(jde, core->getJDE())) return XYZ;
 	jde = core->getJDE();
 	const Vec3d equPos = planet->getJ2000EquatorialPos(core);
-	// Calculate the radius of the planet at the item's position. It is necessary to re-scale it
-	Vec4d rect;
-	Vec3d XYZ0, XYZsp;
+	// East/West points are assumed to be along the equator, on the planet rim. Start with sub-observer point
 	if (nType==NomenclatureItemType::niSpecialPointEast || nType==NomenclatureItemType::niSpecialPointWest)
 	{
 		QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core);
-		double pointLongitude = (nType==NomenclatureItemType::niSpecialPointEast) ? subObs.first[2] + M_PI_2 : subObs.first[2] - M_PI_2;
-		rect = planet->getRectangularCoordinates(pointLongitude * M_180_PI, latitude);
-		StelUtils::spheToRect(pointLongitude, 0., XYZsp);
-		XYZ0 = XYZsp * (rect[3] * static_cast<double>(planet->getSphereScale()));
+
+		longitude = - subObs.first[2]  * M_180_PI;
+		if (planet->isRotatingRetrograde()) longitude *= -1;
+		longitude += ((nType==NomenclatureItemType::niSpecialPointEast) ? 90. : -90.);
+		longitude=StelUtils::fmodpos(longitude, 360.);
+		Q_ASSERT(latitude==0.);
+		// rebuild XYZpc
+		StelUtils::spheToRect(longitude * M_PI_180, latitude * M_PI_180, XYZpc);
 	}
-	else
-	{
-		rect = planet->getRectangularCoordinates(longitude, latitude);
-		XYZ0 = XYZpc * (rect[3] * static_cast<double>(planet->getSphereScale()));
-	}
+	// Calculate the radius of the planet at the item's position. It is necessary to re-scale it
+	Vec4d rect = planet->getRectangularCoordinates(longitude, latitude);
+	Vec3d XYZ0 = XYZpc * (rect[3] * static_cast<double>(planet->getSphereScale()));
 	// TODO2: intersect properly with OBJ bodies! (LP:1723742)
 
 	/* We have to calculate feature's coordinates in VSOP87 (this is Ecliptic J2000 coordinates).

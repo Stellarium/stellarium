@@ -167,9 +167,9 @@ protected:
 	static void createNameLists();
 
 private:
-	Vec3d XYZpc;                         // holds planetocentric direction vector (unit length, from longitude/latitude)
-	mutable Vec3d XYZ;                   // holds J2000 position
-	mutable double jde;                  // jde time of XYZ value
+	mutable Vec3d XYZpc;   // holds planetocentric direction vector (unit length, from longitude/latitude). One-time conversion for fixed features, but mutable for special points.
+	mutable Vec3d XYZ;     // holds J2000 position in space (i.e. including planet position, offset from planetocenter)
+	mutable double jde;    // jde time of XYZ value
 	static Vec3f color;
 	static bool hideLocalNomenclature;
 
@@ -185,8 +185,9 @@ private:
 	PlanetP planet;
 	int identificator;
 	QString englishName, context, nameI18n;
-	NomenclatureItemType nType;       // Type of nomenclature item
-	double latitude, longitude, size;  // degrees, degrees, km
+	NomenclatureItemType nType; // Type of nomenclature item
+	double latitude, size;      // degrees, km
+	mutable double longitude;   // degrees. Declared mutable to allow change in otherwise const methods (for special points)
 
 	LinearFader labelsFader;
 };
