@@ -1513,8 +1513,9 @@ void StelCore::addSiderealYear()
 void StelCore::addSiderealYears(double n)
 {
 	double days = 365.256363004;
-	const PlanetP& home = position->getHomePlanet();
-	if (!home->getEnglishName().contains("Observer", Qt::CaseInsensitive) && (home->getSiderealPeriod()>0))
+	const PlanetP& home = getCurrentPlanet();
+	Planet::PlanetType ptype = home->getPlanetType();
+	if (ptype!=Planet::isObserver && ptype!=Planet::isArtificial && home->getSiderealPeriod()>0.)
 		days = home->getSiderealPeriod();
 
 	addSolarDays(days*n);
