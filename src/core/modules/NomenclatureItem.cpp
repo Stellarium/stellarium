@@ -235,12 +235,19 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 
 	if (flags&Extra)
 	{
-		oss << QString("%1: %2/%3<br/>").arg(q_("Planetographic long./lat."), StelUtils::decDegToDmsStr(longitude), StelUtils::decDegToDmsStr(latitude));
-		oss << QString("%1: %2<br/>").arg(q_("Celestial body"), planet->getNameI18n());
+		if (nType==NomenclatureItemType::niSpecialPointEast || nType==NomenclatureItemType::niSpecialPointWest)
+		{
+			QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core);
+			double pointLongitude = (nType==NomenclatureItemType::niSpecialPointEast) ? subObs.first[2] + M_PI_2 : subObs.first[2] - M_PI_2;
+			oss << QString("%1: %2/%3<br/>").arg(q_("Planetographic long./lat.")).arg(StelUtils::radToDmsStr(pointLongitude), StelUtils::decDegToDmsStr(latitude));
+		}
+		else
+			oss << QString("%1: %2/%3<br/>").arg(q_("Planetographic long./lat.")).arg(StelUtils::decDegToDmsStr(longitude), StelUtils::decDegToDmsStr(latitude));
+		oss << QString("%1: %2<br/>").arg(q_("Celestial body")).arg(planet->getNameI18n());
 		QString description = getNomenclatureTypeDescription(nType, planet->getEnglishName());
 		if (nType!=NomenclatureItem::niUNDEFINED && nType!=NomenclatureItem::niSpecialPointPole && nType!=NomenclatureItem::niSpecialPointEast && nType!=NomenclatureItem::niSpecialPointWest && !description.isEmpty())
 			oss << QString("%1: %2<br/>").arg(q_("Landform description"), description);
-		oss << QString("%1: %2°<br/>").arg(q_("Solar altitude"), QString::number(getSolarAltitude(core), 'f', 1));
+		oss << QString("%1: %2°<br/>").arg(q_("Solar altitude")).arg(QString::number(getSolarAltitude(core), 'f', 1));
 	}
 
 	postProcessInfoString(str, flags);
@@ -258,8 +265,21 @@ Vec3d NomenclatureItem::getJ2000EquatorialPos(const StelCore* core) const
 	jde = core->getJDE();
 	const Vec3d equPos = planet->getJ2000EquatorialPos(core);
 	// Calculate the radius of the planet at the item's position. It is necessary to re-scale it
-	Vec4d rect = planet->getRectangularCoordinates(longitude, latitude);
-	Vec3d XYZ0 = XYZpc * (rect[3] * static_cast<double>(planet->getSphereScale()));
+	Vec4d rect;
+	Vec3d XYZ0, XYZsp;
+	if (nType==NomenclatureItemType::niSpecialPointEast || nType==NomenclatureItemType::niSpecialPointWest)
+	{
+		QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core);
+		double pointLongitude = (nType==NomenclatureItemType::niSpecialPointEast) ? subObs.first[2] + M_PI_2 : subObs.first[2] - M_PI_2;
+		rect = planet->getRectangularCoordinates(pointLongitude * M_180_PI, latitude);
+		StelUtils::spheToRect(pointLongitude, 0., XYZsp);
+		XYZ0 = XYZsp * (rect[3] * static_cast<double>(planet->getSphereScale()));
+	}
+	else
+	{
+		rect = planet->getRectangularCoordinates(longitude, latitude);
+		XYZ0 = XYZpc * (rect[3] * static_cast<double>(planet->getSphereScale()));
+	}
 	// TODO2: intersect properly with OBJ bodies! (LP:1723742)
 
 	/* We have to calculate feature's coordinates in VSOP87 (this is Ecliptic J2000 coordinates).
@@ -267,12 +287,7 @@ Vec3d NomenclatureItem::getJ2000EquatorialPos(const StelCore* core) const
 	   planet->getRotEquatorialToVsop87() gives us the rotation matrix between Equatorial (on date) coordinates and Ecliptic J2000 coordinates.
 	   So we have to make another change to obtain the rotation matrix using Equatorial J2000: we have to multiplay by core->matVsop87ToJ2000 */
 	// TODO: Maybe it is more efficient to add some getRotEquatorialToVsop87Zrotation() to the Planet class which returns a Mat4d computed in Planet::computeTransMatrix().
-	double rot = static_cast<double>(planet->getAxisRotation());
-	// dirty hack for giants
-	QStringList giants = (QStringList() << "Jupiter" << "Saturn" << "Uranus" << "Neptune");
-	if ((nType==NomenclatureItemType::niSpecialPointEast || nType==NomenclatureItemType::niSpecialPointWest) && giants.contains(planet->getEnglishName(), Qt::CaseInsensitive))
-		rot *= -1.;
-	XYZ = equPos + (core->matVsop87ToJ2000 * planet->getRotEquatorialToVsop87()) * Mat4d::zrotation(rot * M_PI_180) * XYZ0;
+	XYZ = equPos + (core->matVsop87ToJ2000 * planet->getRotEquatorialToVsop87()) * Mat4d::zrotation(static_cast<double>(planet->getAxisRotation())* M_PI/180.0) * XYZ0;
 	return XYZ;
 }
 
@@ -290,18 +305,6 @@ double NomenclatureItem::getAngularSize(const StelCore* core) const
 float NomenclatureItem::getAngularSizeRatio(const StelCore *core) const
 {
 	return getAngularSize(core)/core->getProjection(StelCore::FrameJ2000)->getFov();
-}
-
-void NomenclatureItem::computePosition(const StelCore *core)
-{
-	if (nType==NomenclatureItemType::niSpecialPointEast || nType==NomenclatureItemType::niSpecialPointWest)
-	{
-		QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core);
-		double pointLongitude = (nType==NomenclatureItemType::niSpecialPointEast) ? subObs.first[2] + M_PI_2 : subObs.first[2] - M_PI_2;
-		longitude = pointLongitude * M_180_PI;
-		if (longitude < 0.) { longitude += 360.; }
-		StelUtils::spheToRect(longitude * M_PI_180, 0., XYZpc);
-	}
 }
 
 void NomenclatureItem::update(double deltaTime)
