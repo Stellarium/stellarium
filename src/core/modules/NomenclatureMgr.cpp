@@ -80,6 +80,15 @@ void NomenclatureMgr::init()
 	addAction("actionShow_Planets_Nomenclature", displayGroup, N_("Nomenclature labels"), "nomenclatureDisplayed", "Alt+N");
 }
 
+void NomenclatureMgr::update(double)
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	for (const auto& p : qAsConst(specialNomenclatureItems))
+	{
+		p->computePosition(core);
+	}
+}
+
 void NomenclatureMgr::updateNomenclatureData()
 {
 	bool flag = getFlagLabels();
@@ -92,6 +101,7 @@ void NomenclatureMgr::updateNomenclatureData()
 void NomenclatureMgr::loadSpecialNomenclature()
 {
 	int featureId = 50000;
+	specialNomenclatureItems.clear();
 	QList<PlanetP> ss = ssystem->getAllPlanets();
 	for (const auto& p: ss)
 	{
@@ -105,14 +115,20 @@ void NomenclatureMgr::loadSpecialNomenclature()
 			nomenclatureItems.insert(p, nomSP);
 		featureId++;
 		// longitude is fake, used just to define the object
-		NomenclatureItemP nomE = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("East"), "", NomenclatureItem::niSpecialPointEast, 0., 0., size));
+		NomenclatureItemP nomE = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("East"), "", NomenclatureItem::niSpecialPointEast, 0., 90., size));
 		if (!nomE.isNull())
+		{
 			nomenclatureItems.insert(p, nomE);
+			specialNomenclatureItems.push_back(nomE);
+		}
 		featureId++;
 		// longitude is fake, used just to define the object
-		NomenclatureItemP nomW = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("West"), "", NomenclatureItem::niSpecialPointWest, 0., 180., size));
+		NomenclatureItemP nomW = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("West"), "", NomenclatureItem::niSpecialPointWest, 0., -90., size));
 		if (!nomW.isNull())
+		{
 			nomenclatureItems.insert(p, nomW);
+			specialNomenclatureItems.push_back(nomW);
+		}
 		featureId++;
 	}
 }
@@ -121,7 +137,7 @@ void NomenclatureMgr::loadNomenclature()
 {
 	qDebug() << "Loading nomenclature for Solar system bodies ...";
 
-	nomenclatureItems.clear();	
+	nomenclatureItems.clear();
 
 	// regular expression to find the comments and empty lines
 	QRegularExpression commentRx("^(\\s*#.*|\\s*)$");

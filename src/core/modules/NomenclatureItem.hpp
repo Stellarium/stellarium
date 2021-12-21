@@ -160,6 +160,9 @@ public:
 	//! return solar altitude in degrees (Meeus, Astr.Alg.1998 53.3)
 	double getSolarAltitude(const StelCore *core) const;
 
+	//! recompute position for East and West points
+	virtual void computePosition(const StelCore *core);
+
 protected:
 	//! returns a type enum for a given 2-letter code
 	static NomenclatureItemType getNomenclatureItemType(const QString abbrev);
