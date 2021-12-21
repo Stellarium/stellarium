@@ -98,7 +98,7 @@ export LD_LIBRARY_PATH=$QTDIR/lib:$LD_LIBRARY_PATH
 
 #### Linux without QtWebEngine
 
-On some distributions (known for ARM systems, like Raspberry OS (Raspbian)) there is no QtWebEngine. You must call cmake with the -DWITH_QTWEBENGINE=0 option in the next step. The result is shown in the system webbrowser.
+On some distributions (known for ARM systems, like Raspberry OS (Raspbian)) there is no QtWebEngine. The CMake script will check installed `qtwebengine5` package and if then is not in system then Stellarium will build without QtWebEngine support. The result is shown in the system web browser.
 
 #### MacOS
 
@@ -144,9 +144,9 @@ You may using the distribution from the Qt Company to install the [latest stable
 export PATH=~/Qt/5.12/clang_64/bin:$PATH
 ```
 
-#### MacOS on ARM without QtWebEngine
+#### MacOS without QtWebEngine
 
-On the new ARM-based Macs, there is no support for QtWebEngine. You must call cmake with the -DWITH_QTWEBENGINE=0 option in the next step. The result is shown in the system webbrowser.
+On the new ARM-based Macs, there is no support for QtWebEngine or it buggy (QtWebEngine in Qt 5.15.2). The CMake script will check installed `QtWebEngine` libraries and if then is not in system then Stellarium will build without QtWebEngine support. The result is shown in the system web browser.
 
 #### Windows
 
@@ -326,7 +326,6 @@ List of supported parameters (passed as `-DPARAMETER=VALUE`):
 | USE_PLUGIN_SCENERY3D          | bool   | ON      | Enable building the 3D Scenery plugin
 | USE_PLUGIN_REMOTECONTROL      | bool   | ON      | Enable building the Remote Control plugin
 | USE_PLUGIN_REMOTESYNC         | bool   | ON      | Enable building the Remote Sync plugin
-| WITH_QTWEBENGINE              | bool   | ON      | Enable using QtWebEngine. This must be disabled on ARM platforms!
 
 Notes:
  \* `/usr/local` on Unix-like systems, `C:\Program Files` or `C:\Program Files (x86)`
@@ -357,7 +356,7 @@ There are several test programs in the repository. To build them, define `-DENAB
 
 Then configure a Debug build and select a test... application to be executed.
 
-Please try to test your changes before committing to master. Our automated [Travis](https://travis-ci.org/github/Stellarium/stellarium) and 
+Please try to test your changes before committing to master. Our automated [GitHub Actions](https://github.com/Stellarium/stellarium/actions/workflows/ci.yml) and 
 [AppVeyor](https://ci.appveyor.com/project/alex-w/stellarium) builds will signal failure when tests don't complete.
 
 To execute all unit tests in terminal please run:
