@@ -52,7 +52,7 @@ NomenclatureItem::NomenclatureItem(PlanetP nPlanet,
 	, longitude(nLongitude)
 	, size(nSize)
 {
-	StelUtils::spheToRect(longitude * M_PI/180.0, latitude * M_PI/180.0, XYZpc);
+	StelUtils::spheToRect(longitude * M_PI_180, latitude * M_PI_180, XYZpc);
 }
 
 NomenclatureItem::~NomenclatureItem()
@@ -68,7 +68,9 @@ QString NomenclatureItem::getNomenclatureTypeString(NomenclatureItemType nType)
 QString NomenclatureItem::getNomenclatureTypeLatinString(NomenclatureItemType nType)
 {
 	static const QMap<NomenclatureItemType, QString>map = {
-		{ niSpecialPoint, "point" },
+		{ niSpecialPointPole, "point" },
+		{ niSpecialPointEast, "point" },
+		{ niSpecialPointWest, "point" },
 		{ niArcus  , "arcus" },
 		{ niAstrum , "astrum" },
 		{ niCatena , "catena" },
@@ -198,7 +200,6 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 {
 	QString str;
 	QTextStream oss(&str);
-	NomenclatureItem::NomenclatureItemType niType = getNomenclatureType();
 
 	if (flags&Name)
 	{
@@ -209,7 +210,7 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 		oss << "</h2>";
 	}
 
-	if (flags&ObjectType && niType!=NomenclatureItem::niUNDEFINED)
+	if (flags&ObjectType && nType!=NomenclatureItem::niUNDEFINED)
 	{
 		QString tstr  = getNomenclatureTypeString(nType);
 		QString latin = getNomenclatureTypeLatinString(nType); // not always latin!
@@ -223,21 +224,28 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 	// Ra/Dec etc.
 	oss << getCommonInfoString(core, flags);
 
-	if (flags&Size && size>0. && nType!=NomenclatureItem::niSpecialPoint)
+	if (flags&Size && size>0. && nType!=NomenclatureItem::niSpecialPointPole && nType!=NomenclatureItem::niSpecialPointEast && nType!=NomenclatureItem::niSpecialPointWest)
 	{
 		QString sz = q_("Linear size");
 		// Satellite Features are almost(?) exclusively lettered craters, and all are on the Moon. Assume craters.
-		if ((niType==NomenclatureItem::niCrater) || (niType==NomenclatureItem::niSatelliteFeature))
+		if ((nType==NomenclatureItem::niCrater) || (nType==NomenclatureItem::niSatelliteFeature))
 			sz = q_("Diameter");
 		oss << QString("%1: %2 %3<br/>").arg(sz).arg(QString::number(size, 'f', 2)).arg(qc_("km", "distance"));
 	}
 
 	if (flags&Extra)
 	{
-		oss << QString("%1: %2/%3<br/>").arg(q_("Planetographic long./lat.")).arg(StelUtils::decDegToDmsStr(longitude)).arg(StelUtils::decDegToDmsStr(latitude));
+		if (nType==NomenclatureItemType::niSpecialPointEast || nType==NomenclatureItemType::niSpecialPointWest)
+		{
+			QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core);
+			double pointLongitude = (nType==NomenclatureItemType::niSpecialPointEast) ? subObs.first[2] + M_PI_2 : subObs.first[2] - M_PI_2;
+			oss << QString("%1: %2/%3<br/>").arg(q_("Planetographic long./lat.")).arg(StelUtils::radToDmsStr(pointLongitude), StelUtils::decDegToDmsStr(latitude));
+		}
+		else
+			oss << QString("%1: %2/%3<br/>").arg(q_("Planetographic long./lat.")).arg(StelUtils::decDegToDmsStr(longitude), StelUtils::decDegToDmsStr(latitude));
 		oss << QString("%1: %2<br/>").arg(q_("Celestial body")).arg(planet->getNameI18n());
 		QString description = getNomenclatureTypeDescription(nType, planet->getEnglishName());
-		if (niType!=NomenclatureItem::niUNDEFINED && niType!=NomenclatureItem::niSpecialPoint && !description.isEmpty())
+		if (nType!=NomenclatureItem::niUNDEFINED && nType!=NomenclatureItem::niSpecialPointPole && nType!=NomenclatureItem::niSpecialPointEast && nType!=NomenclatureItem::niSpecialPointWest && !description.isEmpty())
 			oss << QString("%1: %2<br/>").arg(q_("Landform description"), description);
 		oss << QString("%1: %2°<br/>").arg(q_("Solar altitude")).arg(QString::number(getSolarAltitude(core), 'f', 1));
 	}
@@ -257,9 +265,21 @@ Vec3d NomenclatureItem::getJ2000EquatorialPos(const StelCore* core) const
 	jde = core->getJDE();
 	const Vec3d equPos = planet->getJ2000EquatorialPos(core);
 	// Calculate the radius of the planet at the item's position. It is necessary to re-scale it
-	const Vec4d rect=planet->getRectangularCoordinates(longitude, latitude);
-	double r=rect[3]  * static_cast<double>(planet->getSphereScale());
-	Vec3d XYZ0 = XYZpc*r;
+	Vec4d rect;
+	Vec3d XYZ0, XYZsp;
+	if (nType==NomenclatureItemType::niSpecialPointEast || nType==NomenclatureItemType::niSpecialPointWest)
+	{
+		QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core);
+		double pointLongitude = (nType==NomenclatureItemType::niSpecialPointEast) ? subObs.first[2] + M_PI_2 : subObs.first[2] - M_PI_2;
+		rect = planet->getRectangularCoordinates(pointLongitude * M_180_PI, latitude);
+		StelUtils::spheToRect(pointLongitude, 0., XYZsp);
+		XYZ0 = XYZsp * (rect[3] * static_cast<double>(planet->getSphereScale()));
+	}
+	else
+	{
+		rect = planet->getRectangularCoordinates(longitude, latitude);
+		XYZ0 = XYZpc * (rect[3] * static_cast<double>(planet->getSphereScale()));
+	}
 	// TODO2: intersect properly with OBJ bodies! (LP:1723742)
 
 	/* We have to calculate feature's coordinates in VSOP87 (this is Ecliptic J2000 coordinates).
@@ -315,10 +335,10 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 	Vec3d srcPos;
 	const float scale = getAngularSizeRatio(core);
 	NomenclatureItem::NomenclatureItemType niType = getNomenclatureType();
-	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (equPos.length() >= XYZ.length()) && (scale>0.04f && (scale<0.5f || niType==NomenclatureItem::niSpecialPoint)))
+	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (equPos.length() >= XYZ.length()) && (scale>0.04f && (scale<0.5f || niType==NomenclatureItem::niSpecialPointPole || niType==NomenclatureItem::niSpecialPointEast || niType==NomenclatureItem::niSpecialPointWest)))
 	{
 		float brightness=(getSolarAltitude(core)<0. ? 0.25f : 1.0f);
-		if (niType==NomenclatureItem::niSpecialPoint)
+		if (niType==NomenclatureItem::niSpecialPointPole || niType==NomenclatureItem::niSpecialPointEast || niType==NomenclatureItem::niSpecialPointWest)
 			brightness = 0.5f;
 		painter->setColor(color*brightness, 1.0f);
 		painter->drawCircle(static_cast<float>(srcPos[0]), static_cast<float>(srcPos[1]), 2.f);
@@ -404,7 +424,9 @@ QMap<NomenclatureItem::NomenclatureItemType, QString> NomenclatureItem::niTypeDe
 void NomenclatureItem::createNameLists()
 {
     niTypeStringMap = {
-	{ niSpecialPoint, qc_("point", "special point") },
+	{ niSpecialPointPole, qc_("point", "special point") },
+	{ niSpecialPointEast, qc_("point", "special point") },
+	{ niSpecialPointWest, qc_("point", "special point") },
 	// TRANSLATORS: Geographic area distinguished by amount of reflected light
 	{ niAlbedoFeature, qc_("albedo feature", "landform") },
 	// TRANSLATORS: Arc-shaped feature
@@ -634,5 +656,7 @@ void NomenclatureItem::createNameLists()
 	// TRANSLATORS: Description for landform 'virga'
 	{ niVirga, q_("A streak or stripe of color.")},
 	{ niLandingSite, ""},
-	{ niSpecialPoint, ""}};
+	{ niSpecialPointPole, ""},
+	{ niSpecialPointEast, ""},
+	{ niSpecialPointWest, ""}};
 }

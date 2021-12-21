@@ -102,7 +102,9 @@ public:
 		niSatelliteFeature	= 55, // type="satellite feature"
 		niTessera		= 56, // type="tessera"
 		niSaxum			= 57, // type="saxum"
-		niSpecialPoint		= 100 // poles, special type
+		niSpecialPointPole	= 100,// North and South Poles; special type
+		niSpecialPointEast	= 101,// East point; special type
+		niSpecialPointWest	= 102 // West point; special type
 	};
 	Q_ENUM(NomenclatureItemType)
 

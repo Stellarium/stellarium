@@ -92,18 +92,27 @@ void NomenclatureMgr::updateNomenclatureData()
 void NomenclatureMgr::loadSpecialNomenclature()
 {
 	int featureId = 50000;
-	NomenclatureItem::NomenclatureItemType ntype = NomenclatureItem::niSpecialPoint;
 	QList<PlanetP> ss = ssystem->getAllPlanets();
 	for (const auto& p: ss)
 	{
 		double size = p->getEquatorialRadius()*AU*0.33; // formal radius of point is 33% of equatorial radius
-		NomenclatureItemP nomNP = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("North Pole"), "", ntype, 90., 0., size));
+		NomenclatureItemP nomNP = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("North Pole"), "", NomenclatureItem::niSpecialPointPole, 90., 0., size));
 		if (!nomNP.isNull())
 			nomenclatureItems.insert(p, nomNP);
 		featureId++;
-		NomenclatureItemP nomSP = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("South Pole"), "", ntype, -90., 0., size));
+		NomenclatureItemP nomSP = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("South Pole"), "", NomenclatureItem::niSpecialPointPole, -90., 0., size));
 		if (!nomSP.isNull())
 			nomenclatureItems.insert(p, nomSP);
+		featureId++;
+		// longitude is fake, used just to define the object
+		NomenclatureItemP nomE = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("East"), "", NomenclatureItem::niSpecialPointEast, 0., 0., size));
+		if (!nomE.isNull())
+			nomenclatureItems.insert(p, nomE);
+		featureId++;
+		// longitude is fake, used just to define the object
+		NomenclatureItemP nomW = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("West"), "", NomenclatureItem::niSpecialPointWest, 0., 180., size));
+		if (!nomW.isNull())
+			nomenclatureItems.insert(p, nomW);
 		featureId++;
 	}
 }
@@ -340,7 +349,7 @@ StelObjectP NomenclatureMgr::searchByName(const QString& englishName) const
 		for (const auto& nItem : nomenclatureItems)
 		{
 			niType = nItem->getNomenclatureType();
-			if (niType!=NomenclatureItem::niSatelliteFeature && niType!=NomenclatureItem::niSpecialPoint && nItem->getEnglishName().toUpper() == englishName.toUpper())
+			if (niType!=NomenclatureItem::niSatelliteFeature && niType!=NomenclatureItem::niSpecialPointPole && niType!=NomenclatureItem::niSpecialPointEast && niType!=NomenclatureItem::niSpecialPointWest && nItem->getEnglishName().toUpper() == englishName.toUpper())
 			{
 				return qSharedPointerCast<StelObject>(nItem);
 			}
@@ -357,7 +366,7 @@ StelObjectP NomenclatureMgr::searchByNameI18n(const QString& nameI18n) const
 		for (const auto& nItem : nomenclatureItems)
 		{
 			niType = nItem->getNomenclatureType();
-			if (niType!=NomenclatureItem::niSatelliteFeature && niType!=NomenclatureItem::niSpecialPoint && nItem->getNameI18n().toUpper() == nameI18n.toUpper())
+			if (niType!=NomenclatureItem::niSatelliteFeature && niType!=NomenclatureItem::niSpecialPointPole && niType!=NomenclatureItem::niSpecialPointEast && niType!=NomenclatureItem::niSpecialPointWest  && nItem->getNameI18n().toUpper() == nameI18n.toUpper())
 			{
 				return qSharedPointerCast<StelObject>(nItem);
 			}
@@ -378,7 +387,7 @@ QStringList NomenclatureMgr::listAllObjects(bool inEnglish) const
 			for (const auto& nItem : nomenclatureItems)
 			{
 				niType = nItem->getNomenclatureType();
-				if (niType!=NomenclatureItem::niSatelliteFeature && niType!=NomenclatureItem::niSpecialPoint)
+				if (niType!=NomenclatureItem::niSatelliteFeature && niType!=NomenclatureItem::niSpecialPointPole && niType!=NomenclatureItem::niSpecialPointEast && niType!=NomenclatureItem::niSpecialPointWest)
 					result << nItem->getEnglishName();
 			}
 		}
@@ -387,7 +396,7 @@ QStringList NomenclatureMgr::listAllObjects(bool inEnglish) const
 			for (const auto& nItem : nomenclatureItems)
 			{
 				niType = nItem->getNomenclatureType();
-				if (niType!=NomenclatureItem::niSatelliteFeature && niType!=NomenclatureItem::niSpecialPoint)
+				if (niType!=NomenclatureItem::niSatelliteFeature && niType!=NomenclatureItem::niSpecialPointPole && niType!=NomenclatureItem::niSpecialPointEast && niType!=NomenclatureItem::niSpecialPointWest)
 					result << nItem->getNameI18n();
 			}
 		}
@@ -410,7 +419,7 @@ QStringList NomenclatureMgr::listAllObjectsByType(const QString &objType, bool i
 				for (const auto& nItem : nomenclatureItems)
 				{
 					niType = nItem->getNomenclatureType();
-					if (nItem->getPlanet()->getEnglishName().contains(objType, Qt::CaseSensitive) && niType!=NomenclatureItem::niSatelliteFeature && niType!=NomenclatureItem::niSpecialPoint)
+					if (nItem->getPlanet()->getEnglishName().contains(objType, Qt::CaseSensitive) && niType!=NomenclatureItem::niSatelliteFeature && niType!=NomenclatureItem::niSpecialPointPole && niType!=NomenclatureItem::niSpecialPointEast && niType!=NomenclatureItem::niSpecialPointWest)
 					{
 						if (inEnglish)
 							result << nItem->getEnglishName();
@@ -449,7 +458,7 @@ NomenclatureItemP NomenclatureMgr::searchByEnglishName(QString nomenclatureItemE
 		for (const auto& p : nomenclatureItems)
 		{
 			niType = p->getNomenclatureType();
-			if (niType!=NomenclatureItem::niSatelliteFeature && niType!=NomenclatureItem::niSpecialPoint && p->getEnglishName() == nomenclatureItemEnglishName)
+			if (niType!=NomenclatureItem::niSatelliteFeature && niType!=NomenclatureItem::niSpecialPointPole && niType!=NomenclatureItem::niSpecialPointEast && niType!=NomenclatureItem::niSpecialPointWest && p->getEnglishName() == nomenclatureItemEnglishName)
 				return p;
 		}
 	}
@@ -507,7 +516,8 @@ void NomenclatureMgr::updateI18n()
 	const StelTranslator& transPole = StelApp::getInstance().getLocaleMgr().getAppStelTranslator();
 	for (const auto& i : qAsConst(nomenclatureItems))
 	{
-		if (i->getNomenclatureType()==NomenclatureItem::niSpecialPoint)
+		NomenclatureItem::NomenclatureItemType niType = i->getNomenclatureType();
+		if (niType==NomenclatureItem::niSpecialPointPole || niType==NomenclatureItem::niSpecialPointEast || niType==NomenclatureItem::niSpecialPointWest)
 			i->translateName(transPole);
 		else
 			i->translateName(trans);
