@@ -1513,10 +1513,10 @@ void StelCore::addSiderealYear()
 void StelCore::addSiderealYears(double n)
 {
 	double days = 365.256363004;
-	const PlanetP& home = getCurrentPlanet();
-	Planet::PlanetType ptype = home->getPlanetType();
-	if (ptype!=Planet::isObserver && ptype!=Planet::isArtificial && home->getSiderealPeriod()>0.)
-		days = home->getSiderealPeriod();
+	double sidereal = getLocalSiderealYearLength();
+	Planet::PlanetType ptype = getCurrentPlanet()->getPlanetType();
+	if (ptype!=Planet::isObserver && ptype!=Planet::isArtificial && sidereal>0.)
+		days = sidereal;
 
 	addSolarDays(days*n);
 }
@@ -1744,8 +1744,9 @@ void StelCore::subtractJulianYears(double n)
 
 void StelCore::addSolarDays(double d)
 {
-	const PlanetP& home = position->getHomePlanet();
-	if (!home->getEnglishName().contains("Observer", Qt::CaseInsensitive))
+	const PlanetP& home = getCurrentPlanet();
+	Planet::PlanetType ptype = home->getPlanetType();
+	if (ptype!=Planet::isArtificial && ptype!=Planet::isObserver)
 		d *= home->getMeanSolarDay();
 
 	setJD(getJD() + d);
@@ -1756,8 +1757,9 @@ void StelCore::addSolarDays(double d)
 
 void StelCore::addSiderealDays(double d)
 {
-	const PlanetP& home = position->getHomePlanet();
-	if (!home->getEnglishName().contains("Observer", Qt::CaseInsensitive))
+	const PlanetP& home = getCurrentPlanet();
+	Planet::PlanetType ptype = home->getPlanetType();
+	if (ptype!=Planet::isArtificial && ptype!=Planet::isObserver)
 		d *= home->getSiderealDay();
 
 	setJD(getJD() + d);
@@ -1767,19 +1769,19 @@ void StelCore::addSiderealDays(double d)
 double StelCore::getLocalSiderealTime() const
 {
 	// On Earth, this requires UT deliberately with all its faults, on other planets we use the more regular TT.
-	return (position->getHomePlanet()->getSiderealTime(getJD(), getJDE())+static_cast<double>(position->getCurrentLocation().longitude))*M_PI/180.;
+	return (getCurrentPlanet()->getSiderealTime(getJD(), getJDE())+static_cast<double>(position->getCurrentLocation().longitude))*M_PI/180.;
 }
 
 //! Get the duration of a sidereal day for the current observer in day.
 double StelCore::getLocalSiderealDayLength() const
 {
-	return position->getHomePlanet()->getSiderealDay();
+	return getCurrentPlanet()->getSiderealDay();
 }
 
 //! Get the duration of a sidereal year for the current observer in days.
 double StelCore::getLocalSiderealYearLength() const
 {
-	return position->getHomePlanet()->getSiderealPeriod();
+	return getCurrentPlanet()->getSiderealPeriod();
 }
 
 QString StelCore::getStartupTimeMode() const
@@ -1872,7 +1874,7 @@ void StelCore::updateTime(double deltaTime)
 		// Unselect if the new home planet is the previously selected object
 		StelObjectMgr* objmgr = GETSTELMODULE(StelObjectMgr);
 		Q_ASSERT(objmgr);
-		if (objmgr->getWasSelected() && objmgr->getSelectedObject()[0].data()==position->getHomePlanet())
+		if (objmgr->getWasSelected() && objmgr->getSelectedObject()[0].data()==getCurrentPlanet())
 		{
 			objmgr->unSelect();
 		}
@@ -1887,7 +1889,7 @@ void StelCore::updateTime(double deltaTime)
 	// GZ maybe setting this static can speedup a bit?
 	static SolarSystem* solsystem = static_cast<SolarSystem*>(StelApp::getInstance().getModuleMgr().getModule("SolarSystem"));
 	// Likely the most important location where we need JDE:
-	solsystem->computePositions(getJDE(), position->getHomePlanet());
+	solsystem->computePositions(getJDE(), getCurrentPlanet());
 }
 
 void StelCore::resetSync()
