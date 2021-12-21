@@ -244,7 +244,7 @@ public:
 	//! if purpose=Position, [epoch-min(orbit_good, 365), epoch+min(orbit_good, 365)].
 	//! This should help to detect and avoid using outdated orbital elements.
 	Vec2d getValidPositionalDataRange(const PositionQuality purpose) const;
-	float getAxisRotation(void) { return axisRotation;} //! return axisRotation last computed in computeTransMatrix().
+	float getAxisRotation(void) { return axisRotation;} //! return axisRotation last computed in computeTransMatrix(). [degrees]
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods of SolarSystem object
