@@ -1705,7 +1705,7 @@ Vec4d Planet::getRectangularCoordinates(const double longDeg, const double latDe
 	Q_UNUSED(longDeg)
 	const double a = getEquatorialRadius();
 	const double bByA = qMin(1., getOneMinusOblateness()); // b/a;
-	qDebug() << "Planet" << englishName << "1-obl" << bByA << "or " << oneMinusOblateness;
+	//qDebug() << "Planet" << englishName << "1-obl" << bByA << "or " << oneMinusOblateness;
 	Q_ASSERT(bByA<=1.);
 
 	// See some previous issues at https://github.com/Stellarium/stellarium/issues/391
