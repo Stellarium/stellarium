@@ -237,41 +237,38 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 
 	if (flags&Extra)
 	{
+		QString sLong = StelUtils::decDegToDmsStr(longitude), sLat = StelUtils::decDegToDmsStr(latitude);
 		if (nType>=NomenclatureItemType::niSpecialPointEast)
 		{
-			// Special longitudes are inverse to the nomenclature longitudes?
 			if (planet->getEnglishName()=="Jupiter")
 			{
-			    // Due to Jupiter's issues around GRS shift we must repeat some calculations here.
-			    double lng=0., lat=0.;
-			    // East/West points are assumed to be along the equator, on the planet rim. Start with sub-observer point
-			    if (nType==NomenclatureItemType::niSpecialPointEast || nType==NomenclatureItemType::niSpecialPointWest)
-			    {
-				QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core, false);
-				lng = - subObs.first[2]  * M_180_PI + ((nType==NomenclatureItemType::niSpecialPointEast) ? 90. : -90.);
-				Q_ASSERT(lat==0.);
-			    }
-			    // Center and Subsolar points are similar.
-			    if (nType==NomenclatureItemType::niSpecialPointCenter || nType==NomenclatureItemType::niSpecialPointSubSolar)
-			    {
-				QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core, false);
-				lat =   M_180_PI * (nType==NomenclatureItemType::niSpecialPointCenter ? subObs.first[1]: subObs.second[1]);
-				lng = - M_180_PI * (nType==NomenclatureItemType::niSpecialPointCenter ? subObs.first[2]: subObs.second[2]);
-			    }
-			    lng=StelUtils::fmodpos(lng, 360.);
-
-			    oss << QString("%1: %2/%3<br/>").arg(q_("Planetographic long./lat.")).arg(StelUtils::decDegToDmsStr(360.-lng), StelUtils::decDegToDmsStr(lat));
+				// Due to Jupiter's issues around GRS shift we must repeat some calculations here.
+				double lng=0., lat=0.;
+				// East/West points are assumed to be along the equator, on the planet rim. Start with sub-observer point
+				if (nType==NomenclatureItemType::niSpecialPointEast || nType==NomenclatureItemType::niSpecialPointWest)
+				{
+					QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core, false);
+					lng = - subObs.first[2]  * M_180_PI + ((nType==NomenclatureItemType::niSpecialPointEast) ? 90. : -90.);
+					Q_ASSERT(lat==0.);
+				}
+				// Center and Subsolar points are similar.
+				if (nType==NomenclatureItemType::niSpecialPointCenter || nType==NomenclatureItemType::niSpecialPointSubSolar)
+				{
+					QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core, false);
+					lat =   M_180_PI * (nType==NomenclatureItemType::niSpecialPointCenter ? subObs.first[1]: subObs.second[1]);
+					lng = - M_180_PI * (nType==NomenclatureItemType::niSpecialPointCenter ? subObs.first[2]: subObs.second[2]);
+				}
+				lng   = StelUtils::fmodpos(lng, 360.);
+				sLong = StelUtils::decDegToDmsStr(360.-lng);
+				sLat  = StelUtils::decDegToDmsStr(lat);
 			}
-			else
-				oss << QString("%1: %2/%3<br/>").arg(q_("Planetographic long./lat.")).arg(StelUtils::decDegToDmsStr(planet->isRotatingRetrograde() ? longitude : 360.-longitude), StelUtils::decDegToDmsStr(latitude));
 		}
-		else
-			oss << QString("%1: %2/%3<br/>").arg(q_("Planetographic long./lat.")).arg(StelUtils::decDegToDmsStr(longitude), StelUtils::decDegToDmsStr(latitude));
-		oss << QString("%1: %2<br/>").arg(q_("Celestial body")).arg(planet->getNameI18n());
+		oss << QString("%1: %2/%3<br/>").arg(q_("Planetographic long./lat."), sLong, sLat);
+		oss << QString("%1: %2<br/>").arg(q_("Celestial body"), planet->getNameI18n());
 		QString description = getNomenclatureTypeDescription(nType, planet->getEnglishName());
 		if (nType!=NomenclatureItem::niUNDEFINED && nType<NomenclatureItem::niSpecialPointPole && !description.isEmpty())
 			oss << QString("%1: %2<br/>").arg(q_("Landform description"), description);
-		oss << QString("%1: %2°<br/>").arg(q_("Solar altitude")).arg(QString::number(getSolarAltitude(core), 'f', 1));
+		oss << QString("%1: %2°<br/>").arg(q_("Solar altitude"), QString::number(getSolarAltitude(core), 'f', 1));
 	}
 
 	postProcessInfoString(str, flags);
