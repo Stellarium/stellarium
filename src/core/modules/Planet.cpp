@@ -1696,6 +1696,9 @@ void Planet::computeTransMatrix(double JD, double JDE)
 // @return [rhoCosPhiPrime*a, rhoSinPhiPrime*a, phiPrime, rho*a] where a=equatorial radius
 Vec4d Planet::getRectangularCoordinates(const double longDeg, const double latDeg, const double altMetres) const
 {
+	if (getPlanetType()==Planet::isArtificial || getPlanetType()==Planet::isObserver || getEnglishName().contains("Spaceship", Qt::CaseInsensitive))
+		return Vec4d(0.);
+
 	// We may extend the use of this method later.
 	Q_UNUSED(longDeg)
 	const double a = getEquatorialRadius();
@@ -1704,9 +1707,6 @@ Vec4d Planet::getRectangularCoordinates(const double longDeg, const double latDe
 	// See some previous issues at https://github.com/Stellarium/stellarium/issues/391
 	const double latRad=latDeg*M_PI_180;
 	const double u = atan( bByA * tan(latRad));
-	//qDebug() << "getTopographicOffsetFromCenter: a=" << a*AU << "b/a=" << bByA << "b=" << bByA*a *AU  << "latRad=" << latRad << "u=" << u;
-	// This may fail & crash if on SpaceshipObserver on the way to the Sun (?) --> add test bByA==1
-	Q_ASSERT((bByA==1.) || (fabs(u)<= fabs(latRad)));
 	const double altFix = altMetres/(1000.0*AU*a);
 
 	const double rhoSinPhiPrime= bByA * sin(u) + altFix*sin(latRad);
