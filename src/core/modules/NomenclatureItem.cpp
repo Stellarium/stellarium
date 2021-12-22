@@ -346,7 +346,7 @@ double NomenclatureItem::getAngularSize(const StelCore* core) const
 
 float NomenclatureItem::getAngularSizeRatio(const StelCore *core) const
 {
-	return getAngularSize(core)/core->getProjection(StelCore::FrameJ2000)->getFov();
+    return static_cast<float>(getAngularSize(core))/core->getProjection(StelCore::FrameJ2000)->getFov();
 }
 
 void NomenclatureItem::update(double deltaTime)
