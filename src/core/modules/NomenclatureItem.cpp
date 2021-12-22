@@ -237,7 +237,7 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 
 	if (flags&Extra)
 	{
-		QString sLong = StelUtils::decDegToDmsStr(longitude), sLat = StelUtils::decDegToDmsStr(latitude);
+		QString sLong = StelUtils::decDegToDmsStr(planet->isRotatingRetrograde() ? longitude : 360.-longitude), sLat = StelUtils::decDegToDmsStr(latitude);
 		if (nType>=NomenclatureItemType::niSpecialPointEast)
 		{
 			if (planet->getEnglishName()=="Jupiter")
