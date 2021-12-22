@@ -232,7 +232,7 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 		// Satellite Features are almost(?) exclusively lettered craters, and all are on the Moon. Assume craters.
 		if ((nType==NomenclatureItem::niCrater) || (nType==NomenclatureItem::niSatelliteFeature))
 			sz = q_("Diameter");
-		oss << QString("%1: %2 %3<br/>").arg(sz).arg(QString::number(size, 'f', 2)).arg(qc_("km", "distance"));
+		oss << QString("%1: %2 %3<br/>").arg(sz, QString::number(size, 'f', 2), qc_("km", "distance"));
 	}
 
 	if (flags&Extra)
