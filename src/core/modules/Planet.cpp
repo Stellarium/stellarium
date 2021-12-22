@@ -1963,7 +1963,7 @@ float Planet::getPAsun(const Vec3d &sunPos, const Vec3d &objPos)
 // Get planetographic coordinates of subsolar and sub-observer points.
 // Source: Explanatory Supplement 2013, 10.4.1
 // Erroneous expression 10.27 fixed by Explan. Suppl. 1992, 7.12-26.
-QPair<Vec4d, Vec3d> Planet::getSubSolarObserverPoints(const StelCore *core) const
+QPair<Vec4d, Vec3d> Planet::getSubSolarObserverPoints(const StelCore *core, bool jupiterGraphical) const
 {
 //	QString debugAid;
 	QPair<Vec4d, Vec3d>ret;
@@ -2011,7 +2011,7 @@ QPair<Vec4d, Vec3d> Planet::getSubSolarObserverPoints(const StelCore *core) cons
 	// sub-earth point (10.19)
 	Vec3d n=PrecNut*Vec3d(cosd0*cosa0, cosd0*sina0, sind0);
 	// Rotation W is OK for all planets except Jupiter: return simple W_II to remove GRS adaptation shift.
-	const double W= (englishName=="Jupiter" ?
+	const double W= ( ((englishName=="Jupiter") && !jupiterGraphical )  ?
 			re.W0+ remainder( (core->getJDE()-J2000 - Dr.length()*(AU/(SPEED_OF_LIGHT*86400.)))*re.W1, 360.) :
 			re.currentAxisW);
 	const double sinW=sin(W*M_PI_180);

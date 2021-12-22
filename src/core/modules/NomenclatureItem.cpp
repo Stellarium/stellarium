@@ -240,7 +240,30 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 		if (nType>=NomenclatureItemType::niSpecialPointEast)
 		{
 			// Special longitudes are inverse to the nomenclature longitudes?
-			oss << QString("%1: %2/%3<br/>").arg(q_("Planetographic long./lat.")).arg(StelUtils::decDegToDmsStr(planet->isRotatingRetrograde() ? longitude : 360.-longitude), StelUtils::decDegToDmsStr(latitude));
+			if (planet->getEnglishName()=="Jupiter")
+			{
+			    // Due to Jupiter's issues around GRS shift we must repeat some calculations here.
+			    double lng=0., lat=0.;
+			    // East/West points are assumed to be along the equator, on the planet rim. Start with sub-observer point
+			    if (nType==NomenclatureItemType::niSpecialPointEast || nType==NomenclatureItemType::niSpecialPointWest)
+			    {
+				QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core, false);
+				lng = - subObs.first[2]  * M_180_PI + ((nType==NomenclatureItemType::niSpecialPointEast) ? 90. : -90.);
+				Q_ASSERT(lat==0.);
+			    }
+			    // Center and Subsolar points are similar.
+			    if (nType==NomenclatureItemType::niSpecialPointCenter || nType==NomenclatureItemType::niSpecialPointSubSolar)
+			    {
+				QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core, false);
+				lat =   M_180_PI * (nType==NomenclatureItemType::niSpecialPointCenter ? subObs.first[1]: subObs.second[1]);
+				lng = - M_180_PI * (nType==NomenclatureItemType::niSpecialPointCenter ? subObs.first[2]: subObs.second[2]);
+			    }
+			    lng=StelUtils::fmodpos(lng, 360.);
+
+			    oss << QString("%1: %2/%3<br/>").arg(q_("Planetographic long./lat.")).arg(StelUtils::decDegToDmsStr(360.-lng), StelUtils::decDegToDmsStr(lat));
+			}
+			else
+				oss << QString("%1: %2/%3<br/>").arg(q_("Planetographic long./lat.")).arg(StelUtils::decDegToDmsStr(planet->isRotatingRetrograde() ? longitude : 360.-longitude), StelUtils::decDegToDmsStr(latitude));
 		}
 		else
 			oss << QString("%1: %2/%3<br/>").arg(q_("Planetographic long./lat.")).arg(StelUtils::decDegToDmsStr(longitude), StelUtils::decDegToDmsStr(latitude));
@@ -268,7 +291,7 @@ Vec3d NomenclatureItem::getJ2000EquatorialPos(const StelCore* core) const
 	// East/West points are assumed to be along the equator, on the planet rim. Start with sub-observer point
 	if (nType==NomenclatureItemType::niSpecialPointEast || nType==NomenclatureItemType::niSpecialPointWest)
 	{
-		QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core);
+		QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core, true);
 
 		longitude = - subObs.first[2]  * M_180_PI;
 		if (planet->isRotatingRetrograde()) longitude *= -1;
@@ -281,7 +304,7 @@ Vec3d NomenclatureItem::getJ2000EquatorialPos(const StelCore* core) const
 	// Center and Subsolar points are similar.
 	if (nType==NomenclatureItemType::niSpecialPointCenter || nType==NomenclatureItemType::niSpecialPointSubSolar)
 	{
-	    QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core);
+	    QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core, true);
 
 	    if (nType==NomenclatureItemType::niSpecialPointCenter)
 	    {
@@ -374,8 +397,9 @@ double NomenclatureItem::getSolarAltitude(const StelCore *core) const
 	QPair<Vec4d, Vec3d> ssop=planet->getSubSolarObserverPoints(core);
 	double sign=planet->isRotatingRetrograde() ? -1. : 1.;
 	double colongitude=450.*M_PI_180-sign*ssop.second[2];
-	double h=asin(sin(ssop.second[0])*sin(latitude*M_PI_180) +
+	double sinH= (sin(ssop.second[0])*sin(latitude*M_PI_180) +
 		      cos(ssop.second[0])*cos(latitude*M_PI_180)*sin(colongitude-longitude*M_PI_180));
+	double h = abs(sinH)<=1 ? asin(sinH) : M_PI_2 * StelUtils::sign(sinH);
 	return h*M_180_PI;
 }
 

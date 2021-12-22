@@ -387,6 +387,9 @@ public:
 	//! Get planetographic coordinates of subsolar and sub-observer points.
 	//! Only meaningful for earth-bound observers.
 	//! Source: Explanatory Supplement 2013, 10.4.1
+	//! @param jupiterGraphical Jupiter requires special treatment because its LII coordinate system does not
+	//!                         stay in sync with the texture. (GRS is moving). Set this to true to return the
+	//!                         incorrect, graphics-only longitude.
 	//! first[0]  = 10.26 phi_e     [rad] Planetocentric latitude of sub-earth point
 	//! first[1]  = 10.26 phi'_e	[rad] Planetographic latitude of sub-earth point
 	//! first[2]  = 10.26 lambda'_e	[rad] Planetographic longitude of sub-earth point (0..2pi)
@@ -397,7 +400,7 @@ public:
 	//! Note: For the Moon, it is more common to give Libration angles, where L=-lambda'_e, B=phi'_e.
 	//! Note: For Jupiter, this returns central meridian in L_II.
 	//! Note: For Saturn, this returns central meridian in L_III (rotation of magnetic field).
-	QPair<Vec4d, Vec3d> getSubSolarObserverPoints(const StelCore *core) const;
+	QPair<Vec4d, Vec3d> getSubSolarObserverPoints(const StelCore *core, bool jupiterGraphical=false) const;
 
 	//! returns if planet has retrograde rotation
 	bool isRotatingRetrograde() const { return re.W1<0.; }
