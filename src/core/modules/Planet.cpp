@@ -302,6 +302,8 @@ Planet::Planet(const QString& englishName,
 		deltaJDE = 0.001*StelCore::JD_SECOND;
 	}
 	propMgr = StelApp::getInstance().getStelPropertyManager();
+
+	Q_ASSERT_X(oneMinusOblateness<=1., "Planet.cpp", QString("1-oblateness too large: %1").arg(QString::number(oneMinusOblateness, 'f', 10)).toLatin1() );
 }
 
 // called in SolarSystem::init() before first planet is created. May initialize static variables.
@@ -1702,11 +1704,23 @@ Vec4d Planet::getRectangularCoordinates(const double longDeg, const double latDe
 	// We may extend the use of this method later.
 	Q_UNUSED(longDeg)
 	const double a = getEquatorialRadius();
-	const double bByA = getOneMinusOblateness(); // b/a;
+	const double bByA = qMin(1., getOneMinusOblateness()); // b/a;
+	qDebug() << "Planet" << englishName << "1-obl" << bByA << "or " << oneMinusOblateness;
+	Q_ASSERT(bByA<=1.);
 
 	// See some previous issues at https://github.com/Stellarium/stellarium/issues/391
-	const double latRad=latDeg*M_PI_180;
-	const double u = atan( bByA * tan(latRad));
+	// For unclear reasons latDeg can be nan. Safety measure:
+	const double latRad = isnan(latDeg) ? 0. : latDeg*M_PI_180;
+	Q_ASSERT_X(!isnan(latRad), "Planet.cpp", QString("NaN result for latRad. Object %1 latitude %2").arg(englishName).arg(QString::number(latDeg, 'f', 5)).toLatin1());
+	const double u = (abs(latRad) - M_PI_2 < 1e-10 ? latRad : atan( bByA * tan(latRad)) );
+	//qDebug() << "getTopographicOffsetFromCenter: a=" << a*AU << "b/a=" << bByA << "b=" << bByA*a *AU  << "latRad=" << latRad << "u=" << u;
+	// There seem to be numerical issues around tan/atan. Relieve the test a bit.
+	Q_ASSERT_X( fabs(u)-fabs(latRad) <= 1e-10, "Planet.cpp", QString("u: %1 latRad: %2 bByA: %3 latRad-u: %4 (%5)")
+								      .arg(QString::number(u))
+								      .arg(QString::number(latRad))
+								      .arg(QString::number(bByA, 'f', 10))
+								      .arg(QString::number(latRad-u))
+								      .arg(englishName).toLatin1() );
 	const double altFix = altMetres/(1000.0*AU*a);
 
 	const double rhoSinPhiPrime= bByA * sin(u) + altFix*sin(latRad);
