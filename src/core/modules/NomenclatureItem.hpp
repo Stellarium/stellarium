@@ -104,7 +104,9 @@ public:
 		niSaxum			= 57, // type="saxum"
 		niSpecialPointPole	= 100,// North and South Poles; special type
 		niSpecialPointEast	= 101,// East point; special type
-		niSpecialPointWest	= 102 // West point; special type
+		niSpecialPointWest	= 102,// West point; special type
+		niSpecialPointCenter    = 103,// Central point; special type
+		niSpecialPointSubSolar	= 104 // Subsolar point; special type
 	};
 	Q_ENUM(NomenclatureItemType)
 
@@ -186,8 +188,9 @@ private:
 	int identificator;
 	QString englishName, context, nameI18n;
 	NomenclatureItemType nType; // Type of nomenclature item
-	double latitude, size;      // degrees, km
+	mutable double latitude;    // degrees
 	mutable double longitude;   // degrees. Declared mutable to allow change in otherwise const methods (for special points)
+	double size;                //  km
 
 	LinearFader labelsFader;
 };

@@ -114,6 +114,16 @@ void NomenclatureMgr::loadSpecialNomenclature()
 		if (!nomW.isNull())
 			nomenclatureItems.insert(p, nomW);
 		featureId++;
+		// longitude is fake, used just to define the object
+		NomenclatureItemP nomC = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("Centre"), "", NomenclatureItem::niSpecialPointCenter, 0., 180., size));
+		if (!nomC.isNull())
+			nomenclatureItems.insert(p, nomC);
+		featureId++;
+		// longitude is fake, used just to define the object
+		NomenclatureItemP nomS = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("Subsolar"), "", NomenclatureItem::niSpecialPointSubSolar, 0., 180., size));
+		if (!nomS.isNull())
+			nomenclatureItems.insert(p, nomS);
+		featureId++;
 	}
 }
 
