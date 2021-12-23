@@ -129,7 +129,7 @@ SolarSystem::~SolarSystem()
 	// release selected:
 	selected.clear();
 	selectedSSO.clear();
-	for (auto* orb : orbits)
+	for (auto* orb : qAsConst(orbits))
 	{
 		delete orb;
 		orb = Q_NULLPTR;
@@ -148,7 +148,7 @@ SolarSystem::~SolarSystem()
 	allTrails = Q_NULLPTR;
 
 	// Get rid of circular reference between the shared pointers which prevent proper destruction of the Planet objects.
-	for (const auto& p : systemPlanets)
+	for (const auto& p : qAsConst(systemPlanets))
 	{
 		p->satellites.clear();
 	}
@@ -327,6 +327,33 @@ void SolarSystem::deinit()
 {
 	Planet::deinitShader();
 	Planet::deinitFBO();
+}
+
+void SolarSystem::resetTextures(const QString &planetName)
+{
+	if (planetName.isEmpty())
+	{
+		for (const auto& p : qAsConst(systemPlanets))
+		{
+			p->resetTextures();
+		}
+	}
+	else
+	{
+		PlanetP planet = searchByEnglishName(planetName);
+		if (!planet.isNull())
+			planet->resetTextures();
+	}
+
+}
+
+void SolarSystem::setTextureForPlanet(const QString& planetName, const QString& texName)
+{
+	PlanetP planet = searchByEnglishName(planetName);
+	if (!planet.isNull())
+		planet->replaceTexture(texName);
+	else
+		qWarning() << "The planet" << planetName << "was not found. Please check the name.";
 }
 
 void SolarSystem::recreateTrails()

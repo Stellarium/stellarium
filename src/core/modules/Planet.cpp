@@ -270,22 +270,30 @@ Planet::Planet(const QString& englishName,
 
 	//only try loading textures when there is actually something to load!
 	//prevents some overhead when starting
+	texMapFileOrig = QString();
 	if(!texMapName.isEmpty())
 	{
 		// TODO: use StelFileMgr::findFileInAllPaths() after introducing an Add-On Manager
 		QString texMapFile = StelFileMgr::findFile("textures/"+texMapName, StelFileMgr::File);
 		if (!texMapFile.isEmpty())
+		{
 			texMap = StelApp::getInstance().getTextureManager().createTextureThread(texMapFile, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+			texMapFileOrig = texMapFile;
+		}
 		else
 			qWarning()<<"Cannot resolve path to texture file"<<texMapName<<"of object"<<englishName;
 	}
 
+	normalMapFileOrig = QString();
 	if(!normalMapName.isEmpty())
 	{
 		// TODO: use StelFileMgr::findFileInAllPaths() after introducing an Add-On Manager
 		QString normalMapFile = StelFileMgr::findFile("textures/"+normalMapName, StelFileMgr::File);
 		if (!normalMapFile.isEmpty())
+		{
 			normalMap = StelApp::getInstance().getTextureManager().createTextureThread(normalMapFile, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+			normalMapFileOrig = normalMapFile;
+		}
 	}
 	//the OBJ is lazily loaded when first required
 	if(!aobjModelName.isEmpty())
@@ -321,6 +329,30 @@ Planet::~Planet()
 {
 	delete rings;
 	delete objModel;
+}
+
+void Planet::resetTextures()
+{
+	// restore texture
+	if (!texMapFileOrig.isEmpty())
+		texMap = StelApp::getInstance().getTextureManager().createTextureThread(texMapFileOrig, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+
+	// restore normal map
+	if (!normalMapFileOrig.isEmpty())
+		normalMap = StelApp::getInstance().getTextureManager().createTextureThread(normalMapFileOrig, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+}
+
+void Planet::replaceTexture(const QString &texName)
+{
+	if(!texName.isEmpty())
+	{
+		QString texMapFile = StelFileMgr::findFile("scripts/" + texName, StelFileMgr::File);
+		if (!texMapFile.isEmpty())
+			texMap = StelApp::getInstance().getTextureManager().createTextureThread(texMapFile, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+		else
+			qWarning()<<"Cannot resolve path to texture file"<<texName<<"of object"<<englishName;
+
+	}
 }
 
 void Planet::translateName(const StelTranslator& trans)

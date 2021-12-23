@@ -572,6 +572,9 @@ public:
 	//! @note This is based on Meeus, Astronomical Algorithms (2nd ed.), but deviates in details.
 	//! @note Limitation for efficiency: If this is a planet moon from another planet, we compute RTS for the parent planet instead!
 	virtual Vec4d getRTSTime(const StelCore* core, const double altitude=0.) const Q_DECL_OVERRIDE;
+
+	void resetTextures();
+	void replaceTexture(const QString& texName);
 	
 protected:
 	// These components for getInfoString() can be overridden in subclasses
@@ -745,6 +748,9 @@ protected:
 private:
 	class StelPropertyMgr* propMgr;
 	QString iauMoonNumber;
+	// File path for texture and normal map; both variables used for saving original names of files
+	QString texMapFileOrig;
+	QString normalMapFileOrig;
 
 	const QString getContextString() const;
 	QPair<double, double> getLunarEclipseMagnitudes() const;
