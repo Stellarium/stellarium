@@ -239,32 +239,27 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 	if (flags&Extra)
 	{
 		QString sLong = StelUtils::decDegToDmsStr(longitude), sLat = StelUtils::decDegToDmsStr(latitude);
-		if (nType>=NomenclatureItemType::niSpecialPointEast)
+		if (nType>=NomenclatureItemType::niSpecialPointEast && planet->getEnglishName()=="Jupiter")
 		{
-			if (planet->getEnglishName()=="Jupiter")
+			// Due to Jupiter's issues around GRS shift we must repeat some calculations here.
+			double lng=0., lat=0.;
+			// East/West points are assumed to be along the equator, on the planet rim. Start with sub-observer point
+			if (nType==NomenclatureItemType::niSpecialPointEast || nType==NomenclatureItemType::niSpecialPointWest)
 			{
-				// Due to Jupiter's issues around GRS shift we must repeat some calculations here.
-				double lng=0., lat=0.;
-				// East/West points are assumed to be along the equator, on the planet rim. Start with sub-observer point
-				if (nType==NomenclatureItemType::niSpecialPointEast || nType==NomenclatureItemType::niSpecialPointWest)
-				{
-					QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core, false);
-					lng = - subObs.first[2]  * M_180_PI + ((nType==NomenclatureItemType::niSpecialPointEast) ? 90. : -90.);
-					Q_ASSERT(lat==0.);
-				}
-				// Center and Subsolar points are similar.
-				if (nType==NomenclatureItemType::niSpecialPointCenter || nType==NomenclatureItemType::niSpecialPointSubSolar)
-				{
-					QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core, false);
-					lat =   M_180_PI * (nType==NomenclatureItemType::niSpecialPointCenter ? subObs.first[1]: subObs.second[1]);
-					lng = - M_180_PI * (nType==NomenclatureItemType::niSpecialPointCenter ? subObs.first[2]: subObs.second[2]);
-				}
-				lng   = StelUtils::fmodpos(lng, 360.);
-				sLong = StelUtils::decDegToDmsStr(360.-lng);
-				sLat  = StelUtils::decDegToDmsStr(lat);
+				QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core, false);
+				lng = - subObs.first[2]  * M_180_PI + ((nType==NomenclatureItemType::niSpecialPointEast) ? 90. : -90.);
+				Q_ASSERT(lat==0.);
 			}
-			else
-			    sLong = StelUtils::decDegToDmsStr(planet->isRotatingRetrograde() || planet->getEnglishName()=="Moon" ? longitude : 360.-longitude);
+			// Center and Subsolar points are similar.
+			if (nType==NomenclatureItemType::niSpecialPointCenter || nType==NomenclatureItemType::niSpecialPointSubSolar)
+			{
+				QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core, false);
+				lat =   M_180_PI * (nType==NomenclatureItemType::niSpecialPointCenter ? subObs.first[1]: subObs.second[1]);
+				lng = - M_180_PI * (nType==NomenclatureItemType::niSpecialPointCenter ? subObs.first[2]: subObs.second[2]);
+			}
+			lng   = StelUtils::fmodpos(lng, 360.);
+			sLong = StelUtils::decDegToDmsStr(360.-lng);
+			sLat  = StelUtils::decDegToDmsStr(lat);
 		}
 		oss << QString("%1: %2/%3<br/>").arg(q_("Planetographic long./lat."), sLong, sLat);
 		oss << QString("%1: %2<br/>").arg(q_("Celestial body"), planet->getNameI18n());
@@ -304,23 +299,23 @@ Vec3d NomenclatureItem::getJ2000EquatorialPos(const StelCore* core) const
 	// Center and Subsolar points are similar.
 	if (nType==NomenclatureItemType::niSpecialPointCenter || nType==NomenclatureItemType::niSpecialPointSubSolar)
 	{
-	    QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core, true);
+		QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core, true);
 
-	    if (nType==NomenclatureItemType::niSpecialPointCenter)
-	    {
-		longitude = - subObs.first[2] * M_180_PI;
-		if (planet->isRotatingRetrograde()) longitude *= -1;
-		latitude = subObs.first[1] * M_180_PI; // or first[0]???
-	    }
-	    else
-	    {
-		longitude = - subObs.second[2] * M_180_PI;
-		if (planet->isRotatingRetrograde()) longitude *= -1;
-		latitude = subObs.second[1] * M_180_PI; // or second[0]???
-	    }
-	    longitude=StelUtils::fmodpos(longitude, 360.);
-	    // rebuild XYZpc
-	    StelUtils::spheToRect(longitude * M_PI_180, latitude * M_PI_180, XYZpc);
+		if (nType==NomenclatureItemType::niSpecialPointCenter)
+		{
+			longitude = - subObs.first[2] * M_180_PI;
+			if (planet->isRotatingRetrograde()) longitude *= -1;
+			latitude = subObs.first[1] * M_180_PI; // or first[0]???
+		}
+		else
+		{
+			longitude = - subObs.second[2] * M_180_PI;
+			if (planet->isRotatingRetrograde()) longitude *= -1;
+			latitude = subObs.second[1] * M_180_PI; // or second[0]???
+		}
+		longitude=StelUtils::fmodpos(longitude, 360.);
+		// rebuild XYZpc
+		StelUtils::spheToRect(longitude * M_PI_180, latitude * M_PI_180, XYZpc);
 	}
 	// Calculate the radius of the planet at the item's position. It is necessary to re-scale it
 	Vec4d rect = planet->getRectangularCoordinates(longitude, latitude);
