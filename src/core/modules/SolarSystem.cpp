@@ -353,7 +353,7 @@ void SolarSystem::setTextureForPlanet(const QString& planetName, const QString& 
 	if (!planet.isNull())
 		planet->replaceTexture(texName);
 	else
-		qWarning() << "The planet" << planetName << "is not found. Please check the name.";
+		qWarning() << "The planet" << planetName << "was not found. Please check the name.";
 }
 
 void SolarSystem::recreateTrails()
