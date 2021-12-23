@@ -244,7 +244,7 @@ public:
 	//! if purpose=Position, [epoch-min(orbit_good, 365), epoch+min(orbit_good, 365)].
 	//! This should help to detect and avoid using outdated orbital elements.
 	Vec2d getValidPositionalDataRange(const PositionQuality purpose) const;
-	float getAxisRotation(void) { return axisRotation;} //! return axisRotation last computed in computeTransMatrix().
+	float getAxisRotation(void) { return axisRotation;} //! return axisRotation last computed in computeTransMatrix(). [degrees]
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods of SolarSystem object
@@ -361,6 +361,14 @@ public:
 	//! This requires both flavours of JD in cases involving Earth.
 	void computeTransMatrix(double JD, double JDE);
 
+	//! Retrieve planetocentric rectangular coordinates of a location on the ellipsoid surface, or with altitude altMetres above the ellipsoid surface.
+	//! Meeus, Astr. Alg. 2nd ed, Ch.11.
+	//! @param longDeg longitude of location, degrees. (currently unused. Set to 0.)
+	//! @param latDeg planetographic latitude, degrees.
+	//! @param altMetres altitude above ellipsoid surface (metres)
+	//! @return [rhoCosPhiPrime*a, rhoSinPhiPrime*a, phiPrime, rho*a] where a=equatorial radius
+	Vec4d getRectangularCoordinates(const double longDeg, const double latDeg, const double altMetres=0.) const;
+
 	//! Get the phase angle (radians) for an observer at pos obsPos in heliocentric coordinates (in AU)
 	double getPhaseAngle(const Vec3d& obsPos) const;
 	//! Get the elongation angle (radians) for an observer at pos obsPos in heliocentric coordinates (in AU)
@@ -379,6 +387,9 @@ public:
 	//! Get planetographic coordinates of subsolar and sub-observer points.
 	//! Only meaningful for earth-bound observers.
 	//! Source: Explanatory Supplement 2013, 10.4.1
+	//! @param jupiterGraphical Jupiter requires special treatment because its LII coordinate system does not
+	//!                         stay in sync with the texture. (GRS is moving). Set this to true to return the
+	//!                         incorrect, graphics-only longitude.
 	//! first[0]  = 10.26 phi_e     [rad] Planetocentric latitude of sub-earth point
 	//! first[1]  = 10.26 phi'_e	[rad] Planetographic latitude of sub-earth point
 	//! first[2]  = 10.26 lambda'_e	[rad] Planetographic longitude of sub-earth point (0..2pi)
@@ -389,7 +400,7 @@ public:
 	//! Note: For the Moon, it is more common to give Libration angles, where L=-lambda'_e, B=phi'_e.
 	//! Note: For Jupiter, this returns central meridian in L_II.
 	//! Note: For Saturn, this returns central meridian in L_III (rotation of magnetic field).
-	QPair<Vec4d, Vec3d> getSubSolarObserverPoints(const StelCore *core) const;
+	QPair<Vec4d, Vec3d> getSubSolarObserverPoints(const StelCore *core, bool jupiterGraphical=false) const;
 
 	//! returns if planet has retrograde rotation
 	bool isRotatingRetrograde() const { return re.W1<0.; }

@@ -101,7 +101,12 @@ public:
 		niReticulum		= 54, // type="reticulum"
 		niSatelliteFeature	= 55, // type="satellite feature"
 		niTessera		= 56, // type="tessera"
-		niSaxum			= 57  // type="saxum"
+		niSaxum			= 57, // type="saxum"
+		niSpecialPointPole	= 100,// North and South Poles; special type
+		niSpecialPointEast	= 101,// East point; special type
+		niSpecialPointWest	= 102,// West point; special type
+		niSpecialPointCenter    = 103,// Central point; special type
+		niSpecialPointSubSolar	= 104 // Subsolar point; special type
 	};
 	Q_ENUM(NomenclatureItemType)
 
@@ -164,11 +169,14 @@ protected:
 	static void createNameLists();
 
 private:
-	Vec3d XYZpc;                         // holds planetocentric position (from longitude/latitude)
-	mutable Vec3d XYZ;                   // holds J2000 position
-	mutable double jde;                  // jde time of XYZ value
+	mutable Vec3d XYZpc;   // holds planetocentric direction vector (unit length, from longitude/latitude). One-time conversion for fixed features, but mutable for special points.
+	mutable Vec3d XYZ;     // holds J2000 position in space (i.e. including planet position, offset from planetocenter)
+	mutable double jde;    // jde time of XYZ value
 	static Vec3f color;
 	static bool hideLocalNomenclature;
+
+	// ratio of angular size of feature to the FOV
+	float getAngularSizeRatio(const StelCore *core) const;
 
 	static QString getNomenclatureTypeLatinString(NomenclatureItemType nType);
 	static QString getNomenclatureTypeString(NomenclatureItemType nType);
@@ -179,8 +187,10 @@ private:
 	PlanetP planet;
 	int identificator;
 	QString englishName, context, nameI18n;
-	NomenclatureItemType nType;       // Type of nomenclature item
-	double latitude, longitude, size;  // degrees, degrees, km
+	NomenclatureItemType nType; // Type of nomenclature item
+	mutable double latitude;    // degrees
+	mutable double longitude;   // degrees. Declared mutable to allow change in otherwise const methods (for special points)
+	double size;                //  km
 
 	LinearFader labelsFader;
 };

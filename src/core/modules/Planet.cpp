@@ -302,6 +302,8 @@ Planet::Planet(const QString& englishName,
 		deltaJDE = 0.001*StelCore::JD_SECOND;
 	}
 	propMgr = StelApp::getInstance().getStelPropertyManager();
+
+	Q_ASSERT_X(oneMinusOblateness<=1., "Planet.cpp", QString("1-oblateness too large: %1").arg(QString::number(oneMinusOblateness, 'f', 10)).toLatin1() );
 }
 
 // called in SolarSystem::init() before first planet is created. May initialize static variables.
@@ -1691,6 +1693,45 @@ void Planet::computeTransMatrix(double JD, double JDE)
 	//addToExtraInfoString(DebugAid, debugAid);
 }
 
+// Retrieve planetocentric rectangular coordinates of a location on the ellipsoid surface
+// Meeus, Astr. Alg. 2nd ed, Ch.11.
+// @return [rhoCosPhiPrime*a, rhoSinPhiPrime*a, phiPrime, rho*a] where a=equatorial radius
+Vec4d Planet::getRectangularCoordinates(const double longDeg, const double latDeg, const double altMetres) const
+{
+	if (getPlanetType()==Planet::isArtificial || getPlanetType()==Planet::isObserver || getEnglishName().contains("Spaceship", Qt::CaseInsensitive))
+		return Vec4d(0.);
+
+	// We may extend the use of this method later.
+	Q_UNUSED(longDeg)
+	const double a = getEquatorialRadius();
+	const double bByA = qMin(1., getOneMinusOblateness()); // b/a;
+	//qDebug() << "Planet" << englishName << "1-obl" << bByA << "or " << oneMinusOblateness;
+	Q_ASSERT(bByA<=1.);
+
+	// See some previous issues at https://github.com/Stellarium/stellarium/issues/391
+	// For unclear reasons latDeg can be nan. Safety measure:
+	const double latRad = std::isnan(latDeg) ? 0. : latDeg*M_PI_180;
+	Q_ASSERT_X(!std::isnan(latRad), "Planet.cpp", QString("NaN result for latRad. Object %1 latitude %2").arg(englishName).arg(QString::number(latDeg, 'f', 5)).toLatin1());
+	const double u = (abs(latRad) - M_PI_2 < 1e-10 ? latRad : atan( bByA * tan(latRad)) );
+	//qDebug() << "getTopographicOffsetFromCenter: a=" << a*AU << "b/a=" << bByA << "b=" << bByA*a *AU  << "latRad=" << latRad << "u=" << u;
+	// There seem to be numerical issues around tan/atan. Relieve the test a bit.
+	Q_ASSERT_X( fabs(u)-fabs(latRad) <= 1e-10, "Planet.cpp", QString("u: %1 latRad: %2 bByA: %3 latRad-u: %4 (%5)")
+								      .arg(QString::number(u))
+								      .arg(QString::number(latRad))
+								      .arg(QString::number(bByA, 'f', 10))
+								      .arg(QString::number(latRad-u))
+								      .arg(englishName).toLatin1() );
+	const double altFix = altMetres/(1000.0*AU*a);
+
+	const double rhoSinPhiPrime= bByA * sin(u) + altFix*sin(latRad);
+	const double rhoCosPhiPrime=        cos(u) + altFix*cos(latRad);
+
+	const double rho = sqrt(rhoSinPhiPrime*rhoSinPhiPrime+rhoCosPhiPrime*rhoCosPhiPrime);
+	double phiPrime=asin(rhoSinPhiPrime/rho);
+	return Vec4d(rhoCosPhiPrime*a, rhoSinPhiPrime*a, phiPrime, rho*a);
+}
+
+
 Mat4d Planet::getRotEquatorialToVsop87(void) const
 {
 	Mat4d rval = rotLocalToParent;
@@ -1936,7 +1977,7 @@ float Planet::getPAsun(const Vec3d &sunPos, const Vec3d &objPos)
 // Get planetographic coordinates of subsolar and sub-observer points.
 // Source: Explanatory Supplement 2013, 10.4.1
 // Erroneous expression 10.27 fixed by Explan. Suppl. 1992, 7.12-26.
-QPair<Vec4d, Vec3d> Planet::getSubSolarObserverPoints(const StelCore *core) const
+QPair<Vec4d, Vec3d> Planet::getSubSolarObserverPoints(const StelCore *core, bool jupiterGraphical) const
 {
 //	QString debugAid;
 	QPair<Vec4d, Vec3d>ret;
@@ -1984,7 +2025,7 @@ QPair<Vec4d, Vec3d> Planet::getSubSolarObserverPoints(const StelCore *core) cons
 	// sub-earth point (10.19)
 	Vec3d n=PrecNut*Vec3d(cosd0*cosa0, cosd0*sina0, sind0);
 	// Rotation W is OK for all planets except Jupiter: return simple W_II to remove GRS adaptation shift.
-	const double W= (englishName=="Jupiter" ?
+	const double W= ( ((englishName=="Jupiter") && !jupiterGraphical )  ?
 			re.W0+ remainder( (core->getJDE()-J2000 - Dr.length()*(AU/(SPEED_OF_LIGHT*86400.)))*re.W1, 360.) :
 			re.currentAxisW);
 	const double sinW=sin(W*M_PI_180);
