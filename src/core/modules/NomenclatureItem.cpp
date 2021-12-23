@@ -240,35 +240,41 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 
 	if (flags&Extra)
 	{
-		QString sLong = StelUtils::decDegToDmsStr(longitude), sLat = StelUtils::decDegToDmsStr(latitude);
-		if (nType>=NomenclatureItemType::niSpecialPointEast && planet->getEnglishName()=="Jupiter")
+		if (nType < NomenclatureItemType::niSpecialPointPole)
 		{
-			// Due to Jupiter's issues around GRS shift we must repeat some calculations here.
-			double lng=0., lat=0.;
-			// East/West points are assumed to be along the equator, on the planet rim. Start with sub-observer point
-			if (nType==NomenclatureItemType::niSpecialPointEast || nType==NomenclatureItemType::niSpecialPointWest)
+			// TODO for 0.22.0 It seems the (numerical) planetary longitudes of NomenclatureItems are off by (usually) 360-longitude.
+			// For 0.21.3 we must now hide the coordinates for the special points, but fix this ASAP.
+			QString sLong = StelUtils::decDegToDmsStr(longitude), sLat = StelUtils::decDegToDmsStr(latitude);
+			if (nType>=NomenclatureItemType::niSpecialPointEast && planet->getEnglishName()=="Jupiter")
 			{
-				QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core, false);
-				lng = - subObs.first[2]  * M_180_PI + ((nType==NomenclatureItemType::niSpecialPointEast) ? 90. : -90.);
-				Q_ASSERT(lat==0.);
+				// Due to Jupiter's issues around GRS shift we must repeat some calculations here.
+				double lng=0., lat=0.;
+				// East/West points are assumed to be along the equator, on the planet rim. Start with sub-observer point
+				if (nType==NomenclatureItemType::niSpecialPointEast || nType==NomenclatureItemType::niSpecialPointWest)
+				{
+					QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core, false);
+					lng = - subObs.first[2]  * M_180_PI + ((nType==NomenclatureItemType::niSpecialPointEast) ? 90. : -90.);
+					Q_ASSERT(lat==0.);
+				}
+				// Center and Subsolar points are similar.
+				if (nType==NomenclatureItemType::niSpecialPointCenter || nType==NomenclatureItemType::niSpecialPointSubSolar)
+				{
+					QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core, false);
+					lat =   M_180_PI * (nType==NomenclatureItemType::niSpecialPointCenter ? subObs.first[1]: subObs.second[1]);
+					lng = - M_180_PI * (nType==NomenclatureItemType::niSpecialPointCenter ? subObs.first[2]: subObs.second[2]);
+				}
+				lng   = StelUtils::fmodpos(lng, 360.);
+				sLong = StelUtils::decDegToDmsStr(360.-lng);
+				sLat  = StelUtils::decDegToDmsStr(lat);
 			}
-			// Center and Subsolar points are similar.
-			if (nType==NomenclatureItemType::niSpecialPointCenter || nType==NomenclatureItemType::niSpecialPointSubSolar)
-			{
-				QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core, false);
-				lat =   M_180_PI * (nType==NomenclatureItemType::niSpecialPointCenter ? subObs.first[1]: subObs.second[1]);
-				lng = - M_180_PI * (nType==NomenclatureItemType::niSpecialPointCenter ? subObs.first[2]: subObs.second[2]);
-			}
-			lng   = StelUtils::fmodpos(lng, 360.);
-			sLong = StelUtils::decDegToDmsStr(360.-lng);
-			sLat  = StelUtils::decDegToDmsStr(lat);
+			oss << QString("%1: %2/%3<br/>").arg(q_("Planetographic long./lat."), sLong, sLat);
 		}
-		oss << QString("%1: %2/%3<br/>").arg(q_("Planetographic long./lat."), sLong, sLat);
 		oss << QString("%1: %2<br/>").arg(q_("Celestial body"), planet->getNameI18n());
 		QString description = getNomenclatureTypeDescription(nType, planet->getEnglishName());
 		if (nType!=NomenclatureItem::niUNDEFINED && nType<NomenclatureItem::niSpecialPointPole && !description.isEmpty())
 			oss << QString("%1: %2<br/>").arg(q_("Landform description"), description);
-		oss << QString("%1: %2°<br/>").arg(q_("Solar altitude"), QString::number(getSolarAltitude(core), 'f', 1));
+		if (planet->getEnglishName()!="Jupiter") // we must exclude this for now due to Jupiter's "off" rotation
+			oss << QString("%1: %2°<br/>").arg(q_("Solar altitude"), QString::number(getSolarAltitude(core), 'f', 1));
 	}
 
 	postProcessInfoString(str, flags);
