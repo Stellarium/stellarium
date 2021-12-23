@@ -523,12 +523,12 @@ void NomenclatureMgr::updateI18n()
 {
 	NomenclatureItem::createNameLists();
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getPlanetaryFeaturesTranslator();
-	const StelTranslator& transPole = StelApp::getInstance().getLocaleMgr().getAppStelTranslator();
+	const StelTranslator& transSpecial = StelApp::getInstance().getLocaleMgr().getAppStelTranslator();
 	for (const auto& i : qAsConst(nomenclatureItems))
 	{
 		NomenclatureItem::NomenclatureItemType niType = i->getNomenclatureType();
-		if (niType==NomenclatureItem::niSpecialPointPole || niType==NomenclatureItem::niSpecialPointEast || niType==NomenclatureItem::niSpecialPointWest)
-			i->translateName(transPole);
+		if (niType>=NomenclatureItem::niSpecialPointPole)
+			i->translateName(transSpecial);
 		else
 			i->translateName(trans);
 	}
