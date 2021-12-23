@@ -157,7 +157,7 @@ float NomenclatureItem::getSelectPriority(const StelCore* core) const
 	if (getFlagLabels())
 	{
 		const float scale = getAngularSizeRatio(core);
-		if (planet->getVMagnitude(core)>=20.f || (planet->getJ2000EquatorialPos(core).length() < getJ2000EquatorialPos(core).length()))
+		if (planet->getVMagnitude(core)>=20.f || (planet->getJ2000EquatorialPos(core).lengthSquared() < getJ2000EquatorialPos(core).lengthSquared()))
 		{
 			// The feature on far-side of the planet or the planet is too faint for view
 			// (in deep shadow for example), so let's disable selecting the nomenclature
@@ -166,8 +166,10 @@ float NomenclatureItem::getSelectPriority(const StelCore* core) const
 		else if (scale>=0.015f)
 		{
 			// The item may be good selectable when it over 37px size only
-			priority -= (20.f + scale*100.f);
-			//priority = planet->getSelectPriority(core) - scale*100.f;
+			//priority -= (20.f + scale*100.f);
+			priority = planet->getSelectPriority(core) - scale*100.f;
+			if (nType>=NomenclatureItemType::niSpecialPointPole)
+				priority -= 10.f;
 		}
 		else
 			priority -= 2.f;
