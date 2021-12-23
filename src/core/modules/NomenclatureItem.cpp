@@ -380,7 +380,7 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 	Vec3d srcPos;
 	const float scale = getAngularSizeRatio(core);
 	NomenclatureItem::NomenclatureItemType niType = getNomenclatureType();
-	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (equPos.length() >= XYZ.length())
+	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (equPos.lengthSquared() >= XYZ.lengthSquared())
 	    && (scale>0.04f && (scale<0.5f || niType>=NomenclatureItem::niSpecialPointPole )))
 	{
 		float brightness=(getSolarAltitude(core)<0. ? 0.25f : 1.0f);
