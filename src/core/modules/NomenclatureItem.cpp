@@ -159,7 +159,8 @@ float NomenclatureItem::getSelectPriority(const StelCore* core) const
 		const float scale = getAngularSizeRatio(core);
 		if (planet->getVMagnitude(core)>=20.f || (planet->getJ2000EquatorialPos(core).length() < getJ2000EquatorialPos(core).length()))
 		{
-			// The feature of far-side of the planet or the planet is too faint for view (in deep shadow for example), so let's disable selecting the nomenclature
+			// The feature on far-side of the planet or the planet is too faint for view
+			// (in deep shadow for example), so let's disable selecting the nomenclature
 			priority += 25.f;
 		}
 		else if (scale>=0.015f)
