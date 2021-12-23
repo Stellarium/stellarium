@@ -237,7 +237,7 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 
 	if (flags&Extra)
 	{
-		QString sLong = StelUtils::decDegToDmsStr(planet->isRotatingRetrograde() ? longitude : 360.-longitude), sLat = StelUtils::decDegToDmsStr(latitude);
+		QString sLong = StelUtils::decDegToDmsStr(longitude), sLat = StelUtils::decDegToDmsStr(latitude);
 		if (nType>=NomenclatureItemType::niSpecialPointEast)
 		{
 			if (planet->getEnglishName()=="Jupiter")
@@ -262,6 +262,8 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 				sLong = StelUtils::decDegToDmsStr(360.-lng);
 				sLat  = StelUtils::decDegToDmsStr(lat);
 			}
+			else
+			    sLong = StelUtils::decDegToDmsStr(planet->isRotatingRetrograde() || planet->getEnglishName()=="Moon" ? longitude : 360.-longitude);
 		}
 		oss << QString("%1: %2/%3<br/>").arg(q_("Planetographic long./lat."), sLong, sLat);
 		oss << QString("%1: %2<br/>").arg(q_("Celestial body"), planet->getNameI18n());
