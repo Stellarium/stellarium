@@ -865,7 +865,7 @@ SatFlags Satellite::getFlags() const
 		flags |= SatHEO;
 	if (eccentricity < 0.25 && (inclination>=25. && inclination<=180.) && (orbitalPeriod>=1100. && orbitalPeriod<=2000.))
 		flags |= SatHGSO;
-	if (StelApp::getInstance().getCore()->getJD() - tleEpochJD > 30.) // TLE epoch is over 30 days old
+	if (qAbs(StelApp::getInstance().getCore()->getJD() - tleEpochJD) > 30.) // TLE epoch is over 30 days old
 		flags |= SatOutdatedTLE;
 	return flags;
 }
