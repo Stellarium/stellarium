@@ -86,7 +86,8 @@ enum SatFlag
 	SatMEO			= 0x0400,
 	SatGSO			= 0x0800,
 	SatHEO			= 0x1000,
-	SatHGSO			= 0x2000
+	SatHGSO			= 0x2000,
+	SatOutdatedTLE		= 0x4000
 };
 typedef QFlags<SatFlag> SatFlags;
 Q_DECLARE_OPERATORS_FOR_FLAGS(SatFlags)
@@ -116,13 +117,13 @@ public:
 	enum OptStatus
 	{
 		StatusOperational		= 1,
-		StatusNonoperational	= 2,
+		StatusNonoperational		= 2,
 		StatusPartiallyOperational	= 3,
 		StatusStandby			= 4,
 		StatusSpare			= 5,
-		StatusExtendedMission	= 6,
+		StatusExtendedMission		= 6,
 		StatusDecayed			= 7,
-		StatusUnknown		= 0
+		StatusUnknown			= 0
 	};
 	Q_ENUM(OptStatus)
 
@@ -269,6 +270,8 @@ private:
 	QString internationalDesignator;
 	//! Epoch of the TLE
 	QString tleEpoch;
+	//! Epoch of the TLE (JD)
+	double tleEpochJD;
 	//! Julian date of Jan 1st of the launch year.
 	//! Used to hide satellites before their launch date.
 	//! Extracted from TLE set with parseInternationalDesignator().
@@ -314,6 +317,7 @@ private:
 	static Vec3f transitSatelliteColor;
 
 	static double timeRateLimit;
+	static int tleEpochAge;
 
 	void draw(StelCore *core, StelPainter& painter);
 

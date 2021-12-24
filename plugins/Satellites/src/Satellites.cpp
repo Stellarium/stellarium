@@ -584,6 +584,7 @@ void Satellites::restoreDefaultSettings()
 	conf->setValue("orbit_line_segments", 90);
 	conf->setValue("orbit_fade_segments", 5);
 	conf->setValue("orbit_segment_duration", 20);
+	conf->setValue("valid_epoch_age", 30);
 	conf->setValue("iconic_mode_enabled", false);
 	
 	conf->endGroup(); // saveTleSources() opens it for itself
@@ -739,6 +740,7 @@ void Satellites::loadSettings()
 	setInvisibleSatelliteColor(Vec3f(conf->value("invisible_satellite_color", "0.2,0.2,0.2").toString()));
 	setTransitSatelliteColor(Vec3f(conf->value("transit_satellite_color", "0.0,0.0,0.0").toString()));
 	Satellite::timeRateLimit = conf->value("time_rate_limit", 1.0).toDouble();
+	Satellite::tleEpochAge = conf->value("valid_epoch_age", 30).toInt();
 
 	// iconic mode
 	setFlagIconicMode(conf->value("iconic_mode_enabled", false).toBool());
@@ -771,6 +773,8 @@ void Satellites::saveSettingsToConfig()
 	conf->setValue("orbit_line_segments", Satellite::orbitLineSegments);
 	conf->setValue("orbit_fade_segments", Satellite::orbitLineFadeSegments);
 	conf->setValue("orbit_segment_duration", Satellite::orbitLineSegmentDuration);
+
+	conf->setValue("valid_epoch_age", Satellite::tleEpochAge);
 
 	// iconic mode
 	conf->setValue("iconic_mode_enabled", getFlagIconicMode());
@@ -1441,6 +1445,15 @@ void Satellites::setOrbitLineSegmentDuration(int s)
 		Satellite::orbitLineSegmentDuration=s;
 		emit orbitLineSegmentDurationChanged(s);
 		recalculateOrbitLines();
+	}
+}
+
+void Satellites::setTleEpochAgeDays(int age)
+{
+	if (age != Satellite::tleEpochAge)
+	{
+		Satellite::tleEpochAge=age;
+		emit tleEpochAgeDaysChanged(age);
 	}
 }
 

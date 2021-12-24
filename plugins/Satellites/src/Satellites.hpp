@@ -161,6 +161,7 @@ class Satellites : public StelObjectModule
 	Q_PROPERTY(int  orbitLineSegments        READ getOrbitLineSegments        WRITE setOrbitLineSegments        NOTIFY orbitLineSegmentsChanged)
 	Q_PROPERTY(int  orbitLineFadeSegments    READ getOrbitLineFadeSegments    WRITE setOrbitLineFadeSegments    NOTIFY orbitLineFadeSegmentsChanged)
 	Q_PROPERTY(int  orbitLineSegmentDuration READ getOrbitLineSegmentDuration WRITE setOrbitLineSegmentDuration NOTIFY orbitLineSegmentDurationChanged)
+	Q_PROPERTY(int  tleEpochAgeDays     READ getTleEpochAgeDays     WRITE setTleEpochAgeDays     NOTIFY tleEpochAgeDaysChanged)
 	Q_PROPERTY(Vec3f invisibleSatelliteColor READ getInvisibleSatelliteColor  WRITE setInvisibleSatelliteColor  NOTIFY invisibleSatelliteColorChanged)
 	Q_PROPERTY(Vec3f transitSatelliteColor   READ getTransitSatelliteColor    WRITE setTransitSatelliteColor    NOTIFY transitSatelliteColorChanged)
 	
@@ -382,6 +383,7 @@ signals:
 	void orbitLineSegmentsChanged(int i);
 	void orbitLineFadeSegmentsChanged(int i);
 	void orbitLineSegmentDurationChanged(int i);
+	void tleEpochAgeDaysChanged(int i);
 	void invisibleSatelliteColorChanged(Vec3f);
 	void transitSatelliteColorChanged(Vec3f);
 
@@ -503,6 +505,11 @@ public slots:
 	int getOrbitLineSegmentDuration() const {return Satellite::orbitLineSegmentDuration;}
 	//! set duration of a single segments
 	void setOrbitLineSegmentDuration(int s);
+
+	//! return the valid age of TLE's epoch
+	int getTleEpochAgeDays() const { return Satellite::tleEpochAge; }
+	//! set the valid age of TLE's epoch
+	void setTleEpochAgeDays(int age);
 
 	void recalculateOrbitLines(void);
 
