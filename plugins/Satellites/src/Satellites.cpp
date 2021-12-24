@@ -1193,6 +1193,13 @@ bool Satellites::add(const TleData& tleData)
 		if (tleData.status==Satellite::StatusNonoperational)
 			satGroups.append("non-operational");
 	}
+	if (tleData.sourceURL.contains("celestrak.com", Qt::CaseInsensitive))
+	{
+		// add groups, based on Celestrak's groups
+		QString fileName = QUrl(tleData.sourceURL).fileName().toLower().replace(".txt", "");
+		if (!satGroups.contains(fileName))
+			satGroups.append(fileName);
+	}
 	if (!satGroups.isEmpty())
 	{
 		satProperties.insert("groups", satGroups);
@@ -1624,9 +1631,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 			continue;
 		if (updateSources[i].file->open(QFile::ReadOnly|QFile::Text))
 		{
-			parseTleFile(*updateSources[i].file,
-			             newData,
-			             updateSources[i].addNew);
+			parseTleFile(*updateSources[i].file, newData, updateSources[i].addNew, updateSources[i].url.toString(QUrl::None));
 			updateSources[i].file->close();
 			delete updateSources[i].file;
 			updateSources[i].file = Q_NULLPTR;
@@ -1825,9 +1830,7 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	emit(tleUpdateComplete(updatedCount, totalCount, addedCount, missingCount));
 }
 
-void Satellites::parseTleFile(QFile& openFile,
-                              TleDataHash& tleList,
-                              bool addFlagValue)
+void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFlagValue, const QString &tleURL)
 {
 	if (!openFile.isOpen() || !openFile.isReadable())
 		return;
@@ -1835,7 +1838,6 @@ void Satellites::parseTleFile(QFile& openFile,
 	// Code mostly re-used from updateFromFiles()
 	int lineNumber = 0;
 	TleData lastData;
-	lastData.addThis = addFlagValue;
 
 	// Celestrak's "status code" list
 	const QMap<QString, Satellite::OptStatus> satOpStatusMap = {
@@ -1857,6 +1859,7 @@ void Satellites::parseTleFile(QFile& openFile,
 			// New entry in the list, so reset all fields
 			lastData = TleData();
 			lastData.addThis = addFlagValue;
+			lastData.sourceURL = tleURL;
 			
 			// The thing in square brackets after the name is actually
 			// Celestrak's "status code". Parse it!

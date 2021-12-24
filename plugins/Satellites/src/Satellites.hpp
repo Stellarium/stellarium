@@ -101,6 +101,8 @@ struct TleData
 	//! Flag indicating whether this satellite should be added.
 	//! See Satellites::autoAddEnabled.
 	bool addThis;
+	//! Source of TLE (URL), can be used for assign satellites group
+	QString sourceURL;
 };
 
 //! @ingroup satellites
@@ -345,11 +347,10 @@ public:
 	//! \param openFile a reference to an \b open file.
 	//! @param[in,out] tleList a hash with satellite IDs as keys.
 	//! @param[in] addFlagValue value to be set to TleData::addThis for all.
+	//! @param[in] tleURL a URL of TLE's source (e.g. Celestrak URL)
 	//! @todo If this can accept a QIODevice, it will be able to read directly
 	//! QNetworkReply-s... --BM
-	static void parseTleFile(QFile& openFile,
-	                         TleDataHash& tleList,
-				 bool addFlagValue = false);
+	static void parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFlagValue = false, const QString& tleURL = "");
 
 	//! Insert a three line TLE into the hash array.
 	//! @param[in] line The second line from the TLE
