@@ -719,8 +719,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		{
 			QString sMTwilight = qc_("Morning twilight", "celestial event");
 			QString sETwilight = qc_("Evening twilight", "celestial event");
-			double lengthOfDay = sunset - sunrise;
-			double twilightAltitude = omgr->getTwilightAltitude();
+			const double twilightAltitude = omgr->getTwilightAltitude();
 			QString alt = QString::number(twilightAltitude, 'f', 1);
 			Vec4d twilight = getRTSTime(core, twilightAltitude);
 			if (twilight[3]==0.)
@@ -737,6 +736,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 				else
 					res += QString("%1 (h=%2°): %3<br/>").arg(sETwilight, alt, StelUtils::hoursToHmsStr(hour, true));
 			}
+			double lengthOfDay = sunset - sunrise;
 			if (lengthOfDay<24.)
 			{
 				QString sDay = q_("Daytime");
