@@ -494,6 +494,7 @@ void Satellite::calculateEpochFromLine1(QString tle)
 				.arg(StelUtils::hoursToHmsStr(24.*(dayOfYear-static_cast<int>(dayOfYear)), true));
 
 	tleEpoch = epochStr;
+	tleEpochJD = epoch.toJulianDay();
 }
 
 QVariantMap Satellite::getInfoMap(const StelCore *core) const
@@ -864,6 +865,8 @@ SatFlags Satellite::getFlags() const
 		flags |= SatHEO;
 	if (eccentricity < 0.25 && (inclination>=25. && inclination<=180.) && (orbitalPeriod>=1100. && orbitalPeriod<=2000.))
 		flags |= SatHGSO;
+	if (StelApp::getInstance().getCore()->getJD() - tleEpochJD > 30.) // TLE epoch is over 30 days old
+		flags |= SatOudatedTLE;
 	return flags;
 }
 

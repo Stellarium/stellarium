@@ -420,6 +420,8 @@ void SatellitesDialog::filterListByGroup(int index)
 		filterModel->setSecondaryFilters(QString(), SatHEO);
 	else if (groupId == "[HGSO]")
 		filterModel->setSecondaryFilters(QString(), SatHGSO);
+	else if (groupId == "[outdatedTLE]")
+		filterModel->setSecondaryFilters(QString(), SatOudatedTLE);
 	else
 		filterModel->setSecondaryFilters(groupId, SatNoFlags);
 
@@ -1010,6 +1012,7 @@ void SatellitesDialog::populateFilterMenu()
 	ui->groupFilterCombo->insertItem(0, q_("[HEO satellites]"), QVariant("[HEO]"));
 	// TRANSLATORS: HGEO = High geosynchronous orbit
 	ui->groupFilterCombo->insertItem(0, q_("[HGSO satellites]"), QVariant("[HGSO]"));
+	ui->groupFilterCombo->insertItem(0, q_("[outdated TLE]"), QVariant("[outdatedTLE]"));
 	ui->groupFilterCombo->insertItem(0, q_("[all]"), QVariant("all"));
 
 	// Restore current selection

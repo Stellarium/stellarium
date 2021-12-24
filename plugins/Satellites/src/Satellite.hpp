@@ -86,7 +86,8 @@ enum SatFlag
 	SatMEO			= 0x0400,
 	SatGSO			= 0x0800,
 	SatHEO			= 0x1000,
-	SatHGSO			= 0x2000
+	SatHGSO			= 0x2000,
+	SatOudatedTLE		= 0x4000
 };
 typedef QFlags<SatFlag> SatFlags;
 Q_DECLARE_OPERATORS_FOR_FLAGS(SatFlags)
@@ -269,6 +270,8 @@ private:
 	QString internationalDesignator;
 	//! Epoch of the TLE
 	QString tleEpoch;
+	//! Epoch of the TLE (JD)
+	double tleEpochJD;
 	//! Julian date of Jan 1st of the launch year.
 	//! Used to hide satellites before their launch date.
 	//! Extracted from TLE set with parseInternationalDesignator().
