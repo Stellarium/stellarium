@@ -317,6 +317,7 @@ private:
 	static Vec3f transitSatelliteColor;
 
 	static double timeRateLimit;
+	static int tleEpochAge;
 
 	void draw(StelCore *core, StelPainter& painter);
 

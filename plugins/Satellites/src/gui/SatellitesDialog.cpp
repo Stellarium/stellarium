@@ -189,6 +189,8 @@ void SatellitesDialog::createDialogContent()
 	connectIntProperty(ui->orbitSegmentsSpin, "Satellites.orbitLineSegments");
 	connectIntProperty(ui->orbitFadeSpin,     "Satellites.orbitLineFadeSegments");
 	connectIntProperty(ui->orbitDurationSpin, "Satellites.orbitLineSegmentDuration");
+	// Settings tab / TLE group
+	connectIntProperty(ui->validAgeSpinBox, "Satellites.tleEpochAgeDays");
 
 	// Satellites tab
 	filterModel = new SatellitesListFilterModel(this);
