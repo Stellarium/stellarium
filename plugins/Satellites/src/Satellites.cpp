@@ -1193,10 +1193,10 @@ bool Satellites::add(const TleData& tleData)
 		if (tleData.status==Satellite::StatusNonoperational)
 			satGroups.append("non-operational");
 	}
-	if (tleData.source.contains("celestrak.com", Qt::CaseInsensitive))
+	if (tleData.sourceURL.contains("celestrak.com", Qt::CaseInsensitive))
 	{
 		// add groups, based on Celestrak's groups
-		QString fileName = QUrl(tleData.source).fileName().toLower().replace(".txt", "");
+		QString fileName = QUrl(tleData.sourceURL).fileName().toLower().replace(".txt", "");
 		if (!satGroups.contains(fileName))
 			satGroups.append(fileName);
 	}
@@ -1830,7 +1830,7 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	emit(tleUpdateComplete(updatedCount, totalCount, addedCount, missingCount));
 }
 
-void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFlagValue, const QString &sourceTLE)
+void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFlagValue, const QString &tleURL)
 {
 	if (!openFile.isOpen() || !openFile.isReadable())
 		return;
@@ -1859,7 +1859,7 @@ void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFla
 			// New entry in the list, so reset all fields
 			lastData = TleData();
 			lastData.addThis = addFlagValue;
-			lastData.source = sourceTLE;
+			lastData.sourceURL = tleURL;
 			
 			// The thing in square brackets after the name is actually
 			// Celestrak's "status code". Parse it!
