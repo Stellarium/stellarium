@@ -715,14 +715,36 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			sunset = hour;
 		}
 
-		double lengthOfDay = sunset - sunrise;
-		if (isSun && lengthOfDay<24.)
+		if (isSun)
 		{
-			QString sDay = q_("Daytime");
-			if (withTables)
-				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sDay, StelUtils::hoursToHmsStr(lengthOfDay, true));
-			else
-				res += QString("%1: %2<br/>").arg(sDay, StelUtils::hoursToHmsStr(lengthOfDay, true));
+			QString sMTwilight = qc_("Morning twilight", "celestial event");
+			QString sETwilight = qc_("Evening twilight", "celestial event");
+			double lengthOfDay = sunset - sunrise;
+			double twilightAltitude = omgr->getTwilightAltitude();
+			QString alt = QString::number(twilightAltitude, 'f', 1);
+			Vec4d twilight = getRTSTime(core, twilightAltitude);
+			if (twilight[3]==0.)
+			{
+				hour = StelUtils::getHoursFromJulianDay(twilight[0]+utcShift);
+				if (withTables)
+					res += QString("<tr><td>%1 (h=%2°):</td><td style='text-align:right;'>%3</td></tr>").arg(sMTwilight, alt, StelUtils::hoursToHmsStr(hour, true));
+				else
+					res += QString("%1 (h=%2°): %3<br/>").arg(sMTwilight, alt, StelUtils::hoursToHmsStr(hour, true));
+
+				hour = StelUtils::getHoursFromJulianDay(twilight[2]+utcShift);
+				if (withTables)
+					res += QString("<tr><td>%1 (h=%2°):</td><td style='text-align:right;'>%3</td></tr>").arg(sETwilight, alt, StelUtils::hoursToHmsStr(hour, true));
+				else
+					res += QString("%1 (h=%2°): %3<br/>").arg(sETwilight, alt, StelUtils::hoursToHmsStr(hour, true));
+			}
+			if (lengthOfDay<24.)
+			{
+				QString sDay = q_("Daytime");
+				if (withTables)
+					res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sDay, StelUtils::hoursToHmsStr(lengthOfDay, true));
+				else
+					res += QString("%1: %2<br/>").arg(sDay, StelUtils::hoursToHmsStr(lengthOfDay, true));
+			}
 		}
 
 		if (withTables)
