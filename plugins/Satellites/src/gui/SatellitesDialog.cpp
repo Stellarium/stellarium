@@ -421,7 +421,7 @@ void SatellitesDialog::filterListByGroup(int index)
 	else if (groupId == "[HGSO]")
 		filterModel->setSecondaryFilters(QString(), SatHGSO);
 	else if (groupId == "[outdatedTLE]")
-		filterModel->setSecondaryFilters(QString(), SatOudatedTLE);
+		filterModel->setSecondaryFilters(QString(), SatOutdatedTLE);
 	else
 		filterModel->setSecondaryFilters(groupId, SatNoFlags);
 

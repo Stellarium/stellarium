@@ -87,7 +87,7 @@ enum SatFlag
 	SatGSO			= 0x0800,
 	SatHEO			= 0x1000,
 	SatHGSO			= 0x2000,
-	SatOudatedTLE		= 0x4000
+	SatOutdatedTLE		= 0x4000
 };
 typedef QFlags<SatFlag> SatFlags;
 Q_DECLARE_OPERATORS_FOR_FLAGS(SatFlags)
@@ -117,13 +117,13 @@ public:
 	enum OptStatus
 	{
 		StatusOperational		= 1,
-		StatusNonoperational	= 2,
+		StatusNonoperational		= 2,
 		StatusPartiallyOperational	= 3,
 		StatusStandby			= 4,
 		StatusSpare			= 5,
-		StatusExtendedMission	= 6,
+		StatusExtendedMission		= 6,
 		StatusDecayed			= 7,
-		StatusUnknown		= 0
+		StatusUnknown			= 0
 	};
 	Q_ENUM(OptStatus)
 
