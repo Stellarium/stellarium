@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-12-23 21:23+0700\n"
+"POT-Creation-Date: 2021-12-24 15:45+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Worachate Boonplod, 2021\n"
 "Language-Team: Thai (https://www.transifex.com/stellarium/teams/80998/th/)\n"
@@ -36,8 +36,8 @@ msgstr "เครื่องหมายที่กำหนดเอง"
 #: src/core/modules/CustomObject.cpp:89 src/core/modules/Asterism.cpp:195
 #: src/core/modules/Constellation.cpp:290
 #: src/core/modules/NomenclatureItem.cpp:222 src/core/modules/Nebula.cpp:223
-#: src/core/modules/Nebula.cpp:225 src/core/modules/Planet.cpp:498
-#: src/core/modules/Planet.cpp:501 src/core/modules/StarWrapper.cpp:50
+#: src/core/modules/Nebula.cpp:225 src/core/modules/Planet.cpp:530
+#: src/core/modules/Planet.cpp:533 src/core/modules/StarWrapper.cpp:50
 #: src/core/modules/StarWrapper.cpp:266 src/core/modules/StarWrapper.cpp:269
 #: src/gui/AstroCalcDialog.cpp:905 src/gui/ObsListDialog.cpp:149
 #: src/gui/ObsListCreateEditDialog.cpp:157 src/ui_configurationDialog.h:1793
@@ -319,8 +319,8 @@ msgid "Antapex"
 msgstr "จุดตรงข้ามเอเพกซ์"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
-#: src/core/modules/GridLinesMgr.cpp:1466 src/core/modules/Planet.cpp:632
-#: src/core/modules/Planet.cpp:970 src/gui/AstroCalcDialog.cpp:6296
+#: src/core/modules/GridLinesMgr.cpp:1466 src/core/modules/Planet.cpp:664
+#: src/core/modules/Planet.cpp:1002 src/gui/AstroCalcDialog.cpp:6296
 #: plugins/Satellites/src/Satellite.cpp:325
 #: plugins/Satellites/src/Satellite.cpp:386
 #: plugins/MeteorShowers/src/MeteorShower.cpp:546
@@ -516,97 +516,97 @@ msgid "Compass marks"
 msgstr "เครื่องหมายแสดงมุมทิศ"
 
 #. TRANSLATORS: North
-#: src/core/modules/LandscapeMgr.cpp:196 src/core/modules/Planet.cpp:1095
+#: src/core/modules/LandscapeMgr.cpp:196 src/core/modules/Planet.cpp:1127
 msgctxt "compass direction"
 msgid "N"
-msgstr "น"
+msgstr "เหนือ"
 
 #. TRANSLATORS: South
-#: src/core/modules/LandscapeMgr.cpp:198 src/core/modules/Planet.cpp:1087
+#: src/core/modules/LandscapeMgr.cpp:198 src/core/modules/Planet.cpp:1119
 msgctxt "compass direction"
 msgid "S"
-msgstr "ต"
+msgstr "ใต้"
 
 #. TRANSLATORS: East
-#: src/core/modules/LandscapeMgr.cpp:200 src/core/modules/Planet.cpp:1099
+#: src/core/modules/LandscapeMgr.cpp:200 src/core/modules/Planet.cpp:1131
 msgctxt "compass direction"
 msgid "E"
-msgstr "อ"
+msgstr "ออก"
 
 #. TRANSLATORS: West
-#: src/core/modules/LandscapeMgr.cpp:202 src/core/modules/Planet.cpp:1091
+#: src/core/modules/LandscapeMgr.cpp:202 src/core/modules/Planet.cpp:1123
 msgctxt "compass direction"
 msgid "W"
 msgstr "ตก"
 
 #. TRANSLATORS: Northeast
-#: src/core/modules/LandscapeMgr.cpp:204 src/core/modules/Planet.cpp:1097
+#: src/core/modules/LandscapeMgr.cpp:204 src/core/modules/Planet.cpp:1129
 msgctxt "compass direction"
 msgid "NE"
-msgstr "อ/น"
+msgstr "ออก/เหนือ"
 
 #. TRANSLATORS: Southeast
-#: src/core/modules/LandscapeMgr.cpp:206 src/core/modules/Planet.cpp:1101
+#: src/core/modules/LandscapeMgr.cpp:206 src/core/modules/Planet.cpp:1133
 msgctxt "compass direction"
 msgid "SE"
-msgstr "อ/ต"
+msgstr "ออก/ใต้"
 
 #. TRANSLATORS: Southwest
-#: src/core/modules/LandscapeMgr.cpp:208 src/core/modules/Planet.cpp:1089
+#: src/core/modules/LandscapeMgr.cpp:208 src/core/modules/Planet.cpp:1121
 msgctxt "compass direction"
 msgid "SW"
-msgstr "ตก/ต"
+msgstr "ตก/ใต้"
 
 #. TRANSLATORS: Northwest
-#: src/core/modules/LandscapeMgr.cpp:210 src/core/modules/Planet.cpp:1093
+#: src/core/modules/LandscapeMgr.cpp:210 src/core/modules/Planet.cpp:1125
 msgctxt "compass direction"
 msgid "NW"
-msgstr "ตก/น"
+msgstr "ตก/เหนือ"
 
 #. TRANSLATORS: North-northeast
-#: src/core/modules/LandscapeMgr.cpp:212 src/core/modules/Planet.cpp:1096
+#: src/core/modules/LandscapeMgr.cpp:212 src/core/modules/Planet.cpp:1128
 msgctxt "compass direction"
 msgid "NNE"
 msgstr "อ/น/น"
 
 #. TRANSLATORS: East-northeast
-#: src/core/modules/LandscapeMgr.cpp:214 src/core/modules/Planet.cpp:1098
+#: src/core/modules/LandscapeMgr.cpp:214 src/core/modules/Planet.cpp:1130
 msgctxt "compass direction"
 msgid "ENE"
 msgstr "อ/น/อ"
 
 #. TRANSLATORS: East-southeast
-#: src/core/modules/LandscapeMgr.cpp:216 src/core/modules/Planet.cpp:1100
+#: src/core/modules/LandscapeMgr.cpp:216 src/core/modules/Planet.cpp:1132
 msgctxt "compass direction"
 msgid "ESE"
 msgstr "อ/ต/อ"
 
 #. TRANSLATORS: South-southeast
-#: src/core/modules/LandscapeMgr.cpp:218 src/core/modules/Planet.cpp:1102
+#: src/core/modules/LandscapeMgr.cpp:218 src/core/modules/Planet.cpp:1134
 msgctxt "compass direction"
 msgid "SSE"
 msgstr "อ/ต/ต"
 
 #. TRANSLATORS: South-southwest
-#: src/core/modules/LandscapeMgr.cpp:220 src/core/modules/Planet.cpp:1088
+#: src/core/modules/LandscapeMgr.cpp:220 src/core/modules/Planet.cpp:1120
 msgctxt "compass direction"
 msgid "SSW"
 msgstr "ตก/ต/ต"
 
 #. TRANSLATORS: West-southwest
-#: src/core/modules/LandscapeMgr.cpp:222 src/core/modules/Planet.cpp:1090
+#: src/core/modules/LandscapeMgr.cpp:222 src/core/modules/Planet.cpp:1122
 msgctxt "compass direction"
 msgid "WSW"
 msgstr "ตก/ต/ตก"
 
 #. TRANSLATORS: West-northwest
-#: src/core/modules/LandscapeMgr.cpp:224 src/core/modules/Planet.cpp:1092
+#: src/core/modules/LandscapeMgr.cpp:224 src/core/modules/Planet.cpp:1124
 msgctxt "compass direction"
 msgid "WNW"
 msgstr "ตก/น/ตก"
 
 #. TRANSLATORS: North-northwest
-#: src/core/modules/LandscapeMgr.cpp:226 src/core/modules/Planet.cpp:1094
+#: src/core/modules/LandscapeMgr.cpp:226 src/core/modules/Planet.cpp:1126
 msgctxt "compass direction"
 msgid "NNW"
 msgstr "ตก/น/น"
@@ -757,13 +757,13 @@ msgstr "ศัพท์ทางธรณีวิทยา"
 msgid "Linear size"
 msgstr "ขนาดเชิงเส้น"
 
-#: src/core/modules/NomenclatureItem.cpp:237 src/core/modules/Planet.cpp:715
+#: src/core/modules/NomenclatureItem.cpp:237 src/core/modules/Planet.cpp:747
 msgid "Diameter"
 msgstr "เส้นผ่านศูนย์กลาง"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/NomenclatureItem.cpp:238 src/core/modules/Planet.cpp:588
-#: src/core/modules/Planet.cpp:613 src/core/modules/Planet.cpp:716
+#: src/core/modules/NomenclatureItem.cpp:238 src/core/modules/Planet.cpp:620
+#: src/core/modules/Planet.cpp:645 src/core/modules/Planet.cpp:748
 #: src/core/modules/Comet.cpp:159 src/core/modules/Comet.cpp:169
 #: src/gui/StelGuiItems.cpp:847 src/gui/AstroCalcDialog.cpp:6230
 #: plugins/Satellites/src/Satellite.cpp:321
@@ -796,7 +796,7 @@ msgstr "มุมเงยของดวงอาทิตย์"
 #: src/core/modules/NomenclatureItem.cpp:481
 msgctxt "special point"
 msgid "point"
-msgstr ""
+msgstr "จุด"
 
 #. TRANSLATORS: Geographic area distinguished by amount of reflected light
 #: src/core/modules/NomenclatureItem.cpp:483
@@ -951,7 +951,7 @@ msgstr "ทะเลสาบ"
 #: src/core/modules/NomenclatureItem.cpp:531
 msgctxt "landform"
 msgid "large ringed feature"
-msgstr ""
+msgstr "ภูมิลักษณ์รูปวงแหวนขนาดใหญ่"
 
 #. TRANSLATORS: Small dark spots on Europa
 #: src/core/modules/NomenclatureItem.cpp:533
@@ -1447,27 +1447,27 @@ msgstr "ชื่อเรียก"
 
 #: src/core/modules/NomenclatureMgr.cpp:99
 msgid "North Pole"
-msgstr ""
+msgstr "ขั้วเหนือ"
 
 #: src/core/modules/NomenclatureMgr.cpp:103
 msgid "South Pole"
-msgstr ""
+msgstr "ขั้วใต้"
 
 #: src/core/modules/NomenclatureMgr.cpp:108
 msgid "East"
-msgstr ""
+msgstr "ตะวันออก"
 
 #: src/core/modules/NomenclatureMgr.cpp:113
 msgid "West"
-msgstr ""
+msgstr "ตะวันตก"
 
 #: src/core/modules/NomenclatureMgr.cpp:118
 msgid "Centre"
-msgstr ""
+msgstr "ศูนย์กลาง"
 
 #: src/core/modules/NomenclatureMgr.cpp:123
 msgid "Subsolar"
-msgstr ""
+msgstr "จุดใต้ดวงอาทิตย์"
 
 #: src/core/modules/Nebula.cpp:149 src/core/StelObject.cpp:315
 #: src/gui/AstroCalcDialog.cpp:3194 src/gui/AstroCalcDialog.cpp:3252
@@ -1499,12 +1499,12 @@ msgstr "โดย"
 msgid "Airmasses"
 msgstr "มวลอากาศ"
 
-#: src/core/modules/Nebula.cpp:210 src/core/modules/Planet.cpp:481
+#: src/core/modules/Nebula.cpp:210 src/core/modules/Planet.cpp:513
 #: src/core/modules/StarWrapper.cpp:220
 msgid "Additional names: "
 msgstr "ชื่ออื่น ๆ: "
 
-#: src/core/modules/Nebula.cpp:216 src/core/modules/Planet.cpp:488
+#: src/core/modules/Nebula.cpp:216 src/core/modules/Planet.cpp:520
 #: src/core/modules/StarWrapper.cpp:226
 msgid "Additional catalog numbers: "
 msgstr "เลขตามบัญชีอื่น ๆ: "
@@ -1562,7 +1562,7 @@ msgid "ly"
 msgstr "ปีแสง"
 
 #: src/core/modules/Nebula.cpp:320 src/core/modules/Nebula.cpp:366
-#: src/core/modules/Planet.cpp:623 src/core/modules/StarWrapper.cpp:317
+#: src/core/modules/Planet.cpp:655 src/core/modules/StarWrapper.cpp:317
 #: src/core/modules/StarWrapper.cpp:319 src/gui/AstroCalcDialog.cpp:3205
 #: src/gui/AstroCalcDialog.cpp:3263 src/ui_configurationDialog.h:1778
 #: plugins/Supernovae/src/Supernova.cpp:160 plugins/Novae/src/Nova.cpp:165
@@ -2072,44 +2072,44 @@ msgstr "คาดหมาย"
 msgid "See Logfile for instructions."
 msgstr "ดูบันทึกสำหรับคำแนะนำ"
 
-#: src/core/modules/Planet.cpp:459 src/core/modules/Comet.cpp:150
+#: src/core/modules/Planet.cpp:491 src/core/modules/Comet.cpp:150
 #: src/core/modules/StarWrapper.cpp:276 plugins/Quasars/src/Quasar.cpp:134
 msgid "Absolute Magnitude"
 msgstr "โชติมาตรสัมบูรณ์"
 
-#: src/core/modules/Planet.cpp:462
+#: src/core/modules/Planet.cpp:494
 msgid "Mean Opposition Magnitude"
 msgstr "โชติมาตรเฉลี่ยที่ตำแหน่งตรงข้ามกับดวงอาทิตย์"
 
-#: src/core/modules/Planet.cpp:496
+#: src/core/modules/Planet.cpp:528
 msgctxt "type of comet"
 msgid "periodic"
 msgstr "มีคาบ"
 
-#: src/core/modules/Planet.cpp:497
+#: src/core/modules/Planet.cpp:529
 msgctxt "type of comet"
 msgid "non-periodic"
 msgstr "ไม่มีคาบ"
 
 #. TRANSLATORS: Ecliptical rectangular coordinates
-#: src/core/modules/Planet.cpp:546 src/core/modules/Planet.cpp:548
+#: src/core/modules/Planet.cpp:578 src/core/modules/Planet.cpp:580
 msgctxt "coordinates"
 msgid "Ecliptical"
 msgstr "พิกัดสุริยวิถี"
 
-#: src/core/modules/Planet.cpp:571 src/core/modules/Planet.cpp:572
+#: src/core/modules/Planet.cpp:603 src/core/modules/Planet.cpp:604
 msgid "Hourly motion"
 msgstr "การเคลื่อนที่รายชั่วโมง"
 
-#: src/core/modules/Planet.cpp:571 src/core/modules/Planet.cpp:1148
-#: src/core/modules/Planet.cpp:1157 src/core/modules/StarWrapper.cpp:333
+#: src/core/modules/Planet.cpp:603 src/core/modules/Planet.cpp:1180
+#: src/core/modules/Planet.cpp:1189 src/core/modules/StarWrapper.cpp:333
 #: plugins/Pulsars/src/Pulsar.cpp:203
 msgctxt "into the direction of"
 msgid "towards"
 msgstr "ไปยัง"
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
-#: src/core/modules/Planet.cpp:586 src/gui/AstroCalcDialog.cpp:886
+#: src/core/modules/Planet.cpp:618 src/gui/AstroCalcDialog.cpp:886
 #: src/gui/AstroCalcDialog.cpp:1161 src/gui/AstroCalcDialog.cpp:1546
 #: src/gui/AstroCalcDialog.cpp:1593 src/gui/AstroCalcDialog.cpp:3173
 #: src/gui/AstroCalcDialog.cpp:6256 src/gui/AstroCalcDialog.cpp:6318
@@ -2122,230 +2122,230 @@ msgstr "หน่วยดาราศาสตร์"
 #. TRANSLATORS: Unit of measure for distance - millions of kilometers
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #. TRANSLATORS: Unit of measure for distance - millions kilometers
-#: src/core/modules/Planet.cpp:602 src/core/modules/Planet.cpp:620
+#: src/core/modules/Planet.cpp:634 src/core/modules/Planet.cpp:652
 #: src/core/modules/Comet.cpp:161 src/gui/AstroCalcDialog.cpp:6232
 msgctxt "distance"
 msgid "M km"
 msgstr "ล้านกิโลเมตร"
 
-#: src/core/modules/Planet.cpp:605
+#: src/core/modules/Planet.cpp:637
 msgid "Distance from Sun"
 msgstr "ระยะห่างจากดวงอาทิตย์"
 
 #. TRANSLATORS: Distance measured in terms of the speed of light
-#: src/core/modules/Planet.cpp:625
+#: src/core/modules/Planet.cpp:657
 msgid "Light time"
 msgstr "เวลาแสง"
 
-#: src/core/modules/Planet.cpp:639
+#: src/core/modules/Planet.cpp:671
 msgid "Orbital velocity"
 msgstr "ความเร็วในวงโคจร"
 
-#: src/core/modules/Planet.cpp:642
+#: src/core/modules/Planet.cpp:674
 msgid "Heliocentric velocity"
 msgstr "ความเร็วศูนย์สุริยะ"
 
-#: src/core/modules/Planet.cpp:652
+#: src/core/modules/Planet.cpp:684
 msgid "NOTE: orbital elements outdated -- consider updating!"
 msgstr "หมายเหตุ: องค์ประกอบวงโคจรล้าสมัยแล้ว -- ควรอัปเดต!"
 
-#: src/core/modules/Planet.cpp:683
+#: src/core/modules/Planet.cpp:715
 msgid "with rings"
 msgstr "รวมวงแหวน"
 
-#: src/core/modules/Planet.cpp:700
+#: src/core/modules/Planet.cpp:732
 msgid "scaled up to"
 msgstr "ขยายขึ้นไปที่"
 
-#: src/core/modules/Planet.cpp:710
+#: src/core/modules/Planet.cpp:742
 msgid "Apparent diameter"
 msgstr "เส้นผ่านศูนย์กลางปรากฏ"
 
-#: src/core/modules/Planet.cpp:715
+#: src/core/modules/Planet.cpp:747
 msgid "Equatorial diameter"
 msgstr "เส้นผ่านศูนย์กลางตามแนวเส้นศูนย์สูตร"
 
-#: src/core/modules/Planet.cpp:773 src/core/modules/Planet.cpp:774
-#: src/core/modules/Planet.cpp:782 src/gui/AstroCalcDialog.cpp:3210
+#: src/core/modules/Planet.cpp:805 src/core/modules/Planet.cpp:806
+#: src/core/modules/Planet.cpp:814 src/gui/AstroCalcDialog.cpp:3210
 #: src/gui/AstroCalcDialog.cpp:3268 src/ui_configurationDialog.h:1817
 msgid "Elongation"
 msgstr "มุมห่าง"
 
-#: src/core/modules/Planet.cpp:775 src/core/modules/Planet.cpp:784
+#: src/core/modules/Planet.cpp:807 src/core/modules/Planet.cpp:816
 #: src/gui/AstroCalcDialog.cpp:3220 src/gui/AstroCalcDialog.cpp:3278
 #: plugins/Satellites/src/Satellite.cpp:391
 msgid "Phase angle"
 msgstr "มุมดิถี"
 
-#: src/core/modules/Planet.cpp:777 src/core/modules/Planet.cpp:786
+#: src/core/modules/Planet.cpp:809 src/core/modules/Planet.cpp:818
 msgid "Illuminated"
 msgstr "ส่วนสว่าง"
 
-#: src/core/modules/Planet.cpp:783
+#: src/core/modules/Planet.cpp:815
 msgid "Elong. in Ecl.Long."
 msgstr "มุมห่างตามแนวลองจิจูดของเส้นสุริยวิถี"
 
-#: src/core/modules/Planet.cpp:798 src/gui/AstroCalcDialog.cpp:6319
+#: src/core/modules/Planet.cpp:830 src/gui/AstroCalcDialog.cpp:6319
 #: src/gui/AstroCalcDialog.cpp:6465 src/gui/AstroCalcDialog.cpp:6477
 msgid "Angular distance"
 msgstr "ระยะห่างเชิงมุม"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:816 src/core/modules/Planet.cpp:980
+#: src/core/modules/Planet.cpp:848 src/core/modules/Planet.cpp:1012
 #: src/core/modules/StarWrapper.cpp:353 src/gui/AstroCalcDialog.cpp:6267
 msgctxt "duration"
 msgid "days"
 msgstr "วัน"
 
-#: src/core/modules/Planet.cpp:825
+#: src/core/modules/Planet.cpp:857
 msgid "Sidereal period"
 msgstr "คาบดาราคติ"
 
-#: src/core/modules/Planet.cpp:834
+#: src/core/modules/Planet.cpp:866
 msgid "Synodic period"
 msgstr "คาบซินอดิก"
 
 #. TRANSLATORS: Unit of measure for speed - meters per second
-#: src/core/modules/Planet.cpp:972
+#: src/core/modules/Planet.cpp:1004
 msgctxt "speed"
 msgid "m/s"
 msgstr "เมตร/วินาที"
 
-#: src/core/modules/Planet.cpp:989
+#: src/core/modules/Planet.cpp:1021
 msgid "Sidereal day"
 msgstr "วันดาราคติ"
 
-#: src/core/modules/Planet.cpp:991
+#: src/core/modules/Planet.cpp:1023
 msgid "Mean solar day"
 msgstr "วันสุริยคติปานกลาง"
 
-#: src/core/modules/Planet.cpp:997
+#: src/core/modules/Planet.cpp:1029
 msgid "The period of rotation is chaotic"
 msgstr "คาบการหมุนไม่แน่นอน"
 
-#: src/core/modules/Planet.cpp:1003 src/core/modules/Planet.cpp:1005
-#: src/core/modules/Planet.cpp:1012 src/core/modules/Planet.cpp:1014
+#: src/core/modules/Planet.cpp:1035 src/core/modules/Planet.cpp:1037
+#: src/core/modules/Planet.cpp:1044 src/core/modules/Planet.cpp:1046
 msgid "Equatorial rotation velocity"
 msgstr "ความเร็วของการหมุนตามแนวเส้นศูนย์สูตร"
 
-#: src/core/modules/Planet.cpp:1038
+#: src/core/modules/Planet.cpp:1070
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "จันทร์ดับ"
 
-#: src/core/modules/Planet.cpp:1040
+#: src/core/modules/Planet.cpp:1072
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "เสี้ยวข้างขึ้น"
 
-#: src/core/modules/Planet.cpp:1042
+#: src/core/modules/Planet.cpp:1074
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "กึ่งข้างขึ้น"
 
-#: src/core/modules/Planet.cpp:1044
+#: src/core/modules/Planet.cpp:1076
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "ค่อนดวงข้างขึ้น"
 
-#: src/core/modules/Planet.cpp:1046
+#: src/core/modules/Planet.cpp:1078
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "จันทร์เพ็ญ"
 
-#: src/core/modules/Planet.cpp:1048
+#: src/core/modules/Planet.cpp:1080
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "ค่อนดวงข้างแรม"
 
-#: src/core/modules/Planet.cpp:1050
+#: src/core/modules/Planet.cpp:1082
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "กึ่งข้างแรม"
 
-#: src/core/modules/Planet.cpp:1052
+#: src/core/modules/Planet.cpp:1084
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "เสี้ยวข้างแรม"
 
-#: src/core/modules/Planet.cpp:1060
+#: src/core/modules/Planet.cpp:1092
 msgid "Moon age"
 msgstr "อายุดิถีจันทร์"
 
-#: src/core/modules/Planet.cpp:1060
+#: src/core/modules/Planet.cpp:1092
 msgid "days old"
 msgstr "วัน"
 
-#: src/core/modules/Planet.cpp:1080 src/core/modules/Planet.cpp:1083
+#: src/core/modules/Planet.cpp:1112 src/core/modules/Planet.cpp:1115
 msgid "Position angle of bright limb"
 msgstr "มุมตำแหน่งของขอบด้านสว่าง"
 
-#: src/core/modules/Planet.cpp:1147 src/core/modules/Planet.cpp:1156
-#: src/core/modules/Planet.cpp:1192 src/core/modules/Planet.cpp:1199
+#: src/core/modules/Planet.cpp:1179 src/core/modules/Planet.cpp:1188
+#: src/core/modules/Planet.cpp:1224 src/core/modules/Planet.cpp:1231
 msgid "Position Angle of axis"
 msgstr "มุมตำแหน่งของแกน"
 
-#: src/core/modules/Planet.cpp:1148 src/core/modules/Planet.cpp:1149
-#: src/core/modules/Planet.cpp:1157 src/core/modules/Planet.cpp:1158
+#: src/core/modules/Planet.cpp:1180 src/core/modules/Planet.cpp:1181
+#: src/core/modules/Planet.cpp:1189 src/core/modules/Planet.cpp:1190
 msgid "Libration"
 msgstr "การแกว่ง"
 
-#: src/core/modules/Planet.cpp:1150 src/core/modules/Planet.cpp:1159
-#: src/core/modules/Planet.cpp:1194 src/core/modules/Planet.cpp:1201
+#: src/core/modules/Planet.cpp:1182 src/core/modules/Planet.cpp:1191
+#: src/core/modules/Planet.cpp:1226 src/core/modules/Planet.cpp:1233
 msgid "Subsolar point"
 msgstr "จุดใต้ดวงอาทิตย์"
 
-#: src/core/modules/Planet.cpp:1151 src/core/modules/Planet.cpp:1160
+#: src/core/modules/Planet.cpp:1183 src/core/modules/Planet.cpp:1192
 msgid "Colongitude"
 msgstr "คู่ฉากลองจิจูด"
 
-#: src/core/modules/Planet.cpp:1193 src/core/modules/Planet.cpp:1200
+#: src/core/modules/Planet.cpp:1225 src/core/modules/Planet.cpp:1232
 msgid "Center point"
 msgstr "จุดศูนย์กลาง"
 
-#: src/core/modules/Planet.cpp:1212
+#: src/core/modules/Planet.cpp:1244
 msgid "Eclipse obscuration"
 msgstr "การบังของอุปราคา"
 
-#: src/core/modules/Planet.cpp:1221
+#: src/core/modules/Planet.cpp:1253
 msgid "Eclipse magnitude"
 msgstr "ขนาดอุปราคา"
 
-#: src/core/modules/Planet.cpp:1246
+#: src/core/modules/Planet.cpp:1278
 msgid "Center of solar eclipse (Lat./Long.)"
 msgstr "จุดศูนย์กลางของสุริยุปราคา (ละติจูด/ลองจิจูด)"
 
-#: src/core/modules/Planet.cpp:1257
+#: src/core/modules/Planet.cpp:1289
 msgid "Shadow center point is"
 msgstr "จุดศูนย์กลางเงาคราสอยู่ห่าง"
 
-#: src/core/modules/Planet.cpp:1259
+#: src/core/modules/Planet.cpp:1291
 msgid "km towards azimuth"
 msgstr "กม. ไปทางมุมทิศ"
 
-#: src/core/modules/Planet.cpp:1263
+#: src/core/modules/Planet.cpp:1295
 msgid "Magnitude of central eclipse"
 msgstr "ขนาดของสุริยุปราคาที่กลางคราส"
 
-#: src/core/modules/Planet.cpp:1266
+#: src/core/modules/Planet.cpp:1298
 msgctxt "type of solar eclipse"
 msgid "(annular)"
 msgstr "(วงแหวน)"
 
-#: src/core/modules/Planet.cpp:1268
+#: src/core/modules/Planet.cpp:1300
 msgctxt "type of solar eclipse"
 msgid "(total)"
 msgstr "(เต็มดวง)"
 
-#: src/core/modules/Planet.cpp:1283
+#: src/core/modules/Planet.cpp:1315
 msgid "Penumbral eclipse magnitude"
 msgstr "ขนาดของจันทรุปราคาเงามัว"
 
-#: src/core/modules/Planet.cpp:1286
+#: src/core/modules/Planet.cpp:1318
 msgid "Umbral eclipse magnitude"
 msgstr "ขนาดของจันทรุปราคาเงามืด"
 
-#: src/core/modules/Planet.cpp:1293
+#: src/core/modules/Planet.cpp:1325
 msgid "Albedo"
 msgstr "อัตราส่วนสะท้อน"
 
@@ -2545,7 +2545,7 @@ msgstr "เริ่มการเข้าถึงเครือข่าย
 
 #: src/core/StelApp.cpp:440
 msgid "Initializing network disk cache..."
-msgstr ""
+msgstr "เริ่มใช้ดิสก์แคชบนเครือข่าย..."
 
 #: src/core/StelApp.cpp:454
 msgid "Initializing network proxy..."
@@ -2593,7 +2593,7 @@ msgstr "เริ่มใช้งานเลเยอร์ของภาพ
 
 #: src/core/StelApp.cpp:526
 msgid "Initializing TOAST surveys..."
-msgstr ""
+msgstr "เริ่มใช้การสำรวจ TOAST..."
 
 #: src/core/StelApp.cpp:532
 msgid "Initializing audio..."
@@ -3138,6 +3138,9 @@ msgid ""
 "<em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' "
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
+"E. M. Reingold & N. Dershowitz แสดงสมการพหุนามนี้ใน <em>Calendrical "
+"Calculations</em> (4th ed. 2018) และ <em>Calendrical Tabulations</em> (2002)"
+" มีรากฐานจาก <em>Astronomical Algorithms</em> (1991) ของ Jean Meeus"
 
 #: src/core/StelCore.cpp:2359
 #, qt-format
@@ -3231,6 +3234,9 @@ msgid ""
 "Acceleration of the Moon and the Universe - the Mass of the Graviton</em> "
 "(%1) and based on C. Schoch's formula (1931)."
 msgstr ""
+"จากผลการคำนวณโดย G. Henriksson ซึ่งพิมพ์ในบทความ <em>The Acceleration of the"
+" Moon and the Universe - the Mass of the Graviton</em> (%1) "
+"และมีรากฐานจากสูตรของ C. Schoch (1931)"
 
 #: src/core/StelCore.cpp:2386
 #, qt-format
@@ -3479,85 +3485,95 @@ msgctxt "celestial event"
 msgid "Set"
 msgstr "ตก"
 
+#: src/core/StelObject.cpp:720
+msgctxt "celestial event"
+msgid "Morning twilight"
+msgstr ""
+
 #: src/core/StelObject.cpp:721
+msgctxt "celestial event"
+msgid "Evening twilight"
+msgstr ""
+
+#: src/core/StelObject.cpp:742
 msgid "Daytime"
 msgstr "กลางวัน"
 
-#: src/core/StelObject.cpp:734
+#: src/core/StelObject.cpp:756
 msgid "Polar night"
 msgstr "เป็นกลางคืนตลอด 24 ชั่วโมง"
 
-#: src/core/StelObject.cpp:736
+#: src/core/StelObject.cpp:758
 msgid "This object never rises"
 msgstr "วัตถุนี้ไม่ขึ้นเหนือขอบฟ้า"
 
-#: src/core/StelObject.cpp:741
+#: src/core/StelObject.cpp:763
 msgid "Polar day"
 msgstr "เป็นกลางวันตลอด 24 ชั่วโมง"
 
-#: src/core/StelObject.cpp:743
+#: src/core/StelObject.cpp:765
 msgid "Circumpolar (never sets)"
 msgstr "วนรอบขั้ว (ไม่ตก)"
 
 #. TRANSLATORS: Greatest Eastern Digression is the maximum azimuth for stars
 #. with upper culmination between pole and zenith
-#: src/core/StelObject.cpp:761
+#: src/core/StelObject.cpp:783
 msgid "Max. E. Digression"
 msgstr "มุมทิศสูงสุดทางตะวันออก"
 
 #. TRANSLATORS: azimuth (abbrev.)
-#: src/core/StelObject.cpp:763
+#: src/core/StelObject.cpp:785
 msgctxt "celestial coordinate system"
 msgid "A"
 msgstr "มุมทิศ"
 
-#: src/core/StelObject.cpp:763
+#: src/core/StelObject.cpp:785
 msgctxt "celestial coordinate system"
 msgid "Az."
 msgstr "มุมทิศ"
 
-#: src/core/StelObject.cpp:765
+#: src/core/StelObject.cpp:787
 msgctxt "celestial coordinate system"
 msgid "h"
-msgstr ""
+msgstr "ช.ม."
 
-#: src/core/StelObject.cpp:765
+#: src/core/StelObject.cpp:787
 msgctxt "celestial coordinate system"
 msgid "HA"
 msgstr "มุมชั่วโมง"
 
 #. TRANSLATORS: Greatest Western Digression is the maximum western azimuth for
 #. stars with upper culmination between pole and zenith
-#: src/core/StelObject.cpp:791
+#: src/core/StelObject.cpp:813
 msgid "Max. W. Digression"
 msgstr "มุมทิศสูงสุดทางตะวันตก"
 
-#: src/core/StelObject.cpp:826
+#: src/core/StelObject.cpp:848
 msgid "Parallactic Angle"
 msgstr "มุมแพรัลแลกซ์"
 
-#: src/core/StelObject.cpp:835 src/gui/AstroCalcDialog.cpp:5443
+#: src/core/StelObject.cpp:857 src/gui/AstroCalcDialog.cpp:5443
 msgid "IAU Constellation"
 msgstr "กลุ่มดาวโดยไอเอยู"
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:1121
+#: src/core/StelObject.cpp:1143
 msgctxt "celestial coordinate system"
 msgid "Solar A/a"
-msgstr ""
+msgstr "มุมทิศ/มุมเงยดวงอาทิตย์"
 
-#: src/core/StelObject.cpp:1121
+#: src/core/StelObject.cpp:1143
 msgctxt "celestial coordinate system"
 msgid "Solar Az./Alt."
 msgstr "มุมทิศ/มุมเงย ของดวงอาทิตย์"
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:1139
+#: src/core/StelObject.cpp:1161
 msgctxt "celestial coordinate system"
 msgid "Lunar A/a"
-msgstr ""
+msgstr "มุมทิศ/มุมเงยดวงจันทร์"
 
-#: src/core/StelObject.cpp:1139
+#: src/core/StelObject.cpp:1161
 msgctxt "celestial coordinate system"
 msgid "Lunar Az./Alt."
 msgstr "มุมทิศ/มุมเงย ของดวงจันทร์"
@@ -3600,51 +3616,51 @@ msgstr "การตกครั้งก่อนหน้าของวัต
 
 #: src/core/StelObjectMgr.cpp:66
 msgid "Next morning twilight"
-msgstr ""
+msgstr "สนธยายามเช้าถัดไป"
 
 #: src/core/StelObjectMgr.cpp:67
 msgid "Next evening twilight"
-msgstr ""
+msgstr "สนธยายามค่ำถัดไป"
 
 #: src/core/StelObjectMgr.cpp:68
 msgid "Today's morning twilight"
-msgstr ""
+msgstr "สนธยายามเช้าของวันนี้"
 
 #: src/core/StelObjectMgr.cpp:69
 msgid "Today's evening twilight"
-msgstr ""
+msgstr "สนธยายามค่ำของวันนี้"
 
 #: src/core/StelObjectMgr.cpp:70
 msgid "Previous morning twilight"
-msgstr ""
+msgstr "สนธยายามเช้าก่อนหน้า"
 
 #: src/core/StelObjectMgr.cpp:71
 msgid "Previous evening twilight"
-msgstr ""
+msgstr "สนธยายามค่ำก่อนหน้า"
 
 #: src/core/StelObjectMgr.cpp:73
 msgid "Selected object at altitude at next morning"
-msgstr ""
+msgstr "วัตถุที่เลือกมีมุมเงยเดิมในเช้าวันถัดไป"
 
 #: src/core/StelObjectMgr.cpp:74
 msgid "Selected object at altitude this morning"
-msgstr ""
+msgstr "วัตถุที่เลือกมีมุมเงยเดิมในเช้าวันนี้"
 
 #: src/core/StelObjectMgr.cpp:75
 msgid "Selected object at altitude at previous morning"
-msgstr ""
+msgstr "วัตถุที่เลือกมีมุมเงยเดิมในเช้าวันก่อนหน้า"
 
 #: src/core/StelObjectMgr.cpp:76
 msgid "Selected object at altitude at next evening"
-msgstr ""
+msgstr "วัตถุที่เลือกมีมุมเงยเดิมในค่ำวันถัดไป"
 
 #: src/core/StelObjectMgr.cpp:77
 msgid "Selected object at altitude this evening"
-msgstr ""
+msgstr "วัตถุที่เลือกมีมุมเงยเดิมในค่ำวันนี้"
 
 #: src/core/StelObjectMgr.cpp:78
 msgid "Selected object at altitude at previous evening"
-msgstr ""
+msgstr "วัตถุที่เลือกมีมุมเงยเดิมในค่ำวันก่อนหน้า"
 
 #: src/core/StelSkyLayerMgr.cpp:85
 msgid "Deep-sky objects background images"
@@ -3694,7 +3710,7 @@ msgstr ""
 #: src/core/StelSkyCultureMgr.cpp:186
 msgctxt "sky culture classification"
 msgid "comparative"
-msgstr ""
+msgstr "เชิงเปรียบเทียบ"
 
 #: src/core/StelSkyCultureMgr.cpp:187
 msgid ""
@@ -3736,6 +3752,8 @@ msgid ""
 "The accuracy of the sky culture description cannot be given, although it "
 "looks like it is built on a solid background. More work would be needed."
 msgstr ""
+"ไม่สามารถยืนยันความถูกต้องของคำอธิบายกลุ่มดาวในวัฒนธรรม "
+"แม้ว่าจะสร้างขึ้นจากภูมิหลังที่หนักแน่น ยังต้องการการศึกษาค้นคว้าอีกมาก"
 
 #: src/core/StelSkyCultureMgr.cpp:206
 msgctxt "sky culture classification"
@@ -4635,13 +4653,13 @@ msgstr "เปิดใช้งาน TUI"
 
 #: src/gui/HelpDialog.cpp:347
 msgid "Special local keys"
-msgstr ""
+msgstr "แป้นพิมพ์พิเศษ"
 
 #: src/gui/HelpDialog.cpp:348
 msgid ""
 "All these hotkeys are locally available to run when specific window or tab "
 "is opened."
-msgstr ""
+msgstr "แป้นพิมพ์พิเศษนี้ใช้งานเมื่อเปิดหน้าต่างหรือแท็บ"
 
 #: src/gui/HelpDialog.cpp:349 src/ui_scriptConsole.h:380
 msgid "Script console"
@@ -5191,6 +5209,8 @@ msgid ""
 "The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later)"
 " and gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
 msgstr ""
+"ขั้นตอนวิธีที่ใช้ใน <em>Astronomical Almanac</em> (1984 เป็นต้นมา) "
+"และให้ค่าโชติมาตร V (เชิงอุปกรณ์) (จาก D.L. Harris)"
 
 #: src/gui/ViewDialog.cpp:1241
 msgid ""
@@ -5198,12 +5218,16 @@ msgid ""
 " still republished in the <em>Explanatory Supplement to the Astronomical "
 "Ephemeris</em> (1961)."
 msgstr ""
+"ขั้นตอนวิธีจากการสังเกตการณ์ระหว่างปี 1877-1891 โดย G. Müller และเผยแพร่ใน "
+"<em>Explanatory Supplement to the Astronomical Ephemeris</em> (1961)"
 
 #: src/gui/ViewDialog.cpp:1242
 msgid ""
 "The algorithm was published in the 2nd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (1992)."
 msgstr ""
+"ขั้นตอนวิธีที่เผยแพร่ใน <em>Explanatory Supplement to the Astronomical "
+"Almanac</em> (1992) ซึ่งเป็นฉบับพิมพ์ครั้งที่ 2"
 
 #: src/gui/ViewDialog.cpp:1243
 msgid ""
@@ -5219,6 +5243,9 @@ msgid ""
 "apparent planetary magnitudes for the Astronomical Almanac.</em> "
 "Astronomy&Computing 25 (2018) 10-24."
 msgstr ""
+"ขั้นตอนวิธีโดย A. Mallama & J. L. Hilton: <em>Computing apparent planetary "
+"magnitudes for the Astronomical Almanac.</em> Astronomy&Computing 25 (2018) "
+"10-24"
 
 #: src/gui/ViewDialog.cpp:1247
 msgid "Visual magnitude based on phase angle and albedo."
@@ -5346,22 +5373,22 @@ msgstr "คุณสามารถถอดถอนออกได้โดย
 #: src/gui/ScriptConsole.cpp:84
 msgctxt "command"
 msgid "selected text as script"
-msgstr ""
+msgstr "ให้ข้อความที่เลือกเป็นสคริปต์"
 
 #: src/gui/ScriptConsole.cpp:85
 msgctxt "command"
 msgid "remove screen text"
-msgstr ""
+msgstr "ลบข้อความบนหน้าจอ"
 
 #: src/gui/ScriptConsole.cpp:86
 msgctxt "command"
 msgid "remove screen images"
-msgstr ""
+msgstr "ลบภาพบนหน้าจอ"
 
 #: src/gui/ScriptConsole.cpp:87
 msgctxt "command"
 msgid "remove screen markers"
-msgstr ""
+msgstr "ลบเครื่องหมายบนหน้าจอ"
 
 #: src/gui/ScriptConsole.cpp:88
 msgctxt "command"
@@ -5414,7 +5441,7 @@ msgstr "แน่ใจหรือไม่ที่จะล้างสคร
 
 #: src/gui/ScriptConsole.cpp:361
 msgid "Select Script Include Directory"
-msgstr ""
+msgstr "เลือกไดเร็กทอรีสำหรับสคริปต์"
 
 #. TRANSLATORS: The first letter of word "Row"
 #: src/gui/ScriptConsole.cpp:393
@@ -5434,7 +5461,7 @@ msgstr "สคริปต์ Stellarium"
 
 #: src/gui/ScriptConsole.cpp:413
 msgid "Include File"
-msgstr ""
+msgstr "รวมแฟ้มข้อมูล"
 
 #: src/gui/SearchDialog.cpp:261
 msgctxt "coordinate system"
@@ -6287,7 +6314,7 @@ msgstr "การร่วมทิศ"
 
 #: src/gui/AstroCalcDialog.cpp:4127
 msgid "Shadow transit"
-msgstr ""
+msgstr "การผ่านของเงา"
 
 #: src/gui/AstroCalcDialog.cpp:4130 src/gui/AstroCalcDialog.cpp:4137
 #: src/gui/AstroCalcDialog.cpp:4183 src/gui/AstroCalcDialog.cpp:4189
@@ -6644,7 +6671,7 @@ msgstr "ชื่อวัตถุ"
 
 #: src/gui/ObsListDialog.cpp:148 src/gui/ObsListCreateEditDialog.cpp:156
 msgid "Localized Object Name"
-msgstr ""
+msgstr "ชื่อท้องถิ่นของวัตถุ"
 
 #: src/gui/ObsListDialog.cpp:153 src/gui/ObsListCreateEditDialog.cpp:161
 #: src/ui_configurationDialog.h:1802
@@ -6657,7 +6684,7 @@ msgstr "วัตถุที่ไม่มีชื่อ"
 
 #: src/gui/ObsListCreateEditDialog.cpp:468
 msgid "Export observing list as..."
-msgstr ""
+msgstr "นำออกรายการสำหรับการสังเกตการณ์..."
 
 #: src/gui/ObsListCreateEditDialog.cpp:483
 msgid "Import observing list"
@@ -6697,6 +6724,8 @@ msgid ""
 "Shortcuts have conflicts! Please press F7 after program startup and check "
 "following multiple assignments"
 msgstr ""
+"ปุ่มลัดทับซ้อนกัน! กรุณากด F7 หลังจากเริ่มโปรแกรม "
+"แล้วตรวจสอบตามข้อความต่อไปนี้"
 
 #: src/StelMainView.cpp:1026
 msgid ""
@@ -7671,7 +7700,7 @@ msgstr "ดาวแปรแสง: ระบบดาวคู่อุปร�
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:453
 msgid "Variable stars: the classical cepheids"
-msgstr ""
+msgstr "ดาวแปรแสง: ซีฟิอิดแบบฉบับ"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:462
@@ -7949,7 +7978,7 @@ msgstr "ดาวพฤหัสบดีที่ไม่มีดาวบร
 #. TRANSLATORS: Name of script
 #: src/translations.h:576
 msgid "Skybox Tiles"
-msgstr ""
+msgstr "แผ่นฟ้า"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:578
@@ -8171,6 +8200,8 @@ msgid ""
 "binoculars. The data for the script are taken from the eponymous book by "
 "Gary Seronik."
 msgstr ""
+"ท่องไปตามวัตถุท้องฟ้าที่น่าสนใจซึ่งสามารถสังเกตได้ด้วยกล้องสองตา "
+"ข้อมูลสำหรับสคริปต์นี้มาจากหนังสือของ Gary Seronik"
 
 #: src/translations.h:627
 msgid ""
@@ -8195,12 +8226,17 @@ msgid ""
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
 "Right Ascension (2000.0)."
 msgstr ""
+"Ben Crowell สร้างบัญชี Binosky "
+"เป็นรายการสังเกตการณ์วัตถุห้วงลึกสำหรับกล้องสองตา สคริปต์นี้แสดง 31 วัตถุ "
+"เรียงตามไรต์แอสเซนชัน (2000.0)"
 
 #: src/translations.h:631
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
 "The Bennett catalog was contributed by Auke Slotegraaf."
 msgstr ""
+"บัญชีวัตถุห้วงลึกในซีกฟ้าใต้ของ Jack Bennett (152 วัตถุ) สร้างโดย Auke "
+"Slotegraaf"
 
 #: src/translations.h:632
 msgid ""
@@ -8208,6 +8244,9 @@ msgid ""
 "the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC "
 "achievement award."
 msgstr ""
+"รายชื่อวัตถุ 111 วัตถุ โดย A.J. Crayon และ Steve Coe ใช้ในหมู่สมาชิก Saguaro"
+" Astronomy Club ในเมืองฟีนิกซ์ รัฐแอริโซนา "
+"สำหรับรางวัลที่สุดของวัตถุในบัญชีเอ็นจีซี"
 
 #: src/translations.h:633
 msgid ""
@@ -8289,6 +8328,8 @@ msgid ""
 "Messier Marathon on March 20, 2020. The data for the script are taken from "
 "GaoXing's observation log: http://www.xjltp.com/2_huodong/2_030301.htm"
 msgstr ""
+"เมซีเยมาราธอนเมื่อวันที่ 20 มีนาคม 2020 ข้อมูลสำหรับสคริปต์นำมาจาก GaoXing's"
+" observation log: http://www.xjltp.com/2_huodong/2_030301.htm"
 
 #: src/translations.h:643
 msgid ""
@@ -8305,6 +8346,8 @@ msgid ""
 "This script will help you make practical works for celestial navigation - he"
 " sets a random location and hides it from the GUI."
 msgstr ""
+"สคริปต์สำหรับใช้ฝึกวิชาการเดินเรือ โปรแกรมจะตั้งค่าที่ตั้งแบบสุ่ม "
+"และซ่อนตำแหน่งจากส่วนต่อประสานกราฟิกกับผู้ใช้"
 
 #: src/translations.h:648
 msgid "&Undo"
@@ -21311,7 +21354,7 @@ msgstr ""
 msgid ""
 "Ceibo is the name of the native tree of Uruguay that gives rise to the "
 "national flower."
-msgstr ""
+msgstr "ซีโบเป็นชื่อต้นไม้พื้นเมืองในอุรุกวัย และเป็นที่มาของดอกไม้ประจำชาติ"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:593
 msgid ""
@@ -23214,24 +23257,24 @@ msgstr "การโหลดใกล้เสร็จสิ้น..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:521
 msgid "Could not load scene, please check log for error messages!"
-msgstr ""
+msgstr "ไม่สามารถโหลดทิวทัศน์ได้ กรุณาตรวจสอบปูมสำหรับข้อผิดพลาด!"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:525
 msgid "Scene successfully loaded."
-msgstr ""
+msgstr "โหลดทิวทัศน์สำเร็จ"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:585
 msgid "Could not load scene info, please check log for error messages!"
-msgstr ""
+msgstr "ไม่สามารถโหลดข้อมูลทิวทัศน์ได้ กรุณาตรวจสอบปูมสำหรับข้อผิดพลาด!"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:609
 #, qt-format
 msgid "Could not find scene ID for %1"
-msgstr ""
+msgstr "ไม่สามารถค้นหา ID ของทิวทัศน์สำหรับ %1"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:654
 msgid "Please load a scene first!"
-msgstr ""
+msgstr "กรุณาโหลดทิวทัศน์ก่อน!"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:691
 #, qt-format
@@ -23259,7 +23302,7 @@ msgstr "เงา %1"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:715
 msgid "Shadows deactivated or not possible."
-msgstr ""
+msgstr "เงาถูกปิดการใช้งานหรือไม่สามารถใช้ได้"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:746
 #, qt-format
@@ -23388,6 +23431,7 @@ msgid ""
 "Approximate calculation of shadow penumbras (sharper shadows near contact "
 "points, blurred shadows further away)."
 msgstr ""
+"คำนวณเงามัวโดยประมาณ (เงาคมกว่าเมื่อใกล้จุดสัมผัส และเบลอเมื่อไกลออกไป)"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:263
 msgid ""
@@ -23506,7 +23550,7 @@ msgstr "ทิวทัศน์ 3 มิติ"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:479
 msgid "Set as default scene"
-msgstr ""
+msgstr "ตั้งให้เป็นทิวทัศน์ปริยาย"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:480
 msgid "Load/save viewpoints"
@@ -23514,16 +23558,16 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
 msgid "Torch strength:"
-msgstr ""
+msgstr "ความเข้มของแสงไฟ:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:482
 msgid "Torch range:"
-msgstr ""
+msgstr "ระยะแสงไฟ:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
 #, qt-format
 msgid "Torchlight (%1)"
-msgstr ""
+msgstr "แสงไฟ (%1)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
 #, qt-format
@@ -23670,15 +23714,15 @@ msgstr "แสดงเส้นสำหรับจุดอายัน"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:300
 msgid "Show Line for Crossquarter"
-msgstr ""
+msgstr "แสดงเส้นกึ่งกลางวิษุวัต-อายัน"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:301
 msgid "Show Line for Major Standstill"
-msgstr ""
+msgstr "แสดงเส้นสำหรับจุดหยุดนิ่งหลัก"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:302
 msgid "Show Line for Minor Standstill"
-msgstr ""
+msgstr "แสดงเส้นสำหรับจุดหยุดนิ่งรอง"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:303
 msgid "Show Polar Circles"
@@ -23865,6 +23909,10 @@ msgid ""
 "of the moon at the major standstill can exceed the indicated limits if it is"
 " high in the sky due to parallax effects."
 msgstr ""
+"เส้นดวงจันทร์คิดผลจากแพรัลแลกซ์ขอบฟ้า มีสองเส้น "
+"คือตำแหน่งที่ดวงจันทร์อยู่ไกลและใกล้โลกที่สุด "
+"เดคลิเนชันของดวงจันทร์ที่ตำแหน่งหยุดนิ่งหลัก "
+"สามารถเลยขีดจำกัดที่แสดงได้เมื่อดวงจันทร์อยู่สูง อันเป็นผลจากแพรัลแลกซ์"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:237
 msgid ""
@@ -23875,12 +23923,19 @@ msgid ""
 "arbitrary locations. The directions are computed based on spherical "
 "trigonometry on a spherical Earth."
 msgstr ""
+"บางศาสนา เช่น อิสลาม ยามละหมาดมีการหันหน้าไปยังทิศทางที่กำหนด "
+"โปรแกรมสามารถแสดงเส้นมุมทิศของสถานที่ได้ 2 แห่ง "
+"ค่าปริยายคือทิศทางของเมืองมักกะฮ์ (กะอ์บะฮ์) และเยรูซาเล็ม "
+"แต่คุณสามารถเลือกสถานที่อื่นได้จากรายการ หรือกำหนดสถานที่เอง "
+"ทิศทางของสถานที่คำนวณจากตรีโกณมิติทรงกลมบนผิวโลก"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:241
 msgid ""
 "In addition, up to two lines each with arbitrary azimuth, altitude and "
 "declination lines with custom label can be shown."
 msgstr ""
+"นอกจากนี้ ยังสามารถแสดงเส้นมุมทิศ มุมเงย และเดคลิเนชันที่กำหนดเองได้ไม่เกิน "
+"2 เส้น"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:718
 msgid "ArchaeoLines Configuration"
