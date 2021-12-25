@@ -210,7 +210,7 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 	{
 		oss << "<h2>" << nameI18n;
 		// englishName here is the original scientific term, usually latin but could be plain english like "landing site".
-		if (nameI18n!=englishName)
+		if (nameI18n!=englishName && nType<NomenclatureItemType::niSpecialPointPole)
 			oss << " (" << englishName << ")";
 		oss << "</h2>";
 	}
@@ -220,7 +220,7 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 		QString tstr  = getNomenclatureTypeString(nType);
 		QString latin = getNomenclatureTypeLatinString(nType); // not always latin!
 		QString ts    = q_("Type");
-		if (tstr!=latin && !latin.isEmpty())
+		if (tstr!=latin && !latin.isEmpty() && nType<NomenclatureItemType::niSpecialPointPole)
 			oss << QString("%1: <b>%2</b> (%3: %4)<br/>").arg(ts, tstr, q_("geologic term"), latin);
 		else
 			oss << QString("%1: <b>%2</b><br/>").arg(ts, tstr);
