@@ -145,6 +145,16 @@ public:
 	//! Translate feature name using the passed translator
 	virtual void translateName(const StelTranslator &trans);
 
+	//! Compute times of nearest rise, transit and set of the item's current Planet.
+	//! @param core the currently active StelCore object
+	//! @param altitude (optional; default=0) altitude of the object, degrees.
+	//! @return Vec4d - time of rise, transit and set closest to current time; JD.
+	//! @note The fourth element flags particular conditions:
+	//!       *  +100. for circumpolar objects. Rise and set give lower culmination times.
+	//!       *  -100. for objects never rising. Rise and set give transit times.
+	//!       * -1000. is used as "invalid" value. The result should then not be used.
+	virtual Vec4d getRTSTime(const StelCore* core, const double altitude=0.) const Q_DECL_OVERRIDE;
+
 	void draw(StelCore* core, StelPainter *painter);
 	NomenclatureItemType getNomenclatureType() const { return nType;}
 	void update(double deltaTime);

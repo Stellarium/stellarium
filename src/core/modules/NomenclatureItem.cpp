@@ -714,3 +714,17 @@ void NomenclatureItem::createNameLists()
 	{ niSpecialPointCenter, ""},
 	{ niSpecialPointSubSolar, ""}};
 }
+
+// Compute times of nearest rise, transit and set of the current Planet.
+// @param core the currently active StelCore object
+// @param altitude (optional; default=0) altitude of the object, degrees.
+//        Setting this to -6. for the Sun will find begin and end for civil twilight.
+// @return Vec4d - time of rise, transit and set closest to current time; JD.
+// @note The fourth element flags particular conditions:
+//       *  +100. for circumpolar objects. Rise and set give lower culmination times.
+//       *  -100. for objects never rising. Rise and set give transit times.
+//       * -1000. is used as "invalid" value. The result should then not be used.
+Vec4d NomenclatureItem::getRTSTime(const StelCore* core, const double altitude) const
+{
+	return planet->getRTSTime(core, altitude);
+}
