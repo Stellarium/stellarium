@@ -210,25 +210,25 @@ void StelLogger::init(const QString& logFilePath)
 	#endif
 	for (int i = 0; i<systemLines.size(); i++)
 	{
-		if(systemLines.at(i).contains("Model"))
-		{
+		// hardware overview
+		if(systemLines.at(i).contains("Model", Qt::CaseInsensitive))
 			writeLog(systemLines.at(i).trimmed());
-		}
 
-		if(systemLines.at(i).contains("Processor"))
-		{
+		if(systemLines.at(i).contains("Chip:", Qt::CaseInsensitive))
 			writeLog(systemLines.at(i).trimmed());
-		}
 
-		if(systemLines.at(i).contains("Memory"))
-		{
-			writeLog(systemLines.at(i).trimmed());
-		}
+		if(systemLines.at(i).contains("Processor", Qt::CaseInsensitive))
+			writeLog(systemLines.at(i).trimmed().replace("Unknown", "Apple M1"));
 
-		if(systemLines.at(i).contains("VRAM"))
-		{
+		if(systemLines.at(i).contains("Memory", Qt::CaseInsensitive))
 			writeLog(systemLines.at(i).trimmed());
-		}
+
+		// graphics/display overview
+		if(systemLines.at(i).contains("Resolution", Qt::CaseInsensitive))
+			writeLog(systemLines.at(i).trimmed());
+
+		if(systemLines.at(i).contains("VRAM", Qt::CaseInsensitive))
+			writeLog(systemLines.at(i).trimmed());
 	}
 
 #elif defined Q_OS_BSD4
