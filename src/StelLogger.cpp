@@ -313,26 +313,33 @@ void StelLogger::writeLog(QString msg)
 
 QString StelLogger::getMsvcVersionString(int ver)
 {
-	// Defines for _MSC_VER macro: https://docs.microsoft.com/ru-ru/cpp/preprocessor/predefined-macros?view=vs-2019
+	// Defines for _MSC_VER macro: https://docs.microsoft.com/ru-ru/cpp/preprocessor/predefined-macros?view=msvc-160
 	const QMap<int, QString> map = {
-		{1310, "MSVC++ 7.1 (Visual Studio 2003)"     },
-		{1400, "MSVC++ 8.0 (Visual Studio 2005)"     },
-		{1500, "MSVC++ 9.0 (Visual Studio 2008)"     },
-		{1600, "MSVC++ 10.0 (Visual Studio 2010)"    },
-		{1700, "MSVC++ 11.0 (Visual Studio 2012)"    },
-		{1800, "MSVC++ 12.0 (Visual Studio 2013)"    },
-		{1900, "MSVC++ 14.0 (Visual Studio 2015)"    },
-		{1910, "MSVC++ 15.0 (Visual Studio 2017 RTW)"},
-		{1911, "MSVC++ 15.3 (Visual Studio 2017)"    },
-		{1912, "MSVC++ 15.5 (Visual Studio 2017)"    },
-		{1913, "MSVC++ 15.6 (Visual Studio 2017)"    },
-		{1914, "MSVC++ 15.7 (Visual Studio 2017)"    },
-		{1915, "MSVC++ 15.8 (Visual Studio 2017)"    },
-		{1916, "MSVC++ 15.9 (Visual Studio 2017)"    },
-		{1920, "MSVC++ 16.0 (Visual Studio 2019 RTW)"},
-		{1921, "MSVC++ 16.1 (Visual Studio 2019)"    },
-		{1922, "MSVC++ 16.2 (Visual Studio 2019)"    },
-		{1923, "MSVC++ 16.3 (Visual Studio 2019)"    },
+		{1310, "MSVC++ 7.1 (Visual Studio 2003)"          },
+		{1400, "MSVC++ 8.0 (Visual Studio 2005)"          },
+		{1500, "MSVC++ 9.0 (Visual Studio 2008)"          },
+		{1600, "MSVC++ 10.0 (Visual Studio 2010)"         },
+		{1700, "MSVC++ 11.0 (Visual Studio 2012)"         },
+		{1800, "MSVC++ 12.0 (Visual Studio 2013)"         },
+		{1900, "MSVC++ 14.0 (Visual Studio 2015)"         },
+		{1910, "MSVC++ 15.0 (Visual Studio 2017 RTW)"     },
+		{1911, "MSVC++ 15.3 (Visual Studio 2017)"         },
+		{1912, "MSVC++ 15.5 (Visual Studio 2017)"         },
+		{1913, "MSVC++ 15.6 (Visual Studio 2017)"         },
+		{1914, "MSVC++ 15.7 (Visual Studio 2017)"         },
+		{1915, "MSVC++ 15.8 (Visual Studio 2017)"         },
+		{1916, "MSVC++ 15.9 (Visual Studio 2017)"         },
+		{1920, "MSVC++ 16.0 (Visual Studio 2019 RTW)"     },
+		{1921, "MSVC++ 16.1 (Visual Studio 2019)"         },
+		{1922, "MSVC++ 16.2 (Visual Studio 2019)"         },
+		{1923, "MSVC++ 16.3 (Visual Studio 2019)"         },
+		{1924, "MSVC++ 16.4 (Visual Studio 2019)"         },
+		{1925, "MSVC++ 16.5 (Visual Studio 2019)"         },
+		{1926, "MSVC++ 16.6 (Visual Studio 2019)"         },
+		{1927, "MSVC++ 16.7 (Visual Studio 2019)"         },
+		{1928, "MSVC++ 16.8, 16.9 (Visual Studio 2019)"   },
+		{1929, "MSVC++ 16.10, 16.11 (Visual Studio 2019)" },
+		{1930, "MSVC++ 17.0 (Visual Studio 2022 RTW)"     },
 	};
 	return map.value(ver, "unknown MSVC++ version");
 }
