@@ -478,9 +478,9 @@ void HelpDialog::updateAboutText(void) const
 	newHtml += "Boston, MA  02110-1335, USA.\n</pre>";
 	newHtml += "<p><a href=\"http://www.fsf.org\">www.fsf.org</a></p>";
 	newHtml += "<h3>" + q_("Developers").toHtmlEscaped() + "</h3><ul>";
-	newHtml += "<li>" + q_("Project coordinator & lead developer: %1").arg(QString("Fabien Ch%1reau").arg(QChar(0x00E9))).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Project coordinator & lead developer: %1").arg(QString("Fabien Chéreau")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Graphic/other designer: %1").arg(QString("Martín Bernardi")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Developer: %1").arg(QString("Guillaume Ch%1reau").arg(QChar(0x00E9))).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Developer: %1").arg(QString("Guillaume Chéreau")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Georg Zotti")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Alexander V. Wolf")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Sky cultures researcher: %1").arg(QString("Susanne M. Hoffmann")).toHtmlEscaped() + "</li></ul>";
@@ -493,7 +493,7 @@ void HelpDialog::updateAboutText(void) const
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Bogdan Marinov")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Timothy Reaves")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Florian Schaukowitsch")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Developer: %1").arg(QString("Andr%1s Mohari").arg(QChar(0x00E1))).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Developer: %1").arg(QString("András Mohari")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Mike Storm")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Ferdinand Majerech")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Jörg Müller")).toHtmlEscaped() + "</li>";
