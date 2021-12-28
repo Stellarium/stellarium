@@ -182,7 +182,7 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 
 	orbitValid = true;
 	initialized = true;
-	isISS = (name=="ISS" || name=="ISS (ZARYA)");
+	isISS = (name=="ISS" || name=="ISS (ZARYA)" || name=="ISS (NAUKA)");
 	moon = GETSTELMODULE(SolarSystem)->getMoon();
 	sun = GETSTELMODULE(SolarSystem)->getSun();
 
