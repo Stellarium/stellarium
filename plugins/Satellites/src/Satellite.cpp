@@ -611,7 +611,24 @@ float Satellite::getVMagnitude(const StelCore* core) const
 		else if (stdMag<99.) // OK, artificial satellite has value for standard magnitude
 		{
 			// Calculation of approx. visual magnitude for artificial satellites
-			// described here: http://www.prismnet.com/~mmccants/tles/mccdesc.html
+			//
+			// The standard magnitude may be an estimate based on the mean cross-
+			// sectional area derived from its dimensions, or it may be a mean
+			// value derived from visual observations. The former are denoted by a
+			// letter "d" in column 37; the latter by a "v". To estimate the
+			// magnitude at other ranges and illuminations, use the following formula:
+			//
+			// mag = stdmag - 15.75 + 2.5 * log10 (range * range / fracil)
+			//
+			// where : stdmag = standard magnitude as defined above
+			//
+			// range = distance from observer to satellite, km
+			//
+			// fracil = fraction of satellite illuminated,
+			//	    [ 0 <= fracil <= 1 ]
+			//
+			// Original dscription: http://www.prismnet.com/~mmccants/tles/mccdesc.html
+
 			double fracil = calculateIlluminatedFraction();
 			if (fracil==0)
 				fracil = 0.000001;
