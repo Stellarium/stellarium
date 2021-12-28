@@ -296,8 +296,8 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 			catalogNumbers = QString("NORAD %1")
 					 .arg(id);
 		else
-			catalogNumbers = QString("NORAD %1; %2 (%3): %4")
-					 .arg(id, q_("International Designator"), "COSPAR/NSSDC", internationalDesignator);
+			catalogNumbers = QString("NORAD %1; %2 (COSPAR/NSSDC): %3")
+					 .arg(id, q_("International Designator"), internationalDesignator);
 		oss << catalogNumbers << "<br/><br/>";
 	}
 
