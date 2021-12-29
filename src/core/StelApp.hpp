@@ -80,7 +80,7 @@ class StelApp : public QObject
 	Q_PROPERTY(int  screenFontSize          READ getScreenFontSize          WRITE setScreenFontSize          NOTIFY screenFontSizeChanged)
 	Q_PROPERTY(int  guiFontSize             READ getGuiFontSize             WRITE setGuiFontSize             NOTIFY guiFontSizeChanged)
 
-	Q_PROPERTY(QString version READ getVersion)
+	Q_PROPERTY(QString version READ getVersion CONSTANT)
 
 public:
 	friend class StelAppGraphicsWidget;
