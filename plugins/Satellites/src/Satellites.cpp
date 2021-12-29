@@ -1259,9 +1259,16 @@ bool Satellites::add(const TleData& tleData)
 			satGroups.append(fileName);
 
 		// add "supergroups", based on CelesTrak's groups
-		QString superGroup = satSuperGroupsMap.value(fileName, "");
-		if (!superGroup.isEmpty() && !satGroups.contains(superGroup))
-			satGroups.append(superGroup);
+		QStringList superGroup = satSuperGroupsMap.values(fileName);
+		if (superGroup.size()>0)
+		{
+			for (int i=0; i<superGroup.size(); i++)
+			{
+				QString groupId = superGroup.at(i).toLocal8Bit().constData();
+				if (!satGroups.contains(groupId))
+					satGroups.append(groupId);
+			}
+		}
 	}
 	if (!satGroups.isEmpty())
 	{
@@ -2374,11 +2381,15 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 void Satellites::createSuperGroupsList()
 {
 	QString communications = "communications", navigation = "navigation", scientific = "scientific",
-		earthresources = "earth resources";
+		earthresources = "earth resources", gps = "gps", glonass = "glonass",
+		geostationary = "geostationary";
 	satSuperGroupsMap = {
 		{ "geo",	communications },
+		{ "geo",	geostationary },
 		{ "gpz",	communications },
+		{ "gpz",	geostationary },
 		{ "gpz-plus",	communications },
+		{ "gpz-plus",	geostationary },
 		{ "intelsat",	communications },
 		{ "ses",	communications },
 		{ "iridium",	communications },
@@ -2394,12 +2405,15 @@ void Satellites::createSuperGroupsList()
 		{ "satnogs",	communications },
 		{ "gorizont",	communications },
 		{ "raduga",	communications },
+		{ "raduga",	geostationary },
 		{ "molniya",	communications },
 		{ "gnss",	navigation },
 		{ "gps",	navigation },
 		{ "gps-ops",	navigation },
+		{ "gps-ops",	gps },
 		{ "glonass",	navigation },
 		{ "glo-ops",	navigation },
+		{ "glo-ops",	glonass },
 		{ "galileo",	navigation },
 		{ "beidou",	navigation },
 		{ "sbas",	navigation },
@@ -2409,6 +2423,7 @@ void Satellites::createSuperGroupsList()
 		{ "geodetic",	scientific },
 		{ "engineering",	scientific },
 		{ "education",	scientific },
+		{ "goes",	scientific },
 		{ "goes",	earthresources },
 		{ "resource",	earthresources },
 		{ "sarsat",	earthresources },

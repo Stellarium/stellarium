@@ -672,7 +672,7 @@ private:
 	// GUI
 	SatellitesDialog* configDialog;
 
-	QMap<QString, QString> satSuperGroupsMap;
+	QMultiMap<QString, QString> satSuperGroupsMap;
 
 	static QString SatellitesCatalogVersion;
 
