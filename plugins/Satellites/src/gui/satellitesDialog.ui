@@ -643,53 +643,6 @@
            </layout>
           </widget>
          </item>
-         <item>
-          <widget class="QGroupBox" name="TLEGroup">
-           <property name="title">
-            <string notr="true">TLE</string>
-           </property>
-           <layout class="QGridLayout" name="gridLayout_8">
-            <property name="leftMargin">
-             <number>0</number>
-            </property>
-            <property name="topMargin">
-             <number>0</number>
-            </property>
-            <property name="bottomMargin">
-             <number>0</number>
-            </property>
-            <item row="0" column="0">
-             <widget class="QLabel" name="validAgeLabel">
-              <property name="toolTip">
-               <string>The valid time range for epoch of TLE in days, using for filter of satellites</string>
-              </property>
-              <property name="text">
-               <string>Age of epoch:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QSpinBox" name="validAgeSpinBox">
-              <property name="toolTip">
-               <string>The valid time range for epoch of TLE in days, using for filter of satellites</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-              <property name="minimum">
-               <number>3</number>
-              </property>
-              <property name="maximum">
-               <number>720</number>
-              </property>
-              <property name="value">
-               <number>30</number>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
         </layout>
        </item>
        <item>
@@ -1297,6 +1250,48 @@
                </property>
                <property name="text">
                 <string notr="true"/>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_8">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QLabel" name="validAgeLabel">
+               <property name="toolTip">
+                <string>The valid time range for epoch of TLE in days, using for filter of satellites</string>
+               </property>
+               <property name="text">
+                <string>Age:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QSpinBox" name="validAgeSpinBox">
+               <property name="toolTip">
+                <string>The valid time range for epoch of TLE in days, using for filter of satellites</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="minimum">
+                <number>1</number>
+               </property>
+               <property name="maximum">
+                <number>720</number>
+               </property>
+               <property name="value">
+                <number>30</number>
                </property>
               </widget>
              </item>

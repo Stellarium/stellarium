@@ -189,8 +189,6 @@ void SatellitesDialog::createDialogContent()
 	connectIntProperty(ui->orbitSegmentsSpin, "Satellites.orbitLineSegments");
 	connectIntProperty(ui->orbitFadeSpin,     "Satellites.orbitLineFadeSegments");
 	connectIntProperty(ui->orbitDurationSpin, "Satellites.orbitLineSegmentDuration");
-	// Settings tab / TLE group
-	connectIntProperty(ui->validAgeSpinBox, "Satellites.tleEpochAgeDays");
 
 	// Satellites tab
 	filterModel = new SatellitesListFilterModel(this);
@@ -225,6 +223,9 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->satOrbitColorPickerButton,  SIGNAL(clicked(bool)), this, SLOT(askSatOrbitColor()));
 	connect(ui->satInfoColorPickerButton,   SIGNAL(clicked(bool)), this, SLOT(askSatInfoColor()));
 	connect(ui->descriptionTextEdit,        SIGNAL(textChanged()), this, SLOT(descriptionTextChanged()));
+	// Satellites tab / TLE group
+	connectIntProperty(ui->validAgeSpinBox, "Satellites.tleEpochAgeDays");
+	connect(ui->validAgeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateFilteredSatellitesList()));
 
 	connect(ui->groupsListWidget, SIGNAL(itemChanged(QListWidgetItem*)),
 		     this, SLOT(handleGroupChanges(QListWidgetItem*)));
@@ -440,6 +441,15 @@ void SatellitesDialog::filterListByGroup(int index)
 		first = ui->satellitesList->model()->index(0, 0);
 	selectionModel->setCurrentIndex(first, QItemSelectionModel::NoUpdate);
 	ui->satellitesList->scrollTo(first);
+}
+
+void SatellitesDialog::updateFilteredSatellitesList()
+{
+	QString groupId = ui->groupFilterCombo->currentData(Qt::UserRole).toString();
+	if (groupId == "[outdatedTLE]")
+	{
+		filterListByGroup(ui->groupFilterCombo->currentIndex());
+	}
 }
 
 void SatellitesDialog::updateSatelliteAndSaveData()
