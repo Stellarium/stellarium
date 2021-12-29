@@ -593,6 +593,8 @@ void Satellites::restoreDefaultSettings()
 	QStringList urls;
 	urls << "1,http://www.celestrak.com/NORAD/elements/visual.txt" // Auto-add ON!
 	     << "http://www.celestrak.com/NORAD/elements/tle-new.txt"
+	     << "http://www.celestrak.com/NORAD/elements/active.txt"
+	     << "http://www.celestrak.com/NORAD/elements/analyst.txt"
 	     << "1,http://www.celestrak.com/NORAD/elements/science.txt"
 	     << "http://www.celestrak.com/NORAD/elements/noaa.txt"
 	     << "http://www.celestrak.com/NORAD/elements/goes.txt"
@@ -632,7 +634,7 @@ void Satellites::restoreDefaultSettings()
 	     << "http://www.celestrak.com/NORAD/elements/oneweb.txt"
 	     << "http://www.celestrak.com/NORAD/elements/planet.txt"
 	     << "http://www.celestrak.com/NORAD/elements/spire.txt"
-	     << "1,https://www.prismnet.com/~mmccants/tles/classfd.zip";
+	     << "https://www.prismnet.com/~mmccants/tles/classfd.zip";
 
 	saveTleSources(urls);
 }
