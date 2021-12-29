@@ -227,6 +227,13 @@ public:
 	//! @returns a null pointer if no such satellite is found.
 	StelObjectP searchByNoradNumber(const QString& noradNumber) const;
 
+	//! Return the satellite with the given International Designator.
+	//! Used as a helper function by searchByName() and
+	//! searchByNameI18n().
+	//! @param intlDesignator search string in the format "XXXX-XXXX".
+	//! @returns a null pointer if no such satellite is found.
+	StelObjectP searchByInternationalDesignator(const QString& intlDesignator) const;
+
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names

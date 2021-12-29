@@ -373,6 +373,10 @@ StelObjectP Satellites::searchByNameI18n(const QString& nameI18n) const
 	if (result)
 		return result;
 
+	result = searchByInternationalDesignator(objw);
+	if (result)
+		return result;
+
 	for (const auto& sat : satellites)
 	{
 		if (sat->initialized && sat->displayed)
@@ -404,6 +408,10 @@ StelObjectP Satellites::searchByName(const QString& englishName) const
 	if (result)
 		return result;
 	
+	result = searchByInternationalDesignator(objw);
+	if (result)
+		return result;
+
 	for (const auto& sat : satellites)
 	{
 		if (sat->initialized && sat->displayed)
@@ -462,6 +470,40 @@ StelObjectP Satellites::searchByNoradNumber(const QString &noradNumber) const
 	return StelObjectP();
 }
 
+StelObjectP Satellites::searchByInternationalDesignator(const QString &intlDesignator) const
+{
+	if (!hintFader)
+		return Q_NULLPTR;
+
+	StelCore* core = StelApp::getInstance().getCore();
+
+	if (qAbs(core->getTimeRate())>=Satellite::timeRateLimit) // Do not show satellites when time rate is over limit
+		return Q_NULLPTR;
+
+	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
+		return Q_NULLPTR;
+
+	// If the search string is an international designator...
+	QRegularExpression regExp("^(\\d+)-(\\w*)\\s*$");
+	QRegularExpressionMatch match=regExp.match(intlDesignator);
+	if (match.hasMatch())
+	{
+		QString designator = QString("%1-%2").arg(match.captured(1), match.captured(2));
+
+		for (const auto& sat : satellites)
+		{
+			if (sat->initialized && sat->displayed)
+			{
+				if (sat->getInternationalDesignator() == designator)
+					return qSharedPointerCast<StelObject>(sat);
+			}
+		}
+	}
+
+	return StelObjectP();
+}
+
+
 QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
@@ -490,6 +532,12 @@ QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbI
 			numberPrefix = numberString;
 	}
 
+	QString designatorPrefix;
+	QRegularExpression regExp2("^(\\d+)-(\\w*)\\s*$");
+	QRegularExpressionMatch match2=regExp2.match(objw);
+	if (match2.hasMatch())
+		designatorPrefix = QString("%1-%2").arg(match2.captured(1), match2.captured(2));
+
 	QStringList names;
 	for (const auto& sobj : satellites)
 	{
@@ -500,6 +548,8 @@ QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbI
 		names.append(sobj->getEnglishName());
 		if (!numberPrefix.isEmpty() && sobj->getCatalogNumberString().startsWith(numberPrefix))
 			names.append(QString("NORAD %1").arg(sobj->getCatalogNumberString()));
+		if (!designatorPrefix.isEmpty() && sobj->getInternationalDesignator().startsWith(designatorPrefix))
+			names.append(sobj->getInternationalDesignator());
 	}
 
 	QString fullMatch = "";
