@@ -20,6 +20,7 @@
 #define STELTONEREPRODUCER_HPP
 
 #include <cmath>
+#include <QObject>
 
 //! Converts tones in function of the eye adaptation to luminance.
 //! The aim is to get on the screen something which is perceptualy accurate,
@@ -32,6 +33,10 @@
 //! and setWorldAdaptationLuminance() before any call to xyYToRGB()
 //! or adaptLuminance otherwise the default values will be used. (they are
 //! appropriate for a daylight sky luminance)
+//!
+//! The user can configure properties of the screen and environmant in the TonemappingDialog:
+//! displayAdaptationLuminance, maxDisplayLuminance and displayGamma.
+//! The latter is not fixed to the sRGB value of 2.2 but should probably also not deviate too much.
 //!
 //! REFERENCES :
 //! Thanks to all the authors of the following papers I used for providing
@@ -48,8 +53,15 @@
 //!
 //! [4] "A Visibility Matching Tone Reproduction Operator for High Dynamic
 //! Range Scenes", G.W. Larson, H. Rushmeier, C. Piatko
-class StelToneReproducer
+class StelToneReproducer: public QObject
 {
+	Q_OBJECT
+	Q_PROPERTY(double worldAdaptationLuminance   READ getWorldAdaptationLuminance   WRITE setWorldAdaptationLuminance   NOTIFY worldAdaptationLuminanceChanged)
+	Q_PROPERTY(double displayAdaptationLuminance READ getDisplayAdaptationLuminance WRITE setDisplayAdaptationLuminance NOTIFY displayAdaptationLuminanceChanged)
+	Q_PROPERTY(double maxDisplayLuminance        READ getMaxDisplayLuminance        WRITE setMaxDisplayLuminance        NOTIFY maxDisplayLuminanceChanged)
+	Q_PROPERTY(double inputScale                 READ getInputScale                 WRITE setInputScale                 NOTIFY inputScaleChanged)
+	Q_PROPERTY(double displayGamma               READ getDisplayGamma               WRITE setDisplayGamma               NOTIFY displayGammaChanged)
+
 public:
 	//! Constructor
 	StelToneReproducer();
@@ -57,10 +69,12 @@ public:
 	//! Desctructor
 	virtual ~StelToneReproducer();
 
+public slots:
 	//! Set the eye adaptation luminance for the display (and precompute what can be)
 	//! Usual luminance range is 1-100 cd/m^2 for a CRT screen
 	//! @param displayAdaptationLuminance the new display luminance in cd/m^2. The initial default value is 50 cd/m^2
 	void setDisplayAdaptationLuminance(float displayAdaptationLuminance);
+	float getDisplayAdaptationLuminance() const {return Lda;}
 
 	//! Set the eye adaptation luminance for the world (and precompute what can be)
 	//! @param worldAdaptationLuminance the new world luminance in cd/m^2. The initial default value is 40000 cd/m^2 for Skylight
@@ -90,10 +104,7 @@ public:
 	//! @param maxdL the maximum luminance in cd/m^2. Initial default value is 100 cd/m^2.
 	//! Higher values indicate "This display can faithfully reproduce brighter lights,
 	//! therefore the sky will usually appear darker".
-	void setMaxDisplayLuminance(float maxdL)
-	{
-		oneOverMaxdL = 1.f/maxdL; lnOneOverMaxdL=std::log(oneOverMaxdL); term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
-	}
+	void setMaxDisplayLuminance(float maxdL);
 
 	//! Get the previously set maximum luminance of the display (CRT, screen etc..)
 	//! This value is used to scale the RGB range
@@ -114,11 +125,16 @@ public:
 	//! Set the display gamma
 	//! @param gamma the gamma. Initial default value is 2.2222 for a CRT, and
 	//! sRGB LCD (and similar modern) panels try to reproduce that.
-	void setDisplayGamma(float gamma)
-	{
-		oneOverGamma = 1.f/gamma; term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
-	}
+	void setDisplayGamma(float gamma);
 
+signals:
+	void worldAdaptationLuminanceChanged(double);
+	void displayAdaptationLuminanceChanged(double);
+	void maxDisplayLuminanceChanged(double);
+	void inputScaleChanged(double);
+	void displayGammaChanged(double);
+
+public:
 	//! Return adapted luminance from world to display
 	//! @param worldLuminance the world luminance to convert in cd/m^2
 	//! @return the converted display luminance in cd/m^2

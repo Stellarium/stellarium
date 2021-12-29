@@ -30,6 +30,7 @@ class QToolButton;
 
 class AddRemoveLandscapesDialog;
 class AtmosphereDialog;
+class TonemappingDialog;
 class GreatRedSpotDialog;
 class ConfigureDSOColorsDialog;
 class ConfigureOrbitColorsDialog;
@@ -68,7 +69,8 @@ private slots:
 	void showAddRemoveLandscapesDialog();
 	// GZ I make this public to have it on a hotkey...
 public slots:
-        void showAtmosphereDialog();
+	void showAtmosphereDialog();
+	void showTonemappingDialog();
 	void showGreatRedSpotDialog();
 	void showConfigureDSOColorsDialog();
 	void showConfigureOrbitColorsDialog();
@@ -108,6 +110,7 @@ private:
 
 	AddRemoveLandscapesDialog * addRemoveLandscapesDialog;
 	AtmosphereDialog * atmosphereDialog;
+	TonemappingDialog * tonemappingDialog;
 	GreatRedSpotDialog * greatRedSpotDialog;
 	ConfigureDSOColorsDialog * configureDSOColorsDialog;
 	ConfigureOrbitColorsDialog * configureOrbitColorsDialog;

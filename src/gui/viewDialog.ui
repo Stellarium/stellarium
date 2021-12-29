@@ -464,6 +464,16 @@
                  </property>
                 </widget>
                </item>
+               <item>
+                <widget class="QPushButton" name="tonemappingPushButton">
+                 <property name="toolTip">
+                  <string>Open tonemapping details.</string>
+                 </property>
+                 <property name="text">
+                  <string>Tonemapping...</string>
+                 </property>
+                </widget>
+               </item>
               </layout>
              </item>
              <item row="7" column="0">
@@ -5142,12 +5152,12 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>

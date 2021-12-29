@@ -18,6 +18,8 @@
 
 #include "StelToneReproducer.hpp"
 #include "StelUtils.hpp"
+#include "StelApp.hpp"
+#include <QSettings>
 #include <cmath>
 
 /*********************************************************************
@@ -25,8 +27,16 @@
 *********************************************************************/
 StelToneReproducer::StelToneReproducer() : Lda(50.f), Lwa(40000.f), oneOverMaxdL(1.f/100.f), lnOneOverMaxdL(std::log(1.f/100.f)), oneOverGamma(1.f/2.2222f)
 {
+	setObjectName("StelToneReproducer");
+	QSettings *conf = StelApp::getInstance().getSettings();
+	Lda = conf->value("video/tm_display_adaptation_luminance", 50.f).toFloat();
+	oneOverGamma=1.f / conf->value("video/tm_gamma", 2.2222f).toFloat();
+	const float maxDisplayLuminance=conf->value("video/tm_max_display_luminance", 100.f).toFloat();
+	oneOverMaxdL=1.f/maxDisplayLuminance;
+	lnOneOverMaxdL=std::log(oneOverMaxdL);
+
 	// Initialize  sensor
-	setInputScale();
+	setInputScale(1.f);
 	
 	// Update alphaDa and betaDa values
 	float log10Lwa = std::log10(Lwa);
@@ -72,6 +82,27 @@ void StelToneReproducer::setDisplayAdaptationLuminance(float _Lda)
 	term2 =(stelpow10f((betaWa-betaDa)/alphaDa) / (M_PIf*0.0001f));
 	lnTerm2 = std::log(term2);
 	term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
+
+	QSettings *conf = StelApp::getInstance().getSettings();
+	conf->setValue("video/tm_display_adaptation_luminance", Lda);
+	emit displayAdaptationLuminanceChanged(static_cast<double>(Lda));
+}
+
+void StelToneReproducer::setMaxDisplayLuminance(float maxdL)
+{
+	oneOverMaxdL = 1.f/maxdL; lnOneOverMaxdL=std::log(oneOverMaxdL); term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
+
+	QSettings *conf = StelApp::getInstance().getSettings();
+	conf->setValue("video/tm_max_display_luminance", maxdL);
+	emit maxDisplayLuminanceChanged(static_cast<double>(maxdL));
+}
+
+void StelToneReproducer::setDisplayGamma(float gamma)
+{
+	oneOverGamma = 1.f/gamma; term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
+	QSettings *conf = StelApp::getInstance().getSettings();
+	conf->setValue("video/tm_gamma", gamma);
+	emit displayGammaChanged(static_cast<double>(gamma));
 }
 
 /*********************************************************************
