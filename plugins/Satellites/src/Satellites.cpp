@@ -196,6 +196,8 @@ void Satellites::init()
 
 	// create satellites according to content of satellites.json file
 	loadCatalog();
+	// create list of "supergroups" for satellites
+	createSuperGroupsList();
 
 	// Set up download manager and the update schedule
 	downloadMgr = new QNetworkAccessManager(this);
@@ -1201,10 +1203,15 @@ bool Satellites::add(const TleData& tleData)
 	}
 	if (tleData.sourceURL.contains("celestrak.com", Qt::CaseInsensitive))
 	{
-		// add groups, based on Celestrak's groups
+		// add groups, based on CelesTrak's groups
 		QString fileName = QUrl(tleData.sourceURL).fileName().toLower().replace(".txt", "");
 		if (!satGroups.contains(fileName))
 			satGroups.append(fileName);
+
+		// add "supergroups", based on CelesTrak's groups
+		QString superGroup = satSuperGroupsMap.value(fileName, "");
+		if (!superGroup.isEmpty() && !satGroups.contains(superGroup))
+			satGroups.append(superGroup);
 	}
 	if (!satGroups.isEmpty())
 	{
@@ -2313,6 +2320,55 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 #endif
 // close SATELLITES_PLUGIN_IRIDIUM
 #endif
+
+void Satellites::createSuperGroupsList()
+{
+	QString communications = "communications", navigation = "navigation", scientific = "scientific",
+		earthresources = "earth resources";
+	satSuperGroupsMap = {
+		{ "geo",	communications },
+		{ "gpz",	communications },
+		{ "gpz-plus",	communications },
+		{ "intelsat",	communications },
+		{ "ses",	communications },
+		{ "iridium",	communications },
+		{ "iridium-NEXT",	communications },
+		{ "starlink",	communications },
+		{ "oneweb",	communications },
+		{ "orbcomm",	communications },
+		{ "globalstar",	communications },
+		{ "swarm",	communications },
+		{ "amateur",	communications },
+		{ "x-comm",	communications },
+		{ "other-comm",	communications },
+		{ "satnogs",	communications },
+		{ "gorizont",	communications },
+		{ "raduga",	communications },
+		{ "molniya",	communications },
+		{ "gnss",	navigation },
+		{ "gps",	navigation },
+		{ "gps-ops",	navigation },
+		{ "glonass",	navigation },
+		{ "glo-ops",	navigation },
+		{ "galileo",	navigation },
+		{ "beidou",	navigation },
+		{ "sbas",	navigation },
+		{ "nnss",	navigation },
+		{ "musson",	navigation },
+		{ "science",	scientific },
+		{ "geodetic",	scientific },
+		{ "engineering",	scientific },
+		{ "education",	scientific },
+		{ "goes",	earthresources },
+		{ "resource",	earthresources },
+		{ "sarsat",	earthresources },
+		{ "dmc",	earthresources },
+		{ "tdrss",	earthresources },
+		{ "argos",	earthresources },
+		{ "planet",	earthresources },
+		{ "spire",	earthresources }
+	};
+}
 
 void Satellites::translations()
 {

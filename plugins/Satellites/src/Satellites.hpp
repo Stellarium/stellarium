@@ -589,6 +589,8 @@ private:
 	//! place.)
 	static void translations();
 
+	void createSuperGroupsList();
+
 	//! Path to the satellite catalog file.
 	QString catalogPath;
 	//! Plug-in data directory.
@@ -662,6 +664,8 @@ private:
 #endif
 	// GUI
 	SatellitesDialog* configDialog;
+
+	QMap<QString, QString> satSuperGroupsMap;
 
 	static QString SatellitesCatalogVersion;
 
