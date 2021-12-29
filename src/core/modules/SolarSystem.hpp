@@ -731,6 +731,16 @@ public slots:
 	//! Reset and recreate trails
 	void recreateTrails();
 
+	//! Reset textures for planet @param planetName
+	//! @note if @param planetName is empty then reset will happen for all solar system objects
+	void resetTextures(const QString& planetName);
+
+	//! Replace the texture for the planet @param planetName
+	//! @param planetName - English name of the planet
+	//! @param texName - file path for texture
+	//! The texture path starts in the scripts directory.
+	void setTextureForPlanet(const QString &planetName, const QString &texName);
+
 signals:
 	void labelsDisplayedChanged(bool b);
 	void nomenclatureDisplayedChanged(bool b);

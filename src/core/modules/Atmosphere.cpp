@@ -360,6 +360,7 @@ void Atmosphere::draw(StelCore* core)
 	GL(atmoShaderProgram->bind());
 	float a, b, c;
 	eye->getShadersParams(a, b, c);
+
 	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.alphaWaOverAlphaDa, a));
 	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.oneOverGamma, b));
 	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.term2TimesOneOverMaxdLpOneOverGamma, c));
@@ -387,13 +388,13 @@ void Atmosphere::draw(StelCore* core)
 					      QMatrix4x4(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15])));
 
 	const auto rgbMaxValue=calcRGBMaxValue(sPainter.getDitheringMode());
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.rgbMaxValue, rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]);
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.rgbMaxValue, rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]));
 	auto& gl=*sPainter.glFuncs();
 	gl.glActiveTexture(GL_TEXTURE1);
 	if(!bayerPatternTex)
 		bayerPatternTex=makeBayerPatternTexture(*sPainter.glFuncs());
 	gl.glBindTexture(GL_TEXTURE_2D, bayerPatternTex);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.bayerPattern, 1);
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.bayerPattern, 1));
 	
 	GL(colorGridBuffer.bind());
 	GL(atmoShaderProgram->setAttributeBuffer(shaderAttribLocations.skyColor, GL_FLOAT, 0, 4, 0));

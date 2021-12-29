@@ -182,7 +182,7 @@ updating Stellarium will not risk the loss of your own data.
 \section{The Logfile}
 \label{sec:LogFile}
 
-Stellarium reports various events and confirmations to a logfile, \file{log.txt}, 
+Stellarium reports various events and confirmations to a \indexterm{logfile}, \file{log.txt}, 
 in the \emph{user directory}. This has the same content as you can see on the console 
 on Linux when you start Stellarium on the command line. Normally you don't need to bother with its contents, 
 however, if Stellarium behaves unexpectedly, crashes, or shows other problems, a quick look into this 
@@ -194,29 +194,31 @@ The logfile can also be displayed within the program: press \key{F1} to call the
 \section{The Main Configuration File}
 \label{sec:ConfigurationFile}
 
-The main configuration file is read each time Stellarium starts, and
+The main \indexterm{configuration file} is read each time Stellarium starts, and
 settings such as the observer's location and display preferences are
 taken from it. Ideally this mechanism should be totally transparent to
 the user -- anything that is configurable should be configured ``in''
 the program GUI. However, at time of writing Stellarium isn't quite
 complete in this respect, despite improvements in each version. Some
-settings, esp.\ color values for lines, grids, etc.\ can only be
+settings, esp.\ color values for some lines, grids, etc.\ can only be
 changed by directly editing the configuration file.\footnote{Color
   values can be edited interactively by the Text User Interface plugin
   (see~\ref{sec:plugins:TextUserInterface}).} This section describes
 some of the settings a user may wish to modify in this way, and how to
 do it.
 
+The name of the configuration file is
+\file{config.ini}\footnote{It is possible to specify a different name
+  for the main configuration file using the \texttt{-\/-config-file}
+  command line option. See section~\ref{sec:CommandLineOptions} Command 
+  Line Options for details.}.
 If the configuration file does not exist in the \emph{user directory}
 when Stellarium is started (e.g., the first time the user starts the
 program), one will be created with default values for all settings
 (refer to section~\ref{sec:FilesAndDirectories} Files and
 Directories for the location of the user directory on your operating
-system). The name of the configuration file is
-\file{config.ini}\footnote{It is possible to specify a different name
-  for the main configuration file using the \texttt{-\/-config-file}
-  command line option. See section~\ref{sec:CommandLineOptions} Command 
-  Line Options for details.}.
+system).
+
 
 The configuration file is a regular text file, so all you need to edit
 it is a text editor like \program{Notepad} on Windows, \program{Text Edit} on

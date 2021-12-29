@@ -81,6 +81,13 @@ public:
 	//! @return true if a object with the passed name was found
 	bool findAndSelect(const QString &name, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
 
+	//! Find and select an object from its standard program name and object type name.
+	//! @param action define whether to add to, replace, or remove from the existing selection
+	//! @param name the case sensitive object translated name
+	//! @param objtype the type of the object
+	//! @return true if a object with the passed name was found
+	bool findAndSelect(const QString &name, const QString &objtype, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
+
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names.
@@ -126,6 +133,9 @@ public:
 
 	//! Find any kind of object by its standard program name.
 	StelObjectP searchByName(const QString &name) const;
+
+	//! Find any kind of object by its standard program name and its object type name.
+	StelObjectP searchByName(const QString &name, const QString &objType) const;
 
 	//! Find an object of the given type and ID
 	//! @param type the type of the object as given by StelObject::getType()
@@ -198,6 +208,19 @@ public slots:
 	void nextMorningTwilight();
 	//! Set simulation time to the next day's evening when Sun reaches twilightAltitude
 	void nextEveningTwilight();
+
+	//! Set simulation time to this day's morning when selected object reaches current altitude
+	void todayMorningAtAltitude();
+	//! Set simulation time to the next morning when selected object reaches current altitude
+	void nextMorningAtAltitude();
+	//! Set simulation time to the previous morning when selected object reaches current altitude
+	void previousMorningAtAltitude();
+	//! Set simulation time to this day's evening when selected object reaches current altitude
+	void todayEveningAtAltitude();
+	//! Set simulation time to the next evening when selected object reaches current altitude
+	void nextEveningAtAltitude();
+	//! Set simulation time to the previous evening when selected object reaches current altitude
+	void previousEveningAtAltitude();
 
 	//! @note These functions were copied over from StelObject. Given that setExtraInfoString is non-const and some functions where these methods are useful are const, we can use the StelObjectMgr as "carrier object".
 	//! Allow additions to the Info String. Can be used by plugins to show extra info for the selected object, or for debugging.

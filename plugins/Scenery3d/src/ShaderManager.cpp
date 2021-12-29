@@ -300,7 +300,7 @@ bool ShaderMgr::preprocessShader(const QString &fileName, const uint flags, QByt
 	}
 
 	processedSource.clear();
-	processedSource.reserve(file.size());
+	processedSource.reserve(static_cast<int>(file.size()));
 
 	//use a text stream for "parsing"
 	QTextStream in(&file),lineStream;
@@ -453,7 +453,7 @@ void ShaderMgr::buildUniformCache(QOpenGLShaderProgram &program)
 #ifndef NDEBUG
 	//qCDebug(shaderMgr)<<"Shader has"<<numUniforms<<"uniforms";
 #endif
-	for(int i =0;i<numUniforms;++i)
+	for(uint i =0;i<static_cast<GLuint>(numUniforms);++i)
 	{
 		GL(gl->glGetActiveUniform(prog,i,bufSize,&length,&size,&type,buf.data()));
 		QString str(buf);
@@ -469,7 +469,7 @@ void ShaderMgr::buildUniformCache(QOpenGLShaderProgram &program)
 		{
 			//this is uniform we recognize
 			//need to get the uniforms location (!= index)
-			m_uniformCache[&program][*it] = loc;
+			m_uniformCache[&program][*it] = static_cast<GLuint>(loc);
 			//output mapping for debugging
 			//qCDebug(shaderMgr)<<i<<loc<<str<<size<<type<<" mapped to "<<*it;
 		}

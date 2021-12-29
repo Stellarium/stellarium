@@ -223,6 +223,9 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->satOrbitColorPickerButton,  SIGNAL(clicked(bool)), this, SLOT(askSatOrbitColor()));
 	connect(ui->satInfoColorPickerButton,   SIGNAL(clicked(bool)), this, SLOT(askSatInfoColor()));
 	connect(ui->descriptionTextEdit,        SIGNAL(textChanged()), this, SLOT(descriptionTextChanged()));
+	// Satellites tab / TLE group
+	connectIntProperty(ui->validAgeSpinBox, "Satellites.tleEpochAgeDays");
+	connect(ui->validAgeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateFilteredSatellitesList()));
 
 	connect(ui->groupsListWidget, SIGNAL(itemChanged(QListWidgetItem*)),
 		     this, SLOT(handleGroupChanges(QListWidgetItem*)));
@@ -398,6 +401,8 @@ void SatellitesDialog::filterListByGroup(int index)
 		filterModel->setSecondaryFilters(QString(), SatNoFlags);
 	else if (groupId == "[displayed]")
 		filterModel->setSecondaryFilters(QString(), SatDisplayed);
+	else if (groupId == "[userdefined]")
+		filterModel->setSecondaryFilters(QString(), SatUser);
 	else if (groupId == "[undisplayed]")
 		filterModel->setSecondaryFilters(QString(), SatNotDisplayed);
 	else if (groupId == "[newlyadded]")
@@ -420,6 +425,8 @@ void SatellitesDialog::filterListByGroup(int index)
 		filterModel->setSecondaryFilters(QString(), SatHEO);
 	else if (groupId == "[HGSO]")
 		filterModel->setSecondaryFilters(QString(), SatHGSO);
+	else if (groupId == "[outdatedTLE]")
+		filterModel->setSecondaryFilters(QString(), SatOutdatedTLE);
 	else
 		filterModel->setSecondaryFilters(groupId, SatNoFlags);
 
@@ -434,6 +441,15 @@ void SatellitesDialog::filterListByGroup(int index)
 		first = ui->satellitesList->model()->index(0, 0);
 	selectionModel->setCurrentIndex(first, QItemSelectionModel::NoUpdate);
 	ui->satellitesList->scrollTo(first);
+}
+
+void SatellitesDialog::updateFilteredSatellitesList()
+{
+	QString groupId = ui->groupFilterCombo->currentData(Qt::UserRole).toString();
+	if (groupId == "[outdatedTLE]")
+	{
+		filterListByGroup(ui->groupFilterCombo->currentIndex());
+	}
 }
 
 void SatellitesDialog::updateSatelliteAndSaveData()
@@ -1010,6 +1026,8 @@ void SatellitesDialog::populateFilterMenu()
 	ui->groupFilterCombo->insertItem(0, q_("[HEO satellites]"), QVariant("[HEO]"));
 	// TRANSLATORS: HGEO = High geosynchronous orbit
 	ui->groupFilterCombo->insertItem(0, q_("[HGSO satellites]"), QVariant("[HGSO]"));
+	ui->groupFilterCombo->insertItem(0, q_("[outdated TLE]"), QVariant("[outdatedTLE]"));
+	ui->groupFilterCombo->insertItem(0, q_("[all user defined]"), QVariant("[userdefined]"));
 	ui->groupFilterCombo->insertItem(0, q_("[all]"), QVariant("all"));
 
 	// Restore current selection
