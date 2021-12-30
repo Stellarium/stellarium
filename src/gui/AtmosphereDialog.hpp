@@ -58,6 +58,9 @@ protected slots:
 	void resetZxStel();
 	void resetZyStel();
 
+	void resetPreet(); // reset all xyYABCDEF parameters
+	void resetStel();  // reset all xyYABCDEF parameters
+
 	void setIncrements(int idx);
 	void setTfromK(double k);
 

@@ -103,7 +103,7 @@ class Skylight: public QObject
 
 	Q_PROPERTY(double T  READ getT WRITE setT NOTIFY turbidityChanged)
 	Q_PROPERTY(bool flagSRGB  READ getFlagSRGB WRITE setFlagSRGB NOTIFY flagSRGBChanged)
-
+	Q_PROPERTY(bool flagSchaefer READ getFlagSchaefer WRITE setFlagSchaefer NOTIFY flagSchaeferChanged)
 
 friend class AtmosphereDialog;
 
@@ -142,11 +142,11 @@ public:
 		p.color[1] = term_y * (1.f + Ay * std::exp(By*oneOverCosZenithAngle))
 				* (1.f + Cy * std::exp(Dy*distSun) + Ey * cosDistSun_q);
 
-// 		p.color[2] = term_Y * (1.f + AY * std::exp(BY*oneOverCosZenithAngle))
-// 				* (1.f + CY * std::exp(DY*distSun) + EY * cosDistSun_q);
+		p.color[2] = term_Y * (1.f + AY * std::exp(BY*oneOverCosZenithAngle))
+				* (1.f + CY * std::exp(DY*distSun) + EY * cosDistSun_q);
 
 
-		if (/*p.color[2] < 0. || */p.color[0] < 0.f || p.color[1] < 0.f)
+		if (p.color[2] < 0.f || p.color[0] < 0.f || p.color[1] < 0.f)
 		{
 			p.color[0] = 0.25;
 			p.color[1] = 0.25;
@@ -226,6 +226,7 @@ signals:
 	void zY34Changed(double val);
 	void turbidityChanged(double val);
 	void flagSRGBChanged(bool val);
+	void flagSchaeferChanged(bool val);
 	
 public slots:
 	void setAYt(const double val){AYt=val;   StelApp::getInstance().getSettings()->setValue("Skylight/AYt",  val); emit AYtChanged(val);  computeLuminanceDistributionCoefs();}
@@ -340,7 +341,9 @@ public slots:
 	void setT(double newT){T=newT; emit turbidityChanged(newT); }
 
 	void setFlagSRGB(bool val){flagSRGB=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/use_sRGB", val); emit flagSRGBChanged(val);}
-	bool getFlagSRGB() {return flagSRGB;}
+	bool getFlagSRGB() const {return flagSRGB;}
+	void setFlagSchaefer(bool val){flagSchaefer=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/use_Schaefer", val); emit flagSchaeferChanged(val);}
+	bool getFlagSchaefer() const {return flagSchaefer;}
 
 private:
 	double thetas;  // angular distance between the zenith and the sun in radian
@@ -380,6 +383,7 @@ private:
 	double zY31, zY32, zY33, zY34;
 
 	bool flagSRGB;             // Apply sRGB color conversion. If false, applies AdobeRGB(1998) (Stellarium's original default)
+	bool flagSchaefer;         // Use Schaerfer's sky brighness model. If false, use CIE brightness from Preetham's paper.
 
 	double term_x;              // Precomputed term for x calculation
 	double term_y;              // Precomputed term for y calculation

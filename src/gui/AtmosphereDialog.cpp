@@ -64,6 +64,7 @@ void AtmosphereDialog::createDialogContent()
 	connectDoubleProperty(ui->doubleSpinBox_T, "StelSkyDrawer.turbidity");
 
 	connectBoolProperty(ui->checkBox_sRGB, "Skylight.flagSRGB");
+	connectBoolProperty(ui->checkBox_Schaefer, "Skylight.flagSchaefer");
 
 	ui->comboBox_skylightDecimals->addItem("1", 1);
 	ui->comboBox_skylightDecimals->addItem("0.1", .1);
@@ -142,6 +143,8 @@ void AtmosphereDialog::createDialogContent()
 	connect(ui->pushButton_ResetZYpreetham, SIGNAL(released()), this, SLOT(resetZyPreet()));
 	connect(ui->pushButton_ResetZXstel,     SIGNAL(released()), this, SLOT(resetZxStel()));
 	connect(ui->pushButton_ResetZYstel,     SIGNAL(released()), this, SLOT(resetZyStel()));
+	connect(ui->resetPreetPushButton,     SIGNAL(released()), this, SLOT(resetPreet()));
+	connect(ui->resetStellPushButton,     SIGNAL(released()), this, SLOT(resetStel()));
 }
 
 void AtmosphereDialog::setStandardAtmosphere()
@@ -349,5 +352,20 @@ void AtmosphereDialog::setTfromK(double k)
 	}
 }
 
+void AtmosphereDialog::resetStel()
+{
+    resetYStel();
+    resetxStel();
+    resetyStel();
+    resetZxStel();
+    resetZyStel();
+}
 
-
+void AtmosphereDialog::resetPreet()
+{
+    resetYPreet();
+    resetxPreet();
+    resetyPreet();
+    resetZxPreet();
+    resetZyPreet();
+}

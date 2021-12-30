@@ -277,6 +277,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 	Vec3d point(1., 0., 0.);
 	float lumi;
 
+	skylightStruct2 skylight;
 	// Compute the sky color for every point above the ground
 	for (unsigned int i=0; i<(1+skyResolutionX)*(1+skyResolutionY); ++i)
 	{
@@ -295,9 +296,22 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 			// it looks nice and gives proper values for brightness estimation
 			// Use the Skybright.cpp 's models for brightness which gives better results.
 		}
-		lumi = skyb.getLuminance(moonPosF[0]*pointF[0]+moonPosF[1]*pointF[1]+
-				moonPosF[2]*pointF[2], sunPosF[0]*pointF[0]+sunPosF[1]*pointF[1]+
-				sunPosF[2]*pointF[2], pointF[2]);
+		// Experimental: Re-allow CIE brightness instead.
+		if (sky.getFlagSchaefer())
+		{
+			lumi = skyb.getLuminance(moonPosF[0]*pointF[0]+moonPosF[1]*pointF[1]+
+					moonPosF[2]*pointF[2], sunPosF[0]*pointF[0]+sunPosF[1]*pointF[1]+
+					sunPosF[2]*pointF[2], pointF[2]);
+		}
+		else
+		{
+			skylight.pos[0]=pointF.v[0];
+			skylight.pos[1]=pointF.v[1];
+			skylight.pos[2]=pointF.v[2];
+			sky.getxyYValuev(skylight);
+			lumi=skylight.color[2];
+		}
+
 		lumi *= eclipseFactor;
 		// Add star background luminance
 		lumi += 0.0001f;
@@ -311,7 +325,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		// Store for later statistics
 		sum_lum+=lumi;
 
-		// Now need to compute the xy part of the color component
+		// No need to compute the xy part of the color component
 		// This is done in the openGL shader
 		// Store the back projected position + luminance in the input color to the shader
 		colorGrid[i].set(pointF[0], pointF[1], pointF[2], lumi);
@@ -419,10 +433,7 @@ void Atmosphere::draw(StelCore* core)
 	GL(atmoShaderProgram->disableAttributeArray(shaderAttribLocations.skyColor));
 	GL(atmoShaderProgram->release());
 	// GZ: debug output
-	//const StelProjectorP prj = core->getProjection(StelCore::FrameEquinoxEqu);
-	//StelPainter painter(prj);
-	//painter.setFont(font);
 	sPainter.setColor(0.7f, 0.7f, 0.7f);
+	sPainter.drawText(83, 108, QString("Tonemapper::worldAdaptationLuminance(): %1" ).arg(eye->getWorldAdaptationLuminance()));
 	sPainter.drawText(83, 120, QString("Atmosphere::getAverageLuminance(): %1" ).arg(getAverageLuminance()));
-	//qDebug() << atmosphere->getAverageLuminance();
 }

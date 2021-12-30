@@ -33,7 +33,8 @@ Skylight::Skylight() :
 	zenithColorX(0.),
 	zenithColorY(0.),
 	eyeLumConversion(0.),
-	flagSRGB(false)
+	flagSRGB(false),
+	flagSchaefer(true)
 {
 	setObjectName("Skylight");
 	AY = BY = CY = DY = EY = 0.;
@@ -101,6 +102,7 @@ Skylight::Skylight() :
 	zY34=conf->value("Skylight/zY34", +0.26688).toDouble();
 
 	flagSRGB=conf->value("Skylight/use_sRGB", false).toBool();
+	flagSchaefer=conf->value("Skylight/use_Schaefer", true).toBool();
 }
 
 Skylight::~Skylight()
@@ -152,6 +154,5 @@ void Skylight::setParamsv(const float * _sunPos, float _turbidity)
 	double cos_thetas = static_cast<double>(sunPos[2]);
 	term_x = zenithColorX   / ((1. + Ax * std::exp(Bx)) * (1. + Cx * std::exp(Dx*thetas) + Ex * cos_thetas * cos_thetas));
 	term_y = zenithColorY   / ((1. + Ay * std::exp(By)) * (1. + Cy * std::exp(Dy*thetas) + Ey * cos_thetas * cos_thetas));
-	term_Y = 0.0; // zenithLuminance /((1.f + AY * std::exp(BY)) * (1.f + CY * std::exp(DY*thetas) + EY * cos_thetas * cos_thetas));
+	term_Y = flagSchaefer ? 0. : zenithLuminance/ ((1. + AY * std::exp(BY)) * (1. + CY * std::exp(DY*thetas) + EY * cos_thetas * cos_thetas));
 }
-
