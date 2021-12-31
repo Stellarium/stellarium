@@ -61,6 +61,8 @@ class StelToneReproducer: public QObject
 	Q_PROPERTY(double maxDisplayLuminance        READ getMaxDisplayLuminance        WRITE setMaxDisplayLuminance        NOTIFY maxDisplayLuminanceChanged)
 	Q_PROPERTY(double inputScale                 READ getInputScale                 WRITE setInputScale                 NOTIFY inputScaleChanged)
 	Q_PROPERTY(double displayGamma               READ getDisplayGamma               WRITE setDisplayGamma               NOTIFY displayGammaChanged)
+	// Use Stellarium's original extra gamma correction (makes sky look better, but it is unclear whether it's required)
+	Q_PROPERTY(bool flagUseTmGamma               READ getFlagUseTmGamma             WRITE setFlagUseTmGamma             NOTIFY flagUseTmGammaChanged)
 
 public:
 	//! Constructor
@@ -89,7 +91,7 @@ public slots:
 		return Lwa;
 	}
 	
-	//! Set the global scale applied to input lumiances, i.e before the adaptation
+	//! Set the global scale applied to input luminances, i.e before the adaptation
 	//! It is the parameter to modify to simulate aperture*exposition time
 	//! @param scale the global input scale
 	void setInputScale(float scale=1.f);
@@ -127,12 +129,16 @@ public slots:
 	//! sRGB LCD (and similar modern) panels try to reproduce that.
 	void setDisplayGamma(float gamma);
 
+	bool getFlagUseTmGamma() const {return flagUseTmGamma;}
+	void setFlagUseTmGamma(bool b);
+
 signals:
 	void worldAdaptationLuminanceChanged(double);
 	void displayAdaptationLuminanceChanged(double);
 	void maxDisplayLuminanceChanged(double);
 	void inputScaleChanged(double);
 	void displayGammaChanged(double);
+	void flagUseTmGammaChanged(bool);
 
 public:
 	//! Return adapted luminance from world to display
@@ -182,11 +188,13 @@ public:
 	//! @param xyY an array of 3 floats which are replaced by the converted RGB values
 	void xyYToRGB(float* xyY) const;
 	
-	void getShadersParams(float& a, float& b, float& c) const
+	void getShadersParams(float& a, float& b, float& c, float& d, bool& e) const
 	{
 		a=alphaWaOverAlphaDa;
 		b=oneOverGamma;
 		c=term2TimesOneOverMaxdLpOneOverGamma;
+		d=term2TimesOneOverMaxdL;
+		e=flagUseTmGamma;
 	}
 private:
 	// The global luminance scaling
@@ -198,6 +206,7 @@ private:
 	float oneOverMaxdL;	// 1 / Display maximum luminance (in cd/m^2)
 	float lnOneOverMaxdL; // log(oneOverMaxdL)
 	float oneOverGamma;	// 1 / Screen gamma value
+	bool flagUseTmGamma;  // true to use Stellarium's original tonemapping with a gamma that is challenged by Ruslan (10110111).
 
 	// Precomputed variables
 	float alphaDa;
@@ -208,7 +217,8 @@ private:
 	float term2;
 	float lnTerm2;	// log(term2)
 	
-	float term2TimesOneOverMaxdLpOneOverGamma;
+	float term2TimesOneOverMaxdLpOneOverGamma; // originally used by FC
+	float term2TimesOneOverMaxdL;              // gamma-free version by Ruslan
 };
 
 #endif // STELTONEREPRODUCER_HPP

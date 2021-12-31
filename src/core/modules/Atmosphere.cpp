@@ -90,6 +90,8 @@ Atmosphere::Atmosphere(void)
 	GL(shaderAttribLocations.alphaWaOverAlphaDa = atmoShaderProgram->uniformLocation("alphaWaOverAlphaDa"));
 	GL(shaderAttribLocations.oneOverGamma = atmoShaderProgram->uniformLocation("oneOverGamma"));
 	GL(shaderAttribLocations.term2TimesOneOverMaxdLpOneOverGamma = atmoShaderProgram->uniformLocation("term2TimesOneOverMaxdLpOneOverGamma"));
+	GL(shaderAttribLocations.term2TimesOneOverMaxdL = atmoShaderProgram->uniformLocation("term2TimesOneOverMaxdL"));
+	GL(shaderAttribLocations.flagUseTmGamma = atmoShaderProgram->uniformLocation("flagUseTmGamma"));
 	GL(shaderAttribLocations.brightnessScale = atmoShaderProgram->uniformLocation("brightnessScale"));
 	GL(shaderAttribLocations.sunPos = atmoShaderProgram->uniformLocation("sunPos"));
 	GL(shaderAttribLocations.term_x = atmoShaderProgram->uniformLocation("term_x"));
@@ -372,12 +374,16 @@ void Atmosphere::draw(StelCore* core)
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
 
 	GL(atmoShaderProgram->bind());
-	float a, b, c;
-	eye->getShadersParams(a, b, c);
+	float a, b, c, d;
+	bool e;
+	eye->getShadersParams(a, b, c, d, e);
 
 	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.alphaWaOverAlphaDa, a));
 	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.oneOverGamma, b));
 	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.term2TimesOneOverMaxdLpOneOverGamma, c));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.term2TimesOneOverMaxdL, d));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.flagUseTmGamma, e));
+
 	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.brightnessScale, atm_intensity));
 	Vec3f sunPos;
 	float term_x, Ax, Bx, Cx, Dx, Ex, term_y, Ay, By, Cy, Dy, Ey;

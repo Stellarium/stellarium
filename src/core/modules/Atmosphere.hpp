@@ -109,7 +109,9 @@ private:
 		int rgbMaxValue;
 		int alphaWaOverAlphaDa;
 		int oneOverGamma;
-		int term2TimesOneOverMaxdLpOneOverGamma;
+		int term2TimesOneOverMaxdLpOneOverGamma; // original
+		int term2TimesOneOverMaxdL;              // challenge by Ruslan
+		int flagUseTmGamma;                      // switch between their use, true to use the first expression.
 		int brightnessScale;
 		int sunPos;
 		int term_x, Ax, Bx, Cx, Dx, Ex;

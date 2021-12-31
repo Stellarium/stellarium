@@ -23,8 +23,10 @@ const highp float ln10 = 2.3025850929940459;
 uniform highp float alphaWaOverAlphaDa;
 uniform highp float oneOverGamma;
 uniform highp float term2TimesOneOverMaxdLpOneOverGamma;
+uniform highp float term2TimesOneOverMaxdL;
 uniform highp float brightnessScale; // Only the atmosphere fader value [0...1], i.e. drawn or not, or in transition.
 uniform bool doSRGB;
+uniform bool flagUseTmGamma;
 
 
 vec3 xyYToRGB(highp float x, highp float y, highp float Y)
@@ -40,8 +42,14 @@ vec3 xyYToRGB(highp float x, highp float y, highp float Y)
 	{
 		// special case for s = 0 (x=0.25, y=0.25)
 		Y *= 0.5121445;
-		Y = pow(abs(Y*pi*1e-4), alphaWaOverAlphaDa*oneOverGamma)* term2TimesOneOverMaxdLpOneOverGamma;
-		return vec3(0.787077, 0.9898434, 1.9256125) * Y * brightnessScale;
+		if (flagUseTmGamma)
+		{
+			Y = pow(abs(Y*pi*1e-4), alphaWaOverAlphaDa*oneOverGamma)* term2TimesOneOverMaxdLpOneOverGamma;
+			return vec3(0.787077, 0.9898434, 1.9256125) * Y * brightnessScale;
+		}else{
+			Y = pow(abs(Y*pi*1e-4), alphaWaOverAlphaDa) * term2TimesOneOverMaxdL;
+			return pow(vec3(0.787077, 0.9898434, 1.9256125) * Y * brightnessScale, vec3(oneOverGamma));
+		}
 	}
 	else
 	{
@@ -60,9 +68,14 @@ vec3 xyYToRGB(highp float x, highp float y, highp float Y)
 		}
 
 		// 2. Adapt the luminance value and scale it to fit in the RGB range [2]
-		// Y = std::pow(adaptLuminanceScaled(Y), oneOverGamma);
-		Y = pow(abs(Y*pi*1e-4), alphaWaOverAlphaDa*oneOverGamma)* term2TimesOneOverMaxdLpOneOverGamma;
-
+		if (flagUseTmGamma)
+		{
+			// Y = std::pow(adaptLuminanceScaled(Y), oneOverGamma);
+			Y = pow(abs(Y*pi*1e-4), alphaWaOverAlphaDa*oneOverGamma)* term2TimesOneOverMaxdLpOneOverGamma;
+		}else{
+			// Y = adaptLuminanceScaled(Y);
+			Y = pow(abs(Y*pi*1e-4), alphaWaOverAlphaDa) * term2TimesOneOverMaxdL;
+		}
 		// Convert from xyY to XYZ
 		highp vec3 XYZ = vec3(x * Y / y, Y, (1. - x - y) * Y / y);
 
@@ -75,22 +88,23 @@ vec3 xyYToRGB(highp float x, highp float y, highp float Y)
 //										vec3(-0.4985314,0.0415560,1.0572252));
 //		return XYZ2sRGBl * XYZ * brightnessScale;
 //  EXPERIMENTAL
-		if(doSRGB)
-		{
+		if(doSRGB){
                     // sRGB transformation. Recipe contains low-level linearity, however this causes a really ugly artifact.
                     // Matrix from WP: https://en.wikipedia.org/wiki/SRGB
                     XYZ2RGB = mat3(vec3(  3.2406,  -0.9689,  0.0557),
                                    vec3( -1.5372,  +1.8758, -0.2040),
                                    vec3( -0.4986,  +0.0415, +1.0570));
-		}
-		else
-		{
+		}else{
 		            // Use a XYZ to Adobe RGB (1998) matrix which uses a D65 reference white. Use values from same source:
                   XYZ2RGB = mat3(vec3( 2.0413690, -0.9692660,  0.0134474),
                                  vec3(-0.5649464, +1.8760108, -0.1183897),
                                  vec3(-0.3446944, +0.0415560, +1.0154096));
-      }
-		return XYZ2RGB * XYZ * brightnessScale;
+		}
+	  	if (flagUseTmGamma){
+			return XYZ2RGB * XYZ * brightnessScale;
+		}else{
+			return pow(XYZ2RGB * XYZ * brightnessScale, vec3(oneOverGamma));
+		}
 // EXPERIMENT END 
 	}
 }

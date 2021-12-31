@@ -31,6 +31,7 @@ StelToneReproducer::StelToneReproducer() : Lda(50.f), Lwa(40000.f), oneOverMaxdL
 	QSettings *conf = StelApp::getInstance().getSettings();
 	Lda = conf->value("video/tm_display_adaptation_luminance", 50.f).toFloat();
 	oneOverGamma=1.f / conf->value("video/tm_gamma", 2.2222f).toFloat();
+	flagUseTmGamma=conf->value("video/flag_use_tm_extra_gamma", true).toBool();
 	const float maxDisplayLuminance=conf->value("video/tm_max_display_luminance", 100.f).toFloat();
 	oneOverMaxdL=1.f/maxDisplayLuminance;
 	lnOneOverMaxdL=std::log(oneOverMaxdL);
@@ -82,6 +83,7 @@ void StelToneReproducer::setDisplayAdaptationLuminance(float _Lda)
 	term2 =(stelpow10f((betaWa-betaDa)/alphaDa) / (M_PIf*0.0001f));
 	lnTerm2 = std::log(term2);
 	term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
+	term2TimesOneOverMaxdL = term2*oneOverMaxdL;
 
 	QSettings *conf = StelApp::getInstance().getSettings();
 	conf->setValue("video/tm_display_adaptation_luminance", Lda);
@@ -90,8 +92,9 @@ void StelToneReproducer::setDisplayAdaptationLuminance(float _Lda)
 
 void StelToneReproducer::setMaxDisplayLuminance(float maxdL)
 {
-	oneOverMaxdL = 1.f/maxdL; lnOneOverMaxdL=std::log(oneOverMaxdL); term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
-
+	oneOverMaxdL = 1.f/maxdL; lnOneOverMaxdL=std::log(oneOverMaxdL);
+	term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
+	term2TimesOneOverMaxdL = term2*oneOverMaxdL;
 	QSettings *conf = StelApp::getInstance().getSettings();
 	conf->setValue("video/tm_max_display_luminance", maxdL);
 	emit maxDisplayLuminanceChanged(static_cast<double>(maxdL));
@@ -99,10 +102,20 @@ void StelToneReproducer::setMaxDisplayLuminance(float maxdL)
 
 void StelToneReproducer::setDisplayGamma(float gamma)
 {
-	oneOverGamma = 1.f/gamma; term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
+	oneOverGamma = 1.f/gamma;
+	term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
+	term2TimesOneOverMaxdL = term2*oneOverMaxdL;
 	QSettings *conf = StelApp::getInstance().getSettings();
 	conf->setValue("video/tm_gamma", gamma);
 	emit displayGammaChanged(static_cast<double>(gamma));
+}
+
+void StelToneReproducer::setFlagUseTmGamma(bool b)
+{
+	flagUseTmGamma=b;
+	QSettings *conf = StelApp::getInstance().getSettings();
+	conf->setValue("video/flag_use_tm_extra_gamma", b);
+	emit flagUseTmGammaChanged(b);
 }
 
 /*********************************************************************
@@ -122,6 +135,7 @@ void StelToneReproducer::setWorldAdaptationLuminance(float _Lwa)
 	term2 = (stelpow10f((betaWa-betaDa)/alphaDa) / (M_PIf*0.0001f));
 	lnTerm2 = std::log(term2);
 	term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
+	term2TimesOneOverMaxdL = term2*oneOverMaxdL;
 }
 
 
