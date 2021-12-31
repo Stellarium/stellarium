@@ -338,7 +338,7 @@ void AtmosphereDialog::resetZxStel()
 void AtmosphereDialog::resetZyStel()
 {
 	resetZyPreet();
-	ui->doubleSpinBox_zY31->setValue(  0.15346); // FC
+	ui->doubleSpinBox_zY31->setValue(  0.14535); // FC
 }
 
 void AtmosphereDialog::setTfromK(double k)
