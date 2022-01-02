@@ -94,11 +94,11 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	setFlagLuminanceAdaptation(conf->value("viewing/use_luminance_adaptation",true).toBool());
 	setDaylightLabelThreshold(conf->value("viewing/sky_brightness_label_threshold", 250.0).toDouble());
 	setFlagStarMagnitudeLimit(conf->value("astro/flag_star_magnitude_limit", false).toBool());
-	setCustomStarMagnitudeLimit(conf->value("astro/star_magnitude_limit", 6.5).toFloat());
+	setCustomStarMagnitudeLimit(conf->value("astro/star_magnitude_limit", 6.5).toDouble());
 	setFlagPlanetMagnitudeLimit(conf->value("astro/flag_planet_magnitude_limit", false).toBool());
-	setCustomPlanetMagnitudeLimit(conf->value("astro/planet_magnitude_limit", 6.5).toFloat());
+	setCustomPlanetMagnitudeLimit(conf->value("astro/planet_magnitude_limit", 6.5).toDouble());
 	setFlagNebulaMagnitudeLimit(conf->value("astro/flag_nebula_magnitude_limit", false).toBool());
-	setCustomNebulaMagnitudeLimit(conf->value("astro/nebula_magnitude_limit", 8.5).toFloat());
+	setCustomNebulaMagnitudeLimit(conf->value("astro/nebula_magnitude_limit", 8.5).toDouble());
 
 	setBortleScaleIndex(conf->value("stars/init_bortle_scale", 3).toInt());
 	setRelativeStarScale(conf->value("stars/relative_scale", 1.0).toDouble());
@@ -117,9 +117,9 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 
 	// GZ four extras
 	setFlagDrawSunAfterAtmosphere(conf->value("landscape/draw_sun_after_atmosphere",false).toBool());
-	setFlagUseSunBlending(conf->value("landscape/use_sun_blending",false).toBool());
+	setFlagEarlySunHalo(conf->value("landscape/early_solar_halo",false).toBool());
 	setFlagTfromK(conf->value("landscape/use_T_from_k",false).toBool());
-	setT(conf->value("landscape/turbidity",5.).toFloat());
+	setT(conf->value("landscape/turbidity",5.).toDouble());
 
 	// Initialize buffers for use by gl vertex array
 	vertexArray = new StarVertex[maxPointSources*6];

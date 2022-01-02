@@ -75,8 +75,9 @@ void AtmosphereDialog::createDialogContent()
 	ui->comboBox_skylightDecimals->addItem("0.00001", .00001);
 	connect(ui->comboBox_skylightDecimals, SIGNAL(currentIndexChanged(int)), this, SLOT(setIncrements(int)));
 
-	connectBoolProperty(ui->checkBox_blendSun, "StelSkyDrawer.flagUseSunBlending");
+	connectBoolProperty(ui->checkBox_earlySunHalo, "StelSkyDrawer.flagEarlySunHalo");
 	connectBoolProperty(ui->checkBox_drawSunAfterAtmosphere, "StelSkyDrawer.flagDrawSunAfterAtmosphere");
+	connectBoolProperty(ui->checkBox_noScatter, "LandscapeMgr.atmosphereNoScatter");
 
 	connectDoubleProperty(ui->doubleSpinBox_zX11, "Skylight.zX11");
 	connectDoubleProperty(ui->doubleSpinBox_zX12, "Skylight.zX12");

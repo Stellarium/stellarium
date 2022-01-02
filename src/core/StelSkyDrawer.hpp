@@ -76,7 +76,7 @@ class StelSkyDrawer : public QObject, protected QOpenGLFunctions
 	Q_PROPERTY(double atmospherePressure READ getAtmospherePressure WRITE setAtmospherePressure NOTIFY atmospherePressureChanged)
 
 	Q_PROPERTY(bool flagDrawSunAfterAtmosphere READ getFlagDrawSunAfterAtmosphere WRITE setFlagDrawSunAfterAtmosphere NOTIFY flagDrawSunAfterAtmosphereChanged)
-	Q_PROPERTY(bool flagUseSunBlending READ getFlagUseSunBlending WRITE setFlagUseSunBlending NOTIFY flagUseSunBlendingChanged)
+	Q_PROPERTY(bool flagEarlySunHalo READ getFlagEarlySunHalo WRITE setFlagEarlySunHalo NOTIFY flagEarlySunHaloChanged)
 	Q_PROPERTY(bool flagTfromK READ getFlagTfromK WRITE setFlagTfromK NOTIFY flagTfromKChanged)
 	Q_PROPERTY(double turbidity READ getT WRITE setT NOTIFY turbidityChanged)
 
@@ -333,14 +333,14 @@ public slots:
 		 emit flagDrawSunAfterAtmosphereChanged(val);
 		}
 	bool getFlagDrawSunAfterAtmosphere() const {return flagDrawSunAfterAtmosphere;}
-	void setFlagUseSunBlending(bool val){
-		flagUseSunBlending= val;
+	void setFlagEarlySunHalo(bool val){
+		flagEarlySunHalo= val;
 		QSettings* conf = StelApp::getInstance().getSettings();
-		conf->setValue("landscape/use_sun_blending", val);
+		conf->setValue("landscape/early_solar_halo", val);
 		conf->sync();
-		emit flagUseSunBlendingChanged(val);
+		emit flagEarlySunHaloChanged(val);
 		}
-	bool getFlagUseSunBlending() const {return flagUseSunBlending;}
+	bool getFlagEarlySunHalo() const {return flagEarlySunHalo;}
 
 	bool getFlagTfromK(void) const {return flagTfromK;}
 	void setFlagTfromK(bool val){
@@ -351,9 +351,9 @@ public slots:
 		emit flagTfromKChanged(val);
 		}
 
-	double getT(void) const {return turbidity;}
+		double getT(void) const {return static_cast<double>(turbidity);}
 	void setT(double newT){
-		turbidity=newT;
+	    turbidity=static_cast<float>(newT);
 		QSettings* conf = StelApp::getInstance().getSettings();
 		conf->setValue("landscape/turbidity", newT);
 		emit turbidityChanged(newT);
@@ -401,9 +401,8 @@ signals:
 	// GZ atmosphere tweaks
 	void flagTfromKChanged(bool b);
 	void flagDrawSunAfterAtmosphereChanged(bool b);
-	void flagUseSunBlendingChanged(bool b);
+	void flagEarlySunHaloChanged(bool b);
 	void turbidityChanged(double t);
-	
 
 private:
 	// Debug
@@ -572,9 +571,9 @@ private:
 	float big3dModelHaloRadius;
 	// GZ Experiments for Atmospheric tweaks.
 	bool flagDrawSunAfterAtmosphere;
-	bool flagUseSunBlending;
+	bool flagEarlySunHalo; // Used to select if solar halo is plotted before (true) or after (default, false) the 3D sphere.
 	bool flagTfromK; // true to compute T from extinction k
-	float turbidity; // need it here...
+	float turbidity; // atmospheric turbidity: Preetham sky usable for 2<T<6, best at T=5.
 };
 
 #endif // STELSKYDRAWER_HPP

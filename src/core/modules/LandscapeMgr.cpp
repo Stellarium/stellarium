@@ -236,6 +236,7 @@ LandscapeMgr::LandscapeMgr()
 	, flagLandscapeSetsLocation(false)
 	, flagLandscapeAutoSelection(false)
 	, flagLightPollutionFromDatabase(false)
+	, atmosphereNoScatter(false)
 	, flagPolyLineDisplayedOnly(false)
 	, polyLineThickness(1)
 	, flagLandscapeUseMinimalBrightness(false)
@@ -458,7 +459,8 @@ void LandscapeMgr::draw(StelCore* core)
 	StelSkyDrawer* drawer=core->getSkyDrawer();
 
 	// Draw the atmosphere
-	atmosphere->draw(core);
+	if (!getFlagAtmosphereNoScatter())
+	    atmosphere->draw(core);
 
 	// GZ 2016-01: When we draw the atmosphere with a low sun, it is possible that the glaring red ball is overpainted and thus invisible.
 	// Attempt to draw the sun only here while not having drawn it by SolarSystem:
@@ -1125,6 +1127,19 @@ void LandscapeMgr::setFlagAtmosphere(const bool displayed)
 bool LandscapeMgr::getFlagAtmosphere() const
 {
 	return atmosphere->getFlagShow();
+}
+
+//! Set flag for displaying Atmosphere
+void LandscapeMgr::setFlagAtmosphereNoScatter(const bool noScatter)
+{
+    atmosphereNoScatter=noScatter;
+	emit atmosphereNoScatterChanged(noScatter);
+}
+
+//! Get flag for displaying Atmosphere
+bool LandscapeMgr::getFlagAtmosphereNoScatter() const
+{
+    return atmosphereNoScatter;
 }
 
 float LandscapeMgr::getAtmosphereFadeIntensity() const
