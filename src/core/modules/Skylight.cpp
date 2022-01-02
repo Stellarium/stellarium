@@ -33,7 +33,6 @@ Skylight::Skylight() :
 	zenithColorX(0.),
 	zenithColorY(0.),
 	eyeLumConversion(0.),
-	flagSRGB(false),
 	flagSchaefer(true)
 {
 	setObjectName("Skylight");
@@ -101,7 +100,6 @@ Skylight::Skylight() :
 	zY33=conf->value("Skylight/zY33", +0.06670).toDouble();
 	zY34=conf->value("Skylight/zY34", +0.26688).toDouble();
 
-	flagSRGB=conf->value("Skylight/use_sRGB", false).toBool();
 	flagSchaefer=conf->value("Skylight/use_Schaefer", true).toBool();
 }
 

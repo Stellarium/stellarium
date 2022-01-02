@@ -58,6 +58,8 @@ void TonemappingDialog::createDialogContent()
 	connectDoubleProperty(ui->dalSpinBox,   "StelToneReproducer.displayAdaptationLuminance");
 	connectDoubleProperty(ui->dmSpinBox,    "StelToneReproducer.maxDisplayLuminance");
 	connectDoubleProperty(ui->gammaSpinBox, "StelToneReproducer.displayGamma");
+	connectBoolProperty(ui->checkBox_extraGamma, "StelToneReproducer.flagUseTmGamma");
+	connectBoolProperty(ui->checkBox_sRGB,  "StelToneReproducer.flagSRGB");
 
 	connect(ui->resetPushButton, SIGNAL(clicked(bool)), this, SLOT(resetTonemapping()));
 }
@@ -69,4 +71,6 @@ void TonemappingDialog::resetTonemapping()
 	t->setDisplayAdaptationLuminance(50.);
 	t->setDisplayGamma(2.2222f);
 	t->setMaxDisplayLuminance(100.);
+	t->setFlagUseTmGamma(true);
+	t->setFlagSRGB(true);
 }

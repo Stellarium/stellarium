@@ -102,7 +102,6 @@ class Skylight: public QObject
 	Q_PROPERTY(double zY34  READ getZY34 WRITE setZY34 NOTIFY zY34Changed)
 
 	Q_PROPERTY(double T  READ getT WRITE setT NOTIFY turbidityChanged)
-	Q_PROPERTY(bool flagSRGB  READ getFlagSRGB WRITE setFlagSRGB NOTIFY flagSRGBChanged)
 	Q_PROPERTY(bool flagSchaefer READ getFlagSchaefer WRITE setFlagSchaefer NOTIFY flagSchaeferChanged)
 
 friend class AtmosphereDialog;
@@ -155,12 +154,11 @@ public:
 	}
 
 	void getShadersParams(Vec3f& asunPos, float& aterm_x, float& aAx, float& aBx, float& aCx, float& aDx, float& aEx,
-		float& aterm_y, float& aAy, float& aBy, float& aCy, float& aDy, float& aEy, int& doSRGB) const
+		float& aterm_y, float& aAy, float& aBy, float& aCy, float& aDy, float& aEy) const
 	{
 		asunPos=sunPos;
 		aterm_x=term_x;aAx=Ax;aBx=Bx;aCx=Cx;aDx=Dx;aEx=Ex;
 		aterm_y=term_y;aAy=Ay;aBy=By;aCy=Cy;aDy=Dy;aEy=Ey;
-		doSRGB=(int)flagSRGB;
 	}
 	
 	// GZ new: reset all parameters...
@@ -225,7 +223,6 @@ signals:
 	void zY33Changed(double val);
 	void zY34Changed(double val);
 	void turbidityChanged(double val);
-	void flagSRGBChanged(bool val);
 	void flagSchaeferChanged(bool val);
 	
 public slots:
@@ -340,8 +337,6 @@ public slots:
 	double getT(void) const {return T;}
 	void setT(double newT){T=newT; emit turbidityChanged(newT); }
 
-	void setFlagSRGB(bool val){flagSRGB=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/use_sRGB", val); emit flagSRGBChanged(val);}
-	bool getFlagSRGB() const {return flagSRGB;}
 	void setFlagSchaefer(bool val){flagSchaefer=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/use_Schaefer", val); emit flagSchaeferChanged(val);}
 	bool getFlagSchaefer() const {return flagSchaefer;}
 
@@ -382,8 +377,7 @@ private:
 	double zY21, zY22, zY23, zY24;
 	double zY31, zY32, zY33, zY34;
 
-	bool flagSRGB;             // Apply sRGB color conversion. If false, applies AdobeRGB(1998) (Stellarium's original default)
-	bool flagSchaefer;         // Use Schaerfer's sky brighness model. If false, use CIE brightness from Preetham's paper.
+	bool flagSchaefer;         // Use Schaerfer's sky brightness model. If false, use CIE brightness from Preetham's paper.
 
 	double term_x;              // Precomputed term for x calculation
 	double term_y;              // Precomputed term for y calculation

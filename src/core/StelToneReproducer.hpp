@@ -63,6 +63,7 @@ class StelToneReproducer: public QObject
 	Q_PROPERTY(double displayGamma               READ getDisplayGamma               WRITE setDisplayGamma               NOTIFY displayGammaChanged)
 	// Use Stellarium's original extra gamma correction (makes sky look better, but it is unclear whether it's required)
 	Q_PROPERTY(bool flagUseTmGamma               READ getFlagUseTmGamma             WRITE setFlagUseTmGamma             NOTIFY flagUseTmGammaChanged)
+	Q_PROPERTY(bool flagSRGB                     READ getFlagSRGB                   WRITE setFlagSRGB                   NOTIFY flagSRGBChanged)
 
 public:
 	//! Constructor
@@ -132,6 +133,11 @@ public slots:
 	bool getFlagUseTmGamma() const {return flagUseTmGamma;}
 	void setFlagUseTmGamma(bool b);
 
+	//! Set whether to use an sRGB (default, true) or AdobeRGB color conversion matrix for the sky colors.
+	//! The actual matrix is in the xyYtoRGB.glsl shader program.
+	void setFlagSRGB(bool val);
+	bool getFlagSRGB() const {return flagSRGB;}
+
 signals:
 	void worldAdaptationLuminanceChanged(double);
 	void displayAdaptationLuminanceChanged(double);
@@ -139,6 +145,7 @@ signals:
 	void inputScaleChanged(double);
 	void displayGammaChanged(double);
 	void flagUseTmGammaChanged(bool);
+	void flagSRGBChanged(bool val);
 
 public:
 	//! Return adapted luminance from world to display
@@ -188,25 +195,27 @@ public:
 	//! @param xyY an array of 3 floats which are replaced by the converted RGB values
 	void xyYToRGB(float* xyY) const;
 	
-	void getShadersParams(float& a, float& b, float& c, float& d, bool& e) const
+	void getShadersParams(float& a, float& b, float& c, float& d, bool& useGamma, bool& sRGB) const
 	{
 		a=alphaWaOverAlphaDa;
 		b=oneOverGamma;
 		c=term2TimesOneOverMaxdLpOneOverGamma;
 		d=term2TimesOneOverMaxdL;
-		e=flagUseTmGamma;
+		useGamma=flagUseTmGamma;
+		sRGB=flagSRGB;
 	}
 private:
 	// The global luminance scaling
 	float inputScale;
-	float lnInputScale;		// std::log(inputScale)
+	float lnInputScale;	// std::log(inputScale)
 	
 	float Lda;		// Display luminance adaptation (in cd/m^2)
 	float Lwa;		// World   luminance adaptation (in cd/m^2)
 	float oneOverMaxdL;	// 1 / Display maximum luminance (in cd/m^2)
-	float lnOneOverMaxdL; // log(oneOverMaxdL)
+	float lnOneOverMaxdL;   // log(oneOverMaxdL)
 	float oneOverGamma;	// 1 / Screen gamma value
-	bool flagUseTmGamma;  // true to use Stellarium's original tonemapping with a gamma that is challenged by Ruslan (10110111).
+	bool flagUseTmGamma;    // true to use Stellarium's original tonemapping with a gamma that is challenged by Ruslan (10110111).
+	bool flagSRGB;          // Apply sRGB color conversion. If false, applies AdobeRGB(1998) (Stellarium's original default)
 
 	// Precomputed variables
 	float alphaDa;

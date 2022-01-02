@@ -63,9 +63,7 @@ void AtmosphereDialog::createDialogContent()
 	connect(ui->extinctionDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(setTfromK(double)));
 	connectDoubleProperty(ui->doubleSpinBox_T, "StelSkyDrawer.turbidity");
 
-	connectBoolProperty(ui->checkBox_sRGB, "Skylight.flagSRGB");
 	connectBoolProperty(ui->checkBox_Schaefer, "Skylight.flagSchaefer");
-	connectBoolProperty(ui->checkBox_flagUseTmGamma, "StelToneReproducer.flagUseTmGamma");
 
 	ui->comboBox_skylightDecimals->addItem("1", 1);
 	ui->comboBox_skylightDecimals->addItem("0.1", .1);

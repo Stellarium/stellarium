@@ -80,25 +80,17 @@ vec3 xyYToRGB(highp float x, highp float y, highp float Y)
 		highp vec3 XYZ = vec3(x * Y / y, Y, (1. - x - y) * Y / y);
 
 		highp mat3 XYZ2RGB;
-//  HEAD of 2021:
-//		// Use the XYZ to sRGB matrix which uses a D65 reference white
-//		// Ref: http://www.brucelindbloom.com/index.html?Eqn_RGB_XYZ_Matrix.html
-//		const highp mat3 XYZ2sRGBl=mat3(vec3(3.2404542,-0.9692660,0.0556434),
-//										vec3(-1.5371385,1.8760108,-0.2040259),
-//										vec3(-0.4985314,0.0415560,1.0572252));
-//		return XYZ2sRGBl * XYZ * brightnessScale;
-//  EXPERIMENTAL
 		if(doSRGB){
-                    // sRGB transformation. Recipe contains low-level linearity, however this causes a really ugly artifact.
-                    // Matrix from WP: https://en.wikipedia.org/wiki/SRGB
-                    XYZ2RGB = mat3(vec3(  3.2406,  -0.9689,  0.0557),
-                                   vec3( -1.5372,  +1.8758, -0.2040),
-                                   vec3( -0.4986,  +0.0415, +1.0570));
+				// Use the XYZ to sRGB matrix which uses a D65 reference white
+				// Ref: http://www.brucelindbloom.com/index.html?Eqn_RGB_XYZ_Matrix.html
+				XYZ2RGB = mat3(vec3( 3.2404542, -0.9692660,  0.0556434),
+							   vec3(-1.5371385,  1.8760108, -0.2040259),
+							   vec3(-0.4985314,  0.0415560,  1.0572252));
 		}else{
-		            // Use a XYZ to Adobe RGB (1998) matrix which uses a D65 reference white. Use values from same source:
-                  XYZ2RGB = mat3(vec3( 2.0413690, -0.9692660,  0.0134474),
-                                 vec3(-0.5649464, +1.8760108, -0.1183897),
-                                 vec3(-0.3446944, +0.0415560, +1.0154096));
+		        // Use a XYZ to Adobe RGB (1998) matrix which uses a D65 reference white. Use values from same source:
+                XYZ2RGB = mat3(vec3( 2.0413690, -0.9692660,  0.0134474),
+                               vec3(-0.5649464, +1.8760108, -0.1183897),
+                               vec3(-0.3446944, +0.0415560, +1.0154096));
 		}
 	  	if (flagUseTmGamma){
 			return XYZ2RGB * XYZ * brightnessScale;

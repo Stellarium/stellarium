@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>796</width>
+    <width>834</width>
     <height>791</height>
    </rect>
   </property>
@@ -278,20 +278,6 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="2">
-         <widget class="QCheckBox" name="checkBox_flagUseTmGamma">
-          <property name="text">
-           <string>Use Stellarium's original tonemapping with extra gamma term</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="2">
-         <widget class="QCheckBox" name="checkBox_sRGB">
-          <property name="text">
-           <string>Color Conversion (sRGB if activated; else Adobe RGB)</string>
-          </property>
-         </widget>
-        </item>
         <item row="4" column="2">
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
@@ -339,20 +325,6 @@
           </item>
          </layout>
         </item>
-        <item row="1" column="0">
-         <widget class="QCheckBox" name="checkBox_earlySunHalo">
-          <property name="text">
-           <string>Draw solar glare before sun</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="2">
-         <widget class="QCheckBox" name="checkBox_drawSunAfterAtmosphere">
-          <property name="text">
-           <string>Draw Sun after atmosphere (attempt better red ball effect)</string>
-          </property>
-         </widget>
-        </item>
         <item row="2" column="0">
          <widget class="QCheckBox" name="checkBox_TfromK">
           <property name="text">
@@ -369,7 +341,7 @@
            <double>0.010000000000000</double>
           </property>
           <property name="value">
-           <double>1.300000000000000</double>
+           <double>1.000000000000000</double>
           </property>
          </widget>
         </item>
@@ -391,6 +363,20 @@
          <widget class="QCheckBox" name="checkBox_noScatter">
           <property name="text">
            <string>Suppress atmosphere scatter (only refraction/extinction)</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2">
+         <widget class="QCheckBox" name="checkBox_drawSunAfterAtmosphere">
+          <property name="text">
+           <string>Draw Sun after atmosphere (attempt better red ball effect)</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QCheckBox" name="checkBox_earlySunHalo">
+          <property name="text">
+           <string>Draw solar glare before Sun</string>
           </property>
          </widget>
         </item>
@@ -874,7 +860,7 @@
       <item>
        <widget class="QLabel" name="label_34">
         <property name="text">
-         <string>F(th; g) = (1+Ae^(B /cos th))(1 + Ce^(Dg) + E cos² g ) --- YP = Yz   F(th; g) /  F(0; th_s)   with zenith angle th, solar zenith angle th_s, solar angle g</string>
+         <string>F(th; g) = (1+Ae^(B /cos th))(1 + Ce^(Dg) + E cos² g ) --- YP = Yz   F(th; g) /  F(0; th_s)   with zenith angle &amp;theta;, solar zenith angle th_s, solar angle g</string>
         </property>
        </widget>
       </item>

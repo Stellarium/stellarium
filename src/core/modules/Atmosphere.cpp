@@ -375,20 +375,19 @@ void Atmosphere::draw(StelCore* core)
 
 	GL(atmoShaderProgram->bind());
 	float a, b, c, d;
-	bool e;
-	eye->getShadersParams(a, b, c, d, e);
+	bool useTmGamma, sRGB;
+	eye->getShadersParams(a, b, c, d, useTmGamma, sRGB);
 
 	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.alphaWaOverAlphaDa, a));
 	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.oneOverGamma, b));
 	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.term2TimesOneOverMaxdLpOneOverGamma, c));
 	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.term2TimesOneOverMaxdL, d));
-	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.flagUseTmGamma, e));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.flagUseTmGamma, useTmGamma));
 
 	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.brightnessScale, atm_intensity));
 	Vec3f sunPos;
 	float term_x, Ax, Bx, Cx, Dx, Ex, term_y, Ay, By, Cy, Dy, Ey;
-	int skySRGB;
-	sky.getShadersParams(sunPos, term_x, Ax, Bx, Cx, Dx, Ex, term_y, Ay, By, Cy, Dy, Ey, skySRGB);
+	sky.getShadersParams(sunPos, term_x, Ax, Bx, Cx, Dx, Ex, term_y, Ay, By, Cy, Dy, Ey);
 	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.sunPos, sunPos[0], sunPos[1], sunPos[2]));
 	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.term_x, term_x));
 	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.Ax, Ax));
@@ -402,7 +401,7 @@ void Atmosphere::draw(StelCore* core)
 	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.Cy, Cy));
 	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.Dy, Dy));
 	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.Ey, Ey));
-	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.doSRGB, skySRGB));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.doSRGB, sRGB));
 	const Mat4f& m = sPainter.getProjector()->getProjectionMatrix();
 	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.projectionMatrix,
 					      QMatrix4x4(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15])));
