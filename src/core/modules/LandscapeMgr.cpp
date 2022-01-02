@@ -334,11 +334,10 @@ void LandscapeMgr::update(double deltaTime)
 	// GZ: First parameter in next call is used for particularly earth-bound computations in Schaefer's sky brightness model. Difference DeltaT makes no difference here.
 	atmosphere->computeColor(core->getJDE(), sunPos, moonPos, lunarPhaseAngle, lunarMagnitude,
 		core, core->getCurrentLocation().latitude, core->getCurrentLocation().altitude,
-		15.f, 40.f, drawer->getExtinctionCoefficient());	// Temperature = 15c, relative humidity = 40%
+				 15.f, 40.f, static_cast<float>(drawer->getExtinctionCoefficient()));	// Temperature = 15c, relative humidity = 40%
 
 	// GZ Experimenting with better sunrise, add some factor here.
-	//core->getSkyDrawer()->reportLuminanceInFov(1.3*(3.75+atmosphere->getAverageLuminance()*3.5), true);
-	core->getSkyDrawer()->reportLuminanceInFov(atmLumFactor*(3.75+atmosphere->getAverageLuminance()*3.5), true);
+	core->getSkyDrawer()->reportLuminanceInFov(static_cast<float>(atmLumFactor*(3.75+static_cast<double>(atmosphere->getAverageLuminance())*3.5)), true);
 
 
 	// NOTE: Simple workaround for brightness of landscape when observing from the Sun.
@@ -347,7 +346,6 @@ void LandscapeMgr::update(double deltaTime)
 		landscape->setBrightness(1.0, 1.0);
 		return;
 	}
-
 
 	// Compute the ground luminance based on every planets around
 	// TBD: Reactivate and verify this code!? Source, reference?
@@ -548,8 +546,7 @@ void LandscapeMgr::init()
 	setFlagLabels(conf->value("landscape/flag_enable_labels", true).toBool());
 	setFlagPolyLineDisplayed(conf->value("landscape/flag_polyline_only", false).toBool());
 	setPolyLineThickness(conf->value("landscape/polyline_thickness", 1).toInt());
-	// GZ new
-	setAtmLumFactor(conf->value("landscape/atm_lum_factor", 1.0).toFloat());
+	setAtmLumFactor(conf->value("landscape/atm_lum_factor", 1.0).toDouble());
 
 	cardinalsPoints = new Cardinals();
 	cardinalsPoints->setFlagShow4WCRLabels(conf->value("viewing/flag_cardinal_points", true).toBool());

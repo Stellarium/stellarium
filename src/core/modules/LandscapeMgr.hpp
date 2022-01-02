@@ -197,7 +197,7 @@ class LandscapeMgr : public StelModule
 		   READ getDefaultLandscapeID
 		   WRITE setDefaultLandscapeID
 		   NOTIFY defaultLandscapeChanged)
-	// GZ new
+	// experimental
 	Q_PROPERTY(double atmLumFactor READ getAtmLumFactor WRITE setAtmLumFactor NOTIFY atmLumFactorChanged)
 
 public:
@@ -273,7 +273,9 @@ public slots:
 	//! Return a map of landscape names to landscape IDs (directory names).
 	static QMap<QString,QString> getNameToDirMap();
 
-	// GZ additions
+	//! set an artificial brightening factor. EXPERIMENTAL! It seems we should not deviate from 1.
+	//! However, increasing makes the solar halo somewhat smaller and the sky darker.
+	//! Maybe tweaking the tonemapping does the same, but correctly.
 	void setAtmLumFactor(double val){if (!qFuzzyCompare(val,atmLumFactor)) {atmLumFactor=val; emit atmLumFactorChanged(val);}}
 	double getAtmLumFactor(void) const {return atmLumFactor;}
 
@@ -693,7 +695,7 @@ private:
 	//! Core current planet name, used to react to planet change.
 	QString currentPlanetName;
 
-	// GZ Luminance factor, allows tweaking via atmosphere detail GUI. Tried with 1.3, but may also be complete bogus!
+	// GZ Luminance factor, allows tweaking via atmosphere detail GUI. Tried with 1.3, but may also be complete bogus! Default in Stellarium=1.0
 	double atmLumFactor;
 
 };
