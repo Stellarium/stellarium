@@ -160,7 +160,7 @@ void AtmosphereDialog::setStandardAtmosphere()
 void AtmosphereDialog::setIncrements(int idx)
 {
 	Q_UNUSED(idx)
-	double val=ui->comboBox_skylightDecimals->currentData().toDouble();
+	const double val=ui->comboBox_skylightDecimals->currentData().toDouble();
 	ui->doubleSpinBox_zX11->setSingleStep(val);
 	ui->doubleSpinBox_zX12->setSingleStep(val);
 	ui->doubleSpinBox_zX13->setSingleStep(val);
@@ -266,7 +266,6 @@ void AtmosphereDialog::resetYStel()
 	ui->doubleSpinBox_AYT->setValue( 0.2787);
 	ui->doubleSpinBox_AY ->setValue(-1.0630);
 	ui->doubleSpinBox_CY ->setValue(+6.3251);
-
 }
 
 void AtmosphereDialog::resetxStel()
@@ -300,6 +299,7 @@ void AtmosphereDialog::resetyStel()
 //void resetZYPreet();
 void AtmosphereDialog::resetZxPreet()
 {
+	// Note: values from the preprint document have one decimal digit more than the final paper.
 	ui->doubleSpinBox_zX11->setValue( 0.00166);
 	ui->doubleSpinBox_zX12->setValue(-0.00375);
 	ui->doubleSpinBox_zX13->setValue(+0.00209);
@@ -315,6 +315,7 @@ void AtmosphereDialog::resetZxPreet()
 
 void AtmosphereDialog::resetZyPreet()
 {
+    // Note: values from the preprint document have one decimal digit more than the final paper.
 	ui->doubleSpinBox_zY11->setValue(  0.00275);
 	ui->doubleSpinBox_zY12->setValue( -0.00610);
 	ui->doubleSpinBox_zY13->setValue( +0.00317);

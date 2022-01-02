@@ -312,7 +312,7 @@
         <item row="1" column="0">
          <widget class="QLabel" name="label_33">
           <property name="text">
-           <string>Global Atm Lumimance Factor (def.1.3)</string>
+           <string>Global Atm Luminance Factor (def.1.0. Try 1.3?)</string>
           </property>
          </widget>
         </item>
@@ -341,7 +341,7 @@
              <string>Schaefer's skylight model is better than the result from the CIE skylight distribution.</string>
             </property>
             <property name="text">
-             <string>Y from Schaefer, not CIE sky</string>
+             <string>Y from Schaefer, not Preetham sky</string>
             </property>
            </widget>
           </item>
@@ -430,34 +430,6 @@
          <widget class="QLabel" name="label_th0">
           <property name="text">
            <string>1</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="4">
-         <widget class="QPushButton" name="pushButton_ResetZYpreetham">
-          <property name="text">
-           <string>Re: Preetham</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="3">
-         <widget class="QPushButton" name="pushButton_ResetZYstel">
-          <property name="text">
-           <string>Re: Stellarium</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="4">
-         <widget class="QPushButton" name="pushButton_ResetZXpreetham">
-          <property name="text">
-           <string>Re: Preetham</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="3">
-         <widget class="QPushButton" name="pushButton_ResetZXstel">
-          <property name="text">
-           <string>Re: Stellarium</string>
           </property>
          </widget>
         </item>
@@ -862,6 +834,34 @@
           </property>
          </widget>
         </item>
+        <item row="6" column="2">
+         <widget class="QPushButton" name="pushButton_ResetZYstel">
+          <property name="text">
+           <string>Reset: Stellarium</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="3">
+         <widget class="QPushButton" name="pushButton_ResetZYpreetham">
+          <property name="text">
+           <string>Reset: Preetham</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QPushButton" name="pushButton_ResetZXstel">
+          <property name="text">
+           <string>Reset: Stellarium</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="3">
+         <widget class="QPushButton" name="pushButton_ResetZXpreetham">
+          <property name="text">
+           <string>Reset: Preetham</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
       <item>
@@ -873,13 +873,6 @@
       </item>
       <item>
        <layout class="QGridLayout" name="gridLayout">
-        <item row="6" column="7">
-         <widget class="QPushButton" name="pushButton_ResetDistyPreetham">
-          <property name="text">
-           <string>Re:Preetham</string>
-          </property>
-         </widget>
-        </item>
         <item row="4" column="1">
          <widget class="QDoubleSpinBox" name="doubleSpinBox_DYT">
           <property name="decimals">
@@ -911,12 +904,18 @@
           <property name="text">
            <string>AY=</string>
           </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
          </widget>
         </item>
         <item row="3" column="0">
          <widget class="QLabel" name="label_5">
           <property name="text">
-           <string> CY=</string>
+           <string>CY=</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
         </item>
@@ -925,12 +924,18 @@
           <property name="text">
            <string>DY=</string>
           </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
          </widget>
         </item>
         <item row="5" column="0">
          <widget class="QLabel" name="label_7">
           <property name="text">
            <string>EY=</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
         </item>
@@ -939,12 +944,18 @@
           <property name="text">
            <string>Ax=</string>
           </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
          </widget>
         </item>
         <item row="2" column="3">
          <widget class="QLabel" name="label_9">
           <property name="text">
            <string>Bx=</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
         </item>
@@ -953,12 +964,18 @@
           <property name="text">
            <string>Cx=</string>
           </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
          </widget>
         </item>
         <item row="4" column="3">
          <widget class="QLabel" name="label_11">
           <property name="text">
            <string>Dx=</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
         </item>
@@ -1233,6 +1250,9 @@
           <property name="text">
            <string>Ex=</string>
           </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
          </widget>
         </item>
         <item row="2" column="4">
@@ -1475,6 +1495,9 @@
           <property name="text">
            <string>BY=</string>
           </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
          </widget>
         </item>
         <item row="1" column="4">
@@ -1539,12 +1562,18 @@
           <property name="text">
            <string>Ay=</string>
           </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
          </widget>
         </item>
         <item row="2" column="6">
          <widget class="QLabel" name="label_14">
           <property name="text">
            <string>By=</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
         </item>
@@ -1553,6 +1582,9 @@
           <property name="text">
            <string>Cy=</string>
           </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
          </widget>
         </item>
         <item row="4" column="6">
@@ -1560,12 +1592,18 @@
           <property name="text">
            <string>Dy=</string>
           </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
          </widget>
         </item>
         <item row="5" column="6">
          <widget class="QLabel" name="label_17">
           <property name="text">
            <string>Ey=</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
         </item>
@@ -1594,41 +1632,6 @@
          <widget class="QLabel" name="label_21">
           <property name="text">
            <string>+ const</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="4">
-         <widget class="QPushButton" name="pushButton_ResetDistxPreetham">
-          <property name="text">
-           <string>Re:Preetham</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="6">
-         <widget class="QPushButton" name="pushButton_ResetDistyStel">
-          <property name="text">
-           <string>Re:Stel</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="0">
-         <widget class="QPushButton" name="pushButton_ResetDistYStel">
-          <property name="text">
-           <string>Re:Stel</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="1">
-         <widget class="QPushButton" name="pushButton_ResetDistYPreetham">
-          <property name="text">
-           <string>Re:Preetham</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="3">
-         <widget class="QPushButton" name="pushButton_ResetDistxStel">
-          <property name="text">
-           <string>Re:Stel</string>
           </property>
          </widget>
         </item>
@@ -1667,6 +1670,48 @@
           </property>
          </widget>
         </item>
+        <item row="6" column="2">
+         <widget class="QPushButton" name="pushButton_ResetDistYPreetham">
+          <property name="text">
+           <string>Reset:Preetham</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="1">
+         <widget class="QPushButton" name="pushButton_ResetDistYStel">
+          <property name="text">
+           <string>Reset:Stellarium</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="5">
+         <widget class="QPushButton" name="pushButton_ResetDistxPreetham">
+          <property name="text">
+           <string>Reset:Preetham</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="4">
+         <widget class="QPushButton" name="pushButton_ResetDistxStel">
+          <property name="text">
+           <string>Reset:Stellarium</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="8">
+         <widget class="QPushButton" name="pushButton_ResetDistyPreetham">
+          <property name="text">
+           <string>Reset:Preetham</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="7">
+         <widget class="QPushButton" name="pushButton_ResetDistyStel">
+          <property name="text">
+           <string>Reset:Stellarium</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
       <item>
@@ -1688,7 +1733,7 @@
       <item>
        <widget class="QLabel" name="label_36">
         <property name="text">
-         <string>Note that the sky brightness (CIE Y) is usually set by Schaefer's model, therefore the bottom-left settings may not change anything.</string>
+         <string>Note: when the sky brightness (CIE Y) is set by Schaefer's model, the bottom-left settings will not visibly change anything.</string>
         </property>
        </widget>
       </item>
