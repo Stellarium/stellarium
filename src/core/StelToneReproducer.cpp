@@ -82,8 +82,8 @@ void StelToneReproducer::setDisplayAdaptationLuminance(float _Lda)
 	alphaWaOverAlphaDa = alphaWa/alphaDa;
 	term2 =(stelpow10f((betaWa-betaDa)/alphaDa) / (M_PIf*0.0001f));
 	lnTerm2 = std::log(term2);
-	term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
 	term2TimesOneOverMaxdL = term2*oneOverMaxdL;
+	term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2TimesOneOverMaxdL, oneOverGamma);
 
 	QSettings *conf = StelApp::getInstance().getSettings();
 	conf->setValue("video/tm_display_adaptation_luminance", Lda);
@@ -93,8 +93,8 @@ void StelToneReproducer::setDisplayAdaptationLuminance(float _Lda)
 void StelToneReproducer::setMaxDisplayLuminance(float maxdL)
 {
 	oneOverMaxdL = 1.f/maxdL; lnOneOverMaxdL=std::log(oneOverMaxdL);
-	term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
 	term2TimesOneOverMaxdL = term2*oneOverMaxdL;
+	term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2TimesOneOverMaxdL, oneOverGamma);
 	QSettings *conf = StelApp::getInstance().getSettings();
 	conf->setValue("video/tm_max_display_luminance", maxdL);
 	emit maxDisplayLuminanceChanged(static_cast<double>(maxdL));
@@ -103,8 +103,8 @@ void StelToneReproducer::setMaxDisplayLuminance(float maxdL)
 void StelToneReproducer::setDisplayGamma(float gamma)
 {
 	oneOverGamma = 1.f/gamma;
-	term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
 	term2TimesOneOverMaxdL = term2*oneOverMaxdL;
+	term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2TimesOneOverMaxdL, oneOverGamma);
 	QSettings *conf = StelApp::getInstance().getSettings();
 	conf->setValue("video/tm_gamma", gamma);
 	emit displayGammaChanged(static_cast<double>(gamma));
@@ -134,8 +134,8 @@ void StelToneReproducer::setWorldAdaptationLuminance(float _Lwa)
 	alphaWaOverAlphaDa = alphaWa/alphaDa;
 	term2 = (stelpow10f((betaWa-betaDa)/alphaDa) / (M_PIf*0.0001f));
 	lnTerm2 = std::log(term2);
-	term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
 	term2TimesOneOverMaxdL = term2*oneOverMaxdL;
+	term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2TimesOneOverMaxdL, oneOverGamma);
 }
 
 
