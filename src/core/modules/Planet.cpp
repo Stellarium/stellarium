@@ -3229,7 +3229,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 	const float magFactorBlue=powf(0.6f, 0.5f*extinctedMag);
 
 	// Draw the halo if it enabled in the ssystem.ini file (+ special case for backward compatible for the Sun)
-	if (this==ssm->getSun())
+	if (this==ssm->getSun() && drawSunHalo && core->getSkyDrawer()->getFlagEarlySunHalo())
 	{
 		// Prepare openGL lighting parameters according to luminance
 		float surfArcMin2 = getSpheroidAngularSize(core)*60;
@@ -3243,7 +3243,8 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		Vec3f haloColorToDraw;
 		//if (this==ssm->getSun())
 		//if (englishName=="Sun")
-			haloColorToDraw.set(2.f*haloColor[0], 2.f*pow(0.8f, 0.5f*extinctedMag) * haloColor[1], 2.f*pow(0.6f, 0.5f*extinctedMag) * haloColor[2]);
+		//	haloColorToDraw.set(2.f*haloColor[0], 2.f*pow(0.8f, 0.5f*extinctedMag) * haloColor[1], 2.f*pow(0.6f, 0.5f*extinctedMag) * haloColor[2]); // UGLY!
+			haloColorToDraw.set(haloColor[0], powf(0.75f, extinctedMag) * haloColor[1], powf(0.42f, 0.9f*extinctedMag) * haloColor[2]);
 		//else
 		//	haloColorToDraw.set(haloColor[0], magFactorGreen * haloColor[1], magFactorBlue * haloColor[2]);
 
@@ -3381,7 +3382,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		#endif
 	}
 
-	bool allowDrawHalo = (this!=ssm->getSun()); // We had drawn the sun already before the sphere.
+	bool allowDrawHalo = (this!=ssm->getSun() || !core->getSkyDrawer()->getFlagEarlySunHalo()); // We had drawn the sun already before the sphere.
 	if ((this!=ssm->getSun()) && ((this !=ssm->getMoon() && core->getCurrentLocation().planetName=="Earth" )))
 	{
 		// Let's hide halo when inner planet between Sun and observer (or moon between planet and observer).
@@ -3410,9 +3411,9 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		// Find new extincted color for halo. The method is again rather ad-hoc, but does not look too bad.
 		// For the sun, we have again to use the stronger extinction to avoid color mismatch.
 		Vec3f haloColorToDraw;
-		//if (this==ssm->getSun())
-		//	haloColorToDraw.set(haloColor[0], powf(0.75f, extinctedMag) * haloColor[1], powf(0.42f, 0.9f*extinctedMag) * haloColor[2]);
-		//else
+		if (this==ssm->getSun())
+			haloColorToDraw.set(haloColor[0], powf(0.75f, extinctedMag) * haloColor[1], powf(0.42f, 0.9f*extinctedMag) * haloColor[2]);
+		else
 			haloColorToDraw.set(haloColor[0], magFactorGreen * haloColor[1], magFactorBlue * haloColor[2]);
 		if (this==ssm->getMoon())
 			haloColorToDraw*=0.6f; // make lunar halo less glaring, so that phase is discernible even if zoomed out.
@@ -3421,9 +3422,9 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		{
 			float haloMag=getVMagnitudeWithExtinction(core);
 			// GZ EXPERIMENTAL: for sun on horizon, mag can go quite low, shrinking the halo too much.
-			//if (englishName=="Sun")
-			//	haloMag=qMin(haloMag, -18.f);
-			core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp.toVec3f(), surfArcMin2, haloMag, haloColorToDraw);
+			if (englishName=="Sun")
+				haloMag=qMin(haloMag, -18.f);
+			core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp.toVec3f(), surfArcMin2, haloMag, haloColorToDraw, this==ssm->getSun());
 		}
 
 		if ((this==ssm->getSun()) && (core->getCurrentLocation().planetName == "Earth"))
