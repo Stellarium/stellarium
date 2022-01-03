@@ -250,12 +250,11 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 	// Calculate the atmosphere RGB for each point of the grid
 
 	// GZ: This used a constant Preetham Turbidity of 5 which is already quite hazy.
-	// TODO: We should do something with the k value set in the atmosphere/extinction settings.
+	// We can work with the k value set in the atmosphere/extinction settings.
 	// Given that T=1 = Pure Air where k=0.16, and other values assumed in parallel, we come to an
 	// ad-hoc mapping function which should not look to bad: T=25(k-0.16)+1
 	//sky.setParamsv(sunPos, 5.f); // To reach the 5 we have k=0.32
 	StelSkyDrawer* skyDrawer = StelApp::getInstance().getCore()->getSkyDrawer();
-
 
 	float turbidity= ( (skyDrawer->getFlagTfromK()) ?  25.f*(extinctionCoefficient-0.16f)+1.f   : static_cast<float>(skyDrawer->getT()));
 	// Note that Preetham's model has some quirks for too low turbidities.

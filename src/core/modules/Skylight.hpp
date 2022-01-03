@@ -424,12 +424,13 @@ inline void Skylight::computeZenithColor(void)
 
 //! Compute the luminance distribution coefficients
 // FC Edit 2003(?) changed some coefficients to get new sky color
-// GZ: 2016-01 changed back to original Preetham values.
+// GZ: 2016-01 found and (alternatively) changed back to original Preetham values.
 // GZ: 2016-01b made them configurable with 2 presets: Preetham and Stellarium.
+// with BY>0 the formulas in getxyYValuev make no sense, from which follows T>0.4275/0.3554(=1.203)
 inline void Skylight::computeLuminanceDistributionCoefs(void)
 {
 	AY=AYt*T+AYc;
-	BY=BYt*T+BYc; BY=qMin(0.0, BY); // with BY>0 the formulas in getxyYValuev make no sense, from which follows T>0.4275/0.3554(=1.203)
+	BY=BYt*T+BYc; BY=qMin(0.0, BY);
 	CY=CYt*T+CYc;
 	DY=DYt*T+DYc;
 	EY=EYt*T+EYc;
@@ -437,7 +438,7 @@ inline void Skylight::computeLuminanceDistributionCoefs(void)
 
 //! Compute the color distribution coefficients
 // FC Edit 2003(?) changed some coefficients to get new sky color
-// GZ: TODO 2016-01 find and change back to original Preetham values.
+// GZ: 2016-01 found and (alternatively) changed back to original Preetham values.
 // with Bx,By>0 the formulas in getxyYValuev make no sense. --> T>0.0011/0.0664=0.017; T>0.0092/0.0951=0.097
 inline void Skylight::computeColorDistributionCoefs(void)
 {
