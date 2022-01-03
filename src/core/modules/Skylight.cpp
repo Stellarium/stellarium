@@ -28,12 +28,13 @@
 
 Skylight::Skylight() :
 	thetas(0.),
-	T(0.),
+	T(5.),
 	zenithLuminance(0.),
 	zenithColorX(0.),
 	zenithColorY(0.),
 	eyeLumConversion(0.),
-	flagSchaefer(true)
+	flagSchaefer(true),
+	flagGuiPublic(false)
 {
 	setObjectName("Skylight");
 	AY = BY = CY = DY = EY = 0.;
@@ -43,47 +44,49 @@ Skylight::Skylight() :
 	// conf
 	QSettings* conf = StelApp::getInstance().getSettings();
 
-	AYt=conf->value("Skylight/AYt",  0.1787).toDouble();
-	AYc=conf->value("Skylight/AYc", -1.4630).toDouble();
+	// Defaults from Stellarium 0.15. These deviate in some places from the Preetham paper.
+	// Fabien says they were hand-tuned, and look better, at least at the then-fixed T=5.
+	AYt=conf->value("Skylight/AYt",  0.2787).toDouble(); // orig:  0.1787
+	AYc=conf->value("Skylight/AYc", -1.0630).toDouble(); // orig: -1.4630
 	BYt=conf->value("Skylight/BYt", -0.3554).toDouble();
 	BYc=conf->value("Skylight/BYc", +0.4275).toDouble();
 	CYt=conf->value("Skylight/CYt", -0.0227).toDouble();
-	CYc=conf->value("Skylight/CYc", +5.3251).toDouble();
+	CYc=conf->value("Skylight/CYc", +6.3251).toDouble(); // orig: +5.3251
 	DYt=conf->value("Skylight/DYt",  0.1206).toDouble();
 	DYc=conf->value("Skylight/DYc", -2.5771).toDouble();
 	EYt=conf->value("Skylight/EYt", -0.0670).toDouble();
 	EYc=conf->value("Skylight/EYc", +0.3703).toDouble();
 
-	Axt=conf->value("Skylight/Axt", -0.0193).toDouble();
-	Axc=conf->value("Skylight/Axc", -0.2592).toDouble();
-	Bxt=conf->value("Skylight/Bxt", -0.0665).toDouble();
-	Bxc=conf->value("Skylight/Bxc", +0.0008).toDouble();
-	Cxt=conf->value("Skylight/Cxt", -0.0004).toDouble();
-	Cxc=conf->value("Skylight/Cxc", +0.2125).toDouble();
+	Axt=conf->value("Skylight/Axt", -0.0148).toDouble(); // orig: -0.0193
+	Axc=conf->value("Skylight/Axc", -0.1703).toDouble(); // orig: -0.2592
+	Bxt=conf->value("Skylight/Bxt", -0.0664).toDouble(); // orig: -0.0665
+	Bxc=conf->value("Skylight/Bxc", +0.0011).toDouble(); // orig: +0.0008
+	Cxt=conf->value("Skylight/Cxt", -0.0005).toDouble(); // orig: -0.0004
+	Cxc=conf->value("Skylight/Cxc", +0.2127).toDouble(); // orig: +0.2125
 	Dxt=conf->value("Skylight/Dxt", -0.0641).toDouble();
-	Dxc=conf->value("Skylight/Dxc", -0.8989).toDouble();
-	Ext=conf->value("Skylight/Ext", -0.0033).toDouble();
-	Exc=conf->value("Skylight/Exc", +0.0452).toDouble();
+	Dxc=conf->value("Skylight/Dxc", -0.8992).toDouble(); // orig: -0.8989
+	Ext=conf->value("Skylight/Ext", -0.0035).toDouble(); // orig: -0.0033
+	Exc=conf->value("Skylight/Exc", +0.0453).toDouble(); // orig: +0.0452
 
-	Ayt=conf->value("Skylight/Ayt", -0.0167).toDouble();
-	Ayc=conf->value("Skylight/Ayc", -0.2608).toDouble();
-	Byt=conf->value("Skylight/Byt", -0.0950).toDouble();
+	Ayt=conf->value("Skylight/Ayt", -0.0131).toDouble(); // orig: -0.0167
+	Ayc=conf->value("Skylight/Ayc", -0.2498).toDouble(); // orig: -0.2608
+	Byt=conf->value("Skylight/Byt", -0.0951).toDouble(); // orig: -0.0950
 	Byc=conf->value("Skylight/Byc", +0.0092).toDouble();
-	Cyt=conf->value("Skylight/Cyt", -0.0079).toDouble();
-	Cyc=conf->value("Skylight/Cyc", +0.2102).toDouble();
-	Dyt=conf->value("Skylight/Dyt", -0.0441).toDouble();
-	Dyc=conf->value("Skylight/Dyc", -1.6537).toDouble();
+	Cyt=conf->value("Skylight/Cyt", -0.0082).toDouble(); // orig: -0.0079
+	Cyc=conf->value("Skylight/Cyc", +0.2404).toDouble(); // orig: +0.2102
+	Dyt=conf->value("Skylight/Dyt", -0.0438).toDouble(); // orig: -0.0441
+	Dyc=conf->value("Skylight/Dyc", -1.0539).toDouble(); // orig: -1.6537
 	Eyt=conf->value("Skylight/Eyt", -0.0109).toDouble();
-	Eyc=conf->value("Skylight/Eyc", +0.0529).toDouble();
+	Eyc=conf->value("Skylight/Eyc", +0.0531).toDouble(); // orig: +0.0529
 
-	zX11=conf->value("Skylight/zX11",  0.00166).toDouble();
+	zX11=conf->value("Skylight/zX11",  0.00216).toDouble(); // orig: 0.00166
 	zX12=conf->value("Skylight/zX12", -0.00375).toDouble();
 	zX13=conf->value("Skylight/zX13", +0.00209).toDouble();
 	zX21=conf->value("Skylight/zX21", -0.02903).toDouble();
 	zX22=conf->value("Skylight/zX22", +0.06377).toDouble();
 	zX23=conf->value("Skylight/zX23", -0.03202).toDouble();
 	zX24=conf->value("Skylight/zX24", +0.00394).toDouble();
-	zX31=conf->value("Skylight/zX31",  0.11693).toDouble();
+	zX31=conf->value("Skylight/zX31",  0.10169).toDouble(); // orig: 0.11693
 	zX32=conf->value("Skylight/zX32", -0.21196).toDouble();
 	zX33=conf->value("Skylight/zX33", +0.06052).toDouble();
 	zX34=conf->value("Skylight/zX34", +0.25886).toDouble();
@@ -95,7 +98,7 @@ Skylight::Skylight() :
 	zY22=conf->value("Skylight/zY22", +0.08970).toDouble();
 	zY23=conf->value("Skylight/zY23", -0.04153).toDouble();
 	zY24=conf->value("Skylight/zY24", +0.00516).toDouble();
-	zY31=conf->value("Skylight/zY31",  0.15346).toDouble();
+	zY31=conf->value("Skylight/zY31",  0.14535).toDouble(); // orig: 0.15346
 	zY32=conf->value("Skylight/zY32", -0.26756).toDouble();
 	zY33=conf->value("Skylight/zY33", +0.06670).toDouble();
 	zY34=conf->value("Skylight/zY34", +0.26688).toDouble();

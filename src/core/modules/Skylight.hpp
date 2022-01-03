@@ -19,7 +19,10 @@
 
 //! Class which computes the daylight sky color
 //! Fast implementation of the algorithm from the article
-//! "A Practical Analytic Model for Daylight" by A. J. Preetham, Peter Shirley and Brian Smits.
+//! "A Practical Analytic Model for Daylight" by A. J. Preetham, Peter Shirley and Brian Smits. Siggraph 1999.
+//! Note that the original implementation for Stellarium fixed turbidity T=5 and
+//! tweaked a few color parameters for a better-looking sky.
+//! When T is set to deviate from 5, the original parameters appear overall better.
 
 #ifndef SKYLIGHT_HPP
 #define SKYLIGHT_HPP
@@ -31,9 +34,6 @@
 #include <QDebug>
 #include <QObject>
 #include <QSettings>
-
-// set this to 1 to use values from the original paper, or 0 to use our own tweaked values.
-#define PREETHAM_ORIGINAL 1
 
 typedef struct {
 	float pos[3];       //! Vector to the position (vertical = pos[2])
@@ -400,7 +400,7 @@ inline void Skylight::getZenithColor(float * v) const
 	v[2] = static_cast<float>(zenithLuminance);
 }
 
-//! Compute CIE luminance for zenith in cd/m^2
+//! Compute CIE Y luminance for zenith in cd/m^2
 inline void Skylight::computeZenithLuminance(void)
 {
 	zenithLuminance = 1000. * ((4.0453*T - 4.9710) * std::tan( (0.4444 - T*(1./120.)) * (M_PI-2.*thetas) ) -
@@ -408,45 +408,18 @@ inline void Skylight::computeZenithLuminance(void)
 	zenithLuminance=qMax(zenithLuminance, 0.00000000001);
 }
 
-
 //! Compute CIE x and y color components
 // Edit: changed some coefficients to get new sky color
 // GZ: 2016-01 changed back to original Preetham values.
 // GZ: 2016-01b made them configurable with 2 presets: Preetham and Stellarium.
 inline void Skylight::computeZenithColor(void)
 {
-
-#ifdef PREETHAM_ORIGINAL
-//	zenithColorX = (( ( (( 0.00166f*thetas - 0.00375f)*thetas + 0.00209f)*thetas)             * T
-//			   +((-0.02903f*thetas + 0.06377f)*thetas - 0.03202f)*thetas + 0.00394f)  * T
-//			   +(( 0.11693f*thetas - 0.21196f)*thetas + 0.06052f)*thetas + 0.25886f);
-//	zenithColorY = (( ( (( 0.00275f*thetas - 0.00610f)*thetas + 0.00317f)*thetas)             * T
-//			   +((-0.04214f*thetas + 0.08970f)*thetas - 0.04153f)*thetas + 0.00516f)  * T
-//			   +(( 0.15346f*thetas - 0.26756f)*thetas + 0.06670f)*thetas + 0.26688f);
-
 	zenithColorX=(( ( (( zX11*thetas + zX12)*thetas + zX13)*thetas)       * T
 			+ (( zX21*thetas + zX22)*thetas + zX23)*thetas + zX24)* T
 		      +((    zX31*thetas + zX32)*thetas + zX33)*thetas + zX34);
 	zenithColorY=(( ( (( zY11*thetas + zY12)*thetas + zY13)*thetas)       * T
 			+ (( zY21*thetas + zY22)*thetas + zY23)*thetas + zY24)* T
 		      +((    zY31*thetas + zY32)*thetas + zY33)*thetas + zY34);
-
-#else
-	static float thetas2;
-	static float thetas3;
-	static float T2;
-
-	thetas2 = thetas * thetas;
-	thetas3 = thetas2 * thetas;
-	T2 = T * T;
-	zenithColorX = ( 0.00216f*thetas3 - 0.00375f*thetas2 + 0.00209f*thetas) * T2 +
-	               (-0.02903f*thetas3 + 0.06377f*thetas2 - 0.03202f*thetas + 0.00394f) * T +
-	               ( 0.10169f*thetas3 - 0.21196f*thetas2 + 0.06052f*thetas + 0.25886f);
-
-	zenithColorY = ( 0.00275f*thetas3 - 0.00610f*thetas2 + 0.00317f*thetas) * T2 +
-	               (-0.04214f*thetas3 + 0.08970f*thetas2 - 0.04153f*thetas + 0.00516f) * T +
-	               ( 0.14535f*thetas3 - 0.26756f*thetas2 + 0.06670f*thetas + 0.26688f);
-#endif
 }
 
 //! Compute the luminance distribution coefficients
@@ -456,30 +429,16 @@ inline void Skylight::computeZenithColor(void)
 inline void Skylight::computeLuminanceDistributionCoefs(void)
 {
 	AY=AYt*T+AYc;
-	BY=BYt*T+BYc; BY=qMin(0.0, BY);
+	BY=BYt*T+BYc; BY=qMin(0.0, BY); // with BY>0 the formulas in getxyYValuev make no sense, from which follows T>0.4275/0.3554(=1.203)
 	CY=CYt*T+CYc;
 	DY=DYt*T+DYc;
 	EY=EYt*T+EYc;
-
-//#ifdef PREETHAM_ORIGINAL
-//	AY = 0.1787f*T - 1.4630f; // Original
-//	CY =-0.0227f*T + 5.3251f; // Original
-//#else
-//	AY = 0.2787f*T - 1.0630f; // FC values
-//	CY =-0.0227f*T + 6.3251f; // FC values
-//#endif
-//	BY =-0.3554f*T + 0.4275f;
-//	DY = 0.1206f*T - 2.5771f;
-//	EY =-0.0670f*T + 0.3703f;
-//	// with BY>0 the formulas in getxyYValuev make no sense, from which follows T>0.4275/0.3554(=1.203)
-
-	// GZ For the experiments this is dangerous...
-	//Q_ASSERT(BY <= 0.0);
 }
 
 //! Compute the color distribution coefficients
 // FC Edit 2003(?) changed some coefficients to get new sky color
 // GZ: TODO 2016-01 find and change back to original Preetham values.
+// with Bx,By>0 the formulas in getxyYValuev make no sense. --> T>0.0011/0.0664=0.017; T>0.0092/0.0951=0.097
 inline void Skylight::computeColorDistributionCoefs(void)
 {
 	Ax=Axt*T+Axc;
@@ -492,38 +451,6 @@ inline void Skylight::computeColorDistributionCoefs(void)
 	Cy=Cyt*T+Cyc;
 	Dy=Dyt*T+Dyc;
 	Ey=Eyt*T+Eyc;
-
-//#ifdef PREETHAM_ORIGINAL
-//	Ax =-0.0193f*T - 0.2592f;
-//	Bx =-0.0665f*T + 0.0008f;
-//	Cx =-0.0004f*T + 0.2125f;
-//	Dx =-0.0641f*T - 0.8989f;
-//	Ex =-0.0033f*T + 0.0452f;
-
-//	Ay =-0.0167f*T - 0.2608f;
-//	By =-0.0950f*T + 0.0092f;
-//	Cy =-0.0079f*T + 0.2102f;
-//	Dy =-0.0441f*T - 1.6537f;
-//	Ey =-0.0109f*T + 0.0529f;
-//#else
-//	Ax =-0.0148f*T - 0.1703f;
-//	Bx =-0.0664f*T + 0.0011f;
-//	Cx =-0.0005f*T + 0.2127f;
-//	Dx =-0.0641f*T - 0.8992f;
-//	Ex =-0.0035f*T + 0.0453f;
-
-//	Ay =-0.0131f*T - 0.2498f;
-//	By =-0.0951f*T + 0.0092f;
-//	Cy =-0.0082f*T + 0.2404f;
-//	Dy =-0.0438f*T - 1.0539f;
-//	Ey =-0.0109f*T + 0.0531f;
-//#endif
-
-	// with Bx,By>0 the formulas in getxyYValuev make no sense. --> T>0.0011/0.0664=0.017; T>0.0092/0.0951=0.097
-	// GZ Deactivated for experimenting...
-	//Q_ASSERT(Bx <= 0.0);
-	//Q_ASSERT(By <= 0.0);
 }
 
 #endif // SKYLIGHT_HPP
-

@@ -250,7 +250,7 @@ void SkylightDialog::resetxStel()
 	ui->doubleSpinBox_Bx ->setValue(+0.0011);
 	ui->doubleSpinBox_CxT->setValue(-0.0005);
 	ui->doubleSpinBox_Cx ->setValue(+0.2127);
-	ui->doubleSpinBox_DxT->setValue(-0.0641);
+	ui->doubleSpinBox_DxT->setValue(-0.0641); // ident
 	ui->doubleSpinBox_Dx ->setValue(-0.8992);
 	ui->doubleSpinBox_ExT->setValue(-0.0035);
 	ui->doubleSpinBox_Ex ->setValue(+0.0453);
