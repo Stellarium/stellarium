@@ -40,6 +40,7 @@
 #include <QSettings>
 #include <QString>
 #include <QRegularExpression>
+#include <QTextCodec>
 
 #include <cmath>
 #include <stdexcept>
@@ -277,6 +278,33 @@ bool SolarSystemEditor::copySolarSystemConfigurationFileTo(QString filePath)
 	}
 }
 
+bool SolarSystemEditor::isFileEncodingValid(QString filePath) const
+{
+	QFile checkFile(filePath);
+	if (!checkFile.open(QIODevice::ReadOnly))
+	{
+		qWarning() << "[Solar System Editor] Cannot open " << QDir::toNativeSeparators(filePath);
+		return false;
+	}
+	else
+	{
+		QByteArray byteArray = checkFile.readAll();
+		checkFile.close();
+
+		QTextCodec::ConverterState state;
+		QTextCodec *codec = QTextCodec::codecForName("UTF-8");
+		const QString text = codec->toUnicode(byteArray.constData(), byteArray.size(), &state);
+		Q_UNUSED(text)
+		if (state.invalidChars > 0)
+		{
+			qDebug() << "[Solar System Editor] Not a valid UTF-8 sequence in file " << filePath;
+			return false;
+		}
+		else
+			return true;
+	}
+}
+
 bool SolarSystemEditor::replaceSolarSystemConfigurationFileWith(QString filePath)
 {
 	if (!QFile::exists(filePath))
@@ -284,6 +312,9 @@ bool SolarSystemEditor::replaceSolarSystemConfigurationFileWith(QString filePath
 		qCritical() << "SolarSystemEditor: Cannot replace, file not found: " << filePath;
 		return false;
 	}
+
+	if (!isFileEncodingValid(filePath))
+		return false;
 
 	//Is it a valid configuration file?
 	QSettings settings(filePath, StelIniFormat);
@@ -336,6 +367,9 @@ bool SolarSystemEditor::addFromSolarSystemConfigurationFile(QString filePath)
 		return false;
 	}
 
+	if (!isFileEncodingValid(filePath))
+		return false;
+
 	//Is it a valid configuration file?
 	QSettings newData(filePath, StelIniFormat);
 	if (newData.status() != QSettings::NoError)
@@ -367,7 +401,7 @@ bool SolarSystemEditor::addFromSolarSystemConfigurationFile(QString filePath)
 
 			minorBodies.beginGroup(fixedGroupName);
 			QStringList newKeys = newData.allKeys(); // limited to the group!
-			for (auto key : newKeys)
+			for (const auto &key : qAsConst(newKeys))
 			{
 				minorBodies.setValue(key, newData.value(key));
 			}
@@ -408,7 +442,7 @@ QHash<QString,QString> SolarSystemEditor::listAllLoadedObjectsInFile(QString fil
 	QStringList groups = solarSystemIni.childGroups();
 	QStringList minorBodies = solarSystem->getAllMinorPlanetCommonEnglishNames();
 	QHash<QString,QString> loadedObjects;
-	for (auto group : groups)
+	for (const auto &group : qAsConst(groups))
 	{
 		QString name = solarSystemIni.value(group + "/name").toString();
 		if (minorBodies.contains(name))
@@ -461,7 +495,7 @@ bool SolarSystemEditor::removeSsoWithName(QString name)
 	}
 
 	//Remove the section
-	for (auto group : settings.childGroups())
+	for (const auto &group : settings.childGroups())
 	{
 		if (settings.value(group + "/name").toString() == name)
 		{
@@ -850,19 +884,7 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 		         << column << "is not a date in packed format";
 		return SsoElements();
 	}
-	int year = dateMatch.captured(2).toInt();
-	switch (dateMatch.captured(1).at(0).toLatin1())
-	{
-		case 'I':
-			year += 1800;
-			break;
-		case 'J':
-			year += 1900;
-			break;
-		case 'K':
-		default:
-			year += 2000;
-	}
+	int year  = unpackYearNumber(dateMatch.captured(1).at(0).toLatin1(), dateMatch.captured(2).toInt());
 	int month = unpackDayOrMonthNumber(dateMatch.captured(3).at(0));
 	int day   = unpackDayOrMonthNumber(dateMatch.captured(4).at(0));
 	//qDebug() << column << year << month << day;
@@ -1060,7 +1082,7 @@ bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> 
 	}
 
 	//Remove loaded objects (identified by name, not by section name) that are also in the proposed objectList
-	for (auto object : objectList)
+	for (const auto &object : objectList)
 	{
 		QString name = object.value("name").toString();
 		if (name.isEmpty())
@@ -1109,7 +1131,7 @@ bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> 
 				continue;
 
 			output << StelUtils::getEndLineChar() << QString("[%1]").arg(sectionName) << StelUtils::getEndLineChar();
-			for (auto key : object.keys())
+			for (const auto &key : object.keys())
 			{
 				output << QString("%1 = %2").arg(key).arg(object.value(key).toString()) << StelUtils::getEndLineChar();
 			}
@@ -1220,7 +1242,7 @@ bool SolarSystemEditor::updateSolarSystemConfigurationFile(QList<SsoElements> ob
 					if (!existingSections.contains(sectionName))
 					{
 						solarSystem.beginGroup(sectionName);
-						for (auto property : object.keys())
+						for (const auto &property : object.keys())
 						{
 							solarSystem.setValue(property, object.value(property));
 						}
@@ -1258,12 +1280,12 @@ bool SolarSystemEditor::updateSolarSystemConfigurationFile(QList<SsoElements> ob
 			//Remove all orbital elements first, in case
 			//the new ones use another coordinate function
 			// GZ This seems completely useless now. Type of orbit will not change as it is always kepler_orbit.
-			for (auto key : orbitalElementsKeys)
+			for (const auto &key : orbitalElementsKeys)
 			{
 				solarSystem.remove(key);
 			}
 
-			for (auto key : orbitalElementsKeys)
+			for (const auto &key : orbitalElementsKeys)
 			{
 				updateSsoProperty(solarSystem, object, key);
 			}
@@ -1356,15 +1378,18 @@ int SolarSystemEditor::unpackDayOrMonthNumber(QChar digit)
 int SolarSystemEditor::unpackYearNumber (QChar prefix, int lastTwoDigits)
 {
 	int year = lastTwoDigits;
-	if (prefix == 'I')
-		year += 1800;
-	else if (prefix == 'J')
-		year += 1900;
-	else if (prefix == 'K')
-		year += 2000;
-	else
-		year = 0; //Error
-
+	switch (prefix.toLatin1())
+	{
+		case 'I':
+			year += 1800;
+			break;
+		case 'J':
+			year += 1900;
+			break;
+		case 'K':
+		default:
+			year += 2000;
+	}
 	return year;
 }
 
@@ -1435,7 +1460,7 @@ QString SolarSystemEditor::unpackMinorPlanetProvisionalDesignation (QString pack
 	int cycleCount = unpackAlphanumericNumber(cycleCountPrefix, cycleCountLastDigit);
 
 	//Assemble the unpacked provisional designation
-	QString result = QString("%1 %2%3").arg(year).arg(halfMonthLetter).arg(secondLetter);
+	QString result = QString("%1 %2%3").arg(year).arg(halfMonthLetter, secondLetter);
 	if (cycleCount != 0)
 	{
 		result.append(QString::number(cycleCount));

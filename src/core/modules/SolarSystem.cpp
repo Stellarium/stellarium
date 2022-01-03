@@ -580,7 +580,7 @@ void SolarSystem::loadPlanets()
 			//qCritical() << "We should not be here!";
 
 			qDebug() << "Removing minor bodies";
-			for (const auto& p : systemPlanets)
+			for (const auto& p : qAsConst(systemPlanets))
 			{
 				// We can only delete minor objects now!
 				if (p->pType >= Planet::isAsteroid)

@@ -258,6 +258,9 @@ private:
 	//! \returns true if the replacement has been successfull.
 	bool resetSolarSystemConfigurationFile() const;
 
+	//! Check encoding of the file
+	bool isFileEncodingValid(QString filePath) const;
+
 	//! Converts an alphanumeric digit as used in MPC packed dates to an integer.
 	//! See http://www.minorplanetcenter.org/iau/info/PackedDates.html
 	//! Interprets the digits from 0 to 9 normally, and the capital letters
