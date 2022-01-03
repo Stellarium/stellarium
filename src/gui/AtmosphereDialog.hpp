@@ -42,28 +42,6 @@ public:
 public slots:
 	virtual void retranslate() Q_DECL_OVERRIDE;
 
-protected slots:
-	// various reset functions for the parametrizable atmosphere model.
-	void resetYPreet();
-	void resetxPreet();
-	void resetyPreet();
-	void resetYStel();
-	void resetxStel();
-	void resetyStel();
-
-	//void resetZYPreet();
-	void resetZxPreet();
-	void resetZyPreet();
-	//void resetZYStel();
-	void resetZxStel();
-	void resetZyStel();
-
-	void resetPreet(); // reset all xyYABCDEF parameters
-	void resetStel();  // reset all xyYABCDEF parameters
-
-	void setIncrements(int idx);
-	void setTfromK(double k);
-
 protected:
         //! Initialize the dialog widgets and connect the signals/slots.
 	virtual void createDialogContent() Q_DECL_OVERRIDE;
@@ -71,6 +49,7 @@ protected:
 
 private slots:
 	void setStandardAtmosphere();
+	void setTfromK(double k);
 
 private:
 	Skylight *skylight;

@@ -23,6 +23,7 @@
 #include "ui_viewDialog.h"
 #include "AddRemoveLandscapesDialog.hpp"
 #include "AtmosphereDialog.hpp"
+#include "SkylightDialog.hpp"
 #include "TonemappingDialog.hpp"
 #include "GreatRedSpotDialog.hpp"
 #include "ConfigureDSOColorsDialog.hpp"
@@ -64,6 +65,7 @@
 ViewDialog::ViewDialog(QObject* parent) : StelDialog("View", parent)
 	, addRemoveLandscapesDialog(Q_NULLPTR)
 	, atmosphereDialog(Q_NULLPTR)
+	, skylightDialog(Q_NULLPTR)
 	, tonemappingDialog(Q_NULLPTR)
 	, greatRedSpotDialog(Q_NULLPTR)
 	, configureDSOColorsDialog(Q_NULLPTR)
@@ -80,6 +82,8 @@ ViewDialog::~ViewDialog()
 	addRemoveLandscapesDialog = Q_NULLPTR;
 	delete atmosphereDialog;
 	atmosphereDialog = Q_NULLPTR;
+	delete skylightDialog;
+	skylightDialog = Q_NULLPTR;
 	delete tonemappingDialog;
 	tonemappingDialog = Q_NULLPTR;
 	delete greatRedSpotDialog;
@@ -201,6 +205,7 @@ void ViewDialog::createDialogContent()
 
 	// atmosphere details
 	connect(ui->pushButtonAtmosphereDetails, SIGNAL(clicked()), this, SLOT(showAtmosphereDialog()));
+	connect(ui->pushButtonSkylightDetails, SIGNAL(clicked()), this, SLOT(showSkylightDialog()));
 	// tonemapping details
 	connect(ui->tonemappingPushButton, SIGNAL(clicked()), this, SLOT(showTonemappingDialog()));
 
@@ -1103,6 +1108,14 @@ void ViewDialog::showAtmosphereDialog()
 		atmosphereDialog = new AtmosphereDialog();
 
 	atmosphereDialog->setVisible(true);
+}
+
+void ViewDialog::showSkylightDialog()
+{
+    if(skylightDialog == Q_NULLPTR)
+	skylightDialog = new SkylightDialog();
+
+    skylightDialog->setVisible(true);
 }
 
 void ViewDialog::showTonemappingDialog()

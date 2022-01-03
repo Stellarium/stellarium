@@ -465,6 +465,13 @@
                 </widget>
                </item>
                <item>
+                <widget class="QPushButton" name="pushButtonSkylightDetails">
+                 <property name="text">
+                  <string>Skylight...</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
                 <widget class="QPushButton" name="tonemappingPushButton">
                  <property name="toolTip">
                   <string>Open tonemapping details.</string>
