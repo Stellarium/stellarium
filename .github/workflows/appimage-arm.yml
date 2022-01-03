@@ -27,7 +27,7 @@ jobs:
 
     - name: Download static QEMU (${{ matrix.qarch }})
       run: |
-        wget https://github.com/multiarch/qemu-user-static/releases/download/v6.1.0-5/qemu-${{ matrix.qarch }}-static -O ${{ runner.temp }}/qemu-static
+        wget https://github.com/multiarch/qemu-user-static/releases/download/v6.1.0-8/qemu-${{ matrix.qarch }}-static -O ${{ runner.temp }}/qemu-static
         chmod +x ${{ runner.temp }}/qemu-static
 
     - name: Build AppImage
