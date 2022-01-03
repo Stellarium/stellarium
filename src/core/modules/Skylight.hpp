@@ -136,14 +136,14 @@ public:
 
 		Q_ASSERT(p.pos[2] >= 0.f);
 		const float oneOverCosZenithAngle = (p.pos[2]==0.f) ? 1e38f : 1.f / p.pos[2];
-		p.color[0] = term_x * (1.f + Ax * std::exp(Bx*oneOverCosZenithAngle))
-				* (1.f + Cx * std::exp(Dx*distSun) + Ex * cosDistSun_q);
+		p.color[0] = static_cast<float>(term_x) * (1.f + static_cast<float>(Ax) * std::exp(static_cast<float>(Bx)*oneOverCosZenithAngle))
+			     * (1.f + static_cast<float>(Cx) * std::exp(static_cast<float>(Dx)*distSun) + static_cast<float>(Ex) * cosDistSun_q);
 
-		p.color[1] = term_y * (1.f + Ay * std::exp(By*oneOverCosZenithAngle))
-				* (1.f + Cy * std::exp(Dy*distSun) + Ey * cosDistSun_q);
+		p.color[1] = static_cast<float>(term_y) * (1.f + static_cast<float>(Ay) * std::exp(static_cast<float>(By)*oneOverCosZenithAngle))
+				* (1.f + static_cast<float>(Cy) * std::exp(static_cast<float>(Dy)*distSun) + static_cast<float>(Ey) * cosDistSun_q);
 
-		p.color[2] = term_Y * (1.f + AY * std::exp(BY*oneOverCosZenithAngle))
-				* (1.f + CY * std::exp(DY*distSun) + EY * cosDistSun_q);
+		p.color[2] = static_cast<float>(term_Y) * (1.f + static_cast<float>(AY) * std::exp(static_cast<float>(BY)*oneOverCosZenithAngle))
+				* (1.f + static_cast<float>(CY) * std::exp(static_cast<float>(DY)*distSun) + static_cast<float>(EY) * cosDistSun_q);
 
 
 		if (p.color[2] < 0.f || p.color[0] < 0.f || p.color[1] < 0.f)
@@ -154,12 +154,15 @@ public:
 		}
 	}
 
-	void getShadersParams(Vec3f& asunPos, float& aterm_x, float& aAx, float& aBx, float& aCx, float& aDx, float& aEx,
-		float& aterm_y, float& aAy, float& aBy, float& aCy, float& aDy, float& aEy) const
+	void getShadersParams(Vec3f& asunPos,
+			      float& aterm_x, float& aAx, float& aBx, float& aCx, float& aDx, float& aEx,
+			      float& aterm_y, float& aAy, float& aBy, float& aCy, float& aDy, float& aEy) const
 	{
 		asunPos=sunPos;
-		aterm_x=term_x;aAx=Ax;aBx=Bx;aCx=Cx;aDx=Dx;aEx=Ex;
-		aterm_y=term_y;aAy=Ay;aBy=By;aCy=Cy;aDy=Dy;aEy=Ey;
+		aterm_x=static_cast<float>(term_x);aAx=static_cast<float>(Ax);aBx=static_cast<float>(Bx);
+		aCx=static_cast<float>(Cx);aDx=static_cast<float>(Dx);aEx=static_cast<float>(Ex);
+		aterm_y=static_cast<float>(term_y);aAy=static_cast<float>(Ay);aBy=static_cast<float>(By);
+		aCy=static_cast<float>(Cy);aDy=static_cast<float>(Dy);aEy=static_cast<float>(Ey);
 	}
 
 signals:
@@ -340,7 +343,7 @@ private:
 	double thetas;  // angular distance between the zenith and the sun in radian
 	double T;       // Turbidity : i.e. sky "clarity"
 	               //  1 : pure air
-	               //  2 : exceptionnally clear
+		       //  2 : exceptionally clear
 	               //  4 : clear
 	               //  8 : light haze
 	               // 25 : haze
@@ -352,13 +355,13 @@ private:
 	double zenithColorY;        // y color component of the CIE color at zenith
 
 	double eyeLumConversion;    // luminance conversion for an eye adapted to screen luminance
-	                           // (around 40 cd/m^2)
+				    // (around 40 cd/m^2)
 
 	double AY, BY, CY, DY, EY;  // Distribution coefficients for the luminance distribution function
 	double Ax, Bx, Cx, Dx, Ex;  // Distribution coefficients for x distribution function
 	double Ay, By, Cy, Dy, Ey;  // Distribution coefficients for y distribution function
 
-	// GZ Experimental: make fully GUI configurable parameters to play! Naming: AY=AYt*T+AYc, etc. (i.e., Tfactor, Constant)
+	// Make fully GUI configurable parameters to play! Naming: AY=AYt*T+AYc, etc. (i.e., Tfactor, Constant)
 	double AYt, BYt, CYt, DYt, EYt;  // Distribution coefficients for the luminance distribution function
 	double Axt, Bxt, Cxt, Dxt, Ext;  // Distribution coefficients for x distribution function
 	double Ayt, Byt, Cyt, Dyt, Eyt;  // Distribution coefficients for y distribution function
@@ -378,7 +381,7 @@ private:
 
 	double term_x;              // Precomputed term for x calculation
 	double term_y;              // Precomputed term for y calculation
-	double term_Y;              // Precomputed term for luminance calculation. We will actually not use it because luminance comes from SkyBright (Schaefer's model)
+	double term_Y;              // Precomputed term for luminance calculation. We will rarely use it because luminance comes better from SkyBright (Schaefer's model)
 
 	float sunPos[3];
 
