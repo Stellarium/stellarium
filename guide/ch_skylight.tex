@@ -18,8 +18,8 @@ more advanced users may want to tweak some of the values.
 
 A well-known fast computer graphics model for daylight has been
 presented by \citet{Preetham:1999}. Its brightness distribution is
-based on the CIE clear-sky model by Kittler and Darula
-\cite{Kittler-Darula:199x}, and models chromaticity distribution with
+based on an all-weather model for sky luminance distribution by
+\citet{Perez:1993} and models chromaticity distribution with
 similarly-shaped functions. It works reasonably well for average
 conditions, and a ``turbidity'' parameter $T$ allows a simple
 modelling of visibility conditions. In terms of the atmospheric
@@ -27,6 +27,7 @@ extinction coefficient $k$ (see \ref{sec:phenomena:Extinction}), we
 can define
 \begin{equation}
   T=25(k-0.16)+1
+  \label{eq:TfromK}
 \end{equation}
 In Stellarium, a value of $T=5$ has been used for many years, and the
 chromaticity parameters have been slightly changed for a more pleasing
@@ -42,12 +43,16 @@ and therefore you must enable this manually by editing \file{config.ini}:
 Only with this setting, a button \button{Skylight\ldots} will be
 available in the View settings, Sky tab.
 
-One setting allows to compute
-$T$ from $k$ with the above relation.  However, please note that the
-parameters are far from intuitive, therefore we added two sets of
-reset functions. One sets the values to those in the original paper,
-the other re-establishes Stellarium's sky colors from version 0.21.3
-and earlier, which however seem only suitable for $T=5$.
+All settings described here will immediately be stored in \file{config.ini}. 
+
+One setting allows to compute $T$ from $k$ with the above relation
+\ref{eq:TfromK}.
+
+Please note that the parameters are far from intuitive, therefore we
+added two sets of reset functions. One sets the values to those in the
+original paper, the other re-establishes Stellarium's sky colors from
+version 0.21.3 and earlier, which however seem only suitable for
+$T=5$.
 
 A sky brightness model better suited for astronomical simulation,
 including twilight and brightness contributions of the Moon and
@@ -68,7 +73,7 @@ sphere is rendered after the atmosphere.
 
 Tonemapping is the process which attempts to compress the brightness
 values found in nature into the range of brightness values which can
-be achieved on a display device so that it looks reasonably natural
+be achieved on a display device so that an image of a natural scene looks reasonably natural
 and realistic. The process has been described by
 \citet{TumblinRushmeier:1993}, \citet{Larson:1997} and
 \citet{DevlinChalmersWilkie:2002}. For low-light conditions like night
