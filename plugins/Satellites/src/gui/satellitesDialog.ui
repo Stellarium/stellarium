@@ -1269,7 +1269,7 @@
              <item>
               <widget class="QLabel" name="validAgeLabel">
                <property name="toolTip">
-                <string>The valid time range for epoch of TLE in days, using for filter of satellites</string>
+                <string>The valid time range for epoch of TLE in days, used in filtering of satellites</string>
                </property>
                <property name="text">
                 <string>Age:</string>
@@ -1279,7 +1279,7 @@
              <item>
               <widget class="QSpinBox" name="validAgeSpinBox">
                <property name="toolTip">
-                <string>The valid time range for epoch of TLE in days, using for filter of satellites</string>
+                <string>The valid time range for epoch of TLE in days, used in filtering of satellites</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
