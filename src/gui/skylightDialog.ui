@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>834</width>
-    <height>675</height>
+    <width>736</width>
+    <height>611</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -254,7 +254,10 @@
       <item>
        <widget class="QLabel" name="label_35">
         <property name="text">
-         <string>zenithLum=zenithY = (4.0453T  4.9710) tan chi  -  0.2155T + 2.4192</string>
+         <string>zenithLum=zenithY = (4.0453T  - 4.9710) tan &amp;chi;  -  0.2155T + 2.4192 kcd/m² ; &amp;chi;=(4/9-T/120)(&amp;pi;-2&amp;theta;&lt;sub&gt;s&lt;/sub&gt;)   [Preetham]</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::RichText</enum>
         </property>
        </widget>
       </item>
@@ -729,7 +732,10 @@
       <item>
        <widget class="QLabel" name="label_34">
         <property name="text">
-         <string>F(th; g) = (1+Ae^(B /cos th))(1 + Ce^(Dg) + E cos² g ) --- YP = Yz   F(th; g) /  F(0; th_s)   with zenith angle &amp;theta;, solar zenith angle th_s, solar angle g</string>
+         <string>F(&amp;theta;; &amp;gamma;) = (1+Ae&lt;sup&gt;B/cos &amp;theta;&lt;/sup&gt;)(1 + Ce&lt;sup&gt;Dg&lt;/sup&gt; + E cos² &amp;gamma; ) --- YP = Yz   F(&amp;theta;; &amp;gamma;) /  F(0; &amp;theta;&lt;sub&gt;s&lt;/sub&gt;)   with zenith angle &amp;theta;, solar zenith angle &amp;theta;&lt;sub&gt;s&lt;/sub&gt;, solar angle &amp;gamma;</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::RichText</enum>
         </property>
        </widget>
       </item>

@@ -103,6 +103,7 @@ class Skylight: public QObject
 
 	Q_PROPERTY(double T  READ getT WRITE setT NOTIFY turbidityChanged)
 	Q_PROPERTY(bool flagSchaefer READ getFlagSchaefer WRITE setFlagSchaefer NOTIFY flagSchaeferChanged)
+	Q_PROPERTY(bool flagGuiPublic READ getFlagGuiPublic WRITE setFlagGuiPublic NOTIFY flagGuiPublicChanged)
 
 friend class AtmosphereDialog;
 
@@ -160,14 +161,6 @@ public:
 		aterm_x=term_x;aAx=Ax;aBx=Bx;aCx=Cx;aDx=Dx;aEx=Ex;
 		aterm_y=term_y;aAy=Ay;aBy=By;aCy=Cy;aDy=Dy;aEy=Ey;
 	}
-	
-	// GZ new: reset all parameters...
-//	void resetPreethamData()
-//	{ // TODO put back the values.
-//		AYt=newAYt; BYt=newBYt; CYt=newCYt; DYt=newDYt; EYt=newEYt; AYc=newAYc; BYc=newBYc; CYc=newCYc; DYc=newDYc; EYc=newEYc;
-//		Axt=newAxt; Bxt=newBxt; Cxt=newCxt; Dxt=newDxt; Ext=newExt; Axc=newAxc; Bxc=newBxc; Cxc=newCxc; Dxc=newDxc; Exc=newExc;
-//		Ayt=newAyt; Byt=newByt; Cyt=newCyt; Dyt=newDyt; Eyt=newEyt; Ayc=newAyc; Byc=newByc; Cyc=newCyc; Dyc=newDyc; Eyc=newEyc;
-//	}
 
 signals:
 	void AYtChanged(double val);
@@ -224,7 +217,8 @@ signals:
 	void zY34Changed(double val);
 	void turbidityChanged(double val);
 	void flagSchaeferChanged(bool val);
-	
+	void flagGuiPublicChanged(bool val);
+
 public slots:
 	void setAYt(const double val){AYt=val;   StelApp::getInstance().getSettings()->setValue("Skylight/AYt",  val); emit AYtChanged(val);  computeLuminanceDistributionCoefs();}
 	void setBYt(const double val){BYt=val;   StelApp::getInstance().getSettings()->setValue("Skylight/BYt",  val); emit BYtChanged(val);  computeLuminanceDistributionCoefs();}
@@ -339,6 +333,8 @@ public slots:
 
 	void setFlagSchaefer(bool val){flagSchaefer=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/use_Schaefer", val); emit flagSchaeferChanged(val);}
 	bool getFlagSchaefer() const {return flagSchaefer;}
+	void setFlagGuiPublic(bool val){flagGuiPublic=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/enable_gui", val); emit flagGuiPublicChanged(val);}
+	bool getFlagGuiPublic() const {return flagGuiPublic;}
 
 private:
 	double thetas;  // angular distance between the zenith and the sun in radian
@@ -378,6 +374,7 @@ private:
 	double zY31, zY32, zY33, zY34;
 
 	bool flagSchaefer;         // Use Schaerfer's sky brightness model. If false, use CIE brightness from Preetham's paper.
+	bool flagGuiPublic;        // allow user interaction via GUI (show a button to call up SkylightDialog in ViewDialog)
 
 	double term_x;              // Precomputed term for x calculation
 	double term_y;              // Precomputed term for y calculation
@@ -385,17 +382,17 @@ private:
 
 	float sunPos[3];
 
-	// Compute CIE Y (luminance) for zenith in cd/m^2
+	//! Compute CIE Y (luminance) for zenith in cd/m^2
 	inline void computeZenithLuminance(void);
-	// Compute CIE x and y color components
+	//! Compute CIE x and y color components
 	inline void computeZenithColor(void);
-	// Compute the luminance distribution coefficients
+	//! Compute the luminance distribution coefficients
 	inline void computeLuminanceDistributionCoefs(void);
-	// Compute the color distribution coefficients
+	//! Compute the color distribution coefficients
 	inline void computeColorDistributionCoefs(void);
 };
 
-// Return the current zenith color in xyY color system
+//! Return the current zenith color in xyY color system
 inline void Skylight::getZenithColor(float * v) const
 {
 	v[0] = static_cast<float>(zenithColorX);
@@ -403,7 +400,7 @@ inline void Skylight::getZenithColor(float * v) const
 	v[2] = static_cast<float>(zenithLuminance);
 }
 
-// Compute CIE luminance for zenith in cd/m^2
+//! Compute CIE luminance for zenith in cd/m^2
 inline void Skylight::computeZenithLuminance(void)
 {
 	zenithLuminance = 1000. * ((4.0453*T - 4.9710) * std::tan( (0.4444 - T*(1./120.)) * (M_PI-2.*thetas) ) -
@@ -412,7 +409,7 @@ inline void Skylight::computeZenithLuminance(void)
 }
 
 
-// Compute CIE x and y color components
+//! Compute CIE x and y color components
 // Edit: changed some coefficients to get new sky color
 // GZ: 2016-01 changed back to original Preetham values.
 // GZ: 2016-01b made them configurable with 2 presets: Preetham and Stellarium.
@@ -452,7 +449,7 @@ inline void Skylight::computeZenithColor(void)
 #endif
 }
 
-// Compute the luminance distribution coefficients
+//! Compute the luminance distribution coefficients
 // FC Edit 2003(?) changed some coefficients to get new sky color
 // GZ: 2016-01 changed back to original Preetham values.
 // GZ: 2016-01b made them configurable with 2 presets: Preetham and Stellarium.
@@ -480,7 +477,7 @@ inline void Skylight::computeLuminanceDistributionCoefs(void)
 	//Q_ASSERT(BY <= 0.0);
 }
 
-// Compute the color distribution coefficients
+//! Compute the color distribution coefficients
 // FC Edit 2003(?) changed some coefficients to get new sky color
 // GZ: TODO 2016-01 find and change back to original Preetham values.
 inline void Skylight::computeColorDistributionCoefs(void)

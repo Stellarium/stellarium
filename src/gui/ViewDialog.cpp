@@ -205,7 +205,12 @@ void ViewDialog::createDialogContent()
 
 	// atmosphere details
 	connect(ui->pushButtonAtmosphereDetails, SIGNAL(clicked()), this, SLOT(showAtmosphereDialog()));
-	connect(ui->pushButtonSkylightDetails, SIGNAL(clicked()), this, SLOT(showSkylightDialog()));
+	// This has to be manually enabled by the user
+	StelPropertyMgr* propMgr = StelApp::getInstance().getStelPropertyManager();
+	if (propMgr->getProperty("Skylight.flagGuiPublic")->getValue().toBool())
+		connect(ui->pushButtonSkylightDetails, SIGNAL(clicked()), this, SLOT(showSkylightDialog()));
+	else
+		ui->pushButtonSkylightDetails->hide();
 	// tonemapping details
 	connect(ui->tonemappingPushButton, SIGNAL(clicked()), this, SLOT(showTonemappingDialog()));
 

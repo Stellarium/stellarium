@@ -62,6 +62,7 @@ void AtmosphereDialog::createDialogContent()
 	connectBoolProperty(ui->checkBox_noScatter, "LandscapeMgr.atmosphereNoScatter");
 
 	connectBoolProperty(ui->checkBox_TfromK, "StelSkyDrawer.flagTfromK");
+	ui->doubleSpinBox_T->setDisabled(ui->checkBox_TfromK->isChecked());
 	connect(ui->checkBox_TfromK, SIGNAL(toggled(bool)), ui->doubleSpinBox_T, SLOT(setDisabled(bool)));
 	connect(ui->extinctionDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(setTfromK(double)));
 	connectDoubleProperty(ui->doubleSpinBox_T, "StelSkyDrawer.turbidity");

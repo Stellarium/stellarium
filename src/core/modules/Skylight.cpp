@@ -101,6 +101,7 @@ Skylight::Skylight() :
 	zY34=conf->value("Skylight/zY34", +0.26688).toDouble();
 
 	flagSchaefer=conf->value("Skylight/use_Schaefer", true).toBool();
+	flagGuiPublic=conf->value("Skylight/enable_gui", false).toBool();
 }
 
 Skylight::~Skylight()
