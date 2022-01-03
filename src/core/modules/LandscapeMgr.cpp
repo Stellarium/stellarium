@@ -335,7 +335,7 @@ void LandscapeMgr::update(double deltaTime)
 	// GZ: First parameter in next call is used for particularly earth-bound computations in Schaefer's sky brightness model. Difference DeltaT makes no difference here.
 	atmosphere->computeColor(core->getJDE(), sunPos, moonPos, lunarPhaseAngle, lunarMagnitude,
 		core, core->getCurrentLocation().latitude, core->getCurrentLocation().altitude,
-				 15.f, 40.f, static_cast<float>(drawer->getExtinctionCoefficient()));	// Temperature = 15c, relative humidity = 40%
+				 15.f, 40.f, static_cast<float>(drawer->getExtinctionCoefficient()), atmosphereNoScatter);	// Temperature = 15c, relative humidity = 40%
 
 	// GZ Experimenting with better sunrise, add some factor here.
 	core->getSkyDrawer()->reportLuminanceInFov(static_cast<float>(atmLumFactor*(3.75+static_cast<double>(atmosphere->getAverageLuminance())*3.5)), true);

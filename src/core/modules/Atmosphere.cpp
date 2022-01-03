@@ -124,7 +124,7 @@ Atmosphere::~Atmosphere(void)
 }
 
 void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moonPhase, float moonMagnitude,
-							   StelCore* core, float latitude, float altitude, float temperature, float relativeHumidity, float extinctionCoefficient)
+							   StelCore* core, float latitude, float altitude, float temperature, float relativeHumidity, float extinctionCoefficient, bool noScatter)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 	if (viewport != prj->getViewport())
@@ -277,7 +277,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 	float sum_lum = 0.f;
 
 	Vec3d point(1., 0., 0.);
-	float lumi;
+	float lumi=0.f;
 
 	skylightStruct2 skylight;
 	// Compute the sky color for every point above the ground
@@ -289,29 +289,31 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		Q_ASSERT(fabs(point.lengthSquared()-1.0) < 1e-10);
 
 		Vec3f pointF=point.toVec3f();
-		// Use mirroring for sun only
-		if (pointF[2]<=0.f)
+		if (!noScatter)
 		{
-			pointF[2] *= -1.f;
-			moonPosF[2] *= -1.f;
-			// The sky below the ground is the symmetric of the one above :
-			// it looks nice and gives proper values for brightness estimation
-			// Use the Skybright.cpp 's models for brightness which gives better results.
-		}
-		// Experimental: Re-allow CIE brightness instead.
-		if (sky.getFlagSchaefer())
-		{
-			lumi = skyb.getLuminance(moonPosF[0]*pointF[0]+moonPosF[1]*pointF[1]+
-					moonPosF[2]*pointF[2], sunPosF[0]*pointF[0]+sunPosF[1]*pointF[1]+
-					sunPosF[2]*pointF[2], pointF[2]);
-		}
-		else
-		{
-			skylight.pos[0]=pointF.v[0];
-			skylight.pos[1]=pointF.v[1];
-			skylight.pos[2]=pointF.v[2];
-			sky.getxyYValuev(skylight);
-			lumi=skylight.color[2];
+			// Use mirroring for sun only
+			if (pointF[2]<=0.f)
+			{
+				pointF[2] *= -1.f;
+				moonPosF[2] *= -1.f;
+				// The sky below the ground is the symmetric of the one above :
+				// it looks nice and gives proper values for brightness estimation
+				// Use the Skybright.cpp 's models for brightness which gives better results.
+			}
+			if (sky.getFlagSchaefer())
+			{
+				lumi = skyb.getLuminance(moonPosF[0]*pointF[0]+moonPosF[1]*pointF[1]+moonPosF[2]*pointF[2],
+							 sunPosF[0] *pointF[0]+sunPosF[1] *pointF[1]+sunPosF[2] *pointF[2],
+							 pointF[2]);
+			}
+			else // Experimental: Re-allow CIE/Preetham brightness instead.
+			{
+				skylight.pos[0]=pointF.v[0];
+				skylight.pos[1]=pointF.v[1];
+				skylight.pos[2]=pointF.v[2];
+				sky.getxyYValuev(skylight);
+				lumi=skylight.color[2];
+			}
 		}
 
 		lumi *= eclipseFactor;
