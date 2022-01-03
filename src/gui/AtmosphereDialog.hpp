@@ -18,16 +18,11 @@
 */
 
 
-// GZ: Methods copied largely from AddRemoveLandscapesDialog
-
 #ifndef ATMOSPHEREDIALOG_HPP
 #define ATMOSPHEREDIALOG_HPP
 
 #include <QObject>
 #include "StelDialog.hpp"
-#include "RefractionExtinction.hpp"
-#include "Skylight.hpp"
-
 
 class Ui_atmosphereDialogForm;
 
@@ -50,9 +45,6 @@ protected:
 private slots:
 	void setStandardAtmosphere();
 	void setTfromK(double k);
-
-private:
-	Skylight *skylight;
 };
 
 #endif // ATMOSPHEREDIALOG_HPP

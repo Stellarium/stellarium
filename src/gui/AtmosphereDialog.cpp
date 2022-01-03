@@ -18,14 +18,12 @@
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelModuleMgr.hpp"
+#include "StelSkyDrawer.hpp"
 #include "AtmosphereDialog.hpp"
-#include "Skylight.hpp"
 #include "ui_atmosphereDialog.h"
 
 AtmosphereDialog::AtmosphereDialog()
 	: StelDialog("Atmosphere")
-	, skylight(Q_NULLPTR)
 {
 	ui = new Ui_atmosphereDialogForm;
 }
@@ -78,8 +76,6 @@ void AtmosphereDialog::setStandardAtmosphere()
 	ui->extinctionDoubleSpinBox->setValue(0.2);
 }
 
-
-
 void AtmosphereDialog::setTfromK(double k)
 {
 	if (ui->checkBox_TfromK->isChecked())
@@ -91,4 +87,3 @@ void AtmosphereDialog::setTfromK(double k)
 		skyDrawer->setT(T);
 	}
 }
-

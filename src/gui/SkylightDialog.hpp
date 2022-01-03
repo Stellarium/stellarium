@@ -1,7 +1,7 @@
 /*
  * Stellarium
- * 
- * Copyright (C) 2011 Georg Zotti (Refraction/Extinction feature)
+ *
+ * Copyright (C) 2022 Georg Zotti
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,17 +17,11 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-
-// GZ: Methods copied largely from AddRemoveLandscapesDialog
-
 #ifndef SKYLIGHTDIALOG_HPP
 #define SKYLIGHTDIALOG_HPP
 
 #include <QObject>
 #include "StelDialog.hpp"
-//#include "RefractionExtinction.hpp"
-#include "Skylight.hpp"
-
 
 class Ui_skylightDialogForm;
 
@@ -62,15 +56,11 @@ protected slots:
 	void resetStel();  // reset all xyYABCDEF parameters
 
 	void setIncrements(int idx);
-	//void setTfromK(double k);
 
 protected:
         //! Initialize the dialog widgets and connect the signals/slots.
 	virtual void createDialogContent() Q_DECL_OVERRIDE;
 	Ui_skylightDialogForm *ui;
-
-private:
-	Skylight *skylight;
 };
 
 #endif // SKYLIGHTDIALOG_HPP

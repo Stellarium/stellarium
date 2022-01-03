@@ -708,7 +708,6 @@ private:
 
 	// GZ Luminance factor, allows tweaking via atmosphere detail GUI. Tried with 1.3, but may also be complete bogus! Default in Stellarium=1.0
 	double atmLumFactor;
-
 };
 
 #endif // LANDSCAPEMGR_HPP

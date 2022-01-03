@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2011 Georg Zotti
+ * Copyright (C) 2022 Georg Zotti
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -16,16 +16,11 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#include "StelApp.hpp"
-#include "StelCore.hpp"
-#include "StelModuleMgr.hpp"
 #include "SkylightDialog.hpp"
-#include "Skylight.hpp"
 #include "ui_skylightDialog.h"
 
 SkylightDialog::SkylightDialog()
 	: StelDialog("Skylight")
-	, skylight(Q_NULLPTR)
 {
 	ui = new Ui_skylightDialogForm;
 }
