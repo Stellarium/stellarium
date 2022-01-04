@@ -438,8 +438,8 @@ void Atmosphere::draw(StelCore* core)
 	GL(atmoShaderProgram->disableAttributeArray(shaderAttribLocations.skyVertex));
 	GL(atmoShaderProgram->disableAttributeArray(shaderAttribLocations.skyColor));
 	GL(atmoShaderProgram->release());
-	// GZ: debug output
-	sPainter.setColor(0.7f, 0.7f, 0.7f);
-	sPainter.drawText(83, 108, QString("Tonemapper::worldAdaptationLuminance(): %1" ).arg(eye->getWorldAdaptationLuminance()));
-	sPainter.drawText(83, 120, QString("Atmosphere::getAverageLuminance(): %1" ).arg(getAverageLuminance()));
+	// debug output
+	// sPainter.setColor(0.7f, 0.7f, 0.7f);
+	// sPainter.drawText(83, 108, QString("Tonemapper::worldAdaptationLuminance(): %1" ).arg(eye->getWorldAdaptationLuminance()));
+	// sPainter.drawText(83, 120, QString("Atmosphere::getAverageLuminance(): %1" ).arg(getAverageLuminance()));
 }
