@@ -450,9 +450,6 @@ public slots:
 	int getAtmosphereBortleLightPollution() const;
 	*/
 
-	// GZ Special purpose to be able to set parameters:
-	Atmosphere* getAtmosphere(void){return atmosphere;}
-
 	//! Set the rotation of the landscape about the z-axis.
 	//! This is intended for special uses such as when the landscape consists of
 	//! a vehicle which might change orientation over time (e.g. a ship).

@@ -569,7 +569,7 @@ private:
 	double daylightLabelThreshold;
 
 	float big3dModelHaloRadius;
-	// GZ Experiments for Atmospheric tweaks.
+	// Settings for Atmospheric tweaks:
 	bool flagDrawSunAfterAtmosphere;
 	bool flagEarlySunHalo; // Used to select if solar halo is plotted before (true) or after (default, false) the 3D sphere.
 	bool flagTfromK; // true to compute T from extinction k

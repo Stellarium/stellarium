@@ -1035,7 +1035,6 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 					oss << QString("%1: %2 %3<br/>").arg(q_("Equatorial rotation velocity")).arg(qAbs(eqRotVel), 0, 'f', 3).arg(kms);
 				else
 					oss << QString("%1: %2 %3<br/>").arg(q_("Equatorial rotation velocity")).arg(qAbs(eqRotVel*1000.), 0, 'f', 3).arg(mps);
-
 			}
 			else if (qAbs(re.period)>0.)
 			{
@@ -3240,21 +3239,12 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 		// Find new extincted color for halo. The method is again rather ad-hoc, but does not look too bad.
 		// For the sun, we have again to use the stronger extinction to avoid color mismatch.
-		Vec3f haloColorToDraw;
-		//if (this==ssm->getSun())
-		//if (englishName=="Sun")
-		//	haloColorToDraw.set(2.f*haloColor[0], 2.f*pow(0.8f, 0.5f*extinctedMag) * haloColor[1], 2.f*pow(0.6f, 0.5f*extinctedMag) * haloColor[2]); // UGLY!
-			haloColorToDraw.set(haloColor[0], powf(0.75f, extinctedMag) * haloColor[1], powf(0.42f, 0.9f*extinctedMag) * haloColor[2]);
-		//else
-		//	haloColorToDraw.set(haloColor[0], magFactorGreen * haloColor[1], magFactorBlue * haloColor[2]);
+		Vec3f haloColorToDraw(haloColor[0], powf(0.75f, extinctedMag) * haloColor[1], powf(0.42f, 0.9f*extinctedMag) * haloColor[2]);
 
-		float haloMag=getVMagnitudeWithExtinction(core);
-		// for sun on horizon, mag can go quite low, shrinking the halo too much.
-		if (englishName=="Sun")
-			haloMag=qMin(haloMag, -18.f);
-		core->getSkyDrawer()->postDrawSky3dModel(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), surfArcMin2, haloMag, haloColorToDraw, (englishName=="Sun"));
+		float haloMag=qMin(-18.f, getVMagnitudeWithExtinction(core)); // for sun on horizon, mag can go quite low, shrinking the halo too much.
+		core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp.toVec3f(), surfArcMin2, haloMag, haloColorToDraw, (englishName=="Sun"));
 
-		if ((englishName=="Sun") && (core->getCurrentLocation().planetName == "Earth"))
+		if (core->getCurrentLocation().planetName == "Earth")
 		{
 			LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 			const float eclipseFactor = static_cast<float>(ssm->getSolarEclipseFactor(core).first);
@@ -3421,7 +3411,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		if (this!=ssm->getSun() || drawSunHalo)
 		{
 			float haloMag=getVMagnitudeWithExtinction(core);
-			// GZ EXPERIMENTAL: for sun on horizon, mag can go quite low, shrinking the halo too much.
+			// EXPERIMENTAL: for sun on horizon, mag can go quite low, shrinking the halo too much.
 			if (englishName=="Sun")
 				haloMag=qMin(haloMag, -18.f);
 			core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp.toVec3f(), surfArcMin2, haloMag, haloColorToDraw, this==ssm->getSun());

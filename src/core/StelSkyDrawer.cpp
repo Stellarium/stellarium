@@ -115,7 +115,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	setAtmosphereTemperature(conf->value("landscape/temperature_C", 15.0).toDouble());
 	setAtmospherePressure(conf->value("landscape/pressure_mbar", 1013.0).toDouble());
 
-	// GZ four extras
+	// four extras for finetuning
 	setFlagDrawSunAfterAtmosphere(conf->value("landscape/draw_sun_after_atmosphere",false).toBool());
 	setFlagEarlySunHalo(conf->value("landscape/early_solar_halo",false).toBool());
 	setFlagTfromK(conf->value("landscape/use_T_from_k",false).toBool());
@@ -493,7 +493,6 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 	float pxRd = pixRadius*3.f+100.f;
 	bool noStarHalo = false;
 
-	//if (mag<-15.f) // GZ-AT problem: sun may be dimmed by extinction...
 	if (isSun)
 	{
 		// Sun, halo size varies in function of the magnitude because sun as seen from pluto should look dimmer

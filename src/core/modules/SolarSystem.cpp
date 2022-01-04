@@ -344,7 +344,6 @@ void SolarSystem::resetTextures(const QString &planetName)
 		if (!planet.isNull())
 			planet->resetTextures();
 	}
-
 }
 
 void SolarSystem::setTextureForPlanet(const QString& planetName, const QString& texName)
