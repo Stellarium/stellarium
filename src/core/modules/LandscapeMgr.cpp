@@ -243,7 +243,6 @@ LandscapeMgr::LandscapeMgr()
 	, defaultMinimalBrightness(0.01)
 	, flagLandscapeSetsMinimalBrightness(false)
 	, flagEnvironmentAutoEnabling(false)
-	, atmLumFactor(1.0)
 {
 	setObjectName("LandscapeMgr"); // should be done by StelModule's constructor.
 
@@ -332,14 +331,12 @@ void LandscapeMgr::update(double deltaTime)
 		moonPos=sunPos;
 		lunarPhaseAngle=0.0f;
 	}
-	// GZ: First parameter in next call is used for particularly earth-bound computations in Schaefer's sky brightness model. Difference DeltaT makes no difference here.
+	// First parameter in next call is used for particularly earth-bound computations in Schaefer's sky brightness model. Difference DeltaT makes no difference here.
 	atmosphere->computeColor(core->getJDE(), sunPos, moonPos, lunarPhaseAngle, lunarMagnitude,
 		core, core->getCurrentLocation().latitude, core->getCurrentLocation().altitude,
 				 15.f, 40.f, static_cast<float>(drawer->getExtinctionCoefficient()), atmosphereNoScatter);	// Temperature = 15c, relative humidity = 40%
 
-	// GZ Experimenting with better sunrise, add some factor here.
-	core->getSkyDrawer()->reportLuminanceInFov(static_cast<float>(atmLumFactor*(3.75+static_cast<double>(atmosphere->getAverageLuminance())*3.5)), true);
-
+	core->getSkyDrawer()->reportLuminanceInFov(3.75f+atmosphere->getAverageLuminance()*3.5f, true);
 
 	// NOTE: Simple workaround for brightness of landscape when observing from the Sun.
 	if (core->getCurrentLocation().planetName == "Sun")
@@ -548,7 +545,6 @@ void LandscapeMgr::init()
 	setFlagLabels(conf->value("landscape/flag_enable_labels", true).toBool());
 	setFlagPolyLineDisplayed(conf->value("landscape/flag_polyline_only", false).toBool());
 	setPolyLineThickness(conf->value("landscape/polyline_thickness", 1).toInt());
-	setAtmLumFactor(conf->value("landscape/atm_lum_factor", 1.0).toDouble());
 
 	cardinalsPoints = new Cardinals();
 	cardinalsPoints->setFlagShow4WCRLabels(conf->value("viewing/flag_cardinal_points", true).toBool());

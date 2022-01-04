@@ -57,9 +57,6 @@ void SkylightDialog::createDialogContent()
 
 	connectBoolProperty(ui->checkBox_earlySunHalo, "StelSkyDrawer.flagEarlySunHalo");
 	connectBoolProperty(ui->checkBox_drawSunAfterAtmosphere, "StelSkyDrawer.flagDrawSunAfterAtmosphere");
-	//connectBoolProperty(ui->checkBox_noScatter, "LandscapeMgr.atmosphereNoScatter");
-	// TODO: This may be really a useless extra. Increase screen max lum in Tonemapping seems to do the same effect, but with better control.
-	connectDoubleProperty(ui->doubleSpinBox_globalBrightness, "LandscapeMgr.atmLumFactor");
 
 	connectDoubleProperty(ui->doubleSpinBox_zX11, "Skylight.zX11");
 	connectDoubleProperty(ui->doubleSpinBox_zX12, "Skylight.zX12");
