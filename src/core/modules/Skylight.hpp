@@ -40,7 +40,6 @@ typedef struct {
 	float color[3];     //! 3 component color, can be RGB or CIE color system
 } skylightStruct2;
 
-// GZ We must derive from QObject now to set parameters via GUI
 class Skylight: public QObject
 {
 	Q_OBJECT
@@ -110,16 +109,11 @@ friend class AtmosphereDialog;
 public:
 	Skylight();
 	virtual ~Skylight();
-	//! Set the fixed parameters and precompute what can be
-	//! This function has to be called once before any call to get_*_value()
-	void setParams(float sunZenithAngle, float turbidity);
 
 	//! Same functions but in vector mode : faster because prevents extra cosine calculations
 	//! The position vectors MUST be normalized, and the vertical z component is the third one
 	void setParamsv(const float * sunPos, float turbidity);
 	
-	// Compute the sky color at the given position in the xyY color system and store it in position.color
-	// void getxyYValue(skylightStruct * position);
 	//! Return the current zenith color in the xyY color system
 	//! @param v 3-element vector to receive x, y, Y values
 	inline void getZenithColor(float * v) const;
@@ -127,7 +121,7 @@ public:
 	//! Compute the sky color at the given position in the CIE color system and store it in p.color
 	//! @param p.color[0] is CIE x color component
 	//! @param p.color[1] is CIE y color component
-	//! @param p.color[2] is undefined (CIE Y color component (luminance) if uncommented)
+	//! @param p.color[2] is CIE Y color component (luminance)
 	void getxyYValuev(skylightStruct2& p) const
 	{
 		const float cosDistSun = sunPos[0]*p.pos[0] + sunPos[1]*p.pos[1] + sunPos[2]*p.pos[2];
@@ -406,15 +400,19 @@ inline void Skylight::getZenithColor(float * v) const
 //! Compute CIE Y luminance for zenith in cd/m^2
 inline void Skylight::computeZenithLuminance(void)
 {
-	zenithLuminance = 1000. * ((4.0453*T - 4.9710) * std::tan( (0.4444 - T*(1./120.)) * (M_PI-2.*thetas) ) -
-		0.2155*T + 2.4192);
+	// The original form does not provide meaningful values when the sun is below the horizon.
+	// The ad-hoc solution here is to take value for sun at thetas=90° and scale ad-hoc at solar altitudes 0...-18°, where solar light is no longer visible.
+	double thetaSun=qMin(thetas, M_PI_2);
+	zenithLuminance = 1000. * ((4.0453*T - 4.9710) * std::tan( (0.4444 - T*(1./120.)) * (M_PI-2.*thetaSun) ) - 0.2155*T + 2.4192);
+	if (thetas>108.*M_PI_180)
+	    zenithLuminance=0.;
+	else if (thetas>M_PI_2) // 90...108°, twilight zone
+	    zenithLuminance *= exp(-(thetas-M_PI_2)*M_180_PI); // exponential falloff looks good.
+
 	zenithLuminance=qMax(zenithLuminance, 0.00000000001);
 }
 
 //! Compute CIE x and y color components
-// Edit: changed some coefficients to get new sky color
-// GZ: 2016-01 changed back to original Preetham values.
-// GZ: 2016-01b made them configurable with 2 presets: Preetham and Stellarium.
 inline void Skylight::computeZenithColor(void)
 {
 	zenithColorX=(( ( (( zX11*thetas + zX12)*thetas + zX13)*thetas)       * T
@@ -427,8 +425,6 @@ inline void Skylight::computeZenithColor(void)
 
 //! Compute the luminance distribution coefficients
 // FC Edit 2003(?) changed some coefficients to get new sky color
-// GZ: 2016-01 found and (alternatively) changed back to original Preetham values.
-// GZ: 2016-01b made them configurable with 2 presets: Preetham and Stellarium.
 // with BY>0 the formulas in getxyYValuev make no sense, from which follows T>0.4275/0.3554(=1.203)
 inline void Skylight::computeLuminanceDistributionCoefs(void)
 {
@@ -441,7 +437,6 @@ inline void Skylight::computeLuminanceDistributionCoefs(void)
 
 //! Compute the color distribution coefficients
 // FC Edit 2003(?) changed some coefficients to get new sky color
-// GZ: 2016-01 found and (alternatively) changed back to original Preetham values.
 // with Bx,By>0 the formulas in getxyYValuev make no sense. --> T>0.0011/0.0664=0.017; T>0.0092/0.0951=0.097
 inline void Skylight::computeColorDistributionCoefs(void)
 {

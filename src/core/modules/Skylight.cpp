@@ -111,28 +111,6 @@ Skylight::~Skylight()
 {
 }
 
-// NOT USED IN THE PROGRAM
-/*
-void Skylight::setParams(float _sunZenithAngle, float _turbidity)
-{
-	// Set the two main variables
-	thetas = _sunZenithAngle;
-	T = _turbidity;
-
-	// Precomputation of the distribution coefficients and zenith luminances/color
-	computeZenithLuminance();
-	computeZenithColor();
-	computeLuminanceDistributionCoefs();
-	computeColorDistributionCoefs();
-
-	// Precompute everything possible to increase the get_CIE_value() function speed
-	float cos_thetas = std::cos(thetas);
-	term_x = zenithColorX   / ((1.f + Ax * std::exp(Bx)) * (1.f + Cx * std::exp(Dx*thetas) + Ex * cos_thetas * cos_thetas));
-	term_y = zenithColorY   / ((1.f + Ay * std::exp(By)) * (1.f + Cy * std::exp(Dy*thetas) + Ey * cos_thetas * cos_thetas));
-	term_Y = zenithLuminance / ((1.f + AY * std::exp(BY)) * (1.f + CY * std::exp(DY*thetas) + EY * cos_thetas * cos_thetas));
-}
-*/
-
 void Skylight::setParamsv(const float * _sunPos, float _turbidity)
 {
 	// Store sun position
@@ -141,8 +119,6 @@ void Skylight::setParamsv(const float * _sunPos, float _turbidity)
 	sunPos[2] = _sunPos[2];
 
 	// Set the two main variables
-	//thetas = M_PI_2 - std::asin((float)sunPos[2]);
-	// GZ why not directly acos?
 	thetas = std::acos(static_cast<double>(sunPos[2]));
 	T = static_cast<double>(_turbidity);
 

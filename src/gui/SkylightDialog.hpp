@@ -37,24 +37,42 @@ public slots:
 	virtual void retranslate() Q_DECL_OVERRIDE;
 
 protected slots:
-	// various reset functions for the parametrizable atmosphere model.
+	//! Reset function for the parametrizable Preetham atmosphere model.
+	//! This resets the parameters for the CIE Y distribution to the values found in Preetham's 1999 paper.
 	void resetYPreet();
+	//! Reset function for the parametrizable Preetham atmosphere model.
+	//! This resets the parameters for the CIE x distribution to the values found in Preetham's 1999 paper.
 	void resetxPreet();
+	//! Reset function for the parametrizable Preetham atmosphere model.
+	//! This resets the parameters for the CIE y distribution to the values found in Preetham's 1999 paper.
 	void resetyPreet();
+	//! Reset function for the parametrizable Preetham atmosphere model.
+	//! This resets the parameters for the CIE Y distribution to Stellarium's default values.
 	void resetYStel();
+	//! Reset function for the parametrizable Preetham atmosphere model.
+	//! This resets the parameters for the CIE x distribution to Stellarium's default values.
 	void resetxStel();
+	//! Reset function for the parametrizable Preetham atmosphere model.
+	//! This resets the parameters for the CIE y distribution to Stellarium's default values.
 	void resetyStel();
 
-	//void resetZYPreet();
+	//! Reset function for the parametrizable Preetham atmosphere model.
+	//! This resets the parameters for the CIE x zenith color to the values found in Preetham's 1999 paper.
 	void resetZxPreet();
+	//! Reset function for the parametrizable Preetham atmosphere model.
+	//! This resets the parameters for the CIE y zenith color to the values found in Preetham's 1999 paper.
 	void resetZyPreet();
-	//void resetZYStel();
+	//! Reset function for the parametrizable Preetham atmosphere model.
+	//! This resets the parameters for the CIE x zenith color to Stellarium's default values.
 	void resetZxStel();
+	//! Reset function for the parametrizable Preetham atmosphere model.
+	//! This resets the parameters for the CIE y zenith color to Stellarium's default values.
 	void resetZyStel();
 
-	void resetPreet(); // reset all xyYABCDEF parameters
-	void resetStel();  // reset all xyYABCDEF parameters
+	void resetPreet(); //! reset all xyYABCDEF parameters to the values found in Preetham's 1999 paper.
+	void resetStel();  //! reset all xyYABCDEF parameters to Stellarium's default values.
 
+	//! changes increments for all fine-tuning spinners
 	void setIncrements(int idx);
 
 protected:
