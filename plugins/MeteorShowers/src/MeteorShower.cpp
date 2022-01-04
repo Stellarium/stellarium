@@ -301,7 +301,11 @@ void MeteorShower::update(StelCore* core, double deltaTime)
 	float rate = mpf / static_cast<float>(maxMpf);
 	for (int i = 0; i < maxMpf; ++i)
 	{
+		#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+		float prob = StelApp::getInstance().getRandF();
+		#else
 		float prob = static_cast<float>(qrand()) / static_cast<float>(RAND_MAX);
+		#endif
 		if (prob < rate)
 		{
 			MeteorObj *m = new MeteorObj(core, m_speed, static_cast<float>(m_radiantAlpha), static_cast<float>(m_radiantDelta),
@@ -339,7 +343,11 @@ void MeteorShower::drawRadiant(StelCore *core)
 	painter.setBlending(true, GL_SRC_ALPHA, GL_ONE);
 
 	Vec3f rgb;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+	float alpha = 0.85f + StelApp::getInstance().getRandF() / 10.f;
+#else
 	float alpha = 0.85f + (static_cast<float>(qrand()) / static_cast<float>(RAND_MAX)) / 10.f;
+#endif
 	switch(m_status)
 	{
 		case ACTIVE_CONFIRMED: //Active, confirmed data
@@ -350,8 +358,8 @@ void MeteorShower::drawRadiant(StelCore *core)
 			break;
 		default: //Inactive
 			rgb = m_mgr->getColorIR();
-	}	
-	painter.setColor(rgb[0], rgb[1], rgb[2], alpha);
+	}
+	painter.setColor(rgb, alpha);
 
 	// Hide the radiant markers at during day light and make it visible
 	// when first stars will shine on the sky.
@@ -366,6 +374,7 @@ void MeteorShower::drawRadiant(StelCore *core)
 
 		if (m_mgr->getEnableLabels())
 		{
+			painter.setColor(rgb);
 			painter.setFont(m_mgr->getFont());
 			const float size = static_cast<float>(getAngularSize(Q_NULLPTR))*M_PI_180f*static_cast<float>(painter.getProjector()->getPixelPerRadAtCenter());
 			const float shift = 8.f + size/1.8f;

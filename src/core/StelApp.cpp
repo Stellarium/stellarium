@@ -89,6 +89,9 @@
 #include <QScreen>
 #include <QDateTime>
 #include <QRegularExpression>
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+#include <QRandomGenerator>
+#endif
 #ifdef ENABLE_SPOUT
 #include <QMessageBox>
 #include "SpoutSender.hpp"
@@ -218,6 +221,9 @@ void StelApp::deinitStatic()
 *************************************************************************/
 StelApp::StelApp(StelMainView *parent)
 	: QObject(parent)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+	, randomGenerator(Q_NULLPTR)
+#endif
 	, mainWin(parent)
 	, core(Q_NULLPTR)
 	, moduleMgr(Q_NULLPTR)
@@ -274,6 +280,9 @@ StelApp::StelApp(StelMainView *parent)
 	singleton = this;
 
 	moduleMgr = new StelModuleMgr();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+	randomGenerator = new QRandomGenerator(static_cast<quint32>(QDateTime::currentMSecsSinceEpoch()));
+#endif
 }
 
 /*************************************************************************
@@ -303,7 +312,9 @@ StelApp::~StelApp()
 	delete actionMgr; actionMgr = Q_NULLPTR;
 	delete propMgr; propMgr = Q_NULLPTR;
 	delete renderBuffer; renderBuffer = Q_NULLPTR;
-
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+	delete randomGenerator; randomGenerator=Q_NULLPTR;
+#endif
 	Q_ASSERT(singleton);
 	singleton = Q_NULLPTR;
 }

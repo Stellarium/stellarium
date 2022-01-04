@@ -156,9 +156,10 @@ int main(int argc, char **argv)
 	}
 #endif
 
-	// Seed the PRNG
+#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
+	// Seed the PRNG. Later Qt versions use qApp->randomGenerator
 	qsrand(QDateTime::currentMSecsSinceEpoch());
-
+#endif
 	QCoreApplication::setApplicationName("stellarium");
 	QCoreApplication::setApplicationVersion(StelUtils::getApplicationVersion());
 	QCoreApplication::setOrganizationDomain("stellarium.org");

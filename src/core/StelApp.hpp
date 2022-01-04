@@ -22,6 +22,9 @@
 
 #include <QString>
 #include <QObject>
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+#include <QRandomGenerator>
+#endif
 #include "StelModule.hpp"
 #include "VecMath.hpp"
 
@@ -163,6 +166,15 @@ public:
 	//! It is the one which provide the projection, navigation and tone converter.
 	//! @return the StelCore instance of the program
 	StelCore* getCore() const {return core;}
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+	//! get a pseudo-random integer
+	quint32 getRand() const {Q_ASSERT(randomGenerator); return randomGenerator->generate();}
+	int getRandBounded(int lowest, int highest) const {Q_ASSERT(randomGenerator); return randomGenerator->bounded(lowest, highest);}
+	//! shortcut to retrieve a random float [0...1).
+	float getRandF() const {Q_ASSERT(randomGenerator); return static_cast<float>(randomGenerator->generateDouble());}
+	float getRandFp1() const {Q_ASSERT(randomGenerator); return static_cast<float>(randomGenerator->generate()) / (static_cast<float>(RAND_MAX)+1.f);}
+#endif
 
 	//! Get the common instance of QNetworkAccessManager used in stellarium
 	QNetworkAccessManager* getNetworkAccessManager() const {return networkAccessManager;}
@@ -357,6 +369,11 @@ private:
 
 	// The StelApp singleton
 	static StelApp* singleton;
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+	//! The app-global random number generator
+	QRandomGenerator *randomGenerator;
+#endif
 
 	//! The main window which is the parent of this object
 	StelMainView* mainWin;
