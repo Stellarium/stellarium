@@ -20,6 +20,7 @@
 #include "StelCore.hpp"
 #include "StelSkyDrawer.hpp"
 #include "AtmosphereDialog.hpp"
+#include "StelPropertyMgr.hpp"
 #include "ui_atmosphereDialog.h"
 
 AtmosphereDialog::AtmosphereDialog()
@@ -54,18 +55,26 @@ void AtmosphereDialog::createDialogContent()
 
 	connect(ui->standardAtmosphereButton, SIGNAL(clicked()), this, SLOT(setStandardAtmosphere()));
 
-	connectBoolProperty(ui->checkBox_TfromK, "StelSkyDrawer.flagTfromK");
-	connect(ui->checkBox_TfromK, SIGNAL(toggled(bool)), ui->doubleSpinBox_T, SLOT(setDisabled(bool)));
-	connect(ui->extinctionDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(setTfromK(double)));
-	connectDoubleProperty(ui->doubleSpinBox_T, "StelSkyDrawer.turbidity");
+	// Experimental settings, protected by Skylight.flagGuiPublic
+	StelPropertyMgr* propMgr = StelApp::getInstance().getStelPropertyManager();
+	if (propMgr->getProperty("Skylight.flagGuiPublic")->getValue().toBool())
+	{
+		connectBoolProperty(ui->checkBox_TfromK, "StelSkyDrawer.flagTfromK");
 
-	connectBoolProperty(ui->checkBox_noScatter, "LandscapeMgr.atmosphereNoScatter");
+		if (ui->checkBox_TfromK->isChecked())
+		{
+			// prepare T display
+			double T=25.*(propMgr->getProperty("StelSkyDrawer.extinctionCoefficient")->getValue().toDouble()-0.16)+1.;
+			ui->doubleSpinBox_T->setValue(T);
+		}
+		connect(ui->checkBox_TfromK, SIGNAL(toggled(bool)), ui->doubleSpinBox_T, SLOT(setDisabled(bool)));
+		connect(ui->extinctionDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(setTfromK(double)));
+		connectDoubleProperty(ui->doubleSpinBox_T, "StelSkyDrawer.turbidity");
 
-	connectBoolProperty(ui->checkBox_TfromK, "StelSkyDrawer.flagTfromK");
-	ui->doubleSpinBox_T->setDisabled(ui->checkBox_TfromK->isChecked());
-	connect(ui->checkBox_TfromK, SIGNAL(toggled(bool)), ui->doubleSpinBox_T, SLOT(setDisabled(bool)));
-	connect(ui->extinctionDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(setTfromK(double)));
-	connectDoubleProperty(ui->doubleSpinBox_T, "StelSkyDrawer.turbidity");
+		connectBoolProperty(ui->checkBox_noScatter, "LandscapeMgr.atmosphereNoScatter");
+	}
+	else
+		ui->groupBox_experimental->hide();
 }
 
 void AtmosphereDialog::setStandardAtmosphere()
