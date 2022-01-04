@@ -238,7 +238,8 @@ IF(WIN32)
           SET(STEL_MINGW_FLAGS "-fexceptions -fident -mthreads")
           SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${STEL_GCC_C_FLAGS} ${STEL_MINGW_FLAGS}")
           SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${STEL_GCC_CXX_FLAGS} ${STEL_MINGW_FLAGS}")
-     ELSE() # MSVC
+     ELSE()
+          # MSVC
           # Additional flags:
           # Disabled warnings
           # C4244: implicit type conversion to a smaller type
@@ -277,6 +278,12 @@ IF("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
      IF(${CMAKE_CXX_COMPILER_VERSION} VERSION_GREATER 3.3)
           SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-const-variable -Wno-unused-result")
      ENDIF()
+     IF(APPLE)
+          SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-common -Wall -Wextra -Wno-unused-parameter")
+          SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-common -Wall -Wextra -Wno-unknown-warning-option")
+          # We support only 64 bits macOS
+          SET(CMAKE_OSX_ARCHITECTURES "x86_64")
+     ENDIF()
 ENDIF()
 
 # FreeBSD-specific compiler flags
@@ -287,19 +294,6 @@ IF(${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
      IF(${GCC_VERSION} VERSION_GREATER 4.7)
           SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-local-typedefs")
      ENDIF()
-ENDIF()
-
-# best way to get to APPLE?
-IF(APPLE)
-     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-common -Wall -Wextra")
-     # using regular Clang or AppleClang
-     IF("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
-          SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-private-field -Wno-unknown-warning-option -Wno-unused-const-variable -Wno-unused-result")
-     ENDIF()
-     SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-common -Wall -Wextra -Wno-unused-parameter")
-
-     # We support only 64 bits MacOSX
-     SET(CMAKE_OSX_ARCHITECTURES "x86_64")
 ENDIF()
 
 # This activates Link Time Optimization on recent GCC
@@ -554,7 +548,6 @@ ELSE()
      MESSAGE(STATUS "Building an OpenGL build")
 ENDIF()
 
-
 # Tell CMake to run moc when necessary:
 SET(CMAKE_AUTOMOC ON)
 # As moc files are generated in the binary dir, tell CMake to always look for includes there:
@@ -598,7 +591,6 @@ ELSE(ENABLE_GPS)
      SET(ENABLE_LIBGPS 0)
      MESSAGE(STATUS "GPS: disabled.")
 ENDIF(ENABLE_GPS)
-
 
 IF(USE_QTOPENGL)
      # QtOpenGL module is deprecated. After merging the QOpenGLWidget branch, we don't use this module directly anymore,
@@ -835,18 +827,19 @@ ADD_SUBDIRECTORY( models )
 ADD_SUBDIRECTORY( src )
 ADD_SUBDIRECTORY( textures )
 ADD_SUBDIRECTORY( doc )
-IF(ENABLE_NLS)
-     ADD_SUBDIRECTORY( po )
-ENDIF()
 ADD_SUBDIRECTORY( landscapes )
 ADD_SUBDIRECTORY( skycultures )
 ADD_SUBDIRECTORY( nebulae )
+ADD_SUBDIRECTORY( stars )
+ADD_SUBDIRECTORY( plugins )
 IF(ENABLE_SCRIPTING)
      ADD_SUBDIRECTORY( scripts )
+ENDIF()
+IF(ENABLE_NLS)
+     ADD_SUBDIRECTORY( po )
 ENDIF()
 IF(USE_PLUGIN_SCENERY3D)
      # add scenery3d scenes
      ADD_SUBDIRECTORY( scenery3d )
 ENDIF()
-ADD_SUBDIRECTORY( stars )
-ADD_SUBDIRECTORY( plugins )
+
