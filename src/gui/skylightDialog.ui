@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>694</width>
-    <height>646</height>
+    <width>1094</width>
+    <height>746</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -786,6 +786,9 @@
        <layout class="QGridLayout" name="gridLayout">
         <item row="4" column="1">
          <widget class="QDoubleSpinBox" name="doubleSpinBox_DYT">
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
           <property name="decimals">
            <number>4</number>
           </property>
@@ -914,6 +917,9 @@
         </item>
         <item row="4" column="2">
          <widget class="QDoubleSpinBox" name="doubleSpinBox_DY">
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
           <property name="decimals">
            <number>4</number>
           </property>
@@ -933,6 +939,9 @@
         </item>
         <item row="3" column="2">
          <widget class="QDoubleSpinBox" name="doubleSpinBox_CY">
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
           <property name="decimals">
            <number>4</number>
           </property>
@@ -952,6 +961,9 @@
         </item>
         <item row="5" column="2">
          <widget class="QDoubleSpinBox" name="doubleSpinBox_EY">
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
           <property name="decimals">
            <number>4</number>
           </property>
@@ -971,6 +983,9 @@
         </item>
         <item row="4" column="8">
          <widget class="QDoubleSpinBox" name="doubleSpinBox_Dy">
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
           <property name="decimals">
            <number>4</number>
           </property>
@@ -990,6 +1005,9 @@
         </item>
         <item row="5" column="7">
          <widget class="QDoubleSpinBox" name="doubleSpinBox_EyT">
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
           <property name="decimals">
            <number>4</number>
           </property>
@@ -1009,6 +1027,9 @@
         </item>
         <item row="5" column="8">
          <widget class="QDoubleSpinBox" name="doubleSpinBox_Ey">
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
           <property name="decimals">
            <number>4</number>
           </property>
@@ -1050,6 +1071,9 @@
         </item>
         <item row="3" column="4">
          <widget class="QDoubleSpinBox" name="doubleSpinBox_CxT">
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
           <property name="decimals">
            <number>4</number>
           </property>
@@ -1069,6 +1093,9 @@
         </item>
         <item row="3" column="5">
          <widget class="QDoubleSpinBox" name="doubleSpinBox_Cx">
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
           <property name="decimals">
            <number>4</number>
           </property>
@@ -1088,6 +1115,9 @@
         </item>
         <item row="4" column="4">
          <widget class="QDoubleSpinBox" name="doubleSpinBox_DxT">
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
           <property name="decimals">
            <number>4</number>
           </property>
@@ -1107,6 +1137,9 @@
         </item>
         <item row="4" column="5">
          <widget class="QDoubleSpinBox" name="doubleSpinBox_Dx">
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
           <property name="decimals">
            <number>4</number>
           </property>
@@ -1126,6 +1159,9 @@
         </item>
         <item row="5" column="4">
          <widget class="QDoubleSpinBox" name="doubleSpinBox_ExT">
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
           <property name="decimals">
            <number>4</number>
           </property>
@@ -1145,6 +1181,9 @@
         </item>
         <item row="5" column="5">
          <widget class="QDoubleSpinBox" name="doubleSpinBox_Ex">
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
           <property name="decimals">
            <number>4</number>
           </property>
@@ -1218,6 +1257,9 @@
         </item>
         <item row="5" column="1">
          <widget class="QDoubleSpinBox" name="doubleSpinBox_EYT">
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
           <property name="decimals">
            <number>4</number>
           </property>
@@ -1369,6 +1411,9 @@
         </item>
         <item row="3" column="7">
          <widget class="QDoubleSpinBox" name="doubleSpinBox_CyT">
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
           <property name="decimals">
            <number>4</number>
           </property>
@@ -1388,6 +1433,9 @@
         </item>
         <item row="3" column="8">
          <widget class="QDoubleSpinBox" name="doubleSpinBox_Cy">
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
           <property name="decimals">
            <number>4</number>
           </property>
@@ -1407,6 +1455,9 @@
         </item>
         <item row="4" column="7">
          <widget class="QDoubleSpinBox" name="doubleSpinBox_DyT">
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
           <property name="decimals">
            <number>4</number>
           </property>
@@ -1487,6 +1538,9 @@
         </item>
         <item row="3" column="1">
          <widget class="QDoubleSpinBox" name="doubleSpinBox_CYT">
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
           <property name="decimals">
            <number>4</number>
           </property>
@@ -1620,42 +1674,42 @@
         <item row="6" column="2">
          <widget class="QPushButton" name="pushButton_ResetDistYPreetham">
           <property name="text">
-           <string>Reset:Preetham</string>
+           <string>Reset: Preetham</string>
           </property>
          </widget>
         </item>
         <item row="6" column="1">
          <widget class="QPushButton" name="pushButton_ResetDistYStel">
           <property name="text">
-           <string>Reset:Stellarium</string>
+           <string>Reset: Stellarium</string>
           </property>
          </widget>
         </item>
         <item row="6" column="5">
          <widget class="QPushButton" name="pushButton_ResetDistxPreetham">
           <property name="text">
-           <string>Reset:Preetham</string>
+           <string>Reset: Preetham</string>
           </property>
          </widget>
         </item>
         <item row="6" column="4">
          <widget class="QPushButton" name="pushButton_ResetDistxStel">
           <property name="text">
-           <string>Reset:Stellarium</string>
+           <string>Reset: Stellarium</string>
           </property>
          </widget>
         </item>
         <item row="6" column="8">
          <widget class="QPushButton" name="pushButton_ResetDistyPreetham">
           <property name="text">
-           <string>Reset:Preetham</string>
+           <string>Reset: Preetham</string>
           </property>
          </widget>
         </item>
         <item row="6" column="7">
          <widget class="QPushButton" name="pushButton_ResetDistyStel">
           <property name="text">
-           <string>Reset:Stellarium</string>
+           <string>Reset: Stellarium</string>
           </property>
          </widget>
         </item>
