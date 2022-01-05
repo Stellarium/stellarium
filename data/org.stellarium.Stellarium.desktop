@@ -414,6 +414,14 @@ Name[zh_HK]=開啟全螢幕模式
 Name[zh_TW]=以全螢幕開啟
 Exec=stellarium -f yes
 
+[Desktop Action XCBPlatform]
+Name=Open with QPA platform XCB
+Exec=stellarium -platform xcb
+
+[Desktop Action XCBPlatformTheme]
+Name=Open with QPA platform theme XCB
+Exec=stellarium -platformtheme xcb
+
 [Desktop Action Debugmode]
 Name=Open in debug mode
 Name[af]=Open in ontfout wyse
