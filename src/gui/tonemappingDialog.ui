@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>327</width>
-    <height>201</height>
+    <width>238</width>
+    <height>188</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -82,7 +82,7 @@
          <font/>
         </property>
         <property name="text">
-         <string>Tonemapping Details</string>
+         <string>Tone Mapping Details</string>
         </property>
        </widget>
       </item>
@@ -130,13 +130,13 @@
       <bool>true</bool>
      </property>
      <property name="title">
-      <string>Custom settings for Tonemapping</string>
+      <string>Custom settings for Tone Mapping</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
       <item row="0" column="0">
        <widget class="QLabel" name="dmLabel">
         <property name="toolTip">
-         <string>Maximum luminance of the display (see display data sheet)</string>
+         <string>Maximum luminance of the display (see display data sheet). Default 100cd/m²</string>
         </property>
         <property name="text">
          <string>Display max luminance:</string>
@@ -270,6 +270,9 @@
       </item>
       <item row="3" column="1">
        <widget class="QCheckBox" name="checkBox_sRGB">
+        <property name="toolTip">
+         <string>Use an XYZ-&gt;sRGB color transform matrix, not XYZ-&gt;Adobe RGB (1998).</string>
+        </property>
         <property name="text">
          <string>Use sRGB</string>
         </property>

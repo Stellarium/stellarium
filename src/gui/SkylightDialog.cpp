@@ -54,6 +54,7 @@ void SkylightDialog::createDialogContent()
 	ui->comboBox_skylightDecimals->addItem("0.0001", .0001);
 	ui->comboBox_skylightDecimals->addItem("0.00001", .00001);
 	connect(ui->comboBox_skylightDecimals, SIGNAL(currentIndexChanged(int)), this, SLOT(setIncrements(int)));
+	ui->comboBox_skylightDecimals->setCurrentIndex(2); // start with 0.01 increment
 
 	connectBoolProperty(ui->checkBox_earlySunHalo, "StelSkyDrawer.flagEarlySunHalo");
 	connectBoolProperty(ui->checkBox_drawSunAfterAtmosphere, "StelSkyDrawer.flagDrawSunAfterAtmosphere");

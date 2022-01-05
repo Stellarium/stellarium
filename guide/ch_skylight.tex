@@ -69,9 +69,9 @@ disk and the solar glare. It makes a slight difference whether the
 Sun's disk is plotted before or after the glare, and whether the solar
 sphere is rendered after the atmosphere. 
 
-\subsection{Tonemapping}
+\subsection{Tone Mapping}
 
-Tonemapping is the process which attempts to compress the brightness
+Tone mapping is the process which attempts to compress the brightness
 values found in nature into the range of brightness values which can
 be achieved on a display device so that an image of a natural scene looks reasonably natural
 and realistic. The process has been described by
@@ -81,8 +81,8 @@ and the transitional phase, twilight, special considerations have to
 be taken, first described by \citet{WannJensen:2000}.
 Stellarium's transformation from skylight model to display colors is based on these papers.
 
-Parameters to tweak the tonemapping can be reached in the view
-settings dialog after pressing \button{Tonemapping\ldots}.
+Parameters to tweak the tone mapping can be reached in the view
+settings dialog after pressing \button{Tone Mapping\ldots}.
 
 \begin{description}
 \item[Display max luminance] maximal brightness of the used
@@ -96,7 +96,7 @@ settings dialog after pressing \button{Tonemapping\ldots}.
 \item[Display Gamma] describes the exponent of a nonlinear correlation
   between input values and output luminance of the screen. Higher
   values push the average image brightness.
-\item[Use extra Gamma term] The original implementation of tonemapping
+\item[Use extra Gamma term] The original implementation of tone mapping
   included a gamma term which did not exactly follow the description
   from \citet{Larson:1997}, but looks better (more colorful) than the
   implementation without the gamma term. You can now play with it to
