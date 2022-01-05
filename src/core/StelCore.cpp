@@ -253,6 +253,7 @@ void StelCore::init()
 	propMgr = StelApp::getInstance().getStelPropertyManager();
 	propMgr->registerObject(skyDrawer);
 	propMgr->registerObject(this);
+	propMgr->registerObject(toneReproducer);
 
 	setCurrentProjectionTypeKey(getDefaultProjectionTypeKey());
 	updateMaximumFov();

@@ -18,6 +18,8 @@
 
 #include "StelToneReproducer.hpp"
 #include "StelUtils.hpp"
+#include "StelApp.hpp"
+#include <QSettings>
 #include <cmath>
 
 /*********************************************************************
@@ -25,8 +27,19 @@
 *********************************************************************/
 StelToneReproducer::StelToneReproducer() : Lda(50.f), Lwa(40000.f), oneOverMaxdL(1.f/100.f), lnOneOverMaxdL(std::log(1.f/100.f)), oneOverGamma(1.f/2.2222f)
 {
+	setObjectName("StelToneReproducer");
+	QSettings *conf = StelApp::getInstance().getSettings();
+	Lda = conf->value("video/tm_display_adaptation_luminance", 50.f).toFloat();
+	oneOverGamma=1.f / conf->value("video/tm_gamma", 2.2222f).toFloat();
+	flagUseTmGamma=conf->value("video/flag_use_tm_extra_gamma", true).toBool();
+	const float maxDisplayLuminance=conf->value("video/tm_max_display_luminance", 100.f).toFloat();
+	flagSRGB=conf->value("video/use_sRGB", true).toBool();
+
+	oneOverMaxdL=1.f/maxDisplayLuminance;
+	lnOneOverMaxdL=std::log(oneOverMaxdL);
+
 	// Initialize  sensor
-	setInputScale();
+	setInputScale(1.f);
 	
 	// Update alphaDa and betaDa values
 	float log10Lwa = std::log10(Lwa);
@@ -56,6 +69,7 @@ void StelToneReproducer::setInputScale(float scale)
 	
 /*********************************************************************
  Set the eye adaptation luminance for the display (and precompute what can be)
+ See Devlin et al., Tone Reproduction and Physically Based Spectral Rendering, section 4.2. 
 *********************************************************************/
 void StelToneReproducer::setDisplayAdaptationLuminance(float _Lda)
 {
@@ -70,7 +84,48 @@ void StelToneReproducer::setDisplayAdaptationLuminance(float _Lda)
 	alphaWaOverAlphaDa = alphaWa/alphaDa;
 	term2 =(stelpow10f((betaWa-betaDa)/alphaDa) / (M_PIf*0.0001f));
 	lnTerm2 = std::log(term2);
-	term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
+	term2TimesOneOverMaxdL = term2*oneOverMaxdL;
+	term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2TimesOneOverMaxdL, oneOverGamma);
+
+	QSettings *conf = StelApp::getInstance().getSettings();
+	conf->setValue("video/tm_display_adaptation_luminance", Lda);
+	emit displayAdaptationLuminanceChanged(static_cast<double>(Lda));
+}
+
+void StelToneReproducer::setMaxDisplayLuminance(float maxdL)
+{
+	oneOverMaxdL = 1.f/maxdL; lnOneOverMaxdL=std::log(oneOverMaxdL);
+	term2TimesOneOverMaxdL = term2*oneOverMaxdL;
+	term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2TimesOneOverMaxdL, oneOverGamma);
+	QSettings *conf = StelApp::getInstance().getSettings();
+	conf->setValue("video/tm_max_display_luminance", maxdL);
+	emit maxDisplayLuminanceChanged(static_cast<double>(maxdL));
+}
+
+void StelToneReproducer::setDisplayGamma(float gamma)
+{
+	oneOverGamma = 1.f/gamma;
+	term2TimesOneOverMaxdL = term2*oneOverMaxdL;
+	term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2TimesOneOverMaxdL, oneOverGamma);
+	QSettings *conf = StelApp::getInstance().getSettings();
+	conf->setValue("video/tm_gamma", gamma);
+	emit displayGammaChanged(static_cast<double>(gamma));
+}
+
+void StelToneReproducer::setFlagUseTmGamma(bool b)
+{
+	flagUseTmGamma=b;
+	QSettings *conf = StelApp::getInstance().getSettings();
+	conf->setValue("video/flag_use_tm_extra_gamma", b);
+	emit flagUseTmGammaChanged(b);
+}
+
+void StelToneReproducer::setFlagSRGB(bool val)
+{
+	flagSRGB=val;
+	QSettings* conf = StelApp::getInstance().getSettings();
+	conf->setValue("video/use_sRGB", val);
+	emit flagSRGBChanged(val);
 }
 
 /*********************************************************************
@@ -89,7 +144,8 @@ void StelToneReproducer::setWorldAdaptationLuminance(float _Lwa)
 	alphaWaOverAlphaDa = alphaWa/alphaDa;
 	term2 = (stelpow10f((betaWa-betaDa)/alphaDa) / (M_PIf*0.0001f));
 	lnTerm2 = std::log(term2);
-	term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
+	term2TimesOneOverMaxdL = term2*oneOverMaxdL;
+	term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2TimesOneOverMaxdL, oneOverGamma);
 }
 
 
@@ -138,7 +194,7 @@ void StelToneReproducer::xyYToRGB(float* color) const
 	const float Z = (1.f - color[0] - color[1]) * color[2] / color[1];
 
 	// Use a XYZ to sRGB matrix which uses a D65 reference white
-	color[0] = 3.2404542f  *X - 1.5371385f*Y - 0.4985314f *Z;
-	color[1] =-0.9692660f *X + 1.8760108f *Y + 0.0415560f*Z;
-	color[2] = 0.0556434f*X - 0.2040259f*Y + 1.0572252f  *Z;
+	color[0] = 3.2404542f * X - 1.5371385f * Y - 0.4985314f * Z;
+	color[1] =-0.9692660f * X + 1.8760108f * Y + 0.0415560f * Z;
+	color[2] = 0.0556434f * X - 0.2040259f * Y + 1.0572252f  *Z;
 }

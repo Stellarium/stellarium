@@ -1035,7 +1035,6 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 					oss << QString("%1: %2 %3<br/>").arg(q_("Equatorial rotation velocity")).arg(qAbs(eqRotVel), 0, 'f', 3).arg(kms);
 				else
 					oss << QString("%1: %2 %3<br/>").arg(q_("Equatorial rotation velocity")).arg(qAbs(eqRotVel*1000.), 0, 'f', 3).arg(mps);
-
 			}
 			else if (qAbs(re.period)>0.)
 			{
@@ -3216,6 +3215,11 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 {
 	// This is the main method drawing a planet 3d model
 	// Some work has to be done on this method to make the rendering nicer
+
+	// Experimental: draw the solar halo before the 3D sphere.
+	// Else the yellowish halo may be drawn on top of the reddened solar disk which looks bad.
+	// For the other Planets, draw halo after to cover the (possibly dark-contrasting) sphere.
+
 	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 
 	// Find extinction settings to change colors. The method is rather ad-hoc.
@@ -3223,6 +3227,46 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 	const float magFactorGreen=powf(0.85f, 0.6f*extinctedMag);
 	const float magFactorBlue=powf(0.6f, 0.5f*extinctedMag);
 
+	// Draw the halo if it enabled in the ssystem.ini file (+ special case for backward compatible for the Sun)
+	if (this==ssm->getSun() && drawSunHalo && core->getSkyDrawer()->getFlagEarlySunHalo())
+	{
+		// Prepare openGL lighting parameters according to luminance
+		float surfArcMin2 = getSpheroidAngularSize(core)*60;
+		surfArcMin2 = surfArcMin2*surfArcMin2*M_PI; // the total illuminated area in arcmin^2
+
+		StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
+		Vec3d tmp = getJ2000EquatorialPos(core);
+
+		// Find new extincted color for halo. The method is again rather ad-hoc, but does not look too bad.
+		// For the sun, we have again to use the stronger extinction to avoid color mismatch.
+		Vec3f haloColorToDraw(haloColor[0], powf(0.75f, extinctedMag) * haloColor[1], powf(0.42f, 0.9f*extinctedMag) * haloColor[2]);
+
+		float haloMag=qMin(-18.f, getVMagnitudeWithExtinction(core)); // for sun on horizon, mag can go quite low, shrinking the halo too much.
+		core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp.toVec3f(), surfArcMin2, haloMag, haloColorToDraw, (englishName=="Sun"));
+
+		if (core->getCurrentLocation().planetName == "Earth")
+		{
+			LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
+			const float eclipseFactor = static_cast<float>(ssm->getSolarEclipseFactor(core).first);
+			// This alpha ensures 0 for complete sun, 1 for eclipse better 1e-10, with a strong increase towards full eclipse. We still need to square it.
+			const float alpha= ( !lmgr->getFlagAtmosphere() && ssm->getFlagPermanentSolarCorona() ? 0.7f : -0.1f*qMax(-10.0f, log10f(eclipseFactor)));
+			StelMovementMgr* mmgr = GETSTELMODULE(StelMovementMgr);
+			float rotationAngle=(mmgr->getEquatorialMount() ? 0.0f : getParallacticAngle(core) * M_180_PIf);
+
+			// Add ecliptic/equator angle. Meeus, Astr. Alg. 2nd, p100.
+			const double jde=core->getJDE();
+			const double eclJDE = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(jde);
+			double ra_equ, dec_equ, lambdaJDE, betaJDE;
+			StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
+			StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaJDE, &betaJDE);
+			// We can safely assume beta=0 and ignore nutation.
+			const float q0=static_cast<float>(atan(-cos(lambdaJDE)*tan(eclJDE)));
+			rotationAngle -= q0*static_cast<float>(180.0/M_PI);
+			core->getSkyDrawer()->drawSunCorona(&sPainter, tmp.toVec3f(), 512.f/192.f*screenSz, haloColorToDraw, alpha*alpha, rotationAngle);
+		}
+	}
+
+	// Draw the real 3D object.
 	if (screenSz>1.f)
 	{
 		//make better use of depth buffer by adjusting clipping planes
@@ -3302,7 +3346,6 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			sPainter.setColor(overbright, powf(0.75f, extinctedMag)*overbright, powf(0.42f, 0.9f*extinctedMag)*overbright);
 		}
 
-		//if (rings) /// GZ This was the previous condition. Not sure why rings were dropped?
 		if(ssm->getFlagUseObjModels() && !objModelPath.isEmpty())
 		{
 			if(!drawObjModel(&sPainter, screenSz))
@@ -3329,7 +3372,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		#endif
 	}
 
-	bool allowDrawHalo = true;
+	bool allowDrawHalo = (this!=ssm->getSun() || !core->getSkyDrawer()->getFlagEarlySunHalo()); // We had drawn the sun already before the sphere.
 	if ((this!=ssm->getSun()) && ((this !=ssm->getMoon() && core->getCurrentLocation().planetName=="Earth" )))
 	{
 		// Let's hide halo when inner planet between Sun and observer (or moon between planet and observer).
@@ -3366,7 +3409,13 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			haloColorToDraw*=0.6f; // make lunar halo less glaring, so that phase is discernible even if zoomed out.
 
 		if (this!=ssm->getSun() || drawSunHalo)
-			core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp.toVec3f(), surfArcMin2, getVMagnitudeWithExtinction(core), haloColorToDraw);
+		{
+			float haloMag=getVMagnitudeWithExtinction(core);
+			// EXPERIMENTAL: for sun on horizon, mag can go quite low, shrinking the halo too much.
+			if (englishName=="Sun")
+				haloMag=qMin(haloMag, -18.f);
+			core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp.toVec3f(), surfArcMin2, haloMag, haloColorToDraw, this==ssm->getSun());
+		}
 
 		if ((this==ssm->getSun()) && (core->getCurrentLocation().planetName == "Earth"))
 		{

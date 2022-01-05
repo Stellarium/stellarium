@@ -43,9 +43,10 @@ public:
 	virtual ~Atmosphere();
 	
 	//! Compute sky brightness values and average luminance.
+	//! @param noScatter true to suppress the actual sky brightness modelling. This will keep refraction/extinction working for didactic reasons.
 	void computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moonPhase, float moonMagnitude, StelCore* core,
 		float latitude = 45.f, float altitude = 200.f,
-		float temperature = 15.f, float relativeHumidity = 40.f);
+		float temperature = 15.f, float relativeHumidity = 40.f, float extinctionCoefficient = 0.32f, bool noScatter=false);
 	void draw(StelCore* core);
 	void update(double deltaTime) {fader.update(static_cast<int>(deltaTime*1000));}
 
@@ -81,9 +82,11 @@ public:
 	//! Get the light pollution luminance in cd/m^2
 	float getLightPollutionLuminance() const { return lightPollutionLuminance; }
 
+	Skylight *getSkyLight(void){return &sky;}
+
 private:
-	Vec4i viewport;
 	Skylight sky;
+	Vec4i viewport;
 	Skybright skyb;
 	unsigned int skyResolutionY,skyResolutionX;
 
@@ -107,7 +110,9 @@ private:
 		int rgbMaxValue;
 		int alphaWaOverAlphaDa;
 		int oneOverGamma;
-		int term2TimesOneOverMaxdLpOneOverGamma;
+		int term2TimesOneOverMaxdLpOneOverGamma; // original
+		int term2TimesOneOverMaxdL;              // challenge by Ruslan
+		int flagUseTmGamma;                      // switch between their use, true to use the first expression.
 		int brightnessScale;
 		int sunPos;
 		int term_x, Ax, Bx, Cx, Dx, Ex;
@@ -115,6 +120,7 @@ private:
 		int projectionMatrix;
 		int skyVertex;
 		int skyColor;
+		int doSRGB;
 	} shaderAttribLocations;
 
 	GLuint bayerPatternTex=0;

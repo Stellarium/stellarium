@@ -344,7 +344,6 @@ void SolarSystem::resetTextures(const QString &planetName)
 		if (!planet.isNull())
 			planet->resetTextures();
 	}
-
 }
 
 void SolarSystem::setTextureForPlanet(const QString& planetName, const QString& texName)
@@ -1354,7 +1353,9 @@ void SolarSystem::draw(StelCore* core)
 	// Draw the elements
 	for (const auto& p : qAsConst(systemPlanets))
 	{
-		p->draw(core, maxMagLabel, planetNameFont);
+		if ( (p->getEnglishName() != "Sun") ||
+				((p->getEnglishName() == "Sun") && !(core->getSkyDrawer()->getFlagDrawSunAfterAtmosphere())))
+			p->draw(core, maxMagLabel, planetNameFont);
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer() && getFlagPointer())

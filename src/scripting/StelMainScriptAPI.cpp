@@ -1390,6 +1390,14 @@ double StelMainScriptAPI::getDisplayMaxLuminance()
 {
     return static_cast<double>(StelApp::getInstance().getCore()->getToneReproducer()->getMaxDisplayLuminance());
 }
+void StelMainScriptAPI::setDisplayAdaptationLuminance(double cdPerSqM)
+{
+    StelApp::getInstance().getCore()->getToneReproducer()->setDisplayAdaptationLuminance(static_cast<float>(cdPerSqM));
+}
+double StelMainScriptAPI::getDisplayAdaptationLuminance()
+{
+    return static_cast<double>(StelApp::getInstance().getCore()->getToneReproducer()->getDisplayAdaptationLuminance());
+}
 void StelMainScriptAPI::setDisplayGamma(double gamma)
 {
     StelApp::getInstance().getCore()->getToneReproducer()->setDisplayGamma(static_cast<float>(gamma));

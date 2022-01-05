@@ -30,6 +30,8 @@ class QToolButton;
 
 class AddRemoveLandscapesDialog;
 class AtmosphereDialog;
+class SkylightDialog;
+class TonemappingDialog;
 class GreatRedSpotDialog;
 class ConfigureDSOColorsDialog;
 class ConfigureOrbitColorsDialog;
@@ -66,11 +68,19 @@ private slots:
 	void updateDefaultLandscape();
 
 	void showAddRemoveLandscapesDialog();
-        void showAtmosphereDialog();
+	// GZ I make this public to have it on a hotkey...
+public slots:
+	void showAtmosphereDialog();
+	void showSkylightDialog();
+	void showTonemappingDialog();
 	void showGreatRedSpotDialog();
 	void showConfigureDSOColorsDialog();
 	void showConfigureOrbitColorsDialog();
 
+private slots:
+
+	//void setLightPollutionSpinBoxStatus();
+	// Two new from the unwanted trunk-rework Not sure if we need them at all?
 	void populateLightPollution();
 	void populatePlanetMagnitudeAlgorithmsList();
 	void populatePlanetMagnitudeAlgorithmDescription();
@@ -102,6 +112,8 @@ private:
 
 	AddRemoveLandscapesDialog * addRemoveLandscapesDialog;
 	AtmosphereDialog * atmosphereDialog;
+	SkylightDialog * skylightDialog;
+	TonemappingDialog * tonemappingDialog;
 	GreatRedSpotDialog * greatRedSpotDialog;
 	ConfigureDSOColorsDialog * configureDSOColorsDialog;
 	ConfigureOrbitColorsDialog * configureOrbitColorsDialog;

@@ -891,6 +891,16 @@ public slots:
 	//! The standard value is 100cd/m^2, appropriate for CRTs. More modern screens often have more.
 	//! @note This is experimental and may not be available in later versions.
 	static double getDisplayMaxLuminance();
+	//! Experimental. Allow setting physical display adaptation luminance for tonemapping.
+	//! The standard value is 50cd/m^2, appropriate for CRTs in dimly lit office environments.
+	//! TBD true?: Increasing the value makes most of the sky darker, to allow saving the highest tones for the brightest lights (esp. the Sun).
+	//! @note This is experimental and may not be available in later versions.
+	static void setDisplayAdaptationLuminance(double cdPerSqM);
+	//! Experimental.
+	//! @return configured physical display adaptation luminance for tonemapping.
+	//! The standard value is 50cd/m^2, appropriate for CRTs in dimly lit office environments.
+	//! @note This is experimental and may not be available in later versions.
+	static double getDisplayAdaptationLuminance();
 	//! Experimental: Set the display gamma
 	//! @param gamma the gamma. Initial default value is 2.2222 (for a CRT), and
 	//! sRGB LCD (and similar modern) panels try to reproduce that. This method allows overriding for other sky tones.

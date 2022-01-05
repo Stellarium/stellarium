@@ -351,6 +351,10 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/StelDialog.cpp
           gui/StelDialogSeparate.hpp
           gui/StelDialogSeparate.cpp
+          gui/TonemappingDialog.hpp
+          gui/TonemappingDialog.cpp
+          gui/SkylightDialog.hpp
+          gui/SkylightDialog.cpp
      )
 
      ################# compiles .ui files ############
@@ -373,6 +377,8 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/addRemoveLandscapesDialog.ui
           gui/dsoColorsDialog.ui
           gui/orbitColorsDialog.ui
+          gui/tonemappingDialog.ui
+          gui/skylightDialog.ui
      )
 
      IF(ENABLE_SCRIPTING)

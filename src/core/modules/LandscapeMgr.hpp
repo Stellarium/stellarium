@@ -112,6 +112,10 @@ class LandscapeMgr : public StelModule
 		   READ getFlagAtmosphere
 		   WRITE setFlagAtmosphere
 		   NOTIFY atmosphereDisplayedChanged)
+	Q_PROPERTY(bool atmosphereNoScatter
+		   READ getFlagAtmosphereNoScatter
+		   WRITE setFlagAtmosphereNoScatter
+		   NOTIFY atmosphereNoScatterChanged)
 	Q_PROPERTY(bool cardinalsPointsDisplayed
 		   READ getFlagCardinalsPoints
 		   WRITE setFlagCardinalsPoints
@@ -427,6 +431,11 @@ public slots:
 	//! Set flag for displaying Atmosphere.
 	void setFlagAtmosphere(const bool displayed);
 
+	//! Get flag for suppressing Atmosphere scatter (blue light) while displaying all other effects (refraction, extinction).
+	bool getFlagAtmosphereNoScatter() const;
+	//! Set flag for suppressing Atmosphere scatter (blue light) while displaying all other effects (refraction, extinction).
+	void setFlagAtmosphereNoScatter(const bool displayed);
+
 	//! Get current display intensity of atmosphere ([0..1], for smoother transitions)
 	float getAtmosphereFadeIntensity() const;
 
@@ -549,6 +558,7 @@ public slots:
 
 signals:
 	void atmosphereDisplayedChanged(const bool displayed);
+	void atmosphereNoScatterChanged(const bool noScatter);
 	void cardinalsPointsDisplayedChanged(const bool displayed);
 	void ordinalsPointsDisplayedChanged(const bool displayed);
 	void ordinals16WRPointsDisplayedChanged(const bool displayed);
@@ -646,6 +656,7 @@ private:
 	bool flagLandscapeAutoSelection;
 
 	bool flagLightPollutionFromDatabase;
+	bool atmosphereNoScatter; // true to suppress actual blue-sky rendering but keep refraction & extinction
 
 	//! control drawing of a Polygonal line, if one is defined.
 	bool flagPolyLineDisplayedOnly;

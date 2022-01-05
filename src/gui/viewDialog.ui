@@ -464,6 +464,26 @@
                  </property>
                 </widget>
                </item>
+               <item>
+                <widget class="QPushButton" name="pushButtonSkylightDetails">
+                 <property name="toolTip">
+                  <string>Open skylight details (color tweaks for the atmosphere)</string>
+                 </property>
+                 <property name="text">
+                  <string>Skylight...</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="tonemappingPushButton">
+                 <property name="toolTip">
+                  <string>Open tone mapping details.</string>
+                 </property>
+                 <property name="text">
+                  <string>Tone Mapping...</string>
+                 </property>
+                </widget>
+               </item>
               </layout>
              </item>
              <item row="7" column="0">

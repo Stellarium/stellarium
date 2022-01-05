@@ -1,0 +1,117 @@
+
+\chapter{Stellarium's Skylight Model}
+\label{ch:skylight}
+\chapterauthor*{Georg Zotti}
+
+\section{Introduction}
+\label{sec:skylight:introduction}
+
+Stellarium's main aim is a realistic simulation of the night sky. This
+is more than just the creation of a star map. Especially a realistic
+simulation of twilight and the visibility of stars, deep-sky objects
+or the Zodiacal light is a challenge. Since early in its history
+Stellarium has used models from the computer graphics literature to
+achieve its goals. For most users, the models seem to work well, but
+more advanced users may want to tweak some of the values.
+
+\subsection{The Skylight Model}
+
+A well-known fast computer graphics model for daylight has been
+presented by \citet{Preetham:1999}. Its brightness distribution is
+based on an all-weather model for sky luminance distribution by
+\citet{Perez:1993} and models chromaticity distribution with
+similarly-shaped functions. It works reasonably well for average
+conditions, and a ``turbidity'' parameter $T$ allows a simple
+modelling of visibility conditions. In terms of the atmospheric
+extinction coefficient $k$ (see \ref{sec:phenomena:Extinction}), we
+can define
+\begin{equation}
+  T=25(k-0.16)+1
+  \label{eq:TfromK}
+\end{equation}
+In Stellarium, a value of $T=5$ has been used for many years, and the
+chromaticity parameters have been slightly changed for a more pleasing
+color distribution at this value for $T$. Recently,
+\newFeature{0.22.0} we have made the many parameters of the Preetham
+model accessible for users to fine-tune. Not many users will even want to do this,
+and therefore you must enable this manually by editing \file{config.ini}:
+\begin{configfile}
+  [Skylight]
+  enable_gui=true
+\end{configfile}
+
+Only with this setting, a button \button{Skylight\ldots} will be
+available in the View settings, Sky tab.
+
+All settings described here will immediately be stored in \file{config.ini}. 
+
+One setting allows to compute $T$ from $k$ with the above relation
+\ref{eq:TfromK}.
+
+Please note that the parameters are far from intuitive, therefore we
+added two sets of reset functions. One sets the values to those in the
+original paper, the other re-establishes Stellarium's sky colors from
+version 0.21.3 and earlier, which however seem only suitable for
+$T=5$.
+
+A sky brightness model better suited for astronomical simulation,
+including twilight and brightness contributions of the Moon and
+airglow, was presented by \citeauthor{Schaefer:Limits-Archaeo}
+(\citeyear{Schaefer:Limits-Archaeo} and
+\citeyear{Schaefer:Limits}). By default, Stellarium uses this model in
+combination with chromaticity from the Preetham model. For
+experiments, you can however revert from the Schaefer brightness model
+to the Preetham model. The parameters of the Schaefer model are
+currently not accessible for further experiments.
+
+Some more parameters fine-tune some aspects of rendering of the Solar
+disk and the solar glare. It makes a slight difference whether the
+Sun's disk is plotted before or after the glare, and whether the solar
+sphere is rendered after the atmosphere. 
+
+\subsection{Tone Mapping}
+
+Tone mapping is the process which attempts to compress the brightness
+values found in nature into the range of brightness values which can
+be achieved on a display device so that an image of a natural scene looks reasonably natural
+and realistic. The process has been described by
+\citet{TumblinRushmeier:1993}, \citet{Larson:1997} and
+\citet{DevlinChalmersWilkie:2002}. For low-light conditions like night
+and the transitional phase, twilight, special considerations have to
+be taken, first described by \citet{WannJensen:2000}.
+Stellarium's transformation from skylight model to display colors is based on these papers.
+
+Parameters to tweak the tone mapping can be reached in the view
+settings dialog after pressing \button{Tone Mapping\ldots}.
+
+\begin{description}
+\item[Display max luminance] maximal brightness of the used
+  screen. This used to be $100 \cdpmQ$ applicable for CRT monitors,
+  but more modern screens can achieve much higher luminances of
+  $250 \cdpmQ$ or more, to be found in the spec sheets.
+\item[Display adaptation luminance] describes the view environment
+  where the screen is set up. For an average office environment,
+  $50 \cdpmQ$ seems a usable default. In an outdoor setting, much
+  higher values are possible.
+\item[Display Gamma] describes the exponent of a nonlinear correlation
+  between input values and output luminance of the screen. Higher
+  values push the average image brightness.
+\item[Use extra Gamma term] The original implementation of tone mapping
+  included a gamma term which did not exactly follow the description
+  from \citet{Larson:1997}, but looks better (more colorful) than the
+  implementation without the gamma term. You can now play with it to
+  find your preferred setting.
+\item[Use sRGB] The final step of color creation is a transformation
+  from CIE Yxy to some display RGB color space. Nowadays most monitors
+  can display the sRGB color space, therefore this flag is usually
+  enabled. Disabling this flag will lead to using the Adobe RGB
+  (1998) color space. The colors may look a bit better on monitors
+  which are set to display Adobe RGB, but washed-out on sRGB monitors.
+\end{description}
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "guide"
+%%% End: 

@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>330</width>
-    <height>190</height>
+    <width>252</width>
+    <height>231</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -143,15 +149,15 @@
        <number>0</number>
       </property>
       <item>
-       <layout class="QHBoxLayout" name="pressureLayout">
-        <item>
+       <layout class="QFormLayout" name="formLayout_atm">
+        <item row="0" column="0">
          <widget class="QLabel" name="pressureLabel">
           <property name="text">
            <string>Pressure (mbar):</string>
           </property>
          </widget>
         </item>
-        <item>
+        <item row="0" column="1">
          <widget class="QDoubleSpinBox" name="pressureDoubleSpinBox">
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -164,11 +170,7 @@
           </property>
          </widget>
         </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="temperatureLayout">
-        <item>
+        <item row="1" column="0">
          <widget class="QLabel" name="temperatureLabel">
           <property name="inputMethodHints">
            <set>Qt::ImhNone</set>
@@ -181,7 +183,7 @@
           </property>
          </widget>
         </item>
-        <item>
+        <item row="1" column="1">
          <widget class="QDoubleSpinBox" name="temperatureDoubleSpinBox">
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -197,11 +199,7 @@
           </property>
          </widget>
         </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="extinctionLayout">
-        <item>
+        <item row="2" column="0">
          <widget class="QLabel" name="extinctionLabel">
           <property name="toolTip">
            <string/>
@@ -210,11 +208,11 @@
            <string>Extinction is the loss of star brightness due to Earth's atmosphere. It is given in mag/airmass, where airmass is number of atmospheres light has to pass. (zenith: 1; horizon: about 40)</string>
           </property>
           <property name="text">
-           <string>Extinction Coefficient:</string>
+           <string>Extinction Coefficient (k):</string>
           </property>
          </widget>
         </item>
-        <item>
+        <item row="2" column="1">
          <widget class="QDoubleSpinBox" name="extinctionDoubleSpinBox">
           <property name="toolTip">
            <string>Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 for murky conditions.</string>
@@ -246,20 +244,70 @@
        </widget>
       </item>
       <item>
-       <spacer name="verticalSpacer_2">
+       <widget class="Line" name="line">
         <property name="orientation">
-         <enum>Qt::Vertical</enum>
+         <enum>Qt::Horizontal</enum>
         </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Expanding</enum>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_experimental">
+     <property name="title">
+      <string>Experimental</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_experimental">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QCheckBox" name="checkBox_noScatter">
+        <property name="text">
+         <string>Suppress scattering (only refraction/extinction)</string>
         </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>0</width>
-          <height>0</height>
-         </size>
+       </widget>
+      </item>
+      <item>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="1" column="0">
+         <widget class="QCheckBox" name="checkBox_TfromK">
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>T=25(k-0.16)+1 -- or T=</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_T">
+          <property name="minimum">
+           <double>1.000000000000000</double>
+          </property>
+          <property name="singleStep">
+           <double>0.100000000000000</double>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_22">
+        <property name="text">
+         <string>T=2/5(default)/6 at k=0.16/0.32/0.36. </string>
         </property>
-       </spacer>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -274,11 +322,6 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <tabstops>
-  <tabstop>pressureDoubleSpinBox</tabstop>
-  <tabstop>temperatureDoubleSpinBox</tabstop>
-  <tabstop>extinctionDoubleSpinBox</tabstop>
- </tabstops>
  <resources/>
  <connections/>
 </ui>
