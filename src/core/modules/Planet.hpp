@@ -366,7 +366,10 @@ public:
 	//! @param longDeg longitude of location, degrees. (currently unused. Set to 0.)
 	//! @param latDeg planetographic latitude, degrees.
 	//! @param altMetres altitude above ellipsoid surface (metres)
-	//! @return [rhoCosPhiPrime*a, rhoSinPhiPrime*a, phiPrime, rho*a] where a=equatorial radius
+	//! @return [rhoCosPhiPrime*a, rhoSinPhiPrime*a, phiPrime, rho*a]
+	//! where a=equatorial radius [AU]
+	//! phiPrime=planetocentric latitude
+	//! rho*a=planetocentric distance of point [AU]
 	Vec4d getRectangularCoordinates(const double longDeg, const double latDeg, const double altMetres=0.) const;
 
 	//! Get the phase angle (radians) for an observer at pos obsPos in heliocentric coordinates (in AU)

@@ -320,21 +320,21 @@ Vec3d NomenclatureItem::getJ2000EquatorialPos(const StelCore* core) const
 		{
 			longitude = - subObs.first[2] * M_180_PI;
 			if (planet->isRotatingRetrograde()) longitude *= -1;
-			latitude = subObs.first[1] * M_180_PI; // or first[0]???
+			latitude = subObs.first[0] * M_180_PI; // all IAU WGPSN data are planetocentric (spherical)
 		}
 		else
 		{
 			longitude = - subObs.second[2] * M_180_PI;
 			if (planet->isRotatingRetrograde()) longitude *= -1;
-			latitude = subObs.second[1] * M_180_PI; // or second[0]???
+			latitude = subObs.second[0] * M_180_PI; // all IAU WGPSN data are planetocentric (spherical)
 		}
 		longitude=StelUtils::fmodpos(longitude, 360.);
 		// rebuild XYZpc
 		StelUtils::spheToRect(longitude * M_PI_180, latitude * M_PI_180, XYZpc);
 	}
 	// Calculate the radius of the planet at the item's position. It is necessary to re-scale it
-	Vec4d rect = planet->getRectangularCoordinates(longitude, latitude);
-	Vec3d XYZ0 = XYZpc * (rect[3] * static_cast<double>(planet->getSphereScale()));
+	//Vec4d rect = planet->getRectangularCoordinates(longitude, latitude);
+	Vec3d XYZ0 = XYZpc * planet->getEquatorialRadius() * static_cast<double>(planet->getSphereScale());
 	// TODO2: intersect properly with OBJ bodies! (LP:1723742)
 
 	/* We have to calculate feature's coordinates in VSOP87 (this is Ecliptic J2000 coordinates).
