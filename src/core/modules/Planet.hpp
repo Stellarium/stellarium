@@ -385,6 +385,10 @@ public:
 	static float getPAsun(const Vec3d &sunPos, const Vec3d &objPos);
 
 	//! Get planetographic coordinates of subsolar and sub-observer points.
+	//! These are defined so that over time the longitude of the central meridian increases.
+	//! This means longitudes are counted positive towards the west for direct rotators and positive
+	//! towards the East for negative rotators (e.g. Venus). Other cartographic conventions may have
+	//! to be followed elsewhere in the program, though. (e.g. planetary feature nomenclature!)
 	//! Only meaningful for earth-bound observers.
 	//! Source: Explanatory Supplement 2013, 10.4.1
 	//! @param jupiterGraphical Jupiter requires special treatment because its LII coordinate system does not
@@ -397,9 +401,9 @@ public:
 	//! second[0] = 10.26 phi_s	[rad] Planetocentric latitude of sub-solar point
 	//! second[1] = 10.26 phi'_s	[rad] Planetographic latitude of sub-solar point
 	//! second[2] = 10.26 lambda'_s	[rad] Planetographic longitude of sub-solar point (0..2pi)
-	//! Note: For the Moon, it is more common to give Libration angles, where L=-lambda'_e, B=phi'_e.
-	//! Note: For Jupiter, this returns central meridian in L_II.
-	//! Note: For Saturn, this returns central meridian in L_III (rotation of magnetic field).
+	//! @note: For the Moon, it is more common to give Libration angles, where L=-lambda'_e, B=phi'_e.
+	//! @note: For Jupiter, this returns central meridian in L_II.
+	//! @note: For Saturn, this returns central meridian in L_III (rotation of magnetic field).
 	QPair<Vec4d, Vec3d> getSubSolarObserverPoints(const StelCore *core, bool jupiterGraphical=false) const;
 
 	//! returns if planet has retrograde rotation

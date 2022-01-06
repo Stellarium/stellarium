@@ -240,42 +240,42 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 
 	if (flags&Extra)
 	{
-		if (nType < NomenclatureItemType::niSpecialPointPole)
+		// For 0.22.0 we must clarify used coordinate system by planet and adapt the coordinates for the special points.
+		const QString cType= isPlanetocentric() ? q_("Planetocentric long./lat.") : q_("Planetographic long./lat.");
+		QString sLong = StelUtils::decDegToDmsStr(longitude), sLat = StelUtils::decDegToDmsStr(latitude);
+		QString cEW  = isEastPositive()   ? qc_("E", "compass direction") : qc_("W", "compass direction");
+		if (!isEastPositive())
+		    sLong=StelUtils::decDegToDmsStr(StelUtils::fmodpos(360.-longitude, 360.)); // avoid 360.0 for the poles!
+		if (is180()) // currently only Moon
 		{
-			// For 0.22.0 we must clarify used coordinate system by planet and adapt the coordinates for the special points.
-			QString sLong = StelUtils::decDegToDmsStr(longitude), sLat = StelUtils::decDegToDmsStr(latitude);
-			if (is180())
-			{
-			    double longMod=longitude > 180. ? longitude-360. : longitude;
-			    sLong = StelUtils::decDegToDmsStr(longMod);
-			}
-			const QString cType= isPlanetocentric() ? q_("Planetocentric long./lat.") : q_("Planetographic long./lat.");
-			const QString cEW  = isEastPositive()   ? qc_("E", "compass direction") : qc_("W", "compass direction");
-
-			if (nType>=NomenclatureItemType::niSpecialPointEast && planet->getEnglishName()=="Jupiter")
-			{
-				// Due to Jupiter's issues around GRS shift we must repeat some calculations here.
-				double lng=0., lat=0.;
-				// East/West points are assumed to be along the equator, on the planet rim. Start with sub-observer point
-				if (nType==NomenclatureItemType::niSpecialPointEast || nType==NomenclatureItemType::niSpecialPointWest)
-				{
-					QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core, false);
-					lng = - subObs.first[2]  * M_180_PI + ((nType==NomenclatureItemType::niSpecialPointEast) ? 90. : -90.);
-					Q_ASSERT(lat==0.);
-				}
-				// Center and Subsolar points are similar.
-				if (nType==NomenclatureItemType::niSpecialPointCenter || nType==NomenclatureItemType::niSpecialPointSubSolar)
-				{
-					QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core, false);
-					lat =   M_180_PI * (nType==NomenclatureItemType::niSpecialPointCenter ? subObs.first[1]: subObs.second[1]);
-					lng = - M_180_PI * (nType==NomenclatureItemType::niSpecialPointCenter ? subObs.first[2]: subObs.second[2]);
-				}
-				lng   = StelUtils::fmodpos(lng, 360.);
-				sLong = StelUtils::decDegToDmsStr(360.-lng);
-				sLat  = StelUtils::decDegToDmsStr(lat);
-			}
-			oss << QString("%1: %2%3/%4<br/>").arg(cType, cEW, sLong, sLat);
+		    double longMod=longitude > 180. ? longitude-360. : longitude;
+		    cEW= longMod >= 0. ? qc_("E", "compass direction") : qc_("W", "compass direction");
+		    sLong = StelUtils::decDegToDmsStr(fabs(longMod));
 		}
+
+		if (nType>=NomenclatureItemType::niSpecialPointEast && planet->getEnglishName()=="Jupiter")
+		{
+			// Due to Jupiter's issues around GRS shift we must repeat some calculations here.
+			double lng=0., lat=0.;
+			// East/West points are assumed to be along the equator, on the planet rim. Start with sub-observer point
+			if (nType==NomenclatureItemType::niSpecialPointEast || nType==NomenclatureItemType::niSpecialPointWest)
+			{
+				QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core, false);
+				lng = - subObs.first[2]  * M_180_PI + ((nType==NomenclatureItemType::niSpecialPointEast) ? 90. : -90.);
+				Q_ASSERT(lat==0.);
+			}
+			// Center and Subsolar points are similar.
+			if (nType==NomenclatureItemType::niSpecialPointCenter || nType==NomenclatureItemType::niSpecialPointSubSolar)
+			{
+				QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core, false);
+				lat =   M_180_PI * (nType==NomenclatureItemType::niSpecialPointCenter ? subObs.first[1]: subObs.second[1]);
+				lng = - M_180_PI * (nType==NomenclatureItemType::niSpecialPointCenter ? subObs.first[2]: subObs.second[2]);
+			}
+			lng   = StelUtils::fmodpos(lng, 360.);
+			sLong = StelUtils::decDegToDmsStr(360.-lng);
+			sLat  = StelUtils::decDegToDmsStr(lat);
+		}
+		oss << QString("%1: %2%3/%4<br/>").arg(cType, cEW, sLong, sLat);
 		oss << QString("%1: %2<br/>").arg(q_("Celestial body"), planet->getNameI18n());
 		QString description = getNomenclatureTypeDescription(nType, planet->getEnglishName());
 		if (nType!=NomenclatureItem::niUNDEFINED && nType<NomenclatureItem::niSpecialPointPole && !description.isEmpty())
@@ -497,7 +497,7 @@ NomenclatureItem::PlanetCoordinateOrientation NomenclatureItem::getPlanetCoordin
 	//{"Iapetus"    , NomenclatureItem::pcoPlanetographicWest360 },
 	//{"Io"         , NomenclatureItem::pcoPlanetographicWest360 }, // Voyager/Galileo SSI
 	//{"Janus"      , NomenclatureItem::pcoPlanetographicWest360 },
-	{"Mars"       , NomenclatureItem::pcoPlanetocentricEast360 }, // MDIM 2.0
+	{"Mars"       , NomenclatureItem::pcoPlanetocentricEast360 }, // MDIM 2.1
 	//{"Mercury"    , NomenclatureItem::pcoPlanetographicWest360 }, // Preliminary MESSENGER MESSENGER Team
 	//{"Mimas"      , NomenclatureItem::pcoPlanetographicWest360 },
 	{"Miranda"    , NomenclatureItem::pcoPlanetocentricEast360 },
@@ -526,7 +526,10 @@ NomenclatureItem::PlanetCoordinateOrientation NomenclatureItem::getPlanetCoordin
 
 bool NomenclatureItem::isPlanetocentric(PlanetCoordinateOrientation pco)
 {
-	return pco & 0x100;
+	// Our data is already converted to be planetocentric.
+	//return pco & 0x100;
+	Q_UNUSED(pco)
+	return true;
 }
 bool NomenclatureItem::isEastPositive(PlanetCoordinateOrientation pco)
 {
@@ -538,7 +541,9 @@ bool NomenclatureItem::is180(PlanetCoordinateOrientation pco)
 }
 bool NomenclatureItem::isPlanetocentric() const
 {
-	return isPlanetocentric(getPlanetCoordinateOrientation());
+	// Our data is already converted to be planetocentric.
+	// return isPlanetocentric(getPlanetCoordinateOrientation());
+	return true;
 }
 bool NomenclatureItem::isEastPositive() const
 {

@@ -35,6 +35,14 @@
 
 class StelPainter;
 
+//! Class which contains data about one Nomenclature entry from the IAU database at https://planetarynames.wr.usgs.gov/
+//! There is a confusing variety of planetographic vs. planetocentric coordinate systems,
+//! counting longitudes in eastern or western direction, or counting from 0...360 degrees or from -180...+180 degrees.
+//! The actual data were taken from https://planetarynames.wr.usgs.gov/GIS_Downloads
+//! and include eastward-positive planetocentric coordinates, i.a. all bodies are treated as spheres. However, according to
+//! https://planetarynames.wr.usgs.gov/TargetCoordinates on some objects at least the longitudes should be counted west-positive,
+//! a convention which we should follow closely. Note that for Mars the traditional west-positive counting has recently been inverted,
+//! and longitudes are now counted east-positive like on earth.
 class NomenclatureItem : public StelObject
 {
 	friend class NomenclatureMgr;
@@ -205,18 +213,21 @@ private:
 	static QString getNomenclatureTypeLatinString(NomenclatureItemType nType);
 	static QString getNomenclatureTypeString(NomenclatureItemType nType);
 	static QString getNomenclatureTypeDescription(NomenclatureItemType nType, QString englishName);
-	//! Returns the description of the feature coordinates where available, or pcoPlanetographicWest360
+	//! Returns the description of the feature coordinates where available, or pcoPlanetographicWest360.
+	//! The default value ensures valid central meridian data for the gas giants.
 	static PlanetCoordinateOrientation getPlanetCoordinateOrientation(QString planetName);
 	PlanetCoordinateOrientation getPlanetCoordinateOrientation() const;
 	//! return whether counting sense of the coordinates is positive towards the east
 	static bool isEastPositive(PlanetCoordinateOrientation pco);
 	//! return whether coordinates are planetocentric (and not planetographic)
+	//! Given that the source data are planetocentric, this returns always true.
 	static bool isPlanetocentric(PlanetCoordinateOrientation pco);
 	//! return whether longitudes shall be counted from -180 to +180 degrees (and not 0...360 degrees)
 	static bool is180(PlanetCoordinateOrientation pco);
 	//! return whether counting sense of the coordinates is positive towards the east
 	bool isEastPositive() const;
-	//! return whether coordinates are planetocentric (and not planetographic)
+	//! return whether coordinates are planetocentric (and not planetographic).
+	//! Given that the source data are planetocentric, this returns always true.
 	bool isPlanetocentric() const;
 	//! return whether longitudes shall be counted from -180 to +180 degrees (and not 0...360 degrees)
 	bool is180() const;
