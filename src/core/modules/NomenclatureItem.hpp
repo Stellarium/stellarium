@@ -154,8 +154,8 @@ public:
 	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
 	virtual Vec3f getInfoColor(void) const Q_DECL_OVERRIDE;
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const Q_DECL_OVERRIDE;
-	//! Get the visual magnitude of a nomenclature item. Dummy method, returns 99.
-	virtual float getVMagnitude(const StelCore* core) const Q_DECL_OVERRIDE;
+	// Get the visual magnitude of a nomenclature item. Dummy method, returns 99.
+	//virtual float getVMagnitude(const StelCore* core) const Q_DECL_OVERRIDE;
 	//! Get the angular size of nomenclature item.
 	virtual double getAngularSize(const StelCore* core) const Q_DECL_OVERRIDE;
 	//! Get the localized name of nomenclature item.

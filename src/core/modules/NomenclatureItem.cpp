@@ -338,12 +338,6 @@ Vec3d NomenclatureItem::getJ2000EquatorialPos(const StelCore* core) const
 	return XYZ;
 }
 
-float NomenclatureItem::getVMagnitude(const StelCore* core) const
-{
-	Q_UNUSED(core);
-	return 99.f;
-}
-
 double NomenclatureItem::getAngularSize(const StelCore* core) const
 {
 	return std::atan2(size*planet->getSphereScale()/AU, getJ2000EquatorialPos(core).length()) * M_180_PI;
