@@ -110,6 +110,20 @@ public:
 	};
 	Q_ENUM(NomenclatureItemType)
 
+	// Describes the orientation of the given feature coordinates
+	enum PlanetCoordinateOrientation
+	{
+		pcoPlanetographicWest360 = 0x000,
+		pcoPlanetographicWest180 = 0x001,
+		pcoPlanetographicEast360 = 0x010,
+		pcoPlanetographicEast180 = 0x011,
+		pcoPlanetocentricWest360 = 0x100,
+		pcoPlanetocentricWest180 = 0x101,
+		pcoPlanetocentricEast360 = 0x110,
+		pcoPlanetocentricEast180 = 0x111
+	};
+	Q_ENUM(PlanetCoordinateOrientation)
+
 	NomenclatureItem(PlanetP nPlanet, int nId, const QString& nName, const QString& nContext, NomenclatureItemType nItemType, double nLatitude, double nLongitude, double nSize);
 	virtual ~NomenclatureItem() Q_DECL_OVERRIDE;
 
@@ -191,6 +205,21 @@ private:
 	static QString getNomenclatureTypeLatinString(NomenclatureItemType nType);
 	static QString getNomenclatureTypeString(NomenclatureItemType nType);
 	static QString getNomenclatureTypeDescription(NomenclatureItemType nType, QString englishName);
+	//! Returns the description of the feature coordinates where available, or pcoPlanetographicWest360
+	static PlanetCoordinateOrientation getPlanetCoordinateOrientation(QString planetName);
+	PlanetCoordinateOrientation getPlanetCoordinateOrientation() const;
+	//! return whether counting sense of the coordinates is positive towards the east
+	static bool isEastPositive(PlanetCoordinateOrientation pco);
+	//! return whether coordinates are planetocentric (and not planetographic)
+	static bool isPlanetocentric(PlanetCoordinateOrientation pco);
+	//! return whether longitudes shall be counted from -180 to +180 degrees (and not 0...360 degrees)
+	static bool is180(PlanetCoordinateOrientation pco);
+	//! return whether counting sense of the coordinates is positive towards the east
+	bool isEastPositive() const;
+	//! return whether coordinates are planetocentric (and not planetographic)
+	bool isPlanetocentric() const;
+	//! return whether longitudes shall be counted from -180 to +180 degrees (and not 0...360 degrees)
+	bool is180() const;
 	static QMap<NomenclatureItemType, QString>niTypeStringMap;
 	static QMap<NomenclatureItemType, QString>niTypeDescriptionMap;
 

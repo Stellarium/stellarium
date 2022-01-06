@@ -151,7 +151,7 @@ void NomenclatureMgr::loadNomenclature()
 	QRegularExpression ctxRx("(.*)\",\\s*\"(.*)");
 
 	QString surfNamesFile = StelFileMgr::findFile("data/nomenclature.dat"); // compressed version of file nomenclature.fab
-	if (!surfNamesFile.isEmpty()) // OK, the file is exist!
+	if (!surfNamesFile.isEmpty()) // OK, the file exists!
 	{
 		// Open file
 		QFile planetSurfNamesFile(surfNamesFile);
@@ -254,7 +254,7 @@ void NomenclatureMgr::loadNomenclature()
 		faultPlanets.removeDuplicates();
 		int err = faultPlanets.size();
 		if (err>0)
-			qDebug() << "WARNING - The next planets to assign nomenclature items is not found:" << faultPlanets.join(", ");
+			qDebug() << "WARNING - These planets to assign nomenclature items were not found:" << faultPlanets.join(", ");
 	}
 }
 

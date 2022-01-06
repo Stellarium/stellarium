@@ -242,9 +242,16 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 	{
 		if (nType < NomenclatureItemType::niSpecialPointPole)
 		{
-			// TODO for 0.22.0 It seems the (numerical) planetary longitudes of NomenclatureItems are off by (usually) 360-longitude.
-			// For 0.21.3 we must now hide the coordinates for the special points, but fix this ASAP.
+			// For 0.22.0 we must clarify used coordinate system by planet and adapt the coordinates for the special points.
 			QString sLong = StelUtils::decDegToDmsStr(longitude), sLat = StelUtils::decDegToDmsStr(latitude);
+			if (is180())
+			{
+			    double longMod=longitude > 180. ? longitude-360. : longitude;
+			    sLong = StelUtils::decDegToDmsStr(longMod);
+			}
+			const QString cType= isPlanetocentric() ? q_("Planetocentric long./lat.") : q_("Planetographic long./lat.");
+			const QString cEW  = isEastPositive()   ? qc_("E", "compass direction") : qc_("W", "compass direction");
+
 			if (nType>=NomenclatureItemType::niSpecialPointEast && planet->getEnglishName()=="Jupiter")
 			{
 				// Due to Jupiter's issues around GRS shift we must repeat some calculations here.
@@ -267,7 +274,7 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 				sLong = StelUtils::decDegToDmsStr(360.-lng);
 				sLat  = StelUtils::decDegToDmsStr(lat);
 			}
-			oss << QString("%1: %2/%3<br/>").arg(q_("Planetographic long./lat."), sLong, sLat);
+			oss << QString("%1: %2%3/%4<br/>").arg(cType, cEW, sLong, sLat);
 		}
 		oss << QString("%1: %2<br/>").arg(q_("Celestial body"), planet->getNameI18n());
 		QString description = getNomenclatureTypeDescription(nType, planet->getEnglishName());
@@ -471,6 +478,77 @@ NomenclatureItem::NomenclatureItemType NomenclatureItem::getNomenclatureItemType
 }
 QMap<NomenclatureItem::NomenclatureItemType, QString> NomenclatureItem::niTypeStringMap;
 QMap<NomenclatureItem::NomenclatureItemType, QString> NomenclatureItem::niTypeDescriptionMap;
+NomenclatureItem::PlanetCoordinateOrientation NomenclatureItem::getPlanetCoordinateOrientation(QString planetName)
+{
+	// data from https://planetarynames.wr.usgs.gov/TargetCoordinates.
+	// Commented away where they are equal to te default value.
+	static const QMap<QString, NomenclatureItem::PlanetCoordinateOrientation> niPCOMap = {
+	//{"Amalthea"   , NomenclatureItem::pcoPlanetographicWest360 },
+	{"Ariel"      , NomenclatureItem::pcoPlanetocentricEast360 },
+	//{"Callisto"   , NomenclatureItem::pcoPlanetographicWest360 },
+	{"Charon"     , NomenclatureItem::pcoPlanetocentricEast360 },
+	//{"Deimos"     , NomenclatureItem::pcoPlanetographicWest360 },
+	//{"Dione"      , NomenclatureItem::pcoPlanetographicWest360 },
+	//{"Enceladus"  , NomenclatureItem::pcoPlanetographicWest360 },
+	//{"Epimetheus" , NomenclatureItem::pcoPlanetographicWest360 },
+	//{"Europa"     , NomenclatureItem::pcoPlanetographicWest360 },
+	//{"Ganymede"   , NomenclatureItem::pcoPlanetographicWest360 },
+	//{"Hyperion"   , NomenclatureItem::pcoPlanetographicWest360 },
+	//{"Iapetus"    , NomenclatureItem::pcoPlanetographicWest360 },
+	//{"Io"         , NomenclatureItem::pcoPlanetographicWest360 }, // Voyager/Galileo SSI
+	//{"Janus"      , NomenclatureItem::pcoPlanetographicWest360 },
+	{"Mars"       , NomenclatureItem::pcoPlanetocentricEast360 }, // MDIM 2.0
+	//{"Mercury"    , NomenclatureItem::pcoPlanetographicWest360 }, // Preliminary MESSENGER MESSENGER Team
+	//{"Mimas"      , NomenclatureItem::pcoPlanetographicWest360 },
+	{"Miranda"    , NomenclatureItem::pcoPlanetocentricEast360 },
+	{"Moon"       , NomenclatureItem::pcoPlanetographicEast180 }, // LOLA 2011 ULCN 2005
+	{"Oberon"     , NomenclatureItem::pcoPlanetocentricEast360 },
+	//{"Phobos"     , NomenclatureItem::pcoPlanetographicWest360 },
+	//{"Phoebe"     , NomenclatureItem::pcoPlanetographicWest360 },
+	{"Pluto"      , NomenclatureItem::pcoPlanetocentricEast360 },
+	//{"Proteus"    , NomenclatureItem::pcoPlanetographicWest360 },
+	{"Puck"       , NomenclatureItem::pcoPlanetocentricEast360 },
+	//{"Rhea"       , NomenclatureItem::pcoPlanetographicWest360 },
+	//{"Tethys"     , NomenclatureItem::pcoPlanetographicWest360 },
+	//{"Thebe"      , NomenclatureItem::pcoPlanetographicWest360 },
+	//{"Titan"      , NomenclatureItem::pcoPlanetographicWest360 },
+	{"Titania"    , NomenclatureItem::pcoPlanetocentricEast360 },
+	{"Triton"     , NomenclatureItem::pcoPlanetographicEast360 },
+	{"Umbriel"    , NomenclatureItem::pcoPlanetocentricEast360 },
+	{"Venus"      , NomenclatureItem::pcoPlanetocentricEast360 }};
+	return niPCOMap.value(planetName, NomenclatureItem::pcoPlanetographicWest360);
+}
+
+NomenclatureItem::PlanetCoordinateOrientation NomenclatureItem::getPlanetCoordinateOrientation() const
+{
+	return getPlanetCoordinateOrientation(planet->getEnglishName());
+}
+
+bool NomenclatureItem::isPlanetocentric(PlanetCoordinateOrientation pco)
+{
+	return pco & 0x100;
+}
+bool NomenclatureItem::isEastPositive(PlanetCoordinateOrientation pco)
+{
+	return pco & 0x010;
+}
+bool NomenclatureItem::is180(PlanetCoordinateOrientation pco)
+{
+	return pco & 0x001;
+}
+bool NomenclatureItem::isPlanetocentric() const
+{
+	return isPlanetocentric(getPlanetCoordinateOrientation());
+}
+bool NomenclatureItem::isEastPositive() const
+{
+	return isEastPositive(getPlanetCoordinateOrientation());
+}
+bool NomenclatureItem::is180() const
+{
+	return is180(getPlanetCoordinateOrientation());
+}
+
 void NomenclatureItem::createNameLists()
 {
     niTypeStringMap = {
