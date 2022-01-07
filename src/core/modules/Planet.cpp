@@ -372,7 +372,7 @@ void Planet::setIAUMoonNumber(QString designation)
 QString Planet::getEnglishName() const
 {
     if (!iauMoonNumber.isEmpty())
-        return QString("%1 (%2)").arg(englishName).arg(iauMoonNumber);
+	return QString("%1 (%2)").arg(englishName, iauMoonNumber);
     else
         return englishName;
 }
@@ -380,7 +380,7 @@ QString Planet::getEnglishName() const
 QString Planet::getNameI18n() const
 {
     if (!iauMoonNumber.isEmpty())
-        return QString("%1 (%2)").arg(nameI18).arg(iauMoonNumber);
+	return QString("%1 (%2)").arg(nameI18, iauMoonNumber);
     else
         return nameI18;
 }
