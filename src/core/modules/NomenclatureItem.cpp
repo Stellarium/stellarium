@@ -205,6 +205,7 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 {
 	QString str;
 	QTextStream oss(&str);
+	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 
 	if (flags&Name)
 	{
@@ -241,18 +242,9 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 	if (flags&Extra)
 	{
 		// For 0.22.0 we must clarify used coordinate system by planet and adapt the coordinates for the special points.
-		const QString cType= isPlanetocentric() ? q_("Planetocentric long./lat.") : q_("Planetographic long./lat.");
-		QString sLong = StelUtils::decDegToDmsStr(longitude), sLat = StelUtils::decDegToDmsStr(latitude);
-		QString cEW  = isEastPositive()   ? qc_("E", "compass direction") : qc_("W", "compass direction");
-		if (!isEastPositive())
-		    sLong=StelUtils::decDegToDmsStr(StelUtils::fmodpos(360.-longitude, 360.)); // avoid 360.0 for the poles!
-		if (is180()) // currently only Moon
-		{
-		    double longMod=longitude > 180. ? longitude-360. : longitude;
-		    cEW= longMod >= 0. ? qc_("E", "compass direction") : qc_("W", "compass direction");
-		    sLong = StelUtils::decDegToDmsStr(fabs(longMod));
-		}
-
+		const QString cType = isPlanetocentric() ? q_("Planetocentric coordinates") : q_("Planetographic coordinates");
+		QString sLong = StelUtils::decDegToLongitudeStr(longitude, isEastPositive(), is180(), !withDecimalDegree),
+			sLat  = StelUtils::decDegToLatitudeStr(latitude, !withDecimalDegree);
 		if (nType>=NomenclatureItemType::niSpecialPointEast && planet->getEnglishName()=="Jupiter")
 		{
 			// Due to Jupiter's issues around GRS shift we must repeat some calculations here.
@@ -272,10 +264,10 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 				lng = - M_180_PI * (nType==NomenclatureItemType::niSpecialPointCenter ? subObs.first[2]: subObs.second[2]);
 			}
 			lng   = StelUtils::fmodpos(lng, 360.);
-			sLong = StelUtils::decDegToDmsStr(360.-lng);
-			sLat  = StelUtils::decDegToDmsStr(lat);
+			sLong = StelUtils::decDegToLongitudeStr(360.-lng, isEastPositive(), is180(), !withDecimalDegree);
+			sLat  = StelUtils::decDegToLatitudeStr(lat, !withDecimalDegree);
 		}
-		oss << QString("%1: %2%3/%4<br/>").arg(cType, cEW, sLong, sLat);
+		oss << QString("%1: %2/%3<br/>").arg(cType, sLat, sLong);
 		oss << QString("%1: %2<br/>").arg(q_("Celestial body"), planet->getNameI18n());
 		QString description = getNomenclatureTypeDescription(nType, planet->getEnglishName());
 		if (nType!=NomenclatureItem::niUNDEFINED && nType<NomenclatureItem::niSpecialPointPole && !description.isEmpty())

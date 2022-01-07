@@ -187,6 +187,18 @@ namespace StelUtils
 	//! @param angle input angle in decimal degrees
 	QString decDegToDmsStr(const double angle);
 
+	//! Convert latitude in decimal degrees to a dms formatted string or use decimal values.
+	//! @param latitude in decimal degrees
+	//! @param dms set true to use DMS formatted string
+	QString decDegToLatitudeStr(const double latitude, bool dms = true);
+
+	//! Convert longitude in decimal degrees to a dms formatted string.
+	//! @param longitude in decimal degrees
+	//! @param eastPositive set true to counting East direction positive
+	//! @param semiSphere set true to use -180..180 degrees range (0..360 degrees otherwise)
+	//! @param dms set true to use DMS formatted string
+	QString decDegToLongitudeStr(const double longitude, bool eastPositive = true, bool semiSphere = true, bool dms = true);
+
 	//! Convert a dms formatted string to an angle in radian
 	//! @param s The input string
 	double dmsStrToRad(const QString& s);

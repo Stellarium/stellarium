@@ -380,6 +380,54 @@ QString decDegToDmsStr(const double angle)
 	return QString("%1%2%3%4\'%5\"").arg(sign?'+':'-').arg(d).arg(QChar(0x00B0)).arg(m,2,10,QLatin1Char('0')).arg(static_cast<unsigned int>(s),2,10,QLatin1Char('0'));
 }
 
+// Convert latitude in decimal degrees to a dms formatted string.
+QString decDegToLatitudeStr(const double latitude, bool dms)
+{
+	bool sign;
+	double s;
+	unsigned int d, m;
+	decDegToDms(latitude, sign, d, m, s);
+	// Important note: we use untranslatable designations for North and South directions,
+	//                 because on some languages (e.g. Russian) the name of direction is
+	//                 followed the value of latitude.
+	// Example: N50.036 = 50.036 с.ш. (Russian; "с.ш." = "n.l." (northern latitude))
+	if (dms)
+		return QString("%1%2%3%4\'%5\"").arg(sign ? 'N' : 'S').arg(d).arg(QChar(0x00B0)).arg(m,2,10,QLatin1Char('0')).arg(static_cast<unsigned int>(s),2,10,QLatin1Char('0'));
+	else
+		return QString("%1%2%3").arg(sign ? 'N' : 'S').arg(QString::number(fabs(latitude), 'f', 4), QChar(0x00B0));
+}
+
+// default values as for Earth
+QString decDegToLongitudeStr(const double longitude, bool eastPositive, bool semiSphere, bool dms)
+{
+	bool sign;
+	double s, longMod = longitude;
+	unsigned int d, m;
+	QString positive, negative;
+	if (eastPositive)
+	{
+		positive = "E";
+		negative = "W";
+	}
+	else
+	{
+		longMod = fmodpos(360.-longitude, 360.); // avoid 360.0 for the poles!
+		positive = "W";
+		negative = "E";
+	}
+	if (semiSphere)
+		longMod = longitude > 180. ? longitude-360. : longitude;
+	decDegToDms(longMod, sign, d, m, s);
+	// Important note: we use untranslatable designations for East and West directions,
+	//                 because on some languages (e.g. Russian) the name of direction is
+	//                 followed the value of longitude.
+	// Example: E82.136 = 82.136 в.д. (Russian; "в.д." = "e.l." (eastern longitude))
+	if (dms)
+		return QString("%1%2%3%4\'%5\"").arg(sign ? positive : negative).arg(d).arg(QChar(0x00B0)).arg(m,2,10,QLatin1Char('0')).arg(static_cast<unsigned int>(s),2,10,QLatin1Char('0'));
+	else
+		return QString("%1%2%3").arg(sign ? positive : negative).arg(QString::number(fabs(longMod), 'f', 4), QChar(0x00B0));
+}
+
 // Convert a dms formatted string to an angle in radian
 double dmsStrToRad(const QString& s)
 {
