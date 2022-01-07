@@ -92,10 +92,10 @@ void NomenclatureMgr::updateNomenclatureData()
 void NomenclatureMgr::loadSpecialNomenclature()
 {
 	int featureId = 50000;
-	QList<PlanetP> ss = ssystem->getAllPlanets();
+	const QList<PlanetP> ss = ssystem->getAllPlanets();
 	for (const auto& p: ss)
 	{
-		double size = p->getEquatorialRadius()*AU*0.25; // formal radius of point is 25% of equatorial radius
+		const double size = p->getEquatorialRadius()*AU*0.25; // formal radius of point is 25% of equatorial radius
 		NomenclatureItemP nomNP = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("North Pole"), "", NomenclatureItem::niSpecialPointPole, 90., 0., size));
 		if (!nomNP.isNull())
 			nomenclatureItems.insert(p, nomNP);

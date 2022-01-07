@@ -153,29 +153,34 @@ QString NomenclatureItem::getNomenclatureTypeDescription(NomenclatureItemType nT
 
 float NomenclatureItem::getSelectPriority(const StelCore* core) const
 {
-	float priority = StelObject::getSelectPriority(core);
-	if (getFlagLabels())
+	if (!getFlagLabels()) // disable if switched off.
+		return 1.e12f;
+
+	// Exclude if the planet is too faint for view (in deep shadow for example),
+	// or if feature is on far-side of the planet
+	if (planet->getVMagnitude(core)>=20.f || (planet->getJ2000EquatorialPos(core).lengthSquared() < getJ2000EquatorialPos(core).lengthSquared()))
+		return 1.e12f;
+
+	// Start with a priority just slightly lower than the carrier planet,
+	// so that clicking on the planet in halo does not select any feature point.
+	float priority=planet->getSelectPriority(core)+5.f;
+	// check visibility of feature
+	const float scale = getAngularSizeRatio(core);
+	const float planetScale = 2.f*static_cast<float>(planet->getAngularSize(core))/core->getProjection(StelCore::FrameJ2000)->getFov();
+	// TODO: describe here what scale means in terms of pixel or percentage of vertical fov?
+
+	// Require the planet to cover 1/10 of the screen to make it worth clicking on features
+	if ((scale>0.04f) && planetScale > 0.1f)
 	{
-		const float scale = getAngularSizeRatio(core);
-		if (planet->getVMagnitude(core)>=20.f || (planet->getJ2000EquatorialPos(core).lengthSquared() < getJ2000EquatorialPos(core).lengthSquared()))
-		{
-			// The feature on far-side of the planet or the planet is too faint for view
-			// (in deep shadow for example), so let's disable selecting the nomenclature
-			priority += 25.f;
-		}
-		else if (scale>=0.015f)
-		{
-			// The item may be good selectable when it over 37px size only
-			//priority -= (20.f + scale*100.f);
-			priority = planet->getSelectPriority(core) - scale*100.f;
-			if (nType>=NomenclatureItemType::niSpecialPointPole)
-				priority -= 10.f;
-		}
-		else
-			priority -= 2.f;
+	    priority -= 5.f - scale;
+
 	}
 	else
-		priority += 1.e12f; // suppress selection if switched off.
+	{
+	    // Make sure only displayed features can be selected.
+	    priority+=1.e12f;
+	    // or work out some logic to select smaller features, but take scale into account! No more 6km satellite craters in a 1cm moon on screen!
+	}
 
 	return priority;
 }
@@ -274,6 +279,11 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 			oss << QString("%1: %2<br/>").arg(q_("Landform description"), description);
 		if (planet->getEnglishName()!="Jupiter") // we must exclude this for now due to Jupiter's "off" rotation
 			oss << QString("%1: %2°<br/>").arg(q_("Solar altitude"), QString::number(getSolarAltitude(core), 'f', 1));
+
+		// DEBUG output. This should help defining valid criteria for selection priority.
+		oss << QString("Planet angular size (semidiameter!): %1''<br/>").arg(QString::number(planet->getAngularSize(core)*3600.));
+		oss << QString("Angular size: %1''<br/>").arg(QString::number(getAngularSize(core)*3600.));
+		oss << QString("Angular size ratio: %1<br/>").arg(QString::number(static_cast<double>(getAngularSizeRatio(core)), 'f', 5));
 	}
 
 	postProcessInfoString(str, flags);
@@ -325,7 +335,6 @@ Vec3d NomenclatureItem::getJ2000EquatorialPos(const StelCore* core) const
 		StelUtils::spheToRect(longitude * M_PI_180, latitude * M_PI_180, XYZpc);
 	}
 	// Calculate the radius of the planet at the item's position. It is necessary to re-scale it
-	//Vec4d rect = planet->getRectangularCoordinates(longitude, latitude);
 	Vec3d XYZ0 = XYZpc * planet->getEquatorialRadius() * static_cast<double>(planet->getSphereScale());
 	// TODO2: intersect properly with OBJ bodies! (LP:1723742)
 
@@ -338,6 +347,7 @@ Vec3d NomenclatureItem::getJ2000EquatorialPos(const StelCore* core) const
 	return XYZ;
 }
 
+// TODO: Decide whether this is full size or semidiameter, like for the planets!
 double NomenclatureItem::getAngularSize(const StelCore* core) const
 {
 	return std::atan2(size*planet->getSphereScale()/AU, getJ2000EquatorialPos(core).length()) * M_180_PI;

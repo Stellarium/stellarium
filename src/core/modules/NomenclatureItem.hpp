@@ -157,6 +157,7 @@ public:
 	// Get the visual magnitude of a nomenclature item. Dummy method, returns 99.
 	//virtual float getVMagnitude(const StelCore* core) const Q_DECL_OVERRIDE;
 	//! Get the angular size of nomenclature item.
+	//! TODO: Decide whether this is full size or semidiameter, like for the planets!
 	virtual double getAngularSize(const StelCore* core) const Q_DECL_OVERRIDE;
 	//! Get the localized name of nomenclature item.
 	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
