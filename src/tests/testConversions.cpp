@@ -1186,6 +1186,28 @@ void TestConversions::testVec2fToStr()
 	}
 }
 
+void TestConversions::testVec2dToStr()
+{
+	QVariantList data;
+
+	data << "1.0000000000,1.0000000000" << 1. << 1.;
+	data << "1.0000000000,0.0000000000" << 1. << 0.;
+	data << "0.0000000000,1.0000000000" << 0. << 1.;
+	data << "0.0000000000,0.0000000000" << 0. << 0.;
+
+	while (data.count()>=3)
+	{
+		QString vec	= data.takeFirst().toString();
+		double v1	= data.takeFirst().toDouble();
+		double v2	= data.takeFirst().toDouble();
+		Vec2d srcVec	= Vec2d(v1, v2);
+		QString dstVec	= srcVec.toStr();
+
+		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
+			.arg(srcVec.toString(), dstVec, vec)));
+	}
+}
+
 void TestConversions::testStrToVec3f()
 {
 	QVariantList data;
@@ -1236,6 +1258,30 @@ void TestConversions::testVec3fToStr()
 							   .arg(srcVec.toString())
 							   .arg(dstVec)
 							   .arg(vec)));
+	}
+}
+
+void TestConversions::testVec3dToStr()
+{
+	QVariantList data;
+
+	data << "1.0000000000,1.0000000000,1.0000000000" << 1. << 1. << 1.;
+	data << "1.0000000000,0.0000000000,1.0000000000" << 1. << 0. << 1.;
+	data << "0.0000000000,1.0000000000,0.0000000000" << 0. << 1. << 0.;
+	data << "0.0000000000,0.0000000000,0.0000000000" << 0. << 0. << 0.;
+
+	while (data.count()>=4)
+	{
+		QString vec	= data.takeFirst().toString();
+		double v1	= data.takeFirst().toDouble();
+		double v2	= data.takeFirst().toDouble();
+		double v3	= data.takeFirst().toDouble();
+		Vec3d srcVec	= Vec3d(v1, v2, v3);
+		//QString dstVec	= StelUtils::vec3fToStr(srcVec);
+		QString dstVec	= srcVec.toStr();
+
+		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
+			.arg(srcVec.toString(), dstVec, vec)));
 	}
 }
 
@@ -1291,6 +1337,30 @@ void TestConversions::testVec4dToStr()
 							   .arg(srcVec.toString())
 							   .arg(dstVec)
 							   .arg(vec)));
+	}
+}
+
+void TestConversions::testVec4fToStr()
+{
+	QVariantList data;
+
+	data << "1.000000,1.000000,1.000000,1.000000" << 1.f << 1.f << 1.f << 1.f;
+	data << "1.000000,0.000000,1.000000,0.000000" << 1.f << 0.f << 1.f << 0.f;
+	data << "0.000000,1.000000,0.000000,1.000000" << 0.f << 1.f << 0.f << 1.f;
+	data << "0.000000,0.000000,0.000000,0.000000" << 0.f << 0.f << 0.f << 0.f;
+
+	while (data.count()>=5)
+	{
+		QString vec	= data.takeFirst().toString();
+		float v1	= data.takeFirst().toFloat();
+		float v2	= data.takeFirst().toFloat();
+		float v3	= data.takeFirst().toFloat();
+		float v4	= data.takeFirst().toFloat();
+		Vec4f srcVec	= Vec4f(v1, v2, v3, v4);
+		QString dstVec	= srcVec.toStr();
+
+		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
+			.arg(srcVec.toString(), dstVec, vec)));
 	}
 }
 
