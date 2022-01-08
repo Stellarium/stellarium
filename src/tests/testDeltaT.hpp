@@ -48,7 +48,8 @@ private slots:
 	void testDeltaTByBorkowski();
 	void testDeltaTByIAU();
 	void testDeltaTByAstronomicalEphemeris();
-	void testDeltaTByTuckermanGoldstine();		
+	void testDeltaTByTuckermanGoldstine();
+	void testDeltaTByChaprontTouze();
 	void testDeltaTStandardError();
 private:
 	QVariantList genericData;

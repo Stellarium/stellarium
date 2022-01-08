@@ -1469,7 +1469,9 @@ double getDeltaTByChaprontTouze(const double jDay)
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
 	// Limited years!
-	year=qBound(-391, year, 1600);
+	if (year < -391 || year > 1600)
+		return deltaT;
+	//year=qBound(-391, year, 1600);
 
 	double u=(jDay-2451545.0)/36525.0; // (2000-jan-1.5)
 

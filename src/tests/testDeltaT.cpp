@@ -1230,6 +1230,35 @@ void TestDeltaT::testDeltaTByTuckermanGoldstine()
 	}
 }
 
+void TestDeltaT::testDeltaTByChaprontTouze()
+{
+	QVariantList data;
+	// check outside valid range
+	data << -395 <<  0.0;
+	data << 1610 <<  0.0;
+
+	while(data.count() >= 2)
+	{
+		int year = data.takeFirst().toInt();
+		int yout, mout, dout;
+		double JD;
+		double expectedResult = data.takeFirst().toDouble();
+		double acceptableError = 1.0; // TODO: Increase accuracy to 0.1 seconds
+		StelUtils::getJDFromDate(&JD, year, 1, 1, 0, 0, 0);
+		double result = StelUtils::getDeltaTByChaprontTouze(JD);
+		double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
+		StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
+		QVERIFY2(actualError <= acceptableError, QString("date=%2 year=%3 result=%4 expected=%5 error=%6 acceptable=%7")
+							.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
+							.arg(year)
+							.arg(result)
+							.arg(expectedResult)
+							.arg(actualError)
+							.arg(acceptableError)
+							.toUtf8());
+	}
+}
+
 void TestDeltaT::testDeltaTStandardError()
 {
 	// the test data was obtained from https://eclipse.gsfc.nasa.gov/SEhelp/uncertainty2004.html
