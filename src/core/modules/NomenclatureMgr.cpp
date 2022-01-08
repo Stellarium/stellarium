@@ -491,20 +491,14 @@ void NomenclatureMgr::setFlagLabels(bool b)
 {
 	if (getFlagLabels() != b)
 	{
-		for (const auto& i : qAsConst(nomenclatureItems))
-			i->setFlagLabels(b);
+		NomenclatureItem::setFlagLabels(b);
 		emit nomenclatureDisplayedChanged(b);
 	}
 }
 
 bool NomenclatureMgr::getFlagLabels() const
 {
-	for (const auto& i : nomenclatureItems)
-	{
-		if (i->getFlagLabels())
-			return true;
-	}
-	return false;
+	return NomenclatureItem::getFlagLabels();
 }
 
 void NomenclatureMgr::setFlagHideLocalNomenclature(bool b)

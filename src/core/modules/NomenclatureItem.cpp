@@ -31,6 +31,7 @@
 const QString NomenclatureItem::NOMENCLATURE_TYPE = QStringLiteral("NomenclatureItem");
 Vec3f NomenclatureItem::color = Vec3f(0.1f,1.0f,0.1f);
 bool NomenclatureItem::hideLocalNomenclature = false;
+LinearFader NomenclatureItem::labelsFader;
 
 NomenclatureItem::NomenclatureItem(PlanetP nPlanet,
 				   int nId,
@@ -358,11 +359,6 @@ float NomenclatureItem::getAngularSizeRatio(const StelCore *core) const
     return static_cast<float>(getAngularSize(core))/core->getProjection(StelCore::FrameJ2000)->getFov();
 }
 
-void NomenclatureItem::update(double deltaTime)
-{
-	labelsFader.update(static_cast<int>(deltaTime*1000));
-}
-
 void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 {
 	if (!getFlagLabels())
@@ -392,7 +388,7 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 		float brightness=(getSolarAltitude(core)<0. ? 0.25f : 1.0f);
 		if (niType>=NomenclatureItem::niSpecialPointPole)
 			brightness = 0.5f;
-		painter->setColor(color*brightness, 1.0f);
+		painter->setColor(color*brightness, labelsFader.getInterstate());
 		painter->drawCircle(static_cast<float>(srcPos[0]), static_cast<float>(srcPos[1]), 2.f);
 		painter->drawText(static_cast<float>(srcPos[0]), static_cast<float>(srcPos[1]), nameI18n, 0, 5.f, 5.f, false);
 	}

@@ -180,10 +180,9 @@ public:
 
 	void draw(StelCore* core, StelPainter *painter);
 	NomenclatureItemType getNomenclatureType() const { return nType;}
-	void update(double deltaTime);
 
-	void setFlagLabels(bool b){ labelsFader = b; }
-	bool getFlagLabels(void) const { return labelsFader==true;}
+	static void setFlagLabels(bool b){ labelsFader = b; }
+	static bool getFlagLabels(void){ return labelsFader.getInterstate()>0.f;}
 	void setFlagHideLocalNomenclature(bool b) { hideLocalNomenclature=b; }
 	bool getFlagHideLocalNomenclature() const { return hideLocalNomenclature; }
 	//QString getEnglishPlanetName(void) const {return planet->getEnglishName();}
@@ -243,7 +242,7 @@ private:
 	mutable double longitude;   // degrees. Declared mutable to allow change in otherwise const methods (for special points)
 	double size;                //  km
 
-	LinearFader labelsFader;
+	static LinearFader labelsFader;
 };
 
 #endif // NOMENCLATUREITEM_HPP
