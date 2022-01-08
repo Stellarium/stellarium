@@ -95,7 +95,7 @@ void TestDates::dateRoundTrip()
 	ok = qFuzzyCompare(1.0, tmp+1.0);
 	QVERIFY(ok);
 	// check case: milliseconds
-	QCOMPARE(StelUtils::julianDayToISO8601String(2400000.0, true), "1858-11-16T12:00:00.000");
+	QCOMPARE(StelUtils::julianDayToISO8601String(2400000.0, true), QString("1858-11-16T12:00:00.000"));
 }
 
 
