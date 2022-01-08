@@ -835,20 +835,22 @@ void TestConversions::testRadToHMSStr()
 {
 	QVariantList data;
 
-	data << 0.		<< "0h00m00.0s";
-	data << M_PI/36		<< "0h20m00.0s";
-	data << 7*M_PI/8	<< "10h30m00.0s";
-	data << 2*M_PI/5	<< "4h48m00.0s";
+	data << 0.		<< false << "0h00m00.0s";
+	data << M_PI/36		<< false << "0h20m00.0s";
+	data << 7*M_PI/8	<< false << "10h30m00.0s";
+	data << 2*M_PI/5	<< false << "4h48m00.0s";
+	data << M_PI/36		<< true  << "0h20m00.00s";
+	data << 7*M_PI/8	<< true  << "10h30m00.00s";
+	data << 2*M_PI/5	<< true  << "4h48m00.00s";
 
-	while (data.count()>=2)
+	while (data.count()>=3)
 	{
 		double rad = data.takeFirst().toDouble();
+		bool flag = data.takeFirst().toBool();
 		QString expectedHMS = data.takeFirst().toString();
-		QString hms = StelUtils::radToHmsStr(rad).trimmed();
+		QString hms = StelUtils::radToHmsStr(rad, flag).trimmed();
 		QVERIFY2(expectedHMS==hms, qPrintable(QString("%1 radians = %2 (expected %3)")
-						      .arg(rad)
-						      .arg(hms)
-						      .arg(expectedHMS)));
+			.arg(QString::number(rad, 'f', 5), hms, expectedHMS)));
 	}
 }
 
@@ -1316,11 +1318,51 @@ void TestConversions::testQDateTimeToJD()
 		 //qWarning() << i.value() << d.toString(format);
 		 double JD = StelUtils::qDateTimeToJd(QDateTime::fromString(i.value(), format));
 		 QVERIFY2(qAbs(i.key() - JD)<=ERROR_LIMIT, qPrintable(QString("JD: %1 Date: %2 Expected JD: %3")
-					 .arg(QString::number(JD, 'f', 5))
-					 .arg(i.value())
-					 .arg(QString::number(i.key(), 'f', 5))
+					 .arg(QString::number(JD, 'f', 5), i.value(), QString::number(i.key(), 'f', 5))
 					 ));
 	 }
+}
+
+void TestConversions::testJDToQDateTime()
+{
+	 QMap<double, QString> map;
+	 map[2454466.0] = "2007-12-31 12:00:00";
+	 map[2500000.0] = "2132-08-31 12:00:00";
+	 map[2454534.0] = "2008-03-08 12:00:00";
+	 map[2299161.0] = "1582-10-15 12:00:00";
+	 map[2454466.5] = "2008-01-01 00:00:00";
+	 map[2400000.0] = "1858-11-16 12:00:00";
+
+	 // See https://doc.qt.io/qt-5/qdate.html#details for restrictions and converion issues (qint64 -> double)
+	 QString format = "yyyy-MM-dd HH:mm:ss";
+	 for (QMap<double, QString>::ConstIterator i=map.constBegin();i!=map.constEnd();++i)
+	 {
+		 QDateTime edt = QDateTime::fromString(i.value(), format);
+		 QDateTime rdt = StelUtils::jdToQDateTime(i.key());
+		 QVERIFY2(edt==rdt, qPrintable(QString("JD: %1 Date: %2 Expected Date: %3")
+			.arg(QString::number(i.key(), 'f', 5), rdt.toString(format), i.value())));
+	 }
+}
+
+void TestConversions::testHoursFromJD()
+{
+	QVariantList data;
+	data << 2454466.0 << 12.; // 2007-12-31 12:00:00
+	data << 2500000.0 << 12.; // 2132-08-31 12:00:00
+	data << 2454534.0 << 12.; // 2008-03-08 12:00:00
+	data << 2299161.0 << 12.; // 1582-10-15 12:00:00
+	data << 2454466.5 << 0.;  // 2008-01-01 00:00:00
+	data << 2400000.0 << 12.; // 1858-11-16 12:00:00
+
+	while (data.count()>=2)
+	{
+		double JD	= data.takeFirst().toDouble();
+		double hours	= data.takeFirst().toDouble();
+		double hrs = StelUtils::getHoursFromJulianDay(JD);
+		QVERIFY2(qAbs(hours - hrs)<=ERROR_LIMIT, qPrintable(QString("JD: %1 Hours: %2 Expected Hours: %3")
+			.arg(QString::number(JD, 'f', 5), QString::number(hrs, 'f', 5), QString::number(hours, 'f', 5))
+			));
+	}
 }
 
 void TestConversions::testTrunc()
@@ -1337,13 +1379,13 @@ void TestConversions::testTrunc()
 	{
 		double res = StelUtils::trunc(i.key());
 		QVERIFY2(qAbs(i.value() - res)<=ERROR_LIMIT, qPrintable(QString("Result: %1 Expected: %2")
-					.arg(QString::number(res, 'f', 2))
-					.arg(QString::number(i.value(), 'f', 2))
+					.arg(QString::number(res, 'f', 2), QString::number(i.value(), 'f', 2))
 					));
 		float resf = StelUtils::trunc(static_cast<float>(i.key()));
 		QVERIFY2(qAbs(static_cast<float>(i.value()) - resf)<=ERROR_LIMIT, qPrintable(QString("Result: %1 Expected: %2")
-					.arg(QString::number(resf, 'f', 2))
-					.arg(QString::number(static_cast<float>(i.value()), 'f', 2))
+					.arg(QString::number(resf, 'f', 2), QString::number(static_cast<float>(i.value()), 'f', 2))
 					));
 	}
 }
+
+

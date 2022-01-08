@@ -62,6 +62,8 @@ private slots:
 	void testStrToVec4d();
 	void testVec4dToStr();
 	void testQDateTimeToJD();
+	void testJDToQDateTime();
+	void testHoursFromJD();
 	void testTrunc();
 };
 
