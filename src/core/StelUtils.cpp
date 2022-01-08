@@ -670,7 +670,7 @@ QString julianDayToISO8601String(const double jd, bool addMS)
 
 	if(addMS)
 	{
-		res.append(".%1").arg(millis,3,10,QLatin1Char('0'));
+		res.append(QString(".%1").arg(millis,3,10,QLatin1Char('0')));
 	}
 	if (year < 0)
 	{

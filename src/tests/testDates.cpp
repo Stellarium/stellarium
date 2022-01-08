@@ -89,6 +89,13 @@ void TestDates::dateRoundTrip()
 			ok = qFuzzyCompare(i.key()+1.0, tmp+1.0);
 		QVERIFY(ok);
 	}
+	// check case: wrong format
+	double tmp = StelUtils::getJulianDayFromISO8601String("-9999-12-31 12:00:00", &ok);
+	QVERIFY(!ok);
+	ok = qFuzzyCompare(1.0, tmp+1.0);
+	QVERIFY(ok);
+	// check case: milliseconds
+	QCOMPARE(StelUtils::julianDayToISO8601String(2400000.0, true), "1858-11-16T12:00:00.000");
 }
 
 
@@ -152,6 +159,22 @@ void TestDates::testRolloverAndValidity()
 	QVERIFY(12==dh);
 	QVERIFY(0==dmin);
 	QVERIFY(0==ds);
+
+	QVERIFY2(StelUtils::changeDateTimeForRollover(2021, 13, 32, 24, 60, 60, &dy, &dm, &dd, &dh, &dmin, &ds), "2l");
+	QVERIFY(2022==dy);
+	QVERIFY(2==dm);
+	QVERIFY(2==dd);
+	QVERIFY(1==dh);
+	QVERIFY(1==dmin);
+	QVERIFY(0==ds);
+
+	QVERIFY2(StelUtils::changeDateTimeForRollover(2021, 1, -1, -1, -1, -1, &dy, &dm, &dd, &dh, &dmin, &ds), "3l");
+	QVERIFY(2020==dy);
+	QVERIFY(12==dm);
+	QVERIFY(29==dd);
+	QVERIFY(22==dh);
+	QVERIFY(58==dmin);
+	QVERIFY(59==ds);
 }
 
 /*
