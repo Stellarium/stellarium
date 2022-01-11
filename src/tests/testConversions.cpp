@@ -1257,6 +1257,69 @@ void TestConversions::testStrToVec3f()
 	}
 }
 
+void TestConversions::testQColorToVec3i()
+{
+	QVariantList data;
+
+	data << 255 << 255 << 255;
+	data << 255 <<   0 << 255;
+	data <<   0 << 255 <<   0;
+	data <<   0 <<   0 <<   0;
+
+	while (data.count()>=3)
+	{
+		int v1		= data.takeFirst().toInt();
+		int v2		= data.takeFirst().toInt();
+		int v3		= data.takeFirst().toInt();
+		Vec3i vec	= Vec3i(v1, v2, v3);
+		Vec3i dstVec    = Vec3i(QColor(v1, v2, v3));
+
+		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2").arg(vec.toStr(), dstVec.toStr())));
+	}
+}
+
+void TestConversions::testQColorToVec3f()
+{
+	QVariantList data;
+
+	data << 1.f << 1.f << 1.f;
+	data << 1.f << 0.f << 1.f;
+	data << 0.f << 1.f << 0.f;
+	data << 0.f << 0.f << 0.f;
+
+	while (data.count()>=3)
+	{
+		float v1	= data.takeFirst().toFloat();
+		float v2	= data.takeFirst().toFloat();
+		float v3	= data.takeFirst().toFloat();
+		Vec3f vec	= Vec3f(v1, v2, v3);
+		Vec3f dstVec    = Vec3f(QColor().fromRgbF(v1, v2, v3));
+
+		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2").arg(vec.toStr(), dstVec.toStr())));
+	}
+}
+
+void TestConversions::testQColorToVec3d()
+{
+	QVariantList data;
+
+	data << 1. << 1. << 1.;
+	data << 1. << 0. << 1.;
+	data << 0. << 1. << 0.;
+	data << 0. << 0. << 0.;
+
+	while (data.count()>=3)
+	{
+		double v1	= data.takeFirst().toDouble();
+		double v2	= data.takeFirst().toDouble();
+		double v3	= data.takeFirst().toDouble();
+		Vec3d vec	= Vec3d(v1, v2, v3);
+		Vec3d dstVec    = Vec3d(QColor().fromRgbF(v1, v2, v3));
+
+		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2").arg(vec.toStr(), dstVec.toStr())));
+	}
+}
+
 void TestConversions::testVec3fToStr()
 {
 	QVariantList data;
@@ -1399,6 +1462,48 @@ void TestConversions::testVec3dToQColor()
 	}
 }
 
+void TestConversions::testVec3fToQVector3D()
+{
+	QVariantList data;
+
+	data << 1.f << 1.f << 1.f;
+	data << 1.f << 0.f << 1.f;
+	data << 0.f << 1.f << 0.f;
+	data << 0.f << 0.f << 0.f;
+
+	while (data.count()>=3)
+	{
+		float v1	= data.takeFirst().toFloat();
+		float v2	= data.takeFirst().toFloat();
+		float v3	= data.takeFirst().toFloat();
+		QVector3D vec	= Vec3f(v1, v2, v3).toQVector3D();
+		QVector3D v3d	= QVector3D(v1, v2, v3);
+
+		QVERIFY(vec==v3d);
+	}
+}
+
+void TestConversions::testVec3dToQVector3D()
+{
+	QVariantList data;
+
+	data << 1. << 1. << 1.;
+	data << 1. << 0. << 1.;
+	data << 0. << 1. << 0.;
+	data << 0. << 0. << 0.;
+
+	while (data.count()>=3)
+	{
+		double v1	= data.takeFirst().toDouble();
+		double v2	= data.takeFirst().toDouble();
+		double v3	= data.takeFirst().toDouble();
+		QVector3D vec	= Vec3d(v1, v2, v3).toQVector3D();
+		QVector3D v3d	= QVector3D(v1, v2, v3);
+
+		QVERIFY(vec==v3d);
+	}
+}
+
 void TestConversions::testStrToVec4d()
 {
 	QVariantList data;
@@ -1425,6 +1530,72 @@ void TestConversions::testStrToVec4d()
 							   .arg(vec)
 							   .arg(dstVec.toString())
 							   .arg(srcVec.toString())));
+	}
+}
+
+void TestConversions::testQColorToVec4i()
+{
+	QVariantList data;
+
+	data << 255 << 255 << 255 << 255;
+	data << 255 <<   0 << 255 <<   0;
+	data <<   0 << 255 <<   0 << 255;
+	data <<   0 <<   0 <<   0 <<   0;
+
+	while (data.count()>=4)
+	{
+		int v1		= data.takeFirst().toInt();
+		int v2		= data.takeFirst().toInt();
+		int v3		= data.takeFirst().toInt();
+		int v4		= data.takeFirst().toInt();
+		Vec4i vec	= Vec4i(v1, v2, v3, v4);
+		Vec4i dstVec    = Vec4i(QColor(v1, v2, v3, v4));
+
+		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2").arg(vec.toStr(), dstVec.toStr())));
+	}
+}
+
+void TestConversions::testQColorToVec4f()
+{
+	QVariantList data;
+
+	data << 1.f << 1.f << 1.f << 1.f;
+	data << 1.f << 0.f << 1.f << 0.f;
+	data << 0.f << 1.f << 0.f << 1.f;
+	data << 0.f << 0.f << 0.f << 0.f;
+
+	while (data.count()>=4)
+	{
+		float v1	= data.takeFirst().toFloat();
+		float v2	= data.takeFirst().toFloat();
+		float v3	= data.takeFirst().toFloat();
+		float v4	= data.takeFirst().toFloat();
+		Vec4f vec	= Vec4f(v1, v2, v3, v4);
+		Vec4f dstVec    = Vec4f(QColor().fromRgbF(v1, v2, v3, v4));
+
+		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2").arg(vec.toStr(), dstVec.toStr())));
+	}
+}
+
+void TestConversions::testQColorToVec4d()
+{
+	QVariantList data;
+
+	data << 1. << 1. << 1. << 1.;
+	data << 1. << 0. << 1. << 0.;
+	data << 0. << 1. << 0. << 1.;
+	data << 0. << 0. << 0. << 0.;
+
+	while (data.count()>=4)
+	{
+		double v1	= data.takeFirst().toDouble();
+		double v2	= data.takeFirst().toDouble();
+		double v3	= data.takeFirst().toDouble();
+		double v4	= data.takeFirst().toDouble();
+		Vec4d vec	= Vec4d(v1, v2, v3, v4);
+		Vec4d dstVec    = Vec4d(QColor().fromRgbF(v1, v2, v3, v4));
+
+		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2").arg(vec.toStr(), dstVec.toStr())));
 	}
 }
 
