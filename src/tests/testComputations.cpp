@@ -54,9 +54,7 @@ void TestComputations::testJDFromBesselianEpoch()
 		double JD = StelUtils::getJDFromBesselianEpoch(besselianEpoch);
 
 		QVERIFY2(qAbs(JD-expectedJD)<=ERROR_LOW_LIMIT, qPrintable(QString("Julian date for Besselian epoch %1 is %2 (expected %3)")
-									.arg(QString::number(besselianEpoch, 'f', 6))
-									.arg(QString::number(JD, 'f', 4))
-									.arg(QString::number(expectedJD, 'f', 4))));
+			.arg(QString::number(besselianEpoch, 'f', 6), QString::number(JD, 'f', 4), QString::number(expectedJD, 'f', 4))));
 	}
 }
 
@@ -84,9 +82,7 @@ void TestComputations::testIsPowerOfTwo()
 		r = StelUtils::isPowerOfTwo(n);
 
 		QVERIFY2(r==f, qPrintable(QString("%1 %2 power of two (expected: %3)")
-					   .arg(n)
-					   .arg(r ? "is":"is not")
-					   .arg(f)));
+			.arg(n).arg(r ? "is":"is not").arg(f)));
 	}
 }
 
@@ -119,9 +115,7 @@ void TestComputations::testGetBiggerPowerOfTwo()
 		r	= StelUtils::getBiggerPowerOfTwo(n);
 
 		QVERIFY2(r==e, qPrintable(QString("Number: %1 getBiggerPowerOfTwo(): %2 (expected: %3)")
-					   .arg(n)
-					   .arg(r)
-					   .arg(e)));
+			.arg(n).arg(r).arg(e)));
 	}
 }
 
@@ -147,11 +141,7 @@ void TestComputations::testDayInYear()
 		n = StelUtils::dayInYear(year, month, day);
 
 		QVERIFY2(n==en, qPrintable(QString("%1-%2-%3 is %4 day (expected: %5)")
-					   .arg(year)
-					   .arg(month)
-					   .arg(day)
-					   .arg(n)
-					   .arg(en)));
+				.arg(year).arg(month).arg(day).arg(n).arg(en)));
 	}
 }
 
@@ -178,11 +168,7 @@ void TestComputations::testYearFraction()
 		fraction = StelUtils::yearFraction(year, month, day);
 
 		QVERIFY2(qAbs(fraction-efrac)<=ERROR_HIGH_LIMIT, qPrintable(QString("%1-%2-%3 is %4 (expected: %5)")
-					   .arg(year)
-					   .arg(month)
-					   .arg(day)
-					   .arg(QString::number(fraction, 'f', 5))
-					   .arg(QString::number(efrac, 'f', 5))));
+			.arg(year).arg(month).arg(day).arg(QString::number(fraction, 'f', 5), QString::number(efrac, 'f', 5))));
 	}
 }
 
@@ -212,13 +198,9 @@ void TestComputations::testEquToEqlTransformations()
 		beta *= 180/M_PI;
 
 		QVERIFY2(qAbs(lambda-lambdaE)<=ERROR_LOW_LIMIT && qAbs(lambda-lambdaE)<=ERROR_LOW_LIMIT,
-				qPrintable(QString("RA/Dec: %1/%2 Lam/Bet: %3/%4 (expected Lam/Bet: %5/%6)")
-					   .arg(QString::number(ra, 'f', 5))
-					   .arg(QString::number(dec, 'f', 5))
-					   .arg(QString::number(lambda, 'f', 5))
-					   .arg(QString::number(beta, 'f', 5))
-					   .arg(QString::number(lambdaE, 'f', 5))
-					   .arg(QString::number(betaE, 'f', 5))));
+			qPrintable(QString("RA/Dec: %1/%2 Lam/Bet: %3/%4 (expected Lam/Bet: %5/%6)")
+			.arg(QString::number(ra, 'f', 5), QString::number(dec, 'f', 5), QString::number(lambda, 'f', 5),
+			     QString::number(beta, 'f', 5), QString::number(lambdaE, 'f', 5), QString::number(betaE, 'f', 5))));
 	}
 }
 
@@ -248,13 +230,9 @@ void TestComputations::testEclToEquTransformations()
 		dec *= 180/M_PI;
 
 		QVERIFY2(qAbs(ra-raE)<=ERROR_LOW_LIMIT && qAbs(dec-decE)<=ERROR_LOW_LIMIT,
-				qPrintable(QString("Lam/Bet: %1/%2 RA/Dec: %3/%4 (expected RA/Dec: %5/%6)")
-					   .arg(QString::number(lambda, 'f', 5))
-					   .arg(QString::number(beta, 'f', 5))
-					   .arg(QString::number(ra, 'f', 5))
-					   .arg(QString::number(dec, 'f', 5))
-					   .arg(QString::number(raE, 'f', 5))
-					   .arg(QString::number(decE, 'f', 5))));
+			qPrintable(QString("Lam/Bet: %1/%2 RA/Dec: %3/%4 (expected RA/Dec: %5/%6)")
+			.arg(QString::number(lambda, 'f', 5), QString::number(beta, 'f', 5), QString::number(ra, 'f', 5),
+			     QString::number(dec, 'f', 5), QString::number(raE, 'f', 5), QString::number(decE, 'f', 5))));
 	}
 }
 
@@ -391,25 +369,25 @@ void TestComputations::testVector2Operators()
 	bool expected, result;
 	QVariantList data;
 	//           Vec(1)       Vec(2)      Compare   Sum         Diff                   Mul                  Scal. M.           C.W.M.
-	data << "0,0"	<< "0,0"	<< true	<<  "0,0"	<<   "0,0"	<<   "0,0"	<<  "0,0"		<< "0,0";
+	data << "0,0"	<< "0,0"	<< true		<<  "0,0"	<<   "0,0"	<<   "0,0"	<<  "0,0"		<< "0,0";
 	data << "0,0"	<< "1,0"	<< false	<<  "1,0"	<<  "-1,0"	<<   "0,0"	<<  "0,0"		<< "0,0";
 	data << "0,0"	<< "1,1"	<< false	<<  "1,1"	<< "-1,-1"	<<   "0,0"	<<  "0,0"		<< "0,0";
 	data << "1,1"	<< "0,0"	<< false	<<  "1,1"	<<   "1,1"	<<   "0,0"	<<  "2,2"		<< "1,1";
-	data << "1,1"	<< "1,1"	<< true	<<  "2,2"	<<   "0,0"	<<   "1,1"	<<  "2,2"		<< "1,1";
-	data << "1,-1"	<< "1,-1"	<< true	<< "2,-2"	<<   "0,0"	<<   "1,1"	<< "2,-2"		<< "1,1";
+	data << "1,1"	<< "1,1"	<< true		<<  "2,2"	<<   "0,0"	<<   "1,1"	<<  "2,2"		<< "1,1";
+	data << "1,-1"	<< "1,-1"	<< true		<< "2,-2"	<<   "0,0"	<<   "1,1"	<< "2,-2"		<< "1,1";
 	data << "1,-1"	<< "-1,1"	<< false	<<  "0,0"	<<   "2,-2"	<< "-1,-1"	<< "2,-2"		<< "1,1";
 
 	while (data.count() >= 8)
 	{
 		firstF		= Vec2f(data.takeFirst().toString());
-		secondF	= Vec2f(data.takeFirst().toString());
+		secondF		= Vec2f(data.takeFirst().toString());
 		vecF		= firstF;
 		expected	= data.takeFirst().toBool();
-		sumF	= Vec2f(data.takeFirst().toString());
+		sumF		= Vec2f(data.takeFirst().toString());
 		diffF		= Vec2f(data.takeFirst().toString());
 		mulF		= Vec2f(data.takeFirst().toString());
 		smF		= Vec2f(data.takeFirst().toString());
-		cwmF	= Vec2f(data.takeFirst().toString());
+		cwmF		= Vec2f(data.takeFirst().toString());
 
 		firstD.set((double)firstF[0], (double)firstF[1]);
 		vecD		= firstD;
@@ -431,126 +409,81 @@ void TestComputations::testVector2Operators()
 
 		result = (firstF==secondF);
 		QVERIFY2(result==expected, qPrintable(QString("%1 == %2 (result: %3; expected: %4)")
-						      .arg(firstF.toString()).arg(secondF.toString())
-						      .arg(result).arg(expected)));
+			.arg(firstF.toString(), secondF.toString()).arg(result).arg(expected)));
 		result = (firstD==secondD);
 		QVERIFY2(result==expected, qPrintable(QString("%1 == %2 (result: %3; expected: %4)")
-						      .arg(firstD.toString()).arg(secondD.toString())
-						      .arg(result).arg(expected)));
+			.arg(firstD.toString(), secondD.toString()).arg(result).arg(expected)));
 		result = (firstI==secondI);
 		QVERIFY2(result==expected, qPrintable(QString("%1 == %2 (result: %3; expected: %4)")
-						      .arg(firstI.toString()).arg(secondI.toString())
-						      .arg(result).arg(expected)));
+			.arg(firstI.toString(), secondI.toString()).arg(result).arg(expected)));
 
 		result = (firstF!=secondF);
 		QVERIFY2(result!=expected, qPrintable(QString("%1 != %2 (result: %3; expected: %4)")
-						      .arg(firstF.toString()).arg(secondF.toString())
-						      .arg(result).arg(expected)));
+			.arg(firstF.toString(), secondF.toString()).arg(result).arg(expected)));
 		result = (firstD!=secondD);
 		QVERIFY2(result!=expected, qPrintable(QString("%1 != %2 (result: %3; expected: %4)")
-						      .arg(firstD.toString()).arg(secondD.toString())
-						      .arg(result).arg(expected)));
+			.arg(firstD.toString(), secondD.toString()).arg(result).arg(expected)));
 		result = (firstI!=secondI);
 		QVERIFY2(result!=expected, qPrintable(QString("%1 != %2 (result: %3; expected: %4)")
-						      .arg(firstI.toString()).arg(secondI.toString())
-						      .arg(result).arg(expected)));
+			.arg(firstI.toString(), secondI.toString()).arg(result).arg(expected)));
 
 		Vec2f sumFR = firstF+secondF;
 		QVERIFY2(sumFR==sumF, qPrintable(QString("%1 + %2 = %3 (expected: %4)")
-						 .arg(firstF.toString())
-						 .arg(secondF.toString())
-						 .arg(sumFR.toString())
-						 .arg(sumF.toString())));
+			.arg(firstF.toString(), secondF.toString(), sumFR.toString(), sumF.toString())));
 		Vec2d sumDR = firstD+secondD;
 		QVERIFY2(sumDR==sumD, qPrintable(QString("%1 + %2 = %3 (expected: %4)")
-						 .arg(firstD.toString())
-						 .arg(secondD.toString())
-						 .arg(sumDR.toString())
-						 .arg(sumD.toString())));
+			.arg(firstD.toString(), secondD.toString(), sumDR.toString(), sumD.toString())));
 		Vec2i sumIR = firstI+secondI;
 		QVERIFY2(sumIR==sumI, qPrintable(QString("%1 + %2 = %3 (expected: %4)")
-						 .arg(firstI.toString())
-						 .arg(secondI.toString())
-						 .arg(sumIR.toString())
-						 .arg(sumI.toString())));
+			.arg(firstI.toString(), secondI.toString(), sumIR.toString(), sumI.toString())));
 
 		Vec2f diffFR = firstF-secondF;
 		QVERIFY2(diffFR==diffF, qPrintable(QString("%1 - %2 = %3 (expected: %4)")
-						 .arg(firstF.toString())
-						 .arg(secondF.toString())
-						 .arg(diffFR.toString())
-						 .arg(diffF.toString())));
+			.arg(firstF.toString(), secondF.toString(), diffFR.toString(), diffF.toString())));
 
 		Vec2d diffDR = firstD-secondD;
 		QVERIFY2(diffDR==diffD, qPrintable(QString("%1 - %2 = %3 (expected: %4)")
-						 .arg(firstD.toString())
-						 .arg(secondD.toString())
-						 .arg(diffDR.toString())
-						 .arg(diffD.toString())));
+			.arg(firstD.toString(), secondD.toString(), diffDR.toString(), diffD.toString())));
 
 		Vec2i diffIR = firstI-secondI;
 		QVERIFY2(diffIR==diffI, qPrintable(QString("%1 - %2 = %3 (expected: %4)")
-						 .arg(firstI.toString())
-						 .arg(secondI.toString())
-						 .arg(diffIR.toString())
-						 .arg(diffI.toString())));
+			.arg(firstI.toString(), secondI.toString(), diffIR.toString(), diffI.toString())));
 
 		Vec2f mulFR = firstF*secondF;
 		QVERIFY2(mulFR==mulF, qPrintable(QString("%1 * %2 = %3 (expected: %4)")
-						 .arg(firstF.toString())
-						 .arg(secondF.toString())
-						 .arg(mulFR.toString())
-						 .arg(mulF.toString())));
+			.arg(firstF.toString(), secondF.toString(), mulFR.toString(), mulF.toString())));
 
 		Vec2d mulDR = firstD*secondD;
 		QVERIFY2(mulDR==mulD, qPrintable(QString("%1 * %2 = %3 (expected: %4)")
-						 .arg(firstD.toString())
-						 .arg(secondD.toString())
-						 .arg(mulDR.toString())
-						 .arg(mulD.toString())));
+			.arg(firstD.toString(), secondD.toString(), mulDR.toString(), mulD.toString())));
 
 		Vec2i mulIR = firstI*secondI;
 		QVERIFY2(mulIR==mulI, qPrintable(QString("%1 * %2 = %3 (expected: %4)")
-						 .arg(firstI.toString())
-						 .arg(secondI.toString())
-						 .arg(mulIR.toString())
-						 .arg(mulI.toString())));
+			.arg(firstI.toString(), secondI.toString(), mulIR.toString(), mulI.toString())));
 
 		Vec2f smFR = firstF*2.f;
 		QVERIFY2(smFR==smF, qPrintable(QString("%1 * 2.f = %2 (expected: %3)")
-						 .arg(firstF.toString())
-						 .arg(smFR.toString())
-						 .arg(smF.toString())));
+			.arg(firstF.toString(), smFR.toString(), smF.toString())));
 
 		Vec2d smDR = firstD*2.;
 		QVERIFY2(smDR==smD, qPrintable(QString("%1 * 2.0 = %2 (expected: %3)")
-						 .arg(firstD.toString())
-						 .arg(smDR.toString())
-						 .arg(smD.toString())));
+			.arg(firstD.toString(), smDR.toString(), smD.toString())));
 
 		Vec2i smIR = firstI*2;
 		QVERIFY2(smIR==smI, qPrintable(QString("%1 * 2 = %2 (expected: %3)")
-						 .arg(firstI.toString())
-						 .arg(smIR.toString())
-						 .arg(smI.toString())));
+			.arg(firstI.toString(), smIR.toString(), smI.toString())));
 
 		vecF *= firstF;
 		QVERIFY2(vecF==cwmF, qPrintable(QString("%1 * %1 = %2 (expected: %3)")
-						 .arg(firstF.toString())
-						 .arg(vecF.toString())
-						 .arg(cwmF.toString())));
+			.arg(firstF.toString(), vecF.toString(), cwmF.toString())));
 
 		vecD *= firstD;
 		QVERIFY2(vecD==cwmD, qPrintable(QString("%1 * %1 = %2 (expected: %3)")
-						 .arg(firstD.toString())
-						 .arg(vecD.toString())
-						 .arg(cwmD.toString())));
+			.arg(firstD.toString(), vecD.toString(), cwmD.toString())));
 
 		vecI *= firstI;
 		QVERIFY2(vecI==cwmI, qPrintable(QString("%1 * %1 = %2 (expected: %3)")
-						 .arg(firstI.toString())
-						 .arg(vecI.toString())
-						 .arg(cwmI.toString())));
+			.arg(firstI.toString(), vecI.toString(), cwmI.toString())));
 	}
 }
 
@@ -562,27 +495,27 @@ void TestComputations::testVector3Operators()
 	bool expected, result;
 	QVariantList data;
 	//           Vec(1)               Vec(2)              Compare   Sum                Diff                   Scal. M.
-	data << "0,0,0"	<< "0,0,0"	<< true	<<  "0,0,0"	<<    "0,0,0"	<<   "0,0,0";
-	data << "0,0,0"	<< "1,0,0"	<< false	<<  "1,0,0"	<<   "-1,0,0"	<<   "0,0,0";
-	data << "0,0,0"	<< "1,1,0"	<< false	<<  "1,1,0"	<< " -1,-1,0"	<<   "0,0,0";
-	data << "0,0,0"	<< "1,1,1"	<< false	<<  "1,1,1"	<< "-1,-1,-1"	<<   "0,0,0";
-	data << "1,1,1"	<< "0,0,0"	<< false	<<  "1,1,1"	<<    "1,1,1"	<<   "2,2,2";
-	data << "1,1,1"	<< "1,1,1"	<< true	<<  "2,2,2"	<<    "0,0,0"	<<   "2,2,2";
-	data << "1,-1,0"	<< "1,-1,0"	<< true	<< "2,-2,0"	<<    "0,0,0"	<<  "2,-2,0";
+	data << "0,0,0"		<< "0,0,0"	<< true		<<  "0,0,0"	<<    "0,0,0"	<<   "0,0,0";
+	data << "0,0,0"		<< "1,0,0"	<< false	<<  "1,0,0"	<<   "-1,0,0"	<<   "0,0,0";
+	data << "0,0,0"		<< "1,1,0"	<< false	<<  "1,1,0"	<< " -1,-1,0"	<<   "0,0,0";
+	data << "0,0,0"		<< "1,1,1"	<< false	<<  "1,1,1"	<< "-1,-1,-1"	<<   "0,0,0";
+	data << "1,1,1"		<< "0,0,0"	<< false	<<  "1,1,1"	<<    "1,1,1"	<<   "2,2,2";
+	data << "1,1,1"		<< "1,1,1"	<< true		<<  "2,2,2"	<<    "0,0,0"	<<   "2,2,2";
+	data << "1,-1,0"	<< "1,-1,0"	<< true		<< "2,-2,0"	<<    "0,0,0"	<<  "2,-2,0";
 	data << "1,-1,0"	<< "-1,1,0"	<< false	<<  "0,0,0"	<<   "2,-2,0"	<<  "2,-2,0";
 
 	while (data.count() >= 7)
 	{
 		firstF		= Vec3f(data.takeFirst().toString());
-		secondF	= Vec3f(data.takeFirst().toString());
+		secondF		= Vec3f(data.takeFirst().toString());
 		expected	= data.takeFirst().toBool();
-		sumF	= Vec3f(data.takeFirst().toString());
+		sumF		= Vec3f(data.takeFirst().toString());
 		diffF		= Vec3f(data.takeFirst().toString());
 		smF		= Vec3f(data.takeFirst().toString());
 
-		firstD	= firstF.toVec3d();
-		secondD	= secondF.toVec3d();
-		sumD	= sumF.toVec3d();
+		firstD		= firstF.toVec3d();
+		secondD		= secondF.toVec3d();
+		sumD		= sumF.toVec3d();
 		diffD		= diffF.toVec3d();
 		smD		= smF.toVec3d();
 
@@ -594,87 +527,57 @@ void TestComputations::testVector3Operators()
 
 		result = (firstF==secondF);
 		QVERIFY2(result==expected, qPrintable(QString("%1 == %2 (result: %3; expected: %4)")
-						      .arg(firstF.toString()).arg(secondF.toString())
-						      .arg(result).arg(expected)));
+			.arg(firstF.toString(), secondF.toString()).arg(result).arg(expected)));
 		result = (firstD==secondD);
 		QVERIFY2(result==expected, qPrintable(QString("%1 == %2 (result: %3; expected: %4)")
-						      .arg(firstD.toString()).arg(secondD.toString())
-						      .arg(result).arg(expected)));
+			.arg(firstD.toString(), secondD.toString()).arg(result).arg(expected)));
 		result = (firstI==secondI);
 		QVERIFY2(result==expected, qPrintable(QString("%1 == %2 (result: %3; expected: %4)")
-						      .arg(firstI.toString()).arg(secondI.toString())
-						      .arg(result).arg(expected)));
+			.arg(firstI.toString(), secondI.toString()).arg(result).arg(expected)));
 
 		result = (firstF!=secondF);
 		QVERIFY2(result!=expected, qPrintable(QString("%1 != %2 (result: %3; expected: %4)")
-						      .arg(firstF.toString()).arg(secondF.toString())
-						      .arg(result).arg(expected)));
+			.arg(firstF.toString(), secondF.toString()).arg(result).arg(expected)));
 		result = (firstD!=secondD);
 		QVERIFY2(result!=expected, qPrintable(QString("%1 != %2 (result: %3; expected: %4)")
-						      .arg(firstD.toString()).arg(secondD.toString())
-						      .arg(result).arg(expected)));
+			.arg(firstD.toString(), secondD.toString()).arg(result).arg(expected)));
 		result = (firstI!=secondI);
 		QVERIFY2(result!=expected, qPrintable(QString("%1 != %2 (result: %3; expected: %4)")
-						      .arg(firstI.toString()).arg(secondI.toString())
-						      .arg(result).arg(expected)));
+			.arg(firstI.toString(), secondI.toString()).arg(result).arg(expected)));
 
 		Vec3f sumFR = firstF+secondF;
 		QVERIFY2(sumFR==sumF, qPrintable(QString("%1 + %2 = %3 (expected: %4)")
-						 .arg(firstF.toString())
-						 .arg(secondF.toString())
-						 .arg(sumFR.toString())
-						 .arg(sumF.toString())));
+			.arg(firstF.toString(), secondF.toString(), sumFR.toString(), sumF.toString())));
 		Vec3d sumDR = firstD+secondD;
 		QVERIFY2(sumDR==sumD, qPrintable(QString("%1 + %2 = %3 (expected: %4)")
-						 .arg(firstD.toString())
-						 .arg(secondD.toString())
-						 .arg(sumDR.toString())
-						 .arg(sumD.toString())));
+			.arg(firstD.toString(), secondD.toString(), sumDR.toString(), sumD.toString())));
 		Vec3i sumIR = firstI+secondI;
 		QVERIFY2(sumIR==sumI, qPrintable(QString("%1 + %2 = %3 (expected: %4)")
-						 .arg(firstI.toString())
-						 .arg(secondI.toString())
-						 .arg(sumIR.toString())
-						 .arg(sumI.toString())));
+			.arg(firstI.toString(), secondI.toString(), sumIR.toString(), sumI.toString())));
 
 		Vec3f diffFR = firstF-secondF;
 		QVERIFY2(diffFR==diffF, qPrintable(QString("%1 - %2 = %3 (expected: %4)")
-						 .arg(firstF.toString())
-						 .arg(secondF.toString())
-						 .arg(diffFR.toString())
-						 .arg(diffF.toString())));
+			.arg(firstF.toString(), secondF.toString(), diffFR.toString(), diffF.toString())));
 
 		Vec3d diffDR = firstD-secondD;
 		QVERIFY2(diffDR==diffD, qPrintable(QString("%1 - %2 = %3 (expected: %4)")
-						 .arg(firstD.toString())
-						 .arg(secondD.toString())
-						 .arg(diffDR.toString())
-						 .arg(diffD.toString())));
+			.arg(firstD.toString(), secondD.toString(), diffDR.toString(), diffD.toString())));
 
 		Vec3i diffIR = firstI-secondI;
 		QVERIFY2(diffIR==diffI, qPrintable(QString("%1 - %2 = %3 (expected: %4)")
-						 .arg(firstI.toString())
-						 .arg(secondI.toString())
-						 .arg(diffIR.toString())
-						 .arg(diffI.toString())));
+			.arg(firstI.toString(), secondI.toString(), diffIR.toString(), diffI.toString())));
 
 		Vec3f smFR = firstF*2.f;
 		QVERIFY2(smFR==smF, qPrintable(QString("%1 * 2.f = %2 (expected: %3)")
-						 .arg(firstF.toString())
-						 .arg(smFR.toString())
-						 .arg(smF.toString())));
+			.arg(firstF.toString(), smFR.toString(), smF.toString())));
 
 		Vec3d smDR = firstD*2.;
 		QVERIFY2(smDR==smD, qPrintable(QString("%1 * 2.0 = %2 (expected: %3)")
-						 .arg(firstD.toString())
-						 .arg(smDR.toString())
-						 .arg(smD.toString())));
+			.arg(firstD.toString(), smDR.toString(), smD.toString())));
 
 		Vec3i smIR = firstI*2;
 		QVERIFY2(smIR==smI, qPrintable(QString("%1 * 2 = %2 (expected: %3)")
-						 .arg(firstI.toString())
-						 .arg(smIR.toString())
-						 .arg(smI.toString())));
+			.arg(firstI.toString(), smIR.toString(), smI.toString())));
 	}
 }
 
@@ -696,11 +599,7 @@ void TestComputations::testIntMod()
 		int eR = data.takeFirst().toInt();
 		int r = StelUtils::imod(a, b);
 
-		QVERIFY2(r==eR, qPrintable(QString("%1 mod %2 = %3 (expected %4)")
-					   .arg(a)
-					   .arg(b)
-					   .arg(r)
-					   .arg(eR)));
+		QVERIFY2(r==eR, qPrintable(QString("%1 mod %2 = %3 (expected %4)").arg(a).arg(b).arg(r).arg(eR)));
 	}
 }
 
@@ -724,10 +623,7 @@ void TestComputations::testIntDiv()
 		int r = a/b;
 
 		QVERIFY2(r==eR, qPrintable(QString("Integer division %1 / %2 = %3 (expected %4)")
-					   .arg(a)
-					   .arg(b)
-					   .arg(r)
-					   .arg(eR)));
+				.arg(a).arg(b).arg(r).arg(eR)));
 	}
 }
 
@@ -752,10 +648,7 @@ void TestComputations::testIntFloorDiv()
 		int r = StelUtils::intFloorDiv(a, b);
 
 		QVERIFY2(r==eR, qPrintable(QString("Integer division %1 / %2 = %3 (expected %4)")
-					   .arg(a)
-					   .arg(b)
-					   .arg(r)
-					   .arg(eR)));
+				.arg(a).arg(b).arg(r).arg(eR)));
 	}
 }
 
@@ -778,10 +671,7 @@ void TestComputations::testFloatMod()
 		float r = StelUtils::fmodpos(a, b);
 
 		QVERIFY2(qAbs(r-eR)<=1e-5, qPrintable(QString("%1 mod %2 = %3 (expected %4)")
-					   .arg(QString::number(a, 'f', 2))
-					   .arg(QString::number(b, 'f', 2))
-					   .arg(QString::number(r, 'f', 2))
-					   .arg(QString::number(eR, 'f', 2))));
+			.arg(QString::number(a, 'f', 2), QString::number(b, 'f', 2), QString::number(r, 'f', 2), QString::number(eR, 'f', 2))));
 	}
 }
 
@@ -804,10 +694,7 @@ void TestComputations::testDoubleMod()
 		double r = StelUtils::fmodpos(a, b);
 
 		QVERIFY2(qAbs(r-eR)<=1e-5, qPrintable(QString("%1 mod %2 = %3 (expected %4)")
-					   .arg(QString::number(a, 'f', 2))
-					   .arg(QString::number(b, 'f', 2))
-					   .arg(QString::number(r, 'f', 2))
-					   .arg(QString::number(eR, 'f', 2))));
+			.arg(QString::number(a, 'f', 2), QString::number(b, 'f', 2), QString::number(r, 'f', 2), QString::number(eR, 'f', 2))));
 	}
 }
 
@@ -823,10 +710,7 @@ void TestComputations::testExp()
 		r = StelUtils::fastExp(v);
 		err = qAbs(e-r);
 		QVERIFY2(err<=1e-2, qPrintable(QString("value: %1 std. exp: %2 fast exp: %3 (error: %4)")
-					   .arg(QString::number(v, 'f', 5))
-					   .arg(QString::number(e, 'f', 5))
-					   .arg(QString::number(r, 'f', 5))
-					   .arg(QString::number(err, 'f', 5))));
+			.arg(QString::number(v, 'f', 5), QString::number(e, 'f', 5), QString::number(r, 'f', 5), QString::number(err, 'f', 5))));
 	}
 }
 
@@ -842,10 +726,7 @@ void TestComputations::testACos()
 		r = StelUtils::fastAcos(v);
 		err = qAbs(e-r);
 		QVERIFY2(err<=2e-2, qPrintable(QString("value: %1 std. acos: %2 fast acos: %3 (error: %4)")
-					   .arg(QString::number(v, 'f', 5))
-					   .arg(QString::number(e, 'f', 5))
-					   .arg(QString::number(r, 'f', 5))
-					   .arg(QString::number(err, 'f', 5))));
+			.arg(QString::number(v, 'f', 5), QString::number(e, 'f', 5), QString::number(r, 'f', 5), QString::number(err, 'f', 5))));
 	}
 }
 
@@ -864,10 +745,7 @@ void TestComputations::testSign()
 		int e = data.takeFirst().toInt();
 		int r = StelUtils::sign(a);
 
-		QVERIFY2(r==e, qPrintable(QString("number: %1 sign: %2 (expected: %3)")
-					   .arg(a)
-					   .arg(r)
-					   .arg(e)));
+		QVERIFY2(r==e, qPrintable(QString("number: %1 sign: %2 (expected: %3)").arg(a).arg(r).arg(e)));
 	}
 
 	data.clear();
@@ -884,9 +762,7 @@ void TestComputations::testSign()
 		int r = StelUtils::sign(a);
 
 		QVERIFY2(r==e, qPrintable(QString("number: %1 sign: %2 (expected: %3)")
-					   .arg(QString::number(a, 'f', 1))
-					   .arg(r)
-					   .arg(e)));
+			.arg(QString::number(a, 'f', 1)).arg(r).arg(e)));
 	}
 
 	data.clear();
@@ -903,9 +779,7 @@ void TestComputations::testSign()
 		int r = StelUtils::sign(a);
 
 		QVERIFY2(r==e, qPrintable(QString("number: %1 sign: %2 (expected: %3)")
-					   .arg(QString::number(a, 'f', 1))
-					   .arg(r)
-					   .arg(e)));
+			.arg(QString::number(a, 'f', 1)).arg(r).arg(e)));
 	}
 }
 
@@ -917,11 +791,11 @@ void TestComputations::testInterpolation()
 	QVERIFY2(abs(i3-.8761253) < 0.000001,
 		 qPrintable(QString("Interpol3 returned %1").arg(QString::number(i3, 'g', 7))));
 	const double i5=StelUtils::interpolate5(0.2777778,                             // Meeus 1998, Ex.3e
-					  StelUtils::dmsToRad(0, 54, 36.125),
-					  StelUtils::dmsToRad(0, 54, 24.606),
-					  StelUtils::dmsToRad(0, 54, 15.486),
-					  StelUtils::dmsToRad(0, 54, 08.694),
-					  StelUtils::dmsToRad(0, 54, 04.133));
+			StelUtils::dmsToRad(0, 54, 36.125),
+			StelUtils::dmsToRad(0, 54, 24.606),
+			StelUtils::dmsToRad(0, 54, 15.486),
+			StelUtils::dmsToRad(0, 54, 08.694),
+			StelUtils::dmsToRad(0, 54, 04.133));
 	double res5=StelUtils::dmsToRad(0, 54, 13.369);
 	QVERIFY2(abs(i5-res5)<0.000001,
 		 qPrintable(QString("Interpol5 returned %1, not %2").arg(QString::number(i5), 'g', 7).arg(QString::number(res5), 'g', 7)));
