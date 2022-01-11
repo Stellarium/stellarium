@@ -80,7 +80,6 @@ void TestGeomMath::testAABBox()
 		QVERIFY(aabox.getPlane(AABBox::Top)==mTop);
 		QVERIFY(aabox.getPlane(AABBox::Left)==mLeft);
 		QVERIFY(aabox.getPlane(AABBox::Right)==mRight);
-		QVERIFY(aabox.getPlane(AABBox::FACECOUNT)!=mRight);
 		QVERIFY(aabox.positiveVertex(max)==max);
 		QVERIFY(aabox.negativeVertex(max)==min);
 	}
