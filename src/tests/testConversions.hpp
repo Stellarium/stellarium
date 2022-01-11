@@ -58,12 +58,15 @@ private slots:
 	void testStrToVec2f();
 	void testVec2fToStr();
 	void testVec2dToStr();
+	void testVec2iToStr();
 	void testStrToVec3f();
 	void testVec3fToStr();
 	void testVec3dToStr();
+	void testVec3iToStr();
 	void testStrToVec4d();
 	void testVec4dToStr();
 	void testVec4fToStr();
+	void testVec4iToStr();
 	void testQDateTimeToJD();
 	void testJDToQDateTime();
 	void testHoursFromJD();

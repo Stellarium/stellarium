@@ -1208,6 +1208,28 @@ void TestConversions::testVec2dToStr()
 	}
 }
 
+void TestConversions::testVec2iToStr()
+{
+	QVariantList data;
+
+	data << "1,1" << 1 << 1;
+	data << "1,0" << 1 << 0;
+	data << "0,1" << 0 << 1;
+	data << "0,0" << 0 << 0;
+
+	while (data.count()>=3)
+	{
+		QString vec	= data.takeFirst().toString();
+		int v1		= data.takeFirst().toInt();
+		int v2		= data.takeFirst().toInt();
+		Vec2i srcVec	= Vec2i(v1, v2);
+		QString dstVec	= srcVec.toStr();
+
+		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
+			.arg(srcVec.toString(), dstVec, vec)));
+	}
+}
+
 void TestConversions::testStrToVec3f()
 {
 	QVariantList data;
@@ -1278,6 +1300,29 @@ void TestConversions::testVec3dToStr()
 		double v3	= data.takeFirst().toDouble();
 		Vec3d srcVec	= Vec3d(v1, v2, v3);
 		//QString dstVec	= StelUtils::vec3fToStr(srcVec);
+		QString dstVec	= srcVec.toStr();
+
+		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
+			.arg(srcVec.toString(), dstVec, vec)));
+	}
+}
+
+void TestConversions::testVec3iToStr()
+{
+	QVariantList data;
+
+	data << "1,1,1" << 1 << 1 << 1;
+	data << "1,0,1" << 1 << 0 << 1;
+	data << "0,1,0" << 0 << 1 << 0;
+	data << "0,0,0" << 0 << 0 << 0;
+
+	while (data.count()>=4)
+	{
+		QString vec	= data.takeFirst().toString();
+		int v1		= data.takeFirst().toInt();
+		int v2		= data.takeFirst().toInt();
+		int v3		= data.takeFirst().toInt();
+		Vec3i srcVec	= Vec3i(v1, v2, v3);
 		QString dstVec	= srcVec.toStr();
 
 		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
@@ -1357,6 +1402,30 @@ void TestConversions::testVec4fToStr()
 		float v3	= data.takeFirst().toFloat();
 		float v4	= data.takeFirst().toFloat();
 		Vec4f srcVec	= Vec4f(v1, v2, v3, v4);
+		QString dstVec	= srcVec.toStr();
+
+		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
+			.arg(srcVec.toString(), dstVec, vec)));
+	}
+}
+
+void TestConversions::testVec4iToStr()
+{
+	QVariantList data;
+
+	data << "1,1,1,1" << 1 << 1 << 1 << 1;
+	data << "1,0,1,0" << 1 << 0 << 1 << 0;
+	data << "0,1,0,1" << 0 << 1 << 0 << 1;
+	data << "0,0,0,0" << 0 << 0 << 0 << 0;
+
+	while (data.count()>=5)
+	{
+		QString vec	= data.takeFirst().toString();
+		int v1		= data.takeFirst().toInt();
+		int v2		= data.takeFirst().toInt();
+		int v3		= data.takeFirst().toInt();
+		int v4		= data.takeFirst().toInt();
+		Vec4i srcVec	= Vec4i(v1, v2, v3, v4);
 		QString dstVec	= srcVec.toStr();
 
 		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
