@@ -42,4 +42,7 @@ void TestStelSkyCultureMgr::testStelSkyCultureMgr()
 	QVERIFY(scMgr.getCurrentSkyCultureBoundariesIdx()==StelSkyCulture::IAU);
 	QVERIFY(scMgr.getCurrentSkyCultureClassificationIdx()==StelSkyCulture::TRADITIONAL);
 	QVERIFY(scMgr.getSkyCultureListEnglish().contains("western", Qt::CaseInsensitive));
+	QVERIFY(scMgr.getDirToNameMap().contains("western"));
+	QVERIFY(!scMgr.setDefaultSkyCultureID(""));
+	QVERIFY(scMgr.getSkyCultureListIDs().contains("western", Qt::CaseInsensitive));
 }
