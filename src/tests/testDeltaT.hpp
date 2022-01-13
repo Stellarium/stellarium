@@ -39,6 +39,7 @@ private slots:
 	void testDeltaTByStephensonMorrison1995WideDates();	
 	void testDeltaTByStephensonMorrison2004WideDates();	
 	void testDeltaTByStephensonMorrisonHohenkerk2016GenericDates();
+	void testDeltaTByStephensonMorrisonHohenkerk2016SpecialDates();
 	void testDeltaTByStephenson1997WideDates();	
 	void testDeltaTByMeeusSimons();	
 	void testDeltaTByKhalidSultanaZaidiWideDates();

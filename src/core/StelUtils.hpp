@@ -795,10 +795,15 @@ namespace StelUtils
 	double getDeltaTByKhalidSultanaZaidi(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
-	//! Implementation of a spline approximation for time period -720-2016.0 for DeltaT by Stephenson, Morrison and Hohenkerk (2016).
-	//! Source: Measurement of the Earth’s rotation: 720 BC to AD 2015
-	//! Proc. R. Soc. A 472: 20160404.
+	//! Implementation of a spline approximation for time period -720-2019.0 for DeltaT by Stephenson, Morrison and Hohenkerk (2016).
+	//! Source: Measurement of the Earth's rotation: 720 BC to AD 2015, published in 2016 in the Royal Society's
+	//! Proceedings A 472, and made freely available via Open Access, by Stephenson, F.R., Morrison, L.V. and
+	//! Hohenkerk, C.Y..
 	//! https://doi.org/10.1098/rspa.2016.0404
+	//! Addendum 2020 to "Measurement of the Earth's Rotation: 720 BC to AD 2015", published in 2021 February
+	//! in the Royal Society's Proceedings A 478, by Morrison, L. V., Stephenson, F.R., Hohenkerk, C.Y. and
+	//! M. Zawilski, M..
+	//! https://doi.org/10.1098/rspa.2020.0776
 	//! @param jDay the date and time expressed as a Julian day
 	//! @return Delta-T in seconds. For times outside the limits, return result from the fitting parabola.
 	double getDeltaTByStephensonMorrisonHohenkerk2016(const double jDay);
