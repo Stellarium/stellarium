@@ -168,20 +168,13 @@ float NomenclatureItem::getSelectPriority(const StelCore* core) const
 	// check visibility of feature
 	const float scale = getAngularSizeRatio(core);
 	const float planetScale = 2.f*static_cast<float>(planet->getAngularSize(core))/core->getProjection(StelCore::FrameJ2000)->getFov();
-	// TODO: describe here what scale means in terms of pixel or percentage of vertical fov?
 
-	// Require the planet to cover 1/10 of the screen to make it worth clicking on features
-	if ((scale>0.04f) && planetScale > 0.1f)
-	{
-	    priority -= 5.f - scale;
-
-	}
+	// Require the planet to cover 1/10 of the screen to make it worth clicking on features.
+	// scale 0.04 is equal to the rendering criterion. Allow 0.02 for clicking on smaller features.
+	if ((scale>0.02f) && planetScale > 0.1f)
+		priority -= 5.f + 4.f * scale;
 	else
-	{
-	    // Make sure only displayed features can be selected.
-	    priority+=1.e12f;
-	    // or work out some logic to select smaller features, but take scale into account! No more 6km satellite craters in a 1cm moon on screen!
-	}
+		priority+=1.e12f; // disallow selection
 
 	return priority;
 }
