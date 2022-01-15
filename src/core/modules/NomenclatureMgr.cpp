@@ -268,6 +268,13 @@ void NomenclatureMgr::draw(StelCore* core)
 {
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter painter(prj);
+
+	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
+	    drawPointer(core, painter);
+
+	if (NomenclatureItem::labelsFader.getInterstate()<=0.f)
+	    return;
+
 	painter.setFont(font);
 	const SphericalCap& viewportRegion = painter.getProjector()->getBoundingCap();
 
@@ -295,9 +302,6 @@ void NomenclatureMgr::draw(StelCore* core)
 				nItem->draw(core, &painter);
 		}
 	}
-
-	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
-		drawPointer(core, painter);
 }
 
 void NomenclatureMgr::drawPointer(StelCore* core, StelPainter& painter)

@@ -182,7 +182,7 @@ public:
 	NomenclatureItemType getNomenclatureType() const { return nType;}
 
 	static void setFlagLabels(bool b){ labelsFader = b; }
-	static bool getFlagLabels(void){ return labelsFader.getInterstate()>0.f;}
+	static bool getFlagLabels(void){ return labelsFader;}
 	void setFlagHideLocalNomenclature(bool b) { hideLocalNomenclature=b; }
 	bool getFlagHideLocalNomenclature() const { return hideLocalNomenclature; }
 	//QString getEnglishPlanetName(void) const {return planet->getEnglishName();}

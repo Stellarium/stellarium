@@ -354,7 +354,7 @@ float NomenclatureItem::getAngularSizeRatio(const StelCore *core) const
 
 void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 {
-	if (!getFlagLabels())
+	if (labelsFader.getInterstate()<=0.f)
 		return;
 
 	const Vec3d equPos = planet->getJ2000EquatorialPos(core);
