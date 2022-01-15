@@ -189,7 +189,7 @@ void SpecialSkyMarker::draw(StelCore *core) const
 
 					float shiftx = ppx*sPainter.getFontMetrics().width(s) / 2.;
 					float shifty = ppx*sPainter.getFontMetrics().height() / 2.;
-					sPainter.drawText(pos, s, 0, -shiftx, shifty);
+					sPainter.drawText(pos, s, 0, -shiftx, shifty, false);
 				}
 				else if (i % 5 == 0)
 				{
