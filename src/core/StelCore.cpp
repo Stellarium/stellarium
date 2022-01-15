@@ -2075,14 +2075,14 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByStephensonMorrison1984;
 			deltaTstart	= -391;
-			deltaTfinish	= 1600;
+			deltaTfinish	= 1600; // TODO: 1630..1980 are tabulated values
 			break;
 		case StephensonHoulden:
-			// Stephenson & Houlden (1986) algorithm for DeltaT. The limits are implicitly given by the tabulated values.
+			// Stephenson & Houlden (1986) algorithm for DeltaT.
 			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByStephensonHoulden;
-			deltaTstart	= -600;
-			deltaTfinish	= 1650;
+			deltaTstart	= -1500;
+			deltaTfinish	= 1600; // TODO: 1630..1980 are tabulated values from Stephenson & Morrison (1984)
 			break;
 		case Espenak:
 			// Espenak (1987, 1989) algorithm for DeltaT
@@ -2321,7 +2321,7 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 			description = q_("This formula was published by F. R. Stephenson and L. V. Morrison in the article <em>Long-term changes in the rotation of the earth - 700 B.C. to A.D. 1980</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1984RSPTA.313...47S'>1984</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case StephensonHoulden:
-			description = q_("This algorithm is used in the PC planetarium program Guide 7.").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
+			description = q_("This algorithm was published by F. R. Stephenson and M. A. Houlden in the book <em>Atlas of Historical Eclipse Maps</em> (%1). This algorithm is used in the PC planetarium program Guide 7.").arg("<a href='https://assets.cambridge.org/97805212/67236/frontmatter/9780521267236_frontmatter.pdf'>1986</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case Espenak: // limited range, but wide availability?
 			description = q_("This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar Eclipses: 1986-2035</em> (1989).").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));

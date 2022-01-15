@@ -604,61 +604,33 @@ void TestDeltaT::testDeltaTByStephensonMorrison1995WideDates()
 	}
 }
 
-void TestDeltaT::testDeltaTByStephenson1997WideDates()
+void TestDeltaT::testDeltaTByStephenson1997()
 {
-	// test data taken from http://www.staff.science.uu.nl/~gent0113/deltat/deltat_old.htm
+	// test data taken from http://ebooks.cambridge.org/ebook.jsf?bid=CBO9780511525186
 
 	QVariantList data;
-
-	/*
-	// FIXME: WTF?
-	data << -500 << 16800;
-	data << -450 << 16000;
-	data << -400 << 15300;
-	data << -350 << 14600;
-	data << -300 << 14000;
-	data << -250 << 13400;
-	data << -200 << 12800;
-	data << -150 << 12200;
-	data << -100 << 11600;
-	data <<  -50 << 11100;
-	*/
+	//data << -500 << 16800;
+	//data << -400 << 15300;
+	//data << -300 << 14000;
+	//data << -200 << 12800;
+	//data << -100 << 11600;
 	data <<    0 << 10600;
-	data <<   50 << 10100;
 	data <<  100 <<  9600;
-	data <<  150 <<  9100;
 	data <<  200 <<  8600;
-	data <<  250 <<  8200;
 	data <<  300 <<  7700;
-	data <<  350 <<  7200;
 	data <<  400 <<  6700;
-	data <<  450 <<  6200;
 	data <<  500 <<  5700;
-	data <<  550 <<  5200;
 	data <<  600 <<  4700;
-	data <<  650 <<  4300;
 	data <<  700 <<  3800;
-	data <<  750 <<  3400;
-	/*
-	// FIXME: WTF?
-	data <<  800 <<  3000;
-	data <<  850 <<  2600;
-	data <<  900 <<  2200;
-	data <<  950 <<  1900;
-	data << 1000 <<  1600;
-	data << 1050 <<  1350;
-	data << 1100 <<  1100;
-	data << 1150 <<   900;
-	data << 1200 <<   750;
-	data << 1250 <<   600;
-	data << 1300 <<   460;
-	data << 1350 <<   360;
-	data << 1400 <<   280; // 300
-	data << 1450 <<   200; // 230
-	data << 1500 <<   150; // 180
-	data << 1550 <<   110; // 140
-	data << 1600 <<    80;  // 110
-	*/
+	//data <<  800 <<  3000;
+	//data <<  900 <<  2200;
+	//data << 1000 <<  1600;
+	//data << 1100 <<  1100;
+	//data << 1200 <<   750;
+	//data << 1300 <<   470;
+	//data << 1400 <<   300;
+	//data << 1500 <<   180;
+	//data << 1600 <<   110;
 
 	while(data.count() >= 2)
 	{
@@ -1309,6 +1281,138 @@ void TestDeltaT::testDeltaTByChaprontTouze()
 		double acceptableError = 1.0; // TODO: Increase accuracy to 0.1 seconds
 		StelUtils::getJDFromDate(&JD, year, 1, 1, 0, 0, 0);
 		double result = StelUtils::getDeltaTByChaprontTouze(JD);
+		double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
+		StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
+		QVERIFY2(actualError <= acceptableError, QString("date=%2 year=%3 result=%4 expected=%5 error=%6 acceptable=%7")
+							.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
+							.arg(year)
+							.arg(result)
+							.arg(expectedResult)
+							.arg(actualError)
+							.arg(acceptableError)
+							.toUtf8());
+	}
+}
+
+void TestDeltaT::testDeltaTByIAUWideDates()
+{
+	// Source of test data: https://web.archive.org/web/20150226203358/http://user.online.be/felixverbelen/dt.htm
+	QVariantList data;
+	data << -2000 << 42757.0;
+	data << -1900 << 40524.0;
+	data << -1800 << 38350.0;
+	data << -1700 << 36236.0;
+	data << -1600 << 34181.0;
+	data << -1500 << 32187.0;
+	data << -1400 << 30253.0;
+	data << -1300 << 28378.0;
+	data << -1200 << 26564.0;
+	data << -1100 << 24809.0;
+	data << -1000 << 23115.0;
+	data <<  -900 << 21480.0;
+	data <<  -800 << 19905.0;
+	data <<  -700 << 18390.0;
+	data <<  -600 << 16935.0;
+	data <<  -500 << 15539.0;
+	data <<  -400 << 14204.0;
+	data <<  -300 << 12929.0;
+	data <<  -200 << 11713.0;
+	data <<  -100 << 10557.0;
+	data <<     0 <<  9462.0;
+	data <<   100 <<  8426.0;
+	data <<   200 <<  7450.0;
+	data <<   300 <<  6534.0;
+	data <<   400 <<  5678.0;
+	data <<   500 <<  4882.0;
+	data <<   600 <<  4145.0;
+	data <<   700 <<  3469.0;
+	data <<   800 <<  2852.0;
+	data <<   900 <<  2296.0;
+	data <<  1000 <<  1799.0;
+	data <<  1100 <<  1362.0;
+	data <<  1200 <<   985.0;
+	data <<  1300 <<   668.0;
+	data <<  1400 <<   411.0;
+	data <<  1500 <<   214.0;
+	data <<  1600 <<    76.0;
+	data <<  1700 <<    -1.0;
+	//data <<  1800 <<   -19.0;
+	//data <<  1900 <<    24.0;
+	data <<  2000 <<   126.0;
+
+	while(data.count() >= 2)
+	{
+		int year = data.takeFirst().toInt();
+		int yout, mout, dout;
+		double JD;
+		double expectedResult = data.takeFirst().toDouble();
+		double acceptableError = 1.0; // TODO: Increase accuracy to 0.1 seconds
+		StelUtils::getJDFromDate(&JD, year, 1, 1, 0, 0, 0);
+		double result = StelUtils::getDeltaTByIAU(JD);
+		double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
+		StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
+		QVERIFY2(actualError <= acceptableError, QString("date=%2 year=%3 result=%4 expected=%5 error=%6 acceptable=%7")
+							.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
+							.arg(year)
+							.arg(result)
+							.arg(expectedResult)
+							.arg(actualError)
+							.arg(acceptableError)
+							.toUtf8());
+	}
+}
+
+void TestDeltaT::testDeltaTByStephensonHoulden()
+{
+	// Source of test data: https://web.archive.org/web/20150226203358/http://user.online.be/felixverbelen/dt.htm
+	QVariantList data;
+	data << -2000 << 54181.0;
+	data << -1900 << 51081.0;
+	data << -1800 << 48073.0;
+	data << -1700 << 45159.0;
+	data << -1600 << 42338.0;
+	data << -1500 << 39610.0; // begin of valid range
+	data << -1400 << 36975.0;
+	data << -1300 << 34433.0;
+	data << -1200 << 31984.0;
+	data << -1100 << 29627.0;
+	data << -1000 << 27364.0;
+	data <<  -900 << 25194.0;
+	data <<  -800 << 23117.0;
+	data <<  -700 << 21133.0;
+	data <<  -600 << 19242.0;
+	data <<  -500 << 17444.0;
+	data <<  -400 << 15738.0;
+	data <<  -300 << 14126.0;
+	data <<  -200 << 12607.0;
+	data <<  -100 << 11181.0;
+	data <<     0 <<  9848.0;
+	data <<   100 <<  8608.0;
+	data <<   200 <<  7461.0;
+	data <<   300 <<  6406.0;
+	data <<   400 <<  5445.0;
+	data <<   500 <<  4577.0;
+	data <<   600 <<  3802.0;
+	data <<   700 <<  3120.0;
+	data <<   800 <<  2531.0;
+	data <<   900 <<  2035.0;
+	data <<  1000 <<  1625.0;
+	data <<  1100 <<  1265.0;
+	data <<  1200 <<   950.0;
+	data <<  1300 <<   680.0;
+	data <<  1400 <<   455.0;
+	data <<  1500 <<   275.0;
+	data <<  1600 <<   140.0;
+
+	while(data.count() >= 2)
+	{
+		int year = data.takeFirst().toInt();
+		int yout, mout, dout;
+		double JD;
+		double expectedResult = data.takeFirst().toDouble();
+		double acceptableError = 1.0; // 1 sec
+		StelUtils::getJDFromDate(&JD, year, 1, 1, 0, 0, 0);
+		double result = StelUtils::getDeltaTByStephensonHoulden(JD);
 		double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
 		StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
 		QVERIFY2(actualError <= acceptableError, QString("date=%2 year=%3 result=%4 expected=%5 error=%6 acceptable=%7")

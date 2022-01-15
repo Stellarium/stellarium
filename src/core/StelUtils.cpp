@@ -1205,7 +1205,7 @@ QString hoursToHmsStr(const float hours, const bool lowprecision)
 //  1820.0=1820-jan-0.5=2385800.0
 //  1810.0=1810-jan-0.5=2382148.0
 //  1800.0=1800-jan-0.5=2378496.0
-//  1735.0=1735-jan-0.5=2354755.0
+//  1735.0=1735-jan-0.5=2354756.0
 //  1625.0=1625-jan-0.5=2314579.0
 //
 // Up to V0.15.1, if the requested year was outside validity range, we returned zero or some useless value.
@@ -1381,7 +1381,7 @@ double getDeltaTByStephenson1978(const double jDay)
 // Implementation of algorithm by Stephenson (1997) for DeltaT computation
 double getDeltaTByStephenson1997(const double jDay)
 {
-	double u=(jDay-2354755.0)/36525.0; // (1735-jan-0.5)
+	double u=(jDay-2354756.0)/36525.0; // (1735-jan-0.5)
 	return -20.0 + 35.0*u*u;
 }
 
@@ -1432,9 +1432,27 @@ double getDeltaTByStephensonMorrison1995(const double jDay)
 // Implementation of algorithm by Stephenson & Houlden (1986) for DeltaT computation
 double getDeltaTByStephensonHoulden(const double jDay)
 {
+	int year, month, day;
+	double u, deltaT = 0.;
+	getDateFromJulianDay(jDay, &year, &month, &day);
+
+	if (year <= 948)
+	{
+		//u = (year-948)/100;
+		u = (yearFraction(year, month, day)-948)/100;
+		deltaT = (46.5*u -405.0)*u +1830.0;
+	}
+	if (948 < year && year <= 1600)
+	{
+		//u = (year-1850)/100;
+		u = (yearFraction(year, month, day)-1850)/100;
+		deltaT = 22.5*u*u;
+	}
+
+	return deltaT;
 	// This formula found in the cited book, page (ii), formula (1).
-	double T=(jDay-2415020.0)/36525; // centuries from J1900.0
-	return (36.79*T+35.06)*T+4.87;
+	//double T=(jDay-2415020.0)/36525; // centuries from J1900.0
+	//return (36.79*T+35.06)*T+4.87;
 }
 
 // Implementation of algorithm by Espenak (1987, 1989) for DeltaT computation
