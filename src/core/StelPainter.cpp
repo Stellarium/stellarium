@@ -553,11 +553,12 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 	if (d>qMax(prj->viewportXywh[3], prj->viewportXywh[2])*2 || ws.isEmpty())
 		return;
 
+	float ppx = static_cast<float>(prj->getDevicePixelsPerPixel());
 	float cWidth = static_cast<float>(getFontMetrics().boundingRect(ws).width())/ws.length();
 	float stdWidth = static_cast<float>(getFontMetrics().boundingRect("a").width());
 	theta = std::atan2(dy - 1, dx);
 	theta_o = M_PIf + std::atan2(dx, dy - 1);	
-	psi = std::atan2(cWidth, d + 1) * M_180_PIf;
+	psi = std::atan2(ppx*cWidth, d + 1) * M_180_PIf;
 	if (psi>5)
 		psi = 5;
 
