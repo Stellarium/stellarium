@@ -1712,10 +1712,16 @@ void StelPainter::drawCircle(float x, float y, float r)
 		dy = dx*sp+dy*cp;
 		dx = r;
 	}
+
+	//circles drawing may require blending, but we reset GL state afterwards if necessary
+	bool oldBlending = glState.blend;
+	GLenum oldSrc = glState.blendSrc, oldDst = glState.blendDst;
+	setBlending(true);
 	enableClientStates(true);
 	setVertexPointer(3, GL_FLOAT, circleVertexArray.data());
 	drawFromArray(LineLoop, 180, 0, false);
 	enableClientStates(false);
+	setBlending(oldBlending, oldSrc, oldDst);
 }
 
 void StelPainter::drawSprite2dMode(float x, float y, float radius)
