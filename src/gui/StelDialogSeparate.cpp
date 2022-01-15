@@ -84,16 +84,6 @@ void StelDialogSeparate::setVisible(bool v)
 			if (gui)
 				dialog->setStyleSheet(gui->getStelStyle().qtStyleSheet);
 			dialog->show();
-			// If the main window has been resized, it is possible the dialog
-			// will be off screen.  Check for this and move it to a visible
-			// position if necessary
-			QPointF newPos = dialog->pos();
-			if (newPos.x()>=screenSize.width())
-				newPos.setX(screenSize.width() - dialog->size().width());
-			if (newPos.y()>=screenSize.height())
-				newPos.setY(screenSize.height() - dialog->size().height());
-			if (newPos != dialog->pos())
-				dialog->move(newPos.toPoint());
 		}
 		else
 		{
