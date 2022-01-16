@@ -154,10 +154,9 @@ public:
 	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
 	virtual Vec3f getInfoColor(void) const Q_DECL_OVERRIDE;
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const Q_DECL_OVERRIDE;
-	// Get the visual magnitude of a nomenclature item. Dummy method, returns 99.
-	//virtual float getVMagnitude(const StelCore* core) const Q_DECL_OVERRIDE;
-	//! Get the angular size of nomenclature item.
-	//! TODO: Decide whether this is full size or semidiameter, like for the planets!
+	//! Return the angular radius of a circle containing the feature as seen from the observer
+	//! with the circle center assumed to be at getJ2000EquatorialPos().
+	//! @return radius in degree. This value is half of the apparent angular size of the object, and is independent of the current FOV.
 	virtual double getAngularSize(const StelCore* core) const Q_DECL_OVERRIDE;
 	//! Get the localized name of nomenclature item.
 	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
@@ -208,7 +207,7 @@ private:
 	static bool hideLocalNomenclature;
 
 	// ratio of angular size of feature to the FOV
-	float getAngularSizeRatio(const StelCore *core) const;
+	float getAngularDiameterRatio(const StelCore *core) const;
 
 	static QString getNomenclatureTypeLatinString(NomenclatureItemType nType);
 	static QString getNomenclatureTypeString(NomenclatureItemType nType);

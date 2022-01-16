@@ -166,7 +166,7 @@ float NomenclatureItem::getSelectPriority(const StelCore* core) const
 	// so that clicking on the planet in halo does not select any feature point.
 	float priority=planet->getSelectPriority(core)+5.f;
 	// check visibility of feature
-	const float scale = getAngularSizeRatio(core);
+	const float scale = getAngularDiameterRatio(core);
 	const float planetScale = 2.f*static_cast<float>(planet->getAngularSize(core))/core->getProjection(StelCore::FrameJ2000)->getFov();
 
 	// Require the planet to cover 1/10 of the screen to make it worth clicking on features.
@@ -277,7 +277,7 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 		// DEBUG output. This should help defining valid criteria for selection priority.
 		oss << QString("Planet angular size (semidiameter!): %1''<br/>").arg(QString::number(planet->getAngularSize(core)*3600.));
 		oss << QString("Angular size: %1''<br/>").arg(QString::number(getAngularSize(core)*3600.));
-		oss << QString("Angular size ratio: %1<br/>").arg(QString::number(static_cast<double>(getAngularSizeRatio(core)), 'f', 5));
+		oss << QString("Angular size ratio: %1<br/>").arg(QString::number(static_cast<double>(getAngularDiameterRatio(core)), 'f', 5));
 	}
 
 	postProcessInfoString(str, flags);
@@ -341,15 +341,15 @@ Vec3d NomenclatureItem::getJ2000EquatorialPos(const StelCore* core) const
 	return XYZ;
 }
 
-// TODO: Decide whether this is full size or semidiameter, like for the planets!
+// Return apparent semidiameter
 double NomenclatureItem::getAngularSize(const StelCore* core) const
 {
-	return std::atan2(size*planet->getSphereScale()/AU, getJ2000EquatorialPos(core).length()) * M_180_PI;
+	return std::atan2(0.5*size*planet->getSphereScale()/AU, getJ2000EquatorialPos(core).length()) * M_180_PI;
 }
 
-float NomenclatureItem::getAngularSizeRatio(const StelCore *core) const
+float NomenclatureItem::getAngularDiameterRatio(const StelCore *core) const
 {
-    return static_cast<float>(getAngularSize(core))/core->getProjection(StelCore::FrameJ2000)->getFov();
+    return static_cast<float>(2.*getAngularSize(core))/core->getProjection(StelCore::FrameJ2000)->getFov();
 }
 
 void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
@@ -372,7 +372,7 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 
 	// check visibility of feature
 	Vec3d srcPos;
-	const float scale = getAngularSizeRatio(core);
+	const float scale = getAngularDiameterRatio(core);
 	NomenclatureItem::NomenclatureItemType niType = getNomenclatureType();
 	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (equPos.lengthSquared() >= XYZ.lengthSquared())
 	    && (scale>0.04f && (scale<0.5f || niType>=NomenclatureItem::niSpecialPointPole )))
