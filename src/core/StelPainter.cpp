@@ -1722,7 +1722,6 @@ void StelPainter::drawCircle(float x, float y, float r)
 		dy = dx*sp+dy*cp;
 		dx = r;
 	}
-
 	enableClientStates(true);
 	setVertexPointer(3, GL_FLOAT, circleVertexArray.data());
 	drawFromArray(LineLoop, 180, 0, false);
