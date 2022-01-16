@@ -240,7 +240,6 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 
 	if (flags&Extra)
 	{
-		// For 0.22.0 we must clarify used coordinate system by planet and adapt the coordinates for the special points.
 		const QString cType = isPlanetocentric() ? q_("Planetocentric coordinates") : q_("Planetographic coordinates");
 		QString sLong = StelUtils::decDegToLongitudeStr(longitude, isEastPositive(), is180(), !withDecimalDegree),
 			sLat  = StelUtils::decDegToLatitudeStr(latitude, !withDecimalDegree);
@@ -275,9 +274,9 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 			oss << QString("%1: %2°<br/>").arg(q_("Solar altitude"), QString::number(getSolarAltitude(core), 'f', 1));
 
 		// DEBUG output. This should help defining valid criteria for selection priority.
-		oss << QString("Planet angular size (semidiameter!): %1''<br/>").arg(QString::number(planet->getAngularSize(core)*3600.));
-		oss << QString("Angular size: %1''<br/>").arg(QString::number(getAngularSize(core)*3600.));
-		oss << QString("Angular size ratio: %1<br/>").arg(QString::number(static_cast<double>(getAngularDiameterRatio(core)), 'f', 5));
+		// oss << QString("Planet angular size (semidiameter!): %1''<br/>").arg(QString::number(planet->getAngularSize(core)*3600.));
+		// oss << QString("Angular size: %1''<br/>").arg(QString::number(getAngularSize(core)*3600.));
+		// oss << QString("Angular size ratio: %1<br/>").arg(QString::number(static_cast<double>(getAngularDiameterRatio(core)), 'f', 5));
 	}
 
 	postProcessInfoString(str, flags);
