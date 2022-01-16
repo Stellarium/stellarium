@@ -424,7 +424,8 @@ QString Pulsar::getPulsarTypeInfoString(QString pcode) const
 	return out.join(",<br />");
 }
 
-double Pulsar::getAngularSize(const StelCore*) const
+// TODO: Why not zero like for stars?
+double Pulsar::getAngularRadius(const StelCore*) const
 {
 	return 0.00001;
 }
@@ -451,7 +452,7 @@ void Pulsar::draw(StelCore* core, StelPainter *painter)
 	if (mag <= mlimit && visible)
 	{		
 		Pulsar::markerTexture->bind();
-		float size = getAngularSize(Q_NULLPTR)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
+		float size = static_cast<float>(getAngularRadius(Q_NULLPTR))*M_PI_180f*painter->getProjector()->getPixelPerRadAtCenter();
 		float shift = 5.f + size/1.6f;		
 
 		if (glitch>0 && glitchFlag)

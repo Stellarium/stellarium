@@ -557,7 +557,7 @@ bool Exoplanet::isVMagnitudeDefined() const
 	return Vmag<98.;
 }
 
-double Exoplanet::getAngularSize(const StelCore*) const
+double Exoplanet::getAngularRadius(const StelCore*) const
 {
 	return 0.0001;
 }
@@ -611,7 +611,7 @@ void Exoplanet::draw(StelCore* core, StelPainter *painter)
 	{		
 		Exoplanet::markerTexture->bind();
 		Vec3f color = (hasHabitableExoplanets ? habitableExoplanetMarkerColor : exoplanetMarkerColor);
-		float size = static_cast<float>(getAngularSize(Q_NULLPTR))*M_PIf/180.f*painter->getProjector()->getPixelPerRadAtCenter();
+		float size = static_cast<float>(getAngularRadius(Q_NULLPTR))*M_PIf/180.f*painter->getProjector()->getPixelPerRadAtCenter();
 		float shift = 5.f + size/1.6f;
 
 		painter->setBlending(true, GL_ONE, GL_ONE);

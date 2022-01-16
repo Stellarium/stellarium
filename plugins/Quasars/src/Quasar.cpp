@@ -182,7 +182,8 @@ float Quasar::getVMagnitude(const StelCore* core) const
 	return VMagnitude;
 }
 
-double Quasar::getAngularSize(const StelCore*) const
+// TODO: Why not Zero like for stars? Or provide real values.
+double Quasar::getAngularRadius(const StelCore*) const
 {
 	return 0.00001;
 }
@@ -229,7 +230,7 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 			painter.setColor(markerColor, 1);
 
 			Quasar::markerTexture->bind();
-			size = getAngularSize(Q_NULLPTR)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
+			size = getAngularRadius(Q_NULLPTR)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
 			shift = 5.f + size/1.6f;
 
 			painter.drawSprite2dMode(getJ2000EquatorialPos(core), distributionMode ? 4.f : 5.f);
@@ -248,7 +249,7 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 			sd->drawPointSource(&painter, vf, rcMag, sd->indexToColor(BvToColorIndex(bV)), true, qMin(1.0f, 1.0f-0.9f*altAz[2]));
 			sd->postDrawPointSource(&painter);
 			painter.setColor(color[0], color[1], color[2], 1);
-			size = getAngularSize(Q_NULLPTR)*M_PI_180f*painter.getProjector()->getPixelPerRadAtCenter();
+			size = getAngularRadius(Q_NULLPTR)*M_PI_180f*painter.getProjector()->getPixelPerRadAtCenter();
 			shift = 6.f + size/1.8f;
 		}
 

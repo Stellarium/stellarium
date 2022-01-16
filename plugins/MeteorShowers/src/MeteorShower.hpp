@@ -125,7 +125,8 @@ public:
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const Q_DECL_OVERRIDE { return m_position; }
 	virtual float getSelectPriority(const StelCore*) const Q_DECL_OVERRIDE { return -4.0; }
 	virtual Vec3f getInfoColor(void) const Q_DECL_OVERRIDE;
-	virtual double getAngularSize(const StelCore*) const Q_DECL_OVERRIDE { return 0.001; }
+	// TODO Describe why not zero size?
+	virtual double getAngularRadius(const StelCore*) const Q_DECL_OVERRIDE { return 0.001; }
 
 private:
 	MeteorShowersMgr* m_mgr;           //! MeteorShowersMgr instance

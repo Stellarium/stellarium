@@ -334,7 +334,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 
 	if (flags&Size && RCS>0.)
 	{
-		const double angularSize = getAngularSize(core)*M_PI_180;
+		const double angularSize = getAngularRadius(core)*M_PI_180;
 		QString sizeStr = "";
 		if (withDecimalDegree)
 			sizeStr = StelUtils::radToDecDegStr(angularSize, 5, false, true);
@@ -755,7 +755,7 @@ QString Satellite::getOperationalStatus() const
 	return map.value(status,              qc_("unknown", "operational status"));
 }
 
-double Satellite::getAngularSize(const StelCore*) const
+double Satellite::getAngularRadius(const StelCore*) const
 {
 	if (RCS>0.)
 	{
@@ -951,10 +951,10 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 		{
 			Vec3f color(1.f,1.f,1.f);
 			// Special case: crossing of the satellite of the Moon or the Sun
-			if (XYZ.angle(moon->getJ2000EquatorialPos(core))*M_180_PI <= moon->getSpheroidAngularSize(core) || XYZ.angle(sun->getJ2000EquatorialPos(core))*M_180_PI <= sun->getSpheroidAngularSize(core))
+			if (XYZ.angle(moon->getJ2000EquatorialPos(core))*M_180_PI <= moon->getSpheroidAngularRadius(core) || XYZ.angle(sun->getJ2000EquatorialPos(core))*M_180_PI <= sun->getSpheroidAngularRadius(core))
 			{
 				painter.setColor(transitSatelliteColor, 1.f);
-				int screenSizeSat = static_cast<int>((getAngularSize(core)*M_PI_180)*painter.getProjector()->getPixelPerRadAtCenter());
+				int screenSizeSat = static_cast<int>((getAngularRadius(core)*M_PI_180)*static_cast<double>(painter.getProjector()->getPixelPerRadAtCenter()));
 				if (screenSizeSat>0)
 				{
 					painter.setBlending(true, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
@@ -1008,7 +1008,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 		{
 			Vec3f drawColor = (visibility == gSatWrapper::VISIBLE) ? hintColor : invisibleSatelliteColor; // Use hintColor for visible satellites only
 			painter.setColor(drawColor*hintBrightness, hintBrightness);
-			if (XYZ.angle(moon->getJ2000EquatorialPos(core))*M_180_PI <= moon->getSpheroidAngularSize(core) || XYZ.angle(sun->getJ2000EquatorialPos(core))*M_180_PI <= sun->getSpheroidAngularSize(core))
+			if (XYZ.angle(moon->getJ2000EquatorialPos(core))*M_180_PI <= moon->getSpheroidAngularRadius(core) || XYZ.angle(sun->getJ2000EquatorialPos(core))*M_180_PI <= sun->getSpheroidAngularRadius(core))
 				painter.setColor(transitSatelliteColor, 1.f);
 
 			if (showLabels)
