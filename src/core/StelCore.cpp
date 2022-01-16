@@ -2075,14 +2075,14 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByStephensonMorrison1984;
 			deltaTstart	= -391;
-			deltaTfinish	= 1600;
+			deltaTfinish	= 1600; // TODO: 1630..1980 are tabulated values
 			break;
 		case StephensonHoulden:
-			// Stephenson & Houlden (1986) algorithm for DeltaT. The limits are implicitly given by the tabulated values.
+			// Stephenson & Houlden (1986) algorithm for DeltaT.
 			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByStephensonHoulden;
-			deltaTstart	= -600;
-			deltaTfinish	= 1650;
+			deltaTstart	= -1500;
+			deltaTfinish	= 1600; // TODO: 1630..1980 are tabulated values from Stephenson & Morrison (1984)
 			break;
 		case Espenak:
 			// Espenak (1987, 1989) algorithm for DeltaT
@@ -2226,7 +2226,7 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 			deltaTnDot = -25.82; // n.dot = -25.82 "/cy/cy
 			deltaTfunc=StelUtils::getDeltaTByStephensonMorrisonHohenkerk2016;
 			deltaTstart	= -720;
-			deltaTfinish	= 2015;
+			deltaTfinish	= 2019;
 			break;
 		case Henriksson2017:
 			// Henriksson solution (2017) for Schoch formula for DeltaT (1931)
@@ -2321,7 +2321,7 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 			description = q_("This formula was published by F. R. Stephenson and L. V. Morrison in the article <em>Long-term changes in the rotation of the earth - 700 B.C. to A.D. 1980</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1984RSPTA.313...47S'>1984</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case StephensonHoulden:
-			description = q_("This algorithm is used in the PC planetarium program Guide 7.").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
+			description = q_("This algorithm was published by F. R. Stephenson and M. A. Houlden in the book <em>Atlas of Historical Eclipse Maps</em> (%1). This algorithm is used in the PC planetarium program Guide 7.").arg("<a href='https://assets.cambridge.org/97805212/67236/frontmatter/9780521267236_frontmatter.pdf'>1986</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case Espenak: // limited range, but wide availability?
 			description = q_("This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar Eclipses: 1986-2035</em> (1989).").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
@@ -2378,7 +2378,7 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 			description = q_("This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, Mariam Sultana and Faheem Zaidi was published in <em>Delta T: Polynomial Approximation of Time Period 1620-2013</em> (%1).").arg("<a href='https://doi.org/10.1155/2014/480964'>2014</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case StephensonMorrisonHohenkerk2016: // PRIMARY SOURCE, SEEMS VERY IMPORTANT
-			description = q_("This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016) was published in <em>Measurement of the Earth’s rotation: 720 BC to AD 2015</em> (%1). Outside of the named range (modelled with a spline fit) it provides values from an approximate parabola.").arg("<a href='https://doi.org/10.1098/rspa.2016.0404'>2016</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
+			description = q_("This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016) was published in <em>Measurement of the Earth’s rotation: 720 BC to AD 2015</em> (%1) and updated in <em>Addendum 2020 to 'Measurement of the Earth's Rotation: 720 BC to AD 2015'</em> (Morrison, L. V., Stephenson, F.R., Hohenkerk, C.Y. and Zawilski, M.; %2). Outside of the named range (modelled with a spline fit) it provides values from an approximate parabola.").arg("<a href='https://doi.org/10.1098/rspa.2016.0404'>2016</a>", "<a href='https://doi.org/10.1098/rspa.2020.0776'>2021</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case Henriksson2017:
 			description = q_("This solution by G. Henriksson was published in the article <em>The Acceleration of the Moon and the Universe - the Mass of the Graviton</em> (%1) and based on C. Schoch's formula (1931).").arg("<a href='https://doi.org/10.22606/adap.2017.23004'>2017</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));

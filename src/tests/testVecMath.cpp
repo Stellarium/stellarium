@@ -279,6 +279,7 @@ void TestVecMath::testVec3Math()
 	QVERIFY2(vf!=vtf, "Magical filling the right values");
 	vf = Vec3f(2.f);
 	QVERIFY(vf.fuzzyEquals(Vec3f(2.f), ERROR_LIMIT));
+	QVERIFY(!vf.fuzzyEquals(Vec3f(2.1f), ERROR_LIMIT));
 
 	vd.set(0.,0.,0.);
 	QVERIFY(vd==Vec3d(0.,0.,0.));
@@ -321,6 +322,7 @@ void TestVecMath::testVec3Math()
 	QVERIFY2(vd==vtd, "Initialize from vector failed!");
 	vd = Vec3d(2.);
 	QVERIFY(vd.fuzzyEquals(Vec3d(2.), ERROR_LIMIT));
+	QVERIFY(!vd.fuzzyEquals(Vec3d(2.1), ERROR_LIMIT));
 
 	QStringList li={"4", "2", "1"};
 	vi=Vec3i(li);

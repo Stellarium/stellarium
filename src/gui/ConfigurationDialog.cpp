@@ -1822,7 +1822,7 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	algorithms->addItem(q_("JPL Horizons"), "JPLHorizons");	
 	algorithms->addItem(q_("Meeus & Simons (2000)"), "MeeusSimons");
 	algorithms->addItem(q_("Morrison & Stephenson (2004, 2005)"), "MorrisonStephenson2004");
-	algorithms->addItem(q_("Stephenson, Morrison & Hohenkerk (2016)"), "StephensonMorrisonHohenkerk2016");
+	algorithms->addItem(q_("Stephenson, Morrison & Hohenkerk (2016, 2021)"), "StephensonMorrisonHohenkerk2016");
 	// Espenak & Meeus (2006) used by default
 	algorithms->addItem(q_("Espenak & Meeus (2006)").append(" *"), "EspenakMeeus");
 	// GZ: I want to try out some things. Something is still wrong with eclipses, see lp:1275092.
