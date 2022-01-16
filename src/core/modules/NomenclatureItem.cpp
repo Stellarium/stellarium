@@ -354,9 +354,8 @@ float NomenclatureItem::getAngularSizeRatio(const StelCore *core) const
 
 void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 {
-	if (labelsFader.getInterstate()<=0.f)
-		return;
-
+	// Called by NomenclatureMgr, so we don't need to check if labelsFader is true.
+	// The painter has been set to enable blending.
 	const Vec3d equPos = planet->getJ2000EquatorialPos(core);
 	Vec3d XYZ = getJ2000EquatorialPos(core);
 

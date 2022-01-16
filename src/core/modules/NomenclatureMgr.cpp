@@ -268,6 +268,7 @@ void NomenclatureMgr::draw(StelCore* core)
 {
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter painter(prj);
+	painter.setBlending(true);
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
 	    drawPointer(core, painter);
@@ -319,7 +320,6 @@ void NomenclatureMgr::drawPointer(StelCore* core, StelPainter& painter)
 
 		painter.setColor(obj->getInfoColor());
 		texPointer->bind();
-		painter.setBlending(true);
 		painter.drawSprite2dMode(static_cast<float>(screenpos[0]), static_cast<float>(screenpos[1]), 13.f, static_cast<float>(StelApp::getInstance().getTotalRunTime()*40.));
 	}
 }
