@@ -233,6 +233,15 @@ void StelPainter::setBlending(bool enableBlending, GLenum blendSrc, GLenum blend
 	}
 }
 
+bool StelPainter::getBlending(GLenum *src, GLenum *dst) const
+{
+	if (dst!=Q_NULLPTR)
+		*dst=glState.blendDst;
+	if (src!=Q_NULLPTR)
+		*src=glState.blendSrc;
+	return glState.blend;
+}
+
 void StelPainter::setDepthTest(bool enable)
 {
 	if(glState.depthTest != enable)
@@ -1713,15 +1722,10 @@ void StelPainter::drawCircle(float x, float y, float r)
 		dx = r;
 	}
 
-	//circles drawing may require blending, but we reset GL state afterwards if necessary
-	bool oldBlending = glState.blend;
-	GLenum oldSrc = glState.blendSrc, oldDst = glState.blendDst;
-	setBlending(true);
 	enableClientStates(true);
 	setVertexPointer(3, GL_FLOAT, circleVertexArray.data());
 	drawFromArray(LineLoop, 180, 0, false);
 	enableClientStates(false);
-	setBlending(oldBlending, oldSrc, oldDst);
 }
 
 void StelPainter::drawSprite2dMode(float x, float y, float radius)
