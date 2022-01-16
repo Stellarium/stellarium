@@ -718,7 +718,7 @@ void NebulaMgr::drawPointer(const StelCore* core, StelPainter& sPainter)
 		sPainter.setBlending(true);
 
 		// Size on screen
-		float size = static_cast<float>(obj->getAngularSize(core))*M_PI_180f*prj->getPixelPerRadAtCenter();
+		float size = static_cast<float>(obj->getAngularRadius(core))*M_PI_180f*prj->getPixelPerRadAtCenter();
 		if (size>120.f) // avoid oversized marker
 			size = 120.f;
 

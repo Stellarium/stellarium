@@ -228,7 +228,7 @@ public:
 	QString getCommonEnglishName(void) const {return englishName;}
 	QString getCommonNameI18n(void) const {return nameI18;}
 	//! Get angular semidiameter, degrees. If planet display is artificially enlarged (e.g. Moon upscale), value will also be increased.
-	virtual double getAngularSize(const StelCore* core) const Q_DECL_OVERRIDE;
+	virtual double getAngularRadius(const StelCore* core) const Q_DECL_OVERRIDE;
 	virtual bool hasAtmosphere(void) {return atmosphere;}
 	virtual bool hasHalo(void) {return halo;}
 	//! Returns whether planet positions are valid and useful for the current simulation time.
@@ -377,7 +377,7 @@ public:
 	//! Get the elongation angle (radians) for an observer at pos obsPos in heliocentric coordinates (in AU)
 	double getElongation(const Vec3d& obsPos) const;
 	//! Get the angular radius (degrees) of the planet spheroid (i.e. without the rings)
-	double getSpheroidAngularSize(const StelCore* core) const;
+	double getSpheroidAngularRadius(const StelCore* core) const;
 	//! Get the planet phase (illuminated fraction of the planet disk, [0=dark..1=full]) for an observer at pos obsPos in heliocentric coordinates (in AU)
 	float getPhase(const Vec3d& obsPos) const;
 	//! Get the position angle of the illuminated limb of a planet
@@ -631,8 +631,8 @@ protected:
 
 	static StelTextureSP texEarthShadow;     // for lunar eclipses
 
-	// Used in drawSphere() to compute shadows, and inside a function to derive eclipse sizes.
-	// For reasons currently unknown we must handle solar eclipses as special case.
+	//! Used in drawSphere() to compute shadows, and inside a function to derive eclipse sizes.
+	//! @param solarEclipseCase For reasons currently unknown we must handle solar eclipses as special case.
 	void computeModelMatrix(Mat4d &result, bool solarEclipseCase) const;
 
 	//! Update the orbit position values.
@@ -640,15 +640,17 @@ protected:
 
 	Vec3f getCurrentOrbitColor() const;
 	
-	// Return the information string "ready to print" :)
+	//! Return the information string "ready to print"
 	QString getPlanetLabel() const;
 
-	// Draw the 3d model. Call the proper functions if there are rings etc..
-	void draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenSz, bool drawOnlyRing=false);
+	//! Draw the 3d model. Call the proper functions if there are rings etc..
+	//! @param screenRd radius in screen pixels
+	void draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenRd, bool drawOnlyRing=false);
 
-	// Draws the OBJ model, assuming it is available
-	// @return false if the model can currently not be drawn (not loaded)
-	bool drawObjModel(StelPainter* painter, float screenSz);
+	//! Draws the OBJ model, assuming it is available
+	//! @param screenRd radius in screen pixels.
+	//! @return false if the model can currently not be drawn (not loaded)
+	bool drawObjModel(StelPainter* painter, float screenRd);
 
 	bool drawObjShadowMap(StelPainter* painter, QMatrix4x4 &shadowMatrix);
 
@@ -656,13 +658,13 @@ protected:
 	//! Returns true when the OBJ is ready to draw
 	bool ensureObjLoaded();
 
-	// Draw the 3D sphere
-	void drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing=false);
+	//! Draw the 3D sphere
+	void drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing=false);
 
-	// Draw the Hips survey.
+	//! Draw the Hips survey.
 	void drawSurvey(StelCore* core, StelPainter* painter);
 
-	// Draw the circle and name of the Planet
+	//! Draw the circle and name of the Planet
 	void drawHints(const StelCore* core, const QFont& planetNameFont);
     
 	PlanetOBJModel* loadObjModel() const;

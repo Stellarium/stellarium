@@ -495,7 +495,7 @@ void SolarSystem::drawPointer(const StelCore* core)
 		const StelObjectP obj = newSelected[0];
 		Vec3d pos=obj->getJ2000EquatorialPos(core);
 
-		Vec3d screenpos;
+		Vec3f screenpos;
 		// Compute 2D pos and return if outside screen
 		if (!prj->project(pos, screenpos))
 			return;
@@ -503,23 +503,23 @@ void SolarSystem::drawPointer(const StelCore* core)
 		StelPainter sPainter(prj);
 		sPainter.setColor(getPointerColor());
 
-		double size = obj->getAngularSize(core)*M_PI_180*prj->getPixelPerRadAtCenter()*2.;
+		float screenSize = static_cast<float>(obj->getAngularRadius(core))*prj->getPixelPerRadAtCenter()*M_PI_180f*2.f;
 		
-		const double scale = prj->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio();
-		size+= scale * (45. + 10.*std::sin(2. * StelApp::getInstance().getAnimationTime()));
+		const float scale = static_cast<float>(prj->getDevicePixelsPerPixel())*StelApp::getInstance().getGlobalScalingRatio();
+		screenSize+= scale * (45.f + 10.f*std::sin(2.f * static_cast<float>(StelApp::getInstance().getAnimationTime())));
 
 		texPointer->bind();
 
 		sPainter.setBlending(true);
 
-		size*=0.5;
-		const double angleBase = StelApp::getInstance().getAnimationTime() * 10;
+		screenSize*=0.5f;
+		const float angleBase = static_cast<float>(StelApp::getInstance().getAnimationTime()) * 10;
 		// We draw 4 instances of the sprite at the corners of the pointer
 		for (int i = 0; i < 4; ++i)
 		{
-			const double angle = angleBase + i * 90;
-			const double x = screenpos[0] + size * cos(angle / 180 * M_PI);
-			const double y = screenpos[1] + size * sin(angle / 180 * M_PI);
+			const float angle = angleBase + i * 90;
+			const float x = screenpos[0] + screenSize * cos(angle * M_PI_180f);
+			const float y = screenpos[1] + screenSize * sin(angle * M_PI_180f);
 			sPainter.drawSprite2dMode(x, y, 10, angle);
 		}
 	}
@@ -975,8 +975,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			minorBodies << englishName;
 
 			Vec3f color = Vec3f(1.f, 1.f, 1.f);
-			const float bV = pd.value(secname+"/color_index_bv", 99.f).toFloat();
-			if (bV<99.f)
+			const double bV = pd.value(secname+"/color_index_bv", 99.).toDouble();
+			if (bV<99.)
 				color = skyDrawer->indexToColor(BvToColorIndex(bV))*0.75f; // see ZoneArray.cpp:L490
 			else
 				color = Vec3f(pd.value(secname+"/color", "1.0,1.0,1.0").toString());
@@ -1012,7 +1012,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				mp->setAbsoluteMagnitudeAndSlope(magnitude, qBound(0.0f, slope, 1.0f));
 			}
 
-			mp->setColorIndexBV(bV);
+			mp->setColorIndexBV(static_cast<float>(bV));
 			mp->setSpectralType(pd.value(secname+"/spec_t", "").toString(), pd.value(secname+"/spec_b", "").toString());
 			if (semi_major_axis>0)
 				mp->deltaJDE = 2.0*semi_major_axis*StelCore::JD_SECOND;
@@ -1779,7 +1779,7 @@ QList<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, c
 		equPos = p->getJ2000EquatorialPos(core);
 		equPos.normalize();
 
-		cosAngularSize = std::cos(p->getSpheroidAngularSize(core) * M_PI/180.);
+		cosAngularSize = std::cos(p->getSpheroidAngularRadius(core) * M_PI/180.);
 
 		if (equPos*v>=std::min(cosLimFov, cosAngularSize) && p->getEnglishName()!=weAreHere)
 		{
@@ -3104,7 +3104,7 @@ void SolarSystem::setCustomGrsLongitude(int longitude)
 
 int SolarSystem::getCustomGrsLongitude() const
 {
-	return RotationElements::customGrsLongitude;
+	return static_cast<int>(RotationElements::customGrsLongitude);
 }
 
 void SolarSystem::setCustomGrsDrift(double drift)

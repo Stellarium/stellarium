@@ -167,7 +167,7 @@ float NomenclatureItem::getSelectPriority(const StelCore* core) const
 	float priority=planet->getSelectPriority(core)+5.f;
 	// check visibility of feature
 	const float scale = getAngularDiameterRatio(core);
-	const float planetScale = 2.f*static_cast<float>(planet->getAngularSize(core))/core->getProjection(StelCore::FrameJ2000)->getFov();
+	const float planetScale = 2.f*static_cast<float>(planet->getAngularRadius(core))/core->getProjection(StelCore::FrameJ2000)->getFov();
 
 	// Require the planet to cover 1/10 of the screen to make it worth clicking on features.
 	// scale 0.04 is equal to the rendering criterion. Allow 0.02 for clicking on smaller features.
@@ -341,14 +341,14 @@ Vec3d NomenclatureItem::getJ2000EquatorialPos(const StelCore* core) const
 }
 
 // Return apparent semidiameter
-double NomenclatureItem::getAngularSize(const StelCore* core) const
+double NomenclatureItem::getAngularRadius(const StelCore* core) const
 {
 	return std::atan2(0.5*size*planet->getSphereScale()/AU, getJ2000EquatorialPos(core).length()) * M_180_PI;
 }
 
 float NomenclatureItem::getAngularDiameterRatio(const StelCore *core) const
 {
-    return static_cast<float>(2.*getAngularSize(core))/core->getProjection(StelCore::FrameJ2000)->getFov();
+    return static_cast<float>(2.*getAngularRadius(core))/core->getProjection(StelCore::FrameJ2000)->getFov();
 }
 
 void NomenclatureItem::draw(StelCore* core, StelPainter *painter)

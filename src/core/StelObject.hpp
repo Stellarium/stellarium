@@ -266,7 +266,8 @@ public:
 	//! Return the angular radius of a circle containing the object as seen from the observer
 	//! with the circle center assumed to be at getJ2000EquatorialPos().
 	//! @return radius in degree. This value is the apparent angular size of the object, and is independent of the current FOV.
-	virtual double getAngularSize(const StelCore* core) const = 0;
+	//! @note The default implementation just returns zero.
+	virtual double getAngularRadius(const StelCore* core) const {Q_UNUSED(core) Q_ASSERT(0); return 0;}
 
 	//! Return airmass value for the object (for atmosphere-dependent calculations)
 	//! @param core

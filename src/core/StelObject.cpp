@@ -1020,7 +1020,7 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	map.insert("vmage", getVMagnitudeWithExtinction(core));
 
 	// angular size
-	double angularSize = 2.*getAngularSize(core)*M_PI_180;
+	double angularSize = 2.*getAngularRadius(core)*M_PI_180;
 	bool sign;
 	double deg;
 	StelUtils::radToDecDeg(angularSize, sign, deg);

@@ -179,7 +179,7 @@ public:
 	virtual QString getEnglishName() const Q_DECL_OVERRIDE {return englishName;}
 	QString getEnglishAliases() const;
 	QString getI18nAliases() const;
-	virtual double getAngularSize(const StelCore*) const Q_DECL_OVERRIDE;
+	virtual double getAngularRadius(const StelCore*) const Q_DECL_OVERRIDE;
 	virtual SphericalRegionP getRegion() const Q_DECL_OVERRIDE {return pointRegion;}
 
 	// Methods specific to Nebula
