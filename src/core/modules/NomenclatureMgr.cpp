@@ -92,10 +92,10 @@ void NomenclatureMgr::updateNomenclatureData()
 void NomenclatureMgr::loadSpecialNomenclature()
 {
 	int featureId = 50000;
-	QList<PlanetP> ss = ssystem->getAllPlanets();
+	const QList<PlanetP> ss = ssystem->getAllPlanets();
 	for (const auto& p: ss)
 	{
-		double size = p->getEquatorialRadius()*AU*0.25; // formal radius of point is 25% of equatorial radius
+		const double size = p->getEquatorialRadius()*AU*0.25; // formal radius of point is 25% of equatorial radius
 		NomenclatureItemP nomNP = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("North Pole"), "", NomenclatureItem::niSpecialPointPole, 90., 0., size));
 		if (!nomNP.isNull())
 			nomenclatureItems.insert(p, nomNP);
@@ -151,7 +151,7 @@ void NomenclatureMgr::loadNomenclature()
 	QRegularExpression ctxRx("(.*)\",\\s*\"(.*)");
 
 	QString surfNamesFile = StelFileMgr::findFile("data/nomenclature.dat"); // compressed version of file nomenclature.fab
-	if (!surfNamesFile.isEmpty()) // OK, the file is exist!
+	if (!surfNamesFile.isEmpty()) // OK, the file exists!
 	{
 		// Open file
 		QFile planetSurfNamesFile(surfNamesFile);
@@ -254,7 +254,7 @@ void NomenclatureMgr::loadNomenclature()
 		faultPlanets.removeDuplicates();
 		int err = faultPlanets.size();
 		if (err>0)
-			qDebug() << "WARNING - The next planets to assign nomenclature items is not found:" << faultPlanets.join(", ");
+			qDebug() << "WARNING - These planets to assign nomenclature items were not found:" << faultPlanets.join(", ");
 	}
 }
 
@@ -268,6 +268,14 @@ void NomenclatureMgr::draw(StelCore* core)
 {
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter painter(prj);
+	painter.setBlending(true);
+
+	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
+	    drawPointer(core, painter);
+
+	if (NomenclatureItem::labelsFader.getInterstate()<=0.f)
+	    return;
+
 	painter.setFont(font);
 	const SphericalCap& viewportRegion = painter.getProjector()->getBoundingCap();
 
@@ -295,9 +303,6 @@ void NomenclatureMgr::draw(StelCore* core)
 				nItem->draw(core, &painter);
 		}
 	}
-
-	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
-		drawPointer(core, painter);
 }
 
 void NomenclatureMgr::drawPointer(StelCore* core, StelPainter& painter)
@@ -315,7 +320,6 @@ void NomenclatureMgr::drawPointer(StelCore* core, StelPainter& painter)
 
 		painter.setColor(obj->getInfoColor());
 		texPointer->bind();
-		painter.setBlending(true);
 		painter.drawSprite2dMode(static_cast<float>(screenpos[0]), static_cast<float>(screenpos[1]), 13.f, static_cast<float>(StelApp::getInstance().getTotalRunTime()*40.));
 	}
 }
@@ -491,20 +495,14 @@ void NomenclatureMgr::setFlagLabels(bool b)
 {
 	if (getFlagLabels() != b)
 	{
-		for (const auto& i : qAsConst(nomenclatureItems))
-			i->setFlagLabels(b);
+		NomenclatureItem::setFlagLabels(b);
 		emit nomenclatureDisplayedChanged(b);
 	}
 }
 
 bool NomenclatureMgr::getFlagLabels() const
 {
-	for (const auto& i : nomenclatureItems)
-	{
-		if (i->getFlagLabels())
-			return true;
-	}
-	return false;
+	return NomenclatureItem::getFlagLabels();
 }
 
 void NomenclatureMgr::setFlagHideLocalNomenclature(bool b)

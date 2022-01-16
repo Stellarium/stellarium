@@ -143,7 +143,7 @@ bool StelObject::isAboveRealHorizon(const StelCore *core) const
 float StelObject::getVMagnitude(const StelCore* core) const 
 {
 	Q_UNUSED(core)
-	return 99;
+	return 99.f;
 }
 
 Vec4d StelObject::getRTSTime(const StelCore *core, const double altitude) const

@@ -2,6 +2,7 @@
 % A. Wolf	2017
 % 20171029 AW: A first version of text
 % 20171210 GZ: small changes for finalization.
+% 20220105 GZ: Add info on coordinate systems 
 
 \chapter{Planetary nomenclature}
 \label{ch:Nomenclature}
@@ -66,6 +67,137 @@ size of planetary feature                & float   & kilometers\\\bottomrule
 Vesta 15201 _("Caesonia","crater") AA 31.20117 249.93457 104.23
 \end{configfile}
 
+\section{Planetary Coordinate Systems}
+\label{sec:Nomenclature:CoordinateSystems}
+
+When we observe the Moon or another planet from Earth (or actually
+from anywhere), we can see only about half of the surface of the
+spheroid body at any time. Foreshortening further prevents us from
+observing surface features along the planet's visible limb. Therefore
+it is important to know the coordinates of the center of the apparent
+disk, given by the \indexterm{central meridian} and latitude. In
+addition, we can also compute the \indexterm{subsolar point}, where
+the sun is visible in the zenith, and which provides the center of the
+illuminated hemisphere. This is not the center of the visible disk! A
+part of the illuminated hemisphere is generally on the far side of the
+planet.
+
+The north pole of the planets is the pole of rotation directed towards
+the north of the invariable plane (near the ecliptic) of the Solar
+system. Most planets are rotating in the same sense as they are moving
+around the sun. This is called
+\indexterm[rotation,prograde]{prograde}. Seen from the north side of
+the ecliptic, they rotate counterclockwise. Only a few objects, most
+notable Venus, are rotating clockwise, i.e.,
+\indexterm[rotation,retrograde]{retrograde}.
+
+For historical reasons, there are several ways to count
+longitudes. Just like the terrestrial zero meridian has been defined
+as that one running through Greenwich observatory\footnote{In earlier
+  times, at least each seafaring nation had its own zero meridian,
+  usually running through an official observatory.}, the zero meridian
+on rocky bodies like the Moon or Mars is usually defined by some
+surface feature like a small crater. For the gas planets, the rotation
+of the magnetic field is usually given to define the central
+meridian. Starting from this central meridian, we can count longitudes
+in both directions. For the Moon, which shows always (almost, see
+\ref{sec:Concepts:PlanetCoordinates}) the same side towards Earth, we
+count western and eastern longitudes from the central meridian towards
+the trailing or leading edge of its daily motion,
+respectively. (Seeing the Moon through an unguided telescope, we first
+see the eastern longitudes from $\approx 90^\circ$ to $0^\circ$, then
+the western longitudes from $0^\circ$ to $\approx 90^\circ$.)
+Alternatively we can count the western longitudes as negative. The
+counting continues to the (invisible) far side of the Moon where one
+meridian has an Eastern longitude of $+180^\circ=-180^\circ$.
+
+For other objects, historically, Mars was the first planet to be
+mapped with cartographic coordinates. Its rotational period of just
+over 24.5 hours allows to follow its rotation and observe only a
+slight change in appearance every day. It appeared natural to count
+the central meridian so that central longitude increased as time
+passed. Just like on Earth, as time passes, increasingly western
+longitudes receive sunlight and also become visible. Therefore these
+\indexterm[coordinates,planetographic]{planetographic} longitudes are
+counted towards the west on planets with prograde rotation.  On
+planets with retrograde rotation like Venus, these longitudes are
+counted eastward.
+
+In contrast, current convention on Earth is to count geographic
+longitudes eastward.
+
+The information about coordinates for center and subsolar points in
+the information displayed for a planet is counted in this
+planetographic sense.
+
+Another convention are
+\indexterm[coordinates,planetocentric]{planetocentric coordinates}
+where longitudes are always counted positively towards the east. East
+is defined as going counterclockwise as seen from the north pole,
+which is itself defined as the one pole more closely aligned with
+Earth's north pole. The latest maps and data for Mars are using
+planetocentric data, i.e., eastern longitudes.
+
+For clarity, therefore coordinates are often explicitly written with ``E'' and
+``W'' instead of signed numbers.
+
+
+Another difference between planetographic and planetocentric
+coordinates is that the latter model the planet as simple sphere,
+ignoring the (usually small) flattening of the planet bodies.
+
+The surface coordinate systems defined by the WGPSN\footnote{IAU
+  Working Group for Planetary System Nomenclature --
+  \url{https://planetarynames.wr.usgs.gov/}} and used in Stellarium
+follows are shown in table
+\ref{tab:Nomenclature:coordinates}\footnote{\url{https://planetarynames.wr.usgs.gov/TargetCoordinates},
+  visited Jan.5, 2022}. However, given that the WGPSN publishes their
+data only with planetocentric latitudes, Stellarium provides planetocentric latitudes
+in the information panel for surface features.
+
+\begin{table}
+\begin{tabular}{lll>{$}r<{$}@{\ldots}>{$}l<{$} l}
+Target     &\multicolumn{4}{c}{Coordinate Systems}&Control Networks\\
+  \hline
+Amalthea   & Planetographic & +West &    0 & +360 &                       \\
+Ariel      & Planetocentric & +East &    0 & +360 &                       \\
+Callisto   & Planetographic & +West &    0 & +360 &                       \\
+Charon     & Planetocentric & +East &    0 & +360 & Charon                \\
+Deimos     & Planetographic & +West &    0 & +360 &                       \\
+Dione      & Planetographic & +West &    0 & +360 &                       \\
+Enceladus  & Planetographic & +West &    0 & +360 &                       \\
+Epimetheus & Planetographic & +West &    0 & +360 &                       \\
+Europa     & Planetographic & +West &    0 & +360 &                       \\
+Ganymede   & Planetographic & +West &    0 & +360 &                       \\
+Hyperion   & Planetographic & +West &    0 & +360 &                       \\
+Iapetus    & Planetographic & +West &    0 & +360 &                       \\
+Io         & Planetographic & +West &    0 & +360 & Voyager/Galileo SSI   \\
+Janus      & Planetographic & +West &    0 & +360 &                       \\
+Mars       & Planetocentric & +East &    0 & +360 & MDIM 2.1              \\ % current as of Stellarium 0.21.3
+Mercury    & Planetographic & +West &    0 & +360 & MESSENGER Team        \\
+Mimas      & Planetographic & +West &    0 & +360 &                       \\
+Miranda    & Planetocentric & +East &    0 & +360 &                       \\
+Moon       & Planetographic & +East & -180 & +180 & LOLA 2011, ULCN 2005  \\
+Oberon     & Planetocentric & +East &    0 & +360 &                       \\
+Phobos     & Planetographic & +West &    0 & +360 &                       \\
+Phoebe     & Planetographic & +West &    0 & +360 &                       \\
+Pluto      & Planetocentric & +East &    0 & +360 & Pluto                 \\
+Proteus    & Planetographic & +West &    0 & +360 &                       \\
+Puck       & Planetocentric & +East &    0 & +360 &                       \\
+Rhea       & Planetographic & +West &    0 & +360 &                       \\
+Tethys     & Planetographic & +West &    0 & +360 &                       \\
+Thebe      & Planetographic & +West &    0 & +360 &                       \\
+Titan      & Planetographic & +West &    0 & +360 &                       \\
+Titania    & Planetocentric & +East &    0 & +360 &                       \\
+Triton     & Planetographic & +East &    0 & +360 &                       \\
+Umbriel    & Planetocentric & +East &    0 & +360 &                       \\
+Venus      & Planetocentric & +East &    0 & +360 &
+\end{tabular}
+  \caption{Coordinate systems used by the WGPSN}
+  \label{tab:Nomenclature:coordinates}
+\end{table}
+
+
 \section{How names are approved by the IAU}
 \label{sec:Nomenclature:ApprovingNames}\index{IAU}
 When images are first obtained of the surface of a planet or satellite, a theme for naming features is chosen 
@@ -76,7 +208,7 @@ or geologic formations. Anyone may suggest that a specific name be considered by
 If the members of the task group agree that the name is appropriate, it can be retained for use 
 when there is a request from a member of the scientific community that a specific feature be named. 
 Names successfully reviewed by a task group are submitted to the IAU Working Group for Planetary System 
-Nomenclature (WGPSN)\footnote{Working Group for Planetary System Nomenclature -- \url{https://planetarynames.wr.usgs.gov/}}. 
+Nomenclature (WGPSN). 
 Upon successful review by the members of the WGPSN, names are considered provisionally approved and can be 
 used on maps and in publications as long as the provisional status is clearly stated. 
 Provisional names are then presented for adoption to the IAU's General Assembly, which met triennially in the past, 

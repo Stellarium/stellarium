@@ -233,6 +233,15 @@ void StelPainter::setBlending(bool enableBlending, GLenum blendSrc, GLenum blend
 	}
 }
 
+bool StelPainter::getBlending(GLenum *src, GLenum *dst) const
+{
+	if (dst!=Q_NULLPTR)
+		*dst=glState.blendDst;
+	if (src!=Q_NULLPTR)
+		*src=glState.blendSrc;
+	return glState.blend;
+}
+
 void StelPainter::setDepthTest(bool enable)
 {
 	if(glState.depthTest != enable)

@@ -92,7 +92,8 @@ void SpecialSkyMarker::draw(StelCore *core) const
 	// Initialize a painter and set openGL state
 	StelPainter sPainter(prj);
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
-	sPainter.setColor(color, fader);
+	sPainter.setBlending(true);
+	sPainter.setColor(color, fader.getInterstate());
 	Vec2i centerScreen(prj->getViewportPosX() + prj->getViewportWidth() / 2, prj->getViewportPosY() + prj->getViewportHeight() / 2);
 
 	/////////////////////////////////////////////////
@@ -117,7 +118,7 @@ void SpecialSkyMarker::draw(StelCore *core) const
 		case FOV_CIRCULAR:
 		{
 			const double pixelsPerRad = static_cast<double>(prj->getPixelPerRadAtCenter());
-			sPainter.drawCircle(centerScreen[0], centerScreen[1], 0.5f * pixelsPerRad * static_cast<float>(M_PI/180) * (angularSize[0]));
+			sPainter.drawCircle(centerScreen[0], centerScreen[1], 0.5f * static_cast<float>((M_PI/180.) * pixelsPerRad * angularSize[0]));
 
 			/*
 			 * NOTE: uncomment the code for display FOV value in top right corner of marker
@@ -172,24 +173,23 @@ void SpecialSkyMarker::draw(StelCore *core) const
 		{
 			Vec3d pos, screenPos;
 			const int f = (StelApp::getInstance().getFlagSouthAzimuthUsage() ? 180 : 0);
-			const float ppx = core->getCurrentStelProjectorParams().devicePixelsPerPixel;
-			sPainter.setBlending(true);
+			const float ppx = static_cast<float>(core->getCurrentStelProjectorParams().devicePixelsPerPixel);
 			sPainter.setLineSmooth(true);
 
 			for(int i=0; i<360; i++)
 			{
-				float a = i*M_PI/180;
-				pos.set(sin(a),cos(a), 0.f);
-				float h = -0.002;
+				double a = i*M_PI/180;
+				pos.set(sin(a),cos(a), 0.);
+				double h = -0.002;
 				if (i % 15 == 0)
 				{
 					h = -0.02;  // the size of the mark every 15 degrees
 
 					QString s = QString("%1").arg((i+90+f)%360);
 
-					float shiftx = ppx*sPainter.getFontMetrics().width(s) / 2.;
-					float shifty = ppx*sPainter.getFontMetrics().height() / 2.;
-					sPainter.drawText(pos, s, 0, -shiftx, shifty, false);
+					float shiftx = ppx*sPainter.getFontMetrics().boundingRect(s).width() *0.5f;
+					float shifty = ppx*sPainter.getFontMetrics().height() *0.5f;
+					sPainter.drawText(pos, s, 0, -shiftx, shifty);
 				}
 				else if (i % 5 == 0)
 				{
@@ -202,13 +202,10 @@ void SpecialSkyMarker::draw(StelCore *core) const
 					sPainter.drawGreatCircleArc(pos, Vec3d(pos[0], pos[1], h), Q_NULLPTR);
 				}
 			}
-			sPainter.setBlending(false);
-			sPainter.setLineSmooth(false);
 		}
 			break;
 	}
 }
-
 
 SpecialMarkersMgr::SpecialMarkersMgr()
 {

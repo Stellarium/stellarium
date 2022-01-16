@@ -31,6 +31,7 @@
 const QString NomenclatureItem::NOMENCLATURE_TYPE = QStringLiteral("NomenclatureItem");
 Vec3f NomenclatureItem::color = Vec3f(0.1f,1.0f,0.1f);
 bool NomenclatureItem::hideLocalNomenclature = false;
+LinearFader NomenclatureItem::labelsFader;
 
 NomenclatureItem::NomenclatureItem(PlanetP nPlanet,
 				   int nId,
@@ -153,29 +154,27 @@ QString NomenclatureItem::getNomenclatureTypeDescription(NomenclatureItemType nT
 
 float NomenclatureItem::getSelectPriority(const StelCore* core) const
 {
-	float priority = StelObject::getSelectPriority(core);
-	if (getFlagLabels())
-	{
-		const float scale = getAngularSizeRatio(core);
-		if (planet->getVMagnitude(core)>=20.f || (planet->getJ2000EquatorialPos(core).lengthSquared() < getJ2000EquatorialPos(core).lengthSquared()))
-		{
-			// The feature on far-side of the planet or the planet is too faint for view
-			// (in deep shadow for example), so let's disable selecting the nomenclature
-			priority += 25.f;
-		}
-		else if (scale>=0.015f)
-		{
-			// The item may be good selectable when it over 37px size only
-			//priority -= (20.f + scale*100.f);
-			priority = planet->getSelectPriority(core) - scale*100.f;
-			if (nType>=NomenclatureItemType::niSpecialPointPole)
-				priority -= 10.f;
-		}
-		else
-			priority -= 2.f;
-	}
+	if (!getFlagLabels()) // disable if switched off.
+		return 1.e12f;
+
+	// Exclude if the planet is too faint for view (in deep shadow for example),
+	// or if feature is on far-side of the planet
+	if (planet->getVMagnitude(core)>=20.f || (planet->getJ2000EquatorialPos(core).lengthSquared() < getJ2000EquatorialPos(core).lengthSquared()))
+		return 1.e12f;
+
+	// Start with a priority just slightly lower than the carrier planet,
+	// so that clicking on the planet in halo does not select any feature point.
+	float priority=planet->getSelectPriority(core)+5.f;
+	// check visibility of feature
+	const float scale = getAngularDiameterRatio(core);
+	const float planetScale = 2.f*static_cast<float>(planet->getAngularSize(core))/core->getProjection(StelCore::FrameJ2000)->getFov();
+
+	// Require the planet to cover 1/10 of the screen to make it worth clicking on features.
+	// scale 0.04 is equal to the rendering criterion. Allow 0.02 for clicking on smaller features.
+	if ((scale>0.02f) && planetScale > 0.1f)
+		priority -= 5.f + 4.f * scale;
 	else
-		priority += 1.e12f; // suppress selection if switched off.
+		priority+=1.e12f; // disallow selection
 
 	return priority;
 }
@@ -205,6 +204,7 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 {
 	QString str;
 	QTextStream oss(&str);
+	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 
 	if (flags&Name)
 	{
@@ -240,41 +240,43 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 
 	if (flags&Extra)
 	{
-		if (nType < NomenclatureItemType::niSpecialPointPole)
+		const QString cType = isPlanetocentric() ? q_("Planetocentric coordinates") : q_("Planetographic coordinates");
+		QString sLong = StelUtils::decDegToLongitudeStr(longitude, isEastPositive(), is180(), !withDecimalDegree),
+			sLat  = StelUtils::decDegToLatitudeStr(latitude, !withDecimalDegree);
+		if (nType>=NomenclatureItemType::niSpecialPointEast && planet->getEnglishName()=="Jupiter")
 		{
-			// TODO for 0.22.0 It seems the (numerical) planetary longitudes of NomenclatureItems are off by (usually) 360-longitude.
-			// For 0.21.3 we must now hide the coordinates for the special points, but fix this ASAP.
-			QString sLong = StelUtils::decDegToDmsStr(longitude), sLat = StelUtils::decDegToDmsStr(latitude);
-			if (nType>=NomenclatureItemType::niSpecialPointEast && planet->getEnglishName()=="Jupiter")
+			// Due to Jupiter's issues around GRS shift we must repeat some calculations here.
+			double lng=0., lat=0.;
+			// East/West points are assumed to be along the equator, on the planet rim. Start with sub-observer point
+			if (nType==NomenclatureItemType::niSpecialPointEast || nType==NomenclatureItemType::niSpecialPointWest)
 			{
-				// Due to Jupiter's issues around GRS shift we must repeat some calculations here.
-				double lng=0., lat=0.;
-				// East/West points are assumed to be along the equator, on the planet rim. Start with sub-observer point
-				if (nType==NomenclatureItemType::niSpecialPointEast || nType==NomenclatureItemType::niSpecialPointWest)
-				{
-					QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core, false);
-					lng = - subObs.first[2]  * M_180_PI + ((nType==NomenclatureItemType::niSpecialPointEast) ? 90. : -90.);
-					Q_ASSERT(lat==0.);
-				}
-				// Center and Subsolar points are similar.
-				if (nType==NomenclatureItemType::niSpecialPointCenter || nType==NomenclatureItemType::niSpecialPointSubSolar)
-				{
-					QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core, false);
-					lat =   M_180_PI * (nType==NomenclatureItemType::niSpecialPointCenter ? subObs.first[1]: subObs.second[1]);
-					lng = - M_180_PI * (nType==NomenclatureItemType::niSpecialPointCenter ? subObs.first[2]: subObs.second[2]);
-				}
-				lng   = StelUtils::fmodpos(lng, 360.);
-				sLong = StelUtils::decDegToDmsStr(360.-lng);
-				sLat  = StelUtils::decDegToDmsStr(lat);
+				QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core, false);
+				lng = - subObs.first[2]  * M_180_PI + ((nType==NomenclatureItemType::niSpecialPointEast) ? 90. : -90.);
+				Q_ASSERT(lat==0.);
 			}
-			oss << QString("%1: %2/%3<br/>").arg(q_("Planetographic long./lat."), sLong, sLat);
+			// Center and Subsolar points are similar.
+			if (nType==NomenclatureItemType::niSpecialPointCenter || nType==NomenclatureItemType::niSpecialPointSubSolar)
+			{
+				QPair<Vec4d, Vec3d> subObs = planet->getSubSolarObserverPoints(core, false);
+				lat =   M_180_PI * (nType==NomenclatureItemType::niSpecialPointCenter ? subObs.first[1]: subObs.second[1]);
+				lng = - M_180_PI * (nType==NomenclatureItemType::niSpecialPointCenter ? subObs.first[2]: subObs.second[2]);
+			}
+			lng   = StelUtils::fmodpos(lng, 360.);
+			sLong = StelUtils::decDegToLongitudeStr(360.-lng, isEastPositive(), is180(), !withDecimalDegree);
+			sLat  = StelUtils::decDegToLatitudeStr(lat, !withDecimalDegree);
 		}
+		oss << QString("%1: %2/%3<br/>").arg(cType, sLat, sLong);
 		oss << QString("%1: %2<br/>").arg(q_("Celestial body"), planet->getNameI18n());
 		QString description = getNomenclatureTypeDescription(nType, planet->getEnglishName());
 		if (nType!=NomenclatureItem::niUNDEFINED && nType<NomenclatureItem::niSpecialPointPole && !description.isEmpty())
 			oss << QString("%1: %2<br/>").arg(q_("Landform description"), description);
 		if (planet->getEnglishName()!="Jupiter") // we must exclude this for now due to Jupiter's "off" rotation
 			oss << QString("%1: %2°<br/>").arg(q_("Solar altitude"), QString::number(getSolarAltitude(core), 'f', 1));
+
+		// DEBUG output. This should help defining valid criteria for selection priority.
+		// oss << QString("Planet angular size (semidiameter!): %1''<br/>").arg(QString::number(planet->getAngularSize(core)*3600.));
+		// oss << QString("Angular size: %1''<br/>").arg(QString::number(getAngularSize(core)*3600.));
+		// oss << QString("Angular size ratio: %1<br/>").arg(QString::number(static_cast<double>(getAngularDiameterRatio(core)), 'f', 5));
 	}
 
 	postProcessInfoString(str, flags);
@@ -313,21 +315,20 @@ Vec3d NomenclatureItem::getJ2000EquatorialPos(const StelCore* core) const
 		{
 			longitude = - subObs.first[2] * M_180_PI;
 			if (planet->isRotatingRetrograde()) longitude *= -1;
-			latitude = subObs.first[1] * M_180_PI; // or first[0]???
+			latitude = subObs.first[0] * M_180_PI; // all IAU WGPSN data are planetocentric (spherical)
 		}
 		else
 		{
 			longitude = - subObs.second[2] * M_180_PI;
 			if (planet->isRotatingRetrograde()) longitude *= -1;
-			latitude = subObs.second[1] * M_180_PI; // or second[0]???
+			latitude = subObs.second[0] * M_180_PI; // all IAU WGPSN data are planetocentric (spherical)
 		}
 		longitude=StelUtils::fmodpos(longitude, 360.);
 		// rebuild XYZpc
 		StelUtils::spheToRect(longitude * M_PI_180, latitude * M_PI_180, XYZpc);
 	}
 	// Calculate the radius of the planet at the item's position. It is necessary to re-scale it
-	Vec4d rect = planet->getRectangularCoordinates(longitude, latitude);
-	Vec3d XYZ0 = XYZpc * (rect[3] * static_cast<double>(planet->getSphereScale()));
+	Vec3d XYZ0 = XYZpc * planet->getEquatorialRadius() * static_cast<double>(planet->getSphereScale());
 	// TODO2: intersect properly with OBJ bodies! (LP:1723742)
 
 	/* We have to calculate feature's coordinates in VSOP87 (this is Ecliptic J2000 coordinates).
@@ -339,32 +340,21 @@ Vec3d NomenclatureItem::getJ2000EquatorialPos(const StelCore* core) const
 	return XYZ;
 }
 
-float NomenclatureItem::getVMagnitude(const StelCore* core) const
-{
-	Q_UNUSED(core);
-	return 99.f;
-}
-
+// Return apparent semidiameter
 double NomenclatureItem::getAngularSize(const StelCore* core) const
 {
-	return std::atan2(size*planet->getSphereScale()/AU, getJ2000EquatorialPos(core).length()) * M_180_PI;
+	return std::atan2(0.5*size*planet->getSphereScale()/AU, getJ2000EquatorialPos(core).length()) * M_180_PI;
 }
 
-float NomenclatureItem::getAngularSizeRatio(const StelCore *core) const
+float NomenclatureItem::getAngularDiameterRatio(const StelCore *core) const
 {
-    return static_cast<float>(getAngularSize(core))/core->getProjection(StelCore::FrameJ2000)->getFov();
-}
-
-void NomenclatureItem::update(double deltaTime)
-{
-	labelsFader.update(static_cast<int>(deltaTime*1000));
+    return static_cast<float>(2.*getAngularSize(core))/core->getProjection(StelCore::FrameJ2000)->getFov();
 }
 
 void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 {
-	if (!getFlagLabels())
-		return;
-
+	// Called by NomenclatureMgr, so we don't need to check if labelsFader is true.
+	// The painter has been set to enable blending.
 	const Vec3d equPos = planet->getJ2000EquatorialPos(core);
 	Vec3d XYZ = getJ2000EquatorialPos(core);
 
@@ -381,7 +371,7 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 
 	// check visibility of feature
 	Vec3d srcPos;
-	const float scale = getAngularSizeRatio(core);
+	const float scale = getAngularDiameterRatio(core);
 	NomenclatureItem::NomenclatureItemType niType = getNomenclatureType();
 	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (equPos.lengthSquared() >= XYZ.lengthSquared())
 	    && (scale>0.04f && (scale<0.5f || niType>=NomenclatureItem::niSpecialPointPole )))
@@ -389,7 +379,7 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 		float brightness=(getSolarAltitude(core)<0. ? 0.25f : 1.0f);
 		if (niType>=NomenclatureItem::niSpecialPointPole)
 			brightness = 0.5f;
-		painter->setColor(color*brightness, 1.0f);
+		painter->setColor(color*brightness, labelsFader.getInterstate());
 		painter->drawCircle(static_cast<float>(srcPos[0]), static_cast<float>(srcPos[1]), 2.f);
 		painter->drawText(static_cast<float>(srcPos[0]), static_cast<float>(srcPos[1]), nameI18n, 0, 5.f, 5.f, false);
 	}
@@ -471,6 +461,82 @@ NomenclatureItem::NomenclatureItemType NomenclatureItem::getNomenclatureItemType
 }
 QMap<NomenclatureItem::NomenclatureItemType, QString> NomenclatureItem::niTypeStringMap;
 QMap<NomenclatureItem::NomenclatureItemType, QString> NomenclatureItem::niTypeDescriptionMap;
+NomenclatureItem::PlanetCoordinateOrientation NomenclatureItem::getPlanetCoordinateOrientation(QString planetName)
+{
+	// data from https://planetarynames.wr.usgs.gov/TargetCoordinates.
+	// Commented away where they are equal to te default value.
+	static const QMap<QString, NomenclatureItem::PlanetCoordinateOrientation> niPCOMap = {
+	//{"Amalthea"   , NomenclatureItem::pcoPlanetographicWest360 },
+	{"Ariel"      , NomenclatureItem::pcoPlanetocentricEast360 },
+	//{"Callisto"   , NomenclatureItem::pcoPlanetographicWest360 },
+	{"Charon"     , NomenclatureItem::pcoPlanetocentricEast360 },
+	//{"Deimos"     , NomenclatureItem::pcoPlanetographicWest360 },
+	//{"Dione"      , NomenclatureItem::pcoPlanetographicWest360 },
+	//{"Enceladus"  , NomenclatureItem::pcoPlanetographicWest360 },
+	//{"Epimetheus" , NomenclatureItem::pcoPlanetographicWest360 },
+	//{"Europa"     , NomenclatureItem::pcoPlanetographicWest360 },
+	//{"Ganymede"   , NomenclatureItem::pcoPlanetographicWest360 },
+	//{"Hyperion"   , NomenclatureItem::pcoPlanetographicWest360 },
+	//{"Iapetus"    , NomenclatureItem::pcoPlanetographicWest360 },
+	//{"Io"         , NomenclatureItem::pcoPlanetographicWest360 }, // Voyager/Galileo SSI
+	//{"Janus"      , NomenclatureItem::pcoPlanetographicWest360 },
+	{"Mars"       , NomenclatureItem::pcoPlanetocentricEast360 }, // MDIM 2.1
+	//{"Mercury"    , NomenclatureItem::pcoPlanetographicWest360 }, // Preliminary MESSENGER MESSENGER Team
+	//{"Mimas"      , NomenclatureItem::pcoPlanetographicWest360 },
+	{"Miranda"    , NomenclatureItem::pcoPlanetocentricEast360 },
+	{"Moon"       , NomenclatureItem::pcoPlanetographicEast180 }, // LOLA 2011 ULCN 2005
+	{"Oberon"     , NomenclatureItem::pcoPlanetocentricEast360 },
+	//{"Phobos"     , NomenclatureItem::pcoPlanetographicWest360 },
+	//{"Phoebe"     , NomenclatureItem::pcoPlanetographicWest360 },
+	{"Pluto"      , NomenclatureItem::pcoPlanetocentricEast360 },
+	//{"Proteus"    , NomenclatureItem::pcoPlanetographicWest360 },
+	{"Puck"       , NomenclatureItem::pcoPlanetocentricEast360 },
+	//{"Rhea"       , NomenclatureItem::pcoPlanetographicWest360 },
+	//{"Tethys"     , NomenclatureItem::pcoPlanetographicWest360 },
+	//{"Thebe"      , NomenclatureItem::pcoPlanetographicWest360 },
+	//{"Titan"      , NomenclatureItem::pcoPlanetographicWest360 },
+	{"Titania"    , NomenclatureItem::pcoPlanetocentricEast360 },
+	{"Triton"     , NomenclatureItem::pcoPlanetographicEast360 },
+	{"Umbriel"    , NomenclatureItem::pcoPlanetocentricEast360 },
+	{"Venus"      , NomenclatureItem::pcoPlanetocentricEast360 }};
+	return niPCOMap.value(planetName, NomenclatureItem::pcoPlanetographicWest360);
+}
+
+NomenclatureItem::PlanetCoordinateOrientation NomenclatureItem::getPlanetCoordinateOrientation() const
+{
+	return getPlanetCoordinateOrientation(planet->getEnglishName());
+}
+
+bool NomenclatureItem::isPlanetocentric(PlanetCoordinateOrientation pco)
+{
+	// Our data is already converted to be planetocentric.
+	//return pco & 0x100;
+	Q_UNUSED(pco)
+	return true;
+}
+bool NomenclatureItem::isEastPositive(PlanetCoordinateOrientation pco)
+{
+	return pco & 0x010;
+}
+bool NomenclatureItem::is180(PlanetCoordinateOrientation pco)
+{
+	return pco & 0x001;
+}
+bool NomenclatureItem::isPlanetocentric() const
+{
+	// Our data is already converted to be planetocentric.
+	// return isPlanetocentric(getPlanetCoordinateOrientation());
+	return true;
+}
+bool NomenclatureItem::isEastPositive() const
+{
+	return isEastPositive(getPlanetCoordinateOrientation());
+}
+bool NomenclatureItem::is180() const
+{
+	return is180(getPlanetCoordinateOrientation());
+}
+
 void NomenclatureItem::createNameLists()
 {
     niTypeStringMap = {
@@ -713,4 +779,18 @@ void NomenclatureItem::createNameLists()
 	{ niSpecialPointWest, ""},
 	{ niSpecialPointCenter, ""},
 	{ niSpecialPointSubSolar, ""}};
+}
+
+// Compute times of nearest rise, transit and set of the current Planet.
+// @param core the currently active StelCore object
+// @param altitude (optional; default=0) altitude of the object, degrees.
+//        Setting this to -6. for the Sun will find begin and end for civil twilight.
+// @return Vec4d - time of rise, transit and set closest to current time; JD.
+// @note The fourth element flags particular conditions:
+//       *  +100. for circumpolar objects. Rise and set give lower culmination times.
+//       *  -100. for objects never rising. Rise and set give transit times.
+//       * -1000. is used as "invalid" value. The result should then not be used.
+Vec4d NomenclatureItem::getRTSTime(const StelCore* core, const double altitude) const
+{
+	return planet->getRTSTime(core, altitude);
 }

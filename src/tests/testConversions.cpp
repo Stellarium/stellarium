@@ -548,9 +548,99 @@ void TestConversions::testDDToDMSStr()
 		QString DMS	= StelUtils::decDegToDmsStr(angle);
 
 		QVERIFY2(DMS==expDMS, qPrintable(QString("%1 degrees = %2 (expected %3)")
-						 .arg(QString::number(angle, 'f', 5))
-						 .arg(DMS)
-						 .arg(expDMS)));
+						 .arg(QString::number(angle, 'f', 5), DMS, expDMS)));
+	}
+}
+
+void TestConversions::testDDToLatitudeStr()
+{
+	QVariantList data;
+	// case 1
+	data << 0.	<< true  << "N0°00'00\"";
+	data << 10.	<< true  << "N10°00'00\"";
+	data << -13.5	<< true  << "S13°30'00\"";
+	data << -90.1	<< true  << "S90°06'00\"";
+	data << 360.6	<< true  << "N360°36'00\"";
+	data << -0.01	<< true  << "S0°00'36\"";
+	// case 2
+	data << 0.	<< false << "N0.0000°";
+	data << 10.	<< false << "N10.0000°";
+	data << -13.5	<< false << "S13.5000°";
+	data << -90.1	<< false << "S90.1000°";
+	data << 360.6	<< false << "N360.6000°";
+	data << -0.01	<< false << "S0.0100°";
+
+	while (data.count()>=3)
+	{
+		double angle	= data.takeFirst().toDouble();
+		bool useDMSfmt  = data.takeFirst().toBool();
+		QString expDMS	= data.takeFirst().toString();
+		QString DMS	= StelUtils::decDegToLatitudeStr(angle, useDMSfmt);
+
+		QVERIFY2(DMS==expDMS, qPrintable(QString("%1 degrees = %2 (expected %3)").arg(QString::number(angle, 'f', 5), DMS, expDMS)));
+	}
+}
+
+void TestConversions::testDDToLongitudeStr()
+{
+	QVariantList data;
+	// case 1
+	data << 0.	<< true  << true  << true  << "E0°00'00\"";
+	data << 10.	<< true  << true  << true  << "E10°00'00\"";
+	data << -13.5	<< true  << true  << true  << "W13°30'00\"";
+	data << -90.1	<< true  << true  << true  << "W90°06'00\"";
+	data << 270.6	<< true  << true  << true  << "W89°24'00\"";
+	data << 360.6	<< true  << true  << true  << "E0°36'00\"";
+	data << -0.01	<< true  << true  << true  << "W0°00'36\"";
+	// case 2
+	data << 0.	<< true  << true  << false << "E0.0000°";
+	data << 10.	<< true  << true  << false << "E10.0000°";
+	data << -13.5	<< true  << true  << false << "W13.5000°";
+	data << -90.1	<< true  << true  << false << "W90.1000°";
+	data << 270.6	<< true  << true  << false << "W89.4000°";
+	data << 360.6	<< true  << true  << false << "E0.6000°";
+	data << -0.01	<< true  << true  << false << "W0.0100°";
+	// case 3
+	data << 0.	<< false << true  << true  << "W0°00'00\"";
+	data << 10.	<< false << true  << true  << "W10°00'00\"";
+	data << -13.5	<< false << true  << true  << "E13°30'00\"";
+	data << -90.1	<< false << true  << true  << "E90°06'00\"";
+	data << 270.6	<< false << true  << true  << "E89°24'00\"";
+	data << 360.6	<< false << true  << true  << "W0°36'00\"";
+	data << -0.01	<< false << true  << true  << "E0°00'36\"";
+	// case 4
+	data << 0.	<< false << true  << false << "W0.0000°";
+	data << 10.	<< false << true  << false << "W10.0000°";
+	data << -13.5	<< false << true  << false << "E13.5000°";
+	data << -90.1	<< false << true  << false << "E90.1000°";
+	data << 270.6	<< false << true  << false << "E89.4000°";
+	data << 360.6	<< false << true  << false << "W0.6000°";
+	data << -0.01	<< false << true  << false << "E0.0100°";
+	// case 5
+	data << 0.	<< true  << false << true  << "E0°00'00\"";
+	data << 10.	<< true  << false << true  << "E10°00'00\"";
+	data << -13.5	<< true  << false << true  << "W13°30'00\"";
+	data << -90.1	<< true  << false << true  << "W90°06'00\"";
+	data << 270.6	<< true  << false << true  << "E270°36'00\"";
+	data << -0.01	<< true  << false << true  << "W0°00'36\"";
+	// case 6
+	data << 0.	<< true  << false << false << "E0.0000°";
+	data << 10.	<< true  << false << false << "E10.0000°";
+	data << -13.5	<< true  << false << false << "W13.5000°";
+	data << -90.1	<< true  << false << false << "W90.1000°";
+	data << 270.6	<< true  << false << false << "E270.6000°";
+	data << -0.01	<< true  << false << false << "W0.0100°";
+
+	while (data.count()>=5)
+	{
+		double angle	  = data.takeFirst().toDouble();
+		bool eastPositive = data.takeFirst().toBool();
+		bool semiSphere   = data.takeFirst().toBool();
+		bool useDMSfmt    = data.takeFirst().toBool();
+		QString expDMS 	  = data.takeFirst().toString();
+		QString DMS	  = StelUtils::decDegToLongitudeStr(angle, eastPositive, semiSphere, useDMSfmt);
+
+		QVERIFY2(DMS==expDMS, qPrintable(QString("%1 degrees = %2 (expected %3)").arg(QString::number(angle, 'f', 5), DMS, expDMS)));
 	}
 }
 

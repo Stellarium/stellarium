@@ -38,6 +38,8 @@ private slots:
 	void testRadToDMSPStr();
 	void testDDToDMS();
 	void testDDToDMSStr();
+	void testDDToLatitudeStr();
+	void testDDToLongitudeStr();
 	void testRadToDD();
 	void testStringCoordinateToRad();
 	void testHMSToHours();
