@@ -116,11 +116,6 @@ float CustomObject::getVMagnitude(const StelCore* core) const
 		return 99.f;
 }
 
-double CustomObject::getAngularRadius(const StelCore*) const
-{
-	return 0.00001;
-}
-
 void CustomObject::update(double deltaTime)
 {
 	labelsFader.update(static_cast<int>(deltaTime*1000));
@@ -139,8 +134,7 @@ void CustomObject::draw(StelCore* core, StelPainter *painter)
 	if (isMarker)
 	{
 		markerTexture->bind();
-		const float size = static_cast<float>(getAngularRadius(Q_NULLPTR))*M_PI_180f*painter->getProjector()->getPixelPerRadAtCenter();
-		const float shift = markerSize + size/1.6f;
+		const float shift = markerSize + 2.f;
 
 		painter->drawSprite2dMode(static_cast<float>(pos[0]), static_cast<float>(pos[1]), markerSize);
 

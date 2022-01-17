@@ -97,8 +97,6 @@ public:
 	//! Get the visual magnitude of pulsar
 	virtual float getVMagnitude(const StelCore* core) const Q_DECL_OVERRIDE;
 	virtual float getVMagnitudeWithExtinction(const StelCore *core) const;
-	//! Get the angular size of pulsar
-	virtual double getAngularRadius(const StelCore* core) const Q_DECL_OVERRIDE;
 	//! Get the localized name of pulsar
 	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
 	//! Get the english name of pulsar

@@ -64,8 +64,6 @@ private:
 	//! observer centered J2000 coordinates.
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const Q_DECL_OVERRIDE {return XYZname;}
 
-	//virtual double getAngularRadius(const StelCore*) const {Q_ASSERT(0); return 0;} // TODO
-
 	//! @param record string containing the following whitespace
 	//! separated fields: abbreviation - a three character abbreviation
 	//! for the asterism, a number of lines (pairs), and a list of Hipparcos
