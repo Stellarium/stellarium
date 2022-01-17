@@ -281,6 +281,7 @@ private:
 	double jdLaunchYearJan1;
 	//! Standard visual magnitude of the satellite.
 	double stdMag;
+	//! Radar cross-section value of the satellite (in meters).
 	double RCS;
 	double perigee;
 	double apogee;
