@@ -43,6 +43,7 @@ CustomObject::CustomObject(const QString& codesignation, const Vec3d& coordJ2000
 	, designation(codesignation)
 	, isMarker(isVisible)
 {
+	XYZ.normalize();
 	markerTexture = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/cross.png");	
 	initialized = true;
 }
