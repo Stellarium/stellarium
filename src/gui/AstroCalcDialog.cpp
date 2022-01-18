@@ -709,15 +709,15 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 
 		int step = 180;
 		int limit = 485;
+#ifdef USE_STATIC_PLUGIN_SATELLITES
 		bool isSatellite = false;
 
-#ifdef USE_STATIC_PLUGIN_SATELLITES
 		SatelliteP sat;		
 		if (selectedObject->getType() == "Satellite") 
 		{
 			// get reference to satellite
 			isSatellite = true;
-			sat = GETSTELMODULE(Satellites)->getById(selectedObject->getInfoMap(core)["catalog"].toString());
+			sat = GETSTELMODULE(Satellites)->getById(selectedObject.staticCast<Satellite>()->getCatalogNumberString());
 		}
 #endif
 
@@ -730,13 +730,13 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 			double JD = noon + ltime / 86400 - shift - 0.5;
 			core->setJD(JD);
 			
+#ifdef USE_STATIC_PLUGIN_SATELLITES
 			if (isSatellite)
 			{
-#ifdef USE_STATIC_PLUGIN_SATELLITES
 				sat->update(0.0);
-#endif
 			}
 			else
+#endif
 				core->update(0.0);
 
 			StelUtils::rectToSphe(&az, &alt, selectedObject->getAltAzPosAuto(core));
@@ -2579,7 +2579,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		{
 			// get reference to satellite
 			isSatellite = true;
-			sat = GETSTELMODULE(Satellites)->getById(selectedObject->getInfoMap(core)["catalog"].toString());
+			sat = GETSTELMODULE(Satellites)->getById(selectedObject.staticCast<Satellite>()->getCatalogNumberString());
 		}
 #endif
 
