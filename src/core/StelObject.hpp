@@ -138,10 +138,10 @@ public:
 	//! - elatJ2000 : ecliptic latitude (Earth's J2000 frame) in decimal degrees
 	//! - vmag : visual magnitude
 	//! - vmage : visual magnitude (after atmospheric extinction)
-	//! - size: angular size in radians
-	//! - size-dd : angular size in decimal degrees
-	//! - size-deg : angular size in decimal degrees (formatted string)
-	//! - size-dms : angular size in DMS format
+	//! - size: angular size (diameter) in radians
+	//! - size-dd : angular size (diameter) in decimal degrees
+	//! - size-deg : angular size (diameter) in decimal degrees (formatted string)
+	//! - size-dms : angular size (diameter) in DMS format
 	//! - rise : time of rise in HM format
 	//! - rise-dhr : time of rise in decimal hours
 	//! - transit : time of transit in HM format

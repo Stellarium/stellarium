@@ -1020,15 +1020,10 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	map.insert("vmage", getVMagnitudeWithExtinction(core));
 
 	// angular size
-	double angularSize = 2.*getAngularRadius(core)*M_PI_180;
-	bool sign;
-	double deg;
-	StelUtils::radToDecDeg(angularSize, sign, deg);
-	// TODO Under which circumstances can sign become negative?
-	if (!sign)
-		deg *= -1;
-	map.insert("size", angularSize); // TODO: What is the purpose/application of giving size in radians?
-	map.insert("size-dd", deg);
+	double angularSize = getAngularRadius(core)*(2.*M_PI_180);
+	Q_ASSERT(angularSize>=0.);
+	map.insert("size", angularSize);
+	map.insert("size-dd", angularSize*M_180_PI);
 	map.insert("size-deg", StelUtils::radToDecDegStr(angularSize, 5));
 	map.insert("size-dms", StelUtils::radToDmsPStr(angularSize, 2));
 
