@@ -627,11 +627,9 @@ float Satellite::getVMagnitude(const StelCore* core) const
 			// fracil = fraction of satellite illuminated,
 			//	    [ 0 <= fracil <= 1 ]
 			//
-			// Original dscription: http://www.prismnet.com/~mmccants/tles/mccdesc.html
+			// Original description: http://www.prismnet.com/~mmccants/tles/mccdesc.html
 
-			double fracil = calculateIlluminatedFraction();
-			if (fracil==0)
-				fracil = 0.000001;
+			double fracil = qMax(0.000001, static_cast<double>(calculateIlluminatedFraction()));
 
 #if(SATELLITES_PLUGIN_IRIDIUM == 1)
 			if (pSatWrapper && name.startsWith("IRIDIUM"))
@@ -713,9 +711,9 @@ float Satellite::getVMagnitude(const StelCore* core) const
 			}
 			else // not Iridium
 #endif
-				vmag = stdMag;
+				vmag = static_cast<float>(stdMag);
 
-			vmag = static_cast<float>(vmag - 15.75 + 2.5 * std::log10(range * range / fracil));
+			vmag += -15.75f + 2.5f * static_cast<float>(std::log10(range * range / fracil));
 		}
 		else if (RCS>0.) // OK, artificial satellite has RCS value and no standard magnitude
 		{
