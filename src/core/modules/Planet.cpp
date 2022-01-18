@@ -694,7 +694,7 @@ QString Planet::getInfoStringSize(const StelCore *core, const InfoStringGroup& f
 	QString str;
 	QTextStream oss(&str);
 
-	const double angularSize = 2.*getAngularRadius(core)*M_PI_180;
+	const double angularSize = getAngularRadius(core)*(2.*M_PI_180);
 	if (flags&Size && angularSize>=4.8e-8)
 	{
 		QString s1, s2, sizeStr = "";
@@ -970,7 +970,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 	{
 		const bool withTables = StelApp::getInstance().getFlagUseFormattingOutput();
 		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
-		const double angularSize = 2.*getAngularRadius(core)*M_PI_180;
+		const double angularSize = getAngularRadius(core)*(2.*M_PI_180);
 		const double siderealPeriod = getSiderealPeriod(); // days required for revolution around parent.
 		const double siderealDay = getSiderealDay(); // =re.period
 		static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
@@ -1246,7 +1246,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 				{
 					const double eclipseMagnitude =
 							(0.5 * angularSize
-							 + (obj->getAngularRadius(core) * M_PI_180) / obj->getInfoMap(core)["scale"].toDouble()
+							 + (obj->getAngularRadius(core) * M_PI_180) / obj->getSphereScale()
 							- getJ2000EquatorialPos(core).angle(obj->getJ2000EquatorialPos(core)))
 							/ angularSize;
 					oss << QString("%1: %2<br />").arg(q_("Eclipse magnitude")).arg(QString::number(eclipseMagnitude, 'f', 3));
@@ -1367,7 +1367,7 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 			if (core->getCurrentPlanet()==ssystem->getEarth() && obj==ssystem->getMoon())
 			{
 				double angularSize = 2.*getAngularRadius(core)*M_PI_180;
-				const double eclipseMagnitude = (0.5*angularSize + (obj->getAngularRadius(core)*M_PI_180)/obj->getInfoMap(core)["scale"].toDouble() - getJ2000EquatorialPos(core).angle(obj->getJ2000EquatorialPos(core)))/angularSize;
+				const double eclipseMagnitude = (0.5*angularSize + (obj->getAngularRadius(core)*M_PI_180)/obj->getSphereScale() - getJ2000EquatorialPos(core).angle(obj->getJ2000EquatorialPos(core)))/angularSize;
 				map.insert("eclipse-magnitude", eclipseMagnitude);
 			}
 			else
