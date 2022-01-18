@@ -334,7 +334,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 
 	if (flags&Size && RCS>0.)
 	{
-		const double angularSize = getAngularRadius(core)*M_PI_180;
+		const double angularSize = getAngularRadius(core)*2.*M_PI_180;
 		QString sizeStr = "";
 		if (withDecimalDegree)
 			sizeStr = StelUtils::radToDecDegStr(angularSize, 5, false, true);
@@ -757,15 +757,15 @@ QString Satellite::getOperationalStatus() const
 
 double Satellite::getAngularRadius(const StelCore*) const
 {
+	double radius = 0.05 / 3600.; // assume 0.1 arcsecond default diameter
 	if (RCS>0.)
 	{
-		double size = std::sqrt(4*RCS/M_PI); // Let's use spherical satellites
-		if (isISS)
-			size = 109.; // Special case: let's use max. size of ISS (109 meters: https://www.nasa.gov/feature/facts-and-figures)
-		return 2.* std::atan(size/(2000.*range))*M_180_PI; // Computing an angular size of artificial satellite ("size" in meters, "range" in kilometres, so, 2000 is equal 1000*2)
+		double halfSize = isISS ?
+			 109. * 0.5 :         // Special case: let's use max. size of ISS (109 meters: https://www.nasa.gov/feature/facts-and-figures)
+			 std::sqrt(RCS/M_PI); // Let's assume spherical satellites/circular cross-section
+		radius = std::atan(halfSize/(1000.*range))*M_180_PI; // Computing an angular size of artificial satellite ("halfSize" in metres, "range" in kilometres)
 	}
-	else
-		return 0.00001;
+	return radius;
 }
 
 void Satellite::setNewTleElements(const QString& tle1, const QString& tle2)
@@ -954,7 +954,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 			if (XYZ.angle(moon->getJ2000EquatorialPos(core))*M_180_PI <= moon->getSpheroidAngularRadius(core) || XYZ.angle(sun->getJ2000EquatorialPos(core))*M_180_PI <= sun->getSpheroidAngularRadius(core))
 			{
 				painter.setColor(transitSatelliteColor, 1.f);
-				int screenSizeSat = static_cast<int>((getAngularRadius(core)*M_PI_180)*static_cast<double>(painter.getProjector()->getPixelPerRadAtCenter()));
+				int screenSizeSat = static_cast<int>((getAngularRadius(core)*(2.*M_PI_180))*static_cast<double>(painter.getProjector()->getPixelPerRadAtCenter()));
 				if (screenSizeSat>0)
 				{
 					painter.setBlending(true, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);

@@ -185,7 +185,7 @@ public:
 	virtual Vec3f getInfoColor(void) const Q_DECL_OVERRIDE;
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const Q_DECL_OVERRIDE;
 	virtual float getVMagnitude(const StelCore* core) const Q_DECL_OVERRIDE;
-	//! Get angular size, degrees
+	//! Get angular half-size, degrees
 	virtual double getAngularRadius(const StelCore*) const Q_DECL_OVERRIDE;
 	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
 	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE
@@ -281,7 +281,7 @@ private:
 	double jdLaunchYearJan1;
 	//! Standard visual magnitude of the satellite.
 	double stdMag;
-	//! Radar cross-section value of the satellite (in meters).
+	//! Radar cross-section value of the satellite (in meters squared).
 	double RCS;
 	double perigee;
 	double apogee;
