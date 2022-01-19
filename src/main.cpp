@@ -379,7 +379,7 @@ int main(int argc, char **argv)
 	QGuiApplication::setFont(tmpFont);
 
 	// Initialize translator feature
-	StelTranslator::init(StelFileMgr::getInstallationDir() + "/data/iso639-1.utf8");
+	StelTranslator::init(StelFileMgr::getInstallationDir() + "/data/languages.tab");
 	
 	// Use our custom translator for Qt translations as well
 	CustomQTranslator trans;
