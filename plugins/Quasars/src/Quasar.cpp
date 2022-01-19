@@ -182,11 +182,6 @@ float Quasar::getVMagnitude(const StelCore* core) const
 	return VMagnitude;
 }
 
-double Quasar::getAngularSize(const StelCore*) const
-{
-	return 0.00001;
-}
-
 float Quasar::getSelectPriority(const StelCore* core) const
 {
 	float mag = getVMagnitudeWithExtinction(core);
@@ -213,6 +208,7 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 
 	StelSkyDrawer* sd = core->getSkyDrawer();
 	const float mlimit = sd->getLimitMagnitude();
+	const float shift = 8.f;
 	float mag = getVMagnitudeWithExtinction(core);
 	if (useMarkers)
 		mag -= shiftVisibility;
@@ -222,16 +218,12 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 
 	if (mag <= mlimit)
 	{
-		float size, shift=0;
 		if (distributionMode || useMarkers)
 		{
 			painter.setBlending(true, GL_ONE, GL_ONE);
 			painter.setColor(markerColor, 1);
 
 			Quasar::markerTexture->bind();
-			size = getAngularSize(Q_NULLPTR)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
-			shift = 5.f + size/1.6f;
-
 			painter.drawSprite2dMode(getJ2000EquatorialPos(core), distributionMode ? 4.f : 5.f);
 		}
 		else
@@ -248,8 +240,6 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 			sd->drawPointSource(&painter, vf, rcMag, sd->indexToColor(BvToColorIndex(bV)), true, qMin(1.0f, 1.0f-0.9f*altAz[2]));
 			sd->postDrawPointSource(&painter);
 			painter.setColor(color[0], color[1], color[2], 1);
-			size = getAngularSize(Q_NULLPTR)*M_PI_180f*painter.getProjector()->getPixelPerRadAtCenter();
-			shift = 6.f + size/1.8f;
 		}
 
 		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+2.f)<mlimit)

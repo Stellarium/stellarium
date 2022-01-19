@@ -376,8 +376,7 @@ void MeteorShower::drawRadiant(StelCore *core)
 		{
 			painter.setColor(rgb);
 			painter.setFont(m_mgr->getFont());
-			const float size = static_cast<float>(getAngularSize(Q_NULLPTR))*M_PI_180f*static_cast<float>(painter.getProjector()->getPixelPerRadAtCenter());
-			const float shift = 8.f + size/1.8f;
+			const float shift = 8.f;
 			if ((mag+1.f)<mlimit)
 				painter.drawText(static_cast<float>(XY[0])+shift, static_cast<float>(XY[1])+shift, getNameI18n(), 0, 0, 0, false);
 		}

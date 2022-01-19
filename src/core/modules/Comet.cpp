@@ -424,15 +424,15 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 
 	// Compute the 2D position and check if in the screen
 	const StelProjectorP prj = core->getProjection(transfo);
-	const double screenSz = (getAngularSize(core))*M_PI_180*static_cast<double>(prj->getPixelPerRadAtCenter());
+	const double screenRd = (getAngularRadius(core))*M_PI_180*static_cast<double>(prj->getPixelPerRadAtCenter());
 	const double viewport_left = prj->getViewportPosX();
 	const double viewport_bottom = prj->getViewportPosY();
 	const bool projectionValid=prj->project(Vec3d(0.), screenPos);
 	if (projectionValid
-		&& screenPos[1] > viewport_bottom - screenSz
-		&& screenPos[1] < viewport_bottom + prj->getViewportHeight()+screenSz
-		&& screenPos[0] > viewport_left - screenSz
-		&& screenPos[0] < viewport_left + prj->getViewportWidth() + screenSz)
+		&& screenPos[1] > viewport_bottom - screenRd
+		&& screenPos[1] < viewport_bottom + prj->getViewportHeight()+screenRd
+		&& screenPos[0] > viewport_left - screenRd
+		&& screenPos[0] < viewport_left + prj->getViewportWidth() + screenRd)
 	{
 		// Draw the name, and the circle if it's not too close from the body it's turning around
 		// this prevents name overlapping (ie for jupiter satellites)
@@ -445,7 +445,7 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 		labelsFader = (flagLabels && ang_dist>0.25f && maxMagLabels>getVMagnitude(core));
 		drawHints(core, planetNameFont);
 
-		draw3dModel(core,transfo,static_cast<float>(screenSz));
+		draw3dModel(core,transfo,static_cast<float>(screenRd));
 	}
 	else
 		if (!projectionValid && prj.data()->getNameI18() == q_("Orthographic"))

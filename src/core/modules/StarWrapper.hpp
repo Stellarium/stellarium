@@ -109,7 +109,6 @@ protected:
 	virtual float getBV(void) const  Q_DECL_OVERRIDE {return s->getBV();}
 	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE {return QString();}
 	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE {return s->getNameI18n();}
-	virtual double getAngularSize(const StelCore*) const Q_DECL_OVERRIDE {return 0.;}
 protected:
 	const SpecialZoneArray<Star> *const a;
 	const SpecialZoneData<Star> *const z;

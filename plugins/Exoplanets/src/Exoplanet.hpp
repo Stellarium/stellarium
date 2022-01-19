@@ -104,8 +104,6 @@ public:
 	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const Q_DECL_OVERRIDE;
 	//! Get the visual magnitude
 	virtual float getVMagnitude(const StelCore* core) const Q_DECL_OVERRIDE;
-	//! Get the angular size of host star
-	virtual double getAngularSize(const StelCore* core) const Q_DECL_OVERRIDE;
 	//! Get the localized name of host star
 	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
 	//! Get the english name

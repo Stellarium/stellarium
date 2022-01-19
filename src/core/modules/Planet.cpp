@@ -694,13 +694,13 @@ QString Planet::getInfoStringSize(const StelCore *core, const InfoStringGroup& f
 	QString str;
 	QTextStream oss(&str);
 
-	const double angularSize = 2.*getAngularSize(core)*M_PI_180;
+	const double angularSize = getAngularRadius(core)*(2.*M_PI_180);
 	if (flags&Size && angularSize>=4.8e-8)
 	{
 		QString s1, s2, sizeStr = "";
 		if (rings)
 		{
-			const double withoutRings = 2.*getSpheroidAngularSize(core)*M_PI/180.;
+			const double withoutRings = 2.*getSpheroidAngularRadius(core)*M_PI/180.;
 			if (withDecimalDegree)
 			{
 				s1 = StelUtils::radToDecDegStr(withoutRings, 5, false, true);
@@ -970,7 +970,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 	{
 		const bool withTables = StelApp::getInstance().getFlagUseFormattingOutput();
 		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
-		const double angularSize = 2.*getAngularSize(core)*M_PI_180;
+		const double angularSize = getAngularRadius(core)*(2.*M_PI_180);
 		const double siderealPeriod = getSiderealPeriod(); // days required for revolution around parent.
 		const double siderealDay = getSiderealDay(); // =re.period
 		static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
@@ -1246,7 +1246,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 				{
 					const double eclipseMagnitude =
 							(0.5 * angularSize
-							 + (obj->getAngularSize(core) * M_PI_180) / obj->getInfoMap(core)["scale"].toDouble()
+							 + (obj->getAngularRadius(core) * M_PI_180) / obj->getSphereScale()
 							- getJ2000EquatorialPos(core).angle(obj->getJ2000EquatorialPos(core)))
 							/ angularSize;
 					oss << QString("%1: %2<br />").arg(q_("Eclipse magnitude")).arg(QString::number(eclipseMagnitude, 'f', 3));
@@ -1366,8 +1366,8 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 			PlanetP obj = eclObj.second;
 			if (core->getCurrentPlanet()==ssystem->getEarth() && obj==ssystem->getMoon())
 			{
-				double angularSize = 2.*getAngularSize(core)*M_PI_180;
-				const double eclipseMagnitude = (0.5*angularSize + (obj->getAngularSize(core)*M_PI_180)/obj->getInfoMap(core)["scale"].toDouble() - getJ2000EquatorialPos(core).angle(obj->getJ2000EquatorialPos(core)))/angularSize;
+				double angularSize = 2.*getAngularRadius(core)*M_PI_180;
+				const double eclipseMagnitude = (0.5*angularSize + (obj->getAngularRadius(core)*M_PI_180)/obj->getSphereScale() - getJ2000EquatorialPos(core).angle(obj->getJ2000EquatorialPos(core)))/angularSize;
 				map.insert("eclipse-magnitude", eclipseMagnitude);
 			}
 			else
@@ -2641,14 +2641,14 @@ float Planet::getVMagnitude(const StelCore* core) const
 	return -26.73f - 2.5f * static_cast<float>(log10(F));
 }
 
-double Planet::getAngularSize(const StelCore* core) const
+double Planet::getAngularRadius(const StelCore* core) const
 {
 	const double rad = (rings ? rings->getSize() : equatorialRadius);
 	return std::atan2(rad*sphereScale,getJ2000EquatorialPos(core).length()) * M_180_PI;
 }
 
 
-double Planet::getSpheroidAngularSize(const StelCore* core) const
+double Planet::getSpheroidAngularRadius(const StelCore* core) const
 {
 	return std::atan2(equatorialRadius*sphereScale,getJ2000EquatorialPos(core).length()) * M_180_PI;
 }
@@ -2718,8 +2718,8 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 
 	// Compute the 2D position and check if in the screen
 	const StelProjectorP prj = core->getProjection(transfo);
-	const double screenSz = (getAngularSize(core))*M_PI_180*static_cast<double>(prj->getPixelPerRadAtCenter());
-	const double viewportBufferSz= (englishName=="Sun" ? screenSz+125. : screenSz);	// enlarge if this is sun with its huge halo.
+	const double screenRd = (getAngularRadius(core))*M_PI_180*static_cast<double>(prj->getPixelPerRadAtCenter());
+	const double viewportBufferSz= (englishName=="Sun" ? screenRd+125. : screenRd);	// enlarge if this is sun with its huge halo.
 	const double viewport_left = prj->getViewportPosX();
 	const double viewport_bottom = prj->getViewportPosY();
 
@@ -2742,7 +2742,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 			labelsFader=false;
 		drawHints(core, planetNameFont);
 
-		draw3dModel(core,transfo,static_cast<float>(screenSz));
+		draw3dModel(core,transfo,static_cast<float>(screenRd));
 	}
 	else if (permanentDrawingOrbits) // A special case for demos
 		drawOrbit(core);
@@ -3211,7 +3211,7 @@ void Planet::deinitFBO()
 	shadowInitialized = false;
 }
 
-void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenSz, bool drawOnlyRing)
+void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenRd, bool drawOnlyRing)
 {
 	// This is the main method drawing a planet 3d model
 	// Some work has to be done on this method to make the rendering nicer
@@ -3231,8 +3231,8 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 	if (this==ssm->getSun() && drawSunHalo && core->getSkyDrawer()->getFlagEarlySunHalo())
 	{
 		// Prepare openGL lighting parameters according to luminance
-		float surfArcMin2 = getSpheroidAngularSize(core)*60;
-		surfArcMin2 = surfArcMin2*surfArcMin2*M_PI; // the total illuminated area in arcmin^2
+		float surfArcMin2 = static_cast<float>(getSpheroidAngularRadius(core))*60.f;
+		surfArcMin2 = surfArcMin2*surfArcMin2*M_PIf; // the total illuminated area in arcmin^2
 
 		StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
 		Vec3d tmp = getJ2000EquatorialPos(core);
@@ -3262,12 +3262,12 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			// We can safely assume beta=0 and ignore nutation.
 			const float q0=static_cast<float>(atan(-cos(lambdaJDE)*tan(eclJDE)));
 			rotationAngle -= q0*static_cast<float>(180.0/M_PI);
-			core->getSkyDrawer()->drawSunCorona(&sPainter, tmp.toVec3f(), 512.f/192.f*screenSz, haloColorToDraw, alpha*alpha, rotationAngle);
+			core->getSkyDrawer()->drawSunCorona(&sPainter, tmp.toVec3f(), 512.f/192.f*screenRd, haloColorToDraw, alpha*alpha, rotationAngle);
 		}
 	}
 
 	// Draw the real 3D object.
-	if (screenSz>1.f)
+	if (screenRd>1.f)
 	{
 		//make better use of depth buffer by adjusting clipping planes
 		//must be done before creating StelPainter
@@ -3348,20 +3348,20 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 		if(ssm->getFlagUseObjModels() && !objModelPath.isEmpty())
 		{
-			if(!drawObjModel(&sPainter, screenSz))
+			if(!drawObjModel(&sPainter, screenRd))
 			{
-				drawSphere(&sPainter, screenSz, drawOnlyRing);
+				drawSphere(&sPainter, screenRd, drawOnlyRing);
 			}
 		}
 		else if (!survey || survey->getInterstate() < 1.0f)
 		{
-			drawSphere(&sPainter, screenSz, drawOnlyRing);
+			drawSphere(&sPainter, screenRd, drawOnlyRing);
 		}
 
 		if (survey && survey->getInterstate() > 0.0f)
 		{
 			drawSurvey(core, &sPainter);
-			drawSphere(&sPainter, screenSz, true);
+			drawSphere(&sPainter, screenRd, true);
 		}
 
 
@@ -3380,7 +3380,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		const Vec3d obj = getJ2000EquatorialPos(core);
 		const Vec3d par = getParent()->getJ2000EquatorialPos(core);
 		const double angle = obj.angle(par)*M_180_PI;
-		const double asize = getParent()->getSpheroidAngularSize(core);
+		const double asize = getParent()->getSpheroidAngularRadius(core);
 		if (angle<=asize)
 			allowDrawHalo = false;
 	}
@@ -3392,7 +3392,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 	if ((hasHalo() || this==ssm->getSun()) && allowDrawHalo)
 	{
 		// Prepare OpenGL lighting parameters according to luminance. For scaled-up planets, reduce brightness of the halo.
-		float surfArcMin2 = static_cast<float>(getSpheroidAngularSize(core)*qMax(1.0, (englishName=="Moon" ? 1.0 : 0.025)*sphereScale))*60.f;
+		float surfArcMin2 = static_cast<float>(getSpheroidAngularRadius(core)*qMax(1.0, (englishName=="Moon" ? 1.0 : 0.025)*sphereScale))*60.f;
 		surfArcMin2 = surfArcMin2*surfArcMin2*M_PIf; // the total illuminated area in arcmin^2
 
 		StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
@@ -3437,7 +3437,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			const float q0=static_cast<float>(atan(-cos(lambdaJDE)*tan(eclJDE)));
 			rotationAngle -= q0*static_cast<float>(180.0/M_PI);
 
-			core->getSkyDrawer()->drawSunCorona(&sPainter, tmp.toVec3f(), 512.f/192.f*screenSz, haloColorToDraw, alpha*alpha, rotationAngle);
+			core->getSkyDrawer()->drawSunCorona(&sPainter, tmp.toVec3f(), 512.f/192.f*screenRd, haloColorToDraw, alpha*alpha, rotationAngle);
 		}
 	}
 }
@@ -3662,7 +3662,7 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 	return data;
 }
 
-void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
+void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 {
 	const float sphereScaleF=static_cast<float>(sphereScale);
 	if (texMap)
@@ -3679,7 +3679,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 
 	// Draw the spheroid itself
 	// Adapt the number of facets according with the size of the sphere for optimization
-	const unsigned short int nb_facet = static_cast<unsigned short int>(qBound(10u, static_cast<uint>(screenSz * 40.f/50.f * sqrt(sphereScaleF)), 100u));	// 40 facets for 1024 pixels diameter on screen
+	const unsigned short int nb_facet = static_cast<unsigned short int>(qBound(10u, static_cast<uint>(screenRd * 40.f/50.f * sqrt(sphereScaleF)), 100u));	// 40 facets for 1024 pixels diameter on screen
 
 	// Generates the vertices
 	Planet3DModel model;
@@ -3897,7 +3897,7 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 	RenderData rData = setCommonShaderUniforms(*painter, shader, *shaderVars);
 	QVector<Vec3f> projectedVertsArray;
 	QVector<Vec3f> vertsArray;
-	double angle = getSpheroidAngularSize(core) * M_PI_180;
+	const double angle = getSpheroidAngularRadius(core) * M_PI_180;
 
 	if (rings)
 	{
@@ -4040,9 +4040,9 @@ bool Planet::ensureObjLoaded()
 	return true;
 }
 
-bool Planet::drawObjModel(StelPainter *painter, float screenSz)
+bool Planet::drawObjModel(StelPainter *painter, float screenRd)
 {
-	Q_UNUSED(screenSz); //screen size unused for now, use it for LOD or something?
+	Q_UNUSED(screenRd); //screen size unused for now, use it for LOD or something?
 
 	//make sure the OBJ is loaded, or start loading it
 	if(!ensureObjLoaded())
@@ -4316,7 +4316,7 @@ void Planet::drawHints(const StelCore* core, const QFont& planetNameFont)
 	StelPainter sPainter(prj);
 	sPainter.setFont(planetNameFont);
 	// Draw nameI18 + scaling if it's not == 1.
-	float tmp = (hintFader.getInterstate()<=0.f ? 7.f : 10.f) + static_cast<float>(getAngularSize(core)*M_PI/180.)*prj->getPixelPerRadAtCenter()/1.44f; // Shift for nameI18 printing
+	float tmp = (hintFader.getInterstate()<=0.f ? 7.f : 10.f) + static_cast<float>(getAngularRadius(core)*M_PI/180.)*prj->getPixelPerRadAtCenter()/1.44f; // Shift for nameI18 printing
 	sPainter.setColor(labelColor,labelsFader.getInterstate());
 	sPainter.drawText(static_cast<float>(screenPos[0]),static_cast<float>(screenPos[1]), getPlanetLabel(), 0, tmp, tmp, false);
 
@@ -4527,9 +4527,9 @@ Vec4d Planet::getRTSTime(const StelCore *core, const double altitude) const
 	if ( (getEnglishName()=="Moon") && (loc.planetName=="Earth")) // && core->getUseTopocentricCoordinates())
 		//ho = +0.7275*asin(6378.14/(eclipticPos.length()*AU)); // horizon parallax factor. This is needed for tabulations, but we must do something else.
 		//ho = -0.25*asin(6378.14/(eclipticPos.length()*AU)); // horizon parallax factor.
-		ho = - getAngularSize(core) * M_PI_180; // semidiameter;
+		ho = - getAngularRadius(core) * M_PI_180; // semidiameter;
 	else if (getEnglishName()=="Sun")
-		ho = - getAngularSize(core) * M_PI_180; // semidiameter; Canonical value 16', but this is accurate even from other planets...
+		ho = - getAngularRadius(core) * M_PI_180; // semidiameter; Canonical value 16', but this is accurate even from other planets...
 
 	if (core->getSkyDrawer()->getFlagHasAtmosphere())
 	{

@@ -298,7 +298,7 @@ bool SkyLabel::draw(StelCore* core, StelPainter& sPainter)
 	}
 	else
 	{
-		float shift = 4.f + static_cast<float>(labelObject->getAngularSize(core))*M_PI_180f*sPainter.getProjector()->getPixelPerRadAtCenter()/1.8f;
+		float shift = 4.f + static_cast<float>(labelObject->getAngularRadius(core))*M_PI_180f*sPainter.getProjector()->getPixelPerRadAtCenter()/1.8f;
 		// use the object size
 		xOffset *= static_cast<double>(shift);
 		yOffset *= static_cast<double>(shift);

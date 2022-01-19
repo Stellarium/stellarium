@@ -241,11 +241,6 @@ float Supernova::getVMagnitude(const StelCore* core) const
 	return static_cast<float>(vmag);
 }
 
-double Supernova::getAngularSize(const StelCore*) const
-{
-	return 0.00001;
-}
-
 void Supernova::update(double deltaTime)
 {
 	labelsFader.update(static_cast<int>(deltaTime*1000));
@@ -256,6 +251,7 @@ void Supernova::draw(StelCore* core, StelPainter& painter)
 	StelSkyDrawer* sd = core->getSkyDrawer();
 	const float mlimit = sd->getLimitMagnitude();
 	const float mag = getVMagnitudeWithExtinction(core);
+	const float shift = 8.f;
 	
 	if (mag <= mlimit)
 	{
@@ -271,8 +267,6 @@ void Supernova::draw(StelCore* core, StelPainter& painter)
 		sd->drawPointSource(&painter, vf, rcMag, color, true, qMin(1.0f, 1.0f-0.9f*altAz[2]));
 		sd->postDrawPointSource(&painter);
 		painter.setColor(color, 1.f);
-		float size = static_cast<float>(getAngularSize(Q_NULLPTR))*M_PI_180f*painter.getProjector()->getPixelPerRadAtCenter();
-		float shift = 6.f + size/1.8f;
 		StarMgr* smgr = GETSTELMODULE(StarMgr); // It's need for checking displaying of labels for stars
 		if (labelsFader.getInterstate()<=0.f && (mag+5.f)<mlimit && smgr->getFlagLabels())
 			painter.drawText(getJ2000EquatorialPos(core), designation, 0, shift, shift, false);

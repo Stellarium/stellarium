@@ -709,15 +709,15 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 
 		int step = 180;
 		int limit = 485;
+#ifdef USE_STATIC_PLUGIN_SATELLITES
 		bool isSatellite = false;
 
-#ifdef USE_STATIC_PLUGIN_SATELLITES
 		SatelliteP sat;		
 		if (selectedObject->getType() == "Satellite") 
 		{
 			// get reference to satellite
 			isSatellite = true;
-			sat = GETSTELMODULE(Satellites)->getById(selectedObject->getInfoMap(core)["catalog"].toString());
+			sat = GETSTELMODULE(Satellites)->getById(selectedObject.staticCast<Satellite>()->getCatalogNumberString());
 		}
 #endif
 
@@ -730,13 +730,13 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 			double JD = noon + ltime / 86400 - shift - 0.5;
 			core->setJD(JD);
 			
+#ifdef USE_STATIC_PLUGIN_SATELLITES
 			if (isSatellite)
 			{
-#ifdef USE_STATIC_PLUGIN_SATELLITES
 				sat->update(0.0);
-#endif
 			}
 			else
+#endif
 				core->update(0.0);
 
 			StelUtils::rectToSphe(&az, &alt, selectedObject->getAltAzPosAuto(core));
@@ -1127,7 +1127,7 @@ void AstroCalcDialog::currentCelestialPositions()
 					extra = dash;
 
 				// Convert to arc-minutes the average angular size of deep-sky object
-				QString angularSize = QString::number(obj->getAngularSize(core) * 120., 'f', 3);
+				QString angularSize = QString::number(obj->getAngularRadius(core) * 120., 'f', 3);
 				if (angularSize.toFloat() < 0.01f)
 					angularSize = dash;
 
@@ -1219,7 +1219,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				QString extra = QString::number(pos.length(), 'f', 5); // A.U.
 
 				// Convert to arc-seconds the angular size of Solar system object (with rings, if any)
-				QString angularSize = QString::number(planet->getAngularSize(core) * 120., 'f', 4);
+				QString angularSize = QString::number(planet->getAngularRadius(core) * 120., 'f', 4);
 				if (angularSize.toFloat() < 1e-4f || planet->getPlanetType() == Planet::isComet)
 					angularSize = dash;
 
@@ -2579,7 +2579,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		{
 			// get reference to satellite
 			isSatellite = true;
-			sat = GETSTELMODULE(Satellites)->getById(selectedObject->getInfoMap(core)["catalog"].toString());
+			sat = GETSTELMODULE(Satellites)->getById(selectedObject.staticCast<Satellite>()->getCatalogNumberString());
 		}
 #endif
 
@@ -3054,26 +3054,26 @@ double AstroCalcDialog::computeGraphValue(const PlanetP &ssObj, const int graphT
 	switch (graphType)
 	{
 		case GraphMagnitudeVsTime:
-			value = ssObj->getVMagnitude(core);
+			value = static_cast<double>(ssObj->getVMagnitude(core));
 			break;
 		case GraphPhaseVsTime:
-			value = ssObj->getPhase(core->getObserverHeliocentricEclipticPos()) * 100.;
+			value = static_cast<double>(ssObj->getPhase(core->getObserverHeliocentricEclipticPos())) * 100.;
 			break;
 		case GraphDistanceVsTime:
 			value =  ssObj->getJ2000EquatorialPos(core).length();
 			break;
 		case GraphElongationVsTime:
-			value = ssObj->getElongation(core->getObserverHeliocentricEclipticPos()) * 180. / M_PI;
+			value = ssObj->getElongation(core->getObserverHeliocentricEclipticPos()) * M_180_PI;
 			break;
 		case GraphAngularSizeVsTime:
 		{
-			value = ssObj->getAngularSize(core) * 360. / M_PI;
+			value = ssObj->getAngularRadius(core) * (360. / M_PI);
 			if (value < 1.)
 				value *= 60.;
 			break;
 		}
 		case GraphPhaseAngleVsTime:
-			value = ssObj->getPhaseAngle(core->getObserverHeliocentricEclipticPos()) * 180. / M_PI;
+			value = ssObj->getPhaseAngle(core->getObserverHeliocentricEclipticPos()) * M_180_PI;
 			break;
 		case GraphHDistanceVsTime:
 			value =  ssObj->getHeliocentricEclipticPos().length();
@@ -3182,7 +3182,7 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 			// equal to one million meters)
 			distMU = q_("Mm");
 		}
-		if ((ssObj->getAngularSize(core) * 360. / M_PI) < 1.) asMU = QString("\"");
+		if ((ssObj->getAngularRadius(core) * 360. / M_PI) < 1.) asMU = QString("\"");
 	}
 
 	bool direction1 = false;
@@ -3805,7 +3805,7 @@ void AstroCalcDialog::calculatePhenomena()
 				stars = carbonStars;
 			for (const auto& object : qAsConst(stars))
 			{
-				if (object->getVMagnitude(core) < (brightLimit - 5.0))
+				if (object->getVMagnitude(core) < static_cast<float>(brightLimit - 5.0))
 					star.append(object);
 			}
 			break;
@@ -3813,21 +3813,21 @@ void AstroCalcDialog::calculatePhenomena()
 		case PHCBrightDoubleStars: // Double stars
 			for (const auto& object : doubleHipStars)
 			{
-				if (object.firstKey()->getVMagnitude(core) < (brightLimit - 5.0))
+				if (object.firstKey()->getVMagnitude(core) < static_cast<float>(brightLimit - 5.0))
 					star.append(object.firstKey());
 			}
 			break;
 		case PHCBrightVariableStars: // Variable stars
 			for (const auto& object : variableHipStars)
 			{
-				if (object.firstKey()->getVMagnitude(core) < (brightLimit - 5.0))
+				if (object.firstKey()->getVMagnitude(core) < static_cast<float>(brightLimit - 5.0))
 					star.append(object.firstKey());
 			}
 			break;
 		case PHCBrightStarClusters: // Star clusters
 			for (const auto& object : allDSO)
 			{
-				if (object->getVMagnitude(core) < brightLimit && (object->getDSOType() == Nebula::NebCl || object->getDSOType() == Nebula::NebOc || object->getDSOType() == Nebula::NebGc || object->getDSOType() == Nebula::NebSA || object->getDSOType() == Nebula::NebSC || object->getDSOType() == Nebula::NebCn))
+			    if (object->getVMagnitude(core) < static_cast<float>(brightLimit) && (object->getDSOType() == Nebula::NebCl || object->getDSOType() == Nebula::NebOc || object->getDSOType() == Nebula::NebGc || object->getDSOType() == Nebula::NebSA || object->getDSOType() == Nebula::NebSC || object->getDSOType() == Nebula::NebCn))
 					dso.append(object);
 			}
 			break;
@@ -4118,8 +4118,8 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		QString phenomenType = q_("Conjunction");
 		double separation = it.value();
 		bool occultation = false;
-		const double s1 = object1->getSpheroidAngularSize(core);
-		const double s2 = object2->getSpheroidAngularSize(core);
+		const double s1 = object1->getSpheroidAngularRadius(core);
+		const double s2 = object2->getSpheroidAngularRadius(core);
 		const double d1 = object1->getJ2000EquatorialPos(core).length();
 		const double d2 = object2->getJ2000EquatorialPos(core).length();
 		if (mode==PhenomenaTypeIndex::Shadows) // shadows
@@ -4293,7 +4293,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		QString phenomenType = q_("Conjunction");
 		double separation = it.value();
 		bool occultation = false;
-		if (separation < (object2->getAngularSize(core) * M_PI / 180.) || separation < (object1->getSpheroidAngularSize(core) * M_PI / 180.))
+		if (separation < (object2->getAngularRadius(core) * M_PI / 180.) || separation < (object1->getSpheroidAngularRadius(core) * M_PI / 180.))
 		{
 			phenomenType = q_("Occultation");
 			occultation = true;
@@ -4373,8 +4373,8 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		QString phenomenType = q_("Conjunction");
 		double separation = it.value();
 		bool occultation = false;		
-		const double s1 = object1->getSpheroidAngularSize(core);
-		const double s2 = object2->getAngularSize(core);
+		const double s1 = object1->getSpheroidAngularRadius(core);
+		const double s2 = object2->getAngularRadius(core);
 		const double d1 = object1->getJ2000EquatorialPos(core).length();
 		const double d2 = object2->getJ2000EquatorialPos(core).length();
 		if (mode==PhenomenaTypeIndex::Opposition)
@@ -5663,7 +5663,7 @@ void AstroCalcDialog::calculateWutObjects()
 								d = object->getDSODesignationWIC();
 							QString n = object->getNameI18n();
 
-							if ((angularSizeLimit) && (!StelUtils::isWithin(object->getAngularSize(core), angularSizeLimitMin, angularSizeLimitMax)))
+							if ((angularSizeLimit) && (!StelUtils::isWithin(object->getAngularRadius(core), angularSizeLimitMin, angularSizeLimitMax)))
 								continue;
 
 							if (d.isEmpty() && n.isEmpty())
@@ -5677,11 +5677,11 @@ void AstroCalcDialog::calculateWutObjects()
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
 
 								if (d.isEmpty())
-									fillWUTTable(n, n, mag, rts, alt, object->getAngularSize(core), constellation, withDecimalDegree);
+									fillWUTTable(n, n, mag, rts, alt, object->getAngularRadius(core), constellation, withDecimalDegree);
 								else if (n.isEmpty())
-									fillWUTTable(d, d, mag, rts, alt, object->getAngularSize(core), constellation, withDecimalDegree);
+									fillWUTTable(d, d, mag, rts, alt, object->getAngularRadius(core), constellation, withDecimalDegree);
 								else
-									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, rts, alt, object->getAngularSize(core), constellation, withDecimalDegree);
+									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, rts, alt, object->getAngularRadius(core), constellation, withDecimalDegree);
 
 								objectsList.insert(designation);
 							}
@@ -5725,7 +5725,7 @@ void AstroCalcDialog::calculateWutObjects()
 						mag = object->getVMagnitude(core);
 						if (object->getPlanetType() == pType && mag <= magLimit && object->isAboveRealHorizon(core))
 						{
-							if ((angularSizeLimit) && (!StelUtils::isWithin(object->getAngularSize(core), angularSizeLimitMin, angularSizeLimitMax)))
+							if ((angularSizeLimit) && (!StelUtils::isWithin(object->getAngularRadius(core), angularSizeLimitMin, angularSizeLimitMax)))
 								continue;
 
 							designation = object->getEnglishName();
@@ -5735,7 +5735,7 @@ void AstroCalcDialog::calculateWutObjects()
 								alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
 
-								fillWUTTable(object->getNameI18n(), designation, mag, rts, alt, 2.0*object->getAngularSize(core), constellation, withDecimalDegree);
+								fillWUTTable(object->getNameI18n(), designation, mag, rts, alt, 2.0*object->getAngularRadius(core), constellation, withDecimalDegree);
 								objectsList.insert(designation);
 							}
 						}
@@ -5863,7 +5863,7 @@ void AstroCalcDialog::calculateWutObjects()
 								d = object->getDSODesignationWIC();
 							QString n = object->getNameI18n();
 
-							if ((angularSizeLimit) && (!StelUtils::isWithin(object->getAngularSize(core), angularSizeLimitMin, angularSizeLimitMax)))
+							if ((angularSizeLimit) && (!StelUtils::isWithin(object->getAngularRadius(core), angularSizeLimitMin, angularSizeLimitMax)))
 								continue;
 
 							if (d.isEmpty() && n.isEmpty())
@@ -5877,11 +5877,11 @@ void AstroCalcDialog::calculateWutObjects()
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
 
 								if (d.isEmpty())
-									fillWUTTable(n, n, mag, rts, alt, object->getAngularSize(core), constellation, withDecimalDegree);
+									fillWUTTable(n, n, mag, rts, alt, object->getAngularRadius(core), constellation, withDecimalDegree);
 								else if (n.isEmpty())
-									fillWUTTable(d, d, mag, rts, alt, object->getAngularSize(core), constellation, withDecimalDegree);
+									fillWUTTable(d, d, mag, rts, alt, object->getAngularRadius(core), constellation, withDecimalDegree);
 								else
-									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, rts, alt, object->getAngularSize(core), constellation, withDecimalDegree);
+									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, rts, alt, object->getAngularRadius(core), constellation, withDecimalDegree);
 
 								objectsList.insert(designation);
 							}
@@ -6045,7 +6045,7 @@ void AstroCalcDialog::calculateWutObjects()
 								d = object->getDSODesignationWIC();
 							QString n = object->getNameI18n();
 
-							if ((angularSizeLimit) && (!StelUtils::isWithin(object->getAngularSize(core), angularSizeLimitMin, angularSizeLimitMax)))
+							if ((angularSizeLimit) && (!StelUtils::isWithin(object->getAngularRadius(core), angularSizeLimitMin, angularSizeLimitMax)))
 								continue;
 
 							if (d.isEmpty() && n.isEmpty())
@@ -6059,11 +6059,11 @@ void AstroCalcDialog::calculateWutObjects()
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
 
 								if (d.isEmpty())
-									fillWUTTable(n, n, mag, rts, alt, object->getAngularSize(core), constellation, withDecimalDegree);
+									fillWUTTable(n, n, mag, rts, alt, object->getAngularRadius(core), constellation, withDecimalDegree);
 								else if (n.isEmpty())
-									fillWUTTable(d, d, mag, rts, alt, object->getAngularSize(core), constellation, withDecimalDegree);
+									fillWUTTable(d, d, mag, rts, alt, object->getAngularRadius(core), constellation, withDecimalDegree);
 								else
-									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, rts, alt, object->getAngularSize(core), constellation, withDecimalDegree);
+									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, rts, alt, object->getAngularRadius(core), constellation, withDecimalDegree);
 
 								objectsList.insert(designation);
 							}

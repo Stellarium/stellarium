@@ -502,12 +502,9 @@ float Nebula::getBMagnitudeWithExtinction(const StelCore* core) const
 	return mag;
 }
 
-double Nebula::getAngularSize(const StelCore *) const
+double Nebula::getAngularRadius(const StelCore *) const
 {
-	float size = majorAxisSize;
-	if (!fuzzyEquals(majorAxisSize, minorAxisSize) || minorAxisSize>0)
-		size = (majorAxisSize+minorAxisSize)*0.5f;
-	return static_cast<double>(size);
+	return static_cast<double>(0.5f*majorAxisSize);
 }
 
 float Nebula::getSelectPriority(const StelCore* core) const
@@ -725,7 +722,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core)
 	const float size = 6.0f;
 	float scaledSize = 0.0f;
 	if (drawHintProportional)
-		scaledSize = static_cast<float>(getAngularSize(Q_NULLPTR)) *M_PI_180f*static_cast<float>(sPainter.getProjector()->getPixelPerRadAtCenter());
+		scaledSize = static_cast<float>(getAngularRadius(Q_NULLPTR)) *(M_PI_180f*2.f)*static_cast<float>(sPainter.getProjector()->getPixelPerRadAtCenter());
 	float finalSize=qMax(size, scaledSize);
 
 	switch (nType)
@@ -846,7 +843,7 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel) const
 
 	sPainter.setColor(labelColor, objectInDisplayedType() ? hintsBrightness : 0.f);
 
-	const float size = static_cast<float>(getAngularSize(Q_NULLPTR))*M_PI_180f*sPainter.getProjector()->getPixelPerRadAtCenter();
+	const float size = static_cast<float>(getAngularRadius(Q_NULLPTR))*(M_PI_180f*2.f)*sPainter.getProjector()->getPixelPerRadAtCenter();
 	const float shift = 5.f + (drawHintProportional ? size*0.9f : 0.f);
 
 	QString str = getNameI18n();

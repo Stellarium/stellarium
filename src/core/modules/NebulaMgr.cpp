@@ -718,17 +718,17 @@ void NebulaMgr::drawPointer(const StelCore* core, StelPainter& sPainter)
 		sPainter.setBlending(true);
 
 		// Size on screen
-		float size = static_cast<float>(obj->getAngularSize(core))*M_PI_180f*prj->getPixelPerRadAtCenter();
-		if (size>120.f) // avoid oversized marker
-			size = 120.f;
+		float screenRd = static_cast<float>(obj->getAngularRadius(core))*M_PI_180f*prj->getPixelPerRadAtCenter();
+		if (screenRd>120.f) // avoid oversized marker
+			screenRd = 120.f;
 
 		if (Nebula::drawHintProportional)
-			size*=1.2f;
-		size+=20.f + 10.f*std::sin(3.f * static_cast<float>(StelApp::getInstance().getAnimationTime()));
-		sPainter.drawSprite2dMode(static_cast<float>(pos[0])-size*0.5f, static_cast<float>(pos[1])-size*0.5f, 10, 90);
-		sPainter.drawSprite2dMode(static_cast<float>(pos[0])-size*0.5f, static_cast<float>(pos[1])+size*0.5f, 10, 0);
-		sPainter.drawSprite2dMode(static_cast<float>(pos[0])+size*0.5f, static_cast<float>(pos[1])+size*0.5f, 10, -90);
-		sPainter.drawSprite2dMode(static_cast<float>(pos[0])+size*0.5f, static_cast<float>(pos[1])-size*0.5f, 10, -180);
+			screenRd*=1.2f;
+		screenRd+=20.f + 10.f*std::sin(3.f * static_cast<float>(StelApp::getInstance().getAnimationTime()));
+		sPainter.drawSprite2dMode(static_cast<float>(pos[0])-screenRd*0.5f, static_cast<float>(pos[1])-screenRd*0.5f, 10, 90);
+		sPainter.drawSprite2dMode(static_cast<float>(pos[0])-screenRd*0.5f, static_cast<float>(pos[1])+screenRd*0.5f, 10, 0);
+		sPainter.drawSprite2dMode(static_cast<float>(pos[0])+screenRd*0.5f, static_cast<float>(pos[1])+screenRd*0.5f, 10, -90);
+		sPainter.drawSprite2dMode(static_cast<float>(pos[0])+screenRd*0.5f, static_cast<float>(pos[1])-screenRd*0.5f, 10, -180);
 	}
 }
 

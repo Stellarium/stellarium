@@ -591,7 +591,7 @@ void NavStars::extraInfo(StelCore* core, const StelObjectP& selectedObject)
 	if ("Sun" == englishName || "Moon" == englishName) 
 	{
 		// Adjust Ho if target is Sun or Moon by adding/subtracting the angular radius.
-		double obj_radius_in_degrees = selectedObject->getAngularSize(core);
+		double obj_radius_in_degrees = selectedObject->getAngularRadius(core);
 		if (!upperLimb)
 			obj_radius_in_degrees *= -1;
 		calc.addAltAppRad((obj_radius_in_degrees * M_PI) / 180.);

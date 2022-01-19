@@ -557,11 +557,6 @@ bool Exoplanet::isVMagnitudeDefined() const
 	return Vmag<98.;
 }
 
-double Exoplanet::getAngularSize(const StelCore*) const
-{
-	return 0.0001;
-}
-
 bool Exoplanet::isDiscovered(const StelCore *core)
 {
 	int year, month, day;
@@ -606,13 +601,12 @@ void Exoplanet::draw(StelCore* core, StelPainter *painter)
 	StelSkyDrawer* sd = core->getSkyDrawer();
 	const float mlimit = sd->getLimitMagnitude();
 	const float mag = getVMagnitudeWithExtinction(core);
+	const float shift = 8.f;
 
 	if (mag <= mlimit)
 	{		
 		Exoplanet::markerTexture->bind();
 		Vec3f color = (hasHabitableExoplanets ? habitableExoplanetMarkerColor : exoplanetMarkerColor);
-		float size = static_cast<float>(getAngularSize(Q_NULLPTR))*M_PIf/180.f*painter->getProjector()->getPixelPerRadAtCenter();
-		float shift = 5.f + size/1.6f;
 
 		painter->setBlending(true, GL_ONE, GL_ONE);
 		painter->setColor(color, 1);

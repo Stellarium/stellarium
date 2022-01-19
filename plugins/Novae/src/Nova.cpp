@@ -309,11 +309,6 @@ float Nova::getVMagnitude(const StelCore* core) const
 	return vmag;
 }
 
-double Nova::getAngularSize(const StelCore*) const
-{
-	return 0.00001;
-}
-
 void Nova::update(double deltaTime)
 {
 	labelsFader.update(static_cast<int>(deltaTime*1000));
@@ -324,6 +319,7 @@ void Nova::draw(StelCore* core, StelPainter* painter)
 	StelSkyDrawer* sd = core->getSkyDrawer();
 	const float mlimit = sd->getLimitMagnitude();
 	float mag = getVMagnitudeWithExtinction(core);
+	const float shift = 8.f;
 
 	if (mag <= mlimit)
 	{
@@ -339,8 +335,6 @@ void Nova::draw(StelCore* core, StelPainter* painter)
 		sd->drawPointSource(painter, vf, rcMag, color, true, qMin(1.0f, 1.0f-0.9f*altAz[2]));
 		sd->postDrawPointSource(painter);
 		painter->setColor(color, 1.f);
-		float size = getAngularSize(Q_NULLPTR)*M_PI_180f*painter->getProjector()->getPixelPerRadAtCenter();
-		float shift = 6.f + size/1.8f;
 		StarMgr* smgr = GETSTELMODULE(StarMgr); // It's need for checking displaying of labels for stars
 		if (labelsFader.getInterstate()<=0.f && (mag+5.f)<mlimit && smgr->getFlagLabels())
 		{
