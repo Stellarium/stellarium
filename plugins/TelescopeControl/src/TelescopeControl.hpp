@@ -85,33 +85,33 @@ class TelescopeControl : public StelObjectModule
 
 public:
 	TelescopeControl();
-	virtual ~TelescopeControl();
+	virtual ~TelescopeControl() Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init();
-	virtual void deinit();
-	virtual void update(double deltaTime);
-	virtual void draw(StelCore* core);
-	virtual double getCallOrder(StelModuleActionName actionName) const;
+	virtual void init() Q_DECL_OVERRIDE;
+	virtual void deinit() Q_DECL_OVERRIDE;
+	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
+	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelObjectModule class
-	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
-	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
-	virtual StelObjectP searchByName(const QString& name) const;
-	virtual StelObjectP searchByID(const QString& id) const { return searchByName(id); }
+	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const Q_DECL_OVERRIDE;
+	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const Q_DECL_OVERRIDE;
+	virtual StelObjectP searchByName(const QString& name) const Q_DECL_OVERRIDE;
+	virtual StelObjectP searchByID(const QString& id) const Q_DECL_OVERRIDE { return searchByName(id); }
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem = 5, bool useStartOfWords = false) const;
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem = 5, bool useStartOfWords = false) const Q_DECL_OVERRIDE;
 	// empty as its not celestial objects
-	virtual QStringList listAllObjects(bool) const { return QStringList(); }
-	virtual QString getName() const { return "Telescope Control"; }
-	virtual QString getStelObjectType() const;
-	virtual bool configureGui(bool show = true);
+	virtual QStringList listAllObjects(bool) const Q_DECL_OVERRIDE { return QStringList(); }
+	virtual QString getName() const Q_DECL_OVERRIDE { return "Telescope Control"; }
+	virtual QString getStelObjectType() const Q_DECL_OVERRIDE;
+	virtual bool configureGui(bool show = true) Q_DECL_OVERRIDE;
 
 	QSharedPointer<TelescopeClient> telescopeClient(int index) const;
 
@@ -195,7 +195,7 @@ public slots:
 	//! // example of usage in scripts
 	//! var flag = TelescopeControl.getFlagTelescopeReticles();
 	//! @endcode
-	bool getFlagTelescopeReticles() const { return (bool)reticleFader; }
+	bool getFlagTelescopeReticles() const { return static_cast<bool>(reticleFader); }
 
 	//! Set display flag for telescope name labels
 	//! @param b boolean flag
@@ -436,9 +436,9 @@ class TelescopeControlStelPluginInterface : public QObject, public StelPluginInt
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const;
-	virtual StelPluginInfo getPluginInfo() const;
-	virtual QObjectList getExtensionList() const { return QObjectList(); }
+	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
+	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
+	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
 };
 
 #endif /* TELESCOPECONTROL_HPP */

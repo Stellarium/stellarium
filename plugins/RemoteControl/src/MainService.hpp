@@ -49,7 +49,6 @@ class MainService : public AbstractAPIService
 {
 	Q_OBJECT
 
-	Q_ENUMS(SelectionMode)
 public:
 	enum SelectionMode
 	{
@@ -57,6 +56,7 @@ public:
 		Zoom,
 		Mark
 	};
+	Q_ENUM(SelectionMode)
 
 	MainService(QObject* parent = Q_NULLPTR);
 

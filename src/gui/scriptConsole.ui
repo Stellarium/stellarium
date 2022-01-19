@@ -177,7 +177,7 @@
            </size>
           </property>
           <property name="toolTip">
-           <string>load script from file</string>
+           <string>Load script from file</string>
           </property>
           <property name="text">
            <string/>
@@ -187,7 +187,7 @@
             <normaloff>:/graphicGui/uibtFolder.png</normaloff>:/graphicGui/uibtFolder.png</iconset>
           </property>
           <property name="shortcut">
-           <string notr="true">Ctrl+O</string>
+           <string notr="true">Ctrl+Shift+O</string>
           </property>
          </widget>
         </item>
@@ -206,7 +206,7 @@
            </size>
           </property>
           <property name="toolTip">
-           <string>save script to file</string>
+           <string>Save script to file</string>
           </property>
           <property name="text">
            <string/>
@@ -216,7 +216,7 @@
             <normaloff>:/graphicGui/uibtSave.png</normaloff>:/graphicGui/uibtSave.png</iconset>
           </property>
           <property name="shortcut">
-           <string notr="true">Ctrl+S</string>
+           <string notr="true">Ctrl+Shift+S</string>
           </property>
          </widget>
         </item>
@@ -235,7 +235,7 @@
            </size>
           </property>
           <property name="toolTip">
-           <string>clear</string>
+           <string>Clear</string>
           </property>
           <property name="text">
            <string/>
@@ -255,7 +255,7 @@
            </size>
           </property>
           <property name="toolTip">
-           <string>pre-process script using SSC preprocessor</string>
+           <string>Pre-process script using SSC preprocessor</string>
           </property>
           <property name="text">
            <string notr="true">SSC</string>
@@ -324,15 +324,15 @@
            </size>
           </property>
           <property name="toolTip">
-           <string>run script</string>
+           <string>Run script</string>
           </property>
           <property name="text">
            <string/>
           </property>
           <property name="icon">
            <iconset resource="../../data/gui/guiRes.qrc">
-           <normaloff>:/graphicGui/uibtStart.png</normaloff>
-           <disabledoff>:/graphicGui/uibtStart-disabled.png</disabledoff>:/graphicGui/uibtStart.png</iconset>
+            <normaloff>:/graphicGui/uibtStart.png</normaloff>
+            <disabledoff>:/graphicGui/uibtStart-disabled.png</disabledoff>:/graphicGui/uibtStart.png</iconset>
           </property>
           <property name="shortcut">
            <string notr="true">Ctrl+Return</string>
@@ -357,15 +357,15 @@
            </size>
           </property>
           <property name="toolTip">
-           <string>stop script</string>
+           <string>Stop script</string>
           </property>
           <property name="text">
            <string/>
           </property>
           <property name="icon">
            <iconset resource="../../data/gui/guiRes.qrc">
-           <normaloff>:/graphicGui/uibtStop.png</normaloff>
-           <disabledoff>:/graphicGui/uibtStop-disabled.png</disabledoff>:/graphicGui/uibtStop.png</iconset>
+            <normaloff>:/graphicGui/uibtStop.png</normaloff>
+            <disabledoff>:/graphicGui/uibtStop-disabled.png</disabledoff>:/graphicGui/uibtStop.png</iconset>
           </property>
          </widget>
         </item>
@@ -398,12 +398,6 @@
           </property>
           <item>
            <widget class="QPlainTextEdit" name="scriptEdit">
-            <property name="font">
-             <font>
-              <family>DejaVu Sans Mono</family>
-              <pointsize>8</pointsize>
-             </font>
-            </property>
             <property name="verticalScrollBarPolicy">
              <enum>Qt::ScrollBarAlwaysOn</enum>
             </property>
@@ -435,14 +429,7 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QTextBrowser" name="logBrowser">
-            <property name="font">
-             <font>
-              <family>DejaVu Sans Mono</family>
-              <pointsize>8</pointsize>
-             </font>
-            </property>
-           </widget>
+           <widget class="QTextBrowser" name="logBrowser"/>
           </item>
          </layout>
         </widget>
@@ -464,14 +451,7 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QTextBrowser" name="outputBrowser">
-            <property name="font">
-             <font>
-              <family>DejaVu Sans Mono</family>
-              <pointsize>8</pointsize>
-             </font>
-            </property>
-           </widget>
+           <widget class="QTextBrowser" name="outputBrowser"/>
           </item>
          </layout>
         </widget>
@@ -635,6 +615,7 @@
   </customwidget>
  </customwidgets>
  <resources>
+  <include location="../../data/gui/guiRes.qrc"/>
   <include location="../../data/gui/guiRes.qrc"/>
  </resources>
  <connections/>

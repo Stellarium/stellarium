@@ -170,6 +170,7 @@ SearchDialog::SearchDialog(QObject* parent)
 	, listModel(Q_NULLPTR)
 	, proxyModel(Q_NULLPTR)
 	, flagHasSelectedText(false)
+	, shiftPressed(false)
 {
 	setObjectName("SearchDialog");
 	ui = new Ui_searchDialogForm;
@@ -195,13 +196,11 @@ SearchDialog::SearchDialog(QObject* parent)
 	setSimbadGetsTypes( conf->value("search/simbad_query_types",      false).toBool());
 	setSimbadGetsDims(  conf->value("search/simbad_query_dimensions", false).toBool());
 
-	shiftPressed = false;
-
 	// Init CompletionListModel
 	searchListModel = new CompletionListModel();
 
 	// Find recent object search data file
-	recentObjectSearchesJsonPath = StelFileMgr::findFile("data", (StelFileMgr::Flags)(StelFileMgr::Directory | StelFileMgr::Writable)) + "/recentObjectSearches.json";
+	recentObjectSearchesJsonPath = StelFileMgr::findFile("data", static_cast<StelFileMgr::Flags>(StelFileMgr::Directory | StelFileMgr::Writable)) + "/recentObjectSearches.json";
 }
 
 SearchDialog::~SearchDialog()
@@ -1424,4 +1423,16 @@ void SearchDialog::pasteAndGo()
 	ui->lineEditSearchSkyObject->setText(""); // clear current text
 	ui->lineEditSearchSkyObject->paste(); // paste text from clipboard
 	gotoObject(); // go to first finded object
+}
+
+void SearchDialog::setVisible(bool v)
+{
+	StelDialog::setVisible(v);
+
+	// if from a previous search action, the first tab is shown but input line is not in focus,
+	// force focus on input line.
+	if (v && (ui->tabWidget->currentIndex()==0))
+	{
+		ui->lineEditSearchSkyObject->setFocus(Qt::PopupFocusReason);
+	}
 }

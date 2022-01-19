@@ -271,7 +271,7 @@ QStringList StelFileMgr::findFileInAllPaths(const QString &path, const Flags &fl
 		return filePaths;
 	}
 
-	for (const auto& locationPath : fileLocations)
+	for (const auto& locationPath : qAsConst(fileLocations))
 	{
 		const QFileInfo finfo(locationPath + "/" + path);
 		if (fileFlagsCheck(finfo, flags))

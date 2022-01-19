@@ -25,6 +25,7 @@
 #include <QHash>
 #include <QIntValidator>
 #include <QStringList>
+#include <QRegularExpressionValidator>
 #include "StelDialog.hpp"
 #include "TelescopeControlGlobals.hpp"
 
@@ -84,10 +85,10 @@ signals:
 private:
 	QStringList deviceModelNames;
 	
-	QRegExpValidator * telescopeNameValidator;
-	QRegExpValidator * hostNameValidator;
-	QRegExpValidator * circleListValidator;
-	QRegExpValidator * serialPortValidator;
+	QRegularExpressionValidator * telescopeNameValidator;
+	QRegularExpressionValidator * hostNameValidator;
+	QRegularExpressionValidator * circleListValidator;
+	QRegularExpressionValidator * serialPortValidator;
 
 	#ifdef Q_OS_WIN
 	TelescopeClientASCOMWidget* ascomWidget;

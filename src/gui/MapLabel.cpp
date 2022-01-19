@@ -43,7 +43,12 @@ void MapLabel::setCursorPos(double longitude, double latitude)
 	const int y = (static_cast<int>((latitude-90.)/-180.*map.height() / scale));
 	//draws the location cursor on the map every time position is changed
 	QPainter painter(&map);
-	painter.drawPixmap(x-locCursor.width()/2,y-locCursor.height()/2,locCursor.width(),locCursor.height(),locCursor);
+	int sif = 1;
+	if (origMap.width()>512) // standard width of texture is 512 pixels
+		sif = static_cast<int>(origMap.width()/512);
+	const int w = static_cast<int>(locCursor.width()/scale)*sif;
+	const int h = static_cast<int>(locCursor.height()/scale)*sif;
+	painter.drawPixmap(x-w/2, y-h/2, w, h, locCursor);
 	resizePixmap();
 }
 
@@ -57,12 +62,12 @@ void MapLabel::mousePressEvent(QMouseEvent* event)
 	const int posY = event->pos().y() * scale;
 
 	//checks if position of mouse click is inside the map
-	if((unsigned)(posX-offsetX) > (unsigned)pixmap()->width() || (unsigned)(posY-offsetY) > (unsigned)pixmap()->height())
+	if(static_cast<unsigned>(posX-offsetX) > static_cast<unsigned>(pixmap()->width()) || static_cast<unsigned>(posY-offsetY) > static_cast<unsigned>(pixmap()->height()))
 	{
 		return;
 	}
-	const double lon = ((double)(posX-offsetX))/pixmap()->size().width()*360.-180.;
-	const double lat = 90.-((double)(posY-offsetY))/pixmap()->size().height()*180.;
+	const double lon = (static_cast<double>(posX-offsetX))/pixmap()->size().width()*360.-180.;
+	const double lat = 90.-(static_cast<double>(posY-offsetY))/pixmap()->size().height()*180.;
 	emit(positionChanged(lon, lat));
 }
 

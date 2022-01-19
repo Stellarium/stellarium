@@ -38,6 +38,7 @@
 #include <QFile>
 #include <QDir>
 #include <QtAlgorithms>
+#include <QRegularExpression>
 
 Landscape::Landscape(float _radius)
 	: radius(static_cast<double>(_radius))
@@ -73,7 +74,7 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 	name = landscapeIni.value("landscape/name").toString();
 	author = landscapeIni.value("landscape/author").toString();
 	description = landscapeIni.value("landscape/description").toString();
-	description = description.replace(QRegExp("\\\\n\\s*\\\\n"), "<br />");
+	description = description.replace(QRegularExpression("\\\\n\\s*\\\\n"), "<br />");
 	description = description.replace("\\n", " ");
 	if (name.isEmpty())
 	{
@@ -105,7 +106,7 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 		if (landscapeIni.contains("location/longitude"))
 			location.longitude = static_cast<float>(StelUtils::getDecAngle(landscapeIni.value("location/longitude").toString())*M_180_PI);
 		if (landscapeIni.contains("location/country"))
-			location.country = landscapeIni.value("location/country").toString();
+			location.region = StelLocationMgr::pickRegionFromCountry(landscapeIni.value("location/country").toString());
 		if (landscapeIni.contains("location/state"))
 			location.state = landscapeIni.value("location/state").toString();
 		if (landscapeIni.contains("location/name"))
@@ -170,17 +171,16 @@ void Landscape::createPolygonalHorizon(const QString& lineFileName, const float 
 		qWarning() << "Landscape Horizon line data file" << QDir::toNativeSeparators(lineFileName) << "not found.";
 		return;
 	}
-	QRegExp emptyLine("^\\s*$");
+	QRegularExpression emptyLine("^\\s*$");
 	QTextStream in(&file);
 	while (!in.atEnd())
 	{
 		// Build list of vertices. The checks can certainly become more robust.
 		QString line = in.readLine();
 		if (line.length()==0) continue;
-		if (emptyLine.exactMatch((line))) continue;
+		if (emptyLine.match(line).hasMatch()) continue;
 		if (line.at(0)=='#') continue; // skip comment lines.
-		//QStringList list = line.split(QRegExp("\\b\\s+\\b"));
-		const QStringList list = line.trimmed().split(QRegExp("\\s+"));
+		const QStringList list = line.trimmed().split(QRegularExpression("\\s+"));
 		if (list.count() < 2)
 		{
 			qWarning() << "Landscape polygon file" << QDir::toNativeSeparators(lineFileName) << "has bad line:" << line << "with" << list.count() << "elements";
@@ -644,6 +644,7 @@ void LandscapeOldStyle::draw(StelCore* core, bool onlyPolygon)
 		return;
 
 	StelPainter painter(core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff));
+	const float ppx = static_cast<float>(painter.getProjector()->getDevicePixelsPerPixel());
 	painter.setBlending(true);
 	painter.setCullFace(true);
 
@@ -674,7 +675,7 @@ void LandscapeOldStyle::draw(StelCore* core, bool onlyPolygon)
 		painter.setBlending(true, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		painter.setColor(horizonPolygonLineColor, landFader.getInterstate());
 		const float lineWidth=painter.getLineWidth();
-		painter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness());
+		painter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness()*ppx);
 		painter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
 		painter.setLineWidth(lineWidth);
 	}
@@ -889,6 +890,7 @@ void LandscapePolygonal::draw(StelCore* core, bool onlyPolygon)
 	transfo->combine(Mat4d::zrotation(-static_cast<double>(angleRotateZOffset)));
 	const StelProjectorP prj = core->getProjection(transfo);
 	StelPainter sPainter(prj);
+	const float ppx = static_cast<float>(sPainter.getProjector()->getDevicePixelsPerPixel());
 
 	// Normal transparency mode for the transition blending
 	sPainter.setBlending(true);
@@ -905,7 +907,7 @@ void LandscapePolygonal::draw(StelCore* core, bool onlyPolygon)
 		sPainter.setLineSmooth(true);
 		sPainter.setColor(horizonPolygonLineColor, landFader.getInterstate());
 		const float lineWidth=sPainter.getLineWidth();
-		sPainter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness());
+		sPainter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness()*ppx);
 		sPainter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
 		sPainter.setLineWidth(lineWidth);
 		sPainter.setLineSmooth(false);
@@ -1009,6 +1011,7 @@ void LandscapeFisheye::draw(StelCore* core, bool onlyPolygon)
 	transfo->combine(Mat4d::zrotation(-static_cast<double>(angleRotateZ+angleRotateZOffset)));
 	const StelProjectorP prj = core->getProjection(transfo);
 	StelPainter painter(prj);
+	const float ppx = static_cast<float>(painter.getProjector()->getDevicePixelsPerPixel());
 
 	if (!onlyPolygon || !horizonPolygon) // Make sure to draw the regular pano when there is no polygon
 	{
@@ -1048,7 +1051,7 @@ void LandscapeFisheye::draw(StelCore* core, bool onlyPolygon)
 		painter.setBlending(true, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		painter.setColor(horizonPolygonLineColor, landFader.getInterstate());
 		const float lineWidth=painter.getLineWidth();
-		painter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness());
+		painter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness()*ppx);
 		painter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
 		painter.setLineWidth(lineWidth);
 	}
@@ -1215,6 +1218,7 @@ void LandscapeSpherical::draw(StelCore* core, bool onlyPolygon)
 	transfo->combine(Mat4d::zrotation(-(static_cast<double>(angleRotateZ+angleRotateZOffset))));
 	const StelProjectorP prj = core->getProjection(transfo);
 	StelPainter sPainter(prj);
+	const float ppx = static_cast<float>(sPainter.getProjector()->getDevicePixelsPerPixel());
 
 	// Normal transparency mode
 	sPainter.setBlending(true);
@@ -1264,7 +1268,7 @@ void LandscapeSpherical::draw(StelCore* core, bool onlyPolygon)
 		sPainter.setBlending(true);
 		sPainter.setColor(horizonPolygonLineColor, landFader.getInterstate());
 		const float lineWidth=sPainter.getLineWidth();
-		sPainter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness());
+		sPainter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness()*ppx);
 		sPainter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
 		sPainter.setLineWidth(lineWidth);
 	}

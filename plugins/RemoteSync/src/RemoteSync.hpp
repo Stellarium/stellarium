@@ -50,7 +50,6 @@ running in a network. See manual for detailed description.
 class RemoteSync : public StelModule
 {
 	Q_OBJECT
-	Q_ENUMS(SyncState ClientBehaviour)
 
 public:
 	enum SyncState
@@ -62,6 +61,7 @@ public:
 		CLIENT_CLOSING, //Plugin is disconnecting from the server
 		CLIENT_WAIT_RECONNECT //Plugin is waiting to try reconnecting again
 	};
+	Q_ENUM(SyncState)
 
 	//! Defines behavior when client connection is lost/server quits
 	enum ClientBehavior
@@ -70,6 +70,7 @@ public:
 		RECONNECT, //automatically try to reconnect
 		QUIT //quit the client
 	};
+	Q_ENUM(ClientBehavior)
 
 	RemoteSync();
 	virtual ~RemoteSync() Q_DECL_OVERRIDE;
@@ -184,6 +185,7 @@ private:
 	QString errorString;
 
 	QSettings* conf;
+	bool allowVersionMismatch; // set true to sync even different versions of Stellarium
 
 	// GUI
 	RemoteSyncDialog* configDialog;
@@ -206,9 +208,9 @@ class RemoteSyncStelPluginInterface : public QObject, public StelPluginInterface
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const;
-	virtual StelPluginInfo getPluginInfo() const;
-	virtual QObjectList getExtensionList() const { return QObjectList(); }
+	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
+	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
+	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
 };
 
 #endif /*REMOTESYNC_HPP*/

@@ -174,8 +174,8 @@ bool Lx200CommandSetSelectedDec::writeCommandToBuffer(char *&p, char *end)
 	p[-2] = '0' + (x %  6); x /=  6;
 	p[-3] = ':';
 	p[-4] = '0' + (x % 10); x /= 10;
-	p[-5] = '0' + (x %  6); x /=  6;	
-	p[-6] = '*'; // '\xDF'; // = 223, degree symbol. GZ: Should be asterisk, according to specs.
+	p[-5] = '0' + (x %  6); x /=  6;
+	p[-6] = '\xDF'; // = 223, degree symbol. This is always printed as asterisk in the specs, very confusing.
 	p[-7] = '0' + (x % 10); x /= 10;
 	p[-8] = '0' + static_cast<char>(x);
 	*p++ = '#';
@@ -593,11 +593,11 @@ int Lx200CommandGetDec::readAnswerFromBuffer(const char *&buff,
 	
 	dec = ((*p++) - '0');
 	dec *= 10; dec += ((*p++) - '0');
-	if (*p++ != ('*'))
+	if (*p++ != (static_cast<char>(223)))
 	{
 		*log_file << Now()
 		          << "Lx200CommandGetDec::readAnswerFromBuffer: "
-			     "error: degree sign (*) expected"
+			     "error: degree sign expected" // not a star, really 0xDF
 			  << StelUtils::getEndLineChar();
 	}
 	

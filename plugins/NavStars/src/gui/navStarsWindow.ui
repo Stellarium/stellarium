@@ -2,14 +2,6 @@
 <ui version="4.0">
  <class>navStarsWindowForm</class>
  <widget class="QWidget" name="navStarsWindowForm">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>486</width>
-    <height>461</height>
-   </rect>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
     <number>0</number>
@@ -156,17 +148,11 @@
        </property>
        <item>
         <widget class="QGroupBox" name="groupBoxNavStars">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>400</height>
-          </size>
-         </property>
          <property name="title">
           <string>Set of navigational stars</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignCenter</set>
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <property name="leftMargin">
@@ -183,8 +169,30 @@
           </property>
           <item>
            <layout class="QGridLayout" name="gridLayout">
+            <item row="1" column="0">
+             <widget class="QLabel" name="labelNote">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Note:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
+              </property>
+             </widget>
+            </item>
             <item row="0" column="0">
              <widget class="QLabel" name="nsSetLabel">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="toolTip">
                <string>Place of the string with coordinates of the mouse pointer</string>
               </property>
@@ -198,6 +206,12 @@
             </item>
             <item row="0" column="1">
              <widget class="QComboBox" name="nsSetComboBox">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="editable">
                <bool>false</bool>
               </property>
@@ -209,20 +223,25 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="labelNote">
-              <property name="text">
-               <string>Note:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
-              </property>
-             </widget>
-            </item>
             <item row="1" column="1">
              <widget class="QLabel" name="nsSetDescription">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>80</height>
+               </size>
+              </property>
               <property name="text">
                <string/>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
               </property>
               <property name="wordWrap">
                <bool>true</bool>
@@ -231,6 +250,27 @@
             </item>
            </layout>
           </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBoxSettings">
+         <property name="title">
+          <string>Settings</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
           <item>
            <widget class="QCheckBox" name="displayAtStartupCheckBox">
             <property name="text">
@@ -260,6 +300,13 @@
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="showExtraDecimals">
+            <property name="text">
+             <string>Show extra decimals in info</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QCheckBox" name="upperLimb">
             <property name="text">
              <string>Use upper limb for Sun and Moon</string>
@@ -267,9 +314,9 @@
            </widget>
           </item>
           <item>
-           <widget class="QCheckBox" name="showExtraDecimals">
+           <widget class="QCheckBox" name="useUTCCheckBox">
             <property name="text">
-             <string>Show extra decimals in info</string>
+             <string>Use UTC time when navigational stars are displayed</string>
             </property>
            </widget>
           </item>

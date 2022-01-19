@@ -31,7 +31,6 @@
 #include "StelLocaleMgr.hpp"
 
 #include <QTextStream>
-#include <QRegExp>
 #include <QDebug>
 #include <QVariant>
 #include <QSettings>
@@ -64,6 +63,7 @@ bool Satellite::hideInvisibleSatellitesFlag = false;
 Vec3f Satellite::invisibleSatelliteColor = Vec3f(0.2f,0.2f,0.2f);
 Vec3f Satellite::transitSatelliteColor = Vec3f(0.f,0.f,0.f);
 double Satellite::timeRateLimit = 1.0; // one JD per second by default
+int Satellite::tleEpochAge = 30; // default age of TLE's epoch to mark TLE as outdated (using for filters)
 
 #if (SATELLITES_PLUGIN_IRIDIUM == 1)
 double Satellite::sunReflAngle = 180.;
@@ -166,7 +166,7 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	QVariantList groupList =  map.value("groups", QVariantList()).toList();
 	if (!groupList.isEmpty())
 	{
-		for (const auto& group : groupList)
+		for (const auto& group : qAsConst(groupList))
 			groups.insert(group.toString());
 	}
 
@@ -182,7 +182,7 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 
 	orbitValid = true;
 	initialized = true;
-	isISS = (name=="ISS" || name=="ISS (ZARYA)");
+	isISS = (name=="ISS" || name=="ISS (ZARYA)" || name=="ISS (NAUKA)");
 	moon = GETSTELMODULE(SolarSystem)->getMoon();
 	sun = GETSTELMODULE(SolarSystem)->getSun();
 
@@ -242,7 +242,7 @@ QVariantMap Satellite::getMap(void)
 	map["orbitColor"] = orbitCol;
 	map["infoColor"] = infoCol;
 	QVariantList commList;
-	for (const auto& c : comms)
+	for (const auto& c : qAsConst(comms))
 	{
 		QVariantMap commMap;
 		commMap["frequency"] = c.frequency;
@@ -252,7 +252,7 @@ QVariantMap Satellite::getMap(void)
 	}
 	map["comms"] = commList;
 	QVariantList groupList;
-	for (const auto& g : groups)
+	for (const auto& g : qAsConst(groups))
 	{
 		groupList << g;
 	}
@@ -296,23 +296,21 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 			catalogNumbers = QString("NORAD %1")
 					 .arg(id);
 		else
-			catalogNumbers = QString("NORAD %1; %2: %3")
-			                 .arg(id)
-					 .arg(q_("International Designator"))
-			                 .arg(internationalDesignator);
+			catalogNumbers = QString("NORAD %1; %2 (COSPAR/NSSDC): %3")
+					 .arg(id, q_("International Designator"), internationalDesignator);
 		oss << catalogNumbers << "<br/><br/>";
 	}
 
 	if (flags & ObjectType)
-	{
 		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("artificial satellite"))  << "<br/>";
-	}
 	
 	if ((flags & Magnitude) && (stdMag<99. || RCS>0.) && (visibility==gSatWrapper::VISIBLE))
 	{
-		oss << QString("%1: <b>%2</b>").arg(q_("Approx. magnitude"), QString::number(getVMagnitude(core), 'f', 2));
-		if (core->getSkyDrawer()->getFlagHasAtmosphere())
-			oss << QString(" (%1: <b>%2</b>)").arg(q_("extincted to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2));
+		const int decimals = 2;
+		const float airmass = getAirmass(core);
+		oss << QString("%1: <b>%2</b>").arg(q_("Approx. magnitude"), QString::number(getVMagnitude(core), 'f', decimals));
+		if (airmass>-1.f) // Don't show extincted magnitude much below horizon where model is meaningless.
+			oss << QString(" (%1 <b>%2</b> %3 <b>%4</b> %5)").arg(q_("reduced to"), QString::number(getVMagnitudeWithExtinction(core), 'f', decimals), q_("by"), QString::number(airmass, 'f', decimals), q_("Airmasses"));
 		oss << "<br />";
 	}
 
@@ -328,16 +326,15 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		oss << QString("%1: %2 %3").arg(q_("Range rate")).arg(rangeRate, 5, 'f', 3).arg(qc_("km/s", "speed")) << "<br/>";
 		// TRANSLATORS: Satellite altitude
 		oss << QString("%1: %2 %3").arg(q_("Altitude")).arg(qRound(height)).arg(km) << "<br/>";
-		Vec2d pa = calculatePerigeeApogeeFromLine2(tleElements.second.data());
 		oss << QString("%1: %2 %3 / %4 %5").arg(q_("Perigee/apogee altitudes"))
-		       .arg(qRound(pa[0])).arg(km)
-		       .arg(qRound(pa[1])).arg(km)
+		       .arg(qRound(perigee)).arg(km)
+		       .arg(qRound(apogee)).arg(km)
 		<< "<br/>";
 	}
 
 	if (flags&Size && RCS>0.)
 	{
-		const double angularSize = getAngularSize(core)*M_PI_180;
+		const double angularSize = getAngularRadius(core)*2.*M_PI_180;
 		QString sizeStr = "";
 		if (withDecimalDegree)
 			sizeStr = StelUtils::radToDecDegStr(angularSize, 5, false, true);
@@ -362,8 +359,8 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		}
 		double inclination = pSatWrapper->getOrbitalInclination();
 		oss << QString("%1: %2 (%3%4)")
-		       .arg(q_("Inclination")).arg(StelUtils::decDegToDmsStr(inclination))
-		       .arg(QString::number(inclination, 'f', 4)).arg(degree)
+		       .arg(q_("Inclination"), StelUtils::decDegToDmsStr(inclination),
+			    QString::number(inclination, 'f', 4), degree)
 		<< "<br/>";
 		oss << QString("%1: %2%3/%4%5")
 		       .arg(q_("SubPoint (Lat./Long.)"))
@@ -387,7 +384,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		        .arg(velocity[1], 5, 'f', 2)
 		        .arg(velocity[2], 5, 'f', 2);
 		// TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered inertial coordinate system
-		oss << QString("%1: %2 %3").arg(q_("TEME velocity")).arg(temeVel).arg(qc_("km/s", "speed")) << "<br/>";
+		oss << QString("%1: %2 %3").arg(q_("TEME velocity"), temeVel, qc_("km/s", "speed")) << "<br/>";
 
 		QString pha = StelApp::getInstance().getFlagShowDecimalDegrees() ?
 				StelUtils::radToDecDegStr(phaseAngle,4,false,true) :
@@ -431,7 +428,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		}
 
 		if (status!=StatusUnknown)
-			oss << QString("%1: %2").arg(q_("Operational status")).arg(getOperationalStatus()) << "<br />";
+			oss << QString("%1: %2").arg(q_("Operational status"), getOperationalStatus()) << "<br />";
 		//Visibility: Full text		
 		oss << q_(visibilityDescription.value(visibility, "")) << "<br />";
 
@@ -442,7 +439,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 			{
 				double dop = getDoppler(c.frequency);
 				double ddop = dop;
-				char sign;
+				QString sign;
 				if (dop<0.)
 				{
 					sign='-';
@@ -454,12 +451,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 				if (!c.modulation.isEmpty() && c.modulation != "") oss << "  " << c.modulation;
 				if (!c.description.isEmpty() && c.description != "") oss << "  " << c.description;
 				if ((!c.modulation.isEmpty() && c.modulation != "") || (!c.description.isEmpty() && c.description != "")) oss << ": ";
-				oss << QString("%1 %2 (%3%4 %5)")
-				       .arg(c.frequency, 8, 'f', 5)
-				       .arg(qc_("MHz", "frequency"))
-				       .arg(sign)
-				       .arg(ddop, 6, 'f', 3)
-				       .arg(qc_("kHz", "frequency"));
+				oss << QString("%1 %2 (%3%4 %5)").arg(QString::number(c.frequency, 'f', 3), qc_("MHz", "frequency"), sign, QString::number(ddop, 'f', 3), qc_("kHz", "frequency"));
 				oss << "<br/>";
 			}
 		}
@@ -470,22 +462,17 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 }
 
 // Calculate perigee and apogee altitudes for mean Earth radius
-Vec2d Satellite::calculatePerigeeApogeeFromLine2(QString tle) const
+void Satellite::calculateSatDataFromLine2(QString tle)
 {
 	// Details: http://www.satobs.org/seesat/Dec-2002/0197.html
 	const double meanEarthRadius = 6371.0088;
 	const double k = 8681663.653;
 	const double meanMotion = tle.left(63).right(11).toDouble();
 	const double semiMajorAxis = std::cbrt((k/meanMotion)*(k/meanMotion));
-	const double eccentricity = QString("0.%1").arg(tle.left(33).right(7)).toDouble();
-	return Vec2d(semiMajorAxis*(1.0 - eccentricity) - meanEarthRadius, semiMajorAxis*(1.0 + eccentricity) - meanEarthRadius);
-}
-
-Vec2d Satellite::getEccentricityInclinationFromLine2(QString tle) const
-{
-	const double inclination = QString(tle.left(16).right(8)).toDouble();
-	const double eccentricity = QString("0.%1").arg(tle.left(33).right(7)).toDouble();
-	return Vec2d(eccentricity, inclination);
+	eccentricity = QString("0.%1").arg(tle.left(33).right(7)).toDouble();
+	perigee = semiMajorAxis*(1.0 - eccentricity) - meanEarthRadius;
+	apogee = semiMajorAxis*(1.0 + eccentricity) - meanEarthRadius;
+	inclination = QString(tle.left(16).right(8)).toDouble();
 }
 
 // Calculate epoch of TLE
@@ -508,6 +495,7 @@ void Satellite::calculateEpochFromLine1(QString tle)
 				.arg(StelUtils::hoursToHmsStr(24.*(dayOfYear-static_cast<int>(dayOfYear)), true));
 
 	tleEpoch = epochStr;
+	tleEpochJD = epoch.toJulianDay();
 }
 
 QVariantMap Satellite::getInfoMap(const StelCore *core) const
@@ -542,9 +530,8 @@ QVariantMap Satellite::getInfoMap(const StelCore *core) const
 	map.insert("TEME-speed-Z", velocity[2]);
 	map.insert("inclination", pSatWrapper->getOrbitalInclination());
 	map.insert("period", pSatWrapper->getOrbitalPeriod());
-	Vec2d pa = calculatePerigeeApogeeFromLine2(tleElements.second.data());
-	map.insert("perigee-altitude", pa[0]);
-	map.insert("apogee-altitude", pa[0]);
+	map.insert("perigee-altitude", perigee);
+	map.insert("apogee-altitude", apogee);
 #if (SATELLITES_PLUGIN_IRIDIUM == 1)
 	if (sunReflAngle>0.)
 	{  // Iridium
@@ -624,10 +611,25 @@ float Satellite::getVMagnitude(const StelCore* core) const
 		else if (stdMag<99.) // OK, artificial satellite has value for standard magnitude
 		{
 			// Calculation of approx. visual magnitude for artificial satellites
-			// described here: http://www.prismnet.com/~mmccants/tles/mccdesc.html
-			double fracil = calculateIlluminatedFraction();
-			if (fracil==0)
-				fracil = 0.000001;
+			//
+			// The standard magnitude may be an estimate based on the mean cross-
+			// sectional area derived from its dimensions, or it may be a mean
+			// value derived from visual observations. The former are denoted by a
+			// letter "d" in column 37; the latter by a "v". To estimate the
+			// magnitude at other ranges and illuminations, use the following formula:
+			//
+			// mag = stdmag - 15.75 + 2.5 * log10 (range * range / fracil)
+			//
+			// where : stdmag = standard magnitude as defined above
+			//
+			// range = distance from observer to satellite, km
+			//
+			// fracil = fraction of satellite illuminated,
+			//	    [ 0 <= fracil <= 1 ]
+			//
+			// Original description: http://www.prismnet.com/~mmccants/tles/mccdesc.html
+
+			double fracil = qMax(0.000001, static_cast<double>(calculateIlluminatedFraction()));
 
 #if(SATELLITES_PLUGIN_IRIDIUM == 1)
 			if (pSatWrapper && name.startsWith("IRIDIUM"))
@@ -709,9 +711,9 @@ float Satellite::getVMagnitude(const StelCore* core) const
 			}
 			else // not Iridium
 #endif
-				vmag = stdMag;
+				vmag = static_cast<float>(stdMag);
 
-			vmag = static_cast<float>(vmag - 15.75 + 2.5 * std::log10(range * range / fracil));
+			vmag += -15.75f + 2.5f * static_cast<float>(std::log10(range * range / fracil));
 		}
 		else if (RCS>0.) // OK, artificial satellite has RCS value and no standard magnitude
 		{
@@ -751,17 +753,17 @@ QString Satellite::getOperationalStatus() const
 	return map.value(status,              qc_("unknown", "operational status"));
 }
 
-double Satellite::getAngularSize(const StelCore*) const
+double Satellite::getAngularRadius(const StelCore*) const
 {
+	double radius = 0.05 / 3600.; // assume 0.1 arcsecond default diameter
 	if (RCS>0.)
 	{
-		double size = std::sqrt(4*RCS/M_PI); // Let's use spherical satellites
-		if (isISS)
-			size = 109.; // Special case: let's use max. size of ISS (109 meters: https://www.nasa.gov/feature/facts-and-figures)
-		return 2.* std::atan(size/(2000.*range))*M_180_PI; // Computing an angular size of artificial satellite ("size" in meters, "range" in kilometres, so, 2000 is equal 1000*2)
+		double halfSize = isISS ?
+			 109. * 0.5 :         // Special case: let's use max. size of ISS (109 meters: https://www.nasa.gov/feature/facts-and-figures)
+			 std::sqrt(RCS/M_PI); // Let's assume spherical satellites/circular cross-section
+		radius = std::atan(halfSize/(1000.*range))*M_180_PI; // Computing an angular size of artificial satellite ("halfSize" in metres, "range" in kilometres)
 	}
-	else
-		return 0.00001;
+	return radius;
 }
 
 void Satellite::setNewTleElements(const QString& tle1, const QString& tle2)
@@ -773,10 +775,8 @@ void Satellite::setNewTleElements(const QString& tle1, const QString& tle2)
 		delete old;
 	}
 
-	tleElements.first.clear();
-	tleElements.first.append(tle1);
-	tleElements.second.clear();
-	tleElements.second.append(tle2);
+	tleElements.first = tle1.toUtf8();
+	tleElements.second = tle2.toUtf8();
 
 	pSatWrapper = new gSatWrapper(id, tle1, tle2);
 	orbitPoints.clear();
@@ -784,11 +784,13 @@ void Satellite::setNewTleElements(const QString& tle1, const QString& tle2)
 	
 	parseInternationalDesignator(tle1);
 	calculateEpochFromLine1(tle1);
+	calculateSatDataFromLine2(tle2);
 }
 
-void Satellite::recomputeEpochTLE()
+void Satellite::recomputeSatData()
 {
 	calculateEpochFromLine1(tleElements.first.data());
+	calculateSatDataFromLine2(tleElements.second.data());
 }
 
 void Satellite::update(double)
@@ -850,8 +852,6 @@ SatFlags Satellite::getFlags() const
 {
 	// There's also a faster, but less readable way: treating them as uint.
 	SatFlags flags;
-	Vec2d orb = getEccentricityInclinationFromLine2(tleElements.second.data());
-	Vec2d apd = calculatePerigeeApogeeFromLine2(tleElements.second.data());
 	double orbitalPeriod = pSatWrapper->getOrbitalPeriod();
 	if (displayed)
 		flags |= SatDisplayed;
@@ -871,16 +871,18 @@ SatFlags Satellite::getFlags() const
 		flags |= SatMediumSize;
 	if (RCS>1.0)
 		flags |= SatLargeSize;
-	if (orb[0] < 0.25 && (orb[1]>=0. && orb[1]<=180.) && apd[1]<4400.)
+	if (eccentricity < 0.25 && (inclination>=0. && inclination<=180.) && apogee<4400.)
 		flags |= SatLEO;
-	if (orb[0] < 0.25 && orb[1]<25. && (orbitalPeriod>=1100. && orbitalPeriod<=2000.))
+	if (eccentricity < 0.25 && inclination<25. && (orbitalPeriod>=1100. && orbitalPeriod<=2000.))
 		flags |= SatGSO;
-	if (orb[0] < 0.25 && (orb[1]>=0. && orb[1]<=180.) && apd[1]>=4400. && orbitalPeriod<1100.)
+	if (eccentricity < 0.25 && (inclination>=0. && inclination<=180.) && apogee>=4400. && orbitalPeriod<1100.)
 		flags |= SatMEO;
-	if (orb[0] >= 0.25 && (orb[1]>=0. && orb[1]<=180.) && apd[0]<=70000. && orbitalPeriod<=14000.)
+	if (eccentricity >= 0.25 && (inclination>=0. && inclination<=180.) && perigee<=70000. && orbitalPeriod<=14000.)
 		flags |= SatHEO;
-	if (orb[0] < 0.25 && (orb[1]>=25. && orb[1]<=180.) && (orbitalPeriod>=1100. && orbitalPeriod<=2000.))
+	if (eccentricity < 0.25 && (inclination>=25. && inclination<=180.) && (orbitalPeriod>=1100. && orbitalPeriod<=2000.))
 		flags |= SatHGSO;
+	if (qAbs(StelApp::getInstance().getCore()->getJD() - tleEpochJD) > tleEpochAge)
+		flags |= SatOutdatedTLE;
 	return flags;
 }
 
@@ -947,10 +949,10 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 		{
 			Vec3f color(1.f,1.f,1.f);
 			// Special case: crossing of the satellite of the Moon or the Sun
-			if (XYZ.angle(moon->getJ2000EquatorialPos(core))*M_180_PI <= moon->getSpheroidAngularSize(core) || XYZ.angle(sun->getJ2000EquatorialPos(core))*M_180_PI <= sun->getSpheroidAngularSize(core))
+			if (XYZ.angle(moon->getJ2000EquatorialPos(core))*M_180_PI <= moon->getSpheroidAngularRadius(core) || XYZ.angle(sun->getJ2000EquatorialPos(core))*M_180_PI <= sun->getSpheroidAngularRadius(core))
 			{
 				painter.setColor(transitSatelliteColor, 1.f);
-				int screenSizeSat = static_cast<int>((getAngularSize(core)*M_PI_180)*painter.getProjector()->getPixelPerRadAtCenter());
+				int screenSizeSat = static_cast<int>((getAngularRadius(core)*(2.*M_PI_180))*static_cast<double>(painter.getProjector()->getPixelPerRadAtCenter()));
 				if (screenSizeSat>0)
 				{
 					painter.setBlending(true, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
@@ -972,13 +974,18 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 				RCMag rcMag;
 
 				// Draw the satellite
-				sd->preDrawPointSource(&painter);
 				if (magSat <= sd->getLimitMagnitude())
 				{
+					Vec3f vf(XYZ.toVec3f());
+					Vec3f altAz(vf);
+					altAz.normalize();
+					core->j2000ToAltAzInPlaceNoRefraction(&altAz);
+					sd->preDrawPointSource(&painter);
 					sd->computeRCMag(magSat, &rcMag);
-					sd->drawPointSource(&painter, XYZ.toVec3f(), rcMag, color*hintBrightness, true);
+					// allow height-dependent twinkle and suppress twinkling in higher altitudes. Keep 0.1 twinkle amount in zenith.
+					sd->drawPointSource(&painter, vf, rcMag, color*hintBrightness, true, qMin(1.0f, 1.0f-0.9f*altAz[2]));
+					sd->postDrawPointSource(&painter);
 				}
-				sd->postDrawPointSource(&painter);
 
 				float txtMag = magSat;
 				if (visibility != gSatWrapper::VISIBLE)
@@ -999,7 +1006,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 		{
 			Vec3f drawColor = (visibility == gSatWrapper::VISIBLE) ? hintColor : invisibleSatelliteColor; // Use hintColor for visible satellites only
 			painter.setColor(drawColor*hintBrightness, hintBrightness);
-			if (XYZ.angle(moon->getJ2000EquatorialPos(core))*M_180_PI <= moon->getSpheroidAngularSize(core) || XYZ.angle(sun->getJ2000EquatorialPos(core))*M_180_PI <= sun->getSpheroidAngularSize(core))
+			if (XYZ.angle(moon->getJ2000EquatorialPos(core))*M_180_PI <= moon->getSpheroidAngularRadius(core) || XYZ.angle(sun->getJ2000EquatorialPos(core))*M_180_PI <= sun->getSpheroidAngularRadius(core))
 				painter.setColor(transitSatelliteColor, 1.f);
 
 			if (showLabels)

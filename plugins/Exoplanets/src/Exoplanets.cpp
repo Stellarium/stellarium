@@ -75,7 +75,7 @@ StelPluginInfo ExoplanetsStelPluginInterface::getPluginInfo() const
 	info.id = "Exoplanets";
 	info.displayedName = N_("Exoplanets");
 	info.authors = "Alexander Wolf";
-	info.contact = "https://github.com/Stellarium/stellarium";
+	info.contact = STELLARIUM_DEV_URL;
 	info.description = N_("This plugin plots the position of stars with exoplanets. Exoplanets data is derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu");
 	info.version = EXOPLANETS_PLUGIN_VERSION;
 	info.license = EXOPLANETS_PLUGIN_LICENSE;
@@ -171,7 +171,7 @@ void Exoplanets::init()
 
 		// key bindings and other actions
 		addAction("actionShow_Exoplanets", N_("Exoplanets"), N_("Show exoplanets"), "showExoplanets", "Ctrl+Alt+E");
-		addAction("actionShow_Exoplanets_ConfigDialog", N_("Exoplanets"), N_("Exoplanets configuration window"), exoplanetsConfigDialog, "visible", "Alt+E");
+		addAction("actionShow_Exoplanets_ConfigDialog", N_("Exoplanets"), N_("Show settings dialog"), exoplanetsConfigDialog, "visible", "Alt+E");
 
 		setFlagShowExoplanets(getEnableAtStartup());
 		setFlagShowExoplanetsButton(flagShowExoplanetsButton);
@@ -502,7 +502,8 @@ void Exoplanets::reloadCatalog(void)
 	if (hasSelection)
 	{
 		// Restore selection...
-		objMgr->setSelectedObject(selectedObject);
+		StelObjectP obj = selectedObject[0];
+		objMgr->findAndSelect(obj->getEnglishName(), obj->getType());
 	}
 }
 
@@ -700,6 +701,7 @@ void Exoplanets::loadConfiguration(void)
 	enableAtStartup = conf->value("enable_at_startup", false).toBool();
 	flagShowExoplanetsButton = conf->value("flag_show_exoplanets_button", true).toBool();
 	setFlagShowExoplanetsDesignations(conf->value("flag_show_designations", true).toBool());
+	setFlagShowExoplanetsNumbers(conf->value("flag_show_numbers", false).toBool());
 	setMarkerColor(Vec3f(conf->value("exoplanet_marker_color", "0.4,0.9,0.5").toString()));
 	setHabitableColor(Vec3f(conf->value("habitable_exoplanet_marker_color", "1.0,0.5,0.0").toString()));
 	setCurrentTemperatureScaleKey(conf->value("temperature_scale", "Celsius").toString());
@@ -743,7 +745,7 @@ void Exoplanets::updateJSON(void)
 {
 	if (updateState==Exoplanets::Updating)
 	{
-		qWarning() << "[Exoplanets] Already updating...  will not start again current update is complete.";
+		qWarning() << "[Exoplanets] Already updating...  will not start again until current update is complete.";
 		return;
 	}
 	qDebug() << "[Exoplanets] Updating exoplanets catalog...";
@@ -781,7 +783,9 @@ void Exoplanets::setFlagShowExoplanetsButton(bool b)
 							       QPixmap(":/Exoplanets/btExoplanets-on.png"),
 							       QPixmap(":/Exoplanets/btExoplanets-off.png"),
 							       QPixmap(":/graphicGui/miscGlow32x32.png"),
-							       "actionShow_Exoplanets");
+							       "actionShow_Exoplanets",
+							       false,
+							       "actionShow_Exoplanets_ConfigDialog");
 			}
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		} else {
@@ -809,6 +813,16 @@ bool Exoplanets::getFlagShowExoplanetsDesignations() const
 void Exoplanets::setFlagShowExoplanetsDesignations(bool b)
 {
 	Exoplanet::showDesignations=b;
+}
+
+bool Exoplanets::getFlagShowExoplanetsNumbers() const
+{
+	return Exoplanet::showNumbers;
+}
+
+void Exoplanets::setFlagShowExoplanetsNumbers(bool b)
+{
+	Exoplanet::showNumbers=b;
 }
 
 bool Exoplanets::getTimelineMode() const
@@ -1027,19 +1041,17 @@ void Exoplanets::translations()
 	// TRANSLATORS: Exoplanet detection method
 	N_("Imaging");
 	// TRANSLATORS: Exoplanet detection method
-	N_("Pulsar");
-	// TRANSLATORS: Exoplanet detection method
-	N_("Other");
-	// TRANSLATORS: Exoplanet detection method
 	N_("Astrometry");
 	// TRANSLATORS: Exoplanet detection method. TTV=Transit Timing Variation
 	N_("TTV");
 	// TRANSLATORS: Exoplanet detection method
 	N_("Timing");
-	// TRANSLATORS: Exoplanet detection method. TTV=Transit Timing Variation
-	N_("Primary Transit, TTV");
 	// TRANSLATORS: Exoplanet detection method
 	N_("Default");
+	// TRANSLATORS: Exoplanet detection method
+	N_("Secondary Transit");
+	// TRANSLATORS: Exoplanet detection method
+	N_("Disk Kinematics");
 
 	/* For copy/paste:
 	// TRANSLATORS:

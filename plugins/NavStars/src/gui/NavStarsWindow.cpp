@@ -71,20 +71,14 @@ void NavStarsWindow::createDialogContent()
 	}
 	ui->nsSetComboBox->setCurrentIndex(idx);
 	connect(ui->nsSetComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setNavigationalStarsSet(int)));
-	ui->displayAtStartupCheckBox->setChecked(ns->getEnableAtStartup());
-	connect(ui->displayAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayAtStartupEnabled(int)));
-	ui->highlightWhenVisible->setChecked(ns->getHighlightWhenVisible());
-	connect(ui->highlightWhenVisible, SIGNAL(stateChanged(int)), this, SLOT(setHighlightWhenVisibleEnabled(int)));
-	ui->limitInfoToNavStars->setChecked(ns->getLimitInfoToNavStars());
-	connect(ui->limitInfoToNavStars, SIGNAL(stateChanged(int)), this, SLOT(setLimitInfoToNavStarsEnabled(int)));
-	ui->showExtraDecimals->setChecked(ns->getShowExtraDecimals());
-	connect(ui->showExtraDecimals, SIGNAL(stateChanged(int)), this, SLOT(setExtraDecimalsDisplayEnabled(int)));
 
-	ui->upperLimb->setChecked(ns->getUpperLimb());
-	connect(ui->upperLimb, SIGNAL(stateChanged(int)), this, SLOT(setUpperLimbEnabled(int)));
-
-	ui->tabulatedDisplay->setChecked(ns->getTabulatedDisplay());
-	connect(ui->tabulatedDisplay, SIGNAL(stateChanged(int)), this, SLOT(setTabulatedDisplayEnabled(int)));
+	connectBoolProperty(ui->displayAtStartupCheckBox,	"NavStars.displayAtStartup");
+	connectBoolProperty(ui->highlightWhenVisible,		"NavStars.highlightWhenVisible");
+	connectBoolProperty(ui->limitInfoToNavStars,		"NavStars.limitInfoToNavStars");
+	connectBoolProperty(ui->upperLimb,			"NavStars.upperLimb");
+	connectBoolProperty(ui->tabulatedDisplay,		"NavStars.tabulatedDisplay");
+	connectBoolProperty(ui->showExtraDecimals,		"NavStars.showExtraDecimals");
+	connectBoolProperty(ui->useUTCCheckBox,			"NavStars.useUTCTime");
 
 	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(saveSettings()));	
 	connect(ui->pushButtonReset, SIGNAL(clicked()), this, SLOT(resetSettings()));
@@ -95,7 +89,6 @@ void NavStarsWindow::createDialogContent()
 	if(gui!=Q_NULLPTR)
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 }
-
 
 void NavStarsWindow::saveSettings()
 {
@@ -111,42 +104,6 @@ void NavStarsWindow::resetSettings()
 	}
 	else
 		qDebug() << "[NavStars] restore defaults is canceled...";
-}
-
-void NavStarsWindow::setDisplayAtStartupEnabled(int checkState)
-{
-	bool b = checkState != Qt::Unchecked;
-	ns->setEnableAtStartup(b);
-}
-
-void NavStarsWindow::setHighlightWhenVisibleEnabled(int checkState)
-{
-	bool b = checkState != Qt::Unchecked;
-	ns->setHighlightWhenVisible(b);
-}
-
-void NavStarsWindow::setLimitInfoToNavStarsEnabled(int checkState)
-{
-	bool b = checkState != Qt::Unchecked;
-	ns->setLimitInfoToNavStars(b);
-}
-
-void NavStarsWindow::setUpperLimbEnabled(int checkState)
-{
-	bool b = checkState != Qt::Unchecked;
-	ns->setUpperLimb(b);
-}
-
-void NavStarsWindow::setTabulatedDisplayEnabled(int checkState)
-{
-	bool b = checkState != Qt::Unchecked;
-	ns->setTabulatedDisplay(b);
-}
-
-void NavStarsWindow::setExtraDecimalsDisplayEnabled(int checkState)
-{
-	bool b = checkState != Qt::Unchecked;
-	ns->setShowExtraDecimals(b);
 }
 
 void NavStarsWindow::populateNavigationalStarsSets()
@@ -190,14 +147,11 @@ void NavStarsWindow::populateNavigationalStarsSetDescription(void)
 
 void NavStarsWindow::setAboutHtml(void)
 {
-	// Regexp to replace {text} with an HTML link.
-	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
-
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Navigational Stars Plug-in") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + NAVSTARS_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + NAVSTARS_PLUGIN_LICENSE + "</td></tr>";
-	html += "<tr><td rowspan='2'><strong>" + q_("Authors") + ":</strong></td><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
+	html += "<tr><td rowspan='2'><strong>" + q_("Authors") + ":</strong></td><td>Alexander Wolf</td></tr>";
 	html += "<tr><td>Andy Kirkham &lt;kirkham.andy@gmail.com&gt;</td></tr>";
 	html += "</table>";
 
@@ -253,16 +207,8 @@ void NavStarsWindow::setAboutHtml(void)
 	html += q_("For further information please refer to the Stellarium User Guide.");
 	html += "</p>";
 
-	html += "<h3>" + q_("Links") + "</h3>";
-	html += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg("Navigational Stars plugin") + "</p>";
-	html += "<p/><ul>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you have a question, you can {get an answer here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://groups.google.com/forum/#!forum/stellarium\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("Bug reports and feature requests can be made {here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://github.com/Stellarium/stellarium/issues\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you want to read full information about this plugin and its history, you can {get info here}.").toHtmlEscaped().replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Navigational_Stars_plugin\">\\1</a>") + "</li>";
-	html += "</ul></p><br/></body></html>";
+	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Navigational Stars plugin");
+	html += "</body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if(gui!=Q_NULLPTR)

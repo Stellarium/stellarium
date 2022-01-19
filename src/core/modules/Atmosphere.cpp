@@ -27,6 +27,7 @@
 #include "StelFileMgr.hpp"
 #include "Dithering.hpp"
 
+#include <QFile>
 #include <QDebug>
 #include <QSettings>
 #include <QOpenGLShaderProgram>
@@ -48,19 +49,16 @@ Atmosphere::Atmosphere(void)
 {
 	setFadeDuration(1.5f);
 
-	QOpenGLShader toneReproShader(QOpenGLShader::Vertex);
-	if (!toneReproShader.compileSourceFile(":/shaders/xyYToRGB.glsl"))
-	{
-		qFatal("Error while compiling atmosphere vertex shader: %s", toneReproShader.log().toLatin1().constData());
-	}
-	if (!toneReproShader.log().isEmpty())
-	{
-		qWarning() << "Warnings while compiling atmosphere Tone Reproducer shader: " << toneReproShader.log();
-	}
 	QOpenGLShader vShader(QOpenGLShader::Vertex);
-	if (!vShader.compileSourceFile(":/shaders/atmosphere.vert"))
 	{
-		qFatal("Error while compiling atmosphere vertex shader: %s", vShader.log().toLatin1().constData());
+		QFile vert(":/shaders/atmosphere.vert");
+		if(!vert.open(QFile::ReadOnly))
+			qFatal("Failed to open atmosphere vertex shader source");
+		QFile toneRepro(":/shaders/xyYToRGB.glsl");
+		if(!toneRepro.open(QFile::ReadOnly))
+			qFatal("Failed to open ToneReproducer shader source");
+		if (!vShader.compileSourceCode(vert.readAll()+toneRepro.readAll()))
+			qFatal("Error while compiling atmosphere vertex shader: %s", vShader.log().toLatin1().constData());
 	}
 	if (!vShader.log().isEmpty())
 	{
@@ -83,34 +81,36 @@ Atmosphere::Atmosphere(void)
 	}
 	atmoShaderProgram = new QOpenGLShaderProgram();
 	atmoShaderProgram->addShader(&vShader);
-	atmoShaderProgram->addShader(&toneReproShader);
 	atmoShaderProgram->addShader(&fShader);
 	StelPainter::linkProg(atmoShaderProgram, "atmosphere");
 
-	atmoShaderProgram->bind();
-	shaderAttribLocations.bayerPattern = atmoShaderProgram->uniformLocation("bayerPattern");
-	shaderAttribLocations.rgbMaxValue = atmoShaderProgram->uniformLocation("rgbMaxValue");
-	shaderAttribLocations.alphaWaOverAlphaDa = atmoShaderProgram->uniformLocation("alphaWaOverAlphaDa");
-	shaderAttribLocations.oneOverGamma = atmoShaderProgram->uniformLocation("oneOverGamma");
-	shaderAttribLocations.term2TimesOneOverMaxdLpOneOverGamma = atmoShaderProgram->uniformLocation("term2TimesOneOverMaxdLpOneOverGamma");
-	shaderAttribLocations.brightnessScale = atmoShaderProgram->uniformLocation("brightnessScale");
-	shaderAttribLocations.sunPos = atmoShaderProgram->uniformLocation("sunPos");
-	shaderAttribLocations.term_x = atmoShaderProgram->uniformLocation("term_x");
-	shaderAttribLocations.Ax = atmoShaderProgram->uniformLocation("Ax");
-	shaderAttribLocations.Bx = atmoShaderProgram->uniformLocation("Bx");
-	shaderAttribLocations.Cx = atmoShaderProgram->uniformLocation("Cx");
-	shaderAttribLocations.Dx = atmoShaderProgram->uniformLocation("Dx");
-	shaderAttribLocations.Ex = atmoShaderProgram->uniformLocation("Ex");
-	shaderAttribLocations.term_y = atmoShaderProgram->uniformLocation("term_y");
-	shaderAttribLocations.Ay = atmoShaderProgram->uniformLocation("Ay");
-	shaderAttribLocations.By = atmoShaderProgram->uniformLocation("By");
-	shaderAttribLocations.Cy = atmoShaderProgram->uniformLocation("Cy");
-	shaderAttribLocations.Dy = atmoShaderProgram->uniformLocation("Dy");
-	shaderAttribLocations.Ey = atmoShaderProgram->uniformLocation("Ey");
-	shaderAttribLocations.projectionMatrix = atmoShaderProgram->uniformLocation("projectionMatrix");
-	shaderAttribLocations.skyVertex = atmoShaderProgram->attributeLocation("skyVertex");
-	shaderAttribLocations.skyColor = atmoShaderProgram->attributeLocation("skyColor");
-	atmoShaderProgram->release();
+	GL(atmoShaderProgram->bind());
+	GL(shaderAttribLocations.bayerPattern = atmoShaderProgram->uniformLocation("bayerPattern"));
+	GL(shaderAttribLocations.rgbMaxValue = atmoShaderProgram->uniformLocation("rgbMaxValue"));
+	GL(shaderAttribLocations.alphaWaOverAlphaDa = atmoShaderProgram->uniformLocation("alphaWaOverAlphaDa"));
+	GL(shaderAttribLocations.oneOverGamma = atmoShaderProgram->uniformLocation("oneOverGamma"));
+	GL(shaderAttribLocations.term2TimesOneOverMaxdLpOneOverGamma = atmoShaderProgram->uniformLocation("term2TimesOneOverMaxdLpOneOverGamma"));
+	GL(shaderAttribLocations.term2TimesOneOverMaxdL = atmoShaderProgram->uniformLocation("term2TimesOneOverMaxdL"));
+	GL(shaderAttribLocations.flagUseTmGamma = atmoShaderProgram->uniformLocation("flagUseTmGamma"));
+	GL(shaderAttribLocations.brightnessScale = atmoShaderProgram->uniformLocation("brightnessScale"));
+	GL(shaderAttribLocations.sunPos = atmoShaderProgram->uniformLocation("sunPos"));
+	GL(shaderAttribLocations.term_x = atmoShaderProgram->uniformLocation("term_x"));
+	GL(shaderAttribLocations.Ax = atmoShaderProgram->uniformLocation("Ax"));
+	GL(shaderAttribLocations.Bx = atmoShaderProgram->uniformLocation("Bx"));
+	GL(shaderAttribLocations.Cx = atmoShaderProgram->uniformLocation("Cx"));
+	GL(shaderAttribLocations.Dx = atmoShaderProgram->uniformLocation("Dx"));
+	GL(shaderAttribLocations.Ex = atmoShaderProgram->uniformLocation("Ex"));
+	GL(shaderAttribLocations.term_y = atmoShaderProgram->uniformLocation("term_y"));
+	GL(shaderAttribLocations.Ay = atmoShaderProgram->uniformLocation("Ay"));
+	GL(shaderAttribLocations.By = atmoShaderProgram->uniformLocation("By"));
+	GL(shaderAttribLocations.Cy = atmoShaderProgram->uniformLocation("Cy"));
+	GL(shaderAttribLocations.Dy = atmoShaderProgram->uniformLocation("Dy"));
+	GL(shaderAttribLocations.Ey = atmoShaderProgram->uniformLocation("Ey"));
+	GL(shaderAttribLocations.doSRGB = atmoShaderProgram->uniformLocation("doSRGB"));
+	GL(shaderAttribLocations.projectionMatrix = atmoShaderProgram->uniformLocation("projectionMatrix"));
+	GL(shaderAttribLocations.skyVertex = atmoShaderProgram->attributeLocation("skyVertex"));
+	GL(shaderAttribLocations.skyColor = atmoShaderProgram->attributeLocation("skyColor"));
+	GL(atmoShaderProgram->release());
 }
 
 Atmosphere::~Atmosphere(void)
@@ -124,7 +124,7 @@ Atmosphere::~Atmosphere(void)
 }
 
 void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moonPhase, float moonMagnitude,
-							   StelCore* core, float latitude, float altitude, float temperature, float relativeHumidity)
+							   StelCore* core, float latitude, float altitude, float temperature, float relativeHumidity, float extinctionCoefficient, bool noScatter)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 	if (viewport != prj->getViewport())
@@ -157,7 +157,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		posGridBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
 		posGridBuffer.create();
 		posGridBuffer.bind();
-		posGridBuffer.allocate(posGrid, (1+skyResolutionX)*(1+skyResolutionY)*8);
+		posGridBuffer.allocate(posGrid, static_cast<int>((1+skyResolutionX)*(1+skyResolutionY))*8);
 		posGridBuffer.release();
 		
 		// Generate the indices used to draw the quads
@@ -247,7 +247,23 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		return;
 	}
 
-	sky.setParamsv(sunPosF, 5.f);
+	// Calculate the atmosphere RGB for each point of the grid
+
+	// GZ: This used a constant Preetham Turbidity of 5 which is already quite hazy.
+	// We can work with the k value set in the atmosphere/extinction settings.
+	// Given that T=1 = Pure Air where k=0.16, and other values assumed in parallel, we come to an
+	// ad-hoc mapping function which should not look to bad: T=25(k-0.16)+1
+	//sky.setParamsv(sunPos, 5.f); // To reach the 5 we have k=0.32
+	StelSkyDrawer* skyDrawer = StelApp::getInstance().getCore()->getSkyDrawer();
+
+	float turbidity= ( (skyDrawer->getFlagTfromK()) ?  25.f*(extinctionCoefficient-0.16f)+1.f   : static_cast<float>(skyDrawer->getT()));
+	// Note that Preetham's model has some quirks for too low turbidities.
+	// A hard limit is some assert later, so must be technically at least 1.203.
+	// Also, Preetham has optimized to T in[2..6], which translates now to k in [0.2-0.36].
+	// In Schaefer-Krisciunas Moon brightness paper, k=0.172 for Mauna Kea. Preetham will likely be too bright here.
+	//sky.setParamsv(sunPos, qBound(2.f, turbidity, 6.f));
+	sky.setParamsv(sunPosF, qBound(2.f, turbidity, 16.f));  // GZ-AT allow more turbidity for testing
+
 	skyb.setLocation(latitude * M_PI_180f, altitude, temperature, relativeHumidity);
 	skyb.setSunMoon(moonPosF[2], sunPosF[2]);
 
@@ -260,8 +276,9 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 	float sum_lum = 0.f;
 
 	Vec3d point(1., 0., 0.);
-	float lumi;
+	float lumi=0.f;
 
+	skylightStruct2 skylight;
 	// Compute the sky color for every point above the ground
 	for (unsigned int i=0; i<(1+skyResolutionX)*(1+skyResolutionY); ++i)
 	{
@@ -271,17 +288,33 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		Q_ASSERT(fabs(point.lengthSquared()-1.0) < 1e-10);
 
 		Vec3f pointF=point.toVec3f();
-		// Use mirroring for sun only
-		if (pointF[2]<=0.f)
+		if (!noScatter)
 		{
-			pointF[2] *= -1.f;
-			// The sky below the ground is the symmetric of the one above :
-			// it looks nice and gives proper values for brightness estimation
-			// Use the Skybright.cpp 's models for brightness which gives better results.
+			// Use mirroring for sun only
+			if (pointF[2]<=0.f)
+			{
+				pointF[2] *= -1.f;
+				moonPosF[2] *= -1.f;
+				// The sky below the ground is the symmetric of the one above :
+				// it looks nice and gives proper values for brightness estimation
+				// Use the Skybright.cpp 's models for brightness which gives better results.
+			}
+			if (sky.getFlagSchaefer())
+			{
+				lumi = skyb.getLuminance(moonPosF[0]*pointF[0]+moonPosF[1]*pointF[1]+moonPosF[2]*pointF[2],
+							 sunPosF[0] *pointF[0]+sunPosF[1] *pointF[1]+sunPosF[2] *pointF[2],
+							 pointF[2]);
+			}
+			else // Experimental: Re-allow CIE/Preetham brightness instead.
+			{
+				skylight.pos[0]=pointF.v[0];
+				skylight.pos[1]=pointF.v[1];
+				skylight.pos[2]=pointF.v[2];
+				sky.getxyYValuev(skylight);
+				lumi=skylight.color[2];
+			}
 		}
-		lumi = skyb.getLuminance(moonPosF[0]*pointF[0]+moonPosF[1]*pointF[1]+
-				moonPosF[2]*pointF[2], sunPosF[0]*pointF[0]+sunPosF[1]*pointF[1]+
-				sunPosF[2]*pointF[2], pointF[2]);
+
 		lumi *= eclipseFactor;
 		// Add star background luminance
 		lumi += 0.0001f;
@@ -295,7 +328,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		// Store for later statistics
 		sum_lum+=lumi;
 
-		// Now need to compute the xy part of the color component
+		// No need to compute the xy part of the color component
 		// This is done in the openGL shader
 		// Store the back projected position + luminance in the input color to the shader
 		colorGrid[i].set(pointF[0], pointF[1], pointF[2], lumi);
@@ -332,79 +365,81 @@ void Atmosphere::draw(StelCore* core)
 	if (StelApp::getInstance().getVisionModeNight())
 		return;
 
-	StelToneReproducer* eye = core->getToneReproducer();
+	const float atm_intensity = fader.getInterstate();
+	if (atm_intensity==0.f)
+	    return;
 
-	if (!fader.getInterstate())
-		return;
+	StelToneReproducer* eye = core->getToneReproducer();
 
 	StelPainter sPainter(core->getProjection2d());
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
 
-	const float atm_intensity = fader.getInterstate();
+	GL(atmoShaderProgram->bind());
+	float a, b, c, d;
+	bool useTmGamma, sRGB;
+	eye->getShadersParams(a, b, c, d, useTmGamma, sRGB);
 
-	atmoShaderProgram->bind();
-	float a, b, c;
-	eye->getShadersParams(a, b, c);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.alphaWaOverAlphaDa, a);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.oneOverGamma, b);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.term2TimesOneOverMaxdLpOneOverGamma, c);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.brightnessScale, atm_intensity);
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.alphaWaOverAlphaDa, a));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.oneOverGamma, b));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.term2TimesOneOverMaxdLpOneOverGamma, c));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.term2TimesOneOverMaxdL, d));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.flagUseTmGamma, useTmGamma));
+
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.brightnessScale, atm_intensity));
 	Vec3f sunPos;
 	float term_x, Ax, Bx, Cx, Dx, Ex, term_y, Ay, By, Cy, Dy, Ey;
 	sky.getShadersParams(sunPos, term_x, Ax, Bx, Cx, Dx, Ex, term_y, Ay, By, Cy, Dy, Ey);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.sunPos, sunPos[0], sunPos[1], sunPos[2]);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.term_x, term_x);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.Ax, Ax);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.Bx, Bx);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.Cx, Cx);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.Dx, Dx);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.Ex, Ex);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.term_y, term_y);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.Ay, Ay);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.By, By);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.Cy, Cy);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.Dy, Dy);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.Ey, Ey);
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.sunPos, sunPos[0], sunPos[1], sunPos[2]));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.term_x, term_x));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.Ax, Ax));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.Bx, Bx));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.Cx, Cx));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.Dx, Dx));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.Ex, Ex));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.term_y, term_y));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.Ay, Ay));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.By, By));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.Cy, Cy));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.Dy, Dy));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.Ey, Ey));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.doSRGB, sRGB));
 	const Mat4f& m = sPainter.getProjector()->getProjectionMatrix();
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.projectionMatrix,
-		QMatrix4x4(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.projectionMatrix,
+					      QMatrix4x4(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15])));
 
 	const auto rgbMaxValue=calcRGBMaxValue(sPainter.getDitheringMode());
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.rgbMaxValue, rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]);
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.rgbMaxValue, rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]));
 	auto& gl=*sPainter.glFuncs();
 	gl.glActiveTexture(GL_TEXTURE1);
 	if(!bayerPatternTex)
 		bayerPatternTex=makeBayerPatternTexture(*sPainter.glFuncs());
 	gl.glBindTexture(GL_TEXTURE_2D, bayerPatternTex);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.bayerPattern, 1);
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.bayerPattern, 1));
 	
-	colorGridBuffer.bind();
-	atmoShaderProgram->setAttributeBuffer(shaderAttribLocations.skyColor, GL_FLOAT, 0, 4, 0);
-	colorGridBuffer.release();
-	atmoShaderProgram->enableAttributeArray(shaderAttribLocations.skyColor);
-	posGridBuffer.bind();
-	atmoShaderProgram->setAttributeBuffer(shaderAttribLocations.skyVertex, GL_FLOAT, 0, 2, 0);
-	posGridBuffer.release();
-	atmoShaderProgram->enableAttributeArray(shaderAttribLocations.skyVertex);
+	GL(colorGridBuffer.bind());
+	GL(atmoShaderProgram->setAttributeBuffer(shaderAttribLocations.skyColor, GL_FLOAT, 0, 4, 0));
+	GL(colorGridBuffer.release());
+	GL(atmoShaderProgram->enableAttributeArray(shaderAttribLocations.skyColor));
+	GL(posGridBuffer.bind());
+	GL(atmoShaderProgram->setAttributeBuffer(shaderAttribLocations.skyVertex, GL_FLOAT, 0, 2, 0));
+	GL(posGridBuffer.release());
+	GL(atmoShaderProgram->enableAttributeArray(shaderAttribLocations.skyVertex));
 
 	// And draw everything at once
-	indicesBuffer.bind();
+	GL(indicesBuffer.bind());
 	std::size_t shift=0;
 	for (unsigned int y=0;y<skyResolutionY;++y)
 	{
 		sPainter.glFuncs()->glDrawElements(GL_TRIANGLE_STRIP, static_cast<int>((skyResolutionX+1)*2), GL_UNSIGNED_SHORT, reinterpret_cast<void*>(shift));
 		shift += static_cast<size_t>((skyResolutionX+1)*2*2);
 	}
-	indicesBuffer.release();
+	GL(indicesBuffer.release());
 	
-	atmoShaderProgram->disableAttributeArray(shaderAttribLocations.skyVertex);
-	atmoShaderProgram->disableAttributeArray(shaderAttribLocations.skyColor);
-	atmoShaderProgram->release();
-	// GZ: debug output
-	//const StelProjectorP prj = core->getProjection(StelCore::FrameEquinoxEqu);
-	//StelPainter painter(prj);
-	//painter.setFont(font);
-	//sPainter.setColor(0.7, 0.7, 0.7);
-	//sPainter.drawText(83, 120, QString("Atmosphere::getAverageLuminance(): %1" ).arg(getAverageLuminance()));
-	//qDebug() << atmosphere->getAverageLuminance();
+	GL(atmoShaderProgram->disableAttributeArray(shaderAttribLocations.skyVertex));
+	GL(atmoShaderProgram->disableAttributeArray(shaderAttribLocations.skyColor));
+	GL(atmoShaderProgram->release());
+	// debug output
+	// sPainter.setColor(0.7f, 0.7f, 0.7f);
+	// sPainter.drawText(83, 108, QString("Tonemapper::worldAdaptationLuminance(): %1" ).arg(eye->getWorldAdaptationLuminance()));
+	// sPainter.drawText(83, 120, QString("Atmosphere::getAverageLuminance(): %1" ).arg(getAverageLuminance()));
 }

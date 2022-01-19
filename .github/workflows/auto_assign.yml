@@ -2,11 +2,13 @@
 # See https://github.com/marketplace/actions/auto-assign-action
 #
 name: 'Auto Assign'
-on: pull_request_target
+on:
+  pull_request_target:
+    types: [opened, reopened, ready_for_review]
 
 jobs:
   add-reviews:
     runs-on: ubuntu-latest
     name: Add reviews
     steps:
-      - uses: kentaro-m/auto-assign-action@v1.1.2
+      - uses: kentaro-m/auto-assign-action@v1.2.0

@@ -71,7 +71,7 @@ StelPluginInfo NovaeStelPluginInterface::getPluginInfo() const
 	info.id = "Novae";
 	info.displayedName = N_("Bright Novae");
 	info.authors = "Alexander Wolf";
-	info.contact = "https://github.com/Stellarium/stellarium";
+	info.contact = STELLARIUM_DEV_URL;
 	info.description = N_("A plugin that shows some bright novae in the Milky Way galaxy.");
 	info.version = NOVAE_PLUGIN_VERSION;
 	info.license = NOVAE_PLUGIN_LICENSE;
@@ -274,7 +274,7 @@ StelObjectP Novae::searchByNameI18n(const QString& nameI18n) const
 	return Q_NULLPTR;
 }
 
-QStringList Novae::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
+QStringList Novae::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (maxNbItem <= 0)
@@ -773,6 +773,7 @@ void Novae::reloadCatalog(void)
 	if (hasSelection)
 	{
 		// Restore selection...
-		objMgr->setSelectedObject(selectedObject);
+		StelObjectP obj = selectedObject[0];
+		objMgr->findAndSelect(obj->getEnglishName(), obj->getType());
 	}
 }

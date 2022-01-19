@@ -42,32 +42,60 @@ CalendarsInfoPanel::CalendarsInfoPanel(Calendars* plugin,
 	QGraphicsTextItem("", parent),
 	plugin(plugin),
 	parentWidget(parent),
-	xPos(static_cast<qreal>(FLT_MAX))
+	xPos(static_cast<qreal>(FLT_MAX)),
+	yPos(static_cast<qreal>(FLT_MAX))
 {
 	StelApp& stelApp = StelApp::getInstance();
 	QFont newFont = font();
 
 	updatePosition();
 	connect (parentWidget, SIGNAL(geometryChanged()), this, SLOT(updatePosition()));
+	// when user switches a calendar on or off, we must force a recalculation of a minimal bounding box before we can rebuild the calendar list.
+	connect (this->plugin, &Calendars::showJulianChanged            , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showGregorianChanged         , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showISOChanged               , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showIcelandicChanged         , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showRomanChanged             , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showOlympicChanged           , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showEgyptianChanged          , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showArmenianChanged          , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showZoroastrianChanged       , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showCopticChanged            , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showEthiopicChanged          , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showChineseChanged           , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showIslamicChanged           , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showHebrewChanged            , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showOldHinduSolarChanged     , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showOldHinduLunarChanged     , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showMayaLongCountChanged     , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showMayaHaabChanged          , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showMayaTzolkinChanged       , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showAztecXihuitlChanged      , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showAztecTonalpohualliChanged, this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showBalineseChanged          , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showFrenchArithmeticChanged  , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showPersianArithmeticChanged , this, [=](bool){setHtml("a"); updatePosition();});
+
 	//Night mode
 	connect(&stelApp, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setColorScheme(const QString&)));
 	setColorScheme(stelApp.getCurrentStelStyle());
 }
-
 
 void CalendarsInfoPanel::updatePosition()
 {
 	qreal bottomBoundingHeight = static_cast<SkyGui*>(parentWidget)->getBottomBarHeight();
 
 	if (sender())
+	{
 		xPos=parentWidget->size().width(); // reset when window has been resized.
-	qreal xPosCand = parentWidget->size().width() -  boundingRect().width();
+		yPos=static_cast<qreal>(FLT_MAX);
+	}
+	qreal xPosCand = parentWidget->size().width() - boundingRect().width();
 	xPos=qMin(xPos, xPosCand);
-	qreal yPos = parentWidget->size().height() - boundingRect().height() - bottomBoundingHeight;
+	qreal yPosCand = parentWidget->size().height() - boundingRect().height() - bottomBoundingHeight;
+	yPos=qMin(yPos, yPosCand);
 	setPos(xPos, yPos);
 }
-
-
 
 void CalendarsInfoPanel::setColorScheme(const QString &schemeName)
 {

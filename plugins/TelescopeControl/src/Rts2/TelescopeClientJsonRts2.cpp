@@ -18,6 +18,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include <QRegularExpression>
 #include "StelUtils.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelTranslator.hpp"
@@ -54,12 +55,13 @@ TelescopeClientJsonRts2::TelescopeClientJsonRts2(const QString &name, const QStr
 	// Example params:
 	// 1000:test:1234@localhost:8889/tel
 
-	QRegExp paramRx("^(\\d+):(.*)$");
+	QRegularExpression paramRx("^(\\d+):(.*)$");
+	QRegularExpressionMatch paramMatch=paramRx.match(params);
 	QString url;
-	if (paramRx.exactMatch(params))
+	if (paramMatch.hasMatch())
 	{
-		refresh_delay = paramRx.cap(1).toInt() / 1000; // convert microseconds to milliseconds
-		url           = paramRx.cap(2).trimmed();
+		refresh_delay = paramMatch.captured(1).toInt() / 1000; // convert microseconds to milliseconds
+		url           = paramMatch.captured(2).trimmed();
 	}
 	else
 	{

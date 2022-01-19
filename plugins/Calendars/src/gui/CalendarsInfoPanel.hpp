@@ -51,7 +51,8 @@ private:
 	// This is actually SkyGui. Perhaps it should be more specific?
 	QGraphicsWidget* parentWidget;
 
-	qreal xPos; // cache screen position to avoid position jitter.
+	qreal xPos; // cache horizontal screen position to avoid position jitter.
+	qreal yPos; // cache vertical   screen position to avoid position jitter.
 };
 
 #endif // CALENDARSINFOPANEL_HPP

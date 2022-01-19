@@ -26,6 +26,7 @@
 #include <QWidget>
 #include <QLocale>
 #include <limits>
+#include <QRegularExpression>
 
 AngleSpinBox::AngleSpinBox(QWidget* parent, DisplayFormat format, PrefixType prefix)
 	: QAbstractSpinBox(parent),
@@ -47,17 +48,13 @@ const QString AngleSpinBox::positivePrefix(PrefixType prefix)
 	{
 		case NormalPlus:
 			return("+");
-			break;
 		case Longitude:
 			return(q_("E")+" ");
-			break;
 		case Latitude:
 			return(q_("N")+" ");
-			break;
 		case Normal:
 		default:
 			return("");
-			break;
 	}
 }
 
@@ -67,17 +64,13 @@ const QString AngleSpinBox::negativePrefix(PrefixType prefix)
 	{
 		case NormalPlus:
 			return(QLocale().negativeSign());
-			break;
 		case Longitude:
 			return(q_("W")+" ");
-			break;
 		case Latitude:
 			return(q_("S")+" ");
-			break;
 		case Normal:
 		default:
 			return(QLocale().negativeSign());
-			break;
 	}
 }
 
@@ -92,7 +85,7 @@ AngleSpinBox::AngleSpinboxSection AngleSpinBox::getCurrentSection() const
 	const QString str = lineEdit()->text();
 	
 	// Regexp must not have "+-" immediately behind "[" !
-	int cPosMin = str.indexOf(QRegExp("^["+q_("N")+q_("S")+q_("E")+q_("W")+"+-]"), 0);
+	int cPosMin = str.indexOf(QRegularExpression("^["+q_("N")+q_("S")+q_("E")+q_("W")+"+-]"), 0);
 	// without prefix (e.g. right ascension): avoid unwanted negating!
 	if ((cPosMin==-1) && (cursorPos==0)) {
 		return SectionDegreesHours;
@@ -104,19 +97,19 @@ AngleSpinBox::AngleSpinboxSection AngleSpinBox::getCurrentSection() const
 	}
 	
 	cPosMin = cPosMax;
-	cPosMax = str.indexOf(QRegExp(QString("[dh%1]").arg(QChar(176))), 0)+1;
+	cPosMax = str.indexOf(QRegularExpression(QString("[dh%1]").arg(QChar(176))), 0)+1;
 	if (cursorPos >= cPosMin && cursorPos <= cPosMax) {
 		return SectionDegreesHours;
 	}
 	
 	cPosMin = cPosMax;
-	cPosMax = str.indexOf(QRegExp("[m']"), 0)+1;
+	cPosMax = str.indexOf(QRegularExpression("[m']"), 0)+1;
 	if (cursorPos > cPosMin && cursorPos <= cPosMax) {
 		return SectionMinutes;
 	}
 	
 	cPosMin = cPosMax;
-	cPosMax = str.indexOf(QRegExp("[s\"]"), 0)+1;
+	cPosMax = str.indexOf(QRegularExpression("[s\"]"), 0)+1;
 	if (cursorPos > cPosMin && cursorPos <= cPosMax) {
 		return SectionSeconds;
 	}
@@ -180,6 +173,8 @@ void AngleSpinBox::stepBy (int steps)
 	formatText();
 	lineEdit()->setCursorPosition(cursorPos);
 	emit(valueChanged());
+	emit(valueChangedDeg(valueDegrees()));
+	emit(valueChangedRad(valueRadians()));
 }
 
 QValidator::State AngleSpinBox::validate(QString& input, int& pos) const
@@ -195,6 +190,8 @@ void AngleSpinBox::clear()
 	radAngle = 0.0;
 	formatText();
 	emit(valueChanged());
+	emit(valueChangedDeg(valueDegrees()));
+	emit(valueChangedRad(valueRadians()));
 }
 
 QAbstractSpinBox::StepEnabled AngleSpinBox::stepEnabled() const
@@ -240,24 +237,27 @@ double AngleSpinBox::stringToDouble(QString input, QValidator::State* state, Pre
 		input = input.mid(1);
 	}
 
-	QRegExp dmsRx("^\\s*(\\d+)\\s*[d\\x00b0](\\s*(\\d+(\\.\\d*)?)\\s*[m'](\\s*(\\d+(\\.\\d*)?)\\s*[s\"]\\s*)?)?$", 
-                  Qt::CaseInsensitive);
-	QRegExp hmsRx("^\\s*(\\d+)\\s*h(\\s*(\\d+(\\.\\d*)?)\\s*[m'](\\s*(\\d+(\\.\\d*)?)\\s*[s\"]\\s*)?)?$", 
-                  Qt::CaseInsensitive);
-	QRegExp decRx("^(\\d+(\\.\\d*)?)(\\s*[\\x00b0]\\s*)?$");
-	QRegExp badRx("[^hdms0-9 \\x00b0'\"\\.]", Qt::CaseInsensitive);
+	QRegularExpression dmsRx("^\\s*(\\d+)\\s*[d\\x00b0](\\s*(\\d+(\\.\\d*)?)\\s*[m'](\\s*(\\d+(\\.\\d*)?)\\s*[s\"]\\s*)?)?$",
+		  QRegularExpression::CaseInsensitiveOption);
+	QRegularExpression hmsRx("^\\s*(\\d+)\\s*h(\\s*(\\d+(\\.\\d*)?)\\s*[m'](\\s*(\\d+(\\.\\d*)?)\\s*[s\"]\\s*)?)?$",
+		  QRegularExpression::CaseInsensitiveOption);
+	QRegularExpression decRx("^(\\d+(\\.\\d*)?)(\\s*[\\x00b0]\\s*)?$");
+	QRegularExpression badRx("[^hdms0-9 \\x00b0'\"\\.]", QRegularExpression::CaseInsensitiveOption);
+	QRegularExpressionMatch dmsMatch=dmsRx.match(input);
+	QRegularExpressionMatch hmsMatch=hmsRx.match(input);
+	QRegularExpressionMatch decMatch=decRx.match(input);
 
 	QValidator::State dummy;
 	if (state == Q_NULLPTR)
 	{
 		state = &dummy;
 	}
-		
-	if (dmsRx.exactMatch(input))
+
+	if (dmsMatch.hasMatch())
 	{
-		double degree = dmsRx.cap(1).toDouble();
-		double minute = dmsRx.cap(3).toDouble();
-		double second = dmsRx.cap(6).toDouble();
+		double degree = dmsMatch.captured(1).toDouble();
+		double minute = dmsMatch.captured(3).toDouble();
+		double second = dmsMatch.captured(6).toDouble();
 		if (degree > 360.0 || degree < -360.0)
 		{
 			*state = QValidator::Invalid;
@@ -279,11 +279,11 @@ double AngleSpinBox::stringToDouble(QString input, QValidator::State* state, Pre
 		*state = QValidator::Acceptable;
 		return (sign * (degree + (minute/60.0) + (second/3600.0))) * M_PI / 180.0;
 	}
-	else if (hmsRx.exactMatch(input))
+	else if (hmsMatch.hasMatch())
 	{
-		double hour   = hmsRx.cap(1).toDouble();
-		double minute = hmsRx.cap(3).toDouble();
-		double second = hmsRx.cap(6).toDouble();
+		double hour   = hmsMatch.captured(1).toDouble();
+		double minute = hmsMatch.captured(3).toDouble();
+		double second = hmsMatch.captured(6).toDouble();
 		if (hour >= 24.0 || hour < 0.0)
 		{
 			*state = QValidator::Invalid;
@@ -305,9 +305,9 @@ double AngleSpinBox::stringToDouble(QString input, QValidator::State* state, Pre
 		*state = QValidator::Acceptable;
 		return sign * (((360.0*hour/24.0) + (minute*15/60.0) + (second*15/3600.0)) * M_PI / 180.0);
 	}
-	else if (decRx.exactMatch(input))
+	else if (decMatch.hasMatch())
 	{
-		double dec = decRx.cap(1).toDouble();
+		double dec = decMatch.captured(1).toDouble();
 		if (dec < 0.0 || dec > 360.0)
 		{
 			*state = QValidator::Invalid;
@@ -335,7 +335,7 @@ void AngleSpinBox::updateValue(void)
 	if (state != QValidator::Acceptable)
 		return;
 
-	if (radAngle == a)
+	if (qFuzzyCompare(radAngle, a))
 		return;
 	radAngle = a;
 
@@ -351,6 +351,8 @@ void AngleSpinBox::updateValue(void)
 
 	formatText();
 	emit(valueChanged());
+	emit(valueChangedDeg(valueDegrees()));
+	emit(valueChangedRad(valueRadians()));
 }
 
 void AngleSpinBox::setRadians(double radians)
@@ -367,6 +369,7 @@ void AngleSpinBox::setDegrees(double degrees)
 
 void AngleSpinBox::formatText(void)
 {
+	const int cursorPos=lineEdit()->cursorPosition();
 	switch (angleSpinBoxFormat)
 	{
 		case DMSLetters:
@@ -410,9 +413,7 @@ void AngleSpinBox::formatText(void)
 			}
 
 			// fix when we have tiny tiny tiny values.
-			if (s < ::pow(10.0, -1 * (decimalPlaces+1)))
-				s= 0.0;
-			else if (s < 0.0 && 0.0 - ::pow(10.0, -1 * (decimalPlaces+1)))
+			if (abs(s) < ::pow(10.0, -1 * (decimalPlaces+1)))
 				s= 0.0;
 
 			QString signInd = positivePrefix(currentPrefixType);
@@ -437,8 +438,8 @@ void AngleSpinBox::formatText(void)
 			angle = fmod(angle,2.0*M_PI);
 			if (angle < 0.0) angle += 2.0*M_PI; // range: [0..2.0*M_PI)
 			angle *= 12./M_PI;
-			h = (unsigned int)angle;
-			m = (unsigned int)((angle-h)*60);
+			h = static_cast<unsigned int>(angle);
+			m = static_cast<unsigned int>((angle-h)*60);
 			s = (angle-h)*3600.-60.*m;
 
 			// we may have seconds as 60 and one less minute...
@@ -456,9 +457,7 @@ void AngleSpinBox::formatText(void)
 			}
 
 			// fix when we have tiny tiny tiny values.
-			if (s < ::pow(10.0, -1 * (decimalPlaces+1)))
-				s= 0.0;
-			else if (s < 0.0 && 0.0 - ::pow(10.0, -1 * (decimalPlaces+1)))
+			if (abs(s) < ::pow(10.0, -1 * (decimalPlaces+1)))
 				s= 0.0;
 
 			if (angleSpinBoxFormat == HMSLetters)
@@ -493,5 +492,6 @@ void AngleSpinBox::formatText(void)
 			break;
 		}
 	}
+	lineEdit()->setCursorPosition(cursorPos);
 }
 

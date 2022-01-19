@@ -473,6 +473,9 @@ private:
 	double absoluteStarScaleCCD;    //!< Value to store the absolute star scale when switching off CCD view
 	bool flagMoonScaleMain;	        //!< Flag to track of usage zooming of the Moon
 	bool flagMinorBodiesScaleMain;  //!< Flag to track of usage zooming of minor bodies
+	bool flagSunScaleMain;	        //!< Flag to track of usage zooming of the Sun
+	bool flagPlanetsScaleMain;	//!< Flag to track of usage zooming of major planets
+	bool flagDSOPropHintMain;	//!< Flag to track of usage proportional hints for DSO
 	double milkyWaySaturation;
 
 	double maxEyepieceAngle;        //!< The maximum aFOV of any eyepiece.
@@ -521,8 +524,10 @@ private:
 
 	//Reticle
 	StelTextureSP reticleTexture;
-	StelTextureSP cardinalsNormalTexture;
-	StelTextureSP cardinalsMirroredTexture;
+	StelTextureSP protractorTexture;
+	StelTextureSP protractorFlipVTexture;
+	StelTextureSP protractorFlipHTexture;
+	StelTextureSP protractorFlipHVTexture;
 	double actualFOV;		//!< Holds the FOV of the ocular/tescope/lens combination; what the screen is zoomed to.
 	double initialFOV;		//!< Holds the initial FOV, degrees
 	bool flagInitFOVUsage;		//!< Flag used to track if we use default initial FOV (value at the startup of planetarium).
@@ -559,9 +564,9 @@ class OcularsStelPluginInterface : public QObject, public StelPluginInterface
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const;
-	virtual StelPluginInfo getPluginInfo() const;
-	virtual QObjectList getExtensionList() const { return QObjectList(); }
+	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
+	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
+	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
 };
 
 #endif /* OCULARS_HPP */

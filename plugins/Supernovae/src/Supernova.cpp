@@ -28,6 +28,7 @@
 #include "StelSkyDrawer.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StarMgr.hpp"
+#include "Planet.hpp"
 
 #include <QTextStream>
 #include <QDebug>
@@ -113,7 +114,7 @@ QString Supernova::getMaxBrightnessDate(const double JD) const
 	return StelApp::getInstance().getLocaleMgr().getPrintableDateLocal(JD);
 }
 
-QString Supernova::getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const double alt_app, const int decimals) const
+QString Supernova::getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals) const
 {
 	const float maglimit = 21.f;
 	QString res;
@@ -121,7 +122,7 @@ QString Supernova::getMagnitudeInfoString(const StelCore *core, const InfoString
 	if (flags&Magnitude)
 	{
 		if (getVMagnitude(core) <= maglimit)
-			res = StelObject::getMagnitudeInfoString(core, flags, alt_app, decimals);
+			res = StelObject::getMagnitudeInfoString(core, flags, decimals);
 		else
 		{
 			res = QString("%1: <b>--</b><br />").arg(q_("Magnitude"));
@@ -137,20 +138,14 @@ QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	QTextStream oss(&str);
 
 	if (flags&Name)
-	{
 		oss << "<h2>" << getNameI18n() << "</h2>";
-	}
 
 	if (flags&ObjectType)
 		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("supernova")) << "<br />";
 
 	if (flags&Magnitude)
-	{
-		double az_app, alt_app;
-		StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
-		Q_UNUSED(az_app)
-		oss << getMagnitudeInfoString(core, flags, alt_app, 2);
-	}
+		oss << getMagnitudeInfoString(core, flags, 2);
+
 	// Ra/Dec etc.
 	oss << getCommonInfoString(core, flags);
 
@@ -246,11 +241,6 @@ float Supernova::getVMagnitude(const StelCore* core) const
 	return static_cast<float>(vmag);
 }
 
-double Supernova::getAngularSize(const StelCore*) const
-{
-	return 0.00001;
-}
-
 void Supernova::update(double deltaTime)
 {
 	labelsFader.update(static_cast<int>(deltaTime*1000));
@@ -261,23 +251,40 @@ void Supernova::draw(StelCore* core, StelPainter& painter)
 	StelSkyDrawer* sd = core->getSkyDrawer();
 	const float mlimit = sd->getLimitMagnitude();
 	const float mag = getVMagnitudeWithExtinction(core);
+	const float shift = 8.f;
 	
 	if (mag <= mlimit)
 	{
 		const Vec3f color(1.f);
+		Vec3f vf(getJ2000EquatorialPos(core).toVec3f());
+		Vec3f altAz(vf);
+		altAz.normalize();
+		core->j2000ToAltAzInPlaceNoRefraction(&altAz);
 		RCMag rcMag;
 		sd->computeRCMag(mag, &rcMag);
 		sd->preDrawPointSource(&painter);
-		sd->drawPointSource(&painter, XYZ.toVec3f(), rcMag, color, false);
+		// allow height-dependent twinkle and suppress twinkling in higher altitudes. Keep 0.1 twinkle amount in zenith.
+		sd->drawPointSource(&painter, vf, rcMag, color, true, qMin(1.0f, 1.0f-0.9f*altAz[2]));
+		sd->postDrawPointSource(&painter);
 		painter.setColor(color, 1.f);
-		float size = static_cast<float>(getAngularSize(Q_NULLPTR))*M_PI_180f*painter.getProjector()->getPixelPerRadAtCenter();
-		float shift = 6.f + size/1.8f;
 		StarMgr* smgr = GETSTELMODULE(StarMgr); // It's need for checking displaying of labels for stars
 		if (labelsFader.getInterstate()<=0.f && (mag+5.f)<mlimit && smgr->getFlagLabels())
-		{
-			painter.drawText(XYZ, designation, 0, shift, shift, false);
-		}
-	}
+			painter.drawText(getJ2000EquatorialPos(core), designation, 0, shift, shift, false);
+	}	
+}
 
-	sd->postDrawPointSource(&painter);
+Vec3d Supernova::getJ2000EquatorialPos(const StelCore* core) const
+{
+	if ((core) && (core->getUseAberration()) && (core->getCurrentPlanet()))
+	{
+		Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+		vel=StelCore::matVsop87ToJ2000*vel*core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
+		Vec3d pos=XYZ+vel;
+		pos.normalize();
+		return pos;
+	}
+	else
+	{
+		return XYZ;
+	}
 }

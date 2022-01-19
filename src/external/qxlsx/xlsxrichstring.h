@@ -41,7 +41,7 @@ class   RichString
 {
 public:
     RichString();
-    explicit RichString(const QString text);
+    explicit RichString(const QString& text);
     RichString(const RichString &other);
     ~RichString();
 

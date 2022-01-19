@@ -86,7 +86,7 @@ StelPluginInfo TextUserInterfaceStelPluginInterface::getPluginInfo() const
 	info.id = "TextUserInterface";
 	info.displayedName = N_("Text User Interface");
 	info.authors = "Matthew Gates";
-	info.contact = "https://github.com/Stellarium/stellarium";
+	info.contact = STELLARIUM_DEV_URL;
 	info.description = N_("Plugin implementation of 0.9.x series Text User Interface (TUI), used in planetarium systems");
 	info.version = TUI_PLUGIN_VERSION;
 	info.license = TUI_PLUGIN_LICENSE;

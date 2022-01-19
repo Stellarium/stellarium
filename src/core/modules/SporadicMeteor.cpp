@@ -20,6 +20,7 @@
 #include "SporadicMeteor.hpp"
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
+#include "StelApp.hpp"
 
 const float SporadicMeteor::_RAND_MAX=1.f/static_cast<float>(RAND_MAX);
 const double SporadicMeteor::_RAND_MAX_P1=1./(static_cast<double>(RAND_MAX)+1.);
@@ -28,6 +29,15 @@ const float SporadicMeteor::_RAND_MAX_P1_f=1.f/(static_cast<float>(RAND_MAX)+1.f
 SporadicMeteor::SporadicMeteor(const StelCore* core, const float& maxVel, const StelTextureSP& bolideTexture)
 	: Meteor(core, bolideTexture)
 {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+	// meteor velocity
+	// (see line 460 in StelApp.cpp)
+	float speed = 11 + (maxVel - 11) * static_cast<float>(StelApp::getInstance().getRandF()); // [11, maxVel]
+
+	// select a random radiant in a visible area
+	double rAlt = M_PI_2  * static_cast<double>(StelApp::getInstance().getRandF());  // [0, pi/2]
+	double rAz = 2 * M_PI * static_cast<double>(StelApp::getInstance().getRandF());  // [0, 2pi]
+#else
 	// meteor velocity
 	// (see line 460 in StelApp.cpp)
 	float speed = 11 + (maxVel - 11) * (static_cast<float>(qrand()) * _RAND_MAX_P1_f); // [11, maxVel]
@@ -35,6 +45,7 @@ SporadicMeteor::SporadicMeteor(const StelCore* core, const float& maxVel, const 
 	// select a random radiant in a visible area
 	double rAlt = M_PI_2 * (static_cast<double>(qrand()) * _RAND_MAX_P1);  // [0, pi/2]
 	double rAz = 2 * M_PI * (static_cast<double>(qrand()) * _RAND_MAX_P1);  // [0, 2pi]
+#endif
 	Vec3d pos;
 	StelUtils::spheToRect(rAz, rAlt, pos);
 
@@ -54,7 +65,11 @@ SporadicMeteor::~SporadicMeteor()
 QList<Meteor::ColorPair> SporadicMeteor::getRandColor()
 {
 	QList<ColorPair> colors;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+	float prob = StelApp::getInstance().getRandF();
+#else
 	float prob = static_cast<float>(qrand()) * _RAND_MAX;
+#endif
 	if (prob > 0.9f)
 	{
 		colors.push_back(Meteor::ColorPair("white", 70));

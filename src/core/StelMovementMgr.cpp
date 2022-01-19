@@ -83,7 +83,8 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 	, initFov(60.)
 	, minFov(0.001389)
 	, maxFov(100.)
-	, deltaFov(0.)
+	, userMaxFov(360.)
+	, deltaFov(0.0)
 	, core(acore)
 	, objectMgr(Q_NULLPTR)
 	, flagLockEquPos(false)
@@ -93,25 +94,29 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 	, isMouseMovingVert(false)
 	, flagEnableMoveAtScreenEdge(false)
 	, flagEnableMouseNavigation(true)
+	, flagEnableMouseZooming(true)
 	, mouseZoomSpeed(30)
 	, flagEnableZoomKeys(true)
 	, flagEnableMoveKeys(true)
 	, keyMoveSpeed(0.00025)
 	, keyZoomSpeed(0.00025)
 	, flagMoveSlow(false)
+	, flagCustomPan(false)
+	, rateX(0.0)
+	, rateY(0.0)
 	, movementsSpeedFactor(1.0)
 	, move()
 	, flagAutoMove(false)
 	, zoomingMode(ZoomNone)
-	, deltaAlt(0.)
-	, deltaAz(0.)
+	, deltaAlt(0.0)
+	, deltaAz(0.0)
 	, flagManualZoom(false)
 	, autoMoveDuration(1.5)
 	, isDragging(false)
 	, hasDragged(false)
 	, previousX(0)
 	, previousY(0)
-	, beforeTimeDragTimeRate(0.)
+	, beforeTimeDragTimeRate(0.0)
 	, dragTimeMode(false)
 	, zoomMove()
 	, flagAutoZoom(false)
@@ -161,9 +166,11 @@ void StelMovementMgr::init()
 	flagManualZoom = conf->value("navigation/flag_manual_zoom").toBool();
 	flagAutoZoomOutResetsDirection = conf->value("navigation/auto_zoom_out_resets_direction", true).toBool();
 	flagEnableMouseNavigation = conf->value("navigation/flag_enable_mouse_navigation",true).toBool();
+	flagEnableMouseZooming = conf->value("navigation/flag_enable_mouse_zooming",true).toBool();
 	flagIndicationMountMode = conf->value("gui/flag_indication_mount_mode", false).toBool();
 
 	minFov = conf->value("navigation/min_fov",0.001389).toDouble(); // default: minimal FOV = 5"
+	userMaxFov = conf->value("navigation/max_fov",360.).toDouble(); // default: 360°=no real limit. maxFov then depends on projection only.
 	initFov = conf->value("navigation/init_fov",60.0).toDouble();
 	currentFov = initFov;
 
@@ -255,7 +262,7 @@ void StelMovementMgr::bindingFOVActions()
 	for (int i = 0; i < defaultFOV.size(); ++i)
 	{
 		confval = QString("fov/quick_fov_%1").arg(i);
-		float cfov = conf->value(confval, defaultFOV.at(i)).toFloat();
+		const double cfov = conf->value(confval, defaultFOV.at(i)).toDouble();
 		tfov = QString::number(cfov, 'f', 2);
 		QString actionName = QString("actionSet_FOV_%1").arg(i);
 		QString actionDescription = QString("%1 #%2 (%3%4)").arg(fovText, QString::number(i), tfov, QChar(0x00B0));
@@ -263,7 +270,7 @@ void StelMovementMgr::bindingFOVActions()
 		if (action!=Q_NULLPTR)
 			actionMgr->findAction(actionName)->setText(actionDescription);
 		else
-			addAction(actionName, fovGroup, actionDescription, this, [=](){setFOVDeg(cfov);}, QString("Ctrl+Alt+%1").arg(i));
+			addAction(actionName, fovGroup, actionDescription, this, [=](){setFOVDeg(static_cast<float>(cfov));}, QString("Ctrl+Alt+%1").arg(i));
 	}
 }
 
@@ -512,7 +519,7 @@ void StelMovementMgr::handleKeys(QKeyEvent* event)
 //! Handle mouse wheel events.
 void StelMovementMgr::handleMouseWheel(QWheelEvent* event)
 {
-	if (flagEnableMouseNavigation==false)
+	if (flagEnableMouseZooming==false)
 		return;
 
 	// This managed only vertical wheel events.
@@ -575,7 +582,7 @@ void StelMovementMgr::addTimeDragPoint(int x, int y)
 bool StelMovementMgr::handlePinch(qreal scale, bool started)
 {
 #ifdef Q_OS_WIN
-	if (flagEnableMouseNavigation == false)
+	if (flagEnableMouseNavigation == false || flagEnableMouseZooming==false)
 		return true;
 #endif
 
@@ -673,22 +680,18 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 					// CTRL + left click = right click for 1 button mouse
 					if (event->modifiers().testFlag(Qt::ControlModifier))
 					{
-						StelApp::getInstance().getStelObjectMgr().unSelect();
+						objectMgr->unSelect();
 						event->accept();
 						return;
 					}
 
 					// Try to select object at that position
-					StelApp::getInstance().getStelObjectMgr().findAndSelect(StelApp::getInstance().getCore(), event->x(), event->y(),
-						event->modifiers().testFlag(Qt::MetaModifier) ? StelModule::AddToSelection : StelModule::ReplaceSelection);
+					objectMgr->findAndSelect(core, event->x(), event->y(), event->modifiers().testFlag(Qt::MetaModifier) ? StelModule::AddToSelection : StelModule::ReplaceSelection);
 			#else
-					StelApp::getInstance().getStelObjectMgr().findAndSelect(StelApp::getInstance().getCore(), event->x(), event->y(),
-						event->modifiers().testFlag(Qt::ControlModifier) ? StelModule::AddToSelection : StelModule::ReplaceSelection);
+					objectMgr->findAndSelect(core, event->x(), event->y(), event->modifiers().testFlag(Qt::ControlModifier) ? StelModule::AddToSelection : StelModule::ReplaceSelection);
 			#endif
-					if (StelApp::getInstance().getStelObjectMgr().getWasSelected())
-					{
+					if (objectMgr->getWasSelected())
 						setFlagTracking(false);
-					}
 					//GZ: You must comment out this line for testing Landscape transparency debug prints.
 					//event->accept();
 					return;
@@ -1015,6 +1018,12 @@ void StelMovementMgr::updateMotion(double deltaTime)
 	{
 		deltaFov = qMin(20., deplzoom*5.);
 		changeFov(deltaFov);
+	}
+
+	if (flagCustomPan)
+	{
+		deltaAz  = rateX*M_PI_180*deltaTime;
+		deltaAlt = rateY*M_PI_180*deltaTime;
 	}
 
 	panView(deltaAz, deltaAlt);
@@ -1621,15 +1630,29 @@ double StelMovementMgr::getAimFov(void) const
 	return (flagAutoZoom ? zoomMove.getAim() : currentFov);
 }
 
+// This is called e.g. when projection changes.
+// We clamp this to the user-set user_maxFov (e.g. for planetarium: 180°; GH #1836)
 void StelMovementMgr::setMaxFov(double max)
 {
-	maxFov = max;
-	if (currentFov > max)
+	maxFov = qMin(max, userMaxFov);
+	if (currentFov > maxFov)
 	{
-		setFov(max);
+		setFov(maxFov);
 	}
 }
 
+void StelMovementMgr::setUserMaxFov(double max)
+{
+	userMaxFov = qMin(360., max);
+	if (maxFov>userMaxFov)
+		setMaxFov(userMaxFov);
+	else
+	{
+		const float prjMaxFov = StelApp::getInstance().getCore()->getProjection(StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity())))->getMaxFov();
+		setMaxFov(qMin(userMaxFov, static_cast<double>(prjMaxFov)));
+	}
+	emit userMaxFovChanged(userMaxFov);
+}
 
 void StelMovementMgr::moveViewport(double offsetX, double offsetY, const float duration)
 {
@@ -1670,5 +1693,19 @@ void StelMovementMgr::handleViewportOffsetMovement(qreal value)
 	double offsetY=oldViewportOffset.v[1] + (targetViewportOffset.v[1]-oldViewportOffset.v[1])*value;
 	//qDebug() << "handleViewportOffsetMovement(" << value << "): Setting viewport offset to " << offsetX << "/" << offsetY;
 	core->setViewportOffset(offsetX, offsetY);
+}
+
+void StelMovementMgr::smoothPan(double deltaX, double deltaY, double ptime, bool s)
+{
+	flagCustomPan = s;
+	if (s)
+	{
+		rateX = deltaX/ptime; // degrees per second
+		rateY = deltaY/ptime; // degrees per second
+		setFlagTracking(false);
+		setFlagLockEquPos(false);
+	}
+	else
+		deltaAz = deltaAlt = 0.0;
 }
 

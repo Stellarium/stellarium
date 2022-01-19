@@ -103,12 +103,13 @@ public:
               float xshift=0.f, float yshift=0.f, bool noGravity=true);
 
 	//! Draw the given SphericalRegion.
-	//! @param region The SphericalRegion to draw.
+	//! @param region The SphericalRegion to draw. If observerVelocity is given, it will be modified.
 	//! @param drawMode define whether to draw the outline or the fill or both.
 	//! @param clippingCap if not set to Q_NULLPTR, tells the painter to try to clip part of the region outside the cap.
 	//! @param doSubDivise if true tesselates the object to follow projection distortions.
-	//! Typically set that to false if you think that the region is fully contained in the viewport.
-	void drawSphericalRegion(const SphericalRegion* region, SphericalPolygonDrawMode drawMode=SphericalPolygonDrawModeFill, const SphericalCap* clippingCap=Q_NULLPTR, bool doSubDivise=true, double maxSqDistortion=5.);
+	//!        Typically set that to false if you think that the region is fully contained in the viewport.
+	//! @param observerVelocity precomputed vector shift for aberration correction
+	void drawSphericalRegion(SphericalRegion *region, SphericalPolygonDrawMode drawMode=SphericalPolygonDrawModeFill, const SphericalCap* clippingCap=Q_NULLPTR, bool doSubDivise=true, double maxSqDistortion=5., const Vec3d &observerVelocity=Vec3d(0.));
 
 	void drawGreatCircleArcs(const StelVertexArray& va, const SphericalCap* clippingCap=Q_NULLPTR);
 
@@ -254,6 +255,10 @@ public:
 	//! the StelPainter is destroyed.
 	void setBlending(bool enableBlending, GLenum blendSrc = GL_SRC_ALPHA, GLenum blendDst = GL_ONE_MINUS_SRC_ALPHA);
 
+	//! Retrieve current blending configuration
+	//! It is useful to preserve and restore these settings with setBlending() later.
+	bool getBlending(GLenum *src=Q_NULLPTR, GLenum *dst=Q_NULLPTR) const;
+
 	void setDepthTest(bool enable);
 
 	void setDepthMask(bool enable);
@@ -322,7 +327,8 @@ public:
 
 	//! Draws the primitives defined in the StelVertexArray.
 	//! @param checkDiscontinuity will check and suppress discontinuities if necessary.
-	void drawStelVertexArray(const StelVertexArray& arr, bool checkDiscontinuity=true);
+	//! @param aberration a vector which moves all vertices according to aberration effects. The vector must be transformed to the frame used in the array.
+	void drawStelVertexArray(const StelVertexArray& arr, bool checkDiscontinuity=true, Vec3d aberration=Vec3d(0.));
 
 	//! Link an opengl program and show a message in case of error or warnings.
 	//! @return true if the link was successful.

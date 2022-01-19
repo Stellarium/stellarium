@@ -2,7 +2,7 @@
 // Name: Solar Eclipse 2009
 // License: Public Domain
 // Author: Matthew Gates
-// Version: 1.0
+// Version: 1.1
 // Description: Script to demonstrate a total solar eclipse which has happened
 //              in 2009 (location=Rangpur, Bangladesh).
 //
@@ -47,6 +47,7 @@ core.setTimeRate(1);
 
 // Setup display mode
 core.clear("natural");
+core.wait(1);
 
 // We'll turn these off as the sun comes up, but for pre-dawn we want to show them
 ConstellationMgr.setFlagLines(true);

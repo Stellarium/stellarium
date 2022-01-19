@@ -74,6 +74,7 @@ private slots:
 	void setNoSelectedInfo();
 	void setAllSelectedInfo();
 	void setBriefSelectedInfo();
+	void setDefaultSelectedInfo();
 	void setCustomSelectedInfo();
 	//! Set the selected object info fields from the "Displayed Fields" boxes.
 	//! Called when any of the boxes has been clicked. Sets the
@@ -158,6 +159,8 @@ private slots:
 
 	void de430ButtonClicked();
 	void de431ButtonClicked();
+	void de440ButtonClicked();
+	void de441ButtonClicked();
 
 	//! feed the combo with useful values. Call in createDialogContent().
 	void populateFontWritingSystemCombo();

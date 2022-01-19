@@ -187,6 +187,18 @@ namespace StelUtils
 	//! @param angle input angle in decimal degrees
 	QString decDegToDmsStr(const double angle);
 
+	//! Convert latitude in decimal degrees to a dms formatted string or use decimal values.
+	//! @param latitude in decimal degrees
+	//! @param dms set true to use DMS formatted string
+	QString decDegToLatitudeStr(const double latitude, bool dms = true);
+
+	//! Convert longitude in decimal degrees to a dms formatted string.
+	//! @param longitude in decimal degrees
+	//! @param eastPositive set true to counting East direction positive
+	//! @param semiSphere set true to use -180..180 degrees range (0..360 degrees otherwise)
+	//! @param dms set true to use DMS formatted string
+	QString decDegToLongitudeStr(const double longitude, bool eastPositive = true, bool semiSphere = true, bool dms = true);
+
 	//! Convert a dms formatted string to an angle in radian
 	//! @param s The input string
 	double dmsStrToRad(const QString& s);
@@ -228,7 +240,7 @@ namespace StelUtils
 	}
 
 	//! Convert from Rectangular direction to spherical coordinate components.
-	//! @param lng double* to store longitude in radian
+	//! @param lng double* to store longitude in radian [-pi, pi]
 	//! @param lat double* to store latitude in radian
 	//! @param v the input 3D vector
 	inline void rectToSphe(double *lng, double *lat, const Vec3d& v){
@@ -238,7 +250,7 @@ namespace StelUtils
 	}
 
 	//! Convert from Rectangular direction to spherical coordinate components.
-	//! @param lng float* to store longitude in radian
+	//! @param lng float* to store longitude in radian [-pi, pi]
 	//! @param lat float* to store latitude in radian
 	//! @param v the input 3D vector
 	inline void rectToSphe(float *lng, float *lat, const Vec3d& v){
@@ -249,7 +261,7 @@ namespace StelUtils
 
 
 	//! Convert from Rectangular direction to spherical coordinate components.
-	//! @param lng float* to store longitude in radian
+	//! @param lng float* to store longitude in radian [-pi, pi]
 	//! @param lat float* to store latitude in radian
 	//! @param v the input 3D vector
 	inline void rectToSphe(float *lng, float *lat, const Vec3f& v){
@@ -259,13 +271,34 @@ namespace StelUtils
 	}
 
 	//! Convert from Rectangular direction to spherical coordinate components.
-	//! @param lng double* to store longitude in radian
+	//! @param lng double* to store longitude in radian [-pi, pi]
 	//! @param lat double* to store latitude in radian
 	//! @param v the input 3D vector
 	inline void rectToSphe(double *lng, double *lat, const Vec3f &v){
 		double r = static_cast<double>(v.length());
 		*lat = asin(static_cast<double>(v[2])/r);
 		*lng = atan2(static_cast<double>(v[1]),static_cast<double>(v[0]));
+	}
+
+	//! Convert from spherical coordinates (including distance) to Rectangular direction.
+	//! @param lng longitude in radian
+	//! @param lat latitude in radian
+	//! @param r length of radius vector (distance)
+	//! @param v the resulting 3D unit vector
+	inline void spheToRect(const double lng, const double lat, const double r, Vec3d& v){
+		const double cosLat = cos(lat);
+		v.set(cos(lng) * cosLat * r, sin(lng) * cosLat * r, sin(lat) * r);
+	}
+
+	//! Convert from Rectangular direction to spherical coordinate components (including distance).
+	//! @param lng double* to store longitude in radian [-pi, pi]
+	//! @param lat double* to store latitude in radian
+	//! @param r double*   length of radius vector (distance)
+	//! @param v the input 3D vector
+	inline void rectToSphe(double *lng, double *lat, double *r, const Vec3d& v){
+		*r = v.length();
+		*lat = asin(v[2] / *r);
+		*lng = atan2(v[1],v[0]);
 	}
 
 	//! Coordinate Transformation from equatorial to ecliptical
@@ -323,28 +356,28 @@ namespace StelUtils
 			     -std::log(-z + std::sqrt(z*z+1)));
 	}
 
-	//! Integer modulo where the result is always nonnegative.
+	//! Integer modulo where the result is always nonnegative. [0..b-1]
 	inline int imod(const int a, const int b){
 		int ret = a % b;
 		if(ret < 0)
 			ret+=b;
 		return ret;
 	}
-	//! Integer modulo where the result is always positive.
+	//! Integer modulo where the result is always positive. [1..b]
 	inline int amod(const int a, const int b){
 		int ret = a % b;
 		if(ret <= 0)
 			ret+=b;
 		return ret;
 	}
-	//! Double modulo where the result is always nonnegative.
+	//! Double modulo where the result is always nonnegative. [0..(b
 	inline double fmodpos(const double a, const double b){
 		double ret = fmod(a, b);
 		if(ret < 0)
 			ret+=b;
 		return ret;
 	}
-	//! Float modulo where the result is always nonnegative.
+	//! Float modulo where the result is always nonnegative. [0..(b
 	inline float fmodpos(const float a, const float b){
 		float ret = fmodf(a, b);
 		if(ret < 0)
@@ -367,6 +400,20 @@ namespace StelUtils
 	    }
 	}
 
+	//! version of intFloorDiv() for large integers.
+	inline long intFloorDivLL(long long num, long long den)
+	{
+	  if (0 < (num^den)) // lgtm [cpp/bitwise-sign-check]
+	    return static_cast<long>(num/den);
+	  else
+	    {
+	      lldiv_t res = lldiv(num,den);
+	      long long ret=  (res.rem)? res.quot-1
+			      : res.quot;
+	      return static_cast<long>(ret);
+	    }
+	}
+
 	///////////////////////////////////////////////////
 	// New Qt based General Calendar Functions.
 	//! Make from julianDay a year, month, day for the Julian Date julianDay represents.
@@ -374,6 +421,9 @@ namespace StelUtils
 
 	//! Make from julianDay an hour, minute, second.
 	void getTimeFromJulianDay(const double julianDay, int *hour, int *minute, int *second, int *millis=Q_NULLPTR);
+
+	//! Make hours (decimal format) from julianDay
+	double getHoursFromJulianDay(const double julianDay);
 
 	//! Parse an ISO8601 date string.
 	//! Also handles negative and distant years.
@@ -623,6 +673,8 @@ namespace StelUtils
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation of algorithm by Stephenson & Houlden (1986) for DeltaT computation
+	//! Source: STEPHENSON F.R and HOULDEN M.A. - Atlas of Historical Eclipse Maps - Cambridge Univ.Press. (1986)
+	//! [https://assets.cambridge.org/97805212/67236/frontmatter/9780521267236_frontmatter.pdf]
 	//! @param jDay the date and time expressed as a Julian day
 	//! @return Delta-T in seconds or 0 if year > 1600
 	double getDeltaTByStephensonHoulden(const double jDay);
@@ -757,10 +809,15 @@ namespace StelUtils
 	double getDeltaTByKhalidSultanaZaidi(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
-	//! Implementation of a spline approximation for time period -720-2016.0 for DeltaT by Stephenson, Morrison and Hohenkerk (2016).
-	//! Source: Measurement of the Earth’s rotation: 720 BC to AD 2015
-	//! Proc. R. Soc. A 472: 20160404.
+	//! Implementation of a spline approximation for time period -720-2019.0 for DeltaT by Stephenson, Morrison and Hohenkerk (2016).
+	//! Source: Measurement of the Earth's rotation: 720 BC to AD 2015, published in 2016 in the Royal Society's
+	//! Proceedings A 472, and made freely available via Open Access, by Stephenson, F.R., Morrison, L.V. and
+	//! Hohenkerk, C.Y..
 	//! https://doi.org/10.1098/rspa.2016.0404
+	//! Addendum 2020 to "Measurement of the Earth's Rotation: 720 BC to AD 2015", published in 2021 February
+	//! in the Royal Society's Proceedings A 478, by Morrison, L. V., Stephenson, F.R., Hohenkerk, C.Y. and
+	//! M. Zawilski, M..
+	//! https://doi.org/10.1098/rspa.2020.0776
 	//! @param jDay the date and time expressed as a Julian day
 	//! @return Delta-T in seconds. For times outside the limits, return result from the fitting parabola.
 	double getDeltaTByStephensonMorrisonHohenkerk2016(const double jDay);
@@ -771,10 +828,10 @@ namespace StelUtils
 	//! For adapting from -26 to -23.895, use -0.91072 * (-23.895 + 26.0) = -1.9170656
 	//! @param jDay the JD
 	//! @param ndot value of n-dot (secular acceleration of the Moon) which should be used in the lunar ephemeris instead of the default values.
-	//! @param useDE43x true if function should adapt calculation of the secular acceleration of the Moon to the DE43x ephemeris
+	//! @param useDE4xx true if function should adapt calculation of the secular acceleration of the Moon to the DE43x/DE44x ephemerides
 	//! @return SecularAcceleration in seconds
-	//! @note n-dot for secular acceleration of the Moon in ELP2000-82B is -23.8946 "/cy/cy and for DE43x is -25.8 "/cy/cy
-	double getMoonSecularAcceleration(const double jDay, const double ndot, const bool useDE43x);
+	//! @note n-dot for secular acceleration of the Moon in ELP2000-82B is -23.8946 "/cy/cy and for DE43x/DE44x is -25.8 "/cy/cy
+	double getMoonSecularAcceleration(const double jDay, const double ndot, const bool useDE4xx);
 
 	//! Get the standard error (sigma) for the value of DeltaT
 	//! @param jDay the JD

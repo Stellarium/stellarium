@@ -25,7 +25,7 @@
 #include <QVariant>
 #include <QStringList>
 #include <QIODevice>
-#include <QRegExp>
+#include <QRegularExpression>
 
 bool readStelIniFile(QIODevice &device, QSettings::SettingsMap &map)
 {
@@ -33,7 +33,7 @@ bool readStelIniFile(QIODevice &device, QSettings::SettingsMap &map)
 	const QString& data = QString::fromUtf8(device.readAll().data());
 
 	// Split by a RE which should match any platform's line breaking rules
-	QRegExp matchLbr("[\\n\\r]+");
+	QRegularExpression matchLbr("[\\n\\r]+");
 	#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
 	const QStringList& lines = data.split(matchLbr, Qt::SkipEmptyParts);
 	#else
@@ -41,32 +41,34 @@ bool readStelIniFile(QIODevice &device, QSettings::SettingsMap &map)
 	#endif
 
 	QString currentSection = "";
-	QRegExp sectionRe("^\\[(.+)\\]$");
-	QRegExp keyRe("^([^=]+)\\s*=\\s*(.+)$");
-	QRegExp cleanComment("#.*$");
-	QRegExp cleanWhiteSpaces("^\\s+");
-	QRegExp reg1("\\s+$");
+	QRegularExpression sectionRe("^\\[(.+)\\]$");
+	QRegularExpression keyRe("^([^=]+)\\s*=\\s*(.+)$");
+	QRegularExpression cleanComment("[#;].*$");
+	QRegularExpression initialWhiteSpace("^\\s+");
+	QRegularExpression appendedWhitespace("\\s+$");
 
 	for(int i=0; i<lines.size(); i++)
 	{
 		QString l = lines.at(i);
 		l.replace(cleanComment, "");		// clean comments
-		l.replace(cleanWhiteSpaces, "");	// clean whitespace
-		l.replace(reg1, "");
+		l.replace(initialWhiteSpace, "");	// clean whitespace
+		l.replace(appendedWhitespace, "");
 
+		QRegularExpressionMatch sectionMatch=sectionRe.match(l);
+		QRegularExpressionMatch keyMatch=keyRe.match(l);
 		// If it's a section marker set the section variable
-		if (sectionRe.exactMatch(l))
-			currentSection = sectionRe.cap(1);
+		if (sectionMatch.hasMatch())
+			currentSection = sectionMatch.captured(1);
 
-		// Otherwise only process if it macthes an re which looks like: key = value
-		else if (keyRe.exactMatch(l))
+		// Otherwise only process if it matches an re which looks like: key = value
+		else if (keyMatch.hasMatch())
 		{
-			// Let REs do the work for us exatracting the key and value
+			// Let REs do the work for us extracting the key and value
 			// and cleaning them up by removing whitespace
-			QString k = keyRe.cap(1);
-			QString v = keyRe.cap(2);
-			v.replace(cleanWhiteSpaces, "");
-			k.replace(reg1, "");
+			QString k = keyMatch.captured(1);
+			QString v = keyMatch.captured(2);
+			v.replace(initialWhiteSpace, "");
+			k.replace(appendedWhitespace, "");
 
 			// keys with no section should have no leading /, so only
 			// add it when there is a valid section.
@@ -77,7 +79,6 @@ bool readStelIniFile(QIODevice &device, QSettings::SettingsMap &map)
 			map[k] = QVariant(v);
 		}
 	}
-
 	return true;
 }
 
@@ -89,45 +90,48 @@ bool writeStelIniFile(QIODevice &device, const QSettings::SettingsMap &map)
 	const QString stelEndl = StelUtils::getEndLineChar();
 
 	int maxKeyWidth = 30;
-	QRegExp reKeyXt("^([^/]+)/(.+)$");  // for extracting keys/values
+	QRegularExpression reKeyXt("^([^/]+)/(.+)$");  // for extracting keys/values
 
 	// first go over map and find longest key length
 	for (auto key : map.keys())
 	{
-		if (reKeyXt.exactMatch(key))
-			key = reKeyXt.cap(2);
+		QRegularExpressionMatch match=reKeyXt.match(key);
+		if (match.hasMatch())
+			key = match.captured(2);
 		if (key.size() > maxKeyWidth) maxKeyWidth = key.size();
 	}
 
 	// OK, this time actually write to the file - first non-section values
 	QString outputLine;
-	for (auto k : map.keys())
+	for (auto key : map.keys())
 	{
-		if (!reKeyXt.exactMatch(k))
+		QRegularExpressionMatch match=reKeyXt.match(key);
+		if (!match.hasMatch())
 		{
 			// this is for those keys without a section
-			outputLine = QString("%1").arg(k,0-maxKeyWidth) + " = " + map[k].toString() + stelEndl;
+			outputLine = QString("%1").arg(key,0-maxKeyWidth) + " = " + map[key].toString() + stelEndl;
 			device.write(outputLine.toUtf8());
 		}
 	}
 
 	// Now those values with sections.
 	QString currentSection("");
-	for (auto k : map.keys())
+	for (auto key : map.keys())
 	{
-		if (reKeyXt.exactMatch(k))
+		QRegularExpressionMatch match=reKeyXt.match(key);
+		if (match.hasMatch())
 		{
-			QString sec = reKeyXt.cap(1); QString key = reKeyXt.cap(2);
+			QString section = match.captured(1); QString sectionKey = match.captured(2);
 
 			// detect new sections and write section headers in file
-			if (sec != currentSection)
+			if (section != currentSection)
 			{
-				currentSection = sec;
+				currentSection = section;
 
 				outputLine = stelEndl + "[" + currentSection + "]" + stelEndl;
 				device.write(outputLine.toUtf8());
 			}
-			outputLine = QString("%1").arg(key,0-maxKeyWidth) + " = " + map[k].toString() + stelEndl;
+			outputLine = QString("%1").arg(sectionKey,0-maxKeyWidth) + " = " + map[key].toString() + stelEndl;
 			device.write(outputLine.toUtf8());
 		}
 	}

@@ -26,6 +26,8 @@
 #include "StarMgr.hpp"
 #include "Star.hpp"
 #include "StelSkyDrawer.hpp"
+#include "Planet.hpp"
+#include "StelUtils.hpp"
 
 #include <QString>
 
@@ -78,7 +80,22 @@ protected:
 		static const double d2000 = 2451545.0;
 		Vec3f v;
 		s->getJ2000Pos(z, (M_PI/180.)*(0.0001/3600.) * ((core->getJDE()-d2000)/365.25) / a->star_position_scale, v);
-		return v.toVec3d();
+
+		// Aberration: Explanatory Supplement 2013, (7.38). We must get the observer planet speed vector in Equatorial J2000 coordinates.
+		if (core->getUseAberration())
+		{
+			Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+			vel=StelCore::matVsop87ToJ2000*vel*core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
+			//Q_ASSERT_X(fabs(v.lengthSquared()-1.0f)<0.0001f, "StarWrapper aberration", "vertex length not unity");
+			v.normalize(); // Required? YES!
+			Vec3d pos=v.toVec3d()+vel;
+			pos.normalize();
+			return pos;
+		}
+		else
+		{
+			return v.toVec3d();
+		}
 	}
 	virtual Vec3f getInfoColor(void) const Q_DECL_OVERRIDE
 	{
@@ -92,7 +109,6 @@ protected:
 	virtual float getBV(void) const  Q_DECL_OVERRIDE {return s->getBV();}
 	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE {return QString();}
 	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE {return s->getNameI18n();}
-	virtual double getAngularSize(const StelCore*) const Q_DECL_OVERRIDE {return 0.;}
 protected:
 	const SpecialZoneArray<Star> *const a;
 	const SpecialZoneData<Star> *const z;

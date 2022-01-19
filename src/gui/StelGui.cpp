@@ -58,7 +58,7 @@
 #include "ViewDialog.hpp"
 #include "ShortcutsDialog.hpp"
 #include "AstroCalcDialog.hpp"
-#include "BookmarksDialog.hpp"
+#include "ObsListDialog.hpp"
 
 #include <QDebug>
 #include <QTimeLine>
@@ -100,7 +100,7 @@ StelGui::StelGui()
 	, scriptConsole(Q_NULLPTR)
 #endif
 	, astroCalcDialog(Q_NULLPTR)
-	, bookmarksDialog(Q_NULLPTR)
+	, obsListDialog(Q_NULLPTR)
 	, flagShowFlipButtons(false)
 	, flipVert(Q_NULLPTR)
 	, flipHoriz(Q_NULLPTR)
@@ -114,8 +114,8 @@ StelGui::StelGui()
 	, buttonNightmode(Q_NULLPTR)
 	, flagShowFullscreenButton(true)
 	, buttonFullscreen(Q_NULLPTR)
-	, flagShowBookmarksButton(false)
-	, btShowBookmarks(Q_NULLPTR)
+	, flagShowObsListButton(false)
+	, btShowObsList(Q_NULLPTR)
 	, flagShowICRSGridButton(false)
 	, btShowICRSGrid(Q_NULLPTR)
 	, flagShowGalacticGridButton(false)
@@ -191,10 +191,10 @@ StelGui::~StelGui()
 		delete astroCalcDialog;
 		astroCalcDialog = Q_NULLPTR;
 	}
-	if (bookmarksDialog)
+	if (obsListDialog)
 	{
-		delete bookmarksDialog;
-		bookmarksDialog = Q_NULLPTR;
+		delete obsListDialog;
+		obsListDialog = Q_NULLPTR;
 	}
 }
 
@@ -215,7 +215,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	scriptConsole = new ScriptConsole(atopLevelGraphicsWidget);
 #endif
 	astroCalcDialog = new AstroCalcDialog(atopLevelGraphicsWidget);
-	bookmarksDialog = new BookmarksDialog(atopLevelGraphicsWidget);
+	obsListDialog = new ObsListDialog(atopLevelGraphicsWidget);
 
 	///////////////////////////////////////////////////////////////////////
 	// Create all the main actions of the program, associated with shortcuts
@@ -250,7 +250,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	actionsMgr->addAction("actionShow_Location_Window_Global", windowsGroup, N_("Location window"), locationDialog, "visible", "F6", "", true);
 	actionsMgr->addAction("actionShow_Shortcuts_Window_Global", windowsGroup, N_("Shortcuts window"), shortcutsDialog, "visible", "F7", "", true);
 	actionsMgr->addAction("actionShow_AstroCalc_Window_Global", windowsGroup, N_("Astronomical calculations window"), astroCalcDialog, "visible", "F10", "", true);
-	actionsMgr->addAction("actionShow_Bookmarks_Window_Global", windowsGroup, N_("Bookmarks"), bookmarksDialog, "visible", "Alt+B", "", true);
+	actionsMgr->addAction("actionShow_ObsList_Window_Global", windowsGroup, N_("Observing list"), obsListDialog, "visible", "Alt+B", "", true);
 	actionsMgr->addAction("actionSave_Copy_Object_Information_Global", miscGroup, N_("Copy selected object information to clipboard"), this, "copySelectedObjectInfo()", "Ctrl+Shift+C", "", true);
 
 	QSettings* conf = StelApp::getInstance().getSettings();
@@ -361,7 +361,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	setFlagShowGotoSelectedObjectButton(conf->value("gui/flag_show_goto_selected_button", true).toBool());
 	setFlagShowNightmodeButton(conf->value("gui/flag_show_nightmode_button", true).toBool());
 	setFlagShowFullscreenButton(conf->value("gui/flag_show_fullscreen_button", true).toBool());
-	setFlagShowBookmarksButton(conf->value("gui/flag_show_bookmarks_button", false).toBool());
+	setFlagShowObsListButton(conf->value("gui/flag_show_obslist_button", false).toBool());
 	setFlagShowICRSGridButton(conf->value("gui/flag_show_icrs_grid_button", false).toBool());
 	setFlagShowGalacticGridButton(conf->value("gui/flag_show_galactic_grid_button", false).toBool());
 	setFlagShowEclipticGridButton(conf->value("gui/flag_show_ecliptic_grid_button", false).toBool());
@@ -480,7 +480,7 @@ void StelGui::setStelStyle(const QString& section)
 	scriptConsole->styleChanged();
 #endif // ENABLE_SCRIPT_CONSOLE	
 	astroCalcDialog->styleChanged();
-	bookmarksDialog->styleChanged();
+	obsListDialog->styleChanged();
 }
 
 
@@ -757,34 +757,32 @@ void StelGui::setFlagShowNebulaBackgroundButton(bool b)
 	}
 }
 
-// Define whether the button toggling bookmarks should be visible
-void StelGui::setFlagShowBookmarksButton(bool b)
+// Define whether the button toggling observing list should be visible
+void StelGui::setFlagShowObsListButton(bool b)
 {
-	if(b!=flagShowBookmarksButton)
+	if(b!=flagShowObsListButton)
 	{
-		if (b==true)
-		{
-			if (btShowBookmarks==Q_NULLPTR)
-			{
+		if (b==true) {
+			if (btShowObsList==Q_NULLPTR) {
 				// Create the nebulae background button
 				QPixmap pxmapGlow32x32(":/graphicGui/miscGlow32x32.png");
-				QPixmap pxmapOn(":/graphicGui/btBookmarks-on.png");
-				QPixmap pxmapOff(":/graphicGui/btBookmarks-off.png");
-				btShowBookmarks = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Bookmarks_Window_Global");
+				QPixmap pxmapOn(":/graphicGui/btObsList-on.png");
+				QPixmap pxmapOff(":/graphicGui/btObsList-off.png");
+				btShowObsList = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_ObsList_Window_Global");
 			}
-			getButtonBar()->addButton(btShowBookmarks, "060-othersGroup");
+			getButtonBar()->addButton(btShowObsList, "060-othersGroup");
 		} else {
-			getButtonBar()->hideButton("actionShow_Bookmarks_Window_Global");
+			getButtonBar()->hideButton("actionShow_ObsList_Window_Global");
 		}
-		flagShowBookmarksButton = b;
+		flagShowObsListButton = b;
 		QSettings* conf = StelApp::getInstance().getSettings();
 		Q_ASSERT(conf);
-		conf->setValue("gui/flag_show_bookmarks_button", b);
+		conf->setValue("gui/flag_show_obslist_button", b);
 		conf->sync();
 		if (initDone) {
 			skyGui->updateBarsPos();
 		}
-		emit flagShowBookmarksButtonChanged(b);
+		emit flagShowObsListButtonChanged(b);
 	}
 }
 
@@ -1338,9 +1336,9 @@ bool StelGui::getFlagShowFullscreenButton() const
 	return flagShowFullscreenButton;
 }
 
-bool StelGui::getFlagShowBookmarksButton() const
+bool StelGui::getFlagShowObsListButton() const
 {
-	return flagShowBookmarksButton;
+	return flagShowObsListButton;
 }
 
 bool StelGui::getFlagShowICRSGridButton() const

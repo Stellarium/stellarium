@@ -25,6 +25,7 @@
 #include <QSet>
 #include <QString>
 #include <QTextCharFormat>
+#include <QRegularExpression>
 
 class QTextDocument;
 
@@ -43,19 +44,10 @@ private:
 	void locateFunctions( const QMetaObject* metaObject, QString scriptName );
 	struct HighlightingRule
 	{
-		QRegExp pattern;
+		QRegularExpression pattern;
 		QTextCharFormat* format;
 	};
 	QVector<HighlightingRule> highlightingRules;
-
-	QRegExp alertPat;
-	QRegExp identPat;
-	QRegExp functionPat;
-	QRegExp multiLineStartPat;
-	QString multiLineEnd;
-
-	QSet<QString> keywords;
-	QSet<QString> predefineds;
 	
 	QHash<QString,QSet<QString>> mod2funcs;
 	QString lastModule;
@@ -68,6 +60,9 @@ private:
 	QTextCharFormat commentFormat;
 	QTextCharFormat functionFormat;
 	QTextCharFormat noMethFormat;
+
+	static const QStringList keywords;
+	static const QStringList predefineds;
 };
 
 #endif // STELSCRIPTSYNTAXHIGHLIGHTER_HPP

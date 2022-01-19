@@ -850,7 +850,10 @@ install(TARGETS indi_simulator_guide RUNTIME DESTINATION bin)
 SET(focussimulator_SRC
     ${CMAKE_CURRENT_SOURCE_DIR}/drivers/focuser/focus_simulator.cpp)
 
-add_executable(indi_simulator_focus ${focussimulator_SRC})
+add_executable(indi_simulaIF (UNITY_BUILD)
+    ENABLE_UNITY_BUILD(celestrongps celestrongps_SRC 10 cpp)
+ENDIF ()
+tor_focus ${focussimulator_SRC})
 target_link_libraries(indi_simulator_focus indidriver)
 install(TARGETS indi_simulator_focus RUNTIME DESTINATION bin)
 
@@ -867,7 +870,10 @@ install(TARGETS indi_robo_focus RUNTIME DESTINATION bin)
 ################ Robo Focuser ################
 
 SET(fcusb_SRC
-    ${CMAKE_CURRENT_SOURCE_DIR}/drivers/focuser/fcusb.cpp)
+    ${CMAKE_CURRENT_SOURCEIF (UNITY_BUILD)
+    ENABLE_UNITY_BUILD(celestrongps celestrongps_SRC 10 cpp)
+ENDIF ()
+_DIR}/drivers/focuser/fcusb.cpp)
 
 add_executable(indi_fcusb_focus ${fcusb_SRC})
 target_link_libraries(indi_fcusb_focus indidriver)

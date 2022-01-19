@@ -26,6 +26,7 @@
 #include <QMetaProperty>
 #include <QStringList>
 #include <QSettings>
+#include <QRegularExpression>
 
 #ifndef USE_QUICKVIEW
 #include <QAction>
@@ -58,7 +59,7 @@ StelAction::StelAction(const QString& actionId,
 	QString cfgOpt = "shortcuts/" + actionId;
 	if (conf->contains(cfgOpt)) // Check existence of shortcut to allow removing shortcuts
 	{
-		QStringList shortcuts = conf->value(cfgOpt).toString().split(QRegExp("\\s+")); // empty shortcuts allows stay primary and alternative shortcuts as they was defined
+		QStringList shortcuts = conf->value(cfgOpt).toString().split(QRegularExpression("\\s+")); // empty shortcuts allows stay primary and alternative shortcuts as they was defined
 		if (shortcuts.size() > 2)
 			qWarning() << actionId << ": does not support more than two shortcuts per action";		
 		setShortcut(shortcuts[0]);
@@ -322,7 +323,7 @@ void StelActionMgr::saveShortcuts()
 			seq += " " + action->altKeySequence.toString().replace(" ", "");
 		if (action->altKeySequence.toString()=="")
 			seq += " \"\"";		
-		conf->setValue(action->objectName(), seq.replace(QRegExp("\\s+")," "));
+		conf->setValue(action->objectName(), seq.replace(QRegularExpression("\\s+")," "));
 	}
 	conf->endGroup();
 	// Apparently shortcuts was changed

@@ -101,6 +101,8 @@ struct TleData
 	//! Flag indicating whether this satellite should be added.
 	//! See Satellites::autoAddEnabled.
 	bool addThis;
+	//! Source of TLE (URL), can be used for assign satellites group
+	QString sourceURL;
 };
 
 //! @ingroup satellites
@@ -159,6 +161,7 @@ class Satellites : public StelObjectModule
 	Q_PROPERTY(int  orbitLineSegments        READ getOrbitLineSegments        WRITE setOrbitLineSegments        NOTIFY orbitLineSegmentsChanged)
 	Q_PROPERTY(int  orbitLineFadeSegments    READ getOrbitLineFadeSegments    WRITE setOrbitLineFadeSegments    NOTIFY orbitLineFadeSegmentsChanged)
 	Q_PROPERTY(int  orbitLineSegmentDuration READ getOrbitLineSegmentDuration WRITE setOrbitLineSegmentDuration NOTIFY orbitLineSegmentDurationChanged)
+	Q_PROPERTY(int  tleEpochAgeDays     READ getTleEpochAgeDays     WRITE setTleEpochAgeDays     NOTIFY tleEpochAgeDaysChanged)
 	Q_PROPERTY(Vec3f invisibleSatelliteColor READ getInvisibleSatelliteColor  WRITE setInvisibleSatelliteColor  NOTIFY invisibleSatelliteColorChanged)
 	Q_PROPERTY(Vec3f transitSatelliteColor   READ getTransitSatelliteColor    WRITE setTransitSatelliteColor    NOTIFY transitSatelliteColorChanged)
 	
@@ -185,16 +188,16 @@ public:
 	};
 
 	Satellites();
-	virtual ~Satellites();
+	virtual ~Satellites() Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init();
-	virtual void deinit();
-	virtual void update(double deltaTime);
-	virtual void draw(StelCore* core);
+	virtual void init() Q_DECL_OVERRIDE;
+	virtual void deinit() Q_DECL_OVERRIDE;
+	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
+	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
 	virtual void drawPointer(StelCore* core, StelPainter& painter);
-	virtual double getCallOrder(StelModuleActionName actionName) const;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectModule class
@@ -203,19 +206,19 @@ public:
 	//! @param limitFov the field of view around the position v in which to search for satellites.
 	//! @param core the StelCore to use for computations.
 	//! @return a list containing the satellites located inside the limitFov circle around position v.
-	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
+	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const Q_DECL_OVERRIDE;
 
 	//! Return the matching satellite object's pointer if exists or Q_NULLPTR.
 	//! @param nameI18n The case in-sensitive satellite name
-	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
+	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const Q_DECL_OVERRIDE;
 
 	//! Return the matching satellite if exists or Q_NULLPTR.
 	//! @param name The case in-sensitive standard program name
-	virtual StelObjectP searchByName(const QString& name) const;
+	virtual StelObjectP searchByName(const QString& name) const Q_DECL_OVERRIDE;
 
 	//! Return the matching satellite if exists or Q_NULLPTR.
 	//! @param id The satellite id (NORAD)
-	virtual StelObjectP searchByID(const QString &id) const;
+	virtual StelObjectP searchByID(const QString &id) const Q_DECL_OVERRIDE;
 	
 	//! Return the satellite with the given catalog number.
 	//! Used as a helper function by searchByName() and
@@ -224,21 +227,28 @@ public:
 	//! @returns a null pointer if no such satellite is found.
 	StelObjectP searchByNoradNumber(const QString& noradNumber) const;
 
+	//! Return the satellite with the given International Designator.
+	//! Used as a helper function by searchByName() and
+	//! searchByNameI18n().
+	//! @param intlDesignator search string in the format "XXXX-XXXX".
+	//! @returns a null pointer if no such satellite is found.
+	StelObjectP searchByInternationalDesignator(const QString& intlDesignator) const;
+
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const Q_DECL_OVERRIDE;
 
-	virtual QStringList listAllObjects(bool inEnglish) const;
+	virtual QStringList listAllObjects(bool inEnglish) const Q_DECL_OVERRIDE;
 
-	virtual QString getName() const { return "Satellites"; }
-	virtual QString getStelObjectType() const { return Satellite::SATELLITE_TYPE; }
+	virtual QString getName() const Q_DECL_OVERRIDE { return "Satellites"; }
+	virtual QString getStelObjectType() const Q_DECL_OVERRIDE { return Satellite::SATELLITE_TYPE; }
 
 	//! Implement this to tell the main Stellarium GUI that there is a GUI element to configure this
 	//! plugin. 
-	virtual bool configureGui(bool show=true);
+	virtual bool configureGui(bool show=true) Q_DECL_OVERRIDE;
 
 	//! Set up the plugin with default values.  This means clearing out the Satellites section in the
 	//! main config.ini (if one already exists), and populating it with default values.  It also 
@@ -345,11 +355,10 @@ public:
 	//! \param openFile a reference to an \b open file.
 	//! @param[in,out] tleList a hash with satellite IDs as keys.
 	//! @param[in] addFlagValue value to be set to TleData::addThis for all.
+	//! @param[in] tleURL a URL of TLE's source (e.g. Celestrak URL)
 	//! @todo If this can accept a QIODevice, it will be able to read directly
 	//! QNetworkReply-s... --BM
-	static void parseTleFile(QFile& openFile,
-	                         TleDataHash& tleList,
-				 bool addFlagValue = false);
+	static void parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFlagValue = false, const QString& tleURL = "");
 
 	//! Insert a three line TLE into the hash array.
 	//! @param[in] line The second line from the TLE
@@ -381,6 +390,7 @@ signals:
 	void orbitLineSegmentsChanged(int i);
 	void orbitLineFadeSegmentsChanged(int i);
 	void orbitLineSegmentDurationChanged(int i);
+	void tleEpochAgeDaysChanged(int i);
 	void invisibleSatelliteColorChanged(Vec3f);
 	void transitSatelliteColorChanged(Vec3f);
 
@@ -503,6 +513,11 @@ public slots:
 	//! set duration of a single segments
 	void setOrbitLineSegmentDuration(int s);
 
+	//! return the valid age of TLE's epoch
+	int getTleEpochAgeDays() const { return Satellite::tleEpochAge; }
+	//! set the valid age of TLE's epoch
+	void setTleEpochAgeDays(int age);
+
 	void recalculateOrbitLines(void);
 
 	//! Display a message on the screen for a few seconds.
@@ -581,6 +596,8 @@ private:
 	//! place.)
 	static void translations();
 
+	void createSuperGroupsList();
+
 	//! Path to the satellite catalog file.
 	QString catalogPath;
 	//! Plug-in data directory.
@@ -655,6 +672,8 @@ private:
 	// GUI
 	SatellitesDialog* configDialog;
 
+	QMultiMap<QString, QString> satSuperGroupsMap;
+
 	static QString SatellitesCatalogVersion;
 
 private slots:
@@ -686,9 +705,9 @@ class SatellitesStelPluginInterface : public QObject, public StelPluginInterface
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const;
-	virtual StelPluginInfo getPluginInfo() const;
-	virtual QObjectList getExtensionList() const { return QObjectList(); }
+	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
+	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
+	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
 };
 
 #endif /* SATELLITES_HPP */

@@ -56,7 +56,6 @@ See the implementation of StelModuleMgr::getPluginsList() for more details.
 @section listPlugins List of Static Plugins
 You can find some details for static plugins in each item of the list of plugins:
  - @ref angleMeasure
- - @ref compassMarks
  - @ref oculars
  - @ref telescopeControl
  - @ref satellites
@@ -96,7 +95,6 @@ There are a few simple \b static plugins written and maintained by the Stellariu
  - <a href="https://github.com/Stellarium/stellarium/tree/master/plugins/HelloStelModule">HelloStelModule plugin</a>: minimal plugin, intended as an example.
  - <a href="https://github.com/Stellarium/stellarium/tree/master/plugins/SimpleDrawLine">SimpleDrawLine</a>: minimal plugin for drawing lines.
  - <a href="https://github.com/Stellarium/stellarium/tree/master/plugins/AngleMeasure">AngleMeasure plugin</a>: simple plugin, intended as a guide to new developers.
- - <a href="https://github.com/Stellarium/stellarium/tree/master/plugins/CompassMarks"> CompassMarks plugin</a>: another simple plugin intended as a guide to new developers.
 
 All static plugins incorporated in Stellarium's main code can be found in the <a href="https://github.com/Stellarium/stellarium/tree/master/plugins">/plugins</a> subdirectory of Stellarium's code tree. Note that some of these plugins are under construction and have not been distributed yet with an official release.
 

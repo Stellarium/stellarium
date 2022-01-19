@@ -33,6 +33,7 @@ public:
 
 	virtual ~MayaHaabCalendar() Q_DECL_OVERRIDE {}
 
+public slots:
 	virtual void retranslate() Q_DECL_OVERRIDE;
 
 	//! Set a calendar date from the Julian day number
@@ -50,6 +51,7 @@ public:
 	//! get a formatted complete string for a date
 	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
+public:
 	//! get tzolkin name index of Haab year bearer (name of 0 Pop) from Haab date
 	//! This must be one of 2, 7, 12, 17. (TODO: write a test!)
 	static int mayanYearBearerFromFixed(int rd);

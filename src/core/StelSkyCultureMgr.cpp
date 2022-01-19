@@ -32,6 +32,7 @@
 #include <QMap>
 #include <QMapIterator>
 #include <QDir>
+#include <QRegularExpression>
 
 StelSkyCultureMgr::StelSkyCultureMgr()
 {
@@ -39,7 +40,7 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 
 	QSet<QString> cultureDirNames = StelFileMgr::listContents("skycultures",StelFileMgr::Directory);
 	
-	for (const auto& dir : cultureDirNames)
+	for (const auto& dir : qAsConst(cultureDirNames))
 	{
 		QString pdFile = StelFileMgr::findFile("skycultures/" + dir + "/info.ini");
 		if (pdFile.isEmpty())
@@ -77,6 +78,7 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 			{ "historical",   StelSkyCulture::HISTORICAL},
 			{ "ethnographic", StelSkyCulture::ETHNOGRAPHIC},
 			{ "single",       StelSkyCulture::SINGLE},
+			{ "comparative",  StelSkyCulture::COMPARATIVE},
 			{ "personal",     StelSkyCulture::PERSONAL},			
 			{ "incomplete",   StelSkyCulture::INCOMPLETE},
 		};
@@ -141,7 +143,7 @@ bool StelSkyCultureMgr::setDefaultSkyCultureID(const QString& id)
 	
 QString StelSkyCultureMgr::getCurrentSkyCultureNameI18() const
 {
-	return q_(currentSkyCulture.englishName);
+	return qc_(currentSkyCulture.englishName, "sky culture");
 }
 
 QString StelSkyCultureMgr::getCurrentSkyCultureEnglishName() const
@@ -178,6 +180,11 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlClassification() const
 			color = "#33ff33"; // "green" area
 			classification = qc_("single", "sky culture classification");
 			description = q_("Represents a single source like a historical atlas, or publications of a single author.");
+			break;
+		case StelSkyCulture::COMPARATIVE:
+			color = "#2090ff"; // "blue" area
+			classification = qc_("comparative", "sky culture classification");
+			description = q_("Compares and confronts elements from at least two sky cultures with each other.");
 			break;
 		case StelSkyCulture::TRADITIONAL:
 			color = "#33ff33"; // "green" area
@@ -234,7 +241,7 @@ QStringList StelSkyCultureMgr::getSkyCultureListI18(void) const
 	while (i.hasNext())
 	{
 		i.next();
-		cultures += q_(i.value().englishName);
+		cultures += qc_(i.value().englishName, "sky culture");
 	}
 	// Sort for GUI use. Note that e.g. German Umlauts are sorted after Z. TODO: Fix this!
 	cultures.sort(Qt::CaseInsensitive);
@@ -297,7 +304,7 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlReferences() const
 		}
 		QString record;
 		// Allow empty and comment lines where first char (after optional blanks) is #
-		QRegExp commentRx("^(\\s*#.*|\\s*)$");
+		QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
 		reference = QString("<h3>%1</h3><ul>").arg(q_("References"));
 		int totalRecords=0;
 		int readOk=0;
@@ -306,14 +313,14 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlReferences() const
 		{
 			record = QString::fromUtf8(refFile.readLine()).trimmed();
 			lineNumber++;
-			if (commentRx.exactMatch(record))
+			if (commentRx.match(record).hasMatch())
 				continue;
 
 			totalRecords++;
 			#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
-			QStringList ref = record.split(QRegExp("\\|"), Qt::KeepEmptyParts);
+			QStringList ref = record.split(QRegularExpression("\\|"), Qt::KeepEmptyParts);
 			#else
-			QStringList ref = record.split(QRegExp("\\|"), QString::KeepEmptyParts);
+			QStringList ref = record.split(QRegularExpression("\\|"), QString::KeepEmptyParts);
 			#endif
 			// 1 - URID; 2 - Reference; 3 - URL (optional)
 			if (ref.count()<2)
@@ -363,7 +370,7 @@ QString StelSkyCultureMgr::skyCultureI18ToDirectory(const QString& cultureName) 
 	while (i.hasNext())
 	{
 		i.next();
-		if (q_(i.value().englishName) == cultureName)
+		if (qc_(i.value().englishName, "sky culture") == cultureName)
 			return i.key();
 	}
 	return "";

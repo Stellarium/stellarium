@@ -17,6 +17,8 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QRegularExpression>
+
 #include "Calendars.hpp"
 #include "CalendarsDialog.hpp"
 #include "ui_calendarsDialog.h"
@@ -77,9 +79,9 @@ void CalendarsDialog::createDialogContent()
 
 	// DISABLE Chinese for now, TBD!
 	ui->chineseCheckBox->hide();
-	ui->islamicCheckBox->hide();
-	ui->hebrewCheckBox->hide();
 	ui->tabs->removeTab(2);
+	ui->newHinduLunarCheckBox->hide();
+	ui->newHinduSolarCheckBox->hide();
 
 	// MAKE SURE to connect each calendar's partsChanged to a respective populate... method here.
 	connect(cal->getCal("Julian"),             SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateJulianParts(QVector<int>)));
@@ -94,7 +96,6 @@ void CalendarsDialog::createDialogContent()
 
 	connectBoolProperty(ui->julianCheckBox,             "Calendars.flagShowJulian");
 	connectBoolProperty(ui->gregorianCheckBox,          "Calendars.flagShowGregorian");
-	connectBoolProperty(ui->gregorianCheckBox,          "Calendars.flagShowGregorian");
 	connectBoolProperty(ui->isoCheckBox,                "Calendars.flagShowISO");
 	connectBoolProperty(ui->romanCheckBox,              "Calendars.flagShowRoman");
 	connectBoolProperty(ui->olympicCheckBox,            "Calendars.flagShowOlympic");
@@ -105,12 +106,18 @@ void CalendarsDialog::createDialogContent()
 	connectBoolProperty(ui->ethiopicCheckBox,           "Calendars.flagShowEthiopic");
 	connectBoolProperty(ui->icelandicCheckBox,          "Calendars.flagShowIcelandic");
 	connectBoolProperty(ui->chineseCheckBox,            "Calendars.flagShowChinese");
+	connectBoolProperty(ui->islamicCheckBox,            "Calendars.flagShowIslamic");
+	connectBoolProperty(ui->hebrewCheckBox,             "Calendars.flagShowHebrew");
+	connectBoolProperty(ui->oldHinduSolarCheckBox,      "Calendars.flagShowOldHinduSolar");
+	connectBoolProperty(ui->oldHinduLunarCheckBox,      "Calendars.flagShowOldHinduLunar");
 	connectBoolProperty(ui->mayaLCCheckBox,             "Calendars.flagShowMayaLongCount");
 	connectBoolProperty(ui->mayaHaabCheckBox,           "Calendars.flagShowMayaHaab");
 	connectBoolProperty(ui->mayaTzolkinCheckBox,        "Calendars.flagShowMayaTzolkin");
 	connectBoolProperty(ui->aztecXihuitlCheckBox,       "Calendars.flagShowAztecXihuitl");
 	connectBoolProperty(ui->aztecTonalpohualliCheckBox, "Calendars.flagShowAztecTonalpohualli");
 	connectBoolProperty(ui->balineseCheckBox,           "Calendars.flagShowBalinese");
+	connectBoolProperty(ui->frenchArithmeticCheckBox,   "Calendars.flagShowFrenchArithmetic");
+	connectBoolProperty(ui->persianArithmeticCheckBox,  "Calendars.flagShowPersianArithmetic");
 
 	// MAKE SURE to connect all part edit elements respective ...Changed() method here.
 	connect(ui->julianYearSpinBox,      SIGNAL(valueChanged(int)), this, SLOT(julianChanged()));
@@ -147,7 +154,7 @@ void CalendarsDialog::createDialogContent()
 void CalendarsDialog::setAboutHtml(void)
 {
 	// Regexp to replace {text} with an HTML link.
-	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
+	QRegularExpression a_rx("[{]([^{]*)[}]");
 
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Calendars Plug-in") + "</h2><table width=\"90%\">";
@@ -170,13 +177,15 @@ void CalendarsDialog::setAboutHtml(void)
 	html += "<li>" + q_("Coptic calendar") + "</li>";
 	html += "<li>" + q_("Ethiopic calendar") + "</li>";
 
-//	html += "<li>" + q_("Hebrew Calendar") + "</li>";
-//	html += "<li>" + q_("Islamic Calendar (algorithmic)") + "</li>";
-//	html += "<li>" + q_("French Revolution calendars") + "</li>";
-//	html += "<li>" + q_("Ethiopian calendar") + "</li>";
+	html += "<li>" + q_("Islamic Calendar (algorithmic)") + "</li>";
+	html += "<li>" + q_("Hebrew Calendar") + "</li>";
+	html += "<li>" + q_("French Revolution calendar (arithmetic version of 1795)") + "</li>";
+	html += "<li>" + q_("Persian calendar (arithmetic version)") + "</li>";
+
 //	html += "<li>" + q_("Chinese calendars") + "</li>";
 //	html += "<li>" + q_("Tibetan calendars") + "</li>";
-//	html += "<li>" + q_("Indian calendars") + "</li>";
+	html += "<li>" + q_("Old Hindu Solar and Lunar calendars") + "</li>";
+//	html += "<li>" + q_("New Hindu Solar and Lunar calendars") + "</li>";
 	html += "<li>" + q_("Maya calendars") + "</li>";
 	html += "<li>" + q_("Aztec calendars") + "</li>";
 	html += "<li>" + q_("Balinese Pawukon calendar") + "</li>";
@@ -187,27 +196,19 @@ void CalendarsDialog::setAboutHtml(void)
 	html += "<h3>" + q_("Publications") + "</h3>";
 	html += "<p>"  + q_("If you use this plugin in your publications, please cite:") + "</p>";
 	html += "<p><ul>";
-	html += "<li>" + QString("{Georg Zotti, Susanne Hoffmann, Alexander Wolf, Fabien Chéreau, Guillaume Chéreau: The simulated sky: Stellarium for cultural astronomy research.} Journal for Skyscape Archaeology, 6.2, 2020, pp. XX-XX.")
-			.toHtmlEscaped().replace(a_rx, "<a href=\"https://equinoxpub.com/PATH-TO.pdf\">\\1</a>") + "</li>";
+	html += "<li>" + QString("{Georg Zotti, Susanne M. Hoffmann, Alexander Wolf, Fabien Chéreau, Guillaume Chéreau: The simulated sky: Stellarium for cultural astronomy research.} Journal for Skyscape Archaeology, 6.2, 2021, pp. 221-258.")
+			.toHtmlEscaped().replace(a_rx, "<a href=\"https://doi.org/10.1558/jsa.17822\">\\1</a>") + "</li>";
 	html += "</ul></p>";
 
 	html += "<h3>" + q_("References") + "</h3>";
 	html += "<p>"  + q_("This plugin is based on:");
 	html += "<ul>";
 	html += "<li>" + QString("{Edward M. Reingold, Nachum Dershowitz: Calendrical Calculations.} The Ultimate Edition. Cambridge University Press 2018.")
-			.toHtmlEscaped().replace(a_rx, "<a href=\"https://doi.org/10.1017/9781107057623\">\\1</a>") + "</li>";
+			.toHtmlEscaped().replace(a_rx, "<a href=\"https://doi.org/10.1017/9781107415058\">\\1</a>") + "</li>";
 	html += "</ul></p>";
 
-	html += "<h3>" + q_("Links") + "</h3>";
-	html += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg("Calendars plugin");
-	html += "<ul>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you have a question, you can {get an answer here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://groups.google.com/forum/#!forum/stellarium\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("Bug reports and feature requests can be made {here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://github.com/Stellarium/stellarium/issues\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you want to read full information about this plugin and its history, see the Stellarium User Guide") + "</li>";
-	html += "</ul></p></body></html>";
+	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Calendars plugin");
+	html += "</body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if(gui!=Q_NULLPTR)

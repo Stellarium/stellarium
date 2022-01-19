@@ -87,6 +87,7 @@ public:
 		SOLSTICES_J2000,
 		SOLSTICES_OF_DATE,
 		ANTISOLAR,
+		EARTH_UMBRA_CENTER,
 		APEX
 	};
 	// Create and precompute positions of a SkyGrid
@@ -819,13 +820,16 @@ void SkyLine::draw(StelCore *core) const
 			// It seems better to just switch it off.
 			if (GETSTELMODULE(SolarSystem)->getFlagMoonScale()) return;
 
+			// We compute the shadow circle attached to the geocenter, but must point it in the opposite direction of the sun's aberrated position.
 			const Vec3d pos=earth->getEclipticPos();
+			const Vec3d dir= - sun->getAberrationPush() + pos;
 			double lambda, beta;
-			StelUtils::rectToSphe(&lambda, &beta, pos);
+			StelUtils::rectToSphe(&lambda, &beta, dir);
 			const QPair<Vec3d, Vec3d> radii=GETSTELMODULE(SolarSystem)->getEarthShadowRadiiAtLunarDistance();
 			const double radius=(line_type==EARTH_UMBRA ? radii.first[1] : radii.second[1]);
 			const double dist=moon->getEclipticPos().length();  // geocentric Lunar distance [AU]
 			const Mat4d rot=Mat4d::zrotation(lambda)*Mat4d::yrotation(-beta);
+
 			StelVertexArray circle(StelVertexArray::LineLoop);
 			for (int i=0; i<360; ++i)
 			{
@@ -834,6 +838,12 @@ void SkyLine::draw(StelCore *core) const
 				circle.vertex.append(pos+point);                                   // attach to earth centre
 			}
 			sPainter.drawStelVertexArray(circle, false); // setting true does not paint for cylindrical&friends :-(
+
+			// Special case for Umbra and Penumbra labels
+			Vec3d point(dist, 0.0, 0.0);
+			rot.transfo(point);
+			const float shift=sPainter.getProjector()->getPixelPerRadAtCenter()*(line_type==EARTH_UMBRA ? radii.first[0] : radii.second[0])*0.0000112f/M_PIf;
+			sPainter.drawText(pos+point, (line_type==EARTH_UMBRA ? q_("Umbra") : q_("Penumbra")), 0.f, shift, shift, false);
 			return;
 		}
 		else
@@ -1430,6 +1440,13 @@ void SkyPoint::updateLabel()
 			northernLabel = q_("ASP");
 			break;
 		}
+		case EARTH_UMBRA_CENTER:
+		{
+			frameType = StelCore::FrameHeliocentricEclipticJ2000;
+			// TRANSLATORS: Center of the umbra
+			northernLabel = q_("C.U.");
+			break;
+		}
 		case APEX:
 		{
 			frameType = StelCore::FrameObservercentricEclipticJ2000;
@@ -1543,6 +1560,23 @@ void SkyPoint::draw(StelCore *core) const
 			sPainter.drawText(coord, northernLabel, 0, shift, shift, false);
 			break;
 		}
+		case EARTH_UMBRA_CENTER:
+		{
+			// We compute the shadow center attached to the geocenter, but must point it in the opposite direction of the sun's aberrated position.
+			const Vec3d pos=earth->getEclipticPos();
+			const Vec3d dir= - sun->getAberrationPush() + pos;
+			double lambda, beta;
+			StelUtils::rectToSphe(&lambda, &beta, dir);
+			const double dist=GETSTELMODULE(SolarSystem)->getMoon()->getEclipticPos().length();
+			const Mat4d rot=Mat4d::zrotation(lambda)*Mat4d::yrotation(-beta);
+
+			Vec3d point(dist, 0.0, 0.0);
+			rot.transfo(point);
+			Vec3d coord = pos+point;
+			sPainter.drawSprite2dMode(coord, 5.f);
+			sPainter.drawText(coord, northernLabel, 0, shift, shift, false);
+			break;
+		}
 		case APEX:
 		{
 			// Observer planet apex (heading point)
@@ -1612,6 +1646,7 @@ GridLinesMgr::GridLinesMgr()
 	solsticeJ2000Points = new SkyPoint(SkyPoint::SOLSTICES_J2000);
 	solsticePoints = new SkyPoint(SkyPoint::SOLSTICES_OF_DATE);
 	antisolarPoint = new SkyPoint(SkyPoint::ANTISOLAR);
+	umbraCenterPoint = new SkyPoint(SkyPoint::EARTH_UMBRA_CENTER);
 	apexPoints = new SkyPoint(SkyPoint::APEX);	
 
 	earth = GETSTELMODULE(SolarSystem)->getEarth();
@@ -1661,6 +1696,7 @@ GridLinesMgr::~GridLinesMgr()
 	delete solsticeJ2000Points;
 	delete solsticePoints;
 	delete antisolarPoint;
+	delete umbraCenterPoint;
 	delete apexPoints;	
 	SkyLine::deinit();
 }
@@ -1754,6 +1790,7 @@ void GridLinesMgr::init()
 	setFlagSolsticeJ2000Points(conf->value("viewing/flag_solstice_J2000_points").toBool());
 	setFlagSolsticePoints(conf->value("viewing/flag_solstice_points").toBool());
 	setFlagAntisolarPoint(conf->value("viewing/flag_antisolar_point").toBool());
+	setFlagUmbraCenterPoint(conf->value("viewing/flag_umbra_center_point").toBool());
 	setFlagApexPoints(conf->value("viewing/flag_apex_points").toBool());
 
 	// Set the line thickness for grids and lines
@@ -1762,91 +1799,92 @@ void GridLinesMgr::init()
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color", "0.5,0.5,0.7").toString();
-	setColorEquatorGrid(             Vec3f(conf->value("color/equatorial_color", defaultColor).toString()));
-	setColorEquatorJ2000Grid(        Vec3f(conf->value("color/equatorial_J2000_color", defaultColor).toString()));
-	setColorEclipticJ2000Grid(       Vec3f(conf->value("color/ecliptical_J2000_color", defaultColor).toString()));
-	setColorEclipticGrid(            Vec3f(conf->value("color/ecliptical_color", defaultColor).toString()));
-	setColorGalacticGrid(            Vec3f(conf->value("color/galactic_color", defaultColor).toString()));
-	setColorSupergalacticGrid(       Vec3f(conf->value("color/supergalactic_color", defaultColor).toString()));
-	setColorAzimuthalGrid(           Vec3f(conf->value("color/azimuthal_color", defaultColor).toString()));
-	setColorEquatorLine(             Vec3f(conf->value("color/equator_color", defaultColor).toString()));
-	setColorEquatorJ2000Line(        Vec3f(conf->value("color/equator_J2000_color", defaultColor).toString()));
-	setColorEclipticLine(            Vec3f(conf->value("color/ecliptic_color", defaultColor).toString()));
-	setColorEclipticJ2000Line(       Vec3f(conf->value("color/ecliptic_J2000_color", defaultColor).toString()));
-	setColorInvariablePlaneLine(     Vec3f(conf->value("color/invariable_plane_color", defaultColor).toString()));
-	setColorSolarEquatorLine(        Vec3f(conf->value("color/solar_equator_color", defaultColor).toString()));
-	setColorPrecessionCircles(       Vec3f(conf->value("color/precession_circles_color", defaultColor).toString()));
-	setColorMeridianLine(            Vec3f(conf->value("color/meridian_color", defaultColor).toString()));
-	setColorHorizonLine(             Vec3f(conf->value("color/horizon_color", defaultColor).toString()));
-	setColorGalacticEquatorLine(     Vec3f(conf->value("color/galactic_equator_color", defaultColor).toString()));
+	setColorEquatorGrid(			Vec3f(conf->value("color/equatorial_color", defaultColor).toString()));
+	setColorEquatorJ2000Grid(		Vec3f(conf->value("color/equatorial_J2000_color", defaultColor).toString()));
+	setColorEclipticJ2000Grid(		Vec3f(conf->value("color/ecliptical_J2000_color", defaultColor).toString()));
+	setColorEclipticGrid(			Vec3f(conf->value("color/ecliptical_color", defaultColor).toString()));
+	setColorGalacticGrid(			Vec3f(conf->value("color/galactic_color", defaultColor).toString()));
+	setColorSupergalacticGrid(		Vec3f(conf->value("color/supergalactic_color", defaultColor).toString()));
+	setColorAzimuthalGrid(			Vec3f(conf->value("color/azimuthal_color", defaultColor).toString()));
+	setColorEquatorLine(			Vec3f(conf->value("color/equator_color", defaultColor).toString()));
+	setColorEquatorJ2000Line(		Vec3f(conf->value("color/equator_J2000_color", defaultColor).toString()));
+	setColorEclipticLine(			Vec3f(conf->value("color/ecliptic_color", defaultColor).toString()));
+	setColorEclipticJ2000Line(		Vec3f(conf->value("color/ecliptic_J2000_color", defaultColor).toString()));
+	setColorInvariablePlaneLine(		Vec3f(conf->value("color/invariable_plane_color", defaultColor).toString()));
+	setColorSolarEquatorLine(		Vec3f(conf->value("color/solar_equator_color", defaultColor).toString()));
+	setColorPrecessionCircles(		Vec3f(conf->value("color/precession_circles_color", defaultColor).toString()));
+	setColorMeridianLine(			Vec3f(conf->value("color/meridian_color", defaultColor).toString()));
+	setColorHorizonLine(			Vec3f(conf->value("color/horizon_color", defaultColor).toString()));
+	setColorGalacticEquatorLine(		Vec3f(conf->value("color/galactic_equator_color", defaultColor).toString()));
 	setColorSupergalacticEquatorLine(Vec3f(conf->value("color/supergalactic_equator_color", defaultColor).toString()));
-	setColorLongitudeLine(           Vec3f(conf->value("color/oc_longitude_color", defaultColor).toString()));
-	setColorPrimeVerticalLine(       Vec3f(conf->value("color/prime_vertical_color", defaultColor).toString()));
-	setColorCurrentVerticalLine(     Vec3f(conf->value("color/current_vertical_color", defaultColor).toString()));
-	setColorColureLines(             Vec3f(conf->value("color/colures_color", defaultColor).toString()));
-	setColorCircumpolarCircles(      Vec3f(conf->value("color/circumpolar_circles_color", defaultColor).toString()));
-	setColorUmbraCircle(             Vec3f(conf->value("color/umbra_circle_color", defaultColor).toString()));
-	setColorPenumbraCircle(          Vec3f(conf->value("color/penumbra_circle_color", defaultColor).toString()));
-	setColorCelestialJ2000Poles(     Vec3f(conf->value("color/celestial_J2000_poles_color", defaultColor).toString()));
-	setColorCelestialPoles(          Vec3f(conf->value("color/celestial_poles_color", defaultColor).toString()));
-	setColorZenithNadir(             Vec3f(conf->value("color/zenith_nadir_color", defaultColor).toString()));
-	setColorEclipticJ2000Poles(      Vec3f(conf->value("color/ecliptic_J2000_poles_color", defaultColor).toString()));
-	setColorEclipticPoles(           Vec3f(conf->value("color/ecliptic_poles_color", defaultColor).toString()));
-	setColorGalacticPoles(           Vec3f(conf->value("color/galactic_poles_color", defaultColor).toString()));
-	setColorGalacticCenter(          Vec3f(conf->value("color/galactic_center_color", defaultColor).toString()));
-	setColorSupergalacticPoles(      Vec3f(conf->value("color/supergalactic_poles_color", defaultColor).toString()));
-	setColorEquinoxJ2000Points(      Vec3f(conf->value("color/equinox_J2000_points_color", defaultColor).toString()));
-	setColorEquinoxPoints(           Vec3f(conf->value("color/equinox_points_color", defaultColor).toString()));
-	setColorSolsticeJ2000Points(     Vec3f(conf->value("color/solstice_J2000_points_color", defaultColor).toString()));
-	setColorSolsticePoints(          Vec3f(conf->value("color/solstice_points_color", defaultColor).toString()));
-	setColorAntisolarPoint(          Vec3f(conf->value("color/antisolar_point_color", defaultColor).toString()));
-	setColorApexPoints(              Vec3f(conf->value("color/apex_points_color", defaultColor).toString()));
+	setColorLongitudeLine(			Vec3f(conf->value("color/oc_longitude_color", defaultColor).toString()));
+	setColorPrimeVerticalLine(		Vec3f(conf->value("color/prime_vertical_color", defaultColor).toString()));
+	setColorCurrentVerticalLine(		Vec3f(conf->value("color/current_vertical_color", defaultColor).toString()));
+	setColorColureLines(			Vec3f(conf->value("color/colures_color", defaultColor).toString()));
+	setColorCircumpolarCircles(		Vec3f(conf->value("color/circumpolar_circles_color", defaultColor).toString()));
+	setColorUmbraCircle(			Vec3f(conf->value("color/umbra_circle_color", defaultColor).toString()));
+	setColorPenumbraCircle(		Vec3f(conf->value("color/penumbra_circle_color", defaultColor).toString()));
+	setColorCelestialJ2000Poles(		Vec3f(conf->value("color/celestial_J2000_poles_color", defaultColor).toString()));
+	setColorCelestialPoles(			Vec3f(conf->value("color/celestial_poles_color", defaultColor).toString()));
+	setColorZenithNadir(			Vec3f(conf->value("color/zenith_nadir_color", defaultColor).toString()));
+	setColorEclipticJ2000Poles(		Vec3f(conf->value("color/ecliptic_J2000_poles_color", defaultColor).toString()));
+	setColorEclipticPoles(			Vec3f(conf->value("color/ecliptic_poles_color", defaultColor).toString()));
+	setColorGalacticPoles(			Vec3f(conf->value("color/galactic_poles_color", defaultColor).toString()));
+	setColorGalacticCenter(			Vec3f(conf->value("color/galactic_center_color", defaultColor).toString()));
+	setColorSupergalacticPoles(		Vec3f(conf->value("color/supergalactic_poles_color", defaultColor).toString()));
+	setColorEquinoxJ2000Points(		Vec3f(conf->value("color/equinox_J2000_points_color", defaultColor).toString()));
+	setColorEquinoxPoints(			Vec3f(conf->value("color/equinox_points_color", defaultColor).toString()));
+	setColorSolsticeJ2000Points(		Vec3f(conf->value("color/solstice_J2000_points_color", defaultColor).toString()));
+	setColorSolsticePoints(			Vec3f(conf->value("color/solstice_points_color", defaultColor).toString()));
+	setColorAntisolarPoint(			Vec3f(conf->value("color/antisolar_point_color", defaultColor).toString()));
+	setColorApexPoints(			Vec3f(conf->value("color/apex_points_color", defaultColor).toString()));
 
 	StelApp& app = StelApp::getInstance();
 	connect(&app, SIGNAL(languageChanged()), this, SLOT(updateLabels()));
 	connect(&app, SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSizeFromApp(int)));
 	
 	QString displayGroup = N_("Display Options");
-	addAction("actionShow_Gridlines",                  displayGroup, N_("Grids and lines"), "gridlinesDisplayed");
-	addAction("actionShow_Equatorial_Grid",            displayGroup, N_("Equatorial grid"), "equatorGridDisplayed", "E");
-	addAction("actionShow_Azimuthal_Grid",             displayGroup, N_("Azimuthal grid"), "azimuthalGridDisplayed", "Z");
-	addAction("actionShow_Ecliptic_Line",              displayGroup, N_("Ecliptic line"), "eclipticLineDisplayed", ",");
-	addAction("actionShow_Ecliptic_J2000_Line",        displayGroup, N_("Ecliptic J2000 line"), "eclipticJ2000LineDisplayed");
-	addAction("actionShow_Invariable_Plane_Line",      displayGroup, N_("Invariable Plane line"), "invariablePlaneLineDisplayed");
-	addAction("actionShow_Solar_Equator_Line",         displayGroup, N_("Solar Equator Plane line"), "solarEquatorLineDisplayed");
-	addAction("actionShow_Equator_Line",               displayGroup, N_("Equator line"), "equatorLineDisplayed", ".");
-	addAction("actionShow_Equator_J2000_Line",         displayGroup, N_("Equator J2000 line"), "equatorJ2000LineDisplayed"); // or with Hotkey??
-	addAction("actionShow_Meridian_Line",              displayGroup, N_("Meridian line"), "meridianLineDisplayed", ";");
-	addAction("actionShow_Horizon_Line",               displayGroup, N_("Horizon line"), "horizonLineDisplayed", "H");
-	addAction("actionShow_Equatorial_J2000_Grid",      displayGroup, N_("Equatorial J2000 grid"), "equatorJ2000GridDisplayed");
-	addAction("actionShow_Ecliptic_J2000_Grid",        displayGroup, N_("Ecliptic J2000 grid"), "eclipticJ2000GridDisplayed");
-	addAction("actionShow_Ecliptic_Grid",              displayGroup, N_("Ecliptic grid"), "eclipticGridDisplayed");
-	addAction("actionShow_Galactic_Grid",              displayGroup, N_("Galactic grid"), "galacticGridDisplayed");
-	addAction("actionShow_Galactic_Equator_Line",      displayGroup, N_("Galactic equator"), "galacticEquatorLineDisplayed");
-	addAction("actionShow_Supergalactic_Grid",         displayGroup, N_("Supergalactic grid"), "supergalacticGridDisplayed");
+	addAction("actionShow_Gridlines",			displayGroup, N_("Grids and lines"), "gridlinesDisplayed");
+	addAction("actionShow_Equatorial_Grid",		displayGroup, N_("Equatorial grid"), "equatorGridDisplayed", "E");
+	addAction("actionShow_Azimuthal_Grid",		displayGroup, N_("Azimuthal grid"), "azimuthalGridDisplayed", "Z");
+	addAction("actionShow_Ecliptic_Line",			displayGroup, N_("Ecliptic line"), "eclipticLineDisplayed", ",");
+	addAction("actionShow_Ecliptic_J2000_Line",	displayGroup, N_("Ecliptic J2000 line"), "eclipticJ2000LineDisplayed");
+	addAction("actionShow_Invariable_Plane_Line",	displayGroup, N_("Invariable Plane line"), "invariablePlaneLineDisplayed");
+	addAction("actionShow_Solar_Equator_Line",	displayGroup, N_("Solar Equator Plane line"), "solarEquatorLineDisplayed");
+	addAction("actionShow_Equator_Line",			displayGroup, N_("Equator line"), "equatorLineDisplayed", ".");
+	addAction("actionShow_Equator_J2000_Line",	displayGroup, N_("Equator J2000 line"), "equatorJ2000LineDisplayed"); // or with Hotkey??
+	addAction("actionShow_Meridian_Line",			displayGroup, N_("Meridian line"), "meridianLineDisplayed", ";");
+	addAction("actionShow_Horizon_Line",			displayGroup, N_("Horizon line"), "horizonLineDisplayed", "H");
+	addAction("actionShow_Equatorial_J2000_Grid",	displayGroup, N_("Equatorial J2000 grid"), "equatorJ2000GridDisplayed");
+	addAction("actionShow_Ecliptic_J2000_Grid",	displayGroup, N_("Ecliptic J2000 grid"), "eclipticJ2000GridDisplayed");
+	addAction("actionShow_Ecliptic_Grid",			displayGroup, N_("Ecliptic grid"), "eclipticGridDisplayed");
+	addAction("actionShow_Galactic_Grid",			displayGroup, N_("Galactic grid"), "galacticGridDisplayed");
+	addAction("actionShow_Galactic_Equator_Line",	displayGroup, N_("Galactic equator"), "galacticEquatorLineDisplayed");
+	addAction("actionShow_Supergalactic_Grid",		displayGroup, N_("Supergalactic grid"), "supergalacticGridDisplayed");
 	addAction("actionShow_Supergalactic_Equator_Line", displayGroup, N_("Supergalactic equator"), "supergalacticEquatorLineDisplayed");
-	addAction("actionShow_Longitude_Line",             displayGroup, N_("Opposition/conjunction longitude line"), "longitudeLineDisplayed");
-	addAction("actionShow_Precession_Circles",         displayGroup, N_("Precession Circles"), "precessionCirclesDisplayed");
-	addAction("actionShow_Prime_Vertical_Line",        displayGroup, N_("Prime Vertical"), "primeVerticalLineDisplayed");
-	addAction("actionShow_Current_Vertical_Line",      displayGroup, N_("Current Vertical"), "currentVerticalLineDisplayed");
-	addAction("actionShow_Colure_Lines",               displayGroup, N_("Colure Lines"), "colureLinesDisplayed");
-	addAction("actionShow_Circumpolar_Circles",        displayGroup, N_("Circumpolar Circles"), "circumpolarCirclesDisplayed");
-	addAction("actionShow_Umbra_Circle",	           displayGroup, N_("Umbra Circle"), "umbraCircleDisplayed");
-	addAction("actionShow_Penumbra_Circle",	           displayGroup, N_("Penumbra Circle"), "penumbraCircleDisplayed");
-	addAction("actionShow_Celestial_J2000_Poles",      displayGroup, N_("Celestial J2000 poles"), "celestialJ2000PolesDisplayed");
-	addAction("actionShow_Celestial_Poles",            displayGroup, N_("Celestial poles"), "celestialPolesDisplayed");
-	addAction("actionShow_Zenith_Nadir",               displayGroup, N_("Zenith and nadir"), "zenithNadirDisplayed");
-	addAction("actionShow_Ecliptic_J2000_Poles",       displayGroup, N_("Ecliptic J2000 poles"), "eclipticJ2000PolesDisplayed");
-	addAction("actionShow_Ecliptic_Poles",             displayGroup, N_("Ecliptic poles"), "eclipticPolesDisplayed");
-	addAction("actionShow_Galactic_Poles",             displayGroup, N_("Galactic poles"), "galacticPolesDisplayed");
-	addAction("actionShow_Galactic_Center",            displayGroup, N_("Galactic center and anticenter"), "galacticCenterDisplayed");
-	addAction("actionShow_Supergalactic_Poles",        displayGroup, N_("Supergalactic poles"), "supergalacticPolesDisplayed");
-	addAction("actionShow_Equinox_J2000_Points",       displayGroup, N_("Equinox J2000 points"), "equinoxJ2000PointsDisplayed");
-	addAction("actionShow_Equinox_Points",             displayGroup, N_("Equinox points"), "equinoxPointsDisplayed");
-	addAction("actionShow_Solstice_J2000_Points",      displayGroup, N_("Solstice J2000 points"), "solsticeJ2000PointsDisplayed");
-	addAction("actionShow_Solstice_Points",            displayGroup, N_("Solstice points"), "solsticePointsDisplayed");
-	addAction("actionShow_Antisolar_Point",            displayGroup, N_("Antisolar point"), "antisolarPointDisplayed");
-	addAction("actionShow_Apex_Points",                displayGroup, N_("Apex points"), "apexPointsDisplayed");
+	addAction("actionShow_Longitude_Line",		displayGroup, N_("Opposition/conjunction longitude line"), "longitudeLineDisplayed");
+	addAction("actionShow_Precession_Circles",		displayGroup, N_("Precession Circles"), "precessionCirclesDisplayed");
+	addAction("actionShow_Prime_Vertical_Line",	displayGroup, N_("Prime Vertical"), "primeVerticalLineDisplayed");
+	addAction("actionShow_Current_Vertical_Line",	displayGroup, N_("Current Vertical"), "currentVerticalLineDisplayed");
+	addAction("actionShow_Colure_Lines",			displayGroup, N_("Colure Lines"), "colureLinesDisplayed");
+	addAction("actionShow_Circumpolar_Circles",	displayGroup, N_("Circumpolar Circles"), "circumpolarCirclesDisplayed");
+	addAction("actionShow_Umbra_Circle",			displayGroup, N_("Umbra Circle"), "umbraCircleDisplayed");
+	addAction("actionShow_Penumbra_Circle",		displayGroup, N_("Penumbra Circle"), "penumbraCircleDisplayed");
+	addAction("actionShow_Celestial_J2000_Poles",	displayGroup, N_("Celestial J2000 poles"), "celestialJ2000PolesDisplayed");
+	addAction("actionShow_Celestial_Poles",		displayGroup, N_("Celestial poles"), "celestialPolesDisplayed");
+	addAction("actionShow_Zenith_Nadir",			displayGroup, N_("Zenith and nadir"), "zenithNadirDisplayed");
+	addAction("actionShow_Ecliptic_J2000_Poles",	displayGroup, N_("Ecliptic J2000 poles"), "eclipticJ2000PolesDisplayed");
+	addAction("actionShow_Ecliptic_Poles",			displayGroup, N_("Ecliptic poles"), "eclipticPolesDisplayed");
+	addAction("actionShow_Galactic_Poles",		displayGroup, N_("Galactic poles"), "galacticPolesDisplayed");
+	addAction("actionShow_Galactic_Center",		displayGroup, N_("Galactic center and anticenter"), "galacticCenterDisplayed");
+	addAction("actionShow_Supergalactic_Poles",	displayGroup, N_("Supergalactic poles"), "supergalacticPolesDisplayed");
+	addAction("actionShow_Equinox_J2000_Points",	displayGroup, N_("Equinox J2000 points"), "equinoxJ2000PointsDisplayed");
+	addAction("actionShow_Equinox_Points",		displayGroup, N_("Equinox points"), "equinoxPointsDisplayed");
+	addAction("actionShow_Solstice_J2000_Points",	displayGroup, N_("Solstice J2000 points"), "solsticeJ2000PointsDisplayed");
+	addAction("actionShow_Solstice_Points",		displayGroup, N_("Solstice points"), "solsticePointsDisplayed");
+	addAction("actionShow_Antisolar_Point",		displayGroup, N_("Antisolar point"), "antisolarPointDisplayed");
+	addAction("actionShow_Umbra_Center_Point",	displayGroup, N_("The center of the Earth's umbra"), "umbraCenterPointDisplayed");
+	addAction("actionShow_Apex_Points",			displayGroup, N_("Apex points"), "apexPointsDisplayed");
 }
 
 void GridLinesMgr::connectSolarSystem()
@@ -1900,6 +1938,7 @@ void GridLinesMgr::update(double deltaTime)
 	solsticeJ2000Points->update(deltaTime);
 	solsticePoints->update(deltaTime);
 	antisolarPoint->update(deltaTime);
+	umbraCenterPoint->update(deltaTime);
 	apexPoints->update(deltaTime);
 	apexPoints->updateLabel();	
 }
@@ -1932,6 +1971,7 @@ void GridLinesMgr::draw(StelCore* core)
 		equinoxPoints->draw(core);
 		solsticePoints->draw(core);
 		longitudeLine->draw(core);
+		umbraCenterPoint->draw(core);
 	}
 
 	// Lines after grids, to be able to e.g. draw equators in different color!
@@ -1958,7 +1998,7 @@ void GridLinesMgr::draw(StelCore* core)
 	equinoxJ2000Points->draw(core);
 	solsticeJ2000Points->draw(core);	
 	apexPoints->draw(core);	
-	antisolarPoint->draw(core);
+	antisolarPoint->draw(core);	
 }
 
 void GridLinesMgr::updateLabels()
@@ -1997,6 +2037,7 @@ void GridLinesMgr::updateLabels()
 	solsticeJ2000Points->updateLabel();
 	solsticePoints->updateLabel();
 	antisolarPoint->updateLabel();
+	umbraCenterPoint->updateLabel();
 	apexPoints->updateLabel();	
 }
 
@@ -2066,7 +2107,8 @@ void GridLinesMgr::setFlagAllPoints(const bool displayed)
 	setFlagSupergalacticPoles(displayed);
 	setFlagCelestialJ2000Poles(displayed);
 	setFlagSolsticeJ2000Points(displayed);
-	setFlagApexPoints(displayed);	
+	setFlagApexPoints(displayed);
+	setFlagUmbraCenterPoint(displayed);
 }
 
 //! Set flag for displaying Azimuthal Grid
@@ -3113,6 +3155,7 @@ void GridLinesMgr::setColorUmbraCircle(const Vec3f& newColor)
 	if(newColor != umbraCircle->getColor())
 	{
 		umbraCircle->setColor(newColor);
+		umbraCenterPoint->setColor(newColor);
 		emit umbraCircleColorChanged(newColor);
 	}
 }
@@ -3495,6 +3538,19 @@ void GridLinesMgr::setColorAntisolarPoint(const Vec3f& newColor)
 	}
 }
 
+void GridLinesMgr::setFlagUmbraCenterPoint(const bool displayed)
+{
+	if(displayed != umbraCenterPoint->isDisplayed())
+	{
+		umbraCenterPoint->setDisplayed(displayed);
+		emit umbraCenterPointDisplayedChanged(displayed);
+	}
+}
+bool GridLinesMgr::getFlagUmbraCenterPoint() const
+{
+	return umbraCenterPoint->isDisplayed();
+}
+
 //! Set flag for displaying vector point
 void GridLinesMgr::setFlagApexPoints(const bool displayed)
 {
@@ -3650,5 +3706,6 @@ void GridLinesMgr::setFontSizeFromApp(int size)
 	equinoxPoints->setFontSize(pointFontSize);
 	solsticeJ2000Points->setFontSize(pointFontSize);
 	solsticePoints->setFontSize(pointFontSize);
-	apexPoints->setFontSize(pointFontSize);	
+	apexPoints->setFontSize(pointFontSize);
+	umbraCenterPoint->setFontSize(pointFontSize);
 }

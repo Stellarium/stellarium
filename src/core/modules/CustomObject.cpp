@@ -29,19 +29,21 @@
 #include "StelModuleMgr.hpp"
 #include "StelProjector.hpp"
 #include "StelUtils.hpp"
+#include "Planet.hpp"
 
 const QString CustomObject::CUSTOMOBJECT_TYPE = QStringLiteral("CustomObject");
 Vec3f CustomObject::markerColor = Vec3f(0.1f,1.0f,0.1f);
 float CustomObject::markerSize = 1.f;
 float CustomObject::selectPriority = 0.f;
 
-CustomObject::CustomObject(const QString& codesignation, const Vec3d& coordinates, const bool isVisible)
+CustomObject::CustomObject(const QString& codesignation, const Vec3d& coordJ2000, const bool isVisible)
 	: initialized(false)
-	, XYZ(coordinates)
+	, XYZ(coordJ2000)
 	, markerTexture(Q_NULLPTR)
 	, designation(codesignation)
 	, isMarker(isVisible)
 {
+	XYZ.normalize();
 	markerTexture = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/cross.png");	
 	initialized = true;
 }
@@ -90,6 +92,7 @@ QString CustomObject::getInfoString(const StelCore* core, const InfoStringGroup&
 
 	// Ra/Dec etc.
 	oss << getCommonInfoString(core, flags);
+	oss << getSolarLunarInfoString(core, flags);
 	postProcessInfoString(str, flags);
 	return str;
 }
@@ -97,6 +100,12 @@ QString CustomObject::getInfoString(const StelCore* core, const InfoStringGroup&
 Vec3f CustomObject::getInfoColor(void) const
 {
 	return Vec3f(1.f, 1.f, 1.f);
+}
+
+Vec3d CustomObject::getJ2000EquatorialPos(const StelCore* core) const
+{
+	Q_UNUSED(core)
+	return XYZ;
 }
 
 float CustomObject::getVMagnitude(const StelCore* core) const
@@ -108,11 +117,6 @@ float CustomObject::getVMagnitude(const StelCore* core) const
 		return 99.f;
 }
 
-double CustomObject::getAngularSize(const StelCore*) const
-{
-	return 0.00001;
-}
-
 void CustomObject::update(double deltaTime)
 {
 	labelsFader.update(static_cast<int>(deltaTime*1000));
@@ -120,10 +124,9 @@ void CustomObject::update(double deltaTime)
 
 void CustomObject::draw(StelCore* core, StelPainter *painter)
 {
-	Q_UNUSED(core);
 	Vec3d pos;
 	// Check visibility of custom object
-	if (!(painter->getProjector()->projectCheck(XYZ, pos)))
+	if (!(painter->getProjector()->projectCheck(getJ2000EquatorialPos(core), pos)))
 		return;
 
 	painter->setBlending(true, GL_ONE, GL_ONE);
@@ -132,8 +135,7 @@ void CustomObject::draw(StelCore* core, StelPainter *painter)
 	if (isMarker)
 	{
 		markerTexture->bind();
-		const float size = static_cast<float>(getAngularSize(Q_NULLPTR))*M_PI_180f*painter->getProjector()->getPixelPerRadAtCenter();
-		const float shift = markerSize + size/1.6f;
+		const float shift = markerSize + 2.f;
 
 		painter->drawSprite2dMode(static_cast<float>(pos[0]), static_cast<float>(pos[1]), markerSize);
 

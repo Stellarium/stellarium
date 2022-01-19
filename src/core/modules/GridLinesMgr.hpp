@@ -180,6 +180,8 @@ class GridLinesMgr : public StelModule
 	Q_PROPERTY(bool antisolarPointDisplayed		READ getFlagAntisolarPoint	WRITE setFlagAntisolarPoint		NOTIFY antisolarPointDisplayedChanged)
 	Q_PROPERTY(Vec3f antisolarPointColor		READ getColorAntisolarPoint	WRITE setColorAntisolarPoint		NOTIFY antisolarPointColorChanged)
 
+	Q_PROPERTY(bool umbraCenterPointDisplayed		READ getFlagUmbraCenterPoint	WRITE setFlagUmbraCenterPoint		NOTIFY umbraCenterPointDisplayedChanged)
+
 	Q_PROPERTY(bool apexPointsDisplayed		READ getFlagApexPoints		WRITE setFlagApexPoints			NOTIFY apexPointsDisplayedChanged)
 	Q_PROPERTY(Vec3f apexPointsColor		READ getColorApexPoints		WRITE setColorApexPoints		NOTIFY apexPointsColorChanged)
 
@@ -872,6 +874,11 @@ public slots:
 	//! @endcode
 	void setColorAntisolarPoint(const Vec3f& newColor);
 
+	//! Setter for displaying the point of the center of umbra.
+	void setFlagUmbraCenterPoint(const bool displayed);
+	//! Accessor for displaying the point of the center of umbra.
+	bool getFlagUmbraCenterPoint() const;
+
 	//! Setter for displaying the Apex and Antapex points, i.e. where the observer planet is heading to or coming from, respectively
 	void setFlagApexPoints(const bool displayed);
 	//! Accessor for displaying Apex/Antapex points.
@@ -1008,6 +1015,7 @@ signals:
 	void solsticePointsColorChanged(const Vec3f & newColor) const;
 	void antisolarPointDisplayedChanged(const bool displayed) const;
 	void antisolarPointColorChanged(const Vec3f & newColor) const;
+	void umbraCenterPointDisplayedChanged(const bool displayed) const;
 	void apexPointsDisplayedChanged(const bool displayed) const;
 	void apexPointsColorChanged(const Vec3f & newColor) const;	
 
@@ -1023,27 +1031,27 @@ private slots:
 	void setFontSizeFromApp(int size);
 
 private:
-	QSharedPointer<Planet> earth;		// shortcut Earth pointer. Must be reconnected whenever solar system has been reloaded.
-	bool gridlinesDisplayed;		// master switch to switch off all grids/lines. (useful for oculars plugin)
-	SkyGrid * equGrid;			// Equatorial grid
+	QSharedPointer<Planet> earth;	// shortcut Earth pointer. Must be reconnected whenever solar system has been reloaded.
+	bool gridlinesDisplayed;			// master switch to switch off all grids/lines. (useful for oculars plugin)
+	SkyGrid * equGrid;				// Equatorial grid
 	SkyGrid * equJ2000Grid;			// Equatorial J2000 grid
 	SkyGrid * galacticGrid;			// Galactic grid
 	SkyGrid * supergalacticGrid;		// Supergalactic grid
-	SkyGrid * eclGrid;			// Ecliptic of Date grid
+	SkyGrid * eclGrid;				// Ecliptic of Date grid
 	SkyGrid * eclJ2000Grid;			// Ecliptic J2000 grid
-	SkyGrid * aziGrid;			// Azimuthal grid
+	SkyGrid * aziGrid;				// Azimuthal grid
 	SkyLine * equatorLine;			// Celestial Equator line
 	SkyLine * equatorJ2000Line;		// Celestial Equator line of J2000
 	SkyLine * eclipticLine;			// Ecliptic line
 	SkyLine * eclipticJ2000Line;		// Ecliptic line of J2000
-	SkyLine * invariablePlaneLine;		// Invariable Plane of the Solar System (WGCCRE2015 report)
+	SkyLine * invariablePlaneLine;	// Invariable Plane of the Solar System (WGCCRE2015 report)
 	SkyLine * solarEquatorLine;		// Projected Solar equator (WGCCRE2015 report)
 	SkyLine * precessionCircleN;		// Northern precession circle
 	SkyLine * precessionCircleS;		// Southern precession circle
 	SkyLine * meridianLine;			// Meridian line
-	SkyLine * longitudeLine;		// Opposition/conjunction longitude line
+	SkyLine * longitudeLine;			// Opposition/conjunction longitude line
 	SkyLine * horizonLine;			// Horizon line
-	SkyLine * galacticEquatorLine;		// line depicting the Galactic equator as defined by the IAU definition of Galactic coordinates (System II, 1958)
+	SkyLine * galacticEquatorLine;	// line depicting the Galactic equator as defined by the IAU definition of Galactic coordinates (System II, 1958)
 	SkyLine * supergalacticEquatorLine;	// line depicting the Supergalactic equator
 	SkyLine * primeVerticalLine;		// Prime Vertical line
 	SkyLine * currentVerticalLine;		// Vertical line for azimuth of display center. Most useful if altitudes labeled.
@@ -1053,19 +1061,20 @@ private:
 	SkyLine * circumpolarCircleS;		// Southern circumpolar circle
 	SkyLine * umbraCircle;			// Umbra circle (Earth shadow in Lunar distance)
 	SkyLine * penumbraCircle;		// Penumbra circle (Earth partial shadow in Lunar distance)
-	SkyPoint * celestialJ2000Poles;		// Celestial poles of J2000
+	SkyPoint * celestialJ2000Poles;	// Celestial poles of J2000
 	SkyPoint * celestialPoles;		// Celestial poles
 	SkyPoint * zenithNadir;			// Zenith and nadir
 	SkyPoint * eclipticJ2000Poles;		// Ecliptic poles of J2000
-	SkyPoint * eclipticPoles;		// Ecliptic poles
-	SkyPoint * galacticPoles;		// Galactic poles
+	SkyPoint * eclipticPoles;			// Ecliptic poles
+	SkyPoint * galacticPoles;			// Galactic poles
 	SkyPoint * galacticCenter;		// Galactic center and anticenter
-	SkyPoint * supergalacticPoles;		// Supergalactic poles
-	SkyPoint * equinoxJ2000Points;		// Equinox points of J2000
+	SkyPoint * supergalacticPoles;	// Supergalactic poles
+	SkyPoint * equinoxJ2000Points;	// Equinox points of J2000
 	SkyPoint * equinoxPoints;		// Equinox points
-	SkyPoint * solsticeJ2000Points;		// Solstice points of J2000
+	SkyPoint * solsticeJ2000Points;	// Solstice points of J2000
 	SkyPoint * solsticePoints;		// Solstice points
 	SkyPoint * antisolarPoint;		// Antisolar point
+	SkyPoint * umbraCenterPoint;		// The point of the center of umbra
 	SkyPoint * apexPoints;			// Apex and Antapex points, i.e. the point where the observer planet is moving to or receding from	
 };
 

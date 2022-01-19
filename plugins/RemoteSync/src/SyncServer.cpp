@@ -31,7 +31,7 @@ Q_LOGGING_CATEGORY(syncServer,"stel.plugin.remoteSync.server")
 
 using namespace SyncProtocol;
 
-SyncServer::SyncServer(QObject* parent)
+SyncServer::SyncServer(QObject* parent, bool allowVersionMismatch)
 	: QObject(parent), stopping(false), timeoutTimerId(-1)
 {
 	qserver = new QTcpServer(this);
@@ -41,7 +41,7 @@ SyncServer::SyncServer(QObject* parent)
 	//create message handlers
 	handlerList.resize(MSGTYPE_SIZE);
 	handlerList[ERROR] =  new ServerErrorHandler();
-	handlerList[CLIENT_CHALLENGE_RESPONSE] = new ServerAuthHandler(this, false);
+	handlerList[CLIENT_CHALLENGE_RESPONSE] = new ServerAuthHandler(this, allowVersionMismatch);
 	handlerList[ALIVE] = new ServerAliveHandler();
 }
 

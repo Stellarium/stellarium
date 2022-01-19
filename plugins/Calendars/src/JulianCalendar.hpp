@@ -39,6 +39,7 @@ public:
 
 	virtual ~JulianCalendar() Q_DECL_OVERRIDE {}
 
+public slots:
 	virtual void retranslate() Q_DECL_OVERRIDE;
 
 	//! Set a calendar date from the Julian day number
@@ -55,6 +56,7 @@ public:
 	//! get a formatted complete string for a date
 	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
+public:
 	//! return name of week day. This is actually independent from any calendar, just a modulo of JD.
 	static QString weekday(double jd);
 

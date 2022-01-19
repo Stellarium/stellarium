@@ -36,6 +36,7 @@ class QDoubleSpinBox;
 class QSlider;
 class StelAction;
 class QToolButton;
+class AngleSpinBox;
 
 //! Base class for all the GUI windows in Stellarium.
 //! 
@@ -126,17 +127,20 @@ protected:
 	//! You should call something like setInputMask("009") for a 3-place numerical field.
 	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
 	//! to the required datatype, the application will crash
+	//Q_DECL_DEPRECATED_X("Use functor-based connections. https://doc.qt.io/qt-5/signalsandslots-syntaxes.html")
 	static void connectIntProperty(QLineEdit* lineEdit, const QString& propName);
 	//! Helper function to connect a QSpinBox to an integer StelProperty.
 	//! @note This method also works with flag/enum types
 	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
 	//! to the required datatype, the application will crash
+	//Q_DECL_DEPRECATED_X("Use functor-based connections. https://doc.qt.io/qt-5/signalsandslots-syntaxes.html")
 	static void connectIntProperty(QSpinBox* spinBox, const QString& propName);
 	//! Helper function to connect a QComboBox to an integer StelProperty.
 	//! The property is mapped to the selected index of the combobox.
 	//! @note This method also works with flag/enum types
 	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
 	//! to the required datatype, the application will crash
+	//Q_DECL_DEPRECATED_X("Use functor-based connections. https://doc.qt.io/qt-5/signalsandslots-syntaxes.html")
 	static void connectIntProperty(QComboBox* comboBox, const QString& propName);
 	//! Helper function to connect a QSlider to an double or float StelProperty
 	//! @param slider The slider which should be connected
@@ -145,11 +149,18 @@ protected:
 	//! @param maxValue the int value associated with the maximal slider position
 	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
 	//! to the required datatype, the application will crash
+	//Q_DECL_DEPRECATED_X("Use functor-based connections. https://doc.qt.io/qt-5/signalsandslots-syntaxes.html")
 	static void connectIntProperty(QSlider* slider, const QString& propName, int minValue, int maxValue);
 	//! Helper function to connect a QDoubleSpinBox to an double or float StelProperty
 	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
 	//! to the required datatype, the application will crash
+	//Q_DECL_DEPRECATED_X("Use functor-based connections. https://doc.qt.io/qt-5/signalsandslots-syntaxes.html")
 	static void connectDoubleProperty(QDoubleSpinBox* spinBox, const QString& propName);
+	//! Helper function to connect an AngleSpinBox to a double or float StelProperty representing decimal degrees
+	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
+	//! to the required datatype, the application will crash
+	//Q_DECL_DEPRECATED_X("Use functor-based connections. https://doc.qt.io/qt-5/signalsandslots-syntaxes.html")
+	static void connectDoubleProperty(AngleSpinBox* spinBox, const QString& propName);
 	//! Helper function to connect a QSlider to an double or float StelProperty
 	//! @param slider The slider which should be connected
 	//! @param propName The id of the StelProperty which should be connected
@@ -157,22 +168,31 @@ protected:
 	//! @param maxValue the double value associated with the maximal slider position
 	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
 	//! to the required datatype, the application will crash
+	//Q_DECL_DEPRECATED_X("Use functor-based connections. https://doc.qt.io/qt-5/signalsandslots-syntaxes.html")
 	static void connectDoubleProperty(QSlider* slider, const QString& propName, double minValue, double maxValue);
 
-	//! Helper function to connect a QComboBox to an QString StelProperty.
+	//! Helper function to connect a QComboBox to a QString StelProperty.
 	//! The property is mapped to the selected string of the combobox.
 	//! Make sure the string is available in the Combobox, else the first element may be chosen.
 	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
 	//! to the required datatype, the application will crash
+	//Q_DECL_DEPRECATED_X("Use functor-based connections. https://doc.qt.io/qt-5/signalsandslots-syntaxes.html")
 	static void connectStringProperty(QComboBox *comboBox, const QString &propName);
+	//! Helper function to connect a QLineEdit to a QString StelProperty.
+	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
+	//! to the required datatype, the application will crash
+	//Q_DECL_DEPRECATED_X("Use functor-based connections. https://doc.qt.io/qt-5/signalsandslots-syntaxes.html")
+	static void connectStringProperty(QLineEdit *lineEdit, const QString &propName);
 
 	//! Helper function to connect a checkbox to a bool StelProperty
 	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
 	//! to the required datatype, the application will crash
+	//Q_DECL_DEPRECATED_X("Use functor-based connections. https://doc.qt.io/qt-5/signalsandslots-syntaxes.html")
 	static void connectBoolProperty(QAbstractButton* checkBox, const QString& propName);
 	//! Helper function to connect a groupbox to a bool StelProperty
 	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
 	//! to the required datatype, the application will crash
+	//Q_DECL_DEPRECATED_X("Use functor-based connections. https://doc.qt.io/qt-5/signalsandslots-syntaxes.html")
 	static void connectBoolProperty(QGroupBox *checkBox, const QString &propName);
 
 	//! Prepare a QToolButton so that it can receive and handle askColor() connections properly.
@@ -183,8 +203,6 @@ protected:
 	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
 	//! to the required datatype, the application will crash
 	void connectColorButton(QToolButton* button, QString propertyName, QString iniName, QString moduleName="");
-
-	bool askConfirmation();
 
 	//! The main dialog
 	QWidget* dialog;
@@ -197,6 +215,7 @@ protected:
 	QList<QWidget *> kineticScrollingList;
 
 protected slots:
+	bool askConfirmation();
 	//! To be called by a connected QToolButton with a color background.
 	//! This QToolButton needs properties "propName" and "iniName" which should be prepared using connectColorButton().
 	void askColor();
@@ -205,8 +224,7 @@ protected slots:
 	//! connect from StelApp to handle font and font size changes.
 	void handleFontChanged();
 
-private slots:
-	void updateNightModeProperty();
+	virtual void updateNightModeProperty(bool n);
 };
 
 class CustomProxy : public QGraphicsProxyWidget

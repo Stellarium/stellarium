@@ -19,6 +19,7 @@
 
 
 #include "VecMath.hpp"
+#include <QRegularExpression>
 
 // Here are a few variant constructors and functions which gcc cannot inline and therefore would cause link errors if included in the VecMath.hpp.
 
@@ -95,12 +96,13 @@ template<> Vec3d::Vector3(QColor c) : Vector3{c.redF(), c.greenF(), c.blueF()}{}
 
 template<> Vec3i Vector3<int>::setFromHtmlColor(QString s)
 {
-	QRegExp re("^#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$");
-	if (re.exactMatch(s))
+	QRegularExpression re("^#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$");
+	QRegularExpressionMatch reMatch=re.match(s);
+	if (reMatch.hasMatch())
 	{
-		v[0] = re.capturedTexts().at(1).toInt(Q_NULLPTR, 16);
-		v[1] = re.capturedTexts().at(2).toInt(Q_NULLPTR, 16);
-		v[2] = re.capturedTexts().at(3).toInt(Q_NULLPTR, 16);
+		v[0] = reMatch.captured(1).toInt(Q_NULLPTR, 16);
+		v[1] = reMatch.captured(2).toInt(Q_NULLPTR, 16);
+		v[2] = reMatch.captured(3).toInt(Q_NULLPTR, 16);
 	}
 	else
 	{
@@ -113,14 +115,15 @@ template<> Vec3i Vector3<int>::setFromHtmlColor(QString s)
 
 template<> Vec3f Vector3<float>::setFromHtmlColor(QString s)
 {
-	QRegExp re("^#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$");
-	if (re.exactMatch(s))
+	QRegularExpression re("^#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$");
+	QRegularExpressionMatch reMatch=re.match(s);
+	if (reMatch.hasMatch())
 	{
-		int i = re.capturedTexts().at(1).toInt(Q_NULLPTR, 16);
+		int i = reMatch.captured(1).toInt(Q_NULLPTR, 16);
 		v[0] = static_cast<float>(i) / 255.f;
-		i = re.capturedTexts().at(2).toInt(Q_NULLPTR, 16);
+		i = reMatch.captured(2).toInt(Q_NULLPTR, 16);
 		v[1] = static_cast<float>(i) / 255.f;
-		i = re.capturedTexts().at(3).toInt(Q_NULLPTR, 16);
+		i = reMatch.captured(3).toInt(Q_NULLPTR, 16);
 		v[2] = static_cast<float>(i) / 255.f;
 	}
 	else
@@ -134,14 +137,15 @@ template<> Vec3f Vector3<float>::setFromHtmlColor(QString s)
 
 template<> Vec3d Vector3<double>::setFromHtmlColor(QString s)
 {
-	QRegExp re("^#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$");
-	if (re.exactMatch(s))
+	QRegularExpression re("^#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$");
+	QRegularExpressionMatch reMatch=re.match(s);
+	if (reMatch.hasMatch())
 	{
-		int i = re.capturedTexts().at(1).toInt(Q_NULLPTR, 16);
+		int i = reMatch.captured(1).toInt(Q_NULLPTR, 16);
 		v[0] = static_cast<double>(i) / 255.;
-		i = re.capturedTexts().at(2).toInt(Q_NULLPTR, 16);
+		i = reMatch.captured(2).toInt(Q_NULLPTR, 16);
 		v[1] = static_cast<double>(i) / 255.;
-		i = re.capturedTexts().at(3).toInt(Q_NULLPTR, 16);
+		i = reMatch.captured(3).toInt(Q_NULLPTR, 16);
 		v[2] = static_cast<double>(i) / 255.;
 	}
 	else

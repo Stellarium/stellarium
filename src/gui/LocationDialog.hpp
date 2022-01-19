@@ -48,8 +48,6 @@ protected:
 	virtual void createDialogContent() Q_DECL_OVERRIDE;
 	Ui_locationDialogForm* ui;
 
-	//void resizePixmap();
-	
 private:
 	//! Set the values of all the fields from a location info
 	//! Also move the observer to this position
@@ -73,11 +71,11 @@ private:
 	//! item.
 	void populatePlanetList();
 
-	//! Populates the drop-down list of countries.
+	//! Populates the drop-down list of regions.
 	//! The displayed names are localized in the current interface language.
 	//! The original names are kept in the user data field of each QComboBox
 	//! item.
-	void populateCountryList();
+	void populateRegionList(const QString& planet = "");
 
 	//! Populates the drop-down list of time zones.
 	//! The displayed names are localized in the current interface language.
@@ -125,8 +123,8 @@ private slots:
 	//! Called when the user clicks on the delete button
 	void deleteCurrentLocationFromList();
 
-	//! filter city list to show entries from single country only
-	void filterSitesByCountry();
+	//! filter city list to show entries from single region only
+	void filterSitesByRegion();
 
 	//! reset city list to complete list (may have been reduced to picked list)
 	void resetLocationList();

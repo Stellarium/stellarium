@@ -104,8 +104,6 @@ class SearchDialog : public StelDialog
 	Q_PROPERTY(bool simbadGetTypes  READ getSimbadGetsTypes  WRITE setSimbadGetsTypes  NOTIFY simbadGetsTypesChanged)
 	Q_PROPERTY(bool simbadGetDims   READ getSimbadGetsDims   WRITE setSimbadGetsDims   NOTIFY simbadGetsDimsChanged)
 
-	Q_ENUMS(CoordinateSystem)
-
 public:
 	//! Available coordinate systems
 	enum CoordinateSystem
@@ -118,6 +116,7 @@ public:
 		ecliptic,
 		eclipticJ2000
 	};
+	Q_ENUM(CoordinateSystem)
 
 	SearchDialog(QObject* parent);
 	virtual ~SearchDialog() Q_DECL_OVERRIDE;
@@ -145,6 +144,8 @@ signals:
 
 public slots:
 	virtual void retranslate() Q_DECL_OVERRIDE;
+	//! On the first call with "true" populates the window contents. Also sets focus to entry line.
+	virtual void setVisible(bool v) Q_DECL_OVERRIDE;
 	//! This style only displays the text search field and the search button
 	void setSimpleStyle();
 

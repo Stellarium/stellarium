@@ -32,6 +32,7 @@ public:
 
 	virtual ~MayaLongCountCalendar() Q_DECL_OVERRIDE {}
 
+public slots:
 	virtual void retranslate() Q_DECL_OVERRIDE {}
 
 	//! Set a calendar date from the Julian day number
@@ -48,6 +49,7 @@ public:
 	//! get a formatted complete string for a date
 	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
+public:
 	//! get RD date from Long Count date
 	static int fixedFromMayanLongCount(QVector<int> longCount);
 	//! get Long Count date from RD date
