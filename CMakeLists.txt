@@ -88,12 +88,13 @@ SET(STELLARIUM_RELEASE_BUILD 0 CACHE BOOL "Set 1 to build as an official release
 IF(STELLARIUM_RELEASE_BUILD)
      ADD_DEFINITIONS(-DSTELLARIUM_RELEASE_BUILD)
      SET(SERIES "${STELLARIUM_MAJOR}.${STELLARIUM_MINOR}")
+     MESSAGE(STATUS "Building Stellarium ${PACKAGE_VERSION} (Mode: ${CMAKE_BUILD_TYPE})")
 ELSE()
      SET(SERIES "head")
      ########### Get revision number for non-release builds ###########
      # Hack until CMake detection for Git is finished
      IF(WIN32)
-          FIND_FILE(GITCMD git.exe)
+          FIND_FILE(GITCMD git.exe)          
      ELSE()
           FIND_FILE(GITCMD git)
      ENDIF()
@@ -107,9 +108,13 @@ ELSE()
           # get the name of latest annotated tag
           EXECUTE_PROCESS(COMMAND ${GITCMD} describe --tags --abbrev=0 WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_TAGS OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
           # get the count of commits between latest release (we use tags for releases) and current HEAD
-          EXECUTE_PROCESS(COMMAND ${GITCMD} log ${GIT_TAGS}..HEAD --pretty=oneline COMMAND wc -l WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_COMMITS OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
+          IF(WIN32)
+               EXECUTE_PROCESS(COMMAND ${GITCMD} log ${GIT_TAGS}..HEAD --pretty=oneline COMMAND find /c /v "" WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_COMMITS OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
+          ELSE()
+               EXECUTE_PROCESS(COMMAND ${GITCMD} log ${GIT_TAGS}..HEAD --pretty=oneline COMMAND wc -l WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_COMMITS OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
+          ENDIF()
           # remove all whitespaces
-          STRING(REPLACE " " "" GIT_COMMITS ${GIT_COMMITS})
+          STRING(STRIP GIT_COMMITS "${GIT_COMMITS}")
           IF(GIT_REVISION)
                # Let's use short hash in all cases
                STRING(SUBSTRING ${GIT_REVISION} 0 7 REVISION)
@@ -129,9 +134,8 @@ ELSE()
           SET(PACKAGE_VERSION "${STELLARIUM_VERSION}")
           ADD_DEFINITIONS(-DSTELLARIUM_VERSION="${STELLARIUM_VERSION}")
      ENDIF()
-     #MESSAGE(STATUS "Full version of Stellarium ${WINDOWS_PACKAGE_VERSION}")
+     MESSAGE(STATUS "Building Stellarium ${PACKAGE_VERSION} [${WINDOWS_PACKAGE_VERSION}] (Mode: ${CMAKE_BUILD_TYPE})")
 ENDIF()
-MESSAGE(STATUS "Building Stellarium ${PACKAGE_VERSION} (Mode: ${CMAKE_BUILD_TYPE})")
 
 # Write version and series of Stellarium to Stellarium User Guide
 CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/version.tex.cmake ${PROJECT_SOURCE_DIR}/guide/version.tex @ONLY NEWLINE_STYLE LF)
