@@ -218,7 +218,7 @@ void SolarSystem::init()
 	setOrbitColorStyle(conf->value("astro/planets_orbits_color_style", "one_color").toString());
 
 	// Settings for calculation of position of Great Red Spot on Jupiter
-	setFlagCustomGrsSettings(conf->value("astro/flag_grs_custom", false).toBool());
+//	setFlagCustomGrsSettings(conf->value("astro/flag_grs_custom", false).toBool());
 	setCustomGrsLongitude(conf->value("astro/grs_longitude", 216).toInt());
 	setCustomGrsDrift(conf->value("astro/grs_drift", 15.).toDouble());
 	setCustomGrsJD(conf->value("astro/grs_jd", 2456901.5).toDouble());
@@ -3081,18 +3081,18 @@ int SolarSystem::getOrbitsThickness() const
 }
 
 
-void SolarSystem::setFlagCustomGrsSettings(bool b)
-{
-	RotationElements::flagCustomGrsSettings=b;
-	// automatic saving of the setting
-	conf->setValue("astro/flag_grs_custom", b);
-	emit flagCustomGrsSettingsChanged(b);
-}
-
-bool SolarSystem::getFlagCustomGrsSettings() const
-{
-	return RotationElements::flagCustomGrsSettings;
-}
+//void SolarSystem::setFlagCustomGrsSettings(bool b)
+//{
+//	RotationElements::flagCustomGrsSettings=b;
+//	// automatic saving of the setting
+//	conf->setValue("astro/flag_grs_custom", b);
+//	emit flagCustomGrsSettingsChanged(b);
+//}
+//
+//bool SolarSystem::getFlagCustomGrsSettings() const
+//{
+//	return RotationElements::flagCustomGrsSettings;
+//}
 
 void SolarSystem::setCustomGrsLongitude(int longitude)
 {

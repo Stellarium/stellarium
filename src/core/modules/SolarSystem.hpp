@@ -100,7 +100,7 @@ class SolarSystem : public StelObjectModule
 	Q_PROPERTY(bool ephemerisScaleMarkersDisplayed	READ getFlagEphemerisScaleMarkers	WRITE setFlagEphemerisScaleMarkers	NOTIFY ephemerisScaleMarkersChanged)
 	Q_PROPERTY(bool ephemerisAlwaysOn		READ getFlagEphemerisAlwaysOn		WRITE setFlagEphemerisAlwaysOn		NOTIFY ephemerisAlwaysOnChanged)
 	// Great Red Spot (GRS) properties
-	Q_PROPERTY(bool flagCustomGrsSettings		READ getFlagCustomGrsSettings		WRITE setFlagCustomGrsSettings		NOTIFY flagCustomGrsSettingsChanged)
+//	Q_PROPERTY(bool flagCustomGrsSettings		READ getFlagCustomGrsSettings		WRITE setFlagCustomGrsSettings		NOTIFY flagCustomGrsSettingsChanged)
 	Q_PROPERTY(int customGrsLongitude		READ getCustomGrsLongitude		WRITE setCustomGrsLongitude		NOTIFY customGrsLongitudeChanged)
 	Q_PROPERTY(double customGrsDrift		READ getCustomGrsDrift			WRITE setCustomGrsDrift			NOTIFY customGrsDriftChanged)
 	Q_PROPERTY(double customGrsJD			READ getCustomGrsJD			WRITE setCustomGrsJD			NOTIFY customGrsJDChanged)
@@ -676,10 +676,10 @@ public slots:
 	//! Get the current value of the flag which enables showing of solar corona when atmosphere is disabled or when total solar eclipses is happened only.
 	bool getFlagPermanentSolarCorona(void) const { return flagPermanentSolarCorona; }
 
-	//! Set flag which determines if custom settings is using for Great Red Spot on Jupiter
-	void setFlagCustomGrsSettings(bool b);
-	//! Get the current value of the flag which determines if custom settings for Great Red Spot on Jupiter is used or not.
-	bool getFlagCustomGrsSettings() const;
+//	//! Set flag which determines if custom settings is using for Great Red Spot on Jupiter
+//	void setFlagCustomGrsSettings(bool b);
+//	//! Get the current value of the flag which determines if custom settings for Great Red Spot on Jupiter is used or not.
+//	bool getFlagCustomGrsSettings() const;
 
 	//! Set longitude of Great Red Spot (System II is used)
 	//! @param longitude (degrees)
@@ -786,7 +786,7 @@ signals:
 	void ephemerisDataLimitChanged(int s);
 	void ephemerisSmartDatesChanged(bool b);
 	void ephemerisScaleMarkersChanged(bool b);
-	void flagCustomGrsSettingsChanged(bool b);
+//	void flagCustomGrsSettingsChanged(bool b);
 	void customGrsLongitudeChanged(int l);
 	void customGrsDriftChanged(double drift);
 	void customGrsJDChanged(double JD);
