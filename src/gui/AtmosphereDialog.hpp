@@ -45,6 +45,7 @@ protected:
 private slots:
 	void setStandardAtmosphere();
 	void setTfromK(double k);
+	void resetTonemapping();
 };
 
 #endif // ATMOSPHEREDIALOG_HPP

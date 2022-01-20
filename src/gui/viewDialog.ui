@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>993</width>
+    <width>1046</width>
     <height>659</height>
    </rect>
   </property>
@@ -79,7 +79,6 @@
        <widget class="QLabel" name="stelWindowTitle">
         <property name="font">
          <font>
-          <weight>75</weight>
           <italic>false</italic>
           <bold>true</bold>
          </font>
@@ -453,14 +452,25 @@
                </item>
                <item>
                 <widget class="QPushButton" name="pushButtonAtmosphereDetails">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="focusPolicy">
                   <enum>Qt::NoFocus</enum>
                  </property>
                  <property name="toolTip">
-                  <string>pressure, temperature, extinction coefficient</string>
+                  <string>Atmosphere visualization settings: pressure, temperature, extinction coefficient, tone mapping, etc.</string>
                  </property>
                  <property name="text">
-                  <string>Refraction/Extinction settings...</string>
+                  <string notr="true"/>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="../../data/gui/guiRes.qrc">
+                   <normaloff>:/graphicGui/uibtSettings.png</normaloff>
+                   <disabledoff>:/graphicGui/uibtSettings-disabled.png</disabledoff>:/graphicGui/uibtSettings.png</iconset>
                  </property>
                 </widget>
                </item>
@@ -470,17 +480,12 @@
                   <string>Open skylight details (color tweaks for the atmosphere)</string>
                  </property>
                  <property name="text">
-                  <string>Skylight...</string>
+                  <string notr="true"/>
                  </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="tonemappingPushButton">
-                 <property name="toolTip">
-                  <string>Open tone mapping details.</string>
-                 </property>
-                 <property name="text">
-                  <string>Tone Mapping...</string>
+                 <property name="icon">
+                  <iconset resource="../../data/gui/guiRes.qrc">
+                   <normaloff>:/graphicGui/uibtEdit.png</normaloff>
+                   <disabledoff>:/graphicGui/uibtEdit-disabled.png</disabledoff>:/graphicGui/uibtEdit.png</iconset>
                  </property>
                 </widget>
                </item>
@@ -1582,11 +1587,22 @@
                </item>
                <item>
                 <widget class="QPushButton" name="pushButtonOrbitColors">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="toolTip">
                   <string>Configure colors of orbit lines</string>
                  </property>
                  <property name="text">
-                  <string>Colors...</string>
+                  <string notr="true"/>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="../../data/gui/guiRes.qrc">
+                   <normaloff>:/graphicGui/uibtSettings.png</normaloff>
+                   <disabledoff>:/graphicGui/uibtSettings-disabled.png</disabledoff>:/graphicGui/uibtSettings.png</iconset>
                  </property>
                 </widget>
                </item>
@@ -5159,7 +5175,9 @@
   <tabstop>constellationArtBrightnessSpinBox</tabstop>
   <tabstop>showAsterismLabelsCheckBox</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../../data/gui/guiRes.qrc"/>
+ </resources>
  <connections/>
  <buttongroups>
   <buttongroup name="buttonGroupDisplayedDSOCatalogs">

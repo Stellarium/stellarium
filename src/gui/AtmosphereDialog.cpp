@@ -21,6 +21,7 @@
 #include "StelSkyDrawer.hpp"
 #include "AtmosphereDialog.hpp"
 #include "StelPropertyMgr.hpp"
+#include "StelToneReproducer.hpp"
 #include "ui_atmosphereDialog.h"
 
 AtmosphereDialog::AtmosphereDialog()
@@ -52,7 +53,13 @@ void AtmosphereDialog::createDialogContent()
 	connectDoubleProperty(ui->pressureDoubleSpinBox,"StelSkyDrawer.atmospherePressure");
 	connectDoubleProperty(ui->temperatureDoubleSpinBox,"StelSkyDrawer.atmosphereTemperature");
 	connectDoubleProperty(ui->extinctionDoubleSpinBox,"StelSkyDrawer.extinctionCoefficient");
+	connectDoubleProperty(ui->dalSpinBox,   "StelToneReproducer.displayAdaptationLuminance");
+	connectDoubleProperty(ui->dmSpinBox,    "StelToneReproducer.maxDisplayLuminance");
+	connectDoubleProperty(ui->gammaSpinBox, "StelToneReproducer.displayGamma");
+	connectBoolProperty(ui->checkBox_extraGamma, "StelToneReproducer.flagUseTmGamma");
+	connectBoolProperty(ui->checkBox_sRGB,  "StelToneReproducer.flagSRGB");
 
+	connect(ui->resetPushButton, SIGNAL(clicked(bool)), this, SLOT(resetTonemapping()));
 	connect(ui->standardAtmosphereButton, SIGNAL(clicked()), this, SLOT(setStandardAtmosphere()));
 
 	// Experimental settings, protected by Skylight.flagGuiPublic
@@ -96,4 +103,15 @@ void AtmosphereDialog::setTfromK(double k)
 
 		skyDrawer->setT(T);
 	}
+}
+
+void AtmosphereDialog::resetTonemapping()
+{
+	StelToneReproducer *t = StelApp::getInstance().getCore()->getToneReproducer();
+	// Defaults as of Stellarium 0.21.0 and earlier. (since 0.10?)
+	t->setDisplayAdaptationLuminance(50.);
+	t->setDisplayGamma(2.2222f);
+	t->setMaxDisplayLuminance(100.);
+	t->setFlagUseTmGamma(true);
+	t->setFlagSRGB(true);
 }

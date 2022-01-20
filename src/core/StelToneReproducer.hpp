@@ -34,7 +34,7 @@
 //! or adaptLuminance otherwise the default values will be used. (they are
 //! appropriate for a daylight sky luminance)
 //!
-//! The user can configure properties of the screen and environmant in the TonemappingDialog:
+//! The user can configure properties of the screen and environmant in the AtmosphereDialog:
 //! displayAdaptationLuminance, maxDisplayLuminance and displayGamma.
 //! The latter is not fixed to the sRGB value of 2.2 but should probably also not deviate too much.
 //!

@@ -24,7 +24,6 @@
 #include "AddRemoveLandscapesDialog.hpp"
 #include "AtmosphereDialog.hpp"
 #include "SkylightDialog.hpp"
-#include "TonemappingDialog.hpp"
 #include "GreatRedSpotDialog.hpp"
 #include "ConfigureDSOColorsDialog.hpp"
 #include "ConfigureOrbitColorsDialog.hpp"
@@ -66,7 +65,6 @@ ViewDialog::ViewDialog(QObject* parent) : StelDialog("View", parent)
 	, addRemoveLandscapesDialog(Q_NULLPTR)
 	, atmosphereDialog(Q_NULLPTR)
 	, skylightDialog(Q_NULLPTR)
-	, tonemappingDialog(Q_NULLPTR)
 	, greatRedSpotDialog(Q_NULLPTR)
 	, configureDSOColorsDialog(Q_NULLPTR)
 	, configureOrbitColorsDialog(Q_NULLPTR)
@@ -84,8 +82,6 @@ ViewDialog::~ViewDialog()
 	atmosphereDialog = Q_NULLPTR;
 	delete skylightDialog;
 	skylightDialog = Q_NULLPTR;
-	delete tonemappingDialog;
-	tonemappingDialog = Q_NULLPTR;
 	delete greatRedSpotDialog;
 	greatRedSpotDialog = Q_NULLPTR;
 	delete configureDSOColorsDialog;
@@ -156,6 +152,11 @@ void ViewDialog::createDialogContent()
 
 	populateLists();
 	populateToolTips();
+	// fixed size for buttons
+	QSize bs = QSize(24, 24);
+	ui->pushButtonAtmosphereDetails->setFixedSize(bs);
+	ui->pushButtonSkylightDetails->setFixedSize(bs);
+	ui->pushButtonOrbitColors->setFixedSize(bs);
 
 	// TODOs after properties merge:
 	// New method: populateLightPollution may be useful. Make sure it is.
@@ -211,8 +212,6 @@ void ViewDialog::createDialogContent()
 		connect(ui->pushButtonSkylightDetails, SIGNAL(clicked()), this, SLOT(showSkylightDialog()));
 	else
 		ui->pushButtonSkylightDetails->hide();
-	// tonemapping details
-	connect(ui->tonemappingPushButton, SIGNAL(clicked()), this, SLOT(showTonemappingDialog()));
 
 	// Planets section
 	connectGroupBox(ui->planetsGroupBox, "actionShow_Planets");
@@ -1121,14 +1120,6 @@ void ViewDialog::showSkylightDialog()
 	skylightDialog = new SkylightDialog();
 
     skylightDialog->setVisible(true);
-}
-
-void ViewDialog::showTonemappingDialog()
-{
-    if(tonemappingDialog == Q_NULLPTR)
-	tonemappingDialog = new TonemappingDialog();
-
-    tonemappingDialog->setVisible(true);
 }
 
 void ViewDialog::showGreatRedSpotDialog()

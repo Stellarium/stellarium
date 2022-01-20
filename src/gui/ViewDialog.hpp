@@ -31,7 +31,6 @@ class QToolButton;
 class AddRemoveLandscapesDialog;
 class AtmosphereDialog;
 class SkylightDialog;
-class TonemappingDialog;
 class GreatRedSpotDialog;
 class ConfigureDSOColorsDialog;
 class ConfigureOrbitColorsDialog;
@@ -72,7 +71,6 @@ private slots:
 public slots:
 	void showAtmosphereDialog();
 	void showSkylightDialog();
-	void showTonemappingDialog();
 	void showGreatRedSpotDialog();
 	void showConfigureDSOColorsDialog();
 	void showConfigureOrbitColorsDialog();
@@ -113,7 +111,6 @@ private:
 	AddRemoveLandscapesDialog * addRemoveLandscapesDialog;
 	AtmosphereDialog * atmosphereDialog;
 	SkylightDialog * skylightDialog;
-	TonemappingDialog * tonemappingDialog;
 	GreatRedSpotDialog * greatRedSpotDialog;
 	ConfigureDSOColorsDialog * configureDSOColorsDialog;
 	ConfigureOrbitColorsDialog * configureOrbitColorsDialog;
