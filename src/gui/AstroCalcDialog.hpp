@@ -162,7 +162,7 @@ public:
 	//! Defines the number and the order of the columns in the lunar eclipse table
 	//! @enum LunarEclipseColumns
 	enum LunarEclipseColumns {
-		LunarEclipseDate,            //! date and time of lunar ecipse
+		LunarEclipseDate,            //! date and time of lunar eclipse
 		LunarEclipseSaros,           //! Saros series
 		LunarEclipseType,            //! type of lunar eclipse lunar eclipse
 		LunarEclipsePMag,            //! penumbral magnitude of lunar eclipse

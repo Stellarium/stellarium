@@ -2202,6 +2202,7 @@ void AstroCalcDialog::initListLunarEclipse()
 
 QPair<double,double> AstroCalcDialog::getLunarEclipseXY() const
 {
+	// Algorithm adaped from Planet::getLunarEclipseMagnitudes() -- we need only x and y here.
 	// Find x, y of Besselian elements
 	QPair<double,double> LunarEclipseXY;
 	// Use geocentric coordinates
@@ -2333,6 +2334,7 @@ void AstroCalcDialog::generateLunarEclipses()
 				core->update(0);
 
 				// Check for eclipse
+				// Algorithm taken from Planet::getLunarEclipseMagnitudes()
 				QPair<double,double> XY = getLunarEclipseXY();
 				XY = getLunarEclipseXY();
 				double x = XY.first;
@@ -2356,11 +2358,13 @@ void AstroCalcDialog::generateLunarEclipses()
 					if (uMag>=1.) EclipseTypeStr = "Total";
 					if (uMag>0. && uMag<1.) EclipseTypeStr = "Partial";
 
-					// Saros series Calculation - useful to search for eclipses in the same Saros
-					// Adapted from Solar Eclipse Saros calculation in S&T magazine (seem to matching well with data from NASA)
+					// Saros series calculations - useful to search for eclipses in the same Saros
+					// Adapted from Saros calculations for solar eclipses in Sky & Telescope (October 1985)
+					// Saros numbers calculated here are matching well with NASA's Five Millennium Catalog of Lunar Eclipses
+
+					// ln = Brown Lunation number : = 1 at the first New Moon of 1923
 					double q = (JDmid-2423436.40347)/29.530588-0.25;
 					q = round(q);
-					// Lunation
 					int ln = int(q) + 1 - 953;
 					int nd = ln + 105;
 					int s = 148 + 38 * nd;
