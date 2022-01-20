@@ -218,10 +218,10 @@ void SolarSystem::init()
 	setOrbitColorStyle(conf->value("astro/planets_orbits_color_style", "one_color").toString());
 
 	// Settings for calculation of position of Great Red Spot on Jupiter
-	setFlagCustomGrsSettings(conf->value("astro/flag_grs_custom", false).toBool());
-	setCustomGrsLongitude(conf->value("astro/grs_longitude", 216).toInt());
-	setCustomGrsDrift(conf->value("astro/grs_drift", 15.).toDouble());
-	setCustomGrsJD(conf->value("astro/grs_jd", 2456901.5).toDouble());
+//	setFlagCustomGrsSettings(conf->value("astro/flag_grs_custom", false).toBool());
+	setGrsLongitude(conf->value("astro/grs_longitude", 216).toInt());
+	setGrsDrift(conf->value("astro/grs_drift", 15.).toDouble());
+	setGrsJD(conf->value("astro/grs_jd", 2456901.5).toDouble());
 
 	setFlagEarthShadowEnlargementDanjon(conf->value("astro/shadow_enlargement_danjon", false).toBool());
 	setFlagPermanentSolarCorona(conf->value("viewing/flag_draw_sun_corona", true).toBool());
@@ -3080,57 +3080,43 @@ int SolarSystem::getOrbitsThickness() const
 	return Planet::orbitsThickness;
 }
 
-
-void SolarSystem::setFlagCustomGrsSettings(bool b)
+void SolarSystem::setGrsLongitude(int longitude)
 {
-	RotationElements::flagCustomGrsSettings=b;
-	// automatic saving of the setting
-	conf->setValue("astro/flag_grs_custom", b);
-	emit flagCustomGrsSettingsChanged(b);
-}
-
-bool SolarSystem::getFlagCustomGrsSettings() const
-{
-	return RotationElements::flagCustomGrsSettings;
-}
-
-void SolarSystem::setCustomGrsLongitude(int longitude)
-{
-	RotationElements::customGrsLongitude = longitude;
+	RotationElements::grsLongitude = longitude;
 	// automatic saving of the setting
 	conf->setValue("astro/grs_longitude", longitude);
-	emit customGrsLongitudeChanged(longitude);
+	emit grsLongitudeChanged(longitude);
 }
 
-int SolarSystem::getCustomGrsLongitude() const
+int SolarSystem::getGrsLongitude() const
 {
-	return static_cast<int>(RotationElements::customGrsLongitude);
+	return static_cast<int>(RotationElements::grsLongitude);
 }
 
-void SolarSystem::setCustomGrsDrift(double drift)
+void SolarSystem::setGrsDrift(double drift)
 {
-	RotationElements::customGrsDrift = drift;
+	RotationElements::grsDrift = drift;
 	// automatic saving of the setting
 	conf->setValue("astro/grs_drift", drift);
-	emit customGrsDriftChanged(drift);
+	emit grsDriftChanged(drift);
 }
 
-double SolarSystem::getCustomGrsDrift() const
+double SolarSystem::getGrsDrift() const
 {
-	return RotationElements::customGrsDrift;
+	return RotationElements::grsDrift;
 }
 
-void SolarSystem::setCustomGrsJD(double JD)
+void SolarSystem::setGrsJD(double JD)
 {
-	RotationElements::customGrsJD = JD;
+	RotationElements::grsJD = JD;
 	// automatic saving of the setting
 	conf->setValue("astro/grs_jd", JD);
-	emit customGrsJDChanged(JD);
+	emit grsJDChanged(JD);
 }
 
-double SolarSystem::getCustomGrsJD()
+double SolarSystem::getGrsJD()
 {
-	return RotationElements::customGrsJD;
+	return RotationElements::grsJD;
 }
 
 void SolarSystem::setFlagEarthShadowEnlargementDanjon(bool b)

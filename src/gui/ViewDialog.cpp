@@ -274,9 +274,6 @@ void ViewDialog::createDialogContent()
 	populatePlanetMagnitudeAlgorithmDescription();
 
 	// GreatRedSpot (Jupiter)
-	connectBoolProperty(ui->customGrsSettingsCheckBox, "SolarSystem.flagCustomGrsSettings");
-	ui->pushButtonGrsDetails->setEnabled(ssmgr->getFlagCustomGrsSettings());
-	connect(ssmgr, SIGNAL(flagCustomGrsSettingsChanged(bool)), ui->pushButtonGrsDetails, SLOT(setEnabled(bool)));
 	connect(ui->pushButtonGrsDetails, SIGNAL(clicked()), this, SLOT(showGreatRedSpotDialog()));
 
 	// Link Solar System Editor button if available...

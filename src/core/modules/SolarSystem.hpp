@@ -100,10 +100,9 @@ class SolarSystem : public StelObjectModule
 	Q_PROPERTY(bool ephemerisScaleMarkersDisplayed	READ getFlagEphemerisScaleMarkers	WRITE setFlagEphemerisScaleMarkers	NOTIFY ephemerisScaleMarkersChanged)
 	Q_PROPERTY(bool ephemerisAlwaysOn		READ getFlagEphemerisAlwaysOn		WRITE setFlagEphemerisAlwaysOn		NOTIFY ephemerisAlwaysOnChanged)
 	// Great Red Spot (GRS) properties
-	Q_PROPERTY(bool flagCustomGrsSettings		READ getFlagCustomGrsSettings		WRITE setFlagCustomGrsSettings		NOTIFY flagCustomGrsSettingsChanged)
-	Q_PROPERTY(int customGrsLongitude		READ getCustomGrsLongitude		WRITE setCustomGrsLongitude		NOTIFY customGrsLongitudeChanged)
-	Q_PROPERTY(double customGrsDrift		READ getCustomGrsDrift			WRITE setCustomGrsDrift			NOTIFY customGrsDriftChanged)
-	Q_PROPERTY(double customGrsJD			READ getCustomGrsJD			WRITE setCustomGrsJD			NOTIFY customGrsJDChanged)
+	Q_PROPERTY(int grsLongitude			READ getGrsLongitude			WRITE setGrsLongitude			NOTIFY grsLongitudeChanged)
+	Q_PROPERTY(double grsDrift			READ getGrsDrift			WRITE setGrsDrift			NOTIFY grsDriftChanged)
+	Q_PROPERTY(double grsJD				READ getGrsJD				WRITE setGrsJD				NOTIFY grsJDChanged)
 	// Eclipse algorithm properties
 	Q_PROPERTY(bool earthShadowEnlargementDanjon    READ getFlagEarthShadowEnlargementDanjon    WRITE setFlagEarthShadowEnlargementDanjon   NOTIFY earthShadowEnlargementDanjonChanged)
 	// Colors
@@ -676,30 +675,25 @@ public slots:
 	//! Get the current value of the flag which enables showing of solar corona when atmosphere is disabled or when total solar eclipses is happened only.
 	bool getFlagPermanentSolarCorona(void) const { return flagPermanentSolarCorona; }
 
-	//! Set flag which determines if custom settings is using for Great Red Spot on Jupiter
-	void setFlagCustomGrsSettings(bool b);
-	//! Get the current value of the flag which determines if custom settings for Great Red Spot on Jupiter is used or not.
-	bool getFlagCustomGrsSettings() const;
-
 	//! Set longitude of Great Red Spot (System II is used)
 	//! @param longitude (degrees)
-	void setCustomGrsLongitude(int longitude);
+	void setGrsLongitude(int longitude);
 	//! Get longitude of Great Red Spot (System II is used)
 	//! @return a longitude (degrees)
-	int getCustomGrsLongitude() const;
+	int getGrsLongitude() const;
 
 	//! Set speed of annual drift for Great Red Spot (System II is used)
 	//! @param annual drift (degrees)
-	void setCustomGrsDrift(double drift);
+	void setGrsDrift(double drift);
 	//! Get speed of annual drift for Great Red Spot (System II is used)
-	double getCustomGrsDrift() const;
+	double getGrsDrift() const;
 
 	//! Set initial JD for calculation of position of Great Red Spot
 	//! @param JD
 	// TODO (GZ): Clarify whether this is JD or rather JDE?
-	void setCustomGrsJD(double JD);
+	void setGrsJD(double JD);
 	//! Get initial JD for calculation of position of Great Red Spot
-	double getCustomGrsJD();
+	double getGrsJD();
 
 	//! Set whether earth shadow should be enlarged following Danjon's method
 	void setFlagEarthShadowEnlargementDanjon(bool b);
@@ -786,10 +780,9 @@ signals:
 	void ephemerisDataLimitChanged(int s);
 	void ephemerisSmartDatesChanged(bool b);
 	void ephemerisScaleMarkersChanged(bool b);
-	void flagCustomGrsSettingsChanged(bool b);
-	void customGrsLongitudeChanged(int l);
-	void customGrsDriftChanged(double drift);
-	void customGrsJDChanged(double JD);
+	void grsLongitudeChanged(int l);
+	void grsDriftChanged(double drift);
+	void grsJDChanged(double JD);
 	void earthShadowEnlargementDanjonChanged(bool b);
 	void flagPermanentSolarCoronaChanged(bool b);
 
