@@ -2353,14 +2353,8 @@ void AstroCalcDialog::generateLunarEclipses()
 				if (pMag>0.)
 				{
 					EclipseTypeStr = "Penumbral";
-					if (uMag>=1.)
-					{
-						EclipseTypeStr = "Total";
-					}
-					else
-					{
-						EclipseTypeStr = "Partial";
-					}
+					if (uMag>=1.) EclipseTypeStr = "Total";
+					if (uMag>0. && uMag<1.) EclipseTypeStr = "Partial";
 
 					// Saros series Calculation - useful to search for eclipses in the same Saros
 					// Adapted from Solar Eclipse Saros calculation in S&T magazine (seem to matching well with data from NASA)
