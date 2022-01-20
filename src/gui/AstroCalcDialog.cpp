@@ -2296,16 +2296,16 @@ void AstroCalcDialog::generateLunarEclipses()
 				double JDmid = JD1 + dt;
 
 				// Find exact time of closest approach between the Moon and shadow centre
-	        	for (int j = 0; j <= 2; j++)
-	        	{
-		        	JD1 = JDmid - 5./1440.;
-		        	JD2 = JDmid + 5./1440.;
-		        	core->setJD(JDmid);
+				for (int j = 0; j <= 2; j++)
+				{
+					JD1 = JDmid - 5./1440.;
+					JD2 = JDmid + 5./1440.;
+					core->setJD(JDmid);
 					core->update(0);
 					QPair<double,double> XY = getLunarEclipseXY();
 					double x = XY.first;
 					double y = XY.second;
-		        	core->setJD(JD1);
+					core->setJD(JD1);
 					core->update(0);
 					XY = getLunarEclipseXY();
 					double x1 = XY.first;
@@ -2353,10 +2353,17 @@ void AstroCalcDialog::generateLunarEclipses()
 				if (pMag>0.)
 				{
 					EclipseTypeStr = "Penumbral";
-					if (uMag>=1.) EclipseTypeStr = "Total";
-					if (uMag>0. && uMag<1.) EclipseTypeStr = "Partial";
+					if (uMag>=1.)
+					{
+						EclipseTypeStr = "Total";
+					}
+					else
+					{
+						EclipseTypeStr = "Partial";
+					}
 
 					// Saros series Calculation - useful to search for eclipses in the same Saros
+					// Adapted from Solar Eclipse Saros calculation in S&T magazine (seem to matching well with data from NASA)
 					double q = (JDmid-2423436.40347)/29.530588-0.25;
 					q = round(q);
 					// Lunation
