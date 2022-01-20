@@ -2202,6 +2202,7 @@ void AstroCalcDialog::initListLunarEclipse()
 
 QPair<double,double> AstroCalcDialog::getLunarEclipseXY() const
 {
+	// Find x, y of Besselian elements
 	QPair<double,double> LunarEclipseXY;
 	// Use geocentric coordinates
 	StelCore* core = StelApp::getInstance().getCore();
@@ -2231,11 +2232,9 @@ QPair<double,double> AstroCalcDialog::getLunarEclipseXY() const
 
 void AstroCalcDialog::generateLunarEclipses()
 {
-
 	const bool onEarth = core->getCurrentPlanet()==solarSystem->getEarth();
 	if (onEarth) // Not sure it's right thing to do but should be ok.
 	{
-
 		initListLunarEclipse();
 
 		const double currentJD = core->getJD();   // save current JD
@@ -2252,19 +2251,20 @@ void AstroCalcDialog::generateLunarEclipses()
 		double temp = (startJD - 2451550.09765 - (29.530588853 * 0.5)) / 29.530588853;
 		double InitFMJD = 2451550.09765 + int(temp) * 29.530588853 - (29.530588853 * 0.5);
 
+		// Search for lunar eclipses at each full Moon
 		for (int i = 0; i <= elements+1; i++)
 		{
 			double JD = InitFMJD + 29.530588853 * i;
 			if (JD > startJD)
 			{
-			    double JD1 = JD;
-			    double JD2 = JD1 + 2.;
+				double JD1 = JD;
+				double JD2 = JD1 + 2.;
 
-			    core->setJD(JD1);
-			    core->setUseTopocentricCoordinates(false);
+				core->setJD(JD1);
+				core->setUseTopocentricCoordinates(false);
 				core->update(0);
 
-			    static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+				static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 				double raSun, deSun, raMoon, deMoon, lSun1, bSun, bMoon, lMoon1, lSun2, lMoon2;
 
 				StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
@@ -2285,58 +2285,58 @@ void AstroCalcDialog::generateLunarEclipses()
 				lSun1 += M_PI;
 				lSun2 += M_PI;
 
-			    double deltaSun = lSun2-lSun1;
-			    if (deltaSun < 0.) deltaSun+=2.*M_PI;
-			    double deltaMoon = lMoon2-lMoon1;
-			    if (deltaMoon < 0.) deltaMoon+=2.*M_PI;
-			    double delta = lSun1-lMoon1;
-			    if (delta > M_PI) delta-=2.*M_PI;
-			    double delta2 = deltaMoon - deltaSun;
-			    double dt = 2. * delta / delta2;
-			    double JDmid = JD1 + dt;
+				double deltaSun = lSun2-lSun1;
+				if (deltaSun < 0.) deltaSun+=2.*M_PI;
+				double deltaMoon = lMoon2-lMoon1;
+				if (deltaMoon < 0.) deltaMoon+=2.*M_PI;
+				double delta = lSun1-lMoon1;
+				if (delta > M_PI) delta-=2.*M_PI;
+				double delta2 = deltaMoon - deltaSun;
+				double dt = 2. * delta / delta2;
+				double JDmid = JD1 + dt;
 
-			    // Find exact time of greatest eclipse
-	            for (int j = 0; j <= 2; j++)
-	            {
-		            JD1 = JDmid - 5./1440.;
-		            JD2 = JDmid + 5./1440.;
-		            core->setJD(JDmid);
-				    //core->setUseTopocentricCoordinates(false);
+				// Find exact time of closest approach between the Moon and shadow centre
+	        	for (int j = 0; j <= 2; j++)
+	        	{
+		        	JD1 = JDmid - 5./1440.;
+		        	JD2 = JDmid + 5./1440.;
+		        	core->setJD(JDmid);
 					core->update(0);
 					QPair<double,double> XY = getLunarEclipseXY();
-				    double x = XY.first;
-				    double y = XY.second;
-		            core->setJD(JD1);
+					double x = XY.first;
+					double y = XY.second;
+		        	core->setJD(JD1);
 					core->update(0);
-				    XY = getLunarEclipseXY();
-				    double x1 = XY.first;
-				    double y1 = XY.second;
-				    core->setJD(JD2);
+					XY = getLunarEclipseXY();
+					double x1 = XY.first;
+					double y1 = XY.second;
+					core->setJD(JD2);
 					core->update(0);
-				    XY = getLunarEclipseXY();
-				    double x2 = XY.first;
-				    double y2 = XY.second;
+					XY = getLunarEclipseXY();
+					double x2 = XY.first;
+					double y2 = XY.second;
 
-				    double xdot1 = (x - x1) * 12.;
-				    double xdot2 = (x2 - x) * 12.;
-				    double xdot = (xdot1 + xdot2) / 2.;
+					double xdot1 = (x - x1) * 12.;
+					double xdot2 = (x2 - x) * 12.;
+					double xdot = (xdot1 + xdot2) / 2.;
 
-				    double ydot1 = (y - y1) * 12.;
-				    double ydot2 = (y2 - y) * 12.;
-				    double ydot = (ydot1 + ydot2) / 2.;
+					double ydot1 = (y - y1) * 12.;
+					double ydot2 = (y2 - y) * 12.;
+					double ydot = (ydot1 + ydot2) / 2.;
 				    
-				    double n2 = xdot * xdot + ydot * ydot;
-				    dt  = -(x * xdot + y * ydot) / n2;
-				    JDmid += dt / 24.;
+					double n2 = xdot * xdot + ydot * ydot;
+					dt  = -(x * xdot + y * ydot) / n2;
+					JDmid += dt / 24.;
 				}
 
-			    core->setJD(JDmid);
+				core->setJD(JDmid);
 				core->update(0);
 
+				// Check for eclipse
 				QPair<double,double> XY = getLunarEclipseXY();
-			    XY = getLunarEclipseXY();
-			    double x = XY.first;
-			    double y = XY.second;
+				XY = getLunarEclipseXY();
+				double x = XY.first;
+				double y = XY.second;
 
 				const double dist=ssystem->getMoon()->getEclipticPos().length();  // geocentric Lunar distance [AU]
 				const double mSD=atan(ssystem->getMoon()->getEquatorialRadius()/dist) * M_180_PI*3600.; // arcsec
@@ -2352,22 +2352,21 @@ void AstroCalcDialog::generateLunarEclipses()
 
 				if (pMag>0.)
 				{
-
 					EclipseTypeStr = "Penumbral";
 					if (uMag>=1.) EclipseTypeStr = "Total";
 					if (uMag>0. && uMag<1.) EclipseTypeStr = "Partial";
 
 					// Saros series Calculation - useful to search for eclipses in the same Saros
-				    double q = (JDmid-2423436.40347)/29.530588-0.25;
-				    q = round(q);
-				    // Lunation
-				    int ln = int(q) + 1 - 953;
-				    int nd = ln + 105;
-				    int s = 148 + 38 * nd;
-				    int nx = -61 * nd;
-				    int nc = floor(nx / 358. + 0.5 - nd / (12. * 358 * 358));
-				    int saros = 1 + ((s + nc * 223 - 1) % 223);
-				    if ((s + nc * 223 -1) < 0) saros -= 223;
+					double q = (JDmid-2423436.40347)/29.530588-0.25;
+					q = round(q);
+					// Lunation
+					int ln = int(q) + 1 - 953;
+					int nd = ln + 105;
+					int s = 148 + 38 * nd;
+					int nx = -61 * nd;
+					int nc = floor(nx / 358. + 0.5 - nd / (12. * 358 * 358));
+					int saros = 1 + ((s + nc * 223 - 1) % 223);
+					if ((s + nc * 223 - 1) < 0) saros -= 223;
 
 					SarosStr = QString("%1").arg(QString::number(saros));
 					pMagStr = QString("%1").arg(QString::number(pMag, 'f', 4));
@@ -2382,12 +2381,9 @@ void AstroCalcDialog::generateLunarEclipses()
 					treeItem->setText(LunarEclipseUMag, uMagStr);
 					treeItem->setTextAlignment(LunarEclipseSaros, Qt::AlignRight);
 				}
-				
 			}
-
 		}
 		core->setJD(currentJD);
-
 		core->setUseTopocentricCoordinates(saveTopocentric);
 		core->update(0); // enforce update cache to avoid odd selection of Moon details!
 
@@ -2402,7 +2398,6 @@ void AstroCalcDialog::generateLunarEclipses()
 	}
 	else
 		cleanupLunarEclipses();
-	
 }
 
 void AstroCalcDialog::cleanupLunarEclipses()
