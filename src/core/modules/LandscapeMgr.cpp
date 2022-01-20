@@ -120,14 +120,13 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 	if (fader4WCR.getInterstate()>0.f)
 	{
 		const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-		const float ppx = core->getCurrentStelProjectorParams().devicePixelsPerPixel;
+		const float ppx = static_cast<float>(core->getCurrentStelProjectorParams().devicePixelsPerPixel);
 		StelPainter sPainter(prj);
 		sPainter.setFont(font4WCR);
-		float sshift, bshift, cshift, vshift;
-		sshift = bshift = cshift = vshift = 0.f;
+		float sshift=0.f, bshift=0.f, cshift=0.f, vshift=0.f;
 		bool flagMask = (core->getProjection(StelCore::FrameJ2000)->getMaskType() != StelProjector::MaskDisk);
 		if (propMgr->getProperty("SpecialMarkersMgr.compassMarksDisplayed")->getValue().toBool())
-			vshift = (screenFontSize + 12)*ppx;
+			vshift = static_cast<float>(screenFontSize + 12)*ppx;
 
 		Vec3f xy;
 		QString directionLabel;
@@ -140,7 +139,7 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 			directionLabel = labels.value(it4w.key(), "");
 
 			if (flagMask)
-				sshift = ppx*sPainter.getFontMetrics().boundingRect(directionLabel).width()*0.5f;
+				sshift = ppx*static_cast<float>(sPainter.getFontMetrics().boundingRect(directionLabel).width())*0.5f;
 
 			if (prj->project(it4w.value(), xy))
 				sPainter.drawText(xy[0], xy[1], directionLabel, 0., -sshift, vshift, false);
@@ -159,7 +158,7 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 				directionLabel = labels.value(it8w.key(), "");
 
 				if (flagMask)
-					bshift = ppx*sPainter.getFontMetrics().boundingRect(directionLabel).width()*0.5f;
+					bshift = ppx*static_cast<float>(sPainter.getFontMetrics().boundingRect(directionLabel).width())*0.5f;
 
 				if (prj->project(it8w.value(), xy))
 					sPainter.drawText(xy[0], xy[1], directionLabel, 0., -bshift, vshift, false);
@@ -178,7 +177,7 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 					directionLabel = labels.value(it16w.key(), "");
 
 					if (flagMask)
-						cshift = ppx*sPainter.getFontMetrics().boundingRect(directionLabel).width()*0.5f;
+						cshift = ppx*static_cast<float>(sPainter.getFontMetrics().boundingRect(directionLabel).width())*0.5f;
 
 					if (prj->project(it16w.value(), xy))
 						sPainter.drawText(xy[0], xy[1], directionLabel, 0., -cshift, vshift, false);
@@ -333,7 +332,7 @@ void LandscapeMgr::update(double deltaTime)
 	}
 	// First parameter in next call is used for particularly earth-bound computations in Schaefer's sky brightness model. Difference DeltaT makes no difference here.
 	atmosphere->computeColor(core->getJDE(), sunPos, moonPos, lunarPhaseAngle, lunarMagnitude,
-		core, core->getCurrentLocation().latitude, core->getCurrentLocation().altitude,
+				 core, core->getCurrentLocation().latitude, static_cast<float>(core->getCurrentLocation().altitude),
 				 15.f, 40.f, static_cast<float>(drawer->getExtinctionCoefficient()), atmosphereNoScatter);	// Temperature = 15c, relative humidity = 40%
 
 	core->getSkyDrawer()->reportLuminanceInFov(3.75f+atmosphere->getAverageLuminance()*3.5f, true);
@@ -405,7 +404,7 @@ void LandscapeMgr::update(double deltaTime)
 	}
 
 	// GZ: 2013-09-25 Take light pollution into account!
-	float pollutionAddonBrightness=(drawer->getBortleScaleIndex()-1.0f)*0.025f; // 0..8, so we assume empirical linear brightening 0..0.02
+	float pollutionAddonBrightness=static_cast<float>(drawer->getBortleScaleIndex()-1)*0.025f; // 0..8, so we assume empirical linear brightening 0..0.02
 	float lunarAddonBrightness=0.f;
 	if (moonPos[2] > -0.1/1.5)
 		lunarAddonBrightness = qMax(0.2f/-12.f*ssystem->getMoon()->getVMagnitudeWithExtinction(core),0.f)*static_cast<float>(moonPos[2]);
@@ -964,7 +963,7 @@ QStringList LandscapeMgr::getAllLandscapeIDs() const
 QStringList LandscapeMgr::getUserLandscapeIDs() const
 {
 	QStringList result;
-	for (auto id : getNameToDirMap().values())
+	for (auto &id : getNameToDirMap().values())
 	{
 		if(!packagedLandscapeIDs.contains(id))
 		{
@@ -1027,7 +1026,7 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 
 		double extcoeff = landscape->getDefaultAtmosphericExtinction();
 		if (extcoeff>-1.0)
-			atmosphere.append(QString("%1: %2").arg(q_("extinction coefficient")).arg(QString::number(extcoeff, 'f', 2)));
+			atmosphere.append(QString("%1: %2").arg(q_("extinction coefficient"), QString::number(extcoeff, 'f', 2)));
 
 		if (atmosphere.size()>0)
 			desc += QString("<b>%1</b>: %2<br />").arg(q_("Atmospheric conditions"), atmosphere.join(", "));
@@ -1171,7 +1170,7 @@ float LandscapeMgr::getAtmosphereLightPollutionLuminance() const
 void LandscapeMgr::setAtmosphereBortleLightPollution(const int bIndex)
 {
 	// This is an empirical formula
-	setAtmosphereLightPollutionLuminance(qMax(0.f,0.0004f*powf(bIndex-1, 2.1f)));
+	setAtmosphereLightPollutionLuminance(qMax(0.f,0.0004f*powf(static_cast<float>(bIndex-1), 2.1f)));
 }
 
 void LandscapeMgr::setZRotation(const float d)
@@ -1254,7 +1253,7 @@ QString LandscapeMgr::nameToID(const QString& name)
 QMap<QString,QString> LandscapeMgr::getNameToDirMap()
 {
 	QMap<QString,QString> result;
-	QSet<QString> landscapeDirs = StelFileMgr::listContents("landscapes",StelFileMgr::Directory);
+	const QSet<QString> landscapeDirs = StelFileMgr::listContents("landscapes",StelFileMgr::Directory);
 
 	for (const auto& dir : landscapeDirs)
 	{
@@ -1271,7 +1270,7 @@ QMap<QString,QString> LandscapeMgr::getNameToDirMap()
 
 QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, const bool display, const bool toMainDirectory)
 {
-	Q_UNUSED(toMainDirectory);
+	Q_UNUSED(toMainDirectory)
 	if (!QFile::exists(sourceFilePath))
 	{
 		qDebug() << "LandscapeMgr: File does not exist:" << QDir::toNativeSeparators(sourceFilePath);
@@ -1304,7 +1303,7 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, const 
 
 	//Detect top directory
 	QString topDir, iniPath;
-	QList<Stel::QZipReader::FileInfo> infoList = reader.fileInfoList();
+	const QList<Stel::QZipReader::FileInfo> infoList = reader.fileInfoList();
 	for (const auto& info : infoList)
 	{
 		QFileInfo fileInfo(info.filePath);
@@ -1422,7 +1421,7 @@ bool LandscapeMgr::removeLandscape(const QString landscapeID)
 		return false;
 
 	QDir landscapeDir(landscapePath);
-	for (auto fileName : landscapeDir.entryList(QDir::Files | QDir::NoDotAndDotDot))
+	for (auto &fileName : landscapeDir.entryList(QDir::Files | QDir::NoDotAndDotDot))
 	{
 		if(!landscapeDir.remove(fileName))
 		{
@@ -1522,8 +1521,8 @@ quint64 LandscapeMgr::loadLandscapeSize(const QString landscapeID) const
 	if (landscapePath.isEmpty())
 		return landscapeSize;
 
-	QDir landscapeDir(landscapePath);
-	for (auto file : landscapeDir.entryInfoList(QDir::Files | QDir::NoDotAndDotDot))
+	const QDir landscapeDir(landscapePath);
+	for (auto &file : landscapeDir.entryInfoList(QDir::Files | QDir::NoDotAndDotDot))
 	{
 		//qDebug() << "name:" << file.baseName() << "size:" << file.size();
 		landscapeSize += static_cast<quint64>(file.size());
@@ -1542,7 +1541,7 @@ QString LandscapeMgr::getDescription() const
 	engDescriptionFile = StelFileMgr::findFile("landscapes/" + getCurrentLandscapeID(), StelFileMgr::Directory) + "/description.en.utf8";
 
 	// OK. Check the file with full name of locale
-	if (!QFileInfo(locDescriptionFile).exists())
+	if (!QFileInfo::exists(locDescriptionFile))
 	{
 		// Oops...  File not exists! What about short name of locale?
 		lang = lang.split("_").at(0);
@@ -1550,12 +1549,12 @@ QString LandscapeMgr::getDescription() const
 	}
 
 	// Check localized description for landscape
-	if (!locDescriptionFile.isEmpty() && QFileInfo(locDescriptionFile).exists())
+	if (!locDescriptionFile.isEmpty() && QFileInfo::exists(locDescriptionFile))
 	{		
 		descFile = locDescriptionFile;
 	}
 	// OK. Localized description of landscape not exists. What about english description of its?
-	else if (!engDescriptionFile.isEmpty() && QFileInfo(engDescriptionFile).exists())
+	else if (!engDescriptionFile.isEmpty() && QFileInfo::exists(engDescriptionFile))
 	{
 		descFile = engDescriptionFile;
 	}

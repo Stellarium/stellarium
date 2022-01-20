@@ -531,7 +531,7 @@ public:
 	}
 
 private:
-	bool operator < (const QTreeWidgetItem &other) const
+	bool operator < (const QTreeWidgetItem &other) const Q_DECL_OVERRIDE
 	{
 		int column = treeWidget()->sortColumn();
 
@@ -586,7 +586,7 @@ public:
 	}
 
 private:
-	bool operator < (const QTreeWidgetItem &other) const
+	bool operator < (const QTreeWidgetItem &other) const Q_DECL_OVERRIDE
 	{
 		int column = treeWidget()->sortColumn();
 
@@ -619,7 +619,7 @@ public:
 	}
 
 private:
-	bool operator < (const QTreeWidgetItem &other) const
+	bool operator < (const QTreeWidgetItem &other) const Q_DECL_OVERRIDE
 	{
 		int column = treeWidget()->sortColumn();
 
@@ -652,7 +652,7 @@ public:
 	}
 
 private:
-	bool operator < (const QTreeWidgetItem &other) const
+	bool operator < (const QTreeWidgetItem &other) const Q_DECL_OVERRIDE
 	{
 		int column = treeWidget()->sortColumn();
 
@@ -685,7 +685,7 @@ public:
 	}
 
 private:
-	bool operator < (const QTreeWidgetItem &other) const
+	bool operator < (const QTreeWidgetItem &other) const Q_DECL_OVERRIDE
 	{
 		int column = treeWidget()->sortColumn();
 

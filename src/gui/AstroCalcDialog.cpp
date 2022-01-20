@@ -1667,14 +1667,14 @@ void AstroCalcDialog::generateEphemeris()
 	EphemerisList.clear();
 	const bool allNakedEyePlanets = (ui->allNakedEyePlanetsCheckBox->isChecked() && cplanet==solarSystem->getEarth());
 
-	QList<PlanetP> celestialObjects;
+	QVector<PlanetP> celestialObjects;
 	Q_ASSERT(celestialObjects.isEmpty());
 
 	int n = 1;
 	if (allNakedEyePlanets)
 	{
 		const QStringList planets = { "Mercury", "Venus", "Mars", "Jupiter", "Saturn"};
-		for (auto planet: planets)
+		for (auto &planet: planets)
 			celestialObjects.append(solarSystem->searchByEnglishName(planet));
 		n = planets.count();
 	}
@@ -1690,7 +1690,7 @@ void AstroCalcDialog::generateEphemeris()
 	EphemerisList.reserve(elements*n);
 	propMgr->setStelPropertyValue("SolarSystem.ephemerisDataLimit", n);
 
-	for (auto obj: celestialObjects)
+	for (auto &obj: celestialObjects)
 	{
 		englishName = obj->getEnglishName();
 		nameI18n = obj->getNameI18n();
