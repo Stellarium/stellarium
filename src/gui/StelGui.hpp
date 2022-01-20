@@ -130,106 +130,64 @@ public:
 public slots:
 	//! Set the state of the flag of usage background for GUI buttons
 	void setFlagUseButtonsBackground(bool b);
-	//! Get the state of the flag of usage background for GUI buttons
-	bool getFlagUseButtonsBackground() const { return flagUseButtonsBackground; }
 
 	//! Set the state of the flag for kinetic scrolling
 	void setFlagUseKineticScrolling(bool b);
-	//! Get the state of the flag for kinetic scrolling
-	bool getFlagUseKineticScrolling() const { return flagUseKineticScrolling; }
 
 	//! Set the state of the flag for enable focus on day spinner in Date and Time dialog
 	void setFlagEnableFocusOnDaySpinner(bool b);
-	//! Get the state of the flag for enable focus on day spinner in Date and Time dialog
-	bool getFlagEnableFocusOnDaySpinner() const { return flagEnableFocusOnDaySpinner; }
 
 	//! Define whether the button for exit should be visible
 	void setFlagShowQuitButton(bool b);
-	//! Get whether the exit button is visible
-	bool getFlagShowQuitButton() const;
 
 	//! Define whether the buttons toggling image flip should be visible
 	void setFlagShowFlipButtons(bool b);
-	//! Get whether the buttons toggling image flip are visible
-	bool getFlagShowFlipButtons() const;
 
 	//! Define whether the button toggling nebulae background should be visible
 	void setFlagShowNebulaBackgroundButton(bool b);
-	//! Get whether the button toggling nebulae background is visible
-	bool getFlagShowNebulaBackgroundButton() const;
 
 	//! Define whether the button toggling DSS survey (TOAST) should be visible
 	void setFlagShowDSSButton(bool b);
-	//! Get whether the button toggling DSS survey (TOAST) is visible
-	bool getFlagShowDSSButton() const;
 
 	//! Define whether the button toggling cardinal should be visible
 	void setFlagShowCardinalButton(bool b);
-	//! Get whether the button toggling cardinal is visible
-	bool getFlagShowCardinalButton() const;
 
 	//! Define whether the button toggling compass marks should be visible
 	void setFlagShowCompassButton(bool b);
-	//! Get whether the button toggling compass marks is visible
-	bool getFlagShowCompassButton() const;
 
 	//! Define whether the button toggling HiPS surveys should be visible
 	void setFlagShowHiPSButton(bool b);
-	//! Get whether the button toggling HiPS surveys is visible
-	bool getFlagShowHiPSButton() const;
 
 	//! Define whether the button for centering on selected object should be visible. If not, user can still press SPACE to center.
 	void setFlagShowGotoSelectedObjectButton(bool b);
-	//! Get whether the button for centering on selected object is visible
-	bool getFlagShowGotoSelectedObjectButton() const;
 
 	//! Define whether the button toggling nightmode should be visible in addition to the Ctrl+N hotkey.
 	void setFlagShowNightmodeButton(bool b);
-	//! Get whether the button toggling nightmode is visible
-	bool getFlagShowNightmodeButton() const;
 
 	//! Define whether the button toggling fullscreen view should be visible in addition to F11 hotkey.
 	void setFlagShowFullscreenButton(bool b);
-	//! Get whether the button toggling fullscreen view is visible
-	bool getFlagShowFullscreenButton() const;
 
 	//! Define whether the button toggling observing list should be visible
 	void setFlagShowObsListButton(bool b);
-	//! Get whether the button toggling observing list is visible
-	bool getFlagShowObsListButton() const;
 
 	//! Define whether the button toggling ICRS grid should be visible
 	void setFlagShowICRSGridButton(bool b);
-	//! Get whether the button toggling ICRS grid is visible
-	bool getFlagShowICRSGridButton() const;
 
 	//! Define whether the button toggling galactic grid should be visible
 	void setFlagShowGalacticGridButton(bool b);
-	//! Get whether the button toggling galactic grid is visible
-	bool getFlagShowGalacticGridButton() const;
 
 	//! Define whether the button toggling ecliptic grid should be visible
 	void setFlagShowEclipticGridButton(bool b);
-	//! Get whether the button toggling ecliptic grid is visible
-	bool getFlagShowEclipticGridButton() const;
 
 	//! Define whether the button toggling constellation boundaries should be visible
 	void setFlagShowConstellationBoundariesButton(bool b);
-	//! Get whether the button toggling constellation boundaries is visible
-	bool getFlagShowConstellationBoundariesButton() const;
 
 	//! Define whether the button toggling asterism lines should be visible
 	void setFlagShowAsterismLinesButton(bool b);
-	//! Get whether the button toggling asterism lines is visible
-	bool getFlagShowAsterismLinesButton() const;
 
 	//! Define whether the button toggling asterism labels should be visible
 	void setFlagShowAsterismLabelsButton(bool b);
-	//! Get whether the button toggling asterism labels is visible
-	bool getFlagShowAsterismLabelsButton() const;
 
-	//! Get the auto-hide status of the horizontal toolbar.
-	bool getAutoHideHorizontalButtonBar() const;
 	//! Set the auto-hide status of the horizontal toolbar.
 	//! When set to true, the horizontal toolbar will auto-hide itself, only
 	//! making an appearance when the mouse is nearby.  When false, it will
@@ -237,14 +195,15 @@ public slots:
 	//! @param b to hide or not to hide
 	void setAutoHideHorizontalButtonBar(bool b);
 	
-	//! Get the auto-hide status of the vertical toolbar.
-	bool getAutoHideVerticalButtonBar() const;
 	//! Set the auto-hide status of the vertical toolbar.
 	//! When set to true, the vertical toolbar will auto-hide itself, only
 	//! making an appearance when the mouse is nearby.  When false, it will
 	//! remain on screen.
 	//! @param b to hide or not to hide
 	void setAutoHideVerticalButtonBar(bool b);
+
+	//! Hide or show the GUI.  Public so it can be called from scripts.
+	void setGuiVisible(bool);
 
 #ifdef ENABLE_SCRIPTING
 	//! change keys when a script is running / not running
@@ -257,8 +216,52 @@ public slots:
 	void resumeScript();
 #endif
 
-	//! Hide or show the GUI.  Public so it can be called from scripts.
-	void setGuiVisible(bool);	
+    public:
+	// Getters
+	//! Get the state of the flag of usage background for GUI buttons
+	bool getFlagUseButtonsBackground() const { return flagUseButtonsBackground; }
+	//! Get the state of the flag for kinetic scrolling
+	bool getFlagUseKineticScrolling() const { return flagUseKineticScrolling; }
+	//! Get the state of the flag for enable focus on day spinner in Date and Time dialog
+	bool getFlagEnableFocusOnDaySpinner() const { return flagEnableFocusOnDaySpinner; }
+	//! Get whether the exit button is visible
+	bool getFlagShowQuitButton() const;
+	//! Get whether the buttons toggling image flip are visible
+	bool getFlagShowFlipButtons() const;
+	//! Get whether the button toggling nebulae background is visible
+	bool getFlagShowNebulaBackgroundButton() const;
+	//! Get whether the button toggling DSS survey (TOAST) is visible
+	bool getFlagShowDSSButton() const;
+	//! Get whether the button toggling cardinal is visible
+	bool getFlagShowCardinalButton() const;
+	//! Get whether the button toggling compass marks is visible
+	bool getFlagShowCompassButton() const;
+	//! Get whether the button toggling HiPS surveys is visible
+	bool getFlagShowHiPSButton() const;
+	//! Get whether the button for centering on selected object is visible
+	bool getFlagShowGotoSelectedObjectButton() const;
+	//! Get whether the button toggling nightmode is visible
+	bool getFlagShowNightmodeButton() const;
+	//! Get whether the button toggling fullscreen view is visible
+	bool getFlagShowFullscreenButton() const;
+	//! Get whether the button toggling observing list is visible
+	bool getFlagShowObsListButton() const;
+	//! Get whether the button toggling ICRS grid is visible
+	bool getFlagShowICRSGridButton() const;
+	//! Get whether the button toggling galactic grid is visible
+	bool getFlagShowGalacticGridButton() const;
+	//! Get whether the button toggling ecliptic grid is visible
+	bool getFlagShowEclipticGridButton() const;
+	//! Get whether the button toggling constellation boundaries is visible
+	bool getFlagShowConstellationBoundariesButton() const;
+	//! Get whether the button toggling asterism lines is visible
+	bool getFlagShowAsterismLinesButton() const;
+	//! Get whether the button toggling asterism labels is visible
+	bool getFlagShowAsterismLabelsButton() const;
+	//! Get the auto-hide status of the horizontal toolbar.
+	bool getAutoHideHorizontalButtonBar() const;
+	//! Get the auto-hide status of the vertical toolbar.
+	bool getAutoHideVerticalButtonBar() const;
 
 signals:
 	void visibleChanged(bool b);
