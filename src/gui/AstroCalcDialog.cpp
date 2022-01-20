@@ -2370,8 +2370,16 @@ void AstroCalcDialog::generateLunarEclipses()
 					if ((s + nc * 223 - 1) < 0) saros -= 223;
 
 					SarosStr = QString("%1").arg(QString::number(saros));
-					pMagStr = QString("%1").arg(QString::number(pMag, 'f', 4));
-					uMagStr = QString("%1").arg(QString::number(uMag, 'f', 4));
+					pMagStr = QString("%1").arg(QString::number(pMag, 'f', 3));
+					
+					if (uMag<0.)
+					{
+						uMagStr = dash;
+					}
+					else
+					{
+						uMagStr = QString("%1").arg(QString::number(uMag, 'f', 3));
+					}
 
 					ACLunarEclipseTreeWidgetItem* treeItem = new ACLunarEclipseTreeWidgetItem(ui->lunareclipseTreeWidget);
 					treeItem->setText(LunarEclipseDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JDmid), localeMgr->getPrintableTimeLocal(JDmid))); // local date and time
@@ -2381,6 +2389,8 @@ void AstroCalcDialog::generateLunarEclipses()
 					treeItem->setText(LunarEclipsePMag, pMagStr);
 					treeItem->setText(LunarEclipseUMag, uMagStr);
 					treeItem->setTextAlignment(LunarEclipseSaros, Qt::AlignRight);
+					treeItem->setTextAlignment(LunarEclipsePMag, Qt::AlignRight);
+					treeItem->setTextAlignment(LunarEclipseUMag, Qt::AlignRight);
 				}
 			}
 		}
