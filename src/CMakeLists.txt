@@ -332,8 +332,6 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/ConfigureDSOColorsDialog.cpp
           gui/ConfigureOrbitColorsDialog.hpp
           gui/ConfigureOrbitColorsDialog.cpp
-          gui/GreatRedSpotDialog.hpp
-          gui/GreatRedSpotDialog.cpp
           gui/CustomDeltaTEquationDialog.hpp
           gui/CustomDeltaTEquationDialog.cpp
           gui/AstroCalcDialog.hpp
@@ -367,7 +365,6 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/searchDialogGui.ui
           gui/configurationDialog.ui
           gui/atmosphereDialog.ui
-          gui/greatRedSpotDialog.ui
           gui/customDeltaTEquationDialog.ui
           gui/astroCalcDialog.ui
           gui/astroCalcExtraEphemerisDialog.ui

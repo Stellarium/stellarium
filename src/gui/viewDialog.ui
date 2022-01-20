@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>993</width>
+    <width>1046</width>
     <height>659</height>
    </rect>
   </property>
@@ -79,7 +79,6 @@
        <widget class="QLabel" name="stelWindowTitle">
         <property name="font">
          <font>
-          <weight>75</weight>
           <italic>false</italic>
           <bold>true</bold>
          </font>
@@ -1799,12 +1798,12 @@
              <item row="14" column="0">
               <layout class="QHBoxLayout" name="horizontalLayout_15">
                <item>
-                <widget class="QPushButton" name="pushButtonGrsDetails">
+                <widget class="QLabel" name="labelGRS">
                  <property name="toolTip">
-                  <string>GRS details...</string>
+                  <string>Jupiter's Great Red Spot</string>
                  </property>
                  <property name="text">
-                  <string>GRS details...</string>
+                  <string>Great Red Spot:</string>
                  </property>
                 </widget>
                </item>
@@ -1820,6 +1819,93 @@
                   </size>
                  </property>
                 </spacer>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="longitudeSpinBox">
+                 <property name="toolTip">
+                  <string>Jovigraphic longitude of Great Red Spot in System II</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="suffix">
+                  <string notr="true">°</string>
+                 </property>
+                 <property name="maximum">
+                  <number>359</number>
+                 </property>
+                 <property name="value">
+                  <number>216</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="driftDoubleSpinBox">
+                 <property name="toolTip">
+                  <string>Annual drift of GRS</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="suffix">
+                  <string notr="true">°</string>
+                 </property>
+                 <property name="decimals">
+                  <number>5</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-90.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>90.000000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>15.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDateTimeEdit" name="jdDateTimeEdit">
+                 <property name="toolTip">
+                  <string>Date and Time (UTC)</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="displayFormat">
+                  <string>yyyy.MM.dd hh:mm</string>
+                 </property>
+                 <property name="calendarPopup">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="recentGrsMeasurementPushButton">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>24</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="toolTip">
+                  <string>View recent GRS measurements (Open JUPOS website)</string>
+                 </property>
+                 <property name="text">
+                  <string notr="true"/>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="../../data/gui/guiRes.qrc">
+                   <normaloff>:/graphicGui/uibtFolder.png</normaloff>
+                   <disabledoff>:/graphicGui/uibtFolder-disabled.png</disabledoff>:/graphicGui/uibtFolder.png</iconset>
+                 </property>
+                </widget>
                </item>
               </layout>
              </item>
@@ -5152,7 +5238,9 @@
   <tabstop>constellationArtBrightnessSpinBox</tabstop>
   <tabstop>showAsterismLabelsCheckBox</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../../data/gui/guiRes.qrc"/>
+ </resources>
  <connections/>
  <buttongroups>
   <buttongroup name="buttonGroupDisplayedDSOCatalogs">

@@ -25,7 +25,6 @@
 #include "AtmosphereDialog.hpp"
 #include "SkylightDialog.hpp"
 #include "TonemappingDialog.hpp"
-#include "GreatRedSpotDialog.hpp"
 #include "ConfigureDSOColorsDialog.hpp"
 #include "ConfigureOrbitColorsDialog.hpp"
 #include "StelApp.hpp"
@@ -61,13 +60,14 @@
 #include <QDialog>
 #include <QStringList>
 #include <QJsonArray>
+#include <QDesktopServices>
+#include <QUrl>
 
 ViewDialog::ViewDialog(QObject* parent) : StelDialog("View", parent)
 	, addRemoveLandscapesDialog(Q_NULLPTR)
 	, atmosphereDialog(Q_NULLPTR)
 	, skylightDialog(Q_NULLPTR)
 	, tonemappingDialog(Q_NULLPTR)
-	, greatRedSpotDialog(Q_NULLPTR)
 	, configureDSOColorsDialog(Q_NULLPTR)
 	, configureOrbitColorsDialog(Q_NULLPTR)
 {
@@ -86,8 +86,6 @@ ViewDialog::~ViewDialog()
 	skylightDialog = Q_NULLPTR;
 	delete tonemappingDialog;
 	tonemappingDialog = Q_NULLPTR;
-	delete greatRedSpotDialog;
-	greatRedSpotDialog = Q_NULLPTR;
 	delete configureDSOColorsDialog;
 	configureDSOColorsDialog = Q_NULLPTR;
 	delete configureOrbitColorsDialog;
@@ -273,8 +271,15 @@ void ViewDialog::createDialogContent()
 	connect(ui->planetMagnitudeAlgorithmComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setPlanetMagnitudeAlgorithm(int)));
 	populatePlanetMagnitudeAlgorithmDescription();
 
-	// GreatRedSpot (Jupiter)
-	connect(ui->pushButtonGrsDetails, SIGNAL(clicked()), this, SLOT(showGreatRedSpotDialog()));
+	// Jupiter's Great Red Spot
+	connectIntProperty(ui->longitudeSpinBox, "SolarSystem.grsLongitude");
+	connectDoubleProperty(ui->driftDoubleSpinBox, "SolarSystem.grsDrift");
+	const StelLocaleMgr& locmgr = StelApp::getInstance().getLocaleMgr();
+	QString fmt = QString("%1 hh:mm").arg(locmgr.getQtDateFormatStr());
+	ui->jdDateTimeEdit->setDisplayFormat(fmt);
+	ui->jdDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(GETSTELMODULE(SolarSystem)->getGrsJD()));
+	connect(ui->jdDateTimeEdit, SIGNAL(dateTimeChanged(QDateTime)), this, SLOT(setGrsJD(QDateTime)));
+	connect(ui->recentGrsMeasurementPushButton, SIGNAL(clicked(bool)), this, SLOT(openRecentGrsMeasurement()));
 
 	// Link Solar System Editor button if available...
 	StelModule *sse=StelApp::getInstance().getModuleMgr().getModule("SolarSystemEditor");
@@ -527,6 +532,17 @@ void ViewDialog::createDialogContent()
 	updateHips();
 
 	updateTabBarListWidgetWidth();
+}
+
+void ViewDialog::setGrsJD(QDateTime dt)
+{
+	GETSTELMODULE(SolarSystem)->setGrsJD(StelUtils::qDateTimeToJd(dt));
+}
+
+void ViewDialog::openRecentGrsMeasurement()
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	QDesktopServices::openUrl(QUrl(conf->value("astro/grs_measurements_url", "http://jupos.privat.t-online.de/rGrs.htm").toString()));
 }
 
 void ViewDialog::populateOrbitsControls(bool flag)
@@ -1126,14 +1142,6 @@ void ViewDialog::showTonemappingDialog()
 	tonemappingDialog = new TonemappingDialog();
 
     tonemappingDialog->setVisible(true);
-}
-
-void ViewDialog::showGreatRedSpotDialog()
-{
-	if(greatRedSpotDialog == Q_NULLPTR)
-		greatRedSpotDialog = new GreatRedSpotDialog();
-
-	greatRedSpotDialog->setVisible(true);
 }
 
 void ViewDialog::showConfigureDSOColorsDialog()

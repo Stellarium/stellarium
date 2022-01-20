@@ -32,7 +32,6 @@ class AddRemoveLandscapesDialog;
 class AtmosphereDialog;
 class SkylightDialog;
 class TonemappingDialog;
-class GreatRedSpotDialog;
 class ConfigureDSOColorsDialog;
 class ConfigureOrbitColorsDialog;
 
@@ -66,14 +65,14 @@ private slots:
 	void setCurrentCultureAsDefault(void);
 	void updateDefaultSkyCulture();
 	void updateDefaultLandscape();
-
+	void setGrsJD(QDateTime dt);
+	void openRecentGrsMeasurement(); //! Opens a website in the system web browser where GRS data can be found.
 	void showAddRemoveLandscapesDialog();
 	// GZ I make this public to have it on a hotkey...
 public slots:
 	void showAtmosphereDialog();
 	void showSkylightDialog();
 	void showTonemappingDialog();
-	void showGreatRedSpotDialog();
 	void showConfigureDSOColorsDialog();
 	void showConfigureOrbitColorsDialog();
 
@@ -114,7 +113,6 @@ private:
 	AtmosphereDialog * atmosphereDialog;
 	SkylightDialog * skylightDialog;
 	TonemappingDialog * tonemappingDialog;
-	GreatRedSpotDialog * greatRedSpotDialog;
 	ConfigureDSOColorsDialog * configureDSOColorsDialog;
 	ConfigureOrbitColorsDialog * configureOrbitColorsDialog;
 };
