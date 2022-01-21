@@ -24,22 +24,22 @@ environment:
     msvcname: Visual Studio 15 2017
     packaging: true
     suffix: Win32
-#  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-#    platform: x64
-#    qtver: 5.14
-#    qtbin: msvc2017_64
-#    msvcname: Visual Studio 16 2019
-#    packaging: false
-#    suffix: Win64
-#    cmake_args: -A x64
-#  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-#    platform: Win32
-#    qtver: 5.14
-#    qtbin: msvc2017
-#    msvcname: Visual Studio 16 2019
-#    packaging: false
-#    suffix: Win32 
-#    cmake_args: -A Win32
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+    platform: x64
+    qtver: 5.14
+    qtbin: msvc2017_64
+    msvcname: Visual Studio 16 2019
+    packaging: false
+    suffix: Win64
+    cmake_args: -A x64
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+    platform: Win32
+    qtver: 5.14
+    qtbin: msvc2017
+    msvcname: Visual Studio 16 2019
+    packaging: false
+    suffix: Win32 
+    cmake_args: -A Win32
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
     platform: x64
     qtver: 5.15
@@ -69,7 +69,7 @@ before_build:
   - cd c:\stellarium
   - mkdir build-%qtver%-%qtbin% && cd build-%qtver%-%qtbin%
   - if [%PUBLISH_BINARY%]==[true] cmake -DCMAKE_INSTALL_PREFIX=c:\stellarium-%qtver%-%qtbin% -G "%msvcname%" %cmake_args% ..
-  - if [%PUBLISH_BINARY%]==[false] cmake -DENABLE_TESTING=On -DENABLE_NLS=Off -DCMAME_INSTALL_PREFIX=c:\stellarium-%qtver%-%qtbin% -G "%msvcname%" %cmake_args% ..
+  - if [%PUBLISH_BINARY%]==[false] cmake -DENABLE_TESTING=On -DENABLE_NLS=Off -DCMAKE_INSTALL_PREFIX=c:\stellarium-%qtver%-%qtbin% -G "%msvcname%" %cmake_args% ..
 
 build:
   project: c:\stellarium\build-%qtver%-%qtbin%\Stellarium.sln
