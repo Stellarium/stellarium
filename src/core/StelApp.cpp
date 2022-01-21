@@ -727,14 +727,14 @@ StelProgressController* StelApp::addProgressBar()
 {
 	StelProgressController* p = new StelProgressController(this);
 	progressControllers.append(p);
-	emit(progressBarAdded(p));
+	emit progressBarAdded(p);
 	return p;
 }
 
 void StelApp::removeProgressBar(StelProgressController* p)
 {
 	progressControllers.removeOne(p);	
-	emit(progressBarRemoved(p));
+	emit progressBarRemoved(p);
 	delete p;
 }
 
@@ -871,9 +871,15 @@ void StelApp::handleClick(QMouseEvent* inputEvent)
 void StelApp::handleWheel(QWheelEvent* event)
 {
 	event->setAccepted(false);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+	QWheelEvent deltaEvent(event->position()*devicePixelsPerPixel,
+			       event->globalPosition()*devicePixelsPerPixel,
+			       event->pixelDelta(), event->angleDelta(), event->buttons(), event->modifiers(), Qt::ScrollUpdate, false);
+#else
 	QWheelEvent deltaEvent(QPoint(qRound(event->pos().x()*devicePixelsPerPixel), qRound(event->pos().y()*devicePixelsPerPixel)),
 			       QPoint(qRound(event->globalPos().x()*devicePixelsPerPixel), qRound(event->globalPos().y()*devicePixelsPerPixel)),
-	                       event->delta(), event->buttons(), event->modifiers(), event->orientation());
+			       event->delta(), event->buttons(), event->modifiers(), event->orientation());
+#endif
 	deltaEvent.setAccepted(false);
 	// Send the event to every StelModule
 	for (auto* i : moduleMgr->getCallOrders(StelModule::ActionHandleMouseClicks)) {
