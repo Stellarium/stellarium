@@ -132,7 +132,7 @@ public:
 			addTimeDragPoint(QCursor::pos().x(), QCursor::pos().y());
 	}
 	//! Implement required draw function.  Does nothing.
-	virtual void draw(StelCore*) Q_DECL_OVERRIDE {;}
+	virtual void draw(StelCore*) Q_DECL_OVERRIDE {}
 	//! Handle keyboard events.
 	virtual void handleKeys(QKeyEvent* event) Q_DECL_OVERRIDE;
 	//! Handle mouse movement events.
@@ -254,7 +254,7 @@ public slots:
 	//!       J2000 positions, the x-axis points to 0h,0°, the y-axis to 6h,0° and the z-axis points to the
 	//!       celestial pole. You may use a constructor defining three components (x,y,z) or the
 	//!       format with just two angles, e.g., Vec3d("0h","0d").
-	void moveToJ2000(const Vec3d& aim, const Vec3d &aimUp, float moveDuration = 1., ZoomingMode zooming = ZoomNone);
+	void moveToJ2000(const Vec3d& aim, const Vec3d &aimUp, float moveDuration = 1., StelMovementMgr::ZoomingMode zooming = ZoomNone);
 
 	//! Move the view to a specified AltAzimuthal position.
 	//! @param aim The position to move to expressed as a vector in AltAz frame.
@@ -275,7 +275,7 @@ public slots:
 	//!       with azimuth angles running counter-clockwise, i.e., against the usual orientation.
 	//! @note Panic function made March 2016. It turned out that using moveToJ2000 for alt-az-based moves behaves odd for long moves during fast timelapse: end vector is linked to the sky!
 	//! As of March 2016: This call does nothing when mount frame is not AltAzi!
-	void moveToAltAzi(const Vec3d& aim, const Vec3d &aimUp, float moveDuration = 1.f, ZoomingMode zooming = ZoomNone);
+	void moveToAltAzi(const Vec3d& aim, const Vec3d &aimUp, float moveDuration = 1.f, StelMovementMgr::ZoomingMode zooming = ZoomNone);
 
 	//! Change the zoom level.
 	//! @param aimFov The desired field of view in degrees.
@@ -426,10 +426,10 @@ public slots:
 	void moveViewport(double offsetX, double offsetY, const float duration=0.f);
 
 	//! Set current mount type defining the reference frame in which head movements occur.
-	void setMountMode(MountMode m);
+	void setMountMode(StelMovementMgr::MountMode m);
 	//! Get current mount type defining the reference frame in which head movements occur.
-	MountMode getMountMode(void) const {return mountMode;}
-	bool getEquatorialMount(void) const {return mountMode == MountEquinoxEquatorial;}
+	StelMovementMgr::MountMode getMountMode(void) const {return mountMode;}
+	bool getEquatorialMount(void) const {return mountMode == StelMovementMgr::MountEquinoxEquatorial;}
 
 	//! Function designed only for scripting context. Put the function into the startup.ssc of your planetarium setup,
 	//! this will avoid any unwanted tracking.

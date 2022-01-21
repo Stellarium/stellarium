@@ -31,7 +31,7 @@ class StelGuiBase
 {
 public:
 	StelGuiBase();
-	virtual ~StelGuiBase() {;}
+	virtual ~StelGuiBase() {}
 
 	virtual void init(QGraphicsWidget *atopLevelGraphicsWidget);
 
@@ -42,7 +42,7 @@ public:
 	virtual void setInfoTextFilters(const StelObject::InfoStringGroup& aflags) =0;
 	virtual const StelObject::InfoStringGroup& getInfoTextFilters() const =0;
 
-	virtual void forceRefreshGui() {;}
+	virtual void forceRefreshGui() {}
 
 	//! Show whether the GUI is visible.
 	//! @param b when true, GUI will be shown, else it will be hidden.

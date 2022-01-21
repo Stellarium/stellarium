@@ -152,7 +152,7 @@ public:
 	Q_ENUM(DeltaTAlgorithm)
 
 	StelCore();
-	virtual ~StelCore();
+	virtual ~StelCore() Q_DECL_OVERRIDE;
 
 	//! Init and load all main core components.
 	void init();
@@ -368,8 +368,8 @@ public slots:
 	void moveObserverTo(const StelLocation& target, double duration=1., double durationIfPlanetChange=1.);
 
 	//! Set the current ProjectionType to use
-	void setCurrentProjectionType(ProjectionType type);
-	ProjectionType getCurrentProjectionType() const;
+	void setCurrentProjectionType(StelCore::ProjectionType type);
+	StelCore::ProjectionType getCurrentProjectionType() const;
 
 	//! Get the current Mapping used by the Projection
 	QString getCurrentProjectionTypeKey(void) const;
@@ -382,9 +382,9 @@ public slots:
 	QStringList getAllProjectionTypeKeys() const;
 
 	//! Set the current algorithm and nDot used therein for time correction (DeltaT)
-	void setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm);
+	void setCurrentDeltaTAlgorithm(StelCore::DeltaTAlgorithm algorithm);
 	//! Get the current algorithm for time correction (DeltaT)
-	DeltaTAlgorithm getCurrentDeltaTAlgorithm() const { return currentDeltaTAlgorithm; }
+	StelCore::DeltaTAlgorithm getCurrentDeltaTAlgorithm() const { return currentDeltaTAlgorithm; }
 	//! Get description of the current algorithm for time correction
 	QString getCurrentDeltaTAlgorithmDescription(void) const;
 	//! Get the current algorithm used by the DeltaT
