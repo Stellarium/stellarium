@@ -726,7 +726,7 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 				static_cast<float>(core->getSkyDrawer()->getCustomStarMagnitudeLimit()) :
 				core->getSkyDrawer()->getLimitMagnitude();
 	QList<StelObjectP> tmp;
-	for (const auto& obj : candidates)
+	for (const auto& obj : qAsConst(candidates))
 	{
 		if (obj->getSelectPriority(core)<=limitMag)
 			tmp.append(obj);
@@ -741,7 +741,7 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 
 	StelObjectP sobj;
 	float best_object_value = 100000.f;
-	for (const auto& obj : candidates)
+	for (const auto& obj : qAsConst(candidates))
 	{
 		prj->project(obj->getJ2000EquatorialPos(core), winpos);
 		float distance = static_cast<float>(std::sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1])))*distanceWeight;
@@ -800,7 +800,7 @@ void StelObjectMgr::unSelect(void)
 	if(!lastSelectedObjects.isEmpty())
 	{
 		lastSelectedObjects.clear();
-		emit(selectedObjectChanged(StelModule::RemoveFromSelection));
+		emit selectedObjectChanged(StelModule::RemoveFromSelection);
 	}
 }
 
@@ -830,7 +830,7 @@ bool StelObjectMgr::setSelectedObject(const QList<StelObjectP>& objs, StelModule
 		lastSelectedObjects.append(objs);
 	else
 		lastSelectedObjects = objs;
-	emit(selectedObjectChanged(action));
+	emit selectedObjectChanged(action);
 	return true;
 }
 
@@ -944,7 +944,7 @@ void StelObjectMgr::addToExtraInfoString(const StelObject::InfoStringGroup &flag
 {
 	// Avoid insertion of full duplicates!
 	if (!extraInfoStrings.contains(flags, str))
-		extraInfoStrings.insertMulti(flags, str);
+		extraInfoStrings.insert(flags, str);
 }
 
 QStringList StelObjectMgr::getExtraInfoStrings(const StelObject::InfoStringGroup& flags) const

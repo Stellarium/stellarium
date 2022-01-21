@@ -41,19 +41,19 @@ int StelLocation::initMetaType()
 QString StelLocation::serializeToLine() const
 {
 	QString sanitizedTZ=StelLocationMgr::sanitizeTimezoneStringForLocationDB(ianaTimeZone);
-	return QString("%1\t%2\t%3\t%4\t%5\t%6\t%7\t%8\t%9\t%10\t%11\t%12")
-			.arg(name)
-			.arg(state)
-			.arg(region)
-			.arg(role)
-			.arg(population/1000)
-			.arg(latitude<0 ? QString("%1S").arg(-latitude, 0, 'f', 6) : QString("%1N").arg(latitude, 0, 'f', 6))
-			.arg(longitude<0 ? QString("%1W").arg(-longitude, 0, 'f', 6) : QString("%1E").arg(longitude, 0, 'f', 6))
-			.arg(altitude)
-			.arg(bortleScaleIndex)
-			.arg(sanitizedTZ)
-			.arg(planetName)
-			.arg(landscapeKey);
+	return QString("%1\t%2\t%3\t%4\t%5\t%6\t%7\t%8\t%9\t%10\t%11\t%12").arg(
+			name,
+			state,
+			region,
+			role,
+			QString::number(population/1000),
+			latitude<0 ? QString("%1S").arg(-latitude, 0, 'f', 6) : QString("%1N").arg(latitude, 0, 'f', 6),
+			longitude<0 ? QString("%1W").arg(-longitude, 0, 'f', 6) : QString("%1E").arg(longitude, 0, 'f', 6),
+			QString::number(altitude),
+			QString::number(bortleScaleIndex)).arg(
+			sanitizedTZ,
+			planetName,
+			landscapeKey);
 }
 
 QString StelLocation::getID() const
@@ -62,7 +62,7 @@ QString StelLocation::getID() const
 		return QString("%1, %2").arg(latitude).arg(longitude);
 
 	if (!region.isEmpty())
-		return QString("%1, %2").arg(name).arg(region);
+		return QString("%1, %2").arg(name, region);
 	else
 		return name;
 }
@@ -112,12 +112,12 @@ StelLocation StelLocation::createFromLine(const QString& rawline)
 	loc.population = static_cast<int> (splitline.at(4).toFloat()*1000);
 
 	const QString& latstring = splitline.at(5).trimmed();
-	loc.latitude = latstring.left(latstring.size() - 1).toFloat();
+	loc.latitude = latstring.leftRef(latstring.size() - 1).toFloat();
 	if (latstring.endsWith('S'))
 		loc.latitude=-loc.latitude;
 
 	const QString& lngstring = splitline.at(6).trimmed();
-	loc.longitude = lngstring.left(lngstring.size() - 1).toFloat();
+	loc.longitude = lngstring.leftRef(lngstring.size() - 1).toFloat();
 	if (lngstring.endsWith('W'))
 		loc.longitude=-loc.longitude;
 

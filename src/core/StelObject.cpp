@@ -845,7 +845,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			else
 				pa = StelUtils::radToDmsStr(par, true);
 
-			res += QString("%1: %2<br/>").arg(q_("Parallactic Angle")).arg(pa);
+			res += QString("%1: %2<br/>").arg(q_("Parallactic Angle"), pa);
 		}
 		res += getExtraInfoStrings(Extra).join("");
 		res += omgr->getExtraInfoStrings(Extra).join("");
@@ -1073,7 +1073,7 @@ void StelObject::addToExtraInfoString(const StelObject::InfoStringGroup &flags, 
 {
 	// Avoid insertion of full duplicates!
 	if (!extraInfoStrings.contains(flags, str))
-		extraInfoStrings.insertMulti(flags, str);
+		extraInfoStrings.insert(flags, str);
 }
 
 QStringList StelObject::getExtraInfoStrings(const InfoStringGroup& flags) const

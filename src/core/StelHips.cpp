@@ -65,7 +65,7 @@ QUrl HipsSurvey::getUrlFor(const QString& path) const
 	if (base.scheme().isEmpty()) base.setScheme("file");
 	if (base.scheme() != "file")
 		args += QString("?v=%1").arg(static_cast<int>(releaseDate));
-	return QString("%1/%2%3").arg(base.url()).arg(path).arg(args);
+	return QString("%1/%2%3").arg(base.url(), path, args);
 }
 
 HipsSurvey::HipsSurvey(const QString& url_, double releaseDate_):
@@ -81,7 +81,7 @@ HipsSurvey::HipsSurvey(const QString& url_, double releaseDate_):
 	req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
 	req.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
 	QNetworkReply* networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
-	connect(networkReply, &QNetworkReply::finished, [&, networkReply] {
+	connect(networkReply, &QNetworkReply::finished, this, [&, networkReply] {
 		QByteArray data = networkReply->readAll();
 		for (QString line : data.split('\n'))
 		{
@@ -170,7 +170,7 @@ bool HipsSurvey::getAllsky()
 		emit statusChanged();
 
 		updateProgressBar(0, 100);
-		connect(networkReply, &QNetworkReply::downloadProgress, [this](qint64 received, qint64 total) {
+		connect(networkReply, &QNetworkReply::downloadProgress, this, [this](qint64 received, qint64 total) {
 			updateProgressBar(static_cast<int>(received), static_cast<int>(total));
 		});
 	}
@@ -186,7 +186,7 @@ bool HipsSurvey::getAllsky()
 		networkReply->deleteLater();
 		networkReply = Q_NULLPTR;
 		emit statusChanged();
-	};
+	}
 	return !allsky.isNull();
 }
 
@@ -199,7 +199,7 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 {
 	// We don't draw anything until we get the properties file and the
 	// allsky texture (if available).
-	bool outside = (angle == 2.0 * M_PI);
+	const bool outside = qFuzzyCompare(angle, 2.0 * M_PI);
 	if (properties.isEmpty()) return;
 	if (!getAllsky()) return;
 	if (fader.getInterstate() == 0.0f) return;
@@ -511,7 +511,7 @@ QList<HipsSurveyP> HipsSurvey::parseHipslist(const QString& data)
 	QList<HipsSurveyP> ret;
 	QString url;
 	double releaseDate = 0;
-	for (auto line : data.split('\n'))
+	for (auto &line : data.split('\n'))
 	{
 		if (line.startsWith('#')) continue;
 		QString key = line.section("=", 0, 0).trimmed();
