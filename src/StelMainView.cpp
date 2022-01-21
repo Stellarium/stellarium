@@ -335,8 +335,8 @@ public:
 protected:
 	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) Q_DECL_OVERRIDE
 	{
-		Q_UNUSED(option);
-		Q_UNUSED(widget);
+		Q_UNUSED(option)
+		Q_UNUSED(widget)
 
 		//a sanity check
 		Q_ASSERT(mainView->glContext() == QOpenGLContext::currentContext());
@@ -400,7 +400,11 @@ protected:
 	{
 		QPointF pos = event->scenePos();
 		pos.setY(rect.height() - 1 - pos.y());
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+		QWheelEvent newEvent(pos, event->screenPos(), QPoint(event->delta(), 0), QPoint(event->delta(), 0), event->buttons(), event->modifiers(), Qt::ScrollUpdate, false);
+#else
 		QWheelEvent newEvent(QPoint(static_cast<int>(pos.x()),static_cast<int>(pos.y())), event->delta(), event->buttons(), event->modifiers(), event->orientation());
+#endif
 		StelApp::getInstance().handleWheel(&newEvent);
 		event->setAccepted(newEvent.isAccepted());
 		if(newEvent.isAccepted())
@@ -441,7 +445,7 @@ protected:
 				break;
 			}
 			case QEvent::Gesture:
-				setAcceptedMouseButtons(Q_NULLPTR);
+				setAcceptedMouseButtons(Qt::NoButton);
 				r = gestureEvent(static_cast<QGestureEvent*>(e));
 				break;
 			default:
@@ -527,7 +531,7 @@ public:
 protected:
 	void resizeEvent(QGraphicsSceneResizeEvent* event) Q_DECL_OVERRIDE
 	{
-		Q_UNUSED(event);
+		Q_UNUSED(event)
 		//widget->setGeometry(0, 0, size().width(), size().height());
 		StelApp::getInstance().getGui()->forceRefreshGui();
 	}
@@ -927,7 +931,7 @@ void StelMainView::init()
 		// Now we have a QMultiMap with (customShortcut, actionName). It may contain multiple keys!
 		QStringList allMapKeys=cstActionsMap.keys();
 		QStringList uniqueMapKeys=cstActionsMap.uniqueKeys();
-		for (auto key : uniqueMapKeys)
+		for (auto &key : uniqueMapKeys)
 			allMapKeys.removeOne(key);
 		conflicts << allMapKeys; // Add the remaining (duplicate) keys
 
@@ -1451,7 +1455,7 @@ bool StelMainView::needsMaxFPS() const
 
 void StelMainView::moveEvent(QMoveEvent * event)
 {
-	Q_UNUSED(event);
+	Q_UNUSED(event)
 
 	// We use the glWidget instead of the event, as we want the screen that shows most of the widget.
 	QWindow* win = glWidget->windowHandle();
@@ -1461,7 +1465,7 @@ void StelMainView::moveEvent(QMoveEvent * event)
 
 void StelMainView::closeEvent(QCloseEvent* event)
 {
-	Q_UNUSED(event);
+	Q_UNUSED(event)
 	stelApp->quit();
 }
 
@@ -1505,7 +1509,7 @@ void StelMainView::saveScreenShot(const QString& filePrefix, const QString& save
 	screenShotPrefix = filePrefix;
 	screenShotDir = saveDir;
 	flagOverwriteScreenshots=overwrite;
-	emit(screenshotRequested());
+	emit screenshotRequested();
 }
 
 void StelMainView::doScreenshot(void)
