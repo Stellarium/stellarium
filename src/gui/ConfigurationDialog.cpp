@@ -71,7 +71,7 @@ public:
 	MinMaxIntValidator(int min, int max, QObject *parent=Q_NULLPTR):
 		QIntValidator(min, max, parent){}
 
-	virtual void fixup(QString &input) const
+	virtual void fixup(QString &input) const Q_DECL_OVERRIDE
 	{
 		int allowed=qBound(bottom(), input.toInt(), top());
 		input.setNum(allowed);
@@ -746,7 +746,7 @@ void ConfigurationDialog::selectScreenshotDir()
 	}
 	catch (std::runtime_error& e)
 	{
-		Q_UNUSED(e);
+		Q_UNUSED(e)
 		// nop
 		// this will happen when people are only half way through typing dirs
 	}
@@ -1242,7 +1242,7 @@ void ConfigurationDialog::populatePluginsList()
 
 void ConfigurationDialog::pluginsSelectionChanged(QListWidgetItem* item, QListWidgetItem* previousItem)
 {
-	Q_UNUSED(previousItem);
+	Q_UNUSED(previousItem)
 	const QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();
 	for (const auto& desc : pluginsList)
 	{
@@ -1471,10 +1471,10 @@ void ConfigurationDialog::updateStarCatalogControlsText()
 		{
 			const QVariantList& magRange = nextStarCatalogToDownload.value("magRange").toList();
 			ui->downloadLabel->setText(q_("Download size: %1MB\nStar count: %2 Million\nMagnitude range: %3 - %4")
-				.arg(nextStarCatalogToDownload.value("sizeMb").toString())
-				.arg(QString::number(nextStarCatalogToDownload.value("count").toDouble(), 'f', 1))
-				.arg(magRange.first().toString())
-				.arg(magRange.last().toString()));
+				.arg(nextStarCatalogToDownload.value("sizeMb").toString(),
+				     QString::number(nextStarCatalogToDownload.value("count").toDouble(), 'f', 1),
+				     magRange.first().toString(),
+				     magRange.last().toString()));
 		}
 	}
 }
@@ -1516,7 +1516,7 @@ void ConfigurationDialog::downloadStars()
 		qWarning() << "Can't open a writable file for storing new star catalog: " << QDir::toNativeSeparators(path);
 		currentDownloadFile->deleteLater();
 		currentDownloadFile = Q_NULLPTR;
-		ui->downloadLabel->setText(q_("Error downloading %1:\n%2").arg(nextStarCatalogToDownload.value("id").toString()).arg(QString("Can't open a writable file for storing new star catalog: %1").arg(path)));
+		ui->downloadLabel->setText(q_("Error downloading %1:\n%2").arg(nextStarCatalogToDownload.value("id").toString(), QString("Can't open a writable file for storing new star catalog: %1").arg(path)));
 		ui->downloadRetryButton->setVisible(true);
 		return;
 	}
@@ -1553,7 +1553,7 @@ void ConfigurationDialog::downloadError(QNetworkReply::NetworkError)
 
 	isDownloadingStarCatalog = false;
 	qWarning() << "Error downloading file" << starCatalogDownloadReply->url() << ": " << starCatalogDownloadReply->errorString();
-	ui->downloadLabel->setText(q_("Error downloading %1:\n%2").arg(nextStarCatalogToDownload.value("id").toString()).arg(starCatalogDownloadReply->errorString()));
+	ui->downloadLabel->setText(q_("Error downloading %1:\n%2").arg(nextStarCatalogToDownload.value("id").toString(), starCatalogDownloadReply->errorString()));
 	ui->downloadCancelButton->setVisible(false);
 	ui->downloadRetryButton->setVisible(true);
 	ui->getStarsButton->setVisible(false);

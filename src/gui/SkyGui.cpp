@@ -147,7 +147,7 @@ QPixmap getInfoPixmap(const QStringList& strList, QFont font, QColor color)
 	titleFont.setPixelSize(font.pixelSize()+7);
 
 	QRect strRect = QFontMetrics(titleFont).boundingRect(strList.at(maxLenIdx));
-	int w = strRect.width()+1+static_cast<int>(0.02f*strRect.width());
+	int w = strRect.width()+1+static_cast<int>(0.02f*static_cast<float>(strRect.width()));
 	int h = strRect.height()*strList.count()+8;
 
 	QPixmap strPixmap(w, h);
@@ -255,11 +255,11 @@ SkyGui::SkyGui(QGraphicsItem * parent)
 	buttonBarPath = new StelBarsPath(this);
 
 	animLeftBarTimeLine = new QTimeLine(200, this);
-	animLeftBarTimeLine->setCurveShape(QTimeLine::EaseInOutCurve);
+	animLeftBarTimeLine->setEasingCurve(QEasingCurve(QEasingCurve::InOutSine));
 	connect(animLeftBarTimeLine, SIGNAL(valueChanged(qreal)), this, SLOT(updateBarsPos()));
 
 	animBottomBarTimeLine = new QTimeLine(200, this);
-	animBottomBarTimeLine->setCurveShape(QTimeLine::EaseInOutCurve);
+	animBottomBarTimeLine->setEasingCurve(QEasingCurve(QEasingCurve::InOutSine));
 	connect(animBottomBarTimeLine, SIGNAL(valueChanged(qreal)), this, SLOT(updateBarsPos()));
 
 	setAcceptHoverEvents(true);
@@ -424,7 +424,7 @@ void SkyGui::updateBarsPos()
 
 void SkyGui::setStelStyle(const QString& style)
 {
-	Q_UNUSED(style);
+	Q_UNUSED(style)
 	buttonBarPath->setPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
 	buttonBarPath->setBrush(QColor::fromRgbF(0.15, 0.16, 0.19, 0.2));
 	buttonBar->setColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
