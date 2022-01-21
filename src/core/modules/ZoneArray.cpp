@@ -237,8 +237,6 @@ bool ZoneArray::readFile(QFile& file, void *data, qint64 size)
 	{
 		part_size = 64*1024;
 	}
-	float i = 0.f;
-	i += 1.f;
 	while (size > 0)
 	{
 		const int to_read = (part_size < size) ? part_size : static_cast<int>(size);
@@ -246,7 +244,6 @@ bool ZoneArray::readFile(QFile& file, void *data, qint64 size)
 		if (read_rc != to_read) return false;
 		size -= read_rc;
 		data = (static_cast<char*>(data)) + read_rc;
-		i += 1.f;
 	}
 	return true;
 }
@@ -421,7 +418,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 
 	const Extinction& extinction=core->getSkyDrawer()->getExtinction();
 	const bool withExtinction=drawer->getFlagHasAtmosphere() && extinction.getExtinctionCoefficient()>=0.01f;
-	const float k = 0.001f*mag_range/mag_steps; // from StarMgr.cpp line 654
+	const float k = 0.001f*static_cast<float>(mag_range)/static_cast<float>(mag_steps); // from StarMgr.cpp line 654
 	
 	// Allow artificial cutoff:
 	// find the (integer) mag at which is just bright enough to be drawn.

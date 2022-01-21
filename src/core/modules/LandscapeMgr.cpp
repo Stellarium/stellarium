@@ -994,11 +994,12 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 		//TRANSLATORS: Unit of measure for distance - meter
 		QString alt = qc_("m", "distance");
 
-		desc += QString("<b>%1</b>: %2, %3, %4 %5")
-				.arg(q_("Location"))
-				.arg(StelUtils::radToDmsStrAdapt(static_cast<double>(landscape->getLocation().latitude) *M_PI_180))
-				.arg(StelUtils::radToDmsStrAdapt(static_cast<double>(landscape->getLocation().longitude) * M_PI_180))
-				.arg(landscape->getLocation().altitude).arg(alt);
+		desc += QString("<b>%1</b>: %2, %3, %4 %5").arg(
+				q_("Location"),
+				StelUtils::radToDmsStrAdapt(static_cast<double>(landscape->getLocation().latitude) *M_PI_180),
+				StelUtils::radToDmsStrAdapt(static_cast<double>(landscape->getLocation().longitude) * M_PI_180),
+				QString::number(landscape->getLocation().altitude),
+				alt);
 
 		QString planetName = landscape->getLocation().planetName;		
 		if (!planetName.isEmpty())

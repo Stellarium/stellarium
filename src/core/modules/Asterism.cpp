@@ -184,7 +184,7 @@ void Asterism::update(int deltaTime)
 
 QString Asterism::getInfoString(const StelCore *core, const InfoStringGroup &flags) const
 {
-	Q_UNUSED(core);
+	Q_UNUSED(core)
 	QString str;
 	QTextStream oss(&str);
 

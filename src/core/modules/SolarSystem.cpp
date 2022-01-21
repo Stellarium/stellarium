@@ -375,7 +375,7 @@ void SolarSystem::recreateTrails()
 	}
 	else
 	{
-		for (const auto& p : getSun()->satellites)
+		for (const auto& p : qAsConst(getSun()->satellites))
 		{
 			if (p->getPlanetType() != Planet::isObserver)
 				allTrails->addObject(static_cast<QSharedPointer<StelObject>>(p), &trailsColor);
@@ -386,7 +386,7 @@ void SolarSystem::recreateTrails()
 		if (obs)
 		{
 			const QSharedPointer<Planet> planet=obs->getHomePlanet();
-			for (const auto& m : planet->satellites)
+			for (const auto& m : qAsConst(planet->satellites))
 				if (m->getPlanetType() != Planet::isObserver)
 					allTrails->addObject(static_cast<QSharedPointer<StelObject>>(m), &trailsColor);
 		}
@@ -594,7 +594,7 @@ void SolarSystem::loadPlanets()
 			//If the file is in the user data directory, rename it:
 			if (solarSystemFile.contains(StelFileMgr::getUserDir()))
 			{
-				QString newName = QString("%1/data/ssystem-%2.ini").arg(StelFileMgr::getUserDir()).arg(QDateTime::currentDateTime().toString("yyyyMMddThhmmss"));
+				QString newName = QString("%1/data/ssystem-%2.ini").arg(StelFileMgr::getUserDir(), QDateTime::currentDateTime().toString("yyyyMMddThhmmss"));
 				if (QFile::rename(solarSystemFile, newName))
 					qWarning() << "Invalid Solar System file" << QDir::toNativeSeparators(solarSystemFile) << "has been renamed to" << QDir::toNativeSeparators(newName);
 				else

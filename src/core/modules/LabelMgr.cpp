@@ -43,7 +43,7 @@ class StelLabel
 {
 public:
 	StelLabel(const QString& text, const QFont& font, const Vec3f& color);
-	virtual ~StelLabel() {;}
+	virtual ~StelLabel() {}
 
 	//! draw the label on the sky
 	//! @param core the StelCore object
@@ -94,13 +94,13 @@ public:
 	SkyLabel(const QString& text, StelObjectP bindObject, const QFont& font, Vec3f color,
 			 QString side="NE", double distance=-1.0, SkyLabel::Style style=TextOnly);
 
-	virtual ~SkyLabel();
+	virtual ~SkyLabel() Q_DECL_OVERRIDE;
 	// SkyLabel(const QString& text, Vec3d coords, QString side="NE", double distance=-1.0, SkyLabel::Style style=TextOnly, double enclosureSize=-1.0);
 
 	//! Draw the label on the sky
 	//! @param core the StelCore object
 	//! @param sPainter the StelPainter to use for drawing operations
-	virtual bool draw(StelCore* core, StelPainter& sPainter);
+	virtual bool draw(StelCore* core, StelPainter& sPainter) Q_DECL_OVERRIDE;
 
 	static SkyLabel::Style stringToStyle(const QString& s);
 	
@@ -123,12 +123,12 @@ public:
 	//! @param font the font to use
 	//! @param color the color for the label
 	HorizonLabel(const QString& text, const float az, const float alt, const QFont& font, const Vec3f& color);
-	virtual ~HorizonLabel();
+	virtual ~HorizonLabel() Q_DECL_OVERRIDE;
 
 	//! draw the label on the screen
 	//! @param core the StelCore object
 	//! @param sPainter the StelPainter to use for drawing operations
-	virtual bool draw(StelCore* core, StelPainter& sPainter);
+	virtual bool draw(StelCore* core, StelPainter& sPainter) Q_DECL_OVERRIDE;
 private:
 	Vec3d altaz; // the vector to the coordinates
 };
@@ -146,12 +146,12 @@ public:
 	//! @param color the color for the label
 	//! @param j2000epoch if true, the label starts displayed in equatorial coordinates for epoch J2000.0
 	EquatorialLabel(const QString& text, const float ra, const float dec, const QFont& font, const Vec3f& color, QString side="NE", double distance=-1.0, bool j2000epoch=true);
-	virtual ~EquatorialLabel();
+	virtual ~EquatorialLabel() Q_DECL_OVERRIDE;
 
 	//! draw the label on the screen
 	//! @param core the StelCore object
 	//! @param sPainter the StelPainter to use for drawing operations
-	virtual bool draw(StelCore* core, StelPainter& sPainter);
+	virtual bool draw(StelCore* core, StelPainter& sPainter) Q_DECL_OVERRIDE;
 private:
 	Vec3d equPos; // the vector to the coordinates
 	QString labelSide;
@@ -171,12 +171,12 @@ public:
 	//! @param font the font to use
 	//! @param color the color for the label
 	ScreenLabel(const QString& text, int x, int y, const QFont& font, const Vec3f& color);
-	virtual ~ScreenLabel();
+	virtual ~ScreenLabel() Q_DECL_OVERRIDE;
 
 	//! draw the label on the screen
 	//! @param core the StelCore object
 	//! @param sPainter the StelPainter to use for drawing operations
-	virtual bool draw(StelCore* core, StelPainter& sPainter);
+	virtual bool draw(StelCore* core, StelPainter& sPainter) Q_DECL_OVERRIDE;
 
 private:
 	int screenX;
@@ -269,23 +269,23 @@ bool SkyLabel::draw(StelCore* core, StelPainter& sPainter)
 	char hJustify = 'c';
 	char vJustify = 'c';
 
-	if (labelSide.toUpper().contains("N"))
+	if (labelSide.contains("N", Qt::CaseInsensitive))
 	{
 		yOffset = 1.0;
 		vJustify = 'b'; // bottom justify text
 	}
-	else if (labelSide.toUpper().contains("S"))
+	else if (labelSide.contains("S", Qt::CaseInsensitive))
 	{
 		yOffset = -1.0;
-		vJustify = 't'; // top justufy text
+		vJustify = 't'; // top justify text
 	}
 
-	if (labelSide.toUpper().contains("E"))
+	if (labelSide.contains("E", Qt::CaseInsensitive))
 	{
 		xOffset = 1.0;
 		hJustify = 'l'; // right justify text
 	}
-	else if (labelSide.toUpper().contains("W"))
+	else if (labelSide.contains("W", Qt::CaseInsensitive))
 	{
 		xOffset = -1.0;
 		hJustify = 'r'; // left justify text
@@ -410,23 +410,23 @@ bool EquatorialLabel::draw(StelCore *core, StelPainter& sPainter)
 	double yOffset(0.);
 	char hJustify = 'c';
 	char vJustify = 'c';
-	if (labelSide.toUpper().contains("N"))
+	if (labelSide.contains("N", Qt::CaseInsensitive))
 	{
 		yOffset = 1.0;
 		vJustify = 'b'; // bottom justify text
 	}
-	else if (labelSide.toUpper().contains("S"))
+	else if (labelSide.contains("S", Qt::CaseInsensitive))
 	{
 		yOffset = -1.0;
-		vJustify = 't'; // top justufy text
+		vJustify = 't'; // top justify text
 	}
 
-	if (labelSide.toUpper().contains("E"))
+	if (labelSide.contains("E", Qt::CaseInsensitive))
 	{
 		xOffset = 1.0;
 		hJustify = 'l'; // right justify text
 	}
-	else if (labelSide.toUpper().contains("W"))
+	else if (labelSide.contains("W", Qt::CaseInsensitive))
 	{
 		xOffset = -1.0;
 		hJustify = 'r'; // left justify text

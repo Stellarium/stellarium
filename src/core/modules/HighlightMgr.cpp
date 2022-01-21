@@ -149,7 +149,7 @@ void HighlightMgr::drawHighlights(StelCore* core, StelPainter& painter)
 
 	if (!highlightList.empty())
 	{
-		Vec3d screenpos;
+		Vec3f screenpos;
 		for (const auto& hlObj : qAsConst(highlightList))
 		{
 			// Compute 2D pos and return if outside screen
@@ -159,7 +159,7 @@ void HighlightMgr::drawHighlights(StelCore* core, StelPainter& painter)
 			painter.setColor(hightlightColor);
 			texPointer->bind();
 			painter.setBlending(true);
-			painter.drawSprite2dMode(screenpos[0], screenpos[1], markerSize, StelApp::getInstance().getTotalRunTime()*40.f);
+			painter.drawSprite2dMode(screenpos[0], screenpos[1], markerSize, static_cast<float>(StelApp::getInstance().getTotalRunTime())*40.f);
 		}
 	}
 }

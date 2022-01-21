@@ -277,7 +277,7 @@ void Landscape::loadLabels(const QString& landscapeId)
 	engLabelFileName = StelFileMgr::findFile("landscapes/" + landscapeId, StelFileMgr::Directory) + "/gazetteer.en.utf8";
 
 	// Check the file with full name of locale
-	if (!QFileInfo(locLabelFileName).exists())
+	if (!QFileInfo::exists(locLabelFileName))
 	{
 		// File not found. What about short name of locale?
 		lang = lang.split("_").at(0);
@@ -285,9 +285,9 @@ void Landscape::loadLabels(const QString& landscapeId)
 	}
 
 	// Get localized or at least English description for landscape
-	if (QFileInfo(locLabelFileName).exists())
+	if (QFileInfo::exists(locLabelFileName))
 		descFileName = locLabelFileName;
-	else if (QFileInfo(engLabelFileName).exists())
+	else if (QFileInfo::exists(engLabelFileName))
 		descFileName = engLabelFileName;
 	else
 		return;
@@ -477,7 +477,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 		const QStringList parameters = landscapeIni.value(key).toString().split(':');  // e.g. tex0:0:0:1:1
 		//TODO: How should be handled an invalid texture description?
 		QString textureName = parameters.value(0);                                    // tex0
-		texnum = textureName.right(textureName.length() - 3).toUInt();                 // 0
+		texnum = textureName.rightRef(textureName.length() - 3).toUInt();             // 0
 		sides[i].tex = sideTexs[texnum];
 		sides[i].tex_illum = sideTexs[nbSide+texnum];
 		sides[i].texCoords[0] = parameters.at(1).toFloat();

@@ -248,9 +248,9 @@ Vec4f Meteor::getColorFromName(QString colorName)
 void Meteor::buildColorVectors(const QList<ColorPair> colors)
 {
 	// building color arrays (line and prism)
-	QList<Vec4f> lineColor;
-	QList<Vec4f> trainColor;
-	for (auto color : colors)
+	QVector<Vec4f> lineColor;
+	QVector<Vec4f> trainColor;
+	for (auto &color : colors)
 	{
 		// segments to be painted with the current color
 		int segs = qRound(m_segments * (color.second / 100.f)); // rounds to nearest integer
@@ -290,22 +290,22 @@ void Meteor::buildColorVectors(const QList<ColorPair> colors)
 		#else
 		int firstSegment = qRound((segs - 1) * (static_cast<float>(qrand()) / (static_cast<float>(RAND_MAX) + 1))); // [0, segments-1]
 		#endif
-		QList<Vec4f> lineColor2 = lineColor.mid(0, firstSegment);
-		QList<Vec4f> lineColor1 = lineColor.mid(firstSegment);
+		QVector<Vec4f> lineColor2 = lineColor.mid(0, firstSegment);
+		QVector<Vec4f> lineColor1 = lineColor.mid(firstSegment);
 		lineColor.clear();
 		lineColor.append(lineColor1);
 		lineColor.append(lineColor2);
 
 		firstSegment *= 2;
-		QList<Vec4f> trainColor2 = trainColor.mid(0, firstSegment);
-		QList<Vec4f> trainColor1 = trainColor.mid(firstSegment);
+		QVector<Vec4f> trainColor2 = trainColor.mid(0, firstSegment);
+		QVector<Vec4f> trainColor1 = trainColor.mid(firstSegment);
 		trainColor.clear();
 		trainColor.append(trainColor1);
 		trainColor.append(trainColor2);
 	}
 
-	m_lineColorVector = lineColor.toVector();
-	m_trainColorVector = trainColor.toVector();
+	m_lineColorVector = lineColor;
+	m_trainColorVector = trainColor;
 }
 
 float Meteor::meteorZ(float zenithAngle, float altitude)

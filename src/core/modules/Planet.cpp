@@ -806,7 +806,7 @@ QString Planet::getInfoStringEloPhase(const StelCore *core, const InfoStringGrou
 			oss << QString("<tr><td>%1 (&Delta;&lambda;<sub>s</sub>):</td><td align=\"right\">%2</td></tr>").arg(q_("Elongation"), dLam);
 			oss << QString("<tr><td>%1:</td><td align=\"right\">%2</td></tr>").arg(q_("Phase angle"), pha);
 			if (withIllum)
-				oss << QString("<tr><td>%1:</td><td align=\"right\">%2%</td></tr>").arg(q_("Illuminated")).arg(QString::number(getPhase(observerHelioPos) * 100., 'f', 1));
+				oss << QString("<tr><td>%1:</td><td align=\"right\">%2%</td></tr>").arg(q_("Illuminated"), QString::number(getPhase(observerHelioPos) * 100., 'f', 1));
 			oss << "</table>";
 		}
 		else
@@ -863,7 +863,7 @@ QString Planet::getInfoStringPeriods(const StelCore *core, const InfoStringGroup
 		{
 			double synodicPeriod = qAbs(1/(1/siderealPeriodCurrentPlanet - 1/siderealPeriod));
 			// Synodic period for major planets in days and in Julian years (symbol: a)
-			oss << QString(fmt).arg(q_("Synodic period")).arg(QString::number(synodicPeriod, 'f', 2)).arg(days).arg(QString::number(synodicPeriod/365.25, 'f', 3));
+			oss << QString(fmt).arg(q_("Synodic period"), QString::number(synodicPeriod, 'f', 2), days, QString::number(synodicPeriod/365.25, 'f', 3));
 		}
 		if (withTables)
 			oss << "</table>";
@@ -1008,8 +1008,6 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 		// For general use, find a better location first.
 		// oss << q_("Planetocentric distance &rho;: %1 (km)").arg(core->getCurrentObserver()->getDistanceFromCenter() * AU) <<"<br>";
 
-		// TRANSLATORS: Unit of measure for period - days
-		QString days = qc_("days", "duration");
 		if (siderealPeriod>0.0)
 		{
 			if (qAbs(siderealDay)>0 && getPlanetType()!=isArtificial)
@@ -1240,7 +1238,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 			const double eclipseObscuration = 100.*(1.-eclObj.first);
 			if (eclipseObscuration>1.e-7) // needed to avoid false display of 1e-14 or so.
 			{
-				oss << QString("%1: %2%<br />").arg(q_("Eclipse obscuration")).arg(QString::number(eclipseObscuration, 'f', 2));
+				oss << QString("%1: %2%<br />").arg(q_("Eclipse obscuration"), QString::number(eclipseObscuration, 'f', 2));
 				PlanetP obj = eclObj.second;
 				if (onEarth && obj == ssystem->getMoon())
 				{
@@ -1249,7 +1247,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 							 + (obj->getAngularRadius(core) * M_PI_180) / obj->getSphereScale()
 							- getJ2000EquatorialPos(core).angle(obj->getJ2000EquatorialPos(core)))
 							/ angularSize;
-					oss << QString("%1: %2<br />").arg(q_("Eclipse magnitude")).arg(QString::number(eclipseMagnitude, 'f', 3));
+					oss << QString("%1: %2<br />").arg(q_("Eclipse magnitude"), QString::number(eclipseMagnitude, 'f', 3));
 				}
 			}
 
@@ -1276,23 +1274,22 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 					{
 						QString info = q_("Center of solar eclipse (Lat./Long.)");
 						if (withDecimalDegree)
-							oss << QString("%1: %2%3/%4%5<br />").arg(info).arg(pos[0], 5, 'f', 4).arg(QChar(0x00B0)).arg(pos[1], 5, 'f', 4).arg(QChar(0x00B0));
+							oss << QString("%1: %2°/%3°<br />").arg(info).arg(pos[0], 5, 'f', 4).arg(pos[1], 5, 'f', 4);
 						else
-							oss << QString("%1: %2/%3<br />").arg(info).arg(StelUtils::decDegToDmsStr(pos[0])).arg(StelUtils::decDegToDmsStr(pos[1]));
+							oss << QString("%1: %2/%3<br />").arg(info, StelUtils::decDegToDmsStr(pos[0]), StelUtils::decDegToDmsStr(pos[1]));
 						StelLocation loc = core->getCurrentLocation();
 						// distance between center point and current location
 						double distance = loc.distanceKm(pos[1], pos[0]);
 						double azimuth = loc.getAzimuthForLocation(pos[1], pos[0]);
 
-						oss << QString("%1 %2 %3 %4%5<br/>")
-								 .arg(q_("Shadow center point is"))
-								 .arg(QString::number(distance, 'f', 1))
-								 .arg(q_("km towards azimuth"))
-								 .arg(QString::number(azimuth, 'f', 1))
-								 .arg(QChar(0x00B0));
-						oss << QString("%1: %2 ")
-								 .arg(q_("Magnitude of central eclipse"))
-								 .arg(QString::number(pos[2], 'f', 3));
+						oss << QString("%1 %2 %3 %4°<br/>").arg(
+								 q_("Shadow center point is"),
+								 QString::number(distance, 'f', 1),
+								 q_("km towards azimuth"),
+								 QString::number(azimuth, 'f', 1));
+						oss << QString("%1: %2 ").arg(
+								 q_("Magnitude of central eclipse"),
+								 QString::number(pos[2], 'f', 3));
 						if (pos[2] < 1.0)
 							oss << QString(qc_("(annular)","type of solar eclipse"));
 						else
@@ -1620,7 +1617,7 @@ QVector<const Planet*> Planet::getCandidatesForShadow() const
 	// Test satellites mutual occultations.
 	if (parent.data() != sun)
 	{
-		for (const auto& planet : parent->satellites)
+		for (const auto& planet : qAsConst(parent->satellites))
 		{
 			//skip self-shadowing
 			if(planet.data() == this )
@@ -4026,7 +4023,7 @@ bool Planet::ensureObjLoaded()
 					qWarning()<<"Cannot load OBJ model into OpenGL for solar system object"<<getEnglishName();
 					return false;
 				}
-				GL(;);
+				GL(;)
 			}
 		}
 		else
@@ -4042,7 +4039,7 @@ bool Planet::ensureObjLoaded()
 
 bool Planet::drawObjModel(StelPainter *painter, float screenRd)
 {
-	Q_UNUSED(screenRd); //screen size unused for now, use it for LOD or something?
+	Q_UNUSED(screenRd) //screen size unused for now, use it for LOD or something?
 
 	//make sure the OBJ is loaded, or start loading it
 	if(!ensureObjLoaded())
