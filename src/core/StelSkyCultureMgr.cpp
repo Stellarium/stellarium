@@ -83,7 +83,7 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 			{ "incomplete",   StelSkyCulture::INCOMPLETE},
 		};
 		StelSkyCulture::CLASSIFICATION classification=classificationMap.value(classificationStr.toLower(), StelSkyCulture::INCOMPLETE);
-		if (!classificationMap.keys().contains(classificationStr.toLower()))
+		if (classificationMap.constFind(classificationStr.toLower()) == classificationMap.constEnd()) // not included
 		{
 			qDebug() << "Skyculture " << dir << "has UNKNOWN classification: " << classificationStr;
 			qDebug() << "Please edit info.ini and change to a supported value. For now, this equals 'incomplete'";

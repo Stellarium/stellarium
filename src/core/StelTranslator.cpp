@@ -123,7 +123,7 @@ QString StelTranslator::iso639_1CodeToNativeName(const QString& languageCode)
 QString StelTranslator::nativeNameToIso639_1Code(const QString& languageName)
 {
 	QMap<QString, QString>::ConstIterator iter;
-	for (iter=iso639codes.begin();iter!=iso639codes.end();++iter)
+	for (iter=iso639codes.constBegin();iter!=iso639codes.constEnd();++iter)
 		if (iter.value() == languageName)
 			return iter.key();
 
@@ -138,7 +138,7 @@ QStringList StelTranslator::getAvailableLanguagesNamesNative(const QString& loca
 		tmpDir.append("/stellarium/");
 	else
 		tmpDir.append("/stellarium-" + section + "/");
-	QStringList codeList = getAvailableIso639_1Codes(tmpDir);
+	const QStringList codeList = getAvailableIso639_1Codes(tmpDir);
 	QStringList output;
 	for (const auto& lang : codeList)
 	{

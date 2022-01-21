@@ -851,8 +851,7 @@ void StelSkyDrawer::initColorTableFromConfigFile(QSettings* conf)
 	std::map<float,Vec3f> color_map;
 	for (float bV=-0.5f;bV<=4.0f;bV+=0.01f)
 	{
-		char entry[256];
-		sprintf(entry,"bv_color_%+5.2f",bV);
+		QString entry = QString::asprintf("bv_color_%+5.2f", static_cast<double>(bV));
 		const QStringList s(conf->value(QString("stars/") + entry).toStringList());
 		if (!s.isEmpty())
 		{

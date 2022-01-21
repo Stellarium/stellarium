@@ -2278,7 +2278,7 @@ float* ComputeCosSinTheta(const unsigned int slices)
 	Q_ASSERT(slices<=MAX_SLICES);
 	
 	// Difference angle between the stops. Always use 2*M_PI/slices!
-	const float dTheta = 2.f * static_cast<float>(M_PI) / slices;
+	const float dTheta = 2.f * static_cast<float>(M_PI) / static_cast<float>(slices);
 	float *cos_sin = cos_sin_theta;
 	float *cos_sin_rev = cos_sin + 2*(slices+1);
 	const float c = std::cos(dTheta);
@@ -2312,7 +2312,7 @@ float* ComputeCosSinRho(const unsigned int segments)
 	Q_ASSERT(segments<=MAX_STACKS);
 	
 	// Difference angle between the stops. Always use M_PI/segments!
-	const float dRho = static_cast<float>(M_PI) / segments;
+	const float dRho = static_cast<float>(M_PI) / static_cast<float>(segments);
 	float *cos_sin = cos_sin_rho;
 	float *cos_sin_rev = cos_sin + 2*(segments+1);
 	const float c = cosf(dRho);

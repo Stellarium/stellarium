@@ -944,7 +944,7 @@ void StelApp::setVisionModeNight(bool b)
 	if (flagNightVision!=b)
 	{
 		flagNightVision=b;
-		emit(visionNightModeChanged(b));
+		emit visionNightModeChanged(b);
 	}
 }
 
@@ -953,7 +953,7 @@ void StelApp::setFlagOverwriteInfoColor(bool b)
 	if (flagOverwriteInfoColor!=b)
 	{
 		flagOverwriteInfoColor=b;
-		emit(flagOverwriteInfoColorChanged(b));
+		emit flagOverwriteInfoColorChanged(b);
 	}
 }
 

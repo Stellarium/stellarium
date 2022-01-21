@@ -74,8 +74,8 @@ ArtificialPlanet::ArtificialPlanet(const PlanetP& orig) :
 void ArtificialPlanet::setDest(const PlanetP& dest)
 {
 	ArtificialPlanet::dest = dest;
-	englishName = QString("%1->%2").arg(orig_name).arg(dest->getEnglishName());
-	nameI18 = QString("%1->%2").arg(orig_name_i18n).arg(dest->getNameI18n());
+	englishName = QString("%1->%2").arg(orig_name, dest->getEnglishName());
+	nameI18 = QString("%1->%2").arg(orig_name_i18n, dest->getNameI18n());
 
 	// rotation:
 	const RotationElements &r(dest->getRotationElements());
@@ -140,10 +140,10 @@ Vec3d ArtificialPlanet::getRot(const Planet* p)
 	return r;
 }
 
-void ArtificialPlanet::computePosition(const double dateJDE, const Vec3d &aberrationPush)
+void ArtificialPlanet::computePosition(const double dateJDE, const Vec3d &aberrationpush)
 {
 	Q_UNUSED(dateJDE)
-	Q_UNUSED(aberrationPush)
+	Q_UNUSED(aberrationpush)
 }
 
 void ArtificialPlanet::computeAverage(double f1)

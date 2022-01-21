@@ -178,10 +178,9 @@ StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const Stel
 //! Create a texture from a QImage.
 StelTextureSP StelTextureMgr::createTexture(const QImage &image, const StelTexture::StelTextureParams& params)
 {
-	bool r;
 	StelTextureSP tex = StelTextureSP(new StelTexture(this));
 	tex->loadParams = params;
-	r = tex->glLoad(image);
+	bool r = tex->glLoad(image);
 	Q_ASSERT(r);
 	return tex;
 }

@@ -157,7 +157,7 @@ QObjectList StelModuleMgr::loadExtensions(const QString &moduleID)
 
 struct StelModuleOrderComparator
 {
-	StelModuleOrderComparator(StelModule::StelModuleActionName aaction) : action(aaction) {;}
+	StelModuleOrderComparator(StelModule::StelModuleActionName aaction) : action(aaction) {}
 	bool operator()(StelModule* x, StelModule* y) {return x->getCallOrder(action)<y->getCallOrder(action);}
 private:
 	StelModule::StelModuleActionName action;
@@ -245,10 +245,9 @@ QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 	}
 
 	// Then list dynamic libraries from the modules/ directory
-	QSet<QString> moduleDirs;
-	moduleDirs = StelFileMgr::listContents("modules",StelFileMgr::Directory);
+	const QSet<QString> moduleDirs = StelFileMgr::listContents("modules",StelFileMgr::Directory);
 
-	for (auto dir : moduleDirs)
+	for (auto &dir : moduleDirs)
 	{
 		QString moduleFullPath = QString("modules/") + dir + "/lib" + dir;
 #ifdef Q_OS_WIN
