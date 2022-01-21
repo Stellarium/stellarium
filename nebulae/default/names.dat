@@ -376,8 +376,8 @@ NGC  3132            _("Eight-Burst Planetary Nebula") # WK, SIMBAD, BCH, SG, DN
 NGC  3132            _("Southern Ring Nebula") # WK, SG, DN
 NGC  3172            _("Polarissima Borealis") # WK, SIMBAD, WSO, WSG
 NGC  3172            _("Polarissima") # DWH
-NGC  3180            _("Little Pinwheel Galaxy") # HT
-NGC  3184            _("Little Pinwheel Galaxy") # B500
+# NGC 3180 and NGC 3184 is same galaxy. Only NGC 3180 is in our catalog.
+NGC  3180            _("Little Pinwheel Galaxy") # HT, B500
 NGC  3185            _("Leo Quartet") # WSG
 NGC  3187            _("Leo Quartet") # WSG
 NGC  3189            _("NGC 3190 Group") # BCH, SIMBAD
@@ -564,9 +564,6 @@ NGC  5904            _("Rose Cluster") # B500
 NGC  5906            _("Splinter Galaxy") # WSG, DSW, SD, DN
 NGC  5906            _("Cat Scratch Galaxy") # B500, SD
 NGC  5906            _("Knife Edge Galaxy") # B500, SD
-NGC  5907            _("Splinter Galaxy") # B500
-NGC  5907            _("Cat Scratch Galaxy") # B500
-NGC  5907            _("Knife Edge Galaxy") # B500
 NGC  6027            _("Seyfert's Sextet") # NED, WSG, SIMBAD
 NGC  6027            _("Seyfert's Quintet") # SIMBAD
 NGC  6027            _("Serpens Sextet")
