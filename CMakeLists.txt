@@ -294,10 +294,7 @@ ENDIF()
 # resolve bug for FreeBSD/amd64 and NVIDIA proprietary drivers 
 IF(${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
      # Use -pthread compilation option to properly link to threading library
-     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
-     IF(${GCC_VERSION} VERSION_GREATER 4.7)
-          SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-local-typedefs")
-     ENDIF()
+     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread -Wno-unused-local-typedefs")
 ENDIF()
 
 # This activates Link Time Optimization on recent GCC
