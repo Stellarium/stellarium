@@ -221,16 +221,16 @@ ELSE()
      SET(STEL_GCC_CXX_FLAGS "${STEL_GCC_CXX_FLAGS} -diag-disable:remark -wd1875,654")
 ENDIF()
 
-# Set whether to try using C++11 when compiling. Required for Qt >= 5.7"
-IF(NOT (CMAKE_VERSION VERSION_LESS 3.1.0))
-     # Let CMake handle setting C++11 (since 3.1)
-     SET(CMAKE_CXX_STANDARD 11)
+# Enable using C++17 when compiling.
+SET(CMAKE_CXX_STANDARD 17)
+SET(CMAKE_CXX_STANDARD_REQUIRED ON)
+SET(CMAKE_CXX_EXTENSIONS OFF)
+# NOTE: C_STANDARD values added in CMake 3.21
+# https://gitlab.kitware.com/cmake/cmake/-/issues/22366
+IF(CMAKE_VERSION VERSION_LESS 3.21.0)
      SET(CMAKE_C_STANDARD 11)
 ELSE()
-     # Add std=c++11 to gcc flags
-     SET(STEL_GCC_CXX_FLAGS "-std=c++11 ${STEL_GCC_CXX_FLAGS}")
-     # Add std=c11 to gcc flags
-     SET(STEL_GCC_C_FLAGS "-std=c11 ${STEL_GCC_C_FLAGS}")
+     SET(CMAKE_C_STANDARD 17)
 ENDIF()
 
 IF(WIN32)
@@ -251,6 +251,8 @@ IF(WIN32)
           # C4351: "new" behaviour, member array default initialization. Required since at least C++98, but funny MSVC throws a warning.
           # C4996: deprecated POSIX names (used in zlib)
           SET(STEL_MSVC_FLAGS "/wd4244 /wd4305 /wd4351 /wd4996")
+          # Avoid type conflict with C++17 standard
+          SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /D_HAS_STD_BYTE=0")
           # Set minimal version of Windows
           SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /D_WIN32_WINNT=${MIN_WIN_VERSION}")
           IF(MSVC_VERSION GREATER 1700)
