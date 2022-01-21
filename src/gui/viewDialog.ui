@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>993</width>
+    <width>1046</width>
     <height>659</height>
    </rect>
   </property>
@@ -79,7 +79,6 @@
        <widget class="QLabel" name="stelWindowTitle">
         <property name="font">
          <font>
-          <weight>75</weight>
           <italic>false</italic>
           <bold>true</bold>
          </font>
@@ -460,10 +459,12 @@
                   <enum>Qt::NoFocus</enum>
                  </property>
                  <property name="toolTip">
-                  <string>pressure, temperature, extinction coefficient</string>
+                  <string>Refraction/Extinction settings: pressure, temperature, extinction coefficient, etc.</string>
                  </property>
-                 <property name="text">
-                  <string>Refraction/Extinction settings...</string>
+                 <property name="icon">
+                  <iconset resource="../../data/gui/guiRes.qrc">
+                   <normaloff>:/graphicGui/uibtSettings.png</normaloff>
+                   <disabledoff>:/graphicGui/uibtSettings-disabled.png</disabledoff>:/graphicGui/uibtSettings.png</iconset>
                  </property>
                 </widget>
                </item>
@@ -473,7 +474,12 @@
                   <string>Open skylight details (color tweaks for the atmosphere)</string>
                  </property>
                  <property name="text">
-                  <string>Skylight...</string>
+                  <string notr="true"/>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="../../data/gui/guiRes.qrc">
+                   <normaloff>:/graphicGui/uibtEdit.png</normaloff>
+                   <disabledoff>:/graphicGui/uibtEdit-disabled.png</disabledoff>:/graphicGui/uibtEdit.png</iconset>
                  </property>
                 </widget>
                </item>
@@ -483,7 +489,12 @@
                   <string>Open tone mapping details.</string>
                  </property>
                  <property name="text">
-                  <string>Tone Mapping...</string>
+                  <string notr="true"/>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="../../data/gui/guiRes.qrc">
+                   <normaloff>:/graphicGui/uibtProcess.png</normaloff>
+                   <disabledoff>:/graphicGui/uibtProcess-disabled.png</disabledoff>:/graphicGui/uibtProcess.png</iconset>
                  </property>
                 </widget>
                </item>
@@ -1589,7 +1600,12 @@
                   <string>Configure colors of orbit lines</string>
                  </property>
                  <property name="text">
-                  <string>Colors...</string>
+                  <string notr="true"/>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="../../data/gui/guiRes.qrc">
+                   <normaloff>:/graphicGui/uibtSettings.png</normaloff>
+                   <disabledoff>:/graphicGui/uibtSettings-disabled.png</disabledoff>:/graphicGui/uibtSettings.png</iconset>
                  </property>
                 </widget>
                </item>
@@ -1804,7 +1820,7 @@
                <item>
                 <widget class="QPushButton" name="pushButtonGrsDetails">
                  <property name="toolTip">
-                  <string>GRS details...</string>
+                  <string>Jupiter's Great Red Spot...</string>
                  </property>
                  <property name="text">
                   <string>GRS details...</string>
@@ -1812,17 +1828,11 @@
                 </widget>
                </item>
                <item>
-                <spacer name="horizontalSpacer_6">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
+                <widget class="QPushButton" name="pushButtonSSE">
+                 <property name="text">
+                  <string>Solar System Editor...</string>
                  </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
+                </widget>
                </item>
               </layout>
              </item>
@@ -1998,13 +2008,6 @@
                 </widget>
                </item>
               </layout>
-             </item>
-             <item row="15" column="0">
-              <widget class="QPushButton" name="pushButtonSSE">
-               <property name="text">
-                <string>Solar System Editor...</string>
-               </property>
-              </widget>
              </item>
             </layout>
            </widget>
@@ -5155,15 +5158,17 @@
   <tabstop>constellationArtBrightnessSpinBox</tabstop>
   <tabstop>showAsterismLabelsCheckBox</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../../data/gui/guiRes.qrc"/>
+ </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
