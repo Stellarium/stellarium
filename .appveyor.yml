@@ -64,7 +64,7 @@ before_build:
   - set PATH=C:\Qt\%qtver%\%qtbin%\bin;%INNSPATH%;%OPENSSLPATH%;%PATH%
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "release" -and $env:packaging -eq "true") { $env:PUBLISH_BINARY = 'true' }
   - ps: if($env:APPVEYOR_REPO_COMMIT_MESSAGE.contains('[publish]') -and $env:packaging -eq "true") { $env:PUBLISH_BINARY = 'true' }
-  - appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/guide/guide.pdf -FileName c:\stellarium\guide\guide.pdf
+  - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/guide/guide.pdf -FileName c:\stellarium\guide\guide.pdf
   - mkdir stellarium-%qtver%-%qtbin%
   - cd c:\stellarium
   - mkdir build-%qtver%-%qtbin% && cd build-%qtver%-%qtbin%
