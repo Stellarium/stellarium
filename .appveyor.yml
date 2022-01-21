@@ -77,7 +77,7 @@ build:
   verbosity: minimal
   
 test_script:
-  - ctest --output-on-failure
+  - if [%PUBLISH_BINARY%]==[false] ctest --output-on-failure
 
 after_test:
   - if [%PUBLISH_BINARY%]==[true] cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target install
