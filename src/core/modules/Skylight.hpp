@@ -108,7 +108,7 @@ friend class AtmosphereDialog;
 
 public:
 	Skylight();
-	virtual ~Skylight();
+	virtual ~Skylight() Q_DECL_OVERRIDE;
 
 	//! Same functions but in vector mode : faster because prevents extra cosine calculations
 	//! The position vectors MUST be normalized, and the vertical z component is the third one

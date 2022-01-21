@@ -102,9 +102,9 @@ private:
 	StelObjectP getBrightestStarInConstellation(void) const;
 
 	//! Get the translated name for the Constellation.
-	QString getNameI18n() const {return nameI18;}
+	QString getNameI18n() const Q_DECL_OVERRIDE {return nameI18;}
 	//! Get the English name for the Constellation.
-	QString getEnglishName() const {return englishName;}
+	QString getEnglishName() const Q_DECL_OVERRIDE {return englishName;}
 	//! Get the short name for the Constellation (returns the abbreviation).
 	QString getShortName() const {return abbreviation;}
 	//! Draw the lines for the Constellation.

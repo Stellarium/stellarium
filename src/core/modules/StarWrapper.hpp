@@ -45,8 +45,8 @@ template <class Star> struct SpecialZoneData;
 class StarWrapperBase : public StelObject
 {
 protected:
-	StarWrapperBase(void) : ref_count(0) {;}
-	virtual ~StarWrapperBase(void) {;}
+	StarWrapperBase(void) : ref_count(0) {}
+	virtual ~StarWrapperBase(void) Q_DECL_OVERRIDE {}
 	virtual QString getType(void) const Q_DECL_OVERRIDE {return STAR_TYPE;}
 
 	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE {return QString();}
@@ -72,9 +72,9 @@ private:
 template <class Star> class StarWrapper : public StarWrapperBase
 {
 protected:
-	StarWrapper(const SpecialZoneArray<Star> *a,
-		const SpecialZoneData<Star> *z,
-		const Star *s) : a(a), z(z), s(s) {;}
+	StarWrapper(const SpecialZoneArray<Star> *array,
+		const SpecialZoneData<Star> *zone,
+		const Star *star) : a(array), z(zone), s(star) {}
 	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const Q_DECL_OVERRIDE
 	{
 		static const double d2000 = 2451545.0;
@@ -103,7 +103,7 @@ protected:
 	}
 	virtual float getVMagnitude(const StelCore* core) const Q_DECL_OVERRIDE
 	{
-		Q_UNUSED(core);
+		Q_UNUSED(core)
 		return 0.001f*a->mag_min + s->getMag()*(0.001f*a->mag_range)/a->mag_steps;
 	}
 	virtual float getBV(void) const  Q_DECL_OVERRIDE {return s->getBV();}
@@ -119,9 +119,9 @@ protected:
 class StarWrapper1 : public StarWrapper<Star1>
 {
 public:
-	StarWrapper1(const SpecialZoneArray<Star1> *a,
-		const SpecialZoneData<Star1> *z,
-		const Star1 *s) : StarWrapper<Star1>(a,z,s) {;}
+	StarWrapper1(const SpecialZoneArray<Star1> *array,
+		const SpecialZoneData<Star1> *zone,
+		const Star1 *star) : StarWrapper<Star1>(array,zone,star) {}
 
 	//! StarWrapper1 supports the following InfoStringGroup flags: <ul>
 	//! <li> Name
@@ -158,18 +158,18 @@ public:
 class StarWrapper2 : public StarWrapper<Star2>
 {
 public:
-	StarWrapper2(const SpecialZoneArray<Star2> *a,
-			   const SpecialZoneData<Star2> *z,
-			   const Star2 *s) : StarWrapper<Star2>(a,z,s) {;}
+	StarWrapper2(const SpecialZoneArray<Star2> *array,
+			   const SpecialZoneData<Star2> *zone,
+			   const Star2 *star) : StarWrapper<Star2>(array,zone,star) {}
 	virtual QString getID(void) const Q_DECL_OVERRIDE { return QString(); }
 };
 
 class StarWrapper3 : public StarWrapper<Star3>
 {
 public:
-	StarWrapper3(const SpecialZoneArray<Star3> *a,
-			   const SpecialZoneData<Star3> *z,
-			   const Star3 *s) : StarWrapper<Star3>(a,z,s) {;}
+	StarWrapper3(const SpecialZoneArray<Star3> *array,
+			   const SpecialZoneData<Star3> *zone,
+			   const Star3 *star) : StarWrapper<Star3>(array,zone,star) {}
 	virtual QString getID(void) const Q_DECL_OVERRIDE { return QString(); }
 };
 

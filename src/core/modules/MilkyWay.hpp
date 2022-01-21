@@ -47,25 +47,25 @@ class MilkyWay : public StelModule
 		   NOTIFY saturationChanged)
 public:
 	MilkyWay();
-	virtual ~MilkyWay();
+	virtual ~MilkyWay() Q_DECL_OVERRIDE;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	//! Initialize the class.  Here we load the texture for the Milky Way and 
 	//! get the display settings from application settings, namely the flag which
 	//! determines if the Milky Way is displayed or not, and the intensity setting.
-	virtual void init();
+	virtual void init() Q_DECL_OVERRIDE;
 
 	//! Draw the Milky Way.
-	virtual void draw(StelCore* core);
+	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
 	
 	//! Update and time-dependent state.  Updates the fade level while the 
 	//! Milky way rendering is being changed from on to off or off to on.
-	virtual void update(double deltaTime);
+	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
 	
 	//! actionDraw returns 1 (because this is background, very early drawing).
 	//! Other actions return 0 for no action.
-	virtual double getCallOrder(StelModuleActionName actionName) const;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 	
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Setter and getters
@@ -73,12 +73,12 @@ public slots:
 	//! Get Milky Way intensity (brightness).
 	double getIntensity() const {return intensity;}
 	//! Set Milky Way intensity. Default value: 1.
-	void setIntensity(double aintensity) {if(aintensity!=intensity){ intensity = aintensity; emit intensityChanged(intensity); }}
+	void setIntensity(double aintensity) {if(!qFuzzyCompare(aintensity, intensity)){ intensity = aintensity; emit intensityChanged(intensity); }}
 
 	//! Get Milky Way saturation (color strength).
 	double getSaturation()const {return saturation;}
 	//! Set Milky Way saturation (color strength).
-	void setSaturation(double sat) {if(sat!=saturation){ saturation = sat; emit saturationChanged(saturation); }}
+	void setSaturation(double sat) {if(!qFuzzyCompare(sat, saturation)){ saturation = sat; emit saturationChanged(saturation); }}
 
 	//! Get the color used for rendering the Milky Way. It is modulated by intensity, light pollution and atmospheric extinction.
 	Vec3f getColor() const {return color;}
