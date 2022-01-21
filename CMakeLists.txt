@@ -224,8 +224,14 @@ ENDIF()
 # Enable using C++17 when compiling.
 SET(CMAKE_CXX_STANDARD 17)
 SET(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
-SET(CMAKE_C_STANDARD 17)
+SET(CMAKE_CXX_EXTENSIONS OFF)
+# NOTE: C_STANDARD values added in CMake 3.21
+# https://gitlab.kitware.com/cmake/cmake/-/issues/22366
+IF(CMAKE_VERSION VERSION_LESS 3.21.0)
+     SET(CMAKE_C_STANDARD 11)
+ELSE()
+     SET(CMAKE_C_STANDARD 17)
+ENDIF()
 
 IF(WIN32)
      # We don't need the extra Windows.h stuff, this may speed up compilation a tiny bit
