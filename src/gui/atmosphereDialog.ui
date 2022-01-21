@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>252</width>
-    <height>231</height>
+    <width>312</width>
+    <height>289</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -292,6 +292,9 @@
         </item>
         <item row="1" column="1">
          <widget class="QDoubleSpinBox" name="doubleSpinBox_T">
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
           <property name="minimum">
            <double>1.000000000000000</double>
           </property>

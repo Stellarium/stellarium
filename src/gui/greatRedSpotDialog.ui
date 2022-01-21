@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>327</width>
-    <height>201</height>
+    <width>376</width>
+    <height>216</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -151,6 +151,9 @@
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
+        <property name="suffix">
+         <string notr="true">°</string>
+        </property>
         <property name="decimals">
          <number>5</number>
         </property>
@@ -190,7 +193,7 @@
          <set>Qt::ImhNone</set>
         </property>
         <property name="text">
-         <string>Annual drift (degrees):</string>
+         <string>Annual drift:</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -203,7 +206,7 @@
          <string>Jovigraphic longitude of Great Red Spot in System II</string>
         </property>
         <property name="text">
-         <string>Longitude of GRS (degrees):</string>
+         <string>Longitude of GRS:</string>
         </property>
        </widget>
       </item>
@@ -211,6 +214,9 @@
        <widget class="QSpinBox" name="longitudeSpinBox">
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+        <property name="suffix">
+         <string notr="true">°</string>
         </property>
         <property name="maximum">
          <number>359</number>
