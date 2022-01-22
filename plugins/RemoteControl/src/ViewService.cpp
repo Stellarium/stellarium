@@ -41,7 +41,7 @@ ViewService::ViewService(QObject *parent) : AbstractAPIService(parent)
 
 void ViewService::get(const QByteArray &operation, const APIParameters &parameters, APIServiceResponse &response)
 {
-	Q_UNUSED(parameters);
+	Q_UNUSED(parameters)
 
 	if(operation=="listlandscape")
 	{
@@ -120,11 +120,11 @@ void ViewService::get(const QByteArray &operation, const APIParameters &paramete
 	else if (operation=="listprojection")
 	{
 		//list projection types
-		QStringList keys = core->getAllProjectionTypeKeys();
+		const QStringList keys = core->getAllProjectionTypeKeys();
 
 		QJsonObject obj;
 
-		for (auto str : keys)
+		for (auto &str : keys)
 		{
 			QString name = core->projectionTypeKeyToNameI18n(str);
 			obj.insert(str,name);

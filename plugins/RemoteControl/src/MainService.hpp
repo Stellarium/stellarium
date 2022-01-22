@@ -77,7 +77,7 @@ private slots:
 	QString getInfoString();
 
 	//! Like StelDialog::gotoObject
-	bool focusObject(const QString& name, SelectionMode mode);
+	bool focusObject(const QString& name, MainService::SelectionMode mode);
 	void focusPosition(const Vec3d& pos);
 
 	void updateMovement(double x, double y, bool xUpdated, bool yUpdated);
