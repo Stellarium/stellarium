@@ -43,7 +43,7 @@ public:
 	};
 	Q_ENUM(HipQueryStatus)
 
-	~HipOnlineReply();
+	~HipOnlineReply() Q_DECL_OVERRIDE;
 
 	//! Get the raw result HTML string from HIP search
 	QString getResult() const {return htmlResult;}
