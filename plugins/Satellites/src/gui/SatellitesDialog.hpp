@@ -61,14 +61,14 @@ public:
 #endif
 
 	SatellitesDialog();
-	~SatellitesDialog();
+	~SatellitesDialog() Q_DECL_OVERRIDE;
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
-	void createDialogContent();
+	void createDialogContent() Q_DECL_OVERRIDE;
 
 public slots:
-	void retranslate();
+	void retranslate() Q_DECL_OVERRIDE;
 
 private slots:
 	void jumpToSourcesTab();

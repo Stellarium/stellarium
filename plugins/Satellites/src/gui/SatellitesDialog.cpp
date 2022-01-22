@@ -288,7 +288,7 @@ void SatellitesDialog::askSatMarkerColor()
 	QColor c = QColorDialog::getColor(buttonMarkerColor, &StelMainView::getInstance(), "");
 	if (c.isValid())
 	{
-		Vec3f vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		Vec3f vColor = Vec3d(c.redF(), c.greenF(), c.blueF()).toVec3f();
 		SatelliteP sat;
 		// colourize all selected satellites
 		for (int i = 0; i < selection.size(); i++)
@@ -316,7 +316,7 @@ void SatellitesDialog::askSatOrbitColor()
 	QColor c = QColorDialog::getColor(buttonOrbitColor, &StelMainView::getInstance(), "");
 	if (c.isValid())
 	{
-		Vec3f vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		Vec3f vColor = Vec3d(c.redF(), c.greenF(), c.blueF()).toVec3f();
 		SatelliteP sat;
 		// colourize all selected satellites
 		for (int i = 0; i < selection.size(); i++)
@@ -344,7 +344,7 @@ void SatellitesDialog::askSatInfoColor()
 	QColor c = QColorDialog::getColor(buttonInfoColor, &StelMainView::getInstance(), "");
 	if (c.isValid())
 	{
-		Vec3f vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		Vec3f vColor = Vec3d(c.redF(), c.greenF(), c.blueF()).toVec3f();
 		SatelliteP sat;
 		// colourize all selected satellites
 		for (int i = 0; i < selection.size(); i++)

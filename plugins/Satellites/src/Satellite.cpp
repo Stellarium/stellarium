@@ -354,7 +354,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 			QString mins = qc_("min", "period");
 			oss << QString("%1: %2 %3 (%4 &mdash; %5 %6)")
 			       .arg(q_("Orbital period")).arg(orbitalPeriod, 5, 'f', 2)
-			       .arg(mins).arg(StelUtils::hoursToHmsStr(orbitalPeriod/60.0, true))
+			       .arg(mins, StelUtils::hoursToHmsStr(orbitalPeriod/60.0, true))
 			       .arg(1440.0/orbitalPeriod, 9, 'f', 5).arg(rpd) << "<br/>";
 		}
 		double inclination = pSatWrapper->getOrbitalInclination();
@@ -362,7 +362,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		       .arg(q_("Inclination"), StelUtils::decDegToDmsStr(inclination),
 			    QString::number(inclination, 'f', 4), degree)
 		<< "<br/>";
-		oss << QString("%1: %2%3/%4%5")
+		oss << QString("%1: %2&deg;/%4&deg;")
 		       .arg(q_("SubPoint (Lat./Long.)"))
 		       .arg(latLongSubPointPosition[0], 5, 'f', 2)
 		       .arg(QChar(0x00B0))
@@ -377,7 +377,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 			.arg(qRound(position[1]))
 			.arg(qRound(position[2]));
 		// TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered inertial coordinate system
-		oss << QString("%1: %2 %3").arg(q_("TEME coordinates")).arg(temeCoords).arg(qc_("km", "distance")) << "<br/>";
+		oss << QString("%1: %2 %3").arg(q_("TEME coordinates"), temeCoords, qc_("km", "distance")) << "<br/>";
 		
 		QString temeVel = QString(xyz)
 		        .arg(velocity[0], 5, 'f', 2)
@@ -409,12 +409,12 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 			double hours = lastUpdated.time().hour() + lastUpdated.time().minute()/60. + lastUpdated.time().second()/3600.;
 			updDate = QString("%1 %2 %3 %4 %5").arg(sd.day())
 					.arg(StelLocaleMgr::longGenitiveMonthName(sd.month())).arg(sd.year())
-					.arg(qc_("at","at time")).arg(StelUtils::hoursToHmsStr(hours, true));
+					.arg(qc_("at","at time"), StelUtils::hoursToHmsStr(hours, true));
 		}
 		oss << QString("%1: %2").arg(q_("Last updated TLE"), updDate) << "<br />";
 		oss << QString("%1: %2").arg(q_("Epoch of the TLE"), tleEpoch) << "<br />";
 		if (RCS>0.)
-			oss << QString("%1: %2 %3<sup>2</sup>").arg(q_("Radar cross-section (RCS)")).arg(QString::number(RCS, 'f', 3)).arg(qc_("m","distance")) << "<br />";
+			oss << QString("%1: %2 %3<sup>2</sup>").arg(q_("Radar cross-section (RCS)"), QString::number(RCS, 'f', 3), qc_("m","distance")) << "<br />";
 
 		// Groups of the artificial satellites
 		QStringList groupList;
@@ -467,7 +467,7 @@ void Satellite::calculateSatDataFromLine2(QString tle)
 	// Details: http://www.satobs.org/seesat/Dec-2002/0197.html
 	const double meanEarthRadius = 6371.0088;
 	const double k = 8681663.653;
-	const double meanMotion = tle.left(63).right(11).toDouble();
+	const double meanMotion = tle.left(63).rightRef(11).toDouble();
 	const double semiMajorAxis = std::cbrt((k/meanMotion)*(k/meanMotion));
 	eccentricity = QString("0.%1").arg(tle.left(33).right(7)).toDouble();
 	perigee = semiMajorAxis*(1.0 - eccentricity) - meanEarthRadius;
@@ -480,12 +480,12 @@ void Satellite::calculateEpochFromLine1(QString tle)
 {
 	QString epochStr;
 	// Details: https://celestrak.com/columns/v04n03/ or https://en.wikipedia.org/wiki/Two-line_element_set
-	int year = tle.left(20).right(2).toInt();
+	int year = tle.left(20).rightRef(2).toInt();
 	if (year>=0 && year<57)
 		year += 2000;
 	else
 		year += 1900;
-	const double dayOfYear = tle.left(32).right(12).toDouble();
+	const double dayOfYear = tle.left(32).rightRef(12).toDouble();
 	QDate epoch = QDate(year, 1, 1).addDays(dayOfYear - 1);
 	if (!epoch.isValid())
 		epochStr = qc_("unknown", "unknown date");
@@ -826,7 +826,7 @@ void Satellite::update(double)
 
 		elAzPosition = pSatWrapper->getAltAz();
 		elAzPosition.normalize();
-		XYZ = getJ2000EquatorialPos(core);
+		XYZ = Satellite::getJ2000EquatorialPos(core);
 
 		pSatWrapper->getSlantRange(range, rangeRate);
 		visibility = pSatWrapper->getVisibilityPredict();
@@ -902,7 +902,7 @@ void Satellite::parseInternationalDesignator(const QString& tle1)
 	QStringList tleData = tle1.split(" ");
 	QString rawString = tleData.at(2);
 	bool ok;
-	int year = rawString.left(2).toInt(&ok);
+	int year = rawString.leftRef(2).toInt(&ok);
 	if (!rawString.isEmpty() && ok)
 	{
 		// Y2K bug :) I wonder what NORAD will do in 2057. :)
