@@ -2178,7 +2178,7 @@ void AstroCalcDialog::setLunarEclipseHeaderNames()
 {
 	lunareclipseHeader.clear();
 	lunareclipseHeader << q_("Date and Time");
-	lunareclipseHeader << q_("Saros series");
+	lunareclipseHeader << q_("Saros number");
 	lunareclipseHeader << q_("Type");
 	lunareclipseHeader << q_("Penumbral eclipse magnitude");
 	lunareclipseHeader << q_("Umbral eclipse magnitude");

@@ -163,7 +163,7 @@ public:
 	//! @enum LunarEclipseColumns
 	enum LunarEclipseColumns {
 		LunarEclipseDate,            //! date and time of lunar eclipse
-		LunarEclipseSaros,           //! Saros series
+		LunarEclipseSaros,           //! Saros number
 		LunarEclipseType,            //! type of lunar eclipse
 		LunarEclipsePMag,            //! penumbral magnitude of lunar eclipse
 		LunarEclipseUMag,            //! umbral magnitude of lunar eclipse
