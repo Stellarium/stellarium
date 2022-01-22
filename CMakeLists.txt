@@ -232,6 +232,7 @@ IF(CMAKE_VERSION VERSION_LESS 3.21.0)
 ELSE()
      SET(CMAKE_C_STANDARD 17)
 ENDIF()
+SET(CMAKE_C_STANDARD_REQUIRED ON)
 
 IF(WIN32)
      # We don't need the extra Windows.h stuff, this may speed up compilation a tiny bit
