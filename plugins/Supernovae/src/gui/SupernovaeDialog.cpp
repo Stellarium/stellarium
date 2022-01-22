@@ -132,11 +132,11 @@ void SupernovaeDialog::setAboutHtml(void)
 
 	html += "<h3>" + q_("Acknowledgments") + "</h3>";
 	html += "<p>" + q_("We thank the following people for their contribution and valuable comments:") + "</p><ul>";
-	html += "<li>" + QString("%1 (<a href='%2'>%3</a> %4)")
-			.arg(q_("Sergei Blinnikov"))
-			.arg("http://www.itep.ru/")
-			.arg(q_("Institute for Theoretical and Experimental Physics"))
-			.arg(q_("in Russia")) + "</li>";
+	html += "<li>" + QString("%1 (<a href='%2'>%3</a> %4)").arg(
+				 q_("Sergei Blinnikov"),
+				 "http://www.itep.ru/",
+				 q_("Institute for Theoretical and Experimental Physics"),
+				 q_("in Russia")) + "</li>";
 	html += "</ul>";
 
 	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Historical Supernovae plugin");

@@ -157,7 +157,7 @@ void Supernovae::init()
 	}
 
 	// If the json file does not already exist, create it from the resource in the Qt resource
-	if(QFileInfo(sneJsonPath).exists())
+	if(QFileInfo::exists(sneJsonPath))
 	{
 		if (!checkJsonFileFormat() || getJsonFileVersion()<CATALOG_FORMAT_VERSION)
 		{
@@ -198,7 +198,7 @@ void Supernovae::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 	
-	for (const auto& sn : snstar)
+	for (const auto& sn : qAsConst(snstar))
 	{
 		if (sn && sn->initialized)
 			sn->draw(core, painter);
@@ -301,7 +301,7 @@ QStringList Supernovae::listAllObjects(bool inEnglish) const
 */
 void Supernovae::restoreDefaultJsonFile(void)
 {
-	if (QFileInfo(sneJsonPath).exists())
+	if (QFileInfo::exists(sneJsonPath))
 		backupJsonFile(true);
 
 	QFile src(":/Supernovae/supernovae.json");
@@ -338,7 +338,7 @@ bool Supernovae::backupJsonFile(bool deleteOriginal)
 	}
 
 	QString backupPath = sneJsonPath + ".old";
-	if (QFileInfo(backupPath).exists())
+	if (QFileInfo::exists(backupPath))
 		QFile(backupPath).remove();
 
 	if (old.copy(backupPath))
@@ -406,7 +406,7 @@ void Supernovae::setSNeMap(const QVariantMap& map)
 	snlist.clear();
 	SNCount = 0;
 	QVariantMap sneMap = map.value("supernova").toMap();
-	for (auto sneKey : sneMap.keys())
+	for (auto &sneKey : sneMap.keys())
 	{
 		QVariantMap sneData = sneMap.value(sneKey).toMap();
 		sneData["designation"] = QString("SN %1").arg(sneKey);
@@ -622,7 +622,7 @@ void Supernovae::startDownload(QString urlString)
 	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
 
 	updateState = Supernovae::Updating;
-	emit(updateStateChanged(updateState));
+	emit updateStateChanged(updateState);
 }
 
 void Supernovae::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
@@ -638,8 +638,8 @@ void Supernovae::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
 		//Round to the greatest possible derived unit
 		while (bytesTotal > 1024)
 		{
-			bytesReceived = qRound(std::floor(bytesReceived / 1024.));
-			bytesTotal    = qRound(std::floor(bytesTotal / 1024.));
+			bytesReceived = qRound(std::floor(static_cast<double>(bytesReceived) / 1024.));
+			bytesTotal    = qRound(std::floor(static_cast<double>(bytesTotal) / 1024.));
 		}
 		currentValue = bytesReceived;
 		endValue = bytesTotal;
@@ -694,8 +694,8 @@ void Supernovae::downloadComplete(QNetworkReply *reply)
 		updateState = Supernovae::DownloadError;
 	}
 
-	emit(updateStateChanged(updateState));
-	emit(jsonUpdateComplete());
+	emit updateStateChanged(updateState);
+	emit jsonUpdateComplete();
 
 	reply->deleteLater();
 	downloadReply = Q_NULLPTR;
