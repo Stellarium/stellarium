@@ -186,7 +186,7 @@ void Quasars::init()
 	}
 
 	// If the json file does not already exist, create it from the resource in the Qt resource
-	if(QFileInfo(catalogJsonPath).exists())
+	if(QFileInfo::exists(catalogJsonPath))
 	{
 		if (!checkJsonFileFormat() || getJsonFileFormatVersion()<CATALOG_FORMAT_VERSION)
 		{
@@ -230,7 +230,7 @@ void Quasars::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 
-	for (const auto& quasar : QSO)
+	for (const auto& quasar : qAsConst(QSO))
 	{
 		if (quasar && quasar->initialized)
 			quasar->draw(core, painter);
@@ -356,7 +356,7 @@ QStringList Quasars::listAllObjects(bool inEnglish) const
 */
 void Quasars::restoreDefaultJsonFile(void)
 {
-	if (QFileInfo(catalogJsonPath).exists())
+	if (QFileInfo::exists(catalogJsonPath))
 		backupJsonFile(true);
 
 	QFile src(":/Quasars/quasars.json");
@@ -393,7 +393,7 @@ bool Quasars::backupJsonFile(bool deleteOriginal)
 	}
 
 	QString backupPath = catalogJsonPath + ".old";
-	if (QFileInfo(backupPath).exists())
+	if (QFileInfo::exists(backupPath))
 		QFile(backupPath).remove();
 
 	if (old.copy(backupPath))
@@ -459,8 +459,8 @@ void Quasars::setQSOMap(const QVariantMap& map)
 {
 	QSO.clear();
 	QsrCount = 0;
-	QVariantMap qsoMap = map.value("quasars").toMap();
-	for (auto qsoKey : qsoMap.keys())
+	const QVariantMap qsoMap = map.value("quasars").toMap();
+	for (auto &qsoKey : qsoMap.keys())
 	{
 		QVariantMap qsoData = qsoMap.value(qsoKey).toMap();
 		qsoData["designation"] = qsoKey;
@@ -659,7 +659,7 @@ void Quasars::startDownload(QString urlString)
 	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
 
 	updateState = Quasars::Updating;
-	emit(updateStateChanged(updateState));
+	emit updateStateChanged(updateState);
 }
 
 void Quasars::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
@@ -675,8 +675,8 @@ void Quasars::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
 		//Round to the greatest possible derived unit
 		while (bytesTotal > 1024)
 		{
-			bytesReceived = static_cast<long long>(std::floor(bytesReceived / 1024.));
-			bytesTotal    = static_cast<long long>(std::floor(bytesTotal / 1024.));
+			bytesReceived = static_cast<long long>(std::floor(static_cast<double>(bytesReceived) / 1024.));
+			bytesTotal    = static_cast<long long>(std::floor(static_cast<double>(bytesTotal) / 1024.));
 		}
 		currentValue = static_cast<int>(bytesReceived);
 		endValue     = static_cast<int>(bytesTotal);
@@ -731,8 +731,8 @@ void Quasars::downloadComplete(QNetworkReply *reply)
 		updateState = Quasars::DownloadError;
 	}
 
-	emit(updateStateChanged(updateState));
-	emit(jsonUpdateComplete());
+	emit updateStateChanged(updateState);
+	emit jsonUpdateComplete();
 
 	reply->deleteLater();
 	downloadReply = Q_NULLPTR;

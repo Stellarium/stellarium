@@ -178,7 +178,7 @@ Vec3f Quasar::getInfoColor(void) const
 
 float Quasar::getVMagnitude(const StelCore* core) const
 {
-	Q_UNUSED(core);
+	Q_UNUSED(core)
 	return VMagnitude;
 }
 

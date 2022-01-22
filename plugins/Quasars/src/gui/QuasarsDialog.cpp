@@ -125,10 +125,10 @@ void QuasarsDialog::setAboutHtml(void)
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf</td></tr>";
 	html += "</table>";
 
-	html += QString("<p>%1 (<a href=\"%2\">%3</a>)</p>")
-			.arg(q_("The Quasars plugin provides visualization of some quasars brighter than visual magnitude 18. The catalogue of quasars was compiled from \"Quasars and Active Galactic Nuclei\" (13th Ed.)"))
-			.arg("http://adsabs.harvard.edu/abs/2010A%26A...518A..10V")
-			.arg(q_("Veron+ 2010"));
+	html += QString("<p>%1 (<a href=\"%2\">%3</a>)</p>").arg(
+			q_("The Quasars plugin provides visualization of some quasars brighter than visual magnitude 18. The catalogue of quasars was compiled from \"Quasars and Active Galactic Nuclei\" (13th Ed.)"),
+			"http://adsabs.harvard.edu/abs/2010A%26A...518A..10V",
+			q_("Veron+ 2010"));
 
 	html += "</ul><p>" + q_("The current catalog contains info about %1 quasars.").arg(qsr->getCountQuasars()) + "</p>";
 	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Quasars plugin");
