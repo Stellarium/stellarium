@@ -215,8 +215,7 @@ private slots:
 	void setTransitCelestialBodyName();
 
 	//! Calculating lunar eclipses to fill the list.
-	//! Algorithm taken from Explanatory Supplement to the Astronomical Ephemeris
-	//! and the American Ephemeris and Nautical Almanac (1961) 
+	//! Algorithm taken from calculating the transits.
 	void generateLunarEclipses();
 	void cleanupLunarEclipses();
 	void selectCurrentLunarEclipse(const QModelIndex &modelIndex);
