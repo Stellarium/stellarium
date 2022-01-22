@@ -110,7 +110,7 @@ void TuiNode::updateNodeNumber()
 	ancestorsNumbers.append(nodeNumber);
 	
 	//TODO: This probably needs to be made RTL-language-friendly. --BM
-	for (auto n : ancestorsNumbers)
+	for (auto n : qAsConst(ancestorsNumbers))
 	{
 		QString number = QString("%1.").arg(n);
 		prefixText.append(number);
