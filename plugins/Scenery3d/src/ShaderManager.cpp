@@ -340,7 +340,7 @@ bool ShaderMgr::preprocessShader(const QString &fileName, const uint flags, QByt
 		}
 
 		//write output
-		processedSource.append(write);
+		processedSource.append(write.toUtf8());
 		processedSource.append('\n');
 	}
 	return true;

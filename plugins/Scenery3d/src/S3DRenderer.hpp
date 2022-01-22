@@ -51,7 +51,7 @@ class S3DRenderer : public QObject, protected QOpenGLFunctions
 public:
 	//! Initializes an empty Scenery3d object.
 	S3DRenderer(QObject* parent = Q_NULLPTR);
-	virtual ~S3DRenderer();
+	virtual ~S3DRenderer() Q_DECL_OVERRIDE;
 
 	//! Draw scenery, called by Scenery3dMgr.
 	void draw(StelCore* core, S3DScene &scene);
@@ -135,7 +135,7 @@ public:
 	bool isANGLEContext() const { return isANGLE; }
 	int getMaximumFramebufferSize() const { return maximumFramebufferSize; }
 signals:
-	void message(const QString& msg) const;
+	void message(const QString& msg);
 
 private:
 	ShaderMgr shaderManager;

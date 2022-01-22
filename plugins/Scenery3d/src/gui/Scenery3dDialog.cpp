@@ -58,7 +58,7 @@ void Scenery3dDialog::retranslate()
 			si = mgr->getCurrentScene(); //the scene that is currently displayed
 		updateTextBrowser(si);
 
-		for (auto* but : shortcutButtons)
+		for (auto* but : qAsConst(shortcutButtons))
 		{
 			//replace stored text with re-translated one
 			but->setProperty("stelOriginalText",but->text());
@@ -250,35 +250,35 @@ void Scenery3dDialog::createUpdateConnections()
 void Scenery3dDialog::updateToolTipStrings()
 {
 	QString toolTipEnablePixelLight = QString("<html><head/><body><p>%1</p><p>%2</p></body></html>")
-			.arg(q_("Provides more accurate lighting by calculating it per-pixel instead of per-vertex."))
-			.arg(q_("Required for bump mapping and shadows!"));
+			.arg(q_("Provides more accurate lighting by calculating it per-pixel instead of per-vertex."),
+			     q_("Required for bump mapping and shadows!"));
 	QString toolTipSimpleShadows = QString("<html><head/><body><p>%1</p><p>%2</p></body></html>")
-			.arg(q_("Uses only a single shadow cascade instead of up to four."))
-			.arg(q_("Provides a speedup in exchange for shadow quality, especially in large scenes."));
+			.arg(q_("Uses only a single shadow cascade instead of up to four."),
+			     q_("Provides a speedup in exchange for shadow quality, especially in large scenes."));
 	QString toolTipShadowFiltering = QString("<html><head/><body><p>%1</p><p>%2</p></body></html>")
-			.arg(q_("Determines how the shadows are filtered, in increasing quality from top to bottom."))
-			.arg(q_("PCSS requires the quality set to LOW or HIGH."));
+			.arg(q_("Determines how the shadows are filtered, in increasing quality from top to bottom."),
+			     q_("PCSS requires the quality set to LOW or HIGH."));
 	QString toolTipPCSS = QString("<html><head/><body><p>%1</p><p>%2</p><p>%3</p></body></html>")
-			.arg(q_("Approximate calculation of shadow penumbras (sharper shadows near contact points, blurred shadows further away)."))
-			.arg(q_("Requires <b>LOW</b> or <b>HIGH</b> shadow filtering (without <b>Hardware</b>)."))
-			.arg(q_("Causes a performance hit."));
+			.arg(q_("Approximate calculation of shadow penumbras (sharper shadows near contact points, blurred shadows further away)."),
+			     q_("Requires <b>LOW</b> or <b>HIGH</b> shadow filtering (without <b>Hardware</b>)."),
+			     q_("Causes a performance hit."));
 	QString toolTipCubemapMode = QString("<html><head/><body><p>%1</p><p>%2</p><p>%3</p><p>%4</p></body></html>")
-			.arg(q_("This determines the way the scene is rendered when Stellarium uses a projection other than &quot;Perspective&quot;. The scene is always rendered onto a cube, and this cube is then warped according to the real projection. The cube is described using an image called &quot;cubemap&quot;."))
-			.arg(q_("<b>6 Textures</b> uses 6 single textures, one for each cube side. This is the most compatible method, but may be slower than the others."))
-			.arg(q_("<b>Cubemap</b> uses a single GL_TEXTURE_CUBEMAP. Recommended for most users."))
-			.arg(q_("<b>Geometry shader</b> uses a modern GPU feature to render all 6 sides of the cube at once. It may be the fastest method depending on the scene and your GPU hardware. If not supported, this cannot be selected."));
+			.arg(q_("This determines the way the scene is rendered when Stellarium uses a projection other than &quot;Perspective&quot;. The scene is always rendered onto a cube, and this cube is then warped according to the real projection. The cube is described using an image called &quot;cubemap&quot;."),
+			     q_("<b>6 Textures</b> uses 6 single textures, one for each cube side. This is the most compatible method, but may be slower than the others."),
+			     q_("<b>Cubemap</b> uses a single GL_TEXTURE_CUBEMAP. Recommended for most users."),
+			     q_("<b>Geometry shader</b> uses a modern GPU feature to render all 6 sides of the cube at once. It may be the fastest method depending on the scene and your GPU hardware. If not supported, this cannot be selected."));
 	QString toolTipCubemapShadows = QString("<html><head/><body><p>%1</p><p>%2</p><p>%3</p></body></html>")
-			.arg(q_("Calculates shadows for each cubemap face separately."))
-			.arg(q_("If disabled, the shadowed area is calculated using a perspective projection, which may cause missing shadows with high FOV values, but is quite a bit faster!"))
-			.arg(q_("This does not work when using the <b>Geometry shader</b> cubemapping mode!"));
+			.arg(q_("Calculates shadows for each cubemap face separately."),
+			     q_("If disabled, the shadowed area is calculated using a perspective projection, which may cause missing shadows with high FOV values, but is quite a bit faster!"),
+			     q_("This does not work when using the <b>Geometry shader</b> cubemapping mode!"));
 	QString toolTipEnableLazyDrawing = QString("<html><head/><body><p>%1<br/>%2</p><p><b>%3</b></p></body></html>")
-			.arg(q_("When checked, the cubemap is only recreated in specific time intervals, instead of each frame."))
-			.arg(q_("Saves energy and may increase subjective application performance."))
-			.arg(q_("Note that the cubemap is always re-rendered when the view position changes."));
+			.arg(q_("When checked, the cubemap is only recreated in specific time intervals, instead of each frame."),
+			     q_("Saves energy and may increase subjective application performance."),
+			     q_("Note that the cubemap is always re-rendered when the view position changes."));
 	QString toolTipDominantFace = QString("<html><head/><body><p>%1</p><p>%2</p><p><b>%3</b></p></body></html>")
-			.arg(q_("When checked, only the face that corresponds to your viewing direction is updated on movement."))
-			.arg(q_("This will speed up rendering, but the appearance will look &quot;broken&quot; until you stop moving."))
-			.arg(q_("This does NOT work with the &quot;Geometry-Shader&quot; cubemapping mode!"));
+			.arg(q_("When checked, only the face that corresponds to your viewing direction is updated on movement."),
+			     q_("This will speed up rendering, but the appearance will look &quot;broken&quot; until you stop moving."),
+			     q_("This does NOT work with the &quot;Geometry-Shader&quot; cubemapping mode!"));
 	QString toolTipSecondDominantFace = QString("<html><head/><body><p>%1</p></body></html>")
 			.arg(q_("This updates a second face, so that the visual appearance seems less &quot;broken&quot;."));
 
@@ -330,7 +330,7 @@ void Scenery3dDialog::initResolutionCombobox(QComboBox *cb)
 
 void Scenery3dDialog::on_comboBoxCubemapSize_currentIndexChanged(int index)
 {
-	Q_UNUSED(index);
+	Q_UNUSED(index)
 	bool ok;
 	uint val = ui->comboBoxCubemapSize->currentData().toUInt(&ok);
 	if(ok)

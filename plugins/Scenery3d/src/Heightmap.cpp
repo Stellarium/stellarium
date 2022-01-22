@@ -100,7 +100,7 @@ float Heightmap::getHeight(const float x, const float y) const
 		//qint64 gridTime = timer.nsecsElapsed();
 		//qDebug()<<"qt"<<qtTime<<"grid"<<gridTime;
 		//Q_ASSERT(height == h);
-		if (h == NO_HEIGHT)
+		if (qFuzzyCompare(h, NO_HEIGHT))
 		{
 			return nullHeight;
 		}

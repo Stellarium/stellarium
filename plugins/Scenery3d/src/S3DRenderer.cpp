@@ -161,7 +161,7 @@ void S3DRenderer::setupPassUniforms(QOpenGLShaderProgram *shader)
 	if(shaderParameters.shadows && loc >= 0)
 	{
 		//Holds the frustum splits necessary for the lookup in the shader
-		Vec4f splitData;
+		Vec4f splitData(0.f);
 		for(int i=0; i<shaderParameters.frustumSplits; i++)
 		{
 			float zVal;
@@ -2113,12 +2113,12 @@ bool S3DRenderer::initCubemapping()
 #define PLANE(_PLANEID_, _MAT_) for(int i=_PLANEID_ * vtxCount;i < (_PLANEID_ + 1)*vtxCount;i++){ _MAT_.transfo(cubeVertices[i]); }\
 	for(int i =_PLANEID_ * idxCount; i < (_PLANEID_+1)*idxCount;++i) { cubeIndices[i] = cubeIndices[i] + _PLANEID_ * vtxCount; }
 
-	PLANE(0, Mat4f::zrotation(-M_PI_2f)); //S
-	PLANE(1, Mat4f::zrotation(M_PI_2f));  //N
-	PLANE(2, Mat4f::identity());  //E
-	PLANE(3, Mat4f::zrotation(M_PIf)); //W
-	PLANE(4, Mat4f::xrotation(M_PI_2f)); //U
-	PLANE(5, Mat4f::xrotation(-M_PI_2f)); //D
+	PLANE(0, Mat4f::zrotation(-M_PI_2f)) //S
+	PLANE(1, Mat4f::zrotation(M_PI_2f))  //N
+	PLANE(2, Mat4f::identity())  //E
+	PLANE(3, Mat4f::zrotation(M_PIf)) //W
+	PLANE(4, Mat4f::xrotation(M_PI_2f)) //U
+	PLANE(5, Mat4f::xrotation(-M_PI_2f)) //D
 #undef PLANE
 
 	//upload original cube vertices + indices to GL
