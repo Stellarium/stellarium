@@ -4023,7 +4023,7 @@ bool Planet::ensureObjLoaded()
 					qWarning()<<"Cannot load OBJ model into OpenGL for solar system object"<<getEnglishName();
 					return false;
 				}
-				GL(;)
+				GL();
 			}
 		}
 		else
