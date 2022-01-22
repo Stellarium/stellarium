@@ -2180,6 +2180,7 @@ void AstroCalcDialog::setLunarEclipseHeaderNames()
 	lunareclipseHeader << q_("Date and Time");
 	lunareclipseHeader << q_("Saros number");
 	lunareclipseHeader << q_("Type");
+	lunareclipseHeader << q_("Gamma");
 	lunareclipseHeader << q_("Penumbral eclipse magnitude");
 	lunareclipseHeader << q_("Umbral eclipse magnitude");
 	ui->lunareclipseTreeWidget->setHeaderLabels(lunareclipseHeader);
@@ -2244,7 +2245,7 @@ void AstroCalcDialog::generateLunarEclipses()
 		startJD = startJD - core->getUTCOffset(startJD) / 24.;
 		stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
 		int elements = static_cast<int>((stopJD - startJD) / 29.530588853);
-		QString SarosStr, EclipseTypeStr, uMagStr, pMagStr;
+		QString SarosStr, EclipseTypeStr, uMagStr, pMagStr, gammaStr;
 
 		const bool saveTopocentric = core->getUseTopocentricCoordinates();
 
@@ -2351,7 +2352,7 @@ void AstroCalcDialog::generateLunarEclipses()
 				const double L2 = f2 + mSD; // distance between center of the Moon and shadow at beginning and end of partial eclipse
 				const double pMag = (L1 - m) / (2. * mSD); // penumbral magnitude
 				const double uMag = (L2 - m) / (2. * mSD); // umbral magnitude
-
+				
 				if (pMag>0.)
 				{
 					EclipseTypeStr = "Penumbral";
@@ -2373,7 +2374,14 @@ void AstroCalcDialog::generateLunarEclipses()
 					int saros = 1 + ((s + nc * 223 - 1) % 223);
 					if ((s + nc * 223 - 1) < 0) saros -= 223;
 
+					// gamma = minimum distance from the center of the Moon to the axis of Earth’s umbral shadow cone
+					// in units of Earth’s equatorial radius. Positive when the Moon passes north of the shadow cone axis.
+					// Source: https://eclipse.gsfc.nasa.gov/5MCLE/5MCLE-Text10.pdf
+					double gamma = m*0.2725/mSD;
+					if (y<0.) gamma = -(gamma);
+
 					SarosStr = QString("%1").arg(QString::number(saros));
+					gammaStr = QString("%1").arg(QString::number(gamma, 'f', 3));
 					pMagStr = QString("%1").arg(QString::number(pMag, 'f', 3));
 					
 					if (uMag<0.)
@@ -2390,9 +2398,11 @@ void AstroCalcDialog::generateLunarEclipses()
 					treeItem->setData(LunarEclipseDate, Qt::UserRole, JDmid);
 					treeItem->setText(LunarEclipseSaros, SarosStr);
 					treeItem->setText(LunarEclipseType, EclipseTypeStr);
+					treeItem->setText(LunarEclipseGamma, gammaStr);
 					treeItem->setText(LunarEclipsePMag, pMagStr);
 					treeItem->setText(LunarEclipseUMag, uMagStr);
 					treeItem->setTextAlignment(LunarEclipseSaros, Qt::AlignRight);
+					treeItem->setTextAlignment(LunarEclipseGamma, Qt::AlignRight);
 					treeItem->setTextAlignment(LunarEclipsePMag, Qt::AlignRight);
 					treeItem->setTextAlignment(LunarEclipseUMag, Qt::AlignRight);
 				}

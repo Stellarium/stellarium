@@ -165,6 +165,7 @@ public:
 		LunarEclipseDate,            //! date and time of lunar eclipse
 		LunarEclipseSaros,           //! Saros number
 		LunarEclipseType,            //! type of lunar eclipse
+		LunarEclipseGamma,           //! Gamma of lunar eclipse
 		LunarEclipsePMag,            //! penumbral magnitude of lunar eclipse
 		LunarEclipseUMag,            //! umbral magnitude of lunar eclipse
 		LunarEclipseCount            //! total number of columns
