@@ -1,6 +1,6 @@
 INCLUDE_DIRECTORIES(. gui)
 
-LINK_DIRECTORIES(${BUILD_DIR}/src)
+LINK_DIRECTORIES(${CMAKE_BINARY_DIR}/src)
 
 SET(Calendars_SRCS
     Calendars.hpp

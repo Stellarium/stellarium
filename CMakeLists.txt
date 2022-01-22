@@ -1,8 +1,12 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10.0)
 MESSAGE(STATUS "Found CMake ${CMAKE_VERSION}")
 
-IF(POLICY CMP0054)
+# Fix behavior of CMAKE_CXX_STANDARD and CMAKE_C_STANDARD when targeting macOS.
+IF(POLICY CMP0025)
+     CMAKE_POLICY(SET CMP0025 NEW)
+ENDIF()
 # Potential dangerous comparison of variables. Details: https://cmake.org/cmake/help/v3.1/policy/CMP0054.html
+IF(POLICY CMP0054)
      CMAKE_POLICY(SET CMP0054 NEW)
 ENDIF()
 IF(POLICY CMP0071)
@@ -148,10 +152,12 @@ IF(OPENGL_DEBUG_LOGGING)
 ENDIF()
 
 # Use ccache if possible
-FIND_PROGRAM(CCACHE_PROGRAM ccache)
-IF(CCACHE_PROGRAM)
-     MESSAGE(STATUS "Found ccache ${CCACHE_PROGRAM}")
-     SET_PROPERTY(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE_PROGRAM}")
+IF(NOT WIN32)
+     FIND_PROGRAM(CCACHE_PROGRAM ccache)
+     IF(CCACHE_PROGRAM)
+          MESSAGE(STATUS "Found ccache ${CCACHE_PROGRAM}")
+          SET_PROPERTY(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE_PROGRAM}")
+     ENDIF()
 ENDIF()
 
 # Add gprof build options if necessary.  Note gmon.out will be created in working directory when Stellarium is executed
@@ -225,14 +231,17 @@ ENDIF()
 SET(CMAKE_CXX_STANDARD 17)
 SET(CMAKE_CXX_STANDARD_REQUIRED ON)
 SET(CMAKE_CXX_EXTENSIONS OFF)
-# NOTE: C_STANDARD values added in CMake 3.21
+# NOTE: C_STANDARD 17 and 23 values added in CMake 3.21
 # https://gitlab.kitware.com/cmake/cmake/-/issues/22366
 IF(CMAKE_VERSION VERSION_LESS 3.21.0)
      SET(CMAKE_C_STANDARD 11)
+     #SET(CMAKE_C_FLAGS "-std=c11 ${CMAKE_C_FLAGS}")
 ELSE()
      SET(CMAKE_C_STANDARD 17)
+     #SET(CMAKE_C_FLAGS "-std=c17 ${CMAKE_C_FLAGS}")
 ENDIF()
 SET(CMAKE_C_STANDARD_REQUIRED ON)
+SET(CMAKE_C_EXTENSIONS OFF)
 
 IF(WIN32)
      # We don't need the extra Windows.h stuff, this may speed up compilation a tiny bit
