@@ -26,6 +26,7 @@
 
 
 #include <cmath>
+#include <cstring>
 #include <limits>
 #include <QString>
 #include <QMatrix4x4>
@@ -1075,7 +1076,7 @@ template<class T> Matrix3<T>::Matrix3() {}
 
 template<class T> Matrix3<T>::Matrix3(const T* m)
 {
-	memcpy_s(r,sizeof(T)*9,m,sizeof(T)*9);
+	std::memcpy(r,m,sizeof(T)*9);
 }
 
 template<class T> Matrix3<T>::Matrix3(const Vector3<T>& v0, const Vector3<T>& v1, const Vector3<T>& v2)
