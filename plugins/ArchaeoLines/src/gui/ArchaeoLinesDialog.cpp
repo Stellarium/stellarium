@@ -134,8 +134,8 @@ void ArchaeoLinesDialog::createDialogContent()
 	setDisplayFormatForSpins(StelApp::getInstance().getFlagShowDecimalDegrees());
 	connect(&StelApp::getInstance(), SIGNAL(flagShowDecimalDegreesChanged(bool)), this, SLOT(setDisplayFormatForSpins(bool)));
 
-	connect(ui->geographicLocation1PickPushButton, &QPushButton::clicked, [=](){locationsDialog->setVisible(true); locationsDialog->setModalContext(1);});
-	connect(ui->geographicLocation2PickPushButton, &QPushButton::clicked, [=](){locationsDialog->setVisible(true); locationsDialog->setModalContext(2);});
+	connect(ui->geographicLocation1PickPushButton, &QPushButton::clicked, this, [=](){locationsDialog->setVisible(true); locationsDialog->setModalContext(1);});
+	connect(ui->geographicLocation2PickPushButton, &QPushButton::clicked, this, [=](){locationsDialog->setVisible(true); locationsDialog->setModalContext(2);});
 
 	connectBoolProperty(ui->geographicLocation1CheckBox,                 "ArchaeoLines.flagShowGeographicLocation1");
 	connectBoolProperty(ui->geographicLocation2CheckBox,                 "ArchaeoLines.flagShowGeographicLocation2");

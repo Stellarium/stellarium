@@ -119,7 +119,7 @@ public:
 	Q_ENUM(Line)
 
 	ArchaeoLine(ArchaeoLine::Line lineType, double definingAngle);
-	virtual ~ArchaeoLine(){}
+	virtual ~ArchaeoLine() Q_DECL_OVERRIDE {}
 	void draw(StelCore* core, float intensity=1.0f) const;
 	const Vec3f& getColor() const {return color;}
 	bool isDisplayed(void) const {return fader;}
