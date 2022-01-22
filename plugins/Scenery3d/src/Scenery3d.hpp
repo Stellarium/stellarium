@@ -152,7 +152,7 @@ signals:
     void loadingSceneIDChanged(const QString& sceneID);
 
     //! This signal is emitted from another thread than this QObject belongs to, so use QueuedConnection.
-    void progressReport(const QString& str, int val, int min, int max);
+    void progressReport(const QString& str, int val, int min, int max) const; // ignore clazy warning here.
 
 public slots:
     //! Performs a relative translation of the viewer's position.

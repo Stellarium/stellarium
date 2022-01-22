@@ -135,7 +135,7 @@ public:
 	bool isANGLEContext() const { return isANGLE; }
 	int getMaximumFramebufferSize() const { return maximumFramebufferSize; }
 signals:
-	void message(const QString& msg);
+	void message(const QString& msg) const; // ignore clazy warning here
 
 private:
 	ShaderMgr shaderManager;
