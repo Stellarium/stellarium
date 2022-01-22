@@ -398,7 +398,7 @@ void MeteorShower::drawMeteors(StelCore *core)
 
 	// step through and draw all active meteors
 	StelPainter painter(core->getProjection(StelCore::FrameAltAz));
-	for (auto* m : m_activeMeteors)
+	for (auto* m : qAsConst(m_activeMeteors))
 	{
 		m->draw(core, painter);
 	}
@@ -559,7 +559,7 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 			oss << QString("%1: %2").arg(q_("The population index")).arg(m_pidx) << "<br />";
 
 		if (!m_parentObj.isEmpty())
-			oss << QString("%1: %2").arg(q_("Parent body")).arg(q_(m_parentObj)) << "<br />";
+			oss << QString("%1: %2").arg(q_("Parent body"), q_(m_parentObj)) << "<br />";
 
 		QString actStr = q_("Activity");
 		if(m_activity.start.month() == m_activity.finish.month())
@@ -582,7 +582,7 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 		oss << "<br />";
 		oss << QString("%1: %2 %3").arg(qc_("Maximum","meteor shower activity")).arg(m_activity.peak.day())
 		       .arg(StelLocaleMgr::longGenitiveMonthName(m_activity.peak.month()));
-		oss << QString(" (%1 %2&deg;)").arg(q_("Solar longitude")).arg(getSolarLongitude(m_activity.peak)) << "<br />";
+		oss << QString(" (%1 %2&deg;)").arg(q_("Solar longitude"), getSolarLongitude(m_activity.peak)) << "<br />";
 
 		if(m_activity.zhr > 0)
 			oss << QString("ZHR<sub>max</sub>: %1").arg(m_activity.zhr) << "<br />";

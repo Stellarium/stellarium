@@ -40,7 +40,7 @@ MeteorShowers::~MeteorShowers()
 void MeteorShowers::update(double deltaTime)
 {
 	StelCore* core = StelApp::getInstance().getCore();
-	for (const auto& ms : m_meteorShowers)
+	for (const auto& ms : qAsConst(m_meteorShowers))
 	{
 		ms->update(core, deltaTime);
 	}
@@ -48,7 +48,7 @@ void MeteorShowers::update(double deltaTime)
 
 void MeteorShowers::draw(StelCore* core)
 {
-	for (const auto& ms : m_meteorShowers)
+	for (const auto& ms : qAsConst(m_meteorShowers))
 	{
 		ms->draw(core);
 	}
@@ -94,7 +94,7 @@ void MeteorShowers::drawPointer(StelCore* core)
 void MeteorShowers::loadMeteorShowers(const QVariantMap& map)
 {
 	m_meteorShowers.clear();
-	for (auto msKey : map.keys())
+	for (auto &msKey : map.keys())
 	{
 		QVariantMap msData = map.value(msKey).toMap();
 		msData["showerID"] = msKey;
