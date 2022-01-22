@@ -45,7 +45,7 @@ template <class Star> struct SpecialZoneData;
 class StarWrapperBase : public StelObject
 {
 protected:
-	StarWrapperBase(void) : ref_count(0) {}
+	StarWrapperBase(void) {}
 	virtual ~StarWrapperBase(void) Q_DECL_OVERRIDE {}
 	virtual QString getType(void) const Q_DECL_OVERRIDE {return STAR_TYPE;}
 
@@ -64,9 +64,6 @@ protected:
 	//! @return a QString containing an HTML encoded description of the StarWrapperBase.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
 	virtual float getBV(void) const = 0;
-
-private:
-	int ref_count;
 };
 
 template <class Star> class StarWrapper : public StarWrapperBase

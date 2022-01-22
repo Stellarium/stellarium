@@ -25,7 +25,7 @@
 #include "StelModuleMgr.hpp"
 #include "SolarSystem.hpp"
 
-Skybright::Skybright() : SN(1.f)
+Skybright::Skybright()
 {
 	setDate(2003, 8, 0.f, 0.f);
 	setLocation(M_PI_4f, 1000., 25.f, 40.f);
