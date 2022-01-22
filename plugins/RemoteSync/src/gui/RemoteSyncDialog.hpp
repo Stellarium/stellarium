@@ -36,13 +36,13 @@ class RemoteSyncDialog : public StelDialog
 
 public:
 	RemoteSyncDialog();
-	~RemoteSyncDialog();
+	~RemoteSyncDialog() Q_DECL_OVERRIDE;
 
 public slots:
-	void retranslate();
+	void retranslate() Q_DECL_OVERRIDE;
 
 protected:
-	void createDialogContent();
+	void createDialogContent() Q_DECL_OVERRIDE;
 
 private slots:
 	void printErrorMessage(const QString error);

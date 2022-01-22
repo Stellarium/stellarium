@@ -234,7 +234,7 @@ void RemoteSyncDialog::updateIPlabel(bool running)
 		QString localHostName=QHostInfo::localHostName();
 		QHostInfo hostInfo = QHostInfo::fromName(localHostName);
 		QString ipString("");
-		for (auto a : hostInfo.addresses())
+		for (auto &a : hostInfo.addresses())
 		{
 			if ((a.protocol() == QAbstractSocket::IPv4Protocol) && a != QHostAddress(QHostAddress::LocalHost))
 			{
@@ -285,7 +285,7 @@ void RemoteSyncDialog::populateExclusionLists()
 	excluded.removeOne(""); // Special case
 	ui->listWidgetSelectedProperties->addItems(excluded);
 	QStringList allProps=StelApp::getInstance().getStelPropertyManager()->getPropertyList();
-	for (auto str : excluded)
+	for (auto &str : excluded)
 	{
 		allProps.removeOne(str);
 	}	
@@ -331,7 +331,7 @@ void RemoteSyncDialog::removePropertiesForExclusion()
 
 		QStringList currentFilter=rs->getStelPropFilter();
 		// Remove the selected from currentFilter...
-		for (auto str : strings)
+		for (auto &str : strings)
 		{
 			currentFilter.removeOne(str);
 		}
