@@ -46,7 +46,6 @@ CalendarsInfoPanel::CalendarsInfoPanel(Calendars* plugin,
 	yPos(static_cast<qreal>(FLT_MAX))
 {
 	StelApp& stelApp = StelApp::getInstance();
-	QFont newFont = font();
 
 	updatePosition();
 	connect (parentWidget, SIGNAL(geometryChanged()), this, SLOT(updatePosition()));
@@ -99,5 +98,5 @@ void CalendarsInfoPanel::updatePosition()
 
 void CalendarsInfoPanel::setColorScheme(const QString &schemeName)
 {
-	Q_UNUSED(schemeName);
+	Q_UNUSED(schemeName)
 }

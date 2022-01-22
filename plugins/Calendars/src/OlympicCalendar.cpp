@@ -58,11 +58,11 @@ QStringList OlympicCalendar::getDateStrings() const
 QString OlympicCalendar::getFormattedDateString() const
 {
 	QStringList str=getDateStrings();
-	return QString(q_("Day %1, month %2 in the year %3 of the %4th Olympiad"))
-			.arg(str.at(3)) // day
-			.arg(str.at(2)) // month, numerical
-			.arg(str.at(1)) // year
-			.arg(str.at(0));// olympiad
+	return QString(q_("Day %1, month %2 in the year %3 of the %4th Olympiad")).arg(
+			str.at(3), // day
+			str.at(2), // month, numerical
+			str.at(1), // year
+			str.at(0));// olympiad
 }
 
 // set date from a vector of calendar date elements sorted from the largest to the smallest.

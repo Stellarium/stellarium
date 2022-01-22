@@ -27,7 +27,7 @@ const long int MayaLongCountCalendar::mayanEpoch=fixedFromJD(584283, false);
 MayaLongCountCalendar::MayaLongCountCalendar(double jd): Calendar(jd)
 {
 	parts={0, 0, 0, 0, 0};
-	retranslate();
+	MayaLongCountCalendar::retranslate();
 }
 
 // Set a calendar date from the Julian day number

@@ -50,7 +50,7 @@ public:
 
 	Calendar(double jd):JD(jd) {}
 
-	virtual ~Calendar() {}
+	virtual ~Calendar() Q_DECL_OVERRIDE {}
 
 public slots:
 	//! Translate e.g. stringlists of part names

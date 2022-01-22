@@ -38,7 +38,7 @@ int IcelandicCalendar::icelandicSummer(int iyear)
 
 IcelandicCalendar::IcelandicCalendar(double jd): Calendar (jd)
 {
-	retranslate();
+	IcelandicCalendar::retranslate();
 }
 
 // Set a calendar date from the Julian day number
@@ -97,13 +97,13 @@ QString IcelandicCalendar::getFormattedDateString() const
 {
 	QStringList str=getDateStrings();
 	// TRANSLATORS: Icelandic calendar phrase like "[Weekday] of week [number] of [summer|winter] (Month [number]: [name]) - [year]"
-	return QString(q_("%1 of week %2 of %3 (Month %4: %5) - %6"))
-			.arg(str.at(6)) // weekday
-			.arg(str.at(4)) // week
-			.arg(str.at(1)) // season
-			.arg(str.at(2)) // month
-			.arg(str.at(3)) // monthName
-			.arg(str.at(0));// year
+	return QString(q_("%1 of week %2 of %3 (Month %4: %5) - %6")).arg(
+			str.at(6), // weekday
+			str.at(4), // week
+			str.at(1), // season
+			str.at(2), // month
+			str.at(3), // monthName
+			str.at(0));// year
 }
 
 /* ====================================================

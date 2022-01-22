@@ -101,7 +101,7 @@ QStringList FrenchArithmeticCalendar::getDateStrings() const
 	}
 	else
 	{
-		list << QString("%1 %2").arg(qc_("Décade", "French Revolution Calendar 'week'")).arg(RomanCalendar::romanNumber(decade)); // 4
+		list << QString("%1 %2").arg(qc_("Décade", "French Revolution Calendar 'week'"), RomanCalendar::romanNumber(decade)); // 4
 		list << dayNames.value(dInDecade, "ERROR_dayNames");               // 5
 	}
 
@@ -125,16 +125,15 @@ QString FrenchArithmeticCalendar::getFormattedDateString() const
 
 		QString dela=qc_("de la", "French Revolution Calendar: of the");
 
-		return QString("%1 %2 %3 %4 (%5) %6 %7, %8")
-				.arg(str.at(5)) // weekday
-				.arg(dela) // day
-				.arg(decadeMap.value((parts.at(2)-1)/10 + 1)) // decadeNr
-				.arg(qc_("décade", "French Revolution Calendar 'week'"))
-				.arg(str.at(3))
-				.arg(qc_("du", "French Revolution Calendar: 'of'"))
-				.arg(monthNames.value(parts.at(1))) // monthname
-				.arg(year);// year
-
+		return QString("%1 %2 %3 %4 (%5) %6 %7, %8").arg(
+				str.at(5), // weekday
+				dela, // day
+				decadeMap.value((parts.at(2)-1)/10 + 1), // decadeNr
+				qc_("décade", "French Revolution Calendar 'week'"),
+				str.at(3),
+				qc_("du", "French Revolution Calendar: 'of'"),
+				monthNames.value(parts.at(1)), // monthname
+				year);// year
 	}
 }
 

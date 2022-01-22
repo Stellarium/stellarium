@@ -31,7 +31,7 @@ const int AztecXihuitlCalendar::aztecXihuitlCorrelation = aztecCorrelation - azt
 
 AztecXihuitlCalendar::AztecXihuitlCalendar(double jd): Calendar(jd)
 {
-	retranslate();
+	AztecXihuitlCalendar::retranslate();
 }
 
 QMap<int, QString> AztecXihuitlCalendar::monthNames;
@@ -92,9 +92,7 @@ QStringList AztecXihuitlCalendar::getDateStrings() const
 QString AztecXihuitlCalendar::getFormattedDateString() const
 {
 	QStringList str=getDateStrings();
-	return QString("%1 %2")
-			.arg(str.at(1))
-			.arg(str.at(0));
+	return QString("%1 %2").arg(str.at(1), str.at(0));
 }
 
 // set date from a vector of calendar date elements sorted from the largest to the smallest.

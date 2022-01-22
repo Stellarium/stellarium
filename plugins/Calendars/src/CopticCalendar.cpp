@@ -91,13 +91,13 @@ QStringList CopticCalendar::getDateStrings() const
 QString CopticCalendar::getFormattedDateString() const
 {
 	QStringList str=getDateStrings();
-	return QString("%1, %2 - %3 (%4) - %5 %6")
-			.arg(str.at(4)) // dayname
-			.arg(str.at(3)) // day
-			.arg(str.at(1)) // month, numerical
-			.arg(str.at(2)) // month, name
-			.arg(str.at(0)) // year
-			.arg(q_("Era Martyrum"));// year
+	return QString("%1, %2 - %3 (%4) - %5 %6").arg(
+			str.at(4), // dayname
+			str.at(3), // day
+			str.at(1), // month, numerical
+			str.at(2), // month, name
+			str.at(0), // year
+			q_("Era Martyrum"));// year
 }
 
 // set date from a vector of calendar date elements sorted from the largest to the smallest.

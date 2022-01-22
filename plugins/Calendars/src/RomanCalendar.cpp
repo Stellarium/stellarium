@@ -96,14 +96,12 @@ QStringList RomanCalendar::getDateStrings() const
 QString RomanCalendar::getFormattedDateString() const
 {
 	QStringList str=getDateStrings();
-
-	QString day;
-	return QString("%1 %2 %3 %4 %5")
-			.arg(str.at(4))
-			.arg(str.at(3))
-			.arg(str.at(2))
-			.arg(str.at(0))
-			.arg(qc_("A.U.C.", "ab urbe condita"));// year AUC
+	return QString("%1 %2 %3 %4 %5").arg(
+			str.at(4),
+			str.at(3),
+			str.at(2),
+			str.at(0),
+			qc_("A.U.C.", "ab urbe condita"));// year AUC
 }
 
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
