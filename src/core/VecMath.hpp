@@ -1289,7 +1289,7 @@ template<class T> Matrix4<T>::Matrix4() {}
 
 template<class T> Matrix4<T>::Matrix4(const T* m)
 {
-	memcpy(r,m,sizeof(T)*16);
+	std::memcpy(r,m,sizeof(T)*16);
 }
 
 template<class T> Matrix4<T>::Matrix4(const Vector4<T>& v0,

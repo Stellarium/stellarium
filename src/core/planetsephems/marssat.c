@@ -342,7 +342,7 @@ static
 void CalcMarsSatElem(double t,int body,double elem[6]) {
   int j;
   const struct MarsSatBody *bp = mars_sat_bodies + body;
-  memcpy_s(elem, 6*sizeof(double), bp->constants, 6*sizeof(double));
+  memcpy(elem, bp->constants, 6*sizeof(double));
   for (j=0;j<2;j++) {
     const struct MarsSatTerm *const begin = bp->lists[j].terms;
     const struct MarsSatTerm *p = begin + bp->lists[j].size;

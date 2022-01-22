@@ -129,7 +129,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	{
 		static const unsigned char texElems[] = {0, 0, 255, 0, 255, 255, 0, 0, 255, 255, 0, 255};
 		unsigned char* elem = &textureCoordArray[i*6*2];
-		memcpy(elem, texElems, 12);
+		std::memcpy(elem, texElems, 12);
 	}
 	texImgHalo=QImage(StelFileMgr::getInstallationDir()+"/textures/star16x16.png");
 	texImgHaloSpiky=QImage(StelFileMgr::getInstallationDir()+"/textures/star16x16_rays.png");
@@ -456,12 +456,12 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 	
 	// Store the drawing instructions in the vertex arrays
 	StarVertex* vx = &(vertexArray[nbPointSources*6]);
-	vx->pos.set(win[0]-radius,win[1]-radius); memcpy(vx->color, starColor, 3); ++vx;
-	vx->pos.set(win[0]+radius,win[1]-radius); memcpy(vx->color, starColor, 3); ++vx;
-	vx->pos.set(win[0]+radius,win[1]+radius); memcpy(vx->color, starColor, 3); ++vx;
-	vx->pos.set(win[0]-radius,win[1]-radius); memcpy(vx->color, starColor, 3); ++vx;
-	vx->pos.set(win[0]+radius,win[1]+radius); memcpy(vx->color, starColor, 3); ++vx;
-	vx->pos.set(win[0]-radius,win[1]+radius); memcpy(vx->color, starColor, 3); ++vx;
+	vx->pos.set(win[0]-radius,win[1]-radius); std::memcpy(vx->color, starColor, 3); ++vx;
+	vx->pos.set(win[0]+radius,win[1]-radius); std::memcpy(vx->color, starColor, 3); ++vx;
+	vx->pos.set(win[0]+radius,win[1]+radius); std::memcpy(vx->color, starColor, 3); ++vx;
+	vx->pos.set(win[0]-radius,win[1]-radius); std::memcpy(vx->color, starColor, 3); ++vx;
+	vx->pos.set(win[0]+radius,win[1]+radius); std::memcpy(vx->color, starColor, 3); ++vx;
+	vx->pos.set(win[0]-radius,win[1]+radius); std::memcpy(vx->color, starColor, 3); ++vx;
 
 	++nbPointSources;
 	if (nbPointSources>=maxPointSources)
