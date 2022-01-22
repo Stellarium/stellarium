@@ -289,7 +289,7 @@ void PointerCoordinates::draw(StelCore *core)
 	{
 		constel=QString(" (%1)").arg(core->getIAUConstellation(core->j2000ToEquinoxEqu(mousePosition)));
 	}
-	QString coordsText = QString("%1: %2/%3%4").arg(coordsSystem).arg(cxt).arg(cyt).arg(constel);
+	QString coordsText = QString("%1: %2/%3%4").arg(coordsSystem, cxt, cyt, constel);
 	x = getCoordinatesPlace(coordsText).first;
 	y = getCoordinatesPlace(coordsText).second;
 	if (getCurrentCoordinatesPlace()!=Custom)
