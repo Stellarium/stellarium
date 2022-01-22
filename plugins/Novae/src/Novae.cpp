@@ -137,7 +137,7 @@ void Novae::init()
 		// populate settings from main config file.
 		readSettingsFromConfig();
 
-		novaeJsonPath = StelFileMgr::findFile("modules/Novae", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/novae.json";
+		novaeJsonPath = StelFileMgr::findFile("modules/Novae", static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable)) + "/novae.json";
 		if (novaeJsonPath.isEmpty())
 			return;
 
@@ -151,7 +151,7 @@ void Novae::init()
 	}
 
 	// If the json file does not already exist, create it from the resource in the Qt resource
-	if(QFileInfo(novaeJsonPath).exists())
+	if(QFileInfo::exists(novaeJsonPath))
 	{
 		if (!checkJsonFileFormat() || getJsonFileVersion()<CATALOG_FORMAT_VERSION)
 		{
@@ -192,7 +192,7 @@ void Novae::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 	
-	for (const auto& n : nova)
+	for (const auto& n : qAsConst(nova))
 	{
 		if (n && n->initialized)
 		{
@@ -214,7 +214,7 @@ void Novae::drawPointer(StelCore* core, StelPainter &painter)
 		const StelObjectP obj = newSelected[0];
 		Vec3d pos=obj->getJ2000EquatorialPos(core);
 
-		Vec3d screenpos;
+		Vec3f screenpos;
 		// Compute 2D pos and return if outside screen
 		if (!painter.getProjector()->project(pos, screenpos))
 			return;
@@ -334,7 +334,7 @@ QStringList Novae::listAllObjects(bool inEnglish) const
 */
 void Novae::restoreDefaultJsonFile(void)
 {
-	if (QFileInfo(novaeJsonPath).exists())
+    if (QFileInfo::exists(novaeJsonPath))
 		backupJsonFile(true);
 
 	QFile src(":/Novae/novae.json");
@@ -371,7 +371,7 @@ bool Novae::backupJsonFile(bool deleteOriginal)
 	}
 
 	QString backupPath = novaeJsonPath + ".old";
-	if (QFileInfo(backupPath).exists())
+	if (QFileInfo::exists(backupPath))
 		QFile(backupPath).remove();
 
 	if (old.copy(backupPath))
@@ -439,7 +439,7 @@ void Novae::setNovaeMap(const QVariantMap& map)
 	novalist.clear();
 	NovaCnt=0;
 	QVariantMap novaeMap = map.value("nova").toMap();
-	for (auto novaeKey : novaeMap.keys())
+	for (auto &novaeKey : novaeMap.keys())
 	{
 		QVariantMap novaeData = novaeMap.value(novaeKey).toMap();
 		novaeData["designation"] = QString("%1").arg(novaeKey);
@@ -625,7 +625,7 @@ void Novae::startDownload(QString urlString)
 	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
 
 	updateState = Novae::Updating;
-	emit(updateStateChanged(updateState));
+	emit updateStateChanged(updateState);
 }
 
 void Novae::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
@@ -641,8 +641,8 @@ void Novae::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
 		//Round to the greatest possible derived unit
 		while (bytesTotal > 1024)
 		{
-			bytesReceived = static_cast<qint64>(std::floor(bytesReceived / 1024.));
-			bytesTotal    = static_cast<qint64>(std::floor(bytesTotal / 1024.));
+			bytesReceived = static_cast<qint64>(std::floor(static_cast<double>(bytesReceived) / 1024.));
+			bytesTotal    = static_cast<qint64>(std::floor(static_cast<double>(bytesTotal) / 1024.));
 		}
 		currentValue = static_cast<int>(bytesReceived);
 		endValue = static_cast<int>(bytesTotal);
@@ -697,8 +697,8 @@ void Novae::downloadComplete(QNetworkReply *reply)
 		updateState = Novae::DownloadError;
 	}
 
-	emit(updateStateChanged(updateState));
-	emit(jsonUpdateComplete());
+	emit updateStateChanged(updateState);
+	emit jsonUpdateComplete();
 
 	reply->deleteLater();
 	downloadReply = Q_NULLPTR;

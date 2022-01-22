@@ -533,10 +533,9 @@ void NavStars::addExtraInfo(StelCore *core)
 		if (limitInfoToNavStars) 
 		{
 			doExtraInfo = false;
-			QString type = selectedObject->getType();
 			if(selectedObject->getType() == QStringLiteral("Star")) {
-				for (QVector<StelObjectP>::const_iterator itor = stars.begin();
-					itor != stars.end();
+				for (QVector<StelObjectP>::const_iterator itor = stars.constBegin();
+					itor != stars.constEnd();
 					itor++)
 				{
 					StelObjectP p = *itor;
@@ -674,8 +673,8 @@ QString NavStars::oneRowTwoCells(const QString& a, const QString& b, const QStri
 
 bool NavStars::isPermittedObject(const QString& s)
 {
-	QVector<QString>::const_iterator itor = permittedObjects.begin();
-	while (itor != permittedObjects.end())
+	QVector<QString>::const_iterator itor = permittedObjects.constBegin();
+	while (itor != permittedObjects.constEnd())
 	{
 		if (*itor == s)
 			return true;
