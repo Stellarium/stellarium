@@ -1969,8 +1969,14 @@ void AstroCalcDialog::generateTransits()
 			}
 
 			const double currentJD = core->getJD();   // save current JD
+#if QT_VERSION >= QT_VERSION_CHECK(5,14,0)
+			// Note: It may even be possible to configure the time zone corrections into this call.
+			double startJD = StelUtils::qDateTimeToJd(ui->transitFromDateEdit->date().startOfDay(Qt::UTC));
+			double stopJD = StelUtils::qDateTimeToJd(ui->transitToDateEdit->date().startOfDay(Qt::UTC));
+#else
 			double startJD = StelUtils::qDateTimeToJd(QDateTime(ui->transitFromDateEdit->date()));
 			double stopJD = StelUtils::qDateTimeToJd(QDateTime(ui->transitToDateEdit->date()));
+#endif
 			startJD = startJD - core->getUTCOffset(startJD) / 24.;
 			stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
 			int elements = static_cast<int>((stopJD - startJD) / currentStep);
@@ -3723,28 +3729,33 @@ void AstroCalcDialog::calculatePhenomena()
 
 	initListPhenomena();
 
+#if QT_VERSION >= QT_VERSION_CHECK(5,14,0)
+	double startJD = StelUtils::qDateTimeToJd(ui->phenomenFromDateEdit->date().startOfDay(Qt::UTC));
+	double stopJD = StelUtils::qDateTimeToJd(ui->phenomenFromDateEdit->date().addDays(1).startOfDay(Qt::UTC));
+#else
 	double startJD = StelUtils::qDateTimeToJd(QDateTime(ui->phenomenFromDateEdit->date()));
 	double stopJD = StelUtils::qDateTimeToJd(QDateTime(ui->phenomenToDateEdit->date().addDays(1)));
+#endif
 	if (stopJD<=startJD) // Stop warming atmosphere!..
 		return;
 
-	QList<PlanetP> objects;
+	QVector<PlanetP> objects;
 	Q_ASSERT(objects.isEmpty());
 	QList<PlanetP> allObjects = solarSystem->getAllPlanets();
 
-	QList<NebulaP> dso;
+	QVector<NebulaP> dso;
 	Q_ASSERT(dso.isEmpty());
 	QVector<NebulaP> allDSO = dsoMgr->getAllDeepSkyObjects();
 
-	QList<StelObjectP> star, doubleStar, variableStar;
+	QVector<StelObjectP> star, doubleStar, variableStar;
 	Q_ASSERT(star.isEmpty());
 	Q_ASSERT(doubleStar.isEmpty());
 	Q_ASSERT(variableStar.isEmpty());
-	QList<StelObjectP> hipStars = starMgr->getHipparcosStars();
-	QList<StelObjectP> carbonStars = starMgr->getHipparcosCarbonStars();
-	QList<StelObjectP> bariumStars = starMgr->getHipparcosBariumStars();
-	QList<StelACStarData> doubleHipStars = starMgr->getHipparcosDoubleStars();
-	QList<StelACStarData> variableHipStars = starMgr->getHipparcosVariableStars();
+	QVector<StelObjectP> hipStars = starMgr->getHipparcosStars().toVector();
+	QVector<StelObjectP> carbonStars = starMgr->getHipparcosCarbonStars().toVector();
+	QVector<StelObjectP> bariumStars = starMgr->getHipparcosBariumStars().toVector();
+	QVector<StelACStarData> doubleHipStars = starMgr->getHipparcosDoubleStars().toVector();
+	QVector<StelACStarData> variableHipStars = starMgr->getHipparcosVariableStars().toVector();
 
 	int obj2Type = ui->object2ComboBox->currentData().toInt();
 	switch (obj2Type)
@@ -3796,7 +3807,7 @@ void AstroCalcDialog::calculatePhenomena()
 		case PHCBrightCarbonStars: // Bright carbon stars
 		case PHCBrightBariumStars: // Bright barium stars
 		{
-			QList<StelObjectP> stars;
+			QVector<StelObjectP> stars;
 			if (obj2Type==PHCBrightStars)
 				stars = hipStars;
 			else if (obj2Type==PHCBrightBariumStars)
@@ -3893,7 +3904,7 @@ void AstroCalcDialog::calculatePhenomena()
 		case PHCBrightSolarSystemObjects: // Bright Solar system objects
 			for (const auto& object : allObjects)
 			{
-				if (object->getVMagnitude(core) < (brightLimit + 2.0f) && object->getPlanetType() != Planet::isUNDEFINED)
+				if (object->getVMagnitude(core) < (brightLimit + 2.0) && object->getPlanetType() != Planet::isUNDEFINED)
 					objects.append(object);
 			}
 			break;
