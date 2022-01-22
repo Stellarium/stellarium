@@ -163,6 +163,7 @@ void AstroCalcDialog::retranslate()
 		setEphemerisHeaderNames();
 		setTransitHeaderNames();
 		setPhenomenaHeaderNames();
+		setWUTHeaderNames();
 		populateCelestialBodyList();
 		populateCelestialCategoryList();
 		populateEphemerisTimeStepsList();
