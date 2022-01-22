@@ -575,7 +575,7 @@ to limit the vertical field of view so that you won't ever zoom out too far.
 \subsubsection{Atmosphere settings}
 \label{sec:gui:view:sky:atmosphere}
 
-An auxiliary dialog opens when you select \button{Refraction/extinction settings\ldots}
+An auxiliary dialog opens when you select \guibutton[1.0]{0.75}{uibtSettings.png}
 and contains detail settings for the atmosphere. Here
 you can set atmospheric pressure and temperature which influence
 refraction (see section~\ref{sec:phenomena:Refraction}), and the
@@ -597,13 +597,19 @@ for changing the general appearance of the view of Solar system objects. Some hi
 
 \begin{description}
 \item[Simulate light speed] will give more precise positions for planetary bodies which move
-  rapidly against backround stars (e.g. the moons of Jupiter). 
-\item[Scale Moon]  will increase the apparent size of the moon
+  rapidly against background stars (e.g. the moons of Jupiter).
+\item[Scale] will increase the apparent size of the selected class of objects:
+  \begin{description}
+  \item[Moon] will increase the apparent size of the Moon
   in the sky, which can be nice for wide field of view shots.
-\item[Scale minor bodies] will increase the apparent size of minor
-  bodies: planet satellites, all kinds of asteroids, and comets.  For
-  some of these 3D models are available, which will be better
+  \item[Minor bodies] will increase the apparent size of minor
+  bodies: planet satellites, all kinds of asteroids, and comets.  
+  Forsome of these 3D models are available, which will be better
   discernible if enlarged.
+  \item[Sun] will increase the apparent size of the Sun
+    in the sky, which can be nice for didactic purposes or demonstrations.
+  \item[Planets] will increase the apparent size of major planets.
+  \end{description}
 \item[Show orbits] adds a rendition of the orbit or trajectory of an SSO. 
 \item[Show trails] plots the apparent path of SSO among the stars as
   seen from the current planet.
