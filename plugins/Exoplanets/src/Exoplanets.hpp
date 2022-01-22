@@ -343,12 +343,12 @@ public slots:
 	}
 
 	//! Set the temperature scale
-	void setCurrentTemperatureScale(TemperatureScale tscale)
+	void setCurrentTemperatureScale(Exoplanets::TemperatureScale tscale)
 	{
 		Exoplanet::temperatureScaleID = static_cast<int>(tscale);
 	}
 	//! Get the current temperature scale
-	TemperatureScale getCurrentTemperatureScale() const
+	Exoplanets::TemperatureScale getCurrentTemperatureScale() const
 	{
 		return static_cast<TemperatureScale>(Exoplanet::temperatureScaleID);
 	}

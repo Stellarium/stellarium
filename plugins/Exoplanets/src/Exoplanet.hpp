@@ -163,11 +163,12 @@ private:
 	static bool habitableMode;
 	static bool showDesignations;
 	static bool showNumbers;
-	static int temperatureScaleID;
+	static int temperatureScaleID; //!< Magic number. 0: Kelvin; 1: Celsius; 2: Fahrenheit
 
 	void draw(StelCore* core, StelPainter *painter);
 
 	QString getTemperatureScaleUnit() const;
+	//! convert input temperature to Kelvin temperature, depending on the setting of temperatureScaleID
 	float getTemperature(float temperature) const;
 
 	int EPCount;
