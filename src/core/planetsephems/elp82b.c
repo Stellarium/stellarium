@@ -162695,7 +162695,7 @@ void GetElp82bSphericalCoor(const double t,double r[3], void *user) {
   }
 
   PrepareElp82bLambdaArray(17,elp82b_max_lambda_factor,lambda,cos_sin_lambda);
-  memcpy(accu,elp82b_constants,sizeof(elp82b_constants));
+  memcpy_s(accu, sizeof(elp82b_constants), elp82b_constants, sizeof(elp82b_constants));
   AccumulateElp82bTerms(elp82b_instructions,elp82b_coefficients,cos_sin_lambda,
                         accu,stack);
 

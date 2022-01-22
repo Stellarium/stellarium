@@ -1075,7 +1075,7 @@ template<class T> Matrix3<T>::Matrix3() {}
 
 template<class T> Matrix3<T>::Matrix3(const T* m)
 {
-	memcpy(r,m,sizeof(T)*9);
+	memcpy_s(r,sizeof(T)*9,m,sizeof(T)*9);
 }
 
 template<class T> Matrix3<T>::Matrix3(const Vector3<T>& v0, const Vector3<T>& v1, const Vector3<T>& v2)
@@ -1188,9 +1188,9 @@ template<class T> Matrix3<T> Matrix3<T>::inverse() const
 
 	/* choose pivot - or die */
 	if (fabs(r2[0]) > fabs(r1[0]))
-		SWAP_ROWS(r2, r1);
+		SWAP_ROWS(r2, r1)
 	if (fabs(r1[0]) > fabs(r0[0]))
-		SWAP_ROWS(r1, r0);
+		SWAP_ROWS(r1, r0)
 	if (0.0 == r0[0])
 		return Matrix3<T>();
 
@@ -1224,7 +1224,7 @@ template<class T> Matrix3<T> Matrix3<T>::inverse() const
 
 	/* choose pivot - or die */
 	if (fabs(r2[1]) > fabs(r1[1]))
-		SWAP_ROWS(r2, r1);
+		SWAP_ROWS(r2, r1)
 	if (0.0 == r1[1])
 		return Matrix3<T>();
 
@@ -1524,11 +1524,11 @@ template<class T> Matrix4<T> Matrix4<T>::inverse() const
 
 	/* choose pivot - or die */
 	if (fabs(r3[0]) > fabs(r2[0]))
-		SWAP_ROWS(r3, r2);
+		SWAP_ROWS(r3, r2)
 	if (fabs(r2[0]) > fabs(r1[0]))
-		SWAP_ROWS(r2, r1);
+		SWAP_ROWS(r2, r1)
 	if (fabs(r1[0]) > fabs(r0[0]))
-		SWAP_ROWS(r1, r0);
+		SWAP_ROWS(r1, r0)
 	if (0.0 == r0[0])
 		return Matrix4<T>();
 
@@ -1575,9 +1575,9 @@ template<class T> Matrix4<T> Matrix4<T>::inverse() const
 
 	/* choose pivot - or die */
 	if (fabs(r3[1]) > fabs(r2[1]))
-		SWAP_ROWS(r3, r2);
+		SWAP_ROWS(r3, r2)
 	if (fabs(r2[1]) > fabs(r1[1]))
-		SWAP_ROWS(r2, r1);
+		SWAP_ROWS(r2, r1)
 	if (0.0 == r1[1])
 		return Matrix4<T>();
 
@@ -1611,7 +1611,7 @@ template<class T> Matrix4<T> Matrix4<T>::inverse() const
 
 	/* choose pivot - or die */
 	if (fabs(r3[2]) > fabs(r2[2]))
-		SWAP_ROWS(r3, r2);
+		SWAP_ROWS(r3, r2)
 	if (0.0 == r2[2])
 		return Matrix4<T>();
 
