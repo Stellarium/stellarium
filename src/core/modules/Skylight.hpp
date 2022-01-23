@@ -270,6 +270,12 @@ public slots:
 	void setZY33(const double val){zY33=val; StelApp::getInstance().getSettings()->setValue("Skylight/zY33", val); emit zY33Changed(val); computeZenithColor();}
 	void setZY34(const double val){zY34=val; StelApp::getInstance().getSettings()->setValue("Skylight/zY34", val); emit zY34Changed(val); computeZenithColor();}
 
+	void setT(double newT){T=newT; emit turbidityChanged(newT); }
+
+	void setFlagSchaefer(bool val){flagSchaefer=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/use_Schaefer", val); emit flagSchaeferChanged(val);}
+	void setFlagGuiPublic(bool val){flagGuiPublic=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/enable_gui", val); emit flagGuiPublicChanged(val);}
+
+public:
 	double getAYt(void) const {return AYt; }
 	double getBYt(void) const {return BYt; }
 	double getCYt(void) const {return CYt; }
@@ -326,11 +332,8 @@ public slots:
 	double getZY34(void) const {return zY34; }
 
 	double getT(void) const {return T;}
-	void setT(double newT){T=newT; emit turbidityChanged(newT); }
 
-	void setFlagSchaefer(bool val){flagSchaefer=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/use_Schaefer", val); emit flagSchaeferChanged(val);}
 	bool getFlagSchaefer() const {return flagSchaefer;}
-	void setFlagGuiPublic(bool val){flagGuiPublic=val; QSettings* conf = StelApp::getInstance().getSettings(); conf->setValue("Skylight/enable_gui", val); emit flagGuiPublicChanged(val);}
 	bool getFlagGuiPublic() const {return flagGuiPublic;}
 
 private:
