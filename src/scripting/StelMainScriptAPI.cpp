@@ -368,7 +368,7 @@ QString StelMainScriptAPI::getProjectionMode()
 
 void StelMainScriptAPI::setProjectionMode(const QString& id)
 {
-	emit(requestSetProjectionMode(id));
+	emit requestSetProjectionMode(id);
 }
 
 QStringList StelMainScriptAPI::getAllSkyCultureIDs()
@@ -384,7 +384,7 @@ QString StelMainScriptAPI::getSkyCulture()
 void StelMainScriptAPI::setSkyCulture(const QString& id)
 {
 	GETSTELMODULE(StelObjectMgr)->unSelect(); // mistake-proofing!
-	emit(requestSetSkyCulture(id));
+	emit requestSetSkyCulture(id);
 }
 
 QString StelMainScriptAPI::getSkyCultureName()
@@ -449,7 +449,7 @@ void StelMainScriptAPI::setSphericMirror(bool b)
 
 void StelMainScriptAPI::setDiskViewport(bool b)
 {
-	emit(requestSetDiskViewport(b));
+	emit requestSetDiskViewport(b);
 }
 
 void StelMainScriptAPI::setViewportStretch(const float stretch)
@@ -483,7 +483,7 @@ void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 		qDebug() << "StelMainScriptAPI::loadSkyImage(): unknown frame type " << frame << " requested -- Using Equatorial J2000";
 	}
 
-	emit(requestLoadSkyImage(id, path, lon0, lat0, lon1, lat1, lon2, lat2, lon3, lat3, minRes, maxBright, visible, frameType, withAberration));
+	emit requestLoadSkyImage(id, path, lon0, lat0, lon1, lat1, lon2, lat2, lon3, lat3, minRes, maxBright, visible, frameType, withAberration);
 }
 
 // Convenience method:
@@ -549,7 +549,7 @@ void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 
 void StelMainScriptAPI::removeSkyImage(const QString& id)
 {
-	emit(requestRemoveSkyImage(id));
+	emit requestRemoveSkyImage(id);
 }
 
 void StelMainScriptAPI::loadSound(const QString& filename, const QString& id)
@@ -561,27 +561,27 @@ void StelMainScriptAPI::loadSound(const QString& filename, const QString& id)
 		return;
 	}
 
-	emit(requestLoadSound(path, id));
+	emit requestLoadSound(path, id);
 }
 
 void StelMainScriptAPI::playSound(const QString& id)
 {
-	emit(requestPlaySound(id));
+	emit requestPlaySound(id);
 }
 
 void StelMainScriptAPI::pauseSound(const QString& id)
 {
-	emit(requestPauseSound(id));
+	emit requestPauseSound(id);
 }
 
 void StelMainScriptAPI::stopSound(const QString& id)
 {
-	emit(requestStopSound(id));
+	emit requestStopSound(id);
 }
 
 void StelMainScriptAPI::dropSound(const QString& id)
 {
-	emit(requestDropSound(id));
+	emit requestDropSound(id);
 }
 
 qint64 StelMainScriptAPI::getSoundPosition(const QString& id)
@@ -603,57 +603,57 @@ void StelMainScriptAPI::loadVideo(const QString& filename, const QString& id, fl
 		return;
 	}
 
-	emit(requestLoadVideo(path, id, x, y, show, alpha));
+	emit requestLoadVideo(path, id, x, y, show, alpha);
 }
 
 void StelMainScriptAPI::playVideo(const QString& id, bool keepVisibleAtEnd)
 {
-	emit(requestPlayVideo(id, keepVisibleAtEnd));
+	emit requestPlayVideo(id, keepVisibleAtEnd);
 }
 
 void StelMainScriptAPI::playVideoPopout(const QString& id, float fromX, float fromY, float atCenterX, float atCenterY, float finalSizeX, float finalSizeY, float popupDuration, bool frozenInTransition)
 {
-	emit(requestPlayVideoPopout(id, fromX, fromY, atCenterX, atCenterY, finalSizeX, finalSizeY, popupDuration, frozenInTransition));
+	emit requestPlayVideoPopout(id, fromX, fromY, atCenterX, atCenterY, finalSizeX, finalSizeY, popupDuration, frozenInTransition);
 }
 
 void StelMainScriptAPI::pauseVideo(const QString& id)
 {
-	emit(requestPauseVideo(id));
+	emit requestPauseVideo(id);
 }
 
 void StelMainScriptAPI::stopVideo(const QString& id)
 {
-	emit(requestStopVideo(id));
+	emit requestStopVideo(id);
 }
 
 void StelMainScriptAPI::dropVideo(const QString& id)
 {
-	emit(requestDropVideo(id));
+	emit requestDropVideo(id);
 }
 
 void StelMainScriptAPI::seekVideo(const QString& id, qint64 ms, bool pause)
 {
-	emit(requestSeekVideo(id, ms, pause));
+	emit requestSeekVideo(id, ms, pause);
 }
 
 void StelMainScriptAPI::setVideoXY(const QString& id, float x, float y, bool relative)
 {
-	emit(requestSetVideoXY(id, x, y, relative));
+	emit requestSetVideoXY(id, x, y, relative);
 }
 
 void StelMainScriptAPI::setVideoAlpha(const QString& id, float alpha)
 {
-	emit(requestSetVideoAlpha(id, alpha));
+	emit requestSetVideoAlpha(id, alpha);
 }
 
 void StelMainScriptAPI::resizeVideo(const QString& id, float w, float h)
 {
-	emit(requestResizeVideo(id, w, h));
+	emit requestResizeVideo(id, w, h);
 }
 
 void StelMainScriptAPI::showVideo(const QString& id, bool show)
 {
-	emit(requestShowVideo(id, show));
+	emit requestShowVideo(id, show);
 }
 
 qint64 StelMainScriptAPI::getVideoDuration(const QString& id)
@@ -698,14 +698,14 @@ void StelMainScriptAPI::setSelectedObjectInfo(const QString& level)
 	else if (level == "ShortInfo")
 		StelApp::getInstance().getGui()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::ShortInfo));
 	else if (level == "None")
-		StelApp::getInstance().getGui()->setInfoTextFilters(StelObject::InfoStringGroup(Q_NULLPTR));
+		StelApp::getInstance().getGui()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::None));
 	else
 		qWarning() << "setSelectedObjectInfo unknown level string \"" << level << "\"";
 }
 
 void StelMainScriptAPI::exit()
 {
-	emit(requestExit());
+	emit requestExit();
 }
 
 void StelMainScriptAPI::quitStellarium()
@@ -744,15 +744,15 @@ QString StelMainScriptAPI::mapToString(const QVariantMap& map)
 	{
 		if (i.value().type()==QVariant::String)
 		{
-			res.append(QString("[ \"%1\" = \"%2\" ]\n").arg(i.key()).arg(i.value().toString()));
+			res.append(QString("[ \"%1\" = \"%2\" ]\n").arg(i.key(), i.value().toString()));
 		}
 		else if (simpleTypeList.contains(i.value().type()))
 		{
-			res.append(QString("[ \"%1\" = %2 ]\n").arg(i.key()).arg(i.value().toString()));
+			res.append(QString("[ \"%1\" = %2 ]\n").arg(i.key(), i.value().toString()));
 		}
 		else
 		{
-			res.append(QString("[ \"%1\" = \"<%2>:%3\" ]\n").arg(i.key()).arg(i.value().typeName()).arg(i.value().toString()));
+			res.append(QString("[ \"%1\" = \"<%2>:%3\" ]\n").arg(i.key(), i.value().typeName(), i.value().toString()));
 		}
 	}
 	res.append( QString("]\n"));
@@ -855,7 +855,7 @@ void StelMainScriptAPI::wait(double t)
 	QTimer::singleShot(qRound(1000*t), loop, SLOT(quit()));
 	if( loop->exec() != 0 )
 	{
-		emit(requestExit()); // causes a call of stopScript
+		emit requestExit(); // causes a call of stopScript
 	}
 }
 
@@ -879,7 +879,7 @@ void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec)
 	QTimer::singleShot(interval, loop, SLOT(quit()));
 	if( loop->exec() != 0 )
 	{
-		emit(requestExit()); // causes a call of stopScript
+		emit requestExit(); // causes a call of stopScript
 	}
 }
 
@@ -1279,7 +1279,7 @@ QString StelMainScriptAPI::translate(QString englishText)
 
 void StelMainScriptAPI::goHome()
 {
-	emit(requestSetHomePosition());
+	emit requestSetHomePosition();
 }
 
 int StelMainScriptAPI::getBortleScaleIndex()

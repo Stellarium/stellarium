@@ -42,7 +42,7 @@ class StelMainScriptAPI : public QObject
 
 public:
 	StelMainScriptAPI(QObject *parent = Q_NULLPTR);
-	~StelMainScriptAPI();
+	~StelMainScriptAPI() Q_DECL_OVERRIDE;
 
 // These functions will be available in scripts
 public slots:
