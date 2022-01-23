@@ -159,6 +159,18 @@ public:
 		GraphDeclinationVsTime      = 10
 	};
 
+	//! Defines the number and the order of the columns in the lunar eclipse table
+	//! @enum LunarEclipseColumns
+	enum LunarEclipseColumns {
+		LunarEclipseDate,            //! date and time of lunar eclipse
+		LunarEclipseSaros,           //! Saros number
+		LunarEclipseType,            //! type of lunar eclipse
+		LunarEclipseGamma,           //! Gamma of lunar eclipse
+		LunarEclipsePMag,            //! penumbral magnitude of lunar eclipse
+		LunarEclipseUMag,            //! umbral magnitude of lunar eclipse
+		LunarEclipseCount            //! total number of columns
+	};
+
 	AstroCalcDialog(QObject* parent);
 	virtual ~AstroCalcDialog() Q_DECL_OVERRIDE;
 
@@ -202,6 +214,13 @@ private slots:
 	void selectCurrentTransit(const QModelIndex &modelIndex);
 	void saveTransits();
 	void setTransitCelestialBodyName();
+
+	//! Calculating lunar eclipses to fill the list.
+	//! Algorithm taken from calculating the transits.
+	void generateLunarEclipses();
+	void cleanupLunarEclipses();
+	void selectCurrentLunarEclipse(const QModelIndex &modelIndex);
+	void saveLunarEclipses();
 
 	void saveEphemerisCelestialBody(int index);
 	void saveEphemerisSecondaryCelestialBody(int index);
@@ -314,6 +333,7 @@ private:
 	QSettings* conf;
 	QTimer *currentTimeLine;
 	QHash<QString,int> wutCategories;
+	QPair<double, double> getLunarEclipseXY() const;
 
 	void saveTableAsCSV(const QString& fileName, QTreeWidget* tWidget, QStringList& headers);
 	void saveTableAsBookmarks(const QString& fileName, QTreeWidget* tWidget);
@@ -328,6 +348,8 @@ private:
 	void setPhenomenaHeaderNames();
 	//! Update header names for WUT table
 	void setWUTHeaderNames(const bool magnitude = true, const bool separation = false);
+	//! update header names for lunar eclipse table
+	void setLunarEclipseHeaderNames();
 
 	//! Init header and list of celestial positions
 	void initListCelestialPositions();
@@ -339,6 +361,8 @@ private:
 	void initListPhenomena();
 	//! Init header and list of WUT
 	void initListWUT(const bool magnitude = true, const bool separation = false);
+	//! Init header and list of lunar eclipse
+	void initListLunarEclipse();
 
 	//! Populates the drop-down list of celestial bodies.
 	//! The displayed names are localized in the current interface language.
@@ -419,7 +443,7 @@ private:
 
 	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph, plotAngularDistanceGraph, plotAziVsTime;
 	int altVsTimePositiveLimit, monthlyElevationPositiveLimit, graphsDuration;
-	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, wutHeader, transitHeader;
+	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, wutHeader, transitHeader, lunareclipseHeader;
 	static double brightLimit;
 	static double minY, maxY, minYme, maxYme, minYsun, maxYsun, minYmoon, maxYmoon, transitX, minY1, maxY1, minY2, maxY2,
 			     minYld, maxYld, minYad, maxYad, minYadm, maxYadm, minYaz, maxYaz;
@@ -634,6 +658,31 @@ private:
 		else if (column == AstroCalcDialog::TransitAltitude || column == AstroCalcDialog::TransitElongation || column == AstroCalcDialog::TransitAngularDistance)
 		{
 			return StelUtils::getDecAngle(text(column)) < StelUtils::getDecAngle(other.text(column));
+		}
+		else
+		{
+			return text(column).toLower() < other.text(column).toLower();
+		}
+	}
+};
+
+// Reimplements the QTreeWidgetItem class to fix the sorting bug
+class ACLunarEclipseTreeWidgetItem : public QTreeWidgetItem
+{
+public:
+	ACLunarEclipseTreeWidgetItem(QTreeWidget* parent)
+		: QTreeWidgetItem(parent)
+	{
+	}
+
+private:
+	bool operator < (const QTreeWidgetItem &other) const
+	{
+		int column = treeWidget()->sortColumn();
+
+		if (column == AstroCalcDialog::LunarEclipseDate)
+		{
+			return data(column, Qt::UserRole).toFloat() < other.data(column, Qt::UserRole).toFloat();
 		}
 		else
 		{

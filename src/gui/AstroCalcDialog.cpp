@@ -139,6 +139,7 @@ AstroCalcDialog::AstroCalcDialog(QObject* parent)
 	Q_ASSERT(positionsHeader.isEmpty());
 	Q_ASSERT(wutHeader.isEmpty());
 	Q_ASSERT(transitHeader.isEmpty());
+	Q_ASSERT(lunareclipseHeader.isEmpty());
 }
 
 AstroCalcDialog::~AstroCalcDialog()
@@ -192,6 +193,8 @@ void AstroCalcDialog::retranslate()
 		ui->phenomenToDateEdit->setToolTip(validDates);
 		ui->transitFromDateEdit->setToolTip(validDates);
 		ui->transitToDateEdit->setToolTip(validDates);
+		ui->lunareclipseFromDateEdit->setToolTip(validDates);
+		ui->lunareclipseToDateEdit->setToolTip(validDates);
 	}
 }
 
@@ -257,6 +260,8 @@ void AstroCalcDialog::createDialogContent()
 	ui->phenomenToDateEdit->setDateTime(currentDT.addMonths(1));
 	ui->transitFromDateEdit->setDateTime(currentDT);
 	ui->transitToDateEdit->setDateTime(currentDT.addMonths(1));
+	ui->lunareclipseFromDateEdit->setDateTime(currentDT);
+	ui->lunareclipseToDateEdit->setDateTime(currentDT.addMonths(1));
 	ui->monthlyElevationTimeInfo->setStyleSheet("font-size: 18pt; color: rgb(238, 238, 238);");
 
 	// TODO: Replace QDateTimeEdit by a new StelDateTimeEdit widget to apply full range of dates
@@ -275,6 +280,10 @@ void AstroCalcDialog::createDialogContent()
 	ui->transitFromDateEdit->setToolTip(validDates);
 	ui->transitToDateEdit->setMinimumDate(minDate);
 	ui->transitToDateEdit->setToolTip(validDates);
+	ui->lunareclipseFromDateEdit->setMinimumDate(minDate);
+	ui->lunareclipseFromDateEdit->setToolTip(validDates);
+	ui->lunareclipseToDateEdit->setMinimumDate(minDate);
+	ui->lunareclipseToDateEdit->setToolTip(validDates);
 	ui->pushButtonExtraEphemerisDialog->setFixedSize(QSize(20, 20));
 	ui->pushButtonCustomStepsDialog->setFixedSize(QSize(26, 26));
 
@@ -330,6 +339,12 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->transitsSaveButton, SIGNAL(clicked()), this, SLOT(saveTransits()));
 	connect(ui->transitTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentTransit(QModelIndex)));
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(setTransitCelestialBodyName()));
+
+	initListLunarEclipse();
+	connect(ui->lunareclipsesCalculateButton, SIGNAL(clicked()), this, SLOT(generateLunarEclipses()));
+	connect(ui->lunareclipsesCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupLunarEclipses()));
+	connect(ui->lunareclipsesSaveButton, SIGNAL(clicked()), this, SLOT(saveLunarEclipses()));
+	connect(ui->lunareclipseTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentLunarEclipse(QModelIndex)));
 
 	// Let's use DMS and decimal degrees as acceptable values for "Maximum allowed separation" input box
 	ui->allowedSeparationSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
@@ -2147,6 +2162,356 @@ void AstroCalcDialog::saveTransits()
 			{
 				// Row 2 and next: the data
 				sData = ui->transitTreeWidget->topLevelItem(i)->text(j).trimmed();
+				xlsx.write(i + 2, j + 1, sData, data);
+				int w = sData.size();
+				if (w > width[j])
+				{
+					width[j] = w;
+				}
+			}
+		}
+
+		for (int i = 0; i < columns; i++)
+		{
+			xlsx.setColumnWidth(i+1, width[i]+2);
+		}
+
+		delete[] width;
+		xlsx.saveAs(filePath);
+	}
+}
+
+void AstroCalcDialog::setLunarEclipseHeaderNames()
+{
+	lunareclipseHeader.clear();
+	lunareclipseHeader << q_("Date and Time");
+	lunareclipseHeader << q_("Saros number");
+	lunareclipseHeader << q_("Type");
+	lunareclipseHeader << q_("Gamma");
+	lunareclipseHeader << q_("Penumbral eclipse magnitude");
+	lunareclipseHeader << q_("Umbral eclipse magnitude");
+	ui->lunareclipseTreeWidget->setHeaderLabels(lunareclipseHeader);
+
+	// adjust the column width
+	for (int i = 0; i < LunarEclipseCount; ++i)
+	{
+		ui->lunareclipseTreeWidget->resizeColumnToContents(i);
+	}
+}
+
+void AstroCalcDialog::initListLunarEclipse()
+{
+	ui->lunareclipseTreeWidget->clear();
+	ui->lunareclipseTreeWidget->setColumnCount(LunarEclipseCount);
+	setLunarEclipseHeaderNames();
+	ui->lunareclipseTreeWidget->header()->setSectionsMovable(false);
+	ui->lunareclipseTreeWidget->header()->setDefaultAlignment(Qt::AlignHCenter);
+}
+
+QPair<double,double> AstroCalcDialog::getLunarEclipseXY() const
+{
+	// Algorithm adaped from Planet::getLunarEclipseMagnitudes() -- we need only x and y here.
+	// Find x, y of Besselian elements
+	QPair<double,double> LunarEclipseXY;
+	// Use geocentric coordinates
+	StelCore* core = StelApp::getInstance().getCore();
+	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+	core->setUseTopocentricCoordinates(false);
+	core->update(0);
+
+	double raMoon, deMoon, raSun, deSun;
+	StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
+	StelUtils::rectToSphe(&raMoon, &deMoon, ssystem->getMoon()->getEquinoxEquatorialPos(core));
+
+	// R.A./Dec of Earth's shadow
+	const double raShadow = StelUtils::fmodpos(raSun + M_PI, 2.*M_PI);
+	const double deShadow = -(deSun);
+	const double raDiff = StelUtils::fmodpos(raMoon - raShadow, 2.*M_PI);
+
+	double x = cos(deMoon) * sin(raDiff);
+	x *= 3600. * M_180_PI;
+	double y = cos(deShadow) * sin(deMoon) - sin(deShadow) * cos(deMoon) * cos(raDiff);
+	y *= 3600. * M_180_PI;
+
+	LunarEclipseXY.first = x;
+	LunarEclipseXY.second = y;
+
+	return LunarEclipseXY;
+}
+
+void AstroCalcDialog::generateLunarEclipses()
+{
+	const bool onEarth = core->getCurrentPlanet()==solarSystem->getEarth();
+	if (onEarth) // Not sure it's right thing to do but should be ok.
+	{
+		initListLunarEclipse();
+
+		const double currentJD = core->getJD();   // save current JD
+		double startJD = StelUtils::qDateTimeToJd(QDateTime(ui->lunareclipseFromDateEdit->date()));
+		double stopJD = StelUtils::qDateTimeToJd(QDateTime(ui->lunareclipseToDateEdit->date()));
+		startJD = startJD - core->getUTCOffset(startJD) / 24.;
+		stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
+		int elements = static_cast<int>((stopJD - startJD) / 29.530588853);
+		QString SarosStr, EclipseTypeStr, uMagStr, pMagStr, gammaStr;
+
+		const bool saveTopocentric = core->getUseTopocentricCoordinates();
+
+		// Find approximate JD of Full Moon = Geocentric opposition in longitude
+		double temp = (startJD - 2451550.09765 - (29.530588853 * 0.5)) / 29.530588853;
+		double InitFMJD = 2451550.09765 + int(temp) * 29.530588853 - (29.530588853 * 0.5);
+
+		// Search for lunar eclipses at each full Moon
+		for (int i = 0; i <= elements+1; i++)
+		{
+			double JD = InitFMJD + 29.530588853 * i;
+			if (JD > startJD)
+			{
+				double JD1 = JD;
+				double JD2 = JD1 + 2.;
+
+				core->setJD(JD1);
+				core->setUseTopocentricCoordinates(false);
+				core->update(0);
+
+				static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+				double raSun, deSun, raMoon, deMoon, lSun1, bSun, bMoon, lMoon1, lSun2, lMoon2;
+
+				StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
+				StelUtils::rectToSphe(&raMoon, &deMoon, ssystem->getMoon()->getEquinoxEquatorialPos(core));
+				double obl=ssystem->getEarth()->getRotObliquity(core->getJD());
+				StelUtils::equToEcl(raSun, deSun, obl, &lSun1, &bSun);
+				StelUtils::equToEcl(raMoon, deMoon, obl, &lMoon1, &bMoon);
+
+				core->setJD(JD2);
+				core->update(0);
+
+				StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
+				StelUtils::rectToSphe(&raMoon, &deMoon, ssystem->getMoon()->getEquinoxEquatorialPos(core));
+				obl=ssystem->getEarth()->getRotObliquity(core->getJD());
+				StelUtils::equToEcl(raSun, deSun, obl, &lSun2, &bSun);
+				StelUtils::equToEcl(raMoon, deMoon, obl, &lMoon2, &bMoon);
+
+				lSun1 += M_PI;
+				lSun2 += M_PI;
+
+				double deltaSun = lSun2-lSun1;
+				if (deltaSun < 0.) deltaSun+=2.*M_PI;
+				double deltaMoon = lMoon2-lMoon1;
+				if (deltaMoon < 0.) deltaMoon+=2.*M_PI;
+				double delta = lSun1-lMoon1;
+				if (delta > M_PI) delta-=2.*M_PI;
+				double delta2 = deltaMoon - deltaSun;
+				double dt = 2. * delta / delta2;
+				double JDmid = JD1 + dt;
+
+				// Find exact time of closest approach between the Moon and shadow centre
+				for (int j = 0; j <= 2; j++)
+				{
+					JD1 = JDmid - 5./1440.;
+					JD2 = JDmid + 5./1440.;
+					core->setJD(JDmid);
+					core->update(0);
+					QPair<double,double> XY = getLunarEclipseXY();
+					double x = XY.first;
+					double y = XY.second;
+					core->setJD(JD1);
+					core->update(0);
+					XY = getLunarEclipseXY();
+					double x1 = XY.first;
+					double y1 = XY.second;
+					core->setJD(JD2);
+					core->update(0);
+					XY = getLunarEclipseXY();
+					double x2 = XY.first;
+					double y2 = XY.second;
+
+					double xdot1 = (x - x1) * 12.;
+					double xdot2 = (x2 - x) * 12.;
+					double xdot = (xdot1 + xdot2) / 2.;
+
+					double ydot1 = (y - y1) * 12.;
+					double ydot2 = (y2 - y) * 12.;
+					double ydot = (ydot1 + ydot2) / 2.;
+				    
+					double n2 = xdot * xdot + ydot * ydot;
+					dt  = -(x * xdot + y * ydot) / n2;
+					JDmid += dt / 24.;
+				}
+
+				core->setJD(JDmid);
+				core->update(0);
+
+				// Check for eclipse
+				// Algorithm taken from Planet::getLunarEclipseMagnitudes()
+				QPair<double,double> XY = getLunarEclipseXY();
+				XY = getLunarEclipseXY();
+				double x = XY.first;
+				double y = XY.second;
+
+				const double dist=ssystem->getMoon()->getEclipticPos().length();  // geocentric Lunar distance [AU]
+				const double mSD=atan(ssystem->getMoon()->getEquatorialRadius()/dist) * M_180_PI*3600.; // arcsec
+				const QPair<Vec3d,Vec3d>shadowRadii=ssystem->getEarthShadowRadiiAtLunarDistance();
+				const double f1 = shadowRadii.second[0]; // radius of penumbra at the distance of the Moon
+				const double f2 = shadowRadii.first[0];  // radius of umbra at the distance of the Moon
+
+				const double m = sqrt(x * x + y * y); // distance between lunar centre and shadow centre
+				const double L1 = f1 + mSD; // distance between center of the Moon and shadow at beginning and end of penumbral eclipse
+				const double L2 = f2 + mSD; // distance between center of the Moon and shadow at beginning and end of partial eclipse
+				const double pMag = (L1 - m) / (2. * mSD); // penumbral magnitude
+				const double uMag = (L2 - m) / (2. * mSD); // umbral magnitude
+				
+				if (pMag>0.)
+				{
+					EclipseTypeStr = "Penumbral";
+					if (uMag>=1.) EclipseTypeStr = "Total";
+					if (uMag>0. && uMag<1.) EclipseTypeStr = "Partial";
+
+					// Saros series calculations - useful to search for eclipses in the same Saros
+					// Adapted from Saros calculations for solar eclipses in Sky & Telescope (October 1985)
+					// Saros numbers calculated here are matching well with NASA's Five Millennium Catalog of Lunar Eclipses
+
+					// ln = Brown Lunation number : = 1 at the first New Moon of 1923
+					double q = (JDmid-2423436.40347)/29.530588-0.25;
+					q = round(q);
+					int ln = int(q) + 1 - 953;
+					int nd = ln + 105;
+					int s = 148 + 38 * nd;
+					int nx = -61 * nd;
+					int nc = floor(nx / 358. + 0.5 - nd / (12. * 358 * 358));
+					int saros = 1 + ((s + nc * 223 - 1) % 223);
+					if ((s + nc * 223 - 1) < 0) saros -= 223;
+
+					// gamma = minimum distance from the center of the Moon to the axis of Earth’s umbral shadow cone
+					// in units of Earth’s equatorial radius. Positive when the Moon passes north of the shadow cone axis.
+					// Source: https://eclipse.gsfc.nasa.gov/5MCLE/5MCLE-Text10.pdf
+					double gamma = m*0.2725/mSD;
+					if (y<0.) gamma = -(gamma);
+
+					SarosStr = QString("%1").arg(QString::number(saros));
+					gammaStr = QString("%1").arg(QString::number(gamma, 'f', 3));
+					pMagStr = QString("%1").arg(QString::number(pMag, 'f', 3));
+					
+					if (uMag<0.)
+					{
+						uMagStr = dash;
+					}
+					else
+					{
+						uMagStr = QString("%1").arg(QString::number(uMag, 'f', 3));
+					}
+
+					ACLunarEclipseTreeWidgetItem* treeItem = new ACLunarEclipseTreeWidgetItem(ui->lunareclipseTreeWidget);
+					treeItem->setText(LunarEclipseDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JDmid), localeMgr->getPrintableTimeLocal(JDmid))); // local date and time
+					treeItem->setData(LunarEclipseDate, Qt::UserRole, JDmid);
+					treeItem->setText(LunarEclipseSaros, SarosStr);
+					treeItem->setText(LunarEclipseType, EclipseTypeStr);
+					treeItem->setText(LunarEclipseGamma, gammaStr);
+					treeItem->setText(LunarEclipsePMag, pMagStr);
+					treeItem->setText(LunarEclipseUMag, uMagStr);
+					treeItem->setTextAlignment(LunarEclipseSaros, Qt::AlignRight);
+					treeItem->setTextAlignment(LunarEclipseGamma, Qt::AlignRight);
+					treeItem->setTextAlignment(LunarEclipsePMag, Qt::AlignRight);
+					treeItem->setTextAlignment(LunarEclipseUMag, Qt::AlignRight);
+				}
+			}
+		}
+		core->setJD(currentJD);
+		core->setUseTopocentricCoordinates(saveTopocentric);
+		core->update(0); // enforce update cache to avoid odd selection of Moon details!
+
+		// adjust the column width
+		for (int i = 0; i < LunarEclipseCount; ++i)
+		{
+			ui->lunareclipseTreeWidget->resizeColumnToContents(i);
+		}
+
+		// sort-by-date
+		ui->lunareclipseTreeWidget->sortItems(LunarEclipseDate, Qt::AscendingOrder);
+	}
+	else
+		cleanupLunarEclipses();
+}
+
+void AstroCalcDialog::cleanupLunarEclipses()
+{
+	ui->lunareclipseTreeWidget->clear();
+}
+
+void AstroCalcDialog::selectCurrentLunarEclipse(const QModelIndex& modelIndex)
+{
+	// Find the Moon
+	QString name = "Moon";
+	double JD = modelIndex.sibling(modelIndex.row(), LunarEclipseDate).data(Qt::UserRole).toDouble();
+
+	if (objectMgr->findAndSelectI18n(name) || objectMgr->findAndSelect(name))
+	{
+		core->setJD(JD);
+		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
+		if (!newSelected.empty())
+		{
+			// Can't point to home planet
+			if (newSelected[0]->getEnglishName() != core->getCurrentLocation().planetName)
+			{
+				mvMgr->moveToObject(newSelected[0], mvMgr->getAutoMoveDuration());
+				mvMgr->setFlagTracking(true);
+			}
+			else
+			{
+				GETSTELMODULE(StelObjectMgr)->unSelect();
+			}
+		}
+	}
+}
+
+void AstroCalcDialog::saveLunarEclipses()
+{
+	QString filter = q_("Microsoft Excel Open XML Spreadsheet");
+	filter.append(" (*.xlsx);;");
+	filter.append(q_("CSV (Comma delimited)"));
+	filter.append(" (*.csv)");
+	QString defaultFilter("(*.xlsx)");
+	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
+							q_("Save calculated lunar eclipses as..."),
+							QDir::homePath() + "/lunareclipses.xlsx",
+							filter,
+							&defaultFilter);
+
+	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
+		saveTableAsCSV(filePath, ui->lunareclipseTreeWidget, ephemerisHeader);
+	else
+	{
+		int count = ui->lunareclipseTreeWidget->topLevelItemCount();
+		int columns = lunareclipseHeader.size();
+		int *width = new int[static_cast<unsigned int>(columns)];
+		QString sData;
+
+		QXlsx::Document xlsx;
+		xlsx.setDocumentProperty("title", q_("Lunar Eclipses"));
+		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
+		xlsx.addSheet("Lunar Eclipses", AbstractSheet::ST_WorkSheet);
+
+		QXlsx::Format header;
+		header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
+		header.setPatternBackgroundColor(Qt::yellow);
+		header.setBorderStyle(QXlsx::Format::BorderThin);
+		header.setBorderColor(Qt::black);
+		header.setFontBold(true);
+		for (int i = 0; i < columns; i++)
+		{
+			// Row 1: Names of columns
+			sData = lunareclipseHeader.at(i).trimmed();
+			xlsx.write(1, i + 1, sData, header);
+			width[i] = sData.size();
+		}
+
+		QXlsx::Format data;
+		data.setHorizontalAlignment(QXlsx::Format::AlignRight);
+		for (int i = 0; i < count; i++)
+		{
+			for (int j = 0; j < columns; j++)
+			{
+				// Row 2 and next: the data
+				sData = ui->lunareclipseTreeWidget->topLevelItem(i)->text(j).trimmed();
 				xlsx.write(i + 2, j + 1, sData, data);
 				int w = sData.size();
 				if (w > width[j])
