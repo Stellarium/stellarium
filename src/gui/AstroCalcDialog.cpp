@@ -3034,8 +3034,7 @@ void AstroCalcDialog::mouseOverGraphs(QMouseEvent* event)
 	StelUtils::getDateFromJulianDay(core->getJD(), &year, &month, &day);
 	StelUtils::getJDFromDate(&startJD, year, 1, 1, 0, 0, 0);
 
-	if (x > ui->graphsPlot->xAxis->range().lower && x < ui->graphsPlot->xAxis->range().upper
-	    && y > ui->graphsPlot->yAxis->range().lower && y < ui->graphsPlot->yAxis->range().upper)
+	if (ui->graphsPlot->xAxis->range().contains(x) && ui->graphsPlot->yAxis->range().contains(y))
 	{
 		QString info = "";
 		if (graph)
