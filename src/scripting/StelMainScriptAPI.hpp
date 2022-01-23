@@ -762,7 +762,7 @@ public slots:
 	static void pauseScript();
 
 	//! Set the amount of selected object information to display
-	//! @param level can be "AllInfo", "ShortInfo", "None"
+	//! @param level can be "AllInfo", "DefaultInfo", "ShortInfo", "None", "Custom"
 	static void setSelectedObjectInfo(const QString& level);
 
 	//! Stop the script

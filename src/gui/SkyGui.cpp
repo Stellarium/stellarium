@@ -24,6 +24,7 @@
 #include "StelGui.hpp"
 #include "StelCore.hpp"
 #include "StelMainView.hpp"
+#include "StelModuleMgr.hpp"
 #include <QGraphicsView>
 #include <QDebug>
 #include <QTimeLine>
@@ -52,58 +53,7 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent),
 	}
 	else if (objectInfo == "custom")
 	{
-		infoTextFilters = StelObject::InfoStringGroup(StelObject::None);
-		
-		conf->beginGroup("custom_selected_info");
-		if (conf->value("flag_show_name", false).toBool())
-			infoTextFilters |= StelObject::Name;
-		if (conf->value("flag_show_catalognumber", false).toBool())
-			infoTextFilters |= StelObject::CatalogNumber;
-		if (conf->value("flag_show_magnitude", false).toBool())
-			infoTextFilters |= StelObject::Magnitude;
-		if (conf->value("flag_show_absolutemagnitude", false).toBool())
-			infoTextFilters |= StelObject::AbsoluteMagnitude;
-		if (conf->value("flag_show_radecj2000", false).toBool())
-			infoTextFilters |= StelObject::RaDecJ2000;
-		if (conf->value("flag_show_radecofdate", false).toBool())
-			infoTextFilters |= StelObject::RaDecOfDate;
-		if (conf->value("flag_show_hourangle", false).toBool())
-			infoTextFilters |= StelObject::HourAngle;
-		if (conf->value("flag_show_altaz", false).toBool())
-			infoTextFilters |= StelObject::AltAzi;
-		if (conf->value("flag_show_elongation", false).toBool())
-			infoTextFilters |= StelObject::Elongation;
-		if (conf->value("flag_show_distance", false).toBool())
-			infoTextFilters |= StelObject::Distance;
-		if (conf->value("flag_show_velocity", false).toBool())
-			infoTextFilters |= StelObject::Velocity;
-		if (conf->value("flag_show_propermotion", false).toBool())
-			infoTextFilters |= StelObject::ProperMotion;
-		if (conf->value("flag_show_size", false).toBool())
-			infoTextFilters |= StelObject::Size;
-		if (conf->value("flag_show_extra", false).toBool())
-			infoTextFilters |= StelObject::Extra;
-		if (conf->value("flag_show_type", false).toBool())
-			infoTextFilters |= StelObject::ObjectType;
-		if (conf->value("flag_show_galcoord", false).toBool())
-			infoTextFilters |= StelObject::GalacticCoord;
-		if (conf->value("flag_show_supergalcoord", false).toBool())
-			infoTextFilters |= StelObject::SupergalacticCoord;
-		if (conf->value("flag_show_othercoord", false).toBool())
-			infoTextFilters |= StelObject::OtherCoord;
-		if (conf->value("flag_show_eclcoordofdate", false).toBool())
-			infoTextFilters |= StelObject::EclipticCoordOfDate;
-		if (conf->value("flag_show_eclcoordj2000", false).toBool())
-			infoTextFilters |= StelObject::EclipticCoordJ2000;
-		if (conf->value("flag_show_constellation", false).toBool())
-			infoTextFilters |= StelObject::IAUConstellation;
-		if (conf->value("flag_show_sidereal_time", false).toBool())
-			infoTextFilters |= StelObject::SiderealTime;
-		if (conf->value("flag_show_rts_time", false).toBool())
-			infoTextFilters |= StelObject::RTSTime;
-		if (conf->value("flag_show_solar_lunar", false).toBool())
-		    infoTextFilters |= StelObject::SolarLunarPosition;
-		conf->endGroup();
+		infoTextFilters = GETSTELMODULE(StelObjectMgr)->getCustomInfoStrings();
 	}
 	else
 	{

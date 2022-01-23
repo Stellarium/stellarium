@@ -201,29 +201,6 @@ void ConfigurationDialog::createDialogContent()
 	connectDoubleProperty(ui->aberrationSpinBox, "StelCore.aberrationFactor");
 	connectBoolProperty(ui->topocentricCheckBox, "StelCore.flagUseTopocentricCoordinates");
 
-	// Selected object info
-	if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::None))
-	{
-		ui->noSelectedInfoRadio->setChecked(true);
-	}
-	else if (gui->getInfoTextFilters() == StelObject::DefaultInfo)
-	{
-	    ui->defaultSelectedInfoRadio->setChecked(true);
-	}
-	else if (gui->getInfoTextFilters() == StelObject::ShortInfo)
-	{
-		ui->briefSelectedInfoRadio->setChecked(true);	
-	}
-	else if (gui->getInfoTextFilters() == StelObject::AllInfo)
-	{
-		ui->allSelectedInfoRadio->setChecked(true);
-	}
-	else
-	{
-		ui->customSelectedInfoRadio->setChecked(true);
-	}
-	updateSelectedInfoCheckBoxes();
-
 	// Additional settings for selected object info
 	connectBoolProperty(ui->checkBoxUMSurfaceBrightness, "NebulaMgr.flagSurfaceBrightnessArcsecUsage");
 	connectBoolProperty(ui->checkBoxUMShortNotationSurfaceBrightness, "NebulaMgr.flagSurfaceBrightnessShortNotationUsage");
@@ -231,12 +208,16 @@ void ConfigurationDialog::createDialogContent()
 	connectBoolProperty(ui->checkBoxUseCCSDesignations,  "StelApp.flagUseCCSDesignation");
 	connectBoolProperty(ui->overwriteTextColorCheckBox,  "StelApp.flagOverwriteInfoColor");
 
+	// Selected object info
+	updateSelectedInfoGui();
 	connect(ui->noSelectedInfoRadio, SIGNAL(released()), this, SLOT(setNoSelectedInfo()));
 	connect(ui->allSelectedInfoRadio, SIGNAL(released()), this, SLOT(setAllSelectedInfo()));
 	connect(ui->defaultSelectedInfoRadio, SIGNAL(released()), this, SLOT(setDefaultSelectedInfo()));
 	connect(ui->briefSelectedInfoRadio, SIGNAL(released()), this, SLOT(setBriefSelectedInfo()));
 	connect(ui->customSelectedInfoRadio, SIGNAL(released()), this, SLOT(setCustomSelectedInfo()));
 	connect(ui->buttonGroupDisplayedFields, SIGNAL(buttonClicked(int)), this, SLOT(setSelectedInfoFromCheckBoxes()));
+	if (appGui)
+		connect(appGui, SIGNAL(infoStringChanged()), this, SLOT(updateSelectedInfoGui()));
 	
 	// Navigation tab
 	// Startup time
@@ -325,9 +306,9 @@ void ConfigurationDialog::createDialogContent()
 	connectBoolProperty(ui->showFlipButtonsCheckbox,				"StelGui.flagShowFlipButtons");
 	connectBoolProperty(ui->showNebulaBgButtonCheckbox,			"StelGui.flagShowNebulaBackgroundButton");
 	
-    connectBoolProperty(ui->showObsListButtonCheckBox,	"StelGui.flagShowObsListButton");
+	connectBoolProperty(ui->showObsListButtonCheckBox,	"StelGui.flagShowObsListButton");
 	
-    connectBoolProperty(ui->showICRSGridButtonCheckBox,			"StelGui.flagShowICRSGridButton");
+	connectBoolProperty(ui->showICRSGridButtonCheckBox,			"StelGui.flagShowICRSGridButton");
 	connectBoolProperty(ui->showGalacticGridButtonCheckBox,		"StelGui.flagShowGalacticGridButton");
 	connectBoolProperty(ui->showEclipticGridButtonCheckBox,		"StelGui.flagShowEclipticGridButton");
 	connectBoolProperty(ui->showHipsButtonCheckBox,				"StelGui.flagShowHiPSButton");
@@ -539,6 +520,33 @@ void ConfigurationDialog::setSphericMirror(bool b)
 		core->setCurrentProjectionType(static_cast<StelCore::ProjectionType>(savedProjectionType));
 		StelApp::getInstance().setViewportEffect("none");
 	}
+}
+
+void ConfigurationDialog::updateSelectedInfoGui()
+{
+	const StelObject::InfoStringGroup& flags = gui->getInfoTextFilters();
+	// Selected object info
+	if (flags == StelObject::InfoStringGroup(StelObject::None))
+	{
+		ui->noSelectedInfoRadio->setChecked(true);
+	}
+	else if (flags == StelObject::DefaultInfo)
+	{
+	    ui->defaultSelectedInfoRadio->setChecked(true);
+	}
+	else if (flags == StelObject::ShortInfo)
+	{
+		ui->briefSelectedInfoRadio->setChecked(true);
+	}
+	else if (flags == StelObject::AllInfo)
+	{
+		ui->allSelectedInfoRadio->setChecked(true);
+	}
+	else
+	{
+		ui->customSelectedInfoRadio->setChecked(true);
+	}
+	updateSelectedInfoCheckBoxes();
 }
 
 void ConfigurationDialog::setNoSelectedInfo()

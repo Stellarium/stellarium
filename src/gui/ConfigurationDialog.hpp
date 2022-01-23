@@ -71,6 +71,7 @@ private:
 	class StelProgressController* progressBar;
 
 private slots:
+	void updateSelectedInfoGui();
 	void setNoSelectedInfo();
 	void setAllSelectedInfo();
 	void setBriefSelectedInfo();

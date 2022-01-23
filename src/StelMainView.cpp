@@ -887,9 +887,9 @@ void StelMainView::init()
 	stelApp->initScriptMgr();
 
 	// Set the global stylesheet, this is only useful for the tooltips.
-	StelGui* gui = dynamic_cast<StelGui*>(stelApp->getGui());
-	if (gui!=Q_NULLPTR)
-		setStyleSheet(gui->getStelStyle().qtStyleSheet);
+	StelGui* sgui = dynamic_cast<StelGui*>(stelApp->getGui());
+	if (sgui!=Q_NULLPTR)
+		setStyleSheet(sgui->getStelStyle().qtStyleSheet);
 	connect(stelApp, SIGNAL(visionNightModeChanged(bool)), this, SLOT(updateNightModeProperty(bool)));
 
 	// I doubt this will have any effect on framerate, but may cause problems elsewhere?

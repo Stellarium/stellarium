@@ -695,10 +695,14 @@ void StelMainScriptAPI::setSelectedObjectInfo(const QString& level)
 {
 	if (level == "AllInfo")
 		StelApp::getInstance().getGui()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::AllInfo));
+	else if (level == "DefaultInfo")
+		StelApp::getInstance().getGui()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::DefaultInfo));
 	else if (level == "ShortInfo")
 		StelApp::getInstance().getGui()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::ShortInfo));
 	else if (level == "None")
 		StelApp::getInstance().getGui()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::None));
+	else if (level == "Custom")
+		StelApp::getInstance().getGui()->setInfoTextFilters(GETSTELMODULE(StelObjectMgr)->getCustomInfoStrings());
 	else
 		qWarning() << "setSelectedObjectInfo unknown level string \"" << level << "\"";
 }

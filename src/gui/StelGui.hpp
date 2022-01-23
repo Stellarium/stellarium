@@ -216,6 +216,12 @@ public slots:
 	void resumeScript();
 #endif
 
+	void displayAllInfo();
+	void displayDefaultInfo();
+	void displayShortInfo();
+	void displayNoneInfo();
+	void displayCustomInfo();
+
     public:
 	// Getters
 	//! Get the state of the flag of usage background for GUI buttons
@@ -287,6 +293,7 @@ signals:
 	void flagShowAsterismLabelsButtonChanged(bool b);
 	void flagShowCardinalButtonChanged(bool b);
 	void flagShowCompassButtonChanged(bool b);
+	void infoStringChanged();
 
 private slots:
 	void reloadStyle();
