@@ -45,8 +45,6 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	virtual void init() Q_DECL_OVERRIDE;
-	virtual void draw(StelCore*) Q_DECL_OVERRIDE {;}
-	virtual void update(double) Q_DECL_OVERRIDE {;}
 
 	///////////////////////////////////////////////////////////////////////////
 	//! Add a new StelObject manager into the list of supported modules.

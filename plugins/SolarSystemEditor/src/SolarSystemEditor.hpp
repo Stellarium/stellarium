@@ -71,17 +71,6 @@ public:
 	//! All initializations should be done here.
 	virtual void init() Q_DECL_OVERRIDE;
 
-	//! called before the plug-in is un-loaded.
-	//! Useful for stopping processes, unloading textures, etc.
-	virtual void deinit() Q_DECL_OVERRIDE {}
-
-	//! Does nothing.
-	virtual void update(double deltaTime) Q_DECL_OVERRIDE {Q_UNUSED(deltaTime)}
-
-	//! draws on the view port.
-	//! Dialog windows don't need explicit drawing, it's done automatically.
-	virtual void draw(StelCore * core) Q_DECL_OVERRIDE {Q_UNUSED(core)}
-
 	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 
 	//! called when the "configure" button in the "Plugins" tab is pressed

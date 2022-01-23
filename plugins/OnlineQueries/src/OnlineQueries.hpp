@@ -62,8 +62,6 @@ public:
 	virtual ~OnlineQueries() Q_DECL_OVERRIDE;
 
 	virtual void init() Q_DECL_OVERRIDE;
-	virtual void update(double) Q_DECL_OVERRIDE {}
-	virtual void draw(StelCore *core) Q_DECL_OVERRIDE {Q_UNUSED(core)}
 	virtual bool configureGui(bool show) Q_DECL_OVERRIDE;
 
 signals:

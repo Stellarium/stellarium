@@ -55,6 +55,7 @@ class StelModule : public QObject
 	// load plugins on windows.
 
 public:
+	//! Constructor. Every derived class MUST call setObjectName(className) in its constructor.
 	StelModule();
 
 	virtual ~StelModule() Q_DECL_OVERRIDE {}
@@ -63,8 +64,8 @@ public:
 	//! If the initialization takes significant time, the progress should be displayed on the loading bar.
 	virtual void init() = 0;
 
-	//! Called before the module will be delete, and before the openGL context is suppressed.
-	//! Deinitialize all openGL texture in this method.
+	//! Called before the module will be deleted, and before the OpenGL context is suppressed.
+	//! Deinitialize all OpenGL texture in this method.
 	virtual void deinit() {}
 
 	//! Return module-specific settings. This can be useful mostly by plugins which may want to keep their settings to their own files.
@@ -77,7 +78,7 @@ public:
 
 	//! Update the module with respect to the time.
 	//! @param deltaTime the time increment in second since last call.
-	virtual void update(double deltaTime) = 0;
+	virtual void update(double deltaTime) {Q_UNUSED(deltaTime)}
 
 	//! Get the version of the module, default is stellarium main version
 	virtual QString getModuleVersion() const;

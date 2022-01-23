@@ -43,7 +43,6 @@ public:
 	// Methods defined in the StelModule class
 	virtual void init() Q_DECL_OVERRIDE;
 	virtual void deinit() Q_DECL_OVERRIDE;
-	virtual void update(double) Q_DECL_OVERRIDE {}
 	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
 	//virtual void drawPointer(StelCore* core, StelPainter& painter);
 	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;

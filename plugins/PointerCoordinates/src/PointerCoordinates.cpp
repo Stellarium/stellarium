@@ -110,11 +110,6 @@ void PointerCoordinates::init()
 	setFlagShowCrossedLines(flagShowCrossedLines);
 }
 
-void PointerCoordinates::deinit()
-{
-	//
-}
-
 void PointerCoordinates::draw(StelCore *core)
 {
 	if (!isEnabled())

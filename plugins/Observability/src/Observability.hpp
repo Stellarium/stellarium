@@ -63,7 +63,6 @@ public:
 	Observability();
 	virtual ~Observability() Q_DECL_OVERRIDE;
 	virtual void init() Q_DECL_OVERRIDE;
-	virtual void update(double) Q_DECL_OVERRIDE {}
 	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
 	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 

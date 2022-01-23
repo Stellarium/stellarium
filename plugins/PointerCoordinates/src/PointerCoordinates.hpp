@@ -88,8 +88,6 @@ public:
 	virtual ~PointerCoordinates() Q_DECL_OVERRIDE;
 
 	virtual void init() Q_DECL_OVERRIDE;
-	virtual void deinit() Q_DECL_OVERRIDE;
-	virtual void update(double) Q_DECL_OVERRIDE {}
 	virtual void draw(StelCore *core) Q_DECL_OVERRIDE;
 	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 	virtual bool configureGui(bool show) Q_DECL_OVERRIDE;
