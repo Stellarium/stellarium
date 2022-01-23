@@ -97,7 +97,11 @@ private:
 	bool operator < (const QTreeWidgetItem& other) const Q_DECL_OVERRIDE
 	{
 		const int column = treeWidget()->sortColumn();
-		return this->data(column, Qt::UserRole).compare(other.data(column, Qt::UserRole)) < 0;
+
+		if (column == MSSearchDialog::ColumnZHR || column == MSSearchDialog::ColumnPeak)
+			return this->data(column, Qt::UserRole).toInt() < other.data(column, Qt::UserRole).toInt();
+		else
+			return text(column).toLower() < other.text(column).toLower();
 	}
 };
 
