@@ -165,6 +165,7 @@ void AstroCalcDialog::retranslate()
 		setTransitHeaderNames();
 		setPhenomenaHeaderNames();
 		setWUTHeaderNames();
+		setLunarEclipseHeaderNames();
 		populateCelestialBodyList();
 		populateCelestialCategoryList();
 		populateEphemerisTimeStepsList();
@@ -260,8 +261,12 @@ void AstroCalcDialog::createDialogContent()
 	ui->phenomenToDateEdit->setDateTime(currentDT.addMonths(1));
 	ui->transitFromDateEdit->setDateTime(currentDT);
 	ui->transitToDateEdit->setDateTime(currentDT.addMonths(1));
-	ui->lunareclipseFromDateEdit->setDateTime(currentDT);
-	ui->lunareclipseToDateEdit->setDateTime(currentDT.addMonths(1));
+	int year, month, day;
+	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
+	QDateTime firstDayOfYear = QDateTime::fromString(QString("%1.%2.%3").arg(year, 4, 10, QLatin1Char('0')).arg(1).arg(1), "yyyy.M.d");
+	QDateTime lastDayOfYear = QDateTime::fromString(QString("%1.%2.%3").arg(year, 4, 10, QLatin1Char('0')).arg(12).arg(31), "yyyy.M.d");
+	ui->lunareclipseFromDateEdit->setDateTime(firstDayOfYear);
+	ui->lunareclipseToDateEdit->setDateTime(lastDayOfYear);
 	ui->monthlyElevationTimeInfo->setStyleSheet("font-size: 18pt; color: rgb(238, 238, 238);");
 
 	// TODO: Replace QDateTimeEdit by a new StelDateTimeEdit widget to apply full range of dates
@@ -555,6 +560,7 @@ void AstroCalcDialog::createDialogContent()
 	//ui->angularDistanceTitle->setStyleSheet(style);
 	ui->graphsNoteLabel->setStyleSheet(style);
 	ui->transitNotificationLabel->setStyleSheet(style);
+	ui->gammaNoteLabel->setStyleSheet(style);
 	style = "QCheckBox { color: rgb(238, 238, 238); }";
 	ui->sunAltitudeCheckBox->setStyleSheet(style);
 	ui->moonAltitudeCheckBox->setStyleSheet(style);
@@ -2188,8 +2194,10 @@ void AstroCalcDialog::setLunarEclipseHeaderNames()
 	lunareclipseHeader << q_("Saros number");
 	lunareclipseHeader << q_("Type");
 	lunareclipseHeader << q_("Gamma");
-	lunareclipseHeader << q_("Penumbral eclipse magnitude");
-	lunareclipseHeader << q_("Umbral eclipse magnitude");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+	lunareclipseHeader << qc_("Penumbral eclipse magnitude", "column name");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+	lunareclipseHeader << qc_("Umbral eclipse magnitude", "column name");
 	ui->lunareclipseTreeWidget->setHeaderLabels(lunareclipseHeader);
 
 	// adjust the column width
@@ -2255,15 +2263,17 @@ void AstroCalcDialog::generateLunarEclipses()
 		QString SarosStr, EclipseTypeStr, uMagStr, pMagStr, gammaStr;
 
 		const bool saveTopocentric = core->getUseTopocentricCoordinates();
+		const double approxJD = 2451550.09765;
+		const double synodicMonth = 29.530588853;
 
 		// Find approximate JD of Full Moon = Geocentric opposition in longitude
-		double temp = (startJD - 2451550.09765 - (29.530588853 * 0.5)) / 29.530588853;
-		double InitFMJD = 2451550.09765 + int(temp) * 29.530588853 - (29.530588853 * 0.5);
+		double temp = (startJD - approxJD - (synodicMonth * 0.5)) / synodicMonth;
+		double InitFMJD = approxJD + int(temp) * synodicMonth - (synodicMonth * 0.5);
 
 		// Search for lunar eclipses at each full Moon
 		for (int i = 0; i <= elements+1; i++)
 		{
-			double JD = InitFMJD + 29.530588853 * i;
+			double JD = InitFMJD + synodicMonth * i;
 			if (JD > startJD)
 			{
 				double JD1 = JD;
@@ -2362,9 +2372,9 @@ void AstroCalcDialog::generateLunarEclipses()
 				
 				if (pMag>0.)
 				{
-					EclipseTypeStr = "Penumbral";
-					if (uMag>=1.) EclipseTypeStr = "Total";
-					if (uMag>0. && uMag<1.) EclipseTypeStr = "Partial";
+					EclipseTypeStr = qc_("Penumbral", "eclipse type");
+					if (uMag>=1.) EclipseTypeStr = qc_("Total", "eclipse type");
+					if (uMag>0. && uMag<1.) EclipseTypeStr = qc_("Partial", "eclipse type");
 
 					// Saros series calculations - useful to search for eclipses in the same Saros
 					// Adapted from Saros calculations for solar eclipses in Sky & Telescope (October 1985)
@@ -2407,7 +2417,10 @@ void AstroCalcDialog::generateLunarEclipses()
 					treeItem->setText(LunarEclipseType, EclipseTypeStr);
 					treeItem->setText(LunarEclipseGamma, gammaStr);
 					treeItem->setText(LunarEclipsePMag, pMagStr);
+					treeItem->setData(LunarEclipsePMag, Qt::UserRole, pMag);
 					treeItem->setText(LunarEclipseUMag, uMagStr);
+					treeItem->setData(LunarEclipseUMag, Qt::UserRole, uMag);
+					treeItem->setTextAlignment(LunarEclipseDate, Qt::AlignRight);
 					treeItem->setTextAlignment(LunarEclipseSaros, Qt::AlignRight);
 					treeItem->setTextAlignment(LunarEclipseGamma, Qt::AlignRight);
 					treeItem->setTextAlignment(LunarEclipsePMag, Qt::AlignRight);

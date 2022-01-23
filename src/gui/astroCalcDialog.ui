@@ -216,9 +216,6 @@
          <property name="text">
           <string>Ephemeris</string>
          </property>
-         <property name="textAlignment">
-          <set>AlignLeading|AlignVCenter</set>
-         </property>
          <property name="icon">
           <iconset>
            <normalon>:/graphicGui/tabEphemeris.png</normalon>
@@ -931,7 +928,6 @@
                 </property>
                 <property name="font">
                  <font>
-                  <weight>75</weight>
                   <bold>true</bold>
                  </font>
                 </property>
@@ -996,7 +992,6 @@
            <widget class="QLabel" name="transitHeaderLabel">
             <property name="font">
              <font>
-              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -1284,7 +1279,6 @@
            <widget class="QTabWidget" name="tabWidgetGraphs">
             <property name="font">
              <font>
-              <weight>50</weight>
               <bold>false</bold>
              </font>
             </property>
@@ -1407,7 +1401,6 @@
                <widget class="QLabel" name="altVsTimeTitle">
                 <property name="font">
                  <font>
-                  <weight>75</weight>
                   <bold>true</bold>
                  </font>
                 </property>
@@ -1468,7 +1461,6 @@
                <widget class="QLabel" name="aziVsTimeTitle">
                 <property name="font">
                  <font>
-                  <weight>75</weight>
                   <bold>true</bold>
                  </font>
                 </property>
@@ -1613,7 +1605,6 @@
                <widget class="QLabel" name="monthlyElevationTitle">
                 <property name="font">
                  <font>
-                  <weight>75</weight>
                   <bold>true</bold>
                  </font>
                 </property>
@@ -1918,7 +1909,6 @@
                <widget class="QLabel" name="angularDistanceTitle">
                 <property name="font">
                  <font>
-                  <weight>75</weight>
                   <bold>true</bold>
                  </font>
                 </property>
@@ -2405,7 +2395,6 @@
                <widget class="QLabel" name="pcDistanceGraphLabel">
                 <property name="font">
                  <font>
-                  <weight>75</weight>
                   <bold>true</bold>
                  </font>
                 </property>
@@ -2531,7 +2520,6 @@
            <widget class="QLabel" name="lunareclipseHeaderLabel">
             <property name="font">
              <font>
-              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -2540,6 +2528,16 @@
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="gammaNoteLabel">
+            <property name="text">
+             <string>Note: The quantity gamma is the minimum distance from the center of the Moon to the axis of Earth’s umbral shadow cone, in units of Earth’s equatorial radius. This distance is positive or negative, depending on whether the Moon passes north or south of the shadow cone axis.</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
             </property>
            </widget>
           </item>

@@ -449,7 +449,7 @@ void HelpDialog::updateAboutText(void) const
 		     "Alexey Sokolov", "Paul Krizak", "ChrUnger", "Minmin Gong", "Andy Kirkham",
 		     "Michael Dickens",  "Patrick (zero0cool0)", "Martín Bernardi", "Sebastian Garcia",
 		     "Wolfgang Laun", "Alexandros Kosiaris", "Alexander Duytschaever", "Jocelyn Girod",
-	"Atque"});
+		     "Atque", "Worachate Boonplod"});
 	contributors.sort();
 
 	// Regexp to replace {text} with an HTML link.

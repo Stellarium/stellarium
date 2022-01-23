@@ -680,9 +680,13 @@ private:
 	{
 		int column = treeWidget()->sortColumn();
 
-		if (column == AstroCalcDialog::LunarEclipseDate)
+		if (column == AstroCalcDialog::LunarEclipseDate || column == AstroCalcDialog::LunarEclipsePMag || column == AstroCalcDialog::LunarEclipseUMag)
 		{
 			return data(column, Qt::UserRole).toFloat() < other.data(column, Qt::UserRole).toFloat();
+		}
+		else if (column == AstroCalcDialog::LunarEclipseGamma)
+		{
+			return text(column).toFloat() < other.text(column).toFloat();
 		}
 		else
 		{
