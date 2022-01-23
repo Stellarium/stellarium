@@ -123,9 +123,9 @@ ELSE()
                ADD_DEFINITIONS(-DGIT_BRANCH="${GIT_BRANCH}")
                # check to use --depth param...
                IF(${GIT_COMMITS} EQUAL 0)
-                    # Append the day of the current year to the number 5 as string
-                    # because we never reaches 5000 commits per 1/4 year
-                    STRING(TIMESTAMP GIT_COMMITS "5%j")
+                    # Append the day of the current year to the number 1 as string
+                    # because we never reaches 1000 commits per 1/4 year
+                    STRING(TIMESTAMP GIT_COMMITS "1%j")
                ENDIF()
                # better way to numbering
                SET(WINDOWS_PACKAGE_VERSION "${VERSION}.${GIT_COMMITS}")
