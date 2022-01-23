@@ -543,33 +543,6 @@ QVariantMap Satellite::getInfoMap(const StelCore *core) const
 	map.insert("phase-angle-dms", StelUtils::radToDmsStr(phaseAngle));
 	map.insert("phase-angle-deg", StelUtils::radToDecDegStr(phaseAngle));
 	map.insert("visibility", visibilityDescription.value(visibility, ""));
-	if (comms.size() > 0)
-	{
-		for (const auto& c : comms)
-		{
-			double dop = getDoppler(c.frequency);
-			double ddop = dop;
-			char sign;
-			if (dop<0.)
-			{
-				sign='-';
-				ddop*=-1;
-			}
-			else
-				sign='+';
-
-			QString commModDesc;
-			if (!c.modulation.isEmpty() && c.modulation != "") commModDesc=c.modulation;
-			if ((!c.modulation.isEmpty() && c.modulation != "") || (!c.description.isEmpty() && c.description != "")) commModDesc.append(" ");
-			if (!c.description.isEmpty() && c.description != "") commModDesc.append(c.description);
-			if ((!c.modulation.isEmpty() && c.modulation != "") || (!c.description.isEmpty() && c.description != "")) commModDesc.append(": ");
-			map.insertMulti("comm", QString("%1%2 MHz (%3%4 kHz)")
-				.arg(commModDesc)
-				.arg(c.frequency, 8, 'f', 5)
-				.arg(sign)
-				.arg(ddop, 6, 'f', 3));
-		}
-	}
 
 	return map;
 }
