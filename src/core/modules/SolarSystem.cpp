@@ -157,7 +157,7 @@ SolarSystem::~SolarSystem()
 	Comet::tailTexture.clear();
 
 	//deinit of SolarSystem is NOT called at app end automatically
-	deinit();
+	SolarSystem::deinit();
 }
 
 /*************************************************************************
@@ -1419,7 +1419,6 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 		if (!(sPainter.getProjector()->projectCheck(AstroCalcDialog::EphemerisList[i].coord, win)))
 			continue;
 
-		float solarAngle=0.f; // Angle to possibly rotate the texture. Degrees.
 		QString debugStr; // Used temporarily for development
 		const bool isComet=AstroCalcDialog::EphemerisList[i].isComet;
 		if (i == AstroCalcDialog::DisplayedPositionIndex)
@@ -1445,17 +1444,18 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 			if ((showDates || showMagnitudes) && showSkippedData && ((i + 1)%dataStep)!=1 && dataStep!=1)
 				continue;
 		}
-		Vec3d win;
+		Vec3f win;
+		float solarAngle=0.f; // Angle to possibly rotate the texture. Degrees.
 		if (prj->project(AstroCalcDialog::EphemerisList[i].coord, win))
 		{
 			if (isComet)
 			{
 				// compute solarAngle in screen space.
-				Vec3d sunWin;
+				Vec3f sunWin;
 				prj->project(AstroCalcDialog::EphemerisList[i].sunCoord, sunWin);
 				// TODO: In some projections, we may need to test result and flip/mirror the angle, or deal with wrap-around effects.
 				// E.g., in cylindrical mode, the comet icon will flip as soon as the corresponding sun position wraps around the screen edge.
-				solarAngle=M_180_PIf*static_cast<float>(atan2(-(win[1]-sunWin[1]), win[0]-sunWin[0]));
+				solarAngle=M_180_PIf*(atan2(-(win[1]-sunWin[1]), win[0]-sunWin[0]));
 				// This will show projected positions and angles usable in labels.
 				debugStr = QString("Sun: %1/%2 Obj: %3/%4 -->%5").arg(QString::number(sunWin[0]), QString::number(sunWin[1]), QString::number(win[0]), QString::number(win[1]), QString::number(solarAngle));
 			}
