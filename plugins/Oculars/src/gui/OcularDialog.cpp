@@ -79,10 +79,13 @@ OcularDialog::OcularDialog(Oculars* pluginPtr,
 
 OcularDialog::~OcularDialog()
 {
-	ui->telescopeListView->clearSelection();
-	ui->ocularListView->clearSelection();
-	ui->ccdListView->clearSelection();
-	ui->lensListView->clearSelection();
+	if (dialog)
+	{
+		ui->telescopeListView->clearSelection();
+		ui->ocularListView->clearSelection();
+		ui->ccdListView->clearSelection();
+		ui->lensListView->clearSelection();
+	}
 
 	ocularTableModel->disconnect(ocularMapper);
 	telescopeTableModel->disconnect(telescopeMapper);
@@ -95,7 +98,8 @@ OcularDialog::~OcularDialog()
 
 void OcularDialog::retranslate()
 {
-	if (dialog) {
+	if (dialog)
+	{
 		ui->retranslateUi(dialog);
 		initAboutText();
 	}
