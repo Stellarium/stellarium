@@ -362,12 +362,10 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		       .arg(q_("Inclination"), StelUtils::decDegToDmsStr(inclination),
 			    QString::number(inclination, 'f', 4), degree)
 		<< "<br/>";
-		oss << QString("%1: %2&deg;/%4&deg;")
+		oss << QString("%1: %2&deg;/%3&deg;")
 		       .arg(q_("SubPoint (Lat./Long.)"))
-		       .arg(latLongSubPointPosition[0], 5, 'f', 2)
-		       .arg(QChar(0x00B0))
-		       .arg(latLongSubPointPosition[1], 5, 'f', 3)
-		       .arg(QChar(0x00B0));
+		       .arg(latLongSubPointPosition[0], 5, 'f', 2)		       
+		       .arg(latLongSubPointPosition[1], 5, 'f', 3);
 		oss << "<br/>";
 		
 		//TODO: This one can be done better
