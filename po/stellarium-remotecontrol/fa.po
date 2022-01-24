@@ -5,15 +5,16 @@
 # 
 # Translators:
 # cardinot <mcardinot@gmail.com>, 2017
+# Armani <armankh190@gmail.com>, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-12-16 17:32+0700\n"
+"POT-Creation-Date: 2022-01-24 02:36+0700\n"
 "PO-Revision-Date: 2017-11-29 01:19+0000\n"
-"Last-Translator: cardinot <mcardinot@gmail.com>, 2017\n"
+"Last-Translator: Armani <armankh190@gmail.com>, 2022\n"
 "Language-Team: Persian (https://www.transifex.com/stellarium/teams/80998/fa/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -114,11 +115,11 @@ msgstr "هیچکدام"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:28
 msgid "(Currently loading: %1)"
-msgstr ""
+msgstr "(درحال بارگیری: %1)"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:71
 msgid "Could not retrieve Scenery3d list"
-msgstr ""
+msgstr "لیست Scenery3d بازیابی نشد"
 
 #: plugins/RemoteControl/webroot/js/ui/actions.js:44
 #: plugins/RemoteControl/webroot/js/ui/actions.js:77
@@ -168,7 +169,7 @@ msgstr "فعالیت ها و اسکریپت ها"
 
 #: index.html:39 tablet7in.html:45
 msgid "Scenery3d"
-msgstr ""
+msgstr "Scenery3d"
 
 #: index.html:77
 msgid "Pause"
@@ -276,19 +277,19 @@ msgstr "انتخاب و تمرکز"
 
 #: index.html:240 tablet7in.html:259
 msgid "Selection mode"
-msgstr ""
+msgstr "روش انتخاب"
 
 #: index.html:240 tablet7in.html:259
 msgid "Center on object"
-msgstr ""
+msgstr "شی در مرکز قرار گیرد"
 
 #: index.html:240 tablet7in.html:259
 msgid "Center and zoom to object"
-msgstr ""
+msgstr "شی بزرگنمایی شود و در مرکز قرار گیرد"
 
 #: index.html:240 tablet7in.html:259
 msgid "Just mark the object"
-msgstr ""
+msgstr "کافیست جسم را علامت گذاری کنید"
 
 #: index.html:242 tablet7in.html:261
 msgid "Quick select"
@@ -308,39 +309,55 @@ msgstr "انتخاب کنونی"
 
 #: index.html:268 tablet7in.html:321
 msgid "Milky Way brightness:"
-msgstr ""
+msgstr "روشنایی راه شیری:"
 
 #: index.html:272 tablet7in.html:333
 msgid "Digitized Sky Survey"
-msgstr ""
+msgstr "بررسی دیجیتالی آسمان"
 
 #: index.html:273 tablet7in.html:334
 msgid "HiPS Survey"
+msgstr "بررسی HiPS"
+
+#: index.html:286 tablet7in.html:350
+msgid "Show planet markers"
 msgstr ""
 
 #: index.html:287 tablet7in.html:351
 msgid "Show planet orbits"
-msgstr ""
+msgstr "نمایش مدار سیاره‌ ها"
 
 #: index.html:288 tablet7in.html:352
 msgid "Show planet orbits only"
-msgstr ""
+msgstr "فقط نمایش مدار سیاره ها"
 
 #: index.html:289 tablet7in.html:353
 msgid "Show orbit for selected planet"
-msgstr ""
+msgstr "نمایش مدار سیاره انتخاب شده"
 
 #: index.html:290 tablet7in.html:354
 msgid "Show planet trails"
-msgstr ""
+msgstr "نمایش دنباله سیاره ها"
 
 #: index.html:291 tablet7in.html:355
 msgid "Show trail only for selected planet"
+msgstr "نمایش دنباله فقط برای سیاره انتخاب شده"
+
+#: index.html:294 tablet7in.html:359
+msgid "Scale Moon:"
+msgstr ""
+
+#: index.html:295 tablet7in.html:363
+msgid "Scale minor bodies:"
+msgstr ""
+
+#: index.html:318 tablet7in.html:404
+msgid "Extinction Coefficient:"
 msgstr ""
 
 #: index.html:322 tablet7in.html:409
 msgid "Shooting Stars"
-msgstr ""
+msgstr "شهاب ها"
 
 #: index.html:323 tablet7in.html:410
 msgid "ZHR:"
@@ -376,7 +393,7 @@ msgstr "سیاره کنونی :"
 
 #: index.html:426 tablet7in.html:524
 msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
-msgstr ""
+msgstr "کاتالوگ سحابی ها (ون دن برگ، 1966)"
 
 #: index.html:444 tablet7in.html:542
 msgid ""
@@ -385,7 +402,7 @@ msgstr ""
 
 #: index.html:512
 msgid "Objects without identifier"
-msgstr ""
+msgstr "اجسام بدون شاخص"
 
 #: index.html:537 tablet7in.html:616
 msgid "Bright Nebulae"
@@ -405,7 +422,7 @@ msgstr "برچسب ها و نشانه ها"
 
 #: index.html:573 tablet7in.html:652
 msgid "Use associated planet and position"
-msgstr ""
+msgstr "از سیاره و موقعیت مرتبط استفاده کنید"
 
 #: index.html:582 tablet7in.html:661
 msgid "Show illumination"
@@ -417,11 +434,11 @@ msgstr "منظر کنونی"
 
 #: index.html:599 tablet7in.html:680
 msgid "Show lines with thickness"
-msgstr ""
+msgstr "نمایش خطوط با ذخامت"
 
 #: index.html:604 tablet7in.html:685
 msgid "Show asterisms with thickness"
-msgstr ""
+msgstr "نمایش صورت های فلکی با ذخامت"
 
 #: index.html:608 tablet7in.html:689
 msgid "Show ray helpers with thickness"
@@ -429,7 +446,7 @@ msgstr ""
 
 #: index.html:616 tablet7in.html:699
 msgid "Show boundaries with thickness"
-msgstr ""
+msgstr "نمایش مرز ها با ذخامت"
 
 #: index.html:621 tablet7in.html:704
 msgid "Constellation selection isolated"
@@ -473,31 +490,31 @@ msgstr "نوشتن برای جستجوی موقعیت"
 
 #: index.html:693 tablet7in.html:791
 msgid "Interaction"
-msgstr ""
+msgstr "اثر مقابل"
 
 #: index.html:694 tablet7in.html:792
 msgid "Current scene:"
-msgstr ""
+msgstr "صحنه فعلی:"
 
 #: index.html:697 tablet7in.html:795
 msgid "View controls"
-msgstr ""
+msgstr "نمایش کنترل ها"
 
 #: index.html:703 tablet7in.html:801
 msgid "Movement controls"
-msgstr ""
+msgstr "کنترل جابجایی"
 
 #: index.html:715 tablet7in.html:813
 msgid "Torchlight"
-msgstr ""
+msgstr "چراغ قوه"
 
 #: index.html:722 tablet7in.html:820
 msgid "Scene selection"
-msgstr ""
+msgstr "انتخاب صحنه"
 
 #: index.html:726 tablet7in.html:824
 msgid "Load selected scene"
-msgstr ""
+msgstr "بارگیری صحنه انتخاب شده"
 
 #: index.html:750 tablet7in.html:849
 msgid "No response from server"
@@ -650,7 +667,7 @@ msgstr "برج حوت(ماهی)"
 
 #: tablet7in.html:507
 msgid "Compass Marks"
-msgstr ""
+msgstr "علامت های قطب نما"
 
 #: tablet7in.html:742
 msgid "Favorites"
