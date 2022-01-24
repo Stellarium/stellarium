@@ -737,7 +737,7 @@ NebulaP NebulaMgr::search(const QString& name)
 {
 	QString uname = name.toUpper();
 
-	for (const auto& n : dsoArray)
+	for (const auto& n : qAsConst(dsoArray))
 	{
 		QString testName = n->getEnglishName().toUpper();
 		if (testName==uname) return n;
@@ -785,7 +785,7 @@ NebulaP NebulaMgr::search(const Vec3d& apos)
 	pos.normalize();
 	NebulaP plusProche;
 	double anglePlusProche=0.0;
-	for (const auto& n : dsoArray)
+	for (const auto& n : qAsConst(dsoArray))
 	{
 		if (n->XYZ*pos>anglePlusProche)
 		{
@@ -811,7 +811,7 @@ QList<StelObjectP> NebulaMgr::searchAround(const Vec3d& av, double limitFov, con
 	v.normalize();
 	const double cosLimFov = cos(limitFov * M_PI/180.);
 	Vec3d equPos;
-	for (const auto& n : dsoArray)
+	for (const auto& n : qAsConst(dsoArray))
 	{
 		equPos = n->XYZ;
 		equPos.normalize();
@@ -1371,7 +1371,7 @@ bool NebulaMgr::loadDSOCatalog(const QString &filename)
 				version = "3.1"; // The first version of extended edition of the catalog
 			if (edition.isEmpty())
 				edition = "unknown";
-			qDebug() << "[...]" << QString("Stellarium DSO Catalog, version %1 (%2 edition)").arg(version).arg(edition);
+			qDebug() << "[...]" << QString("Stellarium DSO Catalog, version %1 (%2 edition)").arg(version, edition);
 			if (StelUtils::compareVersions(version, StellariumDSOCatalogVersion)!=0)
 			{
 				++totalRecords;
@@ -1580,7 +1580,7 @@ bool NebulaMgr::loadDSOOutlines(const QString &filename)
 	std::vector<Vec3d> *points = Q_NULLPTR;
 	typedef QPair<double, double> coords;
 	coords point, fpoint;
-	QList<coords> outline;
+	QVector<coords> outline;
 	QString record, command, dso;
 	NebulaP e;
 	// Read the outlines data of the DSO
@@ -1592,9 +1592,9 @@ bool NebulaMgr::loadDSOOutlines(const QString &filename)
 			continue;
 
 		// bytes 1 - 8, RA
-		RA = record.left(8).toDouble();
+		RA = record.leftRef(8).toDouble();
 		// bytes 9 -18, DE
-		DE = record.mid(9, 10).toDouble();
+		DE = record.midRef(9, 10).toDouble();
 		// bytes 19-25, command
 		command = record.mid(19, 7).trimmed();
 		// bytes 26, designation of DSO
@@ -1731,7 +1731,7 @@ void NebulaMgr::updateI18n()
 {
 	Nebula::buildTypeStringMap();
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
-	for (const auto& n : dsoArray)
+	for (const auto& n : qAsConst(dsoArray))
 		n->translateName(trans);
 }
 
@@ -1742,7 +1742,7 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 	QString objw = nameI18n.toUpper();
 
 	// Search by common names
-	for (const auto& n : dsoArray)
+	for (const auto& n : qAsConst(dsoArray))
 	{
 		QString objwcap = n->nameI18.toUpper();
 		if (objwcap==objw)
@@ -1750,9 +1750,9 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 	}
 
 	// Search by aliases of common names
-	for (const auto& n : dsoArray)
+	for (const auto& n : qAsConst(dsoArray))
 	{
-		for (auto objwcapa : n->nameI18Aliases)
+		for (auto &objwcapa : n->nameI18Aliases)
 		{
 			if (objwcapa.toUpper()==objw)
 				return qSharedPointerCast<StelObject>(n);
@@ -1783,7 +1783,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 		// Search by aliases of common names
 		for (const auto& n : dsoArray)
 		{
-			for (auto objwcapa : n->englishAliases)
+			for (auto &objwcapa : n->englishAliases)
 			{
 				if (objwcapa.toUpper()==objw)
 					return qSharedPointerCast<StelObject>(n);
@@ -1877,7 +1877,7 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	QString objw = objPrefix.toUpper();
 
 	// Search by Messier objects number (possible formats are "M31" or "M 31")
-	if (objw.size()>=1 && objw.left(1)=="M" && objw.left(3)!="MEL")
+	if (objw.size()>=1 && objw.at(0)=="M" && objw.left(3)!="MEL")
 	{
 		for (const auto& n : dsoArray)
 		{
@@ -1996,7 +1996,7 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	}
 
 	// Search by Caldwell objects number (possible formats are "C31" or "C 31")
-	if (objw.size()>=1 && objw.left(1)=="C" && objw.left(2)!="CR" && objw.left(2)!="CE")
+	if (objw.size()>=1 && objw.at(0)=="C" && objw.left(2)!="CR" && objw.left(2)!="CE")
 	{
 		for (const auto& n : dsoArray)
 		{
@@ -2058,7 +2058,7 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	}
 
 	// Search by Barnard objects number (possible formats are "B31" or "B 31")
-	if (objw.size()>=1 && objw.left(1)=="B")
+	if (objw.size()>=1 && objw.at(0)=="B")
 	{
 		for (const auto& n : dsoArray)
 		{
@@ -2478,7 +2478,7 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 				names.append(name);
 
 			nameList = n->englishAliases;
-			for (const auto &name : nameList)
+			for (const auto &name : qAsConst(nameList))
 				names.append(name);
 		}
 	}

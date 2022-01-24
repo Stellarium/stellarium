@@ -134,8 +134,8 @@ void OnlineQueriesDialog::createDialogContent()
 	}
 	else
 	{
-		connect(ui->backPushButton,    &QPushButton::clicked, [=]{static_cast<StelWebEngineView*>(view)->triggerPageAction(QWebEnginePage::Back);});
-		connect(ui->forwardPushButton, &QPushButton::clicked, [=]{static_cast<StelWebEngineView*>(view)->triggerPageAction(QWebEnginePage::Forward);});
+		connect(ui->backPushButton,    &QPushButton::clicked, this, [=]{static_cast<StelWebEngineView*>(view)->triggerPageAction(QWebEnginePage::Back);});
+		connect(ui->forwardPushButton, &QPushButton::clicked, this, [=]{static_cast<StelWebEngineView*>(view)->triggerPageAction(QWebEnginePage::Forward);});
 	}
 #else
 	ui->backPushButton->hide();

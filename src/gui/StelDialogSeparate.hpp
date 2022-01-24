@@ -67,7 +67,7 @@ signals:
 	void sizeChanged(QSizeF);
 
 protected:
-	virtual void resizeEvent(QResizeEvent *event)
+	virtual void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE
 	{
 		if (event->size() != event->oldSize())
 		{

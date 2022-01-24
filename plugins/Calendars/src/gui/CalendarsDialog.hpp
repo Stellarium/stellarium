@@ -37,13 +37,13 @@ class CalendarsDialog : public StelDialog
 
 public:
 	CalendarsDialog();
-	~CalendarsDialog();
+	~CalendarsDialog() Q_DECL_OVERRIDE;
 
 public slots:
-	void retranslate();
+	void retranslate() Q_DECL_OVERRIDE;
 
 protected:
-	void createDialogContent();
+	void createDialogContent() Q_DECL_OVERRIDE;
 
 private:
 	Ui_calendarsDialog* ui;

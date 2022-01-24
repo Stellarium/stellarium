@@ -84,7 +84,7 @@ public:
 	//! Constructor
 	StelSkyDrawer(StelCore* core);
 	//! Destructor
-	~StelSkyDrawer();
+	~StelSkyDrawer() Q_DECL_OVERRIDE;
 
 	//! Init parameters from config file
 	void init();

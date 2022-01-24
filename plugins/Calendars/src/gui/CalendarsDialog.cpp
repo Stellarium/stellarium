@@ -47,7 +47,7 @@ CalendarsDialog::CalendarsDialog()
 
 CalendarsDialog::~CalendarsDialog()
 {
-	delete ui;          ui=Q_NULLPTR;
+	delete ui; ui=Q_NULLPTR;
 }
 
 void CalendarsDialog::retranslate()

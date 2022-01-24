@@ -36,12 +36,12 @@ class CustomProxy : public QGraphicsProxyWidget
 			setFocusPolicy(Qt::StrongFocus);
 		}
 		//! Reimplement this method to add windows decorations. Currently there are invisible 2 px decorations
-		void paintWindowFrame(QPainter*, const QStyleOptionGraphicsItem *, QWidget *)
+		void paintWindowFrame(QPainter*, const QStyleOptionGraphicsItem *, QWidget *) Q_DECL_OVERRIDE
 		{
 		}
 
 	protected:
-		virtual bool event(QEvent* event)
+		virtual bool event(QEvent* event) Q_DECL_OVERRIDE
 		{
 			if (event->type()==QEvent::WindowDeactivate)
 			{
@@ -55,7 +55,7 @@ class CustomProxy : public QGraphicsProxyWidget
 		}
 		
 		// Avoid blocking the program when hovering over an inactive window
-		virtual bool sceneEvent(QEvent* event)
+		virtual bool sceneEvent(QEvent* event) Q_DECL_OVERRIDE
 		{
 			if (!(isActiveWindow() || event->type()==QEvent::WindowActivate || event->type()==QEvent::GraphicsSceneMousePress))
 			{

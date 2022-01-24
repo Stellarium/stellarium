@@ -55,7 +55,7 @@ CustomObject::~CustomObject()
 
 float CustomObject::getSelectPriority(const StelCore* core) const
 {
-	Q_UNUSED(core);
+	Q_UNUSED(core)
 	return selectPriority;
 }
 
@@ -66,7 +66,7 @@ QString CustomObject::getNameI18n() const
 	{
 		QStringList cod = designation.split(" ");
 		if (cod.count()>1)
-			r = QString("%1 %2").arg(q_(cod.at(0))).arg(cod.at(1));
+			r = QString("%1 %2").arg(q_(cod.at(0)), cod.at(1));
 		else
 			r = q_(r);
 	}
@@ -110,7 +110,7 @@ Vec3d CustomObject::getJ2000EquatorialPos(const StelCore* core) const
 
 float CustomObject::getVMagnitude(const StelCore* core) const
 {
-	Q_UNUSED(core);
+	Q_UNUSED(core)
 	if (isMarker)
 		return 3.f;
 	else

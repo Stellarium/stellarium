@@ -671,7 +671,7 @@ void Oculars::determineMaxEyepieceAngle()
 {
 	if (ready)
 	{
-		for (const auto* ocular : oculars)
+		for (const auto* ocular : qAsConst(oculars))
 		{
 			if (ocular->apparentFOV() > maxEyepieceAngle)
 			{
@@ -876,7 +876,7 @@ void Oculars::ccdRotationReset()
 	if (ccd)
 	{
 		ccd->setChipRotAngle(0.0);
-		emit(selectedCCDChanged(selectedCCDIndex));
+		emit selectedCCDChanged(selectedCCDIndex);
 		emit selectedCCDRotationAngleChanged(0.0);
 	}
 }
@@ -889,7 +889,7 @@ void Oculars::prismPositionAngleReset()
 	if (ccd)
 	{
 		ccd->setPrismPosAngle(0.0);
-		emit(selectedCCDChanged(selectedCCDIndex));
+		emit selectedCCDChanged(selectedCCDIndex);
 		emit selectedCCDPrismPositionAngleChanged(0.0);
 	}
 }
@@ -1026,7 +1026,7 @@ void Oculars::decrementCCDIndex()
 	{
 		selectedCCDIndex = ccds.count() - 1;
 	}
-	emit(selectedCCDChanged(selectedCCDIndex));
+	emit selectedCCDChanged(selectedCCDIndex);
 }
 
 void Oculars::decrementOcularIndex()
@@ -1048,7 +1048,7 @@ void Oculars::decrementOcularIndex()
 		if (selectedTelescopeIndex == -1)
 			selectedTelescopeIndex = 0;
 	}
-	emit(selectedOcularChanged(selectedOcularIndex));
+	emit selectedOcularChanged(selectedOcularIndex);
 }
 
 void Oculars::decrementTelescopeIndex()
@@ -1058,7 +1058,7 @@ void Oculars::decrementTelescopeIndex()
 	{
 		selectedTelescopeIndex = telescopes.count() - 1;
 	}
-	emit(selectedTelescopeChanged(selectedTelescopeIndex));
+	emit selectedTelescopeChanged(selectedTelescopeIndex);
 }
 
 void Oculars::decrementLensIndex()
@@ -1072,7 +1072,7 @@ void Oculars::decrementLensIndex()
 	{
 		selectedLensIndex = lenses.count() - 1;
 	}
-	emit(selectedLensChanged(selectedLensIndex));
+	emit selectedLensChanged(selectedLensIndex);
 }
 
 void Oculars::rotateReticleClockwise()
@@ -1117,7 +1117,7 @@ void Oculars::displayPopupMenu()
 				QAction* action = Q_NULLPTR;
 				if (selectedTelescopeIndex != -1 || oculars[index]->isBinoculars())
 				{
-					action = submenu->addAction(label, [=](){selectOcularAtIndex(index);});
+					action = submenu->addAction(label, submenu, [=](){selectOcularAtIndex(index);});
 					availableOcularCount++;
 				}
 
@@ -1192,7 +1192,7 @@ void Oculars::displayPopupMenu()
 				{
 					label = ccds[index]->name();
 				}
-				QAction* action = submenu->addAction(label, [=](){selectCCDAtIndex(index);});
+				QAction* action = submenu->addAction(label, submenu, [=](){selectCCDAtIndex(index);});
 				if (index == selectedCCDIndex)
 				{
 					action->setCheckable(true);
@@ -1202,16 +1202,16 @@ void Oculars::displayPopupMenu()
 			popup->addMenu(submenu);
 			
 			submenu = new QMenu(q_("&Rotate CCD"), popup);
-			submenu->addAction(QString("&1: -90") + QChar(0x00B0), [=](){rotateCCD(-90);});
-			submenu->addAction(QString("&2: -45") + QChar(0x00B0), [=](){rotateCCD(-45);});
-			submenu->addAction(QString("&3: -15") + QChar(0x00B0), [=](){rotateCCD(-15);});
-			submenu->addAction(QString("&4: -5") + QChar(0x00B0),  [=](){rotateCCD(-5);});
-			submenu->addAction(QString("&5: -1") + QChar(0x00B0),  [=](){rotateCCD(-1);});
-			submenu->addAction(QString("&6: +1") + QChar(0x00B0),  [=](){rotateCCD(1);});
-			submenu->addAction(QString("&7: +5") + QChar(0x00B0),  [=](){rotateCCD(5);});
-			submenu->addAction(QString("&8: +15") + QChar(0x00B0), [=](){rotateCCD(15);});
-			submenu->addAction(QString("&9: +45") + QChar(0x00B0), [=](){rotateCCD(45);});
-			submenu->addAction(QString("&0: +90") + QChar(0x00B0), [=](){rotateCCD(90);});
+			submenu->addAction(QString("&1: -90") + QChar(0x00B0), submenu, [=](){rotateCCD(-90);});
+			submenu->addAction(QString("&2: -45") + QChar(0x00B0), submenu, [=](){rotateCCD(-45);});
+			submenu->addAction(QString("&3: -15") + QChar(0x00B0), submenu, [=](){rotateCCD(-15);});
+			submenu->addAction(QString("&4: -5") + QChar(0x00B0),  submenu, [=](){rotateCCD(-5);});
+			submenu->addAction(QString("&5: -1") + QChar(0x00B0),  submenu, [=](){rotateCCD(-1);});
+			submenu->addAction(QString("&6: +1") + QChar(0x00B0),  submenu, [=](){rotateCCD(1);});
+			submenu->addAction(QString("&7: +5") + QChar(0x00B0),  submenu, [=](){rotateCCD(5);});
+			submenu->addAction(QString("&8: +15") + QChar(0x00B0), submenu, [=](){rotateCCD(15);});
+			submenu->addAction(QString("&9: +45") + QChar(0x00B0), submenu, [=](){rotateCCD(45);});
+			submenu->addAction(QString("&0: +90") + QChar(0x00B0), submenu, [=](){rotateCCD(90);});
 
 			submenu->addAction(q_("&Reset rotation"), this, SLOT(ccdRotationReset()));
 			popup->addMenu(submenu);			
@@ -2176,7 +2176,7 @@ void Oculars::validateAndLoadIniFile()
 		return;
 
 	// If the ini file does not already exist, create it from the resource in the QT resource
-	if(!QFileInfo(ocularIniPath).exists())
+	if(!QFileInfo::exists(ocularIniPath))
 	{
 		QFile src(":/ocular/default_ocular.ini");
 		if (!src.copy(ocularIniPath))
@@ -2508,7 +2508,7 @@ QMenu* Oculars::addLensSubmenu(QMenu* parent)
 		{
 			label = lenses[index]->getName();
 		}
-		QAction* action = submenu->addAction(label, [=](){selectLensAtIndex(index);});
+		QAction* action = submenu->addAction(label, submenu, [=](){selectLensAtIndex(index);});
 		if (index == selectedLensIndex)
 		{
 			action->setCheckable(true);
@@ -2537,7 +2537,7 @@ QMenu* Oculars::addTelescopeSubmenu(QMenu *parent)
 		{
 			label = telescopes[index]->name();
 		}
-		QAction* action = submenu->addAction(label, [=](){selectTelescopeAtIndex(index);});
+		QAction* action = submenu->addAction(label, submenu, [=](){selectTelescopeAtIndex(index);});
 		if (index == selectedTelescopeIndex)
 		{
 			action->setCheckable(true);

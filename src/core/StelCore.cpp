@@ -1355,7 +1355,7 @@ void StelCore::setCurrentTimeZone(const QString& tz)
 	if (StelApp::getInstance().getLocationMgr().getAllTimezoneNames().contains(tz))
 	{
 		currentTimeZone = tz;
-		emit(currentTimeZoneChanged(tz));
+		emit currentTimeZoneChanged(tz);
 	}
 	else
 	{
@@ -1555,7 +1555,7 @@ void StelCore::addCalendricMonth()
 		month = 1;
 		year++;
 	}
-	StelUtils::getJDFromDate(&cjd, year, month, day, hour, minute, second);
+	StelUtils::getJDFromDate(&cjd, year, month, day, hour, minute, static_cast<float>(second));
 	setJD(cjd);
 }
 
@@ -1687,7 +1687,7 @@ void StelCore::subtractCalendricMonth()
 		month = 12;
 		year--;
 	}
-	StelUtils::getJDFromDate(&cjd, year, month, day, hour, minute, second);
+	StelUtils::getJDFromDate(&cjd, year, month, day, hour, minute, static_cast<float>(second));
 	setJD(cjd);
 }
 
@@ -1884,7 +1884,7 @@ void StelCore::updateTime(double deltaTime)
 		position = newObs;
 	}
 	if (position->update(deltaTime))
-		emit(locationChanged(getCurrentLocation()));
+		emit locationChanged(getCurrentLocation());
 
 	// Position of sun and all the satellites (ie planets)
 	// GZ maybe setting this static can speedup a bit?
@@ -2393,9 +2393,9 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 	// Put n-dot value info
 	if (getCurrentDeltaTAlgorithm()!=WithoutCorrection)
 	{
-		QString fp = QString("%1\"/cy%2").arg(QString::number(getDeltaTnDot(), 'f', 4)).arg(QChar(0x00B2));
-		QString sp = QString("n%1").arg(QChar(0x2032));
-		description.append(" " + q_("The solution's value of %1 for %2 (secular acceleration of the Moon) requires an adaptation, see Guide for details.").arg(fp).arg(sp));
+		QString accel = QString("%1\"/cy<sup>2</sup>").arg(QString::number(getDeltaTnDot(), 'f', 4));
+		QString ndot  = QString("&#x1E45;");
+		description.append(" " + q_("The solution's value of %1 for %2 (secular acceleration of the Moon) requires an adaptation, see Guide for details.").arg(accel, ndot));
 	}
 
 	return description;

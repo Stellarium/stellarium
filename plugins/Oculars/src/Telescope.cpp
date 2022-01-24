@@ -48,13 +48,13 @@ static QMap<int, QString> mapping;
 QMap<int, QString> Telescope::propertyMap()
 {
 	if(mapping.isEmpty()) {
-		mapping = QMap<int, QString>();
-		mapping[0] = "name";
-		mapping[1] = "diameter";
-		mapping[2] = "focalLength";
-		mapping[3] = "hFlipped";
-		mapping[4] = "vFlipped";
-		mapping[5] = "equatorial";
+	mapping = {
+		    {0, "name"},
+		    {1, "diameter"},
+		    {2, "focalLength"},
+		    {3, "hFlipped"},
+		    {4, "vFlipped"},
+		    {5, "equatorial"}};
 	}
 	return mapping;
 }

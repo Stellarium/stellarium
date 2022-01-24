@@ -59,7 +59,7 @@ ToastTile::ToastTile(ToastSurvey* survey, int level, int x, int y)
 ToastTile::~ToastTile()
 {
 	//delete all currently owned tiles
-	for (auto* child : subTiles)
+	for (auto* child : qAsConst(subTiles))
 	{
 		delete child;
 	}
@@ -251,7 +251,7 @@ void ToastTile::draw(StelPainter* sPainter, const SphericalCap& viewportShape, i
 	if (!isVisible(viewportShape, maxVisibleLevel))
 	{
 		// Clean up to save memory.
-		for (auto* child : subTiles)
+		for (auto* child : qAsConst(subTiles))
 		{
 			//put into cache instead of delete
 			//the subtiles of the child remain owned by it
@@ -267,7 +267,7 @@ void ToastTile::draw(StelPainter* sPainter, const SphericalCap& viewportShape, i
 		drawTile(sPainter, color);
 
 	// Draw all the children
-	for (auto* child : subTiles)
+	for (auto* child : qAsConst(subTiles))
 	{
 		child->draw(sPainter, viewportShape, maxVisibleLevel, color);
 	}

@@ -125,7 +125,7 @@ void MSSearchDialog::searchEvents()
 
 	//Fill list of events
 	initListEvents();
-	for (const auto& r : searchResult)
+	for (const auto& r : qAsConst(searchResult))
 	{
 		MSTreeWidgetItem* treeItem = new MSTreeWidgetItem(m_ui->listEvents);
 		treeItem->setText(ColumnCode, r.code);
@@ -142,7 +142,7 @@ void MSSearchDialog::searchEvents()
 		treeItem->setData(ColumnCode, Qt::UserRole, r.code);
 		treeItem->setData(ColumnName, Qt::UserRole, r.name);
 		treeItem->setData(ColumnDataType, Qt::UserRole, r.type);
-		treeItem->setData(ColumnPeak, Qt::UserRole, r.peak);
+		treeItem->setData(ColumnPeak, Qt::UserRole, r.peak.dayOfYear());
 		treeItem->setData(ColumnZHR, Qt::UserRole, r.zhrMax);
 	}
 

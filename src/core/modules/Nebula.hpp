@@ -240,7 +240,7 @@ private:
 	{
 		nameI18 = trans.qtranslate(englishName);
 		nameI18Aliases.clear();
-		for (auto alias : englishAliases)
+		for (auto &alias : englishAliases)
 			nameI18Aliases.append(trans.qtranslate(alias));
 	}	
 

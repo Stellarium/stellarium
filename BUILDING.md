@@ -40,7 +40,7 @@ your distribution. Here's a list.
 ### Required dependencies
 
 - A C++ compiler able to compile C++11 code ([GCC](https://gcc.gnu.org/) 4.8.1 or later, Clang 3.3 or later, MSVC 2015 or later)
-- [CMake](http://www.cmake.org/) 2.8.12 or later - buildsystem used by many open source projects
+- [CMake](http://www.cmake.org/) 3.10.0 or later - buildsystem used by many open source projects
 - [Qt Framework](http://www.qt.io/) 5.9.0 or later
 - [OpenGL](https://www.opengl.org/) - graphics library
 - [Zlib](http://www.zlib.net) - compression library
@@ -63,8 +63,9 @@ To install all of these, use the following commands:
 sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc g++ \
                  graphviz doxygen gettext git \
                  qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev \
-                 qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev \
-                 libgps-dev libqt5positioning5 libqt5positioning5-plugins qtwebengine5-dev
+                 qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev \
+                 qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins \
+                 qtwebengine5-dev
 ```
 
 #### Fedora / CentOS

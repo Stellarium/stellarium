@@ -30,7 +30,7 @@
 bool readStelIniFile(QIODevice &device, QSettings::SettingsMap &map)
 {
 	// Is this the right conversion?
-	const QString& data = QString::fromUtf8(device.readAll().data());
+	const QString& data = QString::fromUtf8(device.readAll().constData());
 
 	// Split by a RE which should match any platform's line breaking rules
 	QRegularExpression matchLbr("[\\n\\r]+");
@@ -93,7 +93,7 @@ bool writeStelIniFile(QIODevice &device, const QSettings::SettingsMap &map)
 	QRegularExpression reKeyXt("^([^/]+)/(.+)$");  // for extracting keys/values
 
 	// first go over map and find longest key length
-	for (auto key : map.keys())
+	for (auto &key : map.keys())
 	{
 		QRegularExpressionMatch match=reKeyXt.match(key);
 		if (match.hasMatch())
@@ -103,7 +103,7 @@ bool writeStelIniFile(QIODevice &device, const QSettings::SettingsMap &map)
 
 	// OK, this time actually write to the file - first non-section values
 	QString outputLine;
-	for (auto key : map.keys())
+	for (auto &key : map.keys())
 	{
 		QRegularExpressionMatch match=reKeyXt.match(key);
 		if (!match.hasMatch())
@@ -116,7 +116,7 @@ bool writeStelIniFile(QIODevice &device, const QSettings::SettingsMap &map)
 
 	// Now those values with sections.
 	QString currentSection("");
-	for (auto key : map.keys())
+	for (auto &key : map.keys())
 	{
 		QRegularExpressionMatch match=reKeyXt.match(key);
 		if (match.hasMatch())

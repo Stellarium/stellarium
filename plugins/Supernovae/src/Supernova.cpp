@@ -95,7 +95,7 @@ QString Supernova::getNameI18n(void) const
 	QString name = designation;
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	if (note.size()!=0)
-		name = QString("%1 (%2)").arg(name).arg(trans.qtranslate(note));
+		name = QString("%1 (%2)").arg(name, trans.qtranslate(note));
 
 	return name;
 }
@@ -104,7 +104,7 @@ QString Supernova::getEnglishName(void) const
 {
 	QString name = designation;
 	if (note.size()!=0)
-		name = QString("%1 (%2)").arg(name).arg(note);	
+		name = QString("%1 (%2)").arg(name, note);
 
 	return name;
 }

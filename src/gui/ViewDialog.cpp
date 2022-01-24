@@ -156,6 +156,13 @@ void ViewDialog::createDialogContent()
 
 	populateLists();
 	populateToolTips();
+	// fixed size for buttons
+	QSize bs = QSize(24, 24);
+	ui->pushButtonAtmosphereDetails->setFixedSize(bs);
+	ui->pushButtonSkylightDetails->setFixedSize(bs);
+	ui->tonemappingPushButton->setFixedSize(bs);
+	ui->pushButtonOrbitColors->setFixedSize(bs);
+
 
 	// TODOs after properties merge:
 	// New method: populateLightPollution may be useful. Make sure it is.
@@ -274,9 +281,6 @@ void ViewDialog::createDialogContent()
 	populatePlanetMagnitudeAlgorithmDescription();
 
 	// GreatRedSpot (Jupiter)
-	connectBoolProperty(ui->customGrsSettingsCheckBox, "SolarSystem.flagCustomGrsSettings");
-	ui->pushButtonGrsDetails->setEnabled(ssmgr->getFlagCustomGrsSettings());
-	connect(ssmgr, SIGNAL(flagCustomGrsSettingsChanged(bool)), ui->pushButtonGrsDetails, SLOT(setEnabled(bool)));
 	connect(ui->pushButtonGrsDetails, SIGNAL(clicked()), this, SLOT(showGreatRedSpotDialog()));
 
 	// Link Solar System Editor button if available...

@@ -47,7 +47,7 @@ class CCD : public QObject
 public:
 	CCD();
 	Q_INVOKABLE CCD(const QObject& other);
-	virtual ~CCD();
+	virtual ~CCD() Q_DECL_OVERRIDE;
 	static CCD* ccdFromSettings(QSettings* settings, int ccdIndex);
 	void writeToSettings(QSettings * settings, const int index);
 	static CCD* ccdModel();

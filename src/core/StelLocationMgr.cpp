@@ -480,8 +480,11 @@ StelLocationMgr::StelLocationMgr()
 		generateBinaryLocationFile("data/base_locations.txt", false, "data/base_locations.bin");
 
 	locations = loadCitiesBin("data/base_locations.bin.gz");
+#if QT_VERSION >= QT_VERSION_CHECK(5,15,0)
+	locations.insert(loadCities("data/user_locations.txt", true));
+#else
 	locations.unite(loadCities("data/user_locations.txt", true));
-	
+#endif
 	// Init to Paris France because it's the center of the world.
 	lastResortLocation = locationForString(conf->value("init_location/last_location", "Paris, Western Europe").toString());
 }
@@ -1024,10 +1027,10 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 			QString ipTimeZone = locMap.value("time_zone").toString();
 			if (ipTimeZone.isEmpty())
 				ipTimeZone = locMap.value("timezone").toString();
-			float latitude=locMap.value("latitude").toFloat();
-			float longitude=locMap.value("longitude").toFloat();
+			double latitude=locMap.value("latitude").toDouble();
+			double longitude=locMap.value("longitude").toDouble();
 
-			qDebug() << "Got location" << QString("%1, %2, %3 (%4, %5; %6)").arg(ipCity).arg(ipRegion).arg(ipCountry).arg(latitude).arg(longitude).arg(ipTimeZone) << "for IP" << locMap.value("ip").toString();
+			qDebug() << "Got location" << QString("%1, %2, %3 (%4, %5; %6)").arg(ipCity, ipRegion, ipCountry).arg(latitude).arg(longitude).arg(ipTimeZone) << "for IP" << locMap.value("ip").toString();
 
 			StelLocation loc;
 			loc.name    = (ipCity.isEmpty() ? QString("%1, %2").arg(latitude).arg(longitude) : ipCity);
@@ -1035,8 +1038,8 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 			loc.region = pickRegionFromCountryCode(ipCountryCode.isEmpty() ? "" : ipCountryCode.toLower());
 			loc.role    = QChar(0x0058); // char 'X'
 			loc.population = 0;
-			loc.latitude = latitude;
-			loc.longitude = longitude;
+			loc.latitude  = static_cast<float>(latitude);
+			loc.longitude = static_cast<float>(longitude);
 			loc.altitude = 0;
 			loc.bortleScaleIndex = StelLocation::DEFAULT_BORTLE_SCALE_INDEX;
 			loc.ianaTimeZone = (ipTimeZone.isEmpty() ? "" : ipTimeZone);

@@ -368,7 +368,7 @@ void StelDialog::askColor()
 	if (c.isValid())
 	{
 		vColor = Vec3d(c.redF(), c.greenF(), c.blueF());
-		StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue(propName, QVariant::fromValue(Vec3f(c.redF(), c.greenF(), c.blueF())));
+		StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue(propName, QVariant::fromValue(vColor.toVec3f()));
 		if (moduleName.isEmpty())
 			StelApp::getInstance().getSettings()->setValue(iniName, vColor.toStr());
 		else
@@ -387,7 +387,7 @@ void StelDialog::enableKineticScrolling(bool b)
 	if (kineticScrollingList.length()==0) return;
 	if (b)
 	{
-		for (auto* w : kineticScrollingList)
+		for (auto* w : qAsConst(kineticScrollingList))
 		{
 			QScroller::grabGesture(w, QScroller::LeftMouseButtonGesture);
 			QScroller::scroller(w); // WHAT DOES THIS DO? We don't use the return value.
@@ -395,7 +395,7 @@ void StelDialog::enableKineticScrolling(bool b)
 	}
 	else
 	{
-		for (auto* w : kineticScrollingList)
+		for (auto* w : qAsConst(kineticScrollingList))
 		{
 			QScroller::ungrabGesture(w);
 			// QScroller::scroller(w);
@@ -425,13 +425,13 @@ void StelDialog::handleDialogSizeChanged(QSizeF size)
 
 //// --- Implementation of StelDialog_p.hpp classes follow ---
 
-QAbstractButtonStelPropertyConnectionHelper::QAbstractButtonStelPropertyConnectionHelper(StelProperty *prop, QAbstractButton *button)
-	:StelPropertyProxy(prop,button), button(button)
+QAbstractButtonStelPropertyConnectionHelper::QAbstractButtonStelPropertyConnectionHelper(StelProperty *pr, QAbstractButton *button)
+	:StelPropertyProxy(pr,button), button(button)
 {
 	QVariant val = prop->getValue();
 	bool ok = val.canConvert<bool>();
 	Q_ASSERT_X(ok,"QAbstractButtonStelPropertyConnectionHelper","Can not convert to bool datatype");
-	Q_UNUSED(ok);
+	Q_UNUSED(ok)
 	onPropertyChanged(val);
 
 	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
@@ -446,13 +446,13 @@ void QAbstractButtonStelPropertyConnectionHelper::onPropertyChanged(const QVaria
 	button->blockSignals(b);
 }
 
-QGroupBoxStelPropertyConnectionHelper::QGroupBoxStelPropertyConnectionHelper(StelProperty *prop, QGroupBox *box)
-	:StelPropertyProxy(prop,box), box(box)
+QGroupBoxStelPropertyConnectionHelper::QGroupBoxStelPropertyConnectionHelper(StelProperty *pr, QGroupBox *box)
+	:StelPropertyProxy(pr,box), box(box)
 {
 	QVariant val = prop->getValue();
 	bool ok = val.canConvert<bool>();
 	Q_ASSERT_X(ok,"QGroupBoxStelPropertyConnectionHelper","Can not convert to bool datatype");
-	Q_UNUSED(ok);
+	Q_UNUSED(ok)
 	onPropertyChanged(val);
 
 	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
@@ -467,13 +467,13 @@ void QGroupBoxStelPropertyConnectionHelper::onPropertyChanged(const QVariant &va
 	box->blockSignals(b);
 }
 
-QComboBoxStelPropertyConnectionHelper::QComboBoxStelPropertyConnectionHelper(StelProperty *prop, QComboBox *combo)
-	:StelPropertyProxy(prop,combo), combo(combo)
+QComboBoxStelPropertyConnectionHelper::QComboBoxStelPropertyConnectionHelper(StelProperty *pr, QComboBox *combo)
+	:StelPropertyProxy(pr,combo), combo(combo)
 {
 	QVariant val = prop->getValue();
 	bool ok = val.canConvert<int>();
 	Q_ASSERT_X(ok,"QComboBoxStelPropertyConnectionHelper","Can not convert to int datatype");
-	Q_UNUSED(ok);
+	Q_UNUSED(ok)
 	onPropertyChanged(val);
 
 	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
@@ -487,13 +487,13 @@ void QComboBoxStelPropertyConnectionHelper::onPropertyChanged(const QVariant &va
 	combo->setCurrentIndex(value.toInt());
 	combo->blockSignals(b);
 }
-QComboBoxStelStringPropertyConnectionHelper::QComboBoxStelStringPropertyConnectionHelper(StelProperty *prop, QComboBox *combo)
-	:StelPropertyProxy(prop,combo), combo(combo)
+QComboBoxStelStringPropertyConnectionHelper::QComboBoxStelStringPropertyConnectionHelper(StelProperty *pr, QComboBox *combo)
+	:StelPropertyProxy(pr,combo), combo(combo)
 {
 	QVariant val = prop->getValue();
 	bool ok = val.canConvert<QString>();
 	Q_ASSERT_X(ok,"QComboBoxStelStringPropertyConnectionHelper","Can not convert to QString datatype");
-	Q_UNUSED(ok);
+	Q_UNUSED(ok)
 	onPropertyChanged(val);
 
 	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
@@ -508,13 +508,13 @@ void QComboBoxStelStringPropertyConnectionHelper::onPropertyChanged(const QVaria
 	combo->blockSignals(b);
 }
 
-QLineEditStelPropertyConnectionHelper::QLineEditStelPropertyConnectionHelper(StelProperty *prop, QLineEdit *edit)
-	:StelPropertyProxy(prop,edit), edit(edit)
+QLineEditStelPropertyConnectionHelper::QLineEditStelPropertyConnectionHelper(StelProperty *pr, QLineEdit *edit)
+	:StelPropertyProxy(pr,edit), edit(edit)
 {
 	QVariant val = prop->getValue();
 	bool ok = val.canConvert<int>();
 	Q_ASSERT_X(ok,"QLineEditStelPropertyConnectionHelper","Can not convert to int datatype");
-	Q_UNUSED(ok);
+	Q_UNUSED(ok)
 	onPropertyChanged(val);
 
 	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
@@ -529,13 +529,13 @@ void QLineEditStelPropertyConnectionHelper::onPropertyChanged(const QVariant &va
 	edit->blockSignals(b);
 }
 
-QSpinBoxStelPropertyConnectionHelper::QSpinBoxStelPropertyConnectionHelper(StelProperty *prop, QSpinBox *spin)
-	:StelPropertyProxy(prop,spin), spin(spin)
+QSpinBoxStelPropertyConnectionHelper::QSpinBoxStelPropertyConnectionHelper(StelProperty *pr, QSpinBox *spin)
+	:StelPropertyProxy(pr,spin), spin(spin)
 {
 	QVariant val = prop->getValue();
 	bool ok = val.canConvert<int>();
 	Q_ASSERT_X(ok,"QSpinBoxStelPropertyConnectionHelper","Can not convert to int datatype");
-	Q_UNUSED(ok);
+	Q_UNUSED(ok)
 	onPropertyChanged(val);
 
 	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
@@ -550,13 +550,13 @@ void QSpinBoxStelPropertyConnectionHelper::onPropertyChanged(const QVariant &val
 	spin->blockSignals(b);
 }
 
-QDoubleSpinBoxStelPropertyConnectionHelper::QDoubleSpinBoxStelPropertyConnectionHelper(StelProperty *prop, QDoubleSpinBox *spin)
-	:StelPropertyProxy(prop,spin), spin(spin)
+QDoubleSpinBoxStelPropertyConnectionHelper::QDoubleSpinBoxStelPropertyConnectionHelper(StelProperty *pr, QDoubleSpinBox *spin)
+	:StelPropertyProxy(pr,spin), spin(spin)
 {
 	QVariant val = prop->getValue();
 	bool ok = val.canConvert<double>();
 	Q_ASSERT_X(ok,"QDoubleSpinBoxStelPropertyConnectionHelper","Can not convert to double datatype");
-	Q_UNUSED(ok);
+	Q_UNUSED(ok)
 	onPropertyChanged(val);
 
 	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
@@ -571,13 +571,13 @@ void QDoubleSpinBoxStelPropertyConnectionHelper::onPropertyChanged(const QVarian
 	spin->blockSignals(b);
 }
 
-AngleSpinBoxStelPropertyConnectionHelper::AngleSpinBoxStelPropertyConnectionHelper(StelProperty *prop, AngleSpinBox *spin)
-	:StelPropertyProxy(prop,spin), spin(spin)
+AngleSpinBoxStelPropertyConnectionHelper::AngleSpinBoxStelPropertyConnectionHelper(StelProperty *pr, AngleSpinBox *spin)
+	:StelPropertyProxy(pr,spin), spin(spin)
 {
 	QVariant val = prop->getValue();
 	bool ok = val.canConvert<double>();
 	Q_ASSERT_X(ok,"AngleSpinBoxStelPropertyConnectionHelper","Can not convert to double datatype");
-	Q_UNUSED(ok);
+	Q_UNUSED(ok)
 	onPropertyChanged(val);
 
 	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
@@ -593,13 +593,13 @@ void AngleSpinBoxStelPropertyConnectionHelper::onPropertyChanged(const QVariant 
 }
 
 
-QSliderStelPropertyConnectionHelper::QSliderStelPropertyConnectionHelper(StelProperty *prop, double minValue, double maxValue, QSlider *slider)
-	: StelPropertyProxy(prop,slider),slider(slider),minValue(minValue),maxValue(maxValue)
+QSliderStelPropertyConnectionHelper::QSliderStelPropertyConnectionHelper(StelProperty *pr, double minValue, double maxValue, QSlider *slider)
+	: StelPropertyProxy(pr,slider),slider(slider),minValue(minValue),maxValue(maxValue)
 {
 	QVariant val = prop->getValue();
 	bool ok = val.canConvert<double>();
 	Q_ASSERT_X(ok,"QSliderStelPropertyConnectionHelper","Can not convert to double datatype");
-	Q_UNUSED(ok);
+	Q_UNUSED(ok)
 
 	dRange = maxValue - minValue;
 	onPropertyChanged(val);
@@ -607,13 +607,13 @@ QSliderStelPropertyConnectionHelper::QSliderStelPropertyConnectionHelper(StelPro
 	connect(slider,SIGNAL(valueChanged(int)),this,SLOT(sliderIntValueChanged(int)));
 }
 
-QSliderStelPropertyConnectionHelper::QSliderStelPropertyConnectionHelper(StelProperty *prop, int minValue, int maxValue, QSlider *slider)
-	: StelPropertyProxy(prop,slider),slider(slider),minValue(minValue),maxValue(maxValue)
+QSliderStelPropertyConnectionHelper::QSliderStelPropertyConnectionHelper(StelProperty *pr, int minValue, int maxValue, QSlider *slider)
+	: StelPropertyProxy(pr,slider),slider(slider),minValue(minValue),maxValue(maxValue)
 {
 	QVariant val = prop->getValue();
 	bool ok = val.canConvert<double>();
 	Q_ASSERT_X(ok,"QSliderStelPropertyConnectionHelper","Can not convert to double datatype");
-	Q_UNUSED(ok);
+	Q_UNUSED(ok)
 
 	dRange = maxValue - minValue;
 	onPropertyChanged(val);

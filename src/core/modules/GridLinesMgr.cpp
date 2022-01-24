@@ -1464,9 +1464,9 @@ void SkyPoint::updateLabel()
 			if (speed>0.)
 			{
 				const QString kms = qc_("km/s", "speed");
-				QString speedStr = QString(" (%1 %2)").arg(QString::number(speed, 'f', 2)).arg(kms);
+				QString speedStr = QString(" (%1 %2)").arg(QString::number(speed, 'f', 2), kms);
 				northernLabel += speedStr;
-				speedStr = QString(" (-%1 %2)").arg(QString::number(speed, 'f', 2)).arg(kms);
+				speedStr = QString(" (-%1 %2)").arg(QString::number(speed, 'f', 2), kms);
 				southernLabel += speedStr;
 			}
 			break;

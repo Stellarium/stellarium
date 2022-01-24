@@ -137,24 +137,17 @@ void StelLogger::init(const QString& logFilePath)
 
 // Aargh Windows API
 #elif defined Q_OS_WIN
-	// Hopefully doesn't throw a linker error on earlier systems. Not like
-	// I'm gonna test it or anything.
-	if (QSysInfo::WindowsVersion >= QSysInfo::WV_XP)
-	{
-		MEMORYSTATUSEX statex;
-		statex.dwLength = sizeof (statex);
-		GlobalMemoryStatusEx(&statex);
-		writeLog(QString("Total physical memory: %1 MB").arg(statex.ullTotalPhys/(1024<<10)));
-		writeLog(QString("Available physical memory: %1 MB").arg(statex.ullAvailPhys/(1024<<10)));
-		writeLog(QString("Physical memory in use: %1%").arg(statex.dwMemoryLoad));
-		#ifndef _WIN64
-		// This always reports about 8TB on Win64, not really useful to show.
-		writeLog(QString("Total virtual memory: %1 MB").arg(statex.ullTotalVirtual/(1024<<10)));
-		writeLog(QString("Available virtual memory: %1 MB").arg(statex.ullAvailVirtual/(1024<<10)));
-		#endif
-	}
-	else
-		writeLog("Windows version too old to get memory info.");
+	MEMORYSTATUSEX statex;
+	statex.dwLength = sizeof (statex);
+	GlobalMemoryStatusEx(&statex);
+	writeLog(QString("Total physical memory: %1 MB").arg(statex.ullTotalPhys/(1024<<10)));
+	writeLog(QString("Available physical memory: %1 MB").arg(statex.ullAvailPhys/(1024<<10)));
+	writeLog(QString("Physical memory in use: %1%").arg(statex.dwMemoryLoad));
+	#ifndef _WIN64
+	// This always reports about 8TB on Win64, not really useful to show.
+	writeLog(QString("Total virtual memory: %1 MB").arg(statex.ullTotalVirtual/(1024<<10)));
+	writeLog(QString("Available virtual memory: %1 MB").arg(statex.ullAvailVirtual/(1024<<10)));
+	#endif
 
 	HKEY hKey = Q_NULLPTR;
 	DWORD dwType = REG_DWORD;

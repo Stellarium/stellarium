@@ -281,12 +281,12 @@ void OnlineQueries::query(QString url, bool useHip)
 {
 	// dissect url and set output.
 	QUrl htmlUrl(url);
-	setOutputHtml(QString("<h1>%1</h1><p>querying %2...</p>").arg(htmlUrl.host()).arg(url));
+	setOutputHtml(QString("<h1>%1</h1><p>querying %2...</p>").arg(htmlUrl.host(), url));
 
 	const QList<StelObjectP>& sel=GETSTELMODULE(StelObjectMgr)->getSelectedObject();
 	if (sel.length()==0)
 	{
-		setOutputHtml(QString("<h1>%1</h1><p>%2</p>").arg(htmlUrl.host()).arg(q_("Please select an object first!")));
+		setOutputHtml(QString("<h1>%1</h1><p>%2</p>").arg(htmlUrl.host(), q_("Please select an object first!")));
 		return;
 	}
 	const StelObjectP obj=sel.at(0);
@@ -295,14 +295,14 @@ void OnlineQueries::query(QString url, bool useHip)
 	{
 		if (obj->getType()!=STAR_TYPE)
 		{
-			setOutputHtml(QString("<h1>%1</h1><p>%2</p>").arg(htmlUrl.host()).arg(qc_("Not a star!", "OnlineQueries")));
+			setOutputHtml(QString("<h1>%1</h1><p>%2</p>").arg(htmlUrl.host(), qc_("Not a star!", "OnlineQueries")));
 			return;
 		}
 
 		QString hipStr=obj->getID();
 		if (!hipStr.startsWith("HIP"))
 		{
-			setOutputHtml(QString("<h1>%1</h1><p>%2</p>").arg(htmlUrl.host()).arg(qc_("Not a HIPPARCOS star!", "OnlineQueries")));
+			setOutputHtml(QString("<h1>%1</h1><p>%2</p>").arg(htmlUrl.host(), qc_("Not a HIPPARCOS star!", "OnlineQueries")));
 			return;
 		}
 		int hipNr=hipStr.split(' ').at(1).toInt();
@@ -316,7 +316,7 @@ void OnlineQueries::query(QString url, bool useHip)
 			QString hipStr=obj->getID();
 			if (!hipStr.startsWith("HIP"))
 			{
-				setOutputHtml(QString("<h1>%1</h1><p>%2</p>").arg(htmlUrl.host()).arg(qc_("Not a HIPPARCOS star!", "OnlineQueries")));
+				setOutputHtml(QString("<h1>%1</h1><p>%2</p>").arg(htmlUrl.host(), qc_("Not a HIPPARCOS star!", "OnlineQueries")));
 				return;
 			}
 			int hipNr=hipStr.split(' ').at(1).toInt();
@@ -349,13 +349,13 @@ void OnlineQueries::query(QString url, bool useHip)
 			// TODO: Other similar replacements?
 			if (objName.isEmpty())
 			{
-				setOutputHtml(QString("<h1>%1</h1><p>%2</p>").arg(q_("ERROR")).arg(q_("We can request data for stars, planets and deep-sky objects. A valid name for this object could not be found. Please enable a few DSO catalogs to form at least a numerical name.")));
+				setOutputHtml(QString("<h1>%1</h1><p>%2</p>").arg(q_("ERROR"), q_("We can request data for stars, planets and deep-sky objects. A valid name for this object could not be found. Please enable a few DSO catalogs to form at least a numerical name.")));
 				return;
 			}
 		}
 		else
 		{
-			setOutputHtml(QString("<h1>%1</h1><p>%2</p>").arg(q_("ERROR")).arg(q_("We can request data for stars, planets and deep-sky objects only.")));
+			setOutputHtml(QString("<h1>%1</h1><p>%2</p>").arg(q_("ERROR"), q_("We can request data for stars, planets and deep-sky objects only.")));
 			return;
 		}
 		setOutputUrl(QUrl(url.arg(objName)));

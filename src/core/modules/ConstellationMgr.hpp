@@ -104,43 +104,43 @@ public:
 	//! Constructor
 	ConstellationMgr(StarMgr *stars);
 	//! Destructor
-	virtual ~ConstellationMgr();
+	virtual ~ConstellationMgr() Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	//! Initialize the ConstellationMgr.
 	//! Reads from the configuration parser object and updates the loading bar
 	//! as constellation objects are loaded for the required sky culture.
-	virtual void init();
+	virtual void init() Q_DECL_OVERRIDE;
 
 	//! Draw constellation lines, art, names and boundaries.
-	virtual void draw(StelCore* core);
+	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
 
 	//! Updates time-varying state for each Constellation.
-	virtual void update(double deltaTime);
+	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
 
 	//! Return the value defining the order of call for the given action
 	//! @param actionName the name of the action for which we want the call order
 	//! @return the value defining the order. The closer to 0 the earlier the module's action will be called
-	virtual double getCallOrder(StelModuleActionName actionName) const;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectModule class
-	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
+	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const Q_DECL_OVERRIDE;
 
 	//! @return the matching constellation object's pointer if exists or Q_NULLPTR
 	//! @param nameI18n The case in-sensitive constellation name
-	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
+	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const Q_DECL_OVERRIDE;
 
 	//! @return the matching constellation if exists or Q_NULLPTR
 	//! @param name The case in-sensitive standard program name (three letter abbreviation)
-	virtual StelObjectP searchByName(const QString& name) const;
+	virtual StelObjectP searchByName(const QString& name) const Q_DECL_OVERRIDE;
 
-	virtual StelObjectP searchByID(const QString &id) const;
+	virtual StelObjectP searchByID(const QString &id) const Q_DECL_OVERRIDE;
 
-	virtual QStringList listAllObjects(bool inEnglish) const;
-	virtual QString getName() const { return "Constellations"; }
-	virtual QString getStelObjectType() const;
+	virtual QStringList listAllObjects(bool inEnglish) const Q_DECL_OVERRIDE;
+	virtual QString getName() const Q_DECL_OVERRIDE { return "Constellations"; }
+	virtual QString getStelObjectType() const Q_DECL_OVERRIDE;
 	//! Describes how to display constellation labels. The viewDialog GUI has a combobox which corresponds to these values.
 	enum ConstellationDisplayStyle
 	{
@@ -310,20 +310,20 @@ public slots:
 	QStringList getConstellationsEnglishNames();
 
 signals:
-	void artDisplayedChanged(const bool displayed) const;
-	void artFadeDurationChanged(const float duration) const;
-	void artIntensityChanged(const double intensity) const;
-	void boundariesColorChanged(const Vec3f & color) const;
-	void boundariesDisplayedChanged(const bool displayed) const;
-	void fontSizeChanged(const float newSize) const;
-	void isolateSelectedChanged(const bool isolate) const;	
-	void linesColorChanged(const Vec3f & color) const;
-	void linesDisplayedChanged(const bool displayed) const;
-	void namesColorChanged(const Vec3f & color) const;
-	void namesDisplayedChanged(const bool displayed) const;
-	void constellationsDisplayStyleChanged(const ConstellationMgr::ConstellationDisplayStyle style) const;
-	void constellationLineThicknessChanged(int thickness) const;
-	void constellationBoundariesThicknessChanged(int thickness) const;
+	void artDisplayedChanged(const bool displayed);
+	void artFadeDurationChanged(const float duration);
+	void artIntensityChanged(const double intensity);
+	void boundariesColorChanged(const Vec3f & color);
+	void boundariesDisplayedChanged(const bool displayed);
+	void fontSizeChanged(const float newSize);
+	void isolateSelectedChanged(const bool isolate);
+	void linesColorChanged(const Vec3f & color);
+	void linesDisplayedChanged(const bool displayed);
+	void namesColorChanged(const Vec3f & color);
+	void namesDisplayedChanged(const bool displayed);
+	void constellationsDisplayStyleChanged(const ConstellationMgr::ConstellationDisplayStyle style);
+	void constellationLineThicknessChanged(int thickness);
+	void constellationBoundariesThicknessChanged(int thickness);
 
 private slots:
 	//! Limit the number of constellations to draw based on selected stars.
@@ -344,10 +344,10 @@ private slots:
 
 	void reloadSkyCulture(void);
 
+private:
 	void setFlagCheckLoadingData(const bool flag) { checkLoadingData = flag; }
 	bool getFlagCheckLoadingData(void) const { return checkLoadingData; }
 
-private:
 	//! Read constellation names from the given file.
 	//! @param namesFile Name of the file containing the constellation names
 	//!        in a format consisting of abbreviation, native name and translatable english name.

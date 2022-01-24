@@ -49,7 +49,7 @@ TuiNodeResponse TuiNodeDateTime::handleEditingKey(int key)
 		response.accepted = true;
 		if (!editing)
 		{
-			emit(setValue(value));
+			emit setValue(value);
 		}
 		return response;
 	}
@@ -59,7 +59,7 @@ TuiNodeResponse TuiNodeDateTime::handleEditingKey(int key)
 		editing = false;
 		editingPart = 0;
 		response.accepted = true;
-		emit(setValue(value));
+		emit setValue(value);
 		return response;
 	}
 	if (key==Qt::Key_Right)
@@ -77,7 +77,7 @@ TuiNodeResponse TuiNodeDateTime::handleEditingKey(int key)
 		typing = false;
 		incPart(editingPart, true);
 		response.accepted = true;
-		emit(setValue(value));
+		emit setValue(value);
 		return response;
 	}
 	if (key==Qt::Key_Down)
@@ -85,7 +85,7 @@ TuiNodeResponse TuiNodeDateTime::handleEditingKey(int key)
 		typing = false;
 		incPart(editingPart, false);
 		response.accepted = true;
-		emit(setValue(value));
+		emit setValue(value);
 		return response;
 	}
 	if (key>=Qt::Key_0 && key<=Qt::Key_9 && editingPart==0)
@@ -104,7 +104,7 @@ TuiNodeResponse TuiNodeDateTime::handleEditingKey(int key)
 		response.newNode = this;
 		if (setPart(editingPart, s.toInt()))
 		{
-			emit(setValue(value));
+			emit setValue(value);
 		}
 		return response;
 	}
@@ -156,7 +156,7 @@ QString TuiNodeDateTime::getDisplayText() const
 
 void TuiNodeDateTime::incPart(int part, bool add)
 {
-	Q_UNUSED(part);
+	Q_UNUSED(part)
 	int diff = 1;
 	if (!add)
 		diff *= -1;

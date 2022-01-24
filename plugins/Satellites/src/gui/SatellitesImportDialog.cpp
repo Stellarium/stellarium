@@ -168,14 +168,14 @@ void SatellitesImportDialog::getData()
 	{
 		QStringList sourceFilePaths;
 		// XXX: we should check that there is at least one home location.
-		QString homeDirPath = QStandardPaths::standardLocations(QStandardPaths::HomeLocation)[0];
+		QString homeDirPath = QStandardPaths::standardLocations(QStandardPaths::HomeLocation).constFirst();
 		sourceFilePaths = QFileDialog::getOpenFileNames(
 				      Q_NULLPTR,
 		                      q_("Select TLE source file(s)..."),
 		                      homeDirPath, "*.*");
 		if (sourceFilePaths.isEmpty())
 			return;
-		for (auto filePath : sourceFilePaths)
+		for (auto &filePath : sourceFilePaths)
 		{
 			QFileInfo fileInfo(filePath);
 			if (fileInfo.exists() && fileInfo.isReadable())

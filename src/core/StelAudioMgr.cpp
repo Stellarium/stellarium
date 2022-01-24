@@ -31,9 +31,15 @@ StelAudioMgr::StelAudioMgr()
 
 StelAudioMgr::~StelAudioMgr()
 {
-	for (const auto& id : audioObjects.keys())
+	QMutableMapIterator<QString, QMediaPlayer*>it(audioObjects);
+	while (it.hasNext())
 	{
-		dropSound(id);
+		it.next();
+		if (it.value()!=Q_NULLPTR)
+		{
+			it.value()->stop();
+			it.remove();
+		}
 	}
 }
 

@@ -155,7 +155,7 @@ void ObsListDialog::setObservingListHeaderNames()
 		q_( "Location" ) // Hided column
 	};
 
-	obsListListModel->setHorizontalHeaderLabels ( headerStrings );;
+	obsListListModel->setHorizontalHeaderLabels ( headerStrings );
 }
 
 /*
@@ -215,7 +215,7 @@ void ObsListDialog::obsListHighLightAllButtonPressed()
 	QString color = hlMgr->getColor().toHtmlColor();
 	float distance = hlMgr->getMarkersSize();
 
-	for ( auto item : observingListItemCollection )
+	for ( const auto &item : qAsConst(observingListItemCollection) )
 	{
 		QString name	= item.name;
 		QString raStr	= item.ra.trimmed();
@@ -255,7 +255,7 @@ void ObsListDialog::obsListClearHighLightButtonPressed()
 	objectMgr->unSelect();
 	GETSTELMODULE ( HighlightMgr )->cleanHighlightList();
 	// Clear labels
-	for ( auto l : highlightLabelIDs )
+	for ( auto l : qAsConst(highlightLabelIDs) )
 		labelMgr->deleteLabel ( l );
 
 	highlightLabelIDs.clear();
@@ -362,7 +362,6 @@ void ObsListDialog::loadDefaultList()
 */
 void ObsListDialog::loadObservingList ( QString listUuid )
 {
-	QVariantMap map;
 	QVariantList listOfObjects;
 	QFile jsonFile ( observingListJsonPath );
 	if ( !jsonFile.open ( QIODevice::ReadOnly ) )
@@ -377,7 +376,7 @@ void ObsListDialog::loadObservingList ( QString listUuid )
 				ui->obsListClearHighlightButton->setEnabled ( true );
 				ui->obsListDeleteButton->setEnabled(true);
 
-				for ( QVariant object: listOfObjects )
+				for ( const QVariant &object: qAsConst(listOfObjects) )
 				{
 					QVariantMap objectMap;
 					if ( object.canConvert<QVariantMap>() )
@@ -425,7 +424,7 @@ void ObsListDialog::loadObservingList ( QString listUuid )
 								if ( loc.name.isEmpty() )
 									Location = QString ( "%1, %2" ).arg ( loc.latitude ).arg ( loc.longitude );
 								else
-									Location = QString ( "%1, %2" ).arg ( loc.name ).arg ( loc.region );
+									Location = QString ( "%1, %2" ).arg ( loc.name, loc.region );
 
 								addModelRow ( lastRow,objectUuid,objectName, objectNameI18n, objectType, objectRaStr, objectDecStr, objectMagnitudeStr, objectConstellation );
 
@@ -583,7 +582,7 @@ void ObsListDialog::selectAndGoToObject ( QModelIndex index )
 			}
 
 			double best_object_value = M_PI;
-			for ( const auto& obj : candidates )
+			for ( const auto& obj : qAsConst(candidates) )
 			{
 				double distance=pos.angle(obj->getJ2000EquatorialPos(core));
 				if ( distance < best_object_value )

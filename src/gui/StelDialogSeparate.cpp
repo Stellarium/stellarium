@@ -58,8 +58,8 @@ protected:
 };
 
 
-StelDialogSeparate::StelDialogSeparate(QString dialogName, QObject* parent)
-	: StelDialog(dialogName, parent),
+StelDialogSeparate::StelDialogSeparate(QString dialogname, QObject* parent)
+	: StelDialog(dialogname, parent),
 	nightCover(Q_NULLPTR)
 {
 }
@@ -175,7 +175,7 @@ void StelDialogSeparate::updateNightModeProperty(bool n)
 {
 	StelDialog::updateNightModeProperty(n);
 	// It seems we cannot code a nightMode property for the QSizeGrip in the global QSS sheet :-(
-	QList<QSizeGrip*> grips=dialog->findChildren<QSizeGrip*>();
+	const QList<QSizeGrip*> grips=dialog->findChildren<QSizeGrip*>();
 	for (const auto &g: grips)
 	{
 		if (n)

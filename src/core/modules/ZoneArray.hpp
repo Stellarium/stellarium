@@ -92,7 +92,7 @@ public:
 	unsigned int getNrOfStars() const { return nr_of_stars; }
 
 	//! Dummy method that does nothing. See subclass implementation.
-	virtual void updateHipIndex(HipIndexStruct hipIndex[]) const {Q_UNUSED(hipIndex);}
+	virtual void updateHipIndex(HipIndexStruct hipIndex[]) const {Q_UNUSED(hipIndex)}
 
 	//! Pure virtual method. See subclass implementation.
 	virtual void searchAround(const StelCore* core, int index,const Vec3d &v,double cosLimFov,
@@ -211,7 +211,7 @@ public:
 
 	//! Add Hipparcos information for all stars in this catalog into @em hipIndex.
 	//! @param hipIndex array of Hipparcos info structs
-	void updateHipIndex(HipIndexStruct hipIndex[]) const;
+	void updateHipIndex(HipIndexStruct hipIndex[]) const Q_DECL_OVERRIDE;
 };
 
 #endif // ZONEARRAY_HPP

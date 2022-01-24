@@ -172,14 +172,14 @@ void AngleSpinBox::stepBy (int steps)
 	radAngle=qMax(radAngle, minRad);
 	formatText();
 	lineEdit()->setCursorPosition(cursorPos);
-	emit(valueChanged());
-	emit(valueChangedDeg(valueDegrees()));
-	emit(valueChangedRad(valueRadians()));
+	emit valueChanged();
+	emit valueChangedDeg(valueDegrees());
+	emit valueChangedRad(valueRadians());
 }
 
 QValidator::State AngleSpinBox::validate(QString& input, int& pos) const
 {
-    Q_UNUSED(pos);
+	Q_UNUSED(pos)
 	QValidator::State state;
 	stringToDouble(input, &state);
 	return state;
@@ -189,9 +189,9 @@ void AngleSpinBox::clear()
 {
 	radAngle = 0.0;
 	formatText();
-	emit(valueChanged());
-	emit(valueChangedDeg(valueDegrees()));
-	emit(valueChangedRad(valueRadians()));
+	emit valueChanged();
+	emit valueChangedDeg(valueDegrees());
+	emit valueChangedRad(valueRadians());
 }
 
 QAbstractSpinBox::StepEnabled AngleSpinBox::stepEnabled() const
@@ -350,9 +350,9 @@ void AngleSpinBox::updateValue(void)
 	radAngle=qMax(radAngle, minRad);
 
 	formatText();
-	emit(valueChanged());
-	emit(valueChangedDeg(valueDegrees()));
-	emit(valueChangedRad(valueRadians()));
+	emit valueChanged();
+	emit valueChangedDeg(valueDegrees());
+	emit valueChangedRad(valueRadians());
 }
 
 void AngleSpinBox::setRadians(double radians)

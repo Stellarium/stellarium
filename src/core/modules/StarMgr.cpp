@@ -170,7 +170,7 @@ double StarMgr::getCallOrder(StelModuleActionName actionName) const
 
 StarMgr::~StarMgr(void)
 {
-	for (auto* z : gridLevels)
+	for (auto* z : qAsConst(gridLevels))
 		delete z;
 	gridLevels.clear();
 	if (hipIndex)
@@ -235,7 +235,7 @@ QString StarMgr::getCrossIdentificationDesignations(QString hip)
 {
 	QStringList designations;
 	auto cr = crossIdMap.find(hip);
-	if (cr==crossIdMap.end() && hip.right(1).toUInt()==0)
+	if (cr==crossIdMap.end() && hip.rightRef(1).toUInt()==0)
 		cr = crossIdMap.find(hip.left(hip.size()-1));
 
 	if (cr!=crossIdMap.end())
@@ -455,7 +455,7 @@ void StarMgr::init()
 	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");   // Load pointer texture
 
 	StelApp::getInstance().getCore()->getGeodesicGrid(maxGeodesicGridLevel)->visitTriangles(maxGeodesicGridLevel,initTriangleFunc,this);
-	for (auto* z : gridLevels)
+	for (auto* z : qAsConst(gridLevels))
 		z->scaleAxis();
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
@@ -580,7 +580,7 @@ void StarMgr::setCheckFlag(const QString& catId, bool b)
 {
 	// Update the starConfigFileFullPath file to take into account that we now have a new catalog
 	int idx=0;
-	for (const auto& catV : catalogsDescription)
+	for (const auto& catV : qAsConst(catalogsDescription))
 	{
 		++idx;
 		QVariantMap m = catV.toMap();
@@ -621,7 +621,7 @@ void StarMgr::loadData(QVariantMap starsConfig)
 		hipIndex[i].z = Q_NULLPTR;
 		hipIndex[i].s = Q_NULLPTR;
 	}
-	for (auto* z : gridLevels)
+	for (auto* z : qAsConst(gridLevels))
 		z->updateHipIndex(hipIndex);
 
 	const QString cat_hip_sp_file_name = starsConfig.value("hipSpectralFile").toString();
@@ -1316,7 +1316,7 @@ void StarMgr::draw(StelCore* core)
 	RCMag rcmag_table[RCMAG_TABLE_SIZE];
 	
 	// Draw all the stars of all the selected zones
-	for (const auto* z : gridLevels)
+	for (const auto* z : qAsConst(gridLevels))
 	{
 		int limitMagIndex=RCMAG_TABLE_SIZE;
 		const float mag_min = 0.001f*z->mag_min;

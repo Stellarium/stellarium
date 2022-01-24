@@ -71,7 +71,7 @@ public:
 	MinMaxIntValidator(int min, int max, QObject *parent=Q_NULLPTR):
 		QIntValidator(min, max, parent){}
 
-	virtual void fixup(QString &input) const
+	virtual void fixup(QString &input) const Q_DECL_OVERRIDE
 	{
 		int allowed=qBound(bottom(), input.toInt(), top());
 		input.setNum(allowed);
@@ -201,29 +201,6 @@ void ConfigurationDialog::createDialogContent()
 	connectDoubleProperty(ui->aberrationSpinBox, "StelCore.aberrationFactor");
 	connectBoolProperty(ui->topocentricCheckBox, "StelCore.flagUseTopocentricCoordinates");
 
-	// Selected object info
-	if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::None))
-	{
-		ui->noSelectedInfoRadio->setChecked(true);
-	}
-	else if (gui->getInfoTextFilters() == StelObject::DefaultInfo)
-	{
-	    ui->defaultSelectedInfoRadio->setChecked(true);
-	}
-	else if (gui->getInfoTextFilters() == StelObject::ShortInfo)
-	{
-		ui->briefSelectedInfoRadio->setChecked(true);	
-	}
-	else if (gui->getInfoTextFilters() == StelObject::AllInfo)
-	{
-		ui->allSelectedInfoRadio->setChecked(true);
-	}
-	else
-	{
-		ui->customSelectedInfoRadio->setChecked(true);
-	}
-	updateSelectedInfoCheckBoxes();
-
 	// Additional settings for selected object info
 	connectBoolProperty(ui->checkBoxUMSurfaceBrightness, "NebulaMgr.flagSurfaceBrightnessArcsecUsage");
 	connectBoolProperty(ui->checkBoxUMShortNotationSurfaceBrightness, "NebulaMgr.flagSurfaceBrightnessShortNotationUsage");
@@ -231,12 +208,16 @@ void ConfigurationDialog::createDialogContent()
 	connectBoolProperty(ui->checkBoxUseCCSDesignations,  "StelApp.flagUseCCSDesignation");
 	connectBoolProperty(ui->overwriteTextColorCheckBox,  "StelApp.flagOverwriteInfoColor");
 
+	// Selected object info
+	updateSelectedInfoGui();
 	connect(ui->noSelectedInfoRadio, SIGNAL(released()), this, SLOT(setNoSelectedInfo()));
 	connect(ui->allSelectedInfoRadio, SIGNAL(released()), this, SLOT(setAllSelectedInfo()));
 	connect(ui->defaultSelectedInfoRadio, SIGNAL(released()), this, SLOT(setDefaultSelectedInfo()));
 	connect(ui->briefSelectedInfoRadio, SIGNAL(released()), this, SLOT(setBriefSelectedInfo()));
 	connect(ui->customSelectedInfoRadio, SIGNAL(released()), this, SLOT(setCustomSelectedInfo()));
 	connect(ui->buttonGroupDisplayedFields, SIGNAL(buttonClicked(int)), this, SLOT(setSelectedInfoFromCheckBoxes()));
+	if (appGui)
+		connect(appGui, SIGNAL(infoStringChanged()), this, SLOT(updateSelectedInfoGui()));
 	
 	// Navigation tab
 	// Startup time
@@ -325,9 +306,9 @@ void ConfigurationDialog::createDialogContent()
 	connectBoolProperty(ui->showFlipButtonsCheckbox,				"StelGui.flagShowFlipButtons");
 	connectBoolProperty(ui->showNebulaBgButtonCheckbox,			"StelGui.flagShowNebulaBackgroundButton");
 	
-    connectBoolProperty(ui->showObsListButtonCheckBox,	"StelGui.flagShowObsListButton");
+	connectBoolProperty(ui->showObsListButtonCheckBox,	"StelGui.flagShowObsListButton");
 	
-    connectBoolProperty(ui->showICRSGridButtonCheckBox,			"StelGui.flagShowICRSGridButton");
+	connectBoolProperty(ui->showICRSGridButtonCheckBox,			"StelGui.flagShowICRSGridButton");
 	connectBoolProperty(ui->showGalacticGridButtonCheckBox,		"StelGui.flagShowGalacticGridButton");
 	connectBoolProperty(ui->showEclipticGridButtonCheckBox,		"StelGui.flagShowEclipticGridButton");
 	connectBoolProperty(ui->showHipsButtonCheckBox,				"StelGui.flagShowHiPSButton");
@@ -541,6 +522,33 @@ void ConfigurationDialog::setSphericMirror(bool b)
 	}
 }
 
+void ConfigurationDialog::updateSelectedInfoGui()
+{
+	const StelObject::InfoStringGroup& flags = gui->getInfoTextFilters();
+	// Selected object info
+	if (flags == StelObject::InfoStringGroup(StelObject::None))
+	{
+		ui->noSelectedInfoRadio->setChecked(true);
+	}
+	else if (flags == StelObject::DefaultInfo)
+	{
+	    ui->defaultSelectedInfoRadio->setChecked(true);
+	}
+	else if (flags == StelObject::ShortInfo)
+	{
+		ui->briefSelectedInfoRadio->setChecked(true);
+	}
+	else if (flags == StelObject::AllInfo)
+	{
+		ui->allSelectedInfoRadio->setChecked(true);
+	}
+	else
+	{
+		ui->customSelectedInfoRadio->setChecked(true);
+	}
+	updateSelectedInfoCheckBoxes();
+}
+
 void ConfigurationDialog::setNoSelectedInfo()
 {
 	gui->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::None));
@@ -746,7 +754,7 @@ void ConfigurationDialog::selectScreenshotDir()
 	}
 	catch (std::runtime_error& e)
 	{
-		Q_UNUSED(e);
+		Q_UNUSED(e)
 		// nop
 		// this will happen when people are only half way through typing dirs
 	}
@@ -1242,7 +1250,7 @@ void ConfigurationDialog::populatePluginsList()
 
 void ConfigurationDialog::pluginsSelectionChanged(QListWidgetItem* item, QListWidgetItem* previousItem)
 {
-	Q_UNUSED(previousItem);
+	Q_UNUSED(previousItem)
 	const QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();
 	for (const auto& desc : pluginsList)
 	{
@@ -1471,10 +1479,10 @@ void ConfigurationDialog::updateStarCatalogControlsText()
 		{
 			const QVariantList& magRange = nextStarCatalogToDownload.value("magRange").toList();
 			ui->downloadLabel->setText(q_("Download size: %1MB\nStar count: %2 Million\nMagnitude range: %3 - %4")
-				.arg(nextStarCatalogToDownload.value("sizeMb").toString())
-				.arg(QString::number(nextStarCatalogToDownload.value("count").toDouble(), 'f', 1))
-				.arg(magRange.first().toString())
-				.arg(magRange.last().toString()));
+				.arg(nextStarCatalogToDownload.value("sizeMb").toString(),
+				     QString::number(nextStarCatalogToDownload.value("count").toDouble(), 'f', 1),
+				     magRange.first().toString(),
+				     magRange.last().toString()));
 		}
 	}
 }
@@ -1516,7 +1524,7 @@ void ConfigurationDialog::downloadStars()
 		qWarning() << "Can't open a writable file for storing new star catalog: " << QDir::toNativeSeparators(path);
 		currentDownloadFile->deleteLater();
 		currentDownloadFile = Q_NULLPTR;
-		ui->downloadLabel->setText(q_("Error downloading %1:\n%2").arg(nextStarCatalogToDownload.value("id").toString()).arg(QString("Can't open a writable file for storing new star catalog: %1").arg(path)));
+		ui->downloadLabel->setText(q_("Error downloading %1:\n%2").arg(nextStarCatalogToDownload.value("id").toString(), QString("Can't open a writable file for storing new star catalog: %1").arg(path)));
 		ui->downloadRetryButton->setVisible(true);
 		return;
 	}
@@ -1553,7 +1561,7 @@ void ConfigurationDialog::downloadError(QNetworkReply::NetworkError)
 
 	isDownloadingStarCatalog = false;
 	qWarning() << "Error downloading file" << starCatalogDownloadReply->url() << ": " << starCatalogDownloadReply->errorString();
-	ui->downloadLabel->setText(q_("Error downloading %1:\n%2").arg(nextStarCatalogToDownload.value("id").toString()).arg(starCatalogDownloadReply->errorString()));
+	ui->downloadLabel->setText(q_("Error downloading %1:\n%2").arg(nextStarCatalogToDownload.value("id").toString(), starCatalogDownloadReply->errorString()));
 	ui->downloadCancelButton->setVisible(false);
 	ui->downloadRetryButton->setVisible(true);
 	ui->getStarsButton->setVisible(false);

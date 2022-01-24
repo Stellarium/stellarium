@@ -81,7 +81,7 @@ QString BalinesePawukonCalendar::getFormattedDateString() const
 	QString str;
 	for (int i=1; i<=10; i++)
 	{
-		str.append(QString("%1:%2 (%3) ").arg(QString::number(i)).arg(QString::number(parts.at(i-1))).arg(dateStrings.at(i-1)));
+		str.append(QString("%1:%2 (%3) ").arg(QString::number(i), QString::number(parts.at(i-1)), dateStrings.at(i-1)));
 	}
 	return str;
 }
@@ -95,7 +95,7 @@ QString BalinesePawukonCalendar::getFormattedDateString1to5() const
 	if (str.length()>0) str.append(" ");
 	for (int i=2; i<=5; i++)
 	{
-		str.append(QString("%1:%2 (%3) ").arg(QString::number(i)).arg(QString::number(parts.at(i-1))).arg(dateStrings.at(i-1)));
+		str.append(QString("%1:%2 (%3) ").arg(QString::number(i), QString::number(parts.at(i-1)), dateStrings.at(i-1)));
 	}
 	return str;
 }
@@ -107,7 +107,7 @@ QString BalinesePawukonCalendar::getFormattedDateString6to10() const
 	QString str;
 	for (int i=6; i<=10; i++)
 	{
-		str.append(QString("%1:%2 (%3) ").arg(QString::number(i)).arg(QString::number(parts.at(i-1))).arg(dateStrings.at(i-1)));
+		str.append(QString("%1:%2 (%3) ").arg(QString::number(i), QString::number(parts.at(i-1)), dateStrings.at(i-1)));
 	}
 	return str;
 }

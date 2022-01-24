@@ -178,7 +178,7 @@ void Satellites::init()
 	}
 
 	// If the json file does not already exist, create it from the resource in the Qt resource
-	if(QFileInfo(catalogPath).exists())
+	if(QFileInfo::exists(catalogPath))
 	{
 		if (!checkJsonFileFormat() || readCatalogVersion() != SatellitesCatalogVersion)
 		{
@@ -291,7 +291,7 @@ bool Satellites::backupCatalog(bool deleteOriginal)
 	}
 
 	QString backupPath = catalogPath + ".old";
-	if (QFileInfo(backupPath).exists())
+	if (QFileInfo::exists(backupPath))
 		QFile(backupPath).remove();
 
 	if (old.copy(backupPath))
@@ -693,7 +693,7 @@ void Satellites::restoreDefaultSettings()
 
 void Satellites::restoreDefaultCatalog()
 {
-	if (QFileInfo(catalogPath).exists())
+    if (QFileInfo::exists(catalogPath))
 		backupCatalog(true);
 
 	QFile src(":/satellites/satellites.json");
@@ -1576,7 +1576,7 @@ void Satellites::updateFromOnlineSources()
 	}
 
 	updateState = Satellites::Updating;
-	emit(updateStateChanged(updateState));
+	emit updateStateChanged(updateState);
 	updateSources.clear();
 	numberDownloadsComplete = 0;
 
@@ -1785,7 +1785,7 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	{
 		qWarning() << "[Satellites] update files contain no TLE sets!";
 		updateState = OtherError;
-		emit(updateStateChanged(updateState));
+		emit updateStateChanged(updateState);
 		return;
 	}
 	
@@ -1905,8 +1905,8 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	         << missingCount << "missing or removed."
 	         << sourceCount << "source entries parsed.";
 
-	emit(updateStateChanged(updateState));
-	emit(tleUpdateComplete(updatedCount, totalCount, addedCount, missingCount));
+	emit updateStateChanged(updateState);
+	emit tleUpdateComplete(updatedCount, totalCount, addedCount, missingCount);
 }
 
 void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFlagValue, const QString &tleURL)

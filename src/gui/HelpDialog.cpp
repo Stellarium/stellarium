@@ -213,7 +213,7 @@ void HelpDialog::downloadComplete(QNetworkReply *reply)
 	reply->deleteLater();
 	downloadReply = Q_NULLPTR;
 
-	emit(checkUpdatesComplete());
+	emit checkUpdatesComplete();
 }
 
 void HelpDialog::showShortcutsWindow()
@@ -305,7 +305,7 @@ void HelpDialog::updateHelpText(void) const
 	// Append all StelAction shortcuts.
 	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
 	typedef QPair<QString, QString> KeyDescription;
-	QList<KeyDescription> groups;
+	QVector<KeyDescription> groups;
 	for (const auto &group : actionMgr->getGroupList())
 	{
 		groups.append(KeyDescription(q_(group), group));
@@ -314,7 +314,7 @@ void HelpDialog::updateHelpText(void) const
 	std::sort(groups.begin(), groups.end());
 	for (const auto &group : groups)
 	{
-		QList<KeyDescription> descriptions;
+		QVector<KeyDescription> descriptions;
 		for (auto* action : actionMgr->getActionList(group.second))
 		{
 			if (action->getShortcut().isEmpty())
@@ -449,7 +449,7 @@ void HelpDialog::updateAboutText(void) const
 		     "Alexey Sokolov", "Paul Krizak", "ChrUnger", "Minmin Gong", "Andy Kirkham",
 		     "Michael Dickens",  "Patrick (zero0cool0)", "Martín Bernardi", "Sebastian Garcia",
 		     "Wolfgang Laun", "Alexandros Kosiaris", "Alexander Duytschaever", "Jocelyn Girod",
-	"Atque"});
+		     "Atque", "Worachate Boonplod"});
 	contributors.sort();
 
 	// Regexp to replace {text} with an HTML link.

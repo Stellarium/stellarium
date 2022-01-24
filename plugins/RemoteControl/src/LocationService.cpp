@@ -123,7 +123,7 @@ void LocationService::get(const QByteArray& operation, const APIParameters &para
 
 void LocationService::post(const QByteArray& operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response)
 {
-	Q_UNUSED(data);
+	Q_UNUSED(data)
 
 	if (operation == "setlocationfields")
 	{

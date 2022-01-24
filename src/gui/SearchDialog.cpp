@@ -1085,14 +1085,14 @@ void SearchDialog::onSimbadStatusChanged()
 	QString info;
 	if (simbadReply->getCurrentStatus()==SimbadLookupReply::SimbadLookupErrorOccured)
 	{
-		info = QString("%1: %2").arg(q_("Simbad Lookup Error")).arg(simbadReply->getErrorString());
+		info = QString("%1: %2").arg(q_("Simbad Lookup Error"), simbadReply->getErrorString());
 		index==1 ? ui->simbadCooStatusLabel->setText(info) : ui->simbadStatusLabel->setText(info);
 		setPushButtonGotoSearch();
 		ui->simbadCooResultsTextBrowser->clear();
 	}
 	else
 	{
-		info = QString("%1: %2").arg(q_("Simbad Lookup")).arg(simbadReply->getCurrentStatusString());
+		info = QString("%1: %2").arg(q_("Simbad Lookup"), simbadReply->getCurrentStatusString());
 		index==1 ? ui->simbadCooStatusLabel->setText(info) : ui->simbadStatusLabel->setText(info);
 		// Query not over, don't disable button
 		ui->pushButtonGotoSearchSkyObject->setEnabled(true);

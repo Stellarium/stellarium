@@ -73,9 +73,39 @@
        <widget class="QLabel" name="stelWindowTitle">
         <property name="palette">
          <palette>
-          <active/>
-          <inactive/>
-          <disabled/>
+          <active>
+           <colorrole role="Text">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>49</red>
+              <green>54</green>
+              <blue>59</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </active>
+          <inactive>
+           <colorrole role="Text">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>49</red>
+              <green>54</green>
+              <blue>59</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </inactive>
+          <disabled>
+           <colorrole role="Text">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>119</red>
+              <green>120</green>
+              <blue>120</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </disabled>
          </palette>
         </property>
         <property name="font">
@@ -161,7 +191,7 @@
         <item row="3" column="0">
          <widget class="QLabel" name="label_skylightDecimals">
           <property name="text">
-           <string>switch parameters below by </string>
+           <string>switch parameters below by</string>
           </property>
          </widget>
         </item>
@@ -229,49 +259,72 @@
        </layout>
       </item>
       <item>
-       <widget class="QLabel" name="label_35">
-        <property name="text">
-         <string>zenithLum=zenithY = (4.0453T  - 4.9710) tan &amp;chi;  -  0.2155T + 2.4192 kcd/m² ; &amp;chi;=(4/9-T/120)(&amp;pi;-2&amp;theta;&lt;sub&gt;s&lt;/sub&gt;)   [Preetham]</string>
-        </property>
-        <property name="textFormat">
-         <enum>Qt::RichText</enum>
-        </property>
-       </widget>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QLabel" name="label_35">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string notr="true">zenithLum=zenithY = (4.0453T  - 4.9710) tan &amp;chi;  -  0.2155T + 2.4192 kcd/m² ; &amp;chi;=(4/9-T/120)(&amp;pi;-2&amp;theta;&lt;sub&gt;s&lt;/sub&gt;) </string>
+          </property>
+          <property name="textFormat">
+           <enum>Qt::AutoText</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_22">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>[Preetham]</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
        <layout class="QGridLayout" name="gridLayout_zenithXY">
         <item row="1" column="0">
          <widget class="QLabel" name="label_24">
           <property name="text">
-           <string>zenithColorX=</string>
+           <string notr="true">zenithColorX=</string>
           </property>
          </widget>
         </item>
         <item row="10" column="0">
          <widget class="QLabel" name="label_th3">
           <property name="text">
-           <string> theta³</string>
+           <string notr="true"> theta³</string>
           </property>
          </widget>
         </item>
         <item row="10" column="1">
          <widget class="QLabel" name="label_th2">
           <property name="text">
-           <string>theta²</string>
+           <string notr="true">theta²</string>
           </property>
          </widget>
         </item>
         <item row="10" column="2">
          <widget class="QLabel" name="label_th1">
           <property name="text">
-           <string>theta</string>
+           <string notr="true">theta</string>
           </property>
          </widget>
         </item>
         <item row="10" column="3">
          <widget class="QLabel" name="label_th0">
           <property name="text">
-           <string>1</string>
+           <string notr="true">1</string>
           </property>
          </widget>
         </item>
@@ -335,28 +388,28 @@
         <item row="3" column="4">
          <widget class="QLabel" name="label_26">
           <property name="text">
-           <string>T²</string>
+           <string notr="true">T²</string>
           </property>
          </widget>
         </item>
         <item row="4" column="4">
          <widget class="QLabel" name="label_25">
           <property name="text">
-           <string>T</string>
+           <string notr="true">T</string>
           </property>
          </widget>
         </item>
         <item row="5" column="4">
          <widget class="QLabel" name="label_27">
           <property name="text">
-           <string>1</string>
+           <string notr="true">1</string>
           </property>
          </widget>
         </item>
         <item row="6" column="0">
          <widget class="QLabel" name="label_zCY">
           <property name="text">
-           <string>zenithColorY=</string>
+           <string notr="true">zenithColorY=</string>
           </property>
          </widget>
         </item>
@@ -458,21 +511,21 @@
         <item row="7" column="4">
          <widget class="QLabel" name="label_26a">
           <property name="text">
-           <string>T²</string>
+           <string notr="true">T²</string>
           </property>
          </widget>
         </item>
         <item row="8" column="4">
          <widget class="QLabel" name="label_25a">
           <property name="text">
-           <string>T</string>
+           <string notr="true">T</string>
           </property>
          </widget>
         </item>
         <item row="9" column="4">
          <widget class="QLabel" name="label_27a">
           <property name="text">
-           <string>1</string>
+           <string notr="true">1</string>
           </property>
          </widget>
         </item>
@@ -773,14 +826,37 @@
        </layout>
       </item>
       <item>
-       <widget class="QLabel" name="label_34">
-        <property name="text">
-         <string>F(&amp;theta;; &amp;gamma;) = (1+Ae&lt;sup&gt;B/cos &amp;theta;&lt;/sup&gt;)(1 + Ce&lt;sup&gt;Dg&lt;/sup&gt; + E cos² &amp;gamma; ) --- YP = Yz   F(&amp;theta;; &amp;gamma;) /  F(0; &amp;theta;&lt;sub&gt;s&lt;/sub&gt;)   with zenith angle &amp;theta;, solar zenith angle &amp;theta;&lt;sub&gt;s&lt;/sub&gt;, solar angle &amp;gamma;</string>
-        </property>
-        <property name="textFormat">
-         <enum>Qt::RichText</enum>
-        </property>
-       </widget>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QLabel" name="label_34">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string notr="true">F(&amp;theta;; &amp;gamma;) = (1+Ae&lt;sup&gt;B/cos &amp;theta;&lt;/sup&gt;)(1 + Ce&lt;sup&gt;Dg&lt;/sup&gt; + E cos² &amp;gamma; ) --- YP = Yz   F(&amp;theta;; &amp;gamma;) /  F(0; &amp;theta;&lt;sub&gt;s&lt;/sub&gt;) </string>
+          </property>
+          <property name="textFormat">
+           <enum>Qt::AutoText</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_23">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>with zenith angle &amp;theta;, solar zenith angle &amp;theta;&lt;sub&gt;s&lt;/sub&gt;, solar angle &amp;gamma;</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
        <layout class="QGridLayout" name="gridLayout">
@@ -809,14 +885,14 @@
         <item row="0" column="1">
          <widget class="QLabel" name="label">
           <property name="text">
-           <string>* T</string>
+           <string notr="true">* T</string>
           </property>
          </widget>
         </item>
         <item row="1" column="0">
          <widget class="QLabel" name="label_2">
           <property name="text">
-           <string>AY=</string>
+           <string notr="true">AY=</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -826,7 +902,7 @@
         <item row="3" column="0">
          <widget class="QLabel" name="label_5">
           <property name="text">
-           <string>CY=</string>
+           <string notr="true">CY=</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -836,7 +912,7 @@
         <item row="4" column="0">
          <widget class="QLabel" name="label_6">
           <property name="text">
-           <string>DY=</string>
+           <string notr="true">DY=</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -846,7 +922,7 @@
         <item row="5" column="0">
          <widget class="QLabel" name="label_7">
           <property name="text">
-           <string>EY=</string>
+           <string notr="true">EY=</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -856,7 +932,7 @@
         <item row="1" column="3">
          <widget class="QLabel" name="label_8">
           <property name="text">
-           <string>Ax=</string>
+           <string notr="true">Ax=</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -866,7 +942,7 @@
         <item row="2" column="3">
          <widget class="QLabel" name="label_9">
           <property name="text">
-           <string>Bx=</string>
+           <string notr="true">Bx=</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -876,7 +952,7 @@
         <item row="3" column="3">
          <widget class="QLabel" name="label_10">
           <property name="text">
-           <string>Cx=</string>
+           <string notr="true">Cx=</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -886,7 +962,7 @@
         <item row="4" column="3">
          <widget class="QLabel" name="label_11">
           <property name="text">
-           <string>Dx=</string>
+           <string notr="true">Dx=</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1204,7 +1280,7 @@
         <item row="5" column="3">
          <widget class="QLabel" name="label_12">
           <property name="text">
-           <string>Ex=</string>
+           <string notr="true">Ex=</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1478,14 +1554,14 @@
         <item row="0" column="2">
          <widget class="QLabel" name="label_3">
           <property name="text">
-           <string>+ const</string>
+           <string notr="true">+ const</string>
           </property>
          </widget>
         </item>
         <item row="2" column="0">
          <widget class="QLabel" name="label_4">
           <property name="text">
-           <string>BY=</string>
+           <string notr="true">BY=</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1561,7 +1637,7 @@
         <item row="1" column="6">
          <widget class="QLabel" name="label_13">
           <property name="text">
-           <string>Ay=</string>
+           <string notr="true">Ay=</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1571,7 +1647,7 @@
         <item row="2" column="6">
          <widget class="QLabel" name="label_14">
           <property name="text">
-           <string>By=</string>
+           <string notr="true">By=</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1581,7 +1657,7 @@
         <item row="3" column="6">
          <widget class="QLabel" name="label_15">
           <property name="text">
-           <string>Cy=</string>
+           <string notr="true">Cy=</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1591,7 +1667,7 @@
         <item row="4" column="6">
          <widget class="QLabel" name="label_16">
           <property name="text">
-           <string>Dy=</string>
+           <string notr="true">Dy=</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1601,7 +1677,7 @@
         <item row="5" column="6">
          <widget class="QLabel" name="label_17">
           <property name="text">
-           <string>Ey=</string>
+           <string notr="true">Ey=</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1611,28 +1687,28 @@
         <item row="0" column="4">
          <widget class="QLabel" name="label_18">
           <property name="text">
-           <string>* T</string>
+           <string notr="true">* T</string>
           </property>
          </widget>
         </item>
         <item row="0" column="5">
          <widget class="QLabel" name="label_19">
           <property name="text">
-           <string>+ const</string>
+           <string notr="true">+ const</string>
           </property>
          </widget>
         </item>
         <item row="0" column="7">
          <widget class="QLabel" name="label_20">
           <property name="text">
-           <string>* T</string>
+           <string notr="true">* T</string>
           </property>
          </widget>
         </item>
         <item row="0" column="8">
          <widget class="QLabel" name="label_21">
           <property name="text">
-           <string>+ const</string>
+           <string notr="true">+ const</string>
           </property>
          </widget>
         </item>

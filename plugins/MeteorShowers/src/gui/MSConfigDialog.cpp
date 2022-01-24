@@ -162,52 +162,52 @@ void MSConfigDialog::refreshUpdateTab()
 
 void MSConfigDialog::refreshMarkersColor()
 {
-	Vec3f c = m_mgr->getColorARG();
+	Vec3d c = m_mgr->getColorARG().toVec3d();
 	QColor color(QColor::fromRgbF(c[0], c[1], c[2]));
 	m_ui->setColorARG->setStyleSheet("background-color:" + color.name() + ";");
 
-	c = m_mgr->getColorARC();
+	c = m_mgr->getColorARC().toVec3d();
 	color = QColor(QColor::fromRgbF(c[0], c[1], c[2]));
 	m_ui->setColorARC->setStyleSheet("background-color:" + color.name() + ";");
 
-	c = m_mgr->getColorIR();
+	c = m_mgr->getColorIR().toVec3d();
 	color = QColor(QColor::fromRgbF(c[0], c[1], c[2]));
 	m_ui->setColorIR->setStyleSheet("background-color:" + color.name() + ";");
 }
 
 void MSConfigDialog::setColorARG()
 {
-	Vec3f c = m_mgr->getColorARG();
+	Vec3d c = m_mgr->getColorARG().toVec3d();
 	QColor color(QColor::fromRgbF(c[0], c[1], c[2]));
-    color = QColorDialog::getColor(color,&StelMainView::getInstance());
+	color = QColorDialog::getColor(color,&StelMainView::getInstance());
 	if (color.isValid())
 	{
 		m_ui->setColorARG->setStyleSheet("background-color:" + color.name() + ";");
-		m_mgr->setColorARG(Vec3f(color.redF(), color.greenF(), color.blueF()));
+		m_mgr->setColorARG(Vec3f(static_cast<float>(color.redF()), static_cast<float>(color.greenF()), static_cast<float>(color.blueF())));
 	}
 }
 
 void MSConfigDialog::setColorARC()
 {
-	Vec3f c = m_mgr->getColorARC();
+	Vec3d c = m_mgr->getColorARC().toVec3d();
 	QColor color(QColor::fromRgbF(c[0], c[1], c[2]));
     color = QColorDialog::getColor(color,&StelMainView::getInstance());
 	if (color.isValid())
 	{
 		m_ui->setColorARC->setStyleSheet("background-color:" + color.name() + ";");
-		m_mgr->setColorARC(Vec3f(color.redF(), color.greenF(), color.blueF()));
+		m_mgr->setColorARC(Vec3f(static_cast<float>(color.redF()), static_cast<float>(color.greenF()), static_cast<float>(color.blueF())));
 	}
 }
 
 void MSConfigDialog::setColorIR()
 {
-	Vec3f c = m_mgr->getColorIR();
+	Vec3d c = m_mgr->getColorIR().toVec3d();
 	QColor color(QColor::fromRgbF(c[0], c[1], c[2]));
-    color = QColorDialog::getColor(color,&StelMainView::getInstance());
+	color = QColorDialog::getColor(color,&StelMainView::getInstance());
 	if (color.isValid())
 	{
 		m_ui->setColorIR->setStyleSheet("background-color:" + color.name() + ";");
-		m_mgr->setColorIR(Vec3f(color.redF(), color.greenF(), color.blueF()));
+		m_mgr->setColorIR(Vec3f(static_cast<float>(color.redF()), static_cast<float>(color.greenF()), static_cast<float>(color.blueF())));
 	}
 }
 
@@ -319,9 +319,9 @@ void MSConfigDialog::setAboutHtml()
 	"<p>" + q_("Info about meteor showers you can get here:") + "</p>"
 	"<ul>"
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	"<li>" + QString(q_("%1Meteor shower%2 - article in Wikipedia").arg("<a href=\"https://en.wikipedia.org/wiki/Meteor_Showers\">")).arg("</a>") + "</li>"
+	"<li>" + QString(q_("%1Meteor shower%2 - article in Wikipedia")).arg("<a href=\"https://en.wikipedia.org/wiki/Meteor_Showers\">", "</a>") + "</li>"
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	"<li>" + QString(q_("%1International Meteor Organization%2").arg("<a href=\"http://www.imo.net/\">")).arg("</a>") + "</li>"
+	"<li>" + QString(q_("%1International Meteor Organization%2")).arg("<a href=\"http://www.imo.net/\">", "</a>") + "</li>"
 	"</ul>";
 
 	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Meteor Showers plugin");

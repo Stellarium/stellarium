@@ -128,7 +128,7 @@ public:
 	virtual bool configureGui(bool show=true) Q_DECL_OVERRIDE;
 
 signals:
-	void downloadStatusChanged(DownloadStatus);
+	void downloadStatusChanged(MeteorShowersMgr::DownloadStatus);
 	void enablePluginChanged(bool b);
 	void enableLabelsChanged(bool b);
 

@@ -146,7 +146,7 @@ gTimeSpan gTime::getTimeToUTC()
 	gTimeSpan tUTCDiff;
 
 	int delta_h = lcl.tm_hour - utc.tm_hour;
-	tUTCDiff = (time_t) delta_h*3600;
+	tUTCDiff = static_cast<time_t>(delta_h)*3600;
 
 	return(tUTCDiff);
 }

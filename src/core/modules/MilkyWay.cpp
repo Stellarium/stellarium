@@ -168,7 +168,7 @@ void MilkyWay::draw(StelCore* core)
 	// We compute a float 1..9 from Bortle index and atmosphere display value (allows smooth fade when switching)
 	float atmFadeIntensity = GETSTELMODULE(LandscapeMgr)->getAtmosphereFadeIntensity();
 	int bortle=drawer->getBortleScaleIndex();
-	float bortleIntensity = 1.f+ (bortle-1)*atmFadeIntensity; // Bortle index moderated by atmosphere fader.
+	float bortleIntensity = 1.f+ static_cast<float>(bortle-1)*atmFadeIntensity; // Bortle index moderated by atmosphere fader.
 	//aLum*=(11.0f-bortle)*0.1f;
 
 	float lum = drawer->surfaceBrightnessToLuminance(12.f+0.15f*bortleIntensity); // was 11.5; Source? How to calibrate the new texture?

@@ -100,10 +100,9 @@ class SolarSystem : public StelObjectModule
 	Q_PROPERTY(bool ephemerisScaleMarkersDisplayed	READ getFlagEphemerisScaleMarkers	WRITE setFlagEphemerisScaleMarkers	NOTIFY ephemerisScaleMarkersChanged)
 	Q_PROPERTY(bool ephemerisAlwaysOn		READ getFlagEphemerisAlwaysOn		WRITE setFlagEphemerisAlwaysOn		NOTIFY ephemerisAlwaysOnChanged)
 	// Great Red Spot (GRS) properties
-	Q_PROPERTY(bool flagCustomGrsSettings		READ getFlagCustomGrsSettings		WRITE setFlagCustomGrsSettings		NOTIFY flagCustomGrsSettingsChanged)
-	Q_PROPERTY(int customGrsLongitude		READ getCustomGrsLongitude		WRITE setCustomGrsLongitude		NOTIFY customGrsLongitudeChanged)
-	Q_PROPERTY(double customGrsDrift		READ getCustomGrsDrift			WRITE setCustomGrsDrift			NOTIFY customGrsDriftChanged)
-	Q_PROPERTY(double customGrsJD			READ getCustomGrsJD			WRITE setCustomGrsJD			NOTIFY customGrsJDChanged)
+	Q_PROPERTY(int grsLongitude			READ getGrsLongitude			WRITE setGrsLongitude			NOTIFY grsLongitudeChanged)
+	Q_PROPERTY(double grsDrift			READ getGrsDrift			WRITE setGrsDrift			NOTIFY grsDriftChanged)
+	Q_PROPERTY(double grsJD				READ getGrsJD				WRITE setGrsJD				NOTIFY grsJDChanged)
 	// Eclipse algorithm properties
 	Q_PROPERTY(bool earthShadowEnlargementDanjon    READ getFlagEarthShadowEnlargementDanjon    WRITE setFlagEarthShadowEnlargementDanjon   NOTIFY earthShadowEnlargementDanjonChanged)
 	// Colors
@@ -676,30 +675,25 @@ public slots:
 	//! Get the current value of the flag which enables showing of solar corona when atmosphere is disabled or when total solar eclipses is happened only.
 	bool getFlagPermanentSolarCorona(void) const { return flagPermanentSolarCorona; }
 
-	//! Set flag which determines if custom settings is using for Great Red Spot on Jupiter
-	void setFlagCustomGrsSettings(bool b);
-	//! Get the current value of the flag which determines if custom settings for Great Red Spot on Jupiter is used or not.
-	bool getFlagCustomGrsSettings() const;
-
 	//! Set longitude of Great Red Spot (System II is used)
 	//! @param longitude (degrees)
-	void setCustomGrsLongitude(int longitude);
+	void setGrsLongitude(int longitude);
 	//! Get longitude of Great Red Spot (System II is used)
 	//! @return a longitude (degrees)
-	int getCustomGrsLongitude() const;
+	int getGrsLongitude() const;
 
 	//! Set speed of annual drift for Great Red Spot (System II is used)
 	//! @param annual drift (degrees)
-	void setCustomGrsDrift(double drift);
+	void setGrsDrift(double drift);
 	//! Get speed of annual drift for Great Red Spot (System II is used)
-	double getCustomGrsDrift() const;
+	double getGrsDrift() const;
 
 	//! Set initial JD for calculation of position of Great Red Spot
 	//! @param JD
 	// TODO (GZ): Clarify whether this is JD or rather JDE?
-	void setCustomGrsJD(double JD);
+	void setGrsJD(double JD);
 	//! Get initial JD for calculation of position of Great Red Spot
-	double getCustomGrsJD();
+	double getGrsJD();
 
 	//! Set whether earth shadow should be enlarged following Danjon's method
 	void setFlagEarthShadowEnlargementDanjon(bool b);
@@ -786,48 +780,47 @@ signals:
 	void ephemerisDataLimitChanged(int s);
 	void ephemerisSmartDatesChanged(bool b);
 	void ephemerisScaleMarkersChanged(bool b);
-	void flagCustomGrsSettingsChanged(bool b);
-	void customGrsLongitudeChanged(int l);
-	void customGrsDriftChanged(double drift);
-	void customGrsJDChanged(double JD);
+	void grsLongitudeChanged(int l);
+	void grsDriftChanged(double drift);
+	void grsJDChanged(double JD);
 	void earthShadowEnlargementDanjonChanged(bool b);
 	void flagPermanentSolarCoronaChanged(bool b);
 
-	void labelsColorChanged(const Vec3f & color) const;
-	void pointerColorChanged(const Vec3f & color) const;
-	void trailsColorChanged(const Vec3f & color) const;
-	void orbitsColorChanged(const Vec3f & color) const;
-	void nomenclatureColorChanged(const Vec3f & color) const;
-	void majorPlanetsOrbitsColorChanged(const Vec3f & color) const;
-	void minorPlanetsOrbitsColorChanged(const Vec3f & color) const;
-	void dwarfPlanetsOrbitsColorChanged(const Vec3f & color) const;
-	void moonsOrbitsColorChanged(const Vec3f & color) const;
-	void cubewanosOrbitsColorChanged(const Vec3f & color) const;
-	void plutinosOrbitsColorChanged(const Vec3f & color) const;
-	void scatteredDiskObjectsOrbitsColorChanged(const Vec3f & color) const;
-	void oortCloudObjectsOrbitsColorChanged(const Vec3f & color) const;
-	void cometsOrbitsColorChanged(const Vec3f & color) const;
-	void sednoidsOrbitsColorChanged(const Vec3f & color) const;
-	void interstellarOrbitsColorChanged(const Vec3f & color) const;
-	void mercuryOrbitColorChanged(const Vec3f & color) const;
-	void venusOrbitColorChanged(const Vec3f & color) const;
-	void earthOrbitColorChanged(const Vec3f & color) const;
-	void marsOrbitColorChanged(const Vec3f & color) const;
-	void jupiterOrbitColorChanged(const Vec3f & color) const;
-	void saturnOrbitColorChanged(const Vec3f & color) const;
-	void uranusOrbitColorChanged(const Vec3f & color) const;
-	void neptuneOrbitColorChanged(const Vec3f & color) const;
-	void ephemerisGenericMarkerColorChanged(const Vec3f & color) const;
-	void ephemerisSecondaryMarkerColorChanged(const Vec3f & color) const;
-	void ephemerisSelectedMarkerColorChanged(const Vec3f & color) const;
-	void ephemerisMercuryMarkerColorChanged(const Vec3f & color) const;
-	void ephemerisVenusMarkerColorChanged(const Vec3f & color) const;
-	void ephemerisMarsMarkerColorChanged(const Vec3f & color) const;
-	void ephemerisJupiterMarkerColorChanged(const Vec3f & color) const;
-	void ephemerisSaturnMarkerColorChanged(const Vec3f & color) const;
+	void labelsColorChanged(const Vec3f & color);
+	void pointerColorChanged(const Vec3f & color);
+	void trailsColorChanged(const Vec3f & color);
+	void orbitsColorChanged(const Vec3f & color);
+	void nomenclatureColorChanged(const Vec3f & color);
+	void majorPlanetsOrbitsColorChanged(const Vec3f & color);
+	void minorPlanetsOrbitsColorChanged(const Vec3f & color);
+	void dwarfPlanetsOrbitsColorChanged(const Vec3f & color);
+	void moonsOrbitsColorChanged(const Vec3f & color);
+	void cubewanosOrbitsColorChanged(const Vec3f & color);
+	void plutinosOrbitsColorChanged(const Vec3f & color);
+	void scatteredDiskObjectsOrbitsColorChanged(const Vec3f & color);
+	void oortCloudObjectsOrbitsColorChanged(const Vec3f & color);
+	void cometsOrbitsColorChanged(const Vec3f & color);
+	void sednoidsOrbitsColorChanged(const Vec3f & color);
+	void interstellarOrbitsColorChanged(const Vec3f & color);
+	void mercuryOrbitColorChanged(const Vec3f & color);
+	void venusOrbitColorChanged(const Vec3f & color);
+	void earthOrbitColorChanged(const Vec3f & color);
+	void marsOrbitColorChanged(const Vec3f & color);
+	void jupiterOrbitColorChanged(const Vec3f & color);
+	void saturnOrbitColorChanged(const Vec3f & color);
+	void uranusOrbitColorChanged(const Vec3f & color);
+	void neptuneOrbitColorChanged(const Vec3f & color);
+	void ephemerisGenericMarkerColorChanged(const Vec3f & color);
+	void ephemerisSecondaryMarkerColorChanged(const Vec3f & color);
+	void ephemerisSelectedMarkerColorChanged(const Vec3f & color);
+	void ephemerisMercuryMarkerColorChanged(const Vec3f & color);
+	void ephemerisVenusMarkerColorChanged(const Vec3f & color);
+	void ephemerisMarsMarkerColorChanged(const Vec3f & color);
+	void ephemerisJupiterMarkerColorChanged(const Vec3f & color);
+	void ephemerisSaturnMarkerColorChanged(const Vec3f & color);
 
-	void orbitColorStyleChanged(QString style) const;
-	void apparentMagnitudeAlgorithmOnEarthChanged(QString algorithm) const;
+	void orbitColorStyleChanged(QString style);
+	void apparentMagnitudeAlgorithmOnEarthChanged(QString algorithm);
 
 	void solarSystemDataReloaded();
 	void requestEphemerisVisualization();

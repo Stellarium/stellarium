@@ -24,6 +24,7 @@
 #include "StelGui.hpp"
 #include "StelCore.hpp"
 #include "StelMainView.hpp"
+#include "StelModuleMgr.hpp"
 #include <QGraphicsView>
 #include <QDebug>
 #include <QTimeLine>
@@ -52,58 +53,7 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent),
 	}
 	else if (objectInfo == "custom")
 	{
-		infoTextFilters = StelObject::InfoStringGroup(StelObject::None);
-		
-		conf->beginGroup("custom_selected_info");
-		if (conf->value("flag_show_name", false).toBool())
-			infoTextFilters |= StelObject::Name;
-		if (conf->value("flag_show_catalognumber", false).toBool())
-			infoTextFilters |= StelObject::CatalogNumber;
-		if (conf->value("flag_show_magnitude", false).toBool())
-			infoTextFilters |= StelObject::Magnitude;
-		if (conf->value("flag_show_absolutemagnitude", false).toBool())
-			infoTextFilters |= StelObject::AbsoluteMagnitude;
-		if (conf->value("flag_show_radecj2000", false).toBool())
-			infoTextFilters |= StelObject::RaDecJ2000;
-		if (conf->value("flag_show_radecofdate", false).toBool())
-			infoTextFilters |= StelObject::RaDecOfDate;
-		if (conf->value("flag_show_hourangle", false).toBool())
-			infoTextFilters |= StelObject::HourAngle;
-		if (conf->value("flag_show_altaz", false).toBool())
-			infoTextFilters |= StelObject::AltAzi;
-		if (conf->value("flag_show_elongation", false).toBool())
-			infoTextFilters |= StelObject::Elongation;
-		if (conf->value("flag_show_distance", false).toBool())
-			infoTextFilters |= StelObject::Distance;
-		if (conf->value("flag_show_velocity", false).toBool())
-			infoTextFilters |= StelObject::Velocity;
-		if (conf->value("flag_show_propermotion", false).toBool())
-			infoTextFilters |= StelObject::ProperMotion;
-		if (conf->value("flag_show_size", false).toBool())
-			infoTextFilters |= StelObject::Size;
-		if (conf->value("flag_show_extra", false).toBool())
-			infoTextFilters |= StelObject::Extra;
-		if (conf->value("flag_show_type", false).toBool())
-			infoTextFilters |= StelObject::ObjectType;
-		if (conf->value("flag_show_galcoord", false).toBool())
-			infoTextFilters |= StelObject::GalacticCoord;
-		if (conf->value("flag_show_supergalcoord", false).toBool())
-			infoTextFilters |= StelObject::SupergalacticCoord;
-		if (conf->value("flag_show_othercoord", false).toBool())
-			infoTextFilters |= StelObject::OtherCoord;
-		if (conf->value("flag_show_eclcoordofdate", false).toBool())
-			infoTextFilters |= StelObject::EclipticCoordOfDate;
-		if (conf->value("flag_show_eclcoordj2000", false).toBool())
-			infoTextFilters |= StelObject::EclipticCoordJ2000;
-		if (conf->value("flag_show_constellation", false).toBool())
-			infoTextFilters |= StelObject::IAUConstellation;
-		if (conf->value("flag_show_sidereal_time", false).toBool())
-			infoTextFilters |= StelObject::SiderealTime;
-		if (conf->value("flag_show_rts_time", false).toBool())
-			infoTextFilters |= StelObject::RTSTime;
-		if (conf->value("flag_show_solar_lunar", false).toBool())
-		    infoTextFilters |= StelObject::SolarLunarPosition;
-		conf->endGroup();
+		infoTextFilters = GETSTELMODULE(StelObjectMgr)->getCustomInfoStrings();
 	}
 	else
 	{
@@ -147,7 +97,7 @@ QPixmap getInfoPixmap(const QStringList& strList, QFont font, QColor color)
 	titleFont.setPixelSize(font.pixelSize()+7);
 
 	QRect strRect = QFontMetrics(titleFont).boundingRect(strList.at(maxLenIdx));
-	int w = strRect.width()+1+static_cast<int>(0.02f*strRect.width());
+	int w = strRect.width()+1+static_cast<int>(0.02f*static_cast<float>(strRect.width()));
 	int h = strRect.height()*strList.count()+8;
 
 	QPixmap strPixmap(w, h);
@@ -255,11 +205,11 @@ SkyGui::SkyGui(QGraphicsItem * parent)
 	buttonBarPath = new StelBarsPath(this);
 
 	animLeftBarTimeLine = new QTimeLine(200, this);
-	animLeftBarTimeLine->setCurveShape(QTimeLine::EaseInOutCurve);
+	animLeftBarTimeLine->setEasingCurve(QEasingCurve(QEasingCurve::InOutSine));
 	connect(animLeftBarTimeLine, SIGNAL(valueChanged(qreal)), this, SLOT(updateBarsPos()));
 
 	animBottomBarTimeLine = new QTimeLine(200, this);
-	animBottomBarTimeLine->setCurveShape(QTimeLine::EaseInOutCurve);
+	animBottomBarTimeLine->setEasingCurve(QEasingCurve(QEasingCurve::InOutSine));
 	connect(animBottomBarTimeLine, SIGNAL(valueChanged(qreal)), this, SLOT(updateBarsPos()));
 
 	setAcceptHoverEvents(true);
@@ -424,7 +374,7 @@ void SkyGui::updateBarsPos()
 
 void SkyGui::setStelStyle(const QString& style)
 {
-	Q_UNUSED(style);
+	Q_UNUSED(style)
 	buttonBarPath->setPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
 	buttonBarPath->setBrush(QColor::fromRgbF(0.15, 0.16, 0.19, 0.2));
 	buttonBar->setColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));

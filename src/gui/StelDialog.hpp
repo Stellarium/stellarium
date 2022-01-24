@@ -86,6 +86,7 @@ public:
 
 	//! Returns true if the dialog contents have been constructed and are currently shown
 	bool visible() const;
+	QString getDialogName() const {return dialogName;}
 
 public slots:
 	//! Retranslate the content of the dialog.
@@ -109,7 +110,6 @@ public slots:
 	//! When a subclass needs a size-dependent update, implement such update in the subclass version,
 	//! but call StelDialog::handleDialogSizeChanged() first.
 	virtual void handleDialogSizeChanged(QSizeF size);
-	QString getDialogName() const {return dialogName;}
 signals:
 	void visibleChanged(bool);
 
@@ -236,7 +236,7 @@ class CustomProxy : public QGraphicsProxyWidget
 			setFocusPolicy(Qt::StrongFocus);
 		}
 		//! Reimplement this method to add windows decorations. Currently there are invisible 2 px decorations
-		void paintWindowFrame(QPainter*, const QStyleOptionGraphicsItem*, QWidget*)
+		void paintWindowFrame(QPainter*, const QStyleOptionGraphicsItem*, QWidget*) Q_DECL_OVERRIDE
 		{
 /*			QStyleOptionTitleBar bar;
 			initStyleOption(&bar);
@@ -246,7 +246,7 @@ class CustomProxy : public QGraphicsProxyWidget
 		}
 	signals: void sizeChanged(QSizeF);
 	protected:
-		virtual bool event(QEvent* event)
+		virtual bool event(QEvent* event) Q_DECL_OVERRIDE
 		{
 			if (StelApp::getInstance().getSettings()->value("gui/flag_use_window_transparency", true).toBool())
 			{
@@ -265,7 +265,7 @@ class CustomProxy : public QGraphicsProxyWidget
 			}
 			return QGraphicsProxyWidget::event(event);
 		}
-		virtual void resizeEvent(QGraphicsSceneResizeEvent *event)
+		virtual void resizeEvent(QGraphicsSceneResizeEvent *event) Q_DECL_OVERRIDE
 		{
 			if (event->newSize() != event->oldSize())
 			{

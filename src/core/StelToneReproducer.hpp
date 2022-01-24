@@ -70,13 +70,13 @@ public:
 	StelToneReproducer();
 	
 	//! Desctructor
-	virtual ~StelToneReproducer();
+	virtual ~StelToneReproducer() Q_DECL_OVERRIDE;
 
 public slots:
 	//! Set the eye adaptation luminance for the display (and precompute what can be)
 	//! Usual luminance range is 1-100 cd/m^2 for a CRT screen
 	//! @param displayAdaptationLuminance the new display luminance in cd/m^2. The initial default value is 50 cd/m^2
-	void setDisplayAdaptationLuminance(float displayAdaptationLuminance);
+	void setDisplayAdaptationLuminance(float Lda);
 	float getDisplayAdaptationLuminance() const {return Lda;}
 
 	//! Set the eye adaptation luminance for the world (and precompute what can be)
@@ -153,7 +153,7 @@ public:
 	//! @return the converted display luminance in cd/m^2
 	float adaptLuminance(float worldLuminance) const
 	{
-		return std::pow((float)(inputScale*worldLuminance*M_PI*0.0001f),alphaWaOverAlphaDa) * term2;
+		return std::pow(static_cast<float>(inputScale*worldLuminance*M_PI*0.0001f),alphaWaOverAlphaDa) * term2;
 	}
 
 	//! Return adapted luminance from display to world
@@ -161,7 +161,7 @@ public:
 	//! @return the converted world luminance in cd/m^2
 	float reverseAdaptLuminance(float displayLuminance) const
 	{
-		return (float) std::pow((float)(displayLuminance/term2),1.f/alphaWaOverAlphaDa)/(inputScale*M_PI*0.0001f);
+		return static_cast<float>(std::pow(static_cast<float>(displayLuminance/term2),1.f/alphaWaOverAlphaDa)/(inputScale*M_PI*0.0001f));
 	}
 	
 	//! Return adapted luminance from world to display with 1 corresponding to full display white

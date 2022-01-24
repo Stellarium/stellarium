@@ -953,8 +953,16 @@ namespace StelUtils
 	//! Interval test. This checks whether @param value is within [@param low, @param high]
 	template <typename T> bool isWithin(const T& value, const T& low, const T& high)
 	{
-	    return !(value < low) && !(high < value);
+		return !(value < low) && !(high < value);
 	}
+
+	template <class Arg1, class Arg2, class Result>
+	struct binary_function
+	{
+		typedef Arg1 first_argument_type;
+		typedef Arg2 second_argument_type;
+		typedef Result result_type;
+	};
 
 
 #ifdef _MSC_BUILD

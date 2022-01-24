@@ -48,7 +48,6 @@
 #include "AstroCalcDialog.hpp"
 #include "StelObserver.hpp"
 
-#include <functional>
 #include <algorithm>
 
 #include <QTextStream>
@@ -158,7 +157,7 @@ SolarSystem::~SolarSystem()
 	Comet::tailTexture.clear();
 
 	//deinit of SolarSystem is NOT called at app end automatically
-	deinit();
+	SolarSystem::deinit();
 }
 
 /*************************************************************************
@@ -218,10 +217,10 @@ void SolarSystem::init()
 	setOrbitColorStyle(conf->value("astro/planets_orbits_color_style", "one_color").toString());
 
 	// Settings for calculation of position of Great Red Spot on Jupiter
-	setFlagCustomGrsSettings(conf->value("astro/flag_grs_custom", false).toBool());
-	setCustomGrsLongitude(conf->value("astro/grs_longitude", 216).toInt());
-	setCustomGrsDrift(conf->value("astro/grs_drift", 15.).toDouble());
-	setCustomGrsJD(conf->value("astro/grs_jd", 2456901.5).toDouble());
+//	setFlagCustomGrsSettings(conf->value("astro/flag_grs_custom", false).toBool());
+	setGrsLongitude(conf->value("astro/grs_longitude", 216).toInt());
+	setGrsDrift(conf->value("astro/grs_drift", 15.).toDouble());
+	setGrsJD(conf->value("astro/grs_jd", 2456901.5).toDouble());
 
 	setFlagEarthShadowEnlargementDanjon(conf->value("astro/shadow_enlargement_danjon", false).toBool());
 	setFlagPermanentSolarCorona(conf->value("viewing/flag_draw_sun_corona", true).toBool());
@@ -376,7 +375,7 @@ void SolarSystem::recreateTrails()
 	}
 	else
 	{
-		for (const auto& p : getSun()->satellites)
+		for (const auto& p : qAsConst(getSun()->satellites))
 		{
 			if (p->getPlanetType() != Planet::isObserver)
 				allTrails->addObject(static_cast<QSharedPointer<StelObject>>(p), &trailsColor);
@@ -387,7 +386,7 @@ void SolarSystem::recreateTrails()
 		if (obs)
 		{
 			const QSharedPointer<Planet> planet=obs->getHomePlanet();
-			for (const auto& m : planet->satellites)
+			for (const auto& m : qAsConst(planet->satellites))
 				if (m->getPlanetType() != Planet::isObserver)
 					allTrails->addObject(static_cast<QSharedPointer<StelObject>>(m), &trailsColor);
 		}
@@ -595,7 +594,7 @@ void SolarSystem::loadPlanets()
 			//If the file is in the user data directory, rename it:
 			if (solarSystemFile.contains(StelFileMgr::getUserDir()))
 			{
-				QString newName = QString("%1/data/ssystem-%2.ini").arg(StelFileMgr::getUserDir()).arg(QDateTime::currentDateTime().toString("yyyyMMddThhmmss"));
+				QString newName = QString("%1/data/ssystem-%2.ini").arg(StelFileMgr::getUserDir(), QDateTime::currentDateTime().toString("yyyyMMddThhmmss"));
 				if (QFile::rename(solarSystemFile, newName))
 					qWarning() << "Invalid Solar System file" << QDir::toNativeSeparators(solarSystemFile) << "has been renamed to" << QDir::toNativeSeparators(newName);
 				else
@@ -1304,7 +1303,8 @@ void SolarSystem::computeTransMatrices(double dateJDE, const Vec3d& observerPos)
 }
 
 // And sort them from the furthest to the closest to the observer
-struct biggerDistance : public std::binary_function<PlanetP, PlanetP, bool>
+// NOTE: std::binary_function is deprecated in C++11 and removed in C++17
+struct biggerDistance : public StelUtils::binary_function<PlanetP, PlanetP, bool>
 {
 	bool operator()(PlanetP p1, PlanetP p2)
 	{
@@ -1331,7 +1331,7 @@ void SolarSystem::draw(StelCore* core)
 	}
 
 	// And sort them from the furthest to the closest
-	sort(systemPlanets.begin(),systemPlanets.end(),biggerDistance());
+	std::sort(systemPlanets.begin(),systemPlanets.end(),biggerDistance());
 
 	if (trailFader.getInterstate()>0.0000001f)
 	{
@@ -1419,7 +1419,6 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 		if (!(sPainter.getProjector()->projectCheck(AstroCalcDialog::EphemerisList[i].coord, win)))
 			continue;
 
-		float solarAngle=0.f; // Angle to possibly rotate the texture. Degrees.
 		QString debugStr; // Used temporarily for development
 		const bool isComet=AstroCalcDialog::EphemerisList[i].isComet;
 		if (i == AstroCalcDialog::DisplayedPositionIndex)
@@ -1445,17 +1444,18 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 			if ((showDates || showMagnitudes) && showSkippedData && ((i + 1)%dataStep)!=1 && dataStep!=1)
 				continue;
 		}
-		Vec3d win;
+		Vec3f win;
+		float solarAngle=0.f; // Angle to possibly rotate the texture. Degrees.
 		if (prj->project(AstroCalcDialog::EphemerisList[i].coord, win))
 		{
 			if (isComet)
 			{
 				// compute solarAngle in screen space.
-				Vec3d sunWin;
+				Vec3f sunWin;
 				prj->project(AstroCalcDialog::EphemerisList[i].sunCoord, sunWin);
 				// TODO: In some projections, we may need to test result and flip/mirror the angle, or deal with wrap-around effects.
 				// E.g., in cylindrical mode, the comet icon will flip as soon as the corresponding sun position wraps around the screen edge.
-				solarAngle=M_180_PIf*static_cast<float>(atan2(-(win[1]-sunWin[1]), win[0]-sunWin[0]));
+				solarAngle=M_180_PIf*(atan2(-(win[1]-sunWin[1]), win[0]-sunWin[0]));
 				// This will show projected positions and angles usable in labels.
 				debugStr = QString("Sun: %1/%2 Obj: %3/%4 -->%5").arg(QString::number(sunWin[0]), QString::number(sunWin[1]), QString::number(win[0]), QString::number(win[1]), QString::number(solarAngle));
 			}
@@ -3080,57 +3080,43 @@ int SolarSystem::getOrbitsThickness() const
 	return Planet::orbitsThickness;
 }
 
-
-void SolarSystem::setFlagCustomGrsSettings(bool b)
+void SolarSystem::setGrsLongitude(int longitude)
 {
-	RotationElements::flagCustomGrsSettings=b;
-	// automatic saving of the setting
-	conf->setValue("astro/flag_grs_custom", b);
-	emit flagCustomGrsSettingsChanged(b);
-}
-
-bool SolarSystem::getFlagCustomGrsSettings() const
-{
-	return RotationElements::flagCustomGrsSettings;
-}
-
-void SolarSystem::setCustomGrsLongitude(int longitude)
-{
-	RotationElements::customGrsLongitude = longitude;
+	RotationElements::grsLongitude = longitude;
 	// automatic saving of the setting
 	conf->setValue("astro/grs_longitude", longitude);
-	emit customGrsLongitudeChanged(longitude);
+	emit grsLongitudeChanged(longitude);
 }
 
-int SolarSystem::getCustomGrsLongitude() const
+int SolarSystem::getGrsLongitude() const
 {
-	return static_cast<int>(RotationElements::customGrsLongitude);
+	return static_cast<int>(RotationElements::grsLongitude);
 }
 
-void SolarSystem::setCustomGrsDrift(double drift)
+void SolarSystem::setGrsDrift(double drift)
 {
-	RotationElements::customGrsDrift = drift;
+	RotationElements::grsDrift = drift;
 	// automatic saving of the setting
 	conf->setValue("astro/grs_drift", drift);
-	emit customGrsDriftChanged(drift);
+	emit grsDriftChanged(drift);
 }
 
-double SolarSystem::getCustomGrsDrift() const
+double SolarSystem::getGrsDrift() const
 {
-	return RotationElements::customGrsDrift;
+	return RotationElements::grsDrift;
 }
 
-void SolarSystem::setCustomGrsJD(double JD)
+void SolarSystem::setGrsJD(double JD)
 {
-	RotationElements::customGrsJD = JD;
+	RotationElements::grsJD = JD;
 	// automatic saving of the setting
 	conf->setValue("astro/grs_jd", JD);
-	emit customGrsJDChanged(JD);
+	emit grsJDChanged(JD);
 }
 
-double SolarSystem::getCustomGrsJD()
+double SolarSystem::getGrsJD()
 {
-	return RotationElements::customGrsJD;
+	return RotationElements::grsJD;
 }
 
 void SolarSystem::setFlagEarthShadowEnlargementDanjon(bool b)

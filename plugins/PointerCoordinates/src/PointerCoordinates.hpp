@@ -88,8 +88,6 @@ public:
 	virtual ~PointerCoordinates() Q_DECL_OVERRIDE;
 
 	virtual void init() Q_DECL_OVERRIDE;
-	virtual void deinit() Q_DECL_OVERRIDE;
-	virtual void update(double) Q_DECL_OVERRIDE {;}
 	virtual void draw(StelCore *core) Q_DECL_OVERRIDE;
 	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 	virtual bool configureGui(bool show) Q_DECL_OVERRIDE;
@@ -165,12 +163,12 @@ public slots:
 	}
 
 	//! Set the current place of the string with coordinates
-	void setCurrentCoordinatesPlace(CoordinatesPlace place)
+	void setCurrentCoordinatesPlace(PointerCoordinates::CoordinatesPlace place)
 	{
 		currentPlace = place;
 	}
 	//! Get the current place of the string with coordinates
-	CoordinatesPlace getCurrentCoordinatesPlace() const
+	PointerCoordinates::CoordinatesPlace getCurrentCoordinatesPlace() const
 	{
 		return currentPlace;
 	}
@@ -180,12 +178,12 @@ public slots:
 	void setCurrentCoordinatesPlaceKey(QString key);
 
 	//! Set the current coordinate system
-	void setCurrentCoordinateSystem(CoordinateSystem cs)
+	void setCurrentCoordinateSystem(PointerCoordinates::CoordinateSystem cs)
 	{
 		currentCoordinateSystem = cs;
 	}
 	//! Get the current coordinate system
-	CoordinateSystem getCurrentCoordinateSystem() const
+	PointerCoordinates::CoordinateSystem getCurrentCoordinateSystem() const
 	{
 		return currentCoordinateSystem;
 	}

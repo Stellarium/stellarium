@@ -657,7 +657,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 
 			QVector<Vec3d> contour;
 			contour.reserve(texCoords.size());
-			for (const auto& v : texCoords)
+			for (const auto& v : qAsConst(texCoords))
 			{
 				Vec3d vertex = X * Vec3d(static_cast<double>(v[0]) * texSizeX, static_cast<double>(v[1]) * texSizeY, 0.);
 				// Originally the projected texture plane remained as tangential plane.

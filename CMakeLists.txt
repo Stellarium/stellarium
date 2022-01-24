@@ -1,8 +1,12 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10.0)
 MESSAGE(STATUS "Found CMake ${CMAKE_VERSION}")
 
-IF(POLICY CMP0054)
+# Fix behavior of CMAKE_CXX_STANDARD and CMAKE_C_STANDARD when targeting macOS.
+IF(POLICY CMP0025)
+     CMAKE_POLICY(SET CMP0025 NEW)
+ENDIF()
 # Potential dangerous comparison of variables. Details: https://cmake.org/cmake/help/v3.1/policy/CMP0054.html
+IF(POLICY CMP0054)
      CMAKE_POLICY(SET CMP0054 NEW)
 ENDIF()
 IF(POLICY CMP0071)
@@ -92,35 +96,37 @@ IF(STELLARIUM_RELEASE_BUILD)
 ELSE()
      SET(SERIES "head")
      ########### Get revision number for non-release builds ###########
-     # Hack until CMake detection for Git is finished
-     IF(WIN32)
-          FIND_FILE(GITCMD git.exe)          
-     ELSE()
-          FIND_FILE(GITCMD git)
-     ENDIF()
      STRING(TIMESTAMP CDNUMBER "%j")
      SET(WINDOWS_PACKAGE_VERSION "${VERSION}.${CDNUMBER}")
-     IF(EXISTS ${GITCMD})
+     FIND_PACKAGE(Git QUIET)
+     IF(Git_FOUND)
+          MESSAGE(STATUS "Found Git ${GIT_VERSION_STRING}")
           # get the name of current branch
-          EXECUTE_PROCESS(COMMAND ${GITCMD} rev-parse --abbrev-ref HEAD WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_BRANCH OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
+          EXECUTE_PROCESS(COMMAND ${GIT_EXECUTABLE} rev-parse --abbrev-ref HEAD WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_BRANCH OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
           # get the hash of latest commit
-          EXECUTE_PROCESS(COMMAND ${GITCMD} log -1 --pretty=format:%h WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_REVISION OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
+          EXECUTE_PROCESS(COMMAND ${GIT_EXECUTABLE} log -1 --pretty=format:%h WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_REVISION OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
           # get the name of latest annotated tag
-          EXECUTE_PROCESS(COMMAND ${GITCMD} describe --tags --abbrev=0 WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_TAGS OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
+          EXECUTE_PROCESS(COMMAND ${GIT_EXECUTABLE} describe --tags --abbrev=0 WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_TAGS OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
           # get the count of commits between latest release (we use tags for releases) and current HEAD
           IF(WIN32)
-               EXECUTE_PROCESS(COMMAND ${GITCMD} log ${GIT_TAGS}..HEAD --pretty=oneline COMMAND find /c /v "" WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_COMMITS OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
+               EXECUTE_PROCESS(COMMAND ${GIT_EXECUTABLE} log ${GIT_TAGS}..HEAD --pretty=oneline COMMAND find /c /v "" WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_COMMITS OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
           ELSE()
-               EXECUTE_PROCESS(COMMAND ${GITCMD} log ${GIT_TAGS}..HEAD --pretty=oneline COMMAND wc -l WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_COMMITS OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
+               EXECUTE_PROCESS(COMMAND ${GIT_EXECUTABLE} log ${GIT_TAGS}..HEAD --pretty=oneline COMMAND wc -l WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_COMMITS OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
           ENDIF()
           # remove all whitespaces
-          STRING(STRIP GIT_COMMITS "${GIT_COMMITS}")
+          STRING(REPLACE " " "" GIT_COMMITS "${GIT_COMMITS}")
           IF(GIT_REVISION)
                # Let's use short hash in all cases
                STRING(SUBSTRING ${GIT_REVISION} 0 7 REVISION)
                SET(PACKAGE_VERSION "${VERSION}-${REVISION}")
                ADD_DEFINITIONS(-DGIT_REVISION="${REVISION}")
                ADD_DEFINITIONS(-DGIT_BRANCH="${GIT_BRANCH}")
+               # check to use --depth param...
+               IF(${GIT_COMMITS} EQUAL 0)
+                    # Append the day of the current year to the number 1 as string
+                    # because we never reaches 1000 commits per 1/4 year
+                    STRING(TIMESTAMP GIT_COMMITS "1%j")
+               ENDIF()
                # better way to numbering
                SET(WINDOWS_PACKAGE_VERSION "${VERSION}.${GIT_COMMITS}")
           ENDIF()
@@ -148,10 +154,12 @@ IF(OPENGL_DEBUG_LOGGING)
 ENDIF()
 
 # Use ccache if possible
-FIND_PROGRAM(CCACHE_PROGRAM ccache)
-IF(CCACHE_PROGRAM)
-     MESSAGE(STATUS "Found ccache ${CCACHE_PROGRAM}")
-     SET_PROPERTY(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE_PROGRAM}")
+IF(NOT WIN32)
+     FIND_PROGRAM(CCACHE_PROGRAM ccache)
+     IF(CCACHE_PROGRAM)
+          MESSAGE(STATUS "Found ccache ${CCACHE_PROGRAM}")
+          SET_PROPERTY(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE_PROGRAM}")
+     ENDIF()
 ENDIF()
 
 # Add gprof build options if necessary.  Note gmon.out will be created in working directory when Stellarium is executed
@@ -221,17 +229,21 @@ ELSE()
      SET(STEL_GCC_CXX_FLAGS "${STEL_GCC_CXX_FLAGS} -diag-disable:remark -wd1875,654")
 ENDIF()
 
-# Set whether to try using C++11 when compiling. Required for Qt >= 5.7"
-IF(NOT (CMAKE_VERSION VERSION_LESS 3.1.0))
-     # Let CMake handle setting C++11 (since 3.1)
-     SET(CMAKE_CXX_STANDARD 11)
+# Enable using C++17 when compiling.
+SET(CMAKE_CXX_STANDARD 17)
+SET(CMAKE_CXX_STANDARD_REQUIRED ON)
+SET(CMAKE_CXX_EXTENSIONS OFF)
+# NOTE: C_STANDARD 17 and 23 values added in CMake 3.21
+# https://gitlab.kitware.com/cmake/cmake/-/issues/22366
+IF(CMAKE_VERSION VERSION_LESS 3.21.0)
      SET(CMAKE_C_STANDARD 11)
+     #SET(CMAKE_C_FLAGS "-std=c11 ${CMAKE_C_FLAGS}")
 ELSE()
-     # Add std=c++11 to gcc flags
-     SET(STEL_GCC_CXX_FLAGS "-std=c++11 ${STEL_GCC_CXX_FLAGS}")
-     # Add std=c11 to gcc flags
-     SET(STEL_GCC_C_FLAGS "-std=c11 ${STEL_GCC_C_FLAGS}")
+     SET(CMAKE_C_STANDARD 17)
+     #SET(CMAKE_C_FLAGS "-std=c17 ${CMAKE_C_FLAGS}")
 ENDIF()
+SET(CMAKE_C_STANDARD_REQUIRED ON)
+SET(CMAKE_C_EXTENSIONS OFF)
 
 IF(WIN32)
      # We don't need the extra Windows.h stuff, this may speed up compilation a tiny bit
@@ -251,6 +263,8 @@ IF(WIN32)
           # C4351: "new" behaviour, member array default initialization. Required since at least C++98, but funny MSVC throws a warning.
           # C4996: deprecated POSIX names (used in zlib)
           SET(STEL_MSVC_FLAGS "/wd4244 /wd4305 /wd4351 /wd4996")
+          # Avoid type conflict with C++17 standard
+          SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /D_HAS_STD_BYTE=0")
           # Set minimal version of Windows
           SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /D_WIN32_WINNT=${MIN_WIN_VERSION}")
           IF(MSVC_VERSION GREATER 1700)
@@ -294,10 +308,7 @@ ENDIF()
 # resolve bug for FreeBSD/amd64 and NVIDIA proprietary drivers 
 IF(${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
      # Use -pthread compilation option to properly link to threading library
-     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
-     IF(${GCC_VERSION} VERSION_GREATER 4.7)
-          SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-local-typedefs")
-     ENDIF()
+     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread -Wno-unused-local-typedefs")
 ENDIF()
 
 # This activates Link Time Optimization on recent GCC

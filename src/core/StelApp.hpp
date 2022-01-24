@@ -97,7 +97,7 @@ public:
 	StelApp(StelMainView* parent);
 
 	//! Deinitialize and destroy the main Stellarium application.
-	virtual ~StelApp();
+	virtual ~StelApp() Q_DECL_OVERRIDE;
 
 	//! Initialize core and all the modules.
 	void init(QSettings* conf);

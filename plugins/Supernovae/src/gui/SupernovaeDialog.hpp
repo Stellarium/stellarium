@@ -36,14 +36,14 @@ class SupernovaeDialog : public StelDialog
 
 public:
 	SupernovaeDialog();
-	~SupernovaeDialog();
+	~SupernovaeDialog() Q_DECL_OVERRIDE;
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
-	void createDialogContent();
+	void createDialogContent() Q_DECL_OVERRIDE;
 
 public slots:
-	void retranslate();
+	void retranslate() Q_DECL_OVERRIDE;
 	void refreshUpdateValues(void);
 
 private slots:

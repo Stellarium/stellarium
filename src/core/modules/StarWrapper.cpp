@@ -328,10 +328,15 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		float pa = std::atan2(dx, dy)*M_180_PIf;
 		if (pa<0)
 			pa += 360.f;
-		oss << QString("%1: %2 %3 %4 %5%6").arg(q_("Proper motion"))
-		       .arg(QString::number(std::sqrt(dx*dx + dy*dy), 'f', 2)).arg(qc_("mas/yr", "milliarc second per year"))
-		       .arg(qc_("towards", "into the direction of")).arg(QString::number(pa, 'f', 1)).arg(QChar(0x00B0)) << "<br />";
-		oss << QString("%1: %2 %3 (%4)").arg(q_("Proper motions by axes")).arg(QString::number(dx, 'f', 2)).arg(QString::number(dy, 'f', 2)).arg(qc_("mas/yr", "milliarc second per year")) << "<br />";
+		oss << QString("%1: %2 %3 %4 %5°").arg(q_("Proper motion"),
+							QString::number(std::sqrt(dx*dx + dy*dy), 'f', 2),
+							qc_("mas/yr", "milliarc second per year"),
+							qc_("towards", "into the direction of"),
+							QString::number(pa, 'f', 1)) << "<br />";
+		oss << QString("%1: %2 %3 (%4)").arg(q_("Proper motions by axes"),
+							QString::number(dx, 'f', 2),
+							QString::number(dy, 'f', 2),
+							qc_("mas/yr", "milliarc second per year")) << "<br />";
 	}
 
 	if (flags&Extra)
@@ -378,13 +383,19 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 		if (wdsObs>0)
 		{
-			oss << QString("%1 (%4): %2%3").arg(q_("Position angle")).arg(QString::number(wdsPA, 'f', 2)).arg(QChar(0x00B0)).arg(wdsObs) << "<br />";
+			oss << QString("%1 (%3): %2°").arg(q_("Position angle"),
+							QString::number(wdsPA, 'f', 2),
+							QString::number(wdsObs)) << "<br />";
 			if (wdsSep>0.f) // A spectroscopic binary or not?
 			{
 				if (wdsSep>60.f) // A wide binary star?
-					oss << QString("%1 (%4): %2\" (%3)").arg(q_("Separation")).arg(QString::number(wdsSep, 'f', 3)).arg(StelUtils::decDegToDmsStr(wdsSep/3600.f)).arg(wdsObs) << "<br />";
+					oss << QString("%1 (%4): %2\" (%3)").arg(
+									    q_("Separation"),
+									    QString::number(wdsSep, 'f', 3),
+									    StelUtils::decDegToDmsStr(wdsSep/3600.f),
+									    QString::number(wdsObs)) << "<br />";
 				else
-					oss << QString("%1 (%3): %2\"").arg(q_("Separation")).arg(QString::number(wdsSep, 'f', 3)).arg(wdsObs) << "<br />";
+					oss << QString("%1 (%3): %2\"").arg(q_("Separation"), QString::number(wdsSep, 'f', 3), QString::number(wdsObs)) << "<br />";
 			}
 		}
 	}

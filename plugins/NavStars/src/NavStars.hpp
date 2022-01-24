@@ -144,7 +144,7 @@ public slots:
 		currentNSSet = nsset;
 	}
 	//! Get the set of navigational stars
-	NavigationalStarsSet getCurrentNavigationalStarsSet() const
+	NavStars::NavigationalStarsSet getCurrentNavigationalStarsSet() const
 	{
 		return currentNSSet;
 	}
