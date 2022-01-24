@@ -99,6 +99,7 @@ TelescopeControl::TelescopeControl()
 	, syncActionId("actionSync_Telescope_To_Selection_%1")
 	, abortSlewActionId("actionAbortSlew_Telescope_Slew_%1")
 	, moveToCenterActionId("actionSlew_Telescope_To_Direction_%1")
+	, centeringScreenActionId("actionCentering_Screen_By_Telescope_%1")
 {
 	setObjectName("TelescopeControl");
 
@@ -190,6 +191,11 @@ void TelescopeControl::init()
 			shortcut = QString("Ctrl+Shift+Alt+%1").arg(i);
 			text = q_("Abort last slew command of telescope #%1").arg(i);
 			addAction(name, section, text, this, [=](){abortTelescopeSlew(i);}, shortcut);
+
+			// "Centering screen by telescope coordinates" commands
+			name = centeringScreenActionId.arg(i);
+			text = q_("Centering screen by telescope coordinates #%1").arg(i);
+			addAction(name, section, text, this, [=](){centeringScreenByTelescope(i);});
 		}
 		connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(translateActionDescriptions()));
 
@@ -246,6 +252,10 @@ void TelescopeControl::translateActionDescriptions()
 
 		name = abortSlewActionId.arg(i);
 		description = q_("Abort last slew command of telescope #%1").arg(i);
+		actionMgr->findAction(name)->setText(description);
+
+		name = centeringScreenActionId.arg(i);
+		description = q_("Centering screen by telescope coordinates #%1").arg(i);
 		actionMgr->findAction(name)->setText(description);
 	}
 }
@@ -446,6 +456,23 @@ void TelescopeControl::syncTelescopeWithSelectedObject(const int idx)
 void TelescopeControl::abortTelescopeSlew(const int idx) {
 	if (telescopeClients.contains(idx))
 		telescopeClients.value(idx)->telescopeAbortSlew();
+}
+
+void TelescopeControl::centeringScreenByTelescope(const int idx) {
+	if (telescopeClients.contains(idx))
+	{
+		StelObjectMgr* objectMgr = GETSTELMODULE(StelObjectMgr);
+		StelMovementMgr* mvMgr = GETSTELMODULE(StelMovementMgr);
+		if (objectMgr->findAndSelect(telescopeClients.value(idx)->getEnglishName(), "Telescope"))
+		{
+			const QList<StelObjectP> newSelected = objectMgr->getSelectedObject("Telescope");
+			if (!newSelected.empty())
+			{
+				mvMgr->moveToObject(newSelected[0], mvMgr->getAutoMoveDuration());
+				mvMgr->setFlagTracking(true);
+			}
+		}
+	}
 }
 
 void TelescopeControl::drawPointer(const StelProjectorP& prj, const StelCore* core, StelPainter& sPainter)
