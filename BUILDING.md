@@ -32,7 +32,7 @@ configure Debug and Release builds.
 
 Do not forget to load the [Code Style File](https://stellarium.org/files/ide/stellarium-ide.xml) 
 ([TAR.GZ](https://stellarium.org/files/ide/stellarium-ide.xml.tgz)) in 
-Extras/Settings/C++/Coding style.
+Extras/Settings/C++/Coding style (Import... button).
 
 ## Prerequisite Packages
 
