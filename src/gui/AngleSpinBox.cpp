@@ -97,7 +97,7 @@ AngleSpinBox::AngleSpinboxSection AngleSpinBox::getCurrentSection() const
 	}
 	
 	cPosMin = cPosMax;
-	cPosMax = str.indexOf(QRegularExpression(QString("[dh%1]").arg(QChar(176))), 0)+1;
+	cPosMax = str.indexOf(QRegularExpression("[dh°]"), 0)+1;
 	if (cursorPos >= cPosMin && cursorPos <= cPosMax) {
 		return SectionDegreesHours;
 	}
@@ -237,12 +237,12 @@ double AngleSpinBox::stringToDouble(QString input, QValidator::State* state, Pre
 		input = input.mid(1);
 	}
 
-	QRegularExpression dmsRx("^\\s*(\\d+)\\s*[d\\x00b0](\\s*(\\d+(\\.\\d*)?)\\s*[m'](\\s*(\\d+(\\.\\d*)?)\\s*[s\"]\\s*)?)?$",
+	QRegularExpression dmsRx("^\\s*(\\d+)\\s*[d°](\\s*(\\d+(\\.\\d*)?)\\s*[m'](\\s*(\\d+(\\.\\d*)?)\\s*[s\"]\\s*)?)?$",
 		  QRegularExpression::CaseInsensitiveOption);
 	QRegularExpression hmsRx("^\\s*(\\d+)\\s*h(\\s*(\\d+(\\.\\d*)?)\\s*[m'](\\s*(\\d+(\\.\\d*)?)\\s*[s\"]\\s*)?)?$",
 		  QRegularExpression::CaseInsensitiveOption);
 	QRegularExpression decRx("^(\\d+(\\.\\d*)?)(\\s*[\\x00b0]\\s*)?$");
-	QRegularExpression badRx("[^hdms0-9 \\x00b0'\"\\.]", QRegularExpression::CaseInsensitiveOption);
+	QRegularExpression badRx("[^hdms0-9 °'\"\\.]", QRegularExpression::CaseInsensitiveOption);
 	QRegularExpressionMatch dmsMatch=dmsRx.match(input);
 	QRegularExpressionMatch hmsMatch=hmsRx.match(input);
 	QRegularExpressionMatch decMatch=decRx.match(input);
@@ -424,8 +424,8 @@ void AngleSpinBox::formatText(void)
 				lineEdit()->setText(QString("%1%2d %3m %4s")
                                     .arg(signInd).arg(d).arg(m).arg(s, 0, 'f', decimalPlaces, ' '));
 			else
-				lineEdit()->setText(QString("%1%2%3 %4' %5\"")
-                                    .arg(signInd).arg(d).arg(QChar(176)).arg(m)
+				lineEdit()->setText(QString("%1%2° %4' %5\"")
+				    .arg(signInd).arg(d).arg(m)
                                     .arg(s, 0, 'f', decimalPlaces, ' '));
 			break;
 		}
@@ -479,10 +479,9 @@ void AngleSpinBox::formatText(void)
 				signInd = negativePrefix(currentPrefixType);
 			}
 
-			lineEdit()->setText(QString("%1%2%3")
+			lineEdit()->setText(QString("%1%2°")
                                 .arg(signInd)
-                                .arg(fmod(angle * 180.0 / M_PI, 360.0), 0, 'f', decimalPlaces, ' ')
-                                .arg(QChar(176)));
+				.arg(fmod(angle * 180.0 / M_PI, 360.0), 0, 'f', decimalPlaces, ' '));
 			break;
 		}
 		default:
