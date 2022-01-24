@@ -213,18 +213,17 @@ void StelSkyDrawer::update(double)
 			fov = minAdaptFov;
 	}
 
-	// GZ: Light pollution must take global atmosphere setting into acount!
-	// moved parts from setBortleScale() here
-	// These value have been calibrated by hand, looking at the faintest star in stellarium at around 40 deg FOV
-	// They should roughly match the scale described at http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
-	static const float bortleToInScale[9] = {2.45f, 1.55f, 1.0f, 0.63f, 0.40f, 0.24f, 0.23f, 0.145f, 0.09f};
 	if (getFlagHasAtmosphere() && core->getJD()>2387627.5) // JD given is J1825.0; ignore Bortle scale index before that.
 	{
-		const auto bortleScaleIndex = StelCore::luminanceToBortleScaleIndex(lightPollutionLuminance);
-		setInputScale(bortleToInScale[bortleScaleIndex-1]);
+        // GZ: Light pollution must take global atmosphere setting into acount!
+        // moved parts from setBortleScale() here
+        // This formula is a fit to a set of values calibrated by hand, looking at the faintest star in stellarium at around 40 deg FOV.
+        // It should roughly match the scale described at http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
+		const auto nelm = StelCore::luminanceToNELM(lightPollutionLuminance);
+		setInputScale(3.3541f*std::exp(-0.404f*(16.5f-2*nelm)));
 	}
 	else
-	    setInputScale(bortleToInScale[0]);
+	    setInputScale(2.45f);
 
 	// This factor is fully arbitrary. It corresponds to the collecting area x exposure time of the instrument
 	// It is based on a power law, so that it varies progressively with the FOV to smoothly switch from human
