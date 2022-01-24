@@ -30,7 +30,9 @@ directory. Default settings create a debug build with all useful plugins.
 In the Projects tab (button in vertical left bar), you should at least 
 configure Debug and Release builds.
 
-Do not forget to load the [Code Style File](https://stellarium.org/files/ide/stellarium-ide.xml) ([TAR.GZ](https://stellarium.org/files/ide/stellarium-ide.xml.tgz)) in Extras/Settings/C++/Coding style.
+Do not forget to load the [Code Style File](https://stellarium.org/files/ide/stellarium-ide.xml) 
+([TAR.GZ](https://stellarium.org/files/ide/stellarium-ide.xml.tgz)) in 
+Extras/Settings/C++/Coding style.
 
 ## Prerequisite Packages
 
@@ -39,7 +41,8 @@ your distribution. Here's a list.
 
 ### Required dependencies
 
-- A C++ compiler able to compile C++11 code ([GCC](https://gcc.gnu.org/) 4.8.1 or later, Clang 3.3 or later, MSVC 2015 or later)
+- A C++ compiler able to compile C++17 code ([GCC](https://gcc.gnu.org/) 7 or later, 
+  Clang 6 or later, MSVC 2017 (15.7) or later)
 - [CMake](http://www.cmake.org/) 3.10.0 or later - buildsystem used by many open source projects
 - [Qt Framework](http://www.qt.io/) 5.9.0 or later
 - [OpenGL](https://www.opengl.org/) - graphics library
@@ -78,28 +81,37 @@ sudo yum install cmake gcc graphviz doxygen gettext git \
 
 #### Linux with outdated Qt
 
-Stellarium tracks the recent Qt releases fairly closely and as such many Linux distribution repositories do not contain an up-to-date enough version for building Stellarium. In the case of Ubuntu, the ''backports'' repository is often good enough, but there may be a need to install it "outside" your package manager. Here's how.
+Stellarium tracks the recent Qt releases fairly closely and as such many Linux distribution repositories do 
+not contain an up-to-date enough version for building Stellarium. In the case of Ubuntu, the ''backports'' 
+repository is often good enough, but there may be a need to install it "outside" your package manager. 
+Here's how.
 
-The Qt development team provides binary installers. If you want to build Qt yourself from source, this is fine but it will take a ''long'' time. We recommend the following procedure for manually installing the latest Qt (required: 5.9 or above at the moment):
-- Download the Linux/X11 package from [Qt Company](http://www.qt.io/download-open-source/). Choose 32/64 bit as appropriate.
+The Qt development team provides binary installers. If you want to build Qt yourself from source, this is 
+fine but it will take a ''long'' time. We recommend the following procedure for manually installing the 
+latest Qt (required: 5.9 or above at the moment):
+- Download the Linux/X11 package from [Qt Company](http://www.qt.io/download-open-source/). Choose 32/64 bit 
+  as appropriate.
 - Install it to `/opt/Qt5`
-- When you want to build Stellarium, execute these commands to set up the environment so that the new Qt is used (for 64-bit package):
+- When you want to build Stellarium, execute these commands to set up the environment so that the new Qt 
+  is used (for 64-bit package):
 ```
-export QTDIR=/opt/Qt5/5.12.11/gcc_64
+export QTDIR=/opt/Qt5/5.12.12/gcc_64
 export PATH=$QTDIR/bin:$PATH
 export LD_LIBRARY_PATH=$QTDIR/lib:$LD_LIBRARY_PATH
 ```
 - After installation, you should write a script which sets `LD_LIBRARY_PATH` and then calls Stellarium:
 ```
 #!/bin/sh
-export QTDIR=/opt/Qt5/5.12.11/gcc_64
+export QTDIR=/opt/Qt5/5.12.12/gcc_64
 export LD_LIBRARY_PATH=$QTDIR/lib:$LD_LIBRARY_PATH
 ./stellarium
 ```
 
 #### Linux without QtWebEngine
 
-On some distributions (known for ARM systems, like Raspberry OS (Raspbian)) there is no QtWebEngine. The CMake script will check installed `qtwebengine5` package and if then is not in system then Stellarium will build without QtWebEngine support. The result is shown in the system web browser.
+On some distributions (known for ARM systems, like Raspberry OS (Raspbian)) there is no QtWebEngine. The 
+CMake script will check installed `qtwebengine5` package and if then is not in system then Stellarium will 
+build without QtWebEngine support. The result is shown in the system web browser.
 
 #### MacOS
 
@@ -140,41 +152,57 @@ $ brew install qt
 export PATH=/usr/local/opt/qt/bin:$PATH
 ```
 
-You may using the distribution from the Qt Company to install the [latest stable version](https://www.qt.io/download-qt-installer) of Qt. In this case adding Qt to your PATH environment variable will to adding to your `.bash_profile` file the following line (for example we installed Qt 5.12.11):
+You may using the distribution from the Qt Company to install the [latest stable version](https://www.qt.io/download-qt-installer) 
+of Qt. In this case adding Qt to your PATH environment variable will to adding to your `.bash_profile` 
+file the following line (for example we installed Qt 5.12.12):
 ```
 export PATH=~/Qt/5.12/clang_64/bin:$PATH
 ```
 
 #### MacOS without QtWebEngine
 
-On the new ARM-based Macs, there is no support for QtWebEngine or it buggy (QtWebEngine in Qt 5.15.2). The CMake script will check installed `QtWebEngine` libraries and if then is not in system then Stellarium will build without QtWebEngine support. The result is shown in the system web browser.
+On the new ARM-based Macs, there is no support for QtWebEngine or it buggy (QtWebEngine in Qt 5.15.2). 
+The CMake script will check installed `QtWebEngine` libraries and if then is not in system then 
+Stellarium will build without QtWebEngine support. The result is shown in the system web browser.
 
 #### Windows
 
-- Install the [Microsoft Visual Studio Community 2017](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=15) or [Microsoft Visual Studio Community 2019](https://visualstudio.microsoft.com/downloads/) (or "better" - e.g. Professional) from Microsoft Website. Qt 5.15 requires MSVC2019.
-- To get the source code of Stellarium you need to install some git environment. [Git for Windows](https://git-scm.com/download/win) seems ok, or the Git Bash and Git GUI, whatever seems suitable for you. But it is not necessary.
-- Get the [latest version of Qt5 from Qt Company](http://www.qt.io/download-open-source/). We recommend to use Qt 5.12 or later.  You must select Qt Script and msvc2017/msvc2019 among so many checkboxes.
+- Install the [Microsoft Visual Studio Community 2017](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=15) 
+  or [later (VS2019 or VS2022)](https://visualstudio.microsoft.com/downloads/) (or "better" - e.g. 
+  Professional) from Microsoft Website. Qt 5.15 requires MSVC2019.
+- To get the source code of Stellarium you need to install some git environment. 
+  [Git for Windows](https://git-scm.com/download/win) seems ok, or the Git Bash and Git GUI, whatever 
+  seems suitable for you. But it is not necessary.
+- Get the [latest version of Qt5 from Qt Company](http://www.qt.io/download-open-source/). We recommend 
+  to use Qt 5.12 or later. You must select Qt Script and msvc2017/msvc2019 among so many checkboxes.
 
 After installing all required libraries and tools you should configure the build environment.
 
-Add `C:\Qt\Qt5.15.11` to your `PATH` variable - you should add string `C:\Qt\Qt5.15.11\msvc2019;C:\Qt\Qt5.15.11\msvc2019\bin` for 32-bit or `C:\Qt\Qt5.15.11\msvc2019_64;C:\Qt\Qt5.15.11\msvc2019_64\bin` for 64-bit to `PATH` variable.
-(Replace the version numbers of Qt and the version of Visual Studio (2017/2019) with the version that you have installed)
+Add `C:\Qt\Qt5.15.12` to your `PATH` variable - you should add string `C:\Qt\Qt5.15.12\msvc2019;C:\Qt\Qt5.15.12\msvc2019\bin` 
+for 32-bit or `C:\Qt\Qt5.15.12\msvc2019_64;C:\Qt\Qt5.15.12\msvc2019_64\bin` for 64-bit to `PATH` variable.
+(Replace the version numbers of Qt and the version of Visual Studio (2017/2019) with the version that you 
+have installed)
 
 **ANGLE issues:**
 
-- The ANGLE library should be taken from Qt 5.6, all later versions don't work and can be downloaded for [x64](https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/libGLES-x64.zip) and [x32](https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/libGLES-Win32.zip). (Don't ask us why. Find a solution!)
+- The ANGLE library should be taken from Qt 5.6, all later versions don't work and can be downloaded 
+- for [x64](https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/libGLES-x64.zip) 
+- and [x32](https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/libGLES-Win32.zip). 
+- (Don't ask us why. Find a solution!)
 
 **Known limitations with Qt 5.15.x:**
 
-- Qt 5.15.0 and 5.15.1 have a buggy `lconvert` and should not be used. Also `lconvert` on Qt 5.15.2 still allocates GBs of memory for translation of a few MBs of strings, if it can get it.
+- Qt 5.15.0 and 5.15.1 have a buggy `lconvert` and should not be used. Also `lconvert` on Qt 5.15.2 
+still allocates GBs of memory for translation of a few MBs of strings, if it can get it.
 
 **Note:** After changes to the `PATH` variable you should reboot the computer to apply those changes.
 
 #### Windows (static)
 
-You can build a static version using MSVC-static kit (for example we installed Qt 5.15.11 with MSVC2019):
+You can build a static version using MSVC-static kit (for example we installed Qt 5.15.12 with MSVC2019):
 
-To prepare a static kit, prepare src package of Qt 5.15.11, and configure compilation tool (Python, Ruby, Perl and Visual Studio 2019). Enter src folder:
+To prepare a static kit, prepare src package of Qt 5.15.12, and configure compilation tool (Python, Ruby, 
+Perl and Visual Studio 2019). Enter src folder:
 
 ```
 configure.bat -static -prefix "D:\Qt\msvc2019_static" -confirm-license -opensource  -debug-and-release -platform win32-msvc  -nomake examples -nomake tests  -plugin-sql-sqlite -plugin-sql-odbc -qt-zlib -qt-libpng -qt-libjpeg -opengl desktop -mp
@@ -182,7 +210,8 @@ nmake
 nmake install
 ```
 
-When finishing compilation, configure kit in Qt Creator. Clone Kit "Desktop Qt 5.15.11 MSVC" to "Desktop Qt 5.15.11 MSVC (static)". Then configure CMake Generator with NMake Makefiles JOM + Extra generator: CodeBlocks.
+When finishing compilation, configure kit in Qt Creator. Clone Kit "Desktop Qt 5.15.12 MSVC" to "Desktop Qt 
+5.15.12 MSVC (static)". Then configure CMake Generator with NMake Makefiles JOM + Extra generator: CodeBlocks.
 
 Finally, just open CMakeLists.txt in Qt Creator and build it with MSVC-static kit.
 
@@ -202,9 +231,9 @@ https://github.com/Stellarium/stellarium/releases
 Do this command in a terminal (if you prefer, you might use arK or some other graphical archive tool): 
 
 ```
-$ tar zxf stellarium-0.21.2.tar.gz
+$ tar zxf stellarium-0.21.3.tar.gz
 ```
-You should now have a directory `stellarium-0.21.2` with the source code in it.
+You should now have a directory `stellarium-0.21.3` with the source code in it.
 
 
 ### Clone project from GitHub
@@ -230,12 +259,13 @@ $ cd stellarium
 
 ### Download source code from GitHub
 
-You can [download](https://github.com/Stellarium/stellarium/archive/master.zip) fresh source code from GitHub by web.
+You can [download](https://github.com/Stellarium/stellarium/archive/master.zip) fresh source code from 
+GitHub by web.
 
 #### Windows specifics
 
-On Windows save the file (`master.zip` or `stellarium-0.21.2.tar.gz`) to the `C:/Devel` directory as example. You will need 
-a decompression program installed in Windows, for example [7-Zip](http://www.7-zip.org/). 
+On Windows save the file (`master.zip` or `stellarium-0.21.3.tar.gz`) to the `C:/Devel` directory as 
+example. You will need a decompression program installed in Windows, for example [7-Zip](http://www.7-zip.org/). 
 The root of the source tree will be `C:/Devel/stellarium` for simplicity.
 
 ## Building
@@ -284,7 +314,8 @@ If you have Qt5 installed using official Qt installer, then pass parameter
 $ cmake -DCMAKE_PREFIX_PATH=/opt/Qt5 ../..
 ```
 
-When you are using QtCreator IDE, build directories are created by the IDE. It appears that on Windows, a directory name is proposed, but you have to create it manually. 
+When you are using QtCreator IDE, build directories are created by the IDE. It appears that on Windows, 
+a directory name is proposed, but you have to create it manually. 
 
 You can keep your copy up-to-date by typing `git pull --rebase` in ~/stellarium. 
 Feel free to send patches to our mailing list stellarium@googlegroups.com
@@ -353,12 +384,15 @@ Then you can double-click this link, or even place it in your task bar.
 
 ## Code testing
 
-There are several test programs in the repository. To build them, define `-DENABLE_TESTING=ON` (or `-DENABLE_TESTING=1`), or configure cmake in QtCreator's Projects tab.
+There are several test programs in the repository. To build them, define `-DENABLE_TESTING=ON` (or 
+`-DENABLE_TESTING=1`), or configure cmake in QtCreator's Projects tab.
 
 Then configure a Debug build and select a test... application to be executed.
 
-Please try to test your changes before committing to master. Our automated [GitHub Actions](https://github.com/Stellarium/stellarium/actions/workflows/ci.yml) and 
-[AppVeyor](https://ci.appveyor.com/project/alex-w/stellarium) builds will signal failure when tests don't complete.
+Please try to test your changes before committing to master. Our automated 
+[GitHub Actions](https://github.com/Stellarium/stellarium/actions/workflows/ci.yml) and 
+[AppVeyor](https://ci.appveyor.com/project/alex-w/stellarium) builds will signal failure when 
+tests don't complete.
 
 To execute all unit tests in terminal please run:
 ```
@@ -371,9 +405,11 @@ $ ctest --output-on-failure
 
 ## Packaging
 
-OK, you have built the program from source code and now you may want to install the executable file into your operating system or create a package for distribution.
+OK, you have built the program from source code and now you may want to install the executable 
+file into your operating system or create a package for distribution.
 
-To install the executable file (with necessary libraries and data files) into the directory defined in parameter `CMAKE_INSTALL_PREFIX`, run:
+To install the executable file (with necessary libraries and data files) into the directory 
+defined in parameter `CMAKE_INSTALL_PREFIX`, run:
 
 ```
 $ sudo make install
@@ -425,9 +461,12 @@ $ hdiutil create -format UDZO -srcfolder Stellarium Stellarium.dmg
 
 To create a Windows installer you need to have installed [Inno Setup](http://www.jrsoftware.org/).
 
-If you have followed all the above procedures the current build will generate the necessary `stellarium.iss` file in `C:\Devel\stellarium\builds\msvc`.
+If you have followed all the above procedures the current build will generate the necessary 
+`stellarium.iss` file in `C:\Devel\stellarium\builds\msvc`.
 
-Double click on it, then from the menu bar "build-compile". It will build the stellarium installer package and place it in a folder of the stellarium source tree root folder `installers`. So you can find it in `C:\Devel\stellarium\stellarium\installers`
+Double click on it, then from the menu bar "build-compile". It will build the stellarium installer 
+package and place it in a folder of the stellarium source tree root folder `installers`. So you 
+can find it in `C:\Devel\stellarium\stellarium\installers`
 
 Or you can use cmake command for create an installer:
 ```
@@ -436,7 +475,8 @@ $ cmake --build c:\devel\stellarium\build\msvc --target stellarium-installer
 
 ### Supported make targets
 
-Make groups various tasks as "targets". Starting make without any arguments causes make to build the default target - in our case, building Stellarium, its tests, the localization files, etc.
+Make groups various tasks as "targets". Starting make without any arguments causes make to build 
+the default target - in our case, building Stellarium, its tests, the localization files, etc.
  Target          | Description
 -----------------|----------------------------------------------------------------------------------------------------
 | install        | Installation of all binaries and related files to the directory determined by `CMAKE_INSTALL_PREFIX`
