@@ -424,7 +424,7 @@ void AngleSpinBox::formatText(void)
 				lineEdit()->setText(QString("%1%2d %3m %4s")
                                     .arg(signInd).arg(d).arg(m).arg(s, 0, 'f', decimalPlaces, ' '));
 			else
-				lineEdit()->setText(QString("%1%2° %4' %5\"")
+				lineEdit()->setText(QString("%1%2° %3' %4\"")
 				    .arg(signInd).arg(d).arg(m)
                                     .arg(s, 0, 'f', decimalPlaces, ' '));
 			break;
