@@ -89,13 +89,6 @@ QMap<int, QString> CCD::propertyMap()
 	return mapping;
 }
 
-
-/* ********************************************************************* */
-#if 0
-#pragma mark -
-#pragma mark Instance Methods
-#endif
-/* ********************************************************************* */
 QString CCD::name() const
 {
 	return m_name;
@@ -286,12 +279,7 @@ void CCD::writeToSettings(QSettings * settings, const int index)
 	settings->setValue(prefix + "prism_distance", this->prismDistance());
 	settings->setValue(prefix + "prism_pos_angle", this->prismPosAngle());	
 }
-/* ********************************************************************* */
-#if 0
-#pragma mark -
-#pragma mark Static Methods
-#endif
-/* ********************************************************************* */
+
 CCD* CCD::ccdFromSettings(QSettings* settings, int ccdIndex)
 {
 	CCD* ccd = new CCD();

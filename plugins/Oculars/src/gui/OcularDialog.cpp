@@ -79,21 +79,20 @@ OcularDialog::OcularDialog(Oculars* pluginPtr,
 
 OcularDialog::~OcularDialog()
 {
-	ocularTableModel->disconnect();
-	telescopeTableModel->disconnect();
-	ccdTableModel->disconnect();
-	lensTableModel->disconnect();
+	ui->telescopeListView->clearSelection();
+	ui->ocularListView->clearSelection();
+	ui->ccdListView->clearSelection();
+	ui->lensListView->clearSelection();
+
+	ocularTableModel->disconnect(ocularMapper);
+	telescopeTableModel->disconnect(telescopeMapper);
+	ccdTableModel->disconnect(ccdMapper);
+	lensTableModel->disconnect(lensMapper);
 
 	delete ui;
 	ui = Q_NULLPTR;
 }
 
-/* ********************************************************************* */
-#if 0
-#pragma mark -
-#pragma mark StelModule Methods
-#endif
-/* ********************************************************************* */
 void OcularDialog::retranslate()
 {
 	if (dialog) {
@@ -102,12 +101,6 @@ void OcularDialog::retranslate()
 	}
 }
 
-/* ********************************************************************* */
-#if 0
-#pragma mark -
-#pragma mark Slot Methods
-#endif
-/* ********************************************************************* */
 void OcularDialog::closeWindow()
 {
 	setVisible(false);
@@ -288,12 +281,6 @@ void OcularDialog::moveDownSelectedLens()
 	}
 }
 
-/* ********************************************************************* */
-#if 0
-#pragma mark -
-#pragma mark Protected Methods
-#endif
-/* ********************************************************************* */
 void OcularDialog::createDialogContent()
 {
 	ui->setupUi(dialog);

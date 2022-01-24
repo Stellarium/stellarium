@@ -59,12 +59,6 @@ QMap<int, QString> Telescope::propertyMap()
 	return mapping;
 }
 
-/* ********************************************************************* */
-#if 0
-#pragma mark -
-#pragma mark Accessors & Mutators
-#endif
-/* ********************************************************************* */
 const QString Telescope::name() const
 {
 	return m_name;
@@ -136,13 +130,6 @@ void Telescope::writeToSettings(QSettings * settings, const int index)
 	settings->setValue(prefix + "equatorial", this->isEquatorial());
 }
 
-/* ********************************************************************* */
-#if 0
-#pragma mark -
-#pragma mark Static Methods
-#endif
-/* ********************************************************************* */
-
 Telescope* Telescope::telescopeFromSettings(QSettings* theSettings, int telescopeIndex)
 {
 	Telescope* telescope = new Telescope();
@@ -156,6 +143,7 @@ Telescope* Telescope::telescopeFromSettings(QSettings* theSettings, int telescop
 	telescope->setEquatorial(theSettings->value(prefix + "equatorial").toBool());
 	return telescope;
 }
+
 Telescope* Telescope::telescopeModel()
 {
 	Telescope* model = new Telescope();

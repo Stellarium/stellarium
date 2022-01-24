@@ -74,13 +74,6 @@ void Lens::writeToSettings(QSettings * settings, const int index)
 	settings->setValue(prefix + "multipler", this->getMultipler());
 }
 
-/* ********************************************************************* */
-#if 0
-#pragma mark -
-#pragma mark Static Methods
-#endif
-/* ********************************************************************* */
-
 Lens* Lens:: lensFromSettings(QSettings* theSettings, int lensIndex)
 {
 	Lens* lens = new Lens();
