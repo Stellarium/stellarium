@@ -2390,9 +2390,9 @@ void AstroCalcDialog::generateLunarEclipses()
 					StelUtils::rectToSphe(&az, &alt, moon->getAltAzPosAuto(core));
 					StelUtils::radToDecDeg(alt, sign, altitude);
 					elevationStr = (withDecimalDegree ? StelUtils::radToDecDegStr(alt) : StelUtils::radToDmsStr(alt));
-					if (altitude >= 45.) // Perfect conditions
+					if (altitude >= 45.) // Perfect conditions - 45+ degrees
 						visibilityConditionsStr = q_("Perfect visibility conditions for current location");
-					else if (altitude >= 13.) // "Photometric altitude"
+					else if (altitude >= 30.) // "Photometric altitude" - 30+ degrees
 						visibilityConditionsStr = q_("Good visibility conditions for current location");
 					else
 						visibilityConditionsStr = q_("Bad visibility conditions for current location");
