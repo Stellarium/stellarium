@@ -254,17 +254,15 @@ void AstroCalcDialog::createDialogContent()
 	ui->saturnMarkerColor->setText(QChar(0x2644));
 
 	const double JD = core->getJD() + core->getUTCOffset(core->getJD()) / 24;
-	QDateTime currentDT = StelUtils::jdToQDateTime(JD);
+	QDateTime currentDT		= StelUtils::jdToQDateTime(JD);
+	QDateTime firstDayOfYear	= QDateTime::fromString(QString("%1-01-01T00:00:01").arg(currentDT.date().year()), Qt::ISODate);
+	QDateTime lastDayOfYear	= QDateTime::fromString(QString("%1-12-31T23:59:59").arg(currentDT.date().year()), Qt::ISODate);
 	ui->dateFromDateTimeEdit->setDateTime(currentDT);
 	ui->dateToDateTimeEdit->setDateTime(currentDT.addMonths(1));
 	ui->phenomenFromDateEdit->setDateTime(currentDT);
 	ui->phenomenToDateEdit->setDateTime(currentDT.addMonths(1));
 	ui->transitFromDateEdit->setDateTime(currentDT);
 	ui->transitToDateEdit->setDateTime(currentDT.addMonths(1));
-	int year, month, day;
-	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
-	QDateTime firstDayOfYear = QDateTime::fromString(QString("%1.%2.%3").arg(year, 4, 10, QLatin1Char('0')).arg(1).arg(1), "yyyy.M.d");
-	QDateTime lastDayOfYear = QDateTime::fromString(QString("%1.%2.%3").arg(year, 4, 10, QLatin1Char('0')).arg(12).arg(31), "yyyy.M.d");
 	ui->lunareclipseFromDateEdit->setDateTime(firstDayOfYear);
 	ui->lunareclipseToDateEdit->setDateTime(lastDayOfYear);
 	ui->monthlyElevationTimeInfo->setStyleSheet("font-size: 18pt; color: rgb(238, 238, 238);");
