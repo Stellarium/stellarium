@@ -162,13 +162,14 @@ public:
 	//! Defines the number and the order of the columns in the lunar eclipse table
 	//! @enum LunarEclipseColumns
 	enum LunarEclipseColumns {
-		LunarEclipseDate,            //! date and time of lunar eclipse
-		LunarEclipseSaros,           //! Saros number
-		LunarEclipseType,            //! type of lunar eclipse
-		LunarEclipseGamma,           //! Gamma of lunar eclipse
-		LunarEclipsePMag,            //! penumbral magnitude of lunar eclipse
-		LunarEclipseUMag,            //! umbral magnitude of lunar eclipse
-		LunarEclipseCount            //! total number of columns
+		LunarEclipseDate,		//! date and time of lunar eclipse
+		LunarEclipseSaros,		//! Saros number
+		LunarEclipseType,		//! type of lunar eclipse
+		LunarEclipseGamma,		//! Gamma of lunar eclipse
+		LunarEclipsePMag,		//! penumbral magnitude of lunar eclipse
+		LunarEclipseUMag,		//! umbral magnitude of lunar eclipse
+		LunarEclipseElevation,	//! elevation of the Moon (e.g. visibility conditions)
+		LunarEclipseCount		//! total number of columns
 	};
 
 	AstroCalcDialog(QObject* parent);
@@ -680,7 +681,7 @@ private:
 	{
 		int column = treeWidget()->sortColumn();
 
-		if (column == AstroCalcDialog::LunarEclipseDate || column == AstroCalcDialog::LunarEclipsePMag || column == AstroCalcDialog::LunarEclipseUMag)
+		if (column == AstroCalcDialog::LunarEclipseDate || column == AstroCalcDialog::LunarEclipsePMag || column == AstroCalcDialog::LunarEclipseUMag || column == AstroCalcDialog::LunarEclipseElevation)
 		{
 			return data(column, Qt::UserRole).toFloat() < other.data(column, Qt::UserRole).toFloat();
 		}
