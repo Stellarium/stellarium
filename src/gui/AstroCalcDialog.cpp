@@ -2396,6 +2396,12 @@ void AstroCalcDialog::generateLunarEclipses()
 						visibilityConditionsStr = q_("Good visibility conditions for current location");
 					else
 						visibilityConditionsStr = q_("Bad visibility conditions for current location");
+					if (uMag < 1.0 && pMag < 0.7)
+					{
+						// Our rule of thumb is that a partial penumbral eclipse is detectable with
+						// the unaided eye if penumbral magnitude>0.7
+						visibilityConditionsStr = q_("Not observable eclipse");
+					}
 					if (!sign)
 					{
 						elevationStr = dash;
