@@ -2396,12 +2396,11 @@ void AstroCalcDialog::generateLunarEclipses()
 						visibilityConditionsStr = q_("Good visibility conditions for current location");
 					else
 						visibilityConditionsStr = q_("Bad visibility conditions for current location");
-					if (uMag < 1.0 && pMag < 0.7)
-					{
-						// Our rule of thumb is that a partial penumbral eclipse is detectable with
-						// the unaided eye if penumbral magnitude>0.7
-						visibilityConditionsStr = q_("Not observable eclipse");
-					}
+
+					// Our rule of thumb is that a partial penumbral eclipse is detectable with
+					// the unaided eye if penumbral magnitude>0.7
+					if (uMag < 1.0 && pMag < 0.7) visibilityConditionsStr = q_("Not observable eclipse");
+
 					if (!sign)
 					{
 						elevationStr = dash;
@@ -2414,8 +2413,7 @@ void AstroCalcDialog::generateLunarEclipses()
 					// Saros numbers calculated here are matching well with NASA's Five Millennium Catalog of Lunar Eclipses
 
 					// ln = Brown Lunation number : = 1 at the first New Moon of 1923
-					double q = (JDmid-2423436.40347)/29.530588-0.25;
-					q = round(q);
+					double q = round((JDmid-2423436.40347)/29.530588-0.25);
 					int ln = int(q) + 1 - 953;
 					int nd = ln + 105;
 					int s = 148 + 38 * nd;
@@ -2433,15 +2431,10 @@ void AstroCalcDialog::generateLunarEclipses()
 					sarosStr = QString("%1").arg(QString::number(saros));
 					gammaStr = QString("%1").arg(QString::number(gamma, 'f', 3));
 					pMagStr = QString("%1").arg(QString::number(pMag, 'f', 3));
-					
 					if (uMag<0.)
-					{
 						uMagStr = dash;
-					}
 					else
-					{
 						uMagStr = QString("%1").arg(QString::number(uMag, 'f', 3));
-					}
 
 					ACLunarEclipseTreeWidgetItem* treeItem = new ACLunarEclipseTreeWidgetItem(ui->lunareclipseTreeWidget);
 					treeItem->setText(LunarEclipseDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JDmid), localeMgr->getPrintableTimeLocal(JDmid))); // local date and time
