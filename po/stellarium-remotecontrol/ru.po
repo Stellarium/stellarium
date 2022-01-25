@@ -5,16 +5,16 @@
 # 
 # Translators:
 # cardinot <mcardinot@gmail.com>, 2017
-# Alexander V. Wolf <alex.v.wolf@gmail.com>, 2021
+# Alexander V. Wolf <alex.v.wolf@gmail.com>, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-12-16 17:32+0700\n"
+"POT-Creation-Date: 2022-01-24 02:36+0700\n"
 "PO-Revision-Date: 2017-11-29 01:19+0000\n"
-"Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2021\n"
+"Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2022\n"
 "Language-Team: Russian (https://www.transifex.com/stellarium/teams/80998/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -319,6 +319,10 @@ msgstr "Оцифрованный обзор неба"
 msgid "HiPS Survey"
 msgstr "Обзор HiPS"
 
+#: index.html:286 tablet7in.html:350
+msgid "Show planet markers"
+msgstr "Показывать метки планет"
+
 #: index.html:287 tablet7in.html:351
 msgid "Show planet orbits"
 msgstr "Показывать орбиты планет"
@@ -338,6 +342,18 @@ msgstr "Показывать следы планет"
 #: index.html:291 tablet7in.html:355
 msgid "Show trail only for selected planet"
 msgstr "Показывать треки только для выбранной планеты"
+
+#: index.html:294 tablet7in.html:359
+msgid "Scale Moon:"
+msgstr "Масштабирование Луны:"
+
+#: index.html:295 tablet7in.html:363
+msgid "Scale minor bodies:"
+msgstr "Масштабирование малых тел:"
+
+#: index.html:318 tablet7in.html:404
+msgid "Extinction Coefficient:"
+msgstr "Коэфф. экстинкции:"
 
 #: index.html:322 tablet7in.html:409
 msgid "Shooting Stars"

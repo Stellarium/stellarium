@@ -2,11 +2,11 @@
 ########### install files ###############
 
 # install info.ini
-INSTALL(FILES info.ini DESTINATION ${SDATALOC}/skycultures/arabian_peninsula )
+INSTALL(FILES info.ini DESTINATION ${SDATALOC}/skycultures/arabic_lunar_mansions )
 
 # install constellations data, native names data, artwork and descriptions
-INSTALL(DIRECTORY ./ DESTINATION ${SDATALOC}/skycultures/arabian_peninsula
+INSTALL(DIRECTORY ./ DESTINATION ${SDATALOC}/skycultures/arabic_lunar_mansions
 	FILES_MATCHING PATTERN "*.fab" 
 	PATTERN "description.*.utf8"
-	PATTERN "*.jpg"
+	PATTERN "*.png"
 	PATTERN "CMakeFiles" EXCLUDE )

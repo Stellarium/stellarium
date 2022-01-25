@@ -5,17 +5,17 @@
 # 
 # Translators:
 # cardinot <mcardinot@gmail.com>, 2017
-# Georg Zotti <Georg.Zotti@univie.ac.at>, 2020
-# Latein Lebt, 2021
+# Latein Lebt, 2022
+# Georg Zotti <Georg.Zotti@univie.ac.at>, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-12-16 17:32+0700\n"
+"POT-Creation-Date: 2022-01-24 02:36+0700\n"
 "PO-Revision-Date: 2017-11-29 01:19+0000\n"
-"Last-Translator: Latein Lebt, 2021\n"
+"Last-Translator: Georg Zotti <Georg.Zotti@univie.ac.at>, 2022\n"
 "Language-Team: German (https://www.transifex.com/stellarium/teams/80998/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -320,6 +320,10 @@ msgstr "Digitized Sky Survey"
 msgid "HiPS Survey"
 msgstr "HiPS-Durchmusterung"
 
+#: index.html:286 tablet7in.html:350
+msgid "Show planet markers"
+msgstr "Planetenmarkierungen anzeigen"
+
 #: index.html:287 tablet7in.html:351
 msgid "Show planet orbits"
 msgstr "Zeige Umlaufbahnen"
@@ -339,6 +343,18 @@ msgstr "Planetenspuren anzeigen"
 #: index.html:291 tablet7in.html:355
 msgid "Show trail only for selected planet"
 msgstr "Nur Spur des gewählten Objekts"
+
+#: index.html:294 tablet7in.html:359
+msgid "Scale Moon:"
+msgstr "Mond vergrößern:"
+
+#: index.html:295 tablet7in.html:363
+msgid "Scale minor bodies:"
+msgstr "Kleinkörper vergrößern:"
+
+#: index.html:318 tablet7in.html:404
+msgid "Extinction Coefficient:"
+msgstr "Extinktionskoeffizient:"
 
 #: index.html:322 tablet7in.html:409
 msgid "Shooting Stars"

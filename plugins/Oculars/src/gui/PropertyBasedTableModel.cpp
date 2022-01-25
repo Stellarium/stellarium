@@ -19,12 +19,6 @@
 #include "PropertyBasedTableModel.hpp"
 #include <QDebug>
 
-/* ********************************************************************* */
-#if 0
-#pragma mark -
-#pragma mark instance Methods
-#endif
-/* ********************************************************************* */
 PropertyBasedTableModel::PropertyBasedTableModel(QObject *parent)
 	: QAbstractTableModel(parent)
 	, content(Q_NULLPTR)
@@ -47,13 +41,6 @@ void PropertyBasedTableModel::init(QList<QObject *>* content, QObject *model, QM
 	this->mappings = mappings;
 	endResetModel();
 }
-
-/* ********************************************************************* */
-#if 0
-#pragma mark -
-#pragma mark Model Methods
-#endif
-/* ********************************************************************* */
 
 int PropertyBasedTableModel::rowCount(const QModelIndex &parent) const
 {

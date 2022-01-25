@@ -660,8 +660,7 @@ void SearchDialog::manualPositionChanged()
 	searchListModel->clearValues();
 	StelCore* core = StelApp::getInstance().getCore();
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);	
-	Vec3d pos;
-	Vec3d aimUp;
+	Vec3d pos;	
 	double spinLong=ui->AxisXSpinBox->valueRadians();
 	double spinLat=ui->AxisYSpinBox->valueRadians();
 
@@ -669,7 +668,7 @@ void SearchDialog::manualPositionChanged()
 	// However, if those are identical, we have a problem when we want to look right into the pole. (e.g. zenith), which requires a special up vector.
 	// aimUp depends on MovementMgr::MountMode mvmgr->mountMode!
 	mvmgr->setViewUpVector(Vec3d(0., 0., 1.));
-	aimUp=mvmgr->getViewUpVectorJ2000();
+	Vec3d aimUp = mvmgr->getViewUpVectorJ2000();
 	StelMovementMgr::MountMode mountMode=mvmgr->getMountMode();
 
 	switch (getCurrentCoordinateSystem())

@@ -64,12 +64,6 @@ extern void qt_set_sequence_auto_mnemonic(bool b);
 
 static QSettings *settings; //!< The settings as read in from the ini file.
 
-/* ****************************************************************************************************************** */
-#if 0
-#pragma mark -
-#pragma mark StelModuleMgr Methods
-#endif
-/* ****************************************************************************************************************** */
 //! This method is the one called automatically by the StelModuleMgr just
 //! after loading the dynamic library
 StelModule* OcularsStelPluginInterface::getStelModule() const
@@ -93,13 +87,6 @@ StelPluginInfo OcularsStelPluginInterface::getPluginInfo() const
 	return info;
 }
 
-
-/* ****************************************************************************************************************** */
-#if 0
-#pragma mark -
-#pragma mark Instance Methods
-#endif
-/* ****************************************************************************************************************** */
 Oculars::Oculars()
 	: selectedCCDIndex(-1)
 	, selectedOcularIndex(-1)
@@ -239,13 +226,6 @@ QSettings* Oculars::getSettings()
 	return settings;
 }
 
-
-/* ****************************************************************************************************************** */
-#if 0
-#pragma mark -
-#pragma mark StelModule Methods
-#endif
-/* ****************************************************************************************************************** */
 bool Oculars::configureGui(bool show)
 {
 	if (show)
@@ -661,12 +641,6 @@ void Oculars::init()
 	connect(skyDrawer, SIGNAL(flagStarMagnitudeLimitChanged(bool)), this, SLOT(handleStarMagLimitToggle(bool)));
 }
 
-/* ****************************************************************************************************************** */
-#if 0
-#pragma mark -
-#pragma mark Private slots Methods
-#endif
-/* ****************************************************************************************************************** */
 void Oculars::determineMaxEyepieceAngle()
 {
 	if (ready)
@@ -808,12 +782,6 @@ void Oculars::updateOcularReticle(void)
 	}
 }
 
-/* ****************************************************************************************************************** */
-#if 0
-#pragma mark -
-#pragma mark Slots Methods
-#endif
-/* ****************************************************************************************************************** */
 void Oculars::updateLists()
 {
 	if (oculars.isEmpty())
@@ -1502,12 +1470,6 @@ void Oculars::toggleTelrad()
 	toggleTelrad(!flagShowTelrad);
 }
 
-/* ****************************************************************************************************************** */
-#if 0
-#pragma mark -
-#pragma mark Private Methods
-#endif
-/* ****************************************************************************************************************** */
 void Oculars::initializeActivationActions()
 {
 	QString ocularsGroup = N_("Oculars");

@@ -60,13 +60,6 @@ QMap<int, QString> Ocular::propertyMap(void)
 	return mapping;
 }
 
-
-/* ********************************************************************* */
-#if 0
-#pragma mark -
-#pragma mark Instance Methods
-#endif
-/* ********************************************************************* */
 double Ocular::actualFOV(const Telescope * telescope, const Lens * lens) const
 {
 	const double lens_multipler = (lens != Q_NULLPTR ? lens->getMultipler() : 1.0);
@@ -94,12 +87,6 @@ double Ocular::magnification(const Telescope * telescope, const Lens * lens) con
 	return magnifiction;
 }
 
-/* ********************************************************************* */
-#if 0
-#pragma mark -
-#pragma mark Accessors & Mutators
-#endif
-/* ********************************************************************* */
 QString Ocular::name(void) const
 {
 	return m_name;
@@ -168,13 +155,6 @@ void Ocular::setReticlePath(const QString path)
 {
 	m_reticlePath = path;
 }
-
-/* ********************************************************************* */
-#if 0
-#pragma mark -
-#pragma mark Static Methods
-#endif
-/* ********************************************************************* */
 
 Ocular * Ocular::ocularFromSettings(const QSettings *theSettings, const int ocularIndex)
 {

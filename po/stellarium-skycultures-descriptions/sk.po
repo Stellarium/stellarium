@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-12-16 17:32+0700\n"
+"POT-Creation-Date: 2022-01-24 19:59+0700\n"
 "PO-Revision-Date: 2020-01-06 16:35+0000\n"
 "Last-Translator: Lubomir Hambalek <lubomir.hambalek@gmail.com>, 2021\n"
 "Language-Team: Slovak (https://www.transifex.com/stellarium/teams/80998/sk/)\n"
@@ -21,427 +21,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: sk\n"
 "Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n >= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);\n"
-
-#. type: Content of: <h1>
-#: ../../skycultures/al-sufi/description.en.utf8:1
-msgid "Al-Sufi (\"Book of Fixed Stars\")"
-msgstr "Al-Súfi (\"Kniha stálic\")"
-
-#. type: Content of: <p>
-#: ../../skycultures/al-sufi/description.en.utf8:2
-msgid ""
-"The Book of Fixed Stars was written shortly before 964 AD. Dr. Paul "
-"Kunitzsch described it as \"the most outstanding among the works of the "
-"prominent astronomer Abu 'l-Ḥusayn 'Abd al-Raḥmān ibn 'Umar al-Şūfi (born in"
-" Rayy, 903; died 986), referred to as al-Sufi. In it, al-Şūfī treats the 48 "
-"classical constellations, which were established and transmitted in "
-"Ptolemy's Almagest. The description of each constellation comprises the "
-"following four sections: first, a general discussion of the constellation "
-"and its individual stars; this section also includes alŞūfi's criticism of "
-"the Ptolemaic tradition and notices of his own observations. Second, a "
-"record of the indigenous Arabic star names falling under that constellation,"
-" and the exact identification of the respective stars with the corresponding"
-" Ptolemaic stars. Third, two drawings of the constellation, one as it is "
-"seen on a celestial globe, and the other one as it is seen in the sky. "
-"Fourth, a table of the stars making up that constellation, giving a verbal "
-"description of each star's location and its longitude, latitude, and "
-"magnitude. This table closely follows the arrangement of Ptolemy's star "
-"catalogue in the Almagest.\" <sup><a href=\"#footnote-1\">[1]</a></sup>. In "
-"addition to the four sections of each constellation mentioned by dr. "
-"Kunitzsch, Al-Sufi would identify stars within the 6 magnitudes that were "
-"neglected by Ptolemy, but he did not catalogue them and was faithful to "
-"Ptolemy star catalog."
-msgstr ""
-"Kniha stálic bola napísaná krátko pred r. 964 n.l. Dr. Paul Kunitzsch ju "
-"popísal ako \"najskvelejšia z diel popredného astronóma Abú al-Husejna 'Abd "
-"al-Rahmána ibn 'Umara al-Súfího (nar. 903 v Rajj, zomrel 986), nazývaného "
-"ako al-Súfí. V nej al-Súfí rozoberá 48 klasických súhvezdí, ktoré boli "
-"uzákonené a odovzdané v Ptolemajovom Almageste. Popis každého súhvezdia "
-"zahŕňa nasledovné časti: po prvé, všeobecnú rozpravu o súhvezdí a jeho "
-"jednotlivých hviezdach; táto časť obsahuje aj al-Súfího kritiku "
-"Ptolemajovskej tradície a poznámky zo svojich vlastných pozorovaní. Po "
-"druhé, záznam domorodých arabských mien hviezd, ktoré spadajú pod dané "
-"súhvezdie a presné určenie jednotlivých hviezd so zodpovedajúcimi "
-"Ptolemajovskými hviezdami. Po tretie, dve kresby súhvezdia - jedna, ako je "
-"vidieť na nebeskej sfére, a druhá, ako je vidieť na oblohe. Po štvrté, "
-"tabuľku hviezd tvoriacich súhvezdie, so slovným popisom polohy každej "
-"hviezdy a jej dĺžku, šírku, magnitúdu. Táto tabuľka blízko kopíruje "
-"usporiadanie Ptolemajovho hviezdneho katalógu v Almageste.\" <sup><a "
-"href=\"#footnote-1\">[1]</a></sup>. K štyrom častiam ku každému súhvezdiu "
-"spomínaných dr. Kunitzschom navyše al-Súfí určil hviezdy do 6 magnitúdy, "
-"ktoré boli Ptolemajom zanedbané, ale do katalógu ich nepripojil a ostal "
-"verný Ptolemajovmu hviezdnemu katalógu."
-
-#. type: Content of: <p>
-#: ../../skycultures/al-sufi/description.en.utf8:3
-msgid ""
-"An important aspect of the general discussion section is Al-Sufi method of "
-"facilitating the star identification. He describes each individual star in "
-"more than way: By the star position related to the constellation figure, by "
-"its magnitude, by the asterism it forms with other stars like triangle or "
-"arc shapes, sometimes by the star position related to the Milky way, and by "
-"the angular distance from a close by star. I have counted more than 700 "
-"angular distances measured by al-Sufi in his book. The units he uses for "
-"angular distances are cubits, spear length, man-height, span, and finger. "
-"Al-Sufi explicitly said in his book that a cubit is equal to two degrees and"
-" 20 minutes <sup><a href=\"#footnote-2\">[2]</a></sup>. For the other units,"
-" Schjellerup concluded some values, but tracking the 700 measurements, I "
-"came up with different values. The following table summarizes the units and "
-"relationship to the cubit value from Schjellerup<sup><a "
-"href=\"#footnote-3\">[3]</a></sup> and from my research."
-msgstr ""
-"Dôležitý aspekt časti všeobecnej diskusie je Al-Súfího metóda vykonania "
-"identifikácie hviezd. Každú jednotlivú hviezdu popisuje viacerými spôsobmi: "
-"podľa polohy hviezdy vzhľadom na obrazec súhvezdia, podľa magnitúdy, podľa "
-"asterizmov, ktoré tvorí s ostatnými hviezdami ako trojuholníky, alebo časti "
-"oblúka, niekedy podľa polohy voči Mliečnej ceste a podľa uhlovej "
-"vzdialenosti od blízkej hviezdy. V knihe som napočítal viac ako 700 uhlových"
-" vzdialeností meraných Al-Súfím. Jednotky, ktoré používa pre uhlové "
-"vzdialenosti, sú lakte, dĺžka kopije, výška človeka, šírka a prst. Al-Súfí "
-"sám explicitne tvrdí, že lakeť sa rovná dvom stupňom a 20 minútam <sup><a "
-"href=\"#footnote-2\">[2]</a></sup>. Pre ostatné jednotky odvodil Schjellerup"
-" niektoré hodnoty, ale po prezretí 700 meraní som prišiel na iné hodnoty. "
-"Nasledujúca tabuľka zhŕňa jednotky a ich vzťah k hodnote lakťa podľa "
-"Schjellerupa <sup><a href=\"#footnote-3\">[3]</a></sup> a z môjho výskumu."
-
-#. type: Content of: <h2>
-#: ../../skycultures/al-sufi/description.en.utf8:5
-msgid "Angular distance units used by Al-Sufi"
-msgstr "Jednotky uhlových vzdialeností používané Al-Súfim"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/al-sufi/description.en.utf8:10
-msgid "<b>Schjellerup</b>"
-msgstr "<b>Schjellerup</b>"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/al-sufi/description.en.utf8:11
-msgid "<b>Khalid</b>"
-msgstr "<b>Chálid</b>"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/al-sufi/description.en.utf8:14
-msgid "<b>unit</b>"
-msgstr "<b>jednotka</b>"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/al-sufi/description.en.utf8:15
-#: ../../skycultures/al-sufi/description.en.utf8:17
-msgid "<b>cubits</b>"
-msgstr "<b>lakte</b>"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/al-sufi/description.en.utf8:16
-#: ../../skycultures/al-sufi/description.en.utf8:18
-msgid "<b>Angular Value</b>"
-msgstr "<b>Uhlová hodnota</b>"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/al-sufi/description.en.utf8:21
-msgid "spear"
-msgstr "kopija"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/al-sufi/description.en.utf8:22
-#: ../../skycultures/al-sufi/description.en.utf8:24
-msgid "6 cubits"
-msgstr "6 lakťov"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/al-sufi/description.en.utf8:28
-msgid "Man-Height"
-msgstr "výška muža"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/al-sufi/description.en.utf8:31
-msgid "3 cubits"
-msgstr "3 lakte"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/al-sufi/description.en.utf8:35
-msgid "cubit"
-msgstr "lakeť"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/al-sufi/description.en.utf8:36
-#: ../../skycultures/al-sufi/description.en.utf8:38
-msgid "1 cubit"
-msgstr "1 lakeť"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/al-sufi/description.en.utf8:42
-msgid "span"
-msgstr "šírka"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/al-sufi/description.en.utf8:43
-msgid "1/3 of a cubit"
-msgstr "1/3 lakťa"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/al-sufi/description.en.utf8:45
-msgid "1/2 of a cubit"
-msgstr "1/2 lakťa"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/al-sufi/description.en.utf8:49
-msgid "finger"
-msgstr "prst"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/al-sufi/description.en.utf8:50
-msgid "1/32 of a cubit"
-msgstr "1/32 lakťa"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/al-sufi/description.en.utf8:52
-msgid "1/16 of a cubit"
-msgstr "1/16 lakťa"
-
-#. type: Content of: <p>
-#: ../../skycultures/al-sufi/description.en.utf8:57
-msgid ""
-"Another important aspect of Al-Sufi book is his record of the indigenous "
-"Arabic star names falling under each constellation, and the exact "
-"identification of the respective stars with the corresponding Ptolemaic "
-"stars. This means that we are looking at two layers of stars knowledge at "
-"the same time: the Ptolemaic one and the indigenous Arab one."
-msgstr ""
-"Ďalší dôležitý prvok Al-Súfího knihy je jeho záznam domorodých arabských "
-"mien hviezd spadajúcich pod každé súhvezdie a ich presná identifikácia "
-"vzhľadom k zodpovedajúcim Ptolemajovým hviezdam. To znamená, že sa pozeráme "
-"naraz na dve vrstvy poznania hviezd: Ptolemajovské a domorodé arabské."
-
-#. type: Content of: <h2>
-#: ../../skycultures/al-sufi/description.en.utf8:59
-msgid "The Sky Culture"
-msgstr "Kultúra oblohy"
-
-#. type: Content of: <p>
-#: ../../skycultures/al-sufi/description.en.utf8:60
-msgid ""
-"This sky culture is a result of a research done on several manuscripts of "
-"the book, oldest of which is the <a "
-"href=\"https://iiif.bodleian.ox.ac.uk/iiif/viewer/c1caa84c-f6d2-483f-9eb4-2439cccdc801#?c=0&m=0&s=0&cv=25&r=0&xywh=-4815%2C-378%2C14782%2C7535\""
-" class='external text' rel=\"nofollow\">Oxford, Bodleian Library Ms. Marsh "
-"144 dated 1009 AD</a>."
-msgstr ""
-"Táto kultúra oblohy je výsledkom výskumu na viacerých rukopisoch knihy, z "
-"ktorých najstarší je <a "
-"href=\"https://iiif.bodleian.ox.ac.uk/iiif/viewer/c1caa84c-f6d2-483f-9eb4-2439cccdc801#?c=0&m=0&s=0&cv=25&r=0&xywh=-4815%2C-378%2C14782%2C7535\""
-" class='external text' rel=\"nofollow\">Oxford, Bodleian Library Ms. Marsh "
-"144 datovaný 1009 n.l.</a>."
-
-#. type: Content of: <p>
-#: ../../skycultures/al-sufi/description.en.utf8:61
-msgid ""
-"First, the manuscripts of the Book of Fixed Stars were critically edited, "
-"and the text was produced. Second, each member star of the 48 constellations"
-" was identified according to Al-Sufi description, and new tables were built "
-"including modern star designations from the Hipparcos, Bright stars, and "
-"Bayer catalogues. Third, Arab indigenous star names were collected and "
-"identified as mapped by Al-Sufi to the Ptolemaic ones. All the previous "
-"steps were included in a book published digitally of the Book of Fixed Stars"
-" plus explanations and commentary by Khalid Al-Ajaji<sup><a "
-"href=\"#footnote-4\">[4]</a></sup>."
-msgstr ""
-"Po prvé, rukopisy Knihy stálic boli riadne upravované a bol k nim spravený "
-"text. Po druhé, každá členská hviezda zo 48 súhvezdí bola identifikovaná "
-"podľa Al-Súfího popisu a skonštruovali sa nové tabuľky vrátane moderných "
-"označení hviezd z katalógov Hipparcos, Jasných hviezd a Beyerovho. Po "
-"tretie, domorodé arabské mená hviezd sa zozbierali a identifikovali podľa "
-"Al-Súfího priradenia k Ptolemajovým. Všetky predošlé kroky boli opísané v "
-"digitálne vydanej knihe Kniha stálic plus vysvetlenia a komentáre od Chálid "
-"Al-Adžadžiho <sup><a href=\"#footnote-4\">[4]</a></sup>."
-
-#. type: Content of: <p>
-#: ../../skycultures/al-sufi/description.en.utf8:62
-msgid ""
-"The sky culture stick figures of the constellations are the images in the "
-"Ulugh Beg manuscript of the Book of Fixed Stars, extracted, and adapted for "
-"Stellarium by Mr. Kutaibaa Akraa <sup><a href=\"#footnote-5\">[5]</a></sup>."
-" The star names file includes the star number in the constellation as the "
-"primary star name and the description of the star in the tables as a "
-"secondary name. For example, Polaris primary name that is displayed with the"
-" star is: UMi1, UMi being Ursa Minor and 1 is the first star of this "
-"constellation. If the star is selected other secondary names are displayed, "
-"which will display \"The star on the end of the tail\" on the top of the "
-"screen. The constellation lines are constructed according to the "
-"constellation shapes with an attempt to include most of the member stars. "
-"For indigenous Arab star knowledge, individual star names were added to the "
-"star file as secondary names, while names of group of stars were defined "
-"through asterism names and asterism lines files."
-msgstr ""
-"Paličkové obrázky ku kultúre oblohy sú prevzaté z Ulug Begovho rukopisu "
-"Knihy stálic, vybraté a uprevené pre Stellarium pánom Kutaibaa Akraa <sup><a"
-" href=\"#footnote-5\">[5]</a></sup>. Súbor s menami hviezd obsahuje číslo "
-"hviezdy v súhvezdí, ako jej hlavné meno a popis hviezdy v tabuľkách ako "
-"vedľajšie meno. Napríklad, Polárka má hlavné meno zobrazené ako UMi1, UMi je"
-" skratka Ursa Minor a 1 je prvá hviezda súhvezdia. Ak je hviezda vybratá, na"
-" vrchu obrazovky sa zobrazia vedľajšie mená ako \"Hviezda na konci "
-"chvosta\". Čiary súhvezdí sú zostavené podľa tvarov súhvezdí s pokusom "
-"spojiť čo najviac členských hviezd. Do súboru s hviezdami boli pridané "
-"ďalšie jednotlivé vedľajšie mená pre domorodé arabské názvy hviezd, kým "
-"názvy skupín hviezd boli definované cez asterizmy a súbory pre čiary "
-"asterizmov."
-
-#. type: Content of: <p>
-#: ../../skycultures/al-sufi/description.en.utf8:63
-msgid ""
-"The translation of star descriptions from Arabic into English was extracted "
-"from Ernie Wright website<sup><a href=\"#footnote-6\">[6]</a></sup> which "
-"was transcribed from Toomer's translation of the Almagest<sup><a "
-"href=\"#footnote-7\">[7]</a></sup>. The translation was modified in a few "
-"places to agree with Al-Sufi wording."
-msgstr ""
-"Preklad popisov hviezd z arabčiny do angličtiny bol prevzatý zo stránky "
-"Ernieho Wrigtha <sup><a href=\"#footnote-6\">[6]</a></sup>, ktorý bol "
-"prepísaný z Toomervho prekladu Almagestu <sup><a "
-"href=\"#footnote-7\">[7]</a></sup>. Preklad bol miestami upravený, aby "
-"súhlasil s Al-Súfího vyjadrením."
-
-#. type: Content of: <p>
-#: ../../skycultures/al-sufi/description.en.utf8:64
-msgid ""
-"The single source of the sky culture is the Book of Fixed Stars and the "
-"objective is to give a faithful representation of the book content."
-msgstr ""
-"Jediným zdrojom tejto kultúry oblohy je Kniha stálic a zámerom je podať "
-"vernú reprezentáciu obsahu knihy."
-
-#. type: Content of: <h2>
-#: ../../skycultures/al-sufi/description.en.utf8:66
-#: ../../skycultures/babylonian_mulapin/description.en.utf8:522
-#: ../../skycultures/babylonian_seleucid/description.en.utf8:464
-#: ../../skycultures/greek_almagest/description.en.utf8:496
-#: ../../skycultures/greek_farnese/description.en.utf8:299
-#: ../../skycultures/greek_leidenAratea/description.en.utf8:288
-msgid "Fair Use"
-msgstr "Spôsob férového použitia"
-
-#. type: Content of: <p>
-#: ../../skycultures/al-sufi/description.en.utf8:67
-msgid ""
-"This sky culture is provided for free under CC BY-ND 4.0 International "
-"Public License (share-alike, do not change it without consulting the "
-"contributors, and cite the contributors). The author wishes that this work "
-"be cited according to the common rules."
-msgstr ""
-"Táto kultúra oblohy je poskytnutá zadarmo pod medzinárodnou licenciou CC BY-"
-"ND 4.0 (možné zdieľanie, nemeniť bez oslovenia prispievateľov a citovať "
-"prispievateľov). Autor si želá, aby bolo to dielo citované podľa všeobecných"
-" pravidiel."
-
-#. type: Content of: <p><h3>
-#: ../../skycultures/al-sufi/description.en.utf8:69
-#: ../../skycultures/anutan/description.en.utf8:45
-#: ../../skycultures/arabic/description.en.utf8:32
-#: ../../skycultures/aztec/description.en.utf8:61
-#: ../../skycultures/babylonian_seleucid/description.en.utf8:475
-#: ../../skycultures/chinese_contemporary/description.en.utf8:23
-#: ../../skycultures/chinese_medieval/description.en.utf8:48
-#: ../../skycultures/egyptian/description.en.utf8:17
-#: ../../skycultures/greek_farnese/description.en.utf8:302
-#: ../../skycultures/greek_leidenAratea/description.en.utf8:291
-#: ../../skycultures/korean/description.en.utf8:12
-#: ../../skycultures/maori/description.en.utf8:10
-#: ../../skycultures/navajo/description.en.utf8:17
-#: ../../skycultures/norse/description.en.utf8:9
-#: ../../skycultures/sami/description.en.utf8:63
-#: ../../skycultures/sardinian/description.en.utf8:11
-#: ../../skycultures/tongan/description.en.utf8:85
-#: ../../skycultures/tupi/description.en.utf8:23
-msgid "Author"
-msgstr "Autor"
-
-#. type: Content of: <p>
-#: ../../skycultures/al-sufi/description.en.utf8:70
-msgid ""
-"This sky culture was compiled and added to Stellarium by Khalid Al-Ajaji: "
-"turath.alfalak@gmail.com"
-msgstr ""
-"Kultúru oblohy podľa Knihy stálic skompiloval a do Stellaria pridal Chálid "
-"Al-Adžadži: turath.alfalak@gmail.com"
-
-#. type: Content of: <h3>
-#: ../../skycultures/al-sufi/description.en.utf8:72
-#: ../../skycultures/arabian_peninsula/description.en.utf8:151
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:77
-#: ../../skycultures/chinese/description.en.utf8:2960
-#: ../../skycultures/sami/description.en.utf8:57
-msgid "Notes"
-msgstr "Poznámky"
-
-#. type: Content of: <p>
-#: ../../skycultures/al-sufi/description.en.utf8:73
-msgid ""
-"[1] The Arabs and the Stars, Paul Kunitzsch,The Astronomer Abu'L-Husayn Al-"
-"Sufi And His Book On The Constellations, XI, pg 57. Northampton [England]: "
-"Variorum Reprints, 1989."
-msgstr ""
-"[1] The Arabs and the Stars, Paul Kunitzsch,The Astronomer Abu'L-Husayn Al-"
-"Sufi And His Book On The Constellations, XI, pg 57. Northampton [England]: "
-"Variorum Reprints, 1989."
-
-#. type: Content of: <p>
-#: ../../skycultures/al-sufi/description.en.utf8:74
-msgid "[2] See Al-Sufi description in his book of the 14th star in Auriga."
-msgstr "[2] Viď Al Súfiho popis 14-tej hviezdy v Povozníkovi v jeho knihe."
-
-#. type: Content of: <p>
-#: ../../skycultures/al-sufi/description.en.utf8:75
-msgid ""
-"[3] DESCRIPTIONS DES ETOILES FIXES, traduction littérale avec des notes par "
-"H C F C Schjellerup, St Petersbourg, 1874, pg 26-27."
-msgstr ""
-"[3] DESCRIPTIONS DES ETOILES FIXES, traduction littérale avec des notes par "
-"H C F C Schjellerup, St Petersbourg, 1874, pg 26-27."
-
-#. type: Content of: <p>
-#: ../../skycultures/al-sufi/description.en.utf8:76
-msgid ""
-"[4] <a "
-"href=\"https://drive.google.com/drive/folders/1s6JXzftwjMQ5rgZoGE3718EtBLBZtjzr?usp=sharing\""
-" class='external text' rel=\"nofollow\">Book of Fixed Stars: Critical "
-"edition with commentary by Khalid AlAjaji</a>."
-msgstr ""
-"[4] <a "
-"href=\"https://drive.google.com/drive/folders/1s6JXzftwjMQ5rgZoGE3718EtBLBZtjzr?usp=sharing\""
-" class='external text' rel=\"nofollow\">Book of Fixed Stars: Critical "
-"edition with commentary by Khalid AlAjaji</a>."
-
-#. type: Content of: <p>
-#: ../../skycultures/al-sufi/description.en.utf8:77
-msgid ""
-"[5] <a href=\"https://gallica.bnf.fr/ark:/12148/btv1b60006156.r=.langEN\" "
-"class='external text' rel=\"nofollow\">Oulough Beg copy of ʿAbd al-Raḥmān "
-"ibn ʿUmar al-Ṣūfī. Kitāb ṣuwar al-kawākib al-ṯābita, Paris, Bibliothèque "
-"nationale de France Ms. Arabe 5036</a>."
-msgstr ""
-"[5] <a href=\"https://gallica.bnf.fr/ark:/12148/btv1b60006156.r=.langEN\" "
-"class='external text' rel=\"nofollow\">Oulough Beg copy of ʿAbd al-Raḥmān "
-"ibn ʿUmar al-Ṣūfī. Kitāb ṣuwar al-kawākib al-ṯābita, Paris, Bibliothèque "
-"nationale de France Ms. Arabe 5036</a>."
-
-#. type: Content of: <p>
-#: ../../skycultures/al-sufi/description.en.utf8:78
-msgid ""
-"[6] <a href=\"http://www.etwright.org/astro/almagest.html#cat\" "
-"class='external text' rel=\"nofollow\">Seeing Ancient Stars, Visualization "
-"of the Almagest Catalog</a>."
-msgstr ""
-"[6] <a href=\"http://www.etwright.org/astro/almagest.html#cat\" "
-"class='external text' rel=\"nofollow\">Seeing Ancient Stars, Visualization "
-"of the Almagest Catalog</a>."
-
-#. type: Content of: <p>
-#: ../../skycultures/al-sufi/description.en.utf8:79
-msgid ""
-"[7] Ptolemy’s ALMAGEST, G. J. Toomer, Princeton University Press, 2nd ed., "
-"1998."
-msgstr ""
-"[7] Ptolemy’s ALMAGEST, G. J. Toomer, Princeton University Press, 2nd ed., "
-"1998."
 
 #. type: Content of: <h2>
 #: ../../skycultures/anutan/description.en.utf8:1
@@ -828,10 +407,10 @@ msgstr "Zornička"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/anutan/description.en.utf8:33
-#: ../../skycultures/arabian_peninsula/description.en.utf8:80
-#: ../../skycultures/arabian_peninsula/description.en.utf8:81
-#: ../../skycultures/arabian_peninsula/description.en.utf8:82
-#: ../../skycultures/arabian_peninsula/description.en.utf8:83
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:80
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:81
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:82
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:83
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:377
 #: ../../skycultures/boorong/description.en.utf8:36
 #: ../../skycultures/lokono/description.en.utf8:26
@@ -887,6 +466,28 @@ msgstr ""
 " Tokelau, Tonga, Tuvalu, Uvea, Outliers\" Archipelago Press, the University "
 "of California : ISBN 9780959378771."
 
+#. type: Content of: <p><h3>
+#: ../../skycultures/anutan/description.en.utf8:45
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:69
+#: ../../skycultures/arabic_indigenous/description.en.utf8:32
+#: ../../skycultures/aztec/description.en.utf8:61
+#: ../../skycultures/babylonian_seleucid/description.en.utf8:475
+#: ../../skycultures/chinese_contemporary/description.en.utf8:23
+#: ../../skycultures/chinese_medieval/description.en.utf8:48
+#: ../../skycultures/egyptian/description.en.utf8:17
+#: ../../skycultures/greek_farnese/description.en.utf8:302
+#: ../../skycultures/greek_leidenAratea/description.en.utf8:291
+#: ../../skycultures/korean/description.en.utf8:12
+#: ../../skycultures/maori/description.en.utf8:10
+#: ../../skycultures/navajo/description.en.utf8:17
+#: ../../skycultures/norse/description.en.utf8:9
+#: ../../skycultures/sami/description.en.utf8:63
+#: ../../skycultures/sardinian/description.en.utf8:11
+#: ../../skycultures/tongan/description.en.utf8:85
+#: ../../skycultures/tupi/description.en.utf8:23
+msgid "Author"
+msgstr "Autor"
+
 #. type: Content of: <p>
 #: ../../skycultures/anutan/description.en.utf8:46
 msgid ""
@@ -897,20 +498,419 @@ msgstr ""
 "d.smale(at)niwa.co.nz"
 
 #. type: Content of: <h1>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:1
-msgid "Arabian Peninsula"
-msgstr "Arabský polostrov"
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:1
+msgid "Arabic (Al-Sufi)"
+msgstr ""
+
+#. type: Content of: <p>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:2
+msgid ""
+"The Book of Fixed Stars was written shortly before 964 AD. Dr. Paul "
+"Kunitzsch described it as \"the most outstanding among the works of the "
+"prominent astronomer Abu 'l-Ḥusayn 'Abd al-Raḥmān ibn 'Umar al-Şūfi (born in"
+" Rayy, 903; died 986), referred to as al-Sufi. In it, al-Şūfī treats the 48 "
+"classical constellations, which were established and transmitted in "
+"Ptolemy's Almagest. The description of each constellation comprises the "
+"following four sections: first, a general discussion of the constellation "
+"and its individual stars; this section also includes alŞūfi's criticism of "
+"the Ptolemaic tradition and notices of his own observations. Second, a "
+"record of the indigenous Arabic star names falling under that constellation,"
+" and the exact identification of the respective stars with the corresponding"
+" Ptolemaic stars. Third, two drawings of the constellation, one as it is "
+"seen on a celestial globe, and the other one as it is seen in the sky. "
+"Fourth, a table of the stars making up that constellation, giving a verbal "
+"description of each star's location and its longitude, latitude, and "
+"magnitude. This table closely follows the arrangement of Ptolemy's star "
+"catalogue in the Almagest.\" <sup><a href=\"#footnote-1\">[1]</a></sup>. In "
+"addition to the four sections of each constellation mentioned by dr. "
+"Kunitzsch, Al-Sufi would identify stars within the 6 magnitudes that were "
+"neglected by Ptolemy, but he did not catalogue them and was faithful to "
+"Ptolemy star catalog."
+msgstr ""
+"Kniha stálic bola napísaná krátko pred r. 964 n.l. Dr. Paul Kunitzsch ju "
+"popísal ako \"najskvelejšia z diel popredného astronóma Abú al-Husejna 'Abd "
+"al-Rahmána ibn 'Umara al-Súfího (nar. 903 v Rajj, zomrel 986), nazývaného "
+"ako al-Súfí. V nej al-Súfí rozoberá 48 klasických súhvezdí, ktoré boli "
+"uzákonené a odovzdané v Ptolemajovom Almageste. Popis každého súhvezdia "
+"zahŕňa nasledovné časti: po prvé, všeobecnú rozpravu o súhvezdí a jeho "
+"jednotlivých hviezdach; táto časť obsahuje aj al-Súfího kritiku "
+"Ptolemajovskej tradície a poznámky zo svojich vlastných pozorovaní. Po "
+"druhé, záznam domorodých arabských mien hviezd, ktoré spadajú pod dané "
+"súhvezdie a presné určenie jednotlivých hviezd so zodpovedajúcimi "
+"Ptolemajovskými hviezdami. Po tretie, dve kresby súhvezdia - jedna, ako je "
+"vidieť na nebeskej sfére, a druhá, ako je vidieť na oblohe. Po štvrté, "
+"tabuľku hviezd tvoriacich súhvezdie, so slovným popisom polohy každej "
+"hviezdy a jej dĺžku, šírku, magnitúdu. Táto tabuľka blízko kopíruje "
+"usporiadanie Ptolemajovho hviezdneho katalógu v Almageste.\" <sup><a "
+"href=\"#footnote-1\">[1]</a></sup>. K štyrom častiam ku každému súhvezdiu "
+"spomínaných dr. Kunitzschom navyše al-Súfí určil hviezdy do 6 magnitúdy, "
+"ktoré boli Ptolemajom zanedbané, ale do katalógu ich nepripojil a ostal "
+"verný Ptolemajovmu hviezdnemu katalógu."
+
+#. type: Content of: <p>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:3
+msgid ""
+"An important aspect of the general discussion section is Al-Sufi method of "
+"facilitating the star identification. He describes each individual star in "
+"more than way: By the star position related to the constellation figure, by "
+"its magnitude, by the asterism it forms with other stars like triangle or "
+"arc shapes, sometimes by the star position related to the Milky way, and by "
+"the angular distance from a close by star. I have counted more than 700 "
+"angular distances measured by al-Sufi in his book. The units he uses for "
+"angular distances are cubits, spear length, man-height, span, and finger. "
+"Al-Sufi explicitly said in his book that a cubit is equal to two degrees and"
+" 20 minutes <sup><a href=\"#footnote-2\">[2]</a></sup>. For the other units,"
+" Schjellerup concluded some values, but tracking the 700 measurements, I "
+"came up with different values. The following table summarizes the units and "
+"relationship to the cubit value from Schjellerup<sup><a "
+"href=\"#footnote-3\">[3]</a></sup> and from my research."
+msgstr ""
+"Dôležitý aspekt časti všeobecnej diskusie je Al-Súfího metóda vykonania "
+"identifikácie hviezd. Každú jednotlivú hviezdu popisuje viacerými spôsobmi: "
+"podľa polohy hviezdy vzhľadom na obrazec súhvezdia, podľa magnitúdy, podľa "
+"asterizmov, ktoré tvorí s ostatnými hviezdami ako trojuholníky, alebo časti "
+"oblúka, niekedy podľa polohy voči Mliečnej ceste a podľa uhlovej "
+"vzdialenosti od blízkej hviezdy. V knihe som napočítal viac ako 700 uhlových"
+" vzdialeností meraných Al-Súfím. Jednotky, ktoré používa pre uhlové "
+"vzdialenosti, sú lakte, dĺžka kopije, výška človeka, šírka a prst. Al-Súfí "
+"sám explicitne tvrdí, že lakeť sa rovná dvom stupňom a 20 minútam <sup><a "
+"href=\"#footnote-2\">[2]</a></sup>. Pre ostatné jednotky odvodil Schjellerup"
+" niektoré hodnoty, ale po prezretí 700 meraní som prišiel na iné hodnoty. "
+"Nasledujúca tabuľka zhŕňa jednotky a ich vzťah k hodnote lakťa podľa "
+"Schjellerupa <sup><a href=\"#footnote-3\">[3]</a></sup> a z môjho výskumu."
+
+#. type: Content of: <h2>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:5
+msgid "Angular distance units used by Al-Sufi"
+msgstr "Jednotky uhlových vzdialeností používané Al-Súfim"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:10
+msgid "<b>Schjellerup</b>"
+msgstr "<b>Schjellerup</b>"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:11
+msgid "<b>Khalid</b>"
+msgstr "<b>Chálid</b>"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:14
+msgid "<b>unit</b>"
+msgstr "<b>jednotka</b>"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:15
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:17
+msgid "<b>cubits</b>"
+msgstr "<b>lakte</b>"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:16
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:18
+msgid "<b>Angular Value</b>"
+msgstr "<b>Uhlová hodnota</b>"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:21
+msgid "spear"
+msgstr "kopija"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:22
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:24
+msgid "6 cubits"
+msgstr "6 lakťov"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:28
+msgid "Man-Height"
+msgstr "výška muža"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:31
+msgid "3 cubits"
+msgstr "3 lakte"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:35
+msgid "cubit"
+msgstr "lakeť"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:36
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:38
+msgid "1 cubit"
+msgstr "1 lakeť"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:42
+msgid "span"
+msgstr "šírka"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:43
+msgid "1/3 of a cubit"
+msgstr "1/3 lakťa"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:45
+msgid "1/2 of a cubit"
+msgstr "1/2 lakťa"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:49
+msgid "finger"
+msgstr "prst"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:50
+msgid "1/32 of a cubit"
+msgstr "1/32 lakťa"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:52
+msgid "1/16 of a cubit"
+msgstr "1/16 lakťa"
+
+#. type: Content of: <p>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:57
+msgid ""
+"Another important aspect of Al-Sufi book is his record of the indigenous "
+"Arabic star names falling under each constellation, and the exact "
+"identification of the respective stars with the corresponding Ptolemaic "
+"stars. This means that we are looking at two layers of stars knowledge at "
+"the same time: the Ptolemaic one and the indigenous Arab one."
+msgstr ""
+"Ďalší dôležitý prvok Al-Súfího knihy je jeho záznam domorodých arabských "
+"mien hviezd spadajúcich pod každé súhvezdie a ich presná identifikácia "
+"vzhľadom k zodpovedajúcim Ptolemajovým hviezdam. To znamená, že sa pozeráme "
+"naraz na dve vrstvy poznania hviezd: Ptolemajovské a domorodé arabské."
+
+#. type: Content of: <h2>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:59
+msgid "The Sky Culture"
+msgstr "Kultúra oblohy"
+
+#. type: Content of: <p>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:60
+msgid ""
+"This sky culture is a result of a research done on several manuscripts of "
+"the book, oldest of which is the <a "
+"href=\"https://iiif.bodleian.ox.ac.uk/iiif/viewer/c1caa84c-f6d2-483f-9eb4-2439cccdc801#?c=0&m=0&s=0&cv=25&r=0&xywh=-4815%2C-378%2C14782%2C7535\""
+" class='external text' rel=\"nofollow\">Oxford, Bodleian Library Ms. Marsh "
+"144 dated 1009 AD</a>."
+msgstr ""
+"Táto kultúra oblohy je výsledkom výskumu na viacerých rukopisoch knihy, z "
+"ktorých najstarší je <a "
+"href=\"https://iiif.bodleian.ox.ac.uk/iiif/viewer/c1caa84c-f6d2-483f-9eb4-2439cccdc801#?c=0&m=0&s=0&cv=25&r=0&xywh=-4815%2C-378%2C14782%2C7535\""
+" class='external text' rel=\"nofollow\">Oxford, Bodleian Library Ms. Marsh "
+"144 datovaný 1009 n.l.</a>."
+
+#. type: Content of: <p>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:61
+msgid ""
+"First, the manuscripts of the Book of Fixed Stars were critically edited, "
+"and the text was produced. Second, each member star of the 48 constellations"
+" was identified according to Al-Sufi description, and new tables were built "
+"including modern star designations from the Hipparcos, Bright stars, and "
+"Bayer catalogues. Third, Arab indigenous star names were collected and "
+"identified as mapped by Al-Sufi to the Ptolemaic ones. All the previous "
+"steps were included in a book published digitally of the Book of Fixed Stars"
+" plus explanations and commentary by Khalid Al-Ajaji<sup><a "
+"href=\"#footnote-4\">[4]</a></sup>."
+msgstr ""
+"Po prvé, rukopisy Knihy stálic boli riadne upravované a bol k nim spravený "
+"text. Po druhé, každá členská hviezda zo 48 súhvezdí bola identifikovaná "
+"podľa Al-Súfího popisu a skonštruovali sa nové tabuľky vrátane moderných "
+"označení hviezd z katalógov Hipparcos, Jasných hviezd a Beyerovho. Po "
+"tretie, domorodé arabské mená hviezd sa zozbierali a identifikovali podľa "
+"Al-Súfího priradenia k Ptolemajovým. Všetky predošlé kroky boli opísané v "
+"digitálne vydanej knihe Kniha stálic plus vysvetlenia a komentáre od Chálid "
+"Al-Adžadžiho <sup><a href=\"#footnote-4\">[4]</a></sup>."
+
+#. type: Content of: <p>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:62
+msgid ""
+"The sky culture stick figures of the constellations are the images in the "
+"Ulugh Beg manuscript of the Book of Fixed Stars, extracted, and adapted for "
+"Stellarium by Mr. Kutaibaa Akraa <sup><a href=\"#footnote-5\">[5]</a></sup>."
+" The star names file includes the star number in the constellation as the "
+"primary star name and the description of the star in the tables as a "
+"secondary name. For example, Polaris primary name that is displayed with the"
+" star is: UMi1, UMi being Ursa Minor and 1 is the first star of this "
+"constellation. If the star is selected other secondary names are displayed, "
+"which will display \"The star on the end of the tail\" on the top of the "
+"screen. The constellation lines are constructed according to the "
+"constellation shapes with an attempt to include most of the member stars. "
+"For indigenous Arab star knowledge, individual star names were added to the "
+"star file as secondary names, while names of group of stars were defined "
+"through asterism names and asterism lines files."
+msgstr ""
+"Paličkové obrázky ku kultúre oblohy sú prevzaté z Ulug Begovho rukopisu "
+"Knihy stálic, vybraté a uprevené pre Stellarium pánom Kutaibaa Akraa <sup><a"
+" href=\"#footnote-5\">[5]</a></sup>. Súbor s menami hviezd obsahuje číslo "
+"hviezdy v súhvezdí, ako jej hlavné meno a popis hviezdy v tabuľkách ako "
+"vedľajšie meno. Napríklad, Polárka má hlavné meno zobrazené ako UMi1, UMi je"
+" skratka Ursa Minor a 1 je prvá hviezda súhvezdia. Ak je hviezda vybratá, na"
+" vrchu obrazovky sa zobrazia vedľajšie mená ako \"Hviezda na konci "
+"chvosta\". Čiary súhvezdí sú zostavené podľa tvarov súhvezdí s pokusom "
+"spojiť čo najviac členských hviezd. Do súboru s hviezdami boli pridané "
+"ďalšie jednotlivé vedľajšie mená pre domorodé arabské názvy hviezd, kým "
+"názvy skupín hviezd boli definované cez asterizmy a súbory pre čiary "
+"asterizmov."
+
+#. type: Content of: <p>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:63
+msgid ""
+"The translation of star descriptions from Arabic into English was extracted "
+"from Ernie Wright website<sup><a href=\"#footnote-6\">[6]</a></sup> which "
+"was transcribed from Toomer's translation of the Almagest<sup><a "
+"href=\"#footnote-7\">[7]</a></sup>. The translation was modified in a few "
+"places to agree with Al-Sufi wording."
+msgstr ""
+"Preklad popisov hviezd z arabčiny do angličtiny bol prevzatý zo stránky "
+"Ernieho Wrigtha <sup><a href=\"#footnote-6\">[6]</a></sup>, ktorý bol "
+"prepísaný z Toomervho prekladu Almagestu <sup><a "
+"href=\"#footnote-7\">[7]</a></sup>. Preklad bol miestami upravený, aby "
+"súhlasil s Al-Súfího vyjadrením."
+
+#. type: Content of: <p>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:64
+msgid ""
+"The single source of the sky culture is the Book of Fixed Stars and the "
+"objective is to give a faithful representation of the book content."
+msgstr ""
+"Jediným zdrojom tejto kultúry oblohy je Kniha stálic a zámerom je podať "
+"vernú reprezentáciu obsahu knihy."
+
+#. type: Content of: <h2>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:66
+#: ../../skycultures/babylonian_mulapin/description.en.utf8:522
+#: ../../skycultures/babylonian_seleucid/description.en.utf8:464
+#: ../../skycultures/greek_almagest/description.en.utf8:496
+#: ../../skycultures/greek_farnese/description.en.utf8:299
+#: ../../skycultures/greek_leidenAratea/description.en.utf8:288
+msgid "Fair Use"
+msgstr "Spôsob férového použitia"
+
+#. type: Content of: <p>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:67
+msgid ""
+"This sky culture is provided for free under CC BY-ND 4.0 International "
+"Public License (share-alike, do not change it without consulting the "
+"contributors, and cite the contributors). The author wishes that this work "
+"be cited according to the common rules."
+msgstr ""
+"Táto kultúra oblohy je poskytnutá zadarmo pod medzinárodnou licenciou CC BY-"
+"ND 4.0 (možné zdieľanie, nemeniť bez oslovenia prispievateľov a citovať "
+"prispievateľov). Autor si želá, aby bolo to dielo citované podľa všeobecných"
+" pravidiel."
+
+#. type: Content of: <p>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:70
+msgid ""
+"This sky culture was compiled and added to Stellarium by Khalid Al-Ajaji: "
+"turath.alfalak@gmail.com"
+msgstr ""
+"Kultúru oblohy podľa Knihy stálic skompiloval a do Stellaria pridal Chálid "
+"Al-Adžadži: turath.alfalak@gmail.com"
+
+#. type: Content of: <h3>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:72
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:151
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:77
+#: ../../skycultures/chinese/description.en.utf8:2960
+#: ../../skycultures/sami/description.en.utf8:57
+msgid "Notes"
+msgstr "Poznámky"
+
+#. type: Content of: <p>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:73
+msgid ""
+"[1] The Arabs and the Stars, Paul Kunitzsch,The Astronomer Abu'L-Husayn Al-"
+"Sufi And His Book On The Constellations, XI, pg 57. Northampton [England]: "
+"Variorum Reprints, 1989."
+msgstr ""
+"[1] The Arabs and the Stars, Paul Kunitzsch,The Astronomer Abu'L-Husayn Al-"
+"Sufi And His Book On The Constellations, XI, pg 57. Northampton [England]: "
+"Variorum Reprints, 1989."
+
+#. type: Content of: <p>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:74
+msgid "[2] See Al-Sufi description in his book of the 14th star in Auriga."
+msgstr "[2] Viď Al Súfiho popis 14-tej hviezdy v Povozníkovi v jeho knihe."
+
+#. type: Content of: <p>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:75
+msgid ""
+"[3] DESCRIPTIONS DES ETOILES FIXES, traduction littérale avec des notes par "
+"H C F C Schjellerup, St Petersbourg, 1874, pg 26-27."
+msgstr ""
+"[3] DESCRIPTIONS DES ETOILES FIXES, traduction littérale avec des notes par "
+"H C F C Schjellerup, St Petersbourg, 1874, pg 26-27."
+
+#. type: Content of: <p>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:76
+msgid ""
+"[4] <a "
+"href=\"https://drive.google.com/drive/folders/1s6JXzftwjMQ5rgZoGE3718EtBLBZtjzr?usp=sharing\""
+" class='external text' rel=\"nofollow\">Book of Fixed Stars: Critical "
+"edition with commentary by Khalid AlAjaji</a>."
+msgstr ""
+"[4] <a "
+"href=\"https://drive.google.com/drive/folders/1s6JXzftwjMQ5rgZoGE3718EtBLBZtjzr?usp=sharing\""
+" class='external text' rel=\"nofollow\">Book of Fixed Stars: Critical "
+"edition with commentary by Khalid AlAjaji</a>."
+
+#. type: Content of: <p>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:77
+msgid ""
+"[5] <a href=\"https://gallica.bnf.fr/ark:/12148/btv1b60006156.r=.langEN\" "
+"class='external text' rel=\"nofollow\">Oulough Beg copy of ʿAbd al-Raḥmān "
+"ibn ʿUmar al-Ṣūfī. Kitāb ṣuwar al-kawākib al-ṯābita, Paris, Bibliothèque "
+"nationale de France Ms. Arabe 5036</a>."
+msgstr ""
+"[5] <a href=\"https://gallica.bnf.fr/ark:/12148/btv1b60006156.r=.langEN\" "
+"class='external text' rel=\"nofollow\">Oulough Beg copy of ʿAbd al-Raḥmān "
+"ibn ʿUmar al-Ṣūfī. Kitāb ṣuwar al-kawākib al-ṯābita, Paris, Bibliothèque "
+"nationale de France Ms. Arabe 5036</a>."
+
+#. type: Content of: <p>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:78
+msgid ""
+"[6] <a href=\"http://www.etwright.org/astro/almagest.html#cat\" "
+"class='external text' rel=\"nofollow\">Seeing Ancient Stars, Visualization "
+"of the Almagest Catalog</a>."
+msgstr ""
+"[6] <a href=\"http://www.etwright.org/astro/almagest.html#cat\" "
+"class='external text' rel=\"nofollow\">Seeing Ancient Stars, Visualization "
+"of the Almagest Catalog</a>."
+
+#. type: Content of: <p>
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:79
+msgid ""
+"[7] Ptolemy’s ALMAGEST, G. J. Toomer, Princeton University Press, 2nd ed., "
+"1998."
+msgstr ""
+"[7] Ptolemy’s ALMAGEST, G. J. Toomer, Princeton University Press, 2nd ed., "
+"1998."
+
+#. type: Content of: <h1>
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:1
+msgid "Arabic (Arabian Peninsula)"
+msgstr ""
 
 #. type: Content of: <h4>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:2
-#: ../../skycultures/arabic/description.en.utf8:2
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:2
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:2
+#: ../../skycultures/arabic_indigenous/description.en.utf8:2
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:2
 #: ../../skycultures/western_rey/description.en.utf8:3
 msgid "Introduction"
 msgstr "Úvod"
 
 #. type: Content of: <p>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:3
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:3
 msgid ""
 "The oral folk tradition of star names and asterisms in the Arabian "
 "Peninsula, mostly scattered in poetry and proverbs."
@@ -919,14 +919,14 @@ msgstr ""
 "väčšinou roztrúsené v básňach a prísloviach."
 
 #. type: Content of: <h2>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:4
-#: ../../skycultures/arabic/description.en.utf8:4
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:4
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:4
+#: ../../skycultures/arabic_indigenous/description.en.utf8:4
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:4
 msgid "Description"
 msgstr "Opis"
 
 #. type: Content of: <p>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:6
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:6
 msgid ""
 "The Arabian Peninsula is a region covering the south western corner of Asia,"
 " bordered by Gulf of Aden and Arabian Sea on the south, Gulf of Oman and "
@@ -948,7 +948,7 @@ msgstr ""
 "Omán, Jemen a časti Sýrie a Iraku."
 
 #. type: Content of: <p>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:9
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:9
 msgid ""
 "The Bedouins and farmers in the Arabian Peninsula relied heavily on stars "
 "for timing their nomadic trips, animal care, weather forecast and "
@@ -967,7 +967,7 @@ msgstr ""
 "tohto regiónu."
 
 #. type: Content of: <p>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:10
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:10
 msgid ""
 "The stars used for timing are the same as that of ancient Arabs, but the "
 "system is simplified by beginning the year cycle with the heliacal rising of"
@@ -986,7 +986,7 @@ msgstr ""
 "iné hviezdy, napr. vo Veľkom voze."
 
 #. type: Content of: <p>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:11
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:11
 msgid ""
 "The sources show that star names and asterisms are few compared to that of "
 "ancient Arabs. Only the bright stars and prominent asterism were named and "
@@ -1008,12 +1008,12 @@ msgstr ""
 "href=\"#footnote-4\">[4]</a></sup>."
 
 #. type: Content of: <h4>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:13
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:13
 msgid "Sources of Star Names and Asterisms"
 msgstr "Zdroje mien hviezd a asterizmov"
 
 #. type: Content of: <p>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:14
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:14
 msgid ""
 "The source of this sky culture is a compilation of star names from oral "
 "traditions and the following books:"
@@ -1022,7 +1022,7 @@ msgstr ""
 "nasledujúcich kníh:"
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:16
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:16
 msgid ""
 "Al-ʿUbūdī, Moḥammad b. Nāṣir, Al-Amthāl al-ʿāmiyah fi Naǧd, The folk "
 "proverbs in Najd, 4 volumes, Dar Al-Thulūthiyah, Riyadh, Saudi Arabia, 2010."
@@ -1032,7 +1032,7 @@ msgstr ""
 "2010."
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:18
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:18
 msgid ""
 "Al-ʿUbūdī, Moḥammad b. Nāṣir, Muʿǧam al-Uṣūl al-faṣīḥah lil-alfāẓ al-"
 "dariǧah, Lexicon of the classical root of the common dialect words, 13 "
@@ -1043,7 +1043,7 @@ msgstr ""
 "Knižnica Kráľa AbdulAzíza, Rijád, Saudská Arábia, 2009."
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:20
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:20
 msgid ""
 "Al-Azhār al-nadiyah min ashʿār al-badiyah, A collection of Bedouins poetry "
 "by the name: The moist flowers of Bedouin Poetry, 18 volumes, Al Ma'arif "
@@ -1054,7 +1054,7 @@ msgstr ""
 "Saudská Arábia."
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:22
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:22
 msgid ""
 "Min ādābinā al-shaʿbiyah fi al-ǧazīrah al-ʿarabiyah, A collection of poetry "
 "by Mandeel al-Fuhaid, Our local literature of the Arab peninsula, 10 "
@@ -1065,7 +1065,7 @@ msgstr ""
 "Saudská Arábia."
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:24
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:24
 msgid ""
 "Al-Suwaydā, ʿAbd al-Raḥman, Al-Amthāl al-shaʿbiyah al-sāʾirah fi manṭiqat "
 "Ḥāʾil, The local common proverbs of the Ḥayel region, Riyadh, Saudi Arabia, "
@@ -1076,7 +1076,7 @@ msgstr ""
 "2007."
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:26
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:26
 msgid ""
 "Al-Suwaydā, ʿAbd al-Raḥman, Durar min al-shiʿr al-shaʿbī, The best of folk "
 "poetry, 3 volume Poetry collection, Riyadh, Saudi Arabia, 1999."
@@ -1085,7 +1085,7 @@ msgstr ""
 "ľudovej poézie, 3 zväzky Zbierky poézie, Rijád, Saudská Arábia, 1999."
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:28
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:28
 msgid ""
 "Al-Suwaydā, ʿAbd al-Raḥman, Shuʿarāʾ al-ǧabal al-shaʿbiyūn, The Poets of the"
 " mountain, 5 volume Poetry collection, Riyadh, Saudi Arabia, 2013."
@@ -1094,7 +1094,7 @@ msgstr ""
 "5 zväzkov Zbierky poézie, Rijád, Saudská Arábia, 2013."
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:30
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:30
 msgid ""
 "Al-Ajaji, Khalid, Sharḥ Qaṣidat al-Qāḍī fi al-anwāʾ wal-nuǧūm, Explanation "
 "of al-Qāḍī poem of anwāʾ and stars, Riyadh, Saudi Arabia, 2013."
@@ -1104,7 +1104,7 @@ msgstr ""
 "2013."
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:32
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:32
 msgid ""
 "Al-Ajaji, Khalid, Sharḥ Maʾthūrāt al-Ḫalāwī al-falakiyah, Explanation of al-"
 "Ḫalāwī astronomy poems, Riyadh, Saudi Arabia, 2018."
@@ -1113,9 +1113,9 @@ msgstr ""
 "Chaláwího astronomických básní, Rijád, Saudská Arábia, 2018."
 
 #. type: Content of: <p><h3>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:35
-#: ../../skycultures/arabic/description.en.utf8:24
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:69
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:35
+#: ../../skycultures/arabic_indigenous/description.en.utf8:24
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:69
 #: ../../skycultures/belarusian/description.en.utf8:8
 #: ../../skycultures/chinese_contemporary/description.en.utf8:5
 #: ../../skycultures/macedonian/description.en.utf8:4
@@ -1127,52 +1127,52 @@ msgid "Constellations"
 msgstr "Súhvezdia"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:38
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:38
 msgid "ID"
 msgstr "ID"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:38
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:38
 msgid "<b>Arabic</b>"
 msgstr "<b>Arabsky</b>"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:38
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:38
 msgid "<b>Transliteration</b>"
 msgstr "<b>Prepis</b>"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:38
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:38
 msgid "<b>Translation</b>"
 msgstr "<b>Preklad</b>"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:38
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:38
 msgid "<b>Comment</b>"
 msgstr "<b>Poznámka</b>"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:38
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:38
 msgid "<b>References</b>"
 msgstr "<b>Zdroje</b>"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:39
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:39
 msgid "<b>Constellations</b>"
 msgstr "<b>Súhvezdia</b>"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:40
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:40
 msgid "al-Ḥuwaiǧzain"
 msgstr "al-Chuwaidžzain"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:40
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:40
 msgid "The Two Guards"
 msgstr "Dvaja strážcovia"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:40
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:40
 msgid ""
 "The two stars: β UMi and γ UMi. They are used for directions. The Two Guards"
 " comes from the legend that al-Jady (Polaris) killed the father of the seven"
@@ -1188,17 +1188,17 @@ msgstr ""
 "na ochranu zavolal dvoch strážcov."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:41
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:41
 msgid "al-Diḫīlain"
 msgstr "al-Dihílain"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:41
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:41
 msgid "The Two Refugees"
 msgstr "Dvaja utečenci"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:41
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:41
 msgid ""
 "The other name of the two stars: β UMi and γ Umi, The Two Refugees, comes "
 "from another version of the legend that they are the ones who committed the "
@@ -1209,33 +1209,33 @@ msgstr ""
 " ochranu."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:42
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:42
 msgid "Āl Aba Bzay"
 msgstr "Ál aba Bzaj"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:42
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:42
 msgid "The Family Of Aba Bzay"
 msgstr "Rodina Aba Bzaja"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:42
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:42
 msgid "The two stars: β UMi and γ UMi"
 msgstr "Dve hviezdy: β UMi a γ UMi"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:43
-#: ../../skycultures/arabian_peninsula/description.en.utf8:67
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:43
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:67
 msgid "al-Naʿāyem"
 msgstr "al-Naʿájem"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:43
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:43
 msgid "Al-Nayem"
 msgstr "Al-Naayem"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:43
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:43
 msgid ""
 "Meaning is not known for certain. It could mean the camels. composed of the "
 "seven stars of the Big Dipper."
@@ -1244,32 +1244,32 @@ msgstr ""
 "voza."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:44
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:44
 msgid "al-Sibbaʿ"
 msgstr "al-Sibbaʿ"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:44
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:44
 msgid "The Seven"
 msgstr "Sedem"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:44
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:44
 msgid "The seven stars of the Big Dipper."
 msgstr "Sedem hviezd Veľkého voza."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:45
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:45
 msgid "Banāt Naʿš"
 msgstr "Banát Naʿš"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:45
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:45
 msgid "Daughters Of Na'sh"
 msgstr "Dcéry Na'šu"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:45
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:45
 msgid ""
 "The seven stars of the Big Dipper. Seven sisters carrying the bier of their "
 "father who was killed by al-Ǧady (Polaris)."
@@ -1278,17 +1278,17 @@ msgstr ""
 " (Polárka)."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:46
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:46
 msgid "al-Šdād"
 msgstr "al-Šdád"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:46
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:46
 msgid "The Saddle Of The Camel"
 msgstr "Sedlo ťavy"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:46
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:46
 msgid ""
 "The 5 bright stars of Cassiopeia. This name is used in the western areas "
 "along the red sea of Saudi Arabia."
@@ -1297,17 +1297,17 @@ msgstr ""
 "Saudskej Arábie, pozdĺž Červeného mora."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:47
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:47
 msgid "al-Miġzal"
 msgstr "al-Midžzal"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:47
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:47
 msgid "The Wool Spindle"
 msgstr "Vreteno"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:47
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:47
 msgid ""
 "The Cross shaped stars of α Cyg (Deneb), ε Cyg (Gienah), γ Cyg (Sadr), δ "
 "Cyg, and β1 Cyg (Albireo). The source is oral tradition from the town of "
@@ -1318,126 +1318,126 @@ msgstr ""
 "Saudskej Arábii."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:48
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:48
 msgid "al-Muqaddam"
 msgstr "al-Mukaddam"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:48
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:48
 msgid "The Front"
 msgstr "Predok"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:48
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:48
 msgid "The front mouth of the bucket (24th mansion of the Moon)"
 msgstr "Predné ústie vedra (24. mesačný dóm)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:49
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:49
 msgid "al-Muḫḫar"
 msgstr "al-Muchchar"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:49
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:49
 msgid "The Rear"
 msgstr "Zadok"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:49
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:49
 msgid "The rear mouth of the bucket (25th mansion of the Moon)"
 msgstr "Zadné ústie vedra (25. mesačný dóm)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:50
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:50
 msgid "al-Rša"
 msgstr "al-Rša"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:50
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:50
 msgid "The Bucket Rope"
 msgstr "Lano k vedru"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:50
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:50
 msgid ""
 "The rope used to pull the bucket from the well (26th mansion of the Moon)"
 msgstr "Lano, ktorým sa vyťahuje vedro zo studne (26. mesačný dóm)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:51
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:51
 msgid "al-Šarṭain"
 msgstr "al-Šartain"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:51
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:51
 msgid "The Two Signs"
 msgstr "Dve znamenia"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:51
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:51
 msgid ""
 "The two signs, stars (Mesarthim and Sheratan) (27th mansion of the Moon)"
 msgstr "Dve znamenia, hviezdy Mesarthim a Sheratan (27. mesačný dóm)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:52
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:52
 msgid "al-Bṭain"
 msgstr "al-Btain"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:52
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:52
 msgid "The Little Abdomen"
 msgstr "Bruško"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:52
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:52
 msgid "The little abdomen of al-Ḥamal (28th mansion of the Moon)."
 msgstr "al-Chamalovo bruško (28. mesačný dóm)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:53
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:53
 msgid "al-Thrayyā"
 msgstr "al-Trajjá"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:53
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:53
 msgid "Al-Thurayya"
 msgstr "Al-Turájja"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:53
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:53
 msgid ""
 "al-Thurayyā is a proper name of the Pleiades (first mansion of the Moon)."
 msgstr "al-Turájja je vlastné meno Plejád (prvý mesačný dóm)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:54
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:54
 msgid "al-Dhraʿ"
 msgstr "al-Dhraʿ"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:54
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:54
 msgid "The Arm"
 msgstr "Rameno"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:54
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:54
 msgid ""
 "The two stars of Canis Minor, the arm of the lion (5th mansion of the Moon)."
 msgstr "Dve hviezdy Malého psa, rameno leva (5. mesačný dóm)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:55
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:55
 msgid "al-Klaibain"
 msgstr "al-Klaibain"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:55
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:55
 msgid "The Two Little Dogs"
 msgstr "Dva malé psy"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:55
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:55
 msgid ""
 "An asterism of the two stars: δ CMa and ε CMa. Their heliacal rising is used"
 " for timing (same time as the 6th mansion of the Moon). The name is common "
@@ -1448,17 +1448,17 @@ msgstr ""
 "strednej Arábii."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:56
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:56
 msgid "al-Nathrah"
 msgstr "al-Natrá"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:56
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:56
 msgid "The Nostrils"
 msgstr "Nozdry"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:56
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:56
 msgid ""
 "M 44 and two adjacent stars representing the nose tip of the Arab lion (6th "
 "mansion of the Moon)."
@@ -1467,62 +1467,62 @@ msgstr ""
 " dóm)."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:57
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:57
 msgid "al-Ṭarf"
 msgstr "al-Tarf"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:57
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:57
 msgid "The Eyes"
 msgstr "Oči"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:57
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:57
 msgid "Eyes of the lion (7th mansion of the Moon)."
 msgstr "Oči leva (7. mesačný dóm)."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:58
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:58
 msgid "al-Ǧabhah"
 msgstr "al-Džabhá"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:58
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:58
 msgid "The Forehead"
 msgstr "Čelo"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:58
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:58
 msgid "Forehead of the lion (8th mansion of the Moon)."
 msgstr "Čelo leva (8. mesačný dóm)."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:59
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:59
 msgid "al-Zubrah"
 msgstr "al-Zubrá"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:59
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:59
 msgid "The Mane"
 msgstr "Hriva"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:59
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:59
 msgid "Mane of the lion (9th mansion of the Moon)."
 msgstr "Hriva leva (9. mesačný dóm)."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:60
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:60
 msgid "al-ʿAwwā"
 msgstr "al-ʿAwwá"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:60
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:60
 msgid "The Bend"
 msgstr "Ohyb"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:60
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:60
 msgid ""
 "an arc of 5 stars. The arabic al-ʿAwwā could mean also the Howlers, dogs "
 "barking at the lion (11th mansion of the Moon)."
@@ -1531,107 +1531,107 @@ msgstr ""
 " leva (11. mesačný dóm)."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:61
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:61
 msgid "al-Ġafr"
 msgstr "al-Džafr"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:61
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:61
 msgid "The Cover"
 msgstr "Kryt"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:61
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:61
 msgid "Three star asterism (13th mansion of the Moon)"
 msgstr "Asterizmuch troch hviezd (13. mesačný dóm)."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:62
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:62
 msgid "al-Zubānā"
 msgstr "al-Zubáná"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:62
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:62
 msgid "Claws Of The Scorpion"
 msgstr "Klepetá Škorpióna"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:62
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:62
 msgid "The two bright stars of Libra (14th mansion of the Moon)."
 msgstr "Dve jasné hviezdy Váh (14. mesačný dóm)."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:63
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:63
 msgid "al-Iklīl"
 msgstr "al-Iklíl"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:63
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:63
 msgid "The Diadem"
 msgstr "Diadém"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:63
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:63
 msgid ""
 "The arc of the three stars on the forehead of Scorpius (15th mansion of the "
 "Moon)."
 msgstr "Oblúk troch hviezd na čele Škorpióna (15. mesačný dóm)."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:64
-#: ../../skycultures/arabian_peninsula/description.en.utf8:126
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:64
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:126
 msgid "al-Šawlah"
 msgstr "al-Šawlá"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:64
-#: ../../skycultures/arabian_peninsula/description.en.utf8:126
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:64
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:126
 msgid "Raised Tail Of The Scorpion"
 msgstr "Zdvihnutý chvost Škorpióna"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:64
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:64
 msgid "The sting of Scorpius (17th mansion of the Moon)."
 msgstr "Žihadlo Škorpióna (17. mesačný dóm)."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:65
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:65
 msgid "aal-ʿAqrab"
 msgstr "aal-ʿAkrab"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:65
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:65
 msgid "The Scorpion"
 msgstr "Škorpión"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:65
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:65
 msgid "The scorpion image"
 msgstr "Obrazec škorpióna"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:66
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:66
 msgid "al-Baldah"
 msgstr "al-Baldá"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:66
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:66
 msgid "The Empty Place"
 msgstr "Prázdne miesto"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:66
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:66
 msgid ""
 "An area with no bright stars in Sagittarius (19th mansion of the Moon)."
 msgstr "Oblasť bez jasných hviezd v Strelcovi (19. mesačný dóm)."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:67
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:67
 msgid "The Ostriches"
 msgstr "Pštrosy"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:67
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:67
 msgid ""
 "Four stars in the milky way representing four ostriches drinking at the "
 "river and another four away from the milky way representing four ostriches "
@@ -1645,17 +1645,17 @@ msgstr ""
 "dvomi skupinami. Všetky sa nachádzajú v súhvezdí Strelec (18. mesačný dóm)."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:68
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:68
 msgid "Saʿd al-Dhabiḥ"
 msgstr "Saʿd al-Dhabich"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:68
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:68
 msgid "The Lucky Star Of The Slaughterer"
 msgstr "Šťastná hviezda bijca"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:68
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:68
 msgid ""
 "Ancient Arab asterism representing a man slaughtering a sheep (20th mansion "
 "of the Moon)."
@@ -1664,17 +1664,17 @@ msgstr ""
 "mesačný dóm)."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:69
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:69
 msgid "Saʿd bulaʿ"
 msgstr "Saʿd bulaʿ"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:69
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:69
 msgid "The Lucky Star Of The Swallower"
 msgstr "Šťastná hviezda prehĺtača"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:69
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:69
 msgid ""
 "Ancient Arab asterism representing a man swallowing a bite (21th mansion of "
 "the Moon)."
@@ -1683,17 +1683,17 @@ msgstr ""
 "mesačný dóm)."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:70
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:70
 msgid "Saʿd al-suʿūd"
 msgstr "Saʿd al-suʿúd"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:70
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:70
 msgid "The Luckiest Of The Lucky Stars"
 msgstr "Najšťastnejšia zo šťastných hviezd"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:70
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:70
 msgid ""
 "Ancient Arab asterism three stars that rises in the morning in the spring "
 "(22nd mansion of the Moon)."
@@ -1702,17 +1702,17 @@ msgstr ""
 "(22. mesačný dóm)."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:71
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:71
 msgid "Saʿd al-aḫbiyah"
 msgstr "Saʿd al-achbijá"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:71
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:71
 msgid "The Lucky Star Of The Tents"
 msgstr "Šťastná hviezda stanov"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:71
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:71
 msgid ""
 "Ancient Arab asterism of a triangle of three stars and a fourth star is "
 "inside the triangle, a man inside a tent (23rd mansion of the Moon)."
@@ -1721,19 +1721,19 @@ msgstr ""
 "muž v stane (23. mesačný dóm)."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:72
-#: ../../skycultures/arabian_peninsula/description.en.utf8:127
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:72
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:127
 msgid "al-Haqʿah"
 msgstr "al-Hakʿá"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:72
-#: ../../skycultures/arabian_peninsula/description.en.utf8:127
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:72
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:127
 msgid "The Circular Mark"
 msgstr "Okrúhle znamenie"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:72
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:72
 msgid ""
 "Ancient Arab asterism of a small triangle of stars (head of Orion) "
 "representing a mark on the side of the horse (third mansion of the Moon)."
@@ -1742,32 +1742,32 @@ msgstr ""
 "predstavujúcich značku na boku koňa (tretí mesačný dóm)."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:73
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:73
 msgid "al-Hanʿah"
 msgstr "al-Hanʿá"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:73
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:73
 msgid "Stoopness"
 msgstr "Ohyb"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:73
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:73
 msgid "Ancient Arab asterism (4th mansion of the Moon)"
 msgstr "Asterizmus starovekých Arabov (4. mesačný dóm)."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:74
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:74
 msgid "Ẓahr al-Ǧawzā"
 msgstr "Zahr al-Džawzá"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:74
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:74
 msgid "Back Of Al-Jawza"
 msgstr "Chrbát Al-Džavzy"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:74
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:74
 msgid ""
 "The three stars at the belt of Orion. This name along with the star names of"
 " Northern Horn of al-Jawza and Southern Horn of al-Jawza comes from the "
@@ -1780,19 +1780,19 @@ msgstr ""
 "prístavu Umludž v Saudskej Arábii."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:75
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:75
 msgid "Zawābin al-Ǧawzā"
 msgstr "Zawábin al-Džawzá"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:75
-#: ../../skycultures/arabian_peninsula/description.en.utf8:76
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:75
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:76
 msgid "Claws Of Al-Jawza"
 msgstr "Pazúre Al-Džavzy"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:75
-#: ../../skycultures/arabian_peninsula/description.en.utf8:76
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:75
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:76
 msgid ""
 "Names of the stars: α, γ, β, and κ Ori, orally communicated from the Qasseem"
 " region of Saudi Arabia."
@@ -1801,22 +1801,22 @@ msgstr ""
 "Arábii."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:76
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:76
 msgid "al-Zibban"
 msgstr "al-Zibban"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:77
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:77
 msgid "Masǧid al-Thrayyā"
 msgstr "Masdžid al-Thrajjá"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:77
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:77
 msgid "Mosque Of Al-Thurayya"
 msgstr "Al-Turájjova mešita"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:77
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:77
 msgid ""
 "A triangle of stars that rise before al-Thurayya (The Pleiades). It is "
 "composed of the three stars: α Ari, α Tri, and β Tri. The source of this "
@@ -1828,17 +1828,17 @@ msgstr ""
 "al-Dawasir v juhozápadnej Saudskej Arábii."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:78
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:78
 msgid "al-Ǧawā"
 msgstr "al-Džawá"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:78
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:78
 msgid "Al-Jawza"
 msgstr "Al-Džavza"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:78
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:78
 msgid ""
 "Al-Jawza is a proper name for a woman. this constellation is a woman shape "
 "for the Orion stars. It is the same as that of ancient Arabs. Some oral "
@@ -1849,52 +1849,52 @@ msgstr ""
 "toto meno len trom hviezdam Oriónovho opasku."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:79
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:79
 msgid "<b>Planets</b>"
 msgstr "<b>Planéty</b>"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:80
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:80
 msgid "Naǧmat al-ṣibḥ"
 msgstr "Nadžmat al-šibch"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:80
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:80
 msgid "Morning Star"
 msgstr "Zornička"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:80
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:80
 msgid "A name for Venus when it sets after the Sun."
 msgstr "Meno pre Venušu keď zapadá za Slnkom."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:81
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:81
 msgid "Naǧmat al-ʿŠā"
 msgstr "Nadžmat al-ʿŠá"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:81
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:81
 msgid "Evening Star"
 msgstr "Večernica"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:81
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:81
 msgid "A name for Venus when it rises before the Sun."
 msgstr "Meno pre Venušu keď vychádza za Slnkom."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:82
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:82
 msgid "al-Ǧuġmah, al-Ǧuġġāmah"
 msgstr "al-Džudžmá, al-Džudždžámá"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:82
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:82
 msgid "The Sip, The Sipper"
 msgstr "Hlt, Hltajúca"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:82
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:82
 msgid ""
 "Bedouins will tell the kids when they ask for milk to wait until Venus (The "
 "sip, the sipper) sets. Another version is that they encourage the children "
@@ -1905,17 +1905,17 @@ msgstr ""
 " ho Venuša (Hltajúca) vypije."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:83
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:83
 msgid "Naǧmat al-Hawdān"
 msgstr "Nadžmat al-Hawdán"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:83
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:83
 msgid "The Star Of Al-Hawdan"
 msgstr "Hviezda Al-Hawdánu"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:83
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:83
 msgid ""
 "Al-Hawdan is a tribe. Every evening they agree that when they see Venus in "
 "the morning, they will start their nomadic trip looking for pasture for "
@@ -1930,267 +1930,267 @@ msgstr ""
 "vracajú sa s nimi večer, keď Venuša zapadá."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:84
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:84
 msgid "<b>Stars</b>"
 msgstr "<b>Hviezdy</b>"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:85
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:85
 msgid "al-Ǧady"
 msgstr "al-Džady"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:85
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:85
 msgid "The Kid"
 msgstr "Dieťa"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:85
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:85
 msgid "Same as the ancient Arab name."
 msgstr "Rovnaké ako staroarabské pomenovanie."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:86
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:86
 msgid "al-Ḥuwaiǧzain 1"
 msgstr "al-Chuwaidžzain 1"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:86
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:86
 msgid "The Two Guards 1"
 msgstr "Dvaja strážcovia 1"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:86
-#: ../../skycultures/arabian_peninsula/description.en.utf8:87
-#: ../../skycultures/arabian_peninsula/description.en.utf8:88
-#: ../../skycultures/arabian_peninsula/description.en.utf8:89
-#: ../../skycultures/arabian_peninsula/description.en.utf8:90
-#: ../../skycultures/arabian_peninsula/description.en.utf8:91
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:86
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:87
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:88
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:89
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:90
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:91
 msgid "See CON100"
 msgstr "Viď CON100"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:87
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:87
 msgid "al-Ḥuwaiǧzain 2"
 msgstr "al-Chuwaidžzain 2"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:87
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:87
 msgid "The Two Guards 2"
 msgstr "Dvaja strážcovia 2"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:88
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:88
 msgid "al-Diḫīlain 1"
 msgstr "al-Dihílain 1"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:88
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:88
 msgid "The Two Refugees 1"
 msgstr "Dvaja utečenci 1"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:89
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:89
 msgid "al-Diḫīlain 2"
 msgstr "al-Dihílain 2"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:89
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:89
 msgid "The Two Refugees 2"
 msgstr "Dvaja utečenci 2"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:90
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:90
 msgid "Āl Aba Bzay 1"
 msgstr "Ál aba Bzaj 1"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:90
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:90
 msgid "The Family Of Aba Bzay 1"
 msgstr "Rodina Aba Bzaja 1"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:91
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:91
 msgid "Āl Aba Bzay 2"
 msgstr "Ál aba Bzaj 2"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:91
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:91
 msgid "The Family Of Aba Bzay 2"
 msgstr "Rodina Aba Bzaja 2"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:92
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:92
 msgid "al-Ḫilj 1"
 msgstr "Al-Childž 1"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:92
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:92
 msgid "Al-Khilj 1"
 msgstr "Al-Childž 1"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:92
-#: ../../skycultures/arabian_peninsula/description.en.utf8:93
-#: ../../skycultures/arabian_peninsula/description.en.utf8:94
-#: ../../skycultures/arabian_peninsula/description.en.utf8:95
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:92
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:93
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:94
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:95
 msgid "The first two stars of the Big Dipper to rise"
 msgstr "Prvá z dvoch vychádzajúcich hviezd Veľkého voza"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:93
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:93
 msgid "al-Ḫilj 2"
 msgstr "Al-Childž 2"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:93
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:93
 msgid "Al-Khilj 2"
 msgstr "Al-Childž 2"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:94
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:94
 msgid "al-Ḫilj al-awwalāt 1"
 msgstr "al-Childž al-awwalát 1"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:94
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:94
 msgid "The first Khilj 1"
 msgstr "Prvý Childž 1"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:95
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:95
 msgid "al-Ḫilj al-awwalāt 2"
 msgstr "al-Childž al-awwalát 2"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:95
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:95
 msgid "The first Khilj 2"
 msgstr "Prvý Childž 2"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:96
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:96
 msgid "al-Ḫilj al-Tuwalī 1"
 msgstr "al-Childž al-Tuwalí 1"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:96
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:96
 msgid "The Latter Khilj 1"
 msgstr "Neskorší Childž 1"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:96
-#: ../../skycultures/arabian_peninsula/description.en.utf8:97
-#: ../../skycultures/arabian_peninsula/description.en.utf8:98
-#: ../../skycultures/arabian_peninsula/description.en.utf8:99
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:96
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:97
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:98
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:99
 msgid "The second two stars of the Big Dipper to rise"
 msgstr "Druhá z dvoch vychádzajúcich hviezd Veľkého voza"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:97
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:97
 msgid "al-Ḫilj al-Tuwalī 2"
 msgstr "al-Childž al-Tuwalí 2"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:97
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:97
 msgid "The Latter Khilj 2"
 msgstr "Neskorší Childž 2"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:98
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:98
 msgid "al-Rubbaʿ 1"
 msgstr "al-Rubbaʿ 1"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:98
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:98
 msgid "The fourth ones 1"
 msgstr "Štvrté 1"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:99
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:99
 msgid "al-Rubbaʿ 2"
 msgstr "al-Rubbaʿ 2"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:99
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:99
 msgid "The fourth ones 2"
 msgstr "Štvrté 2"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:100
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:100
 msgid "al-Ḫamis"
 msgstr "al-Chamis"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:100
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:100
 msgid "The Fifth"
 msgstr "Piata"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:100
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:100
 msgid "The star ε UMa, fifth to rise of the seven stars of the Big Dipper."
 msgstr ""
 "Hviezda ε UMa, piata vychádzajúca v poradí zo siedmych hviezd Veľkého voza."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:101
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:101
 msgid "al-Satt"
 msgstr "al-Satt"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:101
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:101
 msgid "The Sixth"
 msgstr "Šiesta"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:101
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:101
 msgid "The star ζ UMa, sixth to rise of the seven stars of the Big Dipper."
 msgstr ""
 "Hviezda ζ UMa, šiesta vychádzajúca v poradí zo siedmych hviezd Veľkého voza."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:102
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:102
 msgid "al-Swaibiʿ"
 msgstr "al-Swaibiʿ"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:102
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:102
 msgid "The Seventh"
 msgstr "Siedma"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:102
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:102
 msgid "The star η UMa, seventh to rise of the seven stars of the Big Dipper."
 msgstr ""
 "Hviezda η UMa, siedma vychádzajúca v poradí zo siedmych hviezd Veľkého voza."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:103
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:103
 msgid "al-Reqīb"
 msgstr "al-Redžíb"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:103
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:103
 msgid "The Watcher"
 msgstr "Strážca"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:103
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:103
 msgid ""
 "The star α Boo. The source of this name is in the tradition of Ḥayel region."
 msgstr "Hviezda α Boo. Zdrojom mena sú tradície regiónu Chajel."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:104
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:104
 msgid "al-Iḥaimir"
 msgstr "al-Ichaimir"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:104
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:104
 msgid "The Reddish One"
 msgstr "Červená"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:104
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:104
 msgid ""
 "The star α Boo. The source of this name is in the traditions of seafarers "
 "and fishers of the west and east costs of the Arabian Peninsula."
@@ -2199,17 +2199,17 @@ msgstr ""
 "východného pobrežia Arabského polostrova."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:105
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:105
 msgid "al-Nasr al-Mkattaf"
 msgstr "al-Nasr al-Mkattaf"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:105
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:105
 msgid "The Closed Wings Eagle"
 msgstr "Orol so zloženými krídlami"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:105
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:105
 msgid ""
 "The star α Lyr (Vega), named because the two stars: ζ Lyr and ε Lyr forms "
 "the closed wings. Source is Ḥayel region."
@@ -2218,47 +2218,47 @@ msgstr ""
 "tvoria zložené krídla. Zdrojom je región Chajel."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:106
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:106
 msgid "al-Mbarī"
 msgstr "al-Mbarí"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:106
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:106
 msgid "The Parallel One"
 msgstr "Rovnobežná"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:106
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:106
 msgid "The star Capella, parallels al-Thurayya (The Pleiades)"
 msgstr "Hviezda Capella rovnobežne s al-Turájja (Plejády)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:107
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:107
 msgid "al-Ǧinīb"
 msgstr "al-Džiníb"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:107
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:107
 msgid "The Sided One"
 msgstr "Postranná"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:107
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:107
 msgid "The star Capella, on the far side of al-Thurayya (The Pleiades)"
 msgstr "Hviezda Capella na vzdialenej strane al-Turájja (Plejád)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:108
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:108
 msgid "al-Nasr al-Basiṭ"
 msgstr "al-Nasr al-Basit"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:108
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:108
 msgid "The Spread Wings Eagle"
 msgstr "Orol s roztiahnutými krídlami"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:108
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:108
 msgid ""
 "The star α Aql (Altair), named because the two stars: γ Aql and β Aql forms "
 "the spread wings. Source is Ḥayel region."
@@ -2267,112 +2267,112 @@ msgstr ""
 "tvoria roztiahnuté krídla. Zdrojom je región Chajel."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:109
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:109
 msgid "aal-Kanūn"
 msgstr "aal-Kanún"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:109
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:109
 msgid "Al-Kanoon"
 msgstr "Al-Kanoon"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:109
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:109
 msgid ""
 "Another name of The Spread wings Eagle mentioned in the poetry of al-Ḫalāwī."
 msgstr ""
 "Iné meno Orla s roztiahnutými krídlami spomínané v básňach al-Chaláwího."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:110
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:110
 msgid "al-Mwaḫḫar 2"
 msgstr "al-Mwachchar 2"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:110
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:110
 msgid "The Rear Bucket Mouth 2"
 msgstr "Zadné ústie vedra 2"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:110
-#: ../../skycultures/arabian_peninsula/description.en.utf8:111
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:110
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:111
 msgid "See CON2504"
 msgstr "Viď CON2504"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:111
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:111
 msgid "al-Mwaḫḫar 1"
 msgstr "al-Mwachchar 1"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:111
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:111
 msgid "The Rear Bucket Mouth 1"
 msgstr "Zadné ústie vedra 1"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:112
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:112
 msgid "al-Mqaddam 2"
 msgstr "al-Mkaddam 2"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:112
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:112
 msgid "The Front Bucket Mouth 2"
 msgstr "Predné ústie vedra 2"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:112
-#: ../../skycultures/arabian_peninsula/description.en.utf8:113
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:112
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:113
 msgid "See CON2502"
 msgstr "Viď CON2502"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:113
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:113
 msgid "al-Mqaddam 1"
 msgstr "al-Mkaddam 1"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:113
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:113
 msgid "The Front Bucket Mouth 1"
 msgstr "Predné ústie vedra 1"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:114
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:114
 msgid "al-Twaibiʿ"
 msgstr "al-Twaibiʿ"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:114
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:114
 msgid "The Follower"
 msgstr "Následovník"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:114
-#: ../../skycultures/arabian_peninsula/description.en.utf8:115
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:114
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:115
 msgid "The star Aldebran, (second mansion of the Moon)"
 msgstr "Hviezda Aldebaran (druhý mesačný dóm)."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:115
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:115
 msgid "al-Twailī"
 msgstr "al-Twailí"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:115
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:115
 msgid "The Latter"
 msgstr "Neskoršia"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:116
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:116
 msgid "al-Mǧaidiḥ"
 msgstr "al-Mdžaidich"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:116
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:116
 msgid "Al-Mjaidih"
 msgstr "Al-Mdžaidih"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:116
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:116
 msgid ""
 "The star Aldebran, (second mansion of the Moon), Name is used in al-Ṭayef "
 "region, western Saudi Arabia."
@@ -2381,22 +2381,22 @@ msgstr ""
 "západnej Saudskej Arábii."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:117
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:117
 msgid "al-Aẓfār 1"
 msgstr "al-Ažfár 1"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:117
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:117
 msgid "The Claws 1"
 msgstr "Pazúre 1"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:117
-#: ../../skycultures/arabian_peninsula/description.en.utf8:118
-#: ../../skycultures/arabian_peninsula/description.en.utf8:119
-#: ../../skycultures/arabian_peninsula/description.en.utf8:120
-#: ../../skycultures/arabian_peninsula/description.en.utf8:121
-#: ../../skycultures/arabian_peninsula/description.en.utf8:122
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:117
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:118
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:119
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:120
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:121
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:122
 msgid ""
 "Stars between α CMi (Procyon) and α Gem. The source is oral tradition of "
 "Najran, southwest of Saudi Arabia."
@@ -2405,122 +2405,122 @@ msgstr ""
 " juhozápadnej Saudskej Arábie."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:118
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:118
 msgid "al-Aẓfār 2"
 msgstr "al-Ažfár 2"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:118
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:118
 msgid "The Claws 2"
 msgstr "Pazúre 2"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:119
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:119
 msgid "al-Aẓfār 3"
 msgstr "al-Ažfár 3"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:119
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:119
 msgid "The Claws 3"
 msgstr "Pazúre 3"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:120
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:120
 msgid "al-Aẓfār 4"
 msgstr "al-Ažfár 4"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:120
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:120
 msgid "The Claws 4"
 msgstr "Pazúre 4"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:121
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:121
 msgid "al-Aẓfār 5"
 msgstr "al-Ažfár 5"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:121
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:121
 msgid "The Claws 5"
 msgstr "Pazúre 5"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:122
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:122
 msgid "al-Aẓfār 6"
 msgstr "al-Ažfár 6"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:122
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:122
 msgid "The Claws 6"
 msgstr "Pazúre 6"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:123
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:123
 msgid "al-Ṣarfah"
 msgstr "al-Šarfá"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:123
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:123
 msgid "Star Of Weather Change"
 msgstr "Hviezda zmeny počasia"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:123
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:123
 msgid "(10th mansion of the Moon)"
 msgstr "(10. mesačný dóm)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:124
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:124
 msgid "al-Smak al-ʿazal"
 msgstr "al-Smak al-ʿazal"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:124
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:124
 msgid "The High Unarmed One"
 msgstr "Vysoký bezbranný"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:124
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:124
 msgid "(12th mansion of the Moon)"
 msgstr "(12. mesačný dóm)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:125
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:125
 msgid "al-Qalb"
 msgstr "al-Kalb"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:125
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:125
 msgid "The Heart"
 msgstr "Srdce"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:125
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:125
 msgid "(16th mansion of the Moon)"
 msgstr "(16. mesačný dóm)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:126
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:126
 msgid "(17th mansion of the Moon)"
 msgstr "(17. mesačný dóm)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:127
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:127
 msgid "(third mansion of the Moon)"
 msgstr "(tretí mesačný dóm)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:128
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:128
 msgid "Qarn al-Ǧawza al-Šimalī"
 msgstr "Karn al-Džawza al-Šimalí"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:128
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:128
 msgid "Northern Horn Of Al-Jawza"
 msgstr "Severný roh Al-Džavzy"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:128
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:128
 msgid ""
 "Name of the star: α Ori, from the western region of Saudi Arabia and used by"
 " the fishers of the red sea. The source is oral tradition from the seaport "
@@ -2531,17 +2531,17 @@ msgstr ""
 "Arábii."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:129
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:129
 msgid "Zabin al-Ǧawza al-Šimalī"
 msgstr "Zabin al-Džawza al-Šimalí"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:129
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:129
 msgid "Northern Claw Of Al-Jawza"
 msgstr "Severný pazúr Al-Džavzy"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:129
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:129
 msgid ""
 "Name of the star: α Ori, this specific name \"Northern Claw of al-Jawza\" "
 "appeared in \"Ibn Bišir, ʿUṯmān ibn ʿAbd Allah (died 1873), ʿInwān al-maǧd "
@@ -2555,17 +2555,17 @@ msgstr ""
 "al-Šitrím), Rijád, Saudská Arábia, 2012, s. 292\"."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:130
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:130
 msgid "Riǧl al-Ǧawza"
 msgstr "Ridžl al-Džawza"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:130
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:130
 msgid "Leg Of Al-Jawza"
 msgstr "Noha Al-Džavzy"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:130
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:130
 msgid ""
 "Name of the star: κ Ori, from the western region of Saudi Arabia and used by"
 " the fishers of the red sea. The source is oral tradition from the seaport "
@@ -2576,17 +2576,17 @@ msgstr ""
 "Arábii."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:131
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:131
 msgid "Qarn al-Ǧawza al-Ǧunūbī"
 msgstr "Karn al-Džawza al-Džunúbí"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:131
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:131
 msgid "Southern Horn Of Al-Jawza"
 msgstr "Južný roh Al-Džavzy"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:131
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:131
 msgid ""
 "Name of the star: β Ori, from the western region of Saudi Arabia and used by"
 " the fishers of the red sea. The source is oral tradition from the seaport "
@@ -2597,17 +2597,17 @@ msgstr ""
 "Arábii."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:132
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:132
 msgid "Zabin al-Ǧawza al-Ǧunūbī"
 msgstr "Zabin al-Džawza al-Džunúbí"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:132
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:132
 msgid "Southern Claw Of Al-Jawza"
 msgstr "Južný pazúr Al-Džavzy"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:132
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:132
 msgid ""
 "Name of the star: β Ori, this name is infered from the name of \"Northern "
 "Claw of al-Jawza\" for α Ori. 1"
@@ -2615,34 +2615,34 @@ msgstr ""
 "Meno hviezdy: β Ori odvodené od mena \"Severný pazúr Al-Džawzy\" pre α Ori 1"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:133
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:133
 msgid "al-Mirzam"
 msgstr "al-Mirzam"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:133
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:133
 msgid "Al-Mirzam"
 msgstr "Al-Mirzam"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:133
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:133
 msgid ""
 "A common name of α CMa (Sirius) used to time the period of the 5th lunar "
 "mansion."
 msgstr "Bežné meno α CMa (Sírius) používané do obdobia 5. mesačného dómu."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:134
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:134
 msgid "al-Šiʿla"
 msgstr "al-Šiʿla"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:134
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:134
 msgid "Al-Shi'la"
 msgstr "Al-Ši'la"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:134
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:134
 msgid ""
 "Another name of α CMa (Sirius) used in the northern parts of the Arabian "
 "Peninsula."
@@ -2650,32 +2650,32 @@ msgstr ""
 "Iné meno α CMa (Síria) používané v severnej časti Arabského polostrova."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:135
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:135
 msgid "Shail"
 msgstr "Šail"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:135
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:135
 msgid "Suhayl"
 msgstr "Suhayl"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:135
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:135
 msgid "The star α Car (Canopus). The name is of ancient origin."
 msgstr "Hviezda α Car (Canopus). Názov je starobylého pôvodu."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:136
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:136
 msgid "Miḥlif"
 msgstr "Michlif"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:136
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:136
 msgid "The Oath Star"
 msgstr "Hviezda prísahy"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:136
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:136
 msgid ""
 "A name of α Eri. It is named as such because people would confuse it with "
 "Suhayl (Canopus), resulting in an argument with some one making an oath that"
@@ -2685,55 +2685,55 @@ msgstr ""
 " ústi k hádkam a tomu, že niektorí prisahajú, že ide alebo nejde o Suhayl."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:137
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:137
 msgid "Aba al-sihil"
 msgstr "Aba al-sihil"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:137
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:137
 msgid "Aba Alsihil"
 msgstr "Aba Alsihil"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:137
-#: ../../skycultures/arabian_peninsula/description.en.utf8:138
-#: ../../skycultures/arabian_peninsula/description.en.utf8:139
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:137
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:138
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:139
 msgid "Another name of α Eri."
 msgstr "Iný názov α Eri."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:138
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:138
 msgid "al-Mishil"
 msgstr "al-Mishil"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:138
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:138
 msgid "Al-Miss.hil"
 msgstr "Al-Miss.hil"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:139
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:139
 msgid "al-Shali (S here is pronounced as in same, not as in share)"
 msgstr "al-S'hali"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:139
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:139
 msgid "As-S.hali"
 msgstr "As-S.hali"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:140
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:140
 msgid "al-Naʿāyem 1"
 msgstr "al-Naʿájem 1"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:140
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:140
 msgid "al-Naayem 1"
 msgstr "Al-Naayem 1"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:140
-#: ../../skycultures/arabian_peninsula/description.en.utf8:141
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:140
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:141
 msgid ""
 "A name for the two bright stars: α and β Cen. This name is used by the "
 "tribes of al-Dawāsir and Yām in the southern regions of Saudi Arabia, and "
@@ -2747,18 +2747,18 @@ msgstr ""
 "Saudskej Arábie, alebo menom staroarabského 18. mesačného dómu."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:141
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:141
 msgid "al-Naʿāyem 2"
 msgstr "al-Naʿájem 2"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:141
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:141
 msgid "al-Naayem 2"
 msgstr "Al-Naayem 2"
 
 #. type: Content of: <h3>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:145
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:71
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:145
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:71
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:539
 #: ../../skycultures/belarusian/description.en.utf8:42
 #: ../../skycultures/boorong/description.en.utf8:220
@@ -2777,27 +2777,27 @@ msgid "Authors"
 msgstr "Autori"
 
 #. type: Content of: <p>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:147
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:147
 msgid "Khalid al-Ajaji, turath.alfalak@gmail.com."
 msgstr "Chalid al-Adžadži, turath.alfalak@gmail.com."
 
 #. type: Content of: <h2>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:149
-#: ../../skycultures/arabic/description.en.utf8:34
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:74
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:149
+#: ../../skycultures/arabic_indigenous/description.en.utf8:34
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:74
 msgid "License"
 msgstr "Licencia"
 
 #. type: Content of: <p>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:150
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:75
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:150
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:75
 msgid ""
 "Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)."
 msgstr ""
 "Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)."
 
 #. type: Content of: <p>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:152
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:152
 msgid ""
 "[1]: Al-Hamdânîʼs Geographie der Arabischen Halbinsel, David Heinrich "
 "Müller, Leiden : E. J. Brill, 1884, pg. 47."
@@ -2806,7 +2806,7 @@ msgstr ""
 "Müller, Leiden : E. J. Brill, 1884, pg. 47."
 
 #. type: Content of: <p><p>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:153
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:153
 msgid ""
 "[2]: Le Bon, Gustave, La civilisation des Arabes, Paris, Librairie de "
 "Firmin-Didot, 1884, livre premier, pg. 1."
@@ -2815,7 +2815,7 @@ msgstr ""
 "Firmin-Didot, 1884, livre premier, pg. 1."
 
 #. type: Content of: <p><p><p>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:154
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:154
 msgid ""
 "[3]: Al-Ajaji, Khalid, Sharḥ Maʾthūrāt al-Ḫalāwī al-falakiyah, Explanation "
 "of al-Ḫalāwī astronomy poems, Riyadh, Saudi Arabia, 2018."
@@ -2824,7 +2824,7 @@ msgstr ""
 " al-Chaláwího astronomických básní, Rijád, Saudská Arábia, 2018."
 
 #. type: Content of: <p><p><p><p>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:155
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:155
 msgid ""
 "[4]: Al-Ajaji, Khalid, Sharḥ Qaṣidat al-Qāḍī fi al-anwāʾ wal-nuǧūm, "
 "Explanation of al-Qāḍī poem of anwāʾ and stars, Riyadh, Saudi Arabia, 2013."
@@ -2834,7 +2834,7 @@ msgstr ""
 "2013."
 
 #. type: Content of: <p><p><p><p>
-#: ../../skycultures/arabian_peninsula/description.en.utf8:156
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:156
 msgid ""
 "[5]: Ibn Bišir, ʿUṯmān ibn ʿAbd Allah (died 1873), ʿInwān al-maǧd fi tarīḫ "
 "Naǧd, The title of glory on the history of Najd, (Arabic critical edition "
@@ -2846,12 +2846,12 @@ msgstr ""
 "Náširom al-Šitrím), Rijád, Saudská Arábia, 2012, s. 292."
 
 #. type: Content of: <h1>
-#: ../../skycultures/arabic/description.en.utf8:1
-msgid "Arabic"
-msgstr "Arabská"
+#: ../../skycultures/arabic_indigenous/description.en.utf8:1
+msgid "Arabic (Indigenous)"
+msgstr ""
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic/description.en.utf8:3
+#: ../../skycultures/arabic_indigenous/description.en.utf8:3
 msgid ""
 "The Arabic sky culture displays the indigenous star knowledge of the ancient"
 " Arabs living in the Arabian Peninsula prior to the Greek astronomy "
@@ -2862,7 +2862,7 @@ msgstr ""
 "deviatom storočí."
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic/description.en.utf8:5
+#: ../../skycultures/arabic_indigenous/description.en.utf8:5
 msgid ""
 "The star knowledge of the ancient Arabs had been recorded and preserved in "
 "old poetry and in the old works of Arab philologists and lexicographers of "
@@ -2893,12 +2893,12 @@ msgstr ""
 "href=\"#footnote-1\">[2]</a></sup>."
 
 #. type: Content of: <h4>
-#: ../../skycultures/arabic/description.en.utf8:6
+#: ../../skycultures/arabic_indigenous/description.en.utf8:6
 msgid "Sources of the Arabic sky culture"
 msgstr "Zdroje k Arabskej kultúre oblohy"
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic/description.en.utf8:7
+#: ../../skycultures/arabic_indigenous/description.en.utf8:7
 msgid ""
 "The source of this sky culture is a study and compilation of star knowledge "
 "of ancient Arabs from the following books:"
@@ -2907,7 +2907,7 @@ msgstr ""
 "starovekých Arabov z nasledujúcich kníh:"
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic/description.en.utf8:9
+#: ../../skycultures/arabic_indigenous/description.en.utf8:9
 msgid ""
 "Ibn Qutaybah, Al-Dinawarī, Abū Muḥammad ʿAbd Allah b. Muslim (died ~ 889), "
 "Kitab al-Anwāʾ (Book of meteorolgy), (Arabic print of the original book, "
@@ -2918,7 +2918,7 @@ msgstr ""
 "al-Maʿarif al-Osmania, Hyderabad, India, 1956)"
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic/description.en.utf8:11
+#: ../../skycultures/arabic_indigenous/description.en.utf8:11
 msgid ""
 "Al-Marzūqī, Abū ʿAli Aḥmad b. Muḥammad b. al-Ḥassan (died 1030), Al-Azminah "
 "wa al-amkinah (Times and Places), (Arabic print of the original book in "
@@ -2929,7 +2929,7 @@ msgstr ""
 "World of Books, Bejrút, Libanon)."
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic/description.en.utf8:13
+#: ../../skycultures/arabic_indigenous/description.en.utf8:13
 msgid ""
 "Al-Ṯaqafī, ʿAbd Allah b. Ḥussayn b. ʿĀṣim (died ~ 1012), Al-Anwāʾ wa al-"
 "azminah (Meteorology and times), (Arabic print of the original book in 1996,"
@@ -2940,7 +2940,7 @@ msgstr ""
 "džíl, Bejrút, Libanon)."
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic/description.en.utf8:15
+#: ../../skycultures/arabic_indigenous/description.en.utf8:15
 msgid ""
 "<a "
 "href=\"https://drive.google.com/drive/folders/1s6JXzftwjMQ5rgZoGE3718EtBLBZtjzr?usp=sharing\">Book"
@@ -2953,7 +2953,7 @@ msgstr ""
 "al-Adžadžiho, digitálne vydanie, 2021 n.l.</a>"
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic/description.en.utf8:17
+#: ../../skycultures/arabic_indigenous/description.en.utf8:17
 msgid ""
 "Al-Farāhīdī, abū ʿAbd al-Raḥmān al-Ḫalīl b. Aḥmad (died ~ 786 AD), Kitab al-"
 "ʿayn, a lexicon titled: The book of ʿayn (Arabic letter العين), (Arabic "
@@ -2964,7 +2964,7 @@ msgstr ""
 "vydanie originálu, 1980 – 1985)."
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic/description.en.utf8:19
+#: ../../skycultures/arabic_indigenous/description.en.utf8:19
 msgid ""
 "Instructions Nautiques et Routiers Arabes et Portugais , I , Ibn Majid, "
 "Gabriel Ferrand, 1921 -1923."
@@ -2973,7 +2973,7 @@ msgstr ""
 "Gabriel Ferrand, 1921 -1923."
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic/description.en.utf8:21
+#: ../../skycultures/arabic_indigenous/description.en.utf8:21
 msgid ""
 "Instructions Nautiques et Routiers Arabes et Portugais , II, Sulayman al-"
 "Mahri et Ibn Majid, Gabriel Ferrand, 1925."
@@ -2982,7 +2982,7 @@ msgstr ""
 "Mahri et Ibn Majid, Gabriel Ferrand, 1925."
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic/description.en.utf8:25
+#: ../../skycultures/arabic_indigenous/description.en.utf8:25
 msgid ""
 "The ancient Arabs gave names to single stars, star couples, an area in the "
 "sky, and particular shape of a group of stars.  Single stars were named "
@@ -3011,12 +3011,12 @@ msgstr ""
 "pomenované podľa legiend a príbehov."
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic/description.en.utf8:33
+#: ../../skycultures/arabic_indigenous/description.en.utf8:33
 msgid "Khalid al-Ajaji: turath.alfalak@gmail.com"
 msgstr "Chalid al-Adžadži: turath.alfalak@gmail.com"
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic/description.en.utf8:35
+#: ../../skycultures/arabic_indigenous/description.en.utf8:35
 msgid ""
 "Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)."
 " The author wishes that this work be cited according to the common rules."
@@ -3025,7 +3025,7 @@ msgstr ""
 " Autor si želá, aby jeho dielo bolo citované podľa bežných pravidiel."
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic/description.en.utf8:36
+#: ../../skycultures/arabic_indigenous/description.en.utf8:36
 msgid ""
 "[1]: Ibn Qutaybah (Arabic ابن قتيبة) (b. 828 d. 884 or 889), Kitab al-Anwā’a"
 " (Arabic الأنواء في مواسم العرب), (Arabic print of the original book in 1956"
@@ -3036,7 +3036,7 @@ msgstr ""
 "r. 1956 v Indii Hydarabad al-Dakan), strana: يد."
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic/description.en.utf8:37
+#: ../../skycultures/arabic_indigenous/description.en.utf8:37
 msgid ""
 "[2]: <a "
 "href=\"https://drive.google.com/drive/folders/1s6JXzftwjMQ5rgZoGE3718EtBLBZtjzr?usp=sharing\">Book"
@@ -3049,12 +3049,12 @@ msgstr ""
 "al-Adžadžiho, digitálne vydanie</a>"
 
 #. type: Content of: <h1>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:1
-msgid "Arabic Lunar Stations"
-msgstr "Arabské mesačné zastavenia"
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:1
+msgid "Arabic (Lunar Mansions)"
+msgstr ""
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:3
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:3
 msgid ""
 "The Arabic lunar stations describes the 28 sky areas chosen in ancient "
 "Arabia to define the daily location of the moon during its monthly trip "
@@ -3065,12 +3065,12 @@ msgstr ""
 "oblohe."
 
 #. type: Content of: <h4>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:5
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:5
 msgid "Historical Overview"
 msgstr "Historický prehľad"
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:6
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:6
 msgid ""
 "Originally, <em>Manāzil al-Qamar</em>, the Arabic for the lunar mansions, or"
 " stations of the moon, were a system of 28 stars, group of stars, or spots "
@@ -3090,7 +3090,7 @@ msgstr ""
 "už predislamskom období, pred 7. storočím n.l."
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:9
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:9
 msgid ""
 "Using heliacal observations, the asterisms of the lunar mansions served to "
 "divide the sidereal and solar year of 365 days into 28 periods of 13 days "
@@ -3121,7 +3121,7 @@ msgstr ""
 "vetra a teploty <sup><a href=\"#footnote-3\">[3]</a></sup>."
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:11
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:11
 msgid ""
 "A detailed description of the stars of each lunar mansion, the times of "
 "their heliacal rising and a compilation of astronomical and meteorological "
@@ -3138,7 +3138,7 @@ msgstr ""
 "href=\"#footnote-4\">[4]</a></sup>."
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:14
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:14
 msgid ""
 "The usage of the lunar mansions continued to schedule the times of "
 "agricultural, travel and medicine practices. Due to the importance of "
@@ -3164,12 +3164,12 @@ msgstr ""
 "href=\"#footnote-7\">[7]</a></sup>."
 
 #. type: Content of: <h4>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:16
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:16
 msgid "Current Usage of Lunar Stations"
 msgstr "Súčasné používanie mesačných zastevení"
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:18
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:18
 msgid ""
 "Agricultural almanacs based on the heliacal rising of lunar stations are "
 "still in active use today. The official calendar of Saudi Arabia includes "
@@ -3187,7 +3187,7 @@ msgstr ""
 "<sup><a href=\"#footnote-9\"> [9]</a></sup>:"
 
 #. type: Content of: <p><blockquote>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:20
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:20
 msgid ""
 "Weather gets hotter and wind gets stronger. Wild grasses dry. Water in wells"
 " gets shallower. Rain is rare during this time. Spring insects start to "
@@ -3201,12 +3201,12 @@ msgstr ""
 "prestať polievať révu, keď sa hrozná začnú zafarbovať."
 
 #. type: Content of: <h4>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:23
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:23
 msgid "Identification of the Lunar Stations"
 msgstr "Identifikovanie mesačných zastavení"
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:24
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:24
 msgid ""
 "Ibn Qutaybah (b. 828 - d. 884 or 889) in his book <em>Kitāb al-anwāʾ</em> "
 "gives detailed description of the stars of each lunar station while an "
@@ -3226,7 +3226,7 @@ msgstr ""
 "[10]</a></sup><sup><a href=\"#footnote-11\">[11]</a></sup>:"
 
 #. type: Content of: <p><blockquote>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:27
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:27
 msgid ""
 "And the 22nd [star of Virgo] and the 23rd which is on the tail [hem of the "
 "garment] with the 25th on the left foot [of Virgo] are named [by the Arabs] "
@@ -3237,7 +3237,7 @@ msgstr ""
 "dóm."
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:29
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:29
 msgid ""
 "Because the stars of the Ptolemaic constellations have known coordinates, it"
 " is relatively easy to identify the Arab star names."
@@ -3246,12 +3246,12 @@ msgstr ""
 "ľahké identifikovať arabské mená hviezd."
 
 #. type: Content of: <h4>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:31
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:31
 msgid "The 28 lunar stations"
 msgstr "28 mesačných zastavení"
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:33
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:33
 msgid ""
 "(Arabic: الشرطان) <em>Al-Sharaṭān</em> (The two signs) or (Arabic: الأشراط) "
 "<em>\"al-Ashrāṭ\"</em> (The signs) composed of the 3 stars: α Ari (Hamal), β"
@@ -3262,7 +3262,7 @@ msgstr ""
 " β Ari (Sheratan) a γ<sup>2</sup> Ari (Mesarthim)"
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:34
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:34
 msgid ""
 "(Arabic: البطين) <em>Al-Buṭayn</em> (The small belly [of the little ram]) "
 "composed of the 3 stars: ε Ari, δ Ari (Botein), and ρ<sup>3</sup> Ari"
@@ -3271,7 +3271,7 @@ msgstr ""
 "hviezd:  ε Ari, δ Ari (Botein), a ρ<sup>3</sup> Ari"
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:35
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:35
 msgid ""
 "(Arabic: الثريا) <em>Al-Thurayyā</em> (Pleiades) composed of the star "
 "cluster of the Pleiades"
@@ -3280,7 +3280,7 @@ msgstr ""
 "Plejády"
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:36
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:36
 msgid ""
 "(Arabic: الدبران) <em>Al-Dabarān</em> (The Follower [of the Pleiades]) "
 "composed of the single star α Tau (Aldebaran)"
@@ -3289,7 +3289,7 @@ msgstr ""
 "jedinej hviezdy α Tau (Aldebaran)"
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:37
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:37
 msgid ""
 "(Arabic: الهقعة) <em>Al-Haqʿah</em> (The mark on the horse side) composed of"
 " the three stars on the head of Orion: λ Ori (Meissa), φ<sup>1</sup> Ori and"
@@ -3299,7 +3299,7 @@ msgstr ""
 "hviezd v hlave Orióna: λ Ori (Meissa), φ<sup>1</sup> Ori a φ<sup>2</sup> Ori"
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:38
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:38
 msgid ""
 "(Arabic: الهنعة<em>Al-Hanʿah</em> (The bend in the neck of a camel) composed"
 " of the 2 stars: γ Gem (Alhena) and ξ Gem"
@@ -3308,7 +3308,7 @@ msgstr ""
 " γ Gem (Alhena) a ξ Gem"
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:39
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:39
 msgid ""
 "(Arabic: الذراع) <em>Al-Dhirāʾ</em> (Retracted arm [of the lion]) composed "
 "of the 2 stars: α CMi (Procyon) and β CMi (Gomeisa)"
@@ -3317,7 +3317,7 @@ msgstr ""
 " 2 hviezd: α CMi (Prokyón) a β CMi (Gomeisa)"
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:40
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:40
 msgid ""
 "(Arabic: النثرة) <em>Al-Nathrah</em> (The tip of the nose of the lion) "
 "composed of the Praesepe cluster and the 2 stars: γ Cnc (Asellus Borealis) "
@@ -3328,7 +3328,7 @@ msgstr ""
 "Australis)"
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:41
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:41
 msgid ""
 "(Arabic: الطرف) <em>Al-Ṭarf</em> (The eyes of the lion) composed of the 2 "
 "stars: ε Leo and ο Leo (Subra)"
@@ -3337,7 +3337,7 @@ msgstr ""
 "ο Leo (Subra)"
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:42
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:42
 msgid ""
 "(Arabic: الجبهة) <em>Al-Ǧabhah</em> (The forehead of the lion) composed of 4"
 " stars: ζ Leo (Adhafera), γ<sup>1</sup> Leo (Algieba), η Leo and α Leo "
@@ -3347,7 +3347,7 @@ msgstr ""
 "Leo (Adhafera), γ<sup>1</sup> Leo (Algieba), η Leo a α Leo (Regulus)"
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:43
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:43
 msgid ""
 "(Arabic: الزبرة) <em>Al-Zubrah</em> (The mane of the lion) composed of the 2"
 " stars: δ Leo (Zosma) and θ Leo (Chertan)"
@@ -3356,7 +3356,7 @@ msgstr ""
 " (Zosma) a θ Leo (Chertan)"
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:44
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:44
 msgid ""
 "(Arabic: الصرفة) <em>Al-Ṣarfah</em> (The change to colder weather) composed "
 "of one star: β Leo (Denebola)"
@@ -3365,7 +3365,7 @@ msgstr ""
 "jednej hviezdy: β Leo (Denebola)"
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:45
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:45
 msgid ""
 "(Arabic: العوا) <em>Al-ʿAwwā</em> (The bend) composed of 5 stars: β Vir "
 "(Zavijava), η Vir (Zaniah), γ Vir (Porrima), δ Vir and ε Vir (Vindemiatrix)"
@@ -3374,7 +3374,7 @@ msgstr ""
 "(Zavijava), η Vir (Zaniah), γ Vir (Porrima), δ Vir a ε Vir (Vindemiatrix)"
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:46
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:46
 msgid ""
 "(Arabic: السماك) <em>Al-Simāk</em> (The unarmed high one) composed of the "
 "star α Vir (Spica)"
@@ -3383,7 +3383,7 @@ msgstr ""
 " α Vir (Spica)"
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:47
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:47
 msgid ""
 "(Arabic: الغفر)  <em>Al-Ġafr</em> (The cover) composed of 3 stars: ι Vir "
 "(Syrma), κ Vir and λ Vir"
@@ -3392,7 +3392,7 @@ msgstr ""
 "(Syrma), κ Vir a λ Vir"
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:48
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:48
 msgid ""
 "(Arabic: الزبانى)  <em>Al-Zubānā</em> (The claws of the scorpion) composed "
 "of the 2 stars: α<sup>2</sup> Lib (Zubenelgenubi) and β Lib (Zubeneschamali)"
@@ -3401,7 +3401,7 @@ msgstr ""
 "hviezd: α<sup>2</sup> Lib (Zubenelgenubi) a β Lib (Zubeneschamali)"
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:49
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:49
 msgid ""
 "(Arabic: الإكليل)  <em>Al-Iklīl</em> (The ornamented headband, The diadem) "
 "composed of the 3 stars: β<sup>1</sup> Sco (Acrab), δ Sco (Dschubba) and π "
@@ -3411,7 +3411,7 @@ msgstr ""
 " hviezd: β<sup>1</sup> Sco (Acrab), δ Sco (Dschubba) a π Sco."
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:50
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:50
 msgid ""
 "(Arabic: القلب)  <em>Al-Qalb</em> (The heart of the scorpion) composed of "
 "the star α Sco (Antares)"
@@ -3420,7 +3420,7 @@ msgstr ""
 "Sco (Antares)"
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:51
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:51
 msgid ""
 "(Arabic: الشولة)  <em>Al-Shawlah</em> (The sting of the scorpion) composed "
 "of the 2 stars: λ Sco (Shaula) and υ Sco (Lesath)"
@@ -3429,7 +3429,7 @@ msgstr ""
 "hviezd: λ Sco (Shaula) a υ Sco (Lesath)"
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:52
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:52
 msgid ""
 "(Arabic: النعائم)  <em>Al-Naʿaʾim</em> (The Ostriches) 8 stars: γ2 Sgr, δ "
 "Sgr, ε Sgr, η Sgr, σ Sgr, φ Sgr, τ Sgr, and ζ Sgr"
@@ -3438,7 +3438,7 @@ msgstr ""
 "Sgr, η Sgr, σ Sgr, φ Sgr, τ Sgr, a ζ Sgr"
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:53
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:53
 msgid ""
 "(Arabic: البلدة<em>Al-Baldah</em> (The empty area) is the area where there "
 "are no stars (between <em>al-Naayem</em> and <em>Saad al-Thabih</em>)"
@@ -3447,7 +3447,7 @@ msgstr ""
 "žiadne hviezdy medzi <em>Al-Nájem</em> a <em>Saad Al-Tabí</em>"
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:54
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:54
 msgid ""
 "(Arabic: سعد الذابح)  <em>Saʿd al-Dhābiḥ</em> (The lucky star of the "
 "Slaughterer) composed of the 3 stars: α<sup>1</sup> Cap (Algedi), β Cap "
@@ -3457,7 +3457,7 @@ msgstr ""
 "skladá z 3 hviezd: α<sup>1</sup> Cap (Algedi), β Cap (Dabih) a ν Cap"
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:55
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:55
 msgid ""
 "(Arabic: سعد بلع)  <em>Saʿd Bulaʿ</em> (The lucky star of the swallower) "
 "composed of the 3 stars: ν Aqr, μ Aqr and ε Aqr (Albali)"
@@ -3466,7 +3466,7 @@ msgstr ""
 " z 3 hviezd: ν Aqr, μ Aqr a ε Aqr (Albali)"
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:56
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:56
 msgid ""
 "(Arabic: سعد السعود)  <em>Saʿd al-Suʿūd</em> (The luckiest of the lucky "
 "stars) composed of the 3 stars: β Aqr (Sadalsuud), ξ Aqr and λ Cap"
@@ -3475,7 +3475,7 @@ msgstr ""
 "skladá z 3 hviezd: β Aqr (Sadalsuud), ξ Aqr a λ Cap"
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:57
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:57
 msgid ""
 "(Arabic: سعد الأخبية)  <em>Saʿd al-Aḫbiyah</em> (The lucky stars of the tent"
 " dwellers) composed of the 4 stars: γ Aqr (Sadachbia), π Aqr, ζ<sup>2</sup> "
@@ -3486,7 +3486,7 @@ msgstr ""
 "η Aqr"
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:58
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:58
 msgid ""
 "(Arabic: المقدم)  <em>Al-Muqaddam</em> (The front bucket mouth) composed of "
 "the 2 stars: α And (Alpheratz) and γ Peg (Algenib)"
@@ -3495,7 +3495,7 @@ msgstr ""
 "hviezd: α And (Alpheratz) a γ Peg (Algenib)"
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:59
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:59
 msgid ""
 "(Arabic: المؤخر)  <em>Al-Muʾaḫar</em> (The rear bucket mouth) composed of "
 "the 2 stars: β Peg (Scheat) and α Peg (Markab)"
@@ -3504,7 +3504,7 @@ msgstr ""
 "hviezd: β Peg (Scheat) a α Peg (Markab)"
 
 #. type: Content of: <ol><li>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:60
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:60
 msgid ""
 "(Arabic: الرشاء أو الحوت)  <em>Al-Rishāʾ</em> or <em>al-Ḥūt</em> (The rope "
 "of the well bucket or The Fish) composed of the star β And (Mirach) and two "
@@ -3515,12 +3515,12 @@ msgstr ""
 "tvoriacich obrazec ryby"
 
 #. type: Content of: <h5>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:62
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:62
 msgid "The Super lion and al-Ǧawzāʾ figures of the ancient Arab star lore"
 msgstr "Obrazce Superleva a Al-Džawzy v staroarabskej tradícii"
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:64
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:64
 msgid ""
 "One may notice from the names of the 7th to the 15th lunar stations that "
 "they are part of a lion figure. This Arab lion figure covers around 100 "
@@ -3532,7 +3532,7 @@ msgstr ""
 " oblohy. Z mien hviezd je možné poskladať obrazec leva."
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:67
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:67
 msgid ""
 "Two of the lunar stations, <em>al-Haqʿah</em> and <em>al-Hanʿah</em>, are "
 "part of al-Ǧawzāʾ stars. al-Ǧawzāʾ is the figure covering Orion plus some "
@@ -3559,7 +3559,7 @@ msgstr ""
 "Ciel des Arabes&quot; <sup><a href=\"#footnote-12\">[12]</a></sup>."
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:70
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:70
 msgid ""
 "In addition to the lunar stations, the prominent indigenous Arab asterisms "
 "have been added."
@@ -3567,7 +3567,7 @@ msgstr ""
 "K mesačným zastaveniam boli pridané dôležité asterizmy domorodých Arabov."
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:73
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:73
 msgid ""
 "Khalid al-Ajaji with additional documentation of this file by Susanne M "
 "Hoffmann."
@@ -3576,7 +3576,7 @@ msgstr ""
 "Hoffmannovej."
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:78
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:78
 msgid ""
 "[1]: Kunitzsch P. The Arabs and the Stars, Variorum reprints Northampton "
 "1989, Al-Manazil, Item XX pp 1-7."
@@ -3585,7 +3585,7 @@ msgstr ""
 "1989, Al-Manazil, Item XX pp 1-7."
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:79
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:79
 msgid ""
 "[2]: Helaine Selin, Encyclopaedia of the History of Science, Technology, and"
 " Medicine in Non-Western Cultures, Lunar Mansions in Islamic History, "
@@ -3596,7 +3596,7 @@ msgstr ""
 "Kunitzsch P. p 520"
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:80
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:80
 msgid ""
 "[3]: Ibn Qutaybah (b. 828 d. 884 or 889), Kitab al-Anwā’, pp 6,7 (Arabic "
 "print of the original book in 1956 in India Hydarabad/Deccan)"
@@ -3605,7 +3605,7 @@ msgstr ""
 "(arabské vydanie pôvodnej knihy z r. 1956 v Indii Hydarabad/Deccan)"
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:81
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:81
 msgid ""
 "[4]: Helaine Selin, Encyclopaedia of the History of Science, Technology, and"
 " Medicine in Non-Western Cultures, Ibn Qutayba, Kunitzsch P. p 429"
@@ -3614,7 +3614,7 @@ msgstr ""
 " Medicine in Non-Western Cultures, Ibn Qutayba, Kunitzsch P. p 429"
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:82
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:82
 msgid ""
 "[5]: Ta̕rīf manāzil alkamar, Les mansions lunaires des Arabes; Muhammad "
 "al-Mukrī.; A de Calassanti-Motylinski published in Alger, Imprimerie "
@@ -3625,7 +3625,7 @@ msgstr ""
 "1899."
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:83
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:83
 msgid ""
 "[6]: <a href=\"http://www.uranos.fr/DOCU_03_T03.htm\">Muhammad al-Muqrī "
 "poem</a>"
@@ -3634,7 +3634,7 @@ msgstr ""
 "Mukrīho</a>"
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:84
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:84
 msgid ""
 "[7]: Salih al-Shethri, Timetable for farmers <em>Jadwal fi ilm al-harth ala "
 "hisaab al-shuthoor</em> (جدول في علم الحرث على حساب الشثور) ISBN "
@@ -3644,7 +3644,7 @@ msgstr ""
 "hisáb al-šutor</em> (جدول في علم الحرث على حساب الشثور) ISBN 9960-49-971-5"
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:85
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:85
 msgid ""
 "[8]: <a href=\"http://www.ummulqura.org.sa/\">Official Calendar</a> of the "
 "Kingdom of Saudi Arabia"
@@ -3653,7 +3653,7 @@ msgstr ""
 "Kráľovstva Saudská Arábia"
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:86
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:86
 msgid ""
 "[9]: Moon stations and Agriculture seasons. A bulletin by the Agriculture "
 "Administration of the Chamber of Commerce in Riyadh, Saudi Arabia. 2002"
@@ -3662,7 +3662,7 @@ msgstr ""
 "Administration of the Chamber of Commerce in Rijád, Saudská Arábia. 2002"
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:87
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:87
 msgid ""
 "[10]: Book of the Stars by al-Sufi (died 986): Critical edition with "
 "commentary by Khalid AlAjaji, digital edition, 2021 AD, كتاب الكواكب لأبي "
@@ -3675,7 +3675,7 @@ msgstr ""
 "بن عبد الله ."
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:88
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:88
 msgid ""
 "[11]: Schjellerup, Description des etoiles fixes, 1874, p. 163. (Translation"
 " into French)"
@@ -3684,7 +3684,7 @@ msgstr ""
 "francúzštiny)"
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_stations/description.en.utf8:89
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:89
 msgid "[12]: Laffitte, Roland, Le Ciel des Arabes, Geuthner, Paris 2012"
 msgstr "[12]: Laffitte, Roland, Le Ciel des Arabes, Geuthner, Paris 2012"
 
