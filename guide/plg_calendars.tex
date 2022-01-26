@@ -66,15 +66,53 @@ dependent on these aspects.
 \subsection{The Calendars}
 \subsubsection{Lunisolar European calendars}
 \begin{description}
-\item[Julian] This implementation utilizes historical year counting,
-  i.e., has no year zero. Years are marked A.D. or B.C., respectively.
+\item[Julian] \name[Julius]{Caesar} introduced this calendar, advised
+  by the Egyptian astronomer \name{Sosigenes}. Every 4th year is a
+  leap year of 366 instead of 365 days, yielding a mean length of the
+  year of 365.25 days.
+
+  In contrast to the default calendar display of Stellarium, this
+  implementation utilizes historical year counting, i.e., has no year
+  zero. Years are marked A.D. or B.C., respectively.  The omission of
+  year zero makes negative leap years break the simple 4-year
+  count. Now they are 1~B.C., 5~B.C., 9~B.C.\ etc. However, note that
+  before 8~A.D.\ leap years are just counted proleptic, but the Romans
+  did not keep the leap years commanded by \name[Julius]{Caesar} until
+  \name{Augustus} put things back in order. This means, displayed
+  dates before 8~A.D.\ may be off by up to 3 days from historical
+  accounts written by contemporaries.
 \item[Gregorian] This implementation acts like Stellarium with respect
-  to year counting and counts negative and positive years, with a year
+  to year counting and counts signed negative and positive years, with a year
   zero between them. It shows dates in a \emph{Proleptic Gregorian}
   calendar for dates before October 15, 1582. Given its improved rules
-  for leap years, it keeps the season's beginnings closer to the
+  for leap years which provide a mean length of the year of 365.2425 days,
+  it keeps the seasons' beginnings closer to the
   commonly known dates, at least for many more centuries in the past
   than the Julian calendar commonly used by historians.
+\item[Revised Julian Calendar] (also named \textbf{Milankovi\'c
+  Calendar}) \newFeature{0.22.0} In 1923, the Serbian scientist
+  \name[Milutin]{Milankovi\'c} (1879--1958) proposed a calendar which
+  should overcome the then 13-day calendar gap between the Eastern
+  European Orthodox churches who still adhered to the Julian calendar
+  and the rest of the world which followed the Gregorian calendar.  It
+  amends the 4-year Julian leap year cycle by omitting century years
+  except for those where division by 900 leaves a remainder of 200 or
+  600.  Therefore the mean length of the year is 365.242\={2} days, 24
+  seconds less than the Gregorian and within 2 seconds of the correct
+  length of the mean tropical year.  For a synchronisation with the
+  Gregorian, October 1-13 1923 were omitted.  Between March 1600 and
+  February 2800 the calendar dates are identical to those in the
+  Gregorian calendar.  The calendar was adopted by several but not all
+  Eastern Orthodox churches, although date of Easter is still computed
+  according to the Julian calendar\footnote{More details can be found on
+    \url{https://en.wikipedia.org/wiki/Revised_Julian_calendar}}.
+
+  In historical context giving dates in the Revised Julian calendar
+  for years before the dates of religious festivals were defined in
+  the calendar makes no sense. Its idea was to have a continuous
+  calendar as it was in use at the concile of Nicaea in
+  A.D.325. Therefore dates before A.D.325 are displayed like in the
+  traditional Julian calendar.
 \item[ISO Week] The International Standards Organization describes
   weeks in the Gregorian calendar from Monday (Day 1) to Sunday (Day
   7). Week 1 of each year contains the first Thursday of the
@@ -244,6 +282,7 @@ settings for the Calendars plugin -- just make it carefully!
 show                         &bool & true\\\midrule
 show\_julian                 &bool & true\\
 show\_gregorian              &bool & true\\
+show\_revised\_julian        &bool & true\\
 show\_iso                    &bool & true\\
 show\_icelandic              &bool & true\\\midrule
 show\_roman                  &bool & true\\

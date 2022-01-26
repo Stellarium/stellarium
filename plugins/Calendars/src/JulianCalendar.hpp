@@ -68,7 +68,7 @@ public:
 	//! find date in the Julian calendar from RD number (may be used in other calendars!)
 	static QVector<int> julianFromFixed(int rd);
 
-	constexpr static const int julianEpoch=-1; //! RD of January 1, AD1.
+	constexpr static const int julianEpoch=-1; //! RD of January 1, AD1 (jul.).
 
 protected:
 	static QMap<int, QString> weekDayNames;

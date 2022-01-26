@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>558</width>
-    <height>405</height>
+    <height>419</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -154,13 +154,6 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="0">
-          <widget class="QCheckBox" name="romanCheckBox">
-           <property name="text">
-            <string comment="calendar">Roman</string>
-           </property>
-          </widget>
-         </item>
          <item row="10" column="0">
           <widget class="QCheckBox" name="balineseCheckBox">
            <property name="text">
@@ -172,13 +165,6 @@
           <widget class="QCheckBox" name="mayaTzolkinCheckBox">
            <property name="text">
             <string comment="calendar">Maya Tzolkin</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="2">
-          <widget class="QCheckBox" name="isoCheckBox">
-           <property name="text">
-            <string comment="calendar">ISO Week</string>
            </property>
           </widget>
          </item>
@@ -214,13 +200,6 @@
           <widget class="QCheckBox" name="armenianCheckBox">
            <property name="text">
             <string comment="calendar">Armenian</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="2">
-          <widget class="QCheckBox" name="zoroastrianCheckBox">
-           <property name="text">
-            <string comment="calendar">Zoroastrian</string>
            </property>
           </widget>
          </item>
@@ -287,13 +266,6 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="2">
-          <widget class="QCheckBox" name="icelandicCheckBox">
-           <property name="text">
-            <string comment="calendar">Icelandic</string>
-           </property>
-          </widget>
-         </item>
          <item row="6" column="0">
           <widget class="QCheckBox" name="mayaLCCheckBox">
            <property name="text">
@@ -326,6 +298,41 @@
           <widget class="QCheckBox" name="persianArithmeticCheckBox">
            <property name="text">
             <string>Persian (arithmetic)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="2">
+          <widget class="QCheckBox" name="zoroastrianCheckBox">
+           <property name="text">
+            <string comment="calendar">Zoroastrian</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="2">
+          <widget class="QCheckBox" name="icelandicCheckBox">
+           <property name="text">
+            <string comment="calendar">Icelandic</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QCheckBox" name="isoCheckBox">
+           <property name="text">
+            <string comment="calendar">ISO Week</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QCheckBox" name="romanCheckBox">
+           <property name="text">
+            <string comment="calendar">Roman</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QCheckBox" name="revisedJulianCheckBox">
+           <property name="text">
+            <string>Revised Julian</string>
            </property>
           </widget>
          </item>
@@ -370,21 +377,18 @@
       <layout class="QVBoxLayout" name="lunisolarVerticalLayout">
        <item>
         <layout class="QGridLayout" name="lunisolarGridLayout">
-         <item row="1" column="4">
-          <widget class="QLineEdit" name="julianWeekdayLineEdit">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="acceptDrops">
-            <bool>false</bool>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         <item row="0" column="1">
+          <widget class="QLabel" name="labelYear">
+           <property name="text">
+            <string>Year</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="1">
-          <widget class="QSpinBox" name="gregorianYearSpinBox">
+         <item row="1" column="1">
+          <widget class="QSpinBox" name="julianYearSpinBox">
+           <property name="toolTip">
+            <string>Negative years here mark years B.C.</string>
+           </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
@@ -406,8 +410,8 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="2">
-          <widget class="QSpinBox" name="julianMonthSpinBox">
+         <item row="3" column="2">
+          <widget class="QSpinBox" name="isoWeekSpinBox">
            <property name="wrapping">
             <bool>true</bool>
            </property>
@@ -418,20 +422,7 @@
             <number>0</number>
            </property>
            <property name="maximum">
-            <number>13</number>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="4">
-          <widget class="QLineEdit" name="gregorianWeekdayLineEdit">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="acceptDrops">
-            <bool>false</bool>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            <number>54</number>
            </property>
           </widget>
          </item>
@@ -446,6 +437,58 @@
           <widget class="QLabel" name="labelDay">
            <property name="text">
             <string>Day</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="2">
+          <widget class="QSpinBox" name="gregorianMonthSpinBox">
+           <property name="wrapping">
+            <bool>true</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+           <property name="minimum">
+            <number>0</number>
+           </property>
+           <property name="maximum">
+            <number>13</number>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QSpinBox" name="gregorianYearSpinBox">
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+           <property name="minimum">
+            <number>-100000</number>
+           </property>
+           <property name="maximum">
+            <number>100000</number>
+           </property>
+           <property name="value">
+            <number>2000</number>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="4">
+          <widget class="QLineEdit" name="julianWeekdayLineEdit">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="acceptDrops">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="4">
+          <widget class="QLabel" name="labelDOW">
+           <property name="text">
+            <string>Weekday</string>
            </property>
           </widget>
          </item>
@@ -465,11 +508,8 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="3">
-          <widget class="QSpinBox" name="julianDaySpinBox">
-           <property name="wrapping">
-            <bool>true</bool>
-           </property>
+         <item row="3" column="3">
+          <widget class="QSpinBox" name="isoDaySpinBox">
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
@@ -477,35 +517,15 @@
             <number>0</number>
            </property>
            <property name="maximum">
-            <number>32</number>
+            <number>8</number>
+           </property>
+           <property name="value">
+            <number>1</number>
            </property>
           </widget>
          </item>
-         <item row="0" column="4">
-          <widget class="QLabel" name="labelDOW">
-           <property name="text">
-            <string>Weekday</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="2">
-          <widget class="QSpinBox" name="isoWeekSpinBox">
-           <property name="wrapping">
-            <bool>true</bool>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-           <property name="minimum">
-            <number>0</number>
-           </property>
-           <property name="maximum">
-            <number>54</number>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="2">
-          <widget class="QSpinBox" name="gregorianMonthSpinBox">
+         <item row="1" column="2">
+          <widget class="QSpinBox" name="julianMonthSpinBox">
            <property name="wrapping">
             <bool>true</bool>
            </property>
@@ -534,34 +554,24 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="1">
-          <widget class="QSpinBox" name="julianYearSpinBox">
-           <property name="toolTip">
-            <string>Negative years here mark years B.C.</string>
+         <item row="2" column="4">
+          <widget class="QLineEdit" name="gregorianWeekdayLineEdit">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="acceptDrops">
+            <bool>false</bool>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
-           <property name="minimum">
-            <number>-100000</number>
-           </property>
-           <property name="maximum">
-            <number>100000</number>
-           </property>
-           <property name="value">
-            <number>2000</number>
-           </property>
           </widget>
          </item>
-         <item row="0" column="1">
-          <widget class="QLabel" name="labelYear">
-           <property name="text">
-            <string>Year</string>
+         <item row="1" column="3">
+          <widget class="QSpinBox" name="julianDaySpinBox">
+           <property name="wrapping">
+            <bool>true</bool>
            </property>
-          </widget>
-         </item>
-         <item row="3" column="3">
-          <widget class="QSpinBox" name="isoDaySpinBox">
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
@@ -569,10 +579,7 @@
             <number>0</number>
            </property>
            <property name="maximum">
-            <number>8</number>
-           </property>
-           <property name="value">
-            <number>1</number>
+            <number>32</number>
            </property>
           </widget>
          </item>
@@ -586,6 +593,20 @@
            </property>
            <property name="maximum">
             <number>100000</number>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="labelRD">
+           <property name="text">
+            <string>Rata Die</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="4">
+          <widget class="QLabel" name="labelRDvalue">
+           <property name="text">
+            <string>RD number</string>
            </property>
           </widget>
          </item>

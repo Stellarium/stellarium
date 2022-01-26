@@ -19,6 +19,8 @@ SET(Calendars_SRCS
     ZoroastrianCalendar.cpp
     JulianCalendar.hpp
     JulianCalendar.cpp
+    RevisedJulianCalendar.hpp
+    RevisedJulianCalendar.cpp
     RomanCalendar.hpp
     RomanCalendar.cpp
     OlympicCalendar.hpp
