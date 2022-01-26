@@ -168,7 +168,7 @@ public:
 		LunarEclipseGamma,		//! Gamma of lunar eclipse
 		LunarEclipsePMag,		//! penumbral magnitude of lunar eclipse
 		LunarEclipseUMag,		//! umbral magnitude of lunar eclipse
-		LunarEclipseElevation,	//! elevation of the Moon (e.g. visibility conditions)
+		LunarEclipseVisConditions,	//! visibility conditions
 		LunarEclipseCount		//! total number of columns
 	};
 
@@ -681,7 +681,7 @@ private:
 	{
 		int column = treeWidget()->sortColumn();
 
-		if (column == AstroCalcDialog::LunarEclipseDate || column == AstroCalcDialog::LunarEclipsePMag || column == AstroCalcDialog::LunarEclipseUMag || column == AstroCalcDialog::LunarEclipseElevation)
+		if (column == AstroCalcDialog::LunarEclipseDate || column == AstroCalcDialog::LunarEclipsePMag || column == AstroCalcDialog::LunarEclipseVisConditions )
 		{
 			return data(column, Qt::UserRole).toFloat() < other.data(column, Qt::UserRole).toFloat();
 		}
