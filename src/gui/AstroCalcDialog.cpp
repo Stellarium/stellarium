@@ -2420,7 +2420,7 @@ void AstroCalcDialog::generateLunarEclipses()
 						if (altitude <= 7.)
 						{
 							visibilityConditionsStr = qc_("Very bad", "visibility conditions");
-							visibilityConditionsTooltip = q_("The max. phase of eclipse is invisible in current location");
+							visibilityConditionsTooltip = q_("The greatest eclipse is invisible in current location");
 						}
 						else
 						{
