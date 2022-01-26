@@ -2199,7 +2199,8 @@ void AstroCalcDialog::setLunarEclipseHeaderNames()
 	lunareclipseHeader << qc_("Penumbral eclipse magnitude", "column name");
 	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
 	lunareclipseHeader << qc_("Umbral eclipse magnitude", "column name");	
-	lunareclipseHeader << q_("Elevation");
+	// TRANSLATORS: Visibility conditions; the name of column in AstroCalc/Eclipses tool
+	lunareclipseHeader << qc_("Vis. Cond.", "column name");
 	ui->lunareclipseTreeWidget->setHeaderLabels(lunareclipseHeader);
 
 	// adjust the column width
@@ -2262,12 +2263,11 @@ void AstroCalcDialog::generateLunarEclipses()
 		startJD = startJD - core->getUTCOffset(startJD) / 24.;
 		stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
 		int elements = static_cast<int>((stopJD - startJD) / 29.530588853);
-		QString sarosStr, eclipseTypeStr, uMagStr, pMagStr, gammaStr, elevationStr, visibilityConditionsStr;
+		QString sarosStr, eclipseTypeStr, uMagStr, pMagStr, gammaStr, visibilityConditionsStr, visibilityConditionsTooltip;
 
 		const bool saveTopocentric = core->getUseTopocentricCoordinates();
 		const double approxJD = 2451550.09765;
 		const double synodicMonth = 29.530588853;
-		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 		bool sign;
 
 		static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
@@ -2389,22 +2389,44 @@ void AstroCalcDialog::generateLunarEclipses()
 					// Visibility conditions / Elevation of the Moon at max. phase of eclipse
 					StelUtils::rectToSphe(&az, &alt, moon->getAltAzPosAuto(core));
 					StelUtils::radToDecDeg(alt, sign, altitude);
-					elevationStr = (withDecimalDegree ? StelUtils::radToDecDegStr(alt) : StelUtils::radToDmsStr(alt));
+
 					if (altitude >= 45.) // Perfect conditions - 45+ degrees
-						visibilityConditionsStr = q_("Perfect visibility conditions for current location");
+					{
+						visibilityConditionsStr = qc_("Perfect", "visibility conditions");
+						visibilityConditionsTooltip = q_("Perfect visibility conditions for current location");
+					}
 					else if (altitude >= 30.) // "Photometric altitude" - 30+ degrees
-						visibilityConditionsStr = q_("Good visibility conditions for current location");
+					{
+						visibilityConditionsStr = qc_("Good", "visibility conditions");
+						visibilityConditionsTooltip = q_("Good visibility conditions for current location");
+					}
 					else
-						visibilityConditionsStr = q_("Bad visibility conditions for current location");
+					{
+						visibilityConditionsStr = qc_("Bad", "visibility conditions");
+						visibilityConditionsTooltip = q_("Bad visibility conditions for current location");
+					}
 
 					// Our rule of thumb is that a partial penumbral eclipse is detectable with
 					// the unaided eye if penumbral magnitude>0.7
-					if (uMag < 1.0 && pMag < 0.7) visibilityConditionsStr = q_("Not observable eclipse");
+					if (uMag < 1.0 && pMag < 0.7)
+					{
+						// TRANSLATORS: Not obs. = Not observable
+						visibilityConditionsStr = qc_("Not obs.", "visibility conditions");
+						visibilityConditionsTooltip = q_("Not observable eclipse");
+					}
 
 					if (!sign)
 					{
-						elevationStr = dash;
-						visibilityConditionsStr = q_("The eclipse is invisible in current location");
+						if (altitude <= 7.)
+						{
+							visibilityConditionsStr = qc_("Very bad", "visibility conditions");
+							visibilityConditionsTooltip = q_("The max. phase of eclipse is invisible in current location");
+						}
+						else
+						{
+							visibilityConditionsStr = qc_("Invisible", "visibility conditions");
+							visibilityConditionsTooltip = q_("The eclipse is invisible in current location");
+						}
 						altitude *= -1.;
 					}
 
@@ -2446,15 +2468,14 @@ void AstroCalcDialog::generateLunarEclipses()
 					treeItem->setData(LunarEclipsePMag, Qt::UserRole, pMag);
 					treeItem->setText(LunarEclipseUMag, uMagStr);
 					treeItem->setData(LunarEclipseUMag, Qt::UserRole, uMag);
-					treeItem->setText(LunarEclipseElevation, elevationStr);
-					treeItem->setData(LunarEclipseElevation, Qt::UserRole, altitude);
-					treeItem->setToolTip(LunarEclipseElevation, visibilityConditionsStr);
+					treeItem->setText(LunarEclipseVisConditions, visibilityConditionsStr);
+					treeItem->setData(LunarEclipseVisConditions, Qt::UserRole, altitude);
+					treeItem->setToolTip(LunarEclipseVisConditions, visibilityConditionsTooltip);
 					treeItem->setTextAlignment(LunarEclipseDate, Qt::AlignRight);
 					treeItem->setTextAlignment(LunarEclipseSaros, Qt::AlignRight);
 					treeItem->setTextAlignment(LunarEclipseGamma, Qt::AlignRight);
 					treeItem->setTextAlignment(LunarEclipsePMag, Qt::AlignRight);
 					treeItem->setTextAlignment(LunarEclipseUMag, Qt::AlignRight);
-					treeItem->setTextAlignment(LunarEclipseElevation, Qt::AlignRight);
 				}
 			}
 		}
