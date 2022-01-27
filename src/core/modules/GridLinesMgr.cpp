@@ -1229,6 +1229,107 @@ void SkyLine::draw(StelCore *core) const
 			part30.transfo4d(rotZ1);
 			part30l.transfo4d(rotZ1);
 		}
+
+		// Get current year and make date caption on ecliptic
+		int year, month, day;
+		StelUtils::getDateFromJulianDay(core->getJD(), &year, &month, &day);
+		double newyearJD;
+		partAxis.set(1,0,0);
+
+		if(StelUtils::getJDFromDate(&newyearJD, year, 1, 1, 0, 0, 0))
+		{
+			int daysOfYear = StelUtils::isLeapYear(year) ? 366 : 365;
+
+			newyearJD = newyearJD + core->getUTCOffset(newyearJD)/24;
+			Vec3d partNewYear=earth->getEclipticPos(newyearJD + core->computeDeltaT(newyearJD)/86400.0)*-1;
+			Vec3d partDay=partNewYear;
+			partDay.transfo4d(Mat4d::rotation(partAxis, -0.1*M_PI/180));
+			Vec3d partDayl=partNewYear;
+			partDayl.transfo4d(Mat4d::rotation(partAxis, -0.175*M_PI/180));
+			Vec3d partWeek=partNewYear;
+			partWeek.transfo4d(Mat4d::rotation(partAxis, -0.25*M_PI/180));
+			Vec3d partMonth=partNewYear;
+			partMonth.transfo4d(Mat4d::rotation(partAxis, -0.75*M_PI/180));
+			Vec3d partMonthl=partNewYear;
+			partMonthl.transfo4d(Mat4d::rotation(partAxis, -0.775*M_PI/180));
+
+			if(line_type == SkyLine::ECLIPTIC_OF_DATE || line_type == SkyLine::ECLIPTIC_J2000)
+			{
+				int month = 0;
+				int monthDays = 0;
+				QString monthNames[] =
+				{
+					qc_("Jan","short month name"),
+					qc_("Feb","short month name"),
+					qc_("Mar","short month name"),
+					qc_("Apr","short month name"),
+					qc_("May","short month name"),
+					qc_("Jun","short month name"),
+					qc_("Jul","short month name"),
+					qc_("Aug","short month name"),
+					qc_("Sep","short month name"),
+					qc_("Oct","short month name"),
+					qc_("Nov","short month name"),
+					qc_("Dec","short month name")
+				};
+				for(int i = 0,d = 0; i < daysOfYear; ++i, ++d)
+				{
+					if(d >= monthDays)
+					{
+						d = 0;
+						++month;
+						monthDays = StelUtils::numberOfDaysInMonthInYear(month, year);
+						sPainter.drawGreatCircleArc(partNewYear, partMonth, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+						QString label = QString("%1").arg(monthNames[month - 1]);
+						if(showLabel)
+						{
+							float shiftx = static_cast<float>(sPainter.getFontMetrics().boundingRect(label).width()) * -1.0f;
+							float shifty = static_cast<float>(sPainter.getFontMetrics().height()) * 0.25f;
+							Vec3d screenPosTgt, screenPosTgtL;
+							prj->project(partMonth, screenPosTgt);
+							prj->project(partMonthl, screenPosTgtL);
+							double dx=screenPosTgtL[0] - screenPosTgt[0];
+							double dy=screenPosTgtL[1] - screenPosTgt[1];
+							float textAngle=static_cast<float>(atan2(dy, dx));
+							sPainter.drawText(partMonthl, label, textAngle*M_180_PIf - 90, shiftx, shifty, false);
+						}
+					}
+					else
+					{
+						sPainter.drawGreatCircleArc(partNewYear, partDay, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+						if(showLabel && d % 5 == 0 && (monthDays > 30 || d != 30))
+						{
+							QString label = QString("%1").arg(d);
+							float shiftx = static_cast<float>(sPainter.getFontMetrics().boundingRect(label).width()) * -1.0f;
+							float shifty = static_cast<float>(sPainter.getFontMetrics().height()) * 0.2f;
+							Vec3d screenPosTgt, screenPosTgtL;
+							prj->project(partDay, screenPosTgt);
+							prj->project(partDayl, screenPosTgtL);
+							double dx = screenPosTgtL[0] - screenPosTgt[0];
+							double dy = screenPosTgtL[1] - screenPosTgt[1];
+							float textAngle=static_cast<float>(atan2(dy, dx));
+							sPainter.drawText(partDayl, label, textAngle*M_180_PIf-90, shiftx, shifty, false);
+						}
+					}
+					double step;
+					if(i<81||i>268)
+					{
+						step = 1.0*M_PI/(daysOfYear - 187.);
+					}
+					else
+					{
+						step = 1.0*M_PI/187.;
+					}
+					const Mat4d& rotZ1 = Mat4d::rotation(partZAxis, step);
+					partNewYear.transfo4d(rotZ1);
+					partDay.transfo4d(rotZ1);
+					partDayl.transfo4d(rotZ1);
+					partWeek.transfo4d(rotZ1);
+					partMonth.transfo4d(rotZ1);
+					partMonthl.transfo4d(rotZ1);
+				}
+			}
+		}
 		sPainter.setLineWidth(lineThickness);
 	}
 
