@@ -3794,8 +3794,22 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 
 	if (englishName=="Mars")
 	{
-		float tNorth=0.85f;
-		float tSouth=0.15f;
+		// Compute Ls for Mars. From Piqueux et al., Icarus 251 (2015) 332-8 (9). Short algorithm with good approximation.
+		const double t=lastJDE-J2000;
+		const double M = (19.38095 + 0.524020769 * t)*M_PI_180;
+		const double sinM=sin(M);
+		const double sin2M=sin(2.*M);
+		const double sin3M=sin(3.*M);
+		const double Ls = 270.38859 + 0.524038542*t + 10.67848*sinM + 0.62077*sin2M + 0.05031*sin3M;
+		// Then compute latitudes of polar caps: Fig.10 in Smith, David E. et al. "Time Variations of
+		// Mars’ Gravitational Field and Seasonal Changes in the Masses of the Polar Ice Caps."
+		// Journal of Geophysical Research 114.E5 (2009): E05002. DOI:10.1029/2008je003267
+		double latN=70.+18.*sin((Ls-200.)*M_PI_180);
+		double latS=-70.-18.*sin((Ls-30.)*M_PI_180);
+
+		// Finally convert to texture coordinates.
+		float tNorth=static_cast<float>((latN+90.)/180.);
+		float tSouth=static_cast<float>((latS+90.)/180.);
 		GL(shader->setUniformValue(shaderVars->poleLat, tNorth, tSouth));
 	}
 	else
