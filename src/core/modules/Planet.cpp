@@ -2768,6 +2768,7 @@ void Planet::PlanetShaderVars::initLocations(QOpenGLShaderProgram* p)
 	//common uniforms
 	GL(projectionMatrix = p->uniformLocation("projectionMatrix"));
 	GL(tex = p->uniformLocation("tex"));
+	GL(poleLat = p->uniformLocation("poleLat"));
 	GL(lightDirection = p->uniformLocation("lightDirection"));
 	GL(eyeDirection = p->uniformLocation("eyeDirection"));
 	GL(diffuseLight = p->uniformLocation("diffuseLight"));
@@ -3791,6 +3792,14 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 		}
 	}
 
+	if (englishName=="Mars")
+	{
+		float tNorth=0.85f;
+		float tSouth=0.15f;
+		GL(shader->setUniformValue(shaderVars->poleLat, tNorth, tSouth));
+	}
+	else
+		GL(shader->setUniformValue(shaderVars->poleLat, 1.f, 0.f));
 	GL(shader->setAttributeArray(shaderVars->vertex, static_cast<const GLfloat*>(projectedVertexArr.constData()), 3));
 	GL(shader->enableAttributeArray(shaderVars->vertex));
 	GL(shader->setAttributeArray(shaderVars->unprojectedVertex, static_cast<const GLfloat*>(model.vertexArr.constData()), 3));
