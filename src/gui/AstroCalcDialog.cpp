@@ -3132,7 +3132,7 @@ void AstroCalcDialog::generateSolarEclipses()
 					int nx = -61 * nd;
 					int nc = floor(nx / 358. + 0.5 - nd / (12. * 358 * 358));
 					int saros = 1 + ((s + nc * 223 - 1) % 223);
-					if ((s + nc * 223 - 1) < 0) saros -= 223;
+					if ((s + nc * 223 - 1) < 0)saros -= 223;
 
 					sarosStr = QString("%1").arg(QString::number(saros));
 					gammaStr = QString("%1").arg(QString::number(gamma, 'f', 3));
@@ -3575,8 +3575,9 @@ void AstroCalcDialog::selectCurrentSolarEclipse(const QModelIndex& modelIndex)
 	StelLocation loc = core->getCurrentLocation();
 	loc.latitude = lat;
 	loc.longitude = lon;
+	loc.altitude = 10; // 10 meters above sea level
+	loc.name = "";
 	core->moveObserverTo(loc, 0.);
-	core->getCurrentLocation();
 
 	if (objectMgr->findAndSelectI18n(name) || objectMgr->findAndSelect(name))
 	{
