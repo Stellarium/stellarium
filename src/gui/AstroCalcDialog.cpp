@@ -2224,7 +2224,7 @@ void AstroCalcDialog::setLunarEclipseHeaderNames()
 {
 	lunareclipseHeader.clear();
 	lunareclipseHeader << q_("Date and Time");
-	lunareclipseHeader << q_("Saros number");
+	lunareclipseHeader << q_("Saros");
 	lunareclipseHeader << q_("Type");
 	lunareclipseHeader << q_("Gamma");
 	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
@@ -2456,11 +2456,14 @@ void AstroCalcDialog::generateLunarEclipses()
 					treeItem->setText(LunarEclipseDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD))); // local date and time
 					treeItem->setData(LunarEclipseDate, Qt::UserRole, JD);
 					treeItem->setText(LunarEclipseSaros, sarosStr);
+					treeItem->setToolTip(LunarEclipseSaros, q_("Saros series number of eclipse (each eclipse in a Saros is separated by an interval of 18 years 11.3 days)"));
 					treeItem->setText(LunarEclipseType, eclipseTypeStr);
 					treeItem->setText(LunarEclipseGamma, gammaStr);
 					treeItem->setText(LunarEclipsePMag, pMagStr);
+					treeItem->setToolTip(LunarEclipsePMag, q_("Penumbral magnitude is the fraction of the Moon's diameter immersed in the penumbra"));
 					treeItem->setData(LunarEclipsePMag, Qt::UserRole, pMag);
 					treeItem->setText(LunarEclipseUMag, uMagStr);
+					treeItem->setToolTip(LunarEclipseUMag, q_("Umbral magnitude is the fraction of the Moon's diameter immersed in the umbra"));
 					treeItem->setData(LunarEclipseUMag, Qt::UserRole, uMag);
 					treeItem->setText(LunarEclipseVisConditions, visibilityConditionsStr);
 					treeItem->setData(LunarEclipseVisConditions, Qt::UserRole, altitude);
@@ -2593,15 +2596,21 @@ void AstroCalcDialog::setSolarEclipseHeaderNames()
 {
 	solareclipseHeader.clear();
 	solareclipseHeader << q_("Date and Time");
-	solareclipseHeader << q_("Saros Number");
+	solareclipseHeader << q_("Saros");
 	solareclipseHeader << q_("Type");
 	solareclipseHeader << q_("Gamma");
-	solareclipseHeader << q_("Eclipse Magnitude");
-	solareclipseHeader << q_("Latitude");
-	solareclipseHeader << q_("Longitude");
-	solareclipseHeader << q_("Altitude");
-	solareclipseHeader << q_("Path Width (km)");
-	solareclipseHeader << q_("Central Duration");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+	solareclipseHeader << qc_("Eclipse Magnitude", "column name");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+	solareclipseHeader << qc_("Latitude", "column name");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+	solareclipseHeader << qc_("Longitude", "column name");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+	solareclipseHeader << qc_("Altitude", "column name");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+	solareclipseHeader << qc_("Path Width (km)", "column name");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+	solareclipseHeader << qc_("Central Duration", "column name");
 	ui->solareclipseTreeWidget->setHeaderLabels(solareclipseHeader);
 
 	// adjust the column width
@@ -2870,13 +2879,13 @@ cSEparameter centralSolarEclipse(double JD) {
 		const double etadot = mudot * x * sin(d) - ddot * zeta;
 		const double xidot = mudot * (-y * sin(d) + zeta * cos(d));
 		const double n = sqrt((xdot - xidot) * (xdot - xidot) + (ydot - etadot) * (ydot - etadot));
-		duration = L2*120./n;
-		// positive = annular eclipse, negative = total eclipse
+		duration = L2*120./n; // positive = annular eclipse, negative = total eclipse
 
 		// Altitude
 		altitude = asin(cfn1*cos(d)*cos(theta * M_PI_180)+sfn1*sin(d)) / M_PI_180;
 
-		// Path Width in km
+		// Path width in kilometre
+		// Explanatory Supplement to the Astronomical Ephemeris and the American Ephemeris and Nautical Almanac (1992)
 		const double p1 = zeta * zeta;
 		const double p2 = x * (xdot - xidot) / n;
 		const double p3 = eta1 * (ydot - etadot) / n;
@@ -3088,34 +3097,34 @@ void AstroCalcDialog::generateSolarEclipses()
 					{
 						if (abs(gamma) < 0.9972 + abs(bessel.L2) && eclipseData.diameterRatio > 1.)
 						{
-							eclipseTypeStr = "Total"; // Non-central total eclipse
+							eclipseTypeStr = qc_("Total", "eclipse type"); // Non-central total eclipse
 						}
 						else if (abs(gamma) < 0.9972 + abs(bessel.L2) && eclipseData.diameterRatio < 1.)
 						{
-							eclipseTypeStr = "Annular"; // Non-central annular eclipse
+							eclipseTypeStr = qc_("Annular", "eclipse type"); // Non-central annular eclipse
 						}
 						else
-							eclipseTypeStr = "Partial";
+							eclipseTypeStr = qc_("Partial", "eclipse type");
 						noncentraleclipse = true;
 					}
 					else
 						if (bessel.L2 < 0.)
 						{
-							eclipseTypeStr = "Total";
+							eclipseTypeStr = qc_("Total", "eclipse type");
 						}
 						else if (bessel.L2 > 0.0047)
 							{
-								eclipseTypeStr = "Annular";
+								eclipseTypeStr = qc_("Annular", "eclipse type");
 							}
 							else if (bessel.L2 > 0. && bessel.L2 < 0.0047)
 							{
 								if (bessel.L2 < (0.00464 * sqrt(1. - gamma * gamma)))
 								{
-									eclipseTypeStr = "Hybrid";
+									eclipseTypeStr = qc_("Hybrid", "eclipse type");
 								}
 								else
 								{
-									eclipseTypeStr = "Annular";
+									eclipseTypeStr = qc_("Annular", "eclipse type");
 								}
 							}
 
@@ -3187,14 +3196,19 @@ void AstroCalcDialog::generateSolarEclipses()
 					treeItem->setData(SolarEclipseLatitude, Qt::UserRole, eclipseLatitude);
 					treeItem->setData(SolarEclipseLongitude, Qt::UserRole, eclipseLongitude);
 					treeItem->setText(SolarEclipseSaros, sarosStr);
+					treeItem->setToolTip(SolarEclipseSaros, q_("Saros series number of eclipse (each eclipse in a Saros is separated by an interval of 18 years 11.3 days)"));
 					treeItem->setText(SolarEclipseType, eclipseTypeStr);
 					treeItem->setText(SolarEclipseGamma, gammaStr);
 					treeItem->setText(SolarEclipseMag, magStr);
+					treeItem->setToolTip(SolarEclipseMag, q_("Eclipse magnitude is the fraction of the Sun's diameter obscured by the Moon"));
 					treeItem->setText(SolarEclipseLatitude, latitudeStr);
 					treeItem->setText(SolarEclipseLongitude, longitudeStr);
 					treeItem->setText(SolarEclipseAltitude, altitudeStr);
+					treeItem->setToolTip(SolarEclipseAltitude, q_("Sun's altitude at greatest eclipse"));
 					treeItem->setText(SolarEclipsePathwidth, pathWidthStr);
+					treeItem->setToolTip(SolarEclipsePathwidth, q_("Width of the path of totality or annularity at greatest eclipse"));
 					treeItem->setText(SolarEclipseDuration, durationStr);
+					treeItem->setToolTip(SolarEclipseDuration, q_("Duration of total or annular phase at greatest eclipse"));
 					treeItem->setTextAlignment(SolarEclipseDate, Qt::AlignRight);
 					treeItem->setTextAlignment(SolarEclipseSaros, Qt::AlignRight);
 					treeItem->setTextAlignment(SolarEclipseGamma, Qt::AlignRight);
@@ -3229,13 +3243,20 @@ void AstroCalcDialog::setSolarEclipseLocalHeaderNames()
 	solareclipselocalHeader.clear();
 	solareclipselocalHeader << q_("Date");
 	solareclipselocalHeader << q_("Type");
-	solareclipselocalHeader << q_("Partial Eclipse Begins");
-	solareclipselocalHeader << q_("Central Eclipse Begins");
-	solareclipselocalHeader << q_("Maximum Eclipse");
-	solareclipselocalHeader << q_("Central Eclipse Ends");
-	solareclipselocalHeader << q_("Eclipse Magnitude");
-	solareclipselocalHeader << q_("Partial Eclipse Ends");
-	solareclipselocalHeader << q_("Totality/Annularity");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+	solareclipselocalHeader << qc_("Partial Eclipse Begins", "column name");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+	solareclipselocalHeader << qc_("Central Eclipse Begins", "column name");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+	solareclipselocalHeader << qc_("Maximum Eclipse", "column name");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+	solareclipselocalHeader << qc_("Central Eclipse Ends", "column name");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+	solareclipselocalHeader << qc_("Eclipse Magnitude", "column name");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+	solareclipselocalHeader << qc_("Partial Eclipse Ends", "column name");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+	solareclipselocalHeader << qc_("Totality/Annularity", "column name");
 	ui->solareclipselocalTreeWidget->setHeaderLabels(solareclipselocalHeader);
 
 	// adjust the column width
@@ -3572,11 +3593,13 @@ void AstroCalcDialog::selectCurrentSolarEclipse(const QModelIndex& modelIndex)
 	double lat = modelIndex.sibling(modelIndex.row(), SolarEclipseLatitude).data(Qt::UserRole).toDouble();
 	double lon = modelIndex.sibling(modelIndex.row(), SolarEclipseLongitude).data(Qt::UserRole).toDouble();
 
-	StelLocation loc = core->getCurrentLocation();
+	StelLocation loc;
 	loc.latitude = lat;
 	loc.longitude = lon;
 	loc.altitude = 10; // 10 meters above sea level
-	loc.name = "";
+	loc.name = q_("Greatest eclipse’s point");
+	loc.planetName = "Earth";
+	loc.ianaTimeZone = "LMST";
 	core->moveObserverTo(loc, 0.);
 
 	if (objectMgr->findAndSelectI18n(name) || objectMgr->findAndSelect(name))
