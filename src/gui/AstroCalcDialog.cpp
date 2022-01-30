@@ -2949,6 +2949,7 @@ localSEparameter localSolarEclipse(double JD,int contact,bool central) {
 	StelCore* core = StelApp::getInstance().getCore();
 	double lat = static_cast<double>(core->getCurrentLocation().latitude);
 	double lon = static_cast<double>(core->getCurrentLocation().longitude);
+	double elevation = static_cast<double>(core->getCurrentLocation().altitude);
 	lat = lat * M_PI_180;
 	lon = -(lon);
 	double L = 0.;
@@ -2958,10 +2959,14 @@ localSEparameter localSolarEclipse(double JD,int contact,bool central) {
 	core->update(0);
 
 	const double e2 = 0.00669398;
+	const double earthRadius = 6378136.6; // Earth's equatorial radius in metre
+	// Source: IERS Conventions (2003)
+	// https://www.iers.org/IERS/EN/Publications/TechnicalNotes/tn32.html
 	const double c = 1./sqrt(1.- e2 * sin(lat) * sin(lat));
 	const double s = (1. - e2) * c;
-	const double rs = s*sin(lat);
-	const double rc = c*cos(lat);
+	// Elevation added to observer's location
+	const double rs = s*sin(lat)+elevation*sin(lat)/earthRadius;
+	const double rc = c*cos(lat)+elevation*cos(lat)/earthRadius;
 
 	SolarEclipse bessel = BesselianElements();
 	const double x = bessel.x;
