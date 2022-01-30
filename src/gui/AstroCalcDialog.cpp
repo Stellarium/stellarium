@@ -3229,8 +3229,6 @@ void AstroCalcDialog::generateSolarEclipses()
 					ACSolarEclipseTreeWidgetItem* treeItem = new ACSolarEclipseTreeWidgetItem(ui->solareclipseTreeWidget);
 					treeItem->setText(SolarEclipseDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD))); // local date and time
 					treeItem->setData(SolarEclipseDate, Qt::UserRole, JD);
-					treeItem->setData(SolarEclipseLatitude, Qt::UserRole, eclipseLatitude);
-					treeItem->setData(SolarEclipseLongitude, Qt::UserRole, eclipseLongitude);
 					treeItem->setText(SolarEclipseSaros, sarosStr);
 					treeItem->setToolTip(SolarEclipseSaros, q_("Saros series number of eclipse (each eclipse in a Saros is separated by an interval of 18 years 11.3 days)"));
 					treeItem->setText(SolarEclipseType, eclipseTypeStr);
@@ -3238,7 +3236,9 @@ void AstroCalcDialog::generateSolarEclipses()
 					treeItem->setText(SolarEclipseMag, magStr);
 					treeItem->setToolTip(SolarEclipseMag, q_("Eclipse magnitude is the fraction of the Sun's diameter obscured by the Moon"));
 					treeItem->setText(SolarEclipseLatitude, latitudeStr);
+					treeItem->setData(SolarEclipseLatitude, Qt::UserRole, eclipseLatitude);
 					treeItem->setText(SolarEclipseLongitude, longitudeStr);
+					treeItem->setData(SolarEclipseLongitude, Qt::UserRole, eclipseLongitude);
 					treeItem->setText(SolarEclipseAltitude, altitudeStr);
 					treeItem->setToolTip(SolarEclipseAltitude, q_("Sun's altitude at greatest eclipse"));
 					treeItem->setText(SolarEclipsePathwidth, pathWidthStr);
@@ -3286,9 +3286,9 @@ void AstroCalcDialog::setSolarEclipseLocalHeaderNames()
 	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
 	solareclipselocalHeader << qc_("Maximum Eclipse", "column name");
 	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-	solareclipselocalHeader << qc_("Central Eclipse Ends", "column name");
-	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
 	solareclipselocalHeader << qc_("Eclipse Magnitude", "column name");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+	solareclipselocalHeader << qc_("Central Eclipse Ends", "column name");
 	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
 	solareclipselocalHeader << qc_("Partial Eclipse Ends", "column name");
 	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
