@@ -9,4 +9,5 @@ INSTALL(DIRECTORY ./ DESTINATION ${SDATALOC}/skycultures/arabic_lunar_mansions
 	FILES_MATCHING PATTERN "*.fab" 
 	PATTERN "description.*.utf8"
 	PATTERN "*.png"
+	PATTERN "*.dat"
 	PATTERN "CMakeFiles" EXCLUDE )
