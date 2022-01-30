@@ -34,6 +34,7 @@
 #include "StelActionMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelJsonParser.hpp"
+#include "planetsephems/sidereal_time.h"
 
 #ifdef USE_STATIC_PLUGIN_SATELLITES
 #include "../plugins/Satellites/src/Satellites.hpp"
@@ -140,6 +141,8 @@ AstroCalcDialog::AstroCalcDialog(QObject* parent)
 	Q_ASSERT(wutHeader.isEmpty());
 	Q_ASSERT(transitHeader.isEmpty());
 	Q_ASSERT(lunareclipseHeader.isEmpty());
+	Q_ASSERT(solareclipseHeader.isEmpty());
+	Q_ASSERT(solareclipselocalHeader.isEmpty());
 }
 
 AstroCalcDialog::~AstroCalcDialog()
@@ -166,6 +169,8 @@ void AstroCalcDialog::retranslate()
 		setPhenomenaHeaderNames();
 		setWUTHeaderNames();
 		setLunarEclipseHeaderNames();
+		setSolarEclipseHeaderNames();
+		setSolarEclipseLocalHeaderNames();
 		populateCelestialBodyList();
 		populateCelestialCategoryList();
 		populateEphemerisTimeStepsList();
@@ -196,6 +201,10 @@ void AstroCalcDialog::retranslate()
 		ui->transitToDateEdit->setToolTip(validDates);
 		ui->lunareclipseFromDateEdit->setToolTip(validDates);
 		ui->lunareclipseToDateEdit->setToolTip(validDates);
+		ui->solareclipseFromDateEdit->setToolTip(validDates);
+		ui->solareclipseToDateEdit->setToolTip(validDates);
+		ui->solareclipselocalFromDateEdit->setToolTip(validDates);
+		ui->solareclipselocalToDateEdit->setToolTip(validDates);
 	}
 }
 
@@ -265,6 +274,10 @@ void AstroCalcDialog::createDialogContent()
 	ui->transitToDateEdit->setDateTime(currentDT.addMonths(1));
 	ui->lunareclipseFromDateEdit->setDateTime(firstDayOfYear);
 	ui->lunareclipseToDateEdit->setDateTime(lastDayOfYear);
+	ui->solareclipseFromDateEdit->setDateTime(firstDayOfYear);
+	ui->solareclipseToDateEdit->setDateTime(lastDayOfYear);
+	ui->solareclipselocalFromDateEdit->setDateTime(firstDayOfYear);
+	ui->solareclipselocalToDateEdit->setDateTime(lastDayOfYear);
 	ui->monthlyElevationTimeInfo->setStyleSheet("font-size: 18pt; color: rgb(238, 238, 238);");
 
 	// TODO: Replace QDateTimeEdit by a new StelDateTimeEdit widget to apply full range of dates
@@ -287,6 +300,14 @@ void AstroCalcDialog::createDialogContent()
 	ui->lunareclipseFromDateEdit->setToolTip(validDates);
 	ui->lunareclipseToDateEdit->setMinimumDate(minDate);
 	ui->lunareclipseToDateEdit->setToolTip(validDates);
+	ui->solareclipseFromDateEdit->setMinimumDate(minDate);
+	ui->solareclipseFromDateEdit->setToolTip(validDates);
+	ui->solareclipseToDateEdit->setMinimumDate(minDate);
+	ui->solareclipseToDateEdit->setToolTip(validDates);
+	ui->solareclipselocalFromDateEdit->setMinimumDate(minDate);
+	ui->solareclipselocalFromDateEdit->setToolTip(validDates);
+	ui->solareclipselocalToDateEdit->setMinimumDate(minDate);
+	ui->solareclipselocalToDateEdit->setToolTip(validDates);
 	ui->pushButtonExtraEphemerisDialog->setFixedSize(QSize(20, 20));
 	ui->pushButtonCustomStepsDialog->setFixedSize(QSize(26, 26));
 
@@ -350,6 +371,16 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->lunareclipsesCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupLunarEclipses()));
 	connect(ui->lunareclipsesSaveButton, SIGNAL(clicked()), this, SLOT(saveLunarEclipses()));
 	connect(ui->lunareclipseTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentLunarEclipse(QModelIndex)));
+	initListSolarEclipse();
+	connect(ui->solareclipsesCalculateButton, SIGNAL(clicked()), this, SLOT(generateSolarEclipses()));
+	connect(ui->solareclipsesCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupSolarEclipses()));
+	connect(ui->solareclipsesSaveButton, SIGNAL(clicked()), this, SLOT(saveSolarEclipses()));
+	connect(ui->solareclipseTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentSolarEclipse(QModelIndex)));
+	initListSolarEclipseLocal();
+	connect(ui->solareclipseslocalCalculateButton, SIGNAL(clicked()), this, SLOT(generateSolarEclipsesLocal()));
+	connect(ui->solareclipseslocalCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupSolarEclipsesLocal()));
+	connect(ui->solareclipseslocalSaveButton, SIGNAL(clicked()), this, SLOT(saveSolarEclipsesLocal()));
+	connect(ui->solareclipselocalTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentSolarEclipseLocal(QModelIndex)));
 
 	// Let's use DMS and decimal degrees as acceptable values for "Maximum allowed separation" input box
 	ui->allowedSeparationSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
@@ -562,6 +593,7 @@ void AstroCalcDialog::createDialogContent()
 	ui->graphsNoteLabel->setStyleSheet(style);
 	ui->transitNotificationLabel->setStyleSheet(style);
 	ui->gammaNoteLabel->setStyleSheet(style);
+	ui->gammaNoteSolarEclipseLabel->setStyleSheet(style);
 	style = "QCheckBox { color: rgb(238, 238, 238); }";
 	ui->sunAltitudeCheckBox->setStyleSheet(style);
 	ui->moonAltitudeCheckBox->setStyleSheet(style);
@@ -2192,7 +2224,7 @@ void AstroCalcDialog::setLunarEclipseHeaderNames()
 {
 	lunareclipseHeader.clear();
 	lunareclipseHeader << q_("Date and Time");
-	lunareclipseHeader << q_("Saros number");
+	lunareclipseHeader << q_("Saros");
 	lunareclipseHeader << q_("Type");
 	lunareclipseHeader << q_("Gamma");
 	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
@@ -2221,6 +2253,8 @@ void AstroCalcDialog::initListLunarEclipse()
 
 QPair<double,double> AstroCalcDialog::getLunarEclipseXY() const
 {
+	// Source: Explanatory Supplement to the Astronomical Ephemeris 
+	// and the American Ephemeris and Nautical Almanac (1961)
 	// Algorithm adaped from Planet::getLunarEclipseMagnitudes() -- we need only x and y here.
 	// Find x, y of Besselian elements
 	QPair<double,double> LunarEclipseXY;
@@ -2276,68 +2310,37 @@ void AstroCalcDialog::generateLunarEclipses()
 		PlanetP earth = ssystem->getEarth();
 
 		// Find approximate JD of Full Moon = Geocentric opposition in longitude
-		double temp = (startJD - approxJD - (synodicMonth * 0.5)) / synodicMonth;
-		double InitFMJD = approxJD + int(temp) * synodicMonth - (synodicMonth * 0.5);
+		double tmp = (startJD - approxJD - (synodicMonth * 0.5)) / synodicMonth;
+		double InitJD = approxJD + int(tmp) * synodicMonth - (synodicMonth * 0.5);
 
 		// Search for lunar eclipses at each full Moon
-		for (int i = 0; i <= elements+1; i++)
+		for (int i = 0; i <= elements+2; i++)
 		{
-			double JD = InitFMJD + synodicMonth * i;
+			double JD = InitJD + synodicMonth * i;
 			if (JD > startJD)
 			{
-				double JD1 = JD;
-				double JD2 = JD1 + 2.;
-
-				core->setJD(JD1);
+				core->setJD(JD);
 				core->setUseTopocentricCoordinates(false);
 				core->update(0);
 
-				double raSun, deSun, raMoon, deMoon, lSun1, bSun, bMoon, lMoon1, lSun2, lMoon2, az, alt, altitude;
-
-				StelUtils::rectToSphe(&raSun, &deSun, sun->getEquinoxEquatorialPos(core));
-				StelUtils::rectToSphe(&raMoon, &deMoon, moon->getEquinoxEquatorialPos(core));
-				double obl=earth->getRotObliquity(core->getJD());
-				StelUtils::equToEcl(raSun, deSun, obl, &lSun1, &bSun);
-				StelUtils::equToEcl(raMoon, deMoon, obl, &lMoon1, &bMoon);
-
-				core->setJD(JD2);
-				core->update(0);
-
-				StelUtils::rectToSphe(&raSun, &deSun, sun->getEquinoxEquatorialPos(core));
-				StelUtils::rectToSphe(&raMoon, &deMoon, moon->getEquinoxEquatorialPos(core));
-				obl=earth->getRotObliquity(core->getJD());
-				StelUtils::equToEcl(raSun, deSun, obl, &lSun2, &bSun);
-				StelUtils::equToEcl(raMoon, deMoon, obl, &lMoon2, &bMoon);
-
-				lSun1 += M_PI;
-				lSun2 += M_PI;
-
-				double deltaSun = lSun2-lSun1;
-				if (deltaSun < 0.) deltaSun+=2.*M_PI;
-				double deltaMoon = lMoon2-lMoon1;
-				if (deltaMoon < 0.) deltaMoon+=2.*M_PI;
-				double delta = lSun1-lMoon1;
-				if (delta > M_PI) delta-=2.*M_PI;
-				double delta2 = deltaMoon - deltaSun;
-				double dt = 2. * delta / delta2;
-				double JDmid = JD1 + dt;
+				double az, alt, altitude;
 
 				// Find exact time of closest approach between the Moon and shadow centre
-				for (int j = 0; j <= 2; j++)
+				double dt = 1.;
+				int iteration = 0;
+				while (abs(dt)>(0.1/86400.) && (iteration < 20)) // 0.1 second of accuracy
 				{
-					JD1 = JDmid - 5./1440.;
-					JD2 = JDmid + 5./1440.;
-					core->setJD(JDmid);
+					core->setJD(JD);
 					core->update(0);
 					QPair<double,double> XY = getLunarEclipseXY();
 					double x = XY.first;
 					double y = XY.second;
-					core->setJD(JD1);
+					core->setJD(JD - 5./1440.);
 					core->update(0);
 					XY = getLunarEclipseXY();
 					double x1 = XY.first;
 					double y1 = XY.second;
-					core->setJD(JD2);
+					core->setJD(JD + 5./1440.);
 					core->update(0);
 					XY = getLunarEclipseXY();
 					double x2 = XY.first;
@@ -2353,14 +2356,18 @@ void AstroCalcDialog::generateLunarEclipses()
 				    
 					double n2 = xdot * xdot + ydot * ydot;
 					dt  = -(x * xdot + y * ydot) / n2;
-					JDmid += dt / 24.;
+					JD += dt / 24.;
+					iteration += 1;
 				}
 
-				core->setJD(JDmid);
+				core->setJD(JD);
 				core->update(0);
 
 				// Check for eclipse
+				// Source: Explanatory Supplement to the Astronomical Ephemeris 
+				// and the American Ephemeris and Nautical Almanac (1961)
 				// Algorithm taken from Planet::getLunarEclipseMagnitudes()
+				
 				QPair<double,double> XY = getLunarEclipseXY();				
 				double x = XY.first;
 				double y = XY.second;
@@ -2427,7 +2434,7 @@ void AstroCalcDialog::generateLunarEclipses()
 					// Saros numbers calculated here are matching well with NASA's Five Millennium Catalog of Lunar Eclipses
 
 					// ln = Brown Lunation number : = 1 at the first New Moon of 1923
-					double q = round((JDmid-2423436.40347)/29.530588-0.25);
+					double q = round((JD-2423436.40347)/29.530588-0.25);
 					int ln = int(q) + 1 - 953;
 					int nd = ln + 105;
 					int s = 148 + 38 * nd;
@@ -2451,14 +2458,17 @@ void AstroCalcDialog::generateLunarEclipses()
 						uMagStr = QString("%1").arg(QString::number(uMag, 'f', 3));
 
 					ACLunarEclipseTreeWidgetItem* treeItem = new ACLunarEclipseTreeWidgetItem(ui->lunareclipseTreeWidget);
-					treeItem->setText(LunarEclipseDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JDmid), localeMgr->getPrintableTimeLocal(JDmid))); // local date and time
-					treeItem->setData(LunarEclipseDate, Qt::UserRole, JDmid);
+					treeItem->setText(LunarEclipseDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD))); // local date and time
+					treeItem->setData(LunarEclipseDate, Qt::UserRole, JD);
 					treeItem->setText(LunarEclipseSaros, sarosStr);
+					treeItem->setToolTip(LunarEclipseSaros, q_("Saros series number of eclipse (each eclipse in a Saros is separated by an interval of 18 years 11.3 days)"));
 					treeItem->setText(LunarEclipseType, eclipseTypeStr);
 					treeItem->setText(LunarEclipseGamma, gammaStr);
 					treeItem->setText(LunarEclipsePMag, pMagStr);
+					treeItem->setToolTip(LunarEclipsePMag, q_("Penumbral magnitude is the fraction of the Moon's diameter immersed in the penumbra"));
 					treeItem->setData(LunarEclipsePMag, Qt::UserRole, pMag);
 					treeItem->setText(LunarEclipseUMag, uMagStr);
+					treeItem->setToolTip(LunarEclipseUMag, q_("Umbral magnitude is the fraction of the Moon's diameter immersed in the umbra"));
 					treeItem->setData(LunarEclipseUMag, Qt::UserRole, uMag);
 					treeItem->setText(LunarEclipseVisConditions, visibilityConditionsStr);
 					treeItem->setData(LunarEclipseVisConditions, Qt::UserRole, altitude);
@@ -2568,6 +2578,1233 @@ void AstroCalcDialog::saveLunarEclipses()
 			{
 				// Row 2 and next: the data
 				sData = ui->lunareclipseTreeWidget->topLevelItem(i)->text(j).trimmed();
+				xlsx.write(i + 2, j + 1, sData, data);
+				int w = sData.size();
+				if (w > width[j])
+				{
+					width[j] = w;
+				}
+			}
+		}
+
+		for (int i = 0; i < columns; i++)
+		{
+			xlsx.setColumnWidth(i+1, width[i]+2);
+		}
+
+		delete[] width;
+		xlsx.saveAs(filePath);
+	}
+}
+
+void AstroCalcDialog::setSolarEclipseHeaderNames()
+{
+	solareclipseHeader.clear();
+	solareclipseHeader << q_("Date and Time");
+	solareclipseHeader << q_("Saros");
+	solareclipseHeader << q_("Type");
+	solareclipseHeader << q_("Gamma");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+	solareclipseHeader << qc_("Eclipse Magnitude", "column name");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+	solareclipseHeader << qc_("Latitude", "column name");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+	solareclipseHeader << qc_("Longitude", "column name");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+	solareclipseHeader << qc_("Altitude", "column name");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+	solareclipseHeader << qc_("Path Width (km)", "column name");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+	solareclipseHeader << qc_("Central Duration", "column name");
+	ui->solareclipseTreeWidget->setHeaderLabels(solareclipseHeader);
+
+	// adjust the column width
+	for (int i = 0; i < SolarEclipseCount; ++i)
+	{
+		ui->solareclipseTreeWidget->resizeColumnToContents(i);
+	}
+}
+
+void AstroCalcDialog::initListSolarEclipse()
+{
+	ui->solareclipseTreeWidget->clear();
+	ui->solareclipseTreeWidget->setColumnCount(SolarEclipseCount);
+	setSolarEclipseHeaderNames();
+	ui->solareclipseTreeWidget->header()->setSectionsMovable(false);
+	ui->solareclipseTreeWidget->header()->setDefaultAlignment(Qt::AlignHCenter);
+}
+
+struct SolarEclipse {
+	double x;
+	double y;
+	double d;
+	double tf1;
+	double tf2;
+	double L1;
+	double L2;
+	double mu;
+};
+
+SolarEclipse BesselianElements() {
+	SolarEclipse result;
+
+	// Besselian elements
+	// Source: Explanatory Supplement to the Astronomical Ephemeris 
+	// and the American Ephemeris and Nautical Almanac (1961)
+
+	StelCore* core = StelApp::getInstance().getCore();
+	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+
+	core->setUseTopocentricCoordinates(false);
+	core->update(0);
+
+	double raMoon, deMoon, raSun, deSun;
+	StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
+	StelUtils::rectToSphe(&raMoon, &deMoon, ssystem->getMoon()->getEquinoxEquatorialPos(core));
+
+	double sdistanceAu = ssystem->getSun()->getEquinoxEquatorialPos(core).length();
+	// Moon's distance in Earth's radius
+	double mdistanceER = ssystem->getMoon()->getEquinoxEquatorialPos(core).length() * AU / 6378.1366;
+	// Greenwich Apparent Sidereal Time
+	const double gast = get_apparent_sidereal_time(core->getJD(), core->getJDE());
+
+	// Avoid bug for special cases happen around Vernal Equinox
+	if (raSun>M_PI && raMoon<M_PI) raMoon+=2.*M_PI;
+	else if (raSun<M_PI && raMoon>M_PI) raSun+=2.*M_PI;
+
+	constexpr double SunEarth = 109.12278;
+	// ratio of Sun-Earth radius : 109.12278 = 696000/6378.1366
+	// Another value is 109.075744787 = 695700/6378.1366
+	// Earth's equatorial radius = 6378.1366
+	// Source: IERS Conventions (2003)
+	// https://www.iers.org/IERS/EN/Publications/TechnicalNotes/tn32.html
+
+	// NASA's solar eclipse predictions use larger Sun with radius 696,000 km
+	// calculated from arctan of IAU 1976 solar radius (959.63 arcsec at 1 au)
+	// This value affects duration of total/annular eclipse ~ 2-3 seconds
+	// Stellarium's solar radius is 695,700 km, this may create discrepancies between prediction & visualization
+
+	const double rss = sdistanceAu * 23454.7925; // from 1 AU/Earth's radius : 149597870.8/6378.1366
+	const double b = mdistanceER / rss;
+	const double a = raSun - ((b * cos(deMoon) * (raMoon-raSun)) / ((1 - b) * cos(deSun)));
+	const double d = deSun - (b * (deMoon - deSun) / (1 - b));
+	double x = cos(deMoon) * sin((raMoon - a));
+	x *= mdistanceER;
+	double y = cos(d) * sin(deMoon);
+	y -= cos(deMoon) * sin(d) * cos((raMoon - a));
+	y *= mdistanceER;
+	double z = sin(deMoon) * sin(d);
+	z += cos(deMoon) * cos(d) * cos((raMoon - a));
+	z *= mdistanceER;
+	// parameters of the shadow cone
+	// 0.2725076 is recommended by IAU, NASA uses 0.272281 for total eclipse to eliminate extreme cases
+	// when the Moon's apparent diameter is very close to the Sun but cannot completely cover it. 
+	// we will use two values (same with NASA), because durations seem to agree with NASA.
+	// Source: Solar Eclipse Predictions and the Mean Lunar Radius
+	// http://eclipsewise.com/solar/SEhelp/SEradius.html
+	const double f1 = asin((SunEarth + 0.2725076) / (rss * (1. - b)));
+	const double tf1 = tan(f1);
+	const double f2 = asin((SunEarth - 0.272281) / (rss * (1. - b)));  
+	const double tf2 = tan(f2);
+	const double L1 = z * tf1 + (0.2725076 / cos(f1));
+	const double L2 = z * tf2 - (0.272281 / cos(f2));
+	double mu = gast - StelUtils::fmodpos(a / M_PI_180, 360.);
+	mu = StelUtils::fmodpos(mu, 360.);
+
+	result.x = x;
+	result.y = y;
+	result.d = d;
+	result.tf1 = tf1;
+	result.tf2 = tf2;
+	result.L1 = L1;
+	result.L2 = L2;
+	result.mu = mu;
+
+	return result;
+}
+
+// Partial solar eclipse parameters
+struct pSEparameter {
+	double magnitude;
+	double diameterRatio;
+	double longitude;
+	double latitude;
+};
+
+pSEparameter partialSolarEclipse() {
+	pSEparameter result;
+
+	// Besselian elements
+	// Source: Explanatory Supplement to the Astronomical Ephemeris 
+	// and the American Ephemeris and Nautical Almanac (1961)
+
+	SolarEclipse bessel = BesselianElements();
+
+	const double x = bessel.x;
+	const double y = bessel.y;
+	const double d = bessel.d;
+	const double tf1 = bessel.tf1;
+	const double tf2 = bessel.tf2;
+	double L1 = bessel.L1;
+	double L2 = bessel.L2;
+	const double mu = bessel.mu;
+	constexpr double e2 = 0.00669398;
+	// e^2 = 0.00669398 : Earth flattening parameter
+	// f = 298.25642 : e^2 = 2f-f^2
+	// Source: IERS Conventions (2003)
+	// https://www.iers.org/IERS/EN/Publications/TechnicalNotes/tn32.html
+
+	const double rho1 = sqrt(1.- e2 * cos(d) * cos(d));
+	const double yy1 = y / rho1;
+	double m = sqrt(x * x + y * y);
+	double xi = x / sqrt(x * x + yy1 * yy1);
+	const double eta1 = yy1 / sqrt(x * x + yy1 * yy1);
+	const double sd1 = sin(d) / rho1;
+	const double cd1 = sqrt(1.- e2) * cos(d) / rho1;
+	const double rho2 = sqrt(1.- e2 * sin(d) * sin(d));
+	const double sd1d2 = e2 * sin(d) * cos(d) / (rho1 * rho2);
+	double zeta = rho2 * (-(eta1) * sd1d2);
+	const double b = -eta1 * sd1;
+	double theta = atan2(xi, b);
+	
+	const double sfn1 = eta1*cd1;
+	const double cfn1 = sqrt(1.- sfn1 * sfn1);
+	double lat = 1.003364092 * sfn1 / cfn1;
+	// 1.003364092 = 6378.1366 / 6356.7519
+	lat = atan(lat);
+	L1 = L1 - zeta * tf1;
+	L2 = L2 - zeta * tf2;
+	const double c = 1. / sqrt(1.- e2 * sin(lat) * sin(lat));
+	const double s = (1.- e2) * c;
+	const double rs = s * sin(lat);
+	const double rc = c * cos(lat);
+	xi = rc * sin(theta);
+	const double eta = rs * cos(d) - rc * sin(d) * cos(theta);
+	const double u = x - xi;
+	const double v = y - eta;
+	m = sqrt(u * u + v * v);
+	const double magnitude = (L1 - m) / (L1 + L2);
+	const double dratio = 1.+ (magnitude - 1.)* 2.;
+	theta = theta / M_PI_180;
+	if (theta < 0.) theta += 360.;
+	double lon = mu - theta;
+	if (lon < -180.) lon += 360.;
+	if (lon > 180.) lon -= 360.;
+	lon = -(lon); // + East, - West
+
+	result.magnitude = magnitude;
+	result.diameterRatio = dratio;
+	result.latitude = lat / M_PI_180;
+	result.longitude = lon;
+
+	return result;
+}
+
+// Central solar eclipse parameters
+struct cSEparameter {
+	double diameterRatio;
+	double longitude;
+	double latitude;
+	double altitude;
+	double pathwidth;
+	double duration;
+};
+
+cSEparameter centralSolarEclipse(double JD) {
+	cSEparameter result;
+
+	// Besselian elements
+	// Source: Explanatory Supplement to the Astronomical Ephemeris 
+	// and the American Ephemeris and Nautical Almanac (1961)
+
+	StelCore* core = StelApp::getInstance().getCore();
+	core->setUseTopocentricCoordinates(false);
+	core->setJD(JD);
+	core->update(0);
+
+	SolarEclipse bessel = BesselianElements();
+
+	const double x = bessel.x;
+	const double y = bessel.y;
+	const double d = bessel.d;
+	const double tf1 = bessel.tf1;
+	const double tf2 = bessel.tf2;
+	double L1 = bessel.L1;
+	double L2 = bessel.L2;
+	const double mu = bessel.mu;
+
+	constexpr double e2 = 0.00669398;
+	const double rho1 = sqrt(1. - e2 * cos(d) *cos(d));
+	const double y1 = y / rho1;
+	const double eta1 = y1;
+	const double sd1 = sin(d) / rho1;
+	const double cd1 = sqrt(1. - e2) * cos(d) / rho1;
+	const double rho2 = sqrt(1.- e2 * sin(d) * sin(d));
+	const double sd1d2 = e2*sin(d)*cos(d)/(rho1*rho2);
+	const double cd1d2 = sqrt(1. - sd1d2 * sd1d2); 
+	const double p = 1. - x * x - y1 * y1;
+	double dratio = 0.;
+	double lat = 99.;
+	double lon = 0.;
+	double duration = 0.;
+	double pathwidth = 0.;
+	double altitude = 0.;
+
+	if (p > 0.) // Moon's shadow axis is touching Earth
+	{
+		const double zeta1 = sqrt(p);
+		const double zeta = rho2 * (zeta1 * cd1d2 - eta1 * sd1d2);
+		L2 = L2 - zeta * tf2;
+		const double b = -y * sin(d) + zeta * cos(d);
+		double theta = atan2(x, b) / M_PI_180;
+		if (theta < 0.) theta += 360.;
+		//if (mu > 360.) mu -= 360.;
+		lon = mu - theta;
+		if (lon < -180.) lon += 360.;
+		if (lon > 180.) lon -= 360.;
+		lon = -(lon); // + East, - West
+		const double sfn1 = eta1 * cd1 + zeta1 * sd1;
+		const double cfn1 = sqrt(1. - sfn1 * sfn1);
+		lat = 1.003364092 * sfn1 / cfn1;
+		lat = atan(lat) / M_PI_180;
+		L1 = L1 - zeta * tf1;
+		const double magnitude = L1 / (L1 + L2);
+		dratio = 1.+(magnitude-1.)*2.;
+
+		core->setJD(JD - 5./1440.);
+		core->update(0);
+
+		bessel = BesselianElements();
+		const double x1 = bessel.x;
+		const double y1 = bessel.y;
+		const double d1 = bessel.d;
+		const double mu1 = bessel.mu;
+
+		core->setJD(JD + 5./1440.);
+		core->update(0);
+
+		bessel = BesselianElements();
+		const double x2 = bessel.x;
+		const double y2 = bessel.y;
+		const double d2 = bessel.d;
+		const double mu2 = bessel.mu;
+
+		// Hourly rate of changes
+		const double xdot = (x2 - x1) * 6.;
+		const double ydot = (y2 - y1) * 6.;
+		const double ddot = (d2 - d1) * 6.;
+		double mudot = (mu2 - mu1) * 6.;
+		mudot = mudot * M_PI_180;
+		mudot = StelUtils::fmodpos(mudot, 2.*M_PI);
+
+		// Duration of central eclipse in minutes
+		const double etadot = mudot * x * sin(d) - ddot * zeta;
+		const double xidot = mudot * (-y * sin(d) + zeta * cos(d));
+		const double n = sqrt((xdot - xidot) * (xdot - xidot) + (ydot - etadot) * (ydot - etadot));
+		duration = L2*120./n; // positive = annular eclipse, negative = total eclipse
+
+		// Altitude
+		altitude = asin(cfn1*cos(d)*cos(theta * M_PI_180)+sfn1*sin(d)) / M_PI_180;
+
+		// Path width in kilometre
+		// Explanatory Supplement to the Astronomical Almanac
+		// Seidelmann, P. Kenneth, ed. (1992). University Science Books. ISBN 978-0-935702-68-2
+		// https://archive.org/details/131123ExplanatorySupplementAstronomicalAlmanac
+		const double p1 = zeta * zeta;
+		const double p2 = x * (xdot - xidot) / n;
+		const double p3 = eta1 * (ydot - etadot) / n;
+		const double p4 = (p2 + p3) * ( p2 + p3);
+		pathwidth = abs(6378.1366*2.*L2/sqrt(p1+p4));
+	}
+
+	result.diameterRatio = dratio;
+	result.latitude = lat;
+	result.longitude = lon;
+	result.altitude = altitude;
+	result.pathwidth = pathwidth;
+	result.duration = duration;
+
+	return result;
+}
+
+// local solar eclipse parameters
+struct localSEparameter {
+	double dt;
+	double L1;
+	double L2;
+	double magnitude;
+	double altitude;
+};
+
+localSEparameter localSolarEclipse(double JD,int contact,bool central) {
+	localSEparameter result;
+	// contact : -1 for beginning, 0 for mid-eclipse, 1 for the end of partial or annular
+	// contact : -1 for the end, 0 for mid-eclipse, 1 for beginning of total
+	// central : true for total/annular eclipse
+
+	// Besselian elements
+	// Source: Explanatory Supplement to the Astronomical Ephemeris 
+	// and the American Ephemeris and Nautical Almanac (1961)
+
+	StelCore* core = StelApp::getInstance().getCore();
+	double lat = static_cast<double>(core->getCurrentLocation().latitude);
+	double lon = static_cast<double>(core->getCurrentLocation().longitude);
+	double elevation = static_cast<double>(core->getCurrentLocation().altitude);
+	lat = lat * M_PI_180;
+	lon = -(lon);
+	double L = 0.;
+
+	core->setUseTopocentricCoordinates(false);
+	core->setJD(JD);
+	core->update(0);
+
+	const double e2 = 0.00669398;
+	const double earthRadius = 6378136.6; // Earth's equatorial radius in metre
+	// Source: IERS Conventions (2003)
+	// https://www.iers.org/IERS/EN/Publications/TechnicalNotes/tn32.html
+	const double c = 1./sqrt(1.- e2 * sin(lat) * sin(lat));
+	const double s = (1. - e2) * c;
+	// Elevation added to observer's location
+	const double rs = s*sin(lat)+elevation*sin(lat)/earthRadius;
+	const double rc = c*cos(lat)+elevation*cos(lat)/earthRadius;
+
+	SolarEclipse bessel = BesselianElements();
+	const double x = bessel.x;
+	const double y = bessel.y;
+	const double d = bessel.d;
+	const double tf1 = bessel.tf1;
+	const double tf2 = bessel.tf2;
+	double L1 = bessel.L1;
+	double L2 = bessel.L2;
+	const double mu = bessel.mu;
+
+	core->setJD(JD - 5./1440.);
+	core->update(0);
+
+	bessel = BesselianElements();
+	const double x1 = bessel.x;
+	const double y1 = bessel.y;
+	const double d1 = bessel.d;
+	const double mu1 = bessel.mu;
+
+	core->setJD(JD + 5./1440.);
+	core->update(0);
+
+	bessel = BesselianElements();
+	const double x2 = bessel.x;
+	const double y2 = bessel.y;
+	const double d2 = bessel.d;
+	const double mu2 = bessel.mu;
+
+	// Hourly rate of changes
+	const double xdot = (x2 - x1) * 6.;
+	const double ydot = (y2 - y1) * 6.;
+	const double ddot = (d2 - d1) * 6.;
+	double mudot = mu2 - mu1;
+	if (mudot < 0.)
+		mudot += 360.;
+	mudot = mudot * 6.;
+	mudot = mudot * M_PI_180;
+	double theta = (mu - lon) * M_PI_180;
+	theta = StelUtils::fmodpos(theta, 2.*M_PI);
+	const double xi = rc*sin(theta);
+	const double eta = rs*cos(d)-rc*sin(d)*cos(theta);
+	const double zeta = rs*sin(d)+rc*cos(d)*cos(theta);
+	const double xidot = mudot * rc * cos(theta);
+	const double etadot = mudot*xi*sin(d)-zeta*ddot;
+	const double u = x - xi;
+	const double v = y - eta;
+	const double udot = xdot - xidot;
+	const double vdot = ydot - etadot;
+	const double n2 = udot * udot + vdot * vdot;
+	const double delta = (u * vdot - udot * v) / sqrt(udot * udot + vdot * vdot);
+	L1 = L1 - zeta * tf1;
+	L2 = L2 - zeta * tf2;
+	if (central)
+		L = L2;
+	else
+		L = L1;
+	const double sfi = delta/L;
+	double cfi = 0.;
+	if ((1.-sfi*sfi) > 0.)
+		cfi = contact * sqrt(1.-sfi*sfi);
+	const double m = sqrt(u * u + v * v);
+	const double magnitude = (L1 - m) / (L1 + L2);
+	const double altitude = asin(rc*cos(d)*cos(theta)+rs*sin(d)) / M_PI_180;
+	const double dt = (L * cfi / sqrt(udot * udot + vdot * vdot)) - (u * udot + v * vdot) / n2;
+
+	result.dt = dt;
+	result.L1 = L1;
+	result.L2 = L2;
+	result.magnitude = magnitude;
+	result.altitude = altitude;
+
+	return result;
+}
+
+void AstroCalcDialog::generateSolarEclipses()
+{
+	const bool onEarth = core->getCurrentPlanet()==solarSystem->getEarth();
+	if (onEarth)
+	{
+		initListSolarEclipse();
+
+		const double currentJD = core->getJD();   // save current JD
+		double startJD = StelUtils::qDateTimeToJd(QDateTime(ui->solareclipseFromDateEdit->date()));
+		double stopJD = StelUtils::qDateTimeToJd(QDateTime(ui->solareclipseToDateEdit->date()));
+		startJD = startJD - core->getUTCOffset(startJD) / 24.;
+		stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
+		QString sarosStr, eclipseTypeStr, gammaStr, magStr, latitudeStr, longitudeStr, altitudeStr, pathWidthStr, durationStr;
+
+		const bool saveTopocentric = core->getUseTopocentricCoordinates();
+		const double approxJD = 2451550.09765;
+		const double synodicMonth = 29.530588853;
+		int elements = static_cast<int>((stopJD - startJD) / synodicMonth);
+		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+
+		// Find approximate JD of New Moon = Geocentric conjunction in longitude
+		// Source: Astronomical Algorithms (1991), Jean Meeus
+		double tmp = (startJD - approxJD - synodicMonth) / synodicMonth;
+		double InitJD = approxJD + int(tmp) * synodicMonth;
+
+		// Search for solar eclipses at each New Moon
+		for (int i = 0; i <= elements+1; i++)
+		{
+			double JD = InitJD + synodicMonth * i;
+			if (JD > startJD)
+			{
+				core->setUseTopocentricCoordinates(false);
+				core->update(0);
+				SolarEclipse bessel = BesselianElements();
+
+				// Find exact time of minimum distance between axis of lunar shadow cone to the center of Earth
+				double dt = 1.;
+				int iteration = 0;
+				while (abs(dt)>(0.1/86400.) && (iteration < 20)) // 0.1 second of accuracy
+				{
+					core->setJD(JD);
+					core->update(0);
+					SolarEclipse bessel = BesselianElements();
+					double x = bessel.x;
+					double y = bessel.y;
+
+					core->setJD(JD - 5./1440.);
+					core->update(0);
+					bessel = BesselianElements();
+					double x1 = bessel.x;
+					double y1 = bessel.y;
+
+					core->setJD(JD + 5./1440.);
+					core->update(0);
+					bessel = BesselianElements();
+					double x2 = bessel.x;
+					double y2 = bessel.y;
+
+					double xdot1 = (x - x1) * 12.;
+					double xdot2 = (x2 - x) * 12.;
+					double xdot = (xdot1 + xdot2) / 2.;
+					double ydot1 = (y - y1) * 12.;
+					double ydot2 = (y2 - y) * 12.;
+					double ydot = (ydot1 + ydot2) / 2.;
+					double n2 = xdot * xdot + ydot * ydot;
+					dt  = -(x * xdot + y * ydot) / n2;
+					JD += dt / 24.;
+					iteration += 1;
+				}
+
+				core->setJD(JD);
+				core->update(0);
+
+				bessel = BesselianElements();
+
+				double gamma = sqrt(bessel.x * bessel.x + bessel.y * bessel.y);
+				if (bessel.y<0.) gamma = -(gamma);
+				pSEparameter eclipseData = partialSolarEclipse();
+
+				bool noncentraleclipse = false; // Non-central includes partial and total/annular eclipses that shadow axis misses Earth
+
+				// Determine the type of solar eclipse
+				// Source: Astronomical Algorithms (1991), Jean Meeus
+				if (abs(gamma) <= (1.5433 + bessel.L2))
+				{
+					if (abs(gamma) > 0.9972 && abs(gamma) < (1.5433 + bessel.L2))
+					{
+						if (abs(gamma) < 0.9972 + abs(bessel.L2) && eclipseData.diameterRatio > 1.)
+						{
+							eclipseTypeStr = qc_("Total", "eclipse type"); // Non-central total eclipse
+						}
+						else if (abs(gamma) < 0.9972 + abs(bessel.L2) && eclipseData.diameterRatio < 1.)
+						{
+							eclipseTypeStr = qc_("Annular", "eclipse type"); // Non-central annular eclipse
+						}
+						else
+							eclipseTypeStr = qc_("Partial", "eclipse type");
+						noncentraleclipse = true;
+					}
+					else
+						if (bessel.L2 < 0.)
+						{
+							eclipseTypeStr = qc_("Total", "eclipse type");
+						}
+						else if (bessel.L2 > 0.0047)
+							{
+								eclipseTypeStr = qc_("Annular", "eclipse type");
+							}
+							else if (bessel.L2 > 0. && bessel.L2 < 0.0047)
+							{
+								if (bessel.L2 < (0.00464 * sqrt(1. - gamma * gamma)))
+								{
+									eclipseTypeStr = qc_("Hybrid", "eclipse type");
+								}
+								else
+								{
+									eclipseTypeStr = qc_("Annular", "eclipse type");
+								}
+							}
+
+					// Saros series calculations - useful to search for eclipses in the same Saros
+					// Adapted from Saros calculations for solar eclipses in Sky & Telescope (October 1985)
+					// Saros numbers calculated here are matching well with NASA's Five Millennium Catalog of Solar Eclipses
+
+					// ln = Brown Lunation number : = 1 at the first New Moon of 1923
+					double q = (JD-2423436.40347)/29.530588;
+					q = round(q);
+					int ln = int(q) + 1 - 953;
+					int nd = ln + 105;
+					int s = 136 + 38 * nd;
+					int nx = -61 * nd;
+					int nc = floor(nx / 358. + 0.5 - nd / (12. * 358 * 358));
+					int saros = 1 + ((s + nc * 223 - 1) % 223);
+					if ((s + nc * 223 - 1) < 0) saros -= 223;
+
+					sarosStr = QString("%1").arg(QString::number(saros));
+					gammaStr = QString("%1").arg(QString::number(gamma, 'f', 3));
+					double eclipseLatitude = 0.;
+					double eclipseLongitude = 0.;
+
+					if (noncentraleclipse)
+					{
+						magStr = QString("%1").arg(QString::number(eclipseData.magnitude, 'f', 3));
+						eclipseLatitude = eclipseData.latitude;
+						eclipseLongitude = eclipseData.longitude;
+						altitudeStr = "0";
+						durationStr = dash;
+						pathWidthStr = dash;
+					}
+					else
+					{
+						cSEparameter eclipseData = centralSolarEclipse(JD);
+						magStr = QString("%1").arg(QString::number(eclipseData.diameterRatio, 'f', 3));
+						altitudeStr = QString("%1").arg(QString::number(round(eclipseData.altitude)));
+						pathWidthStr = QString("%1").arg(QString::number(round(eclipseData.pathwidth)));
+						eclipseLatitude = eclipseData.latitude;
+						eclipseLongitude = eclipseData.longitude;
+						float duration = abs(eclipseData.duration);
+						int durationMinute = int(duration);
+						int durationSecond = round((duration - durationMinute) * 60.);
+						if (durationSecond>59)
+						{
+							durationMinute += 1;
+							durationSecond = 0;
+						}
+						if (durationSecond>9)
+							durationStr = QString("%1m %2s").arg(QString::number(durationMinute)).arg(QString::number(durationSecond));
+						else
+							durationStr = QString("%1m 0%2s").arg(QString::number(durationMinute)).arg(QString::number(durationSecond));
+					}
+
+					if (withDecimalDegree)
+						{
+							latitudeStr = StelUtils::decDegToLatitudeStr(eclipseLatitude, false);
+							longitudeStr = StelUtils::decDegToLongitudeStr(eclipseLongitude, false);
+						}
+					else
+						{
+							latitudeStr = StelUtils::decDegToLatitudeStr(eclipseLatitude, true);
+							longitudeStr = StelUtils::decDegToLongitudeStr(eclipseLongitude, true);
+						}
+
+					ACSolarEclipseTreeWidgetItem* treeItem = new ACSolarEclipseTreeWidgetItem(ui->solareclipseTreeWidget);
+					treeItem->setText(SolarEclipseDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD))); // local date and time
+					treeItem->setData(SolarEclipseDate, Qt::UserRole, JD);
+					treeItem->setData(SolarEclipseLatitude, Qt::UserRole, eclipseLatitude);
+					treeItem->setData(SolarEclipseLongitude, Qt::UserRole, eclipseLongitude);
+					treeItem->setText(SolarEclipseSaros, sarosStr);
+					treeItem->setToolTip(SolarEclipseSaros, q_("Saros series number of eclipse (each eclipse in a Saros is separated by an interval of 18 years 11.3 days)"));
+					treeItem->setText(SolarEclipseType, eclipseTypeStr);
+					treeItem->setText(SolarEclipseGamma, gammaStr);
+					treeItem->setText(SolarEclipseMag, magStr);
+					treeItem->setToolTip(SolarEclipseMag, q_("Eclipse magnitude is the fraction of the Sun's diameter obscured by the Moon"));
+					treeItem->setText(SolarEclipseLatitude, latitudeStr);
+					treeItem->setText(SolarEclipseLongitude, longitudeStr);
+					treeItem->setText(SolarEclipseAltitude, altitudeStr);
+					treeItem->setToolTip(SolarEclipseAltitude, q_("Sun's altitude at greatest eclipse"));
+					treeItem->setText(SolarEclipsePathwidth, pathWidthStr);
+					treeItem->setToolTip(SolarEclipsePathwidth, q_("Width of the path of totality or annularity at greatest eclipse"));
+					treeItem->setText(SolarEclipseDuration, durationStr);
+					treeItem->setToolTip(SolarEclipseDuration, q_("Duration of total or annular phase at greatest eclipse"));
+					treeItem->setTextAlignment(SolarEclipseDate, Qt::AlignRight);
+					treeItem->setTextAlignment(SolarEclipseSaros, Qt::AlignRight);
+					treeItem->setTextAlignment(SolarEclipseGamma, Qt::AlignRight);
+					treeItem->setTextAlignment(SolarEclipseMag, Qt::AlignRight);
+					treeItem->setTextAlignment(SolarEclipseLatitude, Qt::AlignRight);
+					treeItem->setTextAlignment(SolarEclipseLongitude, Qt::AlignRight);
+					treeItem->setTextAlignment(SolarEclipseAltitude, Qt::AlignRight);
+					treeItem->setTextAlignment(SolarEclipsePathwidth, Qt::AlignRight);
+					treeItem->setTextAlignment(SolarEclipseDuration, Qt::AlignRight);
+				}
+			}
+		}
+		core->setJD(currentJD);
+		core->setUseTopocentricCoordinates(saveTopocentric);
+		core->update(0); // enforce update cache to avoid odd selection of Moon details!
+
+		// adjust the column width
+		for (int i = 0; i < SolarEclipseCount; ++i)
+		{
+			ui->solareclipseTreeWidget->resizeColumnToContents(i);
+		}
+
+		// sort-by-date
+		ui->solareclipseTreeWidget->sortItems(SolarEclipseDate, Qt::AscendingOrder);
+	}
+	else
+		cleanupSolarEclipses();
+}
+
+void AstroCalcDialog::setSolarEclipseLocalHeaderNames()
+{
+	solareclipselocalHeader.clear();
+	solareclipselocalHeader << q_("Date");
+	solareclipselocalHeader << q_("Type");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+	solareclipselocalHeader << qc_("Partial Eclipse Begins", "column name");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+	solareclipselocalHeader << qc_("Central Eclipse Begins", "column name");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+	solareclipselocalHeader << qc_("Maximum Eclipse", "column name");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+	solareclipselocalHeader << qc_("Central Eclipse Ends", "column name");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+	solareclipselocalHeader << qc_("Eclipse Magnitude", "column name");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+	solareclipselocalHeader << qc_("Partial Eclipse Ends", "column name");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+	solareclipselocalHeader << qc_("Duration", "column name");
+	ui->solareclipselocalTreeWidget->setHeaderLabels(solareclipselocalHeader);
+
+	// adjust the column width
+	for (int i = 0; i < SolarEclipseLocalCount; ++i)
+	{
+		ui->solareclipselocalTreeWidget->resizeColumnToContents(i);
+	}
+}
+
+void AstroCalcDialog::initListSolarEclipseLocal()
+{
+	ui->solareclipselocalTreeWidget->clear();
+	ui->solareclipselocalTreeWidget->setColumnCount(SolarEclipseLocalCount);
+	setSolarEclipseLocalHeaderNames();
+	ui->solareclipselocalTreeWidget->header()->setSectionsMovable(false);
+	ui->solareclipselocalTreeWidget->header()->setDefaultAlignment(Qt::AlignHCenter);
+}
+
+void AstroCalcDialog::generateSolarEclipsesLocal()
+{
+	const bool onEarth = core->getCurrentPlanet()==solarSystem->getEarth();
+	if (onEarth)
+	{
+		initListSolarEclipseLocal();
+
+		const double currentJD = core->getJD();   // save current JD
+		double startJD = StelUtils::qDateTimeToJd(QDateTime(ui->solareclipselocalFromDateEdit->date()));
+		double stopJD = StelUtils::qDateTimeToJd(QDateTime(ui->solareclipselocalToDateEdit->date()));
+		startJD = startJD - core->getUTCOffset(startJD) / 24.;
+		stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
+		QString eclipseTypeStr, magStr, altitudeStr, durationStr;
+		bool centraleclipse = false;
+
+		const bool saveTopocentric = core->getUseTopocentricCoordinates();
+		const double approxJD = 2451550.09765;
+		const double synodicMonth = 29.530588853;
+		int elements = static_cast<int>((stopJD - startJD) / synodicMonth);
+
+		// Find approximate JD of New Moon = Geocentric conjunction in longitude
+		double tmp = (startJD - approxJD - synodicMonth) / synodicMonth;
+		double InitJD = approxJD + int(tmp) * synodicMonth;
+
+		// Search for solar eclipses at each New Moon
+		for (int i = 0; i <= elements+2; i++)
+		{
+			double JD = InitJD + synodicMonth * i;
+			if (JD > startJD)
+			{
+				core->setUseTopocentricCoordinates(false);
+				core->update(0);
+				SolarEclipse bessel = BesselianElements();
+
+				// Find exact time of minimum distance between axis of lunar shadow cone to the center of Earth
+				double dt = 1.;
+				int iteration = 0;
+				while (abs(dt)>(0.1/86400.) && (iteration < 20)) // 0.1 second of accuracy
+				{
+					core->setJD(JD);
+					core->update(0);
+					SolarEclipse bessel = BesselianElements();
+					double x = bessel.x;
+					double y = bessel.y;
+
+					core->setJD(JD - 5./1440.);
+					core->update(0);
+					bessel = BesselianElements();
+					double x1 = bessel.x;
+					double y1 = bessel.y;
+
+					core->setJD(JD + 5./1440.);
+					core->update(0);
+					bessel = BesselianElements();
+					double x2 = bessel.x;
+					double y2 = bessel.y;
+
+					double xdot1 = (x - x1) * 12.;
+					double xdot2 = (x2 - x) * 12.;
+					double xdot = (xdot1 + xdot2) / 2.;
+					double ydot1 = (y - y1) * 12.;
+					double ydot2 = (y2 - y) * 12.;
+					double ydot = (ydot1 + ydot2) / 2.;
+					double n2 = xdot * xdot + ydot * ydot;
+					dt  = -(x * xdot + y * ydot) / n2;
+					JD += dt / 24.;
+					iteration += 1;
+				}
+
+				core->setJD(JD);
+				core->update(0);
+				bessel = BesselianElements();
+				double gamma = sqrt(bessel.x * bessel.x + bessel.y * bessel.y);
+
+				if (bessel.y<0.)
+					gamma = -(gamma);
+
+				if (abs(gamma) <= (1.5433 + bessel.L2)) // Solar eclipse occurs on this date
+				{
+					double magLocal = 0., altitudeMideclipse = 0.;
+					double altitudeFirstcontact = 0.;
+					double altitudeLastcontact = 0.;
+
+					// Find time of maximum eclipse for current location
+					double dt = 1.;
+					int iteration = 0;
+					localSEparameter eclipseData = localSolarEclipse(JD,0,false);
+					while (abs(dt) > 0.000001 && (iteration < 20))
+					{
+						eclipseData = localSolarEclipse(JD,0,false);
+						dt = eclipseData.dt;
+						JD += dt / 24.;
+						iteration += 1;
+						magLocal = eclipseData.magnitude;
+						altitudeMideclipse = eclipseData.altitude;
+					}
+					magStr = QString("%1").arg(QString::number(magLocal, 'f', 3));
+
+					if (magLocal > 0.) // Eclipse occurs for transparent Earth, need to check altitude of the Sun at each contacts
+					{
+						double JD1 = JD;
+						double JD2 = JD;
+						double JDmax = JD;
+						double JD3 = JD;
+						double JD4 = JD;
+						// First contact
+						dt = 1.;
+						iteration = 0;
+						eclipseData = localSolarEclipse(JD1,-1,false);
+						dt = eclipseData.dt;
+						while (abs(dt) > 0.000001 && (iteration < 20))
+						{
+							eclipseData = localSolarEclipse(JD1,-1,false);
+							dt = eclipseData.dt;
+							JD1 += dt / 24.;
+							iteration += 1;
+							altitudeFirstcontact = eclipseData.altitude;
+						}
+						// Last contact
+						dt = 1.;
+						iteration = 0;
+						eclipseData = localSolarEclipse(JD4,1,false);
+						dt = eclipseData.dt;
+						while (abs(dt) > 0.000001 && (iteration < 20))
+						{
+							eclipseData = localSolarEclipse(JD4,1,false);
+							dt = eclipseData.dt;
+							JD4 += dt / 24.;
+							iteration += 1;
+							altitudeLastcontact = eclipseData.altitude;
+						}
+
+						if (altitudeMideclipse > -.3 || altitudeFirstcontact > -.3 || altitudeLastcontact > -.3) // Eclipse certainly visible at this location
+						{
+							// 0.3 deg. is approx. correction for atmospheric refraction at horizon	            		
+							if ((altitudeFirstcontact < -.3) && (altitudeLastcontact > -.3)) // Eclipse occurs at Sunrise
+							{
+								// find time of Sunrise (not exactly, we want the time when lower limb is at the horizon)
+								for (int i = 0; i <= 5; i++)
+								{
+									eclipseData = localSolarEclipse(JD - 5./1440.,0,false);
+									double alt1 = eclipseData.altitude+.3;
+									eclipseData = localSolarEclipse(JD + 5./1440.,0,false);
+									double alt2 = eclipseData.altitude+.3;
+									double dt = .006944444 * alt1 / (alt2 - alt1);
+									JD = JD - 5./1440. - dt;
+									eclipseData = localSolarEclipse(JD,0,false);
+								}
+								if (altitudeMideclipse > -.3) // Eclipse begins at Sunrise before Mid-eclipse
+								{
+									JD1 = JD; // time of first contact at Sunrise
+								}
+								else
+								{
+									// Eclipse begins at Sunrise, after Mid-eclipse
+									JD1 = JD; // time of first contact at Sunrise
+									JDmax = JD; // time of maximum eclipse
+									magLocal = eclipseData.magnitude;
+									magStr = QString("%1").arg(QString::number(eclipseData.magnitude, 'f', 3));
+								}
+							}
+
+							if ((altitudeFirstcontact > -.3) && (altitudeLastcontact < -.3)) // Eclipse occurs at Sunset
+							{
+								// find time of Sunset (not exactly, we want the time when lower limb is at the horizon)
+								for (int i = 0; i <= 5; i++)
+								{
+									eclipseData = localSolarEclipse(JD - 5./1440.,0,false);
+									double alt1 = eclipseData.altitude+.3;
+									eclipseData = localSolarEclipse(JD + 5./1440.,0,false);
+									double alt2 = eclipseData.altitude+.3;
+									double dt = .006944444 * alt1 / (alt2 - alt1);
+									JD = JD - 5./1440. - dt;
+									eclipseData = localSolarEclipse(JD,0,false);
+								}
+								if (altitudeMideclipse > -.3) // Eclipse ends at Sunset after Mid-eclipse
+									JD4 = JD; // time of last contact at Sunset
+								else
+									{
+										// Eclipse ends at Sunset before Mid-eclipse
+										JD4 = JD; // time of last contact at Sunset
+										JDmax = JD; // time of maximum eclipse
+										magLocal = eclipseData.magnitude;
+										magStr = QString("%1").arg(QString::number(eclipseData.magnitude, 'f', 3));
+									}
+							}
+
+							// 2nd contact - start of totality/annularity
+							double L2 = 0.;
+							iteration = 0;
+							dt = 1.;
+							JD2 = JD;
+							eclipseData = localSolarEclipse(JD2,-1,true);
+							dt = eclipseData.dt;
+							while (abs(dt) > 0.000001 && (iteration < 20))
+							{
+								eclipseData = localSolarEclipse(JD2,-1,true);
+								dt = eclipseData.dt;
+								JD2 += dt / 24.;
+								iteration += 1;
+							}
+							double C2altitude = eclipseData.altitude;
+							// 3rd contact - end of totality/annularity
+							iteration = 0;
+							dt = 1.;
+							JD3 = JD;
+							eclipseData = localSolarEclipse(JD3,1,true);
+							dt = eclipseData.dt;
+							while (abs(dt) > 0.000001 && (iteration < 20))
+							{
+								eclipseData = localSolarEclipse(JD3,1,true);
+								dt = eclipseData.dt;
+								JD3 += dt / 24.;
+								iteration += 1;
+							}
+							double C3altitude = eclipseData.altitude;
+
+							L2 = eclipseData.L2;
+
+							if (abs(JD3-JD2) > 1./86400. && (C2altitude > 0.) && (C3altitude > 0.)) // Central eclipse occurs
+							{
+								centraleclipse = true;
+								if (L2 < 0.)
+								{
+									eclipseTypeStr = qc_("Total", "eclipse type");
+									JD = JD3;
+									JD3 = JD2;
+									JD2 = JD;
+								}
+								else
+									eclipseTypeStr = qc_("Annular", "eclipse type");
+							}
+							else
+								{
+									eclipseTypeStr = qc_("Partial", "eclipse type");
+									centraleclipse = false;
+								}
+
+							if (centraleclipse)
+							{
+								double duration = abs(JD3-JD2)*1440.;
+								int durationMinute = int(duration);
+								int durationSecond = round((duration - durationMinute) * 60.);
+								if (durationSecond>59)
+								{
+									durationMinute += 1;
+									durationSecond = 0;
+								}
+								if (durationSecond>9)
+									durationStr = QString("%1m %2s").arg(QString::number(durationMinute)).arg(QString::number(durationSecond));
+								else
+									durationStr = QString("%1m 0%2s").arg(QString::number(durationMinute)).arg(QString::number(durationSecond));
+							}
+
+							ACSolarEclipseLocalTreeWidgetItem* treeItem = new ACSolarEclipseLocalTreeWidgetItem(ui->solareclipselocalTreeWidget);
+							treeItem->setText(SolarEclipseLocalDate, QString("%1").arg(localeMgr->getPrintableDateLocal(JDmax))); // local date
+							treeItem->setData(SolarEclipseLocalDate, Qt::UserRole, JDmax);
+							treeItem->setText(SolarEclipseLocalType, eclipseTypeStr);
+							treeItem->setText(SolarEclipseLocalFirstContact, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD1)));
+							
+							if (centraleclipse)
+								treeItem->setText(SolarEclipseLocal2ndContact, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD2)));
+							else
+								treeItem->setText(SolarEclipseLocal2ndContact, dash);
+							treeItem->setText(SolarEclipseLocalMaximum, QString("%1").arg(localeMgr->getPrintableTimeLocal(JDmax)));
+							treeItem->setText(SolarEclipseLocalMagnitude, magStr);
+							if (centraleclipse)
+								treeItem->setText(SolarEclipseLocal3rdContact, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD3)));
+							else
+								treeItem->setText(SolarEclipseLocal3rdContact, dash);
+							treeItem->setText(SolarEclipseLocalLastContact, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD4)));
+							if (centraleclipse)
+								treeItem->setText(SolarEclipseLocalDuration, durationStr);
+							else
+								treeItem->setText(SolarEclipseLocalDuration, dash);
+							treeItem->setToolTip(SolarEclipseLocalDuration, q_("Duration of total or annular eclipse"));
+							treeItem->setTextAlignment(SolarEclipseLocalDate, Qt::AlignRight);
+							treeItem->setTextAlignment(SolarEclipseLocalMagnitude, Qt::AlignRight);
+							treeItem->setTextAlignment(SolarEclipseLocalFirstContact, Qt::AlignRight);
+							treeItem->setTextAlignment(SolarEclipseLocal2ndContact, Qt::AlignRight);
+							treeItem->setTextAlignment(SolarEclipseLocalMaximum, Qt::AlignRight);
+							treeItem->setTextAlignment(SolarEclipseLocal3rdContact, Qt::AlignRight);
+							treeItem->setTextAlignment(SolarEclipseLocalLastContact, Qt::AlignRight);
+							treeItem->setTextAlignment(SolarEclipseLocalDuration, Qt::AlignRight);
+						}
+					}
+				}
+			}
+		}
+		core->setJD(currentJD);
+		core->setUseTopocentricCoordinates(saveTopocentric);
+		core->update(0); // enforce update cache to avoid odd selection of Moon details!
+
+		// adjust the column width
+		for (int i = 0; i < SolarEclipseLocalCount; ++i)
+		{
+			ui->solareclipselocalTreeWidget->resizeColumnToContents(i);
+		}
+
+		// sort-by-date
+		ui->solareclipselocalTreeWidget->sortItems(SolarEclipseLocalDate, Qt::AscendingOrder);
+	}
+	else
+		cleanupSolarEclipsesLocal();
+}
+
+void AstroCalcDialog::cleanupSolarEclipses()
+{
+	ui->solareclipseTreeWidget->clear();
+}
+
+void AstroCalcDialog::selectCurrentSolarEclipse(const QModelIndex& modelIndex)
+{
+	// Find the Sun
+	QString name = "Sun";
+	double JD = modelIndex.sibling(modelIndex.row(), SolarEclipseDate).data(Qt::UserRole).toDouble();
+	double lat = modelIndex.sibling(modelIndex.row(), SolarEclipseLatitude).data(Qt::UserRole).toDouble();
+	double lon = modelIndex.sibling(modelIndex.row(), SolarEclipseLongitude).data(Qt::UserRole).toDouble();
+
+	StelLocation loc;
+	loc.latitude = lat;
+	loc.longitude = lon;
+	loc.altitude = 10; // 10 meters above sea level
+	loc.name = q_("Greatest eclipse’s point");
+	loc.planetName = "Earth";
+	loc.ianaTimeZone = "LMST";
+	core->moveObserverTo(loc, 0.);
+
+	if (objectMgr->findAndSelectI18n(name) || objectMgr->findAndSelect(name))
+	{
+		core->setJD(JD);
+		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
+		if (!newSelected.empty())
+		{
+			// Can't point to home planet
+			if (newSelected[0]->getEnglishName() != core->getCurrentLocation().planetName)
+			{
+				mvMgr->moveToObject(newSelected[0], mvMgr->getAutoMoveDuration());
+				mvMgr->setFlagTracking(true);
+			}
+			else
+			{
+				GETSTELMODULE(StelObjectMgr)->unSelect();
+			}
+		}
+	}
+}
+
+void AstroCalcDialog::saveSolarEclipses()
+{
+	QString filter = q_("Microsoft Excel Open XML Spreadsheet");
+	filter.append(" (*.xlsx);;");
+	filter.append(q_("CSV (Comma delimited)"));
+	filter.append(" (*.csv)");
+	QString defaultFilter("(*.xlsx)");
+	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
+							q_("Save calculated solar eclipses as..."),
+							QDir::homePath() + "/solareclipses.xlsx",
+							filter,
+							&defaultFilter);
+
+	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
+		saveTableAsCSV(filePath, ui->solareclipseTreeWidget, ephemerisHeader);
+	else
+	{
+		int count = ui->solareclipseTreeWidget->topLevelItemCount();
+		int columns = solareclipseHeader.size();
+		int *width = new int[static_cast<unsigned int>(columns)];
+		QString sData;
+
+		QXlsx::Document xlsx;
+		xlsx.setDocumentProperty("title", q_("Solar Eclipses"));
+		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
+		xlsx.addSheet("Solar Eclipses", AbstractSheet::ST_WorkSheet);
+
+		QXlsx::Format header;
+		header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
+		header.setPatternBackgroundColor(Qt::yellow);
+		header.setBorderStyle(QXlsx::Format::BorderThin);
+		header.setBorderColor(Qt::black);
+		header.setFontBold(true);
+		for (int i = 0; i < columns; i++)
+		{
+			// Row 1: Names of columns
+			sData = solareclipseHeader.at(i).trimmed();
+			xlsx.write(1, i + 1, sData, header);
+			width[i] = sData.size();
+		}
+
+		QXlsx::Format data;
+		data.setHorizontalAlignment(QXlsx::Format::AlignRight);
+		for (int i = 0; i < count; i++)
+		{
+			for (int j = 0; j < columns; j++)
+			{
+				// Row 2 and next: the data
+				sData = ui->solareclipseTreeWidget->topLevelItem(i)->text(j).trimmed();
+				xlsx.write(i + 2, j + 1, sData, data);
+				int w = sData.size();
+				if (w > width[j])
+				{
+					width[j] = w;
+				}
+			}
+		}
+
+		for (int i = 0; i < columns; i++)
+		{
+			xlsx.setColumnWidth(i+1, width[i]+2);
+		}
+
+		delete[] width;
+		xlsx.saveAs(filePath);
+	}
+}
+
+void AstroCalcDialog::cleanupSolarEclipsesLocal()
+{
+	ui->solareclipselocalTreeWidget->clear();
+}
+
+void AstroCalcDialog::selectCurrentSolarEclipseLocal(const QModelIndex& modelIndex)
+{
+	// Find the Sun
+	QString name = "Sun";
+	double JD = modelIndex.sibling(modelIndex.row(), SolarEclipseLocalDate).data(Qt::UserRole).toDouble();
+
+	if (objectMgr->findAndSelectI18n(name) || objectMgr->findAndSelect(name))
+	{
+		core->setJD(JD);
+		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
+		if (!newSelected.empty())
+		{
+			// Can't point to home planet
+			if (newSelected[0]->getEnglishName() != core->getCurrentLocation().planetName)
+			{
+				mvMgr->moveToObject(newSelected[0], mvMgr->getAutoMoveDuration());
+				mvMgr->setFlagTracking(true);
+			}
+			else
+			{
+				GETSTELMODULE(StelObjectMgr)->unSelect();
+			}
+		}
+	}
+}
+
+void AstroCalcDialog::saveSolarEclipsesLocal()
+{
+	QString filter = q_("Microsoft Excel Open XML Spreadsheet");
+	filter.append(" (*.xlsx);;");
+	filter.append(q_("CSV (Comma delimited)"));
+	filter.append(" (*.csv)");
+	QString defaultFilter("(*.xlsx)");
+	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
+							q_("Save calculated solar eclipses as..."),
+							QDir::homePath() + "/solareclipses-local.xlsx",
+							filter,
+							&defaultFilter);
+
+	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
+		saveTableAsCSV(filePath, ui->solareclipselocalTreeWidget, ephemerisHeader);
+	else
+	{
+		int count = ui->solareclipselocalTreeWidget->topLevelItemCount();
+		int columns = solareclipselocalHeader.size();
+		int *width = new int[static_cast<unsigned int>(columns)];
+		QString sData;
+
+		QXlsx::Document xlsx;
+		xlsx.setDocumentProperty("title", q_("Solar Eclipses"));
+		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
+		xlsx.addSheet("Solar Eclipses", AbstractSheet::ST_WorkSheet);
+
+		QXlsx::Format header;
+		header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
+		header.setPatternBackgroundColor(Qt::yellow);
+		header.setBorderStyle(QXlsx::Format::BorderThin);
+		header.setBorderColor(Qt::black);
+		header.setFontBold(true);
+		for (int i = 0; i < columns; i++)
+		{
+			// Row 1: Names of columns
+			sData = solareclipselocalHeader.at(i).trimmed();
+			xlsx.write(1, i + 1, sData, header);
+			width[i] = sData.size();
+		}
+
+		QXlsx::Format data;
+		data.setHorizontalAlignment(QXlsx::Format::AlignRight);
+		for (int i = 0; i < count; i++)
+		{
+			for (int j = 0; j < columns; j++)
+			{
+				// Row 2 and next: the data
+				sData = ui->solareclipselocalTreeWidget->topLevelItem(i)->text(j).trimmed();
 				xlsx.write(i + 2, j + 1, sData, data);
 				int w = sData.size();
 				if (w > width[j])

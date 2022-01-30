@@ -2414,33 +2414,46 @@
         </widget>
         <widget class="QWidget" name="stackedWidgetPage8">
          <layout class="QGridLayout" name="gridLayout_18">
-          <item row="4" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_39">
-            <item>
-             <widget class="QPushButton" name="lunareclipsesCleanupButton">
-              <property name="text">
-               <string>Cleanup lunar eclipses</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="lunareclipsesSaveButton">
-              <property name="text">
-               <string>Export lunar eclipses...</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="lunareclipsesCalculateButton">
-              <property name="text">
-               <string>Calculate lunar eclipses</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="2" column="0">
-           <widget class="QTreeWidget" name="lunareclipseTreeWidget">
+          <item row="0" column="0">
+           <widget class="QTabWidget" name="tabWidgetEclipses">
+            <property name="tabPosition">
+             <enum>QTabWidget::South</enum>
+            </property>
+            <property name="currentIndex">
+             <number>0</number>
+            </property>
+            <widget class="QWidget" name="tabGolbalSolarEclipse">
+             <attribute name="title">
+              <string>All Solar Eclipses</string>
+             </attribute>
+             <layout class="QGridLayout" name="gridLayout_20">
+              <item row="4" column="0">
+               <layout class="QHBoxLayout" name="horizontalLayout_40">
+                <item>
+                 <widget class="QPushButton" name="solareclipsesCleanupButton">
+                  <property name="text">
+                   <string>Cleanup solar eclipses</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="solareclipsesSaveButton">
+                  <property name="text">
+                   <string>Export solar eclipses...</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="solareclipsesCalculateButton">
+                  <property name="text">
+                   <string>Calculate solar eclipses</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="2" column="0">
+             <widget class="QTreeWidget" name="solareclipseTreeWidget">
             <property name="rootIsDecorated">
              <bool>false</bool>
             </property>
@@ -2465,18 +2478,43 @@
            </widget>
           </item>
           <item row="1" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_36">
+           <layout class="QHBoxLayout" name="horizontalLayout_43">
             <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_37">
+             <layout class="QHBoxLayout" name="horizontalLayout_41">
+            <item>
+             <widget class="QLabel" name="changeLocationLabel">
+              <property name="text">
+               <string>* Double click will change current location to the place of greatest eclipse</string>
+              </property>
+             </widget>
+            </item>
               <item>
-               <widget class="QLabel" name="lunareclipseFromLabel">
+               <widget class="QLabel" name="solareclipseLabel">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="font">
+                 <font>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="solareclipseFromLabel">
                 <property name="text">
                  <string>From:</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QDateEdit" name="lunareclipseFromDateEdit">
+               <widget class="QDateEdit" name="solareclipseFromDateEdit">
                 <property name="wrapping">
                  <bool>true</bool>
                 </property>
@@ -2491,16 +2529,16 @@
              </layout>
             </item>
             <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_38">
+             <layout class="QHBoxLayout" name="horizontalLayout_42">
               <item>
-               <widget class="QLabel" name="lunareclipseToLabel">
+               <widget class="QLabel" name="solareclipseToLabel">
                 <property name="text">
                  <string>To:</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QDateEdit" name="lunareclipseToDateEdit">
+               <widget class="QDateEdit" name="solareclipseToDateEdit">
                 <property name="wrapping">
                  <bool>true</bool>
                 </property>
@@ -2517,39 +2555,350 @@
            </layout>
           </item>
           <item row="0" column="0">
-           <widget class="QLabel" name="lunareclipseHeaderLabel">
+           <widget class="QLabel" name="solareclipseHeaderLabel">
             <property name="font">
              <font>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
             <property name="text">
-             <string>Table of lunar eclipses</string>
+             <string>Table of solar eclipses</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
             </property>
+            </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="gammaNoteSolarEclipseLabel">
+              <property name="text">
+               <string>Note: The quantity gamma is the minimum distance from the axis of lunar shadow cone to the center of Earth, in units of Earth’s equatorial radius. This distance is positive or negative, depending on whether the axis of the shadow cone passes north or south of the Earth's center.</string>
+              </property>
+              <property name="wordWrap">
+               <bool>true</bool>
+              </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
-          </item>
-          <item row="3" column="0">
-           <widget class="QLabel" name="gammaNoteLabel">
-            <property name="text">
-             <string>Note: The quantity gamma is the minimum distance from the center of the Moon to the axis of Earth’s umbral shadow cone, in units of Earth’s equatorial radius. This distance is positive or negative, depending on whether the Moon passes north or south of the shadow cone axis.</string>
+            <widget class="QWidget" name="tabSolarEclipseLocal">
+             <attribute name="title">
+              <string>Local Solar Eclipses</string>
+             </attribute>
+             <layout class="QGridLayout" name="gridLayout_21">
+              <item row="4" column="0">
+               <layout class="QHBoxLayout" name="horizontalLayout_44">
+                <item>
+                 <widget class="QPushButton" name="solareclipseslocalCleanupButton">
+                  <property name="text">
+                   <string>Cleanup solar eclipses</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="solareclipseslocalSaveButton">
+                  <property name="text">
+                   <string>Export solar eclipses...</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="solareclipseslocalCalculateButton">
+                  <property name="text">
+                   <string>Calculate solar eclipses</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="2" column="0">
+             <widget class="QTreeWidget" name="solareclipselocalTreeWidget">
+            <property name="rootIsDecorated">
+             <bool>false</bool>
             </property>
-            <property name="wordWrap">
+            <property name="uniformRowHeights">
              <bool>true</bool>
             </property>
+            <property name="itemsExpandable">
+             <bool>false</bool>
+            </property>
+            <property name="sortingEnabled">
+             <bool>true</bool>
+            </property>
+            <property name="expandsOnDoubleClick">
+             <bool>false</bool>
+            </property>
+            <property name="columnCount">
+             <number>0</number>
+            </property>
+            <attribute name="headerShowSortIndicator" stdset="0">
+             <bool>true</bool>
+            </attribute>
            </widget>
           </item>
-         </layout>
-        </widget>
+          <item row="1" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_45">
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_46">
+              <item>
+               <widget class="QLabel" name="solareclipselocalLabel">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="font">
+                 <font>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="solareclipselocalFromLabel">
+                <property name="text">
+                 <string>From:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QDateEdit" name="solareclipselocalFromDateEdit">
+                <property name="wrapping">
+                 <bool>true</bool>
+                </property>
+                <property name="displayFormat">
+                 <string notr="true">yyyy.MM.dd</string>
+                </property>
+                <property name="calendarPopup">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_47">
+              <item>
+               <widget class="QLabel" name="solareclipselocalToLabel">
+                <property name="text">
+                 <string>To:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QDateEdit" name="solareclipselocalToDateEdit">
+                <property name="wrapping">
+                 <bool>true</bool>
+                </property>
+                <property name="displayFormat">
+                 <string notr="true">yyyy.MM.dd</string>
+                </property>
+                <property name="calendarPopup">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="solareclipselocalHeaderLabel">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Table of solar eclipses visible in current location</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            </widget>
+            </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="tabLunarEclipse">
+             <attribute name="title">
+              <string>Lunar Eclipses</string>
+             </attribute>
+             <layout class="QGridLayout" name="gridLayout_19">
+              <item row="4" column="0">
+               <layout class="QHBoxLayout" name="horizontalLayout_39">
+                <item>
+                 <widget class="QPushButton" name="lunareclipsesCleanupButton">
+                  <property name="text">
+                   <string>Cleanup lunar eclipses</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="lunareclipsesSaveButton">
+                  <property name="text">
+                   <string>Export lunar eclipses...</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="lunareclipsesCalculateButton">
+                  <property name="text">
+                   <string>Calculate lunar eclipses</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="2" column="0">
+               <widget class="QTreeWidget" name="lunareclipseTreeWidget">
+                <property name="rootIsDecorated">
+                 <bool>false</bool>
+                </property>
+                <property name="uniformRowHeights">
+                 <bool>true</bool>
+                </property>
+                <property name="itemsExpandable">
+                 <bool>false</bool>
+                </property>
+                <property name="sortingEnabled">
+                 <bool>true</bool>
+                </property>
+                <property name="expandsOnDoubleClick">
+                 <bool>false</bool>
+                </property>
+                <property name="columnCount">
+                 <number>0</number>
+                </property>
+                <attribute name="headerShowSortIndicator" stdset="0">
+                 <bool>true</bool>
+                </attribute>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <layout class="QHBoxLayout" name="horizontalLayout_36">
+                <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_48">
+              <item>
+               <widget class="QLabel" name="lunareclipseLabel">
+                <property name="text">
+                 <string>All lunar eclipses:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="lunareclipseLabel">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="font">
+                 <font>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+               </item>
+                </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_37">
+                  <item>
+                   <widget class="QLabel" name="lunareclipseFromLabel">
+                    <property name="text">
+                     <string>From:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QDateEdit" name="lunareclipseFromDateEdit">
+                    <property name="wrapping">
+                     <bool>true</bool>
+                    </property>
+                    <property name="displayFormat">
+                     <string notr="true">yyyy.MM.dd</string>
+                    </property>
+                    <property name="calendarPopup">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_38">
+                  <item>
+                   <widget class="QLabel" name="lunareclipseToLabel">
+                    <property name="text">
+                     <string>To:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                  <widget class="QDateEdit" name="lunareclipseToDateEdit">
+                    <property name="wrapping">
+                     <bool>true</bool>
+                    </property>
+                    <property name="displayFormat">
+                     <string notr="true">yyyy.MM.dd</string>
+                    </property>
+                    <property name="calendarPopup">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="lunareclipseHeaderLabel">
+                <property name="font">
+                 <font>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Table of lunar eclipses</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="gammaNoteLabel">
+                    <property name="text">
+                 <string>Note: The quantity gamma is the minimum distance from the center of the Moon to the axis of Earth’s umbral shadow cone, in units of Earth’s equatorial radius. This distance is positive or negative, depending on whether the Moon passes north or south of the shadow cone axis.</string>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+          </widget>
+         </item>
+        </layout>
        </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-  </layout>
- </widget>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </item>
+ </layout>
+</widget>
  <customwidgets>
   <customwidget>
    <class>BarFrame</class>
