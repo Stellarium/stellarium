@@ -3804,8 +3804,10 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 		// Then compute latitudes of polar caps: Fig.10 in Smith, David E. et al. "Time Variations of
 		// Mars’ Gravitational Field and Seasonal Changes in the Masses of the Polar Ice Caps."
 		// Journal of Geophysical Research 114.E5 (2009): E05002. DOI:10.1029/2008je003267
-		double latN= 70.-18.*sin((Ls-195.)*M_PI_180);
-		double latS=-70.+18.*sin((Ls- 15.)*M_PI_180);
+		//double latN= 70.-18.*sin((Ls-195.)*M_PI_180);
+		//double latS=-70.+18.*sin((Ls- 15.)*M_PI_180);
+		double latN= 70.+18.*cos((Ls-125.)*M_PI_180); // goes down to 52°
+		double latS=-68.+19.*cos((Ls-105.)*M_PI_180); // goes up to -49°
 
 		// Finally convert to texture coordinates.
 		float tNorth=static_cast<float>((latN+90.)/180.);
@@ -3813,7 +3815,7 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 		GL(shader->setUniformValue(shaderVars->poleLat, tNorth, tSouth));
 	}
 	else
-		GL(shader->setUniformValue(shaderVars->poleLat, 1.f, 0.f));
+		GL(shader->setUniformValue(shaderVars->poleLat, 1.1f, -0.1f)); // add some security margin.
 	GL(shader->setAttributeArray(shaderVars->vertex, static_cast<const GLfloat*>(projectedVertexArr.constData()), 3));
 	GL(shader->enableAttributeArray(shaderVars->vertex));
 	GL(shader->setAttributeArray(shaderVars->unprojectedVertex, static_cast<const GLfloat*>(model.vertexArr.constData()), 3));
@@ -3939,6 +3941,8 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 			GL(moonShaderProgram->setUniformValue(moonShaderVars.earthShadow, 3));
 		}
 	}
+
+	GL(shader->setUniformValue(shaderVars->poleLat, 1.1f, -0.1f)); // Avoid streaks across Mars
 
 	// Apply a rotation otherwize the hips surveys don't get rendered at the
 	// proper position.  Not sure why...
