@@ -3285,7 +3285,7 @@ void AstroCalcDialog::setSolarEclipseLocalHeaderNames()
 	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
 	solareclipselocalHeader << qc_("Partial Eclipse Ends", "column name");
 	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-	solareclipselocalHeader << qc_("Totality/Annularity", "column name");
+	solareclipselocalHeader << qc_("Duration", "column name");
 	ui->solareclipselocalTreeWidget->setHeaderLabels(solareclipselocalHeader);
 
 	// adjust the column width
@@ -3528,17 +3528,17 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 								centraleclipse = true;
 								if (L2 < 0.)
 								{
-									eclipseTypeStr = "Total";
+									eclipseTypeStr = qc_("Total", "eclipse type");
 									JD = JD3;
 									JD3 = JD2;
 									JD2 = JD;
 								}
 								else
-									eclipseTypeStr = "Annular";
+									eclipseTypeStr = qc_("Annular", "eclipse type");
 							}
 							else
 								{
-									eclipseTypeStr = "Partial";
+									eclipseTypeStr = qc_("Partial", "eclipse type");
 									centraleclipse = false;
 								}
 
@@ -3579,6 +3579,7 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 								treeItem->setText(SolarEclipseLocalDuration, durationStr);
 							else
 								treeItem->setText(SolarEclipseLocalDuration, dash);
+							treeItem->setToolTip(SolarEclipseLocalDuration, q_("Duration of total or annular eclipse"));
 							treeItem->setTextAlignment(SolarEclipseLocalDate, Qt::AlignRight);
 							treeItem->setTextAlignment(SolarEclipseLocalMagnitude, Qt::AlignRight);
 							treeItem->setTextAlignment(SolarEclipseLocalFirstContact, Qt::AlignRight);
