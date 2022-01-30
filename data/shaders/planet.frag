@@ -302,17 +302,19 @@ void main()
 
     mediump vec4 finalColor = texColor;
 	// apply (currently only Martian) pole caps. texc.t=0 at south pole, 1 at north pole. 
-	if (texc.t>poleLat.x-0.025) {	// North pole near t=1
+	if (texc.t>poleLat.x-0.01+0.001*sin(texc.s*18.*M_PI)) {	// North pole near t=1
 		mediump float mixfactor=1.;
-		if (texc.t<poleLat.x+0.025)
-			mixfactor=(texc.t-poleLat.x+0.025)/0.05;
-		finalColor.xyz=mix(vec3(1., 1., 1.), finalColor.xyz, 1.-mixfactor); 
+		if (texc.t<poleLat.x+0.01+0.001*sin(texc.s*18.*M_PI))
+			mixfactor=(texc.t-poleLat.x+0.01-0.001*sin(texc.s*18.*M_PI))/0.02;
+		//finalColor.xyz=mix(vec3(1., 1., 1.), finalColor.xyz, 1.-mixfactor); 
+		finalColor.xyz=mix(vec3(1., 1., 1.), finalColor.xyz, smoothstep(0., 1., 1.-mixfactor)); 
 	}
-	if (texc.t<poleLat.y+0.025) {	// South pole near texc.t~0
+	if (texc.t<poleLat.y+0.01+0.001*sin(texc.s*18.*M_PI)) {	// South pole near texc.t~0
 		mediump float mixfactor=1.;
-		if (texc.t>poleLat.y-0.025)
-			mixfactor=(poleLat.y+0.025-texc.t)/0.05;
-		finalColor.xyz=mix(vec3(1., 1., 1.), finalColor.xyz, 1.-mixfactor); 
+		if (texc.t>poleLat.y-0.01+0.001*sin(texc.s*18.*M_PI))
+			mixfactor=(poleLat.y+0.01-texc.t-0.001*sin(texc.s*18.*M_PI))/0.02;
+		//finalColor.xyz=mix(vec3(1., 1., 1.), finalColor.xyz, 1.-mixfactor); 
+		finalColor.xyz=mix(vec3(1., 1., 1.), finalColor.xyz, smoothstep(0., 1., 1.-mixfactor)); 
 	}
 #ifdef IS_MOON
     if(final_illumination < 0.9999)
