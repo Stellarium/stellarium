@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-01-30 15:43+0700\n"
+"POT-Creation-Date: 2022-01-30 19:08+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -773,8 +773,8 @@ msgstr ""
 msgid "Planetographic coordinates"
 msgstr ""
 
-#: src/core/modules/NomenclatureItem.cpp:269 src/ui_astroCalcDialog.h:2232
-#: src/ui_astroCalcDialog.h:2235 src/ui_astroCalcDialog.h:2249
+#: src/core/modules/NomenclatureItem.cpp:269 src/ui_astroCalcDialog.h:2195
+#: src/ui_astroCalcDialog.h:2198 src/ui_astroCalcDialog.h:2212
 msgid "Celestial body"
 msgstr ""
 
@@ -3446,23 +3446,23 @@ msgid "IAU Constellation"
 msgstr ""
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:1141
+#: src/core/StelObject.cpp:1143
 msgctxt "celestial coordinate system"
 msgid "Solar A/a"
 msgstr ""
 
-#: src/core/StelObject.cpp:1141
+#: src/core/StelObject.cpp:1143
 msgctxt "celestial coordinate system"
 msgid "Solar Az./Alt."
 msgstr ""
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:1159
+#: src/core/StelObject.cpp:1161
 msgctxt "celestial coordinate system"
 msgid "Lunar A/a"
 msgstr ""
 
-#: src/core/StelObject.cpp:1159
+#: src/core/StelObject.cpp:1161
 msgctxt "celestial coordinate system"
 msgid "Lunar Az./Alt."
 msgstr ""
@@ -4544,23 +4544,23 @@ msgstr ""
 msgid "Run script"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:356 src/ui_astroCalcDialog.h:2072
+#: src/gui/HelpDialog.cpp:356 src/ui_astroCalcDialog.h:2035
 msgid "Astronomical calculations"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:357 src/ui_astroCalcDialog.h:2109
+#: src/gui/HelpDialog.cpp:357 src/ui_astroCalcDialog.h:2072
 msgid "Update positions"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:360 src/ui_astroCalcDialog.h:2175
+#: src/gui/HelpDialog.cpp:360 src/ui_astroCalcDialog.h:2138
 msgid "Calculate ephemeris"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:362 src/ui_astroCalcDialog.h:2198
+#: src/gui/HelpDialog.cpp:362 src/ui_astroCalcDialog.h:2161
 msgid "Calculate transits"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:364 src/ui_astroCalcDialog.h:2218
+#: src/gui/HelpDialog.cpp:364 src/ui_astroCalcDialog.h:2181
 msgid "Calculate phenomena"
 msgstr ""
 
@@ -5659,7 +5659,7 @@ msgstr ""
 msgid "Save calculated ephemeris as..."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1916 src/ui_astroCalcDialog.h:2083
+#: src/gui/AstroCalcDialog.cpp:1916 src/ui_astroCalcDialog.h:2046
 msgid "Ephemeris"
 msgstr ""
 
@@ -5675,7 +5675,7 @@ msgstr ""
 msgid "Save calculated transits as..."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2178 src/ui_astroCalcDialog.h:2085
+#: src/gui/AstroCalcDialog.cpp:2178 src/ui_astroCalcDialog.h:2048
 msgid "Transits"
 msgstr ""
 
@@ -5768,7 +5768,7 @@ msgstr ""
 msgid "The greatest eclipse is invisible in current location"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2464 src/gui/AstroCalcDialog.cpp:3235
+#: src/gui/AstroCalcDialog.cpp:2464 src/gui/AstroCalcDialog.cpp:3233
 msgid ""
 "Saros series number of eclipse (each eclipse in a Saros is separated by an "
 "interval of 18 years 11.3 days)"
@@ -5789,12 +5789,12 @@ msgstr ""
 msgid "Save calculated lunar eclipses as..."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2555 src/ui_astroCalcDialog.h:2333
+#: src/gui/AstroCalcDialog.cpp:2555 src/ui_astroCalcDialog.h:2291
 msgid "Lunar Eclipses"
 msgstr ""
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:2608 src/gui/AstroCalcDialog.cpp:3291
+#: src/gui/AstroCalcDialog.cpp:2608 src/gui/AstroCalcDialog.cpp:3289
 msgctxt "column name"
 msgid "Eclipse Magnitude"
 msgstr ""
@@ -5840,7 +5840,7 @@ msgctxt "eclipse type"
 msgid "Hybrid"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:3239
+#: src/gui/AstroCalcDialog.cpp:3237
 msgid ""
 "Eclipse magnitude is the fraction of the Sun's diameter obscured by the Moon"
 msgstr ""
@@ -5881,7 +5881,7 @@ msgid "Maximum Eclipse"
 msgstr ""
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:3289
+#: src/gui/AstroCalcDialog.cpp:3291
 msgctxt "column name"
 msgid "Central Eclipse Ends"
 msgstr ""
@@ -6382,7 +6382,7 @@ msgid "Save calculated phenomena as..."
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:5705 src/gui/AstroCalcDialog.cpp:5707
-#: src/ui_astroCalcDialog.h:2087
+#: src/ui_astroCalcDialog.h:2050
 msgid "Phenomena"
 msgstr ""
 
@@ -6636,19 +6636,19 @@ msgctxt "IAU Constellation"
 msgid "Const."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:7155 src/ui_astroCalcDialog.h:2283
+#: src/gui/AstroCalcDialog.cpp:7155 src/ui_astroCalcDialog.h:2246
 msgid "Limit angular size:"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:7156 src/ui_astroCalcDialog.h:2281
+#: src/gui/AstroCalcDialog.cpp:7156 src/ui_astroCalcDialog.h:2244
 msgid "Set limits for angular size for visible celestial objects"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:7157 src/ui_astroCalcDialog.h:2285
+#: src/gui/AstroCalcDialog.cpp:7157 src/ui_astroCalcDialog.h:2248
 msgid "Minimal angular size for visible celestial objects"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:7158 src/ui_astroCalcDialog.h:2288
+#: src/gui/AstroCalcDialog.cpp:7158 src/ui_astroCalcDialog.h:2251
 msgid "Maximum angular size for visible celestial objects"
 msgstr ""
 
@@ -6672,7 +6672,7 @@ msgstr ""
 msgid "Save list of objects as..."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:7817 src/ui_astroCalcDialog.h:2093
+#: src/gui/AstroCalcDialog.cpp:7817 src/ui_astroCalcDialog.h:2056
 msgid "What's Up Tonight"
 msgstr ""
 
@@ -10276,7 +10276,7 @@ msgstr ""
 msgid "names in English"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:933 src/ui_astroCalcDialog.h:2277
+#: src/ui_searchDialogGui.h:933 src/ui_astroCalcDialog.h:2240
 msgid "Search in list..."
 msgstr ""
 
@@ -10396,7 +10396,7 @@ msgstr ""
 msgid "Light pollution:"
 msgstr ""
 
-#: src/ui_viewDialog.h:3246 src/ui_astroCalcDialog.h:2191
+#: src/ui_viewDialog.h:3246 src/ui_astroCalcDialog.h:2154
 msgid "or"
 msgstr ""
 
@@ -10689,7 +10689,7 @@ msgstr ""
 msgid "Sun's glare"
 msgstr ""
 
-#: src/ui_viewDialog.h:3382 src/ui_astroCalcDialog.h:2121
+#: src/ui_viewDialog.h:3382 src/ui_astroCalcDialog.h:2084
 msgid "Show:"
 msgstr ""
 
@@ -12578,467 +12578,459 @@ msgstr ""
 msgid "..."
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2078
+#: src/ui_astroCalcDialog.h:2041
 msgid "Positions"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2080
+#: src/ui_astroCalcDialog.h:2043
 msgid "Celestial bodies above horizon"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2089 src/ui_astroCalcDialog.h:2266
-#: src/ui_astroCalcDialog.h:2305
+#: src/ui_astroCalcDialog.h:2052 src/ui_astroCalcDialog.h:2229
+#: src/ui_astroCalcDialog.h:2268
 msgid "Graphs"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2091
+#: src/ui_astroCalcDialog.h:2054
 msgctxt "What's Up Tonight"
 msgid "WUT"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2096
+#: src/ui_astroCalcDialog.h:2059
 msgctxt "Planetary Calculator"
 msgid "PC"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2098
+#: src/ui_astroCalcDialog.h:2061
 msgid "Planetary Calculator"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2101
+#: src/ui_astroCalcDialog.h:2064
 msgid "Eclipses"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2108
+#: src/ui_astroCalcDialog.h:2071
 msgid "Export positions..."
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2111 src/ui_astroCalcDialog.h:2273
+#: src/ui_astroCalcDialog.h:2074 src/ui_astroCalcDialog.h:2236
 msgid "Show objects brighter than magnitude"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2113 src/ui_astroCalcDialog.h:2275
+#: src/ui_astroCalcDialog.h:2076 src/ui_astroCalcDialog.h:2238
 msgid "Up to mag.:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2115 src/ui_astroCalcDialog.h:2142
+#: src/ui_astroCalcDialog.h:2078 src/ui_astroCalcDialog.h:2105
 msgid "Use horizontal coordinates"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2117 src/ui_astroCalcDialog.h:2144
+#: src/ui_astroCalcDialog.h:2080 src/ui_astroCalcDialog.h:2107
 msgctxt "horizonal coordinates"
 msgid "H.C."
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2119
+#: src/ui_astroCalcDialog.h:2082
 msgid "List of objects above horizon"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2123
+#: src/ui_astroCalcDialog.h:2086
 msgid "Show connecting line between the ephemeris markers"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2125
+#: src/ui_astroCalcDialog.h:2088
 msgctxt "show line"
 msgid "line"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2127
+#: src/ui_astroCalcDialog.h:2090
 msgid "Show markers of positions of the current celestial body on the sky"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2129
+#: src/ui_astroCalcDialog.h:2092
 msgid "markers"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2131
+#: src/ui_astroCalcDialog.h:2094
 msgid "Show dates of positions of current celestial body near markers"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2133
+#: src/ui_astroCalcDialog.h:2096
 msgid "dates"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2135
+#: src/ui_astroCalcDialog.h:2098
 msgid "Show magnitudes of current celestial body"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2137
+#: src/ui_astroCalcDialog.h:2100
 msgid "magnitudes"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2139 src/ui_astroCalcExtraEphemerisDialog.h:197
+#: src/ui_astroCalcDialog.h:2102 src/ui_astroCalcExtraEphemerisDialog.h:197
 msgid "Extra options for ephemeris visualization"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2146
+#: src/ui_astroCalcDialog.h:2109
 msgid "Color of ephemeris marker for first celestial body"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2149
+#: src/ui_astroCalcDialog.h:2112
 msgid "Color of ephemeris marker for second celestial body"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2152
+#: src/ui_astroCalcDialog.h:2115
 msgid "Color of selected ephemeris marker"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2155
+#: src/ui_astroCalcDialog.h:2118
 msgid "Color of Mercury's ephemeris marker"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2158
+#: src/ui_astroCalcDialog.h:2121
 msgid "Color of Venus' ephemeris marker"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2162
+#: src/ui_astroCalcDialog.h:2125
 msgid "Color of Mars' ephemeris marker"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2165
+#: src/ui_astroCalcDialog.h:2128
 msgid "Color of Jupiter's ephemeris marker"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2168
+#: src/ui_astroCalcDialog.h:2131
 msgid "Color of Saturn's ephemeris marker"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2170
+#: src/ui_astroCalcDialog.h:2133
 msgid "Cleanup ephemerides"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2171
+#: src/ui_astroCalcDialog.h:2134
 msgid "Export ephemeris..."
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2173 src/ui_astroCalcDialog.h:2216
+#: src/ui_astroCalcDialog.h:2136 src/ui_astroCalcDialog.h:2179
 #: plugins/Satellites/src/ui_satellitesDialog.h:1225
 msgid "Calculations require time, please be patient"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2176 src/ui_astroCalcDialog.h:2201
-#: src/ui_astroCalcDialog.h:2211 src/ui_astroCalcDialog.h:2311
-#: src/ui_astroCalcDialog.h:2320 src/ui_astroCalcDialog.h:2329
+#: src/ui_astroCalcDialog.h:2139 src/ui_astroCalcDialog.h:2164
+#: src/ui_astroCalcDialog.h:2174 src/ui_astroCalcDialog.h:2273
+#: src/ui_astroCalcDialog.h:2281 src/ui_astroCalcDialog.h:2288
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "From:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2177 src/ui_astroCalcDialog.h:2202
-#: src/ui_astroCalcDialog.h:2212 src/ui_astroCalcDialog.h:2312
-#: src/ui_astroCalcDialog.h:2321 src/ui_astroCalcDialog.h:2330
+#: src/ui_astroCalcDialog.h:2140 src/ui_astroCalcDialog.h:2165
+#: src/ui_astroCalcDialog.h:2175 src/ui_astroCalcDialog.h:2274
+#: src/ui_astroCalcDialog.h:2282 src/ui_astroCalcDialog.h:2289
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:195
 msgid "To:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2178 src/ui_astroCalcCustomStepsDialog.h:153
+#: src/ui_astroCalcDialog.h:2141 src/ui_astroCalcCustomStepsDialog.h:153
 msgid "Time step:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2180 src/ui_astroCalcCustomStepsDialog.h:152
+#: src/ui_astroCalcDialog.h:2143 src/ui_astroCalcCustomStepsDialog.h:152
 msgid "Custom time step for ephemeris visualization"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2182
+#: src/ui_astroCalcDialog.h:2145
 msgid "Celestial body:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2184
+#: src/ui_astroCalcDialog.h:2147
 msgid "First celestial body"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2187 src/ui_astroCalcDialog.h:2206
+#: src/ui_astroCalcDialog.h:2150 src/ui_astroCalcDialog.h:2169
 msgid "and"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2189
+#: src/ui_astroCalcDialog.h:2152
 msgid "Second celestial body"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2193
+#: src/ui_astroCalcDialog.h:2156
 msgid ""
 "Compute ephemeris for all planets visible to the unaided eye (works on Earth "
 "only)"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2195
+#: src/ui_astroCalcDialog.h:2158
 msgid "all naked-eye planets"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2196
+#: src/ui_astroCalcDialog.h:2159
 msgid "Cleanup transits"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2197
+#: src/ui_astroCalcDialog.h:2160
 msgid "Export transits..."
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2199
+#: src/ui_astroCalcDialog.h:2162
 msgid "Celestial object:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2203
+#: src/ui_astroCalcDialog.h:2166
 msgid "Table of approximate transits for selected celestial object"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2204
+#: src/ui_astroCalcDialog.h:2167
 msgid ""
 "Note: artificial satellites and unnamed stars are excluded from calculation"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2205
+#: src/ui_astroCalcDialog.h:2168
 msgid "Between objects:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2210
+#: src/ui_astroCalcDialog.h:2173
 msgid "Maximum allowed separation:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2213
+#: src/ui_astroCalcDialog.h:2176
 msgid "Cleanup of phenomena"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2214
+#: src/ui_astroCalcDialog.h:2177
 msgid "Export phenomena..."
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2219
+#: src/ui_astroCalcDialog.h:2182
 msgid "Calculate also:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2220
+#: src/ui_astroCalcDialog.h:2183
 msgid "oppositions"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2221
+#: src/ui_astroCalcDialog.h:2184
 msgid "perihelion and aphelion"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2222
+#: src/ui_astroCalcDialog.h:2185
 msgid "Please select object to plot its graph 'Altitude vs. Time'."
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2223
+#: src/ui_astroCalcDialog.h:2186
 msgid "Also the graph for the Sun"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2224
+#: src/ui_astroCalcDialog.h:2187
 msgid "Also the graph for the Moon"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2226 src/ui_astroCalcDialog.h:2238
+#: src/ui_astroCalcDialog.h:2189 src/ui_astroCalcDialog.h:2201
 msgid ""
 "Draw only the part of the graph where altitude is greater than the value "
 "given in the right box."
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2228 src/ui_astroCalcDialog.h:2240
-#: src/ui_astroCalcDialog.h:2290
+#: src/ui_astroCalcDialog.h:2191 src/ui_astroCalcDialog.h:2203
+#: src/ui_astroCalcDialog.h:2253
 msgid "Above altitude:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2230 src/ui_astroCalcDialog.h:2242
+#: src/ui_astroCalcDialog.h:2193 src/ui_astroCalcDialog.h:2205
 msgid "Altitude limit in degrees"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2233
+#: src/ui_astroCalcDialog.h:2196
 msgid "Altitude vs. Time"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2234
+#: src/ui_astroCalcDialog.h:2197
 msgid "Please select object to plot its graph 'Azimuth vs. Time'."
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2236
+#: src/ui_astroCalcDialog.h:2199
 msgid "Azimuth vs. Time"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2245
+#: src/ui_astroCalcDialog.h:2208
 msgid "Local Time in hours"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2248
+#: src/ui_astroCalcDialog.h:2211
 msgid ""
 "Please select object to plot its 'Monthly Elevation' graph for the current "
 "year at selected time."
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2250
+#: src/ui_astroCalcDialog.h:2213
 msgid "Monthly Elevation"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2254
+#: src/ui_astroCalcDialog.h:2217
 msgid "Draw graphs"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2255
+#: src/ui_astroCalcDialog.h:2218
 msgid "Second graph:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2257 src/ui_astroCalcDialog.h:2261
+#: src/ui_astroCalcDialog.h:2220 src/ui_astroCalcDialog.h:2224
 msgid "How many years to display"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2259
+#: src/ui_astroCalcDialog.h:2222
 msgid "Duration:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2263
+#: src/ui_astroCalcDialog.h:2226
 msgctxt "duration"
 msgid "years"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2264
+#: src/ui_astroCalcDialog.h:2227
 msgid "First graph:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2265 src/ui_astroCalcDialog.h:2268
+#: src/ui_astroCalcDialog.h:2228 src/ui_astroCalcDialog.h:2231
 msgid "Important note: this tool works on Earth only!"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2267
+#: src/ui_astroCalcDialog.h:2230
 msgid "Angular distance limit, degrees:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2269
+#: src/ui_astroCalcDialog.h:2232
 msgid "Change of angular distance between the Moon and selected object"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2270
+#: src/ui_astroCalcDialog.h:2233
 msgid "Lunar Distance"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2271
+#: src/ui_astroCalcDialog.h:2234
 msgid "Show objects which are up:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2276
+#: src/ui_astroCalcDialog.h:2239
 msgid "Matching objects:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2278
+#: src/ui_astroCalcDialog.h:2241
 msgid "Export list of objects..."
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2279
+#: src/ui_astroCalcDialog.h:2242
 msgid "Select a category:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2291
+#: src/ui_astroCalcDialog.h:2254
 msgid "First celestial body:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2292
+#: src/ui_astroCalcDialog.h:2255
 msgid "Second celestial body:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2293
+#: src/ui_astroCalcDialog.h:2256
 msgid "Synodic period:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2295
+#: src/ui_astroCalcDialog.h:2258
 msgid "Orbital velocity of first celestial body:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2296
+#: src/ui_astroCalcDialog.h:2259
 msgid "Angular distance:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2297
+#: src/ui_astroCalcDialog.h:2260
 msgid "Mean motion of second celestial body:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2298
+#: src/ui_astroCalcDialog.h:2261
 msgid "Mean motion of first celestial body:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2299
+#: src/ui_astroCalcDialog.h:2262
 msgid "Orbital velocity of second celestial body:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2300
+#: src/ui_astroCalcDialog.h:2263
 msgid "Orbital periods ratio:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2301
+#: src/ui_astroCalcDialog.h:2264
 msgid "Equatorial diameters ratio:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2302
+#: src/ui_astroCalcDialog.h:2265
 msgid "Linear distance:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2303
+#: src/ui_astroCalcDialog.h:2266
 msgid "Data"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2304
+#: src/ui_astroCalcDialog.h:2267
 msgid ""
 "The change in the linear and angular distances between selected celestial "
 "bodies"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2306 src/ui_astroCalcDialog.h:2316
+#: src/ui_astroCalcDialog.h:2269 src/ui_astroCalcDialog.h:2277
 msgid "Cleanup solar eclipses"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2307 src/ui_astroCalcDialog.h:2317
+#: src/ui_astroCalcDialog.h:2270 src/ui_astroCalcDialog.h:2278
 msgid "Export solar eclipses..."
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2308 src/ui_astroCalcDialog.h:2318
+#: src/ui_astroCalcDialog.h:2271 src/ui_astroCalcDialog.h:2279
 msgid "Calculate solar eclipses"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2309
-msgid ""
-"* Double click will change current location to the place of greatest eclipse"
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:2313
+#: src/ui_astroCalcDialog.h:2272
 msgid "Table of solar eclipses"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2314
+#: src/ui_astroCalcDialog.h:2275
 msgid ""
-"Note: The quantity gamma is the minimum distance from the axis of lunar "
+"Notes: The quantity gamma is the minimum distance from the axis of lunar "
 "shadow cone to the center of Earth, in units of Earth’s equatorial radius. "
 "This distance is positive or negative, depending on whether the axis of the "
-"shadow cone passes north or south of the Earth's center."
+"shadow cone passes north or south of the Earth's center. Double click will "
+"change current location to the place of greatest eclipse."
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2315
+#: src/ui_astroCalcDialog.h:2276
 msgid "All Solar Eclipses"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2322
+#: src/ui_astroCalcDialog.h:2280
 msgid "Table of solar eclipses visible in current location"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2323
+#: src/ui_astroCalcDialog.h:2283
 msgid "Local Solar Eclipses"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2324
+#: src/ui_astroCalcDialog.h:2284
 msgid "Cleanup lunar eclipses"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2325
+#: src/ui_astroCalcDialog.h:2285
 msgid "Export lunar eclipses..."
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2326
+#: src/ui_astroCalcDialog.h:2286
 msgid "Calculate lunar eclipses"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2327
-msgid "All lunar eclipses:"
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:2331
+#: src/ui_astroCalcDialog.h:2287
 msgid "Table of lunar eclipses"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:2332
+#: src/ui_astroCalcDialog.h:2290
 msgid ""
 "Note: The quantity gamma is the minimum distance from the center of the Moon "
 "to the axis of Earth’s umbral shadow cone, in units of Earth’s equatorial "

@@ -2482,23 +2482,7 @@
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_41">
                   <item>
-                   <widget class="QLabel" name="changeLocationLabel">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="text">
-                     <string>* Double click will change current location to the place of greatest eclipse</string>
-                    </property>
-                    <property name="wordWrap">
-                     <bool>true</bool>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QLabel" name="solareclipseLabel">
+                   <widget class="QLabel" name="solareclipseHeaderLabel">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
                       <horstretch>0</horstretch>
@@ -2511,9 +2495,28 @@
                      </font>
                     </property>
                     <property name="text">
-                     <string/>
+                     <string>Table of solar eclipses</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                     </property>
                    </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_14">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                     <enum>QSizePolicy::Fixed</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
                   </item>
                   <item>
                    <widget class="QLabel" name="solareclipseFromLabel">
@@ -2563,25 +2566,10 @@
                 </item>
                </layout>
               </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="solareclipseHeaderLabel">
-                <property name="font">
-                 <font>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Table of solar eclipses</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignCenter</set>
-                </property>
-               </widget>
-              </item>
               <item row="3" column="0">
                <widget class="QLabel" name="gammaNoteSolarEclipseLabel">
                 <property name="text">
-                 <string>Note: The quantity gamma is the minimum distance from the axis of lunar shadow cone to the center of Earth, in units of Earth’s equatorial radius. This distance is positive or negative, depending on whether the axis of the shadow cone passes north or south of the Earth's center.</string>
+                 <string>Notes: The quantity gamma is the minimum distance from the axis of lunar shadow cone to the center of Earth, in units of Earth’s equatorial radius. This distance is positive or negative, depending on whether the axis of the shadow cone passes north or south of the Earth's center. Double click will change current location to the place of greatest eclipse.</string>
                 </property>
                 <property name="wordWrap">
                  <bool>true</bool>
@@ -2650,7 +2638,7 @@
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_46">
                   <item>
-                   <widget class="QLabel" name="solareclipselocalLabel">
+                   <widget class="QLabel" name="solareclipselocalHeaderLabel">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
                       <horstretch>0</horstretch>
@@ -2663,7 +2651,10 @@
                      </font>
                     </property>
                     <property name="text">
-                     <string/>
+                     <string>Table of solar eclipses visible in current location</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                     </property>
                    </widget>
                   </item>
@@ -2714,21 +2705,6 @@
                  </layout>
                 </item>
                </layout>
-              </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="solareclipselocalHeaderLabel">
-                <property name="font">
-                 <font>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Table of solar eclipses visible in current location</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignCenter</set>
-                </property>
-               </widget>
               </item>
              </layout>
             </widget>
@@ -2790,33 +2766,25 @@
               <item row="1" column="0">
                <layout class="QHBoxLayout" name="horizontalLayout_36">
                 <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_48">
-                  <item>
-                   <widget class="QLabel" name="lunareclipseLabel">
-                    <property name="text">
-                     <string>All lunar eclipses:</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QLabel" name="lunareclipseLabel">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="font">
-                     <font>
-                      <bold>true</bold>
-                     </font>
-                    </property>
-                    <property name="text">
-                     <string/>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
+                 <widget class="QLabel" name="lunareclipseHeaderLabel">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>Table of lunar eclipses</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
                 </item>
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_37">
@@ -2867,21 +2835,6 @@
                  </layout>
                 </item>
                </layout>
-              </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="lunareclipseHeaderLabel">
-                <property name="font">
-                 <font>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Table of lunar eclipses</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignCenter</set>
-                </property>
-               </widget>
               </item>
               <item row="3" column="0">
                <widget class="QLabel" name="gammaNoteLabel">
