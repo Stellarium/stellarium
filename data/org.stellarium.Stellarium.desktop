@@ -416,10 +416,22 @@ Exec=stellarium -f yes
 
 [Desktop Action XCBPlatform]
 Name=Open with QPA platform XCB
+Name[cs]=Otevřít pomocí platformy QPA XCB
+Name[de]=Mit der QPA-Plattform XCB öffnen
+Name[es]=Abrir con la plataforma QPA XCB
+Name[gl]=Abrir cocoa plataforma platform XCB de QPA
+Name[sk]=Otvoriť cez QPA platformu XCB
+Name[uk]=Відкрити за допомогою XCB платформи QPA
 Exec=stellarium -platform xcb
 
 [Desktop Action XCBPlatformTheme]
 Name=Open with QPA platform theme XCB
+Name[cs]=Otevřít pomocí tématu platformy QPA XCB
+Name[de]=Mit dem QPA-Plattform-Thema XCB öffnen
+Name[es]=Abrir con el tema de la plataforma QPA XCB
+Name[gl]=Abrir co tema XCB da plataforma QPA
+Name[sk]=Otvoriť s motívom QPA platformy XCB
+Name[uk]=Відкрити за допомогою XCB теми платформи QPA
 Exec=stellarium -platformtheme xcb
 
 [Desktop Action Debugmode]
