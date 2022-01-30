@@ -3142,25 +3142,27 @@ void AstroCalcDialog::generateSolarEclipses()
 						noncentraleclipse = true;
 					}
 					else
+					{
 						if (bessel.L2 < 0.)
 						{
 							eclipseTypeStr = qc_("Total", "eclipse type");
 						}
 						else if (bessel.L2 > 0.0047)
+						{
+							eclipseTypeStr = qc_("Annular", "eclipse type");
+						}
+						else if (bessel.L2 > 0. && bessel.L2 < 0.0047)
+						{
+							if (bessel.L2 < (0.00464 * sqrt(1. - gamma * gamma)))
+							{
+								eclipseTypeStr = qc_("Hybrid", "eclipse type");
+							}
+							else
 							{
 								eclipseTypeStr = qc_("Annular", "eclipse type");
 							}
-							else if (bessel.L2 > 0. && bessel.L2 < 0.0047)
-							{
-								if (bessel.L2 < (0.00464 * sqrt(1. - gamma * gamma)))
-								{
-									eclipseTypeStr = qc_("Hybrid", "eclipse type");
-								}
-								else
-								{
-									eclipseTypeStr = qc_("Annular", "eclipse type");
-								}
-							}
+						}
+					}
 
 					// Saros series calculations - useful to search for eclipses in the same Saros
 					// Adapted from Saros calculations for solar eclipses in Sky & Telescope (October 1985)
@@ -3208,21 +3210,21 @@ void AstroCalcDialog::generateSolarEclipses()
 							durationSecond = 0;
 						}
 						if (durationSecond>9)
-							durationStr = QString("%1m %2s").arg(QString::number(durationMinute)).arg(QString::number(durationSecond));
+							durationStr = QString("%1m %2s").arg(QString::number(durationMinute), QString::number(durationSecond));
 						else
-							durationStr = QString("%1m 0%2s").arg(QString::number(durationMinute)).arg(QString::number(durationSecond));
+							durationStr = QString("%1m 0%2s").arg(QString::number(durationMinute), QString::number(durationSecond));
 					}
 
 					if (withDecimalDegree)
-						{
-							latitudeStr = StelUtils::decDegToLatitudeStr(eclipseLatitude, false);
-							longitudeStr = StelUtils::decDegToLongitudeStr(eclipseLongitude, false);
-						}
+					{
+						latitudeStr = StelUtils::decDegToLatitudeStr(eclipseLatitude, false);
+						longitudeStr = StelUtils::decDegToLongitudeStr(eclipseLongitude, false);
+					}
 					else
-						{
-							latitudeStr = StelUtils::decDegToLatitudeStr(eclipseLatitude, true);
-							longitudeStr = StelUtils::decDegToLongitudeStr(eclipseLongitude, true);
-						}
+					{
+						latitudeStr = StelUtils::decDegToLatitudeStr(eclipseLatitude, true);
+						longitudeStr = StelUtils::decDegToLongitudeStr(eclipseLongitude, true);
+					}
 
 					ACSolarEclipseTreeWidgetItem* treeItem = new ACSolarEclipseTreeWidgetItem(ui->solareclipseTreeWidget);
 					treeItem->setText(SolarEclipseDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD))); // local date and time
@@ -3447,7 +3449,7 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 							if ((altitudeFirstcontact < -.3) && (altitudeLastcontact > -.3)) // Eclipse occurs at Sunrise
 							{
 								// find time of Sunrise (not exactly, we want the time when lower limb is at the horizon)
-								for (int i = 0; i <= 5; i++)
+								for (int j = 0; j <= 5; j++)
 								{
 									eclipseData = localSolarEclipse(JD - 5./1440.,0,false);
 									double alt1 = eclipseData.altitude+.3;
@@ -3474,7 +3476,7 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 							if ((altitudeFirstcontact > -.3) && (altitudeLastcontact < -.3)) // Eclipse occurs at Sunset
 							{
 								// find time of Sunset (not exactly, we want the time when lower limb is at the horizon)
-								for (int i = 0; i <= 5; i++)
+								for (int j = 0; j <= 5; j++)
 								{
 									eclipseData = localSolarEclipse(JD - 5./1440.,0,false);
 									double alt1 = eclipseData.altitude+.3;
@@ -3558,9 +3560,9 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 									durationSecond = 0;
 								}
 								if (durationSecond>9)
-									durationStr = QString("%1m %2s").arg(QString::number(durationMinute)).arg(QString::number(durationSecond));
+									durationStr = QString("%1m %2s").arg(QString::number(durationMinute), QString::number(durationSecond));
 								else
-									durationStr = QString("%1m 0%2s").arg(QString::number(durationMinute)).arg(QString::number(durationSecond));
+									durationStr = QString("%1m 0%2s").arg(QString::number(durationMinute), QString::number(durationSecond));
 							}
 
 							ACSolarEclipseLocalTreeWidgetItem* treeItem = new ACSolarEclipseLocalTreeWidgetItem(ui->solareclipselocalTreeWidget);
@@ -3568,18 +3570,23 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 							treeItem->setData(SolarEclipseLocalDate, Qt::UserRole, JDmax);
 							treeItem->setText(SolarEclipseLocalType, eclipseTypeStr);
 							treeItem->setText(SolarEclipseLocalFirstContact, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD1)));
+							treeItem->setToolTip(SolarEclipseLocalFirstContact, q_("The time of first contact"));
 							
 							if (centraleclipse)
 								treeItem->setText(SolarEclipseLocal2ndContact, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD2)));
 							else
 								treeItem->setText(SolarEclipseLocal2ndContact, dash);
+							treeItem->setToolTip(SolarEclipseLocal2ndContact, q_("The time of second contact"));
 							treeItem->setText(SolarEclipseLocalMaximum, QString("%1").arg(localeMgr->getPrintableTimeLocal(JDmax)));
+							treeItem->setToolTip(SolarEclipseLocalMaximum, q_("The time of greatest eclipse"));
 							treeItem->setText(SolarEclipseLocalMagnitude, magStr);
 							if (centraleclipse)
 								treeItem->setText(SolarEclipseLocal3rdContact, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD3)));
 							else
 								treeItem->setText(SolarEclipseLocal3rdContact, dash);
+							treeItem->setToolTip(SolarEclipseLocal3rdContact, q_("The time of third contact"));
 							treeItem->setText(SolarEclipseLocalLastContact, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD4)));
+							treeItem->setToolTip(SolarEclipseLocalLastContact, q_("The time of fourth contact"));
 							if (centraleclipse)
 								treeItem->setText(SolarEclipseLocalDuration, durationStr);
 							else
