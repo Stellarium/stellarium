@@ -302,16 +302,16 @@ void main()
 
     mediump vec4 finalColor = texColor;
 	// apply (currently only Martian) pole caps. texc.t=0 at south pole, 1 at north pole. 
-	if (texc.t>poleLat.x) {	// North pole near t=1
+	if (texc.t>poleLat.x-0.025) {	// North pole near t=1
 		mediump float mixfactor=1.;
-		if (texc.t<poleLat.x+0.05)
-			mixfactor=(texc.t-poleLat.x)/0.05;
+		if (texc.t<poleLat.x+0.025)
+			mixfactor=(texc.t-poleLat.x+0.025)/0.05;
 		finalColor.xyz=mix(vec3(1., 1., 1.), finalColor.xyz, 1.-mixfactor); 
 	}
-	if (texc.t<poleLat.y) {	// South pole near texc.t~0
+	if (texc.t<poleLat.y+0.025) {	// South pole near texc.t~0
 		mediump float mixfactor=1.;
-		if (texc.t>poleLat.y-0.05)
-			mixfactor=(poleLat.y-texc.t)/0.05;
+		if (texc.t>poleLat.y-0.025)
+			mixfactor=(poleLat.y+0.025-texc.t)/0.05;
 		finalColor.xyz=mix(vec3(1., 1., 1.), finalColor.xyz, 1.-mixfactor); 
 	}
 #ifdef IS_MOON
