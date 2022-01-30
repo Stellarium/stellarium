@@ -3804,8 +3804,8 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 		// Then compute latitudes of polar caps: Fig.10 in Smith, David E. et al. "Time Variations of
 		// Mars’ Gravitational Field and Seasonal Changes in the Masses of the Polar Ice Caps."
 		// Journal of Geophysical Research 114.E5 (2009): E05002. DOI:10.1029/2008je003267
-		double latN=70.+18.*sin((Ls-200.)*M_PI_180);
-		double latS=-70.-18.*sin((Ls-30.)*M_PI_180);
+		double latN= 70.-18.*sin((Ls-195.)*M_PI_180);
+		double latS=-70.+18.*sin((Ls- 15.)*M_PI_180);
 
 		// Finally convert to texture coordinates.
 		float tNorth=static_cast<float>((latN+90.)/180.);
