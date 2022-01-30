@@ -172,6 +172,37 @@ public:
 		LunarEclipseCount		//! total number of columns
 	};
 
+	//! Defines the number and the order of the columns in the global solar eclipse table
+	//! @enum SolarEclipseColumns
+	enum SolarEclipseColumns {
+		SolarEclipseDate,            //! date and time of solar eclipse
+		SolarEclipseSaros,           //! saros number of solar eclipse
+		SolarEclipseType,            //! type of solar eclipse
+		SolarEclipseGamma,           //! gamma of solar eclipse
+		SolarEclipseMag,             //! greatest magnitude of solar eclipse
+		SolarEclipseLatitude,        //! latitude at greatest eclipse
+		SolarEclipseLongitude,       //! longitude at greatest eclipse
+		SolarEclipseAltitude,        //! altitude of the Sun at greatest eclipse
+		SolarEclipsePathwidth,       //! pathwidth of total or annular solar eclipse
+		SolarEclipseDuration,        //! central duration of total or annular solar eclipse
+		SolarEclipseCount            //! total number of columns
+	};
+
+	//! Defines the number and the order of the columns in the local solar eclipse table
+	//! @enum SolarEclipseColumns
+	enum SolarEclipseLocalColumns {
+		SolarEclipseLocalDate,        //! date of maximum solar eclipse
+		SolarEclipseLocalType,        //! type of solar eclipse
+		SolarEclipseLocalFirstContact,//! time of the beginning of partial solar eclipse
+		SolarEclipseLocal2ndContact,  //! time of the beginning of total/annular solar eclipse
+		SolarEclipseLocalMaximum,     //! time of maximum solar eclipse
+		SolarEclipseLocal3rdContact,  //! time of the end of total/annular solar eclipse
+		SolarEclipseLocalMagnitude,   //! maximum magnitude of solar eclipse
+		SolarEclipseLocalLastContact, //! time of the end of partial solar eclipse
+		SolarEclipseLocalDuration,    //! duration of total/annular solar eclipse
+		SolarEclipseLocalCount        //! total number of columns
+	};
+
 	AstroCalcDialog(QObject* parent);
 	virtual ~AstroCalcDialog() Q_DECL_OVERRIDE;
 
@@ -222,6 +253,20 @@ private slots:
 	void cleanupLunarEclipses();
 	void selectCurrentLunarEclipse(const QModelIndex &modelIndex);
 	void saveLunarEclipses();
+
+	//! Calculating solar eclipses to fill the list.
+	//! Algorithm taken from calculating the transits.
+	void generateSolarEclipses();
+	void cleanupSolarEclipses();
+	void selectCurrentSolarEclipse(const QModelIndex &modelIndex);
+	void saveSolarEclipses();
+
+	//! Calculating local solar eclipses to fill the list.
+	//! Algorithm taken from calculating the transits.
+	void generateSolarEclipsesLocal();
+	void cleanupSolarEclipsesLocal();
+	void selectCurrentSolarEclipseLocal(const QModelIndex &modelIndex);
+	void saveSolarEclipsesLocal();
 
 	void saveEphemerisCelestialBody(int index);
 	void saveEphemerisSecondaryCelestialBody(int index);
@@ -351,6 +396,10 @@ private:
 	void setWUTHeaderNames(const bool magnitude = true, const bool separation = false);
 	//! update header names for lunar eclipse table
 	void setLunarEclipseHeaderNames();
+	//! update header names for solar eclipse table
+	void setSolarEclipseHeaderNames();
+	//! update header names for local solar eclipse table
+	void setSolarEclipseLocalHeaderNames();
 
 	//! Init header and list of celestial positions
 	void initListCelestialPositions();
@@ -364,6 +413,10 @@ private:
 	void initListWUT(const bool magnitude = true, const bool separation = false);
 	//! Init header and list of lunar eclipse
 	void initListLunarEclipse();
+	//! Init header and list of solar eclipse
+	void initListSolarEclipse();
+	//! Init header and list of local solar eclipse
+	void initListSolarEclipseLocal();
 
 	//! Populates the drop-down list of celestial bodies.
 	//! The displayed names are localized in the current interface language.
@@ -444,7 +497,7 @@ private:
 
 	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph, plotAngularDistanceGraph, plotAziVsTime;
 	int altVsTimePositiveLimit, monthlyElevationPositiveLimit, graphsDuration;
-	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, wutHeader, transitHeader, lunareclipseHeader;
+	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, wutHeader, transitHeader, lunareclipseHeader, solareclipseHeader, solareclipselocalHeader;
 	static double brightLimit;
 	static double minY, maxY, minYme, maxYme, minYsun, maxYsun, minYmoon, maxYmoon, transitX, minY1, maxY1, minY2, maxY2,
 			     minYld, maxYld, minYad, maxYad, minYadm, maxYadm, minYaz, maxYaz;
@@ -688,6 +741,60 @@ private:
 		else if (column == AstroCalcDialog::LunarEclipseGamma)
 		{
 			return text(column).toFloat() < other.text(column).toFloat();
+		}
+		else
+		{
+			return text(column).toLower() < other.text(column).toLower();
+		}
+	}
+};
+
+// Reimplements the QTreeWidgetItem class to fix the sorting bug
+class ACSolarEclipseTreeWidgetItem : public QTreeWidgetItem
+{
+public:
+	ACSolarEclipseTreeWidgetItem(QTreeWidget* parent)
+		: QTreeWidgetItem(parent)
+	{
+	}
+
+private:
+	bool operator < (const QTreeWidgetItem &other) const
+	{
+		int column = treeWidget()->sortColumn();
+
+		if (column == AstroCalcDialog::SolarEclipseDate || column == AstroCalcDialog::SolarEclipseLatitude || column == AstroCalcDialog::SolarEclipseLongitude)
+		{
+			return data(column, Qt::UserRole).toFloat() < other.data(column, Qt::UserRole).toFloat();
+		}
+		else if (column == AstroCalcDialog::SolarEclipseGamma || column == AstroCalcDialog::SolarEclipsePathwidth || column == AstroCalcDialog::SolarEclipseAltitude)
+		{
+			return text(column).toFloat() < other.text(column).toFloat();
+		}
+		else
+		{
+			return text(column).toLower() < other.text(column).toLower();
+		}
+	}
+};
+
+// Reimplements the QTreeWidgetItem class to fix the sorting bug
+class ACSolarEclipseLocalTreeWidgetItem : public QTreeWidgetItem
+{
+public:
+	ACSolarEclipseLocalTreeWidgetItem(QTreeWidget* parent)
+		: QTreeWidgetItem(parent)
+	{
+	}
+
+private:
+	bool operator < (const QTreeWidgetItem &other) const
+	{
+		int column = treeWidget()->sortColumn();
+
+		if (column == AstroCalcDialog::SolarEclipseLocalDate )
+		{
+			return data(column, Qt::UserRole).toFloat() < other.data(column, Qt::UserRole).toFloat();
 		}
 		else
 		{

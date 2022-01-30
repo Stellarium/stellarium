@@ -496,6 +496,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	{
 		double glong, glat;
 		StelUtils::rectToSphe(&glong, &glat, getGalacticPos(core));
+		if (glong<0.) glong += 2.0*M_PI;
 		if (withDecimalDegree)
 		{
 			firstCoordinate  = StelUtils::radToDecDegStr(glong);
@@ -503,8 +504,8 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		}
 		else
 		{
-			firstCoordinate  = StelUtils::radToDmsStr(glong,true);
-			secondCoordinate = StelUtils::radToDmsStr(glat,true);
+			firstCoordinate  = StelUtils::radToDmsStr(glong, true);
+			secondCoordinate = StelUtils::radToDmsStr(glat, true);
 		}
 
 		// TRANSLATORS: Galactic longitude/latitude
@@ -520,6 +521,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	{
 		double sglong, sglat;
 		StelUtils::rectToSphe(&sglong, &sglat, getSupergalacticPos(core));
+		if (sglong<0.) sglong += 2.0*M_PI;
 		if (withDecimalDegree)
 		{
 			firstCoordinate  = StelUtils::radToDecDegStr(sglong);
@@ -527,8 +529,8 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		}
 		else
 		{
-			firstCoordinate  = StelUtils::radToDmsStr(sglong,true);
-			secondCoordinate = StelUtils::radToDmsStr(sglat,true);
+			firstCoordinate  = StelUtils::radToDmsStr(sglong, true);
+			secondCoordinate = StelUtils::radToDmsStr(sglat, true);
 		}
 
 		// TRANSLATORS: Supergalactic longitude/latitude
