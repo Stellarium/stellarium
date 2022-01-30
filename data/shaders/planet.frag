@@ -300,12 +300,20 @@ void main()
 
     lowp vec4 texColor = texture2D(tex, texc);
 
-	// apply (currently only Martian) pole caps. texc.t=0 at south pole, 1 at north pole. 
-	if ((texc.t>poleLat.x) || (texc.t<poleLat.y)) {	// North pole near t=1, or South pole near texc~0
-		texColor.xyz=vec3(1.0, 1.0, 1.0); 
-	}
-
     mediump vec4 finalColor = texColor;
+	// apply (currently only Martian) pole caps. texc.t=0 at south pole, 1 at north pole. 
+	if (texc.t>poleLat.x) {	// North pole near t=1
+		mediump float mixfactor=1.;
+		if (texc.t<poleLat.x+0.05)
+			mixfactor=(texc.t-poleLat.x)/0.05;
+		finalColor.xyz=mix(vec3(1., 1., 1.), finalColor.xyz, 1.-mixfactor); 
+	}
+	if (texc.t<poleLat.y) {	// South pole near texc.t~0
+		mediump float mixfactor=1.;
+		if (texc.t>poleLat.y-0.05)
+			mixfactor=(poleLat.y-texc.t)/0.05;
+		finalColor.xyz=mix(vec3(1., 1., 1.), finalColor.xyz, 1.-mixfactor); 
+	}
 #ifdef IS_MOON
     if(final_illumination < 0.9999)
     {
