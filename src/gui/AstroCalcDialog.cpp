@@ -2253,6 +2253,8 @@ void AstroCalcDialog::initListLunarEclipse()
 
 QPair<double,double> AstroCalcDialog::getLunarEclipseXY() const
 {
+	// Source: Explanatory Supplement to the Astronomical Ephemeris 
+	// and the American Ephemeris and Nautical Almanac (1961)
 	// Algorithm adaped from Planet::getLunarEclipseMagnitudes() -- we need only x and y here.
 	// Find x, y of Besselian elements
 	QPair<double,double> LunarEclipseXY;
@@ -2362,7 +2364,10 @@ void AstroCalcDialog::generateLunarEclipses()
 				core->update(0);
 
 				// Check for eclipse
+				// Source: Explanatory Supplement to the Astronomical Ephemeris 
+				// and the American Ephemeris and Nautical Almanac (1961)
 				// Algorithm taken from Planet::getLunarEclipseMagnitudes()
+				
 				QPair<double,double> XY = getLunarEclipseXY();				
 				double x = XY.first;
 				double y = XY.second;
@@ -2643,6 +2648,10 @@ struct SolarEclipse {
 SolarEclipse BesselianElements() {
 	SolarEclipse result;
 
+	// Besselian elements
+	// Source: Explanatory Supplement to the Astronomical Ephemeris 
+	// and the American Ephemeris and Nautical Almanac (1961)
+
 	StelCore* core = StelApp::getInstance().getCore();
 	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 
@@ -2663,15 +2672,15 @@ SolarEclipse BesselianElements() {
 	if (raSun>M_PI && raMoon<M_PI) raMoon+=2.*M_PI;
 	else if (raSun<M_PI && raMoon>M_PI) raSun+=2.*M_PI;
 
-	// Besselian elements
-	// based on Explanatory supplement to the astronomical ephemeris
-	// and the American ephemeris and nautical almanac (1961)
 	constexpr double SunEarth = 109.12278;
 	// ratio of Sun-Earth radius : 109.12278 = 696000/6378.1366
 	// Another value is 109.075744787 = 695700/6378.1366
+	// Earth's equatorial radius = 6378.1366
+	// Source: IERS Conventions (2003)
+	// https://www.iers.org/IERS/EN/Publications/TechnicalNotes/tn32.html
 
 	// NASA's solar eclipse predictions use larger Sun with radius 696,000 km
-	// calculated from IAU 1976 solar radius (959.63 arcsec at 1 au)
+	// calculated from arctan of IAU 1976 solar radius (959.63 arcsec at 1 au)
 	// This value affects duration of total/annular eclipse ~ 2-3 seconds
 	// Stellarium's solar radius is 695,700 km, this may create discrepancies between prediction & visualization
 
@@ -2691,6 +2700,8 @@ SolarEclipse BesselianElements() {
 	// 0.2725076 is recommended by IAU, NASA uses 0.272281 for total eclipse to eliminate extreme cases
 	// when the Moon's apparent diameter is very close to the Sun but cannot completely cover it. 
 	// we will use two values (same with NASA), because durations seem to agree with NASA.
+	// Source: Solar Eclipse Predictions and the Mean Lunar Radius
+	// http://eclipsewise.com/solar/SEhelp/SEradius.html
 	const double f1 = asin((SunEarth + 0.2725076) / (rss * (1. - b)));
 	const double tf1 = tan(f1);
 	const double f2 = asin((SunEarth - 0.272281) / (rss * (1. - b)));  
@@ -2723,6 +2734,10 @@ struct pSEparameter {
 pSEparameter partialSolarEclipse() {
 	pSEparameter result;
 
+	// Besselian elements
+	// Source: Explanatory Supplement to the Astronomical Ephemeris 
+	// and the American Ephemeris and Nautical Almanac (1961)
+
 	SolarEclipse bessel = BesselianElements();
 
 	const double x = bessel.x;
@@ -2735,7 +2750,10 @@ pSEparameter partialSolarEclipse() {
 	const double mu = bessel.mu;
 	constexpr double e2 = 0.00669398;
 	// e^2 = 0.00669398 : Earth flattening parameter
-	// IERS 2010 : f = 298.25642 : e^2 = 2f-f^2
+	// f = 298.25642 : e^2 = 2f-f^2
+	// Source: IERS Conventions (2003)
+	// https://www.iers.org/IERS/EN/Publications/TechnicalNotes/tn32.html
+
 	const double rho1 = sqrt(1.- e2 * cos(d) * cos(d));
 	const double yy1 = y / rho1;
 	double m = sqrt(x * x + y * y);
@@ -2794,6 +2812,10 @@ struct cSEparameter {
 
 cSEparameter centralSolarEclipse(double JD) {
 	cSEparameter result;
+
+	// Besselian elements
+	// Source: Explanatory Supplement to the Astronomical Ephemeris 
+	// and the American Ephemeris and Nautical Almanac (1961)
 
 	StelCore* core = StelApp::getInstance().getCore();
 	core->setUseTopocentricCoordinates(false);
@@ -2885,7 +2907,9 @@ cSEparameter centralSolarEclipse(double JD) {
 		altitude = asin(cfn1*cos(d)*cos(theta * M_PI_180)+sfn1*sin(d)) / M_PI_180;
 
 		// Path width in kilometre
-		// Explanatory Supplement to the Astronomical Ephemeris and the American Ephemeris and Nautical Almanac (1992)
+		// Explanatory Supplement to the Astronomical Almanac
+		// Seidelmann, P. Kenneth, ed. (1992). University Science Books. ISBN 978-0-935702-68-2
+		// https://archive.org/details/131123ExplanatorySupplementAstronomicalAlmanac
 		const double p1 = zeta * zeta;
 		const double p2 = x * (xdot - xidot) / n;
 		const double p3 = eta1 * (ydot - etadot) / n;
@@ -2917,6 +2941,10 @@ localSEparameter localSolarEclipse(double JD,int contact,bool central) {
 	// contact : -1 for beginning, 0 for mid-eclipse, 1 for the end of partial or annular
 	// contact : -1 for the end, 0 for mid-eclipse, 1 for beginning of total
 	// central : true for total/annular eclipse
+
+	// Besselian elements
+	// Source: Explanatory Supplement to the Astronomical Ephemeris 
+	// and the American Ephemeris and Nautical Almanac (1961)
 
 	StelCore* core = StelApp::getInstance().getCore();
 	double lat = static_cast<double>(core->getCurrentLocation().latitude);
@@ -3030,6 +3058,7 @@ void AstroCalcDialog::generateSolarEclipses()
 		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 
 		// Find approximate JD of New Moon = Geocentric conjunction in longitude
+		// Source: Astronomical Algorithms (1991), Jean Meeus
 		double tmp = (startJD - approxJD - synodicMonth) / synodicMonth;
 		double InitJD = approxJD + int(tmp) * synodicMonth;
 
@@ -3090,7 +3119,7 @@ void AstroCalcDialog::generateSolarEclipses()
 				bool noncentraleclipse = false; // Non-central includes partial and total/annular eclipses that shadow axis misses Earth
 
 				// Determine the type of solar eclipse
-				// Source : Astronomical Algorithms, Jean Meeus
+				// Source: Astronomical Algorithms (1991), Jean Meeus
 				if (abs(gamma) <= (1.5433 + bessel.L2))
 				{
 					if (abs(gamma) > 0.9972 && abs(gamma) < (1.5433 + bessel.L2))
