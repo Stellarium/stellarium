@@ -2521,23 +2521,23 @@
                   <item>
                    <widget class="QLabel" name="solareclipseFromLabel">
                     <property name="text">
-                     <string>From:</string>
+                     <string>From Year:</string>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QDateEdit" name="solareclipseFromDateEdit">
-                    <property name="wrapping">
-                     <bool>true</bool>
-                    </property>
-                    <property name="displayFormat">
-                     <string notr="true">yyyy.MM.dd</string>
-                    </property>
-                    <property name="calendarPopup">
-                     <bool>true</bool>
-                    </property>
-                   </widget>
-                  </item>
+                    <widget class="QSpinBox" name="solareclipseFromYearSpinBox">
+                     <property name="maximum">
+                      <number>17000</number>
+                      </property>
+                      <property name="minimum">
+                      <number>-13000</number>
+                      </property>
+                      <property name="value">
+                       <number>2022</number>
+                      </property>
+                     </widget>
+                    </item>
                  </layout>
                 </item>
                 <item>
@@ -2550,15 +2550,15 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QDateEdit" name="solareclipseToDateEdit">
-                    <property name="wrapping">
-                     <bool>true</bool>
+                   <widget class="QSpinBox" name="solareclipseToYearSpinBox">
+                    <property name="maximum">
+                     <number>17000</number>
                     </property>
-                    <property name="displayFormat">
-                     <string notr="true">yyyy.MM.dd</string>
+                    <property name="minimum">
+                     <number>-13000</number>
                     </property>
-                    <property name="calendarPopup">
-                     <bool>true</bool>
+                    <property name="value">
+                     <number>2022</number>
                     </property>
                    </widget>
                   </item>
@@ -2661,20 +2661,20 @@
                   <item>
                    <widget class="QLabel" name="solareclipselocalFromLabel">
                     <property name="text">
-                     <string>From:</string>
+                     <string>From Year:</string>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QDateEdit" name="solareclipselocalFromDateEdit">
-                    <property name="wrapping">
-                     <bool>true</bool>
+                   <widget class="QSpinBox" name="solareclipselocalFromYearSpinBox">
+                    <property name="maximum">
+                     <number>17000</number>
                     </property>
-                    <property name="displayFormat">
-                     <string notr="true">yyyy.MM.dd</string>
+                    <property name="minimum">
+                     <number>-13000</number>
                     </property>
-                    <property name="calendarPopup">
-                     <bool>true</bool>
+                    <property name="value">
+                     <number>2022</number>
                     </property>
                    </widget>
                   </item>
@@ -2690,15 +2690,15 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QDateEdit" name="solareclipselocalToDateEdit">
-                    <property name="wrapping">
-                     <bool>true</bool>
+                   <widget class="QSpinBox" name="solareclipselocalToYearSpinBox">
+                    <property name="maximum">
+                     <number>17000</number>
                     </property>
-                    <property name="displayFormat">
-                     <string notr="true">yyyy.MM.dd</string>
+                    <property name="minimum">
+                     <number>-13000</number>
                     </property>
-                    <property name="calendarPopup">
-                     <bool>true</bool>
+                    <property name="value">
+                     <number>2022</number>
                     </property>
                    </widget>
                   </item>
@@ -2791,23 +2791,23 @@
                   <item>
                    <widget class="QLabel" name="lunareclipseFromLabel">
                     <property name="text">
-                     <string>From:</string>
+                     <string>From Year:</string>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QDateEdit" name="lunareclipseFromDateEdit">
-                    <property name="wrapping">
-                     <bool>true</bool>
-                    </property>
-                    <property name="displayFormat">
-                     <string notr="true">yyyy.MM.dd</string>
-                    </property>
-                    <property name="calendarPopup">
-                     <bool>true</bool>
-                    </property>
-                   </widget>
-                  </item>
+                    <widget class="QSpinBox" name="lunareclipseFromYearSpinBox">
+                     <property name="maximum">
+                      <number>17000</number>
+                      </property>
+                      <property name="minimum">
+                      <number>-13000</number>
+                      </property>
+                      <property name="value">
+                       <number>2022</number>
+                      </property>
+                     </widget>
+                    </item>
                  </layout>
                 </item>
                 <item>
@@ -2819,19 +2819,19 @@
                     </property>
                    </widget>
                   </item>
-                  <item>
-                   <widget class="QDateEdit" name="lunareclipseToDateEdit">
-                    <property name="wrapping">
-                     <bool>true</bool>
-                    </property>
-                    <property name="displayFormat">
-                     <string notr="true">yyyy.MM.dd</string>
-                    </property>
-                    <property name="calendarPopup">
-                     <bool>true</bool>
-                    </property>
-                   </widget>
-                  </item>
+                   <item>
+                    <widget class="QSpinBox" name="lunareclipseToYearSpinBox">
+                     <property name="maximum">
+                      <number>17000</number>
+                      </property>
+                      <property name="minimum">
+                      <number>-13000</number>
+                      </property>
+                      <property name="value">
+                       <number>2022</number>
+                      </property>
+                     </widget>
+                    </item>
                  </layout>
                 </item>
                </layout>
