@@ -33,6 +33,7 @@
 #include "CalendarsDialog.hpp"
 
 #include "JulianCalendar.hpp"
+#include "RevisedJulianCalendar.hpp"
 #include "GregorianCalendar.hpp"
 #include "ISOCalendar.hpp"
 #include "IcelandicCalendar.hpp"
@@ -88,6 +89,7 @@ Calendars::Calendars():
 	toolbarButton(Q_NULLPTR),
 	enabled(true),
 	flagShowJulian(true),
+	flagShowRevisedJulian(true),
 	flagShowGregorian(true),
 	flagShowISO(true),
 	flagShowIcelandic(true),
@@ -192,6 +194,7 @@ void Calendars::init()
 
 	const double jd=StelApp::getInstance().getCore()->getJD();
 	calendars.insert("Julian", new JulianCalendar(jd));
+	calendars.insert("RevisedJulian", new RevisedJulianCalendar(jd));
 	calendars.insert("Gregorian", new GregorianCalendar(jd));
 	calendars.insert("ISO", new ISOCalendar(jd));
 	calendars.insert("Icelandic", new IcelandicCalendar(jd));
@@ -228,6 +231,7 @@ void Calendars::loadSettings()
 	// Now activate calendar displays if needed.
 	enable(                conf->value("Calendars/show", true).toBool());
 	showJulian(            conf->value("Calendars/show_julian", true).toBool());
+	showRevisedJulian(     conf->value("Calendars/show_revised_julian", true).toBool());
 	showGregorian(         conf->value("Calendars/show_gregorian", true).toBool());
 	showISO(               conf->value("Calendars/show_iso", true).toBool());
 	showIcelandic(         conf->value("Calendars/show_icelandic", true).toBool());
@@ -278,28 +282,29 @@ void Calendars::draw(StelCore* core)
 	oss << "<table>";
 	// Select the drawable calendars from GUI or settings.
 	if (calendars.count()==0) return;
-	if (flagShowJulian)             oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Julian",                "calendar"), getCal("Julian")->getFormattedDateString());
-	if (flagShowGregorian)          oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Gregorian",             "calendar"), getCal("Gregorian")->getFormattedDateString());
-	if (flagShowISO)                oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("ISO week",              "calendar"), getCal("ISO")->getFormattedDateString());
-	if (flagShowIcelandic)          oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Icelandic",             "calendar"), getCal("Icelandic")->getFormattedDateString());
-	if (flagShowRoman)              oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Roman",                 "calendar"), getCal("Roman")->getFormattedDateString());
-	if (flagShowOlympic)            oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Olympic",               "calendar"), getCal("Olympic")->getFormattedDateString());
-	if (flagShowEgyptian)           oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Egyptian",              "calendar"), getCal("Egyptian")->getFormattedDateString());
-	if (flagShowArmenian)           oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Armenian",              "calendar"), getCal("Armenian")->getFormattedDateString());
-	if (flagShowZoroastrian)        oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Zoroastrian",           "calendar"), getCal("Zoroastrian")->getFormattedDateString());
-	if (flagShowCoptic)             oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Coptic",                "calendar"), getCal("Coptic")->getFormattedDateString());
-	if (flagShowEthiopic)           oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Ethiopic",              "calendar"), getCal("Ethiopic")->getFormattedDateString());
-	if (flagShowFrenchArithmetic)   oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("French Rev. (Arithm.)", "calendar"), getCal("FrenchArithmetic")->getFormattedDateString());
-	if (flagShowIslamic)            oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Islamic",               "calendar"), getCal("Islamic")->getFormattedDateString());
-	if (flagShowHebrew)             oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Hebrew",                "calendar"), getCal("Hebrew")->getFormattedDateString());
-	if (flagShowPersianArithmetic)  oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Persian (Arithm.)",     "calendar"), getCal("PersianArithmetic")->getFormattedDateString());
-	if (flagShowOldHinduSolar)      oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Old Hindu Solar",       "calendar"), getCal("OldHinduSolar")->getFormattedDateString());
-	if (flagShowOldHinduLunar)      oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Old Hindu Lunisolar",   "calendar"), getCal("OldHinduLunar")->getFormattedDateString());
-	if (flagShowMayaLongCount)      oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Maya Long Count",       "calendar"), getCal("MayaLongCount")->getFormattedDateString());
-	if (flagShowMayaHaab)           oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Maya Haab",             "calendar"), getCal("MayaHaab")->getFormattedDateString());
-	if (flagShowMayaTzolkin)        oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Maya Tzolkin",          "calendar"), getCal("MayaTzolkin")->getFormattedDateString());
-	if (flagShowAztecXihuitl)       oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Aztec Xihuitl",         "calendar"), getCal("AztecXihuitl")->getFormattedDateString());
-	if (flagShowAztecTonalpohualli) oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Aztec Tonalpohualli",   "calendar"), getCal("AztecTonalpohualli")->getFormattedDateString());
+	if (flagShowJulian)             oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Julian",                "calendar"), getCal("Julian")->getFormattedDateString());
+	if (flagShowGregorian)          oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Gregorian",             "calendar"), getCal("Gregorian")->getFormattedDateString());
+	if (flagShowRevisedJulian)      oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Revised Julian",        "calendar"), getCal("RevisedJulian")->getFormattedDateString());
+	if (flagShowISO)                oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("ISO week",              "calendar"), getCal("ISO")->getFormattedDateString());
+	if (flagShowIcelandic)          oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Icelandic",             "calendar"), getCal("Icelandic")->getFormattedDateString());
+	if (flagShowRoman)              oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Roman",                 "calendar"), getCal("Roman")->getFormattedDateString());
+	if (flagShowOlympic)            oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Olympic",               "calendar"), getCal("Olympic")->getFormattedDateString());
+	if (flagShowEgyptian)           oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Egyptian",              "calendar"), getCal("Egyptian")->getFormattedDateString());
+	if (flagShowArmenian)           oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Armenian",              "calendar"), getCal("Armenian")->getFormattedDateString());
+	if (flagShowZoroastrian)        oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Zoroastrian",           "calendar"), getCal("Zoroastrian")->getFormattedDateString());
+	if (flagShowCoptic)             oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Coptic",                "calendar"), getCal("Coptic")->getFormattedDateString());
+	if (flagShowEthiopic)           oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Ethiopic",              "calendar"), getCal("Ethiopic")->getFormattedDateString());
+	if (flagShowFrenchArithmetic)   oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("French Rev. (Arithm.)", "calendar"), getCal("FrenchArithmetic")->getFormattedDateString());
+	if (flagShowIslamic)            oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Islamic",               "calendar"), getCal("Islamic")->getFormattedDateString());
+	if (flagShowHebrew)             oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Hebrew",                "calendar"), getCal("Hebrew")->getFormattedDateString());
+	if (flagShowPersianArithmetic)  oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Persian (Arithm.)",     "calendar"), getCal("PersianArithmetic")->getFormattedDateString());
+	if (flagShowOldHinduSolar)      oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Old Hindu Solar",       "calendar"), getCal("OldHinduSolar")->getFormattedDateString());
+	if (flagShowOldHinduLunar)      oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Old Hindu Lunisolar",   "calendar"), getCal("OldHinduLunar")->getFormattedDateString());
+	if (flagShowMayaLongCount)      oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Maya Long Count",       "calendar"), getCal("MayaLongCount")->getFormattedDateString());
+	if (flagShowMayaHaab)           oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Maya Haab",             "calendar"), getCal("MayaHaab")->getFormattedDateString());
+	if (flagShowMayaTzolkin)        oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Maya Tzolkin",          "calendar"), getCal("MayaTzolkin")->getFormattedDateString());
+	if (flagShowAztecXihuitl)       oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Aztec Xihuitl",         "calendar"), getCal("AztecXihuitl")->getFormattedDateString());
+	if (flagShowAztecTonalpohualli) oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Aztec Tonalpohualli",   "calendar"), getCal("AztecTonalpohualli")->getFormattedDateString());
 	if (flagShowBalinese)      {
 		oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Balinese Pawukon", "calendar"), static_cast<BalinesePawukonCalendar*>(getCal("Balinese"))->getFormattedDateString1to5());
 		oss << QString("<tr><td>  </td><td>%1</td></tr>").arg(static_cast<BalinesePawukonCalendar*>(getCal("Balinese"))->getFormattedDateString6to10());
@@ -359,6 +364,16 @@ void Calendars::showJulian(bool b)
 	{
 		flagShowJulian=b;
 		conf->setValue("Calendars/show_julian", b);
+		emit showJulianChanged(b);
+	}
+}
+bool Calendars::isRevisedJulianDisplayed() const { return flagShowRevisedJulian;}
+void Calendars::showRevisedJulian(bool b)
+{
+	if (b!=flagShowRevisedJulian)
+	{
+		flagShowRevisedJulian=b;
+		conf->setValue("Calendars/show_revised_julian", b);
 		emit showJulianChanged(b);
 	}
 }

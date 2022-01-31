@@ -22,6 +22,19 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 
+
+QString Calendar::getFormattedDateString(QVector<int> date, QString sep)
+{
+	QString res;
+	QVector<int>::const_iterator it;
+	for (it=date.constBegin(); it!=date.constEnd(); ++it)
+	{
+		res.append(QString::number(*it));
+		res.append(sep);
+	}
+	return res;
+}
+
 QString Calendar::getFormattedDateString() const
 {
 	return getDateStrings().join(' ');

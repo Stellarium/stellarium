@@ -81,6 +81,9 @@ public slots:
 	//! get a formatted complete string for a date. The default implementation just concatenates all strings from getDateStrings() with a space in between.
 	virtual QString getFormattedDateString() const;
 
+	//! get a formatted complete string for a date. This implementation just converts and concatenates all ints with sep in between.
+	static QString getFormattedDateString(QVector<int> date, QString sep=" ");
+
 public:
 	constexpr static const double J2000=2451545.0;
 	constexpr static const double jdEpoch=-1721424.5;

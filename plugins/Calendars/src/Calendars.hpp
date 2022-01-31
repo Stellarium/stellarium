@@ -37,6 +37,7 @@ class Calendars : public StelModule
 	Q_OBJECT
 	Q_PROPERTY(bool enabled		      READ isEnabled                WRITE enable            NOTIFY enabledChanged)
 	Q_PROPERTY(bool flagShowJulian        READ isJulianDisplayed        WRITE showJulian        NOTIFY showJulianChanged)
+	Q_PROPERTY(bool flagShowRevisedJulian READ isRevisedJulianDisplayed WRITE showRevisedJulian NOTIFY showRevisedJulianChanged)
 	Q_PROPERTY(bool flagShowGregorian     READ isGregorianDisplayed     WRITE showGregorian     NOTIFY showGregorianChanged)
 	Q_PROPERTY(bool flagShowISO           READ isISODisplayed           WRITE showISO           NOTIFY showISOChanged)
 	Q_PROPERTY(bool flagShowIcelandic     READ isIcelandicDisplayed     WRITE showIcelandic     NOTIFY showIcelandicChanged)
@@ -101,6 +102,7 @@ signals:
 
 	void enabledChanged(bool b);
 	void showJulianChanged(bool b);
+	void showRevisedJulianChanged(bool b);
 	void showGregorianChanged(bool b);
 	void showISOChanged(bool b);
 	void showIcelandicChanged(bool b);
@@ -133,6 +135,8 @@ public slots:
 	void enable(bool b);
 	bool isJulianDisplayed() const;		//!< display Julian Calendar?
 	void showJulian(bool b);		//!< activate display of Julian Calendar
+	bool isRevisedJulianDisplayed() const;	//!< display Revised Julian Calendar?
+	void showRevisedJulian(bool b);		//!< activate display of Revised Julian Calendar
 	bool isGregorianDisplayed() const;	//!< display Gregorian Calendar?
 	void showGregorian(bool b);		//!< activate display of Gregorian Calendar
 	bool isISODisplayed() const;		//!< display ISO Calendar?
@@ -198,6 +202,7 @@ private:
 	// StelProperties:
 	bool enabled;
 	bool flagShowJulian;
+	bool flagShowRevisedJulian;
 	bool flagShowGregorian;
 	bool flagShowISO;
 	bool flagShowIcelandic;

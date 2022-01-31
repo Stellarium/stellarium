@@ -28,6 +28,10 @@
 #include "StelUtils.hpp"
 #include "../Calendar.hpp"
 #include "../JulianCalendar.hpp"
+#include "../RevisedJulianCalendar.hpp"
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+#include <QCalendar>
+#endif
 #include "../GregorianCalendar.hpp"
 #include "../ISOCalendar.hpp"
 #include "../IcelandicCalendar.hpp"
@@ -81,14 +85,15 @@ void TestCalendars::testBasics()
 	QVERIFY2(Calendar::modInterval(5, 1, 2)==1, qPrintable(QString("modInterval(5, 1, 2)=%1").arg(QString::number(Calendar::modInterval(5, 1, 2)))));
 	QVERIFY2(Calendar::modInterval(6, 1, 2)==1, qPrintable(QString("modInterval(6, 1, 2)=%1").arg(QString::number(Calendar::modInterval(6, 1, 2)))));
 	// Critically important: modinterval(., 1, n)=amod(., n-1). n is NOT the maximum possible return value!
-	QVERIFY2(Calendar::modInterval(42, 1, 7)==StelUtils::amod(42, 6), qPrintable(QString("modInterval(42, 1, 6)=%1 vs amod(42, 6)=%2").arg(QString::number(Calendar::modInterval(5, 1, 2))).arg(QString::number(StelUtils::amod(42, 6)))));
-	QVERIFY2(Calendar::modInterval(43, 1, 7)==StelUtils::amod(43, 6), qPrintable(QString("modInterval(43, 1, 6)=%1 vs amod(43, 6)=%2").arg(QString::number(Calendar::modInterval(6, 1, 2))).arg(QString::number(StelUtils::amod(43, 6)))));
+	QVERIFY2(Calendar::modInterval(42, 1, 7)==StelUtils::amod(42, 6), qPrintable(QString("modInterval(42, 1, 6)=%1 vs amod(42, 6)=%2").arg(QString::number(Calendar::modInterval(5, 1, 2)), QString::number(StelUtils::amod(42, 6)))));
+	QVERIFY2(Calendar::modInterval(43, 1, 7)==StelUtils::amod(43, 6), qPrintable(QString("modInterval(43, 1, 6)=%1 vs amod(43, 6)=%2").arg(QString::number(Calendar::modInterval(6, 1, 2)), QString::number(StelUtils::amod(43, 6)))));
 	QVERIFY(StelUtils::intFloorDiv(8, 2)==4);
 	QVERIFY(StelUtils::intFloorDiv(8, 3)==2);
 	QVERIFY(StelUtils::intFloorDiv(-8, 3)==-3);
 	QVERIFY(StelUtils::intFloorDiv(-8, -2)==4);
 	QVERIFY(StelUtils::intFloorDiv(-8, 2)==-4);
 	QVERIFY(StelUtils::intFloorDiv(8, -2)==-4);
+	QVERIFY(StelUtils::imod(-1, 100)==99);
 }
 
 void TestCalendars::testEuropean()
@@ -98,6 +103,333 @@ void TestCalendars::testEuropean()
 	QVERIFY(GregorianCalendar::fixedFromGregorian({1, 1, 1})==GregorianCalendar::gregorianEpoch);
 	QVERIFY(JulianCalendar::fixedFromJulian({1, 1, 1})==JulianCalendar::julianEpoch);
 	QVERIFY(JulianCalendar::fixedFromJulian({1, 1, 1})==GregorianCalendar::fixedFromGregorian({0, JulianCalendar::december, 30}));
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+	// RevisedJulianCalendar should behave identical to Qt's MilankovicCalendar.
+	QCalendar mil(QCalendar::System::Milankovic);
+	for (int year=400; year<10001; year+=100)
+		QVERIFY(RevisedJulianCalendar::isLeap(year)==mil.isLeapYear(year));
+#endif
+	QVERIFY(RevisedJulianCalendar::isLeap( 400)==false);
+	QVERIFY(RevisedJulianCalendar::isLeap( 500)==false);
+	QVERIFY(RevisedJulianCalendar::isLeap( 600)==true);
+	QVERIFY(RevisedJulianCalendar::isLeap( 700)==false);
+	QVERIFY(RevisedJulianCalendar::isLeap( 800)==false);
+	QVERIFY(RevisedJulianCalendar::isLeap( 900)==false);
+	QVERIFY(RevisedJulianCalendar::isLeap(1000)==false);
+	QVERIFY(RevisedJulianCalendar::isLeap(1100)==true);
+	QVERIFY(RevisedJulianCalendar::isLeap(1200)==false);
+	QVERIFY(RevisedJulianCalendar::isLeap(1300)==false);
+	QVERIFY(RevisedJulianCalendar::isLeap(1400)==false);
+	QVERIFY(RevisedJulianCalendar::isLeap(1500)==true);
+	QVERIFY(RevisedJulianCalendar::isLeap(1600)==false);
+	QVERIFY(RevisedJulianCalendar::isLeap(1700)==false);
+	QVERIFY(RevisedJulianCalendar::isLeap(1800)==false);
+	QVERIFY(RevisedJulianCalendar::isLeap(1900)==false);
+	QVERIFY(RevisedJulianCalendar::isLeap(2000)==true);
+	QVERIFY(RevisedJulianCalendar::isLeap(2100)==false);
+	QVERIFY(RevisedJulianCalendar::isLeap(2200)==false);
+	QVERIFY(RevisedJulianCalendar::isLeap(2300)==false);
+	QVERIFY(RevisedJulianCalendar::isLeap(2400)==true);
+	QVERIFY(RevisedJulianCalendar::isLeap(2500)==false);
+	QVERIFY(RevisedJulianCalendar::isLeap(2600)==false);
+	QVERIFY(RevisedJulianCalendar::isLeap(2700)==false);
+	QVERIFY(RevisedJulianCalendar::isLeap(2800)==false);
+	QVERIFY(RevisedJulianCalendar::isLeap(2900)==true);
+	QVERIFY(RevisedJulianCalendar::isLeap(3000)==false);
+	QVERIFY(RevisedJulianCalendar::isLeap(3100)==false);
+	QVERIFY(RevisedJulianCalendar::isLeap(3200)==false);
+	QVERIFY(RevisedJulianCalendar::isLeap(3300)==true);
+	QVERIFY(RevisedJulianCalendar::isLeap(3400)==false);
+	QVERIFY(RevisedJulianCalendar::isLeap(3500)==false);
+	QVERIFY(RevisedJulianCalendar::isLeap(3600)==false);
+	QVERIFY(RevisedJulianCalendar::isLeap(3700)==false);
+	QVERIFY(RevisedJulianCalendar::isLeap(3800)==true);
+	QVERIFY(RevisedJulianCalendar::isLeap(3900)==false);
+	QVERIFY(RevisedJulianCalendar::isLeap(4000)==false);
+	QVERIFY(RevisedJulianCalendar::revisedJulianEpoch==Calendar::fixedFromJD(1721425.5, false));
+	QVERIFY2(qFuzzyCompare(RevisedJulianCalendar::fixedFromRevisedJulian({2000, 1, 1}), 730120.5 - 0.5), // Subtract half-day.
+		 qPrintable(QString("fixed from Revised Julian 1.1.2000: %1 (expected %2)").arg(RevisedJulianCalendar::fixedFromRevisedJulian({2000, 1, 1})).arg(730120.5-0.5, 8, 'f')));
+
+	// Test simple date reversion for all dates 1..28.month.year in sensible range.
+	for (int y=325; y<10799; y++)
+		for (int m=1; m<=12; ++m)
+			for (int d=1; d<29; d++)
+			{
+				QVector<int> date={y, m, d};
+				QVERIFY2(RevisedJulianCalendar::revisedJulianFromFixed(RevisedJulianCalendar::fixedFromRevisedJulian(date)) == date,
+					 qPrintable(QString("Problem with date %1").arg(Calendar::getFormattedDateString(date, ":"))));
+			}
+
+	// Make sure to get the transition right.
+	for (int y=325; y<400; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==JulianCalendar::fixedFromJulian({y, m, 1}));
+	// Rest of table from https://en.wikipedia.org/wiki/Revised_Julian_calendar. Note that the arithmetic result is reversed from the list.
+	for (int y=325; y<400; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1})+1);
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({400, m, 1})==GregorianCalendar::fixedFromGregorian({400, m, 1})+1);
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({400, m, 1})==GregorianCalendar::fixedFromGregorian({400, m, 1}));
+	for (int y=401; y<600; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1}));
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({600, m, 1})==GregorianCalendar::fixedFromGregorian({600, m, 1}));
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({600, m, 1})==GregorianCalendar::fixedFromGregorian({600, m, 1})+1);
+	for (int y=601; y<800; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1})+1);
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({800, m, 1})==GregorianCalendar::fixedFromGregorian({800, m, 1})+1);
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({800, m, 1})==GregorianCalendar::fixedFromGregorian({800, m, 1}));
+	for (int y=801; y<1100; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1}));
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({1100, m, 1})==GregorianCalendar::fixedFromGregorian({1100, m, 1}));
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({1100, m, 1})==GregorianCalendar::fixedFromGregorian({1100, m, 1})+1);
+	for (int y=1101; y<1200; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1})+1);
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({1200, m, 1})==GregorianCalendar::fixedFromGregorian({1200, m, 1})+1);
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({1200, m, 1})==GregorianCalendar::fixedFromGregorian({1200, m, 1}));
+	for (int y=1201; y<1500; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1}));
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({1500, m, 1})==GregorianCalendar::fixedFromGregorian({1500, m, 1}));
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({1500, m, 1})==GregorianCalendar::fixedFromGregorian({1500, m, 1})+1);
+	for (int y=1501; y<1600; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1})+1);
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({1600, m, 1})==GregorianCalendar::fixedFromGregorian({1600, m, 1})+1);
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({1600, m, 1})==GregorianCalendar::fixedFromGregorian({1600, m, 1}));
+	for (int y=1601; y<2800; y++)
+		for (int m=1; m<=12; ++m)
+		{
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1}));
+			for (int d=1; d<29; d++)
+			{
+				QVector<int> date={y, m, d};
+				QVERIFY(RevisedJulianCalendar::revisedJulianFromFixed(GregorianCalendar::fixedFromGregorian(date)) == date);
+			}
+		}
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({2800, m, 1})==GregorianCalendar::fixedFromGregorian({2800, m, 1}));
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({2800, m, 1})==GregorianCalendar::fixedFromGregorian({2800, m, 1})-1);
+	for (int y=2801; y<2900; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1})-1);
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({2900, m, 1})==GregorianCalendar::fixedFromGregorian({2900, m, 1})-1);
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({2900, m, 1})==GregorianCalendar::fixedFromGregorian({2900, m, 1}));
+	for (int y=2901; y<3200; y++)
+		for (int m=1; m<=12; ++m)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1}));
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({3200, m, 1})==GregorianCalendar::fixedFromGregorian({3200, m, 1}));
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({3300, m, 1})==GregorianCalendar::fixedFromGregorian({3300, m, 1}));
+	for (int y=3301; y<3600; y++)
+		for (int m=1; m<=12; ++m)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({3300, 3, 1})==GregorianCalendar::fixedFromGregorian({3300, 3, 1}));
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({3600, m, 1})==GregorianCalendar::fixedFromGregorian({3600, m, 1}));
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({3600, m, 1})==GregorianCalendar::fixedFromGregorian({3600, m, 1})-1);
+	for (int y=3601; y<3800; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1})-1);
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({3800, m, 1})==GregorianCalendar::fixedFromGregorian({3800, m, 1})-1);
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({3800, m, 1})==GregorianCalendar::fixedFromGregorian({3800, m, 1}));
+	for (int y=3801; y<4000; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1}));
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({4000, m, 1})==GregorianCalendar::fixedFromGregorian({4000, m, 1}));
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({4000, m, 1})==GregorianCalendar::fixedFromGregorian({4000, m, 1})-1);
+	for (int y=4001; y<4200; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1})-1);
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({4200, m, 1})==GregorianCalendar::fixedFromGregorian({4200, m, 1})-1);
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({4200, m, 1})==GregorianCalendar::fixedFromGregorian({4200, m, 1}));
+	for (int y=4201; y<4400; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1}));
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({4400, m, 1})==GregorianCalendar::fixedFromGregorian({4400, m, 1}));
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({4400, m, 1})==GregorianCalendar::fixedFromGregorian({4400, m, 1})-1);
+	for (int y=4401; y<4700; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1})-1);
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({4700, m, 1})==GregorianCalendar::fixedFromGregorian({4700, m, 1})-1);
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({4700, m, 1})==GregorianCalendar::fixedFromGregorian({4700, m, 1}));
+	for (int y=4701; y<4800; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1}));
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({4800, m, 1})==GregorianCalendar::fixedFromGregorian({4800, m, 1}));
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({4800, m, 1})==GregorianCalendar::fixedFromGregorian({4800, m, 1})-1);
+	for (int y=4801; y<5100; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1})-1);
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({5100, m, 1})==GregorianCalendar::fixedFromGregorian({5100, m, 1})-1);
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({5100, m, 1})==GregorianCalendar::fixedFromGregorian({5100, m, 1}));
+	for (int y=5101; y<5200; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1}));
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({5200, m, 1})==GregorianCalendar::fixedFromGregorian({5200, m, 1}));
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({5200, m, 1})==GregorianCalendar::fixedFromGregorian({5200, m, 1})-1);
+	for (int y=5201; y<6400; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1})-1);
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({6400, m, 1})==GregorianCalendar::fixedFromGregorian({6400, m, 1})-1);
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({6400, m, 1})==GregorianCalendar::fixedFromGregorian({6400, m, 1})-2);
+	for (int y=6401; y<6500; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1})-2);
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({6500, m, 1})==GregorianCalendar::fixedFromGregorian({6500, m, 1})-2);
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({6500, m, 1})==GregorianCalendar::fixedFromGregorian({6500, m, 1})-1);
+	for (int y=6501; y<6800; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1})-1);
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({6800, m, 1})==GregorianCalendar::fixedFromGregorian({6800, m, 1})-1);
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({6800, m, 1})==GregorianCalendar::fixedFromGregorian({6800, m, 1})-2);
+	for (int y=6801; y<6900; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1})-2);
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({6900, m, 1})==GregorianCalendar::fixedFromGregorian({6900, m, 1})-2);
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({6900, m, 1})==GregorianCalendar::fixedFromGregorian({6900, m, 1})-1);
+	for (int y=6901; y<7200; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1})-1);
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({7200, m, 1})==GregorianCalendar::fixedFromGregorian({7200, m, 1})-1);
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({7200, m, 1})==GregorianCalendar::fixedFromGregorian({7200, m, 1})-2);
+	for (int y=7201; y<7400; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1})-2);
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({7400, m, 1})==GregorianCalendar::fixedFromGregorian({7400, m, 1})-2);
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({7400, m, 1})==GregorianCalendar::fixedFromGregorian({7400, m, 1})-1);
+	for (int y=7401; y<7600; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1})-1);
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({7600, m, 1})==GregorianCalendar::fixedFromGregorian({7600, m, 1})-1);
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({7600, m, 1})==GregorianCalendar::fixedFromGregorian({7600, m, 1})-2);
+	for (int y=7601; y<7800; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1})-2);
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({7800, m, 1})==GregorianCalendar::fixedFromGregorian({7800, m, 1})-2);
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({7800, m, 1})==GregorianCalendar::fixedFromGregorian({7800, m, 1})-1);
+	for (int y=7801; y<8000; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1})-1);
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({8000, m, 1})==GregorianCalendar::fixedFromGregorian({8000, m, 1})-1);
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({8000, m, 1})==GregorianCalendar::fixedFromGregorian({8000, m, 1})-2);
+	for (int y=8001; y<8300; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1})-2);
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({8300, m, 1})==GregorianCalendar::fixedFromGregorian({8300, m, 1})-2);
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({8300, m, 1})==GregorianCalendar::fixedFromGregorian({8300, m, 1})-1);
+	for (int y=8301; y<8400; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1})-1);
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({8400, m, 1})==GregorianCalendar::fixedFromGregorian({8400, m, 1})-1);
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({8400, m, 1})==GregorianCalendar::fixedFromGregorian({8400, m, 1})-2);
+	for (int y=8401; y<8700; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1})-2);
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({8700, m, 1})==GregorianCalendar::fixedFromGregorian({8700, m, 1})-2);
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({8700, m, 1})==GregorianCalendar::fixedFromGregorian({8700, m, 1})-1);
+	for (int y=8701; y<8800; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1})-1);
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({8800, m, 1})==GregorianCalendar::fixedFromGregorian({8800, m, 1})-1);
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({8800, m, 1})==GregorianCalendar::fixedFromGregorian({8800, m, 1})-2);
+	for (int y=8801; y<10000; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1})-2);
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({10000, m, 1})==GregorianCalendar::fixedFromGregorian({10000, m, 1})-2);
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({10000, m, 1})==GregorianCalendar::fixedFromGregorian({10000, m, 1})-3);
+	for (int y=10001; y<10100; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1})-3);
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({10100, m, 1})==GregorianCalendar::fixedFromGregorian({10100, m, 1})-3);
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({10100, m, 1})==GregorianCalendar::fixedFromGregorian({10100, m, 1})-2);
+	for (int y=10101; y<10400; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1})-2);
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({10400, m, 1})==GregorianCalendar::fixedFromGregorian({10400, m, 1})-2);
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({10400, m, 1})==GregorianCalendar::fixedFromGregorian({10400, m, 1})-3);
+	for (int y=10401; y<10500; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1})-3);
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({10500, m, 1})==GregorianCalendar::fixedFromGregorian({10500, m, 1})-3);
+	for (int m=3; m<=12; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({10500, m, 1})==GregorianCalendar::fixedFromGregorian({10500, m, 1})-2);
+	for (int y=10501; y<10800; y++)
+		for (int m=1; m<=12; m++)
+			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1})-2);
+	for (int m=1; m<=2; m++)
+		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({10800, m, 1})==GregorianCalendar::fixedFromGregorian({10800, m, 1})-2);
 
 	QVERIFY(-214193==ISOCalendar::fixedFromISO({-586, 29, 7}));
 	QVERIFY( -61387==ISOCalendar::fixedFromISO({-168, 49, 3}));
@@ -1144,8 +1476,8 @@ void TestCalendars::testBalinesePawukon()
 	const QVector<int>expect2038({1, 2, 1, 3, 4, 1, 4, 7, 1, 2});
 
 	QVERIFY2(BalinesePawukonCalendar::baliPawukonFromFixed(sample2038) == expect2038,
-		 qPrintable(QString("Bali for %1 = %2").arg(QString::number(sample2038))
-			    .arg(printVec(BalinesePawukonCalendar::baliPawukonFromFixed(sample2038)))));
+		 qPrintable(QString("Bali for %1 = %2").arg(QString::number(sample2038),
+			    printVec(BalinesePawukonCalendar::baliPawukonFromFixed(sample2038)))));
 
 	QVERIFY(-214193==BalinesePawukonCalendar::baliOnOrBefore({0, 1, 1, 1, 3, 1, 1, 5, 7, 3}, -214193));
 	QVERIFY( -61387==BalinesePawukonCalendar::baliOnOrBefore({1, 2, 2, 1, 4, 5, 4, 5, 5, 2},  -61387));

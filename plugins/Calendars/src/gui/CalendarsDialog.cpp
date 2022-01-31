@@ -77,11 +77,17 @@ void CalendarsDialog::createDialogContent()
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(resetCalendarsSettings()));
 	setAboutHtml();
 
-	// DISABLE Chinese for now, TBD!
+#ifdef STELLARIUM_RELEASE_BUILD
+	ui->labelRDvalue->hide();
+	ui->labelRD->hide();
+	// DISABLE Chinese etc for now, TBD!
 	ui->chineseCheckBox->hide();
 	ui->tabs->removeTab(2);
 	ui->newHinduLunarCheckBox->hide();
 	ui->newHinduSolarCheckBox->hide();
+#else
+	connect(cal->getCal("Julian"), &JulianCalendar::jdChanged, this, [=](double jd){ui->labelRDvalue->setText(QString::number(Calendar::fixedFromJD(jd)));});
+#endif
 
 	// MAKE SURE to connect each calendar's partsChanged to a respective populate... method here.
 	connect(cal->getCal("Julian"),             SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateJulianParts(QVector<int>)));
@@ -95,6 +101,7 @@ void CalendarsDialog::createDialogContent()
 	//connect(cal->getCal("Chinese"), SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateChineseParts(QVector<int>)));
 
 	connectBoolProperty(ui->julianCheckBox,             "Calendars.flagShowJulian");
+	connectBoolProperty(ui->revisedJulianCheckBox,      "Calendars.flagShowRevisedJulian");
 	connectBoolProperty(ui->gregorianCheckBox,          "Calendars.flagShowGregorian");
 	connectBoolProperty(ui->isoCheckBox,                "Calendars.flagShowISO");
 	connectBoolProperty(ui->romanCheckBox,              "Calendars.flagShowRoman");
@@ -167,6 +174,7 @@ void CalendarsDialog::setAboutHtml(void)
 	html += "<p>" + q_("The Calendars plugin provides an interface to various calendars used around the world.") + "</p>";
 	html += "<ul><li>" + q_("Julian Calendar") + "</li>";
 	html += "<li>" + q_("Gregorian Calendar") + "</li>";
+	html += "<li>" + q_("Revised Julian Calendar (Milankovi&cacute;)") + "</li>";
 	html += "<li>" + q_("ISO Weeks") + "</li>";
 	html += "<li>" + q_("Icelandic calendar") + "</li>";
 	html += "<li>" + q_("Roman (Julian) calendar") + "</li>";
