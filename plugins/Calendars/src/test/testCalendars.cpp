@@ -143,6 +143,16 @@ void TestCalendars::testEuropean()
 	QVERIFY2(qFuzzyCompare(RevisedJulianCalendar::fixedFromRevisedJulian({2000, 1, 1}), 730120.5 - 0.5), // Subtract half-day.
 		 qPrintable(QString("fixed from Revised Julian 1.1.2000: %1 (expected %2)").arg(RevisedJulianCalendar::fixedFromRevisedJulian({2000, 1, 1})).arg(730120.5-0.5, 8, 'f')));
 
+	// Test simple date reversion for all dates 1..28.month.year in sensible range.
+	for (int y=325; y<10799; y++)
+		for (int m=1; m<=12; ++m)
+			for (int d=1; d<29; d++)
+			{
+				QVector<int> date={y, m, d};
+				QVERIFY2(RevisedJulianCalendar::revisedJulianFromFixed(RevisedJulianCalendar::fixedFromRevisedJulian(date)) == date,
+					 qPrintable(QString("Problem with date %1").arg(Calendar::getFormattedDateString(date, ":"))));
+			}
+
 	// Make sure to get the transition right.
 	for (int y=325; y<400; y++)
 		for (int m=1; m<=12; m++)
@@ -199,7 +209,14 @@ void TestCalendars::testEuropean()
 		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({1600, m, 1})==GregorianCalendar::fixedFromGregorian({1600, m, 1}));
 	for (int y=1601; y<2800; y++)
 		for (int m=1; m<=12; ++m)
+		{
 			QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({y, m, 1})==GregorianCalendar::fixedFromGregorian({y, m, 1}));
+			for (int d=1; d<29; d++)
+			{
+				QVector<int> date={y, m, d};
+				QVERIFY(RevisedJulianCalendar::revisedJulianFromFixed(GregorianCalendar::fixedFromGregorian(date)) == date);
+			}
+		}
 	for (int m=1; m<=2; m++)
 		QVERIFY(RevisedJulianCalendar::fixedFromRevisedJulian({2800, m, 1})==GregorianCalendar::fixedFromGregorian({2800, m, 1}));
 	for (int m=3; m<=12; m++)

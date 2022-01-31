@@ -108,9 +108,7 @@ QVector<int> RevisedJulianCalendar::revisedJulianFromFixed(int rd)
 	const int priorSubcycleYears = StelUtils::intFloorDiv(remainingDays, 365);                   // n1
 	int year = 100 * priorCenturies + 4 * priorSubcycles + priorSubcycleYears;
 	// Add a correction which was omitted in Wikipedia!
-	const int n1=priorSubcycleYears;
-	const int n100=priorCenturies;
-	if ( !((n1==4) || (n100==2 || n100==6))) // Hopefully correct? NO Some issue with 6?
+	if ( !((priorSubcycleYears==4) || (priorCenturies==2)))
 		year+=1;
 
 	remainingDays = StelUtils::imod(remainingDays, 365);

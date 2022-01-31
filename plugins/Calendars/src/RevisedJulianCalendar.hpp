@@ -21,13 +21,13 @@
 
 #include "JulianCalendar.hpp"
 
-//! Stellarium uses Julian Day numbers internally, and the conventional approach of using the Gregorian calendar for dates after 1582-10-15.
-//! The Orthodox Church worked out a Revised Julian Calendar in 1923. See https://en.wikipedia.org/wiki/Revised_Julian_calendar
+//! The Orthodox Church worked out a Revised Julian Calendar in 1923 to overcome the 13-day gap between their traditional Julian and the rest of the world which is using the Gregorian.
 //! In this calendar, only centuries where division by 900 yields 200 or 600 are leap years.
+//! Dates from March 1st, 1600 to February 28th, 2800, go in sync with the Gregorian calendar.
+//! The algorithm implemented here was taken from https://en.wikipedia.org/wiki/Revised_Julian_calendar in January 2022 (with a necessary fix discovered during implementation)
 //! @note Behaviour of this calendar for dates BC is not documented.
 //! In the first century, dates are 2 days away from the Julian.
-//! Around the Nicaean concile (AD325) this calendar provides the same dates as the Julian.
-//! Therefore we make the switchover in AD325.
+//! Around the Nicaean concile (AD325) this calendar provides the same dates as the Julian, therefore we make the switchover in AD325, and forward all earlier dates to the Julian calendar.
 
 class RevisedJulianCalendar : public JulianCalendar
 {
