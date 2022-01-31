@@ -985,12 +985,14 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	// galactic long/lat
 	pos = getGalacticPos(core);
 	StelUtils::rectToSphe(&glong, &glat, pos);
+	if (glong<0.) glong += 2.0*M_PI;
 	map.insert("glong", glong*M_180_PI);
 	map.insert("glat", glat*M_180_PI);
 
 	// supergalactic long/lat
 	pos = getSupergalacticPos(core);
 	StelUtils::rectToSphe(&glong, &glat, pos);
+	if (glong<0.) glong += 2.0*M_PI;
 	map.insert("sglong", glong*M_180_PI);
 	map.insert("sglat", glat*M_180_PI);
 
