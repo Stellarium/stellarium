@@ -23,6 +23,7 @@
 #include <QObject>
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
+#include "StelLocation.hpp"
 
 //! Abstract superclass for all calendars.
 //! Stellarium uses Julian Day numbers internally, and the conventional approach of using the Gregorian calendar for dates after 1582-10-15.
@@ -85,7 +86,8 @@ public slots:
 	static QString getFormattedDateString(QVector<int> date, QString sep=" ");
 
 public:
-	constexpr static const double J2000=2451545.0;
+	//constexpr static const double J2000=2451545.0;
+	constexpr static const double j2000=730120.5; //!< RD of J2000.0
 	constexpr static const double jdEpoch=-1721424.5;
 	constexpr static const double mjdEpoch=678576.0;
 	constexpr static const int bogus=-1000000; // special value to indicate invalid result in some calendars.
@@ -141,6 +143,39 @@ public:
 
 	//! Split integer to mixed-radix vector. Reingold-Dershowitz CC.UE 1.42
 	static QVector<int> toRadix(int num, QVector<int>radix);
+
+
+	// ASTRONOMICAL FUNCTIONS AND DEFINITIONS FROM CH.14
+	static const StelLocation urbana;
+	static const StelLocation greenwich;
+	static const StelLocation mecca;
+	static const StelLocation jerusalem;
+	static const StelLocation acre;
+	static double direction(StelLocation loc1, StelLocation loc2);
+	//! @return longitude-dependent time offset in fractions of day.
+	static double zoneFromLongitude(double lngDeg){return lngDeg/360.;}
+	//! @return fractions of day
+	static double universalFromLocal(double fractionalDay, StelLocation location);
+	//! @return fractions of day
+	static double localFromUniversal(double fractionalDay, StelLocation location);
+	//! @return fractions of day
+	static double standardFromUniversal(double fractionalDay, StelLocation location);
+	//! @return fractions of day
+	static double universalFromStandard(double fractionalDay, StelLocation location);
+	//! @return fractions of day
+	static double standardFromLocal(double fractionalDay, StelLocation location);
+	//! @return fractions of day
+	static double localFromStandard(double fractionalDay, StelLocation location);
+	//! @return DeltaT in fractions of day. This utilizes Stellarium's solution.
+	static double ephemerisCorrection(double rd);
+	//! Correct rd_ut to Dynamical time.
+	static double dynamicalFromUniversal(double rd_ut);
+	//! Correct rd_dt to Universal time.
+	static double universalFromDynamical(double rd_dt);
+	//! @return Julian centuries since j2000 in dynamical time (for ephemeris calculations)
+	static double julianCenturies(double rd_ut);
+
+
 signals:
 	void partsChanged(QVector<int> parts);
 	void jdChanged(double jd);

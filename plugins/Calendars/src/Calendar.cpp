@@ -17,6 +17,7 @@
  */
 
 #include <QDebug>
+#include <QTimeZone>
 
 #include "Calendar.hpp"
 #include "StelApp.hpp"
@@ -103,4 +104,71 @@ QVector<int> Calendar::toRadix(int num, QVector<int>radix)
 	}
 	res.prepend(rest);
 	return res;
+}
+
+// DEFINITIONS FROM CHAPTER 14: ASTRONOMICAL CALENDARS
+const StelLocation Calendar::urbana   = StelLocation::createFromLine("Urbana	Il	09	X	250	40.1N	88.2W	225	7	UT-6");
+const StelLocation Calendar::greenwich= StelLocation::createFromLine("Greenwich	London	18	X	100	51.4777815N	0E	46.9	7	UT");
+const StelLocation Calendar::mecca    = StelLocation::createFromLine("Mecca	Mecca	16	X	200	21.42333333N	39.82333333E	298	9	UT+3");
+const StelLocation Calendar::jerusalem= StelLocation::createFromLine("Jerusalem	Israel	16	X	2000	31.78N	35.24E	740	7	UT+2");
+const StelLocation Calendar::acre     = StelLocation::createFromLine("Acre	Israel	16	X	20	32.94N	35.09E	22	6	UT+2");
+double Calendar::direction(StelLocation loc1, StelLocation loc2)
+{
+	// We could do that, but south azimuth may cause problems.
+	//return StelLocation::getAzimuthForLocation(static_cast<double>(loc1.longitude), static_cast<double>(loc1.latitude),
+	//					   static_cast<double>(loc2.longitude), static_cast<double>(loc2.latitude));
+	const double longObs    = static_cast<double>(loc1.longitude) * M_PI_180;
+	const double latObs     = static_cast<double>(loc1.latitude ) * M_PI_180;
+	const double longTarget = static_cast<double>(loc2.longitude) * M_PI_180;
+	const double latTarget  = static_cast<double>(loc2.latitude ) * M_PI_180;
+
+	double az = atan2(sin(longTarget-longObs), cos(latObs)*tan(latTarget)-sin(latObs)*cos(longTarget-longObs));
+	return StelUtils::fmodpos(M_180_PI * az, 360.0);
+}
+double Calendar::universalFromLocal(double fractionalDay, StelLocation location)
+{
+	return fractionalDay-zoneFromLongitude(static_cast<double>(location.longitude));
+}
+double Calendar::localFromUniversal(double fractionalDay, StelLocation location)
+{
+	return fractionalDay+zoneFromLongitude(static_cast<double>(location.longitude));
+
+}
+double Calendar::standardFromUniversal(double fractionalDay, StelLocation location)
+{
+	static const QDateTime j2000(QDate(2000, 1, 1), QTime(0, 0, 0), Qt::UTC);
+	QTimeZone tz(location.ianaTimeZone.toUtf8());
+	return fractionalDay+tz.standardTimeOffset(j2000)/86400;
+}
+double Calendar::universalFromStandard(double fractionalDay, StelLocation location)
+{
+	static const QDateTime j2000(QDate(2000, 1, 1), QTime(0, 0, 0), Qt::UTC);
+	QTimeZone tz(location.ianaTimeZone.toUtf8());
+	return fractionalDay-tz.standardTimeOffset(j2000)/86400;
+}
+double Calendar::standardFromLocal(double fractionalDay, StelLocation location)
+{
+	return standardFromUniversal(universalFromLocal(fractionalDay, location), location);
+}
+double Calendar::localFromStandard(double fractionalDay, StelLocation location)
+{
+	return localFromUniversal(universalFromStandard(fractionalDay, location), location);
+}
+double Calendar::ephemerisCorrection(double rd)
+{
+	double jd=jdFromMoment(rd, false);
+	double deltaT=StelApp::getInstance().getCore()->computeDeltaT(jd);
+	return deltaT/86400.;
+}
+double Calendar::dynamicalFromUniversal(double rd_ut)
+{
+	return rd_ut+ephemerisCorrection(rd_ut);
+}
+double Calendar::universalFromDynamical(double rd_dt)
+{
+	return rd_dt-ephemerisCorrection(rd_dt);
+}
+double Calendar::julianCenturies(double rd_ut)
+{
+	return (dynamicalFromUniversal(rd_ut)-j2000)/36525.;
 }

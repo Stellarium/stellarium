@@ -72,6 +72,7 @@ public:
 
 
 protected:
+	//! @return RD of Gregorian new year
 	static int gregorianNewYear(int year) {return fixedFromGregorian({year, january, 1});}
 	static int gregorianYearFromFixed(int rd);
 	//! return year-month-day for RD date
