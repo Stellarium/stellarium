@@ -570,6 +570,7 @@ void AstroCalcDialog::createDialogContent()
 	ui->transitNotificationLabel->setStyleSheet(style);
 	ui->gammaNoteLabel->setStyleSheet(style);
 	ui->gammaNoteSolarEclipseLabel->setStyleSheet(style);
+	ui->UncertaintiesNoteLabel->setStyleSheet(style);
 	style = "QCheckBox { color: rgb(238, 238, 238); }";
 	ui->sunAltitudeCheckBox->setStyleSheet(style);
 	ui->moonAltitudeCheckBox->setStyleSheet(style);
@@ -2269,10 +2270,10 @@ void AstroCalcDialog::generateLunarEclipses()
 
 		const double currentJD = core->getJD();   // save current JD
 		double startyear = ui->lunareclipseFromYearSpinBox->value();
-		double stopyear = ui->lunareclipseToYearSpinBox->value();
+		double years = ui->lunareclipseYearsSpinBox->value();
 		double startJD, stopJD;
 		StelUtils::getJDFromDate(&startJD, startyear, 1, 1, 0, 0, 0);
-		StelUtils::getJDFromDate(&stopJD, stopyear+1, 1, 1, 0, 0, 0);
+		StelUtils::getJDFromDate(&stopJD, startyear+years, 1, 1, 0, 0, 0);
 		startJD = startJD - core->getUTCOffset(startJD) / 24.;
 		stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
 		int elements = static_cast<int>((stopJD - startJD) / 29.530588853);
@@ -2566,6 +2567,8 @@ void AstroCalcDialog::saveLunarEclipses()
 				}
 			}
 		}
+
+		xlsx.write(count+3, 1, "Note: Local circumstances for eclipses more than thousand of years in the past and future are not reliable due to uncertainties in ΔT which is related to Earth's rotation.");
 
 		for (int i = 0; i < columns; i++)
 		{
@@ -3031,10 +3034,10 @@ void AstroCalcDialog::generateSolarEclipses()
 
 		const double currentJD = core->getJD();   // save current JD
 		double startyear = ui->solareclipseFromYearSpinBox->value();
-		double stopyear = ui->solareclipseToYearSpinBox->value();
+		double years = ui->solareclipseYearsSpinBox->value();
 		double startJD, stopJD;
 		StelUtils::getJDFromDate(&startJD, startyear, 1, 1, 0, 0, 0);
-		StelUtils::getJDFromDate(&stopJD, stopyear+1, 1, 1, 0, 0, 0);
+		StelUtils::getJDFromDate(&stopJD, startyear+years, 1, 1, 0, 0, 0);
 		startJD = startJD - core->getUTCOffset(startJD) / 24.;
 		stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
 		QString sarosStr, eclipseTypeStr, gammaStr, magStr, latitudeStr, longitudeStr, altitudeStr, pathWidthStr, durationStr;
@@ -3312,10 +3315,10 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 
 		const double currentJD = core->getJD();   // save current JD
 		double startyear = ui->solareclipselocalFromYearSpinBox->value();
-		double stopyear = ui->solareclipselocalToYearSpinBox->value();
+		double years = ui->solareclipselocalYearsSpinBox->value();
 		double startJD, stopJD;
 		StelUtils::getJDFromDate(&startJD, startyear, 1, 1, 0, 0, 0);
-		StelUtils::getJDFromDate(&stopJD, stopyear+1, 1, 1, 0, 0, 0);
+		StelUtils::getJDFromDate(&stopJD, startyear+years, 1, 1, 0, 0, 0);
 		startJD = startJD - core->getUTCOffset(startJD) / 24.;
 		stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
 		QString eclipseTypeStr, magStr, altitudeStr, durationStr;
@@ -3717,6 +3720,8 @@ void AstroCalcDialog::saveSolarEclipses()
 			}
 		}
 
+		xlsx.write(count+3, 1, "Note: Local circumstances for eclipses more than thousand of years in the past and future are not reliable due to uncertainties in ΔT which is related to Earth's rotation.");
+
 		for (int i = 0; i < columns; i++)
 		{
 			xlsx.setColumnWidth(i+1, width[i]+2);
@@ -3815,6 +3820,8 @@ void AstroCalcDialog::saveSolarEclipsesLocal()
 				}
 			}
 		}
+
+		xlsx.write(count+3, 1, "Note: Local circumstances for eclipses more than thousand of years in the past and future are not reliable due to uncertainties in ΔT which is related to Earth's rotation.");
 
 		for (int i = 0; i < columns; i++)
 		{
