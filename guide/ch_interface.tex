@@ -460,12 +460,28 @@ for changing the general appearance of the main sky view and projections. Some h
   brightness of faint objects when a bright object is in the field of
   view. This simulates how the eye can be dazzled by a bright object
   such as the moon, making it harder to see faint stars and galaxies.
+\begin{samepage} % If the list of options is page-broken from the beginning of the "Light pollution" item, it becomes hard to orient in the text due to starting a page with a nested list.
 \item[Light pollution] In urban and suburban areas, the sky is
   brightened by terrestrial light pollution reflected in the atmosphere.
-  Stellarium simulates light pollution and is calibrated to the
-  \emph{Bortle Dark Sky Scale} where 1 means a good dark sky, and 9 is
-  a very badly light-polluted sky. See Appendix~\ref{ch:BortleScale}
-  for more information.
+  Stellarium simulates light pollution and lets the user configure how bright
+  the night sky is.
+  There are several ways to set it up:
+  \begin{description}
+    \item[Automatic from locations database] option makes Stellarium find sky
+      brightness from its locations database and simulate light pollution
+      without any further user input.
+    \item[Manual] mode lets the user choose the amount of light pollution by
+      moving a slider. To make it easier to orient in the resulting amount of
+      light pollution, a tooltip will show the classification of the sky
+      according to the \emph{Bortle Dark Sky Scale} (See Appendix~\ref{ch:BortleScale}
+      for more information), as well as the naked-eye limiting magnitude.
+    \item[Manual from SQM] mode lets one enter the reading of a \emph{Sky Quality Meter}.
+      Stellarium can accept it in several units: physical ($\mathrm{cd/m^2}$,
+      $\mathrm{mcd/m^2}$, $\mathrm{\mu cd/m^2}$) as well as astronomical,
+      $\mathrm{mag/arcsec^2}$. To enter a value, first choose the unit, and
+      then type the number into the spinbox.
+  \end{description}
+\end{samepage}
 \item[Solar altitude for Twilight Finder] You can configure \newFeature{0.21.2} 
 shortcut keys to go to the time when the sun reaches this altitude below the 
 mathematical horizon. See section~\ref{sec:gui:help:hotkeys:example}.
