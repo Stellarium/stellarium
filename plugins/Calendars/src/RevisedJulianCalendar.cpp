@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Georg Zotti
+ * Copyright (C) 2022 Georg Zotti
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -66,10 +66,7 @@ bool RevisedJulianCalendar::isLeap(int year)
 	if (leap && (StelUtils::imod(year, 100) == 0))
 	{
 		int century=StelUtils::imod(year, 900);
-		if (year>0)
-			leap=(century==200) || (century==600);
-		else
-			leap=(century==201) || (century==601);
+		leap=(century==200) || (century==600);
 	}
 	return leap;
 }
@@ -80,7 +77,7 @@ int RevisedJulianCalendar::fixedFromRevisedJulian(QVector<int> revisedJulian)
 	const int month=revisedJulian.at(1);
 	const int day=revisedJulian.at(2);
 	// Year BC make no sense here! Don't bother dealing with the leap years...
-	// But note that the calendard were parallel in 325 (Nicaea)
+	// But note that the calendars were parallel in 325 (Nicaea)
 	if (year<325)
 		return JulianCalendar::fixedFromJulian(revisedJulian);
 
