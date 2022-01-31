@@ -2768,6 +2768,7 @@ void Planet::PlanetShaderVars::initLocations(QOpenGLShaderProgram* p)
 	//common uniforms
 	GL(projectionMatrix = p->uniformLocation("projectionMatrix"));
 	GL(tex = p->uniformLocation("tex"));
+	GL(poleLat = p->uniformLocation("poleLat"));
 	GL(lightDirection = p->uniformLocation("lightDirection"));
 	GL(eyeDirection = p->uniformLocation("eyeDirection"));
 	GL(diffuseLight = p->uniformLocation("diffuseLight"));
@@ -3791,6 +3792,30 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 		}
 	}
 
+	if (englishName=="Mars")
+	{
+		// Compute Ls for Mars. From Piqueux et al., Icarus 251 (2015) 332-8 (9). Short algorithm with good approximation.
+		const double t=lastJDE-J2000;
+		const double M = (19.38095 + 0.524020769 * t)*M_PI_180;
+		const double sinM=sin(M);
+		const double sin2M=sin(2.*M);
+		const double sin3M=sin(3.*M);
+		const double Ls = 270.38859 + 0.524038542*t + 10.67848*sinM + 0.62077*sin2M + 0.05031*sin3M;
+		// Then compute latitudes of polar caps: Fig.10 in Smith, David E. et al. "Time Variations of
+		// Mars’ Gravitational Field and Seasonal Changes in the Masses of the Polar Ice Caps."
+		// Journal of Geophysical Research 114.E5 (2009): E05002. DOI:10.1029/2008je003267
+		//double latN= 70.-18.*sin((Ls-195.)*M_PI_180);
+		//double latS=-70.+18.*sin((Ls- 15.)*M_PI_180);
+		double latN= 70.+18.*cos((Ls-125.)*M_PI_180); // goes down to 52°
+		double latS=-68.+19.*cos((Ls-105.)*M_PI_180); // goes up to -49°
+
+		// Finally convert to texture coordinates.
+		float tNorth=static_cast<float>((latN+90.)/180.);
+		float tSouth=static_cast<float>((latS+90.)/180.);
+		GL(shader->setUniformValue(shaderVars->poleLat, tNorth, tSouth));
+	}
+	else
+		GL(shader->setUniformValue(shaderVars->poleLat, 1.1f, -0.1f)); // add some security margin.
 	GL(shader->setAttributeArray(shaderVars->vertex, static_cast<const GLfloat*>(projectedVertexArr.constData()), 3));
 	GL(shader->enableAttributeArray(shaderVars->vertex));
 	GL(shader->setAttributeArray(shaderVars->unprojectedVertex, static_cast<const GLfloat*>(model.vertexArr.constData()), 3));
@@ -3916,6 +3941,8 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 			GL(moonShaderProgram->setUniformValue(moonShaderVars.earthShadow, 3));
 		}
 	}
+
+	GL(shader->setUniformValue(shaderVars->poleLat, 1.1f, -0.1f)); // Avoid streaks across Mars
 
 	// Apply a rotation otherwize the hips surveys don't get rendered at the
 	// proper position.  Not sure why...

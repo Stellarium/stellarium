@@ -786,6 +786,9 @@ private:
 		int orenNayarParameters;
 		int outgasParameters;
 
+		// For Mars poles
+		int poleLat; // latitudes of edges of northern (x) and southern (y) polar cap [texture y, moving from 0 (S) to 1 (N)]. Only used for Mars, use [1, 0] for other objects.
+
 		// Moon-specific variables
 		int earthShadow;
 		int eclipsePush; // apparent brightness push for partial Lunar Eclipse (make bright rim overbright)
