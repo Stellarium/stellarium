@@ -2569,7 +2569,7 @@
               <item row="3" column="0">
                <widget class="QLabel" name="gammaNoteSolarEclipseLabel">
                 <property name="text">
-                 <string>Notes: The quantity gamma is the minimum distance from the axis of lunar shadow cone to the center of Earth, in units of Earth’s equatorial radius. This distance is positive or negative, depending on whether the axis of the shadow cone passes north or south of the Earth's center. Path of solar eclipses more than thousand of years in the past and future are not reliable due to uncertainties in ΔT which is related to Earth's rotation.</string>
+                 <string>Notes: The quantity gamma is the minimum distance from the axis of lunar shadow cone to the center of Earth, in units of Earth’s equatorial radius. This distance is positive or negative, depending on whether the axis of the shadow cone passes north or south of the Earth's center. Path of solar eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation.</string>
                 </property>
                 <property name="wordWrap">
                  <bool>true</bool>
@@ -2709,7 +2709,7 @@
               <item row="3" column="0">
                <widget class="QLabel" name="UncertaintiesNoteLabel">
                 <property name="text">
-                 <string>Note: Local circumstances for eclipses more than thousand of years in the past and future are not reliable due to uncertainties in ΔT which is related to Earth's rotation.</string>
+                 <string>Note: Local circumstances for eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation.</string>
                 </property>
                 <property name="wordWrap">
                  <bool>true</bool>
@@ -2849,7 +2849,7 @@
               <item row="3" column="0">
                <widget class="QLabel" name="gammaNoteLabel">
                 <property name="text">
-                 <string>Notes: The quantity gamma is the minimum distance from the center of the Moon to the axis of Earth’s umbral shadow cone, in units of Earth’s equatorial radius. This distance is positive or negative, depending on whether the Moon passes north or south of the shadow cone axis. Local circumstances for eclipses more than thousand of years in the past and future are not reliable due to uncertainties in ΔT which is related to Earth's rotation.</string>
+                 <string>Notes: The quantity gamma is the minimum distance from the center of the Moon to the axis of Earth’s umbral shadow cone, in units of Earth’s equatorial radius. This distance is positive or negative, depending on whether the Moon passes north or south of the shadow cone axis. Local circumstances for eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation.</string>
                 </property>
                 <property name="wordWrap">
                  <bool>true</bool>

@@ -2568,7 +2568,7 @@ void AstroCalcDialog::saveLunarEclipses()
 			}
 		}
 
-		xlsx.write(count+3, 1, "Note: Local circumstances for eclipses more than thousand of years in the past and future are not reliable due to uncertainties in ΔT which is related to Earth's rotation.");
+		xlsx.write(count+3, 1, "Note: Local circumstances for eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation.");
 
 		for (int i = 0; i < columns; i++)
 		{
@@ -3720,7 +3720,7 @@ void AstroCalcDialog::saveSolarEclipses()
 			}
 		}
 
-		xlsx.write(count+3, 1, "Note: Local circumstances for eclipses more than thousand of years in the past and future are not reliable due to uncertainties in ΔT which is related to Earth's rotation.");
+		xlsx.write(count+3, 1, "Note: Path of eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation.");
 
 		for (int i = 0; i < columns; i++)
 		{
@@ -3821,7 +3821,7 @@ void AstroCalcDialog::saveSolarEclipsesLocal()
 			}
 		}
 
-		xlsx.write(count+3, 1, "Note: Local circumstances for eclipses more than thousand of years in the past and future are not reliable due to uncertainties in ΔT which is related to Earth's rotation.");
+		xlsx.write(count+3, 1, "Note: Local circumstances for eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation.");
 
 		for (int i = 0; i < columns; i++)
 		{
