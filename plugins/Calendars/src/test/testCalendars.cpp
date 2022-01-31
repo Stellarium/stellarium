@@ -985,6 +985,7 @@ void TestCalendars::testIslamic()
 
 void TestCalendars::testHebrew()
 {
+	QVERIFY(HebrewCalendar::hebrewEpoch==-1373427);
 	QVERIFY(-214193==HebrewCalendar::fixedFromHebrew({3174,  5, 10}));
 	QVERIFY( -61387==HebrewCalendar::fixedFromHebrew({3593,  9, 25}));
 	QVERIFY(  25469==HebrewCalendar::fixedFromHebrew({3831,  7,  3}));
@@ -1054,6 +1055,11 @@ void TestCalendars::testHebrew()
 	QVERIFY(HebrewCalendar::hebrewFromFixed( 728714)==QVector<int>({5756, 12,  5}));
 	QVERIFY(HebrewCalendar::hebrewFromFixed( 744313)==QVector<int>({5799,  8, 12}));
 	QVERIFY(HebrewCalendar::hebrewFromFixed( 764652)==QVector<int>({5854,  5,  5}));
+
+	// Bug GH#2153
+	QVERIFY(HebrewCalendar::hebrewFromFixed(GregorianCalendar::fixedFromGregorian({2022, 1, 2})) == QVector<int>({5782, 10, 29}));
+	QVERIFY(HebrewCalendar::hebrewFromFixed(GregorianCalendar::fixedFromGregorian({2022, 1, 3})) == QVector<int>({5782, 11, 1}));
+	QVERIFY(HebrewCalendar::hebrewFromFixed(GregorianCalendar::fixedFromGregorian({2022, 1, 4})) == QVector<int>({5782, 11, 2}));
 }
 
 void TestCalendars::testPersian()

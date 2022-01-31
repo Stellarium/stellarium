@@ -255,7 +255,7 @@ void TelescopeControl::translateActionDescriptions()
 		actionMgr->findAction(name)->setText(description);
 
 		name = centeringScreenActionId.arg(i);
-		description = q_("Centering screen by telescope coordinates #%1").arg(i);
+		description = q_("Center the screen on telescope #%1 coordinates").arg(i);
 		actionMgr->findAction(name)->setText(description);
 	}
 }

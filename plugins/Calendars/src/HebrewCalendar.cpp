@@ -72,7 +72,6 @@ void HebrewCalendar::setJD(double JD)
 
 // get a stringlist of calendar date elements sorted from the largest to the smallest.
 // Year, Month, MonthName, Day, DayName
-// Again, in this plugin only, note no year zero, and AD/BC counting.
 QStringList HebrewCalendar::getDateStrings() const
 {	
 	const int rd=fixedFromHebrew(parts);
@@ -150,8 +149,15 @@ double HebrewCalendar::molad(int hYear, int hMonth)
 int HebrewCalendar::hebrewCalendarElapsedDays(int hYear)
 {
 	const int monthsElapsed=StelUtils::intFloorDiv(235*hYear-234, 19);
-	const int partsElapsed=12084+13753*monthsElapsed;
-	const int days = 29*monthsElapsed+StelUtils::intFloorDiv(partsElapsed, 25920);
+	//const int partsElapsed=12084+13753*monthsElapsed;
+	//const int days = 29*monthsElapsed+StelUtils::intFloorDiv(partsElapsed, 25920);
+	// Alternative solution to avoid large 32bit ints:
+	const int partsElapsed=204+793*StelUtils::imod(monthsElapsed, 1080);
+	const int hoursElapsed=11+12*monthsElapsed
+			+ 793*StelUtils::intFloorDiv(monthsElapsed, 1080)
+			+ StelUtils::intFloorDiv(partsElapsed, 1080);
+	const int days=29*monthsElapsed+ StelUtils::intFloorDiv(hoursElapsed, 24);
+
 	if (StelUtils::imod(3*(days+1), 7)<3)
 		return days+1;
 	else
@@ -229,7 +235,7 @@ int HebrewCalendar::fixedFromHebrew(QVector<int> hebrew)
 
 QVector<int> HebrewCalendar::hebrewFromFixed(int rd)
 {
-	const int approx = StelUtils::intFloorDiv(98496*(rd-hebrewEpoch), 35975351)+1;
+	const int approx = StelUtils::intFloorDivLL(98496*(rd-hebrewEpoch), 35975351)+1;
 
 	int year=approx-1;
 	while (hebrewNewYear(year+1)<=rd)
@@ -238,7 +244,7 @@ QVector<int> HebrewCalendar::hebrewFromFixed(int rd)
 	const int start= (rd<fixedFromHebrew({year, HebrewCalendar::nisan, 1}) ? HebrewCalendar::tishri : HebrewCalendar::nisan);
 
 	int month=start;
-	while (rd>fixedFromHebrew({year, month, lastDayOfHebrewMonth(month, year)}))
+	while (rd>fixedFromHebrew({year, month, lastDayOfHebrewMonth(year, month)}))
 		month++;
 
 	const int day=rd-fixedFromHebrew({year, month, 1})+1;
