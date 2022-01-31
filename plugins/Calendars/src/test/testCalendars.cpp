@@ -29,6 +29,9 @@
 #include "../Calendar.hpp"
 #include "../JulianCalendar.hpp"
 #include "../RevisedJulianCalendar.hpp"
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+#include <QCalendar>
+#endif
 #include "../GregorianCalendar.hpp"
 #include "../ISOCalendar.hpp"
 #include "../IcelandicCalendar.hpp"
@@ -101,7 +104,12 @@ void TestCalendars::testEuropean()
 	QVERIFY(JulianCalendar::fixedFromJulian({1, 1, 1})==JulianCalendar::julianEpoch);
 	QVERIFY(JulianCalendar::fixedFromJulian({1, 1, 1})==GregorianCalendar::fixedFromGregorian({0, JulianCalendar::december, 30}));
 
-	// ADD A FEW MORE CRITICAL TESTS!
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+	// RevisedJulianCalendar should behave identical to Qt's MilankovicCalendar.
+	QCalendar mil(QCalendar::System::Milankovic);
+	for (int year=400; year<10001; year+=100)
+		QVERIFY(RevisedJulianCalendar::isLeap(year)==mil.isLeapYear(year));
+#endif
 	QVERIFY(RevisedJulianCalendar::isLeap( 400)==false);
 	QVERIFY(RevisedJulianCalendar::isLeap( 500)==false);
 	QVERIFY(RevisedJulianCalendar::isLeap( 600)==true);
