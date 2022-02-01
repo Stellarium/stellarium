@@ -73,9 +73,66 @@
        <widget class="QLabel" name="stelWindowTitle">
         <property name="palette">
          <palette>
-          <active/>
-          <inactive/>
-          <disabled/>
+          <active>
+           <colorrole role="Dark">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>119</red>
+              <green>120</green>
+              <blue>120</blue>
+             </color>
+            </brush>
+           </colorrole>
+           <colorrole role="Window">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>239</red>
+              <green>240</green>
+              <blue>241</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </active>
+          <inactive>
+           <colorrole role="Dark">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>119</red>
+              <green>120</green>
+              <blue>120</blue>
+             </color>
+            </brush>
+           </colorrole>
+           <colorrole role="Window">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>239</red>
+              <green>240</green>
+              <blue>241</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </inactive>
+          <disabled>
+           <colorrole role="Dark">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>119</red>
+              <green>120</green>
+              <blue>120</blue>
+             </color>
+            </brush>
+           </colorrole>
+           <colorrole role="Window">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>239</red>
+              <green>240</green>
+              <blue>241</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </disabled>
          </palette>
         </property>
         <property name="font">
@@ -300,7 +357,7 @@
       <item row="1" column="0">
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>7</number>
         </property>
         <widget class="QWidget" name="stackedWidgetPage1">
          <layout class="QGridLayout" name="gridLayout_2">
@@ -2414,7 +2471,7 @@
         </widget>
         <widget class="QWidget" name="stackedWidgetPage8">
          <layout class="QGridLayout" name="gridLayout_18">
-          <item row="0" column="0">
+          <item row="1" column="0">
            <widget class="QTabWidget" name="tabWidgetEclipses">
             <property name="tabPosition">
              <enum>QTabWidget::South</enum>
@@ -2477,95 +2534,6 @@
                 </attribute>
                </widget>
               </item>
-              <item row="1" column="0">
-               <layout class="QHBoxLayout" name="horizontalLayout_43">
-                <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_41">
-                  <item>
-                   <widget class="QLabel" name="solareclipseHeaderLabel">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="font">
-                     <font>
-                      <bold>true</bold>
-                     </font>
-                    </property>
-                    <property name="text">
-                     <string>Table of solar eclipses</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <spacer name="horizontalSpacer_14">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeType">
-                     <enum>QSizePolicy::Fixed</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                  <item>
-                   <widget class="QLabel" name="solareclipseFromLabel">
-                    <property name="text">
-                     <string>From:</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                    <widget class="QSpinBox" name="solareclipseFromYearSpinBox">
-                     <property name="maximum">
-                      <number>9999</number>
-                      </property>
-                      <property name="minimum">
-                      <number>-9999</number>
-                      </property>
-                      <property name="value">
-                       <number>2022</number>
-                      </property>
-                     </widget>
-                    </item>
-                 </layout>
-                </item>
-                <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_42">
-                  <item>
-                   <widget class="QLabel" name="solareclipseYearsLabel">
-                    <property name="text">
-                     <string>to the next</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QSpinBox" name="solareclipseYearsSpinBox">
-                    <property name="maximum">
-                     <number>500</number>
-                    </property>
-                    <property name="minimum">
-                     <number>2</number>
-                    </property>
-                    <property name="value">
-                     <number>10</number>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-               </layout>
-              </item>
               <item row="3" column="0">
                <widget class="QLabel" name="gammaNoteSolarEclipseLabel">
                 <property name="text">
@@ -2583,7 +2551,7 @@
               <string>Local Solar Eclipses</string>
              </attribute>
              <layout class="QGridLayout" name="gridLayout_21">
-              <item row="4" column="0">
+              <item row="3" column="0">
                <layout class="QHBoxLayout" name="horizontalLayout_44">
                 <item>
                  <widget class="QPushButton" name="solareclipseslocalCleanupButton">
@@ -2608,7 +2576,7 @@
                 </item>
                </layout>
               </item>
-              <item row="2" column="0">
+              <item row="1" column="0">
                <widget class="QTreeWidget" name="solareclipselocalTreeWidget">
                 <property name="rootIsDecorated">
                  <bool>false</bool>
@@ -2633,80 +2601,7 @@
                 </attribute>
                </widget>
               </item>
-              <item row="1" column="0">
-               <layout class="QHBoxLayout" name="horizontalLayout_45">
-                <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_46">
-                  <item>
-                   <widget class="QLabel" name="solareclipselocalHeaderLabel">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="font">
-                     <font>
-                      <bold>true</bold>
-                     </font>
-                    </property>
-                    <property name="text">
-                     <string>Table of solar eclipses visible in current location</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QLabel" name="solareclipselocalFromLabel">
-                    <property name="text">
-                     <string>From:</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QSpinBox" name="solareclipselocalFromYearSpinBox">
-                    <property name="maximum">
-                     <number>9999</number>
-                    </property>
-                    <property name="minimum">
-                     <number>-9999</number>
-                    </property>
-                    <property name="value">
-                     <number>2022</number>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_47">
-                  <item>
-                   <widget class="QLabel" name="solareclipselocalYearsLabel">
-                    <property name="text">
-                     <string>to the next</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QSpinBox" name="solareclipselocalYearsSpinBox">
-                    <property name="maximum">
-                     <number>500</number>
-                    </property>
-                    <property name="minimum">
-                     <number>2</number>
-                    </property>
-                    <property name="value">
-                     <number>10</number>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-               </layout>
-              </item>
-              <item row="3" column="0">
+              <item row="2" column="0">
                <widget class="QLabel" name="UncertaintiesNoteLabel">
                 <property name="text">
                  <string>Note: Local circumstances for eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation.</string>
@@ -2723,32 +2618,7 @@
               <string>Lunar Eclipses</string>
              </attribute>
              <layout class="QGridLayout" name="gridLayout_19">
-              <item row="4" column="0">
-               <layout class="QHBoxLayout" name="horizontalLayout_39">
-                <item>
-                 <widget class="QPushButton" name="lunareclipsesCleanupButton">
-                  <property name="text">
-                   <string>Cleanup lunar eclipses</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="lunareclipsesSaveButton">
-                  <property name="text">
-                   <string>Export lunar eclipses...</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="lunareclipsesCalculateButton">
-                  <property name="text">
-                   <string>Calculate lunar eclipses</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-              <item row="2" column="0">
+              <item row="1" column="0">
                <widget class="QTreeWidget" name="lunareclipseTreeWidget">
                 <property name="rootIsDecorated">
                  <bool>false</bool>
@@ -2773,80 +2643,7 @@
                 </attribute>
                </widget>
               </item>
-              <item row="1" column="0">
-               <layout class="QHBoxLayout" name="horizontalLayout_36">
-                <item>
-                 <widget class="QLabel" name="lunareclipseHeaderLabel">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <bold>true</bold>
-                   </font>
-                  </property>
-                  <property name="text">
-                   <string>Table of lunar eclipses</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_37">
-                  <item>
-                   <widget class="QLabel" name="lunareclipseFromLabel">
-                    <property name="text">
-                     <string>From:</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                    <widget class="QSpinBox" name="lunareclipseFromYearSpinBox">
-                     <property name="maximum">
-                      <number>9999</number>
-                      </property>
-                      <property name="minimum">
-                      <number>-9999</number>
-                      </property>
-                      <property name="value">
-                       <number>2022</number>
-                      </property>
-                     </widget>
-                    </item>
-                 </layout>
-                </item>
-                <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_38">
-                  <item>
-                   <widget class="QLabel" name="lunareclipseYearsLabel">
-                    <property name="text">
-                     <string>to the next</string>
-                    </property>
-                   </widget>
-                  </item>
-                   <item>
-                    <widget class="QSpinBox" name="lunareclipseYearsSpinBox">
-                     <property name="maximum">
-                      <number>500</number>
-                      </property>
-                      <property name="minimum">
-                      <number>2</number>
-                      </property>
-                      <property name="value">
-                       <number>10</number>
-                      </property>
-                     </widget>
-                    </item>
-                 </layout>
-                </item>
-               </layout>
-              </item>
-              <item row="3" column="0">
+              <item row="2" column="0">
                <widget class="QLabel" name="gammaNoteLabel">
                 <property name="text">
                  <string>Notes: The quantity gamma is the minimum distance from the center of the Moon to the axis of Earth’s umbral shadow cone, in units of Earth’s equatorial radius. This distance is positive or negative, depending on whether the Moon passes north or south of the shadow cone axis. Local circumstances for eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation.</string>
@@ -2856,9 +2653,126 @@
                 </property>
                </widget>
               </item>
+              <item row="3" column="0">
+               <layout class="QHBoxLayout" name="horizontalLayout_39">
+                <item>
+                 <widget class="QPushButton" name="lunareclipsesCleanupButton">
+                  <property name="text">
+                   <string>Cleanup lunar eclipses</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="lunareclipsesSaveButton">
+                  <property name="text">
+                   <string>Export lunar eclipses...</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="lunareclipsesCalculateButton">
+                  <property name="text">
+                   <string>Calculate lunar eclipses</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
              </layout>
             </widget>
            </widget>
+          </item>
+          <item row="0" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_43">
+            <property name="leftMargin">
+             <number>10</number>
+            </property>
+            <property name="rightMargin">
+             <number>10</number>
+            </property>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_41">
+              <item>
+               <widget class="QLabel" name="eclipseHeaderLabel">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="font">
+                 <font>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Table of solar eclipses</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_14">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Fixed</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QLabel" name="eclipseFromLabel">
+                <property name="text">
+                 <string>From year</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="eclipseFromYearSpinBox">
+                <property name="minimum">
+                 <number>-9999</number>
+                </property>
+                <property name="maximum">
+                 <number>9999</number>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_42">
+              <item>
+               <widget class="QLabel" name="eclipseYearsLabel">
+                <property name="text">
+                 <string>to the next</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="eclipseYearsSpinBox">
+                <property name="minimum">
+                 <number>2</number>
+                </property>
+                <property name="maximum">
+                 <number>500</number>
+                </property>
+                <property name="value">
+                 <number>10</number>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
           </item>
          </layout>
         </widget>

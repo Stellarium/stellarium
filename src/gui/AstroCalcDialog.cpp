@@ -257,15 +257,14 @@ void AstroCalcDialog::createDialogContent()
 	ui->saturnMarkerColor->setText(QChar(0x2644));
 
 	const double JD = core->getJD() + core->getUTCOffset(core->getJD()) / 24;
-	QDateTime currentDT		= StelUtils::jdToQDateTime(JD);
-	QDateTime firstDayOfYear	= QDateTime::fromString(QString("%1-01-01T00:00:01").arg(currentDT.date().year()), Qt::ISODate);
-	QDateTime lastDayOfYear	= QDateTime::fromString(QString("%1-12-31T23:59:59").arg(currentDT.date().year()), Qt::ISODate);
+	QDateTime currentDT		= StelUtils::jdToQDateTime(JD);	
 	ui->dateFromDateTimeEdit->setDateTime(currentDT);
 	ui->dateToDateTimeEdit->setDateTime(currentDT.addMonths(1));
 	ui->phenomenFromDateEdit->setDateTime(currentDT);
 	ui->phenomenToDateEdit->setDateTime(currentDT.addMonths(1));
 	ui->transitFromDateEdit->setDateTime(currentDT);
 	ui->transitToDateEdit->setDateTime(currentDT.addMonths(1));
+	ui->eclipseFromYearSpinBox->setValue(currentDT.date().year());
 	ui->monthlyElevationTimeInfo->setStyleSheet("font-size: 18pt; color: rgb(238, 238, 238);");
 
 	// TODO: Replace QDateTimeEdit by a new StelDateTimeEdit widget to apply full range of dates
@@ -284,6 +283,7 @@ void AstroCalcDialog::createDialogContent()
 	ui->transitFromDateEdit->setToolTip(validDates);
 	ui->transitToDateEdit->setMinimumDate(minDate);
 	ui->transitToDateEdit->setToolTip(validDates);
+	ui->eclipseFromYearSpinBox->setToolTip(QString("%1 %2..%3").arg(q_("Valid range years:"), QString::number(ui->eclipseFromYearSpinBox->minimum()), QString::number(ui->eclipseFromYearSpinBox->maximum())));
 	ui->pushButtonExtraEphemerisDialog->setFixedSize(QSize(20, 20));
 	ui->pushButtonCustomStepsDialog->setFixedSize(QSize(26, 26));
 
@@ -538,6 +538,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), this, SLOT(changePage(QListWidgetItem*, QListWidgetItem*)));
 	connect(ui->tabWidgetGraphs, SIGNAL(currentChanged(int)), this, SLOT(changeGraphsTab(int)));
 	connect(ui->tabWidgetPC, SIGNAL(currentChanged(int)), this, SLOT(changePCTab(int)));
+	connect(ui->tabWidgetEclipses, SIGNAL(currentChanged(int)), this, SLOT(changeEclipsesTab(int)));
 
 	connect(ui->pushButtonExtraEphemerisDialog, SIGNAL(clicked()), this, SLOT(showExtraEphemerisDialog()));
 	connect(ui->pushButtonCustomStepsDialog, SIGNAL(clicked()), this, SLOT(showCustomStepsDialog()));
@@ -548,6 +549,8 @@ void AstroCalcDialog::createDialogContent()
 	ui->ephemerisPushButton->setShortcut(QKeySequence("Shift+F10"));
 	ui->transitsCalculateButton->setShortcut(QKeySequence("Shift+F10"));
 	ui->phenomenaPushButton->setShortcut(QKeySequence("Shift+F10"));
+	ui->solareclipsesCalculateButton->setShortcut(QKeySequence("Shift+F10"));
+	ui->solareclipseslocalCalculateButton->setShortcut(QKeySequence("Shift+F10"));
 	ui->lunareclipsesCalculateButton->setShortcut(QKeySequence("Shift+F10"));
 
 	// Let's improve visibility of the text
@@ -2269,11 +2272,11 @@ void AstroCalcDialog::generateLunarEclipses()
 		initListLunarEclipse();
 
 		const double currentJD = core->getJD();   // save current JD
-		double startyear = ui->lunareclipseFromYearSpinBox->value();
-		double years = ui->lunareclipseYearsSpinBox->value();
+		double startyear = ui->eclipseFromYearSpinBox->value();
+		double years = ui->eclipseYearsSpinBox->value();
 		double startJD, stopJD;
-		StelUtils::getJDFromDate(&startJD, startyear, 1, 1, 0, 0, 0);
-		StelUtils::getJDFromDate(&stopJD, startyear+years, 1, 1, 0, 0, 0);
+		StelUtils::getJDFromDate(&startJD, startyear, 1, 1, 0, 0, 1);
+		StelUtils::getJDFromDate(&stopJD, startyear+years, 12, 31, 23, 59, 59);
 		startJD = startJD - core->getUTCOffset(startJD) / 24.;
 		stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
 		int elements = static_cast<int>((stopJD - startJD) / 29.530588853);
@@ -3033,11 +3036,11 @@ void AstroCalcDialog::generateSolarEclipses()
 		initListSolarEclipse();
 
 		const double currentJD = core->getJD();   // save current JD
-		double startyear = ui->solareclipseFromYearSpinBox->value();
-		double years = ui->solareclipseYearsSpinBox->value();
+		double startyear = ui->eclipseFromYearSpinBox->value();
+		double years = ui->eclipseYearsSpinBox->value();
 		double startJD, stopJD;
-		StelUtils::getJDFromDate(&startJD, startyear, 1, 1, 0, 0, 0);
-		StelUtils::getJDFromDate(&stopJD, startyear+years, 1, 1, 0, 0, 0);
+		StelUtils::getJDFromDate(&startJD, startyear, 1, 1, 0, 0, 1);
+		StelUtils::getJDFromDate(&stopJD, startyear+years, 12, 31, 23, 59, 59);
 		startJD = startJD - core->getUTCOffset(startJD) / 24.;
 		stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
 		QString sarosStr, eclipseTypeStr, gammaStr, magStr, latitudeStr, longitudeStr, altitudeStr, pathWidthStr, durationStr;
@@ -3314,14 +3317,14 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 		initListSolarEclipseLocal();
 
 		const double currentJD = core->getJD();   // save current JD
-		double startyear = ui->solareclipselocalFromYearSpinBox->value();
-		double years = ui->solareclipselocalYearsSpinBox->value();
+		double startyear = ui->eclipseFromYearSpinBox->value();
+		double years = ui->eclipseYearsSpinBox->value();
 		double startJD, stopJD;
-		StelUtils::getJDFromDate(&startJD, startyear, 1, 1, 0, 0, 0);
-		StelUtils::getJDFromDate(&stopJD, startyear+years, 1, 1, 0, 0, 0);
+		StelUtils::getJDFromDate(&startJD, startyear, 1, 1, 0, 0, 1);
+		StelUtils::getJDFromDate(&stopJD, startyear+years, 12, 31, 23, 59, 59);
 		startJD = startJD - core->getUTCOffset(startJD) / 24.;
 		stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
-		QString eclipseTypeStr, magStr, altitudeStr, durationStr;
+		QString eclipseTypeStr, magStr, durationStr;
 		bool centraleclipse = false;
 
 		const bool saveTopocentric = core->getUseTopocentricCoordinates();
@@ -6823,6 +6826,16 @@ void AstroCalcDialog::changeGraphsTab(int index)
 		plotAngularDistanceGraph = true;
 		drawAngularDistanceGraph(); // Is object already selected?
 	}
+}
+
+void AstroCalcDialog::changeEclipsesTab(int index)
+{
+	const QMap<int, QString> headermap = {
+		{0,	q_("Table of solar eclipses")},
+		{1,	q_("Table of solar eclipses visible in current location")},
+		{2,	q_("Table of lunar eclipses")}
+		};
+	ui->eclipseHeaderLabel->setText(headermap.value(index, q_("Table of solar eclipses")));
 }
 
 void AstroCalcDialog::updateTabBarListWidgetWidth()
