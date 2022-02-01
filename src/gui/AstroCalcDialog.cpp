@@ -199,12 +199,6 @@ void AstroCalcDialog::retranslate()
 		ui->phenomenToDateEdit->setToolTip(validDates);
 		ui->transitFromDateEdit->setToolTip(validDates);
 		ui->transitToDateEdit->setToolTip(validDates);
-		ui->lunareclipseFromDateEdit->setToolTip(validDates);
-		ui->lunareclipseToDateEdit->setToolTip(validDates);
-		ui->solareclipseFromDateEdit->setToolTip(validDates);
-		ui->solareclipseToDateEdit->setToolTip(validDates);
-		ui->solareclipselocalFromDateEdit->setToolTip(validDates);
-		ui->solareclipselocalToDateEdit->setToolTip(validDates);
 	}
 }
 
@@ -272,12 +266,6 @@ void AstroCalcDialog::createDialogContent()
 	ui->phenomenToDateEdit->setDateTime(currentDT.addMonths(1));
 	ui->transitFromDateEdit->setDateTime(currentDT);
 	ui->transitToDateEdit->setDateTime(currentDT.addMonths(1));
-	ui->lunareclipseFromDateEdit->setDateTime(firstDayOfYear);
-	ui->lunareclipseToDateEdit->setDateTime(lastDayOfYear);
-	ui->solareclipseFromDateEdit->setDateTime(firstDayOfYear);
-	ui->solareclipseToDateEdit->setDateTime(lastDayOfYear);
-	ui->solareclipselocalFromDateEdit->setDateTime(firstDayOfYear);
-	ui->solareclipselocalToDateEdit->setDateTime(lastDayOfYear);
 	ui->monthlyElevationTimeInfo->setStyleSheet("font-size: 18pt; color: rgb(238, 238, 238);");
 
 	// TODO: Replace QDateTimeEdit by a new StelDateTimeEdit widget to apply full range of dates
@@ -296,18 +284,6 @@ void AstroCalcDialog::createDialogContent()
 	ui->transitFromDateEdit->setToolTip(validDates);
 	ui->transitToDateEdit->setMinimumDate(minDate);
 	ui->transitToDateEdit->setToolTip(validDates);
-	ui->lunareclipseFromDateEdit->setMinimumDate(minDate);
-	ui->lunareclipseFromDateEdit->setToolTip(validDates);
-	ui->lunareclipseToDateEdit->setMinimumDate(minDate);
-	ui->lunareclipseToDateEdit->setToolTip(validDates);
-	ui->solareclipseFromDateEdit->setMinimumDate(minDate);
-	ui->solareclipseFromDateEdit->setToolTip(validDates);
-	ui->solareclipseToDateEdit->setMinimumDate(minDate);
-	ui->solareclipseToDateEdit->setToolTip(validDates);
-	ui->solareclipselocalFromDateEdit->setMinimumDate(minDate);
-	ui->solareclipselocalFromDateEdit->setToolTip(validDates);
-	ui->solareclipselocalToDateEdit->setMinimumDate(minDate);
-	ui->solareclipselocalToDateEdit->setToolTip(validDates);
 	ui->pushButtonExtraEphemerisDialog->setFixedSize(QSize(20, 20));
 	ui->pushButtonCustomStepsDialog->setFixedSize(QSize(26, 26));
 
@@ -594,6 +570,7 @@ void AstroCalcDialog::createDialogContent()
 	ui->transitNotificationLabel->setStyleSheet(style);
 	ui->gammaNoteLabel->setStyleSheet(style);
 	ui->gammaNoteSolarEclipseLabel->setStyleSheet(style);
+	ui->UncertaintiesNoteLabel->setStyleSheet(style);
 	style = "QCheckBox { color: rgb(238, 238, 238); }";
 	ui->sunAltitudeCheckBox->setStyleSheet(style);
 	ui->moonAltitudeCheckBox->setStyleSheet(style);
@@ -2292,8 +2269,11 @@ void AstroCalcDialog::generateLunarEclipses()
 		initListLunarEclipse();
 
 		const double currentJD = core->getJD();   // save current JD
-		double startJD = StelUtils::qDateTimeToJd(QDateTime(ui->lunareclipseFromDateEdit->date()));
-		double stopJD = StelUtils::qDateTimeToJd(QDateTime(ui->lunareclipseToDateEdit->date()));
+		double startyear = ui->lunareclipseFromYearSpinBox->value();
+		double years = ui->lunareclipseYearsSpinBox->value();
+		double startJD, stopJD;
+		StelUtils::getJDFromDate(&startJD, startyear, 1, 1, 0, 0, 0);
+		StelUtils::getJDFromDate(&stopJD, startyear+years, 1, 1, 0, 0, 0);
 		startJD = startJD - core->getUTCOffset(startJD) / 24.;
 		stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
 		int elements = static_cast<int>((stopJD - startJD) / 29.530588853);
@@ -2442,6 +2422,7 @@ void AstroCalcDialog::generateLunarEclipses()
 					int nc = floor(nx / 358. + 0.5 - nd / (12. * 358 * 358));
 					int saros = 1 + ((s + nc * 223 - 1) % 223);
 					if ((s + nc * 223 - 1) < 0) saros -= 223;
+					if (saros < -223) saros += 223;
 
 					// gamma = minimum distance from the center of the Moon to the axis of Earth’s umbral shadow cone
 					// in units of Earth’s equatorial radius. Positive when the Moon passes north of the shadow cone axis.
@@ -2586,6 +2567,8 @@ void AstroCalcDialog::saveLunarEclipses()
 				}
 			}
 		}
+
+		xlsx.write(count+3, 1, q_("Note: Local circumstances for eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation."));
 
 		for (int i = 0; i < columns; i++)
 		{
@@ -3050,8 +3033,11 @@ void AstroCalcDialog::generateSolarEclipses()
 		initListSolarEclipse();
 
 		const double currentJD = core->getJD();   // save current JD
-		double startJD = StelUtils::qDateTimeToJd(QDateTime(ui->solareclipseFromDateEdit->date()));
-		double stopJD = StelUtils::qDateTimeToJd(QDateTime(ui->solareclipseToDateEdit->date()));
+		double startyear = ui->solareclipseFromYearSpinBox->value();
+		double years = ui->solareclipseYearsSpinBox->value();
+		double startJD, stopJD;
+		StelUtils::getJDFromDate(&startJD, startyear, 1, 1, 0, 0, 0);
+		StelUtils::getJDFromDate(&stopJD, startyear+years, 1, 1, 0, 0, 0);
 		startJD = startJD - core->getUTCOffset(startJD) / 24.;
 		stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
 		QString sarosStr, eclipseTypeStr, gammaStr, magStr, latitudeStr, longitudeStr, altitudeStr, pathWidthStr, durationStr;
@@ -3070,7 +3056,7 @@ void AstroCalcDialog::generateSolarEclipses()
 		double InitJD = approxJD + int(tmp) * synodicMonth;
 
 		// Search for solar eclipses at each New Moon
-		for (int i = 0; i <= elements+1; i++)
+		for (int i = 0; i <= elements+2; i++)
 		{
 			double JD = InitJD + synodicMonth * i;
 			if (JD > startJD)
@@ -3180,6 +3166,7 @@ void AstroCalcDialog::generateSolarEclipses()
 					int nc = floor(nx / 358. + 0.5 - nd / (12. * 358 * 358));
 					int saros = 1 + ((s + nc * 223 - 1) % 223);
 					if ((s + nc * 223 - 1) < 0) saros -= 223;
+					if (saros < -223) saros += 223;
 
 					sarosStr = QString("%1").arg(QString::number(saros));
 					gammaStr = QString("%1").arg(QString::number(gamma, 'f', 3));
@@ -3327,8 +3314,11 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 		initListSolarEclipseLocal();
 
 		const double currentJD = core->getJD();   // save current JD
-		double startJD = StelUtils::qDateTimeToJd(QDateTime(ui->solareclipselocalFromDateEdit->date()));
-		double stopJD = StelUtils::qDateTimeToJd(QDateTime(ui->solareclipselocalToDateEdit->date()));
+		double startyear = ui->solareclipselocalFromYearSpinBox->value();
+		double years = ui->solareclipselocalYearsSpinBox->value();
+		double startJD, stopJD;
+		StelUtils::getJDFromDate(&startJD, startyear, 1, 1, 0, 0, 0);
+		StelUtils::getJDFromDate(&stopJD, startyear+years, 1, 1, 0, 0, 0);
 		startJD = startJD - core->getUTCOffset(startJD) / 24.;
 		stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
 		QString eclipseTypeStr, magStr, altitudeStr, durationStr;
@@ -3730,6 +3720,8 @@ void AstroCalcDialog::saveSolarEclipses()
 			}
 		}
 
+		xlsx.write(count+3, 1, q_("Note: Path of eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation."));
+
 		for (int i = 0; i < columns; i++)
 		{
 			xlsx.setColumnWidth(i+1, width[i]+2);
@@ -3828,6 +3820,8 @@ void AstroCalcDialog::saveSolarEclipsesLocal()
 				}
 			}
 		}
+
+		xlsx.write(count+3, 1, q_("Note: Local circumstances for eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation."));
 
 		for (int i = 0; i < columns; i++)
 		{

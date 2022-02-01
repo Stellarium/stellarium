@@ -2526,39 +2526,39 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QDateEdit" name="solareclipseFromDateEdit">
-                    <property name="wrapping">
-                     <bool>true</bool>
-                    </property>
-                    <property name="displayFormat">
-                     <string notr="true">yyyy.MM.dd</string>
-                    </property>
-                    <property name="calendarPopup">
-                     <bool>true</bool>
-                    </property>
-                   </widget>
-                  </item>
+                    <widget class="QSpinBox" name="solareclipseFromYearSpinBox">
+                     <property name="maximum">
+                      <number>9999</number>
+                      </property>
+                      <property name="minimum">
+                      <number>-9999</number>
+                      </property>
+                      <property name="value">
+                       <number>2022</number>
+                      </property>
+                     </widget>
+                    </item>
                  </layout>
                 </item>
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_42">
                   <item>
-                   <widget class="QLabel" name="solareclipseToLabel">
+                   <widget class="QLabel" name="solareclipseYearsLabel">
                     <property name="text">
-                     <string>To:</string>
+                     <string>to the next</string>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QDateEdit" name="solareclipseToDateEdit">
-                    <property name="wrapping">
-                     <bool>true</bool>
+                   <widget class="QSpinBox" name="solareclipseYearsSpinBox">
+                    <property name="maximum">
+                     <number>500</number>
                     </property>
-                    <property name="displayFormat">
-                     <string notr="true">yyyy.MM.dd</string>
+                    <property name="minimum">
+                     <number>2</number>
                     </property>
-                    <property name="calendarPopup">
-                     <bool>true</bool>
+                    <property name="value">
+                     <number>10</number>
                     </property>
                    </widget>
                   </item>
@@ -2569,7 +2569,7 @@
               <item row="3" column="0">
                <widget class="QLabel" name="gammaNoteSolarEclipseLabel">
                 <property name="text">
-                 <string>Notes: The quantity gamma is the minimum distance from the axis of lunar shadow cone to the center of Earth, in units of Earth’s equatorial radius. This distance is positive or negative, depending on whether the axis of the shadow cone passes north or south of the Earth's center. Double click will change current location to the place of greatest eclipse.</string>
+                 <string>Notes: The quantity gamma is the minimum distance from the axis of lunar shadow cone to the center of Earth, in units of Earth’s equatorial radius. This distance is positive or negative, depending on whether the axis of the shadow cone passes north or south of the Earth's center. Path of solar eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation.</string>
                 </property>
                 <property name="wordWrap">
                  <bool>true</bool>
@@ -2666,15 +2666,15 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QDateEdit" name="solareclipselocalFromDateEdit">
-                    <property name="wrapping">
-                     <bool>true</bool>
+                   <widget class="QSpinBox" name="solareclipselocalFromYearSpinBox">
+                    <property name="maximum">
+                     <number>9999</number>
                     </property>
-                    <property name="displayFormat">
-                     <string notr="true">yyyy.MM.dd</string>
+                    <property name="minimum">
+                     <number>-9999</number>
                     </property>
-                    <property name="calendarPopup">
-                     <bool>true</bool>
+                    <property name="value">
+                     <number>2022</number>
                     </property>
                    </widget>
                   </item>
@@ -2683,28 +2683,38 @@
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_47">
                   <item>
-                   <widget class="QLabel" name="solareclipselocalToLabel">
+                   <widget class="QLabel" name="solareclipselocalYearsLabel">
                     <property name="text">
-                     <string>To:</string>
+                     <string>to the next</string>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QDateEdit" name="solareclipselocalToDateEdit">
-                    <property name="wrapping">
-                     <bool>true</bool>
+                   <widget class="QSpinBox" name="solareclipselocalYearsSpinBox">
+                    <property name="maximum">
+                     <number>500</number>
                     </property>
-                    <property name="displayFormat">
-                     <string notr="true">yyyy.MM.dd</string>
+                    <property name="minimum">
+                     <number>2</number>
                     </property>
-                    <property name="calendarPopup">
-                     <bool>true</bool>
+                    <property name="value">
+                     <number>10</number>
                     </property>
                    </widget>
                   </item>
                  </layout>
                 </item>
                </layout>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="UncertaintiesNoteLabel">
+                <property name="text">
+                 <string>Note: Local circumstances for eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation.</string>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+               </widget>
               </item>
              </layout>
             </widget>
@@ -2796,42 +2806,42 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QDateEdit" name="lunareclipseFromDateEdit">
-                    <property name="wrapping">
-                     <bool>true</bool>
-                    </property>
-                    <property name="displayFormat">
-                     <string notr="true">yyyy.MM.dd</string>
-                    </property>
-                    <property name="calendarPopup">
-                     <bool>true</bool>
-                    </property>
-                   </widget>
-                  </item>
+                    <widget class="QSpinBox" name="lunareclipseFromYearSpinBox">
+                     <property name="maximum">
+                      <number>9999</number>
+                      </property>
+                      <property name="minimum">
+                      <number>-9999</number>
+                      </property>
+                      <property name="value">
+                       <number>2022</number>
+                      </property>
+                     </widget>
+                    </item>
                  </layout>
                 </item>
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_38">
                   <item>
-                   <widget class="QLabel" name="lunareclipseToLabel">
+                   <widget class="QLabel" name="lunareclipseYearsLabel">
                     <property name="text">
-                     <string>To:</string>
+                     <string>to the next</string>
                     </property>
                    </widget>
                   </item>
-                  <item>
-                   <widget class="QDateEdit" name="lunareclipseToDateEdit">
-                    <property name="wrapping">
-                     <bool>true</bool>
-                    </property>
-                    <property name="displayFormat">
-                     <string notr="true">yyyy.MM.dd</string>
-                    </property>
-                    <property name="calendarPopup">
-                     <bool>true</bool>
-                    </property>
-                   </widget>
-                  </item>
+                   <item>
+                    <widget class="QSpinBox" name="lunareclipseYearsSpinBox">
+                     <property name="maximum">
+                      <number>500</number>
+                      </property>
+                      <property name="minimum">
+                      <number>2</number>
+                      </property>
+                      <property name="value">
+                       <number>10</number>
+                      </property>
+                     </widget>
+                    </item>
                  </layout>
                 </item>
                </layout>
@@ -2839,7 +2849,7 @@
               <item row="3" column="0">
                <widget class="QLabel" name="gammaNoteLabel">
                 <property name="text">
-                 <string>Note: The quantity gamma is the minimum distance from the center of the Moon to the axis of Earth’s umbral shadow cone, in units of Earth’s equatorial radius. This distance is positive or negative, depending on whether the Moon passes north or south of the shadow cone axis.</string>
+                 <string>Notes: The quantity gamma is the minimum distance from the center of the Moon to the axis of Earth’s umbral shadow cone, in units of Earth’s equatorial radius. This distance is positive or negative, depending on whether the Moon passes north or south of the shadow cone axis. Local circumstances for eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation.</string>
                 </property>
                 <property name="wordWrap">
                  <bool>true</bool>
