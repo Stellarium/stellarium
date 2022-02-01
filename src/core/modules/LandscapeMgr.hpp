@@ -612,10 +612,6 @@ signals:
 	void currentLandscapeChanged(QString currentLandscapeID,QString currentLandscapeName);
 
 private slots:
-	//! Set the light pollution following the Bortle Scale.
-	//! This should not be called from script code, use StelMainScriptAPI::setBortleScaleIndex if you want to change the light pollution.
-	void setAtmosphereBortleLightPollution(const int bIndex);
-
 	//! Reacts to StelCore::locationChanged.
 	void onLocationChanged(const StelLocation &loc);
 	void onTargetLocationChanged(const StelLocation &loc);
@@ -628,11 +624,10 @@ private slots:
 	void cyclicChangeLightPollution();
 
 private:
-	//! Get light pollution luminance level.
+	//! Get light pollution luminance level in cd/m².
 	float getAtmosphereLightPollutionLuminance() const;
-	//! Set light pollution luminance level.
+	//! Set light pollution luminance level in cd/m².
 	void setAtmosphereLightPollutionLuminance(const float f);
-
 
 	//! For a given landscape name, return the landscape ID.
 	//! This takes a name of the landscape, as described in the landscape:name item in the

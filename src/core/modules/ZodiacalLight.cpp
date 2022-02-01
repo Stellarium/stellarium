@@ -184,7 +184,8 @@ void ZodiacalLight::draw(StelCore* core)
 	if ( (drawer->getFlagHasAtmosphere()) && (bortle > 5) ) return;
 
 	float atmFadeIntensity = GETSTELMODULE(LandscapeMgr)->getAtmosphereFadeIntensity();
-	float bortleIntensity = 1.f+ static_cast<float>(bortle-1)*atmFadeIntensity; // Bortle index moderated by atmosphere fader.
+    const float nelm = StelCore::luminanceToNELM(drawer->getLightPollutionLuminance());
+	float bortleIntensity = 1.f+(15.5f-2*nelm)*atmFadeIntensity; // smoothed Bortle index moderated by atmosphere fader.
 
 	// The ZL is best observed from Earth only. On the Moon, we must be happy with ZL along the J2000 ecliptic. (Sorry for LP:1628765, I don't find a general solution.)
 	StelProjector::ModelViewTranformP transfo;

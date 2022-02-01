@@ -223,7 +223,7 @@ void LibGPSLookupHelper::query()
 	if (verbose)
 		qDebug() << "GPSD location" << QString("lat %1, long %2, alt %3").arg(loc.latitude).arg(loc.longitude).arg(loc.altitude);
 
-	loc.bortleScaleIndex=StelLocation::DEFAULT_BORTLE_SCALE_INDEX;
+	loc.lightPollutionLuminance=StelLocation::DEFAULT_LIGHT_POLLUTION_LUMINANCE;
 	// Usually you don't leave your time zone with GPS.
 	loc.ianaTimeZone=StelApp::getInstance().getCore()->getCurrentTimeZone();
 	loc.isUserLocation=true;
@@ -385,7 +385,7 @@ void NMEALookupHelper::nmeaUpdated(const QGeoPositionInfo &update)
 		loc.altitude=( qIsNaN(coord.altitude()) ? 0 : static_cast<int>(floor(coord.altitude())));
 		if (verbose)
 			qDebug() << "Location in progress: Long=" << loc.longitude << " Lat=" << loc.latitude << " Alt" << loc.altitude;
-		loc.bortleScaleIndex=StelLocation::DEFAULT_BORTLE_SCALE_INDEX;
+		loc.lightPollutionLuminance=StelLocation::DEFAULT_LIGHT_POLLUTION_LUMINANCE;
 		// Usually you don't leave your time zone with GPS.
 		loc.ianaTimeZone=core->getCurrentTimeZone();
 		loc.isUserLocation=true;
@@ -1043,7 +1043,7 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 			loc.latitude  = static_cast<float>(latitude);
 			loc.longitude = static_cast<float>(longitude);
 			loc.altitude = 0;
-			loc.bortleScaleIndex = StelLocation::DEFAULT_BORTLE_SCALE_INDEX;
+			loc.lightPollutionLuminance = StelLocation::DEFAULT_LIGHT_POLLUTION_LUMINANCE;
 			loc.ianaTimeZone = (ipTimeZone.isEmpty() ? "" : ipTimeZone);
 			loc.planetName = "Earth";
 			loc.landscapeKey = "";

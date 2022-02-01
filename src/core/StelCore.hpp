@@ -750,6 +750,23 @@ public slots:
 	//! @param positionEqJnow position vector in rectangular equatorial coordinates of current epoch&equinox.
 	QString getIAUConstellation(const Vec3d positionEqJnow) const;
 
+	//! Returns naked-eye limiting magnitude corresponding to the given sky luminance in cd/m².
+	static float luminanceToNELM(float luminance);
+	//! Returns sky luminance in cd/m² corresponding to the given naked-eye limiting magnitude.
+	static float nelmToLuminance(float nelm);
+	//! Returns some representative naked-eye limiting magnitude for the given Bortle scale index.
+	static float bortleScaleIndexToNELM(int index);
+	//! Returns some representative value of zenith luminance in cd/m² for the given Bortle scale index.
+	static float bortleScaleIndexToLuminance(const int index) { return nelmToLuminance(bortleScaleIndexToNELM(index)); }
+	//! Classifies the sky using the Bortle scale using zenith naked-eye limiting magnitude as input.
+	static int nelmToBortleScaleIndex(float nelm);
+	//! Classifies the sky using the Bortle scale using zenith luminance in cd/m² as input.
+	static int luminanceToBortleScaleIndex(const float luminance) { return nelmToBortleScaleIndex(luminanceToNELM(luminance)); }
+	//! Converts luminance in cd/m² to magnitude/arcsec².
+	static float luminanceToMPSAS(const float cdm2) { return std::log10(cdm2/10.8e4f) / -0.4f; }
+	//! Converts magnitude/arcsec² to luminance in cd/m².
+	static float mpsasToLuminance(const float mag) { return 10.8e4f*std::pow(10.f, -0.4f*mag); }
+
 signals:
 	//! This signal is emitted when the observer location has changed.
 	void locationChanged(const StelLocation&);

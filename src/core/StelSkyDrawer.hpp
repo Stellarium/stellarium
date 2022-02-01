@@ -56,7 +56,7 @@ class StelSkyDrawer : public QObject, protected QOpenGLFunctions
 	Q_PROPERTY(double absoluteStarScale READ getAbsoluteStarScale WRITE setAbsoluteStarScale NOTIFY absoluteStarScaleChanged)
 	Q_PROPERTY(double twinkleAmount READ getTwinkleAmount WRITE setTwinkleAmount NOTIFY twinkleAmountChanged)
 	Q_PROPERTY(bool flagStarTwinkle READ getFlagTwinkle WRITE setFlagTwinkle NOTIFY flagTwinkleChanged)
-	Q_PROPERTY(int bortleScaleIndex READ getBortleScaleIndex WRITE setBortleScaleIndex NOTIFY bortleScaleIndexChanged)
+	Q_PROPERTY(double lightPollutionLuminance READ getLightPollutionLuminance WRITE setLightPollutionLuminance NOTIFY lightPollutionLuminanceChanged)
 	Q_PROPERTY(bool flagDrawBigStarHalo READ getFlagDrawBigStarHalo WRITE setFlagDrawBigStarHalo NOTIFY flagDrawBigStarHaloChanged)
 	Q_PROPERTY(bool flagStarSpiky READ getFlagStarSpiky WRITE setFlagStarSpiky NOTIFY flagStarSpikyChanged)
 
@@ -195,36 +195,14 @@ public slots:
 	//! @note option for planetariums
 	bool getFlagForcedTwinkle() const {return flagForcedTwinkle;}
 
-	//! Set the parameters so that the stars disappear at about the limit given by the bortle scale
+	//! Set the parameters so that the stars disappear at about the naked-eye limiting magnitude corresponding
+	//! to the given zenith luminance at moonless night.
 	//! The limit is valid only at a given zoom level (around 60 deg)
-	//! @see https://en.wikipedia.org/wiki/Bortle_scale
-	void setBortleScaleIndex(int index);
-	//! Get the current Bortle scale index
-	//! @see https://en.wikipedia.org/wiki/Bortle_scale
-	int getBortleScaleIndex() const {return bortleScaleIndex;}
-	//! Get the average Naked-Eye Limiting Magnitude (NELM) for current Bortle scale index:
-	//! Class 1 = NELM 7.6-8.0; average NELM is 7.8
-	//! Class 2 = NELM 7.1-7.5; average NELM is 7.3
-	//! Class 3 = NELM 6.6-7.0; average NELM is 6.8
-	//! Class 4 = NELM 6.1-6.5; average NELM is 6.3
-	//! Class 5 = NELM 5.6-6.0; average NELM is 5.8
-	//! Class 6 = NELM 5.1-5.5; average NELM is 5.3
-	//! Class 7 = NELM 4.6-5.0; average NELM is 4.8
-	//! Class 8 = NELM 4.1-4.5; average NELM is 4.3
-	//! Class 9 = NELM 4.0
-	float getNELMFromBortleScale() const;
-	//! Get the average Naked-Eye Limiting Magnitude (NELM) for given Bortle scale index [1..9]
-	//! Class 1 = NELM 7.6-8.0; average NELM is 7.8
-	//! Class 2 = NELM 7.1-7.5; average NELM is 7.3
-	//! Class 3 = NELM 6.6-7.0; average NELM is 6.8
-	//! Class 4 = NELM 6.1-6.5; average NELM is 6.3
-	//! Class 5 = NELM 5.6-6.0; average NELM is 5.8
-	//! Class 6 = NELM 5.1-5.5; average NELM is 5.3
-	//! Class 7 = NELM 4.6-5.0; average NELM is 4.8
-	//! Class 8 = NELM 4.1-4.5; average NELM is 4.3
-	//! Class 9 = NELM 4.0
-	//! @arg idx Bortle Scale Index (valid: 1..9, will be forced to valid range)
-	static float getNELMFromBortleScale(int idx);
+	void setLightPollutionLuminance(double luminance);
+	//! Get the current zenith luminance at moonless night.
+	double getLightPollutionLuminance() const {return lightPollutionLuminance;}
+
+	Q_DECL_DEPRECATED int getBortleScaleIndex() const;
 
 	//! Set flag for drawing a halo around bright stars.
 	void setFlagDrawBigStarHalo(bool b) {if(b!=flagDrawBigStarHalo){ flagDrawBigStarHalo=b; emit flagDrawBigStarHaloChanged(b);}}
@@ -368,8 +346,8 @@ signals:
 	void twinkleAmountChanged(double b);
 	//! Emitted whenever the twinkle flag is toggled
 	void flagTwinkleChanged(bool b);
-	//! Emitted whenever the Bortle scale index changed
-	void bortleScaleIndexChanged(int index);
+	//! Emitted whenever light pollution luminance changed
+	void lightPollutionLuminanceChanged(double luminance);
 	//! Emitted when flag to draw big halo around stars changed
 	void flagDrawBigStarHaloChanged(bool b);
 	//! Emitted on change of star texture
@@ -517,8 +495,8 @@ private:
 	//! Contains the list of colors matching a given B-V index
 	static Vec3f colorTable[128];
 
-	//! The current Bortle Scale index
-	int bortleScaleIndex;
+	//! The current light pollution luminance
+	double lightPollutionLuminance;
 
 	//! The scaling applied to input luminance before they are converted by the StelToneReproducer
 	float inScale;

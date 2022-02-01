@@ -34,6 +34,7 @@
 #include <QImage>
 #include <QList>
 #include <QFont>
+#include <QVariant>
 
 class QSettings;
 class StelLocation;
@@ -140,8 +141,8 @@ public:
 	const StelLocation& getLocation() const {return location;}
 	//! Return if the location is valid (a valid location has a valid planetName!)
 	bool hasLocation() const {return (!(location.planetName.isEmpty()));}
-  	//! Return default Bortle index (light pollution value) or -1 (unknown/no change)
-	int getDefaultBortleIndex() const {return defaultBortleIndex;}
+	//! Return default light pollution luminance in cd/m², if present
+	QVariant getDefaultLightPollutionLuminance() const {return defaultLightPollutionLuminance;}
 	//! Return default fog setting (0/1) or -1 (no change)
 	int getDefaultFogSetting() const {return defaultFogSetting;}
 	//! Return default atmosperic extinction [mag/airmass], or -1 (no change)
@@ -233,7 +234,9 @@ protected:
 	double sinMinAltitudeLimit; //! Minimal altitude of landscape cover. Can be used to construct bounding caps, so that e.g. no stars are drawn below this altitude. Default -0.035, i.e. sin(-2 degrees).
 
 	StelLocation location; //! OPTIONAL. If present, can be used to set location.
-	int defaultBortleIndex; //! May be given in landscape.ini:[location]light_pollution. Default: -1 (no change).
+	/** May be given in landscape.ini:light_pollution_luminance in cd/m². Default: no change.
+	 * Another way (deprecated) is to use landscape.ini:[location]light_pollution to set Bortle scale index. Default: -1 (no change). */
+	QVariant defaultLightPollutionLuminance;
 	int defaultFogSetting;  //! May be given in landscape.ini:[location]display_fog: -1(no change), 0(off), 1(on). Default: -1.
 	double defaultExtinctionCoefficient; //! May be given in landscape.ini:[location]atmospheric_extinction_coefficient. Default -1 (no change).
 	double defaultTemperature; //! [Celsius] May be given in landscape.ini:[location]atmospheric_temperature. default: -1000.0 (no change)

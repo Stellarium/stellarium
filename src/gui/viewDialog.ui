@@ -510,56 +510,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QSpinBox" name="lightPollutionSpinBox">
-                 <property name="maximumSize">
-                  <size>
-                   <width>75</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="minimum">
-                  <number>1</number>
-                 </property>
-                 <property name="maximum">
-                  <number>9</number>
-                 </property>
-                 <property name="value">
-                  <number>1</number>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="label">
-                 <property name="text">
-                  <string>or</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="useLightPollutionFromLocationDataCheckBox">
-                 <property name="toolTip">
-                  <string>Use light pollution data from locations database and ignore settings for light pollution in left box</string>
-                 </property>
-                 <property name="text">
-                  <string>take from locations database</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_12">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
+                <widget class="LightPollutionWidget" name="lightPollutionWidget" native="true"/>
                </item>
               </layout>
              </item>
@@ -5053,6 +5004,12 @@
    <header>Dialog.hpp</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>LightPollutionWidget</class>
+   <extends>QWidget</extends>
+   <header>LightPollutionWidget.hpp</header>
+   <container>1</container>
+  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>page_sky</tabstop>
@@ -5070,7 +5027,6 @@
   <tabstop>zodiacalLightCheckBox</tabstop>
   <tabstop>zodiacalLightBrightnessDoubleSpinBox</tabstop>
   <tabstop>adaptationCheckbox</tabstop>
-  <tabstop>lightPollutionSpinBox</tabstop>
   <tabstop>zhrSlider</tabstop>
   <tabstop>zhrSpinBox</tabstop>
   <tabstop>page_DSO</tabstop>

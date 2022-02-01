@@ -104,7 +104,7 @@ void ViewDialog::retranslate()
 		populateToolTips();
 		populatePlanetMagnitudeAlgorithmsList();
 		populatePlanetMagnitudeAlgorithmDescription();
-		setBortleScaleToolTip(StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScaleIndex());
+        ui->lightPollutionWidget->retranslate();
 		populateHipsGroups();
 		updateHips();
 		//Hack to shrink the tabs to optimal size after language change
@@ -165,7 +165,6 @@ void ViewDialog::createDialogContent()
 
 
 	// TODOs after properties merge:
-	// New method: populateLightPollution may be useful. Make sure it is.
 	// Jupiter's GRS should become property, and recheck the other "from trunk" entries.
 	connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)),&StelApp::getInstance().getSkyCultureMgr(),SLOT(setCurrentSkyCultureNameI18(QString)));
 	connect(&StelApp::getInstance().getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(skyCultureChanged()));
@@ -199,16 +198,10 @@ void ViewDialog::createDialogContent()
 	connectBoolProperty(ui->adaptationCheckbox, "StelSkyDrawer.flagLuminanceAdaptation");
 	connectDoubleProperty(ui->twilightAltitudeDoubleSpinBox, "StelObjectMgr.twilightAltitude");
 
-	// Light pollution
 	StelModule* lmgr = StelApp::getInstance().getModule("LandscapeMgr");
 	Q_ASSERT(lmgr);
-	StelSkyDrawer* drawer = StelApp::getInstance().getCore()->getSkyDrawer();
-	Q_ASSERT(drawer);
-	populateLightPollution();
-	connectBoolProperty(ui->useLightPollutionFromLocationDataCheckBox, "LandscapeMgr.flagUseLightPollutionFromDatabase");
-	connect(lmgr, SIGNAL(flagUseLightPollutionFromDatabaseChanged(bool)), this, SLOT(populateLightPollution()));
-	connectIntProperty(ui->lightPollutionSpinBox, "StelSkyDrawer.bortleScaleIndex");
-	connect(drawer, SIGNAL(bortleScaleIndexChanged(int)), this, SLOT(setBortleScaleToolTip(int)));
+	// Light pollution
+	ui->lightPollutionWidget->setup();
 
 	// atmosphere details
 	connect(ui->pushButtonAtmosphereDetails, SIGNAL(clicked()), this, SLOT(showAtmosphereDialog()));
@@ -869,71 +862,6 @@ void ViewDialog::updateSelectedTypesCheckBoxes()
 	ui->checkBoxSupernovaRemnantsType->setChecked(flags & Nebula::TypeSupernovaRemnants);
 	ui->checkBoxGalaxyClustersType->setChecked(flags & Nebula::TypeGalaxyClusters);
 	ui->checkBoxOtherType->setChecked(flags & Nebula::TypeOther);
-}
-
-// 20160411. New function introduced with trunk merge. Not sure yet if useful or bad with property connections?.
-void ViewDialog::populateLightPollution()
-{
-	StelCore *core = StelApp::getInstance().getCore();
-	StelModule *lmgr = StelApp::getInstance().getModule("LandscapeMgr");
-	int bIdx = core->getSkyDrawer()->getBortleScaleIndex();
-	if (lmgr->property("flagUseLightPollutionFromDatabase").toBool())
-	{
-		StelLocation loc = core->getCurrentLocation();
-		bIdx = loc.bortleScaleIndex;
-		if (!loc.planetName.contains("Earth")) // location not on Earth...
-			bIdx = 1;
-		if (bIdx<1) // ...or it observatory, or it unknown location
-			bIdx = loc.DEFAULT_BORTLE_SCALE_INDEX;
-		ui->lightPollutionSpinBox->setEnabled(false);
-	}
-	else
-		ui->lightPollutionSpinBox->setEnabled(true);
-
-	ui->lightPollutionSpinBox->setValue(bIdx);
-	setBortleScaleToolTip(bIdx);
-}
-
-void ViewDialog::setBortleScaleToolTip(int Bindex)
-{
-	int i = Bindex-1;
-	const QStringList list={
-		//TRANSLATORS: Short description for Class 1 of the Bortle scale
-		q_("Excellent dark-sky site"),
-		//TRANSLATORS: Short description for Class 2 of the Bortle scale
-		q_("Typical truly dark site"),
-		//TRANSLATORS: Short description for Class 3 of the Bortle scale
-		q_("Rural sky"),
-		//TRANSLATORS: Short description for Class 4 of the Bortle scale
-		q_("Rural/suburban transition"),
-		//TRANSLATORS: Short description for Class 5 of the Bortle scale
-		q_("Suburban sky"),
-		//TRANSLATORS: Short description for Class 6 of the Bortle scale
-		q_("Bright suburban sky"),
-		//TRANSLATORS: Short description for Class 7 of the Bortle scale
-		q_("Suburban/urban transition"),
-		//TRANSLATORS: Short description for Class 8 of the Bortle scale
-		q_("City sky"),
-		//TRANSLATORS: Short description for Class 9 of the Bortle scale
-		q_("Inner-city sky")};
-
-	static const QStringList nelm={
-		"7.6-8.0",
-		"7.1-7.5",
-		"6.6-7.0",
-		"6.1-6.5",
-		"5.6-6.0",
-		"5.1-5.5",
-		"4.6-5.0",
-		"4.1-4.5",
-		"4.0"};
-
-	QString tooltip = QString("%1 (%2 %3)")
-			.arg(list.at(i))
-			.arg(q_("The naked-eye limiting magnitude is"))
-			.arg(nelm.at(i));
-
-	ui->lightPollutionSpinBox->setToolTip(tooltip);
 }
 
 void ViewDialog::populateToolTips()

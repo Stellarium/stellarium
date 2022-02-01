@@ -69,6 +69,26 @@ disk and the solar glare. It makes a slight difference whether the
 Sun's disk is plotted before or after the glare, and whether the solar
 sphere is rendered after the atmosphere. 
 
+\section{Light Pollution}
+
+In urban and suburban areas the night sky is lit by ground sources of light.
+This light is scattered by the atmosphere, and the sky appears brighter. This
+reduces visibility of astronomical objects.
+
+Stellarium simulates this effect. The main physical quantity that describes light pollution is zenith luminance, measured in candelas per square meter ($\mathrm{cd/m^2}$). It can be measured using a device called \emph{sky quality meter} (SQM).
+
+For astronomical observations often another unit of sky brightness is useful: magnitudes per square arcsecond ($\mathrm{mag/arcsec^2}$). It is related to $\mathrm{cd/m^2}$ as
+\begin{equation}
+L=10.8\times10^{4-0.4M},
+\end{equation}
+where $L$ is the value in $\mathrm{cd/m^2}$, and $M$ is the value in $\mathrm{mag/arcsec^2}$. Some SQMs give readings in $\mathrm{mag/arcsec^2}$. Stellarium supports input in both units.
+
+Another way to characterize light pollution is by defining the \emph{naked-eye limiting magnitude} (NELM). Unlike luminance, which, although based on human vision, is well-standardized (in particular, the candela is part of the SI), NELM is subjective and variable: it is based on human vision, depends on weather conditions, and is not standardized. In Stellarium the calculations follow \citet{Schaefer:LimitingMagnitudes}. In particular, equation $(18)$ is used, assuming observer's acuity $F_s=1$ (as suggested in the text as ``typical observer''), and absorption term $k_v=0.3$ (as suggested for ``typical weather'').
+
+A related subjective characterization of light pollution is the \emph{Bortle Dark Sky Scale}, which assigns an integral number from 1 to 9 to the sky based on its brightness. This scale is described in detail in Appendix~\ref{ch:BortleScale}.
+
+Stellarium calculates both Bortle class and NELM for user convenience. They aren't used in the actual calculations for visualization.
+
 \section{Tone Mapping}
 
 Tone mapping is the process which attempts to compress the brightness

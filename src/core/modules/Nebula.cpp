@@ -586,9 +586,8 @@ float Nebula::getContrastIndex(const StelCore* core) const
 	// Compute an extended object's contrast index: http://www.unihedron.com/projects/darksky/NELM2BCalc.html
 
 	// Sky brightness
-	// Source: Schaefer, B.E. Feb. 1990. Telescopic Limiting Magnitude. PASP 102:212-229
-	// URL: http://adsbit.harvard.edu/cgi-bin/nph-iarticle_query?bibcode=1990PASP..102..212S [1990PASP..102..212S]
-	const float B_mpsas = 21.58f - 5*log10(std::pow(10.f, 1.586f - static_cast<float>(core->getSkyDrawer()->getNELMFromBortleScale())*0.2f)-1);
+	const auto luminance = core->getSkyDrawer()->getLightPollutionLuminance();
+	const float B_mpsas = StelCore::luminanceToMPSAS(luminance);
 	// Compute an extended object's contrast index
 	// Source: Clark, R.N., 1990. Appendix E in Visual Astronomy of the Deep Sky, Cambridge University Press and Sky Publishing.
 	// URL: http://www.clarkvision.com/visastro/appendix-e.html

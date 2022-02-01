@@ -404,7 +404,8 @@ void LandscapeMgr::update(double deltaTime)
 	}
 
 	// GZ: 2013-09-25 Take light pollution into account!
-	float pollutionAddonBrightness=static_cast<float>(drawer->getBortleScaleIndex()-1)*0.025f; // 0..8, so we assume empirical linear brightening 0..0.02
+    const float nelm = StelCore::luminanceToNELM(drawer->getLightPollutionLuminance());
+	float pollutionAddonBrightness=(15.5f-2*nelm)*0.025f; // 0..8, so we assume empirical linear brightening 0..0.02
 	float lunarAddonBrightness=0.f;
 	if (moonPos[2] > -0.1/1.5)
 		lunarAddonBrightness = qMax(0.2f/-12.f*ssystem->getMoon()->getVMagnitudeWithExtinction(core),0.f)*static_cast<float>(moonPos[2]);
@@ -557,10 +558,10 @@ void LandscapeMgr::init()
 	//Bortle scale is managed by SkyDrawer
 	StelSkyDrawer* drawer = app->getCore()->getSkyDrawer();
 	Q_ASSERT(drawer);
-	setAtmosphereBortleLightPollution(drawer->getBortleScaleIndex());
+	setAtmosphereLightPollutionLuminance(drawer->getLightPollutionLuminance());
 	connect(app->getCore(), SIGNAL(locationChanged(StelLocation)), this, SLOT(onLocationChanged(StelLocation)));
 	connect(app->getCore(), SIGNAL(targetLocationChanged(StelLocation)), this, SLOT(onTargetLocationChanged(StelLocation)));
-	connect(drawer, SIGNAL(bortleScaleIndexChanged(int)), this, SLOT(setAtmosphereBortleLightPollution(int)));
+	connect(drawer, &StelSkyDrawer::lightPollutionLuminanceChanged, this, &LandscapeMgr::setAtmosphereLightPollutionLuminance);
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 
 	QString displayGroup = N_("Display Options");
@@ -660,9 +661,9 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 			setFlagFog(static_cast<bool>(landscape->getDefaultFogSetting()));
 			landscape->setFlagShowFog(static_cast<bool>(landscape->getDefaultFogSetting()));
 		}
-		if (landscape->getDefaultBortleIndex() > 0)
+		if (landscape->getDefaultLightPollutionLuminance().isValid())
 		{
-			drawer->setBortleScaleIndex(landscape->getDefaultBortleIndex());
+			drawer->setLightPollutionLuminance(landscape->getDefaultLightPollutionLuminance().toFloat());
 		}
 		if (landscape->getDefaultAtmosphericExtinction() >= 0.0)
 		{
@@ -823,13 +824,15 @@ void LandscapeMgr::onLocationChanged(const StelLocation &loc)
 	{
 		//this was previously logic in ViewDialog, but should really be on a non-GUI layer
 		StelCore* core = StelApp::getInstance().getCore();
-		int bIdx = loc.bortleScaleIndex;
+		float lum;
 		if (!loc.planetName.contains("Earth")) // location not on Earth...
-			bIdx = 1;
-		if (bIdx<1) // ...or it observatory, or it unknown location
-			bIdx = loc.DEFAULT_BORTLE_SCALE_INDEX;
+			lum = 0;
+		else if(loc.lightPollutionLuminance.isValid())
+			lum = loc.lightPollutionLuminance.toFloat();
+		else // ...or it is an observatory, or it is an unknown location
+			lum = loc.DEFAULT_LIGHT_POLLUTION_LUMINANCE;
 
-		core->getSkyDrawer()->setBortleScaleIndex(bIdx);
+		core->getSkyDrawer()->setLightPollutionLuminance(lum);
 	}
 }
 
@@ -1032,9 +1035,9 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 		if (atmosphere.size()>0)
 			desc += QString("<b>%1</b>: %2<br />").arg(q_("Atmospheric conditions"), atmosphere.join(", "));
 
-		int bortle = landscape->getDefaultBortleIndex();
-		if (bortle>-1)
-			desc += QString("<b>%1</b>: %2 (%3)").arg(q_("Light pollution")).arg(bortle).arg(q_("by Bortle scale"));
+		const auto lightPollutionLum = landscape->getDefaultLightPollutionLuminance();
+		if (lightPollutionLum.isValid())
+			desc += q_("<b>Light pollution</b>: %1 cd/m<sup>2</sup>").arg(lightPollutionLum.toFloat());
 	}	
 	return desc;
 }
@@ -1165,13 +1168,6 @@ void LandscapeMgr::setAtmosphereLightPollutionLuminance(const float f)
 float LandscapeMgr::getAtmosphereLightPollutionLuminance() const
 {
 	return atmosphere->getLightPollutionLuminance();
-}
-
-//! Set the light pollution following the Bortle Scale
-void LandscapeMgr::setAtmosphereBortleLightPollution(const int bIndex)
-{
-	// This is an empirical formula
-	setAtmosphereLightPollutionLuminance(qMax(0.f,0.0004f*powf(static_cast<float>(bIndex-1), 2.1f)));
 }
 
 void LandscapeMgr::setZRotation(const float d)
@@ -1588,28 +1584,34 @@ QString LandscapeMgr::getDescription() const
 void LandscapeMgr::increaseLightPollution()
 {
 	StelCore* core = StelApp::getInstance().getCore();
-	int bidx = core->getSkyDrawer()->getBortleScaleIndex() + 1;
+	const auto lum = core->getSkyDrawer()->getLightPollutionLuminance();
+	auto bidx = core->luminanceToBortleScaleIndex(lum) + 1;
 	if (bidx>9)
 		bidx = 9;
-	core->getSkyDrawer()->setBortleScaleIndex(bidx);
+	const auto newLum = core->bortleScaleIndexToLuminance(bidx);
+	core->getSkyDrawer()->setLightPollutionLuminance(newLum);
 }
 
 void LandscapeMgr::reduceLightPollution()
 {
 	StelCore* core = StelApp::getInstance().getCore();
-	int bidx = core->getSkyDrawer()->getBortleScaleIndex() - 1;
+	const auto lum = core->getSkyDrawer()->getLightPollutionLuminance();
+	auto bidx = core->luminanceToBortleScaleIndex(lum) - 1;
 	if (bidx<1)
 		bidx = 1;
-	core->getSkyDrawer()->setBortleScaleIndex(bidx);
+	const auto newLum = core->bortleScaleIndexToLuminance(bidx);
+	core->getSkyDrawer()->setLightPollutionLuminance(newLum);
 }
 
 void LandscapeMgr::cyclicChangeLightPollution()
 {
 	StelCore* core = StelApp::getInstance().getCore();
-	int bidx = core->getSkyDrawer()->getBortleScaleIndex() + 1;
+	const auto lum = core->getSkyDrawer()->getLightPollutionLuminance();
+	auto bidx = core->luminanceToBortleScaleIndex(lum) + 1;
 	if (bidx>9)
 		bidx = 1;
-	core->getSkyDrawer()->setBortleScaleIndex(bidx);
+	const auto newLum = core->bortleScaleIndexToLuminance(bidx);
+	core->getSkyDrawer()->setLightPollutionLuminance(newLum);
 }
 
 /*
