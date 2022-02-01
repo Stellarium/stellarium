@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-02-01 11:06+0700\n"
+"POT-Creation-Date: 2022-02-01 12:47+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -6775,6 +6775,59 @@ msgstr ""
 
 #: src/gui/DateTimeDialog.cpp:244 src/gui/DateTimeDialog.cpp:245
 msgid "Date and Time in Gregorian calendar"
+msgstr ""
+
+#. TRANSLATORS: Short description for Class 1 of the Bortle scale
+#: src/gui/LightPollutionWidget.cpp:295
+msgid "excellent dark-sky site"
+msgstr ""
+
+#. TRANSLATORS: Short description for Class 2 of the Bortle scale
+#: src/gui/LightPollutionWidget.cpp:297
+msgid "typical truly dark site"
+msgstr ""
+
+#. TRANSLATORS: Short description for Class 3 of the Bortle scale
+#: src/gui/LightPollutionWidget.cpp:299
+msgid "rural sky"
+msgstr ""
+
+#. TRANSLATORS: Short description for Class 4 of the Bortle scale
+#: src/gui/LightPollutionWidget.cpp:301
+msgid "rural/suburban transition"
+msgstr ""
+
+#. TRANSLATORS: Short description for Class 5 of the Bortle scale
+#: src/gui/LightPollutionWidget.cpp:303
+msgid "suburban sky"
+msgstr ""
+
+#. TRANSLATORS: Short description for Class 6 of the Bortle scale
+#: src/gui/LightPollutionWidget.cpp:305
+msgid "bright suburban sky"
+msgstr ""
+
+#. TRANSLATORS: Short description for Class 7 of the Bortle scale
+#: src/gui/LightPollutionWidget.cpp:307
+msgid "suburban/urban transition"
+msgstr ""
+
+#. TRANSLATORS: Short description for Class 8 of the Bortle scale
+#: src/gui/LightPollutionWidget.cpp:309
+msgid "city sky"
+msgstr ""
+
+#. TRANSLATORS: Short description for Class 9 of the Bortle scale
+#: src/gui/LightPollutionWidget.cpp:311
+msgid "inner-city sky"
+msgstr ""
+
+#: src/gui/LightPollutionWidget.cpp:317
+msgid "Bortle class"
+msgstr ""
+
+#: src/gui/LightPollutionWidget.cpp:318
+msgid "Naked-eye limiting magnitude"
 msgstr ""
 
 #: src/scripting/StelScriptMgr.cpp:369 src/ui_configurationDialog.h:1691
@@ -13712,7 +13765,7 @@ msgstr ""
 msgid "manual from SQM"
 msgstr ""
 
-#: src/ui_lightPollutionWidget.h:108
+#: src/ui_lightPollutionWidget.h:108 src/ui_lightPollutionWidget.h:113
 msgid "cd/m²"
 msgstr ""
 
