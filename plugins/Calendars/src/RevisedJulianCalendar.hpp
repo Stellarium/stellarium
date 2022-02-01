@@ -38,6 +38,8 @@ public:
 	virtual ~RevisedJulianCalendar() Q_DECL_OVERRIDE {}
 
 public slots:
+	virtual void retranslate() Q_DECL_OVERRIDE;
+
 	//! Set a calendar date from the Julian day number
 	virtual void setJD(double JD) Q_DECL_OVERRIDE;
 
@@ -45,7 +47,17 @@ public slots:
 	//! Year-Month[1...12]-Day[1...31]
 	virtual void setDate(QVector<int> parts) Q_DECL_OVERRIDE;
 
+	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
+	//! Year, Month, MonthName, Day, DayName
+	virtual QStringList getDateStrings() const Q_DECL_OVERRIDE;
+
+	//! get a formatted complete string for a date
+	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
+
 public:
+	//! return name of week day. This is actually independent from any calendar, just a modulo of JD.
+	static QString weekday(double jd);
+
 	//! returns true for leap years. We handle years prior to 325 like in the regular Julian calendar.
 	static bool isLeap(int year);
 
@@ -56,6 +68,10 @@ public:
 	static QVector<int> revisedJulianFromFixed(int rd);
 
 	constexpr static const int revisedJulianEpoch=1; //! RD of January 1, AD1.
+
+protected:
+	static QMap<int, QString> weekDayNames;
+	static QMap<int, QString> monthNames;
 };
 
 #endif

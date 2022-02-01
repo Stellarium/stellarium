@@ -31,6 +31,7 @@
 
 // We only need to include calendars when we have to call special functions.
 #include "JulianCalendar.hpp"
+#include "RevisedJulianCalendar.hpp"
 #include "GregorianCalendar.hpp"
 //#include "MayaHaabCalendar.hpp"
 //#include "MayaTzolkinCalendar.hpp"
@@ -91,6 +92,7 @@ void CalendarsDialog::createDialogContent()
 
 	// MAKE SURE to connect each calendar's partsChanged to a respective populate... method here.
 	connect(cal->getCal("Julian"),             SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateJulianParts(QVector<int>)));
+	connect(cal->getCal("RevisedJulian"),      SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateRevisedJulianParts(QVector<int>)));
 	connect(cal->getCal("Gregorian"),          SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateGregorianParts(QVector<int>)));
 	connect(cal->getCal("ISO"),                SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateISOParts(QVector<int>)));
 	connect(cal->getCal("MayaLongCount"),      SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateMayaLongCountParts(QVector<int>)));
@@ -127,20 +129,23 @@ void CalendarsDialog::createDialogContent()
 	connectBoolProperty(ui->persianArithmeticCheckBox,  "Calendars.flagShowPersianArithmetic");
 
 	// MAKE SURE to connect all part edit elements respective ...Changed() method here.
-	connect(ui->julianYearSpinBox,      SIGNAL(valueChanged(int)), this, SLOT(julianChanged()));
-	connect(ui->julianMonthSpinBox,     SIGNAL(valueChanged(int)), this, SLOT(julianChanged()));
-	connect(ui->julianDaySpinBox,       SIGNAL(valueChanged(int)), this, SLOT(julianChanged()));
-	connect(ui->gregorianYearSpinBox,   SIGNAL(valueChanged(int)), this, SLOT(gregorianChanged()));
-	connect(ui->gregorianMonthSpinBox,  SIGNAL(valueChanged(int)), this, SLOT(gregorianChanged()));
-	connect(ui->gregorianDaySpinBox,    SIGNAL(valueChanged(int)), this, SLOT(gregorianChanged()));
-	connect(ui->isoYearSpinBox,         SIGNAL(valueChanged(int)), this, SLOT(isoChanged()));
-	connect(ui->isoWeekSpinBox,         SIGNAL(valueChanged(int)), this, SLOT(isoChanged()));
-	connect(ui->isoDaySpinBox,          SIGNAL(valueChanged(int)), this, SLOT(isoChanged()));
-	connect(ui->baktunSpinBox,          SIGNAL(valueChanged(int)), this, SLOT(mayaLongCountChanged()));
-	connect(ui->katunSpinBox,           SIGNAL(valueChanged(int)), this, SLOT(mayaLongCountChanged()));
-	connect(ui->tunSpinBox,             SIGNAL(valueChanged(int)), this, SLOT(mayaLongCountChanged()));
-	connect(ui->uinalSpinBox,           SIGNAL(valueChanged(int)), this, SLOT(mayaLongCountChanged()));
-	connect(ui->kinSpinBox,             SIGNAL(valueChanged(int)), this, SLOT(mayaLongCountChanged()));
+	connect(ui->julianYearSpinBox,		SIGNAL(valueChanged(int)), this, SLOT(julianChanged()));
+	connect(ui->julianMonthSpinBox,		SIGNAL(valueChanged(int)), this, SLOT(julianChanged()));
+	connect(ui->julianDaySpinBox,		SIGNAL(valueChanged(int)), this, SLOT(julianChanged()));
+	connect(ui->revisedJulianYearSpinBox,	SIGNAL(valueChanged(int)), this, SLOT(revisedJulianChanged()));
+	connect(ui->revisedJulianMonthSpinBox,	SIGNAL(valueChanged(int)), this, SLOT(revisedJulianChanged()));
+	connect(ui->revisedJulianDaySpinBox,	SIGNAL(valueChanged(int)), this, SLOT(revisedJulianChanged()));
+	connect(ui->gregorianYearSpinBox,	SIGNAL(valueChanged(int)), this, SLOT(gregorianChanged()));
+	connect(ui->gregorianMonthSpinBox,	SIGNAL(valueChanged(int)), this, SLOT(gregorianChanged()));
+	connect(ui->gregorianDaySpinBox,	SIGNAL(valueChanged(int)), this, SLOT(gregorianChanged()));
+	connect(ui->isoYearSpinBox,		SIGNAL(valueChanged(int)), this, SLOT(isoChanged()));
+	connect(ui->isoWeekSpinBox,		SIGNAL(valueChanged(int)), this, SLOT(isoChanged()));
+	connect(ui->isoDaySpinBox,		SIGNAL(valueChanged(int)), this, SLOT(isoChanged()));
+	connect(ui->baktunSpinBox,		SIGNAL(valueChanged(int)), this, SLOT(mayaLongCountChanged()));
+	connect(ui->katunSpinBox,		SIGNAL(valueChanged(int)), this, SLOT(mayaLongCountChanged()));
+	connect(ui->tunSpinBox,			SIGNAL(valueChanged(int)), this, SLOT(mayaLongCountChanged()));
+	connect(ui->uinalSpinBox,		SIGNAL(valueChanged(int)), this, SLOT(mayaLongCountChanged()));
+	connect(ui->kinSpinBox,			SIGNAL(valueChanged(int)), this, SLOT(mayaLongCountChanged()));
 	// TODO: Indirect handling of Haab/Tzolkin and Xihuitl/Tonalpohualli, with going back and forth to dates set in the GUI elements.
 	//connect(ui->haabMonthSpinBox, SIGNAL(valueChanged(int)), this, SLOT(mayaHaabChanged()));
 	//connect(ui->haabDaySpinBox,   SIGNAL(valueChanged(int)), this, SLOT(mayaHaabChanged()));
@@ -250,6 +255,18 @@ void CalendarsDialog::populateJulianParts(QVector<int> parts)
 		ui->julianWeekdayLineEdit->setText(jul->weekday(jul->getJD()));
 }
 
+void CalendarsDialog::populateRevisedJulianParts(QVector<int> parts)
+{
+	ui->revisedJulianYearSpinBox->setValue(parts.at(0));
+	ui->revisedJulianMonthSpinBox->setValue(parts.at(1));
+	ui->revisedJulianDaySpinBox->setValue(parts.at(2));
+
+	// If the GUI wants to show other related data, we can find the sender. (nullptr when this slot is called directly!)
+	RevisedJulianCalendar *rjul=dynamic_cast<RevisedJulianCalendar*>(sender());
+	if (rjul)
+		ui->revisedJulianWeekdayLineEdit->setText(rjul->weekday(rjul->getJD()));
+}
+
 void CalendarsDialog::populateGregorianParts(QVector<int> parts)
 {
 	ui->gregorianYearSpinBox->setValue(parts.at(0));
@@ -320,23 +337,30 @@ void CalendarsDialog::populateAztecTonalpohualliParts(QVector<int> parts)
 void CalendarsDialog::julianChanged()
 {
 	cal->getCal("Julian")->setDate({ui->julianYearSpinBox->value(),
-					 ui->julianMonthSpinBox->value(),
-					 ui->julianDaySpinBox->value()});
+					ui->julianMonthSpinBox->value(),
+					ui->julianDaySpinBox->value()});
+}
+
+void CalendarsDialog::revisedJulianChanged()
+{
+	cal->getCal("RevisedJulian")->setDate({ui->revisedJulianYearSpinBox->value(),
+					       ui->revisedJulianMonthSpinBox->value(),
+					       ui->revisedJulianDaySpinBox->value()});
 }
 
 void CalendarsDialog::gregorianChanged()
 {
 	cal->getCal("Gregorian")->setDate({ui->gregorianYearSpinBox->value(),
-					    ui->gregorianMonthSpinBox->value(),
-					    ui->gregorianDaySpinBox->value()});
+					   ui->gregorianMonthSpinBox->value(),
+					   ui->gregorianDaySpinBox->value()});
 }
 
 void CalendarsDialog::isoChanged()
 {
 	// TODO proper handling of ISO weekday combo box.
 	cal->getCal("ISO")->setDate({ui->isoYearSpinBox->value(),
-					ui->isoWeekSpinBox->value(),
-					ui->isoDaySpinBox->value()});
+				     ui->isoWeekSpinBox->value(),
+				     ui->isoDaySpinBox->value()});
 }
 
 void CalendarsDialog::mayaLongCountChanged()
@@ -351,23 +375,23 @@ void CalendarsDialog::mayaLongCountChanged()
 void CalendarsDialog::mayaHaabChanged()
 {
 	cal->getCal("MayaHaab")->setDate({ui->haabMonthSpinBox->value(),
-					   ui->haabDaySpinBox->value()});
+					  ui->haabDaySpinBox->value()});
 }
 
 void CalendarsDialog::mayaTzolkinChanged()
 {
 	cal->getCal("MayaTzolkin")->setDate({ui->tzolkinNumberSpinBox->value(),
-					      ui->tzolkinNameSpinBox->value()});
+					     ui->tzolkinNameSpinBox->value()});
 }
 
 void CalendarsDialog::aztecXihuitlChanged()
 {
 	cal->getCal("AztecXihuitl")->setDate({ui->xihuitlMonthSpinBox->value(),
-					   ui->xihuitlDaySpinBox->value()});
+					      ui->xihuitlDaySpinBox->value()});
 }
 
 void CalendarsDialog::aztecTonalpohualliChanged()
 {
 	cal->getCal("AztecTonalpohualli")->setDate({ui->tonalpohualliNumberSpinBox->value(),
-					      ui->tonalpohualliNameSpinBox->value()});
+						    ui->tonalpohualliNameSpinBox->value()});
 }
