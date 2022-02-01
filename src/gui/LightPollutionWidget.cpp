@@ -33,14 +33,14 @@ void LightPollutionWidget::setup()
 
 	ui->manualSlider->setTracking(true);
 	connect(ui->manualSlider, &QSlider::valueChanged, this, &LightPollutionWidget::onSliderMoved);
-	connect(ui->fromSQMmag_SB, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
-			&LightPollutionWidget::onSpinboxEdited);
-	connect(ui->fromSQMcdm2_logSB, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
-			&LightPollutionWidget::onSpinboxEdited);
-	connect(ui->modeCB, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
-			[this](const int index){ setMode(static_cast<Mode>(index)); });
-	connect(ui->unitCB, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
-			[this](const int index){ setUnit(static_cast<Unit>(index)); });
+	connect(ui->fromSQMmag_SB, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+		this, &LightPollutionWidget::onSpinboxEdited);
+	connect(ui->fromSQMcdm2_logSB, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+		this, &LightPollutionWidget::onSpinboxEdited);
+	connect(ui->modeCB, QOverload<int>::of(&QComboBox::currentIndexChanged),
+		this, [this](const int index){ setMode(static_cast<Mode>(index)); });
+	connect(ui->unitCB, QOverload<int>::of(&QComboBox::currentIndexChanged),
+		this, [this](const int index){ setUnit(static_cast<Unit>(index)); });
 
 	const auto luminanceProp = StelApp::getInstance().getStelPropertyManager()->getProperty(PROPERTY_LUMINANCE);
 	connect(this, &LightPollutionWidget::luminanceChanged, luminanceProp, &StelProperty::setValue);
@@ -91,50 +91,50 @@ void LightPollutionWidget::populate()
 
 void LightPollutionWidget::setMode(const Mode mode)
 {
-    // Prevent window resizes on switching between modes
-    const auto minSpinBoxWidth = std::max(ui->fromSQMcdm2_logSB->minimumSizeHint().width(),
-                                          ui->fromSQMmag_SB->minimumSizeHint().width());
-    const auto minManipulatorWidth = minSpinBoxWidth + ui->unitCB->minimumSizeHint().width();
-    ui->manualSlider->setMinimumWidth(minManipulatorWidth);
+	// Prevent window resizes on switching between modes
+	const auto minSpinBoxWidth = std::max(ui->fromSQMcdm2_logSB->minimumSizeHint().width(),
+					      ui->fromSQMmag_SB->minimumSizeHint().width());
+	const auto minManipulatorWidth = minSpinBoxWidth + ui->unitCB->minimumSizeHint().width();
+	ui->manualSlider->setMinimumWidth(minManipulatorWidth);
 
 	ui->modeCB->setCurrentIndex(static_cast<int>(mode));
 	const auto propUseDB = StelApp::getInstance().getStelPropertyManager()->getProperty(PROPERTY_USE_DB);
 	switch(mode)
 	{
 	case Mode::AutoFromDB:
-        ui->horizontalSpacer->changeSize(minManipulatorWidth,0, QSizePolicy::Minimum);
-		ui->manualSlider->hide();
-		ui->fromSQMcdm2_logSB->hide();
-		ui->fromSQMmag_SB->hide();
-		ui->unitCB->hide();
-		propUseDB->setValue(true);
-		break;
-	case Mode::Manual:
-        ui->horizontalSpacer->changeSize(0,0, QSizePolicy::Preferred);
-		ui->manualSlider->show();
-		ui->fromSQMcdm2_logSB->hide();
-		ui->fromSQMmag_SB->hide();
-		ui->unitCB->hide();
-		propUseDB->setValue(false);
-		StelApp::getInstance().getSettings()->setValue(SETTINGS_KEY_MODE, MODE_NAME_MANUAL);
-		break;
-	case Mode::ManualFromSQM:
-        ui->horizontalSpacer->changeSize(0,0, QSizePolicy::Preferred);
-		ui->manualSlider->hide();
-		if(unit()==Unit::mpsas)
-		{
+			ui->horizontalSpacer->changeSize(minManipulatorWidth,0, QSizePolicy::Minimum);
+			ui->manualSlider->hide();
 			ui->fromSQMcdm2_logSB->hide();
-			ui->fromSQMmag_SB->show();
-		}
-		else
-		{
-			ui->fromSQMcdm2_logSB->show();
 			ui->fromSQMmag_SB->hide();
-		}
-		ui->unitCB->show();
-		propUseDB->setValue(false);
-		StelApp::getInstance().getSettings()->setValue(SETTINGS_KEY_MODE, MODE_NAME_MANUAL_FROM_SQM);
-		break;
+			ui->unitCB->hide();
+			propUseDB->setValue(true);
+			break;
+	case Mode::Manual:
+			ui->horizontalSpacer->changeSize(0,0, QSizePolicy::Preferred);
+			ui->manualSlider->show();
+			ui->fromSQMcdm2_logSB->hide();
+			ui->fromSQMmag_SB->hide();
+			ui->unitCB->hide();
+			propUseDB->setValue(false);
+			StelApp::getInstance().getSettings()->setValue(SETTINGS_KEY_MODE, MODE_NAME_MANUAL);
+			break;
+	case Mode::ManualFromSQM:
+			ui->horizontalSpacer->changeSize(0,0, QSizePolicy::Preferred);
+			ui->manualSlider->hide();
+			if(unit()==Unit::mpsas)
+			{
+				ui->fromSQMcdm2_logSB->hide();
+				ui->fromSQMmag_SB->show();
+			}
+			else
+			{
+				ui->fromSQMcdm2_logSB->show();
+				ui->fromSQMmag_SB->hide();
+			}
+			ui->unitCB->show();
+			propUseDB->setValue(false);
+			StelApp::getInstance().getSettings()->setValue(SETTINGS_KEY_MODE, MODE_NAME_MANUAL_FROM_SQM);
+			break;
 	}
 	if(ui->fromSQMmag_SB->isVisible() || ui->fromSQMcdm2_logSB->isVisible())
 		updateSpinBoxValue();
@@ -175,17 +175,17 @@ void LightPollutionWidget::setUnit(const Unit unit)
 			break;
 		}
         if(mode()==Mode::ManualFromSQM)
-        {
-            if(unit == Unit::mpsas)
-            {
-                ui->fromSQMmag_SB->show();
-                ui->fromSQMcdm2_logSB->hide();
-            }
-            else
-            {
-                ui->fromSQMmag_SB->hide();
-                ui->fromSQMcdm2_logSB->show();
-            }
+	{
+		if(unit == Unit::mpsas)
+		{
+			ui->fromSQMmag_SB->show();
+			ui->fromSQMcdm2_logSB->hide();
+		}
+		else
+		{
+			ui->fromSQMmag_SB->hide();
+			ui->fromSQMcdm2_logSB->show();
+		}
         }
 	}
 	if(ui->fromSQMmag_SB->isVisible() || ui->fromSQMcdm2_logSB->isVisible())
@@ -313,10 +313,9 @@ void LightPollutionWidget::updateBortleScaleToolTip()
 	const auto nelm = StelCore::luminanceToNELM(luminanceValue_);
 	const auto bortleIndex = StelCore::nelmToBortleScaleIndex(nelm);
 
-	QString tooltip = q_("Bortle class %1: %2\nNaked-eye limiting magnitude: %3")
-						.arg(bortleIndex)
-						.arg(list.at(bortleIndex - 1))
-						.arg(std::round(nelm*10)*0.1);
+	QString tooltip = QString("%1 %2: %3\n%4: %5")
+			.arg(q_("Bortle class").arg(bortleIndex).arg(list.at(bortleIndex - 1))
+			.arg(q_("Naked-eye limiting magnitude"))).arg(std::round(nelm*10)*0.1);
 
 	ui->manualSlider->setToolTip(tooltip);
 	ui->fromSQMmag_SB->setToolTip(tooltip);

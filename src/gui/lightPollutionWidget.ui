@@ -101,6 +101,9 @@
    </item>
    <item>
     <widget class="QComboBox" name="unitCB">
+     <property name="currentText">
+      <string comment="unit measurement">cd/m²</string>
+     </property>
      <item>
       <property name="text">
        <string>cd/m²</string>
