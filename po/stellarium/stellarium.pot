@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-02-02 05:08+0700\n"
+"POT-Creation-Date: 2022-02-02 05:12+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -6822,7 +6822,8 @@ msgstr ""
 msgid "inner-city sky"
 msgstr ""
 
-#: src/gui/LightPollutionWidget.cpp:316
+#. TRANSLATORS: The tooltip has two lines
+#: src/gui/LightPollutionWidget.cpp:317
 #, qt-format
 msgid ""
 "Bortle class %1: %2\n"
