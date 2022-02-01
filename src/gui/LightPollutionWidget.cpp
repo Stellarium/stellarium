@@ -313,9 +313,8 @@ void LightPollutionWidget::updateBortleScaleToolTip()
 	const auto nelm = StelCore::luminanceToNELM(luminanceValue_);
 	const auto bortleIndex = StelCore::nelmToBortleScaleIndex(nelm);
 
-	QString tooltip = QString("%1 %2: %3\n%4: %5")
-			.arg(q_("Bortle class"), QString::number(bortleIndex), list.at(bortleIndex - 1),
-			     q_("Naked-eye limiting magnitude"), QString::number(std::round(nelm*10)*0.1, 'f', 1));
+	QString tooltip = q_("Bortle class %1: %2\nNaked-eye limiting magnitude: %3")
+			.arg(bortleIndex).arg(list.at(bortleIndex - 1)).arg(std::round(nelm*10)*0.1);
 
 	ui->manualSlider->setToolTip(tooltip);
 	ui->fromSQMmag_SB->setToolTip(tooltip);

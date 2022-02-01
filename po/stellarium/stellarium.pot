@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-02-01 15:38+0700\n"
+"POT-Creation-Date: 2022-02-02 05:08+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -6822,12 +6822,11 @@ msgstr ""
 msgid "inner-city sky"
 msgstr ""
 
-#: src/gui/LightPollutionWidget.cpp:317
-msgid "Bortle class"
-msgstr ""
-
-#: src/gui/LightPollutionWidget.cpp:318
-msgid "Naked-eye limiting magnitude"
+#: src/gui/LightPollutionWidget.cpp:316
+#, qt-format
+msgid ""
+"Bortle class %1: %2\n"
+"Naked-eye limiting magnitude: %3"
 msgstr ""
 
 #: src/scripting/StelScriptMgr.cpp:369 src/ui_configurationDialog.h:1691
