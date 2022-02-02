@@ -4606,6 +4606,7 @@ Vec4d Planet::getRTSTime(const StelCore *core, const double altitude) const
 		{
 			core->setJD(currentJD+mt);
 			core->update(0);
+			ho = - getAngularRadius(core) * M_PI_180; // semidiameter;
 			Theta2=obsPlanet->getSiderealTime(currentJD+mt, currentJDE+mt) * (M_PI/180.) + L;  // [radians]
 			StelUtils::rectToSphe(&ra, &de, ssystem->getMoon()->getEquinoxEquatorialPos(core));
 			cosH0=(sin(ho)-sin(phi)*sin(de))/(cos(phi)*cos(de));
@@ -4618,6 +4619,7 @@ Vec4d Planet::getRTSTime(const StelCore *core, const double altitude) const
 		{
 			core->setJD(currentJD+mr);
 			core->update(0);
+			ho = - getAngularRadius(core) * M_PI_180; // semidiameter;
 			Theta2=obsPlanet->getSiderealTime(currentJD+mr, currentJDE+mr) * (M_PI/180.) + L;  // [radians]
 			StelUtils::rectToSphe(&ra, &de, ssystem->getMoon()->getEquinoxEquatorialPos(core));
 			cosH0=(sin(ho)-sin(phi)*sin(de))/(cos(phi)*cos(de));
@@ -4644,6 +4646,7 @@ Vec4d Planet::getRTSTime(const StelCore *core, const double altitude) const
 		{
 			core->setJD(currentJD+ms);
 			core->update(0);
+			ho = - getAngularRadius(core) * M_PI_180; // semidiameter;
 			Theta2=obsPlanet->getSiderealTime(currentJD+ms, currentJDE+ms) * (M_PI/180.) + L;  // [radians]
 			StelUtils::rectToSphe(&ra, &de, ssystem->getMoon()->getEquinoxEquatorialPos(core));
 			cosH0=(sin(ho)-sin(phi)*sin(de))/(cos(phi)*cos(de));
