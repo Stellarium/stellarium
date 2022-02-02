@@ -48,7 +48,7 @@ void BalinesePawukonCalendar::setDate(QVector<int> parts)
 	//const double dayFraction=JD+0.5 -std::floor(JD);
 
 	this->parts=parts;
-	int fixedFromBP=baliOnOrBefore(parts, fixedFromJD(JD));
+	int fixedFromBP=baliOnOrBefore(parts, fixedFromJD(JD, true));
 
 	// restore time from JD!
 	double frac=StelUtils::fmodpos(JD+0.5+StelApp::getInstance().getCore()->getUTCOffset(JD)/24., 1.);

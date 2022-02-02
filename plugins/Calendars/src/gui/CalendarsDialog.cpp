@@ -87,7 +87,7 @@ void CalendarsDialog::createDialogContent()
 	ui->newHinduLunarCheckBox->hide();
 	ui->newHinduSolarCheckBox->hide();
 #else
-	connect(cal->getCal("Julian"), &JulianCalendar::jdChanged, this, [=](double jd){ui->labelRDvalue->setText(QString::number(Calendar::fixedFromJD(jd)));});
+	connect(cal->getCal("Julian"), &JulianCalendar::jdChanged, this, [=](double jd){ui->labelRDvalue->setText(QString::number(Calendar::fixedFromJD(jd, true)));});
 #endif
 
 	// MAKE SURE to connect each calendar's partsChanged to a respective populate... method here.

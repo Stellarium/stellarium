@@ -31,7 +31,7 @@ void ISOCalendar::setJD(double JD)
 {
 	this->JD=JD;
 
-	const int rd=fixedFromJD(JD);
+	const int rd=fixedFromJD(JD, true);
 
 	parts=isoFromFixed(rd);
 

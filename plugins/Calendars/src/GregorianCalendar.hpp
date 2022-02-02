@@ -70,10 +70,10 @@ public:
 	//! Return RD of Pentecost in Gregorian calendar.
 	static int pentecost(int gYear) { return easter(gYear)+49; }
 
-
-protected:
 	//! @return RD of Gregorian new year
 	static int gregorianNewYear(int year) {return fixedFromGregorian({year, january, 1});}
+
+protected:
 	static int gregorianYearFromFixed(int rd);
 	//! return year-month-day for RD date
 	static QVector<int> gregorianFromFixed(int rd);
