@@ -1760,7 +1760,7 @@ double getDeltaTByReingoldDershowitz(const double jDay)
 	{
 		// [2051..2150]
 		double x = (year-1820)/100.;
-		deltaT = (- 20 + 32*x*x + 0.5628*(2150-year));
+		deltaT = (- 20 + 32*x*x - 0.5628*(2150-year));
 	}
 	else if ((year >= 1987) && (year <= 2050))
 	{
