@@ -39,6 +39,7 @@ private slots:
 	void testPersian();
 	void testBalinesePawukon();
 	void testOldHindu();
+	void testAstro();
 };
 
 #endif // _TESTCALENDARS_HPP
