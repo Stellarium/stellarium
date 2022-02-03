@@ -1690,8 +1690,8 @@ void TestCalendars::testOldHindu()
 }
 
 // A few test for chapter 14. Here we preferred to use Stellarium's extensive astro functions instead of re-implementing what R-D wrote in CC:UE
-void TestCalendars::testAstro()
-{
+//void TestCalendars::testAstro()
+//{
 	// WE CANNOT TEST IT - NO CORE
 	//QVERIFY(Calendar::equationOfTime(Calendar::j2000)<0.); // just get the sign right.
 	//QVERIFY(Calendar::siderealFromMoment(Calendar::j2000)>280.);
@@ -1708,4 +1708,4 @@ void TestCalendars::testAstro()
 	// - 19:16 local true solar time,
 	// - 19:01 local mean solar time, or
 	// - 19:13 zone time.
-}
+//}

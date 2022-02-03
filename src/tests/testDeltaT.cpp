@@ -1046,8 +1046,8 @@ void TestDeltaT::testDeltaTByReingoldDershowitzWideDates()
 	data << 2006 <<  0.000752;
 	data << 2010 <<  0.000772;
 	data << 2050 <<  0.001076;
-	data << 2060 <<  0.002488;
-	data << 2100 <<  0.002998;
+	data << 2060 <<  0.001316;
+	data << 2100 <<  0.002347;
 	data << 2150 <<  0.003802;
 	data << 2200 <<  0.005117;
 
@@ -1062,10 +1062,8 @@ void TestDeltaT::testDeltaTByReingoldDershowitzWideDates()
 		StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
 		double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
 		QVERIFY2(actualError<=1e-5, QString("date=%2 year=%3 result=%4 expected=%5")
-			 .arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
-			 .arg(year)
-			 .arg(QString::number(result, 'f', 5))
-			 .arg(QString::number(expectedResult, 'f', 5))
+			 .arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout)).arg(year)
+			 .arg(QString::number(result, 'f', 5), QString::number(expectedResult, 'f', 5))
 			 .toUtf8());
 	}
 }
