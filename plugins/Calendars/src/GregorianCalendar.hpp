@@ -78,7 +78,7 @@ public slots:
 	//! @return RD date of the n-th k-day
 	static int nthKday(const int n, const Calendar::Day k, const int gYear, const int gMonth, const int gDay);
 
-protected:
+public:
 	constexpr static const int gregorianEpoch=1;  //! RD of January 1, AD1 (greg).
 };
 
