@@ -1699,9 +1699,9 @@ void TestCalendars::testAstro()
 //	QVERIFY(Calendar::)
 
 	// From CC:UE ch.14.78, 14.79
-	QVERIFY(Calendar::timeFromMoment(Calendar::sunset(GregorianCalendar::fixedFromGregorian({1945, 11, 12}), Calendar::urbana)) - (16.+42./60.)/24. < 0.1);
-	StelLocation cfsAlert("CFS Alert", "Nunavut", "Northern America", 82.5f, -62.31666667f, 0, 10, "UT-5", 4, 'X');
-	QVERIFY(qFuzzyCompare(Calendar::timeFromMoment(Calendar::sunset(GregorianCalendar::fixedFromGregorian({1945, 11, 12}), cfsAlert)), Calendar::bogus));
+//	QVERIFY(Calendar::timeFromMoment(Calendar::sunset(GregorianCalendar::fixedFromGregorian({1945, 11, 12}), Calendar::urbana)) - (16.+42./60.)/24. < 0.1);
+//	StelLocation cfsAlert("CFS Alert", "Nunavut", "Northern America", 82.5f, -62.31666667f, 0, 10, "UT-5", 4, 'X');
+//	QVERIFY(qFuzzyCompare(Calendar::timeFromMoment(Calendar::sunset(GregorianCalendar::fixedFromGregorian({1945, 11, 12}), cfsAlert)), Calendar::bogus));
 
 	// Example from before 14.89:
 	// check that Italian Hour 2:00 in Padua on 12.11.1732 (greg) converts to
