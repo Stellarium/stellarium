@@ -977,6 +977,7 @@ void AstroCalcDialog::setHECPositionsHeaderNames()
 {
 
 	hecPositionsHeader.clear();
+	hecPositionsHeader << "#";
 	// TRANSLATORS: name of object
 	hecPositionsHeader << q_("Name");
 	// TRANSLATORS: ecliptic latitude
@@ -1573,10 +1574,13 @@ void AstroCalcDialog::selectCurrentCelestialPosition(const QModelIndex& modelInd
 	}	
 }
 
-void AstroCalcDialog::fillHECPositionTable(QString objectName, QString latitude, QString longitude, double distance)
+void AstroCalcDialog::fillHECPositionTable(int serial, QString objectName, QString latitude, QString longitude, double distance)
 {
 	AHECPosTreeWidgetItem* treeItem = new AHECPosTreeWidgetItem(ui->hecPositionsTreeWidget);
+	treeItem->setText(HECColumnSerial, QString::number(serial));
+	treeItem->setTextAlignment(HECColumnSerial, Qt::AlignHCenter);
 	treeItem->setText(HECColumnName, objectName);
+	treeItem->setTextAlignment(HECColumnName, Qt::AlignLeft);
 	treeItem->setText(HECColumnLatitude, latitude);
 	treeItem->setTextAlignment(HECColumnLatitude, Qt::AlignRight);
 	treeItem->setText(HECColumnLongitude, longitude);
@@ -1596,7 +1600,22 @@ void AstroCalcDialog::currentHECPositions()
 	double distance, longitude, latitude, dl;
 	Vec3d pos;
 	bool sign;
-	QScatterSeries *series = new QScatterSeries();
+	int serial;
+
+	const QMap<QString, int> planetNumberMap = {
+		{ "Mercury", 1 },
+		{ "Venus",   2 },
+		{ "Earth",   3 },
+		{ "Mars",    4 },
+		{ "Jupiter", 5 },
+		{ "Saturn",  6 },
+		{ "Uranus",  7 },
+		{ "Neptune", 8 }
+	};
+
+	QScatterSeries *seriesSun = new QScatterSeries();
+	seriesSun->append(0, 0);
+	QScatterSeries *seriesPlanets = new QScatterSeries();
 
 	const double JD = core->getJD();
 	ui->hecPositionsTimeLabel->setText(q_("Positions on %1").arg(QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD))));
@@ -1622,14 +1641,20 @@ void AstroCalcDialog::currentHECPositions()
 				coordStrings.second = StelUtils::radToDmsStr(longitude, true);
 			}
 
-			fillHECPositionTable(planet->getNameI18n(), coordStrings.first, coordStrings.second, distance);
-			series->append(dl, distance);
+			serial = planetNumberMap.value(planet->getEnglishName(), 0);
+			fillHECPositionTable(serial, planet->getNameI18n(), coordStrings.first, coordStrings.second, distance);
+			seriesPlanets->append(dl, serial);
 		}
 	}
 
 	QPolarChart *chart = new QPolarChart();
-	chart->addSeries(series);
+	chart->addSeries(seriesSun);
+	chart->addSeries(seriesPlanets);
 	chart->legend()->hide();
+	//chart->setBackgroundBrush(QBrush(QColor(86, 87, 90)));
+	chart->setMargins(QMargins(0, 0, 0, 0));
+	//chart->setBackgroundVisible(false);
+	//chart->setTheme(QChart::ChartThemeLight);
 
 	QValueAxis *angularAxis = new QValueAxis();
 	angularAxis->setTickCount(9); // First and last ticks are co-located on 0/360 angle.
@@ -1638,21 +1663,27 @@ void AstroCalcDialog::currentHECPositions()
 	angularAxis->setShadesBrush(QBrush(QColor(249, 249, 255)));
 	chart->addAxis(angularAxis, QPolarChart::PolarOrientationAngular);
 
-	QLogValueAxis *radialAxis = new QLogValueAxis();
-	//radialAxis->setTickCount(9);
-	//radialAxis->setLabelFormat("%d");
-	radialAxis->setBase(10.0);
+	QValueAxis *radialAxis = new QValueAxis();
+	radialAxis->setLabelFormat("%d");
 	chart->addAxis(radialAxis, QPolarChart::PolarOrientationRadial);
 
-	series->attachAxis(radialAxis);
-	series->attachAxis(angularAxis);
-	series->setMarkerSize(7);
+	seriesPlanets->attachAxis(radialAxis);
+	seriesPlanets->attachAxis(angularAxis);
+	seriesPlanets->setMarkerSize(5);
+	seriesPlanets->setColor(Qt::blue);
+	seriesPlanets->setBorderColor(Qt::blue);
 
-	radialAxis->setRange(0, 35);
+	seriesSun->attachAxis(radialAxis);
+	seriesSun->attachAxis(angularAxis);
+	seriesSun->setMarkerSize(10);
+	seriesSun->setColor(Qt::yellow);
+	seriesSun->setBorderColor(Qt::red);
+
+	radialAxis->setRange(0, 8);
 	angularAxis->setRange(0, 360);
 
 	ui->hecPositionsGraph->setChart(chart);
-	//ui->hecPositionsGraph->setRenderHint(QPainter::Antialiasing);
+	//ui->hecPositionsGraph->setBackgroundBrush(QBrush(QColor(86, 87, 90)));
 
 	adjustHECPositionsColumns();
 	// sort-by-name

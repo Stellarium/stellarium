@@ -371,7 +371,7 @@
             </property>
             <widget class="QWidget" name="tabObjects">
              <attribute name="title">
-              <string>Positions</string>
+              <string>Seen now</string>
              </attribute>
              <layout class="QGridLayout" name="gridLayout_22">
               <item row="0" column="0">
@@ -499,6 +499,9 @@
                 <property name="editTriggers">
                  <set>QAbstractItemView::NoEditTriggers</set>
                 </property>
+                <property name="rootIsDecorated">
+                 <bool>false</bool>
+                </property>
                 <property name="uniformRowHeights">
                  <bool>true</bool>
                 </property>
@@ -541,7 +544,6 @@
                <widget class="QLabel" name="hecPositionsHeaderLabel">
                 <property name="font">
                  <font>
-                  <weight>75</weight>
                   <bold>true</bold>
                  </font>
                 </property>
@@ -554,7 +556,11 @@
                </widget>
               </item>
               <item row="1" column="1">
-               <widget class="QChartView" name="hecPositionsGraph"/>
+               <widget class="QChartView" name="hecPositionsGraph">
+                <property name="renderHints">
+                 <set>QPainter::Antialiasing|QPainter::TextAntialiasing</set>
+                </property>
+               </widget>
               </item>
              </layout>
             </widget>
@@ -1071,7 +1077,6 @@
                 </property>
                 <property name="font">
                  <font>
-                  <weight>75</weight>
                   <bold>true</bold>
                  </font>
                 </property>
@@ -1136,7 +1141,6 @@
            <widget class="QLabel" name="transitHeaderLabel">
             <property name="font">
              <font>
-              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -1424,7 +1428,6 @@
            <widget class="QTabWidget" name="tabWidgetGraphs">
             <property name="font">
              <font>
-              <weight>50</weight>
               <bold>false</bold>
              </font>
             </property>
@@ -1547,7 +1550,6 @@
                <widget class="QLabel" name="altVsTimeTitle">
                 <property name="font">
                  <font>
-                  <weight>75</weight>
                   <bold>true</bold>
                  </font>
                 </property>
@@ -1608,7 +1610,6 @@
                <widget class="QLabel" name="aziVsTimeTitle">
                 <property name="font">
                  <font>
-                  <weight>75</weight>
                   <bold>true</bold>
                  </font>
                 </property>
@@ -1753,7 +1754,6 @@
                <widget class="QLabel" name="monthlyElevationTitle">
                 <property name="font">
                  <font>
-                  <weight>75</weight>
                   <bold>true</bold>
                  </font>
                 </property>
@@ -2058,7 +2058,6 @@
                <widget class="QLabel" name="angularDistanceTitle">
                 <property name="font">
                  <font>
-                  <weight>75</weight>
                   <bold>true</bold>
                  </font>
                 </property>
@@ -2545,7 +2544,6 @@
                <widget class="QLabel" name="pcDistanceGraphLabel">
                 <property name="font">
                  <font>
-                  <weight>75</weight>
                   <bold>true</bold>
                  </font>
                 </property>
@@ -2796,7 +2794,6 @@
                 </property>
                 <property name="font">
                  <font>
-                  <weight>75</weight>
                   <bold>true</bold>
                  </font>
                 </property>

@@ -83,7 +83,8 @@ public:
 	//! (heliocentric ecliptic coordinates)
 	//! @enum HECPositionsColumns
 	enum HECPositionsColumns {
-		HECColumnName,          //! name of object
+		HECColumnSerial,        //! serial number of the planet
+		HECColumnName,          //! name of the planet
 		HECColumnLatitude,      //! heliocentric ecliptical latitude
 		HECColumnLongitude,     //! heliocentric ecliptical longitude
 		HECColumnDistance,      //! distance
@@ -483,7 +484,7 @@ private:
 					QString angularSize, QString angularSizeToolTip, QString extraData,
 					QString extraDataToolTip, QString transitTime, QString maxElevation,
 					QString sElongation, QString objectType);
-	void fillHECPositionTable(QString objectName, QString latitude, QString longitude, double distance);
+	void fillHECPositionTable(int serial, QString objectName, QString latitude, QString longitude, double distance);
 
 	//! Calculation conjunctions and oppositions.
 	//! @note Ported from KStars, should be improved, because this feature calculates
@@ -694,6 +695,10 @@ private:
 		if (column == AstroCalcDialog::HECColumnLatitude || column == AstroCalcDialog::HECColumnLongitude)
 		{
 			return StelUtils::getDecAngle(text(column)) < StelUtils::getDecAngle(other.text(column));
+		}
+		else if (column == AstroCalcDialog::HECColumnSerial)
+		{
+			return text(column).toInt() < other.text(column).toInt();
 		}
 		else if (column == AstroCalcDialog::HECColumnDistance)
 		{
