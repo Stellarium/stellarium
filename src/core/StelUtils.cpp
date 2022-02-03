@@ -1776,9 +1776,7 @@ double getDeltaTByReingoldDershowitz(const double jDay)
 	}
 	else if ((year >= 1800) && (year <= 1986))
 	{
-		// FIXME: This part should be check because this part gives the strange values of DeltaT (see unit tests)
 		double c = (getFixedFromGregorian(1900, 1, 1)-getFixedFromGregorian(year, 7, 1))/36525.;
-
 		if (year >= 1900) // [1900..1986]
 		{
 			deltaT = ((((((-0.212591*c + 0.677066)*c - 0.861938)*c + 0.553040)*c - 0.181133)*c + 0.025184)*c + 0.000297)*c - 0.00002;
@@ -2363,10 +2361,15 @@ float *ComputeCosSinRhoZone(const float dRho, const unsigned int segments, const
 
 int getFixedFromGregorian(const int year, const int month, const int day)
 {
+	bool leap = false;
+	if (year % 100 == 0)
+		leap = (year % 400 == 0);
+	else
+		leap = (year % 4 == 0);
 	int y = year - 1;
 	int r = 365*y + intFloorDiv(y, 4) - intFloorDiv(y, 100) + intFloorDiv(y, 400) + (367*month-362)/12 + day;
 	if (month>2)
-		r += (isLeapYear(year) ? -1 : -2);
+		r += (leap ? -1 : -2);
 
 	return r;
 }

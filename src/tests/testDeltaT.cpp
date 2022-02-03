@@ -1038,8 +1038,8 @@ void TestDeltaT::testDeltaTByReingoldDershowitzWideDates()
 	// TODO: Compute and fill the test data for range [1800..1986]
 	//data << 1800 << 128.824; // pass: 1e-3 ; ??? seems equation has wrong signs for terms
 	data << 1850 <<  1.755490;
-	//data << 1890 <<  0.002340; // pass: 1e-4
-	//data << 1900 <<  0.000591; // pass: 1e-3
+	data << 1890 <<  0.002400;
+	data << 1900 << -0.000020;
 	data << 1987 <<  0.000640;
 	data << 2000 <<  0.000739;
 	data << 2005 <<  0.000749;
@@ -1051,6 +1051,7 @@ void TestDeltaT::testDeltaTByReingoldDershowitzWideDates()
 	data << 2150 <<  0.003802;
 	data << 2200 <<  0.005117;
 
+	// TODO: switch to use seconds
 	while(data.count() >= 2)
 	{
 		int year = data.takeFirst().toInt();
