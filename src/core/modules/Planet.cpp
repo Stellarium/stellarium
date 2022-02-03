@@ -4554,15 +4554,15 @@ Vec4d Planet::getRTSTime(const StelCore *core, const double altitude) const
 
 	if ((getEnglishName()=="Moon") && (loc.planetName=="Earth"))
 	{
-		StelCore* core = StelApp::getInstance().getCore();
+		StelCore* core1 = StelApp::getInstance().getCore();
 		static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-		double ho = - getAngularRadius(core) * M_PI_180; // semidiameter;
+		double ho = - getAngularRadius(core1) * M_PI_180; // semidiameter;
 		double hoRefraction = 0.; 
 
-		if (core->getSkyDrawer()->getFlagHasAtmosphere())
+		if (core1->getSkyDrawer()->getFlagHasAtmosphere())
 		{
 			// canonical" refraction at horizon is -34'. Replace by pressure-dependent value here!
-			Refraction refraction=core->getSkyDrawer()->getRefraction();
+			Refraction refraction=core1->getSkyDrawer()->getRefraction();
 			Vec3d zeroAlt(1.0,0.0,0.0);
 			refraction.backward(zeroAlt);
 			hoRefraction = asin(zeroAlt[2]);
@@ -4570,12 +4570,12 @@ Vec4d Planet::getRTSTime(const StelCore *core, const double altitude) const
 		if (altitude != 0.)
 			ho = altitude*M_PI_180; // Not sure if we use refraction for off-zero settings?
 
-		PlanetP obsPlanet = core->getCurrentPlanet();
+		PlanetP obsPlanet = core1->getCurrentPlanet();
 		const double rotRate = obsPlanet->getSiderealDay();
 
 		double ra, de;
 		double Theta2=obsPlanet->getSiderealTime(currentJD, currentJDE) * (M_PI/180.) + L;  // [radians]
-		StelUtils::rectToSphe(&ra, &de, ssystem->getMoon()->getEquinoxEquatorialPos(core));
+		StelUtils::rectToSphe(&ra, &de, ssystem->getMoon()->getEquinoxEquatorialPos(core1));
 		ho += hoRefraction;
 		double cosH0=(sin(ho)-sin(phi)*sin(de))/(cos(phi)*cos(de));
 		double h2=StelUtils::fmodpos(Theta2-ra, 2.*M_PI); if (h2>M_PI) h2-=2.*M_PI; // Hour angle at currentJD. This should be [-pi, pi]
@@ -4606,8 +4606,8 @@ Vec4d Planet::getRTSTime(const StelCore *core, const double altitude) const
 		// Find exact transiting time
 		for (int i = 0; i <= 4; i++)
 		{
-			core->setJD(currentJD+mt);
-			core->update(0);
+			core1->setJD(currentJD+mt);
+			core1->update(0);
 			Theta2=obsPlanet->getSiderealTime(currentJD+mt, currentJDE+mt) * (M_PI/180.) + L;  // [radians]
 			StelUtils::rectToSphe(&ra, &de, ssystem->getMoon()->getEquinoxEquatorialPos(core));
 			cosH0=(sin(ho)-sin(phi)*sin(de))/(cos(phi)*cos(de));
@@ -4618,14 +4618,14 @@ Vec4d Planet::getRTSTime(const StelCore *core, const double altitude) const
 		// Find exact rising time
 		for (int i = 0; i <= 4; i++)
 		{
-			core->setJD(currentJD+mr);
-			core->update(0);
-			ho = - getAngularRadius(core) * M_PI_180; // semidiameter;
+			core1->setJD(currentJD+mr);
+			core1->update(0);
+			ho = - getAngularRadius(core1) * M_PI_180; // semidiameter;
 			ho += hoRefraction;
 			if (altitude != 0.)
 				ho = altitude*M_PI_180; // Not sure if we use refraction for off-zero settings?
 			Theta2=obsPlanet->getSiderealTime(currentJD+mr, currentJDE+mr) * (M_PI/180.) + L;  // [radians]
-			StelUtils::rectToSphe(&ra, &de, ssystem->getMoon()->getEquinoxEquatorialPos(core));
+			StelUtils::rectToSphe(&ra, &de, ssystem->getMoon()->getEquinoxEquatorialPos(core1));
 			cosH0=(sin(ho)-sin(phi)*sin(de))/(cos(phi)*cos(de));
 			h2=StelUtils::fmodpos(Theta2-ra, 2.*M_PI); if (h2>M_PI) h2-=2.*M_PI; // Hour angle at currentJD. This should be [-pi, pi]
 			flag=0.;
@@ -4648,10 +4648,10 @@ Vec4d Planet::getRTSTime(const StelCore *core, const double altitude) const
 		// Find exact setting time
 		for (int i = 0; i <= 4; i++)
 		{
-			core->setJD(currentJD+ms);
-			core->update(0);
+			core1->setJD(currentJD+ms);
+			core1->update(0);
 			ho = - getAngularRadius(core) * M_PI_180; // semidiameter;
-			if (core->getSkyDrawer()->getFlagHasAtmosphere())
+			if (core1->getSkyDrawer()->getFlagHasAtmosphere())
 			ho += hoRefraction;
 			if (altitude != 0.)
 				ho = altitude*M_PI_180; // Not sure if we use refraction for off-zero settings?
@@ -4675,8 +4675,8 @@ Vec4d Planet::getRTSTime(const StelCore *core, const double altitude) const
 			}
 			ms += ms2;
 		}
-		core->setJD(currentJD);
-		core->update(0); // enforce update
+		core1->setJD(currentJD);
+		core1->update(0); // enforce update
 	}
 	else
 	{
