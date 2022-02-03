@@ -56,7 +56,6 @@ public slots:
 	//! get a formatted complete string for a date
 	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
-public:
 	//! return name of week day. This is actually independent from any calendar, just a modulo of JD.
 	static QString weekday(double jd);
 
@@ -68,6 +67,7 @@ public:
 	//! find date in the Julian calendar from RD number (may be used in other calendars!)
 	static QVector<int> julianFromFixed(int rd);
 
+public:
 	constexpr static const int julianEpoch=-1; //! RD of January 1, AD1 (jul.).
 
 protected:

@@ -51,11 +51,13 @@ public slots:
 	//! get a formatted complete string for a date ("nth of the monthname, Year X in the YY olympiad")
 	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
-public:
+	//! return Julian year from { olympiad, year}
 	static int julianYearFromOlympiad(QVector<int>odate);
 
+	//! return { olympiad, year}
 	static QVector<int> olympiadFromJulianYear(int jYear);
 
+public:
 	constexpr static const int olympiadStart=-776;
 };
 

@@ -52,11 +52,9 @@ public slots:
 	//! get a formatted complete string for a date
 	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
-public:
 	//! returns true for leap years
 	static bool isLeap(int year);
 
-	constexpr static const int gregorianEpoch=1;  //! RD of January 1, AD1 (greg).
 	//! auxiliary functions from CC.UE ch2.5
 	//! Return R.D. of date in the Gregorian calendar.
 	static int fixedFromGregorian(QVector<int> gregorian);
@@ -73,13 +71,15 @@ public:
 	//! @return RD of Gregorian new year
 	static int gregorianNewYear(int year) {return fixedFromGregorian({year, january, 1});}
 
-protected:
 	static int gregorianYearFromFixed(int rd);
 	//! return year-month-day for RD date
 	static QVector<int> gregorianFromFixed(int rd);
 
 	//! @return RD date of the n-th k-day
 	static int nthKday(const int n, const Calendar::Day k, const int gYear, const int gMonth, const int gDay);
+
+protected:
+	constexpr static const int gregorianEpoch=1;  //! RD of January 1, AD1 (greg).
 };
 
 #endif

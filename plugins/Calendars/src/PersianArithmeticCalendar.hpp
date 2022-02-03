@@ -50,7 +50,6 @@ public slots:
 	//! get a formatted complete string for a date
 	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
-public:
 	//! returns true for leap years
 	static bool isLeap(int pYear);
 
