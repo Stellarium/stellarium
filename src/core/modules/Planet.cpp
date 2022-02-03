@@ -4557,6 +4557,7 @@ Vec4d Planet::getRTSTime(const StelCore *core, const double altitude) const
 		StelCore* core = StelApp::getInstance().getCore();
 		static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 		double ho = - getAngularRadius(core) * M_PI_180; // semidiameter;
+		double hoRefraction = 0.; 
 
 		if (core->getSkyDrawer()->getFlagHasAtmosphere())
 		{
@@ -4564,7 +4565,7 @@ Vec4d Planet::getRTSTime(const StelCore *core, const double altitude) const
 			Refraction refraction=core->getSkyDrawer()->getRefraction();
 			Vec3d zeroAlt(1.0,0.0,0.0);
 			refraction.backward(zeroAlt);
-			ho += asin(zeroAlt[2]);
+			hoRefraction = asin(zeroAlt[2]);
 		}
 		if (altitude != 0.)
 			ho = altitude*M_PI_180; // Not sure if we use refraction for off-zero settings?
@@ -4575,6 +4576,7 @@ Vec4d Planet::getRTSTime(const StelCore *core, const double altitude) const
 		double ra, de;
 		double Theta2=obsPlanet->getSiderealTime(currentJD, currentJDE) * (M_PI/180.) + L;  // [radians]
 		StelUtils::rectToSphe(&ra, &de, ssystem->getMoon()->getEquinoxEquatorialPos(core));
+		ho += hoRefraction;
 		double cosH0=(sin(ho)-sin(phi)*sin(de))/(cos(phi)*cos(de));
 		double h2=StelUtils::fmodpos(Theta2-ra, 2.*M_PI); if (h2>M_PI) h2-=2.*M_PI; // Hour angle at currentJD. This should be [-pi, pi]
 		mt=-h2*(0.5*rotRate/M_PI);
@@ -4606,7 +4608,6 @@ Vec4d Planet::getRTSTime(const StelCore *core, const double altitude) const
 		{
 			core->setJD(currentJD+mt);
 			core->update(0);
-			ho = - getAngularRadius(core) * M_PI_180; // semidiameter;
 			Theta2=obsPlanet->getSiderealTime(currentJD+mt, currentJDE+mt) * (M_PI/180.) + L;  // [radians]
 			StelUtils::rectToSphe(&ra, &de, ssystem->getMoon()->getEquinoxEquatorialPos(core));
 			cosH0=(sin(ho)-sin(phi)*sin(de))/(cos(phi)*cos(de));
@@ -4620,14 +4621,7 @@ Vec4d Planet::getRTSTime(const StelCore *core, const double altitude) const
 			core->setJD(currentJD+mr);
 			core->update(0);
 			ho = - getAngularRadius(core) * M_PI_180; // semidiameter;
-			if (core->getSkyDrawer()->getFlagHasAtmosphere())
-			{
-				// canonical" refraction at horizon is -34'. Replace by pressure-dependent value here!
-				Refraction refraction=core->getSkyDrawer()->getRefraction();
-				Vec3d zeroAlt(1.0,0.0,0.0);
-				refraction.backward(zeroAlt);
-				ho += asin(zeroAlt[2]);
-			}
+			ho += hoRefraction;
 			if (altitude != 0.)
 				ho = altitude*M_PI_180; // Not sure if we use refraction for off-zero settings?
 			Theta2=obsPlanet->getSiderealTime(currentJD+mr, currentJDE+mr) * (M_PI/180.) + L;  // [radians]
@@ -4658,13 +4652,7 @@ Vec4d Planet::getRTSTime(const StelCore *core, const double altitude) const
 			core->update(0);
 			ho = - getAngularRadius(core) * M_PI_180; // semidiameter;
 			if (core->getSkyDrawer()->getFlagHasAtmosphere())
-			{
-				// canonical" refraction at horizon is -34'. Replace by pressure-dependent value here!
-				Refraction refraction=core->getSkyDrawer()->getRefraction();
-				Vec3d zeroAlt(1.0,0.0,0.0);
-				refraction.backward(zeroAlt);
-				ho += asin(zeroAlt[2]);
-			}
+			ho += hoRefraction;
 			if (altitude != 0.)
 				ho = altitude*M_PI_180; // Not sure if we use refraction for off-zero settings?
 			Theta2=obsPlanet->getSiderealTime(currentJD+ms, currentJDE+ms) * (M_PI/180.) + L;  // [radians]
