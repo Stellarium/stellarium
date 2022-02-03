@@ -67,7 +67,7 @@ public slots:
 	//! Convert between AUC and Julian year numbers
 	static int aucYearFromJulian(int julianYear);
 
-	//! return a Roman number (1...19)
+	//! return a Roman number (within int range). Uses multiplicative terms for num>5000.
 	static QString romanNumber(const int num);
 
 public:
