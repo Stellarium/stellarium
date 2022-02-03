@@ -51,7 +51,7 @@ ObsListDialog::ObsListDialog ( QObject* parent ) : StelDialog ( "Observing list"
     observingListJsonPath = StelFileMgr::findFile ( "data", ( StelFileMgr::Flags ) ( StelFileMgr::Directory|StelFileMgr::Writable ) ) + "/" + QString ( JSON_FILE_NAME );
     bookmarksJsonPath = StelFileMgr::findFile ( "data", ( StelFileMgr::Flags ) ( StelFileMgr::Directory|StelFileMgr::Writable ) ) + "/" + QString ( JSON_BOOKMARKS_FILE_NAME );
     createEditDialog_instance = Q_NULLPTR;
-    defaultListUuid_ = "";
+    defaultListOlud_ = "";
 }
 
 ObsListDialog::~ObsListDialog()
@@ -170,11 +170,11 @@ void ObsListDialog::setObservingListHeaderNames()
 /*
  * Add row in the obsListListModel
 */
-void ObsListDialog::addModelRow ( int number, QString uuid, QString name, QString nameI18n, QString type, QString ra, QString dec, QString magnitude, QString constellation )
+void ObsListDialog::addModelRow (int number, QString olud, QString name, QString nameI18n, QString type, QString ra, QString dec, QString magnitude, QString constellation )
 {
     QStandardItem* item = Q_NULLPTR;
 
-    item = new QStandardItem ( uuid );
+    item = new QStandardItem (olud );
     item->setEditable ( false );
     obsListListModel->setItem ( number, ColumnUUID, item );
 
@@ -300,9 +300,9 @@ void ObsListDialog::obsListEditButtonPressed()
 /**
  * Open the observing list create/edit dialog
 */
-void ObsListDialog::invokeObsListCreateEditDialog ( string listUuid )
+void ObsListDialog::invokeObsListCreateEditDialog ( string listOlud )
 {
-    createEditDialog_instance = ObsListCreateEditDialog::Instance ( listUuid );
+    createEditDialog_instance = ObsListCreateEditDialog::Instance (listOlud );
     connect ( createEditDialog_instance, SIGNAL ( exitButtonClicked() ), this, SLOT ( obsListCreateEditDialogClosed() ) );
     createEditDialog_instance->setListName ( listName_ );
     createEditDialog_instance->setVisible ( true );
@@ -327,7 +327,7 @@ void ObsListDialog::loadListsName()
             ui->obsListComboBox->clear();
 
             // Get the default list uuid
-            QString defaultListUuid = map.value ( KEY_DEFAULT_LIST_UUID ).toString();
+            QString defaultListUuid = map.value ( KEY_DEFAULT_LIST_OLUD ).toString();
 
             QVariantMap observingListsMap = map.value ( QString ( KEY_OBSERVING_LISTS ) ).toMap();
             populateListNameInComboBox ( observingListsMap );
@@ -366,7 +366,7 @@ void ObsListDialog::populateListNameInComboBox ( QVariantMap map )
 /*
  * Populate data into combo box
 */
-void ObsListDialog::populateDataInComboBox ( QVariantMap map, QString defaultListUuid )
+void ObsListDialog::populateDataInComboBox ( QVariantMap map, QString defaultListOlud )
 {
     QMap<QString, QVariant>::iterator i;
     for ( i = map.begin(); i != map.end(); ++i ) {
@@ -384,8 +384,8 @@ void ObsListDialog::populateDataInComboBox ( QVariantMap map, QString defaultLis
                 }
             }
         }
-        if ( defaultListUuid == listUuid ) {
-            defaultListUuid_ = defaultListUuid;
+        if (defaultListOlud == listUuid ) {
+            defaultListOlud_ = defaultListOlud;
         }
     }
 }
@@ -397,13 +397,13 @@ void ObsListDialog::populateDataInComboBox ( QVariantMap map, QString defaultLis
 */
 void ObsListDialog::loadDefaultList()
 {
-    if ( defaultListUuid_ != "" ) {
-        int index = ui->obsListComboBox->findData ( defaultListUuid_ );
+    if (defaultListOlud_ != "" ) {
+        int index = ui->obsListComboBox->findData (defaultListOlud_ );
         if ( index != -1 ) {
             ui->obsListComboBox->setCurrentIndex ( index );
             ui->obsListEditListButton->setEnabled ( true );
-            selectedObservingListUuid = defaultListUuid_.toStdString();
-            loadObservingList ( defaultListUuid_ );
+            selectedObservingListUuid = defaultListOlud_.toStdString();
+            loadObservingList (defaultListOlud_ );
         }
     } else {
         ui->obsListComboBox->setCurrentIndex ( 0 );
@@ -414,7 +414,7 @@ void ObsListDialog::loadDefaultList()
 /*
  * Load selected observing list
 */
-void ObsListDialog::loadObservingList ( QString listUuid )
+void ObsListDialog:: loadObservingList ( QString listOlud )
 {
     QVariantMap map;
     QVariantList listOfObjects;
@@ -425,10 +425,10 @@ void ObsListDialog::loadObservingList ( QString listUuid )
         try {
 
             map = StelJsonParser::parse ( jsonFile.readAll() ).toMap();
-            QVariantMap observingListMap = map.value ( QString ( KEY_OBSERVING_LISTS ) ).toMap().value ( listUuid ).toMap();
+            QVariantMap observingListMap = map.value ( QString ( KEY_OBSERVING_LISTS ) ).toMap().value (listOlud ).toMap();
             QString sortingBy = observingListMap.value ( KEY_SORTING ).toString();
 
-            listOfObjects = loadListFromJson ( map, listUuid );
+            listOfObjects = loadListFromJson (map, listOlud );
 
             if ( listOfObjects.size() > 0 ) {
                 ui->obsListHighlightAllButton->setEnabled ( true );
@@ -506,7 +506,8 @@ void ObsListDialog::loadObservingList ( QString listUuid )
                                     item.constellation = objectConstellation;
                                 }
                                 if ( !JDs.isEmpty() ) {
-                                    item.jd	= QString::number ( JD, 'f', 6 );
+                                    //item.jd	= QString::number ( JD, 'f', 6 );
+                                    item.jd = JD;
                                 }
                                 if ( !Location.isEmpty() ) {
                                     item.location = Location;
@@ -554,11 +555,11 @@ void ObsListDialog::loadObservingList ( QString listUuid )
 /*
  * Load the list from JSON file QVariantMap map
 */
-QVariantList ObsListDialog::loadListFromJson ( QVariantMap map, QString listUuid )
+QVariantList ObsListDialog::loadListFromJson ( QVariantMap map, QString listOlud )
 {
 
     observingListItemCollection.clear();
-    QVariantMap observingListMap = map.value ( QString ( KEY_OBSERVING_LISTS ) ).toMap().value ( listUuid ).toMap();
+    QVariantMap observingListMap = map.value ( QString ( KEY_OBSERVING_LISTS ) ).toMap().value (listOlud ).toMap();
     QVariantList listOfObjects;
 
     QString listDescription = observingListMap.value ( QString ( KEY_DESCRIPTION ) ).value<QString>();
@@ -679,9 +680,9 @@ void ObsListDialog::saveBookmarks ( QHash<QString, bookmark> bookmarksCollection
             allListsMap = mapFromJsonFile.value ( QString ( KEY_OBSERVING_LISTS ) ).toMap();
         }
 
-        QString defaultListValue = mapFromJsonFile.value ( QString ( KEY_DEFAULT_LIST_UUID ) ).toString();
+        QString defaultListValue = mapFromJsonFile.value ( QString ( KEY_DEFAULT_LIST_OLUD ) ).toString();
         if ( defaultListValue.isEmpty() ) {
-            mapFromJsonFile.insert ( KEY_DEFAULT_LIST_UUID, "" );
+            mapFromJsonFile.insert ( KEY_DEFAULT_LIST_OLUD, "" );
         }
 
         if ( checkIfBookmarksListExists ( allListsMap ) ) {
@@ -788,9 +789,11 @@ void ObsListDialog::selectAndGoToObject ( QModelIndex index )
     QString itemUuid = uuidItem->text();
     observingListItem item = observingListItemCollection.value ( itemUuid );
 
-    if ( !item.jd.isEmpty() ) {
+    /*if ( !item.jd.isEmpty() ) {
         core->setJD ( item.jd.toDouble() );
-    }
+    }*/
+    core->setJD ( item.jd);
+
     if ( !item.location.isEmpty() ) {
         StelLocationMgr* locationMgr = &StelApp::getInstance().getLocationMgr();
         core->moveObserverTo ( locationMgr->locationForString ( item.location ) );
@@ -885,7 +888,7 @@ void ObsListDialog::obsListDeleteButtonPressed()
                 QVariantMap newObsListMap;
                 map = StelJsonParser::parse ( jsonFile.readAll() ).toMap();
 
-                newMap.insert ( QString ( KEY_DEFAULT_LIST_UUID ), map.value ( QString ( KEY_DEFAULT_LIST_UUID ) ) );
+                newMap.insert ( QString ( KEY_DEFAULT_LIST_OLUD ), map.value ( QString ( KEY_DEFAULT_LIST_OLUD ) ) );
                 QVariantMap obsListMap = map.value ( QString ( KEY_OBSERVING_LISTS ) ).toMap();
 
                 QMap<QString, QVariant>::iterator i;
@@ -911,7 +914,7 @@ void ObsListDialog::obsListDeleteButtonPressed()
                 //TODO pas utile car listeName_ est réinitialiséé et rechargée dans loadListsName().
                 //TODO a supprimer après les tests finaux.
                 //QString listName = ui->obsListComboBox->itemText(currentIndex);
-                //listName_.removeOne(listName);
+                //listNames_.removeOne(listName);
                 
                 selectedObservingListUuid = "";
 

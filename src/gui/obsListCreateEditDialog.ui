@@ -127,7 +127,7 @@
    <item row="1" column="0">
     <widget class="QWidget" name="widget" native="true">
      <layout class="QGridLayout" name="gridLayout">
-      <item row="11" column="0">
+      <item row="12" column="0">
        <widget class="QFrame" name="frame">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -143,19 +143,58 @@
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_4">
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayoutCheckBox">
+          <layout class="QHBoxLayout" name="horizontalLayoutCheckBoxRacDecFov">
            <item>
-            <widget class="QCheckBox" name="obsListDefaultListCheckBox">
+            <widget class="QCheckBox" name="obsListRaCheckBox">
              <property name="toolTip">
-              <string>Set the list as default</string>
+              <string>Right ascension</string>
              </property>
              <property name="toolTipDuration">
               <number>3</number>
              </property>
              <property name="text">
-              <string>Set list as default</string>
+              <string>Ra</string>
              </property>
             </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="obsListDecCheckBox">
+             <property name="toolTip">
+              <string>Declination</string>
+             </property>
+             <property name="toolTipDuration">
+              <number>3</number>
+             </property>
+             <property name="text">
+              <string>Dec</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="obsListFovCheckBox">
+             <property name="toolTip">
+              <string>Fiel Of View</string>
+             </property>
+             <property name="toolTipDuration">
+              <number>3</number>
+             </property>
+             <property name="text">
+              <string>Fov</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_4">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
            </item>
           </layout>
          </item>
@@ -252,43 +291,6 @@
         </layout>
        </widget>
       </item>
-      <item row="5" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayoutLineEdit_1">
-        <item>
-         <widget class="QLabel" name="labelListeName">
-          <property name="text">
-           <string>Name of the list:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Fixed</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>39</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="nameOfListLineEdit"/>
-        </item>
-       </layout>
-      </item>
-      <item row="10" column="0">
-       <widget class="QTreeView" name="obsListCreationEditionTreeView">
-        <property name="toolTipDuration">
-         <number>-1</number>
-        </property>
-       </widget>
-      </item>
       <item row="6" column="0">
        <layout class="QHBoxLayout" name="horizontalLayoutLineEdit_2">
         <item>
@@ -319,7 +321,7 @@
         </item>
        </layout>
       </item>
-      <item row="7" column="0">
+      <item row="8" column="0">
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
          <widget class="QLabel" name="obsListErrorMessage">
@@ -328,6 +330,60 @@
           </property>
           <property name="text">
            <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="11" column="0">
+       <widget class="QTreeView" name="obsListCreationEditionTreeView">
+        <property name="toolTipDuration">
+         <number>-1</number>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayoutLineEdit_1">
+        <item>
+         <widget class="QLabel" name="labelListeName">
+          <property name="text">
+           <string>Name of the list:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>39</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="nameOfListLineEdit"/>
+        </item>
+       </layout>
+      </item>
+      <item row="7" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayoutCheckBoxDefault">
+        <item>
+         <widget class="QCheckBox" name="obsListDefaultListCheckBox">
+          <property name="toolTip">
+           <string>Set the list as default</string>
+          </property>
+          <property name="toolTipDuration">
+           <number>3</number>
+          </property>
+          <property name="text">
+           <string>Set list as default</string>
           </property>
          </widget>
         </item>

@@ -59,33 +59,33 @@ private:
     QString bookmarksJsonPath;
     QHash<QString, observingListItem> observingListItemCollection;
     QList<int> highlightLabelIDs;
-    QString defaultListUuid_;
+    QString defaultListOlud_;
     QList<QString> listName_;
     QStringList listNamesModel;
 
     //! Set header names for observing list table
     void setObservingListHeaderNames();
 
-    void invokeObsListCreateEditDialog ( std::string listUuid );
+    void invokeObsListCreateEditDialog ( std::string listOlud );
 
     ObsListCreateEditDialog * createEditDialog_instance;
 
     //! Add row in the obsListListModel
     //! @param number row number
-    //! @param uuid id of the record
+    //! @param olud id of the record
     //! @param name name or the designation of the object
     //! @param type type of the object
     //! @param ra right assencion of the object
     //! @param dec declination of the object
     //! @param magnitude magnitude of the object
     //! @param constellation constellation in which the object is located
-    void addModelRow ( int number, QString uuid, QString name, QString nameI18n, QString type, QString ra, QString dec, QString magnitude, QString constellation );
+    void addModelRow (int number, QString olud, QString name, QString nameI18n, QString type, QString ra, QString dec, QString magnitude, QString constellation );
 
     //! Load the selected observing list
-    //! @param listUuid the uuid of the list
-    void loadObservingList ( QString listUuid );
+    //! @param listOlud the olud (id) of the list
+    void loadObservingList ( QString listOlud );
 
-    //! Load the lists names to populate the combo box and get the default list uuid
+    //! Load the lists names to populate the combo box and get the default list olud
     void loadListsName();
     
     //! Load the default list
@@ -97,13 +97,13 @@ private:
     bool checkIfBookmarksListExists(QVariantMap allListsMap);
     
     //! Load list from JSON file
-    QVariantList loadListFromJson(QVariantMap map, QString listUuid);
+    QVariantList loadListFromJson(QVariantMap map, QString listOlud);
     
     //! Populate list names into combo box
     void populateListNameInComboBox(QVariantMap map);
     
     //! Populate data into combo box
-    void populateDataInComboBox(QVariantMap map, QString defaultListUuid);
+    void populateDataInComboBox(QVariantMap map, QString defaultListOlud);
     
     //! Sort the obsListTreeView by the column name given in parameter
     void sortObsListTreeViewByColumnName(QString columnName);

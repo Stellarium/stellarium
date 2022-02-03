@@ -56,15 +56,19 @@ private:
     //! To know if the dialog is open in creation mode or editionn mode
     // if true we are in creation mode otherwise in edition mode
     bool isCreationMode;
+    bool isSaveAs;
     QStandardItemModel * obsListListModel;
     class StelCore* core;
     class StelObjectMgr* objectMgr;
-    std::string listUuid_;
+    std::string listOlud_;
     QString observingListJsonPath;
     QHash<QString, observingListItem> observingListItemCollection;
 
     //List names
-    QList<QString> listName_;
+    QList<QString> listNames_;
+
+    //Current list name
+    QString currentListName;
 
     //! Sorting of the list ex: right ascension
     QString sorting;
@@ -92,8 +96,6 @@ private:
     //Private constructor and destructor
     ObsListCreateEditDialog ( std::string listUuid );
     virtual ~ObsListCreateEditDialog();
-
-
 
 
 public slots:
