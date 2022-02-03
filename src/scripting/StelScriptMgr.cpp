@@ -386,6 +386,12 @@ void StelScriptMgr::addModules()
 	}
 }
 
+void StelScriptMgr::addObject(QObject *obj)
+{
+	QScriptValue objectValue = engine->newQObject(obj);
+	engine->globalObject().setProperty(obj->objectName(), objectValue);
+}
+
 QStringList StelScriptMgr::getScriptList() const
 {
 	QStringList scriptFiles;

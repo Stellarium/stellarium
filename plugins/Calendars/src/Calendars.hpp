@@ -23,10 +23,11 @@
 #include <QMap>
 
 #include "StelModule.hpp"
+#include "StelScriptMgr.hpp"
 
 
 #include "Calendar.hpp"
-#include "CalendarsInfoPanel.hpp"
+#include "../plugins/Calendars/src/gui/CalendarsInfoPanel.hpp"
 
 class CalendarsDialog;
 class StelButton;
@@ -96,6 +97,9 @@ public:
 	//! MayaLongCount, MayaHaab, MayaTzolkin, AztecXihuitl, AztecTonalpohualli
 	//! TODO: ADD HERE: Chinese, NewHinduSolar, NewHinduLunar, Tibetan, ...
 	Calendar* getCal(QString name);
+
+	//! to be called after program startup, when StelScriptMgr has been set up.
+	void makeCalendarsScriptable(StelScriptMgr *ssm);
 
 signals:
 	//void jdChanged(double jd);

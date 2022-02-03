@@ -25,7 +25,7 @@
 #include "StelTranslator.hpp"
 #include "StelLocation.hpp"
 
-//! Abstract superclass for all calendars.
+//! Superclass for all calendars.
 //! Stellarium uses Julian Day numbers internally, and the conventional approach of using the Gregorian calendar for dates after 1582-10-15.
 //! For dates before that, the Julian calendar is used, in the form finalized by Augustus and running unchanged since 8AD.
 //! Astronomical year counting implies having a year 0, while some calendars adhere to historical counting like 1 B.C., 1 A.D.
@@ -50,18 +50,18 @@ public:
 	typedef enum { spring  = 0, summer       = 90, autumn   = 180, winter      = 270} Season; // CC.UE 3.5
 	typedef enum { newMoon = 0, firstQuarter = 90, fullMoon = 180, lastQuarter = 270} Phase;  // CC.UE 14.59-62
 
-	Calendar(double jd):JD(jd) {}
+	Calendar(double jd):JD(jd) { setObjectName("Calendar"); }
 
 	virtual ~Calendar() Q_DECL_OVERRIDE {}
 
 public slots:
 	//! Translate e.g. stringlists of part names
-	virtual void retranslate() = 0;
+	virtual void retranslate(){}
 
 	//! Set a calendar date from the Julian day number
 	//! Subclasses set JD and compute the parts and possibly other data
 	//! This triggers the partsChanged() signal
-	virtual void setJD(double JD) = 0;
+	virtual void setJD(double JD){Q_UNUSED(JD)}
 
 	//! Get Julian day number from a calendar date
 	virtual double getJD() const { return JD;}
@@ -69,7 +69,7 @@ public slots:
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! This triggers the jdChanged() signal
 	//! Note that this must not change the time of day! You must retrieve the time from the current JD before recomputing a new JD.
-	virtual void setDate(QVector<int> parts) = 0;
+	virtual void setDate(QVector<int> parts){Q_UNUSED(parts)}
 
 	//! get a vector of calendar date elements sorted from the largest to the smallest.
 	//! The order depends on the actual calendar
@@ -78,7 +78,7 @@ public slots:
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! The order depends on the actual calendar
-	virtual QStringList getDateStrings() const = 0;
+	virtual QStringList getDateStrings() const {return QStringList();}
 
 	//! get a formatted complete string for a date. The default implementation just concatenates all strings from getDateStrings() with a space in between.
 	virtual QString getFormattedDateString() const;
@@ -153,6 +153,7 @@ public:
 	static const StelLocation acre;
 	static const StelLocation padua; // (CC:UE 14.85)
 
+public slots:
 	static double direction(StelLocation loc1, StelLocation loc2);
 	//! @return longitude-dependent time offset in fractions of day.
 	static double zoneFromLongitude(double lngDeg){return lngDeg/360.;}
@@ -203,8 +204,6 @@ public:
 	static double declination(double rd_ut, double eclLat, double eclLong);
 	//! @return right ascension for time-dependent ecliptical coordinates [degrees] (CC:UE 14.30, but we use our own solution)
 	static double rightAscension(double rd_ut, double eclLat, double eclLong);
-	constexpr static const double meanTropicalYear=365.242189; //!< (CC:UE 14.31)
-	constexpr static const double meanSiderealYear=365.25636;  //!< (CC:UE 14.32)
 	//! @return solar longitude [degrees] for moment RD_UT (CC:UE 14.33, but we use our own solution)
 	static double solarLongitude(double rd_ut);
 
@@ -228,7 +227,6 @@ public:
 	//! @return an estimate for the moment (RD_UT) before rd_ut when sun has reached lambda (CC:UE 14.42)
 	static double estimatePriorSolarLongitude(double lambda, double rd_ut);
 	// 14.6 The Month
-	constexpr static const double meanSynodicMonth=29.530588861;  //!< (CC:UE 14.44)
 	//! @return RD of n-th new moon after RD0. (CC:UE 14.45, following Meeus AA2, ch.49)
 	static double nthNewMoon(int n);
 	//! @return RD of New Moon before rd_ut (CC:UE 14.46)
@@ -279,8 +277,6 @@ public:
 	static double sineOffset(double rd_ut, StelLocation loc, double alpha);
 	//! @return rd of , rd. (CC:UE 14.70)
 	static double momentOfDepression(double rd_approx, StelLocation loc, double alpha, bool early);
-	static constexpr bool morning=true;  //!< CC:UE 14.71
-	static constexpr bool evening=false; //!< CC:UE 14.73
 	//! @return fraction of day of when sun is alpha degrees below horizon in the morning (or bogus) (CC:UE 14.72)
 	static double dawn(int rd, StelLocation loc, double alpha);
 	//! @return fraction of day of when sun is alpha degrees below horizon in the evening (or bogus) (CC:UE 14.74)
@@ -353,6 +349,13 @@ signals:
 protected:
 	double JD;		//! date expressed as JD(UT), including day fraction (ready to interact with the main application)
 	QVector<int> parts;	//! date expressed in the numerical parts of the calendar (usually the smallest part represents a day count)
+
+	static constexpr double meanTropicalYear=365.242189; //!< (CC:UE 14.31)
+	static constexpr double meanSiderealYear=365.25636;  //!< (CC:UE 14.32)
+	static constexpr double meanSynodicMonth=29.530588861;  //!< (CC:UE 14.44)
+	static constexpr bool morning=true;  //!< CC:UE 14.71
+	static constexpr bool evening=false; //!< CC:UE 14.73
+
 };
 
 #endif

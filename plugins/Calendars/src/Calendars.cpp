@@ -28,6 +28,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelTranslator.hpp"
+#include "StelScriptMgr.hpp"
 
 #include "Calendars.hpp"
 #include "CalendarsDialog.hpp"
@@ -193,6 +194,7 @@ void Calendars::init()
 	infoPanel->setPos(600, 300);
 
 	const double jd=StelApp::getInstance().getCore()->getJD();
+	calendars.insert("Calendar", new Calendar(jd)); // For scripting use only.
 	calendars.insert("Julian", new JulianCalendar(jd));
 	calendars.insert("RevisedJulian", new RevisedJulianCalendar(jd));
 	calendars.insert("Gregorian", new GregorianCalendar(jd));
@@ -223,6 +225,16 @@ void Calendars::init()
 	{
 		connect(cal, SIGNAL(jdChanged(double)), StelApp::getInstance().getCore(), SLOT(setJD(double)));
 		connect(&StelApp::getInstance(), SIGNAL(languageChanged()), cal, SLOT(retranslate()));
+	}
+}
+
+// Add calendar as scriptable object! Some scripting functions won't work though, as they use object types unknown to the scripting engine.
+void Calendars::makeCalendarsScriptable(StelScriptMgr *ssm)
+{
+	foreach (Calendar* cal, calendars)
+	{
+		cal->setObjectName(cal->metaObject()->className());
+		ssm->addObject(cal);
 	}
 }
 
