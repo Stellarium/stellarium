@@ -1633,7 +1633,7 @@ void AstroCalcDialog::currentHECPositions()
 
 	QValueAxis *angularAxis = new QValueAxis();
 	angularAxis->setTickCount(9); // First and last ticks are co-located on 0/360 angle.
-	angularAxis->setLabelFormat("%.1f");
+	angularAxis->setLabelFormat("%d");
 	angularAxis->setShadesVisible(true);
 	angularAxis->setShadesBrush(QBrush(QColor(249, 249, 255)));
 	chart->addAxis(angularAxis, QPolarChart::PolarOrientationAngular);
@@ -1648,11 +1648,11 @@ void AstroCalcDialog::currentHECPositions()
 	series->attachAxis(angularAxis);
 	series->setMarkerSize(7);
 
-	radialAxis->setRange(0, 32);
+	radialAxis->setRange(0, 35);
 	angularAxis->setRange(0, 360);
 
 	ui->hecPositionsGraph->setChart(chart);
-	ui->hecPositionsGraph->setRenderHint(QPainter::Antialiasing);
+	//ui->hecPositionsGraph->setRenderHint(QPainter::Antialiasing);
 
 	adjustHECPositionsColumns();
 	// sort-by-name
