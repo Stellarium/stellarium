@@ -181,6 +181,7 @@ void AstroCalcDialog::retranslate()
 		populatePlanetList();
 		populateGroupCelestialBodyList();
 		currentCelestialPositions();
+		currentHECPositions();
 		prepareAxesAndGraph();
 		prepareAziVsTimeAxesAndGraph();
 		populateFunctionsList();
