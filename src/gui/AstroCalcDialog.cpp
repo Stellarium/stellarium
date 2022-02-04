@@ -1663,7 +1663,7 @@ void AstroCalcDialog::currentHECPositions()
 	chart->setBackgroundVisible(false);
 
 	QValueAxis *angularAxis = new QValueAxis();
-	angularAxis->setTickCount(9); // First and last ticks are co-located on 0/360 angle.
+	angularAxis->setTickCount(13); // First and last ticks are co-located on 0/360 angle (30 degrees per tick).
 	angularAxis->setLabelFormat("%d");
 	angularAxis->setGridLineColor(axisColor);
 	angularAxis->setLabelsColor(axisColor);
