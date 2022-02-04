@@ -196,7 +196,7 @@ void ExoplanetsDialog::fillExoplanetsTable()
 	ui->exoplanetsTreeWidget->setColumnCount(EPSCount);
 	setColumnNames();
 	ui->exoplanetsTreeWidget->header()->setSectionsMovable(false);
-	ui->exoplanetsTreeWidget->header()->setDefaultAlignment(Qt::AlignHCenter);
+	ui->exoplanetsTreeWidget->header()->setDefaultAlignment(Qt::AlignCenter);
 
 	const QString dash = QChar(0x2014);
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();

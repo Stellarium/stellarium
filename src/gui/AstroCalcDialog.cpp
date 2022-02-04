@@ -865,7 +865,7 @@ void AstroCalcDialog::initListCelestialPositions()
 	ui->celestialPositionsTreeWidget->setColumnCount(CColumnCount);
 	setCelestialPositionsHeaderNames();
 	ui->celestialPositionsTreeWidget->header()->setSectionsMovable(false);
-	ui->celestialPositionsTreeWidget->header()->setDefaultAlignment(Qt::AlignHCenter);	
+	ui->celestialPositionsTreeWidget->header()->setDefaultAlignment(Qt::AlignCenter);
 }
 
 void AstroCalcDialog::setCelestialPositionsHeaderNames()
@@ -1596,7 +1596,7 @@ void AstroCalcDialog::initListEphemeris()
 	ui->ephemerisTreeWidget->setColumnCount(EphemerisCount);
 	setEphemerisHeaderNames();
 	ui->ephemerisTreeWidget->header()->setSectionsMovable(false);
-	ui->ephemerisTreeWidget->header()->setDefaultAlignment(Qt::AlignHCenter);
+	ui->ephemerisTreeWidget->header()->setDefaultAlignment(Qt::AlignCenter);
 }
 
 void AstroCalcDialog::reGenerateEphemeris()
@@ -1970,7 +1970,7 @@ void AstroCalcDialog::initListTransit()
 	ui->transitTreeWidget->setColumnCount(TransitCount);
 	setTransitHeaderNames();
 	ui->transitTreeWidget->header()->setSectionsMovable(false);
-	ui->transitTreeWidget->header()->setDefaultAlignment(Qt::AlignHCenter);
+	ui->transitTreeWidget->header()->setDefaultAlignment(Qt::AlignCenter);
 }
 
 void AstroCalcDialog::generateTransits()
@@ -2228,7 +2228,7 @@ void AstroCalcDialog::initListLunarEclipse()
 	ui->lunareclipseTreeWidget->setColumnCount(LunarEclipseCount);
 	setLunarEclipseHeaderNames();
 	ui->lunareclipseTreeWidget->header()->setSectionsMovable(false);
-	ui->lunareclipseTreeWidget->header()->setDefaultAlignment(Qt::AlignHCenter);
+	ui->lunareclipseTreeWidget->header()->setDefaultAlignment(Qt::AlignCenter);
 }
 
 QPair<double,double> AstroCalcDialog::getLunarEclipseXY() const
@@ -2617,7 +2617,7 @@ void AstroCalcDialog::initListSolarEclipse()
 	ui->solareclipseTreeWidget->setColumnCount(SolarEclipseCount);
 	setSolarEclipseHeaderNames();
 	ui->solareclipseTreeWidget->header()->setSectionsMovable(false);
-	ui->solareclipseTreeWidget->header()->setDefaultAlignment(Qt::AlignHCenter);
+	ui->solareclipseTreeWidget->header()->setDefaultAlignment(Qt::AlignCenter);
 }
 
 struct SolarEclipse {
@@ -3306,7 +3306,7 @@ void AstroCalcDialog::initListSolarEclipseLocal()
 	ui->solareclipselocalTreeWidget->setColumnCount(SolarEclipseLocalCount);
 	setSolarEclipseLocalHeaderNames();
 	ui->solareclipselocalTreeWidget->header()->setSectionsMovable(false);
-	ui->solareclipselocalTreeWidget->header()->setDefaultAlignment(Qt::AlignHCenter);
+	ui->solareclipselocalTreeWidget->header()->setDefaultAlignment(Qt::AlignCenter);
 }
 
 void AstroCalcDialog::generateSolarEclipsesLocal()
@@ -5367,7 +5367,7 @@ void AstroCalcDialog::initListPhenomena()
 	ui->phenomenaTreeWidget->setColumnCount(PhenomenaCount);
 	setPhenomenaHeaderNames();
 	ui->phenomenaTreeWidget->header()->setSectionsMovable(false);
-	ui->phenomenaTreeWidget->header()->setDefaultAlignment(Qt::AlignHCenter);
+	ui->phenomenaTreeWidget->header()->setDefaultAlignment(Qt::AlignCenter);
 }
 
 void AstroCalcDialog::selectCurrentPhenomen(const QModelIndex& modelIndex)
@@ -7070,7 +7070,7 @@ void AstroCalcDialog::initListWUT(const bool magnitude, const bool separation)
 	ui->wutMatchingObjectsTreeWidget->setColumnCount(WUTCount);
 	setWUTHeaderNames(magnitude, separation);
 	ui->wutMatchingObjectsTreeWidget->header()->setSectionsMovable(false);
-	ui->wutMatchingObjectsTreeWidget->header()->setDefaultAlignment(Qt::AlignHCenter);
+	ui->wutMatchingObjectsTreeWidget->header()->setDefaultAlignment(Qt::AlignCenter);
 }
 
 void AstroCalcDialog::enableAngularLimits(bool enable)
@@ -7130,7 +7130,7 @@ void AstroCalcDialog::fillWUTTable(QString objectName, QString designation, floa
 	treeItem->setText(WUTAngularSize, sAngularSize);
 	treeItem->setTextAlignment(WUTAngularSize, Qt::AlignRight);
 	treeItem->setText(WUTConstellation, constellation);
-	treeItem->setTextAlignment(WUTConstellation, Qt::AlignHCenter);
+	treeItem->setTextAlignment(WUTConstellation, Qt::AlignCenter);
 	treeItem->setToolTip(WUTConstellation, q_("IAU Constellation"));
 }
 
