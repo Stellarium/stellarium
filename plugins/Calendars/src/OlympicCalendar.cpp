@@ -74,8 +74,8 @@ void OlympicCalendar::setDate(QVector<int> parts)
 {
 	if (parts.length()<4)
 	{
-		this->parts[0]=parts.at(0);
-		this->parts[1]=parts.at(1);
+		this->parts[0]=parts.value(0);
+		this->parts[1]=parts.value(1);
 	}
 	else
 		this->parts=parts;
@@ -92,8 +92,8 @@ void OlympicCalendar::setDate(QVector<int> parts)
 
 int OlympicCalendar::julianYearFromOlympiad(QVector<int>odate)
 {
-	int cycle=odate.at(0);
-	int year=odate.at(1);
+	int cycle=odate.value(0);
+	int year =odate.value(1);
 	int years=olympiadStart+4*(cycle-1)+year-1;
 	return (years < 0 ? years : years+1);
 }

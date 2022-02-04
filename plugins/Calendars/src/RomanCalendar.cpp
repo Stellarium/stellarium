@@ -146,11 +146,11 @@ int RomanCalendar::julianYearFromAUC(int aucYear)
 
 int RomanCalendar::fixedFromRoman(QVector<int> roman)
 {
-	const int year=roman.at(0);
-	const int month=roman.at(1);
-	const events event=static_cast<events>(roman.at(2));
-	const int count=roman.at(3);
-	const int leap=roman.at(4);
+	const int year =roman.value(0);
+	const int month=roman.value(1);
+	const events event=static_cast<events>(roman.value(2));
+	const int count=roman.value(3);
+	const int leap =roman.value(4);
 
 	int rd = 0; // Suppress warning
 	switch (event)

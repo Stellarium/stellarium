@@ -213,9 +213,9 @@ int HebrewCalendar::lastDayOfHebrewMonth(int hYear, int hMonth)
 
 int HebrewCalendar::fixedFromHebrew(QVector<int> hebrew)
 {
-	const int year=hebrew.at(0);
-	const int month=hebrew.at(1);
-	const int day=hebrew.at(2);
+	const int year =hebrew.value(0);
+	const int month=hebrew.value(1);
+	const int day  =hebrew.value(2);
 
 	int ret=hebrewNewYear(year)+day-1;
 	if (month<tishri)

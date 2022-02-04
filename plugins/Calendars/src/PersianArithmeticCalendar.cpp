@@ -124,9 +124,9 @@ bool PersianArithmeticCalendar::isLeap(int pYear)
 
 int PersianArithmeticCalendar::fixedFromPersianArithmetic(QVector<int> persian)
 {
-	const int pYear=persian.at(0);
-	const int month=persian.at(1);
-	const int day=persian.at(2);
+	const int pYear=persian.value(0);
+	const int month=persian.value(1);
+	const int day  =persian.value(2);
 
 	int y = pYear - (0<pYear ? 474 : 473);
 	int year = StelUtils::imod(y, 2820) + 474;

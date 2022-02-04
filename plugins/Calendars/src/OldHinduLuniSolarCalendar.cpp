@@ -107,10 +107,10 @@ void OldHinduLuniSolarCalendar::setDate(QVector<int> parts)
 // parts={ year, month, leap, day}
 int OldHinduLuniSolarCalendar::fixedFromOldHinduLunar(QVector<int> parts)
 {
-	const int year=parts.at(0);
-	const int month=parts.at(1);
-	const bool leap=parts.at(2);
-	const int day=parts.at(3);
+	const int year =parts.value(0);
+	const int month=parts.value(1);
+	const bool leap=parts.value(2);
+	const int day  =parts.value(3);
 
 	const double mina = (12*year-1)*aryaSolarMonth;
 	const double lunarNewYear=aryaLunarMonth*(std::floor(mina/aryaLunarMonth)+1.);

@@ -195,9 +195,9 @@ int BalinesePawukonCalendar::baliCaturwaraFromFixed(const int rd)
 
 int BalinesePawukonCalendar::baliOnOrBefore(const QVector<int>baliDate, const int rd)
 {
-	const int a5=baliDate.at(4)-1;
-	const int a6=baliDate.at(5)-1;
-	const int b7=baliDate.at(6)-1;
+	const int a5=baliDate.value(4)-1;
+	const int a6=baliDate.value(5)-1;
+	const int b7=baliDate.value(6)-1;
 	const int b35=StelUtils::imod(a5+14+15*(b7-a5), 35);
 	const int days=a6+36*(b35-a6);
 	static const int Delta=baliDayFromFixed(0);

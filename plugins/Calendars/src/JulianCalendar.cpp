@@ -127,9 +127,9 @@ QString JulianCalendar::weekday(double jd)
 
 int JulianCalendar::fixedFromJulian(QVector<int> julian)
 {
-	const int year=julian.at(0);
-	const int month=julian.at(1);
-	const int day=julian.at(2);
+	const int year =julian.value(0);
+	const int month=julian.value(1);
+	const int day  =julian.value(2);
 	const int y=(year<0 ? year+1 : year);
 
 	int ret=julianEpoch-1+365*(y-1)+StelUtils::intFloorDiv(y-1, 4)

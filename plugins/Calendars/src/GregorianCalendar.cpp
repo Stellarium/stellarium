@@ -93,9 +93,9 @@ bool GregorianCalendar::isLeap(int year)
 
 int GregorianCalendar::fixedFromGregorian(QVector<int> gregorian)
 {
-	const int year=gregorian.at(0);
-	const int month=gregorian.at(1);
-	const int day=gregorian.at(2);
+	const int year =gregorian.value(0);
+	const int month=gregorian.value(1);
+	const int day  =gregorian.value(2);
 
 	int rd=gregorianEpoch-1+365*(year-1)+StelUtils::intFloorDiv((year-1), 4)-StelUtils::intFloorDiv((year-1), 100)
 			+StelUtils::intFloorDiv((year-1), 400)+(367*month-362)/12+day;

@@ -163,9 +163,9 @@ bool FrenchArithmeticCalendar::isLeap(int fYear)
 
 int FrenchArithmeticCalendar::fixedFromFrenchArithmetic(QVector<int> french)
 {
-	const int year=french.at(0);
-	const int month=french.at(1);
-	const int day=french.at(2);
+	const int year =french.value(0);
+	const int month=french.value(1);
+	const int day  =french.value(2);
 
 	return frenchEpoch-1+365*(year-1)
 		+StelUtils::intFloorDiv(year-1, 4)

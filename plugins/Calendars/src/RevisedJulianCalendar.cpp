@@ -73,9 +73,9 @@ bool RevisedJulianCalendar::isLeap(int year)
 
 int RevisedJulianCalendar::fixedFromRevisedJulian(QVector<int> revisedJulian)
 {
-	const int year=revisedJulian.at(0);
-	const int month=revisedJulian.at(1);
-	const int day=revisedJulian.at(2);
+	const int year =revisedJulian.value(0);
+	const int month=revisedJulian.value(1);
+	const int day  =revisedJulian.value(2);
 	// Year BC make no sense here! Don't bother dealing with the leap years...
 	// But note that the calendars were parallel in 325 (Nicaea)
 	if (year<325)
