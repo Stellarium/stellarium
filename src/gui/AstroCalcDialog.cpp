@@ -1632,10 +1632,9 @@ void AstroCalcDialog::currentHECPositions()
 			}
 
 			fillHECPositionTable(planet->getNameI18n(), coordStrings.first, coordStrings.second, distance);
-			seriesPlanets->append(dl, distance);
+			seriesPlanets->append(360.-dl, log(distance));
 		}
 	}
-
 
 	adjustHECPositionsColumns();
 	// sort-by-name
@@ -1650,21 +1649,42 @@ void AstroCalcDialog::currentHECPositions()
 	chart->setMargins(QMargins(0, 0, 0, 0));
 	chart->setBackgroundVisible(false);
 
-	QValueAxis *angularAxis = new QValueAxis();
+	// QPolarChart only has clockwise counting.
+	// We prevent a view from below with a manually labeled category axis.
+	QCategoryAxis *angularAxis = new QCategoryAxis();
 	angularAxis->setTickCount(13); // First and last ticks are co-located on 0/360 angle (30 degrees per tick).
-	angularAxis->setLabelFormat("%d");
+	angularAxis->append("330", 30);
+	angularAxis->append("300", 60);
+	angularAxis->append("270", 90);
+	angularAxis->append("240", 120);
+	angularAxis->append("210", 150);
+	angularAxis->append("180", 180);
+	angularAxis->append("150", 210);
+	angularAxis->append("120", 240);
+	angularAxis->append("90", 270);
+	angularAxis->append("60", 300);
+	angularAxis->append("30", 330);
+	angularAxis->append("0", 360);
+	angularAxis->setLabelsPosition(QCategoryAxis::AxisLabelsPositionOnValue);
 	angularAxis->setGridLineColor(axisColor);
 	angularAxis->setLabelsColor(labelColor);
 	angularAxis->setRange(0, 360);
 	chart->addAxis(angularAxis, QPolarChart::PolarOrientationAngular);
 
-	QLogValueAxis *radialAxis = new QLogValueAxis();
-	radialAxis->setLabelFormat("%d");
+	// The QLogValueAxis has a stupid limit for the low end. Again, circumvent it with a CategoryAxis.
+	QCategoryAxis *radialAxis = new QCategoryAxis();
+	radialAxis->append("0.5", log(.5));  // a few stop marks for AU values
+	radialAxis->append("1", log(1));
+	radialAxis->append("2", log(2));
+	radialAxis->append("5", log(5));
+	radialAxis->append("10", log(10));
+	radialAxis->append("20", log(20));
+	radialAxis->append("30", log(30));
+	radialAxis->setLabelsPosition(QCategoryAxis::AxisLabelsPositionCenter);
 	radialAxis->setGridLineColor(axisColor);
 	radialAxis->setLabelsColor(labelColor);
 	radialAxis->setLineVisible(false);
-	radialAxis->setBase(3.0);
-	radialAxis->setRange(0, 30);
+	radialAxis->setRange(-1.5, log(32));
 	chart->addAxis(radialAxis, QPolarChart::PolarOrientationRadial);
 
 	seriesPlanets->attachAxis(angularAxis);
