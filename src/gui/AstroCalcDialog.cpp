@@ -1728,7 +1728,7 @@ void AstroCalcDialog::saveHECPositions()
 		QString sData;
 
 		QXlsx::Document xlsx;
-		xlsx.setDocumentProperty("title", q_("Heliocentric ecliptic positions of major planets"));
+		xlsx.setDocumentProperty("title", q_("Heliocentric ecliptic positions of the major planets"));
 		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
 		xlsx.addSheet(q_("Major planets"), AbstractSheet::ST_WorkSheet);
 

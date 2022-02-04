@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-02-05 03:45+0700\n"
+"POT-Creation-Date: 2022-02-05 05:56+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5612,8 +5612,8 @@ msgstr ""
 msgid "Distance from the Sun at the moment of computation of position"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1731
-msgid "Heliocentric ecliptic positions of major planets"
+#: src/gui/AstroCalcDialog.cpp:1731 src/ui_astroCalcDialog.h:2061
+msgid "Heliocentric ecliptic positions of the major planets"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:1733 src/ui_astroCalcDialog.h:2064
@@ -12675,10 +12675,6 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:2060
 msgid "Seen now"
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:2061
-msgid "Heliocentric ecliptic positions of the major planets"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:2067
