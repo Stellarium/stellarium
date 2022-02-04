@@ -1648,47 +1648,58 @@ void AstroCalcDialog::currentHECPositions()
 		}
 	}
 
+
+	adjustHECPositionsColumns();
+	// sort-by-name
+	ui->hecPositionsTreeWidget->sortItems(HECColumnDistance, Qt::AscendingOrder);
+
+	QColor axisColor(Qt::white);
+
 	QPolarChart *chart = new QPolarChart();
 	chart->addSeries(seriesSun);
 	chart->addSeries(seriesPlanets);
 	chart->legend()->hide();
-	//chart->setBackgroundBrush(QBrush(QColor(86, 87, 90)));
 	chart->setMargins(QMargins(0, 0, 0, 0));
-	//chart->setBackgroundVisible(false);
-	//chart->setTheme(QChart::ChartThemeLight);
+	chart->setBackgroundVisible(false);
 
 	QValueAxis *angularAxis = new QValueAxis();
 	angularAxis->setTickCount(9); // First and last ticks are co-located on 0/360 angle.
 	angularAxis->setLabelFormat("%d");
-	angularAxis->setShadesVisible(true);
-	angularAxis->setShadesBrush(QBrush(QColor(249, 249, 255)));
+	angularAxis->setGridLineColor(axisColor);
+	angularAxis->setLabelsColor(axisColor);
 	chart->addAxis(angularAxis, QPolarChart::PolarOrientationAngular);
 
 	QValueAxis *radialAxis = new QValueAxis();
 	radialAxis->setLabelFormat("%d");
+	radialAxis->setGridLineColor(axisColor);
+	radialAxis->setLabelsColor(axisColor);
 	chart->addAxis(radialAxis, QPolarChart::PolarOrientationRadial);
 
 	seriesPlanets->attachAxis(radialAxis);
 	seriesPlanets->attachAxis(angularAxis);
 	seriesPlanets->setMarkerSize(5);
-	seriesPlanets->setColor(Qt::blue);
-	seriesPlanets->setBorderColor(Qt::blue);
+	seriesPlanets->setColor(Qt::cyan);
+	seriesPlanets->setBorderColor(Qt::cyan);
 
 	seriesSun->attachAxis(radialAxis);
 	seriesSun->attachAxis(angularAxis);
-	seriesSun->setMarkerSize(10);
+	seriesSun->setMarkerSize(15);
 	seriesSun->setColor(Qt::yellow);
 	seriesSun->setBorderColor(Qt::red);
 
-	radialAxis->setRange(0, 8);
+	radialAxis->setRange(0, seriesPlanets->count());
 	angularAxis->setRange(0, 360);
 
-	ui->hecPositionsGraph->setChart(chart);
-	//ui->hecPositionsGraph->setBackgroundBrush(QBrush(QColor(86, 87, 90)));
+	QLinearGradient backgroundGradient;
+	backgroundGradient.setStart(QPointF(0, 0));
+	backgroundGradient.setFinalStop(QPointF(0, 1));
+	// Colors for gradiaent taken from QSS's QWidget
+	backgroundGradient.setColorAt(0.0, QColor(90, 90, 90));
+	backgroundGradient.setColorAt(1.0, QColor(70, 70, 70));
+	backgroundGradient.setCoordinateMode(QGradient::ObjectBoundingMode);
 
-	adjustHECPositionsColumns();
-	// sort-by-name
-	ui->hecPositionsTreeWidget->sortItems(HECColumnDistance, Qt::AscendingOrder);
+	ui->hecPositionsGraph->setChart(chart);
+	ui->hecPositionsGraph->setBackgroundBrush(backgroundGradient);
 }
 
 void AstroCalcDialog::saveHECPositions()
