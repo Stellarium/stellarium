@@ -577,7 +577,6 @@ void AstroCalcDialog::createDialogContent()
 	QString style = "QLabel { color: rgb(238, 238, 238); }";
 	ui->celestialPositionsTimeLabel->setStyleSheet(style);
 	ui->hecPositionsTimeLabel->setStyleSheet(style);
-	ui->hecNoteLabel->setStyleSheet(style);
 	ui->altVsTimeLabel->setStyleSheet(style);
 	//ui->altVsTimeTitle->setStyleSheet(style);
 	ui->aziVsTimeLabel->setStyleSheet(style);
@@ -980,7 +979,7 @@ void AstroCalcDialog::initListHECPositions()
 	ui->hecPositionsTreeWidget->setColumnCount(HECColumnCount);
 	setHECPositionsHeaderNames();
 	ui->hecPositionsTreeWidget->header()->setSectionsMovable(false);
-	ui->hecPositionsTreeWidget->header()->setDefaultAlignment(Qt::AlignHCenter);
+	ui->hecPositionsTreeWidget->header()->setDefaultAlignment(Qt::AlignCenter);
 }
 
 void AstroCalcDialog::setHECPositionsHeaderNames()
@@ -1653,21 +1652,21 @@ void AstroCalcDialog::currentHECPositions()
 	// We prevent a view from below with a manually labeled category axis.
 	QCategoryAxis *angularAxis = new QCategoryAxis();
 	angularAxis->setTickCount(13); // First and last ticks are co-located on 0/360 angle (30 degrees per tick).
-	angularAxis->append("330", 30);
-	angularAxis->append("300", 60);
-	angularAxis->append("270", 90);
-	angularAxis->append("240", 120);
-	angularAxis->append("210", 150);
-	angularAxis->append("180", 180);
-	angularAxis->append("150", 210);
-	angularAxis->append("120", 240);
-	angularAxis->append("90", 270);
-	angularAxis->append("60", 300);
-	angularAxis->append("30", 330);
-	angularAxis->append("0", 360);
+	angularAxis->append("330&deg;", 30);
+	angularAxis->append("300&deg;", 60);
+	angularAxis->append("270&deg;", 90);
+	angularAxis->append("240&deg;", 120);
+	angularAxis->append("210&deg;", 150);
+	angularAxis->append("180&deg;", 180);
+	angularAxis->append("150&deg;", 210);
+	angularAxis->append("120&deg;", 240);
+	angularAxis->append("90&deg;", 270);
+	angularAxis->append("60&deg;", 300);
+	angularAxis->append("30&deg;", 330);
+	angularAxis->append("0&deg;", 360);
 	angularAxis->setLabelsPosition(QCategoryAxis::AxisLabelsPositionOnValue);
-	angularAxis->setGridLineColor(axisColor);
 	angularAxis->setLabelsColor(labelColor);
+	angularAxis->setGridLineColor(axisColor);
 	angularAxis->setRange(0, 360);
 	chart->addAxis(angularAxis, QPolarChart::PolarOrientationAngular);
 
@@ -1680,9 +1679,9 @@ void AstroCalcDialog::currentHECPositions()
 	radialAxis->append("10", log(10));
 	radialAxis->append("20", log(20));
 	radialAxis->append("30", log(30));
-	radialAxis->setLabelsPosition(QCategoryAxis::AxisLabelsPositionCenter);
-	radialAxis->setGridLineColor(axisColor);
+	radialAxis->setLabelsPosition(QCategoryAxis::AxisLabelsPositionOnValue);
 	radialAxis->setLabelsColor(labelColor);
+	radialAxis->setGridLineColor(axisColor);
 	radialAxis->setLineVisible(false);
 	radialAxis->setRange(-1.5, log(32));
 	chart->addAxis(radialAxis, QPolarChart::PolarOrientationRadial);

@@ -494,36 +494,29 @@
               <string>Major planets</string>
              </attribute>
              <layout class="QGridLayout" name="gridLayout_23">
-              <item row="1" column="0">
-               <layout class="QVBoxLayout" name="verticalLayout_2">
-                <item>
-                 <widget class="QTreeWidget" name="hecPositionsTreeWidget">
-                  <property name="editTriggers">
-                   <set>QAbstractItemView::NoEditTriggers</set>
-                  </property>
-                  <property name="rootIsDecorated">
-                   <bool>false</bool>
-                  </property>
-                  <property name="uniformRowHeights">
-                   <bool>true</bool>
-                  </property>
-                  <property name="itemsExpandable">
-                   <bool>false</bool>
-                  </property>
-                  <property name="sortingEnabled">
-                   <bool>true</bool>
-                  </property>
-                  <property name="expandsOnDoubleClick">
-                   <bool>false</bool>
-                  </property>
-                  <property name="columnCount">
-                   <number>0</number>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
+              <item row="2" column="1">
+               <widget class="QChartView" name="hecPositionsGraph">
+                <property name="renderHints">
+                 <set>QPainter::Antialiasing|QPainter::TextAntialiasing</set>
+                </property>
+               </widget>
               </item>
-              <item row="3" column="0" colspan="2">
+              <item row="0" column="0" colspan="2">
+               <widget class="QLabel" name="hecPositionsHeaderLabel">
+                <property name="font">
+                 <font>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Heliocentric ecliptic positions of the major planets</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0" colspan="2">
                <layout class="QHBoxLayout" name="horizontalLayout_23">
                 <item>
                  <widget class="QLabel" name="hecPositionsTimeLabel"/>
@@ -544,25 +537,28 @@
                 </item>
                </layout>
               </item>
-              <item row="0" column="0" colspan="2">
-               <widget class="QLabel" name="hecPositionsHeaderLabel">
-                <property name="font">
-                 <font>
-                  <bold>true</bold>
-                 </font>
+              <item row="2" column="0">
+               <widget class="QTreeWidget" name="hecPositionsTreeWidget">
+                <property name="editTriggers">
+                 <set>QAbstractItemView::NoEditTriggers</set>
                 </property>
-                <property name="text">
-                 <string>Heliocentric ecliptic positions of major planets</string>
+                <property name="rootIsDecorated">
+                 <bool>false</bool>
                 </property>
-                <property name="alignment">
-                 <set>Qt::AlignCenter</set>
+                <property name="uniformRowHeights">
+                 <bool>true</bool>
                 </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QChartView" name="hecPositionsGraph">
-                <property name="renderHints">
-                 <set>QPainter::Antialiasing|QPainter::TextAntialiasing</set>
+                <property name="itemsExpandable">
+                 <bool>false</bool>
+                </property>
+                <property name="sortingEnabled">
+                 <bool>true</bool>
+                </property>
+                <property name="expandsOnDoubleClick">
+                 <bool>false</bool>
+                </property>
+                <property name="columnCount">
+                 <number>0</number>
                 </property>
                </widget>
               </item>
