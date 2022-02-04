@@ -1606,6 +1606,8 @@ void AstroCalcDialog::currentHECPositions()
 	Vec3d pos;
 	bool sign;
 	QScatterSeries *seriesPlanets = new QScatterSeries();
+	QScatterSeries *seriesSun = new QScatterSeries();
+	seriesSun->append(0., -1.5);
 	const double JD = core->getJD();
 	ui->hecPositionsTimeLabel->setText(q_("Positions on %1").arg(QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD))));
 
@@ -1636,7 +1638,7 @@ void AstroCalcDialog::currentHECPositions()
 	}
 
 	adjustHECPositionsColumns();
-	// sort-by-name
+	// sort-by-distance
 	ui->hecPositionsTreeWidget->sortItems(HECColumnDistance, Qt::AscendingOrder);
 
 	QColor axisColor(Qt::lightGray);
@@ -1644,6 +1646,7 @@ void AstroCalcDialog::currentHECPositions()
 
 	QPolarChart *chart = new QPolarChart();
 	chart->addSeries(seriesPlanets);
+	chart->addSeries(seriesSun);
 	chart->legend()->hide();
 	chart->setMargins(QMargins(0, 0, 0, 0));
 	chart->setBackgroundVisible(false);
@@ -1691,6 +1694,12 @@ void AstroCalcDialog::currentHECPositions()
 	seriesPlanets->setMarkerSize(5);
 	seriesPlanets->setColor(Qt::cyan);
 	seriesPlanets->setBorderColor(Qt::transparent);
+
+	seriesSun->attachAxis(angularAxis);
+	seriesSun->attachAxis(radialAxis);
+	seriesSun->setMarkerSize(9);
+	seriesSun->setColor(Qt::yellow);
+	seriesSun->setBorderColor(Qt::red);
 
 	ui->hecPositionsGraph->setChart(chart);
 	ui->hecPositionsGraph->setBackgroundBrush(graphBackgroundGradient);
