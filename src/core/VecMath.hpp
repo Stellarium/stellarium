@@ -336,7 +336,7 @@ public:
 	//! Formatted string with brackets
 	inline QString toString() const {return QString("[%1, %2, %3, %4]").arg(v[0]).arg(v[1]).arg(v[2]).arg(v[3]);}
 	//! Compact comma-separated string without brackets and spaces.
-	//! The result can be restored into a Vector2 by the Vector4(QString s) constructors.
+	//! The result can be restored into a Vector4 by the Vector4(QString s) constructors.
 	QString toStr() const;
 	//! Convert to a QColor.
 	QColor toQColor() const;
