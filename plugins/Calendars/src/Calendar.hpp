@@ -69,15 +69,22 @@ public slots:
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! This triggers the jdChanged() signal
 	//! Note that this must not change the time of day! You must retrieve the time from the current JD before recomputing a new JD.
+	//! You can also use this with scripting by calling the actual calendars, like
+	//! GregorianCalendar.setDate([2023, 3, 4]); // This changes the date in the program!
+	//! MayaLongCountCalendar.setDate([13, 0, 0, 0, 1]); // This changes the date in the program!
+	//! @note No check is made for the number of elements, which depends on the actual calendar.
 	virtual void setDate(QVector<int> parts){Q_UNUSED(parts)}
 
 	//! get a vector of calendar date elements sorted from the largest to the smallest.
 	//! The order depends on the actual calendar
+	//! @note this also works with scripting. The result can be further processed. E.g.
+	//! core.output("Baktun: " + MayaLongCountCalendar.getDateL()[0]);
 	virtual QVector<int> getDate() const { return parts; }
-
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! The order depends on the actual calendar
+	//! For scripting use, you can extract single elements, like:
+	//! core.output("Tzolkin name: " + MayaTzolkinCalendar.getDateStrings()[1]);
 	virtual QStringList getDateStrings() const {return QStringList();}
 
 	//! get a formatted complete string for a date. The default implementation just concatenates all strings from getDateStrings() with a space in between.
