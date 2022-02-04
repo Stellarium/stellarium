@@ -577,6 +577,7 @@ void AstroCalcDialog::createDialogContent()
 	QString style = "QLabel { color: rgb(238, 238, 238); }";
 	ui->celestialPositionsTimeLabel->setStyleSheet(style);
 	ui->hecPositionsTimeLabel->setStyleSheet(style);
+	ui->hecNoteLabel->setStyleSheet(style);
 	ui->altVsTimeLabel->setStyleSheet(style);
 	//ui->altVsTimeTitle->setStyleSheet(style);
 	ui->aziVsTimeLabel->setStyleSheet(style);

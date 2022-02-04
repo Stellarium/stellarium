@@ -495,31 +495,45 @@
              </attribute>
              <layout class="QGridLayout" name="gridLayout_23">
               <item row="1" column="0">
-               <widget class="QTreeWidget" name="hecPositionsTreeWidget">
-                <property name="editTriggers">
-                 <set>QAbstractItemView::NoEditTriggers</set>
-                </property>
-                <property name="rootIsDecorated">
-                 <bool>false</bool>
-                </property>
-                <property name="uniformRowHeights">
-                 <bool>true</bool>
-                </property>
-                <property name="itemsExpandable">
-                 <bool>false</bool>
-                </property>
-                <property name="sortingEnabled">
-                 <bool>true</bool>
-                </property>
-                <property name="expandsOnDoubleClick">
-                 <bool>false</bool>
-                </property>
-                <property name="columnCount">
-                 <number>0</number>
-                </property>
-               </widget>
+               <layout class="QVBoxLayout" name="verticalLayout_2">
+                <item>
+                 <widget class="QTreeWidget" name="hecPositionsTreeWidget">
+                  <property name="editTriggers">
+                   <set>QAbstractItemView::NoEditTriggers</set>
+                  </property>
+                  <property name="rootIsDecorated">
+                   <bool>false</bool>
+                  </property>
+                  <property name="uniformRowHeights">
+                   <bool>true</bool>
+                  </property>
+                  <property name="itemsExpandable">
+                   <bool>false</bool>
+                  </property>
+                  <property name="sortingEnabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="expandsOnDoubleClick">
+                   <bool>false</bool>
+                  </property>
+                  <property name="columnCount">
+                   <number>0</number>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="hecNoteLabel">
+                  <property name="text">
+                   <string>Currently on the graph we have a view from below the ecliptic plane  due technical reasons.</string>
+                  </property>
+                  <property name="wordWrap">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
-              <item row="2" column="0" colspan="2">
+              <item row="3" column="0" colspan="2">
                <layout class="QHBoxLayout" name="horizontalLayout_23">
                 <item>
                  <widget class="QLabel" name="hecPositionsTimeLabel"/>
