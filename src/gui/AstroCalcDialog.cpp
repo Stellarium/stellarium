@@ -976,9 +976,9 @@ void AstroCalcDialog::initListHECPositions()
 
 void AstroCalcDialog::setHECPositionsHeaderNames()
 {
-
 	hecPositionsHeader.clear();
-	hecPositionsHeader << "#";
+	// TRANSLATORS: Symbol for "number"
+	hecPositionsHeader << qc_("#", "numero sign");
 	// TRANSLATORS: name of object
 	hecPositionsHeader << q_("Name");
 	// TRANSLATORS: ecliptic latitude
