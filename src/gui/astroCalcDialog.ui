@@ -357,121 +357,213 @@
       <item row="1" column="0">
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>7</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="stackedWidgetPage1">
          <layout class="QGridLayout" name="gridLayout_2">
-          <item row="3" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_15">
-            <item>
-             <widget class="QLabel" name="celestialPositionsTimeLabel">
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="celestialPositionsSaveButton">
-              <property name="text">
-               <string>Export positions...</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="celestialPositionsUpdateButton">
-              <property name="text">
-               <string>Update positions</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="0" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_16">
-            <item>
-             <widget class="QLabel" name="celestialMagnitudeLimitLabel">
-              <property name="toolTip">
-               <string>Show objects brighter than magnitude</string>
-              </property>
-              <property name="text">
-               <string>Up to mag.:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QDoubleSpinBox" name="celestialMagnitudeDoubleSpinBox">
-              <property name="maximum">
-               <double>25.000000000000000</double>
-              </property>
-              <property name="value">
-               <double>12.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QCheckBox" name="horizontalCoordinatesCheckBox">
-              <property name="toolTip">
-               <string>Use horizontal coordinates</string>
-              </property>
-              <property name="text">
-               <string comment="horizonal coordinates">H.C.</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_2">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QComboBox" name="celestialCategoryComboBox">
-              <property name="editable">
-               <bool>true</bool>
-              </property>
-              <property name="insertPolicy">
-               <enum>QComboBox::NoInsert</enum>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="2" column="0">
-           <widget class="QTreeWidget" name="celestialPositionsTreeWidget">
-            <property name="toolTip">
-             <string>List of objects above horizon</string>
+          <item row="1" column="0">
+           <widget class="QTabWidget" name="tabWidgetPositions">
+            <property name="tabPosition">
+             <enum>QTabWidget::South</enum>
             </property>
-            <property name="editTriggers">
-             <set>QAbstractItemView::NoEditTriggers</set>
-            </property>
-            <property name="rootIsDecorated">
-             <bool>false</bool>
-            </property>
-            <property name="uniformRowHeights">
-             <bool>true</bool>
-            </property>
-            <property name="itemsExpandable">
-             <bool>false</bool>
-            </property>
-            <property name="sortingEnabled">
-             <bool>true</bool>
-            </property>
-            <property name="expandsOnDoubleClick">
-             <bool>false</bool>
-            </property>
-            <property name="columnCount">
+            <property name="currentIndex">
              <number>0</number>
             </property>
-            <attribute name="headerShowSortIndicator" stdset="0">
-             <bool>true</bool>
-            </attribute>
+            <widget class="QWidget" name="tabObjects">
+             <attribute name="title">
+              <string>Seen now</string>
+             </attribute>
+             <layout class="QGridLayout" name="gridLayout_22">
+              <item row="0" column="0">
+               <layout class="QHBoxLayout" name="horizontalLayout_16">
+                <item>
+                 <widget class="QLabel" name="celestialMagnitudeLimitLabel">
+                  <property name="toolTip">
+                   <string>Show objects brighter than magnitude</string>
+                  </property>
+                  <property name="text">
+                   <string>Up to mag.:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QDoubleSpinBox" name="celestialMagnitudeDoubleSpinBox">
+                  <property name="maximum">
+                   <double>25.000000000000000</double>
+                  </property>
+                  <property name="value">
+                   <double>12.000000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="horizontalCoordinatesCheckBox">
+                  <property name="toolTip">
+                   <string>Use horizontal coordinates</string>
+                  </property>
+                  <property name="text">
+                   <string comment="horizonal coordinates">H.C.</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_2">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="celestialCategoryComboBox">
+                  <property name="editable">
+                   <bool>true</bool>
+                  </property>
+                  <property name="insertPolicy">
+                   <enum>QComboBox::NoInsert</enum>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="1" column="0">
+               <widget class="QTreeWidget" name="celestialPositionsTreeWidget">
+                <property name="toolTip">
+                 <string>List of objects above horizon</string>
+                </property>
+                <property name="editTriggers">
+                 <set>QAbstractItemView::NoEditTriggers</set>
+                </property>
+                <property name="rootIsDecorated">
+                 <bool>false</bool>
+                </property>
+                <property name="uniformRowHeights">
+                 <bool>true</bool>
+                </property>
+                <property name="itemsExpandable">
+                 <bool>false</bool>
+                </property>
+                <property name="sortingEnabled">
+                 <bool>true</bool>
+                </property>
+                <property name="expandsOnDoubleClick">
+                 <bool>false</bool>
+                </property>
+                <property name="columnCount">
+                 <number>0</number>
+                </property>
+                <attribute name="headerShowSortIndicator" stdset="0">
+                 <bool>true</bool>
+                </attribute>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <layout class="QHBoxLayout" name="horizontalLayout_15">
+                <item>
+                 <widget class="QLabel" name="celestialPositionsTimeLabel">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="celestialPositionsSaveButton">
+                  <property name="text">
+                   <string>Export positions...</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="celestialPositionsUpdateButton">
+                  <property name="text">
+                   <string>Update positions</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="tabSolarSystem">
+             <attribute name="title">
+              <string>Major planets</string>
+             </attribute>
+             <layout class="QGridLayout" name="gridLayout_23">
+              <item row="2" column="1">
+               <widget class="QChartView" name="hecPositionsGraph">
+                <property name="renderHints">
+                 <set>QPainter::Antialiasing|QPainter::TextAntialiasing</set>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0" colspan="2">
+               <widget class="QLabel" name="hecPositionsHeaderLabel">
+                <property name="font">
+                 <font>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Heliocentric ecliptic positions of the major planets</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0" colspan="2">
+               <layout class="QHBoxLayout" name="horizontalLayout_23">
+                <item>
+                 <widget class="QLabel" name="hecPositionsTimeLabel"/>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="hecPositionsSaveButton">
+                  <property name="text">
+                   <string>Export positions...</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="hecPositionsUpdateButton">
+                  <property name="text">
+                   <string>Update positions</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="2" column="0">
+               <widget class="QTreeWidget" name="hecPositionsTreeWidget">
+                <property name="editTriggers">
+                 <set>QAbstractItemView::NoEditTriggers</set>
+                </property>
+                <property name="rootIsDecorated">
+                 <bool>false</bool>
+                </property>
+                <property name="uniformRowHeights">
+                 <bool>true</bool>
+                </property>
+                <property name="itemsExpandable">
+                 <bool>false</bool>
+                </property>
+                <property name="sortingEnabled">
+                 <bool>true</bool>
+                </property>
+                <property name="expandsOnDoubleClick">
+                 <bool>false</bool>
+                </property>
+                <property name="columnCount">
+                 <number>0</number>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
            </widget>
           </item>
          </layout>
@@ -2799,6 +2891,11 @@
    <class>QCustomPlot</class>
    <extends>QWidget</extends>
    <header>external/qcustomplot/qcustomplot.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QChartView</class>
+   <extends>QGraphicsView</extends>
+   <header>QtCharts/qchartview.h</header>
   </customwidget>
  </customwidgets>
  <resources>

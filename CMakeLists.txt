@@ -484,6 +484,7 @@ FIND_PACKAGE(Qt5Widgets REQUIRED)
 # required for qcustomplot external dependency
 # not used elsewhere
 FIND_PACKAGE(Qt5PrintSupport REQUIRED)
+FIND_PACKAGE(Qt5Charts REQUIRED)
 IF(USE_PLUGIN_TELESCOPECONTROL OR ENABLE_GPS)
      FIND_PACKAGE(Qt5SerialPort REQUIRED)
 ENDIF()

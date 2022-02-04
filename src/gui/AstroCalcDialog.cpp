@@ -60,6 +60,9 @@
 #include <QSortFilterProxyModel>
 #include <QStringListModel>
 
+#include <QtCharts/QtCharts>
+using namespace QtCharts;
+
 #include "AstroCalcDialog.hpp"
 #include "AstroCalcExtraEphemerisDialog.hpp"
 #include "AstroCalcCustomStepsDialog.hpp"
@@ -164,6 +167,7 @@ void AstroCalcDialog::retranslate()
 	{
 		ui->retranslateUi(dialog);
 		setCelestialPositionsHeaderNames();
+		setHECPositionsHeaderNames();
 		setEphemerisHeaderNames();
 		setTransitHeaderNames();
 		setPhenomenaHeaderNames();
@@ -177,6 +181,7 @@ void AstroCalcDialog::retranslate()
 		populatePlanetList();
 		populateGroupCelestialBodyList();
 		currentCelestialPositions();
+		currentHECPositions();
 		prepareAxesAndGraph();
 		prepareAziVsTimeAxesAndGraph();
 		populateFunctionsList();
@@ -223,7 +228,16 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
+	// prepare default background gradient for all graphs
+	graphBackgroundGradient.setStart(QPointF(0, 0));
+	graphBackgroundGradient.setFinalStop(QPointF(0, 1));
+	// Colors for gradiaent taken from QSS's QWidget
+	graphBackgroundGradient.setColorAt(0.0, QColor(90, 90, 90));
+	graphBackgroundGradient.setColorAt(1.0, QColor(70, 70, 70));
+	graphBackgroundGradient.setCoordinateMode(QGradient::ObjectBoundingMode);
+
 	initListCelestialPositions();
+	initListHECPositions();
 	initListPhenomena();	
 	populateCelestialBodyList();
 	populateCelestialCategoryList();
@@ -305,6 +319,11 @@ void AstroCalcDialog::createDialogContent()
 	connect(dsoMgr, SIGNAL(flagSizeLimitsUsageChanged(bool)), this, SLOT(currentCelestialPositions()));
 	connect(dsoMgr, SIGNAL(minSizeLimitChanged(double)), this, SLOT(currentCelestialPositions()));
 	connect(dsoMgr, SIGNAL(maxSizeLimitChanged(double)), this, SLOT(currentCelestialPositions()));
+
+	connect(ui->hecPositionsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentHECPosition(QModelIndex)));
+	connect(ui->hecPositionsUpdateButton, SIGNAL(clicked()), this, SLOT(currentHECPositions()));
+	connect(ui->hecPositionsSaveButton, SIGNAL(clicked()), this, SLOT(saveHECPositions()));
+	connect(ui->tabWidgetPositions, SIGNAL(currentChanged(int)), this, SLOT(changePositionsTab(int)));
 
 	connectBoolProperty(ui->ephemerisShowLineCheckBox, "SolarSystem.ephemerisLineDisplayed");
 	connectBoolProperty(ui->ephemerisShowMarkersCheckBox, "SolarSystem.ephemerisMarkersDisplayed");
@@ -546,6 +565,7 @@ void AstroCalcDialog::createDialogContent()
 	updateTabBarListWidgetWidth();
 
 	ui->celestialPositionsUpdateButton->setShortcut(QKeySequence("Shift+F10"));
+	ui->hecPositionsUpdateButton->setShortcut(QKeySequence("Shift+F10"));
 	ui->ephemerisPushButton->setShortcut(QKeySequence("Shift+F10"));
 	ui->transitsCalculateButton->setShortcut(QKeySequence("Shift+F10"));
 	ui->phenomenaPushButton->setShortcut(QKeySequence("Shift+F10"));
@@ -556,6 +576,7 @@ void AstroCalcDialog::createDialogContent()
 	// Let's improve visibility of the text
 	QString style = "QLabel { color: rgb(238, 238, 238); }";
 	ui->celestialPositionsTimeLabel->setStyleSheet(style);
+	ui->hecPositionsTimeLabel->setStyleSheet(style);
 	ui->altVsTimeLabel->setStyleSheet(style);
 	//ui->altVsTimeTitle->setStyleSheet(style);
 	ui->aziVsTimeLabel->setStyleSheet(style);
@@ -949,6 +970,40 @@ void AstroCalcDialog::adjustCelestialPositionsColumns()
 	for (int i = 0; i < CColumnCount; ++i)
 	{
 		ui->celestialPositionsTreeWidget->resizeColumnToContents(i);
+	}
+}
+
+void AstroCalcDialog::initListHECPositions()
+{
+	ui->hecPositionsTreeWidget->clear();
+	ui->hecPositionsTreeWidget->setColumnCount(HECColumnCount);
+	setHECPositionsHeaderNames();
+	ui->hecPositionsTreeWidget->header()->setSectionsMovable(false);
+	ui->hecPositionsTreeWidget->header()->setDefaultAlignment(Qt::AlignCenter);
+}
+
+void AstroCalcDialog::setHECPositionsHeaderNames()
+{
+	hecPositionsHeader.clear();
+	// TRANSLATORS: name of object
+	hecPositionsHeader << q_("Name");
+	// TRANSLATORS: ecliptic latitude
+	hecPositionsHeader << q_("Latitude");
+	// TRANSLATORS: ecliptic longitude
+	hecPositionsHeader << q_("Longitude");
+	// TRANSLATORS: distance
+	hecPositionsHeader << q_("Distance");
+
+	ui->hecPositionsTreeWidget->setHeaderLabels(hecPositionsHeader);
+	adjustHECPositionsColumns();
+}
+
+void AstroCalcDialog::adjustHECPositionsColumns()
+{
+	// adjust the column width
+	for (int i = 0; i < HECColumnCount; ++i)
+	{
+		ui->hecPositionsTreeWidget->resizeColumnToContents(i);
 	}
 }
 
@@ -1524,6 +1579,235 @@ void AstroCalcDialog::selectCurrentCelestialPosition(const QModelIndex& modelInd
 			mvMgr->setFlagTracking(true);
 		}
 	}	
+}
+
+void AstroCalcDialog::fillHECPositionTable(QString objectName, QString latitude, QString longitude, double distance)
+{
+	AHECPosTreeWidgetItem* treeItem = new AHECPosTreeWidgetItem(ui->hecPositionsTreeWidget);
+	treeItem->setText(HECColumnName, objectName);
+	treeItem->setTextAlignment(HECColumnName, Qt::AlignLeft);
+	treeItem->setText(HECColumnLatitude, latitude);
+	treeItem->setTextAlignment(HECColumnLatitude, Qt::AlignRight);
+	treeItem->setText(HECColumnLongitude, longitude);
+	treeItem->setTextAlignment(HECColumnLongitude, Qt::AlignRight);
+	treeItem->setText(HECColumnDistance, QString("%1 %2").arg(QString::number(distance, 'f', 2), qc_("AU", "distance, astronomical unit")));
+	treeItem->setData(HECColumnDistance, Qt::UserRole, distance);
+	treeItem->setTextAlignment(HECColumnDistance, Qt::AlignRight);
+	treeItem->setToolTip(HECColumnDistance, q_("Distance from the Sun at the moment of computation of position"));
+}
+
+void AstroCalcDialog::currentHECPositions()
+{
+	QPair<QString, QString> coordStrings;
+	initListHECPositions();
+	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+
+	double distance, longitude, latitude, dl;
+	Vec3d pos;
+	bool sign;
+	QScatterSeries *seriesPlanets = new QScatterSeries();
+	QScatterSeries *seriesSun = new QScatterSeries();
+	seriesSun->append(0., -1.5);
+	const double JD = core->getJD();
+	ui->hecPositionsTimeLabel->setText(q_("Positions on %1").arg(QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD))));
+
+	QList<PlanetP> planets = solarSystem->getAllPlanets();
+	for (const auto& planet : qAsConst(planets))
+	{
+		if (planet->getPlanetType() == Planet::isPlanet)
+		{
+			pos = planet->getHeliocentricEclipticPos();
+			distance = pos.length();
+			StelUtils::rectToSphe(&longitude, &latitude, pos);
+			if (longitude<0) longitude+=2.0*M_PI;
+			StelUtils::radToDecDeg(longitude, sign, dl);
+			if (withDecimalDegree)
+			{
+				coordStrings.first  = StelUtils::radToDecDegStr(latitude);
+				coordStrings.second = StelUtils::radToDecDegStr(longitude);
+			}
+			else
+			{
+				coordStrings.first  = StelUtils::radToDmsStr(latitude, true);
+				coordStrings.second = StelUtils::radToDmsStr(longitude, true);
+			}
+
+			fillHECPositionTable(planet->getNameI18n(), coordStrings.first, coordStrings.second, distance);
+			seriesPlanets->append(360.-dl, log(distance));
+		}
+	}
+
+	adjustHECPositionsColumns();
+	// sort-by-distance
+	ui->hecPositionsTreeWidget->sortItems(HECColumnDistance, Qt::AscendingOrder);
+
+	QColor axisColor(Qt::lightGray);
+	QColor labelColor(Qt::white);
+
+	QPolarChart *chart = new QPolarChart();
+	chart->addSeries(seriesPlanets);
+	chart->addSeries(seriesSun);
+	chart->legend()->hide();
+	chart->setMargins(QMargins(0, 0, 0, 0));
+	chart->setBackgroundVisible(false);
+
+	// QPolarChart only has clockwise counting.
+	// We prevent a view from below with a manually labeled category axis.
+	QCategoryAxis *angularAxis = new QCategoryAxis();
+	angularAxis->setTickCount(13); // First and last ticks are co-located on 0/360 angle (30 degrees per tick).
+	angularAxis->append("330&deg;", 30);
+	angularAxis->append("300&deg;", 60);
+	angularAxis->append("270&deg;", 90);
+	angularAxis->append("240&deg;", 120);
+	angularAxis->append("210&deg;", 150);
+	angularAxis->append("180&deg;", 180);
+	angularAxis->append("150&deg;", 210);
+	angularAxis->append("120&deg;", 240);
+	angularAxis->append("90&deg;", 270);
+	angularAxis->append("60&deg;", 300);
+	angularAxis->append("30&deg;", 330);
+	angularAxis->append("0&deg;", 360);
+	angularAxis->setLabelsPosition(QCategoryAxis::AxisLabelsPositionOnValue);
+	angularAxis->setLabelsColor(labelColor);
+	angularAxis->setGridLineColor(axisColor);
+	angularAxis->setRange(0, 360);
+	chart->addAxis(angularAxis, QPolarChart::PolarOrientationAngular);
+
+	// The QLogValueAxis has a stupid limit for the low end. Again, circumvent it with a CategoryAxis.
+	QCategoryAxis *radialAxis = new QCategoryAxis();
+	radialAxis->append("0.5", log(.5));  // a few stop marks for AU values
+	radialAxis->append("1", log(1));
+	radialAxis->append("2", log(2));
+	radialAxis->append("5", log(5));
+	radialAxis->append("10", log(10));
+	radialAxis->append("20", log(20));
+	radialAxis->append("30", log(30));
+	radialAxis->setLabelsPosition(QCategoryAxis::AxisLabelsPositionOnValue);
+	radialAxis->setLabelsColor(labelColor);
+	radialAxis->setGridLineColor(axisColor);
+	radialAxis->setLineVisible(false);
+	radialAxis->setRange(-1.5, log(32));
+	chart->addAxis(radialAxis, QPolarChart::PolarOrientationRadial);
+
+	seriesPlanets->attachAxis(angularAxis);
+	seriesPlanets->attachAxis(radialAxis);
+	seriesPlanets->setMarkerSize(5);
+	seriesPlanets->setColor(Qt::cyan);
+	seriesPlanets->setBorderColor(Qt::transparent);
+
+	seriesSun->attachAxis(angularAxis);
+	seriesSun->attachAxis(radialAxis);
+	seriesSun->setMarkerSize(9);
+	seriesSun->setColor(Qt::yellow);
+	seriesSun->setBorderColor(Qt::red);
+
+	ui->hecPositionsGraph->setChart(chart);
+	ui->hecPositionsGraph->setBackgroundBrush(graphBackgroundGradient);
+}
+
+void AstroCalcDialog::saveHECPositions()
+{
+	QString filter = q_("Microsoft Excel Open XML Spreadsheet");
+	filter.append(" (*.xlsx);;");
+	filter.append(q_("CSV (Comma delimited)"));
+	filter.append(" (*.csv)");
+	QString defaultFilter("(*.xlsx)");
+	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
+							q_("Save celestial positions of objects as..."),
+							QDir::homePath() + "/positions.xlsx",
+							filter,
+							&defaultFilter);
+
+	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
+		saveTableAsCSV(filePath, ui->hecPositionsTreeWidget, hecPositionsHeader);
+	else
+	{
+		int count = ui->hecPositionsTreeWidget->topLevelItemCount();
+		int columns = hecPositionsHeader.size();
+		int *width = new int[static_cast<unsigned int>(columns)];
+		QString sData;
+
+		QXlsx::Document xlsx;
+		xlsx.setDocumentProperty("title", q_("Heliocentric ecliptic positions of major planets"));
+		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
+		xlsx.addSheet(q_("Major planets"), AbstractSheet::ST_WorkSheet);
+
+		QXlsx::Format header;
+		header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
+		header.setPatternBackgroundColor(Qt::yellow);
+		header.setBorderStyle(QXlsx::Format::BorderThin);
+		header.setBorderColor(Qt::black);
+		header.setFontBold(true);
+		for (int i = 0; i < columns; i++)
+		{
+			// Row 1: Names of columns
+			sData = hecPositionsHeader.at(i).trimmed();
+			xlsx.write(1, i + 1, sData, header);
+			width[i] = sData.size();
+		}
+
+		QXlsx::Format data;
+		data.setHorizontalAlignment(QXlsx::Format::AlignRight);
+		for (int i = 0; i < count; i++)
+		{
+			for (int j = 0; j < columns; j++)
+			{
+				// Row 2 and next: the data
+				sData = ui->hecPositionsTreeWidget->topLevelItem(i)->text(j).trimmed();
+				xlsx.write(i + 2, j + 1, sData, data);
+				int w = sData.size();
+				if (w > width[j])
+				{
+					width[j] = w;
+				}
+			}
+		}
+
+		for (int i = 0; i < columns; i++)
+		{
+			xlsx.setColumnWidth(i+1, width[i]+2);
+		}
+
+		delete[] width;
+
+		// Add the date and time info for celestial positions
+		xlsx.write(count + 2, 1, ui->hecPositionsTimeLabel->text());
+		QXlsx::CellRange range = CellRange(count+2, 1, count+2, columns);
+		QXlsx::Format extraData;
+		extraData.setBorderStyle(QXlsx::Format::BorderThin);
+		extraData.setBorderColor(Qt::black);
+		extraData.setPatternBackgroundColor(Qt::yellow);
+		extraData.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
+		xlsx.mergeCells(range, extraData);
+
+		xlsx.saveAs(filePath);
+	}
+}
+
+void AstroCalcDialog::selectCurrentHECPosition(const QModelIndex& modelIndex)
+{
+	// Find the object
+	QString nameI18n = modelIndex.sibling(modelIndex.row(), HECColumnName).data().toString();
+	bool found = (objectMgr->findAndSelectI18n(nameI18n) || objectMgr->findAndSelect(nameI18n));
+
+	if (!found)
+	{
+		QStringList list = nameI18n.split("(");
+		if (list.count() > 0 && nameI18n.lastIndexOf("(") != 0 && nameI18n.lastIndexOf("/") < 0)
+			nameI18n = list.at(0).trimmed();
+
+		found = (objectMgr->findAndSelectI18n(nameI18n) || objectMgr->findAndSelect(nameI18n));
+	}
+
+	if (found)
+	{
+		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
+		if (!newSelected.empty())
+		{
+			mvMgr->moveToObject(newSelected[0], mvMgr->getAutoMoveDuration());
+			mvMgr->setFlagTracking(true);
+		}
+	}
 }
 
 void AstroCalcDialog::selectCurrentEphemeride(const QModelIndex& modelIndex)
@@ -6826,6 +7110,12 @@ void AstroCalcDialog::changeGraphsTab(int index)
 		plotAngularDistanceGraph = true;
 		drawAngularDistanceGraph(); // Is object already selected?
 	}
+}
+
+void AstroCalcDialog::changePositionsTab(int index)
+{
+	if (index==1)
+		currentHECPositions();
 }
 
 void AstroCalcDialog::changeEclipsesTab(int index)

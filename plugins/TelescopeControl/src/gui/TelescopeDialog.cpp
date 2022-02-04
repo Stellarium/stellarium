@@ -518,7 +518,7 @@ void TelescopeDialog::setHeaderNames()
 {
 	QStringList headerStrings;
 	// TRANSLATORS: Symbol for "number"
-	headerStrings << q_("#");
+	headerStrings << qc_("#", "numero sign");
 	//headerStrings << "Start";
 	headerStrings << q_("Status");
 	headerStrings << q_("Type");

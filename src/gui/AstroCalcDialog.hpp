@@ -79,6 +79,17 @@ public:
 		CColumnCount            //! total number of columns
 	};
 
+	//! Defines the number and the order of the columns in the table that major planets positions
+	//! (heliocentric ecliptic coordinates)
+	//! @enum HECPositionsColumns
+	enum HECPositionsColumns {
+		HECColumnName,          //! name of the planet
+		HECColumnLatitude,      //! heliocentric ecliptical latitude
+		HECColumnLongitude,     //! heliocentric ecliptical longitude
+		HECColumnDistance,      //! distance
+		HECColumnCount          //! total number of columns
+	};
+
 	//! Defines the number and the order of the columns in the ephemeris table
 	//! @enum EphemerisColumns
 	enum EphemerisColumns {
@@ -228,6 +239,10 @@ private slots:
 	void saveCelestialPositions();
 	void selectCurrentCelestialPosition(const QModelIndex &modelIndex);
 
+	void currentHECPositions();
+	void saveHECPositions();
+	void selectCurrentHECPosition(const QModelIndex &modelIndex);
+
 	void saveCelestialPositionsMagnitudeLimit(double mag);
 	void saveCelestialPositionsHorizontalCoordinatesFlag(bool b);
 	void saveCelestialPositionsCategory(int index);
@@ -358,6 +373,7 @@ private slots:
 	void changePCTab(int index);
 	void changeGraphsTab(int index);
 	void changeEclipsesTab(int index);
+	void changePositionsTab(int index);
 
 	void updateSolarSystemData();
 	void populateCelestialNames(QString);
@@ -378,6 +394,7 @@ private:
 	//QStringListModel* wutModel;
 	//QSortFilterProxyModel *proxyModel;
 	QSettings* conf;
+	QLinearGradient graphBackgroundGradient;
 	QTimer *currentTimeLine;
 	QHash<QString,int> wutCategories;
 	QPair<double, double> getLunarEclipseXY() const;
@@ -387,6 +404,8 @@ private:
 
 	//! Update header names for celestial positions tables
 	void setCelestialPositionsHeaderNames();
+	//! Update header names for celestial positions tables (major planets; heliocentric ecliptic coordinates)
+	void setHECPositionsHeaderNames();
 	//! Update header names for ephemeris table
 	void setEphemerisHeaderNames();
 	//! update header names for transit table
@@ -404,6 +423,8 @@ private:
 
 	//! Init header and list of celestial positions
 	void initListCelestialPositions();
+	//! Init header and list of celestial positions (major planets; heliocentric ecliptic coordinates)
+	void initListHECPositions();
 	//! Init header and list of ephemeris
 	void initListEphemeris();
 	//! Init header and list of transits
@@ -443,6 +464,7 @@ private:
 	double computeMaxElevation(StelObjectP obj);
 
 	void adjustCelestialPositionsColumns();
+	void adjustHECPositionsColumns();
 	void adjustWUTColumns();
 	void adjustPhenomenaColumns();
 
@@ -462,6 +484,7 @@ private:
 					QString angularSize, QString angularSizeToolTip, QString extraData,
 					QString extraDataToolTip, QString transitTime, QString maxElevation,
 					QString sElongation, QString objectType);
+	void fillHECPositionTable(QString objectName, QString latitude, QString longitude, double distance);
 
 	//! Calculation conjunctions and oppositions.
 	//! @note Ported from KStars, should be improved, because this feature calculates
@@ -498,7 +521,7 @@ private:
 
 	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph, plotAngularDistanceGraph, plotAziVsTime;
 	int altVsTimePositiveLimit, monthlyElevationPositiveLimit, graphsDuration;
-	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, wutHeader, transitHeader, lunareclipseHeader, solareclipseHeader, solareclipselocalHeader;
+	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, hecPositionsHeader, wutHeader, transitHeader, lunareclipseHeader, solareclipseHeader, solareclipselocalHeader;
 	static double brightLimit;
 	static double minY, maxY, minYme, maxYme, minYsun, maxYsun, minYmoon, maxYmoon, transitX, minY1, maxY1, minY2, maxY2,
 			     minYld, maxYld, minYad, maxYad, minYadm, maxYadm, minYaz, maxYaz;
@@ -647,6 +670,35 @@ private:
 		else if (column == AstroCalcDialog::CColumnTransit)
 		{
 			return StelUtils::hmsStrToHours(text(column).append("00s")) < StelUtils::hmsStrToHours(other.text(column).append("00s"));
+		}
+		else
+		{
+			return text(column).toLower() < other.text(column).toLower();
+		}
+	}
+};
+
+// Reimplements the QTreeWidgetItem class to fix the sorting bug
+class AHECPosTreeWidgetItem : public QTreeWidgetItem
+{
+public:
+	AHECPosTreeWidgetItem(QTreeWidget* parent)
+		: QTreeWidgetItem(parent)
+	{
+	}
+
+private:
+	bool operator < (const QTreeWidgetItem &other) const Q_DECL_OVERRIDE
+	{
+		int column = treeWidget()->sortColumn();
+
+		if (column == AstroCalcDialog::HECColumnLatitude || column == AstroCalcDialog::HECColumnLongitude)
+		{
+			return StelUtils::getDecAngle(text(column)) < StelUtils::getDecAngle(other.text(column));
+		}
+		else if (column == AstroCalcDialog::HECColumnDistance)
+		{
+			return data(column, Qt::UserRole).toFloat() < other.data(column, Qt::UserRole).toFloat();
 		}
 		else
 		{
