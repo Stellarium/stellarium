@@ -491,6 +491,7 @@ QString MeteorShower::getSolarLongitude(QDate date)
 	// put it in the range 0 to 360 degrees
 	l /= 360.;
 	l = (l - static_cast<int>(l)) * 360. - 1.;
+	l = StelUtils::fmodpos(l, 360.0);
 
 	return QString::number(l, 'f', 2);
 }
