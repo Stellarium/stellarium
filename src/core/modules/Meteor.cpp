@@ -27,6 +27,11 @@
 
 #include <QtMath>
 
+#define EARTH_RADIUSf 6378.f          //! earth_radius in km
+#define EARTH_RADIUS2 40678884.f     //! earth_radius^2 in km
+#define MAX_ALTITUDE 120.f           //! max meteor altitude in km
+#define MIN_ALTITUDE 80.f            //! min meteor altitude in km
+
 Meteor::Meteor(const StelCore* core, const StelTextureSP& bolideTexture)
 	: m_core(core)
 	, m_alive(false)
@@ -316,9 +321,9 @@ float Meteor::meteorZ(float zenithAngle, float altitude)
 	{
 		const float zcos = cos(zenithAngle);
 		distance = sqrt(EARTH_RADIUS2 * pow(zcos, 2)
-				 + 2 * EARTH_RADIUS * altitude
+				 + 2 * EARTH_RADIUSf * altitude
 				 + pow(altitude, 2));
-		distance -= EARTH_RADIUS * zcos;
+		distance -= EARTH_RADIUSf * zcos;
 	}
 	else
 	{
