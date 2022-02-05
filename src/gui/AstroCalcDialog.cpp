@@ -3018,11 +3018,15 @@ pSEparameter partialSolarEclipse() {
 	double L1 = bessel.L1;
 	double L2 = bessel.L2;
 	const double mu = bessel.mu;
-	constexpr double e2 = 0.00669398;
-	// e^2 = 0.00669398 : Earth flattening parameter
-	// f = 298.25642 : e^2 = 2f-f^2
-	// Source: IERS Conventions (2003)
+	constexpr double e2 = 0.00669438;
+	// e^2 = 0.00669438 : Earth flattening parameter
+	// Inverse flattening 1/f = 298.257223563 : e^2 = 2f-f^2
+	// Source: 1984 World Geodetic System (WGS 84)
+	// https://web.archive.org/web/20200710203711/http://www.epsg-registry.org/export.htm?gml=urn:ogc:def:ellipsoid:EPSG::7030
+	// There is a modern value from IERS Conventions (2003)
+	// 1/f = 298.25642 But seem to be not widely used
 	// https://www.iers.org/IERS/EN/Publications/TechnicalNotes/tn32.html
+	// We use older value to be comparable with literatures and consistence across Stellarium
 
 	const double rho1 = sqrt(1.- e2 * cos(d) * cos(d));
 	const double yy1 = y / rho1;
@@ -3039,8 +3043,8 @@ pSEparameter partialSolarEclipse() {
 	
 	const double sfn1 = eta1*cd1;
 	const double cfn1 = sqrt(1.- sfn1 * sfn1);
-	double lat = 1.003364092 * sfn1 / cfn1;
-	// 1.003364092 = 6378.1366 / 6356.7519
+	double lat = 1.0033640898 * sfn1 / cfn1;
+	// 1.0033640898 = 1/(1-1/f) See flattening parameter above
 	lat = atan(lat);
 	L1 = L1 - zeta * tf1;
 	L2 = L2 - zeta * tf2;
@@ -3103,7 +3107,7 @@ cSEparameter centralSolarEclipse(double JD) {
 	double L2 = bessel.L2;
 	const double mu = bessel.mu;
 
-	constexpr double e2 = 0.00669398;
+	constexpr double e2 = 0.00669438;
 	const double rho1 = sqrt(1. - e2 * cos(d) *cos(d));
 	const double y1 = y / rho1;
 	const double eta1 = y1;
@@ -3135,7 +3139,7 @@ cSEparameter centralSolarEclipse(double JD) {
 		lon = -(lon); // + East, - West
 		const double sfn1 = eta1 * cd1 + zeta1 * sd1;
 		const double cfn1 = sqrt(1. - sfn1 * sfn1);
-		lat = 1.003364092 * sfn1 / cfn1;
+		lat = 1.0033640898 * sfn1 / cfn1;
 		lat = atan(lat) / M_PI_180;
 		L1 = L1 - zeta * tf1;
 		const double magnitude = L1 / (L1 + L2);
@@ -3202,6 +3206,7 @@ struct localSEparameter {
 	double dt;
 	double L1;
 	double L2;
+	double ce;
 	double magnitude;
 	double altitude;
 };
@@ -3228,7 +3233,7 @@ localSEparameter localSolarEclipse(double JD,int contact,bool central) {
 	core->setJD(JD);
 	core->update(0);
 
-	const double e2 = 0.00669398;
+	constexpr double e2 = 0.00669438;
 	const double earthRadius = 6378136.6; // Earth's equatorial radius in metre
 	// Source: IERS Conventions (2003)
 	// https://www.iers.org/IERS/EN/Publications/TechnicalNotes/tn32.html
@@ -3295,9 +3300,10 @@ localSEparameter localSolarEclipse(double JD,int contact,bool central) {
 	else
 		L = L1;
 	const double sfi = delta/L;
-	double cfi = 0.;
-	if ((1.-sfi*sfi) > 0.)
-		cfi = contact * sqrt(1.-sfi*sfi);
+	const double ce = 1.- sfi*sfi;
+	double cfi = 0.; 
+	if (ce > 0.)
+		cfi = contact * sqrt(ce);
 	const double m = sqrt(u * u + v * v);
 	const double magnitude = (L1 - m) / (L1 + L2);
 	const double altitude = asin(rc*cos(d)*cos(theta)+rs*sin(d)) / M_PI_180;
@@ -3306,6 +3312,7 @@ localSEparameter localSolarEclipse(double JD,int contact,bool central) {
 	result.dt = dt;
 	result.L1 = L1;
 	result.L2 = L2;
+	result.ce = ce;
 	result.magnitude = magnitude;
 	result.altitude = altitude;
 
@@ -3784,7 +3791,6 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 							}
 
 							// 2nd contact - start of totality/annularity
-							double L2 = 0.;
 							iteration = 0;
 							dt = 1.;
 							JD2 = JD;
@@ -3813,12 +3819,10 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 							}
 							double C3altitude = eclipseData.altitude;
 
-							L2 = eclipseData.L2;
-
-							if (abs(JD3-JD2) > 1./86400. && (C2altitude > 0.) && (C3altitude > 0.)) // Central eclipse occurs
+							if (eclipseData.ce > 0. && ((C2altitude > 0.) || (C3altitude > 0.))) // Central eclipse occurs
 							{
 								centraleclipse = true;
-								if (L2 < 0.)
+								if (eclipseData.L2 < 0.)
 								{
 									eclipseTypeStr = qc_("Total", "eclipse type");
 									JD = JD3;
