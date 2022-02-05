@@ -38,6 +38,12 @@
 #define SPEED_OF_LIGHT 299792.458
 // Ecliptic obliquity of J2000.0, degrees
 #define EPS_0 23.4392803055555555555556
+// Equatorial radius of the Earth in km
+#define EARTH_RADIUS 6378.1366
+// Equatorial radius of the Sun in km
+#define SUN_RADIUS 696000.
+// Equatorial radius of the Moon in km
+#define MOON_RADIUS 1738.
 
 // Add a few frequently used extra math-type literals
 #ifndef M_PI_180
