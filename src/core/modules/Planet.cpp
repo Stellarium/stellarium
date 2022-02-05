@@ -909,32 +909,39 @@ public:
 		z += cos(deMoon) * cos(d) * cos((raMoon - a));
 		z *= mdistanceER;
 		// parameters of the shadow cone
-		const double f1 = asin((SunEarth + 0.272488) / (rss * (1 - b)));
+		const double f1 = asin((SunEarth + 0.2725076) / (rss * (1 - b)));
 		const double tf1 = tan(f1);
 		const double f2 = asin((SunEarth - 0.272281) / (rss * (1 - b)));
 		const double tf2 = tan(f2);
-		double L1 = z * tf1 + (0.272488 / cos(f1));
+		double L1 = z * tf1 + (0.2725076 / cos(f1));
 		double L2 = z * tf2 - (0.272281 / cos(f2));
 		double mu = gast - a / M_PI_180;
+		constexpr double e2 = 0.00669438;
+		// e^2 = 0.00669438 : Earth flattening parameter
+		// Inverse flattening 1/f = 298.257223563 : e^2 = 2f-f^2
+		// Source: 1984 World Geodetic System (WGS 84)
+		// https://web.archive.org/web/20200710203711/http://www.epsg-registry.org/export.htm?gml=urn:ogc:def:ellipsoid:EPSG::7030
+		// There is a modern value from IERS Conventions (2003)
+		// 1/f = 298.25642 But seem to be not widely used
+		// https://www.iers.org/IERS/EN/Publications/TechnicalNotes/tn32.html
+		// We use older value to be comparable with literatures and consistence across Stellarium
 
 		// Find Lat./Long. of center line on Earth's surface
 		double cd = cos(d);
-		double rho1 = sqrt(1 - 0.00669398 * cd * cd);
-		// e^2 = 0.00669398 : Earth flattening parameter
-		// IERS 2010 : f = 298.25642 : e^2 = 2f-f^2
+		double rho1 = sqrt(1. - e2 * cd * cd);
 		double y1 = y / rho1;
 		double xi = x;
 		double eta1 = y1;
 		double sd = sin(d);
 		double sd1 = sd / rho1;
-		double cd1 = sqrt(1 - 0.00669398) * cd / rho1;
-		double rho2 = sqrt(1 - 0.00669398 * sd * sd);
-		double sd1d2 = 0.00669398 * sd * cd / (rho1 * rho2);
-		double cd1d2 = sqrt(1 - sd1d2 * sd1d2);
+		double cd1 = sqrt(1. - e2) * cd / rho1;
+		double rho2 = sqrt(1. - e2 * sd * sd);
+		double sd1d2 = e2 * sd * cd / (rho1 * rho2);
+		double cd1d2 = sqrt(1. - sd1d2 * sd1d2);
 		double lon = 0, mag = 0;
 		double lat = 99; // initialize an impossible latitude to indicate no central eclipse
 
-		if ((1 - x * x - y1 * y1) > 0)
+		if ((1. - x * x - y1 * y1) > 0)
 		{
 			const double zeta1 = sqrt(1 - x * x - y1 * y1);
 			const double zeta = rho2 * (zeta1 * cd1d2 - eta1 * sd1d2);
@@ -942,15 +949,16 @@ public:
 			L2 = L2 - zeta * tf2;
 			double b = -y * sd + zeta * cd;
 			double theta = atan2(xi, b) / M_PI_180;
-			if (theta < 0) theta += 360;
-			if (mu > 360) mu -= 360;
+			if (theta < 0.) theta += 360.;
+			if (mu > 360.) mu -= 360.;
 			lon = mu - theta;
-			if (lon < -180) lon += 360;
-			if (lon > 180) lon -= 360;
-			lon *= -1.0; // + East, - West
+			if (lon < -180.) lon += 360.;
+			if (lon > 180.) lon -= 360.;
+			lon = -(lon); // + East, - West
 			double sfn1 = eta1 * cd1 + zeta1 * sd1;
-			double cfn1 = sqrt(1 - sfn1 * sfn1);
-			lat = 1.0033641 * sfn1 / cfn1;
+			double cfn1 = sqrt(1. - sfn1 * sfn1);
+			lat = 1.0033640898 * sfn1 / cfn1;
+			// 1.0033640898 = 1/(1-1/f) See flattening parameter above
 			lat = atan(lat) / M_PI_180;
 			L1 = L1 - zeta * tf1;
 			// Magnitude of eclipse
