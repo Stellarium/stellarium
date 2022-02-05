@@ -120,47 +120,47 @@ const StelLocation Calendar::jerusalem("Jerusalem", "Israel", "Western Asia",   
 const StelLocation Calendar::acre     ("Acre",      "Israel", "Western Asia",     32.94f,       35.09f,        22,    20, "UT+2", 6, 'N');
 const StelLocation Calendar::padua    ("Padua",     "Italy",  "Southern Europe",  45.407778f,   11.8858333f,   18,   200, "UT+1", 6, 'N');
 
-double Calendar::direction(StelLocation loc1, StelLocation loc2)
+double Calendar::direction(const StelLocation &locFrom, const StelLocation &locTo)
 {
 	// We could do that, but south azimuth may cause problems.
 	//return StelLocation::getAzimuthForLocation(static_cast<double>(loc1.longitude), static_cast<double>(loc1.latitude),
 	//					   static_cast<double>(loc2.longitude), static_cast<double>(loc2.latitude));
-	const double longObs    = static_cast<double>(loc1.longitude) * M_PI_180;
-	const double latObs     = static_cast<double>(loc1.latitude ) * M_PI_180;
-	const double longTarget = static_cast<double>(loc2.longitude) * M_PI_180;
-	const double latTarget  = static_cast<double>(loc2.latitude ) * M_PI_180;
+	const double longObs    = static_cast<double>(locFrom.longitude) * M_PI_180;
+	const double latObs     = static_cast<double>(locFrom.latitude ) * M_PI_180;
+	const double longTarget = static_cast<double>(locTo.longitude) * M_PI_180;
+	const double latTarget  = static_cast<double>(locTo.latitude ) * M_PI_180;
 
 	double az = atan2(sin(longTarget-longObs), cos(latObs)*tan(latTarget)-sin(latObs)*cos(longTarget-longObs));
 	return StelUtils::fmodpos(M_180_PI * az, 360.0);
 }
-double Calendar::universalFromLocal(double fractionalDay, StelLocation location)
+double Calendar::universalFromLocal(double fractionalDay, const StelLocation &loc)
 {
-	return fractionalDay-zoneFromLongitude(static_cast<double>(location.longitude));
+	return fractionalDay-zoneFromLongitude(static_cast<double>(loc.longitude));
 }
-double Calendar::localFromUniversal(double fractionalDay, StelLocation location)
+double Calendar::localFromUniversal(double fractionalDay, const StelLocation &loc)
 {
-	return fractionalDay+zoneFromLongitude(static_cast<double>(location.longitude));
+	return fractionalDay+zoneFromLongitude(static_cast<double>(loc.longitude));
 
 }
-double Calendar::standardFromUniversal(double fractionalDay, StelLocation location)
+double Calendar::standardFromUniversal(double fractionalDay, const StelLocation &loc)
 {
 	static const QDateTime j2000(QDate(2000, 1, 1), QTime(0, 0, 0), Qt::UTC);
-	QTimeZone tz(location.ianaTimeZone.toUtf8());
+	QTimeZone tz(loc.ianaTimeZone.toUtf8());
 	return fractionalDay+tz.standardTimeOffset(j2000)/86400;
 }
-double Calendar::universalFromStandard(double fractionalDay, StelLocation location)
+double Calendar::universalFromStandard(double fractionalDay, const StelLocation &loc)
 {
 	static const QDateTime j2000(QDate(2000, 1, 1), QTime(0, 0, 0), Qt::UTC);
-	QTimeZone tz(location.ianaTimeZone.toUtf8());
+	QTimeZone tz(loc.ianaTimeZone.toUtf8());
 	return fractionalDay-tz.standardTimeOffset(j2000)/86400;
 }
-double Calendar::standardFromLocal(double fractionalDay, StelLocation location)
+double Calendar::standardFromLocal(double fractionalDay, const StelLocation &loc)
 {
-	return standardFromUniversal(universalFromLocal(fractionalDay, location), location);
+	return standardFromUniversal(universalFromLocal(fractionalDay, loc), loc);
 }
-double Calendar::localFromStandard(double fractionalDay, StelLocation location)
+double Calendar::localFromStandard(double fractionalDay, const StelLocation &loc)
 {
-	return localFromUniversal(universalFromStandard(fractionalDay, location), location);
+	return localFromUniversal(universalFromStandard(fractionalDay, loc), loc);
 }
 double Calendar::ephemerisCorrection(double rd)
 {
@@ -188,33 +188,33 @@ double Calendar::equationOfTime(double rd_ut)
 	return core->getSolutionEquationOfTime(jd+deltaT/86400.);
 }
 // return moment (RD in local mean solar time) corrected by equation of time
-double Calendar::apparentFromLocal(double rd_local_mean, StelLocation loc)
+double Calendar::apparentFromLocal(double rd_local_mean, const StelLocation &loc)
 {
 	return rd_local_mean+equationOfTime(universalFromLocal(rd_local_mean, loc));
 }
 // return moment (RD in local apparent solar time) corrected by equation of time into local mean solar time
-double Calendar::localFromApparent(double rd_local_app, StelLocation loc)
+double Calendar::localFromApparent(double rd_local_app, const StelLocation &loc)
 {
 	return rd_local_app-equationOfTime(universalFromLocal(rd_local_app, loc));
 }
 // return moment (RD in UT) corrected into apparent time by equation of time and location
-double Calendar::apparentFromUniversal(double rd_ut, StelLocation loc)
+double Calendar::apparentFromUniversal(double rd_ut, const StelLocation &loc)
 {
 	return apparentFromLocal(localFromUniversal(rd_ut, loc), loc);
 }
 
 // return moment (RD in local apparent solar time) corrected by equation of time into UT
-double Calendar::universalFromApparent(double rd_local_app, StelLocation loc)
+double Calendar::universalFromApparent(double rd_local_app, const StelLocation &loc)
 {
 	return universalFromLocal(localFromApparent(rd_local_app, loc), loc);
 }
 // return RD (UT) of true midnight from RD and location
-double Calendar::midnight(int rd, StelLocation loc)
+double Calendar::midnight(int rd, const StelLocation &loc)
 {
 	return universalFromApparent(rd, loc);
 }
 // return RD (UT) of true noon from RD and location
-double Calendar::midday(int rd, StelLocation loc)
+double Calendar::midday(int rd, const StelLocation &loc)
 {
 	return universalFromApparent(rd+0.5, loc);
 }
@@ -344,7 +344,7 @@ double Calendar::precession(double rd_dt)
 }
 
 // return altitude of the sun at loc, degrees
-double Calendar::solarAltitude(double rd_ut, StelLocation loc)
+double Calendar::solarAltitude(double rd_ut, const StelLocation &loc)
 {
 	const double phiRad=static_cast<double>(loc.latitude)*M_PI_180;
 	const double psi=static_cast<double>(loc.longitude);
@@ -755,7 +755,7 @@ double Calendar::lunarPhaseAtOrAfter(double phi, double rd_ut)
 }
 
 // return altitude of the moon at loc, degrees (CC:UE 14:64)
-double Calendar::lunarAltitude(double rd_ut, StelLocation loc)
+double Calendar::lunarAltitude(double rd_ut, const StelLocation &loc)
 {
 	double phiRad=static_cast<double>(loc.latitude)*M_PI_180;
 	double psi=static_cast<double>(loc.longitude);
@@ -776,7 +776,7 @@ double Calendar::lunarAltitude(double rd_ut, StelLocation loc)
 }
 
 // return lunar parallax [degrees] at RD rd_ut. (CC:UE 14.66)
-double Calendar::lunarParallax(double rd_ut, StelLocation loc)
+double Calendar::lunarParallax(double rd_ut, const StelLocation &loc)
 {
 	const double geo=lunarAltitude(rd_ut, loc);
 	const double Delta=lunarDistance(rd_ut);
@@ -785,21 +785,21 @@ double Calendar::lunarParallax(double rd_ut, StelLocation loc)
 	return M_180_PI*asin(arg);
 }
 // return altitude of the moon at loc, degrees. (CC:UE 14.67)
-double Calendar::topocentricLunarAltitude(double rd_ut, StelLocation loc)
+double Calendar::topocentricLunarAltitude(double rd_ut, const StelLocation &loc)
 {
 	return lunarAltitude(rd_ut, loc)-lunarParallax(rd_ut, loc);
 }
 
 // 14.7 Rising and setting
 // return rd of , rd. (CC:UE 14.68)
-double Calendar::approxMomentOfDepression(double rd_loc, StelLocation loc, double alpha, bool early)
+double Calendar::approxMomentOfDepression(double rd_loc, double alpha, bool early, const StelLocation &loc)
 {
-	const double trie=sineOffset(rd_loc, loc, alpha);
+	const double trie=sineOffset(rd_loc, alpha, loc);
 	const int date=fixedFromMoment(rd_loc);
 	double alt=date+0.5;
 	if (alpha>=0)
 		alt= early ? date : date+1;
-	const double value=fabs(trie)>1. ? sineOffset(alt, loc, alpha) : trie;
+	const double value=fabs(trie)>1. ? sineOffset(alt, alpha, loc) : trie;
 	const double offset=modInterval(asin(value)/(2.*M_PI), -12., 12.);
 
 	if (fabs(value)<=1.)
@@ -815,7 +815,7 @@ double Calendar::approxMomentOfDepression(double rd_loc, StelLocation loc, doubl
 
 }
 // return sine of ... (CC:UE 14.69)
-double Calendar::sineOffset(double rd_loc, StelLocation loc, double alpha)
+double Calendar::sineOffset(double rd_loc, double alpha, const StelLocation &loc)
 {
 	const double phiRad=static_cast<double>(loc.latitude)*M_PI_180;
 	const double tP=universalFromLocal(rd_loc, loc);
@@ -823,33 +823,33 @@ double Calendar::sineOffset(double rd_loc, StelLocation loc, double alpha)
 	return tan(phiRad)*tan(deltaRad)+sin(alpha*M_PI_180)/(cos(deltaRad)*cos(phiRad));
 }
 // return rd of , rd. (CC:UE 14.70)
-double Calendar::momentOfDepression(double rd_approx, StelLocation loc, double alpha, bool early)
+double Calendar::momentOfDepression(double rd_approx, double alpha, bool early, const StelLocation &loc)
 {
-	const double t=approxMomentOfDepression(rd_approx, loc, alpha, early);
+	const double t=approxMomentOfDepression(rd_approx, alpha, early, loc);
 	if (qFuzzyCompare(t,bogus))
 		return bogus;
 	if (fabs(rd_approx-t)<30./86400.)
 		return t;
 	else
-		return momentOfDepression(t, loc, alpha, early);
+		return momentOfDepression(t, alpha, early, loc);
 }
 
 // return fraction of day of when sun is alpha degrees below horizon in the morning (or bogus) (CC:UE 14.72)
-double Calendar::dawn(int rd, StelLocation loc, double alpha)
+double Calendar::dawn(int rd, double alpha, const StelLocation &loc)
 {
-	const double result=momentOfDepression(rd+0.25, loc, alpha, morning);
+	const double result=momentOfDepression(rd+0.25, alpha, morning, loc);
 	return qFuzzyCompare(result, bogus) ? bogus : standardFromLocal(result, loc);
 }
 // return fraction of day of when sun is alpha degrees below horizon in the evening (or bogus) (CC:UE 14.74)
-double Calendar::dusk(int rd, StelLocation loc, double alpha)
+double Calendar::dusk(int rd, double alpha, const StelLocation &loc)
 {
-	const double result=momentOfDepression(rd+0.75, loc, alpha, evening);
+	const double result=momentOfDepression(rd+0.75, alpha, evening, loc);
 	return qFuzzyCompare(result, bogus) ? bogus : standardFromLocal(result, loc);
 }
 
 // return refraction at the mathematical horizon of location loc (CC:UE 14.75)
 // note in the book a first argument t is specified but unused.
-double Calendar::refraction(StelLocation loc)
+double Calendar::refraction(const StelLocation &loc)
 {
 	static const double R=6.372e6;
 	const double h=qMax(0, loc.altitude);
@@ -857,23 +857,23 @@ double Calendar::refraction(StelLocation loc)
 	return 34./60.+dip+19./3600.*sqrt(h);
 }
 // return fraction of day for the moment of sunrise (CC:UE 14.76)
-double Calendar::sunrise(int rd, StelLocation loc)
+double Calendar::sunrise(int rd, const StelLocation &loc)
 {
-	return dawn(rd, loc, refraction(loc)+16./60.);
+	return dawn(rd, refraction(loc)+16./60., loc);
 }
 // return fraction of day for the moment of sunset (CC:UE 14.77)
-double Calendar::sunset(int rd, StelLocation loc)
+double Calendar::sunset(int rd, const StelLocation &loc)
 {
-	return dusk(rd, loc, refraction(loc)+16./60.);
+	return dusk(rd, refraction(loc)+16./60., loc);
 }
 
 // return apparent altitude of moon (CC:UE 14.83)
-double Calendar::observedLunarAltitude(double rd_ut, StelLocation loc)
+double Calendar::observedLunarAltitude(double rd_ut, const StelLocation &loc)
 {
 	return topocentricLunarAltitude(rd_ut, loc) + refraction(loc) + 16./60.;
 }
 // return moment of moonrise (CC:UE 14.83)
-double Calendar::moonrise(int rd, StelLocation loc)
+double Calendar::moonrise(int rd, const StelLocation &loc)
 {
 	const double t=universalFromStandard(rd, loc);
 	const bool waning=lunarPhase(t) > 180.;
@@ -911,7 +911,7 @@ double Calendar::moonrise(int rd, StelLocation loc)
 	return (rdA+rdB)*0.5;
 }
 // return moment of moonset (CC:UE 14.84)
-double Calendar::moonset(int rd, StelLocation loc)
+double Calendar::moonset(int rd, const StelLocation &loc)
 {
 	const double t=universalFromStandard(rd, loc);
 	const bool waxing=lunarPhase(t) < 180.;
@@ -952,48 +952,48 @@ double Calendar::moonset(int rd, StelLocation loc)
 // 14.8 Times of Day
 // return local time of the start of Italian hour counting, a half hour after sunset (fraction of day)
 // note This extends CC:UE 14.86 by allowing another location. Use Calendar::padua for the default solution
-double Calendar::localZeroItalianHour(double rd_loc, StelLocation loc)
+double Calendar::localZeroItalianHour(double rd_loc, const StelLocation &loc)
 {
 	int date=fixedFromMoment(rd_loc);
-	return localFromStandard(dusk(date, loc, 16./60.)+0.5/24., loc);
+	return localFromStandard(dusk(date, 16./60., loc)+0.5/24., loc);
 }
 // return local time of the start of Italian-style hour counting, but starting at sunset (fraction of day)
 // note This extends CC:UE 14.86 by allowing another location and keeping the sunset time.
-double Calendar::localZeroSunsetHour(double rd_loc, StelLocation loc)
+double Calendar::localZeroSunsetHour(double rd_loc, const StelLocation &loc)
 {
 	int date=fixedFromMoment(rd_loc);
-	return localFromStandard(dusk(date, loc, 16./60.), loc);
+	return localFromStandard(dusk(date, 16./60., loc), loc);
 }
 // return local time of the start of Babylonian hour counting with sunrise (fraction of day)
 // note This extends CC:UE 14.86 by allowing another location and showing the reverse counting.
-double Calendar::localZeroBabylonianHour(double rd_loc, StelLocation loc)
+double Calendar::localZeroBabylonianHour(double rd_loc, const StelLocation &loc)
 {
 	int date=fixedFromMoment(rd_loc);
-	return localFromStandard(dawn(date, loc, 16./60.), loc);
+	return localFromStandard(dawn(date, 16./60., loc), loc);
 }
 // return local time from Italian time (CC:UE 14.87)
-double Calendar::localFromItalian(double rd_loc, StelLocation loc)
+double Calendar::localFromItalian(double rd_loc, const StelLocation &loc)
 {
 	int date=fixedFromMoment(rd_loc);
 	double z=localZeroItalianHour(rd_loc-1, loc);
 	return rd_loc-date+z;
 }
 // return local time from Sunset time (extending idea from CC:UE 14.87)
-double Calendar::localFromSunsetHour(double rd_loc, StelLocation loc)
+double Calendar::localFromSunsetHour(double rd_loc, const StelLocation &loc)
 {
 	int date=fixedFromMoment(rd_loc);
 	double z=localZeroSunsetHour(rd_loc-1, loc);
 	return rd_loc-date+z;
 }
 // return local time from Babylonian time (extending idea from CC:UE 14.87)
-double Calendar::localFromBabylonian(double rd_loc, StelLocation loc)
+double Calendar::localFromBabylonian(double rd_loc, const StelLocation &loc)
 {
 	int date=fixedFromMoment(rd_loc);
 	double z=localZeroBabylonianHour(rd_loc-1, loc);
 	return rd_loc-date+z;
 }
 // return Italian time from local time (CC:UE 14.88)
-double Calendar::italianFromLocal(double rd_loc, StelLocation loc)
+double Calendar::italianFromLocal(double rd_loc, const StelLocation &loc)
 {
 	int date=fixedFromMoment(rd_loc);
 	double z0=localZeroItalianHour(rd_loc-1., loc);
@@ -1004,7 +1004,7 @@ double Calendar::italianFromLocal(double rd_loc, StelLocation loc)
 		return rd_loc+date-z0;
 }
 // return Sunset time from local time (extending idea from CC:UE 14.88)
-double Calendar::sunsetHourFromLocal(double rd_loc, StelLocation loc)
+double Calendar::sunsetHourFromLocal(double rd_loc, const StelLocation &loc)
 {
 	int date=fixedFromMoment(rd_loc);
 	double z0=localZeroSunsetHour(rd_loc-1., loc);
@@ -1015,7 +1015,7 @@ double Calendar::sunsetHourFromLocal(double rd_loc, StelLocation loc)
 		return rd_loc+date-z0;
 }
 // return Babylonian time from local time (extending idea from CC:UE 14.88)
-double Calendar::babylonianFromLocal(double rd_loc, StelLocation loc)
+double Calendar::babylonianFromLocal(double rd_loc, const StelLocation &loc)
 {
 	int date=fixedFromMoment(rd_loc);
 	double z=localZeroBabylonianHour(rd_loc, loc);
@@ -1033,15 +1033,15 @@ double Calendar::arcOfLight(double rd)
 	return M_180_PI*acos(cos(M_PI_180*lunarLatitude(rd)) * cos(M_PI_180*lunarPhase(rd)));
 }
 // return rd_ut of good lunar visibility (CC:UE 14.96)
-double Calendar::simpleBestView(int rd, StelLocation loc)
+double Calendar::simpleBestView(int rd, const StelLocation &loc)
 {
-	double dark=dusk(rd, loc, 4.5);
+	double dark=dusk(rd, 4.5, loc);
 	double best= qFuzzyCompare(dark,bogus) ? rd+1 : dark;
 	return universalFromStandard(best, loc);
 }
 
 // return true or false according to Shaukat (CC:UE 14.97)
-bool Calendar::shaukatCriterion(int rd, StelLocation loc)
+bool Calendar::shaukatCriterion(int rd, const StelLocation &loc)
 {
 	const double t=simpleBestView(rd-1, loc);
 	const double phase=lunarPhase(t);
@@ -1054,11 +1054,11 @@ bool Calendar::shaukatCriterion(int rd, StelLocation loc)
 			&& (h > 4.1);
 	return crit;
 }
-double Calendar::arcOfVision(double rd_loc, StelLocation loc)
+double Calendar::arcOfVision(double rd_loc, const StelLocation &loc)
 {
 	return lunarAltitude(rd_loc, loc) - solarAltitude(rd_loc, loc);
 }
-double Calendar::bruinBestView(int rd, StelLocation loc)
+double Calendar::bruinBestView(int rd, const StelLocation &loc)
 {
 	const double sun = sunset(rd, loc);
 	const double moon = moonset(rd, loc);
@@ -1068,7 +1068,7 @@ double Calendar::bruinBestView(int rd, StelLocation loc)
 	return universalFromStandard(best, loc);
 }
 // return true or false according to Yallop (CC:UE 14.100)
-bool Calendar::yallopCriterion(int rd, StelLocation loc)
+bool Calendar::yallopCriterion(int rd, const StelLocation &loc)
 {
 	static const double e=-0.14;
 	const double t = bruinBestView(rd-1, loc);
@@ -1083,7 +1083,7 @@ bool Calendar::yallopCriterion(int rd, StelLocation loc)
 			&& (ARCV > q1+e);
 	return crit;
 }
-double Calendar::lunarSemiDiameter(double rd_loc, StelLocation loc)
+double Calendar::lunarSemiDiameter(double rd_loc, const StelLocation &loc)
 {
 	const double h=lunarAltitude(rd_loc, loc);
 	const double p=lunarParallax(rd_loc, loc);
@@ -1094,7 +1094,7 @@ double Calendar::lunarDiameter(double rd_ut)
 	return 1792367000/(9*lunarDistance(rd_ut));
 }
 // return previous date of first crescent (CC:UE 14.104)
-int Calendar::phasisOnOrBefore(int rd, StelLocation loc)
+int Calendar::phasisOnOrBefore(int rd, const StelLocation &loc)
 {
 	const int moon=fixedFromMoment(lunarPhaseAtOrBefore(newMoon, rd));
 	const int age=rd-moon;
@@ -1111,13 +1111,13 @@ int Calendar::phasisOnOrBefore(int rd, StelLocation loc)
 	return d;
 }
 // return next date of first crescent (CC:UE 14.105)
-int Calendar::phasisOnOrAfter(int rd, StelLocation loc)
+int Calendar::phasisOnOrAfter(int rd, const StelLocation &loc)
 {
 	const int moon=fixedFromMoment(lunarPhaseAtOrBefore(newMoon, rd));
 	const int age=rd-moon;
 	int tau=rd;
 	if ((age>=4.) || visibleCrescent(rd-1, loc))
-		tau += 29.;
+		tau += 29;
 
 	int d=tau-1;
 	bool crit;

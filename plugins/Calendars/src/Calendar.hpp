@@ -24,8 +24,10 @@
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
 #include "StelLocation.hpp"
+#include "StelApp.hpp"
+#include "StelCore.hpp"
 
-//! Superclass for all calendars.
+//! Superclass for all calendars, capable of a multitude of astronomical calculations.
 //! Stellarium uses Julian Day numbers internally, and the conventional approach of using the Gregorian calendar for dates after 1582-10-15.
 //! For dates before that, the Julian calendar is used, in the form finalized by Augustus and running unchanged since 8AD.
 //! Astronomical year counting implies having a year 0, while some calendars adhere to historical counting like 1 B.C., 1 A.D.
@@ -36,10 +38,14 @@
 //!
 //! The most important source used here is:
 //! Edward M. Reingold, Nachum Dershowitz: Calendrical Calculations
-//! in various editions (1997-2018), referred to as CC. In particular CC.ME=2nd "Millennium edition", CC.UE=4th "Ultimate Edition"
+//! in various editions (1997-2018), referred to as CC. In particular CC:ME=2nd "Millennium edition", CC:UE=4th "Ultimate Edition", with amendments published until January 2022.
 //! It describes the Gregorian calendar with year zero, and the Julian without. In this plugin only, we adhere to this convention to finally have all possible variations of dates.
 //! It does not use JD directly but a number called Rata Die (RD=JD-1721424.5), a day count starting at midnight of January 1st, 1 AD (Proleptic Gregorian).
 //! with functions including "fixed" in their names. Our calendar subclasses can use Calendar::fixedFromJD(jd) / Calendar::jdFromFixed(rd).
+//!
+//! Most functions are static, with names derived from the functions given in Lisp in CC:UE. Most calendars have dates which can be described in lists of integers.
+//! Some functions require a StelLocation argument. For accessability as Stellarium scripting functions, argument order was changed to place the location argument as last
+//! and declare it with a default value of the current location, so that it can be used in scripting. Currently, other, non-default StelLocation arguments cannot be used with scripting.
 class Calendar : public QObject
 {
 	Q_OBJECT
@@ -49,6 +55,9 @@ public:
 	typedef enum { sunday  = 0, monday, tuesday, wednesday, thursday, friday, saturday } Day;
 	typedef enum { spring  = 0, summer       = 90, autumn   = 180, winter      = 270} Season; // CC.UE 3.5
 	typedef enum { newMoon = 0, firstQuarter = 90, fullMoon = 180, lastQuarter = 270} Phase;  // CC.UE 14.59-62
+	Q_ENUM(Day)
+	Q_ENUM(Season)
+	Q_ENUM(Phase)
 
 	Calendar(double jd):JD(jd) { setObjectName("Calendar"); }
 
@@ -100,6 +109,7 @@ public:
 	constexpr static const double mjdEpoch=678576.0;
 	constexpr static const int bogus=-1000000; // special value to indicate invalid result in some calendars.
 
+public slots:
 	//! Interfacing function from Reingold/Dershowitz: Calendrical Calculations
 	//! Returns a "moment" in RD that represents JD.
 	//! Stellarium extension: optionally includes local time zone offset.
@@ -152,6 +162,7 @@ public:
 	//! Split integer to mixed-radix vector. Reingold-Dershowitz CC.UE 1.42
 	static QVector<int> toRadix(int num, QVector<int>radix);
 
+public:
 	// ASTRONOMICAL FUNCTIONS AND DEFINITIONS FROM CH.14
 	static const StelLocation urbana;
 	static const StelLocation greenwich;
@@ -161,22 +172,22 @@ public:
 	static const StelLocation padua; // (CC:UE 14.85)
 
 public slots:
-	static double direction(StelLocation loc1, StelLocation loc2);
+	static double direction(const StelLocation &locFrom, const StelLocation &locTo);
 	//! @return longitude-dependent time offset in fractions of day.
 	static double zoneFromLongitude(double lngDeg){return lngDeg/360.;}
 
 	//! @return fractions of day
-	static double universalFromLocal(double fractionalDay, StelLocation location);
+	static double universalFromLocal(double fractionalDay, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	//! @return fractions of day
-	static double localFromUniversal(double fractionalDay, StelLocation location);
+	static double localFromUniversal(double fractionalDay, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	//! @return fractions of day
-	static double standardFromUniversal(double fractionalDay, StelLocation location);
+	static double standardFromUniversal(double fractionalDay, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	//! @return fractions of day
-	static double universalFromStandard(double fractionalDay, StelLocation location);
+	static double universalFromStandard(double fractionalDay, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	//! @return fractions of day
-	static double standardFromLocal(double fractionalDay, StelLocation location);
+	static double standardFromLocal(double fractionalDay, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	//! @return fractions of day
-	static double localFromStandard(double fractionalDay, StelLocation location);
+	static double localFromStandard(double fractionalDay, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	//! @return DeltaT in fractions of day. This utilizes Stellarium's solution.
 	static double ephemerisCorrection(double rd);
 	//! Correct rd_ut to Dynamical time.
@@ -189,17 +200,17 @@ public slots:
 	//! @note We use functions from Stellarium instead of the functions from CC:UE.
 	static double equationOfTime(double rd_ut);
 	//! @return moment (RD in local mean solar time) corrected by equation of time (CC:UE 14.21)
-	static double apparentFromLocal(double rd_local_mean, StelLocation loc);
+	static double apparentFromLocal(double rd_local_mean, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	//! @return moment (RD in local apparent solar time) corrected by equation of time into local mean solar time (CC:UE 14.22)
-	static double localFromApparent(double rd_local_app, StelLocation loc);
+	static double localFromApparent(double rd_local_app, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	//! @return moment (RD in UT) corrected into apparent time by equation of time and location (CC:UE 14.23)
-	static double apparentFromUniversal(double rd_ut, StelLocation loc);
+	static double apparentFromUniversal(double rd_ut, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	//! @return moment (RD in local apparent solar time) corrected by equation of time into UT (CC:UE 14.24)
-	static double universalFromApparent(double rd_local_app, StelLocation loc);
+	static double universalFromApparent(double rd_local_app, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	//! @return RD (UT) of true midnight from RD and location (CC:UE 14.25)
-	static double midnight(int rd, StelLocation loc);
+	static double midnight(int rd, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	//! @return RD (UT) of true noon from RD and location (CC:UE 14.26)
-	static double midday(int rd, StelLocation loc);
+	static double midday(int rd, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 
 	//! @return sidereal time (at Greenwich) at moment rd_ut (CC:UE 14.27, but we use our own solution)
 	//! @note this does not take location into account, it's sidereal time at Greenwich.
@@ -229,7 +240,7 @@ public slots:
 	//! @return precession in ecliptical longitude since moment rd_dt (CC:UE 14.39, which is from Meeus AA 21.6/21.7.)
 	static double precession(double rd_dt);
 	//! @return altitude of the sun at loc, degrees. (CC:UE 14.41)
-	static double solarAltitude(double rd_ut, StelLocation loc);
+	static double solarAltitude(double rd_ut, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 
 	//! @return an estimate for the moment (RD_UT) before rd_ut when sun has reached lambda (CC:UE 14.42)
 	static double estimatePriorSolarLongitude(double lambda, double rd_ut);
@@ -270,84 +281,89 @@ public slots:
 	static double lunarPhaseAtOrAfter(double phi, double rd_ut);
 	//! @return altitude of the moon at loc, degrees. (CC:UE 14.64)
 	//! @note The result has not been corrected for parallax or refraction
-	static double lunarAltitude(double rd_ut, StelLocation loc);
+	static double lunarAltitude(double rd_ut, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	//! @return lunar parallax [degrees] at RD rd_ut. (CC:UE 14.66)
-	static double lunarParallax(double rd_ut, StelLocation loc);
+	static double lunarParallax(double rd_ut, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	//! @return altitude of the moon at loc, degrees. (CC:UE 14.67)
-	static double topocentricLunarAltitude(double rd_ut, StelLocation loc);
+	static double topocentricLunarAltitude(double rd_ut, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 
 	// 14.7 Rising and setting
 	//! @return rd of lcal mean solar time when sun is alpha degrees below math. horizon. (CC:UE 14.68)
-	static double approxMomentOfDepression(double rd_loc, StelLocation loc, double alpha, bool early);
+	//! @note argument order is different from CC:UE
+	static double approxMomentOfDepression(double rd_loc, double alpha, bool early, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	//! @return sine of the angle alpha between where the sun is at
 	//!   rd_ut and where it is at its position of interest (CC:UE 14.69)
-	static double sineOffset(double rd_ut, StelLocation loc, double alpha);
+	//! @note argument order is different from CC:UE
+	static double sineOffset(double rd_ut, double alpha, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	//! @return rd of , rd. (CC:UE 14.70)
-	static double momentOfDepression(double rd_approx, StelLocation loc, double alpha, bool early);
+	//! @note argument order is different from CC:UE
+	static double momentOfDepression(double rd_approx, double alpha, bool early, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	//! @return fraction of day of when sun is alpha degrees below horizon in the morning (or bogus) (CC:UE 14.72)
-	static double dawn(int rd, StelLocation loc, double alpha);
+	//! @note argument order is different from CC:UE
+	static double dawn(int rd, double alpha, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	//! @return fraction of day of when sun is alpha degrees below horizon in the evening (or bogus) (CC:UE 14.74)
-	static double dusk(int rd, StelLocation loc, double alpha);
+	//! @note argument order is different from CC:UE
+	static double dusk(int rd, double alpha, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	//! @return refraction at the mathematical horizon of location loc (CC:UE 14.75)
 	//! @note in the book a first argument t is specified but unused.
-	static double refraction(StelLocation loc);
+	static double refraction(const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	//! @return fraction of day for the moment of sunrise (CC:UE 14.76)
-	static double sunrise(int rd, StelLocation loc);
+	static double sunrise(int rd, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	//! @return fraction of day for the moment of sunset (CC:UE 14.77)
-	static double sunset(int rd, StelLocation loc);
+	static double sunset(int rd, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 
 	//! @return apparent altitude of moon (CC:UE 14.83)
-	static double observedLunarAltitude(double rd_ut, StelLocation loc);
+	static double observedLunarAltitude(double rd_ut, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	//! @return moment of moonrise (CC:UE 14.83)
-	static double moonrise(int rd, StelLocation loc);
+	static double moonrise(int rd, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	//! @return moment of moonset (CC:UE 14.84)
-	static double moonset(int rd, StelLocation loc);
+	static double moonset(int rd, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 
 	// 14.8 Times of Day
 	//! @return local time of the start of Italian hour counting, a half hour after sunset (fraction of day)
 	//! @note This extends CC:UE 14.86 by allowing another location. Use Calendar::padua for the default solution
-	static double localZeroItalianHour(double rd_loc, StelLocation loc);
+	static double localZeroItalianHour(double rd_loc, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	//! @return local time of the start of Italian-style hour counting, but starting at sunset (fraction of day)
 	//! @note This extends CC:UE 14.86 by allowing another location and keeping the sunset time.
-	static double localZeroSunsetHour(double rd_loc, StelLocation loc);
+	static double localZeroSunsetHour(double rd_loc, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	//! @return local time of the start of Babylonian hour counting with sunrise (fraction of day)
 	//! @note This extends CC:UE 14.86 by allowing another location and showing the reverse counting.
 	//! @todo Check this!
-	static double localZeroBabylonianHour(double rd_loc, StelLocation loc);
+	static double localZeroBabylonianHour(double rd_loc, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	//! @return local time from Italian time (CC:UE 14.87)
-	static double localFromItalian(double rd_loc, StelLocation loc);
+	static double localFromItalian(double rd_loc, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	//! @return local time from Sunset time (extending idea from CC:UE 14.87)
-	static double localFromSunsetHour(double rd_loc, StelLocation loc);
+	static double localFromSunsetHour(double rd_loc, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	//! @return local time from Babylonian time (extending idea from CC:UE 14.87)
 	//! @todo Check this!
-	static double localFromBabylonian(double rd_loc, StelLocation loc);
+	static double localFromBabylonian(double rd_loc, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	//! @return Italian time from local time (CC:UE 14.88)
-	static double italianFromLocal(double rd_loc, StelLocation loc);
+	static double italianFromLocal(double rd_loc, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	//! @return Sunset time from local time (extending idea from CC:UE 14.88)
-	static double sunsetHourFromLocal(double rd_loc, StelLocation loc);
+	static double sunsetHourFromLocal(double rd_loc, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	//! @return Babylonian time from local time (extending idea from CC:UE 14.88)
 	//! @todo Check this!
-	static double babylonianFromLocal(double rd_loc, StelLocation loc);
+	static double babylonianFromLocal(double rd_loc, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 
 	// 14.9 Lunar Crescent Visibility
 	//! @return elongation of the Moon (CC:UE 14.95)
 	static double arcOfLight(double rd_loc);
 	//! @return rd_ut of good lunar visibility (CC:UE 14.96)
-	static double simpleBestView(int rd, StelLocation loc);
+	static double simpleBestView(int rd, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	//! @return true or false according to Shaukat (CC:UE 14.97)
-	static bool shaukatCriterion(int rd, StelLocation loc);
-	static double arcOfVision(double rd_loc, StelLocation loc);
-	static double bruinBestView(int rd, StelLocation loc);
+	static bool shaukatCriterion(int rd, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
+	static double arcOfVision(double rd_loc, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
+	static double bruinBestView(int rd, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	//! @return true or false according to Yallop (CC:UE 14.100)
-	static bool yallopCriterion(int rd, StelLocation loc);
-	static double lunarSemiDiameter(double rd_loc, StelLocation loc);
+	static bool yallopCriterion(int rd, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
+	static double lunarSemiDiameter(double rd_loc, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	static double lunarDiameter(double rd_ut);
 	//! @return whichever criterion is set. CC:UE 14.103 uses Shaukat's criterion.
-	static bool visibleCrescent(int rd, StelLocation loc){return shaukatCriterion(rd, loc);}
+	static bool visibleCrescent(int rd, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation()){return shaukatCriterion(rd, loc);}
 	//! @return previous date (RD) of first crescent (CC:UE 14.104)
-	static int phasisOnOrBefore(int rd, StelLocation loc);
+	static int phasisOnOrBefore(int rd, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	//! @return next date of first crescent (CC:UE 14.105)
-	static int phasisOnOrAfter(int rd, StelLocation loc);
+	static int phasisOnOrAfter(int rd, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 
 signals:
 	void partsChanged(QVector<int> parts);
