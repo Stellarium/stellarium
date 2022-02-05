@@ -3791,7 +3791,6 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 							}
 
 							// 2nd contact - start of totality/annularity
-							double L2 = 0.;
 							iteration = 0;
 							dt = 1.;
 							JD2 = JD;
