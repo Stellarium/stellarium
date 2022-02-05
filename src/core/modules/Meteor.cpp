@@ -27,8 +27,6 @@
 
 #include <QtMath>
 
-#define EARTH_RADIUSf 6378.f          //! earth_radius in km
-#define EARTH_RADIUS2 40678884.f     //! earth_radius^2 in km
 #define MAX_ALTITUDE 120.f           //! max meteor altitude in km
 #define MIN_ALTITUDE 80.f            //! min meteor altitude in km
 
@@ -320,10 +318,9 @@ float Meteor::meteorZ(float zenithAngle, float altitude)
 	if (zenithAngle > 1.13446401f) // > 65 degrees?
 	{
 		const float zcos = cos(zenithAngle);
-		distance = sqrt(EARTH_RADIUS2 * pow(zcos, 2)
-				 + 2 * EARTH_RADIUSf * altitude
-				 + pow(altitude, 2));
-		distance -= EARTH_RADIUSf * zcos;
+        constexpr auto R = static_cast<float>(EARTH_RADIUS);
+		distance = sqrt(pow(R * zcos, 2) + 2 * R * altitude + pow(altitude, 2));
+		distance -= R * zcos;
 	}
 	else
 	{
