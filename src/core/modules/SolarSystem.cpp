@@ -2021,7 +2021,7 @@ bool SolarSystem::nearLunarEclipse() const
 	Vec3d shadow = en * (e.length() + m.length());
 
 	// find shadow radii in AU
-	double r_penumbra = shadow.length()*702378.1/AU/e.length() - 696000./AU;
+	double r_penumbra = shadow.length()*702378.1/AU/e.length() - SUN_RADIUS/AU;
 
 	// modify shadow location for scaled moon
 	Vec3d mdist = shadow - mh;

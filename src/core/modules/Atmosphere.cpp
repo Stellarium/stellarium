@@ -199,8 +199,8 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 
 	// Update the eclipse intensity factor to apply on atmosphere model
 	// these are for radii
-	const double sun_angular_size = atan(696000./AU/_sunPos.length());
-	const double moon_angular_size = atan(1738./AU/moonPos.length());
+	const double sun_angular_size = atan(SUN_RADIUS/AU/_sunPos.length());
+	const double moon_angular_size = atan(MOON_RADIUS/AU/moonPos.length());
 	const double touch_angle = sun_angular_size + moon_angular_size;
 
 	// determine luminance falloff during solar eclipses

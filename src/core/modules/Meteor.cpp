@@ -27,6 +27,9 @@
 
 #include <QtMath>
 
+#define MAX_ALTITUDE 120.f           //! max meteor altitude in km
+#define MIN_ALTITUDE 80.f            //! min meteor altitude in km
+
 Meteor::Meteor(const StelCore* core, const StelTextureSP& bolideTexture)
 	: m_core(core)
 	, m_alive(false)
@@ -315,10 +318,9 @@ float Meteor::meteorZ(float zenithAngle, float altitude)
 	if (zenithAngle > 1.13446401f) // > 65 degrees?
 	{
 		const float zcos = cos(zenithAngle);
-		distance = sqrt(EARTH_RADIUS2 * pow(zcos, 2)
-				 + 2 * EARTH_RADIUS * altitude
-				 + pow(altitude, 2));
-		distance -= EARTH_RADIUS * zcos;
+        constexpr auto R = static_cast<float>(EARTH_RADIUS);
+		distance = sqrt(pow(R * zcos, 2) + 2 * R * altitude + pow(altitude, 2));
+		distance -= R * zcos;
 	}
 	else
 	{

@@ -2934,7 +2934,7 @@ SolarEclipse BesselianElements() {
 
 	double sdistanceAu = ssystem->getSun()->getEquinoxEquatorialPos(core).length();
 	// Moon's distance in Earth's radius
-	double mdistanceER = ssystem->getMoon()->getEquinoxEquatorialPos(core).length() * AU / 6378.1366;
+	double mdistanceER = ssystem->getMoon()->getEquinoxEquatorialPos(core).length() * AU / EARTH_RADIUS;
 	// Greenwich Apparent Sidereal Time
 	const double gast = get_apparent_sidereal_time(core->getJD(), core->getJDE());
 
@@ -3188,7 +3188,7 @@ cSEparameter centralSolarEclipse(double JD) {
 		const double p2 = x * (xdot - xidot) / n;
 		const double p3 = eta1 * (ydot - etadot) / n;
 		const double p4 = (p2 + p3) * ( p2 + p3);
-		pathwidth = abs(6378.1366*2.*L2/sqrt(p1+p4));
+		pathwidth = abs(EARTH_RADIUS*2.*L2/sqrt(p1+p4));
 	}
 
 	result.diameterRatio = dratio;

@@ -886,7 +886,7 @@ public:
 
 		double sdistanceAu = ssystem->getSun()->getEquinoxEquatorialPos(core).length();
 		// Moon's distance in Earth's radius
-		double mdistanceER = ssystem->getMoon()->getEquinoxEquatorialPos(core).length() * AU / 6378.1366;
+		double mdistanceER = ssystem->getMoon()->getEquinoxEquatorialPos(core).length() * AU / EARTH_RADIUS;
 		// Greenwich Apparent Sidereal Time
 		double gast = get_apparent_sidereal_time(core->getJD(), core->getJDE());
 
@@ -1595,7 +1595,7 @@ static bool willCastShadow(const Planet* thisPlanet, const Planet* p, const Plan
 	ppVector.normalize();
 	
 	double shadowDistance = ppVector * thisPos;
-	static const double sunRadius = 696000./AU;
+	static const double sunRadius = SUN_RADIUS/AU;
 	const double d = planetPos.length() / (p->getEquatorialRadius()/sunRadius+1);
 	double penumbraRadius = (shadowDistance-d)/d*sunRadius;
 	// TODO: Note that Earth's shadow should be enlarged a bit. (6-7% following Danjon?)
