@@ -127,6 +127,7 @@ void CalendarsDialog::createDialogContent()
 	connectBoolProperty(ui->balineseCheckBox,           "Calendars.flagShowBalinese");
 	connectBoolProperty(ui->frenchArithmeticCheckBox,   "Calendars.flagShowFrenchArithmetic");
 	connectBoolProperty(ui->persianArithmeticCheckBox,  "Calendars.flagShowPersianArithmetic");
+	connectBoolProperty(ui->persianAstronomicalCheckBox,"Calendars.flagShowPersianAstronomical");
 
 	// MAKE SURE to connect all part edit elements respective ...Changed() method here.
 	connect(ui->julianYearSpinBox,		SIGNAL(valueChanged(int)), this, SLOT(julianChanged()));
@@ -194,6 +195,7 @@ void CalendarsDialog::setAboutHtml(void)
 	html += "<li>" + q_("Hebrew Calendar") + "</li>";
 	html += "<li>" + q_("French Revolution calendar (arithmetic version of 1795)") + "</li>";
 	html += "<li>" + q_("Persian calendar (arithmetic version)") + "</li>";
+	html += "<li>" + q_("Persian calendar (astronomical version)") + "</li>";
 
 //	html += "<li>" + q_("Chinese calendars") + "</li>";
 //	html += "<li>" + q_("Tibetan calendars") + "</li>";

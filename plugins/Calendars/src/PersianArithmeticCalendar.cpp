@@ -102,7 +102,7 @@ QString PersianArithmeticCalendar::getFormattedDateString() const
 // Time is not changed!
 void PersianArithmeticCalendar::setDate(QVector<int> parts)
 {
-	//qDebug() << "FrenchArithmeticCalendar::setDate:" << parts;
+	//qDebug() << "PersianArithmeticCalendar::setDate:" << parts;
 	this->parts=parts;
 
 	double rd=fixedFromPersianArithmetic(parts);

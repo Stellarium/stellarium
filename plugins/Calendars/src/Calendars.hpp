@@ -61,7 +61,8 @@ class Calendars : public StelModule
 	Q_PROPERTY(bool flagShowAztecTonalpohualli READ isAztecTonalpohualliDisplayed WRITE showAztecTonalpohualli NOTIFY showAztecTonalpohualliChanged)
 	Q_PROPERTY(bool flagShowBalinese      READ isBalineseDisplayed      WRITE showBalinese      NOTIFY showBalineseChanged)
 	Q_PROPERTY(bool flagShowFrenchArithmetic   READ isFrenchArithmeticDisplayed   WRITE showFrenchArithmetic   NOTIFY showFrenchArithmeticChanged)
-	Q_PROPERTY(bool flagShowPersianArithmetic  READ isPersianArithmeticDisplayed  WRITE showPersianArithmetic  NOTIFY showPersianArithmeticChanged)
+	Q_PROPERTY(bool flagShowPersianArithmetic   READ isPersianArithmeticDisplayed   WRITE showPersianArithmetic   NOTIFY showPersianArithmeticChanged)
+	Q_PROPERTY(bool flagShowPersianAstronomical READ isPersianAstronomicalDisplayed WRITE showPersianAstronomical NOTIFY showPersianAstronomicalChanged)
 
 public:
 	Calendars();
@@ -130,6 +131,7 @@ signals:
 	void showBalineseChanged(bool b);
 	void showFrenchArithmeticChanged(bool b);
 	void showPersianArithmeticChanged(bool b);
+	void showPersianAstronomicalChanged(bool b);
 
 public slots:
 	// Setters/getters
@@ -187,6 +189,8 @@ public slots:
 	void showFrenchArithmetic(bool b);	  //!< activate display of French Arithmetic
 	bool isPersianArithmeticDisplayed() const; //!< display Persian Arithmetic?
 	void showPersianArithmetic(bool b);	  //!< activate display of Persian Arithmetic
+	bool isPersianAstronomicalDisplayed() const; //!< display Persian Astronomical?
+	void showPersianAstronomical(bool b);	  //!< activate display of Persian Astronomical
 
 private:
 	// Font used for displaying text
@@ -230,6 +234,7 @@ private:
 	bool flagShowBalinese;
 	bool flagShowFrenchArithmetic;
 	bool flagShowPersianArithmetic;
+	bool flagShowPersianAstronomical;
 };
 
 
