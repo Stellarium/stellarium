@@ -890,8 +890,9 @@ public:
 		// Greenwich Apparent Sidereal Time
 		double gast = get_apparent_sidereal_time(core->getJD(), core->getJDE());
 
-		if (raSun < 0.) raSun += M_PI * 2.;
-		if (raMoon < 0.) raMoon += M_PI * 2.;
+		// Avoid bug for special cases happen around Vernal Equinox
+		if (raSun>M_PI && raMoon<M_PI) raMoon+=2.*M_PI;
+		else if (raSun<M_PI && raMoon>M_PI) raSun+=2.*M_PI;
 
 		// Besselian elements
 		// based on Explanatory supplement to the astronomical ephemeris
@@ -1750,7 +1751,7 @@ Vec4d Planet::getRectangularCoordinates(const double longDeg, const double latDe
 	// For unclear reasons latDeg can be nan. Safety measure:
 	const double latRad = std::isnan(latDeg) ? 0. : latDeg*M_PI_180;
 	Q_ASSERT_X(!std::isnan(latRad), "Planet.cpp", QString("NaN result for latRad. Object %1 latitude %2").arg(englishName).arg(QString::number(latDeg, 'f', 5)).toLatin1());
-	const double u = (abs(abs(latRad) - M_PI_2) < 1e-10 ? latRad : atan( bByA * tan(latRad)) );
+	const double u = (M_PI_2 - (abs(latRad)) < 1e-10 ? latRad : atan( bByA * tan(latRad)) );
 	//qDebug() << "getTopographicOffsetFromCenter: a=" << a*AU << "b/a=" << bByA << "b=" << bByA*a *AU  << "latRad=" << latRad << "u=" << u;
 	// There seem to be numerical issues around tan/atan. Relieve the test a bit.
 	Q_ASSERT_X( fabs(u)-fabs(latRad) <= 1e-10, "Planet.cpp", QString("u: %1 latRad: %2 bByA: %3 latRad-u: %4 (%5)")
