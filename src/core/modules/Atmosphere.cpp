@@ -214,8 +214,8 @@ void Atmosphere::computeColor(StelCore* core, const double JD, const Planet& cur
 
 		// Update the eclipse intensity factor to apply on atmosphere model
 		// these are for radii
-		const double sun_angular_size = atan(SUN_RADIUS/AU/sunPos.length());
-		const double moon_angular_size = atan(MOON_RADIUS/AU/moonPos.length());
+		const double sun_angular_size = atan(sun.getEquatorialRadius()/sunPos.length());
+		const double moon_angular_size = atan(moon->getEquatorialRadius()/moonPos.length());
 		const double touch_angle = sun_angular_size + moon_angular_size;
 
 		// determine luminance falloff during solar eclipses
