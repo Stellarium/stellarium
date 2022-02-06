@@ -916,7 +916,8 @@ public:
 		double L1 = z * tf1 + (0.2725076 / cos(f1));
 		double L2 = z * tf2 - (0.272281 / cos(f2));
 		double mu = gast - a / M_PI_180;
-		constexpr double e2 = 0.00669438;
+		const double f = 1. - ssystem->getEarth()->getOneMinusOblateness(); // flattening
+		const double e2 = 2.*f-(f*f);
 		// e^2 = 0.00669438 : Earth flattening parameter
 		// Inverse flattening 1/f = 298.257223563 : e^2 = 2f-f^2
 		// Source: 1984 World Geodetic System (WGS 84)
@@ -924,7 +925,8 @@ public:
 		// There is a modern value from IERS Conventions (2003)
 		// 1/f = 298.25642 But seem to be not widely used
 		// https://www.iers.org/IERS/EN/Publications/TechnicalNotes/tn32.html
-		// We use older value to be comparable with literatures and consistence across Stellarium
+		// We use older value to be comparable with literatures and consistenc across Stellarium
+		const double ff = 1./(1.-f);
 
 		// Find Lat./Long. of center line on Earth's surface
 		double cd = cos(d);
@@ -957,7 +959,7 @@ public:
 			lon = -(lon); // + East, - West
 			double sfn1 = eta1 * cd1 + zeta1 * sd1;
 			double cfn1 = sqrt(1. - sfn1 * sfn1);
-			lat = 1.0033640898 * sfn1 / cfn1;
+			lat = ff * sfn1 / cfn1;
 			// 1.0033640898 = 1/(1-1/f) See flattening parameter above
 			lat = atan(lat) / M_PI_180;
 			L1 = L1 - zeta * tf1;
@@ -1748,7 +1750,7 @@ Vec4d Planet::getRectangularCoordinates(const double longDeg, const double latDe
 	// For unclear reasons latDeg can be nan. Safety measure:
 	const double latRad = std::isnan(latDeg) ? 0. : latDeg*M_PI_180;
 	Q_ASSERT_X(!std::isnan(latRad), "Planet.cpp", QString("NaN result for latRad. Object %1 latitude %2").arg(englishName).arg(QString::number(latDeg, 'f', 5)).toLatin1());
-	const double u = (abs(latRad) - M_PI_2 < 1e-10 ? latRad : atan( bByA * tan(latRad)) );
+	const double u = (abs(abs(latRad) - M_PI_2) < 1e-10 ? latRad : atan( bByA * tan(latRad)) );
 	//qDebug() << "getTopographicOffsetFromCenter: a=" << a*AU << "b/a=" << bByA << "b=" << bByA*a *AU  << "latRad=" << latRad << "u=" << u;
 	// There seem to be numerical issues around tan/atan. Relieve the test a bit.
 	Q_ASSERT_X( fabs(u)-fabs(latRad) <= 1e-10, "Planet.cpp", QString("u: %1 latRad: %2 bByA: %3 latRad-u: %4 (%5)")

@@ -3018,7 +3018,10 @@ pSEparameter partialSolarEclipse() {
 	double L1 = bessel.L1;
 	double L2 = bessel.L2;
 	const double mu = bessel.mu;
-	constexpr double e2 = 0.00669438;
+
+	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+	const double f = 1.0 - ssystem->getEarth()->getOneMinusOblateness(); // flattening
+	const double e2 = 2.*f-(f*f);
 	// e^2 = 0.00669438 : Earth flattening parameter
 	// Inverse flattening 1/f = 298.257223563 : e^2 = 2f-f^2
 	// Source: 1984 World Geodetic System (WGS 84)
@@ -3026,8 +3029,8 @@ pSEparameter partialSolarEclipse() {
 	// There is a modern value from IERS Conventions (2003)
 	// 1/f = 298.25642 But seem to be not widely used
 	// https://www.iers.org/IERS/EN/Publications/TechnicalNotes/tn32.html
-	// We use older value to be comparable with literatures and consistence across Stellarium
-
+	// We use older value to be comparable with literatures and consistenc across Stellarium
+	const double ff = 1./(1.-f);
 	const double rho1 = sqrt(1.- e2 * cos(d) * cos(d));
 	const double yy1 = y / rho1;
 	double m = sqrt(x * x + y * y);
@@ -3043,8 +3046,7 @@ pSEparameter partialSolarEclipse() {
 	
 	const double sfn1 = eta1*cd1;
 	const double cfn1 = sqrt(1.- sfn1 * sfn1);
-	double lat = 1.0033640898 * sfn1 / cfn1;
-	// 1.0033640898 = 1/(1-1/f) See flattening parameter above
+	double lat = ff * sfn1 / cfn1;
 	lat = atan(lat);
 	L1 = L1 - zeta * tf1;
 	L2 = L2 - zeta * tf2;
@@ -3107,7 +3109,10 @@ cSEparameter centralSolarEclipse(double JD) {
 	double L2 = bessel.L2;
 	const double mu = bessel.mu;
 
-	constexpr double e2 = 0.00669438;
+	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+	const double f = 1.0 - ssystem->getEarth()->getOneMinusOblateness(); // flattening
+	const double e2 = 2.*f-(f*f);
+	const double ff = 1./(1.-f);
 	const double rho1 = sqrt(1. - e2 * cos(d) *cos(d));
 	const double y1 = y / rho1;
 	const double eta1 = y1;
@@ -3139,7 +3144,7 @@ cSEparameter centralSolarEclipse(double JD) {
 		lon = -(lon); // + East, - West
 		const double sfn1 = eta1 * cd1 + zeta1 * sd1;
 		const double cfn1 = sqrt(1. - sfn1 * sfn1);
-		lat = 1.0033640898 * sfn1 / cfn1;
+		lat = ff * sfn1 / cfn1;
 		lat = atan(lat) / M_PI_180;
 		L1 = L1 - zeta * tf1;
 		const double magnitude = L1 / (L1 + L2);
@@ -3225,23 +3230,19 @@ localSEparameter localSolarEclipse(double JD,int contact,bool central) {
 	double lat = static_cast<double>(core->getCurrentLocation().latitude);
 	double lon = static_cast<double>(core->getCurrentLocation().longitude);
 	double elevation = static_cast<double>(core->getCurrentLocation().altitude);
-	lat = lat * M_PI_180;
 	lon = -(lon);
 	double L = 0.;
+
+	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+	//PlanetP earth = ssystem->getEarth();
+	Vec4d geocentricCoords = ssystem->getEarth()->getRectangularCoordinates(lon,lat,elevation);
+	const double rc = geocentricCoords[0]/(EARTH_RADIUS/AU); // rhoCosPhiPrime
+	const double rs = geocentricCoords[1]/(EARTH_RADIUS/AU); // rhoSinPhiPrime
+	lat = lat * M_PI_180;
 
 	core->setUseTopocentricCoordinates(false);
 	core->setJD(JD);
 	core->update(0);
-
-	constexpr double e2 = 0.00669438;
-	const double earthRadius = 6378136.6; // Earth's equatorial radius in metre
-	// Source: IERS Conventions (2003)
-	// https://www.iers.org/IERS/EN/Publications/TechnicalNotes/tn32.html
-	const double c = 1./sqrt(1.- e2 * sin(lat) * sin(lat));
-	const double s = (1. - e2) * c;
-	// Elevation added to observer's location
-	const double rs = s*sin(lat)+elevation*sin(lat)/earthRadius;
-	const double rc = c*cos(lat)+elevation*cos(lat)/earthRadius;
 
 	SolarEclipse bessel = BesselianElements();
 	const double x = bessel.x;
