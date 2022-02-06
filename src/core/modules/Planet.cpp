@@ -948,7 +948,6 @@ public:
 		{
 			const double zeta1 = sqrt(1 - x * x - y1 * y1);
 			const double zeta = rho2 * (zeta1 * cd1d2 - eta1 * sd1d2);
-			//const double sd2 = sd * 1.0033641 / rho2;
 			L2 = L2 - zeta * tf2;
 			double b = -y * sd + zeta * cd;
 			double theta = atan2(xi, b) / M_PI_180;
@@ -961,7 +960,6 @@ public:
 			double sfn1 = eta1 * cd1 + zeta1 * sd1;
 			double cfn1 = sqrt(1. - sfn1 * sfn1);
 			lat = ff * sfn1 / cfn1;
-			// 1.0033640898 = 1/(1-1/f) See flattening parameter above
 			lat = atan(lat) / M_PI_180;
 			L1 = L1 - zeta * tf1;
 			// Magnitude of eclipse

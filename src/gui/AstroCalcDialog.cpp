@@ -3230,14 +3230,14 @@ localSEparameter localSolarEclipse(double JD,int contact,bool central) {
 	double lat = static_cast<double>(core->getCurrentLocation().latitude);
 	double lon = static_cast<double>(core->getCurrentLocation().longitude);
 	double elevation = static_cast<double>(core->getCurrentLocation().altitude);
-	lon = -(lon);
+	//lon = -(lon);
 	double L = 0.;
 
 	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	Vec4d geocentricCoords = ssystem->getEarth()->getRectangularCoordinates(lon,lat,elevation);
 	static const double earthRadius = ssystem->getEarth()->getEquatorialRadius();
-	static const double rc = geocentricCoords[0]/earthRadius; // rhoCosPhiPrime
-	static const double rs = geocentricCoords[1]/earthRadius; // rhoSinPhiPrime
+	const double rc = geocentricCoords[0]/earthRadius; // rhoCosPhiPrime
+	const double rs = geocentricCoords[1]/earthRadius; // rhoSinPhiPrime
 
 	core->setUseTopocentricCoordinates(false);
 	core->setJD(JD);
@@ -3255,7 +3255,6 @@ localSEparameter localSolarEclipse(double JD,int contact,bool central) {
 
 	core->setJD(JD - 5./1440.);
 	core->update(0);
-
 	bessel = BesselianElements();
 	const double x1 = bessel.x;
 	const double y1 = bessel.y;
@@ -3264,7 +3263,6 @@ localSEparameter localSolarEclipse(double JD,int contact,bool central) {
 
 	core->setJD(JD + 5./1440.);
 	core->update(0);
-
 	bessel = BesselianElements();
 	const double x2 = bessel.x;
 	const double y2 = bessel.y;
@@ -3280,7 +3278,7 @@ localSEparameter localSolarEclipse(double JD,int contact,bool central) {
 		mudot += 360.;
 	mudot = mudot * 6.;
 	mudot = mudot * M_PI_180;
-	double theta = (mu - lon) * M_PI_180;
+	double theta = (mu + lon) * M_PI_180;
 	theta = StelUtils::fmodpos(theta, 2.*M_PI);
 	const double xi = rc*sin(theta);
 	const double eta = rs*cos(d)-rc*sin(d)*cos(theta);
