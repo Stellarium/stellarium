@@ -1293,7 +1293,7 @@ int StelMainScriptAPI::getBortleScaleIndex()
 
 void StelMainScriptAPI::setBortleScaleIndex(int index)
 {
-    const auto lum = StelCore::bortleScaleIndexToLuminance(index);
+	const auto lum = StelCore::bortleScaleIndexToLuminance(index);
 	StelApp::getInstance().getCore()->getSkyDrawer()->setLightPollutionLuminance(lum);
 }
 
