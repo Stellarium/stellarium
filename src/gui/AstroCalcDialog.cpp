@@ -3020,8 +3020,8 @@ pSEparameter partialSolarEclipse() {
 	const double mu = bessel.mu;
 
 	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-	const double f = 1.0 - ssystem->getEarth()->getOneMinusOblateness(); // flattening
-	const double e2 = 2.*f-(f*f);
+	static const double f = 1.0 - ssystem->getEarth()->getOneMinusOblateness(); // flattening
+	static const double e2 = f*(2.-f);
 	// e^2 = 0.00669438 : Earth flattening parameter
 	// Inverse flattening 1/f = 298.257223563 : e^2 = 2f-f^2
 	// Source: 1984 World Geodetic System (WGS 84)
@@ -3030,7 +3030,7 @@ pSEparameter partialSolarEclipse() {
 	// 1/f = 298.25642 But seem to be not widely used
 	// https://www.iers.org/IERS/EN/Publications/TechnicalNotes/tn32.html
 	// We use older value to be comparable with literatures and consistenc across Stellarium
-	const double ff = 1./(1.-f);
+	static const double ff = 1./(1.-f);
 	const double rho1 = sqrt(1.- e2 * cos(d) * cos(d));
 	const double yy1 = y / rho1;
 	double m = sqrt(x * x + y * y);
@@ -3110,9 +3110,9 @@ cSEparameter centralSolarEclipse(double JD) {
 	const double mu = bessel.mu;
 
 	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-	const double f = 1.0 - ssystem->getEarth()->getOneMinusOblateness(); // flattening
-	const double e2 = 2.*f-(f*f);
-	const double ff = 1./(1.-f);
+	static const double f = 1.0 - ssystem->getEarth()->getOneMinusOblateness(); // flattening
+	static const double e2 = f*(2.-f);
+	static const double ff = 1./(1.-f);
 	const double rho1 = sqrt(1. - e2 * cos(d) *cos(d));
 	const double y1 = y / rho1;
 	const double eta1 = y1;
@@ -3234,11 +3234,10 @@ localSEparameter localSolarEclipse(double JD,int contact,bool central) {
 	double L = 0.;
 
 	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-	//PlanetP earth = ssystem->getEarth();
 	Vec4d geocentricCoords = ssystem->getEarth()->getRectangularCoordinates(lon,lat,elevation);
-	const double rc = geocentricCoords[0]/(EARTH_RADIUS/AU); // rhoCosPhiPrime
-	const double rs = geocentricCoords[1]/(EARTH_RADIUS/AU); // rhoSinPhiPrime
-	lat = lat * M_PI_180;
+	static const double earthRadius = ssystem->getEarth()->getEquatorialRadius();
+	static const double rc = geocentricCoords[0]/earthRadius; // rhoCosPhiPrime
+	static const double rs = geocentricCoords[1]/earthRadius; // rhoSinPhiPrime
 
 	core->setUseTopocentricCoordinates(false);
 	core->setJD(JD);

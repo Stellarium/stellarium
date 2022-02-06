@@ -916,8 +916,8 @@ public:
 		double L1 = z * tf1 + (0.2725076 / cos(f1));
 		double L2 = z * tf2 - (0.272281 / cos(f2));
 		double mu = gast - a / M_PI_180;
-		const double f = 1. - ssystem->getEarth()->getOneMinusOblateness(); // flattening
-		const double e2 = 2.*f-(f*f);
+		static const double f = 1. - ssystem->getEarth()->getOneMinusOblateness(); // flattening
+		static const double e2 = f*(2.-f);
 		// e^2 = 0.00669438 : Earth flattening parameter
 		// Inverse flattening 1/f = 298.257223563 : e^2 = 2f-f^2
 		// Source: 1984 World Geodetic System (WGS 84)
@@ -926,7 +926,7 @@ public:
 		// 1/f = 298.25642 But seem to be not widely used
 		// https://www.iers.org/IERS/EN/Publications/TechnicalNotes/tn32.html
 		// We use older value to be comparable with literatures and consistenc across Stellarium
-		const double ff = 1./(1.-f);
+		static const double ff = 1./(1.-f);
 
 		// Find Lat./Long. of center line on Earth's surface
 		double cd = cos(d);
