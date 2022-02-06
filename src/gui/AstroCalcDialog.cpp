@@ -3230,8 +3230,6 @@ localSEparameter localSolarEclipse(double JD,int contact,bool central) {
 	double lat = static_cast<double>(core->getCurrentLocation().latitude);
 	double lon = static_cast<double>(core->getCurrentLocation().longitude);
 	double elevation = static_cast<double>(core->getCurrentLocation().altitude);
-	//lon = -(lon);
-	double L = 0.;
 
 	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	Vec4d geocentricCoords = ssystem->getEarth()->getRectangularCoordinates(lon,lat,elevation);
@@ -3293,10 +3291,8 @@ localSEparameter localSolarEclipse(double JD,int contact,bool central) {
 	const double delta = (u * vdot - udot * v) / sqrt(udot * udot + vdot * vdot);
 	L1 = L1 - zeta * tf1;
 	L2 = L2 - zeta * tf2;
-	if (central)
-		L = L2;
-	else
-		L = L1;
+	double L = L1;
+	if (central) L = L2;
 	const double sfi = delta/L;
 	const double ce = 1.- sfi*sfi;
 	double cfi = 0.; 
