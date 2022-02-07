@@ -241,7 +241,7 @@ double AngleSpinBox::stringToDouble(QString input, QValidator::State* state, Pre
 		  QRegularExpression::CaseInsensitiveOption);
 	QRegularExpression hmsRx("^\\s*(\\d+)\\s*h(\\s*(\\d+(\\.\\d*)?)\\s*[m'](\\s*(\\d+(\\.\\d*)?)\\s*[s\"]\\s*)?)?$",
 		  QRegularExpression::CaseInsensitiveOption);
-	QRegularExpression decRx("^(\\d+(\\.\\d*)?)(\\s*[\\x00b0]\\s*)?$");
+	QRegularExpression decRx(u8"^(\\d+(\\.\\d*)?)\\s*\u00b0\\s*?$");
 	QRegularExpression badRx("[^hdms0-9 °'\"\\.]", QRegularExpression::CaseInsensitiveOption);
 	QRegularExpressionMatch dmsMatch=dmsRx.match(input);
 	QRegularExpressionMatch hmsMatch=hmsRx.match(input);
