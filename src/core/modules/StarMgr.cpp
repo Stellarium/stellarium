@@ -241,14 +241,15 @@ QString StarMgr::getCrossIdentificationDesignations(QString hip)
 	if (cr!=crossIdMap.end())
 	{
 		crossid crossIdData = cr.value();
-		if (crossIdData.sao>0)
-			designations << QString("SAO %1").arg(crossIdData.sao);
+		if (crossIdData.hr>0)
+			designations << QString("HR %1").arg(crossIdData.hr);
 
 		if (crossIdData.hd>0)
 			designations << QString("HD %1").arg(crossIdData.hd);
 
-		if (crossIdData.hr>0)
-			designations << QString("HR %1").arg(crossIdData.hr);
+		if (crossIdData.sao>0)
+			designations << QString("SAO %1").arg(crossIdData.sao);
+
 	}
 
 	return designations.join(" - ");
