@@ -747,12 +747,20 @@ const StelLocation StelLocationMgr::locationFromCLI() const
 {
 	StelLocation ret;
 	QSettings* conf = StelApp::getInstance().getSettings();
-	bool ok;
 	conf->beginGroup("location_run_once");
-	ret.latitude = parseAngle(StelUtils::radToDmsStr(conf->value("latitude").toDouble(), true), &ok);
-	if (!ok) ret.role = '!';
-	ret.longitude = parseAngle(StelUtils::radToDmsStr(conf->value("longitude").toDouble(), true), &ok);
-	if (!ok) ret.role = '!';
+
+	const auto latVar = conf->value("latitude");
+	if (latVar.isValid())
+		ret.latitude = 180/M_PI * latVar.toDouble();
+	else
+		ret.role = '!';
+
+	const auto lonVar = conf->value("longitude");
+	if (lonVar.isValid())
+		ret.longitude = 180/M_PI * lonVar.toDouble();
+	else
+		ret.role = '!';
+	bool ok;
 	ret.altitude = conf->value("altitude", 0).toInt(&ok);
 	ret.planetName = conf->value("home_planet", "Earth").toString();
 	ret.landscapeKey = conf->value("landscape_name", "guereins").toString();
