@@ -679,7 +679,10 @@ static float parseAngle(const QString& s, bool* ok)
 		if (!*ok) return 0;
 		float sec = match.captured(3).isEmpty()? 0 : match.captured(3).toFloat(ok);
 		if (!*ok) return 0;
-		return deg + min / 60 + sec / 3600;
+		if (deg < 0)
+			return deg - min / 60 - sec / 3600;
+		else
+			return deg + min / 60 + sec / 3600;
 	}
 	return 0;
 }
