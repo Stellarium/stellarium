@@ -59,6 +59,8 @@ public slots:
 	void setTuiObjInfo(bool tObjInfo) { tuiObjInfo = tObjInfo; }
 	//! Set Gravity text for the TUI text
 	void setTuiGravityUi(bool tGravityUi) { tuiGravityUi = tGravityUi; }
+    //! Set light pollution level
+    void setLightPollutionLevel(int level);
 
 private slots:
 	void setHomePlanet(QString planetName);
