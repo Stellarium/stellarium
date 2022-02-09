@@ -59,6 +59,7 @@ Landscape::Landscape(float _radius)
 	, horizonPolygon(Q_NULLPTR)
 	, fontSize(18)
 	, memorySize(sizeof(Landscape))
+	, multisamplingEnabled_(StelApp::getInstance().getSettings()->value("video/multisampling", 0).toUInt() != 0)
 {
 }
 
@@ -739,6 +740,12 @@ void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter, const b
 	else
 		sPainter.setColor(Vec3f(landscapeBrightness), landFader.getInterstate());
 
+    const auto gl = sPainter.glFuncs();
+#ifdef GL_MULTISAMPLE
+	if (multisamplingEnabled_)
+		gl->glEnable(GL_MULTISAMPLE);
+#endif
+
 	for (const auto& side : precomputedSides)
 	{
 		if (side.light==drawLight)
@@ -747,6 +754,11 @@ void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter, const b
 			sPainter.drawSphericalTriangles(side.arr, true, false, Q_NULLPTR, false);
 		}
 	}
+
+#ifdef GL_MULTISAMPLE
+	if (multisamplingEnabled_)
+		gl->glDisable(GL_MULTISAMPLE);
+#endif
 }
 
 // Draw the ground
@@ -770,6 +782,7 @@ void LandscapeOldStyle::drawGround(StelCore* core, StelPainter& sPainter) const
 		groundTex->bind();
 	}
 	StelVertexArray va(static_cast<const QVector<Vec3d> >(groundVertexArr), StelVertexArray::Triangles, static_cast<const QVector<Vec2f> >(groundTexCoordArr));
+
 	sPainter.drawStelVertexArray(va, true);
 }
 
@@ -911,7 +924,19 @@ void LandscapePolygonal::draw(StelCore* core, bool onlyPolygon)
 	if (!onlyPolygon) // The only useful application of the onlyPolygon is a demo which does not fill the polygon
 	{
 		sPainter.setColor(landscapeBrightness*groundColor, landFader.getInterstate());
+
+    const auto gl = sPainter.glFuncs();
+#ifdef GL_MULTISAMPLE
+	if (multisamplingEnabled_)
+		gl->glEnable(GL_MULTISAMPLE);
+#endif
+
 		sPainter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeFill);
+
+#ifdef GL_MULTISAMPLE
+	if (multisamplingEnabled_)
+		gl->glDisable(GL_MULTISAMPLE);
+#endif
 	}
 
 	if (horizonPolygonLineColor != Vec3f(-1.f,0.f,0.f))

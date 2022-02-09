@@ -253,6 +253,7 @@ protected:
 	int fontSize;     //! Used for landscape labels (optionally indicating landscape features)
 	Vec3f labelColor; //! Color for the landscape labels.
 	unsigned int memorySize;   //!< holds an approximate value of memory consumption (for cache cost estimate)
+    bool multisamplingEnabled_;
 };
 
 //! @class LandscapeOldStyle
