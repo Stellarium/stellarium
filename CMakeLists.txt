@@ -37,6 +37,12 @@ SET(COPYRIGHT_YEARS "2000-${CURRENTYEAR}")
 SET(STELLARIUM_URL "https://stellarium.org/")
 ADD_DEFINITIONS(-DSTELLARIUM_URL="${STELLARIUM_URL}")
 
+# The line below is copied from copied from src/gui/HelpDialog.cpp file
+SET(STELLARIUM_COPYRIGHT "Copyright © ${COPYRIGHT_YEARS} ${PROJECT_NAME} Developers")
+# The line below is copied from copied from src/main.cpp file
+#SET(STELLARIUM_COPYRIGHT "Copyright © ${COPYRIGHT_YEARS} Fabien Chereau et al.")
+ADD_DEFINITIONS(-DSTELLARIUM_COPYRIGHT="${STELLARIUM_COPYRIGHT}")
+
 # Define URL for usage within program (feedback URL for plug-ins)
 SET(STELLARIUM_DEV_URL "https://github.com/Stellarium/stellarium")
 ADD_DEFINITIONS(-DSTELLARIUM_DEV_URL="${STELLARIUM_DEV_URL}")

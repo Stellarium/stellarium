@@ -458,7 +458,7 @@ void HelpDialog::updateAboutText(void) const
 	// populate About tab
 	QString newHtml = "<h1>" + StelUtils::getApplicationName() + "</h1>";
 	// Note: this legal notice is not suitable for translation
-	newHtml += QString("<h3>Copyright &copy; %1 Stellarium Developers</h3>").arg(COPYRIGHT_YEARS);
+	newHtml += QString("<h3>%1</h3>").arg(STELLARIUM_COPYRIGHT);
 	if (!message.isEmpty())
 		newHtml += "<p><strong>" + message + "</strong></p>";
 	// newHtml += "<p><em>Version 0.15 is dedicated in memory of our team member Barry Gerdes.</em></p>";

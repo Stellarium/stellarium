@@ -237,7 +237,7 @@ int main(int argc, char **argv)
 	// OK we start the full program.
 	// Print the console splash and get on with loading the program
 	QString versionLine = QString("This is %1 - %2").arg(StelUtils::getApplicationName(), STELLARIUM_URL);
-	QString copyrightLine = QString("Copyright (C) %1 Fabien Chereau et al.").arg(COPYRIGHT_YEARS);
+	QString copyrightLine = STELLARIUM_COPYRIGHT;
 	int maxLength = qMax(versionLine.size(), copyrightLine.size());
 	qDebug() << qPrintable(QString(" %1").arg(QString().fill('-', maxLength+2)));
 	qDebug() << qPrintable(QString("[ %1 ]").arg(versionLine.leftJustified(maxLength, ' ')));
