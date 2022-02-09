@@ -871,102 +871,206 @@ QString Planet::getInfoStringPeriods(const StelCore *core, const InfoStringGroup
 	return str;
 }
 
-class SolarEclipse
+SolarEclipseBessel::SolarEclipseBessel(double &besX, double &besY,
+	double &besD, double &bestf1, double &bestf2, double &besL1, double &besL2, double &besMu)
 {
-private:
-	static constexpr double SunEarth = 109.12278; // ratio of Sun-Earth radius 696000/6378.1366
+	// Besselian elements
+	// Source: Explanatory Supplement to the Astronomical Ephemeris 
+	// and the American Ephemeris and Nautical Almanac (1961)
 
-public:
-	static Vec3d point(const StelCore* core)
+	StelCore* core = StelApp::getInstance().getCore();
+	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+	core->setUseTopocentricCoordinates(false);
+	core->update(0);
+
+	double raMoon, deMoon, raSun, deSun;
+	StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
+	StelUtils::rectToSphe(&raMoon, &deMoon, ssystem->getMoon()->getEquinoxEquatorialPos(core));
+
+	double sdistanceAu = ssystem->getSun()->getEquinoxEquatorialPos(core).length();
+	const double earthRadius = ssystem->getEarth()->getEquatorialRadius()*AU;
+	// Moon's distance in Earth's radius
+	double mdistanceER = ssystem->getMoon()->getEquinoxEquatorialPos(core).length() * AU / earthRadius;
+	// Greenwich Apparent Sidereal Time
+	const double gast = get_apparent_sidereal_time(core->getJD(), core->getJDE());
+
+	// Avoid bug for special cases happen around Vernal Equinox
+	double raDiff = StelUtils::fmodpos(raMoon-raSun, 2.*M_PI);
+	if (raDiff>M_PI) raDiff-=2.*M_PI;
+
+	constexpr double SunEarth = 109.12278;
+	// ratio of Sun-Earth radius : 109.12278 = 696000/6378.1366
+	// Another value is 109.075744787 = 695700/6378.1366
+	// Earth's equatorial radius = 6378.1366
+	// Source: IERS Conventions (2003)
+	// https://www.iers.org/IERS/EN/Publications/TechnicalNotes/tn32.html
+
+	// NASA's solar eclipse predictions use larger Sun with radius 696,000 km
+	// calculated from arctan of IAU 1976 solar radius (959.63 arcsec at 1 au)
+	// This value affects duration of total/annular eclipse ~ 2-3 seconds
+	// Stellarium's solar radius is 695,700 km, this may create discrepancies between prediction & visualization
+
+	const double rss = sdistanceAu * 23454.7925; // from 1 AU/Earth's radius : 149597870.8/6378.1366
+	const double b = mdistanceER / rss;
+	const double a = raSun - ((b * cos(deMoon) * raDiff) / ((1 - b) * cos(deSun)));
+	besD = deSun - (b * (deMoon - deSun) / (1 - b));
+	besX = cos(deMoon) * sin((raMoon - a));
+	besX *= mdistanceER;
+	besY = cos(besD) * sin(deMoon);
+	besY -= cos(deMoon) * sin(besD) * cos((raMoon - a));
+	besY *= mdistanceER;
+	double z = sin(deMoon) * sin(besD);
+	z += cos(deMoon) * cos(besD) * cos((raMoon - a));
+	z *= mdistanceER;
+	const double k = 0.2725076;
+	const double s = 0.272281;
+	// Ratio of Moon/Earth's radius 0.2725076 is recommended by IAU for both k & s
+	// s = 0.272281 is used by Fred Espenak/NASA for total eclipse to eliminate extreme cases
+	// when the Moon's apparent diameter is very close to the Sun but cannot completely cover it. 
+	// we will use two values (same with NASA), because durations seem to agree with NASA.
+	// Source: Solar Eclipse Predictions and the Mean Lunar Radius
+	// http://eclipsewise.com/solar/SEhelp/SEradius.html
+
+	// Parameters of the shadow cone
+	const double f1 = asin((SunEarth + k) / (rss * (1. - b)));
+	bestf1 = tan(f1);
+	const double f2 = asin((SunEarth - s) / (rss * (1. - b)));  
+	bestf2 = tan(f2);
+	besL1 = z * bestf1 + (k / cos(f1));
+	besL2 = z * bestf2 - (s / cos(f2));
+	besMu = gast - a * M_180_PI;
+	besMu = StelUtils::fmodpos(besMu, 360.);
+};
+
+// Solar eclipse data at given time
+SolarEclipseData::SolarEclipseData(double JD, double &dRatio, double &latDeg,
+	double &lngDeg, double &altitude, double &pathWidth, double &duration, double &magnitude)
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	const double currentJD = core->getJD();   // save current JD
+	const bool saveTopocentric = core->getUseTopocentricCoordinates();
+
+	core->setUseTopocentricCoordinates(false);
+	core->setJD(JD);
+	core->update(0);
+
+	double x,y,d,tf1,tf2,L1,L2,mu;
+	SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+
+	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+	static const double f = 1.0 - ssystem->getEarth()->getOneMinusOblateness(); // flattening
+	const double earthRadius = ssystem->getEarth()->getEquatorialRadius()*AU;
+	static const double e2 = f*(2.-f);
+	static const double ff = 1./(1.-f);
+	const double rho1 = sqrt(1. - e2 * cos(d) *cos(d));
+	const double eta1 = y / rho1;
+	const double sd1 = sin(d) / rho1;
+	const double cd1 = sqrt(1. - e2) * cos(d) / rho1;
+	const double rho2 = sqrt(1.- e2 * sin(d) * sin(d));
+	const double sd1d2 = e2*sin(d)*cos(d)/(rho1*rho2);
+	const double cd1d2 = sqrt(1. - sd1d2 * sd1d2); 
+	const double p = 1. - x * x - eta1 * eta1;
+
+	if (p > 0.) // Central eclipse : Moon's shadow axis is touching Earth
 	{
-		static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-		double raSun, deSun, raMoon, deMoon;
-		StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
-		StelUtils::rectToSphe(&raMoon, &deMoon, ssystem->getMoon()->getEquinoxEquatorialPos(core));
+		const double zeta1 = sqrt(p);
+		const double zeta = rho2 * (zeta1 * cd1d2 - eta1 * sd1d2);
+		double L2a = L2 - zeta * tf2;
+		const double b = -y * sin(d) + zeta * cos(d);
+		double theta = atan2(x, b) * M_180_PI;
+		lngDeg = theta - mu;
+		lngDeg = StelUtils::fmodpos(lngDeg, 360.);
+		if (lngDeg > 180.) lngDeg -= 360.;
+		const double sfn1 = eta1 * cd1 + zeta1 * sd1;
+		const double cfn1 = sqrt(1. - sfn1 * sfn1);
+		latDeg = atan(ff * sfn1 / cfn1) / M_PI_180;
+		double L1a = L1 - zeta * tf1;
+		magnitude = L1a / (L1a + L2a);
+		dRatio = 1.+(magnitude-1.)*2.;
 
-		double sdistanceAu = ssystem->getSun()->getEquinoxEquatorialPos(core).length();
-		// Moon's distance in Earth's radius
-		double mdistanceER = ssystem->getMoon()->getEquinoxEquatorialPos(core).length() * AU / EARTH_RADIUS;
-		// Greenwich Apparent Sidereal Time
-		double gast = get_apparent_sidereal_time(core->getJD(), core->getJDE());
+		core->setJD(JD - 5./1440.);
+		core->update(0);
 
-		if (raSun < 0.) raSun += M_PI * 2.;
-		if (raMoon < 0.) raMoon += M_PI * 2.;
+		double x1,y1,d1,mu1;
+		SolarEclipseBessel(x1,y1,d1,tf1,tf2,L1,L2,mu1);
 
-		// Besselian elements
-		// based on Explanatory supplement to the astronomical ephemeris
-		// and the American ephemeris and nautical almanac (1961)
-		const double rss = sdistanceAu * 23454.7925; // from 1 AU/Earth's radius : 149597870.8/6378.1366
-		const double b = mdistanceER / rss;
-		const double a = raSun - ((b * cos(deMoon) * (raMoon - raSun)) / ((1 - b) * cos(deSun)));
-		const double d = deSun - (b * (deMoon - deSun) / (1 - b));
-		double x = cos(deMoon) * sin((raMoon - a));
-		x *= mdistanceER;
-		double y = cos(d) * sin(deMoon);
-		y -= cos(deMoon) * sin(d) * cos((raMoon - a));
-		y *= mdistanceER;
-		double z = sin(deMoon) * sin(d);
-		z += cos(deMoon) * cos(d) * cos((raMoon - a));
-		z *= mdistanceER;
-		// parameters of the shadow cone
-		const double f1 = asin((SunEarth + 0.2725076) / (rss * (1 - b)));
-		const double tf1 = tan(f1);
-		const double f2 = asin((SunEarth - 0.272281) / (rss * (1 - b)));
-		const double tf2 = tan(f2);
-		double L1 = z * tf1 + (0.2725076 / cos(f1));
-		double L2 = z * tf2 - (0.272281 / cos(f2));
-		double mu = gast - a / M_PI_180;
-		constexpr double e2 = 0.00669438;
-		// e^2 = 0.00669438 : Earth flattening parameter
-		// Inverse flattening 1/f = 298.257223563 : e^2 = 2f-f^2
-		// Source: 1984 World Geodetic System (WGS 84)
-		// https://web.archive.org/web/20200710203711/http://www.epsg-registry.org/export.htm?gml=urn:ogc:def:ellipsoid:EPSG::7030
-		// There is a modern value from IERS Conventions (2003)
-		// 1/f = 298.25642 But seem to be not widely used
-		// https://www.iers.org/IERS/EN/Publications/TechnicalNotes/tn32.html
-		// We use older value to be comparable with literatures and consistence across Stellarium
+		core->setJD(JD + 5./1440.);
+		core->update(0);
 
-		// Find Lat./Long. of center line on Earth's surface
-		double cd = cos(d);
-		double rho1 = sqrt(1. - e2 * cd * cd);
-		double y1 = y / rho1;
-		double xi = x;
-		double eta1 = y1;
-		double sd = sin(d);
-		double sd1 = sd / rho1;
-		double cd1 = sqrt(1. - e2) * cd / rho1;
-		double rho2 = sqrt(1. - e2 * sd * sd);
-		double sd1d2 = e2 * sd * cd / (rho1 * rho2);
-		double cd1d2 = sqrt(1. - sd1d2 * sd1d2);
-		double lon = 0, mag = 0;
-		double lat = 99; // initialize an impossible latitude to indicate no central eclipse
+		double x2,y2,d2,mu2;
+		SolarEclipseBessel(x2,y2,d2,tf1,tf2,L1,L2,mu2);
 
-		if ((1. - x * x - y1 * y1) > 0)
-		{
-			const double zeta1 = sqrt(1 - x * x - y1 * y1);
-			const double zeta = rho2 * (zeta1 * cd1d2 - eta1 * sd1d2);
-			//const double sd2 = sd * 1.0033641 / rho2;
-			L2 = L2 - zeta * tf2;
-			double b = -y * sd + zeta * cd;
-			double theta = atan2(xi, b) / M_PI_180;
-			if (theta < 0.) theta += 360.;
-			if (mu > 360.) mu -= 360.;
-			lon = mu - theta;
-			if (lon < -180.) lon += 360.;
-			if (lon > 180.) lon -= 360.;
-			lon = -(lon); // + East, - West
-			double sfn1 = eta1 * cd1 + zeta1 * sd1;
-			double cfn1 = sqrt(1. - sfn1 * sfn1);
-			lat = 1.0033640898 * sfn1 / cfn1;
-			// 1.0033640898 = 1/(1-1/f) See flattening parameter above
-			lat = atan(lat) / M_PI_180;
-			L1 = L1 - zeta * tf1;
-			// Magnitude of eclipse
-			// mag < 1 = annular
-			mag = L1 / (L1 + L2);
-		}
-		return Vec3d(lat, lon, mag);
+		// Hourly rate
+		const double xdot = (x2 - x1) * 6.;
+		const double ydot = (y2 - y1) * 6.;
+		const double ddot = (d2 - d1) * 6.;
+		double mudot = (mu2 - mu1);
+		if (mudot<0.) mudot += 360.; // make sure it is positive in case mu2 < mu1
+		mudot = mudot * 6.* M_PI_180;
+
+		// Duration of central eclipse in minutes
+		const double etadot = mudot * x * sin(d) - ddot * zeta;
+		const double xidot = mudot * (-y * sin(d) + zeta * cos(d));
+		const double n = sqrt((xdot - xidot) * (xdot - xidot) + (ydot - etadot) * (ydot - etadot));
+		duration = L2a*120./n; // positive = annular eclipse, negative = total eclipse
+
+		// Approximate altitude
+		altitude = asin(cfn1*cos(d)*cos(theta * M_PI_180)+sfn1*sin(d)) / M_PI_180;
+
+		// Path width in kilometers
+		// Explanatory Supplement to the Astronomical Almanac
+		// Seidelmann, P. Kenneth, ed. (1992). University Science Books. ISBN 978-0-935702-68-2
+		// https://archive.org/details/131123ExplanatorySupplementAstronomicalAlmanac
+		// Path width for central solar eclipses which only part of umbra/antumbra touches Earth
+		// are too wide and could give a false impression, annular eclipse of 2003 May 31, for example.
+		// We have to check this in the next step by calculating northern/southern limit of umbra/antumbra.
+		// Don't show the path width if there is no northern limit or southern limit.
+		// We will eventually have to calculate both limits, if we want to draw eclipse path on world map.
+		const double p1 = zeta * zeta;
+		const double p2 = x * (xdot - xidot) / n;
+		const double p3 = eta1 * (ydot - etadot) / n;
+		const double p4 = (p2 + p3) * (p2 + p3);
+		pathWidth = abs(earthRadius*2.*L2a/sqrt(p1+p4));
 	}
+	else  // Partial eclipse or non-central eclipse
+	{
+		const double yy1 = y / rho1;
+		double xi = x / sqrt(x * x + yy1 * yy1);
+		const double eta1 = yy1 / sqrt(x * x + yy1 * yy1);
+		const double sd1 = sin(d) / rho1;
+		const double cd1 = sqrt(1.- e2) * cos(d) / rho1;
+		const double rho2 = sqrt(1.- e2 * sin(d) * sin(d));
+		const double sd1d2 = e2 * sin(d) * cos(d) / (rho1 * rho2);
+		double zeta = rho2 * (-(eta1) * sd1d2);
+		const double b = -eta1 * sd1;
+		double theta = atan2(xi, b);
+		const double sfn1 = eta1*cd1;
+		const double cfn1 = sqrt(1.- sfn1 * sfn1);
+		double lat = ff * sfn1 / cfn1;
+		lat = atan(lat);
+		L1 = L1 - zeta * tf1;
+		L2 = L2 - zeta * tf2;
+		const double c = 1. / sqrt(1.- e2 * sin(lat) * sin(lat));
+		const double s = (1.- e2) * c;
+		const double rs = s * sin(lat);
+		const double rc = c * cos(lat);
+		xi = rc * sin(theta);
+		const double eta = rs * cos(d) - rc * sin(d) * cos(theta);
+		const double u = x - xi;
+		const double v = y - eta;
+		magnitude = (L1 - sqrt(u * u + v * v)) / (L1 + L2);
+		dRatio = 1.+ (magnitude - 1.)* 2.;
+		theta = theta / M_PI_180;
+		lngDeg = theta - mu;
+		lngDeg = StelUtils::fmodpos(lngDeg, 360.);
+		if (lngDeg > 180.) lngDeg -= 360.;
+		latDeg = lat / M_PI_180;
+		duration = 0.;
+		pathWidth = 0.;
+	}
+	core->setJD(currentJD);
+	core->setUseTopocentricCoordinates(saveTopocentric);
+	core->update(0);
 };
 
 QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& flags) const
@@ -1246,7 +1350,6 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 			const double eclipseObscuration = 100.*(1.-eclObj.first);
 			if (eclipseObscuration>1.e-7) // needed to avoid false display of 1e-14 or so.
 			{
-				oss << QString("%1: %2%<br />").arg(q_("Eclipse obscuration"), QString::number(eclipseObscuration, 'f', 2));
 				PlanetP obj = eclObj.second;
 				if (onEarth && obj == ssystem->getMoon())
 				{
@@ -1257,6 +1360,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 							/ angularSize;
 					oss << QString("%1: %2<br />").arg(q_("Eclipse magnitude"), QString::number(eclipseMagnitude, 'f', 3));
 				}
+				oss << QString("%1: %2%<br />").arg(q_("Eclipse obscuration"), QString::number(eclipseObscuration, 'f', 2));
 			}
 
 			if (onEarth)
@@ -1275,34 +1379,55 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 				double raDiff = StelUtils::fmodpos((raMoon - raSun)/M_PI_180, 360.0);
 				if (raDiff < 3. || raDiff > 357.)
 				{
-					SolarEclipse solarEclipse;
-					Vec3d pos = solarEclipse.point(core1);
+					double JD = core1->getJD();
+					double dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude;
+					SolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
 
-					if (pos[0] < 90.) // only display when shadow axis is touching Earth
+					if (pathWidth > 0.) // only display when shadow axis is touching Earth
 					{
+						oss << QString("%1: %2 ").arg(
+								 q_("Moon/Sun diameter ratio"), // It seems magnitude of total/annular eclipses sometimes represented by this value
+								 QString::number(dRatio, 'f', 3));
+						if (dRatio < 1.0)
+							oss << QString(qc_("(annular)","type of solar eclipse"));
+						else
+							oss << QString(qc_("(total)","type of solar eclipse"));
+						oss << "<br/>";
+						double centralDuraton = abs(duration);
+						int durationMinute = int(centralDuraton);
+						int durationSecond = round((centralDuraton - durationMinute) * 60.);
+						if (durationSecond>59)
+						{
+							durationMinute += 1;
+							durationSecond = 0;
+						}
+						oss << QString("%1: %2%3 %4%5<br/>").arg(
+								 q_("Central eclipse duration"),
+								 QString::number(durationMinute),
+								 q_("m"),
+								 QString::number(durationSecond),
+								 q_("s"));
 						QString info = q_("Center of solar eclipse (Lat./Long.)");
 						if (withDecimalDegree)
-							oss << QString("%1: %2°/%3°<br />").arg(info).arg(pos[0], 5, 'f', 4).arg(pos[1], 5, 'f', 4);
+							oss << QString("%1: %2°/%3°<br />").arg(info).arg(latDeg, 5, 'f', 4).arg(lngDeg, 5, 'f', 4);
 						else
-							oss << QString("%1: %2/%3<br />").arg(info, StelUtils::decDegToDmsStr(pos[0]), StelUtils::decDegToDmsStr(pos[1]));
+							oss << QString("%1: %2/%3<br />").arg(info, StelUtils::decDegToDmsStr(latDeg), StelUtils::decDegToDmsStr(lngDeg));
 						StelLocation loc = core->getCurrentLocation();
 						// distance between center point and current location
-						double distance = loc.distanceKm(pos[1], pos[0]);
-						double azimuth = loc.getAzimuthForLocation(pos[1], pos[0]);
-
+						double distance = loc.distanceKm(lngDeg, latDeg);
+						double azimuth = loc.getAzimuthForLocation(lngDeg, latDeg);
 						oss << QString("%1 %2 %3 %4°<br/>").arg(
 								 q_("Shadow center point is"),
 								 QString::number(distance, 'f', 1),
 								 q_("km towards azimuth"),
 								 QString::number(azimuth, 'f', 1));
-						oss << QString("%1: %2 ").arg(
-								 q_("Magnitude of central eclipse"),
-								 QString::number(pos[2], 'f', 3));
-						if (pos[2] < 1.0)
-							oss << QString(qc_("(annular)","type of solar eclipse"));
+						if (dRatio < 1.0)
+							oss << QString(q_("Width of antumbra"));
 						else
-							oss << QString(qc_("(total)","type of solar eclipse"));
-						oss << "<br/>";
+							oss << QString(q_("Width of umbra"));
+						oss << QString(": %1 %2<br/>").arg(
+								 QString::number(pathWidth, 'f', 1),
+								 qc_("km", "distance"));
 					}
 				}
 				core1->setUseTopocentricCoordinates(useTopocentric);
@@ -1748,7 +1873,7 @@ Vec4d Planet::getRectangularCoordinates(const double longDeg, const double latDe
 	// For unclear reasons latDeg can be nan. Safety measure:
 	const double latRad = std::isnan(latDeg) ? 0. : latDeg*M_PI_180;
 	Q_ASSERT_X(!std::isnan(latRad), "Planet.cpp", QString("NaN result for latRad. Object %1 latitude %2").arg(englishName).arg(QString::number(latDeg, 'f', 5)).toLatin1());
-	const double u = (abs(latRad) - M_PI_2 < 1e-10 ? latRad : atan( bByA * tan(latRad)) );
+	const double u = (M_PI_2 - (abs(latRad)) < 1e-10 ? latRad : atan( bByA * tan(latRad)) );
 	//qDebug() << "getTopographicOffsetFromCenter: a=" << a*AU << "b/a=" << bByA << "b=" << bByA*a *AU  << "latRad=" << latRad << "u=" << u;
 	// There seem to be numerical issues around tan/atan. Relieve the test a bit.
 	Q_ASSERT_X( fabs(u)-fabs(latRad) <= 1e-10, "Planet.cpp", QString("u: %1 latRad: %2 bByA: %3 latRad-u: %4 (%5)")
