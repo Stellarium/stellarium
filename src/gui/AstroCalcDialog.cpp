@@ -3155,8 +3155,6 @@ void AstroCalcDialog::generateSolarEclipses()
 					}
 					else
 					{
-						//double dRatio,latDeg,lngDeg,altitude,pathWidth,duration;
-						//SolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
 						magStr = QString("%1").arg(QString::number(dRatio, 'f', 3));
 						eclipseAltitude = altitude;
 						altitudeStr = QString("%1°").arg(QString::number(round(eclipseAltitude)));

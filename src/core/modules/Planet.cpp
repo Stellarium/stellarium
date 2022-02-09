@@ -1032,7 +1032,6 @@ SolarEclipseData::SolarEclipseData(double JD, double &dRatio, double &latDeg,
 		const double p3 = eta1 * (ydot - etadot) / n;
 		const double p4 = (p2 + p3) * (p2 + p3);
 		pathWidth = abs(earthRadius*2.*L2a/sqrt(p1+p4));
-		
 	}
 	else  // Partial eclipse or non-central eclipse
 	{
