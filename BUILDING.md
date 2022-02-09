@@ -73,10 +73,13 @@ sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc
 
 #### Fedora / CentOS
 
+Note: This should work on RHEL/CentOS 8 or later and recent versions of Fedora. To build on CentOS 7 or older,
+see [Linux with outdated Qt](#linux-with-outdated-qt).
+
 ```
-sudo yum install cmake gcc graphviz doxygen gettext git \
-                 qt5-base-devel qt5-qttools-devel qt5-qtscript-devel qt5-qtsvg-devel qt5-qtmultimedia-devel \
-                 qt5-qtserialport-devel qt5-qtlocation-devel qt5-qtpositioning-devel qtwebengine5-devel
+sudo dnf install cmake gcc graphviz doxygen gettext git \
+                 qt5-qtbase-devel qt5-qttools-devel qt5-qtscript-devel qt5-qtsvg-devel qt5-qtmultimedia-devel \
+                 qt5-qtserialport-devel qt5-qtlocation-devel qt5-qtcharts-devel qt5-qtwebengine-devel
 ```
 
 #### Linux with outdated Qt
