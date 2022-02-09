@@ -1416,16 +1416,18 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 						// distance between center point and current location
 						double distance = loc.distanceKm(lngDeg, latDeg);
 						double azimuth = loc.getAzimuthForLocation(lngDeg, latDeg);
-
 						oss << QString("%1 %2 %3 %4°<br/>").arg(
 								 q_("Shadow center point is"),
 								 QString::number(distance, 'f', 1),
 								 q_("km towards azimuth"),
 								 QString::number(azimuth, 'f', 1));
-						oss << QString("%1: %2 %3<br/>").arg(
-								 q_("Width of umbra/antumbra"),
+						if (dRatio < 1.0)
+							oss << QString(q_("Width of antumbra"));
+						else
+							oss << QString(q_("Width of umbra"));
+						oss << QString(": %1 %2<br/>").arg(
 								 QString::number(pathWidth, 'f', 1),
-								 q_("km"));
+								 qc_("km", "distance"));
 					}
 				}
 				core1->setUseTopocentricCoordinates(useTopocentric);
