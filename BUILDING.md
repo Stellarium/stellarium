@@ -68,7 +68,7 @@ sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc
                  qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev \
                  qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev \
                  qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins \
-                 qtwebengine5-dev
+                 qtwebengine5-dev libqt5charts5-dev
 ```
 
 #### Fedora / CentOS
