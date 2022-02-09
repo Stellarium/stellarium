@@ -944,7 +944,7 @@ SolarEclipseBessel::SolarEclipseBessel(double &besX, double &besY,
 
 // Solar eclipse data at given time
 SolarEclipseData::SolarEclipseData(double JD, double &dRatio, double &latDeg,
-	double &longDeg, double &altitude, double &pathWidth, double &duration, double &magnitude)
+	double &lngDeg, double &altitude, double &pathWidth, double &duration, double &magnitude)
 {
 	StelCore* core = StelApp::getInstance().getCore();
 	const double currentJD = core->getJD();   // save current JD
@@ -978,9 +978,9 @@ SolarEclipseData::SolarEclipseData(double JD, double &dRatio, double &latDeg,
 		double L2a = L2 - zeta * tf2;
 		const double b = -y * sin(d) + zeta * cos(d);
 		double theta = atan2(x, b) * M_180_PI;
-		longDeg = theta - mu;
-		longDeg = StelUtils::fmodpos(longDeg, 360.);
-		if (longDeg > 180.) longDeg -= 360.;
+		lngDeg = theta - mu;
+		lngDeg = StelUtils::fmodpos(lngDeg, 360.);
+		if (lngDeg > 180.) lngDeg -= 360.;
 		const double sfn1 = eta1 * cd1 + zeta1 * sd1;
 		const double cfn1 = sqrt(1. - sfn1 * sfn1);
 		latDeg = atan(ff * sfn1 / cfn1) / M_PI_180;
@@ -1021,7 +1021,6 @@ SolarEclipseData::SolarEclipseData(double JD, double &dRatio, double &latDeg,
 		// Explanatory Supplement to the Astronomical Almanac
 		// Seidelmann, P. Kenneth, ed. (1992). University Science Books. ISBN 978-0-935702-68-2
 		// https://archive.org/details/131123ExplanatorySupplementAstronomicalAlmanac
-
 		// Path width for central solar eclipses which only part of umbra/antumbra touches Earth
 		// are too wide and could give a false impression, annular eclipse of 2003 May 31, for example.
 		// We have to check this in the next step by calculating northern/southern limit of umbra/antumbra.
@@ -1062,9 +1061,9 @@ SolarEclipseData::SolarEclipseData(double JD, double &dRatio, double &latDeg,
 		magnitude = (L1 - sqrt(u * u + v * v)) / (L1 + L2);
 		dRatio = 1.+ (magnitude - 1.)* 2.;
 		theta = theta / M_PI_180;
-		longDeg = theta - mu;
-		longDeg = StelUtils::fmodpos(longDeg, 360.);
-		if (longDeg > 180.) longDeg -= 360.;
+		lngDeg = theta - mu;
+		lngDeg = StelUtils::fmodpos(lngDeg, 360.);
+		if (lngDeg > 180.) lngDeg -= 360.;
 		latDeg = lat / M_PI_180;
 		duration = 0.;
 		pathWidth = 0.;
@@ -1381,20 +1380,20 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 				if (raDiff < 3. || raDiff > 357.)
 				{
 					double JD = core1->getJD();
-					double dRatio,latDeg,longDeg,altitude,pathWidth,duration,magnitude;
-					SolarEclipseData(JD,dRatio,latDeg,longDeg,altitude,pathWidth,duration,magnitude);
+					double dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude;
+					SolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
 
 					if (pathWidth > 0.) // only display when shadow axis is touching Earth
 					{
 						QString info = q_("Center of solar eclipse (Lat./Long.)");
 						if (withDecimalDegree)
-							oss << QString("%1: %2°/%3°<br />").arg(info).arg(latDeg, 5, 'f', 4).arg(longDeg, 5, 'f', 4);
+							oss << QString("%1: %2°/%3°<br />").arg(info).arg(latDeg, 5, 'f', 4).arg(lngDeg, 5, 'f', 4);
 						else
-							oss << QString("%1: %2/%3<br />").arg(info, StelUtils::decDegToDmsStr(latDeg), StelUtils::decDegToDmsStr(longDeg));
+							oss << QString("%1: %2/%3<br />").arg(info, StelUtils::decDegToDmsStr(latDeg), StelUtils::decDegToDmsStr(lngDeg));
 						StelLocation loc = core->getCurrentLocation();
 						// distance between center point and current location
-						double distance = loc.distanceKm(longDeg, latDeg);
-						double azimuth = loc.getAzimuthForLocation(longDeg, latDeg);
+						double distance = loc.distanceKm(lngDeg, latDeg);
+						double azimuth = loc.getAzimuthForLocation(lngDeg, latDeg);
 
 						oss << QString("%1 %2 %3 %4°<br/>").arg(
 								 q_("Shadow center point is"),
@@ -1406,7 +1405,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 								 QString::number(pathWidth, 'f', 1),
 								 q_("km"));
 						oss << QString("%1: %2 ").arg(
-								 q_("Moon/Sun diameter ratio"),
+								 q_("Moon/Sun diameter ratio"), // It seems magnitude of total/annular eclipses sometimes represented by this value
 								 QString::number(dRatio, 'f', 3));
 						if (dRatio < 1.0)
 							oss << QString(qc_("(annular)","type of solar eclipse"));
