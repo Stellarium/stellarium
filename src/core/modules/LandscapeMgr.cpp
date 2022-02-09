@@ -318,27 +318,22 @@ void LandscapeMgr::update(double deltaTime)
 
 	StelCore* core = StelApp::getInstance().getCore();
 	StelSkyDrawer* drawer=core->getSkyDrawer();
-	Vec3d sunPos = ssystem->getSun()->getAltAzPosAuto(core);
 
 	// Compute the moon position in local coordinate
-	Vec3d moonPos = ssystem->getMoon()->getAltAzPosAuto(core);
-	float lunarPhaseAngle=static_cast<float>(ssystem->getMoon()->getPhaseAngle(ssystem->getEarth()->getHeliocentricEclipticPos()));
-	float lunarMagnitude=ssystem->getMoon()->getVMagnitudeWithExtinction(core);
-	// LP:1673283 no lunar brightening if not on Earth!
-	if (core->getCurrentLocation().planetName != "Earth")
-	{
-		moonPos=sunPos;
-		lunarPhaseAngle=0.0f;
-	}
+	const auto sun   = ssystem->getSun();
+	const auto moon  = ssystem->getMoon();
+	const auto earth = ssystem->getEarth();
+	const auto currentPlanet = core->getCurrentPlanet();
+	const bool currentIsEarth = currentPlanet->getID() == earth->getID();
 	// First parameter in next call is used for particularly earth-bound computations in Schaefer's sky brightness model. Difference DeltaT makes no difference here.
-	atmosphere->computeColor(core->getJDE(), sunPos, moonPos, lunarPhaseAngle, lunarMagnitude,
-				 core, core->getCurrentLocation().latitude, static_cast<float>(core->getCurrentLocation().altitude),
-				 15.f, 40.f, static_cast<float>(drawer->getExtinctionCoefficient()), atmosphereNoScatter);	// Temperature = 15c, relative humidity = 40%
+	// Temperature = 15°C, relative humidity = 40%
+	atmosphere->computeColor(core, core->getJDE(), *currentPlanet, *sun, currentIsEarth ? moon.get() : nullptr, core->getCurrentLocation(),
+							 15.f, 40.f, static_cast<float>(drawer->getExtinctionCoefficient()), atmosphereNoScatter);
 
 	core->getSkyDrawer()->reportLuminanceInFov(3.75f+atmosphere->getAverageLuminance()*3.5f, true);
 
 	// NOTE: Simple workaround for brightness of landscape when observing from the Sun.
-	if (core->getCurrentLocation().planetName == "Sun")
+	if (currentPlanet->getID() == sun->getID())
 	{
 		landscape->setBrightness(1.0, 1.0);
 		return;
@@ -372,8 +367,6 @@ void LandscapeMgr::update(double deltaTime)
 //	qDebug() << "Adapted Atmosphere lum=" << eye->adaptLuminance(atmosphere->getAverageLuminance()) << " Adapted ground lum=" << eye->adaptLuminance(groundLuminance);
 
 	// compute global ground brightness in a simplistic way, directly in RGB
-	sunPos.normalize();
-	moonPos.normalize();
 
 	double landscapeBrightness=0.0;
 	if (getFlagLandscapeUseMinimalBrightness())
@@ -384,6 +377,11 @@ void LandscapeMgr::update(double deltaTime)
 		else
 			landscapeBrightness = getDefaultMinimalBrightness();
 	}
+
+	Vec3d sunPos = sun->getAltAzPosAuto(core);
+	sunPos.normalize();
+	Vec3d moonPos = moon->getAltAzPosAuto(core);
+	moonPos.normalize();
 
 	// With atmosphere on, we define the solar brightness contribution zero when the sun is 8 degrees below the horizon.
 	// The multiplier of 1.5 just looks better, it somehow represents illumination by scattered sunlight.
@@ -407,8 +405,8 @@ void LandscapeMgr::update(double deltaTime)
     const float nelm = StelCore::luminanceToNELM(drawer->getLightPollutionLuminance());
 	float pollutionAddonBrightness=(15.5f-2*nelm)*0.025f; // 0..8, so we assume empirical linear brightening 0..0.02
 	float lunarAddonBrightness=0.f;
-	if (moonPos[2] > -0.1/1.5)
-		lunarAddonBrightness = qMax(0.2f/-12.f*ssystem->getMoon()->getVMagnitudeWithExtinction(core),0.f)*static_cast<float>(moonPos[2]);
+	if (currentIsEarth && moonPos[2] > -0.1/1.5)
+		lunarAddonBrightness = qMax(0.2f/-12.f*moon->getVMagnitudeWithExtinction(core),0.f)*static_cast<float>(moonPos[2]);
 
 	landscapeBrightness += static_cast<double>(qMax(lunarAddonBrightness, pollutionAddonBrightness));
 
