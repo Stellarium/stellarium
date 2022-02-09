@@ -1350,7 +1350,6 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 			const double eclipseObscuration = 100.*(1.-eclObj.first);
 			if (eclipseObscuration>1.e-7) // needed to avoid false display of 1e-14 or so.
 			{
-				oss << QString("%1: %2%<br />").arg(q_("Eclipse obscuration"), QString::number(eclipseObscuration, 'f', 2));
 				PlanetP obj = eclObj.second;
 				if (onEarth && obj == ssystem->getMoon())
 				{
@@ -1361,6 +1360,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 							/ angularSize;
 					oss << QString("%1: %2<br />").arg(q_("Eclipse magnitude"), QString::number(eclipseMagnitude, 'f', 3));
 				}
+				oss << QString("%1: %2%<br />").arg(q_("Eclipse obscuration"), QString::number(eclipseObscuration, 'f', 2));
 			}
 
 			if (onEarth)
@@ -1385,6 +1385,28 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 
 					if (pathWidth > 0.) // only display when shadow axis is touching Earth
 					{
+						oss << QString("%1: %2 ").arg(
+								 q_("Moon/Sun diameter ratio"), // It seems magnitude of total/annular eclipses sometimes represented by this value
+								 QString::number(dRatio, 'f', 3));
+						if (dRatio < 1.0)
+							oss << QString(qc_("(annular)","type of solar eclipse"));
+						else
+							oss << QString(qc_("(total)","type of solar eclipse"));
+						oss << "<br/>";
+						double centralDuraton = abs(duration);
+						int durationMinute = int(centralDuraton);
+						int durationSecond = round((centralDuraton - durationMinute) * 60.);
+						if (durationSecond>59)
+						{
+							durationMinute += 1;
+							durationSecond = 0;
+						}
+						oss << QString("%1: %2%3 %4%5<br/>").arg(
+								 q_("Central eclipse duration"),
+								 QString::number(durationMinute),
+								 q_("m"),
+								 QString::number(durationSecond),
+								 q_("s"));
 						QString info = q_("Center of solar eclipse (Lat./Long.)");
 						if (withDecimalDegree)
 							oss << QString("%1: %2°/%3°<br />").arg(info).arg(latDeg, 5, 'f', 4).arg(lngDeg, 5, 'f', 4);
@@ -1404,29 +1426,6 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 								 q_("Width of umbra/antumbra"),
 								 QString::number(pathWidth, 'f', 1),
 								 q_("km"));
-						oss << QString("%1: %2 ").arg(
-								 q_("Moon/Sun diameter ratio"), // It seems magnitude of total/annular eclipses sometimes represented by this value
-								 QString::number(dRatio, 'f', 3));
-						if (dRatio < 1.0)
-							oss << QString(qc_("(annular)","type of solar eclipse"));
-						else
-							oss << QString(qc_("(total)","type of solar eclipse"));
-						oss << "<br/>";
-
-						double centralDuraton = abs(duration);
-						int durationMinute = int(centralDuraton);
-						int durationSecond = round((centralDuraton - durationMinute) * 60.);
-						if (durationSecond>59)
-						{
-							durationMinute += 1;
-							durationSecond = 0;
-						}
-						oss << QString("%1: %2%3 %4%5<br/>").arg(
-								 q_("Central eclipse duration"),
-								 QString::number(durationMinute),
-								 q_("m"),
-								 QString::number(durationSecond),
-								 q_("s"));
 					}
 				}
 				core1->setUseTopocentricCoordinates(useTopocentric);
