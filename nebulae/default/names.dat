@@ -464,7 +464,7 @@ NGC  4325            _("Galaxy Cluster")
 NGC  4361            _("Lawn Sprinkler Nebula") # B500
 NGC  4374            _("Markarian's Chain") # DSW, WSG, CC
 NGC  4387            _("Great Galactic Face") # DSW
-NGC  4406            _("Faust V051") # SIMBAD
+# NGC  4406            _("Faust V051") # SIMBAD
 NGC  4406            _("Markarian's Chain") # WSG, CC
 NGC  4435            _("The Eyes") # DSW, SD, PSA, B500
 NGC  4435            _("Copeland's Eyes") # B500, DSW
@@ -552,7 +552,6 @@ NGC  5457            _("Pinwheel Galaxy") # SIMBAD, DSW, B500, PAS
 NGC  5466            _("Snowglobe Cluster") # SD
 NGC  5466            _("Ghost Globular Cluster") # SD
 NGC  5617            _("Dracula Cluster") # SG
-NGC  5623            _("Dragon Nebula")
 NGC  5629            _("NGC 5629 group") # WSG
 NGC  5662            _("Gypsy Moth Cluster") # HT
 NGC  5746            _("Blade and Pearl Galaxy") # B500, HT
@@ -615,6 +614,7 @@ NGC  6514            _("Trifid Nebula") # WK, SIMBAD, DSW, TSS, BCH, SOG, WSO, P
 NGC  6520            _("Dead Man's Chest Cluster") # B500, HT
 NGC  6520            _("Castaway Cluster") # HT
 NGC  6523            _("Lagoon Nebula") # BCH, SG, CC, DN, DAN, CCG, B500, PAS
+NGC  5623            _("Dragon Nebula") # SEDS
 NGC  6530            _("Herschel 36")
 NGC  6530            _("Hourglass Cluster")
 NGC  6530            _("Lagoon Nebula") # SG
@@ -646,7 +646,8 @@ NGC  6633            _("Captain Hook Cluster") # HT
 NGC  6633            _("Wasp-Waist Cluster") # HT
 NGC  6642            _("Tadpole Cluster") # DSW
 NGC  6656            _("Great Sagittarius Cluster") # B500, SG, CSOG-MSC
-NGC  6656            _("Crackerjack Cluster") # MO, SG
+# Trademark
+# NGC  6656            _("Crackerjack Cluster") # MO, SG
 NGC  6664            _("Santa's Sleigh Cluster") # B500, SD
 NGC  6664            _("Teacup Cluster") # SD
 NGC  6705            _("Wild Duck Cluster") # OGSC, SIMBAD, DSW, TSS, WSO, PSA, CC, CSOG-MSC, B500, PAS
@@ -849,7 +850,7 @@ IC   4628            _("Prawn Nebula") # APOD
 IC   4665            _("Summer Beehive Cluster") # HT
 IC   4665            _("Poseidon's Trident Cluster") # B500, DSW
 IC   4665            _("Black Swallowtail Butterfly Cluster") # HT
-IC   4725            _("υ Sgr Cluster") # PAS
+# IC   4725            _("υ Sgr Cluster") # PAS
 IC   4756            _("Graff's Cluster")
 IC   4756            _("Tweedledee Cluster") # HT, B500
 IC   4756            _("Secret Garden Cluster") # HT
