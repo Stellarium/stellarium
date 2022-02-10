@@ -170,6 +170,7 @@ Tigre	Buenos Aires	08	N	31.106	34.42603S	58.57962W	8	5	America/Argentina/Buenos_
 Tandil	Buenos Aires	08	N	104.325	37.32167S	59.13316W	192	7	America/Argentina/Buenos_Aires
 San Vicente	Misiones	08	N	38.247	26.61667S	54.13333W	603	5	America/Argentina/Cordoba
 Santo Tome	Corrientes	08	N	22.634	28.54939S	56.04077W	81	5	America/Argentina/Cordoba
+Santos Lugares	Buenos Aires	08	N	37.267	34.60379S	58.5461W	30	5	America/Argentina/Buenos_Aires
 Santa Elena	Entre Rios	08	N	18.41	30.94432S	59.78832W	67	5	America/Argentina/Cordoba
 San Pedro	Buenos Aires	08	N	47.452	33.67918S	59.66633W	30	5	America/Argentina/Buenos_Aires
 San Pedro	Misiones	08	N	23.736	26.62207S	54.10842W	554	5	America/Argentina/Cordoba
@@ -3337,9 +3338,11 @@ Jiuquan	Gansu	13	N	428.346	39.74318N	98.51736E	1464	7	Asia/Shanghai
 Shigu	Yunnan	13	N	21.006	26.86852N	99.95628E	1850	5	Asia/Shanghai
 Shangyun	Yunnan	13	N	44.918	23.05191N	99.82838E	909	5	Asia/Shanghai
 Shangpa	Yunnan	13	N	30.129	26.91948N	98.95158E	2984	5	Asia/Shanghai
-Shache	Xinjiang	13	N	82.509	38.41667N	77.24056E	1236	6	Asia/Urumqi
+Shache	Xinjiang	13	N	128.145	38.41667N	77.24056E	1236	7	Asia/Urumqi
 Ruidian	Yunnan	13	N	28.612	25.53171N	98.40855E	1755	5	Asia/Shanghai
 Qushi	Yunnan	13	N	42.38	25.21667N	98.6E	1468	5	Asia/Shanghai
+Qiemo	Xinjiang	13	N	18.893	38.13407N	85.52977E	1252	5	Asia/Urumqi
+Qarek	Xinjiang	13	N	29.946	38.37222N	76.99028E	1259	5	Asia/Urumqi
 Qamdo	Tibet	13	N	86.28	31.1304N	97.17982E	3235	6	Asia/Shanghai
 Yingjiang	Yunnan	13	N	80.481	24.71022N	97.93671E	826	6	Asia/Shanghai
 Nagqu	Tibet	13	N	30	31.47678N	92.05729E	4512	5	Asia/Shanghai
@@ -3350,33 +3353,45 @@ Liuku	Yunnan	13	N	63.013	25.8505N	98.85567E	829	6	Asia/Shanghai
 Lhasa	Tibet	13	R	118.721	29.65N	91.1E	3651	7	Asia/Shanghai
 Laojunmiao	Gansu	13	N	84.769	39.83333N	97.73333E	2026	6	Asia/Shanghai
 Bonan	Yunnan	13	N	55.685	25.46335N	99.52826E	1633	6	Asia/Shanghai
-Kashgar	Xinjiang	13	N	274.717	39.47066N	75.98951E	1297	7	Asia/Urumqi
+Kashgar	Xinjiang	13	N	506.64	39.47066N	75.98951E	1297	8	Asia/Urumqi
+Kaqun	Xinjiang	13	N	18.749	37.97806N	76.86722E	1455	5	Asia/Urumqi
 Judian	Yunnan	13	N	21.368	27.30612N	99.6491E	1879	5	Asia/Shanghai
 Jinhua	Yunnan	13	N	53.523	26.538N	99.91715E	2201	6	Asia/Shanghai
 Jinding	Yunnan	13	N	53.667	26.43903N	99.44061E	2511	6	Asia/Shanghai
 Jietou	Yunnan	13	N	65.843	25.4274N	98.65324E	1605	6	Asia/Shanghai
 Jiayuguan	Gansu	13	N	231.853	39.81121N	98.28618E	1635	7	Asia/Shanghai
 Houqiao	Yunnan	13	N	27.965	25.32356N	98.27802E	1712	5	Asia/Shanghai
-Hotan	Xinjiang	13	N	114	37.1075N	79.93548E	1384	7	Asia/Urumqi
+Hotan	Xinjiang	13	N	410.19	37.1075N	79.93548E	1384	7	Asia/Urumqi
 Gudong	Yunnan	13	N	45.528	25.34165N	98.48297E	1679	5	Asia/Shanghai
+Elixku	Xinjiang	13	N	36.793	38.70917N	77.37056E	1197	5	Asia/Urumqi
 Deqen	Tibet	13	N	62.4	29.96178N	90.71875E	3974	6	Asia/Shanghai
 Baoshan	Yunnan	13	N	935.618	25.11626N	99.16366E	1680	8	Asia/Shanghai
-Xinyuan	Xinjiang	13	N	300	43.42649N	83.24959E	953	7	Asia/Urumqi
+Yining	Xinjiang	13	N	515.082	43.97799N	81.51804E	792	8	Asia/Urumqi
+Xinyuan	Xinjiang	13	N	282.718	43.42649N	83.24959E	953	7	Asia/Urumqi
+Wusu	Xinjiang	13	N	72.587	44.43105N	84.67623E	474	6	Asia/Urumqi
 UEruemqi	Xinjiang	13	R	3029.372	43.80096N	87.60046E	862	9	Asia/Urumqi
-Turpan	Xinjiang	13	N	254.9	42.94769N	89.17886E	41	7	Asia/Urumqi
+Turpan	Xinjiang	13	N	273.385	42.94769N	89.17886E	41	7	Asia/Urumqi
+Tacheng	Xinjiang	13	N	161.037	46.74535N	82.95847E	546	7	Asia/Urumqi
 Shihezi	Xinjiang	13	N	572.772	44.3023N	86.03694E	467	8	Asia/Urumqi
+Sandaohezi	Xinjiang	13	N	60.129	44.32597N	85.62009E	528	6	Asia/Urumqi
 Qapqal	Xinjiang	13	N	160	43.80194N	81.08722E	638	7	Asia/Urumqi
 Kuqa	Xinjiang	13	N	102.752	41.71707N	82.93064E	1056	7	Asia/Urumqi
-Korla	Xinjiang	13	N	179.465	41.76055N	86.15231E	945	7	Asia/Urumqi
-Karamay	Xinjiang	13	N	260	45.58473N	84.88724E	366	7	Asia/Urumqi
+Korla	Xinjiang	13	N	549.324	41.76055N	86.15231E	945	8	Asia/Urumqi
+Karamay	Xinjiang	13	N	261.445	45.58473N	84.88724E	366	7	Asia/Urumqi
 Hoxtolgay	Xinjiang	13	N	22	46.51872N	86.00214E	804	5	Asia/Urumqi
 Hami	Xinjiang	13	N	246.373	42.83393N	93.50601E	762	7	Asia/Urumqi
+Fuyun	Xinjiang	13	N	19.772	46.9919N	89.52115E	800	5	Asia/Urumqi
+Emin	Xinjiang	13	N	57.782	46.52574N	83.63325E	522	6	Asia/Urumqi
+Dushanzi	Xinjiang	13	N	69.361	44.33333N	84.85E	721	6	Asia/Urumqi
+Dure	Xinjiang	13	N	15.253	46.51188N	88.53389E	664	5	Asia/Urumqi
 Dunhuang	Gansu	13	N	186.027	40.16667N	94.68333E	1131	7	Asia/Shanghai
 Changji	Xinjiang	13	N	198.776	44.00782N	87.30461E	581	7	Asia/Urumqi
+Burqin	Xinjiang	13	N	20.205	47.70283N	86.86375E	471	5	Asia/Urumqi
 Baijiantan	Xinjiang	13	N	93.697	45.69298N	85.13942E	291	6	Asia/Urumqi
 Aral	Xinjiang	13	N	260	40.54184N	81.26566E	1014	7	Asia/Urumqi
-Altay	Xinjiang	13	N	139.341	47.84864N	88.13361E	866	7	Asia/Urumqi
+Altay	Xinjiang	13	N	190.064	47.84864N	88.13361E	866	7	Asia/Urumqi
 Aksu	Xinjiang	13	N	535.657	41.18418N	80.27921E	1119	8	Asia/Urumqi
+Oymak	Xinjiang	13	N	15.187	47.87809N	86.98955E	521	5	Asia/Urumqi
 Liangji	Jiangsu	13	N	52.048	33.96389N	117.96944E	28	6	Asia/Shanghai
 Lanshan	Jiangsu	13	N	55.442	33.93611N	117.725E	26	6	Asia/Shanghai
 Qing'an	Jiangsu	13	N	48.234	33.96944N	117.88056E	22	5	Asia/Shanghai
@@ -3867,7 +3882,7 @@ Meizhou	Guangdong	13	N	992.351	24.28859N	116.11768E	84	8	Asia/Shanghai
 Meishan	Sichuan	13	N	1107.742	30.04392N	103.83696E	423	9	Asia/Shanghai
 Wuchuan	Guangdong	13	N	104.168	21.45713N	110.76591E	7	7	Asia/Shanghai
 Mapo	Jiangsu	13	N	35.358	34.51667N	117.06667E	38	5	Asia/Shanghai
-Maoming	Guangdong	13	N	1307.802	21.65N	110.9E	25	9	Asia/Shanghai
+Maoming	Guangdong	13	N	1307.802	21.66625N	110.91364E	31	9	Asia/Shanghai
 Maocun	Jiangsu	13	N	57.649	34.37667N	117.25056E	57	6	Asia/Shanghai
 Majie	Yunnan	13	N	131.696	25.0319N	102.638E	1894	7	Asia/Shanghai
 Zhijiang	Hubei	13	N	60.169	30.42139N	111.75333E	46	6	Asia/Shanghai
@@ -4400,7 +4415,7 @@ Tailai	Heilongjiang	13	N	66.623	46.38909N	123.41371E	143	6	Asia/Shanghai
 Taikang	Heilongjiang	13	N	55.316	46.86135N	124.442E	146	6	Asia/Shanghai
 Tahe	Heilongjiang	13	N	60.874	52.33333N	124.73333E	432	6	Asia/Shanghai
 Sujiatun	Liaoning	13	N	148.113	41.65917N	123.33917E	40	7	Asia/Shanghai
-Suileng	Heilongjiang	13	N	57.124	47.24805N	127.09535E	193	6	Asia/Shanghai
+Suiling	Heilongjiang	13	N	57.124	47.23489N	127.10769E	164	6	Asia/Shanghai
 Suihua	Heilongjiang	13	N	252.245	46.63954N	126.99508E	183	7	Asia/Shanghai
 Suifenhe	Heilongjiang	13	N	15.183	44.39982N	131.14775E	441	5	Asia/Shanghai
 Songjianghe	Jilin	13	N	67.672	42.1859N	127.47895E	737	6	Asia/Shanghai
@@ -4478,7 +4493,7 @@ Huanren	Liaoning	13	N	66.147	41.26472N	125.36667E	269	6	Asia/Shanghai
 Huangnihe	Jilin	13	N	54.959	43.55833N	128.02389E	490	6	Asia/Shanghai
 Huanan	Heilongjiang	13	N	66.087	46.23624N	130.54642E	153	6	Asia/Shanghai
 Huadian	Jilin	13	N	139.047	42.96333N	126.74778E	268	7	Asia/Shanghai
-Honggang	Heilongjiang	13	N	147.977	46.40124N	124.88322E	143	7	Asia/Shanghai
+Honggang	Heilongjiang	13	N	147.977	46.3974N	124.88447E	123	7	Asia/Shanghai
 Hohhot	Inner Mongolia	13	R	2350	40.81056N	111.65222E	1051	9	Asia/Shanghai
 Hengshan	Heilongjiang	13	N	164.844	45.20837N	130.89808E	260	7	Asia/Shanghai
 Helong	Jilin	13	N	85.756	42.53974N	128.99722E	447	6	Asia/Shanghai
@@ -4506,7 +4521,7 @@ Luobei	Heilongjiang	13	N	42.109	47.57602N	130.81311E	85	5	Asia/Shanghai
 Fengcheng	Liaoning	13	N	120.514	40.45361N	124.07167E	65	7	Asia/Shanghai
 Erenhot	Inner Mongolia	13	N	16.427	43.6475N	111.97667E	965	5	Asia/Shanghai
 Erdaojiang	Jilin	13	N	60.831	41.77639N	126.03194E	407	6	Asia/Shanghai
-Dunhua	Jilin	13	N	148.844	43.37383N	128.23789E	501	7	Asia/Shanghai
+Dunhua	Jilin	13	N	148.844	43.36954N	128.22861E	509	7	Asia/Shanghai
 Dongning	Heilongjiang	13	N	61.44	44.08436N	131.11841E	149	6	Asia/Shanghai
 Dongling	Liaoning	13	N	171.454	41.81444N	123.57583E	53	7	Asia/Shanghai
 Dongfeng	Jilin	13	N	67.82	42.64031N	125.51176E	350	6	Asia/Shanghai
@@ -4545,7 +4560,7 @@ Baiquan	Heilongjiang	13	N	70.472	47.60605N	126.08481E	237	6	Asia/Shanghai
 Baicheng	Jilin	13	N	316.97	45.60746N	122.82076E	152	7	Asia/Shanghai
 Baishan	Jilin	13	N	183.88	41.93853N	126.41965E	471	7	Asia/Shanghai
 Anshan	Liaoning	13	N	1450	41.12361N	122.99E	55	9	Asia/Shanghai
-Anda	Heilongjiang	13	N	181.271	46.40202N	125.31454E	148	7	Asia/Shanghai
+Anda	Heilongjiang	13	N	181.271	46.44867N	125.30161E	143	7	Asia/Shanghai
 Oroqen Zizhiqi	Inner Mongolia	13	N	61.582	50.56667N	123.71667E	419	6	Asia/Shanghai
 Acheng	Heilongjiang	13	N	144.665	45.54558N	126.95191E	149	7	Asia/Shanghai
 Songling	Hebei	13	N	52.277	40.29303N	118.26908E	134	6	Asia/Shanghai
@@ -4615,6 +4630,7 @@ Taizhou	Zhejiang	13	N	1485.502	28.66266N	121.43312E	15	9	Asia/Shanghai
 Qianjiang	Chongqing	13	N	203.682	29.53284N	108.77478E	582	7	Asia/Shanghai
 Wenshan City	Yunnan	13	N	450	23.36306N	104.25047E	1257	7	Asia/Shanghai
 Tuanbao	Hubei	13	N	59.58	30.33675N	109.13465E	999	6	Asia/Shanghai
+Bole	Xinjiang	13	N	235.585	44.89334N	82.06993E	509	7	Asia/Shanghai
 Liupanshui	Guizhou	13	N	1320.825	26.59444N	104.83333E	1799	9	Asia/Shanghai
 Huanggang	Hubei	13	N	366.769	30.45143N	114.87035E	46	7	Asia/Shanghai
 Anxiang	Henan	13	N	38.345	38.38339N	114.54046E	101	5	Asia/Shanghai
@@ -4644,7 +4660,10 @@ Qipan	Jiangsu	13	N	66.419	34.24469N	118.22113E	33	6	Asia/Shanghai
 Huocheng	Xinjiang	13	N	360	44.05305N	80.87173E	639	7	Asia/Urumqi
 Longnan	Gansu	13	N	85.826	33.39791N	104.91703E	1009	6	Asia/Shanghai
 Bayan Nur	Inner Mongolia	13	N	1760	40.74143N	107.38599E	1041	9	Asia/Shanghai
+Huoshilafu	Xinjiang	13	N	17.351	37.86642N	76.69579E	1585	5	Asia/Urumqi
+Gulebage	Xinjiang	13	N	22.255	38.41269N	77.23028E	1240	5	Asia/Urumqi
 Sandaoling Lutiankuang Wuqi Nongchang	Xinjiang	13	N	30.513	43.01478N	92.88279E	770	5	Asia/Urumqi
+Tumxuk	Xinjiang	13	N	135.727	39.86984N	79.06118E	1099	7	Asia/Urumqi
 Chongzuo	Guangxi	13	N	384.905	22.38161N	107.3683E	128	7	Asia/Shanghai
 Zhakou	Guangxi	13	N	31.173	21.70656N	109.47502E	12	5	Asia/Shanghai
 Fangchenggang	Guangxi	13	N	276.315	21.76945N	108.35661E	13	7	Asia/Shanghai
@@ -4749,6 +4768,18 @@ Maguan	Gansu	13	N	22.032	35.06615N	106.03324E	1570	5	Asia/Shanghai
 Muhe	Gansu	13	N	16.592	35.02337N	106.13488E	1683	5	Asia/Shanghai
 Qingyang	Gansu	13	N	377.528	35.70976N	107.64455E	1427	7	Asia/Shanghai
 Quankou	Qinghai	13	N	18.308	37.35222N	101.7393E	2807	5	Asia/Shanghai
+Alamaiti	Xinjiang	13	N	23.583	38.58203N	77.47622E	1191	5	Asia/Urumqi
+Arele	Xinjiang	13	N	17.398	38.38008N	77.31324E	1214	5	Asia/Urumqi
+Awati	Xinjiang	13	N	25.119	38.60838N	77.3964E	1184	5	Asia/Urumqi
+Azhatebage	Xinjiang	13	N	15.846	38.65883N	77.4664E	1178	5	Asia/Urumqi
+Bage'awati	Xinjiang	13	N	16.951	38.48908N	77.54022E	1195	5	Asia/Urumqi
+Baishikante	Xinjiang	13	N	39.243	38.45964N	77.47904E	1201	5	Asia/Urumqi
+Dunbage	Xinjiang	13	N	17.579	38.85739N	77.50474E	1168	5	Asia/Urumqi
+Huangdi	Xinjiang	13	N	34.658	38.80898N	77.44861E	1174	5	Asia/Urumqi
+Kuoshi'airike	Xinjiang	13	N	16.413	38.62275N	77.27948E	1203	5	Asia/Urumqi
+Mixia	Xinjiang	13	N	32.419	38.45396N	77.24918E	1219	5	Asia/Urumqi
+Paikeqi	Xinjiang	13	N	19.809	38.55011N	77.20825E	1211	5	Asia/Urumqi
+Tage'erqi	Xinjiang	13	N	34.554	38.54516N	77.25732E	1208	5	Asia/Urumqi
 Zipaquira	Cundinamarca	08	N	91.235	5.02208N	74.00481W	2607	6	America/Bogota
 Zarzal	Valle del Cauca	08	N	28.761	4.39462N	76.0715W	921	5	America/Bogota
 Zaragoza	Antioquia	08	N	18.795	7.48971N	74.86919W	66	5	America/Bogota
@@ -4998,7 +5029,7 @@ Limon	Limon	07	R	63.081	9.99074N	83.03596W	29	6	America/Costa_Rica
 Patarra	San Jose	07	N	23.983	9.88059N	84.03551W	1180	5	America/Costa_Rica
 Paraiso	Cartago	07	N	39.702	9.83832N	83.86557W	1332	5	America/Costa_Rica
 Nicoya	Guanacaste	07	N	15.313	10.15038N	85.45093W	128	5	America/Costa_Rica
-Mercedes	Heredia	07	N	26.007	10.00695N	84.13396W	1107	5	America/Costa_Rica
+Mercedes Norte	Heredia	07	N	26.007	10.00611N	84.13018W	1118	5	America/Costa_Rica
 Liberia	Guanacaste	07	R	45.38	10.63504N	85.43772W	148	5	America/Costa_Rica
 Ipis	San Jose	07	N	26.669	9.96548N	84.0182W	1310	5	America/Costa_Rica
 Heredia	Heredia	07	R	21.947	10.00236N	84.11651W	1174	5	America/Costa_Rica
@@ -9883,7 +9914,7 @@ Magelang	Central Java	14	N	111.461	7.47056S	110.21778E	379	7	Asia/Jakarta
 Madiun	East Java	14	N	186.099	7.6298S	111.5239E	69	7	Asia/Jakarta
 Luwuk	Central Sulawesi	14	N	47.778	0.9516S	122.7875E	17	5	Asia/Makassar
 Lumajang	East Java	14	N	123.626	8.1335S	113.2248E	56	7	Asia/Jakarta
-Lubuklinggau	South Sumatra	14	N	148.243	3.2945S	102.8614E	140	7	Asia/Jakarta
+Lubuklinggau	South Sumatra	14	N	234.166	3.2945S	102.8614E	140	7	Asia/Jakarta
 Loa Janan	East Kalimantan	14	N	212.816	0.58295S	117.09503E	9	7	Asia/Makassar
 Lembang	West Java	14	N	183.13	6.81167S	107.6175E	1252	7	Asia/Jakarta
 Lebaksiu	Central Java	14	N	33.606	7.0496S	109.1441E	149	5	Asia/Jakarta
@@ -10053,137 +10084,141 @@ Tralee	Munster	18	N	22.941	52.27042N	9.70264W	8	5	Europe/Dublin
 Tallaght	Leinster	18	N	64.282	53.2859N	6.37344W	103	6	Europe/Dublin
 Swords	Leinster	18	R	36.924	53.45972N	6.21806W	17	5	Europe/Dublin
 Sligo	Connaught	18	N	20.228	54.26969N	8.46943W	10	5	Europe/Dublin
-Droichead Nua	Leinster	18	N	18.86	53.18194N	6.79667W	92	5	Europe/Dublin
+Droichead Nua	Leinster	18	N	22.742	53.18194N	6.79667W	92	5	Europe/Dublin
 Navan	Leinster	18	N	24.545	53.65278N	6.68139W	35	5	Europe/Dublin
 Naas	Leinster	18	N	20.713	53.21583N	6.66694W	93	5	Europe/Dublin
 An Muileann gCearr	Leinster	18	N	17.262	53.52466N	7.3385W	93	5	Europe/Dublin
-Malahide	Leinster	18	N	15.846	53.45083N	6.15444W	11	5	Europe/Dublin
+Malahide	Leinster	18	N	16.55	53.45083N	6.15444W	11	5	Europe/Dublin
 Lucan	Leinster	18	N	15.269	53.35736N	6.44859W	25	5	Europe/Dublin
 Luimneach	Munster	18	N	90.054	52.66472N	8.62306W	7	6	Europe/Dublin
-Letterkenny	Ulster	18	N	16.901	54.95N	7.73333W	8	5	Europe/Dublin
-Leixlip	Leinster	18	N	15.452	53.36583N	6.49556W	48	5	Europe/Dublin
+Letterkenny	Ulster	18	N	19.274	54.95N	7.73333W	8	5	Europe/Dublin
+Leixlip	Leinster	18	N	15.504	53.36583N	6.49556W	48	5	Europe/Dublin
 Kilkenny	Leinster	18	N	21.589	52.65417N	7.25222W	48	5	Europe/Dublin
+Greystones	Leinster	18	N	18.14	53.14083N	6.06306W	19	5	Europe/Dublin
 Gaillimh	Connaught	18	R	70.686	53.27245N	9.05095W	10	6	Europe/Dublin
 Finglas	Leinster	18	N	19.768	53.38917N	6.29694W	59	5	Europe/Dublin
 Ennis	Munster	18	N	24.427	52.84361N	8.98639W	5	5	Europe/Dublin
 Dun Laoghaire	Leinster	18	N	26.525	53.29395N	6.13586W	16	5	Europe/Dublin
 Dundalk	Leinster	18	N	33.428	54N	6.41667W	18	5	Europe/Dublin
 Dublin	Leinster	18	C	1024.027	53.33306N	6.24889W	17	9	Europe/Dublin
-Drogheda	Leinster	18	N	33.441	53.71889N	6.34778W	28	5	Europe/Dublin
+Drogheda	Leinster	18	N	40.956	53.71889N	6.34778W	28	5	Europe/Dublin
+Douglas	Munster	18	N	26.883	51.87444N	8.435W	11	5	Europe/Dublin
 Cork	Munster	18	N	190.384	51.89797N	8.47061W	10	7	Europe/Dublin
 Cluain Meala	Munster	18	N	17.394	52.355N	7.70389W	24	5	Europe/Dublin
 Celbridge	Leinster	18	N	20.288	53.34165N	6.54419W	59	5	Europe/Dublin
+Carrigaline	Munster	18	N	15.77	51.81167N	8.39861W	14	5	Europe/Dublin
 Carlow	Leinster	18	N	20.055	52.84083N	6.92611W	55	5	Europe/Dublin
 Bray	Leinster	18	N	32.6	53.20278N	6.09833W	7	5	Europe/Dublin
 Blanchardstown	Leinster	18	N	16.511	53.38806N	6.37556W	49	5	Europe/Dublin
-Balbriggan	Leinster	18	N	23.364	53.60846N	6.1831W	12	5	Europe/Dublin
+Ballincollig	Munster	18	N	18.621	51.88333N	8.58333W	27	5	Europe/Dublin
+Balbriggan	Leinster	18	N	21.722	53.60846N	6.1831W	12	5	Europe/Dublin
 Athlone	Leinster	18	N	21.351	53.42278N	7.93722W	39	5	Europe/Dublin
 Sandyford	Leinster	18	N	22.288	53.2747N	6.2253W	100	5	Europe/Dublin
 Donaghmede	Leinster	18	N	15.299	53.39845N	6.16179W	18	5	Europe/Dublin
 Jerusalem	Jerusalem	16	R	801	31.76904N	35.21633E	786	8	Asia/Jerusalem
-Modi'in Makkabbim Re'ut	Central District	16	N	88.749	31.89385N	35.01504E	276	6	Asia/Jerusalem
-Zikhron Ya'aqov	Haifa	16	N	23.075	32.56645N	34.95628E	164	5	Asia/Jerusalem
-Safed	Northern District	16	N	27.816	32.96465N	35.496E	779	5	Asia/Jerusalem
-Yoqne'am 'Illit	Northern District	16	N	23.311	32.65385N	35.10382E	126	5	Asia/Jerusalem
-Yirka	Northern District	16	N	17.003	32.95435N	35.21197E	339	5	Asia/Jerusalem
-Yif'at	Northern District	16	N	18.905	32.6775N	35.22333E	140	5	Asia/Jerusalem
+Modi'in Makkabbim Re'ut	Central District	16	N	93.277	31.89385N	35.01504E	276	6	Asia/Jerusalem
+Zikhron Ya'aqov	Haifa	16	N	23.206	32.56645N	34.95628E	164	5	Asia/Jerusalem
+Safed	Northern District	16	N	36.094	32.96465N	35.496E	779	5	Asia/Jerusalem
+Yoqne'am 'Illit	Northern District	16	N	23.796	32.65385N	35.10382E	126	5	Asia/Jerusalem
+Yirka	Northern District	16	N	17.171	32.95435N	35.21197E	339	5	Asia/Jerusalem
 Yehud	Central District	16	N	25.6	32.03317N	34.89091E	44	5	Asia/Jerusalem
-Yavne	Central District	16	N	31.774	31.87808N	34.73983E	37	5	Asia/Jerusalem
+Yavne	Central District	16	N	47.585	31.87808N	34.73983E	37	5	Asia/Jerusalem
 Jaffa	Tel Aviv	16	N	100	32.05043N	34.75224E	26	7	Asia/Jerusalem
 Yafa	Northern District	16	N	18.905	32.68923N	35.27832E	356	5	Asia/Jerusalem
-Umm el Fahm	Haifa	16	N	41.03	32.51725N	35.15349E	398	5	Asia/Jerusalem
-Tirat Karmel	Haifa	16	N	18.993	32.76021N	34.97183E	47	5	Asia/Jerusalem
-Tiberias	Northern District	16	N	39.79	32.79221N	35.53124E	-140	5	Asia/Jerusalem
+Umm el Fahm	Haifa	16	N	56.109	32.51725N	35.15349E	398	6	Asia/Jerusalem
+Tirat Karmel	Haifa	16	N	23.112	32.76021N	34.97183E	47	5	Asia/Jerusalem
+Tiberias	Northern District	16	N	44.779	32.79221N	35.53124E	-140	5	Asia/Jerusalem
 Tel Aviv	Tel Aviv	16	R	432.892	32.08088N	34.78057E	15	7	Asia/Jerusalem
-maalot Tarshiha	Northern District	16	N	21.4	33.01667N	35.26667E	484	5	Asia/Jerusalem
+maalot Tarshiha	Northern District	16	N	21.836	33.01667N	35.26667E	484	5	Asia/Jerusalem
 Tamra	Northern District	16	N	25.917	32.85301N	35.1987E	92	5	Asia/Jerusalem
-Shefar'am	Northern District	16	N	41.558	32.80583N	35.16895E	137	5	Asia/Jerusalem
-Sederot	Southern District	16	N	20.228	31.525N	34.59693E	90	5	Asia/Jerusalem
-Sakhnin	Northern District	16	N	24.596	32.86422N	35.29707E	236	5	Asia/Jerusalem
-Rosh Ha'Ayin	Central District	16	N	39.215	32.09556N	34.95664E	62	5	Asia/Jerusalem
+Shefar'am	Northern District	16	N	42.137	32.80583N	35.16895E	137	5	Asia/Jerusalem
+Sederot	Southern District	16	N	27.635	31.525N	34.59693E	90	5	Asia/Jerusalem
+Sakhnin	Northern District	16	N	31.702	32.86422N	35.29707E	236	5	Asia/Jerusalem
+Rosh Ha'Ayin	Central District	16	N	61.801	32.09556N	34.95664E	62	6	Asia/Jerusalem
 Rishon LeZiyyon	Central District	16	N	220.492	31.97102N	34.78939E	56	7	Asia/Jerusalem
-Rehovot	Central District	16	N	132.671	31.89421N	34.81199E	47	7	Asia/Jerusalem
+Rehovot	Central District	16	N	143.904	31.89421N	34.81199E	47	7	Asia/Jerusalem
 Ramla	Central District	16	R	63.86	31.92923N	34.86563E	83	6	Asia/Jerusalem
 Ramat HaSharon	Tel Aviv	16	N	36.137	32.14613N	34.8394E	68	5	Asia/Jerusalem
-Ramat Gan	Tel Aviv	16	N	128.095	32.08227N	34.81065E	57	7	Asia/Jerusalem
-Ra'anana	Central District	16	N	80	32.1836N	34.87386E	49	6	Asia/Jerusalem
-Qiryat Yam	Haifa	16	N	39.273	32.84966N	35.06973E	9	5	Asia/Jerusalem
-Qiryat Tiv'on	Haifa	16	N	18.121	32.71618N	35.12494E	154	5	Asia/Jerusalem
-Qiryat Shemona	Northern District	16	N	22.035	33.20733N	35.57212E	124	5	Asia/Jerusalem
-Qiryat Mozqin	Haifa	16	N	39.404	32.83706N	35.0776E	10	5	Asia/Jerusalem
-Qiryat Mal'akhi	Southern District	16	N	23.124	31.72888N	34.74632E	68	5	Asia/Jerusalem
-Kiryat Gat	Southern District	16	N	47.45	31.60998N	34.76422E	133	5	Asia/Jerusalem
-Qiryat Bialik	Haifa	16	N	36.551	32.8275N	35.08583E	12	5	Asia/Jerusalem
-Qiryat Ata	Haifa	16	N	48.966	32.81149N	35.11323E	46	5	Asia/Jerusalem
+Ramat Gan	Tel Aviv	16	N	163.301	32.08227N	34.81065E	57	7	Asia/Jerusalem
+Ra'anana	Central District	16	N	75.421	32.1836N	34.87386E	49	6	Asia/Jerusalem
+Qiryat Yam	Haifa	16	N	39.897	32.84966N	35.06973E	9	5	Asia/Jerusalem
+Qiryat Tiv'on	Haifa	16	N	18.13	32.71618N	35.12494E	154	5	Asia/Jerusalem
+Qiryat Shemona	Northern District	16	N	22.512	33.20733N	35.57212E	124	5	Asia/Jerusalem
+Qiryat Mozqin	Haifa	16	N	43.303	32.83706N	35.0776E	10	5	Asia/Jerusalem
+Qiryat Mal'akhi	Southern District	16	N	23.819	31.72888N	34.74632E	68	5	Asia/Jerusalem
+Kiryat Gat	Southern District	16	N	57.105	31.60998N	34.76422E	133	6	Asia/Jerusalem
+Qiryat Bialik	Haifa	16	N	40.231	32.8275N	35.08583E	12	5	Asia/Jerusalem
+Qiryat Ata	Haifa	16	N	59.03	32.81149N	35.11323E	46	6	Asia/Jerusalem
 Qalansuwa	Central District	16	N	16.898	32.28493N	34.98106E	39	5	Asia/Jerusalem
-Petah Tiqwa	Central District	16	N	200	32.08707N	34.88747E	54	7	Asia/Jerusalem
-Or Yehuda	Tel Aviv	16	N	30.802	32.02923N	34.85788E	33	5	Asia/Jerusalem
-Ofaqim	Southern District	16	N	24.311	31.3141N	34.62025E	137	5	Asia/Jerusalem
-Netivot	Southern District	16	N	24.564	31.42305N	34.58911E	151	5	Asia/Jerusalem
-Netanya	Central District	16	N	171.676	32.33291N	34.85992E	38	7	Asia/Jerusalem
-Ness Ziona	Central District	16	N	38.7	31.92933N	34.79868E	35	5	Asia/Jerusalem
-Nesher	Haifa	16	N	21.245	32.76622N	35.04425E	125	5	Asia/Jerusalem
-Nazerat 'Illit	Northern District	16	N	41.169	32.70816N	35.32469E	506	5	Asia/Jerusalem
+Petah Tiqwa	Central District	16	N	247.956	32.08707N	34.88747E	54	7	Asia/Jerusalem
+Or Yehuda	Tel Aviv	16	N	36.813	32.02923N	34.85788E	33	5	Asia/Jerusalem
+Or Akiva	Haifa	16	N	18.972	32.5064N	34.92087E	17	5	Asia/Jerusalem
+Ofaqim	Southern District	16	N	30.662	31.3141N	34.62025E	137	5	Asia/Jerusalem
+Netivot	Southern District	16	N	37.542	31.42305N	34.58911E	151	5	Asia/Jerusalem
+Netanya	Central District	16	N	224.471	32.33291N	34.85992E	38	7	Asia/Jerusalem
+Ness Ziona	Central District	16	N	50.351	31.92933N	34.79868E	35	6	Asia/Jerusalem
+Nesher	Haifa	16	N	24.148	32.76622N	35.04425E	125	5	Asia/Jerusalem
+Nazerat 'Illit	Northern District	16	N	41.734	32.70816N	35.32469E	506	5	Asia/Jerusalem
 Nazareth	Northern District	16	R	64.8	32.70056N	35.29722E	333	6	Asia/Jerusalem
-Nahariyya	Northern District	16	N	51.2	33.00892N	35.09814E	15	6	Asia/Jerusalem
-Migdal Ha`Emeq	Northern District	16	N	24.8	32.67597N	35.23986E	227	5	Asia/Jerusalem
-Mevasseret Ziyyon	Jerusalem	16	N	24.409	31.80186N	35.15072E	711	5	Asia/Jerusalem
-Majd el Kurum	Northern District	16	N	15.292	32.92186N	35.25568E	217	5	Asia/Jerusalem
-Maghar	Northern District	16	N	18.915	32.88984N	35.40703E	292	5	Asia/Jerusalem
-Lod	Central District	16	N	66.589	31.9467N	34.8903E	68	6	Asia/Jerusalem
-Kefar Yona	Central District	16	N	21.611	32.31669N	34.93507E	59	5	Asia/Jerusalem
-Kfar Saba	Central District	16	N	80.773	32.175N	34.90694E	57	6	Asia/Jerusalem
-Karmi'el	Northern District	16	N	44.382	32.91708N	35.30501E	233	5	Asia/Jerusalem
-Kafr Qasim	Central District	16	N	17.303	32.11406N	34.97624E	136	5	Asia/Jerusalem
-Kafr Qari'	Haifa	16	N	18.675	32.50666N	35.05392E	116	5	Asia/Jerusalem
-Kafr Manda	Northern District	16	N	15.014	32.81034N	35.26009E	176	5	Asia/Jerusalem
-Kafr Kanna	Northern District	16	N	17.606	32.7466N	35.34242E	278	5	Asia/Jerusalem
-Judeida Makr	Northern District	16	N	17.53	32.9282N	35.15705E	82	5	Asia/Jerusalem
-Holon	Tel Aviv	16	N	165.787	32.01034N	34.77918E	31	7	Asia/Jerusalem
-Hod HaSharon	Central District	16	N	43.185	32.15934N	34.8932E	57	5	Asia/Jerusalem
-Herzliya	Tel Aviv	16	N	83.6	32.16627N	34.82536E	28	6	Asia/Jerusalem
+Nahariyya	Northern District	16	N	58.096	33.00892N	35.09814E	15	6	Asia/Jerusalem
+Migdal Ha'Emeq	Northern District	16	N	25.675	32.67597N	35.23986E	227	5	Asia/Jerusalem
+Mevasseret Ziyyon	Jerusalem	16	N	24.052	31.80186N	35.15072E	711	5	Asia/Jerusalem
+Majd el Kurum	Northern District	16	N	15.455	32.92186N	35.25568E	217	5	Asia/Jerusalem
+Maghar	Northern District	16	N	22.957	32.88984N	35.40703E	292	5	Asia/Jerusalem
+Lod	Central District	16	N	77.223	31.9467N	34.8903E	68	6	Asia/Jerusalem
+Kefar Yona	Central District	16	N	24.778	32.31669N	34.93507E	59	5	Asia/Jerusalem
+Kfar Saba	Central District	16	N	110.456	32.175N	34.90694E	57	7	Asia/Jerusalem
+Karmi'el	Northern District	16	N	46.252	32.91708N	35.30501E	233	5	Asia/Jerusalem
+Kafr Qasim	Central District	16	N	23.823	32.11406N	34.97624E	136	5	Asia/Jerusalem
+Kafr Qari'	Haifa	16	N	19.018	32.50666N	35.05392E	116	5	Asia/Jerusalem
+Kafr Manda	Northern District	16	N	20.188	32.81034N	35.26009E	176	5	Asia/Jerusalem
+Kafr Kanna	Northern District	16	N	22.751	32.7466N	35.34242E	278	5	Asia/Jerusalem
+Judeida Makr	Northern District	16	N	21.163	32.9282N	35.15705E	82	5	Asia/Jerusalem
+Holon	Tel Aviv	16	N	196.282	32.01034N	34.77918E	31	7	Asia/Jerusalem
+Hod HaSharon	Central District	16	N	63.175	32.15934N	34.8932E	57	6	Asia/Jerusalem
+Herzliya	Tel Aviv	16	N	97.47	32.16627N	34.82536E	28	6	Asia/Jerusalem
 Haifa	Haifa	16	R	267.3	32.81841N	34.9885E	40	7	Asia/Jerusalem
-Hadera	Haifa	16	N	75.854	32.44192N	34.9039E	13	6	Asia/Jerusalem
+Hadera	Haifa	16	N	97.335	32.44192N	34.9039E	13	6	Asia/Jerusalem
 Giv'at Shmuel	Tel Aviv	16	N	18.5	32.07817N	34.84858E	53	5	Asia/Jerusalem
-Givatayim	Tel Aviv	16	N	48	32.07225N	34.81253E	50	5	Asia/Jerusalem
-Gedera	Central District	16	N	26.217	31.81456N	34.77998E	64	5	Asia/Jerusalem
-Gan Yavne	Central District	16	N	22.453	31.78737N	34.70659E	52	5	Asia/Jerusalem
-Ganei Tikva	Central District	16	N	16.053	32.05971N	34.8732E	79	5	Asia/Jerusalem
-Even Yehuda	Central District	16	N	15.221	32.26959N	34.88759E	49	5	Asia/Jerusalem
-Et Tira	Central District	16	N	20.786	32.2341N	34.95023E	78	5	Asia/Jerusalem
-Et Taiyiba	Central District	16	N	32.978	32.26616N	35.00893E	86	5	Asia/Jerusalem
+Givatayim	Tel Aviv	16	N	60.644	32.07225N	34.81253E	50	6	Asia/Jerusalem
+Gedera	Central District	16	N	28.313	31.81456N	34.77998E	64	5	Asia/Jerusalem
+Gan Yavne	Central District	16	N	23.869	31.78737N	34.70659E	52	5	Asia/Jerusalem
+Ganei Tikva	Central District	16	N	20.398	32.05971N	34.8732E	79	5	Asia/Jerusalem
+Et Tira	Central District	16	N	26.552	32.2341N	34.95023E	78	5	Asia/Jerusalem
+Et Taiyiba	Central District	16	N	43.957	32.26616N	35.00893E	86	5	Asia/Jerusalem
 Er Reina	Northern District	16	N	15.621	32.72339N	35.31622E	343	5	Asia/Jerusalem
-Eilat	Southern District	16	N	45.588	29.55805N	34.94821E	63	5	Asia/Jerusalem
-Dimona	Southern District	16	N	33.558	31.07079N	35.03269E	551	5	Asia/Jerusalem
+Eilat	Southern District	16	N	52.299	29.55805N	34.94821E	63	6	Asia/Jerusalem
+Dimona	Southern District	16	N	34.5	31.07079N	35.03269E	551	5	Asia/Jerusalem
 Daliyat al Karmel	Haifa	16	N	25	32.69383N	35.04686E	414	5	Asia/Jerusalem
-Bet Shemesh	Jerusalem	16	N	67.1	31.73072N	34.99293E	282	6	Asia/Jerusalem
+Binyamina	Haifa	16	N	15.847	32.5232N	34.94499E	17	5	Asia/Jerusalem
+Bet Shemesh	Jerusalem	16	N	124.957	31.73072N	34.99293E	282	7	Asia/Jerusalem
 Bet She'an	Northern District	16	N	16.8	32.49728N	35.49632E	-121	5	Asia/Jerusalem
-Bnei Brak	Tel Aviv	16	N	154.4	32.08074N	34.8338E	51	7	Asia/Jerusalem
-Be'er Ya'aqov	Central District	16	N	26.122	31.93864N	34.83749E	74	5	Asia/Jerusalem
+Bnei Brak	Tel Aviv	16	N	204.639	32.08074N	34.8338E	51	7	Asia/Jerusalem
+Be'er Ya'aqov	Central District	16	N	27.768	31.93864N	34.83749E	74	5	Asia/Jerusalem
 Beersheba	Southern District	16	R	186.6	31.25181N	34.7913E	285	7	Asia/Jerusalem
-Bat Yam	Tel Aviv	16	N	128.979	32.02379N	34.75185E	32	7	Asia/Jerusalem
-Baqa el Gharbiya	Haifa	16	N	29.393	32.41806N	35.04312E	91	5	Asia/Jerusalem
+Bat Yam	Tel Aviv	16	N	129.012	32.02379N	34.75185E	32	7	Asia/Jerusalem
+Baqa el Gharbiya	Haifa	16	N	29.95	32.41806N	35.04312E	91	5	Asia/Jerusalem
 Azor	Tel Aviv	16	N	16.201	32.0243N	34.80632E	25	5	Asia/Jerusalem
-Ashkelon	Southern District	16	N	105.995	31.66926N	34.57149E	42	7	Asia/Jerusalem
+Ashkelon	Southern District	16	N	144.073	31.66926N	34.57149E	42	7	Asia/Jerusalem
 Ashdod	Southern District	16	N	224.656	31.79213N	34.64966E	27	7	Asia/Jerusalem
 'Ar'ara	Haifa	16	N	24.904	32.49553N	35.09411E	163	5	Asia/Jerusalem
-Arad	Southern District	16	N	23.7	31.25882N	35.21282E	613	5	Asia/Jerusalem
-Acre	Northern District	16	N	45.603	32.92814N	35.07647E	8	5	Asia/Jerusalem
+Arad	Southern District	16	N	26.756	31.25882N	35.21282E	613	5	Asia/Jerusalem
+Acre	Northern District	16	N	49.38	32.92814N	35.07647E	8	5	Asia/Jerusalem
 Afula	Northern District	16	N	44.93	32.60907N	35.2892E	62	5	Asia/Jerusalem
 West Jerusalem	Jerusalem	16	N	400	31.78199N	35.21961E	796	7	Asia/Jerusalem
 Rahat	Southern District	16	N	19.586	31.39547N	34.75699E	228	5	Asia/Jerusalem
-Modiin Ilit	Jerusalem	16	N	64.179	31.93221N	35.04416E	319	6	Asia/Jerusalem
+Modiin Ilit	Jerusalem	16	N	76.374	31.93221N	35.04416E	319	6	Asia/Jerusalem
 Ariel	Judea and Samaria Area	16	R	17.668	32.1065N	35.18449E	567	5	Asia/Jerusalem
 Tel Sheva'	Southern District	16	N	20.204	31.24864N	34.86007E	304	5	Asia/Jerusalem
 'Ar'ara BaNegev	Southern District	16	N	17.64	31.16046N	35.02274E	437	5	Asia/Jerusalem
 Hura	Southern District	16	N	21.558	31.30084N	34.93606E	425	5	Asia/Jerusalem
 Kuseifa	Southern District	16	N	21.079	31.24535N	35.0931E	476	5	Asia/Jerusalem
 Shoham	Central District	16	N	20.74	31.99866N	34.94559E	82	5	Asia/Jerusalem
-El'ad	Central District	16	N	47.866	32.04984N	34.95382E	134	5	Asia/Jerusalem
+El'ad	Central District	16	N	48.763	32.04984N	34.95382E	134	5	Asia/Jerusalem
 Yehud-Monosson	Tel Aviv	16	N	29.312	32.0284N	34.8796E	36	5	Asia/Jerusalem
 Kadima Zoran	Central District	16	N	22.49	32.27782N	34.9194E	52	5	Asia/Jerusalem
 Kiryat Ono	Tel Aviv	16	N	39.986	32.06124N	34.85618E	69	5	Asia/Jerusalem
-Binyamina-Giv'at Ada	Haifa	16	N	15.627	32.51824N	34.95398E	26	5	Asia/Jerusalem
+Binyamina-Giv'at Ada	Haifa	16	N	15.847	32.51824N	34.95398E	26	5	Asia/Jerusalem
 Douglas	Douglas	18	C	26.218	54.15N	4.48333W	31	5	Europe/Isle_of_Man
 Punch	Jammu and Kashmir	15	N	28.197	33.77033N	74.09254E	999	5	Asia/Kolkata
 Keelakarai	Tamil Nadu	15	N	30.468	9.23183N	78.78545E	14	5	Asia/Kolkata
@@ -13362,7 +13397,7 @@ Desio	Lombardy	19	N	40.337	45.61831N	9.20249E	198	5	Europe/Rome
 Desenzano del Garda	Lombardy	19	N	22.665	45.47127N	10.53559E	88	5	Europe/Rome
 Dalmine	Lombardy	19	N	22.881	45.64933N	9.60617E	205	5	Europe/Rome
 Cusano	Lombardy	19	N	18.904	45.55187N	9.18373E	154	5	Europe/Rome
-Cuneo	Piedmont	19	N	46.416	44.39071N	7.54828E	546	5	Europe/Rome
+Cuneo	Piedmont	19	N	46.416	44.39071N	7.54828E	489	5	Europe/Rome
 Cremona	Lombardy	19	N	59.561	45.13325N	10.02129E	52	6	Europe/Rome
 Crema	Lombardy	19	N	31.481	45.36264N	9.68176E	77	5	Europe/Rome
 Corsico	Lombardy	19	N	33.669	45.43099N	9.11093E	120	5	Europe/Rome
@@ -13991,7 +14026,7 @@ Kagoshima	Kagoshima	13	R	555.352	31.56667N	130.55E	6	8	Asia/Tokyo
 Kadoma	Osaka	13	N	131.727	34.7381N	135.57442E	8	7	Asia/Tokyo
 Kadogawa	Miyazaki	13	N	17.526	32.47126N	131.65452E	8	5	Asia/Tokyo
 Izumo	Shimane	13	N	89.286	35.36667N	132.76667E	6	6	Asia/Tokyo
-Izumisano	Osaka	13	N	100.649	34.41667N	135.31667E	6	7	Asia/Tokyo
+Izumisano	Osaka	13	N	98.84	34.41667N	135.31667E	6	6	Asia/Tokyo
 Izumiotsu	Osaka	13	N	80.772	34.5N	135.4E	3	6	Asia/Tokyo
 Izumi	Osaka	13	N	189.085	34.48333N	135.43333E	24	7	Asia/Tokyo
 Izumi	Kagoshima	13	N	39.217	32.08333N	130.36667E	37	5	Asia/Tokyo
@@ -14331,7 +14366,7 @@ Gujo	Gifu	13	N	46.918	35.73691N	136.95852E	314	5	Asia/Tokyo
 Joetsu	Niigata	13	N	204.137	37.14828N	138.23642E	10	7	Asia/Tokyo
 Saitama	Saitama	13	R	1193.35	35.90807N	139.65657E	16	9	Asia/Tokyo
 Higashimurayama	Tokyo	13	N	150.556	35.75459N	139.46852E	82	7	Asia/Tokyo
-Fujikawaguchiko	Yamanashi	13	N	23.097	35.48933N	138.68832E	1086	5	Asia/Tokyo
+Fujikawaguchiko	Yamanashi	13	N	26.54	35.48933N	138.68832E	1086	5	Asia/Tokyo
 Arashiyama	Kyoto	13	N	50	35.01481N	135.67755E	36	6	Asia/Tokyo
 Dazaifu	Fukuoka	13	N	70.587	33.51278N	130.52389E	42	6	Asia/Tokyo
 Kamigyo-ku	Kyoto	13	N	83	35.02954N	135.75666E	61	6	Asia/Tokyo
@@ -20025,7 +20060,7 @@ Torit	Eastern Equatoria	02	R	20.048	4.41177N	32.57046E	617	5	Africa/Juba
 Tonj	Warrap	02	N	17.338	7.27389N	28.6775E	444	5	Africa/Juba
 Rumbek	Lakes	02	R	32.083	6.80619N	29.67742E	428	5	Africa/Juba
 Malakal	Upper Nile	02	R	160.765	9.53342N	31.66049E	400	7	Africa/Juba
-Leer	Unity	02	N	100.722	8.30306N	30.14056E	397	7	Africa/Juba
+Leer	Unity	02	N	17.827	8.30306N	30.14056E	397	5	Africa/Juba
 Kuacjok	Warrap	02	R	78	8.30278N	27.98E	428	6	Africa/Juba
 Kafia Kingi	Western Bahr al Ghazal	02	N	16	9.27345N	24.41701E	604	5	Africa/Juba
 Juba	Central Equatoria	02	C	450	4.85165N	31.58247E	518	7	Africa/Juba
@@ -21526,7 +21561,7 @@ Van Buren	Arkansas	09	N	23.081	35.43676N	94.34827W	127	5	America/Chicago
 West Memphis	Arkansas	09	N	25.052	35.14648N	90.18454W	66	5	America/Chicago
 Adams Morgan	Washington, D.C.	09	N	15.83	38.9215N	77.0422W	55	5	America/New_York
 Shaw	Washington, D.C.	09	N	17.639	38.91206N	77.02137W	30	5	America/New_York
-Washington	Washington, D.C.	09	C	601.723	38.89511N	77.03637W	6	8	America/New_York
+Washington	Washington, D.C.	09	C	689.545	38.89511N	77.03637W	6	8	America/New_York
 Bear	Delaware	09	N	19.371	39.62928N	75.65826W	19	5	America/New_York
 Dover	Delaware	09	R	37.522	39.15817N	75.52437W	11	5	America/New_York
 Middletown	Delaware	09	N	20.372	39.44956N	75.71632W	21	5	America/New_York
@@ -21616,7 +21651,7 @@ Homestead	Florida	09	N	80.737	25.46872N	80.47756W	6	6	America/New_York
 Immokalee	Florida	09	N	24.154	26.41869N	81.4173W	12	5	America/New_York
 Iona	Florida	09	N	15.369	26.52036N	81.96398W	6	5	America/New_York
 Ives Estates	Florida	09	N	19.525	25.96231N	80.17671W	11	5	America/New_York
-Jacksonville	Florida	09	N	868.031	30.33218N	81.65565W	12	8	America/New_York
+Jacksonville	Florida	09	N	949.611	30.33218N	81.65565W	12	8	America/New_York
 Jacksonville Beach	Florida	09	N	23.064	30.29469N	81.39314W	3	5	America/New_York
 Jasmine Estates	Florida	09	N	18.989	28.29306N	82.6901W	9	5	America/New_York
 Jupiter	Florida	09	N	62.707	26.93422N	80.09421W	5	6	America/New_York
@@ -21863,7 +21898,7 @@ Evansville	Indiana	09	N	119.943	37.97476N	87.55585W	118	7	America/Chicago
 Fishers	Indiana	09	N	76.794	39.95559N	86.01387W	250	6	America/Indiana/Indianapolis
 Greenfield	Indiana	09	N	21.497	39.78504N	85.76942W	273	5	America/Indiana/Indianapolis
 Greenwood	Indiana	09	N	55.586	39.61366N	86.10665W	246	6	America/Indiana/Indianapolis
-Indianapolis	Indiana	09	R	829.718	39.76838N	86.15804W	248	8	America/Indiana/Indianapolis
+Indianapolis	Indiana	09	R	887.642	39.76838N	86.15804W	248	8	America/Indiana/Indianapolis
 Jasper	Indiana	09	N	15.451	38.39144N	86.93111W	146	5	America/Indiana/Vincennes
 Jeffersonville	Indiana	09	N	46.96	38.27757N	85.73718W	138	5	America/Kentucky/Louisville
 Lawrence	Indiana	09	N	47.809	39.83865N	86.02526W	266	5	America/Indiana/Indianapolis
@@ -22154,7 +22189,7 @@ Burlington	North Carolina	09	N	52.472	36.09569N	79.4378W	197	6	America/New_York
 Carrboro	North Carolina	09	N	21.156	35.91014N	79.07529W	141	5	America/New_York
 Cary	North Carolina	09	N	159.769	35.79154N	78.78112W	152	7	America/New_York
 Chapel Hill	North Carolina	09	N	59.568	35.9132N	79.05584W	149	6	America/New_York
-Charlotte	North Carolina	09	N	827.097	35.22709N	80.84313W	272	8	America/New_York
+Charlotte	North Carolina	09	N	874.579	35.22709N	80.84313W	272	8	America/New_York
 Clayton	North Carolina	09	N	19.304	35.65071N	78.45639W	103	5	America/New_York
 Clemmons	North Carolina	09	N	19.844	36.02153N	80.382W	255	5	America/New_York
 Concord	North Carolina	09	N	87.696	35.40888N	80.58158W	209	6	America/New_York
@@ -22233,7 +22268,7 @@ Athens	Ohio	09	N	25.044	39.32924N	82.10126W	224	5	America/New_York
 Beavercreek	Ohio	09	N	46.277	39.70923N	84.06327W	267	5	America/New_York
 Centerville	Ohio	09	N	23.882	39.62839N	84.15938W	309	5	America/New_York
 Cincinnati	Ohio	09	N	296.943	39.12711N	84.51439W	267	7	America/New_York
-Columbus	Ohio	09	R	850.106	39.96118N	82.99879W	242	8	America/New_York
+Columbus	Ohio	09	R	905.748	39.96118N	82.99879W	242	8	America/New_York
 Dayton	Ohio	09	N	140.599	39.75895N	84.19161W	237	7	America/New_York
 Fairborn	Ohio	09	N	33.452	39.82089N	84.01938W	255	5	America/New_York
 Fairfield	Ohio	09	N	42.767	39.34589N	84.5605W	185	5	America/New_York
@@ -22286,7 +22321,7 @@ Moore	Oklahoma	09	N	60.451	35.33951N	97.4867W	385	6	America/Chicago
 Muskogee	Oklahoma	09	N	38.456	35.74788N	95.36969W	191	5	America/Chicago
 Mustang	Oklahoma	09	N	20.226	35.38423N	97.72449W	416	5	America/Chicago
 Norman	Oklahoma	09	N	120.284	35.22257N	97.43948W	361	7	America/Chicago
-Oklahoma City	Oklahoma	09	R	631.346	35.46756N	97.51643W	395	8	America/Chicago
+Oklahoma City	Oklahoma	09	R	681.054	35.46756N	97.51643W	395	8	America/Chicago
 Owasso	Oklahoma	09	N	34.542	36.26954N	95.85471W	188	5	America/Chicago
 Ponca City	Oklahoma	09	N	24.758	36.70698N	97.08559W	315	5	America/Chicago
 Sand Springs	Oklahoma	09	N	19.783	36.13981N	96.10889W	212	5	America/Chicago
@@ -22301,7 +22336,7 @@ Chester	Pennsylvania	09	N	34.092	39.84967N	75.35707W	9	5	America/New_York
 Drexel Hill	Pennsylvania	09	N	28.043	39.94706N	75.29213W	77	5	America/New_York
 Hanover	Pennsylvania	09	N	15.496	39.80066N	76.98304W	188	5	America/New_York
 Pennsport	Pennsylvania	09	N	26	39.92761N	75.15045W	10	5	America/New_York
-Philadelphia	Pennsylvania	09	N	1567.442	39.95233N	75.16379W	40	9	America/New_York
+Philadelphia	Pennsylvania	09	N	1603.797	39.95233N	75.16379W	40	9	America/New_York
 Springfield	Pennsylvania	09	N	23.363	39.93067N	75.32019W	82	5	America/New_York
 West Chester	Pennsylvania	09	N	19.842	39.96097N	75.60804W	136	5	America/New_York
 Wharton	Pennsylvania	09	N	49.732	39.92678N	75.15712W	8	5	America/New_York
@@ -22374,7 +22409,7 @@ Memphis	Tennessee	09	N	655.77	35.14953N	90.04898W	84	8	America/Chicago
 Morristown	Tennessee	09	N	29.478	36.21398N	83.29489W	399	5	America/New_York
 Mount Juliet	Tennessee	09	N	31.54	36.20005N	86.51861W	168	5	America/Chicago
 Murfreesboro	Tennessee	09	N	126.118	35.84562N	86.39027W	191	7	America/Chicago
-Nashville	Tennessee	09	R	530.852	36.16589N	86.78444W	171	8	America/Chicago
+Nashville	Tennessee	09	R	689.447	36.16589N	86.78444W	171	8	America/Chicago
 New South Memphis	Tennessee	09	N	641.608	35.08676N	90.05676W	79	8	America/Chicago
 Oak Ridge	Tennessee	09	N	29.302	36.01036N	84.26964W	259	5	America/New_York
 Sevierville	Tennessee	09	N	16.49	35.86815N	83.56184W	275	5	America/New_York
@@ -22442,7 +22477,7 @@ Euless	Texas	09	N	54.219	32.83707N	97.08195W	184	6	America/Chicago
 Farmers Branch	Texas	09	N	32.689	32.92651N	96.89612W	147	5	America/Chicago
 Flower Mound	Texas	09	N	71.253	33.01457N	97.09696W	186	6	America/Chicago
 Forney	Texas	09	N	18.418	32.74818N	96.47193W	149	5	America/Chicago
-Fort Worth	Texas	09	N	833.319	32.72541N	97.32085W	203	8	America/Chicago
+Fort Worth	Texas	09	N	918.915	32.72541N	97.32085W	203	8	America/Chicago
 Fresno	Texas	09	N	19.069	29.53885N	95.44744W	27	5	America/Chicago
 Friendswood	Texas	09	N	38.8	29.5294N	95.20104W	11	5	America/Chicago
 Frisco	Texas	09	N	154.407	33.15067N	96.82361W	216	7	America/Chicago
@@ -23251,7 +23286,7 @@ Kearney	Nebraska	09	N	33.021	40.69946N	99.08148W	662	5	America/Chicago
 La Vista	Nebraska	09	N	16.921	41.18389N	96.03113W	342	5	America/Chicago
 Lincoln	Nebraska	09	R	277.348	40.8N	96.66696W	366	7	America/Chicago
 Norfolk	Nebraska	09	N	24.366	42.02834N	97.417W	463	5	America/Chicago
-Omaha	Nebraska	09	N	443.885	41.25626N	95.94043W	315	7	America/Chicago
+Omaha	Nebraska	09	N	486.051	41.25626N	95.94043W	315	7	America/Chicago
 Papillion	Nebraska	09	N	19.51	41.15444N	96.04224W	309	5	America/Chicago
 Bedford	New Hampshire	09	N	21.188	42.94647N	71.5159W	96	5	America/New_York
 Concord	New Hampshire	09	R	42.62	43.20814N	71.53757W	87	5	America/New_York
@@ -23512,7 +23547,7 @@ Nanuet	New York	09	N	17.882	41.08871N	74.01347W	100	5	America/New_York
 New City	New York	09	N	33.559	41.1476N	73.98931W	53	5	America/New_York
 New Rochelle	New York	09	N	79.846	40.91149N	73.78235W	37	6	America/New_York
 New Springville	New York	09	N	20.756	40.59344N	74.1632W	9	5	America/New_York
-New York City	New York	09	N	8175.133	40.71427N	74.00597W	57	9	America/New_York
+New York City	New York	09	N	8804.19	40.71427N	74.00597W	57	9	America/New_York
 Newburgh	New York	09	N	28.29	41.50343N	74.01042W	46	5	America/New_York
 Niagara Falls	New York	09	N	48.916	43.0945N	79.05671W	187	5	America/New_York
 North Amityville	New York	09	N	17.862	40.6976N	73.42512W	12	5	America/New_York
@@ -23853,7 +23888,7 @@ Nogales	Arizona	09	N	20.252	31.34038N	110.93425W	1172	5	America/Phoenix
 Oro Valley	Arizona	09	N	43.565	32.39091N	110.96649W	774	5	America/Phoenix
 Payson	Arizona	09	N	15.345	34.23087N	111.32514W	1498	5	America/Phoenix
 Peoria	Arizona	09	N	190.985	33.5806N	112.23738W	347	7	America/Phoenix
-Phoenix	Arizona	09	R	1563.025	33.44838N	112.07404W	366	9	America/Phoenix
+Phoenix	Arizona	09	R	1608.139	33.44838N	112.07404W	366	9	America/Phoenix
 Prescott	Arizona	09	N	41.899	34.54002N	112.4685W	1638	5	America/Phoenix
 Prescott Valley	Arizona	09	N	42.197	34.61002N	112.31572W	1529	5	America/Phoenix
 Queen Creek	Arizona	09	N	34.614	33.24866N	111.6343W	428	5	America/Phoenix
@@ -24293,7 +24328,7 @@ Clifton	Colorado	09	N	19.889	39.09193N	108.44898W	1445	5	America/Denver
 Colorado Springs	Colorado	09	N	456.568	38.83388N	104.82136W	1838	7	America/Denver
 Columbine	Colorado	09	N	24.28	39.58777N	105.06943W	1691	5	America/Denver
 Commerce City	Colorado	09	N	53.696	39.80832N	104.93387W	1574	6	America/Denver
-Denver	Colorado	09	R	682.545	39.73915N	104.9847W	1636	8	America/Denver
+Denver	Colorado	09	R	715.522	39.73915N	104.9847W	1636	8	America/Denver
 Durango	Colorado	09	N	18.006	37.27528N	107.88007W	1998	5	America/Denver
 Englewood	Colorado	09	N	33.082	39.64777N	104.98776W	1642	5	America/Denver
 Fountain	Colorado	09	N	27.767	38.68222N	104.70081W	1694	5	America/Denver
@@ -24455,7 +24490,7 @@ Newberg	Oregon	09	N	22.78	45.30012N	122.97316W	56	5	America/Los_Angeles
 Oak Grove	Oregon	09	N	16.629	45.41679N	122.64009W	58	5	America/Los_Angeles
 Oregon City	Oregon	09	N	35.831	45.35734N	122.60676W	37	5	America/Los_Angeles
 Pendleton	Oregon	09	N	16.881	45.67207N	118.7886W	327	5	America/Los_Angeles
-Portland	Oregon	09	N	632.309	45.52345N	122.67621W	15	8	America/Los_Angeles
+Portland	Oregon	09	N	652.503	45.52345N	122.67621W	15	8	America/Los_Angeles
 Redmond	Oregon	09	N	28.654	44.27262N	121.17392W	912	5	America/Los_Angeles
 Roseburg	Oregon	09	N	22.114	43.2165N	123.34174W	146	5	America/Los_Angeles
 Salem	Oregon	09	R	164.549	44.9429N	123.0351W	55	7	America/Los_Angeles
@@ -24576,7 +24611,7 @@ Richland	Washington	09	N	54.248	46.28569N	119.28446W	115	6	America/Los_Angeles
 Salmon Creek	Washington	09	N	19.686	45.71067N	122.64899W	52	5	America/Los_Angeles
 Sammamish	Washington	09	N	52.253	47.64177N	122.0804W	23	6	America/Los_Angeles
 SeaTac	Washington	09	N	28.215	47.44846N	122.29217W	126	5	America/Los_Angeles
-Seattle	Washington	09	N	684.451	47.60621N	122.33207W	56	8	America/Los_Angeles
+Seattle	Washington	09	N	737.015	47.60621N	122.33207W	56	8	America/Los_Angeles
 Shoreline	Washington	09	N	55.439	47.75565N	122.34152W	146	6	America/Los_Angeles
 Silverdale	Washington	09	N	19.204	47.64454N	122.69487W	1	5	America/Los_Angeles
 South Hill	Washington	09	N	52.431	47.14121N	122.27012W	165	6	America/Los_Angeles
