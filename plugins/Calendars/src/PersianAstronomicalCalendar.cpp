@@ -30,7 +30,7 @@ PersianAstronomicalCalendar::PersianAstronomicalCalendar(double jd): PersianArit
 	PersianAstronomicalCalendar::retranslate();
 }
 
-const StelLocation PersianAstronomicalCalendar::tehran( "Tehran",  "ir", "Southern Asia", 35.69439f, 51.42151f, 1178, 7153, "Asia/Tehran", 9, 'C');
+const StelLocation PersianAstronomicalCalendar::tehran( "Tehran",  "ir", "Southern Asia", 35.68f,    51.42f,    1100, 7153, "Asia/Tehran", 9, 'C');
 const StelLocation PersianAstronomicalCalendar::isfahan("Isfahan", "ir", "Southern Asia", 32.65246f, 51.67462f, 1578, 1547, "Asia/Tehran", 9, 'R');
 
 // Set a calendar date from the Julian day number
