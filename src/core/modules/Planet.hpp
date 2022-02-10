@@ -74,6 +74,21 @@ public:
 	StelTextureSP tex;
 };
 
+// Class to calculate Besselian elements of solar eclipse
+class SolarEclipseBessel
+{
+public:
+	SolarEclipseBessel(double &besX, double &besY,
+		double &besDec, double &besTf1, double &besTf2, double &besL1, double &besL2, double &besMu);
+};
+
+// Class to calculate solar eclipse data at given time
+class SolarEclipseData
+{
+public:
+	SolarEclipseData(double JD, double &dRatio, double &latDeg, double &lngDeg, double &altitude,
+		double &pathWidth, double &duration, double &magnitude);
+};
 
 class Planet : public StelObject
 {

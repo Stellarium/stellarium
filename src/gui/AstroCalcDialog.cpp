@@ -2904,305 +2904,8 @@ void AstroCalcDialog::initListSolarEclipse()
 	ui->solareclipseTreeWidget->header()->setDefaultAlignment(Qt::AlignCenter);
 }
 
-struct SolarEclipse {
-	double x;
-	double y;
-	double d;
-	double tf1;
-	double tf2;
-	double L1;
-	double L2;
-	double mu;
-};
-
-SolarEclipse BesselianElements() {
-	SolarEclipse result;
-
-	// Besselian elements
-	// Source: Explanatory Supplement to the Astronomical Ephemeris 
-	// and the American Ephemeris and Nautical Almanac (1961)
-
-	StelCore* core = StelApp::getInstance().getCore();
-	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-
-	core->setUseTopocentricCoordinates(false);
-	core->update(0);
-
-	double raMoon, deMoon, raSun, deSun;
-	StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
-	StelUtils::rectToSphe(&raMoon, &deMoon, ssystem->getMoon()->getEquinoxEquatorialPos(core));
-
-	double sdistanceAu = ssystem->getSun()->getEquinoxEquatorialPos(core).length();
-	// Moon's distance in Earth's radius
-	double mdistanceER = ssystem->getMoon()->getEquinoxEquatorialPos(core).length() * AU / EARTH_RADIUS;
-	// Greenwich Apparent Sidereal Time
-	const double gast = get_apparent_sidereal_time(core->getJD(), core->getJDE());
-
-	// Avoid bug for special cases happen around Vernal Equinox
-	if (raSun>M_PI && raMoon<M_PI) raMoon+=2.*M_PI;
-	else if (raSun<M_PI && raMoon>M_PI) raSun+=2.*M_PI;
-
-	constexpr double SunEarth = 109.12278;
-	// ratio of Sun-Earth radius : 109.12278 = 696000/6378.1366
-	// Another value is 109.075744787 = 695700/6378.1366
-	// Earth's equatorial radius = 6378.1366
-	// Source: IERS Conventions (2003)
-	// https://www.iers.org/IERS/EN/Publications/TechnicalNotes/tn32.html
-
-	// NASA's solar eclipse predictions use larger Sun with radius 696,000 km
-	// calculated from arctan of IAU 1976 solar radius (959.63 arcsec at 1 au)
-	// This value affects duration of total/annular eclipse ~ 2-3 seconds
-	// Stellarium's solar radius is 695,700 km, this may create discrepancies between prediction & visualization
-
-	const double rss = sdistanceAu * 23454.7925; // from 1 AU/Earth's radius : 149597870.8/6378.1366
-	const double b = mdistanceER / rss;
-	const double a = raSun - ((b * cos(deMoon) * (raMoon-raSun)) / ((1 - b) * cos(deSun)));
-	const double d = deSun - (b * (deMoon - deSun) / (1 - b));
-	double x = cos(deMoon) * sin((raMoon - a));
-	x *= mdistanceER;
-	double y = cos(d) * sin(deMoon);
-	y -= cos(deMoon) * sin(d) * cos((raMoon - a));
-	y *= mdistanceER;
-	double z = sin(deMoon) * sin(d);
-	z += cos(deMoon) * cos(d) * cos((raMoon - a));
-	z *= mdistanceER;
-	// parameters of the shadow cone
-	// 0.2725076 is recommended by IAU, NASA uses 0.272281 for total eclipse to eliminate extreme cases
-	// when the Moon's apparent diameter is very close to the Sun but cannot completely cover it. 
-	// we will use two values (same with NASA), because durations seem to agree with NASA.
-	// Source: Solar Eclipse Predictions and the Mean Lunar Radius
-	// http://eclipsewise.com/solar/SEhelp/SEradius.html
-	const double f1 = asin((SunEarth + 0.2725076) / (rss * (1. - b)));
-	const double tf1 = tan(f1);
-	const double f2 = asin((SunEarth - 0.272281) / (rss * (1. - b)));  
-	const double tf2 = tan(f2);
-	const double L1 = z * tf1 + (0.2725076 / cos(f1));
-	const double L2 = z * tf2 - (0.272281 / cos(f2));
-	double mu = gast - StelUtils::fmodpos(a / M_PI_180, 360.);
-	mu = StelUtils::fmodpos(mu, 360.);
-
-	result.x = x;
-	result.y = y;
-	result.d = d;
-	result.tf1 = tf1;
-	result.tf2 = tf2;
-	result.L1 = L1;
-	result.L2 = L2;
-	result.mu = mu;
-
-	return result;
-}
-
-// Partial solar eclipse parameters
-struct pSEparameter {
-	double magnitude;
-	double diameterRatio;
-	double longitude;
-	double latitude;
-};
-
-pSEparameter partialSolarEclipse() {
-	pSEparameter result;
-
-	// Besselian elements
-	// Source: Explanatory Supplement to the Astronomical Ephemeris 
-	// and the American Ephemeris and Nautical Almanac (1961)
-
-	SolarEclipse bessel = BesselianElements();
-
-	const double x = bessel.x;
-	const double y = bessel.y;
-	const double d = bessel.d;
-	const double tf1 = bessel.tf1;
-	const double tf2 = bessel.tf2;
-	double L1 = bessel.L1;
-	double L2 = bessel.L2;
-	const double mu = bessel.mu;
-	constexpr double e2 = 0.00669438;
-	// e^2 = 0.00669438 : Earth flattening parameter
-	// Inverse flattening 1/f = 298.257223563 : e^2 = 2f-f^2
-	// Source: 1984 World Geodetic System (WGS 84)
-	// https://web.archive.org/web/20200710203711/http://www.epsg-registry.org/export.htm?gml=urn:ogc:def:ellipsoid:EPSG::7030
-	// There is a modern value from IERS Conventions (2003)
-	// 1/f = 298.25642 But seem to be not widely used
-	// https://www.iers.org/IERS/EN/Publications/TechnicalNotes/tn32.html
-	// We use older value to be comparable with literatures and consistence across Stellarium
-
-	const double rho1 = sqrt(1.- e2 * cos(d) * cos(d));
-	const double yy1 = y / rho1;
-	double m = sqrt(x * x + y * y);
-	double xi = x / sqrt(x * x + yy1 * yy1);
-	const double eta1 = yy1 / sqrt(x * x + yy1 * yy1);
-	const double sd1 = sin(d) / rho1;
-	const double cd1 = sqrt(1.- e2) * cos(d) / rho1;
-	const double rho2 = sqrt(1.- e2 * sin(d) * sin(d));
-	const double sd1d2 = e2 * sin(d) * cos(d) / (rho1 * rho2);
-	double zeta = rho2 * (-(eta1) * sd1d2);
-	const double b = -eta1 * sd1;
-	double theta = atan2(xi, b);
-	
-	const double sfn1 = eta1*cd1;
-	const double cfn1 = sqrt(1.- sfn1 * sfn1);
-	double lat = 1.0033640898 * sfn1 / cfn1;
-	// 1.0033640898 = 1/(1-1/f) See flattening parameter above
-	lat = atan(lat);
-	L1 = L1 - zeta * tf1;
-	L2 = L2 - zeta * tf2;
-	const double c = 1. / sqrt(1.- e2 * sin(lat) * sin(lat));
-	const double s = (1.- e2) * c;
-	const double rs = s * sin(lat);
-	const double rc = c * cos(lat);
-	xi = rc * sin(theta);
-	const double eta = rs * cos(d) - rc * sin(d) * cos(theta);
-	const double u = x - xi;
-	const double v = y - eta;
-	m = sqrt(u * u + v * v);
-	const double magnitude = (L1 - m) / (L1 + L2);
-	const double dratio = 1.+ (magnitude - 1.)* 2.;
-	theta = theta / M_PI_180;
-	if (theta < 0.) theta += 360.;
-	double lon = mu - theta;
-	if (lon < -180.) lon += 360.;
-	if (lon > 180.) lon -= 360.;
-	lon = -(lon); // + East, - West
-
-	result.magnitude = magnitude;
-	result.diameterRatio = dratio;
-	result.latitude = lat / M_PI_180;
-	result.longitude = lon;
-
-	return result;
-}
-
-// Central solar eclipse parameters
-struct cSEparameter {
-	double diameterRatio;
-	double longitude;
-	double latitude;
-	double altitude;
-	double pathwidth;
-	double duration;
-};
-
-cSEparameter centralSolarEclipse(double JD) {
-	cSEparameter result;
-
-	// Besselian elements
-	// Source: Explanatory Supplement to the Astronomical Ephemeris 
-	// and the American Ephemeris and Nautical Almanac (1961)
-
-	StelCore* core = StelApp::getInstance().getCore();
-	core->setUseTopocentricCoordinates(false);
-	core->setJD(JD);
-	core->update(0);
-
-	SolarEclipse bessel = BesselianElements();
-
-	const double x = bessel.x;
-	const double y = bessel.y;
-	const double d = bessel.d;
-	const double tf1 = bessel.tf1;
-	const double tf2 = bessel.tf2;
-	double L1 = bessel.L1;
-	double L2 = bessel.L2;
-	const double mu = bessel.mu;
-
-	constexpr double e2 = 0.00669438;
-	const double rho1 = sqrt(1. - e2 * cos(d) *cos(d));
-	const double y1 = y / rho1;
-	const double eta1 = y1;
-	const double sd1 = sin(d) / rho1;
-	const double cd1 = sqrt(1. - e2) * cos(d) / rho1;
-	const double rho2 = sqrt(1.- e2 * sin(d) * sin(d));
-	const double sd1d2 = e2*sin(d)*cos(d)/(rho1*rho2);
-	const double cd1d2 = sqrt(1. - sd1d2 * sd1d2); 
-	const double p = 1. - x * x - y1 * y1;
-	double dratio = 0.;
-	double lat = 99.;
-	double lon = 0.;
-	double duration = 0.;
-	double pathwidth = 0.;
-	double altitude = 0.;
-
-	if (p > 0.) // Moon's shadow axis is touching Earth
-	{
-		const double zeta1 = sqrt(p);
-		const double zeta = rho2 * (zeta1 * cd1d2 - eta1 * sd1d2);
-		L2 = L2 - zeta * tf2;
-		const double b = -y * sin(d) + zeta * cos(d);
-		double theta = atan2(x, b) / M_PI_180;
-		if (theta < 0.) theta += 360.;
-		//if (mu > 360.) mu -= 360.;
-		lon = mu - theta;
-		if (lon < -180.) lon += 360.;
-		if (lon > 180.) lon -= 360.;
-		lon = -(lon); // + East, - West
-		const double sfn1 = eta1 * cd1 + zeta1 * sd1;
-		const double cfn1 = sqrt(1. - sfn1 * sfn1);
-		lat = 1.0033640898 * sfn1 / cfn1;
-		lat = atan(lat) / M_PI_180;
-		L1 = L1 - zeta * tf1;
-		const double magnitude = L1 / (L1 + L2);
-		dratio = 1.+(magnitude-1.)*2.;
-
-		core->setJD(JD - 5./1440.);
-		core->update(0);
-
-		bessel = BesselianElements();
-		const double x1 = bessel.x;
-		const double y1 = bessel.y;
-		const double d1 = bessel.d;
-		const double mu1 = bessel.mu;
-
-		core->setJD(JD + 5./1440.);
-		core->update(0);
-
-		bessel = BesselianElements();
-		const double x2 = bessel.x;
-		const double y2 = bessel.y;
-		const double d2 = bessel.d;
-		const double mu2 = bessel.mu;
-
-		// Hourly rate of changes
-		const double xdot = (x2 - x1) * 6.;
-		const double ydot = (y2 - y1) * 6.;
-		const double ddot = (d2 - d1) * 6.;
-		double mudot = (mu2 - mu1) * 6.;
-		mudot = mudot * M_PI_180;
-		mudot = StelUtils::fmodpos(mudot, 2.*M_PI);
-
-		// Duration of central eclipse in minutes
-		const double etadot = mudot * x * sin(d) - ddot * zeta;
-		const double xidot = mudot * (-y * sin(d) + zeta * cos(d));
-		const double n = sqrt((xdot - xidot) * (xdot - xidot) + (ydot - etadot) * (ydot - etadot));
-		duration = L2*120./n; // positive = annular eclipse, negative = total eclipse
-
-		// Altitude
-		altitude = asin(cfn1*cos(d)*cos(theta * M_PI_180)+sfn1*sin(d)) / M_PI_180;
-
-		// Path width in kilometre
-		// Explanatory Supplement to the Astronomical Almanac
-		// Seidelmann, P. Kenneth, ed. (1992). University Science Books. ISBN 978-0-935702-68-2
-		// https://archive.org/details/131123ExplanatorySupplementAstronomicalAlmanac
-		const double p1 = zeta * zeta;
-		const double p2 = x * (xdot - xidot) / n;
-		const double p3 = eta1 * (ydot - etadot) / n;
-		const double p4 = (p2 + p3) * ( p2 + p3);
-		pathwidth = abs(EARTH_RADIUS*2.*L2/sqrt(p1+p4));
-	}
-
-	result.diameterRatio = dratio;
-	result.latitude = lat;
-	result.longitude = lon;
-	result.altitude = altitude;
-	result.pathwidth = pathwidth;
-	result.duration = duration;
-
-	return result;
-}
-
-// local solar eclipse parameters
-struct localSEparameter {
+// Local solar eclipse parameters
+struct LocalSEparams {
 	double dt;
 	double L1;
 	double L2;
@@ -3211,8 +2914,8 @@ struct localSEparameter {
 	double altitude;
 };
 
-localSEparameter localSolarEclipse(double JD,int contact,bool central) {
-	localSEparameter result;
+LocalSEparams localSolarEclipse(double JD,int contact,bool central) {
+	LocalSEparams result;
 	// contact : -1 for beginning, 0 for mid-eclipse, 1 for the end of partial or annular
 	// contact : -1 for the end, 0 for mid-eclipse, 1 for beginning of total
 	// central : true for total/annular eclipse
@@ -3225,62 +2928,38 @@ localSEparameter localSolarEclipse(double JD,int contact,bool central) {
 	double lat = static_cast<double>(core->getCurrentLocation().latitude);
 	double lon = static_cast<double>(core->getCurrentLocation().longitude);
 	double elevation = static_cast<double>(core->getCurrentLocation().altitude);
-	lat = lat * M_PI_180;
-	lon = -(lon);
-	double L = 0.;
+
+	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+	Vec4d geocentricCoords = ssystem->getEarth()->getRectangularCoordinates(lon,lat,elevation);
+	static const double earthRadius = ssystem->getEarth()->getEquatorialRadius();
+	const double rc = geocentricCoords[0]/earthRadius; // rhoCosPhiPrime
+	const double rs = geocentricCoords[1]/earthRadius; // rhoSinPhiPrime
 
 	core->setUseTopocentricCoordinates(false);
 	core->setJD(JD);
 	core->update(0);
 
-	constexpr double e2 = 0.00669438;
-	const double earthRadius = 6378136.6; // Earth's equatorial radius in metre
-	// Source: IERS Conventions (2003)
-	// https://www.iers.org/IERS/EN/Publications/TechnicalNotes/tn32.html
-	const double c = 1./sqrt(1.- e2 * sin(lat) * sin(lat));
-	const double s = (1. - e2) * c;
-	// Elevation added to observer's location
-	const double rs = s*sin(lat)+elevation*sin(lat)/earthRadius;
-	const double rc = c*cos(lat)+elevation*cos(lat)/earthRadius;
-
-	SolarEclipse bessel = BesselianElements();
-	const double x = bessel.x;
-	const double y = bessel.y;
-	const double d = bessel.d;
-	const double tf1 = bessel.tf1;
-	const double tf2 = bessel.tf2;
-	double L1 = bessel.L1;
-	double L2 = bessel.L2;
-	const double mu = bessel.mu;
+	double x,y,d,tf1,tf2,L1,L2,mu;
+	SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
 
 	core->setJD(JD - 5./1440.);
 	core->update(0);
-
-	bessel = BesselianElements();
-	const double x1 = bessel.x;
-	const double y1 = bessel.y;
-	const double d1 = bessel.d;
-	const double mu1 = bessel.mu;
+	double x1,y1,d1,bestf1,bestf2,besL1,besL2,mu1;
+	SolarEclipseBessel(x1,y1,d1,bestf1,bestf2,besL1,besL2,mu1);
 
 	core->setJD(JD + 5./1440.);
 	core->update(0);
-
-	bessel = BesselianElements();
-	const double x2 = bessel.x;
-	const double y2 = bessel.y;
-	const double d2 = bessel.d;
-	const double mu2 = bessel.mu;
+	double x2,y2,d2,mu2;
+	SolarEclipseBessel(x2,y2,d2,bestf1,bestf2,besL1,besL2,mu2);
 
 	// Hourly rate of changes
 	const double xdot = (x2 - x1) * 6.;
 	const double ydot = (y2 - y1) * 6.;
 	const double ddot = (d2 - d1) * 6.;
 	double mudot = mu2 - mu1;
-	if (mudot < 0.)
-		mudot += 360.;
-	mudot = mudot * 6.;
-	mudot = mudot * M_PI_180;
-	double theta = (mu - lon) * M_PI_180;
+	if (mudot < 0.) mudot += 360.; // make sure it is positive in case mu2 < mu1
+	mudot = mudot * 6. * M_PI_180;
+	double theta = (mu + lon) * M_PI_180;
 	theta = StelUtils::fmodpos(theta, 2.*M_PI);
 	const double xi = rc*sin(theta);
 	const double eta = rs*cos(d)-rc*sin(d)*cos(theta);
@@ -3295,10 +2974,8 @@ localSEparameter localSolarEclipse(double JD,int contact,bool central) {
 	const double delta = (u * vdot - udot * v) / sqrt(udot * udot + vdot * vdot);
 	L1 = L1 - zeta * tf1;
 	L2 = L2 - zeta * tf2;
-	if (central)
-		L = L2;
-	else
-		L = L1;
+	double L = L1;
+	if (central) L = L2;
 	const double sfi = delta/L;
 	const double ce = 1.- sfi*sfi;
 	double cfi = 0.; 
@@ -3357,7 +3034,6 @@ void AstroCalcDialog::generateSolarEclipses()
 			{
 				core->setUseTopocentricCoordinates(false);
 				core->update(0);
-				SolarEclipse bessel = BesselianElements();
 
 				// Find exact time of minimum distance between axis of lunar shadow cone to the center of Earth
 				double dt = 1.;
@@ -3366,21 +3042,18 @@ void AstroCalcDialog::generateSolarEclipses()
 				{
 					core->setJD(JD);
 					core->update(0);
-					SolarEclipse bessel = BesselianElements();
-					double x = bessel.x;
-					double y = bessel.y;
+					double x,y,d,tf1,tf2,L1,L2,mu;
+					SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
 
 					core->setJD(JD - 5./1440.);
 					core->update(0);
-					bessel = BesselianElements();
-					double x1 = bessel.x;
-					double y1 = bessel.y;
+					double x1,y1;
+					SolarEclipseBessel(x1,y1,d,tf1,tf2,L1,L2,mu);
 
 					core->setJD(JD + 5./1440.);
 					core->update(0);
-					bessel = BesselianElements();
-					double x2 = bessel.x;
-					double y2 = bessel.y;
+					double x2,y2;
+					SolarEclipseBessel(x2,y2,d,tf1,tf2,L1,L2,mu);
 
 					double xdot1 = (x - x1) * 12.;
 					double xdot2 = (x2 - x) * 12.;
@@ -3397,25 +3070,27 @@ void AstroCalcDialog::generateSolarEclipses()
 				core->setJD(JD);
 				core->update(0);
 
-				bessel = BesselianElements();
+				double x,y,d,tf1,tf2,L1,L2,mu;
+				SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
 
-				double gamma = sqrt(bessel.x * bessel.x + bessel.y * bessel.y);
-				if (bessel.y<0.) gamma = -(gamma);
-				pSEparameter eclipseData = partialSolarEclipse();
+				double gamma = sqrt(x * x + y * y);
+				if (y<0.) gamma = -(gamma);
+				double dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude;
+				SolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
 
-				bool noncentraleclipse = false; // Non-central includes partial and total/annular eclipses that shadow axis misses Earth
+				bool noncentraleclipse = false; // Non-central includes partial and total/annular eclipses that shadow axis miss Earth
 
 				// Determine the type of solar eclipse
 				// Source: Astronomical Algorithms (1991), Jean Meeus
-				if (abs(gamma) <= (1.5433 + bessel.L2))
+				if (abs(gamma) <= (1.5433 + L2))
 				{
-					if (abs(gamma) > 0.9972 && abs(gamma) < (1.5433 + bessel.L2))
+					if (abs(gamma) > 0.9972 && abs(gamma) < (1.5433 + L2))
 					{
-						if (abs(gamma) < 0.9972 + abs(bessel.L2) && eclipseData.diameterRatio > 1.)
+						if (abs(gamma) < 0.9972 + abs(L2) && dRatio > 1.)
 						{
 							eclipseTypeStr = qc_("Total", "eclipse type"); // Non-central total eclipse
 						}
-						else if (abs(gamma) < 0.9972 + abs(bessel.L2) && eclipseData.diameterRatio < 1.)
+						else if (abs(gamma) < 0.9972 + abs(L2) && dRatio < 1.)
 						{
 							eclipseTypeStr = qc_("Annular", "eclipse type"); // Non-central annular eclipse
 						}
@@ -3425,17 +3100,17 @@ void AstroCalcDialog::generateSolarEclipses()
 					}
 					else
 					{
-						if (bessel.L2 < 0.)
+						if (L2 < 0.)
 						{
 							eclipseTypeStr = qc_("Total", "eclipse type");
 						}
-						else if (bessel.L2 > 0.0047)
+						else if (L2 > 0.0047)
 						{
 							eclipseTypeStr = qc_("Annular", "eclipse type");
 						}
-						else if (bessel.L2 > 0. && bessel.L2 < 0.0047)
+						else if (L2 > 0. && L2 < 0.0047)
 						{
-							if (bessel.L2 < (0.00464 * sqrt(1. - gamma * gamma)))
+							if (L2 < (0.00464 * sqrt(1. - gamma * gamma)))
 							{
 								eclipseTypeStr = qc_("Hybrid", "eclipse type");
 							}
@@ -3471,26 +3146,24 @@ void AstroCalcDialog::generateSolarEclipses()
 
 					if (noncentraleclipse)
 					{
-						magStr = QString("%1").arg(QString::number(eclipseData.magnitude, 'f', 3));
-						eclipseLatitude = eclipseData.latitude;
-						eclipseLongitude = eclipseData.longitude;
+						magStr = QString("%1").arg(QString::number(magnitude, 'f', 3));
+						eclipseLatitude = latDeg;
+						eclipseLongitude = lngDeg;
 						altitudeStr = "0°";
 						durationStr = dash;
 						pathWidthStr = dash;
 					}
 					else
 					{
-						cSEparameter eclipseData = centralSolarEclipse(JD);
-						magStr = QString("%1").arg(QString::number(eclipseData.diameterRatio, 'f', 3));
-						eclipseAltitude = eclipseData.altitude;
+						magStr = QString("%1").arg(QString::number(dRatio, 'f', 3));
+						eclipseAltitude = altitude;
 						altitudeStr = QString("%1°").arg(QString::number(round(eclipseAltitude)));
-						pathwidth = eclipseData.pathwidth;
-						pathWidthStr = QString("%1 %2").arg(QString::number(round(pathwidth)), km);
-						eclipseLatitude = eclipseData.latitude;
-						eclipseLongitude = eclipseData.longitude;
-						float duration = abs(eclipseData.duration);
-						int durationMinute = int(duration);
-						int durationSecond = round((duration - durationMinute) * 60.);
+						pathWidthStr = QString("%1 %2").arg(QString::number(round(pathWidth)), km);
+						eclipseLatitude = latDeg;
+						eclipseLongitude = lngDeg;
+						double centralDuration = abs(duration);
+						int durationMinute = int(centralDuration);
+						int durationSecond = round((centralDuration - durationMinute) * 60.);
 						if (durationSecond>59)
 						{
 							durationMinute += 1;
@@ -3635,7 +3308,6 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 			{
 				core->setUseTopocentricCoordinates(false);
 				core->update(0);
-				SolarEclipse bessel = BesselianElements();
 
 				// Find exact time of minimum distance between axis of lunar shadow cone to the center of Earth
 				double dt = 1.;
@@ -3644,21 +3316,18 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 				{
 					core->setJD(JD);
 					core->update(0);
-					SolarEclipse bessel = BesselianElements();
-					double x = bessel.x;
-					double y = bessel.y;
+					double x,y,d,tf1,tf2,L1,L2,mu;
+					SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
 
 					core->setJD(JD - 5./1440.);
 					core->update(0);
-					bessel = BesselianElements();
-					double x1 = bessel.x;
-					double y1 = bessel.y;
+					double x1,y1;
+					SolarEclipseBessel(x1,y1,d,tf1,tf2,L1,L2,mu);
 
 					core->setJD(JD + 5./1440.);
 					core->update(0);
-					bessel = BesselianElements();
-					double x2 = bessel.x;
-					double y2 = bessel.y;
+					double x2,y2;
+					SolarEclipseBessel(x2,y2,d,tf1,tf2,L1,L2,mu);
 
 					double xdot1 = (x - x1) * 12.;
 					double xdot2 = (x2 - x) * 12.;
@@ -3674,13 +3343,12 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 
 				core->setJD(JD);
 				core->update(0);
-				bessel = BesselianElements();
-				double gamma = sqrt(bessel.x * bessel.x + bessel.y * bessel.y);
+				double x,y,d,tf1,tf2,L1,L2,mu;
+				SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+				double gamma = sqrt(x * x + y * y);
+				if (y<0.) gamma = -(gamma);
 
-				if (bessel.y<0.)
-					gamma = -(gamma);
-
-				if (abs(gamma) <= (1.5433 + bessel.L2)) // Solar eclipse occurs on this date
+				if (abs(gamma) <= (1.5433 + L2)) // Solar eclipse occurs on this date
 				{
 					double magLocal = 0., altitudeMideclipse = 0.;
 					double altitudeFirstcontact = 0.;
@@ -3689,7 +3357,7 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 					// Find time of maximum eclipse for current location
 					double dt = 1.;
 					int iteration = 0;
-					localSEparameter eclipseData = localSolarEclipse(JD,0,false);
+					LocalSEparams eclipseData = localSolarEclipse(JD,0,false);
 					while (abs(dt) > 0.000001 && (iteration < 20))
 					{
 						eclipseData = localSolarEclipse(JD,0,false);
