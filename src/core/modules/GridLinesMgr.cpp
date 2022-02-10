@@ -1257,21 +1257,6 @@ void SkyLine::draw(StelCore *core) const
 			{
 				int month = 0;
 				int monthDays = 0;
-				QString monthNames[] =
-				{
-					qc_("Jan","short month name"),
-					qc_("Feb","short month name"),
-					qc_("Mar","short month name"),
-					qc_("Apr","short month name"),
-					qc_("May","short month name"),
-					qc_("Jun","short month name"),
-					qc_("Jul","short month name"),
-					qc_("Aug","short month name"),
-					qc_("Sep","short month name"),
-					qc_("Oct","short month name"),
-					qc_("Nov","short month name"),
-					qc_("Dec","short month name")
-				};
 				for(int i = 0,d = 0; i < daysOfYear; ++i, ++d)
 				{
 					if(d >= monthDays)
@@ -1280,7 +1265,7 @@ void SkyLine::draw(StelCore *core) const
 						++month;
 						monthDays = StelUtils::numberOfDaysInMonthInYear(month, year);
 						sPainter.drawGreatCircleArc(partNewYear, partMonth, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
-						QString label = QString("%1").arg(monthNames[month - 1]);
+						QString label = QString("%1").arg(StelLocaleMgr::shortMonthName(month));
 						if(showLabel)
 						{
 							float shiftx = static_cast<float>(sPainter.getFontMetrics().boundingRect(label).width()) * -1.0f;
