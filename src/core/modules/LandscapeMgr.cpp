@@ -327,7 +327,7 @@ void LandscapeMgr::update(double deltaTime)
 	const bool currentIsEarth = currentPlanet->getID() == earth->getID();
 	// First parameter in next call is used for particularly earth-bound computations in Schaefer's sky brightness model. Difference DeltaT makes no difference here.
 	// Temperature = 15°C, relative humidity = 40%
-	atmosphere->computeColor(core, core->getJDE(), *currentPlanet, *sun, currentIsEarth ? moon.get() : nullptr, core->getCurrentLocation(),
+	atmosphere->computeColor(core, core->getJDE(), *currentPlanet, *sun, currentIsEarth ? moon.data() : nullptr, core->getCurrentLocation(),
 							 15.f, 40.f, static_cast<float>(drawer->getExtinctionCoefficient()), atmosphereNoScatter);
 
 	core->getSkyDrawer()->reportLuminanceInFov(3.75f+atmosphere->getAverageLuminance()*3.5f, true);
