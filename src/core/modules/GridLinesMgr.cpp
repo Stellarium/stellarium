@@ -1244,8 +1244,8 @@ void SkyLine::draw(StelCore *core) const
 			Vec3d partNewYear=earth->getEclipticPos(newyearJD + core->computeDeltaT(newyearJD)/86400.0)*-1;
 			Vec3d partDay=partNewYear;
 			partDay.transfo4d(Mat4d::rotation(partAxis, -0.1*M_PI/180));
-			Vec3d partDayl=partNewYear;
-			partDayl.transfo4d(Mat4d::rotation(partAxis, -0.175*M_PI/180));
+			Vec3d partDayl=earth->getEclipticPos(newyearJD + 0.5 + core->computeDeltaT(newyearJD + 0.5)/86400.0)*-1;
+			partDayl.transfo4d(Mat4d::rotation(partAxis, -0.125*M_PI/180));
 			Vec3d partWeek=partNewYear;
 			partWeek.transfo4d(Mat4d::rotation(partAxis, -0.25*M_PI/180));
 			Vec3d partMonth=partNewYear;
@@ -1279,23 +1279,7 @@ void SkyLine::draw(StelCore *core) const
 							sPainter.drawText(partMonthl, label, textAngle*M_180_PIf - 90, shiftx, shifty, false);
 						}
 					}
-					else
-					{
-						sPainter.drawGreatCircleArc(partNewYear, partDay, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
-						if(showLabel && d % 5 == 0 && (monthDays > 30 || d != 30))
-						{
-							QString label = QString("%1").arg(d);
-							float shiftx = static_cast<float>(sPainter.getFontMetrics().boundingRect(label).width()) * -1.0f;
-							float shifty = static_cast<float>(sPainter.getFontMetrics().height()) * 0.2f;
-							Vec3d screenPosTgt, screenPosTgtL;
-							prj->project(partDay, screenPosTgt);
-							prj->project(partDayl, screenPosTgtL);
-							double dx = screenPosTgtL[0] - screenPosTgt[0];
-							double dy = screenPosTgtL[1] - screenPosTgt[1];
-							float textAngle=static_cast<float>(atan2(dy, dx));
-							sPainter.drawText(partDayl, label, textAngle*M_180_PIf-90, shiftx, shifty, false);
-						}
-					}
+					sPainter.drawGreatCircleArc(partNewYear, partDay, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
 					double step;
 					if(i<81||i>268)
 					{
@@ -1304,6 +1288,20 @@ void SkyLine::draw(StelCore *core) const
 					else
 					{
 						step = 1.0*M_PI/187.;
+					}
+					if(showLabel && (d+1)%5==0)
+					{
+						QString label = QString("%1").arg(d+1);
+						float shiftx = static_cast<float>(sPainter.getFontMetrics().boundingRect(label).width()) * -1.0f;
+						float shifty = static_cast<float>(sPainter.getFontMetrics().height()) * 0.2f;
+						Vec3d screenPosTgt, screenPosTgtL;
+						prj->project(partDay, screenPosTgt);
+						prj->project(partDayl, screenPosTgtL);
+						double dx = screenPosTgtL[0] - screenPosTgt[0];
+						double dy = screenPosTgtL[1] - screenPosTgt[1];
+						float textAngle=static_cast<float>(atan2(dy, dx));
+						// Use fixed number 177 to redress text angle rather than calculate in realtime
+						sPainter.drawText(partDayl, label, textAngle*M_180_PIf-177, shiftx, shifty, false);
 					}
 					const Mat4d& rotZ1 = Mat4d::rotation(partZAxis, step);
 					partNewYear.transfo4d(rotZ1);
