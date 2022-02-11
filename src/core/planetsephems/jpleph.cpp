@@ -607,7 +607,7 @@ int DLL_FUNC jpl_state(void *ephem, const double et, const int list[14],
 	{
 		eph->curr_cache_loc = nr;
 		/* Read two blocks ahead to account for header: */
-		if(FSeek(eph->ifile, (nr + 2) * eph->recsize, SEEK_SET)) // lgtm [cpp/integer-multiplication-cast-to-long]
+		if(FSeek(eph->ifile, static_cast<unsigned long>(nr + 2) * eph->recsize, SEEK_SET)) // lgtm [cpp/integer-multiplication-cast-to-long]
 		{
 			// GZ: Make sure we will try again on next call...
 			eph->curr_cache_loc=0;
