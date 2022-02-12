@@ -30,8 +30,8 @@ PersianAstronomicalCalendar::PersianAstronomicalCalendar(double jd): PersianArit
 	PersianAstronomicalCalendar::retranslate();
 }
 
-const StelLocation PersianAstronomicalCalendar::tehran( "Tehran",  "ir", "Southern Asia", 35.68f,    51.42f,    1100, 7153, "Asia/Tehran", 9, 'C');
-const StelLocation PersianAstronomicalCalendar::isfahan("Isfahan", "ir", "Southern Asia", 32.65246f, 51.67462f, 1578, 1547, "Asia/Tehran", 9, 'R');
+//const StelLocation PersianAstronomicalCalendar::tehran( "Tehran",  "ir", "Southern Asia", 51.42f,    35.68f,    1100, 7153, "Asia/Tehran", 9, 'C');
+const StelLocation PersianAstronomicalCalendar::isfahan("Isfahan", "ir", "Southern Asia", 51.67462f, 32.65246f, 1578, 1547, "Asia/Tehran", 9, 'R');
 
 // Set a calendar date from the Julian day number
 void PersianAstronomicalCalendar::setJD(double JD)
@@ -75,7 +75,7 @@ QVector<int> PersianAstronomicalCalendar::persianAstronomicalFromFixed(int rd)
 {
 	const int newYear=persianNewYearOnOrBefore(rd);
 	const int y=qRound((newYear-persianEpoch)/meanTropicalYear)+1;
-	const int year= 0<y ? y : y-1;
+	const int year= 0<y ? y : y-1; // no year zero
 	const int dayOfYear=rd-fixedFromPersianAstronomical({year, 1, 1})+1;
 	const int month= dayOfYear<=186 ? qRound(ceil(dayOfYear/31.)) : qRound(ceil((dayOfYear-6)/30.));
 	const int day=rd-fixedFromPersianAstronomical({year, month, 1})+1;
@@ -90,7 +90,7 @@ int PersianAstronomicalCalendar::persianNewYearOnOrBefore(int rd)
 	double lng;
 	do {
 		day++;
-		lng=solarLongitude(middayInTehran(day));
-	} while (lng<=static_cast<double>(Calendar::spring)+2.);
+		lng=modInterval(solarLongitude(middayInTehran(day)), -180., 180.);
+	} while (lng<=static_cast<double>(Calendar::spring)); // +2. // It seems the +2 is erroneous!
 	return day;
 }

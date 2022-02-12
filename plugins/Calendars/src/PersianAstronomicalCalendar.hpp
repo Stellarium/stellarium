@@ -67,12 +67,9 @@ public slots:
 	//! find vernal equinox on or before a given fixed (RD) date (CC:UE 15.4)
 	static int persianNewYearOnOrBefore(int rd);
 
-
-
-
 protected:
 	//! location where solar observation is linked to
-	static const StelLocation tehran; // CC:UE 15.2
+	//static const StelLocation tehran; // CC:UE 15.2
 	static const StelLocation isfahan; // CC:UE 15.2 alternative
 
 };
