@@ -27,6 +27,7 @@
 #include "precession.h"
 #include "StelModuleMgr.hpp"
 #include "SolarSystem.hpp"
+#include "StelLocationMgr.hpp"
 
 
 QString Calendar::getFormattedDateString(QVector<int> date, QString sep)
@@ -113,12 +114,25 @@ QVector<int> Calendar::toRadix(int num, QVector<int>radix)
 
 // DEFINITIONS FROM CHAPTER 14: ASTRONOMICAL CALENDARS
 // Crucial: Region MUST be full name - we cannot look up region codes in the tests!
-const StelLocation Calendar::urbana   ("Urbana",    "Il",     "Northern America", 40.1f,       -88.2f,        225,   250, "UT-6", 7, 'N');
-const StelLocation Calendar::greenwich("Greenwich", "London", "Northern Europe",  51.4777815f,   0.f,          46.9, 100, "UT",   7, 'O');
-const StelLocation Calendar::mecca    ("Mecca",     "Mecca",  "Western Asia",     21.42333333f, 39.82333333f, 298,   200, "UT+3", 9, 'R');
-const StelLocation Calendar::jerusalem("Jerusalem", "Israel", "Western Asia",     31.78f,       35.24f,       740,  2000, "UT+2", 7, 'C');
-const StelLocation Calendar::acre     ("Acre",      "Israel", "Western Asia",     32.94f,       35.09f,        22,    20, "UT+2", 6, 'N');
-const StelLocation Calendar::padua    ("Padua",     "Italy",  "Southern Europe",  45.407778f,   11.8858333f,   18,   200, "UT+1", 6, 'N');
+//                                       Name        country   region               long         lat           alt    popK  Timezone          Bortle Role
+const StelLocation Calendar::urbana   ("Urbana",    "Il",     "Northern America", -88.2f,        40.1f,        225,   250, "America/Chicago", 7, 'N');
+const StelLocation Calendar::greenwich("Greenwich", "London", "Northern Europe",    0.f,         51.4777815f,   46.9, 100, "Europe/London",   7, 'O');
+const StelLocation Calendar::mecca    ("MecKa",     "Mecca",  "Western Asia",      39.82333333f, 21.42333333f, 298,   200, "Asia/Riyadh", 9, 'R');
+// Keep here, or use only in Persian?
+const StelLocation Calendar::tehran   ( "Tehran",   "ir",     "Southern Asia",     51.42f,       35.68f,      1100,  7153, "Asia/Tehran", 9, 'C');
+const StelLocation Calendar::paris    ( "Paris",    "fr",     "Western Europe",     2.34f,       48.84f,        27,  6000, "Europe/Paris", 9, 'C');
+const StelLocation Calendar::jerusalem("Jerusalem", "Israel", "Western Asia",      35.24f,       31.78f,       740,  2000, "Asia/Jerusalem", 7, 'C');
+const StelLocation Calendar::acre     ("Acre",      "Israel", "Western Asia",      35.09f,       32.94f,        22,    20, "Asia/Jerusalem", 6, 'N');
+const StelLocation Calendar::padua    ("Padua",     "Italy",  "Southern Europe",   11.8858333f,  45.407778f,    18,   200, "Europe/Rome", 6, 'N');
+
+StelLocation Calendar::location(const QString &name)
+{
+	StelLocation loc=StelApp::getInstance().getLocationMgr().locationForString(name);
+
+	//qDebug() << "Calendar: Found location:" << loc.name << loc.ianaTimeZone << loc.longitude << "/" << loc.latitude;
+
+	return loc;
+}
 
 double Calendar::direction(const StelLocation &locFrom, const StelLocation &locTo)
 {
@@ -133,34 +147,37 @@ double Calendar::direction(const StelLocation &locFrom, const StelLocation &locT
 	double az = atan2(sin(longTarget-longObs), cos(latObs)*tan(latTarget)-sin(latObs)*cos(longTarget-longObs));
 	return StelUtils::fmodpos(M_180_PI * az, 360.0);
 }
-double Calendar::universalFromLocal(double fractionalDay, const StelLocation &loc)
+double Calendar::universalFromLocal(double rd_loc, const StelLocation &loc)
 {
-	return fractionalDay-zoneFromLongitude(static_cast<double>(loc.longitude));
+	//qDebug() << "universalFromLocal: Location " << loc.name << "longitude:" << loc.longitude;
+	return rd_loc-zoneFromLongitude(static_cast<double>(loc.longitude));
 }
-double Calendar::localFromUniversal(double fractionalDay, const StelLocation &loc)
+double Calendar::localFromUniversal(double rd_ut, const StelLocation &loc)
 {
-	return fractionalDay+zoneFromLongitude(static_cast<double>(loc.longitude));
-
+	//qDebug() << "localFromUniversal: Location " << loc.name << "longitude:" << loc.longitude;
+	return rd_ut+zoneFromLongitude(static_cast<double>(loc.longitude));
 }
-double Calendar::standardFromUniversal(double fractionalDay, const StelLocation &loc)
+double Calendar::standardFromUniversal(double rd_ut, const StelLocation &loc)
 {
-	static const QDateTime j2000(QDate(2000, 1, 1), QTime(0, 0, 0), Qt::UTC);
+	static const QDateTime j2k(QDate(2000, 1, 1), QTime(0, 0, 0), Qt::UTC);
 	QTimeZone tz(loc.ianaTimeZone.toUtf8());
-	return fractionalDay+tz.standardTimeOffset(j2000)/86400;
+	//qDebug() << "standardFromUniversal: Location " << loc.name << "TZ:" << loc.ianaTimeZone << tz.standardTimeOffset(j2k);
+	return rd_ut+tz.standardTimeOffset(j2k)/86400.;
 }
-double Calendar::universalFromStandard(double fractionalDay, const StelLocation &loc)
+double Calendar::universalFromStandard(double rd_zone, const StelLocation &loc)
 {
-	static const QDateTime j2000(QDate(2000, 1, 1), QTime(0, 0, 0), Qt::UTC);
+	static const QDateTime j2k(QDate(2000, 1, 1), QTime(0, 0, 0), Qt::UTC);
 	QTimeZone tz(loc.ianaTimeZone.toUtf8());
-	return fractionalDay-tz.standardTimeOffset(j2000)/86400;
+	//qDebug() << "universalFromStandard: Location " << loc.name << "TZ:" << loc.ianaTimeZone << tz.standardTimeOffset(j2k);
+	return rd_zone-tz.standardTimeOffset(j2k)/86400.;
 }
-double Calendar::standardFromLocal(double fractionalDay, const StelLocation &loc)
+double Calendar::standardFromLocal(double rd_loc, const StelLocation &loc)
 {
-	return standardFromUniversal(universalFromLocal(fractionalDay, loc), loc);
+	return standardFromUniversal(universalFromLocal(rd_loc, loc), loc);
 }
-double Calendar::localFromStandard(double fractionalDay, const StelLocation &loc)
+double Calendar::localFromStandard(double rd_zone, const StelLocation &loc)
 {
-	return localFromUniversal(universalFromStandard(fractionalDay, loc), loc);
+	return localFromUniversal(universalFromStandard(rd_zone, loc), loc);
 }
 double Calendar::ephemerisCorrection(double rd)
 {
@@ -176,16 +193,27 @@ double Calendar::universalFromDynamical(double rd_dt)
 {
 	return rd_dt-ephemerisCorrection(rd_dt);
 }
+// CC:UE 14.18
 double Calendar::julianCenturies(double rd_ut)
 {
 	return (dynamicalFromUniversal(rd_ut)-j2000)/36525.;
 }
 double Calendar::equationOfTime(double rd_ut)
 {
-	static StelCore *core = StelApp::getInstance().getCore();
-	double jd=jdFromMoment(rd_ut, false);
-	double deltaT=core->computeDeltaT(jd);
-	return core->getSolutionEquationOfTime(jd+deltaT/86400.);
+	// // The full solution to the equation of time requires lots of computation. We go the fast way from Meeus, AA2, 28.3, or its related version from CC:UE
+	const double JDE=jdFromMoment(rd_ut, false); // actually JD.
+	const double T=(JDE-2451545.0)/36525.;
+	const double tau = T*0.1;
+	const double epsRad=getPrecessionAngleVondrakEpsilon(JDE);
+	const double e = (-0.0000001267*T-0.000042037)*T+0.016708634;
+	const double M = ((-0.0001537*T+35999.05029)*T+357.52911)*M_PI_180;
+	double Lo = StelUtils::fmodpos(280.4664567 + tau*(360007.6982779 + tau*(0.03032028 + tau*(1./49931. + tau*(-1./15300. - tau/2000000.)))), 360.);
+	Lo *= M_PI_180;
+	double y=tan(epsRad*0.5); y*=y;
+
+	double E=y*sin(2.*Lo)+2.*e*sin(M)*(2.*y*cos(2.*Lo)-1.)-0.5*y*y*sin(4.*Lo)-1.25*e*e*sin(2.*M);
+	// E in radians.
+	return E*(M_1_PI*0.5);
 }
 // return moment (RD in local mean solar time) corrected by equation of time
 double Calendar::apparentFromLocal(double rd_local_mean, const StelLocation &loc)
@@ -208,12 +236,12 @@ double Calendar::universalFromApparent(double rd_local_app, const StelLocation &
 {
 	return universalFromLocal(localFromApparent(rd_local_app, loc), loc);
 }
-// return RD (UT) of true midnight from RD and location
+// return RD (UT) of True (solar) Midnight from RD and location
 double Calendar::midnight(int rd, const StelLocation &loc)
 {
 	return universalFromApparent(rd, loc);
 }
-// return RD (UT) of true noon from RD and location
+// return RD (UT) of True (solar) Noon from RD and location
 double Calendar::midday(int rd, const StelLocation &loc)
 {
 	return universalFromApparent(rd+0.5, loc);
@@ -256,9 +284,62 @@ double Calendar::rightAscension(double rd_ut, double eclLat, double eclLong)
 	return raRad*M_180_PI;
 }
 
-//! @return solar longitude [degrees] for moment RD_UT (CC:UE 14.33, but we use our own solution)
+static const double solarXYZ[][3]={
+	{ 403406, 270.54861,     0.9287892},
+	{ 195207, 340.19128, 35999.1376958},
+	{ 119433,  63.91854, 35999.4089666},
+	{ 112392, 331.26220, 35998.7287385},
+	{   3891, 317.843,   71998.20261},
+	{   2819,  86.631,   71998.4403 },
+	{   1721, 240.052,   36000.35726},
+	{    660, 310.26,    71997.4812},
+	{    350, 247.23,    32964.4678},
+	{    334, 260.87,      -19.4410},
+	{    314, 297.82,   445267.1117},
+	{    268, 343.14,    45036.8840},
+	{    242, 166.79,        3.1008},
+	{    234,  81.53,    22518.4434},
+	{    158,   3.50,      -19.9739},
+	{    132, 132.75,    65928.9345},
+	{    129, 182.95,     9038.0293},
+	{    114, 162.03,     3034.7684},
+	{     99,  29.8,     33718.148},
+	{     93, 266.4,      3034.448},
+	{     86, 249.2,     -2280.773},
+	{     78, 157.6,     29929.992},
+	{     72, 257.8,     31556.493},
+	{     68, 185.1,       149.588},
+	{     64,  69.9,      9037.750},
+	{     46,   8  ,    107997.405},
+	{     38, 197.1,     -4444.176},
+	{     37, 250.4,       151.771},
+	{     32,  65.3,     67555.316},
+	{     29, 162.7,     31556.080},
+	{     28, 341.5,     -4561.540},
+	{     27, 291.6,    107996.706},
+	{     27,  98.5,      1221.655},
+	{     25, 146.7,     62894.167},
+	{     24, 110  ,     31437.369},
+	{     21,   5.2,     14578.298},
+	{     21, 342.6,    -31931.757},
+	{     20, 230.9,     34777.243},
+	{     18, 256.1,      1221.999},
+	{     17,  45.3,     62894.511},
+	{     14, 242.9,     -4442.039},
+	{     13, 115.2,    107997.909},
+	{     13, 151.8,       119.066},
+	{     13, 285.3,     16859.071},
+	{     12,  53.3,        -4.578},
+	{     10, 126.6,     26895.292},
+	{     10, 205.7,       -39.127},
+	{     10,  85.9,     12297.536},
+	{     10, 146.1,     90073.778}};
+
+// return solar longitude [degrees] for moment RD_UT (CC:UE 14.33)
+// We cannot use Stellarium's VSOP87A solution here because we need longitude for equinox of date.
 double Calendar::solarLongitude(double rd_ut)
 {
+/*
 	static StelCore *core = StelApp::getInstance().getCore();
 	double jde=jdFromMoment(rd_ut, false);
 	jde+=core->computeDeltaT(jde)/86400.;
@@ -267,9 +348,18 @@ double Calendar::solarLongitude(double rd_ut)
 	GETSTELMODULE(SolarSystem)->getEarth()->computePosition(jde, pos, vel);
 	double lng, lat;
 	StelUtils::rectToSphe(&lng, &lat, pos);
-	return StelUtils::fmodpos(lng+M_PI+nutation(rd_ut)+aberration(rd_ut), 360.);
+	return StelUtils::fmodpos(M_180_PI*(lng+M_PI)+nutation(rd_ut)+aberration(rd_ut), 360.);
+*/
+	const double c=julianCenturies(rd_ut);
+	double lambda=0.;
+	for( int i=48; i>=0; i--)
+		lambda += solarXYZ[i][0]*sin(M_PI_180*(solarXYZ[i][1]+solarXYZ[i][2]*c));
+	lambda *= 0.000005729577951308232;
+	lambda += StelUtils::fmodpos(36000.76953744*c, 360.) + 282.7771834;
+
+	return StelUtils::fmodpos(lambda+nutation(rd_ut)+aberration(rd_ut), 360.);
 }
-//! @return nutation in degrees for moment rd_ut (CC:UE 14.34, but we use our own solution)
+// return nutation in degrees for moment rd_ut (CC:UE 14.34, but we use our own solution)
 double Calendar::nutation(double rd_ut)
 {
 	static StelCore *core = StelApp::getInstance().getCore();
@@ -279,13 +369,13 @@ double Calendar::nutation(double rd_ut)
 	getNutationAngles(jde, &deltaPsi, &deltaEps);
 	return deltaPsi*M_180_PI;
 }
-//! @return aberration in degrees for moment rd_ut (CC:UE 14.35)
+// return aberration in degrees for moment rd_ut (CC:UE 14.35)
 double Calendar::aberration(double rd_ut)
 {
 	double c=julianCenturies(rd_ut);
 	return 0.0000974*cos((177.63+35999.01848*c)*M_PI_180)-0.005575;
 }
-//! @return moment (RD_UT) of when the sun first reaches lng [degrees] after rd_ut  (CC:UE 14.36)
+// return moment (RD_UT) of when the sun first reaches lng [degrees] after rd_ut  (CC:UE 14.36)
 double Calendar::solarLongitudeAfter(double lng, double rd_ut)
 {
 	static const double rate=meanTropicalYear/360.;
@@ -330,6 +420,13 @@ double Calendar::seasonInGregorian(Calendar::Season season, int gYear)
 	return solarLongitudeAfter(season, GregorianCalendar::gregorianNewYear(gYear));
 }
 
+// return merely a test (CC:UE 14.38)
+double Calendar::urbanaWinter(int gYear)
+{
+	return standardFromUniversal(
+				solarLongitudeAfter(winter, GregorianCalendar::fixedFromGregorian({gYear, GregorianCalendar::january, 1})), urbana);
+}
+
 // return precession in ecliptical longitude since moment rd_dt (CC:UE 14.39, which is from Meeus AA2 21.6/21.7.)
 double Calendar::precession(double rd_dt)
 {
@@ -360,13 +457,14 @@ double Calendar::solarAltitude(double rd_ut, const StelLocation &loc)
 	double theta0=siderealFromMoment(rd_ut);
 	double capH=StelUtils::fmodpos(theta0-raRad*M_180_PI+psi, 360.); // local hour angle
 	double sinAlt=sin(phiRad)*sin(declRad)+cos(phiRad)*cos(declRad)*cos(capH*M_PI_180);
-	return asin(sinAlt);
+	return asin(sinAlt)*M_180_PI;
 }
 
+// return an estimate for the moment (RD_UT) before rd_ut when sun has reached lambda (CC:UE 14.42)
 double Calendar::estimatePriorSolarLongitude(double lambda, double rd_ut)
 {
 	static const double rate=meanTropicalYear/360.;
-	double tau=rd_ut-rate*StelUtils::fmodpos(solarLongitude(rd_ut)-lambda, 360);
+	double tau=rd_ut-rate*StelUtils::fmodpos(solarLongitude(rd_ut)-lambda, 360.);
 	double Delta=modInterval(solarLongitude(tau)-lambda, -180., 180.);
 	return qMin(rd_ut, tau-rate*Delta);
 }
@@ -612,14 +710,14 @@ double Calendar::lunarLongitude(double rd_ut)
 	double correction=0.;
 	for (int i=59; i>=0; i--)
 	{
-		correction+=lunarLD[i][4]*pow(E, fabs(lunarLD[i][1]))*cos(M_PI_180*(lunarLD[i][0]*D + lunarLD[i][1]*M + lunarLD[i][2]*MP + lunarLD[i][3]*F ));
+		correction+=lunarLD[i][4]*pow(E, fabs(lunarLD[i][1]))*sin(M_PI_180*(lunarLD[i][0]*D + lunarLD[i][1]*M + lunarLD[i][2]*MP + lunarLD[i][3]*F ));
 	}
 	const double venus  = 3958.   * sin(M_PI_180*(119.75 +    131.849*c));
 	const double jupiter=  318.   * sin(M_PI_180*( 53.09 + 479264.290*c));
 	const double flatEarth = 1962.* sin(M_PI_180*(LP-F));
 
 	correction+=venus+jupiter+flatEarth;
-	return StelUtils::fmodpos(LP + correction*1e-6 +nutation(rd_ut), 360.);
+	return StelUtils::fmodpos(LP + correction*1.e-6 +nutation(rd_ut), 360.);
 }
 // return lunar latitude at rd_ut (CC:UE 14.63, actually Meeus AA2, ch.47)
 double Calendar::lunarLatitude(double rd_ut)
@@ -647,7 +745,7 @@ double Calendar::lunarLatitude(double rd_ut)
 	return beta*1e-6;
 }
 
-//! @return lunar distance [metres] at rd_ut (CC:UE 14.65, actually Meeus AA2 ch.47)
+// return lunar distance [metres] at rd_ut (CC:UE 14.65, actually Meeus AA2 ch.47)
 double Calendar::lunarDistance(double rd_ut)
 {
 	const double c=julianCenturies(rd_ut);
@@ -695,6 +793,11 @@ double Calendar::lunarNode(double rd_ut)
 {
 	return modInterval(moonNode(julianCenturies(rd_ut)), -180., 180.);
 }
+// sidereal lunar longitude counted from some other point (CC:UE 14.55)
+double Calendar::siderealLunarLongitude(double rd_ut, double siderealStart)
+{
+	return StelUtils::fmodpos(lunarLongitude(rd_ut)-precession(rd_ut)+siderealStart, 360.);
+}
 // return lunar phase (angular difference in ecliptical longitude from the sun)
 // at moment rd_ut (CC:UE 14.56)
 double Calendar::lunarPhase(double rd_ut)
@@ -702,8 +805,8 @@ double Calendar::lunarPhase(double rd_ut)
 	static const double t0=nthNewMoon(0);
 	const double phi=StelUtils::fmodpos(lunarLongitude(rd_ut)-solarLongitude(rd_ut), 360.);
 	const int n=qRound((rd_ut-t0)/meanSynodicMonth);
-	const double phiP=StelUtils::fmodpos((rd_ut-nthNewMoon(n))/meanSynodicMonth, 1.);
-	return (fabs(phi-phiP)>180) ? phiP : phi;
+	const double phiP=360.*StelUtils::fmodpos((rd_ut-nthNewMoon(n))/meanSynodicMonth, 1.);
+	return (fabs(phi-phiP)>180.) ? phiP : phi;
 }
 
 // binary search for the moment when solar longitude reaches lng in the time between a and b (CC:UE 14.36)
@@ -834,13 +937,13 @@ double Calendar::momentOfDepression(double rd_approx, double alpha, bool early, 
 		return momentOfDepression(t, alpha, early, loc);
 }
 
-// return fraction of day of when sun is alpha degrees below horizon in the morning (or bogus) (CC:UE 14.72)
+// return fraction of day (Zone Time!) of when sun is alpha degrees below horizon in the morning (or bogus) (CC:UE 14.72)
 double Calendar::dawn(int rd, double alpha, const StelLocation &loc)
 {
 	const double result=momentOfDepression(rd+0.25, alpha, morning, loc);
 	return qFuzzyCompare(result, bogus) ? bogus : standardFromLocal(result, loc);
 }
-// return fraction of day of when sun is alpha degrees below horizon in the evening (or bogus) (CC:UE 14.74)
+// return fraction of day (Zone Time!) of when sun is alpha degrees below horizon in the evening (or bogus) (CC:UE 14.74)
 double Calendar::dusk(int rd, double alpha, const StelLocation &loc)
 {
 	const double result=momentOfDepression(rd+0.75, alpha, evening, loc);
@@ -853,7 +956,7 @@ double Calendar::refraction(const StelLocation &loc)
 {
 	static const double R=6.372e6;
 	const double h=qMax(0, loc.altitude);
-	const double dip=acos(R/R+h)*M_180_PI;
+	const double dip=acos(R/(R+h))*M_180_PI;
 	return 34./60.+dip+19./3600.*sqrt(h);
 }
 // return fraction of day for the moment of sunrise (CC:UE 14.76)
@@ -879,10 +982,16 @@ double Calendar::moonrise(int rd, const StelLocation &loc)
 	const bool waning=lunarPhase(t) > 180.;
 	const double alt=observedLunarAltitude(t, loc);
 	const double lat=static_cast<double>(loc.latitude);
-	const double offset=alt/(4.*(90-fabs(lat)));
+	const double offset=alt/(4.*(90.-fabs(lat)));
+
+	static const QDateTime j2k(QDate(2000, 1, 1), QTime(0, 0, 0), Qt::UTC);
+	QTimeZone tz(loc.ianaTimeZone.toUtf8());
+	//qDebug() << "moonrise for: Location " << loc.name << "TZ:" << loc.ianaTimeZone << tz.standardTimeOffset(j2k);
+
+
 	double approx = t + 0.5 + offset;
 	if (waning)
-		approx = offset>0. ? t+1-offset : t-offset;
+		approx = offset>0. ? t+1.-offset : t-offset;
 
 	// apply binary search to identify moonrise
 	// TBD: It seems we can actually omit storing the altitudes when we can guarantee rdA and rdB enclose the event.
@@ -917,10 +1026,10 @@ double Calendar::moonset(int rd, const StelLocation &loc)
 	const bool waxing=lunarPhase(t) < 180.;
 	const double alt=observedLunarAltitude(t, loc);
 	const double lat=static_cast<double>(loc.latitude);
-	const double offset=alt/(4.*(90-fabs(lat)));
+	const double offset=alt/(4.*(90.-fabs(lat)));
 	double approx = t + 0.5 - offset;
 	if (waxing)
-		approx = offset>0. ? t+offset : t+1+offset;
+		approx = offset>0. ? t+offset : t+1.+offset;
 
 	// apply binary search to identify moonset
 	// TBD: It seems we can actually omit storing the altitudes when we can guarantee rdA and rdB enclose the event.
