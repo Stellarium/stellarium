@@ -1,0 +1,59 @@
+// Test Astronomical Calendars. Regular QTesting impossible because we need a StelCore for this.
+// (c) 2022 Georg Zotti
+// This is for the Calendars plugin
+
+const data=[
+	[ -214193, [-1208,  5,  1]],
+	[  -61387, [ -790,  9, 14]],
+	[   25469, [ -552,  7,  2]],
+	[   49217, [ -487,  7,  9]],
+	[  171307, [ -153, 10, 19]],
+	[  210155, [  -46,  2, 31]],
+	[  253427, [   73,  8, 19]],
+	[  369740, [  392,  2,  5]],
+	[  400085, [  475,  3,  4]],
+	[  434355, [  569,  1,  3]],
+	[  452605, [  618, 12, 20]],
+	[  470160, [  667,  1, 14]],
+	[  473837, [  677,  2,  8]],
+	[  507850, [  770,  3, 22]],
+	[  524156, [  814, 11, 13]],
+	[  544676, [  871,  1, 21]],
+	[  567118, [  932,  6, 28]],
+	[  569477, [  938, 12, 14]],
+	[  601716, [ 1027,  3, 21]],
+	[  613424, [ 1059,  4, 10]],
+	[  626596, [ 1095,  5,  2]],
+	[  645554, [ 1147,  3, 30]],
+	[  664224, [ 1198,  5, 10]],
+	[  671401, [ 1218,  1,  7]],
+	[  694799, [ 1282,  1, 29]],
+	[  704424, [ 1308,  6,  3]],
+	[  708842, [ 1320,  7,  7]],
+	[  709409, [ 1322,  1, 29]],
+	[  709580, [ 1322,  7, 14]],
+	[  727274, [ 1370, 12, 27]],
+	[  728714, [ 1374, 12,  6]],
+	[  744313, [ 1417,  8, 19]],
+	[  764652, [ 1473,  4, 28]]
+];
+
+core.output("Testing PersianAstronomicalCalendar::fixedFromPersianAstronomical()");
+for (i=0; i<data.length; i++){
+	rd=data[i][0];
+	pDate=data[i][1];
+
+	resRD=PersianAstronomicalCalendar.fixedFromPersianAstronomical(pDate);
+	if(rd == resRD){core.output("OK")} else {core.output("ERR:" + rd + " != " + resRD)};
+}
+
+core.output("Testing PersianAstronomicalCalendar::persianAstronomicalFromFixed()");
+for (i=0; i<data.length; i++){
+	rd=data[i][0];
+	pDate=data[i][1];
+
+	resDate = PersianAstronomicalCalendar.persianAstronomicalFromFixed(rd);
+	// if(pDate == resDate){core.output("OK")} else {core.output("ERR:" + pDate + " != " + resDate)};
+	// Compare algorithm for simple arrays from https://stackoverflow.com/questions/7837456/how-to-compare-arrays-in-javascript
+	if (pDate.length === resDate.length && pDate.every(function(value, index) { return value === resDate[index]})){core.output("OK")} else {core.output("ERR:" + pDate + " != " + resDate)};	
+}
