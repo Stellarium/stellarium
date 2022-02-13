@@ -53,6 +53,7 @@
 #include "../AztecXihuitlCalendar.hpp"
 #include "../AztecTonalpohualliCalendar.hpp"
 #include "../BalinesePawukonCalendar.hpp"
+#include "../TibetanCalendar.hpp"
 
 QTEST_GUILESS_MAIN(TestCalendars)
 
@@ -1688,6 +1689,78 @@ void TestCalendars::testOldHindu()
 	QVERIFY(OldHinduLuniSolarCalendar::oldHinduLunarFromFixed( 744313)==QVector<int>({5139,  8, 0, 14}));
 	QVERIFY(OldHinduLuniSolarCalendar::oldHinduLunarFromFixed( 764652)==QVector<int>({5195,  4, 0,  6}));
 }
+
+void TestCalendars::testTibetan()
+{
+	QVERIFY(-214193==TibetanCalendar::fixedFromTibetan({-459,  8, 0, 11, 0}));
+	QVERIFY( -61387==TibetanCalendar::fixedFromTibetan({ -41, 12, 0, 27, 0}));
+	QVERIFY(  25469==TibetanCalendar::fixedFromTibetan({ 197, 10, 0,  3, 0}));
+	QVERIFY(  49217==TibetanCalendar::fixedFromTibetan({ 262, 10, 0,  9, 0}));
+	QVERIFY( 171307==TibetanCalendar::fixedFromTibetan({ 596, 12, 0, 19, 0}));
+	QVERIFY( 210155==TibetanCalendar::fixedFromTibetan({ 703,  5, 0,  4, 0}));
+	QVERIFY( 253427==TibetanCalendar::fixedFromTibetan({ 821, 10, 0, 15, 0}));
+	QVERIFY( 369740==TibetanCalendar::fixedFromTibetan({1140,  4, 0,  6, 0}));
+	QVERIFY( 400085==TibetanCalendar::fixedFromTibetan({1223,  4, 0, 23, 0}));
+	QVERIFY( 434355==TibetanCalendar::fixedFromTibetan({1317,  3, 0,  8, 0}));
+	QVERIFY( 452605==TibetanCalendar::fixedFromTibetan({1367,  2, 0,  8, 0}));
+	QVERIFY( 470160==TibetanCalendar::fixedFromTibetan({1415,  2, 0, 22, 0}));
+	QVERIFY( 473837==TibetanCalendar::fixedFromTibetan({1425,  4, 0,  8, 0}));
+	QVERIFY( 507850==TibetanCalendar::fixedFromTibetan({1518,  5, 0,  1, 0}));
+	QVERIFY( 524156==TibetanCalendar::fixedFromTibetan({1563,  1, 0,  7, 0}));
+	QVERIFY( 544676==TibetanCalendar::fixedFromTibetan({1619,  3, 0,  3, 0}));
+	QVERIFY( 567118==TibetanCalendar::fixedFromTibetan({1680,  8, 0,  2, 0}));
+	QVERIFY( 569477==TibetanCalendar::fixedFromTibetan({1687,  1, 0, 29, 0}));
+	QVERIFY( 601716==TibetanCalendar::fixedFromTibetan({1775,  4, 0, 20, 0}));
+	QVERIFY( 613424==TibetanCalendar::fixedFromTibetan({1807,  6, 1,  4, 0}));
+	QVERIFY( 626596==TibetanCalendar::fixedFromTibetan({1843,  6, 0,  6, 0}));
+	QVERIFY( 645554==TibetanCalendar::fixedFromTibetan({1895,  5, 0,  5, 0}));
+	QVERIFY( 664224==TibetanCalendar::fixedFromTibetan({1946,  6, 0, 11, 0}));
+	QVERIFY( 671401==TibetanCalendar::fixedFromTibetan({1966,  2, 0, 13, 0}));
+	QVERIFY( 694799==TibetanCalendar::fixedFromTibetan({2030,  2, 0, 22, 0}));
+	QVERIFY( 704424==TibetanCalendar::fixedFromTibetan({2056,  7, 0, 20, 0}));
+	QVERIFY( 708842==TibetanCalendar::fixedFromTibetan({2068,  8, 0,  9, 0}));
+	QVERIFY( 709409==TibetanCalendar::fixedFromTibetan({2070,  3, 1, 14, 0}));
+	QVERIFY( 709580==TibetanCalendar::fixedFromTibetan({2070,  8, 0,  8, 0}));
+	QVERIFY( 727274==TibetanCalendar::fixedFromTibetan({2119,  1, 0, 14, 0}));
+	QVERIFY( 728714==TibetanCalendar::fixedFromTibetan({2123,  1, 0,  7, 0}));
+	QVERIFY( 744313==TibetanCalendar::fixedFromTibetan({2165,  9, 0, 14, 0}));
+	QVERIFY( 764652==TibetanCalendar::fixedFromTibetan({2221,  6, 0,  6, 0}));
+
+	QVERIFY(TibetanCalendar::tibetanFromFixed(-214193)==QVector<int>({-459,  8, 0, 11, 0}));
+	QVERIFY(TibetanCalendar::tibetanFromFixed( -61387)==QVector<int>({ -41, 12, 0, 27, 0}));
+	QVERIFY(TibetanCalendar::tibetanFromFixed(  25469)==QVector<int>({ 197, 10, 0,  3, 0}));
+	QVERIFY(TibetanCalendar::tibetanFromFixed(  49217)==QVector<int>({ 262, 10, 0,  9, 0}));
+	QVERIFY(TibetanCalendar::tibetanFromFixed( 171307)==QVector<int>({ 596, 12, 0, 19, 0}));
+	QVERIFY(TibetanCalendar::tibetanFromFixed( 210155)==QVector<int>({ 703,  5, 0,  4, 0}));
+	QVERIFY(TibetanCalendar::tibetanFromFixed( 253427)==QVector<int>({ 821, 10, 0, 15, 0}));
+	QVERIFY(TibetanCalendar::tibetanFromFixed( 369740)==QVector<int>({1140,  4, 0,  6, 0}));
+	QVERIFY(TibetanCalendar::tibetanFromFixed( 400085)==QVector<int>({1223,  4, 0, 23, 0}));
+	QVERIFY(TibetanCalendar::tibetanFromFixed( 434355)==QVector<int>({1317,  3, 0,  8, 0}));
+	QVERIFY(TibetanCalendar::tibetanFromFixed( 452605)==QVector<int>({1367,  2, 0,  8, 0}));
+	QVERIFY(TibetanCalendar::tibetanFromFixed( 470160)==QVector<int>({1415,  2, 0, 22, 0}));
+	QVERIFY(TibetanCalendar::tibetanFromFixed( 473837)==QVector<int>({1425,  4, 0,  8, 0}));
+	QVERIFY(TibetanCalendar::tibetanFromFixed( 507850)==QVector<int>({1518,  5, 0,  1, 0}));
+	QVERIFY(TibetanCalendar::tibetanFromFixed( 524156)==QVector<int>({1563,  1, 0,  7, 0}));
+	QVERIFY(TibetanCalendar::tibetanFromFixed( 544676)==QVector<int>({1619,  3, 0,  3, 0}));
+	QVERIFY(TibetanCalendar::tibetanFromFixed( 567118)==QVector<int>({1680,  8, 0,  2, 0}));
+	QVERIFY(TibetanCalendar::tibetanFromFixed( 569477)==QVector<int>({1687,  1, 0, 29, 0}));
+	QVERIFY(TibetanCalendar::tibetanFromFixed( 601716)==QVector<int>({1775,  4, 0, 20, 0}));
+	QVERIFY(TibetanCalendar::tibetanFromFixed( 613424)==QVector<int>({1807,  6, 1,  4, 0}));
+	QVERIFY(TibetanCalendar::tibetanFromFixed( 626596)==QVector<int>({1843,  6, 0,  6, 0}));
+	QVERIFY(TibetanCalendar::tibetanFromFixed( 645554)==QVector<int>({1895,  5, 0,  5, 0}));
+	QVERIFY(TibetanCalendar::tibetanFromFixed( 664224)==QVector<int>({1946,  6, 0, 11, 0}));
+	QVERIFY(TibetanCalendar::tibetanFromFixed( 671401)==QVector<int>({1966,  2, 0, 13, 0}));
+	QVERIFY(TibetanCalendar::tibetanFromFixed( 694799)==QVector<int>({2030,  2, 0, 22, 0}));
+	QVERIFY(TibetanCalendar::tibetanFromFixed( 704424)==QVector<int>({2056,  7, 0, 20, 0}));
+	QVERIFY(TibetanCalendar::tibetanFromFixed( 708842)==QVector<int>({2068,  8, 0,  9, 0}));
+	QVERIFY(TibetanCalendar::tibetanFromFixed( 709409)==QVector<int>({2070,  3, 1, 14, 0}));
+	QVERIFY(TibetanCalendar::tibetanFromFixed( 709580)==QVector<int>({2070,  8, 0,  8, 0}));
+	QVERIFY(TibetanCalendar::tibetanFromFixed( 727274)==QVector<int>({2119,  1, 0, 14, 0}));
+	QVERIFY(TibetanCalendar::tibetanFromFixed( 728714)==QVector<int>({2123,  1, 0,  7, 0}));
+	QVERIFY(TibetanCalendar::tibetanFromFixed( 744313)==QVector<int>({2165,  9, 0, 14, 0}));
+	QVERIFY(TibetanCalendar::tibetanFromFixed( 764652)==QVector<int>({2221,  6, 0,  6, 0}));
+}
+
 
 // A few test for chapter 14. Here we preferred to use Stellarium's extensive astro functions instead of re-implementing what R-D wrote in CC:UE
 //void TestCalendars::testAstro()

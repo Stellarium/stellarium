@@ -64,6 +64,7 @@ class Calendars : public StelModule
 	Q_PROPERTY(bool flagShowFrenchArithmetic   READ isFrenchArithmeticDisplayed   WRITE showFrenchArithmetic   NOTIFY showFrenchArithmeticChanged)
 	Q_PROPERTY(bool flagShowPersianArithmetic   READ isPersianArithmeticDisplayed   WRITE showPersianArithmetic   NOTIFY showPersianArithmeticChanged)
 	Q_PROPERTY(bool flagShowPersianAstronomical READ isPersianAstronomicalDisplayed WRITE showPersianAstronomical NOTIFY showPersianAstronomicalChanged)
+	Q_PROPERTY(bool flagShowTibetan      READ isTibetanDisplayed        WRITE showTibetan       NOTIFY showTibetanChanged)
 
 public:
 	Calendars();
@@ -97,7 +98,7 @@ public:
 	//! Armenian, Zoroastrian, Coptic, Ethiopic, Islamic, Hebrew,
 	//! OldHinduSolar, OldHinduLunar, Balinese
 	//! MayaLongCount, MayaHaab, MayaTzolkin, AztecXihuitl, AztecTonalpohualli
-	//! TODO: ADD HERE: Chinese, NewHinduSolar, NewHinduLunar, Tibetan, ...
+	//! TODO: ADD HERE: Chinese, NewHinduSolar, NewHinduLunar, ...
 	Calendar* getCal(QString name);
 
 	//! to be called after program startup, when StelScriptMgr has been set up.
@@ -134,6 +135,7 @@ signals:
 	void showFrenchArithmeticChanged(bool b);
 	void showPersianArithmeticChanged(bool b);
 	void showPersianAstronomicalChanged(bool b);
+	void showTibetanChanged(bool b);
 
 public slots:
 	// Setters/getters
@@ -188,13 +190,15 @@ public slots:
 	bool isBalineseDisplayed() const;       //!< display Balinese Pawukon?
 	void showBalinese(bool b);	        //!< activate display of Balinese Pawukon
 	bool isFrenchAstronomicalDisplayed() const; //!< display French Astronomical?
-	void showFrenchAstronomical(bool b);	  //!< activate display of French Astronomical
+	void showFrenchAstronomical(bool b);	//!< activate display of French Astronomical
 	bool isFrenchArithmeticDisplayed() const; //!< display French Arithmetic?
-	void showFrenchArithmetic(bool b);	  //!< activate display of French Arithmetic
+	void showFrenchArithmetic(bool b);	//!< activate display of French Arithmetic
 	bool isPersianArithmeticDisplayed() const; //!< display Persian Arithmetic?
-	void showPersianArithmetic(bool b);	  //!< activate display of Persian Arithmetic
+	void showPersianArithmetic(bool b);	//!< activate display of Persian Arithmetic
 	bool isPersianAstronomicalDisplayed() const; //!< display Persian Astronomical?
-	void showPersianAstronomical(bool b);	  //!< activate display of Persian Astronomical
+	void showPersianAstronomical(bool b);	//!< activate display of Persian Astronomical
+	bool isTibetanDisplayed() const;        //!< display Tibetan?
+	void showTibetan(bool b);	        //!< activate display of Tibetan
 
 private:
 	// Font used for displaying text
@@ -240,6 +244,7 @@ private:
 	bool flagShowFrenchArithmetic;
 	bool flagShowPersianArithmetic;
 	bool flagShowPersianAstronomical;
+	bool flagShowTibetan;
 };
 
 

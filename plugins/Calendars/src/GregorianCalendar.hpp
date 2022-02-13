@@ -70,6 +70,10 @@ public slots:
 
 	//! @return RD of Gregorian new year
 	static int gregorianNewYear(int year) {return fixedFromGregorian({year, january, 1});}
+	//! @return RD of December 31 of gYear
+	static int gregorianYearEnd(int gYear){return fixedFromGregorian({gYear, december, 31});}
+	//! @return a QVector<int> with two elements: RD of Jan 1 and December 31 of gYear
+	static QVector<int> gregorianYearRange(int gYear){return {fixedFromGregorian({gYear, january, 1}), fixedFromGregorian({gYear, december, 31})};}
 
 	static int gregorianYearFromFixed(int rd);
 	//! return year-month-day for RD date
@@ -77,6 +81,7 @@ public slots:
 
 	//! @return RD date of the n-th k-day
 	static int nthKday(const int n, const Calendar::Day k, const int gYear, const int gMonth, const int gDay);
+
 
 public:
 	constexpr static const int gregorianEpoch=1;  //! RD of January 1, AD1 (greg).

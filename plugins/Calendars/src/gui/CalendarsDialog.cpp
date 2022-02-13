@@ -129,6 +129,7 @@ void CalendarsDialog::createDialogContent()
 	connectBoolProperty(ui->frenchArithmeticCheckBox,   "Calendars.flagShowFrenchArithmetic");
 	connectBoolProperty(ui->persianArithmeticCheckBox,  "Calendars.flagShowPersianArithmetic");
 	connectBoolProperty(ui->persianAstronomicalCheckBox,"Calendars.flagShowPersianAstronomical");
+	connectBoolProperty(ui->tibetanCheckBox,            "Calendars.flagShowTibetan");
 
 	// MAKE SURE to connect all part edit elements respective ...Changed() method here.
 	connect(ui->julianYearSpinBox,		SIGNAL(valueChanged(int)), this, SLOT(julianChanged()));
@@ -181,7 +182,7 @@ void CalendarsDialog::setAboutHtml(void)
 	html += "<p>" + q_("The Calendars plugin provides an interface to various calendars used around the world.") + "</p>";
 	html += "<ul><li>" + q_("Julian Calendar") + "</li>";
 	html += "<li>" + q_("Gregorian Calendar") + "</li>";
-	html += "<li>" + q_("Revised Julian Calendar (Milankovi&cacute;)") + "</li>";
+	html += "<li>" + q_("Revised Julian Calendar (Milankovi&#x107;)") + "</li>";
 	html += "<li>" + q_("ISO Weeks") + "</li>";
 	html += "<li>" + q_("Icelandic calendar") + "</li>";
 	html += "<li>" + q_("Roman (Julian) calendar") + "</li>";
@@ -200,9 +201,9 @@ void CalendarsDialog::setAboutHtml(void)
 	html += "<li>" + q_("Persian calendar (astronomical version)") + "</li>";
 
 //	html += "<li>" + q_("Chinese calendars") + "</li>";
-//	html += "<li>" + q_("Tibetan calendars") + "</li>";
 	html += "<li>" + q_("Old Hindu Solar and Lunar calendars") + "</li>";
 //	html += "<li>" + q_("New Hindu Solar and Lunar calendars") + "</li>";
+	html += "<li>" + q_("Tibetan (Phuglugs, Phug-pa, K&#x101;lacakra) calendar") + "</li>";
 	html += "<li>" + q_("Maya calendars") + "</li>";
 	html += "<li>" + q_("Aztec calendars") + "</li>";
 	html += "<li>" + q_("Balinese Pawukon calendar") + "</li>";

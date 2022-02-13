@@ -112,6 +112,19 @@ QVector<int> Calendar::toRadix(int num, QVector<int>radix)
 	return res;
 }
 
+// Intersect a collection of candidates against a range of values.
+// return a new QVector<int> with all elements from candidates which lie in range
+QVector<int> Calendar::intersectWithRange(QVector<int>cand, QVector<int>range)
+{
+	QVector<int>res;
+	for (int i=0; i<cand.length(); i++)
+	{
+		if ( (cand.value(i) >= range.value(0)) && (cand.value(i) <= range.value(1)) )
+			res.append(cand.value(i));
+	}
+	return res;
+}
+
 // DEFINITIONS FROM CHAPTER 14: ASTRONOMICAL CALENDARS
 // Crucial: Region MUST be full name - we cannot look up region codes in the tests!
 //                                       Name        country   region               long         lat           alt    popK  Timezone          Bortle Role

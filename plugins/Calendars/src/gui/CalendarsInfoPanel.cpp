@@ -66,6 +66,7 @@ CalendarsInfoPanel::CalendarsInfoPanel(Calendars* plugin,
 	connect (this->plugin, &Calendars::showHebrewChanged            , this, [=](bool){setHtml("a"); updatePosition();});
 	connect (this->plugin, &Calendars::showOldHinduSolarChanged     , this, [=](bool){setHtml("a"); updatePosition();});
 	connect (this->plugin, &Calendars::showOldHinduLunarChanged     , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showTibetanChanged           , this, [=](bool){setHtml("a"); updatePosition();});
 	connect (this->plugin, &Calendars::showMayaLongCountChanged     , this, [=](bool){setHtml("a"); updatePosition();});
 	connect (this->plugin, &Calendars::showMayaHaabChanged          , this, [=](bool){setHtml("a"); updatePosition();});
 	connect (this->plugin, &Calendars::showMayaTzolkinChanged       , this, [=](bool){setHtml("a"); updatePosition();});
