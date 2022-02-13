@@ -60,6 +60,7 @@ class Calendars : public StelModule
 	Q_PROPERTY(bool flagShowAztecXihuitl  READ isAztecXihuitlDisplayed  WRITE showAztecXihuitl  NOTIFY showAztecXihuitlChanged)
 	Q_PROPERTY(bool flagShowAztecTonalpohualli READ isAztecTonalpohualliDisplayed WRITE showAztecTonalpohualli NOTIFY showAztecTonalpohualliChanged)
 	Q_PROPERTY(bool flagShowBalinese      READ isBalineseDisplayed      WRITE showBalinese      NOTIFY showBalineseChanged)
+	Q_PROPERTY(bool flagShowFrenchAstronomical READ isFrenchAstronomicalDisplayed WRITE showFrenchAstronomical NOTIFY showFrenchAstronomicalChanged)
 	Q_PROPERTY(bool flagShowFrenchArithmetic   READ isFrenchArithmeticDisplayed   WRITE showFrenchArithmetic   NOTIFY showFrenchArithmeticChanged)
 	Q_PROPERTY(bool flagShowPersianArithmetic   READ isPersianArithmeticDisplayed   WRITE showPersianArithmetic   NOTIFY showPersianArithmeticChanged)
 	Q_PROPERTY(bool flagShowPersianAstronomical READ isPersianAstronomicalDisplayed WRITE showPersianAstronomical NOTIFY showPersianAstronomicalChanged)
@@ -129,6 +130,7 @@ signals:
 	void showAztecXihuitlChanged(bool b);
 	void showAztecTonalpohualliChanged(bool b);
 	void showBalineseChanged(bool b);
+	void showFrenchAstronomicalChanged(bool b);
 	void showFrenchArithmeticChanged(bool b);
 	void showPersianArithmeticChanged(bool b);
 	void showPersianAstronomicalChanged(bool b);
@@ -185,6 +187,8 @@ public slots:
 	void showAztecTonalpohualli(bool b);	//!< activate display of Aztec Tonalpohualli
 	bool isBalineseDisplayed() const;       //!< display Balinese Pawukon?
 	void showBalinese(bool b);	        //!< activate display of Balinese Pawukon
+	bool isFrenchAstronomicalDisplayed() const; //!< display French Astronomical?
+	void showFrenchAstronomical(bool b);	  //!< activate display of French Astronomical
 	bool isFrenchArithmeticDisplayed() const; //!< display French Arithmetic?
 	void showFrenchArithmetic(bool b);	  //!< activate display of French Arithmetic
 	bool isPersianArithmeticDisplayed() const; //!< display Persian Arithmetic?
@@ -232,6 +236,7 @@ private:
 	bool flagShowAztecXihuitl;
 	bool flagShowAztecTonalpohualli;
 	bool flagShowBalinese;
+	bool flagShowFrenchAstronomical;
 	bool flagShowFrenchArithmetic;
 	bool flagShowPersianArithmetic;
 	bool flagShowPersianAstronomical;

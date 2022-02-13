@@ -125,6 +125,7 @@ void CalendarsDialog::createDialogContent()
 	connectBoolProperty(ui->aztecXihuitlCheckBox,       "Calendars.flagShowAztecXihuitl");
 	connectBoolProperty(ui->aztecTonalpohualliCheckBox, "Calendars.flagShowAztecTonalpohualli");
 	connectBoolProperty(ui->balineseCheckBox,           "Calendars.flagShowBalinese");
+	connectBoolProperty(ui->frenchAstronomicalCheckBox, "Calendars.flagShowFrenchAstronomical");
 	connectBoolProperty(ui->frenchArithmeticCheckBox,   "Calendars.flagShowFrenchArithmetic");
 	connectBoolProperty(ui->persianArithmeticCheckBox,  "Calendars.flagShowPersianArithmetic");
 	connectBoolProperty(ui->persianAstronomicalCheckBox,"Calendars.flagShowPersianAstronomical");
@@ -193,6 +194,7 @@ void CalendarsDialog::setAboutHtml(void)
 
 	html += "<li>" + q_("Islamic Calendar (algorithmic)") + "</li>";
 	html += "<li>" + q_("Hebrew Calendar") + "</li>";
+	html += "<li>" + q_("French Revolution calendar (astronomical version of 1793)") + "</li>";
 	html += "<li>" + q_("French Revolution calendar (arithmetic version of 1795)") + "</li>";
 	html += "<li>" + q_("Persian calendar (arithmetic version)") + "</li>";
 	html += "<li>" + q_("Persian calendar (astronomical version)") + "</li>";

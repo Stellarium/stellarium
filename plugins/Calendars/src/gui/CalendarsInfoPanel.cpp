@@ -72,6 +72,7 @@ CalendarsInfoPanel::CalendarsInfoPanel(Calendars* plugin,
 	connect (this->plugin, &Calendars::showAztecXihuitlChanged      , this, [=](bool){setHtml("a"); updatePosition();});
 	connect (this->plugin, &Calendars::showAztecTonalpohualliChanged, this, [=](bool){setHtml("a"); updatePosition();});
 	connect (this->plugin, &Calendars::showBalineseChanged          , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showFrenchAstronomicalChanged, this, [=](bool){setHtml("a"); updatePosition();});
 	connect (this->plugin, &Calendars::showFrenchArithmeticChanged  , this, [=](bool){setHtml("a"); updatePosition();});
 	connect (this->plugin, &Calendars::showPersianArithmeticChanged , this, [=](bool){setHtml("a"); updatePosition();});
 	connect (this->plugin, &Calendars::showPersianAstronomicalChanged,this, [=](bool){setHtml("a"); updatePosition();});
