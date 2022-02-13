@@ -19,6 +19,7 @@
 #include "StelTranslator.hpp"
 #include "PersianAstronomicalCalendar.hpp"
 #include "JulianCalendar.hpp"
+#include "GregorianCalendar.hpp"
 #include "RomanCalendar.hpp"
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
@@ -93,4 +94,12 @@ int PersianAstronomicalCalendar::persianNewYearOnOrBefore(int rd)
 		lng=modInterval(solarLongitude(middayInTehran(day)), -180., 180.);
 	} while (lng<=static_cast<double>(Calendar::spring)); // +2. // It seems the +2 is erroneous!
 	return day;
+}
+
+// find RD number of Persian New Year (Nowruz)
+int PersianAstronomicalCalendar::nowruz(const int gYear)
+{
+	const int pYear=gYear-GregorianCalendar::gregorianYearFromFixed(persianEpoch)+1;
+	const int y = pYear<=0 ? pYear-1 : pYear;
+	return fixedFromPersianAstronomical({y, 1, 1});
 }

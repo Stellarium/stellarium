@@ -58,6 +58,9 @@ public slots:
 	//! find date in the Persian calendar from RD number
 	static QVector<int> persianArithmeticFromFixed(int rd);
 
+	//! find RD number of Persian New Year (Nowruz)
+	static int nowruz(const int gYear);
+
 protected:
 	static const int persianEpoch; //! RD of .
 	static QMap<int, QString> weekDayNames;

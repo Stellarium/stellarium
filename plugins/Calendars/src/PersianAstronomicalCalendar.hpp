@@ -67,6 +67,9 @@ public slots:
 	//! find vernal equinox on or before a given fixed (RD) date (CC:UE 15.4)
 	static int persianNewYearOnOrBefore(int rd);
 
+	//! find RD number of Persian New Year (Nowruz)
+	static int nowruz(const int gYear);
+
 protected:
 	//! location where solar observation is linked to
 	//static const StelLocation tehran; // CC:UE 15.2

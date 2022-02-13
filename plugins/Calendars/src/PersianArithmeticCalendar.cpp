@@ -19,6 +19,7 @@
 #include "StelTranslator.hpp"
 #include "PersianArithmeticCalendar.hpp"
 #include "JulianCalendar.hpp"
+#include "GregorianCalendar.hpp"
 #include "RomanCalendar.hpp"
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
@@ -157,4 +158,12 @@ QVector<int> PersianArithmeticCalendar::persianArithmeticFromFixed(int rd)
 	int day=rd - fixedFromPersianArithmetic({year, month, 1}) + 1;
 
 	return {year, month, day};
+}
+
+// find RD number of Persian New Year (Nowruz)
+int PersianArithmeticCalendar::nowruz(const int gYear)
+{
+	const int pYear=gYear-GregorianCalendar::gregorianYearFromFixed(persianEpoch)+1;
+	const int y = pYear<=0 ? pYear-1 : pYear;
+	return fixedFromPersianArithmetic({y, 1, 1});
 }
