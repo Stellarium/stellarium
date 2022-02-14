@@ -66,7 +66,6 @@ public:
 protected:
 	static QMap<int, QString> monthNames;
 	static QMap<int, QString> dayNames;
-
 };
 
 #endif

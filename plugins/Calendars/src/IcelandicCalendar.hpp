@@ -73,11 +73,11 @@ public slots:
 	static int icelandicSummer(int iyear);
 	//! find RD of begin of winter for Icelandic (Gregorian) year.
 	static int icelandicWinter(int iyear){ return icelandicSummer(iyear+1)-180; }
+
 public:
 	static const int icelandicEpoch;  //! RD of April 19, AD1 (Gregorian).
 
 protected:
-
 	static QMap<int, QString> weekDayNames;
 	static QMap<int, QString> monthNames;
 };

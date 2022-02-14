@@ -74,7 +74,6 @@ protected:
 	//! location where solar observation is linked to
 	//static const StelLocation tehran; // CC:UE 15.2
 	static const StelLocation isfahan; // CC:UE 15.2 alternative
-
 };
 
 #endif

@@ -477,7 +477,6 @@ protected:
 	static constexpr double meanSynodicMonth=29.530588861;  //!< (CC:UE 14.44)
 	static constexpr bool morning=true;  //!< CC:UE 14.71
 	static constexpr bool evening=false; //!< CC:UE 14.73
-
 };
 
 #endif

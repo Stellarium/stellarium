@@ -927,8 +927,6 @@ double Calendar::approxMomentOfDepression(double rd_loc, double alpha, bool earl
 	}
 	else
 		return bogus;
-
-
 }
 // return sine of ... (CC:UE 14.69)
 double Calendar::sineOffset(double rd_loc, double alpha, const StelLocation &loc)
