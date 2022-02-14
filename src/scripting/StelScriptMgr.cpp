@@ -295,38 +295,6 @@ QScriptValue createVec3d(QScriptContext* context, QScriptEngine *engine)
 	return vec3dToScriptValue(engine, c);
 }
 
-/*
-Q_DECLARE_METATYPE(QVector<int>)
-// FIXME:
-// - working versions and integration of QVector<int>
-// - Scriptable conversions of StelLocation
-
-
-void vecIntFromScriptValue(const QScriptValue& obj, QVector<int>& v)
-{
-	QString s=obj.toString().trimmed();
-	s=s.remove(0, 1);
-	s.chop(1);
-	QStringList list=s.split(',');
-	for (auto &str : list)
-	{
-		v.append(str.toInt());
-	}
-}
-QScriptValue vecIntToScriptValue(QScriptEngine *engine, const QVector<int>& v)
-{
-	Q_UNUSED(engine)
-	QString str("[");
-	for (QVector<int>::const_iterator it=v.constBegin(); it!=v.constEnd(); it++)
-	{
-		str.append(QString(" %1").arg(*it));
-	}
-	str.append("]");
-	return str;
-}
-*/
-
-
 class StelScriptEngineAgent : public QScriptEngineAgent
 {
 public:
@@ -370,8 +338,6 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 
 	// This is enough for a simple Array access for a QVector<int> input or return type (e.g. Calendars plugin)
 	qScriptRegisterSequenceMetaType<QVector<int>>(engine);
-	// The converters are not good currently. Maybe also really not required!
-	//qScriptRegisterMetaType(engine, vecIntToScriptValue, vecIntFromScriptValue);
 
 	// Add the core object to access methods related to core
 	mainAPI = new StelMainScriptAPI(this);
