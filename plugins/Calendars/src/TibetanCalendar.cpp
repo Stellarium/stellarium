@@ -163,7 +163,7 @@ void TibetanCalendar::setJD(double JD)
 }
 
 // get a stringlist of calendar date elements sorted from the largest to the smallest.
-// Year, Month, MonthName, Day, WeekDayName
+// Year, Month, MonthName, "leap"|"", Day, "leap"|"", WeekDayName
 QStringList TibetanCalendar::getDateStrings() const
 {
 	const int rd=fixedFromTibetan(parts);
@@ -174,9 +174,9 @@ QStringList TibetanCalendar::getDateStrings() const
 	list << QString::number(parts.at(0));            // 0:year
 	list << QString::number(parts.at(1));            // 1:month
 	list << monthNames.value(parts.at(1), "error");  // 2:monthName
-	list << (parts.at(2)==1 ? "leapmonth" : "regular"); // 3: leap?
+	list << (parts.at(2)==1 ? qc_("leap", "calendar term like leap year or leap day") : ""); // 3: leap? (only if leap)
 	list << QString::number(parts.at(3));            // 4:day
-	list << (parts.at(4)==1 ? "leapday" : "regular");// 5:leap?
+	list << (parts.at(4)==1 ? qc_("leap", "calendar term like leap year or leap day") : ""); // 5: leap? (only if leap)
 	list << weekDayNames.value(dow);                 // 6:weekday
 
 	return list;
@@ -192,10 +192,10 @@ QString TibetanCalendar::getFormattedDateString() const
 	return QString("%1, %2<sub>%3</sub> - %4 (%5)<sub>%6</sub> - %7 %8").arg(
 				str.at(6), // 1 weekday
 				str.at(4), // 2 day
-				str.at(5), // 3 dayLeap
+				str.at(5), // 3 dayLeap (only displayed when indeed a leap day)
 				str.at(1), // 4 monthNum
 				str.at(2), // 5 monthName
-				str.at(3), // 6 monthLeap?
+				str.at(3), // 6 monthLeap (only displayed when indeed a leap month)
 				str.at(0), // 7 year
 				epoch);    // 8 epoch
 }
@@ -272,23 +272,14 @@ QVector<int> TibetanCalendar::tibetanFromFixed(int rd)
 // return Tibetan Sun Equation, interpolation scheme of 12 discrete values (CC:UE 21.2)
 // input alpha from [0...12]
 double TibetanCalendar::tibetanSunEquation(const double alpha)
-{ // This function use recursion, but should still be safe.
-	//static int calls=0;
-	//calls++;
-	//qDebug() << "Scalls" << calls << "for alpha=" << alpha;
+{
 	if (alpha>6.) {
-	//	qDebug() << "alpha>6";
 		return -tibetanSunEquation(alpha-6.);
 	}
 	if (alpha>3.) {
-	//	qDebug() << "alpha>3";
 		return tibetanSunEquation(6.-alpha);
 	}
-
-	//qDebug() << "found alpha" << alpha;
-
 	static const QMap<double,double>map({{0.,0.}, {1.,6./60.}, {2.,10./60.}, {3.,11./60.}});
-	//calls--;
 
 	// It seems we cannot lookup double indices in a QMap.
 	double res=0;
@@ -304,23 +295,17 @@ double TibetanCalendar::tibetanSunEquation(const double alpha)
 			   StelUtils::fmodpos(alpha, 1.)*tibetanSunEquation(ceil(alpha)) +
 			   StelUtils::fmodpos(-alpha, 1.)*tibetanSunEquation(floor(alpha))
 			   );
-	//qDebug() << "found res" << res << "for alpha" << alpha;
 	return res;
 }
 // return Tibetan Moon Equation, one of 28 discrete values (CC:UE 21.3)
 // input alpha from [0...28]
 double TibetanCalendar::tibetanMoonEquation(const double alpha)
-{ // This function use recursion, but should still be safe.
-	//static int calls=0;
-	//calls++;
-	//qDebug() << "Mcalls" << calls << "for alpha=" << alpha;
+{
 	if (alpha>14.) return -tibetanMoonEquation(alpha-14.);
 	if (alpha> 7.) return tibetanMoonEquation(14.-alpha);
 
 	static const QMap<double,double>map({{0.,0.},      {1.,5./60.},  {2.,10./60.}, {3.,15./60.},
 					     {4.,19./60.}, {5.,22./60.}, {6.,24./60.}, {7.,25./60.}});
-	//calls--;
-
 	double res=0;
 	if (qFuzzyCompare(alpha, 0.))
 		res=map.value(0.);
@@ -344,7 +329,6 @@ double TibetanCalendar::tibetanMoonEquation(const double alpha)
 			   );
 	return res;
 }
-
 
 // Holidays
 // return true for a Tibetan leap month (CC:UE 21.6)

@@ -28,6 +28,8 @@
 //! Months are lunar with lengths of 29 or 30 days. Leap months precede their "ordinary" months.
 //!
 //! Our implementation uses a 5-part QVector<int> {year, month, leap-month, day, leap-day}
+//!
+//! @todo Also derive the Hindu elements like Nakshatras, when Hindu calendars have been done.
 class TibetanCalendar : public Calendar
 {
 	Q_OBJECT
@@ -48,7 +50,8 @@ public slots:
 	virtual void setDate(QVector<int> parts) Q_DECL_OVERRIDE;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
-	//! Year, Month, MonthName, Day, DayName
+	//! {Year, Month, MonthName, "leap"|"", Day, "leap"|"", WeekDayName}
+	//! The words "leap" (translated) are only given if the respective element before (month or day) are leap. Else an empty string is given.
 	virtual QStringList getDateStrings() const Q_DECL_OVERRIDE;
 
 	//! get a formatted complete string for a date
