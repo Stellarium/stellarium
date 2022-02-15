@@ -21,6 +21,10 @@
 
 #include "JulianCalendar.hpp"
 
+//! @class GregorianCalendar
+//! Functions for the Gregorian calendar
+//! @author Georg Zotti
+//! @ingroup calendars
 //! Stellarium uses Julian Day numbers internally, and the conventional approach of using the Gregorian calendar for dates after 1582-10-15.
 //! For dates before that, the Julian calendar is used, in the form finalized by Augustus and running unchanged since 8AD.
 //! Some European countries, especially the Protestant countries, delayed the calendar switch well into the 18th century.

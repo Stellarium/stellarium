@@ -32,7 +32,42 @@
 class CalendarsDialog;
 class StelButton;
 
-//! Calendars plugin provides an interface to various calendars
+/*! @defgroup calendars Calendars Plug-in
+@{
+The Calendars plugin provides an interface to various calendars
+
+The primary source of this plugin is the book "Calendrical Calculations: The Ultimate Edition"
+by Edward M. Reingold and Nachum Dershowitz (2018). It comtains algorithmic descriptions of dozens of calendars,
+most of which should make their way into this plugin.
+
+This book describes data conversion from and to calendars, using not the commonly used Julian Day number, but an intermediate
+number called Rata Die (R.D.), days counted from midnight of (proleptic) 1.1. of year 1 AD (Gregorian).
+
+For the user, a simple selection GUI allows choosing which calendars should be displayed in the lower-right screen corner.
+Some more GUI tabs allow interaction with selected calendars.
+
+A potentially great feature for owners of the book is that most functions from the book are available as scripting functions for the respective calendars.
+
+Examples:
+
+core.output(JulianCalendar.isLeap(1700));
+core.output(GregorianCalendar.isLeap(1700));
+rd=GregorianCalendar.fixedFromGregorian{[2021, 3, 14]);
+
+Take care that some data arguments are internally stored as QVector<int>, and translated to Arrays in ECMAscript.
+The various calendars may have array lengths of elements, which are not always checked.
+When a StelLocation argument is used in the internal function, a scripting function is available which allows specifying
+a location name in format "city, region". This also works with user-specified locations.
+Time zones only work correctly when specified (in the location database) as full specification like "Europe/Madrid", not "UT+4".
+
+@}
+*/
+
+//! @class Calendars
+//! StelModule plugin which provides display and a scripting interface to a multitude of calendrical functions.
+//! @author Georg Zotti
+//! @ingroup calendars
+
 class Calendars : public StelModule
 {
 	Q_OBJECT

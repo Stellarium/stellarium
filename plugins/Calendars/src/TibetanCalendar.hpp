@@ -21,6 +21,10 @@
 
 #include "Calendar.hpp"
 
+//! @class TibetanCalendar
+//! Functions for the Tibetan calendar
+//! @author Georg Zotti
+//! @ingroup calendars
 //! The Tibetan Phuglugs/Phug-pa version of the Kalacakra (Wheel of Time) calendar is similar
 //! tot he Hindu Lunisolar calendars, described as between the arithmetic simplicity of the old Hindu and the
 //! astronomical complexity of the modern Hindu. Astronomical events are calculated in local time

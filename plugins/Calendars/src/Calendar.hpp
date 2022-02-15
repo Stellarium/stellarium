@@ -27,7 +27,11 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 
+//! @class Calendar
 //! Superclass for all calendars, capable of a multitude of astronomical calculations.
+//! @author Georg Zotti
+//! @ingroup calendars
+//!
 //! Stellarium uses Julian Day numbers internally, and the conventional approach of using the Gregorian calendar for dates after 1582-10-15.
 //! For dates before that, the Julian calendar is used, in the form finalized by Augustus and running unchanged since 8AD.
 //! Astronomical year counting implies having a year 0, while some calendars adhere to historical counting like 1 B.C., 1 A.D.
