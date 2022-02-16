@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>562</width>
-    <height>419</height>
+    <width>606</width>
+    <height>444</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -171,7 +171,7 @@
          <item row="9" column="1">
           <widget class="QCheckBox" name="newHinduLunarCheckBox">
            <property name="text">
-            <string>New Hindu Lunar</string>
+            <string comment="calendar">New Hindu Lunar</string>
            </property>
           </widget>
          </item>
@@ -199,7 +199,7 @@
          <item row="9" column="0">
           <widget class="QCheckBox" name="newHinduSolarCheckBox">
            <property name="text">
-            <string>New Hindu Solar</string>
+            <string comment="calendar">New Hindu Solar</string>
            </property>
           </widget>
          </item>
@@ -213,7 +213,7 @@
          <item row="8" column="0">
           <widget class="QCheckBox" name="oldHinduSolarCheckBox">
            <property name="text">
-            <string>Old Hindu Solar</string>
+            <string comment="calendar">Old Hindu Solar</string>
            </property>
           </widget>
          </item>
@@ -255,7 +255,7 @@
          <item row="8" column="1">
           <widget class="QCheckBox" name="oldHinduLunarCheckBox">
            <property name="text">
-            <string>Old Hindu Lunar</string>
+            <string comment="calendar">Old Hindu Lunar</string>
            </property>
           </widget>
          </item>
@@ -311,7 +311,7 @@
          <item row="1" column="0">
           <widget class="QCheckBox" name="revisedJulianCheckBox">
            <property name="text">
-            <string>Revised Julian</string>
+            <string comment="calendar">Revised Julian</string>
            </property>
           </widget>
          </item>
@@ -325,35 +325,35 @@
          <item row="5" column="1">
           <widget class="QCheckBox" name="persianArithmeticCheckBox">
            <property name="text">
-            <string>Persian (arithmetic)</string>
+            <string comment="calendar">Persian (arithmetic)</string>
            </property>
           </widget>
          </item>
          <item row="5" column="2">
           <widget class="QCheckBox" name="persianAstronomicalCheckBox">
            <property name="text">
-            <string>Persian (astronomical)</string>
+            <string comment="calendar">Persian (astronomical)</string>
            </property>
           </widget>
          </item>
          <item row="4" column="1">
           <widget class="QCheckBox" name="frenchArithmeticCheckBox">
            <property name="text">
-            <string>French Revolution (arithmetic)</string>
+            <string comment="calendar">French Revolution (arithmetic)</string>
            </property>
           </widget>
          </item>
          <item row="4" column="0">
           <widget class="QCheckBox" name="frenchAstronomicalCheckBox">
            <property name="text">
-            <string>French Revolution (astronomical)</string>
+            <string comment="calendar">French Revolution (astronomical)</string>
            </property>
           </widget>
          </item>
          <item row="9" column="2">
           <widget class="QCheckBox" name="tibetanCheckBox">
            <property name="text">
-            <string>Tibetan</string>
+            <string comment="calendar">Tibetan</string>
            </property>
           </widget>
          </item>
@@ -634,7 +634,7 @@
          <item row="2" column="0">
           <widget class="QLabel" name="labelRevisedJulianCalendar">
            <property name="text">
-            <string>Revised Julian</string>
+            <string comment="calendar">Revised Julian</string>
            </property>
           </widget>
          </item>
