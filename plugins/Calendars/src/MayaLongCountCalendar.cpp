@@ -45,11 +45,11 @@ void MayaLongCountCalendar::setJD(double JD)
 QStringList MayaLongCountCalendar::getDateStrings() const
 {
 	QStringList list;
-	list << QString::number(parts.at(0));
-	list << QString::number(parts.at(1));
-	list << QString::number(parts.at(2));
-	list << QString::number(parts.at(3));
-	list << QString::number(parts.at(4));
+	list << QString::number(parts.value(0));
+	list << QString::number(parts.value(1));
+	list << QString::number(parts.value(2));
+	list << QString::number(parts.value(3));
+	list << QString::number(parts.value(4));
 
 	return list;
 }
@@ -81,11 +81,11 @@ void MayaLongCountCalendar::setDate(QVector<int> parts)
 //! get RD date from Long Count date
 int MayaLongCountCalendar::fixedFromMayanLongCount(QVector<int> longCount)
 {
-	const int baktun=longCount.at(0);
-	const int katun =longCount.at(1);
-	const int tun   =longCount.at(2);
-	const int uinal =longCount.at(3);
-	const int kin   =longCount.at(4);
+	const int baktun=longCount.value(0);
+	const int katun =longCount.value(1);
+	const int tun   =longCount.value(2);
+	const int uinal =longCount.value(3);
+	const int kin   =longCount.value(4);
 
 	return mayanEpoch+baktun*144000+katun*7200+tun*360+uinal*20+kin;
 }

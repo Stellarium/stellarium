@@ -102,7 +102,7 @@ void AztecXihuitlCalendar::setDate(QVector<int> parts)
 {
 	this->parts=parts;
 
-	const int rdOnOrBefore=aztecXihuitlOnOrBefore(parts, fixedFromJD(JD));
+	const int rdOnOrBefore=aztecXihuitlOnOrBefore(parts, fixedFromJD(JD, true));
 
 	// restore time from JD!
 	double frac=StelUtils::fmodpos(JD+0.5+StelApp::getInstance().getCore()->getUTCOffset(JD)/24., 1.);

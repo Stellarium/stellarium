@@ -114,7 +114,7 @@ StelLocation StelLocation::createFromLine(const QString& rawline)
 	loc.region = getRegionFromCode(splitline.at(2).trimmed());
 	loc.role    = splitline.at(3).at(0).toUpper();
 	if (loc.role.isNull())
-		loc.role = QChar(0x0058); // char 'X'
+		loc.role = 'X';
 	loc.population = static_cast<int> (splitline.at(4).toFloat()*1000);
 
 	const QString& latstring = splitline.at(5).trimmed();

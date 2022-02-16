@@ -1759,12 +1759,12 @@ double getDeltaTByReingoldDershowitz(const double jDay)
 	if ((year>= 2051) && (year <= 2150))
 	{
 		// [2051..2150]
-		double x = (year-1820)/100.;
-		deltaT = (- 20 + 32*x*x + 0.5628*(2150-year));
+		const double x = (year-1820)/100.;
+		deltaT = -20 + 32*x*x + 0.5628*(2150-year);
 	}
 	else if ((year >= 1987) && (year <= 2050))
 	{
-		int y2000 = year-2000;
+		const int y2000 = year-2000;
 		if (year>=2006) // [2006..2050]
 		{
 			deltaT = ((0.005589*y2000 + 0.32217)*y2000 + 62.92);
@@ -1776,9 +1776,7 @@ double getDeltaTByReingoldDershowitz(const double jDay)
 	}
 	else if ((year >= 1800) && (year <= 1986))
 	{
-		// FIXME: This part should be check because this part gives the strange values of DeltaT (see unit tests)
-		double c = (getFixedFromGregorian(1900, 1, 1)-getFixedFromGregorian(year, 7, 1))/36525.;
-
+		const double c = (getFixedFromGregorian(year, 7, 1)-getFixedFromGregorian(1900, 1, 1))/36525.;
 		if (year >= 1900) // [1900..1986]
 		{
 			deltaT = ((((((-0.212591*c + 0.677066)*c - 0.861938)*c + 0.553040)*c - 0.181133)*c + 0.025184)*c + 0.000297)*c - 0.00002;
@@ -1792,31 +1790,31 @@ double getDeltaTByReingoldDershowitz(const double jDay)
 	else if ((year>=1700) && (year<=1799))
 	{
 		// [1700..1799]
-		int y1700 = year-1700;
+		const int y1700 = year-1700;
 		deltaT = (((-0.0000266484*y1700 + 0.003336121)*y1700 - 0.005092142)*y1700 + 8.118780842);
 	}
 	else if ((year>=1600) && (year<=1699))
 	{
 		// [1600..1699]
-		int y1600 = year-1600;
-		deltaT = (((0.000140272128*y1600 - 0.01532)*y1600 - 0.9808)*y1600 + 120);
+		const int y1600 = year-1600;
+		deltaT = (((0.000140272128*y1600 - 0.01532)*y1600 - 0.9808)*y1600 + 120.);
 	}
 	else if ((year>=500) && (year<=1599))
 	{
 		// [500..1599]
-		double y1000 = (year-1000)/100.;
+		const double y1000 = (year-1000)/100.;
 		deltaT = ((((((0.0083572073*y1000 - 0.005050998)*y1000 - 0.8503463)*y1000 + 0.319781)*y1000 + 71.23472)*y1000 - 556.01)*y1000 + 1574.2);
 	}
 	else if ((year>-500) && (year<500))
 	{
 		// (-500..500)
-		double y0 = year/100.;
+		const double y0 = year/100.;
 		deltaT = ((((((0.0090316521*y0 + 0.022174192)*y0 - 0.1798452)*y0 - 5.952053)*y0 + 33.78311)*y0 - 1014.41)*y0 + 10583.6);
 	}
 	else
 	{
 		// otherwise
-		double x = (year-1820)/100.;
+		const double x = (year-1820)/100.;
 		deltaT = (-20 + 32*x*x);
 	}
 
@@ -2363,10 +2361,15 @@ float *ComputeCosSinRhoZone(const float dRho, const unsigned int segments, const
 
 int getFixedFromGregorian(const int year, const int month, const int day)
 {
+	bool leap = false;
+	if (year % 100 == 0)
+		leap = (year % 400 == 0);
+	else
+		leap = (year % 4 == 0);
 	int y = year - 1;
 	int r = 365*y + intFloorDiv(y, 4) - intFloorDiv(y, 100) + intFloorDiv(y, 400) + (367*month-362)/12 + day;
 	if (month>2)
-		r += (isLeapYear(year) ? -1 : -2);
+		r += (leap ? -1 : -2);
 
 	return r;
 }

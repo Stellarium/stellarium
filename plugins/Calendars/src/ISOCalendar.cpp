@@ -31,7 +31,7 @@ void ISOCalendar::setJD(double JD)
 {
 	this->JD=JD;
 
-	const int rd=fixedFromJD(JD);
+	const int rd=fixedFromJD(JD, true);
 
 	parts=isoFromFixed(rd);
 
@@ -83,9 +83,9 @@ QString ISOCalendar::getFormattedDateString() const
 
 int ISOCalendar::fixedFromISO(QVector<int> iso)
 {
-	const int year=iso.at(0);
-	const int week=iso.at(1);
-	const int day=iso.at(2);
+	const int year=iso.value(0);
+	const int week=iso.value(1);
+	const int day= iso.value(2);
 
 	return nthKday(week, sunday, year-1, december, 28)+day;
 }

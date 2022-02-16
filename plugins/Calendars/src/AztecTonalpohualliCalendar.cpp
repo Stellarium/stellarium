@@ -91,7 +91,7 @@ void AztecTonalpohualliCalendar::setDate(QVector<int> parts)
 {
 	this->parts=parts;
 
-	const int rdOnOrBefore=aztecTonalpohualliOnOrBefore(parts, fixedFromJD(JD));
+	const int rdOnOrBefore=aztecTonalpohualliOnOrBefore(parts, fixedFromJD(JD, true));
 	// restore time from JD!
 	double frac=StelUtils::fmodpos(JD+0.5+StelApp::getInstance().getCore()->getUTCOffset(JD)/24., 1.);
 	JD=jdFromFixed(rdOnOrBefore+frac, true);

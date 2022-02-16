@@ -150,9 +150,11 @@ in some calendars) \emph{epagomenae} days, with different \emph{calendar eras}.
   A.D. Years begin at the Vernal equinox (\emph{nowruz}) and follow a
   complicated leap year cycle of 2820 years. Days begin at midnight
   (zone time). An identical calendar with different month names was
-  adopted in Afghanistan in 1957. The current implementation gives the
-  algorithmic version which occasionally deviates from the
-  astronomical version by 1 day.
+  adopted in Afghanistan in 1957.
+
+  Stellarium provides both versions:\newFeature{0.22.0} the algorithmic version and the
+  astronomically specified one. They occasionally deviate from each
+  other by 1 day.
 \end{description}
 
 \subsubsection{Near Eastern calendars}
@@ -240,7 +242,7 @@ Several more calendars \newFeature{0.21.0} have been worked out in algorithmic f
 \subsubsection{French Revolution calendar}
 The French Revolution of 1789 brought also a calendar reform. After a
 few years with different year count only, a new calendar was
-introduced effective on November 24, 1793 (4. Frimaire, II). This was
+introduced effective on November 24, 1793 (4. Frimaire, II).\newFeature{0.22.0} This was
 based on an astronomical determination of the autumnal equinox at
 Paris, which marked the start of the years.
 
@@ -252,17 +254,25 @@ alluded to the climate or vegetation.
 In 1795, \newFeature{0.21.0} an arithmetic version was proposed which
 got rid of the difficult astronomical computation with a leap year
 scheme similar to the Gregorian. However, this version of the calendar
-never came into use.  Stellarium currently shows this calendar, which
-may be off by 1 day.
+never came into use.  Stellarium also shows this calendar, which
+may be off from the original by 1 day.
 
 With the end of Gregorian year 1805, the calendar was abolished, but
 re-introduced for a few days in May 1871.
 
-\subsection{Further development}
-The plugin is in an early phase of development. More calendars will be
-added in later versions, and formatting and setting options may be
-improved.
+\subsection{Scripting}
 
+Advanced users who have the book at hand may find it useful
+that\newFeature{0.22.0} almost all functions from
+\cite{Reingold-Dershowitz:2018} (as far as the implementation of the
+described calendars has come) are available as scripting
+functions. Whenever a location is needed, you can try to read a
+location from the location database by giving a location like
+``Vienna, Austria'' or ``Madrid, Western Europe'' (this should also
+work for user-specified locations. Take care to use a ``real'' name
+for the timezone, not just ``UT+3'', else timezone will be read as
+zero. Full documentation for this can be found at
+\url{https://stellarium.org/doc/head/group__calendars.html}.
 
 \subsection{Configuration Options}
 \label{sec:plugin:Calendars:configuration}
@@ -292,24 +302,31 @@ show\_armenian               &bool & true\\
 show\_zoroastrian            &bool & true\\
 show\_coptic                 &bool & true\\
 show\_ethiopic               &bool & true\\
-%show\_persian               &bool & true\\
+show\_persian\_astronomical  &bool & true\\
 show\_persian\_arithmetic    &bool & true\\\midrule
 show\_islamic                &bool & true\\
 show\_hebrew                 &bool & true\\\midrule
 show\_old\_hindu\_solar      &bool & true\\
-show\_old\_hindu\_lunlar     &bool & true\\
+show\_old\_hindu\_lunar      &bool & true\\
 %show\_new\_hindu\_solar     &bool & true\\
-%show\_new\_hindu\_lunlar    &bool & true\\
+%show\_new\_hindu\_lunar     &bool & true\\
+show\_tibetan                &bool & true\\
 show\_balinese\_pawukon      &bool & true\\\midrule
 show\_maya\_long\_count      &bool & true\\
 show\_maya\_haab             &bool & true\\
 show\_maya\_tzolkin          &bool & true\\
 show\_aztec\_tonalpohualli   &bool & true\\
 show\_aztec\_xihuitl         &bool & true\\\midrule
-%show\_french\_revolution     &bool & true\\
+show\_french\_astronomical   &bool & true\\
 show\_french\_arithmetic     &bool & true\\\bottomrule
 %show\_chinese                &bool & false\\
 \end{longtable}
+
+\subsection{Further development}
+The plugin is in an early phase of development. More calendars will be
+added in later versions, and formatting and setting options may be
+improved. Members of non-European cultures are invited to suggest
+better formatting for their calendars!
 
 \subsection{Acknowledgments}
 

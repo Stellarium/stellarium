@@ -21,6 +21,10 @@
 
 #include "Calendar.hpp"
 
+//! @class JulianCalendar
+//! Functions for the Julian calendar
+//! @author Georg Zotti
+//! @ingroup calendars
 //! Stellarium uses Julian Day numbers internally, and the conventional approach of using the Gregorian calendar for dates after 1582-10-15.
 //! For dates before that, the Julian calendar is used, in the form finalized by Augustus and running unchanged since 8AD.
 //! Some European countries, especially the Protestant countries, delayed the calendar switch well into the 18th century.
@@ -56,7 +60,6 @@ public slots:
 	//! get a formatted complete string for a date
 	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
-public:
 	//! return name of week day. This is actually independent from any calendar, just a modulo of JD.
 	static QString weekday(double jd);
 
@@ -68,6 +71,7 @@ public:
 	//! find date in the Julian calendar from RD number (may be used in other calendars!)
 	static QVector<int> julianFromFixed(int rd);
 
+public:
 	constexpr static const int julianEpoch=-1; //! RD of January 1, AD1 (jul.).
 
 protected:

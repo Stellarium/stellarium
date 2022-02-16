@@ -45,7 +45,6 @@ public slots:
 	//! Year-Month[1...12]-Day[1...31]
 	virtual void setDate(QVector<int> parts) Q_DECL_OVERRIDE;
 
-public:
 	//! returns true for leap years. We handle years prior to 325 like in the regular Julian calendar.
 	static bool isLeap(int year);
 
@@ -55,6 +54,7 @@ public:
 	//! the returned date is in the standard Julian Calendar.
 	static QVector<int> revisedJulianFromFixed(int rd);
 
+public:
 	constexpr static const int revisedJulianEpoch=1; //! RD of January 1, AD1.
 };
 

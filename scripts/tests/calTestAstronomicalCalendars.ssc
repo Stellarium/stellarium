@@ -1,0 +1,79 @@
+// Test Astronomical Calendars. Regular QTesting impossible because we need a StelCore for this.
+// (c) 2022 Georg Zotti
+// This is for the Calendars plugin
+
+const data=[  // PersianAstro    FrenchAstro
+	[ -214193, [-1208,  5,  1], [-2378, 11,  5]],
+	[  -61387, [ -790,  9, 14], [-1959,  3, 14]],
+	[   25469, [ -552,  7,  2], [-1721,  1,  2]],
+	[   49217, [ -487,  7,  9], [-1656,  1, 10]],
+	[  171307, [ -153, 10, 19], [-1322,  4, 19]],
+	[  210155, [  -46,  2, 31], [-1216,  9,  1]],
+	[  253427, [   73,  8, 19], [-1097,  2, 19]],
+	[  369740, [  392,  2,  5], [ -779,  8,  5]],
+	[  400085, [  475,  3,  4], [ -696,  9,  5]],
+	[  434355, [  569,  1,  3], [ -602,  7,  2]],
+	[  452605, [  618, 12, 20], [ -552,  6, 20]],
+	[  470160, [  667,  1, 14], [ -504,  7, 13]],
+	[  473837, [  677,  2,  8], [ -494,  8,  8]],
+	[  507850, [  770,  3, 22], [ -401,  9, 23]],
+	[  524156, [  814, 11, 13], [ -356,  5, 14]],
+	[  544676, [  871,  1, 21], [ -300,  7, 20]],
+	[  567118, [  932,  6, 28], [ -239, 13,  2]],
+	[  569477, [  938, 12, 14], [ -232,  6, 15]],
+	[  601716, [ 1027,  3, 21], [ -144,  9, 22]],
+	[  613424, [ 1059,  4, 10], [ -112, 10, 12]],
+	[  626596, [ 1095,  5,  2], [  -76, 11,  6]],
+	[  645554, [ 1147,  3, 30], [  -24, 10,  1]],
+	[  664224, [ 1198,  5, 10], [   27, 11, 14]],
+	[  671401, [ 1218,  1,  7], [   47,  7,  6]],
+	[  694799, [ 1282,  1, 29], [  111,  7, 28]],
+	[  704424, [ 1308,  6,  3], [  137, 12,  7]],
+	[  708842, [ 1320,  7,  7], [  150,  1,  7]],
+	[  709409, [ 1322,  1, 29], [  151,  7, 29]],
+	[  709580, [ 1322,  7, 14], [  152,  1, 15]],
+	[  727274, [ 1370, 12, 27], [  200,  6, 27]],
+	[  728714, [ 1374, 12,  6], [  204,  6,  6]],
+	[  744313, [ 1417,  8, 19], [  247,  2, 20]],
+	[  764652, [ 1473,  4, 28], [  302, 10, 30]]
+];
+
+core.output("Testing PersianAstronomicalCalendar::fixedFromPersianAstronomical()");
+for (i=0; i<data.length; i++){
+	rd=data[i][0];
+	pDate=data[i][1];
+
+	resRD=PersianAstronomicalCalendar.fixedFromPersianAstronomical(pDate);
+	if(rd == resRD){core.output("OK")} else {core.output("ERR:" + rd + " != " + resRD)};
+}
+
+core.output("Testing PersianAstronomicalCalendar::persianAstronomicalFromFixed()");
+for (i=0; i<data.length; i++){
+	rd=data[i][0];
+	pDate=data[i][1];
+
+	resDate = PersianAstronomicalCalendar.persianAstronomicalFromFixed(rd);
+	// if(pDate == resDate){core.output("OK")} else {core.output("ERR:" + pDate + " != " + resDate)};
+	// Compare algorithm for simple arrays from https://stackoverflow.com/questions/7837456/how-to-compare-arrays-in-javascript
+	if (pDate.length === resDate.length && pDate.every(function(value, index) { return value === resDate[index]})){core.output("OK")} else {core.output("ERR:" + pDate + " != " + resDate)};	
+}
+
+core.output("Testing FrenchAstronomicalCalendar::fixedFromFrenchAstronomical()");
+for (i=0; i<data.length; i++){
+	rd=data[i][0];
+	pDate=data[i][2];
+
+	resRD=FrenchAstronomicalCalendar.fixedFromFrenchAstronomical(pDate);
+	if(rd == resRD){core.output("OK")} else {core.output("ERR:" + rd + " != " + resRD)};
+}
+
+core.output("Testing FrenchAstronomicalCalendar::frenchAstronomicalFromFixed()");
+for (i=0; i<data.length; i++){
+	rd=data[i][0];
+	pDate=data[i][2];
+
+	resDate = FrenchAstronomicalCalendar.frenchAstronomicalFromFixed(rd);
+	// if(pDate == resDate){core.output("OK")} else {core.output("ERR:" + pDate + " != " + resDate)};
+	// Compare algorithm for simple arrays from https://stackoverflow.com/questions/7837456/how-to-compare-arrays-in-javascript
+	if (pDate.length === resDate.length && pDate.every(function(value, index) { return value === resDate[index]})){core.output("OK")} else {core.output("ERR:" + pDate + " != " + resDate)};	
+}

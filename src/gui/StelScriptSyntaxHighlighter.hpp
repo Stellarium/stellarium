@@ -29,6 +29,10 @@
 
 class QTextDocument;
 
+//! This class is used to colorize the ECMAScript syntax elements in the Scripting Console.
+//! It marks keywords, function names, literals, etc.
+//! All StelModules and public slots from StelModules are colorized.
+//! Single non-module objects registered with the StelScriprMgr are not highlighted, but their methods are.
 class StelScriptSyntaxHighlighter : public QSyntaxHighlighter
 {
 	Q_OBJECT

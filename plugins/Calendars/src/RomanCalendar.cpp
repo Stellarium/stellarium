@@ -146,11 +146,11 @@ int RomanCalendar::julianYearFromAUC(int aucYear)
 
 int RomanCalendar::fixedFromRoman(QVector<int> roman)
 {
-	const int year=roman.at(0);
-	const int month=roman.at(1);
-	const events event=static_cast<events>(roman.at(2));
-	const int count=roman.at(3);
-	const int leap=roman.at(4);
+	const int year =roman.value(0);
+	const int month=roman.value(1);
+	const events event=static_cast<events>(roman.value(2));
+	const int count=roman.value(3);
+	const int leap =roman.value(4);
 
 	int rd = 0; // Suppress warning
 	switch (event)
@@ -204,12 +204,86 @@ int RomanCalendar::aucYearFromJulian(int julianYear)
 		return julianYear - yearRomeFounded;
 }
 
-// return a Roman number (1...19)
+// return a Roman number (within int range)
 QString RomanCalendar::romanNumber(const int num)
 {
-	QStringList roman={"",   "I",  "II",  "III",  "IV",  "V",  "VI",  "VII",  "VIII",  "IX",
-			   "X", "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX"};
-	if (num>19) return QString::number(num); // "bogus";
-	if (num<1) return QString::number(num);  // "bogus";
-	return roman.at(num);
+	if (num==0)
+		return ("N");
+	QString res;
+	if (num < 0 )
+		res.append("-");
+	int n=abs(num);
+	if ( n>=5000 )
+	{
+		int mils=n/1000;
+		res.append(romanNumber(mils));
+		res.append("&middot;M ");
+		n-=mils*1000;
+	}
+	while ( n>=1000 )
+	{
+		res.append("M");
+		n -= 1000;
+	}
+	if ( n>=900 )
+	{
+		res.append("CM");
+		n -= 900;
+	}
+	if ( n>=500 )
+	{
+		res.append("D");
+		n -= 500;
+	}
+	if ( n>=400 )
+	{
+		res.append("CD");
+		n -= 400;
+	}
+	while ( n>=100 )
+	{
+		res.append("C");
+		n -= 100;
+	}
+	if ( n>=90 )
+	{
+		res.append("XC");
+		n -= 90;
+	}
+	if ( n>=50 )
+	{
+		res.append("L");
+		n -= 50;
+	}
+	if ( n>=40 )
+	{
+		res.append("XL");
+		n -= 40;
+	}
+	while (n >= 10)
+	{
+		res.append("X");
+		n -= 10;
+	}
+	if ( n==9 )
+	{
+		res.append("IX");
+		n -= 9;
+	}
+	if ( n>=5 )
+	{
+		res.append("V");
+		n -= 5;
+	}
+	if ( n==4 )
+	{
+		res.append("IV");
+		n -= 4;
+	}
+	while ( n>0 )
+	{
+		res.append("I");
+		n -= 1;
+	}
+	return res;
 }

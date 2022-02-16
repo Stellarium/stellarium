@@ -66,14 +66,17 @@ CalendarsInfoPanel::CalendarsInfoPanel(Calendars* plugin,
 	connect (this->plugin, &Calendars::showHebrewChanged            , this, [=](bool){setHtml("a"); updatePosition();});
 	connect (this->plugin, &Calendars::showOldHinduSolarChanged     , this, [=](bool){setHtml("a"); updatePosition();});
 	connect (this->plugin, &Calendars::showOldHinduLunarChanged     , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showTibetanChanged           , this, [=](bool){setHtml("a"); updatePosition();});
 	connect (this->plugin, &Calendars::showMayaLongCountChanged     , this, [=](bool){setHtml("a"); updatePosition();});
 	connect (this->plugin, &Calendars::showMayaHaabChanged          , this, [=](bool){setHtml("a"); updatePosition();});
 	connect (this->plugin, &Calendars::showMayaTzolkinChanged       , this, [=](bool){setHtml("a"); updatePosition();});
 	connect (this->plugin, &Calendars::showAztecXihuitlChanged      , this, [=](bool){setHtml("a"); updatePosition();});
 	connect (this->plugin, &Calendars::showAztecTonalpohualliChanged, this, [=](bool){setHtml("a"); updatePosition();});
 	connect (this->plugin, &Calendars::showBalineseChanged          , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showFrenchAstronomicalChanged, this, [=](bool){setHtml("a"); updatePosition();});
 	connect (this->plugin, &Calendars::showFrenchArithmeticChanged  , this, [=](bool){setHtml("a"); updatePosition();});
 	connect (this->plugin, &Calendars::showPersianArithmeticChanged , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showPersianAstronomicalChanged,this, [=](bool){setHtml("a"); updatePosition();});
 
 	//Night mode
 	connect(&stelApp, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setColorScheme(const QString&)));

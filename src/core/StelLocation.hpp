@@ -30,7 +30,25 @@ class Planet;
 class StelLocation
 {
 public:
-	StelLocation() : longitude(0.f), latitude(0.f), altitude(0), population(0.f), role('X'), isUserLocation(true) {}
+	StelLocation() : longitude(0.f), latitude(0.f), altitude(0), population(0), role('X'), isUserLocation(true) {}
+	//! constructor for ad-hoc locations.
+	//! @arg lName location name
+	//! @arg lState may be usedful if region has more than one such name
+	//! @arg lRegion must be the long name of UN UM49 only! (E.g., "Western Europe")
+	//! @arg lng geographical longitude, east-positive
+	//! @arg lat geographical latitude, north-positive
+	//! @arg alt altitude above mean sea level
+	//! @arg populationK population in thousands
+	//! @arg timeZone IANA timezone string like "Europe/Vienna" or "UT-7"
+	//! @arg bortleIndex light polution hint
+	//! @arg roleKey code for location role.
+	//! @arg landscapeID a fitting landscape
+	StelLocation(QString lName, QString lState, QString lRegion, float lng, float lat, int alt,
+		     int populationK, QString timeZone, int bortleIndex, QChar roleKey='X', QString landscapeID="")
+		: name(lName), region(lRegion), state(lState),
+		  longitude(lng), latitude(lat), altitude(alt),
+		  lightPollutionLuminance(bortleIndex), landscapeKey(landscapeID),
+		  population(populationK), role(roleKey), ianaTimeZone(timeZone), isUserLocation(true) {}
 
 	//! Return a short string which can be used in a list view.
 	QString getID() const;
@@ -70,7 +88,7 @@ public:
 	QVariant lightPollutionLuminance;
 	//! A hint for associating a landscape to the location
 	QString landscapeKey;
-	//! Population in number of inhabitants
+	//! Population in thousands of inhabitants
 	int population;
 	//! Location role code.
 	//! Possible values:

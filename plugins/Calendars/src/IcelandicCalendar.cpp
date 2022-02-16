@@ -113,10 +113,10 @@ QString IcelandicCalendar::getFormattedDateString() const
 // RD from {year, season, week[1...27], weekday[0...6]}
 int IcelandicCalendar::fixedFromIcelandic(QVector<int> icelandic)
 {
-	const int year=icelandic.at(0);
-	const Calendar::Season season=static_cast<Calendar::Season>(icelandic.at(1));
-	const int week=icelandic.at(2);
-	const Calendar::Day weekday=static_cast<Calendar::Day>(icelandic.at(3));
+	const int year=icelandic.value(0);
+	const Calendar::Season season=static_cast<Calendar::Season>(icelandic.value(1));
+	const int week=icelandic.value(2);
+	const Calendar::Day weekday=static_cast<Calendar::Day>(icelandic.value(3));
 
 	int start = (season==summer ? icelandicSummer(year) : icelandicWinter(year));
 	int shift = (season==summer ? thursday : saturday );
