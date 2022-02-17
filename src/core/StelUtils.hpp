@@ -457,7 +457,7 @@ namespace StelUtils
 	//! Return a day number of week for date
 	//! @return number of day: 0 - sunday, 1 - monday,..
 	int getDayOfWeek(int year, int month, int day);
-	inline int getDayOfWeek(double JD){ double d= fmod(JD+1.5, 7); if (d<0) d+=7.0;
+	inline int getDayOfWeek(double JD){ double d= fmodpos(JD+1.5, 7);
 		return std::lround(floor(d));
 	}
 
@@ -880,7 +880,7 @@ namespace StelUtils
 	//! @param minAngle start angle inside the half-circle. maxAngle=minAngle+segments*phi
 	float* ComputeCosSinRhoZone(const float dRho, const unsigned int segments, const float minAngle);
 
-	//! Calculate fixed days (R.D.) from Gregorian date
+	//! Calculate fixed days (R.D.) from Gregorian date (proleptic Gregorian calendar)
 	//! @param year
 	//! @param month
 	//! @param day

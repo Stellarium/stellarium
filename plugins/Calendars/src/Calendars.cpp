@@ -28,6 +28,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelTranslator.hpp"
+#include "StelScriptMgr.hpp"
 
 #include "Calendars.hpp"
 #include "CalendarsDialog.hpp"
@@ -48,14 +49,17 @@
 #include "HebrewCalendar.hpp"
 #include "OldHinduSolarCalendar.hpp"
 #include "OldHinduLuniSolarCalendar.hpp"
+#include "TibetanCalendar.hpp"
 #include "MayaLongCountCalendar.hpp"
 #include "MayaHaabCalendar.hpp"
 #include "MayaTzolkinCalendar.hpp"
 #include "AztecXihuitlCalendar.hpp"
 #include "AztecTonalpohualliCalendar.hpp"
 #include "BalinesePawukonCalendar.hpp"
+#include "FrenchAstronomicalCalendar.hpp"
 #include "FrenchArithmeticCalendar.hpp"
 #include "PersianArithmeticCalendar.hpp"
+#include "PersianAstronomicalCalendar.hpp"
 
 /*************************************************************************
  This method is the one called automatically by the StelModuleMgr just 
@@ -111,8 +115,11 @@ Calendars::Calendars():
 	flagShowAztecXihuitl(true),
 	flagShowAztecTonalpohualli(true),
 	flagShowBalinese(true),
+	flagShowFrenchAstronomical(true),
 	flagShowFrenchArithmetic(true),
-	flagShowPersianArithmetic(true)
+	flagShowPersianArithmetic(true),
+	flagShowPersianAstronomical(true),
+	flagShowTibetan(true)
 {
 	setObjectName("Calendars");
 	font.setPixelSize(15);
@@ -193,6 +200,7 @@ void Calendars::init()
 	infoPanel->setPos(600, 300);
 
 	const double jd=StelApp::getInstance().getCore()->getJD();
+	calendars.insert("Calendar", new Calendar(jd)); // For scripting use only.
 	calendars.insert("Julian", new JulianCalendar(jd));
 	calendars.insert("RevisedJulian", new RevisedJulianCalendar(jd));
 	calendars.insert("Gregorian", new GregorianCalendar(jd));
@@ -215,14 +223,27 @@ void Calendars::init()
 	calendars.insert("AztecXihuitl", new AztecXihuitlCalendar(jd));
 	calendars.insert("AztecTonalpohualli", new AztecTonalpohualliCalendar(jd));
 	calendars.insert("Balinese", new BalinesePawukonCalendar(jd));
+	calendars.insert("FrenchAstronomical", new FrenchAstronomicalCalendar(jd));
 	calendars.insert("FrenchArithmetic", new FrenchArithmeticCalendar(jd));
 	calendars.insert("PersianArithmetic", new PersianArithmeticCalendar(jd));
+	calendars.insert("PersianAstronomical", new PersianAstronomicalCalendar(jd));
+	calendars.insert("Tibetan", new TibetanCalendar(jd));
 	// TODO: Add your Calendar subclasses here.
 
 	foreach (Calendar* cal, calendars)
 	{
 		connect(cal, SIGNAL(jdChanged(double)), StelApp::getInstance().getCore(), SLOT(setJD(double)));
 		connect(&StelApp::getInstance(), SIGNAL(languageChanged()), cal, SLOT(retranslate()));
+	}
+}
+
+// Add calendar as scriptable object! Some scripting functions won't work though, as they use object types unknown to the scripting engine.
+void Calendars::makeCalendarsScriptable(StelScriptMgr *ssm)
+{
+	foreach (Calendar* cal, calendars)
+	{
+		cal->setObjectName(cal->metaObject()->className());
+		ssm->addObject(cal);
 	}
 }
 
@@ -253,8 +274,11 @@ void Calendars::loadSettings()
 	showAztecXihuitl(      conf->value("Calendars/show_aztec_xihuitl", true).toBool());
 	showAztecTonalpohualli(conf->value("Calendars/show_aztec_tonalpohualli", true).toBool());
 	showBalinese(          conf->value("Calendars/show_balinese_pawukon", true).toBool());
+	showFrenchAstronomical(conf->value("Calendars/show_french_astronomical", true).toBool());
 	showFrenchArithmetic(  conf->value("Calendars/show_french_arithmetic", true).toBool());
 	showPersianArithmetic( conf->value("Calendars/show_persian_arithmetic", true).toBool());
+	showPersianAstronomical(conf->value("Calendars/show_persian_astronomical", true).toBool());
+	showTibetan(           conf->value("Calendars/show_tibetan", true).toBool());
 }
 
 void Calendars::restoreDefaultSettings()
@@ -294,12 +318,15 @@ void Calendars::draw(StelCore* core)
 	if (flagShowZoroastrian)        oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Zoroastrian",           "calendar"), getCal("Zoroastrian")->getFormattedDateString());
 	if (flagShowCoptic)             oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Coptic",                "calendar"), getCal("Coptic")->getFormattedDateString());
 	if (flagShowEthiopic)           oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Ethiopic",              "calendar"), getCal("Ethiopic")->getFormattedDateString());
+	if (flagShowFrenchAstronomical) oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("French Rev. (Astron.)", "calendar"), getCal("FrenchAstronomical")->getFormattedDateString());
 	if (flagShowFrenchArithmetic)   oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("French Rev. (Arithm.)", "calendar"), getCal("FrenchArithmetic")->getFormattedDateString());
 	if (flagShowIslamic)            oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Islamic",               "calendar"), getCal("Islamic")->getFormattedDateString());
 	if (flagShowHebrew)             oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Hebrew",                "calendar"), getCal("Hebrew")->getFormattedDateString());
 	if (flagShowPersianArithmetic)  oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Persian (Arithm.)",     "calendar"), getCal("PersianArithmetic")->getFormattedDateString());
+	if (flagShowPersianAstronomical)oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Persian (Astron.)",     "calendar"), getCal("PersianAstronomical")->getFormattedDateString());
 	if (flagShowOldHinduSolar)      oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Old Hindu Solar",       "calendar"), getCal("OldHinduSolar")->getFormattedDateString());
 	if (flagShowOldHinduLunar)      oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Old Hindu Lunisolar",   "calendar"), getCal("OldHinduLunar")->getFormattedDateString());
+	if (flagShowTibetan)            oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Tibetan",               "calendar"), getCal("Tibetan")->getFormattedDateString());
 	if (flagShowMayaLongCount)      oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Maya Long Count",       "calendar"), getCal("MayaLongCount")->getFormattedDateString());
 	if (flagShowMayaHaab)           oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Maya Haab",             "calendar"), getCal("MayaHaab")->getFormattedDateString());
 	if (flagShowMayaTzolkin)        oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Maya Tzolkin",          "calendar"), getCal("MayaTzolkin")->getFormattedDateString());
@@ -607,6 +634,17 @@ void Calendars::showBalinese(bool b)
 	}
 }
 
+bool Calendars::isFrenchAstronomicalDisplayed() const { return flagShowFrenchAstronomical;}
+void Calendars::showFrenchAstronomical(bool b)
+{
+	if (b!=flagShowFrenchAstronomical)
+	{
+		flagShowFrenchAstronomical=b;
+		conf->setValue("Calendars/show_french_astronomical", b);
+		emit showFrenchAstronomicalChanged(b);
+	}
+}
+
 bool Calendars::isFrenchArithmeticDisplayed() const { return flagShowFrenchArithmetic;}
 void Calendars::showFrenchArithmetic(bool b)
 {
@@ -626,5 +664,27 @@ void Calendars::showPersianArithmetic(bool b)
 		flagShowPersianArithmetic=b;
 		conf->setValue("Calendars/show_persian_arithmetic", b);
 		emit showPersianArithmeticChanged(b);
+	}
+}
+
+bool Calendars::isPersianAstronomicalDisplayed() const { return flagShowPersianAstronomical;}
+void Calendars::showPersianAstronomical(bool b)
+{
+	if (b!=flagShowPersianAstronomical)
+	{
+		flagShowPersianAstronomical=b;
+		conf->setValue("Calendars/show_persian_astronomical", b);
+		emit showPersianAstronomicalChanged(b);
+	}
+}
+
+bool Calendars::isTibetanDisplayed() const { return flagShowTibetan;}
+void Calendars::showTibetan(bool b)
+{
+	if (b!=flagShowTibetan)
+	{
+		flagShowTibetan=b;
+		conf->setValue("Calendars/show_tibetan", b);
+		emit showTibetanChanged(b);
 	}
 }

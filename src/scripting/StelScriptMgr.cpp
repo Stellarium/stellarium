@@ -336,6 +336,9 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 
 	defVecClasses(engine);
 
+	// This is enough for a simple Array access for a QVector<int> input or return type (e.g. Calendars plugin)
+	qScriptRegisterSequenceMetaType<QVector<int>>(engine);
+
 	// Add the core object to access methods related to core
 	mainAPI = new StelMainScriptAPI(this);
 	QScriptValue objectValue = engine->newQObject(mainAPI);
@@ -384,6 +387,12 @@ void StelScriptMgr::addModules()
 		QScriptValue objectValue = engine->newQObject(m);
 		engine->globalObject().setProperty(m->objectName(), objectValue);
 	}
+}
+
+void StelScriptMgr::addObject(QObject *obj)
+{
+	QScriptValue objectValue = engine->newQObject(obj);
+	engine->globalObject().setProperty(obj->objectName(), objectValue);
 }
 
 QStringList StelScriptMgr::getScriptList() const

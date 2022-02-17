@@ -69,10 +69,10 @@ void EgyptianCalendar::setJD(double JD)
 QStringList EgyptianCalendar::getDateStrings() const
 {
 	QStringList list;
-	list << QString::number(parts.at(0));
-	list << QString::number(parts.at(1));
-	list << monthNames.value(parts.at(1));
-	list << QString::number(parts.at(2));
+	list << QString::number(parts.value(0));
+	list << QString::number(parts.value(1));
+	list << monthNames.value(parts.value(1));
+	list << QString::number(parts.value(2));
 
 	return list;
 }

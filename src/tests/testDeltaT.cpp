@@ -1035,22 +1035,22 @@ void TestDeltaT::testDeltaTByReingoldDershowitzWideDates()
 	data << 1690 <<  0.000115;
 	data << 1700 <<  0.000094;
 	data << 1790 <<  0.000177;
-	// TODO: Compute and fill the test data for range [1800..1986]
-	//data << 1800 << 128.824; // pass: 1e-3 ; ??? seems equation has wrong signs for terms
-	data << 1850 <<  1.755490;
-	//data << 1890 <<  0.002340; // pass: 1e-4
-	//data << 1900 <<  0.000591; // pass: 1e-3
+	data << 1800 <<  0.000160;
+	data << 1850 <<  0.000080;
+	data << 1890 << -0.000070;
+	data << 1900 << -0.000020;
 	data << 1987 <<  0.000640;
 	data << 2000 <<  0.000739;
 	data << 2005 <<  0.000749;
 	data << 2006 <<  0.000752;
 	data << 2010 <<  0.000772;
 	data << 2050 <<  0.001076;
-	data << 2060 <<  0.002488;
-	data << 2100 <<  0.002998;
+	data << 2060 <<  0.002490;
+	data << 2100 <<  0.003000;
 	data << 2150 <<  0.003802;
 	data << 2200 <<  0.005117;
 
+	// TODO: switch to use seconds
 	while(data.count() >= 2)
 	{
 		int year = data.takeFirst().toInt();
@@ -1062,10 +1062,8 @@ void TestDeltaT::testDeltaTByReingoldDershowitzWideDates()
 		StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
 		double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
 		QVERIFY2(actualError<=1e-5, QString("date=%2 year=%3 result=%4 expected=%5")
-			 .arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
-			 .arg(year)
-			 .arg(QString::number(result, 'f', 5))
-			 .arg(QString::number(expectedResult, 'f', 5))
+			 .arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout)).arg(year)
+			 .arg(QString::number(result, 'f', 5), QString::number(expectedResult, 'f', 5))
 			 .toUtf8());
 	}
 }

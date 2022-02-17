@@ -52,8 +52,6 @@ public slots:
 	//! get a formatted complete string for a date
 	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
-public:
-	// static public Methods from CC
 	//! Return Hindu day count from RD
 	static int hinduDayCount(int rd) {return rd-hinduEpoch;}
 
@@ -62,9 +60,12 @@ public:
 	static int fixedFromOldHinduSolar(QVector<int> parts);
 	static QVector<int> oldHinduSolarFromFixed(int rd);
 
-	// configure details.
-	void setWeekdayStyle(int style); // valid arguments: 0|1 (real difference not documented in CC.UE!)
-	void setMonthStyle(int style); // valid arguments: 0=Vedic or 1=Sanskrit or 2=Zodiacal
+	//! configure details for future output. This could be used in a startup script.
+	//! valid styles: 0|1 (real difference not documented in CC.UE!)
+	void setWeekdayStyle(int style);
+	//! configure details for future output. This could be used in a startup script.
+	//! valid styles: 0=Vedic or 1=Sanskrit or 2=Zodiacal
+	void setMonthStyle(int style);
 
 protected:
 	static const int hinduEpoch; // RD -1132959.

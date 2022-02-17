@@ -220,9 +220,9 @@ void OldHinduSolarCalendar::setDate(QVector<int> parts)
 
 int OldHinduSolarCalendar::fixedFromOldHinduSolar(QVector<int> parts)
 {
-	int year=parts.at(0);
-	int month=parts.at(1);
-	int day=parts.at(2);
+	int year =parts.value(0);
+	int month=parts.value(1);
+	int day  =parts.value(2);
 	return std::lround(std::ceil(hinduEpoch+year*aryaSolarYear+(month-1)*aryaSolarMonth+day-1.25));
 }
 

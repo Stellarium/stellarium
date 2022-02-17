@@ -52,8 +52,6 @@ public slots:
 	//! get a formatted complete string for a date
 	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
-	// static public Methods from CC
-public:
 	//! compute RD date from an Old Hindu Lunisolar date
 	//! parts={ year, month, leap, day}
 	static int fixedFromOldHinduLunar(QVector<int> parts);

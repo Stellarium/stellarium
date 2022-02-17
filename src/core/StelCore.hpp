@@ -470,11 +470,15 @@ public slots:
 	//! It is still frequently used in the literature.
 	double getJDE() const;
 
-	//! Get solution of equation of time
-	//! Source: J. Meeus "Astronomical Algorithms" (2nd ed., with corrections as of August 10, 2009) p.183-187.
+	//! Get solution of equation of time [minutes].
+	//! Source: J. Meeus "Astronomical Algorithms" (2nd ed., 1998) 28.3.
 	//! @param JDE JD in Dynamical Time (previously called Ephemeris Time)
 	//! @return time in minutes
 	double getSolutionEquationOfTime(const double JDE) const;
+	//! Get solution of equation of time [minutes] for the current time.
+	//! Source: J. Meeus "Astronomical Algorithms" (2nd ed., with corrections as of August 10, 2009) p.183-187.
+	//! @return time in minutes
+	double getSolutionEquationOfTime() const;
 
 	bool getUseDST() const;
 	void setUseDST(const bool b);
@@ -489,7 +493,7 @@ public slots:
 	//! Get the current date in Modified Julian Day (UT)
 	double getMJDay() const;
 
-	//! Compute DeltaT estimation for a given date.
+	//! Compute DeltaT estimation for a given date [seconds].
 	//! DeltaT is the accumulated effect of earth's rotation slowly getting slower, mostly caused by tidal braking by the Moon.
 	//! For accurate positioning of objects in the sky, we must compute earth-based clock-dependent things like earth rotation, hour angles etc.
 	//! using plain UT, but all orbital motions or rotation of the other planets must be computed in TT, which is a regular time frame.

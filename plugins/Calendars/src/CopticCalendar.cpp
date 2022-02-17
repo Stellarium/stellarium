@@ -117,9 +117,9 @@ void CopticCalendar::setDate(QVector<int> parts)
 
 int CopticCalendar::fixedFromCoptic(QVector<int> coptic)
 {
-	const int year=coptic.at(0);
-	const int month=coptic.at(1);
-	const int day=coptic.at(2);
+	const int year =coptic.value(0);
+	const int month=coptic.value(1);
+	const int day  =coptic.value(2);
 
 	return copticEpoch - 1 + 365*(year-1) + StelUtils::intFloorDiv(year, 4) + 30*(month-1) + day;
 }

@@ -57,8 +57,14 @@ SET(Calendars_SRCS
     BalinesePawukonCalendar.cpp
     FrenchArithmeticCalendar.hpp
     FrenchArithmeticCalendar.cpp
+    FrenchAstronomicalCalendar.hpp
+    FrenchAstronomicalCalendar.cpp
     PersianArithmeticCalendar.hpp
     PersianArithmeticCalendar.cpp
+    PersianAstronomicalCalendar.hpp
+    PersianAstronomicalCalendar.cpp
+    TibetanCalendar.hpp
+    TibetanCalendar.cpp
 )
 
 SET(Calendars_UIS

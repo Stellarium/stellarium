@@ -1304,7 +1304,7 @@ double StelCore::getUTCOffset(const double JD) const
 			shiftInSeconds = qRound((loc.longitude/15.f)*3600.f); // Local Mean Solar Time
 		}
 		if (tzName=="LTST")
-			shiftInSeconds += getSolutionEquationOfTime(JD)*60;
+			shiftInSeconds += qRound(getSolutionEquationOfTime()*60);
 	}
 	#ifdef Q_OS_WIN
 	// A dirty hack for report: https://github.com/Stellarium/stellarium/issues/686
@@ -1388,27 +1388,36 @@ void StelCore::setUseCustomTimeZone(const bool b)
 
 double StelCore::getSolutionEquationOfTime(const double JDE) const
 {
-	double tau = (JDE - 2451545.0)/365250.0;
-	double sunMeanLongitude = 280.4664567 + tau*(360007.6892779 + tau*(0.03032028 + tau*(1./49931. - tau*(1./15300. - tau/2000000.))));
+	// The full solution to the equation of time requires lots of computation. We go the fast way from Meeus, AA2, 28.3.
 
-	// reduce the angle
-	sunMeanLongitude = std::fmod(sunMeanLongitude, 360.);
-	// force it to be the positive remainder, so that 0 <= angle < 360
-	sunMeanLongitude = std::fmod(sunMeanLongitude + 360., 360.);
+	const double T=(JDE-2451545.0)/36525.;
+	const double tau = T*0.1;
+	const double epsRad=getPrecessionAngleVondrakEpsilon(JDE);
+	const double e = (-0.0000001267*T-0.000042037)*T+0.016708634;
+	const double M = ((-0.0001537*T+35999.05029)*T+357.52911)*M_PI_180;
+	double Lo = StelUtils::fmodpos(280.4664567 + tau*(360007.6982779 + tau*(0.03032028 + tau*(1./49931. + tau*(-1./15300. - tau/2000000.)))), 360.);
+	Lo *= M_PI_180;
+	double y=tan(epsRad*0.5); y*=y;
+
+	double E=y*sin(2.*Lo)+2.*e*sin(M)*(2.*y*cos(2.*Lo)-1.)-0.5*y*y*sin(4.*Lo)-1.25*e*e*sin(2.*M);
+	return E*M_180_PI*4.;
+}
+
+double StelCore::getSolutionEquationOfTime() const
+{
+	const double tau = (getJDE() - 2451545.0)/365250.0;
+	const double sunMeanLongitude = StelUtils::fmodpos(280.4664567 + tau*(360007.6982779 + tau*(0.03032028 + tau*(1./49931. + tau*(-1./15300. - tau/2000000.)))), 360.);
 
 	Vec3d pos = GETSTELMODULE(StelObjectMgr)->searchByName("Sun")->getEquinoxEquatorialPos(this);
 	double ra, dec;
 	StelUtils::rectToSphe(&ra, &dec, pos);
 
-	// covert radians to degrees and reduce the angle
-	double alpha = std::fmod(ra*M_180_PI, 360.);
-	// force it to be the positive remainder, so that 0 <= angle < 360
-	alpha = std::fmod(alpha + 360., 360.);
+	// covert radians to degrees and reduce the angle, so that 0 <= angle < 360
+	const double alpha = StelUtils::fmodpos(ra*M_180_PI, 360.);
 
 	double deltaPsi, deltaEps;
-	getNutationAngles(JDE, &deltaPsi, &deltaEps); // these are radians!
-	//double equation = 4*(sunMeanLongitude - 0.0057183 - alpha + get_nutation_longitude(JDE)*cos(get_mean_ecliptical_obliquity(JDE)));
-	double equation = 4*(sunMeanLongitude - 0.0057183 - alpha + deltaPsi*M_180_PI*cos(getPrecessionAngleVondrakEpsilon(JDE)));
+	getNutationAngles(getJDE(), &deltaPsi, &deltaEps); // these are radians!
+	double equation = 4*(sunMeanLongitude - 0.0057183 - alpha + deltaPsi*M_180_PI*cos(getPrecessionAngleVondrakEpsilon(getJDE())));
 	// The equation of time is always smaller 20 minutes in absolute value
 	if (qAbs(equation)>20)
 	{

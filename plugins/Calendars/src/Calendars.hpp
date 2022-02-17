@@ -23,15 +23,51 @@
 #include <QMap>
 
 #include "StelModule.hpp"
+#include "StelScriptMgr.hpp"
 
 
 #include "Calendar.hpp"
-#include "CalendarsInfoPanel.hpp"
+#include "../plugins/Calendars/src/gui/CalendarsInfoPanel.hpp"
 
 class CalendarsDialog;
 class StelButton;
 
-//! Calendars plugin provides an interface to various calendars
+/*! @defgroup calendars Calendars Plug-in
+@{
+The Calendars plugin provides an interface to various calendars
+
+The primary source of this plugin is the book "Calendrical Calculations: The Ultimate Edition"
+by Edward M. Reingold and Nachum Dershowitz (2018). It comtains algorithmic descriptions of dozens of calendars,
+most of which should make their way into this plugin.
+
+This book describes data conversion from and to calendars, using not the commonly used Julian Day number, but an intermediate
+number called Rata Die (R.D.), days counted from midnight of (proleptic) 1.1. of year 1 AD (Gregorian).
+
+For the user, a simple selection GUI allows choosing which calendars should be displayed in the lower-right screen corner.
+Some more GUI tabs allow interaction with selected calendars.
+
+A potentially great feature for owners of the book is that most functions from the book are available as scripting functions for the respective calendars.
+
+Examples:
+
+core.output(JulianCalendar.isLeap(1700));
+core.output(GregorianCalendar.isLeap(1700));
+rd=GregorianCalendar.fixedFromGregorian{[2021, 3, 14]);
+
+Take care that some data arguments are internally stored as QVector<int>, and translated to Arrays in ECMAscript.
+The various calendars may have array lengths of elements, which are not always checked.
+When a StelLocation argument is used in the internal function, a scripting function is available which allows specifying
+a location name in format "city, region". This also works with user-specified locations.
+Time zones only work correctly when specified (in the location database) as full specification like "Europe/Madrid", not "UT+4".
+
+@}
+*/
+
+//! @class Calendars
+//! StelModule plugin which provides display and a scripting interface to a multitude of calendrical functions.
+//! @author Georg Zotti
+//! @ingroup calendars
+
 class Calendars : public StelModule
 {
 	Q_OBJECT
@@ -59,8 +95,11 @@ class Calendars : public StelModule
 	Q_PROPERTY(bool flagShowAztecXihuitl  READ isAztecXihuitlDisplayed  WRITE showAztecXihuitl  NOTIFY showAztecXihuitlChanged)
 	Q_PROPERTY(bool flagShowAztecTonalpohualli READ isAztecTonalpohualliDisplayed WRITE showAztecTonalpohualli NOTIFY showAztecTonalpohualliChanged)
 	Q_PROPERTY(bool flagShowBalinese      READ isBalineseDisplayed      WRITE showBalinese      NOTIFY showBalineseChanged)
+	Q_PROPERTY(bool flagShowFrenchAstronomical READ isFrenchAstronomicalDisplayed WRITE showFrenchAstronomical NOTIFY showFrenchAstronomicalChanged)
 	Q_PROPERTY(bool flagShowFrenchArithmetic   READ isFrenchArithmeticDisplayed   WRITE showFrenchArithmetic   NOTIFY showFrenchArithmeticChanged)
-	Q_PROPERTY(bool flagShowPersianArithmetic  READ isPersianArithmeticDisplayed  WRITE showPersianArithmetic  NOTIFY showPersianArithmeticChanged)
+	Q_PROPERTY(bool flagShowPersianArithmetic   READ isPersianArithmeticDisplayed   WRITE showPersianArithmetic   NOTIFY showPersianArithmeticChanged)
+	Q_PROPERTY(bool flagShowPersianAstronomical READ isPersianAstronomicalDisplayed WRITE showPersianAstronomical NOTIFY showPersianAstronomicalChanged)
+	Q_PROPERTY(bool flagShowTibetan      READ isTibetanDisplayed        WRITE showTibetan       NOTIFY showTibetanChanged)
 
 public:
 	Calendars();
@@ -94,8 +133,11 @@ public:
 	//! Armenian, Zoroastrian, Coptic, Ethiopic, Islamic, Hebrew,
 	//! OldHinduSolar, OldHinduLunar, Balinese
 	//! MayaLongCount, MayaHaab, MayaTzolkin, AztecXihuitl, AztecTonalpohualli
-	//! TODO: ADD HERE: Chinese, NewHinduSolar, NewHinduLunar, Tibetan, ...
+	//! TODO: ADD HERE: Chinese, NewHinduSolar, NewHinduLunar, ...
 	Calendar* getCal(QString name);
+
+	//! to be called after program startup, when StelScriptMgr has been set up.
+	void makeCalendarsScriptable(StelScriptMgr *ssm);
 
 signals:
 	//void jdChanged(double jd);
@@ -124,8 +166,11 @@ signals:
 	void showAztecXihuitlChanged(bool b);
 	void showAztecTonalpohualliChanged(bool b);
 	void showBalineseChanged(bool b);
+	void showFrenchAstronomicalChanged(bool b);
 	void showFrenchArithmeticChanged(bool b);
 	void showPersianArithmeticChanged(bool b);
+	void showPersianAstronomicalChanged(bool b);
+	void showTibetanChanged(bool b);
 
 public slots:
 	// Setters/getters
@@ -179,10 +224,16 @@ public slots:
 	void showAztecTonalpohualli(bool b);	//!< activate display of Aztec Tonalpohualli
 	bool isBalineseDisplayed() const;       //!< display Balinese Pawukon?
 	void showBalinese(bool b);	        //!< activate display of Balinese Pawukon
+	bool isFrenchAstronomicalDisplayed() const; //!< display French Astronomical?
+	void showFrenchAstronomical(bool b);	//!< activate display of French Astronomical
 	bool isFrenchArithmeticDisplayed() const; //!< display French Arithmetic?
-	void showFrenchArithmetic(bool b);	  //!< activate display of French Arithmetic
+	void showFrenchArithmetic(bool b);	//!< activate display of French Arithmetic
 	bool isPersianArithmeticDisplayed() const; //!< display Persian Arithmetic?
-	void showPersianArithmetic(bool b);	  //!< activate display of Persian Arithmetic
+	void showPersianArithmetic(bool b);	//!< activate display of Persian Arithmetic
+	bool isPersianAstronomicalDisplayed() const; //!< display Persian Astronomical?
+	void showPersianAstronomical(bool b);	//!< activate display of Persian Astronomical
+	bool isTibetanDisplayed() const;        //!< display Tibetan?
+	void showTibetan(bool b);	        //!< activate display of Tibetan
 
 private:
 	// Font used for displaying text
@@ -224,8 +275,11 @@ private:
 	bool flagShowAztecXihuitl;
 	bool flagShowAztecTonalpohualli;
 	bool flagShowBalinese;
+	bool flagShowFrenchAstronomical;
 	bool flagShowFrenchArithmetic;
 	bool flagShowPersianArithmetic;
+	bool flagShowPersianAstronomical;
+	bool flagShowTibetan;
 };
 
 
