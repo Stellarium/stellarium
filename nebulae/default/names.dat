@@ -51,8 +51,10 @@
 #      - SH 2-132 in Cepheus, Hubble Palette, The Lion Nebula; https://www.astrobin.com/71357/B/
 #      - Sharpless 2-132: the Lion Nebula in Cepheus - a two-panel mosaic in 'Hubble Palette' (SHO); https://www.astrobin.com/356827/F/
 #      - Sharpless 2-170 in Cassiopeia - the 'Little Rosette' nebula; https://www.astrobin.com/373021/B/
+#      - NGC 6397 - Ara Globular Cluster; https://www.astrobin.com/357980/
 #   AAPOD2:
 #      - Dolphin Head Nebula - Sh2-308; https://www.aapod2.com/blog/dolphin-head-nebula-sh2-308
+#      - Bubble Galaxy - NGC 3521; https://www.aapod2.com/blog/ngc-3521
 #   UT:
 #      - Messier 55 – the NGC 6809 Globular Star Cluster; https://www.universetoday.com/36216/messier-55/
 #   AM:
@@ -87,7 +89,8 @@
 #   PAS: Patrick Moore, Paul Doherty, H. J. P. Arnold, The Photographic Atlas of the Stars, CRC Press LLC, 1999. ISBN 0750306548; https://books.google.com/books?id=YjcvJUfnWBAC&pg=PA97#v=onepage&q&f=false
 #   ???: Source very much needed. Marked especially for objects which have a well-known name, where a new/alternative name does not help anybody.
 #   TBD:  ADD OTHERS HERE!
-#
+#   ESA-Hubble:
+#      - NGC 3521 - Bubble Galaxy; https://esahubble.org/images/potw1538a/
 NGC  40              _("Bow-Tie Nebula") # B500
 NGC  40              _("Scarab Nebula") # B500
 NGC  55              _("String of Pearls") # SG
@@ -167,6 +170,7 @@ NGC  1232            _("Eye of God Galaxy") # B500, HT
 NGC  1245            _("Patrick Starfish Cluster") # B500, SD
 NGC  1269            _("Snow Collar Galaxy") # SG, HT
 NGC  1275            _("Perseus A") # NED, SIMBAD, BCH, PAS
+NGC  1313            _("Topsy Turvy Galaxy") # WP
 NGC  1316            _("Fornax A") # NED, SIMBAD, TSS, SG, HT, WSG, PSA, B500
 NGC  1317            _("Fornax B") # SIMBAD
 NGC  1333            _("Embryo Nebula") # B500, HT
@@ -400,6 +404,7 @@ NGC  3372            _("Homunculus Nebula") # WK, WSO
 NGC  3372            _("Keyhole Nebula") # WK, SIMBAD, BCH, SG, WSO, DN, DAN
 NGC  3372            _("The Great Nebula in Carina") # DN, APOD
 NGC  3432            _("Knitting Needle Galaxy") # B500, SD
+NGC  3521            _("Bubble Galaxy") # ESA-Hubble, AAPOD2
 NGC  3532            _("Wishing Well Cluster") # OGSC, CSOG-MSC
 NGC  3532            _("Firefly Party Cluster") # OGSC
 NGC  3532            _("Pincushion Cluster") # OGSC
@@ -596,6 +601,7 @@ NGC  6357            _("War and Peace Nebula") # WP, SIMBAD
 NGC  6369            _("Little Ghost Nebula") # SIMBAD, DSW, HT, CC, B500
 NGC  6369            _("Ghost of Mars Nebula") # HT
 NGC  6380            _("Tonantzintla 1") # SIMBAD
+NGC  6397            _("Ara Globular Cluster") # ABIN
 NGC  6400            _("Phantom Cluster") # B500, SG, HT
 NGC  6400            _("Long John Silver Cluster") # HT
 NGC  6405            _("Butterfly Cluster") # OGSC, SIMBAD, DSW, BCH, SG, PSA, CC, CSOG-MSC, B500, PAS
@@ -1190,8 +1196,8 @@ ACO  3627            _("Norma Cluster") # NED, WP
 ACO  3627            _("Great Attractor") # WSG
 ACO  3742            _("Indus Cluster") # SIMBAD
 ACO  S373            _("Fornax Cluster") # NED, WP, BCH, WSO, WSG
-ACO  S737            _("Fornax Group") # SIMBAD
-ACO  S737            _("NGC 1399 Group") # WP, SIMBAD
+ACO  S373            _("Fornax Group") # SIMBAD
+ACO  S373            _("NGC 1399 Group") # WP, SIMBAD
 ACO  S636            _("Antlia Cluster") # NED, WP
 ESO  37-1            _("E3 Cluster") # SIMBAD
 ESO  57-76           _("Hodge 11") # SIMBAD
