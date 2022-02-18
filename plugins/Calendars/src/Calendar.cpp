@@ -1152,7 +1152,6 @@ double Calendar::daytimeTemporalHour(const int rd, const StelLocation &loc)
 	if (qFuzzyCompare(sunrise(rd, loc), bogus ) || qFuzzyCompare(sunset(rd, loc), bogus))
 		return bogus;
 	return (1./12.) * (sunset(rd, loc)-sunrise(rd, loc));
-
 }
 // return length of a temporal night hour at date rd and location loc.  (CC:UE 14.90)
 double Calendar::nighttimeTemporalHour(const int rd, const StelLocation &loc)
