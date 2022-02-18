@@ -97,35 +97,37 @@ Calendars::Calendars():
 	toolbarButton(Q_NULLPTR),
 	enabled(true),
 	flagShowJulian(true),
-	flagShowRevisedJulian(true),
+	flagShowRevisedJulian(false),
 	flagShowGregorian(true),
 	flagShowISO(true),
-	flagShowIcelandic(true),
-	flagShowRoman(true),
-	flagShowOlympic(true),
-	flagShowEgyptian(true),
-	flagShowArmenian(true),
-	flagShowZoroastrian(true),
-	flagShowCoptic(true),
-	flagShowEthiopic(true),
+	flagShowIcelandic(false),
+	flagShowRoman(false),
+	flagShowOlympic(false),
+	flagShowEgyptian(false),
+	flagShowArmenian(false),
+	flagShowZoroastrian(false),
+	flagShowCoptic(false),
+	flagShowEthiopic(false),
 	flagShowChinese(true),
 	flagShowIslamic(true),
 	flagShowHebrew(true),
-	flagShowOldHinduSolar(true),
-	flagShowOldHinduLunar(true),
+	flagShowOldHinduSolar(false),
+	flagShowOldHinduLunar(false),
 	flagShowNewHinduSolar(true),
 	flagShowNewHinduLunar(true),
+	flagShowAstroHinduSolar(false),
+	flagShowAstroHinduLunar(false),
 	flagShowMayaLongCount(true),
-	flagShowMayaHaab(true),
-	flagShowMayaTzolkin(true),
-	flagShowAztecXihuitl(true),
-	flagShowAztecTonalpohualli(true),
-	flagShowBalinese(true),
-	flagShowFrenchAstronomical(true),
-	flagShowFrenchArithmetic(true),
-	flagShowPersianArithmetic(true),
-	flagShowPersianAstronomical(true),
-	flagShowTibetan(true)
+	flagShowMayaHaab(false),
+	flagShowMayaTzolkin(false),
+	flagShowAztecXihuitl(false),
+	flagShowAztecTonalpohualli(false),
+	flagShowBalinese(false),
+	flagShowFrenchAstronomical(false),
+	flagShowFrenchArithmetic(false),
+	flagShowPersianArithmetic(false),
+	flagShowPersianAstronomical(false),
+	flagShowTibetan(false)
 {
 	setObjectName("Calendars");
 	font.setPixelSize(15);
@@ -262,37 +264,37 @@ void Calendars::loadSettings()
 	// Now activate calendar displays if needed.
 	enable(                 conf->value("Calendars/show", true).toBool());
 	showJulian(             conf->value("Calendars/show_julian", true).toBool());
-	showRevisedJulian(      conf->value("Calendars/show_revised_julian", true).toBool());
+	showRevisedJulian(      conf->value("Calendars/show_revised_julian", false).toBool());
 	showGregorian(          conf->value("Calendars/show_gregorian", true).toBool());
 	showISO(                conf->value("Calendars/show_iso", true).toBool());
-	showIcelandic(          conf->value("Calendars/show_icelandic", true).toBool());
-	showRoman(              conf->value("Calendars/show_roman", true).toBool());
-	showOlympic(            conf->value("Calendars/show_olympic", true).toBool());
-	showEgyptian(           conf->value("Calendars/show_egyptian", true).toBool());
-	showArmenian(           conf->value("Calendars/show_armenian", true).toBool());
-	showZoroastrian(        conf->value("Calendars/show_zoroastrian", true).toBool());
-	showCoptic(	        conf->value("Calendars/show_coptic", true).toBool());
-	showEthiopic(	        conf->value("Calendars/show_ethiopic", true).toBool());
+	showIcelandic(          conf->value("Calendars/show_icelandic", false).toBool());
+	showRoman(              conf->value("Calendars/show_roman", false).toBool());
+	showOlympic(            conf->value("Calendars/show_olympic", false).toBool());
+	showEgyptian(           conf->value("Calendars/show_egyptian", false).toBool());
+	showArmenian(           conf->value("Calendars/show_armenian", false).toBool());
+	showZoroastrian(        conf->value("Calendars/show_zoroastrian", false).toBool());
+	showCoptic(	        conf->value("Calendars/show_coptic", false).toBool());
+	showEthiopic(	        conf->value("Calendars/show_ethiopic", false).toBool());
 	showChinese(            conf->value("Calendars/show_chinese", false).toBool());
 	showIslamic(            conf->value("Calendars/show_islamic", true).toBool());
 	showHebrew(             conf->value("Calendars/show_hebrew", true).toBool());
-	showOldHinduSolar(      conf->value("Calendars/show_old_hindu_solar", true).toBool());
-	showOldHinduLunar(      conf->value("Calendars/show_old_hindu_lunar", true).toBool());
+	showOldHinduSolar(      conf->value("Calendars/show_old_hindu_solar", false).toBool());
+	showOldHinduLunar(      conf->value("Calendars/show_old_hindu_lunar", false).toBool());
 	showNewHinduSolar(      conf->value("Calendars/show_new_hindu_solar", true).toBool());
 	showNewHinduLunar(      conf->value("Calendars/show_new_hindu_lunar", true).toBool());
-	showAstroHinduSolar(    conf->value("Calendars/show_astro_hindu_solar", true).toBool());
-	showAstroHinduLunar(    conf->value("Calendars/show_astro_hindu_lunar", true).toBool());
+	showAstroHinduSolar(    conf->value("Calendars/show_astro_hindu_solar", false).toBool());
+	showAstroHinduLunar(    conf->value("Calendars/show_astro_hindu_lunar", false).toBool());
 	showMayaLongCount(      conf->value("Calendars/show_maya_long_count", true).toBool());
-	showMayaHaab(           conf->value("Calendars/show_maya_haab", true).toBool());
-	showMayaTzolkin(        conf->value("Calendars/show_maya_tzolkin", true).toBool());
-	showAztecXihuitl(       conf->value("Calendars/show_aztec_xihuitl", true).toBool());
-	showAztecTonalpohualli( conf->value("Calendars/show_aztec_tonalpohualli", true).toBool());
-	showBalinese(           conf->value("Calendars/show_balinese_pawukon", true).toBool());
-	showFrenchAstronomical( conf->value("Calendars/show_french_astronomical", true).toBool());
-	showFrenchArithmetic(   conf->value("Calendars/show_french_arithmetic", true).toBool());
-	showPersianArithmetic(  conf->value("Calendars/show_persian_arithmetic", true).toBool());
-	showPersianAstronomical(conf->value("Calendars/show_persian_astronomical", true).toBool());
-	showTibetan(            conf->value("Calendars/show_tibetan", true).toBool());
+	showMayaHaab(           conf->value("Calendars/show_maya_haab", false).toBool());
+	showMayaTzolkin(        conf->value("Calendars/show_maya_tzolkin", false).toBool());
+	showAztecXihuitl(       conf->value("Calendars/show_aztec_xihuitl", false).toBool());
+	showAztecTonalpohualli( conf->value("Calendars/show_aztec_tonalpohualli", false).toBool());
+	showBalinese(           conf->value("Calendars/show_balinese_pawukon", false).toBool());
+	showFrenchAstronomical( conf->value("Calendars/show_french_astronomical", false).toBool());
+	showFrenchArithmetic(   conf->value("Calendars/show_french_arithmetic", false).toBool());
+	showPersianArithmetic(  conf->value("Calendars/show_persian_arithmetic", false).toBool());
+	showPersianAstronomical(conf->value("Calendars/show_persian_astronomical", false).toBool());
+	showTibetan(            conf->value("Calendars/show_tibetan", false).toBool());
 }
 
 void Calendars::restoreDefaultSettings()
