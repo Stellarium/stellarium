@@ -535,6 +535,8 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	SsoElements result;
 	// New and exact definition, directly from https://minorplanetcenter.net/iau/info/CometOrbitFormat.html
 	// We parse by documented columns and process extracted strings later.
+	/*
+	 * Wrong regexp; GH: #2281
 	QRegularExpression mpcParser("^([[:print:]]{4})"      //    1 -   4  i4     1. Periodic comet number
 				    "([CPDIA])"               //    5        a1     2. Orbit type (generally `C', `P' or `D') -- A=reclassified as Asteroid? I=Interstellar.
 				    "([[:print:]]{7}).{2}"    //    6 -  12  a7     3. Provisional designation (in packed form)
@@ -554,6 +556,8 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 				    "([[:print:]]{56})\\s"    //  103 - 158  a56   17. Designation and Name
 				    "([[:print:]]{1,9}).*$"   //  160 - 168  a9    18. Reference
 	    );
+	*/
+	QRegularExpression mpcParser("^\\s*(\\d{4})?([CPDIA])((?:\\w{6}|\\s{6})?[0a-zA-Z])?\\s+(\\d{4})\\s+(\\d{2})\\s+(\\d{1,2}\\.\\d{3,4})\\s+(\\d{1,2}\\.\\d{5,6})\\s+(\\d\\.\\d{5,6})\\s+(\\d{1,3}\\.\\d{3,4})\\s+(\\d{1,3}\\.\\d{3,4})\\s+(\\d{1,3}\\.\\d{3,4})\\s+(?:(\\d{4})(\\d\\d)(\\d\\d))?\\s+(\\-?\\d{1,2}\\.\\d)\\s+(\\d{1,2}\\.\\d)\\s+(\\S.{1,54}\\S)(?:\\s+(\\S.*))?$");
 	if (!mpcParser.isValid())
 	{
 		qWarning() << "Bad Regular Expression:" << mpcParser.errorString();
