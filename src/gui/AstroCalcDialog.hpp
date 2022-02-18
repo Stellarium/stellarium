@@ -104,16 +104,18 @@ public:
 		EphemerisCount          //! total number of columns
 	};
 
-	//! Defines the number and the order of the columns in the transit table
-	//! @enum TransitColumns
-	enum TransitColumns {
-		TransitCOName,          //! name of celestial object
-		TransitDate,            //! date and time of transit
-		TransitAltitude,        //! altitude
-		TransitMagnitude,       //! magnitude
-		TransitElongation,      //! elongation (from the Sun)
-		TransitAngularDistance, //! angular distance (from the Moon)
-		TransitCount            //! total number of columns
+	//! Defines the number and the order of the columns in the rises, transits and sets table
+	//! @enum RTSColumns
+	enum RTSColumns {
+		RTSCOName,		//! name of celestial object
+		RTSRiseDate,            //! date and time of rise
+		RTSTransitDate,         //! date and time of transit
+		RTSSetDate,		//! date and time of set
+		RTSTransitAltitude,     //! altitude at transit
+		RTSMagnitude,		//! magnitude at transit
+		RTSElongation,		//! elongation at transit (from the Sun)
+		RTSAngularDistance,	//! angular distance at transit (from the Moon)
+		RTSCount		//! total number of columns
 	};
 
 	//! Defines the number and the order of the columns in the phenomena table
@@ -255,15 +257,15 @@ private slots:
 	void onChangedEphemerisPosition();
 	void reGenerateEphemeris();
 
-	//! Calculating the transits for selected celestial body and fill the list.
-	void generateTransits();
-	void cleanupTransits();
-	void selectCurrentTransit(const QModelIndex &modelIndex);
-	void saveTransits();
-	void setTransitCelestialBodyName();
+	//! Calculating the rises, transits and sets for selected celestial body and fill the list.
+	void generateRTS();
+	void cleanupRTS();
+	void selectCurrentRTS(const QModelIndex &modelIndex);
+	void saveRTS();
+	void setRTSCelestialBodyName();
 
 	//! Calculating lunar eclipses to fill the list.
-	//! Algorithm taken from calculating the transits.
+	//! Algorithm taken from calculating the rises, transits and sets.
 	void generateLunarEclipses();
 	void cleanupLunarEclipses();
 	void selectCurrentLunarEclipse(const QModelIndex &modelIndex);
@@ -408,8 +410,8 @@ private:
 	void setHECPositionsHeaderNames();
 	//! Update header names for ephemeris table
 	void setEphemerisHeaderNames();
-	//! update header names for transit table
-	void setTransitHeaderNames();
+	//! update header names for rises, transists and sets table
+	void setRTSHeaderNames();
 	//! Update header names for phenomena table
 	void setPhenomenaHeaderNames();
 	//! Update header names for WUT table
@@ -427,8 +429,8 @@ private:
 	void initListHECPositions();
 	//! Init header and list of ephemeris
 	void initListEphemeris();
-	//! Init header and list of transits
-	void initListTransit();
+	//! Init header and list of rises, transists and sets
+	void initListRTS();
 	//! Init header and list of phenomena
 	void initListPhenomena();
 	//! Init header and list of WUT
@@ -521,7 +523,7 @@ private:
 
 	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph, plotAngularDistanceGraph, plotAziVsTime;
 	int altVsTimePositiveLimit, monthlyElevationPositiveLimit, graphsDuration;
-	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, hecPositionsHeader, wutHeader, transitHeader, lunareclipseHeader, solareclipseHeader, solareclipselocalHeader;
+	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, hecPositionsHeader, wutHeader, rtsHeader, lunareclipseHeader, solareclipseHeader, solareclipselocalHeader;
 	static double brightLimit;
 	static double minY, maxY, minYme, maxYme, minYsun, maxYsun, minYmoon, maxYmoon, transitX, minY1, maxY1, minY2, maxY2,
 			     minYld, maxYld, minYad, maxYad, minYadm, maxYadm, minYaz, maxYaz;
@@ -741,10 +743,10 @@ private:
 };
 
 // Reimplements the QTreeWidgetItem class to fix the sorting bug
-class ACTransitTreeWidgetItem : public QTreeWidgetItem
+class ACRTSTreeWidgetItem : public QTreeWidgetItem
 {
 public:
-	ACTransitTreeWidgetItem(QTreeWidget* parent)
+	ACRTSTreeWidgetItem(QTreeWidget* parent)
 		: QTreeWidgetItem(parent)
 	{
 	}
@@ -754,15 +756,15 @@ private:
 	{
 		int column = treeWidget()->sortColumn();
 
-		if (column == AstroCalcDialog::TransitDate)
+		if (column == AstroCalcDialog::RTSRiseDate || column == AstroCalcDialog::RTSTransitDate || column == AstroCalcDialog::RTSSetDate)
 		{
 			return data(column, Qt::UserRole).toFloat() < other.data(column, Qt::UserRole).toFloat();
 		}
-		else if (column == AstroCalcDialog::TransitMagnitude)
+		else if (column == AstroCalcDialog::RTSMagnitude)
 		{
 			return text(column).toFloat() < other.text(column).toFloat();
 		}
-		else if (column == AstroCalcDialog::TransitAltitude || column == AstroCalcDialog::TransitElongation || column == AstroCalcDialog::TransitAngularDistance)
+		else if (column == AstroCalcDialog::RTSTransitAltitude || column == AstroCalcDialog::RTSElongation || column == AstroCalcDialog::RTSAngularDistance)
 		{
 			return StelUtils::getDecAngle(text(column)) < StelUtils::getDecAngle(other.text(column));
 		}
