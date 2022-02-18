@@ -45,6 +45,7 @@
 #      - Methuselah Nebula; https://apod.nasa.gov/apod/ap101021.html
 #      - Sharpless-308: The Dolphin Nebula; https://apod.nasa.gov/apod/ap200302.html
 #      - The Medulla Nebula Supernova Remnant; https://apod.nasa.gov/apod/ap210118.html
+#      - NGC 6188: The Dragons of Ara; https://apod.nasa.gov/apod/ap200728.html
 #   HST:
 #      - Hubble offers a dazzling necklace; https://spacetelescope.org/images/potw1133a/
 #   ABIN: 
@@ -96,6 +97,9 @@
 #   TBD:  ADD OTHERS HERE!
 #   ESA-Hubble:
 #      - NGC 3521 - Bubble Galaxy; https://esahubble.org/images/potw1538a/
+#   ESKY: https://www.glyphweb.com/esky/ngc.html
+#   ADI: https://astrodonimaging.com/gallery/southern-seagull-nebula/
+#      - NGC2029, NGC2032, NGC2035 - Southern Seagull Nebula; https://astrodonimaging.com/gallery/southern-seagull-nebula/
 NGC  40              _("Bow-Tie Nebula") # B500
 NGC  40              _("Scarab Nebula") # B500
 NGC  55              _("String of Pearls") # SG
@@ -255,12 +259,15 @@ NGC  1999            _("Rubber Stamp Nebula") # HT
 NGC  1999            _("Black Eye Nebula") # B500
 NGC  2022            _("Kissing Crescents Nebula") # B500, SD
 NGC  2022            _("Orion's Collarbone Nebula") # B500
+NGC  2023            _("Lump Star") # ESKY
 NGC  2024            _("Flame Nebula") # WK, TSS, HT, WSO, CC, DN, B500
 NGC  2024            _("Tank Tracks Nebula") # HT, CC
 NGC  2024            _("Maple Leaf Nebula") # B500
 NGC  2024            _("Lips Nebula") # HT, B500
 NGC  2024            _("Burning Bush Nebula") # HT
 NGC  2024            _("The Ghost of Alnitak") # HT
+NGC  2032            _("Southern Seagull Nebula") # ADI
+NGC  2035            _("Dragon’s Head Nebula") # ESKY, ADI
 NGC  2060            _("30 Dor B") # SIMBAD
 NGC  2068            _("Casper the Friendly Ghost Nebula") # B500
 NGC  2070            _("Tarantula Nebula") # WK, SIMBAD, BCH, WSO, PSA, DN, PAS
@@ -582,6 +589,7 @@ NGC  6121            _("Spider Globular Cluster") # B500
 NGC  6134            _("Little Pincushion") # SG
 NGC  6171            _("The Crucifix Cluster") # B500
 NGC  6188            _("Rim Nebula") # SIMBAD
+NGC  6188            _("Dragons of Ara") # APOD
 NGC  6169            _("μ Normae Cluster") # OGSC
 NGC  6205            _("Great Star Cluster in Hercules") # DSW, BCH, CSOG-MSC, PGH
 NGC  6205            _("Hercules Globular Cluster") # WK, BCH, B500
