@@ -2301,7 +2301,7 @@ void AstroCalcDialog::generateRTS()
 			startJD = startJD - core->getUTCOffset(startJD) / 24.;
 			stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
 			int elements = static_cast<int>((stopJD - startJD) / currentStep);
-			double JD, az, alt, utcShift;
+			double JD, az, alt;
 			float magnitude;
 			QString riseStr, setStr, altStr, magStr, elongSStr = dash, elongLStr = dash;
 			for (int i = 0; i <= elements; i++)
@@ -2310,7 +2310,7 @@ void AstroCalcDialog::generateRTS()
 				core->setJD(JD);
 				core->update(0); // force update to get new coordinates
 				Vec4d rts = selectedObject->getRTSTime(core);
-				JD = rts[1]; // static_cast<int>(JD) + 0.5 + rts[1]/24. - UTCshift;
+				JD = rts[1];
 				core->setJD(JD);
 				core->update(0); // force update to get new coordinates
 
