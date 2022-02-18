@@ -186,7 +186,7 @@ QStringList TibetanCalendar::getDateStrings() const
 QString TibetanCalendar::getFormattedDateString() const
 {
 	QStringList str=getDateStrings();
-	// TRANSLATORS: A.T. stands for "anno Tibetarum".
+	// TRANSLATORS: A.T. stands for "anno Tibetorum".
 	QString epoch = qc_("A.T.", "epoch");
 	// Format: [weekday], [day_{leap}] - [month, numeral] ([month, name]_{leap}) - [year] [epoch]
 	return QString("%1, %2<sub>%3</sub> - %4 (%5)<sub>%6</sub> - %7 %8").arg(

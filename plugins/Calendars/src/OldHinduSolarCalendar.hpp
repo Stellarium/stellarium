@@ -21,6 +21,10 @@
 
 #include "Calendar.hpp"
 
+//! @class OldHinduSolarCalendar
+//! Functions for the Old Hindu Solar calendar described in CC:UE chapter 10.
+//! @author Georg Zotti
+//! @ingroup calendars
 //! The old hindu Solar calendar as given in CC.UE describes the one given in the (First) Arya Siddhanta of Aryabhata (499 C.E.),
 //! as amended by Lalla (ca. 720-790 C.E.).
 //! There are many variations which are not described in CC.UE and therefore not handled in this implementation.
