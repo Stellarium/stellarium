@@ -41,12 +41,13 @@ by Edward M. Reingold and Nachum Dershowitz (2018). It comtains algorithmic desc
 most of which should make their way into this plugin.
 
 This book describes data conversion from and to calendars, using not the commonly used Julian Day number, but an intermediate
-number called Rata Die (R.D.), days counted from midnight of (proleptic) 1.1. of year 1 AD (Gregorian).
+number called <em>Rata Die</em> (R.D.; easily remembered by the authors' names), days counted from midnight of (proleptic) 1.1. of year 1 AD (Gregorian).
 
 For the user, a simple selection GUI allows choosing which calendars should be displayed in the lower-right screen corner.
 Some more GUI tabs allow interaction with selected calendars.
 
 A potentially great feature for owners of the book is that most functions from the book are available as scripting functions for the respective calendars.
+Just call objects by their classnames.
 
 Examples:
 
@@ -89,6 +90,10 @@ class Calendars : public StelModule
 	Q_PROPERTY(bool flagShowHebrew        READ isHebrewDisplayed        WRITE showHebrew        NOTIFY showHebrewChanged)
 	Q_PROPERTY(bool flagShowOldHinduSolar READ isOldHinduSolarDisplayed WRITE showOldHinduSolar NOTIFY showOldHinduSolarChanged)
 	Q_PROPERTY(bool flagShowOldHinduLunar READ isOldHinduLunarDisplayed WRITE showOldHinduLunar NOTIFY showOldHinduLunarChanged)
+	Q_PROPERTY(bool flagShowNewHinduSolar READ isNewHinduSolarDisplayed WRITE showNewHinduSolar NOTIFY showNewHinduSolarChanged)
+	Q_PROPERTY(bool flagShowNewHinduLunar READ isNewHinduLunarDisplayed WRITE showNewHinduLunar NOTIFY showNewHinduLunarChanged)
+	Q_PROPERTY(bool flagShowAstroHinduSolar READ isAstroHinduSolarDisplayed WRITE showAstroHinduSolar NOTIFY showAstroHinduSolarChanged)
+	Q_PROPERTY(bool flagShowAstroHinduLunar READ isAstroHinduLunarDisplayed WRITE showAstroHinduLunar NOTIFY showAstroHinduLunarChanged)
 	Q_PROPERTY(bool flagShowMayaLongCount READ isMayaLongCountDisplayed WRITE showMayaLongCount NOTIFY showMayaLongCountChanged)
 	Q_PROPERTY(bool flagShowMayaHaab      READ isMayaHaabDisplayed      WRITE showMayaHaab      NOTIFY showMayaHaabChanged)
 	Q_PROPERTY(bool flagShowMayaTzolkin   READ isMayaTzolkinDisplayed   WRITE showMayaTzolkin   NOTIFY showMayaTzolkinChanged)
@@ -160,6 +165,10 @@ signals:
 	void showHebrewChanged(bool b);
 	void showOldHinduSolarChanged(bool b);
 	void showOldHinduLunarChanged(bool b);
+	void showNewHinduSolarChanged(bool b);
+	void showNewHinduLunarChanged(bool b);
+	void showAstroHinduSolarChanged(bool b);
+	void showAstroHinduLunarChanged(bool b);
 	void showMayaLongCountChanged(bool b);
 	void showMayaHaabChanged(bool b);
 	void showMayaTzolkinChanged(bool b);
@@ -212,6 +221,14 @@ public slots:
 	void showOldHinduSolar(bool b);		//!< activate display of Old Hindu Solar
 	bool isOldHinduLunarDisplayed() const;	//!< display Old Hindu Lunar?
 	void showOldHinduLunar(bool b);		//!< activate display of Old Hindu Lunar
+	bool isNewHinduSolarDisplayed() const;	//!< display New Hindu Solar?
+	void showNewHinduSolar(bool b);		//!< activate display of New Hindu Solar
+	bool isNewHinduLunarDisplayed() const;	//!< display New Hindu Lunisolar?
+	void showNewHinduLunar(bool b);		//!< activate display of New Hindu Lunisolar
+	bool isAstroHinduSolarDisplayed() const;//!< display Astro Hindu Solar?
+	void showAstroHinduSolar(bool b);	//!< activate display of Astro Hindu Solar
+	bool isAstroHinduLunarDisplayed() const;//!< display Astro Hindu Lunisolar?
+	void showAstroHinduLunar(bool b);	//!< activate display of Astro Hindu Lunisolar
 	bool isMayaLongCountDisplayed() const;	//!< display Maya Long Count?
 	void showMayaLongCount(bool b);		//!< activate display of Maya Long Count
 	bool isMayaHaabDisplayed() const;	//!< display Maya Haab?
@@ -269,6 +286,10 @@ private:
 	bool flagShowHebrew;
 	bool flagShowOldHinduSolar;
 	bool flagShowOldHinduLunar;
+	bool flagShowNewHinduSolar;
+	bool flagShowNewHinduLunar;
+	bool flagShowAstroHinduSolar;
+	bool flagShowAstroHinduLunar;
 	bool flagShowMayaLongCount;
 	bool flagShowMayaHaab;
 	bool flagShowMayaTzolkin;

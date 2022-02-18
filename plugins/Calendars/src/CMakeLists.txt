@@ -43,6 +43,14 @@ SET(Calendars_SRCS
     OldHinduSolarCalendar.cpp
     OldHinduLuniSolarCalendar.hpp
     OldHinduLuniSolarCalendar.cpp
+    NewHinduCalendar.hpp
+    NewHinduCalendar.cpp
+    NewHinduLunarCalendar.hpp
+    NewHinduLunarCalendar.cpp
+    AstroHinduLunarCalendar.hpp
+    AstroHinduLunarCalendar.cpp
+    AstroHinduSolarCalendar.hpp
+    AstroHinduSolarCalendar.cpp
     MayaLongCountCalendar.hpp
     MayaLongCountCalendar.cpp
     MayaHaabCalendar.hpp
