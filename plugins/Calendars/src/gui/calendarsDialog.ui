@@ -346,28 +346,28 @@
          <item row="9" column="0">
           <widget class="QCheckBox" name="oldHinduLunarCheckBox">
            <property name="text">
-            <string>Old Hindu Lunar</string>
+            <string comment="calendar">Old Hindu Lunar</string>
            </property>
           </widget>
          </item>
          <item row="8" column="1">
           <widget class="QCheckBox" name="newHinduSolarCheckBox">
            <property name="text">
-            <string>New Hindu Solar</string>
+            <string comment="calendar">New Hindu Solar</string>
            </property>
           </widget>
          </item>
          <item row="8" column="2">
           <widget class="QCheckBox" name="astroHinduSolarCheckBox">
            <property name="text">
-            <string>Hindu Astro Solar</string>
+            <string comment="calendar">Hindu Astro Solar</string>
            </property>
           </widget>
          </item>
          <item row="9" column="2">
           <widget class="QCheckBox" name="astroHinduLunarCheckBox">
            <property name="text">
-            <string>Hindu Astro Lunar</string>
+            <string comment="calendar">Hindu Astro Lunar</string>
            </property>
           </widget>
          </item>
@@ -615,7 +615,7 @@
          <item row="1" column="1">
           <widget class="QSpinBox" name="julianYearSpinBox">
            <property name="toolTip">
-            <string>Negative years here mark years B.C.</string>
+            <string comment="calendar">Negative years here mark years B.C.</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -720,13 +720,13 @@
      </widget>
      <widget class="QWidget" name="chineseTab">
       <attribute name="title">
-       <string>Chinese</string>
+       <string comment="calendar">Chinese</string>
       </attribute>
       <layout class="QVBoxLayout" name="chineseVerticalLayout"/>
      </widget>
      <widget class="QWidget" name="mesoamericaTab">
       <attribute name="title">
-       <string>Mesoamerica</string>
+       <string comment="calendar">Mesoamerica</string>
       </attribute>
       <layout class="QVBoxLayout" name="mesoamericaVerticalLayout">
        <item>
@@ -734,7 +734,7 @@
          <item row="0" column="2">
           <widget class="QLabel" name="labelKatun">
            <property name="text">
-            <string>Katun</string>
+            <string comment="calendar">Katun</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -744,7 +744,7 @@
          <item row="5" column="0">
           <widget class="QLabel" name="labelXihuitl">
            <property name="text">
-            <string>Xihuitl</string>
+            <string comment="calendar">Xihuitl</string>
            </property>
           </widget>
          </item>
@@ -819,14 +819,14 @@
          <item row="2" column="0">
           <widget class="QLabel" name="labelHaab">
            <property name="text">
-            <string>Haab</string>
+            <string comment="calendar">Haab</string>
            </property>
           </widget>
          </item>
          <item row="0" column="3">
           <widget class="QLabel" name="labelTun">
            <property name="text">
-            <string>Tun</string>
+            <string comment="calendar">Tun</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -836,7 +836,7 @@
          <item row="0" column="5">
           <widget class="QLabel" name="labelKin">
            <property name="text">
-            <string>Kin</string>
+            <string comment="calendar">Kin</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -872,7 +872,7 @@
          <item row="0" column="4">
           <widget class="QLabel" name="labelUinal">
            <property name="text">
-            <string>Uinal</string>
+            <string comment="calendar">Uinal</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -882,7 +882,7 @@
          <item row="0" column="1">
           <widget class="QLabel" name="labelBaktun">
            <property name="text">
-            <string>Baktun</string>
+            <string comment="calendar">Baktun</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -892,7 +892,7 @@
          <item row="1" column="0">
           <widget class="QLabel" name="labelLongCount">
            <property name="text">
-            <string>Long Count</string>
+            <string comment="calendar">Long Count</string>
            </property>
           </widget>
          </item>
@@ -1024,14 +1024,14 @@
          <item row="3" column="0">
           <widget class="QLabel" name="labelTzolkin">
            <property name="text">
-            <string>Tzolkin</string>
+            <string comment="calendar">Tzolkin</string>
            </property>
           </widget>
          </item>
          <item row="6" column="0">
           <widget class="QLabel" name="labelTonalpohualli">
            <property name="text">
-            <string>Tonalpohualli</string>
+            <string comment="calendar">Tonalpohualli</string>
            </property>
           </widget>
          </item>
