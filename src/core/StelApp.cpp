@@ -406,7 +406,9 @@ void StelApp::initScriptMgr()
 	scriptMgr->addModules();
 
 #ifdef USE_STATIC_PLUGIN_CALENDARS
-	GETSTELMODULE(Calendars)->makeCalendarsScriptable(scriptMgr);
+	Calendars *cal=GETSTELMODULE(Calendars);
+	if (cal)
+		cal->makeCalendarsScriptable(scriptMgr);
 #endif
 	QString startupScript;
 	if (qApp->property("onetime_startup_script").isValid())
