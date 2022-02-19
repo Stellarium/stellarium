@@ -1694,6 +1694,32 @@ void TestCalendars::testOldHindu()
 
 void TestCalendars::testNewHindu()
 {
+	QVERIFY2(qFuzzyCompare(NewHinduCalendar::hinduSineTable( 0)*3438,    0), qPrintable(QString("hinduSinTable for %1: %2").arg( 0).arg(QString::number( NewHinduCalendar::hinduSineTable( 0)))));
+	QVERIFY2(qFuzzyCompare(NewHinduCalendar::hinduSineTable( 1)*3438,  225), qPrintable(QString("hinduSinTable for %1: %2").arg( 1).arg(QString::number( NewHinduCalendar::hinduSineTable( 1)))));
+	QVERIFY2(qFuzzyCompare(NewHinduCalendar::hinduSineTable( 2)*3438,  449), qPrintable(QString("hinduSinTable for %1: %2").arg( 2).arg(QString::number( NewHinduCalendar::hinduSineTable( 2)))));
+	QVERIFY2(qFuzzyCompare(NewHinduCalendar::hinduSineTable( 3)*3438,  671), qPrintable(QString("hinduSinTable for %1: %2").arg( 3).arg(QString::number( NewHinduCalendar::hinduSineTable( 3)))));
+	QVERIFY2(qFuzzyCompare(NewHinduCalendar::hinduSineTable( 4)*3438,  890), qPrintable(QString("hinduSinTable for %1: %2").arg( 4).arg(QString::number( NewHinduCalendar::hinduSineTable( 4)))));
+	QVERIFY2(qFuzzyCompare(NewHinduCalendar::hinduSineTable( 5)*3438, 1105), qPrintable(QString("hinduSinTable for %1: %2").arg( 5).arg(QString::number( NewHinduCalendar::hinduSineTable( 5)))));
+	QVERIFY2(qFuzzyCompare(NewHinduCalendar::hinduSineTable( 6)*3438, 1315), qPrintable(QString("hinduSinTable for %1: %2").arg( 6).arg(QString::number( NewHinduCalendar::hinduSineTable( 6)))));
+	QVERIFY2(qFuzzyCompare(NewHinduCalendar::hinduSineTable( 7)*3438, 1520), qPrintable(QString("hinduSinTable for %1: %2").arg( 7).arg(QString::number( NewHinduCalendar::hinduSineTable( 7)))));
+	QVERIFY2(qFuzzyCompare(NewHinduCalendar::hinduSineTable( 8)*3438, 1719), qPrintable(QString("hinduSinTable for %1: %2").arg( 8).arg(QString::number( NewHinduCalendar::hinduSineTable( 8)))));
+	QVERIFY2(qFuzzyCompare(NewHinduCalendar::hinduSineTable( 9)*3438, 1910), qPrintable(QString("hinduSinTable for %1: %2").arg( 9).arg(QString::number( NewHinduCalendar::hinduSineTable( 9)))));
+	QVERIFY2(qFuzzyCompare(NewHinduCalendar::hinduSineTable(10)*3438, 2093), qPrintable(QString("hinduSinTable for %1: %2").arg(10).arg(QString::number( NewHinduCalendar::hinduSineTable(10)))));
+	QVERIFY2(qFuzzyCompare(NewHinduCalendar::hinduSineTable(11)*3438, 2267), qPrintable(QString("hinduSinTable for %1: %2").arg(11).arg(QString::number( NewHinduCalendar::hinduSineTable(11)))));
+	QVERIFY2(qFuzzyCompare(NewHinduCalendar::hinduSineTable(12)*3438, 2431), qPrintable(QString("hinduSinTable for %1: %2").arg(12).arg(QString::number( NewHinduCalendar::hinduSineTable(12)))));
+	QVERIFY2(qFuzzyCompare(NewHinduCalendar::hinduSineTable(13)*3438, 2585), qPrintable(QString("hinduSinTable for %1: %2").arg(13).arg(QString::number( NewHinduCalendar::hinduSineTable(13)))));
+	QVERIFY2(qFuzzyCompare(NewHinduCalendar::hinduSineTable(14)*3438, 2728), qPrintable(QString("hinduSinTable for %1: %2").arg(14).arg(QString::number( NewHinduCalendar::hinduSineTable(14)))));
+	QVERIFY2(qFuzzyCompare(NewHinduCalendar::hinduSineTable(15)*3438, 2859), qPrintable(QString("hinduSinTable for %1: %2").arg(15).arg(QString::number( NewHinduCalendar::hinduSineTable(15)))));
+	QVERIFY2(qFuzzyCompare(NewHinduCalendar::hinduSineTable(16)*3438, 2978), qPrintable(QString("hinduSinTable for %1: %2").arg(16).arg(QString::number( NewHinduCalendar::hinduSineTable(16)))));
+	QVERIFY2(qFuzzyCompare(NewHinduCalendar::hinduSineTable(17)*3438, 3084), qPrintable(QString("hinduSinTable for %1: %2").arg(17).arg(QString::number( NewHinduCalendar::hinduSineTable(17)))));
+	QVERIFY2(qFuzzyCompare(NewHinduCalendar::hinduSineTable(18)*3438, 3177), qPrintable(QString("hinduSinTable for %1: %2").arg(18).arg(QString::number( NewHinduCalendar::hinduSineTable(18)))));
+	QVERIFY2(qFuzzyCompare(NewHinduCalendar::hinduSineTable(19)*3438, 3256), qPrintable(QString("hinduSinTable for %1: %2").arg(19).arg(QString::number( NewHinduCalendar::hinduSineTable(19)))));
+	QVERIFY2(qFuzzyCompare(NewHinduCalendar::hinduSineTable(20)*3438, 3321), qPrintable(QString("hinduSinTable for %1: %2").arg(20).arg(QString::number( NewHinduCalendar::hinduSineTable(20)))));
+	QVERIFY2(qFuzzyCompare(NewHinduCalendar::hinduSineTable(21)*3438, 3372), qPrintable(QString("hinduSinTable for %1: %2").arg(21).arg(QString::number( NewHinduCalendar::hinduSineTable(21)))));
+	QVERIFY2(qFuzzyCompare(NewHinduCalendar::hinduSineTable(22)*3438, 3409), qPrintable(QString("hinduSinTable for %1: %2").arg(22).arg(QString::number( NewHinduCalendar::hinduSineTable(22)))));
+	QVERIFY2(qFuzzyCompare(NewHinduCalendar::hinduSineTable(23)*3438, 3431), qPrintable(QString("hinduSinTable for %1: %2").arg(23).arg(QString::number( NewHinduCalendar::hinduSineTable(23)))));
+	QVERIFY2(qFuzzyCompare(NewHinduCalendar::hinduSineTable(24)*3438, 3438), qPrintable(QString("hinduSinTable for %1: %2").arg(24).arg(QString::number( NewHinduCalendar::hinduSineTable(24)))));
+
 	QVERIFY(-214193==NewHinduCalendar::fixedFromHinduSolar({-664,  5, 19}));
 	QVERIFY( -61387==NewHinduCalendar::fixedFromHinduSolar({-246,  9, 26}));
 	QVERIFY(  25469==NewHinduCalendar::fixedFromHinduSolar({  -8,  7,  9}));
