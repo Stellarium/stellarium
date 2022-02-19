@@ -299,7 +299,8 @@ void StelLogger::writeLog(QString msg)
 		msg.append(QLatin1Char('\n'));
 
 	fileMutex.lock();
-	logFile.write(qPrintable(msg), msg.size());
+	const auto utf8 = msg.toUtf8();
+	logFile.write(utf8.constData(), utf8.size());
 	log += msg;
 	fileMutex.unlock();
 }
