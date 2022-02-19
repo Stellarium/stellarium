@@ -142,7 +142,7 @@ AstroCalcDialog::AstroCalcDialog(QObject* parent)
 	Q_ASSERT(phenomenaHeader.isEmpty());
 	Q_ASSERT(positionsHeader.isEmpty());
 	Q_ASSERT(wutHeader.isEmpty());
-	Q_ASSERT(transitHeader.isEmpty());
+	Q_ASSERT(rtsHeader.isEmpty());
 	Q_ASSERT(lunareclipseHeader.isEmpty());
 	Q_ASSERT(solareclipseHeader.isEmpty());
 	Q_ASSERT(solareclipselocalHeader.isEmpty());
@@ -169,7 +169,7 @@ void AstroCalcDialog::retranslate()
 		setCelestialPositionsHeaderNames();
 		setHECPositionsHeaderNames();
 		setEphemerisHeaderNames();
-		setTransitHeaderNames();
+		setRTSHeaderNames();
 		setPhenomenaHeaderNames();
 		setWUTHeaderNames();
 		setLunarEclipseHeaderNames();
@@ -202,8 +202,8 @@ void AstroCalcDialog::retranslate()
 		ui->dateToDateTimeEdit->setToolTip(validDates);
 		ui->phenomenFromDateEdit->setToolTip(validDates);
 		ui->phenomenToDateEdit->setToolTip(validDates);
-		ui->transitFromDateEdit->setToolTip(validDates);
-		ui->transitToDateEdit->setToolTip(validDates);
+		ui->rtsFromDateEdit->setToolTip(validDates);
+		ui->rtsToDateEdit->setToolTip(validDates);
 	}
 }
 
@@ -276,8 +276,8 @@ void AstroCalcDialog::createDialogContent()
 	ui->dateToDateTimeEdit->setDateTime(currentDT.addMonths(1));
 	ui->phenomenFromDateEdit->setDateTime(currentDT);
 	ui->phenomenToDateEdit->setDateTime(currentDT.addMonths(1));
-	ui->transitFromDateEdit->setDateTime(currentDT);
-	ui->transitToDateEdit->setDateTime(currentDT.addMonths(1));
+	ui->rtsFromDateEdit->setDateTime(currentDT);
+	ui->rtsToDateEdit->setDateTime(currentDT.addMonths(1));
 	ui->eclipseFromYearSpinBox->setValue(currentDT.date().year());
 	ui->monthlyElevationTimeInfo->setStyleSheet("font-size: 18pt; color: rgb(238, 238, 238);");
 
@@ -293,10 +293,10 @@ void AstroCalcDialog::createDialogContent()
 	ui->phenomenFromDateEdit->setToolTip(validDates);
 	ui->phenomenToDateEdit->setMinimumDate(minDate);
 	ui->phenomenToDateEdit->setToolTip(validDates);
-	ui->transitFromDateEdit->setMinimumDate(minDate);
-	ui->transitFromDateEdit->setToolTip(validDates);
-	ui->transitToDateEdit->setMinimumDate(minDate);
-	ui->transitToDateEdit->setToolTip(validDates);
+	ui->rtsFromDateEdit->setMinimumDate(minDate);
+	ui->rtsFromDateEdit->setToolTip(validDates);
+	ui->rtsToDateEdit->setMinimumDate(minDate);
+	ui->rtsToDateEdit->setToolTip(validDates);
 	ui->eclipseFromYearSpinBox->setToolTip(QString("%1 %2..%3").arg(q_("Valid range years:"), QString::number(ui->eclipseFromYearSpinBox->minimum()), QString::number(ui->eclipseFromYearSpinBox->maximum())));
 	ui->pushButtonExtraEphemerisDialog->setFixedSize(QSize(20, 20));
 	ui->pushButtonCustomStepsDialog->setFixedSize(QSize(26, 26));
@@ -353,12 +353,12 @@ void AstroCalcDialog::createDialogContent()
 	connectColorButton(ui->saturnMarkerColor, "SolarSystem.ephemerisSaturnMarkerColor", "color/ephemeris_saturn_marker_color");
 
 	// Tab: Transits
-	initListTransit();
-	connect(ui->transitsCalculateButton, SIGNAL(clicked()), this, SLOT(generateTransits()));
-	connect(ui->transitsCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupTransits()));
-	connect(ui->transitsSaveButton, SIGNAL(clicked()), this, SLOT(saveTransits()));
-	connect(ui->transitTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentTransit(QModelIndex)));
-	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(setTransitCelestialBodyName()));
+	initListRTS();
+	connect(ui->rtsCalculateButton, SIGNAL(clicked()), this, SLOT(generateRTS()));
+	connect(ui->rtsCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupRTS()));
+	connect(ui->rtsSaveButton, SIGNAL(clicked()), this, SLOT(saveRTS()));
+	connect(ui->rtsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentRTS(QModelIndex)));
+	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(setRTSCelestialBodyName()));
 
 	// Tab: Eclipses
 	initListLunarEclipse();
@@ -567,7 +567,7 @@ void AstroCalcDialog::createDialogContent()
 	ui->celestialPositionsUpdateButton->setShortcut(QKeySequence("Shift+F10"));
 	ui->hecPositionsUpdateButton->setShortcut(QKeySequence("Shift+F10"));
 	ui->ephemerisPushButton->setShortcut(QKeySequence("Shift+F10"));
-	ui->transitsCalculateButton->setShortcut(QKeySequence("Shift+F10"));
+	ui->rtsCalculateButton->setShortcut(QKeySequence("Shift+F10"));
 	ui->phenomenaPushButton->setShortcut(QKeySequence("Shift+F10"));
 	ui->solareclipsesCalculateButton->setShortcut(QKeySequence("Shift+F10"));
 	ui->solareclipseslocalCalculateButton->setShortcut(QKeySequence("Shift+F10"));
@@ -591,7 +591,7 @@ void AstroCalcDialog::createDialogContent()
 	ui->angularDistanceLimitLabel->setStyleSheet(style);	
 	//ui->angularDistanceTitle->setStyleSheet(style);
 	ui->graphsNoteLabel->setStyleSheet(style);
-	ui->transitNotificationLabel->setStyleSheet(style);
+	ui->rtsNotificationLabel->setStyleSheet(style);
 	ui->gammaNoteLabel->setStyleSheet(style);
 	ui->gammaNoteSolarEclipseLabel->setStyleSheet(style);
 	ui->UncertaintiesNoteLabel->setStyleSheet(style);
@@ -2228,43 +2228,45 @@ void AstroCalcDialog::cleanupEphemeris()
 	ui->ephemerisTreeWidget->clear();
 }
 
-void AstroCalcDialog::setTransitHeaderNames()
+void AstroCalcDialog::setRTSHeaderNames()
 {
-	transitHeader.clear();
-	transitHeader << q_("Name");
-	transitHeader << q_("Date and Time");
+	rtsHeader.clear();
+	rtsHeader << q_("Name");
+	rtsHeader << qc_("Rise", "celestial event");
+	rtsHeader << qc_("Transit", "celestial event; passage across a meridian");
+	rtsHeader << qc_("Set", "celestial event");
 	// TRANSLATORS: altitude
-	transitHeader << q_("Altitude");
+	rtsHeader << q_("Altitude");
 	// TRANSLATORS: magnitude
-	transitHeader << q_("Mag.");
-	transitHeader << q_("Solar Elongation");
-	transitHeader << q_("Lunar Elongation");
-	ui->transitTreeWidget->setHeaderLabels(transitHeader);
+	rtsHeader << q_("Mag.");
+	rtsHeader << q_("Solar Elongation");
+	rtsHeader << q_("Lunar Elongation");
+	ui->rtsTreeWidget->setHeaderLabels(rtsHeader);
 
 	// adjust the column width
-	for (int i = 0; i < TransitCount; ++i)
+	for (int i = 0; i < RTSCount; ++i)
 	{
-		ui->transitTreeWidget->resizeColumnToContents(i);
+		ui->rtsTreeWidget->resizeColumnToContents(i);
 	}
 }
 
-void AstroCalcDialog::initListTransit()
+void AstroCalcDialog::initListRTS()
 {
-	ui->transitTreeWidget->clear();
-	ui->transitTreeWidget->setColumnCount(TransitCount);
-	setTransitHeaderNames();
-	ui->transitTreeWidget->header()->setSectionsMovable(false);
-	ui->transitTreeWidget->header()->setDefaultAlignment(Qt::AlignCenter);
+	ui->rtsTreeWidget->clear();
+	ui->rtsTreeWidget->setColumnCount(RTSCount);
+	setRTSHeaderNames();
+	ui->rtsTreeWidget->header()->setSectionsMovable(false);
+	ui->rtsTreeWidget->header()->setDefaultAlignment(Qt::AlignCenter);
 }
 
-void AstroCalcDialog::generateTransits()
+void AstroCalcDialog::generateRTS()
 {
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
 	if (!selectedObjects.isEmpty())
 	{
 		QString name, englishName;
 		StelObjectP selectedObject = selectedObjects[0];
-		name = ui->transitCelestialBodyNameLabel->text();
+		name = ui->rtsCelestialBodyNameLabel->text();
 		selectedObject->getEnglishName().isEmpty() ? englishName = name : englishName = selectedObject->getEnglishName();
 		//const bool isPlanet = (selectedObject->getType() == "Planet");
 
@@ -2272,7 +2274,7 @@ void AstroCalcDialog::generateTransits()
 		{
 			const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 
-			initListTransit();
+			initListRTS();
 
 			double currentStep = 1.0;
 			const PlanetP& planet = core->getCurrentPlanet();
@@ -2290,26 +2292,25 @@ void AstroCalcDialog::generateTransits()
 			const double currentJD = core->getJD();   // save current JD
 #if QT_VERSION >= QT_VERSION_CHECK(5,14,0)
 			// Note: It may even be possible to configure the time zone corrections into this call.
-			double startJD = StelUtils::qDateTimeToJd(ui->transitFromDateEdit->date().startOfDay(Qt::UTC));
-			double stopJD = StelUtils::qDateTimeToJd(ui->transitToDateEdit->date().startOfDay(Qt::UTC));
+			double startJD = StelUtils::qDateTimeToJd(ui->rtsFromDateEdit->date().startOfDay(Qt::UTC));
+			double stopJD = StelUtils::qDateTimeToJd(ui->rtsToDateEdit->date().startOfDay(Qt::UTC));
 #else
-			double startJD = StelUtils::qDateTimeToJd(QDateTime(ui->transitFromDateEdit->date()));
-			double stopJD = StelUtils::qDateTimeToJd(QDateTime(ui->transitToDateEdit->date()));
+			double startJD = StelUtils::qDateTimeToJd(QDateTime(ui->rtsFromDateEdit->date()));
+			double stopJD = StelUtils::qDateTimeToJd(QDateTime(ui->rtsToDateEdit->date()));
 #endif
 			startJD = startJD - core->getUTCOffset(startJD) / 24.;
 			stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
 			int elements = static_cast<int>((stopJD - startJD) / currentStep);
-			double JD, /*UTCshift,*/ az, alt;
+			double JD, az, alt;
 			float magnitude;
-			QString altStr, magStr, elongSStr = dash, elongLStr =dash;
+			QString riseStr, setStr, altStr, magStr, elongSStr = dash, elongLStr = dash;
 			for (int i = 0; i <= elements; i++)
 			{
-				JD = startJD + i * currentStep;
+				JD = startJD + i * currentStep + 1;
 				core->setJD(JD);
 				core->update(0); // force update to get new coordinates
-				// UTCshift = core->getUTCOffset(JD) / 24.; // Fix DST shift...
 				Vec4d rts = selectedObject->getRTSTime(core);
-				JD = rts[1]; // static_cast<int>(JD) + 0.5 + rts[1]/24. - UTCshift;
+				JD = rts[1];
 				core->setJD(JD);
 				core->update(0); // force update to get new coordinates
 
@@ -2329,46 +2330,65 @@ void AstroCalcDialog::generateTransits()
 				magnitude = selectedObject->getVMagnitudeWithExtinction(core);
 				magStr = (magnitude > 50.f || selectedObject->getEnglishName().contains("marker", Qt::CaseInsensitive)? dash : QString::number(magnitude, 'f', 2));
 
-				ACTransitTreeWidgetItem* treeItem = new ACTransitTreeWidgetItem(ui->transitTreeWidget);
-				treeItem->setText(TransitCOName, name);
-				treeItem->setData(TransitCOName, Qt::UserRole, englishName);
-				treeItem->setText(TransitDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD))); // local date and time
-				treeItem->setData(TransitDate, Qt::UserRole, JD);
-				treeItem->setText(TransitAltitude, altStr);
-				treeItem->setTextAlignment(TransitAltitude, Qt::AlignRight);
-				treeItem->setText(TransitMagnitude, magStr);
-				treeItem->setTextAlignment(TransitMagnitude, Qt::AlignRight);
-				treeItem->setText(TransitElongation, elongSStr);
-				treeItem->setTextAlignment(TransitElongation, Qt::AlignRight);
-				treeItem->setText(TransitAngularDistance, elongLStr);
-				treeItem->setTextAlignment(TransitAngularDistance, Qt::AlignRight);
+				if (rts[3]==0.)
+				{
+					riseStr = QString("%1 %2").arg(localeMgr->getPrintableDateLocal(rts[0]), localeMgr->getPrintableTimeLocal(rts[0]));
+					setStr = QString("%1 %2").arg(localeMgr->getPrintableDateLocal(rts[2]), localeMgr->getPrintableTimeLocal(rts[2]));
+				}
+				else
+					riseStr = setStr = dash;
+
+				ACRTSTreeWidgetItem* treeItem = new ACRTSTreeWidgetItem(ui->rtsTreeWidget);
+				treeItem->setText(RTSCOName, name);
+				treeItem->setData(RTSCOName, Qt::UserRole, englishName);
+				treeItem->setText(RTSRiseDate, riseStr); // local date and time
+				treeItem->setData(RTSRiseDate, Qt::UserRole, rts[0]);
+				treeItem->setTextAlignment(RTSRiseDate, Qt::AlignRight);
+				treeItem->setText(RTSTransitDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD))); // local date and time
+				treeItem->setData(RTSTransitDate, Qt::UserRole, JD);
+				treeItem->setTextAlignment(RTSTransitDate, Qt::AlignRight);
+				treeItem->setText(RTSSetDate, setStr); // local date and time
+				treeItem->setData(RTSSetDate, Qt::UserRole, rts[2]);
+				treeItem->setTextAlignment(RTSSetDate, Qt::AlignRight);
+				treeItem->setText(RTSTransitAltitude, altStr);
+				treeItem->setToolTip(RTSTransitAltitude, q_("Altitude of celestial object at transit"));
+				treeItem->setTextAlignment(RTSTransitAltitude, Qt::AlignRight);
+				treeItem->setText(RTSMagnitude, magStr);
+				treeItem->setTextAlignment(RTSMagnitude, Qt::AlignRight);
+				treeItem->setToolTip(RTSMagnitude, q_("Magnitude of celestial object at transit"));
+				treeItem->setText(RTSElongation, elongSStr);
+				treeItem->setTextAlignment(RTSElongation, Qt::AlignRight);
+				treeItem->setToolTip(RTSElongation, q_("Celestial object's angular distance from the Sun at transit"));
+				treeItem->setText(RTSAngularDistance, elongLStr);
+				treeItem->setTextAlignment(RTSAngularDistance, Qt::AlignRight);
+				treeItem->setToolTip(RTSAngularDistance, q_("Celestial object's angular distance from the Moon at transit"));
 			}
 			core->setJD(currentJD);
 
 			// adjust the column width
-			for (int i = 0; i < TransitCount; ++i)
+			for (int i = 0; i < RTSCount; ++i)
 			{
-				ui->transitTreeWidget->resizeColumnToContents(i);
+				ui->rtsTreeWidget->resizeColumnToContents(i);
 			}
 
 			// sort-by-date
-			ui->transitTreeWidget->sortItems(TransitDate, Qt::AscendingOrder);
+			ui->rtsTreeWidget->sortItems(RTSTransitDate, Qt::AscendingOrder);
 		}
 		else
-			cleanupTransits();
+			cleanupRTS();
 	}
 }
 
-void AstroCalcDialog::cleanupTransits()
+void AstroCalcDialog::cleanupRTS()
 {
-	ui->transitTreeWidget->clear();
+	ui->rtsTreeWidget->clear();
 }
 
-void AstroCalcDialog::selectCurrentTransit(const QModelIndex& modelIndex)
+void AstroCalcDialog::selectCurrentRTS(const QModelIndex& modelIndex)
 {
 	// Find the object
-	QString name = modelIndex.sibling(modelIndex.row(), TransitCOName).data(Qt::UserRole).toString();
-	double JD = modelIndex.sibling(modelIndex.row(), TransitDate).data(Qt::UserRole).toDouble();
+	QString name = modelIndex.sibling(modelIndex.row(), RTSCOName).data(Qt::UserRole).toString();
+	double JD = modelIndex.sibling(modelIndex.row(), RTSTransitDate).data(Qt::UserRole).toDouble();
 
 	if (objectMgr->findAndSelectI18n(name) || objectMgr->findAndSelect(name))
 	{
@@ -2390,7 +2410,7 @@ void AstroCalcDialog::selectCurrentTransit(const QModelIndex& modelIndex)
 	}
 }
 
-void AstroCalcDialog::setTransitCelestialBodyName()
+void AstroCalcDialog::setRTSCelestialBodyName()
 {
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
 	QString name;
@@ -2413,10 +2433,10 @@ void AstroCalcDialog::setTransitCelestialBodyName()
 		if (selectedObject->getType()=="Satellite")
 			name = QString();
 	}
-	ui->transitCelestialBodyNameLabel->setText(name);
+	ui->rtsCelestialBodyNameLabel->setText(name);
 }
 
-void AstroCalcDialog::saveTransits()
+void AstroCalcDialog::saveRTS()
 {
 	QString filter = q_("Microsoft Excel Open XML Spreadsheet");
 	filter.append(" (*.xlsx);;");
@@ -2424,24 +2444,24 @@ void AstroCalcDialog::saveTransits()
 	filter.append(" (*.csv)");
 	QString defaultFilter("(*.xlsx)");
 	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
-							q_("Save calculated transits as..."),
-							QDir::homePath() + "/transits.xlsx",
+							q_("Save calculated data as..."),
+							QDir::homePath() + "/RTS.xlsx",
 							filter,
 							&defaultFilter);
 
 	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
-		saveTableAsCSV(filePath, ui->transitTreeWidget, ephemerisHeader);
+		saveTableAsCSV(filePath, ui->rtsTreeWidget, ephemerisHeader);
 	else
 	{
-		int count = ui->transitTreeWidget->topLevelItemCount();
-		int columns = transitHeader.size();
+		int count = ui->rtsTreeWidget->topLevelItemCount();
+		int columns = rtsHeader.size();
 		int *width = new int[static_cast<unsigned int>(columns)];
 		QString sData;
 
 		QXlsx::Document xlsx;
 		xlsx.setDocumentProperty("title", q_("Transits"));
 		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
-		xlsx.addSheet(ui->transitCelestialBodyNameLabel->text(), AbstractSheet::ST_WorkSheet);
+		xlsx.addSheet(ui->rtsCelestialBodyNameLabel->text(), AbstractSheet::ST_WorkSheet);
 
 		QXlsx::Format header;
 		header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
@@ -2452,7 +2472,7 @@ void AstroCalcDialog::saveTransits()
 		for (int i = 0; i < columns; i++)
 		{
 			// Row 1: Names of columns
-			sData = transitHeader.at(i).trimmed();
+			sData = rtsHeader.at(i).trimmed();
 			xlsx.write(1, i + 1, sData, header);
 			width[i] = sData.size();
 		}
@@ -2464,7 +2484,7 @@ void AstroCalcDialog::saveTransits()
 			for (int j = 0; j < columns; j++)
 			{
 				// Row 2 and next: the data
-				sData = ui->transitTreeWidget->topLevelItem(i)->text(j).trimmed();
+				sData = ui->rtsTreeWidget->topLevelItem(i)->text(j).trimmed();
 				xlsx.write(i + 2, j + 1, sData, data);
 				int w = sData.size();
 				if (w > width[j])
@@ -6687,9 +6707,9 @@ void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* prev
 		ui->dateToDateTimeEdit->setDateTime(currentDT.addMonths(1));
 	}
 
-	// special case - transits
+	// special case - RTS
 	if (ui->stackListWidget->row(current) == 2)
-		setTransitCelestialBodyName();
+		setRTSCelestialBodyName();
 
 	// special case - graphs
 	if (ui->stackListWidget->row(current) == 4)

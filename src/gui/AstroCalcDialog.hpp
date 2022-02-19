@@ -104,16 +104,18 @@ public:
 		EphemerisCount          //! total number of columns
 	};
 
-	//! Defines the number and the order of the columns in the transit table
-	//! @enum TransitColumns
-	enum TransitColumns {
-		TransitCOName,          //! name of celestial object
-		TransitDate,            //! date and time of transit
-		TransitAltitude,        //! altitude
-		TransitMagnitude,       //! magnitude
-		TransitElongation,      //! elongation (from the Sun)
-		TransitAngularDistance, //! angular distance (from the Moon)
-		TransitCount            //! total number of columns
+	//! Defines the number and the order of the columns in the rises, transits and sets table
+	//! @enum RTSColumns
+	enum RTSColumns {
+		RTSCOName,              //! name of celestial object
+		RTSRiseDate,            //! date and time of rise
+		RTSTransitDate,         //! date and time of transit
+		RTSSetDate,             //! date and time of set
+		RTSTransitAltitude,     //! altitude at transit
+		RTSMagnitude,           //! magnitude at transit
+		RTSElongation,          //! elongation at transit (from the Sun)
+		RTSAngularDistance,     //! angular distance at transit (from the Moon)
+		RTSCount                //! total number of columns
 	};
 
 	//! Defines the number and the order of the columns in the phenomena table
@@ -255,15 +257,15 @@ private slots:
 	void onChangedEphemerisPosition();
 	void reGenerateEphemeris();
 
-	//! Calculating the transits for selected celestial body and fill the list.
-	void generateTransits();
-	void cleanupTransits();
-	void selectCurrentTransit(const QModelIndex &modelIndex);
-	void saveTransits();
-	void setTransitCelestialBodyName();
+	//! Calculating the rises, transits and sets for selected celestial body and fill the list.
+	void generateRTS();
+	void cleanupRTS();
+	void selectCurrentRTS(const QModelIndex &modelIndex);
+	void saveRTS();
+	void setRTSCelestialBodyName();
 
 	//! Calculating lunar eclipses to fill the list.
-	//! Algorithm taken from calculating the transits.
+	//! Algorithm taken from calculating the rises, transits and sets.
 	void generateLunarEclipses();
 	void cleanupLunarEclipses();
 	void selectCurrentLunarEclipse(const QModelIndex &modelIndex);
@@ -408,8 +410,8 @@ private:
 	void setHECPositionsHeaderNames();
 	//! Update header names for ephemeris table
 	void setEphemerisHeaderNames();
-	//! update header names for transit table
-	void setTransitHeaderNames();
+	//! update header names for rises, transists and sets table
+	void setRTSHeaderNames();
 	//! Update header names for phenomena table
 	void setPhenomenaHeaderNames();
 	//! Update header names for WUT table
@@ -427,8 +429,8 @@ private:
 	void initListHECPositions();
 	//! Init header and list of ephemeris
 	void initListEphemeris();
-	//! Init header and list of transits
-	void initListTransit();
+	//! Init header and list of rises, transists and sets
+	void initListRTS();
 	//! Init header and list of phenomena
 	void initListPhenomena();
 	//! Init header and list of WUT
@@ -521,7 +523,7 @@ private:
 
 	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph, plotAngularDistanceGraph, plotAziVsTime;
 	int altVsTimePositiveLimit, monthlyElevationPositiveLimit, graphsDuration;
-	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, hecPositionsHeader, wutHeader, transitHeader, lunareclipseHeader, solareclipseHeader, solareclipselocalHeader;
+	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, hecPositionsHeader, wutHeader, rtsHeader, lunareclipseHeader, solareclipseHeader, solareclipselocalHeader;
 	static double brightLimit;
 	static double minY, maxY, minYme, maxYme, minYsun, maxYsun, minYmoon, maxYmoon, transitX, minY1, maxY1, minY2, maxY2,
 			     minYld, maxYld, minYad, maxYad, minYadm, maxYadm, minYaz, maxYaz;
@@ -544,81 +546,81 @@ private:
 	bool graphPlotNeedsRefresh;
 
 	enum PhenomenaCategory {
-		PHCLatestSelectedObject			= -1,
-		PHCSolarSystem					= 0,
-		PHCPlanets						= 1,
-		PHCAsteroids						= 2,
-		PHCPlutinos						= 3,
-		PHCComets						= 4,
-		PHCDwarfPlanets					= 5,
-		PHCCubewanos					= 6,
-		PHCScatteredDiscObjects			= 7,
-		PHCOortCloudObjects				= 8,
-		PHCSednoids						= 9,
-		PHCBrightStars					= 10,
-		PHCBrightDoubleStars				= 11,
-		PHCBrightVariableStars				= 12,
-		PHCBrightStarClusters				= 13,
-		PHCPlanetaryNebulae				= 14,
-		PHCBrightNebulae					= 15,
-		PHCDarkNebulae					= 16,
-		PHCBrightGalaxies					= 17,
-		PHCSymbioticStars					= 18,
-		PHCEmissionLineStars				= 19,
-		PHCInterstellarObjects				= 20,
-		PHCPlanetsSun					= 21,
-		PHCSunPlanetsMoons				= 22,
-		PHCBrightSolarSystemObjects		= 23,
-		PHCSolarSystemMinorBodies		= 24,
-		PHCMoonsFirstBody				= 25,
-		PHCBrightCarbonStars				= 26,
-		PHCBrightBariumStars				= 27,
+		PHCLatestSelectedObject     = -1,
+		PHCSolarSystem              =  0,
+		PHCPlanets                  =  1,
+		PHCAsteroids                =  2,
+		PHCPlutinos                 =  3,
+		PHCComets                   =  4,
+		PHCDwarfPlanets             =  5,
+		PHCCubewanos                =  6,
+		PHCScatteredDiscObjects     =  7,
+		PHCOortCloudObjects         =  8,
+		PHCSednoids                 =  9,
+		PHCBrightStars              = 10,
+		PHCBrightDoubleStars        = 11,
+		PHCBrightVariableStars      = 12,
+		PHCBrightStarClusters       = 13,
+		PHCPlanetaryNebulae         = 14,
+		PHCBrightNebulae            = 15,
+		PHCDarkNebulae              = 16,
+		PHCBrightGalaxies           = 17,
+		PHCSymbioticStars           = 18,
+		PHCEmissionLineStars        = 19,
+		PHCInterstellarObjects      = 20,
+		PHCPlanetsSun               = 21,
+		PHCSunPlanetsMoons          = 22,
+		PHCBrightSolarSystemObjects = 23,
+		PHCSolarSystemMinorBodies   = 24,
+		PHCMoonsFirstBody           = 25,
+		PHCBrightCarbonStars        = 26,
+		PHCBrightBariumStars        = 27,
 		PHCNone	// stop gapper for syntax reasons
 	};
 
 	enum WUTCategory {
-		EWPlanets						= 0,
-		EWBrightStars					= 1,
-		EWBrightNebulae					= 2,
-		EWDarkNebulae					= 3,
-		EWGalaxies						= 4,
-		EWOpenStarClusters				= 5,
-		EWAsteroids						= 6,
-		EWComets						= 7,
-		EWPlutinos						= 8,
-		EWDwarfPlanets					= 9,
-		EWCubewanos					= 10,
-		EWScatteredDiscObjects			= 11,
-		EWOortCloudObjects				= 12,
-		EWSednoids						= 13,
-		EWPlanetaryNebulae				= 14,
-		EWBrightDoubleStars				= 15,
-		EWBrightVariableStars				= 16,
-		EWBrightStarsWithHighProperMotion	= 17,
-		EWSymbioticStars					= 18,
-		EWEmissionLineStars				= 19,
-		EWSupernovaeCandidates			= 20,
-		EWSupernovaeRemnantCandidates	= 21,
-		EWSupernovaeRemnants			= 22,
-		EWClustersOfGalaxies				= 23,
-		EWInterstellarObjects				= 24,
-		EWGlobularStarClusters			= 25,
-		EWRegionsOfTheSky				= 26,
-		EWActiveGalaxies					= 27,
-		EWPulsars						= 28,
-		EWExoplanetarySystems			= 29,
-		EWBrightNovaStars				= 30,
-		EWBrightSupernovaStars			= 31,
-		EWInteractingGalaxies				= 32,
-		EWDeepSkyObjects				= 33,
-		EWMessierObjects					= 34,
-		EWNGCICObjects					= 35,
-		EWCaldwellObjects				= 36,
-		EWHerschel400Objects				= 37,
-		EWAlgolTypeVariableStars			= 38,	// http://www.sai.msu.su/gcvs/gcvs/vartype.htm
-		EWClassicalCepheidsTypeVariableStars	= 39,	// http://www.sai.msu.su/gcvs/gcvs/vartype.htm
-		EWCarbonStars					= 40,
-		EWBariumStars					= 41,
+		EWPlanets                            =  0,
+		EWBrightStars                        =  1,
+		EWBrightNebulae                      =  2,
+		EWDarkNebulae                        =  3,
+		EWGalaxies                           =  4,
+		EWOpenStarClusters                   =  5,
+		EWAsteroids                          =  6,
+		EWComets                             =  7,
+		EWPlutinos                           =  8,
+		EWDwarfPlanets                       =  9,
+		EWCubewanos                          = 10,
+		EWScatteredDiscObjects               = 11,
+		EWOortCloudObjects                   = 12,
+		EWSednoids                           = 13,
+		EWPlanetaryNebulae                   = 14,
+		EWBrightDoubleStars                  = 15,
+		EWBrightVariableStars                = 16,
+		EWBrightStarsWithHighProperMotion    = 17,
+		EWSymbioticStars                     = 18,
+		EWEmissionLineStars                  = 19,
+		EWSupernovaeCandidates               = 20,
+		EWSupernovaeRemnantCandidates        = 21,
+		EWSupernovaeRemnants                 = 22,
+		EWClustersOfGalaxies                 = 23,
+		EWInterstellarObjects                = 24,
+		EWGlobularStarClusters               = 25,
+		EWRegionsOfTheSky                    = 26,
+		EWActiveGalaxies                     = 27,
+		EWPulsars                            = 28,
+		EWExoplanetarySystems                = 29,
+		EWBrightNovaStars                    = 30,
+		EWBrightSupernovaStars               = 31,
+		EWInteractingGalaxies                = 32,
+		EWDeepSkyObjects                     = 33,
+		EWMessierObjects                     = 34,
+		EWNGCICObjects                       = 35,
+		EWCaldwellObjects                    = 36,
+		EWHerschel400Objects                 = 37,
+		EWAlgolTypeVariableStars             = 38, // http://www.sai.msu.su/gcvs/gcvs/vartype.htm
+		EWClassicalCepheidsTypeVariableStars = 39, // http://www.sai.msu.su/gcvs/gcvs/vartype.htm
+		EWCarbonStars                        = 40,
+		EWBariumStars                        = 41,
 		EWNone	// stop gapper for syntax reasons
 	};
 };
@@ -741,10 +743,10 @@ private:
 };
 
 // Reimplements the QTreeWidgetItem class to fix the sorting bug
-class ACTransitTreeWidgetItem : public QTreeWidgetItem
+class ACRTSTreeWidgetItem : public QTreeWidgetItem
 {
 public:
-	ACTransitTreeWidgetItem(QTreeWidget* parent)
+	ACRTSTreeWidgetItem(QTreeWidget* parent)
 		: QTreeWidgetItem(parent)
 	{
 	}
@@ -754,15 +756,15 @@ private:
 	{
 		int column = treeWidget()->sortColumn();
 
-		if (column == AstroCalcDialog::TransitDate)
+		if (column == AstroCalcDialog::RTSRiseDate || column == AstroCalcDialog::RTSTransitDate || column == AstroCalcDialog::RTSSetDate)
 		{
 			return data(column, Qt::UserRole).toFloat() < other.data(column, Qt::UserRole).toFloat();
 		}
-		else if (column == AstroCalcDialog::TransitMagnitude)
+		else if (column == AstroCalcDialog::RTSMagnitude)
 		{
 			return text(column).toFloat() < other.text(column).toFloat();
 		}
-		else if (column == AstroCalcDialog::TransitAltitude || column == AstroCalcDialog::TransitElongation || column == AstroCalcDialog::TransitAngularDistance)
+		else if (column == AstroCalcDialog::RTSTransitAltitude || column == AstroCalcDialog::RTSElongation || column == AstroCalcDialog::RTSAngularDistance)
 		{
 			return StelUtils::getDecAngle(text(column)) < StelUtils::getDecAngle(other.text(column));
 		}
