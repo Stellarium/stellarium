@@ -107,15 +107,15 @@ public:
 	//! Defines the number and the order of the columns in the rises, transits and sets table
 	//! @enum RTSColumns
 	enum RTSColumns {
-		RTSCOName,		//! name of celestial object
+		RTSCOName,              //! name of celestial object
 		RTSRiseDate,            //! date and time of rise
 		RTSTransitDate,         //! date and time of transit
-		RTSSetDate,		//! date and time of set
+		RTSSetDate,             //! date and time of set
 		RTSTransitAltitude,     //! altitude at transit
-		RTSMagnitude,		//! magnitude at transit
-		RTSElongation,		//! elongation at transit (from the Sun)
-		RTSAngularDistance,	//! angular distance at transit (from the Moon)
-		RTSCount		//! total number of columns
+		RTSMagnitude,           //! magnitude at transit
+		RTSElongation,          //! elongation at transit (from the Sun)
+		RTSAngularDistance,     //! angular distance at transit (from the Moon)
+		RTSCount                //! total number of columns
 	};
 
 	//! Defines the number and the order of the columns in the phenomena table
@@ -546,81 +546,81 @@ private:
 	bool graphPlotNeedsRefresh;
 
 	enum PhenomenaCategory {
-		PHCLatestSelectedObject			= -1,
-		PHCSolarSystem					= 0,
-		PHCPlanets						= 1,
-		PHCAsteroids						= 2,
-		PHCPlutinos						= 3,
-		PHCComets						= 4,
-		PHCDwarfPlanets					= 5,
-		PHCCubewanos					= 6,
-		PHCScatteredDiscObjects			= 7,
-		PHCOortCloudObjects				= 8,
-		PHCSednoids						= 9,
-		PHCBrightStars					= 10,
-		PHCBrightDoubleStars				= 11,
-		PHCBrightVariableStars				= 12,
-		PHCBrightStarClusters				= 13,
-		PHCPlanetaryNebulae				= 14,
-		PHCBrightNebulae					= 15,
-		PHCDarkNebulae					= 16,
-		PHCBrightGalaxies					= 17,
-		PHCSymbioticStars					= 18,
-		PHCEmissionLineStars				= 19,
-		PHCInterstellarObjects				= 20,
-		PHCPlanetsSun					= 21,
-		PHCSunPlanetsMoons				= 22,
-		PHCBrightSolarSystemObjects		= 23,
-		PHCSolarSystemMinorBodies		= 24,
-		PHCMoonsFirstBody				= 25,
-		PHCBrightCarbonStars				= 26,
-		PHCBrightBariumStars				= 27,
+		PHCLatestSelectedObject     = -1,
+		PHCSolarSystem              =  0,
+		PHCPlanets                  =  1,
+		PHCAsteroids                =  2,
+		PHCPlutinos                 =  3,
+		PHCComets                   =  4,
+		PHCDwarfPlanets             =  5,
+		PHCCubewanos                =  6,
+		PHCScatteredDiscObjects     =  7,
+		PHCOortCloudObjects         =  8,
+		PHCSednoids                 =  9,
+		PHCBrightStars              = 10,
+		PHCBrightDoubleStars        = 11,
+		PHCBrightVariableStars      = 12,
+		PHCBrightStarClusters       = 13,
+		PHCPlanetaryNebulae         = 14,
+		PHCBrightNebulae            = 15,
+		PHCDarkNebulae              = 16,
+		PHCBrightGalaxies           = 17,
+		PHCSymbioticStars           = 18,
+		PHCEmissionLineStars        = 19,
+		PHCInterstellarObjects      = 20,
+		PHCPlanetsSun               = 21,
+		PHCSunPlanetsMoons          = 22,
+		PHCBrightSolarSystemObjects = 23,
+		PHCSolarSystemMinorBodies   = 24,
+		PHCMoonsFirstBody           = 25,
+		PHCBrightCarbonStars        = 26,
+		PHCBrightBariumStars        = 27,
 		PHCNone	// stop gapper for syntax reasons
 	};
 
 	enum WUTCategory {
-		EWPlanets						= 0,
-		EWBrightStars					= 1,
-		EWBrightNebulae					= 2,
-		EWDarkNebulae					= 3,
-		EWGalaxies						= 4,
-		EWOpenStarClusters				= 5,
-		EWAsteroids						= 6,
-		EWComets						= 7,
-		EWPlutinos						= 8,
-		EWDwarfPlanets					= 9,
-		EWCubewanos					= 10,
-		EWScatteredDiscObjects			= 11,
-		EWOortCloudObjects				= 12,
-		EWSednoids						= 13,
-		EWPlanetaryNebulae				= 14,
-		EWBrightDoubleStars				= 15,
-		EWBrightVariableStars				= 16,
-		EWBrightStarsWithHighProperMotion	= 17,
-		EWSymbioticStars					= 18,
-		EWEmissionLineStars				= 19,
-		EWSupernovaeCandidates			= 20,
-		EWSupernovaeRemnantCandidates	= 21,
-		EWSupernovaeRemnants			= 22,
-		EWClustersOfGalaxies				= 23,
-		EWInterstellarObjects				= 24,
-		EWGlobularStarClusters			= 25,
-		EWRegionsOfTheSky				= 26,
-		EWActiveGalaxies					= 27,
-		EWPulsars						= 28,
-		EWExoplanetarySystems			= 29,
-		EWBrightNovaStars				= 30,
-		EWBrightSupernovaStars			= 31,
-		EWInteractingGalaxies				= 32,
-		EWDeepSkyObjects				= 33,
-		EWMessierObjects					= 34,
-		EWNGCICObjects					= 35,
-		EWCaldwellObjects				= 36,
-		EWHerschel400Objects				= 37,
-		EWAlgolTypeVariableStars			= 38,	// http://www.sai.msu.su/gcvs/gcvs/vartype.htm
-		EWClassicalCepheidsTypeVariableStars	= 39,	// http://www.sai.msu.su/gcvs/gcvs/vartype.htm
-		EWCarbonStars					= 40,
-		EWBariumStars					= 41,
+		EWPlanets                            =  0,
+		EWBrightStars                        =  1,
+		EWBrightNebulae                      =  2,
+		EWDarkNebulae                        =  3,
+		EWGalaxies                           =  4,
+		EWOpenStarClusters                   =  5,
+		EWAsteroids                          =  6,
+		EWComets                             =  7,
+		EWPlutinos                           =  8,
+		EWDwarfPlanets                       =  9,
+		EWCubewanos                          = 10,
+		EWScatteredDiscObjects               = 11,
+		EWOortCloudObjects                   = 12,
+		EWSednoids                           = 13,
+		EWPlanetaryNebulae                   = 14,
+		EWBrightDoubleStars                  = 15,
+		EWBrightVariableStars                = 16,
+		EWBrightStarsWithHighProperMotion    = 17,
+		EWSymbioticStars                     = 18,
+		EWEmissionLineStars                  = 19,
+		EWSupernovaeCandidates               = 20,
+		EWSupernovaeRemnantCandidates        = 21,
+		EWSupernovaeRemnants                 = 22,
+		EWClustersOfGalaxies                 = 23,
+		EWInterstellarObjects                = 24,
+		EWGlobularStarClusters               = 25,
+		EWRegionsOfTheSky                    = 26,
+		EWActiveGalaxies                     = 27,
+		EWPulsars                            = 28,
+		EWExoplanetarySystems                = 29,
+		EWBrightNovaStars                    = 30,
+		EWBrightSupernovaStars               = 31,
+		EWInteractingGalaxies                = 32,
+		EWDeepSkyObjects                     = 33,
+		EWMessierObjects                     = 34,
+		EWNGCICObjects                       = 35,
+		EWCaldwellObjects                    = 36,
+		EWHerschel400Objects                 = 37,
+		EWAlgolTypeVariableStars             = 38, // http://www.sai.msu.su/gcvs/gcvs/vartype.htm
+		EWClassicalCepheidsTypeVariableStars = 39, // http://www.sai.msu.su/gcvs/gcvs/vartype.htm
+		EWCarbonStars                        = 40,
+		EWBariumStars                        = 41,
 		EWNone	// stop gapper for syntax reasons
 	};
 };
