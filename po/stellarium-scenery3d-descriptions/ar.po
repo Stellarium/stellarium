@@ -6,6 +6,7 @@
 # Translators:
 # Latein Lebt, 2022
 # cardinot <mcardinot@gmail.com>, 2022
+# Khalid AlAjaji, 2022
 # 
 #, fuzzy
 msgid ""
@@ -14,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2021-09-19 19:50+0700\n"
 "PO-Revision-Date: 2020-11-24 18:28+0000\n"
-"Last-Translator: cardinot <mcardinot@gmail.com>, 2022\n"
+"Last-Translator: Khalid AlAjaji, 2022\n"
 "Language-Team: Arabic (https://www.transifex.com/stellarium/teams/80998/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,11 +36,14 @@ msgid ""
 "or some other details to find out how this plugin behaves. Then build and "
 "present your own work!"
 msgstr ""
+"هذا المنظر مفيد كأساس لتطوير مناظرك الخاصة. انسخ مجلد المنظر وعدّل عليه كما "
+"تشاء، جرب إعدادات المواد أو بعض التفاصيل الأخرى لتتعرف على كيقية عمل هذه "
+"الإضافة. بعد ذلك ابن عملك الخاص واعرضه!"
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Testscene/description.en.utf8:8
 msgid "Coordinate and orientation tests"
-msgstr ""
+msgstr "اختبارات الإحداثيات والاتجاه"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:10
@@ -53,6 +57,12 @@ msgid ""
 "absolutely and always point west-east, the grid lines hit the northern "
 "horizon slightly (4.2 deg) left of north!"
 msgstr ""
+"الأعمدة الظاهرة هنا، كما ترى من وسط المبنى، تعطي مشهدا تقريبيا (ليس عالي "
+"الدقة!) للانقلابين والاعتدالين وشروق وغياب الشمس في عروض وسط أوروبا. الشبكة "
+"المرئية على الأرضية لا تستقيم مع الشمال الجغرافي. يعوض هذا بتدوير مقداره "
+"-4.2 درجة (اختبار التقاء الخطوط عند الرأس)، بمعنى أنه إذا كانت الأعمدة متجهة"
+" تماما إلى الشرق والغرب، فإن خطوط الشبكة تميل عن الأفق الشمالي (-4.2 درجة) "
+"يسار الشمال!"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:19
@@ -60,11 +70,13 @@ msgid ""
 "Walkaround ground coordinates (Ctrl-R, T) should display the coordinates "
 "visible along the south and west border of the ground."
 msgstr ""
+"إحداثيات التجول الأرضية (Ctrl-R, T) تعرض الإحداثيات المرئية على طول حدود "
+"الأرض الجنوبية والغربية."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Testscene/description.en.utf8:23
 msgid "Material test"
-msgstr ""
+msgstr "اختبار المواد"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:25
@@ -73,6 +85,8 @@ msgid ""
 " can play with material parameters to create funny effects like "
 "semitransparent or glow-in-the-dark brick spheres."
 msgstr ""
+"يستخدم هذا النموذج أيضا في اختبار قدرات هذه الإضافة الرسومية. تستطيع تجريب "
+"قيم المعاملات لإنشاء تأثيرات طريفة مثل كرات طوب شبه شفافة أو فوسفورية."
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:29
@@ -80,12 +94,14 @@ msgid ""
 "To test temporal features, the pillars and spheres are visible only from the"
 " years 2000 until 2020.  Edit the material file to change that!"
 msgstr ""
+"لاختبار المزايا الدنيوية، فإن الأعمدة والكرات لا ترى إلا في الفترة من 2000 "
+"إلى 2020. يمكنك تحرير ملف المادة لتعديل ذلك!"
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Testscene/description.en.utf8:32
 #: ../../scenery3d/Sterngarten/description.en.utf8:56
 msgid "Model"
-msgstr ""
+msgstr "النموذج"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:33
@@ -93,6 +109,8 @@ msgid ""
 "Testscene for Stellarium/scenery3d development. Export from SU8-Kerkythea-"
 "KT2OBJ."
 msgstr ""
+"منظر اختباري لتطوير المناظر ثلاثية الأبعاد في ستيللاريوم. مورد من "
+"SU8-Kerkythea-KT2OBJ."
 
 #. type: Content of: <h2>
 #: ../../scenery3d/Sterngarten/description.en.utf8:1
@@ -105,6 +123,8 @@ msgid ""
 "Sterngarten (\"Star Garden\") is an open-air planetarium in the south-west "
 "of Vienna, demonstrating the solar year."
 msgstr ""
+"Sterngarten (\"حديقة النجوم\") قبة فلكية مفتوحة في جنوب غرب فيينا، تعرض "
+"السنة الشمسية.  "
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:7
@@ -118,11 +138,14 @@ msgid ""
 "Astronomical Bureau (1907) and Austrian Astronomical Society (1924). "
 "Director of first Vienna Planetarium (1927) and Urania observatory."
 msgstr ""
+"Univ.Prof.Dr.Oswald Thomas (1882 Kronstadt - 1963 Vienna). مؤسس, المكتب "
+"الفلكي (1907) والجمعية الفلكية النمساوية (1924). مدير أول قبة فلكية في فيينا"
+"  (1927) ومرصد أورانيا."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:14
 msgid "Construction"
-msgstr ""
+msgstr "البناء"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:16
@@ -136,6 +159,12 @@ msgid ""
 "Calendar)  and the monthly journal \"Der Sternenbote\" (The Starry "
 "Messenger)."
 msgstr ""
+"طورت حديقة النجوم من قبل تلميذ Thomas وخليفته في المكتب الفلكي البروفيسور "
+"Hermann Mucke عاش (1935-2019) ومساعديه. وكان Mucke أيضا سكرتيرا للجمعية "
+"الفلكية النمساوية من 1963 إلى 2018، ومديرا لقبة فيينا الفلكية 1963-2001 "
+"ومرصد أورانيا العام في فيينا 1971-2001. ولأكثر من 60 سنة نشر Mucke والجمعية "
+"\"Österreichischer Himmelskalender\" (التقويم النمساوي الفلكي) والمجلة "
+"الشهرية \"Der Sternenbote\"  (مرسول النجوم)."
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:22
@@ -143,11 +172,12 @@ msgid ""
 "It was built 1997-2001 by the Austrian Astronomical Society, supported by "
 "public and private sponsors."
 msgstr ""
+"بُنَيَ بين 1997 إلى 2001 من قبل الجمعية الفلكية النمساوية، بدعم شعبي وخاص."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:24
 msgid "Purpose"
-msgstr ""
+msgstr "الغرض"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:26
@@ -158,29 +188,32 @@ msgid ""
 "southwest of Vienna; always open privately for everybody free of charge. "
 "Frequently guided tours."
 msgstr ""
+"توعية الجمهور بالمعرفة الفلكية. مشاهدة الحقائق الفلكية والتغيرات بالعين "
+"المجردة، أو من خلال المناظير، متوفرة في موقعنا، في أقصى جنوب غرب فيينا؛ "
+"مفتوح مجانا لكل الأفراد. تعرض الزيارات مع دليل سياحي تقام باستمرار. "
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:32
 msgid "Components"
-msgstr ""
+msgstr "المكونات"
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:35
 msgid ""
 "Pyramid with platform 7x7m. Seen from 1.5m above Center Plate all angles "
 "fit."
-msgstr ""
+msgstr "هرم مع منصة 7×7م. ترى من 1.5 م فوق مركز الصفيحة بجميع الزوايا."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:36
 msgid "Horizon Railing, representing the mathematical horizon."
-msgstr ""
+msgstr "سياج الأفق، يمثل الأفق الرياضي."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:37
 msgid ""
 "Surrounding Steps; 200 seats. Entrance by staircase and wheelchair ramp."
-msgstr ""
+msgstr "مدرج محيط؛ 200 مقعد. مدخل بسلم درج ومنحدر للكراسي المتحركة."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:38
@@ -191,6 +224,10 @@ msgid ""
 "rising/setting on the mathematical horizon is not possible in the field due "
 "to vegetation and landscape)."
 msgstr ""
+"أعمدة لطلوع وغياب الشمس في بداية الفصول. مواقع الأعمدة مطابقة لسمت "
+"الاعتدالين والانقلابين. الأذرعة مؤشر على الأفق وتأثير التغير بسبب الانكسار. "
+"(الرصد للطلوع/ الغياب في الأفق الرياضي مستحيل في الموقع بسبب الأشجار "
+"والتضاريس)."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:42
@@ -198,6 +235,8 @@ msgid ""
 "South Pillar, marked (10&deg;/10&deg; altitude); Transit marks for sun at "
 "seasons' beginning."
 msgstr ""
+"العمود الجنوبي، (10&درجة؛/10&درجة؛ الارتفاع)؛ علامات عبور الشمس في بداية "
+"الفصل."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:43
@@ -205,6 +244,8 @@ msgid ""
 "North Pillar, marked (10&deg;/10&deg; altitude); on top Shadow Disc with "
 "central hole: North celestial Pole."
 msgstr ""
+"العمود الشمالي، (10&درجة؛/10&درجة؛ الارتفاع)؛ قرص الظل في الأعلى مع فتحة في "
+"المركز: قطب السماء الشمالي."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:44
@@ -214,16 +255,19 @@ msgid ""
 " longitude, with zodiacal signs. Ascending part serves as polar gnomon for "
 "the"
 msgstr ""
+"أناليما منحنية، مقسمة. تواريخ الربيع والصيف في الجزء الأفقي، الخريف والشتاء "
+"في الجزء الصاعد، مقسمة (10&درجة؛/10&درجة؛) الطول الشمسي مع البروج. الجزء "
+"الصاعد يخدم كعقرب المزولة القطبي."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:45
 msgid "Sundial, full hours Vh to VIIh marked."
-msgstr ""
+msgstr "مزولة، ساعات كاملة، الساعة V إلى VII مقسمة."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:46
 msgid "Information panels."
-msgstr ""
+msgstr "لوحات المعلومات."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:49
@@ -233,7 +277,7 @@ msgstr "مزيد المعلومات"
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:50
 msgid "Websites in German only."
-msgstr ""
+msgstr "موقع الإنترنت بالألمانية فقط."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:52
@@ -241,6 +285,8 @@ msgid ""
 "Österreichischer Astronomischer Verein: <a "
 "href=\"https://www.astroverein.at\">https://www.astroverein.at</a>"
 msgstr ""
+"Österreichischer Astronomischer Verein: <a "
+"href=\"https://www.astroverein.at\">https://www.astroverein.at</a>"
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:53
@@ -248,6 +294,8 @@ msgid ""
 "German Wikipedia article on the <a "
 "href=\"https://de.wikipedia.org/wiki/Sterngarten\">Sterngarten</a>"
 msgstr ""
+"مقالة بالألمانية في الويكيبيديا <a "
+"href=\"https://de.wikipedia.org/wiki/Sterngarten\">Sterngarten</a>"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:57
@@ -257,6 +305,9 @@ msgid ""
 "by Mucke in his primary school days. Mucke's spirit will remain alive in the"
 " Sterngarten."
 msgstr ""
+"عمل Georg Zotti حسب مخطط H. Mucke؛ مثل عدد كبير من الفلكيين الهواة "
+"والمحترفين، تعرف Zotti  على الفلك عن طريق Mucke  في أيام المدرسة الإبتدائية."
+" روح Mucke  ستبقى حية في حديقة النجوم."
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:60
@@ -264,3 +315,5 @@ msgid ""
 "Model created in 2010 with Google Sketchup 8, exported from Google Sketchup "
 "8.0.14346."
 msgstr ""
+"تم عمل النموذج في 2010 باستخدام Google Sketchup 8, مصدر من Google Sketchup "
+"8.0.14346."
