@@ -45,6 +45,10 @@ public slots:
 	//! set RD date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! parts = {Year, Month[1...12], leapMonth[0|1], Day[1...30], leapDay[0|1] }
 	virtual void setDate(QVector<int> parts) Q_DECL_OVERRIDE;
+
+	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
+	//! @return {Year, Month, MonthName, leap[0|1], Day, DayName}
+	virtual QStringList getDateStrings() const Q_DECL_OVERRIDE;
 };
 
 #endif

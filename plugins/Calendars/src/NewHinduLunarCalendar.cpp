@@ -45,13 +45,13 @@ QStringList NewHinduLunarCalendar::getDateStrings() const
 
 	// parts={year, month, leap-month, day, leap-day}
 	QStringList list;
-	list << QString::number(parts.at(0));            // 0:year
-	list << QString::number(parts.at(1));            // 1:month
-	list << monthNames.value(parts.at(1), "error");  // 2:monthName
-	list << (parts.at(2)==1 ? "1" : "0"); // 3: leap? (1 only if leap)
-	list << QString::number(parts.at(3));            // 4:day
-	list << (parts.at(4)==1 ? "1" : ""); // 5: leap? (1 only if leap)
-	list << weekDayNames.value(dow);                 // 6:weekday
+	list << QString::number(parts.at(0));            // 0: year
+	list << QString::number(parts.at(1));            // 1: month
+	list << monthNames.value(parts.at(1), "error");  // 2: monthName
+	list << (parts.at(2)==1 ? "1" : "0");            // 3: leapMonth? (1 only if leap)
+	list << QString::number(parts.at(3));            // 4: day
+	list << (parts.at(4)==1 ? "1" : "0");            // 5: leapDay? (1 only if leap)
+	list << weekDayNames.value(dow);                 // 6: weekday
 
 	return list;
 }
@@ -62,16 +62,16 @@ QString NewHinduLunarCalendar::getFormattedDateString() const
 	QStringList str=getDateStrings();
 	// TRANSLATORS: V.E. stands for Vikrama Era
 	QString epoch = qc_("V.E.", "calendar epoch");
-	QString leap = (str.at(3)=="1" ? qc_("leap", "short indicator for leap month") : "");
-	QString adhika = (str.at(5)=="1" ? qc_("adhika", "Hindu leap month/day") : "");
+	QString leap = qc_("adhika", "Hindu leap month/day");
+
 	// Format: [weekday], [day] - [month, numeral] ([month, name]) [leap] - [year] [epoch]
-	return QString("%1, %2 - %3<sub>%6</sub> (%4)<sub>%5</sub> - %7 %8").arg(
+	return QString("%1, %2<sub>%3</sub> - %4 (%5)<sub>%6</sub> - %7 %8").arg(
 				str.at(6),
 				str.at(4),
+				(str.at(5)=="1" ? leap : ""),
 				str.at(1),
 				str.at(2),
-				leap,
-				adhika,
+				(str.at(3)=="1" ? leap : ""),
 				str.at(0),
 				epoch);
 }

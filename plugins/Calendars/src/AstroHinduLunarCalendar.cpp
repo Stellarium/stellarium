@@ -49,3 +49,23 @@ void AstroHinduLunarCalendar::setDate(QVector<int> parts)
 
 	emit jdChanged(JD);
 }
+
+// get a stringlist of calendar date elements sorted from the largest to the smallest.
+// {Year, Month, MonthName,  Day, DayName}
+QStringList AstroHinduLunarCalendar::getDateStrings() const
+{
+	const int rd=fixedFromAstroHinduLunar(parts);
+	const int dow=dayOfWeekFromFixed(rd);
+
+	// parts={year, month, leap-month, day, leap-day}
+	QStringList list;
+	list << QString::number(parts.at(0));            // 0: year
+	list << QString::number(parts.at(1));            // 1: month
+	list << monthNames.value(parts.at(1), "error");  // 2: monthName
+	list << (parts.at(2)==1 ? "1" : "0");            // 3: leapMonth? (1 only if leap)
+	list << QString::number(parts.at(3));            // 4: day
+	list << (parts.at(4)==1 ? "1" : "0");            // 5: leapDay? (1 only if leap)
+	list << weekDayNames.value(dow);                 // 6: weekday
+
+	return list;
+}
