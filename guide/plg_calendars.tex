@@ -37,8 +37,10 @@ The calendar dates in the main program behave like most other astronomical softw
 \end{itemize}
 
 \noindent Since earliest times people all over the world have observed the sky
-and used its phenomena to record and measure time. Over millennia,
-various systematic calendars evolved. A classic and often-cited
+and used its phenomena to structure their lives, agree on future events
+(``we shall meet here again and exchange goods at the third Full Moon from now''),
+record and measure time.
+Over millennia, various systematic calendars evolved. A classic and often-cited
 presentation of calendars from the pre-computer era is still the
 monumental work by Ginzel (\citeyear{Ginzel:ChronologieI, Ginzel:ChronologieII,
   Ginzel:ChronologieIII}).  The next challenge was then to describe the
@@ -174,17 +176,18 @@ Several more calendars \newFeature{0.21.0} have been worked out in algorithmic f
 
 \subsubsection{Asian calendars}
 \begin{description}
-\item[Old Hindu Solar] used before about 1100 A.D. The implementation follows the 
-  (First) \emph{\=Arya Siddh\=anta} of \=Aryabha\d{t}a (499 C.E.), 
-  as amended by Lalla (circa 720--790 C.E.).
-  The year is split into 12 months (\emph{saura}) of equal length. 
-  Days begin with sunrise, simplified as 6~am.
+\item[Old Hindu Solar] used before about 1100 A.D. The implementation
+  follows the (First) \emph{\=Arya Siddh\=anta} of \=Aryabha\d{t}a
+  (499 C.E.), as amended by Lalla (circa 720--790 C.E.).  The year is
+  split into 12 months (\emph{saura}) of equal length.  Days begin
+  with sunrise, simplified as 6~am. Years are counted from the
+  \emph{Kali Yuga} (Iron Age) epoch (3102~B.C.).
 \item[Old Hindu Lunisolar] used before about 1100~A.D. 
   This implementation shows the south-Indian method 
   with months starting at New Moon (\emph{am\=anta} scheme). 
   (In the north, the \emph{p\=ur\d{n}im\=anta} scheme describes months 
   starting with Full Moon. There are also some local differences.)
-\item[New Hindu Solar and Lunisolar] This is the classical Hindu
+\item[New Hindu Solar and Lunisolar] This is the Hindu
   calendar \newFeature{0.22.0} from the \emph{S\=urya-Siddh\=anta}
   (ca.~1000~A.D.). It is based on epicyclical motions of the Sun and
   Moon around the Earth. While still an approximation, this provides
@@ -195,13 +198,22 @@ Several more calendars \newFeature{0.21.0} have been worked out in algorithmic f
   zodiacal position of the sun at sunrise in Ujjain, India, decides on
   the date.
 
+  Years given for the Solar calendar are counted from the \emph{Saka}
+  era (A.D.~78).
+
   The lunar month name is determined by the (first) zodiacal sign
   entered by the sun during the month. When no sign is entered, the
-  month is ``leap'' and named after the following month. When a Solar
-  month elapses without a New Moon, a lunar month can also be skipped
-  (\emph{kshaya}).
-  The Lunisolar year has 12 or 13 months, of which up to 2 can be leap
-  and one skipped. Both months schemes share the same 12 names.
+  month is ``leap'' (\emph{adhika}) and named after the following
+  month. When a Solar month passes without a New Moon, a lunar month
+  can also be skipped (\emph{kshaya}).  The Lunisolar year has 12 or
+  13 months, of which up to 2 can be leap and one skipped!
+
+  A lunar day varies in length from 21.5 to 26.2 hours, and therefore
+  may occasionally have to be repeated (here the second day is the
+  leap day or \emph{adhika}), or skipped.
+
+  Years are given in the \emph{Vikrama era} which began in
+  58~B.C. Both months schemes share the same 12 names.
 
   Also this calendar is shown in the \emph{am\=anta} scheme, i.e.,
   months start at New Moon. There are again several local variants,
@@ -292,14 +304,15 @@ re-introduced for a few days in May 1871.
 
 Advanced users who have the book at hand may find it useful
 that\newFeature{0.22.0} almost all functions from
-\cite{Reingold-Dershowitz:2018} (as far as the implementation of the
-described calendars has come) are available as scripting
-functions. Whenever a location is needed, you can try to read a
-location from the location database by giving a location like
-``Vienna, Austria'' or ``Madrid, Western Europe'' (this should also
-work for user-specified locations. Take care to use a ``real'' name
-for the timezone, not just ``UT+3'', else timezone will be read as
-zero. Full documentation for this can be found at
+\citet{Reingold-Dershowitz:2018} are available as scripting functions
+(as far as the implementation of the described calendars has
+come). Whenever a location is needed, the current location is used, or
+you can use a location from the location database by giving its name
+like ``Vienna, Austria'' or ``Madrid, Western Europe''. This should
+also work for user-specified locations. Take care to use a ``real''
+name for the timezone, or specify an UTC based zone exactly like
+``UTC+03:15'', else timezone will be read as zero. Full documentation
+for this can be found at
 \url{https://stellarium.org/doc/head/group__calendars.html}.
 
 \subsection{Configuration Options}
@@ -353,10 +366,20 @@ show\_french\_arithmetic     &bool & false\\\bottomrule
 \end{longtable}
 
 \subsection{Further development}
-The plugin is in an early phase of development. More calendars will be
-added in later versions, and formatting and setting options may be
-improved. Members of non-European cultures are invited to suggest
-better formatting for their calendars!
+The plugin is still in development. More calendars will be added in
+later versions, and formatting and setting options may be
+improved. Members of non-European cultures who are actually using the
+output and can judge its correctness are invited to report errors or
+suggest better formatting for their respective calendars.
+
+For example, our source book \citep{Reingold-Dershowitz:2018}
+describes one solution for the ``New Hindu'' calendars, but notes
+several variants, which are in fact also location dependent. We cannot
+show every variant here, but hope to have the version described in the
+book correct. If you know what you are doing: we are accepting
+improvements and extensions in form of working code plus documentation
+where this variant is used. Not just a few example dates, but an
+algorithmic solution.
 
 \subsection{Acknowledgments}
 
