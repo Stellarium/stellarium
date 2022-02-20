@@ -112,3 +112,67 @@ for (i=0; i<data.length; i++){
 	if (pDate.length === resDate.length && pDate.every(function(value, index) { return value === resDate[index]})){core.output("OK")} else {core.output("ERR:" + pDate + " != " + resDate)};	
 }
 
+core.output("Testing Table 20.2");
+rd=GregorianCalendar.fixedFromGregorian([1982, 3, 1]);
+const lambdas=[330, 0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330];
+for (i=0; i<lambdas.length; i++){
+	rd=NewHinduCalendar.hinduSolarLongitudeAtOrAfter(lambdas[i], rd);
+
+	// split into Gregorian date and time...
+	frac=rd % 1;
+	hours=frac*24;
+	hr= Math.floor(hours);
+	minutes=(hours-hr)*60;
+	mn=Math.floor(minutes);
+	seconds=(minutes-mn)*60;
+	sc=Math.floor(seconds);
+	core.output("Event " + lambdas[i] +":\t" + rd.toFixed(6) + " Date: " + GregorianCalendar.gregorianFromFixed(Math.floor(rd)) + " Time: " + hr + ":" + mn + ":" + sc);
+
+	// also show the month begin that predates these. This derives the Hindu times. 
+	rdm=NewHinduCalendar.hinduNewMoonBefore(rd);
+	// split into Gregorian date and time...
+	frac=rdm % 1;
+	hours=frac*24;
+	hr= Math.floor(hours);
+	minutes=(hours-hr)*60;
+	mn=Math.floor(minutes);
+	seconds=(minutes-mn)*60;
+	sc=Math.floor(seconds);
+	core.output("Event Month:\t" + rdm.toFixed(6) + " Date: " + GregorianCalendar.gregorianFromFixed(Math.floor(rdm)) + " Time: " + hr + ":" + mn + ":" + sc);
+
+}
+
+/*
+// Set time in Stellarium for an ad-hoc test. These call functions 20.12-20.16
+
+core.output("hinduSolarLongitude(now):" + NewHinduCalendar.hinduSolarLongitude(Calendar.rdNow()));
+core.output("hinduLunarLongitude(now):" + NewHinduCalendar.hinduLunarLongitude(Calendar.rdNow()));
+core.output("hinduLunarPhase(now):" + NewHinduCalendar.hinduLunarPhase(Calendar.rdNow()));
+core.output("hinduLunarDayFromMoment(now):" + NewHinduCalendar.hinduLunarDayFromMoment(Calendar.rdNow()));
+core.output("hinduNewMoonBefore(now):" + NewHinduCalendar.hinduNewMoonBefore(Calendar.rdNow()));
+
+
+for (rd=569420; rd<569485; rd++){
+	// This shows details for a sequence of days from NewHinduCalendar.hinduLunarFromFixed()
+
+	critical=NewHinduCalendar.hinduSunrise(rd);
+	day=NewHinduCalendar.hinduLunarDayFromMoment(critical);
+	leapDay=(day==NewHinduCalendar.hinduLunarDayFromMoment(NewHinduCalendar.hinduSunrise(rd-1)));
+	lastNewMoon=NewHinduCalendar.hinduNewMoonBefore(critical);
+	nextNewMoon=NewHinduCalendar.hinduNewMoonBefore(Math.floor(lastNewMoon)+35);
+	solarMonth=NewHinduCalendar.hinduZodiac(lastNewMoon);
+	leapMonth=(solarMonth==NewHinduCalendar.hinduZodiac(nextNewMoon));
+	month=(solarMonth+1);
+	
+
+	core.output("RD:" + rd + " " + GregorianCalendar.gregorianFromFixed(rd) + " HinduLunar: " + NewHinduCalendar.hinduLunarFromFixed(rd));
+	core.output("\tcritical:" + critical);
+	core.output("\tday:" + day);
+	core.output("\tlastNewMoon:" + lastNewMoon);  // This seems to move a bit from day to day!
+	core.output("\tnextNewMoon:" + nextNewMoon);
+	core.output("\tSolarMonth:" + solarMonth);
+	core.output("\tLeapMonth:" + leapMonth);
+	core.output("\tmonth:" + month);
+}
+*/
+

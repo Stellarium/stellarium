@@ -167,7 +167,6 @@ int NewHinduCalendar::fixedFromHinduSolar(QVector<int> parts)
 }
 
 // return { year, month, leapMonth, day, leapDay } (CC:UE 20.23)
-
 QVector<int> NewHinduCalendar::hinduLunarFromFixed(int rd)
 {
 	const double critical=hinduSunrise(rd);
