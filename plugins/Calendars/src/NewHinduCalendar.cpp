@@ -25,20 +25,51 @@
 
 // timezone for Ujjain must be set to UT (acknowledged erratum in CC:UE)
 //                                           Name   country region           long                   lat       alt popK  Timezone          Bortle Role
-const StelLocation NewHinduCalendar::ujjain("Ujjain", "In", "Southern Asia", 75.+46./60.+6./3600.,  23.+9./60., 0, 550, "Europe/London", 7, 'N');
+const StelLocation NewHinduCalendar::ujjain   ("Ujjain", "In", "Southern Asia", 75.+46./60.+6./3600.,  23.+9./60., 0, 550, "UTC+05:03", 7, 'N');
+const StelLocation NewHinduCalendar::ujjainUTC("Ujjain", "In", "Southern Asia", 75.+46./60.+6./3600.,  23.+9./60., 0, 550, "UTC"      , 7, 'N');
 const StelLocation NewHinduCalendar::hinduLocation=ujjain;
 
+QMap<int, QString>NewHinduCalendar::lunarStations;
 
 NewHinduCalendar::NewHinduCalendar(double jd): OldHinduLuniSolarCalendar(jd)
 {
-//	NewHinduCalendar::retranslate();
+	NewHinduCalendar::retranslate();
 }
 
-//void NewHinduCalendar::retranslate()
-//{
-////	// fill the name lists with translated month names.
-////	monthNames={ // inherited from superclass.
-//}
+void NewHinduCalendar::retranslate()
+{
+	OldHinduLuniSolarCalendar::retranslate();
+	lunarStations={
+		{  1, qc_("Aśvinī"            , "Hindu Lunar Station name")},
+		{  2, qc_("Bharaṇī"           , "Hindu Lunar Station name")},
+		{  3, qc_("Kṛttikā"           , "Hindu Lunar Station name")},
+		{  4, qc_("Rohiṇī"            , "Hindu Lunar Station name")},
+		{  5, qc_("Mṛigaśiras"        , "Hindu Lunar Station name")},
+		{  6, qc_("Ārdrā"             , "Hindu Lunar Station name")},
+		{  7, qc_("Punarvasu"         , "Hindu Lunar Station name")},
+		{  8, qc_("Puṣya"             , "Hindu Lunar Station name")},
+		{  9, qc_("Āśleṣā"            , "Hindu Lunar Station name")},
+		{ 10, qc_("Maghā"             , "Hindu Lunar Station name")},
+		{ 11, qc_("Pūrva-Phalgunī"    , "Hindu Lunar Station name")},
+		{ 12, qc_("Uttara-Phalgunī"   , "Hindu Lunar Station name")},
+		{ 13, qc_("Hasta"             , "Hindu Lunar Station name")},
+		{ 14, qc_("Citrā"             , "Hindu Lunar Station name")},
+		{ 15, qc_("Svāti"             , "Hindu Lunar Station name")},
+		{ 16, qc_("Viśākhā"           , "Hindu Lunar Station name")},
+		{ 17, qc_("Anřādhā"           , "Hindu Lunar Station name")},
+		{ 18, qc_("Jyeṣṭhā"           , "Hindu Lunar Station name")},
+		{ 19, qc_("Mūla"              , "Hindu Lunar Station name")},
+		{ 20, qc_("Pūrva-Āṣāḍhā"      , "Hindu Lunar Station name")},
+		{ 21, qc_("Uttara-Āṣāḍhā"     , "Hindu Lunar Station name")},
+		{  0, qc_("Abhijit"           , "Hindu Lunar Station name")},  // What to do with it?
+		{ 22, qc_("Śravaṇā"           , "Hindu Lunar Station name")},
+		{ 23, qc_("Dhaniṣṭhā"         , "Hindu Lunar Station name")},
+		{ 24, qc_("Śatatārakā"        , "Hindu Lunar Station name")},
+		{ 25, qc_("Pūrva-Bhādrapadā"  , "Hindu Lunar Station name")},
+		{ 26, qc_("Uttara-Bhādrapadā" , "Hindu Lunar Station name")},
+		{ 27, qc_("Revatī"            , "Hindu Lunar Station name")}
+	};
+}
 
 // Set a calendar date from the Julian day number
 void NewHinduCalendar::setJD(double JD)
@@ -99,7 +130,7 @@ void NewHinduCalendar::setDate(QVector<int> parts)
 	emit jdChanged(JD);
 }
 
-// return { year, month, day}
+// return { year, month, day} (CC:UE 20.20)
 QVector<int> NewHinduCalendar::hinduSolarFromFixed(int rd)
 {
 	const double critical=hinduSunrise(rd+1);
@@ -136,15 +167,16 @@ int NewHinduCalendar::fixedFromHinduSolar(QVector<int> parts)
 }
 
 // return { year, month, leapMonth, day, leapDay } (CC:UE 20.23)
+
 QVector<int> NewHinduCalendar::hinduLunarFromFixed(int rd)
 {
 	const double critical=hinduSunrise(rd);
 	const int day=hinduLunarDayFromMoment(critical);
-	const bool leapDay= day==hinduLunarDayFromMoment(hinduSunrise(rd-1));
+	const bool leapDay= (day==hinduLunarDayFromMoment(hinduSunrise(rd-1)));
 	const double lastNewMoon=hinduNewMoonBefore(critical);
 	const double nextNewMoon=hinduNewMoonBefore(floor(lastNewMoon)+35.);
 	const int solarMonth=hinduZodiac(lastNewMoon);
-	const bool leapMonth= solarMonth==hinduZodiac(nextNewMoon);
+	const bool leapMonth= (solarMonth==hinduZodiac(nextNewMoon));
 	const int month=StelUtils::amod(solarMonth+1, 12);
 	const int year=hinduCalendarYear(month<=2 ? rd+180 : rd) - hinduLunarEra;
 
@@ -163,20 +195,25 @@ int NewHinduCalendar::fixedFromHinduLunar(QVector<int> parts)
 	const double approx=hinduEpoch+hinduSiderealYear*(year+hinduLunarEra+(month-1)/12.);
 	const int s=qRound(floor(approx-hinduSiderealYear*modInterval(hinduSolarLongitude(approx)/360.-(month-1)/12., -0.5, 0.5)));
 	const int k=hinduLunarDayFromMoment(s+0.25);
-	const QVector<int>mid=hinduLunarFromFixed(s-15);
-	int est=modInterval(k, 15, 45);
+	const QVector<int>mid=hinduLunarFromFixed(s-15); // Middle of preceding Solar month
+
+	int est;
 	if ((3<k) && (k<27))
 		est=k;
 	else if ( (mid.value(1)!=month) || (mid.value(2) && !leapMonth) )
 		est=modInterval(k, -15, 15);
+	else
+		est=modInterval(k, 15, 45);
 	est = s+day-est;
 	const int tau=est-modInterval(hinduLunarDayFromMoment(est+0.25)-day, -15, 15);
 
+	int hldfmHsr;
 	int date = tau-2;
 	do {
 		date++;
-	} while( (hinduLunarDayFromMoment(hinduSunrise(date)) != day) &&
-		  hinduLunarDayFromMoment(hinduSunrise(date)) != StelUtils::amod(day+1, 30) );
+		hldfmHsr=hinduLunarDayFromMoment(hinduSunrise(date));
+	} while( ((hldfmHsr != day) &&
+		  (hldfmHsr != StelUtils::amod(day+1, 30))) );
 
 	return (leapDay ? date+1 : date);
 }
@@ -202,7 +239,7 @@ double NewHinduCalendar::hinduArcsin(const double amp)
 	do {
 		pos++;
 	}
-	while (amp<=hinduSineTable(pos));
+	while (amp>hinduSineTable(pos));
 	const double below=hinduSineTable(pos-1);
 	return (225./60.)*(pos-1.+(amp-below)/(hinduSineTable(pos)-below));
 }
@@ -256,24 +293,14 @@ double NewHinduCalendar::hinduNewMoonBefore(const double rd_ut)
 	const double tau=rd_ut-(hinduSynodicMonth/360.)*hinduLunarPhase(rd_ut);
 	double l=tau-1.;
 	double u=qMin(rd_ut, tau+1.);
-	double hlpL=hinduLunarPhase(l);
-	//double hlpU=hinduLunarPhase(u);
 	do{
-		double mid=(l+u)/2.;
-		double hlpMid=hinduLunarPhase(mid);
-		if (hlpL>180)
-		{
+		double mid=(l+u)*0.5;
+		if (hinduLunarPhase(mid)>180.)
 			l=mid;
-			hlpL=hlpMid;
-		}
 		else
-		{
 			u=mid;
-			//hlpU=hlpMid;
-		}
-
 	} while ( (hinduZodiac(l)!=hinduZodiac(u)) && (u-l>eps) );
-	return (u+l)/2.;
+	return (l+u)*0.5;
 }
 
 int NewHinduCalendar::hinduCalendarYear(const double rd_ut)
@@ -283,7 +310,7 @@ int NewHinduCalendar::hinduCalendarYear(const double rd_ut)
 
 
 // return the ascensional difference (CC:UE 20.27)
-double NewHinduCalendar::hinduAscensionalDifference(const double rd, const StelLocation &loc)
+double NewHinduCalendar::hinduAscensionalDifference(const int rd, const StelLocation &loc)
 {
 	const double sinD=(1397./3438.)*hinduSine(hinduTropicalLongitude(rd));
 	const double phi=static_cast<double>(loc.latitude);
@@ -334,7 +361,7 @@ double NewHinduCalendar::hinduEquationOfTime(const double rd_ut)
 // return hindu time of sunrise (CC:UE 20.33)
 double NewHinduCalendar::hinduSunrise(const int rd)
 {
-	return rd+0.25+(static_cast<double>(ujjain.longitude-hinduLocation.longitude))/360.-hinduEquationOfTime(rd)
+	return rd+0.25+static_cast<double>(ujjain.longitude-hinduLocation.longitude)/360.-hinduEquationOfTime(rd)
 			+ (1577917828./(1582237828.*360.))*(hinduAscensionalDifference(rd, hinduLocation)+0.25*hinduSolarSiderealDifference(rd));
 }
 
@@ -342,9 +369,8 @@ double NewHinduCalendar::hinduSunrise(const int rd)
 // return hindu time of sunset (CC:UE 20.34)
 double NewHinduCalendar::hinduSunset(const int rd)
 {
-	return rd+0.75+static_cast<double>(ujjain.longitude-hinduLocation.longitude)/360.
-			- hinduEquationOfTime(rd) + (1577917828./(1582237828.*360.))*
-			(0.75*hinduSolarSiderealDifference(rd) - hinduAscensionalDifference(rd, hinduLocation));
+	return rd+0.75+static_cast<double>(ujjain.longitude-hinduLocation.longitude)/360.-hinduEquationOfTime(rd)
+			+ (1577917828./(1582237828.*360.))*(0.75*hinduSolarSiderealDifference(rd) - hinduAscensionalDifference(rd, hinduLocation));
 }
 // return hindu time  (CC:UE 20.35)
 double NewHinduCalendar::hinduStandardFromSundial(const int rd_ut)
@@ -361,14 +387,10 @@ double NewHinduCalendar::hinduStandardFromSundial(const int rd_ut)
 QVector<int> NewHinduCalendar::hinduFullMoonFromFixed(int rd)
 {
 	QVector<int>lDate=hinduLunarFromFixed(rd); // { year, month, leapMonth, day, leapDay }
-	//const int year=lDate.at(0);
-	const int month=lDate.at(1);
-	//const int leapMonth=lDate.at(2);
 	const int day=lDate.at(3);
-	//const int leapDay=lDate.at(4);
-	const int m=(day>=16? hinduLunarFromFixed(rd+20).at(1) : month);
 
-	lDate.replace(1, m);
+	if (day>=16)
+		lDate.replace(1, hinduLunarFromFixed(rd+20).at(1) );
 	return lDate;
 }
 // return RD date from a New Hindu Lunar date counted from full to full moon (CC:UE 20.37)
@@ -415,7 +437,9 @@ double NewHinduCalendar::ayanamsha(const double rd_ut)
 // return start of sidereal count (CC:UE 20.41)
 double NewHinduCalendar::siderealStart()
 {
-	return precession(universalFromLocal(meshaSamkranti(285), hinduLocation));
+	//return precession(universalFromLocal(meshaSamkranti(285), hinduLocation));
+	// From the Errata of 2021-12-12
+	return precession(solarLongitudeAfter(autumn, JulianCalendar::fixedFromJulian({285, JulianCalendar::september, 1})));
 }
 // return astronomical definition of hindu sunset (CC:UE 20.42)
 double NewHinduCalendar::astroHinduSunset(const int rd)

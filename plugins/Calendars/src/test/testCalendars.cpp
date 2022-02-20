@@ -1839,7 +1839,7 @@ void TestCalendars::testNewHindu()
 	QVERIFY( 524156==NewHinduLunarCalendar::fixedFromHinduLunar({1492, 11, 0,  7, 0}));
 	QVERIFY( 544676==NewHinduLunarCalendar::fixedFromHinduLunar({1549,  2, 1,  3, 0}));
 	QVERIFY( 567118==NewHinduLunarCalendar::fixedFromHinduLunar({1610,  7, 0,  2, 0}));
-	//QVERIFY2( 569477==NewHinduLunarCalendar::fixedFromHinduLunar({1616, 11, 0, 28, 1}), qPrintable(QString("Result: %1").arg(NewHinduLunarCalendar::fixedFromHinduLunar({1616, 11, 0, 28, 1}))));
+	QVERIFY( 569477==NewHinduLunarCalendar::fixedFromHinduLunar({1616, 11, 0, 28, 1}));
 	QVERIFY( 601716==NewHinduLunarCalendar::fixedFromHinduLunar({1705,  3, 0, 20, 0}));
 	QVERIFY( 613424==NewHinduLunarCalendar::fixedFromHinduLunar({1737,  4, 0,  4, 0}));
 	QVERIFY( 626596==NewHinduLunarCalendar::fixedFromHinduLunar({1773,  5, 0,  6, 0}));

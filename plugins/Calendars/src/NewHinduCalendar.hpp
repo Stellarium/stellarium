@@ -51,7 +51,7 @@ public:
 	virtual ~NewHinduCalendar() Q_DECL_OVERRIDE {}
 
 public slots:
-	//virtual void retranslate() Q_DECL_OVERRIDE;
+	virtual void retranslate() Q_DECL_OVERRIDE;
 
 	//! Set a calendar date from the Julian day number
 	virtual void setJD(double JD) Q_DECL_OVERRIDE;
@@ -69,10 +69,10 @@ public slots:
 
 
 	// 20.1 Hindu Astronomy
-	//! @return table value within [0...3438] for the sine of an angle (CC:UE 20.4)
+	//! @return table value within [0...3438]/3438 for the sine of an angle (CC:UE 20.4)
 	//! within 0..90 degrees specified as integral number of steps of 225'.
 	static double hinduSineTable(const int entry);
-	//! @return sine value within [0...1] for the sine of an angle theta (CC:UE 20.5)
+	//! @return sine value within [0...1] for the sine of an angle theta, interpolated from the 25-entry sine table (CC:UE 20.5)
 	static double hinduSine(const double theta);
 	//! @return arcsine value within [0...1] for the sine of an angle theta (CC:UE 20.6)
 	static double hinduArcsin(const double amp);
@@ -113,8 +113,8 @@ public slots:
 
 	// 20.3 Sunrise
 	//! @return the ascensional difference (CC:UE 20.27)
-	static double hinduAscensionalDifference(const double rd, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
-	static double hinduAscensionalDifference(const double rd, const QString &loc){return hinduAscensionalDifference(rd, location(loc));}
+	static double hinduAscensionalDifference(const int rd, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
+	static double hinduAscensionalDifference(const int rd, const QString &loc){return hinduAscensionalDifference(rd, location(loc));}
 	//! @return tropical longitude (CC:UE 20.28)
 	static double hinduTropicalLongitude(const double rd_ut);
 	//! @return solar sidereal difference (CC:UE 20.29)
@@ -225,10 +225,12 @@ protected:
 	constexpr static const int hinduSolarEra = 3179; //!< Saka era (CC:UE 20.19)
 	constexpr static const int hinduLunarEra = 3044; //!< Vikrama era (CC:UE 20.22)
 
-	static const StelLocation ujjain; //!< Sacred city in India to which we relate the calendar. (CC:UE 20.25)
+	static const StelLocation ujjain;    //!< Sacred city in India to which we relate the calendar. (CC:UE 20.25)
+	static const StelLocation ujjainUTC; //!< Sacred city in India to which we relate the calendar, with timezone set to UTC. (CC:UE 20.25)
 	//! convention to one site to which we relate the calendar. (CC:UE 20.26)
 	//! @todo make this configurable?
 	static const StelLocation hinduLocation;
+	static QMap<int, QString>lunarStations;
 };
 
 #endif
