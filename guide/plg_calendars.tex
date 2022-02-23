@@ -63,7 +63,13 @@ largest component) those dates may not be useful.
 Note that in some calendars the day did not begin at midnight, but for
 example at sunrise, sunset, or dawn. This cannot be reflected in this
 plugin. Dates should be correct at noon, and may be one day off
-dependent on these aspects.
+dependent on these aspects.\footnote{At the current point of
+  implementation I cannot exclude further errors! The plugin
+  reproduces the given sample dates, but we cannot give any guarantee
+  about the accuracy of historical dates. If you are more familiar
+  with any of the non-European calendars, you are invited to identify
+  errors or at least additions to this documentation, e.g. variants to
+  the schemes used.}
 
 \subsection{The Calendars}
 \subsubsection{Lunisolar European calendars}
@@ -219,11 +225,50 @@ Several more calendars \newFeature{0.21.0} have been worked out in algorithmic f
   months start at New Moon. There are again several local variants,
   and of course a longitude difference to the reference location may
   also lead to deviations.
+
+  In addition to the New Hindu Lunisolar date, the Hindu \emph{panchang} is shown, a 5-part description of the day consisting of
+  \begin{description}
+  \item[Tithi] (lunar day)
+  \item[Weekday]
+  \item[Nak\d{s}atra] the part of the ecliptic the Moon is in at time of sunrise (in Ujjain).
+  \item[Yoga] a cycle of 27 names resulting from the ``addition'' of
+    Solar and Lunar longitudes.\footnote{For technical reasons this
+      is currently shown for midnight UTC. It is currently unclear if
+      \emph{yoga} should be given for the time of sunrise or for the
+      current moment.}
+  \item[Kara\d{n}a] a count of 60 lunar half-days resulting in 11
+    names. The \emph{kara\d{n}a} at time of sunrise (in Ujjain)
+    governs the \emph{kara\d{n}a} for the day \footnote{Again, this is
+      unconfirmed. If you know better, please tell us!}.
+  \end{description}
   
 \item[Hindu Astronomical Solar and Lunisolar] These are similar to the
   New Hindu calendars, \newFeature{0.22.0} but with even more accurate
   positional computations from the \emph{S\=urya-Siddh\=anta} for
   Solar and Lunar positions.
+\item[Tibetan calendar] is actually only one of several calendars
+  \newFeature{0.22.0} used in Tibet. We show the date in the official
+  \emph{Phuglugs} (or \emph{Phug-pa}, \emph{Phukluk}) version of the
+  \emph{K\=alacakra} calendar, derived from the \emph{K\=alacakra
+    Tantra} which was translated from Sanskrit to Tibetan in the 11th
+  century, and has been sanctioned by the Dalai Lama. It is similar to
+  the Hindu Lunisolar calendar, but has also regional variants where
+  astronomical events are computed in local time. In Tibet, the actual
+  calendar is issued only annually (after empirical corrections) by
+  the Tibetan School for Astro and Medicine and may diverge from the
+  calendar shown here.
+
+  Months are 29 or 30 days long and numbered 1 to 12. Leap months
+  precede their ``regular'' counterparts but else have the same name.
+
+  Years are counted from the date of ascension of the first Yarlung
+  king, \name[Nyatri]{Tsenpo}, in 128~B.C. (We write ``A.T.'' for Anno
+  Tibetorum.) However, it is more common to designate years in a cycle
+  of 60 years, with 5 elements which label two consecutive years which
+  are further named ``male'' and ``female'', and a parallel cycle of
+  12 animal totems. This cycle has been synchronized with the similar
+  Chinese 60-years cycle.
+  
 \item[Balinese Pawukon] is a 10-part sequence of day names with cycle
   lengths of 2 to 10, which can also be written as numbers or
   symbols. Some numbers repeat in simple cycles, while others follow
