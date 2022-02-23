@@ -84,6 +84,10 @@ public slots:
 	//! @note the QVector usually contains one element, but in 719 had zero, in 718 and 12698 two.
 	static QVector<int> tibetanNewYear(const int gYear);
 
+	//! @return the year name in the 60-year cycle
+	//! @note modelled after CC:UE 19.18
+	static QString tibetanSexagesimalYear(const int tYear);
+
 public:
 	static const int tibetanEpoch; //! RD of Gregorian {-127, december, 7}. CC:UE 21.1
 
