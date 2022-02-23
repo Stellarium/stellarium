@@ -73,6 +73,10 @@ class Calendars : public StelModule
 {
 	Q_OBJECT
 	Q_PROPERTY(bool enabled		      READ isEnabled                WRITE enable            NOTIFY enabledChanged)
+
+	Q_PROPERTY(bool flagTextColorOverride READ getFlagTextColorOverride WRITE setFlagTextColorOverride NOTIFY flagTextColorOverrideChanged)
+	Q_PROPERTY(Vec3f textColor            READ getTextColor             WRITE setTextColor      NOTIFY textColorChanged)
+
 	Q_PROPERTY(bool flagShowJulian        READ isJulianDisplayed        WRITE showJulian        NOTIFY showJulianChanged)
 	Q_PROPERTY(bool flagShowRevisedJulian READ isRevisedJulianDisplayed WRITE showRevisedJulian NOTIFY showRevisedJulianChanged)
 	Q_PROPERTY(bool flagShowGregorian     READ isGregorianDisplayed     WRITE showGregorian     NOTIFY showGregorianChanged)
@@ -148,6 +152,8 @@ signals:
 	//void jdChanged(double jd);
 
 	void enabledChanged(bool b);
+	void flagTextColorOverrideChanged(bool b);
+	void textColorChanged(Vec3f &color);
 	void showJulianChanged(bool b);
 	void showRevisedJulianChanged(bool b);
 	void showGregorianChanged(bool b);
@@ -185,6 +191,12 @@ public slots:
 	// Setters/getters
 	//! is display of calendars overlay active?
 	bool isEnabled() const;
+	bool getFlagTextColorOverride() const;
+	void setFlagTextColorOverride(bool b);
+	//! Get the current color of the text (when override flag is active).
+	Vec3f getTextColor() const;
+	void setTextColor(const Vec3f& newColor);
+
 	//! enable display of calendars overlay
 	void enable(bool b);
 	bool isJulianDisplayed() const;		//!< display Julian Calendar?
@@ -269,6 +281,9 @@ private:
 
 	// StelProperties:
 	bool enabled;
+	bool flagTextColorOverride;
+	Vec3f textColor;
+
 	bool flagShowJulian;
 	bool flagShowRevisedJulian;
 	bool flagShowGregorian;

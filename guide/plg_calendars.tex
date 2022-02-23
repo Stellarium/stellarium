@@ -373,42 +373,47 @@ Apart from changing settings using the plugin configuration dialog,
 you can also edit the \file{config.ini} file to change
 settings for the Calendars plugin -- just make it carefully!
 
-\begin{longtable}{l|l|l}\toprule
-\emph{ID}                      &\emph{Type} & \emph{Default}  \\\midrule
+{\footnotesize
+\begin{longtable}{l@{\,}|@{\,}l@{\,}|@{\,}l@{\,}||@{\,}l@{\,}|@{\,}l@{\,}|@{\,}l}\toprule
+  \emph{ID}                      &\emph{Type} & \emph{Default}  &
+  \emph{ID}                      &\emph{Type} & \emph{Default}  \\\midrule
 show                         &bool & true\\\midrule
-show\_julian                 &bool & true\\
+flag\_text\_color\_override  &bool & false &
+text\_color                  &R,G,B& \ccbox{0.5,0.5,0.7}  \\
+show\_julian                 &bool & true&
 show\_gregorian              &bool & true\\
-show\_revised\_julian        &bool & false\\
+show\_revised\_julian        &bool & false&
 show\_iso                    &bool & true\\
 show\_icelandic              &bool & false\\\midrule
-show\_roman                  &bool & false\\
+show\_roman                  &bool & false&
 show\_olympic                &bool & false\\\midrule
 show\_egyptian               &bool & false\\
-show\_armenian               &bool & false\\
+show\_armenian               &bool & false&
 show\_zoroastrian            &bool & false\\
-show\_coptic                 &bool & false\\
+show\_coptic                 &bool & false&
 show\_ethiopic               &bool & false\\
-show\_persian\_astronomical  &bool & false\\
+show\_persian\_astronomical  &bool & false&
 show\_persian\_arithmetic    &bool & false\\\midrule
-show\_islamic                &bool & true\\
+show\_islamic                &bool & true&
 show\_hebrew                 &bool & true\\\midrule
-show\_old\_hindu\_solar      &bool & false\\
+show\_old\_hindu\_solar      &bool & false&
 show\_old\_hindu\_lunar      &bool & false\\
-show\_new\_hindu\_solar      &bool & true\\
+show\_new\_hindu\_solar      &bool & true&
 show\_new\_hindu\_lunar      &bool & true\\
-show\_astro\_hindu\_solar    &bool & false\\
+show\_astro\_hindu\_solar    &bool & false&
 show\_astro\_hindu\_lunar    &bool & false\\
-show\_tibetan                &bool & false\\
+show\_tibetan                &bool & false&
 show\_balinese\_pawukon      &bool & false\\\midrule
 show\_maya\_long\_count      &bool & true\\
-show\_maya\_haab             &bool & false\\
+show\_maya\_haab             &bool & false&
 show\_maya\_tzolkin          &bool & false\\
-show\_aztec\_tonalpohualli   &bool & false\\
+show\_aztec\_tonalpohualli   &bool & false&
 show\_aztec\_xihuitl         &bool & false\\\midrule
-show\_french\_astronomical   &bool & false\\
+show\_french\_astronomical   &bool & false&
 show\_french\_arithmetic     &bool & false\\\bottomrule
 %show\_chinese                &bool & false\\
 \end{longtable}
+}
 
 \subsection{Further development}
 The plugin is still in development. More calendars will be added in

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>606</width>
-    <height>444</height>
+    <height>458</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -368,6 +368,24 @@
           <widget class="QCheckBox" name="astroHinduLunarCheckBox">
            <property name="text">
             <string comment="calendar">Hindu Astro Lunar</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_Settings">
+         <item>
+          <widget class="QToolButton" name="textcolorToolButton">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="overrideTextColorCheckBox">
+           <property name="text">
+            <string>Override automatic text color</string>
            </property>
           </widget>
          </item>

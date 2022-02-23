@@ -133,6 +133,9 @@ void CalendarsDialog::createDialogContent()
 	connectBoolProperty(ui->persianArithmeticCheckBox,  "Calendars.flagShowPersianArithmetic");
 	connectBoolProperty(ui->persianAstronomicalCheckBox,"Calendars.flagShowPersianAstronomical");
 
+	connectBoolProperty(ui->overrideTextColorCheckBox,  "Calendars.flagTextColorOverride");
+	connectColorButton(ui->textcolorToolButton,         "Calendars.textColor",		"Calendars/text_color");
+
 	// MAKE SURE to connect all part edit elements respective ...Changed() method here.
 	connect(ui->julianYearSpinBox,		SIGNAL(valueChanged(int)), this, SLOT(julianChanged()));
 	connect(ui->julianMonthSpinBox,		SIGNAL(valueChanged(int)), this, SLOT(julianChanged()));

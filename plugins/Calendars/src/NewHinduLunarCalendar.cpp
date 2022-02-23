@@ -103,7 +103,7 @@ QString NewHinduLunarCalendar::getFormattedPanchangString()
 				tithi       , QString::number(parts.value(3)),
 				q_("Day")   , weekDayNames.value(dow, "error"),
 				nakshatraStr, lunarStations.value(hinduLunarStation(rd)),
-				yogaStr     , yogas.value(yoga(rd)),
+				yogaStr     , yogas.value(yoga(rd))).arg( // split args for Qt<5.14
 				// Karanas are 1/2 lunar days. According to WP, the karana at sunrise governs the day.
 				karanaStr   , karanas.value(karana(karanaForDay(rd)), QString::number(karanaForDay(rd)))
 				);

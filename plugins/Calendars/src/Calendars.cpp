@@ -96,6 +96,8 @@ StelPluginInfo CalendarsStelPluginInterface::getPluginInfo() const
 Calendars::Calendars():
 	toolbarButton(Q_NULLPTR),
 	enabled(true),
+	flagTextColorOverride(false),
+	textColor(0.75f),
 	flagShowJulian(true),
 	flagShowRevisedJulian(false),
 	flagShowGregorian(true),
@@ -261,8 +263,11 @@ void Calendars::makeCalendarsScriptable(StelScriptMgr *ssm)
 
 void Calendars::loadSettings()
 {
+	QString defaultColor =  conf->value("color/default_color", "0.5,0.5,0.7").toString();
 	// Now activate calendar displays if needed.
 	enable(                 conf->value("Calendars/show", true).toBool());
+	setFlagTextColorOverride(conf->value("Calendars/flag_text_color_override", false).toBool());
+	setTextColor(           Vec3f(conf->value("Calendars/text_color", defaultColor).toString()));
 	showJulian(             conf->value("Calendars/show_julian", true).toBool());
 	showRevisedJulian(      conf->value("Calendars/show_revised_julian", false).toBool());
 	showGregorian(          conf->value("Calendars/show_gregorian", true).toBool());
@@ -360,15 +365,22 @@ void Calendars::draw(StelCore* core)
 	}
 	oss << "</table>";
 	Vec3f color(1);
-	if (StelApp::getInstance().getFlagOverwriteInfoColor())
+	if (getFlagTextColorOverride())
 	{
-		// make info text more readable...
-		color = StelApp::getInstance().getOverwriteInfoColor();
+		color=textColor;
 	}
-	if (core->isBrightDaylight() && !StelApp::getInstance().getVisionModeNight())
+	else
 	{
-		// make info text more readable when atmosphere enabled at daylight.
-		color = StelApp::getInstance().getDaylightInfoColor();
+		if (StelApp::getInstance().getFlagOverwriteInfoColor())
+		{
+			// make info text more readable...
+			color = StelApp::getInstance().getOverwriteInfoColor();
+		}
+		if (core->isBrightDaylight() && !StelApp::getInstance().getVisionModeNight())
+		{
+			// make info text more readable when atmosphere enabled at daylight.
+			color = StelApp::getInstance().getDaylightInfoColor();
+		}
 	}
 
 	infoPanel->setDefaultTextColor(color.toQColor());
@@ -752,5 +764,29 @@ void Calendars::showTibetan(bool b)
 		flagShowTibetan=b;
 		conf->setValue("Calendars/show_tibetan", b);
 		emit showTibetanChanged(b);
+	}
+}
+
+bool Calendars::getFlagTextColorOverride() const { return flagTextColorOverride;}
+void Calendars::setFlagTextColorOverride(bool b)
+{
+	if (b!=flagTextColorOverride)
+	{
+		flagTextColorOverride=b;
+		conf->setValue("Calendars/flag_text_color_override", b);
+		emit flagTextColorOverrideChanged(b);
+	}
+}
+
+Vec3f Calendars::getTextColor() const
+{
+	return textColor;
+}
+void Calendars::setTextColor(const Vec3f& newColor)
+{
+	if(newColor != textColor)
+	{
+		textColor=newColor;
+		emit textColorChanged(textColor);
 	}
 }

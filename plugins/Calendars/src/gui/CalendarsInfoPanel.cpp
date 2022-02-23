@@ -89,7 +89,7 @@ CalendarsInfoPanel::CalendarsInfoPanel(Calendars* plugin,
 
 void CalendarsInfoPanel::updatePosition()
 {
-	qreal bottomBoundingHeight = static_cast<SkyGui*>(parentWidget)->getBottomBarHeight();
+	qreal bottomBoundingHeight = static_cast<SkyGui*>(parentWidget)->getBottomBarHeight()+5.;
 
 	if (sender())
 	{
