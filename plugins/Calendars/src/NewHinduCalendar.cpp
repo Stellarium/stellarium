@@ -260,7 +260,6 @@ int NewHinduCalendar::fixedFromHinduLunar(QVector<int> parts)
 	return (leapDay ? date+1 : date);
 }
 
-
 double NewHinduCalendar::hinduSineTable(const int entry)
 {
 	const double exact=3438.*sin(entry*225./60.*M_PI_180);
