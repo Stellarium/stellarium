@@ -1035,7 +1035,29 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 
 		const auto lightPollutionLum = landscape->getDefaultLightPollutionLuminance();
 		if (lightPollutionLum.isValid())
-			desc += q_("<b>Light pollution</b>: %1 cd/m<sup>2</sup>").arg(lightPollutionLum.toFloat());
+		{
+			const auto lum = lightPollutionLum.toFloat();
+			auto scaledLum = lum;
+			QString unit = q_("cd/m<sup>2</sup>");
+			if(lum < 1e-6f)
+			{
+				scaledLum = lum*1e9f;
+				unit = q_("ncd/m<sup>2</sup>");
+			}
+			else if(lum < 1e-3f)
+			{
+				scaledLum = lum*1e6f;
+				unit = q_("&mu;cd/m<sup>2</sup>");
+			}
+			else if(lum < 1)
+			{
+				scaledLum = lum*1e3f;
+				unit = q_("mcd/m<sup>2</sup>");
+			}
+			desc += q_("<b>Light pollution</b>: %1 %2 (NELM: %3; Bortle class: %4)")
+						.arg(scaledLum).arg(unit).arg(StelCore::luminanceToNELM(lum))
+						.arg(StelCore::luminanceToBortleScaleIndex(lum));
+		}
 	}	
 	return desc;
 }
