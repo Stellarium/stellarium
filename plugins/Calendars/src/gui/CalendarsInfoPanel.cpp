@@ -50,33 +50,37 @@ CalendarsInfoPanel::CalendarsInfoPanel(Calendars* plugin,
 	updatePosition();
 	connect (parentWidget, SIGNAL(geometryChanged()), this, SLOT(updatePosition()));
 	// when user switches a calendar on or off, we must force a recalculation of a minimal bounding box before we can rebuild the calendar list.
-	connect (this->plugin, &Calendars::showJulianChanged            , this, [=](bool){setHtml("a"); updatePosition();});
-	connect (this->plugin, &Calendars::showGregorianChanged         , this, [=](bool){setHtml("a"); updatePosition();});
-	connect (this->plugin, &Calendars::showISOChanged               , this, [=](bool){setHtml("a"); updatePosition();});
-	connect (this->plugin, &Calendars::showIcelandicChanged         , this, [=](bool){setHtml("a"); updatePosition();});
-	connect (this->plugin, &Calendars::showRomanChanged             , this, [=](bool){setHtml("a"); updatePosition();});
-	connect (this->plugin, &Calendars::showOlympicChanged           , this, [=](bool){setHtml("a"); updatePosition();});
-	connect (this->plugin, &Calendars::showEgyptianChanged          , this, [=](bool){setHtml("a"); updatePosition();});
-	connect (this->plugin, &Calendars::showArmenianChanged          , this, [=](bool){setHtml("a"); updatePosition();});
-	connect (this->plugin, &Calendars::showZoroastrianChanged       , this, [=](bool){setHtml("a"); updatePosition();});
-	connect (this->plugin, &Calendars::showCopticChanged            , this, [=](bool){setHtml("a"); updatePosition();});
-	connect (this->plugin, &Calendars::showEthiopicChanged          , this, [=](bool){setHtml("a"); updatePosition();});
-	connect (this->plugin, &Calendars::showChineseChanged           , this, [=](bool){setHtml("a"); updatePosition();});
-	connect (this->plugin, &Calendars::showIslamicChanged           , this, [=](bool){setHtml("a"); updatePosition();});
-	connect (this->plugin, &Calendars::showHebrewChanged            , this, [=](bool){setHtml("a"); updatePosition();});
-	connect (this->plugin, &Calendars::showOldHinduSolarChanged     , this, [=](bool){setHtml("a"); updatePosition();});
-	connect (this->plugin, &Calendars::showOldHinduLunarChanged     , this, [=](bool){setHtml("a"); updatePosition();});
-	connect (this->plugin, &Calendars::showTibetanChanged           , this, [=](bool){setHtml("a"); updatePosition();});
-	connect (this->plugin, &Calendars::showMayaLongCountChanged     , this, [=](bool){setHtml("a"); updatePosition();});
-	connect (this->plugin, &Calendars::showMayaHaabChanged          , this, [=](bool){setHtml("a"); updatePosition();});
-	connect (this->plugin, &Calendars::showMayaTzolkinChanged       , this, [=](bool){setHtml("a"); updatePosition();});
-	connect (this->plugin, &Calendars::showAztecXihuitlChanged      , this, [=](bool){setHtml("a"); updatePosition();});
-	connect (this->plugin, &Calendars::showAztecTonalpohualliChanged, this, [=](bool){setHtml("a"); updatePosition();});
-	connect (this->plugin, &Calendars::showBalineseChanged          , this, [=](bool){setHtml("a"); updatePosition();});
-	connect (this->plugin, &Calendars::showFrenchAstronomicalChanged, this, [=](bool){setHtml("a"); updatePosition();});
-	connect (this->plugin, &Calendars::showFrenchArithmeticChanged  , this, [=](bool){setHtml("a"); updatePosition();});
-	connect (this->plugin, &Calendars::showPersianArithmeticChanged , this, [=](bool){setHtml("a"); updatePosition();});
-	connect (this->plugin, &Calendars::showPersianAstronomicalChanged,this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showJulianChanged             , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showGregorianChanged          , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showISOChanged                , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showIcelandicChanged          , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showRomanChanged              , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showOlympicChanged            , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showEgyptianChanged           , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showArmenianChanged           , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showZoroastrianChanged        , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showCopticChanged             , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showEthiopicChanged           , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showChineseChanged            , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showIslamicChanged            , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showHebrewChanged             , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showOldHinduSolarChanged      , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showOldHinduLunarChanged      , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showNewHinduSolarChanged      , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showNewHinduLunarChanged      , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showAstroHinduSolarChanged    , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showAstroHinduLunarChanged    , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showTibetanChanged            , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showMayaLongCountChanged      , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showMayaHaabChanged           , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showMayaTzolkinChanged        , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showAztecXihuitlChanged       , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showAztecTonalpohualliChanged , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showBalineseChanged           , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showFrenchAstronomicalChanged , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showFrenchArithmeticChanged   , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showPersianArithmeticChanged  , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showPersianAstronomicalChanged, this, [=](bool){setHtml("a"); updatePosition();});
 
 	//Night mode
 	connect(&stelApp, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setColorScheme(const QString&)));
@@ -85,7 +89,7 @@ CalendarsInfoPanel::CalendarsInfoPanel(Calendars* plugin,
 
 void CalendarsInfoPanel::updatePosition()
 {
-	qreal bottomBoundingHeight = static_cast<SkyGui*>(parentWidget)->getBottomBarHeight();
+	qreal bottomBoundingHeight = static_cast<SkyGui*>(parentWidget)->getBottomBarHeight()+5.;
 
 	if (sender())
 	{

@@ -186,10 +186,10 @@ QStringList TibetanCalendar::getDateStrings() const
 QString TibetanCalendar::getFormattedDateString() const
 {
 	QStringList str=getDateStrings();
-	// TRANSLATORS: A.T. stands for "anno Tibetarum".
+	// TRANSLATORS: A.T. stands for "anno Tibetorum".
 	QString epoch = qc_("A.T.", "epoch");
 	// Format: [weekday], [day_{leap}] - [month, numeral] ([month, name]_{leap}) - [year] [epoch]
-	return QString("%1, %2<sub>%3</sub> - %4 (%5)<sub>%6</sub> - %7 %8").arg(
+	return QString("%1, %2<sub>%3</sub> - %4 (%5)<sub>%6</sub> - %7 %8 (%9)").arg(
 				str.at(6), // 1 weekday
 				str.at(4), // 2 day
 				str.at(5), // 3 dayLeap (only displayed when indeed a leap day)
@@ -197,7 +197,9 @@ QString TibetanCalendar::getFormattedDateString() const
 				str.at(2), // 5 monthName
 				str.at(3), // 6 monthLeap (only displayed when indeed a leap month)
 				str.at(0), // 7 year
-				epoch);    // 8 epoch
+				epoch,     // 8 epoch
+				tibetanSexagesimalYear(parts.value(0))
+				);
 }
 
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
@@ -363,4 +365,19 @@ QVector<int> TibetanCalendar::tibetanNewYear(const int gYear)
 	QVector<int>range=GregorianCalendar::gregorianYearRange(gYear);
 
 	return Calendar::intersectWithRange(cand, range);
+}
+
+// return the year name in the 60-year cycle
+// note modelled after CC:UE 19.18
+QString TibetanCalendar::tibetanSexagesimalYear(const int tYear)
+{
+	// 1027 (jul.; after Tibetan New year...) was a fire-female-hare year.
+	// Male years precede female years of the same element. These offsets assure the correct indices.
+	const int animal=StelUtils::amod(tYear+2, 12);
+	const int element=StelUtils::imod(tYear+9, 10) / 2 + 1; // deliberately kill effect of odd numbers.
+	return QString("%1 - %2 - %3").arg(
+				elements.value(element),
+				QStringList({q_("male"), q_("female")}).value(StelUtils::imod(tYear+3, 2)),
+				animals.value(animal)
+				);
 }

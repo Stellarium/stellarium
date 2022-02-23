@@ -397,7 +397,7 @@ double Calendar::solarLongitudeAfter(double lng, double rd_ut)
 	double b=tau+5.;
 	return solarLongitudeInv(lng, a, b);
 }
-// binary search for the moment when solar longitude reaches lng in the time between a and b (CC:UE 14.36)
+// binary search for the moment when solar longitude reaches lng in the time between rdA and rdB (CC:UE 14.36)
 double Calendar::solarLongitudeInv(double lng, double rdA, double rdB)
 {
 	Q_ASSERT(lng>=0.);
@@ -822,7 +822,7 @@ double Calendar::lunarPhase(double rd_ut)
 	return (fabs(phi-phiP)>180.) ? phiP : phi;
 }
 
-// binary search for the moment when solar longitude reaches lng in the time between a and b (CC:UE 14.36)
+// binary search for the moment when solar longitude reaches lng in the time between rdA and rdB (CC:UE 14.36)
 double Calendar::lunarPhaseInv(double phi, double rdA, double rdB)
 {
 	Q_ASSERT(phi>=0.);
@@ -1144,6 +1144,43 @@ double Calendar::babylonianFromLocal(double rd_loc, const StelLocation &loc)
 		return rd_loc+date-z;
 	else
 		return rd_loc+date-z1;
+}
+
+// return length of a temporal day hour at date rd and location loc. (CC:UE 14.89)
+double Calendar::daytimeTemporalHour(const int rd, const StelLocation &loc)
+{
+	if (qFuzzyCompare(sunrise(rd, loc), bogus ) || qFuzzyCompare(sunset(rd, loc), bogus))
+		return bogus;
+	return (1./12.) * (sunset(rd, loc)-sunrise(rd, loc));
+}
+// return length of a temporal night hour at date rd and location loc.  (CC:UE 14.90)
+double Calendar::nighttimeTemporalHour(const int rd, const StelLocation &loc)
+{
+	if (qFuzzyCompare(sunrise(rd+1, loc), bogus ) || qFuzzyCompare(sunset(rd, loc), bogus))
+		return bogus;
+	return (1./12.) * (sunrise(rd+1, loc)-sunset(rd, loc));
+}
+// return standard time from "temporal" sundial time (CC:UE 14.91)
+double Calendar::standardFromSundial(const double rd_ut, const StelLocation &loc)
+{
+	const int date=fixedFromMoment(rd_ut);
+	const double hour=24.*timeFromMoment(rd_ut);
+	double h; // duration of a temporal hour
+	if ((6.<=hour) && (hour<=18.))
+		h=daytimeTemporalHour(date, loc);
+	else if (hour<6)
+		h=nighttimeTemporalHour(date-1, loc);
+	else
+		h=nighttimeTemporalHour(date, loc);
+
+	if (qFuzzyCompare(h, bogus))
+		return bogus;
+	else if ((6<=hour) && (hour<=18))
+		return sunrise(date, loc)+(hour-6.)*h;
+	else if (hour<6)
+		return sunset(date-1, loc)+(hour+6)*h;
+	else
+		return sunset(date, loc)+(hour-18)*h;
 }
 
 // 14.9 Lunar Crescent Visibility

@@ -84,8 +84,6 @@ void CalendarsDialog::createDialogContent()
 	// DISABLE Chinese etc for now, TBD!
 	ui->chineseCheckBox->hide();
 	ui->tabs->removeTab(2);
-	ui->newHinduLunarCheckBox->hide();
-	ui->newHinduSolarCheckBox->hide();
 #else
 	connect(cal->getCal("Julian"), &JulianCalendar::jdChanged, this, [=](double jd){ui->labelRDvalue->setText(QString::number(Calendar::fixedFromJD(jd, true)));});
 #endif
@@ -119,6 +117,11 @@ void CalendarsDialog::createDialogContent()
 	connectBoolProperty(ui->hebrewCheckBox,             "Calendars.flagShowHebrew");
 	connectBoolProperty(ui->oldHinduSolarCheckBox,      "Calendars.flagShowOldHinduSolar");
 	connectBoolProperty(ui->oldHinduLunarCheckBox,      "Calendars.flagShowOldHinduLunar");
+	connectBoolProperty(ui->newHinduSolarCheckBox,      "Calendars.flagShowNewHinduSolar");
+	connectBoolProperty(ui->newHinduLunarCheckBox,      "Calendars.flagShowNewHinduLunar");
+	connectBoolProperty(ui->astroHinduSolarCheckBox,    "Calendars.flagShowAstroHinduSolar");
+	connectBoolProperty(ui->astroHinduLunarCheckBox,    "Calendars.flagShowAstroHinduLunar");
+	connectBoolProperty(ui->tibetanCheckBox,            "Calendars.flagShowTibetan");
 	connectBoolProperty(ui->mayaLCCheckBox,             "Calendars.flagShowMayaLongCount");
 	connectBoolProperty(ui->mayaHaabCheckBox,           "Calendars.flagShowMayaHaab");
 	connectBoolProperty(ui->mayaTzolkinCheckBox,        "Calendars.flagShowMayaTzolkin");
@@ -129,7 +132,9 @@ void CalendarsDialog::createDialogContent()
 	connectBoolProperty(ui->frenchArithmeticCheckBox,   "Calendars.flagShowFrenchArithmetic");
 	connectBoolProperty(ui->persianArithmeticCheckBox,  "Calendars.flagShowPersianArithmetic");
 	connectBoolProperty(ui->persianAstronomicalCheckBox,"Calendars.flagShowPersianAstronomical");
-	connectBoolProperty(ui->tibetanCheckBox,            "Calendars.flagShowTibetan");
+
+	connectBoolProperty(ui->overrideTextColorCheckBox,  "Calendars.flagTextColorOverride");
+	connectColorButton(ui->textcolorToolButton,         "Calendars.textColor",		"Calendars/text_color");
 
 	// MAKE SURE to connect all part edit elements respective ...Changed() method here.
 	connect(ui->julianYearSpinBox,		SIGNAL(valueChanged(int)), this, SLOT(julianChanged()));
@@ -202,7 +207,8 @@ void CalendarsDialog::setAboutHtml(void)
 
 //	html += "<li>" + q_("Chinese calendars") + "</li>";
 	html += "<li>" + q_("Old Hindu Solar and Lunar calendars") + "</li>";
-//	html += "<li>" + q_("New Hindu Solar and Lunar calendars") + "</li>";
+	html += "<li>" + q_("New Hindu Solar and Lunar calendars") + "</li>";
+	html += "<li>" + q_("Astronomically 'accurate' Hindu Solar and Lunar calendars") + "</li>";
 	html += "<li>" + q_("Tibetan (Phuglugs, Phug-pa, K&#x101;lacakra) calendar") + "</li>";
 	html += "<li>" + q_("Maya calendars") + "</li>";
 	html += "<li>" + q_("Aztec calendars") + "</li>";

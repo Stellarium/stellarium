@@ -2,40 +2,40 @@
 // (c) 2022 Georg Zotti
 // This is for the Calendars plugin
 
-const data=[  // PersianAstro    FrenchAstro
-	[ -214193, [-1208,  5,  1], [-2378, 11,  5]],
-	[  -61387, [ -790,  9, 14], [-1959,  3, 14]],
-	[   25469, [ -552,  7,  2], [-1721,  1,  2]],
-	[   49217, [ -487,  7,  9], [-1656,  1, 10]],
-	[  171307, [ -153, 10, 19], [-1322,  4, 19]],
-	[  210155, [  -46,  2, 31], [-1216,  9,  1]],
-	[  253427, [   73,  8, 19], [-1097,  2, 19]],
-	[  369740, [  392,  2,  5], [ -779,  8,  5]],
-	[  400085, [  475,  3,  4], [ -696,  9,  5]],
-	[  434355, [  569,  1,  3], [ -602,  7,  2]],
-	[  452605, [  618, 12, 20], [ -552,  6, 20]],
-	[  470160, [  667,  1, 14], [ -504,  7, 13]],
-	[  473837, [  677,  2,  8], [ -494,  8,  8]],
-	[  507850, [  770,  3, 22], [ -401,  9, 23]],
-	[  524156, [  814, 11, 13], [ -356,  5, 14]],
-	[  544676, [  871,  1, 21], [ -300,  7, 20]],
-	[  567118, [  932,  6, 28], [ -239, 13,  2]],
-	[  569477, [  938, 12, 14], [ -232,  6, 15]],
-	[  601716, [ 1027,  3, 21], [ -144,  9, 22]],
-	[  613424, [ 1059,  4, 10], [ -112, 10, 12]],
-	[  626596, [ 1095,  5,  2], [  -76, 11,  6]],
-	[  645554, [ 1147,  3, 30], [  -24, 10,  1]],
-	[  664224, [ 1198,  5, 10], [   27, 11, 14]],
-	[  671401, [ 1218,  1,  7], [   47,  7,  6]],
-	[  694799, [ 1282,  1, 29], [  111,  7, 28]],
-	[  704424, [ 1308,  6,  3], [  137, 12,  7]],
-	[  708842, [ 1320,  7,  7], [  150,  1,  7]],
-	[  709409, [ 1322,  1, 29], [  151,  7, 29]],
-	[  709580, [ 1322,  7, 14], [  152,  1, 15]],
-	[  727274, [ 1370, 12, 27], [  200,  6, 27]],
-	[  728714, [ 1374, 12,  6], [  204,  6,  6]],
-	[  744313, [ 1417,  8, 19], [  247,  2, 20]],
-	[  764652, [ 1473,  4, 28], [  302, 10, 30]]
+const data=[  // PersianAstro    FrenchAstro    HinduAstroSolar    HinduAstroLunar
+	[ -214193, [-1208,  5,  1], [-2378, 11,  5], [-664,  5, 13], [-529,  6, 1, 11, 0]],
+	[  -61387, [ -790,  9, 14], [-1959,  3, 14], [-246,  9, 21], [-111,  9, 0, 27, 0]],
+	[   25469, [ -552,  7,  2], [-1721,  1,  2], [  -8,  7,  5], [ 127,  8, 0,  3, 1]],
+	[   49217, [ -487,  7,  9], [-1656,  1, 10], [  57,  7, 11], [ 192,  8, 0,  9, 0]],
+	[  171307, [ -153, 10, 19], [-1322,  4, 19], [ 391, 10, 17], [ 526, 10, 0, 20, 0]],
+	[  210155, [  -46,  2, 31], [-1216,  9,  1], [ 498,  2, 27], [ 633,  3, 0,  5, 0]],
+	[  253427, [   73,  8, 19], [-1097,  2, 19], [ 616,  8, 13], [ 751,  8, 0, 15, 0]],
+	[  369740, [  392,  2,  5], [ -779,  8,  5], [ 935,  1, 26], [1070,  2, 0,  6, 0]],
+	[  400085, [  475,  3,  4], [ -696,  9,  5], [1018,  2, 24], [1153,  2, 0, 23, 0]],
+	[  434355, [  569,  1,  3], [ -602,  7,  2], [1111, 12, 21], [1247,  1, 0,  8, 0]],
+	[  452605, [  618, 12, 20], [ -552,  6, 20], [1161, 12,  8], [1296, 12, 0,  8, 0]],
+	[  470160, [  667,  1, 14], [ -504,  7, 13], [1209, 12, 31], [1345,  1, 0, 23, 0]],
+	[  473837, [  677,  2,  8], [ -494,  8,  8], [1220,  1, 25], [1355,  2, 0,  8, 0]],
+	[  507850, [  770,  3, 22], [ -401,  9, 23], [1313,  3,  7], [1448,  4, 0,  1, 0]],
+	[  524156, [  814, 11, 13], [ -356,  5, 14], [1357, 10, 28], [1492, 11, 0,  7, 0]],
+	[  544676, [  871,  1, 21], [ -300,  7, 20], [1414,  1,  4], [1549,  2, 1,  4, 0]],
+	[  567118, [  932,  6, 28], [ -239, 13,  2], [1475,  6,  9], [1610,  7, 0,  2, 0]],
+	[  569477, [  938, 12, 14], [ -232,  6, 15], [1481, 11, 28], [1616, 11, 0, 29, 0]],
+	[  601716, [ 1027,  3, 21], [ -144,  9, 22], [1570,  3,  2], [1705,  3, 0, 20, 0]],
+	[  613424, [ 1059,  4, 10], [ -112, 10, 12], [1602,  3, 22], [1737,  4, 0,  5, 0]],
+	[  626596, [ 1095,  5,  2], [  -76, 11,  6], [1638,  4, 13], [1773,  5, 0,  6, 0]],
+	[  645554, [ 1147,  3, 30], [  -24, 10,  1], [1690,  3,  9], [1825,  4, 0,  5, 0]],
+	[  664224, [ 1198,  5, 10], [   27, 11, 14], [1741,  4, 20], [1876,  5, 0, 11, 0]],
+	[  671401, [ 1218,  1,  7], [   47,  7,  6], [1760, 12, 15], [1896,  1, 0, 13, 0]],
+	[  694799, [ 1282,  1, 29], [  111,  7, 28], [1825,  1,  7], [1960,  1, 0, 22, 0]],
+	[  704424, [ 1308,  6,  3], [  137, 12,  7], [1851,  5, 10], [1986,  5, 0, 20, 0]],
+	[  708842, [ 1320,  7,  7], [  150,  1,  7], [1863,  6, 14], [1998,  7, 0,  9, 0]],
+	[  709409, [ 1322,  1, 29], [  151,  7, 29], [1865,  1,  6], [2000,  1, 0, 14, 0]],
+	[  709580, [ 1322,  7, 14], [  152,  1, 15], [1865,  6, 21], [2000,  7, 0,  8, 0]],
+	[  727274, [ 1370, 12, 27], [  200,  6, 27], [1913, 12,  4], [2048, 12, 0, 14, 0]],
+	[  728714, [ 1374, 12,  6], [  204,  6,  6], [1917, 11, 13], [2052, 12, 0,  7, 0]],
+	[  744313, [ 1417,  8, 19], [  247,  2, 20], [1960,  7, 25], [2095,  8, 0, 14, 0]],
+	[  764652, [ 1473,  4, 28], [  302, 10, 30], [2016,  4,  2], [2151,  4, 0,  6, 0]]
 ];
 
 core.output("Testing PersianAstronomicalCalendar::fixedFromPersianAstronomical()");
@@ -73,7 +73,106 @@ for (i=0; i<data.length; i++){
 	pDate=data[i][2];
 
 	resDate = FrenchAstronomicalCalendar.frenchAstronomicalFromFixed(rd);
-	// if(pDate == resDate){core.output("OK")} else {core.output("ERR:" + pDate + " != " + resDate)};
-	// Compare algorithm for simple arrays from https://stackoverflow.com/questions/7837456/how-to-compare-arrays-in-javascript
 	if (pDate.length === resDate.length && pDate.every(function(value, index) { return value === resDate[index]})){core.output("OK")} else {core.output("ERR:" + pDate + " != " + resDate)};	
 }
+
+core.output("Testing AstroHinduSolarCalendar::fixedFromAstroHinduSolar()");
+for (i=0; i<data.length; i++){
+	rd=data[i][0];
+	pDate=data[i][3];
+
+	resRD=AstroHinduSolarCalendar.fixedFromAstroHinduSolar(pDate);
+	if(rd == resRD){core.output("OK")} else {core.output("ERR:" + rd + " != " + resRD)};
+}
+
+core.output("Testing AstroHinduSolarCalendar::astroHinduSolarFromFixed()");
+for (i=0; i<data.length; i++){
+	rd=data[i][0];
+	pDate=data[i][3];
+
+	resDate = AstroHinduSolarCalendar.astroHinduSolarFromFixed(rd);
+	if (pDate.length === resDate.length && pDate.every(function(value, index) { return value === resDate[index]})){core.output("OK")} else {core.output("ERR:" + pDate + " != " + resDate)};	
+}
+
+core.output("Testing AstroHinduLunarCalendar::fixedFromAstroHinduLunar()");
+for (i=0; i<data.length; i++){
+	rd=data[i][0];
+	pDate=data[i][4];
+
+	resRD=AstroHinduLunarCalendar.fixedFromAstroHinduLunar(pDate);
+	if(rd == resRD){core.output("OK")} else {core.output("ERR:" + rd + " != " + resRD)};
+}
+
+core.output("Testing AstroHinduLunarCalendar::astroHinduLunarFromFixed()");
+for (i=0; i<data.length; i++){
+	rd=data[i][0];
+	pDate=data[i][4];
+
+	resDate = AstroHinduLunarCalendar.astroHinduLunarFromFixed(rd);
+	if (pDate.length === resDate.length && pDate.every(function(value, index) { return value === resDate[index]})){core.output("OK")} else {core.output("ERR:" + pDate + " != " + resDate)};	
+}
+
+core.output("Testing Table 20.2");
+rd=GregorianCalendar.fixedFromGregorian([1982, 3, 1]);
+const lambdas=[330, 0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330];
+for (i=0; i<lambdas.length; i++){
+	rd=NewHinduCalendar.hinduSolarLongitudeAtOrAfter(lambdas[i], rd);
+
+	// split into Gregorian date and time...
+	frac=rd % 1;
+	hours=frac*24;
+	hr= Math.floor(hours);
+	minutes=(hours-hr)*60;
+	mn=Math.floor(minutes);
+	seconds=(minutes-mn)*60;
+	sc=Math.floor(seconds);
+	core.output("Event " + lambdas[i] +":\t" + rd.toFixed(6) + " Date: " + GregorianCalendar.gregorianFromFixed(Math.floor(rd)) + " Time: " + hr + ":" + mn + ":" + sc);
+
+	// also show the month begin that predates these. This derives the Hindu times. 
+	rdm=NewHinduCalendar.hinduNewMoonBefore(rd);
+	// split into Gregorian date and time...
+	frac=rdm % 1;
+	hours=frac*24;
+	hr= Math.floor(hours);
+	minutes=(hours-hr)*60;
+	mn=Math.floor(minutes);
+	seconds=(minutes-mn)*60;
+	sc=Math.floor(seconds);
+	core.output("Event Month:\t" + rdm.toFixed(6) + " Date: " + GregorianCalendar.gregorianFromFixed(Math.floor(rdm)) + " Time: " + hr + ":" + mn + ":" + sc);
+
+}
+
+/*
+// Set time in Stellarium for an ad-hoc test. These call functions 20.12-20.16
+
+core.output("hinduSolarLongitude(now):" + NewHinduCalendar.hinduSolarLongitude(Calendar.rdNow()));
+core.output("hinduLunarLongitude(now):" + NewHinduCalendar.hinduLunarLongitude(Calendar.rdNow()));
+core.output("hinduLunarPhase(now):" + NewHinduCalendar.hinduLunarPhase(Calendar.rdNow()));
+core.output("hinduLunarDayFromMoment(now):" + NewHinduCalendar.hinduLunarDayFromMoment(Calendar.rdNow()));
+core.output("hinduNewMoonBefore(now):" + NewHinduCalendar.hinduNewMoonBefore(Calendar.rdNow()));
+
+
+for (rd=569420; rd<569485; rd++){
+	// This shows details for a sequence of days from NewHinduCalendar.hinduLunarFromFixed()
+
+	critical=NewHinduCalendar.hinduSunrise(rd);
+	day=NewHinduCalendar.hinduLunarDayFromMoment(critical);
+	leapDay=(day==NewHinduCalendar.hinduLunarDayFromMoment(NewHinduCalendar.hinduSunrise(rd-1)));
+	lastNewMoon=NewHinduCalendar.hinduNewMoonBefore(critical);
+	nextNewMoon=NewHinduCalendar.hinduNewMoonBefore(Math.floor(lastNewMoon)+35);
+	solarMonth=NewHinduCalendar.hinduZodiac(lastNewMoon);
+	leapMonth=(solarMonth==NewHinduCalendar.hinduZodiac(nextNewMoon));
+	month=(solarMonth+1);
+	
+
+	core.output("RD:" + rd + " " + GregorianCalendar.gregorianFromFixed(rd) + " HinduLunar: " + NewHinduCalendar.hinduLunarFromFixed(rd));
+	core.output("\tcritical:" + critical);
+	core.output("\tday:" + day);
+	core.output("\tlastNewMoon:" + lastNewMoon);  // This seems to move a bit from day to day!
+	core.output("\tnextNewMoon:" + nextNewMoon);
+	core.output("\tSolarMonth:" + solarMonth);
+	core.output("\tLeapMonth:" + leapMonth);
+	core.output("\tmonth:" + month);
+}
+*/
+

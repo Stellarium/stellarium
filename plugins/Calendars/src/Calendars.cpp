@@ -49,6 +49,10 @@
 #include "HebrewCalendar.hpp"
 #include "OldHinduSolarCalendar.hpp"
 #include "OldHinduLuniSolarCalendar.hpp"
+#include "NewHinduCalendar.hpp"
+#include "NewHinduLunarCalendar.hpp"
+#include "AstroHinduSolarCalendar.hpp"
+#include "AstroHinduLunarCalendar.hpp"
 #include "TibetanCalendar.hpp"
 #include "MayaLongCountCalendar.hpp"
 #include "MayaHaabCalendar.hpp"
@@ -92,34 +96,40 @@ StelPluginInfo CalendarsStelPluginInterface::getPluginInfo() const
 Calendars::Calendars():
 	toolbarButton(Q_NULLPTR),
 	enabled(true),
+	flagTextColorOverride(false),
+	textColor(0.75f),
 	flagShowJulian(true),
-	flagShowRevisedJulian(true),
+	flagShowRevisedJulian(false),
 	flagShowGregorian(true),
 	flagShowISO(true),
-	flagShowIcelandic(true),
-	flagShowRoman(true),
-	flagShowOlympic(true),
-	flagShowEgyptian(true),
-	flagShowArmenian(true),
-	flagShowZoroastrian(true),
-	flagShowCoptic(true),
-	flagShowEthiopic(true),
+	flagShowIcelandic(false),
+	flagShowRoman(false),
+	flagShowOlympic(false),
+	flagShowEgyptian(false),
+	flagShowArmenian(false),
+	flagShowZoroastrian(false),
+	flagShowCoptic(false),
+	flagShowEthiopic(false),
 	flagShowChinese(true),
 	flagShowIslamic(true),
 	flagShowHebrew(true),
-	flagShowOldHinduSolar(true),
-	flagShowOldHinduLunar(true),
+	flagShowOldHinduSolar(false),
+	flagShowOldHinduLunar(false),
+	flagShowNewHinduSolar(true),
+	flagShowNewHinduLunar(true),
+	flagShowAstroHinduSolar(false),
+	flagShowAstroHinduLunar(false),
 	flagShowMayaLongCount(true),
-	flagShowMayaHaab(true),
-	flagShowMayaTzolkin(true),
-	flagShowAztecXihuitl(true),
-	flagShowAztecTonalpohualli(true),
-	flagShowBalinese(true),
-	flagShowFrenchAstronomical(true),
-	flagShowFrenchArithmetic(true),
-	flagShowPersianArithmetic(true),
-	flagShowPersianAstronomical(true),
-	flagShowTibetan(true)
+	flagShowMayaHaab(false),
+	flagShowMayaTzolkin(false),
+	flagShowAztecXihuitl(false),
+	flagShowAztecTonalpohualli(false),
+	flagShowBalinese(false),
+	flagShowFrenchAstronomical(false),
+	flagShowFrenchArithmetic(false),
+	flagShowPersianArithmetic(false),
+	flagShowPersianAstronomical(false),
+	flagShowTibetan(false)
 {
 	setObjectName("Calendars");
 	font.setPixelSize(15);
@@ -217,6 +227,10 @@ void Calendars::init()
 	calendars.insert("Hebrew", new HebrewCalendar(jd));
 	calendars.insert("OldHinduSolar", new OldHinduSolarCalendar(jd));
 	calendars.insert("OldHinduLunar", new OldHinduLuniSolarCalendar(jd));
+	calendars.insert("NewHinduSolar", new NewHinduCalendar(jd));
+	calendars.insert("NewHinduLunar", new NewHinduLunarCalendar(jd));
+	calendars.insert("AstroHinduSolar", new AstroHinduSolarCalendar(jd));
+	calendars.insert("AstroHinduLunar", new AstroHinduLunarCalendar(jd));
 	calendars.insert("MayaLongCount", new MayaLongCountCalendar(jd));
 	calendars.insert("MayaHaab", new MayaHaabCalendar(jd));
 	calendars.insert("MayaTzolkin", new MayaTzolkinCalendar(jd));
@@ -249,36 +263,43 @@ void Calendars::makeCalendarsScriptable(StelScriptMgr *ssm)
 
 void Calendars::loadSettings()
 {
+	QString defaultColor =  conf->value("color/default_color", "0.5,0.5,0.7").toString();
 	// Now activate calendar displays if needed.
-	enable(                conf->value("Calendars/show", true).toBool());
-	showJulian(            conf->value("Calendars/show_julian", true).toBool());
-	showRevisedJulian(     conf->value("Calendars/show_revised_julian", true).toBool());
-	showGregorian(         conf->value("Calendars/show_gregorian", true).toBool());
-	showISO(               conf->value("Calendars/show_iso", true).toBool());
-	showIcelandic(         conf->value("Calendars/show_icelandic", true).toBool());
-	showRoman(             conf->value("Calendars/show_roman", true).toBool());
-	showOlympic(           conf->value("Calendars/show_olympic", true).toBool());
-	showEgyptian(          conf->value("Calendars/show_egyptian", true).toBool());
-	showArmenian(          conf->value("Calendars/show_armenian", true).toBool());
-	showZoroastrian(       conf->value("Calendars/show_zoroastrian", true).toBool());
-	showCoptic(	       conf->value("Calendars/show_coptic", true).toBool());
-	showEthiopic(	       conf->value("Calendars/show_ethiopic", true).toBool());
-	showChinese(           conf->value("Calendars/show_chinese", false).toBool());
-	showIslamic(           conf->value("Calendars/show_islamic", true).toBool());
-	showHebrew(            conf->value("Calendars/show_hebrew", true).toBool());
-	showOldHinduSolar(     conf->value("Calendars/show_old_hindu_solar", true).toBool());
-	showOldHinduLunar(     conf->value("Calendars/show_old_hindu_lunar", true).toBool());
-	showMayaLongCount(     conf->value("Calendars/show_maya_long_count", true).toBool());
-	showMayaHaab(          conf->value("Calendars/show_maya_haab", true).toBool());
-	showMayaTzolkin(       conf->value("Calendars/show_maya_tzolkin", true).toBool());
-	showAztecXihuitl(      conf->value("Calendars/show_aztec_xihuitl", true).toBool());
-	showAztecTonalpohualli(conf->value("Calendars/show_aztec_tonalpohualli", true).toBool());
-	showBalinese(          conf->value("Calendars/show_balinese_pawukon", true).toBool());
-	showFrenchAstronomical(conf->value("Calendars/show_french_astronomical", true).toBool());
-	showFrenchArithmetic(  conf->value("Calendars/show_french_arithmetic", true).toBool());
-	showPersianArithmetic( conf->value("Calendars/show_persian_arithmetic", true).toBool());
-	showPersianAstronomical(conf->value("Calendars/show_persian_astronomical", true).toBool());
-	showTibetan(           conf->value("Calendars/show_tibetan", true).toBool());
+	enable(                 conf->value("Calendars/show", true).toBool());
+	setFlagTextColorOverride(conf->value("Calendars/flag_text_color_override", false).toBool());
+	setTextColor(           Vec3f(conf->value("Calendars/text_color", defaultColor).toString()));
+	showJulian(             conf->value("Calendars/show_julian", true).toBool());
+	showRevisedJulian(      conf->value("Calendars/show_revised_julian", false).toBool());
+	showGregorian(          conf->value("Calendars/show_gregorian", true).toBool());
+	showISO(                conf->value("Calendars/show_iso", true).toBool());
+	showIcelandic(          conf->value("Calendars/show_icelandic", false).toBool());
+	showRoman(              conf->value("Calendars/show_roman", false).toBool());
+	showOlympic(            conf->value("Calendars/show_olympic", false).toBool());
+	showEgyptian(           conf->value("Calendars/show_egyptian", false).toBool());
+	showArmenian(           conf->value("Calendars/show_armenian", false).toBool());
+	showZoroastrian(        conf->value("Calendars/show_zoroastrian", false).toBool());
+	showCoptic(	        conf->value("Calendars/show_coptic", false).toBool());
+	showEthiopic(	        conf->value("Calendars/show_ethiopic", false).toBool());
+	showChinese(            conf->value("Calendars/show_chinese", false).toBool());
+	showIslamic(            conf->value("Calendars/show_islamic", true).toBool());
+	showHebrew(             conf->value("Calendars/show_hebrew", true).toBool());
+	showOldHinduSolar(      conf->value("Calendars/show_old_hindu_solar", false).toBool());
+	showOldHinduLunar(      conf->value("Calendars/show_old_hindu_lunar", false).toBool());
+	showNewHinduSolar(      conf->value("Calendars/show_new_hindu_solar", true).toBool());
+	showNewHinduLunar(      conf->value("Calendars/show_new_hindu_lunar", true).toBool());
+	showAstroHinduSolar(    conf->value("Calendars/show_astro_hindu_solar", false).toBool());
+	showAstroHinduLunar(    conf->value("Calendars/show_astro_hindu_lunar", false).toBool());
+	showMayaLongCount(      conf->value("Calendars/show_maya_long_count", true).toBool());
+	showMayaHaab(           conf->value("Calendars/show_maya_haab", false).toBool());
+	showMayaTzolkin(        conf->value("Calendars/show_maya_tzolkin", false).toBool());
+	showAztecXihuitl(       conf->value("Calendars/show_aztec_xihuitl", false).toBool());
+	showAztecTonalpohualli( conf->value("Calendars/show_aztec_tonalpohualli", false).toBool());
+	showBalinese(           conf->value("Calendars/show_balinese_pawukon", false).toBool());
+	showFrenchAstronomical( conf->value("Calendars/show_french_astronomical", false).toBool());
+	showFrenchArithmetic(   conf->value("Calendars/show_french_arithmetic", false).toBool());
+	showPersianArithmetic(  conf->value("Calendars/show_persian_arithmetic", false).toBool());
+	showPersianAstronomical(conf->value("Calendars/show_persian_astronomical", false).toBool());
+	showTibetan(            conf->value("Calendars/show_tibetan", false).toBool());
 }
 
 void Calendars::restoreDefaultSettings()
@@ -326,6 +347,12 @@ void Calendars::draw(StelCore* core)
 	if (flagShowPersianAstronomical)oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Persian (Astron.)",     "calendar"), getCal("PersianAstronomical")->getFormattedDateString());
 	if (flagShowOldHinduSolar)      oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Old Hindu Solar",       "calendar"), getCal("OldHinduSolar")->getFormattedDateString());
 	if (flagShowOldHinduLunar)      oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Old Hindu Lunisolar",   "calendar"), getCal("OldHinduLunar")->getFormattedDateString());
+	if (flagShowNewHinduSolar)      oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("New Hindu Solar",       "calendar"), getCal("NewHinduSolar")->getFormattedDateString());
+	if (flagShowNewHinduLunar)      oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("New Hindu Lunisolar",   "calendar"), getCal("NewHinduLunar")->getFormattedDateString());
+	if (flagShowNewHinduLunar)      oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("New Hindu Panchang",    "calendar"),
+												    static_cast<NewHinduLunarCalendar*>(getCal("NewHinduLunar"))->getFormattedPanchangString());
+	if (flagShowAstroHinduSolar)    oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Astro Hindu Solar",     "calendar"), getCal("AstroHinduSolar")->getFormattedDateString());
+	if (flagShowAstroHinduLunar)    oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Astro Hindu Lunisolar", "calendar"), getCal("AstroHinduLunar")->getFormattedDateString());
 	if (flagShowTibetan)            oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Tibetan",               "calendar"), getCal("Tibetan")->getFormattedDateString());
 	if (flagShowMayaLongCount)      oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Maya Long Count",       "calendar"), getCal("MayaLongCount")->getFormattedDateString());
 	if (flagShowMayaHaab)           oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Maya Haab",             "calendar"), getCal("MayaHaab")->getFormattedDateString());
@@ -338,15 +365,22 @@ void Calendars::draw(StelCore* core)
 	}
 	oss << "</table>";
 	Vec3f color(1);
-	if (StelApp::getInstance().getFlagOverwriteInfoColor())
+	if (getFlagTextColorOverride())
 	{
-		// make info text more readable...
-		color = StelApp::getInstance().getOverwriteInfoColor();
+		color=textColor;
 	}
-	if (core->isBrightDaylight() && !StelApp::getInstance().getVisionModeNight())
+	else
 	{
-		// make info text more readable when atmosphere enabled at daylight.
-		color = StelApp::getInstance().getDaylightInfoColor();
+		if (StelApp::getInstance().getFlagOverwriteInfoColor())
+		{
+			// make info text more readable...
+			color = StelApp::getInstance().getOverwriteInfoColor();
+		}
+		if (core->isBrightDaylight() && !StelApp::getInstance().getVisionModeNight())
+		{
+			// make info text more readable when atmosphere enabled at daylight.
+			color = StelApp::getInstance().getDaylightInfoColor();
+		}
 	}
 
 	infoPanel->setDefaultTextColor(color.toQColor());
@@ -568,6 +602,50 @@ void Calendars::showOldHinduLunar(bool b)
 	}
 }
 
+bool Calendars::isNewHinduSolarDisplayed() const { return flagShowNewHinduSolar;}
+void Calendars::showNewHinduSolar(bool b)
+{
+	if (b!=flagShowNewHinduSolar)
+	{
+		flagShowNewHinduSolar=b;
+		conf->setValue("Calendars/show_new_hindu_solar", b);
+		emit showNewHinduSolarChanged(b);
+	}
+}
+
+bool Calendars::isNewHinduLunarDisplayed() const { return flagShowNewHinduLunar;}
+void Calendars::showNewHinduLunar(bool b)
+{
+	if (b!=flagShowNewHinduLunar)
+	{
+		flagShowNewHinduLunar=b;
+		conf->setValue("Calendars/show_new_hindu_lunar", b);
+		emit showNewHinduLunarChanged(b);
+	}
+}
+
+bool Calendars::isAstroHinduSolarDisplayed() const { return flagShowAstroHinduSolar;}
+void Calendars::showAstroHinduSolar(bool b)
+{
+	if (b!=flagShowAstroHinduSolar)
+	{
+		flagShowAstroHinduSolar=b;
+		conf->setValue("Calendars/show_astro_hindu_solar", b);
+		emit showAstroHinduSolarChanged(b);
+	}
+}
+
+bool Calendars::isAstroHinduLunarDisplayed() const { return flagShowAstroHinduLunar;}
+void Calendars::showAstroHinduLunar(bool b)
+{
+	if (b!=flagShowAstroHinduLunar)
+	{
+		flagShowAstroHinduLunar=b;
+		conf->setValue("Calendars/show_astro_hindu_lunar", b);
+		emit showAstroHinduLunarChanged(b);
+	}
+}
+
 bool Calendars::isMayaLongCountDisplayed() const { return flagShowMayaLongCount;}
 void Calendars::showMayaLongCount(bool b)
 {
@@ -686,5 +764,29 @@ void Calendars::showTibetan(bool b)
 		flagShowTibetan=b;
 		conf->setValue("Calendars/show_tibetan", b);
 		emit showTibetanChanged(b);
+	}
+}
+
+bool Calendars::getFlagTextColorOverride() const { return flagTextColorOverride;}
+void Calendars::setFlagTextColorOverride(bool b)
+{
+	if (b!=flagTextColorOverride)
+	{
+		flagTextColorOverride=b;
+		conf->setValue("Calendars/flag_text_color_override", b);
+		emit flagTextColorOverrideChanged(b);
+	}
+}
+
+Vec3f Calendars::getTextColor() const
+{
+	return textColor;
+}
+void Calendars::setTextColor(const Vec3f& newColor)
+{
+	if(newColor != textColor)
+	{
+		textColor=newColor;
+		emit textColorChanged(textColor);
 	}
 }

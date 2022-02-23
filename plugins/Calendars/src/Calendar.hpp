@@ -275,8 +275,8 @@ public slots:
 	//! @return aberration in degrees for moment rd_ut (CC:UE 14.35)
 	static double aberration(double rd_ut);
 
-	//! binary search for the moment when solar longitude reaches lng in the time between a and b (used in CC:UE 14.36)
-	static double solarLongitudeInv(double lng, double a, double b);
+	//! binary search for the moment when solar longitude reaches lng in the time between rdA and rdB (used in CC:UE 14.36)
+	static double solarLongitudeInv(double lng, double rdA, double rdB);
 	//! @return moment (RD_UT) of when the sun first reaches lng [degrees] after rd_ut  (CC:UE 14.36)
 	static double solarLongitudeAfter(double lng, double rd_ut);
 	//! @return rd_ut of season begin  (CC:UE 14.37)
@@ -324,7 +324,7 @@ public slots:
 	//! @return lunar phase (angular difference in ecliptical longitude from the sun)
 	//! at moment rd_ut (CC:UE 14.56)
 	static double lunarPhase(double rd_ut);
-	//! binary search for the moment when lunar phase reaches phi in the time between a and b (CC:UE 14.57)
+	//! binary search for the moment when lunar phase reaches phi in the time between rdA and rdB (CC:UE 14.57)
 	static double lunarPhaseInv(double phi, double rdA, double rdB);
 	//! @return rd of moment when phase was phi [degrees] before rd_ut (CC:UE 14.57)
 	static double lunarPhaseAtOrBefore(double phi, double rd_ut);
@@ -438,6 +438,16 @@ public slots:
 	//! @todo Check this!
 	static double babylonianFromLocal(double rd_loc, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
 	static double babylonianFromLocal(double rd_loc, const QString &loc){return babylonianFromLocal(rd_loc, location(loc));}
+
+	//! @return length of a temporal day hour at date rd and location loc. (CC:UE 14.89)
+	static double daytimeTemporalHour(const int rd, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
+	static double daytimeTemporalHour(const int rd, const QString &loc){return daytimeTemporalHour(rd, location(loc));}
+	//! @return length of a temporal night hour at date rd and location loc.  (CC:UE 14.90)
+	static double nighttimeTemporalHour(const int rd, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
+	static double nighttimeTemporalHour(const int rd, const QString &loc){return nighttimeTemporalHour(rd, location(loc));}
+	//! @return standard time from "temporal" sundial time (CC:UE 14.91)
+	static double standardFromSundial(const double rd_ut, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());
+	static double standardFromSundial(const double rd_ut, const QString &loc){return standardFromSundial(rd_ut, location(loc));}
 
 	// 14.9 Lunar Crescent Visibility
 	//! @return elongation of the Moon (CC:UE 14.95)

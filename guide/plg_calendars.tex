@@ -37,8 +37,10 @@ The calendar dates in the main program behave like most other astronomical softw
 \end{itemize}
 
 \noindent Since earliest times people all over the world have observed the sky
-and used its phenomena to record and measure time. Over millennia,
-various systematic calendars evolved. A classic and often-cited
+and used its phenomena to structure their lives, agree on future events
+(``we shall meet here again and exchange goods at the third Full Moon from now''),
+record and measure time.
+Over millennia, various systematic calendars evolved. A classic and often-cited
 presentation of calendars from the pre-computer era is still the
 monumental work by Ginzel (\citeyear{Ginzel:ChronologieI, Ginzel:ChronologieII,
   Ginzel:ChronologieIII}).  The next challenge was then to describe the
@@ -61,7 +63,13 @@ largest component) those dates may not be useful.
 Note that in some calendars the day did not begin at midnight, but for
 example at sunrise, sunset, or dawn. This cannot be reflected in this
 plugin. Dates should be correct at noon, and may be one day off
-dependent on these aspects.
+dependent on these aspects.\footnote{At the current point of
+  implementation I cannot exclude further errors! The plugin
+  reproduces the given sample dates, but we cannot give any guarantee
+  about the accuracy of historical dates. If you are more familiar
+  with any of the non-European calendars, you are invited to identify
+  errors or at least additions to this documentation, e.g. variants to
+  the schemes used.}
 
 \subsection{The Calendars}
 \subsubsection{Lunisolar European calendars}
@@ -174,16 +182,93 @@ Several more calendars \newFeature{0.21.0} have been worked out in algorithmic f
 
 \subsubsection{Asian calendars}
 \begin{description}
-\item[Old Hindu Solar] used before about 1100 A.D. The implementation follows the 
-  (First) \emph{\=Arya Siddh\=anta} of \=Aryabha\d{t}a (499 C.E.), 
-  as amended by Lalla (circa 720--790 C.E.).
-  The year is split into 12 months (\emph{saura}) of equal length. 
-  Days begin with sunrise, simplified as 6~am.
-\item[Old Hindu Lunisolar] used before about 1100 A.D. 
+\item[Old Hindu Solar] used before about 1100 A.D. The implementation
+  follows the (First) \emph{\=Arya Siddh\=anta} of \=Aryabha\d{t}a
+  (499 C.E.), as amended by Lalla (circa 720--790 C.E.).  The year is
+  split into 12 months (\emph{saura}) of equal length.  Days begin
+  with sunrise, simplified as 6~am. Years are counted from the
+  \emph{Kali Yuga} (Iron Age) epoch (3102~B.C.).
+\item[Old Hindu Lunisolar] used before about 1100~A.D. 
   This implementation shows the south-Indian method 
   with months starting at New Moon (\emph{am\=anta} scheme). 
   (In the north, the \emph{p\=ur\d{n}im\=anta} scheme describes months 
   starting with Full Moon. There are also some local differences.)
+\item[New Hindu Solar and Lunisolar] This is the Hindu
+  calendar \newFeature{0.22.0} from the \emph{S\=urya-Siddh\=anta}
+  (ca.~1000~A.D.). It is based on epicyclical motions of the Sun and
+  Moon around the Earth. While still an approximation, this provides
+  more accurate models of the motions at cost of much more complicated
+  computation.  The Solar month begins when the Sun enters a sign on
+  the \indexterm[Zodiac, Sidereal]{Sidereal Zodiac}. Months are
+  therefore 29 to 32 days long. Solar days begin at sunrise, and the
+  zodiacal position of the sun at sunrise in Ujjain, India, decides on
+  the date.
+
+  Years given for the Solar calendar are counted from the \emph{Saka}
+  era (A.D.~78).
+
+  The lunar month name is determined by the (first) zodiacal sign
+  entered by the sun during the month. When no sign is entered, the
+  month is ``leap'' (\emph{adhika}) and named after the following
+  month. When a Solar month passes without a New Moon, a lunar month
+  can also be skipped (\emph{kshaya}).  The Lunisolar year has 12 or
+  13 months, of which up to 2 can be leap and one skipped!
+
+  A lunar day varies in length from 21.5 to 26.2 hours, and therefore
+  may occasionally have to be repeated (here the second day is the
+  leap day or \emph{adhika}), or skipped.
+
+  Years are given in the \emph{Vikrama era} which began in
+  58~B.C. Both months schemes share the same 12 names.
+
+  Also this calendar is shown in the \emph{am\=anta} scheme, i.e.,
+  months start at New Moon. There are again several local variants,
+  and of course a longitude difference to the reference location may
+  also lead to deviations.
+
+  In addition to the New Hindu Lunisolar date, the Hindu \emph{panchang} is shown, a 5-part description of the day consisting of
+  \begin{description}
+  \item[Tithi] (lunar day)
+  \item[Weekday]
+  \item[Nak\d{s}atra] the part of the ecliptic the Moon is in at time of sunrise (in Ujjain).
+  \item[Yoga] a cycle of 27 names resulting from the ``addition'' of
+    Solar and Lunar longitudes.\footnote{For technical reasons this
+      is currently shown for midnight UTC. It is currently unclear if
+      \emph{yoga} should be given for the time of sunrise or for the
+      current moment.}
+  \item[Kara\d{n}a] a count of 60 lunar half-days resulting in 11
+    names. The \emph{kara\d{n}a} at time of sunrise (in Ujjain)
+    governs the \emph{kara\d{n}a} for the day \footnote{Again, this is
+      unconfirmed. If you know better, please tell us!}.
+  \end{description}
+  
+\item[Hindu Astronomical Solar and Lunisolar] These are similar to the
+  New Hindu calendars, \newFeature{0.22.0} but with even more accurate
+  positional computations from the \emph{S\=urya-Siddh\=anta} for
+  Solar and Lunar positions.
+\item[Tibetan calendar] is actually only one of several calendars
+  \newFeature{0.22.0} used in Tibet. We show the date in the official
+  \emph{Phuglugs} (or \emph{Phug-pa}, \emph{Phukluk}) version of the
+  \emph{K\=alacakra} calendar, derived from the \emph{K\=alacakra
+    Tantra} which was translated from Sanskrit to Tibetan in the 11th
+  century, and has been sanctioned by the Dalai Lama. It is similar to
+  the Hindu Lunisolar calendar, but has also regional variants where
+  astronomical events are computed in local time. In Tibet, the actual
+  calendar is issued only annually (after empirical corrections) by
+  the Tibetan School for Astro and Medicine and may diverge from the
+  calendar shown here.
+
+  Months are 29 or 30 days long and numbered 1 to 12. Leap months
+  precede their ``regular'' counterparts but else have the same name.
+
+  Years are counted from the date of ascension of the first Yarlung
+  king, \name[Nyatri]{Tsenpo}, in 128~B.C. (We write ``A.T.'' for Anno
+  Tibetorum.) However, it is more common to designate years in a cycle
+  of 60 years, with 5 elements which label two consecutive years which
+  are further named ``male'' and ``female'', and a parallel cycle of
+  12 animal totems. This cycle has been synchronized with the similar
+  Chinese 60-years cycle.
+  
 \item[Balinese Pawukon] is a 10-part sequence of day names with cycle
   lengths of 2 to 10, which can also be written as numbers or
   symbols. Some numbers repeat in simple cycles, while others follow
@@ -264,14 +349,15 @@ re-introduced for a few days in May 1871.
 
 Advanced users who have the book at hand may find it useful
 that\newFeature{0.22.0} almost all functions from
-\cite{Reingold-Dershowitz:2018} (as far as the implementation of the
-described calendars has come) are available as scripting
-functions. Whenever a location is needed, you can try to read a
-location from the location database by giving a location like
-``Vienna, Austria'' or ``Madrid, Western Europe'' (this should also
-work for user-specified locations. Take care to use a ``real'' name
-for the timezone, not just ``UT+3'', else timezone will be read as
-zero. Full documentation for this can be found at
+\citet{Reingold-Dershowitz:2018} are available as scripting functions
+(as far as the implementation of the described calendars has
+come). Whenever a location is needed, the current location is used, or
+you can use a location from the location database by giving its name
+like ``Vienna, Austria'' or ``Madrid, Western Europe''. This should
+also work for user-specified locations. Take care to use a ``real''
+name for the timezone, or specify an UTC based zone exactly like
+``UTC+03:15'', else timezone will be read as zero. Full documentation
+for this can be found at
 \url{https://stellarium.org/doc/head/group__calendars.html}.
 
 \subsection{Configuration Options}
@@ -287,46 +373,63 @@ Apart from changing settings using the plugin configuration dialog,
 you can also edit the \file{config.ini} file to change
 settings for the Calendars plugin -- just make it carefully!
 
-\begin{longtable}{l|l|l}\toprule
-\emph{ID}                      &\emph{Type} & \emph{Default}  \\\midrule
+{\footnotesize
+\begin{longtable}{l@{\,}|@{\,}l@{\,}|@{\,}l@{\,}||@{\,}l@{\,}|@{\,}l@{\,}|@{\,}l}\toprule
+  \emph{ID}                      &\emph{Type} & \emph{Default}  &
+  \emph{ID}                      &\emph{Type} & \emph{Default}  \\\midrule
 show                         &bool & true\\\midrule
-show\_julian                 &bool & true\\
+flag\_text\_color\_override  &bool & false &
+text\_color                  &R,G,B& \ccbox{0.5,0.5,0.7}  \\
+show\_julian                 &bool & true&
 show\_gregorian              &bool & true\\
-show\_revised\_julian        &bool & true\\
+show\_revised\_julian        &bool & false&
 show\_iso                    &bool & true\\
-show\_icelandic              &bool & true\\\midrule
-show\_roman                  &bool & true\\
-show\_olympic                &bool & true\\
-show\_egyptian               &bool & true\\
-show\_armenian               &bool & true\\
-show\_zoroastrian            &bool & true\\
-show\_coptic                 &bool & true\\
-show\_ethiopic               &bool & true\\
-show\_persian\_astronomical  &bool & true\\
-show\_persian\_arithmetic    &bool & true\\\midrule
-show\_islamic                &bool & true\\
+show\_icelandic              &bool & false\\\midrule
+show\_roman                  &bool & false&
+show\_olympic                &bool & false\\\midrule
+show\_egyptian               &bool & false\\
+show\_armenian               &bool & false&
+show\_zoroastrian            &bool & false\\
+show\_coptic                 &bool & false&
+show\_ethiopic               &bool & false\\
+show\_persian\_astronomical  &bool & false&
+show\_persian\_arithmetic    &bool & false\\\midrule
+show\_islamic                &bool & true&
 show\_hebrew                 &bool & true\\\midrule
-show\_old\_hindu\_solar      &bool & true\\
-show\_old\_hindu\_lunar      &bool & true\\
-%show\_new\_hindu\_solar     &bool & true\\
-%show\_new\_hindu\_lunar     &bool & true\\
-show\_tibetan                &bool & true\\
-show\_balinese\_pawukon      &bool & true\\\midrule
+show\_old\_hindu\_solar      &bool & false&
+show\_old\_hindu\_lunar      &bool & false\\
+show\_new\_hindu\_solar      &bool & true&
+show\_new\_hindu\_lunar      &bool & true\\
+show\_astro\_hindu\_solar    &bool & false&
+show\_astro\_hindu\_lunar    &bool & false\\
+show\_tibetan                &bool & false&
+show\_balinese\_pawukon      &bool & false\\\midrule
 show\_maya\_long\_count      &bool & true\\
-show\_maya\_haab             &bool & true\\
-show\_maya\_tzolkin          &bool & true\\
-show\_aztec\_tonalpohualli   &bool & true\\
-show\_aztec\_xihuitl         &bool & true\\\midrule
-show\_french\_astronomical   &bool & true\\
-show\_french\_arithmetic     &bool & true\\\bottomrule
+show\_maya\_haab             &bool & false&
+show\_maya\_tzolkin          &bool & false\\
+show\_aztec\_tonalpohualli   &bool & false&
+show\_aztec\_xihuitl         &bool & false\\\midrule
+show\_french\_astronomical   &bool & false&
+show\_french\_arithmetic     &bool & false\\\bottomrule
 %show\_chinese                &bool & false\\
 \end{longtable}
+}
 
 \subsection{Further development}
-The plugin is in an early phase of development. More calendars will be
-added in later versions, and formatting and setting options may be
-improved. Members of non-European cultures are invited to suggest
-better formatting for their calendars!
+The plugin is still in development. More calendars will be added in
+later versions, and formatting and setting options may be
+improved. Members of non-European cultures who are actually using the
+output and can judge its correctness are invited to report errors or
+suggest better formatting for their respective calendars.
+
+For example, our source book \citep{Reingold-Dershowitz:2018}
+describes one solution for the ``New Hindu'' calendars, but notes
+several variants, which are in fact also location dependent. We cannot
+show every variant here, but hope to have the version described in the
+book correct. If you know what you are doing: we are accepting
+improvements and extensions in form of working code plus documentation
+where this variant is used. Not just a few example dates, but an
+algorithmic solution.
 
 \subsection{Acknowledgments}
 

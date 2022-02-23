@@ -41,12 +41,13 @@ by Edward M. Reingold and Nachum Dershowitz (2018). It comtains algorithmic desc
 most of which should make their way into this plugin.
 
 This book describes data conversion from and to calendars, using not the commonly used Julian Day number, but an intermediate
-number called Rata Die (R.D.), days counted from midnight of (proleptic) 1.1. of year 1 AD (Gregorian).
+number called <em>Rata Die</em> (R.D.; easily remembered by the authors' names), days counted from midnight of (proleptic) 1.1. of year 1 AD (Gregorian).
 
 For the user, a simple selection GUI allows choosing which calendars should be displayed in the lower-right screen corner.
 Some more GUI tabs allow interaction with selected calendars.
 
 A potentially great feature for owners of the book is that most functions from the book are available as scripting functions for the respective calendars.
+Just call objects by their classnames.
 
 Examples:
 
@@ -72,6 +73,10 @@ class Calendars : public StelModule
 {
 	Q_OBJECT
 	Q_PROPERTY(bool enabled		      READ isEnabled                WRITE enable            NOTIFY enabledChanged)
+
+	Q_PROPERTY(bool flagTextColorOverride READ getFlagTextColorOverride WRITE setFlagTextColorOverride NOTIFY flagTextColorOverrideChanged)
+	Q_PROPERTY(Vec3f textColor            READ getTextColor             WRITE setTextColor      NOTIFY textColorChanged)
+
 	Q_PROPERTY(bool flagShowJulian        READ isJulianDisplayed        WRITE showJulian        NOTIFY showJulianChanged)
 	Q_PROPERTY(bool flagShowRevisedJulian READ isRevisedJulianDisplayed WRITE showRevisedJulian NOTIFY showRevisedJulianChanged)
 	Q_PROPERTY(bool flagShowGregorian     READ isGregorianDisplayed     WRITE showGregorian     NOTIFY showGregorianChanged)
@@ -89,6 +94,10 @@ class Calendars : public StelModule
 	Q_PROPERTY(bool flagShowHebrew        READ isHebrewDisplayed        WRITE showHebrew        NOTIFY showHebrewChanged)
 	Q_PROPERTY(bool flagShowOldHinduSolar READ isOldHinduSolarDisplayed WRITE showOldHinduSolar NOTIFY showOldHinduSolarChanged)
 	Q_PROPERTY(bool flagShowOldHinduLunar READ isOldHinduLunarDisplayed WRITE showOldHinduLunar NOTIFY showOldHinduLunarChanged)
+	Q_PROPERTY(bool flagShowNewHinduSolar READ isNewHinduSolarDisplayed WRITE showNewHinduSolar NOTIFY showNewHinduSolarChanged)
+	Q_PROPERTY(bool flagShowNewHinduLunar READ isNewHinduLunarDisplayed WRITE showNewHinduLunar NOTIFY showNewHinduLunarChanged)
+	Q_PROPERTY(bool flagShowAstroHinduSolar READ isAstroHinduSolarDisplayed WRITE showAstroHinduSolar NOTIFY showAstroHinduSolarChanged)
+	Q_PROPERTY(bool flagShowAstroHinduLunar READ isAstroHinduLunarDisplayed WRITE showAstroHinduLunar NOTIFY showAstroHinduLunarChanged)
 	Q_PROPERTY(bool flagShowMayaLongCount READ isMayaLongCountDisplayed WRITE showMayaLongCount NOTIFY showMayaLongCountChanged)
 	Q_PROPERTY(bool flagShowMayaHaab      READ isMayaHaabDisplayed      WRITE showMayaHaab      NOTIFY showMayaHaabChanged)
 	Q_PROPERTY(bool flagShowMayaTzolkin   READ isMayaTzolkinDisplayed   WRITE showMayaTzolkin   NOTIFY showMayaTzolkinChanged)
@@ -143,6 +152,8 @@ signals:
 	//void jdChanged(double jd);
 
 	void enabledChanged(bool b);
+	void flagTextColorOverrideChanged(bool b);
+	void textColorChanged(Vec3f &color);
 	void showJulianChanged(bool b);
 	void showRevisedJulianChanged(bool b);
 	void showGregorianChanged(bool b);
@@ -160,6 +171,10 @@ signals:
 	void showHebrewChanged(bool b);
 	void showOldHinduSolarChanged(bool b);
 	void showOldHinduLunarChanged(bool b);
+	void showNewHinduSolarChanged(bool b);
+	void showNewHinduLunarChanged(bool b);
+	void showAstroHinduSolarChanged(bool b);
+	void showAstroHinduLunarChanged(bool b);
 	void showMayaLongCountChanged(bool b);
 	void showMayaHaabChanged(bool b);
 	void showMayaTzolkinChanged(bool b);
@@ -176,6 +191,12 @@ public slots:
 	// Setters/getters
 	//! is display of calendars overlay active?
 	bool isEnabled() const;
+	bool getFlagTextColorOverride() const;
+	void setFlagTextColorOverride(bool b);
+	//! Get the current color of the text (when override flag is active).
+	Vec3f getTextColor() const;
+	void setTextColor(const Vec3f& newColor);
+
 	//! enable display of calendars overlay
 	void enable(bool b);
 	bool isJulianDisplayed() const;		//!< display Julian Calendar?
@@ -212,6 +233,14 @@ public slots:
 	void showOldHinduSolar(bool b);		//!< activate display of Old Hindu Solar
 	bool isOldHinduLunarDisplayed() const;	//!< display Old Hindu Lunar?
 	void showOldHinduLunar(bool b);		//!< activate display of Old Hindu Lunar
+	bool isNewHinduSolarDisplayed() const;	//!< display New Hindu Solar?
+	void showNewHinduSolar(bool b);		//!< activate display of New Hindu Solar
+	bool isNewHinduLunarDisplayed() const;	//!< display New Hindu Lunisolar?
+	void showNewHinduLunar(bool b);		//!< activate display of New Hindu Lunisolar
+	bool isAstroHinduSolarDisplayed() const;//!< display Astro Hindu Solar?
+	void showAstroHinduSolar(bool b);	//!< activate display of Astro Hindu Solar
+	bool isAstroHinduLunarDisplayed() const;//!< display Astro Hindu Lunisolar?
+	void showAstroHinduLunar(bool b);	//!< activate display of Astro Hindu Lunisolar
 	bool isMayaLongCountDisplayed() const;	//!< display Maya Long Count?
 	void showMayaLongCount(bool b);		//!< activate display of Maya Long Count
 	bool isMayaHaabDisplayed() const;	//!< display Maya Haab?
@@ -252,6 +281,9 @@ private:
 
 	// StelProperties:
 	bool enabled;
+	bool flagTextColorOverride;
+	Vec3f textColor;
+
 	bool flagShowJulian;
 	bool flagShowRevisedJulian;
 	bool flagShowGregorian;
@@ -269,6 +301,10 @@ private:
 	bool flagShowHebrew;
 	bool flagShowOldHinduSolar;
 	bool flagShowOldHinduLunar;
+	bool flagShowNewHinduSolar;
+	bool flagShowNewHinduLunar;
+	bool flagShowAstroHinduSolar;
+	bool flagShowAstroHinduLunar;
 	bool flagShowMayaLongCount;
 	bool flagShowMayaHaab;
 	bool flagShowMayaTzolkin;
