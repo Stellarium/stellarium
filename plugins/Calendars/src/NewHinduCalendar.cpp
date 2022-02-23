@@ -30,6 +30,8 @@ const StelLocation NewHinduCalendar::ujjainUTC("Ujjain", "In", "Southern Asia", 
 const StelLocation NewHinduCalendar::hinduLocation=ujjain;
 
 QMap<int, QString>NewHinduCalendar::lunarStations;
+QMap<int, QString>NewHinduCalendar::yogas;
+QMap<int, QString>NewHinduCalendar::karanas;
 
 NewHinduCalendar::NewHinduCalendar(double jd): OldHinduLuniSolarCalendar(jd)
 {
@@ -69,6 +71,48 @@ void NewHinduCalendar::retranslate()
 		{ 26, qc_("Uttara-Bhādrapadā" , "Hindu Lunar Station name")},
 		{ 27, qc_("Revatī"            , "Hindu Lunar Station name")}
 	};
+	yogas={
+		{  1, qc_("Viṣkambha" , "Hindu yoga name")},
+		{  2, qc_("Prīti"     , "Hindu yoga name")},
+		{  3, qc_("Ayuṣmān"   , "Hindu yoga name")},
+		{  4, qc_("Saubhāgya" , "Hindu yoga name")},
+		{  5, qc_("Śobhana"   , "Hindu yoga name")},
+		{  6, qc_("Atigaṇda"  , "Hindu yoga name")},
+		{  7, qc_("Sukarman"  , "Hindu yoga name")},
+		{  8, qc_("Dhṛti"     , "Hindu yoga name")},
+		{  9, qc_("Śūla"      , "Hindu yoga name")},
+		{ 10, qc_("Gaṇda"     , "Hindu yoga name")},
+		{ 11, qc_("Vṛddhi"    , "Hindu yoga name")},
+		{ 12, qc_("Dhruva"    , "Hindu yoga name")},
+		{ 13, qc_("Vyāghāta"  , "Hindu yoga name")},
+		{ 14, qc_("Harṣaṇa"   , "Hindu yoga name")},
+		{ 15, qc_("Vajra"     , "Hindu yoga name")},
+		{ 16, qc_("Siddhi"    , "Hindu yoga name")},
+		{ 17, qc_("Vyatīpāta" , "Hindu yoga name")},
+		{ 18, qc_("Varīyas"   , "Hindu yoga name")},
+		{ 19, qc_("Parigha"   , "Hindu yoga name")},
+		{ 20, qc_("Śiva"      , "Hindu yoga name")},
+		{ 21, qc_("Siddha"    , "Hindu yoga name")},
+		{ 22, qc_("Sādhya"    , "Hindu yoga name")},
+		{ 23, qc_("Śubha"     , "Hindu yoga name")},
+		{ 24, qc_("Śukla"     , "Hindu yoga name")},
+		{ 25, qc_("Brahman"   , "Hindu yoga name")},
+		{ 26, qc_("Indra"     , "Hindu yoga name")},
+		{ 27, qc_("Vaidhṛti"  , "Hindu yoga name")}
+	};
+	karanas={
+		{  0, qc_("Kiṃstughna", "Hindu karana name")},
+		{  1, qc_("Bava"      , "Hindu karana name")},
+		{  2, qc_("Vālava"    , "Hindu karana name")},
+		{  3, qc_("Kaulava"   , "Hindu karana name")},
+		{  4, qc_("Taitila"   , "Hindu karana name")},
+		{  5, qc_("Gara"      , "Hindu karana name")},
+		{  6, qc_("Vaṇija"    , "Hindu karana name")},
+		{  7, qc_("Viṣṭi"     , "Hindu karana name")},
+		{  8, qc_("Śakuni"    , "Hindu karana name")},
+		{  9, qc_("Catuṣpada" , "Hindu karana name")},
+		{ 10, qc_("Nāga"      , "Hindu karana name")},
+	};
 }
 
 // Set a calendar date from the Julian day number
@@ -80,6 +124,20 @@ void NewHinduCalendar::setJD(double JD)
 	parts=hinduSolarFromFixed(rd);
 
 	emit partsChanged(parts);
+}
+
+// set date from a vector of calendar date elements sorted from the largest to the smallest.
+// Year-Month[1...12]-Day[1...31]
+// Time is not changed!
+void NewHinduCalendar::setDate(QVector<int> parts)
+{
+	this->parts=parts;
+	double rd=fixedFromHinduSolar(parts);
+	// restore time from JD!
+	double frac=StelUtils::fmodpos(JD+0.5+StelApp::getInstance().getCore()->getUTCOffset(JD)/24., 1.);
+	JD=jdFromFixed(rd+frac, true);
+
+	emit jdChanged(JD);
 }
 
 // get a stringlist of calendar date elements sorted from the largest to the smallest.
@@ -113,21 +171,6 @@ QString NewHinduCalendar::getFormattedDateString() const
 				str.at(2),
 				str.at(0),
 				epoch);
-}
-
-
-// set date from a vector of calendar date elements sorted from the largest to the smallest.
-// Year-Month[1...12]-Day[1...31]
-// Time is not changed!
-void NewHinduCalendar::setDate(QVector<int> parts)
-{
-	this->parts=parts;
-	double rd=fixedFromHinduSolar(parts);
-	// restore time from JD!
-	double frac=StelUtils::fmodpos(JD+0.5+StelApp::getInstance().getCore()->getUTCOffset(JD)/24., 1.);
-	JD=jdFromFixed(rd+frac, true);
-
-	emit jdChanged(JD);
 }
 
 // return { year, month, day} (CC:UE 20.20)
@@ -748,10 +791,30 @@ int NewHinduCalendar::karana(const int n)
 	else
 		return StelUtils::amod(n-1, 7);
 }
-// return yoga (CC:UE 20.64)
-int NewHinduCalendar::yoga(const double rd_ut)
+
+// return karana [1...60] for day rd. According to Wikipedia (https://en.wikipedia.org/wiki/Hindu_calendar#Kara%E1%B9%87a),
+// the karana at sunrise prevails for the day, but this has yet to be confirmed.
+int NewHinduCalendar::karanaForDay(const int rd)
 {
-	return 1+qRound(floor( StelUtils::fmodpos( (hinduSolarLongitude(rd_ut)+hinduLunarLongitude(rd_ut))/(800./60.), 27.)));
+	const double sunrise=hinduSunrise(rd);
+	int karanaCand=0;
+	double latest=sunrise-30;
+	for (int n=1; n<=60; n++)
+	{
+		double kBeg=hinduLunarDayAtOrAfter((n+1)*0.5, sunrise-30);
+		if ( (kBeg<sunrise) && (kBeg>latest) )
+		{
+			karanaCand=n;
+			latest=kBeg;
+		}
+	}
+	return karanaCand;
+}
+
+// return yoga (CC:UE 20.64)
+int NewHinduCalendar::yoga(const int rd)
+{
+	return 1+qRound(floor( StelUtils::fmodpos( (hinduSolarLongitude(rd)+hinduLunarLongitude(rd))/(800./60.), 27.)));
 }
 // return the sacred Wednesdays in a Gregorian year. (CC:UE 20.65)
 QVector<int> NewHinduCalendar::sacredWednesdays(const int gYear)

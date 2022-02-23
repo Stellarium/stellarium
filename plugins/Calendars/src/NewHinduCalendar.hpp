@@ -67,7 +67,6 @@ public slots:
 	//! get a formatted complete string for the date in the New Hindu Solar calendar
 	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
-
 	// 20.1 Hindu Astronomy
 	//! @return table value within [0...3438]/3438 for the sine of an angle (CC:UE 20.4)
 	//! within 0..90 degrees specified as integral number of steps of 225'.
@@ -207,8 +206,11 @@ public slots:
 	static int hinduLunarStation(const int rd);
 	//! @return karana index (CC:UE 20.63)
 	static int karana(const int n);
+	//! @return karana [1...60] for day rd. According to Wikipedia (https://en.wikipedia.org/wiki/Hindu_calendar#Kara%E1%B9%87a),
+	//! the karana at sunrise prevails for the day, but this has yet to be confirmed.
+	static int karanaForDay(const int rd);
 	//! @return yoga (CC:UE 20.64)
-	static int yoga(const double rd_ut);
+	static int yoga(const int rd);
 	//! @return the sacred Wednesdays in a Gregorian year. (CC:UE 20.65)
 	static QVector<int> sacredWednesdays(const int gYear);
 	//! @return the sacred Wednesdays in a certain range of RDs. (CC:UE 20.66)
@@ -231,6 +233,8 @@ protected:
 	//! @todo make this configurable?
 	static const StelLocation hinduLocation;
 	static QMap<int, QString>lunarStations;
+	static QMap<int, QString>yogas;
+	static QMap<int, QString>karanas;
 };
 
 #endif

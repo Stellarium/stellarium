@@ -53,6 +53,10 @@ public slots:
 
 	//! get a formatted complete string for a date
 	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
+
+	//! get a formatted string for displaying the "panchang", a set of
+	//! tithi (lunar day), day of week, nakshatra, yoga, karana.
+	virtual QString getFormattedPanchangString();
 };
 
 #endif

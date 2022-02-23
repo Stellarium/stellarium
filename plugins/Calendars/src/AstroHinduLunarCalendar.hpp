@@ -49,6 +49,10 @@ public slots:
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! @return {Year, Month, MonthName, leap[0|1], Day, DayName}
 	virtual QStringList getDateStrings() const Q_DECL_OVERRIDE;
+
+	//! get a formatted string for displaying the "panchang", a set of
+	//! tithi (lunar day), day of week, nakshatra, yoga, karana.
+	virtual QString getFormattedPanchangString() Q_DECL_OVERRIDE;
 };
 
 #endif

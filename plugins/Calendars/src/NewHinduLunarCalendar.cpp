@@ -89,3 +89,22 @@ void NewHinduLunarCalendar::setDate(QVector<int> parts)
 
 	emit jdChanged(JD);
 }
+
+QString NewHinduLunarCalendar::getFormattedPanchangString()
+{
+	const int rd=fixedFromHinduLunar(parts);
+	const int dow=dayOfWeekFromFixed(rd);
+
+	QString tithi        = QString(qc_("Tithi",    "Hindu Calendar element"));
+	QString nakshatraStr = QString(qc_("Nakṣatra", "Hindu Calendar element"));
+	QString yogaStr      = QString(qc_("Yoga",     "Hindu Calendar element"));
+	QString karanaStr    = QString(qc_("Karana",   "Hindu Calendar element"));
+	return QString("%1: %2, %3: %4, %5: %6, %7: %8, %9: %10").arg(
+				tithi       , QString::number(parts.value(3)),
+				q_("Day")   , weekDayNames.value(dow, "error"),
+				nakshatraStr, lunarStations.value(hinduLunarStation(rd)),
+				yogaStr     , yogas.value(yoga(rd)),
+				// Karanas are 1/2 lunar days. According to WP, the karana at sunrise governs the day.
+				karanaStr   , karanas.value(karana(karanaForDay(rd)), QString::number(karanaForDay(rd)))
+				);
+}
