@@ -552,6 +552,7 @@ StelMainView::StelMainView(QSettings* settings)
 	  flagUseCustomScreenshotSize(false),
 	  customScreenshotWidth(1024),
 	  customScreenshotHeight(768),
+	  screenshotDpi(72),
 	  customScreenshotMagnification(1.0f),
 	  screenShotPrefix("stellarium-"),
 	  screenShotFormat("png"),
@@ -667,6 +668,7 @@ void StelMainView::resizeEvent(QResizeEvent* event)
 		rootItem->setSize(sz);
 		if(guiItem)
 			guiItem->setGeometry(QRectF(0.0,0.0,sz.width(),sz.height()));
+		emit sizeChanged(sz);
 	}
 	QGraphicsView::resizeEvent(event);
 }
@@ -873,6 +875,7 @@ void StelMainView::init()
 	flagUseCustomScreenshotSize=configuration->value("main/screenshot_custom_size", false).toBool();
 	customScreenshotWidth=configuration->value("main/screenshot_custom_width", 1024).toInt();
 	customScreenshotHeight=configuration->value("main/screenshot_custom_height", 768).toInt();
+	screenshotDpi=configuration->value("main/screenshot_dpi", 72).toInt();
 	setFlagCursorTimeout(configuration->value("gui/flag_mouse_cursor_timeout", false).toBool());
 	setCursorTimeout(configuration->value("gui/mouse_cursor_timeout", 10.f).toDouble());
 	setMaxFps(configuration->value("video/maximum_fps",10000.f).toFloat());
@@ -1504,6 +1507,14 @@ void StelMainView::setScreenshotFormat(const QString filetype)
 		qDebug() << "Invalid filetype for screenshot: " << filetype;
 	}
 }
+
+void StelMainView::setScreenshotDpi(int dpi)
+{
+	screenshotDpi=dpi;
+	StelApp::getInstance().getSettings()->setValue("main/screenshot_dpi", dpi);
+	emit screenshotDpiChanged(dpi);
+}
+
 void StelMainView::saveScreenShot(const QString& filePrefix, const QString& saveDir, const bool overwrite)
 {
 	screenShotPrefix = filePrefix;
@@ -1707,6 +1718,10 @@ void StelMainView::doScreenshot(void)
 				break;
 		}
 	}
+
+	// Set preferred image resolution (for some printing workflows)
+	im.setDotsPerMeterX(qRound(screenshotDpi*100./2.54));
+	im.setDotsPerMeterY(qRound(screenshotDpi*100./2.54));
 	qDebug() << "INFO Saving screenshot in file: " << QDir::toNativeSeparators(shotPath.filePath());
 	QImageWriter imageWriter(shotPath.filePath());
 	if (screenShotFormat=="tif")

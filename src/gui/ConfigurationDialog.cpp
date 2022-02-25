@@ -375,6 +375,16 @@ void ConfigurationDialog::createDialogContent()
 	ui->customScreenshotHeightLineEdit->setValidator(new MinMaxIntValidator(128, 16384, this));
 	connectIntProperty(ui->customScreenshotWidthLineEdit, "MainView.customScreenshotWidth");
 	connectIntProperty(ui->customScreenshotHeightLineEdit, "MainView.customScreenshotHeight");
+	connectIntProperty(ui->dpiSpinBox, "MainView.screenshotDpi");
+	StelMainView *mainView=static_cast<StelMainView *>(StelApp::getInstance().parent());
+	connect(mainView, SIGNAL(screenshotDpiChanged(int)), this, SLOT(updateDpiTooltip()));
+	connect(mainView, SIGNAL(flagUseCustomScreenshotSizeChanged(bool)), this, SLOT(updateDpiTooltip()));
+	connect(mainView, SIGNAL(customScreenshotWidthChanged(int)), this, SLOT(updateDpiTooltip()));
+	connect(mainView, SIGNAL(customScreenshotHeightChanged(int)), this, SLOT(updateDpiTooltip()));
+	connect(mainView, SIGNAL(customScreenshotHeightChanged(int)), this, SLOT(updateDpiTooltip()));
+	connect(mainView, SIGNAL(sizeChanged(const QSize&)), this, SLOT(updateDpiTooltip()));
+	updateDpiTooltip();
+
 	connectBoolProperty(ui->autoEnableEnvironmentCheckBox, "LandscapeMgr.flagEnvironmentAutoEnabling");
 	connectBoolProperty(ui->autoChangeLandscapesCheckBox, "LandscapeMgr.flagLandscapeAutoSelection");
 
@@ -758,6 +768,30 @@ void ConfigurationDialog::selectScreenshotDir()
 		// nop
 		// this will happen when people are only half way through typing dirs
 	}
+}
+
+void ConfigurationDialog::updateDpiTooltip()
+{
+	StelMainView *mainView=static_cast<StelMainView *>(StelApp::getInstance().parent());
+	const QString qMM=qc_("mm", "millimeters");
+	const int dpi=mainView->getScreenshotDpi();
+	double mmX, mmY;
+	if (mainView->getFlagUseCustomScreenshotSize())
+	{
+		mmX=mainView->getCustomScreenshotWidth()*25.4/dpi;
+		mmY=mainView->getCustomScreenshotHeight()*25.4/dpi;
+	}
+	else
+	{
+		mmX=mainView->window()->width()*25.4/dpi;
+		mmY=mainView->window()->height()*25.4/dpi;
+	}
+
+	ui->dpiSpinBox->setToolTip("<html><head/><body><p>" +
+				   q_("Dots per Inch (for image metadata).") + "</p><p>" +
+				   q_("Current designated print size") +
+				   QString(": %1&times;%2 %3").arg(QString::number(mmX, 'f', 1), QString::number(mmY, 'f', 1), qMM) +
+				   + "</p></body></html>");
 }
 
 // Store FOV and viewing dir.

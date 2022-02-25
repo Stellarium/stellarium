@@ -54,6 +54,7 @@ class StelMainView : public QGraphicsView
 	Q_PROPERTY(bool flagUseCustomScreenshotSize READ getFlagUseCustomScreenshotSize WRITE setFlagUseCustomScreenshotSize NOTIFY flagUseCustomScreenshotSizeChanged)
 	Q_PROPERTY(int  customScreenshotWidth      READ getCustomScreenshotWidth      WRITE setCustomScreenshotWidth      NOTIFY customScreenshotWidthChanged)
 	Q_PROPERTY(int  customScreenshotHeight     READ getCustomScreenshotHeight     WRITE setCustomScreenshotHeight     NOTIFY customScreenshotHeightChanged)
+	Q_PROPERTY(int  screenshotDpi	           READ getScreenshotDpi              WRITE setScreenshotDpi              NOTIFY screenshotDpiChanged)
 	Q_PROPERTY(QString screenShotFormat        READ getScreenshotFormat           WRITE setScreenshotFormat           NOTIFY screenshotFormatChanged)
 	Q_PROPERTY(bool flagCursorTimeout          READ getFlagCursorTimeout          WRITE setFlagCursorTimeout          NOTIFY flagCursorTimeoutChanged)
 	Q_PROPERTY(double cursorTimeout            READ getCursorTimeout              WRITE setCursorTimeout              NOTIFY cursorTimeoutChanged)
@@ -148,12 +149,16 @@ public slots:
 	void setFlagUseCustomScreenshotSize(bool b) {flagUseCustomScreenshotSize=b; emit flagUseCustomScreenshotSizeChanged(b);}
 	//! Get custom screenshot width
 	int getCustomScreenshotWidth() const {return customScreenshotWidth;}
-	//! Set whether custom size should be used for screenshots
+	//! Set custom width for screenshots
 	void setCustomScreenshotWidth(int width) {customScreenshotWidth=width; emit customScreenshotWidthChanged(width);}
 	//! Get custom screenshot height
 	int getCustomScreenshotHeight() const {return customScreenshotHeight;}
-	//! Set whether custom size should be used for screenshots
+	//! Set custom height for screenshots
 	void setCustomScreenshotHeight(int height) {customScreenshotHeight=height; emit customScreenshotHeightChanged(height);}
+	//! Get screenshot DPI. This is only an entry in the screenshot image metadata. The raster content is not influenced.
+	int getScreenshotDpi() const {return screenshotDpi;}
+	//! Set screenshot DPI. This is only an entry in the screenshot image metadata. The raster content is not influenced.
+	void setScreenshotDpi(int dpi);
 	//! Get screenshot magnification. This should be used by StarMgr, text drawing and other elements which may
 	//! want to enlarge their output in screenshots to keep them visible.
 	float getCustomScreenshotMagnification() const {return customScreenshotMagnification;}
@@ -208,6 +213,8 @@ protected:
 
 	bool eventFilter(QObject *obj, QEvent *event) override;
 signals:
+	//! emitted when window size has changed
+	void sizeChanged(const QSize &sz);
 	//! emitted when saveScreenShot is requested with saveScreenShot().
 	//! doScreenshot() does the actual work (it has to do it in the main
 	//! thread, where as saveScreenShot() might get called from another one.
@@ -226,6 +233,7 @@ signals:
 	void flagUseCustomScreenshotSizeChanged(bool use);
 	void customScreenshotWidthChanged(int width);
 	void customScreenshotHeightChanged(int height);
+	void screenshotDpiChanged(int dpi);
 	void screenshotFormatChanged(QString format);
 
 	void skyBackgroundColorChanged(Vec3f color);
@@ -287,6 +295,7 @@ private:
 	bool flagUseCustomScreenshotSize; //! if true, the next 2 values are observed for screenshots.
 	int customScreenshotWidth;            //! used when flagCustomResolutionScreenshots==true
 	int customScreenshotHeight;           //! used when flagCustomResolutionScreenshots==true
+	int screenshotDpi;                //! Image metadata entry for DPI. This does not influence the screenshot raster image content in any way, but some workflows like to have a configurable entry.
 	float customScreenshotMagnification;  //! tracks the magnification factor customScreenshotHeight/NormalWindowHeight
 	QString screenShotPrefix;
 	QString screenShotFormat; //! file type like "png" or "jpg".
