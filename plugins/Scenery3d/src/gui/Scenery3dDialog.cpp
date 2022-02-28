@@ -320,7 +320,7 @@ void Scenery3dDialog::initResolutionCombobox(QComboBox *cb)
 	bool oldval = cb->blockSignals(true);
 
 	uint maxResolution = mgr->getMaximumFramebufferSize();
-	for(uint i = 256;i<=qMin(4096u,maxResolution);i*=2)
+	for(uint i = 256;i<=qMin(16384u,maxResolution);i*=2)
 	{
 		cb->addItem(QString::number(i),i);
 	}
