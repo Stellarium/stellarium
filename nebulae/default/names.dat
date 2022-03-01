@@ -99,6 +99,9 @@
 #   ADI: https://astrodonimaging.com/
 #      - NGC2029, NGC2032, NGC2035 - Southern Seagull Nebula; https://astrodonimaging.com/gallery/southern-seagull-nebula/
 #   TLO: Guy Consolmagno, Dan M. Davis, Turn Left at Orion, Cambridge University Press, 2019. ISBN 9781108558464; https://doi.org/10.1017/9781108558464
+#   JH: Sir John Herschel's note
+#      - NGC3199/h3239: Falcated Nebula; Results of astronomical observations made during the years 1834, 5, 6, 7, 8, at the Cape of Good Hope... P38, 20, 94; https://ngcicproject.observers.org/Historical_Record/Corwin/1847AO-1_JHerschelCapeObs.pdf
+#      - NGC2070: Great Looped Nebula; Results of astronomical observations made during the years 1834, 5, 6, 7, 8, at the Cape of Good Hope...
 #   ???: Source very much needed. Marked especially for objects which have a well-known name, where a new/alternative name does not help anybody.
 #   TBD:  ADD OTHERS HERE!
 NGC  40              _("Bow-Tie Nebula") # ESKY, B500
@@ -272,7 +275,7 @@ NGC  2035            _("Dragon’s Head Nebula") # ESKY, ADI
 NGC  2060            _("30 Dor B") # SIMBAD
 NGC  2068            _("Casper the Friendly Ghost Nebula") # B500
 NGC  2070            _("Tarantula Nebula") # WK, SIMBAD, BCH, WSO, PSA, DN, PAS, TLO
-NGC  2070            _("Great Looped Nebula") # BCH, SOG
+NGC  2070            _("Great Looped Nebula") # BCH, SOG, JH
 NGC  2070            _("True Lovers' Knot") # ???
 NGC  2070            _("30 Dor Cluster") # SIMBAD, BCH
 NGC  2070            _("30 Dor Nebula") # PSA
@@ -403,6 +406,7 @@ NGC  3187            _("Leo Quartet") # WSG
 NGC  3189            _("NGC 3190 Group") # BCH, SIMBAD
 NGC  3189            _("Leo Quartet") # WSG
 NGC  3193            _("Leo Quartet") # WSG
+NGC  3199            _("Falcated Nebula") # JH
 NGC  3228            _("Queen's Cache Cluster") # HT
 NGC  3242            _("Ghost of Jupiter Nebula") # WK, SIMBAD, DSW, BCH, DWH, WSO, PSA, CC, DN, B500, PAS, TLO
 NGC  3242            _("Eye Nebula") # DN
@@ -537,7 +541,7 @@ NGC  4826            _("Evil Eye Galaxy") # SIMBAD
 NGC  4826            _("Sleeping Beauty Galaxy") # B500
 NGC  4833            _("The Southern Butterfly") # SG
 NGC  4889            _("Coma B") # ESKY
-NGC  4898            _("Z Coma Coma") # SIMBAD
+# NGC  4898            _("Z Coma Coma") # SIMBAD
 NGC  4945            _("The Tweezers Galaxy") # SG
 # NGC  4990            _("Cocoon Galaxy") # SIMBAD
 NGC  5033            _("Waterbug Galaxy") # SD
