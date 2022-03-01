@@ -294,19 +294,11 @@ StelObjectP Exoplanets::searchByName(const QString& englishName) const
 			return qSharedPointerCast<StelObject>(eps);
 
 		QStringList ppn = eps->getExoplanetsEnglishNames();
+		ppn << eps->getDesignations();
+		ppn << eps->getExoplanetsDesignations();
 		if (!ppn.isEmpty())
 		{
-			for (const auto& str : ppn)
-			{
-				if (str.toUpper() == englishName.toUpper())
-					return qSharedPointerCast<StelObject>(eps);
-			}
-		}
-
-		ppn = eps->getExoplanetsDesignations();
-		if (!ppn.isEmpty())
-		{
-		    for (const auto& str : qAsConst(ppn))
+			for (const auto& str : qAsConst(ppn))
 			{
 				if (str.toUpper() == englishName.toUpper())
 					return qSharedPointerCast<StelObject>(eps);
@@ -366,6 +358,7 @@ QStringList Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbI
 		names.append(eps->getExoplanetsNamesI18n());
 		names.append(eps->getEnglishName());
 		names.append(eps->getExoplanetsEnglishNames());
+		names.append(eps->getDesignations());
 	}
 
 	QString fullMatch = "";
